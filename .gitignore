@@ -1,0 +1,11 @@
+# Compiler binaries
+mwcc_compiler/
+
+# Build artifacts
+*.o
+*.elf
+*.map
+*.dol
+
+# Temporary files
+*.swp
