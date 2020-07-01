@@ -1,0 +1,3 @@
+# Build artifacts
+*.exe
+elf2dol
