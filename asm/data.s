@@ -60,7 +60,17 @@ lbl_803BA0FC:
 lbl_803BA150:
     .asciz "active deffect:"
     .balign 4
-    .incbin "baserom.dol", 0x3B7160, 0x60
+    .asciz "[NULL]\n\n"
+    .balign 4
+    .asciz "free deffect:"
+    .balign 4
+    .asciz "[NULL]\n\n\n"
+    .balign 4
+    .asciz "translate"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .incbin "baserom.dol", 0x3B71BC, 0x4
 .global lbl_803BA1C0
 lbl_803BA1C0:
     .asciz "lbspdisplay.c"
@@ -96,7 +106,12 @@ lbl_803BA2C0:
     .balign 4
 .global lbl_803BA344
 lbl_803BA344:
-	.incbin "baserom.dol", 0x3B7344, 0x3C
+    .asciz "[LbMem] Error: lbMemFreeToHeap %x.\n"
+    .balign 4
+    .asciz "!p->size"
+    .balign 4
+    .asciz "!cancelflag"
+    .balign 4
 .global lbl_803BA380
 lbl_803BA380:
 	.incbin "baserom.dol", 0x3B7380, 0x50
@@ -137,20 +152,29 @@ lbl_803BA520:
 lbl_803BA540:
     .asciz "Cannot open file no=%d."
     .balign 4
-    .incbin "baserom.dol", 0x3B7558, 0x30
+    .asciz "file isn't exist %s = %d\n"
+    .balign 4
+    .asciz "entry_num != -1"
+    .balign 4
+    .incbin "baserom.dol", 0x3B7584, 0x4
 .global lbl_803BA588
 lbl_803BA588:
-	.incbin "baserom.dol", 0x3B7588, 0x1C
+    .asciz "HSD_ArchiveParse error!\n"
+    .balign 4
 .global lbl_803BA5A4
 lbl_803BA5A4:
     .asciz "lbarchive.c"
     .balign 4
 .global lbl_803BA5B0
 lbl_803BA5B0:
-	.incbin "baserom.dol", 0x3B75B0, 0x40
+    .asciz "Cannot find symbol %s.\n"
+    .balign 4
+    .asciz "archive->flags & HSD_ARCHIVE_DONT_FREE"
+    .balign 4
 .global lbl_803BA5F0
 lbl_803BA5F0:
-	.incbin "baserom.dol", 0x3B75F0, 0x48
+    .asciz "lbArchiveRelocate: byte-order mismatch! Please check data format %x %x\n"
+    .balign 4
 .global lbl_803BA638
 lbl_803BA638:
 	.incbin "baserom.dol", 0x3B7638, 0x54
@@ -169,7 +193,8 @@ lbl_803BA6A8:
     .balign 4
 .global lbl_803BA6E8
 lbl_803BA6E8:
-	.incbin "baserom.dol", 0x3B76E8, 0x20
+    .asciz "[LbDvd] %s is not PRELOADed.\n"
+    .balign 4
 .global lbl_803BA708
 lbl_803BA708:
 	.incbin "baserom.dol", 0x3B7708, 0x3A0
@@ -252,10 +277,47 @@ lbl_803BADB0:
     .balign 4
 .global lbl_803BAE14
 lbl_803BAE14:
-	.incbin "baserom.dol", 0x3B7E14, 0x28
+    .asciz "Warning : frame offsets not supported\n"
+    .balign 4
 .global lbl_803BAE3C
 lbl_803BAE3C:
-	.incbin "baserom.dol", 0x3B7E3C, 0x1EC
+    .asciz "Warning : file format is newer than player\n"
+    .balign 4
+    .asciz "by sugano & yoshiki.\n"
+    .balign 4
+    .asciz "base %x\n"
+    .balign 4
+    .asciz "size %d\n"
+    .balign 4
+    .asciz "count %d\n"
+    .balign 4
+    .asciz "csizep %x\n"
+    .balign 4
+    .asciz "[LbMthp] magic = %s\n"
+    .balign 4
+    .asciz "[LbMthp] version = %d\n"
+    .balign 4
+    .asciz "[LbMthp] bufSize = %d\n"
+    .balign 4
+    .asciz "[LbMthp] xSize = %d\n"
+    .balign 4
+    .asciz "[LbMthp] ySize = %d\n"
+    .balign 4
+    .asciz "[LbMthp] framerate = %d\n"
+    .balign 4
+    .asciz "[LbMthp] numFrames = %d\n"
+    .balign 4
+    .asciz "[LbMthp] firstFrame = %d\n"
+    .balign 4
+    .asciz "[LbMthp] frameOffsets = %d\n"
+    .balign 4
+    .asciz "[LbMthp] firstFrameSize = %d\n"
+    .balign 4
+    .asciz "!MoviePlayer.power"
+    .balign 4
+    .asciz "heap_size >= memoryRequired"
+    .balign 4
+    .incbin "baserom.dol", 0x3B7FE8, 0x40
 .global lbl_803BB028
 lbl_803BB028:
 	.incbin "baserom.dol", 0x3B8028, 0x38
@@ -282,7 +344,8 @@ lbl_803BB0E0:
 	.incbin "baserom.dol", 0x3B80E0, 0x1FC
 .global lbl_803BB2DC
 lbl_803BB2DC:
-	.incbin "baserom.dol", 0x3B82DC, 0x18
+    .asciz "lbRefSetUnuse error!\n"
+    .balign 4
 .global lbl_803BB2F4
 lbl_803BB2F4:
     .asciz "lbrefract.c"
@@ -337,7 +400,8 @@ lbl_803BCB9C:
 	.incbin "baserom.dol", 0x3B9B9C, 0x14
 .global lbl_803BCBB0
 lbl_803BCBB0:
-	.incbin "baserom.dol", 0x3B9BB0, 0x20
+    .asciz "couldn't get CmSubject struct.\n"
+    .balign 4
 .global lbl_803BCBD0
 lbl_803BCBD0:
     .asciz "camera.c"
@@ -377,7 +441,8 @@ lbl_803BCDE0:
 	.incbin "baserom.dol", 0x3B9DE0, 0x64
 .global lbl_803BCE44
 lbl_803BCE44:
-	.incbin "baserom.dol", 0x3B9E44, 0x1C
+    .asciz "cant get player struct! %d\n"
+    .balign 4
 .global lbl_803BCE60
 lbl_803BCE60:
     .asciz "player.c"
@@ -445,7 +510,10 @@ lbl_803BD1E4:
 lbl_803BD1F4:
     .asciz "total != 0.0F"
     .balign 4
-    .incbin "baserom.dol", 0x3BA204, 0x4C
+    .asciz "zako ko player illegal ! :%d\n"
+    .balign 4
+    .asciz "0 <= player && player < Gm_Player_NumMax"
+    .balign 4
 .global lbl_803BD250
 lbl_803BD250:
     .asciz "plbonusinline.h"
@@ -456,21 +524,34 @@ lbl_803BD260:
     .balign 4
 .global lbl_803BD270
 lbl_803BD270:
-	.incbin "baserom.dol", 0x3BA270, 0x38
+    .asciz "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n"
+    .balign 4
 .global lbl_803BD2A8
 lbl_803BD2A8:
     .asciz "mpcoll.c"
     .balign 4
-    .incbin "baserom.dol", 0x3BA2B4, 0xD0
+    .asciz "%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n"
+    .balign 4
+    .asciz "itkind=%d\n"
+    .balign 4
+    .asciz "i<MPCOLL_WALLID_MAX"
+    .balign 4
+    .asciz "%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) ply=%d ms=%d\n"
+    .balign 4
+    .asciz "%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) gobjid=%d\n"
+    .balign 4
 .global lbl_803BD384
 lbl_803BD384:
-	.incbin "baserom.dol", 0x3BA384, 0x28
+    .asciz "not support rotate at JObj type coll\n"
+    .balign 4
 .global lbl_803BD3AC
 lbl_803BD3AC:
-	.incbin "baserom.dol", 0x3BA3AC, 0x1C
+    .asciz "%s:%d: Error:oioi... id=%d\n"
+    .balign 4
 .global lbl_803BD3C8
 lbl_803BD3C8:
-	.incbin "baserom.dol", 0x3BA3C8, 0x10
+    .asciz "%s:%d: oioi...\n"
+    .balign 4
 .global lbl_803BD3D8
 lbl_803BD3D8:
 	.incbin "baserom.dol", 0x3BA3D8, 0x1E70
@@ -479,13 +560,21 @@ lbl_803BF248:
 	.incbin "baserom.dol", 0x3BC248, 0x268
 .global lbl_803BF4B0
 lbl_803BF4B0:
-	.incbin "baserom.dol", 0x3BC4B0, 0x90
+    .asciz "%s:%d:not found lineID=%d\n"
+    .balign 4
+    .asciz "%s:%d: Error: mpGetSpeed() x=%f y=%f\n"
+    .balign 4
+    .asciz "!(ABS(speed->x)>10000.0F||ABS(speed->y)>10000.0F)"
+    .balign 4
+    .incbin "baserom.dol", 0x3BC528, 0x18
 .global lbl_803BF540
 lbl_803BF540:
 	.incbin "baserom.dol", 0x3BC540, 0x1A0
 .global lbl_803BF6E0
 lbl_803BF6E0:
-	.incbin "baserom.dol", 0x3BC6E0, 0x80
+    .asciz "map coll under=%d upper=%d left=%d right=%d bbox=%d\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3BC718, 0x48
 .global lbl_803BF760
 lbl_803BF760:
 	.incbin "baserom.dol", 0x3BC760, 0x30
@@ -496,10 +585,16 @@ lbl_803BF790:
     .incbin "baserom.dol", 0x3BC79C, 0x4
 .global lbl_803BF7A0
 lbl_803BF7A0:
-	.incbin "baserom.dol", 0x3BC7A0, 0x18
+    .asciz "Duplicate Free %08X\n"
+    .balign 4
 .global lbl_803BF7B8
 lbl_803BF7B8:
-	.incbin "baserom.dol", 0x3BC7B8, 0x4C
+    .asciz "can't remove no force effect!\n"
+    .balign 4
+    .asciz "error no parent gobj!\n"
+    .balign 4
+    .asciz "Over Anime Call\n"
+    .balign 4
 .global lbl_803BF804
 lbl_803BF804:
     .asciz "translate"
@@ -604,7 +699,8 @@ lbl_803C025C:
 	.incbin "baserom.dol", 0x3BD25C, 0x264
 .global lbl_803C04C0
 lbl_803C04C0:
-	.incbin "baserom.dol", 0x3BD4C0, 0x1C
+    .asciz "[EfASync] unknown type %d\n"
+    .balign 4
 .global lbl_803C04DC
 lbl_803C04DC:
     .asciz "efasync.c"
@@ -629,23 +725,30 @@ lbl_803C0550:
     .balign 4
 .global lbl_803C055C
 lbl_803C055C:
-	.incbin "baserom.dol", 0x3BD55C, 0x20
+    .asciz "fighter sub color num over!\n"
+    .balign 4
 .global lbl_803C057C
 lbl_803C057C:
     .asciz "fighter.c"
     .balign 4
 .global lbl_803C0588
 lbl_803C0588:
-	.incbin "baserom.dol", 0x3BD588, 0x24
+    .asciz "ellegal flag fp->no_normal_motion\n"
+    .balign 4
 .global lbl_803C05AC
 lbl_803C05AC:
-	.incbin "baserom.dol", 0x3BD5AC, 0x64
+    .asciz "fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n"
+    .balign 4
+    .asciz "fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n"
+    .balign 4
 .global lbl_803C0610
 lbl_803C0610:
-	.incbin "baserom.dol", 0x3BD610, 0x28
+    .asciz "ellegal flag fp->no_reaction_always\n"
+    .balign 4
 .global lbl_803C0638
 lbl_803C0638:
-	.incbin "baserom.dol", 0x3BD638, 0x20
+    .asciz "fighter joint depth num over!\n"
+    .balign 4
 .global lbl_803C0658
 lbl_803C0658:
     .asciz "ftanim.c"
@@ -656,10 +759,16 @@ lbl_803C0664:
     .balign 4
 .global lbl_803C0670
 lbl_803C0670:
-	.incbin "baserom.dol", 0x3BD670, 0x5C
+    .asciz "atree data error! player %d\n"
+    .balign 4
+    .asciz "fighter tobj num over!\n"
+    .balign 4
+    .asciz "can't find fighter texture anim!\n"
+    .balign 4
 .global lbl_803C06CC
 lbl_803C06CC:
-	.incbin "baserom.dol", 0x3BD6CC, 0x1C
+    .asciz "texture no exist! %d %d\n"
+    .balign 4
 .global lbl_803C06E8
 lbl_803C06E8:
 	.incbin "baserom.dol", 0x3BD6E8, 0xC4
@@ -697,25 +806,46 @@ lbl_803C0A08:
     .balign 4
     .asciz "jp->envelopemtx"
     .balign 4
-    .incbin "baserom.dol", 0x3BDA40, 0x78
+    .asciz "fighter parts model dobj num over! player %d\n"
+    .balign 4
+    .asciz "fighter dobj num over! player %d\n"
+    .balign 4
+    .asciz "fighter parts num over! player %d\n"
+    .balign 4
 .global lbl_803C0AB8
 lbl_803C0AB8:
-	.incbin "baserom.dol", 0x3BDAB8, 0x28
+    .asciz "fighter parts num not match! player %d\n"
+    .balign 4
 .global lbl_803C0AE0
 lbl_803C0AE0:
-	.incbin "baserom.dol", 0x3BDAE0, 0x20
+    .asciz "fighter parts model num over!\n"
+    .balign 4
 .global lbl_803C0B00
 lbl_803C0B00:
-	.incbin "baserom.dol", 0x3BDB00, 0x14
+    .asciz "can't find tobj!\n"
+    .balign 4
 .global lbl_803C0B14
 lbl_803C0B14:
-	.incbin "baserom.dol", 0x3BDB14, 0xA0
+    .asciz "fighter parts model dobj num over!\n"
+    .balign 4
+    .asciz "cant set fighter rot x!\n"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .asciz "cant set fighter rot y!\n"
+    .balign 4
+    .asciz "cant set fighter rot z!\n"
+    .balign 4
 .global lbl_803C0BB4
 lbl_803C0BB4:
-	.incbin "baserom.dol", 0x3BDBB4, 0x1C
+    .asciz "cant get fighter rot x!\n"
+    .balign 4
 .global lbl_803C0BD0
 lbl_803C0BD0:
-	.incbin "baserom.dol", 0x3BDBD0, 0x38
+    .asciz "cant get fighter rot y!\n"
+    .balign 4
+    .asciz "cant get fighter rot z!\n"
+    .balign 4
 .global lbl_803C0C08
 lbl_803C0C08:
     .asciz "ftcamera.c"
@@ -733,20 +863,30 @@ lbl_803C0C4C:
 	.incbin "baserom.dol", 0x3BDC4C, 0xC
 .global lbl_803C0C58
 lbl_803C0C58:
-	.incbin "baserom.dol", 0x3BDC58, 0x1C
+    .asciz "attack power over 500!! %f\n"
+    .balign 4
 .global lbl_803C0C74
 lbl_803C0C74:
     .asciz "ftcoll.c"
     .balign 4
 .global lbl_803C0C80
 lbl_803C0C80:
-	.incbin "baserom.dol", 0x3BDC80, 0x2C
+    .asciz "damage log over %d!!\n"
+    .balign 4
+    .asciz "tip log over %d!!\n"
+    .balign 4
 .global lbl_803C0CAC
 lbl_803C0CAC:
 	.incbin "baserom.dol", 0x3BDCAC, 0x44
 .global lbl_803C0CF0
 lbl_803C0CF0:
-	.incbin "baserom.dol", 0x3BDCF0, 0x68
+    .asciz "in ftCollisionSetHitStatus illegal parts!\n"
+    .balign 4
+    .asciz "fighter hit num over!\n"
+    .balign 4
+    .asciz "fighter dynamics hit num over!\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3BDD54, 0x4
 .global lbl_803C0D58
 lbl_803C0D58:
     .asciz "ftcommon.c"
@@ -757,7 +897,8 @@ lbl_803C0D64:
     .balign 4
 .global lbl_803C0D80
 lbl_803C0D80:
-	.incbin "baserom.dol", 0x3BDD80, 0x24
+    .asciz "fighter ground no under Id! %d %d\n"
+    .balign 4
 .global lbl_803C0DA4
 lbl_803C0DA4:
     .asciz "translate"
@@ -768,7 +909,9 @@ lbl_803C0DB0:
     .balign 4
 .global lbl_803C0DD0
 lbl_803C0DD0:
-	.incbin "baserom.dol", 0x3BDDD0, 0xC0
+    .asciz "fighter accessory already exsist!\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3BDDF4, 0x9C
 .global jtbl_803C0E90
 jtbl_803C0E90:
 	.incbin "baserom.dol", 0x3BDE90, 0x20
@@ -902,12 +1045,25 @@ lbl_803C26FC:
 	.incbin "baserom.dol", 0x3BF6FC, 0x24
 .global lbl_803C2720
 lbl_803C2720:
-	.incbin "baserom.dol", 0x3BF720, 0x24
+    .asciz "fighter reference counter error!\n"
+    .balign 4
 .global lbl_803C2744
 lbl_803C2744:
     .asciz "ftdata.c"
     .balign 4
-    .incbin "baserom.dol", 0x3BF750, 0xB0
+    .asciz "cant get corps model array!\n"
+    .balign 4
+    .asciz "HSD_ArchiveParse error!\n"
+    .balign 4
+    .asciz "fighter figatree over! %x\n"
+    .balign 4
+    .asciz "Demo Status error! %d\n"
+    .balign 4
+    .asciz "lbArchiveRelocate error! %x\n"
+    .balign 4
+    .asciz "HSD_ArchiveParse error! %x\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3BF7FC, 0x4
 .global lbl_803C2800
 lbl_803C2800:
 	.incbin "baserom.dol", 0x3BF800, 0x2AA0
@@ -924,7 +1080,8 @@ lbl_803C5488:
     .balign 4
 .global lbl_803C54A8
 lbl_803C54A8:
-	.incbin "baserom.dol", 0x3C24A8, 0x1C
+    .asciz "wait anim data illegal!!\n"
+    .balign 4
 .global lbl_803C54C4
 lbl_803C54C4:
     .asciz "ftwaitanim.c"
@@ -938,7 +1095,12 @@ lbl_803C5520:
 	.incbin "baserom.dol", 0x3C2520, 0x60
 .global lbl_803C5580
 lbl_803C5580:
-	.incbin "baserom.dol", 0x3C2580, 0x40
+    .asciz "ftGetImmItem item_gobj is NULL!!\n"
+    .balign 4
+    .asciz "ftpickupitem.c"
+    .balign 4
+    .asciz "item_gobj"
+    .balign 4
 .global jtbl_803C55C0
 jtbl_803C55C0:
 	.incbin "baserom.dol", 0x3C25C0, 0x5C
@@ -966,7 +1128,8 @@ lbl_803C5720:
     .balign 4
 .global lbl_803C572C
 lbl_803C572C:
-	.incbin "baserom.dol", 0x3C272C, 0x1C
+    .asciz "fighter dynamics num over!\n"
+    .balign 4
 .global lbl_803C5748
 lbl_803C5748:
     .asciz "ftdynamics.c"
@@ -979,7 +1142,9 @@ lbl_803C5794:
 	.incbin "baserom.dol", 0x3C2794, 0x1C
 .global lbl_803C57B0
 lbl_803C57B0:
-	.incbin "baserom.dol", 0x3C27B0, 0x270
+    .asciz "no effect from animlist %d\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3C27CC, 0x254
 .global lbl_803C5A20
 lbl_803C5A20:
 	.incbin "baserom.dol", 0x3C2A20, 0x48
@@ -1012,7 +1177,8 @@ jtbl_803C5D60:
 	.incbin "baserom.dol", 0x3C2D60, 0x50
 .global lbl_803C5DB0
 lbl_803C5DB0:
-	.incbin "baserom.dol", 0x3C2DB0, 0x14
+    .asciz "csP is bad address\n"
+    .balign 4
 .global lbl_803C5DC4
 lbl_803C5DC4:
     .asciz "ftcmdscript.c"
@@ -1022,7 +1188,9 @@ lbl_803C5DD4:
 	.incbin "baserom.dol", 0x3C2DD4, 0x30C
 .global lbl_803C60E0
 lbl_803C60E0:
-	.incbin "baserom.dol", 0x3C30E0, 0x28
+    .asciz "command script buffer over flow!\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3C3104, 0x4
 .global lbl_803C6108
 lbl_803C6108:
     .asciz "ftcpuattack.c"
@@ -1047,7 +1215,8 @@ lbl_803C6948:
 	.incbin "baserom.dol", 0x3C3948, 0x14
 .global lbl_803C695C
 lbl_803C695C:
-	.incbin "baserom.dol", 0x3C395C, 0x18
+    .asciz "no demo vi anim! %d\n"
+    .balign 4
 .global lbl_803C6974
 lbl_803C6974:
     .asciz "ftdemo.c"
@@ -1063,24 +1232,28 @@ lbl_803C6ADC:
 	.incbin "baserom.dol", 0x3C3ADC, 0xC
 .global lbl_803C6AE8
 lbl_803C6AE8:
-	.incbin "baserom.dol", 0x3C3AE8, 0x20
+    .asciz "don't reset spycloak colanim!\n"
+    .balign 4
 .global lbl_803C6B08
 lbl_803C6B08:
     .asciz "ftcolanimlist.c"
     .balign 4
 .global lbl_803C6B18
 lbl_803C6B18:
-	.incbin "baserom.dol", 0x3C3B18, 0x28
+    .asciz "fighter chk device wind func num over!\n"
+    .balign 4
 .global lbl_803C6B40
 lbl_803C6B40:
     .asciz "ftdevice.c"
     .balign 4
 .global lbl_803C6B4C
 lbl_803C6B4C:
-	.incbin "baserom.dol", 0x3C3B4C, 0x2C
+    .asciz "fighter chk device catch func num over!\n"
+    .balign 4
 .global lbl_803C6B78
 lbl_803C6B78:
-	.incbin "baserom.dol", 0x3C3B78, 0x28
+    .asciz "fighter chk device coll func num over!\n"
+    .balign 4
 .global lbl_803C6BA0
 lbl_803C6BA0:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -1092,7 +1265,8 @@ lbl_803C6BC8:
     .incbin "baserom.dol", 0x3C3BD4, 0x4
 .global lbl_803C6BD8
 lbl_803C6BD8:
-	.incbin "baserom.dol", 0x3C3BD8, 0x18
+    .asciz "no afterimage item!\n"
+    .balign 4
 .global lbl_803C6BF0
 lbl_803C6BF0:
     .asciz "ftafterimage.c"
@@ -1119,13 +1293,18 @@ lbl_803C6CF8:
 lbl_803C6D24:
     .asciz "ftmetal.c"
     .balign 4
-    .incbin "baserom.dol", 0x3C3D30, 0x40
+    .asciz "fighter parts model dobj num over!\n"
+    .balign 4
+    .asciz "fighter dobj num over!\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3C3D6C, 0x4
 .global lbl_803C6D70
 lbl_803C6D70:
 	.incbin "baserom.dol", 0x3C3D70, 0x78
 .global lbl_803C6DE8
 lbl_803C6DE8:
-	.incbin "baserom.dol", 0x3C3DE8, 0x18
+    .asciz "ellegal swing item!!!\n"
+    .balign 4
 .global lbl_803C6E00
 lbl_803C6E00:
     .asciz "ftswing.c"
@@ -1155,7 +1334,8 @@ lbl_803C6F0C:
     .incbin "baserom.dol", 0x3C3F3C, 0x4
 .global lbl_803C6F40
 lbl_803C6F40:
-	.incbin "baserom.dol", 0x3C3F40, 0x20
+    .asciz "don't have smash42 motion!!!\n"
+    .balign 4
 .global lbl_803C6F60
 lbl_803C6F60:
     .asciz "ftattacks4combo.c"
@@ -1169,7 +1349,10 @@ lbl_803C6F78:
 lbl_803C6F88:
     .asciz "scale != 0.0F"
     .balign 4
-    .incbin "baserom.dol", 0x3C3F98, 0x58
+    .asciz "don't set ftKindCalcIndiviParamTable!!\n"
+    .balign 4
+    .asciz "ftKindCalcIndiviParamTable[fp->kind] != NULL"
+    .balign 4
 .global lbl_803C6FF0
 lbl_803C6FF0:
 	.incbin "baserom.dol", 0x3C3FF0, 0x40
@@ -1203,7 +1386,8 @@ lbl_803C70E0:
     .incbin "baserom.dol", 0x3C40EC, 0x4
 .global lbl_803C70F0
 lbl_803C70F0:
-	.incbin "baserom.dol", 0x3C40F0, 0x1C
+    .asciz "couldn't get walk frame\n"
+    .balign 4
 .global lbl_803C710C
 lbl_803C710C:
     .asciz "ftwalkcommon.c"
@@ -1219,7 +1403,8 @@ lbl_803C7DD0:
 	.incbin "baserom.dol", 0x3C4DD0, 0x18
 .global lbl_803C7DE8
 lbl_803C7DE8:
-	.incbin "baserom.dol", 0x3C4DE8, 0x20
+    .asciz "ftToSpecialNFox::Caution!!!\n"
+    .balign 4
 .global lbl_803C7E08
 lbl_803C7E08:
     .asciz "ftfoxspecialn.c"
@@ -1292,7 +1477,8 @@ lbl_803CB6C0:
 	.incbin "baserom.dol", 0x3C86C0, 0x18
 .global lbl_803CB6D8
 lbl_803CB6D8:
-	.incbin "baserom.dol", 0x3C86D8, 0x20
+    .asciz "ftToSpecialNFox::Caution!!!\n"
+    .balign 4
 .global lbl_803CB6F8
 lbl_803CB6F8:
     .asciz "ftkirbyspecialfox.c"
@@ -1343,14 +1529,67 @@ lbl_803CE6B8:
 	.incbin "baserom.dol", 0x3CB6B8, 0x398
 .global lbl_803CEA50
 lbl_803CEA50:
-	.incbin "baserom.dol", 0x3CBA50, 0x20
+    .asciz "yoshi matanim frame not same\n"
+    .balign 4
 .global lbl_803CEA70
 lbl_803CEA70:
     .asciz "ftyoshi.c"
     .balign 4
 .global lbl_803CEA7C
 lbl_803CEA7C:
-	.incbin "baserom.dol", 0x3CBA7C, 0x2CC
+    .asciz "yoshi parts_model NULL!!\n"
+    .balign 4
+    .asciz "PlYs.dat"
+    .balign 4
+    .asciz "ftDataYoshi"
+    .balign 4
+    .asciz "PlYsNr.dat"
+    .balign 4
+    .asciz "PlyYoshi5K_Share_joint"
+    .balign 4
+    .asciz "PlyYoshi5K_Share_matanim_joint"
+    .balign 4
+    .asciz "PlYsRe.dat"
+    .balign 4
+    .asciz "PlyYoshi5KRe_Share_joint"
+    .balign 4
+    .asciz "PlyYoshi5KRe_Share_matanim_joint"
+    .balign 4
+    .asciz "PlYsBu.dat"
+    .balign 4
+    .asciz "PlyYoshi5KBu_Share_joint"
+    .balign 4
+    .asciz "PlyYoshi5KBu_Share_matanim_joint"
+    .balign 4
+    .asciz "PlYsYe.dat"
+    .balign 4
+    .asciz "PlyYoshi5KYe_Share_joint"
+    .balign 4
+    .asciz "PlyYoshi5KYe_Share_matanim_joint"
+    .balign 4
+    .asciz "PlYsPi.dat"
+    .balign 4
+    .asciz "PlyYoshi5KPi_Share_joint"
+    .balign 4
+    .asciz "PlyYoshi5KPi_Share_matanim_joint"
+    .balign 4
+    .asciz "PlYsAq.dat"
+    .balign 4
+    .asciz "PlyYoshi5KAq_Share_joint"
+    .balign 4
+    .asciz "PlyYoshi5KAq_Share_matanim_joint"
+    .balign 4
+    .asciz "PlYsAJ.dat"
+    .balign 4
+    .asciz "ftDemoResultMotionFileYoshi"
+    .balign 4
+    .asciz "ftDemoIntroMotionFileYoshi"
+    .balign 4
+    .asciz "ftDemoEndingMotionFileYoshi"
+    .balign 4
+    .asciz "ftDemoViWaitMotionFileYoshi"
+    .balign 4
+    .incbin "baserom.dol", 0x3CBCEC, 0x5C
 .global lbl_803CED48
 lbl_803CED48:
 	.incbin "baserom.dol", 0x3CBD48, 0x3C
@@ -1410,7 +1649,12 @@ jtbl_803D4998:
 	.incbin "baserom.dol", 0x3D1998, 0x28
 .global lbl_803D49C0
 lbl_803D49C0:
-	.incbin "baserom.dol", 0x3D19C0, 0x6C
+    .asciz "boss is human or boss!\n"
+    .balign 4
+    .asciz "ftbosslib.c"
+    .balign 4
+    .asciz "kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu"
+    .balign 4
 .global jtbl_803D4A2C
 jtbl_803D4A2C:
 	.incbin "baserom.dol", 0x3D1A2C, 0x1C
@@ -1435,7 +1679,29 @@ lbl_803D4AC8:
     .balign 4
     .asciz "DbLevel == DbLKind_NoDebugRom"
     .balign 4
-    .incbin "baserom.dol", 0x3D1B04, 0x134
+    .asciz "Data %lx\n"
+    .balign 4
+    .asciz "please setup server for USB\n"
+    .balign 4
+    .asciz "# ---------------------------------------------\n"
+    .balign 4
+    .asciz "#    Super Smash Bros. Melee\n"
+    .balign 4
+    .asciz "# Distribution %d\n"
+    .balign 4
+    .asciz "# Language %d\n"
+    .balign 4
+    .asciz "# DbLevel %d\n"
+    .balign 4
+    .asciz "# Arena Size %d MB\n"
+    .balign 4
+    .asciz "# ARAM Free Size %d MB\n"
+    .balign 4
+    .asciz "# GC Calendar Year %d Month %d Day %d\n"
+    .balign 4
+    .asciz "#             Hour %d Min %d Sec %d \n"
+    .balign 4
+    .incbin "baserom.dol", 0x3D1C34, 0x4
 .global lbl_803D4C38
 lbl_803D4C38:
 	.incbin "baserom.dol", 0x3D1C38, 0x13C
@@ -1465,7 +1731,8 @@ lbl_803D5480:
 	.incbin "baserom.dol", 0x3D2480, 0xD8
 .global lbl_803D5558
 lbl_803D5558:
-	.incbin "baserom.dol", 0x3D2558, 0x38
+    .asciz "RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+    .balign 4
 .global lbl_803D5590
 lbl_803D5590:
     .asciz "\\cffff00%2d"
@@ -1544,7 +1811,8 @@ lbl_803D79F0:
 	.incbin "baserom.dol", 0x3D49F0, 0x18
 .global lbl_803D7A08
 lbl_803D7A08:
-	.incbin "baserom.dol", 0x3D4A08, 0x38
+    .asciz "Error : not find color in gmRegSetupEnemyColorTable()\n"
+    .balign 4
 .global lbl_803D7A40
 lbl_803D7A40:
     .asciz "gmregcommon.c"
@@ -1623,7 +1891,8 @@ jtbl_803D9E9C:
 	.incbin "baserom.dol", 0x3D6E9C, 0x7C
 .global lbl_803D9F18
 lbl_803D9F18:
-	.incbin "baserom.dol", 0x3D6F18, 0x44
+    .asciz "This is impossible stage num from mnSelStageRandom() -> stage %d \n"
+    .balign 4
 .global lbl_803D9F5C
 lbl_803D9F5C:
     .asciz "gmtoulib.c"
@@ -1669,7 +1938,9 @@ lbl_803DA2E0:
 	.incbin "baserom.dol", 0x3D72E0, 0xF0
 .global lbl_803DA3D0
 lbl_803DA3D0:
-	.incbin "baserom.dol", 0x3D73D0, 0x10
+    .asciz "ckind:%d\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3D73DC, 0x4
 .global lbl_803DA3E0
 lbl_803DA3E0:
     .asciz "GmGover.dat"
@@ -1742,10 +2013,13 @@ lbl_803DA8C8:
 	.incbin "baserom.dol", 0x3D78C8, 0x10
 .global lbl_803DA8D8
 lbl_803DA8D8:
-	.incbin "baserom.dol", 0x3D78D8, 0x24
+    .asciz "[hsdDumpClassStat] -- Report --\n"
+    .balign 4
 .global lbl_803DA8FC
 lbl_803DA8FC:
-	.incbin "baserom.dol", 0x3D78FC, 0x24
+    .asciz "[HSD_ObjDumpStat] -- Report --\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3D791C, 0x4
 .global lbl_803DA920
 lbl_803DA920:
 	.incbin "baserom.dol", 0x3D7920, 0x384
@@ -2026,7 +2300,16 @@ lbl_803DFEDC:
 lbl_803E00C0:
     .asciz "ground.c"
     .balign 4
-    .incbin "baserom.dol", 0x3DD0CC, 0x60
+    .asciz "%s:%d: assert\n"
+    .balign 4
+    .asciz "%s:%d: couldn t get jobj\n"
+    .balign 4
+    .asciz "%s:%d: couldn t get gobj!\n"
+    .balign 4
+    .asciz "lightset"
+    .balign 4
+    .asciz "*lightset"
+    .balign 4
 .global lbl_803E012C
 lbl_803E012C:
     .asciz "bgm!=BGM_Undefined"
@@ -2036,7 +2319,8 @@ jtbl_803E0140:
 	.incbin "baserom.dol", 0x3DD140, 0xB8
 .global lbl_803E01F8
 lbl_803E01F8:
-	.incbin "baserom.dol", 0x3DD1F8, 0x28
+    .asciz "%s:%d: not found stage param in DAT\n"
+    .balign 4
 .global lbl_803E0220
 lbl_803E0220:
     .asciz "i!=Gr_CObj_Max"
@@ -2044,13 +2328,15 @@ lbl_803E0220:
     .incbin "baserom.dol", 0x3DD230, 0x31C
 .global lbl_803E054C
 lbl_803E054C:
-	.incbin "baserom.dol", 0x3DD54C, 0x1C
+    .asciz "use dummy CamRange ...!\n"
+    .balign 4
 .global jtbl_803E0568
 jtbl_803E0568:
 	.incbin "baserom.dol", 0x3DD568, 0x6C
 .global lbl_803E05D4
 lbl_803E05D4:
-	.incbin "baserom.dol", 0x3DD5D4, 0x1C
+    .asciz "use dummy DeadRange ...\n"
+    .balign 4
 .global jtbl_803E05F0
 jtbl_803E05F0:
 	.incbin "baserom.dol", 0x3DD5F0, 0xD8
@@ -2063,7 +2349,9 @@ lbl_803E0730:
     .balign 4
 .global lbl_803E073C
 lbl_803E073C:
-	.incbin "baserom.dol", 0x3DD73C, 0x14
+    .asciz "oioi... %08x\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3DD74C, 0x4
 .global lbl_803E0750
 lbl_803E0750:
     .asciz "map_ptcl"
@@ -2130,7 +2418,8 @@ lbl_803E0BA8:
     .balign 4
 .global lbl_803E0BBC
 lbl_803E0BBC:
-	.incbin "baserom.dol", 0x3DDBBC, 0x1C
+    .asciz "%s:%d: couldn t get gobj!\n"
+    .balign 4
 .global lbl_803E0BD8
 lbl_803E0BD8:
 	.incbin "baserom.dol", 0x3DDBD8, 0x188
@@ -2143,14 +2432,17 @@ lbl_803E0EB4:
     .balign 4
 .global lbl_803E0EC0
 lbl_803E0EC0:
-	.incbin "baserom.dol", 0x3DDEC0, 0x24
+    .asciz "%s:%d:Warning: not found tobj !\n"
+    .balign 4
 .global lbl_803E0EE4
 lbl_803E0EE4:
     .asciz "GrdIzumiStar_TopN_joint"
     .balign 4
 .global lbl_803E0EFC
 lbl_803E0EFC:
-	.incbin "baserom.dol", 0x3DDEFC, 0xEC
+    .asciz "%s:%d:oioi...\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3DDF0C, 0xDC
 .global lbl_803E0FE8
 lbl_803E0FE8:
 	.incbin "baserom.dol", 0x3DDFE8, 0x260
@@ -2163,7 +2455,10 @@ lbl_803E138C:
     .balign 4
     .asciz "GrdPStadiumBG_OVDummy_mat6962_GrdPStadiumDummy_0_image_desc"
     .balign 4
-    .incbin "baserom.dol", 0x3DE3D8, 0x28
+    .asciz "no such image desc!\n"
+    .balign 4
+    .asciz "no such tobj!\n"
+    .balign 4
 .global jtbl_803E1400
 jtbl_803E1400:
 	.incbin "baserom.dol", 0x3DE400, 0x48
@@ -2266,16 +2561,20 @@ lbl_803E2190:
 	.incbin "baserom.dol", 0x3DF190, 0x34
 .global lbl_803E21C4
 lbl_803E21C4:
-	.incbin "baserom.dol", 0x3DF1C4, 0x40
+    .asciz "grcorneria.c    grCorneriaGetPosMapKind2\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3DF1F0, 0x14
 .global lbl_803E2204
 lbl_803E2204:
 	.incbin "baserom.dol", 0x3DF204, 0x4B0
 .global lbl_803E26B4
 lbl_803E26B4:
-	.incbin "baserom.dol", 0x3DF6B4, 0x10
+    .asciz "talk no = %d\n"
+    .balign 4
 .global lbl_803E26C4
 lbl_803E26C4:
-	.incbin "baserom.dol", 0x3DF6C4, 0x18
+    .asciz "*** Beam Damage! %f\n"
+    .balign 4
 .global lbl_803E26DC
 lbl_803E26DC:
     .asciz "SIS_GrCorneriaData"
@@ -2314,7 +2613,9 @@ lbl_803E2D78:
     .incbin "baserom.dol", 0x3DFD84, 0x134
 .global lbl_803E2EB8
 lbl_803E2EB8:
-	.incbin "baserom.dol", 0x3DFEB8, 0x128
+    .asciz "*** Not Set Position!(Tyukei)\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3DFED8, 0x108
 .global jtbl_803E2FE0
 jtbl_803E2FE0:
 	.incbin "baserom.dol", 0x3DFFE0, 0x58
@@ -2331,7 +2632,10 @@ lbl_803E30B0:
 lbl_803E3434:
     .asciz "grmutecity.c"
     .balign 4
-    .incbin "baserom.dol", 0x3E0444, 0x38
+    .asciz "not found car spline (R)\n"
+    .balign 4
+    .asciz "not found car spline (L)\n"
+    .balign 4
 .global lbl_803E347C
 lbl_803E347C:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -2353,7 +2657,8 @@ lbl_803E3CE8:
 	.incbin "baserom.dol", 0x3E0CE8, 0x114
 .global lbl_803E3DFC
 lbl_803E3DFC:
-	.incbin "baserom.dol", 0x3E0DFC, 0x18
+    .asciz "pos = %f : tgrpos = %f\n"
+    .balign 4
 .global jtbl_803E3E14
 jtbl_803E3E14:
 	.incbin "baserom.dol", 0x3E0E14, 0x4C
@@ -2417,10 +2722,13 @@ lbl_803E4C78:
 	.incbin "baserom.dol", 0x3E1C78, 0xF8
 .global lbl_803E4D70
 lbl_803E4D70:
-	.incbin "baserom.dol", 0x3E1D70, 0x1C
+    .asciz "*** Req Effect Anime %d\n"
+    .balign 4
 .global lbl_803E4D8C
 lbl_803E4D8C:
-	.incbin "baserom.dol", 0x3E1D8C, 0x1C
+    .asciz "Kraid Hand Pos = %f\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3E1DA4, 0x4
 .global lbl_803E4DA8
 lbl_803E4DA8:
 	.incbin "baserom.dol", 0x3E1DA8, 0x17C
@@ -2463,7 +2771,9 @@ lbl_803E5198:
 	.incbin "baserom.dol", 0x3E2198, 0x98
 .global lbl_803E5230
 lbl_803E5230:
-	.incbin "baserom.dol", 0x3E2230, 0x18
+    .asciz "*** End Frame = %d\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3E2244, 0x4
 .global lbl_803E5248
 lbl_803E5248:
 	.incbin "baserom.dol", 0x3E2248, 0x100
@@ -2514,7 +2824,8 @@ lbl_803E5A58:
 	.incbin "baserom.dol", 0x3E2A58, 0x30C
 .global lbl_803E5D64
 lbl_803E5D64:
-	.incbin "baserom.dol", 0x3E2D64, 0x10
+    .asciz "%s:%d: oioi...\n"
+    .balign 4
 .global lbl_803E5D74
 lbl_803E5D74:
 	.incbin "baserom.dol", 0x3E2D74, 0x1C
@@ -2665,7 +2976,8 @@ lbl_803E83B8:
 lbl_803E851C:
     .asciz "grheal.c"
     .balign 4
-    .incbin "baserom.dol", 0x3E5528, 0x20
+    .asciz "*** Not found Next Player!(%d)\n"
+    .balign 4
 .global lbl_803E8548
 lbl_803E8548:
 	.incbin "baserom.dol", 0x3E5548, 0xC0
@@ -2769,16 +3081,20 @@ lbl_803EA6F4:
     .balign 4
 .global lbl_803EA708
 lbl_803EA708:
-	.incbin "baserom.dol", 0x3E7708, 0x20
+    .asciz "[all PLink num] -- Report --\n"
+    .balign 4
 .global lbl_803EA728
 lbl_803EA728:
-	.incbin "baserom.dol", 0x3E7728, 0x40
+    .asciz "------------------------------------------------------------\n"
+    .balign 4
 .global lbl_803EA768
 lbl_803EA768:
-	.incbin "baserom.dol", 0x3E7768, 0x1C
+    .asciz "------ Thread info ------\n"
+    .balign 4
 .global lbl_803EA784
 lbl_803EA784:
-	.incbin "baserom.dol", 0x3E7784, 0x24
+    .asciz "base:%x, end:%x, size:%d peak:%d \n"
+    .balign 4
 .global lbl_803EA7A8
 lbl_803EA7A8:
     .asciz "Capsule "
@@ -2811,20 +3127,64 @@ lbl_803EA7A8:
     .balign 4
     .asciz "G Shell "
     .balign 4
-    .incbin "baserom.dol", 0x3E785C, 0x444
+    .asciz "R Shell "
+    .balign 4
+    .asciz "L Gun   "
+    .balign 4
+    .asciz "Freeze  "
+    .balign 4
+    .asciz "Foods   "
+    .balign 4
+    .asciz "MSBomb  "
+    .balign 4
+    .asciz "Flipper "
+    .balign 4
+    .asciz "S Scope "
+    .balign 4
+    .asciz "StarRod "
+    .balign 4
+    .asciz "LipStick"
+    .balign 4
+    .asciz "Harisen "
+    .balign 4
+    .asciz "F Flower"
+    .balign 4
+    .asciz "Kinoko  "
+    .balign 4
+    .asciz "DKinoko "
+    .balign 4
+    .asciz "Hammer  "
+    .balign 4
+    .asciz "WStar   "
+    .balign 4
+    .asciz "ScBall  "
+    .balign 4
+    .asciz "RabbitC "
+    .balign 4
+    .asciz "MetalB  "
+    .balign 4
+    .asciz "Spycloak"
+    .balign 4
+    .asciz "M Ball  "
+    .balign 4
+    .incbin "baserom.dol", 0x3E794C, 0x354
 .global lbl_803EACA0
 lbl_803EACA0:
-	.incbin "baserom.dol", 0x3E7CA0, 0x10
+    .asciz "Item Max Over.\n"
+    .balign 4
 .global lbl_803EACB0
 lbl_803EACB0:
-	.incbin "baserom.dol", 0x3E7CB0, 0x28
+    .asciz "couldn't get Item struct.(CZako)\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3E7CD4, 0x4
 .global lbl_803EACD8
 lbl_803EACD8:
     .asciz "A B  C D E    F    G"
     .balign 4
 .global lbl_803EACF0
 lbl_803EACF0:
-	.incbin "baserom.dol", 0x3E7CF0, 0x20
+    .asciz "\n%d %d %2d %d %2.2f %2.2f %2.2f"
+    .balign 4
 .global lbl_803EAD10
 lbl_803EAD10:
     .asciz "EYE %d,%d,%d"
@@ -2838,7 +3198,13 @@ lbl_803EAD40:
 	.incbin "baserom.dol", 0x3E7D40, 0x88
 .global lbl_803EADC8
 lbl_803EADC8:
-	.incbin "baserom.dol", 0x3E7DC8, 0x40
+    .asciz "cant find xfb!\n"
+    .balign 4
+    .asciz "dbscreenshot.c"
+    .balign 4
+    .asciz "USB:shot/screenshot%02d.frb"
+    .balign 4
+    .incbin "baserom.dol", 0x3E7E04, 0x4
 .global lbl_803EAE08
 lbl_803EAE08:
 	.incbin "baserom.dol", 0x3E7E08, 0x50
@@ -3118,7 +3484,31 @@ lbl_803F0570:
 lbl_803F0580:
     .asciz "MvHowTo.mth"
     .balign 4
-    .incbin "baserom.dol", 0x3ED58C, 0x144
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mngallery.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .asciz "cursor_user_data"
+    .balign 4
+    .asciz "MenMainConGa_Top_joint"
+    .balign 4
+    .asciz "MenMainConGa_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConGa_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConGa_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_animjoint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_shapeanim_joint"
+    .balign 4
+    .incbin "baserom.dol", 0x3ED6CC, 0x4
 .global lbl_803F06D0
 lbl_803F06D0:
 	.incbin "baserom.dol", 0x3ED6D0, 0x378
@@ -3156,16 +3546,20 @@ jtbl_803F124C:
 	.incbin "baserom.dol", 0x3EE24C, 0x34
 .global lbl_803F1280
 lbl_803F1280:
-	.incbin "baserom.dol", 0x3EE280, 0x34
+    .asciz "not found zako model data! check ground dat file!\n"
+    .balign 4
 .global lbl_803F12B4
 lbl_803F12B4:
-	.incbin "baserom.dol", 0x3EE2B4, 0x2C
+    .asciz "===== Not Found Item_Struct!! =====\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3EE2DC, 0x4
 .global jtbl_803F12E0
 jtbl_803F12E0:
 	.incbin "baserom.dol", 0x3EE2E0, 0x80
 .global lbl_803F1360
 lbl_803F1360:
-	.incbin "baserom.dol", 0x3EE360, 0x18
+    .asciz "damage log over %d!!\n"
+    .balign 4
 .global lbl_803F1378
 lbl_803F1378:
     .asciz "itcoll.c"
@@ -3222,7 +3616,8 @@ lbl_803F22A8:
 	.incbin "baserom.dol", 0x3EF2A8, 0x40
 .global lbl_803F22E8
 lbl_803F22E8:
-	.incbin "baserom.dol", 0x3EF2E8, 0x18
+    .asciz "item can't set attack!\n"
+    .balign 4
 .global lbl_803F2300
 lbl_803F2300:
     .asciz "itanimlist.c"
@@ -3247,7 +3642,11 @@ lbl_803F4D20:
 	.incbin "baserom.dol", 0x3F1D20, 0x708
 .global lbl_803F5428
 lbl_803F5428:
-	.incbin "baserom.dol", 0x3F2428, 0x180
+    .asciz "can t init zako pos\n"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .incbin "baserom.dol", 0x3F2468, 0x140
 .global lbl_803F55A8
 lbl_803F55A8:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -3355,7 +3754,8 @@ lbl_803F67F0:
     .incbin "baserom.dol", 0x3F3818, 0x30
 .global lbl_803F6848
 lbl_803F6848:
-	.incbin "baserom.dol", 0x3F3848, 0x18
+    .asciz "illusion add twice.\n"
+    .balign 4
 .global lbl_803F6860
 lbl_803F6860:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -3572,7 +3972,8 @@ lbl_803F8C08:
 	.incbin "baserom.dol", 0x3F5C08, 0x1C4
 .global lbl_803F8DCC
 lbl_803F8DCC:
-	.incbin "baserom.dol", 0x3F5DCC, 0x10
+    .asciz "%s:%d: oioi...\n"
+    .balign 4
 .global lbl_803F8DDC
 lbl_803F8DDC:
     .asciz "ityaku.c"
@@ -3632,7 +4033,16 @@ lbl_803F94D0:
 lbl_803F94E8:
     .asciz "ScInfTim_scene_models"
     .balign 4
-    .incbin "baserom.dol", 0x3F6500, 0x98
+    .asciz "Error : jobj dont't get (ifAddTimeDownModel)\n"
+    .balign 4
+    .asciz "iftime.c"
+    .balign 4
+    .asciz "translate"
+    .balign 4
+    .asciz "Error : gobj dont't get (ifAddTime)\n"
+    .balign 4
+    .asciz "Error : jobj dont't get (ifAddTime)\n"
+    .balign 4
 .global lbl_803F9598
 lbl_803F9598:
     .asciz "DmgNum_scene_models"
@@ -3645,7 +4055,12 @@ lbl_803F95AC:
 lbl_803F95C0:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3F65CC, 0x5C
+    .asciz "Error : gobj dont't get (ifAddMark)\n"
+    .balign 4
+    .asciz "ifstatus.c"
+    .balign 4
+    .asciz "Error : jobj dont't get (ifAddMark)\n"
+    .balign 4
 .global lbl_803F9628
 lbl_803F9628:
 	.incbin "baserom.dol", 0x3F6628, 0x158
@@ -3829,34 +4244,55 @@ lbl_803FD064:
 	.incbin "baserom.dol", 0x3FA064, 0x1C0
 .global lbl_803FD224
 lbl_803FD224:
-	.incbin "baserom.dol", 0x3FA224, 0xC
+    .asciz "<Format>\n"
+    .balign 4
 .global lbl_803FD230
 lbl_803FD230:
-	.incbin "baserom.dol", 0x3FA230, 0xC
+    .asciz "result %d\n"
+    .balign 4
 .global lbl_803FD23C
 lbl_803FD23C:
-	.incbin "baserom.dol", 0x3FA23C, 0x10
+    .asciz "<Accessable>\n"
+    .balign 4
 .global lbl_803FD24C
 lbl_803FD24C:
-	.incbin "baserom.dol", 0x3FA24C, 0xC
+    .asciz "<Create>\n"
+    .balign 4
 .global lbl_803FD258
 lbl_803FD258:
-	.incbin "baserom.dol", 0x3FA258, 0xC
+    .asciz "<Delete>\n"
+    .balign 4
 .global lbl_803FD264
 lbl_803FD264:
-	.incbin "baserom.dol", 0x3FA264, 0x10
+    .asciz "<SnapMount0>\n"
+    .balign 4
 .global lbl_803FD274
 lbl_803FD274:
 	.incbin "baserom.dol", 0x3FA274, 0x18
 .global lbl_803FD28C
 lbl_803FD28C:
-	.incbin "baserom.dol", 0x3FA28C, 0x10
+    .asciz "<SnapLoad0>\n"
+    .balign 4
 .global lbl_803FD29C
 lbl_803FD29C:
-	.incbin "baserom.dol", 0x3FA29C, 0x10
+    .asciz "<SnapDelete0>\n"
+    .balign 4
 .global lbl_803FD2AC
 lbl_803FD2AC:
-	.incbin "baserom.dol", 0x3FA2AC, 0x64
+    .asciz "<SnapSwap0>\n"
+    .balign 4
+    .asciz "< Yoshiki Test >"
+    .balign 4
+    .asciz "Accessable"
+    .balign 4
+    .asciz "SnapMount0"
+    .balign 4
+    .asciz "SnapLoad0 "
+    .balign 4
+    .asciz "SnapDelete0 "
+    .balign 4
+    .asciz "SnapSwap0 "
+    .balign 4
 .global lbl_803FD310
 lbl_803FD310:
 	.incbin "baserom.dol", 0x3FA310, 0x27C
@@ -3877,7 +4313,8 @@ lbl_803FDC48:
 	.incbin "baserom.dol", 0x3FAC48, 0x38
 .global lbl_803FDC80
 lbl_803FDC80:
-	.incbin "baserom.dol", 0x3FAC80, 0x18
+    .asciz "TW : Screen alloc Fail\n"
+    .balign 4
 .global lbl_803FDC98
 lbl_803FDC98:
     .asciz "textlib.c"
@@ -3917,13 +4354,15 @@ jtbl_803FE280:
 	.incbin "baserom.dol", 0x3FB280, 0x24
 .global lbl_803FE2A4
 lbl_803FE2A4:
-	.incbin "baserom.dol", 0x3FB2A4, 0x3C
+    .asciz "X   %3.2f\nY   %3.2f\nZ   %3.2f\nMS  %3.2f\nSS  %3.2f\nMD  %3.2f"
+    .balign 4
 .global jtbl_803FE2E0
 jtbl_803FE2E0:
 	.incbin "baserom.dol", 0x3FB2E0, 0xD8
 .global lbl_803FE3B8
 lbl_803FE3B8:
-	.incbin "baserom.dol", 0x3FB3B8, 0x24
+    .asciz "*** BG data aren't being loaded!\n"
+    .balign 4
 .global lbl_803FE3DC
 lbl_803FE3DC:
     .asciz "ScMenFigure_scene_lights"
@@ -3931,10 +4370,38 @@ lbl_803FE3DC:
     .incbin "baserom.dol", 0x3FB3F8, 0x5C
 .global lbl_803FE454
 lbl_803FE454:
-	.incbin "baserom.dol", 0x3FB454, 0x20
+    .asciz "**** Not Found Toy Model!(%d)\n"
+    .balign 4
 .global lbl_803FE474
 lbl_803FE474:
-	.incbin "baserom.dol", 0x3FB474, 0x174
+    .asciz "*** Error : Not Found Model Name!(To Idx %d)\n"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .asciz "*** Cann't Show Model!\n"
+    .balign 4
+    .asciz "3DPos X = %f, Y = %f, Z = %f\n"
+    .balign 4
+    .asciz "2DPos X = %f, Y = %f\n\n"
+    .balign 4
+    .asciz "Pos : %f, %f,%f\n"
+    .balign 4
+    .asciz "WinSize = %f, %f\n"
+    .balign 4
+    .asciz "WinScale = %f, %f\n"
+    .balign 4
+    .asciz "FontSize = %f, %f\n"
+    .balign 4
+    .asciz "RotY = %f\n"
+    .balign 4
+    .asciz "*** Pad = %d\n"
+    .balign 4
+    .asciz "top = %f, bottom = %f, right = %f, left = %f\n"
+    .balign 4
+    .asciz "top = %f, bottom = %f\n"
+    .balign 4
+    .asciz "right = %f, left = %f\n"
+    .balign 4
 .global lbl_803FE5E8
 lbl_803FE5E8:
     .asciz "ScMenFigure_cam_int1_camera"
@@ -3946,16 +4413,42 @@ lbl_803FE7A0:
     .balign 4
 .global lbl_803FE7B0
 lbl_803FE7B0:
-	.incbin "baserom.dol", 0x3FB7B0, 0x10
+    .asciz "Rea_%c %3d/%3d\n"
+    .balign 4
 .global lbl_803FE7C0
 lbl_803FE7C0:
-	.incbin "baserom.dol", 0x3FB7C0, 0x24
+    .asciz "*** Couldn't Open Debug Window2!\n"
+    .balign 4
 .global lbl_803FE7E4
 lbl_803FE7E4:
-	.incbin "baserom.dol", 0x3FB7E4, 0x9C
+    .asciz "*** Couldn't Open Debug Window!\n"
+    .balign 4
+    .asciz "SdToy.dat"
+    .balign 4
+    .asciz "SIS_ToyData"
+    .balign 4
+    .asciz "SdToyExp.dat"
+    .balign 4
+    .asciz "SIS_ToyDataExp"
+    .balign 4
+    .asciz "SdToy.usd"
+    .balign 4
+    .asciz "SIS_ToyData_E"
+    .balign 4
+    .asciz "SdToyExp.usd"
+    .balign 4
+    .asciz "SIS_ToyDataExp_E"
+    .balign 4
 .global lbl_803FE880
 lbl_803FE880:
-	.incbin "baserom.dol", 0x3FB880, 0x50
+    .asciz "Pos : %f, %f,%f\n"
+    .balign 4
+    .asciz "WinSize = %f, %f\n"
+    .balign 4
+    .asciz "WinScale = %f, %f\n"
+    .balign 4
+    .asciz "FontSize = %f, %f\n"
+    .balign 4
 .global lbl_803FE8D0
 lbl_803FE8D0:
     .asciz "ToyFigureListMarkN_Top_joint"
@@ -3966,7 +4459,23 @@ lbl_803FE8F0:
     .balign 4
 .global lbl_803FE8FC
 lbl_803FE8FC:
-	.incbin "baserom.dol", 0x3FB8FC, 0x114
+    .asciz "*** Can't Get Public Address!(tyList Model)\n"
+    .balign 4
+    .asciz "ToyFigurePanel_listpos01_joint"
+    .balign 4
+    .asciz "ToyFigureListBase_Top_joint"
+    .balign 4
+    .asciz "ToyFigureListBase_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyFigureListBaseend_Top_joint"
+    .balign 4
+    .asciz "ToyFigureListCursor_Top_joint"
+    .balign 4
+    .asciz "*** BG data aren't being loaded!\n"
+    .balign 4
+    .asciz "ScMenFigure_scene_lights"
+    .balign 4
+    .incbin "baserom.dol", 0x3FBA0C, 0x4
 .global lbl_803FEA10
 lbl_803FEA10:
     .asciz "ToyFigurePonPanel_Top_joint"
@@ -4010,17 +4519,331 @@ lbl_803FF01C:
     .balign 4
 .global lbl_803FF048
 lbl_803FF048:
-	.incbin "baserom.dol", 0x3FC048, 0x20
+    .asciz "*** tyDisplay Atari Irregul!\n"
+    .balign 4
 .global lbl_803FF068
 lbl_803FF068:
     .asciz "tydisplay.c"
     .balign 4
 .global lbl_803FF074
 lbl_803FF074:
-	.incbin "baserom.dol", 0x3FC074, 0x128
+    .asciz "*** tyDisplay Table Scale Irregul!\n"
+    .balign 4
+    .asciz "TyMnDisp.dat"
+    .balign 4
+    .asciz "TyMnDisp.usd"
+    .balign 4
+    .asciz "*** BG data aren't being loaded!\n"
+    .balign 4
+    .asciz "*** Can not Load Panel Label(%s)\n"
+    .balign 4
+    .asciz "ScMenDisplay_scene_lights"
+    .balign 4
+    .incbin "baserom.dol", 0x3FC11C, 0x80
 .global lbl_803FF19C
 lbl_803FF19C:
-	.incbin "baserom.dol", 0x3FC19C, 0xE0C
+    .asciz "X  %3.2f\nZ  %3.2f"
+    .balign 4
+    .asciz "ToyDspQues_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmA_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmB_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmC_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmD_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmE_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1A_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1B_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1C_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1D_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1E_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2A_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2B_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2C_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2D_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2E_Top_joint"
+    .balign 4
+    .asciz "ToyDspMapA_Top_joint"
+    .balign 4
+    .asciz "ToyDspMapB_Top_joint"
+    .balign 4
+    .asciz "ToyDspMapC_Top_joint"
+    .balign 4
+    .asciz "ToyDspMapD_Top_joint"
+    .balign 4
+    .asciz "ToyDspMapE_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesA_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesB_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesC_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesD_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesE_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgetcA_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgetcB_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgetcC_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgetcD_Top_joint"
+    .balign 4
+    .asciz "ToyDspFgetcE_Top_joint"
+    .balign 4
+    .asciz "ToyDspPokemonA_Top_joint"
+    .balign 4
+    .asciz "ToyDspPokemonB_Top_joint"
+    .balign 4
+    .asciz "ToyDspPokemonC_Top_joint"
+    .balign 4
+    .asciz "ToyDspPokemonD_Top_joint"
+    .balign 4
+    .asciz "ToyDspPokemonE_Top_joint"
+    .balign 4
+    .asciz "ToyDspItemA_Top_joint"
+    .balign 4
+    .asciz "ToyDspItemB_Top_joint"
+    .balign 4
+    .asciz "ToyDspItemC_Top_joint"
+    .balign 4
+    .asciz "ToyDspItemD_Top_joint"
+    .balign 4
+    .asciz "ToyDspItemE_Top_joint"
+    .balign 4
+    .asciz "ToyDspStand_Top_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmA_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmB_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmC_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmD_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaCmE_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1A_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1B_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1C_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1D_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR1E_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2A_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2B_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2C_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2D_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMycharaR2E_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMapA_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMapB_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMapC_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMapD_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspMapE_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesA_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesB_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesC_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesD_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgseriesE_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgetcA_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgetcB_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgetcC_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgetcD_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspFgetcE_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspPokemonA_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspPokemonB_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspPokemonC_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspPokemonD_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspPokemonE_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspItemA_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspItemB_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspItemC_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspItemD_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyDspItemE_Top_matanim_joint"
+    .balign 4
+    .asciz "TyQuesD.dat"
+    .balign 4
+    .asciz "TyMycCmA.dat"
+    .balign 4
+    .asciz "TyMycCmB.dat"
+    .balign 4
+    .asciz "TyMycCmC.dat"
+    .balign 4
+    .asciz "TyMycCmD.dat"
+    .balign 4
+    .asciz "TyMycCmE.dat"
+    .balign 4
+    .asciz "TyMycR1A.dat"
+    .balign 4
+    .asciz "TyMycR1B.dat"
+    .balign 4
+    .asciz "TyMycR1C.dat"
+    .balign 4
+    .asciz "TyMycR1D.dat"
+    .balign 4
+    .asciz "TyMycR1E.dat"
+    .balign 4
+    .asciz "TyMycR2A.dat"
+    .balign 4
+    .asciz "TyMycR2B.dat"
+    .balign 4
+    .asciz "TyMycR2C.dat"
+    .balign 4
+    .asciz "TyMycR2D.dat"
+    .balign 4
+    .asciz "TyMycR2E.dat"
+    .balign 4
+    .asciz "TyMapA.dat"
+    .balign 4
+    .asciz "TyMapB.dat"
+    .balign 4
+    .asciz "TyMapC.dat"
+    .balign 4
+    .asciz "TyMapD.dat"
+    .balign 4
+    .asciz "TyMapE.dat"
+    .balign 4
+    .asciz "TySeriA.dat"
+    .balign 4
+    .asciz "TySeriB.dat"
+    .balign 4
+    .asciz "TySeriC.dat"
+    .balign 4
+    .asciz "TySeriD.dat"
+    .balign 4
+    .asciz "TySeriE.dat"
+    .balign 4
+    .asciz "TyEtcA.dat"
+    .balign 4
+    .asciz "TyEtcB.dat"
+    .balign 4
+    .asciz "TyEtcC.dat"
+    .balign 4
+    .asciz "TyEtcD.dat"
+    .balign 4
+    .asciz "TyEtcE.dat"
+    .balign 4
+    .asciz "TyPokeA.dat"
+    .balign 4
+    .asciz "TyPokeB.dat"
+    .balign 4
+    .asciz "TyPokeC.dat"
+    .balign 4
+    .asciz "TyPokeD.dat"
+    .balign 4
+    .asciz "TyPokeE.dat"
+    .balign 4
+    .asciz "TyItemA.dat"
+    .balign 4
+    .asciz "TyItemB.dat"
+    .balign 4
+    .asciz "TyItemC.dat"
+    .balign 4
+    .asciz "TyItemD.dat"
+    .balign 4
+    .asciz "TyItemE.dat"
+    .balign 4
+    .asciz "TyStandD.dat"
+    .balign 4
+    .asciz "PlCaDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlDkDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlFxDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlGwDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlKbDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlKpDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlLkDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlLgDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlMrDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlMsDViWaitAj.dat"
+    .balign 4
+    .asciz "PlMtDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlNsDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlPeDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlPkDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlPpDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlPrDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlSsDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlYsDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlZdDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlSkDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlFcDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlClDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlDrDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlFeDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlPcDViWaitAJ.dat"
+    .balign 4
+    .asciz "PlGnDViWaitAJ.dat"
+    .balign 4
 .global lbl_803FFFA8
 lbl_803FFFA8:
 	.incbin "baserom.dol", 0x3FCFA8, 0x68
@@ -4181,13 +5004,51 @@ lbl_804008F8:
     .balign 4
 .global lbl_80400918
 lbl_80400918:
-	.incbin "baserom.dol", 0x3FD918, 0x210
+    .asciz "Error:Time is over.\n"
+    .balign 4
+    .asciz "UNLOCKED"
+    .balign 4
+    .asciz "DISCONNECT"
+    .balign 4
+    .asciz "HOST_OPEN"
+    .balign 4
+    .asciz "TARGET_OPEN"
+    .balign 4
+    .asciz "CONNECTED"
+    .balign 4
+    .asciz "%2d: FirstBlock:%02d,BlockLength:%02d,Connect:%s,Lock:%s.\n"
+    .balign 4
+    .asciz "[fio] Error: %s\n"
+    .balign 4
+    .asciz "fioPacketSendPacket.MCCWrite.NG"
+    .balign 4
+    .asciz "fioPacketSendPacket.MCCNotify.NG"
+    .balign 4
+    .asciz "fioPacketResultRead.MCCClose.NG"
+    .balign 4
+    .asciz "fioPacketResultRead.MCCStreamOpen.NG"
+    .balign 4
+    .asciz "fioPacketResultRead.MCCStreamRead.NG(Err:%d)"
+    .balign 4
+    .asciz "MCCStream:MCCStreamClose.NG\n"
+    .balign 4
+    .asciz "MCCStream:MCCOpen.NG\n"
+    .balign 4
+    .asciz "fioPacketResultWrite.MCCClose.NG"
+    .balign 4
+    .asciz "fioPacketResultWrite.MCCStreamOpen.NG"
+    .balign 4
+    .asciz "fioPacketResultWrite.MCCStreamWrite.NG"
+    .balign 4
+    .incbin "baserom.dol", 0x3FDB24, 0x4
 .global lbl_80400B28
 lbl_80400B28:
-	.incbin "baserom.dol", 0x3FDB28, 0x24
+    .asciz "ERROR: THP only supports 4:2:0!!!\n"
+    .balign 4
 .global lbl_80400B4C
 lbl_80400B4C:
-	.incbin "baserom.dol", 0x3FDB4C, 0x34
+    .asciz "THP does not support anything other than 4:2:0!\n"
+    .balign 4
 .global lbl_80400B80
 lbl_80400B80:
 	.incbin "baserom.dol", 0x3FDB80, 0x28
@@ -4196,16 +5057,37 @@ lbl_80400BA8:
 	.incbin "baserom.dol", 0x3FDBA8, 0x48
 .global lbl_80400BF0
 lbl_80400BF0:
-	.incbin "baserom.dol", 0x3FDBF0, 0x18
+    .asciz "DBExceptionDestination\n"
+    .balign 4
 .global lbl_80400C08
 lbl_80400C08:
-	.incbin "baserom.dol", 0x3FDC08, 0x38
+    .asciz "DSPInit(): Build Date: %s %s\n"
+    .balign 4
+    .asciz "Sep  8 2001"
+    .balign 4
+    .asciz "01:51:48"
+    .balign 4
 .global lbl_80400C40
 lbl_80400C40:
-	.incbin "baserom.dol", 0x3FDC40, 0x140
+    .asciz "DSP is booting task: 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : IRAM MMEM ADDR: 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : IRAM DSP ADDR : 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : IRAM LENGTH   : 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : DRAM MMEM ADDR: 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : Start Vector  : 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_add_task() : Added task    : 0x%08X\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3FDD7C, 0x4
 .global lbl_80400D80
 lbl_80400D80:
-	.incbin "baserom.dol", 0x3FDD80, 0xC8
+    .asciz "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n"
+    .balign 4
 .global lbl_80400E48
 lbl_80400E48:
     .asciz "DVDReadAsync(): specified area is out of the file  "
@@ -4213,7 +5095,14 @@ lbl_80400E48:
     .incbin "baserom.dol", 0x3FDE7C, 0x4
 .global lbl_80400E80
 lbl_80400E80:
-	.incbin "baserom.dol", 0x3FDE80, 0x4C
+    .asciz "app booted via JTAG\n"
+    .balign 4
+    .asciz "load fst\n"
+    .balign 4
+    .asciz "app booted from bootrom\n"
+    .balign 4
+    .asciz "bootrom\n"
+    .balign 4
 .global jtbl_80400ECC
 jtbl_80400ECC:
 	.incbin "baserom.dol", 0x3FDECC, 0x20
@@ -4231,7 +5120,16 @@ lbl_80400F98:
 	.incbin "baserom.dol", 0x3FDF98, 0x40
 .global lbl_80400FD8
 lbl_80400FD8:
-	.incbin "baserom.dol", 0x3FDFD8, 0x70
+    .asciz "  Game Name ... %c%c%c%c\n"
+    .balign 4
+    .asciz "  Company ..... %c%c\n"
+    .balign 4
+    .asciz "  Disk # ...... %d\n"
+    .balign 4
+    .asciz "  Game ver .... %d\n"
+    .balign 4
+    .asciz "  Streaming ... %s\n"
+    .balign 4
 .global jtbl_80401048
 jtbl_80401048:
 	.incbin "baserom.dol", 0x3FE048, 0x68
@@ -4285,7 +5183,33 @@ jtbl_80401584:
 	.incbin "baserom.dol", 0x3FE584, 0x94
 .global lbl_80401618
 lbl_80401618:
-	.incbin "baserom.dol", 0x3FE618, 0x1C0
+    .asciz "\nDolphin OS $Revision: 47 $.\n"
+    .balign 4
+    .asciz "Kernel built : %s %s\n"
+    .balign 4
+    .asciz "Nov 12 2001"
+    .balign 4
+    .asciz "01:46:17"
+    .balign 4
+    .asciz "Console Type : "
+    .balign 4
+    .asciz "Retail %d\n"
+    .balign 4
+    .asciz "Mac Emulator\n"
+    .balign 4
+    .asciz "PC Emulator\n"
+    .balign 4
+    .asciz "EPPC Arthur\n"
+    .balign 4
+    .asciz "EPPC Minnow\n"
+    .balign 4
+    .asciz "Development HW%d\n"
+    .balign 4
+    .asciz "Memory %d MB\n"
+    .balign 4
+    .asciz "Arena : 0x%x - 0x%x\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3FE700, 0xD8
 .global lbl_804017D8
 lbl_804017D8:
     .asciz "OSCheckHeap: Failed HeapArray in %d"
@@ -4314,22 +5238,115 @@ lbl_804017D8:
     .balign 4
     .asciz "OSCheckHeap: Failed total == hd->size in %d"
     .balign 4
-    .incbin "baserom.dol", 0x3FEAF4, 0x7C
+    .asciz "\nOSDumpHeap(%d):\n"
+    .balign 4
+    .asciz "--------Inactive\n"
+    .balign 4
+    .asciz "addr\tsize\t\tend\tprev\tnext\n"
+    .balign 4
+    .asciz "--------Allocated\n"
+    .balign 4
+    .asciz "%x\t%d\t%x\t%x\t%x\n"
+    .balign 4
+    .asciz "--------Free\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3FEB6C, 0x4
 .global lbl_80401B70
 lbl_80401B70:
 	.incbin "baserom.dol", 0x3FEB70, 0x80
 .global lbl_80401BF0
 lbl_80401BF0:
-	.incbin "baserom.dol", 0x3FEBF0, 0x230
+    .asciz ">>> L2 INVALIDATE : SHOULD NEVER HAPPEN\n"
+    .balign 4
+    .asciz "Machine check received\n"
+    .balign 4
+    .asciz "HID2 = 0x%x   SRR1 = 0x%x\n"
+    .balign 4
+    .asciz "Machine check was not DMA/locked cache related\n"
+    .balign 4
+    .asciz "DMAErrorHandler(): An error occurred while processing DMA.\n"
+    .balign 4
+    .asciz "The following errors have been detected and cleared :\n"
+    .balign 4
+    .asciz "\t- Requested a locked cache tag that was already in the cache\n"
+    .balign 4
+    .asciz "\t- DMA attempted to access normal cache\n"
+    .balign 4
+    .asciz "\t- DMA missed in data cache\n"
+    .balign 4
+    .asciz "\t- DMA queue overflowed\n"
+    .balign 4
+    .asciz "L1 i-caches initialized\n"
+    .balign 4
+    .asciz "L1 d-caches initialized\n"
+    .balign 4
+    .asciz "L2 cache initialized\n"
+    .balign 4
+    .asciz "Locked cache machine check handler installed\n"
+    .balign 4
+    .incbin "baserom.dol", 0x3FEE1C, 0x4
 .global lbl_80401E20
 lbl_80401E20:
-	.incbin "baserom.dol", 0x3FEE20, 0x1B4
+    .asciz "------------------------- Context 0x%08x -------------------------\n"
+    .balign 4
+    .asciz "r%-2d  = 0x%08x (%14d)  r%-2d  = 0x%08x (%14d)\n"
+    .balign 4
+    .asciz "LR   = 0x%08x                   CR   = 0x%08x\n"
+    .balign 4
+    .asciz "SRR0 = 0x%08x                   SRR1 = 0x%08x\n"
+    .balign 4
+    .asciz "\nGQRs----------\n"
+    .balign 4
+    .asciz "gqr%d = 0x%08x \t gqr%d = 0x%08x\n"
+    .balign 4
+    .asciz "\n\nFPRs----------\n"
+    .balign 4
+    .asciz "fr%d \t= %d \t fr%d \t= %d\n"
+    .balign 4
+    .asciz "\n\nPSFs----------\n"
+    .balign 4
+    .asciz "ps%d \t= 0x%x \t ps%d \t= 0x%x\n"
+    .balign 4
+    .asciz "\nAddress:      Back Chain    LR Save\n"
+    .balign 4
+    .asciz "0x%08x:   0x%08x    0x%08x\n"
+    .balign 4
 .global lbl_80401FD4
 lbl_80401FD4:
-	.incbin "baserom.dol", 0x3FEFD4, 0x24
+    .asciz "FPU-unavailable handler installed\n"
+    .balign 4
 .global lbl_80401FF8
 lbl_80401FF8:
-	.incbin "baserom.dol", 0x3FEFF8, 0x2DC
+    .asciz " in \"%s\" on line %d.\n"
+    .balign 4
+    .asciz "\nAddress:      Back Chain    LR Save\n"
+    .balign 4
+    .asciz "0x%08x:   0x%08x    0x%08x\n"
+    .balign 4
+    .asciz "Non-recoverable Exception %d"
+    .balign 4
+    .asciz "Unhandled Exception %d"
+    .balign 4
+    .asciz "\nDSISR = 0x%08x                   DAR  = 0x%08x\n"
+    .balign 4
+    .asciz "TB = 0x%016llx\n"
+    .balign 4
+    .asciz "\nInstruction at 0x%x (read from SRR0) attempted to access invalid address 0x%x (read from DAR)\n"
+    .balign 4
+    .asciz "\nAttempted to fetch instruction from invalid address 0x%x (read from SRR0)\n"
+    .balign 4
+    .asciz "\nInstruction at 0x%x (read from SRR0) attempted to access unaligned address 0x%x (read from DAR)\n"
+    .balign 4
+    .asciz "\nProgram exception : Possible illegal instruction/operation at or around 0x%x (read from SRR0)\n"
+    .balign 4
+    .asciz "AI DMA Address =   0x%04x%04x\n"
+    .balign 4
+    .asciz "ARAM DMA Address = 0x%04x%04x\n"
+    .balign 4
+    .asciz "DI DMA Address =   0x%08x\n"
+    .balign 4
+    .asciz "\nLast interrupt (%d): SRR0 = 0x%08x  TB = 0x%016llx\n"
+    .balign 4
 .global jtbl_804022D4
 jtbl_804022D4:
 	.incbin "baserom.dol", 0x3FF2D4, 0x44
@@ -4347,7 +5364,56 @@ lbl_8040236C:
 	.incbin "baserom.dol", 0x3FF36C, 0xB4
 .global lbl_80402420
 lbl_80402420:
-	.incbin "baserom.dol", 0x3FF420, 0x810
+    .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head != NULL && RunQueue[prio].tail != NULL in %d\n"
+    .balign 4
+    .asciz "OSThread.c"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head == NULL && RunQueue[prio].tail == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(&RunQueue[prio]) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed __OSActiveThreadQueue.head == NULL || __OSActiveThreadQueue.head->linkActive.prev == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed __OSActiveThreadQueue.tail == NULL || __OSActiveThreadQueue.tail->linkActive.next == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->linkActive.next == NULL || thread == thread->linkActive.next->linkActive.prev in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->linkActive.prev == NULL || thread == thread->linkActive.prev->linkActive.next in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed *(thread->stackEnd) == OS_THREAD_STACK_MAGIC in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed OS_PRIORITY_MIN <= thread->priority && thread->priority <= OS_PRIORITY_MAX+1 in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed 0 <= thread->suspend in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(&thread->queueJoin) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->queue == &RunQueue[thread->priority] in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed IsMember(&RunQueue[thread->priority], thread) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->priority == __OSGetEffectivePriority(thread) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed !IsSuspended(thread->suspend) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->queue == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->queue != NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(thread->queue) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed IsMember(thread->queue, thread) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->priority == 32 in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed !__OSCheckDeadLock(thread) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->queueMutex.head == NULL && thread->queueMutex.tail == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed. unkown thread state (%d) of thread %p\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed __OSCheckMutexes(thread) in %d\n"
+    .balign 4
 .global lbl_80402C30
 lbl_80402C30:
 	.incbin "baserom.dol", 0x3FFC30, 0x30
@@ -4402,7 +5468,17 @@ lbl_80405494:
     .balign 4
     .asciz "hsdIsDescendantOf(info, &hsdDObj)"
     .balign 4
-    .incbin "baserom.dol", 0x4024E4, 0x8C
+    .asciz "can not find specified pobj in link.\n"
+    .balign 4
+    .asciz "can not find specified pobj in link."
+    .balign 4
+    .asciz "dobj->mobj == mobj"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_dobj"
+    .balign 4
+    .incbin "baserom.dol", 0x40256C, 0x4
 .global lbl_80405570
 lbl_80405570:
 	.incbin "baserom.dol", 0x402570, 0x48
@@ -4415,7 +5491,8 @@ jtbl_804055C8:
 	.incbin "baserom.dol", 0x4025C8, 0x64
 .global lbl_8040562C
 lbl_8040562C:
-	.incbin "baserom.dol", 0x40262C, 0x18
+    .asciz "unexpected texmap id.\n"
+    .balign 4
 .global jtbl_80405644
 jtbl_80405644:
 	.incbin "baserom.dol", 0x402644, 0x20
@@ -4449,13 +5526,15 @@ jtbl_80405898:
 	.incbin "baserom.dol", 0x402898, 0x20
 .global lbl_804058B8
 lbl_804058B8:
-	.incbin "baserom.dol", 0x4028B8, 0x24
+    .asciz "specified texmtx id desn't exist.\n"
+    .balign 4
 .global jtbl_804058DC
 jtbl_804058DC:
 	.incbin "baserom.dol", 0x4028DC, 0x7C
 .global lbl_80405958
 lbl_80405958:
-	.incbin "baserom.dol", 0x402958, 0x2C
+    .asciz "texmtx index exceed hardware limit (%d).\n"
+    .balign 4
 .global jtbl_80405984
 jtbl_80405984:
 	.incbin "baserom.dol", 0x402984, 0x2C
@@ -4516,10 +5595,12 @@ jtbl_80405FEC:
 	.incbin "baserom.dol", 0x402FEC, 0x30
 .global lbl_8040601C
 lbl_8040601C:
-	.incbin "baserom.dol", 0x40301C, 0x20
+    .asciz "unexpected argument format.\n"
+    .balign 4
 .global lbl_8040603C
 lbl_8040603C:
-	.incbin "baserom.dol", 0x40303C, 0x1C
+    .asciz "unexpected type of object.\n"
+    .balign 4
 .global jtbl_80406058
 jtbl_80406058:
 	.incbin "baserom.dol", 0x403058, 0x34
@@ -4555,7 +5636,13 @@ lbl_804061A0:
     .balign 4
 .global lbl_804061D4
 lbl_804061D4:
-	.incbin "baserom.dol", 0x4031D4, 0x4C
+    .asciz "unexpected lightdesc flags (%x)\n"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_lobj"
+    .balign 4
+    .incbin "baserom.dol", 0x40321C, 0x4
 .global lbl_80406220
 lbl_80406220:
 	.incbin "baserom.dol", 0x403220, 0x40
@@ -4564,7 +5651,8 @@ jtbl_80406260:
 	.incbin "baserom.dol", 0x403260, 0x34
 .global lbl_80406294
 lbl_80406294:
-	.incbin "baserom.dol", 0x403294, 0x20
+    .asciz "unkown type of render pass.\n"
+    .balign 4
 .global lbl_804062B4
 lbl_804062B4:
     .asciz "cobj->eyepos"
@@ -4600,7 +5688,8 @@ lbl_80406424:
     .balign 4
 .global lbl_80406430
 lbl_80406430:
-	.incbin "baserom.dol", 0x403430, 0x18
+    .asciz "pobj: unexected type.\n"
+    .balign 4
 .global lbl_80406448
 lbl_80406448:
     .asciz "hsdIsDescendantOf(info, &hsdPObj)"
@@ -4619,7 +5708,8 @@ lbl_804064BC:
     .balign 4
 .global lbl_804064EC
 lbl_804064EC:
-	.incbin "baserom.dol", 0x4034EC, 0x1C
+    .asciz "unexpected vertex type.\n"
+    .balign 4
 .global lbl_80406508
 lbl_80406508:
     .asciz "shape_set->normal_desc->comp_cnt == GX_NRM_XYZ"
@@ -4632,7 +5722,8 @@ lbl_80406538:
     .balign 4
 .global lbl_8040657C
 lbl_8040657C:
-	.incbin "baserom.dol", 0x40357C, 0x2C
+    .asciz "attr(%d) is not supported by sysdolphin\n"
+    .balign 4
 .global lbl_804065A8
 lbl_804065A8:
 	.incbin "baserom.dol", 0x4035A8, 0x128
@@ -4682,10 +5773,47 @@ lbl_80406918:
     .balign 4
     .asciz "child->next == NULL"
     .balign 4
-    .incbin "baserom.dol", 0x403954, 0x84
+    .asciz "child should be a orphan.\n"
+    .balign 4
+    .asciz "child->parent == NULL"
+    .balign 4
+    .asciz "child should not have siblings"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_INSTANCE)"
+    .balign 4
+    .asciz "last != child"
+    .balign 4
 .global lbl_804069D8
 lbl_804069D8:
-	.incbin "baserom.dol", 0x4039D8, 0x108
+    .asciz "can not find specified jobj. maybe jobj tree is broken.\n"
+    .balign 4
+    .asciz "jobj[%d,%d]"
+    .balign 4
+    .asciz "SKELETON_ROOT "
+    .balign 4
+    .asciz "SKELETON "
+    .balign 4
+    .asciz "ENVELOPE_MODEL "
+    .balign 4
+    .asciz "EFFECTOR "
+    .balign 4
+    .asciz "  rot(L): "
+    .balign 4
+    .asciz "  sca(L): "
+    .balign 4
+    .asciz "  tra(L): "
+    .balign 4
+    .asciz "  rot(G): "
+    .balign 4
+    .asciz "  sca(G): "
+    .balign 4
+    .asciz "  tra(G): "
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_jobj"
+    .balign 4
+    .incbin "baserom.dol", 0x403AC4, 0x1C
 .global lbl_80406AE0
 lbl_80406AE0:
 	.incbin "baserom.dol", 0x403AE0, 0xC
@@ -4698,7 +5826,9 @@ lbl_80406B04:
     .balign 4
 .global lbl_80406B14
 lbl_80406B14:
-	.incbin "baserom.dol", 0x403B14, 0x2C
+    .asciz "unkown type of billboard.\n"
+    .balign 4
+    .incbin "baserom.dol", 0x403B30, 0x10
 .global lbl_80406B40
 lbl_80406B40:
 	.incbin "baserom.dol", 0x403B40, 0x80
@@ -4708,7 +5838,12 @@ lbl_80406BC0:
     .balign 4
 .global lbl_80406BD0
 lbl_80406BD0:
-	.incbin "baserom.dol", 0x403BD0, 0x6C
+    .asciz "No memory space remains for XFB.\n"
+    .balign 4
+    .asciz "cannot allocate memory for gx fifo.\n"
+    .balign 4
+    .asciz "no space remains for gx fifo.\n"
+    .balign 4
 .global lbl_80406C3C
 lbl_80406C3C:
     .asciz "sysdolphin_base_library"
@@ -4717,17 +5852,20 @@ lbl_80406C3C:
     .balign 4
     .asciz "objalloc.h"
     .balign 4
-    .incbin "baserom.dol", 0x403C7C, 0x28
+    .asciz "objalloc: %s\tusing %d\tfreed %d\tpeak %d\n"
+    .balign 4
 .global lbl_80406CA4
 lbl_80406CA4:
-	.incbin "baserom.dol", 0x403CA4, 0x3C
+    .asciz "init parameter should be set before invoking HSD_Init().\n"
+    .balign 4
 .global lbl_80406CE0
 lbl_80406CE0:
     .asciz "idx != -1"
     .balign 4
 .global lbl_80406CEC
 lbl_80406CEC:
-	.incbin "baserom.dol", 0x403CEC, 0x24
+    .asciz "unexpected type of render pass.\n"
+    .balign 4
 .global lbl_80406D10
 lbl_80406D10:
     .asciz "_p->xfb[idx].status == HSD_VI_XFB_DRAWING"
@@ -4771,10 +5909,18 @@ lbl_80406E80:
 	.incbin "baserom.dol", 0x403E80, 0x78
 .global lbl_80406EF8
 lbl_80406EF8:
-	.incbin "baserom.dol", 0x403EF8, 0x34
+    .asciz "unexpected type of robj.\n"
+    .balign 4
+    .asciz "(ptr && nitems) || !ptr"
+    .balign 4
 .global lbl_80406F2C
 lbl_80406F2C:
-	.incbin "baserom.dol", 0x403F2C, 0xA4
+    .asciz "Number of argment of expression exceeds the argument buffer\nsize. (requested num of arg %d, allocated %d)\n"
+    .balign 4
+    .asciz "rvalue->jobj"
+    .balign 4
+    .asciz "constraint only support jobj target.\n"
+    .balign 4
 .global lbl_80406FD0
 lbl_80406FD0:
 	.incbin "baserom.dol", 0x403FD0, 0x40
@@ -4801,7 +5947,8 @@ lbl_804070B4:
 	.incbin "baserom.dol", 0x4040B4, 0x3C
 .global lbl_804070F0
 lbl_804070F0:
-	.incbin "baserom.dol", 0x4040F0, 0x20
+    .asciz "You must specify CObj first.\n"
+    .balign 4
 .global jtbl_80407110
 jtbl_80407110:
 	.incbin "baserom.dol", 0x404110, 0x78
@@ -4853,14 +6000,24 @@ lbl_80407448:
     .balign 4
 .global lbl_804074A8
 lbl_804074A8:
-	.incbin "baserom.dol", 0x4044A8, 0x48
+    .asciz "HSD_ArchiveParse: byte-order mismatch! Please check data format %x %x\n"
+    .balign 4
 .global lbl_804074F0
 lbl_804074F0:
     .asciz "bytecode.c"
     .balign 4
     .asciz "operand < nb_args"
     .balign 4
-    .incbin "baserom.dol", 0x404510, 0x80
+    .asciz "specified stack doesn't exist (%d).\n"
+    .balign 4
+    .asciz "not yet implemented.\n"
+    .balign 4
+    .asciz "unexpected byte code.\n"
+    .balign 4
+    .asciz "stack->next"
+    .balign 4
+    .asciz "unexpected opcode 0x%x.\n"
+    .balign 4
 .global lbl_80407590
 lbl_80407590:
 	.incbin "baserom.dol", 0x404590, 0x3C
@@ -4872,7 +6029,14 @@ lbl_804075CC:
 lbl_80407604:
     .asciz "class_info->head.info_size >= parent_info->head.info_size"
     .balign 4
-    .incbin "baserom.dol", 0x404640, 0x58
+    .asciz "entry %d <null>\n"
+    .balign 4
+    .asciz "entry %d - %d <null>\n"
+    .balign 4
+    .asciz "entry %d(%d)"
+    .balign 4
+    .asciz "  nb_alloc %d nb_free %d\n"
+    .balign 4
 .global lbl_80407698
 lbl_80407698:
     .asciz "idx >= 0"
@@ -4887,7 +6051,11 @@ lbl_804076C8:
     .balign 4
     .asciz "info_hash"
     .balign 4
-    .incbin "baserom.dol", 0x4046E0, 0x40
+    .asciz "<class %s>\n"
+    .balign 4
+    .asciz "    info %d object %d nb_exist %d nb_peak %d\n"
+    .balign 4
+    .incbin "baserom.dol", 0x40471C, 0x4
 .global lbl_80407720
 lbl_80407720:
     .asciz "idx < hash->table_size"
@@ -4904,7 +6072,18 @@ lbl_80407744:
 lbl_80407760:
     .asciz "HSD_TExpGetType(texp) == HSD_TE_TEV"
     .balign 4
-    .incbin "baserom.dol", 0x404784, 0x114
+    .asciz "tev can't select multiple konst input.\n"
+    .balign 4
+    .asciz "sel == HSD_TE_RGB || sel == HSD_TE_A"
+    .balign 4
+    .asciz "idx == 3 || sel != HSD_TE_RGB || exp->tev.c_clamp"
+    .balign 4
+    .asciz "idx == 3 || sel != HSD_TE_A || exp->tev.a_clamp"
+    .balign 4
+    .asciz "swap == HSD_TE_UNDEF || tev->tex_swap == swap"
+    .balign 4
+    .asciz "swap == HSD_TE_UNDEF || tev->ras_swap == swap"
+    .balign 4
 .global jtbl_80407898
 jtbl_80407898:
 	.incbin "baserom.dol", 0x404898, 0xA0
@@ -4940,30 +6119,45 @@ lbl_80407D60:
     .balign 4
 .global lbl_80407D78
 lbl_80407D78:
-	.incbin "baserom.dol", 0x404D78, 0x18
+    .asciz "%s in %s on line %d.\n"
+    .balign 4
 .global lbl_80407D90
 lbl_80407D90:
-	.incbin "baserom.dol", 0x404D90, 0xA4
+    .asciz "audio heap overflow.\n"
+    .balign 4
+    .asciz "Can't load SFX file; bank(id=%d) buffer overflow.\n"
+    .balign 4
+    .asciz "hsd_SynthSFXBankHead[bankID + 1] - hsd_SynthSFXBank[bankID] >= hsd_SynthSFXLoadBuf[1]"
+    .balign 4
 .global lbl_80407E34
 lbl_80407E34:
-	.incbin "baserom.dol", 0x404E34, 0x24
+    .asciz "invalid bankID = %d; filename = %s\n"
+    .balign 4
 .global lbl_80407E58
 lbl_80407E58:
     .asciz "(bankID >= 0 && bankID < hsd_SynthSFXBankNum)"
     .balign 4
 .global lbl_80407E88
 lbl_80407E88:
-	.incbin "baserom.dol", 0x404E88, 0x10
+    .asciz "bank overflow\n"
+    .balign 4
 .global lbl_80407E98
 lbl_80407E98:
     .asciz "hsd_SynthSFXBankHead[hsd_SynthSFXBankNum + 1] <= hsd_SynthSFXBankAREnd"
     .balign 4
-    .incbin "baserom.dol", 0x404EE0, 0x2C
+    .asciz "bank stack underflow\n"
+    .balign 4
+    .asciz "hsd_SynthSFXBankNum"
+    .balign 4
 .global lbl_80407F0C
 lbl_80407F0C:
     .asciz "sfxGroupDataReaddressCounter > 0"
     .balign 4
-    .incbin "baserom.dol", 0x404F30, 0xA8
+    .asciz "Can't relocate SFX group; bank = %d; sfxgroup = %d\n"
+    .balign 4
+    .asciz "hsd_SynthSFXBank[bankID] + group->arsize <= hsd_SynthSFXBankHead[bankID + 1]"
+    .balign 4
+    .incbin "baserom.dol", 0x404FB4, 0x24
 .global lbl_80407FD8
 lbl_80407FD8:
 	.incbin "baserom.dol", 0x404FD8, 0x10
@@ -5020,10 +6214,19 @@ lbl_804082A8:
 	.incbin "baserom.dol", 0x4052A8, 0x8C
 .global lbl_80408334
 lbl_80408334:
-	.incbin "baserom.dol", 0x405334, 0x14
+    .asciz "can not open %s\n"
+    .balign 4
 .global lbl_80408348
 lbl_80408348:
-	.incbin "baserom.dol", 0x405348, 0x70
+    .asciz "file size of \"%s\" is 0\n"
+    .balign 4
+    .asciz "channel == 0 || channel == 1"
+    .balign 4
+    .asciz "0 <= type && type <= 4"
+    .balign 4
+    .asciz "type == 0 || param != NULL"
+    .balign 4
+    .incbin "baserom.dol", 0x4053B4, 0x4
 .global lbl_804083B8
 lbl_804083B8:
     .asciz "devcom.c"
@@ -5165,19 +6368,25 @@ lbl_8040A540:
     .balign 4
     .asciz "Unknown error"
     .balign 4
-    .incbin "baserom.dol", 0x40777C, 0x2C
+    .asciz "%s: MCC Error, %s (%d)\n"
+    .balign 4
+    .asciz "MCC Error, %s (%d)\n"
+    .balign 4
 .global jtbl_8040A7A8
 jtbl_8040A7A8:
 	.incbin "baserom.dol", 0x4077A8, 0x138
 .global lbl_8040A8E0
 lbl_8040A8E0:
-	.incbin "baserom.dol", 0x4078E0, 0x24
+    .asciz "EXI_%d:not support USB (Error=%d)\n"
+    .balign 4
 .global lbl_8040A904
 lbl_8040A904:
-	.incbin "baserom.dol", 0x407904, 0x1C
+    .asciz "EXI initialized (EXI_%d)\n"
+    .balign 4
 .global lbl_8040A920
 lbl_8040A920:
-	.incbin "baserom.dol", 0x407920, 0x1C
+    .asciz "Error(0x%x) in MCCNotify.\n"
+    .balign 4
 .global lbl_8040A93C
 lbl_8040A93C:
 	.incbin "baserom.dol", 0x40793C, 0x94
@@ -5185,7 +6394,28 @@ lbl_8040A93C:
 lbl_8040A9D0:
     .asciz "loading file (%s) from USB ..."
     .balign 4
-    .incbin "baserom.dol", 0x4079F0, 0x110
+    .asciz "cannot open file\n"
+    .balign 4
+    .asciz "cannot get files stat\n"
+    .balign 4
+    .asciz "too large file size\n"
+    .balign 4
+    .asciz "cannot allocate memory\n"
+    .balign 4
+    .asciz "cannot load file\n"
+    .balign 4
+    .asciz "Done %s size:%d time:%f spped:%fkbps\n"
+    .balign 4
+    .asciz "cannot save file\n"
+    .balign 4
+    .asciz "Seaching files (%s) via USB ..."
+    .balign 4
+    .asciz "cannot get dir stat\n"
+    .balign 4
+    .asciz "too large dir size\n"
+    .balign 4
+    .asciz "cannot use USB now.\n"
+    .balign 4
 .global lbl_8040AB00
 lbl_8040AB00:
 	.incbin "baserom.dol", 0x407B00, 0x20
@@ -5240,7 +6470,10 @@ lbl_8040BF70:
 lbl_8040BFB0:
     .asciz "particle.c"
     .balign 4
-    .incbin "baserom.dol", 0x408FBC, 0x54
+    .asciz "illigal form data (strange number of group)\n"
+    .balign 4
+    .asciz "psInitDataBanks: unknown version\n"
+    .balign 4
 .global lbl_8040C010
 lbl_8040C010:
     .asciz "object.h"
@@ -5299,7 +6532,8 @@ lbl_8040C3B0:
     .balign 4
 .global lbl_8040C3BC
 lbl_8040C3BC:
-	.incbin "baserom.dol", 0x4093BC, 0x20
+    .asciz "BadOBJ for SOBJ-displayfunc\n"
+    .balign 4
 .global jtbl_8040C3DC
 jtbl_8040C3DC:
 	.incbin "baserom.dol", 0x4093DC, 0xB4
@@ -5311,7 +6545,13 @@ lbl_8040C4B8:
 	.incbin "baserom.dol", 0x4094B8, 0x68
 .global lbl_8040C520
 lbl_8040C520:
-	.incbin "baserom.dol", 0x409520, 0x48
+    .asciz "unknow camera\n"
+    .balign 4
+    .asciz "Cannot open archive %s.\n"
+    .balign 4
+    .asciz "Cannot find symbol %s.\n"
+    .balign 4
+    .incbin "baserom.dol", 0x409564, 0x4
 .global lbl_8040C568
 lbl_8040C568:
 	.incbin "baserom.dol", 0x409568, 0x40
