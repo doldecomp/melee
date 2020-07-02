@@ -1,3 +1,7 @@
+ifneq ($(findstring MINGW,$(shell uname)),)
+  WINDOWS := 1
+endif
+
 #-------------------------------------------------------------------------------
 # Files
 #-------------------------------------------------------------------------------
@@ -18,7 +22,11 @@ O_FILES := $(S_FILES:.s=.o) $(C_FILES:.c=.o)
 #-------------------------------------------------------------------------------
 
 # Programs
-WINE    := wine
+ifeq ($(WINDOWS),1)
+  WINE :=
+else
+  WINE := wine
+endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 OBJCOPY := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 CC      := $(WINE) mwcc_compiler/mwcceppc.exe
