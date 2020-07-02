@@ -1131,6 +1131,9 @@ lbl_804D2648:
 .global lbl_804D2E70
 lbl_804D2E70:
 	.skip 0x3530
+
+.section .sbss
+
 .global lbl_804D63A0
 lbl_804D63A0:
 	.skip 0x4
