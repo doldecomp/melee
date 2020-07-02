@@ -1,5 +1,8 @@
 _SDA_BASE_ = 0x804DB6A0;
 _SDA2_BASE_ = 0x804DF9E0;
+
+FORCEFILES { data0.o }
+
 SECTIONS
 {
     .text0 BIND(0x80003100) : { *(.text0) }
