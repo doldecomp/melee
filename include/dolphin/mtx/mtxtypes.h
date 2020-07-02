@@ -1,7 +1,7 @@
 #ifndef _mtxtypes_h_
 #define _mtxtype_h_
 
-#include "dolphin\types.h"
+#include "dolphin/types.h"
 
 typedef struct
 {
