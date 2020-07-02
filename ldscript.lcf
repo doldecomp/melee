@@ -6,7 +6,16 @@ FORCEFILES { extab.o }
 SECTIONS
 {
     .init BIND(0x80003100) : { *(.init) }
-    .text BIND(0x80005940) : { *(.text) }
+
+    .text BIND(0x80005940) : { 
+        code_80005940.o(.text)
+        code_80008D30.o(.text)
+        code_8000B1CC.o(.text)
+        code_8000CE50.o(.text)
+        lbvector.o(.text)
+        text.o(.text)
+    }
+
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
     extabindex_ BIND(0x800056C0) : { *(extabindex_) } /* TODO: should be extabindex */
     .ctors BIND(0x803B7240) : { *(.ctors) }
