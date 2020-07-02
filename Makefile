@@ -38,7 +38,7 @@ ELF2DOL := tools/elf2dol
 SHA1SUM := sha1sum
 
 # Options
-INCLUDES := -i include -i src
+INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP)
