@@ -1,6 +1,9 @@
 ifneq ($(findstring MINGW,$(shell uname)),)
   WINDOWS := 1
 endif
+ifneq ($(findstring MSYS,$(shell uname)),)
+  WINDOWS := 1
+endif
 
 #-------------------------------------------------------------------------------
 # Files
