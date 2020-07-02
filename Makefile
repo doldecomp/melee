@@ -38,9 +38,11 @@ ELF2DOL := tools/elf2dol
 SHA1SUM := sha1sum
 
 # Options
+INCLUDES := -i include -i src
+
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP)
-CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
+CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p $(INCLUDES)
 
 #-------------------------------------------------------------------------------
 # Recipes

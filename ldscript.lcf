@@ -5,7 +5,10 @@ FORCEFILES { extab.o }
 
 SECTIONS
 {
-    .init BIND(0x80003100) : { *(.init) }
+    .init BIND(0x80003100) : {
+		__mem.o(.text)
+		*(.init) 
+	}
 
     .text BIND(0x80005940) : { 
         code_80005940.o(.text)
