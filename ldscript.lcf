@@ -1,7 +1,7 @@
 _SDA_BASE_ = 0x804DB6A0;
 _SDA2_BASE_ = 0x804DF9E0;
 
-FORCEFILES { extab.o }
+FORCEFILES { extab.o object.o }
 
 SECTIONS
 {
@@ -17,6 +17,29 @@ SECTIONS
         code_8000CE50.o(.text)
         lbvector.o(.text)
         text.o(.text)
+
+        /* sysdolphin files */
+        mobj.o(.text)
+        aobj.o(.text)
+        lobj.o(.text)
+        cobj.o(.text)
+        fobj.o(.text)
+        pobj.o(.text)
+        jobj.o(.text)
+        displayfunc.o(.text)
+        initialize.o(.text)
+        video.o(.text)
+        pad.o(.text)
+        code_80378A34.o(.text)
+        objalloc.o(.text)
+        code_8037AE34.o(.text)
+        id.o(.text)
+        wobj.o(.text)
+        fog.o(.text)
+        perf.o(.text)
+        list.o(.text)
+        object.o(.text)
+        code_8037E708.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
