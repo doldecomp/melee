@@ -11,12 +11,13 @@ extern const float lbl_804D7AC0;
 extern const double lbl_804D7AB0;
 extern const double lbl_804D7AB8;
 
+//#define NONMATCHING
+
 // matches except for location of variable y on stack in inlined sqrtf call
 #ifdef NONMATCHING
 float func_8000D2EC(float *a)
 {
     float foo;
-    //volatile float pad;
 
     float f4 = sqrtf(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);
     if (lbl_804D7AA8 == f4 /*0.0f*/)

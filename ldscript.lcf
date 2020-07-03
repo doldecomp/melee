@@ -17,7 +17,10 @@ SECTIONS
         code_8000CE50.o(.text)
         lbvector.o(.text)
         lbvector_asm.o(.text)
-        text.o(.text)
+        text_part1.o(.text)
+        text_part2.o(.text)
+        text_part3.o(.text)
+        text_part4.o(.text)
 
         /* sysdolphin files */
         mobj.o(.text)
