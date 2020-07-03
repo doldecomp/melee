@@ -21,8 +21,8 @@ func_8037CD8C:
 /* 8037CDB4 00379994  7C 08 03 A6 */	mtlr r0
 /* 8037CDB8 00379998  4E 80 00 20 */	blr 
 
-.global func_8037CDBC
-func_8037CDBC:
+.global HSD_IDSetup
+HSD_IDSetup:
 /* 8037CDBC 0037999C  7C 08 02 A6 */	mflr r0
 /* 8037CDC0 003799A0  3C 60 80 4C */	lis r3, lbl_804C23EC@ha
 /* 8037CDC4 003799A4  90 01 00 04 */	stw r0, 4(r1)
