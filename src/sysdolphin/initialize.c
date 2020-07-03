@@ -2,11 +2,7 @@
 
 #include "video.h"
 
-typedef struct _FrameBuffers {
-    void* xfb[3];
-} FrameBuffers;
-
-extern FrameBuffers lbl_804C0948; // FrameBuffer
+extern void* lbl_804C0948[3]; // FrameBuffer
 
 extern u32 lbl_804C0954[11]; // memReport
 
@@ -22,7 +18,7 @@ extern const GXColor lbl_804DE590;
 
 void HSD_InitComponent(void)
 {
-    FrameBuffers* FrameBuffer = &lbl_804C0948;
+    void** FrameBuffer = lbl_804C0948;
 
     HSD_OSInit();
     {
@@ -38,7 +34,7 @@ void HSD_InitComponent(void)
         vi_status.update_alpha = GX_ENABLE;
         vi_status.update_z = GX_ENABLE;
 
-        HSD_VIInit(&vi_status, FrameBuffer->xfb[0], FrameBuffer->xfb[1], FrameBuffer->xfb[2]); // HSD_VIInit(&vi_status, FrameBuffer[0], FrameBuffer[1], FrameBuffer[2]);
+        HSD_VIInit(&vi_status, FrameBuffer[0], FrameBuffer[1], FrameBuffer[2]); // HSD_VIInit(&vi_status, FrameBuffer[0], FrameBuffer[1], FrameBuffer[2]);
     }
 
     HSD_GXInit();
