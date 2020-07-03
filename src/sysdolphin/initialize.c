@@ -21,13 +21,13 @@ void HSD_InitComponent(void)
     HSD_OSInit();
     {
         HSD_VIStatus vi_status;
-        GXColor black = lbl_804DE590; // GXColor black = {0, 0, 0, 0};
+        GXColor clr = lbl_804DE590; // GXColor clr = {0xFF, 0xFF, 0xFF, 0xFF};
 
         vi_status.rmode = *lbl_804D5E04; // vi_status.rmode = *rmode;
         vi_status.black = GX_TRUE;
         vi_status.vf = GX_TRUE;
         vi_status.gamma = GX_GM_1_0;
-        vi_status.clear_clr = black;
+        vi_status.clear_clr = clr;
         vi_status.clear_z = GX_MAX_Z24;
         vi_status.update_clr = GX_ENABLE;
         vi_status.update_alpha = GX_ENABLE;
