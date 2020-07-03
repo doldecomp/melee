@@ -16,6 +16,7 @@ SECTIONS
         code_8000B1CC.o(.text)
         code_8000CE50.o(.text)
         lbvector.o(.text)
+        lbvector_asm.o(.text)
         text.o(.text)
 
         /* sysdolphin files */

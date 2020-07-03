@@ -2,26 +2,28 @@
 
 .section .text, "ax"  # 0x80005940 - 0x803B7240
 
+.if 0
+
 .global func_8000D2EC
 func_8000D2EC:
 /* 8000D2EC 00009ECC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8000D2F0 00009ED0  C0 23 00 00 */	lfs f1, 0(r3)
-/* 8000D2F4 00009ED4  C0 03 00 04 */	lfs f0, 4(r3)
-/* 8000D2F8 00009ED8  EC 41 00 72 */	fmuls f2, f1, f1
-/* 8000D2FC 00009EDC  C0 63 00 08 */	lfs f3, 8(r3)
-/* 8000D300 00009EE0  EC 20 00 32 */	fmuls f1, f0, f0
+/* 8000D2F0 00009ED0  C0 23 00 00 */	lfs f1, 0(r3)       # a[0]
+/* 8000D2F4 00009ED4  C0 03 00 04 */	lfs f0, 4(r3)       # a[1]
+/* 8000D2F8 00009ED8  EC 41 00 72 */	fmuls f2, f1, f1    # a[0] * a[0]
+/* 8000D2FC 00009EDC  C0 63 00 08 */	lfs f3, 8(r3)       # a[2]
+/* 8000D300 00009EE0  EC 20 00 32 */	fmuls f1, f0, f0    # a[1] * a[1]
 /* 8000D304 00009EE4  C0 02 80 C8 */	lfs f0, lbl_804D7AA8-_SDA2_BASE_(r2)
-/* 8000D308 00009EE8  EC 63 00 F2 */	fmuls f3, f3, f3
+/* 8000D308 00009EE8  EC 63 00 F2 */	fmuls f3, f3, f3    # a[2] * a[2]
 /* 8000D30C 00009EEC  EC 22 08 2A */	fadds f1, f2, f1
 /* 8000D310 00009EF0  EC 83 08 2A */	fadds f4, f3, f1
 /* 8000D314 00009EF4  FC 04 00 40 */	fcmpo cr0, f4, f0
 /* 8000D318 00009EF8  40 81 00 50 */	ble lbl_8000D368
-/* 8000D31C 00009EFC  FC 20 20 34 */	frsqrte f1, f4
+/* 8000D31C 00009EFC  FC 20 20 34 */	frsqrte f1, f4      # 1/ sqrt(f4)
 /* 8000D320 00009F00  C8 62 80 D0 */	lfd f3, lbl_804D7AB0-_SDA2_BASE_(r2)
 /* 8000D324 00009F04  C8 42 80 D8 */	lfd f2, lbl_804D7AB8-_SDA2_BASE_(r2)
-/* 8000D328 00009F08  FC 01 00 72 */	fmul f0, f1, f1
+/* 8000D328 00009F08  FC 01 00 72 */	fmul f0, f1, f1   # f4 * (guess*guess) - const
 /* 8000D32C 00009F0C  FC 23 00 72 */	fmul f1, f3, f1
-/* 8000D330 00009F10  FC 04 10 3C */	fnmsub f0, f4, f0, f2
+/* 8000D330 00009F10  FC 04 10 3C */	fnmsub f0, f4, f0, f2   # f0 = f4 * f1 * f1 - lbl_804D7AB8
 /* 8000D334 00009F14  FC 21 00 32 */	fmul f1, f1, f0
 /* 8000D338 00009F18  FC 01 00 72 */	fmul f0, f1, f1
 /* 8000D33C 00009F1C  FC 23 00 72 */	fmul f1, f3, f1
@@ -32,7 +34,7 @@ func_8000D2EC:
 /* 8000D350 00009F30  FC 04 10 3C */	fnmsub f0, f4, f0, f2
 /* 8000D354 00009F34  FC 01 00 32 */	fmul f0, f1, f0
 /* 8000D358 00009F38  FC 04 00 32 */	fmul f0, f4, f0
-/* 8000D35C 00009F3C  FC 00 00 18 */	frsp f0, f0
+/* 8000D35C 00009F3C  FC 00 00 18 */	frsp f0, f0         # convert double to float
 /* 8000D360 00009F40  D0 01 00 10 */	stfs f0, 0x10(r1)
 /* 8000D364 00009F44  C0 81 00 10 */	lfs f4, 0x10(r1)
 lbl_8000D368:
@@ -44,8 +46,8 @@ lbl_8000D378:
 /* 8000D378 00009F58  C0 42 80 E0 */	lfs f2, lbl_804D7AC0-_SDA2_BASE_(r2)
 /* 8000D37C 00009F5C  FC 20 20 90 */	fmr f1, f4
 /* 8000D380 00009F60  C0 03 00 00 */	lfs f0, 0(r3)
-/* 8000D384 00009F64  EC 42 20 24 */	fdivs f2, f2, f4
-/* 8000D388 00009F68  EC 00 00 B2 */	fmuls f0, f0, f2
+/* 8000D384 00009F64  EC 42 20 24 */	fdivs f2, f2, f4    # f2 = lbl_804D7AC0 / f4
+/* 8000D388 00009F68  EC 00 00 B2 */	fmuls f0, f0, f2    # f0 = a[0] * lbl_804D7AC0 / f4
 /* 8000D38C 00009F6C  D0 03 00 00 */	stfs f0, 0(r3)
 /* 8000D390 00009F70  C0 03 00 04 */	lfs f0, 4(r3)
 /* 8000D394 00009F74  EC 00 00 B2 */	fmuls f0, f0, f2
@@ -56,6 +58,8 @@ lbl_8000D378:
 lbl_8000D3A8:
 /* 8000D3A8 00009F88  38 21 00 18 */	addi r1, r1, 0x18
 /* 8000D3AC 00009F8C  4E 80 00 20 */	blr 
+
+.endif
 
 .global func_8000D3B0
 func_8000D3B0:

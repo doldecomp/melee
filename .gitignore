@@ -9,6 +9,7 @@ mwcc_compiler/
 
 # Temporary files
 *.swp
+*.dump
 
 # IDE
 .vscode/

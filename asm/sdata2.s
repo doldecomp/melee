@@ -100,6 +100,9 @@ lbl_804D7AA0:
 .global lbl_804D7AA4
 lbl_804D7AA4:
 	.incbin "baserom.dol", 0x431484, 0x4
+
+# lbvector
+
 .global lbl_804D7AA8
 lbl_804D7AA8:
 	.incbin "baserom.dol", 0x431488, 0x8
