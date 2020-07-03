@@ -3,6 +3,10 @@
 
 #include "global.h"
 
+#define HSD_CLASS_INFO(o) ((HSD_ClassInfo*)o)
+#define HSD_CLASS_METHOD(o) (o->parent.class_info)
+#define HSD_PARENT_INFO(o) ((o)->parent.head.parent)
+
 typedef struct _HSD_Class {
     struct _HSD_ClassInfo* class_info;
 } HSD_Class;
