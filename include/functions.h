@@ -8037,7 +8037,7 @@
 // ? func_8034EC14(?);
 // ? func_8034ECA4(?);
 // ? func_8034EE9C(?);
-// ? func_8034F314(?);
+void VIWaitForRetrace(void);
 // ? func_8034F368(?);
 // ? func_8034F63C(?);
 // ? func_8034F7DC(?);
@@ -8564,13 +8564,13 @@
 // ? func_80374A80(?);
 // ? func_80374A88(?);
 // ? HSD_EraseRect(?);
-// ? HSD_InitComponent(?);
-// ? func_80374F60(?);
-// ? func_80374F78(?);
-// ? func_80374F7C(?);
+// void HSD_InitComponent(void);
+// void HSD_GXSetFifoObj(GXFifoObj* fifo);
+// void HSD_DVDInit(void);
+// void** HSD_AllocateXFB(s32 nbBuffer, GXRenderModeObj* rm);
 // ? func_80375194(?);
-// ? func_80375258(?);
-// ? func_80375304(?);
+void HSD_GXInit(void);
+void HSD_OSInit(void);
 // ? func_80375404(?);
 // ? func_8037540C(?);
 // ? func_80375414(?);
@@ -8578,7 +8578,7 @@
 // ? func_80375530(?);
 // ? func_80375538(?);
 // ? func_803755A8(?);
-// ? func_803755B4(?);
+void HSD_ObjInit(void);
 // ? func_803755F8(?);
 // ? func_803756F8(?);
 // ? HSD_VISearchXFBByStatus(?);
@@ -8594,7 +8594,7 @@
 // ? func_803765A8(?);
 // ? func_80376718(?);
 // ? func_803767A0(?);
-// ? func_803767B8(?);
+void HSD_VIInit(HSD_VIStatus* vi_status, void* xfb0, void* xfb1, void* xfb2);
 // ? HSD_PadGetRawQueueCount(?);
 // ? func_803769D8(?);
 // ? func_803769FC(?);
@@ -8679,7 +8679,7 @@
 // ? func_8037CBA4(?);
 // ? func_8037CC90(?);
 // ? func_8037CD8C(?);
-// ? func_8037CDBC(?);
+void HSD_IDSetup(void);
 // ? func_8037CDEC(?);
 // ? func_8037CEE8(?);
 // ? func_8037CF98(?);
@@ -8800,7 +8800,7 @@
 // ? func_80387B1C(?);
 // ? func_80387BA4(?);
 // ? func_80387DF8(?);
-// ? func_803881E4(?);
+void func_803881E4(void);
 // ? func_80388220(?);
 // ? func_80388278(?);
 // ? func_80388320(?);

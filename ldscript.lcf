@@ -28,6 +28,7 @@ SECTIONS
         jobj.o(.text)
         displayfunc.o(.text)
         initialize.o(.text)
+        initialize_asm.o(.text)
         video.o(.text)
         pad.o(.text)
         code_80378A34.o(.text)
