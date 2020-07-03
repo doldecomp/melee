@@ -2,7 +2,11 @@
 
 #include "video.h"
 
-extern void* lbl_804C0948[3]; // FrameBuffer
+typedef struct _FrameBuffers {
+    void* xfb[3];
+} FrameBuffers;
+
+extern FrameBuffers lbl_804C0948; // FrameBuffer
 
 extern u32 lbl_804C0954[11]; // memReport
 
@@ -12,17 +16,18 @@ extern GXFifoObj* lbl_804D76C4; // DefaultFifoObj
 
 extern BOOL lbl_804D76CC; // init_done
 
-extern GXRenderModeObj* lbl_804D5E04; // rmode
+extern const GXRenderModeObj* lbl_804D5E04; // rmode
 
 extern const GXColor lbl_804DE590;
 
 void HSD_InitComponent(void)
 {
+    FrameBuffers* FrameBuffer = &lbl_804C0948;
+
     HSD_OSInit();
     {
         HSD_VIStatus vi_status;
-        GXColor clr = lbl_804DE590; // GXColor clr = {0xFF, 0xFF, 0xFF, 0xFF};
-
+        GXColor clr = lbl_804DE590; // GXColor clr = {0, 0, 0, 0};
         vi_status.rmode = *lbl_804D5E04; // vi_status.rmode = *rmode;
         vi_status.black = GX_TRUE;
         vi_status.vf = GX_TRUE;
@@ -33,7 +38,7 @@ void HSD_InitComponent(void)
         vi_status.update_alpha = GX_ENABLE;
         vi_status.update_z = GX_ENABLE;
 
-        HSD_VIInit(&vi_status, lbl_804C0948[0], lbl_804C0948[1], lbl_804C0948[2]); // HSD_VIInit(&vi_status, FrameBuffer[0], FrameBuffer[1], FrameBuffer[2]);
+        HSD_VIInit(&vi_status, FrameBuffer->xfb[0], FrameBuffer->xfb[1], FrameBuffer->xfb[2]); // HSD_VIInit(&vi_status, FrameBuffer[0], FrameBuffer[1], FrameBuffer[2]);
     }
 
     HSD_GXInit();

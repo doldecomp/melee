@@ -7,9 +7,9 @@
 
 typedef struct _HSD_VIStatus {
     GXRenderModeObj rmode;
-    u8 black;
+    u32 black;
     u8 vf;
-    u8 gamma;
+    u32 gamma;
     GXColor clear_clr;
     u32 clear_z;
     u8 update_clr;
