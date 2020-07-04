@@ -91,8 +91,6 @@ void HSD_AObjInvokeCallBacks(void)
 {
     u32 junk1;
     u32 junk2;
-    #pragma unused(junk1)
-    #pragma unused(junk2)
     HSD_SList* list;
 
     if (lbl_804D762C != 0 && lbl_804D7630 == 0) {
