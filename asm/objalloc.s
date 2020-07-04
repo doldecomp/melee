@@ -281,8 +281,8 @@ func_8037AD20:
 /* 8037AD40 00377920  90 03 00 08 */	stw r0, 8(r3)
 /* 8037AD44 00377924  4E 80 00 20 */	blr 
 
-.global func_8037AD48
-func_8037AD48:
+.global HSD_ObjAllocInit
+HSD_ObjAllocInit:
 /* 8037AD48 00377928  7C 08 02 A6 */	mflr r0
 /* 8037AD4C 0037792C  90 01 00 04 */	stw r0, 4(r1)
 /* 8037AD50 00377930  94 21 FF D8 */	stwu r1, -0x28(r1)

@@ -34,6 +34,7 @@ SECTIONS
         objalloc.o(.text)
         code_8037AE34.o(.text)
         id.o(.text)
+        id_asm.o(.text)
         wobj.o(.text)
         fog.o(.text)
         perf.o(.text)

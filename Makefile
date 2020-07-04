@@ -11,7 +11,7 @@ endif
 
 # Inputs
 S_FILES := $(wildcard asm/*.s)
-C_FILES := $(wildcard src/*.c)
+C_FILES := $(wildcard src/*.c) $(wildcard src/sysdolphin/*.c)
 LDSCRIPT := ldscript.lcf
 
 # Outputs
@@ -38,7 +38,7 @@ ELF2DOL := tools/elf2dol
 SHA1SUM := sha1sum
 
 # Options
-INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
+INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/sysdolphin/
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP)
