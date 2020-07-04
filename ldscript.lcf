@@ -21,6 +21,7 @@ SECTIONS
         /* sysdolphin files */
         mobj.o(.text)
         aobj.o(.text)
+        aobj_asm.o(.text)
         lobj.o(.text)
         cobj.o(.text)
         fobj.o(.text)

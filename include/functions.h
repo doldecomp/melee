@@ -8454,7 +8454,7 @@
 // ? func_8036A590(?);
 // ? func_8036A944(?);
 // ? func_8036A974(?);
-// ? func_8036A99C(?);
+void HSD_FObjRemoveAll(struct _HSD_FObj* fobj);
 // ? func_8036AA44(?);
 // ? func_8036AA64(?);
 // ? func_8036AA80(?);
