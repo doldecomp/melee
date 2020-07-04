@@ -7,6 +7,7 @@
 #include "objalloc.h"
 
 #include "fobj.h"
+#include "list.h"
 
 #define AOBJ_REWINDED (1 << 26)
 #define AOBJ_FIRST_PLAY (1 << 27)
@@ -45,6 +46,7 @@ u32 HSD_AObjGetFlags(HSD_AObj* aobj);
 void HSD_AObjSetFlags(HSD_AObj* aobj, u32 flags);
 void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags);
 void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj);
-void HSD_AObjInitEndCallback(void);
+void HSD_AObjInitEndCallBack(void);
+void HSD_AObjInvokeCallBacks(void);
 
 #endif
