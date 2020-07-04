@@ -23,45 +23,21 @@ u32 HSD_AObjGetFlags(HSD_AObj* aobj)
     return (aobj) ? aobj->flags : 0;
 }
 
-#ifdef NON_MATCHING
 void HSD_AObjSetFlags(HSD_AObj* aobj, u32 flags)
 {
-    if (aobj)
-        aobj->flags |= (flags & (AOBJ_LOOP | AOBJ_NO_UPDATE));
+    if (aobj) {
+        flags &= (AOBJ_LOOP | AOBJ_NO_UPDATE);
+        aobj->flags |= flags;
+    }
 }
-#else
-asm void HSD_AObjSetFlags(HSD_AObj* aobj, u32 flags)
-{
-    nofralloc
-    /* 8036401C 00360BFC  28 03 00 00 */	cmplwi r3, 0
-    /* 80364020 00360C00  4D 82 00 20 */	beqlr 
-    /* 80364024 00360C04  80 03 00 00 */	lwz r0, 0(r3)
-    /* 80364028 00360C08  54 84 00 86 */	rlwinm r4, r4, 0, 2, 3
-    /* 8036402C 00360C0C  7C 00 23 78 */	or r0, r0, r4
-    /* 80364030 00360C10  90 03 00 00 */	stw r0, 0(r3)
-    /* 80364034 00360C14  4E 80 00 20 */	blr
-}
-#endif
 
-#ifdef NON_MATCHING
 void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags)
 {
-    if (aobj)
-        aobj->flags &=  ~(flags & (AOBJ_LOOP | AOBJ_NO_UPDATE));
+    if (aobj) {
+        flags &= (AOBJ_LOOP | AOBJ_NO_UPDATE);
+        aobj->flags &= ~flags;
+    }
 }
-#else
-asm void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags)
-{
-    nofralloc
-    /* 80364038 00360C18  28 03 00 00 */	cmplwi r3, 0
-    /* 8036403C 00360C1C  4D 82 00 20 */	beqlr 
-    /* 80364040 00360C20  80 03 00 00 */	lwz r0, 0(r3)
-    /* 80364044 00360C24  54 84 00 86 */	rlwinm r4, r4, 0, 2, 3
-    /* 80364048 00360C28  7C 00 20 78 */	andc r0, r0, r4
-    /* 8036404C 00360C2C  90 03 00 00 */	stw r0, 0(r3)
-    /* 80364050 00360C30  4E 80 00 20 */	blr 
-}
-#endif
 
 #ifdef NON_MATCHING
 void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)
@@ -70,8 +46,8 @@ void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)
         return;
     if (aobj->fobj) {
             HSD_FObjRemoveAll(aobj->fobj);
-        aobj->fobj = fobj;
     }
+    aobj->fobj = fobj;
 }
 #else
 asm void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)

@@ -2,21 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global HSD_ZListInitAllocData
-HSD_ZListInitAllocData:
-/* 803738A0 00370480  7C 08 02 A6 */	mflr r0
-/* 803738A4 00370484  3C 60 80 4C */	lis r3, lbl_804C0918@ha
-/* 803738A8 00370488  90 01 00 04 */	stw r0, 4(r1)
-/* 803738AC 0037048C  38 63 09 18 */	addi r3, r3, lbl_804C0918@l
-/* 803738B0 00370490  38 80 00 48 */	li r4, 0x48
-/* 803738B4 00370494  94 21 FF F8 */	stwu r1, -8(r1)
-/* 803738B8 00370498  38 A0 00 04 */	li r5, 4
-/* 803738BC 0037049C  48 00 74 8D */	bl HSD_ObjAllocInit
-/* 803738C0 003704A0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 803738C4 003704A4  38 21 00 08 */	addi r1, r1, 8
-/* 803738C8 003704A8  7C 08 03 A6 */	mtlr r0
-/* 803738CC 003704AC  4E 80 00 20 */	blr 
-
 .global func_803738D0
 func_803738D0:
 /* 803738D0 003704B0  7C 08 02 A6 */	mflr r0
