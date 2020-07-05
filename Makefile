@@ -41,8 +41,8 @@ SHA1SUM := sha1sum
 INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
 
 ASFLAGS := -mgekko -I include
-LDFLAGS := -map $(MAP)
-CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p $(INCLUDES)
+LDFLAGS := -map $(MAP) -fp fmadd -proc gekko
+CFLAGS  := -Cpp_exceptions off -fp fmadd -proc gekko -O4,p $(INCLUDES)
 
 #-------------------------------------------------------------------------------
 # Recipes
