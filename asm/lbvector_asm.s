@@ -935,8 +935,6 @@ lbl_8000DFD0:
 /* 8000DFEC 0000ABCC  7C 08 03 A6 */	mtlr r0
 /* 8000DFF0 0000ABD0  4E 80 00 20 */	blr 
 
-.endif
-
 .global func_8000DFF4
 func_8000DFF4:
 /* 8000DFF4 0000ABD4  7C 08 02 A6 */	mflr r0
@@ -1054,6 +1052,8 @@ func_8000E138:
 /* 8000E190 0000AD70  38 21 00 18 */	addi r1, r1, 0x18
 /* 8000E194 0000AD74  7C 08 03 A6 */	mtlr r0
 /* 8000E198 0000AD78  4E 80 00 20 */	blr 
+
+.endif
 
 .global func_8000E19C
 func_8000E19C:

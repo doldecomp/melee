@@ -154,23 +154,25 @@ float *func_8000D4F8(float *a, float *b, float *c)
     return c;
 }
 
-// uses ps instructions
-void func_80342E58(float *a, float *b);
+// PSVECCrossProduct
+void func_80342E58(/*VecPtr a, VecPtr b, VecPtr c*/);
 
 float func_8000D5BC(float a);
 
-float *func_8000D530(float *a, float *b, float *c)
+#pragma fp_contract on
+
+Vec *func_8000D530(Vec *a, Vec *b, Vec *c)
 {
     float foo;
 
-    func_80342E58(a, b);
-    foo = func_8000D5BC(c[0] * c[0] + c[1] * c[1] + c[2] * c[2]);
+    func_80342E58(a, b /*, c*/);  // TODO: Doesn't match if I pass c in
+    foo = func_8000D5BC(c->x * c->x + c->y * c->y + c->z * c->z);
     if (lbl_804D7AA8 /*0.0f*/ != foo)
     {
         float recip = /*1.0f*/ lbl_804D7AC0 / foo;
-        c[0] *= recip;
-        c[1] *= recip;
-        c[2] *= recip;
+        c->x *= recip;
+        c->y *= recip;
+        c->z *= recip;
     }
     return c;
 }
@@ -184,8 +186,6 @@ extern const float lbl_804D7AC4;
 extern const float lbl_804D7AC8;
 
 extern float func_80022D1C(float);
-
-#pragma fp_contract on
 
 #ifdef NONMATCHING
 //#if 1
@@ -629,7 +629,7 @@ lbl_8000DAF8:
 /* 8000DAFC 0000A6DC  4E 80 00 20 */	blr 
 }
 
-asm func_8000DB00()
+asm func_8000DB00(Vec *a /*r3*/, int b /*r4*/, float c /*f1*/)
 {
     nofralloc
 /* 8000DB00 0000A6E0  C8 82 80 F0 */	lfd f4, lbl_804D7AD0-_SDA2_BASE_(r2)
@@ -939,11 +939,47 @@ extern const float lbl_804D7B14;
 extern float func_80022C30(float, float);
 extern float func_80022DBC(float);
 
+/*
+#define lbl_804D7AC8 1.2f
+#define lbl_804D7AC0 2.3f
+#define lbl_804D7B10 3.4f
+#define lbl_804D7B14 4.5f
+#define lbl_804D7AA8 5.6f
+*/
+
 // Prologue is completely different.
 #ifdef NONMATCHING
+Vec *func_8000DF0C(Vec *a, Vec *b, Vec *c, Vec *d)
+{
+    if (lbl_804D7AC8 == c->z || lbl_804D7AC0 == c->z)
+    {
+        if (c->z == lbl_804D7AC8)
+        {
+            a->y = lbl_804D7B10;
+            a->x = func_80022C30(d->x, d->y);
+        }
+        else
+        {
+            a->y = lbl_804D7B14;
+            a->x = func_80022C30(-d->x, d->y);
+        }
+        //lbl_8000DF98
+        a->z = lbl_804D7AA8;
+    }
+    //lbl_8000DFA4
+    else
+    {
+        a->y = func_80022DBC(-c->z);
+        a->x = func_80022C30(d->z, b->z);
+        a->z = func_80022C30(c->y, c->x);
+    }
+    //lbl_8000DFD0
+    return a;
+}
+/*
 float *func_8000DF0C(float *a, float *b, float *c, float *d)
 {
-    if (c[2] == lbl_804D7AC8 || c[2] == lbl_804D7AC0)
+    if (lbl_804D7AC8 == c[2] || lbl_804D7AC0 == c[2])
     {
         if (c[2] == lbl_804D7AC8)
         {
@@ -968,6 +1004,7 @@ float *func_8000DF0C(float *a, float *b, float *c, float *d)
     //lbl_8000DFD0
     return a;
 }
+*/
 #else
 asm float *func_8000DF0C(float *a, float *b, float *c, float *d)
 {
@@ -1035,5 +1072,188 @@ lbl_8000DFD0:
 /* 8000DFE8 0000ABC8  38 21 00 28 */	addi r1, r1, 0x28
 /* 8000DFEC 0000ABCC  7C 08 03 A6 */	mtlr r0
 /* 8000DFF0 0000ABD0  4E 80 00 20 */	blr 
+}
+#endif
+
+/*
+#define lbl_804D7AC8 1.2f
+#define lbl_804D7AC0 2.3f
+#define lbl_804D7B10 3.4f
+#define lbl_804D7B14 4.5f
+#define lbl_804D7AA8 5.6f
+*/
+
+// Prologue differences... again
+#ifdef NONMATCHING
+Vec *func_8000DFF4(Vec *a, Vec *b, Vec *c)
+{
+    Vec sp18;
+    float foo;
+
+    func_80342E58(c, b, &sp18);
+    foo = func_8000D5BC(sp18.x * sp18.x + sp18.y * sp18.y + sp18.z * sp18.z);
+    if (foo != lbl_804D7AA8)
+    {
+        float bar = lbl_804D7AC0 / foo;
+        sp18.x *= bar;
+        sp18.y *= bar;
+        sp18.z *= bar;
+    }
+    // possible inlined call to func_8000DF0C?
+    //lbl_8000E080
+    if (sp18.z == lbl_804D7AC8 || sp18.z == lbl_804D7AC0)
+    {
+        if (sp18.z == lbl_804D7AC8)
+        {
+            a->y = lbl_804D7B10;
+            a->x = func_80022C30(c->x, c->y);
+        }
+        else
+        {
+            a->y = lbl_804D7B14;
+            a->x = func_80022C30(-c->x, c->y);
+        }
+        a->z = lbl_804D7AA8;
+    }
+    //lbl_8000E0EC
+    else
+    {
+        a->y = func_80022DBC(-sp18.z);
+        a->x = func_80022C30(c->z, b->z);
+        a->z = func_80022C30(sp18.y, sp18.x);
+    }
+    return a;
+}
+#else
+asm Vec *func_8000DFF4(Vec *a, Vec *b, Vec *c)
+{
+    nofralloc
+/* 8000DFF4 0000ABD4  7C 08 02 A6 */	mflr r0
+/* 8000DFF8 0000ABD8  90 01 00 04 */	stw r0, 4(r1)
+/* 8000DFFC 0000ABDC  94 21 FF C8 */	stwu r1, -0x38(r1)
+/* 8000E000 0000ABE0  93 E1 00 34 */	stw r31, 0x34(r1)
+/* 8000E004 0000ABE4  3B E5 00 00 */	addi r31, r5, 0
+/* 8000E008 0000ABE8  38 A1 00 18 */	addi r5, r1, 0x18
+/* 8000E00C 0000ABEC  93 C1 00 30 */	stw r30, 0x30(r1)
+/* 8000E010 0000ABF0  3B C4 00 00 */	addi r30, r4, 0
+/* 8000E014 0000ABF4  93 A1 00 2C */	stw r29, 0x2c(r1)
+/* 8000E018 0000ABF8  3B A3 00 00 */	addi r29, r3, 0
+/* 8000E01C 0000ABFC  38 7F 00 00 */	addi r3, r31, 0
+/* 8000E020 0000AC00  48 33 4E 39 */	bl func_80342E58
+/* 8000E024 0000AC04  C0 21 00 18 */	lfs f1, 0x18(r1)
+/* 8000E028 0000AC08  C0 01 00 1C */	lfs f0, 0x1c(r1)
+/* 8000E02C 0000AC0C  EC 21 00 72 */	fmuls f1, f1, f1
+/* 8000E030 0000AC10  C0 41 00 20 */	lfs f2, 0x20(r1)
+/* 8000E034 0000AC14  EC 00 00 32 */	fmuls f0, f0, f0
+/* 8000E038 0000AC18  EC 42 00 B2 */	fmuls f2, f2, f2
+/* 8000E03C 0000AC1C  EC 01 00 2A */	fadds f0, f1, f0
+/* 8000E040 0000AC20  EC 22 00 2A */	fadds f1, f2, f0
+/* 8000E044 0000AC24  4B FF F5 79 */	bl func_8000D5BC
+/* 8000E048 0000AC28  C0 02 80 C8 */	lfs f0, lbl_804D7AA8-_SDA2_BASE_(r2)
+/* 8000E04C 0000AC2C  FC 00 08 00 */	fcmpu cr0, f0, f1
+/* 8000E050 0000AC30  41 82 00 30 */	beq lbl_8000E080
+/* 8000E054 0000AC34  C0 42 80 E0 */	lfs f2, lbl_804D7AC0-_SDA2_BASE_(r2)
+/* 8000E058 0000AC38  C0 01 00 18 */	lfs f0, 0x18(r1)
+/* 8000E05C 0000AC3C  EC 22 08 24 */	fdivs f1, f2, f1
+/* 8000E060 0000AC40  EC 00 00 72 */	fmuls f0, f0, f1
+/* 8000E064 0000AC44  D0 01 00 18 */	stfs f0, 0x18(r1)
+/* 8000E068 0000AC48  C0 01 00 1C */	lfs f0, 0x1c(r1)
+/* 8000E06C 0000AC4C  EC 00 00 72 */	fmuls f0, f0, f1
+/* 8000E070 0000AC50  D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 8000E074 0000AC54  C0 01 00 20 */	lfs f0, 0x20(r1)
+/* 8000E078 0000AC58  EC 00 00 72 */	fmuls f0, f0, f1
+/* 8000E07C 0000AC5C  D0 01 00 20 */	stfs f0, 0x20(r1)
+lbl_8000E080:
+/* 8000E080 0000AC60  C0 02 80 E8 */	lfs f0, lbl_804D7AC8-_SDA2_BASE_(r2)
+/* 8000E084 0000AC64  C0 21 00 20 */	lfs f1, 0x20(r1)
+/* 8000E088 0000AC68  FC 00 08 00 */	fcmpu cr0, f0, f1
+/* 8000E08C 0000AC6C  41 82 00 10 */	beq lbl_8000E09C
+/* 8000E090 0000AC70  C0 02 80 E0 */	lfs f0, lbl_804D7AC0-_SDA2_BASE_(r2)
+/* 8000E094 0000AC74  FC 00 08 00 */	fcmpu cr0, f0, f1
+/* 8000E098 0000AC78  40 82 00 54 */	bne lbl_8000E0EC
+lbl_8000E09C:
+/* 8000E09C 0000AC7C  C0 02 80 E8 */	lfs f0, lbl_804D7AC8-_SDA2_BASE_(r2)
+/* 8000E0A0 0000AC80  FC 00 08 00 */	fcmpu cr0, f0, f1
+/* 8000E0A4 0000AC84  40 82 00 20 */	bne lbl_8000E0C4
+/* 8000E0A8 0000AC88  C0 02 81 30 */	lfs f0, lbl_804D7B10-_SDA2_BASE_(r2)
+/* 8000E0AC 0000AC8C  D0 1D 00 04 */	stfs f0, 4(r29)
+/* 8000E0B0 0000AC90  C0 3F 00 00 */	lfs f1, 0(r31)
+/* 8000E0B4 0000AC94  C0 5F 00 04 */	lfs f2, 4(r31)
+/* 8000E0B8 0000AC98  48 01 4B 79 */	bl func_80022C30
+/* 8000E0BC 0000AC9C  D0 3D 00 00 */	stfs f1, 0(r29)
+/* 8000E0C0 0000ACA0  48 00 00 20 */	b lbl_8000E0E0
+lbl_8000E0C4:
+/* 8000E0C4 0000ACA4  C0 02 81 34 */	lfs f0, lbl_804D7B14-_SDA2_BASE_(r2)
+/* 8000E0C8 0000ACA8  D0 1D 00 04 */	stfs f0, 4(r29)
+/* 8000E0CC 0000ACAC  C0 1F 00 00 */	lfs f0, 0(r31)
+/* 8000E0D0 0000ACB0  C0 5F 00 04 */	lfs f2, 4(r31)
+/* 8000E0D4 0000ACB4  FC 20 00 50 */	fneg f1, f0
+/* 8000E0D8 0000ACB8  48 01 4B 59 */	bl func_80022C30
+/* 8000E0DC 0000ACBC  D0 3D 00 00 */	stfs f1, 0(r29)
+lbl_8000E0E0:
+/* 8000E0E0 0000ACC0  C0 02 80 C8 */	lfs f0, lbl_804D7AA8-_SDA2_BASE_(r2)
+/* 8000E0E4 0000ACC4  D0 1D 00 08 */	stfs f0, 8(r29)
+/* 8000E0E8 0000ACC8  48 00 00 30 */	b lbl_8000E118
+lbl_8000E0EC:
+/* 8000E0EC 0000ACCC  FC 20 08 50 */	fneg f1, f1
+/* 8000E0F0 0000ACD0  48 01 4C CD */	bl func_80022DBC
+/* 8000E0F4 0000ACD4  D0 3D 00 04 */	stfs f1, 4(r29)
+/* 8000E0F8 0000ACD8  C0 3F 00 08 */	lfs f1, 8(r31)
+/* 8000E0FC 0000ACDC  C0 5E 00 08 */	lfs f2, 8(r30)
+/* 8000E100 0000ACE0  48 01 4B 31 */	bl func_80022C30
+/* 8000E104 0000ACE4  D0 3D 00 00 */	stfs f1, 0(r29)
+/* 8000E108 0000ACE8  C0 21 00 1C */	lfs f1, 0x1c(r1)
+/* 8000E10C 0000ACEC  C0 41 00 18 */	lfs f2, 0x18(r1)
+/* 8000E110 0000ACF0  48 01 4B 21 */	bl func_80022C30
+/* 8000E114 0000ACF4  D0 3D 00 08 */	stfs f1, 8(r29)
+lbl_8000E118:
+/* 8000E118 0000ACF8  7F A3 EB 78 */	mr r3, r29
+/* 8000E11C 0000ACFC  80 01 00 3C */	lwz r0, 0x3c(r1)
+/* 8000E120 0000AD00  83 E1 00 34 */	lwz r31, 0x34(r1)
+/* 8000E124 0000AD04  83 C1 00 30 */	lwz r30, 0x30(r1)
+/* 8000E128 0000AD08  83 A1 00 2C */	lwz r29, 0x2c(r1)
+/* 8000E12C 0000AD0C  38 21 00 38 */	addi r1, r1, 0x38
+/* 8000E130 0000AD10  7C 08 03 A6 */	mtlr r0
+/* 8000E134 0000AD14  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NONMATCHING
+Vec *func_8000E138(Vec *a, Vec *b)
+{
+    func_8000DB00(a, 1, b->x);
+    func_8000DB00(a, 2, b->y);
+    func_8000DB00(a, 4, b->z);
+    return a;
+}
+#else
+asm Vec *func_8000E138(Vec *a, Vec *b)
+{
+    nofralloc
+/* 8000E138 0000AD18  7C 08 02 A6 */	mflr r0
+/* 8000E13C 0000AD1C  90 01 00 04 */	stw r0, 4(r1)
+/* 8000E140 0000AD20  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8000E144 0000AD24  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8000E148 0000AD28  3B E4 00 00 */	addi r31, r4, 0
+/* 8000E14C 0000AD2C  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 8000E150 0000AD30  3B C3 00 00 */	addi r30, r3, 0
+/* 8000E154 0000AD34  C0 24 00 00 */	lfs f1, 0(r4)
+/* 8000E158 0000AD38  38 80 00 01 */	li r4, 1
+/* 8000E15C 0000AD3C  4B FF F9 A5 */	bl func_8000DB00
+/* 8000E160 0000AD40  C0 3F 00 04 */	lfs f1, 4(r31)
+/* 8000E164 0000AD44  38 7E 00 00 */	addi r3, r30, 0
+/* 8000E168 0000AD48  38 80 00 02 */	li r4, 2
+/* 8000E16C 0000AD4C  4B FF F9 95 */	bl func_8000DB00
+/* 8000E170 0000AD50  C0 3F 00 08 */	lfs f1, 8(r31)
+/* 8000E174 0000AD54  38 7E 00 00 */	addi r3, r30, 0
+/* 8000E178 0000AD58  38 80 00 04 */	li r4, 4
+/* 8000E17C 0000AD5C  4B FF F9 85 */	bl func_8000DB00
+/* 8000E180 0000AD60  7F C3 F3 78 */	mr r3, r30
+/* 8000E184 0000AD64  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8000E188 0000AD68  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8000E18C 0000AD6C  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 8000E190 0000AD70  38 21 00 18 */	addi r1, r1, 0x18
+/* 8000E194 0000AD74  7C 08 03 A6 */	mtlr r0
+/* 8000E198 0000AD78  4E 80 00 20 */	blr 
 }
 #endif
