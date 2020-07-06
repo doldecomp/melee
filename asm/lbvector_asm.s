@@ -342,8 +342,6 @@ lbl_8000D780:
 /* 8000D788 0000A368  7C 08 03 A6 */	mtlr r0
 /* 8000D78C 0000A36C  4E 80 00 20 */	blr 
 
-.endif
-
 .global func_8000D790
 func_8000D790:
 /* 8000D790 0000A370  7C 08 02 A6 */	mflr r0
@@ -692,12 +690,12 @@ func_8000DC6C:
 /* 8000DC6C 0000A84C  C0 24 00 04 */	lfs f1, 4(r4)
 /* 8000DC70 0000A850  C0 03 00 04 */	lfs f0, 4(r3)
 /* 8000DC74 0000A854  C0 64 00 00 */	lfs f3, 0(r4)
-/* 8000DC78 0000A858  EC 01 00 32 */	fmuls f0, f1, f0
+/* 8000DC78 0000A858  EC 01 00 32 */	fmuls f0, f1, f0    # a[1] * b[1]
 /* 8000DC7C 0000A85C  C0 23 00 00 */	lfs f1, 0(r3)
 /* 8000DC80 0000A860  C0 42 81 24 */	lfs f2, lbl_804D7B04-_SDA2_BASE_(r2)
-/* 8000DC84 0000A864  EC 03 00 7A */	fmadds f0, f3, f1, f0
-/* 8000DC88 0000A868  EC 42 00 32 */	fmuls f2, f2, f0
-/* 8000DC8C 0000A86C  EC 03 08 BA */	fmadds f0, f3, f2, f1
+/* 8000DC84 0000A864  EC 03 00 7A */	fmadds f0, f3, f1, f0  # b[0] * a[0] + a[1] * b[1]
+/* 8000DC88 0000A868  EC 42 00 32 */	fmuls f2, f2, f0       # lbl_804D7B04 * (b[0] * a[0] + a[1] * b[1])
+/* 8000DC8C 0000A86C  EC 03 08 BA */	fmadds f0, f3, f2, f1  # b[0] * lbl_804D7B04 * (b[0] * a[0] + a[1] * b[1]) + a[0]
 /* 8000DC90 0000A870  D0 03 00 00 */	stfs f0, 0(r3)
 /* 8000DC94 0000A874  C0 24 00 04 */	lfs f1, 4(r4)
 /* 8000DC98 0000A878  C0 03 00 04 */	lfs f0, 4(r3)
@@ -765,12 +763,12 @@ lbl_8000DD18:
 /* 8000DD80 0000A960  C0 A1 00 10 */	lfs f5, 0x10(r1)
 lbl_8000DD84:
 /* 8000DD84 0000A964  C0 43 00 04 */	lfs f2, 4(r3)
-/* 8000DD88 0000A968  EC 00 01 72 */	fmuls f0, f0, f5
+/* 8000DD88 0000A968  EC 00 01 72 */	fmuls f0, f0, f5    # sqrt * sqrt
 /* 8000DD8C 0000A96C  C0 24 00 04 */	lfs f1, 4(r4)
 /* 8000DD90 0000A970  C0 63 00 00 */	lfs f3, 0(r3)
-/* 8000DD94 0000A974  EC 22 00 72 */	fmuls f1, f2, f1
+/* 8000DD94 0000A974  EC 22 00 72 */	fmuls f1, f2, f1    # a[1] * b[1]
 /* 8000DD98 0000A978  C0 44 00 00 */	lfs f2, 0(r4)
-/* 8000DD9C 0000A97C  EC 23 08 BA */	fmadds f1, f3, f2, f1
+/* 8000DD9C 0000A97C  EC 23 08 BA */	fmadds f1, f3, f2, f1   # a[0] * b[0] + a[1] * b[1]
 /* 8000DDA0 0000A980  EC 21 00 24 */	fdivs f1, f1, f0
 /* 8000DDA4 0000A984  38 21 00 18 */	addi r1, r1, 0x18
 /* 8000DDA8 0000A988  4E 80 00 20 */	blr 
@@ -936,6 +934,8 @@ lbl_8000DFD0:
 /* 8000DFE8 0000ABC8  38 21 00 28 */	addi r1, r1, 0x28
 /* 8000DFEC 0000ABCC  7C 08 03 A6 */	mtlr r0
 /* 8000DFF0 0000ABD0  4E 80 00 20 */	blr 
+
+.endif
 
 .global func_8000DFF4
 func_8000DFF4:
