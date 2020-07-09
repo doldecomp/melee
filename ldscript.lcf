@@ -17,6 +17,7 @@ SECTIONS
         code_8000CE50.o(.text)
         lbvector.o(.text)
         text_1.o(.text)
+        Gecko_setjmp.o(.text)
         runtime.o(.text)
         text_2.o(.text)
 
