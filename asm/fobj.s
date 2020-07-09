@@ -103,8 +103,8 @@ lbl_8036AA74:
 /* 8036AA78 00367658  54 03 07 3E */	clrlwi r3, r0, 0x1c
 /* 8036AA7C 0036765C  4E 80 00 20 */	blr 
 
-.global func_8036AA80
-func_8036AA80:
+.global HSD_FObjReqAnimAll
+HSD_FObjReqAnimAll:
 /* 8036AA80 00367660  28 03 00 00 */	cmplwi r3, 0
 /* 8036AA84 00367664  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8036AA88 00367668  41 82 00 94 */	beq lbl_8036AB1C

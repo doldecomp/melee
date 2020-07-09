@@ -48,5 +48,6 @@ void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags);
 void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj);
 void HSD_AObjInitEndCallBack(void);
 void HSD_AObjInvokeCallBacks(void);
+void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame);
 
 #endif

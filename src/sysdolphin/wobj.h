@@ -32,5 +32,6 @@ typedef struct _HSD_WObjAnim {
 } HSD_WObjAnim;
 
 void HSD_WObjRemoveAnim(HSD_WObj* wobj);
+void HSD_WObjReqAnim(HSD_WObj* wobj, f32 frame);
 
 #endif

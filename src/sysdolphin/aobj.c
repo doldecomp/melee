@@ -103,3 +103,42 @@ void HSD_AObjInvokeCallBacks(void)
     }
 }
 #pragma pop
+
+#ifdef NON_MATCHING
+void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
+{
+    u32 flags;
+
+    if (aobj == NULL)
+        return;
+
+    aobj->curr_frame = frame;
+
+    aobj->flags = aobj->flags & 0xBFFFFFFF;
+    aobj->flags = flags | AOBJ_FIRST_PLAY;
+
+    HSD_FObjReqAnimAll(aobj->fobj, frame);
+}
+#else
+asm void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
+{
+    nofralloc
+    /* 8036410C 00360CEC  7C 08 02 A6 */	mflr r0
+    /* 80364110 00360CF0  28 03 00 00 */	cmplwi r3, 0
+    /* 80364114 00360CF4  90 01 00 04 */	stw r0, 4(r1)
+    /* 80364118 00360CF8  94 21 FF F8 */	stwu r1, -8(r1)
+    /* 8036411C 00360CFC  41 82 00 20 */	beq lbl_8036413C
+    /* 80364120 00360D00  D0 23 00 04 */	stfs f1, 4(r3)
+    /* 80364124 00360D04  80 03 00 00 */	lwz r0, 0(r3)
+    /* 80364128 00360D08  54 00 00 80 */	rlwinm r0, r0, 0, 2, 0
+    /* 8036412C 00360D0C  64 00 08 00 */	oris r0, r0, 0x800
+    /* 80364130 00360D10  90 03 00 00 */	stw r0, 0(r3)
+    /* 80364134 00360D14  80 63 00 14 */	lwz r3, 0x14(r3)
+    /* 80364138 00360D18  48 00 69 49 */	bl HSD_FObjReqAnimAll
+lbl_8036413C:
+    /* 8036413C 00360D1C  80 01 00 0C */	lwz r0, 0xc(r1)
+    /* 80364140 00360D20  38 21 00 08 */	addi r1, r1, 8
+    /* 80364144 00360D24  7C 08 03 A6 */	mtlr r0
+    /* 80364148 00360D28  4E 80 00 20 */	blr 
+}
+#endif
