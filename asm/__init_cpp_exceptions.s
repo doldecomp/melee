@@ -15,7 +15,7 @@ __fini_cpp_exceptions:
 /* 80322F34 0031FB14  80 6D A4 A0 */	lwz r3, lbl_804D5B40-_SDA_BASE_(r13)
 /* 80322F38 0031FB18  2C 03 FF FE */	cmpwi r3, -2
 /* 80322F3C 0031FB1C  41 82 00 10 */	beq lbl_80322F4C
-/* 80322F40 0031FB20  4B FF F8 1D */	bl func_8032275C
+/* 80322F40 0031FB20  4B FF F8 1D */	bl __unregister_fragment
 /* 80322F44 0031FB24  38 00 FF FE */	li r0, -2
 /* 80322F48 0031FB28  90 0D A4 A0 */	stw r0, lbl_804D5B40-_SDA_BASE_(r13)
 lbl_80322F4C:
@@ -36,7 +36,7 @@ __init_cpp_exceptions:
 /* 80322F78 0031FB58  3C A0 80 00 */	lis r5, lbl_80005918@ha
 /* 80322F7C 0031FB5C  7C 64 1B 78 */	mr r4, r3
 /* 80322F80 0031FB60  38 65 59 18 */	addi r3, r5, lbl_80005918@l
-/* 80322F84 0031FB64  4B FF F8 0D */	bl func_80322790
+/* 80322F84 0031FB64  4B FF F8 0D */	bl __register_fragment
 /* 80322F88 0031FB68  90 6D A4 A0 */	stw r3, lbl_804D5B40-_SDA_BASE_(r13)
 lbl_80322F8C:
 /* 80322F8C 0031FB6C  80 01 00 0C */	lwz r0, 0xc(r1)
