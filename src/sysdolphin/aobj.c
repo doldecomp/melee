@@ -62,6 +62,8 @@ void HSD_AObjInitEndCallBack(void)
     lbl_804D7630 = 0;
 }
 
+// HACK: Pragma here fixes a redundant branching issue
+#pragma push
 #pragma optimization_level 2
 void HSD_AObjInvokeCallBacks(void)
 {
@@ -78,6 +80,7 @@ void HSD_AObjInvokeCallBacks(void)
         }
     }
 }
+#pragma pop
 
 void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
 {
