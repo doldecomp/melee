@@ -32,8 +32,12 @@ SECTIONS
         direct_io.o(.text)
         cstring.o(.text)
         mem_funcs.o(.text)
+        
         /* Combination of CW PPC and Dolphin SDK */
         text_2.o(.text)
+
+        /* non-split sysdolphin files */
+        text_3.o(.text)
 
         /* sysdolphin files */
         mobj.o(.text)
