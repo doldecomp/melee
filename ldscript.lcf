@@ -36,6 +36,9 @@ SECTIONS
         /* Combination of CW PPC and Dolphin SDK */
         text_2.o(.text)
 
+        /* sysdolphin files */
+        dobj.o(.text)
+        
         /* non-split sysdolphin files */
         text_3.o(.text)
 
