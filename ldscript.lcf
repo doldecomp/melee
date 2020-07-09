@@ -24,8 +24,24 @@ SECTIONS
         Gecko_setjmp.o(.text)
         runtime.o(.text)
         __init_cpp_exceptions.o(.text)
+        abort_exit.o(.text)
+        ansi_fp.o(.text)
+        buffer_io.o(.text)
+        critical_regions.gamecube.o(.text)
+        ctype.o(.text)
+        direct_io.o(.text)
+        cstring.o(.text)
+        mem_funcs.o(.text)
+        
         /* Combination of CW PPC and Dolphin SDK */
         text_2.o(.text)
+
+        /* sysdolphin files */
+        dobj.o(.text)
+        tobj.o(.text)
+
+        /* non-split sysdolphin files */
+        text_3.o(.text)
 
         /* sysdolphin files */
         mobj.o(.text)
@@ -39,9 +55,10 @@ SECTIONS
         initialize.o(.text)
         video.o(.text)
         pad.o(.text)
-        code_80378A34.o(.text)
+        spline.o(.text)
+        code_80379310.o(.text)
         objalloc.o(.text)
-        code_8037AE34.o(.text)
+        robj.o(.text)
         id.o(.text)
         id_asm.o(.text)
         wobj.o(.text)
@@ -49,7 +66,9 @@ SECTIONS
         perf.o(.text)
         list.o(.text)
         object.o(.text)
-        code_8037E708.o(.text)
+        quatlib.o(.text)
+        memory.o(.text)
+        code_8037F244.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
