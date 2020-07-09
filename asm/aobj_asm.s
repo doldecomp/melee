@@ -282,8 +282,8 @@ lbl_803644B0:
 /* 803644C4 003610A4  7C 08 03 A6 */	mtlr r0
 /* 803644C8 003610A8  4E 80 00 20 */	blr 
 
-.global func_803644CC
-func_803644CC:
+.global HSD_AObjRemove
+HSD_AObjRemove:
 /* 803644CC 003610AC  7C 08 02 A6 */	mflr r0
 /* 803644D0 003610B0  90 01 00 04 */	stw r0, 4(r1)
 /* 803644D4 003610B4  94 21 FF E8 */	stwu r1, -0x18(r1)

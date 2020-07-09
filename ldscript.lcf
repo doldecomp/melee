@@ -48,6 +48,7 @@ SECTIONS
         id.o(.text)
         id_asm.o(.text)
         wobj.o(.text)
+        wobj_asm.o(.text)
         fog.o(.text)
         perf.o(.text)
         list.o(.text)
