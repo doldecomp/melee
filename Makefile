@@ -42,7 +42,7 @@ INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP)
-CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p $(INCLUDES)
+CFLAGS  := -Cpp_exceptions off -fp hard -O4,p $(INCLUDES)
 
 #-------------------------------------------------------------------------------
 # Recipes
