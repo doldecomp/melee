@@ -17,10 +17,14 @@ SECTIONS
         code_8000CE50.o(.text)
         lbvector.o(.text)
         text_1.o(.text)
+
+        /* CW PPC EABI Runtime Support */
+        __va_arg.o(.text)
         NMWException.o(.text)
         Gecko_setjmp.o(.text)
         runtime.o(.text)
         __init_cpp_exceptions.o(.text)
+        /* Combination of CW PPC and Dolphin SDK */
         text_2.o(.text)
 
         /* sysdolphin files */
