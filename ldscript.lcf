@@ -24,6 +24,10 @@ SECTIONS
         Gecko_setjmp.o(.text)
         runtime.o(.text)
         __init_cpp_exceptions.o(.text)
+        abort_exit.o(.text)
+        ansi_fp.o(.text)
+        buffer_io.o(.text)
+        critical_regions.gamecube.o(.text)
         /* Combination of CW PPC and Dolphin SDK */
         text_2.o(.text)
 
