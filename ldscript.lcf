@@ -29,6 +29,9 @@ SECTIONS
         buffer_io.o(.text)
         critical_regions.gamecube.o(.text)
         ctype.o(.text)
+        direct_io.o(.text)
+        cstring.o(.text)
+        mem_funcs.o(.text)
         /* Combination of CW PPC and Dolphin SDK */
         text_2.o(.text)
 
