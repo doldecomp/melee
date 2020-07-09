@@ -85,7 +85,6 @@ void HSD_AObjInitEndCallBack(void)
     lbl_804D7630 = 0;
 }
 
-#pragma push
 #pragma optimization_level 2
 void HSD_AObjInvokeCallBacks(void)
 {
@@ -102,7 +101,6 @@ void HSD_AObjInvokeCallBacks(void)
         }
     }
 }
-#pragma pop
 
 #ifdef NON_MATCHING
 void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
