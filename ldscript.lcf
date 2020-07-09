@@ -1,7 +1,7 @@
 _SDA_BASE_ = 0x804DB6A0;
 _SDA2_BASE_ = 0x804DF9E0;
 
-FORCEFILES { extab.o object.o }
+FORCEFILES { extab.o object.o __init_cpp_exceptions.o }
 
 SECTIONS
 {
@@ -19,6 +19,7 @@ SECTIONS
         text_1.o(.text)
         Gecko_setjmp.o(.text)
         runtime.o(.text)
+        __init_cpp_exceptions.o(.text)
         text_2.o(.text)
 
         /* sysdolphin files */
