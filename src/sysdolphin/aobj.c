@@ -114,7 +114,7 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
 
     aobj->curr_frame = frame;
 
-    aobj->flags = aobj->flags & 0xBFFFFFFF;
+    flags = aobj->flags & 0xBFFFFFFF;
     aobj->flags = flags | AOBJ_FIRST_PLAY;
 
     HSD_FObjReqAnimAll(aobj->fobj, frame);
