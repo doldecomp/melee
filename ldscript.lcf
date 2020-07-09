@@ -65,7 +65,9 @@ SECTIONS
         perf.o(.text)
         list.o(.text)
         object.o(.text)
-        code_8037E708.o(.text)
+        quatlib.o(.text)
+        memory.o(.text)
+        code_8037F244.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
