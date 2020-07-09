@@ -41,6 +41,10 @@ void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags)
     }
 }
 
+// HACK: Pragmas affect epilogue addi/mtlr ordering. Check when we have 1.0
+#pragma push
+#pragma altivec_codegen on
+#pragma altivec_model on
 void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)
 {
     if (aobj == NULL)
@@ -50,6 +54,7 @@ void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)
     }
     aobj->fobj = fobj;
 }
+#pragma pop
 
 void HSD_AObjInitEndCallBack(void)
 {
