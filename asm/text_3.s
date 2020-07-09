@@ -7,8 +7,8 @@ HSD_DObjSetCurrent:
 /* 8035DD98 0035A978  90 6D BF 04 */	stw r3, lbl_804D75A4-_SDA_BASE_(r13)
 /* 8035DD9C 0035A97C  4E 80 00 20 */	blr 
 
-.global HSD_DobjGetFlags
-HSD_DobjGetFlags:
+.global HSD_DObjGetFlags
+HSD_DObjGetFlags:
 /* 8035DDA0 0035A980  28 03 00 00 */	cmplwi r3, 0
 /* 8035DDA4 0035A984  41 82 00 0C */	beq lbl_8035DDB0
 /* 8035DDA8 0035A988  80 63 00 14 */	lwz r3, 0x14(r3)
