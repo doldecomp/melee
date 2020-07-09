@@ -28,6 +28,7 @@ SECTIONS
         ansi_fp.o(.text)
         buffer_io.o(.text)
         critical_regions.gamecube.o(.text)
+        ctype.o(.text)
         /* Combination of CW PPC and Dolphin SDK */
         text_2.o(.text)
 
