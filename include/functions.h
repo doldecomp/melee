@@ -8454,7 +8454,7 @@
 // ? func_8036A590(?);
 // ? func_8036A944(?);
 // ? func_8036A974(?);
-// ? func_8036A99C(?);
+void HSD_FObjRemoveAll(struct _HSD_FObj* fobj);
 // ? func_8036AA44(?);
 // ? func_8036AA64(?);
 // ? func_8036AA80(?);
@@ -8650,7 +8650,7 @@
 // ? func_8037A968(?);
 // ? func_8037ABC8(?);
 // ? func_8037AD20(?);
-// void HSD_ObjAllocInit(HSD_ObjAllocData* data, u32 size, u32 align);
+void HSD_ObjAllocInit(struct _HSD_ObjAllocData* data, u32 size, u32 align);
 // ? HSD_RObjInitAllocData(?);
 // ? func_8037AE90(?);
 // ? func_8037AEA8(?);
