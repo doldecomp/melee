@@ -2301,6 +2301,9 @@ lbl_8037CD40:
 /* 8037CD50 00379930  38 21 00 28 */	addi r1, r1, 0x28
 /* 8037CD54 00379934  7C 08 03 A6 */	mtlr r0
 /* 8037CD58 00379938  4E 80 00 20 */	blr 
+
+.global _HSD_RObjForgetMemory
+_HSD_RObjForgetMemory:
 /* 8037CD5C 0037993C  80 0D C0 48 */	lwz r0, lbl_804D76E8-_SDA_BASE_(r13)
 /* 8037CD60 00379940  7C 03 00 40 */	cmplw r3, r0
 /* 8037CD64 00379944  4D 81 00 20 */	bgtlr 

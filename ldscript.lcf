@@ -57,7 +57,7 @@ SECTIONS
         pad.o(.text)
         code_80378A34.o(.text)
         objalloc.o(.text)
-        code_8037AE34.o(.text)
+        robj.o(.text)
         id.o(.text)
         id_asm.o(.text)
         wobj.o(.text)
