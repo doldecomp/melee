@@ -76,7 +76,10 @@ SECTIONS
         class.o(.text)
         hash.o(.text)
         texp.o(.text)
-        code_80387DF8.o(.text)
+        texpdag.o(.text)
+        leak.o(.text)
+        debug.o(.text)
+        code_8038838C.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
