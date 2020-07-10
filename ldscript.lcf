@@ -56,7 +56,8 @@ SECTIONS
         video.o(.text)
         pad.o(.text)
         spline.o(.text)
-        code_80379310.o(.text)
+        mtx.o(.text)
+        util.o(.text)
         objalloc.o(.text)
         robj.o(.text)
         id.o(.text)
@@ -68,7 +69,14 @@ SECTIONS
         object.o(.text)
         quatlib.o(.text)
         memory.o(.text)
-        code_8037F244.o(.text)
+        shadow.o(.text)
+        archive.o(.text)
+        random.o(.text)
+        bytecode.o(.text)
+        class.o(.text)
+        hash.o(.text)
+        texp.o(.text)
+        code_80387DF8.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
