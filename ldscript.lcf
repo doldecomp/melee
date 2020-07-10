@@ -39,11 +39,8 @@ SECTIONS
         /* sysdolphin files */
         dobj.o(.text)
         tobj.o(.text)
-
-        /* non-split sysdolphin files */
-        text_3.o(.text)
-
-        /* sysdolphin files */
+        state.o(.text)
+        tev.o(.text)
         mobj.o(.text)
         aobj.o(.text)
         lobj.o(.text)
@@ -56,7 +53,8 @@ SECTIONS
         video.o(.text)
         pad.o(.text)
         spline.o(.text)
-        code_80379310.o(.text)
+        mtx.o(.text)
+        util.o(.text)
         objalloc.o(.text)
         robj.o(.text)
         id.o(.text)
@@ -68,7 +66,17 @@ SECTIONS
         object.o(.text)
         quatlib.o(.text)
         memory.o(.text)
-        code_8037F244.o(.text)
+        shadow.o(.text)
+        archive.o(.text)
+        random.o(.text)
+        bytecode.o(.text)
+        class.o(.text)
+        hash.o(.text)
+        texp.o(.text)
+        texpdag.o(.text)
+        leak.o(.text)
+        debug.o(.text)
+        code_8038838C.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
