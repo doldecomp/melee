@@ -39,11 +39,8 @@ SECTIONS
         /* sysdolphin files */
         dobj.o(.text)
         tobj.o(.text)
-
-        /* non-split sysdolphin files */
-        text_3.o(.text)
-
-        /* sysdolphin files */
+        state.o(.text)
+        tev.o(.text)
         mobj.o(.text)
         aobj.o(.text)
         lobj.o(.text)
