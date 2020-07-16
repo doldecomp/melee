@@ -17,6 +17,8 @@ SECTIONS
         code_8000CE50.o(.text)
         lbvector.o(.text)
         text_1.o(.text)
+        player.o(.text)
+        text_2.o(.text)
 
         /* CW PPC EABI Runtime Support */
         __va_arg.o(.text)
@@ -33,8 +35,14 @@ SECTIONS
         cstring.o(.text)
         mem_funcs.o(.text)
         
-        /* Combination of CW PPC and Dolphin SDK */
-        text_2.o(.text)
+        /* Remaining CW PPC stdlib */
+        text_3.o(.text)
+
+        /* Combined MetroTRK debugger code*/
+        MetroTRK.o(.text)
+
+        /* Combined Dolphin SDK code */
+        dolphin_sdk.o(.text)
 
         /* sysdolphin files */
         dobj.o(.text)
