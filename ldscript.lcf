@@ -1,7 +1,7 @@
 _SDA_BASE_ = 0x804DB6A0;
 _SDA2_BASE_ = 0x804DF9E0;
 
-FORCEFILES { extab.o object.o __init_cpp_exceptions.o }
+FORCEFILES { extab.o object.o __init_cpp_exceptions.o console_io.o }
 
 SECTIONS
 {
@@ -36,7 +36,7 @@ SECTIONS
         mem_funcs.o(.text)
         printf.o(.text)
         rand.o(.text)
-        string.o(.text)
+        strng.o(.text)
         strtoul.o(.text)
         console_io.o(.text)
         wchar_io.o(.text)
@@ -128,7 +128,10 @@ SECTIONS
         texpdag.o(.text)
         leak.o(.text)
         debug.o(.text)
-        code_8038838C.o(.text)
+        AXDriver.o(.text)
+        code_8038FAA8.o(.text)
+        psdisp.o(.text)
+        code_803A3920.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
