@@ -41,8 +41,48 @@ SECTIONS
         /* Combined MetroTRK debugger code*/
         MetroTRK.o(.text)
 
-        /* Combined Dolphin SDK code */
-        dolphin_sdk.o(.text)
+        /* Dolphin SDK */
+        hio.o(.text)
+        mcc.o(.text)
+        fio.o(.text)
+        THPDec.o(.text)
+        jpegdec.o(.text)
+        PPCArch.o(.text)
+        db.o(.text)
+        dsp.o(.text)
+        dsp_dbg.o(.text)
+        dsp_task.o(.text)
+        dvdlow.o(.text)
+        dvdqueue.o(.text)
+        dvderror.o(.text)
+        fstload.o(.text)
+        GXInit.o(.text)
+        GXFifo.o(.text)
+        mtxvec.o(.text)
+
+        /* Combination of Dolphin SDK OS code, EXI, and SI */
+        dolphin_sdk_1.o(.text)
+
+        /* Runtime PPC EABI */
+        __ppc_eabi_init.o(.text)
+
+        /* Dolphin SDK */
+        Padclamp.o(.text)
+        
+        /* Dolphin SDK Pad & SI partial */
+        dolphin_sdk_2.o(.text)
+
+        /* Dolphin SDK */
+        vi.o(.text)
+        ai.o(.text)
+        ar.o(.text)
+        arq.o(.text)
+
+        /* Combined Dolphin SDK CARD code */
+        CARD.o(.text)
+
+        /* Combined Dolphin SDK AX code */
+        AX.o(.text)
 
         /* sysdolphin files */
         dobj.o(.text)
