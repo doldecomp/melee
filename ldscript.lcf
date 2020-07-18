@@ -34,9 +34,13 @@ SECTIONS
         direct_io.o(.text)
         cstring.o(.text)
         mem_funcs.o(.text)
-        
-        /* Remaining CW PPC stdlib */
-        text_3.o(.text)
+        printf.o(.text)
+        rand.o(.text)
+        string.o(.text)
+        strtoul.o(.text)
+        console_io.o(.text)
+        wchar_io.o(.text)
+        math.o(.text)
 
         /* Combined MetroTRK debugger code*/
         MetroTRK.o(.text)
