@@ -1,0 +1,62 @@
+.include "macros.inc"
+
+.section .text  # 0x80005940 - 0x803B7240
+
+.global PPCMfmsr
+PPCMfmsr:
+/* 80335E5C 00332A3C  7C 60 00 A6 */	mfmsr r3
+/* 80335E60 00332A40  4E 80 00 20 */	blr 
+
+.global func_80335E64
+func_80335E64:
+/* 80335E64 00332A44  7C 60 01 24 */	mtmsr r3
+/* 80335E68 00332A48  4E 80 00 20 */	blr 
+
+.global func_80335E6C
+func_80335E6C:
+/* 80335E6C 00332A4C  7C 70 FA A6 */	mfspr r3, 0x3f0
+/* 80335E70 00332A50  4E 80 00 20 */	blr 
+
+.global func_80335E74
+func_80335E74:
+/* 80335E74 00332A54  7C 79 FA A6 */	mfspr r3, 0x3f9
+/* 80335E78 00332A58  4E 80 00 20 */	blr 
+
+.global func_80335E7C
+func_80335E7C:
+/* 80335E7C 00332A5C  7C 79 FB A6 */	mtspr 0x3f9, r3
+/* 80335E80 00332A60  4E 80 00 20 */	blr 
+
+.global func_80335E84
+func_80335E84:
+/* 80335E84 00332A64  7C 76 03 A6 */	mtspr 0x16, r3
+/* 80335E88 00332A68  4E 80 00 20 */	blr 
+
+.global func_80335E8C
+func_80335E8C:
+/* 80335E8C 00332A6C  44 00 00 02 */	sc 
+/* 80335E90 00332A70  4E 80 00 20 */	blr 
+
+.global func_80335E94
+func_80335E94:
+/* 80335E94 00332A74  7C 00 04 AC */	sync 0
+lbl_80335E98:
+/* 80335E98 00332A78  60 00 00 00 */	nop 
+/* 80335E9C 00332A7C  38 60 00 00 */	li r3, 0
+/* 80335EA0 00332A80  60 00 00 00 */	nop 
+/* 80335EA4 00332A84  4B FF FF F4 */	b lbl_80335E98
+
+.global func_80335EA8
+func_80335EA8:
+/* 80335EA8 00332A88  7C 78 E2 A6 */	mfspr r3, 0x398
+/* 80335EAC 00332A8C  4E 80 00 20 */	blr 
+
+.global func_80335EB0
+func_80335EB0:
+/* 80335EB0 00332A90  7C 78 E3 A6 */	mtspr 0x398, r3
+/* 80335EB4 00332A94  4E 80 00 20 */	blr 
+
+.global func_80335EB8
+func_80335EB8:
+/* 80335EB8 00332A98  7C 79 E3 A6 */	mtspr 0x399, r3
+/* 80335EBC 00332A9C  4E 80 00 20 */	blr 

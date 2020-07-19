@@ -1,7 +1,7 @@
 _SDA_BASE_ = 0x804DB6A0;
 _SDA2_BASE_ = 0x804DF9E0;
 
-FORCEFILES { extab.o object.o __init_cpp_exceptions.o }
+FORCEFILES { extab.o object.o __init_cpp_exceptions.o console_io.o }
 
 SECTIONS
 {
@@ -34,15 +34,59 @@ SECTIONS
         direct_io.o(.text)
         cstring.o(.text)
         mem_funcs.o(.text)
-        
-        /* Remaining CW PPC stdlib */
-        text_3.o(.text)
+        printf.o(.text)
+        rand.o(.text)
+        strng.o(.text)
+        strtoul.o(.text)
+        console_io.o(.text)
+        wchar_io.o(.text)
+        math.o(.text)
 
         /* Combined MetroTRK debugger code*/
         MetroTRK.o(.text)
 
-        /* Combined Dolphin SDK code */
-        dolphin_sdk.o(.text)
+        /* Dolphin SDK */
+        hio.o(.text)
+        mcc.o(.text)
+        fio.o(.text)
+        THPDec.o(.text)
+        jpegdec.o(.text)
+        PPCArch.o(.text)
+        db.o(.text)
+        dsp.o(.text)
+        dsp_dbg.o(.text)
+        dsp_task.o(.text)
+        dvdlow.o(.text)
+        dvdqueue.o(.text)
+        dvderror.o(.text)
+        fstload.o(.text)
+        GXInit.o(.text)
+        GXFifo.o(.text)
+        mtxvec.o(.text)
+
+        /* Combination of Dolphin SDK OS code, EXI, and SI */
+        dolphin_sdk_1.o(.text)
+
+        /* Runtime PPC EABI */
+        __ppc_eabi_init.o(.text)
+
+        /* Dolphin SDK */
+        Padclamp.o(.text)
+        
+        /* Dolphin SDK Pad & SI partial */
+        dolphin_sdk_2.o(.text)
+
+        /* Dolphin SDK */
+        vi.o(.text)
+        ai.o(.text)
+        ar.o(.text)
+        arq.o(.text)
+
+        /* Combined Dolphin SDK CARD code */
+        CARD.o(.text)
+
+        /* Combined Dolphin SDK AX code */
+        AX.o(.text)
 
         /* sysdolphin files */
         dobj.o(.text)
@@ -84,7 +128,10 @@ SECTIONS
         texpdag.o(.text)
         leak.o(.text)
         debug.o(.text)
-        code_8038838C.o(.text)
+        AXDriver.o(.text)
+        code_8038FAA8.o(.text)
+        psdisp.o(.text)
+        code_803A3920.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
