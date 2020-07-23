@@ -129,9 +129,19 @@ SECTIONS
         leak.o(.text)
         debug.o(.text)
         AXDriver.o(.text)
-        code_8038FAA8.o(.text)
+        gobjproc.o(.text)
+        gobjplink.o(.text)
+        gobjgxlink.o(.text)
+        gobjobject.o(.text)
+        gobjuserdata.o(.text)
+        gobj.o(.text)
+        code_80391580.o(.text)
         psdisp.o(.text)
-        code_803A3920.o(.text)
+        psdisptev.o(.text)
+        psappsrt.o(.text)
+        sobj.o(.text)
+        sislib.o(.text)
+        code_803A947C.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
