@@ -141,7 +141,7 @@ SECTIONS
         psappsrt.o(.text)
         sobj.o(.text)
         sislib.o(.text)
-        code_803A947C.o(.text)
+        code_803A949C.o(.text)
     }
 
     extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
