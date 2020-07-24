@@ -42,8 +42,24 @@ SECTIONS
         wchar_io.o(.text)
         math.o(.text)
 
-        /* Combined MetroTRK debugger code*/
-        MetroTRK.o(.text)
+        /* MetroTRK Debugger */
+        mainloop.o(.text)
+        nubevent.o(.text)
+        nubinit.o(.text)
+        msg.o(.text)
+        msgbuf.o(.text)
+        serpoll.o(.text)
+        dispatch.o(.text)
+        msghndlr.o(.text)
+        flush_cache.o(.text)
+        mem_TRK.o(.text)
+        targimpl.o(.text)
+        dolphin_trk.o(.text)
+        mpc_7xx_603e.o(.text)
+        main_TRK.o(.text)
+        dolphin_trk_glue.o(.text)
+        targcont.o(.text)
+        AmcExi2Stubs.o(.text)
         DebuggerDriver.o(.text)
 
         /* Dolphin SDK */
