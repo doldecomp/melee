@@ -44,6 +44,7 @@ SECTIONS
 
         /* Combined MetroTRK debugger code*/
         MetroTRK.o(.text)
+        DebuggerDriver.o(.text)
 
         /* Dolphin SDK */
         hio.o(.text)
