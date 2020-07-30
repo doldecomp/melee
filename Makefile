@@ -38,13 +38,19 @@ CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 SHA1SUM := sha1sum
+PYTHON  := python3
+
+POSTPROC := tools/postprocess.py
 
 # Options
 INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/sysdolphin/
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP)
-CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p $(INCLUDES)
+CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p -nodefaults $(INCLUDES)
+
+# for postprocess.py
+PROCFLAGS := -fprologue-fixup=old_stack
 
 #-------------------------------------------------------------------------------
 # Recipes
@@ -73,4 +79,5 @@ $(ELF): $(O_FILES) $(LDSCRIPT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
+	$(PYTHON) $(POSTPROC) $(PROCFLAGS) $@
 
