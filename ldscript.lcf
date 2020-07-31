@@ -127,6 +127,7 @@ SECTIONS
         mtx.o(.text)
         util.o(.text)
         objalloc.o(.text)
+        objalloc_asm.o(.text)
         robj.o(.text)
         id.o(.text)
         id_asm.o(.text)
