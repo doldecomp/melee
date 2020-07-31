@@ -17,6 +17,21 @@ SECTIONS
         text_1.o(.text)
         player.o(.text)
         text_2.o(.text)
+        grzebes.o(.text)
+        grcorneria.o(.text)
+        grstory.o(.text)
+        gronett.o(.text)
+        grbigblue.o(.text)
+        grmutecity.o(.text)
+        grfourside.o(.text)
+        grgreatbay.o(.text)
+        gricemt.o(.text)
+        grinishie1.o(.text)
+        grinishie2.o(.text)
+        grkraid_.o(.text)
+        grrcruise.o(.text)
+        grshrine.o(.text)
+        gryorster.o(.text)
         grgarden.o(.text)
         grvenom.o(.text)
         grtest.o(.text)
@@ -183,7 +198,24 @@ SECTIONS
 
 FORCEFILES 
 { 
-    extab.o 
+    extab.o
+    grzebes.o
+    grcorneria.o
+    grstory.o
+    gronett.o
+    grbigblue.o
+    grmutecity.o
+    grfourside.o
+    grgreatbay.o
+    gricemt.o
+    grinishie1.o
+    grinishie2.o
+    grkraid_.o
+    grrcruise.o
+    grshrine.o
+    gryorster.o
+    grgarden.o
+    grvenom.o
     grtest.o 
     grkinokoroute.o
     __init_cpp_exceptions.o
