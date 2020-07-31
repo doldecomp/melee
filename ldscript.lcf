@@ -1,7 +1,7 @@
 _SDA_BASE_ = 0x804DB6A0;
 _SDA2_BASE_ = 0x804DF9E0;
 
-FORCEFILES { extab.o object.o __init_cpp_exceptions.o console_io.o }
+FORCEFILES { extab.o object.o __init_cpp_exceptions.o console_io.o grtest.o grkinokoroute.o }
 
 SECTIONS
 {
@@ -19,6 +19,11 @@ SECTIONS
         text_1.o(.text)
         player.o(.text)
         text_2.o(.text)
+        grgarden.o(.text)
+        grvenom.o(.text)
+        grtest.o(.text)
+        grkinokoroute.o(.text)
+        text_3.o(.text)
 
         /* CW PPC EABI Runtime Support */
         __va_arg.o(.text)
