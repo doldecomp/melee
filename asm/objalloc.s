@@ -278,8 +278,8 @@ lbl_8037AD0C:
 /* 8037AD18 003778F8  7C 08 03 A6 */	mtlr r0
 /* 8037AD1C 003778FC  4E 80 00 20 */	blr 
 
-.global func_8037AD20
-func_8037AD20:
+.global HSD_ObjFree
+HSD_ObjFree:
 /* 8037AD20 00377900  80 03 00 04 */	lwz r0, 4(r3)
 /* 8037AD24 00377904  90 04 00 00 */	stw r0, 0(r4)
 /* 8037AD28 00377908  90 83 00 04 */	stw r4, 4(r3)

@@ -20,7 +20,7 @@ extern void* jtbl_8040608C;
 extern s32 lbl_804D7630;
 extern s32 lbl_804D762C;
 
-extern f32 lbl_804DE438; // 0.0F
+extern const f32 lbl_804DE438; // 0.0F
 
 extern HSD_SList* lbl_804D7628;
 
@@ -338,23 +338,16 @@ lbl_80364570:
     /* 803645A4 00361184  4E 80 00 20 */	blr 
 }
 
-asm void HSD_AObjFree(HSD_AObj* aobj)
+#pragma push
+#pragma peephole on
+void HSD_AObjFree(HSD_AObj* aobj)
 {
-    nofralloc
-    /* 803645A8 00361188  7C 08 02 A6 */	mflr r0
-    /* 803645AC 0036118C  7C 64 1B 79 */	or. r4, r3, r3
-    /* 803645B0 00361190  90 01 00 04 */	stw r0, 4(r1)
-    /* 803645B4 00361194  94 21 FF F8 */	stwu r1, -8(r1)
-    /* 803645B8 00361198  41 82 00 10 */	beq lbl_803645C8
-    /* 803645BC 0036119C  3C 60 80 4C */	lis r3, lbl_804C0880@ha
-    /* 803645C0 003611A0  38 63 08 80 */	addi r3, r3, lbl_804C0880@l
-    /* 803645C4 003611A4  48 01 67 5D */	bl func_8037AD20
-lbl_803645C8:
-    /* 803645C8 003611A8  80 01 00 0C */	lwz r0, 0xc(r1)
-    /* 803645CC 003611AC  38 21 00 08 */	addi r1, r1, 8
-    /* 803645D0 003611B0  7C 08 03 A6 */	mtlr r0
-    /* 803645D4 003611B4  4E 80 00 20 */	blr 
+    if (!aobj)
+        return;
+    
+    HSD_ObjFree(&lbl_804C0880, (HSD_ObjAllocLink*)aobj);
 }
+#pragma pop
 
 asm void func_803645D8(void)
 {
