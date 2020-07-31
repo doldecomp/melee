@@ -20,7 +20,7 @@ extern void* jtbl_8040608C;
 extern s32 lbl_804D7630;
 extern s32 lbl_804D762C;
 
-extern f32 lbl_804DE438; // 0.0F
+extern const f32 lbl_804DE438; // 0.0F
 
 extern HSD_SList* lbl_804D7628;
 
@@ -283,43 +283,27 @@ lbl_803644B0:
     /* 803644C8 003610A8  4E 80 00 20 */	blr 
 }
 
-asm void HSD_AObjRemove(HSD_AObj* aobj)
+#pragma push
+#pragma peephole on
+void HSD_AObjRemove(HSD_AObj* aobj)
 {
-    nofralloc
-    /* 803644CC 003610AC  7C 08 02 A6 */	mflr r0
-    /* 803644D0 003610B0  90 01 00 04 */	stw r0, 4(r1)
-    /* 803644D4 003610B4  94 21 FF E8 */	stwu r1, -0x18(r1)
-    /* 803644D8 003610B8  93 E1 00 14 */	stw r31, 0x14(r1)
-    /* 803644DC 003610BC  7C 7F 1B 79 */	or. r31, r3, r3
-    /* 803644E0 003610C0  41 82 00 48 */	beq lbl_80364528
-    /* 803644E4 003610C4  41 82 00 1C */	beq lbl_80364500
-    /* 803644E8 003610C8  80 7F 00 14 */	lwz r3, 0x14(r31)
-    /* 803644EC 003610CC  28 03 00 00 */	cmplwi r3, 0
-    /* 803644F0 003610D0  41 82 00 08 */	beq lbl_803644F8
-    /* 803644F4 003610D4  48 00 64 A9 */	bl HSD_FObjRemoveAll
-lbl_803644F8:
-    /* 803644F8 003610D8  38 00 00 00 */	li r0, 0
-    /* 803644FC 003610DC  90 1F 00 14 */	stw r0, 0x14(r31)
-lbl_80364500:
-    /* 80364500 003610E0  28 1F 00 00 */	cmplwi r31, 0
-    /* 80364504 003610E4  41 82 00 1C */	beq lbl_80364520
-    /* 80364508 003610E8  80 7F 00 18 */	lwz r3, 0x18(r31)
-    /* 8036450C 003610EC  28 03 00 00 */	cmplwi r3, 0
-    /* 80364510 003610F0  41 82 00 08 */	beq lbl_80364518
-    /* 80364514 003610F4  48 00 CC 49 */	bl HSD_JObjUnref
-lbl_80364518:
-    /* 80364518 003610F8  38 00 00 00 */	li r0, 0
-    /* 8036451C 003610FC  90 1F 00 18 */	stw r0, 0x18(r31)
-lbl_80364520:
-    /* 80364520 00361100  7F E3 FB 78 */	mr r3, r31
-    /* 80364524 00361104  48 00 00 85 */	bl HSD_AObjFree
-lbl_80364528:
-    /* 80364528 00361108  80 01 00 1C */	lwz r0, 0x1c(r1)
-    /* 8036452C 0036110C  83 E1 00 14 */	lwz r31, 0x14(r1)
-    /* 80364530 00361110  38 21 00 18 */	addi r1, r1, 0x18
-    /* 80364534 00361114  7C 08 03 A6 */	mtlr r0
-    /* 80364538 00361118  4E 80 00 20 */	blr 
+    if (!aobj)
+        return;
+    
+    if (aobj) {
+        if (aobj->fobj)
+            HSD_FObjRemoveAll(aobj->fobj);
+        aobj->fobj = NULL;
+    }
+
+    if (aobj) {
+        if (aobj->hsd_obj != NULL)
+            HSD_JObjUnref((HSD_JObj*)aobj->hsd_obj);
+        aobj->hsd_obj = NULL;
+    }
+    HSD_AObjFree(aobj);
 }
+#pragma pop
 
 asm HSD_AObj* HSD_AObjAlloc(void)
 {
@@ -330,7 +314,7 @@ asm HSD_AObj* HSD_AObjAlloc(void)
     /* 80364548 00361128  38 63 08 80 */	addi r3, r3, lbl_804C0880@l
     /* 8036454C 0036112C  94 21 FF F0 */	stwu r1, -0x10(r1)
     /* 80364550 00361130  93 E1 00 0C */	stw r31, 0xc(r1)
-    /* 80364554 00361134  48 01 66 75 */	bl func_8037ABC8
+    /* 80364554 00361134  48 01 66 75 */	bl HSD_ObjAlloc
     /* 80364558 00361138  7C 7F 1B 79 */	or. r31, r3, r3
     /* 8036455C 0036113C  40 82 00 14 */	bne lbl_80364570
     /* 80364560 00361140  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
@@ -354,23 +338,16 @@ lbl_80364570:
     /* 803645A4 00361184  4E 80 00 20 */	blr 
 }
 
-asm void HSD_AObjFree(HSD_AObj* aobj)
+#pragma push
+#pragma peephole on
+void HSD_AObjFree(HSD_AObj* aobj)
 {
-    nofralloc
-    /* 803645A8 00361188  7C 08 02 A6 */	mflr r0
-    /* 803645AC 0036118C  7C 64 1B 79 */	or. r4, r3, r3
-    /* 803645B0 00361190  90 01 00 04 */	stw r0, 4(r1)
-    /* 803645B4 00361194  94 21 FF F8 */	stwu r1, -8(r1)
-    /* 803645B8 00361198  41 82 00 10 */	beq lbl_803645C8
-    /* 803645BC 0036119C  3C 60 80 4C */	lis r3, lbl_804C0880@ha
-    /* 803645C0 003611A0  38 63 08 80 */	addi r3, r3, lbl_804C0880@l
-    /* 803645C4 003611A4  48 01 67 5D */	bl func_8037AD20
-lbl_803645C8:
-    /* 803645C8 003611A8  80 01 00 0C */	lwz r0, 0xc(r1)
-    /* 803645CC 003611AC  38 21 00 08 */	addi r1, r1, 8
-    /* 803645D0 003611B0  7C 08 03 A6 */	mtlr r0
-    /* 803645D4 003611B4  4E 80 00 20 */	blr 
+    if (!aobj)
+        return;
+    
+    HSD_ObjFree(&lbl_804C0880, (HSD_ObjAllocLink*)aobj);
 }
+#pragma pop
 
 asm void func_803645D8(void)
 {
