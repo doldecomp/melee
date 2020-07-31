@@ -80,4 +80,3 @@ $(ELF): $(O_FILES) $(LDSCRIPT)
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(PYTHON) $(POSTPROC) $(PROCFLAGS) $@
-

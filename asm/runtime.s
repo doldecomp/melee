@@ -384,8 +384,8 @@ lbl_80322D98:
 /* 80322D98 0031F978  7C 63 2E 30 */	sraw r3, r3, r5
 /* 80322D9C 0031F97C  4E 80 00 20 */	blr 
 
-.global __cvt_sll_dbl
-__cvt_sll_dbl:
+.global __cvt_sll_flt
+__cvt_sll_flt:
 /* 80322DA0 0031F980  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80322DA4 0031F984  54 65 00 01 */	rlwinm. r5, r3, 0, 0, 0
 /* 80322DA8 0031F988  41 82 00 0C */	beq lbl_80322DB4
