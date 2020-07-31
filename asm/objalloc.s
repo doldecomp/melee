@@ -12,8 +12,8 @@ HSD_ObjSetHeap:
 /* 8037A960 00377540  90 65 00 08 */	stw r3, 8(r5)
 /* 8037A964 00377544  4E 80 00 20 */	blr 
 
-.global func_8037A968
-func_8037A968:
+.global HSD_ObjAllocAddFree
+HSD_ObjAllocAddFree:
 /* 8037A968 00377548  7C 08 02 A6 */	mflr r0
 /* 8037A96C 0037754C  90 01 00 04 */	stw r0, 4(r1)
 /* 8037A970 00377550  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -179,8 +179,8 @@ lbl_8037ABA8:
 /* 8037ABC0 003777A0  7C 08 03 A6 */	mtlr r0
 /* 8037ABC4 003777A4  4E 80 00 20 */	blr 
 
-.global func_8037ABC8
-func_8037ABC8:
+.global HSD_ObjAlloc
+HSD_ObjAlloc:
 /* 8037ABC8 003777A8  7C 08 02 A6 */	mflr r0
 /* 8037ABCC 003777AC  90 01 00 04 */	stw r0, 4(r1)
 /* 8037ABD0 003777B0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -250,7 +250,7 @@ lbl_8037ACA8:
 /* 8037ACB0 00377890  40 82 00 24 */	bne lbl_8037ACD4
 /* 8037ACB4 00377894  38 7F 00 00 */	addi r3, r31, 0
 /* 8037ACB8 00377898  38 80 00 01 */	li r4, 1
-/* 8037ACBC 0037789C  4B FF FC AD */	bl func_8037A968
+/* 8037ACBC 0037789C  4B FF FC AD */	bl HSD_ObjAllocAddFree
 /* 8037ACC0 003778A0  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 8037ACC4 003778A4  28 00 00 00 */	cmplwi r0, 0
 /* 8037ACC8 003778A8  40 82 00 0C */	bne lbl_8037ACD4

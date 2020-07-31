@@ -22,4 +22,8 @@ typedef struct _HSD_ObjAllocData {
     struct _HSD_ObjAllocData* next;
 } HSD_ObjAllocData;
 
+void HSD_ObjSetHeap(u32 size, void* ptr);
+s32	HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num);
+void* HSD_ObjAlloc(HSD_ObjAllocData* data);
+
 #endif
