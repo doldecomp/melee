@@ -1,8 +1,6 @@
 _SDA_BASE_ = 0x804DB6A0;
 _SDA2_BASE_ = 0x804DF9E0;
 
-FORCEFILES { extab.o object.o __init_cpp_exceptions.o console_io.o grtest.o grkinokoroute.o }
-
 SECTIONS
 {
     .init BIND(0x80003100) : {
@@ -180,4 +178,14 @@ SECTIONS
     .sdata BIND(0x804D36A0) : { *(.sdata) }
     .sbss BIND(0x804D63A0) : { *(.sbss) }
     .sdata2 BIND(0x804D79E0) : { *(.sdata2) }
+}
+
+FORCEFILES 
+{ 
+    extab.o 
+    grtest.o 
+    grkinokoroute.o
+    __init_cpp_exceptions.o
+    console_io.o   
+    object.o 
 }
