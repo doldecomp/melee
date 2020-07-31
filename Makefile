@@ -9,16 +9,24 @@ endif
 # Files
 #-------------------------------------------------------------------------------
 
+TARGET := ssbm.us.1.2
+
+BUILD_DIR := build/$(TARGET)
+
+SRC_DIRS := src src/sysdolphin
+ASM_DIRS := asm
+
 # Inputs
 S_FILES := $(wildcard asm/*.s)
 C_FILES := $(wildcard src/*.c) $(wildcard src/sysdolphin/*.c)
 LDSCRIPT := ldscript.lcf
 
 # Outputs
-DOL     := main.dol
+DOL     := $(BUILD_DIR)/main.dol
 ELF     := $(DOL:.dol=.elf)
-MAP     := ssbm.map
-O_FILES := $(S_FILES:.s=.o) $(C_FILES:.c=.o)
+MAP     := $(BUILD_DIR)/ssbm.map
+O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
+           $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
 
 #-------------------------------------------------------------------------------
 # Tools
@@ -56,11 +64,16 @@ PROCFLAGS := -fprologue-fixup=old_stack
 # Recipes
 #-------------------------------------------------------------------------------
 
+ALL_DIRS := build $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(ASM_DIRS))
+
+# Make sure build directory exists before compiling anything
+DUMMY != mkdir -p $(ALL_DIRS)
+
 .PHONY: tools
 
 $(DOL): $(ELF) | tools
 	$(ELF2DOL) $< $@
-	$(SHA1SUM) -c ssbm.sha1
+	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:
 	rm -f $(DOL) $(ELF) $(O_FILES) $(MAP)
@@ -74,9 +87,13 @@ $(ELF): $(O_FILES) $(LDSCRIPT)
 # The Metrowerks linker doesn't generate physical addresses in the ELF program headers. This fixes it somehow.
 	$(OBJCOPY) $@ $@
 
-%.o: %.s
+$(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-%.o: %.c
+$(BUILD_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(PYTHON) $(POSTPROC) $(PROCFLAGS) $@
+
+### Debug Print ###
+
+print-% : ; $(info $* is a $(flavor $*) variable set to [$($*)]) @true
