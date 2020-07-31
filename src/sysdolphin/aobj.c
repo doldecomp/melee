@@ -127,7 +127,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
         aobj->curr_frame += aobj->framerate;
     }
 
-if ((aobj->flags & AOBJ_LOOP) && aobj->end_frame <= aobj->curr_frame) {
+    if ((aobj->flags & AOBJ_LOOP) && aobj->end_frame <= aobj->curr_frame) {
         if (aobj->rewind_frame < aobj->end_frame) {
             f32 x, y;
             
@@ -151,7 +151,7 @@ if ((aobj->flags & AOBJ_LOOP) && aobj->end_frame <= aobj->curr_frame) {
         HSD_FObjInterpretAnimAll(aobj->fobj, obj, update_func, rate);
     }
 
-    if (!(aobj->flags & AOBJ_LOOP) && (aobj->end_frame <= aobj->curr_frame) && aobj != NULL) {
+    if (!(aobj->flags & AOBJ_LOOP) && (aobj->end_frame <= aobj->curr_frame) && aobj) {
         HSD_FObjStopAnimAll(aobj->fobj, obj, update_func, aobj->framerate);
         aobj->flags |= AOBJ_NO_ANIM;
     }
