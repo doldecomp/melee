@@ -1,5 +1,5 @@
-#ifndef _mtxtypes_h_
-#define _mtxtype_h_
+#ifndef _MTXTYPES_h_
+#define _MTXTYPES_h_
 
 #include "dolphin/types.h"
 

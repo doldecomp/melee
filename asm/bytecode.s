@@ -742,7 +742,7 @@ lbl_80380FA8:
 lbl_80380FD8:
 /* 80380FD8 0037DBB8  EC 38 C8 24 */	fdivs f1, f24, f25
 /* 80380FDC 0037DBBC  4B FA 1E 79 */	bl __cvt_dbl_usll
-/* 80380FE0 0037DBC0  4B FA 1D C1 */	bl __cvt_sll_dbl
+/* 80380FE0 0037DBC0  4B FA 1D C1 */	bl __cvt_sll_flt
 /* 80380FE4 0037DBC4  EF 19 C0 7C */	fnmsubs f24, f25, f1, f24
 lbl_80380FE8:
 /* 80380FE8 0037DBC8  D3 01 00 30 */	stfs f24, 0x30(r1)
