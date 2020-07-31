@@ -153,6 +153,7 @@ SECTIONS
         leak.o(.text)
         debug_.o(.text)
         AXDriver.o(.text)
+        devcom.o(.text)
         gobjproc.o(.text)
         gobjplink.o(.text)
         gobjgxlink.o(.text)
