@@ -14,9 +14,17 @@ SECTIONS
         code_8000B1CC.o(.text)
         code_8000CE50.o(.text)
         lbvector.o(.text)
+        
         text_1.o(.text)
+        
         player.o(.text)
+
         text_2.o(.text)
+
+        grizumi.o(.text)
+        grcastle.o(.text)
+        grstadium.o(.text)
+        grkongo.o(.text)
         grzebes.o(.text)
         grcorneria.o(.text)
         grstory.o(.text)
@@ -36,6 +44,16 @@ SECTIONS
         grvenom.o(.text)
         grtest.o(.text)
         grkinokoroute.o(.text)
+        grshrineroute.o(.text)
+        grzebesroute.o(.text)
+        grbigblueroute.o(.text)
+        grfigure1.o(.text)
+        grfigure2.o(.text)
+        grfigure3.o(.text)
+        groldyoshi.o(.text)
+        groldkongo.o(.text)
+        groldpupupu.o(.text)
+
         text_3.o(.text)
 
         /* CW PPC EABI Runtime Support */
@@ -199,6 +217,10 @@ SECTIONS
 FORCEFILES 
 { 
     extab.o
+    grizumi.o
+    grcastle.o
+    grstadium.o
+    grkongo.o
     grzebes.o
     grcorneria.o
     grstory.o
@@ -218,6 +240,15 @@ FORCEFILES
     grvenom.o
     grtest.o 
     grkinokoroute.o
+    grshrineroute.o
+    grzebesroute.o
+    grbigblueroute.o
+    grfigure1.o
+    grfigure2.o
+    grfigure3.o
+    groldyoshi.o
+    groldkongo.o
+    groldpupupu.o
     __init_cpp_exceptions.o
     console_io.o   
     object.o 
