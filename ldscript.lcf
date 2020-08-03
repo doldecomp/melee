@@ -1,14 +1,34 @@
-_SDA_BASE_ = 0x804DB6A0;
-_SDA2_BASE_ = 0x804DF9E0;
+#define BEGIN_SEG(name, addr) \
+    _##name##SegmentStart = .; \
+    .name BIND(_##name##SegmentStart)
+
+#define END_SEG(name) \
+    _##name##SegmentEnd = .;
+
+#define ADDR_START 0x80003100 // TODO: Do better than this
 
 SECTIONS
 {
-    .init BIND(0x80003100) : {
+    // Do this manually since we need to use both ADDR_START for bind and start.
+    _initSegmentStart = ADDR_START; .init BIND(ADDR_START) : {
 		__mem.o(.text)
 		*(.init) 
 	}
+    END_SEG(init)
 
-    .text BIND(0x80005940) : { 
+    /* TODO: should be extab */
+    BEGIN_SEG(extab_, _initSegmentEnd) : { 
+        *(extab_)
+    }
+    END_SEG(extab_)
+
+    /* TODO: should be extabindex */
+    BEGIN_SEG(extabindex_, _extab_SegmentEnd) : { 
+        *(extabindex_)
+    }
+    END_SEG(extabindex_)
+
+    BEGIN_SEG(text, _extabindex_SegmentEnd) : {
         code_80005940.o(.text)
         code_80008D30.o(.text)
         code_8000B1CC.o(.text)
@@ -183,17 +203,23 @@ SECTIONS
         sislib.o(.text)
         code_803A949C.o(.text)
     }
+    END_SEG(text)
 
-    extab_ BIND(0x80005520) : { *(extab_) } /* TODO: should be extab */
-    extabindex_ BIND(0x800056C0) : { *(extabindex_) } /* TODO: should be extabindex */
-    .ctors BIND(0x803B7240) : { *(.ctors) }
-    .dtors BIND(0x803B7260) : { *(.dtors) }
-    .rodata BIND(0x803B7280) : { *(.rodata) }
-    .data BIND(0x803B9840) : { *(.data) }
-    .bss BIND(0x804316C0) : { *(.bss) }
-    .sdata BIND(0x804D36A0) : { *(.sdata) }
-    .sbss BIND(0x804D63A0) : { *(.sbss) }
-    .sdata2 BIND(0x804D79E0) : { *(.sdata2) }
+    BEGIN_SEG(ctors, _textSegmentEnd) : { *(.ctors) } END_SEG(ctors)
+    BEGIN_SEG(dtors, _ctorsSegmentEnd) : { *(.dtors) } END_SEG(dtors)
+    BEGIN_SEG(rodata, _dtorsSegmentEnd) : { *(.rodata) } END_SEG(rodata)
+    BEGIN_SEG(data, _rodataSegmentEnd) : { *(.data) } END_SEG(data)
+    BEGIN_SEG(bss, _dataSegmentEnd) : { *(.bss) } END_SEG(bss)
+    // TODO: Bss size shenanagans. Sbss isnt recognized
+    // by elf2dol, so we need this ugly hack for sdata to position it into the end of sbss.
+    _sdataSegmentStartHack = _bssSegmentEnd - 0x2D00; .sdata BIND(_sdataSegmentStartHack) : { *(.sdata) } END_SEG(sdata)
+    BEGIN_SEG(sbss, _sdataSegmentEnd) : { *(.sbss) } END_SEG(sbss)
+    // TODO: ALIGN or ALIGNALL doesnt seem to work for aligning the start of sdata2.
+    // Please find less of a lack for this.
+    _sdata2SegmentStartHack = _sbssSegmentEnd + 0x17; .sdata2 BIND(_sdata2SegmentStartHack) : { *(.sdata2) } END_SEG(sdata2)
+
+_SDA_BASE_ = _sdata2SegmentStartHack + 0x3CC0;
+_SDA2_BASE_ = _sdata2SegmentEnd + 0xDE0;
 }
 
 FORCEFILES 
