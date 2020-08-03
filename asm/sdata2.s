@@ -9097,8 +9097,10 @@ lbl_804DB698:
 .global lbl_804DB69C
 lbl_804DB69C:
 	.incbin "baserom.dol", 0x43507C, 0x4
+.global _SDA_BASE_START
 .global lbl_804DB6A0
 lbl_804DB6A0:
+_SDA_BASE_START:
 	.incbin "baserom.dol", 0x435080, 0x8
 .global lbl_804DB6A8
 lbl_804DB6A8:

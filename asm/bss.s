@@ -4635,4 +4635,3 @@ lbl_804D79C4:
 .global lbl_804D79C8
 lbl_804D79C8:
 	.skip 0x1
-

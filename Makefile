@@ -19,7 +19,7 @@ ASM_DIRS := asm
 # Inputs
 S_FILES := $(wildcard asm/*.s)
 C_FILES := $(wildcard src/*.c) $(wildcard src/sysdolphin/*.c)
-LDSCRIPT := ldscript.lcf
+LDSCRIPT := $(BUILD_DIR)/ldscript.lcf
 
 # Outputs
 DOL     := $(BUILD_DIR)/main.dol
@@ -42,6 +42,7 @@ else
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 OBJCOPY := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
+CPP     := cpp -P
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
@@ -55,7 +56,7 @@ INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP)
-CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p -nodefaults $(INCLUDES)
+CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p -nodefaults -msgstyle gcc $(INCLUDES)
 
 # for postprocess.py
 PROCFLAGS := -fprologue-fixup=old_stack
@@ -64,6 +65,12 @@ PROCFLAGS := -fprologue-fixup=old_stack
 # Recipes
 #-------------------------------------------------------------------------------
 
+### Default target ###
+
+default: all
+
+all: $(DOL)
+
 ALL_DIRS := build $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(ASM_DIRS))
 
 # Make sure build directory exists before compiling anything
@@ -71,12 +78,15 @@ DUMMY != mkdir -p $(ALL_DIRS)
 
 .PHONY: tools
 
+$(LDSCRIPT): ldscript.lcf
+	$(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
+
 $(DOL): $(ELF) | tools
-	$(ELF2DOL) $< $@
+	$(ELF2DOL) -v -v $< $@
 	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:
-	rm -f $(DOL) $(ELF) $(O_FILES) $(MAP)
+	rm -f -d -r build
 	$(MAKE) -C tools clean
 
 tools:
