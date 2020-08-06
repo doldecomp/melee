@@ -929,9 +929,45 @@ lbl_803C0FC8:
 .global lbl_803C10D0
 lbl_803C10D0:
 	.incbin "baserom.dol", 0x3BE0D0, 0x84
+
+    .balign 4
 .global lbl_803C1154
 lbl_803C1154:
-	.incbin "baserom.dol", 0x3BE154, 0x84
+    .4byte func_800E0960
+    .4byte func_800E57AC
+    .4byte func_800E2AEC
+    .4byte func_8010D9AC
+    .4byte func_800EE680
+    .4byte func_80132ABC
+    .4byte func_800EAE44
+    .4byte func_801100EC
+    .4byte func_8011480C
+    .4byte FighterOnLoad_Peach
+    .4byte func_8011EF3C
+    .4byte func_80122EDC
+    .4byte func_801243E4
+    .4byte func_8012837C
+    .4byte func_8012B99C
+    .4byte func_8013C67C
+    .4byte func_80144E48
+    .4byte func_80142324
+    .4byte func_801364AC
+    .4byte func_80139334
+    .4byte func_80148CE4
+    .4byte func_801494E4
+    .4byte func_80149CC4
+    .4byte func_80149E34
+    .4byte func_8014A37C
+    .4byte func_8014EE1C
+    .4byte func_8014F124
+    .4byte func_8014FC6C
+    .4byte func_80155E1C
+    .4byte func_8014F3DC
+    .4byte func_8014F440
+    .4byte func_8014F6B8
+    .4byte func_8014F9D0
+
+    .balign 4
 .global lbl_803C11D8
 lbl_803C11D8:
 	.incbin "baserom.dol", 0x3BE1D8, 0x84
