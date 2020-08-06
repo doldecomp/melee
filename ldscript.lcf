@@ -1,248 +1,41 @@
-#define BEGIN_SEG(name, addr) \
-    _##name##SegmentStart = .; \
-    .name BIND(_##name##SegmentStart)
-
-#define END_SEG(name) \
-    _##name##SegmentEnd = .;
-
-#define ADDR_START 0x80003100 // TODO: Do better than this
-
-SECTIONS
-{
-    // Do this manually since we need to use both ADDR_START for bind and start.
-    _initSegmentStart = ADDR_START; .init BIND(ADDR_START) : {
-		__mem.o(.text)
-		*(.init) 
-	}
-    END_SEG(init)
-
-    /* TODO: should be extab */
-    BEGIN_SEG(extab_, _initSegmentEnd) : { 
-        *(extab_)
-    }
-    END_SEG(extab_)
-
-    /* TODO: should be extabindex */
-    BEGIN_SEG(extabindex_, _extab_SegmentEnd) : { 
-        *(extabindex_)
-    }
-    END_SEG(extabindex_)
-
-    BEGIN_SEG(text, _extabindex_SegmentEnd) : {
-        code_80005940.o(.text)
-        code_80008D30.o(.text)
-        code_8000B1CC.o(.text)
-        code_8000CE50.o(.text)
-        lbvector.o(.text)
-        
-        text_1.o(.text)
-        
-        player.o(.text)
-
-        text_2.o(.text)
-
-        grizumi.o(.text)
-        grcastle.o(.text)
-        grstadium.o(.text)
-        grkongo.o(.text)
-        grzebes.o(.text)
-        grcorneria.o(.text)
-        grstory.o(.text)
-        gronett.o(.text)
-        grbigblue.o(.text)
-        grmutecity.o(.text)
-        grfourside.o(.text)
-        grgreatbay.o(.text)
-        gricemt.o(.text)
-        grinishie1.o(.text)
-        grinishie2.o(.text)
-        grkraid_.o(.text)
-        grrcruise.o(.text)
-        grshrine.o(.text)
-        gryorster.o(.text)
-        grgarden.o(.text)
-        grvenom.o(.text)
-        grtest.o(.text)
-        grkinokoroute.o(.text)
-        grshrineroute.o(.text)
-        grzebesroute.o(.text)
-        grbigblueroute.o(.text)
-        grfigure1.o(.text)
-        grfigure2.o(.text)
-        grfigure3.o(.text)
-        groldyoshi.o(.text)
-        groldkongo.o(.text)
-        groldpupupu.o(.text)
-
-        text_3.o(.text)
-
-        /* CW PPC EABI Runtime Support */
-        __va_arg.o(.text)
-        NMWException.o(.text)
-        Gecko_setjmp.o(.text)
-        runtime.o(.text)
-        __init_cpp_exceptions.o(.text)
-        abort_exit.o(.text)
-        ansi_fp.o(.text)
-        buffer_io.o(.text)
-        critical_regions.gamecube.o(.text)
-        ctype.o(.text)
-        direct_io.o(.text)
-        cstring.o(.text)
-        mem_funcs.o(.text)
-        printf.o(.text)
-        rand.o(.text)
-        string_.o(.text)
-        strtoul.o(.text)
-        console_io.o(.text)
-        wchar_io.o(.text)
-        math.o(.text)
-
-        /* MetroTRK Debugger */
-        mainloop.o(.text)
-        nubevent.o(.text)
-        nubinit.o(.text)
-        msg.o(.text)
-        msgbuf.o(.text)
-        serpoll.o(.text)
-        dispatch.o(.text)
-        msghndlr.o(.text)
-        flush_cache.o(.text)
-        mem_TRK.o(.text)
-        targimpl.o(.text)
-        dolphin_trk.o(.text)
-        mpc_7xx_603e.o(.text)
-        main_TRK.o(.text)
-        dolphin_trk_glue.o(.text)
-        targcont.o(.text)
-        AmcExi2Stubs.o(.text)
-        DebuggerDriver.o(.text)
-
-        /* Dolphin SDK */
-        hio.o(.text)
-        mcc.o(.text)
-        fio.o(.text)
-        THPDec.o(.text)
-        jpegdec.o(.text)
-        PPCArch.o(.text)
-        db.o(.text)
-        dsp.o(.text)
-        dsp_debug.o(.text)
-        dsp_task.o(.text)
-        dvdlow.o(.text)
-        dvdqueue.o(.text)
-        dvderror.o(.text)
-        fstload.o(.text)
-        GXInit.o(.text)
-        GXFifo.o(.text)
-        mtxvec.o(.text)
-
-        /* Combination of Dolphin SDK OS code, EXI, and SI */
-        dolphin_sdk_1.o(.text)
-
-        /* Runtime PPC EABI */
-        __ppc_eabi_init.o(.text)
-
-        /* Dolphin SDK */
-        Padclamp.o(.text)
-        
-        /* Dolphin SDK Pad & SI partial */
-        dolphin_sdk_2.o(.text)
-
-        /* Dolphin SDK */
-        vi.o(.text)
-        ai.o(.text)
-        ar.o(.text)
-        arq.o(.text)
-
-        /* Combined Dolphin SDK CARD code */
-        CARD.o(.text)
-
-        /* Combined Dolphin SDK AX code */
-        AX.o(.text)
-
-        /* sysdolphin files */
-        dobj.o(.text)
-        tobj.o(.text)
-        state.o(.text)
-        tev.o(.text)
-        mobj.o(.text)
-        aobj.o(.text)
-        lobj.o(.text)
-        cobj.o(.text)
-        fobj.o(.text)
-        fobj_asm.o(.text)
-        pobj.o(.text)
-        jobj.o(.text)
-        displayfunc.o(.text)
-        displayfunc_asm.o(.text)
-        initialize.o(.text)
-        video.o(.text)
-        pad.o(.text)
-        spline.o(.text)
-        mtx.o(.text)
-        util.o(.text)
-        objalloc.o(.text)
-        objalloc_asm.o(.text)
-        robj.o(.text)
-        id.o(.text)
-        id_asm.o(.text)
-        wobj.o(.text)
-        wobj_asm.o(.text)
-        fog.o(.text)
-        perf.o(.text)
-        list.o(.text)
-        object.o(.text)
-        quatlib.o(.text)
-        memory.o(.text)
-        shadow.o(.text)
-        archive.o(.text)
-        random.o(.text)
-        bytecode.o(.text)
-        class.o(.text)
-        hash.o(.text)
-        texp.o(.text)
-        texpdag.o(.text)
-        leak.o(.text)
-        debug_.o(.text)
-        AXDriver.o(.text)
-        devcom.o(.text)
-        gobjproc.o(.text)
-        gobjplink.o(.text)
-        gobjgxlink.o(.text)
-        gobjobject_.o(.text)
-        gobjuserdata.o(.text)
-        gobj.o(.text)
-        code_80391580.o(.text)
-        psdisp.o(.text)
-        psdisptev_.o(.text)
-        psappsrt.o(.text)
-        sobj.o(.text)
-        sislib.o(.text)
-        code_803A949C.o(.text)
-    }
-    END_SEG(text)
-
-    BEGIN_SEG(ctors, _textSegmentEnd) : { *(.ctors) } END_SEG(ctors)
-    BEGIN_SEG(dtors, _ctorsSegmentEnd) : { *(.dtors) } END_SEG(dtors)
-    BEGIN_SEG(rodata, _dtorsSegmentEnd) : { *(.rodata) } END_SEG(rodata)
-    BEGIN_SEG(data, _rodataSegmentEnd) : { *(.data) } END_SEG(data)
-    BEGIN_SEG(bss, _dataSegmentEnd) : { *(.bss) } END_SEG(bss)
-    // TODO: Bss size shenanagans. Sbss isnt recognized
-    // by elf2dol, so we need this ugly hack for sdata to position it into the end of sbss.
-    _sdataSegmentStartHack = _bssSegmentEnd - 0x2D00; .sdata BIND(_sdataSegmentStartHack) : { *(.sdata) } END_SEG(sdata)
-    BEGIN_SEG(sbss, _sdataSegmentEnd) : { *(.sbss) } END_SEG(sbss)
-    // TODO: ALIGN or ALIGNALL doesnt seem to work for aligning the start of sdata2.
-    // Please find less of a lack for this.
-    _sdata2SegmentStartHack = _sbssSegmentEnd + 0x17; .sdata2 BIND(_sdata2SegmentStartHack) : { *(.sdata2) } END_SEG(sdata2)
-
-_SDA_BASE_ = _sdata2SegmentStartHack + 0x3CC0;
-_SDA2_BASE_ = _sdata2SegmentEnd + 0xDE0;
+/* #line 1	"default.lcf.h"	/* stack depth 0 */
+/* #line 1	"boot.h"	/* stack depth 1 */
+/* #line 34	"default.lcf.h"	/* stack depth 0 */
+MEMORY {
+text : origin = 0x80003100
+}
+SECTIONS {
+GROUP:{
+.init ALIGN(0x20):{}
+/* TODO: should be extab and extabindex */
+extab_ ALIGN(0x20):{}
+extabindex_ ALIGN(0x20):{}
+.text ALIGN(0x20):{}
+.ctors ALIGN(0x20):{}
+.dtors ALIGN(0x20):{}
+.rodata ALIGN(0x20):{}
+.data ALIGN(0x20):{}
+.bss ALIGN(0x20):{}
+.sdata ALIGN(0x20):{}
+.sbss ALIGN(0x20):{}
+.sdata2 ALIGN(0x20):{}
+.sbss2 ALIGN(0x20):{}
+.stack ALIGN(0x100):{}
+} > text
+_stack_addr = (_f_sbss2 + SIZEOF(.sbss2) + 65536 + 0x7) & ~0x7;
+_stack_end = _f_sbss2 + SIZEOF(.sbss2);
+_db_stack_addr = (_stack_addr + 0x2000);
+_db_stack_end = _stack_addr;
+__ArenaLo = (_db_stack_addr + 0x1f) & ~0x1f;
+__ArenaHi = 0x81700000 ;
 }
 
+// Need these temporarily.
 FORCEFILES 
-{ 
+{
+    __mem.o
     extab.o
+    extabindex.o
     grizumi.o
     grcastle.o
     grstadium.o
