@@ -76,7 +76,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/mem_funcs.o                    \
 	$(BUILD_DIR)/asm/printf.o                       \
 	$(BUILD_DIR)/asm/rand.o                         \
-	$(BUILD_DIR)/asm/string_.o                      \
+	$(BUILD_DIR)/asm/string.o                       \
 	$(BUILD_DIR)/asm/strtoul.o                      \
 	$(BUILD_DIR)/asm/console_io.o                   \
 	$(BUILD_DIR)/asm/wchar_io.o                     \
@@ -178,7 +178,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/texp.o				            \
 	$(BUILD_DIR)/asm/texpdag.o					    \
 	$(BUILD_DIR)/asm/leak.o						    \
-	$(BUILD_DIR)/asm/debug_.o					    \
+	$(BUILD_DIR)/asm/debug.o					    \
 	$(BUILD_DIR)/asm/AXDriver.o					    \
 	$(BUILD_DIR)/asm/devcom.o					    \
 	$(BUILD_DIR)/asm/gobjproc.o					    \
@@ -189,7 +189,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/gobj.o						    \
 	$(BUILD_DIR)/asm/code_80391580.o			    \
 	$(BUILD_DIR)/asm/psdisp.o					    \
-	$(BUILD_DIR)/asm/psdisptev_.o				    \
+	$(BUILD_DIR)/asm/psdisptev.o				    \
 	$(BUILD_DIR)/asm/psappsrt.o					    \
 	$(BUILD_DIR)/asm/sobj.o						    \
 	$(BUILD_DIR)/asm/sislib.o					    \
