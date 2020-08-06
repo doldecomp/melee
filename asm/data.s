@@ -1,5 +1,7 @@
 .section .data  # 0x803B9840 - 0x804316C0
 
+.include "macros.inc"
+
 .global lbl_803B9840
 lbl_803B9840:
 	.incbin "baserom.dol", 0x3B6840, 0x40
@@ -771,10 +773,108 @@ lbl_803C06CC:
     .balign 4
 .global lbl_803C06E8
 lbl_803C06E8:
-	.incbin "baserom.dol", 0x3BD6E8, 0xC4
+    .4byte 0x80071028
+    .4byte 0x8007121C
+    .4byte 0x8007162C
+    .4byte 0x8007169C
+    .4byte 0x80071708
+    .4byte 0x80071784
+    .4byte 0x800717D8
+    .4byte 0x80071B50
+    .4byte 0x80071CCC
+    .4byte 0x80071820
+    .4byte 0x800718A4
+    .4byte 0x80071908
+    .4byte 0x8007192C
+    .4byte 0x80071950
+    .4byte 0x80071974
+    .4byte 0x80071998
+    .4byte 0x80071A14
+    .4byte 0x80071A58
+    .4byte 0x80071A9C
+    .4byte 0x80071AE8
+    .4byte 0x80071B28
+    .4byte 0x80071D40
+    .4byte 0x80071D94
+    .4byte 0x80071DCC
+    .4byte 0x80071E04
+    .4byte 0x80071F34
+    .4byte 0x80071F78
+    .4byte 0x80071FA0
+    .4byte 0x80071FC8
+    .4byte 0x80072320
+    .4byte 0x800726F4
+    .4byte 0x800727C8
+    .4byte 0x80072894
+    .4byte 0x800728F8
+    .4byte 0x8007297C
+    .4byte 0x800729D4
+    .4byte 0x80072A5C
+    .4byte 0x80072ABC
+    .4byte 0x80072B14
+    .4byte 0x80072B3C
+    .4byte 0x80072B94
+    .4byte 0x80072BF4
+    .4byte 0x80072C6C
+    .4byte 0x80072CB0
+    .4byte 0x80072CD8
+    .4byte 0x80072E4C
+    .4byte 0x80073008
+    .4byte 0x800730B8
+    .4byte 0x80073118
+
 .global lbl_803C07AC
 lbl_803C07AC:
-	.incbin "baserom.dol", 0x3BD7AC, 0xC4
+    .4byte 0x800711DC
+    .4byte 0x800715EC
+    .4byte 0x8007168C
+    .4byte 0x800716F8
+    .4byte 0x80071774
+    .4byte 0x800717C8
+    .4byte 0x80071810
+    .4byte 0x80071CA4
+    .4byte 0x80071D30
+    .4byte 0x80071820
+    .4byte 0x800718A4
+    .4byte 0x80071908
+    .4byte 0x8007192C
+    .4byte 0x80071950
+    .4byte 0x80071974
+    .4byte 0x80071998
+    .4byte 0x80071A14
+    .4byte 0x80071A58
+    .4byte 0x80071A9C
+    .4byte 0x80071AE8
+    .4byte 0x80071B28
+    .4byte 0x80071D40
+    .4byte 0x80071D94
+    .4byte 0x80071DCC
+    .4byte 0x80071F0C
+    .4byte 0x80071F34
+    .4byte 0x80071F78
+    .4byte 0x80071FA0
+    .4byte 0x800722C8
+    .4byte 0x800726C0
+    .4byte 0x800726F4
+    .4byte 0x8007283C
+    .4byte 0x80072894
+    .4byte 0x8007296C
+    .4byte 0x800729C4
+    .4byte 0x80072A4C
+    .4byte 0x80072AAC
+    .4byte 0x80072B04
+    .4byte 0x80072B14
+    .4byte 0x80072B84
+    .4byte 0x80072BE4
+    .4byte 0x80072C5C
+    .4byte 0x80072C6C
+    .4byte 0x80072CB0
+    .4byte 0x80072E24
+    .4byte 0x80072FE0
+    .4byte 0x8007309C
+    .4byte 0x80073108
+    .4byte 0x8007320C
+
 .global lbl_803C0870
 lbl_803C0870:
 	.incbin "baserom.dol", 0x3BD870, 0x34
@@ -970,109 +1070,1416 @@ lbl_803C1154:
     .balign 4
 .global lbl_803C11D8
 lbl_803C11D8:
-	.incbin "baserom.dol", 0x3BE1D8, 0x84
+    .4byte 0x800E08CC
+    .4byte 0x800E5554
+    .4byte 0x800E2888
+    .4byte 0x8010D740
+    .4byte 0x800EE5C0
+    .4byte 0x80132A0C
+    .4byte 0x800EAD84
+    .4byte 0x80110094
+    .4byte 0x801147C0
+    .4byte 0x8011B51C
+    .4byte 0x8011EFE8
+    .4byte 0x80122F28
+    .4byte 0x80124474
+    .4byte 0x8012832C
+    .4byte 0x8012B960
+    .4byte 0x8013C318
+    .4byte 0x80144DFC
+    .4byte 0x801422E8
+    .4byte 0x80136258
+    .4byte 0x801392DC
+    .4byte 0x80148C64
+    .4byte 0x8014949C
+    .4byte 0x80149ACC
+    .4byte 0x80149EAC
+    .4byte 0x8014A250
+    .4byte 0x8014EBFC
+    .4byte 0x8014EEF8
+    .4byte 0x8014FC68
+    .4byte 0x80155E18
+    .4byte 0x8014F1F0
+    .4byte 0x8014F418
+    .4byte 0x8014F640
+    .4byte 0x8014F9CC
+
+    .balign 4
 .global lbl_803C125C
 lbl_803C125C:
-	.incbin "baserom.dol", 0x3BE25C, 0x84
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8013C340
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C12E0
 lbl_803C12E0:
-	.incbin "baserom.dol", 0x3BE2E0, 0x84
+    .4byte 0x803C7120
+    .4byte 0x803C7788
+    .4byte 0x803C72B8
+    .4byte 0x803CB838
+    .4byte 0x803C8368
+    .4byte 0x803CEDC0
+    .4byte 0x803C7E18
+    .4byte 0x803CC060
+    .4byte 0x803CC650
+    .4byte 0x803CCCB8
+    .4byte 0x803CD2D0
+    .4byte 0x803CD838
+    .4byte 0x803CDD78
+    .4byte 0x803CE2D0
+    .4byte 0x803CE6D0
+    .4byte 0x803CFEF0
+    .4byte 0x803D0B00
+    .4byte 0x803D0628
+    .4byte 0x803CF420
+    .4byte 0x803CFA58
+    .4byte 0x803D0FA0
+    .4byte 0x803D1498
+    .4byte 0x803D1848
+    .4byte 0x803D1EA8
+    .4byte 0x803D23E8
+    .4byte 0x803D29F8
+    .4byte 0x803D2E80
+    .4byte 0x803D3A30
+    .4byte 0x803D41F8
+	.4byte NULL
+	.4byte NULL
+    .4byte 0x803D35E8
+    .4byte 0x803D3998
+
+    .balign 4
 .global lbl_803C1364
 lbl_803C1364:
-	.incbin "baserom.dol", 0x3BE364, 0x84
+    .4byte 0x803C7260
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803CA04C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803D0868
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803D38C8
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C13E8
 lbl_803C13E8:
-	.incbin "baserom.dol", 0x3BE3E8, 0x84
+    .4byte 0x800E1450
+    .4byte 0x800E9EE8
+    .4byte 0x800E32B0
+    .4byte 0x8010E1C4
+    .4byte 0x800F5564
+    .4byte 0x80132EFC
+    .4byte 0x800EC354
+    .4byte 0x80111038
+    .4byte 0x80116C94
+    .4byte 0x8011C34C
+    .4byte 0x8011F99C
+    .4byte NULL
+    .4byte 0x80124E38
+    .4byte 0x8012A1D8
+    .4byte 0x8012F4B4
+    .4byte 0x8013D234
+    .4byte 0x801466C4
+    .4byte 0x80142B14
+    .4byte 0x8013741C
+    .4byte 0x8013B638
+    .4byte 0x800EC354
+    .4byte 0x800E1450
+    .4byte 0x800E9EE8
+    .4byte 0x80124E38
+    .4byte 0x8014C7A0
+    .4byte 0x800E32B0
+    .4byte 0x8013741C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80132EFC
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C146C
 lbl_803C146C:
-	.incbin "baserom.dol", 0x3BE46C, 0x84
+    .4byte 0x800E1AB0
+    .4byte 0x800E72C4
+    .4byte 0x800E4CF4
+    .4byte 0x8010FBFC
+    .4byte 0x800F23B8
+    .4byte 0x80135B04
+    .4byte 0x800EBB80
+    .4byte 0x8011312C
+    .4byte 0x80118250
+    .4byte 0x8011D7F0
+    .4byte 0x8012122C
+    .4byte NULL
+    .4byte 0x80125E60
+    .4byte 0x8012A738
+    .4byte 0x8012E33C
+    .4byte 0x8013CA98
+    .4byte 0x80145258
+    .4byte 0x80144024
+    .4byte 0x8013826C
+    .4byte 0x801398E8
+    .4byte 0x800EBB80
+    .4byte 0x800E1AB0
+    .4byte 0x800E72C4
+    .4byte 0x80125E60
+    .4byte 0x8014E158
+    .4byte 0x800E4CF4
+    .4byte 0x8013826C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80135B04
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C14F0
 lbl_803C14F0:
-	.incbin "baserom.dol", 0x3BE4F0, 0x84
+    .4byte 0x800E2194
+    .4byte 0x800E85EC
+    .4byte 0x800E40D8
+    .4byte NULL
+    .4byte 0x800F3E68
+    .4byte 0x801346A4
+    .4byte 0x800EB6DC
+    .4byte 0x80114224
+    .4byte 0x80119E90
+    .4byte 0x8011D1C4
+    .4byte 0x80122988
+    .4byte 0x80122988
+    .4byte 0x80127924
+    .4byte 0x8012B09C
+    .4byte 0x8012E78C
+    .4byte 0x8013CF2C
+    .4byte 0x80146264
+    .4byte 0x80144708
+    .4byte 0x80138A30
+    .4byte 0x8013AFA4
+    .4byte 0x800EB6DC
+    .4byte 0x800E2194
+    .4byte 0x800E85EC
+    .4byte 0x80127924
+    .4byte 0x8014CF78
+    .4byte 0x800E40D8
+    .4byte 0x80138A30
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x801346A4
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C1574
 lbl_803C1574:
-	.incbin "baserom.dol", 0x3BE574, 0x84
+    .4byte 0x800E14C8
+    .4byte 0x800E9F6C
+    .4byte 0x800E33E0
+    .4byte 0x8010E234
+    .4byte 0x800F55D0
+    .4byte 0x80132F94
+    .4byte 0x800EC404
+    .4byte 0x8011108C
+    .4byte 0x80116D04
+    .4byte 0x8011C3C4
+    .4byte 0x8011FB08
+    .4byte NULL
+    .4byte 0x80124EAC
+    .4byte 0x8012A2AC
+    .4byte 0x8012F588
+    .4byte 0x8013D2A0
+    .4byte 0x8014677C
+    .4byte 0x80142B88
+    .4byte 0x801374A0
+    .4byte 0x8013B6D8
+    .4byte 0x800EC404
+    .4byte 0x800E14C8
+    .4byte 0x800E9F6C
+    .4byte 0x80124EAC
+    .4byte 0x8014C828
+    .4byte 0x800E33E0
+    .4byte 0x801374A0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80132F94
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C15F8
 lbl_803C15F8:
-	.incbin "baserom.dol", 0x3BE5F8, 0x84
+    .4byte 0x800E1040
+    .4byte 0x800E61A8
+    .4byte 0x800E2C00
+    .4byte 0x8010E69C
+    .4byte 0x800F1680
+    .4byte 0x80134ED0
+    .4byte 0x800ECF78
+    .4byte 0x80112198
+    .4byte 0x80117034
+    .4byte 0x8011E45C
+    .4byte 0x8011F26C
+    .4byte 0x8011F26C
+    .4byte 0x8012489C
+    .4byte 0x801295F0
+    .4byte 0x8012CE64
+    .4byte 0x8013DF60
+    .4byte 0x801473F4
+    .4byte 0x801426EC
+    .4byte 0x801367B8
+    .4byte 0x8013A9A4
+    .4byte 0x800ECF78
+    .4byte 0x800E1040
+    .4byte 0x800E61A8
+    .4byte 0x8012489C
+    .4byte 0x8014E6C0
+    .4byte 0x800E2C00
+    .4byte 0x801367B8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80134ED0
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C167C
 lbl_803C167C:
-	.incbin "baserom.dol", 0x3BE67C, 0x84
+    .4byte 0x800E0DA8
+    .4byte 0x800E608C
+    .4byte 0x800E2B80
+    .4byte 0x8010E574
+    .4byte 0x800F1630
+    .4byte 0x80134E58
+    .4byte 0x800ECDAC
+    .4byte 0x801120E8
+    .4byte 0x80116F94
+    .4byte 0x8011E3D0
+    .4byte 0x8011F1F8
+    .4byte 0x8011F1F8
+    .4byte 0x80124830
+    .4byte 0x8012954C
+    .4byte 0x8012CDE8
+    .4byte 0x8013DEA8
+    .4byte 0x80147320
+    .4byte 0x8014267C
+    .4byte 0x80136744
+    .4byte 0x8013A928
+    .4byte 0x800ECDAC
+    .4byte 0x800E0DA8
+    .4byte 0x800E608C
+    .4byte 0x80124830
+    .4byte 0x8014E644
+    .4byte 0x800E2B80
+    .4byte 0x80136744
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80134E58
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C1700
 lbl_803C1700:
-	.incbin "baserom.dol", 0x3BE700, 0x84
+    .4byte 0x800E207C
+    .4byte 0x800E8560
+    .4byte 0x800E4040
+    .4byte 0x8010DC80
+    .4byte 0x800F3D50
+    .4byte 0x8013460C
+    .4byte 0x800EB65C
+    .4byte 0x80114160
+    .4byte 0x80119E14
+    .4byte 0x8011D11C
+    .4byte 0x80122904
+    .4byte 0x80122904
+    .4byte 0x801278BC
+    .4byte 0x8012AF5C
+    .4byte 0x8012E6F8
+    .4byte 0x8013CE8C
+    .4byte 0x801461F0
+    .4byte 0x801445F0
+    .4byte 0x801389CC
+    .4byte 0x8013AEE0
+    .4byte 0x800EB65C
+    .4byte 0x800E207C
+    .4byte 0x800E8560
+    .4byte 0x801278BC
+    .4byte 0x8014CEF0
+    .4byte 0x800E4040
+    .4byte 0x801389CC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8013460C
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C1784
 lbl_803C1784:
-	.incbin "baserom.dol", 0x3BE784, 0x84
+    .4byte 0x800E1A54
+    .4byte 0x800E7238
+    .4byte 0x800E4A78
+    .4byte 0x8010FB1C
+    .4byte 0x800F2300
+    .4byte 0x80135A2C
+    .4byte 0x800EBB1C
+    .4byte 0x801130D0
+    .4byte 0x80118120
+    .4byte 0x8011D72C
+    .4byte 0x801211B4
+    .4byte NULL
+    .4byte 0x80125DE8
+    .4byte 0x8012A674
+    .4byte 0x8012E2C4
+    .4byte 0x8013C9C8
+    .4byte 0x801451DC
+    .4byte 0x80143FC8
+    .4byte 0x80138208
+    .4byte 0x80139834
+    .4byte 0x800EBB1C
+    .4byte 0x800E1A54
+    .4byte 0x800E7238
+    .4byte 0x80125DE8
+    .4byte 0x8014E0AC
+    .4byte 0x800E4A78
+    .4byte 0x80138208
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80135A2C
+    .4byte NULL
+
+    .balign 4
 .global lbl_803C1808
 lbl_803C1808:
-	.incbin "baserom.dol", 0x3BE808, 0x84
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8011493C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014A828
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803C188C
 lbl_803C188C:
-	.incbin "baserom.dol", 0x3BE88C, 0x84
+    .4byte 0x800E0A20
+    .4byte 0x800E55A8
+    .4byte 0x800E28E8
+    .4byte 0x8010D7A8
+    .4byte 0x800EE914
+    .4byte 0x80132B3C
+    .4byte 0x800EAFA4
+    .4byte 0x80110204
+    .4byte 0x80114968
+    .4byte 0x8011B740
+    .4byte 0x8011ED38
+    .4byte 0x8011ED38
+    .4byte 0x801244B8
+    .4byte 0x80128464
+    .4byte 0x8012BACC
+    .4byte 0x8013C6EC
+    .4byte 0x80144EE0
+    .4byte 0x80142388
+    .4byte 0x801362B0
+    .4byte 0x801393CC
+    .4byte 0x80148DC0
+    .4byte 0x80149560
+    .4byte 0x80149B00
+    .4byte 0x80149FE4
+    .4byte 0x8014A5B8
+    .4byte 0x8014EC58
+    .4byte 0x8014EF60
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F218
+    .4byte 0x8014F460
+    .4byte 0x8014F720
+    .4byte NULL
+
 .global lbl_803C1910
 lbl_803C1910:
-	.incbin "baserom.dol", 0x3BE910, 0x84
+    .4byte 0x800E0B00
+    .4byte 0x800E5688
+    .4byte 0x800E29C8
+    .4byte 0x8010D888
+    .4byte 0x800EE9DC
+    .4byte 0x80132C1C
+    .4byte 0x800EB018
+    .4byte 0x801102E4
+    .4byte 0x80114A48
+    .4byte 0x8011B820
+    .4byte 0x8011EE18
+    .4byte 0x8011EE18
+    .4byte 0x80124598
+    .4byte 0x80128544
+    .4byte 0x8012BBAC
+    .4byte 0x8013C798
+    .4byte 0x80144F50
+    .4byte 0x80142468
+    .4byte 0x80136390
+    .4byte 0x801394AC
+    .4byte 0x80148E34
+    .4byte 0x80149640
+    .4byte 0x80149BE0
+    .4byte 0x8014A0C4
+    .4byte 0x8014A698
+    .4byte 0x8014ED38
+    .4byte 0x8014F040
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F2F8
+    .4byte 0x8014F540
+    .4byte 0x8014F800
+    .4byte NULL
+
 .global lbl_803C1994
 lbl_803C1994:
-	.incbin "baserom.dol", 0x3BE994, 0x84
+    .4byte 0x800E0B48
+    .4byte 0x800E56D0
+    .4byte 0x800E2A10
+    .4byte 0x8010D8D0
+    .4byte 0x800EEA24
+    .4byte 0x80132C64
+    .4byte 0x800EB060
+    .4byte 0x8011032C
+    .4byte 0x80114A90
+    .4byte 0x8011B868
+    .4byte 0x8011EE60
+    .4byte 0x8011EE60
+    .4byte 0x801245E0
+    .4byte 0x8012858C
+    .4byte 0x8012BBF4
+    .4byte 0x8013C7E8
+    .4byte 0x80144F54
+    .4byte 0x801424B0
+    .4byte 0x801363D8
+    .4byte 0x801394F4
+    .4byte 0x80148E7C
+    .4byte 0x80149688
+    .4byte 0x80149C28
+    .4byte 0x8014A10C
+    .4byte 0x8014A6E0
+    .4byte 0x8014ED80
+    .4byte 0x8014F088
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F340
+    .4byte 0x8014F588
+    .4byte 0x8014F848
+    .4byte NULL
+
 .global lbl_803C1A18
 lbl_803C1A18:
-	.incbin "baserom.dol", 0x3BEA18, 0x84
+    .4byte 0x800E0B90
+    .4byte 0x800E5718
+    .4byte 0x800E2A58
+    .4byte 0x8010D918
+    .4byte 0x800EEA6C
+    .4byte 0x80132CAC
+    .4byte 0x800EB0A8
+    .4byte 0x80110374
+    .4byte 0x80114AD8
+    .4byte 0x8011B8B0
+    .4byte 0x8011EEA8
+    .4byte 0x8011EEA8
+    .4byte 0x80124628
+    .4byte 0x801285D4
+    .4byte 0x8012BC3C
+    .4byte 0x8013C838
+    .4byte 0x80144F4C
+    .4byte 0x801424F8
+    .4byte 0x80136420
+    .4byte 0x8013953C
+    .4byte 0x80148EC4
+    .4byte 0x801496D0
+    .4byte 0x80149C70
+    .4byte 0x8014A154
+    .4byte 0x8014A728
+    .4byte 0x8014EDC8
+    .4byte 0x8014F0D0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F388
+    .4byte 0x8014F5D0
+    .4byte 0x8014F890
+    .4byte NULL
+
 .global lbl_803C1A9C
 lbl_803C1A9C:
-	.incbin "baserom.dol", 0x3BEA9C, 0x84
+    .4byte 0x800E0A20
+    .4byte 0x800E55A8
+    .4byte 0x800E28E8
+    .4byte 0x8010D7A8
+    .4byte 0x800EE914
+    .4byte 0x80132B3C
+    .4byte 0x800EB11C
+    .4byte 0x80110204
+    .4byte 0x80114968
+    .4byte 0x8011B740
+    .4byte 0x8011ED38
+    .4byte 0x8011ED38
+    .4byte 0x801244B8
+    .4byte 0x80128464
+    .4byte 0x8012BACC
+    .4byte 0x8013C6EC
+    .4byte 0x80144EE0
+    .4byte 0x80142388
+    .4byte 0x801362B0
+    .4byte 0x801393CC
+    .4byte 0x80148F38
+    .4byte 0x80149560
+    .4byte 0x80149B00
+    .4byte 0x80149FE4
+    .4byte 0x8014A5B8
+    .4byte 0x8014EC58
+    .4byte 0x8014EF60
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F218
+    .4byte 0x8014F460
+    .4byte 0x8014F720
+    .4byte NULL
+
 .global lbl_803C1B20
 lbl_803C1B20:
-	.incbin "baserom.dol", 0x3BEB20, 0x84
+    .4byte 0x800E0B90
+    .4byte 0x800E5718
+    .4byte 0x800E2A58
+    .4byte 0x8010D918
+    .4byte 0x800EEA6C
+    .4byte 0x80132CAC
+    .4byte 0x800EB1FC
+    .4byte 0x80110374
+    .4byte 0x80114AD8
+    .4byte 0x8011B8B0
+    .4byte 0x8011EEA8
+    .4byte 0x8011EEA8
+    .4byte 0x80124628
+    .4byte 0x801285D4
+    .4byte 0x8012BC3C
+    .4byte 0x8013C838
+    .4byte 0x80144F4C
+    .4byte 0x801424F8
+    .4byte 0x80136420
+    .4byte 0x8013953C
+    .4byte 0x80149018
+    .4byte 0x801496D0
+    .4byte 0x80149C70
+    .4byte 0x8014A154
+    .4byte 0x8014A728
+    .4byte 0x8014EDC8
+    .4byte 0x8014F0D0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F388
+    .4byte 0x8014F5D0
+    .4byte 0x8014F890
+    .4byte NULL
+
 .global lbl_803C1BA4
 lbl_803C1BA4:
-	.incbin "baserom.dol", 0x3BEBA4, 0x84
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8012467C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803C1C28
 lbl_803C1C28:
-	.incbin "baserom.dol", 0x3BEC28, 0x84
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x801246C0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803C1CAC
 lbl_803C1CAC:
-	.incbin "baserom.dol", 0x3BECAC, 0x84
+    .4byte 0x800E0C24
+    .4byte 0x800E5898
+    .4byte NULL
+    .4byte 0x8010DAB4
+    .4byte 0x800EEB38
+    .4byte 0x80132D38
+    .4byte 0x800EB2AC
+    .4byte 0x80110408
+    .4byte 0x80114B6C
+    .4byte 0x8011B998
+    .4byte 0x8011F0E4
+    .4byte 0x8011F0E4
+    .4byte 0x801247A8
+    .4byte NULL
+    .4byte 0x8012BCC8
+    .4byte 0x8013C8C4
+    .4byte 0x80145018
+    .4byte 0x80142584
+    .4byte 0x80136520
+    .4byte 0x80139624
+    .4byte 0x8014908C
+    .4byte 0x80149744
+    .4byte 0x80149D5C
+    .4byte 0x8014A1C8
+    .4byte NULL
+    .4byte 0x8014EE60
+    .4byte 0x8014F168
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F904
+    .4byte 0x8014FB9C
+
 .global lbl_803C1D30
 lbl_803C1D30:
-	.incbin "baserom.dol", 0x3BED30, 0x84
+    .4byte 0x800E0C68
+    .4byte 0x800E5904
+    .4byte NULL
+    .4byte 0x8010DAF8
+    .4byte 0x800EEB7C
+    .4byte 0x80132D7C
+    .4byte 0x800EB2F0
+    .4byte 0x8011044C
+    .4byte 0x80114BB0
+    .4byte 0x8011B9DC
+    .4byte 0x8011F128
+    .4byte 0x8011F128
+    .4byte 0x801247EC
+    .4byte NULL
+    .4byte 0x8012BD34
+    .4byte 0x8013C908
+    .4byte 0x8014505C
+    .4byte 0x801425C8
+    .4byte 0x80136564
+    .4byte 0x80139668
+    .4byte 0x801490D0
+    .4byte 0x80149788
+    .4byte 0x80149DC8
+    .4byte 0x8014A20C
+    .4byte NULL
+    .4byte 0x8014EEAC
+    .4byte 0x8014F1AC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F948
+    .4byte 0x8014FBA0
+
 .global lbl_803C1DB4
 lbl_803C1DB4:
-	.incbin "baserom.dol", 0x3BEDB4, 0x84
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800F1B6C
+    .4byte 0x80132A64
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F698
+    .4byte NULL
+
 .global lbl_803C1E38
 lbl_803C1E38:
-	.incbin "baserom.dol", 0x3BEE38, 0x84
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8010D96C
+    .4byte 0x800EE818
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x801101CC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80128628
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80144F58
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014A77C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803C1EBC
 lbl_803C1EBC:
-	.incbin "baserom.dol", 0x3BEEBC, 0x84
+    .4byte 0x800E0BE4
+    .4byte 0x800E5858
+    .4byte 0x800E2B40
+    .4byte 0x8010DA74
+    .4byte 0x800EEAC0
+    .4byte 0x80132D00
+    .4byte 0x800EB250
+    .4byte 0x801103C8
+    .4byte 0x80114B2C
+    .4byte 0x8011B904
+    .4byte 0x8011F0A4
+    .4byte 0x80122FCC
+    .4byte 0x80124704
+    .4byte 0x80128684
+    .4byte 0x8012BC90
+    .4byte 0x8013C88C
+    .4byte 0x80144FB4
+    .4byte 0x8014254C
+    .4byte 0x801364E8
+    .4byte 0x80139590
+    .4byte 0x8014906C
+    .4byte 0x80149724
+    .4byte 0x80149D3C
+    .4byte 0x8014A1A8
+    .4byte 0x8014A7B4
+    .4byte 0x8014EE40
+    .4byte 0x8014F148
+    .4byte 0x8014FDD0
+    .4byte 0x80155F8C
+    .4byte 0x8014F3FC
+    .4byte 0x8014F624
+    .4byte 0x8014F8E4
+    .4byte 0x8014FB78
+
 .global lbl_803C1F40
 lbl_803C1F40:
-	.incbin "baserom.dol", 0x3BEF40, 0x108
+    .4byte 0x803C57D0
+    .4byte 0x803C57DC
+    .4byte 0x803C7BE8
+    .4byte 0x803C7BF4
+    .4byte 0x803C7598
+    .4byte 0x803C75A4
+    .4byte 0x803CBDF8
+    .4byte 0x803CBE04
+    .4byte 0x803CA308
+    .4byte 0x803CA314
+    .4byte 0x803CF0A0
+    .4byte 0x803CF0AC
+    .4byte 0x803C80B8
+    .4byte 0x803C80C4
+    .4byte 0x803CC360
+    .4byte 0x803CC36C
+    .4byte 0x803CCAD0
+    .4byte 0x803CCADC
+    .4byte 0x803CD078
+    .4byte 0x803CD084
+    .4byte 0x803CD610
+    .4byte 0x803CD61C
+    .4byte 0x803CDB78
+    .4byte 0x803CDB84
+    .4byte 0x803CE0B8
+    .4byte 0x803CE0C4
+    .4byte 0x803CE510
+    .4byte 0x803CE51C
+    .4byte 0x803CEA98
+    .4byte 0x803CEAA4
+    .4byte 0x803D02F0
+    .4byte 0x803D02FC
+    .4byte 0x803D0D80
+
+    # TODO: What is this table?
+    .4byte 0x803D0D8C
+    .4byte 0x803D08A8
+    .4byte 0x803D08B4
+    .4byte 0x803CF820
+    .4byte 0x803CF82C
+    .4byte 0x803CFC98
+    .4byte 0x803CFCA4
+    .4byte 0x803D1240
+    .4byte 0x803D124C
+    .4byte 0x803D15D8
+    .4byte 0x803D15E4
+    .4byte 0x803D1CA8
+    .4byte 0x803D1CB4
+    .4byte 0x803D21E8
+    .4byte 0x803D21F4
+    .4byte 0x803D28E8
+    .4byte 0x803D28F4
+    .4byte 0x803D2CD8
+    .4byte 0x803D2CE4
+    .4byte 0x803D3280
+    .4byte 0x803D328C
+    .4byte 0x803D4070
+    .4byte 0x803D407C
+    .4byte 0x803D4818
+    .4byte 0x803D4824
+    .4byte 0x803D34E8
+    .4byte 0x803D34F4
+    .4byte 0x803D3568
+    .4byte 0x803D3574
+    .4byte 0x803D38E8
+    .4byte 0x803D38F4
+    .4byte 0x803D39B8
+    .4byte 0x803D39C4
+
 .global lbl_803C2048
 lbl_803C2048:
-	.incbin "baserom.dol", 0x3BF048, 0x84
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800EEE9C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803C20CC
 lbl_803C20CC:
-	.incbin "baserom.dol", 0x3BF0CC, 0x84
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800EEF04
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8013C4F0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803C2150
 lbl_803C2150:
-	.incbin "baserom.dol", 0x3BF150, 0x108
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800EF87C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8013C614
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+    # TODO: What is this table?
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800EF028
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8013C664
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803C2258
 lbl_803C2258:
-	.incbin "baserom.dol", 0x3BF258, 0x108
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800EF9BC
+    .4byte 0x800EF9FC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+    # TODO: What is this table?
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803C2360
 lbl_803C2360:
-	.incbin "baserom.dol", 0x3BF360, 0x108
+    .4byte 0x803C5A28
+    .4byte 0x803C7D9C
+    .4byte 0x803C773C
+    .4byte 0x803CC020
+    .4byte 0x803CA5B4
+    .4byte 0x803CF26C
+    .4byte 0x803C82B0
+    .4byte 0x803CC558
+    .4byte 0x803CCC84
+    .4byte 0x803CD290
+    .4byte 0x803CD7C4
+    .4byte 0x803CDD2C
+    .4byte 0x803CE2A0
+    .4byte 0x803CE678
+    .4byte 0x803CECFC
+    .4byte 0x803D0508
+    .4byte 0x803D0F5C
+    .4byte 0x803D0AB4
+    .4byte 0x803CFA18
+    .4byte 0x803CFEB0
+    .4byte 0x803D1458
+    .4byte 0x803D180C
+    .4byte 0x803D1E74
+    .4byte 0x803D23B4
+    .4byte 0x803D29C8
+    .4byte 0x803D2E40
+    .4byte 0x803D34A8
+    .4byte 0x803D40C4
+    .4byte 0x803D4868
+    .4byte 0x803D3558
+    .4byte 0x803D35D8
+    .4byte 0x803D3988
+    .4byte 0x803D3A24
+
+    # TODO: What is this table?
+    .4byte 0x803C595C
+    .4byte 0x803C7D10
+    .4byte 0x803C76A0
+    .4byte 0x803CBF88
+    .4byte 0x803CA4E0
+    .4byte 0x803CF1E0
+    .4byte 0x803C8224
+    .4byte 0x803CC4CC
+    .4byte 0x803CCBF8
+    .4byte 0x803CD204
+    .4byte 0x803CD738
+    .4byte 0x803CDCA0
+    .4byte 0x803CE204
+    .4byte 0x803CE5EC
+    .4byte 0x803CEC70
+    .4byte 0x803D047C
+    .4byte 0x803D0EC4
+    .4byte 0x803D09E8
+    .4byte 0x803CF98C
+    .4byte 0x803CFE24
+    .4byte 0x803D13CC
+    .4byte 0x803D1770
+    .4byte 0x803D1DE8
+    .4byte 0x803D2328
+    .4byte 0x803D292C
+    .4byte 0x803D2DB4
+    .4byte 0x803D3410
+    .4byte 0x803D40B8
+    .4byte 0x803D485C
+    .4byte 0x803D3520
+    .4byte 0x803D35A0
+    .4byte 0x803D3948
+    .4byte 0x803D3A18
+
 .global lbl_803C2468
 lbl_803C2468:
-	.incbin "baserom.dol", 0x3BF468, 0x84
+    .4byte 0x803C59D8
+    .4byte 0x803C7D8C
+    .4byte 0x803C772C
+    .4byte 0x803CC010
+    .4byte 0x803CA55C
+    .4byte 0x803CF25C
+    .4byte 0x803C82A0
+    .4byte 0x803CC548
+    .4byte 0x803CCC74
+    .4byte 0x803CD280
+    .4byte 0x803CD7B4
+    .4byte 0x803CDD1C
+    .4byte 0x803CE290
+    .4byte 0x803CE668
+    .4byte 0x803CECEC
+    .4byte 0x803D04F8
+    .4byte 0x803D0F4C
+    .4byte 0x803D0A64
+    .4byte 0x803CFA08
+    .4byte 0x803CFEA0
+    .4byte 0x803D1448
+    .4byte 0x803D17FC
+    .4byte 0x803D1E64
+    .4byte 0x803D23A4
+    .4byte 0x803D29B8
+    .4byte 0x803D2E30
+    .4byte 0x803D3498
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803D3954
+    .4byte NULL
+
 .global lbl_803C24EC
 lbl_803C24EC:
-	.incbin "baserom.dol", 0x3BF4EC, 0x84
+    .4byte 0x800E0CE0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800EEBF8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80142640
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F9A4
+    .4byte NULL
+
 .global lbl_803C2570
 lbl_803C2570:
-	.incbin "baserom.dol", 0x3BF570, 0x84
+    .4byte 0x800E0CAC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800EEBC0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014260C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8014F98C
+    .4byte NULL
+
 .global lbl_803C25F4
 lbl_803C25F4:
 	.incbin "baserom.dol", 0x3BF5F4, 0x108
@@ -1100,9 +2507,5125 @@ lbl_803C2744:
     .asciz "HSD_ArchiveParse error! %x\n"
     .balign 4
     .incbin "baserom.dol", 0x3BF7FC, 0x4
+
+    .balign 4
 .global lbl_803C2800
 lbl_803C2800:
-	.incbin "baserom.dol", 0x3BF800, 0x2AA0
+    # Entry 0
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D3E00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D3E3C
+
+    # Entry 1
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D3910
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D394C
+
+    # Entry 2
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D3B88
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D3BC4
+
+    # Entry 3
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D4078
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D40B4
+
+    # Entry 4
+    # ID
+    .4byte 29
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D42E4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D4560
+
+    # Entry 5
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D42E4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D4560
+
+    # Entry 6
+    # ID
+    .4byte 29
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D4A08
+    .4byte NULL
+    .4byte 0x800D4CE8
+    .4byte NULL
+    .4byte 0x800D4E30
+
+    # Entry 7
+    # ID
+    .4byte 0
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D4A08
+    .4byte NULL
+    .4byte 0x800D4CE8
+    .4byte NULL
+    .4byte 0x800D4E30
+
+    # Entry 8
+    # ID
+    .4byte 1
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D4A08
+    .4byte NULL
+    .4byte 0x800D4CE8
+    .4byte NULL
+    .4byte 0x800D4E30
+
+    # Entry 9
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D4A08
+    .4byte NULL
+    .4byte 0x800D4CE8
+    .4byte NULL
+    .4byte 0x800D4E30
+
+    # Entry 10
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00D00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D4A08
+    .4byte NULL
+    .4byte 0x800D4CE8
+    .4byte NULL
+    .4byte 0x800D4E30
+
+    # Entry 11
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00D20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BFE6C
+    .4byte 0x800BFE70
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+    # Entry 12
+    # ID
+    .4byte 2
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D52F8
+    .4byte 0x800D5358
+    .4byte 0x800D535C
+    .4byte 0x800D5470
+    .4byte 0x800D5A6C
+
+    # Entry 13
+    # ID
+    .4byte 2
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D56EC
+    .4byte 0x800D575C
+    .4byte 0x800D58F4
+    .4byte 0x800D5A08
+    .4byte 0x800761C8
+
+    # Entry 14
+    # ID
+    .4byte 2
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008A494
+    .4byte 0x8008A4D4
+    .4byte 0x8008A644
+    .4byte 0x8008A678
+    .4byte 0x800761C8
+
+    # Entry 15
+    # ID
+    .4byte 7
+
+    # Flags
+    .4byte 0x00004066
+    .4byte 0x01C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C95F4
+    .4byte 0x800C9614
+    .4byte 0x800C9768
+    .4byte 0x800C9788
+    .4byte 0x800761C8
+
+    # Entry 16
+    # ID
+    .4byte 8
+
+    # Flags
+    .4byte 0x00004066
+    .4byte 0x01C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C95F4
+    .4byte 0x800C9614
+    .4byte 0x800C9768
+    .4byte 0x800C9788
+    .4byte 0x800761C8
+
+    # Entry 17
+    # ID
+    .4byte 9
+
+    # Flags
+    .4byte 0x00004066
+    .4byte 0x01C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C95F4
+    .4byte 0x800C9614
+    .4byte 0x800C9768
+    .4byte 0x800C9788
+    .4byte 0x800761C8
+
+    # Entry 18
+    # ID
+    .4byte 10
+
+    # Flags
+    .4byte 0x00002064
+    .4byte 0x01C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C9970
+    .4byte 0x800C99F8
+    .4byte 0x800C9BEC
+    .4byte 0x800C9C0C
+    .4byte 0x800761C8
+
+    # Entry 19
+    # ID
+    .4byte 11
+
+    # Flags
+    .4byte 0x00002064
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C9E10
+    .4byte 0x800C9ED8
+    .4byte 0x800C9EFC
+    .4byte 0x800CA024
+    .4byte 0x800761C8
+
+    # Entry 20
+    # ID
+    .4byte 12
+
+    # Flags
+    .4byte 0x00000067
+    .4byte 0x01C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CA1F4
+    .4byte 0x800CA230
+    .4byte 0x800CA53C
+    .4byte 0x800CA5D0
+    .4byte 0x800761C8
+
+    # Entry 21
+    # ID
+    .4byte 13
+
+    # Flags
+    .4byte 0x00000068
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CA77C
+    .4byte 0x800CA830
+    .4byte 0x800CA95C
+    .4byte 0x800CAA2C
+    .4byte 0x800761C8
+
+    # Entry 22
+    # ID
+    .4byte 13
+
+    # Flags
+    .4byte 0x00000068
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CAA4C
+    .4byte 0x800CAA6C
+    .4byte 0x800CAB84
+    .4byte 0x800CABA4
+    .4byte 0x800761C8
+
+    # Entry 23
+    # ID
+    .4byte 14
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CAC9C
+    .4byte 0x800CADB0
+    .4byte 0x800CAE18
+    .4byte 0x800CAE60
+    .4byte 0x800761C8
+
+    # Entry 24
+    # ID
+    .4byte 15
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CB528
+    .4byte 0x800CB5FC
+    .4byte 0x800CB6AC
+    .4byte 0x800CB6CC
+    .4byte 0x800761C8
+
+    # Entry 25
+    # ID
+    .4byte 16
+
+    # Flags
+    .4byte 0x00008069
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CB2F8
+    .4byte 0x800CB334
+    .4byte 0x800CB474
+    .4byte 0x800CB4B0
+    .4byte 0x800761C8
+
+    # Entry 26
+    # ID
+    .4byte 17
+
+    # Flags
+    .4byte 0x00008069
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CB2F8
+    .4byte 0x800CB334
+    .4byte 0x800CB474
+    .4byte 0x800CB4B0
+    .4byte 0x800761C8
+
+    # Entry 27
+    # ID
+    .4byte 18
+
+    # Flags
+    .4byte 0x0001006A
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CC388
+    .4byte 0x800CC4F8
+    .4byte 0x800CC634
+    .4byte 0x800CC700
+    .4byte 0x800761C8
+
+    # Entry 28
+    # ID
+    .4byte 19
+
+    # Flags
+    .4byte 0x0001006A
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CC388
+    .4byte 0x800CC4F8
+    .4byte 0x800CC634
+    .4byte 0x800CC700
+    .4byte 0x800761C8
+
+    # Entry 29
+    # ID
+    .4byte 20
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CCA00
+    .4byte 0x800CCD34
+    .4byte 0x800CCD58
+    .4byte 0x800CCD78
+    .4byte 0x800761C8
+
+    # Entry 30
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CCA00
+    .4byte 0x800CCD34
+    .4byte 0x800CCD58
+    .4byte 0x800CCD78
+    .4byte 0x800761C8
+
+    # Entry 31
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CCA00
+    .4byte 0x800CCD34
+    .4byte 0x800CCD58
+    .4byte 0x800CCD78
+    .4byte 0x800761C8
+
+    # Entry 32
+    # ID
+    .4byte 23
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CCDFC
+    .4byte 0x800CCE50
+    .4byte 0x800CCE74
+    .4byte 0x800CCE94
+    .4byte 0x800761C8
+
+    # Entry 33
+    # ID
+    .4byte 24
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CCA00
+    .4byte 0x800CCE50
+    .4byte 0x800CCD58
+    .4byte 0x800CCD78
+    .4byte 0x800761C8
+
+    # Entry 34
+    # ID
+    .4byte 25
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CCA00
+    .4byte 0x800CCE50
+    .4byte 0x800CCD58
+    .4byte 0x800CCD78
+    .4byte 0x800761C8
+
+    # Entry 35
+    # ID
+    .4byte 26
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80096AA0
+    .4byte 0x80096AF4
+    .4byte 0x80096B44
+    .4byte 0x80096C98
+    .4byte 0x800761C8
+
+    # Entry 36
+    # ID
+    .4byte 27
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80096AA0
+    .4byte 0x80096AF4
+    .4byte 0x80096B44
+    .4byte 0x80096C98
+    .4byte 0x800761C8
+
+    # Entry 37
+    # ID
+    .4byte 28
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80096AA0
+    .4byte 0x80096AF4
+    .4byte 0x80096B44
+    .4byte 0x80096C98
+    .4byte 0x800761C8
+
+    # Entry 38
+    # ID
+    .4byte 29
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80090824
+    .4byte 0x80090828
+    .4byte 0x8009093C
+    .4byte 0x8009095C
+    .4byte 0x800761C8
+
+    # Entry 39
+    # ID
+    .4byte 30
+
+    # Flags
+    .4byte 0x00000065
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D607C
+    .4byte 0x800D60B8
+    .4byte 0x800D623C
+    .4byte 0x800D625C
+    .4byte 0x800761C8
+
+    # Entry 40
+    # ID
+    .4byte 31
+
+    # Flags
+    .4byte 0x00000065
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D6448
+    .4byte 0x800D6474
+    .4byte 0x800D6584
+    .4byte 0x800D65B8
+    .4byte 0x800761C8
+
+    # Entry 41
+    # ID
+    .4byte 34
+
+    # Flags
+    .4byte 0x00000065
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D6658
+    .4byte 0x800D6694
+    .4byte 0x800D6784
+    .4byte 0x800D67A4
+    .4byte 0x800761C8
+
+    # Entry 42
+    # ID
+    .4byte 35
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D5D3C
+    .4byte 0x800D5D78
+    .4byte 0x800D5F18
+    .4byte 0x800D5F38
+    .4byte 0x800761C8
+
+    # Entry 43
+    # ID
+    .4byte 36
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D5D3C
+    .4byte 0x800D5D78
+    .4byte 0x800D5F18
+    .4byte 0x800D5F38
+    .4byte 0x800761C8
+
+    # Entry 44
+    # ID
+    .4byte 46
+
+    # Flags
+    .4byte 0x002C0201
+    .4byte 0x02800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008AC9C
+    .4byte 0x8008ACD8
+    .4byte 0x8008ADF0
+    .4byte 0x8008AE10
+    .4byte 0x800761C8
+
+    # Entry 45
+    # ID
+    .4byte 47
+
+    # Flags
+    .4byte 0x002C0202
+    .4byte 0x03800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008B040
+    .4byte 0x8008B07C
+    .4byte 0x8008ADF0
+    .4byte 0x8008AE10
+    .4byte 0x800761C8
+
+    # Entry 46
+    # ID
+    .4byte 48
+
+    # Flags
+    .4byte 0x002C0203
+    .4byte 0x04800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008B354
+    .4byte 0x8008B390
+    .4byte 0x8008ADF0
+    .4byte 0x8008AE10
+    .4byte 0x800761C8
+
+    # Entry 47
+    # ID
+    .4byte 49
+
+    # Flags
+    .4byte 0x002C0204
+    .4byte 0x05800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D6C0C
+    .4byte NULL
+    .4byte 0x800D6E98
+    .4byte 0x800D6EF8
+    .4byte 0x800761C8
+
+    # Entry 48
+    # ID
+    .4byte 50
+
+    # Flags
+    .4byte 0x002C0204
+    .4byte 0x05800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D6D48
+    .4byte 0x800D6E70
+    .4byte 0x800D6EB8
+    .4byte 0x800D6F18
+    .4byte 0x800761C8
+
+    # Entry 49
+    # ID
+    .4byte 51
+
+    # Flags
+    .4byte 0x002C0204
+    .4byte 0x05800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D6E34
+    .4byte NULL
+    .4byte 0x800D6ED8
+    .4byte 0x800D6F38
+    .4byte 0x800761C8
+
+    # Entry 50
+    # ID
+    .4byte 52
+
+    # Flags
+    .4byte 0x00240205
+    .4byte 0x06800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008B548
+    .4byte 0x8008B5AC
+    .4byte 0x8008B600
+    .4byte 0x8008B638
+    .4byte 0x800761C8
+
+    # Entry 51
+    # ID
+    .4byte 53
+
+    # Flags
+    .4byte 0x00240206
+    .4byte 0x07800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008B8D4
+    .4byte 0x8008B910
+    .4byte 0x8008B940
+    .4byte 0x8008B960
+    .4byte 0x800761C8
+
+    # Entry 52
+    # ID
+    .4byte 54
+
+    # Flags
+    .4byte 0x00240206
+    .4byte 0x07800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008B8D4
+    .4byte 0x8008B910
+    .4byte 0x8008B940
+    .4byte 0x8008B960
+    .4byte 0x800761C8
+
+    # Entry 53
+    # ID
+    .4byte 55
+
+    # Flags
+    .4byte 0x00240206
+    .4byte 0x07800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008B8D4
+    .4byte 0x8008B910
+    .4byte 0x8008B940
+    .4byte 0x8008B960
+    .4byte 0x800761C8
+
+    # Entry 54
+    # ID
+    .4byte 56
+
+    # Flags
+    .4byte 0x00240206
+    .4byte 0x07800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008B8D4
+    .4byte 0x8008B910
+    .4byte 0x8008B940
+    .4byte 0x8008B960
+    .4byte 0x800761C8
+
+    # Entry 55
+    # ID
+    .4byte 57
+
+    # Flags
+    .4byte 0x00240206
+    .4byte 0x07800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008B8D4
+    .4byte 0x8008B910
+    .4byte 0x8008B940
+    .4byte 0x8008B960
+    .4byte 0x800761C8
+
+    # Entry 56
+    # ID
+    .4byte 58
+
+    # Flags
+    .4byte 0x00240207
+    .4byte 0x08800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008BA98
+    .4byte 0x8008BAD4
+    .4byte 0x8008BB04
+    .4byte 0x8008BB24
+    .4byte 0x800761C8
+
+    # Entry 57
+    # ID
+    .4byte 59
+
+    # Flags
+    .4byte 0x00240208
+    .4byte 0x09800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008BCFC
+    .4byte 0x8008BD80
+    .4byte 0x8008BF84
+    .4byte 0x8008BFA4
+    .4byte 0x800761C8
+
+    # Entry 58
+    # ID
+    .4byte 60
+
+    # Flags
+    .4byte 0x00240A09
+    .4byte 0x0A800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008C520
+    .4byte 0x8008C55C
+    .4byte 0x8008C7F0
+    .4byte 0x8008C810
+    .4byte 0x800761C8
+
+    # Entry 59
+    # ID
+    .4byte 61
+
+    # Flags
+    .4byte 0x00240A09
+    .4byte 0x0A800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008C520
+    .4byte 0x8008C55C
+    .4byte 0x8008C7F0
+    .4byte 0x8008C810
+    .4byte 0x800761C8
+
+    # Entry 60
+    # ID
+    .4byte 62
+
+    # Flags
+    .4byte 0x00240A09
+    .4byte 0x0A800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008C520
+    .4byte 0x8008C55C
+    .4byte 0x8008C7F0
+    .4byte 0x8008C810
+    .4byte 0x800761C8
+
+    # Entry 61
+    # ID
+    .4byte 63
+
+    # Flags
+    .4byte 0x00240A09
+    .4byte 0x0A800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008C520
+    .4byte 0x8008C55C
+    .4byte 0x8008C7F0
+    .4byte 0x8008C810
+    .4byte 0x800761C8
+
+    # Entry 62
+    # ID
+    .4byte 64
+
+    # Flags
+    .4byte 0x00240A09
+    .4byte 0x0A800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008C520
+    .4byte 0x8008C55C
+    .4byte 0x8008C7F0
+    .4byte 0x8008C810
+    .4byte 0x800761C8
+
+    # Entry 63
+    # ID
+    .4byte 66
+
+    # Flags
+    .4byte 0x00240A0A
+    .4byte 0x0B800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008CA98
+    .4byte 0x8008CAD4
+    .4byte 0x8008CB04
+    .4byte 0x8008CB24
+    .4byte 0x800761C8
+
+    # Entry 64
+    # ID
+    .4byte 67
+
+    # Flags
+    .4byte 0x00240A0B
+    .4byte 0x0C800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008CCBC
+    .4byte 0x8008CCF8
+    .4byte 0x8008CD28
+    .4byte 0x8008CD48
+    .4byte 0x800761C8
+
+    # Entry 65
+    # ID
+    .4byte 68
+
+    # Flags
+    .4byte 0x0024060C
+    .4byte 0x0D800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D010
+    .4byte 0x8008D08C
+    .4byte 0x8008D5B4
+    .4byte 0x8008D5D4
+    .4byte 0x800761C8
+
+    # Entry 66
+    # ID
+    .4byte 69
+
+    # Flags
+    .4byte 0x0024060D
+    .4byte 0x0E800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D010
+    .4byte 0x8008D194
+    .4byte 0x8008D5B4
+    .4byte 0x8008D5D4
+    .4byte 0x800761C8
+
+    # Entry 67
+    # ID
+    .4byte 70
+
+    # Flags
+    .4byte 0x0024060E
+    .4byte 0x0F800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D010
+    .4byte 0x8008D29C
+    .4byte 0x8008D5B4
+    .4byte 0x8008D5D4
+    .4byte 0x800761C8
+
+    # Entry 68
+    # ID
+    .4byte 71
+
+    # Flags
+    .4byte 0x0024060F
+    .4byte 0x10800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D010
+    .4byte 0x8008D3A4
+    .4byte 0x8008D5B4
+    .4byte 0x8008D5D4
+    .4byte 0x800761C8
+
+    # Entry 69
+    # ID
+    .4byte 72
+
+    # Flags
+    .4byte 0x00240610
+    .4byte 0x11800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D010
+    .4byte 0x8008D4AC
+    .4byte 0x8008D5B4
+    .4byte 0x8008D5D4
+    .4byte 0x800761C8
+
+    # Entry 70
+    # ID
+    .4byte 73
+
+    # Flags
+    .4byte 0x0000060C
+    .4byte 0x0DC00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D78C
+    .4byte 0x8008D7AC
+    .4byte 0x8008D7B0
+    .4byte 0x8008D7D0
+    .4byte 0x800761C8
+
+    # Entry 71
+    # ID
+    .4byte 74
+
+    # Flags
+    .4byte 0x0000060D
+    .4byte 0x0EC00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D78C
+    .4byte 0x8008D7AC
+    .4byte 0x8008D7B0
+    .4byte 0x8008D7D0
+    .4byte 0x800761C8
+
+    # Entry 72
+    # ID
+    .4byte 75
+
+    # Flags
+    .4byte 0x0000060E
+    .4byte 0x0FC00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D78C
+    .4byte 0x8008D7AC
+    .4byte 0x8008D7B0
+    .4byte 0x8008D7D0
+    .4byte 0x800761C8
+
+    # Entry 73
+    # ID
+    .4byte 76
+
+    # Flags
+    .4byte 0x0000060F
+    .4byte 0x10C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D78C
+    .4byte 0x8008D7AC
+    .4byte 0x8008D7B0
+    .4byte 0x8008D7D0
+    .4byte 0x800761C8
+
+    # Entry 74
+    # ID
+    .4byte 77
+
+    # Flags
+    .4byte 0x00000610
+    .4byte 0x11C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008D78C
+    .4byte 0x8008D7AC
+    .4byte 0x8008D7B0
+    .4byte 0x8008D7D0
+    .4byte 0x800761C8
+
+    # Entry 75
+    # ID
+    .4byte 165
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 76
+    # ID
+    .4byte 166
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 77
+    # ID
+    .4byte 167
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 78
+    # ID
+    .4byte 168
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 79
+    # ID
+    .4byte 169
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 80
+    # ID
+    .4byte 170
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 81
+    # ID
+    .4byte 171
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 82
+    # ID
+    .4byte 172
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 83
+    # ID
+    .4byte 173
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 84
+    # ID
+    .4byte 174
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 85
+    # ID
+    .4byte 175
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 86
+    # ID
+    .4byte 176
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008F7F0
+    .4byte 0x8008FA44
+    .4byte 0x8008FB18
+    .4byte 0x8008FB64
+    .4byte 0x800761C8
+
+    # Entry 87
+    # ID
+    .4byte 177
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008FD98
+    .4byte 0x8008FF48
+    .4byte 0x8008FF84
+    .4byte 0x800900EC
+    .4byte 0x800761C8
+
+    # Entry 88
+    # ID
+    .4byte 178
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008FD98
+    .4byte 0x8008FF48
+    .4byte 0x8008FF84
+    .4byte 0x800900EC
+    .4byte 0x800761C8
+
+    # Entry 89
+    # ID
+    .4byte 179
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008FD98
+    .4byte 0x8008FF48
+    .4byte 0x8008FF84
+    .4byte 0x800900EC
+    .4byte 0x800761C8
+
+    # Entry 90
+    # ID
+    .4byte 180
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8008FD98
+    .4byte 0x8008FF48
+    .4byte 0x8008FF84
+    .4byte 0x800900EC
+    .4byte 0x800761C8
+
+    # Entry 91
+    # ID
+    .4byte 181
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800901D0
+    .4byte 0x80090324
+    .4byte 0x8009035C
+    .4byte 0x800904C0
+    .4byte 0x800761C8
+
+    # Entry 92
+    # ID
+    .4byte 78
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80094A14
+    .4byte 0x80094B20
+    .4byte 0x80094B24
+    .4byte 0x80094B44
+    .4byte 0x800761C8
+
+    # Entry 93
+    # ID
+    .4byte 89
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80094A14
+    .4byte 0x80094B20
+    .4byte 0x80094B24
+    .4byte 0x80094B44
+    .4byte 0x800761C8
+
+    # Entry 94
+    # ID
+    .4byte 79
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096228
+    .4byte 0x800761C8
+
+    # Entry 95
+    # ID
+    .4byte 80
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096228
+    .4byte 0x800761C8
+
+    # Entry 96
+    # ID
+    .4byte 81
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096228
+    .4byte 0x800761C8
+
+    # Entry 97
+    # ID
+    .4byte 82
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096228
+    .4byte 0x800761C8
+
+    # Entry 98
+    # ID
+    .4byte 83
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096144
+    .4byte 0x80096208
+    .4byte 0x800761C8
+
+    # Entry 99
+    # ID
+    .4byte 84
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096208
+    .4byte 0x800761C8
+
+    # Entry 100
+    # ID
+    .4byte 85
+
+    # Flags
+    .4byte 0x00440462
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x800961B0
+    .4byte 0x8009634C
+    .4byte 0x800761C8
+
+    # Entry 101
+    # ID
+    .4byte 86
+
+    # Flags
+    .4byte 0x00440462
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x800961B0
+    .4byte 0x8009634C
+    .4byte 0x800761C8
+
+    # Entry 102
+    # ID
+    .4byte 87
+
+    # Flags
+    .4byte 0x00440462
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x800961B0
+    .4byte 0x8009634C
+    .4byte 0x800761C8
+
+    # Entry 103
+    # ID
+    .4byte 88
+
+    # Flags
+    .4byte 0x00440462
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x800961B0
+    .4byte 0x8009634C
+    .4byte 0x800761C8
+
+    # Entry 104
+    # ID
+    .4byte 92
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096470
+    .4byte 0x800761C8
+
+    # Entry 105
+    # ID
+    .4byte 93
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096470
+    .4byte 0x800761C8
+
+    # Entry 106
+    # ID
+    .4byte 94
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096470
+    .4byte 0x800761C8
+
+    # Entry 107
+    # ID
+    .4byte 95
+
+    # Flags
+    .4byte 0x00440062
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096470
+    .4byte 0x800761C8
+
+    # Entry 108
+    # ID
+    .4byte 96
+
+    # Flags
+    .4byte 0x00440862
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096228
+    .4byte 0x800761C8
+
+    # Entry 109
+    # ID
+    .4byte 97
+
+    # Flags
+    .4byte 0x00440862
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096228
+    .4byte 0x800761C8
+
+    # Entry 110
+    # ID
+    .4byte 98
+
+    # Flags
+    .4byte 0x00440862
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096228
+    .4byte 0x800761C8
+
+    # Entry 111
+    # ID
+    .4byte 99
+
+    # Flags
+    .4byte 0x00440862
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096228
+    .4byte 0x800761C8
+
+    # Entry 112
+    # ID
+    .4byte 100
+
+    # Flags
+    .4byte 0x00440C62
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x800961B0
+    .4byte 0x8009634C
+    .4byte 0x800761C8
+
+    # Entry 113
+    # ID
+    .4byte 101
+
+    # Flags
+    .4byte 0x00440C62
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x800961B0
+    .4byte 0x8009634C
+    .4byte 0x800761C8
+
+    # Entry 114
+    # ID
+    .4byte 102
+
+    # Flags
+    .4byte 0x00440C62
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x800961B0
+    .4byte 0x8009634C
+    .4byte 0x800761C8
+
+    # Entry 115
+    # ID
+    .4byte 103
+
+    # Flags
+    .4byte 0x00440C62
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x800961B0
+    .4byte 0x8009634C
+    .4byte 0x800761C8
+
+    # Entry 116
+    # ID
+    .4byte 104
+
+    # Flags
+    .4byte 0x00440862
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096470
+    .4byte 0x800761C8
+
+    # Entry 117
+    # ID
+    .4byte 105
+
+    # Flags
+    .4byte 0x00440862
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096470
+    .4byte 0x800761C8
+
+    # Entry 118
+    # ID
+    .4byte 106
+
+    # Flags
+    .4byte 0x00440862
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096470
+    .4byte 0x800761C8
+
+    # Entry 119
+    # ID
+    .4byte 107
+
+    # Flags
+    .4byte 0x00440862
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80095E80
+    .4byte 0x80096120
+    .4byte 0x80096124
+    .4byte 0x80096470
+    .4byte 0x800761C8
+
+    # Entry 120
+    # ID
+    .4byte 108
+
+    # Flags
+    .4byte 0x00440040
+    .4byte 0x3F800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD390
+    .4byte 0x800CD3B0
+    .4byte 0x800CD3D0
+    .4byte 0x800CD3F0
+    .4byte 0x800761C8
+
+    # Entry 121
+    # ID
+    .4byte 109
+
+    # Flags
+    .4byte 0x00440041
+    .4byte 0x40800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD390
+    .4byte 0x800CD3B0
+    .4byte 0x800CD3D0
+    .4byte 0x800CD3F0
+    .4byte 0x800761C8
+
+    # Entry 122
+    # ID
+    .4byte 110
+
+    # Flags
+    .4byte 0x00440842
+    .4byte 0x41800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD390
+    .4byte 0x800CD3B0
+    .4byte 0x800CD3D0
+    .4byte 0x800CD3F0
+    .4byte 0x800761C8
+
+    # Entry 123
+    # ID
+    .4byte 111
+
+    # Flags
+    .4byte 0x00440043
+    .4byte 0x42800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD390
+    .4byte 0x800CD3B0
+    .4byte 0x800CD3D0
+    .4byte 0x800CD3F0
+    .4byte 0x800761C8
+
+    # Entry 124
+    # ID
+    .4byte 112
+
+    # Flags
+    .4byte 0x00440044
+    .4byte 0x43800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD458
+    .4byte 0x800CD478
+    .4byte 0x800CD498
+    .4byte 0x800CD4B8
+    .4byte 0x800761C8
+
+    # Entry 125
+    # ID
+    .4byte 113
+
+    # Flags
+    .4byte 0x00440045
+    .4byte 0x44800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD458
+    .4byte 0x800CD478
+    .4byte 0x800CD498
+    .4byte 0x800CD4B8
+    .4byte 0x800761C8
+
+    # Entry 126
+    # ID
+    .4byte 114
+
+    # Flags
+    .4byte 0x00440846
+    .4byte 0x45800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD458
+    .4byte 0x800CD478
+    .4byte 0x800CD498
+    .4byte 0x800CD4B8
+    .4byte 0x800761C8
+
+    # Entry 127
+    # ID
+    .4byte 115
+
+    # Flags
+    .4byte 0x00440047
+    .4byte 0x46800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD458
+    .4byte 0x800CD478
+    .4byte 0x800CD498
+    .4byte 0x800CD4B8
+    .4byte 0x800761C8
+
+    # Entry 128
+    # ID
+    .4byte 116
+
+    # Flags
+    .4byte 0x00440048
+    .4byte 0x47800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD520
+    .4byte 0x800CD540
+    .4byte 0x800CD560
+    .4byte 0x800CD580
+    .4byte 0x800761C8
+
+    # Entry 129
+    # ID
+    .4byte 117
+
+    # Flags
+    .4byte 0x00440049
+    .4byte 0x48800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD520
+    .4byte 0x800CD540
+    .4byte 0x800CD560
+    .4byte 0x800CD580
+    .4byte 0x800761C8
+
+    # Entry 130
+    # ID
+    .4byte 118
+
+    # Flags
+    .4byte 0x0044084A
+    .4byte 0x49800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD520
+    .4byte 0x800CD540
+    .4byte 0x800CD560
+    .4byte 0x800CD580
+    .4byte 0x800761C8
+
+    # Entry 131
+    # ID
+    .4byte 119
+
+    # Flags
+    .4byte 0x0044004B
+    .4byte 0x4A800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD520
+    .4byte 0x800CD540
+    .4byte 0x800CD560
+    .4byte 0x800CD580
+    .4byte 0x800761C8
+
+    # Entry 132
+    # ID
+    .4byte 120
+
+    # Flags
+    .4byte 0x0044004C
+    .4byte 0x4B800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD6A0
+    .4byte 0x800CD7C4
+    .4byte 0x800CD7E4
+    .4byte 0x800CD804
+    .4byte 0x800761C8
+
+    # Entry 133
+    # ID
+    .4byte 121
+
+    # Flags
+    .4byte 0x0044004D
+    .4byte 0x4C800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD6A0
+    .4byte 0x800CD7C4
+    .4byte 0x800CD7E4
+    .4byte 0x800CD804
+    .4byte 0x800761C8
+
+    # Entry 134
+    # ID
+    .4byte 122
+
+    # Flags
+    .4byte 0x0044084E
+    .4byte 0x4D800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD6A0
+    .4byte 0x800CD7C4
+    .4byte 0x800CD7E4
+    .4byte 0x800CD804
+    .4byte 0x800761C8
+
+    # Entry 135
+    # ID
+    .4byte 123
+
+    # Flags
+    .4byte 0x0044004F
+    .4byte 0x4E800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD6A0
+    .4byte 0x800CD7C4
+    .4byte 0x800CD7E4
+    .4byte 0x800CD804
+    .4byte 0x800761C8
+
+    # Entry 136
+    # ID
+    .4byte 124
+
+    # Flags
+    .4byte 0x00440050
+    .4byte 0x4F800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD88C
+    .4byte 0x800CD8AC
+    .4byte 0x800CD8CC
+    .4byte 0x800CD8EC
+    .4byte 0x800761C8
+
+    # Entry 137
+    # ID
+    .4byte 125
+
+    # Flags
+    .4byte 0x00440051
+    .4byte 0x50800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD88C
+    .4byte 0x800CD8AC
+    .4byte 0x800CD8CC
+    .4byte 0x800CD8EC
+    .4byte 0x800761C8
+
+    # Entry 138
+    # ID
+    .4byte 126
+
+    # Flags
+    .4byte 0x00440852
+    .4byte 0x51800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD88C
+    .4byte 0x800CD8AC
+    .4byte 0x800CD8CC
+    .4byte 0x800CD8EC
+    .4byte 0x800761C8
+
+    # Entry 139
+    # ID
+    .4byte 127
+
+    # Flags
+    .4byte 0x00440053
+    .4byte 0x52800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CD88C
+    .4byte 0x800CD8AC
+    .4byte 0x800CD8CC
+    .4byte 0x800CD8EC
+    .4byte 0x800761C8
+
+    # Entry 140
+    # ID
+    .4byte 128
+
+    # Flags
+    .4byte 0x00440054
+    .4byte 0x53800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CDB14
+    .4byte 0x800CDB34
+    .4byte 0x800CDB54
+    .4byte 0x800CDB74
+    .4byte 0x800761C8
+
+    # Entry 141
+    # ID
+    .4byte 129
+
+    # Flags
+    .4byte 0x00440055
+    .4byte 0x54800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CDB14
+    .4byte 0x800CDB34
+    .4byte 0x800CDB54
+    .4byte 0x800CDB74
+    .4byte 0x800761C8
+
+    # Entry 142
+    # ID
+    .4byte 130
+
+    # Flags
+    .4byte 0x00440856
+    .4byte 0x55800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CDB14
+    .4byte 0x800CDB34
+    .4byte 0x800CDB54
+    .4byte 0x800CDB74
+    .4byte 0x800761C8
+
+    # Entry 143
+    # ID
+    .4byte 131
+
+    # Flags
+    .4byte 0x00440057
+    .4byte 0x56800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CDB14
+    .4byte 0x800CDB34
+    .4byte 0x800CDB54
+    .4byte 0x800CDB74
+    .4byte 0x800761C8
+
+    # Entry 144
+    # ID
+    .4byte 134
+
+    # Flags
+    .4byte 0x00440058
+    .4byte 0x57800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CF0B8
+    .4byte 0x800CF118
+    .4byte 0x800CF1A0
+    .4byte 0x800CF258
+    .4byte 0x800761C8
+
+    # Entry 145
+    # ID
+    .4byte 135
+
+    # Flags
+    .4byte 0x004C0058
+    .4byte 0x57800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CF2B8
+    .4byte 0x800CF2BC
+    .4byte 0x800CF380
+    .4byte 0x800CF3A0
+    .4byte 0x800761C8
+
+    # Entry 146
+    # ID
+    .4byte 136
+
+    # Flags
+    .4byte 0x004C0058
+    .4byte 0x57800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CF424
+    .4byte 0x800CF428
+    .4byte 0x800CF494
+    .4byte 0x800CF4B4
+    .4byte 0x800761C8
+
+    # Entry 147
+    # ID
+    .4byte 137
+
+    # Flags
+    .4byte 0x004C0058
+    .4byte 0x57800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CF528
+    .4byte 0x800CF52C
+    .4byte 0x800CF54C
+    .4byte 0x800CF56C
+    .4byte 0x800761C8
+
+    # Entry 148
+    # ID
+    .4byte 138
+
+    # Flags
+    .4byte 0x00440159
+    .4byte 0x58800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CE308
+    .4byte 0x800CE348
+    .4byte 0x800CE350
+    .4byte 0x800CE390
+    .4byte 0x800761C8
+
+    # Entry 149
+    # ID
+    .4byte 139
+
+    # Flags
+    .4byte 0x00440559
+    .4byte 0x58800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CE328
+    .4byte 0x800CE34C
+    .4byte 0x800CE370
+    .4byte 0x800CE3B8
+    .4byte 0x800761C8
+
+    # Entry 150
+    # ID
+    .4byte 140
+
+    # Flags
+    .4byte 0x00440159
+    .4byte 0x58800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CE308
+    .4byte 0x800CE348
+    .4byte 0x800CE350
+    .4byte 0x800CE390
+    .4byte 0x800761C8
+
+    # Entry 151
+    # ID
+    .4byte 141
+
+    # Flags
+    .4byte 0x00440559
+    .4byte 0x58800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CE328
+    .4byte 0x800CE34C
+    .4byte 0x800CE370
+    .4byte 0x800CE3B8
+    .4byte 0x800761C8
+
+    # Entry 152
+    # ID
+    .4byte 142
+
+    # Flags
+    .4byte 0x004C015A
+    .4byte 0x59800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CEAF0
+    .4byte 0x800CEC50
+    .4byte 0x800CEC58
+    .4byte 0x800CEC98
+    .4byte 0x800761C8
+
+    # Entry 153
+    # ID
+    .4byte 143
+
+    # Flags
+    .4byte 0x004C055A
+    .4byte 0x59800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800CEBA0
+    .4byte 0x800CEC54
+    .4byte 0x800CEC78
+    .4byte 0x800CECC0
+    .4byte 0x800761C8
+
+    # Entry 154
+    # ID
+    .4byte 144
+
+    # Flags
+    .4byte 0x0044825B
+    .4byte 0x5A800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D2DD0
+    .4byte 0x800D2E0C
+    .4byte 0x800D2E2C
+    .4byte 0x800D2E4C
+    .4byte 0x800761C8
+
+    # Entry 155
+    # ID
+    .4byte 145
+
+    # Flags
+    .4byte 0x0045065B
+    .4byte 0x5A800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D2EF8
+    .4byte 0x800D2F34
+    .4byte 0x800D2F54
+    .4byte 0x800D2F74
+    .4byte 0x800761C8
+
+    # Entry 156
+    # ID
+    .4byte 146
+
+    # Flags
+    .4byte 0x00528000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D30C0
+    .4byte 0x800D30FC
+    .4byte 0x800D3100
+    .4byte 0x800D3120
+    .4byte 0x800761C8
+
+    # Entry 157
+    # ID
+    .4byte 147
+
+    # Flags
+    .4byte 0x00530000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D30C0
+    .4byte 0x800D30FC
+    .4byte 0x800D3100
+    .4byte 0x800D3120
+    .4byte 0x800761C8
+
+    # Entry 158
+    # ID
+    .4byte 149
+
+    # Flags
+    .4byte 0x00440000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D79AC
+    .4byte 0x800D7AEC
+    .4byte 0x800D7B4C
+    .4byte 0x800D7B8C
+    .4byte 0x800761C8
+
+    # Entry 159
+    # ID
+    .4byte 150
+
+    # Flags
+    .4byte 0x004C015C
+    .4byte 0x5B800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D7DFC
+    .4byte 0x800D8024
+    .4byte 0x800D8064
+    .4byte 0x800D80A4
+    .4byte 0x800761C8
+
+    # Entry 160
+    # ID
+    .4byte 151
+
+    # Flags
+    .4byte 0x0044015D
+    .4byte 0x5C800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D83AC
+    .4byte 0x800D843C
+    .4byte 0x800D8444
+    .4byte 0x800D8484
+    .4byte 0x800761C8
+
+    # Entry 161
+    # ID
+    .4byte 152
+
+    # Flags
+    .4byte 0x00440000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D88B8
+    .4byte 0x800D88F8
+    .4byte 0x800D8900
+    .4byte 0x800D8940
+    .4byte 0x800761C8
+
+    # Entry 162
+    # ID
+    .4byte 153
+
+    # Flags
+    .4byte 0x00440000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D79B0
+    .4byte 0x800D7B1C
+    .4byte 0x800D7B6C
+    .4byte 0x800D7BB4
+    .4byte 0x800761C8
+
+    # Entry 163
+    # ID
+    .4byte 154
+
+    # Flags
+    .4byte 0x004C055C
+    .4byte 0x5B800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D7F10
+    .4byte 0x800D8044
+    .4byte 0x800D8084
+    .4byte 0x800D80CC
+    .4byte 0x800761C8
+
+    # Entry 164
+    # ID
+    .4byte 155
+
+    # Flags
+    .4byte 0x0044055D
+    .4byte 0x5C800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D83F4
+    .4byte 0x800D8440
+    .4byte 0x800D8464
+    .4byte 0x800D84AC
+    .4byte 0x800761C8
+
+    # Entry 165
+    # ID
+    .4byte 156
+
+    # Flags
+    .4byte 0x00440000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D88D8
+    .4byte 0x800D88FC
+    .4byte 0x800D8920
+    .4byte 0x800D8968
+    .4byte 0x800761C8
+
+    # Entry 166
+    # ID
+    .4byte 157
+
+    # Flags
+    .4byte 0x00440000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D79AC
+    .4byte 0x800D7AEC
+    .4byte 0x800D7B4C
+    .4byte 0x800D7B8C
+    .4byte 0x800761C8
+
+    # Entry 167
+    # ID
+    .4byte 158
+
+    # Flags
+    .4byte 0x004C015C
+    .4byte 0x5B800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D7DFC
+    .4byte 0x800D8024
+    .4byte 0x800D8064
+    .4byte 0x800D80A4
+    .4byte 0x800761C8
+
+    # Entry 168
+    # ID
+    .4byte 159
+
+    # Flags
+    .4byte 0x0044015D
+    .4byte 0x5C800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D83AC
+    .4byte 0x800D843C
+    .4byte 0x800D8444
+    .4byte 0x800D8484
+    .4byte 0x800761C8
+
+    # Entry 169
+    # ID
+    .4byte 160
+
+    # Flags
+    .4byte 0x00440000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D88B8
+    .4byte 0x800D88F8
+    .4byte 0x800D8900
+    .4byte 0x800D8940
+    .4byte 0x800761C8
+
+    # Entry 170
+    # ID
+    .4byte 161
+
+    # Flags
+    .4byte 0x00440000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D79B0
+    .4byte 0x800D7B1C
+    .4byte 0x800D7B6C
+    .4byte 0x800D7BB4
+    .4byte 0x800761C8
+
+    # Entry 171
+    # ID
+    .4byte 162
+
+    # Flags
+    .4byte 0x004C055C
+    .4byte 0x5B800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D7F10
+    .4byte 0x800D8044
+    .4byte 0x800D8084
+    .4byte 0x800D80CC
+    .4byte 0x800761C8
+
+    # Entry 172
+    # ID
+    .4byte 163
+
+    # Flags
+    .4byte 0x0044055D
+    .4byte 0x5C800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D83F4
+    .4byte 0x800D8440
+    .4byte 0x800D8464
+    .4byte 0x800D84AC
+    .4byte 0x800761C8
+
+    # Entry 173
+    # ID
+    .4byte 164
+
+    # Flags
+    .4byte 0x00440000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D88D8
+    .4byte 0x800D88FC
+    .4byte 0x800D8920
+    .4byte 0x800D8968
+    .4byte 0x800761C8
+
+    # Entry 174
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00480000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80096DF4
+    .4byte 0x80096DF8
+    .4byte 0x80096E48
+    .4byte 0x80096ED0
+    .4byte 0x800761C8
+
+    # Entry 175
+    # ID
+    .4byte 90
+
+    # Flags
+    .4byte 0x00484066
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80096FD0
+    .4byte 0x80097074
+    .4byte 0x80097098
+    .4byte 0x800970B8
+    .4byte 0x800761C8
+
+    # Entry 176
+    # ID
+    .4byte 91
+
+    # Flags
+    .4byte 0x00484066
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80096FD0
+    .4byte 0x80097074
+    .4byte 0x80097098
+    .4byte 0x800970B8
+    .4byte 0x800761C8
+
+    # Entry 177
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00482064
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800971B0
+    .4byte 0x80097458
+    .4byte 0x8009747C
+    .4byte 0x8009749C
+    .4byte 0x800761C8
+
+    # Entry 178
+    # ID
+    .4byte 37
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01C00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800926DC
+    .4byte 0x80092758
+    .4byte 0x80092870
+    .4byte 0x800928AC
+    .4byte 0x800761C8
+
+    # Entry 179
+    # ID
+    .4byte 38
+
+    # Flags
+    .4byte 0x00180000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80092A24
+    .4byte 0x80092A78
+    .4byte 0x80092B70
+    .4byte 0x80092BAC
+    .4byte 0x800761C8
+
+    # Entry 180
+    # ID
+    .4byte 39
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80092CAC
+    .4byte 0x80092CFC
+    .4byte 0x80092E10
+    .4byte 0x80092E30
+    .4byte 0x800761C8
+
+    # Entry 181
+    # ID
+    .4byte 40
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80093354
+    .4byte 0x80093624
+    .4byte 0x80093628
+    .4byte 0x8009365C
+    .4byte 0x800761C8
+
+    # Entry 182
+    # ID
+    .4byte 37
+
+    # Flags
+    .4byte 0x00101073
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80093CD0
+    .4byte 0x80093EC0
+    .4byte 0x8009403C
+    .4byte 0x80094078
+    .4byte 0x800761C8
+
+    # Entry 183
+    # ID
+    .4byte 183
+
+    # Flags
+    .4byte 0x0060006C
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80097DC0
+    .4byte 0x80097E1C
+    .4byte 0x80097E20
+    .4byte 0x80097E40
+    .4byte 0x800761C8
+
+    # Entry 184
+    # ID
+    .4byte 184
+
+    # Flags
+    .4byte 0x0060006C
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80097FC0
+    .4byte 0x8009802C
+    .4byte 0x8009807C
+    .4byte 0x8009809C
+    .4byte 0x800761C8
+
+    # Entry 185
+    # ID
+    .4byte 185
+
+    # Flags
+    .4byte 0x0062006C
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009F1E0
+    .4byte 0x8009F2B0
+    .4byte 0x8009F2B4
+    .4byte 0x8009F2D4
+    .4byte 0x800761C8
+
+    # Entry 186
+    # ID
+    .4byte 186
+
+    # Flags
+    .4byte 0x0060006C
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098194
+    .4byte 0x800981D0
+    .4byte 0x800981D4
+    .4byte 0x800981F4
+    .4byte 0x800761C8
+
+    # Entry 187
+    # ID
+    .4byte 187
+
+    # Flags
+    .4byte 0x00640231
+    .4byte 0x32000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800985B4
+    .4byte 0x800985F0
+    .4byte 0x800985F4
+    .4byte 0x80098614
+    .4byte 0x800761C8
+
+    # Entry 188
+    # ID
+    .4byte 188
+
+    # Flags
+    .4byte 0x0060006C
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098380
+    .4byte 0x800983BC
+    .4byte 0x800983C0
+    .4byte 0x800983E0
+    .4byte 0x800761C8
+
+    # Entry 189
+    # ID
+    .4byte 189
+
+    # Flags
+    .4byte 0x0060006C
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098380
+    .4byte 0x800983BC
+    .4byte 0x800983C0
+    .4byte 0x800983E0
+    .4byte 0x800761C8
+
+    # Entry 190
+    # ID
+    .4byte 190
+
+    # Flags
+    .4byte 0x0060006C
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C8C04
+    .4byte 0x800C8C40
+    .4byte 0x800C8C44
+    .4byte 0x800C8C64
+    .4byte 0x800761C8
+
+    # Entry 191
+    # ID
+    .4byte 191
+
+    # Flags
+    .4byte 0x0060006D
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80097DC0
+    .4byte 0x80097E1C
+    .4byte 0x80097E20
+    .4byte 0x80097E40
+    .4byte 0x800761C8
+
+    # Entry 192
+    # ID
+    .4byte 192
+
+    # Flags
+    .4byte 0x0060006D
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80097FC0
+    .4byte 0x8009802C
+    .4byte 0x8009807C
+    .4byte 0x8009809C
+    .4byte 0x800761C8
+
+    # Entry 193
+    # ID
+    .4byte 193
+
+    # Flags
+    .4byte 0x0062006D
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009F1E0
+    .4byte 0x8009F2B0
+    .4byte 0x8009F2B4
+    .4byte 0x8009F2D4
+    .4byte 0x800761C8
+
+    # Entry 194
+    # ID
+    .4byte 194
+
+    # Flags
+    .4byte 0x0060006D
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098194
+    .4byte 0x800981D0
+    .4byte 0x800981D4
+    .4byte 0x800981F4
+    .4byte 0x800761C8
+
+    # Entry 195
+    # ID
+    .4byte 195
+
+    # Flags
+    .4byte 0x00640232
+    .4byte 0x33000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800985B4
+    .4byte 0x800985F0
+    .4byte 0x800985F4
+    .4byte 0x80098614
+    .4byte 0x800761C8
+
+    # Entry 196
+    # ID
+    .4byte 196
+
+    # Flags
+    .4byte 0x0060006D
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098380
+    .4byte 0x800983BC
+    .4byte 0x800983C0
+    .4byte 0x800983E0
+    .4byte 0x800761C8
+
+    # Entry 197
+    # ID
+    .4byte 197
+
+    # Flags
+    .4byte 0x0060006D
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098380
+    .4byte 0x800983BC
+    .4byte 0x800983C0
+    .4byte 0x800983E0
+    .4byte 0x800761C8
+
+    # Entry 198
+    # ID
+    .4byte 198
+
+    # Flags
+    .4byte 0x0060006D
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C8C04
+    .4byte 0x800C8C40
+    .4byte 0x800C8C44
+    .4byte 0x800C8C64
+    .4byte 0x800761C8
+
+    # Entry 199
+    # ID
+    .4byte 199
+
+    # Flags
+    .4byte 0x0070006E
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800988A8
+    .4byte 0x800988E4
+    .4byte 0x800988E8
+    .4byte 0x80098908
+    .4byte 0x800761C8
+
+    # Entry 200
+    # ID
+    .4byte 200
+
+    # Flags
+    .4byte 0x0070006E
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098AA0
+    .4byte 0x80098ADC
+    .4byte 0x80098AE0
+    .4byte 0x80098B00
+    .4byte 0x800761C8
+
+    # Entry 201
+    # ID
+    .4byte 201
+
+    # Flags
+    .4byte 0x0070006E
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098AA0
+    .4byte 0x80098ADC
+    .4byte 0x80098AE0
+    .4byte 0x80098B00
+    .4byte 0x800761C8
+
+    # Entry 202
+    # ID
+    .4byte 202
+
+    # Flags
+    .4byte 0x00700000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C2028
+    .4byte 0x800C2180
+    .4byte 0x800C22C0
+    .4byte 0x800C2348
+    .4byte 0x800761C8
+
+    # Entry 203
+    # ID
+    .4byte 203
+
+    # Flags
+    .4byte 0x00700000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C2028
+    .4byte 0x800C2180
+    .4byte 0x800C22C0
+    .4byte 0x800C2348
+    .4byte 0x800761C8
+
+    # Entry 204
+    # ID
+    .4byte 204
+
+    # Flags
+    .4byte 0x00700000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C252C
+    .4byte 0x800C25AC
+    .4byte 0x800C25B0
+    .4byte 0x800C25D0
+    .4byte 0x800761C8
+
+    # Entry 205
+    # ID
+    .4byte 286
+
+    # Flags
+    .4byte 0x00500000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098C14
+    .4byte 0x80098C50
+    .4byte 0x80098C54
+    .4byte 0x80098C74
+    .4byte 0x800761C8
+
+    # Entry 206
+    # ID
+    .4byte 287
+
+    # Flags
+    .4byte 0x00500000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098DEC
+    .4byte 0x80098DF0
+    .4byte 0x80098DF4
+    .4byte 0x80098E14
+    .4byte 0x800761C8
+
+    # Entry 207
+    # ID
+    .4byte 288
+
+    # Flags
+    .4byte 0x00500000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098EBC
+    .4byte 0x80098EF8
+    .4byte 0x80098EFC
+    .4byte 0x80098F1C
+    .4byte 0x800761C8
+
+    # Entry 208
+    # ID
+    .4byte 289
+
+    # Flags
+    .4byte 0x00500000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098EBC
+    .4byte 0x80098EF8
+    .4byte 0x80098EFC
+    .4byte 0x80098F1C
+    .4byte 0x800761C8
+
+    # Entry 209
+    # ID
+    .4byte 290
+
+    # Flags
+    .4byte 0x00500000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098F90
+    .4byte 0x80098FCC
+    .4byte 0x80098FD0
+    .4byte 0x80098FF0
+    .4byte 0x800761C8
+
+    # Entry 210
+    # ID
+    .4byte 291
+
+    # Flags
+    .4byte 0x00500000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80098F90
+    .4byte 0x80098FCC
+    .4byte 0x80098FD0
+    .4byte 0x80098FF0
+    .4byte 0x800761C8
+
+    # Entry 211
+    # ID
+    .4byte 205
+
+    # Flags
+    .4byte 0x00500000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800990B8
+    .4byte 0x80099138
+    .4byte 0x8009913C
+    .4byte 0x8009915C
+    .4byte 0x800761C8
+
+    # Entry 212
+    # ID
+    .4byte 242
+
+    # Flags
+    .4byte 0x00A00033
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D8CC8
+    .4byte 0x800D8D80
+    .4byte 0x800D8D88
+    .4byte 0x800D8E08
+    .4byte 0x800761C8
+
+    # Entry 213
+    # ID
+    .4byte 242
+
+    # Flags
+    .4byte 0x00A00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D9E80
+    .4byte 0x800D9F90
+    .4byte 0x800D9F94
+    .4byte 0x800D9FDC
+    .4byte 0x800761C8
+
+    # Entry 214
+    # ID
+    .4byte 243
+
+    # Flags
+    .4byte 0x00A00033
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D8D24
+    .4byte 0x800D8D84
+    .4byte 0x800D8DD0
+    .4byte 0x800D8E6C
+    .4byte 0x800761C8
+
+    # Entry 215
+    # ID
+    .4byte 243
+
+    # Flags
+    .4byte 0x00A00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D9E80
+    .4byte 0x800D9F90
+    .4byte 0x800D9F94
+    .4byte 0x800D9FDC
+    .4byte 0x800761C8
+
+    # Entry 216
+    # ID
+    .4byte 244
+
+    # Flags
+    .4byte 0x00A00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DA318
+    .4byte 0x800DA31C
+    .4byte 0x800DA3D0
+    .4byte 0x800DA418
+    .4byte 0x800761C8
+
+    # Entry 217
+    # ID
+    .4byte 245
+
+    # Flags
+    .4byte 0x00A40034
+    .4byte 0x34000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DA568
+    .4byte 0x800DA5A4
+    .4byte 0x800DA5A8
+    .4byte 0x800DA5F0
+    .4byte 0x800761C8
+
+    # Entry 218
+    # ID
+    .4byte 246
+
+    # Flags
+    .4byte 0x00A00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DA744
+    .4byte 0x800DA780
+    .4byte 0x800DA784
+    .4byte 0x800DA7E4
+    .4byte 0x800761C8
+
+    # Entry 219
+    # ID
+    .4byte 247
+
+    # Flags
+    .4byte 0x00A40035
+    .4byte 0x35000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DD8C4
+    .4byte 0x800DD92C
+    .4byte 0x800DD930
+    .4byte 0x800DD990
+    .4byte 0x800761C8
+
+    # Entry 220
+    # ID
+    .4byte 248
+
+    # Flags
+    .4byte 0x00A40036
+    .4byte 0x36000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DDA10
+    .4byte 0x800DDA5C
+    .4byte 0x800DDA60
+    .4byte 0x800DDAC0
+    .4byte 0x800761C8
+
+    # Entry 221
+    # ID
+    .4byte 249
+
+    # Flags
+    .4byte 0x00A40037
+    .4byte 0x37000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DDB40
+    .4byte 0x800DDB8C
+    .4byte 0x800DDB90
+    .4byte 0x800DDBF0
+    .4byte 0x800DDC70
+
+    # Entry 222
+    # ID
+    .4byte 250
+
+    # Flags
+    .4byte 0x00A40038
+    .4byte 0x38000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DDCB4
+    .4byte 0x800DDD00
+    .4byte 0x800DDD04
+    .4byte 0x800DDD64
+    .4byte 0x800761C8
+
+    # Entry 223
+    # ID
+    .4byte 251
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DAC70
+    .4byte 0x800DAC74
+    .4byte 0x800DADE8
+    .4byte 0x800DAE94
+    .4byte 0x800761C8
+
+    # Entry 224
+    # ID
+    .4byte 252
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DB908
+    .4byte 0x800DBA4C
+    .4byte 0x800DBA6C
+    .4byte 0x800DBA8C
+    .4byte 0x800761C8
+
+    # Entry 225
+    # ID
+    .4byte 253
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DC2E4
+    .4byte 0x800DC328
+    .4byte 0x800DC32C
+    .4byte 0x800DC34C
+    .4byte 0x800761C8
+
+    # Entry 226
+    # ID
+    .4byte 254
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DB004
+    .4byte 0x800DB008
+    .4byte 0x800DB00C
+    .4byte 0x800DB1F8
+    .4byte 0x800761C8
+
+    # Entry 227
+    # ID
+    .4byte 255
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DBD10
+    .4byte 0x800DBD30
+    .4byte 0x800DBD50
+    .4byte 0x800DBE9C
+    .4byte 0x800761C8
+
+    # Entry 228
+    # ID
+    .4byte 256
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DC468
+    .4byte 0x800DC4AC
+    .4byte 0x800DC4B0
+    .4byte 0x800DC5EC
+    .4byte 0x800761C8
+
+    # Entry 229
+    # ID
+    .4byte 257
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DC7F0
+    .4byte 0x800DC82C
+    .4byte 0x800DC830
+    .4byte 0x800DC890
+    .4byte 0x800761C8
+
+    # Entry 230
+    # ID
+    .4byte 258
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DC110
+    .4byte 0x800DC160
+    .4byte 0x800DC224
+    .4byte 0x800DC264
+    .4byte 0x800761C8
+
+    # Entry 231
+    # ID
+    .4byte 259
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800761C8
+
+    # Entry 232
+    # ID
+    .4byte 260
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800761C8
+
+    # Entry 233
+    # ID
+    .4byte 42
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800994D8
+    .4byte 0x800996F0
+    .4byte 0x80099714
+    .4byte 0x80099734
+    .4byte 0x800761C8
+
+    # Entry 234
+    # ID
+    .4byte 43
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800994D8
+    .4byte 0x800996F0
+    .4byte 0x80099714
+    .4byte 0x80099734
+    .4byte 0x800761C8
+
+    # Entry 235
+    # ID
+    .4byte 41
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800999D8
+    .4byte 0x80099A14
+    .4byte 0x80099A18
+    .4byte 0x80099A38
+    .4byte 0x800761C8
+
+    # Entry 236
+    # ID
+    .4byte 44
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80099BD0
+    .4byte 0x80099C24
+    .4byte 0x80099CEC
+    .4byte 0x80099D48
+    .4byte 0x800761C8
+
+    # Entry 237
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80099E24
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+    # Entry 238
+    # ID
+    .4byte 45
+
+    # Flags
+    .4byte 0x00100000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80099E80
+    .4byte 0x80099EBC
+    .4byte 0x80099EC0
+    .4byte 0x80099EFC
+    .4byte 0x800761C8
+
+    # Entry 239
+    # ID
+    .4byte 262
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE69C
+    .4byte 0x800DE6BC
+    .4byte 0x800DE6C0
+    .4byte 0x800DE6C4
+    .4byte 0x800761C8
+
+    # Entry 240
+    # ID
+    .4byte 263
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE6C8
+    .4byte 0x800DE6E8
+    .4byte 0x800DE6EC
+    .4byte 0x800DE6F0
+    .4byte 0x800761C8
+
+    # Entry 241
+    # ID
+    .4byte 264
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE6F4
+    .4byte 0x800DE714
+    .4byte 0x800DE718
+    .4byte 0x800DE71C
+    .4byte 0x800DE720
+
+    # Entry 242
+    # ID
+    .4byte 265
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE76C
+    .4byte 0x800DE78C
+    .4byte 0x800DE790
+    .4byte 0x800DE794
+    .4byte 0x800761C8
+
+    # Entry 243
+    # ID
+    .4byte 266
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE76C
+    .4byte 0x800DE78C
+    .4byte 0x800DE790
+    .4byte 0x800DE794
+    .4byte 0x800761C8
+
+    # Entry 244
+    # ID
+    .4byte 209
+
+    # Flags
+    .4byte 0x0080006F
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009A2A8
+    .4byte 0x8009A2E4
+    .4byte 0x8009A388
+    .4byte 0x8009A3A8
+    .4byte 0x800761C8
+
+    # Entry 245
+    # ID
+    .4byte 210
+
+    # Flags
+    .4byte 0x00800000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009A468
+    .4byte 0x8009A4A4
+    .4byte 0x8009A5F4
+    .4byte 0x8009A5F8
+    .4byte 0x800761C8
+
+    # Entry 246
+    # ID
+    .4byte 211
+
+    # Flags
+    .4byte 0x00880000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009A728
+    .4byte 0x8009A72C
+    .4byte 0x8009A74C
+    .4byte 0x8009A750
+    .4byte 0x800761C8
+
+    # Entry 247
+    # ID
+    .4byte 212
+
+    # Flags
+    .4byte 0x0080006B
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C1B2C
+    .4byte 0x800C1B64
+    .4byte 0x800C1B84
+    .4byte 0x800C1BA4
+    .4byte 0x800761C8
+
+    # Entry 248
+    # ID
+    .4byte 214
+
+    # Flags
+    .4byte 0x00800000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C1B2C
+    .4byte 0x800C1B64
+    .4byte 0x800C1B84
+    .4byte 0x800C1BA4
+    .4byte 0x800761C8
+
+    # Entry 249
+    # ID
+    .4byte 213
+
+    # Flags
+    .4byte 0x0080006B
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009EF04
+    .4byte 0x8009EF40
+    .4byte 0x8009EF44
+    .4byte 0x8009EF48
+    .4byte 0x800761C8
+
+    # Entry 250
+    # ID
+    .4byte 214
+
+    # Flags
+    .4byte 0x00800000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009F048
+    .4byte 0x8009F0B8
+    .4byte 0x8009F0BC
+    .4byte 0x8009F0C0
+    .4byte 0x800761C8
+
+    # Entry 251
+    # ID
+    .4byte 215
+
+    # Flags
+    .4byte 0x00800000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009F400
+    .4byte 0x8009F43C
+    .4byte 0x8009F440
+    .4byte 0x8009F460
+    .4byte 0x800761C8
+
+    # Entry 252
+    # ID
+    .4byte 216
+
+    # Flags
+    .4byte 0x00900070
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80081504
+    .4byte 0x80081540
+    .4byte 0x80081544
+    .4byte 0x800815E4
+    .4byte 0x80081644
+
+    # Entry 253
+    # ID
+    .4byte 217
+
+    # Flags
+    .4byte 0x00980000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009A8D8
+    .4byte 0x8009A8FC
+    .4byte 0x8009A96C
+    .4byte 0x8009A98C
+    .4byte 0x80081644
+
+    # Entry 254
+    # ID
+    .4byte 219
+
+    # Flags
+    .4byte 0x00900000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009AC68
+    .4byte 0x8009ACA4
+    .4byte 0x8009ACA8
+    .4byte 0x8009ADA4
+    .4byte 0x80081644
+
+    # Entry 255
+    # ID
+    .4byte 220
+
+    # Flags
+    .4byte 0x00900000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009AC68
+    .4byte 0x8009ACA4
+    .4byte 0x8009ACA8
+    .4byte 0x8009ADA4
+    .4byte 0x80081644
+
+    # Entry 256
+    # ID
+    .4byte 221
+
+    # Flags
+    .4byte 0x0094023E
+    .4byte 0x3D000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009AF70
+    .4byte 0x8009AF90
+    .4byte 0x8009AF94
+    .4byte 0x8009AFB4
+    .4byte 0x80081644
+
+    # Entry 257
+    # ID
+    .4byte 222
+
+    # Flags
+    .4byte 0x0024023F
+    .4byte 0x3E000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009AF70
+    .4byte 0x8009AF90
+    .4byte 0x8009AF94
+    .4byte 0x8009AFB4
+    .4byte 0x80081644
+
+    # Entry 258
+    # ID
+    .4byte 223
+
+    # Flags
+    .4byte 0x00900000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009B10C
+    .4byte 0x8009B12C
+    .4byte 0x8009B130
+    .4byte 0x8009B150
+    .4byte 0x80081644
+
+    # Entry 259
+    # ID
+    .4byte 224
+
+    # Flags
+    .4byte 0x00900000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009B10C
+    .4byte 0x8009B12C
+    .4byte 0x8009B130
+    .4byte 0x8009B150
+    .4byte 0x80081644
+
+    # Entry 260
+    # ID
+    .4byte 225
+
+    # Flags
+    .4byte 0x00900000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009B278
+    .4byte 0x8009B2B4
+    .4byte 0x8009B2B8
+    .4byte 0x8009B2D8
+    .4byte 0x800761C8
+
+    # Entry 261
+    # ID
+    .4byte 226
+
+    # Flags
+    .4byte 0x00900000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009B424
+    .4byte 0x8009B460
+    .4byte 0x8009B464
+    .4byte 0x8009B4A0
+    .4byte 0x800761C8
+
+    # Entry 262
+    # ID
+    .4byte 227
+
+    # Flags
+    .4byte 0x00900000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009B278
+    .4byte 0x8009B2B4
+    .4byte 0x8009B2B8
+    .4byte 0x8009B2D8
+    .4byte 0x800761C8
+
+    # Entry 263
+    # ID
+    .4byte 228
+
+    # Flags
+    .4byte 0x00900000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009B424
+    .4byte 0x8009B460
+    .4byte 0x8009B464
+    .4byte 0x8009B4A0
+    .4byte 0x800761C8
+
+    # Entry 264
+    # ID
+    .4byte 239
+
+    # Flags
+    .4byte 0x00000071
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DECF4
+    .4byte 0x800DED30
+    .4byte 0x800DEE44
+    .4byte 0x800DEE64
+    .4byte 0x800761C8
+
+    # Entry 265
+    # ID
+    .4byte 240
+
+    # Flags
+    .4byte 0x00000071
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DECF4
+    .4byte 0x800DED30
+    .4byte 0x800DEE44
+    .4byte 0x800DEE64
+    .4byte 0x800761C8
+
+    # Entry 266
+    # ID
+    .4byte 267
+
+    # Flags
+    .4byte 0x00B80000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009C830
+    .4byte 0x8009CA00
+    .4byte 0x8009CA04
+    .4byte 0x8009CA08
+    .4byte 0x800761C8
+
+    # Entry 267
+    # ID
+    .4byte 268
+
+    # Flags
+    .4byte 0x00B80000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009C830
+    .4byte 0x8009CA00
+    .4byte 0x8009CA04
+    .4byte 0x8009CA08
+    .4byte 0x800761C8
+
+    # Entry 268
+    # ID
+    .4byte 269
+
+    # Flags
+    .4byte 0x00B80000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009C830
+    .4byte 0x8009CA00
+    .4byte 0x8009CA04
+    .4byte 0x8009CA08
+    .4byte 0x800761C8
+
+    # Entry 269
+    # ID
+    .4byte 270
+
+    # Flags
+    .4byte 0x00B80000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009C830
+    .4byte 0x8009CA00
+    .4byte 0x8009CA04
+    .4byte 0x8009CA08
+    .4byte 0x800761C8
+
+    # Entry 270
+    # ID
+    .4byte 271
+
+    # Flags
+    .4byte 0x00B80000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009C830
+    .4byte 0x8009CA00
+    .4byte 0x8009CA04
+    .4byte 0x8009CA08
+    .4byte 0x800761C8
+
+    # Entry 271
+    # ID
+    .4byte 272
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE69C
+    .4byte 0x800DE6BC
+    .4byte 0x800DE6C0
+    .4byte 0x800DE6C4
+    .4byte 0x800761C8
+
+    # Entry 272
+    # ID
+    .4byte 273
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE6C8
+    .4byte 0x800DE6E8
+    .4byte 0x800DE6EC
+    .4byte 0x800DE6F0
+    .4byte 0x800761C8
+
+    # Entry 273
+    # ID
+    .4byte 274
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE6F4
+    .4byte 0x800DE714
+    .4byte 0x800DE718
+    .4byte 0x800DE71C
+    .4byte 0x800761C8
+
+    # Entry 274
+    # ID
+    .4byte 275
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800DE76C
+    .4byte 0x800DE78C
+    .4byte 0x800DE790
+    .4byte 0x800DE794
+    .4byte 0x800761C8
+
+    # Entry 275
+    # ID
+    .4byte 276
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009CB04
+    .4byte 0x8009CB08
+    .4byte 0x8009CB0C
+    .4byte 0x8009CB10
+    .4byte 0x800761C8
+
+    # Entry 276
+    # ID
+    .4byte 254
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BBC78
+    .4byte 0x800BBC7C
+    .4byte 0x800BBC80
+    .4byte 0x800BBC84
+    .4byte 0x800761C8
+
+    # Entry 277
+    # ID
+    .4byte 277
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BC1B0
+    .4byte 0x800BC304
+    .4byte 0x800BC308
+    .4byte 0x800BC340
+    .4byte 0x800761C8
+
+    # Entry 278
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BC8C4
+    .4byte 0x800BC8C8
+    .4byte 0x800BC8CC
+    .4byte 0x800BC8D0
+    .4byte 0x800761C8
+
+    # Entry 279
+    # ID
+    .4byte 278
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BCA54
+    .4byte 0x800BCAE8
+    .4byte 0x800BCAEC
+    .4byte 0x800BCAF0
+    .4byte 0x800761C8
+
+    # Entry 280
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BCC7C
+    .4byte 0x800BCCF4
+    .4byte 0x800BCCF8
+    .4byte 0x800BCCFC
+    .4byte 0x800761C8
+
+    # Entry 281
+    # ID
+    .4byte 279
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BCED8
+    .4byte 0x800BCEDC
+    .4byte 0x800BCEE0
+    .4byte 0x800BCEE4
+    .4byte 0x800761C8
+
+    # Entry 282
+    # ID
+    .4byte 280
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BCEE8
+    .4byte 0x800BCEEC
+    .4byte 0x800BCEF0
+    .4byte 0x800BCEF4
+    .4byte 0x800761C8
+
+    # Entry 283
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00400
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BC9B8
+    .4byte 0x800BC9BC
+    .4byte 0x800BC9C0
+    .4byte 0x800BC9C4
+    .4byte 0x800761C8
+
+    # Entry 284
+    # ID
+    .4byte 281
+
+    # Flags
+    .4byte 0x00B20400
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BCB80
+    .4byte 0x800BCC14
+    .4byte 0x800BCC18
+    .4byte 0x800BCC1C
+    .4byte 0x800761C8
+
+    # Entry 285
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00400
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BCD5C
+    .4byte 0x800BCDD4
+    .4byte 0x800BCDD8
+    .4byte 0x800BCDDC
+    .4byte 0x800761C8
+
+    # Entry 286
+    # ID
+    .4byte 282
+
+    # Flags
+    .4byte 0x00B20400
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BCEF8
+    .4byte 0x800BCEFC
+    .4byte 0x800BCF00
+    .4byte 0x800BCF04
+    .4byte 0x800761C8
+
+    # Entry 287
+    # ID
+    .4byte 283
+
+    # Flags
+    .4byte 0x00B20400
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BCF08
+    .4byte 0x800BCF0C
+    .4byte 0x800BCF10
+    .4byte 0x800BCF14
+    .4byte 0x800761C8
+
+    # Entry 288
+    # ID
+    .4byte 29
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BD38C
+    .4byte 0x800BD390
+    .4byte 0x800BD394
+    .4byte 0x800BD398
+    .4byte 0x800761C8
+
+    # Entry 289
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BD6E8
+    .4byte 0x800BD7BC
+    .4byte 0x800BD9D8
+    .4byte 0x800BD9DC
+    .4byte 0x800761C8
+
+    # Entry 290
+    # ID
+    .4byte 285
+
+    # Flags
+    .4byte 0x00C20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BDDC4
+    .4byte 0x800BDDC8
+    .4byte 0x800BDDCC
+    .4byte 0x800BDF10
+    .4byte 0x800761C8
+
+    # Entry 291
+    # ID
+    .4byte 284
+
+    # Flags
+    .4byte 0x00C20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BE258
+    .4byte 0x800BE25C
+    .4byte 0x800BE260
+    .4byte 0x800BE3A4
+    .4byte 0x800761C8
+
+    # Entry 292
+    # ID
+    .4byte 29
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BE618
+    .4byte 0x800BE61C
+    .4byte 0x800BE620
+    .4byte 0x800BE6A8
+    .4byte 0x800761C8
+
+    # Entry 293
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8009EC08
+    .4byte 0x8009EC0C
+    .4byte 0x8009EC3C
+    .4byte 0x8009EC40
+    .4byte 0x800761C8
+
+    # Entry 294
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C0F34
+    .4byte 0x800C0FC8
+    .4byte 0x800C1194
+    .4byte 0x800C11E4
+    .4byte 0x800761C8
+
+    # Entry 295
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C12D8
+    .4byte 0x800C134C
+    .4byte 0x800C1350
+    .4byte 0x800C1354
+    .4byte 0x800761C8
+
+    # Entry 296
+    # ID
+    .4byte 16
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C1460
+    .4byte 0x800C14B0
+    .4byte 0x800C1574
+    .4byte 0x800C15B4
+    .4byte 0x800761C8
+
+    # Entry 297
+    # ID
+    .4byte 206
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C32AC
+    .4byte 0x800C334C
+    .4byte 0x800C3350
+    .4byte 0x800C3370
+    .4byte 0x800761C8
+
+    # Entry 298
+    # ID
+    .4byte 207
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C33C8
+    .4byte 0x800C343C
+    .4byte 0x800C3440
+    .4byte 0x800C3460
+    .4byte 0x800761C8
+
+    # Entry 299
+    # ID
+    .4byte 208
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C34B8
+    .4byte 0x800C34F4
+    .4byte 0x800C34F8
+    .4byte 0x800C3518
+    .4byte 0x800761C8
+
+    # Entry 300
+    # ID
+    .4byte 205
+
+    # Flags
+    .4byte 0x00500000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C466C
+    .4byte 0x800C46E0
+    .4byte 0x800C46E4
+    .4byte 0x800C4704
+    .4byte 0x800761C8
+
+    # Entry 301
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800761C8
+
+    # Entry 302
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00400
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800761C8
+
+    # Entry 303
+    # ID
+    .4byte 292
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BD17C
+    .4byte 0x800BD180
+    .4byte 0x800BD184
+    .4byte 0x800BD188
+    .4byte 0x800761C8
+
+    # Entry 304
+    # ID
+    .4byte 293
+
+    # Flags
+    .4byte 0x00B20400
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800BD18C
+    .4byte 0x800BD190
+    .4byte 0x800BD194
+    .4byte 0x800BD198
+    .4byte 0x800761C8
+
+    # Entry 305
+    # ID
+    .4byte 30
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C4900
+    .4byte 0x800C4964
+    .4byte 0x800C4968
+    .4byte 0x800C4A14
+    .4byte 0x800C4A18
+
+    # Entry 306
+    # ID
+    .4byte 31
+
+    # Flags
+    .4byte 0x0044005F
+    .4byte 0x5E000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C4BA4
+    .4byte 0x800C4BA8
+    .4byte 0x800C4BAC
+    .4byte 0x800C4C30
+    .4byte 0x800C4E2C
+
+    # Entry 307
+    # ID
+    .4byte 132
+
+    # Flags
+    .4byte 0x0044005E
+    .4byte 0x5DC00000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C4FEC
+    .4byte 0x800C5074
+    .4byte 0x800C50D4
+    .4byte 0x800C50F4
+    .4byte 0x800761C8
+
+    # Entry 308
+    # ID
+    .4byte 133
+
+    # Flags
+    .4byte 0x0044405E
+    .4byte 0x5D800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C56BC
+    .4byte 0x800C56DC
+    .4byte 0x800C572C
+    .4byte 0x800C574C
+    .4byte 0x800761C8
+
+    # Entry 309
+    # ID
+    .4byte 133
+
+    # Flags
+    .4byte 0x0044205E
+    .4byte 0x5D800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C5848
+    .4byte 0x800C59EC
+    .4byte 0x800C5A10
+    .4byte 0x800C5A30
+    .4byte 0x800761C8
+
+    # Entry 310
+    # ID
+    .4byte 133
+
+    # Flags
+    .4byte 0x0044005E
+    .4byte 0x5D800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C5C10
+    .4byte 0x800C5C74
+    .4byte 0x800C5C94
+    .4byte 0x800C5CB4
+    .4byte 0x800761C8
+
+    # Entry 311
+    # ID
+    .4byte 133
+
+    # Flags
+    .4byte 0x0044045E
+    .4byte 0x5D800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C5DBC
+    .4byte 0x800C5E94
+    .4byte 0x800C5F40
+    .4byte 0x800C5F60
+    .4byte 0x800761C8
+
+    # Entry 312
+    # ID
+    .4byte 133
+
+    # Flags
+    .4byte 0x0044845E
+    .4byte 0x5D800000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C5B24
+    .4byte 0x800C5B44
+    .4byte 0x800C5B48
+    .4byte 0x800C5B68
+    .4byte 0x800761C8
+
+    # Entry 313
+    # ID
+    .4byte 133
+
+    # Flags
+    .4byte 0x0044005E
+    .4byte 0x5D400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C6020
+    .4byte 0x800C6084
+    .4byte 0x800C6088
+    .4byte 0x800C60A8
+    .4byte 0x800761C8
+
+    # Entry 314
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D1868
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D18A4
+    .4byte 0x800761C8
+
+    # Entry 315
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D1A28
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D1A64
+    .4byte 0x800761C8
+
+    # Entry 316
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D1CAC
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D1CE8
+    .4byte 0x800761C8
+
+    # Entry 317
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D1E1C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D1E58
+    .4byte 0x800761C8
+
+    # Entry 318
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D2158
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D2194
+    .4byte 0x800761C8
+
+    # Entry 319
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D2318
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D2354
+    .4byte 0x800761C8
+
+    # Entry 320
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D259C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D25D8
+    .4byte 0x800761C8
+
+    # Entry 321
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00400000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800D270C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x800D2748
+    .4byte 0x800761C8
+
+    # Entry 322
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C6370
+    .4byte 0x800C63B4
+    .4byte 0x800C63B8
+    .4byte 0x800C6404
+    .4byte 0x800761C8
+
+    # Entry 323
+    # ID
+    .4byte 238
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C6700
+    .4byte 0x800C673C
+    .4byte 0x800C6740
+    .4byte 0x800C6950
+    .4byte 0x800761C8
+
+    # Entry 324
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C6CC8
+    .4byte 0x800C6D34
+    .4byte 0x800C6D38
+    .4byte 0x800C6E90
+    .4byte 0x800761C8
+
+    # Entry 325
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00520000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800912A8
+    .4byte 0x800913DC
+    .4byte 0x800913E0
+    .4byte 0x8009144C
+    .4byte 0x800761C8
+
+    # Entry 326
+    # ID
+    .4byte 20
+
+    # Flags
+    .4byte 0x00000000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80091988
+    .4byte 0x800919D8
+    .4byte 0x800919DC
+    .4byte 0x800919FC
+    .4byte 0x800761C8
+
+    # Entry 327
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80155B70
+    .4byte 0x80155B74
+    .4byte 0x80155B78
+    .4byte 0x80155B7C
+    .4byte 0x800761C8
+
+    # Entry 328
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80155C20
+    .4byte 0x80155C88
+    .4byte 0x80155C8C
+    .4byte 0x80155C90
+    .4byte 0x800761C8
+
+    # Entry 329
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80155D5C
+    .4byte 0x80155D60
+    .4byte 0x80155D64
+    .4byte 0x80155D68
+    .4byte 0x800761C8
+
+    # Entry 330
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x80155E08
+    .4byte 0x80155E0C
+    .4byte 0x80155E10
+    .4byte 0x80155E14
+    .4byte 0x800761C8
+
+    # Entry 331
+    # ID
+    .4byte 254
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8010AA1C
+    .4byte 0x8010AA20
+    .4byte 0x8010AA24
+    .4byte 0x8010AA28
+    .4byte 0x800761C8
+
+    # Entry 332
+    # ID
+    .4byte 294
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8010AF54
+    .4byte 0x8010B0A0
+    .4byte 0x8010B0A4
+    .4byte 0x8010B0DC
+    .4byte 0x800761C8
+
+    # Entry 333
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C7734
+    .4byte 0x800C77B0
+    .4byte 0x800C77B4
+    .4byte 0x800C77B8
+    .4byte 0x800761C8
+
+    # Entry 334
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C7A58
+    .4byte 0x800C7AD4
+    .4byte 0x800C7AD8
+    .4byte 0x800C7ADC
+    .4byte 0x800761C8
+
+    # Entry 335
+    # ID
+    .4byte 212
+
+    # Flags
+    .4byte 0x00800000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C7FC8
+    .4byte 0x800C8004
+    .4byte 0x800C8008
+    .4byte 0x800C8028
+    .4byte 0x800761C8
+
+    # Entry 336
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8015B660
+    .4byte 0x8015B664
+    .4byte 0x8015B668
+    .4byte 0x8015B66C
+    .4byte 0x800761C8
+
+    # Entry 337
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8015B704
+    .4byte 0x8015B76C
+    .4byte 0x8015B770
+    .4byte 0x8015B774
+    .4byte 0x800761C8
+
+    # Entry 338
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B00000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8015B840
+    .4byte 0x8015B844
+    .4byte 0x8015B848
+    .4byte 0x8015B84C
+    .4byte 0x800761C8
+
+    # Entry 339
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00B20000
+    .4byte 0x01000000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x8015B8EC
+    .4byte 0x8015B8F0
+    .4byte 0x8015B8F4
+    .4byte 0x8015B8F8
+    .4byte 0x800761C8
+
+    # Entry 340
+    # ID
+    .4byte -1
+
+    # Flags
+    .4byte 0x00C00000
+    .4byte 0x01400000
+
+    # Functions (Anim, Input, Action, Collision, Camera)
+    .4byte 0x800C91C0
+    .4byte 0x800C9208
+    .4byte 0x800C925C
+    .4byte 0x800C9260
+    .4byte 0x800761C8
+
 .global lbl_803C52A0
 lbl_803C52A0:
 	.incbin "baserom.dol", 0x3C22A0, 0x1C0
@@ -2032,7 +8555,14 @@ lbl_803DA6A0:
     .balign 4
 .global lbl_803DA6B4
 lbl_803DA6B4:
-	.incbin "baserom.dol", 0x3D76B4, 0xA4
+	.incbin "baserom.dol", 0x3D76B4, 0x6C
+
+    .balign 4
+    .asciz "IfCameraInfo_Top_model_set"
+    .balign 4
+    .asciz "IfCamera_Top_model_set"
+
+    .balign 8 # Hmm...
 .global lbl_803DA758
 lbl_803DA758:
     .asciz "?333?333C("
@@ -2329,9 +8859,126 @@ lbl_803DFE08:
 .global lbl_803DFEA8
 lbl_803DFEA8:
 	.incbin "baserom.dol", 0x3DCEA8, 0x34
+
+    .balign 4
 .global lbl_803DFEDC
 lbl_803DFEDC:
-	.incbin "baserom.dol", 0x3DCEDC, 0x1E4
+    .4byte 0x803DFEA8
+    .4byte 0x803E5764
+    .4byte 0x803E11A4
+    .4byte 0x803E4ECC
+    .4byte 0x803E1800
+    .4byte 0x803E52E0
+    .4byte 0x803E3F6C
+    .4byte 0x803E5130
+    .4byte 0x803E1B2C
+    .4byte 0x803E4D0C
+    .4byte 0x803E274C
+    .4byte 0x803E51CC
+    .4byte 0x803E0E5C
+    .4byte 0x803E76D0
+    .4byte 0x803E1F08
+    .4byte 0x803E54CC
+    .4byte 0x803E1334
+    .4byte 0x803E6A3C
+    .4byte 0x803E33DC
+    .4byte 0x803E2D20
+    .4byte 0x803E2858
+    .4byte 0x803E3D94
+    .4byte 0x803E4800
+    .4byte NULL
+    .4byte 0x803E4950
+    .4byte 0x803E4C00
+    .4byte NULL
+    .4byte 0x803E7A00
+    .4byte 0x803E6748
+    .4byte 0x803E650C
+    .4byte 0x803E65E8
+    .4byte 0x803E584C
+    .4byte 0x803E5988
+    .4byte 0x803E5E0C
+    .4byte 0x803E617C
+    .4byte 0x803E5764
+    .4byte 0x803E7E38
+    .4byte 0x803E7F90
+    .4byte 0x803E7D34
+    .4byte 0x803E7B10
+    .4byte 0x803E85A4
+    .4byte 0x803E8664
+    .4byte 0x803E872C
+    .4byte 0x803E87EC
+    .4byte 0x803E88AC
+    .4byte 0x803E8974
+    .4byte 0x803E8A34
+    .4byte 0x803E8AF4
+    .4byte 0x803E8C0C
+    .4byte 0x803E8CCC
+    .4byte 0x803E8D8C
+    .4byte 0x803E8E4C
+    .4byte 0x803E8F0C
+    .4byte 0x803E8FCC
+    .4byte 0x803E908C
+    .4byte 0x803E914C
+    .4byte 0x803E920C
+    .4byte 0x803E92CC
+    .4byte 0x803E9394
+    .4byte 0x803E9454
+    .4byte 0x803E9514
+    .4byte 0x803E95D4
+    .4byte 0x803E9694
+    .4byte 0x803E9754
+    .4byte 0x803E981C
+    .4byte 0x803E98DC
+    .4byte 0x803E84C4
+    .4byte 0x803E821C
+    .4byte 0x803E62C0
+    .4byte 0x803E6370
+    .4byte 0x803E6420
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+    .4byte 0x803E5764
+
+    .balign 4
+    .asciz "%s:%d: couldn t get user data(Ground)\n"
+
+    .balign 4
 .global lbl_803E00C0
 lbl_803E00C0:
     .asciz "ground.c"
@@ -3606,9 +10253,656 @@ lbl_803F1384:
 .global lbl_803F1418
 lbl_803F1418:
 	.incbin "baserom.dol", 0x3EE418, 0xAC
+
+    .balign 4
 .global lbl_803F14C4
 lbl_803F14C4:
-	.incbin "baserom.dol", 0x3EE4C4, 0xA14
+    .4byte 0x803F5468
+    .4byte 0x8027CF00
+    .4byte NULL
+    .4byte 0x8027D1D4
+    .4byte 0x8027D208
+    .4byte 0x8027D230
+    .4byte 0x8027D338
+    .4byte 0x8027D414
+    .4byte 0x8027D450
+    .4byte 0x8027D4F4
+    .4byte 0x8027D4B8
+    .4byte NULL
+    .4byte 0x8027D614
+    .4byte 0x8027D530
+    .4byte 0x8027D650
+    .4byte 0x803F5850
+    .4byte 0x802861CC
+    .4byte 0x80286208
+    .4byte 0x80286780
+    .4byte 0x80286964
+    .4byte 0x802867B4
+    .4byte 0x80286CB4
+    .4byte 0x80286F04
+    .4byte 0x80286FC8
+    .4byte 0x80286E70
+    .4byte 0x80286D48
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80286DDC
+    .4byte 0x80287084
+    .4byte 0x803F58E0
+    .4byte 0x80287458
+    .4byte NULL
+    .4byte 0x80287E68
+    .4byte 0x80287EA8
+    .4byte 0x80287EC8
+    .4byte 0x80288818
+    .4byte 0x80288A98
+    .4byte NULL
+    .4byte 0x802889F8
+    .4byte 0x802888B8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80288958
+    .4byte 0x80288C68
+    .4byte 0x803F5988
+    .4byte 0x80288D98
+    .4byte NULL
+    .4byte 0x80288F88
+    .4byte 0x80288FBC
+    .4byte 0x80288FDC
+    .4byte 0x80289218
+    .4byte 0x802895A8
+    .4byte 0x80289644
+    .4byte 0x8028950C
+    .4byte 0x802893D4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80289470
+    .4byte 0x802896AC
+    .4byte 0x803F59F8
+    .4byte 0x80289784
+    .4byte NULL
+    .4byte 0x8028A93C
+    .4byte 0x8028AB28
+    .4byte 0x8028A970
+    .4byte 0x8028AEA4
+    .4byte 0x8028AFC4
+    .4byte NULL
+    .4byte 0x8028AF8C
+    .4byte 0x8028AF1C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8028AF54
+    .4byte 0x8028B06C
+    .4byte 0x803F63C0
+    .4byte 0x80296120
+    .4byte 0x802960E0
+    .4byte 0x8029683C
+    .4byte 0x802968D8
+    .4byte 0x80296930
+    .4byte 0x8029789C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802978B4
+    .4byte 0x802978A4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802978AC
+    .4byte 0x802978BC
+    .4byte 0x803F54D8
+    .4byte 0x8027D76C
+    .4byte NULL
+    .4byte 0x8027E0B4
+    .4byte 0x8027E648
+    .4byte 0x80280380
+    .4byte 0x80280DF0
+    .4byte 0x80280E30
+    .4byte 0x80280E9C
+    .4byte 0x802810A4
+    .4byte 0x80281070
+    .4byte NULL
+    .4byte 0x80281104
+    .4byte 0x802810C4
+    .4byte 0x80281144
+    .4byte 0x803F55D0
+    .4byte 0x80281164
+    .4byte NULL
+    .4byte 0x8028218C
+    .4byte 0x802826F8
+    .4byte 0x802829FC
+    .4byte 0x802839BC
+    .4byte 0x80283588
+    .4byte 0x80282B14
+    .4byte 0x80283A3C
+    .4byte 0x80283A5C
+    .4byte NULL
+    .4byte 0x80283AA4
+    .4byte 0x80283A80
+    .4byte 0x80283AC4
+    .4byte 0x803F56C8
+    .4byte 0x80283BEC
+    .4byte 0x80283C48
+    .4byte 0x80283F28
+    .4byte 0x8028402C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8028412C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80284194
+    .4byte 0x803F5740
+    .4byte 0x802842A4
+    .4byte 0x80284324
+    .4byte 0x802844E4
+    .4byte 0x8028454C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802845BC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80284624
+    .4byte 0x803F57A0
+    .4byte 0x80284644
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8028482C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80284834
+    .4byte 0x803F57B0
+    .4byte 0x80284910
+    .4byte NULL
+    .4byte 0x80284AAC
+    .4byte 0x80284B30
+    .4byte 0x80284BA0
+    .4byte 0x80284C78
+    .4byte NULL
+    .4byte 0x80284C10
+    .4byte 0x80284CAC
+    .4byte 0x80284CCC
+    .4byte NULL
+    .4byte 0x80284D14
+    .4byte 0x80284CF0
+    .4byte 0x80284D34
+    .4byte 0x803F5800
+    .4byte 0x80285338
+    .4byte NULL
+    .4byte 0x80285804
+    .4byte 0x80285B00
+    .4byte 0x80285C78
+    .4byte 0x80285FAC
+    .4byte NULL
+    .4byte 0x80285DF0
+    .4byte 0x80285FE0
+    .4byte 0x80286000
+    .4byte NULL
+    .4byte 0x80286048
+    .4byte 0x80286024
+    .4byte 0x80286068
+    .4byte 0x803F5AB0
+    .4byte 0x8028B0B8
+    .4byte NULL
+    .4byte 0x8028B5E8
+    .4byte 0x8028B3C0
+    .4byte 0x8028B3E0
+    .4byte 0x8028B4D4
+    .4byte NULL
+    .4byte 0x8028B580
+    .4byte 0x8028B540
+    .4byte 0x8028B4F8
+    .4byte NULL
+    .4byte 0x8028B560
+    .4byte 0x8028B51C
+    .4byte 0x8028B8B8
+    .4byte 0x803F5BA8
+    .4byte 0x8028BDAC
+    .4byte NULL
+    .4byte 0x8028C148
+    .4byte 0x8028C300
+    .4byte 0x8028C1AC
+    .4byte 0x8028CCA8
+    .4byte 0x8028CCCC
+    .4byte 0x8028CB24
+    .4byte 0x8028CD04
+    .4byte 0x8028CD3C
+    .4byte NULL
+    .4byte 0x8028CF2C
+    .4byte 0x8028CE1C
+    .4byte 0x8028CFC0
+    .4byte 0x803F5C48
+    .4byte 0x8028D59C
+    .4byte NULL
+    .4byte 0x8028D898
+    .4byte 0x8028D9F4
+    .4byte 0x8028D8E0
+    .4byte 0x8028E540
+    .4byte 0x8028E584
+    .4byte 0x8028E3CC
+    .4byte 0x8028E5C8
+    .4byte 0x8028E600
+    .4byte NULL
+    .4byte 0x8028E684
+    .4byte 0x8028E624
+    .4byte 0x8028E718
+    .4byte 0x803F5CC8
+    .4byte 0x8028E738
+    .4byte NULL
+    .4byte 0x8028E904
+    .4byte 0x8028E9B8
+    .4byte 0x8028E9E0
+    .4byte 0x8028EA54
+    .4byte NULL
+    .4byte 0x8028EB00
+    .4byte 0x8028EAC0
+    .4byte 0x8028EA78
+    .4byte NULL
+    .4byte 0x8028EAE0
+    .4byte 0x8028EA9C
+    .4byte 0x8028EB68
+    .4byte 0x803F5D28
+    .4byte 0x8028ED50
+    .4byte 0x8028ED10
+    .4byte 0x8028F2B4
+    .4byte 0x8028F318
+    .4byte 0x8028F340
+    .4byte 0x8028F3CC
+    .4byte 0x8028F42C
+    .4byte NULL
+    .4byte 0x8028F3EC
+    .4byte 0x8028F3D4
+    .4byte 0x8028F3E4
+    .4byte 0x8028F40C
+    .4byte 0x8028F3DC
+    .4byte 0x8028F8C4
+    .4byte 0x803F5DB0
+    .4byte 0x8028FBE4
+    .4byte NULL
+    .4byte 0x8028FD7C
+    .4byte 0x8028FDE4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8028FE70
+    .4byte 0x803F5E00
+    .4byte 0x8028FED4
+    .4byte NULL
+    .4byte 0x802900CC
+    .4byte 0x802900F4
+    .4byte 0x80290114
+    .4byte 0x802906E4
+    .4byte 0x80290738
+    .4byte 0x80290794
+    .4byte 0x80290830
+    .4byte 0x802907F0
+    .4byte NULL
+    .4byte 0x802908A4
+    .4byte 0x80290850
+    .4byte 0x80290918
+    .4byte 0x803F5EA8
+    .4byte 0x80290A20
+    .4byte NULL
+    .4byte 0x80290F8C
+    .4byte 0x80290FC0
+    .4byte 0x80290FE0
+    .4byte 0x802915E8
+    .4byte 0x802919B8
+    .4byte 0x80291B58
+    .4byte 0x80291978
+    .4byte 0x802917C8
+    .4byte NULL
+    .4byte 0x80291998
+    .4byte 0x802918A0
+    .4byte 0x80291BC0
+    .4byte 0x803F5F40
+    .4byte 0x80291C98
+    .4byte NULL
+    .4byte 0x8029215C
+    .4byte 0x80292190
+    .4byte 0x802921B8
+    .4byte 0x8029222C
+    .4byte NULL
+    .4byte 0x802922D8
+    .4byte 0x80292298
+    .4byte 0x80292250
+    .4byte NULL
+    .4byte 0x802922B8
+    .4byte 0x80292274
+    .4byte 0x80292340
+    .4byte 0x803F5F90
+    .4byte 0x80292360
+    .4byte NULL
+    .4byte 0x80292514
+    .4byte 0x80292548
+    .4byte 0x802925B4
+    .4byte 0x8029266C
+    .4byte NULL
+    .4byte 0x802926A8
+    .4byte 0x8029274C
+    .4byte 0x80292710
+    .4byte NULL
+    .4byte 0x802927A8
+    .4byte 0x8029276C
+    .4byte 0x802927C8
+    .4byte 0x803F6310
+    .4byte 0x8029570C
+    .4byte NULL
+    .4byte 0x802958C8
+    .4byte 0x80295908
+    .4byte 0x80295974
+    .4byte 0x80295ACC
+    .4byte NULL
+    .4byte 0x80295B08
+    .4byte 0x80295BAC
+    .4byte 0x80295B70
+    .4byte NULL
+    .4byte 0x80295C08
+    .4byte 0x80295BCC
+    .4byte 0x80295C28
+    .4byte 0x803F5FF0
+    .4byte 0x8029285C
+    .4byte NULL
+    .4byte 0x80292A5C
+    .4byte 0x80292A90
+    .4byte 0x80292B2C
+    .4byte 0x80292BCC
+    .4byte NULL
+    .4byte 0x80292C08
+    .4byte 0x80292CAC
+    .4byte 0x80292C70
+    .4byte NULL
+    .4byte 0x80292D08
+    .4byte 0x80292CCC
+    .4byte 0x80292D28
+    .4byte 0x803F6090
+    .4byte 0x80292E04
+    .4byte NULL
+    .4byte 0x80293284
+    .4byte 0x802933C4
+    .4byte 0x802933EC
+    .4byte 0x80293488
+    .4byte NULL
+    .4byte 0x80293534
+    .4byte 0x802934F4
+    .4byte 0x802934AC
+    .4byte NULL
+    .4byte 0x80293514
+    .4byte 0x802934D0
+    .4byte 0x80293640
+    .4byte 0x803F6110
+    .4byte 0x8029367C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802939E0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802939E8
+    .4byte 0x803F6130
+    .4byte 0x80293A08
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80293D6C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80293D74
+    .4byte 0x803F6150
+    .4byte 0x80293F58
+    .4byte NULL
+    .4byte 0x802940FC
+    .4byte 0x802941F8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802942B0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80294344
+    .4byte 0x803F61B0
+    .4byte 0x8029451C
+    .4byte NULL
+    .4byte 0x80294728
+    .4byte 0x80294790
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80294A28
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80294A90
+    .4byte 0x803F6220
+    .4byte 0x80294AB0
+    .4byte NULL
+    .4byte 0x80294BE4
+    .4byte 0x80294C14
+    .4byte 0x80294C3C
+    .4byte 0x80294D4C
+    .4byte NULL
+    .4byte 0x80294CE4
+    .4byte 0x80294D5C
+    .4byte 0x80294D54
+    .4byte NULL
+    .4byte 0x80294DA0
+    .4byte 0x80294D7C
+    .4byte 0x80294A90
+    .4byte 0x803F6270
+    .4byte 0x80295118
+    .4byte NULL
+    .4byte 0x8029524C
+    .4byte 0x80295298
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80295340
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802953A8
+    .4byte 0x803F62C0
+    .4byte 0x802953C8
+    .4byte NULL
+    .4byte 0x80295524
+    .4byte 0x80295554
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802955E0
+    .4byte 0x80295684
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802956EC
+    .4byte 0x803F6370
+    .4byte 0x80295C48
+    .4byte NULL
+    .4byte 0x80295D90
+    .4byte 0x80295DC0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80295E4C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80295EB4
+    .4byte 0x803F6488
+    .4byte 0x80297904
+    .4byte 0x802978DC
+    .4byte 0x80297ABC
+    .4byte 0x80297AF0
+    .4byte 0x80297B18
+    .4byte 0x80297BB8
+    .4byte NULL
+    .4byte 0x80297BF8
+    .4byte 0x802980A0
+    .4byte 0x80298060
+    .4byte NULL
+    .4byte 0x80298114
+    .4byte 0x802980D4
+    .4byte 0x80298148
+    .4byte 0x803F64F8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80298634
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80298654
+    .4byte 0x8029863C
+    .4byte 0x8029864C
+    .4byte 0x80298828
+    .4byte 0x80298644
+    .4byte 0x802988C4
+    .4byte 0x803F6530
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80298BE4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80298C04
+    .4byte 0x80298BEC
+    .4byte 0x80298BFC
+    .4byte 0x80298CE8
+    .4byte 0x80298BF4
+    .4byte 0x80298DCC
+    .4byte 0x803F6680
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029A600
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029A620
+    .4byte 0x8029A608
+    .4byte 0x8029A618
+    .4byte 0x8029A704
+    .4byte 0x8029A610
+    .4byte 0x8029A728
+    .4byte 0x803F6568
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80299360
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802993A0
+    .4byte 0x80299368
+    .4byte 0x80299378
+    .4byte 0x80299380
+    .4byte 0x80299370
+    .4byte 0x802993C0
+    .4byte 0x803F6630
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80299B6C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x80299B74
+    .4byte 0x80299C08
+    .4byte 0x80299C10
+    .4byte 0x80299C18
+    .4byte 0x80299C20
+    .4byte 0x80299C28
+    .4byte 0x803F6640
+    .4byte 0x80299D4C
+    .4byte NULL
+    .4byte 0x80299DD0
+    .4byte 0x80299E28
+    .4byte 0x80299E48
+    .4byte 0x8029A0B0
+    .4byte 0x8029A0EC
+    .4byte NULL
+    .4byte 0x8029A0C8
+    .4byte 0x8029A0B8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029A0C0
+    .4byte 0x8029A0F4
+    .4byte 0x803F66C8
+    .4byte 0x8029A9FC
+    .4byte NULL
+    .4byte 0x8029AD1C
+    .4byte 0x8029AD94
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029AF34
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029B0A8
+    .4byte 0x803F6728
+    .4byte 0x8029B1AC
+    .4byte 0x8029B188
+    .4byte 0x8029B2F4
+    .4byte 0x8029B328
+    .4byte 0x8029B348
+    .4byte 0x8029B46C
+    .4byte 0x8029B56C
+    .4byte 0x8029B670
+    .4byte 0x8029B52C
+    .4byte 0x8029B4AC
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029B4EC
+    .4byte 0x8029B6D8
+
 .global lbl_803F1ED8
 lbl_803F1ED8:
     .asciz "ItCo.dat"
@@ -3663,19 +10957,2971 @@ lbl_803F2310:
 	.incbin "baserom.dol", 0x3EF310, 0xBC
 .global lbl_803F23CC
 lbl_803F23CC:
-	.incbin "baserom.dol", 0x3EF3CC, 0xB5C
+    .4byte 0x803F7A48
+    .4byte 0x802C8F4C
+    .4byte 0x802C9504
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C8FC4
+    .4byte 0x803F7A98
+    .4byte 0x802C9588
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C961C
+    .4byte 0x803F7AD8
+    .4byte 0x802C9D40
+    .4byte 0x802C9E00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C9E24
+    .4byte 0x803F7B08
+    .4byte 0x802CA49C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CA538
+    .4byte 0x803F7B58
+    .4byte 0x802CAFD4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CB0F8
+    .4byte 0x803F7BC0
+    .4byte 0x802CB8AC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CB940
+    .4byte 0x803F7C10
+    .4byte 0x802CC6E4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CC744
+    .4byte 0x803F7C40
+    .4byte 0x802CCAB4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CCB14
+    .4byte 0x803F7C70
+    .4byte 0x802CCF9C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CD000
+    .4byte 0x803F7CA0
+    .4byte 0x802CD44C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CD7B8
+    .4byte 0x802CD7D4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CD4DC
+    .4byte 0x803F7CF8
+    .4byte 0x802CDBE0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CDC60
+    .4byte 0x803F7D60
+    .4byte 0x802CE710
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CE7D0
+    .4byte 0x803F7DC8
+    .4byte 0x802CF3E0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CF450
+    .4byte 0x803F7DE8
+    .4byte 0x802CF814
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CF884
+    .4byte 0x803F7E08
+    .4byte 0x802CFC48
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CFCB8
+    .4byte 0x803F7E28
+    .4byte 0x802D007C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D0118
+    .4byte 0x803F7E78
+    .4byte 0x802D0A0C
+    .4byte NULL
+    .4byte 0x802D0D18
+    .4byte 0x802D0E30
+    .4byte 0x802D0E90
+    .4byte 0x802D0AD0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D0AB0
+    .4byte 0x803F7EE8
+    .4byte 0x802D1438
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D14D4
+    .4byte 0x803F7F58
+    .4byte 0x802D251C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D25BC
+    .4byte 0x803F7FC8
+    .4byte 0x802D3008
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D3070
+    .4byte 0x803F7FF8
+    .4byte 0x802D3260
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D32DC
+    .4byte 0x803F8058
+    .4byte 0x802D36B0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D372C
+    .4byte 0x803F80C8
+    .4byte 0x802D3B18
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D3B6C
+    .4byte 0x803F80F8
+    .4byte 0x802D3EF8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D3F4C
+    .4byte 0x803F8128
+    .4byte 0x802D42C4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D43B0
+    .4byte 0x803F8190
+    .4byte 0x802D5050
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D5648
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D56F0
+    .4byte 0x803F8250
+    .4byte 0x802D5ABC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D5CD8
+    .4byte 0x803F8270
+    .4byte 0x802D5CF8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D6100
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D61A8
+    .4byte 0x803F82B0
+    .4byte 0x802D6870
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D6F00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D6FB0
+    .4byte 0x803F82F0
+    .4byte 0x802D6FD0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D73D0
+    .4byte 0x803F7AC8
+    .4byte 0x802C9C20
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C9C78
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C9CA0
+    .4byte 0x802C9C78
+    .4byte 0x802C9C78
+    .4byte NULL
+    .4byte 0x802C9C78
+    .4byte 0x802C9C80
+    .4byte 0x803F7B48
+    .4byte 0x802CACD0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CADC8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CADC0
+    .4byte 0x802CADD0
+    .4byte 0x803F7BB0
+    .4byte 0x802CB690
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CB778
+    .4byte 0x803F7BB0
+    .4byte 0x802CB704
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CB778
+    .4byte 0x803F7C00
+    .4byte 0x802CC3D4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CC5A4
+    .4byte NULL
+    .4byte 0x802CC5CC
+    .4byte NULL
+    .4byte 0x802CC5C4
+    .4byte 0x802CC584
+    .4byte 0x803F7C00
+    .4byte 0x802CC440
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CC5A4
+    .4byte NULL
+    .4byte 0x802CC5CC
+    .4byte NULL
+    .4byte 0x802CC5C4
+    .4byte 0x802CC584
+    .4byte 0x803F7C00
+    .4byte 0x802CC4AC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CC5A4
+    .4byte NULL
+    .4byte 0x802CC5CC
+    .4byte NULL
+    .4byte 0x802CC5C4
+    .4byte 0x802CC584
+    .4byte 0x803F7C00
+    .4byte 0x802CC518
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CC5A4
+    .4byte NULL
+    .4byte 0x802CC5CC
+    .4byte NULL
+    .4byte 0x802CC5C4
+    .4byte 0x802CC584
+    .4byte 0x803F7D90
+    .4byte 0x802CEEC8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802CF0B4
+    .4byte 0x803F7F48
+    .4byte 0x802D2308
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D23D4
+    .4byte 0x803F7F48
+    .4byte 0x802D234C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D23D4
+    .4byte 0x803F7F48
+    .4byte 0x802D2390
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D23D4
+    .4byte 0x803F7FB8
+    .4byte 0x802D2E80
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D2ED0
+    .4byte 0x803F8180
+    .4byte 0x802D4DE0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D4EF4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D4F28
+    .4byte NULL
+    .4byte 0x802D4F48
+    .4byte 0x802D4F08
+    .4byte 0x802D4F50
+    .4byte 0x802D4F58
+    .4byte 0x803F8200
+    .4byte 0x802D57D0
+    .4byte NULL
+    .4byte 0x802D59A8
+    .4byte 0x802D59DC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D5A04
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D5A9C
+    .4byte 0x803F82A0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D6808
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D6810
+    .4byte 0x802D6830
+    .4byte 0x802D6838
+    .4byte 0x802D6840
+    .4byte 0x802D6848
+    .4byte 0x802D6850
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+    .4byte 0x000000A1
+    .4byte 0x000000A2
+    .4byte 0x000000A3
+    .4byte 0x000000A4
+    .4byte 0x000000A5
+    .4byte 0x000000A6
+    .4byte 0x000000AA
+    .4byte 0x000000AB
+    .4byte 0x000000AC
+    .4byte 0x000000B0
+    .4byte 0x000000B1
+    .4byte 0x000000B4
+    .4byte 0x000000B5
+    .4byte 0x000000B6
+    .4byte 0x000000B9
+    .4byte 0x000000BA
+    .4byte 0x000000BB
+    .4byte 0x000000BC
+    .4byte 0x000000BD
+    .4byte 0x000000BE
+    .4byte 0x000000BF
+    .4byte 0x00000000
+
 .global lbl_803F2F28
 lbl_803F2F28:
 	.incbin "baserom.dol", 0x3EFF28, 0x1D8
+
+    .balign 4
 .global lbl_803F3100
 lbl_803F3100:
-	.incbin "baserom.dol", 0x3F0100, 0x1BA8
+    .4byte 0x803F8320
+    .4byte 0x802D73F0
+    .4byte 0x8027C8B0
+    .4byte 0x802D7C14
+    .4byte 0x802D7CB4
+    .4byte 0x802D7D18
+    .4byte NULL
+    .4byte 0x802D7F38
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F8EB0
+    .4byte 0x802E8BCC
+    .4byte 0x802EA41C
+    .4byte 0x802EA0E0
+    .4byte 0x802EA154
+    .4byte 0x802EA1B4
+    .4byte NULL
+    .4byte 0x802E8CD8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F8B48
+    .4byte 0x802E4A44
+    .4byte 0x8027C8B0
+    .4byte 0x802E561C
+    .4byte 0x802E5690
+    .4byte 0x802E56E8
+    .4byte NULL
+    .4byte 0x802E4B00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E5AA4
+    .4byte 0x803F89C8
+    .4byte 0x802E2470
+    .4byte 0x802E34DC
+    .4byte 0x802E31F8
+    .4byte 0x802E32B4
+    .4byte 0x802E3314
+    .4byte NULL
+    .4byte 0x802E257C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E3784
+    .4byte 0x803F8E90
+    .4byte 0x802E878C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E87D8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E87F8
+    .4byte 0x802E87E0
+    .4byte 0x802E87F0
+    .4byte 0x802E881C
+    .4byte 0x802E87E8
+    .4byte 0x802E89B0
+    .4byte 0x803F6788
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029BA38
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029BA40
+    .4byte 0x8029BA60
+    .4byte 0x8029BA70
+    .4byte 0x8029BA78
+    .4byte 0x8029BA68
+    .4byte 0x8029BA98
+    .4byte 0x803F75D0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C11E0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C1384
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C13CC
+    .4byte 0x802C1400
+    .4byte 0x802C14B8
+    .4byte 0x802C1514
+    .4byte 0x802C145C
+    .4byte 0x802C1570
+    .4byte 0x803F6798
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029BFB4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029BFCC
+    .4byte 0x8029BFBC
+    .4byte 0x8029BFC4
+    .4byte 0x8029C208
+    .4byte 0x8029C4AC
+    .4byte 0x8029C4B4
+    .4byte 0x803F6C98
+    .4byte NULL
+    .4byte 0x802ADC04
+    .4byte 0x802ADD88
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802ADDB0
+    .4byte 0x803F6C88
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802ADBE4
+    .4byte 0x803F9470
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F2BDC
+    .4byte 0x803F67D0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CA78
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CA80
+    .4byte 0x8029CA78
+    .4byte 0x8029CC4C
+    .4byte 0x8029CC54
+    .4byte 0x8029CCF0
+    .4byte 0x8029CCF8
+    .4byte 0x803F67D0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CA78
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CA80
+    .4byte 0x8029CA78
+    .4byte 0x8029CC4C
+    .4byte 0x8029CC54
+    .4byte 0x8029CCF0
+    .4byte 0x8029CCF8
+    .4byte 0x803F6818
+    .4byte NULL
+    .4byte 0x8029CFA0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CF8C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029D948
+    .4byte 0x803F6818
+    .4byte NULL
+    .4byte 0x8029CFA0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CF8C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029D948
+    .4byte 0x803F6888
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029DEB0
+    .4byte 0x8029EC34
+    .4byte 0x8029E5D0
+    .4byte 0x8029F960
+    .4byte 0x8029FA30
+    .4byte 0x8029FB24
+    .4byte 0x8029FD20
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029FD64
+    .4byte 0x8029FD40
+    .4byte 0x8029FD84
+    .4byte 0x803F6888
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029DEB0
+    .4byte 0x8029EC34
+    .4byte 0x8029E5D0
+    .4byte 0x8029F960
+    .4byte 0x8029FA30
+    .4byte 0x8029FB24
+    .4byte 0x8029FD20
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029FD64
+    .4byte 0x8029FD40
+    .4byte 0x8029FD84
+    .4byte 0x803F6920
+    .4byte NULL
+    .4byte 0x802A087C
+    .4byte 0x802A0E70
+    .4byte 0x802A0F84
+    .4byte 0x802A0F88
+    .4byte 0x802A1F08
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A20E8
+    .4byte 0x802A1FA8
+    .4byte 0x802A2048
+    .4byte 0x802A2320
+    .4byte 0x802A2288
+    .4byte 0x802A23CC
+    .4byte 0x803F6920
+    .4byte NULL
+    .4byte 0x802A087C
+    .4byte 0x802A0E70
+    .4byte 0x802A0F84
+    .4byte 0x802A0F88
+    .4byte 0x802A1F08
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A20E8
+    .4byte 0x802A1FA8
+    .4byte 0x802A2048
+    .4byte 0x802A2320
+    .4byte 0x802A2288
+    .4byte 0x802A23CC
+    .4byte 0x803F6998
+    .4byte 0x802A2418
+    .4byte NULL
+    .4byte 0x802A7688
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A7D40
+    .4byte 0x803F6998
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A7688
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A7D40
+    .4byte 0x803F6A28
+    .4byte NULL
+    .4byte 0x802A8984
+    .4byte 0x802A8AF8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9A80
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9D4C
+    .4byte 0x802A9CE0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9B08
+    .4byte 0x802AA034
+    .4byte 0x803F6A28
+    .4byte NULL
+    .4byte 0x802A8984
+    .4byte 0x802A8AF8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9A80
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9D4C
+    .4byte 0x802A9CE0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9B08
+    .4byte 0x802AA034
+    .4byte 0x803F6B28
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AA284
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AA35C
+    .4byte 0x802AA2E8
+    .4byte 0x802AA34C
+    .4byte 0x802AA37C
+    .4byte 0x802AA354
+    .4byte 0x802AA474
+    .4byte 0x803F6B60
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AA75C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AA7C4
+    .4byte 0x803F6B70
+    .4byte NULL
+    .4byte 0x802AA9CC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AB2AC
+    .4byte 0x802AB3C0
+    .4byte 0x802AB3C8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AB3D0
+    .4byte 0x803F6BC8
+    .4byte NULL
+    .4byte 0x802AB90C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AC050
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AC098
+    .4byte 0x802AC074
+    .4byte 0x802AC338
+    .4byte 0x802AC35C
+    .4byte 0x802AC3F8
+    .4byte 0x802AC41C
+    .4byte 0x803F6C08
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F6C08
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F6C08
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F6C08
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F6CA8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AEB00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AF184
+    .4byte 0x803F6CA8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AEB00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AF184
+    .4byte 0x803F6E98
+    .4byte NULL
+    .4byte 0x802AF298
+    .4byte 0x802AF434
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AF920
+    .4byte 0x803F6E98
+    .4byte NULL
+    .4byte 0x802AF298
+    .4byte 0x802AF434
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AF920
+    .4byte 0x803F6F40
+    .4byte NULL
+    .4byte 0x802AFA2C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AFD4C
+    .4byte 0x802AFD54
+    .4byte 0x802AFD5C
+    .4byte 0x802AFD64
+    .4byte 0x802AFD6C
+    .4byte 0x803F6F50
+    .4byte NULL
+    .4byte 0x802AFEF8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B0D84
+    .4byte 0x802B10E4
+    .4byte NULL
+    .4byte 0x802B1294
+    .4byte 0x802B0F34
+    .4byte NULL
+    .4byte 0x802B14DC
+    .4byte 0x802B16E4
+    .4byte 0x802B1890
+    .4byte 0x803F70A8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B1AAC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B1C40
+    .4byte 0x803F70C8
+    .4byte NULL
+    .4byte 0x802B202C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2508
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2518
+    .4byte 0x802B2520
+    .4byte NULL
+    .4byte 0x802B2510
+    .4byte 0x802B2528
+    .4byte 0x803F70C8
+    .4byte NULL
+    .4byte 0x802B202C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2508
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2518
+    .4byte 0x802B2520
+    .4byte NULL
+    .4byte 0x802B2510
+    .4byte 0x802B2528
+    .4byte 0x803F70F8
+    .4byte NULL
+    .4byte 0x802B2644
+    .4byte 0x802B2700
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2870
+    .4byte 0x803F70F8
+    .4byte NULL
+    .4byte 0x802B2644
+    .4byte 0x802B2700
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2870
+    .4byte 0x803F70B8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B1D38
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B1DCC
+    .4byte 0x803F7118
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2AE0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2C04
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B2E5C
+    .4byte 0x802B2D50
+    .4byte NULL
+    .4byte 0x802B2F88
+    .4byte 0x802B2E7C
+    .4byte 0x802B2FA8
+    .4byte 0x803F94A0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F3330
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F3374
+    .4byte 0x803F7158
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B309C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B314C
+    .4byte 0x802B30C0
+    .4byte 0x802B3108
+    .4byte 0x802B312C
+    .4byte 0x802B30E4
+    .4byte 0x802B3348
+    .4byte 0x803F7190
+    .4byte NULL
+    .4byte 0x802B34E4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B3A94
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B3AF8
+    .4byte 0x802B3C44
+    .4byte 0x802B3CA8
+    .4byte 0x802B3D70
+    .4byte 0x802B3D0C
+    .4byte 0x802B3EDC
+    .4byte 0x803F71D8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B45F0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B46C8
+    .4byte 0x802B4638
+    .4byte 0x802B4680
+    .4byte 0x802B4A60
+    .4byte 0x802B4A18
+    .4byte 0x802B4AA8
+    .4byte 0x803F7190
+    .4byte NULL
+    .4byte 0x802B34E4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B3A94
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B3AF8
+    .4byte 0x802B3C44
+    .4byte 0x802B3CA8
+    .4byte 0x802B3D70
+    .4byte 0x802B3D0C
+    .4byte 0x802B3EDC
+    .4byte 0x803F71D8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B45F0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B46C8
+    .4byte 0x802B4638
+    .4byte 0x802B4680
+    .4byte 0x802B4A60
+    .4byte 0x802B4A18
+    .4byte 0x802B4AA8
+    .4byte 0x803F7220
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B52B8
+    .4byte NULL
+    .4byte 0x802B4F78
+    .4byte 0x802B5374
+    .4byte 0x802B52EC
+    .4byte NULL
+    .4byte 0x802B5354
+    .4byte 0x802B5320
+    .4byte 0x802B54E4
+    .4byte 0x803F7288
+    .4byte NULL
+    .4byte 0x802B58D8
+    .4byte 0x802B59C4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B5FD8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B5FF0
+    .4byte 0x802B5FE0
+    .4byte 0x802B5FE8
+    .4byte 0x802B6144
+    .4byte 0x802B613C
+    .4byte 0x802B62B0
+    .4byte 0x803F7340
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B6C28
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B6E4C
+    .4byte 0x802B6C7C
+    .4byte NULL
+    .4byte 0x802B6D24
+    .4byte 0x802B6CD0
+    .4byte 0x802B7104
+    .4byte 0x803F73A8
+    .4byte 0x802B7150
+    .4byte NULL
+    .4byte 0x802BA97C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BAEA0
+    .4byte 0x803F7438
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BCE94
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BD10C
+    .4byte 0x803F7488
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BD240
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BD30C
+    .4byte 0x803F74A8
+    .4byte NULL
+    .4byte 0x802BD47C
+    .4byte 0x802BD628
+    .4byte 0x802BD8CC
+    .4byte 0x802BD748
+    .4byte 0x802BD938
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BD99C
+    .4byte 0x802BD978
+    .4byte NULL
+    .4byte 0x802BD9E4
+    .4byte 0x802BD9C0
+    .4byte 0x802BDA08
+    .4byte 0x803F6C58
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AD2E8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AD2F0
+    .4byte 0x802AD384
+    .4byte 0x802AD38C
+    .4byte 0x802AD3B0
+    .4byte 0x802AD450
+    .4byte 0x802AD458
+    .4byte 0x803F6C68
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AD6F0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AD9FC
+    .4byte 0x803F7558
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BFE34
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C016C
+    .4byte 0x803F74F8
+    .4byte NULL
+    .4byte 0x802BDB4C
+    .4byte 0x802BDC74
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BDDF8
+    .4byte 0x803F7528
+    .4byte NULL
+    .4byte 0x802BDEFC
+    .4byte 0x802BDFE0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BE1F4
+    .4byte 0x803F75C0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C0490
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C0498
+    .4byte 0x802C04B8
+    .4byte 0x802C04C8
+    .4byte 0x802C04D0
+    .4byte 0x802C04C0
+    .4byte 0x802C04F0
+    .4byte 0x803F7668
+    .4byte NULL
+    .4byte 0x802C17FC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C1FC8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C1FD0
+    .4byte 0x802C1FF0
+    .4byte 0x802C20E4
+    .4byte 0x802C20EC
+    .4byte 0x802C1FF8
+    .4byte 0x802C210C
+    .4byte 0x803F76A8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C2424
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C242C
+    .4byte 0x802C244C
+    .4byte 0x802C245C
+    .4byte 0x802C2464
+    .4byte 0x802C2454
+    .4byte 0x802C246C
+    .4byte 0x803F76F8
+    .4byte NULL
+    .4byte 0x802C3CBC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C443C
+    .4byte 0x802C4550
+    .4byte 0x802C4558
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C4560
+    .4byte 0x803F7740
+    .4byte NULL
+    .4byte 0x802C4670
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C49A0
+    .4byte 0x802C49A8
+    .4byte 0x802C49B0
+    .4byte 0x802C49B8
+    .4byte 0x802C49C0
+    .4byte 0x803F7750
+    .4byte NULL
+    .4byte 0x802C4A00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C4C90
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C4C98
+    .4byte 0x802C4CB8
+    .4byte 0x802C4CC8
+    .4byte 0x802C4CD0
+    .4byte 0x802C4CC0
+    .4byte 0x802C4CD8
+    .4byte 0x803F7548
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BE488
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BE538
+    .4byte 0x802BE4AC
+    .4byte 0x802BE4F4
+    .4byte 0x802BE518
+    .4byte 0x802BE4D0
+    .4byte 0x802BE578
+    .4byte 0x803F7760
+    .4byte NULL
+    .4byte 0x802C56A0
+    .4byte 0x802C578C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C60B4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C60CC
+    .4byte 0x802C60BC
+    .4byte 0x802C60C4
+    .4byte 0x802C6140
+    .4byte 0x802C6138
+    .4byte 0x802C61D4
+    .4byte 0x803F76B8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C37BC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C3AA4
+    .4byte 0x803F7898
+    .4byte NULL
+    .4byte 0x802C62F8
+    .4byte 0x802C63B4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C65C4
+    .4byte 0x803F78D8
+    .4byte NULL
+    .4byte 0x802C66E8
+    .4byte 0x802C67A4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C68D8
+    .4byte 0x803F78E8
+    .4byte NULL
+    .4byte 0x802C69FC
+    .4byte 0x802C6AB8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C6C18
+    .4byte 0x803F78F8
+    .4byte NULL
+    .4byte 0x802C6D3C
+    .4byte 0x802C6DF8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C6F20
+    .4byte 0x803F7918
+    .4byte NULL
+    .4byte 0x802C7044
+    .4byte 0x802C7100
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C71EC
+    .4byte 0x803F7938
+    .4byte NULL
+    .4byte 0x802C7310
+    .4byte 0x802C73CC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C74B8
+    .4byte 0x803F7968
+    .4byte NULL
+    .4byte 0x802C7A54
+    .4byte 0x802C7B10
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C7D40
+    .4byte 0x803F79A0
+    .4byte NULL
+    .4byte 0x802C7E64
+    .4byte 0x802C7F20
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C8018
+    .4byte 0x803F79E0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C847C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C8A28
+    .4byte 0x802C88E4
+    .4byte 0x802C899C
+    .4byte 0x802C8A08
+    .4byte 0x802C8940
+    .4byte 0x802C8B08
+    .4byte 0x803F7A28
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C8C74
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C8F2C
+    .4byte 0x803F79C0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C835C
+    .4byte 0x803F9378
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F044C
+    .4byte 0x803F9388
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F0F0C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F0F14
+    .4byte 0x802F0F34
+    .4byte 0x802F0F3C
+    .4byte 0x802F0F44
+    .4byte 0x802F0F64
+    .4byte 0x802F0BC8
+    .4byte 0x803F9378
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F044C
+    .4byte 0x803F9388
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F0BC8
+    .4byte 0x803F93A8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F10B4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F10D8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F1094
+    .4byte 0x803F6788
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029BA38
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029BA40
+    .4byte 0x8029BA60
+    .4byte 0x8029BA70
+    .4byte 0x8029BA78
+    .4byte 0x8029BA68
+    .4byte 0x8029BA98
+    .4byte 0x803F75D0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C1384
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C13CC
+    .4byte 0x802C1400
+    .4byte 0x802C14B8
+    .4byte 0x802C1514
+    .4byte 0x802C145C
+    .4byte 0x802C1570
+    .4byte 0x803F75C0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C0490
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C0498
+    .4byte 0x802C04B8
+    .4byte 0x802C04C8
+    .4byte 0x802C04D0
+    .4byte 0x802C04C0
+    .4byte 0x802C04F0
+    .4byte 0x803F7668
+    .4byte NULL
+    .4byte 0x802C17FC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C1FC8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C1FD0
+    .4byte 0x802C1FF0
+    .4byte 0x802C20E4
+    .4byte 0x802C20EC
+    .4byte 0x802C1FF8
+    .4byte 0x802C210C
+    .4byte 0x803F7528
+    .4byte NULL
+    .4byte 0x802BDEFC
+    .4byte 0x802BDFE0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BE1F4
+    .4byte 0x803F7548
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BE488
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802BE578
+    .4byte 0x803F67D0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CA78
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CA80
+    .4byte 0x8029CA78
+    .4byte 0x8029CC4C
+    .4byte 0x8029CC54
+    .4byte 0x8029CCF0
+    .4byte 0x8029CCF8
+    .4byte 0x803F67D0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CA78
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x8029CA80
+    .4byte 0x8029CA78
+    .4byte 0x8029CC4C
+    .4byte 0x8029CC54
+    .4byte 0x8029CCF0
+    .4byte 0x8029CCF8
+    .4byte 0x803F6CA8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AEB00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AF184
+    .4byte 0x803F6CA8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AEB00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AF184
+    .4byte 0x803F6A28
+    .4byte NULL
+    .4byte 0x802A8984
+    .4byte 0x802A8AF8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9A80
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9D4C
+    .4byte 0x802A9CE0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9B08
+    .4byte 0x802AA034
+    .4byte 0x803F6A28
+    .4byte NULL
+    .4byte 0x802A8984
+    .4byte 0x802A8AF8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9A80
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9D4C
+    .4byte 0x802A9CE0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802A9B08
+    .4byte 0x802AA034
+    .4byte 0x803F6E98
+    .4byte NULL
+    .4byte 0x802AF298
+    .4byte 0x802AF434
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AF920
+    .4byte 0x803F6E98
+    .4byte NULL
+    .4byte 0x802AF298
+    .4byte 0x802AF434
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AF920
+    .4byte 0x803F7760
+    .4byte NULL
+    .4byte 0x802C56A0
+    .4byte 0x802C578C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C60B4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C60CC
+    .4byte 0x802C60BC
+    .4byte 0x802C60C4
+    .4byte 0x802C6140
+    .4byte 0x802C6138
+    .4byte 0x802C61D4
+    .4byte 0x803F6B70
+    .4byte NULL
+    .4byte 0x802AA9CC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AB2AC
+    .4byte 0x802AB3C0
+    .4byte 0x802AB3C8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AB3D0
+    .4byte 0x803F6F40
+    .4byte NULL
+    .4byte 0x802AFA2C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AFD4C
+    .4byte 0x802AFD54
+    .4byte 0x802AFD5C
+    .4byte 0x802AFD64
+    .4byte 0x802AFD6C
+    .4byte 0x803F7190
+    .4byte NULL
+    .4byte 0x802B34E4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B3A94
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B3AF8
+    .4byte 0x802B3C44
+    .4byte 0x802B3CA8
+    .4byte 0x802B3D70
+    .4byte 0x802B3D0C
+    .4byte 0x802B3EDC
+    .4byte 0x803F71D8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B45F0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B46C8
+    .4byte 0x802B4638
+    .4byte 0x802B4680
+    .4byte 0x802B4A60
+    .4byte 0x802B4A18
+    .4byte 0x802B4AA8
+    .4byte 0x803F7190
+    .4byte NULL
+    .4byte 0x802B34E4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B3A94
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B3AF8
+    .4byte 0x802B3C44
+    .4byte 0x802B3CA8
+    .4byte 0x802B3D70
+    .4byte 0x802B3D0C
+    .4byte 0x802B3EDC
+    .4byte 0x803F71D8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B45F0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B46C8
+    .4byte 0x802B4638
+    .4byte 0x802B4680
+    .4byte 0x802B4A60
+    .4byte 0x802B4A18
+    .4byte 0x802B4AA8
+    .4byte 0x803F7288
+    .4byte NULL
+    .4byte 0x802B58D8
+    .4byte 0x802B59C4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B5FD8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B5FF0
+    .4byte 0x802B5FE0
+    .4byte 0x802B5FE8
+    .4byte 0x802B6144
+    .4byte 0x802B613C
+    .4byte 0x802B62B0
+    .4byte 0x803F6F50
+    .4byte NULL
+    .4byte 0x802AFEF8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B0D84
+    .4byte 0x802B10E4
+    .4byte NULL
+    .4byte 0x802B1294
+    .4byte 0x802B0F34
+    .4byte NULL
+    .4byte 0x802B14DC
+    .4byte 0x802B16E4
+    .4byte 0x802B1890
+    .4byte 0x803F70A8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B1AAC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802B1C40
+    .4byte 0x803F6C58
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AD2E8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802AD2F0
+    .4byte 0x802AD384
+    .4byte 0x802AD38C
+    .4byte 0x802AD3B0
+    .4byte 0x802AD450
+    .4byte 0x802AD458
+    .4byte 0x803F79E0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C847C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C8A28
+    .4byte 0x802C88E4
+    .4byte 0x802C899C
+    .4byte 0x802C8A08
+    .4byte 0x802C8940
+    .4byte 0x802C8B08
+    .4byte 0x803F7958
+    .4byte NULL
+    .4byte 0x802C75DC
+    .4byte 0x802C7698
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802C7754
+    .4byte 0x803F94A0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F3330
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F3374
+    .4byte 0x803F8BD8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E6A40
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E6ACC
+    .4byte 0x803F93C8
+    .4byte 0x802F14E4
+    .4byte 0x802F1518
+    .4byte 0x802F1888
+    .4byte 0x802F1CE0
+    .4byte 0x802F1CE0
+    .4byte NULL
+    .4byte 0x802F1910
+    .4byte 0x802F1F48
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802F18F0
+    .4byte 0x803F8C8C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E6F7C
+    .4byte 0x802E6FC0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E709C
+
 .global lbl_803F4CA8
 lbl_803F4CA8:
 	.incbin "baserom.dol", 0x3F1CA8, 0x78
+
+    .balign 4
 .global lbl_803F4D20
 lbl_803F4D20:
-	.incbin "baserom.dol", 0x3F1D20, 0x708
+    .4byte 0x803F8320
+    .4byte 0x802D73F0
+    .4byte 0x8027C8B0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D7F38
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D84D8
+    .4byte 0x803F83E0
+    .4byte 0x802D84F8
+    .4byte 0x8027C8B0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D85F4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F83F0
+    .4byte 0x802D8688
+    .4byte 0x8027C8B0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D8EC8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802D9A0C
+    .4byte 0x803F85F0
+    .4byte 0x802DC69C
+    .4byte 0x8027C8B0
+    .4byte 0x802DD4F4
+    .4byte 0x802DD59C
+    .4byte 0x802DD67C
+    .4byte NULL
+    .4byte 0x802DC774
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802DD7D0
+    .4byte 0x803F88C0
+    .4byte 0x802E05A0
+    .4byte 0x8027C8B0
+    .4byte 0x802E0F70
+    .4byte 0x802E0FE4
+    .4byte 0x802E10C8
+    .4byte NULL
+    .4byte 0x802E0EE0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E16D8
+    .4byte 0x803F8468
+    .4byte 0x802D9BA8
+    .4byte 0x802DC480
+    .4byte 0x802DBE90
+    .4byte 0x802DBF30
+    .4byte 0x802DC000
+    .4byte NULL
+    .4byte 0x802D9CC4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E16D8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F89C8
+    .4byte 0x802E2470
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E257C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F8A88
+    .4byte 0x802E37BC
+    .4byte 0x8027C8B0
+    .4byte 0x802E468C
+    .4byte 0x802E4700
+    .4byte 0x802E47C0
+    .4byte NULL
+    .4byte 0x802E3884
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E4A24
+    .4byte 0x803F8940
+    .4byte 0x802E1820
+    .4byte 0x802E1874
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E1E5C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E2450
+    .4byte 0x803F86C8
+    .4byte 0x802DE040
+    .4byte 0x802DFEF4
+    .4byte 0x802DE434
+    .4byte 0x802DE648
+    .4byte 0x802DE4FC
+    .4byte 0x802DFC34
+    .4byte 0x802DFC58
+    .4byte 0x802DEEF4
+    .4byte 0x802DFC90
+    .4byte 0x802DFCB0
+    .4byte NULL
+    .4byte 0x802DFE40
+    .4byte 0x802DFD60
+    .4byte 0x802DFED4
+    .4byte 0x803F87F0
+    .4byte 0x802E02E8
+    .4byte 0x802E0388
+    .4byte 0x802E0308
+    .4byte 0x802E0348
+    .4byte 0x802E0328
+    .4byte 0x802E03A8
+    .4byte 0x802E03C8
+    .4byte 0x802E0368
+    .4byte 0x802E03E8
+    .4byte 0x802E0408
+    .4byte NULL
+    .4byte 0x802E0448
+    .4byte 0x802E0428
+    .4byte 0x802E0468
+    .4byte 0x803F9000
+    .4byte 0x802EB5C8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EB6A8
+    .4byte 0x802EB684
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EC850
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F91D0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EEA08
+    .4byte 0x802EEA70
+    .4byte 0x802EEB28
+    .4byte 0x802EEED0
+    .4byte NULL
+    .4byte 0x802EEBB0
+    .4byte 0x802EEF10
+    .4byte 0x802EEED8
+    .4byte NULL
+    .4byte 0x802EEF68
+    .4byte 0x802EEF30
+    .4byte 0x802EEF88
+    .4byte 0x803F91D0
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EEA08
+    .4byte 0x802EEA70
+    .4byte 0x802EEB28
+    .4byte 0x802EEED0
+    .4byte NULL
+    .4byte 0x802EEBB0
+    .4byte 0x802EEF10
+    .4byte 0x802EEED8
+    .4byte NULL
+    .4byte 0x802EEF68
+    .4byte 0x802EEF30
+    .4byte 0x802EEF88
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F9260
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EF074
+    .4byte 0x802EF700
+    .4byte NULL
+    .4byte 0x802EF944
+    .4byte 0x802EF724
+    .4byte 0x802EF874
+    .4byte 0x802EF924
+    .4byte 0x802EF7CC
+    .4byte 0x802EFA24
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x803F90D0
+    .4byte 0x802ECE90
+    .4byte 0x802ECCDC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EDDC0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EE1E0
+    .4byte 0x803F8DE8
+    .4byte NULL
+    .4byte 0x802E79C8
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E838C
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802E8420
+    .4byte 0x802E838C
+    .4byte 0x802E8418
+    .4byte 0x802E85F4
+    .4byte 0x802E8784
+    .4byte NULL
+    .4byte 0x803F8FD0
+    .4byte 0x802EB1EC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EB444
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EB45C
+    .4byte 0x802EB44C
+    .4byte 0x802EB454
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EB5A8
+    .4byte 0x803F9328
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x802EFBC0
+    .4byte 0x802EFBE8
+    .4byte 0x802EFC08
+    .4byte 0x802EFE28
+    .4byte 0x802F022C
+    .4byte NULL
+    .4byte 0x802F0104
+    .4byte 0x802EFF1C
+    .4byte NULL
+    .4byte 0x802F01F8
+    .4byte 0x802F0010
+    .4byte 0x802F0320
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
 .global lbl_803F5428
 lbl_803F5428:
     .asciz "can t init zako pos\n"
