@@ -120,6 +120,9 @@ typedef struct {
 	FILE *elf;
 } DOL_map;
 
+uint32_t sdataSize = 0;
+uint32_t sbssSize = 0;
+
 void usage(const char *name)
 {
 	fprintf(stderr, "Usage: %s [-h] [-v] [--] elf-file dol-file\n", name);
@@ -161,7 +164,15 @@ void add_bss(DOL_map *map, uint32_t paddr, uint32_t memsz)
 	}
 }
 
-void read_elf_segments(DOL_map *map, const char *elf)
+void increment_bss_size(DOL_map *map, uint32_t memsz)
+{
+	// because it can be byte swapped, we need to force the add via a temporary.
+	uint32_t preAdd = swap32(map->header.bss_size);
+	preAdd += memsz;
+	map->header.bss_size = swap32(preAdd);
+}
+
+void read_elf_segments(DOL_map *map, const char *elf, uint32_t sdata_pdhr, uint32_t sbss_pdhr)
 {
 	int read, i;
 	Elf32_Ehdr ehdr;
@@ -255,6 +266,11 @@ void read_elf_segments(DOL_map *map, const char *elf)
 					if(filesz == 0) {
 						// BSS segment
 						add_bss(map, paddr, memsz);
+
+						// We need to keep PHDF sizes, so track these.
+						if(i == sbss_pdhr) {
+							sbssSize = memsz;
+						}
 					} else {
 						// DATA segment
 						if(filesz > memsz) {
@@ -265,6 +281,11 @@ void read_elf_segments(DOL_map *map, const char *elf)
 						if(map->data_cnt >= MAX_DATA_SEGMENTS) {
 							die("Error: Too many DATA segments");
 						}
+						// Track sdata as well.
+						if(i == sdata_pdhr) {
+							sdataSize = memsz;
+						}
+
 						map->header.data_addr[map->data_cnt] = swap32(paddr);
 						map->header.data_size[map->data_cnt] = swap32(filesz);
 						map->data_elf_off[map->data_cnt] = offset;
@@ -280,6 +301,8 @@ void read_elf_segments(DOL_map *map, const char *elf)
 			fprintf(stderr, "Skipping program header %d of type %d\n", i, swap32(phdrs[i].p_type));
 		}
 	}
+	increment_bss_size(map, sdataSize);
+	increment_bss_size(map, sbssSize);
 	if(verbosity >= 2) {
 		fprintf(stderr, "Segments:\n");
 		for(i=0; i<map->text_cnt; i++) {
@@ -457,12 +480,14 @@ int main(int argc, char **argv)
 
 	const char *elf_file = arg[0];
 	const char *dol_file = arg[1];
+	uint32_t sdata_pdhr = atoi(arg[2]);
+	uint32_t sbss_pdhr = atoi(arg[3]);
 
 	DOL_map map;
 
 	memset(&map, 0, sizeof(map));
 
-	read_elf_segments(&map, elf_file);
+	read_elf_segments(&map, elf_file, sdata_pdhr, sbss_pdhr);
 	map_dol(&map);
 	write_dol(&map, dol_file);
 	

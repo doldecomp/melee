@@ -25,8 +25,12 @@ LDSCRIPT := $(BUILD_DIR)/ldscript.lcf
 DOL     := $(BUILD_DIR)/main.dol
 ELF     := $(DOL:.dol=.elf)
 MAP     := $(BUILD_DIR)/ssbm.map
-O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
-           $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
+
+include obj_files.mk
+
+O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES) \
+           $(CTORS_O_FILES) $(DTORS_O_FILES) $(RODATA_O_FILES) $(DATA_O_FILES)    \
+           $(BSS_O_FILES) $(SDATA_O_FILES) $(SBSS_O_FILES) $(SDATA2_O_FILES)
 
 #-------------------------------------------------------------------------------
 # Tools
@@ -61,6 +65,10 @@ CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p -nodefaults -msgstyle 
 # for postprocess.py
 PROCFLAGS := -fprologue-fixup=old_stack
 
+# elf2dol needs to know these in order to calculate sbss correctly.
+SDATA_PDHR := 9
+SBSS_PDHR := 10
+
 #-------------------------------------------------------------------------------
 # Recipes
 #-------------------------------------------------------------------------------
@@ -82,7 +90,7 @@ $(LDSCRIPT): ldscript.lcf
 	$(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
 $(DOL): $(ELF) | tools
-	$(ELF2DOL) -v -v $< $@
+	$(ELF2DOL) -v -v $< $@ $(SDATA_PDHR) $(SBSS_PDHR)
 	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:

@@ -1130,7 +1130,8 @@ lbl_804D2648:
 	.skip 0x828
 .global lbl_804D2E70
 lbl_804D2E70:
-	.skip 0x3530
+	.skip 0x830
+	#.skip 0x3530
 
 .section .sbss
 
