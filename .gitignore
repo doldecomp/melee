@@ -2,6 +2,7 @@
 mwcc_compiler/
 
 # Build artifacts
+build/
 *.o
 *.elf
 *.map
