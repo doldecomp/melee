@@ -36,6 +36,7 @@ FORCEFILES
     __mem.o
     extab.o
     extabindex.o
+    grfzerocar.o
     grizumi.o
     grcastle.o
     grstadium.o
@@ -68,6 +69,13 @@ FORCEFILES
     groldyoshi.o
     groldkongo.o
     groldpupupu.o
+    grpura.o
+    grgreens.o
+    grflatzone.o
+    grpushon.o
+    grfigureget.o
+    grbattle.o
+    grlast.o
     __init_cpp_exceptions.o
     console_io.o   
     object.o 

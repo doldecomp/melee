@@ -19,6 +19,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/text_1.o 		 	            \
 	$(BUILD_DIR)/asm/player.o 		 	            \
 	$(BUILD_DIR)/asm/text_2.o 		 	            \
+	$(BUILD_DIR)/asm/grfzerocar.o 		            \
 	$(BUILD_DIR)/asm/grizumi.o 		 	            \
 	$(BUILD_DIR)/asm/grcastle.o 		            \
 	$(BUILD_DIR)/asm/grstadium.o 	 	            \
@@ -51,6 +52,13 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/groldyoshi.o 		            \
 	$(BUILD_DIR)/asm/groldkongo.o 		            \
 	$(BUILD_DIR)/asm/groldpupupu.o 		            \
+	$(BUILD_DIR)/asm/grpura.o 			            \
+	$(BUILD_DIR)/asm/grgreens.o 		            \
+	$(BUILD_DIR)/asm/grflatzone.o 		            \
+	$(BUILD_DIR)/asm/grpushon.o 		            \
+	$(BUILD_DIR)/asm/grfigureget.o 		            \
+	$(BUILD_DIR)/asm/grbattle.o 		            \
+	$(BUILD_DIR)/asm/grlast.o 			            \
 	$(BUILD_DIR)/asm/text_3.o                       \
                                                     \
 	$(BUILD_DIR)/asm/__va_arg.o                     \
