@@ -76,7 +76,16 @@ FORCEFILES
     grfigureget.o
     grbattle.o
     grlast.o
+    grhomerun.o
+    grheal.o
+    grtmario.o
+    grtfalcon.o
+    grtclink.o
+    grtdonkey.o
+    grtdrmario.o
+    grtfalco.o
+    grtfox.o
     __init_cpp_exceptions.o
-    console_io.o   
-    object.o 
+    console_io.o
+    object.o
 }
