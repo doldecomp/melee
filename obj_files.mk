@@ -20,6 +20,21 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/player.o 		 	            \
 	$(BUILD_DIR)/asm/text_2.o 		 	            \
 	$(BUILD_DIR)/asm/text_3.o 		 	            \
+	$(BUILD_DIR)/asm/ftness.o 			            \
+	$(BUILD_DIR)/asm/ftpeach.o 			            \
+	$(BUILD_DIR)/asm/fticeclimber.o 	            \
+	$(BUILD_DIR)/asm/ftpikachu.o 		            \
+	$(BUILD_DIR)/asm/ftsamus.o 		 	            \
+	$(BUILD_DIR)/asm/ftyoshi.o 		 	            \
+	$(BUILD_DIR)/asm/ftkoopa.o 		 	            \
+	$(BUILD_DIR)/asm/ftmars.o 		 	            \
+	$(BUILD_DIR)/asm/ftzelda.o 		 	            \
+	$(BUILD_DIR)/asm/ftpurin.o 		 	            \
+	$(BUILD_DIR)/asm/ftluigi.o 		 	            \
+	$(BUILD_DIR)/asm/ftmewtwo.o 		            \
+	$(BUILD_DIR)/asm/ftclink.o 			            \
+	$(BUILD_DIR)/asm/ftdrmario.o 		            \
+	$(BUILD_DIR)/asm/text_4.o 		 	            \
 	$(BUILD_DIR)/asm/grfzerocar.o 		            \
 	$(BUILD_DIR)/asm/grizumi.o 		 	            \
 	$(BUILD_DIR)/asm/grcastle.o 		            \
@@ -89,7 +104,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/grtemblem.o 		            \
 	$(BUILD_DIR)/asm/grtganon.o 		            \
 	$(BUILD_DIR)/asm/code_80224A54.o 	            \
-	$(BUILD_DIR)/asm/text_4.o                       \
+	$(BUILD_DIR)/asm/text_5.o                       \
                                                     \
 	$(BUILD_DIR)/asm/__va_arg.o                     \
 	$(BUILD_DIR)/asm/NMWException.o                 \
