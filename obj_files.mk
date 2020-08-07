@@ -19,6 +19,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/text_1.o 		 	            \
 	$(BUILD_DIR)/asm/player.o 		 	            \
 	$(BUILD_DIR)/asm/text_2.o 		 	            \
+	$(BUILD_DIR)/asm/text_3.o 		 	            \
 	$(BUILD_DIR)/asm/grfzerocar.o 		            \
 	$(BUILD_DIR)/asm/grizumi.o 		 	            \
 	$(BUILD_DIR)/asm/grcastle.o 		            \
@@ -59,7 +60,16 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/grfigureget.o 		            \
 	$(BUILD_DIR)/asm/grbattle.o 		            \
 	$(BUILD_DIR)/asm/grlast.o 			            \
-	$(BUILD_DIR)/asm/text_3.o                       \
+	$(BUILD_DIR)/asm/grhomerun.o 		            \
+	$(BUILD_DIR)/asm/grheal.o 			            \
+	$(BUILD_DIR)/asm/grtmario.o 		            \
+	$(BUILD_DIR)/asm/grtfalcon.o 		            \
+	$(BUILD_DIR)/asm/grtclink.o 		            \
+	$(BUILD_DIR)/asm/grtdonkey.o 		            \
+	$(BUILD_DIR)/asm/grtdrmario.o 		            \
+	$(BUILD_DIR)/asm/grtfalco.o 		            \
+	$(BUILD_DIR)/asm/grtfox.o 			            \
+	$(BUILD_DIR)/asm/text_4.o                       \
                                                     \
 	$(BUILD_DIR)/asm/__va_arg.o                     \
 	$(BUILD_DIR)/asm/NMWException.o                 \
