@@ -85,6 +85,25 @@ FORCEFILES
     grtdrmario.o
     grtfalco.o
     grtfox.o
+    grticeclimber.o
+    grtkirby.o
+    grtkoopa.o
+    grtlink.o
+    grtluigi.o
+    grtmars.o
+    grtmewtwo.o
+    grtness.o
+    grtpeach.o
+    grtpichu.o
+    grtpikachu.o
+    grtpurin.o
+    grtsamus.o
+    grtseak.o
+    grtyoshi.o
+    grtzelda.o
+    grtgamewatch.o
+    grtemblem.o
+    grtganon.o
     __init_cpp_exceptions.o
     console_io.o
     object.o

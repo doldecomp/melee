@@ -69,6 +69,26 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/grtdrmario.o 		            \
 	$(BUILD_DIR)/asm/grtfalco.o 		            \
 	$(BUILD_DIR)/asm/grtfox.o 			            \
+	$(BUILD_DIR)/asm/grticeclimber.o 	            \
+	$(BUILD_DIR)/asm/grtkirby.o 		            \
+	$(BUILD_DIR)/asm/grtkoopa.o 		            \
+	$(BUILD_DIR)/asm/grtlink.o 			            \
+	$(BUILD_DIR)/asm/grtluigi.o 		            \
+	$(BUILD_DIR)/asm/grtmars.o 			            \
+	$(BUILD_DIR)/asm/grtmewtwo.o 		            \
+	$(BUILD_DIR)/asm/grtness.o 			            \
+	$(BUILD_DIR)/asm/grtpeach.o 		            \
+	$(BUILD_DIR)/asm/grtpichu.o 		            \
+	$(BUILD_DIR)/asm/grtpikachu.o 		            \
+	$(BUILD_DIR)/asm/grtpurin.o 		            \
+	$(BUILD_DIR)/asm/grtsamus.o 		            \
+	$(BUILD_DIR)/asm/grtseak.o 			            \
+	$(BUILD_DIR)/asm/grtyoshi.o 		            \
+	$(BUILD_DIR)/asm/grtzelda.o 		            \
+	$(BUILD_DIR)/asm/grtgamewatch.o 	            \
+	$(BUILD_DIR)/asm/grtemblem.o 		            \
+	$(BUILD_DIR)/asm/grtganon.o 		            \
+	$(BUILD_DIR)/asm/code_80224A54.o 	            \
 	$(BUILD_DIR)/asm/text_4.o                       \
                                                     \
 	$(BUILD_DIR)/asm/__va_arg.o                     \
