@@ -20,6 +20,14 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/player.o 		 	            \
 	$(BUILD_DIR)/asm/text_2.o 		 	            \
 	$(BUILD_DIR)/asm/text_3.o 		 	            \
+	$(BUILD_DIR)/asm/ftdonkey_1.o 		            \
+	$(BUILD_DIR)/asm/ftmario.o 			            \
+	$(BUILD_DIR)/asm/ftfalcon.o 		            \
+	$(BUILD_DIR)/asm/ftfox.o 			            \
+	$(BUILD_DIR)/asm/ftlink.o 			            \
+	$(BUILD_DIR)/asm/ftkirby.o 			            \
+	$(BUILD_DIR)/asm/ftdonkey_2.o 		            \
+	$(BUILD_DIR)/asm/ftseak.o 			            \
 	$(BUILD_DIR)/asm/ftness.o 			            \
 	$(BUILD_DIR)/asm/ftpeach.o 			            \
 	$(BUILD_DIR)/asm/fticeclimber.o 	            \
@@ -34,6 +42,18 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/ftmewtwo.o 		            \
 	$(BUILD_DIR)/asm/ftclink.o 			            \
 	$(BUILD_DIR)/asm/ftdrmario.o 		            \
+	$(BUILD_DIR)/asm/ftfalco.o 			            \
+	$(BUILD_DIR)/asm/ftpichu.o 			            \
+	$(BUILD_DIR)/asm/ftgamewatch.o 		            \
+	$(BUILD_DIR)/asm/ftganon.o 			            \
+	$(BUILD_DIR)/asm/ftemblem.o 		            \
+	$(BUILD_DIR)/asm/ftzakoboy.o 		            \
+	$(BUILD_DIR)/asm/ftzakogirl.o 		            \
+	$(BUILD_DIR)/asm/ftgigakoopa.o 		            \
+	$(BUILD_DIR)/asm/ftsandbag.o 		            \
+	$(BUILD_DIR)/asm/ftmasterhand.o 	            \
+	$(BUILD_DIR)/asm/ftcrazyhand.o 		            \
+	$(BUILD_DIR)/asm/ftbosslib.o 		            \
 	$(BUILD_DIR)/asm/text_4.o 		 	            \
 	$(BUILD_DIR)/asm/grfzerocar.o 		            \
 	$(BUILD_DIR)/asm/grizumi.o 		 	            \
