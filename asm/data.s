@@ -1077,32 +1077,32 @@ lbl_803C11D8:
     .4byte func_800EE5C0
     .4byte func_80132A0C
     .4byte func_800EAD84
-    .4byte 0x80110094
-    .4byte 0x801147C0
-    .4byte 0x8011B51C
-    .4byte 0x8011EFE8
-    .4byte 0x80122F28
-    .4byte 0x80124474
-    .4byte 0x8012832C
-    .4byte 0x8012B960
-    .4byte 0x8013C318
-    .4byte 0x80144DFC
-    .4byte 0x801422E8
-    .4byte 0x80136258
-    .4byte 0x801392DC
-    .4byte 0x80148C64
-    .4byte 0x8014949C
-    .4byte 0x80149ACC
-    .4byte 0x80149EAC
-    .4byte 0x8014A250
-    .4byte 0x8014EBFC
-    .4byte 0x8014EEF8
-    .4byte 0x8014FC68
-    .4byte 0x80155E18
-    .4byte 0x8014F1F0
-    .4byte 0x8014F418
-    .4byte 0x8014F640
-    .4byte 0x8014F9CC
+    .4byte func_80110094
+    .4byte func_801147C0
+    .4byte func_8011B51C
+    .4byte func_8011EFE8
+    .4byte func_80122F28
+    .4byte func_80124474
+    .4byte func_8012832C
+    .4byte func_8012B960
+    .4byte func_8013C318
+    .4byte func_80144DFC
+    .4byte func_801422E8
+    .4byte func_80136258
+    .4byte func_801392DC
+    .4byte func_80148C64
+    .4byte func_8014949C
+    .4byte func_80149ACC
+    .4byte func_80149EAC
+    .4byte func_8014A250
+    .4byte func_8014EBFC
+    .4byte func_8014EEF8
+    .4byte func_8014FC68
+    .4byte func_80155E18
+    .4byte func_8014F1F0
+    .4byte func_8014F418
+    .4byte func_8014F640
+    .4byte func_8014F9CC
 
     .balign 4
 .global lbl_803C125C
@@ -1218,112 +1218,112 @@ lbl_803C1364:
     .balign 4
 .global lbl_803C13E8
 lbl_803C13E8:
-    .4byte 0x800E1450
-    .4byte 0x800E9EE8
-    .4byte 0x800E32B0
-    .4byte 0x8010E1C4
-    .4byte 0x800F5564
-    .4byte 0x80132EFC
-    .4byte 0x800EC354
-    .4byte 0x80111038
-    .4byte 0x80116C94
-    .4byte 0x8011C34C
-    .4byte 0x8011F99C
+    .4byte func_800E1450
+    .4byte func_800E9EE8
+    .4byte func_800E32B0
+    .4byte func_8010E1C4
+    .4byte func_800F5564
+    .4byte func_80132EFC
+    .4byte func_800EC354
+    .4byte func_80111038
+    .4byte func_80116C94
+    .4byte func_8011C34C
+    .4byte func_8011F99C
     .4byte NULL
-    .4byte 0x80124E38
-    .4byte 0x8012A1D8
-    .4byte 0x8012F4B4
-    .4byte 0x8013D234
-    .4byte 0x801466C4
-    .4byte 0x80142B14
-    .4byte 0x8013741C
-    .4byte 0x8013B638
-    .4byte 0x800EC354
-    .4byte 0x800E1450
-    .4byte 0x800E9EE8
-    .4byte 0x80124E38
-    .4byte 0x8014C7A0
-    .4byte 0x800E32B0
-    .4byte 0x8013741C
-    .4byte NULL
-    .4byte NULL
+    .4byte func_80124E38
+    .4byte func_8012A1D8
+    .4byte func_8012F4B4
+    .4byte func_8013D234
+    .4byte func_801466C4
+    .4byte func_80142B14
+    .4byte func_8013741C
+    .4byte func_8013B638
+    .4byte func_800EC354
+    .4byte func_800E1450
+    .4byte func_800E9EE8
+    .4byte func_80124E38
+    .4byte func_8014C7A0
+    .4byte func_800E32B0
+    .4byte func_8013741C
     .4byte NULL
     .4byte NULL
-    .4byte 0x80132EFC
+    .4byte NULL
+    .4byte NULL
+    .4byte func_80132EFC
     .4byte NULL
 
     .balign 4
 .global lbl_803C146C
 lbl_803C146C:
-    .4byte 0x800E1AB0
-    .4byte 0x800E72C4
-    .4byte 0x800E4CF4
-    .4byte 0x8010FBFC
-    .4byte 0x800F23B8
-    .4byte 0x80135B04
-    .4byte 0x800EBB80
-    .4byte 0x8011312C
-    .4byte 0x80118250
-    .4byte 0x8011D7F0
-    .4byte 0x8012122C
+    .4byte func_800E1AB0
+    .4byte func_800E72C4
+    .4byte func_800E4CF4
+    .4byte func_8010FBFC
+    .4byte func_800F23B8
+    .4byte func_80135B04
+    .4byte func_800EBB80
+    .4byte func_8011312C
+    .4byte func_80118250
+    .4byte func_8011D7F0
+    .4byte func_8012122C
     .4byte NULL
-    .4byte 0x80125E60
-    .4byte 0x8012A738
-    .4byte 0x8012E33C
-    .4byte 0x8013CA98
-    .4byte 0x80145258
-    .4byte 0x80144024
-    .4byte 0x8013826C
-    .4byte 0x801398E8
-    .4byte 0x800EBB80
-    .4byte 0x800E1AB0
-    .4byte 0x800E72C4
-    .4byte 0x80125E60
-    .4byte 0x8014E158
-    .4byte 0x800E4CF4
-    .4byte 0x8013826C
-    .4byte NULL
-    .4byte NULL
+    .4byte func_80125E60
+    .4byte func_8012A738
+    .4byte func_8012E33C
+    .4byte func_8013CA98
+    .4byte func_80145258
+    .4byte func_80144024
+    .4byte func_8013826C
+    .4byte func_801398E8
+    .4byte func_800EBB80
+    .4byte func_800E1AB0
+    .4byte func_800E72C4
+    .4byte func_80125E60
+    .4byte func_8014E158
+    .4byte func_800E4CF4
+    .4byte func_8013826C
     .4byte NULL
     .4byte NULL
-    .4byte 0x80135B04
+    .4byte NULL
+    .4byte NULL
+    .4byte func_80135B04
     .4byte NULL
 
     .balign 4
 .global lbl_803C14F0
 lbl_803C14F0:
-    .4byte 0x800E2194
-    .4byte 0x800E85EC
-    .4byte 0x800E40D8
+    .4byte func_800E2194
+    .4byte func_800E85EC
+    .4byte func_800E40D8
     .4byte NULL
-    .4byte 0x800F3E68
-    .4byte 0x801346A4
-    .4byte 0x800EB6DC
-    .4byte 0x80114224
-    .4byte 0x80119E90
-    .4byte 0x8011D1C4
-    .4byte 0x80122988
-    .4byte 0x80122988
-    .4byte 0x80127924
-    .4byte 0x8012B09C
-    .4byte 0x8012E78C
-    .4byte 0x8013CF2C
-    .4byte 0x80146264
-    .4byte 0x80144708
-    .4byte 0x80138A30
-    .4byte 0x8013AFA4
-    .4byte 0x800EB6DC
-    .4byte 0x800E2194
-    .4byte 0x800E85EC
-    .4byte 0x80127924
-    .4byte 0x8014CF78
-    .4byte 0x800E40D8
-    .4byte 0x80138A30
-    .4byte NULL
-    .4byte NULL
+    .4byte func_800F3E68
+    .4byte func_801346A4
+    .4byte func_800EB6DC
+    .4byte func_80114224
+    .4byte func_80119E90
+    .4byte func_8011D1C4
+    .4byte func_80122988
+    .4byte func_80122988
+    .4byte func_80127924
+    .4byte func_8012B09C
+    .4byte func_8012E78C
+    .4byte func_8013CF2C
+    .4byte func_80146264
+    .4byte func_80144708
+    .4byte func_80138A30
+    .4byte func_8013AFA4
+    .4byte func_800EB6DC
+    .4byte func_800E2194
+    .4byte func_800E85EC
+    .4byte func_80127924
+    .4byte func_8014CF78
+    .4byte func_800E40D8
+    .4byte func_80138A30
     .4byte NULL
     .4byte NULL
-    .4byte 0x801346A4
+    .4byte NULL
+    .4byte NULL
+    .4byte func_801346A4
     .4byte NULL
 
     .balign 4
@@ -1982,7 +1982,7 @@ lbl_803C1E38:
 
 .global lbl_803C1EBC
 lbl_803C1EBC:
-    .4byte 0x800E0BE4
+    .4byte func_800E0BE4
     .4byte 0x800E5858
     .4byte 0x800E2B40
     .4byte 0x8010DA74
@@ -2159,13 +2159,14 @@ lbl_803C20CC:
     .4byte NULL
     .4byte NULL
 
+# Multi-jump function table
 .global lbl_803C2150
 lbl_803C2150:
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x800EF87C
+    .4byte func_800EF87C
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2176,7 +2177,7 @@ lbl_803C2150:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x8013C614
+    .4byte func_8013C614
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2195,23 +2196,22 @@ lbl_803C2150:
     .4byte NULL
     .4byte NULL
 
-    # TODO: What is this table?
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x800EF028
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
+    .4byte func_800EF028
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x8013C664
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte func_8013C664
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2240,8 +2240,8 @@ lbl_803C2258:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x800EF9BC
-    .4byte 0x800EF9FC
+    .4byte func_800EF9BC
+    .4byte func_800EF9FC
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2685,8 +2685,8 @@ lbl_803C2800:
     .4byte 0x01000000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800BFE6C
-    .4byte 0x800BFE70
+    .4byte func_800BFE6C
+    .4byte func_800BFE70
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2700,11 +2700,11 @@ lbl_803C2800:
     .4byte 0x01000000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800D52F8
-    .4byte 0x800D5358
-    .4byte 0x800D535C
-    .4byte 0x800D5470
-    .4byte 0x800D5A6C
+    .4byte func_800D52F8
+    .4byte func_800D5358
+    .4byte func_800D535C
+    .4byte func_800D5470
+    .4byte func_800D5A6C
 
     # Entry 13
     # ID
@@ -2715,10 +2715,10 @@ lbl_803C2800:
     .4byte 0x01000000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800D56EC
-    .4byte 0x800D575C
-    .4byte 0x800D58F4
-    .4byte 0x800D5A08
+    .4byte func_800D56EC
+    .4byte func_800D575C
+    .4byte func_800D58F4
+    .4byte func_800D5A08
     .4byte func_800761C8
 
     # Entry 14
@@ -2730,10 +2730,10 @@ lbl_803C2800:
     .4byte 0x01C00000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x8008A494
-    .4byte 0x8008A4D4
-    .4byte 0x8008A644
-    .4byte 0x8008A678
+    .4byte func_8008A494
+    .4byte func_8008A4D4
+    .4byte func_8008A644
+    .4byte func_8008A678
     .4byte func_800761C8
 
     # Entry 15
@@ -2790,10 +2790,10 @@ lbl_803C2800:
     .4byte 0x01C00000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800C9970
-    .4byte 0x800C99F8
-    .4byte 0x800C9BEC
-    .4byte 0x800C9C0C
+    .4byte func_800C9970
+    .4byte func_800C99F8
+    .4byte func_800C9BEC
+    .4byte func_800C9C0C
     .4byte func_800761C8
 
     # Entry 19
@@ -2805,10 +2805,10 @@ lbl_803C2800:
     .4byte 0x01800000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800C9E10
-    .4byte 0x800C9ED8
-    .4byte 0x800C9EFC
-    .4byte 0x800CA024
+    .4byte func_800C9E10
+    .4byte func_800C9ED8
+    .4byte func_800C9EFC
+    .4byte func_800CA024
     .4byte func_800761C8
 
     # Entry 20
@@ -2820,10 +2820,10 @@ lbl_803C2800:
     .4byte 0x01C00000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800CA1F4
-    .4byte 0x800CA230
-    .4byte 0x800CA53C
-    .4byte 0x800CA5D0
+    .4byte func_800CA1F4
+    .4byte func_800CA230
+    .4byte func_800CA53C
+    .4byte func_800CA5D0
     .4byte func_800761C8
 
     # Entry 21
@@ -2835,10 +2835,10 @@ lbl_803C2800:
     .4byte 0x01800000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800CA77C
-    .4byte 0x800CA830
-    .4byte 0x800CA95C
-    .4byte 0x800CAA2C
+    .4byte func_800CA77C
+    .4byte func_800CA830
+    .4byte func_800CA95C
+    .4byte func_800CAA2C
     .4byte func_800761C8
 
     # Entry 22
@@ -2850,10 +2850,10 @@ lbl_803C2800:
     .4byte 0x01800000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800CAA4C
-    .4byte 0x800CAA6C
-    .4byte 0x800CAB84
-    .4byte 0x800CABA4
+    .4byte func_800CAA4C
+    .4byte func_800CAA6C
+    .4byte func_800CAB84
+    .4byte func_800CABA4
     .4byte func_800761C8
 
     # Entry 23
@@ -2865,10 +2865,10 @@ lbl_803C2800:
     .4byte 0x01800000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800CAC9C
-    .4byte 0x800CADB0
-    .4byte 0x800CAE18
-    .4byte 0x800CAE60
+    .4byte func_800CAC9C
+    .4byte func_800CADB0
+    .4byte func_800CAE18
+    .4byte func_800CAE60
     .4byte func_800761C8
 
     # Entry 24
@@ -4320,10 +4320,10 @@ lbl_803C2800:
     .4byte 0x3F800000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800CD390
-    .4byte 0x800CD3B0
-    .4byte 0x800CD3D0
-    .4byte 0x800CD3F0
+    .4byte func_800CD390
+    .4byte func_800CD3B0
+    .4byte func_800CD3D0
+    .4byte func_800CD3F0
     .4byte func_800761C8
 
     # Entry 121
@@ -4335,10 +4335,10 @@ lbl_803C2800:
     .4byte 0x40800000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800CD390
-    .4byte 0x800CD3B0
-    .4byte 0x800CD3D0
-    .4byte 0x800CD3F0
+    .4byte func_800CD390
+    .4byte func_800CD3B0
+    .4byte func_800CD3D0
+    .4byte func_800CD3F0
     .4byte func_800761C8
 
     # Entry 122
@@ -4350,10 +4350,10 @@ lbl_803C2800:
     .4byte 0x41800000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800CD390
-    .4byte 0x800CD3B0
-    .4byte 0x800CD3D0
-    .4byte 0x800CD3F0
+    .4byte func_800CD390
+    .4byte func_800CD3B0
+    .4byte func_800CD3D0
+    .4byte func_800CD3F0
     .4byte func_800761C8
 
     # Entry 123
@@ -4365,10 +4365,10 @@ lbl_803C2800:
     .4byte 0x42800000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte 0x800CD390
-    .4byte 0x800CD3B0
-    .4byte 0x800CD3D0
-    .4byte 0x800CD3F0
+    .4byte func_800CD390
+    .4byte func_800CD3B0
+    .4byte func_800CD3D0
+    .4byte func_800CD3F0
     .4byte func_800761C8
 
     # Entry 124
