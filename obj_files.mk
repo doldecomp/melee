@@ -140,7 +140,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/cstring.o                      \
 	$(BUILD_DIR)/asm/mem_funcs.o                    \
 	$(BUILD_DIR)/asm/printf.o                       \
-	$(BUILD_DIR)/asm/rand.o                         \
+	$(BUILD_DIR)/src/msl/rand.o                     \
 	$(BUILD_DIR)/asm/string.o                       \
 	$(BUILD_DIR)/asm/strtoul.o                      \
 	$(BUILD_DIR)/asm/console_io.o                   \
