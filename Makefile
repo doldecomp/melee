@@ -13,7 +13,7 @@ TARGET := ssbm.us.1.2
 
 BUILD_DIR := build/$(TARGET)
 
-SRC_DIRS := src src/runtime src/sysdolphin
+SRC_DIRS := src src/msl src/msl/ppc_eabi src/runtime src/sysdolphin
 ASM_DIRS := asm
 
 # Inputs
@@ -56,7 +56,7 @@ PYTHON  := python3
 POSTPROC := tools/postprocess.py
 
 # Options
-INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/runtime/ -i src/sysdolphin/
+INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/msl -i src/msl/ppc_eabi -i src/runtime/ -i src/sysdolphin/ 
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP) -fp hard -nodefaults

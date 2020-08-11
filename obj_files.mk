@@ -130,11 +130,11 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/NMWException.o                 \
 	$(BUILD_DIR)/asm/Gecko_setjmp.o                 \
 	$(BUILD_DIR)/asm/runtime.o                      \
-	$(BUILD_DIR)/src/runtime/__init_cpp_exceptions.o\
+	$(BUILD_DIR)/src/runtime/__init_cpp_exceptions.o 		  \
 	$(BUILD_DIR)/asm/abort_exit.o                   \
 	$(BUILD_DIR)/asm/ansi_fp.o                      \
 	$(BUILD_DIR)/asm/buffer_io.o                    \
-	$(BUILD_DIR)/asm/critical_regions.gamecube.o    \
+	$(BUILD_DIR)/src/msl/ppc_eabi/critical_regions.gamecube.o \
 	$(BUILD_DIR)/asm/ctype.o                        \
 	$(BUILD_DIR)/asm/direct_io.o                    \
 	$(BUILD_DIR)/asm/cstring.o                      \
