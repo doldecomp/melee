@@ -15224,10 +15224,96 @@ lbl_804003A0:
     .balign 4
     .asciz "standScene"
     .balign 4
-    .incbin "baserom.dol", 0x3FD42C, 0x4
+    .4byte NULL
+
+    .balign 4
 .global lbl_80400430
 lbl_80400430:
-	.incbin "baserom.dol", 0x3FD430, 0xD8
+	.4byte NULL
+    .4byte 0x08800000
+    .4byte NULL
+
+    .balign 4
+.global lbl_8040043C
+lbl_8040043C:
+.4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte lbl_8040043C
+    .4byte 0x00000001
+    .4byte lbl_8040043C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte __read_console
+    .4byte __write_console
+    .4byte func_80325F18
+    .4byte NULL
+
+    .balign 1
+.global lbl_80400478
+lbl_80400478:
+    .4byte NULL
+    .4byte 0x10800000
+    .byte 0
+    .byte 0
+
+.global lbl_80400482
+lbl_80400482:
+    .byte 0
+    .byte 0
+
+    .balign 4
+.global lbl_80400484
+lbl_80400484:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte lbl_80400484
+    .4byte 0x00000001
+    .4byte lbl_80400484
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte __read_console
+
+    .balign 4
+.global lbl_804004B4
+lbl_804004B4:
+    .4byte __write_console
+
+    .balign 4
+.global lbl_804004B8
+lbl_804004B8:
+    .4byte func_80325F18
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x10800000
+    .4byte NULL
+
+    .balign 4
+.global lbl_804004CC
+lbl_804004CC:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte lbl_804004CC
+    .4byte 0x00000001
+    .4byte lbl_804004CC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte __read_console
+    .4byte __write_console
+    .4byte func_80325F18
+    .4byte NULL
+
 .global jtbl_80400508
 jtbl_80400508:
 	.incbin "baserom.dol", 0x3FD508, 0x84
