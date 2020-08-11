@@ -1,7 +1,7 @@
 # Linker order for every file, passed to the Metrowerks linker.
 
 INIT_O_FILES := 						            \
-	$(BUILD_DIR)/src/__mem.o                        \
+	$(BUILD_DIR)/src/runtime/__mem.o	            \
     $(BUILD_DIR)/asm/init.o
 
 EXTAB_O_FILES :=                                    \
@@ -130,17 +130,17 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/NMWException.o                 \
 	$(BUILD_DIR)/asm/Gecko_setjmp.o                 \
 	$(BUILD_DIR)/asm/runtime.o                      \
-	$(BUILD_DIR)/asm/__init_cpp_exceptions.o        \
+	$(BUILD_DIR)/src/runtime/__init_cpp_exceptions.o 		  \
 	$(BUILD_DIR)/asm/abort_exit.o                   \
 	$(BUILD_DIR)/asm/ansi_fp.o                      \
 	$(BUILD_DIR)/asm/buffer_io.o                    \
-	$(BUILD_DIR)/asm/critical_regions.gamecube.o    \
+	$(BUILD_DIR)/src/msl/ppc_eabi/critical_regions.gamecube.o \
 	$(BUILD_DIR)/asm/ctype.o                        \
 	$(BUILD_DIR)/asm/direct_io.o                    \
 	$(BUILD_DIR)/asm/cstring.o                      \
 	$(BUILD_DIR)/asm/mem_funcs.o                    \
 	$(BUILD_DIR)/asm/printf.o                       \
-	$(BUILD_DIR)/asm/rand.o                         \
+	$(BUILD_DIR)/src/msl/rand.o                     \
 	$(BUILD_DIR)/asm/string.o                       \
 	$(BUILD_DIR)/asm/strtoul.o                      \
 	$(BUILD_DIR)/asm/console_io.o                   \
