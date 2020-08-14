@@ -9,6 +9,8 @@ endif
 # Files
 #-------------------------------------------------------------------------------
 
+TARGET_COL := gamecube
+
 TARGET := ssbm.us.1.2
 
 BUILD_DIR := build/$(TARGET)
@@ -90,7 +92,7 @@ $(LDSCRIPT): ldscript.lcf
 	$(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
 $(DOL): $(ELF) | tools
-	$(ELF2DOL) $< $@ $(SDATA_PDHR) $(SBSS_PDHR)
+	$(ELF2DOL) $< $@ $(SDATA_PDHR) $(SBSS_PDHR) $(TARGET_COL)
 	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:
