@@ -117,6 +117,9 @@ func_8014FA30:
 /* 8014FB6C 0014C74C  38 21 00 18 */	addi r1, r1, 0x18
 /* 8014FB70 0014C750  7C 08 03 A6 */	mtlr r0
 /* 8014FB74 0014C754  4E 80 00 20 */	blr 
+
+.global func_8014FB78
+func_8014FB78:
 /* 8014FB78 0014C758  80 83 00 2C */	lwz r4, 0x2c(r3)
 /* 8014FB7C 0014C75C  80 64 01 0C */	lwz r3, 0x10c(r4)
 /* 8014FB80 0014C760  80 84 02 D4 */	lwz r4, 0x2d4(r4)
@@ -126,7 +129,13 @@ func_8014FA30:
 /* 8014FB90 0014C770  90 64 00 00 */	stw r3, 0(r4)
 /* 8014FB94 0014C774  90 04 00 04 */	stw r0, 4(r4)
 /* 8014FB98 0014C778  4E 80 00 20 */	blr 
+
+.global func_8014FB9C
+func_8014FB9C:
 /* 8014FB9C 0014C77C  4E 80 00 20 */	blr 
+
+.global func_8014FBA0
+func_8014FBA0:
 /* 8014FBA0 0014C780  4E 80 00 20 */	blr 
 
 .global func_8014FBA4
