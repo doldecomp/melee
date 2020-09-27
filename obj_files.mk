@@ -251,6 +251,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/gobjgxlink.o				    \
 	$(BUILD_DIR)/asm/gobjobject_.o				    \
 	$(BUILD_DIR)/asm/gobjuserdata.o				    \
+	$(BUILD_DIR)/src/sysdolphin/gobj.o			    \
 	$(BUILD_DIR)/asm/gobj.o						    \
 	$(BUILD_DIR)/asm/code_80391580.o			    \
 	$(BUILD_DIR)/asm/psdisp.o					    \
