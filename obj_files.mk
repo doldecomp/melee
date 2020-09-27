@@ -211,6 +211,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/cobj.o						    \
 	$(BUILD_DIR)/src/sysdolphin/fobj.o              \
 	$(BUILD_DIR)/asm/fobj_asm.o					    \
+	$(BUILD_DIR)/src/sysdolphin/pobj.o              \
 	$(BUILD_DIR)/asm/pobj.o						    \
 	$(BUILD_DIR)/asm/jobj.o						    \
 	$(BUILD_DIR)/src/sysdolphin/displayfunc.o       \
