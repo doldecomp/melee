@@ -141,4 +141,6 @@ extern HSD_PObjInfo hsdPObj;
 #define HSD_POBJ_INFO(i) ((HSD_PObjInfo*)(i))
 #define HSD_POBJ_METHOD(o) HSD_POBJ_INFO(HSD_CLASS_METHOD(o))
 
+u16 HSD_PObjGetFlags(HSD_PObj* pobj);
+
 #endif
