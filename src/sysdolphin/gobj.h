@@ -10,7 +10,7 @@ typedef struct _HSD_GObj {
     u8 p_priority;
     u8 render_priority;
     s8 obj_kind;
-    s8 data_kind;
+    s8 user_data_kind;
     struct _HSD_GObj* next; //0x08
     struct _HSD_GObj* prev; //0x0C
     struct _HSD_GObj* next_gx; //0x10
@@ -35,3 +35,6 @@ typedef struct _HSD_GObjProc {
 } HSD_GObjProc;
 
 #endif
+
+BOOL func_80390C5C(HSD_GObj* gobj);
+BOOL func_80390C84(HSD_GObj* gobj);
