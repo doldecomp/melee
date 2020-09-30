@@ -3,6 +3,7 @@
 
 #include "dolphin/types.h"
 
+#include "id.h"
 #include "object.h"
 #include "objalloc.h"
 
