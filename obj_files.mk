@@ -216,6 +216,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/jobj.o						    \
 	$(BUILD_DIR)/src/sysdolphin/displayfunc.o       \
 	$(BUILD_DIR)/asm/displayfunc_asm.o			    \
+	$(BUILD_DIR)/src/sysdolphin/initialize.o 	    \
 	$(BUILD_DIR)/asm/initialize.o				    \
 	$(BUILD_DIR)/asm/video.o					    \
 	$(BUILD_DIR)/asm/pad.o						    \

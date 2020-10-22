@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#define HSD_VI_XFB_MAX 3
+
 #define VI_DISPLAY_PIX_SZ 2
 
 typedef struct _HSD_VIStatus {
