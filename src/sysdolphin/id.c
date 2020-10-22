@@ -74,8 +74,8 @@ asm void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
 /* 8037CE18 003799F8  3C 60 80 4C */	lis r3, lbl_804C23EC@ha
 /* 8037CE1C 003799FC  38 63 23 EC */	addi r3, r3, lbl_804C23EC@l
 lbl_8037CE20:
-/* 8037CE20 00379A00  3C 80 44 70 */	lis r4, 0x446F8657@ha
-/* 8037CE24 00379A04  38 04 86 57 */	addi r0, r4, 0x446F8657@l
+/* 8037CE20 00379A00  3C 80 44 70 */	lis r4, 0x4470
+/* 8037CE24 00379A04  38 04 86 57 */	addi r0, r4, -0x79A9
 /* 8037CE28 00379A08  7C 80 F0 16 */	mulhwu r4, r0, r30
 /* 8037CE2C 00379A0C  7C 04 F0 50 */	subf r0, r4, r30
 /* 8037CE30 00379A10  54 00 F8 7E */	srwi r0, r0, 1
@@ -144,8 +144,8 @@ asm void HSD_IDRemoveByIDFromTable(HSD_IDTable* table, u32 id)
 /* 8037CEFC 00379ADC  3C 60 80 4C */	lis r3, lbl_804C23EC@ha
 /* 8037CF00 00379AE0  38 63 23 EC */	addi r3, r3, lbl_804C23EC@l
 lbl_8037CF04:
-/* 8037CF04 00379AE4  3C A0 44 70 */	lis r5, 0x446F8657@ha
-/* 8037CF08 00379AE8  38 05 86 57 */	addi r0, r5, 0x446F8657@l
+/* 8037CF04 00379AE4  3C A0 44 70 */	lis r5, 0x4470
+/* 8037CF08 00379AE8  38 05 86 57 */	addi r0, r5, -0x79A9
 /* 8037CF0C 00379AEC  7C A0 20 16 */	mulhwu r5, r0, r4
 /* 8037CF10 00379AF0  7C 05 20 50 */	subf r0, r5, r4
 /* 8037CF14 00379AF4  54 00 F8 7E */	srwi r0, r0, 1
@@ -197,8 +197,8 @@ asm void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
 /* 8037CFA0 00379B80  3C 60 80 4C */	lis r3, lbl_804C23EC@ha
 /* 8037CFA4 00379B84  38 63 23 EC */	addi r3, r3, lbl_804C23EC@l
 lbl_8037CFA8:
-/* 8037CFA8 00379B88  3C C0 44 70 */	lis r6, 0x446F8657@ha
-/* 8037CFAC 00379B8C  38 06 86 57 */	addi r0, r6, 0x446F8657@l
+/* 8037CFA8 00379B88  3C C0 44 70 */	lis r6, 0x4470
+/* 8037CFAC 00379B8C  38 06 86 57 */	addi r0, r6, -0x79A9
 /* 8037CFB0 00379B90  7C C0 20 16 */	mulhwu r6, r0, r4
 /* 8037CFB4 00379B94  7C 06 20 50 */	subf r0, r6, r4
 /* 8037CFB8 00379B98  54 00 F8 7E */	srwi r0, r0, 1
@@ -234,6 +234,8 @@ lbl_8037D018:
 /* 8037D01C 00379BFC  4E 80 00 20 */	blr 
 }
 
+#pragma push
+#pragma force_active on
 asm void _HSD_IDForgetMemory(void)
 {
     nofralloc
@@ -250,3 +252,4 @@ asm void _HSD_IDForgetMemory(void)
 /* 8037D048 00379C28  7C 08 03 A6 */	mtlr r0
 /* 8037D04C 00379C2C  4E 80 00 20 */	blr 
 }
+#pragma pop
