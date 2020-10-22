@@ -235,21 +235,10 @@ lbl_8037D018:
 }
 
 #pragma push
+#pragma peephole on
 #pragma force_active on
-asm void _HSD_IDForgetMemory(void)
+void _HSD_IDForgetMemory(void)
 {
-    nofralloc
-/* 8037D020 00379C00  7C 08 02 A6 */	mflr r0
-/* 8037D024 00379C04  3C 60 80 4C */	lis r3, lbl_804C23EC@ha
-/* 8037D028 00379C08  90 01 00 04 */	stw r0, 4(r1)
-/* 8037D02C 00379C0C  38 63 23 EC */	addi r3, r3, lbl_804C23EC@l
-/* 8037D030 00379C10  38 80 00 00 */	li r4, 0
-/* 8037D034 00379C14  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8037D038 00379C18  38 A0 01 94 */	li r5, 0x194
-/* 8037D03C 00379C1C  4B C8 60 C5 */	bl memset
-/* 8037D040 00379C20  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8037D044 00379C24  38 21 00 08 */	addi r1, r1, 8
-/* 8037D048 00379C28  7C 08 03 A6 */	mtlr r0
-/* 8037D04C 00379C2C  4E 80 00 20 */	blr 
+    memset(&lbl_804C23EC, 0, 0x194);
 }
 #pragma pop
