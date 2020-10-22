@@ -189,50 +189,33 @@ lbl_8037CF88:
 /* 8037CF94 00379B74  4E 80 00 20 */	blr 
 }
 
-asm void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
+#pragma push
+#pragma peephole on
+void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
 {
-    nofralloc
-/* 8037CF98 00379B78  28 03 00 00 */	cmplwi r3, 0
-/* 8037CF9C 00379B7C  40 82 00 0C */	bne lbl_8037CFA8
-/* 8037CFA0 00379B80  3C 60 80 4C */	lis r3, lbl_804C23EC@ha
-/* 8037CFA4 00379B84  38 63 23 EC */	addi r3, r3, lbl_804C23EC@l
-lbl_8037CFA8:
-/* 8037CFA8 00379B88  3C C0 44 70 */	lis r6, 0x4470
-/* 8037CFAC 00379B8C  38 06 86 57 */	addi r0, r6, -0x79A9
-/* 8037CFB0 00379B90  7C C0 20 16 */	mulhwu r6, r0, r4
-/* 8037CFB4 00379B94  7C 06 20 50 */	subf r0, r6, r4
-/* 8037CFB8 00379B98  54 00 F8 7E */	srwi r0, r0, 1
-/* 8037CFBC 00379B9C  7C 00 32 14 */	add r0, r0, r6
-/* 8037CFC0 00379BA0  54 00 D1 BE */	srwi r0, r0, 6
-/* 8037CFC4 00379BA4  1C 00 00 65 */	mulli r0, r0, 0x65
-/* 8037CFC8 00379BA8  7C 00 20 50 */	subf r0, r0, r4
-/* 8037CFCC 00379BAC  54 00 10 3A */	slwi r0, r0, 2
-/* 8037CFD0 00379BB0  7C 63 00 2E */	lwzx r3, r3, r0
-/* 8037CFD4 00379BB4  48 00 00 2C */	b lbl_8037D000
-lbl_8037CFD8:
-/* 8037CFD8 00379BB8  80 03 00 04 */	lwz r0, 4(r3)
-/* 8037CFDC 00379BBC  7C 00 20 40 */	cmplw r0, r4
-/* 8037CFE0 00379BC0  40 82 00 1C */	bne lbl_8037CFFC
-/* 8037CFE4 00379BC4  28 05 00 00 */	cmplwi r5, 0
-/* 8037CFE8 00379BC8  41 82 00 0C */	beq lbl_8037CFF4
-/* 8037CFEC 00379BCC  38 00 00 01 */	li r0, 1
-/* 8037CFF0 00379BD0  90 05 00 00 */	stw r0, 0(r5)
-lbl_8037CFF4:
-/* 8037CFF4 00379BD4  80 63 00 08 */	lwz r3, 8(r3)
-/* 8037CFF8 00379BD8  4E 80 00 20 */	blr 
-lbl_8037CFFC:
-/* 8037CFFC 00379BDC  80 63 00 00 */	lwz r3, 0(r3)
-lbl_8037D000:
-/* 8037D000 00379BE0  28 03 00 00 */	cmplwi r3, 0
-/* 8037D004 00379BE4  40 82 FF D4 */	bne lbl_8037CFD8
-/* 8037D008 00379BE8  28 05 00 00 */	cmplwi r5, 0
-/* 8037D00C 00379BEC  41 82 00 0C */	beq lbl_8037D018
-/* 8037D010 00379BF0  38 00 00 00 */	li r0, 0
-/* 8037D014 00379BF4  90 05 00 00 */	stw r0, 0(r5)
-lbl_8037D018:
-/* 8037D018 00379BF8  38 60 00 00 */	li r3, 0
-/* 8037D01C 00379BFC  4E 80 00 20 */	blr 
+    IDEntry* entry;
+
+    if (table == NULL) {
+        table = &lbl_804C23EC;
+    }
+
+    entry = (&table->table[0].next)[hash(id)];
+    while (entry != NULL) {
+        if (entry->id == id) {
+            if (success != NULL) {
+                *success = 1;
+            }
+            return entry->data;
+        }
+        entry = entry->next;
+    }
+
+    if (success != NULL) {
+        *success = 0;
+    }
+    return NULL;
 }
+#pragma pop
 
 #pragma push
 #pragma peephole on
