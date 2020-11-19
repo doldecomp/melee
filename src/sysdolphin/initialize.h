@@ -1,5 +1,5 @@
-#ifndef _initialize_
-#define _initialize_
+#ifndef _initialize_h_
+#define _initialize_h_
 
 #include "global.h"
 
