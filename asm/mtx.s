@@ -1361,6 +1361,9 @@ lbl_8037A6F8:
 /* 8037A6FC 003772DC  38 21 00 08 */	addi r1, r1, 8
 /* 8037A700 003772E0  7C 08 03 A6 */	mtlr r0
 /* 8037A704 003772E4  4E 80 00 20 */	blr 
+
+.global HSD_VecGetAllocData
+HSD_VecGetAllocData:
 /* 8037A708 003772E8  3C 60 80 4C */	lis r3, lbl_804C2310@ha
 /* 8037A70C 003772EC  38 63 23 10 */	addi r3, r3, lbl_804C2310@l
 /* 8037A710 003772F0  4E 80 00 20 */	blr 
@@ -1379,6 +1382,9 @@ func_8037A714:
 /* 8037A738 00377318  38 21 00 08 */	addi r1, r1, 8
 /* 8037A73C 0037731C  7C 08 03 A6 */	mtlr r0
 /* 8037A740 00377320  4E 80 00 20 */	blr 
+
+.global HSD_MtxGetAllocData
+HSD_MtxGetAllocData:
 /* 8037A744 00377324  3C 60 80 4C */	lis r3, lbl_804C233C@ha
 /* 8037A748 00377328  38 63 23 3C */	addi r3, r3, lbl_804C233C@l
 /* 8037A74C 0037732C  4E 80 00 20 */	blr 

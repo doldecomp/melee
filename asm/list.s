@@ -21,9 +21,15 @@ HSD_ListInitAllocData:
 /* 8037E434 0037B014  38 21 00 08 */	addi r1, r1, 8
 /* 8037E438 0037B018  7C 08 03 A6 */	mtlr r0
 /* 8037E43C 0037B01C  4E 80 00 20 */	blr 
+
+.global HSD_SListGetAllocData
+HSD_SListGetAllocData:
 /* 8037E440 0037B020  3C 60 80 4C */	lis r3, lbl_804C2580@ha
 /* 8037E444 0037B024  38 63 25 80 */	addi r3, r3, lbl_804C2580@l
 /* 8037E448 0037B028  4E 80 00 20 */	blr 
+
+.global HSD_DListGetAllocData
+HSD_DListGetAllocData:
 /* 8037E44C 0037B02C  3C 60 80 4C */	lis r3, lbl_804C25AC@ha
 /* 8037E450 0037B030  38 63 25 AC */	addi r3, r3, lbl_804C25AC@l
 /* 8037E454 0037B034  4E 80 00 20 */	blr 

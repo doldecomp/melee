@@ -21,9 +21,15 @@ HSD_RObjInitAllocData:
 /* 8037AE6C 00377A4C  38 21 00 08 */	addi r1, r1, 8
 /* 8037AE70 00377A50  7C 08 03 A6 */	mtlr r0
 /* 8037AE74 00377A54  4E 80 00 20 */	blr 
+
+.global HSD_RObjGetAllocData
+HSD_RObjGetAllocData:
 /* 8037AE78 00377A58  3C 60 80 4C */	lis r3, lbl_804C2368@ha
 /* 8037AE7C 00377A5C  38 63 23 68 */	addi r3, r3, lbl_804C2368@l
 /* 8037AE80 00377A60  4E 80 00 20 */	blr 
+
+.global HSD_RvalueObjGetAllocData
+HSD_RvalueObjGetAllocData:
 /* 8037AE84 00377A64  3C 60 80 4C */	lis r3, lbl_804C2394@ha
 /* 8037AE88 00377A68  38 63 23 94 */	addi r3, r3, lbl_804C2394@l
 /* 8037AE8C 00377A6C  4E 80 00 20 */	blr 

@@ -204,6 +204,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dobj.o						    \
 	$(BUILD_DIR)/asm/tobj.o						    \
 	$(BUILD_DIR)/asm/state.o					    \
+	$(BUILD_DIR)/src/sysdolphin/tev.o				\
 	$(BUILD_DIR)/asm/tev.o						    \
 	$(BUILD_DIR)/asm/mobj.o						    \
 	$(BUILD_DIR)/src/sysdolphin/aobj.o	            \
