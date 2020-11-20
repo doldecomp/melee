@@ -10,7 +10,7 @@ extern u8 lbl_804C0850[0x30]; // chan_alloc_data
 
 extern s32 lbl_804D7600; // state_num_chans
 extern void* lbl_804D7604; // chan_chan
-extern void* lbl_804D760C; //
+extern void* lbl_804D760C;
 
 #ifdef NON_MATCHING
 void HSD_RenderInitAllocData(void)
