@@ -92,14 +92,11 @@ asm void HSD_InitComponent(void)
 /* 80374F5C 00371B3C  4E 80 00 20 */	blr 
 }
 
-#pragma push
-#pragma peephole on
 void HSD_GXSetFifoObj(GXFifoObj* fifo) 
 {
     lbl_804C0954.gxfifo = lbl_804D5E0C;
     lbl_804D76C4 = fifo;
 }
-#pragma pop
 
 void HSD_DVDInit(void)
 {
