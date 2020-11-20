@@ -345,6 +345,9 @@ lbl_8037ADC4:
 /* 8037AE1C 003779FC  38 21 00 28 */	addi r1, r1, 0x28
 /* 8037AE20 00377A00  7C 08 03 A6 */	mtlr r0
 /* 8037AE24 00377A04  4E 80 00 20 */	blr 
+
+.global _HSD_ObjAllocForgetMemory
+_HSD_ObjAllocForgetMemory:
 /* 8037AE28 00377A08  38 00 00 00 */	li r0, 0
 /* 8037AE2C 00377A0C  90 0D C0 40 */	stw r0, lbl_804D76E0-_SDA_BASE_(r13)
 /* 8037AE30 00377A10  4E 80 00 20 */	blr 

@@ -219,7 +219,6 @@ void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
 
 #pragma push
 #pragma peephole on
-#pragma force_active on
 void _HSD_IDForgetMemory(void)
 {
     memset(&lbl_804C23EC, 0, 0x194);

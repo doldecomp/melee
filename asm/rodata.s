@@ -1,5 +1,7 @@
 .section .rodata  # 0x803B7280 - 0x803B9840
 
+.include "macros.inc"
+
 .global lbl_803B7280
 lbl_803B7280:
 	.incbin "baserom.dol", 0x3B4280, 0x28
@@ -650,10 +652,19 @@ lbl_803B94D0:
 	.incbin "baserom.dol", 0x3B64D0, 0x10
 .global lbl_803B94E0
 lbl_803B94E0:
-	.incbin "baserom.dol", 0x3B64E0, 0x1C
+	.4byte _HSD_AObjForgetMemory
+    .4byte _HSD_DispForgetMemory
+    .4byte _HSD_IDForgetMemory
+    .4byte _HSD_ObjAllocForgetMemory
+    .4byte _HSD_RandForgetMemory
+    .4byte _HSD_RObjForgetMemory
+    .4byte NULL
 .global lbl_803B94FC
 lbl_803B94FC:
-	.incbin "baserom.dol", 0x3B64FC, 0x74
+    .4byte HSD_AObjGetAllocData
+    .4byte lbl_804D5E20
+    .4byte HSD_FObjGetAllocData
+	.incbin "baserom.dol", 0x3B6508, 0x68
 .global lbl_803B9570
 lbl_803B9570:
 	.incbin "baserom.dol", 0x3B6570, 0x10

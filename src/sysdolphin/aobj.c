@@ -29,13 +29,10 @@ void HSD_AObjInitAllocData(void)
     HSD_ObjAllocInit(&lbl_804C0880, sizeof(HSD_AObj), 4);
 }
 
-#pragma push
-#pragma force_active on // Unused function until it's loaded into a GetAllocData function table, so force_active required to match for now
 HSD_ObjAllocData* HSD_AObjGetAllocData(void)
 {
     return &lbl_804C0880;
 }
-#pragma pop
 
 u32 HSD_AObjGetFlags(HSD_AObj* aobj)
 {

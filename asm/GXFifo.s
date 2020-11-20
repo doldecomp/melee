@@ -3084,8 +3084,8 @@ lbl_8033E1E8:
 /* 8033E284 0033AE64  B0 04 00 02 */	sth r0, 2(r4)
 /* 8033E288 0033AE68  4E 80 00 20 */	blr 
 
-.global func_8033E28C
-func_8033E28C:
+.global GXSetChanAmbColor
+GXSetChanAmbColor:
 /* 8033E28C 0033AE6C  2C 03 00 03 */	cmpwi r3, 3
 /* 8033E290 0033AE70  41 82 00 B0 */	beq lbl_8033E340
 /* 8033E294 0033AE74  40 80 00 1C */	bge lbl_8033E2B0
@@ -3185,8 +3185,8 @@ lbl_8033E3BC:
 /* 8033E3EC 0033AFCC  90 E3 00 A8 */	stw r7, 0xa8(r3)
 /* 8033E3F0 0033AFD0  4E 80 00 20 */	blr 
 
-.global func_8033E3F4
-func_8033E3F4:
+.global GXSetChanMatColor
+GXSetChanMatColor:
 /* 8033E3F4 0033AFD4  2C 03 00 03 */	cmpwi r3, 3
 /* 8033E3F8 0033AFD8  41 82 00 B0 */	beq lbl_8033E4A8
 /* 8033E3FC 0033AFDC  40 80 00 1C */	bge lbl_8033E418
@@ -3308,8 +3308,8 @@ func_8033E55C:
 /* 8033E5A0 0033B180  90 03 04 F0 */	stw r0, 0x4f0(r3)
 /* 8033E5A4 0033B184  4E 80 00 20 */	blr 
 
-.global func_8033E5A8
-func_8033E5A8:
+.global GXSetChanCtrl
+GXSetChanCtrl:
 /* 8033E5A8 0033B188  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 8033E5AC 0033B18C  2C 03 00 04 */	cmpwi r3, 4
 /* 8033E5B0 0033B190  93 E1 00 34 */	stw r31, 0x34(r1)
