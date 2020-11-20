@@ -8,6 +8,7 @@ extern u8 lbl_804C07F8[0x1C]; // render_alloc_data
 extern u8 lbl_804C0824[0x14]; // tevreg_alloc_data
 extern u8 lbl_804C0850[0x30]; // chan_alloc_data
 
+extern s32 lbl_804D7600; // state_num_chans
 extern void* lbl_804D7604; // chan_chan
 extern void* lbl_804D760C; //
 
@@ -283,3 +284,13 @@ lbl_803623BC:
 /* 803623C8 0035EFA8  7C 08 03 A6 */	mtlr r0
 /* 803623CC 0035EFAC  4E 80 00 20 */	blr 
 }
+
+#pragma push
+#pragma peephole on
+void HSD_StateSetNumChans(s32 num)
+{
+    if (lbl_804D7600 != num) {
+        GXSetNumChans(num & 0xFF);
+    }
+}
+#pragma pop

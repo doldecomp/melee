@@ -3286,8 +3286,8 @@ lbl_8033E524:
 /* 8033E554 0033B134  90 E3 00 B0 */	stw r7, 0xb0(r3)
 /* 8033E558 0033B138  4E 80 00 20 */	blr 
 
-.global func_8033E55C
-func_8033E55C:
+.global GXSetNumChans
+GXSetNumChans:
 /* 8033E55C 0033B13C  80 8D A5 08 */	lwz r4, lbl_804D5BA8-_SDA_BASE_(r13)
 /* 8033E560 0033B140  54 67 06 3E */	clrlwi r7, r3, 0x18
 /* 8033E564 0033B144  54 60 25 36 */	rlwinm r0, r3, 4, 0x14, 0x1b
