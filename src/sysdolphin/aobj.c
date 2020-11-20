@@ -1350,10 +1350,7 @@ void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
 }
 #pragma pop
 
-#pragma push
-#pragma force_active on
 void _HSD_AObjForgetMemory(void)
 {
     lbl_804D7628 = NULL;
 }
-#pragma pop

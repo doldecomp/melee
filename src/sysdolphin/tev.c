@@ -1,12 +1,10 @@
 #include "tev.h"
 
-#include "objalloc.h"
-
 extern void* lbl_80405B98;
 
-extern u8 lbl_804C07F8[0x1C]; // render_alloc_data
-extern u8 lbl_804C0824[0x14]; // tevreg_alloc_data
-extern u8 lbl_804C0850[0x30]; // chan_alloc_data
+extern HSD_ObjAllocData lbl_804C07F8; // render_alloc_data
+extern HSD_ObjAllocData lbl_804C0824; // tevreg_alloc_data
+extern HSD_ObjAllocData lbl_804C0850; // chan_alloc_data
 
 extern s32 lbl_804D7600; // state_num_chans
 extern void* lbl_804D7604; // chan_chan
@@ -15,9 +13,9 @@ extern void* lbl_804D760C;
 #ifdef NON_MATCHING
 void HSD_RenderInitAllocData(void)
 {
-    HSD_ObjAllocInit((HSD_ObjAllocData*)&lbl_804C07F8, 0x1C, 4);
-    HSD_ObjAllocInit((HSD_ObjAllocData*)&lbl_804C0824, 0x14, 4);
-    HSD_ObjAllocInit((HSD_ObjAllocData*)&lbl_804C0850, 0x30, 4);
+    HSD_ObjAllocInit(&lbl_804C07F8, 0x1C, 4);
+    HSD_ObjAllocInit(&lbl_804C0824, 0x14, 4);
+    HSD_ObjAllocInit(&lbl_804C0850, 0x30, 4);
 }
 #else
 asm void HSD_RenderInitAllocData(void) 
@@ -49,17 +47,17 @@ asm void HSD_RenderInitAllocData(void)
 }
 #endif
 
-void* HSD_RenderGetAllocData(void)
+HSD_ObjAllocData* HSD_RenderGetAllocData(void)
 {
     return &lbl_804C07F8;
 }
 
-void* HSD_TevRegGetAllocData(void)
+HSD_ObjAllocData* HSD_TevRegGetAllocData(void)
 {
     return &lbl_804C0824;
 }
 
-void* HSD_ChanGetAllocData(void)
+HSD_ObjAllocData* HSD_ChanGetAllocData(void)
 {
     return &lbl_804C0850;
 }

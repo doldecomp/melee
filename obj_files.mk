@@ -226,6 +226,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/util.o						    \
 	$(BUILD_DIR)/src/sysdolphin/objalloc.o          \
 	$(BUILD_DIR)/asm/objalloc_asm.o				    \
+	$(BUILD_DIR)/src/sysdolphin/robj.o			    \
 	$(BUILD_DIR)/asm/robj.o						    \
 	$(BUILD_DIR)/src/sysdolphin/id.o                \
 	$(BUILD_DIR)/src/sysdolphin/wobj.o              \
