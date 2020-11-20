@@ -13,9 +13,9 @@ extern void* lbl_804D760C;
 #ifdef NON_MATCHING
 void HSD_RenderInitAllocData(void)
 {
-    HSD_ObjAllocInit((HSD_ObjAllocData*)&lbl_804C07F8, 0x1C, 4);
-    HSD_ObjAllocInit((HSD_ObjAllocData*)&lbl_804C0824, 0x14, 4);
-    HSD_ObjAllocInit((HSD_ObjAllocData*)&lbl_804C0850, 0x30, 4);
+    HSD_ObjAllocInit(&lbl_804C07F8, 0x1C, 4);
+    HSD_ObjAllocInit(&lbl_804C0824, 0x14, 4);
+    HSD_ObjAllocInit(&lbl_804C0850, 0x30, 4);
 }
 #else
 asm void HSD_RenderInitAllocData(void) 
