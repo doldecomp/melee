@@ -670,7 +670,26 @@ lbl_803B94FC:
     .4byte HSD_SListGetAllocData
     .4byte lbl_804D5E34
     .4byte HSD_DListGetAllocData
-	.incbin "baserom.dol", 0x3B6520, 0x50
+    .4byte lbl_804D5E3C
+    .4byte HSD_VecGetAllocData
+    .4byte lbl_804D5E44
+    .4byte HSD_MtxGetAllocData
+    .4byte lbl_804D5E48
+    .4byte HSD_RObjGetAllocData
+    .4byte lbl_804D5E4C
+    .4byte HSD_RvalueObjGetAllocData
+    .4byte lbl_804D5E54
+    .4byte HSD_ShadowGetAllocData
+    .4byte lbl_804D5E5C
+    .4byte HSD_RenderGetAllocData
+    .4byte lbl_804D5E64
+    .4byte HSD_ChanGetAllocData
+    .4byte lbl_804D5E6C
+    .4byte HSD_TevRegGetAllocData
+    .4byte lbl_804D5E74
+	.4byte NULL
+    .4byte NULL
+    .4byte NULL
 .global lbl_803B9570
 lbl_803B9570:
 	.incbin "baserom.dol", 0x3B6570, 0x10

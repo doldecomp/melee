@@ -48,8 +48,6 @@ asm void HSD_RenderInitAllocData(void)
 }
 #endif
 
-#pragma push
-#pragma force_active on
 void* HSD_RenderGetAllocData(void)
 {
     return &lbl_804C07F8;
@@ -64,7 +62,6 @@ void* HSD_ChanGetAllocData(void)
 {
     return &lbl_804C0850;
 }
-#pragma pop
 
 asm void HSD_SetupChannel(void* ch)
 {

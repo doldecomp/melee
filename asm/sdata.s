@@ -4236,7 +4236,34 @@ lbl_804D5E30:
 	.incbin "baserom.dol", 0x430E50, 0x4
 .global lbl_804D5E34
 lbl_804D5E34:
-	.incbin "baserom.dol", 0x430E54, 0x48
+	.incbin "baserom.dol", 0x430E54, 0x8
+.global lbl_804D5E3C
+lbl_804D5E3C:
+	.incbin "baserom.dol", 0x430E5C, 0x8
+.global lbl_804D5E44
+lbl_804D5E44:
+	.incbin "baserom.dol", 0x430E64, 0x4
+.global lbl_804D5E48
+lbl_804D5E48:
+	.incbin "baserom.dol", 0x430E68, 0x4
+.global lbl_804D5E4C
+lbl_804D5E4C:
+	.incbin "baserom.dol", 0x430E6C, 0x8
+.global lbl_804D5E54
+lbl_804D5E54:
+	.incbin "baserom.dol", 0x430E74, 0x8
+.global lbl_804D5E5C
+lbl_804D5E5C:
+	.incbin "baserom.dol", 0x430E7C, 0x8
+.global lbl_804D5E64
+lbl_804D5E64:
+	.incbin "baserom.dol", 0x430E84, 0x8
+.global lbl_804D5E6C
+lbl_804D5E6C:
+	.incbin "baserom.dol", 0x430E8C, 0x8
+.global lbl_804D5E74
+lbl_804D5E74:
+	.incbin "baserom.dol", 0x430E94, 0x8
 .global lbl_804D5E7C
 lbl_804D5E7C:
     .asciz "data"
