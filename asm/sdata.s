@@ -4230,7 +4230,13 @@ lbl_804D5E20:
 	.incbin "baserom.dol", 0x430E40, 0x8
 .global lbl_804D5E28
 lbl_804D5E28:
-	.incbin "baserom.dol", 0x430E48, 0x54
+	.incbin "baserom.dol", 0x430E48, 0x8
+.global lbl_804D5E30
+lbl_804D5E30:
+	.incbin "baserom.dol", 0x430E50, 0x4
+.global lbl_804D5E34
+lbl_804D5E34:
+	.incbin "baserom.dol", 0x430E54, 0x48
 .global lbl_804D5E7C
 lbl_804D5E7C:
     .asciz "data"

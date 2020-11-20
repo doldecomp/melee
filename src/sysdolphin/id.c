@@ -7,13 +7,10 @@ extern struct _HSD_IDTable lbl_804C23EC; // default_table
 extern char* lbl_804D5EE8; // "id.c"
 extern char* lbl_804D5EF0;
 
-#pragma push
-#pragma force_active on // Unused function until it's loaded into a GetAllocData function table, so force_active required to match for now
 HSD_ObjAllocData* HSD_IDGetAllocData(void)
 {
     return &lbl_804C23C0;
 }
-#pragma pop
 
 void HSD_IDInitAllocData(void)
 {

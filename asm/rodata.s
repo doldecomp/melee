@@ -664,7 +664,13 @@ lbl_803B94FC:
     .4byte HSD_AObjGetAllocData
     .4byte lbl_804D5E20
     .4byte HSD_FObjGetAllocData
-	.incbin "baserom.dol", 0x3B6508, 0x68
+    .4byte lbl_804D5E28
+    .4byte HSD_IDGetAllocData
+    .4byte lbl_804D5E30
+    .4byte HSD_SListGetAllocData
+    .4byte lbl_804D5E34
+    .4byte HSD_DListGetAllocData
+	.incbin "baserom.dol", 0x3B6520, 0x50
 .global lbl_803B9570
 lbl_803B9570:
 	.incbin "baserom.dol", 0x3B6570, 0x10
