@@ -42,7 +42,7 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
     if (entry == NULL) {
         entry = HSD_ObjAlloc(&lbl_804C23C0);
         if (entry == NULL) {
-            func_80388220(lbl_804D5EE8, 67, lbl_804D5EF0);
+            __assert(lbl_804D5EE8, 67, lbl_804D5EF0);
         }
         entry->id = id;
         entry->data = data;
@@ -107,7 +107,7 @@ lbl_8037CE80:
 /* 8037CE94 00379A74  38 6D A8 48 */	addi r3, r13, lbl_804D5EE8
 /* 8037CE98 00379A78  38 80 00 43 */	li r4, 0x43
 /* 8037CE9C 00379A7C  38 AD A8 50 */	addi r5, r13, lbl_804D5EF0
-/* 8037CEA0 00379A80  48 00 B3 81 */	bl func_80388220
+/* 8037CEA0 00379A80  48 00 B3 81 */	bl __assert
 lbl_8037CEA4:
 /* 8037CEA4 00379A84  38 7D 00 00 */	addi r3, r29, 0
 /* 8037CEA8 00379A88  38 80 00 00 */	li r4, 0
