@@ -247,6 +247,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/texpdag.o					    \
 	$(BUILD_DIR)/asm/leak.o						    \
 	$(BUILD_DIR)/asm/debug.o					    \
+	$(BUILD_DIR)/asm/synth.o					    \
 	$(BUILD_DIR)/asm/AXDriver.o					    \
 	$(BUILD_DIR)/asm/devcom.o					    \
 	$(BUILD_DIR)/asm/gobjproc.o					    \
