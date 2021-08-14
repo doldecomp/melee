@@ -103,7 +103,7 @@ tools:
 	$(MAKE) -C tools
 
 $(ELF): $(O_FILES) $(LDSCRIPT)
-	$(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) $(O_FILES)
+	 $(LD) $(LDFLAGS) -lcf $(LDSCRIPT) $(O_FILES) -o $@
 # The Metrowerks linker doesn't generate physical addresses in the ELF program headers. This fixes it somehow.
 	$(OBJCOPY) $@ $@
 
