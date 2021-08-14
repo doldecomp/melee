@@ -11,7 +11,9 @@ EXTABINDEX_O_FILES :=                               \
     $(BUILD_DIR)/asm/extabindex.o
 
 TEXT_O_FILES := 						            \
-	$(BUILD_DIR)/asm/code_80005940.o  	            \
+	$(BUILD_DIR)/src/melee/lib/lbcommands.o			\
+	$(BUILD_DIR)/asm/lbcommands_asm.o  	            \
+	$(BUILD_DIR)/asm/code_80005BB0.o  	            \
 	$(BUILD_DIR)/asm/code_80008D30.o  	            \
 	$(BUILD_DIR)/asm/code_8000B1CC.o  	            \
 	$(BUILD_DIR)/asm/code_8000CE50.o  	            \

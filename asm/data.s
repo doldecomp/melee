@@ -2,9 +2,28 @@
 
 .include "macros.inc"
 
+# lbcommands
+
 .global lbl_803B9840
 lbl_803B9840:
-	.incbin "baserom.dol", 0x3B6840, 0x40
+    .4byte SubactionEvent_00
+    .4byte SubactionEvent_04
+    .4byte func_80005994
+    .4byte func_800059DC
+    .4byte func_80005A30
+    .4byte func_80005A88
+    .4byte func_80005AC4
+    .4byte func_80005AE4
+    .4byte func_80005B00
+    .4byte func_80005B18
+    .4byte 0
+    .4byte 0
+    .4byte 0
+    .4byte 0
+    .4byte 0
+    .4byte 0
+
+
 .global lbl_803B9880
 lbl_803B9880:
 	.incbin "baserom.dol", 0x3B6880, 0xA8
