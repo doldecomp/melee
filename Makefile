@@ -47,7 +47,6 @@ else
   WINE := wine
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
-OBJCOPY := $(DEVKITPPC)/bin/powerpc-eabi-objcopy
 CPP     := cpp -P
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwldeppc.exe
@@ -104,8 +103,6 @@ tools:
 
 $(ELF): $(O_FILES) $(LDSCRIPT)
 	 $(LD) $(LDFLAGS) -lcf $(LDSCRIPT) $(O_FILES) -o $@
-# The Metrowerks linker doesn't generate physical addresses in the ELF program headers. This fixes it somehow.
-	$(OBJCOPY) $@ $@
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
