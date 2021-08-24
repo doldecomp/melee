@@ -20,7 +20,7 @@ ASM_DIRS := $(shell find asm/ -type f -name '*.s')
 
 # Inputs
 S_FILES := $(wildcard asm/*.s)
-C_FILES := $(wildcard src/*.c) $(wildcard src/sysdolphin/*.c)
+C_FILES := $(wildcard src/*.c)
 LDSCRIPT := $(BUILD_DIR)/ldscript.lcf
 
 # Outputs
