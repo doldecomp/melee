@@ -234,7 +234,7 @@ void read_elf_segments(DOL_map *map, const char *elf, uint32_t sdata_pdhr, uint3
 	for(i=0; i<phnum; i++) {
 		if(swap32(phdrs[i].p_type) == PT_LOAD) {
 			uint32_t offset = swap32(phdrs[i].p_offset);
-			uint32_t paddr = swap32(phdrs[i].p_paddr);
+			uint32_t paddr = swap32(phdrs[i].p_vaddr);
 			uint32_t filesz = swap32(phdrs[i].p_filesz);
 			uint32_t memsz = swap32(phdrs[i].p_memsz);
 			uint32_t flags = swap32(phdrs[i].p_flags);
