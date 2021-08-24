@@ -15,8 +15,8 @@ TARGET := ssbm.us.1.2
 
 BUILD_DIR := build/$(TARGET)
 
-SRC_DIRS := src src/msl src/msl/ppc_eabi src/runtime src/sysdolphin src/melee src/melee/lib
-ASM_DIRS := asm
+SRC_DIRS := $(shell find src/ -type f -name '*.c')
+ASM_DIRS := $(shell find asm/ -type f -name '*.s')
 
 # Inputs
 S_FILES := $(wildcard asm/*.s)
@@ -57,7 +57,7 @@ PYTHON  := python3
 POSTPROC := tools/postprocess.py
 
 # Options
-INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/msl -i src/msl/ppc_eabi -i src/runtime/ -i src/sysdolphin/ -i src/melee/ -i src/melee/lib/
+INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/msl -i src/msl/ppc_eabi -i src/runtime/ -i src/sysdolphin/ -i src/sysdolphin/baselib/ -i src/melee/ -i src/melee/lb/
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP) -fp hard -nodefaults
