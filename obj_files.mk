@@ -25,7 +25,8 @@ TEXT_O_FILES := 						            \
 	                                                \
 	$(BUILD_DIR)/asm/melee/text_2.o 		 	            \
 	$(BUILD_DIR)/asm/melee/text_3.o 		 	            \
-													\
+															\
+	$(BUILD_DIR)/asm/melee/ft/code_800679B0.o 		 	\
 	$(BUILD_DIR)/asm/melee/ft/ftdonkey_1.o 		    \
 	$(BUILD_DIR)/asm/melee/ft/ftmario.o 			            \
 	$(BUILD_DIR)/asm/melee/ft/ftfalcon.o 		            \
