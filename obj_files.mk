@@ -46,37 +46,42 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/ftpurin.o 		 	            \
 	$(BUILD_DIR)/asm/melee/ft/ftluigi.o 		 	            \
 	$(BUILD_DIR)/asm/melee/ft/ftmewtwo.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftclink.o 			            \
+	$(BUILD_DIR)/asm/melee/ft/ftclink.o 					\
 	$(BUILD_DIR)/asm/melee/ft/ftdrmario.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftfalco.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/ftpichu.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/ftgamewatch.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftganon.o 			            \
+	$(BUILD_DIR)/asm/melee/ft/ftfalco.o 					\
+	$(BUILD_DIR)/asm/melee/ft/ftpichu.o 					\
+	$(BUILD_DIR)/asm/melee/ft/ftgamewatch.o 				\
+	$(BUILD_DIR)/asm/melee/ft/ftganon.o 					\
 	$(BUILD_DIR)/asm/melee/ft/ftemblem.o 		            \
 	$(BUILD_DIR)/asm/melee/ft/ftzakoboy.o 		            \
 	$(BUILD_DIR)/asm/melee/ft/ftzakogirl.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftgigakoopa.o 		            \
+	$(BUILD_DIR)/asm/melee/ft/ftgigakoopa.o 				\
 	$(BUILD_DIR)/asm/melee/ft/ftsandbag.o 		            \
 	$(BUILD_DIR)/asm/melee/ft/ftmasterhand.o 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftcrazyhand.o 		            \
+	$(BUILD_DIR)/asm/melee/ft/ftcrazyhand.o 				\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.o 		            \
-													\
+															\
 	$(BUILD_DIR)/asm/melee/text_4.o 		 	            \
-													\
-	$(BUILD_DIR)/asm/melee/gr/grfzerocar.o 		    \
-	$(BUILD_DIR)/asm/melee/gr/grizumi.o 		 	            \
+															\
+	$(BUILD_DIR)/asm/melee/gm/gmtitle.o 		 			\
+	$(BUILD_DIR)/asm/melee/gm/gmsinglebutton.o 		 		\
+															\
+	$(BUILD_DIR)/asm/melee/text_5.o 		 	            \
+															\
+	$(BUILD_DIR)/asm/melee/gr/grfzerocar.o 					\
+	$(BUILD_DIR)/asm/melee/gr/grizumi.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grcastle.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grstadium.o 	 	            \
-	$(BUILD_DIR)/asm/melee/gr/grkongo.o 		 	            \
-	$(BUILD_DIR)/asm/melee/gr/grzebes.o 		 	            \
+	$(BUILD_DIR)/asm/melee/gr/grkongo.o 		 			\
+	$(BUILD_DIR)/asm/melee/gr/grzebes.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grcorneria.o 	 	            \
-	$(BUILD_DIR)/asm/melee/gr/grstory.o 		 	            \
-	$(BUILD_DIR)/asm/melee/gr/gronett.o 		 	            \
+	$(BUILD_DIR)/asm/melee/gr/grstory.o 		 			\
+	$(BUILD_DIR)/asm/melee/gr/gronett.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grbigblue.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grmutecity.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grfourside.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grgreatbay.o 	 	            \
-	$(BUILD_DIR)/asm/melee/gr/gricemt.o 		 	            \
+	$(BUILD_DIR)/asm/melee/gr/gricemt.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grinishie1.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grinishie2.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grkraid_.o 		            \
@@ -84,7 +89,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grshrine.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/gryorster.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grgarden.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grvenom.o 		 	            \
+	$(BUILD_DIR)/asm/melee/gr/grvenom.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grtest.o 		 	            \
 	$(BUILD_DIR)/asm/melee/gr/grkinokoroute.o  	            \
 	$(BUILD_DIR)/asm/melee/gr/grshrineroute.o  	            \
@@ -95,12 +100,12 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grfigure3.o		            \
 	$(BUILD_DIR)/asm/melee/gr/groldyoshi.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/groldkongo.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/groldpupupu.o 		            \
+	$(BUILD_DIR)/asm/melee/gr/groldpupupu.o 				\
 	$(BUILD_DIR)/asm/melee/gr/grpura.o 			            \
 	$(BUILD_DIR)/asm/melee/gr/grgreens.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grflatzone.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grpushon.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grfigureget.o 		            \
+	$(BUILD_DIR)/asm/melee/gr/grfigureget.o 				\
 	$(BUILD_DIR)/asm/melee/gr/grbattle.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grlast.o 			            \
 	$(BUILD_DIR)/asm/melee/gr/grhomerun.o 		            \
@@ -115,17 +120,17 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grticeclimber.o 	            \
 	$(BUILD_DIR)/asm/melee/gr/grtkirby.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtkoopa.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtlink.o 			            \
+	$(BUILD_DIR)/asm/melee/gr/grtlink.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtluigi.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtmars.o 			            \
+	$(BUILD_DIR)/asm/melee/gr/grtmars.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtmewtwo.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtness.o 			            \
+	$(BUILD_DIR)/asm/melee/gr/grtness.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtpeach.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtpichu.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtpikachu.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtpurin.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtsamus.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtseak.o 			            \
+	$(BUILD_DIR)/asm/melee/gr/grtseak.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtyoshi.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtzelda.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtgamewatch.o 	            \
@@ -133,7 +138,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtganon.o 		            \
 															\
 	$(BUILD_DIR)/asm/melee/code_80224A54.o 	            \
-	$(BUILD_DIR)/asm/melee/text_5.o                       \
+	$(BUILD_DIR)/asm/melee/text_6.o                       \
                                                     \
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
