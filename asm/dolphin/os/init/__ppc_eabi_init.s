@@ -51,3 +51,10 @@ _ExitProcess:
 /* 8034CB44 00349724  38 21 00 08 */	addi r1, r1, 8
 /* 8034CB48 00349728  7C 08 03 A6 */	mtlr r0
 /* 8034CB4C 0034972C  4E 80 00 20 */	blr 
+
+
+.section .ctors  # 0x803B7240 - 0x803B7260
+
+.global lbl_803B7240
+lbl_803B7240:
+	.incbin "baserom.dol", 0x3B4240, 0x20

@@ -79,3 +79,8 @@ lbl_80323090:
 /* 8032309C 0031FC7C  38 21 00 18 */	addi r1, r1, 0x18
 /* 803230A0 0031FC80  7C 08 03 A6 */	mtlr r0
 /* 803230A4 0031FC84  4E 80 00 20 */	blr 
+
+.section .dtors  # 0x803B7260 - 0x803B7280
+.global lbl_803B7260
+lbl_803B7260:
+	.incbin "baserom.dol", 0x3B4260, 0x20
