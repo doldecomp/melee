@@ -25,7 +25,10 @@ TEXT_O_FILES := 						            \
 	                                                \
 	$(BUILD_DIR)/asm/melee/text_2.o 		 	            \
 	$(BUILD_DIR)/asm/melee/text_3.o 		 	            \
-													\
+															\
+	$(BUILD_DIR)/asm/melee/ef/code_8005B4B8.o				\
+															\
+	$(BUILD_DIR)/asm/melee/ft/code_800679B0.o 		 	\
 	$(BUILD_DIR)/asm/melee/ft/ftdonkey_1.o 		    \
 	$(BUILD_DIR)/asm/melee/ft/ftmario.o 			            \
 	$(BUILD_DIR)/asm/melee/ft/ftfalcon.o 		            \
@@ -62,11 +65,12 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.o 		            \
 															\
 	$(BUILD_DIR)/asm/melee/text_4.o 		 	            \
+	$(BUILD_DIR)/asm/melee/text_5.o 		 	            \
 															\
 	$(BUILD_DIR)/asm/melee/gm/gmtitle.o 		 			\
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.o 		 			\
 															\
-	$(BUILD_DIR)/asm/melee/text_5.o 		 	            \
+	$(BUILD_DIR)/asm/melee/text_6.o 		 	            \
 															\
 	$(BUILD_DIR)/asm/melee/gr/grfzerocar.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grizumi.o 		 			\
@@ -137,8 +141,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtemblem.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtganon.o 		            \
 															\
-	$(BUILD_DIR)/asm/melee/code_80224A54.o 	            \
-	$(BUILD_DIR)/asm/melee/text_6.o                       \
+	$(BUILD_DIR)/asm/melee/code_80224A54.o 	            	\
+	$(BUILD_DIR)/asm/melee/text_7.o                      	\
                                                     \
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
