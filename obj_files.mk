@@ -64,7 +64,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/text_4.o 		 	            \
 															\
 	$(BUILD_DIR)/asm/melee/gm/gmtitle.o 		 			\
-	$(BUILD_DIR)/asm/melee/gm/gmsinglebutton.o 		 		\
+	$(BUILD_DIR)/asm/melee/gm/gmcamera.o 		 			\
 															\
 	$(BUILD_DIR)/asm/melee/text_5.o 		 	            \
 															\
