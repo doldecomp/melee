@@ -147,6 +147,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/stage.o 	            		\
 															\
 	$(BUILD_DIR)/asm/melee/text_3.o                      	\
+															\
+	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
+															\
+	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
