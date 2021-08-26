@@ -1,6 +1,6 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x80005940 - 0x803B7240
+.section .text, "ax"  # 0x8000D2EC - 0x8000ED50
 
 .global func_8000D2EC
 func_8000D2EC:
