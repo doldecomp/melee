@@ -150,8 +150,17 @@ TEXT_O_FILES := 						            \
 															\
 	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesw.o                   \
+	$(BUILD_DIR)/asm/melee/mn/mnname.o                   	\
 															\
 	$(BUILD_DIR)/asm/melee/text_4.o                      	\
+															\
+	$(BUILD_DIR)/asm/melee/mn/mnvibration.o                 \
+	$(BUILD_DIR)/asm/melee/mn/mnsound.o                 	\
+	$(BUILD_DIR)/asm/melee/mn/mndeflicker.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mnlanguage.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mnhyaku.o               		\
+															\
+	$(BUILD_DIR)/asm/melee/text_5.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
