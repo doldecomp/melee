@@ -169,7 +169,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mngallery.o	                \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesel.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mncharsel.o               	\
-
+															\
 	$(BUILD_DIR)/asm/melee/text_5.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
