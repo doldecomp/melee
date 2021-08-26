@@ -162,9 +162,11 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mnhyaku.o               		\
 	$(BUILD_DIR)/asm/melee/mn/mnevent.o               		\
 	$(BUILD_DIR)/asm/melee/mn/mndatadel.o               	\
-															\
+	$(BUILD_DIR)/asm/melee/mn/code_802502CC.o               \
+	$(BUILD_DIR)/asm/melee/mn/mnstagesel.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mncharsel.o               	\
+
 	$(BUILD_DIR)/asm/melee/text_5.o                      	\
-	$(BUILD_DIR)/asm/melee/text_6.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
