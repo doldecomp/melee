@@ -162,7 +162,11 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mnhyaku.o               		\
 	$(BUILD_DIR)/asm/melee/mn/mnevent.o               		\
 	$(BUILD_DIR)/asm/melee/mn/mndatadel.o               	\
-	$(BUILD_DIR)/asm/melee/mn/code_802502CC.o               \
+	$(BUILD_DIR)/asm/melee/mn/mncount.o			            \
+	$(BUILD_DIR)/asm/melee/mn/mninfo.o			            \
+	$(BUILD_DIR)/asm/melee/mn/mninfobonus.o		            \
+	$(BUILD_DIR)/asm/melee/mn/mnsnap.o			            \
+	$(BUILD_DIR)/asm/melee/mn/mngallery.o	                \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesel.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mncharsel.o               	\
 
