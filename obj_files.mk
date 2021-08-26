@@ -19,8 +19,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/code_8000CE50.o  	    \
 	$(BUILD_DIR)/asm/melee/lb/lbvector.o		 	\
 	                                                \
-	$(BUILD_DIR)/asm/melee/text_1.o 		 	            \
+	$(BUILD_DIR)/asm/melee/text_1.o 		 	    \
 	                                                \
+	$(BUILD_DIR)/asm/melee/cm/code_80028B9C.o 		\
+													\
 	$(BUILD_DIR)/asm/melee/pl/player.o 		 	        \
 	                                                \
 	$(BUILD_DIR)/asm/melee/pl/code_8003715C.o 		 	    \
