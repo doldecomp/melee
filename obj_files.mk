@@ -151,9 +151,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesw.o                   \
 	$(BUILD_DIR)/asm/melee/mn/mnname.o                   	\
-															\
-	$(BUILD_DIR)/asm/melee/text_4.o                      	\
-															\
+	$(BUILD_DIR)/asm/melee/mn/code_8023B0F8.o               \
 	$(BUILD_DIR)/asm/melee/mn/mnvibration.o                 \
 	$(BUILD_DIR)/asm/melee/mn/mnsound.o                 	\
 	$(BUILD_DIR)/asm/melee/mn/mndeflicker.o               	\
@@ -170,7 +168,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesel.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mncharsel.o               	\
 															\
-	$(BUILD_DIR)/asm/melee/text_5.o                      	\
+	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
