@@ -149,6 +149,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/text_3.o                      	\
 															\
 	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
+	$(BUILD_DIR)/asm/melee/mn/mnstagesw.o                   \
 															\
 	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
