@@ -24,7 +24,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/pl/player.o 		 	        \
 	                                                \
 	$(BUILD_DIR)/asm/melee/text_2.o 		 	            \
-	$(BUILD_DIR)/asm/melee/text_3.o 		 	            \
+															\
+	$(BUILD_DIR)/asm/melee/mp/code_80041C78.o 		 	    \
 															\
 	$(BUILD_DIR)/asm/melee/ef/code_8005B4B8.o				\
 															\
@@ -64,13 +65,13 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/ftcrazyhand.o 				\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.o 		            \
 															\
+	$(BUILD_DIR)/asm/melee/text_3.o 		 	            \
 	$(BUILD_DIR)/asm/melee/text_4.o 		 	            \
-	$(BUILD_DIR)/asm/melee/text_5.o 		 	            \
 															\
 	$(BUILD_DIR)/asm/melee/gm/gmtitle.o 		 			\
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.o 		 			\
 															\
-	$(BUILD_DIR)/asm/melee/text_6.o 		 	            \
+	$(BUILD_DIR)/asm/melee/text_5.o 		 	            \
 															\
 	$(BUILD_DIR)/asm/melee/gr/grfzerocar.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grizumi.o 		 			\
@@ -142,8 +143,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtganon.o 		            \
 															\
 	$(BUILD_DIR)/asm/melee/code_80224A54.o 	            	\
-	$(BUILD_DIR)/asm/melee/text_7.o                      	\
-                                                    \
+	$(BUILD_DIR)/asm/melee/text_6.o                      	\
+														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
 	$(BUILD_DIR)/asm/Runtime/Gecko_setjmp.o         	\
