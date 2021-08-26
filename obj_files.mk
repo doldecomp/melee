@@ -19,6 +19,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/code_8000CE50.o  	    \
 	$(BUILD_DIR)/asm/melee/lb/lbvector.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000E9F0.o 		\
+	$(BUILD_DIR)/asm/melee/lb/lbfile.o 				\
+	$(BUILD_DIR)/asm/melee/lb/code_80016A54.o		\
 	                                                \
 	$(BUILD_DIR)/asm/melee/cm/code_80028B9C.o 		\
 													\
@@ -29,7 +31,8 @@ TEXT_O_FILES := 						            \
 													\
 	$(BUILD_DIR)/asm/melee/ef/code_8005B4B8.o		\
 													\
-	$(BUILD_DIR)/asm/melee/ft/code_800679B0.o 		\
+	$(BUILD_DIR)/asm/melee/ft/fighter.o 			\
+	$(BUILD_DIR)/asm/melee/ft/code_8006DBF4.o 		\
 	$(BUILD_DIR)/asm/melee/ft/ftdonkey_1.o 		    \
 	$(BUILD_DIR)/asm/melee/ft/ftmario.o 			            \
 	$(BUILD_DIR)/asm/melee/ft/ftfalcon.o 		            \
