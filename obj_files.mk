@@ -144,9 +144,31 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtgamewatch.o 	            \
 	$(BUILD_DIR)/asm/melee/gr/grtemblem.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtganon.o 		            \
+	$(BUILD_DIR)/asm/melee/gr/stage.o 	            		\
 															\
-	$(BUILD_DIR)/asm/melee/code_80224A54.o 	            	\
 	$(BUILD_DIR)/asm/melee/text_3.o                      	\
+															\
+	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
+	$(BUILD_DIR)/asm/melee/mn/mnstagesw.o                   \
+	$(BUILD_DIR)/asm/melee/mn/mnname.o                   	\
+	$(BUILD_DIR)/asm/melee/mn/code_8023B0F8.o               \
+	$(BUILD_DIR)/asm/melee/mn/mnvibration.o                 \
+	$(BUILD_DIR)/asm/melee/mn/mnsound.o                 	\
+	$(BUILD_DIR)/asm/melee/mn/mndeflicker.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mnsoundtest.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mnlanguage.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mnhyaku.o               		\
+	$(BUILD_DIR)/asm/melee/mn/mnevent.o               		\
+	$(BUILD_DIR)/asm/melee/mn/mndatadel.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mncount.o			            \
+	$(BUILD_DIR)/asm/melee/mn/mninfo.o			            \
+	$(BUILD_DIR)/asm/melee/mn/mninfobonus.o		            \
+	$(BUILD_DIR)/asm/melee/mn/mnsnap.o			            \
+	$(BUILD_DIR)/asm/melee/mn/mngallery.o	                \
+	$(BUILD_DIR)/asm/melee/mn/mnstagesel.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mncharsel.o               	\
+															\
+	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
