@@ -164,6 +164,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mndatadel.o               	\
 															\
 	$(BUILD_DIR)/asm/melee/text_5.o                      	\
+	$(BUILD_DIR)/asm/melee/text_6.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
