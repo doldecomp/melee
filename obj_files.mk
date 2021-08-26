@@ -157,6 +157,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mnvibration.o                 \
 	$(BUILD_DIR)/asm/melee/mn/mnsound.o                 	\
 	$(BUILD_DIR)/asm/melee/mn/mndeflicker.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mnsoundtest.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mnlanguage.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mnhyaku.o               		\
 	$(BUILD_DIR)/asm/melee/mn/mnevent.o               		\
