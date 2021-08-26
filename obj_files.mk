@@ -144,8 +144,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtgamewatch.o 	            \
 	$(BUILD_DIR)/asm/melee/gr/grtemblem.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtganon.o 		            \
+	$(BUILD_DIR)/asm/melee/gr/stage.o 	            		\
 															\
-	$(BUILD_DIR)/asm/melee/code_80224A54.o 	            	\
 	$(BUILD_DIR)/asm/melee/text_3.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
