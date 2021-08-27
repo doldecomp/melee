@@ -8,7 +8,7 @@
 lbl_803B9840:
     .4byte SubactionEvent_00
     .4byte SubactionEvent_04
-    .4byte func_80005994
+    .4byte SubactionEvent_08
     .4byte func_800059DC
     .4byte func_80005A30
     .4byte func_80005A88
