@@ -46,10 +46,13 @@ void GrTMars_80221F68(void)
     return;
 }
 
+#pragma push
+#pragma peephole on
 void GrTMars_80221F6C(void)
 {
     func_801CAE04(0);
 }
+#pragma pop
 
 int GrTMars_80221F90(void)
 {
