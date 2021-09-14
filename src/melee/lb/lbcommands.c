@@ -3,20 +3,20 @@
 extern const f64 lbl_804D79E0;
 
 // Reset
-void Command_00(SubactionInfo* info)
+void Command_00(CommandInfo* info)
 {
     info->data_position = 0;
 }
 
 //Set Timer
 #ifdef NON_MATCHING
-void Command_04(SubactionInfo* info)
+void Command_04(CommandInfo* info)
 {
     info->timer += *info->data_position & 0x3ffffff;
     info->data_position += 1;
 }
 #else
-asm void Command_04(SubactionInfo* info)
+asm void Command_04(CommandInfo* info)
 {
     nofralloc
     stwu r1, -0x18(r1)
@@ -42,13 +42,13 @@ asm void Command_04(SubactionInfo* info)
 
 //Adjust Timer
 #ifdef NON_MATCHING
-void Command_08(SubactionInfo* info)
+void Command_08(CommandInfo* info)
 {
     info->timer = (*info->data_position & 0x3ffffff) - info->frame_count;
     info->data_position += 1;
 }
 #else
-asm void Command_08(SubactionInfo* info)
+asm void Command_08(CommandInfo* info)
 {
     nofralloc
     stwu r1, -0x18(r1)
