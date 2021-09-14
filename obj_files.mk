@@ -130,7 +130,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtkoopa.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtlink.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtluigi.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtmars.o 					\
+	$(BUILD_DIR)/src/melee/gr/grtmars.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtmewtwo.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtness.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtpeach.o 		            \
