@@ -1,4 +1,4 @@
-#include "lbcommands.h"
+#include "lbcommand.h"
 
 extern const f64 lbl_804D79E0;
 
