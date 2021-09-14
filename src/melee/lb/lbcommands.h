@@ -13,7 +13,7 @@ typedef struct _SubactionInfo {
     u32 unk_x18; //0x18
 } SubactionInfo;
 
-void SubactionEvent_00(SubactionInfo* info);
-void SubactionEvent_04(SubactionInfo* info);
+void Command_00(SubactionInfo* info);
+void Command_04(SubactionInfo* info);
 
 #endif
