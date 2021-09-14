@@ -1,10 +1,16 @@
-.include "macros.inc"
+#include "grtmars.h"
 
-.section .text  # 0x80005940 - 0x803B7240
+extern int* lbl_8049E6C8;
+extern int* lbl_803E8EB0;
 
-.global func_80221EF4
-func_80221EF4:
-/* 80221EF4 0021EAD4  4E 80 00 20 */	blr 
+void GrTMars_80221EF4(void)
+{
+    return;
+}
+
+asm void GrTMars_80221EF8(void)
+{
+    nofralloc
 /* 80221EF8 0021EAD8  7C 08 02 A6 */	mflr r0
 /* 80221EFC 0021EADC  3C 60 80 4A */	lis r3, lbl_8049E6C8@ha
 /* 80221F00 0021EAE0  90 01 00 04 */	stw r0, 4(r1)
@@ -20,11 +26,11 @@ func_80221EF4:
 /* 80221F28 0021EB08  88 05 00 00 */	lbz r0, 0(r5)
 /* 80221F2C 0021EB0C  50 80 17 7A */	rlwimi r0, r4, 2, 0x1d, 0x1d
 /* 80221F30 0021EB10  98 05 00 00 */	stb r0, 0(r5)
-/* 80221F34 0021EB14  48 00 00 65 */	bl func_80221F98
+/* 80221F34 0021EB14  48 00 00 65 */	bl GrTMars_80221F98
 /* 80221F38 0021EB18  38 60 00 01 */	li r3, 1
-/* 80221F3C 0021EB1C  48 00 00 5D */	bl func_80221F98
+/* 80221F3C 0021EB1C  48 00 00 5D */	bl GrTMars_80221F98
 /* 80221F40 0021EB20  38 60 00 02 */	li r3, 2
-/* 80221F44 0021EB24  48 00 00 55 */	bl func_80221F98
+/* 80221F44 0021EB24  48 00 00 55 */	bl GrTMars_80221F98
 /* 80221F48 0021EB28  4B FA 1A 79 */	bl func_801C39C0
 /* 80221F4C 0021EB2C  4B FA 1C 69 */	bl func_801C3BB4
 /* 80221F50 0021EB30  4B FA 22 C1 */	bl func_801C4210
@@ -33,21 +39,26 @@ func_80221EF4:
 /* 80221F5C 0021EB3C  38 21 00 08 */	addi r1, r1, 8
 /* 80221F60 0021EB40  7C 08 03 A6 */	mtlr r0
 /* 80221F64 0021EB44  4E 80 00 20 */	blr 
-/* 80221F68 0021EB48  4E 80 00 20 */	blr 
-/* 80221F6C 0021EB4C  7C 08 02 A6 */	mflr r0
-/* 80221F70 0021EB50  38 60 00 00 */	li r3, 0
-/* 80221F74 0021EB54  90 01 00 04 */	stw r0, 4(r1)
-/* 80221F78 0021EB58  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80221F7C 0021EB5C  4B FA 8E 89 */	bl func_801CAE04
-/* 80221F80 0021EB60  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80221F84 0021EB64  38 21 00 08 */	addi r1, r1, 8
-/* 80221F88 0021EB68  7C 08 03 A6 */	mtlr r0
-/* 80221F8C 0021EB6C  4E 80 00 20 */	blr 
-/* 80221F90 0021EB70  38 60 00 00 */	li r3, 0
-/* 80221F94 0021EB74  4E 80 00 20 */	blr 
+}
 
-.global func_80221F98
-func_80221F98:
+void GrTMars_80221F68(void)
+{
+    return;
+}
+
+void GrTMars_80221F6C(void)
+{
+    func_801CAE04(0);
+}
+
+int GrTMars_80221F90(void)
+{
+    return 0;
+}
+
+asm HSD_GObj* GrTMars_80221F98(int param_1)
+{
+    nofralloc
 /* 80221F98 0021EB78  7C 08 02 A6 */	mflr r0
 /* 80221F9C 0021EB7C  90 01 00 04 */	stw r0, 4(r1)
 /* 80221FA0 0021EB80  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -110,6 +121,11 @@ lbl_8022205C:
 /* 80222074 0021EC54  38 21 00 20 */	addi r1, r1, 0x20
 /* 80222078 0021EC58  7C 08 03 A6 */	mtlr r0
 /* 8022207C 0021EC5C  4E 80 00 20 */	blr 
+}
+
+asm void GrTMars_80222080(HSD_GObj* gobj)
+{
+    nofralloc
 /* 80222080 0021EC60  7C 08 02 A6 */	mflr r0
 /* 80222084 0021EC64  38 A0 00 00 */	li r5, 0
 /* 80222088 0021EC68  90 01 00 04 */	stw r0, 4(r1)
@@ -121,10 +137,26 @@ lbl_8022205C:
 /* 802220A0 0021EC80  38 21 00 08 */	addi r1, r1, 8
 /* 802220A4 0021EC84  7C 08 03 A6 */	mtlr r0
 /* 802220A8 0021EC88  4E 80 00 20 */	blr 
-/* 802220AC 0021EC8C  38 60 00 00 */	li r3, 0
-/* 802220B0 0021EC90  4E 80 00 20 */	blr 
-/* 802220B4 0021EC94  4E 80 00 20 */	blr 
-/* 802220B8 0021EC98  4E 80 00 20 */	blr 
+}
+
+int GrTMars_802220AC(void)
+{
+    return 0;
+}
+
+void GrTMars_802220B4(void)
+{
+    return;
+}
+
+void GrTMars_802220B8(void)
+{
+    return;
+}
+
+asm void GrTMars_802220BC(HSD_GObj* gobj)
+{
+    nofralloc
 /* 802220BC 0021EC9C  7C 08 02 A6 */	mflr r0
 /* 802220C0 0021ECA0  90 01 00 04 */	stw r0, 4(r1)
 /* 802220C4 0021ECA4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -145,22 +177,30 @@ lbl_8022205C:
 /* 80222100 0021ECE0  38 21 00 20 */	addi r1, r1, 0x20
 /* 80222104 0021ECE4  7C 08 03 A6 */	mtlr r0
 /* 80222108 0021ECE8  4E 80 00 20 */	blr 
-/* 8022210C 0021ECEC  38 60 00 00 */	li r3, 0
-/* 80222110 0021ECF0  4E 80 00 20 */	blr 
-/* 80222114 0021ECF4  7C 08 02 A6 */	mflr r0
-/* 80222118 0021ECF8  90 01 00 04 */	stw r0, 4(r1)
-/* 8022211C 0021ECFC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80222120 0021ED00  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80222124 0021ED04  7C 7F 1B 78 */	mr r31, r3
-/* 80222128 0021ED08  4B DE F4 CD */	bl func_800115F4
-/* 8022212C 0021ED0C  7F E3 FB 78 */	mr r3, r31
-/* 80222130 0021ED10  4B FA 0E B1 */	bl func_801C2FE0
-/* 80222134 0021ED14  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80222138 0021ED18  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8022213C 0021ED1C  38 21 00 18 */	addi r1, r1, 0x18
-/* 80222140 0021ED20  7C 08 03 A6 */	mtlr r0
-/* 80222144 0021ED24  4E 80 00 20 */	blr 
-/* 80222148 0021ED28  4E 80 00 20 */	blr 
+}
+
+int GrTMars_8022210C(void)
+{
+    return 0;
+}
+
+#pragma push
+#pragma peephole on
+void GrTMars_80222114(HSD_GObj* gobj)
+{
+    func_800115F4();
+    func_801C2FE0(gobj);
+}
+#pragma pop
+
+void GrTMars_80222148(void)
+{
+    return;
+}
+
+asm void GrTMars_8022214C(HSD_GObj* gobj)
+{
+    nofralloc
 /* 8022214C 0021ED2C  7C 08 02 A6 */	mflr r0
 /* 80222150 0021ED30  90 01 00 04 */	stw r0, 4(r1)
 /* 80222154 0021ED34  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -181,18 +221,32 @@ lbl_8022205C:
 /* 80222190 0021ED70  38 21 00 20 */	addi r1, r1, 0x20
 /* 80222194 0021ED74  7C 08 03 A6 */	mtlr r0
 /* 80222198 0021ED78  4E 80 00 20 */	blr 
-/* 8022219C 0021ED7C  38 60 00 00 */	li r3, 0
-/* 802221A0 0021ED80  4E 80 00 20 */	blr 
-/* 802221A4 0021ED84  7C 08 02 A6 */	mflr r0
-/* 802221A8 0021ED88  90 01 00 04 */	stw r0, 4(r1)
-/* 802221AC 0021ED8C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 802221B0 0021ED90  4B FA 0E 31 */	bl func_801C2FE0
-/* 802221B4 0021ED94  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 802221B8 0021ED98  38 21 00 08 */	addi r1, r1, 8
-/* 802221BC 0021ED9C  7C 08 03 A6 */	mtlr r0
-/* 802221C0 0021EDA0  4E 80 00 20 */	blr 
-/* 802221C4 0021EDA4  4E 80 00 20 */	blr 
-/* 802221C8 0021EDA8  38 60 00 00 */	li r3, 0
-/* 802221CC 0021EDAC  4E 80 00 20 */	blr 
-/* 802221D0 0021EDB0  38 60 00 01 */	li r3, 1
-/* 802221D4 0021EDB4  4E 80 00 20 */	blr 
+}
+
+int GrTMars_8022219C(void)
+{
+    return 0;
+}
+
+#pragma push
+#pragma peephole on
+void GrTMars_802221A4(HSD_GObj* gobj)
+{
+    func_801C2FE0(gobj);
+}
+#pragma pop
+
+void GrTMars_802221C4(void)
+{
+    return;
+}
+
+int GrTMars_802221C8(void)
+{
+    return 0;
+}
+
+int GrTMars_802221D0(void)
+{
+    return 1;
+}
