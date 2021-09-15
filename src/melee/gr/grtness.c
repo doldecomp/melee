@@ -1,10 +1,16 @@
-.include "macros.inc"
+#include "grtness.h"
 
-.section .text  # 0x80005940 - 0x803B7240
+extern int* lbl_8049E6C8;
+extern int* lbl_803E9030;
 
-.global func_802225D0
-func_802225D0:
-/* 802225D0 0021F1B0  4E 80 00 20 */	blr 
+void GrTNess_802225D0(void)
+{
+    return;
+}
+
+asm void GrTNess_802225D4(void)
+{
+    nofralloc
 /* 802225D4 0021F1B4  7C 08 02 A6 */	mflr r0
 /* 802225D8 0021F1B8  3C 60 80 4A */	lis r3, lbl_8049E6C8@ha
 /* 802225DC 0021F1BC  90 01 00 04 */	stw r0, 4(r1)
@@ -20,11 +26,11 @@ func_802225D0:
 /* 80222604 0021F1E4  88 05 00 00 */	lbz r0, 0(r5)
 /* 80222608 0021F1E8  50 80 17 7A */	rlwimi r0, r4, 2, 0x1d, 0x1d
 /* 8022260C 0021F1EC  98 05 00 00 */	stb r0, 0(r5)
-/* 80222610 0021F1F0  48 00 00 65 */	bl func_80222674
+/* 80222610 0021F1F0  48 00 00 65 */	bl GrTNess_80222674
 /* 80222614 0021F1F4  38 60 00 01 */	li r3, 1
-/* 80222618 0021F1F8  48 00 00 5D */	bl func_80222674
+/* 80222618 0021F1F8  48 00 00 5D */	bl GrTNess_80222674
 /* 8022261C 0021F1FC  38 60 00 02 */	li r3, 2
-/* 80222620 0021F200  48 00 00 55 */	bl func_80222674
+/* 80222620 0021F200  48 00 00 55 */	bl GrTNess_80222674
 /* 80222624 0021F204  4B FA 13 9D */	bl func_801C39C0
 /* 80222628 0021F208  4B FA 15 8D */	bl func_801C3BB4
 /* 8022262C 0021F20C  4B FA 1B E5 */	bl func_801C4210
@@ -33,21 +39,29 @@ func_802225D0:
 /* 80222638 0021F218  38 21 00 08 */	addi r1, r1, 8
 /* 8022263C 0021F21C  7C 08 03 A6 */	mtlr r0
 /* 80222640 0021F220  4E 80 00 20 */	blr 
-/* 80222644 0021F224  4E 80 00 20 */	blr 
-/* 80222648 0021F228  7C 08 02 A6 */	mflr r0
-/* 8022264C 0021F22C  38 60 00 00 */	li r3, 0
-/* 80222650 0021F230  90 01 00 04 */	stw r0, 4(r1)
-/* 80222654 0021F234  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80222658 0021F238  4B FA 87 AD */	bl func_801CAE04
-/* 8022265C 0021F23C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80222660 0021F240  38 21 00 08 */	addi r1, r1, 8
-/* 80222664 0021F244  7C 08 03 A6 */	mtlr r0
-/* 80222668 0021F248  4E 80 00 20 */	blr 
-/* 8022266C 0021F24C  38 60 00 00 */	li r3, 0
-/* 80222670 0021F250  4E 80 00 20 */	blr 
+}
 
-.global func_80222674
-func_80222674:
+void GrTNess_80222644(void)
+{
+    return;
+}
+
+#pragma push
+#pragma peephole on
+void GrTNess_80222648(void)
+{
+    func_801CAE04(0);
+}
+#pragma pop
+
+int GrTNess_8022266C(void)
+{
+    return 0;
+}
+
+asm HSD_GObj* GrTNess_80222674(int param_1)
+{
+    nofralloc
 /* 80222674 0021F254  7C 08 02 A6 */	mflr r0
 /* 80222678 0021F258  90 01 00 04 */	stw r0, 4(r1)
 /* 8022267C 0021F25C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -110,6 +124,11 @@ lbl_80222738:
 /* 80222750 0021F330  38 21 00 20 */	addi r1, r1, 0x20
 /* 80222754 0021F334  7C 08 03 A6 */	mtlr r0
 /* 80222758 0021F338  4E 80 00 20 */	blr 
+}
+
+asm void GrTNess_8022275C(HSD_GObj* gobj)
+{
+    nofralloc
 /* 8022275C 0021F33C  7C 08 02 A6 */	mflr r0
 /* 80222760 0021F340  38 A0 00 00 */	li r5, 0
 /* 80222764 0021F344  90 01 00 04 */	stw r0, 4(r1)
@@ -121,10 +140,27 @@ lbl_80222738:
 /* 8022277C 0021F35C  38 21 00 08 */	addi r1, r1, 8
 /* 80222780 0021F360  7C 08 03 A6 */	mtlr r0
 /* 80222784 0021F364  4E 80 00 20 */	blr 
-/* 80222788 0021F368  38 60 00 00 */	li r3, 0
-/* 8022278C 0021F36C  4E 80 00 20 */	blr 
-/* 80222790 0021F370  4E 80 00 20 */	blr 
-/* 80222794 0021F374  4E 80 00 20 */	blr 
+}
+
+
+int GrTNess_80222788(void)
+{
+    return 0;
+}
+
+void GrTNess_80222790(void)
+{
+    return;
+}
+
+void GrTNess_80222794(void)
+{
+    return;
+}
+
+asm void GrTNess_80222798(HSD_GObj* gobj)
+{
+    nofralloc
 /* 80222798 0021F378  7C 08 02 A6 */	mflr r0
 /* 8022279C 0021F37C  90 01 00 04 */	stw r0, 4(r1)
 /* 802227A0 0021F380  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -145,22 +181,30 @@ lbl_80222738:
 /* 802227DC 0021F3BC  38 21 00 20 */	addi r1, r1, 0x20
 /* 802227E0 0021F3C0  7C 08 03 A6 */	mtlr r0
 /* 802227E4 0021F3C4  4E 80 00 20 */	blr 
-/* 802227E8 0021F3C8  38 60 00 00 */	li r3, 0
-/* 802227EC 0021F3CC  4E 80 00 20 */	blr 
-/* 802227F0 0021F3D0  7C 08 02 A6 */	mflr r0
-/* 802227F4 0021F3D4  90 01 00 04 */	stw r0, 4(r1)
-/* 802227F8 0021F3D8  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 802227FC 0021F3DC  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80222800 0021F3E0  7C 7F 1B 78 */	mr r31, r3
-/* 80222804 0021F3E4  4B DE ED F1 */	bl func_800115F4
-/* 80222808 0021F3E8  7F E3 FB 78 */	mr r3, r31
-/* 8022280C 0021F3EC  4B FA 07 D5 */	bl func_801C2FE0
-/* 80222810 0021F3F0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80222814 0021F3F4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80222818 0021F3F8  38 21 00 18 */	addi r1, r1, 0x18
-/* 8022281C 0021F3FC  7C 08 03 A6 */	mtlr r0
-/* 80222820 0021F400  4E 80 00 20 */	blr 
-/* 80222824 0021F404  4E 80 00 20 */	blr 
+}
+
+int GrTNess_802227E8(void)
+{
+    return 0;
+}
+
+#pragma push
+#pragma peephole on
+void GrTNess_802227F0(HSD_GObj* gobj)
+{
+    func_800115F4();
+    func_801C2FE0(gobj);
+}
+#pragma pop
+
+void GrTNess_80222824(void)
+{
+    return;
+}
+
+asm void GrTNess_80222828(HSD_GObj* gobj)
+{
+    nofralloc
 /* 80222828 0021F408  7C 08 02 A6 */	mflr r0
 /* 8022282C 0021F40C  90 01 00 04 */	stw r0, 4(r1)
 /* 80222830 0021F410  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -181,18 +225,32 @@ lbl_80222738:
 /* 8022286C 0021F44C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80222870 0021F450  7C 08 03 A6 */	mtlr r0
 /* 80222874 0021F454  4E 80 00 20 */	blr 
-/* 80222878 0021F458  38 60 00 00 */	li r3, 0
-/* 8022287C 0021F45C  4E 80 00 20 */	blr 
-/* 80222880 0021F460  7C 08 02 A6 */	mflr r0
-/* 80222884 0021F464  90 01 00 04 */	stw r0, 4(r1)
-/* 80222888 0021F468  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8022288C 0021F46C  4B FA 07 55 */	bl func_801C2FE0
-/* 80222890 0021F470  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80222894 0021F474  38 21 00 08 */	addi r1, r1, 8
-/* 80222898 0021F478  7C 08 03 A6 */	mtlr r0
-/* 8022289C 0021F47C  4E 80 00 20 */	blr 
-/* 802228A0 0021F480  4E 80 00 20 */	blr 
-/* 802228A4 0021F484  38 60 00 00 */	li r3, 0
-/* 802228A8 0021F488  4E 80 00 20 */	blr 
-/* 802228AC 0021F48C  38 60 00 01 */	li r3, 1
-/* 802228B0 0021F490  4E 80 00 20 */	blr 
+}
+
+int GrTNess_80222878(void)
+{
+    return 0;
+}
+
+#pragma push
+#pragma peephole on
+void GrTNess_80222880(HSD_GObj* gobj)
+{
+    func_801C2FE0(gobj);
+}
+#pragma pop
+
+void GrTNess_802228A0(void)
+{
+    return;
+}
+
+int GrTNess_802228A4(void)
+{
+    return 0;
+}
+
+int GrTNess_802228AC(void)
+{
+    return 1;
+}
