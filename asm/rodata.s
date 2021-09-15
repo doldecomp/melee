@@ -4,13 +4,26 @@
 
 .global lbl_803B7280
 lbl_803B7280:
-	.incbin "baserom.dol", 0x3B4280, 0x28
+    .float 0
+    .float -1
+    .float 0
+    .float 0
+    .float -1
+    .float 0
+    .float 0
+    .float -1
+    .float 0
+	.4byte NULL
 .global lbl_803B72A8
 lbl_803B72A8:
-	.incbin "baserom.dol", 0x3B42A8, 0xC
+	.float 0
+    .float 0
+    .float 1
 .global lbl_803B72B4
 lbl_803B72B4:
-	.incbin "baserom.dol", 0x3B42B4, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B72C0
 lbl_803B72C0:
 	.incbin "baserom.dol", 0x3B42C0, 0x40
@@ -19,52 +32,87 @@ lbl_803B7300:
 	.incbin "baserom.dol", 0x3B4300, 0xB8
 .global lbl_803B73B8
 lbl_803B73B8:
-	.incbin "baserom.dol", 0x3B43B8, 0xC
+	.float 0
+    .float 0
+    .float -1
 .global lbl_803B73C4
 lbl_803B73C4:
-	.incbin "baserom.dol", 0x3B43C4, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B73D0
 lbl_803B73D0:
-	.incbin "baserom.dol", 0x3B43D0, 0xC
+	.float 0
+    .float 1
+    .float 0
 .global lbl_803B73DC
 lbl_803B73DC:
-	.incbin "baserom.dol", 0x3B43DC, 0xC
+	.float 0
+    .float 1
+    .float 0
 .global lbl_803B73E8
 lbl_803B73E8:
 	.incbin "baserom.dol", 0x3B43E8, 0xA0
 .global lbl_803B7488
 lbl_803B7488:
-	.incbin "baserom.dol", 0x3B4488, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B7494
 lbl_803B7494:
-	.incbin "baserom.dol", 0x3B4494, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B74A0
 lbl_803B74A0:
-	.incbin "baserom.dol", 0x3B44A0, 0x10
+	.float 0
+    .float 0
+    .float 0
+    .4byte NULL
 .global lbl_803B74B0
 lbl_803B74B0:
-	.incbin "baserom.dol", 0x3B44B0, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B74BC
 lbl_803B74BC:
-	.incbin "baserom.dol", 0x3B44BC, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B74C8
 lbl_803B74C8:
-	.incbin "baserom.dol", 0x3B44C8, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B74D4
 lbl_803B74D4:
-	.incbin "baserom.dol", 0x3B44D4, 0xC
+	.float 1.8
+    .float 0
+    .float 0
 .global lbl_803B74E0
 lbl_803B74E0:
-	.incbin "baserom.dol", 0x3B44E0, 0x10
+	.float 1.8
+    .float 0
+    .float 0
+    .4byte NULL
 .global lbl_803B74F0
 lbl_803B74F0:
-	.incbin "baserom.dol", 0x3B44F0, 0x10
+	.float 0
+    .float 0
+    .float 0
+    .4byte NULL
 .global lbl_803B7500
 lbl_803B7500:
-	.incbin "baserom.dol", 0x3B4500, 0x10
+	.float 0
+    .float 3.1415927
+    .float 0
+    .float 0
 .global lbl_803B7510
 lbl_803B7510:
-	.incbin "baserom.dol", 0x3B4510, 0x10
+	.float 1
+    .float 0
+    .float 0
+    .4byte NULL
 .global lbl_803B7520
 lbl_803B7520:
 	.incbin "baserom.dol", 0x3B4520, 0x28
@@ -73,13 +121,20 @@ lbl_803B7548:
 	.incbin "baserom.dol", 0x3B4548, 0x28
 .global lbl_803B7570
 lbl_803B7570:
-	.incbin "baserom.dol", 0x3B4570, 0xC
+	.float 0
+    .float 4
+    .float 0
 .global lbl_803B757C
 lbl_803B757C:
-	.incbin "baserom.dol", 0x3B457C, 0xC
+	.float 0
+    .float 4
+    .float 0
 .global lbl_803B7588
 lbl_803B7588:
-	.incbin "baserom.dol", 0x3B4588, 0x10
+	.float 1.8
+    .float 0
+    .float 0
+    .4byte NULL
 .global lbl_803B7598
 lbl_803B7598:
 	.incbin "baserom.dol", 0x3B4598, 0xC
@@ -637,19 +692,30 @@ lbl_803B9410:
 	.incbin "baserom.dol", 0x3B6410, 0x90
 .global lbl_803B94A0
 lbl_803B94A0:
-	.incbin "baserom.dol", 0x3B64A0, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B94AC
 lbl_803B94AC:
-	.incbin "baserom.dol", 0x3B64AC, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B94B8
 lbl_803B94B8:
-	.incbin "baserom.dol", 0x3B64B8, 0xC
+	.float 1
+    .float 1
+    .float 1
 .global lbl_803B94C4
 lbl_803B94C4:
-	.incbin "baserom.dol", 0x3B64C4, 0xC
+	.4byte NULL
+    .4byte NULL
+    .4byte NULL
 .global lbl_803B94D0
 lbl_803B94D0:
-	.incbin "baserom.dol", 0x3B64D0, 0x10
+	.float 1
+    .float 1
+    .float 1
+    .4byte NULL
 .global lbl_803B94E0
 lbl_803B94E0:
 	.4byte _HSD_AObjForgetMemory
@@ -692,22 +758,35 @@ lbl_803B94FC:
     .4byte NULL
 .global lbl_803B9570
 lbl_803B9570:
-	.incbin "baserom.dol", 0x3B6570, 0x10
+    .4byte 0x80000000
+    .4byte 0x40000000
+    .4byte 0x20000000
+    .4byte 0x10000000
 .global lbl_803B9580
 lbl_803B9580:
-	.incbin "baserom.dol", 0x3B6580, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B958C
 lbl_803B958C:
-	.incbin "baserom.dol", 0x3B658C, 0xC
+	.float 1
+    .float 1
+    .float 1
 .global lbl_803B9598
 lbl_803B9598:
-	.incbin "baserom.dol", 0x3B6598, 0x10
+	.float 0
+    .float 1
+    .float 0
+    .4byte NULL
 .global lbl_803B95A8
 lbl_803B95A8:
 	.incbin "baserom.dol", 0x3B65A8, 0x40
 .global lbl_803B95E8
 lbl_803B95E8:
-	.incbin "baserom.dol", 0x3B65E8, 0x10
+	.long 1
+    .long 2
+    .long 0
+    .4byte NULL
 .global lbl_803B95F8
 lbl_803B95F8:
 	.incbin "baserom.dol", 0x3B65F8, 0x20
@@ -719,10 +798,14 @@ lbl_803B9628:
 	.incbin "baserom.dol", 0x3B6628, 0x30
 .global lbl_803B9658
 lbl_803B9658:
-	.incbin "baserom.dol", 0x3B6658, 0xC
+	.float 0
+    .float 0
+    .float 1
 .global lbl_803B9664
 lbl_803B9664:
-	.incbin "baserom.dol", 0x3B6664, 0xC
+	.float 0
+    .float 0
+    .float 0
 .global lbl_803B9670
 lbl_803B9670:
 	.incbin "baserom.dol", 0x3B6670, 0x1D0
