@@ -808,7 +808,9 @@ lbl_803B8AE0:
 	.incbin "baserom.dol", 0x3B5AE0, 0xB0
 .global lbl_803B8B90
 lbl_803B8B90:
-	.incbin "baserom.dol", 0x3B5B90, 0x18
+	.double 0
+    .double 4.294967296E9
+    .double 2.147483648E9
 .global lbl_803B8BA8
 lbl_803B8BA8:
 	.incbin "baserom.dol", 0x3B5BA8, 0x48
