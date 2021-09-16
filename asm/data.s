@@ -14936,88 +14936,172 @@ lbl_803FF074:
 lbl_803FF19C:
     .asciz "X  %3.2f\nZ  %3.2f"
     .balign 4
+.global lbl_803FF1B0
+lbl_803FF1B0:
     .asciz "ToyDspQues_Top_joint"
     .balign 4
+.global lbl_803FF1C8
+lbl_803FF1C8:
     .asciz "ToyDspMycharaCmA_Top_joint"
     .balign 4
+.global lbl_803FF1E4
+lbl_803FF1E4:
     .asciz "ToyDspMycharaCmB_Top_joint"
     .balign 4
+.global lbl_803FF200
+lbl_803FF200:
     .asciz "ToyDspMycharaCmC_Top_joint"
     .balign 4
+.global lbl_803FF21C
+lbl_803FF21C:
     .asciz "ToyDspMycharaCmD_Top_joint"
     .balign 4
+.global lbl_803FF238
+lbl_803FF238:
     .asciz "ToyDspMycharaCmE_Top_joint"
     .balign 4
+.global lbl_803FF254
+lbl_803FF254:
     .asciz "ToyDspMycharaR1A_Top_joint"
     .balign 4
+.global lbl_803FF270
+lbl_803FF270:
     .asciz "ToyDspMycharaR1B_Top_joint"
     .balign 4
+.global lbl_803FF28C
+lbl_803FF28C:
     .asciz "ToyDspMycharaR1C_Top_joint"
     .balign 4
+.global lbl_803FF2A8
+lbl_803FF2A8:
     .asciz "ToyDspMycharaR1D_Top_joint"
     .balign 4
+.global lbl_803FF2C4
+lbl_803FF2C4:
     .asciz "ToyDspMycharaR1E_Top_joint"
     .balign 4
+.global lbl_803FF2E0
+lbl_803FF2E0:
     .asciz "ToyDspMycharaR2A_Top_joint"
     .balign 4
+.global lbl_803FF2FC
+lbl_803FF2FC:
     .asciz "ToyDspMycharaR2B_Top_joint"
     .balign 4
+.global lbl_803FF318
+lbl_803FF318:
     .asciz "ToyDspMycharaR2C_Top_joint"
     .balign 4
+.global lbl_803FF334
+lbl_803FF334:
     .asciz "ToyDspMycharaR2D_Top_joint"
     .balign 4
+.global lbl_803FF350
+lbl_803FF350:
     .asciz "ToyDspMycharaR2E_Top_joint"
     .balign 4
+.global lbl_803FF36C
+lbl_803FF36C:
     .asciz "ToyDspMapA_Top_joint"
     .balign 4
+.global lbl_803FF384
+lbl_803FF384:
     .asciz "ToyDspMapB_Top_joint"
     .balign 4
+.global lbl_803FF39C
+lbl_803FF39C:
     .asciz "ToyDspMapC_Top_joint"
     .balign 4
+.global lbl_803FF3B4
+lbl_803FF3B4:
     .asciz "ToyDspMapD_Top_joint"
     .balign 4
+.global lbl_803FF3CC
+lbl_803FF3CC:
     .asciz "ToyDspMapE_Top_joint"
     .balign 4
+.global lbl_803FF3E4
+lbl_803FF3E4:
     .asciz "ToyDspFgseriesA_Top_joint"
     .balign 4
+.global lbl_803FF400
+lbl_803FF400:
     .asciz "ToyDspFgseriesB_Top_joint"
     .balign 4
+.global lbl_803FF41C
+lbl_803FF41C:
     .asciz "ToyDspFgseriesC_Top_joint"
     .balign 4
+.global lbl_803FF438
+lbl_803FF438:
     .asciz "ToyDspFgseriesD_Top_joint"
     .balign 4
+.global lbl_803FF454
+lbl_803FF454:
     .asciz "ToyDspFgseriesE_Top_joint"
     .balign 4
+.global lbl_803FF470
+lbl_803FF470:
     .asciz "ToyDspFgetcA_Top_joint"
     .balign 4
+.global lbl_803FF488
+lbl_803FF488:
     .asciz "ToyDspFgetcB_Top_joint"
     .balign 4
+.global lbl_803FF4A0
+lbl_803FF4A0:
     .asciz "ToyDspFgetcC_Top_joint"
     .balign 4
+.global lbl_803FF4B8
+lbl_803FF4B8:
     .asciz "ToyDspFgetcD_Top_joint"
     .balign 4
+.global lbl_803FF4D0
+lbl_803FF4D0:
     .asciz "ToyDspFgetcE_Top_joint"
     .balign 4
+.global lbl_803FF4E8
+lbl_803FF4E8:
     .asciz "ToyDspPokemonA_Top_joint"
     .balign 4
+.global lbl_803FF504
+lbl_803FF504:
     .asciz "ToyDspPokemonB_Top_joint"
     .balign 4
+.global lbl_803FF520
+lbl_803FF520:
     .asciz "ToyDspPokemonC_Top_joint"
     .balign 4
+.global lbl_803FF53C
+lbl_803FF53C:
     .asciz "ToyDspPokemonD_Top_joint"
     .balign 4
+.global lbl_803FF558
+lbl_803FF558:
     .asciz "ToyDspPokemonE_Top_joint"
     .balign 4
+.global lbl_803FF574
+lbl_803FF574:
     .asciz "ToyDspItemA_Top_joint"
     .balign 4
+.global lbl_803FF58C
+lbl_803FF58C:
     .asciz "ToyDspItemB_Top_joint"
     .balign 4
+.global lbl_803FF5A4
+lbl_803FF5A4:
     .asciz "ToyDspItemC_Top_joint"
     .balign 4
+.global lbl_803FF5BC
+lbl_803FF5BC:
     .asciz "ToyDspItemD_Top_joint"
     .balign 4
+.global lbl_803FF5D4
+lbl_803FF5D4:
     .asciz "ToyDspItemE_Top_joint"
     .balign 4
+.global lbl_803FF5EC
+lbl_803FF5EC:
     .asciz "ToyDspStand_Top_joint"
     .balign 4
     .asciz "ToyDspMycharaCmA_Top_matanim_joint"

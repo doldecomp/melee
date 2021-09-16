@@ -757,7 +757,49 @@ lbl_803B8974:
     .4byte NULL
 .global lbl_803B8988
 lbl_803B8988:
-	.incbin "baserom.dol", 0x3B5988, 0xAC
+    .4byte lbl_803FF1B0
+    .4byte lbl_803FF1C8
+    .4byte lbl_803FF1E4
+    .4byte lbl_803FF200
+    .4byte lbl_803FF21C
+    .4byte lbl_803FF238
+    .4byte lbl_803FF254
+    .4byte lbl_803FF270
+    .4byte lbl_803FF28C
+    .4byte lbl_803FF2A8
+    .4byte lbl_803FF2C4
+    .4byte lbl_803FF2E0
+    .4byte lbl_803FF2FC
+    .4byte lbl_803FF318
+    .4byte lbl_803FF334
+    .4byte lbl_803FF350
+    .4byte lbl_803FF36C
+    .4byte lbl_803FF384
+    .4byte lbl_803FF39C
+    .4byte lbl_803FF3B4
+    .4byte lbl_803FF3CC
+    .4byte lbl_803FF3E4
+    .4byte lbl_803FF400
+    .4byte lbl_803FF41C
+    .4byte lbl_803FF438
+    .4byte lbl_803FF454
+    .4byte lbl_803FF470
+    .4byte lbl_803FF488
+    .4byte lbl_803FF4A0
+    .4byte lbl_803FF4B8
+    .4byte lbl_803FF4D0
+    .4byte lbl_803FF4E8
+    .4byte lbl_803FF504
+    .4byte lbl_803FF520
+    .4byte lbl_803FF53C
+    .4byte lbl_803FF558
+    .4byte lbl_803FF574
+    .4byte lbl_803FF58C
+    .4byte lbl_803FF5A4
+    .4byte lbl_803FF5BC
+    .4byte lbl_803FF5D4
+    .4byte lbl_803FF5EC
+    .4byte lbl_803FF1B0
 .global lbl_803B8A34
 lbl_803B8A34:
 	.incbin "baserom.dol", 0x3B5A34, 0xAC
