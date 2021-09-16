@@ -750,7 +750,11 @@ lbl_803B8968:
 	.incbin "baserom.dol", 0x3B5968, 0xC
 .global lbl_803B8974
 lbl_803B8974:
-	.incbin "baserom.dol", 0x3B5974, 0x14
+	.float 0
+    .float 0
+    .float 0
+    .float 0
+    .4byte NULL
 .global lbl_803B8988
 lbl_803B8988:
 	.incbin "baserom.dol", 0x3B5988, 0xAC
