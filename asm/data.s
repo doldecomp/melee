@@ -206,10 +206,16 @@ lbl_803BA68C:
 lbl_803BA6A8:
     .asciz "free_index != -1"
     .balign 4
+.global lbl_803BA6BC
+lbl_803BA6BC:
     .asciz "LbRb.dat"
     .balign 4
+.global lbl_803BA6C8
+lbl_803BA6C8:
     .asciz "EfMnData.dat"
     .balign 4
+.global lbl_803BA6D8
+lbl_803BA6D8:
     .asciz "EfCoData.dat"
     .balign 4
 .global lbl_803BA6E8
@@ -8426,7 +8432,29 @@ lbl_803D9248:
 	.incbin "baserom.dol", 0x3D6248, 0x1CC
 .global lbl_803D9414
 lbl_803D9414:
-	.incbin "baserom.dol", 0x3D6414, 0x48
+    .byte 0x82
+    .byte 0x73
+    .byte 0x82
+    .byte 0x85
+    .byte 0x82
+    .byte 0x81
+    .byte 0x82
+    .byte 0x8D
+    .4byte NULL
+.global lbl_803D9420
+lbl_803D9420:
+    .asciz "IrEzTarg"
+    .balign 4
+.global lbl_803D942C
+lbl_803D942C:
+    .asciz "IrEzTuki"
+    .balign 4
+.global lbl_803D9438
+lbl_803D9438:
+    .asciz "IrEzFigG"
+    .balign 4
+    .asciz "ScItrAllstar_scene_data"
+    .balign 4
 .global lbl_803D945C
 lbl_803D945C:
     .asciz "SdIntro.dat"
@@ -9983,7 +10011,70 @@ lbl_803ED4C4:
 	.incbin "baserom.dol", 0x3EA4C4, 0x74
 .global lbl_803ED538
 lbl_803ED538:
-	.incbin "baserom.dol", 0x3EA538, 0xC8
+	.float 0
+    .float 0
+    .float -0.1
+    .float 0
+    .float 0
+    .float -0.1
+    .float 0
+    .float 0
+    .float -0.1
+    .float 0
+    .float 0
+    .float -0.1
+.global lbl_803ED568
+lbl_803ED568:
+    .float 50
+    .float 59
+    .float -0.1
+.global lbl_803ED574
+lbl_803ED574:
+    .float 40
+    .float 49
+    .float -0.1
+.global lbl_803ED580
+lbl_803ED580:
+    .float 30
+    .float 39
+    .float -0.1
+.global lbl_803ED58C
+lbl_803ED58C:
+    .float 10
+    .float 19
+    .float -0.1
+.global lbl_803ED598
+lbl_803ED598:
+    .float 20
+    .float 29
+    .float -0.1
+.global lbl_803ED5A4
+lbl_803ED5A4:
+    .float 0
+    .float 9
+    .float -0.1
+.global lbl_803ED5B0
+lbl_803ED5B0:
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 1
+    .float 0
+    .float 0
+    .float 2
+    .float 3
+    .float 4
+    .float 0
+    .float 5
+    .float 6
+    .float 7
+    .float 8
 .global lbl_803ED600
 lbl_803ED600:
 	.incbin "baserom.dol", 0x3EA600, 0x18
@@ -14845,88 +14936,172 @@ lbl_803FF074:
 lbl_803FF19C:
     .asciz "X  %3.2f\nZ  %3.2f"
     .balign 4
+.global lbl_803FF1B0
+lbl_803FF1B0:
     .asciz "ToyDspQues_Top_joint"
     .balign 4
+.global lbl_803FF1C8
+lbl_803FF1C8:
     .asciz "ToyDspMycharaCmA_Top_joint"
     .balign 4
+.global lbl_803FF1E4
+lbl_803FF1E4:
     .asciz "ToyDspMycharaCmB_Top_joint"
     .balign 4
+.global lbl_803FF200
+lbl_803FF200:
     .asciz "ToyDspMycharaCmC_Top_joint"
     .balign 4
+.global lbl_803FF21C
+lbl_803FF21C:
     .asciz "ToyDspMycharaCmD_Top_joint"
     .balign 4
+.global lbl_803FF238
+lbl_803FF238:
     .asciz "ToyDspMycharaCmE_Top_joint"
     .balign 4
+.global lbl_803FF254
+lbl_803FF254:
     .asciz "ToyDspMycharaR1A_Top_joint"
     .balign 4
+.global lbl_803FF270
+lbl_803FF270:
     .asciz "ToyDspMycharaR1B_Top_joint"
     .balign 4
+.global lbl_803FF28C
+lbl_803FF28C:
     .asciz "ToyDspMycharaR1C_Top_joint"
     .balign 4
+.global lbl_803FF2A8
+lbl_803FF2A8:
     .asciz "ToyDspMycharaR1D_Top_joint"
     .balign 4
+.global lbl_803FF2C4
+lbl_803FF2C4:
     .asciz "ToyDspMycharaR1E_Top_joint"
     .balign 4
+.global lbl_803FF2E0
+lbl_803FF2E0:
     .asciz "ToyDspMycharaR2A_Top_joint"
     .balign 4
+.global lbl_803FF2FC
+lbl_803FF2FC:
     .asciz "ToyDspMycharaR2B_Top_joint"
     .balign 4
+.global lbl_803FF318
+lbl_803FF318:
     .asciz "ToyDspMycharaR2C_Top_joint"
     .balign 4
+.global lbl_803FF334
+lbl_803FF334:
     .asciz "ToyDspMycharaR2D_Top_joint"
     .balign 4
+.global lbl_803FF350
+lbl_803FF350:
     .asciz "ToyDspMycharaR2E_Top_joint"
     .balign 4
+.global lbl_803FF36C
+lbl_803FF36C:
     .asciz "ToyDspMapA_Top_joint"
     .balign 4
+.global lbl_803FF384
+lbl_803FF384:
     .asciz "ToyDspMapB_Top_joint"
     .balign 4
+.global lbl_803FF39C
+lbl_803FF39C:
     .asciz "ToyDspMapC_Top_joint"
     .balign 4
+.global lbl_803FF3B4
+lbl_803FF3B4:
     .asciz "ToyDspMapD_Top_joint"
     .balign 4
+.global lbl_803FF3CC
+lbl_803FF3CC:
     .asciz "ToyDspMapE_Top_joint"
     .balign 4
+.global lbl_803FF3E4
+lbl_803FF3E4:
     .asciz "ToyDspFgseriesA_Top_joint"
     .balign 4
+.global lbl_803FF400
+lbl_803FF400:
     .asciz "ToyDspFgseriesB_Top_joint"
     .balign 4
+.global lbl_803FF41C
+lbl_803FF41C:
     .asciz "ToyDspFgseriesC_Top_joint"
     .balign 4
+.global lbl_803FF438
+lbl_803FF438:
     .asciz "ToyDspFgseriesD_Top_joint"
     .balign 4
+.global lbl_803FF454
+lbl_803FF454:
     .asciz "ToyDspFgseriesE_Top_joint"
     .balign 4
+.global lbl_803FF470
+lbl_803FF470:
     .asciz "ToyDspFgetcA_Top_joint"
     .balign 4
+.global lbl_803FF488
+lbl_803FF488:
     .asciz "ToyDspFgetcB_Top_joint"
     .balign 4
+.global lbl_803FF4A0
+lbl_803FF4A0:
     .asciz "ToyDspFgetcC_Top_joint"
     .balign 4
+.global lbl_803FF4B8
+lbl_803FF4B8:
     .asciz "ToyDspFgetcD_Top_joint"
     .balign 4
+.global lbl_803FF4D0
+lbl_803FF4D0:
     .asciz "ToyDspFgetcE_Top_joint"
     .balign 4
+.global lbl_803FF4E8
+lbl_803FF4E8:
     .asciz "ToyDspPokemonA_Top_joint"
     .balign 4
+.global lbl_803FF504
+lbl_803FF504:
     .asciz "ToyDspPokemonB_Top_joint"
     .balign 4
+.global lbl_803FF520
+lbl_803FF520:
     .asciz "ToyDspPokemonC_Top_joint"
     .balign 4
+.global lbl_803FF53C
+lbl_803FF53C:
     .asciz "ToyDspPokemonD_Top_joint"
     .balign 4
+.global lbl_803FF558
+lbl_803FF558:
     .asciz "ToyDspPokemonE_Top_joint"
     .balign 4
+.global lbl_803FF574
+lbl_803FF574:
     .asciz "ToyDspItemA_Top_joint"
     .balign 4
+.global lbl_803FF58C
+lbl_803FF58C:
     .asciz "ToyDspItemB_Top_joint"
     .balign 4
+.global lbl_803FF5A4
+lbl_803FF5A4:
     .asciz "ToyDspItemC_Top_joint"
     .balign 4
+.global lbl_803FF5BC
+lbl_803FF5BC:
     .asciz "ToyDspItemD_Top_joint"
     .balign 4
+.global lbl_803FF5D4
+lbl_803FF5D4:
     .asciz "ToyDspItemE_Top_joint"
     .balign 4
+.global lbl_803FF5EC
+lbl_803FF5EC:
     .asciz "ToyDspStand_Top_joint"
     .balign 4
     .asciz "ToyDspMycharaCmA_Top_matanim_joint"
