@@ -206,10 +206,16 @@ lbl_803BA68C:
 lbl_803BA6A8:
     .asciz "free_index != -1"
     .balign 4
+.global lbl_803BA6BC
+lbl_803BA6BC:
     .asciz "LbRb.dat"
     .balign 4
+.global lbl_803BA6C8
+lbl_803BA6C8:
     .asciz "EfMnData.dat"
     .balign 4
+.global lbl_803BA6D8
+lbl_803BA6D8:
     .asciz "EfCoData.dat"
     .balign 4
 .global lbl_803BA6E8
@@ -8426,7 +8432,29 @@ lbl_803D9248:
 	.incbin "baserom.dol", 0x3D6248, 0x1CC
 .global lbl_803D9414
 lbl_803D9414:
-	.incbin "baserom.dol", 0x3D6414, 0x48
+    .byte 0x82
+    .byte 0x73
+    .byte 0x82
+    .byte 0x85
+    .byte 0x82
+    .byte 0x81
+    .byte 0x82
+    .byte 0x8D
+    .4byte NULL
+.global lbl_803D9420
+lbl_803D9420:
+    .asciz "IrEzTarg"
+    .balign 4
+.global lbl_803D942C
+lbl_803D942C:
+    .asciz "IrEzTuki"
+    .balign 4
+.global lbl_803D9438
+lbl_803D9438:
+    .asciz "IrEzFigG"
+    .balign 4
+    .asciz "ScItrAllstar_scene_data"
+    .balign 4
 .global lbl_803D945C
 lbl_803D945C:
     .asciz "SdIntro.dat"
@@ -9983,7 +10011,70 @@ lbl_803ED4C4:
 	.incbin "baserom.dol", 0x3EA4C4, 0x74
 .global lbl_803ED538
 lbl_803ED538:
-	.incbin "baserom.dol", 0x3EA538, 0xC8
+	.float 0
+    .float 0
+    .float -0.1
+    .float 0
+    .float 0
+    .float -0.1
+    .float 0
+    .float 0
+    .float -0.1
+    .float 0
+    .float 0
+    .float -0.1
+.global lbl_803ED568
+lbl_803ED568:
+    .float 50
+    .float 59
+    .float -0.1
+.global lbl_803ED574
+lbl_803ED574:
+    .float 40
+    .float 49
+    .float -0.1
+.global lbl_803ED580
+lbl_803ED580:
+    .float 30
+    .float 39
+    .float -0.1
+.global lbl_803ED58C
+lbl_803ED58C:
+    .float 10
+    .float 19
+    .float -0.1
+.global lbl_803ED598
+lbl_803ED598:
+    .float 20
+    .float 29
+    .float -0.1
+.global lbl_803ED5A4
+lbl_803ED5A4:
+    .float 0
+    .float 9
+    .float -0.1
+.global lbl_803ED5B0
+lbl_803ED5B0:
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 1
+    .float 0
+    .float 0
+    .float 2
+    .float 3
+    .float 4
+    .float 0
+    .float 5
+    .float 6
+    .float 7
+    .float 8
 .global lbl_803ED600
 lbl_803ED600:
 	.incbin "baserom.dol", 0x3EA600, 0x18

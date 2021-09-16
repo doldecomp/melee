@@ -182,8 +182,12 @@ lbl_804D37D8:
 lbl_804D37E0:
     .asciz "0"
     .balign 4
+.global lbl_804D37E4
+lbl_804D37E4:
     .asciz "ItCo."
     .balign 4
+.global lbl_804D37EC
+lbl_804D37EC:
     .asciz "IfAll"
     .balign 4
 .global lbl_804D37F4
@@ -1266,7 +1270,12 @@ lbl_804D4098:
     .balign 4
 .global lbl_804D40A0
 lbl_804D40A0:
-	.incbin "baserom.dol", 0x42F0C0, 0x10
+    .4byte 0x8C529263
+    .4byte 0x00000000
+.global lbl_804D40A8
+lbl_804D40A8:
+    .asciz "IrAls"
+    .balign 4
 .global lbl_804D40B0
 lbl_804D40B0:
     .asciz "IrRdMap"
