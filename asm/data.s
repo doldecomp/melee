@@ -609,7 +609,7 @@ lbl_803BF760:
 lbl_803BF790:
     .asciz "mpisland.c"
     .balign 4
-    .incbin "baserom.dol", 0x3BC79C, 0x4
+    .4byte NULL
 .global lbl_803BF7A0
 lbl_803BF7A0:
     .asciz "Duplicate Free %08X\n"
@@ -631,7 +631,7 @@ lbl_803BF804:
 lbl_803BF81C:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
-    .incbin "baserom.dol", 0x3BC844, 0x4
+    .4byte NULL
 .global lbl_803BF848
 lbl_803BF848:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -7774,7 +7774,7 @@ lbl_803C5DD4:
 lbl_803C60E0:
     .asciz "command script buffer over flow!\n"
     .balign 4
-    .incbin "baserom.dol", 0x3C3104, 0x4
+    .4byte NULL
 .global lbl_803C6108
 lbl_803C6108:
     .asciz "ftcpuattack.c"
@@ -7846,7 +7846,7 @@ lbl_803C6BA0:
 lbl_803C6BC8:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3C3BD4, 0x4
+    .4byte NULL
 .global lbl_803C6BD8
 lbl_803C6BD8:
     .asciz "no afterimage item!\n"
@@ -7881,7 +7881,7 @@ lbl_803C6D24:
     .balign 4
     .asciz "fighter dobj num over!\n"
     .balign 4
-    .incbin "baserom.dol", 0x3C3D6C, 0x4
+    .4byte NULL
 .global lbl_803C6D70
 lbl_803C6D70:
 	.incbin "baserom.dol", 0x3C3D70, 0x78
@@ -10328,7 +10328,7 @@ lbl_803F0580:
     .balign 4
     .asciz "MenMainCursorGa_Top_shapeanim_joint"
     .balign 4
-    .incbin "baserom.dol", 0x3ED6CC, 0x4
+    .4byte NULL
 .global lbl_803F06D0
 lbl_803F06D0:
 	.incbin "baserom.dol", 0x3ED6D0, 0x378
@@ -10372,7 +10372,7 @@ lbl_803F1280:
 lbl_803F12B4:
     .asciz "===== Not Found Item_Struct!! =====\n"
     .balign 4
-    .incbin "baserom.dol", 0x3EE2DC, 0x4
+    .4byte NULL
 .global jtbl_803F12E0
 jtbl_803F12E0:
 	.incbin "baserom.dol", 0x3EE2E0, 0x80
@@ -15629,7 +15629,7 @@ lbl_80400918:
     .balign 4
     .asciz "fioPacketResultWrite.MCCStreamWrite.NG"
     .balign 4
-    .incbin "baserom.dol", 0x3FDB24, 0x4
+    .4byte NULL
 .global lbl_80400B28
 lbl_80400B28:
     .asciz "ERROR: THP only supports 4:2:0!!!\n"
@@ -15672,7 +15672,7 @@ lbl_80400C40:
     .balign 4
     .asciz "__DSP_add_task() : Added task    : 0x%08X\n"
     .balign 4
-    .incbin "baserom.dol", 0x3FDD7C, 0x4
+    .4byte NULL
 .global lbl_80400D80
 lbl_80400D80:
     .asciz "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n"
@@ -15681,7 +15681,7 @@ lbl_80400D80:
 lbl_80400E48:
     .asciz "DVDReadAsync(): specified area is out of the file  "
     .balign 4
-    .incbin "baserom.dol", 0x3FDE7C, 0x4
+    .4byte NULL
 .global lbl_80400E80
 lbl_80400E80:
     .asciz "app booted via JTAG\n"
@@ -15839,7 +15839,7 @@ lbl_804017D8:
     .balign 4
     .asciz "--------Free\n"
     .balign 4
-    .incbin "baserom.dol", 0x3FEB6C, 0x4
+    .4byte NULL
 .global lbl_80401B70
 lbl_80401B70:
 	.incbin "baserom.dol", 0x3FEB70, 0x80
@@ -15873,7 +15873,7 @@ lbl_80401BF0:
     .balign 4
     .asciz "Locked cache machine check handler installed\n"
     .balign 4
-    .incbin "baserom.dol", 0x3FEE1C, 0x4
+    .4byte NULL
 .global lbl_80401E20
 lbl_80401E20:
     .asciz "------------------------- Context 0x%08x -------------------------\n"
@@ -16067,7 +16067,7 @@ lbl_80405494:
     .balign 4
     .asciz "hsd_dobj"
     .balign 4
-    .incbin "baserom.dol", 0x40256C, 0x4
+    .4byte NULL
 .global lbl_80405570
 lbl_80405570:
 	.incbin "baserom.dol", 0x402570, 0x48
@@ -16231,7 +16231,7 @@ lbl_804061D4:
     .balign 4
     .asciz "hsd_lobj"
     .balign 4
-    .incbin "baserom.dol", 0x40321C, 0x4
+    .4byte NULL
 .global lbl_80406220
 lbl_80406220:
 	.incbin "baserom.dol", 0x403220, 0x40
@@ -16485,7 +16485,7 @@ lbl_80406E48:
 lbl_80406E58:
     .asciz "objalloc.c"
     .balign 4
-    .incbin "baserom.dol", 0x403E64, 0x4
+    .4byte NULL
 .global lbl_80406E68
 lbl_80406E68:
     .asciz "rp->u.jobj"
@@ -16527,7 +16527,7 @@ lbl_8040701C:
     .balign 4
     .asciz "had_wobj"
     .balign 4
-    .incbin "baserom.dol", 0x404074, 0x4
+    .4byte NULL
 .global lbl_80407078
 lbl_80407078:
 	.incbin "baserom.dol", 0x404078, 0x3C
@@ -16554,12 +16554,12 @@ lbl_804072A8:
 lbl_804072E4:
     .asciz "sysdolphin_base_library"
     .balign 4
-    .incbin "baserom.dol", 0x4042FC, 0x4
+    .4byte NULL
 .global lbl_80407300
 lbl_80407300:
     .asciz "memory.c"
     .balign 4
-    .incbin "baserom.dol", 0x40430C, 0x4
+    .4byte NULL
 .global lbl_80407310
 lbl_80407310:
     .asciz "shadow.c"
@@ -16644,7 +16644,7 @@ lbl_804076C8:
     .balign 4
     .asciz "    info %d object %d nb_exist %d nb_peak %d\n"
     .balign 4
-    .incbin "baserom.dol", 0x40471C, 0x4
+    .4byte NULL
 .global lbl_80407720
 lbl_80407720:
     .asciz "idx < hash->table_size"
@@ -16815,7 +16815,7 @@ lbl_80408348:
     .balign 4
     .asciz "type == 0 || param != NULL"
     .balign 4
-    .incbin "baserom.dol", 0x4053B4, 0x4
+    .4byte NULL
 .global lbl_804083B8
 lbl_804083B8:
     .asciz "devcom.c"
@@ -16834,7 +16834,7 @@ lbl_804083B8:
     .balign 4
     .asciz "size != 0"
     .balign 4
-    .incbin "baserom.dol", 0x40547C, 0x4
+    .4byte NULL
 .global lbl_80408480
 lbl_80408480:
     .asciz "gobjproc.c"
@@ -16861,7 +16861,7 @@ lbl_80408500:
 lbl_8040852C:
     .asciz "gobj->gx_link != HSD_GOBJ_GXLINK_NONE"
     .balign 4
-    .incbin "baserom.dol", 0x405554, 0x4
+    .4byte NULL
 .global lbl_80408558
 lbl_80408558:
     .asciz "gobjobject.c"
@@ -16870,7 +16870,7 @@ lbl_80408558:
 lbl_80408568:
     .asciz "gobj->obj_kind == HSD_GOBJ_OBJ_NONE"
     .balign 4
-    .incbin "baserom.dol", 0x40558C, 0x4
+    .4byte NULL
 .global lbl_80408590
 lbl_80408590:
     .asciz "gobjuserdata.c"
@@ -16883,7 +16883,7 @@ lbl_804085A0:
 lbl_804085D0:
     .asciz "gobj->user_data_remove_func"
     .balign 4
-    .incbin "baserom.dol", 0x4055EC, 0x4
+    .4byte NULL
 .global lbl_804085F0
 lbl_804085F0:
 	.incbin "baserom.dol", 0x4055F0, 0x20
@@ -16910,7 +16910,7 @@ lbl_8040A4B8:
 lbl_8040A510:
     .asciz "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f"
     .balign 4
-    .incbin "baserom.dol", 0x40753C, 0x4
+    .4byte NULL
 .global lbl_8040A540
 lbl_8040A540:
     .asciz "MCC is no initialize"
@@ -17140,7 +17140,7 @@ lbl_8040C520:
     .balign 4
     .asciz "Cannot find symbol %s.\n"
     .balign 4
-    .incbin "baserom.dol", 0x409564, 0x4
+    .4byte NULL
 .global lbl_8040C568
 lbl_8040C568:
 	.incbin "baserom.dol", 0x409568, 0x40
