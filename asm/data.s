@@ -7915,7 +7915,7 @@ lbl_803C6EF8:
 lbl_803C6F0C:
     .asciz "itGetKind(fp->item_gobj) == It_Kind_LipStick"
     .balign 4
-    .incbin "baserom.dol", 0x3C3F3C, 0x4
+    .4byte NULL
 .global lbl_803C6F40
 lbl_803C6F40:
     .asciz "don't have smash42 motion!!!\n"
@@ -7924,7 +7924,7 @@ lbl_803C6F40:
 lbl_803C6F60:
     .asciz "ftattacks4combo.c"
     .balign 4
-    .incbin "baserom.dol", 0x3C3F74, 0x4
+    .4byte NULL
 .global lbl_803C6F78
 lbl_803C6F78:
     .asciz "ftchangeparam.c"
@@ -7947,27 +7947,27 @@ jtbl_803C7030:
 lbl_803C70A0:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3C40AC, 0x4
+    .4byte NULL
 .global lbl_803C70B0
 lbl_803C70B0:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3C40BC, 0x4
+    .4byte NULL
 .global lbl_803C70C0
 lbl_803C70C0:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3C40CC, 0x4
+    .4byte NULL
 .global lbl_803C70D0
 lbl_803C70D0:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3C40DC, 0x4
+    .4byte NULL
 .global lbl_803C70E0
 lbl_803C70E0:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3C40EC, 0x4
+    .4byte NULL
 .global lbl_803C70F0
 lbl_803C70F0:
     .asciz "couldn't get walk frame\n"
@@ -7996,7 +7996,19 @@ lbl_803C72A0:
     .4byte func_800CD390
     .4byte func_800CD3B0
     .4byte func_800CD3D0
-    .incbin "baserom.dol", 0x3C42D0, 0xB00
+    .4byte func_800CD3F0
+    .4byte func_800761C8
+    .4byte 0x00000128
+    .4byte 0x00440846
+    .4byte 0x45000000
+    .4byte func_800CD458
+    .4byte func_800CD478
+    .4byte func_800CD498
+    .4byte func_800CD4B8
+    .4byte func_800761C8
+    .4byte 0x00000129
+    .4byte 0x0044084A
+    .incbin "baserom.dol", 0x3C4300, 0xAD0
 .global lbl_803C7DD0
 lbl_803C7DD0:
 	.incbin "baserom.dol", 0x3C4DD0, 0x18
@@ -8082,7 +8094,7 @@ lbl_803CB6D8:
 lbl_803CB6F8:
     .asciz "ftkirbyspecialfox.c"
     .balign 4
-    .incbin "baserom.dol", 0x3C870C, 0x4
+    .4byte NULL
 .global lbl_803CB710
 lbl_803CB710:
 	.incbin "baserom.dol", 0x3C8710, 0x10
@@ -8300,7 +8312,7 @@ lbl_803D4AC8:
     .balign 4
     .asciz "#             Hour %d Min %d Sec %d \n"
     .balign 4
-    .incbin "baserom.dol", 0x3D1C34, 0x4
+    .4byte NULL
 .global lbl_803D4C38
 lbl_803D4C38:
 	.incbin "baserom.dol", 0x3D1C38, 0x13C
@@ -8380,7 +8392,7 @@ lbl_803D68CC:
 lbl_803D69F8:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3D3A04, 0x4
+    .4byte NULL
 .global lbl_803D6A08
 lbl_803D6A08:
 	.incbin "baserom.dol", 0x3D3A08, 0x10
@@ -8561,7 +8573,7 @@ lbl_803DA2E0:
 lbl_803DA3D0:
     .asciz "ckind:%d\n"
     .balign 4
-    .incbin "baserom.dol", 0x3D73DC, 0x4
+    .4byte NULL
 .global lbl_803DA3E0
 lbl_803DA3E0:
     .asciz "GmGover.dat"
@@ -8590,7 +8602,7 @@ lbl_803DA488:
 lbl_803DA494:
     .asciz "ScComSoon_scene_data"
     .balign 4
-    .incbin "baserom.dol", 0x3D74AC, 0x4
+    .4byte NULL
 .global lbl_803DA4B0
 lbl_803DA4B0:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -8647,7 +8659,7 @@ lbl_803DA8D8:
 lbl_803DA8FC:
     .asciz "[HSD_ObjDumpStat] -- Report --\n"
     .balign 4
-    .incbin "baserom.dol", 0x3D791C, 0x4
+    .4byte NULL
 .global lbl_803DA920
 lbl_803DA920:
 	.incbin "baserom.dol", 0x3D7920, 0x384
@@ -8827,7 +8839,7 @@ lbl_803DD2C0:
 lbl_803DD3E8:
     .asciz "MvHowto.mth"
     .balign 4
-    .incbin "baserom.dol", 0x3DA3F4, 0x4
+    .4byte NULL
 .global lbl_803DD3F8
 lbl_803DD3F8:
     .asciz "MvOmake15.mth"
@@ -9518,7 +9530,7 @@ lbl_803E5198:
 lbl_803E5230:
     .asciz "*** End Frame = %d\n"
     .balign 4
-    .incbin "baserom.dol", 0x3E2244, 0x4
+    .4byte NULL
 .global lbl_803E5248
 lbl_803E5248:
 	.incbin "baserom.dol", 0x3E2248, 0x100
@@ -9584,7 +9596,7 @@ lbl_803E5DB0:
 lbl_803E5E64:
     .asciz "grzebesroute.c"
     .balign 4
-    .incbin "baserom.dol", 0x3E2E74, 0x4
+    .4byte NULL
 .global lbl_803E5E78
 lbl_803E5E78:
 	.incbin "baserom.dol", 0x3E2E78, 0x35C
@@ -9808,7 +9820,7 @@ lbl_803E9880:
 lbl_803E9940:
     .asciz "no!=St_Player_InitPos_None"
     .balign 4
-    .incbin "baserom.dol", 0x3E695C, 0x4
+    .4byte NULL
 .global lbl_803E9960
 lbl_803E9960:
 	.incbin "baserom.dol", 0x3E6960, 0xD68
@@ -9921,7 +9933,7 @@ lbl_803EACA0:
 lbl_803EACB0:
     .asciz "couldn't get Item struct.(CZako)\n"
     .balign 4
-    .incbin "baserom.dol", 0x3E7CD4, 0x4
+    .4byte NULL
 .global lbl_803EACD8
 lbl_803EACD8:
     .asciz "A B  C D E    F    G"
@@ -9949,7 +9961,7 @@ lbl_803EADC8:
     .balign 4
     .asciz "USB:shot/screenshot%02d.frb"
     .balign 4
-    .incbin "baserom.dol", 0x3E7E04, 0x4
+    .4byte NULL
 .global lbl_803EAE08
 lbl_803EAE08:
 	.incbin "baserom.dol", 0x3E7E08, 0x50
@@ -9957,7 +9969,7 @@ lbl_803EAE08:
 lbl_803EAE58:
     .asciz "objalloc.h"
     .balign 4
-    .incbin "baserom.dol", 0x3E7E64, 0x4
+    .4byte NULL
 .global lbl_803EAE68
 lbl_803EAE68:
 	.incbin "baserom.dol", 0x3E7E68, 0x540
