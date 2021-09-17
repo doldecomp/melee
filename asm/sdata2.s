@@ -1,6 +1,8 @@
 # Small read-only data
 .section .sdata2  # 0x804D79E0 - 0x804DEC00
 
+.include "macros.inc"
+
 .global lbl_804D79E0
 lbl_804D79E0:
 	.incbin "baserom.dol", 0x4313C0, 0x8
