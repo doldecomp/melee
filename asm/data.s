@@ -1169,7 +1169,7 @@ lbl_803C125C:
     .balign 4
 .global lbl_803C12E0
 lbl_803C12E0:
-    .4byte 0x803C7120
+    .4byte lbl_803C7120
     .4byte 0x803C7788
     .4byte 0x803C72B8
     .4byte 0x803CB838
@@ -7976,12 +7976,27 @@ lbl_803C70F0:
 lbl_803C710C:
     .asciz "ftwalkcommon.c"
     .balign 4
-    .incbin "baserom.dol", 0x3C411C, 0x184
+    .4byte NULL
+.global lbl_803C7120
+lbl_803C7120:
+    .4byte 0xFFFFFFFF
+    .incbin "baserom.dol", 0x3C4124, 0x17C
 .global lbl_803C72A0
 lbl_803C72A0:
     .asciz "A@"
     .balign 4
-    .incbin "baserom.dol", 0x3C42A4, 0xB2C
+    .4byte NULL
+    .4byte 0xC0C00000
+    .4byte 0x40C00000
+    .4byte 0x40C00000
+    .4byte 0x40C00000
+    .4byte 0x00000127
+    .4byte 0x00440842
+    .4byte 0x41000000
+    .4byte func_800CD390
+    .4byte func_800CD3B0
+    .4byte func_800CD3D0
+    .incbin "baserom.dol", 0x3C42D0, 0xB00
 .global lbl_803C7DD0
 lbl_803C7DD0:
 	.incbin "baserom.dol", 0x3C4DD0, 0x18
