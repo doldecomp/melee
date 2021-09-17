@@ -52,7 +52,7 @@ lbl_803BA030:
 lbl_803BA040:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3B704C, 0x4
+    .4byte NULL
 .global lbl_803BA050
 lbl_803BA050:
     .asciz "lbvector.c"
@@ -63,7 +63,7 @@ lbl_803BA050:
     .balign 4
     .asciz "pos3d->z>-50000.0F&&pos3d->z<50000.0F"
     .balign 4
-    .incbin "baserom.dol", 0x3B70D4, 0x4
+    .4byte NULL
 .global lbl_803BA0D8
 lbl_803BA0D8:
     .asciz "lbshadow.c"
@@ -91,7 +91,7 @@ lbl_803BA150:
     .balign 4
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
-    .incbin "baserom.dol", 0x3B71BC, 0x4
+    .4byte NULL
 .global lbl_803BA1C0
 lbl_803BA1C0:
     .asciz "lbspdisplay.c"
@@ -112,7 +112,7 @@ lbl_803BA2A0:
 lbl_803BA2AC:
     .asciz "lbRumbleData"
     .balign 4
-    .incbin "baserom.dol", 0x3B72BC, 0x4
+    .4byte NULL
 .global lbl_803BA2C0
 lbl_803BA2C0:
     .asciz "lbmemory.c"
@@ -177,7 +177,7 @@ lbl_803BA540:
     .balign 4
     .asciz "entry_num != -1"
     .balign 4
-    .incbin "baserom.dol", 0x3B7584, 0x4
+    .4byte NULL
 .global lbl_803BA588
 lbl_803BA588:
     .asciz "HSD_ArchiveParse error!\n"
@@ -291,7 +291,7 @@ lbl_803BAD90:
 lbl_803BAD9C:
     .asciz "MemSnapIconData"
     .balign 4
-    .incbin "baserom.dol", 0x3B7DAC, 0x4
+    .4byte NULL
 .global lbl_803BADB0
 lbl_803BADB0:
     .asciz "lbmthp.c"
@@ -360,7 +360,7 @@ lbl_803BB088:
 lbl_803BB094:
     .asciz "lbBgFlashColAnimData"
     .balign 4
-    .incbin "baserom.dol", 0x3B80AC, 0x4
+    .4byte NULL
 .global lbl_803BB0B0
 lbl_803BB0B0:
     .asciz "?"
@@ -474,7 +474,7 @@ lbl_803BCE44:
 lbl_803BCE60:
     .asciz "player.c"
     .balign 4
-    .incbin "baserom.dol", 0x3B9E6C, 0x4
+    .4byte NULL
 .global lbl_803BCE70
 lbl_803BCE70:
 	.incbin "baserom.dol", 0x3B9E70, 0x40
@@ -1011,7 +1011,7 @@ lbl_803C0CF0:
     .balign 4
     .asciz "fighter dynamics hit num over!\n"
     .balign 4
-    .incbin "baserom.dol", 0x3BDD54, 0x4
+    .4byte NULL
 .global lbl_803C0D58
 lbl_803C0D58:
     .asciz "ftcommon.c"
@@ -1044,7 +1044,7 @@ jtbl_803C0E90:
 lbl_803C0EB0:
     .asciz "translate"
     .balign 4
-    .incbin "baserom.dol", 0x3BDEBC, 0x4
+    .4byte NULL
 .global lbl_803C0EC0
 lbl_803C0EC0:
 	.incbin "baserom.dol", 0x3BDEC0, 0x108

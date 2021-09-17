@@ -1,6 +1,8 @@
 # Small read/write data
 .section .sdata  # 0x804D36A0 - 0x804D63A0
 
+.include "macros.inc"
+
 .global lbl_804D36A0
 lbl_804D36A0:
 	.incbin "baserom.dol", 0x42E6C0, 0x4
@@ -87,7 +89,7 @@ lbl_804D3730:
 lbl_804D3738:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42E75C, 0x4
+    .4byte NULL
 .global lbl_804D3740
 lbl_804D3740:
     .asciz "jobj.h"
@@ -106,19 +108,20 @@ lbl_804D3758:
     .balign 4
 .global lbl_804D3760
 lbl_804D3760:
-	.incbin "baserom.dol", 0x42E780, 0x4
+	.4byte 0xFFFFFFFF
 .global lbl_804D3764
 lbl_804D3764:
-	.incbin "baserom.dol", 0x42E784, 0x4
+	.4byte 0x000000FF
 .global lbl_804D3768
 lbl_804D3768:
-	.incbin "baserom.dol", 0x42E788, 0x4
+	.4byte 0xFF0000FF
 .global lbl_804D376C
 lbl_804D376C:
-	.incbin "baserom.dol", 0x42E78C, 0x4
+	.4byte 0xFF000040
 .global lbl_804D3770
 lbl_804D3770:
-	.incbin "baserom.dol", 0x42E790, 0x8
+	.4byte 0xFFFF00FF
+    .4byte NULL
 .global lbl_804D3778
 lbl_804D3778:
     .asciz "lbarq.c"
@@ -127,7 +130,7 @@ lbl_804D3778:
 lbl_804D3780:
     .asciz "rp"
     .balign 4
-    .incbin "baserom.dol", 0x42E7A4, 0x4
+    .4byte NULL
 .global lbl_804D3788
 lbl_804D3788:
     .asciz "handle"
@@ -140,7 +143,7 @@ lbl_804D3790:
 lbl_804D3794:
     .asciz "p->size"
     .balign 4
-    .incbin "baserom.dol", 0x42E7BC, 0x4
+    .4byte NULL
 .global lbl_804D37A0
 lbl_804D37A0:
     .asciz "%s :"
@@ -161,7 +164,7 @@ lbl_804D37B4:
 lbl_804D37B8:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42E7DC, 0x4
+    .4byte NULL
 .global lbl_804D37C0
 lbl_804D37C0:
     .asciz "0"
@@ -170,7 +173,7 @@ lbl_804D37C0:
 lbl_804D37C4:
     .asciz "archive"
     .balign 4
-    .incbin "baserom.dol", 0x42E7EC, 0x4
+    .4byte NULL
 .global lbl_804D37D0
 lbl_804D37D0:
     .asciz "lbdvd.c"
@@ -216,7 +219,7 @@ lbl_804D3820:
 lbl_804D3828:
     .asciz "%u"
     .balign 4
-    .incbin "baserom.dol", 0x42E84C, 0x4
+    .4byte NULL
 .global lbl_804D3830
 lbl_804D3830:
     .asciz "0"
@@ -229,7 +232,7 @@ lbl_804D3840:
 	.incbin "baserom.dol", 0x42E860, 0x4
 .global lbl_804D3844
 lbl_804D3844:
-	.incbin "baserom.dol", 0x42E864, 0x4
+	.4byte NULL
 .global lbl_804D3848
 lbl_804D3848:
 	.incbin "baserom.dol", 0x42E868, 0x4
@@ -362,17 +365,17 @@ lbl_804D3928:
 lbl_804D3930:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42E954, 0x4
+    .4byte NULL
 .global lbl_804D3938
 lbl_804D3938:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42E95C, 0x4
+    .4byte NULL
 .global lbl_804D3940
 lbl_804D3940:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42E964, 0x4
+    .4byte NULL
 .global lbl_804D3948
 lbl_804D3948:
     .asciz "0"
@@ -434,7 +437,7 @@ lbl_804D39B4:
 lbl_804D39BC:
     .asciz "scale"
     .balign 4
-    .incbin "baserom.dol", 0x42E9E4, 0x4
+    .4byte NULL
 .global lbl_804D39C8
 lbl_804D39C8:
     .asciz "jobj.h"
@@ -463,7 +466,7 @@ lbl_804D39F0:
 lbl_804D39F8:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42EA1C, 0x4
+    .4byte NULL
 .global lbl_804D3A00
 lbl_804D3A00:
     .asciz "jobj.h"
@@ -476,7 +479,7 @@ lbl_804D3A08:
 lbl_804D3A10:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42EA34, 0x4
+    .4byte NULL
 .global lbl_804D3A18
 lbl_804D3A18:
     .asciz "0"
@@ -489,7 +492,7 @@ lbl_804D3A1C:
 lbl_804D3A24:
     .asciz "jobj"
     .balign 4
-    .incbin "baserom.dol", 0x42EA4C, 0x4
+    .4byte NULL
 .global lbl_804D3A30
 lbl_804D3A30:
     .asciz "jobj.h"
@@ -1271,7 +1274,7 @@ lbl_804D4098:
 .global lbl_804D40A0
 lbl_804D40A0:
     .4byte 0x8C529263
-    .4byte 0x00000000
+    .4byte NULL
 .global lbl_804D40A8
 lbl_804D40A8:
     .asciz "IrAls"
@@ -1893,7 +1896,7 @@ lbl_804D4700:
 lbl_804D4708:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42F72C, 0x4
+    .4byte NULL
 .global lbl_804D4710
 lbl_804D4710:
     .asciz "gobj"
@@ -1922,7 +1925,7 @@ lbl_804D4734:
 lbl_804D473C:
     .asciz "bg_gp"
     .balign 4
-    .incbin "baserom.dol", 0x42F764, 0x4
+    .4byte NULL
 .global lbl_804D4748
 lbl_804D4748:
     .asciz "jobj.h"
@@ -1935,7 +1938,7 @@ lbl_804D4750:
 lbl_804D4758:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42F77C, 0x4
+    .4byte NULL
 .global lbl_804D4760
 lbl_804D4760:
     .asciz "jobj.h"
@@ -2033,7 +2036,7 @@ lbl_804D4818:
 lbl_804D4820:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42F844, 0x4
+    .4byte 0x41800000
 .global lbl_804D4828
 lbl_804D4828:
     .asciz "lobj.h"
@@ -2051,7 +2054,7 @@ lbl_804D4840:
 lbl_804D4848:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42F86C, 0x4
+    .4byte NULL
 .global lbl_804D4850
 lbl_804D4850:
     .asciz "jobj.h"
@@ -2096,7 +2099,7 @@ lbl_804D488C:
 lbl_804D4894:
     .asciz "jobj"
     .balign 4
-    .incbin "baserom.dol", 0x42F8BC, 0x4
+    .4byte NULL
 .global lbl_804D48A0
 lbl_804D48A0:
 	.incbin "baserom.dol", 0x42F8C0, 0x8
@@ -2142,7 +2145,7 @@ lbl_804D48F8:
 lbl_804D4900:
     .asciz "gp"
     .balign 4
-    .incbin "baserom.dol", 0x42F924, 0x4
+    .4byte NULL
 .global lbl_804D4908
 lbl_804D4908:
     .asciz "jobj.h"
@@ -2155,7 +2158,7 @@ lbl_804D4910:
 lbl_804D4918:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42F93C, 0x4
+    .4byte NULL
 .global lbl_804D4920
 lbl_804D4920:
     .asciz "jobj.h"
@@ -2168,7 +2171,7 @@ lbl_804D4928:
 lbl_804D4930:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42F954, 0x4
+    .4byte 0x41800000
 .global lbl_804D4938
 lbl_804D4938:
     .asciz "lobj.h"
@@ -2240,7 +2243,7 @@ lbl_804D49CC:
 lbl_804D49D0:
     .asciz "%d"
     .balign 4
-    .incbin "baserom.dol", 0x42F9F4, 0x4
+    .4byte NULL
 .global lbl_804D49D8
 lbl_804D49D8:
 	.incbin "baserom.dol", 0x42F9F8, 0x8
@@ -2265,10 +2268,10 @@ lbl_804D49F8:
 lbl_804D4A00:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42FA24, 0x4
+    .4byte NULL
 .global lbl_804D4A08
 lbl_804D4A08:
-	.incbin "baserom.dol", 0x42FA28, 0x4
+	.long 1
 .global lbl_804D4A0C
 lbl_804D4A0C:
     .asciz "%5d "
@@ -2278,7 +2281,7 @@ lbl_804D4A14:
 	.incbin "baserom.dol", 0x42FA34, 0xAC
 .global lbl_804D4AC0
 lbl_804D4AC0:
-	.incbin "baserom.dol", 0x42FAE0, 0x4
+	.4byte 0x0A000000
 .global lbl_804D4AC4
 lbl_804D4AC4:
     .asciz "%d %s"
@@ -2315,10 +2318,11 @@ lbl_804D4AEC:
 lbl_804D4AF0:
     .asciz "T"
     .balign 4
-    .incbin "baserom.dol", 0x42FB14, 0x4
+    .4byte NULL
 .global lbl_804D4AF8
 lbl_804D4AF8:
-	.incbin "baserom.dol", 0x42FB18, 0x8
+	.long 1
+    .4byte NULL
 .global lbl_804D4B00
 lbl_804D4B00:
     .asciz "0"
@@ -2327,7 +2331,7 @@ lbl_804D4B00:
 lbl_804D4B04:
     .asciz "USB:"
     .balign 4
-    .incbin "baserom.dol", 0x42FB2C, 0x4
+    .4byte NULL
 .global lbl_804D4B10
 lbl_804D4B10:
 	.incbin "baserom.dol", 0x42FB30, 0x8
@@ -2339,7 +2343,7 @@ lbl_804D4B18:
 lbl_804D4B1C:
     .asciz "%s : %d"
     .balign 4
-    .incbin "baserom.dol", 0x42FB44, 0x4
+    .4byte NULL
 .global lbl_804D4B28
 lbl_804D4B28:
     .asciz "data"
@@ -2449,7 +2453,7 @@ lbl_804D4BFC:
 lbl_804D4C04:
     .asciz "NULL"
     .balign 4
-    .incbin "baserom.dol", 0x42FC2C, 0x4
+    .4byte NULL
 .global lbl_804D4C10
 lbl_804D4C10:
     .asciz "A "
@@ -2541,7 +2545,7 @@ lbl_804D4FF4:
 lbl_804D4FFC:
     .asciz "jobj"
     .balign 4
-    .incbin "baserom.dol", 0x430024, 0x4
+    .4byte NULL
 .global lbl_804D5008
 lbl_804D5008:
     .asciz "jobj.h"
@@ -3386,7 +3390,7 @@ lbl_804D5678:
 lbl_804D5680:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x4306A4, 0x4
+    .4byte NULL
 .global lbl_804D5688
 lbl_804D5688:
     .asciz "jobj.h"
@@ -3521,7 +3525,7 @@ lbl_804D5788:
     .balign 4
 .global lbl_804D5790
 lbl_804D5790:
-	.incbin "baserom.dol", 0x4307B0, 0x4
+	.4byte NULL
 .global lbl_804D5794
 lbl_804D5794:
     .asciz "jobj.h"
@@ -3530,10 +3534,10 @@ lbl_804D5794:
 lbl_804D579C:
     .asciz "jobj"
     .balign 4
-    .incbin "baserom.dol", 0x4307C4, 0x4
+    .4byte NULL
 .global lbl_804D57A8
 lbl_804D57A8:
-	.incbin "baserom.dol", 0x4307C8, 0x4
+	.4byte 0xFFFFFFFF
 .global lbl_804D57AC
 lbl_804D57AC:
     .asciz "P"
@@ -3550,7 +3554,7 @@ lbl_804D57B8:
 lbl_804D57C0:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x4307E4, 0x4
+    .4byte NULL
 .global lbl_804D57C8
 lbl_804D57C8:
     .asciz "jobj.h"
@@ -3693,7 +3697,7 @@ lbl_804D5A2C:
 lbl_804D5A34:
     .asciz "%3.2f"
     .balign 4
-    .incbin "baserom.dol", 0x430A5C, 0x4
+    .4byte NULL
 .global lbl_804D5A40
 lbl_804D5A40:
 	.incbin "baserom.dol", 0x430A60, 0x4
@@ -3724,7 +3728,7 @@ lbl_804D5A64:
 lbl_804D5A6C:
     .asciz "jobj"
     .balign 4
-    .incbin "baserom.dol", 0x430A94, 0x4
+    .4byte NULL
 .global lbl_804D5A78
 lbl_804D5A78:
     .asciz "jobj.h"
@@ -3739,7 +3743,7 @@ lbl_804D5A88:
     .balign 4
 .global lbl_804D5A8C
 lbl_804D5A8C:
-	.incbin "baserom.dol", 0x430AAC, 0x4
+	.4byte NULL
 .global lbl_804D5A90
 lbl_804D5A90:
     .asciz "jobj.h"
@@ -3750,10 +3754,10 @@ lbl_804D5A98:
     .balign 4
 .global lbl_804D5AA0
 lbl_804D5AA0:
-	.incbin "baserom.dol", 0x430AC0, 0x4
+	.4byte 0x000C0000
 .global lbl_804D5AA4
 lbl_804D5AA4:
-	.incbin "baserom.dol", 0x430AC4, 0x4
+	.4byte NULL
 .global lbl_804D5AA8
 lbl_804D5AA8:
     .asciz "0"
@@ -3768,10 +3772,11 @@ lbl_804D5AB4:
     .balign 4
 .global lbl_804D5ABC
 lbl_804D5ABC:
-	.incbin "baserom.dol", 0x430ADC, 0x4
+	.4byte 0x00150000
 .global lbl_804D5AC0
 lbl_804D5AC0:
-	.incbin "baserom.dol", 0x430AE0, 0x8
+	.4byte NULL
+    .4byte NULL
 .global lbl_804D5AC8
 lbl_804D5AC8:
     .asciz "jobj.h"
@@ -3806,7 +3811,8 @@ lbl_804D5B00:
     .balign 4
 .global lbl_804D5B08
 lbl_804D5B08:
-	.incbin "baserom.dol", 0x430B28, 0x8
+	.4byte 0x000000FF
+    .4byte NULL
 .global lbl_804D5B10
 lbl_804D5B10:
     .asciz "jobj.h"
@@ -3970,7 +3976,7 @@ lbl_804D5C50:
 lbl_804D5C54:
     .asciz "Pad.c"
     .balign 4
-    .incbin "baserom.dol", 0x430C7C, 0x4
+    .4byte NULL
 .global lbl_804D5C60
 lbl_804D5C60:
 	.incbin "baserom.dol", 0x430C80, 0x8
@@ -3989,12 +3995,12 @@ lbl_804D5C78:
     .balign 4
 .global lbl_804D5C80
 lbl_804D5C80:
-	.incbin "baserom.dol", 0x430CA0, 0x4
+	.4byte NULL
 .global lbl_804D5C84
 lbl_804D5C84:
     .asciz "dobj"
     .balign 4
-    .incbin "baserom.dol", 0x430CAC, 0x4
+    .4byte NULL
 .global lbl_804D5C90
 lbl_804D5C90:
     .asciz "tobj.c"
@@ -4017,7 +4023,7 @@ lbl_804D5CAC:
     .balign 4
 .global lbl_804D5CB4
 lbl_804D5CB4:
-	.incbin "baserom.dol", 0x430CD4, 0x4
+	.4byte NULL
 .global lbl_804D5CB8
 lbl_804D5CB8:
     .asciz "new"
@@ -4032,7 +4038,8 @@ lbl_804D5CC0:
     .balign 4
 .global lbl_804D5CC8
 lbl_804D5CC8:
-	.incbin "baserom.dol", 0x430CE8, 0x8
+	.4byte 0x000000FF
+    .4byte NULL
 .global lbl_804D5CD0
 lbl_804D5CD0:
     .asciz "tev.c"
@@ -4041,7 +4048,7 @@ lbl_804D5CD0:
 lbl_804D5CD8:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x430CFC, 0x4
+    .4byte NULL
 .global lbl_804D5CE0
 lbl_804D5CE0:
     .asciz "mobj.c"
@@ -4062,7 +4069,7 @@ lbl_804D5CF8:
 lbl_804D5CFC:
     .asciz "tobj"
     .balign 4
-    .incbin "baserom.dol", 0x430D24, 0x4
+    .4byte NULL
 .global lbl_804D5D08
 lbl_804D5D08:
     .asciz "aobj.c"
@@ -4097,7 +4104,7 @@ lbl_804D5D34:
     .balign 4
 .global lbl_804D5D38
 lbl_804D5D38:
-	.incbin "baserom.dol", 0x430D58, 0x4
+	.4byte NULL
 .global lbl_804D5D3C
 lbl_804D5D3C:
     .asciz "*p"
@@ -4114,7 +4121,7 @@ lbl_804D5D48:
 lbl_804D5D50:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x430D74, 0x4
+    .4byte NULL
 .global lbl_804D5D58
 lbl_804D5D58:
     .asciz "fobj.c"
@@ -4123,7 +4130,7 @@ lbl_804D5D58:
 lbl_804D5D60:
     .asciz "new"
     .balign 4
-    .incbin "baserom.dol", 0x430D84, 0x4
+    .4byte NULL
 .global lbl_804D5D68
 lbl_804D5D68:
     .asciz "pobj.c"
@@ -4152,7 +4159,7 @@ lbl_804D5D8C:
 lbl_804D5D94:
     .asciz "jp->mtx"
     .balign 4
-    .incbin "baserom.dol", 0x430DBC, 0x4
+    .4byte NULL
 .global lbl_804D5DA0
 lbl_804D5DA0:
     .asciz "jobj.h"
@@ -4277,7 +4284,7 @@ lbl_804D5E74:
 lbl_804D5E7C:
     .asciz "data"
     .balign 4
-    .incbin "baserom.dol", 0x430EA4, 0x4
+    .4byte NULL
 .global lbl_804D5E88
 lbl_804D5E88:
     .asciz "video.c"
@@ -4302,7 +4309,7 @@ lbl_804D5EA0:
 lbl_804D5EA8:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x430ECC, 0x4
+    .4byte NULL
 .global lbl_804D5EB0
 lbl_804D5EB0:
     .asciz "data"
@@ -4329,7 +4336,7 @@ lbl_804D5ED4:
     .balign 4
 .global lbl_804D5ED8
 lbl_804D5ED8:
-	.incbin "baserom.dol", 0x430EF8, 0x4
+	.4byte NULL
 .global lbl_804D5EDC
 lbl_804D5EDC:
     .asciz "rvalue"
@@ -4366,7 +4373,7 @@ lbl_804D5F0C:
 lbl_804D5F14:
     .asciz "jobj"
     .balign 4
-    .incbin "baserom.dol", 0x430F3C, 0x4
+    .4byte NULL
 .global lbl_804D5F20
 lbl_804D5F20:
     .asciz "fog.c"
@@ -4415,7 +4422,7 @@ lbl_804D5F68:
 lbl_804D5F70:
     .asciz "adr"
     .balign 4
-    .incbin "baserom.dol", 0x430F94, 0x4
+    .4byte NULL
 .global lbl_804D5F78
 lbl_804D5F78:
     .asciz "shadow"
@@ -4428,7 +4435,7 @@ lbl_804D5F80:
 lbl_804D5F84:
     .asciz "rect"
     .balign 4
-    .incbin "baserom.dol", 0x430FAC, 0x4
+    .4byte NULL
 .global lbl_804D5F90
 lbl_804D5F90:
 	.incbin "baserom.dol", 0x430FB0, 0x4
@@ -4480,17 +4487,17 @@ lbl_804D5FDC:
 lbl_804D5FE4:
     .asciz "tevdesc"
     .balign 4
-    .incbin "baserom.dol", 0x43100C, 0x4
+    .4byte NULL
 .global lbl_804D5FF0
 lbl_804D5FF0:
     .asciz "l < num"
     .balign 4
 .global lbl_804D5FF8
 lbl_804D5FF8:
-	.incbin "baserom.dol", 0x431018, 0x4
+	.4byte 0x0007FF00
 .global lbl_804D5FFC
 lbl_804D5FFC:
-	.incbin "baserom.dol", 0x43101C, 0x4
+	.4byte NULL
 .global lbl_804D6000
 lbl_804D6000:
     .asciz " "
@@ -4532,10 +4539,10 @@ lbl_804D6040:
 lbl_804D6044:
     .asciz "vID > 0"
     .balign 4
-    .incbin "baserom.dol", 0x43106C, 0x4
+    .4byte NULL
 .global lbl_804D6050
 lbl_804D6050:
-	.incbin "baserom.dol", 0x431070, 0x4
+	.long 4
 .global lbl_804D6054
 lbl_804D6054:
     .asciz "0"
@@ -4544,7 +4551,7 @@ lbl_804D6054:
 lbl_804D6058:
     .asciz "dc"
     .balign 4
-    .incbin "baserom.dol", 0x43107C, 0x4
+    .4byte NULL
 .global lbl_804D6060
 lbl_804D6060:
     .asciz "gproc"
@@ -4563,24 +4570,25 @@ lbl_804D6074:
     .balign 4
 .global lbl_804D6078
 lbl_804D6078:
-	.incbin "baserom.dol", 0x431098, 0x8
+	.4byte 0x0C000000
+    .4byte NULL
 .global lbl_804D6080
 lbl_804D6080:
     .asciz "@@@"
     .balign 4
-    .incbin "baserom.dol", 0x4310A4, 0x4
+    .4byte NULL
 .global lbl_804D6088
 lbl_804D6088:
-	.incbin "baserom.dol", 0x4310A8, 0x4
+	.long 4
 .global lbl_804D608C
 lbl_804D608C:
-	.incbin "baserom.dol", 0x4310AC, 0x4
+	.long 1
 .global lbl_804D6090
 lbl_804D6090:
-	.incbin "baserom.dol", 0x4310B0, 0x4
+	.4byte 0xFFFFFFFF
 .global lbl_804D6094
 lbl_804D6094:
-	.incbin "baserom.dol", 0x4310B4, 0x4
+	.4byte 0xFF0000FF
 .global lbl_804D6098
 lbl_804D6098:
 	.incbin "baserom.dol", 0x4310B8, 0x4
@@ -4624,7 +4632,7 @@ lbl_804D62D4:
 	.incbin "baserom.dol", 0x4312F4, 0x4
 .global lbl_804D62D8
 lbl_804D62D8:
-	.incbin "baserom.dol", 0x4312F8, 0x4
+	.4byte 0x0A000000
 .global lbl_804D62DC
 lbl_804D62DC:
     .asciz "[%08X"
@@ -4639,7 +4647,7 @@ lbl_804D62E8:
     .balign 4
 .global lbl_804D62F0
 lbl_804D62F0:
-	.incbin "baserom.dol", 0x431310, 0x4
+	.4byte 0x5D0A0000
 .global lbl_804D62F4
 lbl_804D62F4:
 	.incbin "baserom.dol", 0x431314, 0x4
@@ -4713,7 +4721,8 @@ lbl_804D634C:
     .balign 4
 .global lbl_804D6350
 lbl_804D6350:
-	.incbin "baserom.dol", 0x431370, 0x8
+	.4byte NULL
+    .4byte NULL
 .global lbl_804D6358
 lbl_804D6358:
     .asciz "jobj.h"
@@ -4724,7 +4733,7 @@ lbl_804D6360:
     .balign 4
 .global lbl_804D6368
 lbl_804D6368:
-	.incbin "baserom.dol", 0x431388, 0x4
+	.4byte 0x01000000
 .global lbl_804D636C
 lbl_804D636C:
     .asciz "jobj.h"
@@ -4733,7 +4742,7 @@ lbl_804D636C:
 lbl_804D6374:
     .asciz "jobj"
     .balign 4
-    .incbin "baserom.dol", 0x43139C, 0x4
+    .4byte NULL
 .global lbl_804D6380
 lbl_804D6380:
     .asciz "{"
@@ -4748,7 +4757,9 @@ lbl_804D6388:
     .balign 4
 .global lbl_804D6390
 lbl_804D6390:
-	.incbin "baserom.dol", 0x4313B0, 0x8
+	.4byte NULL
+    .4byte NULL
 .global lbl_804D6398
 lbl_804D6398:
-	.incbin "baserom.dol", 0x4313B8, 0x8
+	.long 3
+    .4byte NULL
