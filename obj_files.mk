@@ -148,6 +148,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtganon.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/stage.o 	            		\
 															\
+	$(BUILD_DIR)/asm/melee/db/code_80225374.o              	\
+															\
 	$(BUILD_DIR)/asm/melee/text_3.o                      	\
 															\
 	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
