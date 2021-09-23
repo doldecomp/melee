@@ -21,6 +21,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/code_8000E9F0.o 		\
 	$(BUILD_DIR)/asm/melee/lb/lbfile.o 				\
 	$(BUILD_DIR)/asm/melee/lb/code_80016A54.o		\
+	$(BUILD_DIR)/asm/melee/lb/lbsnap.o				\
+	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8.o		\
 	                                                \
 	$(BUILD_DIR)/asm/melee/cm/code_80028B9C.o 		\
 													\
@@ -146,12 +148,15 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtganon.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/stage.o 	            		\
 															\
+	$(BUILD_DIR)/asm/melee/db/code_80225374.o              	\
+															\
 	$(BUILD_DIR)/asm/melee/text_3.o                      	\
 															\
 	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesw.o                   \
 	$(BUILD_DIR)/asm/melee/mn/mnname.o                   	\
 	$(BUILD_DIR)/asm/melee/mn/code_8023B0F8.o               \
+	$(BUILD_DIR)/asm/melee/mn/mndiagram.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mnvibration.o                 \
 	$(BUILD_DIR)/asm/melee/mn/mnsound.o                 	\
 	$(BUILD_DIR)/asm/melee/mn/mndeflicker.o               	\
@@ -167,6 +172,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mngallery.o	                \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesel.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mncharsel.o               	\
+															\
+	$(BUILD_DIR)/asm/melee/it/code_80266F3C.o              	\
+	$(BUILD_DIR)/asm/melee/it/code_8027CF30.o              	\
 															\
 	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
