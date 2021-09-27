@@ -16492,7 +16492,9 @@ lbl_80406E68:
     .balign 4
 .global lbl_80406E74
 lbl_80406E74:
-	.incbin "baserom.dol", 0x403E74, 0xC
+	.4byte 0x32
+	.4byte 0x33
+	.4byte 0x34
 .global lbl_80406E80
 lbl_80406E80:
 	.incbin "baserom.dol", 0x403E80, 0x78
