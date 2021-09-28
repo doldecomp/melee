@@ -9096,7 +9096,70 @@ lbl_803E05D4:
     .balign 4
 .global jtbl_803E05F0
 jtbl_803E05F0:
-	.incbin "baserom.dol", 0x3DD5F0, 0xD8
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C98
+    .4byte lbl_801C3CFC
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3CD4
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3D10
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3CAC
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3C84
+    .4byte lbl_801C3CE8
+    .4byte lbl_801C3CC0
+.global lbl_803E065C
+lbl_803E065C:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803E066C
+lbl_803E066C:
+    .4byte 0x00000000
+    .4byte 0x3F11EB85
+    .4byte 0x3F11EB85
+    .4byte 0x3F11EB85
+    .4byte 0x00000000
+.global lbl_803E0680
+lbl_803E0680:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x000D0000
+    .4byte 0xFFFFFFFF
+    .4byte lbl_803E066C
+    .4byte 0x00000000
+    .4byte lbl_804D4508
+.global lbl_803E069C
+lbl_803E069C:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803E06AC
+lbl_803E06AC:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00040000
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_803E06C8
 lbl_803E06C8:
 	.incbin "baserom.dol", 0x3DD6C8, 0x68
@@ -9108,7 +9171,7 @@ lbl_803E0730:
 lbl_803E073C:
     .asciz "oioi... %08x\n"
     .balign 4
-    .incbin "baserom.dol", 0x3DD74C, 0x4
+    .4byte NULL
 .global lbl_803E0750
 lbl_803E0750:
     .asciz "map_ptcl"
