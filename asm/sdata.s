@@ -658,10 +658,15 @@ lbl_804D3B38:
 lbl_804D3B40:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42EB64, 0xC
+    .4byte NULL
+.global lbl_804D3B48
+lbl_804D3B48:
+    .4byte lbl_803C5794
+    .4byte NULL
 .global lbl_804D3B50
 lbl_804D3B50:
-	.incbin "baserom.dol", 0x42EB70, 0x8
+    .4byte lbl_804D3B48
+    .4byte NULL
 .global lbl_804D3B58
 lbl_804D3B58:
     .asciz "jobj.h"

@@ -8178,7 +8178,7 @@ lbl_803C54A8:
 lbl_803C54C4:
     .asciz "ftwaitanim.c"
     .balign 4
-    .incbin "baserom.dol", 0x3C24D4, 0x4
+    .4byte NULL
 .global jtbl_803C54D8
 jtbl_803C54D8:
 	.incbin "baserom.dol", 0x3C24D8, 0x48
@@ -8195,7 +8195,29 @@ lbl_803C5580:
     .balign 4
 .global jtbl_803C55C0
 jtbl_803C55C0:
-	.incbin "baserom.dol", 0x3C25C0, 0x5C
+    .4byte lbl_80095728
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095728
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095728
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095728
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095728
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095738
+    .4byte lbl_80095728
 .global jtbl_803C561C
 jtbl_803C561C:
 	.incbin "baserom.dol", 0x3C261C, 0x5C
@@ -8208,12 +8230,17 @@ lbl_803C56D8:
     .balign 4
 .global lbl_803C5700
 lbl_803C5700:
-	.incbin "baserom.dol", 0x3C2700, 0x10
+    .4byte 0x00000009
+    .4byte 0x0000000A
+    .4byte 0x0000000B
+    .4byte 0x0000000C
 .global lbl_803C5710
 lbl_803C5710:
     .asciz "A`"
     .balign 4
-    .incbin "baserom.dol", 0x3C2714, 0xC
+    .4byte NULL
+    .4byte 0xC0400000
+    .4byte 0x40400000
 .global lbl_803C5720
 lbl_803C5720:
     .asciz "translate"
@@ -8228,10 +8255,21 @@ lbl_803C5748:
     .balign 4
     .asciz "fp->dynamics_num < Ft_Dynamics_NumMax"
     .balign 4
-    .incbin "baserom.dol", 0x3C2780, 0x14
+.global lbl_803C5780
+    .4byte NULL
+    .4byte 0x3F11EB85
+    .4byte 0x3F11EB85
+    .4byte 0x3F11EB85
+    .4byte NULL
 .global lbl_803C5794
 lbl_803C5794:
-	.incbin "baserom.dol", 0x3C2794, 0x1C
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00050000
+    .4byte 0xFFFFFFFF
+    .4byte lbl_803C5780
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_803C57B0
 lbl_803C57B0:
     .asciz "no effect from animlist %d\n"
