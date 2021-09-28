@@ -213,7 +213,12 @@ lbl_804D37EC:
     .balign 4
 .global lbl_804D37F4
 lbl_804D37F4:
-	.incbin "baserom.dol", 0x42E814, 0x10
+    .4byte 0x00000004
+    .4byte 0x00000005
+    .4byte 0x00000000
+.global lbl_804D3800
+lbl_804D3800:
+    .4byte 0x00000000
 .global lbl_804D3804
 lbl_804D3804:
     .asciz "%s"
@@ -658,10 +663,15 @@ lbl_804D3B38:
 lbl_804D3B40:
     .asciz "0"
     .balign 4
-    .incbin "baserom.dol", 0x42EB64, 0xC
+    .4byte NULL
+.global lbl_804D3B48
+lbl_804D3B48:
+    .4byte lbl_803C5794
+    .4byte NULL
 .global lbl_804D3B50
 lbl_804D3B50:
-	.incbin "baserom.dol", 0x42EB70, 0x8
+    .4byte lbl_804D3B48
+    .4byte NULL
 .global lbl_804D3B58
 lbl_804D3B58:
     .asciz "jobj.h"
@@ -4012,7 +4022,8 @@ lbl_804D5B38:
     .balign 4
 .global fragmentID
 fragmentID:
-	.incbin "baserom.dol", 0x430B60, 0x8
+	.int -2
+    .4byte NULL
 .global lbl_804D5B48
 lbl_804D5B48:
 	.incbin "baserom.dol", 0x430B68, 0x8
