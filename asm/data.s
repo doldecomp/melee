@@ -608,10 +608,54 @@ lbl_803BA1C0:
 lbl_803BA1D0:
     .asciz "!image_desc->image_ptr"
     .balign 4
-    .incbin "baserom.dol", 0x3B71E8, 0x60
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0xFFFFFF00
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000002
+    .4byte 0x00000000
+    .4byte 0x000000FF
+    .4byte 0x000000FF
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte 0x00000000
 .global lbl_803BA248
 lbl_803BA248:
-	.incbin "baserom.dol", 0x3B7248, 0x58
+    .4byte func_80013BB0
+    .4byte func_80013BB8
+    .4byte func_80013BE4
+    .4byte func_80013C18
+    .4byte func_80013D68
+    .4byte func_80013E3C
+    .4byte func_80013F78
+    .4byte func_80013FF0
+    .4byte func_80014014
+    .4byte func_800140F8
+    .4byte func_80014234
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_803BA2A0
 lbl_803BA2A0:
     .asciz "LbRb.dat"
