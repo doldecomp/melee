@@ -687,7 +687,26 @@ lbl_803BA344:
     .balign 4
 .global lbl_803BA380
 lbl_803BA380:
-	.incbin "baserom.dol", 0x3B7380, 0x50
+    .4byte 0x00000002
+    .4byte 0x00000001
+    .4byte 0x00000006
+    .4byte 0x00000800
+    .4byte 0x00000003
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x004F8800
+    .4byte 0x00000004
+    .4byte 0x00000002
+    .4byte 0x00000006
+    .4byte 0x0064B400
+    .4byte 0x00000005
+    .4byte 0x00000004
+    .4byte 0x00000006
+    .4byte 0x0096C800
+    .4byte 0x00000006
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_803BA3D0
 lbl_803BA3D0:
     .asciz "lbheap.c"
@@ -696,19 +715,78 @@ lbl_803BA3D0:
 lbl_803BA3DC:
     .asciz "p->status == LbHeapStatus_Create"
     .balign 4
+.global lbl_803BA400
+lbl_803BA400:
     .asciz "     Hsd"
     .balign 4
+.global lbl_803BA40C
+lbl_803BA40C:
     .asciz "    ARAM"
     .balign 4
+.global lbl_803BA418
+lbl_803BA418:
     .asciz "     Seq"
     .balign 4
+.global lbl_803BA424
+lbl_803BA424:
     .asciz "    Stay"
     .balign 4
+.global lbl_803BA430
+lbl_803BA430:
     .asciz "    AllM"
     .balign 4
+.global lbl_803BA43C
+lbl_803BA43C:
     .asciz "    AllA"
     .balign 4
-    .incbin "baserom.dol", 0x3B7448, 0xC0
+    .4byte lbl_803BA400
+    .4byte lbl_803BA40C
+    .4byte lbl_803BA418
+    .4byte lbl_803BA424
+    .4byte lbl_803BA430
+    .4byte lbl_803BA43C
+    .4byte 0x5B6C6248
+    .4byte 0x6561705D
+    .4byte 0x202D2D20
+    .4byte 0x5265706F
+    .4byte 0x7274202D
+    .4byte 0x2D0A0000
+    .4byte 0x20253564
+    .4byte 0x204B4220
+    .4byte 0x2B200000
+    .4byte 0x20253564
+    .4byte 0x204B4228
+    .4byte 0x20253864
+    .4byte 0x29000000
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20646573
+    .4byte 0x74726F79
+    .4byte 0x00000000
+    .4byte 0x202F2025
+    .4byte 0x3564204B
+    .4byte 0x420A0000
+    .4byte 0x4D61696E
+    .4byte 0x52414D20
+    .4byte 0x546F7461
+    .4byte 0x6C203A20
+    .4byte 0x25356420
+    .4byte 0x4B422820
+    .4byte 0x25386429
+    .4byte 0x0A000000
+    .4byte 0x20202041
+    .4byte 0x52414D20
+    .4byte 0x546F7461
+    .4byte 0x6C203A20
+    .4byte 0x25356420
+    .4byte 0x4B422820
+    .4byte 0x25386429
+    .4byte 0x0A000000
+    .4byte 0x00000000
 .global lbl_803BA508
 lbl_803BA508:
     .asciz "lbfile.c"
