@@ -213,7 +213,12 @@ lbl_804D37EC:
     .balign 4
 .global lbl_804D37F4
 lbl_804D37F4:
-	.incbin "baserom.dol", 0x42E814, 0x10
+    .4byte 0x00000004
+    .4byte 0x00000005
+    .4byte 0x00000000
+.global lbl_804D3800
+lbl_804D3800:
+    .4byte 0x00000000
 .global lbl_804D3804
 lbl_804D3804:
     .asciz "%s"
