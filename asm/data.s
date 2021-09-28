@@ -14615,7 +14615,96 @@ lbl_803F7978:
 lbl_803F7A00:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
-    .incbin "baserom.dol", 0x3F4A28, 0x160
+    .4byte NULL
+.global lbl_803F7A2C
+lbl_803F7A2C:
+    .4byte func_802C8CDC
+    .4byte func_802C8F20
+    .4byte func_802C8F24
+    .4byte 0x00000001
+    .4byte func_802C8CDC
+    .4byte func_802C8F20
+    .4byte func_802C8F24
+    .4byte 0x00000000
+    .4byte func_802C9190
+    .4byte func_802C9204
+    .4byte func_802C9240
+    .4byte 0x00000001
+    .4byte func_802C9190
+    .4byte func_802C9204
+    .4byte func_802C9240
+    .4byte 0x00000002
+    .4byte func_802C9190
+    .4byte func_802C9204
+    .4byte func_802C9240
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000000
+    .4byte func_802C94A8
+    .4byte func_802C94D8
+    .4byte 0xFFFFFFFF
+    .4byte func_802C93FC
+    .4byte func_802C9420
+    .4byte func_802C9440
+    .4byte 0x00000000
+    .4byte func_802C96CC
+    .4byte func_802C9798
+    .4byte func_802C9850
+    .4byte 0x00000001
+    .4byte func_802C990C
+    .4byte func_802C9970
+    .4byte func_802C9A28
+    .4byte 0xFFFFFFFF
+    .4byte func_802C9AB4
+    .4byte func_802C9AD8
+    .4byte func_802C9AF8
+    .4byte 0x00000000
+    .4byte func_802C9CE8
+    .4byte func_802C9D1C
+    .4byte func_802C9D20
+    .4byte 0x00000000
+    .4byte func_802C9EF0
+    .4byte func_802C9F74
+    .4byte func_802C9FBC
+    .4byte 0x00000001
+    .4byte func_802CA198
+    .4byte func_802CA318
+    .4byte func_802CA31C
+    .4byte 0xFFFFFFFF
+    .4byte func_802CA388
+    .4byte func_802CA3AC
+    .4byte func_802CA3CC
+    .4byte 0x00000000
+    .4byte func_802CA5D8
+    .4byte func_802CA618
+    .4byte func_802CA654
+    .4byte 0x00000001
+    .4byte func_802CA724
+    .4byte func_802CA7FC
+    .4byte func_802CA890
+    .4byte 0x00000002
+    .4byte func_802CA984
+    .4byte func_802CA9B8
+    .4byte func_802CA9F4
+    .4byte 0xFFFFFFFF
+    .4byte func_802CAAA4
+    .4byte func_802CAAC8
+    .4byte func_802CAAE8
+    .4byte 0x00000000
+    .4byte func_802CAE60
+    .4byte func_802CAE94
+    .4byte func_802CAFB4
+    .4byte 0x00000000
+    .4byte func_802CB118
+    .4byte func_802CB14C
+    .4byte func_802CB150
+    .4byte 0x00000001
+    .4byte func_802CB17C
+    .4byte func_802CB280
+    .4byte func_802CB284
+    .4byte 0xFFFFFFFF
+    .4byte func_802CB3B4
+    .4byte func_802CB3D8
+    .4byte func_802CB4C8
 .global lbl_803F7B88
 lbl_803F7B88:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
