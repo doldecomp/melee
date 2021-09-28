@@ -1306,7 +1306,35 @@ lbl_803BACF4:
 lbl_803BAD00:
     .asciz "index < _p(slot)[chan].num"
     .balign 4
-    .incbin "baserom.dol", 0x3B7D1C, 0x74
+    .4byte 0x91E59790
+    .4byte 0x93AC8358
+    .4byte 0x837D8362
+    .4byte 0x83568385
+    .4byte 0x83758389
+    .4byte 0x8355815B
+    .4byte 0x83598263
+    .4byte 0x82772020
+    .4byte 0x8ECA905E
+    .4byte 0x8366815B
+    .4byte 0x835E0000
+    .4byte 0x53757065
+    .4byte 0x7220536D
+    .4byte 0x61736820
+    .4byte 0x42726F73
+    .4byte 0x2E204D65
+    .4byte 0x6C656520
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x536E6170
+    .4byte 0x73686F74
+    .4byte 0x00000000
+    .4byte 0x25732025
+    .4byte 0x3032642F
+    .4byte 0x25303264
+    .4byte 0x20253032
+    .4byte 0x643A2530
+    .4byte 0x32643A25
+    .4byte 0x30326400
 .global lbl_803BAD90
 lbl_803BAD90:
     .asciz "LbMcSnap."
@@ -1368,10 +1396,42 @@ lbl_803BAE3C:
     .balign 4
     .asciz "heap_size >= memoryRequired"
     .balign 4
-    .incbin "baserom.dol", 0x3B7FE8, 0x40
+    .4byte NULL
+    .4byte 0x028001E0
+    .4byte 0x00000006
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803BB000
+lbl_803BB000:
+    .4byte 0x00000000
+    .4byte 0x43A00000
+    .4byte 0xC3700000
+    .4byte 0x43CFD89A
+    .4byte 0x00000000
+.global lbl_803BB014
+lbl_803BB014:
+    .4byte 0x00000000
+    .4byte 0x43A00000
+    .4byte 0xC3700000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_803BB028
 lbl_803BB028:
-	.incbin "baserom.dol", 0x3B8028, 0x38
+    .4byte 0x00000000
+    .4byte 0x00000001
+    .4byte 0x00000280
+    .4byte 0x000001E0
+    .4byte 0x00000280
+    .4byte 0x000001E0
+    .4byte lbl_803BB000
+    .4byte lbl_803BB014
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x3DCCCCCD
+    .4byte 0x46EA6000
+    .4byte 0x42700000
+    .4byte 0x3FAAAAAA
 .global lbl_803BB060
 lbl_803BB060:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
