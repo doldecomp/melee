@@ -1178,7 +1178,20 @@ lbl_803BAAEC:
     .balign 4
 .global lbl_803BAB08
 lbl_803BAB08:
-	.incbin "baserom.dol", 0x3B7B08, 0x38
+    .4byte lbl_80019D90
+    .4byte lbl_80019D9C
+    .4byte lbl_80019DA8
+    .4byte lbl_80019DBC
+    .4byte lbl_80019DC8
+    .4byte lbl_80019DD4
+    .4byte lbl_80019DE4
+    .4byte lbl_80019DF8
+    .4byte lbl_80019E08
+    .4byte lbl_80019E18
+    .4byte lbl_80019E28
+    .4byte lbl_80019E34
+    .4byte lbl_80019E40
+    .4byte lbl_80019E4C
 .global lbl_803BAB40
 lbl_803BAB40:
     .asciz "_p(work_area)"
@@ -1189,10 +1202,71 @@ lbl_803BAB50:
     .balign 4
 .global lbl_803BAB60
 lbl_803BAB60:
-	.incbin "baserom.dol", 0x3B7B60, 0x14
+    .4byte 0x02000100
+    .4byte 0x00000000
+    .4byte 0x00000300
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_803BAB74
 lbl_803BAB74:
-	.incbin "baserom.dol", 0x3B7B74, 0xE8
+    .4byte 0x00000000
+    .4byte 0x00000003
+    .4byte 0x00000000
+    .4byte 0x00001790
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00001F2C
+    .4byte 0x00000001
+    .4byte 0x00000000
+    .4byte 0x00001F2C
+    .4byte 0x00000001
+    .4byte 0x00000000
+    .4byte 0x00001F2C
+    .4byte 0x00000001
+    .4byte 0x00000000
+    .4byte 0x00001F2C
+    .4byte 0x00000001
+    .4byte 0x00000000
+    .4byte 0x00001F2C
+    .4byte 0x00000001
+    .4byte 0x00000000
+    .4byte 0x00001F2C
+    .4byte 0x00000001
+    .4byte 0x00000000
+    .4byte 0x00001F2C
+    .4byte 0x00000001
+    .4byte 0x00000000
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x91E59790
+    .4byte 0x93AC8358
+    .4byte 0x837D8362
+    .4byte 0x83568385
+    .4byte 0x83758389
+    .4byte 0x8355815B
+    .4byte 0x83598263
+    .4byte 0x82772020
+    .4byte 0x835A815B
+    .4byte 0x83758366
+    .4byte 0x815B835E
+    .4byte 0x00000000
+    .4byte 0x53757065
+    .4byte 0x7220536D
+    .4byte 0x61736820
+    .4byte 0x42726F73
+    .4byte 0x2E204D65
+    .4byte 0x6C656520
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x47616D65
+    .4byte 0x20446174
+    .4byte 0x61000000
+    .4byte 0x25732025
+    .4byte 0x34642F25
+    .4byte 0x3032642F
+    .4byte 0x25303264
+    .4byte 0x00000000
 .global lbl_803BAC5C
 lbl_803BAC5C:
     .asciz "SuperSmashBros0110290334"
@@ -1213,7 +1287,17 @@ lbl_803BAC88:
     .balign 4
 .global lbl_803BACC8
 lbl_803BACC8:
-	.incbin "baserom.dol", 0x3B7CC8, 0x2C
+    .4byte 0x02000100
+    .4byte 0x00000000
+    .4byte 0x00000300
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000003
+    .4byte 0x00000000
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_803BACF4
 lbl_803BACF4:
     .asciz "lbsnap.c"
