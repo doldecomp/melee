@@ -38,6 +38,7 @@ O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES
 #-------------------------------------------------------------------------------
 
 MWCC_VERSION := 1.0
+MWCC_LD_VERSION := 1.3.2
 
 # Programs
 ifeq ($(WINDOWS),1)
@@ -48,7 +49,7 @@ endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 CPP     := cpp -P
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
-LD      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwldeppc.exe
+LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 SHA1SUM := sha1sum
 PYTHON  := python3

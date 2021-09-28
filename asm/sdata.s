@@ -4010,8 +4010,8 @@ lbl_804D5B30:
 lbl_804D5B38:
     .asciz "jobj"
     .balign 4
-.global lbl_804D5B40
-lbl_804D5B40:
+.global fragmentID
+fragmentID:
 	.incbin "baserom.dol", 0x430B60, 0x8
 .global lbl_804D5B48
 lbl_804D5B48:
