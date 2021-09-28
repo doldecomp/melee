@@ -564,7 +564,27 @@ lbl_803BA0E4:
     .balign 4
 .global lbl_803BA0FC
 lbl_803BA0FC:
-	.incbin "baserom.dol", 0x3B70FC, 0x54
+    .4byte 0x00000000
+    .4byte 0x00000004
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x000000FF
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte 0x00000000
+    .4byte 0x636F7564
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x6C696768
+    .4byte 0x7420706F
+    .4byte 0x73697469
+    .4byte 0x6F6E202E
+    .4byte 0x2E2E0A00
+    .4byte 0x00000000
 .global lbl_803BA150
 lbl_803BA150:
     .asciz "active deffect:"
@@ -8345,7 +8365,27 @@ lbl_803C6BF0:
     .balign 4
 .global jtbl_803C6C00
 jtbl_803C6C00:
-	.incbin "baserom.dol", 0x3C3C00, 0x54
+    .4byte lbl_800C27B4
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C0
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27B4
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C8
+    .4byte lbl_800C27C0
 .global jtbl_803C6C54
 jtbl_803C6C54:
 	.incbin "baserom.dol", 0x3C3C54, 0x54
