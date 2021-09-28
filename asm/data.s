@@ -18838,8 +18838,14 @@ lbl_80431690:
 	.incbin "baserom.dol", 0x42E690, 0xC
 .global lbl_8043169C
 lbl_8043169C:
-	.incbin "baserom.dol", 0x42E69C, 0x18
+    .4byte 0x00000001
+    .4byte 0x00020006
+    .4byte 0x000E001E
+    .4byte 0x003E007E
+    .4byte 0x00FE01FE
+    .4byte 0x03FE07FE
 .global lbl_804316B4
 lbl_804316B4:
-	.incbin "baserom.dol", 0x42E6B4, 0xC
-
+    .4byte 0x02020203
+    .4byte 0x04050607
+    .4byte 0x08090A0B

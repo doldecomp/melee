@@ -4022,7 +4022,8 @@ lbl_804D5B38:
     .balign 4
 .global fragmentID
 fragmentID:
-	.incbin "baserom.dol", 0x430B60, 0x8
+	.int -2
+    .4byte NULL
 .global lbl_804D5B48
 lbl_804D5B48:
 	.incbin "baserom.dol", 0x430B68, 0x8
