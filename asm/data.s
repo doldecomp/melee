@@ -3591,10 +3591,83 @@ lbl_803C2570:
 
 .global lbl_803C25F4
 lbl_803C25F4:
-	.incbin "baserom.dol", 0x3BF5F4, 0x108
+    .4byte 0x00000000
+    .4byte 0x00000010
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x00000012
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x00000010
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000E
+    .4byte 0x00000000
+    .4byte 0x0000000F
+    .4byte 0x00000000
+    .4byte 0x0000000E
 .global lbl_803C26FC
 lbl_803C26FC:
-	.incbin "baserom.dol", 0x3BF6FC, 0x24
+    .4byte 0x01030408
+    .4byte 0x050C0611
+    .4byte 0x0A0F0E0E
+    .4byte 0x0702090B
+    .4byte 0x0D121011
+    .4byte 0x06010307
+    .4byte 0xFF1331FF
+    .4byte 0xFFFFFF0C
+    .4byte 0xFF000000
 .global lbl_803C2720
 lbl_803C2720:
     .asciz "fighter reference counter error!\n"
@@ -3615,8 +3688,7 @@ lbl_803C2744:
     .balign 4
     .asciz "HSD_ArchiveParse error! %x\n"
     .balign 4
-    .incbin "baserom.dol", 0x3BF7FC, 0x4
-
+    .4byte NULL
     .balign 4
 .global lbl_803C2800
 lbl_803C2800:
