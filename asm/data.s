@@ -16376,7 +16376,12 @@ lbl_803FD264:
     .balign 4
 .global lbl_803FD274
 lbl_803FD274:
-	.incbin "baserom.dol", 0x3FA274, 0x18
+    .4byte 0x00000000
+    .4byte 0x028001E0
+    .4byte 0x00000004
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_803FD28C
 lbl_803FD28C:
     .asciz "<SnapLoad0>\n"
