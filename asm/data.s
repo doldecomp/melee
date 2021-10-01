@@ -1396,6 +1396,8 @@ lbl_803BAE3C:
     .balign 4
     .asciz "heap_size >= memoryRequired"
     .balign 4
+.global lbl_803BAFE8
+lbl_803BAFE8:
     .4byte NULL
     .4byte 0x028001E0
     .4byte 0x00000006
@@ -18716,29 +18718,333 @@ jtbl_8040B870:
 lbl_8040B8AC:
     .asciz "<< Push START Button >>"
     .balign 4
-    .incbin "baserom.dol", 0x4088C4, 0x14
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte func_80395644
+    .4byte func_803956D8
+    .4byte 0x00000000
 .global lbl_8040B8D8
 lbl_8040B8D8:
     .asciz "<<PUSH START BUTTON TO SEE INSTRUCTION>>"
     .balign 4
 .global lbl_8040B904
 lbl_8040B904:
-	.incbin "baserom.dol", 0x408904, 0x10
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte func_803957C0
+    .4byte func_80395A78
 .global jtbl_8040B914
 jtbl_8040B914:
 	.incbin "baserom.dol", 0x408914, 0x1DC
 .global lbl_8040BAF0
 lbl_8040BAF0:
-	.incbin "baserom.dol", 0x408AF0, 0x14
+    .4byte 0x00000000
+    .4byte func_80396130
+    .4byte func_80396188
+    .4byte func_803962A8
+    .4byte 0x00000000
 .global jtbl_8040BB04
 jtbl_8040BB04:
-	.incbin "baserom.dol", 0x408B04, 0x138
+    .4byte lbl_80396714
+    .4byte lbl_80396720
+    .4byte lbl_8039672C
+    .4byte lbl_80396738
+    .4byte lbl_80396744
+    .4byte lbl_80396750
+    .4byte lbl_8039675C
+.global lbl_8040BB20
+lbl_8040BB20:
+    .4byte 0x41444452
+    .4byte 0x45535320
+    .4byte 0x2D203130
+    .4byte 0x68202020
+    .4byte 0x20202028
+    .4byte 0x55502900
+.global lbl_8040BB38
+lbl_8040BB38:
+    .4byte 0x41444452
+    .4byte 0x45535320
+    .4byte 0x2B203130
+    .4byte 0x68202020
+    .4byte 0x2028444F
+    .4byte 0x574E2900
+.global lbl_8040BB50
+lbl_8040BB50:
+    .4byte 0x41444452
+    .4byte 0x45535320
+    .4byte 0x2D203430
+    .4byte 0x68202020
+    .4byte 0x20284C45
+    .4byte 0x46542900
+.global lbl_8040BB68
+lbl_8040BB68:
+    .4byte 0x41444452
+    .4byte 0x45535320
+    .4byte 0x2B203430
+    .4byte 0x68202020
+    .4byte 0x28524947
+    .4byte 0x48542900
+.global lbl_8040BB80
+lbl_8040BB80:
+    .4byte 0x4E455720
+    .4byte 0x41444452
+    .4byte 0x45535320
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x28412900
+.global lbl_8040BB98
+lbl_8040BB98:
+    .4byte 0x44554D50
+    .4byte 0x20544F20
+    .4byte 0x434F4E53
+    .4byte 0x4F4C4520
+    .4byte 0x20202020
+    .4byte 0x28582900
+.global lbl_8040BBB0
+lbl_8040BBB0:
+    .4byte 0x434C4F53
+    .4byte 0x45202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x28422900
+.global lbl_8040BBC8
+lbl_8040BBC8:
+    .4byte lbl_8040BB20
+    .4byte lbl_8040BB38
+    .4byte lbl_8040BB50
+    .4byte lbl_8040BB68
+    .4byte lbl_8040BB80
+    .4byte lbl_8040BB98
+    .4byte lbl_8040BBB0
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte func_80394F48
+    .4byte func_803966A0
+    .4byte lbl_8040BBC8
+    .4byte 0x00000000
+.global lbl_8040BC00
+lbl_8040BC00:
+    .4byte 0x2B2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2B
+    .4byte 0x00000000
+.global lbl_8040BC20
+lbl_8040BC20:
+    .4byte 0x7C20494E
+    .4byte 0x50555420
+    .4byte 0x41444452
+    .4byte 0x45535320
+    .4byte 0x3A203825
+    .4byte 0x30375820
+    .4byte 0x7C000000
 .global lbl_8040BC3C
 lbl_8040BC3C:
-	.incbin "baserom.dol", 0x408C3C, 0x1C
+    .4byte 0x00000000
+    .4byte func_80396868
+    .4byte func_80396884
+    .4byte func_80396A20
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global jtbl_8040BC58
 jtbl_8040BC58:
-	.incbin "baserom.dol", 0x408C58, 0x26C
+    .4byte lbl_80396CEC
+    .4byte lbl_80396CF8
+    .4byte lbl_80396D04
+    .4byte lbl_80396D10
+    .4byte lbl_80396D1C
+    .4byte lbl_80396D28
+    .4byte lbl_80396D34
+.global lbl_8040BC74
+lbl_8040BC74:
+    .4byte 0x44454352
+    .4byte 0x454D454E
+    .4byte 0x54204E55
+    .4byte 0x4D204154
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x20202855
+    .4byte 0x50290000
+.global lbl_8040BC94
+lbl_8040BC94:
+    .4byte 0x494E4352
+    .4byte 0x454D454E
+    .4byte 0x54204E55
+    .4byte 0x4D204154
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x28444F57
+    .4byte 0x4E290000
+.global lbl_8040BCB4
+lbl_8040BCB4:
+    .4byte 0x4D4F5645
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x544F204C
+    .4byte 0x45465420
+    .4byte 0x20202020
+    .4byte 0x284C4546
+    .4byte 0x54290000
+.global lbl_8040BCD4
+lbl_8040BCD4:
+    .4byte 0x4D4F5645
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x544F2052
+    .4byte 0x49474854
+    .4byte 0x20202028
+    .4byte 0x52494748
+    .4byte 0x54290000
+.global lbl_8040BCF4
+lbl_8040BCF4:
+    .4byte 0x4D454D4F
+    .4byte 0x52592044
+    .4byte 0x554D5020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202028
+    .4byte 0x41290000
+.global lbl_8040BD14
+lbl_8040BD14:
+    .4byte 0x434C4541
+    .4byte 0x52204E55
+    .4byte 0x4D204154
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x20202020
+    .4byte 0x20202028
+    .4byte 0x58290000
+.global lbl_8040BD34
+lbl_8040BD34:
+    .4byte 0x434C4F53
+    .4byte 0x45202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202028
+    .4byte 0x42290000
+    .4byte lbl_8040BC74
+    .4byte lbl_8040BC94
+    .4byte lbl_8040BCB4
+    .4byte lbl_8040BCD4
+    .4byte lbl_8040BCF4
+    .4byte lbl_8040BD14
+    .4byte lbl_8040BD34
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte func_80394F48
+    .4byte func_80396C78
+    .4byte 0x8040BD54
+    .4byte 0x00000000
+.global lbl_8040BD8C
+lbl_8040BD8C:
+    .4byte 0x2B2D2044
+    .4byte 0x42415420
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2B000000
+.global lbl_8040BDB0
+lbl_8040BDB0:
+    .4byte 0x2B2D2049
+    .4byte 0x42415420
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2B000000
+.global lbl_8040BDD4
+lbl_8040BDD4:
+    .4byte 0x7C202564
+    .4byte 0x20424C20
+    .4byte 0x78787878
+    .4byte 0x78787878
+    .4byte 0x78787820
+    .4byte 0x20256325
+    .4byte 0x63202563
+    .4byte 0x25632563
+    .4byte 0x25632025
+    .4byte 0x73207C00
+.global lbl_8040BDFC
+lbl_8040BDFC:
+    .4byte 0x7C202020
+    .4byte 0x42455049
+    .4byte 0x20253038
+    .4byte 0x58204252
+    .4byte 0x504E2025
+    .4byte 0x30385820
+    .4byte 0x7C000000
+.global lbl_8040BE18
+lbl_8040BE18:
+    .4byte 0x2B2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2B000000
+.global lbl_8040BE3C
+lbl_8040BE3C:
+    .4byte 0x2B2D2053
+    .4byte 0x5052202D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2B0000
+.global lbl_8040BE54
+lbl_8040BE54:
+    .4byte 0x7C204E4F
+    .4byte 0x2020204E
+    .4byte 0x414D4520
+    .4byte 0x20202056
+    .4byte 0x414C2020
+    .4byte 0x207C0000
+.global lbl_8040BE6C
+lbl_8040BE6C:
+    .4byte 0x7C253464
+    .4byte 0x20257325
+    .4byte 0x73202530
+    .4byte 0x38587C00
+.global lbl_8040BE7C
+lbl_8040BE7C:
+    .4byte 0x2B2D2D2D
+    .4byte 0x2D206765
+    .4byte 0x6B6B6F20
+    .4byte 0x6F6E6C79
+    .4byte 0x202D2D2D
+    .4byte 0x2D2B0000
+.global lbl_8040BE94
+lbl_8040BE94:
+    .4byte 0x7C202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x207C0000
+.global lbl_8040BEAC
+lbl_8040BEAC:
+    .4byte 0x2B2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2B0000
 .global lbl_8040BEC4
 lbl_8040BEC4:
 	.incbin "baserom.dol", 0x408EC4, 0x4C
