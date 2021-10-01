@@ -18704,16 +18704,44 @@ lbl_8040A9D0:
     .balign 4
 .global lbl_8040AB00
 lbl_8040AB00:
-	.incbin "baserom.dol", 0x407B00, 0x20
+    .4byte 0x10808000
+    .4byte func_80392194
+    .4byte 0x46808000
+    .4byte func_80392194
+    .4byte 0x7C808000
+    .4byte func_80392194
+    .4byte 0xB3808000
+    .4byte func_80392194
 .global lbl_8040AB20
 lbl_8040AB20:
-	.incbin "baserom.dol", 0x407B20, 0x20
+    .4byte 0xB3808000
+    .4byte func_80392194
+    .4byte 0x7C808000
+    .4byte func_80392194
+    .4byte 0x46808000
+    .4byte func_80392194
+    .4byte 0x10808000
+    .4byte func_80392194
 .global lbl_8040AB40
 lbl_8040AB40:
 	.incbin "baserom.dol", 0x407B40, 0xD30
 .global jtbl_8040B870
 jtbl_8040B870:
-	.incbin "baserom.dol", 0x408870, 0x3C
+    .4byte lbl_80394B94
+    .4byte lbl_80394BA4
+    .4byte lbl_80394BB4
+    .4byte lbl_80394C38
+    .4byte lbl_80394CA0
+    .4byte lbl_80394CB0
+    .4byte lbl_80394CD4
+    .4byte lbl_80394D54
+    .4byte lbl_80394D64
+    .4byte lbl_80394D74
+    .4byte lbl_80394D84
+    .4byte lbl_80394D94
+    .4byte lbl_80394DA4
+    .4byte lbl_80394DB4
+    .4byte lbl_80394DC4
 .global lbl_8040B8AC
 lbl_8040B8AC:
     .asciz "<< Push START Button >>"
@@ -18735,7 +18763,151 @@ lbl_8040B904:
     .4byte func_80395A78
 .global jtbl_8040B914
 jtbl_8040B914:
-	.incbin "baserom.dol", 0x408914, 0x1DC
+    .4byte lbl_80395E00
+    .4byte lbl_80395E10
+    .4byte lbl_80395E20
+    .4byte lbl_80395E30
+    .4byte lbl_80395E40
+    .4byte lbl_80395E4C
+    .4byte lbl_80395EC8
+    .4byte lbl_8039604C
+    .4byte lbl_80396060
+.global lbl_8040B938
+lbl_8040B938:
+    .4byte 0x4D4F5645
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x55502020
+    .4byte 0x20202020
+    .4byte 0x20202855
+    .4byte 0x50290000
+.global lbl_8040B954
+lbl_8040B954:
+    .4byte 0x4D4F5645
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x444F574E
+    .4byte 0x20202020
+    .4byte 0x28444F57
+    .4byte 0x4E290000
+.global lbl_8040B970
+lbl_8040B970:
+    .4byte 0x4D4F5645
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x4C454654
+    .4byte 0x20202020
+    .4byte 0x284C4546
+    .4byte 0x54290000
+.global lbl_8040B98C
+lbl_8040B98C:
+    .4byte 0x4D4F5645
+    .4byte 0x20435552
+    .4byte 0x534F5220
+    .4byte 0x52494748
+    .4byte 0x54202028
+    .4byte 0x52494748
+    .4byte 0x54290000
+.global lbl_8040B9A8
+lbl_8040B9A8:
+    .4byte 0x4D454D20
+    .4byte 0x44554D50
+    .4byte 0x20415420
+    .4byte 0x43555253
+    .4byte 0x4F522020
+    .4byte 0x20202028
+    .4byte 0x41290000
+.global lbl_8040B9C4
+lbl_8040B9C4:
+    .4byte 0x4D454D20
+    .4byte 0x44554D50
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202028
+    .4byte 0x58290000
+.global lbl_8040B9E0
+lbl_8040B9E0:
+    .4byte 0x44554D50
+    .4byte 0x20435055
+    .4byte 0x20434F4E
+    .4byte 0x54455854
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20200000
+.global lbl_8040B9FC
+lbl_8040B9FC:
+    .4byte 0x53505220
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20200000
+.global lbl_8040BA18
+lbl_8040BA18:
+    .4byte 0x51554954
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20202020
+    .4byte 0x20200000
+.global lbl_8040BA34
+lbl_8040BA34:
+    .4byte lbl_8040B938
+    .4byte lbl_8040B954
+    .4byte lbl_8040B970
+    .4byte lbl_8040B98C
+    .4byte lbl_8040B9A8
+    .4byte lbl_8040B9C4
+    .4byte lbl_8040B9E0
+    .4byte lbl_8040B9FC
+    .4byte lbl_8040BA18
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte func_80394F48
+    .4byte func_80395D88
+    .4byte lbl_8040BA34
+    .4byte 0x00000000
+.global lbl_8040BA74
+lbl_8040BA74:
+    .4byte 0x2B2D204D
+    .4byte 0x454D4F52
+    .4byte 0x59204455
+    .4byte 0x4D50202D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2B0000
+.global lbl_8040BAA4
+lbl_8040BAA4:
+    .4byte 0x7C253038
+    .4byte 0x583D2530
+    .4byte 0x38583A25
+    .4byte 0x3038583A
+    .4byte 0x25303858
+    .4byte 0x3A253038
+    .4byte 0x587C0000
+.global lbl_8040BAC0
+lbl_8040BAC0:
+    .4byte 0x2B2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2D2D2D
+    .4byte 0x2D2B0000
 .global lbl_8040BAF0
 lbl_8040BAF0:
     .4byte 0x00000000
