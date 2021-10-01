@@ -1690,7 +1690,110 @@ lbl_804D4320:
     .4byte 0x21000000
 .global lbl_804D4328
 lbl_804D4328:
-	.incbin "baserom.dol", 0x42F348, 0x1A0
+    .4byte 0x00532121
+    .4byte 0x21000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC9E8
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BCAF0
+    .4byte 0x00000000
+    .4byte func_801BCF20
+    .4byte 0x00000000
+    .4byte func_801BCF40
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BD028
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte func_801BEA10
+    .4byte func_801BD164
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BD30C
+    .4byte 0x00000000
+    .4byte func_801BD44C
+    .4byte 0x00000000
+    .4byte func_801BD46C
+    .4byte 0x00000000
+    .4byte func_801BD658
+    .4byte func_801BEA4C
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte func_801BEA88
+    .4byte func_801BD7FC
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte func_801BEAF0
+    .4byte func_801BD93C
+    .4byte 0x00000000
+    .4byte func_801BDAD4
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BDAF4
+    .4byte 0x00000000
+    .4byte func_801BDC08
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BDD44
+    .4byte 0x00000000
+    .4byte func_801BDE94
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BE37C
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BE39C
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte func_801BEB2C
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
+    .4byte func_801BE618
+    .4byte 0x00000000
+    .4byte func_801BE638
+    .4byte 0x00000000
+    .4byte func_801BC754
+    .4byte 0x00000000
 .global lbl_804D44C8
 lbl_804D44C8:
     .asciz "GPIJ"
@@ -2805,7 +2908,77 @@ lbl_804D4CAC:
     .4byte 0x829F0000
 .global lbl_804D4E4C
 lbl_804D4E4C:
-	.incbin "baserom.dol", 0x42FE6C, 0x11C
+    .4byte 0x00000000
+    .4byte 0x82A10000
+    .4byte 0x82A30000
+    .4byte 0x82A50000
+    .4byte 0x82A70000
+    .4byte 0x82AA0000
+    .4byte 0x82AC0000
+    .4byte 0x82AE0000
+    .4byte 0x82B00000
+    .4byte 0x82B20000
+    .4byte 0x82B40000
+    .4byte 0x82B60000
+    .4byte 0x82B80000
+    .4byte 0x82BA0000
+    .4byte 0x82BC0000
+    .4byte 0x82BE0000
+    .4byte 0x82C00000
+    .4byte 0x82C30000
+    .4byte 0x82C10000
+    .4byte 0x82C50000
+    .4byte 0x82C70000
+    .4byte 0x82CE0000
+    .4byte 0x82CF0000
+    .4byte 0x82D10000
+    .4byte 0x82D20000
+    .4byte 0x82D40000
+    .4byte 0x82D50000
+    .4byte 0x82D70000
+    .4byte 0x82D80000
+    .4byte 0x82DA0000
+    .4byte 0x82DB0000
+    .4byte 0x82E10000
+    .4byte 0x82E30000
+    .4byte 0x82E50000
+    .4byte 0x20000000
+    .4byte 0x83400000
+    .4byte 0x83420000
+    .4byte 0x83440000
+    .4byte 0x83460000
+    .4byte 0x83480000
+    .4byte 0x834B0000
+    .4byte 0x834D0000
+    .4byte 0x834F0000
+    .4byte 0x83510000
+    .4byte 0x83530000
+    .4byte 0x83550000
+    .4byte 0x83570000
+    .4byte 0x83590000
+    .4byte 0x835B0000
+    .4byte 0x835D0000
+    .4byte 0x835F0000
+    .4byte 0x83610000
+    .4byte 0x83640000
+    .4byte 0x83620000
+    .4byte 0x83660000
+    .4byte 0x83680000
+    .4byte 0x836F0000
+    .4byte 0x83700000
+    .4byte 0x83720000
+    .4byte 0x83730000
+    .4byte 0x83750000
+    .4byte 0x83760000
+    .4byte 0x83780000
+    .4byte 0x83790000
+    .4byte 0x837B0000
+    .4byte 0x837C0000
+    .4byte 0x83830000
+    .4byte 0x83850000
+    .4byte 0x83870000
+    .4byte 0x81600000
+    .4byte 0x81410000
 .global lbl_804D4F68
 lbl_804D4F68:
     .4byte 0x000000FF
@@ -3995,7 +4168,53 @@ lbl_804D5858:
     .4byte 0x0000007F
 .global lbl_804D585C
 lbl_804D585C:
-	.incbin "baserom.dol", 0x43087C, 0xAC
+    .4byte 0xFFFFFFFF
+    .4byte 0x4E4F4E45
+    .4byte 0x00000000
+    .4byte 0x41435449
+    .4byte 0x56454400
+    .4byte 0x4155544F
+    .4byte 0x00000000
+.global lbl_804D5878
+lbl_804D5878:
+    .4byte 0x4F464600
+.global lbl_804D587C
+lbl_804D587C:
+    .4byte 0x4F4E0000
+    .4byte lbl_804D5878
+    .4byte lbl_804D587C
+    .4byte 0x803FA3F4
+    .4byte 0x803FA404
+    .4byte 0x4D617374
+    .4byte 0x65720000
+    .4byte 0x44657665
+    .4byte 0x6C6F7000
+    .4byte 0x41646472
+    .4byte 0x34203A00
+    .4byte 0x75333220
+    .4byte 0x20203A00
+    .4byte 0x41646472
+    .4byte 0x32203A00
+    .4byte 0x75313620
+    .4byte 0x20203A00
+    .4byte 0x41646472
+    .4byte 0x20203A00
+    .4byte 0x75382020
+    .4byte 0x20203A00
+    .4byte 0x4E6F7468
+    .4byte 0x696E6700
+    .4byte 0x56657279
+    .4byte 0x6C6F7700
+    .4byte 0x4C6F7700
+    .4byte 0x4D696464
+    .4byte 0x6C650000
+    .4byte 0x48696768
+    .4byte 0x00000000
+    .4byte 0x52756C65
+    .4byte 0x00000000
+    .4byte 0x803FB064
+    .4byte 0x803FB074
+    .4byte 0x00000000
 .global lbl_804D5908
 lbl_804D5908:
     .4byte 0x00000001
@@ -4004,7 +4223,32 @@ lbl_804D590C:
     .4byte 0x00000001
 .global lbl_804D5910
 lbl_804D5910:
-	.incbin "baserom.dol", 0x430930, 0x68
+    .4byte 0x00000001
+    .4byte 0x53494D50
+    .4byte 0x4C450000
+    .4byte 0x43686172
+    .4byte 0x61203A00
+    .4byte 0x436F6C6F
+    .4byte 0x72203A00
+    .4byte 0x4D6F6465
+    .4byte 0x203A0000
+    .4byte 0x4C756967
+    .4byte 0x69000000
+    .4byte 0x4D617273
+    .4byte 0x00000000
+    .4byte 0x4D657774
+    .4byte 0x776F0000
+    .4byte 0x50757269
+    .4byte 0x6E000000
+    .4byte 0x46616C63
+    .4byte 0x6F000000
+    .4byte 0x432D4C69
+    .4byte 0x6E6B0000
+    .4byte 0x526F6900
+    .4byte 0x50696368
+    .4byte 0x75000000
+    .4byte 0x47616E6F
+    .4byte 0x6E000000
 .global lbl_804D5978
 lbl_804D5978:
     .4byte 0x3C496E69
