@@ -385,16 +385,28 @@ lbl_804D38F0:
 .global lbl_804D38F4
 lbl_804D38F4:
     .4byte 0xFFFFFFFF
+.global lbl_804D38F8
+lbl_804D38F8:
     .4byte 0x646B2E73
     .4byte 0x736D0000
+.global lbl_804D3900
+lbl_804D3900:
     .4byte 0x666F782E
     .4byte 0x73736D00
+.global lbl_804D3908
+lbl_804D3908:
     .4byte 0x6963652E
     .4byte 0x73736D00
+.global lbl_804D3910
+lbl_804D3910:
     .4byte 0x7A732E73
     .4byte 0x736D0000
+.global lbl_804D3918
+lbl_804D3918:
     .4byte 0x67772E73
     .4byte 0x736D0000
+.global lbl_804D3920
+lbl_804D3920:
     .4byte 0x656E642E
     .4byte 0x73736D00
 .global lbl_804D3928
@@ -1833,12 +1845,16 @@ lbl_804D4500:
 .global lbl_804D4508
 lbl_804D4508:
     .4byte 0x41800000
+.global lbl_804D450C
+lbl_804D450C:
     .4byte lbl_803E0680
     .4byte lbl_804D4500
 .global lbl_804D4514
 lbl_804D4514:
     .4byte lbl_803E069C
     .4byte 0x00000000
+.global lbl_804D451C
+lbl_804D451C:
     .4byte lbl_803E06AC
     .4byte lbl_804D4514
 .global lbl_804D4524
@@ -3007,6 +3023,8 @@ lbl_804D4F8C:
     .asciz "jobj"
     .balign 4
     .4byte 0x00000000
+.global lbl_804D4F98
+lbl_804D4F98:
     .4byte 0x00000000
     .4byte 0x00000000
 .global lbl_804D4FA0
