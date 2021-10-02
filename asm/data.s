@@ -17594,96 +17594,188 @@ lbl_803FF5D4:
 lbl_803FF5EC:
     .asciz "ToyDspStand_Top_joint"
     .balign 4
+.global lbl_803FF604
+lbl_803FF604:
     .asciz "ToyDspMycharaCmA_Top_matanim_joint"
     .balign 4
+.global lbl_803FF628
+lbl_803FF628:
     .asciz "ToyDspMycharaCmB_Top_matanim_joint"
     .balign 4
+.global lbl_803FF64C
+lbl_803FF64C:
     .asciz "ToyDspMycharaCmC_Top_matanim_joint"
     .balign 4
+.global lbl_803FF670
+lbl_803FF670:
     .asciz "ToyDspMycharaCmD_Top_matanim_joint"
     .balign 4
+.global lbl_803FF694
+lbl_803FF694:
     .asciz "ToyDspMycharaCmE_Top_matanim_joint"
     .balign 4
+.global lbl_803FF6B8
+lbl_803FF6B8:
     .asciz "ToyDspMycharaR1A_Top_matanim_joint"
     .balign 4
+.global lbl_803FF6DC
+lbl_803FF6DC:
     .asciz "ToyDspMycharaR1B_Top_matanim_joint"
     .balign 4
+.global lbl_803FF700
+lbl_803FF700:
     .asciz "ToyDspMycharaR1C_Top_matanim_joint"
     .balign 4
+.global lbl_803FF724
+lbl_803FF724:
     .asciz "ToyDspMycharaR1D_Top_matanim_joint"
     .balign 4
+.global lbl_803FF748
+lbl_803FF748:
     .asciz "ToyDspMycharaR1E_Top_matanim_joint"
     .balign 4
+.global lbl_803FF76C
+lbl_803FF76C:
     .asciz "ToyDspMycharaR2A_Top_matanim_joint"
     .balign 4
+.global lbl_803FF790
+lbl_803FF790:
     .asciz "ToyDspMycharaR2B_Top_matanim_joint"
     .balign 4
+.global lbl_803FF7B4
+lbl_803FF7B4:
     .asciz "ToyDspMycharaR2C_Top_matanim_joint"
     .balign 4
+.global lbl_803FF7D8
+lbl_803FF7D8:
     .asciz "ToyDspMycharaR2D_Top_matanim_joint"
     .balign 4
+.global lbl_803FF7FC
+lbl_803FF7FC:
     .asciz "ToyDspMycharaR2E_Top_matanim_joint"
     .balign 4
+.global lbl_803FF820
+lbl_803FF820:
     .asciz "ToyDspMapA_Top_matanim_joint"
     .balign 4
+.global lbl_803FF840
+lbl_803FF840:
     .asciz "ToyDspMapB_Top_matanim_joint"
     .balign 4
+.global lbl_803FF860
+lbl_803FF860:
     .asciz "ToyDspMapC_Top_matanim_joint"
     .balign 4
+.global lbl_803FF880
+lbl_803FF880:
     .asciz "ToyDspMapD_Top_matanim_joint"
     .balign 4
+.global lbl_803FF8A0
+lbl_803FF8A0:
     .asciz "ToyDspMapE_Top_matanim_joint"
     .balign 4
+.global lbl_803FF8C0
+lbl_803FF8C0:
     .asciz "ToyDspFgseriesA_Top_matanim_joint"
     .balign 4
+.global lbl_803FF8E4
+lbl_803FF8E4:
     .asciz "ToyDspFgseriesB_Top_matanim_joint"
     .balign 4
+.global lbl_803FF908
+lbl_803FF908:
     .asciz "ToyDspFgseriesC_Top_matanim_joint"
     .balign 4
+.global lbl_803FF92C
+lbl_803FF92C:
     .asciz "ToyDspFgseriesD_Top_matanim_joint"
     .balign 4
+.global lbl_803FF950
+lbl_803FF950:
     .asciz "ToyDspFgseriesE_Top_matanim_joint"
     .balign 4
+.global lbl_803FF974
+lbl_803FF974:
     .asciz "ToyDspFgetcA_Top_matanim_joint"
     .balign 4
+.global lbl_803FF994
+lbl_803FF994:
     .asciz "ToyDspFgetcB_Top_matanim_joint"
     .balign 4
+.global lbl_803FF9B4
+lbl_803FF9B4:
     .asciz "ToyDspFgetcC_Top_matanim_joint"
     .balign 4
+.global lbl_803FF9D4
+lbl_803FF9D4:
     .asciz "ToyDspFgetcD_Top_matanim_joint"
     .balign 4
+.global lbl_803FF9F4
+lbl_803FF9F4:
     .asciz "ToyDspFgetcE_Top_matanim_joint"
     .balign 4
+.global lbl_803FFA14
+lbl_803FFA14:
     .asciz "ToyDspPokemonA_Top_matanim_joint"
     .balign 4
+.global lbl_803FFA38
+lbl_803FFA38:
     .asciz "ToyDspPokemonB_Top_matanim_joint"
     .balign 4
+.global lbl_803FFA5C
+lbl_803FFA5C:
     .asciz "ToyDspPokemonC_Top_matanim_joint"
     .balign 4
+.global lbl_803FFA80
+lbl_803FFA80:
     .asciz "ToyDspPokemonD_Top_matanim_joint"
     .balign 4
+.global lbl_803FFAA4
+lbl_803FFAA4:
     .asciz "ToyDspPokemonE_Top_matanim_joint"
     .balign 4
+.global lbl_803FFAC8
+lbl_803FFAC8:
     .asciz "ToyDspItemA_Top_matanim_joint"
     .balign 4
+.global lbl_803FFAE8
+lbl_803FFAE8:
     .asciz "ToyDspItemB_Top_matanim_joint"
     .balign 4
+.global lbl_803FFB08
+lbl_803FFB08:
     .asciz "ToyDspItemC_Top_matanim_joint"
     .balign 4
+.global lbl_803FFB28
+lbl_803FFB28:
     .asciz "ToyDspItemD_Top_matanim_joint"
     .balign 4
+.global lbl_803FFB48
+lbl_803FFB48:
     .asciz "ToyDspItemE_Top_matanim_joint"
     .balign 4
+.global lbl_803FFB68
+lbl_803FFB68:
     .asciz "TyQuesD.dat"
     .balign 4
+.global lbl_803FFB74
+lbl_803FFB74:
     .asciz "TyMycCmA.dat"
     .balign 4
+.global lbl_803FFB84
+lbl_803FFB84:
     .asciz "TyMycCmB.dat"
     .balign 4
+.global lbl_803FFB94
+lbl_803FFB94:
     .asciz "TyMycCmC.dat"
     .balign 4
+.global lbl_803FFBA4
+lbl_803FFBA4:
     .asciz "TyMycCmD.dat"
     .balign 4
+.global lbl_803FFBB4
+lbl_803FFBB4:
     .asciz "TyMycCmE.dat"
     .balign 4
     .asciz "TyMycR1A.dat"
@@ -17812,10 +17904,37 @@ lbl_803FF5EC:
     .balign 4
 .global lbl_803FFFA8
 lbl_803FFFA8:
-	.incbin "baserom.dol", 0x3FCFA8, 0x68
+    .4byte 0x803FFDA0
+    .4byte 0x803FFDB4
+    .4byte 0x803FFDC8
+    .4byte 0x803FFDDC
+    .4byte 0x803FFDF0
+    .4byte 0x803FFE04
+    .4byte 0x803FFE18
+    .4byte 0x803FFE2C
+    .4byte 0x803FFE40
+    .4byte 0x803FFE54
+    .4byte 0x803FFE68
+    .4byte 0x803FFE7C
+    .4byte 0x803FFE90
+    .4byte 0x803FFEA4
+    .4byte 0x803FFEB8
+    .4byte 0x803FFECC
+    .4byte 0x803FFEE0
+    .4byte 0x803FFEF4
+    .4byte 0x803FFF08
+    .4byte 0x803FFF1C
+    .4byte 0x803FFF30
+    .4byte 0x803FFF44
+    .4byte 0x803FFF58
+    .4byte 0x803FFF6C
+    .4byte 0x803FFF80
+    .4byte 0x803FFF94
 .global lbl_80400010
 lbl_80400010:
-	.incbin "baserom.dol", 0x3FD010, 0xC
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_8040001C
 lbl_8040001C:
     .asciz "Vi0102.dat"
