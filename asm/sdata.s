@@ -3007,6 +3007,8 @@ lbl_804D4F8C:
     .asciz "jobj"
     .balign 4
     .4byte 0x00000000
+.global lbl_804D4F98
+lbl_804D4F98:
     .4byte 0x00000000
     .4byte 0x00000000
 .global lbl_804D4FA0
