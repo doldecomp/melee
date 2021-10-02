@@ -17778,76 +17778,148 @@ lbl_803FFBA4:
 lbl_803FFBB4:
     .asciz "TyMycCmE.dat"
     .balign 4
+.global lbl_803FFBC4
+lbl_803FFBC4:
     .asciz "TyMycR1A.dat"
     .balign 4
+.global lbl_803FFBD4
+lbl_803FFBD4:
     .asciz "TyMycR1B.dat"
     .balign 4
+.global lbl_803FFBE4
+lbl_803FFBE4:
     .asciz "TyMycR1C.dat"
     .balign 4
+.global lbl_803FFBF4
+lbl_803FFBF4:
     .asciz "TyMycR1D.dat"
     .balign 4
+.global lbl_803FFC04
+lbl_803FFC04:
     .asciz "TyMycR1E.dat"
     .balign 4
+.global lbl_803FFC14
+lbl_803FFC14:
     .asciz "TyMycR2A.dat"
     .balign 4
+.global lbl_803FFC24
+lbl_803FFC24:
     .asciz "TyMycR2B.dat"
     .balign 4
+.global lbl_803FFC34
+lbl_803FFC34:
     .asciz "TyMycR2C.dat"
     .balign 4
+.global lbl_803FFC44
+lbl_803FFC44:
     .asciz "TyMycR2D.dat"
     .balign 4
+.global lbl_803FFC54
+lbl_803FFC54:
     .asciz "TyMycR2E.dat"
     .balign 4
+.global lbl_803FFC64
+lbl_803FFC64:
     .asciz "TyMapA.dat"
     .balign 4
+.global lbl_803FFC70
+lbl_803FFC70:
     .asciz "TyMapB.dat"
     .balign 4
+.global lbl_803FFC7C
+lbl_803FFC7C:
     .asciz "TyMapC.dat"
     .balign 4
+.global lbl_803FFC88
+lbl_803FFC88:
     .asciz "TyMapD.dat"
     .balign 4
+.global lbl_803FFC94
+lbl_803FFC94:
     .asciz "TyMapE.dat"
     .balign 4
+.global lbl_803FFCA0
+lbl_803FFCA0:
     .asciz "TySeriA.dat"
     .balign 4
+.global lbl_803FFCAC
+lbl_803FFCAC:
     .asciz "TySeriB.dat"
     .balign 4
+.global lbl_803FFCB8
+lbl_803FFCB8:
     .asciz "TySeriC.dat"
     .balign 4
+.global lbl_803FFCC4
+lbl_803FFCC4:
     .asciz "TySeriD.dat"
     .balign 4
+.global lbl_803FFCD0
+lbl_803FFCD0:
     .asciz "TySeriE.dat"
     .balign 4
+.global lbl_803FFCDC
+lbl_803FFCDC:
     .asciz "TyEtcA.dat"
     .balign 4
+.global lbl_803FFCE8
+lbl_803FFCE8:
     .asciz "TyEtcB.dat"
     .balign 4
+.global lbl_803FFCF4
+lbl_803FFCF4:
     .asciz "TyEtcC.dat"
     .balign 4
+.global lbl_803FFD00
+lbl_803FFD00:
     .asciz "TyEtcD.dat"
     .balign 4
+.global lbl_803FFD0C
+lbl_803FFD0C:
     .asciz "TyEtcE.dat"
     .balign 4
+.global lbl_803FFD18
+lbl_803FFD18:
     .asciz "TyPokeA.dat"
     .balign 4
+.global lbl_803FFD24
+lbl_803FFD24:
     .asciz "TyPokeB.dat"
     .balign 4
+.global lbl_803FFD30
+lbl_803FFD30:
     .asciz "TyPokeC.dat"
     .balign 4
+.global lbl_803FFD3C
+lbl_803FFD3C:
     .asciz "TyPokeD.dat"
     .balign 4
+.global lbl_803FFD48
+lbl_803FFD48:
     .asciz "TyPokeE.dat"
     .balign 4
+.global lbl_803FFD54
+lbl_803FFD54:
     .asciz "TyItemA.dat"
     .balign 4
+.global lbl_803FFD60
+lbl_803FFD60:
     .asciz "TyItemB.dat"
     .balign 4
+.global lbl_803FFD6C
+lbl_803FFD6C:
     .asciz "TyItemC.dat"
     .balign 4
+.global lbl_803FFD78
+lbl_803FFD78:
     .asciz "TyItemD.dat"
     .balign 4
+.global lbl_803FFD84
+lbl_803FFD84:
     .asciz "TyItemE.dat"
     .balign 4
+.global lbl_803FFD90
+lbl_803FFD90:
     .asciz "TyStandD.dat"
     .balign 4
     .asciz "PlCaDViWaitAJ.dat"
