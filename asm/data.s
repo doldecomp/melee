@@ -17922,86 +17922,138 @@ lbl_803FFD84:
 lbl_803FFD90:
     .asciz "TyStandD.dat"
     .balign 4
+.global lbl_803FFDA0
+lbl_803FFDA0:
     .asciz "PlCaDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFDB4
+lbl_803FFDB4:
     .asciz "PlDkDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFDC8
+lbl_803FFDC8:
     .asciz "PlFxDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFDDC
+lbl_803FFDDC:
     .asciz "PlGwDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFDF0
+lbl_803FFDF0:
     .asciz "PlKbDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFE04
+lbl_803FFE04:
     .asciz "PlKpDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFE18
+lbl_803FFE18:
     .asciz "PlLkDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFE2C
+lbl_803FFE2C:
     .asciz "PlLgDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFE40
+lbl_803FFE40:
     .asciz "PlMrDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFE54
+lbl_803FFE54:
     .asciz "PlMsDViWaitAj.dat"
     .balign 4
+.global lbl_803FFE68
+lbl_803FFE68:
     .asciz "PlMtDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFE7C
+lbl_803FFE7C:
     .asciz "PlNsDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFE90
+lbl_803FFE90:
     .asciz "PlPeDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFEA4
+lbl_803FFEA4:
     .asciz "PlPkDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFEB8
+lbl_803FFEB8:
     .asciz "PlPpDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFECC
+lbl_803FFECC:
     .asciz "PlPrDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFEE0
+lbl_803FFEE0:
     .asciz "PlSsDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFEF4
+lbl_803FFEF4:
     .asciz "PlYsDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFF08
+lbl_803FFF08:
     .asciz "PlZdDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFF1C
+lbl_803FFF1C:
     .asciz "PlSkDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFF30
+lbl_803FFF30:
     .asciz "PlFcDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFF44
+lbl_803FFF44:
     .asciz "PlClDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFF58
+lbl_803FFF58:
     .asciz "PlDrDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFF6C
+lbl_803FFF6C:
     .asciz "PlFeDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFF80
+lbl_803FFF80:
     .asciz "PlPcDViWaitAJ.dat"
     .balign 4
+.global lbl_803FFF94
+lbl_803FFF94:
     .asciz "PlGnDViWaitAJ.dat"
     .balign 4
 .global lbl_803FFFA8
 lbl_803FFFA8:
-    .4byte 0x803FFDA0
-    .4byte 0x803FFDB4
-    .4byte 0x803FFDC8
-    .4byte 0x803FFDDC
-    .4byte 0x803FFDF0
-    .4byte 0x803FFE04
-    .4byte 0x803FFE18
-    .4byte 0x803FFE2C
-    .4byte 0x803FFE40
-    .4byte 0x803FFE54
-    .4byte 0x803FFE68
-    .4byte 0x803FFE7C
-    .4byte 0x803FFE90
-    .4byte 0x803FFEA4
-    .4byte 0x803FFEB8
-    .4byte 0x803FFECC
-    .4byte 0x803FFEE0
-    .4byte 0x803FFEF4
-    .4byte 0x803FFF08
-    .4byte 0x803FFF1C
-    .4byte 0x803FFF30
-    .4byte 0x803FFF44
-    .4byte 0x803FFF58
-    .4byte 0x803FFF6C
-    .4byte 0x803FFF80
-    .4byte 0x803FFF94
+    .4byte lbl_803FFDA0
+    .4byte lbl_803FFDB4
+    .4byte lbl_803FFDC8
+    .4byte lbl_803FFDDC
+    .4byte lbl_803FFDF0
+    .4byte lbl_803FFE04
+    .4byte lbl_803FFE18
+    .4byte lbl_803FFE2C
+    .4byte lbl_803FFE40
+    .4byte lbl_803FFE54
+    .4byte lbl_803FFE68
+    .4byte lbl_803FFE7C
+    .4byte lbl_803FFE90
+    .4byte lbl_803FFEA4
+    .4byte lbl_803FFEB8
+    .4byte lbl_803FFECC
+    .4byte lbl_803FFEE0
+    .4byte lbl_803FFEF4
+    .4byte lbl_803FFF08
+    .4byte lbl_803FFF1C
+    .4byte lbl_803FFF30
+    .4byte lbl_803FFF44
+    .4byte lbl_803FFF58
+    .4byte lbl_803FFF6C
+    .4byte lbl_803FFF80
+    .4byte lbl_803FFF94
 .global lbl_80400010
 lbl_80400010:
     .4byte 0x00000000
