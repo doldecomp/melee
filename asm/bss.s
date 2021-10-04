@@ -137,7 +137,10 @@ lbl_8045993C:
 	.skip 0x30
 .global lbl_8045996C
 lbl_8045996C:
-	.skip 0xFC
+	.skip 0x84
+.global lbl_804599F0
+lbl_804599F0:
+    .skip 0x78
 .global lbl_80459A68
 lbl_80459A68:
 	.skip 0xC
@@ -146,7 +149,13 @@ lbl_80459A74:
 	.skip 0x18
 .global lbl_80459A8C
 lbl_80459A8C:
-	.skip 0xFC
+	.skip 0xC
+.global lbl_80459A98
+lbl_80459A98:
+    .skip 0x90
+.global lbl_80459B28
+lbl_80459B28:
+    .skip 0x60
 .global lbl_80459B88
 lbl_80459B88:
 	.skip 0x658
