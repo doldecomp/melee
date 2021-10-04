@@ -145,3 +145,24 @@ lbl_80005BA0:
 /* 80005BA4 00002784  38 21 00 08 */	addi r1, r1, 8
 /* 80005BA8 00002788  7C 08 03 A6 */	mtlr r0
 /* 80005BAC 0000278C  4E 80 00 20 */	blr 
+
+.section .data
+
+.global lbl_803B9840
+lbl_803B9840:
+    .4byte Command_00
+    .4byte Command_04
+    .4byte Command_08
+    .4byte func_800059DC
+    .4byte func_80005A30
+    .4byte func_80005A88
+    .4byte func_80005AC4
+    .4byte func_80005AE4
+    .4byte func_80005B00
+    .4byte func_80005B18
+    .4byte 0
+    .4byte 0
+    .4byte 0
+    .4byte 0
+    .4byte 0
+    .4byte 0
