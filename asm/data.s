@@ -16501,63 +16501,63 @@ lbl_803C72A0:
     .4byte 0x00000128
     .4byte 0x003C0111
     .4byte 0x12000000
-    .4byte 0x800E6368
-    .4byte 0x800E6ADC
-    .4byte 0x800E6B7C
-    .4byte 0x800E6C3C
+    .4byte func_800E6368
+    .4byte func_800E6ADC
+    .4byte func_800E6B7C
+    .4byte func_800E6C3C
     .4byte func_800761C8
     .4byte 0x00000129
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte 0x800E65BC
-    .4byte 0x800E6B04
-    .4byte 0x800E6B9C
-    .4byte 0x800E6C5C
+    .4byte func_800E65BC
+    .4byte func_800E6B04
+    .4byte func_800E6B9C
+    .4byte func_800E6C5C
     .4byte func_800761C8
     .4byte 0x0000012A
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte 0x800E667C
-    .4byte 0x800E6B08
-    .4byte 0x800E6BBC
-    .4byte 0x800E6C7C
+    .4byte func_800E667C
+    .4byte func_800E6B08
+    .4byte func_800E6BBC
+    .4byte func_800E6C7C
     .4byte func_800761C8
     .4byte 0x0000012B
     .4byte 0x003C0511
     .4byte 0x12000000
-    .4byte 0x800E6740
-    .4byte 0x800E6B30
-    .4byte 0x800E6BDC
-    .4byte 0x800E6C9C
+    .4byte func_800E6740
+    .4byte func_800E6B30
+    .4byte func_800E6BDC
+    .4byte func_800E6C9C
     .4byte func_800761C8
     .4byte 0x0000012C
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte 0x800E69BC
-    .4byte 0x800E6B58
-    .4byte 0x800E6BFC
-    .4byte 0x800E6CBC
+    .4byte func_800E69BC
+    .4byte func_800E6B58
+    .4byte func_800E6BFC
+    .4byte func_800E6CBC
     .4byte func_800761C8
     .4byte 0x0000012D
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte 0x800EA004
-    .4byte 0x800EA07C
-    .4byte 0x800EA084
-    .4byte 0x800EA128
+    .4byte func_800EA004
+    .4byte func_800EA07C
+    .4byte func_800EA084
+    .4byte func_800EA128
     .4byte func_800761C8
     .4byte 0x0000012E
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte 0x800EA294
-    .4byte 0x800EA3F4
-    .4byte 0x800EA47C
-    .4byte 0x800EA5EC
+    .4byte func_800EA294
+    .4byte func_800EA3F4
+    .4byte func_800EA47C
+    .4byte func_800EA5EC
     .4byte func_800761C8
     .4byte 0x0000012F
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte 0x800EA908
+    .4byte func_800EA908
     .4byte 0x800EA9A4
     .4byte 0x800EA9AC
     .4byte 0x800EAB90
@@ -16725,50 +16725,50 @@ lbl_803C72A0:
     .4byte 0x00000141
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000142
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000143
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000144
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000145
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000146
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x506C4678
     .4byte 0x2E646174
@@ -26771,63 +26771,63 @@ lbl_803D0F90:
     .4byte 0x00000128
     .4byte 0x003C0111
     .4byte 0x12000000
-    .4byte 0x800E6368
-    .4byte 0x800E6ADC
-    .4byte 0x800E6B7C
-    .4byte 0x800E6C3C
+    .4byte func_800E6368
+    .4byte func_800E6ADC
+    .4byte func_800E6B7C
+    .4byte func_800E6C3C
     .4byte func_800761C8
     .4byte 0x00000129
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte 0x800E65BC
-    .4byte 0x800E6B04
-    .4byte 0x800E6B9C
-    .4byte 0x800E6C5C
+    .4byte func_800E65BC
+    .4byte func_800E6B04
+    .4byte func_800E6B9C
+    .4byte func_800E6C5C
     .4byte func_800761C8
     .4byte 0x0000012A
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte 0x800E667C
-    .4byte 0x800E6B08
-    .4byte 0x800E6BBC
-    .4byte 0x800E6C7C
+    .4byte func_800E667C
+    .4byte func_800E6B08
+    .4byte func_800E6BBC
+    .4byte func_800E6C7C
     .4byte func_800761C8
     .4byte 0x0000012B
     .4byte 0x003C0511
     .4byte 0x12000000
-    .4byte 0x800E6740
-    .4byte 0x800E6B30
-    .4byte 0x800E6BDC
-    .4byte 0x800E6C9C
+    .4byte func_800E6740
+    .4byte func_800E6B30
+    .4byte func_800E6BDC
+    .4byte func_800E6C9C
     .4byte func_800761C8
     .4byte 0x0000012C
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte 0x800E69BC
-    .4byte 0x800E6B58
-    .4byte 0x800E6BFC
-    .4byte 0x800E6CBC
+    .4byte func_800E69BC
+    .4byte func_800E6B58
+    .4byte func_800E6BFC
+    .4byte func_800E6CBC
     .4byte func_800761C8
     .4byte 0x0000012D
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte 0x800EA004
-    .4byte 0x800EA07C
-    .4byte 0x800EA084
-    .4byte 0x800EA128
+    .4byte func_800EA004
+    .4byte func_800EA07C
+    .4byte func_800EA084
+    .4byte func_800EA128
     .4byte func_800761C8
     .4byte 0x0000012E
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte 0x800EA294
-    .4byte 0x800EA3F4
-    .4byte 0x800EA47C
-    .4byte 0x800EA5EC
+    .4byte func_800EA294
+    .4byte func_800EA3F4
+    .4byte func_800EA47C
+    .4byte func_800EA5EC
     .4byte func_800761C8
     .4byte 0x0000012F
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte 0x800EA908
+    .4byte func_800EA908
     .4byte 0x800EA9A4
     .4byte 0x800EA9AC
     .4byte 0x800EAB90
@@ -26995,50 +26995,50 @@ lbl_803D0F90:
     .4byte 0x00000141
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000142
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000143
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000144
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000145
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x00000146
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte 0x800E5B18
-    .4byte 0x800E5C38
-    .4byte 0x800E5C3C
-    .4byte 0x800E5C5C
+    .4byte func_800E5B18
+    .4byte func_800E5C38
+    .4byte func_800E5C3C
+    .4byte func_800E5C5C
     .4byte func_800761C8
     .4byte 0x506C4663
     .4byte 0x2E646174
