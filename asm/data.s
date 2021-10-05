@@ -6268,69 +6268,69 @@ jtbl_803BFB28:
     .4byte lbl_80065448
     .4byte lbl_80065468
     .4byte lbl_80065488
-    .4byte 0x800654B0
-    .4byte 0x80065580
-    .4byte 0x80065650
-    .4byte 0x80065670
-    .4byte 0x80065690
-    .4byte 0x800657CC
-    .4byte 0x800657E0
-    .4byte 0x800657F4
-    .4byte 0x80065808
-    .4byte 0x800659CC
-    .4byte 0x80065AA4
-    .4byte 0x80065ACC
-    .4byte 0x80065B1C
-    .4byte 0x80065C08
-    .4byte 0x80065C58
-    .4byte 0x80065D44
-    .4byte 0x80065DB0
-    .4byte 0x80065DD8
-    .4byte 0x80065DF8
-    .4byte 0x80065E00
-    .4byte 0x80065E08
-    .4byte 0x80065E74
-    .4byte 0x80065F74
-    .4byte 0x80066118
-    .4byte 0x80066138
-    .4byte 0x80066158
-    .4byte 0x80066178
-    .4byte 0x800661A0
-    .4byte 0x8006634C
-    .4byte 0x800663C0
-    .4byte 0x80066410
-    .4byte 0x80066430
-    .4byte 0x80066450
-    .4byte 0x800664BC
-    .4byte 0x800664DC
-    .4byte 0x800664FC
-    .4byte 0x80066540
-    .4byte 0x80066630
-    .4byte 0x80066674
-    .4byte 0x80066698
-    .4byte 0x800666A0
-    .4byte 0x800666A8
-    .4byte 0x80066704
-    .4byte 0x80066718
-    .4byte 0x8006672C
-    .4byte 0x80066740
-    .4byte 0x80066754
-    .4byte 0x80066948
-    .4byte 0x80066768
-    .4byte 0x800667E0
-    .4byte 0x80066858
-    .4byte 0x800668D0
-    .4byte 0x80066718
-    .4byte 0x8006672C
-    .4byte 0x80066740
-    .4byte 0x80066754
-    .4byte 0x800669AC
-    .4byte 0x800669C0
-    .4byte 0x800669D4
-    .4byte 0x80066A38
-    .4byte 0x80066A9C
-    .4byte 0x80066AB0
-    .4byte 0x80066AC4
+    .4byte lbl_800654B0
+    .4byte lbl_80065580
+    .4byte lbl_80065650
+    .4byte lbl_80065670
+    .4byte lbl_80065690
+    .4byte lbl_800657CC
+    .4byte lbl_800657E0
+    .4byte lbl_800657F4
+    .4byte lbl_80065808
+    .4byte lbl_800659CC
+    .4byte lbl_80065AA4
+    .4byte lbl_80065ACC
+    .4byte lbl_80065B1C
+    .4byte lbl_80065C08
+    .4byte lbl_80065C58
+    .4byte lbl_80065D44
+    .4byte lbl_80065DB0
+    .4byte lbl_80065DD8
+    .4byte lbl_80065DF8
+    .4byte lbl_80065E00
+    .4byte lbl_80065E08
+    .4byte lbl_80065E74
+    .4byte lbl_80065F74
+    .4byte lbl_80066118
+    .4byte lbl_80066138
+    .4byte lbl_80066158
+    .4byte lbl_80066178
+    .4byte lbl_800661A0
+    .4byte lbl_8006634C
+    .4byte lbl_800663C0
+    .4byte lbl_80066410
+    .4byte lbl_80066430
+    .4byte lbl_80066450
+    .4byte lbl_800664BC
+    .4byte lbl_800664DC
+    .4byte lbl_800664FC
+    .4byte lbl_80066540
+    .4byte lbl_80066630
+    .4byte lbl_80066674
+    .4byte lbl_80066698
+    .4byte lbl_800666A0
+    .4byte lbl_800666A8
+    .4byte lbl_80066704
+    .4byte lbl_80066718
+    .4byte lbl_8006672C
+    .4byte lbl_80066740
+    .4byte lbl_80066754
+    .4byte lbl_80066948
+    .4byte lbl_80066768
+    .4byte lbl_800667E0
+    .4byte lbl_80066858
+    .4byte lbl_800668D0
+    .4byte lbl_80066718
+    .4byte lbl_8006672C
+    .4byte lbl_80066740
+    .4byte lbl_80066754
+    .4byte lbl_800669AC
+    .4byte lbl_800669C0
+    .4byte lbl_800669D4
+    .4byte lbl_80066A38
+    .4byte lbl_80066A9C
+    .4byte lbl_80066AB0
+    .4byte lbl_80066AC4
     .4byte lbl_80066AD8
     .4byte lbl_80066AEC
     .4byte lbl_80066BC0
@@ -6353,308 +6353,356 @@ jtbl_803BFB28:
     .4byte lbl_80067204
     .4byte lbl_80067224
     .4byte lbl_800671C4
-    .4byte 0x4566436F
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666643
-    .4byte 0x6F6D6D6F
-    .4byte 0x6E446174
-    .4byte 0x61546162
-    .4byte 0x6C650000
-    .4byte 0x45664D72
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566664D
-    .4byte 0x6172696F
-    .4byte 0x44617461
-    .4byte 0x5461626C
-    .4byte 0x65000000
-    .4byte 0x45665373
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666653
-    .4byte 0x616D7573
-    .4byte 0x44617461
-    .4byte 0x5461626C
-    .4byte 0x65000000
-    .4byte 0x45664678
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666646
-    .4byte 0x6F784461
-    .4byte 0x74615461
-    .4byte 0x626C6500
-    .4byte 0x45664361
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666643
-    .4byte 0x61707461
-    .4byte 0x696E4461
-    .4byte 0x74615461
-    .4byte 0x626C6500
-    .4byte 0x45664B62
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566664B
-    .4byte 0x69726279
-    .4byte 0x44617461
-    .4byte 0x5461626C
-    .4byte 0x65000000
-    .4byte 0x45664C6B
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566664C
-    .4byte 0x696E6B44
-    .4byte 0x61746154
-    .4byte 0x61626C65
-    .4byte NULL
-    .4byte 0x4566506B
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666650
-    .4byte 0x696B6163
-    .4byte 0x68754461
-    .4byte 0x74615461
-    .4byte 0x626C6500
-    .4byte 0x4566446B
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666644
-    .4byte 0x6F6E6B65
-    .4byte 0x79446174
-    .4byte 0x61546162
-    .4byte 0x6C650000
-    .4byte 0x45665973
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666659
-    .4byte 0x6F736869
-    .4byte 0x44617461
-    .4byte 0x5461626C
-    .4byte 0x65000000
-    .4byte 0x45664E73
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566664E
-    .4byte 0x65737344
-    .4byte 0x61746154
-    .4byte 0x61626C65
-    .4byte NULL
-    .4byte 0x45665072
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666650
-    .4byte 0x7572696E
-    .4byte 0x44617461
-    .4byte 0x5461626C
-    .4byte 0x65000000
-    .4byte 0x45664B70
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566664B
-    .4byte 0x6F6F7061
-    .4byte 0x44617461
-    .4byte 0x5461626C
-    .4byte 0x65000000
-    .4byte 0x45664D74
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566664D
-    .4byte 0x65777477
-    .4byte 0x6F446174
-    .4byte 0x61546162
-    .4byte 0x6C650000
-    .4byte 0x45664963
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666649
-    .4byte 0x6365636C
-    .4byte 0x696D6265
-    .4byte 0x72446174
-    .4byte 0x61546162
-    .4byte 0x6C650000
-    .4byte 0x45665065
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x65666650
-    .4byte 0x65616368
-    .4byte 0x44617461
-    .4byte 0x5461626C
-    .4byte 0x65000000
-    .4byte 0x45664D73
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566664D
-    .4byte 0x61727344
-    .4byte 0x61746154
-    .4byte 0x61626C65
-    .4byte NULL
-    .4byte 0x45665A64
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566665A
-    .4byte 0x656C6461
-    .4byte 0x44617461
-    .4byte 0x5461626C
-    .4byte 0x65000000
-    .4byte 0x45664C67
-    .4byte 0x44617461
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6566664C
+.global lbl_803BFD68
+lbl_803BFD68:
+    .asciz "EfCoData.dat"
+    .balign 4
+.global lbl_803BFD78
+lbl_803BFD78:
+    .asciz "effCommonDataTable"
+    .balign 4
+.global lbl_803BFD8C
+lbl_803BFD8C:
+    .asciz "EfMrData.dat"
+    .balign 4
+.global lbl_803BFD9C
+lbl_803BFD9C:
+    .asciz "effMarioDataTable"
+    .balign 4
+.global lbl_803BFDB0
+lbl_803BFDB0:
+    .asciz "EfSsData.dat"
+    .balign 4
+.global lbl_803BFDC0
+lbl_803BFDC0:
+    .asciz "effSamusDataTable"
+    .balign 4
+.global lbl_803BFDD4
+lbl_803BFDD4:
+    .asciz "EfFxData.dat"
+    .balign 4
+.global lbl_803BFDE4
+lbl_803BFDE4:
+    .asciz "effFoxDataTable"
+    .balign 4
+.global lbl_803BFDF4
+lbl_803BFDF4:
+    .asciz "EfCaData.dat"
+    .balign 4
+.global lbl_803BFE04
+lbl_803BFE04:
+    .asciz "effCaptainDataTable"
+    .balign 4
+.global lbl_803BFE18
+lbl_803BFE18:
+    .asciz "EfKbData.dat"
+    .balign 4
+.global lbl_803BFE28
+lbl_803BFE28:
+    .asciz "effKirbyDataTable"
+    .balign 4
+.global lbl_803BFE3C
+lbl_803BFE3C:
+    .asciz "EfLkData.dat"
+    .balign 4
+.global lbl_803BFE4C
+lbl_803BFE4C:
+    .asciz "effLinkDataTable"
+    .balign 4
+.global lbl_803BFE60
+lbl_803BFE60:
+    .asciz "EfPkData.dat"
+    .balign 4
+.global lbl_803BFE70
+lbl_803BFE70:
+    .asciz "effPikachuDataTable"
+    .balign 4
+.global lbl_803BFE84
+lbl_803BFE84:
+    .asciz "EfDkData.dat"
+    .balign 4
+.global lbl_803BFE94
+lbl_803BFE94:
+    .asciz "effDonkeyDataTable"
+    .balign 4
+.global lbl_803BFEA8
+lbl_803BFEA8:
+    .asciz "EfYsData.dat"
+    .balign 4
+.global lbl_803BFEB8
+lbl_803BFEB8:
+    .asciz "effYoshiDataTable"
+    .balign 4
+.global lbl_803BFECC
+lbl_803BFECC:
+    .asciz "EfNsData.dat"
+    .balign 4
+.global lbl_803BFEDC
+lbl_803BFEDC:
+    .asciz "effNessDataTable"
+    .balign 4
+.global lbl_803BFEF0
+lbl_803BFEF0:
+    .asciz "EfPrData.dat"
+    .balign 4
+.global lbl_803BFF00
+lbl_803BFF00:
+    .asciz "effPurinDataTable"
+    .balign 4
+.global lbl_803BFF14
+lbl_803BFF14:
+    .asciz "EfKpData.dat"
+    .balign 4
+.global lbl_803BFF24
+lbl_803BFF24:
+    .asciz "effKoopaDataTable"
+    .balign 4
+.global lbl_803BFF38
+lbl_803BFF38:
+    .asciz "EfMtData.dat"
+    .balign 4
+.global lbl_803BFF48
+lbl_803BFF48:
+    .asciz "effMewtwoDataTable"
+    .balign 4
+.global lbl_803BFF5C
+lbl_803BFF5C:
+    .asciz "EfIcData.dat"
+    .balign 4
+.global lbl_803BFF6C
+lbl_803BFF6C:
+    .asciz "effIceclimberDataTable"
+    .balign 4
+.global lbl_803BFF84
+lbl_803BFF84:
+    .asciz "EfPeData.dat"
+    .balign 4
+.global lbl_803BFF94
+lbl_803BFF94:
+    .asciz "effPeachDataTable"
+    .balign 4
+.global lbl_803BFFA8
+lbl_803BFFA8:
+    .asciz "EfMsData.dat"
+    .balign 4
+.global lbl_803BFFB8
+lbl_803BFFB8:
+    .asciz "effMarsDataTable"
+    .balign 4
+.global lbl_803BFFCC
+lbl_803BFFCC:
+    .asciz "EfZdData.dat"
+    .balign 4
+.global lbl_803BFFDC
+lbl_803BFFDC:
+    .asciz "effZeldaDataTable"
+    .balign 4
+.global lbl_803BFFF0
+lbl_803BFFF0:
+    .asciz "EfLgData.dat"
+    .balign 4
+.global lbl_803C0000
+lbl_803C0000:
+    .ascii "effL"
 .global lbl_803C0004
 lbl_803C0004:
     .asciz "uigiDataTable"
     .balign 4
+.global lbl_803C0014
+lbl_803C0014:
     .asciz "EfGnData.dat"
     .balign 4
+.global lbl_803C0024
+lbl_803C0024:
     .asciz "effGanonDataTable"
     .balign 4
+.global lbl_803C0038
+lbl_803C0038:
     .asciz "EfKbMs.dat"
     .balign 4
+.global lbl_803C0044
+lbl_803C0044:
     .asciz "effKirbyMarsDataTable"
     .balign 4
+.global lbl_803C005C
+lbl_803C005C:
     .asciz "EfKbZd.dat"
     .balign 4
+.global lbl_803C0068
+lbl_803C0068:
     .asciz "effKirbyZeldaDataTable"
     .balign 4
+.global lbl_803C0080
+lbl_803C0080:
     .asciz "EfMnData.dat"
     .balign 4
+.global lbl_803C0090
+lbl_803C0090:
     .asciz "effMenuDataTable"
     .balign 4
+.global lbl_803C00A4
+lbl_803C00A4:
     .asciz "EfKbMr.dat"
     .balign 4
+.global lbl_803C00B0
+lbl_803C00B0:
     .asciz "effKirbyMarioDataTable"
     .balign 4
+.global lbl_803C00C8
+lbl_803C00C8:
     .asciz "EfKbFx.dat"
     .balign 4
+.global lbl_803C00D4
+lbl_803C00D4:
     .asciz "effKirbyFoxDataTable"
     .balign 4
+.global lbl_803C00EC
+lbl_803C00EC:
     .asciz "EfKbSs.dat"
     .balign 4
+.global lbl_803C00F8
+lbl_803C00F8:
     .asciz "effKirbySamusDataTable"
     .balign 4
+.global lbl_803C0110
+lbl_803C0110:
     .asciz "EfKbPk.dat"
     .balign 4
+.global lbl_803C011C
+lbl_803C011C:
     .asciz "effKirbyPikachuDataTable"
     .balign 4
+.global lbl_803C0138
+lbl_803C0138:
     .asciz "EfKbLg.dat"
     .balign 4
+.global lbl_803C0144
+lbl_803C0144:
     .asciz "effKirbyLuigiDataTable"
     .balign 4
+.global lbl_803C015C
+lbl_803C015C:
     .asciz "EfKbCa.dat"
     .balign 4
+.global lbl_803C0168
+lbl_803C0168:
     .asciz "effKirbyCaptainDataTable"
     .balign 4
+.global lbl_803C0184
+lbl_803C0184:
     .asciz "EfKbDk.dat"
     .balign 4
+.global lbl_803C0190
+lbl_803C0190:
     .asciz "effKirbyDonkeyDataTable"
     .balign 4
+.global lbl_803C01A8
+lbl_803C01A8:
     .asciz "EfKbKp.dat"
     .balign 4
+.global lbl_803C01B4
+lbl_803C01B4:
     .asciz "effKirbyKoopaDataTable"
     .balign 4
+.global lbl_803C01CC
+lbl_803C01CC:
     .asciz "EfKbIc.dat"
     .balign 4
+.global lbl_803C01D8
+lbl_803C01D8:
     .asciz "effKirbyIceDataTable"
     .balign 4
+.global lbl_803C01F0
+lbl_803C01F0:
     .asciz "EfKbGn.dat"
     .balign 4
+.global lbl_803C01FC
+lbl_803C01FC:
     .asciz "effKirbyGanonDataTable"
     .balign 4
+.global lbl_803C0214
+lbl_803C0214:
     .asciz "EfKbFe.dat"
     .balign 4
+.global lbl_803C0220
+lbl_803C0220:
     .asciz "effKirbyEmblemDataTable"
     .balign 4
+.global lbl_803C0238
+lbl_803C0238:
     .asciz "EfFeData.dat"
     .balign 4
+.global lbl_803C0248
+lbl_803C0248:
     .asciz "effEmblemDataTable"
     .balign 4
 .global lbl_803C025C
 lbl_803C025C:
-    .4byte 0x803BFD68
-    .4byte 0x803BFD78
+    .4byte lbl_803BFD68
+    .4byte lbl_803BFD78
     .4byte NULL
-    .4byte 0x803BFD8C
-    .4byte 0x803BFD9C
+    .4byte lbl_803BFD8C
+    .4byte lbl_803BFD9C
     .4byte NULL
-    .4byte 0x803BFDB0
-    .4byte 0x803BFDC0
+    .4byte lbl_803BFDB0
+    .4byte lbl_803BFDC0
     .4byte NULL
-    .4byte 0x803BFDD4
-    .4byte 0x803BFDE4
+    .4byte lbl_803BFDD4
+    .4byte lbl_803BFDE4
     .4byte NULL
-    .4byte 0x803BFDF4
-    .4byte 0x803BFE04
+    .4byte lbl_803BFDF4
+    .4byte lbl_803BFE04
     .4byte NULL
-    .4byte 0x803BFE18
-    .4byte 0x803BFE28
+    .4byte lbl_803BFE18
+    .4byte lbl_803BFE28
     .4byte NULL
-    .4byte 0x803BFE3C
-    .4byte 0x803BFE4C
+    .4byte lbl_803BFE3C
+    .4byte lbl_803BFE4C
     .4byte NULL
-    .4byte 0x803BFE60
-    .4byte 0x803BFE70
+    .4byte lbl_803BFE60
+    .4byte lbl_803BFE70
     .4byte NULL
-    .4byte 0x803BFE84
-    .4byte 0x803BFE94
+    .4byte lbl_803BFE84
+    .4byte lbl_803BFE94
     .4byte NULL
-    .4byte 0x803BFEA8
-    .4byte 0x803BFEB8
+    .4byte lbl_803BFEA8
+    .4byte lbl_803BFEB8
     .4byte NULL
-    .4byte 0x803BFECC
-    .4byte 0x803BFEDC
+    .4byte lbl_803BFECC
+    .4byte lbl_803BFEDC
     .4byte NULL
-    .4byte 0x803BFEF0
-    .4byte 0x803BFF00
+    .4byte lbl_803BFEF0
+    .4byte lbl_803BFF00
     .4byte NULL
-    .4byte 0x803BFF14
-    .4byte 0x803BFF24
+    .4byte lbl_803BFF14
+    .4byte lbl_803BFF24
     .4byte NULL
-    .4byte 0x803BFF38
-    .4byte 0x803BFF48
+    .4byte lbl_803BFF38
+    .4byte lbl_803BFF48
     .4byte NULL
-    .4byte 0x803BFF5C
-    .4byte 0x803BFF6C
+    .4byte lbl_803BFF5C
+    .4byte lbl_803BFF6C
     .4byte NULL
-    .4byte 0x803BFF84
-    .4byte 0x803BFF94
+    .4byte lbl_803BFF84
+    .4byte lbl_803BFF94
     .4byte NULL
-    .4byte 0x803BFFA8
-    .4byte 0x803BFFB8
+    .4byte lbl_803BFFA8
+    .4byte lbl_803BFFB8
     .4byte NULL
-    .4byte 0x803BFFCC
-    .4byte 0x803BFFDC
+    .4byte lbl_803BFFCC
+    .4byte lbl_803BFFDC
     .4byte NULL
-    .4byte 0x803BFFF0
-    .4byte 0x803C0000
+    .4byte lbl_803BFFF0
+    .4byte lbl_803C0000
     .4byte NULL
-    .4byte 0x803C0014
-    .4byte 0x803C0024
+    .4byte lbl_803C0014
+    .4byte lbl_803C0024
     .4byte NULL
-    .4byte 0x803C0038
-    .4byte 0x803C0044
+    .4byte lbl_803C0038
+    .4byte lbl_803C0044
     .4byte NULL
-    .4byte 0x803C005C
-    .4byte 0x803C0068
+    .4byte lbl_803C005C
+    .4byte lbl_803C0068
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -6683,38 +6731,38 @@ lbl_803C025C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x803C0080
-    .4byte 0x803C0090
+    .4byte lbl_803C0080
+    .4byte lbl_803C0090
     .4byte NULL
-    .4byte 0x803C00A4
-    .4byte 0x803C00B0
+    .4byte lbl_803C00A4
+    .4byte lbl_803C00B0
     .4byte NULL
-    .4byte 0x803C00C8
-    .4byte 0x803C00D4
+    .4byte lbl_803C00C8
+    .4byte lbl_803C00D4
     .4byte NULL
-    .4byte 0x803C00EC
-    .4byte 0x803C00F8
+    .4byte lbl_803C00EC
+    .4byte lbl_803C00F8
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x803C0110
-    .4byte 0x803C011C
+    .4byte lbl_803C0110
+    .4byte lbl_803C011C
     .4byte NULL
-    .4byte 0x803C0138
-    .4byte 0x803C0144
+    .4byte lbl_803C0138
+    .4byte lbl_803C0144
     .4byte NULL
-    .4byte 0x803C015C
-    .4byte 0x803C0168
+    .4byte lbl_803C015C
+    .4byte lbl_803C0168
     .4byte NULL
-    .4byte 0x803C0184
-    .4byte 0x803C0190
+    .4byte lbl_803C0184
+    .4byte lbl_803C0190
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x803C01A8
-    .4byte 0x803C01B4
+    .4byte lbl_803C01A8
+    .4byte lbl_803C01B4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -6728,17 +6776,17 @@ lbl_803C025C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x803C01CC
-    .4byte 0x803C01D8
+    .4byte lbl_803C01CC
+    .4byte lbl_803C01D8
     .4byte NULL
-    .4byte 0x803C01F0
-    .4byte 0x803C01FC
+    .4byte lbl_803C01F0
+    .4byte lbl_803C01FC
     .4byte NULL
-    .4byte 0x803C0214
-    .4byte 0x803C0220
+    .4byte lbl_803C0214
+    .4byte lbl_803C0220
     .4byte NULL
-    .4byte 0x803C0238
-    .4byte 0x803C0248
+    .4byte lbl_803C0238
+    .4byte lbl_803C0248
     .4byte NULL
     .4byte NULL
     .4byte NULL
