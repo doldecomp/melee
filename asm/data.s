@@ -78597,18 +78597,18 @@ lbl_80405FC4:
     .balign 4
 .global jtbl_80405FEC
 jtbl_80405FEC:
-    .4byte 0x80364604
-    .4byte 0x80364614
-    .4byte 0x80364628
-    .4byte 0x8036463C
-    .4byte 0x80364650
-    .4byte 0x80364670
-    .4byte 0x80364684
-    .4byte 0x80364698
-    .4byte 0x80364660
-    .4byte 0x803646AC
-    .4byte 0x803646C0
-    .4byte 0x803646D4
+    .4byte func_803645D8 + 0x2C
+    .4byte func_803645D8 + 0x3C
+    .4byte func_803645D8 + 0x50
+    .4byte func_803645D8 + 0x64
+    .4byte func_803645D8 + 0x78
+    .4byte func_803645D8 + 0x98
+    .4byte func_803645D8 + 0xAC
+    .4byte func_803645D8 + 0xC0
+    .4byte func_803645D8 + 0x88
+    .4byte func_803645D8 + 0xD4
+    .4byte func_803645D8 + 0xE8
+    .4byte func_803645D8 + 0xFC
 .global lbl_8040601C
 lbl_8040601C:
     .asciz "unexpected argument format.\n"
@@ -78619,33 +78619,33 @@ lbl_8040603C:
     .balign 4
 .global jtbl_80406058
 jtbl_80406058:
-    .4byte 0x803652E4
-    .4byte 0x803652E4
-    .4byte 0x80365114
-    .4byte 0x80364E2C
-    .4byte 0x803652E4
-    .4byte 0x803652AC
-    .4byte 0x80364D2C
-    .4byte 0x8036502C
-    .4byte 0x80364F18
-    .4byte 0x80364F94
-    .4byte 0x803651EC
-    .4byte 0x80364FE8
-    .4byte 0x80365230
+    .4byte func_80364C08 + 0x6DC
+    .4byte func_80364C08 + 0x6DC
+    .4byte func_80364C08 + 0x50C
+    .4byte func_80364C08 + 0x224
+    .4byte func_80364C08 + 0x6DC
+    .4byte func_80364C08 + 0x6A4
+    .4byte func_80364C08 + 0x124
+    .4byte func_80364C08 + 0x424
+    .4byte func_80364C08 + 0x310
+    .4byte func_80364C08 + 0x38C
+    .4byte func_80364C08 + 0x5E4
+    .4byte func_80364C08 + 0x3E0
+    .4byte func_80364C08 + 0x628
 .global jtbl_8040608C
 jtbl_8040608C:
-    .4byte 0x80364D0C
-    .4byte 0x80364CAC
-    .4byte 0x80364CC8
-    .4byte 0x80364CE0
-    .4byte 0x80364D0C
-    .4byte 0x80364CAC
-    .4byte 0x80364CC8
-    .4byte 0x80364CE0
-    .4byte 0x80364D0C
-    .4byte 0x80364CAC
-    .4byte 0x80364CC8
-    .4byte 0x80364CE0
+    .4byte func_80364C08 + 0x104
+    .4byte func_80364C08 + 0xA4
+    .4byte func_80364C08 + 0xC0
+    .4byte func_80364C08 + 0xD8
+    .4byte func_80364C08 + 0x104
+    .4byte func_80364C08 + 0xA4
+    .4byte func_80364C08 + 0xC0
+    .4byte func_80364C08 + 0xD8
+    .4byte func_80364C08 + 0x104
+    .4byte func_80364C08 + 0xA4
+    .4byte func_80364C08 + 0xC0
+    .4byte func_80364C08 + 0xD8
     .4byte NULL
 .global lbl_804060C0
 lbl_804060C0:
