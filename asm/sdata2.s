@@ -7240,28 +7240,28 @@ lbl_804DA6B0:
 	.4byte 0x44268000
 .global lbl_804DA6B4
 lbl_804DA6B4:
-	.4byte 0x803D9EE8
+	.4byte lbl_803D9EE8
 .global lbl_804DA6B8
 lbl_804DA6B8:
-	.4byte 0x803D9EF4
+	.4byte lbl_803D9EF4
 .global lbl_804DA6BC
 lbl_804DA6BC:
-	.4byte 0x803D9F00
+	.4byte lbl_803D9F00
 .global lbl_804DA6C0
 lbl_804DA6C0:
-	.4byte 0x803D9F00
+	.4byte lbl_803D9F00
 .global lbl_804DA6C4
 lbl_804DA6C4:
-	.4byte 0x803D9EE8
+	.4byte lbl_803D9EE8
 .global lbl_804DA6C8
 lbl_804DA6C8:
-	.4byte 0x803D9EF4
+	.4byte lbl_803D9EF4
 .global lbl_804DA6CC
 lbl_804DA6CC:
-	.4byte 0x803D9F00
+	.4byte lbl_803D9F00
 .global lbl_804DA6D0
 lbl_804DA6D0:
-	.4byte 0x803D9F00
+	.4byte lbl_803D9F00
 .global lbl_804DA6D4
 lbl_804DA6D4:
 	.4byte 0x43CFD89A

@@ -35429,12 +35429,18 @@ jtbl_803D9E9C:
 	.4byte lbl_8018C560
 	.4byte lbl_8018C684
 	.4byte lbl_8018C718
+.global lbl_803D9EE8
+lbl_803D9EE8:
     .4byte 0x83518358
     .4byte 0x83672030
     .4byte 0x30000000
+.global lbl_803D9EF4
+lbl_803D9EF4:
     .4byte 0x8267826C
     .4byte 0x826D2030
     .4byte 0x30000000
+.global lbl_803D9F00
+lbl_803D9F00:
     .4byte 0x8262826F
     .4byte 0x82742030
     .4byte 0x30000000
