@@ -83,4 +83,11 @@ lbl_80323090:
 .section .dtors  # 0x803B7260 - 0x803B7280
 .global lbl_803B7260
 lbl_803B7260:
-	.incbin "baserom.dol", 0x3B4260, 0x20
+	.4byte __destroy_global_chain
+    .4byte __fini_cpp_exceptions
+    .4byte __destroy_global_chain
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
