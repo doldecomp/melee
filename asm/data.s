@@ -71665,9 +71665,13 @@ lbl_803FD58C:
     .4byte 0x414C4C20
     .4byte 0x434F4C4F
     .4byte 0x52203A00
+.global lbl_803FD848
+lbl_803FD848:
     .4byte 0x53544550
     .4byte 0x20414E49
     .4byte 0x4D203A00
+.global lbl_803FD854
+lbl_803FD854:
     .4byte 0x50414E45
     .4byte 0x4C204849
     .4byte 0x4444454E
@@ -71796,7 +71800,7 @@ lbl_803FD864:
     .4byte 0x3F800000
     .4byte 0x00000003
     .4byte NULL
-    .4byte 0x803FD848
+    .4byte lbl_803FD848
     .4byte NULL
     .4byte 0x803FA3D0
     .4byte NULL
@@ -71804,7 +71808,7 @@ lbl_803FD864:
     .4byte 0x3F800000
     .4byte 0x00000003
     .4byte NULL
-    .4byte 0x803FD854
+    .4byte lbl_803FD854
     .4byte NULL
     .4byte 0x803FA3D4
     .4byte NULL
@@ -71826,14 +71830,20 @@ lbl_803FD864:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+.global lbl_803FDAC4
+lbl_803FDAC4:
     .4byte 0x3C205361
     .4byte 0x6B6F6461
     .4byte 0x20546573
     .4byte 0x74203E00
+.global lbl_803FDAD4
+lbl_803FDAD4:
     .4byte 0x4576656E
     .4byte 0x74205374
     .4byte 0x61676520
     .4byte 0x3A000000
+.global lbl_803FDAE4
+lbl_803FDAE4:
     .4byte 0x46697843
     .4byte 0x616D6572
     .4byte 0x61205374
@@ -71843,7 +71853,7 @@ lbl_803FD864:
 lbl_803FDAF8:
     .4byte NULL
     .4byte NULL
-    .4byte 0x803FDAC4
+    .4byte lbl_803FDAC4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -71851,7 +71861,7 @@ lbl_803FDAF8:
     .4byte NULL
     .4byte 0x00000003
 	.4byte lbl_80301D7C
-    .4byte 0x803FDAD4
+    .4byte lbl_803FDAD4
     .4byte NULL
     .4byte 0x803FA3E0
     .4byte 0x3F800000
@@ -71859,7 +71869,7 @@ lbl_803FDAF8:
     .4byte 0x3F800000
     .4byte 0x00000001
 	.4byte lbl_80301D40
-    .4byte 0x803FDAE4
+    .4byte lbl_803FDAE4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -71877,6 +71887,8 @@ lbl_803FDAF8:
     .4byte 0x67616E6F
     .4byte 0x20546573
     .4byte 0x74203E00
+.global lbl_803FDB88
+lbl_803FDB88:
     .4byte 0x53544146
     .4byte 0x46524F4C
     .4byte 0x4C205354
@@ -71902,7 +71914,7 @@ lbl_803FDB9C:
     .4byte NULL
     .4byte 0x00000001
 	.4byte lbl_80301E08
-    .4byte 0x803FDB88
+    .4byte lbl_803FDB88
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -71917,11 +71929,15 @@ lbl_803FDB9C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+.global lbl_803FDC20
+lbl_803FDC20:
     .4byte NULL
     .4byte NULL
     .4byte 0x4220F738
     .4byte 0x43961ED9
     .4byte NULL
+.global lbl_803FDC34
+lbl_803FDC34:
     .4byte NULL
     .4byte NULL
     .4byte 0x41200000
@@ -71935,8 +71951,8 @@ lbl_803FDC48:
     .4byte 0x000001E0
     .4byte 0x00000280
     .4byte 0x000001E0
-    .4byte 0x803FDC20
-    .4byte 0x803FDC34
+    .4byte lbl_803FDC20
+    .4byte lbl_803FDC34
     .4byte NULL
     .4byte NULL
     .4byte 0x3DCCCCCD
@@ -71990,29 +72006,41 @@ jtbl_803FDCF0:
 lbl_803FDD18:
     .asciz "TyLight.dat"
     .balign 4
+.global lbl_803FDD24
+lbl_803FDD24:
     .asciz "ScToyLightMaster0_scene_lights"
     .balign 4
+.global lbl_803FDD44
+lbl_803FDD44:
     .asciz "ScToyLightMaster1_scene_lights"
     .balign 4
+.global lbl_803FDD64
+lbl_803FDD64:
     .asciz "ScToyLightMaster2_scene_lights"
     .balign 4
+.global lbl_803FDD84
+lbl_803FDD84:
     .asciz "ScToyLightMaster4_scene_lights"
     .balign 4
+.global lbl_803FDDA4
+lbl_803FDDA4:
     .asciz "ScToyLightMaster5_scene_lights"
     .balign 4
+.global lbl_803FDDC4
+lbl_803FDDC4:
     .asciz "ScToyLightMaster6_scene_lights"
     .balign 4
-    .4byte 0x803FDD24
+    .4byte lbl_803FDD24
     .4byte NULL
-    .4byte 0x803FDD44
+    .4byte lbl_803FDD44
     .4byte NULL
-    .4byte 0x803FDD64
+    .4byte lbl_803FDD64
     .4byte NULL
-    .4byte 0x803FDD84
+    .4byte lbl_803FDD84
     .4byte NULL
-    .4byte 0x803FDDA4
+    .4byte lbl_803FDDA4
     .4byte NULL
-    .4byte 0x803FDDC4
+    .4byte lbl_803FDDC4
     .4byte NULL
     .4byte NULL
     .4byte 0x000019FF
@@ -72133,161 +72161,86 @@ lbl_803FDD18:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65426733
-    .4byte 0x5F736F62
-    .4byte 0x6A646573
-    .4byte 0x63000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65426735
-    .4byte 0x5F736F62
-    .4byte 0x6A646573
-    .4byte 0x63000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65426736
-    .4byte 0x5F736F62
-    .4byte 0x6A646573
-    .4byte 0x63000000
-    .4byte 0x803FDFF0
-    .4byte 0x803FE008
-    .4byte 0x803FE020
-    .4byte 0x546F7943
-    .4byte 0x616D6572
-    .4byte 0x61496E66
-    .4byte 0x6F426F61
-    .4byte 0x645F736F
-    .4byte 0x626A6465
-    .4byte 0x73630000
-    .4byte 0x546F7943
-    .4byte 0x616D6572
-    .4byte 0x61496E66
-    .4byte 0x6F4E6578
-    .4byte 0x745F736F
-    .4byte 0x626A6465
-    .4byte 0x73630000
-    .4byte 0x546F7943
-    .4byte 0x616D6572
-    .4byte 0x61496E66
-    .4byte 0x6F507265
-    .4byte 0x765F736F
-    .4byte 0x626A6465
-    .4byte 0x73630000
-    .4byte 0x546F7943
-    .4byte 0x616D6572
-    .4byte 0x61496E66
-    .4byte 0x6F427574
-    .4byte 0x746F6E5F
-    .4byte 0x736F626A
-    .4byte 0x64657363
-    .4byte NULL
-    .4byte 0x546F7943
-    .4byte 0x616D6572
-    .4byte 0x61496E66
-    .4byte 0x6F526574
-    .4byte 0x75726E5F
-    .4byte 0x736F626A
-    .4byte 0x64657363
-    .4byte NULL
-    .4byte 0x546F7943
-    .4byte 0x616D6572
-    .4byte 0x61496E66
-    .4byte 0x6F4C5F73
-    .4byte 0x6F626A64
-    .4byte 0x65736300
-    .4byte 0x546F7943
-    .4byte 0x616D6572
-    .4byte 0x61496E66
-    .4byte 0x6F525F73
-    .4byte 0x6F626A64
-    .4byte 0x65736300
-    .4byte 0x803FE044
-    .4byte 0x803FE060
-    .4byte 0x803FE07C
-    .4byte 0x803FE098
-    .4byte 0x803FE0B8
-    .4byte 0x803FE0D8
-    .4byte 0x803FE0F0
-    .4byte 0x546F7953
-    .4byte 0x74616E64
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F41
-    .4byte 0x4354494F
-    .4byte 0x4E5F6163
-    .4byte 0x74696F6E
-    .4byte 0x315F616E
-    .4byte 0x696D6A6F
-    .4byte 0x696E7400
-    .4byte 0x546F7953
-    .4byte 0x74616E64
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F41
-    .4byte 0x4354494F
-    .4byte 0x4E5F6163
-    .4byte 0x74696F6E
-    .4byte 0x315F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x546F7953
-    .4byte 0x74616E64
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F41
-    .4byte 0x4354494F
-    .4byte 0x4E5F6163
-    .4byte 0x74696F6E
-    .4byte 0x315F7368
-    .4byte 0x61706561
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x546F7953
-    .4byte 0x74616E64
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F41
-    .4byte 0x4354494F
-    .4byte 0x4E5F6163
-    .4byte 0x74696F6E
-    .4byte 0x325F616E
-    .4byte 0x696D6A6F
-    .4byte 0x696E7400
-    .4byte 0x546F7953
-    .4byte 0x74616E64
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F41
-    .4byte 0x4354494F
-    .4byte 0x4E5F6163
-    .4byte 0x74696F6E
-    .4byte 0x325F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x546F7953
-    .4byte 0x74616E64
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F41
-    .4byte 0x4354494F
-    .4byte 0x4E5F6163
-    .4byte 0x74696F6E
-    .4byte 0x325F7368
-    .4byte 0x61706561
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x803FE124
-    .4byte 0x803FE150
-    .4byte 0x803FE180
-    .4byte 0x803FE1B4
-    .4byte 0x803FE1E0
-    .4byte 0x803FE210
+.global lbl_803FDFF0
+lbl_803FDFF0:
+    .asciz "ToyFigureBg3_sobjdesc"
+    .balign 4
+.global lbl_803FE008
+lbl_803FE008:
+    .asciz "ToyFigureBg5_sobjdesc"
+    .balign 4
+.global lbl_803FE020
+lbl_803FE020:
+    .asciz "ToyFigureBg6_sobjdesc"
+    .balign 4
+    .4byte lbl_803FDFF0
+    .4byte lbl_803FE008
+    .4byte lbl_803FE020
+.global lbl_803FE044
+lbl_803FE044:
+    .asciz "ToyCameraInfoBoad_sobjdesc"
+    .balign 4
+.global lbl_803FE060
+lbl_803FE060:
+    .asciz "ToyCameraInfoNext_sobjdesc"
+    .balign 4
+.global lbl_803FE07C
+lbl_803FE07C:
+    .asciz "ToyCameraInfoPrev_sobjdesc"
+    .balign 4
+.global lbl_803FE098
+lbl_803FE098:
+    .asciz "ToyCameraInfoButton_sobjdesc"
+    .balign 4
+.global lbl_803FE0B8
+lbl_803FE0B8:
+    .asciz "ToyCameraInfoReturn_sobjdesc"
+    .balign 4
+.global lbl_803FE0D8
+lbl_803FE0D8:
+    .asciz "ToyCameraInfoL_sobjdesc"
+    .balign 4
+.global lbl_803FE0F0
+lbl_803FE0F0:
+    .asciz "ToyCameraInfoR_sobjdesc"
+    .balign 4
+    .4byte lbl_803FE044
+    .4byte lbl_803FE060
+    .4byte lbl_803FE07C
+    .4byte lbl_803FE098
+    .4byte lbl_803FE0B8
+    .4byte lbl_803FE0D8
+    .4byte lbl_803FE0F0
+.global lbl_803FE124
+lbl_803FE124:
+    .asciz "ToyStandModel_TopN_ACTION_action1_animjoint"
+    .balign 4
+.global lbl_803FE150
+lbl_803FE150:
+    .asciz "ToyStandModel_TopN_ACTION_action1_matanim_joint"
+    .balign 4
+.global lbl_803FE180
+lbl_803FE180:
+    .asciz "ToyStandModel_TopN_ACTION_action1_shapeanim_joint"
+    .balign 4
+.global lbl_803FE1B4
+lbl_803FE1B4:
+    .asciz "ToyStandModel_TopN_ACTION_action2_animjoint"
+    .balign 4
+.global lbl_803FE1E0
+lbl_803FE1E0:
+    .asciz "ToyStandModel_TopN_ACTION_action2_matanim_joint"
+    .balign 4
+.global lbl_803FE210
+lbl_803FE210:
+    .asciz "ToyStandModel_TopN_ACTION_action2_shapeanim_joint"
+    .balign 4
+    .4byte lbl_803FE124
+    .4byte lbl_803FE150
+    .4byte lbl_803FE180
+    .4byte lbl_803FE1B4
+    .4byte lbl_803FE1E0
+    .4byte lbl_803FE210
 .global jtbl_803FE25C
 jtbl_803FE25C:
 	.4byte lbl_80304C68
