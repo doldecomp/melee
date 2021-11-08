@@ -57,4 +57,11 @@ _ExitProcess:
 
 .global lbl_803B7240
 lbl_803B7240:
-	.incbin "baserom.dol", 0x3B4240, 0x20
+	.4byte __init_cpp_exceptions
+    .4byte func_80326578
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
