@@ -72096,103 +72096,62 @@ lbl_803FDDC4:
     .4byte 0x00000005
     .4byte 0x000019FF
     .4byte NULL
-    .4byte 0x54795374
-    .4byte 0x616E642E
-    .4byte 0x64617400
-    .4byte 0x546F7953
-    .4byte 0x74616E64
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F6A
-    .4byte 0x6F696E74
+    .asciz "TyStand.dat"
+    .balign 4
+    .asciz "ToyStandModel_TopN_joint"
+    .balign 4
+.global lbl_803FDE84
+lbl_803FDE84:
+    .asciz "ToyFigurePanel_Top_joint"
+    .balign 4
+    .4byte lbl_803FDE84
+.global lbl_803FDEA4
+lbl_803FDEA4:
+    .asciz "ToyFigureBack_Top_joint"
+    .balign 4
+    .4byte lbl_803FDEA4
+    .4byte lbl_803FDEA4
     .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x6550616E
-    .4byte 0x656C5F54
-    .4byte 0x6F705F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x803FDE84
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65426163
-    .4byte 0x6B5F546F
-    .4byte 0x705F6A6F
-    .4byte 0x696E7400
-    .4byte 0x803FDEA4
-    .4byte 0x803FDEA4
-    .4byte NULL
-    .4byte 0x803FDEA4
+    .4byte lbl_803FDEA4
     .4byte NULL
     .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x6550616E
-    .4byte 0x656C5F54
-    .4byte 0x6F705F61
-    .4byte 0x6E696D6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x6550616E
-    .4byte 0x656C5F54
-    .4byte 0x6F705F6D
-    .4byte 0x6174616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x6550616E
-    .4byte 0x656C5F54
-    .4byte 0x6F705F73
-    .4byte 0x68617065
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x803FDED4
-    .4byte 0x803FDEF4
-    .4byte 0x803FDF18
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65426163
-    .4byte 0x6B5F546F
-    .4byte 0x705F616E
-    .4byte 0x696D6A6F
-    .4byte 0x696E7400
+.global lbl_803FDED4
+lbl_803FDED4:
+    .asciz "ToyFigurePanel_Top_animjoint"
+    .balign 4
+.global lbl_803FDEF4
+lbl_803FDEF4:
+    .asciz "ToyFigurePanel_Top_matanim_joint"
+    .balign 4
+.global lbl_803FDF18
+lbl_803FDF18:
+    .asciz "ToyFigurePanel_Top_shapeanim_joint"
+    .balign 4
+    .4byte lbl_803FDED4
+    .4byte lbl_803FDEF4
+    .4byte lbl_803FDF18
+.global lbl_803FDF48
+lbl_803FDF48:
+    .asciz "ToyFigureBack_Top_animjoint"
+    .balign 4
 .global lbl_803FDF64
 lbl_803FDF64:
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65426163
-    .4byte 0x6B5F546F
-    .4byte 0x705F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
+    .asciz "ToyFigureBack_Top_matanim_joint"
+    .balign 4
 .global lbl_803FDF84
 lbl_803FDF84:
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65426163
-    .4byte 0x6B5F546F
-    .4byte 0x705F7368
-    .4byte 0x61706561
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x803FDF48
+    .asciz "ToyFigureBack_Top_shapeanim_joint"
+    .balign 4
+    .4byte lbl_803FDF48
     .4byte lbl_803FDF64
     .4byte lbl_803FDF84
-    .4byte 0x803FDF48
+    .4byte lbl_803FDF48
     .4byte lbl_803FDF64
     .4byte lbl_803FDF84
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x803FDF48
+    .4byte lbl_803FDF48
     .4byte lbl_803FDF64
     .4byte lbl_803FDF84
     .4byte NULL
@@ -73706,16 +73665,12 @@ lbl_804000D0:
     .4byte NULL
     .4byte 0xC0400000
     .4byte NULL
-    .4byte 0x56693035
-    .4byte 0x30322E64
-    .4byte 0x61740000
-    .4byte 0x76697375
-    .4byte 0x616C3035
-    .4byte 0x30325363
-    .4byte 0x656E6500
-    .4byte 0x4972416C
-    .4byte 0x732E6461
-    .4byte 0x74000000
+    .asciz "Vi0502.dat"
+    .balign 4
+    .asciz "visual0502Scene"
+    .balign 4
+    .asciz "IrAls.dat"
+    .balign 4
     .4byte NULL
 .global lbl_80400108
 lbl_80400108:
