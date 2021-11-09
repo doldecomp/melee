@@ -8521,8 +8521,8 @@ lbl_803C1EBC:
 
 .global lbl_803C1F40
 lbl_803C1F40:
-    .4byte 0x803C57D0
-    .4byte 0x803C57DC
+    .4byte lbl_803C57D0
+    .4byte lbl_803C57DC
     .4byte 0x803C7BE8
     .4byte 0x803C7BF4
     .4byte 0x803C7598
@@ -8841,7 +8841,7 @@ lbl_803C2360:
     .4byte 0x803D3A24
 
     # TODO: What is this table?
-    .4byte 0x803C595C
+    .4byte lbl_803C595C
     .4byte 0x803C7D10
     .4byte 0x803C76A0
     .4byte 0x803CBF88
@@ -14514,17 +14514,18 @@ lbl_803C57B0:
     .asciz "no effect from animlist %d\n"
     .balign 4
     .4byte NULL
-    .4byte 0x506C4D72
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x66744461
-    .4byte 0x74614D61
-    .4byte 0x72696F00
+.global lbl_803C57D0
+lbl_803C57D0:
+    .asciz "PlMr.dat"
+    .balign 4
+.global lbl_803C57DC
+lbl_803C57DC:
+    .asciz "ftDataMario"
+    .balign 4
 .global lbl_803C57E8
 lbl_803C57E8:
-    .4byte 0x506C4D72
-    .4byte 0x4E722E64
-    .4byte 0x61740000
+    .asciz "PlMrNr.dat"
+    .balign 4
 .global lbl_803C57F4
 lbl_803C57F4:
     .4byte 0x506C794D
@@ -14620,50 +14621,28 @@ lbl_803C58EC:
     .4byte NULL
 .global lbl_803C5910
 lbl_803C5910:
-    .4byte 0x506C4D72
-    .4byte 0x47722E64
-    .4byte 0x61740000
+    .asciz "PlMrGr.dat"
+    .balign 4
 .global lbl_803C591C
 lbl_803C591C:
-    .4byte 0x506C794D
-    .4byte 0x6172696F
-    .4byte 0x354B4772
-    .4byte 0x5F536861
-    .4byte 0x72655F6A
-    .4byte 0x6F696E74
-    .4byte NULL
+    .asciz "PlyMario5KGr_Share_joint"
+    .balign 4
 .global lbl_803C5938
 lbl_803C5938:
-    .4byte 0x506C794D
-    .4byte 0x6172696F
-    .4byte 0x354B4772
-    .4byte 0x5F536861
-    .4byte 0x72655F6D
-    .4byte 0x6174616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x506C4D72
-    .4byte 0x414A2E64
-    .4byte 0x61740000
+    .asciz "PlyMario5KGr_Share_matanim_joint"
+    .balign 4
+.global lbl_803C595C
+lbl_803C595C:
+    .asciz "PlMrAJ.dat"
+    .balign 4
 .global lbl_803C5968
 lbl_803C5968:
-    .4byte 0x66744465
-    .4byte 0x6D6F5265
-    .4byte 0x73756C74
-    .4byte 0x4D6F7469
-    .4byte 0x6F6E4669
-    .4byte 0x6C654D61
-    .4byte 0x72696F00
+    .asciz "ftDemoResultMotionFileMario"
+    .balign 4
 .global lbl_803C5984
 lbl_803C5984:
-    .4byte 0x66744465
-    .4byte 0x6D6F496E
-    .4byte 0x74726F4D
-    .4byte 0x6F74696F
-    .4byte 0x6E46696C
-    .4byte 0x654D6172
-    .4byte 0x696F0000
+    .asciz "ftDemoIntroMotionFileMario"
+    .balign 4
 .global lbl_803C59A0
 lbl_803C59A0:
     .4byte 0x66744465
@@ -71676,16 +71655,18 @@ lbl_803FD58C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x3C524553
-    .4byte 0x554C5420
-    .4byte 0x54455354
-    .4byte 0x3E000000
-    .4byte 0x3150204B
-    .4byte 0x494E4420
-    .4byte 0x3A000000
-    .4byte 0x3250204B
-    .4byte 0x494E4420
-    .4byte 0x3A000000
+.global lbl_803FD78C
+lbl_803FD78C:
+    .asciz "<RESULT TEST>"
+    .balign 4
+.global lbl_803FD79C
+lbl_803FD79C:
+    .asciz "1P KIND :"
+    .balign 4
+.global lbl_803FD7A8
+lbl_803FD7A8:
+    .asciz "2P KIND :"
+    .balign 4
     .4byte 0x3350204B
     .4byte 0x494E4420
     .4byte 0x3A000000
@@ -71738,7 +71719,7 @@ lbl_803FD854:
 lbl_803FD864:
     .4byte NULL
     .4byte NULL
-    .4byte 0x803FD78C
+    .4byte lbl_803FD78C
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -71746,7 +71727,7 @@ lbl_803FD864:
     .4byte NULL
     .4byte 0x00000002
     .4byte NULL
-    .4byte 0x803FD79C
+    .4byte lbl_803FD79C
     .4byte 0x803FB538
     .4byte 0x803FA39C
     .4byte NULL
@@ -71754,7 +71735,7 @@ lbl_803FD864:
     .4byte NULL
     .4byte 0x00000002
     .4byte NULL
-    .4byte 0x803FD7A8
+    .4byte lbl_803FD7A8
     .4byte 0x803FB538
     .4byte 0x803FA3A0
     .4byte NULL
@@ -71941,22 +71922,19 @@ lbl_803FDAF8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x3C205375
-    .4byte 0x67616E6F
-    .4byte 0x20546573
-    .4byte 0x74203E00
+.global lbl_803FDB78
+lbl_803FDB78:
+    .asciz "< Sugano Test >"
+    .balign 4
 .global lbl_803FDB88
 lbl_803FDB88:
-    .4byte 0x53544146
-    .4byte 0x46524F4C
-    .4byte 0x4C205354
-    .4byte 0x41525420
-    .4byte 0x3E000000
+    .asciz "STAFFROLL START >"
+    .balign 4
 .global lbl_803FDB9C
 lbl_803FDB9C:
     .4byte NULL
     .4byte NULL
-    .4byte 0x803FDB78
+    .4byte lbl_803FDB78
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -72184,6 +72162,8 @@ lbl_803FDDC4:
     .4byte 0x705F616E
     .4byte 0x696D6A6F
     .4byte 0x696E7400
+.global lbl_803FDF64
+lbl_803FDF64:
     .4byte 0x546F7946
     .4byte 0x69677572
     .4byte 0x65426163
@@ -72192,6 +72172,8 @@ lbl_803FDDC4:
     .4byte 0x74616E69
     .4byte 0x6D5F6A6F
     .4byte 0x696E7400
+.global lbl_803FDF84
+lbl_803FDF84:
     .4byte 0x546F7946
     .4byte 0x69677572
     .4byte 0x65426163
@@ -72202,17 +72184,17 @@ lbl_803FDDC4:
     .4byte 0x6A6F696E
     .4byte 0x74000000
     .4byte 0x803FDF48
-    .4byte 0x803FDF64
-    .4byte 0x803FDF84
+    .4byte lbl_803FDF64
+    .4byte lbl_803FDF84
     .4byte 0x803FDF48
-    .4byte 0x803FDF64
-    .4byte 0x803FDF84
+    .4byte lbl_803FDF64
+    .4byte lbl_803FDF84
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x803FDF48
-    .4byte 0x803FDF64
-    .4byte 0x803FDF84
+    .4byte lbl_803FDF64
+    .4byte lbl_803FDF84
     .4byte NULL
     .4byte NULL
     .4byte NULL
