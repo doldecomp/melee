@@ -257,9 +257,9 @@ lbl_8022569C:
 .global func_802256CC
 func_802256CC:
 /* 802256CC 002222AC  7C 08 02 A6 */	mflr r0
-/* 802256D0 002222B0  3C 60 80 4E */	lis r3, 0x804DEC00@ha
+/* 802256D0 002222B0  3C 60 80 4E */	lis r3, _stack_end@ha
 /* 802256D4 002222B4  90 01 00 04 */	stw r0, 4(r1)
-/* 802256D8 002222B8  38 63 EC 00 */	addi r3, r3, 0x804DEC00@l
+/* 802256D8 002222B8  38 63 EC 00 */	addi r3, r3, _stack_end@l
 /* 802256DC 002222BC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 802256E0 002222C0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 802256E4 002222C4  3B E3 00 04 */	addi r31, r3, 4
@@ -274,12 +274,12 @@ lbl_802256F0:
 /* 80225700 002222E0  4C C6 31 82 */	crclr 6
 /* 80225704 002222E4  38 63 A7 68 */	addi r3, r3, lbl_803EA768@l
 /* 80225708 002222E8  48 11 FF A1 */	bl OSReport
-/* 8022570C 002222EC  3C 60 80 4F */	lis r3, 0x804EEC00@ha
+/* 8022570C 002222EC  3C 60 80 4F */	lis r3, _db_stack_end@ha
 /* 80225710 002222F0  4C C6 31 82 */	crclr 6
-/* 80225714 002222F4  38 83 EC 00 */	addi r4, r3, 0x804EEC00@l
-/* 80225718 002222F8  3C 60 80 4E */	lis r3, 0x804DEC00@ha
+/* 80225714 002222F4  38 83 EC 00 */	addi r4, r3, _db_stack_end@l
+/* 80225718 002222F8  3C 60 80 4E */	lis r3, _stack_end@ha
 /* 8022571C 002222FC  3C C0 80 3F */	lis r6, lbl_803EA784@ha
-/* 80225720 00222300  38 A3 EC 00 */	addi r5, r3, 0x804DEC00@l
+/* 80225720 00222300  38 A3 EC 00 */	addi r5, r3, _stack_end@l
 /* 80225724 00222304  38 66 A7 84 */	addi r3, r6, lbl_803EA784@l
 /* 80225728 00222308  7C C5 20 50 */	subf r6, r5, r4
 /* 8022572C 0022230C  7C FF 20 50 */	subf r7, r31, r4
