@@ -9236,9 +9236,9 @@ __OSThreadInit:
 /* 8034AC74 00347854  4B FF A4 19 */	bl func_8034508C
 /* 8034AC78 00347858  3C 60 80 4F */	lis r3, _db_stack_end@ha
 /* 8034AC7C 0034785C  38 03 EC 00 */	addi r0, r3, _db_stack_end@l
-/* 8034AC80 00347860  3C 60 80 4E */	lis r3, 0x804DEC00@ha
+/* 8034AC80 00347860  3C 60 80 4E */	lis r3, _stack_end@ha
 /* 8034AC84 00347864  90 1C 07 14 */	stw r0, 0x714(r28)
-/* 8034AC88 00347868  38 03 EC 00 */	addi r0, r3, 0x804DEC00@l
+/* 8034AC88 00347868  38 03 EC 00 */	addi r0, r3, _stack_end@l
 /* 8034AC8C 0034786C  38 7C 07 18 */	addi r3, r28, 0x718
 /* 8034AC90 00347870  90 1C 07 18 */	stw r0, 0x718(r28)
 /* 8034AC94 00347874  3C 80 DE AE */	lis r4, 0xDEADBABE@ha
