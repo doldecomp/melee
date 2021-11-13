@@ -83754,6 +83754,8 @@ lbl_8040BD34:
     .4byte 0x20202020
     .4byte 0x20202028
     .4byte 0x42290000
+.global lbl_8040BD54
+lbl_8040BD54:
     .4byte lbl_8040BC74
     .4byte lbl_8040BC94
     .4byte lbl_8040BCB4
@@ -83766,7 +83768,7 @@ lbl_8040BD34:
     .4byte NULL
     .4byte func_80394F48
     .4byte func_80396C78
-    .4byte 0x8040BD54
+    .4byte lbl_8040BD54
     .4byte NULL
 .global lbl_8040BD8C
 lbl_8040BD8C:
@@ -84227,6 +84229,8 @@ lbl_8040C490:
     .4byte NULL
     .4byte 0x3F800000
     .4byte NULL
+.global lbl_8040C4A4
+lbl_8040C4A4:
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -84240,8 +84244,8 @@ lbl_8040C4B8:
     .4byte 0x000001E0
     .4byte 0x00000280
     .4byte 0x000001E0
-    .4byte 0x8040C490
-    .4byte 0x8040C4A4
+    .4byte lbl_8040C490
+    .4byte lbl_8040C4A4
     .4byte NULL
     .4byte NULL
     .4byte NULL
