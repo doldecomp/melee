@@ -8679,8 +8679,8 @@ lbl_803C1F40:
     .4byte lbl_803C80C4
     .4byte 0x803CC360
     .4byte 0x803CC36C
-    .4byte 0x803CCAD0
-    .4byte 0x803CCADC
+    .4byte lbl_803CCAD0
+    .4byte lbl_803CCADC
     .4byte 0x803CD078
     .4byte 0x803CD084
     .4byte 0x803CD610
@@ -8956,7 +8956,7 @@ lbl_803C2360:
     .4byte lbl_803CF26C
     .4byte lbl_803C82B0
     .4byte 0x803CC558
-    .4byte 0x803CCC84
+    .4byte lbl_803CCC84
     .4byte 0x803CD290
     .4byte 0x803CD7C4
     .4byte 0x803CDD2C
@@ -8991,7 +8991,7 @@ lbl_803C2360:
     .4byte lbl_803CF1E0
     .4byte lbl_803C8224
     .4byte 0x803CC4CC
-    .4byte 0x803CCBF8
+    .4byte lbl_803CCBF8
     .4byte 0x803CD204
     .4byte 0x803CD738
     .4byte 0x803CDCA0
@@ -9027,7 +9027,7 @@ lbl_803C2468:
     .4byte lbl_803CF25C
     .4byte lbl_803C82A0
     .4byte 0x803CC548
-    .4byte 0x803CCC74
+    .4byte lbl_803CCC74
     .4byte 0x803CD280
     .4byte 0x803CD7B4
     .4byte 0x803CDD1C
@@ -21858,127 +21858,102 @@ lbl_803CC650:
 	.4byte lbl_8011A95C
 	.4byte lbl_8011AA0C
     .4byte func_800761C8
-    .4byte 0x506C4E73
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x66744461
-    .4byte 0x74614E65
-    .4byte 0x73730000
-    .4byte 0x506C4E73
-    .4byte 0x4E722E64
-    .4byte 0x61740000
-    .4byte 0x506C794E
-    .4byte 0x65737335
-    .4byte 0x4B5F5368
-    .4byte 0x6172655F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x506C794E
-    .4byte 0x65737335
-    .4byte 0x4B5F5368
-    .4byte 0x6172655F
-    .4byte 0x6D617461
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x506C4E73
-    .4byte 0x59652E64
-    .4byte 0x61740000
-    .4byte 0x506C794E
-    .4byte 0x65737335
-    .4byte 0x4B59655F
-    .4byte 0x53686172
-    .4byte 0x655F6A6F
-    .4byte 0x696E7400
-    .4byte 0x506C794E
-    .4byte 0x65737335
-    .4byte 0x4B59655F
-    .4byte 0x53686172
-    .4byte 0x655F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x506C4E73
-    .4byte 0x42752E64
-    .4byte 0x61740000
-    .4byte 0x506C794E
-    .4byte 0x65737335
-    .4byte 0x4B42755F
-    .4byte 0x53686172
-    .4byte 0x655F6A6F
-    .4byte 0x696E7400
-    .4byte 0x506C794E
-    .4byte 0x65737335
-    .4byte 0x4B42755F
-    .4byte 0x53686172
-    .4byte 0x655F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x506C4E73
-    .4byte 0x47722E64
-    .4byte 0x61740000
-    .4byte 0x506C794E
-    .4byte 0x65737335
-    .4byte 0x4B47725F
-    .4byte 0x53686172
-    .4byte 0x655F6A6F
-    .4byte 0x696E7400
-    .4byte 0x506C794E
-    .4byte 0x65737335
-    .4byte 0x4B47725F
-    .4byte 0x53686172
-    .4byte 0x655F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x506C4E73
-    .4byte 0x414A2E64
-    .4byte 0x61740000
-    .4byte 0x66744465
-    .4byte 0x6D6F5265
-    .4byte 0x73756C74
-    .4byte 0x4D6F7469
-    .4byte 0x6F6E4669
-    .4byte 0x6C654E65
-    .4byte 0x73730000
-    .4byte 0x66744465
-    .4byte 0x6D6F496E
-    .4byte 0x74726F4D
-    .4byte 0x6F74696F
-    .4byte 0x6E46696C
-    .4byte 0x654E6573
-    .4byte 0x73000000
-    .4byte 0x66744465
-    .4byte 0x6D6F456E
-    .4byte 0x64696E67
-    .4byte 0x4D6F7469
-    .4byte 0x6F6E4669
-    .4byte 0x6C654E65
-    .4byte 0x73730000
-    .4byte 0x66744465
-    .4byte 0x6D6F5669
-    .4byte 0x57616974
-    .4byte 0x4D6F7469
-    .4byte 0x6F6E4669
-    .4byte 0x6C654E65
-    .4byte 0x73730000
-    .4byte 0x803CCC04
-    .4byte 0x803CCC20
-    .4byte 0x803CCC3C
-    .4byte 0x803CCC58
-    .4byte 0x803CCAE8
-    .4byte 0x803CCAF4
-    .4byte 0x803CCB0C
-    .4byte 0x803CCB2C
-    .4byte 0x803CCB38
-    .4byte 0x803CCB50
-    .4byte 0x803CCB70
-    .4byte 0x803CCB7C
-    .4byte 0x803CCB94
-    .4byte 0x803CCBB4
-    .4byte 0x803CCBC0
-    .4byte 0x803CCBD8
+.global lbl_803CCAD0
+lbl_803CCAD0:
+    .asciz "PlNs.dat"
+    .balign 4
+.global lbl_803CCADC
+lbl_803CCADC:
+    .asciz "ftDataNess"
+    .balign 4
+.global lbl_803CCAE8
+lbl_803CCAE8:
+    .asciz "PlNsNr.dat"
+    .balign 4
+.global lbl_803CCAF4
+lbl_803CCAF4:
+    .asciz "PlyNess5K_Share_joint"
+    .balign 4
+.global lbl_803CCB0C
+lbl_803CCB0C:
+    .asciz "PlyNess5K_Share_matanim_joint"
+    .balign 4
+.global lbl_803CCB2C
+lbl_803CCB2C:
+    .asciz "PlNsYe.dat"
+    .balign 4
+.global lbl_803CCB38
+lbl_803CCB38:
+    .asciz "PlyNess5KYe_Share_joint"
+    .balign 4
+.global lbl_803CCB50
+lbl_803CCB50:
+    .asciz "PlyNess5KYe_Share_matanim_joint"
+    .balign 4
+.global lbl_803CCB70
+lbl_803CCB70:
+    .asciz "PlNsBu.dat"
+    .balign 4
+.global lbl_803CCB7C
+lbl_803CCB7C:
+    .asciz "PlyNess5KBu_Share_joint"
+    .balign 4
+.global lbl_803CCB94
+lbl_803CCB94:
+    .asciz "PlyNess5KBu_Share_matanim_joint"
+    .balign 4
+.global lbl_803CCBB4
+lbl_803CCBB4:
+    .asciz "PlNsGr.dat"
+    .balign 4
+.global lbl_803CCBC0
+lbl_803CCBC0:
+    .asciz "PlyNess5KGr_Share_joint"
+    .balign 4
+.global lbl_803CCBD8
+lbl_803CCBD8:
+    .asciz "PlyNess5KGr_Share_matanim_joint"
+    .balign 4
+.global lbl_803CCBF8
+lbl_803CCBF8:
+    .asciz "PlNsAJ.dat"
+    .balign 4
+.global lbl_803CCC04
+lbl_803CCC04:
+    .asciz "ftDemoResultMotionFileNess"
+    .balign 4
+.global lbl_803CCC20
+lbl_803CCC20:
+    .asciz "ftDemoIntroMotionFileNess"
+    .balign 4
+.global lbl_803CCC3C
+lbl_803CCC3C:
+    .asciz "ftDemoEndingMotionFileNess"
+    .balign 4
+.global lbl_803CCC58
+lbl_803CCC58:
+    .asciz "ftDemoViWaitMotionFileNess"
+    .balign 4
+.global lbl_803CCC74
+lbl_803CCC74:
+    .4byte lbl_803CCC04
+    .4byte lbl_803CCC20
+    .4byte lbl_803CCC3C
+    .4byte lbl_803CCC58
+.global lbl_803CCC84
+lbl_803CCC84:
+    .4byte lbl_803CCAE8
+    .4byte lbl_803CCAF4
+    .4byte lbl_803CCB0C
+    .4byte lbl_803CCB2C
+    .4byte lbl_803CCB38
+    .4byte lbl_803CCB50
+    .4byte lbl_803CCB70
+    .4byte lbl_803CCB7C
+    .4byte lbl_803CCB94
+    .4byte lbl_803CCBB4
+    .4byte lbl_803CCBC0
+    .4byte lbl_803CCBD8
     .4byte NULL
 .global lbl_803CCCB8
 lbl_803CCCB8:
