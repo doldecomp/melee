@@ -8952,9 +8952,9 @@ lbl_803C2360:
     .4byte lbl_803C7D9C
     .4byte lbl_803C773C
     .4byte lbl_803CC020
-    .4byte 0x803CA5B4
+    .4byte lbl_803CA5B4
     .4byte 0x803CF26C
-    .4byte 0x803C82B0
+    .4byte lbl_803C82B0
     .4byte 0x803CC558
     .4byte 0x803CCC84
     .4byte 0x803CD290
@@ -9025,7 +9025,7 @@ lbl_803C2468:
     .4byte lbl_803CC010
     .4byte lbl_803CA55C
     .4byte 0x803CF25C
-    .4byte 0x803C82A0
+    .4byte lbl_803C82A0
     .4byte 0x803CC548
     .4byte 0x803CCC74
     .4byte 0x803CD280
@@ -17255,10 +17255,14 @@ lbl_803C8268:
 lbl_803C8284:
     .asciz "ftDemoViWaitMotionFileLink"
     .balign 4
+.global lbl_803C82A0
+lbl_803C82A0:
     .4byte lbl_803C8230
     .4byte lbl_803C824C
     .4byte lbl_803C8268
     .4byte lbl_803C8284
+.global lbl_803C82B0
+lbl_803C82B0:
     .4byte lbl_803C80D0
     .4byte lbl_803C80DC
     .4byte lbl_803C80F4
@@ -19485,6 +19489,8 @@ lbl_803CA5A4:
     .4byte NULL
     .4byte NULL
     .4byte lbl_803CA588
+.global lbl_803CA5B4
+lbl_803CA5B4:
     .4byte lbl_803CA320
     .4byte lbl_803CA32C
     .4byte lbl_803CA344
