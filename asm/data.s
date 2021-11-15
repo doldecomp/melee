@@ -83931,18 +83931,10 @@ lbl_8040C360:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x50617274
-    .4byte 0x69636C65
-    .4byte 0x3A736574
-    .4byte 0x426C656E
-    .4byte 0x644D6F64
-    .4byte 0x653A556E
-    .4byte 0x6B6E6F77
-    .4byte 0x6E206D6F
-    .4byte 0x64650A00
-    .4byte 0x70736469
-    .4byte 0x73702E63
-    .4byte NULL
+    .asciz "Particle:setBlendMode:Unknown mode\n"
+    .balign 4
+    .asciz "psdisp.c"
+    .balign 4
 .global lbl_8040C3A0
 lbl_8040C3A0:
 	.4byte func_803A4740
@@ -84000,12 +83992,8 @@ jtbl_8040C3DC:
     .4byte 0x00000002
     .4byte 0x00000002
     .4byte NULL
-    .4byte 0x4F757420
-    .4byte 0x43616D65
-    .4byte 0x72614469
-    .4byte 0x73702052
-    .4byte 0x616E6765
-    .4byte 0x0A000000
+    .asciz "Out CameraDisp Range\n"
+    .balign 4
 .global lbl_8040C490
 lbl_8040C490:
     .4byte NULL
@@ -84033,21 +84021,15 @@ lbl_8040C4B8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x477FFF00
+    .4byte 0x477FFF00 
     .4byte 0x41F00000
     .4byte 0x3FAAA993
-    .4byte 0x5A45524F
-    .4byte 0x20627974
-    .4byte 0x6520616C
-    .4byte 0x6C6F630A
-    .4byte NULL
-    .4byte 0x7369736C
-    .4byte 0x69622E63
-    .4byte NULL
-    .4byte 0x4D656D6F
-    .4byte 0x72792045
-    .4byte 0x6D707479
-    .4byte 0x0A000000
+    .asciz "ZERO byte alloc\n"
+    .balign 4
+    .asciz "sislib.c"
+    .balign 4
+    .asciz "Memory Empty\n"
+    .balign 4
 .global lbl_8040C520
 lbl_8040C520:
     .asciz "unknow camera\n"
