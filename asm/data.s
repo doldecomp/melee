@@ -31097,6 +31097,8 @@ lbl_803D6488:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+.global lbl_803D6558
+lbl_803D6558:
     .4byte 0x000A0000
     .4byte NULL
     .4byte NULL
@@ -31289,6 +31291,8 @@ lbl_803D6488:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+.global lbl_803D6858
+lbl_803D6858:
     .4byte 0x00080000
     .4byte NULL
     .4byte NULL
@@ -31300,103 +31304,40 @@ lbl_803D6488:
 .global lbl_803D6878
 lbl_803D6878:
     .4byte 0x000D0000
-    .4byte 0x803D6488
+    .4byte lbl_803D6488
     .4byte 0x01300000
-    .4byte 0x803D6558
+    .4byte lbl_803D6558
     .4byte 0x02020000
-    .4byte 0x803D6858
+    .4byte lbl_803D6858
     .4byte 0x03000000
     .4byte NULL
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x43616E6E
-    .4byte 0x6F742072
-    .4byte 0x65616420
-    .4byte 0x61726368
-    .4byte 0x69766520
-    .4byte 0x66696C65
-    .4byte 0x20284669
-    .4byte 0x6C65204E
-    .4byte 0x616D6520
-    .4byte 0x3A202573
-    .4byte 0x292E0000
+    .asciz "Error : Cannot read archive file (File Name : %s)."
+    .balign 4
 .global lbl_803D68CC
 lbl_803D68CC:
-    .4byte 0x25648146
-    .4byte 0x25303264
-    .4byte NULL
-    .4byte 0x53645273
-    .4byte 0x742E7573
-    .4byte 0x64000000
-    .4byte 0x5349535F
-    .4byte 0x52657375
-    .4byte 0x6C744461
-    .4byte 0x74610000
-    .4byte 0x53645273
-    .4byte 0x742E6461
-    .4byte 0x74000000
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x676F626A
-    .4byte 0x20646F6E
-    .4byte 0x74277420
-    .4byte 0x67657420
-    .4byte 0x28676D52
-    .4byte 0x6573756C
-    .4byte 0x74416464
-    .4byte 0x50616E65
-    .4byte 0x6C43616D
-    .4byte 0x65726129
-    .4byte 0x0A000000
-    .4byte 0x676D7265
-    .4byte 0x73756C74
-    .4byte 0x2E630000
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x636F626A
-    .4byte 0x20646F6E
-    .4byte 0x74277420
-    .4byte 0x67657420
-    .4byte 0x28676D52
-    .4byte 0x6573756C
-    .4byte 0x74416464
-    .4byte 0x50616E65
-    .4byte 0x6C43616D
-    .4byte 0x65726129
-    .4byte 0x0A000000
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x676F626A
-    .4byte 0x20646F6E
-    .4byte 0x74277420
-    .4byte 0x67657420
-    .4byte 0x28676D52
-    .4byte 0x6573756C
-    .4byte 0x74416464
-    .4byte 0x4C696768
-    .4byte 0x74290A00
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x6C6F626A
-    .4byte 0x20646F6E
-    .4byte 0x74277420
-    .4byte 0x67657420
-    .4byte 0x28676D52
-    .4byte 0x6573756C
-    .4byte 0x74416464
-    .4byte 0x4C696768
-    .4byte 0x74290A00
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x676F626A
-    .4byte 0x20646F6E
-    .4byte 0x74277420
-    .4byte 0x67657420
-    .4byte 0x28676D52
-    .4byte 0x6573756C
-    .4byte 0x74416464
-    .4byte 0x4D6F6465
-    .4byte 0x6C290A00
+# FIX ME
+    .ascii "%d"
+    .byte 0x81
+    .asciz "F%02d"
+    .balign 4
+    .asciz "SdRst.usd"
+    .balign 4
+    .asciz "SIS_ResultData"
+    .balign 4
+    .asciz "SdRst.dat"
+    .balign 4
+    .asciz "Error : gobj dont't get (gmResultAddPanelCamera)\n"
+    .balign 4
+    .asciz "gmresult.c"
+    .balign 4
+    .asciz "Error : cobj dont't get (gmResultAddPanelCamera)\n"
+    .balign 4
+    .asciz "Error : gobj dont't get (gmResultAddLight)\n"
+    .balign 4
+    .asciz "Error : lobj dont't get (gmResultAddLight)\n"
+    .balign 4
+    .asciz "Error : gobj dont't get (gmResultAddModel)\n"
+    .balign 4
 .global lbl_803D69F8
 lbl_803D69F8:
     .asciz "translate"
