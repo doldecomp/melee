@@ -8695,9 +8695,9 @@ lbl_803C1F40:
     .4byte 0x803D4818
     .4byte 0x803D4824
     .4byte lbl_803D34E8
-    .4byte 0x803D34F4
-    .4byte 0x803D3568
-    .4byte 0x803D3574
+    .4byte lbl_803D34F4
+    .4byte lbl_803D3568
+    .4byte lbl_803D3574
     .4byte lbl_803D38E8
     .4byte lbl_803D38F4
     .4byte lbl_803D39B8
@@ -8950,8 +8950,8 @@ lbl_803C2360:
     .4byte 0x803D34A8
     .4byte 0x803D40C4
     .4byte 0x803D4868
-    .4byte 0x803D3558
-    .4byte 0x803D35D8
+    .4byte lbl_803D3558
+    .4byte lbl_803D35D8
     .4byte lbl_803D3988
     .4byte lbl_803D3A24
 
@@ -8985,8 +8985,8 @@ lbl_803C2360:
     .4byte lbl_803D3410
     .4byte 0x803D40B8
     .4byte 0x803D485C
-    .4byte 0x803D3520
-    .4byte 0x803D35A0
+    .4byte lbl_803D3520
+    .4byte lbl_803D35A0
     .4byte lbl_803D3948
     .4byte lbl_803D3A18
 
@@ -28007,70 +28007,74 @@ lbl_803D3498:
     .4byte NULL
 .global lbl_803D34E8
 lbl_803D34E8:
-    .4byte 0x506C426F
-    .4byte 0x2E646174
+    .asciz "PlBo.dat"
+    .balign 4
+.global lbl_803D34F4
+lbl_803D34F4:
+    .asciz "ftDataBoy"
+    .balign 4
+.global lbl_803D3500
+lbl_803D3500:
+    .asciz "PlBoNr.dat"
+    .balign 4
+.global lbl_803D350C
+lbl_803D350C:
+    .asciz "PlyBoy_Share_joint"
+    .balign 4
+.global lbl_803D3520
+lbl_803D3520:
+    .asciz "PlBoAJ.dat"
+    .balign 4
+.global lbl_803D352C
+lbl_803D352C:
+    .asciz "ftDemoIntroMotionFileBoy"
+    .balign 4
     .4byte NULL
-    .4byte 0x66744461
-    .4byte 0x7461426F
-    .4byte 0x79000000
-    .4byte 0x506C426F
-    .4byte 0x4E722E64
-    .4byte 0x61740000
-    .4byte 0x506C7942
-    .4byte 0x6F795F53
-    .4byte 0x68617265
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x506C426F
-    .4byte 0x414A2E64
-    .4byte 0x61740000
-    .4byte 0x66744465
-    .4byte 0x6D6F496E
-    .4byte 0x74726F4D
-    .4byte 0x6F74696F
-    .4byte 0x6E46696C
-    .4byte 0x65426F79
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x803D352C
+    .4byte lbl_803D352C
     .4byte NULL
     .4byte NULL
-    .4byte 0x803D3500
-    .4byte 0x803D350C
+.global lbl_803D3558
+lbl_803D3558:
+    .4byte lbl_803D3500
+    .4byte lbl_803D350C
     .4byte NULL
     .4byte NULL
-    .4byte 0x506C476C
-    .4byte 0x2E646174
+.global lbl_803D3568
+lbl_803D3568:
+    .asciz "PlGl.dat"
+    .balign 4
+.global lbl_803D3574
+lbl_803D3574:
+    .asciz "ftDataGirl"
+    .balign 4
+.global lbl_803D3580
+lbl_803D3580:
+    .asciz "PlGlNr.dat"
+    .balign 4
+.global lbl_803D358C
+lbl_803D358C:
+    .asciz "PlyGirl_Share_joint"
+    .balign 4
+.global lbl_803D35A0
+lbl_803D35A0:
+    .asciz "PlGlAJ.dat"
+    .balign 4
+.global lbl_803D35AC
+lbl_803D35AC:
+    .asciz "ftDemoIntroMotionFileGirl"
+    .balign 4
     .4byte NULL
-    .4byte 0x66744461
-    .4byte 0x74614769
-    .4byte 0x726C0000
-    .4byte 0x506C476C
-    .4byte 0x4E722E64
-    .4byte 0x61740000
-    .4byte 0x506C7947
-    .4byte 0x69726C5F
-    .4byte 0x53686172
-    .4byte 0x655F6A6F
-    .4byte 0x696E7400
-    .4byte 0x506C476C
-    .4byte 0x414A2E64
-    .4byte 0x61740000
-    .4byte 0x66744465
-    .4byte 0x6D6F496E
-    .4byte 0x74726F4D
-    .4byte 0x6F74696F
-    .4byte 0x6E46696C
-    .4byte 0x65476972
-    .4byte 0x6C000000
-    .4byte NULL
-    .4byte 0x803D35AC
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x803D3580
-    .4byte 0x803D358C
+    .4byte lbl_803D35AC
     .4byte NULL
     .4byte NULL
+.global lbl_803D35D8
+lbl_803D35D8:
+    .4byte lbl_803D3580
+    .4byte lbl_803D358C
+    .4byte NULL
+    .4byte NULL
+.global lbl_803D35E8
+lbl_803D35E8:
     .4byte 0x00000127
     .4byte 0x00340011
     .4byte 0x12000000
