@@ -7788,10 +7788,10 @@ lbl_803C12E0:
     .4byte lbl_803D29F8
     .4byte lbl_803D2E80
     .4byte lbl_803D3A30
-    .4byte 0x803D41F8
+    .4byte lbl_803D41F8
 	.4byte NULL
 	.4byte NULL
-    .4byte 0x803D35E8
+    .4byte lbl_803D35E8
     .4byte lbl_803D3998
     .balign 4
 
@@ -8692,8 +8692,8 @@ lbl_803C1F40:
     .4byte lbl_803D328C
     .4byte lbl_803D4070
     .4byte lbl_803D407C
-    .4byte 0x803D4818
-    .4byte 0x803D4824
+    .4byte lbl_803D4818
+    .4byte lbl_803D4824
     .4byte lbl_803D34E8
     .4byte lbl_803D34F4
     .4byte lbl_803D3568
@@ -8949,7 +8949,7 @@ lbl_803C2360:
     .4byte lbl_803D2E40
     .4byte lbl_803D34A8
     .4byte lbl_803D40C4
-    .4byte 0x803D4868
+    .4byte lbl_803D4868
     .4byte lbl_803D3558
     .4byte lbl_803D35D8
     .4byte lbl_803D3988
@@ -8984,7 +8984,7 @@ lbl_803C2360:
     .4byte lbl_803D2DB4
     .4byte lbl_803D3410
     .4byte lbl_803D40B8
-    .4byte 0x803D485C
+    .4byte lbl_803D485C
     .4byte lbl_803D3520
     .4byte lbl_803D35A0
     .4byte lbl_803D3948
@@ -28860,6 +28860,8 @@ jtbl_803D41D0:
 	.4byte lbl_801513A8
 	.4byte lbl_801513E8
 	.4byte lbl_801513F8
+.global lbl_803D41F8
+lbl_803D41F8:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01000000
@@ -29252,28 +29254,30 @@ jtbl_803D41D0:
 	.4byte lbl_8015BBD8
 	.4byte lbl_8015BC38
     .4byte func_800761C8
-    .4byte 0x506C4368
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x66744461
-    .4byte 0x74614372
-    .4byte 0x617A7968
-    .4byte 0x616E6400
-    .4byte 0x506C4368
-    .4byte 0x4E722E64
-    .4byte 0x61740000
-    .4byte 0x506C7943
-    .4byte 0x72617A79
-    .4byte 0x68616E64
-    .4byte 0x5F536861
-    .4byte 0x72655F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x506C4368
-    .4byte 0x414A2E64
-    .4byte 0x61740000
-    .4byte 0x803D4834
-    .4byte 0x803D4840
+.global lbl_803D4818
+lbl_803D4818:
+    .asciz "PlCh.dat"
+    .balign 4
+.global lbl_803D4824
+lbl_803D4824:
+    .asciz "ftDataCrazyhand"
+    .balign 4
+.global lbl_803D4834
+lbl_803D4834:
+    .asciz "PlChNr.dat"
+    .balign 4
+.global lbl_803D4840
+lbl_803D4840:
+    .asciz "PlyCrazyhand_Share_joint"
+    .balign 4
+.global lbl_803D485C
+lbl_803D485C:
+    .asciz "PlChAJ.dat"
+    .balign 4
+.global lbl_803D4868
+lbl_803D4868:
+    .4byte lbl_803D4834
+    .4byte lbl_803D4840
     .4byte NULL
     .4byte NULL
 .global lbl_803D4878
