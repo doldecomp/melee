@@ -723,47 +723,20 @@ lbl_803BA43C:
     .4byte lbl_803BA424
     .4byte lbl_803BA430
     .4byte lbl_803BA43C
-    .4byte 0x5B6C6248
-    .4byte 0x6561705D
-    .4byte 0x202D2D20
-    .4byte 0x5265706F
-    .4byte 0x7274202D
-    .4byte 0x2D0A0000
-    .4byte 0x20253564
-    .4byte 0x204B4220
-    .4byte 0x2B200000
-    .4byte 0x20253564
-    .4byte 0x204B4228
-    .4byte 0x20253864
-    .4byte 0x29000000
-    .4byte 0x20202020
-    .4byte 0x20202020
-    .4byte 0x20202020
-    .4byte 0x20202020
-    .4byte 0x20202020
-    .4byte 0x20202020
-    .4byte 0x20646573
-    .4byte 0x74726F79
-    .4byte NULL
-    .4byte 0x202F2025
-    .4byte 0x3564204B
-    .4byte 0x420A0000
-    .4byte 0x4D61696E
-    .4byte 0x52414D20
-    .4byte 0x546F7461
-    .4byte 0x6C203A20
-    .4byte 0x25356420
-    .4byte 0x4B422820
-    .4byte 0x25386429
-    .4byte 0x0A000000
-    .4byte 0x20202041
-    .4byte 0x52414D20
-    .4byte 0x546F7461
-    .4byte 0x6C203A20
-    .4byte 0x25356420
-    .4byte 0x4B422820
-    .4byte 0x25386429
-    .4byte 0x0A000000
+    .asciz "[lbHeap] -- Report --\n"
+    .balign 4
+    .asciz " %5d KB + "
+    .balign 4
+    .asciz " %5d KB( %8d)"
+    .balign 4
+    .asciz "                         destroy"
+    .balign 4
+    .asciz " / %5d KB\n"
+    .balign 4
+    .asciz "MainRAM Total : %5d KB( %8d)\n"
+    .balign 4
+    .asciz "   ARAM Total : %5d KB( %8d)\n"
+    .balign 4
     .4byte NULL
 .global lbl_803BA508
 lbl_803BA508:
