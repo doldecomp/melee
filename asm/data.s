@@ -7785,7 +7785,7 @@ lbl_803C12E0:
     .4byte lbl_803D1848
     .4byte lbl_803D1EA8
     .4byte lbl_803D23E8
-    .4byte 0x803D29F8
+    .4byte lbl_803D29F8
     .4byte 0x803D2E80
     .4byte lbl_803D3A30
     .4byte 0x803D41F8
@@ -8684,8 +8684,8 @@ lbl_803C1F40:
     .4byte lbl_803D1CB4
     .4byte lbl_803D21E8
     .4byte lbl_803D21F4
-    .4byte 0x803D28E8
-    .4byte 0x803D28F4
+    .4byte lbl_803D28E8
+    .4byte lbl_803D28F4
     .4byte 0x803D2CD8
     .4byte 0x803D2CE4
     .4byte 0x803D3280
@@ -8943,7 +8943,7 @@ lbl_803C2360:
     .4byte lbl_803D180C
     .4byte lbl_803D1E74
     .4byte lbl_803D23B4
-    .4byte 0x803D29C8
+    .4byte lbl_803D29C8
     .4byte 0x803D2E40
     .4byte 0x803D34A8
     .4byte 0x803D40C4
@@ -8978,7 +8978,7 @@ lbl_803C2360:
     .4byte lbl_803D1770
     .4byte lbl_803D1DE8
     .4byte lbl_803D2328
-    .4byte 0x803D292C
+    .4byte lbl_803D292C
     .4byte 0x803D2DB4
     .4byte 0x803D3410
     .4byte 0x803D40B8
@@ -9014,7 +9014,7 @@ lbl_803C2468:
     .4byte lbl_803D17FC
     .4byte lbl_803D1E64
     .4byte lbl_803D23A4
-    .4byte 0x803D29B8
+    .4byte lbl_803D29B8
     .4byte 0x803D2E30
     .4byte 0x803D3498
     .4byte NULL
@@ -27299,74 +27299,64 @@ lbl_803D23E8:
 	.4byte lbl_8014DBA8
 	.4byte lbl_8014DC04
     .4byte func_800761C8
-    .4byte 0x506C4777
-    .4byte 0x2E646174
+.global lbl_803D28E8
+lbl_803D28E8:
+    .asciz "PlGw.dat"
+    .balign 4
+.global lbl_803D28F4
+lbl_803D28F4:
+    .asciz "ftDataGamewatch"
+    .balign 4
+.global lbl_803D2904
+lbl_803D2904:
+    .asciz "PlGwNr.dat"
+    .balign 4
+.global lbl_803D2910
+lbl_803D2910:
+    .asciz "PlyGamewatch5K_Share_joint"
+    .balign 4
+.global lbl_803D292C
+lbl_803D292C:
+    .asciz "PlGwAJ.dat"
+    .balign 4
+.global lbl_803D2938
+lbl_803D2938:
+    .asciz "ftDemoResultMotionFileGamewatch"
+    .balign 4
+.global lbl_803D2958
+lbl_803D2958:
+    .asciz "ftDemoIntroMotionFileGamewatch"
+    .balign 4
+.global lbl_803D2978
+lbl_803D2978:
+    .asciz "ftDemoEndingMotionFileGamewatch"
+    .balign 4
+.global lbl_803D2998
+lbl_803D2998:
+    .asciz "ftDemoViWaitMotionFileGamewatch"
+    .balign 4
+.global lbl_803D29B8
+lbl_803D29B8:
+    .4byte lbl_803D2938
+    .4byte lbl_803D2958
+    .4byte lbl_803D2978
+    .4byte lbl_803D2998
+.global lbl_803D29C8
+lbl_803D29C8:
+    .4byte lbl_803D2904
+    .4byte lbl_803D2910
     .4byte NULL
-    .4byte 0x66744461
-    .4byte 0x74614761
-    .4byte 0x6D657761
-    .4byte 0x74636800
-    .4byte 0x506C4777
-    .4byte 0x4E722E64
-    .4byte 0x61740000
-    .4byte 0x506C7947
-    .4byte 0x616D6577
-    .4byte 0x61746368
-    .4byte 0x354B5F53
-    .4byte 0x68617265
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x506C4777
-    .4byte 0x414A2E64
-    .4byte 0x61740000
-    .4byte 0x66744465
-    .4byte 0x6D6F5265
-    .4byte 0x73756C74
-    .4byte 0x4D6F7469
-    .4byte 0x6F6E4669
-    .4byte 0x6C654761
-    .4byte 0x6D657761
-    .4byte 0x74636800
-    .4byte 0x66744465
-    .4byte 0x6D6F496E
-    .4byte 0x74726F4D
-    .4byte 0x6F74696F
-    .4byte 0x6E46696C
-    .4byte 0x6547616D
-    .4byte 0x65776174
-    .4byte 0x63680000
-    .4byte 0x66744465
-    .4byte 0x6D6F456E
-    .4byte 0x64696E67
-    .4byte 0x4D6F7469
-    .4byte 0x6F6E4669
-    .4byte 0x6C654761
-    .4byte 0x6D657761
-    .4byte 0x74636800
-    .4byte 0x66744465
-    .4byte 0x6D6F5669
-    .4byte 0x57616974
-    .4byte 0x4D6F7469
-    .4byte 0x6F6E4669
-    .4byte 0x6C654761
-    .4byte 0x6D657761
-    .4byte 0x74636800
-    .4byte 0x803D2938
-    .4byte 0x803D2958
-    .4byte 0x803D2978
-    .4byte 0x803D2998
-    .4byte 0x803D2904
-    .4byte 0x803D2910
+    .4byte lbl_803D2904
+    .4byte lbl_803D2910
     .4byte NULL
-    .4byte 0x803D2904
-    .4byte 0x803D2910
+    .4byte lbl_803D2904
+    .4byte lbl_803D2910
     .4byte NULL
-    .4byte 0x803D2904
-    .4byte 0x803D2910
+    .4byte lbl_803D2904
+    .4byte lbl_803D2910
     .4byte NULL
-    .4byte 0x803D2904
-    .4byte 0x803D2910
-    .4byte NULL
+.global lbl_803D29F8
+lbl_803D29F8:
     .4byte 0xFFFFFFFF
     .4byte NULL
     .4byte 0x01000000
