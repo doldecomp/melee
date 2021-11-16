@@ -19844,10 +19844,10 @@ lbl_803CACB0:
     .4byte lbl_803CAC60
     .4byte lbl_803CAC70
     .4byte lbl_803CAC8C
-    .4byte 0x506C4B62
-    .4byte 0x4E724370
-    .4byte 0x50722E64
-    .4byte 0x61740000
+.global lbl_803CACF8
+lbl_803CACF8:
+    .asciz "PlKbNrCpPr.dat"
+    .balign 4
     .4byte 0x506C794B
     .4byte 0x69726279
     .4byte 0x50725F53
@@ -19962,7 +19962,9 @@ lbl_803CACB0:
     .4byte 0x696D5F6A
     .4byte 0x6F696E74
     .4byte NULL
-    .4byte 0x803CACF8
+.global lbl_803CAED0
+lbl_803CAED0:
+    .4byte lbl_803CACF8
     .4byte 0x803CAD08
     .4byte 0x803CAD20
     .4byte 0x803CAD40
@@ -20098,6 +20100,8 @@ lbl_803CACB0:
     .4byte 0x696D5F6A
     .4byte 0x6F696E74
     .4byte NULL
+.global lbl_803CB0F0
+lbl_803CB0F0:
     .4byte 0x803CAF18
     .4byte 0x803CAF28
     .4byte 0x803CAF40
@@ -20234,6 +20238,8 @@ lbl_803CACB0:
     .4byte 0x696D5F6A
     .4byte 0x6F696E74
     .4byte NULL
+.global lbl_803CB310
+lbl_803CB310:
     .4byte 0x803CB138
     .4byte 0x803CB148
     .4byte 0x803CB160
@@ -20254,28 +20260,18 @@ lbl_803CACB0:
     .4byte 0x803CB2EC
 .global lbl_803CB358
 lbl_803CB358:
-    .4byte 0x506C4B62
-    .4byte 0x4E724370
-    .4byte 0x47772E64
-    .4byte 0x61740000
+    .asciz "PlKbNrCpGw.dat"
+    .balign 4
 .global lbl_803CB368
 lbl_803CB368:
-    .4byte 0x506C794B
-    .4byte 0x69726279
-    .4byte 0x47775F53
-    .4byte 0x68617265
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
+    .asciz "PlyKirbyGw_Share_joint"
+    .balign 4
 .global lbl_803CB380
 lbl_803CB380:
-    .4byte 0x506C794B
-    .4byte 0x69726279
-    .4byte 0x47775F53
-    .4byte 0x68617265
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
+    .asciz "PlyKirbyGw_Share_matanim_joint"
+    .balign 4
+.global lbl_803CB3A0
+lbl_803CB3A0:
     .4byte lbl_803CB358
     .4byte lbl_803CB368
     .4byte lbl_803CB380
@@ -20311,16 +20307,16 @@ lbl_803CB3E8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x803CAED0
-    .4byte 0x803CB0F0
+    .4byte lbl_803CAED0
+    .4byte lbl_803CB0F0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x803CB310
+    .4byte lbl_803CB310
     .4byte NULL
-    .4byte 0x803CB3A0
+    .4byte lbl_803CB3A0
     .4byte NULL
     .4byte NULL
     .4byte NULL
