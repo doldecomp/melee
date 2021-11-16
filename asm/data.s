@@ -32305,11 +32305,15 @@ lbl_803D7058:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+.global lbl_803D78E8
+lbl_803D78E8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x42780000
     .4byte NULL
+.global lbl_803D78FC
+lbl_803D78FC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -32323,47 +32327,20 @@ lbl_803D7910:
     .4byte 0x000001E0
     .4byte 0x00000280
     .4byte 0x000001E0
-    .4byte 0x803D78E8
-    .4byte 0x803D78FC
+    .4byte lbl_803D78E8
+    .4byte lbl_803D78FC
     .4byte NULL
     .4byte NULL
     .4byte 0x3F800000
     .4byte 0x459C4000
     .4byte 0x419FFFFF
     .4byte 0x3F9BBBBF
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x6D6F6465
-    .4byte 0x6C20676F
-    .4byte 0x626A2064
-    .4byte 0x6F6E7427
-    .4byte 0x74206669
-    .4byte 0x6E642061
-    .4byte 0x7420676D
-    .4byte 0x52657375
-    .4byte 0x6C745365
-    .4byte 0x74566965
-    .4byte 0x77506F73
-    .4byte 0x0A000000
-    .4byte 0x676D7265
-    .4byte 0x73756C74
-    .4byte 0x706C6179
-    .4byte 0x65722E63
-    .4byte NULL
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x6D6F6465
-    .4byte 0x6C206A6F
-    .4byte 0x626A2064
-    .4byte 0x6F6E7427
-    .4byte 0x74206669
-    .4byte 0x6E642061
-    .4byte 0x7420676D
-    .4byte 0x52657375
-    .4byte 0x6C745365
-    .4byte 0x74566965
-    .4byte 0x77506F73
-    .4byte 0x0A000000
+    .asciz "Error : model gobj dont't find at gmResultSetViewPos\n"
+    .balign 4
+    .asciz "gmresultplayer.c"
+    .balign 4
+    .asciz "Error : model jobj dont't find at gmResultSetViewPos\n"
+    .balign 4
     .4byte NULL
 .global lbl_803D79D0
 lbl_803D79D0:
