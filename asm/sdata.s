@@ -2229,6 +2229,8 @@ lbl_804D47A8:
 lbl_804D47B0:
     .asciz "jobj"
     .balign 4
+.global lbl_804D47B8
+lbl_804D47B8:
     .asciz "/GrVe"
     .balign 4
 .global lbl_804D47C0
@@ -2283,6 +2285,8 @@ lbl_804D4818:
 lbl_804D4820:
     .asciz "0"
     .balign 4
+.global lbl_804D4824
+lbl_804D4824:
     .4byte 0x41800000
 .global lbl_804D4828
 lbl_804D4828:
@@ -2292,6 +2296,8 @@ lbl_804D4828:
 lbl_804D4830:
     .asciz "lobj"
     .balign 4
+.global lbl_804D4838
+lbl_804D4838:
     .4byte 0x41800000
     .4byte 0x00000000
 .global lbl_804D4840
@@ -2449,6 +2455,8 @@ lbl_804D4958:
 lbl_804D4960:
     .asciz "bg_gobj"
     .balign 4
+.global lbl_804D4968
+lbl_804D4968:
     .4byte 0x00000003
     .4byte 0x00000000
 .global lbl_804D4970
@@ -2472,8 +2480,12 @@ lbl_804D498C:
     .asciz "aobj"
     .balign 4
     .4byte NULL
+.global lbl_804D4998
+lbl_804D4998:
     .4byte 0x0000000A
     .4byte 0x00000000
+.global lbl_804D49A0
+lbl_804D49A0:
     .4byte 0x2F477248
     .4byte 0x72000000
 .global lbl_804D49A8
@@ -2829,6 +2841,8 @@ lbl_804D4CAC:
     .4byte 0x82F10000
     .4byte 0x815B0000
     .4byte 0x81420000
+.global lbl_804D4CD8
+lbl_804D4CD8:
     .4byte 0x83410000
     .4byte 0x83430000
     .4byte 0x83450000
@@ -2854,6 +2868,8 @@ lbl_804D4CAC:
     .4byte 0x836B0000
     .4byte 0x836C0000
     .4byte 0x836D0000
+.global lbl_804D4D3C
+lbl_804D4D3C:
     .4byte 0x836E0000
     .4byte 0x83710000
     .4byte 0x83740000
