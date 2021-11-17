@@ -49977,39 +49977,41 @@ lbl_803E8DF0:
     .4byte 0x2E630000
 .global lbl_803E8EB0
 lbl_803E8EB0:
-    .4byte 0x80222080
-    .4byte 0x802220AC
-    .4byte 0x802220B4
-    .4byte 0x802220B8
+    .4byte GrTMars_80222080
+    .4byte GrTMars_802220AC
+    .4byte GrTMars_802220B4
+    .4byte GrTMars_802220B8
     .4byte NULL
-    .4byte 0x8022214C
-    .4byte 0x8022219C
-    .4byte 0x802221A4
-    .4byte 0x802221C4
+    .4byte GrTMars_8022214C
+    .4byte GrTMars_8022219C
+    .4byte GrTMars_802221A4
+    .4byte GrTMars_802221C4
     .4byte NULL
-    .4byte 0x802220BC
-    .4byte 0x8022210C
-    .4byte 0x80222114
-    .4byte 0x80222148
+    .4byte GrTMars_802220BC
+    .4byte GrTMars_8022210C
+    .4byte GrTMars_80222114
+    .4byte GrTMars_80222148
     .4byte 0xC0000000
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
+.global lbl_803E8F00
+lbl_803E8F00:
     .4byte 0x2F477254
     .4byte 0x4D732E64
     .4byte 0x61740000
     .4byte 0x00000034
-    .4byte 0x803E8EB0
-    .4byte 0x803E8F00
-    .4byte 0x80221EF8
-    .4byte 0x80221EF4
-    .4byte 0x80221F68
-    .4byte 0x80221F6C
-    .4byte 0x80221F90
-    .4byte 0x802221C8
-    .4byte 0x802221D0
+    .4byte lbl_803E8EB0
+    .4byte lbl_803E8F00
+    .4byte GrTMars_80221EF8
+    .4byte GrTMars_80221EF4
+    .4byte GrTMars_80221F68
+    .4byte GrTMars_80221F6C
+    .4byte GrTMars_80221F90
+    .4byte GrTMars_802221C8
+    .4byte GrTMars_802221D0
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
