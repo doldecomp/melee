@@ -1973,6 +1973,8 @@ lbl_804D45E0:
 .global lbl_804D45E4
 lbl_804D45E4:
     .4byte 0x01000000
+.global lbl_804D45E8
+lbl_804D45E8:
     .4byte 0x2F477250
     .4byte 0x73000000
 .global lbl_804D45F0
@@ -2037,6 +2039,8 @@ lbl_804D4648:
     .asciz "0"
     .balign 4
     .4byte NULL
+.global lbl_804D4650
+lbl_804D4650:
     .4byte 0x2F477243
     .4byte 0x6E000000
 .global lbl_804D4658
@@ -2434,6 +2438,8 @@ lbl_804D4928:
 lbl_804D4930:
     .asciz "0"
     .balign 4
+.global lbl_804D4934
+lbl_804D4934:
     .4byte 0x41800000
 .global lbl_804D4938
 lbl_804D4938:
@@ -2443,6 +2449,8 @@ lbl_804D4938:
 lbl_804D4940:
     .asciz "lobj"
     .balign 4
+.global lbl_804D4948
+lbl_804D4948:
     .4byte 0x41800000
     .4byte 0x00000000
 .global lbl_804D4950
@@ -2668,12 +2676,20 @@ lbl_804D4B1C:
 lbl_804D4B28:
     .asciz "data"
     .balign 4
+.global lbl_804D4B30
+lbl_804D4B30:
     .4byte 0x008B008C
     .4byte 0x008D0000
+.global lbl_804D4B38
+lbl_804D4B38:
     .4byte 0x00960097
     .4byte 0x00980099
+.global lbl_804D4B40
+lbl_804D4B40:
     .4byte 0x00A400A5
     .4byte 0x00A60000
+.global lbl_804D4B48
+lbl_804D4B48:
     .4byte 0x00A800A9
     .4byte 0x00AA0000
 .global lbl_804D4B50
@@ -4645,6 +4661,8 @@ lbl_804D587C:
 lbl_804D5880:
     .4byte lbl_804D5878
     .4byte lbl_804D587C
+.global lbl_804D5888
+lbl_804D5888:
     .4byte lbl_803FA3F4
     .4byte lbl_803FA404
 .global lbl_804D5890
@@ -4698,10 +4716,14 @@ lbl_804D5910:
     .4byte 0x72203A00
     .4byte 0x4D6F6465
     .4byte 0x203A0000
-    .4byte 0x4C756967
-    .4byte 0x69000000
-    .4byte 0x4D617273
-    .4byte 0x00000000
+.global lbl_804D5934
+lbl_804D5934:
+    .asciz "Luigi"
+    .balign 4
+.global lbl_804D593C
+lbl_804D593C:
+    .asciz "Mars"
+    .balign 4
     .4byte 0x4D657774
     .4byte 0x776F0000
     .4byte 0x50757269
