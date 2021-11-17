@@ -2007,7 +2007,10 @@ lbl_804D68D0:
     .skip 0x8
 .global lbl_804D68D8
 lbl_804D68D8:
-	.skip 0x10
+	.skip 0x8
+.global lbl_804D68E0
+lbl_804D68E0:
+    .skip 0x8
 .global lbl_804D68E8
 lbl_804D68E8:
 	.skip 0x1

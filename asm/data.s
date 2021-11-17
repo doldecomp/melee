@@ -38782,7 +38782,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x01020000
 	.4byte func_801B4064
@@ -38794,7 +38794,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B45A4
     .4byte NULL
     .4byte 0x11000000
-    .4byte 0x804D68D8
+    .4byte lbl_804D68D8
     .4byte NULL
     .4byte 0x03020000
 	.4byte lbl_801B461C
@@ -38806,7 +38806,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x09020000
 	.4byte lbl_801B4768
@@ -38824,7 +38824,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x11020000
 	.4byte func_801B4064
@@ -38842,7 +38842,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x19020000
 	.4byte func_801B4064
@@ -38854,7 +38854,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B4430
     .4byte NULL
     .4byte 0x12000000
-    .4byte 0x804D68D8
+    .4byte lbl_804D68D8
     .4byte NULL
     .4byte 0x1B020000
 	.4byte lbl_801B47FC
@@ -38872,7 +38872,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x21020000
 	.4byte func_801B4064
@@ -38884,7 +38884,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B4974
     .4byte NULL
     .4byte 0x14000000
-    .4byte 0x804D68D8
+    .4byte lbl_804D68D8
     .4byte NULL
     .4byte 0x23020000
 	.4byte lbl_801B4B28
@@ -38896,7 +38896,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B4430
     .4byte NULL
     .4byte 0x15000000
-    .4byte 0x804D68D8
+    .4byte lbl_804D68D8
     .4byte NULL
     .4byte 0x25020000
 	.4byte func_801B4064
@@ -38908,7 +38908,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x29020000
 	.4byte func_801B4064
@@ -38932,7 +38932,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x31020000
 	.4byte func_801B4064
@@ -38950,7 +38950,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x3A020000
 	.4byte func_801B4064
@@ -38968,7 +38968,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x41020000
 	.4byte lbl_801B4E58
@@ -38980,7 +38980,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x49020000
 	.4byte func_801B4064
@@ -38992,7 +38992,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x51020000
 	.4byte func_801B4064
@@ -39004,7 +39004,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B4430
     .4byte NULL
     .4byte 0x18000000
-    .4byte 0x804D68D8
+    .4byte lbl_804D68D8
     .4byte NULL
     .4byte 0x53020000
 	.4byte lbl_801B4EB8
@@ -39016,7 +39016,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B3F40
     .4byte NULL
     .4byte 0x0E000000
-    .4byte 0x804D68E0
+    .4byte lbl_804D68E0
     .4byte NULL
     .4byte 0x59020000
 	.4byte lbl_801B4F44
@@ -39028,13 +39028,13 @@ lbl_803DE1B8:
 	.4byte lbl_801B4430
 	.4byte lbl_801B5078
     .4byte 0x19000000
-    .4byte 0x804D68D8
+    .4byte lbl_804D68D8
     .4byte NULL
     .4byte 0x5B020000
 	.4byte lbl_801B4430
     .4byte NULL
     .4byte 0x1A000000
-    .4byte 0x804D68D8
+    .4byte lbl_804D68D8
     .4byte NULL
     .4byte 0x5C020000
 	.4byte func_801B4064
@@ -39046,7 +39046,7 @@ lbl_803DE1B8:
 	.4byte lbl_801B4430
 	.4byte lbl_801B518C
     .4byte 0x1B000000
-    .4byte 0x804D68D8
+    .4byte lbl_804D68D8
     .4byte NULL
     .4byte 0x68020000
     .4byte NULL
