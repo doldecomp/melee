@@ -158,7 +158,22 @@ lbl_80459B28:
     .skip 0x60
 .global lbl_80459B88
 lbl_80459B88:
-	.skip 0x658
+	.skip 0x88
+.global lbl_80459C10
+lbl_80459C10:
+    .skip 0x90
+.global lbl_80459CA0
+lbl_80459CA0:
+    .skip 0x78
+.global lbl_80459D18
+lbl_80459D18:
+    .skip 0x78
+.global lbl_80459D90
+lbl_80459D90:
+    .skip 0x60
+.global lbl_80459DF0
+lbl_80459DF0:
+    .skip 0x3F0
 .global lbl_8045A1E0
 lbl_8045A1E0:
 	.skip 0x4E0
@@ -2007,7 +2022,10 @@ lbl_804D68D0:
     .skip 0x8
 .global lbl_804D68D8
 lbl_804D68D8:
-	.skip 0x10
+	.skip 0x8
+.global lbl_804D68E0
+lbl_804D68E0:
+    .skip 0x8
 .global lbl_804D68E8
 lbl_804D68E8:
 	.skip 0x1
@@ -2028,7 +2046,10 @@ lbl_804D68F9:
 	.skip 0x7
 .global lbl_804D6900
 lbl_804D6900:
-	.skip 0x10
+	.skip 0x8
+.global lbl_804D6908
+lbl_804D6908:
+    .skip 0x8
 .global lbl_804D6910
 lbl_804D6910:
     .skip 0x8
@@ -2751,7 +2772,10 @@ lbl_804D6DCC:
 	.skip 0x4
 .global lbl_804D6DD0
 lbl_804D6DD0:
-	.skip 0x8
+	.skip 0x4
+.global lbl_804D6DD4
+lbl_804D6DD4:
+    .skip 0x4
 .global lbl_804D6DD8
 lbl_804D6DD8:
 	.skip 0x4
