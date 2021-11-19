@@ -284,6 +284,8 @@ lbl_803B75DC:
     .4byte 0x00000000
     .4byte 0x40E00000
     .4byte 0x00000000
+.global lbl_803B75E8
+lbl_803B75E8:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
