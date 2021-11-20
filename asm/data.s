@@ -83740,6 +83740,8 @@ lbl_8040BA34:
     .4byte lbl_8040B9FC
     .4byte lbl_8040BA18
     .4byte NULL
+.global lbl_8040BA5C
+lbl_8040BA5C:
     .4byte NULL
     .4byte NULL
     .4byte func_80394F48
@@ -83865,6 +83867,8 @@ lbl_8040BBC8:
     .4byte lbl_8040BB98
     .4byte lbl_8040BBB0
     .4byte NULL
+.global lbl_8040BBE8
+lbl_8040BBE8:
     .4byte NULL
     .4byte NULL
     .4byte func_80394F48
@@ -83988,6 +83992,8 @@ lbl_8040BD54:
     .4byte lbl_8040BD14
     .4byte lbl_8040BD34
     .4byte NULL
+.global lbl_8040BD74
+lbl_8040BD74:
     .4byte NULL
     .4byte NULL
     .4byte func_80394F48
