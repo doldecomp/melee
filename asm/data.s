@@ -100407,7 +100407,7 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0xB0000000
     .4byte 0xB0000000
-	.4byte lbl_80010000
+	.4byte 0x80010000
     .4byte 0x807FFFFF
     .4byte 0x808FFFFF
 	.4byte lbl_80244444
