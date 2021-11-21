@@ -26,7 +26,7 @@ LDSCRIPT := $(BUILD_DIR)/ldscript.lcf
 # Outputs
 DOL     := $(BUILD_DIR)/main.dol
 ELF     := $(DOL:.dol=.elf)
-MAP     := $(BUILD_DIR)/ssbm.map
+MAP     := $(BUILD_DIR)/GALE01.map
 
 include obj_files.mk
 
