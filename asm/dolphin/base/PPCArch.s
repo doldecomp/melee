@@ -46,13 +46,13 @@ lbl_80335E98:
 /* 80335EA0 00332A80  60 00 00 00 */	nop 
 /* 80335EA4 00332A84  4B FF FF F4 */	b lbl_80335E98
 
-.global func_80335EA8
-func_80335EA8:
+.global PPCMfhid2
+PPCMfhid2:
 /* 80335EA8 00332A88  7C 78 E2 A6 */	mfspr r3, 0x398
 /* 80335EAC 00332A8C  4E 80 00 20 */	blr 
 
-.global func_80335EB0
-func_80335EB0:
+.global PPCMthid2
+PPCMthid2:
 /* 80335EB0 00332A90  7C 78 E3 A6 */	mtspr 0x398, r3
 /* 80335EB4 00332A94  4E 80 00 20 */	blr 
 
