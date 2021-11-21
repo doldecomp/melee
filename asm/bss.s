@@ -3622,8 +3622,8 @@ lbl_804D7284:
 .global lbl_804D7288
 lbl_804D7288:
 	.skip 0x4
-.global lbl_804D728C
-lbl_804D728C:
+.global __DVDLongFileNameFlag
+__DVDLongFileNameFlag:
 	.skip 0x4
 .global lbl_804D7290
 lbl_804D7290:
@@ -3736,20 +3736,20 @@ lbl_804D7328:
 .global lbl_804D732C
 lbl_804D732C:
 	.skip 0xC
-.global lbl_804D7338
-lbl_804D7338:
+.global BootInfo
+BootInfo:
 	.skip 0x4
-.global lbl_804D733C
-lbl_804D733C:
+.global BI2DebugFlag
+BI2DebugFlag:
 	.skip 0x4
-.global lbl_804D7340
-lbl_804D7340:
+.global BI2DebugFlagHolder
+BI2DebugFlagHolder:
 	.skip 0x4
-.global lbl_804D7344
-lbl_804D7344:
+.global AreWeInitialized
+AreWeInitialized:
 	.skip 0x4
-.global lbl_804D7348
-lbl_804D7348:
+.global OSExceptionTable
+OSExceptionTable:
 	.skip 0x8
 .global lbl_804D7350
 lbl_804D7350:
@@ -3757,8 +3757,8 @@ lbl_804D7350:
 .global lbl_804D7354
 lbl_804D7354:
 	.skip 0x4
-.global lbl_804D7358
-lbl_804D7358:
+.global AlarmQueue
+AlarmQueue:
 	.skip 0x8
 .global lbl_804D7360
 lbl_804D7360:
@@ -3874,8 +3874,8 @@ lbl_804D7410:
 .global lbl_804D7414
 lbl_804D7414:
 	.skip 0x4
-.global lbl_804D7418
-lbl_804D7418:
+.global __PADSpec
+__PADSpec:
 	.skip 0x8
 .global lbl_804D7420
 lbl_804D7420:

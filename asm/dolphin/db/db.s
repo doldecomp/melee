@@ -50,8 +50,8 @@ lbl_80335F4C:
 /* 80335F54 00332B34  7C 60 01 24 */	mtmsr r3
 /* 80335F58 00332B38  4B FF FF AC */	b lbl_80335F04
 
-.global func_80335F5C
-func_80335F5C:
+.global __DBIsExceptionMarked
+__DBIsExceptionMarked:
 /* 80335F5C 00332B3C  80 8D BB 68 */	lwz r4, lbl_804D7208@sda21(r13)
 /* 80335F60 00332B40  54 60 06 3E */	clrlwi r0, r3, 0x18
 /* 80335F64 00332B44  38 60 00 01 */	li r3, 1
@@ -60,8 +60,8 @@ func_80335F5C:
 /* 80335F70 00332B50  7C 83 00 38 */	and r3, r4, r0
 /* 80335F74 00332B54  4E 80 00 20 */	blr 
 
-.global func_80335F78
-func_80335F78:
+.global DBPrintf
+DBPrintf:
 /* 80335F78 00332B58  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 80335F7C 00332B5C  40 86 00 24 */	bne cr1, lbl_80335FA0
 /* 80335F80 00332B60  D8 21 00 28 */	stfd f1, 0x28(r1)

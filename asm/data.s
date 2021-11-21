@@ -75087,8 +75087,8 @@ jtbl_80401584:
 	.4byte lbl_80341E24
 	.4byte lbl_80341E40
     .4byte NULL
-.global lbl_80401618
-lbl_80401618:
+.global DriveInfo
+DriveInfo:
     .asciz "\nDolphin OS $Revision: 47 $.\n"
     .balign 4
     .asciz "Kernel built : %s %s\n"

@@ -239,6 +239,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtxvec.o           \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx44.o            \
 	$(BUILD_DIR)/asm/dolphin/mtx/vec.o              \
+	$(BUILD_DIR)/asm/dolphin/os/OS.o                \
                                                     \
 	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_1.o                \
                                                     \
