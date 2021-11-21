@@ -3502,23 +3502,23 @@ lbl_804D70F4:
 .global lbl_804D70F8
 lbl_804D70F8:
 	.skip 0x8
-.global lbl_804D7100
-lbl_804D7100:
+.global Ydchuff
+Ydchuff:
 	.skip 0x20
-.global lbl_804D7120
-lbl_804D7120:
+.global Udchuff
+Udchuff:
 	.skip 0x20
-.global lbl_804D7140
-lbl_804D7140:
+.global Vdchuff
+Vdchuff:
 	.skip 0x20
-.global lbl_804D7160
-lbl_804D7160:
+.global Yachuff
+Yachuff:
 	.skip 0x20
-.global lbl_804D7180
-lbl_804D7180:
+.global Uachuff
+Uachuff:
 	.skip 0x20
-.global lbl_804D71A0
-lbl_804D71A0:
+.global Vachuff
+Vachuff:
 	.skip 0x20
 .global lbl_804D71C0
 lbl_804D71C0:
