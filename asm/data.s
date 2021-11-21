@@ -60525,6 +60525,8 @@ lbl_803F23CC:
     .4byte NULL
     .4byte NULL
 
+.global lbl_803F2ED0
+lbl_803F2ED0:
     .4byte 0x000000A1
     .4byte 0x000000A2
     .4byte 0x000000A3
