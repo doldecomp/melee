@@ -3931,98 +3931,98 @@ lbl_804D7468:
 .global lbl_804D746C
 lbl_804D746C:
 	.skip 0x4
-.global lbl_804D7470
-lbl_804D7470:
+.global __AIS_Callback
+__AIS_Callback:
 	.skip 0x4
-.global lbl_804D7474
-lbl_804D7474:
+.global __AID_Callback
+__AID_Callback:
 	.skip 0x4
-.global lbl_804D7478
-lbl_804D7478:
+.global __CallbackStack
+__CallbackStack:
 	.skip 0x4
-.global lbl_804D747C
-lbl_804D747C:
+.global __OldStack
+__OldStack:
 	.skip 0x4
-.global lbl_804D7480
-lbl_804D7480:
+.global __AI_init_flag
+__AI_init_flag:
 	.skip 0x8
-.global lbl_804D7488
-lbl_804D7488:
+.global bound_32KHz
+bound_32KHz:
 	.skip 0x4
 .global lbl_804D748C
 lbl_804D748C:
 	.skip 0x4
-.global lbl_804D7490
-lbl_804D7490:
+.global bound_48KHz
+bound_48KHz:
 	.skip 0x4
 .global lbl_804D7494
 lbl_804D7494:
 	.skip 0x4
-.global lbl_804D7498
-lbl_804D7498:
+.global min_wait
+min_wait:
 	.skip 0x4
 .global lbl_804D749C
 lbl_804D749C:
 	.skip 0x4
-.global lbl_804D74A0
-lbl_804D74A0:
+.global max_wait
+max_wait:
 	.skip 0x4
 .global lbl_804D74A4
 lbl_804D74A4:
 	.skip 0x4
-.global lbl_804D74A8
-lbl_804D74A8:
+.global buffer
+buffer:
 	.skip 0x4
 .global lbl_804D74AC
 lbl_804D74AC:
 	.skip 0x4
-.global lbl_804D74B0
-lbl_804D74B0:
+.global __AR_Callback
+__AR_Callback:
 	.skip 0x4
-.global lbl_804D74B4
-lbl_804D74B4:
+.global __AR_Size
+__AR_Size:
 	.skip 0x4
-.global lbl_804D74B8
-lbl_804D74B8:
+.global __AR_StackPointer
+__AR_StackPointer:
 	.skip 0x4
-.global lbl_804D74BC
-lbl_804D74BC:
+.global __AR_FreeBlocks
+__AR_FreeBlocks:
 	.skip 0x4
-.global lbl_804D74C0
-lbl_804D74C0:
+.global __AR_BlockLength
+__AR_BlockLength:
 	.skip 0x4
-.global lbl_804D74C4
-lbl_804D74C4:
+.global __AR_init_flag
+__AR_init_flag:
 	.skip 0x4
-.global lbl_804D74C8
-lbl_804D74C8:
+.global __ARQRequestQueueHi
+__ARQRequestQueueHi:
 	.skip 0x4
-.global lbl_804D74CC
-lbl_804D74CC:
+.global __ARQRequestTailHi
+__ARQRequestTailHi:
 	.skip 0x4
-.global lbl_804D74D0
-lbl_804D74D0:
+.global __ARQRequestQueueLo
+__ARQRequestQueueLo:
 	.skip 0x4
-.global lbl_804D74D4
-lbl_804D74D4:
+.global __ARQRequestTailLo
+__ARQRequestTailLo:
 	.skip 0x4
-.global lbl_804D74D8
-lbl_804D74D8:
+.global __ARQRequestPendingHi
+__ARQRequestPendingHi:
 	.skip 0x4
-.global lbl_804D74DC
-lbl_804D74DC:
+.global __ARQRequestPendingLo
+__ARQRequestPendingLo:
 	.skip 0x4
-.global lbl_804D74E0
-lbl_804D74E0:
+.global __ARQCallbackHi
+__ARQCallbackHi:
 	.skip 0x4
-.global lbl_804D74E4
-lbl_804D74E4:
+.global __ARQCallbackLo
+__ARQCallbackLo:
 	.skip 0x4
-.global lbl_804D74E8
-lbl_804D74E8:
+.global __ARQChunkSize
+__ARQChunkSize:
 	.skip 0x4
-.global lbl_804D74EC
-lbl_804D74EC:
+.global __ARQ_init_flag
+__ARQ_init_flag:
 	.skip 0x4
 .global lbl_804D74F0
 lbl_804D74F0:
