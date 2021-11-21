@@ -7850,10 +7850,10 @@ void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSr
 // ? __OSGetDIConfig(?);
 // ? OSInitAlarm(?);
 // ? OSCreateAlarm(?);
-// ? func_80343778(?);
-// ? func_803439C8(?);
+// ? InsertAlarm(?);
+// ? OSSetAlarm(?);
 // ? func_80343A30(?);
-// ? func_80343AAC(?);
+// ? OSCancelAlarm(?);
 // ? DLInsert(?);
 // ? func_80343EF0(?);
 // ? func_80343FEC(?);
