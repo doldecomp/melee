@@ -1343,8 +1343,8 @@ lbl_80359BD8:
 /* 80359D7C 0035695C  7C 08 03 A6 */	mtlr r0
 /* 80359D80 00356960  4E 80 00 20 */	blr 
 
-.global func_80359D84
-func_80359D84:
+.global AXRegisterCallback
+AXRegisterCallback:
 /* 80359D84 00356964  90 6D BE A8 */	stw r3, lbl_804D7548@sda21(r13)
 /* 80359D88 00356968  4E 80 00 20 */	blr 
 
