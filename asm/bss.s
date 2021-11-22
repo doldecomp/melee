@@ -3760,20 +3760,20 @@ lbl_804D7354:
 .global AlarmQueue
 AlarmQueue:
 	.skip 0x8
-.global lbl_804D7360
-lbl_804D7360:
+.global HeapArray
+HeapArray:
 	.skip 0x4
-.global lbl_804D7364
-lbl_804D7364:
+.global NumHeaps
+NumHeaps:
 	.skip 0x4
-.global lbl_804D7368
-lbl_804D7368:
+.global ArenaStart
+ArenaStart:
 	.skip 0x4
-.global lbl_804D736C
-lbl_804D736C:
+.global ArenaEnd
+ArenaEnd:
 	.skip 0x4
-.global lbl_804D7370
-lbl_804D7370:
+.global __OSArenaHi
+__OSArenaHi:
 	.skip 0x8
 .global lbl_804D7378
 lbl_804D7378:
