@@ -218,7 +218,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MetroTRK/targcont.o            \
 													\
 	$(BUILD_DIR)/asm/dolphin/amcstubs/AmcExi2Stubs.o		\
-	$(BUILD_DIR)/asm/dolphin/DebuggerDriver.o               \
+	$(BUILD_DIR)/asm/dolphin/OdemuExi2/DebuggerDriver.o     \
 	$(BUILD_DIR)/asm/dolphin/hio/hio.o              \
 	$(BUILD_DIR)/asm/dolphin/mcc/mcc.o              \
 	$(BUILD_DIR)/asm/dolphin/mcc/fio.o              \
@@ -245,6 +245,19 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/os/OSArena.o           \
 	$(BUILD_DIR)/asm/dolphin/os/OSAudioSystem.o     \
 	$(BUILD_DIR)/asm/dolphin/os/OSCache.o           \
+	$(BUILD_DIR)/asm/dolphin/os/OSContext.o         \
+	$(BUILD_DIR)/asm/dolphin/os/OSError.o           \
+	$(BUILD_DIR)/asm/dolphin/os/OSExi.o             \
+	$(BUILD_DIR)/asm/dolphin/os/OSFont.o            \
+	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt.o       \
+	$(BUILD_DIR)/asm/dolphin/os/OSLink.o            \
+	$(BUILD_DIR)/asm/dolphin/os/OSMemory.o          \
+	$(BUILD_DIR)/asm/dolphin/os/OSMutex.o           \
+	$(BUILD_DIR)/asm/dolphin/os/OSReboot.o          \
+	$(BUILD_DIR)/asm/dolphin/os/OSReset.o           \
+	$(BUILD_DIR)/asm/dolphin/os/OSResetSW.o         \
+	$(BUILD_DIR)/asm/dolphin/os/OSRtc.o             \
+	$(BUILD_DIR)/asm/dolphin/os/OSSerial.o          \
                                                     \
 	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_1.o                \
                                                     \
