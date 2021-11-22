@@ -8878,7 +8878,7 @@ void HSD_Panic(char*, u32, char*);
 // ? func_8038E9A8(?);
 // ? func_8038E9E0(?);
 // ? func_8038EA18(?);
-// ? func_8038EA50(?);
+// ? HSD_DevComIsBusy(?);
 // ? func_8038EA68(?);
 // ? func_8038ECDC(?);
 // ? func_8038F4F0(?);
