@@ -80,8 +80,8 @@ func_8014A250:
 /* 8014A374 00146F54  7C 08 03 A6 */	mtlr r0
 /* 8014A378 00146F58  4E 80 00 20 */	blr 
 
-.global func_8014A37C
-func_8014A37C:
+.global ftGameWatch_OnLoad
+ftGameWatch_OnLoad:
 /* 8014A37C 00146F5C  7C 08 02 A6 */	mflr r0
 /* 8014A380 00146F60  38 80 00 00 */	li r4, 0
 /* 8014A384 00146F64  90 01 00 04 */	stw r0, 4(r1)

@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80149E34
-func_80149E34:
+.global ftPichu_OnLoad
+ftPichu_OnLoad:
 /* 80149E34 00146A14  7C 08 02 A6 */	mflr r0
 /* 80149E38 00146A18  38 80 00 01 */	li r4, 1
 /* 80149E3C 00146A1C  90 01 00 04 */	stw r0, 4(r1)

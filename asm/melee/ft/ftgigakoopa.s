@@ -38,8 +38,8 @@ func_8014F698:
 /* 8014F6B0 0014C290  7C 08 03 A6 */	mtlr r0
 /* 8014F6B4 0014C294  4E 80 00 20 */	blr 
 
-.global func_8014F6B8
-func_8014F6B8:
+.global ftGKoopa_OnLoad
+ftGKoopa_OnLoad:
 /* 8014F6B8 0014C298  7C 08 02 A6 */	mflr r0
 /* 8014F6BC 0014C29C  90 01 00 04 */	stw r0, 4(r1)
 /* 8014F6C0 0014C2A0  94 21 FF E8 */	stwu r1, -0x18(r1)

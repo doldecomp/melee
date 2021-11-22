@@ -150,8 +150,8 @@ lbl_8014F3C4:
 /* 8014F3D4 0014BFB4  7C 08 03 A6 */	mtlr r0
 /* 8014F3D8 0014BFB8  4E 80 00 20 */	blr 
 
-.global func_8014F3DC
-func_8014F3DC:
+.global ftZakoBoy_OnLoad
+ftZakoBoy_OnLoad:
 /* 8014F3DC 0014BFBC  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 8014F3E0 0014BFC0  80 65 01 0C */	lwz r3, 0x10c(r5)
 /* 8014F3E4 0014BFC4  80 85 02 D8 */	lwz r4, 0x2d8(r5)

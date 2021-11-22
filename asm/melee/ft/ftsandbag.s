@@ -6,8 +6,8 @@
 func_8014F9CC:
 /* 8014F9CC 0014C5AC  4E 80 00 20 */	blr 
 
-.global func_8014F9D0
-func_8014F9D0:
+.global ftSandbag_OnLoad
+ftSandbag_OnLoad:
 /* 8014F9D0 0014C5B0  7C 08 02 A6 */	mflr r0
 /* 8014F9D4 0014C5B4  38 80 00 01 */	li r4, 1
 /* 8014F9D8 0014C5B8  90 01 00 04 */	stw r0, 4(r1)

@@ -166,8 +166,8 @@ lbl_8014F10C:
 /* 8014F11C 0014BCFC  7C 08 03 A6 */	mtlr r0
 /* 8014F120 0014BD00  4E 80 00 20 */	blr 
 
-.global func_8014F124
-func_8014F124:
+.global ftRoy_OnLoad
+ftRoy_OnLoad:
 /* 8014F124 0014BD04  7C 08 02 A6 */	mflr r0
 /* 8014F128 0014BD08  90 01 00 04 */	stw r0, 4(r1)
 /* 8014F12C 0014BD0C  94 21 FF F8 */	stwu r1, -8(r1)

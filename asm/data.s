@@ -7647,45 +7647,45 @@ lbl_803C10D0:
     .4byte NULL
     .balign 4
 
-.global lbl_803C1154
-lbl_803C1154:
-    .4byte func_800E0960
-    .4byte func_800E57AC
-    .4byte func_800E2AEC
-    .4byte func_8010D9AC
-    .4byte func_800EE680
-    .4byte func_80132ABC
-    .4byte func_800EAE44
-    .4byte func_801100EC
-    .4byte func_8011480C
-    .4byte FighterOnLoad_Peach
-    .4byte func_8011EF3C
-    .4byte func_80122EDC
-    .4byte func_801243E4
-    .4byte func_8012837C
-    .4byte func_8012B99C
-    .4byte func_8013C67C
-    .4byte func_80144E48
-    .4byte func_80142324
-    .4byte func_801364AC
-    .4byte func_80139334
-    .4byte func_80148CE4
-    .4byte func_801494E4
-    .4byte func_80149CC4
-    .4byte func_80149E34
-    .4byte func_8014A37C
-    .4byte func_8014EE1C
-    .4byte func_8014F124
-    .4byte func_8014FC6C
-    .4byte func_80155E1C
-    .4byte func_8014F3DC
-    .4byte func_8014F440
-    .4byte func_8014F6B8
-    .4byte func_8014F9D0
+.global ft_OnLoad
+ft_OnLoad:
+    .4byte ftMario_OnLoad
+    .4byte ftFox_OnLoad
+    .4byte ftCFalcon_OnLoad
+    .4byte ftDonkey_OnLoad
+    .4byte ftKirby_OnLoad
+    .4byte ftKoopa_OnLoad
+    .4byte ftLink_OnLoad
+    .4byte ftSeak_OnLoad
+    .4byte ftNess_OnLoad
+    .4byte ftPeach_OnLoad
+    .4byte ftPopo_OnLoad
+    .4byte ftNana_OnLoad
+    .4byte ftPikachu_OnLoad
+    .4byte ftSamus_OnLoad
+    .4byte ftYoshi_OnLoad
+    .4byte ftPurin_OnLoad
+    .4byte ftMewtwo_OnLoad
+    .4byte ftLuigi_OnLoad
+    .4byte ftMars_OnLoad
+    .4byte ftZelda_OnLoad
+    .4byte ftCLink_OnLoad
+    .4byte ftDrMario_OnLoad
+    .4byte ftFalco_OnLoad
+    .4byte ftPichu_OnLoad
+    .4byte ftGameWatch_OnLoad
+    .4byte ftGanon_OnLoad
+    .4byte ftRoy_OnLoad
+    .4byte ftMasterhand_OnLoad
+    .4byte ftCrazyhand_OnLoad
+    .4byte ftZakoBoy_OnLoad
+    .4byte ftZakoGirl_OnLoad
+    .4byte ftGKoopa_OnLoad
+    .4byte ftSandbag_OnLoad
 
     .balign 4
-.global lbl_803C11D8
-lbl_803C11D8:
+.global ft_OnDeath
+ft_OnDeath:
     .4byte func_800E08CC
     .4byte func_800E5554
     .4byte func_800E2888
@@ -7832,8 +7832,8 @@ lbl_803C1364:
     .4byte NULL
     .balign 4
 
-.global lbl_803C13E8
-lbl_803C13E8:
+.global ft_SpecialS
+ft_SpecialS:
     .4byte func_800E1450
     .4byte func_800E9EE8
     .4byte func_800E32B0
@@ -7869,8 +7869,8 @@ lbl_803C13E8:
     .4byte NULL
     .balign 4
 
-.global lbl_803C146C
-lbl_803C146C:
+.global ft_SpecialHiAir
+ft_SpecialHiAir:
     .4byte func_800E1AB0
     .4byte func_800E72C4
     .4byte func_800E4CF4
@@ -7906,8 +7906,8 @@ lbl_803C146C:
     .4byte NULL
     .balign 4
 
-.global lbl_803C14F0
-lbl_803C14F0:
+.global ft_SpecialLwAir
+ft_SpecialLwAir:
     .4byte func_800E2194
     .4byte func_800E85EC
     .4byte func_800E40D8
@@ -7943,8 +7943,8 @@ lbl_803C14F0:
     .4byte NULL
     .balign 4
 
-.global lbl_803C1574
-lbl_803C1574:
+.global ft_SpecialSAir
+ft_SpecialSAir:
     .4byte func_800E14C8
     .4byte func_800E9F6C
     .4byte func_800E33E0
@@ -7980,8 +7980,8 @@ lbl_803C1574:
     .4byte NULL
     .balign 4
 
-.global lbl_803C15F8
-lbl_803C15F8:
+.global ft_SpecialNAir
+ft_SpecialNAir:
     .4byte func_800E1040
     .4byte func_800E61A8
     .4byte func_800E2C00
@@ -8017,8 +8017,8 @@ lbl_803C15F8:
     .4byte NULL
     .balign 4
 
-.global lbl_803C167C
-lbl_803C167C:
+.global ft_SpecialN
+ft_SpecialN:
     .4byte func_800E0DA8
     .4byte func_800E608C
     .4byte func_800E2B80
@@ -8054,8 +8054,8 @@ lbl_803C167C:
     .4byte NULL
     .balign 4
 
-.global lbl_803C1700
-lbl_803C1700:
+.global ft_SpecialLw
+ft_SpecialLw:
     .4byte func_800E207C
     .4byte func_800E8560
     .4byte func_800E4040
@@ -8091,8 +8091,8 @@ lbl_803C1700:
     .4byte NULL
     .balign 4
 
-.global lbl_803C1784
-lbl_803C1784:
+.global ft_SpecialHi
+ft_SpecialHi:
     .4byte func_800E1A54
     .4byte func_800E7238
     .4byte func_800E4A78
@@ -8128,8 +8128,8 @@ lbl_803C1784:
     .4byte NULL
     .balign 4
 
-.global lbl_803C1808
-lbl_803C1808:
+.global ft_OnAbsorb
+ft_OnAbsorb:
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -8164,8 +8164,8 @@ lbl_803C1808:
     .4byte NULL
     .4byte NULL
 
-.global lbl_803C188C
-lbl_803C188C:
+.global ft_OnItemPickup
+ft_OnItemPickup:
     .4byte func_800E0A20
     .4byte func_800E55A8
     .4byte func_800E28E8
@@ -8200,8 +8200,8 @@ lbl_803C188C:
     .4byte func_8014F720
     .4byte NULL
 
-.global lbl_803C1910
-lbl_803C1910:
+.global ft_OnItemInvisible
+ft_OnItemInvisible:
     .4byte func_800E0B00
     .4byte func_800E5688
     .4byte func_800E29C8
@@ -8236,8 +8236,8 @@ lbl_803C1910:
     .4byte func_8014F800
     .4byte NULL
 
-.global lbl_803C1994
-lbl_803C1994:
+.global ft_OnItemVisible
+ft_OnItemVisible:
     .4byte func_800E0B48
     .4byte func_800E56D0
     .4byte func_800E2A10
@@ -8272,8 +8272,8 @@ lbl_803C1994:
     .4byte func_8014F848
     .4byte NULL
 
-.global lbl_803C1A18
-lbl_803C1A18:
+.global ft_OnItemRelease
+ft_OnItemRelease:
     .4byte func_800E0B90
     .4byte func_800E5718
     .4byte func_800E2A58
@@ -8308,8 +8308,8 @@ lbl_803C1A18:
     .4byte func_8014F890
     .4byte NULL
 
-.global lbl_803C1A9C
-lbl_803C1A9C:
+.global ft_OnItemCatch
+ft_OnItemCatch:
     .4byte func_800E0A20
     .4byte func_800E55A8
     .4byte func_800E28E8
@@ -8452,8 +8452,8 @@ lbl_803C1C28:
     .4byte NULL
     .4byte NULL
 
-.global lbl_803C1CAC
-lbl_803C1CAC:
+.global ft_OnKnockbackEnter
+ft_OnKnockbackEnter:
     .4byte func_800E0C24
     .4byte func_800E5898
     .4byte NULL

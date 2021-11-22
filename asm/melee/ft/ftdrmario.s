@@ -23,8 +23,8 @@ func_8014949C:
 /* 801494DC 001460BC  7C 08 03 A6 */	mtlr r0
 /* 801494E0 001460C0  4E 80 00 20 */	blr 
 
-.global func_801494E4
-func_801494E4:
+.global ftDrMario_OnLoad
+ftDrMario_OnLoad:
 /* 801494E4 001460C4  7C 08 02 A6 */	mflr r0
 /* 801494E8 001460C8  90 01 00 04 */	stw r0, 4(r1)
 /* 801494EC 001460CC  94 21 FF E0 */	stwu r1, -0x20(r1)
