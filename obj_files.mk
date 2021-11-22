@@ -2,7 +2,8 @@
 
 INIT_O_FILES := 						            \
 	$(BUILD_DIR)/src/Runtime/__mem.o	            \
-    $(BUILD_DIR)/asm/init.o
+	$(BUILD_DIR)/asm/init.o				            \
+    $(BUILD_DIR)/src/dolphin/os/init/__start.o
 
 EXTAB_O_FILES :=                                    \
     $(BUILD_DIR)/asm/extab.o

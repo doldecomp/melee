@@ -28,7 +28,7 @@ __OSInitSystemCall:
 /* 8034ABC4 003477A4  38 84 AB 80 */	addi r4, r4, SystemCallVector@l
 /* 8034ABC8 003477A8  7F E3 FB 78 */	mr r3, r31
 /* 8034ABCC 003477AC  7C A4 00 50 */	subf r5, r4, r0
-/* 8034ABD0 003477B0  4B CB 86 25 */	bl func_800031F4
+/* 8034ABD0 003477B0  4B CB 86 25 */	bl memcpy
 /* 8034ABD4 003477B4  7F E3 FB 78 */	mr r3, r31
 /* 8034ABD8 003477B8  38 80 01 00 */	li r4, 0x100
 /* 8034ABDC 003477BC  4B FF 9C 99 */	bl DCFlushRangeNoSync

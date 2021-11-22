@@ -57,7 +57,7 @@ PYTHON  := python3
 POSTPROC := tools/postprocess.py
 
 # Options
-INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/msl -i src/msl/ppc_eabi -i src/runtime/ -i src/sysdolphin/ -i src/sysdolphin/baselib/ -i src/melee/ -i src/melee/gr/ -i src/melee/lb/
+INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/msl -i src/msl/ppc_eabi -i src/dolphin/os/init/ -i src/runtime/ -i src/sysdolphin/ -i src/sysdolphin/baselib/ -i src/melee/ -i src/melee/gr/ -i src/melee/lb/
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP) -fp hard -nodefaults

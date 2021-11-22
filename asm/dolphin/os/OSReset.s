@@ -106,8 +106,8 @@ __OSDoHotReset:
 /* 80348444 00345024  7C 08 03 A6 */	mtlr r0
 /* 80348448 00345028  4E 80 00 20 */	blr 
 
-.global func_8034844C
-func_8034844C:
+.global OSResetSystem
+OSResetSystem:
 /* 8034844C 0034502C  7C 08 02 A6 */	mflr r0
 /* 80348450 00345030  90 01 00 04 */	stw r0, 4(r1)
 /* 80348454 00345034  94 21 FF C0 */	stwu r1, -0x40(r1)
