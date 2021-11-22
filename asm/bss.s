@@ -1029,8 +1029,8 @@ lbl_804A7698:
 .global lbl_804A76C8
 lbl_804A76C8:
 	.skip 0x578
-.global lbl_804A7C40
-lbl_804A7C40:
+.global __OSErrorTable
+__OSErrorTable:
 	.skip 0x40
 .global lbl_804A7C80
 lbl_804A7C80:
@@ -3778,14 +3778,14 @@ __OSArenaHi:
 .global lbl_804D7378
 lbl_804D7378:
 	.skip 0x4
-.global lbl_804D737C
-lbl_804D737C:
+.global __OSLastInterruptSrr0
+__OSLastInterruptSrr0:
 	.skip 0x4
-.global lbl_804D7380
-lbl_804D7380:
+.global __OSLastInterrupt
+__OSLastInterrupt:
 	.skip 0x8
-.global lbl_804D7388
-lbl_804D7388:
+.global __OSLastInterruptTime
+__OSLastInterruptTime:
 	.skip 0x4
 .global lbl_804D738C
 lbl_804D738C:

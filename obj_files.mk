@@ -245,6 +245,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/os/OSArena.o           \
 	$(BUILD_DIR)/asm/dolphin/os/OSAudioSystem.o     \
 	$(BUILD_DIR)/asm/dolphin/os/OSCache.o           \
+	$(BUILD_DIR)/asm/dolphin/os/OSContext.o         \
+	$(BUILD_DIR)/asm/dolphin/os/OSError.o           \
                                                     \
 	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_1.o                \
                                                     \
