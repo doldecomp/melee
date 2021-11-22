@@ -15,8 +15,8 @@ func_8014F418:
 /* 8014F438 0014C018  7C 08 03 A6 */	mtlr r0
 /* 8014F43C 0014C01C  4E 80 00 20 */	blr 
 
-.global func_8014F440
-func_8014F440:
+.global ftZakoGirl_OnLoad
+ftZakoGirl_OnLoad:
 /* 8014F440 0014C020  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 8014F444 0014C024  80 65 01 0C */	lwz r3, 0x10c(r5)
 /* 8014F448 0014C028  80 85 02 D8 */	lwz r4, 0x2d8(r5)

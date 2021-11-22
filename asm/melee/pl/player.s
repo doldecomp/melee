@@ -1047,8 +1047,8 @@ lbl_80032530:
 /* 80032544 0002F124  7C 08 03 A6 */	mtlr r0
 /* 80032548 0002F128  4E 80 00 20 */	blr 
 
-.global func_8003254C
-func_8003254C:
+.global pl_SetSlottype
+pl_SetSlottype:
 /* 8003254C 0002F12C  7C 08 02 A6 */	mflr r0
 /* 80032550 0002F130  90 01 00 04 */	stw r0, 4(r1)
 /* 80032554 0002F134  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1591,7 +1591,7 @@ lbl_80032CA4:
 /* 80032CB8 0002F898  28 03 00 00 */	cmplwi r3, 0
 /* 80032CBC 0002F89C  41 82 00 0C */	beq lbl_80032CC8
 /* 80032CC0 0002F8A0  FC 20 F8 90 */	fmr f1, f31
-/* 80032CC4 0002F8A4  48 05 39 E1 */	bl func_800866A4
+/* 80032CC4 0002F8A4  48 05 39 E1 */	bl ftData_SetScale
 lbl_80032CC8:
 /* 80032CC8 0002F8A8  3B DE 00 01 */	addi r30, r30, 1
 /* 80032CCC 0002F8AC  2C 1E 00 02 */	cmpwi r30, 2
@@ -2795,8 +2795,8 @@ lbl_80033CB0:
 /* 80033CD8 000308B8  7C 08 03 A6 */	mtlr r0
 /* 80033CDC 000308BC  4E 80 00 20 */	blr 
 
-.global func_80033CE0
-func_80033CE0:
+.global pl_LoseStock
+pl_LoseStock:
 /* 80033CE0 000308C0  7C 08 02 A6 */	mflr r0
 /* 80033CE4 000308C4  90 01 00 04 */	stw r0, 4(r1)
 /* 80033CE8 000308C8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -3265,8 +3265,8 @@ lbl_800342FC:
 /* 80034328 00030F08  7C 08 03 A6 */	mtlr r0
 /* 8003432C 00030F0C  4E 80 00 20 */	blr 
 
-.global func_80034330
-func_80034330:
+.global pl_SetHUDDamage
+pl_SetHUDDamage:
 /* 80034330 00030F10  7C 08 02 A6 */	mflr r0
 /* 80034334 00030F14  90 01 00 04 */	stw r0, 4(r1)
 /* 80034338 00030F18  94 21 FF E0 */	stwu r1, -0x20(r1)

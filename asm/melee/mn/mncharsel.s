@@ -4749,9 +4749,9 @@ lbl_80260080:
 /* 8026008C 0025CC6C  7C 08 03 A6 */	mtlr r0
 /* 80260090 0025CC70  4E 80 00 20 */	blr 
 
-.global func_80260094
-func_80260094:
-/* 80260094 0025CC74  7C 08 02 A6 */	mflr r0
+.global mnCharSel_CostumeChange
+mnCharSel_CostumeChange:
+/* mnCharSel_CostumeChange 0025CC74  7C 08 02 A6 */	mflr r0
 /* 80260098 0025CC78  90 01 00 04 */	stw r0, 4(r1)
 /* 8026009C 0025CC7C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 802600A0 0025CC80  BF 61 00 1C */	stmw r27, 0x1c(r1)
@@ -4901,7 +4901,9 @@ lbl_8026028C:
 /* 80260294 0025CE74  38 21 00 30 */	addi r1, r1, 0x30
 /* 80260298 0025CE78  7C 08 03 A6 */	mtlr r0
 /* 8026029C 0025CE7C  4E 80 00 20 */	blr 
-lbl_802602A0:
+
+.global mnCharSel_CursorThink
+mnCharSel_CursorThink:
 /* 802602A0 0025CE80  7C 08 02 A6 */	mflr r0
 /* 802602A4 0025CE84  3C A0 80 4A */	lis r5, lbl_804A0BC0@ha
 /* 802602A8 0025CE88  90 01 00 04 */	stw r0, 4(r1)
@@ -5703,7 +5705,7 @@ lbl_80260DFC:
 lbl_80260E28:
 /* 80260E28 0025DA08  38 73 00 00 */	addi r3, r19, 0
 /* 80260E2C 0025DA0C  38 9C 00 00 */	addi r4, r28, 0
-/* 80260E30 0025DA10  4B FF F2 65 */	bl func_80260094
+/* 80260E30 0025DA10  4B FF F2 65 */	bl mnCharSel_CostumeChange
 /* 80260E34 0025DA14  48 00 14 74 */	b lbl_802622A8
 lbl_80260E38:
 /* 80260E38 0025DA18  3A 93 FF FC */	addi r20, r19, -4
@@ -6024,7 +6026,7 @@ lbl_802612B4:
 /* 802612D8 0025DEB8  40 82 00 10 */	bne lbl_802612E8
 /* 802612DC 0025DEBC  38 60 00 00 */	li r3, 0
 /* 802612E0 0025DEC0  38 9C 00 00 */	addi r4, r28, 0
-/* 802612E4 0025DEC4  4B FF ED B1 */	bl func_80260094
+/* 802612E4 0025DEC4  4B FF ED B1 */	bl mnCharSel_CostumeChange
 lbl_802612E8:
 /* 802612E8 0025DEC8  80 6D B6 10 */	lwz r3, lbl_804D6CB0@sda21(r13)
 /* 802612EC 0025DECC  88 03 00 02 */	lbz r0, 2(r3)
@@ -6490,7 +6492,7 @@ lbl_80261944:
 /* 8026197C 0025E55C  28 00 00 03 */	cmplwi r0, 3
 /* 80261980 0025E560  41 82 00 0C */	beq lbl_8026198C
 /* 80261984 0025E564  7F 84 E3 78 */	mr r4, r28
-/* 80261988 0025E568  4B FF E7 0D */	bl func_80260094
+/* 80261988 0025E568  4B FF E7 0D */	bl mnCharSel_CostumeChange
 lbl_8026198C:
 /* 8026198C 0025E56C  57 94 05 EF */	rlwinm. r20, r28, 0, 0x17, 0x17
 /* 80261990 0025E570  41 82 07 14 */	beq lbl_802620A4
@@ -10006,11 +10008,11 @@ lbl_80264BD4:
 /* 80264BF4 002617D4  C1 E2 CA 74 */	lfs f15, lbl_804DC454@sda21(r2)
 /* 80264BF8 002617D8  7F 40 22 14 */	add r26, r0, r4
 /* 80264BFC 002617DC  C1 C2 CA 9C */	lfs f14, lbl_804DC47C@sda21(r2)
-/* 80264C00 002617E0  3C A0 80 26 */	lis r5, lbl_802602A0@ha
+/* 80264C00 002617E0  3C A0 80 26 */	lis r5, mnCharSel_CursorThink@ha
 /* 80264C04 002617E4  3C 80 80 38 */	lis r4, HSD_Free@ha
 /* 80264C08 002617E8  3C 60 80 36 */	lis r3, HSD_AObjStopAnim@ha
 /* 80264C0C 002617EC  3B 26 10 70 */	addi r25, r6, func_80391070@l
-/* 80264C10 002617F0  3A E5 02 A0 */	addi r23, r5, lbl_802602A0@l
+/* 80264C10 002617F0  3A E5 02 A0 */	addi r23, r5, mnCharSel_CursorThink@l
 /* 80264C14 002617F4  3A C4 F1 B0 */	addi r22, r4, HSD_Free@l
 /* 80264C18 002617F8  3A 83 41 4C */	addi r20, r3, HSD_AObjStopAnim@l
 /* 80264C1C 002617FC  3E A0 00 01 */	lis r21, 1

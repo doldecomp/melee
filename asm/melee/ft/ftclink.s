@@ -100,8 +100,8 @@ func_80148C64:
 /* 80148CDC 001458BC  7C 08 03 A6 */	mtlr r0
 /* 80148CE0 001458C0  4E 80 00 20 */	blr 
 
-.global func_80148CE4
-func_80148CE4:
+.global ftCLink_OnLoad
+ftCLink_OnLoad:
 /* 80148CE4 001458C4  7C 08 02 A6 */	mflr r0
 /* 80148CE8 001458C8  38 A0 00 01 */	li r5, 1
 /* 80148CEC 001458CC  90 01 00 04 */	stw r0, 4(r1)
