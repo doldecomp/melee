@@ -2,9 +2,15 @@
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
 
-It builds the following DOL:
+```diff
+- INFORMATION! -
 
-main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
+The DOL this repository builds can be shifted! Meaning you are able to now
+add and remove code as you see fit, for modding or research purposes.
+```
+
+It builds the following DOL:
+v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 
 ## Building
 
@@ -16,7 +22,7 @@ main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 
 ### Instructions
 
-1. Obtain a copy of the MWCC (Build 144) PowerPC and place it in tools/mwcc_compiler/1.0/ folder in tools/. (NOTE: This compiler's executables [mwcceppc.exe mwasmeppc.exe and mwldeppc.exe] can be installed with Codewarrior 1.0 for Gamecube, but no license or crack is provided with this project. Please obtain access to the compiler on your own.) If you are in the Gamecube/Wii Decompilation discord (not public at this time, but if you are interested and have the skillset to contribute, please DM Revo#7090 on Discord for access), download GC_COMPILERS.zip and extract it to tools/mwcc_compiler/.
+1. Download GC_WII_COMPILERS.zip from (https://cdn.discordapp.com/attachments/704241951972524063/801641758249320478/GC_WII_COMPILERS.zip) and extract the GC compilers to tools/mwcc_compiler/.
 2. Run the `make` command
 
 ## Contributions
