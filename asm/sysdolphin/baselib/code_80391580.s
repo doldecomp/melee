@@ -3830,8 +3830,8 @@ lbl_80394A34:
 /* 80394A40 00391620  7C 08 03 A6 */	mtlr r0
 /* 80394A44 00391624  4E 80 00 20 */	blr 
 
-.global func_80394A48
-func_80394A48:
+.global Exception_ReportStackTrace
+Exception_ReportStackTrace:
 /* 80394A48 00391628  7C 08 02 A6 */	mflr r0
 /* 80394A4C 0039162C  3C A0 80 41 */	lis r5, lbl_8040AB00@ha
 /* 80394A50 00391630  90 01 00 04 */	stw r0, 4(r1)
@@ -3888,8 +3888,8 @@ lbl_80394B04:
 /* 80394B10 003916F0  7C 08 03 A6 */	mtlr r0
 /* 80394B14 003916F4  4E 80 00 20 */	blr 
 
-.global func_80394B18
-func_80394B18:
+.global Exception_ReportCodeline
+Exception_ReportCodeline:
 /* 80394B18 003916F8  7C 08 02 A6 */	mflr r0
 /* 80394B1C 003916FC  3C E0 80 41 */	lis r7, lbl_8040AB00@ha
 /* 80394B20 00391700  90 01 00 04 */	stw r0, 4(r1)
@@ -7736,8 +7736,8 @@ func_80397DA4:
 /* 80397DEC 003949CC  7C 08 03 A6 */	mtlr r0
 /* 80397DF0 003949D0  4E 80 00 20 */	blr 
 
-.global func_80397DF4
-func_80397DF4:
+.global Exception_StoreDebugLevel
+Exception_StoreDebugLevel:
 /* 80397DF4 003949D4  90 6D C2 28 */	stw r3, lbl_804D78C8@sda21(r13)
 /* 80397DF8 003949D8  4E 80 00 20 */	blr 
 
