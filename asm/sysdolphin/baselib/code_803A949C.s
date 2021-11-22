@@ -15971,7 +15971,3 @@ lbl_803B721C:
 /* 803B7224 003B3E04  38 21 00 88 */	addi r1, r1, 0x88
 /* 803B7228 003B3E08  7C 08 03 A6 */	mtlr r0
 /* 803B722C 003B3E0C  4E 80 00 20 */	blr 
-/* 803B7230 003B3E10  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
-/* 803B7234 003B3E14  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
-/* 803B7238 003B3E18  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
-/* 803B723C 003B3E1C  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
