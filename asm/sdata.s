@@ -5361,12 +5361,12 @@ lbl_804D5BF8:
 lbl_804D5C00:
     .4byte 0x00000000
     .4byte 0x3F800000
-.global lbl_804D5C08
-lbl_804D5C08:
+.global __OSCurrHeap
+__OSCurrHeap:
     .4byte 0xFFFFFFFF
     .4byte 0x00000000
-.global lbl_804D5C10
-lbl_804D5C10:
+.global __OSArenaLo
+__OSArenaLo:
     .4byte 0xFFFFFFFF
     .4byte 0x00000000
 .global lbl_804D5C18

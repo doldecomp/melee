@@ -17,13 +17,13 @@ func_80335E6C:
 /* 80335E6C 00332A4C  7C 70 FA A6 */	mfspr r3, 0x3f0
 /* 80335E70 00332A50  4E 80 00 20 */	blr 
 
-.global func_80335E74
-func_80335E74:
+.global PPCMfl2cr
+PPCMfl2cr:
 /* 80335E74 00332A54  7C 79 FA A6 */	mfspr r3, 0x3f9
 /* 80335E78 00332A58  4E 80 00 20 */	blr 
 
-.global func_80335E7C
-func_80335E7C:
+.global PPCMtl2cr
+PPCMtl2cr:
 /* 80335E7C 00332A5C  7C 79 FB A6 */	mtspr 0x3f9, r3
 /* 80335E80 00332A60  4E 80 00 20 */	blr 
 
@@ -37,8 +37,8 @@ func_80335E8C:
 /* 80335E8C 00332A6C  44 00 00 02 */	sc 
 /* 80335E90 00332A70  4E 80 00 20 */	blr 
 
-.global func_80335E94
-func_80335E94:
+.global PPCHalt
+PPCHalt:
 /* 80335E94 00332A74  7C 00 04 AC */	sync 0
 lbl_80335E98:
 /* 80335E98 00332A78  60 00 00 00 */	nop 
