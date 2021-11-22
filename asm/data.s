@@ -75372,7 +75372,7 @@ lbl_80402318:
     .4byte NULL
 .global lbl_80402348
 lbl_80402348:
-    .4byte func_80347BFC
+    .4byte OSOnReset
     .4byte 0x0000007F
     .4byte NULL
     .4byte NULL

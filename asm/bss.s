@@ -1041,11 +1041,11 @@ lbl_804A7D40:
 .global lbl_804A7D60
 lbl_804A7D60:
 	.skip 0x58
-.global lbl_804A7DB8
-lbl_804A7DB8:
+.global Packet
+Packet:
 	.skip 0x80
-.global lbl_804A7E38
-lbl_804A7E38:
+.global Alarm
+Alarm:
 	.skip 0xA0
 .global lbl_804A7ED8
 lbl_804A7ED8:
@@ -3751,8 +3751,8 @@ AreWeInitialized:
 .global OSExceptionTable
 OSExceptionTable:
 	.skip 0x8
-.global lbl_804D7350
-lbl_804D7350:
+.global __OSStartTime
+__OSStartTime:
 	.skip 0x4
 .global lbl_804D7354
 lbl_804D7354:
@@ -3799,8 +3799,8 @@ lbl_804D7394:
 .global lbl_804D7398
 lbl_804D7398:
 	.skip 0x8
-.global lbl_804D73A0
-lbl_804D73A0:
+.global ResetFunctionQueue
+ResetFunctionQueue:
 	.skip 0x8
 .global lbl_804D73A8
 lbl_804D73A8:
@@ -3808,17 +3808,17 @@ lbl_804D73A8:
 .global lbl_804D73AC
 lbl_804D73AC:
 	.skip 0x4
-.global lbl_804D73B0
-lbl_804D73B0:
+.global LastState
+LastState:
 	.skip 0x8
-.global lbl_804D73B8
-lbl_804D73B8:
+.global HoldUp
+HoldUp:
 	.skip 0x4
 .global lbl_804D73BC
 lbl_804D73BC:
 	.skip 0x4
-.global lbl_804D73C0
-lbl_804D73C0:
+.global HoldDown
+HoldDown:
 	.skip 0x4
 .global lbl_804D73C4
 lbl_804D73C4:
