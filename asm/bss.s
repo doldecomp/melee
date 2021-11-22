@@ -1185,11 +1185,11 @@ lbl_804C23C0:
 .global lbl_804C23EC
 lbl_804C23EC:
 	.skip 0x194
-.global lbl_804C2580
-lbl_804C2580:
+.global slist_alloc_data
+slist_alloc_data:
 	.skip 0x2C
-.global lbl_804C25AC
-lbl_804C25AC:
+.global dlist_alloc_data
+dlist_alloc_data:
 	.skip 0x2C
 .global lbl_804C25D8
 lbl_804C25D8:

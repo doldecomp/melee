@@ -28,8 +28,8 @@ lbl_8037E1E0:
 /* 8037E20C 0037ADEC  7C 08 03 A6 */	mtlr r0
 /* 8037E210 0037ADF0  4E 80 00 20 */	blr 
 
-.global func_8037E214
-func_8037E214:
+.global HSD_PerfSetStartTime
+HSD_PerfSetStartTime:
 /* 8037E214 0037ADF4  7C 08 02 A6 */	mflr r0
 /* 8037E218 0037ADF8  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E21C 0037ADFC  94 21 FF F8 */	stwu r1, -8(r1)
@@ -41,8 +41,8 @@ func_8037E214:
 /* 8037E234 0037AE14  7C 08 03 A6 */	mtlr r0
 /* 8037E238 0037AE18  4E 80 00 20 */	blr 
 
-.global func_8037E23C
-func_8037E23C:
+.global HSD_PerfSetCPUTime
+HSD_PerfSetCPUTime:
 /* 8037E23C 0037AE1C  7C 08 02 A6 */	mflr r0
 /* 8037E240 0037AE20  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E244 0037AE24  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -73,8 +73,8 @@ func_8037E23C:
 /* 8037E2A8 0037AE88  7C 08 03 A6 */	mtlr r0
 /* 8037E2AC 0037AE8C  4E 80 00 20 */	blr 
 
-.global func_8037E2B0
-func_8037E2B0:
+.global HSD_PerfSetDrawTime
+HSD_PerfSetDrawTime:
 /* 8037E2B0 0037AE90  7C 08 02 A6 */	mflr r0
 /* 8037E2B4 0037AE94  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E2B8 0037AE98  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -106,8 +106,8 @@ func_8037E2B0:
 /* 8037E320 0037AF00  7C 08 03 A6 */	mtlr r0
 /* 8037E324 0037AF04  4E 80 00 20 */	blr 
 
-.global func_8037E328
-func_8037E328:
+.global HSD_PerfSetTotalTime
+HSD_PerfSetTotalTime:
 /* 8037E328 0037AF08  7C 08 02 A6 */	mflr r0
 /* 8037E32C 0037AF0C  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E330 0037AF10  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -139,8 +139,8 @@ func_8037E328:
 /* 8037E398 0037AF78  7C 08 03 A6 */	mtlr r0
 /* 8037E39C 0037AF7C  4E 80 00 20 */	blr 
 
-.global func_8037E3A0
-func_8037E3A0:
+.global HSD_PerfCountEnvelopeBlending
+HSD_PerfCountEnvelopeBlending:
 /* 8037E3A0 0037AF80  7C 08 02 A6 */	mflr r0
 /* 8037E3A4 0037AF84  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E3A8 0037AF88  94 21 FF E8 */	stwu r1, -0x18(r1)

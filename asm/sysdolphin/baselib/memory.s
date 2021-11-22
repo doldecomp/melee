@@ -18,8 +18,8 @@ HSD_Free:
 /* 8037F1DC 0037BDBC  7C 08 03 A6 */	mtlr r0
 /* 8037F1E0 0037BDC0  4E 80 00 20 */	blr 
 
-.global func_8037F1E4
-func_8037F1E4:
+.global HSD_MemAlloc
+HSD_MemAlloc:
 /* 8037F1E4 0037BDC4  7C 08 02 A6 */	mflr r0
 /* 8037F1E8 0037BDC8  90 01 00 04 */	stw r0, 4(r1)
 /* 8037F1EC 0037BDCC  94 21 FF E8 */	stwu r1, -0x18(r1)

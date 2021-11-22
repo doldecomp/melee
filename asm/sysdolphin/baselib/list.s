@@ -5,15 +5,15 @@
 .global HSD_ListInitAllocData
 HSD_ListInitAllocData:
 /* 8037E3FC 0037AFDC  7C 08 02 A6 */	mflr r0
-/* 8037E400 0037AFE0  3C 60 80 4C */	lis r3, lbl_804C2580@ha
+/* 8037E400 0037AFE0  3C 60 80 4C */	lis r3, slist_alloc_data@ha
 /* 8037E404 0037AFE4  90 01 00 04 */	stw r0, 4(r1)
-/* 8037E408 0037AFE8  38 63 25 80 */	addi r3, r3, lbl_804C2580@l
+/* 8037E408 0037AFE8  38 63 25 80 */	addi r3, r3, slist_alloc_data@l
 /* 8037E40C 0037AFEC  38 80 00 08 */	li r4, 8
 /* 8037E410 0037AFF0  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8037E414 0037AFF4  38 A0 00 04 */	li r5, 4
 /* 8037E418 0037AFF8  4B FF C9 31 */	bl HSD_ObjAllocInit
-/* 8037E41C 0037AFFC  3C 60 80 4C */	lis r3, lbl_804C25AC@ha
-/* 8037E420 0037B000  38 63 25 AC */	addi r3, r3, lbl_804C25AC@l
+/* 8037E41C 0037AFFC  3C 60 80 4C */	lis r3, dlist_alloc_data@ha
+/* 8037E420 0037B000  38 63 25 AC */	addi r3, r3, dlist_alloc_data@l
 /* 8037E424 0037B004  38 80 00 0C */	li r4, 0xc
 /* 8037E428 0037B008  38 A0 00 04 */	li r5, 4
 /* 8037E42C 0037B00C  4B FF C9 1D */	bl HSD_ObjAllocInit
@@ -24,22 +24,22 @@ HSD_ListInitAllocData:
 
 .global HSD_SListGetAllocData
 HSD_SListGetAllocData:
-/* 8037E440 0037B020  3C 60 80 4C */	lis r3, lbl_804C2580@ha
-/* 8037E444 0037B024  38 63 25 80 */	addi r3, r3, lbl_804C2580@l
+/* 8037E440 0037B020  3C 60 80 4C */	lis r3, slist_alloc_data@ha
+/* 8037E444 0037B024  38 63 25 80 */	addi r3, r3, slist_alloc_data@l
 /* 8037E448 0037B028  4E 80 00 20 */	blr 
 
 .global HSD_DListGetAllocData
 HSD_DListGetAllocData:
-/* 8037E44C 0037B02C  3C 60 80 4C */	lis r3, lbl_804C25AC@ha
-/* 8037E450 0037B030  38 63 25 AC */	addi r3, r3, lbl_804C25AC@l
+/* 8037E44C 0037B02C  3C 60 80 4C */	lis r3, dlist_alloc_data@ha
+/* 8037E450 0037B030  38 63 25 AC */	addi r3, r3, dlist_alloc_data@l
 /* 8037E454 0037B034  4E 80 00 20 */	blr 
 
-.global func_8037E458
-func_8037E458:
+.global HSD_SListAlloc
+HSD_SListAlloc:
 /* 8037E458 0037B038  7C 08 02 A6 */	mflr r0
-/* 8037E45C 0037B03C  3C 60 80 4C */	lis r3, lbl_804C2580@ha
+/* 8037E45C 0037B03C  3C 60 80 4C */	lis r3, slist_alloc_data@ha
 /* 8037E460 0037B040  90 01 00 04 */	stw r0, 4(r1)
-/* 8037E464 0037B044  38 63 25 80 */	addi r3, r3, lbl_804C2580@l
+/* 8037E464 0037B044  38 63 25 80 */	addi r3, r3, slist_alloc_data@l
 /* 8037E468 0037B048  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8037E46C 0037B04C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8037E470 0037B050  4B FF C7 59 */	bl HSD_ObjAlloc
@@ -61,12 +61,12 @@ lbl_8037E48C:
 /* 8037E4AC 0037B08C  7C 08 03 A6 */	mtlr r0
 /* 8037E4B0 0037B090  4E 80 00 20 */	blr 
 
-.global func_8037E4B4
-func_8037E4B4:
+.global HSD_SListAllocAndAppend
+HSD_SListAllocAndAppend:
 /* 8037E4B4 0037B094  7C 08 02 A6 */	mflr r0
-/* 8037E4B8 0037B098  3C A0 80 4C */	lis r5, lbl_804C2580@ha
+/* 8037E4B8 0037B098  3C A0 80 4C */	lis r5, slist_alloc_data@ha
 /* 8037E4BC 0037B09C  90 01 00 04 */	stw r0, 4(r1)
-/* 8037E4C0 0037B0A0  38 05 25 80 */	addi r0, r5, lbl_804C2580@l
+/* 8037E4C0 0037B0A0  38 05 25 80 */	addi r0, r5, slist_alloc_data@l
 /* 8037E4C4 0037B0A4  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8037E4C8 0037B0A8  93 E1 00 24 */	stw r31, 0x24(r1)
 /* 8037E4CC 0037B0AC  93 C1 00 20 */	stw r30, 0x20(r1)
@@ -89,7 +89,7 @@ lbl_8037E4FC:
 /* 8037E50C 0037B0EC  93 DF 00 04 */	stw r30, 4(r31)
 /* 8037E510 0037B0F0  7F E4 FB 78 */	mr r4, r31
 /* 8037E514 0037B0F4  7F A3 EB 78 */	mr r3, r29
-/* 8037E518 0037B0F8  48 00 00 A5 */	bl func_8037E5BC
+/* 8037E518 0037B0F8  48 00 00 A5 */	bl HSD_SListAppendList
 /* 8037E51C 0037B0FC  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8037E520 0037B100  83 E1 00 24 */	lwz r31, 0x24(r1)
 /* 8037E524 0037B104  83 C1 00 20 */	lwz r30, 0x20(r1)
@@ -98,12 +98,12 @@ lbl_8037E4FC:
 /* 8037E530 0037B110  7C 08 03 A6 */	mtlr r0
 /* 8037E534 0037B114  4E 80 00 20 */	blr 
 
-.global func_8037E538
-func_8037E538:
+.global HSD_SListPrepend
+HSD_SListPrepend:
 /* 8037E538 0037B118  7C 08 02 A6 */	mflr r0
-/* 8037E53C 0037B11C  3C A0 80 4C */	lis r5, lbl_804C2580@ha
+/* 8037E53C 0037B11C  3C A0 80 4C */	lis r5, slist_alloc_data@ha
 /* 8037E540 0037B120  90 01 00 04 */	stw r0, 4(r1)
-/* 8037E544 0037B124  38 05 25 80 */	addi r0, r5, lbl_804C2580@l
+/* 8037E544 0037B124  38 05 25 80 */	addi r0, r5, slist_alloc_data@l
 /* 8037E548 0037B128  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8037E54C 0037B12C  93 E1 00 24 */	stw r31, 0x24(r1)
 /* 8037E550 0037B130  93 C1 00 20 */	stw r30, 0x20(r1)
@@ -126,7 +126,7 @@ lbl_8037E580:
 /* 8037E590 0037B170  93 DF 00 04 */	stw r30, 4(r31)
 /* 8037E594 0037B174  7F E4 FB 78 */	mr r4, r31
 /* 8037E598 0037B178  7F A3 EB 78 */	mr r3, r29
-/* 8037E59C 0037B17C  48 00 00 91 */	bl func_8037E62C
+/* 8037E59C 0037B17C  48 00 00 91 */	bl HSD_SListPrependList
 /* 8037E5A0 0037B180  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8037E5A4 0037B184  83 E1 00 24 */	lwz r31, 0x24(r1)
 /* 8037E5A8 0037B188  83 C1 00 20 */	lwz r30, 0x20(r1)
@@ -135,8 +135,8 @@ lbl_8037E580:
 /* 8037E5B4 0037B194  7C 08 03 A6 */	mtlr r0
 /* 8037E5B8 0037B198  4E 80 00 20 */	blr 
 
-.global func_8037E5BC
-func_8037E5BC:
+.global HSD_SListAppendList
+HSD_SListAppendList:
 /* 8037E5BC 0037B19C  7C 08 02 A6 */	mflr r0
 /* 8037E5C0 0037B1A0  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E5C4 0037B1A4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -169,8 +169,8 @@ lbl_8037E614:
 /* 8037E624 0037B204  7C 08 03 A6 */	mtlr r0
 /* 8037E628 0037B208  4E 80 00 20 */	blr 
 
-.global func_8037E62C
-func_8037E62C:
+.global HSD_SListPrependList
+HSD_SListPrependList:
 /* 8037E62C 0037B20C  7C 08 02 A6 */	mflr r0
 /* 8037E630 0037B210  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E634 0037B214  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -193,17 +193,17 @@ lbl_8037E65C:
 /* 8037E674 0037B254  7C 08 03 A6 */	mtlr r0
 /* 8037E678 0037B258  4E 80 00 20 */	blr 
 
-.global func_8037E67C
-func_8037E67C:
+.global HSD_SListRemove
+HSD_SListRemove:
 /* 8037E67C 0037B25C  7C 08 02 A6 */	mflr r0
 /* 8037E680 0037B260  7C 64 1B 79 */	or. r4, r3, r3
 /* 8037E684 0037B264  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E688 0037B268  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8037E68C 0037B26C  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8037E690 0037B270  41 82 00 1C */	beq lbl_8037E6AC
-/* 8037E694 0037B274  3C 60 80 4C */	lis r3, lbl_804C2580@ha
+/* 8037E694 0037B274  3C 60 80 4C */	lis r3, slist_alloc_data@ha
 /* 8037E698 0037B278  83 E4 00 00 */	lwz r31, 0(r4)
-/* 8037E69C 0037B27C  38 63 25 80 */	addi r3, r3, lbl_804C2580@l
+/* 8037E69C 0037B27C  38 63 25 80 */	addi r3, r3, slist_alloc_data@l
 /* 8037E6A0 0037B280  4B FF C6 81 */	bl HSD_ObjFree
 /* 8037E6A4 0037B284  7F E3 FB 78 */	mr r3, r31
 /* 8037E6A8 0037B288  48 00 00 08 */	b lbl_8037E6B0

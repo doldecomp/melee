@@ -108,8 +108,8 @@ lbl_8038033C:
 /* 80380350 0037CF30  7C 08 03 A6 */	mtlr r0
 /* 80380354 0037CF34  4E 80 00 20 */	blr 
 
-.global func_80380358
-func_80380358:
+.global HSD_ArchiveGetPublicAddress
+HSD_ArchiveGetPublicAddress:
 /* 80380358 0037CF38  7C 08 02 A6 */	mflr r0
 /* 8038035C 0037CF3C  90 01 00 04 */	stw r0, 4(r1)
 /* 80380360 0037CF40  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -156,8 +156,8 @@ lbl_803803DC:
 /* 803803F4 0037CFD4  7C 08 03 A6 */	mtlr r0
 /* 803803F8 0037CFD8  4E 80 00 20 */	blr 
 
-.global func_803803FC
-func_803803FC:
+.global HSD_ArchiveGetExtern
+HSD_ArchiveGetExtern:
 /* 803803FC 0037CFDC  2C 04 00 00 */	cmpwi r4, 0
 /* 80380400 0037CFE0  41 80 00 10 */	blt lbl_80380410
 /* 80380404 0037CFE4  80 03 00 10 */	lwz r0, 0x10(r3)
@@ -175,8 +175,8 @@ lbl_80380418:
 /* 8038042C 0037D00C  7C 64 02 14 */	add r3, r4, r0
 /* 80380430 0037D010  4E 80 00 20 */	blr 
 
-.global func_80380434
-func_80380434:
+.global HSD_ArchiveLocateExtern
+HSD_ArchiveLocateExtern:
 /* 80380434 0037D014  7C 08 02 A6 */	mflr r0
 /* 80380438 0037D018  90 01 00 04 */	stw r0, 4(r1)
 /* 8038043C 0037D01C  94 21 FF D0 */	stwu r1, -0x30(r1)
