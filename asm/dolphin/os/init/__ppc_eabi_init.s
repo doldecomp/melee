@@ -60,8 +60,3 @@ lbl_803B7240:
 	.4byte __init_cpp_exceptions
     .4byte func_80326578
     .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL

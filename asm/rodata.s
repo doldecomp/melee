@@ -2880,10 +2880,4 @@ lbl_803B9670:
     .4byte 0xE6E7E8E9
     .4byte 0xEAF2F3F4
     .4byte 0xF5F6F7F8
-    .4byte 0xF9FA0000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
+    .2byte 0xF9FA

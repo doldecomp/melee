@@ -3951,8 +3951,8 @@ lbl_8015FEA0:
 /* 8015FEAC 0015CA8C  7C 08 03 A6 */	mtlr r0
 /* 8015FEB0 0015CA90  4E 80 00 20 */	blr 
 
-.global func_8015FEB4
-func_8015FEB4:
+.global main
+main:
 /* 8015FEB4 0015CA94  7C 08 02 A6 */	mflr r0
 /* 8015FEB8 0015CA98  3C 80 80 3D */	lis r4, lbl_803D4AC8@ha
 /* 8015FEBC 0015CA9C  90 01 00 04 */	stw r0, 4(r1)

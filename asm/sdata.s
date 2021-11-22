@@ -6483,4 +6483,3 @@ lbl_804D6390:
 .global lbl_804D6398
 lbl_804D6398:
 	.long 3
-    .4byte NULL

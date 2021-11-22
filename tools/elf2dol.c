@@ -15,6 +15,8 @@
 #define MIN(a, b)	(((a) < (b)) ? (a) : (b))
 #endif
 
+#define ARRAY_COUNT(arr) (sizeof(arr)/sizeof((arr)[0]))
+
 #define EI_NIDENT       16
 
 typedef struct {
@@ -68,7 +70,7 @@ int verbosity = 0;
 #if BYTE_ORDER == BIG_ENDIAN
 
 #define swap32(x) (x)
-#define swaf16(x) (x)
+#define swap16(x) (x)
 
 #else
 
@@ -80,7 +82,7 @@ static inline uint32_t swap32(uint32_t v)
 	       (v << 24);
 }
 
-static inline uint16_t swaf16(uint16_t v)
+static inline uint16_t swap16(uint16_t v)
 {
 	return (v >> 8) | (v << 8);
 }
@@ -120,11 +122,6 @@ typedef struct {
 	FILE *elf;
 } DOL_map;
 
-// We need to track 2 PDHR sizes in the event this is for Wii, but for Gamecube
-// we only need the first element(s).
-uint32_t sdataSizes[2] = {0, 0};
-uint32_t sbssSizes[2] = {0, 0};
-
 void usage(const char *name)
 {
 	fprintf(stderr, "Usage: %s [-h] [-v] [--] elf-file dol-file\n", name);
@@ -154,11 +151,14 @@ void ferrordie(FILE *f, const char *str)
 void add_bss(DOL_map *map, uint32_t paddr, uint32_t memsz)
 {
 	if(map->flags & HAVE_BSS) {
-		uint32_t start = swap32(map->header.bss_addr);
-		uint32_t size = swap32(map->header.bss_size);
-		if ( (start+size) == paddr) {
-			map->header.bss_size = swap32(size+memsz);
-		}
+		uint32_t curr_start = swap32(map->header.bss_addr);
+		uint32_t curr_size = swap32(map->header.bss_size);
+		if (paddr < curr_start)
+			map->header.bss_addr = swap32(paddr);
+		// Total BSS size should be the end of the last bss section minus the
+		// start of the first bss section.
+		if (paddr + memsz > curr_start + curr_size)
+			map->header.bss_size = swap32(paddr + memsz - curr_start);
 	} else {
 		map->header.bss_addr = swap32(paddr);
 		map->header.bss_size = swap32(memsz);
@@ -166,19 +166,10 @@ void add_bss(DOL_map *map, uint32_t paddr, uint32_t memsz)
 	}
 }
 
-void increment_bss_size(DOL_map *map, uint32_t memsz)
-{
-	// because it can be byte swapped, we need to force the add via a temporary.
-	uint32_t preAdd = swap32(map->header.bss_size);
-	preAdd += memsz;
-	map->header.bss_size = swap32(preAdd);
-}
-
-void read_elf_segments(DOL_map *map, const char *elf, uint32_t sdata_pdhr, uint32_t sbss_pdhr, const char *platform)
+void read_elf_segments(DOL_map *map, const char *elf)
 {
 	int read, i;
 	Elf32_Ehdr ehdr;
-	int isWii = !(strcmp(platform, "wii")) ? 1 : 0;
 	
 	if(verbosity >= 2)
 		fprintf(stderr, "Reading ELF file...\n");
@@ -201,9 +192,9 @@ void read_elf_segments(DOL_map *map, const char *elf, uint32_t sdata_pdhr, uint3
 		die("Invalid ELF ident version");
 	if(swap32(ehdr.e_version) != EV_CURRENT)
 		die("Invalid ELF version");
-	if(swaf16(ehdr.e_type) != ET_EXEC)
+	if(swap16(ehdr.e_type) != ET_EXEC)
 		die("ELF is not an executable");
-	if(swaf16(ehdr.e_machine) != EM_PPC)
+	if(swap16(ehdr.e_machine) != EM_PPC)
 		die("Machine is not PowerPC");
 	if(!swap32(ehdr.e_entry))
 		die("ELF has no entrypoint");
@@ -213,14 +204,14 @@ void read_elf_segments(DOL_map *map, const char *elf, uint32_t sdata_pdhr, uint3
 	if(verbosity >= 2)
 		fprintf(stderr, "Valid ELF header found\n");
 	
-	uint16_t phnum = swaf16(ehdr.e_phnum);
+	uint16_t phnum = swap16(ehdr.e_phnum);
 	uint32_t phoff = swap32(ehdr.e_phoff);
 	Elf32_Phdr *phdrs;
 	
 	if(!phnum || !phoff)
 		die("ELF has no program headers");
 	
-	if(swaf16(ehdr.e_phentsize) != sizeof(Elf32_Phdr))
+	if(swap16(ehdr.e_phentsize) != sizeof(Elf32_Phdr))
 		die("Invalid program header entry size");
 	
 	phdrs = malloc(phnum * sizeof(Elf32_Phdr));
@@ -269,13 +260,6 @@ void read_elf_segments(DOL_map *map, const char *elf, uint32_t sdata_pdhr, uint3
 					if(filesz == 0) {
 						// BSS segment
 						add_bss(map, paddr, memsz);
-
-						// We need to keep PHDF sizes, so track these.
-						if(i == sbss_pdhr) {
-							sbssSizes[0] = memsz;
-						} else if(isWii && i == sbss_pdhr + 2) {
-							sbssSizes[1] = memsz;
-						}
 					} else {
 						// DATA segment
 						if(filesz > memsz) {
@@ -286,13 +270,6 @@ void read_elf_segments(DOL_map *map, const char *elf, uint32_t sdata_pdhr, uint3
 						if(map->data_cnt >= MAX_DATA_SEGMENTS) {
 							die("Error: Too many DATA segments");
 						}
-						// Track sdata as well.
-						if(i == sdata_pdhr) {
-							sdataSizes[0] = memsz;
-						} else if(isWii && i == sdata_pdhr + 2) {
-							sdataSizes[1] = memsz;
-						}
-
 						map->header.data_addr[map->data_cnt] = swap32(paddr);
 						map->header.data_size[map->data_cnt] = swap32(filesz);
 						map->data_elf_off[map->data_cnt] = offset;
@@ -308,10 +285,6 @@ void read_elf_segments(DOL_map *map, const char *elf, uint32_t sdata_pdhr, uint3
 			fprintf(stderr, "Skipping program header %d of type %d\n", i, swap32(phdrs[i].p_type));
 		}
 	}
-	increment_bss_size(map, sdataSizes[0]);
-	increment_bss_size(map, sdataSizes[1]);
-	increment_bss_size(map, sbssSizes[0]);
-	increment_bss_size(map, sbssSizes[1]);
 	if(verbosity >= 2) {
 		fprintf(stderr, "Segments:\n");
 		for(i=0; i<map->text_cnt; i++) {
@@ -399,6 +372,16 @@ void fcpy(FILE *dst, FILE *src, uint32_t dst_off, uint32_t src_off, uint32_t siz
 	free(blockbuf);
 }
 
+void fpad(FILE *dst, uint32_t dst_off, uint32_t size)
+{
+	uint32_t i;
+
+	if(fseek(dst, dst_off, SEEK_SET) < 0)
+		ferrordie(dst, "writing DOL segment data");
+	for(i=0; i<size; i++)
+		fputc(0, dst);
+}
+
 void write_dol(DOL_map *map, const char *dol)
 {
 	FILE *dolf;
@@ -429,21 +412,33 @@ void write_dol(DOL_map *map, const char *dol)
 		fprintf(stderr, "Writing DOL header...\n");
 	}
 	
-	written = fwrite(&map->header, sizeof(DOL_hdr), 1, dolf);
+	// Write DOL header with aligned text and data section sizes
+	DOL_hdr aligned_header = map->header;
+	for(i=0; i<ARRAY_COUNT(aligned_header.text_size); i++)
+		aligned_header.text_size[i] = swap32(DOL_ALIGN(swap32(aligned_header.text_size[i])));
+	for(i=0; i<ARRAY_COUNT(aligned_header.data_size); i++)
+		aligned_header.data_size[i] = swap32(DOL_ALIGN(swap32(aligned_header.data_size[i])));
+	written = fwrite(&aligned_header, sizeof(DOL_hdr), 1, dolf);
 	if(written != 1)
 		ferrordie(dolf, "writing DOL header");
 	
 	for(i=0; i<map->text_cnt; i++) {
+		uint32_t size = swap32(map->header.text_size[i]);
+		uint32_t padded_size = DOL_ALIGN(size);
 		if(verbosity >= 2)
 			fprintf(stderr, "Writing TEXT segment %d...\n", i);
-		fcpy(dolf, map->elf, swap32(map->header.text_off[i]), map->text_elf_off[i],
-		     swap32(map->header.text_size[i]));
+		fcpy(dolf, map->elf, swap32(map->header.text_off[i]), map->text_elf_off[i], size);
+		if (padded_size > size)
+			fpad(dolf, swap32(map->header.text_off[i]) + size, padded_size - size);
 	}
 	for(i=0; i<map->data_cnt; i++) {
+		uint32_t size = swap32(map->header.data_size[i]);
+		uint32_t padded_size = DOL_ALIGN(size);
 		if(verbosity >= 2)
 			fprintf(stderr, "Writing DATA segment %d...\n", i);
-		fcpy(dolf, map->elf, swap32(map->header.data_off[i]), map->data_elf_off[i],
-		     swap32(map->header.data_size[i]));
+		fcpy(dolf, map->elf, swap32(map->header.data_off[i]), map->data_elf_off[i], size);
+		if (padded_size > size)
+			fpad(dolf, swap32(map->header.data_off[i]) + size, padded_size - size);
 	}
 	
 	if(verbosity >= 2)
@@ -489,15 +484,12 @@ int main(int argc, char **argv)
 
 	const char *elf_file = arg[0];
 	const char *dol_file = arg[1];
-	uint32_t sdata_pdhr = atoi(arg[2]);
-	uint32_t sbss_pdhr = atoi(arg[3]);
-	const char *platform = arg[4];
 
 	DOL_map map;
 
 	memset(&map, 0, sizeof(map));
 
-	read_elf_segments(&map, elf_file, sdata_pdhr, sbss_pdhr, platform);
+	read_elf_segments(&map, elf_file);
 	map_dol(&map);
 	write_dol(&map, dol_file);
 	

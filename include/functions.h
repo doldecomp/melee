@@ -1,7 +1,7 @@
 /* .init section */
-// ? func_800031F4(?);
+// ? memcpy(?);
 // ? TRK_memcpy(?);
-// ? func_80003268(?);
+// ? TRK_memset(?);
 // ? gTRKInterruptVectorTable(?);
 // ? func_800051CC(?);
 // ? __check_pad3(?);
@@ -3736,7 +3736,7 @@
 // ? func_8015FC74(?);
 // ? func_8015FCC0(?);
 // ? func_8015FDA4(?);
-// ? func_8015FEB4(?);
+// ? main(?);
 // ? func_801601C4(?);
 // ? func_80160244(?);
 // ? func_801602C0(?);
@@ -7947,7 +7947,7 @@ void OSReport();
 // ? OSRegisterResetFunction(?);
 // ? Reset(?);
 // ? __OSDoHotReset(?);
-// ? func_8034844C(?);
+// ? OSResetSystem(?);
 // ? OSGetResetCode(?);
 // ? __OSResetSWInterruptHandler(?);
 // ? OSGetResetButtonState(?);

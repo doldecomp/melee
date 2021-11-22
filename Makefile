@@ -9,8 +9,6 @@ endif
 # Files
 #-------------------------------------------------------------------------------
 
-TARGET_COL := gamecube
-
 TARGET := ssbm.us.1.2
 
 BUILD_DIR := build/$(TARGET)
@@ -57,7 +55,7 @@ PYTHON  := python3
 POSTPROC := tools/postprocess.py
 
 # Options
-INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/msl -i src/msl/ppc_eabi -i src/runtime/ -i src/sysdolphin/ -i src/sysdolphin/baselib/ -i src/melee/ -i src/melee/gr/ -i src/melee/lb/
+INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/msl -i src/msl/ppc_eabi -i src/dolphin/os/init/ -i src/runtime/ -i src/sysdolphin/ -i src/sysdolphin/baselib/ -i src/melee/ -i src/melee/gr/ -i src/melee/lb/
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP) -fp hard -nodefaults
@@ -65,10 +63,6 @@ CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p -nodefaults -msgstyle 
 
 # for postprocess.py
 PROCFLAGS := -fprologue-fixup=old_stack
-
-# elf2dol needs to know these in order to calculate sbss correctly.
-SDATA_PDHR := 9
-SBSS_PDHR := 10
 
 #-------------------------------------------------------------------------------
 # Recipes
@@ -91,7 +85,7 @@ $(LDSCRIPT): ldscript.lcf
 	$(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
 $(DOL): $(ELF) | tools
-	$(ELF2DOL) $< $@ $(SDATA_PDHR) $(SBSS_PDHR) $(TARGET_COL)
+	$(ELF2DOL) $< $@
 	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:
