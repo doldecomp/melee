@@ -20,6 +20,7 @@ extern void* jtbl_8040608C;
 extern s32 lbl_804D7630;
 extern s32 lbl_804D762C;
 
+extern const f32 lbl_804DE43C;
 extern const f32 lbl_804DE438; // 0.0F
 
 extern HSD_SList* lbl_804D7628;
@@ -326,7 +327,7 @@ lbl_80364570:
     /* 80364580 00361160  3C 00 40 00 */	lis r0, 0x4000
     /* 80364584 00361164  90 1F 00 00 */	stw r0, 0(r31)
     /* 80364588 00361168  7F E3 FB 78 */	mr r3, r31
-    /* 8036458C 0036116C  C0 02 EA 5C */	lfs f0, -0x15A4(r2)
+    /* 8036458C 0036116C  C0 02 EA 5C */	lfs f0, lbl_804DE43C(r2)
     /* 80364590 00361170  D0 1F 00 10 */	stfs f0, 0x10(r31)
     /* 80364594 00361174  80 01 00 14 */	lwz r0, 0x14(r1)
     /* 80364598 00361178  83 E1 00 0C */	lwz r31, 0xc(r1)
