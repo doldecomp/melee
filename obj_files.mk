@@ -320,6 +320,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/bytecode.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/class.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/hash.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/texp.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/texp.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/texpdag.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/leak.o			\
