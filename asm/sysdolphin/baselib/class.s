@@ -187,7 +187,7 @@ lbl_80381E18:
 /* 80381E54 0037EA34  54 1F 10 34 */	rlwinm r31, r0, 2, 0, 0x1a
 /* 80381E58 0037EA38  7F E4 FB 78 */	mr r4, r31
 /* 80381E5C 0037EA3C  93 CD C0 60 */	stw r30, lbl_804D7700@sda21(r13)
-/* 80381E60 0037EA40  48 00 03 0D */	bl func_8038216C
+/* 80381E60 0037EA40  48 00 03 0D */	bl hsdFreeMemPiece
 /* 80381E64 0037EA44  38 1F 00 1F */	addi r0, r31, 0x1f
 /* 80381E68 0037EA48  80 6D C0 60 */	lwz r3, lbl_804D7700@sda21(r13)
 /* 80381E6C 0037EA4C  54 00 E8 FA */	rlwinm r0, r0, 0x1d, 3, 0x1d
@@ -405,8 +405,8 @@ lbl_8038214C:
 /* 80382164 0037ED44  7C 08 03 A6 */	mtlr r0
 /* 80382168 0037ED48  4E 80 00 20 */	blr 
 
-.global func_8038216C
-func_8038216C:
+.global hsdFreeMemPiece
+hsdFreeMemPiece:
 /* 8038216C 0037ED4C  7C 08 02 A6 */	mflr r0
 /* 80382170 0037ED50  90 01 00 04 */	stw r0, 4(r1)
 /* 80382174 0037ED54  94 21 FF E8 */	stwu r1, -0x18(r1)
