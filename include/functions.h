@@ -8766,7 +8766,7 @@ void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 // ? func_80382A40(?);
 // ? HSD_HashSearch(?);
 // ? HSD_TExpGetType(?);
-// ? func_80382C3C(?);
+// ? HSD_TExpRef(?);
 // ? func_80382CC4(?);
 // ? func_80382DDC(?);
 // ? func_803830FC(?);
