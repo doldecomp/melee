@@ -53,7 +53,7 @@ _ExitProcess:
 /* 8034CB4C 0034972C  4E 80 00 20 */	blr 
 
 
-.section .ctors  # 0x803B7240 - 0x803B7260
+.section .ctors, "wa"  # 0x803B7240 - 0x803B7260
 
 .global lbl_803B7240
 lbl_803B7240:
