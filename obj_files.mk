@@ -357,8 +357,8 @@ BSS_O_FILES :=                                      \
 SDATA_O_FILES :=                                    \
     $(BUILD_DIR)/asm/sdata.o
 
-# Previously defined in bss.o
-SBSS_O_FILES :=
+SBSS_O_FILES :=                                     \
+    $(BUILD_DIR)/asm/sbss.o
 
 SDATA2_O_FILES :=                                   \
     $(BUILD_DIR)/asm/sdata2.o
