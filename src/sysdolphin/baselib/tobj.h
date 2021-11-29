@@ -249,7 +249,7 @@ typedef struct _HSD_TObjInfo {
 
 typedef struct _HSD_TexAnim {
     struct _HSD_TexAnim* next;
-    u32 id; //GXTexMapID
+    s32 id; //GXTexMapID
     struct _HSD_AObjDesc* aobjdesc;
     struct _HSD_ImageDesc** imagetbl;
     struct _HSD_TlutDesc** tluttbl;
