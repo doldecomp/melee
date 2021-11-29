@@ -27,7 +27,7 @@ _stack_end = _f_sbss2 + SIZEOF(.sbss2);
 _db_stack_addr = (_stack_addr + 0x2000);
 _db_stack_end = _stack_addr;
 __ArenaLo = (_db_stack_addr + 0x1f) & ~0x1f;
-__ArenaHi = 0x81700000 ;
+__ArenaHi = 0x817FEFF0 ;
 }
 
 // Need these temporarily.

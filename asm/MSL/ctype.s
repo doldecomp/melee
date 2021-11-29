@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global tolower
-tolower:
+.global toupper
+toupper:
 /* 80323560 00320140  2C 03 FF FF */	cmpwi r3, -1
 /* 80323564 00320144  40 82 00 0C */	bne lbl_80323570
 /* 80323568 00320148  38 60 FF FF */	li r3, -1
@@ -16,8 +16,8 @@ lbl_80323570:
 /* 80323580 00320160  88 63 00 00 */	lbz r3, 0(r3)
 /* 80323584 00320164  4E 80 00 20 */	blr 
 
-.global toupper
-toupper:
+.global tolower
+tolower:
 /* 80323588 00320168  2C 03 FF FF */	cmpwi r3, -1
 /* 8032358C 0032016C  40 82 00 0C */	bne lbl_80323598
 /* 80323590 00320170  38 60 FF FF */	li r3, -1

@@ -2283,17 +2283,17 @@ lbl_804D7274:
 .global lbl_804D7278
 lbl_804D7278:
 	.skip 0x4
-.global lbl_804D727C
-lbl_804D727C:
+.global FstStart
+FstStart:
 	.skip 0x4
-.global lbl_804D7280
-lbl_804D7280:
+.global FstStringStart
+FstStringStart:
 	.skip 0x4
 .global lbl_804D7284
 lbl_804D7284:
 	.skip 0x4
-.global lbl_804D7288
-lbl_804D7288:
+.global currentDirectory
+currentDirectory:
 	.skip 0x4
 .global __DVDLongFileNameFlag
 __DVDLongFileNameFlag:
