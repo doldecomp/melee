@@ -278,6 +278,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/ax/AX.o 				\
                                                     \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/dobj.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tev.o		\
