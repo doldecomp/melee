@@ -3511,3 +3511,50 @@ lbl_80008D20:
 /* 80008D24 00005904  38 A5 00 01 */	addi r5, r5, 1
 /* 80008D28 00005908  42 00 FE B4 */	bdnz lbl_80008BDC
 /* 80008D2C 0000590C  4E 80 00 20 */	blr 
+
+.section .data
+
+.global lbl_803B9880
+lbl_803B9880:
+    .4byte 0x00083D60
+    .4byte 0x00083D60
+    .4byte 0x00083D60
+    .4byte 0x0000005B
+    .4byte 0x0000005A
+    .4byte 0x00000059
+    .4byte 0x00000058
+    .4byte 0x00000057
+    .4byte 0x00000056
+    .4byte 0x0000006F
+    .4byte 0x00000070
+    .4byte 0x00000071
+    .4byte 0x00000054
+    .4byte 0x00000054
+    .4byte 0x00000054
+    .4byte 0x0000005A
+    .4byte 0x00000059
+    .4byte 0x000000DF
+    .4byte 0x000000E1
+    .4byte 0x000000E1
+    .4byte 0x000000E1
+    .4byte 0x00000062
+    .4byte 0x00000063
+    .4byte 0x00000064
+    .4byte 0x00000065
+    .4byte 0x00000066
+    .4byte 0x00000067
+    .4byte 0x0004461B
+    .4byte 0x0004461B
+    .4byte 0x0004461B
+    .4byte 0x000000F1
+    .4byte 0x000000F1
+    .4byte 0x000000F1
+    .4byte 0x0000005E
+    .4byte 0x0000005D
+    .4byte 0x0000005C
+    .4byte 0x00035BAF
+    .4byte 0x00035BB2
+    .4byte 0x00035BB5
+    .4byte 0x00083D60
+    .4byte 0x00083D60
+    .4byte 0x0000020D

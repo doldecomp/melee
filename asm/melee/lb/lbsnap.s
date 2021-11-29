@@ -1117,3 +1117,56 @@ lbl_8001E2BC:
 /* 8001E2EC 0001AECC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8001E2F0 0001AED0  7C 08 03 A6 */	mtlr r0
 /* 8001E2F4 0001AED4  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803BACC8
+lbl_803BACC8:
+    .4byte 0x02000100
+    .4byte NULL
+    .4byte 0x00000300
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000003
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte NULL
+
+.global lbl_803BACF4
+lbl_803BACF4:
+    .asciz "lbsnap.c"
+    .balign 4
+
+.global lbl_803BAD00
+lbl_803BAD00:
+    .asciz "index < _p(slot)[chan].num"
+    .balign 4
+    .4byte 0x91E59790
+    .4byte 0x93AC8358
+    .4byte 0x837D8362
+    .4byte 0x83568385
+    .4byte 0x83758389
+    .4byte 0x8355815B
+    .4byte 0x83598263
+    .4byte 0x82772020
+    .4byte 0x8ECA905E
+    .4byte 0x8366815B
+    .4byte 0x835E0000
+    .asciz "Super Smash Bros. Melee         Snapshot"
+    .balign 4
+    .asciz "%s %02d/%02d %02d:%02d:%02d"
+    .balign 4
+
+.global lbl_803BAD90
+lbl_803BAD90:
+    .asciz "LbMcSnap."
+    .balign 4
+
+.global lbl_803BAD9C
+lbl_803BAD9C:
+    .asciz "MemSnapIconData"
+    .balign 4
+    .4byte NULL

@@ -2132,3 +2132,61 @@ func_8000CE40:
 /* 8000CE44 00009A24  4D 82 00 20 */	beqlr 
 /* 8000CE48 00009A28  90 83 00 18 */	stw r4, 0x18(r3)
 /* 8000CE4C 00009A2C  4E 80 00 20 */	blr 
+
+.section .data
+
+.global lbl_803B9FC0
+lbl_803B9FC0:
+    .4byte 0x0000000E
+    .4byte 0x0000000E
+    .4byte 0x0000000E
+    .4byte 0x0000000E
+    .4byte 0x00000002
+    .4byte 0x00000004
+    .4byte 0x00000006
+    .4byte NULL
+
+.global lbl_803B9FE0
+lbl_803B9FE0:
+    .4byte 0x0000000C
+    .4byte 0x0000000D
+    .4byte 0x0000000E
+    .4byte 0x0000000F
+
+.global lbl_803B9FF0
+lbl_803B9FF0:
+    .4byte 0x00000007
+    .4byte 0x00000004
+    .4byte 0x00000005
+    .4byte 0x00000006
+
+.global lbl_803BA000
+lbl_803BA000:
+    .4byte 0x00000006
+    .4byte 0x00000006
+    .4byte 0x00000006
+    .4byte 0x00000006
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x00000003
+    .4byte NULL
+
+.global lbl_803BA020
+lbl_803BA020:
+    .4byte 0x0000001C
+    .4byte 0x0000001D
+    .4byte 0x0000001E
+    .4byte 0x0000001F
+
+.global lbl_803BA030
+lbl_803BA030:
+    .4byte 0x00000007
+    .4byte 0x00000004
+    .4byte 0x00000005
+    .4byte 0x00000006
+
+.global lbl_803BA040
+lbl_803BA040:
+    .asciz "translate"
+    .balign 4
+    .4byte NULL

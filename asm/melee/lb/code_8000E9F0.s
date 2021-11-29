@@ -8186,3 +8186,256 @@ lbl_80016134:
 /* 80016150 00012D30  38 21 00 18 */	addi r1, r1, 0x18
 /* 80016154 00012D34  7C 08 03 A6 */	mtlr r0
 /* 80016158 00012D38  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803BA0D8
+lbl_803BA0D8:
+    .asciz "lbshadow.c"
+    .balign 4
+
+.global lbl_803BA0E4
+lbl_803BA0E4:
+    .asciz "lbshadow"
+    .balign 4
+    .asciz "shadow.h"
+    .balign 4
+
+.global lbl_803BA0FC
+lbl_803BA0FC:
+    .4byte NULL
+    .4byte 0x00000004
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .asciz "coudn t get light position ...\n"
+    .balign 4
+    .4byte NULL
+
+.global lbl_803BA150
+lbl_803BA150:
+    .asciz "active deffect:"
+    .balign 4
+    .asciz "[NULL]\n\n"
+    .balign 4
+    .asciz "free deffect:"
+    .balign 4
+    .asciz "[NULL]\n\n\n"
+    .balign 4
+    .asciz "translate"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .4byte NULL
+
+.global lbl_803BA1C0
+lbl_803BA1C0:
+    .asciz "lbspdisplay.c"
+    .balign 4
+
+.global lbl_803BA1D0
+lbl_803BA1D0:
+    .asciz "!image_desc->image_ptr"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xFFFFFF00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte 0x000000FF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+
+.global lbl_803BA248
+lbl_803BA248:
+    .4byte func_80013BB0
+    .4byte func_80013BB8
+    .4byte func_80013BE4
+    .4byte func_80013C18
+    .4byte func_80013D68
+    .4byte func_80013E3C
+    .4byte func_80013F78
+    .4byte func_80013FF0
+    .4byte func_80014014
+    .4byte func_800140F8
+    .4byte func_80014234
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+.global lbl_803BA2A0
+lbl_803BA2A0:
+    .asciz "LbRb.dat"
+    .balign 4
+
+.global lbl_803BA2AC
+lbl_803BA2AC:
+    .asciz "lbRumbleData"
+    .balign 4
+    .4byte NULL
+
+.global lbl_803BA2C0
+lbl_803BA2C0:
+    .asciz "lbmemory.c"
+    .balign 4
+    .asciz "_p(free_heap)"
+    .balign 4
+    .asciz "(u32)arenaLo >= (u32)_p(a_arenaLo) && (u32)arenaHi <= (u32)_p(a_arenaHi)"
+    .balign 4
+    .asciz "_p(free_mem)"
+    .balign 4
+    .asciz "memp_kouho"
+    .balign 4
+
+.global lbl_803BA344
+lbl_803BA344:
+    .asciz "[LbMem] Error: lbMemFreeToHeap %x.\n"
+    .balign 4
+    .asciz "!p->size"
+    .balign 4
+    .asciz "!cancelflag"
+    .balign 4
+
+.global lbl_803BA380
+lbl_803BA380:
+    .4byte 0x00000002
+    .4byte 0x00000001
+    .4byte 0x00000006
+    .4byte 0x00000800
+    .4byte 0x00000003
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x004F8800
+    .4byte 0x00000004
+    .4byte 0x00000002
+    .4byte 0x00000006
+    .4byte 0x0064B400
+    .4byte 0x00000005
+    .4byte 0x00000004
+    .4byte 0x00000006
+    .4byte 0x0096C800
+    .4byte 0x00000006
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+.global lbl_803BA3D0
+lbl_803BA3D0:
+    .asciz "lbheap.c"
+    .balign 4
+
+.global lbl_803BA3DC
+lbl_803BA3DC:
+    .asciz "p->status == LbHeapStatus_Create"
+    .balign 4
+
+.global lbl_803BA400
+lbl_803BA400:
+    .asciz "     Hsd"
+    .balign 4
+
+.global lbl_803BA40C
+lbl_803BA40C:
+    .asciz "    ARAM"
+    .balign 4
+
+.global lbl_803BA418
+lbl_803BA418:
+    .asciz "     Seq"
+    .balign 4
+
+.global lbl_803BA424
+lbl_803BA424:
+    .asciz "    Stay"
+    .balign 4
+
+.global lbl_803BA430
+lbl_803BA430:
+    .asciz "    AllM"
+    .balign 4
+    
+.global lbl_803BA43C
+lbl_803BA43C:
+    .asciz "    AllA"
+    .balign 4
+    .4byte lbl_803BA400
+    .4byte lbl_803BA40C
+    .4byte lbl_803BA418
+    .4byte lbl_803BA424
+    .4byte lbl_803BA430
+    .4byte lbl_803BA43C
+    .asciz "[lbHeap] -- Report --\n"
+    .balign 4
+    .asciz " %5d KB + "
+    .balign 4
+    .asciz " %5d KB( %8d)"
+    .balign 4
+    .asciz "                         destroy"
+    .balign 4
+    .asciz " / %5d KB\n"
+    .balign 4
+    .asciz "MainRAM Total : %5d KB( %8d)\n"
+    .balign 4
+    .asciz "   ARAM Total : %5d KB( %8d)\n"
+    .balign 4
+    .4byte NULL
+
+
+.section .rodata
+
+.global lbl_803B7280
+lbl_803B7280:
+    .float 0
+    .float -1
+    .float 0
+    .float 0
+    .float -1
+    .float 0
+    .float 0
+    .float -1
+    .float 0
+	.4byte NULL
+
+.global lbl_803B72A8
+lbl_803B72A8:
+	.float 0
+    .float 0
+    .float 1
+
+.global lbl_803B72B4
+lbl_803B72B4:
+	.float 0
+    .float 0
+    .float 0
