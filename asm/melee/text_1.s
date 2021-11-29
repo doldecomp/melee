@@ -4155,3 +4155,81 @@ lbl_80160174:
 /* 801601B8 0015CD98  38 21 00 28 */	addi r1, r1, 0x28
 /* 801601BC 0015CD9C  7C 08 03 A6 */	mtlr r0
 /* 801601C0 0015CDA0  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803D4A48
+lbl_803D4A48:
+    .4byte 0x00340002
+    .4byte 0x03000A00
+    .4byte 0x00000100
+    .4byte 0x00000808
+    .4byte 0x00000800
+    .4byte 0xFFFFFFFF
+
+.global lbl_803D4A60
+lbl_803D4A60:
+    .4byte 0x02000000
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0x01010101
+    .4byte 0x00010000
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+
+.global lbl_803D4A80
+lbl_803D4A80:
+    .4byte 0x00000002
+    .4byte 0x028001E0
+    .4byte 0x01E00028
+    .4byte 0x00000280
+    .4byte 0x01E00000
+    .4byte NULL
+    .4byte 0x00000606
+    .4byte 0x06060606
+    .4byte 0x06060606
+    .4byte 0x06060606
+    .4byte 0x06060606
+    .4byte 0x06060606
+    .4byte 0x06060808
+    .4byte 0x0A0C0A08
+    .4byte 0x08000000
+
+.global lbl_803D4ABC
+lbl_803D4ABC:
+    .asciz "/usa.ini"
+    .balign 4
+
+.global lbl_803D4AC8
+lbl_803D4AC8:
+    .asciz "/develop.ini"
+    .balign 4
+    .asciz "gmmain.c"
+    .balign 4
+    .asciz "DbLevel == DbLKind_NoDebugRom"
+    .balign 4
+    .asciz "Data %lx\n"
+    .balign 4
+    .asciz "please setup server for USB\n"
+    .balign 4
+    .asciz "# ---------------------------------------------\n"
+    .balign 4
+    .asciz "#    Super Smash Bros. Melee\n"
+    .balign 4
+    .asciz "# Distribution %d\n"
+    .balign 4
+    .asciz "# Language %d\n"
+    .balign 4
+    .asciz "# DbLevel %d\n"
+    .balign 4
+    .asciz "# Arena Size %d MB\n"
+    .balign 4
+    .asciz "# ARAM Free Size %d MB\n"
+    .balign 4
+    .asciz "# GC Calendar Year %d Month %d Day %d\n"
+    .balign 4
+    .asciz "#             Hour %d Min %d Sec %d \n"
+    .balign 4
+    .4byte NULL

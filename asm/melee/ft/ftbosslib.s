@@ -1242,3 +1242,25 @@ func_8015CC14:
 /* 8015CC28 00159808  38 21 00 08 */	addi r1, r1, 8
 /* 8015CC2C 0015980C  7C 08 03 A6 */	mtlr r0
 /* 8015CC30 00159810  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803D49C0
+lbl_803D49C0:
+    .asciz "boss is human or boss!\n"
+    .balign 4
+    .asciz "ftbosslib.c"
+    .balign 4
+    .asciz "kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu"
+    .balign 4
+
+.global jtbl_803D4A2C
+jtbl_803D4A2C:
+	.4byte lbl_8015C5AC
+	.4byte lbl_8015C5B4
+	.4byte lbl_8015C5BC
+	.4byte lbl_8015C5C4
+	.4byte lbl_8015C5CC
+	.4byte lbl_8015C5D4
+	.4byte lbl_8015C5D4

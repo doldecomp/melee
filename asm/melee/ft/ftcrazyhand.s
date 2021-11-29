@@ -6904,3 +6904,95 @@ lbl_8015BC78:
 /* 8015BC7C 0015885C  38 21 00 08 */	addi r1, r1, 8
 /* 8015BC80 00158860  7C 08 03 A6 */	mtlr r0
 /* 8015BC84 00158864  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803D4878
+lbl_803D4878:
+    .4byte 0x00000157
+    .4byte 0x00000159
+    .4byte 0x0000015B
+    .4byte 0x0000015D
+    .4byte 0x0000015F
+    .4byte 0x00000162
+    .4byte 0x00000163
+    .4byte 0x00000165
+    .4byte 0x00000174
+    .4byte 0x00000175
+    .4byte 0x00000176
+    .4byte 0x00000167
+    .4byte 0x00000169
+    .4byte 0x00000170
+    .4byte 0x00000171
+    .4byte 0x00000179
+    .4byte 0x0000017A
+    .4byte 0x0000017B
+    .4byte 0x00010203
+    .4byte 0x04050607
+    .4byte 0x08090A0B
+    .4byte 0x0C0D0E0F
+    .4byte 0x10110000
+    .4byte 0x00040404
+    .4byte 0x08030B02
+    .4byte 0x0D020F03
+    .4byte 0x01020304
+    .4byte 0x05000203
+    .4byte 0x04050001
+    .4byte 0x03040500
+    .4byte 0x01020405
+    .4byte 0x00010203
+    .4byte 0x05000102
+    .4byte 0x03040000
+.global jtbl_803D4900
+jtbl_803D4900:
+	.4byte lbl_801566B4
+	.4byte lbl_80156A5C
+	.4byte lbl_80156688
+	.4byte lbl_80156A5C
+	.4byte lbl_801566E0
+	.4byte lbl_80156A5C
+	.4byte lbl_80156710
+	.4byte lbl_80156A5C
+	.4byte lbl_80156740
+	.4byte lbl_80156A5C
+	.4byte lbl_80156A5C
+	.4byte lbl_80156770
+	.4byte lbl_801567A0
+	.4byte lbl_80156A5C
+	.4byte lbl_801567AC
+	.4byte lbl_80156A5C
+	.4byte lbl_801567DC
+	.4byte lbl_80156A5C
+	.4byte lbl_8015683C
+	.4byte lbl_80156A5C
+	.4byte lbl_80156A5C
+	.4byte lbl_80156A5C
+	.4byte lbl_80156A5C
+	.4byte lbl_80156A5C
+	.4byte lbl_80156A5C
+	.4byte lbl_8015686C
+	.4byte lbl_80156878
+	.4byte lbl_80156A5C
+	.4byte lbl_80156A5C
+	.4byte lbl_80156884
+	.4byte lbl_80156898
+	.4byte lbl_801568AC
+	.4byte lbl_80156A5C
+	.4byte lbl_80156A5C
+	.4byte lbl_801568B8
+	.4byte lbl_801568E8
+	.4byte lbl_80156918
+	.4byte lbl_80156948
+.global jtbl_803D4998
+jtbl_803D4998:
+	.4byte lbl_8015B2FC
+	.4byte lbl_8015B35C
+	.4byte lbl_8015B390
+	.4byte lbl_8015B3B8
+	.4byte lbl_8015B3EC
+	.4byte lbl_8015B404
+	.4byte lbl_8015B43C
+	.4byte lbl_8015B46C
+	.4byte lbl_8015B4AC
+	.4byte lbl_8015B4BC

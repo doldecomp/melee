@@ -6858,3 +6858,42 @@ lbl_8006DB58:
 /* 8006DBE8 0006A7C8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8006DBEC 0006A7CC  7C 08 03 A6 */	mtlr r0
 /* 8006DBF0 0006A7D0  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803C0530
+lbl_803C0530:
+    .asciz "PlCo.dat"
+    .balign 4
+
+.global lbl_803C053C
+lbl_803C053C:
+    .asciz "ftLoadCommonData"
+    .balign 4
+.global lbl_803C0550
+lbl_803C0550:
+    .asciz "translate"
+    .balign 4
+.global lbl_803C055C
+lbl_803C055C:
+    .asciz "fighter sub color num over!\n"
+    .balign 4
+.global lbl_803C057C
+lbl_803C057C:
+    .asciz "fighter.c"
+    .balign 4
+.global lbl_803C0588
+lbl_803C0588:
+    .asciz "ellegal flag fp->no_normal_motion\n"
+    .balign 4
+.global lbl_803C05AC
+lbl_803C05AC:
+    .asciz "fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n"
+    .balign 4
+    .asciz "fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n"
+    .balign 4
+.global lbl_803C0610
+lbl_803C0610:
+    .asciz "ellegal flag fp->no_reaction_always\n"
+    .balign 4
