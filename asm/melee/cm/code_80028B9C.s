@@ -9979,3 +9979,173 @@ func_800316B4:
 /* 80031718 0002E2F8  38 21 00 10 */	addi r1, r1, 0x10
 /* 8003171C 0002E2FC  7C 08 03 A6 */	mtlr r0
 /* 80031720 0002E300  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803BCB18
+lbl_803BCB18:
+    .4byte func_8002B3D4
+    .4byte func_8002CDDC
+    .4byte func_8002D318
+    .4byte func_8002D85C
+    .4byte func_8002DDC4
+    .4byte func_8002C908
+    .4byte func_8002E490
+    .4byte NULL
+    .4byte NULL
+
+.global lbl_803BCB3C
+lbl_803BCB3C:
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x4220F738
+    .4byte 0x43961ED9
+    .4byte NULL
+
+.global lbl_803BCB50
+lbl_803BCB50:
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x41200000
+    .4byte NULL
+    .4byte NULL
+
+.global lbl_803BCB64
+lbl_803BCB64:
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte 0x00000280
+    .4byte 0x000001E0
+    .4byte 0x00000280
+    .4byte 0x000001E0
+    .4byte lbl_803BCB3C
+    .4byte lbl_803BCB50
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3DCCCCCD
+    .4byte 0x46800000
+    .4byte 0x41F00000
+    .4byte 0x3F9BD194
+.global lbl_803BCB9C
+lbl_803BCB9C:
+    .4byte NULL
+    .4byte 0x3FC00000
+    .4byte 0x3FA8F5C3
+    .4byte 0x3F947AE1
+    .4byte 0x3F800000
+
+.global lbl_803BCBB0
+lbl_803BCBB0:
+    .asciz "couldn't get CmSubject struct.\n"
+    .balign 4
+
+.global lbl_803BCBD0
+lbl_803BCBD0:
+    .asciz "camera.c"
+    .balign 4
+    .asciz "fov_u<MTXDegToRad(90.0F)"
+    .balign 4
+    .asciz "fov_d<MTXDegToRad(90.0F)"
+    .balign 4
+    .asciz "fov_r<MTXDegToRad(90.0F)"
+    .balign 4
+    .asciz "fov_l<MTXDegToRad(90.0F)"
+    .balign 4
+
+.global jtbl_803BCC4C
+jtbl_803BCC4C:
+    .4byte lbl_8002A4F8
+    .4byte lbl_8002A554
+    .4byte lbl_8002A6C0
+    .4byte lbl_8002A6C0
+    .4byte lbl_8002A4F8
+    .4byte lbl_8002A52C
+    .4byte lbl_8002A6C0
+    .4byte lbl_8002A700
+    .4byte lbl_8002A728
+    .4byte 0x72617465
+    .4byte 0x3E302E30
+    .4byte 0x46262672
+    .4byte 0x6174653C
+    .4byte 0x3D312E30
+    .4byte 0x46000000
+    .4byte 0x736E6170
+    .4byte 0x73686F74
+    .4byte 0x21207074
+    .4byte 0x723D2530
+    .4byte 0x38780A00
+    .4byte NULL
+
+.global lbl_803BCCA0
+lbl_803BCCA0:
+    .4byte 0x42A60000
+    .4byte 0x447A0000
+    .4byte 0xC1F00000
+    .4byte 0x40A00000
+    .4byte 0xC0E00000
+    .4byte 0x418C0000
+    .4byte 0xC18C0000
+    .4byte NULL
+    .4byte 0x3D8BAC71
+    .4byte 0x42700000
+    .4byte 0x42F00000
+    .4byte 0x3D4CCCCD
+    .4byte 0x3DCCCCCD
+    .4byte 0x42F00000
+    .4byte 0x44610000
+    .4byte 0x3E19999A
+    .4byte 0x42180000
+    .4byte 0x3DCCCCCD
+    .4byte 0x3DCCCCCD
+    .4byte 0x3A83126F
+    .4byte 0x3DCCCCCD
+    .4byte 0x3F800000
+    .4byte 0x3F800000
+    .4byte 0x3F19999A
+    .4byte 0x3F19999A
+    .4byte 0x3D4CCCCD
+    .4byte 0x3DCCCCCD
+    .4byte 0x41E80000
+    .4byte 0x3DCCCCCD
+    .4byte 0x3DCCCCCD
+    .4byte 0x3DCCCCCD
+    .4byte 0x3DCCCCCD
+    .4byte 0x3F000000
+    .4byte 0x3F000000
+    .4byte 0x3ECCCCCD
+    .4byte 0xC1300000
+    .4byte 0x43C80000
+    .4byte 0x3E4CCCCD
+    .4byte 0x40800000
+    .4byte 0x3D4CCCCD
+    .4byte 0x3F800000
+    .4byte 0xC0E00000
+    .4byte 0x40E00000
+    .4byte 0x3F000000
+    .4byte 0x3F000000
+    .4byte 0x3B83126F
+    .4byte 0x3E4CCCCD
+    .4byte 0x3CCCCCCD
+    .4byte 0x3E4CCCCD
+    .4byte 0x3B449BA6
+    .4byte 0x3E4CCCCD
+    .4byte 0x3CCCCCCD
+    .4byte 0x3E4CCCCD
+    .4byte 0x3CA3D70A
+    .4byte 0x3F800000
+    .4byte 0x3E0F5C29
+    .4byte 0x44960000
+    .4byte 0xBE4CCCCD
+    .4byte 0x3F99999A
+    .4byte NULL
+
+.global lbl_803BCD90
+lbl_803BCD90:
+    .asciz "cmsnap.c"
+    .balign 4
+
+.global lbl_803BCD9C
+lbl_803BCD9C:
+    .asciz "_p(status) == CmSnapStatus_Sleep"
+    .balign 4
