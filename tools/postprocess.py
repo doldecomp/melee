@@ -173,6 +173,7 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                 f.seek(ofs)
 
                 mtlr_pos = 0
+                addi_pos = 0
                 
                 # (mtlr position, blr position)
                 epilogues = []
@@ -204,11 +205,14 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                     elif instr == 0x4E800020:
                         if mtlr_pos:
                             epilogues.append((mtlr_pos, it))
+                        if addi_pos and mtlr_pos == 0:
+                            epilogues.append((addi_pos, it))
                         mtlr_pos = 0
+                        addi_pos = 0
                     # addi r1, r1, 0x18
                     elif instr == 0x38210018:
                         if mtlr_pos == 0:
-                            mtlr_pos = it                      
+                            addi_pos = it                      
                         
 
                 # Check for a lone mtlr
