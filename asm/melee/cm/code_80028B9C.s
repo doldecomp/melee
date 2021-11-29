@@ -10149,3 +10149,18 @@ lbl_803BCD90:
 lbl_803BCD9C:
     .asciz "_p(status) == CmSnapStatus_Sleep"
     .balign 4
+
+
+.section .bss, "wa"
+
+.global lbl_80452C68
+lbl_80452C68:
+	.skip 0x39C
+
+.global lbl_80453004
+lbl_80453004:
+	.skip 0x5C
+
+.global lbl_80453060
+lbl_80453060:
+	.skip 0x20

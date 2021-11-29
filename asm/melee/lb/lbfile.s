@@ -674,3 +674,10 @@ lbl_803BA540:
     .asciz "entry_num != -1"
     .balign 4
     .4byte NULL
+
+
+.section .bss, "wa"
+
+.global lbl_80432058
+lbl_80432058:
+	.skip 0x20

@@ -7646,42 +7646,6 @@ lbl_8001D280:
 /* 8001D2B4 00019E94  7C 08 03 A6 */	mtlr r0
 /* 8001D2B8 00019E98  4E 80 00 20 */	blr 
 
-.global func_8001D2BC
-func_8001D2BC:
-/* 8001D2BC 00019E9C  7C 08 02 A6 */	mflr r0
-/* 8001D2C0 00019EA0  3C 60 80 43 */	lis r3, lbl_80433380@ha
-/* 8001D2C4 00019EA4  90 01 00 04 */	stw r0, 4(r1)
-/* 8001D2C8 00019EA8  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8001D2CC 00019EAC  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8001D2D0 00019EB0  3B E0 00 01 */	li r31, 1
-/* 8001D2D4 00019EB4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8001D2D8 00019EB8  3B C3 33 80 */	addi r30, r3, lbl_80433380@l
-/* 8001D2DC 00019EBC  93 A1 00 0C */	stw r29, 0xc(r1)
-/* 8001D2E0 00019EC0  3B A0 00 00 */	li r29, 0
-/* 8001D2E4 00019EC4  93 81 00 08 */	stw r28, 8(r1)
-lbl_8001D2E8:
-/* 8001D2E8 00019EC8  83 9E 00 4C */	lwz r28, 0x4c(r30)
-/* 8001D2EC 00019ECC  7F A3 EB 78 */	mr r3, r29
-/* 8001D2F0 00019ED0  48 33 8C 6D */	bl CARDProbe
-/* 8001D2F4 00019ED4  90 7E 00 4C */	stw r3, 0x4c(r30)
-/* 8001D2F8 00019ED8  80 1E 00 4C */	lwz r0, 0x4c(r30)
-/* 8001D2FC 00019EDC  7C 00 E0 00 */	cmpw r0, r28
-/* 8001D300 00019EE0  41 82 00 08 */	beq lbl_8001D308
-/* 8001D304 00019EE4  93 FE 00 54 */	stw r31, 0x54(r30)
-lbl_8001D308:
-/* 8001D308 00019EE8  3B BD 00 01 */	addi r29, r29, 1
-/* 8001D30C 00019EEC  2C 1D 00 02 */	cmpwi r29, 2
-/* 8001D310 00019EF0  3B DE 00 04 */	addi r30, r30, 4
-/* 8001D314 00019EF4  41 80 FF D4 */	blt lbl_8001D2E8
-/* 8001D318 00019EF8  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8001D31C 00019EFC  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8001D320 00019F00  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8001D324 00019F04  83 A1 00 0C */	lwz r29, 0xc(r1)
-/* 8001D328 00019F08  83 81 00 08 */	lwz r28, 8(r1)
-/* 8001D32C 00019F0C  38 21 00 18 */	addi r1, r1, 0x18
-/* 8001D330 00019F10  7C 08 03 A6 */	mtlr r0
-/* 8001D334 00019F14  4E 80 00 20 */	blr 
-
 
 .section .data
 
@@ -8149,3 +8113,29 @@ lbl_803B72C0:
     .4byte lbl_804D37EC
     .long 0
     .4byte NULL
+
+
+.section .bss, "wa"
+
+.global lbl_80432078
+lbl_80432078:
+	.skip 0x978
+
+.global lbl_804329F0
+lbl_804329F0:
+	.skip 0x78
+
+.global lbl_80432A68
+lbl_80432A68:
+	.skip 0x8B0
+
+.global lbl_80433318
+lbl_80433318:
+	.skip 0x68
+
+
+.section .bss, "wa"
+
+.global lbl_80433380
+lbl_80433380:
+	.skip 0x60
