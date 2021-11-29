@@ -2289,8 +2289,8 @@ FstStart:
 .global FstStringStart
 FstStringStart:
 	.skip 0x4
-.global lbl_804D7284
-lbl_804D7284:
+.global MaxEntryNum
+MaxEntryNum:
 	.skip 0x4
 .global currentDirectory
 currentDirectory:

@@ -1026,8 +1026,8 @@ __DVDFSInit:
 /* 80337948 00334528  28 03 00 00 */	cmplwi r3, 0
 /* 8033794C 0033452C  4D 82 00 20 */	beqlr 
 /* 80337950 00334530  80 03 00 08 */	lwz r0, 8(r3)
-/* 80337954 00334534  90 0D BB E4 */	stw r0, lbl_804D7284@sda21(r13)
-/* 80337958 00334538  80 0D BB E4 */	lwz r0, lbl_804D7284@sda21(r13)
+/* 80337954 00334534  90 0D BB E4 */	stw r0, MaxEntryNum@sda21(r13)
+/* 80337958 00334538  80 0D BB E4 */	lwz r0, MaxEntryNum@sda21(r13)
 /* 8033795C 0033453C  1C 00 00 0C */	mulli r0, r0, 0xc
 /* 80337960 00334540  7C 03 02 14 */	add r0, r3, r0
 /* 80337964 00334544  90 0D BB E0 */	stw r0, FstStringStart@sda21(r13)
@@ -1264,11 +1264,11 @@ lbl_80337C4C:
 /* 80337C58 00334838  7C 08 03 A6 */	mtlr r0
 /* 80337C5C 0033483C  4E 80 00 20 */	blr 
 
-.global func_80337C60
-func_80337C60:
+.global DVDFastOpen
+DVDFastOpen:
 /* 80337C60 00334840  2C 03 00 00 */	cmpwi r3, 0
 /* 80337C64 00334844  41 80 00 38 */	blt lbl_80337C9C
-/* 80337C68 00334848  80 0D BB E4 */	lwz r0, lbl_804D7284@sda21(r13)
+/* 80337C68 00334848  80 0D BB E4 */	lwz r0, MaxEntryNum@sda21(r13)
 /* 80337C6C 0033484C  7C 03 00 40 */	cmplw r3, r0
 /* 80337C70 00334850  40 80 00 2C */	bge lbl_80337C9C
 /* 80337C74 00334854  1C C3 00 0C */	mulli r6, r3, 0xc
@@ -1312,8 +1312,8 @@ func_80337CD4:
 /* 80337CF0 003348D0  7C 08 03 A6 */	mtlr r0
 /* 80337CF4 003348D4  4E 80 00 20 */	blr 
 
-.global func_80337CF8
-func_80337CF8:
+.global DVDReadAsyncPrio
+DVDReadAsyncPrio:
 /* 80337CF8 003348D8  7C 08 02 A6 */	mflr r0
 /* 80337CFC 003348DC  90 01 00 04 */	stw r0, 4(r1)
 /* 80337D00 003348E0  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -1351,8 +1351,8 @@ lbl_80337D60:
 /* 80337D74 00334954  48 00 D9 B5 */	bl OSPanic
 lbl_80337D78:
 /* 80337D78 00334958  93 DA 00 38 */	stw r30, 0x38(r26)
-/* 80337D7C 0033495C  3C 60 80 33 */	lis r3, lbl_80337DB8@ha
-/* 80337D80 00334960  38 E3 7D B8 */	addi r7, r3, lbl_80337DB8@l
+/* 80337D7C 0033495C  3C 60 80 33 */	lis r3, cbForReadAsync@ha
+/* 80337D80 00334960  38 E3 7D B8 */	addi r7, r3, cbForReadAsync@l
 /* 80337D84 00334964  80 1A 00 30 */	lwz r0, 0x30(r26)
 /* 80337D88 00334968  38 7A 00 00 */	addi r3, r26, 0
 /* 80337D8C 0033496C  38 9B 00 00 */	addi r4, r27, 0
@@ -1366,7 +1366,9 @@ lbl_80337D78:
 /* 80337DAC 0033498C  38 21 00 38 */	addi r1, r1, 0x38
 /* 80337DB0 00334990  7C 08 03 A6 */	mtlr r0
 /* 80337DB4 00334994  4E 80 00 20 */	blr 
-lbl_80337DB8:
+
+.global cbForReadAsync
+cbForReadAsync:
 /* 80337DB8 00334998  7C 08 02 A6 */	mflr r0
 /* 80337DBC 0033499C  90 01 00 04 */	stw r0, 4(r1)
 /* 80337DC0 003349A0  94 21 FF F8 */	stwu r1, -8(r1)
