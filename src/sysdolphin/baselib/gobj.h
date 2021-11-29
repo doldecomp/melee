@@ -29,12 +29,15 @@ typedef struct _HSD_GObjProc {
     struct _HSD_GObjProc* next; //0x4
     struct _HSD_GObjProc* prev; //0x8
     u8 s_link; //0xC
-    u8 flags; //0xD
+    u8 flags_1:1; //0xD
+    u8 flags_2:1;
+    u8 flags_3:1;
+    u8 flags_4:1;
     struct _HSD_GObj* gobj; //0x10
     void (*callback)(struct _HSD_GObj*); //0x14
 } HSD_GObjProc;
 
 #endif
 
-BOOL func_80390C5C(HSD_GObj* gobj);
-BOOL func_80390C84(HSD_GObj* gobj);
+void func_80390C5C(HSD_GObj* gobj);
+void func_80390C84(HSD_GObj* gobj);
