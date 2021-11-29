@@ -205,6 +205,10 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                         if mtlr_pos:
                             epilogues.append((mtlr_pos, it))
                         mtlr_pos = 0
+                    # addi r1, r1, 0x18
+                    elif instr == 0x38210018:
+                        if mtlr_pos == 0:
+                            mtlr_pos = it                      
                         
 
                 # Check for a lone mtlr
@@ -222,7 +226,7 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                     #   addi r1, r1, 24
                     #   blr
                     assert blr_pos - 4 > mtlr_pos
-                    assert blr_pos - mtlr_pos <= 6 * 4
+                    assert blr_pos - mtlr_pos <= 7 * 4
 
                     print("Patching old epilogue: %s %s" % (mtlr_pos, blr_pos))
 

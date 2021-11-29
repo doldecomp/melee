@@ -3,14 +3,6 @@
 
 .include "macros.inc"
 
-.global lbl_804D79E0
-lbl_804D79E0:
-    .4byte 0x43300000
-    .4byte 0x00000000
-.global lbl_804D79E8
-lbl_804D79E8:
-    .4byte 0x7F7FFFFF
-    .4byte 0x00000000
 .global lbl_804D79F0
 lbl_804D79F0:
     .4byte 0x3727C5AC
