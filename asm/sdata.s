@@ -3,10 +3,6 @@
 
 .include "macros.inc"
 
-.global lbl_804D3720
-lbl_804D3720:
-    .asciz "pos3d"
-    .balign 4
 .global lbl_804D3728
 lbl_804D3728:
     .asciz "shadow"

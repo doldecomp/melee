@@ -1476,3 +1476,95 @@ lbl_801A3634:
 .global func_801A367C
 func_801A367C:
 /* 801A367C 001A025C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803DA630
+lbl_803DA630:
+    .4byte 0x3F19999A
+    .4byte 0x3F19999A
+    .4byte 0x42200000
+    .4byte 0x43D00000
+    .4byte 0x3F19999A
+    .4byte 0x3F19999A
+    .4byte 0x43AA0000
+    .4byte 0x43D00000
+    .4byte 0x3F19999A
+    .4byte 0x3F19999A
+    .4byte 0x42200000
+    .4byte 0x42300000
+
+.global jtbl_803DA660
+jtbl_803DA660:
+	.4byte lbl_801A23EC
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24BC
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24D8
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24F4
+	.4byte lbl_801A24A0
+
+.global lbl_803DA6A0
+lbl_803DA6A0:
+    .asciz "SIS_VsCameraData"
+    .balign 4
+
+.global lbl_803DA6B4
+lbl_803DA6B4:
+    .4byte 0x01000000
+	.4byte lbl_801A26C0
+	.4byte lbl_801A2798
+    .4byte 0x00000004
+	.4byte lbl_801A2800
+	.4byte lbl_801A28AC
+    .4byte 0x00000002
+	.4byte lbl_801A292C
+	.4byte lbl_801A2AAC
+    .4byte 0x00000054
+    .4byte NULL
+	.4byte lbl_801A2BB0
+    .4byte 0x00000034
+    .4byte NULL
+	.4byte lbl_801A2BB0
+    .4byte 0x00000094
+    .4byte NULL
+	.4byte lbl_801A2BB0
+    .4byte 0x00001204
+	.4byte lbl_801A2BF0
+	.4byte lbl_801A2D44
+    .4byte 0x00001604
+	.4byte lbl_801A2FBC
+	.4byte lbl_801A2FFC
+    .4byte 0x00001A14
+    .4byte NULL
+	.4byte lbl_801A2BB0
+    .balign 4
+    .asciz "IfCameraInfo_Top_model_set"
+    .balign 4
+    .asciz "IfCamera_Top_model_set"
+    .balign 4
+    .4byte NULL
+
+.global lbl_803DA758
+lbl_803DA758:
+    .asciz "?333?333C("
+    .balign 4
+    .4byte 0x43200000
+    .4byte 0x3F333333
+    .4byte 0x3F333333
+    .4byte 0x43280000
+    .4byte 0x43400000
+    .4byte 0x3F333333
+    .4byte 0x3F333333
+    .4byte NULL
+    .4byte 0x43800000

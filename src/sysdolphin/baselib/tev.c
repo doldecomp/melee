@@ -10,6 +10,8 @@ extern s32 lbl_804D7600; // state_num_chans
 extern void* lbl_804D7604; // chan_chan
 extern void* lbl_804D760C;
 
+
+// This function isn't matching because the externs. Once split properly, it will match.
 #ifdef NON_MATCHING
 void HSD_RenderInitAllocData(void)
 {

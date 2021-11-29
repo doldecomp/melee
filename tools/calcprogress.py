@@ -169,4 +169,4 @@ if __name__ == "__main__":
     print("Progress:")
     print(f"\tCode sections: {decomp_code_size} / {dol_code_size} bytes in src ({codeCompletionPcnt:%})")
     print(f"\tData sections: {decomp_data_size} / {dol_data_size} bytes in src ({dataCompletionPcnt:%})")
-    print("\nYou have {} of 290 Trophies and {} of 51 Event Matches.".format(trophyCount, eventCount))
+    print("\nYou have {} of 290 Trophies and completed {} of 51 Event Matches.".format(trophyCount, eventCount))

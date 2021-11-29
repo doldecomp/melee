@@ -231,6 +231,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_debug.o        \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_task.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdlow.o           \
+	$(BUILD_DIR)/asm/dolphin/dvd/dvdfs.o            \
+	$(BUILD_DIR)/asm/dolphin/dvd/dvd.o              \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdqueue.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvderror.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/fstload.o          \

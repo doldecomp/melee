@@ -3734,7 +3734,7 @@ func_8015FBA4:
 /* 8015FBC0 0015C7A0  4B EA C5 A1 */	bl func_8000C160
 /* 8015FBC4 0015C7A4  3C 60 80 3D */	lis r3, lbl_803D4ABC@ha
 /* 8015FBC8 0015C7A8  38 63 4A BC */	addi r3, r3, lbl_803D4ABC@l
-/* 8015FBCC 0015C7AC  48 1D 7D A1 */	bl func_8033796C
+/* 8015FBCC 0015C7AC  48 1D 7D A1 */	bl DVDConvertPathToEntrynum
 /* 8015FBD0 0015C7B0  2C 03 FF FF */	cmpwi r3, -1
 /* 8015FBD4 0015C7B4  41 82 00 18 */	beq lbl_8015FBEC
 /* 8015FBD8 0015C7B8  38 60 00 01 */	li r3, 1
@@ -3875,7 +3875,7 @@ func_8015FDA4:
 /* 8015FDB4 0015C994  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8015FDB8 0015C998  3B E3 4A C8 */	addi r31, r3, lbl_803D4AC8@l
 /* 8015FDBC 0015C99C  38 7F 00 00 */	addi r3, r31, 0
-/* 8015FDC0 0015C9A0  48 1D 7B AD */	bl func_8033796C
+/* 8015FDC0 0015C9A0  48 1D 7B AD */	bl DVDConvertPathToEntrynum
 /* 8015FDC4 0015C9A4  2C 03 FF FF */	cmpwi r3, -1
 /* 8015FDC8 0015C9A8  41 82 00 B4 */	beq lbl_8015FE7C
 /* 8015FDCC 0015C9AC  A0 6D B4 90 */	lhz r3, lbl_804D6B30@sda21(r13)
@@ -3962,7 +3962,7 @@ main:
 /* 8015FECC 0015CAAC  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 8015FED0 0015CAB0  48 1E 30 F9 */	bl OSInit
 /* 8015FED4 0015CAB4  48 1E EF C9 */	bl func_8034EE9C
-/* 8015FED8 0015CAB8  48 1D 7F 11 */	bl func_80337DE8
+/* 8015FED8 0015CAB8  48 1D 7F 11 */	bl DVDInit
 /* 8015FEDC 0015CABC  48 1E D9 11 */	bl func_8034D7EC
 /* 8015FEE0 0015CAC0  48 1F 32 05 */	bl func_803530E4
 /* 8015FEE4 0015CAC4  48 1E 38 3D */	bl OSInitAlarm
@@ -4155,3 +4155,81 @@ lbl_80160174:
 /* 801601B8 0015CD98  38 21 00 28 */	addi r1, r1, 0x28
 /* 801601BC 0015CD9C  7C 08 03 A6 */	mtlr r0
 /* 801601C0 0015CDA0  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803D4A48
+lbl_803D4A48:
+    .4byte 0x00340002
+    .4byte 0x03000A00
+    .4byte 0x00000100
+    .4byte 0x00000808
+    .4byte 0x00000800
+    .4byte 0xFFFFFFFF
+
+.global lbl_803D4A60
+lbl_803D4A60:
+    .4byte 0x02000000
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0x01010101
+    .4byte 0x00010000
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+
+.global lbl_803D4A80
+lbl_803D4A80:
+    .4byte 0x00000002
+    .4byte 0x028001E0
+    .4byte 0x01E00028
+    .4byte 0x00000280
+    .4byte 0x01E00000
+    .4byte NULL
+    .4byte 0x00000606
+    .4byte 0x06060606
+    .4byte 0x06060606
+    .4byte 0x06060606
+    .4byte 0x06060606
+    .4byte 0x06060606
+    .4byte 0x06060808
+    .4byte 0x0A0C0A08
+    .4byte 0x08000000
+
+.global lbl_803D4ABC
+lbl_803D4ABC:
+    .asciz "/usa.ini"
+    .balign 4
+
+.global lbl_803D4AC8
+lbl_803D4AC8:
+    .asciz "/develop.ini"
+    .balign 4
+    .asciz "gmmain.c"
+    .balign 4
+    .asciz "DbLevel == DbLKind_NoDebugRom"
+    .balign 4
+    .asciz "Data %lx\n"
+    .balign 4
+    .asciz "please setup server for USB\n"
+    .balign 4
+    .asciz "# ---------------------------------------------\n"
+    .balign 4
+    .asciz "#    Super Smash Bros. Melee\n"
+    .balign 4
+    .asciz "# Distribution %d\n"
+    .balign 4
+    .asciz "# Language %d\n"
+    .balign 4
+    .asciz "# DbLevel %d\n"
+    .balign 4
+    .asciz "# Arena Size %d MB\n"
+    .balign 4
+    .asciz "# ARAM Free Size %d MB\n"
+    .balign 4
+    .asciz "# GC Calendar Year %d Month %d Day %d\n"
+    .balign 4
+    .asciz "#             Hour %d Min %d Sec %d \n"
+    .balign 4
+    .4byte NULL

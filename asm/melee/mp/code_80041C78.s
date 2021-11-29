@@ -28966,3 +28966,2507 @@ lbl_8005B4A0:
 /* 8005B4AC 0005808C  38 21 00 48 */	addi r1, r1, 0x48
 /* 8005B4B0 00058090  7C 08 03 A6 */	mtlr r0
 /* 8005B4B4 00058094  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803BD270
+lbl_803BD270:
+    .asciz "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n"
+    .balign 4
+
+.global lbl_803BD2A8
+lbl_803BD2A8:
+    .asciz "mpcoll.c"
+    .balign 4
+    .asciz "%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n"
+    .balign 4
+    .asciz "itkind=%d\n"
+    .balign 4
+    .asciz "i<MPCOLL_WALLID_MAX"
+    .balign 4
+    .asciz "%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) ply=%d ms=%d\n"
+    .balign 4
+    .asciz "%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) gobjid=%d\n"
+    .balign 4
+
+.global lbl_803BD384
+lbl_803BD384:
+    .asciz "not support rotate at JObj type coll\n"
+    .balign 4
+
+.global lbl_803BD3AC
+lbl_803BD3AC:
+    .asciz "%s:%d: Error:oioi... id=%d\n"
+    .balign 4
+
+.global lbl_803BD3C8
+lbl_803BD3C8:
+    .asciz "%s:%d: oioi...\n"
+    .balign 4
+
+.global lbl_803BD3D8
+lbl_803BD3D8:
+    .4byte 0x3F800000
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+
+.global lbl_803BD430
+lbl_803BD430:
+    .4byte 0x3F800000
+    .4byte 0x00000161
+    .4byte 0x00000161
+    .4byte 0x00000161
+    .4byte 0x00000161
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000036
+    .4byte 0x00000037
+    .4byte 0x00000038
+    .4byte 0x00000039
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD488
+lbl_803BD488:
+    .4byte 0x3FC00000
+    .4byte 0x00000152
+    .4byte 0x00000152
+    .4byte 0x00000152
+    .4byte 0x00000152
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x0000001D
+    .4byte 0x0000001E
+    .4byte 0x0000001F
+    .4byte 0x00000020
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD4E0
+lbl_803BD4E0:
+    .4byte 0x3F800000
+    .4byte 0x00000155
+    .4byte 0x00000155
+    .4byte 0x00000155
+    .4byte 0x00000155
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000022
+    .4byte 0x00000023
+    .4byte 0x00000024
+    .4byte 0x00000025
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD538
+lbl_803BD538:
+    .4byte 0x3F800000
+    .4byte 0x0000016D
+    .4byte 0x0000016D
+    .4byte 0x0000016D
+    .4byte 0x0000016D
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x0000000E
+    .4byte 0x0000000F
+    .4byte 0x00000010
+    .4byte 0x00000011
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD590
+lbl_803BD590:
+    .4byte 0x3F800000
+    .4byte 0x0000015B
+    .4byte 0x0000015B
+    .4byte 0x0000015B
+    .4byte 0x0000015B
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x0000004B
+    .4byte 0x0000004B
+    .4byte 0x0000004C
+    .4byte 0x0000004C
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x0000002C
+    .4byte 0x0000002D
+    .4byte 0x0000002E
+    .4byte 0x0000002F
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000001
+.global lbl_803BD5E8
+lbl_803BD5E8:
+    .4byte 0x3F800000
+    .4byte 0x00000158
+    .4byte 0x00000158
+    .4byte 0x00000158
+    .4byte 0x00000158
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000027
+    .4byte 0x00000028
+    .4byte 0x00000029
+    .4byte 0x0000002A
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD640
+lbl_803BD640:
+    .4byte 0x3F800000
+    .4byte 0x0000016A
+    .4byte 0x0000016A
+    .4byte 0x0000016A
+    .4byte 0x0000016A
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x0000003B
+    .4byte 0x0000003C
+    .4byte 0x0000003D
+    .4byte 0x0000003E
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD698
+lbl_803BD698:
+    .4byte 0x3F800000
+    .4byte 0x0000015E
+    .4byte 0x0000015E
+    .4byte 0x0000015E
+    .4byte 0x0000015E
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000031
+    .4byte 0x00000032
+    .4byte 0x00000033
+    .4byte 0x00000034
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD6F0
+lbl_803BD6F0:
+    .4byte 0x3F800000
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD748
+lbl_803BD748:
+    .4byte 0x3F800000
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000018
+    .4byte 0x00000019
+    .4byte 0x0000001A
+    .4byte 0x0000001B
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD7A0
+lbl_803BD7A0:
+    .4byte 0x3F800000
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x00000001
+    .4byte 0x00007537
+    .4byte NULL
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte NULL
+    .4byte 0x00007538
+    .4byte NULL
+    .4byte 0x00000018
+    .4byte 0x00000019
+    .4byte 0x0000001A
+    .4byte 0x0000001B
+    .4byte 0x00000001
+    .4byte 0x0000753B
+    .4byte NULL
+.global lbl_803BD7F8
+lbl_803BD7F8:
+    .4byte 0x3F800000
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x00000001
+    .4byte 0x00007539
+    .4byte NULL
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte NULL
+    .4byte 0x00007533
+    .4byte NULL
+    .4byte 0x00000018
+    .4byte 0x00000019
+    .4byte 0x0000001A
+    .4byte 0x0000001B
+    .4byte 0x00000001
+    .4byte 0x0000753A
+    .4byte NULL
+.global lbl_803BD850
+lbl_803BD850:
+    .4byte 0x3F800000
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x0000014F
+    .4byte 0x00000001
+    .4byte 0x0000754A
+    .4byte NULL
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte 0x0000020E
+    .4byte NULL
+    .4byte 0x00007539
+    .4byte NULL
+    .4byte 0x00000018
+    .4byte 0x00000019
+    .4byte 0x0000001A
+    .4byte 0x0000001B
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD8A8
+lbl_803BD8A8:
+    .4byte 0x3F800000
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD900
+lbl_803BD900:
+    .4byte 0x3DCCCCCD
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD958
+lbl_803BD958:
+    .4byte 0x3F666666
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BD9B0
+lbl_803BD9B0:
+    .4byte 0x3F800000
+    .4byte 0x0000014C
+    .4byte 0x0000014C
+    .4byte 0x0000014C
+    .4byte 0x0000014C
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000013
+    .4byte 0x00000014
+    .4byte 0x00000015
+    .4byte 0x00000016
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BDA08
+lbl_803BDA08:
+    .4byte 0x3F800000
+    .4byte 0x0000014C
+    .4byte 0x0000014C
+    .4byte 0x0000014C
+    .4byte 0x0000014C
+    .4byte 0x00000001
+    .4byte 0x00007531
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00007532
+    .4byte NULL
+    .4byte 0x00000013
+    .4byte 0x00000014
+    .4byte 0x00000015
+    .4byte 0x00000016
+    .4byte 0x00000001
+    .4byte 0x00007533
+    .4byte NULL
+.global lbl_803BDA60
+lbl_803BDA60:
+    .4byte 0x3E4CCCCD
+    .4byte 0x00000164
+    .4byte 0x00000164
+    .4byte 0x00000164
+    .4byte 0x00000164
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000036
+    .4byte 0x00000037
+    .4byte 0x00000038
+    .4byte 0x00000039
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BDAB8
+lbl_803BDAB8:
+    .4byte 0x3F800000
+    .4byte 0x00000170
+    .4byte 0x00000170
+    .4byte 0x00000170
+    .4byte 0x00000170
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000040
+    .4byte 0x00000041
+    .4byte 0x00000042
+    .4byte 0x00000043
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BDB10
+lbl_803BDB10:
+    .4byte 0x3DCCCCCD
+    .4byte 0x0000015E
+    .4byte 0x0000015E
+    .4byte 0x0000015E
+    .4byte 0x0000015E
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x00000031
+    .4byte 0x00000032
+    .4byte 0x00000033
+    .4byte 0x00000034
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BDB68
+lbl_803BDB68:
+    .4byte 0x3F800000
+    .4byte 0x00000167
+    .4byte 0x00000167
+    .4byte 0x00000167
+    .4byte 0x00000167
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0x0000003B
+    .4byte 0x0000003C
+    .4byte 0x0000003D
+    .4byte 0x0000003E
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BDBC0
+lbl_803BDBC0:
+    .4byte 0x3F800000
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+.global lbl_803BDC18
+lbl_803BDC18:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDC68
+lbl_803BDC68:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDCB8
+lbl_803BDCB8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDD08
+lbl_803BDD08:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDD58
+lbl_803BDD58:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDDA8
+lbl_803BDDA8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDDF8
+lbl_803BDDF8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDE48
+lbl_803BDE48:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDE98
+lbl_803BDE98:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDEE8
+lbl_803BDEE8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDF38
+lbl_803BDF38:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDF88
+lbl_803BDF88:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BDFD8
+lbl_803BDFD8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD7A0
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE028
+lbl_803BE028:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE078
+lbl_803BE078:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE0C8
+lbl_803BE0C8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE118
+lbl_803BE118:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD850
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE168
+lbl_803BE168:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE1B8
+lbl_803BE1B8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE208
+lbl_803BE208:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE258
+lbl_803BE258:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE2A8
+lbl_803BE2A8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE2F8
+lbl_803BE2F8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BDA08
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE348
+lbl_803BE348:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE398
+lbl_803BE398:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE3E8
+lbl_803BE3E8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE438
+lbl_803BE438:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE488
+lbl_803BE488:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE4D8
+lbl_803BE4D8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE528
+lbl_803BE528:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE578
+lbl_803BE578:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE5C8
+lbl_803BE5C8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE618
+lbl_803BE618:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD7F8
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE668
+lbl_803BE668:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE6B8
+lbl_803BE6B8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE708
+lbl_803BE708:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE758
+lbl_803BE758:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE7A8
+lbl_803BE7A8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE7F8
+lbl_803BE7F8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE848
+lbl_803BE848:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE898
+lbl_803BE898:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE8E8
+lbl_803BE8E8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE938
+lbl_803BE938:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE988
+lbl_803BE988:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BE9D8
+lbl_803BE9D8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEA28
+lbl_803BEA28:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEA78
+lbl_803BEA78:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEAC8
+lbl_803BEAC8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEB18
+lbl_803BEB18:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEB68
+lbl_803BEB68:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEBB8
+lbl_803BEBB8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEC08
+lbl_803BEC08:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEC58
+lbl_803BEC58:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BECA8
+lbl_803BECA8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BECF8
+lbl_803BECF8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BED48
+lbl_803BED48:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BED98
+lbl_803BED98:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEDE8
+lbl_803BEDE8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEE38
+lbl_803BEE38:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEE88
+lbl_803BEE88:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEED8
+lbl_803BEED8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEF28
+lbl_803BEF28:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEF78
+lbl_803BEF78:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BEFC8
+lbl_803BEFC8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BF018
+lbl_803BF018:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BF068
+lbl_803BF068:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BF0B8
+lbl_803BF0B8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BF108
+lbl_803BF108:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BF158
+lbl_803BF158:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BF1A8
+lbl_803BF1A8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+.global lbl_803BF1F8
+lbl_803BF1F8:
+    .4byte lbl_803BD3D8
+    .4byte lbl_803BD430
+    .4byte lbl_803BD488
+    .4byte lbl_803BD4E0
+    .4byte lbl_803BD538
+    .4byte lbl_803BD590
+    .4byte lbl_803BD5E8
+    .4byte lbl_803BD640
+    .4byte lbl_803BD698
+    .4byte lbl_803BD6F0
+    .4byte lbl_803BD748
+    .4byte lbl_803BD8A8
+    .4byte lbl_803BD900
+    .4byte lbl_803BD958
+    .4byte lbl_803BD9B0
+    .4byte lbl_803BDA60
+    .4byte lbl_803BDAB8
+    .4byte lbl_803BDB10
+    .4byte lbl_803BDB68
+    .4byte lbl_803BDBC0
+
+.global lbl_803BF248
+lbl_803BF248:
+    .4byte NULL
+    .4byte lbl_803BDC18
+    .4byte 0x00000001
+    .4byte lbl_803BDC68
+    .4byte 0x00000002
+    .4byte lbl_803BDCB8
+    .4byte 0x00000003
+    .4byte lbl_803BDD08
+    .4byte 0x00000004
+    .4byte lbl_803BDD58
+    .4byte 0x00000005
+    .4byte lbl_803BDDA8
+    .4byte 0x00000006
+    .4byte lbl_803BDDF8
+    .4byte 0x00000007
+    .4byte lbl_803BDE48
+    .4byte 0x00000008
+    .4byte lbl_803BDE98
+    .4byte 0x00000009
+    .4byte lbl_803BDEE8
+    .4byte 0x0000000A
+    .4byte lbl_803BDF38
+    .4byte 0x0000000B
+    .4byte lbl_803BDF88
+    .4byte 0x0000000C
+    .4byte lbl_803BDFD8
+    .4byte 0x0000000D
+    .4byte lbl_803BE028
+    .4byte 0x0000000E
+    .4byte lbl_803BE078
+    .4byte 0x0000000F
+    .4byte lbl_803BE0C8
+    .4byte 0x00000010
+    .4byte lbl_803BE118
+    .4byte 0x00000011
+    .4byte lbl_803BE168
+    .4byte 0x00000012
+    .4byte lbl_803BE1B8
+    .4byte 0x00000013
+    .4byte lbl_803BE208
+    .4byte 0x00000014
+    .4byte lbl_803BE258
+    .4byte 0x00000015
+    .4byte lbl_803BE2A8
+    .4byte 0x00000016
+    .4byte lbl_803BE2F8
+    .4byte 0x00000017
+    .4byte lbl_803BE348
+    .4byte 0x00000018
+    .4byte lbl_803BE398
+    .4byte 0x00000019
+    .4byte lbl_803BE3E8
+    .4byte 0x0000001A
+    .4byte lbl_803BE438
+    .4byte 0x0000001B
+    .4byte lbl_803BE488
+    .4byte 0x0000001C
+    .4byte lbl_803BE4D8
+    .4byte 0x0000001D
+    .4byte lbl_803BE528
+    .4byte 0x0000001E
+    .4byte lbl_803BE578
+    .4byte 0x0000001F
+    .4byte lbl_803BE5C8
+    .4byte 0x00000020
+    .4byte lbl_803BE618
+    .4byte 0x00000021
+    .4byte lbl_803BE668
+    .4byte 0x00000022
+    .4byte lbl_803BE6B8
+    .4byte 0x00000023
+    .4byte lbl_803BE708
+    .4byte 0x00000024
+    .4byte lbl_803BE758
+    .4byte 0x00000025
+    .4byte lbl_803BE7A8
+    .4byte 0x00000026
+    .4byte lbl_803BE7F8
+    .4byte 0x00000027
+    .4byte lbl_803BE848
+    .4byte 0x00000028
+    .4byte lbl_803BE898
+    .4byte 0x00000029
+    .4byte lbl_803BE8E8
+    .4byte 0x0000002A
+    .4byte lbl_803BE938
+    .4byte 0x0000002B
+    .4byte lbl_803BE988
+    .4byte 0x0000002C
+    .4byte lbl_803BE9D8
+    .4byte 0x0000002D
+    .4byte lbl_803BEA28
+    .4byte 0x0000002E
+    .4byte lbl_803BEA78
+    .4byte 0x0000002F
+    .4byte lbl_803BEAC8
+    .4byte 0x00000030
+    .4byte lbl_803BEB18
+    .4byte 0x00000031
+    .4byte lbl_803BEB68
+    .4byte 0x00000032
+    .4byte lbl_803BEBB8
+    .4byte 0x00000033
+    .4byte lbl_803BEC08
+    .4byte 0x00000034
+    .4byte lbl_803BEC58
+    .4byte 0x00000035
+    .4byte lbl_803BECA8
+    .4byte 0x00000036
+    .4byte lbl_803BECF8
+    .4byte 0x00000037
+    .4byte lbl_803BED48
+    .4byte 0x00000038
+    .4byte lbl_803BED98
+    .4byte 0x00000039
+    .4byte lbl_803BEDE8
+    .4byte 0x0000003A
+    .4byte lbl_803BEE38
+    .4byte 0x0000003B
+    .4byte lbl_803BEE88
+    .4byte 0x0000003C
+    .4byte lbl_803BEED8
+    .4byte 0x0000003D
+    .4byte lbl_803BEF28
+    .4byte 0x0000003E
+    .4byte lbl_803BEF78
+    .4byte 0x0000003F
+    .4byte lbl_803BEFC8
+    .4byte 0x00000040
+    .4byte lbl_803BF018
+    .4byte 0x00000041
+    .4byte lbl_803BF068
+    .4byte 0x00000042
+    .4byte lbl_803BF0B8
+    .4byte 0x00000043
+    .4byte lbl_803BF108
+    .4byte 0x00000044
+    .4byte lbl_803BF158
+    .4byte 0x00000045
+    .4byte lbl_803BF1A8
+    .4byte 0x00000046
+    .4byte lbl_803BF1F8
+    .asciz "groundCollVtx"
+    .balign 4
+    .asciz "groundCollLine"
+    .balign 4
+    .asciz "groundCollJoint"
+    .balign 4
+
+.global lbl_803BF4B0
+lbl_803BF4B0:
+    .asciz "%s:%d:not found lineID=%d\n"
+    .balign 4
+    .asciz "%s:%d: Error: mpGetSpeed() x=%f y=%f\n"
+    .balign 4
+    .asciz "!(ABS(speed->x)>10000.0F||ABS(speed->y)>10000.0F)"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+.global lbl_803BF540
+lbl_803BF540:
+    .4byte NULL
+    .4byte 0x00000004
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xFFA030FF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte 0x42282564
+    .4byte 0x2C256429
+    .4byte 0x2D282564
+    .4byte 0x2C256429
+    .4byte 0x0A000000
+    .4byte 0x007F0080
+    .4byte 0x00810082
+    .4byte 0x00830084
+    .4byte 0x00850086
+    .4byte 0x00870088
+    .4byte 0x0089008A
+    .4byte 0x008B008C
+    .4byte 0x008D008E
+    .4byte 0x008F0090
+    .4byte 0x00910092
+    .4byte 0x00930000
+    .4byte 0x00200021
+    .4byte 0x00220023
+    .4byte 0x00240025
+    .4byte 0x00260027
+    .4byte 0x00280029
+    .4byte 0x002A002B
+    .4byte 0x002C002D
+    .4byte 0x002E002F
+    .4byte 0x00300031
+    .4byte 0x00320033
+    .4byte 0x00340035
+    .4byte 0x00360037
+    .4byte 0x00380039
+    .4byte 0x003A003B
+    .4byte 0x003C003D
+    .4byte 0x003E003F
+    .4byte 0x00400041
+    .4byte 0x00420043
+    .4byte 0x00440045
+    .4byte 0x00460047
+    .4byte 0x00480049
+    .4byte 0x004A004B
+    .4byte 0x004C004D
+    .4byte 0x004E004F
+    .4byte 0x00500051
+    .4byte 0x00520053
+    .4byte 0x00540055
+    .4byte 0x00560057
+    .4byte 0x00580059
+    .4byte 0x005A005B
+    .4byte 0x005C005D
+    .4byte 0x005E005F
+    .4byte 0x00600061
+    .4byte 0x00620063
+    .4byte 0x00640065
+    .4byte 0x00660067
+    .4byte 0x00680069
+    .4byte 0x006A006B
+    .4byte 0x006C006D
+    .4byte 0x006E006F
+    .4byte 0x00DC00DD
+    .4byte 0x00DE00DF
+    .4byte 0x00E000E1
+    .4byte 0x00E200E3
+    .4byte 0x00E400E5
+    .4byte 0x00E600E7
+    .4byte 0x00E800E9
+    .4byte 0x00EA00EB
+    .4byte 0x00EC00ED
+    .4byte 0x00EE00EF
+    .4byte 0x00F000F1
+    .4byte 0x00F200F3
+    .4byte 0x00F40000
+    .4byte 0x0099009A
+    .4byte 0x009B009C
+    .4byte 0x009D009E
+    .4byte 0x009F00A0
+    .4byte 0x00A100A2
+    .4byte 0x00A300A4
+    .4byte 0x00A500A6
+    .4byte 0x00A700A8
+    .4byte 0x00A900AA
+    .4byte 0x00AB00AC
+    .4byte 0x00AD00AE
+    .4byte 0x00AF00B0
+    .4byte 0x00B100B2
+    .4byte 0x00B300B4
+    .4byte 0x00B500B6
+    .4byte 0x00B700B8
+    .4byte 0x00B900BA
+    .4byte 0x00BB00BC
+    .4byte 0x00BD00BE
+    .4byte 0x00BF00C0
+    .4byte 0x00C100C2
+    .4byte 0x00C300C4
+    .4byte 0x00C500C6
+
+.global lbl_803BF6E0
+lbl_803BF6E0:
+    .asciz "map coll under=%d upper=%d left=%d right=%d bbox=%d\n"
+    .balign 4
+
+.global lbl_803BF718
+lbl_803BF718:
+    .4byte 0xBF800000
+    .4byte 0xC3C80000
+    .4byte 0x3F800000
+    .4byte 0xC3C80000
+
+.global lbl_803BF728
+lbl_803BF728:
+    .4byte 0x00000001
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0x00010000
+
+.global lbl_803BF738
+lbl_803BF738:
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xC1100000
+    .4byte 0xC3CC0000
+    .4byte 0x41100000
+    .4byte 0xC3C40000
+    .4byte 0x00000002
+
+.global lbl_803BF760
+lbl_803BF760:
+    .4byte lbl_803BF718
+    .4byte 0x00000002
+    .4byte lbl_803BF728
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte lbl_803BF738
+    .4byte 0x00000001
+    .4byte NULL
+
+.global lbl_803BF790
+lbl_803BF790:
+    .asciz "mpisland.c"
+    .balign 4
+    .4byte NULL

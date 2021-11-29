@@ -1,32 +1,5 @@
 .section .sbss  # 0x804D63A0 - 0x804D79C9
 
-.global lbl_804D63A0
-lbl_804D63A0:
-	.skip 0x4
-.global lbl_804D63A4
-lbl_804D63A4:
-	.skip 0x4
-.global lbl_804D63A8
-lbl_804D63A8:
-	.skip 0x4
-.global lbl_804D63AC
-lbl_804D63AC:
-	.skip 0x4
-.global lbl_804D63B0
-lbl_804D63B0:
-	.skip 0x4
-.global lbl_804D63B4
-lbl_804D63B4:
-	.skip 0x4
-.global lbl_804D63B8
-lbl_804D63B8:
-	.skip 0x8
-.global lbl_804D63C0
-lbl_804D63C0:
-	.skip 0x8
-.global lbl_804D63C8
-lbl_804D63C8:
-	.skip 0x8
 .global lbl_804D63D0
 lbl_804D63D0:
 	.skip 0x8
@@ -2229,8 +2202,8 @@ lbl_804D7228:
 .global lbl_804D722C
 lbl_804D722C:
 	.skip 0x4
-.global lbl_804D7230
-lbl_804D7230:
+.global StopAtNextInt
+StopAtNextInt:
 	.skip 0x4
 .global lbl_804D7234
 lbl_804D7234:
@@ -2241,20 +2214,20 @@ lbl_804D7238:
 .global lbl_804D723C
 lbl_804D723C:
 	.skip 0x4
-.global lbl_804D7240
-lbl_804D7240:
+.global LastResetEnd
+LastResetEnd:
 	.skip 0x4
 .global lbl_804D7244
 lbl_804D7244:
 	.skip 0x4
-.global lbl_804D7248
-lbl_804D7248:
+.global ResetOccurred
+ResetOccurred:
 	.skip 0x4
 .global lbl_804D724C
 lbl_804D724C:
 	.skip 0x4
-.global lbl_804D7250
-lbl_804D7250:
+.global Breaking
+Breaking:
 	.skip 0x4
 .global lbl_804D7254
 lbl_804D7254:
@@ -2283,17 +2256,17 @@ lbl_804D7274:
 .global lbl_804D7278
 lbl_804D7278:
 	.skip 0x4
-.global lbl_804D727C
-lbl_804D727C:
+.global FstStart
+FstStart:
 	.skip 0x4
-.global lbl_804D7280
-lbl_804D7280:
+.global FstStringStart
+FstStringStart:
 	.skip 0x4
-.global lbl_804D7284
-lbl_804D7284:
+.global MaxEntryNum
+MaxEntryNum:
 	.skip 0x4
-.global lbl_804D7288
-lbl_804D7288:
+.global currentDirectory
+currentDirectory:
 	.skip 0x4
 .global __DVDLongFileNameFlag
 __DVDLongFileNameFlag:
@@ -2301,8 +2274,8 @@ __DVDLongFileNameFlag:
 .global lbl_804D7290
 lbl_804D7290:
 	.skip 0x8
-.global lbl_804D7298
-lbl_804D7298:
+.global executing
+executing:
 	.skip 0x4
 .global lbl_804D729C
 lbl_804D729C:
@@ -2316,8 +2289,8 @@ lbl_804D72A4:
 .global lbl_804D72A8
 lbl_804D72A8:
 	.skip 0x4
-.global lbl_804D72AC
-lbl_804D72AC:
+.global AutoFinishing
+AutoFinishing:
 	.skip 0x4
 .global lbl_804D72B0
 lbl_804D72B0:
