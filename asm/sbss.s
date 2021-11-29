@@ -1,29 +1,5 @@
 .section .sbss  # 0x804D63A0 - 0x804D79C9
 
-.global lbl_804D63A0
-lbl_804D63A0:
-	.skip 0x4
-.global lbl_804D63A4
-lbl_804D63A4:
-	.skip 0x4
-.global lbl_804D63A8
-lbl_804D63A8:
-	.skip 0x4
-.global lbl_804D63AC
-lbl_804D63AC:
-	.skip 0x4
-.global lbl_804D63B0
-lbl_804D63B0:
-	.skip 0x4
-.global lbl_804D63B4
-lbl_804D63B4:
-	.skip 0x4
-.global lbl_804D63B8
-lbl_804D63B8:
-	.skip 0x8
-.global lbl_804D63C0
-lbl_804D63C0:
-	.skip 0x8
 .global lbl_804D63C8
 lbl_804D63C8:
 	.skip 0x8
