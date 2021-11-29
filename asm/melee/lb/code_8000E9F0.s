@@ -8439,3 +8439,18 @@ lbl_803B72B4:
 	.float 0
     .float 0
     .float 0
+
+
+.section .bss, "wa"
+
+.global lbl_804316C0
+lbl_804316C0:
+	.skip 0x1F0
+
+.global lbl_804318B0
+lbl_804318B0:
+	.skip 0x6F0
+
+.global lbl_80431FA0
+lbl_80431FA0:
+	.skip 0xB8
