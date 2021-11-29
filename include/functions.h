@@ -8571,7 +8571,7 @@ void HSD_JObjUnref(struct _HSD_JObj* jobj);
 // ? func_80375194(?);
 void HSD_GXInit(void);
 void HSD_OSInit(void);
-// ? func_80375404(?);
+// ? HSD_GetHeap(?);
 // ? func_8037540C(?);
 // ? func_80375414(?);
 // ? func_80375428(?);
