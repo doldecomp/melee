@@ -324,8 +324,8 @@ HSD_OSInit:
 /* 803753FC 00371FDC  7C 08 03 A6 */	mtlr r0
 /* 80375400 00371FE0  4E 80 00 20 */	blr 
 
-.global func_80375404
-func_80375404:
+.global HSD_GetHeap
+HSD_GetHeap:
 /* 80375404 00371FE4  80 6D A7 60 */	lwz r3, lbl_804D5E00@sda21(r13)
 /* 80375408 00371FE8  4E 80 00 20 */	blr 
 
