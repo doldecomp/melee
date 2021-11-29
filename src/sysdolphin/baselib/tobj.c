@@ -87,6 +87,17 @@ inline void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
     }
 }
 
+inline void HSD_TObjReqAnimAllByFlags_inline(HSD_TObj* tobj, f32 startframe, u32 flags)
+{
+    HSD_TObj* tp;
+
+    if (tobj != NULL) {
+        for (tp = tobj; tp != NULL; tp = tp->next) {
+            HSD_TObjReqAnimByFlags(tp, startframe, flags);
+        }
+    }
+}
+
 void HSD_TObjReqAnimAllByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
 {
     HSD_TObj* tp;
@@ -101,4 +112,9 @@ void HSD_TObjReqAnimAllByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
 void HSD_TObjReqAnim(HSD_TObj* tobj, f32 startframe)
 {
     HSD_TObjReqAnimByFlags(tobj, startframe, TOBJ_ANIM);
+}
+
+void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
+{
+    HSD_TObjReqAnimAllByFlags_inline(tobj, startframe, TOBJ_ANIM);
 }
