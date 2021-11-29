@@ -12471,3 +12471,198 @@ lbl_80041C4C:
 /* 80041C70 0003E850  7C 08 03 A6 */	mtlr r0
 /* 80041C74 0003E854  4E 80 00 20 */	blr 
 
+
+.section .data
+
+.global lbl_803BCE70
+lbl_803BCE70:
+    .4byte 0xFFFFFFFF
+    .4byte 0x0000002F
+    .4byte 0x00000030
+    .4byte 0x00000031
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+
+.global lbl_803BCEB0
+lbl_803BCEB0:
+    .asciz "pltrick.c"
+    .balign 4
+
+.global lbl_803BCEBC
+lbl_803BCEBC:
+    .asciz "0 <= h_player && h_player < 8"
+    .balign 4
+    .asciz "PlATK_AttackNormal_Start <= kind && kind <= PlATK_AttackNormal_End"
+    .balign 4
+
+.global lbl_803BCF20
+lbl_803BCF20:
+    .asciz "plbonus.c"
+    .balign 4
+    .asciz "player != Gm_Player_Other"
+    .balign 4
+    .asciz "gmDecisionGetType(kind) == Gm_DecType_Flag"
+    .balign 4
+
+.global lbl_803BCF74
+lbl_803BCF74:
+    .asciz "gmDecisionGetType(kind) == Gm_DecType_Point"
+    .balign 4
+    .asciz "plbonusinline.h"
+    .balign 4
+    .asciz "total != 0.0F"
+    .balign 4
+
+.global lbl_803BCFC0
+lbl_803BCFC0:
+    .4byte lbl_80039998
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_80039998
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_80039998
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_80039998
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_8003999C
+    .4byte lbl_80039998
+
+.global lbl_803BD014
+lbl_803BD014:
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5DC
+    .4byte lbl_8003C5DC
+    .4byte lbl_8003C5FC
+    .4byte lbl_8003C5CC
+    .4byte lbl_8003C5CC
+    .4byte lbl_8003C5CC
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5D4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5E4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5D4
+    .4byte lbl_8003C5CC
+    .4byte lbl_8003C5CC
+    .4byte lbl_8003C5CC
+    .4byte lbl_8003C5D4
+    .4byte lbl_8003C5EC
+    .4byte lbl_8003C5EC
+    .4byte lbl_8003C5CC
+    .4byte lbl_8003C5FC
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5EC
+    .4byte lbl_8003C5EC
+    .4byte lbl_8003C5EC
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5DC
+    .4byte lbl_8003C5F4
+    .4byte lbl_8003C5DC
+    .4byte lbl_8003C5F4
+
+.global jtbl_803BD0B0
+jtbl_803BD0B0:
+    .4byte lbl_8003DE24
+    .4byte lbl_8003DE34
+    .4byte lbl_8003DE34
+    .4byte lbl_8003DE24
+    .4byte lbl_8003DE34
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE64
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE54
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE70
+    .4byte lbl_8003DE44
+
+.global lbl_803BD12C
+lbl_803BD12C:
+    .asciz "plbonuslib.c"
+    .balign 4
+
+.global lbl_803BD13C
+lbl_803BD13C:
+    .asciz "pl_itemlog_kind < Pl_ItemLog_Terminate"
+    .balign 4
+
+.global lbl_803BD164
+lbl_803BD164:
+    .asciz "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < It_PKind_Terminate"
+    .balign 4
+
+.global lbl_803BD1B0
+lbl_803BD1B0:
+    .asciz "It_PKind_Start <= kind && kind < It_PKind_Terminate"
+    .balign 4
+
+.global lbl_803BD1E4
+lbl_803BD1E4:
+    .asciz "plbonusinline.h"
+    .balign 4
+
+.global lbl_803BD1F4
+lbl_803BD1F4:
+    .asciz "total != 0.0F"
+    .balign 4
+    .asciz "zako ko player illegal ! :%d\n"
+    .balign 4
+    .asciz "0 <= player && player < Gm_Player_NumMax"
+    .balign 4
+
+.global lbl_803BD250
+lbl_803BD250:
+    .asciz "plbonusinline.h"
+    .balign 4
+
+.global lbl_803BD260
+lbl_803BD260:
+    .asciz "total != 0.0F"
+    .balign 4
