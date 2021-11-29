@@ -166,3 +166,11 @@ lbl_803B9840:
     .4byte 0
     .4byte 0
     .4byte 0
+
+
+.section .sdata2
+
+.global lbl_804D79E8
+lbl_804D79E8:
+    .4byte 0x7F7FFFFF
+    .4byte 0x00000000
