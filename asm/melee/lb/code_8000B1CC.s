@@ -2190,3 +2190,16 @@ lbl_803BA040:
     .asciz "translate"
     .balign 4
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D3710
+lbl_804D3710:
+    .asciz "jobj.h"
+    .balign 4
+
+.global lbl_804D3718
+lbl_804D3718:
+    .asciz "jobj"
+    .balign 4

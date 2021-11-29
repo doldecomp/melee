@@ -14,8 +14,8 @@ EXTABINDEX_O_FILES :=                               \
 TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/lb/lbcommand.o			\
 	$(BUILD_DIR)/asm/melee/lb/lbcommand.o  		    \
-	$(BUILD_DIR)/asm/melee/lb/code_80005BB0.o  	    \
-	$(BUILD_DIR)/asm/melee/lb/code_80008D30.o  	    \
+	$(BUILD_DIR)/asm/melee/lb/lbcollision.o  	    \
+	$(BUILD_DIR)/asm/melee/lb/code_8000AD8C.o  	    \
 	$(BUILD_DIR)/asm/melee/lb/code_8000B1CC.o  	    \
 	$(BUILD_DIR)/asm/melee/lb/code_8000CE50.o  	    \
 	$(BUILD_DIR)/asm/melee/lb/lbvector.o		 	\
