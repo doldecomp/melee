@@ -647,3 +647,30 @@ lbl_80016A40:
 /* 80016A4C 0001362C  7C 08 03 A6 */	mtlr r0
 /* 80016A50 00013630  4E 80 00 20 */	blr 
 
+
+.section .data
+
+.global lbl_803BA508
+lbl_803BA508:
+    .asciz "lbfile.c"
+    .balign 4
+
+.global lbl_803BA514
+lbl_803BA514:
+    .asciz "!cancelflag"
+    .balign 4
+    
+.global lbl_803BA520
+lbl_803BA520:
+    .asciz "Error : file name too long %s."
+    .balign 4
+
+.global lbl_803BA540
+lbl_803BA540:
+    .asciz "Cannot open file no=%d."
+    .balign 4
+    .asciz "file isn't exist %s = %d\n"
+    .balign 4
+    .asciz "entry_num != -1"
+    .balign 4
+    .4byte NULL
