@@ -1857,6 +1857,7 @@ lbl_8000ED4C:
 /* 8000ED4C 0000B92C  38 21 00 48 */	addi r1, r1, 0x48
 /* 8000ED50 0000B930  4E 80 00 20 */	blr 
 
+
 .section .data
 
 .global lbl_803BA050
@@ -1870,3 +1871,11 @@ lbl_803BA050:
     .asciz "pos3d->z>-50000.0F&&pos3d->z<50000.0F"
     .balign 4
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D3720
+lbl_804D3720:
+    .asciz "pos3d"
+    .balign 4

@@ -8456,7 +8456,7 @@ lbl_80431FA0:
 	.skip 0xB8
 
 
-.section .sdata
+.section .sbss
 
 .global lbl_804D63A0
 lbl_804D63A0:

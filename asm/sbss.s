@@ -1,8 +1,5 @@
 .section .sbss  # 0x804D63A0 - 0x804D79C9
 
-.global lbl_804D63C8
-lbl_804D63C8:
-	.skip 0x8
 .global lbl_804D63D0
 lbl_804D63D0:
 	.skip 0x8

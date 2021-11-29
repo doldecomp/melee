@@ -681,3 +681,10 @@ lbl_803BA540:
 .global lbl_80432058
 lbl_80432058:
 	.skip 0x20
+
+
+.section .sbss
+
+.global lbl_804D63C8
+lbl_804D63C8:
+	.skip 0x8
