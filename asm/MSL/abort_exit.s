@@ -80,7 +80,7 @@ lbl_80323090:
 /* 803230A0 0031FC80  7C 08 03 A6 */	mtlr r0
 /* 803230A4 0031FC84  4E 80 00 20 */	blr 
 
-.section .dtors  # 0x803B7260 - 0x803B7280
+.section .dtors, "wa"  # 0x803B7260 - 0x803B7280
 .global lbl_803B7260
 lbl_803B7260:
 	.4byte __destroy_global_chain
