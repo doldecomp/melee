@@ -8236,7 +8236,7 @@ void VIWaitForRetrace(void);
 // ? HSD_TObjAddAnim(?);
 // ? HSD_TObjAddAnimAll(?);
 // ? HSD_TObjReqAnimAllByFlags(?);
-// ? func_8035E7D4(?);
+// ? HSD_TObjReqAnim(?);
 // ? func_8035E800(?);
 // ? func_8035EB6C(?);
 // ? func_8035EBA0(?);

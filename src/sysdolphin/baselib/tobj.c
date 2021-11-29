@@ -2,7 +2,7 @@
 
 #include "aobj.h"
 
-inline void HSD_TObjRemoveAnim_inline(HSD_TObj* tobj)
+inline void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
     if (tobj == NULL){
         return;
@@ -18,7 +18,7 @@ void HSD_TObjRemoveAnimAll(HSD_TObj* tobj)
 
     if (tobj != NULL){
         for (tp = tobj; tp != NULL; tp = tp->next) {
-            HSD_TObjRemoveAnim_inline(tp);
+            HSD_TObjRemoveAnim(tp);
         }
     }
 }
@@ -96,4 +96,9 @@ void HSD_TObjReqAnimAllByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
             HSD_TObjReqAnimByFlags(tp, startframe, flags);
         }
     }
+}
+
+void HSD_TObjReqAnim(HSD_TObj* tobj, f32 startframe)
+{
+    HSD_TObjReqAnimByFlags(tobj, startframe, TOBJ_ANIM);
 }
