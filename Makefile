@@ -13,9 +13,6 @@ TARGET := ssbm.us.1.2
 
 BUILD_DIR := build/$(TARGET)
 
-SRC_DIRS := $(shell find src/ -type f -name '*.c')
-ASM_DIRS := $(shell find asm/ -type f -name '*.s')
-
 # Inputs
 S_FILES := $(wildcard asm/*.s)
 C_FILES := $(wildcard src/*.c)
@@ -42,7 +39,7 @@ MWCC_LD_VERSION := 1.3.2
 ifeq ($(WINDOWS),1)
   WINE :=
 else
-  WINE := wine
+  WINE ?= wine
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 CPP     := cpp -P
@@ -68,13 +65,16 @@ PROCFLAGS := -fprologue-fixup=old_stack
 # Recipes
 #-------------------------------------------------------------------------------
 
+# Remove all built-in rules
+.SUFFIXES:
+
 ### Default target ###
 
 default: all
 
 all: $(DOL)
 
-ALL_DIRS := build $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(ASM_DIRS))
+ALL_DIRS := $(sort $(dir $(O_FILES)))
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
