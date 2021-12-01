@@ -1,4 +1,4 @@
-#include "objalloc.h"
+#include "sysdolphin/objalloc.h"
 
 extern objheap lbl_80406E48;
 

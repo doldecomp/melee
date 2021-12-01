@@ -16,3 +16,6 @@ build/
 .vscode/
 build.bat
 clean.bat
+*.exe
+*.dll
+*.bat

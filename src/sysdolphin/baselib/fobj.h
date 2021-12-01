@@ -4,7 +4,7 @@
 #include "dolphin/types.h"
 
 #include "object.h"
-#include "objalloc.h"
+#include "sysdolphin/objalloc.h"
 
 #define HSD_A_OP_NONE 0
 #define HSD_A_OP_CON 1

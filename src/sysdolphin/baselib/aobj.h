@@ -3,9 +3,9 @@
 
 #include "dolphin/types.h"
 
-#include "id.h"
+#include "sysdolphin/id.h"
 #include "object.h"
-#include "objalloc.h"
+#include "sysdolphin/objalloc.h"
 
 #include "fobj.h"
 #include "list.h"

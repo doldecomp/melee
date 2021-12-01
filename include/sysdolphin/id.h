@@ -1,9 +1,9 @@
-#ifndef _id_h_
-#define _id_h_
+#ifndef _sysdolphin_id_h_
+#define _sysdolphin_id_h_
 
 #include "global.h"
 
-#include "objalloc.h"
+#include "sysdolphin/objalloc.h"
 
 #define hash(s) (s % 0x65)
 

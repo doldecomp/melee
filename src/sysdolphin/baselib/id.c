@@ -1,4 +1,4 @@
-#include "id.h"
+#include "sysdolphin/id.h"
 
 extern HSD_ObjAllocData lbl_804C23C0; // hsd_iddata
 

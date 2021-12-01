@@ -3,7 +3,7 @@
 
 #include "include/global.h"
 
-#include "objalloc.h"
+#include "sysdolphin/objalloc.h"
 
 #include "jobj.h"
 

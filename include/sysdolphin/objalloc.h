@@ -1,5 +1,5 @@
-#ifndef _objalloc_h_
-#define _objalloc_h_
+#ifndef _sysdolphin_objalloc_h_
+#define _sysdolphin_objalloc_h_
 
 #include "global.h"
 
