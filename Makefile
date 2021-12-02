@@ -33,7 +33,7 @@ O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES
 #-------------------------------------------------------------------------------
 
 MWCC_VERSION := 1.0
-MWCC_LD_VERSION := 1.3.2
+MWCC_LD_VERSION := 1.1
 
 # Programs
 ifeq ($(WINDOWS),1)
