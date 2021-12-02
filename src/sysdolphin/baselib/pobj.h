@@ -1,7 +1,7 @@
 #ifndef _pobj_h_
 #define _pobj_h_
 
-#include "include/dolphin/types.h"
+#include <dolphin/types.h>
 
 #include "object.h"
 

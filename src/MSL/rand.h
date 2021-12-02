@@ -1,7 +1,7 @@
 #ifndef _RAND_H_
 #define _RAND_H_
 
-#include "include/dolphin/types.h"
+#include <dolphin/types.h>
 
 void srand(u32 seed);
 s32 rand(void);

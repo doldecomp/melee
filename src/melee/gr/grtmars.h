@@ -1,7 +1,7 @@
 #ifndef _grtmars_h_
 #define _grtmars_h_
 
-#include "dolphin/types.h"
+#include <dolphin/types.h>
 #include "functions.h"
 
 #include "sysdolphin/baselib/gobj.h"
