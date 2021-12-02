@@ -1,6 +1,7 @@
+#include <string.h>
+
 #include "aobj.h"
 
-#include "__mem.h"
 #include "jobj.h"
 
 extern HSD_ObjAllocData lbl_804C0880; //aobj_alloc_data

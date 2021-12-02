@@ -1,4 +1,4 @@
-#include "include/dolphin/types.h"
+#include <dolphin/types.h>
 
 extern const void* lbl_80005918; //info
 extern s32 fragmentID; //fragmentID
