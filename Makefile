@@ -5,6 +5,8 @@ ifneq ($(findstring MSYS,$(shell uname)),)
   WINDOWS := 1
 endif
 
+GENERATE_MAP ?= 1
+
 #-------------------------------------------------------------------------------
 # Files
 #-------------------------------------------------------------------------------
@@ -32,7 +34,7 @@ O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES
 # Tools
 #-------------------------------------------------------------------------------
 
-MWCC_VERSION := 1.0
+MWCC_VERSION := 1.1
 MWCC_LD_VERSION := 1.3.2
 
 # Programs
@@ -52,11 +54,14 @@ PYTHON  := python3
 POSTPROC := tools/postprocess.py
 
 # Options
-INCLUDES := -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src -i src/msl -i src/msl/ppc_eabi -i src/dolphin/os/init/ -i src/runtime/ -i src/sysdolphin/ -i src/sysdolphin/baselib/ -i src/melee/ -i src/melee/gr/ -i src/melee/lb/
+INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
 
 ASFLAGS := -mgekko -I include
-LDFLAGS := -map $(MAP) -fp hard -nodefaults
-CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults -msgstyle gcc $(INCLUDES)
+LDFLAGS := -fp hard -nodefaults
+ifeq ($(GENERATE_MAP),1)
+  LDFLAGS += -map $(MAP)
+endif
+CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults -msgstyle gcc $(INCLUDES)
 
 # for postprocess.py
 PROCFLAGS := -fprologue-fixup=old_stack
