@@ -867,7 +867,6 @@ lbl_8000DE5C:
 /* 8000DF00 0000AAE0  EC 06 00 2A */	fadds f0, f6, f0
 /* 8000DF04 0000AAE4  D0 04 00 08 */	stfs f0, 8(r4)
 /* 8000DF08 0000AAE8  4E 80 00 20 */	blr 
-.endif
 
 .global func_8000DF0C
 func_8000DF0C:
@@ -1085,6 +1084,7 @@ func_8000E19C:
 lbl_8000E208:
 /* 8000E208 0000ADE8  38 21 00 10 */	addi r1, r1, 0x10
 /* 8000E20C 0000ADEC  4E 80 00 20 */	blr 
+.endif
 
 .global func_8000E210
 func_8000E210:
