@@ -263,6 +263,7 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                     lwz = read_u32(f)
                     f.seek(mr_pos)
                     mr = read_u32(f)
+                    f.seek(mr_pos)
                     write_u32(f, lwz)
                     f.seek(lwz_pos)
                     write_u32(f, mr)
