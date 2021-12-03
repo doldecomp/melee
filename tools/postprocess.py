@@ -175,6 +175,7 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                 mtlr_pos = 0
                 addi_pos = 0
                 lwz_pos = 0
+                mr_pos = 0
                 
                 # (mtlr position, blr position)
                 epilogues = []
@@ -208,25 +209,23 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                     elif instr == 0x38210018: # addi r1, r1, 0x18
                         if mtlr_pos == 0:
                             addi_pos = it
-                    elif instr & 0xFFFFFF00 == 0x80010000: # lwz r0, N(r1)
+                    elif instr & 0xFFFFFF00 == 0x80010000 and instr & 0xFF > 0: # lwz r0, N(r1)
                         assert lwz_pos == 0
                         lwz_pos = it
                     elif instr == 0x7FE3FB78 and it == lwz_pos + 4: # mr r3, r3
-                        mr_epilogues.append((lwz_pos, it))
-                        lwz_pos = 0
+                        mr_pos = it
                     # blr
                     elif instr == 0x4E800020:
                         if mtlr_pos:
                             epilogues.append((mtlr_pos, it))
                         if addi_pos and mtlr_pos == 0:
-                            epilogues.append((addi_pos, it))                            
+                            epilogues.append((addi_pos, it))
+                        if lwz_pos and mr_pos:
+                            mr_epilogues.append((lwz_pos, it))
                         mtlr_pos = 0
                         addi_pos = 0
                         lwz_pos = 0
-                        
-
-                # Check for a lone mtlr
-                assert mtlr_pos == 0
+                        mr_pos = 0
 
                 # Reunify mtlr/blr instructions, shifting intermediary instructions up
                 for mtlr_pos, blr_pos in epilogues:    
