@@ -21,3 +21,6 @@ clean.bat
 epilogue/
 
 __pycache__
+*.exe
+*.dll
+*.bat
