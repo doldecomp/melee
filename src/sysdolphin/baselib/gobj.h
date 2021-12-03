@@ -1,7 +1,7 @@
 #ifndef _gobj_h_
 #define _gobj_h_
 
-#include "include/dolphin/types.h"
+#include <dolphin/types.h>
 
 typedef struct _HSD_GObj {
     u16 classifier;
