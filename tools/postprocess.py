@@ -246,6 +246,39 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                     f.seek(blr_pos - 4)
                     write_u32(f, mtlr)
 
+                epilogues = []
+
+                lwz_pos = 0
+
+                for _ in range(ofs, ofs+size, 4):
+                    it = f.tell()
+                    instr = read_u32(f)
+
+                    # Skip padding
+                    if instr == 0: continue
+
+                    if instr & 0xFFFFFF00 == 0x80010000: # lwz r0, N(r1)
+                        assert lwz_pos == 0
+                        lwz_pos = it
+                    elif instr == 0x7FE3FB78 and lwz_pos: # mr r3, r3
+                        epilogues.append((lwz_pos, it))
+                        lwz_pos = 0
+
+                # Swap the lwz and mr instruction that are incorrectly scheduled
+                for lwz_pos, mr_pos in epilogues:    
+                    # Check if we need to do anything
+                    if lwz_pos + 4 == mr_pos:
+
+                        print("Patching old epilogue: %s %s" % (lwz_pos, mr_pos))
+
+                        f.seek(lwz_pos)
+                        lwz = read_u32(f)
+                        f.seek(mr_pos)
+                        mr = read_u32(f)
+                        write_u32(f, lwz)
+                        f.seek(lwz)
+                        write_u32(f, mr)
+
     return (result, patch_align_ofs)
 
 def postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
