@@ -212,7 +212,7 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                     elif instr & 0xFFFFFF00 == 0x80010000 and instr & 0xFF > 0: # lwz r0, N(r1)
                         assert lwz_pos == 0
                         lwz_pos = it
-                    elif instr == 0x7FE3FB78 and it == lwz_pos + 4: # mr r3, r3
+                    elif (instr == 0x7F83E378 or instr == 0x7FE3FB78 or instr == 0x7FC3F378 or instr == 0x7FA3EB78) and it == lwz_pos + 4: # mr r3, r28 || mr r3, r29 || mr r3, r30 || mr r3, r31
                         mr_pos = it
                     # blr
                     elif instr == 0x4E800020:
