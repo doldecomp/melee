@@ -221,7 +221,7 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                         if addi_pos and mtlr_pos == 0:
                             epilogues.append((addi_pos, it))
                         if lwz_pos and mr_pos:
-                            mr_epilogues.append((lwz_pos, it))
+                            mr_epilogues.append((lwz_pos, mr_pos))
                         mtlr_pos = 0
                         addi_pos = 0
                         lwz_pos = 0
