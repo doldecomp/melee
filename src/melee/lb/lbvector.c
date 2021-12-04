@@ -2,6 +2,8 @@
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/gx/GXTransform.h>
 
+#define PI 3.1415926535897931
+
 // exactly the same as the one from math.h, but with one extra iteration
 extern inline float sqrtf_accurate(float x)
 {
@@ -14,26 +16,26 @@ volatile float y;
    guess = _half*guess*(_three - guess*guess*x);  // now have 12 sig bits
    guess = _half*guess*(_three - guess*guess*x);  // now have 24 sig bits
    guess = _half*guess*(_three - guess*guess*x);  // now have 32 sig bits
-   guess = _half*guess*(_three - guess*guess*x);  // now have 32 sig bits
+   guess = _half*guess*(_three - guess*guess*x);  // extra iteration
    y=(float)(x*guess);
    return y ;
  }
   return x ;
 }
 
-static float vec_len(Vec *vec)
+static float lbvector_len(Vec *vec)
 {
     return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-static float vec_len2(Vec *vec)
+static float lbvector_len_xy(Vec *vec)
 {
     return sqrtf_accurate(vec->x * vec->x + vec->y * vec->y);
 }
 
-float func_8000D2EC(Vec *vec)
+float lbvector_normalize(Vec *vec)
 {
-    float len = vec_len(vec);
+    float len = lbvector_len(vec);
     float inv;
 
     if (len == 0.0f)
@@ -45,20 +47,20 @@ float func_8000D2EC(Vec *vec)
     return len;
 }
 
-float func_8000D3B0(Vec *a)
+float lbvector_normalize_xy(Vec *a)
 {
-    float var1 = sqrtf_accurate(a->x * a->x + a->y * a->y);
-    float var2;
+    float len = sqrtf_accurate(a->x * a->x + a->y * a->y);
+    float inv;
 
-    if (var1 == 0.0f)
+    if (len == 0.0f)
         return 0.0f;
-    var2 = 1.0f / var1;
-    a->x *= var2;
-    a->y *= var2;
-    return var1;
+    inv = 1.0f / len;
+    a->x *= inv;
+    a->y *= inv;
+    return len;
 }
 
-Vec *func_8000D46C(Vec *a, Vec *b)
+Vec *lbvector_add(Vec *a, Vec *b)
 {
     a->x += b->x;
     a->y += b->y;
@@ -66,14 +68,14 @@ Vec *func_8000D46C(Vec *a, Vec *b)
     return a;
 }
 
-Vec *func_8000D4A0(Vec *a, Vec *b)
+Vec *lbvector_add_xy(Vec *a, Vec *b)
 {
     a->x += b->x;
     a->y += b->y;
     return a;
 }
 
-Vec *func_8000D4C4(Vec *a, Vec *b)
+Vec *lbvector_sub(Vec *a, Vec *b)
 {
     a->x -= b->x;
     a->y -= b->y;
@@ -81,7 +83,7 @@ Vec *func_8000D4C4(Vec *a, Vec *b)
     return a;
 }
 
-Vec *func_8000D4F8(Vec *a, Vec *b, Vec *result)
+Vec *lbvector_diff(Vec *a, Vec *b, Vec *result)
 {
     result->x = a->x - b->x;
     result->y = a->y - b->y;
@@ -89,10 +91,10 @@ Vec *func_8000D4F8(Vec *a, Vec *b, Vec *result)
     return result;
 }
 
-Vec *func_8000D530(Vec *a, Vec *b, Vec *c)
+Vec *lbvector_crossprod_normalized(Vec *a, Vec *b, Vec *c)
 {
     PSVECCrossProduct(a, b, c);
-    func_8000D2EC(c);
+    lbvector_normalize(c);
     return c;
 }
 
@@ -100,9 +102,9 @@ extern float func_80022D1C(float);
 
 float func_8000D620(Vec *a, Vec *b)
 {
-    float f5 = vec_len(a) * vec_len(b);
+    float f5 = lbvector_len(a) * lbvector_len(b);
 
-    if (f5 > 1.000000013351432e-10f)
+    if (f5 > 0.0000000001f)
     {
         float f1 = (a->x * b->x + a->y * b->y + a->z * b->z) / f5;
         if (f1 > 1.0f)
@@ -116,7 +118,7 @@ float func_8000D620(Vec *a, Vec *b)
 
 float func_8000D790(Vec *a, Vec *b)
 {
-    float f4 = vec_len2(a) * vec_len2(b);
+    float f4 = lbvector_len_xy(a) * lbvector_len_xy(b);
     float f1 = 0.0f;
 
     if (f4 != f1)
@@ -131,22 +133,24 @@ float func_8000D790(Vec *a, Vec *b)
     return 0.0f;
 }
 
+// Taylor series approximations of sin and cos
+
 static float sin(float angle)
 {
-    if (angle > 3.1415926535897931)
-        angle -= 6.2831853071795862;
-    else if (angle < -3.1415926535897931)
-        angle += 6.2831853071795862;
+    if (angle > PI)
+        angle -= 2.0 * PI;
+    else if (angle < -PI)
+        angle += 2.0 * PI;
     return 0.9878619909286499f * angle - 0.15527099370956421f * angle * angle * angle + 0.0056429998949170113f * angle * angle * angle * angle * angle;
 }
 
 static float cos(float angle)
 {
-    angle += 1.5707963267948966;
-    if (angle > 3.1415926535897931)
-        angle -= 6.2831853071795862;
-    else if (angle < -3.1415926535897931)
-        angle += 6.2831853071795862;
+    angle += PI / 2.0;
+    if (angle > PI)
+        angle -= 2.0 * PI;
+    else if (angle < -PI)
+        angle += 2.0 * PI;
     return 0.9878619909286499f * angle - 0.15527099370956421f * angle * angle * angle + 0.0056429998949170113f * angle * angle * angle * angle * angle;
 }
 
@@ -155,22 +159,22 @@ void func_8000D8F4(Vec *a, Vec *b, float angle)
     float f0 = sqrtf(b->y * b->y + b->z * b->z);
     float s = sin(angle);
     float c = cos(angle);
-    float f2;
-    float f3;
+    float var5;
+    float var6;
     float x, y, z;
-    float f11;
-    float f4;
-    float v3;
-    float v4;
+    float var1;
+    float var2;
+    float var3;
+    float var4;
 
-    if (f0 > 1.000000013351432e-10f)
+    if (f0 > 0.0000000001f)
     {
-        f2 = b->z / f0;
-        f3 = b->y / f0;
+        var5 = b->z / f0;
+        var6 = b->y / f0;
 
         x = a->x;
-        y = a->y * f2 - a->z * f3;
-        z = a->y * f3 + a->z * f2;
+        y = a->y * var5 - a->z * var6;
+        z = a->y * var6 + a->z * var5;
     }
     else
     {
@@ -179,21 +183,21 @@ void func_8000D8F4(Vec *a, Vec *b, float angle)
         z = a->z;
     }
 
-    f11 = x * f0  -  z * b->x;
-    f4 = x * b->x  +  z * f0;
+    var1 = x * f0  -  z * b->x;
+    var2 = x * b->x  +  z * f0;
 
-    v3 = f11 * c  -  y * s;
-    v4 = f11 * s  +  y * c;
+    var3 = var1 * c  -  y * s;
+    var4 = var1 * s  +  y * c;
 
-    x = v3 * f0  +  f4 * b->x;
-    y = v4;
-    z = -v3 * b->x  +  f4 * f0;
+    x = var3 * f0  +  var2 * b->x;
+    y = var4;
+    z = -var3 * b->x  +  var2 * f0;
 
-    if (f0 > 1.000000013351432e-10f)
+    if (f0 > 0.0000000001f)
     {
         a->x = x;
-        a->y = y * f2 + z * f3;
-        a->z = -y * f3 + z * f2;
+        a->y = y * var5 + z * var6;
+        a->z = -y * var6 + z * var5;
     }
     else
     {
@@ -203,7 +207,7 @@ void func_8000D8F4(Vec *a, Vec *b, float angle)
     }
 }
 
-void func_8000DB00(Vec *a, int b, float angle)
+void lbvector_rotate(Vec *v, int axis, float angle)
 {
     float s = sin(angle);
     float c = cos(angle);
@@ -211,27 +215,27 @@ void func_8000DB00(Vec *a, int b, float angle)
     float y;
     float z;
 
-    switch (b)
+    switch (axis)
     {
-    case 1:
-        x = a->x;
-        y = a->y * c - a->z * s;
-        z = a->y * s + a->z * c;
+    case 1:  // rotate about x axis
+        x = v->x;
+        y = v->y * c - v->z * s;
+        z = v->y * s + v->z * c;
         break;
-    case 2:
-        x = a->x * c + a->z * s;
-        y = a->y;
-        z = a->z * c - a->x * s;
+    case 2:  // rotate about y axis
+        x = v->x * c + v->z * s;
+        y = v->y;
+        z = v->z * c - v->x * s;
         break;
-    case 4:
-        x = a->x * c - a->y * s;
-        y = a->x * s + a->y * c;
-        z = a->z;
+    case 4:  // rotate about z axis
+        x = v->x * c - v->y * s;
+        y = v->x * s + v->y * c;
+        z = v->z;
         break;
     }
-    a->x = x;
-    a->y = y;
-    a->z = z;
+    v->x = x;
+    v->y = y;
+    v->z = z;
 }
 
 float dummy(void) { return 2.0f; } // needed here to force order of floats in .sdata2 section
@@ -250,17 +254,17 @@ float func_8000DCA8(Vec *a, Vec *b)
          / (sqrtf(a->x*a->x + a->y*a->y) * sqrtf(b->x*b->x + b->y*b->y));
 }
 
-Vec *func_8000DDAC(Vec *a, Vec *b, Vec *c, float d)
+Vec *func_8000DDAC(Vec *a, Vec *b, Vec *result, float scale)
 {
-    func_8000D4F8(b, a, c);
-    c->x *= d;
-    c->y *= d;
-    c->z *= d;
-    func_8000D46C(c, a);
-    return c;
+    lbvector_diff(b, a, result);
+    result->x *= scale;
+    result->y *= scale;
+    result->z *= scale;
+    lbvector_add(result, a);
+    return result;
 }
 
-Vec *func_8000DE38(Mtx a, Vec *b, float c)
+Vec *func_8000DE38(Mtx m, Vec *v, float c)
 {
     float var1;
     float var2;
@@ -270,24 +274,23 @@ Vec *func_8000DE38(Mtx a, Vec *b, float c)
     else if (c < 0.0f)
         c = 0.0f;
 
-    var1 = a[0][0] *  2.0f - a[0][3] * 4.0f + a[1][2] * 2.0f;
-    var2 = a[0][0] * -3.0f + a[0][3] * 4.0f - a[1][2];
-    b->x = a[0][0] + (var1*c*c + var2*c);
+    var1 = m[0][0] *  2.0f - m[0][3] * 4.0f + m[1][2] * 2.0f;
+    var2 = m[0][0] * -3.0f + m[0][3] * 4.0f - m[1][2];
+    v->x = m[0][0] + (var1*c*c + var2*c);
 
-    var1 = a[0][1] *  2.0f - a[1][0] * 4.0f + a[1][3] * 2.0f;
-    var2 = a[0][1] * -3.0f + a[1][0] * 4.0f - a[1][3];
-    b->y = a[0][1] + (var1*c*c + var2*c);
+    var1 = m[0][1] *  2.0f - m[1][0] * 4.0f + m[1][3] * 2.0f;
+    var2 = m[0][1] * -3.0f + m[1][0] * 4.0f - m[1][3];
+    v->y = m[0][1] + (var1*c*c + var2*c);
 
-    var1 = a[0][2] *  2.0f - a[1][1] * 4.0f + a[2][0] * 2.0f;
-    var2 = a[0][2] * -3.0f + a[1][1] * 4.0f - a[2][0];
-    b->z = a[0][2] + (var1*c*c + var2*c);
+    var1 = m[0][2] *  2.0f - m[1][1] * 4.0f + m[2][0] * 2.0f;
+    var2 = m[0][2] * -3.0f + m[1][1] * 4.0f - m[2][0];
+    v->z = m[0][2] + (var1*c*c + var2*c);
 
-    return b;
+    return v;
 }
 
 extern float func_80022DBC(float);
 extern float func_80022C30(float, float);
-extern float sqrtf__Ff(float, float);
 
 Vec *func_8000DF0C(Vec *a, Vec *b, Vec *c, Vec *d)
 {
@@ -319,17 +322,17 @@ Vec *func_8000DFF4(Vec *a, Vec *b, Vec *c)
     Vec sp18;
 
     PSVECCrossProduct(c, b, &sp18);
-    func_8000D2EC(&sp18);
+    lbvector_normalize(&sp18);
     func_8000DF0C(a, b, &sp18, c);
     return a;
 }
 
-Vec *func_8000E138(Vec *a, Vec *b)
+Vec *func_8000E138(Vec *v, Vec *rot)
 {
-    func_8000DB00(a, 1, b->x);
-    func_8000DB00(a, 2, b->y);
-    func_8000DB00(a, 4, b->z);
-    return a;
+    lbvector_rotate(v, 1, rot->x);
+    lbvector_rotate(v, 2, rot->y);
+    lbvector_rotate(v, 4, rot->z);
+    return v;
 }
 
 float func_8000E19C(float n)
@@ -345,31 +348,32 @@ struct Struct8000E210
     float unk14;
     float unk18;
     u8 filler1C[0x38-0x1C];
-    float unk38;
-    float unk3C;
-    float unk40;
-    float unk44;
-    float unk48;
-    float unk4C;
+    /*0x38*/ float near;
+    /*0x3C*/ float far;
+    /*0x40*/ float unk40;  // top or fov?
+    /*0x44*/ float unk44;  // bottom or aspect?
+    /*0x48*/ float left;
+    /*0x4C*/ float right;
 };
 
 extern void __assert(const char *file, int line, const char *condition);
+
 #define assert_line(condition, line) ((condition) ? ((void) 0) : __assert(__FILE__, line, #condition))
 
 extern MtxPtr func_80369688(struct Struct8000E210 *);
 
-float *func_8000E210(struct Struct8000E210 *a, Vec *pos3d, float *c, int d)
+Vec *func_8000E210(struct Struct8000E210 *a, const Point3d *pos3d, Point3d *screenCoords, int d)
 {
     u8 filler[16];
     Mtx projMtx;
-    float sp90[7];
-    float sp78[6];
-    Mtx sp48;
-    Vec sp3C;
-    Vec sp30;
-    Point3d sp24;
-    Point3d sp18;
-    MtxPtr r3;
+    float projection[7];  // projection params
+    float viewport[6];  // viewport params
+    Mtx m;
+    Point3d point;
+    Vec upVec;
+    Point3d camPos;
+    Point3d target;
+    MtxPtr mvMtx;  // modelview matrix
     float f1;
 
     assert_line(pos3d, 676);
@@ -377,88 +381,98 @@ float *func_8000E210(struct Struct8000E210 *a, Vec *pos3d, float *c, int d)
     assert_line(pos3d->y>-50000.0F&&pos3d->y<50000.0F, 678);
     assert_line(pos3d->z>-50000.0F&&pos3d->z<50000.0F, 679);
 
-    sp3C = *pos3d;
+    point = *pos3d;
     switch (func_8036A12C(a))
     {
     case 1:
-        C_MTXPerspective(projMtx, a->unk40, a->unk44, a->unk38, a->unk3C);
-        sp90[0] = 0.0f;
-        sp90[1] = projMtx[0][0];
-        sp90[2] = projMtx[0][2];
-        sp90[3] = projMtx[1][1];
-        sp90[4] = projMtx[1][2];
-        sp90[5] = projMtx[2][2];
-        sp90[6] = projMtx[2][3];
+        C_MTXPerspective(projMtx, a->unk40, a->unk44, a->near, a->far);
+        projection[0] = 0.0f;
+        projection[1] = projMtx[0][0];
+        projection[2] = projMtx[0][2];
+        projection[3] = projMtx[1][1];
+        projection[4] = projMtx[1][2];
+        projection[5] = projMtx[2][2];
+        projection[6] = projMtx[2][3];
         break;
     case 3:
-        C_MTXOrtho(&projMtx, a->unk40, a->unk44, a->unk48, a->unk4C, a->unk38, a->unk3C);
-        sp90[0] = 1.0f;
-        sp90[1] = projMtx[0][0];
-        sp90[2] = projMtx[0][3];
-        sp90[3] = projMtx[1][1];
-        sp90[4] = projMtx[1][3];
-        sp90[5] = projMtx[2][2];
-        sp90[6] = projMtx[2][3];
+        C_MTXOrtho(&projMtx, a->unk40, a->unk44, a->left, a->right, a->near, a->far);
+        projection[0] = 1.0f;
+        projection[1] = projMtx[0][0];
+        projection[2] = projMtx[0][3];
+        projection[3] = projMtx[1][1];
+        projection[4] = projMtx[1][3];
+        projection[5] = projMtx[2][2];
+        projection[6] = projMtx[2][3];
         break;
     default:
         return NULL;
     }
 
-    sp78[0] = a->unkC;
-    sp78[1] = a->unk14;
-
-    sp78[2] = a->unk10 - a->unkC;
-    sp78[3] = a->unk18 - a->unk14;
-    sp78[4] = 0.0f;
-    sp78[5] = 1.0f;
+    viewport[0] = a->unkC;  // x origin
+    viewport[1] = a->unk14;  // y origin
+    viewport[2] = a->unk10 - a->unkC;  // width
+    viewport[3] = a->unk18 - a->unk14;  // height
+    viewport[4] = 0.0f;  // near z
+    viewport[5] = 1.0f;  // far z
 
     if (d != 0)
     {
-        func_80368784(a, &sp24);
-        func_80368E70(a, &sp30);
-        func_803686AC(a, &sp18);
-        C_MTXLookAt(sp48, &sp24, &sp30, &sp18);
-        r3 = sp48;
+        func_80368784(a, &camPos);
+        func_80368E70(a, &upVec);
+        func_803686AC(a, &target);
+        C_MTXLookAt(m, &camPos, &upVec, &target);
+        mvMtx = m;
     }
     else
-        r3 = func_80369688(a);
+        mvMtx = func_80369688(a);
 
-    f1 = r3[2][0] * pos3d->x + r3[2][1] * pos3d->y + r3[2][2] * pos3d->z + r3[2][3];
-    if (f1 > -0.0099999999f)
+    f1 = mvMtx[2][0] * pos3d->x
+       + mvMtx[2][1] * pos3d->y
+       + mvMtx[2][2] * pos3d->z
+       + mvMtx[2][3];
+    if (f1 > -0.01f)
     {
-        f1 = -f1 - 0.0099999999f;
-        sp3C.x += r3[2][0] * f1;
-        sp3C.y += r3[2][1] * f1;
-        sp3C.z += r3[2][2] * f1;
+        f1 = -f1 - 0.01f;
+        point.x += mvMtx[2][0] * f1;
+        point.y += mvMtx[2][1] * f1;
+        point.z += mvMtx[2][2] * f1;
     }
 
-    GXProject(sp3C.x, sp3C.y, sp3C.z, r3, sp90, sp78, &c[0], &c[1], &c[2]);
-    return c;
+    GXProject(
+        point.x, point.y, point.z,
+        mvMtx,
+        projection, viewport,
+        &screenCoords->x, &screenCoords->y, &screenCoords->z);
+    return screenCoords;
 }
 
-void func_8000E530(Mtx a, Vec *b)
+void func_8000E530(Mtx m, Vec *v)
 {
-    float f0 = sin(b->x);
-    float f1 = cos(b->x);
-    float f2 = sin(b->y);
-    float f3 = cos(b->y);
-    float f11 = sin(b->z);
-    float f10 = cos(b->z);
-    float f12 = f0 * f2;
-    float f13 = f1 * f2;
+    float sx = sin(v->x);
+    float cx = cos(v->x);
+    float sy = sin(v->y);
+    float cy = cos(v->y);
+    float sz = sin(v->z);
+    float cz = cos(v->z);
 
-    a[0][0] = f3 * f10;
-    a[1][0] = f3 * f11;
-    a[2][0] = -f2;
-    a[0][1] = f10 * f12 - f1 * f11;
-    a[1][1] = f11 * f12 + f1 * f10;
-    a[2][1] = f0 * f3;
-    a[0][2] = f10 * f13 + f0 * f11;
-    a[1][2] = f11 * f13 - f0 * f10;
-    a[2][2] = f1 * f3;
-    a[0][3] = 0.0f;
-    a[1][3] = 0.0f;
-    a[2][3] = 0.0f;
+    float sxsy = sx * sy;
+    float cxsy = cx * sy;
+
+    m[0][0] = cy * cz;
+    m[1][0] = cy * sz;
+    m[2][0] = -sy;
+
+    m[0][1] = cz * sxsy - cx * sz;
+    m[1][1] = sz * sxsy + cx * cz;
+    m[2][1] = sx * cy;
+
+    m[0][2] = cz * cxsy + sx * sz;
+    m[1][2] = sz * cxsy - sx * cz;
+    m[2][2] = cx * cy;
+
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
 }
 
 float func_8000E838(Vec *a, Vec *b, Vec *c, Vec *d)
@@ -468,10 +482,9 @@ float func_8000E838(Vec *a, Vec *b, Vec *c, Vec *d)
     float f3;
     int tooSmall;
 
-    // also matches with these calls written out
-    func_8000D4F8(b, a, &v1);
+    lbvector_diff(b, a, &v1);
     f3 = v1.x * v1.x + v1.y * v1.y + v1.z * v1.z;
-    func_8000D4F8(c, a, &v2);
+    lbvector_diff(c, a, &v2);
     if (f3 < 9.9999997473787516e-06f && f3 > -9.9999997473787516e-06f)
         tooSmall = 1;
     else
@@ -479,7 +492,7 @@ float func_8000E838(Vec *a, Vec *b, Vec *c, Vec *d)
     if (tooSmall)
     {
         *d = *a;
-        return vec_len(&v2);
+        return lbvector_len(&v2);
     }
     else
     {
@@ -489,8 +502,8 @@ float func_8000E838(Vec *a, Vec *b, Vec *c, Vec *d)
         d->x = a->x + v1.x * f1;
         d->y = a->y + v1.y * f1;
         d->z = a->z + v1.z * f1;
-        func_8000D4F8(c, d, &v3);
-        return vec_len(&v3);
+        lbvector_diff(c, d, &v3);
+        return lbvector_len(&v3);
         
     }
 }
