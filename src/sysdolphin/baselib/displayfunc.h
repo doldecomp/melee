@@ -3,9 +3,9 @@
 
 #include <global.h>
 
-#include "objalloc.h"
+#include "sysdolphin/baselib/objalloc.h"
 
-#include "jobj.h"
+#include "sysdolphin/baselib/jobj.h"
 
 void HSD_ZListInitAllocData(void);
 

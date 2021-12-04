@@ -1,10 +1,10 @@
 #ifndef _wobj_h_
 #define _wobj_h_
 
-#include "global.h"
+#include <global.h>
 
-#include "object.h"
-#include "aobj.h"
+#include "sysdolphin/baselib/object.h"
+#include "sysdolphin/baselib/aobj.h"
 
 typedef struct _HSD_WObj {
     HSD_Obj parent;

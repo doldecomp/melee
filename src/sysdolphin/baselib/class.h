@@ -1,7 +1,7 @@
 #ifndef _class_h_
 #define _class_h_
 
-#include "global.h"
+#include <global.h>
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*)o)
 #define HSD_CLASS_METHOD(o) (o->parent.class_info)

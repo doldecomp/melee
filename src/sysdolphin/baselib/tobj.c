@@ -1,6 +1,6 @@
-#include "tobj.h"
+#include "sysdolphin/baselib/tobj.h"
 
-#include "aobj.h"
+#include "sysdolphin/baselib/aobj.h"
 
 inline void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {

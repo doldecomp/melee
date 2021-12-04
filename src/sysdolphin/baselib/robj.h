@@ -1,12 +1,12 @@
 #ifndef _robj_h_
 #define _robj_h_
 
-#include "global.h"
+#include <global.h>
 
-#include "objalloc.h"
+#include "sysdolphin/baselib/objalloc.h"
 
-#include "aobj.h"
-#include "jobj.h"
+#include "sysdolphin/baselib/aobj.h"
+#include "sysdolphin/baselib/jobj.h"
 
 #define TYPE_MASK 0x70000000
 #define REFTYPE_JOBJ 0x10000000

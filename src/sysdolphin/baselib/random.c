@@ -1,4 +1,4 @@
-#include "random.h"
+#include "sysdolphin/baselib/random.h"
 
 extern u32 lbl_804D5F90; // seed
 extern u32* lbl_804D5F94; // seed_ptr

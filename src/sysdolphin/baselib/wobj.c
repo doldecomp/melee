@@ -1,4 +1,4 @@
-#include "wobj.h"
+#include "sysdolphin/baselib/wobj.h"
 
 void HSD_WObjRemoveAnim(HSD_WObj* wobj)
 {

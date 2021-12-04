@@ -1,4 +1,4 @@
-#include "object.h"
+#include "sysdolphin/baselib/object.h"
 
 extern HSD_ClassInfo lbl_804072A8; // hsdObj
 extern const char lbl_804072E4[24]; // "sysdolphin_base_library\0"

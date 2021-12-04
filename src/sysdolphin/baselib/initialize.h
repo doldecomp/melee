@@ -1,7 +1,9 @@
 #ifndef _initialize_h_
 #define _initialize_h_
 
-#include "global.h"
+#include <global.h>
+
+#include <dolphin/types.h>
 
 typedef struct _HSD_MemReport
 {

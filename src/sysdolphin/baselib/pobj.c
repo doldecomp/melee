@@ -1,4 +1,4 @@
-#include "pobj.h"
+#include "sysdolphin/baselib/pobj.h"
 
 u16 HSD_PObjGetFlags(HSD_PObj* pobj)
 {

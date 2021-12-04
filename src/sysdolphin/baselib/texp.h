@@ -1,7 +1,7 @@
 #ifndef _texp_h_
 #define _texp_h_
 
-#include "dolphin/types.h"
+#include <dolphin/types.h>
 
 typedef enum _HSD_TEInput {
     HSD_TE_END = 0,

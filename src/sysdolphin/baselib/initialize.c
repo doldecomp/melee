@@ -1,7 +1,7 @@
-#include "initialize.h"
+#include "sysdolphin/baselib/initialize.h"
 
-#include "leak.h"
-#include "video.h"
+#include "sysdolphin/baselib/leak.h"
+#include "sysdolphin/baselib/video.h"
 
 extern void* lbl_804C0948[HSD_VI_XFB_MAX]; //FrameBuffer
 
