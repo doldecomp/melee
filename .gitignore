@@ -16,3 +16,5 @@ build/
 .vscode/
 build.bat
 clean.bat
+
+__pycache__

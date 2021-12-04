@@ -5,6 +5,8 @@ ifneq ($(findstring MSYS,$(shell uname)),)
   WINDOWS := 1
 endif
 
+GENERATE_MAP ?= 1
+
 #-------------------------------------------------------------------------------
 # Files
 #-------------------------------------------------------------------------------
@@ -32,7 +34,7 @@ O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES
 # Tools
 #-------------------------------------------------------------------------------
 
-MWCC_VERSION := 1.0
+MWCC_VERSION := 1.1
 MWCC_LD_VERSION := 1.1
 
 # Programs
@@ -55,8 +57,11 @@ POSTPROC := tools/postprocess.py
 INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
 
 ASFLAGS := -mgekko -I include
-LDFLAGS := -map $(MAP) -fp hard -nodefaults
-CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults -msgstyle gcc $(INCLUDES)
+LDFLAGS := -fp hard -nodefaults
+ifeq ($(GENERATE_MAP),1)
+  LDFLAGS += -map $(MAP)
+endif
+CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults $(INCLUDES)
 
 # for postprocess.py
 PROCFLAGS := -fprologue-fixup=old_stack
@@ -105,6 +110,8 @@ $(BUILD_DIR)/%.o: %.s
 $(BUILD_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 	$(PYTHON) $(POSTPROC) $(PROCFLAGS) $@
+
+$(BUILD_DIR)/src/melee/lb/lbvector.o: CFLAGS += -inline auto -fp_contract on
 
 ### Debug Print ###
 

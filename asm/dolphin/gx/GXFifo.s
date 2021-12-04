@@ -6587,8 +6587,9 @@ lbl_8034111C:
 /* 80341140 0033DD20  7C 08 03 A6 */	mtlr r0
 /* 80341144 0033DD24  4E 80 00 20 */	blr 
 
-.global func_80341148
-func_80341148:
+# GXProject
+.global GXProject
+GXProject:
 /* 80341148 0033DD28  C0 83 00 00 */	lfs f4, 0(r3)
 /* 8034114C 0033DD2C  C0 03 00 04 */	lfs f0, 4(r3)
 /* 80341150 0033DD30  C0 C3 00 10 */	lfs f6, 0x10(r3)

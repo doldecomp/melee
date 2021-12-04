@@ -19,7 +19,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/lbtime.o  	        \
 	$(BUILD_DIR)/asm/melee/lb/code_8000B074.o  	    \
 	$(BUILD_DIR)/asm/melee/lb/code_8000CE50.o  	    \
-	$(BUILD_DIR)/asm/melee/lb/lbvector.o		 	\
+	$(BUILD_DIR)/src/melee/lb/lbvector.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.o 		\
 	$(BUILD_DIR)/asm/melee/lb/lbfile.o 				\
