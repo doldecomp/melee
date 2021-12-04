@@ -7,6 +7,12 @@ endif
 
 GENERATE_MAP ?= 1
 
+VERBOSE ?= 0
+
+ifeq ($(VERBOSE),0)
+  QUIET := @
+endif
+
 #-------------------------------------------------------------------------------
 # Files
 #-------------------------------------------------------------------------------
@@ -29,6 +35,7 @@ include obj_files.mk
 
 O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES) $(RODATA_O_FILES) $(DATA_O_FILES)    \
            $(BSS_O_FILES) $(SDATA_O_FILES) $(SBSS_O_FILES) $(SDATA2_O_FILES)
+DEP_FILES := $(O_FILES:.o=.dep)
 
 #-------------------------------------------------------------------------------
 # Tools
@@ -48,13 +55,17 @@ CPP     := cpp -P
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
+HOSTCC  := cc
 SHA1SUM := sha1sum
 PYTHON  := python3
 
 POSTPROC := tools/postprocess.py
 
 # Options
-INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
+INCLUDE_DIRS = $(*D)
+SYSTEM_INCLUDE_DIRS := include include/dolphin include/dolphin/mtx src
+#INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
+INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE_DIRS))
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -fp hard -nodefaults
@@ -66,6 +77,8 @@ CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults $
 # for postprocess.py
 PROCFLAGS := -fprologue-fixup=old_stack
 
+HOSTCFLAGS := -Wall -O3 -s
+
 #-------------------------------------------------------------------------------
 # Recipes
 #-------------------------------------------------------------------------------
@@ -73,45 +86,54 @@ PROCFLAGS := -fprologue-fixup=old_stack
 # Remove all built-in rules
 .SUFFIXES:
 
+.PHONY: default
+
 ### Default target ###
 
-default: all
-
-all: $(DOL)
+default: $(DOL)
+	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
 
-.PHONY: tools
-
 $(LDSCRIPT): ldscript.lcf
-	$(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
+	$(QUIET) $(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
-$(DOL): $(ELF) | tools
-	$(ELF2DOL) $< $@
-	$(SHA1SUM) -c $(TARGET).sha1
+%.dol: %.elf $(ELF2DOL)
+	@echo Converting $< to $@
+	$(QUIET) $(ELF2DOL) $< $@
 
 clean:
-	rm -f -d -r build
-	$(MAKE) -C tools clean
-
-tools:
-	$(MAKE) -C tools
+	rm -f -d -r build $(ELF2DOL)
 
 $(ELF): $(O_FILES) $(LDSCRIPT)
-	@echo $(O_FILES) > build/o_files
-	$(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files
+	@echo Linking ELF $@
+	$(QUIET) echo $(O_FILES) > build/o_files
+	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files
 
 $(BUILD_DIR)/%.o: %.s
-	$(AS) $(ASFLAGS) -o $@ $<
+	@echo Assembling $<
+	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
-	$(PYTHON) $(POSTPROC) $(PROCFLAGS) $@
+	@echo Compiling $<
+	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) -MT $@ $< >/dev/null
+	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
+	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $@
 
 $(BUILD_DIR)/src/melee/lb/lbvector.o: CFLAGS += -inline auto -fp_contract on
+
+-include $(DEP_FILES)
+
+#-------------------------------------------------------------------------------
+# Tool Recipes
+#-------------------------------------------------------------------------------
+
+$(ELF2DOL): tools/elf2dol.c
+	@echo Building tool $@
+	$(QUIET) $(HOSTCC) $(HOSTCFLAGS) -o $@ $^
 
 ### Debug Print ###
 
