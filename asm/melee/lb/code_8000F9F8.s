@@ -7554,6 +7554,68 @@ lbl_804D63C0:
 	.skip 0x8
 
 
+.section .sdata
+
+.global lbl_804D3740
+lbl_804D3740:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3748
+lbl_804D3748:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3750
+lbl_804D3750:
+    .asciz "lobj.h"
+    .balign 4
+.global lbl_804D3758
+lbl_804D3758:
+    .asciz "lobj"
+    .balign 4
+.global lbl_804D3760
+lbl_804D3760:
+	.4byte 0xFFFFFFFF
+.global lbl_804D3764
+lbl_804D3764:
+	.4byte 0x000000FF
+.global lbl_804D3768
+lbl_804D3768:
+	.4byte 0xFF0000FF
+.global lbl_804D376C
+lbl_804D376C:
+	.4byte 0xFF000040
+.global lbl_804D3770
+lbl_804D3770:
+	.4byte 0xFFFF00FF
+    .4byte NULL
+.global lbl_804D3778
+lbl_804D3778:
+    .asciz "lbarq.c"
+    .balign 4
+.global lbl_804D3780
+lbl_804D3780:
+    .asciz "rp"
+    .balign 4
+    .4byte NULL
+.global lbl_804D3788
+lbl_804D3788:
+    .asciz "handle"
+    .balign 4
+.global lbl_804D3790
+lbl_804D3790:
+    .asciz "0"
+    .balign 4
+.global lbl_804D3794
+lbl_804D3794:
+    .asciz "p->size"
+    .balign 4
+    .4byte NULL
+.global lbl_804D37A0
+lbl_804D37A0:
+    .asciz "%s :"
+    .balign 4
+
+
 .section .sdata2
 
 .global lbl_804D7BA0
