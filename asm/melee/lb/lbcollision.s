@@ -6355,6 +6355,8 @@ lbl_804D3708:
 
 .section .sdata2
 
+.4byte NULL
+
 .global lbl_804D79F0
 lbl_804D79F0:
     .4byte 0x3727C5AC
