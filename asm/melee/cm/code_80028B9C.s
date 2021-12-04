@@ -10164,3 +10164,22 @@ lbl_80453004:
 .global lbl_80453060
 lbl_80453060:
 	.skip 0x20
+
+
+.section .sbss
+
+.global lbl_804D6458
+lbl_804D6458:
+	.skip 0x4
+.global lbl_804D645C
+lbl_804D645C:
+	.skip 0x4
+.global lbl_804D6460
+lbl_804D6460:
+	.skip 0x4
+.global lbl_804D6464
+lbl_804D6464:
+	.skip 0x4
+.global lbl_804D6468
+lbl_804D6468:
+	.skip 0x8

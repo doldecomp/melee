@@ -1165,6 +1165,23 @@ lbl_803BA0FC:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D3728
+lbl_804D3728:
+    .asciz "shadow"
+    .balign 4
+.global lbl_804D3730
+lbl_804D3730:
+    .asciz "lobj"
+    .balign 4
+.global lbl_804D3738
+lbl_804D3738:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sdata2
 
 .global lbl_804D7B30
