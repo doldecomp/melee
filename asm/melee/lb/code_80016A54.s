@@ -8133,9 +8133,13 @@ lbl_80432A68:
 lbl_80433318:
 	.skip 0x68
 
-
-.section .bss, "wa"
-
 .global lbl_80433380
 lbl_80433380:
 	.skip 0x60
+
+
+.section .sbss
+
+.global lbl_804D63D0
+lbl_804D63D0:
+	.skip 0x8

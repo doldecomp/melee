@@ -6710,3 +6710,13 @@ lbl_803BCE60:
     .asciz "player.c"
     .balign 4
     .4byte NULL
+
+
+.section .bss, "wa"
+
+.global lbl_80453080
+lbl_80453080:
+	.skip 0x5760
+.global lbl_804587E0
+lbl_804587E0:
+	.skip 0x30

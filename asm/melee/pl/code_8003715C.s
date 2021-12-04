@@ -12666,3 +12666,16 @@ lbl_803BD250:
 lbl_803BD260:
     .asciz "total != 0.0F"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6470
+lbl_804D6470:
+	.skip 0x8
+.global lbl_804D6478
+lbl_804D6478:
+	.skip 0x8
+.global lbl_804D6480
+lbl_804D6480:
+	.skip 0x8
