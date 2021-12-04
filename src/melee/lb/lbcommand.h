@@ -1,7 +1,9 @@
 #ifndef _lbcommands_h_
 #define _lbcommands_h_
 
-#include "dolphin/types.h"
+#include <global.h>
+
+#include <dolphin/types.h>
 
 typedef struct _CommandInfo {
     f32 timer; //0x00
@@ -20,5 +22,10 @@ void Command_0C(CommandInfo* info);
 void Command_10_ExecuteLoop(CommandInfo* info);
 void Command_10_Goto(CommandInfo* info);
 void Command_14(CommandInfo* info);
+void Command_80005AC4(CommandInfo* info);
+void Command_80005AE4(CommandInfo* info);
+void Command_80005B00(CommandInfo* info);
+void Command_80005B18(CommandInfo* info);
+void Command_80005B64(CommandInfo* info);
 
 #endif
