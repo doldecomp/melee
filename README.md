@@ -27,4 +27,6 @@ v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 
 ## Contributions
 
+Gamecube/Wii Decompilation Discord: https://discord.gg/hKx3FJJgrV
+
 Contributions and PRs are welcome.
