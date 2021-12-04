@@ -1,7 +1,7 @@
 #ifndef _video_h_
 #define _video_h_
 
-#include "global.h"
+#include <global.h>
 
 #define HSD_VI_XFB_MAX 3
 

@@ -1,8 +1,8 @@
 #include <string.h>
 
-#include "aobj.h"
+#include "sysdolphin/baselib/aobj.h"
 
-#include "jobj.h"
+#include "sysdolphin/baselib/jobj.h"
 
 extern HSD_ObjAllocData lbl_804C0880; //aobj_alloc_data
 

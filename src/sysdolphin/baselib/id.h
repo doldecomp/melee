@@ -1,9 +1,11 @@
 #ifndef _id_h_
 #define _id_h_
 
-#include "global.h"
+#include <global.h>
 
-#include "objalloc.h"
+#include <dolphin/types.h>
+
+#include "sysdolphin/baselib/objalloc.h"
 
 #define hash(s) (s % 0x65)
 

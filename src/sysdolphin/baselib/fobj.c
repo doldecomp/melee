@@ -1,4 +1,4 @@
-#include "fobj.h"
+#include "sysdolphin/baselib/fobj.h"
 
 extern HSD_ObjAllocData lbl_804C08D8;
 

@@ -1,7 +1,7 @@
 #ifndef _object_h_
 #define _object_h_
 
-#include "class.h"
+#include "sysdolphin/baselib/class.h"
 
 #define HSD_OBJ_NOREF -1
 
