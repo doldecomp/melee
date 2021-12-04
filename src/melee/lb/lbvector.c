@@ -2,6 +2,8 @@
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/gx/GXTransform.h>
 
+#include "sysdolphin/baselib/cobj.h"
+
 #define PI 3.1415926535897931
 
 // exactly the same as the one from math.h, but with one extra iteration
@@ -340,29 +342,11 @@ float func_8000E19C(float n)
     return sqrtf_accurate(n);
 }
 
-struct Struct8000E210
-{
-    u8 filler0[0xC];
-    float unkC;
-    float unk10;
-    float unk14;
-    float unk18;
-    u8 filler1C[0x38-0x1C];
-    /*0x38*/ float near;
-    /*0x3C*/ float far;
-    /*0x40*/ float unk40;  // top or fov?
-    /*0x44*/ float unk44;  // bottom or aspect?
-    /*0x48*/ float left;
-    /*0x4C*/ float right;
-};
-
-extern void __assert(const char *file, int line, const char *condition);
-
 #define assert_line(condition, line) ((condition) ? ((void) 0) : __assert(__FILE__, line, #condition))
 
-extern MtxPtr func_80369688(struct Struct8000E210 *);
+extern MtxPtr func_80369688(HSD_CObj *);
 
-Vec *func_8000E210(struct Struct8000E210 *a, const Point3d *pos3d, Point3d *screenCoords, int d)
+Vec *func_8000E210(HSD_CObj *cobj, const Point3d *pos3d, Point3d *screenCoords, int d)
 {
     u8 filler[16];
     Mtx projMtx;
@@ -382,10 +366,10 @@ Vec *func_8000E210(struct Struct8000E210 *a, const Point3d *pos3d, Point3d *scre
     assert_line(pos3d->z>-50000.0F&&pos3d->z<50000.0F, 679);
 
     point = *pos3d;
-    switch (func_8036A12C(a))
+    switch (func_8036A12C(cobj))
     {
-    case 1:
-        C_MTXPerspective(projMtx, a->unk40, a->unk44, a->near, a->far);
+    case PROJ_PERSPECTIVE:
+        C_MTXPerspective(projMtx, cobj->projection_param.perspective.fov, cobj->projection_param.perspective.aspect, cobj->near, cobj->far);
         projection[0] = 0.0f;
         projection[1] = projMtx[0][0];
         projection[2] = projMtx[0][2];
@@ -394,8 +378,8 @@ Vec *func_8000E210(struct Struct8000E210 *a, const Point3d *pos3d, Point3d *scre
         projection[5] = projMtx[2][2];
         projection[6] = projMtx[2][3];
         break;
-    case 3:
-        C_MTXOrtho(&projMtx, a->unk40, a->unk44, a->left, a->right, a->near, a->far);
+    case PROJ_ORTHO:
+        C_MTXOrtho(&projMtx, cobj->projection_param.ortho.top, cobj->projection_param.ortho.bottom, cobj->projection_param.ortho.left, cobj->projection_param.ortho.right, cobj->near, cobj->far);
         projection[0] = 1.0f;
         projection[1] = projMtx[0][0];
         projection[2] = projMtx[0][3];
@@ -408,23 +392,23 @@ Vec *func_8000E210(struct Struct8000E210 *a, const Point3d *pos3d, Point3d *scre
         return NULL;
     }
 
-    viewport[0] = a->unkC;  // x origin
-    viewport[1] = a->unk14;  // y origin
-    viewport[2] = a->unk10 - a->unkC;  // width
-    viewport[3] = a->unk18 - a->unk14;  // height
+    viewport[0] = cobj->viewport_left;  // x origin
+    viewport[1] = cobj->viewport_top;  // y origin
+    viewport[2] = cobj->viewport_right - cobj->viewport_left;  // width
+    viewport[3] = cobj->viewport_bottom - cobj->viewport_top;  // height
     viewport[4] = 0.0f;  // near z
     viewport[5] = 1.0f;  // far z
 
     if (d != 0)
     {
-        func_80368784(a, &camPos);
-        func_80368E70(a, &upVec);
-        func_803686AC(a, &target);
+        func_80368784(cobj, &camPos);
+        func_80368E70(cobj, &upVec);
+        func_803686AC(cobj, &target);
         C_MTXLookAt(m, &camPos, &upVec, &target);
         mvMtx = m;
     }
     else
-        mvMtx = func_80369688(a);
+        mvMtx = func_80369688(cobj);
 
     f1 = mvMtx[2][0] * pos3d->x
        + mvMtx[2][1] * pos3d->y
