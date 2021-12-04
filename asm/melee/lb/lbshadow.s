@@ -1130,35 +1130,6 @@ lbl_8000F9D4:
 /* 8000F9F0 0000C5D0  7C 08 03 A6 */	mtlr r0
 /* 8000F9F4 0000C5D4  4E 80 00 20 */	blr 
 
-.section .sdata2
-
-.global lbl_804D7B30
-lbl_804D7B30:
-	.4byte 0xC0400000
-.global lbl_804D7B34
-lbl_804D7B34:
-	.4byte 0x40800000
-.global lbl_804D7B38
-lbl_804D7B38:
-	.4byte 0x3F800000
-.global lbl_804D7B3C
-lbl_804D7B3C:
-	.4byte 0x40400000
-.global lbl_804D7B40
-lbl_804D7B40:
-	.4byte 0x40000000
-.global lbl_804D7B44
-lbl_804D7B44:
-	.4byte 0x3F000000
-.global lbl_804D7B48
-lbl_804D7B48:
-	.4byte 0x00000000
-	.4byte 0x00000000
-.global lbl_804D7B50
-lbl_804D7B50:
-	.4byte 0x43300000
-	.4byte 0x80000000
-
 .section .data
 
     .4byte NULL
@@ -1192,3 +1163,33 @@ lbl_803BA0FC:
     .asciz "coudn t get light position ...\n"
     .balign 4
     .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804D7B30
+lbl_804D7B30:
+	.4byte 0xC0400000
+.global lbl_804D7B34
+lbl_804D7B34:
+	.4byte 0x40800000
+.global lbl_804D7B38
+lbl_804D7B38:
+	.4byte 0x3F800000
+.global lbl_804D7B3C
+lbl_804D7B3C:
+	.4byte 0x40400000
+.global lbl_804D7B40
+lbl_804D7B40:
+	.4byte 0x40000000
+.global lbl_804D7B44
+lbl_804D7B44:
+	.4byte 0x3F000000
+.global lbl_804D7B48
+lbl_804D7B48:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D7B50
+lbl_804D7B50:
+	.4byte 0x43300000
+	.4byte 0x80000000
