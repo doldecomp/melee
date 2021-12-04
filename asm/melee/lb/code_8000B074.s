@@ -2317,3 +2317,17 @@ lbl_804D3710:
 lbl_804D3718:
     .asciz "jobj"
     .balign 4
+
+
+.section .sdata2
+
+.global lbl_804D7A58
+lbl_804D7A58:
+	.4byte 0x00000000
+.global lbl_804D7A5C
+lbl_804D7A5C:
+	.4byte 0x3F800000
+.global lbl_804D7A60
+lbl_804D7A60:
+	.4byte 0x38D1B717
+	.4byte 0x00000000
