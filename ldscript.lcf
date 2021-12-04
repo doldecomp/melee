@@ -35,7 +35,7 @@ lbl_804D7AA8 = 0x804D7AA8;
 lbl_804D7AB0 = 0x804D7AB0;
 lbl_804D7AC0 = 0x804D7AC0;
 */
-func_8000D5BC = 0x8000D5BC;
+sqrtf__Ff = 0x8000D5BC;
 
 // Need these temporarily.
 FORCEFILES 
