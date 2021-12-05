@@ -4,7 +4,7 @@
 
 #include "sysdolphin/baselib/jobj.h"
 
-extern HSD_ObjAllocData lbl_804C0880; //aobj_alloc_data
+extern HSD_ObjAllocData aobj_alloc_data;
 
 extern char* lbl_804D5D08;
 extern char* lbl_804D5D10;
@@ -28,12 +28,12 @@ extern HSD_SList* lbl_804D7628;
 
 void HSD_AObjInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C0880, sizeof(HSD_AObj), 4);
+    HSD_ObjAllocInit(&aobj_alloc_data, sizeof(HSD_AObj), 4);
 }
 
 HSD_ObjAllocData* HSD_AObjGetAllocData(void)
 {
-    return &lbl_804C0880;
+    return &aobj_alloc_data;
 }
 
 u32 HSD_AObjGetFlags(HSD_AObj* aobj)
@@ -302,49 +302,26 @@ void HSD_AObjRemove(HSD_AObj* aobj)
     }
     HSD_AObjFree(aobj);
 }
-#pragma pop
 
-asm HSD_AObj* HSD_AObjAlloc(void)
+HSD_AObj* HSD_AObjAlloc(void) 
 {
-    nofralloc
-    /* 8036453C 0036111C  7C 08 02 A6 */	mflr r0
-    /* 80364540 00361120  3C 60 80 4C */	lis r3, lbl_804C0880@ha
-    /* 80364544 00361124  90 01 00 04 */	stw r0, 4(r1)
-    /* 80364548 00361128  38 63 08 80 */	addi r3, r3, lbl_804C0880@l
-    /* 8036454C 0036112C  94 21 FF F0 */	stwu r1, -0x10(r1)
-    /* 80364550 00361130  93 E1 00 0C */	stw r31, 0xc(r1)
-    /* 80364554 00361134  48 01 66 75 */	bl HSD_ObjAlloc
-    /* 80364558 00361138  7C 7F 1B 79 */	or. r31, r3, r3
-    /* 8036455C 0036113C  40 82 00 14 */	bne lbl_80364570
-    /* 80364560 00361140  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
-    /* 80364564 00361144  38 80 01 E9 */	li r4, 0x1e9
-    /* 80364568 00361148  38 AD A6 70 */	addi r5, r13, lbl_804D5D10
-    /* 8036456C 0036114C  48 02 3C B5 */	bl __assert
-lbl_80364570:
-    /* 80364570 00361150  38 7F 00 00 */	addi r3, r31, 0
-    /* 80364574 00361154  38 80 00 00 */	li r4, 0
-    /* 80364578 00361158  38 A0 00 1C */	li r5, 0x1c
-    /* 8036457C 0036115C  4B C9 EB 85 */	bl memset
-    /* 80364580 00361160  3C 00 40 00 */	lis r0, 0x4000
-    /* 80364584 00361164  90 1F 00 00 */	stw r0, 0(r31)
-    /* 80364588 00361168  7F E3 FB 78 */	mr r3, r31
-    /* 8036458C 0036116C  C0 02 EA 5C */	lfs f0, lbl_804DE43C(r2)
-    /* 80364590 00361170  D0 1F 00 10 */	stfs f0, 0x10(r31)
-    /* 80364594 00361174  80 01 00 14 */	lwz r0, 0x14(r1)
-    /* 80364598 00361178  83 E1 00 0C */	lwz r31, 0xc(r1)
-    /* 8036459C 0036117C  38 21 00 10 */	addi r1, r1, 0x10
-    /* 803645A0 00361180  7C 08 03 A6 */	mtlr r0
-    /* 803645A4 00361184  4E 80 00 20 */	blr 
+    HSD_AObj* aobj = (HSD_AObj*)HSD_ObjAlloc(&aobj_alloc_data);
+    if (aobj == NULL)
+    {
+        __assert(lbl_804D5D08, 489, lbl_804D5D10);
+    }
+    memset(aobj, 0, sizeof(HSD_AObj));
+    aobj->flags = AOBJ_NO_ANIM;
+    aobj->framerate = lbl_804DE43C;
+    return aobj;
 }
 
-#pragma push
-#pragma peephole on
 void HSD_AObjFree(HSD_AObj* aobj)
 {
     if (!aobj)
         return;
     
-    HSD_ObjFree(&lbl_804C0880, (HSD_ObjAllocLink*)aobj);
+    HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*)aobj);
 }
 #pragma pop
 
