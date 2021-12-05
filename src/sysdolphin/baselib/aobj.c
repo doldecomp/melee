@@ -21,7 +21,7 @@ extern void* jtbl_8040608C;
 extern s32 lbl_804D7630;
 extern s32 lbl_804D762C;
 
-extern const f32 lbl_804DE43C;
+extern const f32 lbl_804DE43C; // 1.0F
 extern const f32 lbl_804DE438; // 0.0F
 
 extern HSD_SList* lbl_804D7628;
