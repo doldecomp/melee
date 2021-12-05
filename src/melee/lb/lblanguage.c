@@ -18,12 +18,9 @@ int func_8000ADD4(void) {
     return (lbl_804D3EE0[0]) == 1 ? 1 : 0;
 }
 
-// this matches, but it needs the correct epilogue patch
-#pragma scheduling off
 u8 func_8000ADF4() {
     return func_8015CC58()[0x16];
 }
-#pragma scheduling on
 
 void func_8000AE18(int language) {
     if(language >= 0 && language < 2)
