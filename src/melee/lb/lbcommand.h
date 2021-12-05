@@ -10,7 +10,7 @@ typedef struct _CommandInfo {
     f32 frame_count; //0x04
     u32* data_position; //0x08
     u32 loop_count; //0x0C
-    u32* event_return; //0x10
+    u32* event_return[4]; //0x10 - Array Size is purely made-up for now
     u32 loop_count_dup; //0x14
     u32 unk_x18; //0x18
 } CommandInfo;
@@ -26,6 +26,6 @@ void Command_80005AC4(CommandInfo* info);
 void Command_80005AE4(CommandInfo* info);
 void Command_80005B00(CommandInfo* info);
 void Command_80005B18(CommandInfo* info);
-void Command_80005B64(CommandInfo* info);
+BOOL Command_80005B64(CommandInfo* info, u32 command);
 
 #endif
