@@ -16,16 +16,16 @@ typedef struct _CommandInfo {
 } CommandInfo;
 
 void Command_00(CommandInfo* info);
+void Command_01(CommandInfo* info);
+void Command_02(CommandInfo* info);
+void Command_03(CommandInfo* info);
 void Command_04(CommandInfo* info);
-void Command_08(CommandInfo* info);
-void Command_0C(CommandInfo* info);
-void Command_10_ExecuteLoop(CommandInfo* info);
-void Command_10_Goto(CommandInfo* info);
+void Command_05(CommandInfo* info);
 void Command_14(CommandInfo* info);
-void Command_80005AC4(CommandInfo* info);
-void Command_80005AE4(CommandInfo* info);
-void Command_80005B00(CommandInfo* info);
-void Command_80005B18(CommandInfo* info);
-BOOL Command_80005B64(CommandInfo* info, u32 command);
+void Command_06(CommandInfo* info);
+void Command_07(CommandInfo* info);
+void Command_08(CommandInfo* info);
+void Command_09(CommandInfo* info);
+BOOL Command_Execute(CommandInfo* info, u32 command);
 
 #endif

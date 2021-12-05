@@ -12,7 +12,7 @@
 // ? func_8000543C(?);
 
 /* .text section */
-// ? Command_80005B64(?);
+// ? Command_Execute(?);
 // ? func_80005BB0(?);
 // ? func_80005C44(?);
 // ? func_80005EBC(?);

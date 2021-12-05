@@ -3,8 +3,8 @@
 extern const f64 lbl_804D79E0;
 
 void (*lbl_803B9840[16])(CommandInfo*) = {
-                            Command_00, Command_04, Command_08, Command_0C, Command_10_ExecuteLoop, 
-                            Command_10_Goto, Command_80005AC4, Command_80005AE4, Command_80005B00, Command_80005B18, 
+                            Command_00, Command_01, Command_02, Command_03, Command_04, 
+                            Command_05, Command_06, Command_07, Command_08, Command_09, 
                             NULL, NULL, NULL, NULL, NULL, NULL
                          };
 
@@ -14,30 +14,30 @@ void Command_00(CommandInfo* info)
     info->data_position = 0;
 }
 
-//Set Timer
-void Command_04(CommandInfo* info)
+// SynchronousTimer
+void Command_01(CommandInfo* info)
 {
     info->timer += *info->data_position & 0x3ffffff;
     info->data_position += 1;
 }
 
-//Adjust Timer
-void Command_08(CommandInfo* info)
+// AsynchronousTimer
+void Command_02(CommandInfo* info)
 {
     info->timer = (*info->data_position & 0x3ffffff) - info->frame_count;
     info->data_position += 1;
 }
 
-//Set Loop
-void Command_0C(CommandInfo* info)
+// SetLoop
+void Command_03(CommandInfo* info)
 {
     info->event_return[info->loop_count++] = info->data_position + 1;
     info->event_return[info->loop_count++] = (u32*)(*info->data_position & 0x3ffffff);
     info->data_position += 1;
 }
 
-//Execute Loop
-asm void Command_10_ExecuteLoop(CommandInfo* info)
+// Execute Loop
+asm void Command_04(CommandInfo* info)
 {
     nofralloc
 /* 80005A30 00002610  80 03 00 0C */	lwz r0, 0xc(r3)
@@ -65,27 +65,31 @@ lbl_80005A6C:
 /* 80005A84 00002664  4E 80 00 20 */	blr 
 }
 
-void Command_10_Goto(CommandInfo* info) {
+// Subroutine
+void Command_05(CommandInfo* info) {
     info->data_position = info->data_position + 1;
     info->event_return[info->loop_count++] = info->data_position + 1;
     info->data_position = (u32*)(*info->data_position);
 }
 
-void Command_80005AC4(CommandInfo* info) {
+// Return
+void Command_06(CommandInfo* info) {
     info->data_position = info->event_return[info->loop_count -= 1];
 }
 
-void Command_80005AE4(CommandInfo* info) {
+// GoTo
+void Command_07(CommandInfo* info) {
     info->data_position += 1;
     info->data_position = (u32*)*info->data_position;
 }
 
-void Command_80005B00(CommandInfo* info) {
+// SetTimerAnimation
+void Command_08(CommandInfo* info) {
     info->data_position += 1;
     info->timer = FLT_MAX;
 }
 
-asm void Command_80005B18(CommandInfo* info) {
+asm void Command_09(CommandInfo* info) {
     nofralloc
 /* 80005B18 000026F8  7C 08 02 A6 */	mflr r0
 /* 80005B1C 000026FC  90 01 00 04 */	stw r0, 4(r1)
@@ -110,7 +114,7 @@ asm void Command_80005B18(CommandInfo* info) {
 
 #pragma push
 #pragma peephole on
-BOOL Command_80005B64(CommandInfo* info, u32 command) {
+BOOL Command_Execute(CommandInfo* info, u32 command) {
     if (command < 10) {
         lbl_803B9840[command](info);
         return TRUE;
