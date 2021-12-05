@@ -19,7 +19,13 @@ endif
 
 TARGET := ssbm.us.1.2
 
+# Overkill epilogue fixup strategy. Set to 1 if necessary.
+EPILOGUE_PROCESS := 1
+
 BUILD_DIR := build/$(TARGET)
+ifeq ($(EPILOGUE_PROCESS),1)
+EPILOGUE_DIR := epilogue/$(TARGET)
+endif
 
 # Inputs
 S_FILES := $(wildcard asm/*.s)
@@ -32,9 +38,16 @@ ELF     := $(DOL:.dol=.elf)
 MAP     := $(BUILD_DIR)/GALE01.map
 
 include obj_files.mk
+ifeq ($(EPILOGUE_PROCESS),1)
+include e_files.mk
+endif
 
 O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES) $(RODATA_O_FILES) $(DATA_O_FILES)    \
            $(BSS_O_FILES) $(SDATA_O_FILES) $(SBSS_O_FILES) $(SDATA2_O_FILES)
+ifeq ($(EPILOGUE_PROCESS),1)
+E_FILES := $(EPILOGUE_UNSCHEDULED)
+endif
+
 DEP_FILES := $(O_FILES:.o=.dep)
 
 #-------------------------------------------------------------------------------
@@ -42,7 +55,11 @@ DEP_FILES := $(O_FILES:.o=.dep)
 #-------------------------------------------------------------------------------
 
 MWCC_VERSION := 1.1
-MWCC_LD_VERSION := 1.1
+ifeq ($(EPILOGUE_PROCESS),1)
+MWCC_EPI_VERSION := 1.0
+MWCC_EPI_EXE := mwcceppc_profile.exe
+endif
+MWCC_LD_VERSION := 1.2.5
 
 # Programs
 ifeq ($(WINDOWS),1)
@@ -53,6 +70,9 @@ endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 CPP     := cpp -P
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
+ifeq ($(EPILOGUE_PROCESS),1)
+CC_EPI  := $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
+endif
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 HOSTCC  := cc
@@ -60,6 +80,7 @@ SHA1SUM := sha1sum
 PYTHON  := python3
 
 POSTPROC := tools/postprocess.py
+FRANK := tools/frank.py
 
 # Options
 INCLUDE_DIRS = $(*D)
@@ -94,9 +115,17 @@ default: $(DOL)
 	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
+ifeq ($(EPILOGUE_PROCESS),1)
+EPI_DIRS := $(sort $(dir $(E_FILES)))
+endif
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
+
+ifeq ($(EPILOGUE_PROCESS),1)
+# Make sure profile directory exists before compiling anything
+DUMMY != mkdir -p $(EPI_DIRS)
+endif
 
 $(LDSCRIPT): ldscript.lcf
 	$(QUIET) $(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
@@ -108,10 +137,18 @@ $(LDSCRIPT): ldscript.lcf
 clean:
 	rm -f -d -r build $(ELF2DOL)
 
+# ELF creation makefile instructions
+ifeq ($(EPILOGUE_PROCESS),1)
+$(ELF): $(O_FILES) $(E_FILES) $(LDSCRIPT)
+	@echo Linking ELF $@
+	$(QUIET) echo $(O_FILES) > build/o_files
+	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files
+else
 $(ELF): $(O_FILES) $(LDSCRIPT)
 	@echo Linking ELF $@
 	$(QUIET) echo $(O_FILES) > build/o_files
 	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files
+endif
 
 $(BUILD_DIR)/%.o: %.s
 	@echo Assembling $<
@@ -122,6 +159,20 @@ $(BUILD_DIR)/%.o: %.c
 	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) -MT $@ $< >/dev/null
 	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
 	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $@
+
+ifeq ($(EPILOGUE_PROCESS),1)
+$(EPILOGUE_DIR)/%.o: %.c $(BUILD_DIR)/%.o
+	$(CC_EPI) $(CFLAGS) -c -o $@ $<
+	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
+
+$(EPILOGUE_DIR)/%.o: %.cp $(BUILD_DIR)/%.o
+	$(CC_EPI) $(CFLAGS) -c -o $@ $<
+	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
+
+$(EPILOGUE_DIR)/%.o: %.cpp $(BUILD_DIR)/%.o
+	$(CC_EPI) $(CFLAGS) -c -o $@ $<
+	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
+endif
 
 $(BUILD_DIR)/src/melee/lb/lbvector.o: CFLAGS += -inline auto -fp_contract on
 

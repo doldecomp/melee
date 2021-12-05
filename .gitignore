@@ -17,4 +17,7 @@ build/
 build.bat
 clean.bat
 
+# Epilogue hack folder
+epilogue/
+
 __pycache__
