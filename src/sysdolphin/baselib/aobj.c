@@ -303,6 +303,7 @@ void HSD_AObjRemove(HSD_AObj* aobj)
     HSD_AObjFree(aobj);
 }
 
+// https://decomp.me/scratch/dPE2w
 HSD_AObj* HSD_AObjAlloc(void) 
 {
     HSD_AObj* aobj = (HSD_AObj*)HSD_ObjAlloc(&aobj_alloc_data);
