@@ -31,4 +31,6 @@ typedef int                 BOOL;
 
 #define NULL ((void*)0)
 
+#define FLT_MAX 3.4028235E38
+
 #endif
