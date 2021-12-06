@@ -10,9 +10,11 @@ import argparse
 
 # Byte sequence that marks code size
 CODESIZE_MAGIC = b"\x00\x00\x00\x06\x00\x00\x00\x00\x00\x00\x00\x34"
+BLR_BYTE_SEQ = b"\x4E\x80\x00\x20"
+MTLR_BYTE_SEQ = b"\x7C\x08\x03\xA6"
 
 # Byte sequence array for branches to link register
-BLR_BYTES = [b"\x4E\x80\x00\x20",
+BLR_BYTE_SEQ_ARRAY = [BLR_BYTE_SEQ,
 b"\x4D\x80\x00\x20", b"\x4D\x80\x00\x21", b"\x4C\x81\x00\x20", b"\x4C\x81\x00\x21",
 b"\x4D\x82\x00\x20", b"\x4D\x82\x00\x21", b"\x4C\x80\x00\x20", b"\x4C\x80\x00\x21",
 b"\x4D\x81\x00\x20", b"\x4D\x81\x00\x21", b"\x4C\x80\x00\x20", b"\x4C\x80\x00\x21",
@@ -50,18 +52,44 @@ assert(eoc_offset != len(vanilla_bytes))
 # Replace 0x34 - eoc in vanilla with bytes from stripped
 final_bytes = vanilla_bytes[:0x34] + stripped_bytes[0x34:eoc_offset] + vanilla_bytes[eoc_offset:]
 
-# Fix conditional branches
-for seq in BLR_BYTES:
+# Fix branches to link register
+for seq in BLR_BYTE_SEQ_ARRAY:
     idx = 0
 
     while idx < len(vanilla_bytes):
         found_pos = vanilla_bytes.find(seq, idx)
         if found_pos == -1:
-            break
-        if found_pos % 4 != 0:
+            break # break while loop when no targets remain
+        if found_pos % 4 != 0: # check 4-byte alignment
+            idx += 4
             continue
         final_bytes = final_bytes[:found_pos] + vanilla_bytes[found_pos:found_pos+4] + final_bytes[found_pos+4:]
-        idx += len(seq)
+        idx = found_pos + len(seq)
+
+# Reunify mtlr/blr instructions, shifting intermediary instructions up
+idx = 0
+
+while idx < len(final_bytes):
+    # Find mtlr position
+    mtlr_found_pos = final_bytes.find(MTLR_BYTE_SEQ, idx)
+    if mtlr_found_pos == -1:
+        break # break while loop when no targets remain
+    if mtlr_found_pos % 4 != 0: # check 4-byte alignment
+        idx += 4
+        continue
+    # Find paired blr position
+    blr_found_pos = final_bytes.find(BLR_BYTE_SEQ, mtlr_found_pos)
+    if blr_found_pos == -1:
+        break # break while loop when no targets remain
+    if blr_found_pos % 4 != 0: # check 4-byte alignment
+        idx += 4
+        continue
+    if mtlr_found_pos + 4 == blr_found_pos:
+        idx += 4
+        continue # continue if mtlr is followed directly by blr
+    
+    final_bytes = final_bytes[:mtlr_found_pos] + final_bytes[mtlr_found_pos+4:blr_found_pos] + final_bytes[mtlr_found_pos:mtlr_found_pos+4] + final_bytes[blr_found_pos:]
+    idx = mtlr_found_pos + len(MTLR_BYTE_SEQ)
 
 with open(args.target, "wb") as f:
     f.write(final_bytes)
