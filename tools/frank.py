@@ -8,8 +8,10 @@
 
 import argparse
 
-# Byte sequences that mark end of code
-EOC_BYTES = [b"\x4E\x80\x00\x20\x02", b"\x48\x00\x00\x01\x02"]
+# Byte sequence that marks code size
+CODESIZE_MAGIC = b"\x00\x00\x00\x06\x00\x00\x00\x00\x00\x00\x00\x34"
+
+# Byte sequences for conditional branches to link register
 CBLR_BYTES = [
 b"\x4D\x80\x00\x20", b"\x4D\x80\x00\x21", b"\x4C\x81\x00\x20", b"\x4C\x81\x00\x21",
 b"\x4D\x82\x00\x20", b"\x4D\x82\x00\x21", b"\x4C\x80\x00\x20", b"\x4C\x80\x00\x21",
@@ -36,24 +38,17 @@ args.profile.close()
 stripped_bytes = profile_bytes.replace(b"\x48\x00\x00\x01\x60\x00\x00\x00", b"")
 
 # Find end of code sections in vanilla and stripped bytes
-vanilla_eoc = len(vanilla_bytes)
-stripped_eoc = len(stripped_bytes)
-for seq in EOC_BYTES:
-    vanilla_idx = vanilla_bytes.find(seq)
-    if -1 < vanilla_idx < vanilla_eoc:
-        vanilla_eoc = vanilla_idx
+code_size_offset = (vanilla_bytes.find(CODESIZE_MAGIC) + 12)
+code_size_bytes = vanilla_bytes[code_size_offset:code_size_offset+4]
+code_size = int.from_bytes(code_size_bytes, byteorder='big')
 
-    stripped_idx = stripped_bytes.find(seq)
-    if -1 < stripped_idx < stripped_eoc:
-        stripped_eoc = stripped_idx
+eoc_offset = 0x34 + code_size
 
-# Break if the detected vanilla end-of-code is not the same from the stripped profile end-of-code
-assert(vanilla_eoc == stripped_eoc)
-# or if the eoc is not found
-assert(vanilla_eoc != len(vanilla_bytes))
+# Break if the eoc is not found
+assert(eoc_offset != len(vanilla_bytes))
 
 # Replace 0x34 - eoc in vanilla with bytes from stripped
-final_bytes = vanilla_bytes[:0x34] + stripped_bytes[0x34:stripped_eoc] + vanilla_bytes[stripped_eoc:]
+final_bytes = vanilla_bytes[:0x34] + stripped_bytes[0x34:eoc_offset] + vanilla_bytes[eoc_offset:]
 
 # Fix conditional branches
 for seq in CBLR_BYTES:
