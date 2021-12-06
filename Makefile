@@ -56,8 +56,8 @@ DEP_FILES := $(O_FILES:.o=.dep)
 
 MWCC_VERSION := 1.1
 ifeq ($(EPILOGUE_PROCESS),1)
-MWCC_EPI_VERSION := 1.0
-MWCC_EPI_EXE := mwcceppc_profile.exe
+MWCC_EPI_VERSION := 1.2.5e
+MWCC_EPI_EXE := mwcceppc.exe
 endif
 MWCC_LD_VERSION := 1.2.5
 
@@ -136,6 +136,7 @@ $(LDSCRIPT): ldscript.lcf
 
 clean:
 	rm -f -d -r build $(ELF2DOL)
+	rm -f -d -r epilogue
 
 # ELF creation makefile instructions
 ifeq ($(EPILOGUE_PROCESS),1)
@@ -158,23 +159,27 @@ $(BUILD_DIR)/%.o: %.c
 	@echo Compiling $<
 	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) -MT $@ $< >/dev/null
 	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
-	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $@
 
 ifeq ($(EPILOGUE_PROCESS),1)
 $(EPILOGUE_DIR)/%.o: %.c $(BUILD_DIR)/%.o
 	$(CC_EPI) $(CFLAGS) -c -o $@ $<
 	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
+	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $(word 2,$^)
 
 $(EPILOGUE_DIR)/%.o: %.cp $(BUILD_DIR)/%.o
 	$(CC_EPI) $(CFLAGS) -c -o $@ $<
 	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
+	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $(word 2,$^)
 
 $(EPILOGUE_DIR)/%.o: %.cpp $(BUILD_DIR)/%.o
 	$(CC_EPI) $(CFLAGS) -c -o $@ $<
 	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
+	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $(word 2,$^)
+	
 endif
 
 $(BUILD_DIR)/src/melee/lb/lbvector.o: CFLAGS += -inline auto -fp_contract on
+$(EPILOGUE_DIR)/src/melee/lb/lbvector.o: CFLAGS += -inline auto -fp_contract on
 
 -include $(DEP_FILES)
 
