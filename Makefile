@@ -79,7 +79,6 @@ HOSTCC  := cc
 SHA1SUM := sha1sum
 PYTHON  := python3
 
-POSTPROC := tools/postprocess.py
 FRANK := tools/frank.py
 
 # Options
@@ -94,9 +93,6 @@ ifeq ($(GENERATE_MAP),1)
   LDFLAGS += -map $(MAP)
 endif
 CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults $(INCLUDES)
-
-# for postprocess.py
-PROCFLAGS := -fprologue-fixup=old_stack
 
 HOSTCFLAGS := -Wall -O3 -s
 
@@ -162,19 +158,19 @@ $(BUILD_DIR)/%.o: %.c
 
 ifeq ($(EPILOGUE_PROCESS),1)
 $(EPILOGUE_DIR)/%.o: %.c $(BUILD_DIR)/%.o
-	$(CC_EPI) $(CFLAGS) -c -o $@ $<
-	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
-	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $(word 2,$^)
+	@echo Frank is fixing $<
+	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
+	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
 
 $(EPILOGUE_DIR)/%.o: %.cp $(BUILD_DIR)/%.o
-	$(CC_EPI) $(CFLAGS) -c -o $@ $<
-	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
-	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $(word 2,$^)
+	@echo Frank is fixing $<
+	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
+	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
 
 $(EPILOGUE_DIR)/%.o: %.cpp $(BUILD_DIR)/%.o
-	$(CC_EPI) $(CFLAGS) -c -o $@ $<
-	$(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
-	$(QUIET) $(PYTHON) $(POSTPROC) $(PROCFLAGS) $(word 2,$^)
+	@echo Frank is fixing $<
+	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
+	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
 	
 endif
 
