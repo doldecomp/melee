@@ -12,7 +12,7 @@ import argparse
 CODESIZE_MAGIC = b"\x00\x00\x00\x06\x00\x00\x00\x00\x00\x00\x00\x34"
 
 # Byte sequences for conditional branches to link register
-CBLR_BYTES = [
+BLR_BYTES = [b"\x4E\x80\x00\x20",
 b"\x4D\x80\x00\x20", b"\x4D\x80\x00\x21", b"\x4C\x81\x00\x20", b"\x4C\x81\x00\x21",
 b"\x4D\x82\x00\x20", b"\x4D\x82\x00\x21", b"\x4C\x80\x00\x20", b"\x4C\x80\x00\x21",
 b"\x4D\x81\x00\x20", b"\x4D\x81\x00\x21", b"\x4C\x80\x00\x20", b"\x4C\x80\x00\x21",
@@ -51,26 +51,17 @@ assert(eoc_offset != len(vanilla_bytes))
 final_bytes = vanilla_bytes[:0x34] + stripped_bytes[0x34:eoc_offset] + vanilla_bytes[eoc_offset:]
 
 # Fix conditional branches
-for seq in CBLR_BYTES:
-    vanilla_idx = vanilla_bytes.count(seq)
-    final_idx = final_bytes.count(seq)
-    if vanilla_idx > final_idx:
-        vanilla_findpos = 0
-        for x in range(vanilla_idx):
-            vanilla_findpos = vanilla_bytes.find(seq, vanilla_findpos)
-            final_bytes = final_bytes[:vanilla_findpos] + vanilla_bytes[vanilla_findpos:vanilla_findpos+4] + final_bytes[vanilla_findpos+4:]
-            vanilla_findpos+=1
+for seq in BLR_BYTES:
+    idx = 0
 
-# Fix remaining branches to link register
-seq = b"\x4E\x80\x00\x20"
-vanilla_idx = vanilla_bytes.count(seq)
-final_idx = final_bytes.count(seq)
-if vanilla_idx > final_idx:
-    vanilla_findpos = 0
-    for x in range(vanilla_idx):
-        vanilla_findpos = vanilla_bytes.find(seq, vanilla_findpos)
-        final_bytes = final_bytes[:vanilla_findpos] + vanilla_bytes[vanilla_findpos:vanilla_findpos+4] + final_bytes[vanilla_findpos+4:]
-        vanilla_findpos+=1
+    while idx < len(vanilla_bytes):
+        found_pos = vanilla_bytes.find(seq, idx)
+        if found_pos == -1:
+            break
+        if found_pos % 4 != 0:
+            continue
+        final_bytes = final_bytes[:found_pos] + vanilla_bytes[found_pos:found_pos+4] + final_bytes[found_pos+4:]
+        idx += len(seq)
 
 with open(args.target, "wb") as f:
     f.write(final_bytes)
