@@ -22,7 +22,7 @@ v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 
 ### Instructions
 
-1. Download GC_WII_COMPILERS.zip from (https://cdn.discordapp.com/attachments/704241951972524063/801641758249320478/GC_WII_COMPILERS.zip) and extract the GC compilers to tools/mwcc_compiler/.
+1. Download GC_WII_COMPILERS.zip from (https://cdn.discordapp.com/attachments/727918646525165659/917185027656286218/GC_WII_COMPILERS.zip) and extract the GC compilers to tools/mwcc_compiler/.
 2. Run the `make` command
 
 ## Contributions
