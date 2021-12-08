@@ -15,6 +15,13 @@ typedef struct _CommandInfo {
     u32 unk_x18; //0x18
 } CommandInfo;
 
+typedef struct _Command_09_Struct
+{
+    u32 id:6;
+    u32 param_1:8;
+    u32 param_2:18;
+} Command_09_Struct;
+
 void Command_00(CommandInfo* info);
 void Command_01(CommandInfo* info);
 void Command_02(CommandInfo* info);

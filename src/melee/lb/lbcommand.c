@@ -89,31 +89,14 @@ void Command_08(CommandInfo* info) {
     info->timer = FLT_MAX;
 }
 
-asm void Command_09(CommandInfo* info) {
-    nofralloc
-/* 80005B18 000026F8  7C 08 02 A6 */	mflr r0
-/* 80005B1C 000026FC  90 01 00 04 */	stw r0, 4(r1)
-/* 80005B20 00002700  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80005B24 00002704  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80005B28 00002708  7C 7F 1B 78 */	mr r31, r3
-/* 80005B2C 0000270C  80 83 00 08 */	lwz r4, 8(r3)
-/* 80005B30 00002710  A0 64 00 00 */	lhz r3, 0(r4)
-/* 80005B34 00002714  80 84 00 00 */	lwz r4, 0(r4)
-/* 80005B38 00002718  54 63 F6 3E */	rlwinm r3, r3, 0x1e, 0x18, 0x1f
-/* 80005B3C 0000271C  54 84 03 BE */	clrlwi r4, r4, 0xe
-/* 80005B40 00002720  48 01 C1 09 */	bl func_80021C48
-/* 80005B44 00002724  80 7F 00 08 */	lwz r3, 8(r31)
-/* 80005B48 00002728  38 03 00 04 */	addi r0, r3, 4
-/* 80005B4C 0000272C  90 1F 00 08 */	stw r0, 8(r31)
-/* 80005B50 00002730  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80005B54 00002734  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80005B58 00002738  38 21 00 18 */	addi r1, r1, 0x18
-/* 80005B5C 0000273C  7C 08 03 A6 */	mtlr r0
-/* 80005B60 00002740  4E 80 00 20 */	blr 
-}
-
 #pragma push
 #pragma peephole on
+void Command_09(CommandInfo* info) {
+    Command_09_Struct* cmd = (Command_09_Struct*)info->data_position;
+    func_80021C48(cmd->param_1, cmd->param_2);
+    info->data_position += 1;
+}
+
 BOOL Command_Execute(CommandInfo* info, u32 command) {
     if (command < 10) {
         lbl_803B9840[command](info);
