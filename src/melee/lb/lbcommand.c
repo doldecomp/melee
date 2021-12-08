@@ -75,8 +75,6 @@ void Command_08(CommandInfo* info) {
     info->timer = FLT_MAX;
 }
 
-#pragma push
-#pragma peephole on
 void Command_09(CommandInfo* info) {
     Command_09_Struct* cmd = info->u.Command_09;
     func_80021C48(cmd->param_1, cmd->param_2);
@@ -90,4 +88,3 @@ BOOL Command_Execute(CommandInfo* info, u32 command) {
     }
     return FALSE;
 }
-#pragma pop
