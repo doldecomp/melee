@@ -366,7 +366,7 @@ Vec *func_8000E210(HSD_CObj *cobj, const Point3d *pos3d, Point3d *screenCoords, 
     assert_line(pos3d->z>-50000.0F&&pos3d->z<50000.0F, 679);
 
     point = *pos3d;
-    switch (func_8036A12C(cobj))
+    switch (HSD_CObjGetProjectionType(cobj))
     {
     case PROJ_PERSPECTIVE:
         C_MTXPerspective(projMtx, cobj->projection_param.perspective.fov, cobj->projection_param.perspective.aspect, cobj->near, cobj->far);

@@ -290,6 +290,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/mobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/aobj.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/lobj.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/cobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/cobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/fobj.o      \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fobj.o		\
