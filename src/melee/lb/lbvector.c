@@ -1,8 +1,5 @@
+#include "lbvector.h"
 #include <math.h>
-#include <dolphin/mtx/mtxtypes.h>
-#include <dolphin/gx/GXTransform.h>
-
-#include "sysdolphin/baselib/cobj.h"
 
 #define PI 3.1415926535897931
 
