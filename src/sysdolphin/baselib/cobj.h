@@ -1,6 +1,8 @@
 #ifndef _cobj_h_
 #define _cobj_h_
 
+#include <global.h>
+
 #include <dolphin/types.h>
 
 #include "sysdolphin/baselib/object.h"
@@ -102,5 +104,7 @@ typedef struct _HSD_CameraAnim {
     struct _HSD_WObjAnim* eye_anim;
     struct _HSD_WObjAnim* interest_anim;
 } HSD_CameraAnim;
+
+void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32 enable_depth);
 
 #endif

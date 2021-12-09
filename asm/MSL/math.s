@@ -53,8 +53,8 @@ func_803261B4:
 /* 803261B4 00322D94  FC 20 0A 10 */	fabs f1, f1
 /* 803261B8 00322D98  4E 80 00 20 */	blr 
 
-.global func_803261BC
-func_803261BC:
+.global tanf
+tanf:
 /* 803261BC 00322D9C  7C 08 02 A6 */	mflr r0
 /* 803261C0 00322DA0  90 01 00 04 */	stw r0, 4(r1)
 /* 803261C4 00322DA4  94 21 FF E0 */	stwu r1, -0x20(r1)
