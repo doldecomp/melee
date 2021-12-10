@@ -302,6 +302,7 @@ void HSD_AObjRemove(HSD_AObj* aobj)
     }
     HSD_AObjFree(aobj);
 }
+#pragma pop
 
 #ifdef NON_MATCHING
 // https://decomp.me/scratch/dPE2w
@@ -352,6 +353,8 @@ lbl_80364570:
 }
 #endif
 
+#pragma push
+#pragma peephole on
 void HSD_AObjFree(HSD_AObj* aobj)
 {
     if (!aobj)
