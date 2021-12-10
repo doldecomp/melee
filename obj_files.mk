@@ -191,7 +191,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MSL/ansi_fp.o                  \
 	$(BUILD_DIR)/asm/MSL/buffer_io.o                \
 	$(BUILD_DIR)/src/MSL/PPC_EABI/critical_regions.gamecube.o 	\
-	$(BUILD_DIR)/asm/MSL/ctype.o                    \
+	$(BUILD_DIR)/src/MSL/ctype.o                    \
 	$(BUILD_DIR)/asm/MSL/direct_io.o                \
 	$(BUILD_DIR)/asm/MSL/cstring.o                  \
 	$(BUILD_DIR)/asm/MSL/mem_funcs.o                \

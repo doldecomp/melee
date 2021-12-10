@@ -2025,8 +2025,8 @@ lbl_803B8C30:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
-.global lbl_803B8D30
-lbl_803B8D30:
+.global LowercaseTable
+LowercaseTable:
     .4byte 0x00010203
     .4byte 0x04050607
     .4byte 0x08090A0B
@@ -2091,8 +2091,8 @@ lbl_803B8D30:
     .4byte 0xF4F5F6F7
     .4byte 0xF8F9FAFB
     .4byte 0xFCFDFEFF
-.global lbl_803B8E30
-lbl_803B8E30:
+.global UppercaseTable
+UppercaseTable:
     .4byte 0x00010203
     .4byte 0x04050607
     .4byte 0x08090A0B
