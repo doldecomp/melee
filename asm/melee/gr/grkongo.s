@@ -3669,3 +3669,217 @@ lbl_801D848C:
 /* 801D8494 001D5074  38 21 00 28 */	addi r1, r1, 0x28
 /* 801D8498 001D5078  7C 08 03 A6 */	mtlr r0
 /* 801D849C 001D507C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E16E0
+lbl_803E16E0:
+    .4byte 0x0002000A
+    .4byte 0x00130003
+    .4byte 0x000A0016
+    .4byte 0x0005000A
+    .4byte 0x002B0006
+    .4byte 0x000A002C
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte 0x00020002
+.global lbl_803E1704
+lbl_803E1704:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+	.4byte lbl_801D6074
+	.4byte lbl_801D6190
+	.4byte lbl_801D6198
+	.4byte lbl_801D6378
+    .4byte NULL
+	.4byte lbl_801D6074
+	.4byte lbl_801D6190
+	.4byte lbl_801D6198
+	.4byte lbl_801D6378
+    .4byte NULL
+	.4byte lbl_801D6038
+	.4byte lbl_801D6064
+	.4byte lbl_801D606C
+	.4byte lbl_801D6070
+    .4byte NULL
+	.4byte lbl_801D5FA8
+	.4byte lbl_801D5FD4
+	.4byte lbl_801D5FDC
+	.4byte lbl_801D5FE0
+    .4byte NULL
+	.4byte lbl_801D55D8
+	.4byte lbl_801D5774
+	.4byte lbl_801D577C
+	.4byte lbl_801D5FA4
+    .4byte NULL
+	.4byte lbl_801D5FE4
+	.4byte lbl_801D6028
+	.4byte lbl_801D6030
+	.4byte lbl_801D6034
+    .4byte NULL
+	.4byte lbl_801D637C
+	.4byte lbl_801D64B4
+	.4byte lbl_801D64BC
+	.4byte lbl_801D6518
+    .4byte NULL
+	.4byte lbl_801D637C
+	.4byte lbl_801D64B4
+	.4byte lbl_801D64BC
+	.4byte lbl_801D6518
+    .4byte NULL
+	.4byte lbl_801D637C
+	.4byte lbl_801D64B4
+	.4byte lbl_801D64BC
+	.4byte lbl_801D6518
+    .4byte NULL
+	.4byte lbl_801D5490
+	.4byte lbl_801D5574
+	.4byte lbl_801D557C
+	.4byte lbl_801D55D4
+    .4byte 0xC0000000
+	.4byte lbl_801D651C
+	.4byte lbl_801D6660
+	.4byte lbl_801D6668
+	.4byte lbl_801D69AC
+    .4byte NULL
+.global lbl_803E17F4
+lbl_803E17F4:
+    .4byte 0x2F47724B
+    .4byte 0x672E6461
+    .4byte 0x74000000
+.global lbl_803E1800
+lbl_803E1800:
+    .4byte 0x00000004
+    .4byte lbl_803E1704
+    .4byte lbl_803E17F4
+	.4byte func_801D523C
+	.4byte func_801D5238
+	.4byte lbl_801D52F8
+	.4byte lbl_801D52FC
+	.4byte lbl_801D5338
+	.4byte lbl_801D8444
+	.4byte lbl_801D844C
+    .4byte 0x00000001
+    .4byte lbl_803E16E0
+    .4byte 0x00000006
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+.global lbl_803E1858
+lbl_803E1858:
+    .asciz "grkongo.c"
+    .balign 4
+.global lbl_803E1864
+lbl_803E1864:
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+.global lbl_803E188C
+lbl_803E188C:
+    .4byte 0x00080000
+    .4byte NULL
+    .4byte 0x3D8EFA35
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00090000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x000A0000
+    .4byte NULL
+    .4byte 0xBD567750
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00170000
+    .4byte NULL
+    .4byte 0xBDD67750
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00180000
+    .4byte NULL
+    .4byte 0xBE0EFA35
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00190000
+    .4byte NULL
+    .4byte 0xBE20D97C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x001A0000
+    .4byte NULL
+    .4byte 0xBE567750
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x001B0000
+    .4byte NULL
+    .4byte 0xBE714639
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x001C0000
+    .4byte NULL
+    .4byte 0xBE3BA866
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x001D0000
+    .4byte NULL
+    .4byte 0xBE060A92
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x001E0000
+    .4byte NULL
+    .4byte 0xBDA0D97C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x001F0000
+    .4byte NULL
+    .4byte 0xBCD67750
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00200000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00070000
+    .4byte NULL
+    .4byte 0x3D567750
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x002D0000
+    .4byte NULL
+    .4byte 0x3DD67750
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_803E19F4
+lbl_803E19F4:
+    .asciz "translate"
+    .balign 4
+.global lbl_803E1A00
+lbl_803E1A00:
+    .asciz "gp->u.taru.keep"
+    .balign 4
