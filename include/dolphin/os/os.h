@@ -1,3 +1,6 @@
+#ifndef _OS_H__
+#define _OS_H_
+
 typedef struct OSCalendarTime
 {
     int sec;    // seconds after the minute [0, 61]
@@ -12,3 +15,5 @@ typedef struct OSCalendarTime
     int msec;   // milliseconds after the second [0,999]
     int usec;   // microseconds after the millisecond [0,999]
 } OSCalendarTime;
+
+#endif
