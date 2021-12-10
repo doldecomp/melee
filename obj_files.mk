@@ -267,6 +267,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_1.o                \
                                                     \
 	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init.o      \
+	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.o      \
                                                     \
 	$(BUILD_DIR)/asm/dolphin/pad/Padclamp.o  		\
                                                     \
