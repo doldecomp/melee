@@ -1050,8 +1050,8 @@ lbl_804C0824:
 .global lbl_804C0850
 lbl_804C0850:
 	.skip 0x30
-.global lbl_804C0880
-lbl_804C0880:
+.global aobj_alloc_data
+aobj_alloc_data:
 	.skip 0x30
 .global lbl_804C08B0
 lbl_804C08B0:

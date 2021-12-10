@@ -4,7 +4,7 @@
 
 #include "sysdolphin/baselib/jobj.h"
 
-extern HSD_ObjAllocData lbl_804C0880; //aobj_alloc_data
+extern HSD_ObjAllocData aobj_alloc_data;
 
 extern char* lbl_804D5D08;
 extern char* lbl_804D5D10;
@@ -21,19 +21,19 @@ extern void* jtbl_8040608C;
 extern s32 lbl_804D7630;
 extern s32 lbl_804D762C;
 
-extern const f32 lbl_804DE43C;
+extern const f32 lbl_804DE43C; // 1.0F
 extern const f32 lbl_804DE438; // 0.0F
 
 extern HSD_SList* lbl_804D7628;
 
 void HSD_AObjInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C0880, sizeof(HSD_AObj), 4);
+    HSD_ObjAllocInit(&aobj_alloc_data, sizeof(HSD_AObj), 4);
 }
 
 HSD_ObjAllocData* HSD_AObjGetAllocData(void)
 {
-    return &lbl_804C0880;
+    return &aobj_alloc_data;
 }
 
 u32 HSD_AObjGetFlags(HSD_AObj* aobj)
@@ -304,6 +304,21 @@ void HSD_AObjRemove(HSD_AObj* aobj)
 }
 #pragma pop
 
+#ifdef NON_MATCHING
+// https://decomp.me/scratch/dPE2w
+HSD_AObj* HSD_AObjAlloc(void) 
+{
+    HSD_AObj* aobj = (HSD_AObj*)HSD_ObjAlloc(&aobj_alloc_data);
+    if (aobj == NULL)
+    {
+        __assert(__FILE__, 489, "0");
+    }
+    memset(aobj, 0, sizeof(HSD_AObj));
+    aobj->flags = AOBJ_NO_ANIM;
+    aobj->framerate = 1.0f;
+    return aobj;
+}
+#else
 asm HSD_AObj* HSD_AObjAlloc(void)
 {
     nofralloc
@@ -336,6 +351,7 @@ lbl_80364570:
     /* 803645A0 00361180  7C 08 03 A6 */	mtlr r0
     /* 803645A4 00361184  4E 80 00 20 */	blr 
 }
+#endif
 
 #pragma push
 #pragma peephole on
@@ -344,7 +360,7 @@ void HSD_AObjFree(HSD_AObj* aobj)
     if (!aobj)
         return;
     
-    HSD_ObjFree(&lbl_804C0880, (HSD_ObjAllocLink*)aobj);
+    HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*)aobj);
 }
 #pragma pop
 
