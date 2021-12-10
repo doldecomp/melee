@@ -255,7 +255,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/os/OSExi.o             \
 	$(BUILD_DIR)/asm/dolphin/os/OSFont.o            \
 	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt.o       \
-	$(BUILD_DIR)/asm/dolphin/os/OSLink.o            \
+	$(BUILD_DIR)/src/dolphin/os/OSLink.o            \
 	$(BUILD_DIR)/asm/dolphin/os/OSMemory.o          \
 	$(BUILD_DIR)/asm/dolphin/os/OSMutex.o           \
 	$(BUILD_DIR)/asm/dolphin/os/OSReboot.o          \
