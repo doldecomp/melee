@@ -54,12 +54,12 @@ DEP_FILES := $(O_FILES:.o=.dep)
 # Tools
 #-------------------------------------------------------------------------------
 
-MWCC_VERSION := 1.1
+MWCC_VERSION := 1.2.5
 ifeq ($(EPILOGUE_PROCESS),1)
-MWCC_EPI_VERSION = 1.2.5e
+MWCC_EPI_VERSION := 1.2.5e
 MWCC_EPI_EXE := mwcceppc.exe
 endif
-MWCC_LD_VERSION := 1.2.5
+MWCC_LD_VERSION := 1.1
 
 # Programs
 ifeq ($(WINDOWS),1)
@@ -71,7 +71,7 @@ AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 CPP     := cpp -P
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
 ifeq ($(EPILOGUE_PROCESS),1)
-CC_EPI  := $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
+CC_EPI   = $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
 endif
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
@@ -94,7 +94,7 @@ ifeq ($(GENERATE_MAP),1)
 endif
 CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults $(INCLUDES)
 
-$(EPILOGUE_DIR)/src/melee/lb/lbtime.o: MWCC_EPI_VERSION := 1.2.5
+$(EPILOGUE_DIR)/src/melee/lb/lbtime.o: CC_EPI := $(CC)
 
 HOSTCFLAGS := -Wall -O3 -s
 
