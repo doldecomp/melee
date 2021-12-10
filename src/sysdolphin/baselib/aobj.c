@@ -4,7 +4,7 @@
 
 #include "sysdolphin/baselib/jobj.h"
 
-extern HSD_ObjAllocData lbl_804C0880; //aobj_alloc_data
+extern HSD_ObjAllocData aobj_alloc_data;
 
 extern char* lbl_804D5D08;
 extern char* lbl_804D5D10;
@@ -21,19 +21,19 @@ extern void* jtbl_8040608C;
 extern s32 lbl_804D7630;
 extern s32 lbl_804D762C;
 
-extern const f32 lbl_804DE43C;
+extern const f32 lbl_804DE43C; // 1.0F
 extern const f32 lbl_804DE438; // 0.0F
 
 extern HSD_SList* lbl_804D7628;
 
 void HSD_AObjInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C0880, sizeof(HSD_AObj), 4);
+    HSD_ObjAllocInit(&aobj_alloc_data, sizeof(HSD_AObj), 4);
 }
 
 HSD_ObjAllocData* HSD_AObjGetAllocData(void)
 {
-    return &lbl_804C0880;
+    return &aobj_alloc_data;
 }
 
 u32 HSD_AObjGetFlags(HSD_AObj* aobj)
@@ -304,13 +304,28 @@ void HSD_AObjRemove(HSD_AObj* aobj)
 }
 #pragma pop
 
+#ifdef NON_MATCHING
+// https://decomp.me/scratch/dPE2w
+HSD_AObj* HSD_AObjAlloc(void) 
+{
+    HSD_AObj* aobj = (HSD_AObj*)HSD_ObjAlloc(&aobj_alloc_data);
+    if (aobj == NULL)
+    {
+        __assert(__FILE__, 489, "0");
+    }
+    memset(aobj, 0, sizeof(HSD_AObj));
+    aobj->flags = AOBJ_NO_ANIM;
+    aobj->framerate = 1.0f;
+    return aobj;
+}
+#else
 asm HSD_AObj* HSD_AObjAlloc(void)
 {
     nofralloc
     /* 8036453C 0036111C  7C 08 02 A6 */	mflr r0
-    /* 80364540 00361120  3C 60 80 4C */	lis r3, lbl_804C0880@ha
+    /* 80364540 00361120  3C 60 80 4C */	lis r3, aobj_alloc_data@ha
     /* 80364544 00361124  90 01 00 04 */	stw r0, 4(r1)
-    /* 80364548 00361128  38 63 08 80 */	addi r3, r3, lbl_804C0880@l
+    /* 80364548 00361128  38 63 08 80 */	addi r3, r3, aobj_alloc_data@l
     /* 8036454C 0036112C  94 21 FF F0 */	stwu r1, -0x10(r1)
     /* 80364550 00361130  93 E1 00 0C */	stw r31, 0xc(r1)
     /* 80364554 00361134  48 01 66 75 */	bl HSD_ObjAlloc
@@ -336,6 +351,7 @@ lbl_80364570:
     /* 803645A0 00361180  7C 08 03 A6 */	mtlr r0
     /* 803645A4 00361184  4E 80 00 20 */	blr 
 }
+#endif
 
 #pragma push
 #pragma peephole on
@@ -344,7 +360,7 @@ void HSD_AObjFree(HSD_AObj* aobj)
     if (!aobj)
         return;
     
-    HSD_ObjFree(&lbl_804C0880, (HSD_ObjAllocLink*)aobj);
+    HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*)aobj);
 }
 #pragma pop
 

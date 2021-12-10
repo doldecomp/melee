@@ -183,7 +183,7 @@ TEXT_O_FILES := 						            \
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
-	$(BUILD_DIR)/asm/Runtime/Gecko_setjmp.o         	\
+	$(BUILD_DIR)/src/Runtime/Gecko_setjmp.o         	\
 	$(BUILD_DIR)/asm/Runtime/runtime.o              	\
 	$(BUILD_DIR)/src/Runtime/__init_cpp_exceptions.o	\
 													\
@@ -191,7 +191,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MSL/ansi_fp.o                  \
 	$(BUILD_DIR)/asm/MSL/buffer_io.o                \
 	$(BUILD_DIR)/src/MSL/PPC_EABI/critical_regions.gamecube.o 	\
-	$(BUILD_DIR)/asm/MSL/ctype.o                    \
+	$(BUILD_DIR)/src/MSL/ctype.o                    \
 	$(BUILD_DIR)/asm/MSL/direct_io.o                \
 	$(BUILD_DIR)/asm/MSL/cstring.o                  \
 	$(BUILD_DIR)/asm/MSL/mem_funcs.o                \
@@ -255,7 +255,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/os/OSExi.o             \
 	$(BUILD_DIR)/asm/dolphin/os/OSFont.o            \
 	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt.o       \
-	$(BUILD_DIR)/asm/dolphin/os/OSLink.o            \
+	$(BUILD_DIR)/src/dolphin/os/OSLink.o            \
 	$(BUILD_DIR)/asm/dolphin/os/OSMemory.o          \
 	$(BUILD_DIR)/asm/dolphin/os/OSMutex.o           \
 	$(BUILD_DIR)/asm/dolphin/os/OSReboot.o          \
@@ -267,6 +267,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_1.o                \
                                                     \
 	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init.o      \
+	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.o      \
                                                     \
 	$(BUILD_DIR)/asm/dolphin/pad/Padclamp.o  		\
                                                     \

@@ -94,6 +94,8 @@ ifeq ($(GENERATE_MAP),1)
 endif
 CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults $(INCLUDES)
 
+$(EPILOGUE_DIR)/src/lb/lbtime.o: MWCC_EPI_VERSION := 1.2.5
+
 HOSTCFLAGS := -Wall -O3 -s
 
 #-------------------------------------------------------------------------------
