@@ -1,9 +1,6 @@
-.include "macros.inc"
 
-.section .text  # 0x80005940 - 0x803B7240
-
-.global __setjmp
-__setjmp:
+asm int __setjmp(register *env) {
+    nofralloc
 /* 803227CC 0031F3AC  7C A8 02 A6 */	mflr r5
 /* 803227D0 0031F3B0  7C C0 00 26 */	mfcr r6
 /* 803227D4 0031F3B4  90 A3 00 00 */	stw r5, 0(r3)
@@ -33,9 +30,11 @@ __setjmp:
 /* 80322834 0031F414  D8 03 00 F0 */	stfd f0, 0xf0(r3)
 /* 80322838 0031F418  38 60 00 00 */	li r3, 0
 /* 8032283C 0031F41C  4E 80 00 20 */	blr 
+}
 
-.global longjmp
-longjmp:
+asm void longjmp(register *env, register int val)
+{
+    nofralloc
 /* 80322840 0031F420  80 A3 00 00 */	lwz r5, 0(r3)
 /* 80322844 0031F424  80 C3 00 04 */	lwz r6, 4(r3)
 /* 80322848 0031F428  7C A8 03 A6 */	mtlr r5
@@ -68,3 +67,4 @@ longjmp:
 /* 803228B4 0031F494  4C 82 00 20 */	bnelr 
 /* 803228B8 0031F498  38 60 00 01 */	li r3, 1
 /* 803228BC 0031F49C  4E 80 00 20 */	blr 
+}
