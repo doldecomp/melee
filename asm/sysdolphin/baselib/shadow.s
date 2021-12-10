@@ -90,8 +90,8 @@ HSD_ShadowAlloc:
 /* 8037F378 0037BF58  7C 08 03 A6 */	mtlr r0
 /* 8037F37C 0037BF5C  4E 80 00 20 */	blr 
 
-.global func_8037F380
-func_8037F380:
+.global HSD_ShadowRemove
+HSD_ShadowRemove:
 /* 8037F380 0037BF60  7C 08 02 A6 */	mflr r0
 /* 8037F384 0037BF64  90 01 00 04 */	stw r0, 4(r1)
 /* 8037F388 0037BF68  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -136,7 +136,7 @@ lbl_8037F3E4:
 lbl_8037F41C:
 /* 8037F41C 0037BFFC  38 7F 00 00 */	addi r3, r31, 0
 /* 8037F420 0037C000  38 80 00 00 */	li r4, 0
-/* 8037F424 0037C004  48 00 06 E5 */	bl func_8037FB08
+/* 8037F424 0037C004  48 00 06 E5 */	bl HSD_ShadowDeleteObject
 /* 8037F428 0037C008  80 1F 00 1C */	lwz r0, 0x1c(r31)
 /* 8037F42C 0037C00C  2C 00 00 00 */	cmpwi r0, 0
 /* 8037F430 0037C010  41 82 00 0C */	beq lbl_8037F43C
@@ -167,8 +167,8 @@ lbl_8037F478:
 /* 8037F488 0037C068  7C 08 03 A6 */	mtlr r0
 /* 8037F48C 0037C06C  4E 80 00 20 */	blr 
 
-.global func_8037F490
-func_8037F490:
+.global HSD_ShadowInit
+HSD_ShadowInit:
 /* 8037F490 0037C070  7C 08 02 A6 */	mflr r0
 /* 8037F494 0037C074  90 01 00 04 */	stw r0, 4(r1)
 /* 8037F498 0037C078  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -199,8 +199,8 @@ lbl_8037F4BC:
 /* 8037F4F8 0037C0D8  7C 08 03 A6 */	mtlr r0
 /* 8037F4FC 0037C0DC  4E 80 00 20 */	blr 
 
-.global func_8037F500
-func_8037F500:
+.global HSD_ShadowSetSize
+HSD_ShadowSetSize:
 /* 8037F500 0037C0E0  7C 08 02 A6 */	mflr r0
 /* 8037F504 0037C0E4  90 01 00 04 */	stw r0, 4(r1)
 /* 8037F508 0037C0E8  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -485,8 +485,8 @@ lbl_8037F908:
 /* 8037F914 0037C4F4  7C 08 03 A6 */	mtlr r0
 /* 8037F918 0037C4F8  4E 80 00 20 */	blr 
 
-.global func_8037F91C
-func_8037F91C:
+.global HSD_ShadowEndRender
+HSD_ShadowEndRender:
 /* 8037F91C 0037C4FC  7C 08 02 A6 */	mflr r0
 /* 8037F920 0037C500  90 01 00 04 */	stw r0, 4(r1)
 /* 8037F924 0037C504  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -508,7 +508,7 @@ lbl_8037F94C:
 /* 8037F960 0037C540  A0 9F 00 04 */	lhz r4, 4(r31)
 /* 8037F964 0037C544  7F C3 F3 78 */	mr r3, r30
 /* 8037F968 0037C548  A0 BF 00 06 */	lhz r5, 6(r31)
-/* 8037F96C 0037C54C  4B FF FB 95 */	bl func_8037F500
+/* 8037F96C 0037C54C  4B FF FB 95 */	bl HSD_ShadowSetSize
 lbl_8037F970:
 /* 8037F970 0037C550  80 7F 00 00 */	lwz r3, 0(r31)
 /* 8037F974 0037C554  38 80 00 01 */	li r4, 1
@@ -516,7 +516,7 @@ lbl_8037F970:
 /* 8037F97C 0037C55C  4B FB D3 A1 */	bl func_8033CD1C
 /* 8037F980 0037C560  4B FB F8 F1 */	bl func_8033F270
 /* 8037F984 0037C564  7F C3 F3 78 */	mr r3, r30
-/* 8037F988 0037C568  48 00 02 15 */	bl func_8037FB9C
+/* 8037F988 0037C568  48 00 02 15 */	bl makeMatrix
 /* 8037F98C 0037C56C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8037F990 0037C570  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8037F994 0037C574  83 C1 00 10 */	lwz r30, 0x10(r1)
@@ -524,8 +524,8 @@ lbl_8037F970:
 /* 8037F99C 0037C57C  7C 08 03 A6 */	mtlr r0
 /* 8037F9A0 0037C580  4E 80 00 20 */	blr 
 
-.global func_8037F9A4
-func_8037F9A4:
+.global HSD_ShadowSetActive
+HSD_ShadowSetActive:
 /* 8037F9A4 0037C584  7C 08 02 A6 */	mflr r0
 /* 8037F9A8 0037C588  90 01 00 04 */	stw r0, 4(r1)
 /* 8037F9AC 0037C58C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -563,7 +563,7 @@ lbl_8037FA00:
 /* 8037FA20 0037C600  A0 85 00 04 */	lhz r4, 4(r5)
 /* 8037FA24 0037C604  7F C3 F3 78 */	mr r3, r30
 /* 8037FA28 0037C608  A0 A5 00 06 */	lhz r5, 6(r5)
-/* 8037FA2C 0037C60C  4B FF FA D5 */	bl func_8037F500
+/* 8037FA2C 0037C60C  4B FF FA D5 */	bl HSD_ShadowSetSize
 lbl_8037FA30:
 /* 8037FA30 0037C610  80 7E 00 08 */	lwz r3, 8(r30)
 /* 8037FA34 0037C614  4B FE 43 2D */	bl func_80363D60
@@ -579,8 +579,8 @@ lbl_8037FA44:
 /* 8037FA54 0037C634  7C 08 03 A6 */	mtlr r0
 /* 8037FA58 0037C638  4E 80 00 20 */	blr 
 
-.global func_8037FA5C
-func_8037FA5C:
+.global HSD_ShadowAddObject
+HSD_ShadowAddObject:
 /* 8037FA5C 0037C63C  7C 08 02 A6 */	mflr r0
 /* 8037FA60 0037C640  90 01 00 04 */	stw r0, 4(r1)
 /* 8037FA64 0037C644  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -629,8 +629,8 @@ lbl_8037FAF0:
 /* 8037FB00 0037C6E0  7C 08 03 A6 */	mtlr r0
 /* 8037FB04 0037C6E4  4E 80 00 20 */	blr 
 
-.global func_8037FB08
-func_8037FB08:
+.global HSD_ShadowDeleteObject
+HSD_ShadowDeleteObject:
 /* 8037FB08 0037C6E8  7C 08 02 A6 */	mflr r0
 /* 8037FB0C 0037C6EC  90 01 00 04 */	stw r0, 4(r1)
 /* 8037FB10 0037C6F0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -675,8 +675,8 @@ lbl_8037FB88:
 /* 8037FB94 0037C774  7C 08 03 A6 */	mtlr r0
 /* 8037FB98 0037C778  4E 80 00 20 */	blr 
 
-.global func_8037FB9C
-func_8037FB9C:
+.global makeMatrix
+makeMatrix:
 /* 8037FB9C 0037C77C  7C 08 02 A6 */	mflr r0
 /* 8037FBA0 0037C780  90 01 00 04 */	stw r0, 4(r1)
 /* 8037FBA4 0037C784  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -752,8 +752,8 @@ lbl_8037FC80:
 /* 8037FCA4 0037C884  7C 08 03 A6 */	mtlr r0
 /* 8037FCA8 0037C888  4E 80 00 20 */	blr 
 
-.global func_8037FCAC
-func_8037FCAC:
+.global HSD_ShadowSetViewingRect
+HSD_ShadowSetViewingRect:
 /* 8037FCAC 0037C88C  7C 08 02 A6 */	mflr r0
 /* 8037FCB0 0037C890  90 01 00 04 */	stw r0, 4(r1)
 /* 8037FCB4 0037C894  94 21 FF 50 */	stwu r1, -0xb0(r1)
@@ -908,8 +908,8 @@ lbl_8037FEAC:
 /* 8037FED4 0037CAB4  7C 08 03 A6 */	mtlr r0
 /* 8037FED8 0037CAB8  4E 80 00 20 */	blr 
 
-.global func_8037FEDC
-func_8037FEDC:
+.global HSD_ViewingRectInit
+HSD_ViewingRectInit:
 /* 8037FEDC 0037CABC  7C 08 02 A6 */	mflr r0
 /* 8037FEE0 0037CAC0  90 01 00 04 */	stw r0, 4(r1)
 /* 8037FEE4 0037CAC4  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -966,8 +966,8 @@ lbl_8037FF18:
 /* 8037FFAC 0037CB8C  7C 08 03 A6 */	mtlr r0
 /* 8037FFB0 0037CB90  4E 80 00 20 */	blr 
 
-.global func_8037FFB4
-func_8037FFB4:
+.global HSD_ViewingRectCheck
+HSD_ViewingRectCheck:
 /* 8037FFB4 0037CB94  7C 08 02 A6 */	mflr r0
 /* 8037FFB8 0037CB98  90 01 00 04 */	stw r0, 4(r1)
 /* 8037FFBC 0037CB9C  94 21 FF E8 */	stwu r1, -0x18(r1)
