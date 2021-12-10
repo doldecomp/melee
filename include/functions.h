@@ -8011,7 +8011,7 @@ void OSReport();
 // ? __OSGetSystemTime(?);
 // ? func_8034C474(?);
 // ? func_8034C4CC(?);
-// ? func_8034C668(?);
+// ? OSTicksToCalendarTime(?);
 // ? InitializeUART(?);
 // ? func_8034C8B4(?);
 // ? unknown(?);

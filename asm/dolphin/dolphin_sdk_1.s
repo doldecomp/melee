@@ -2003,8 +2003,8 @@ lbl_8034C63C:
 /* 8034C660 00349240  90 04 00 0C */	stw r0, 0xc(r4)
 /* 8034C664 00349244  4E 80 00 20 */	blr 
 
-.global func_8034C668
-func_8034C668:
+.global OSTicksToCalendarTime
+OSTicksToCalendarTime:
 /* 8034C668 00349248  7C 08 02 A6 */	mflr r0
 /* 8034C66C 0034924C  90 01 00 04 */	stw r0, 4(r1)
 /* 8034C670 00349250  94 21 FF C8 */	stwu r1, -0x38(r1)

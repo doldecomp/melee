@@ -15,7 +15,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/lb/lbcommand.o			\
 	$(BUILD_DIR)/asm/melee/lb/lbcollision.o  	    \
 	$(BUILD_DIR)/src/melee/lb/lblanguage.o  	    \
-	$(BUILD_DIR)/asm/melee/lb/lbtime.o  	        \
+	$(BUILD_DIR)/src/melee/lb/lbtime.o  	        \
 	$(BUILD_DIR)/asm/melee/lb/code_8000B074.o  	    \
 	$(BUILD_DIR)/asm/melee/lb/code_8000CE50.o  	    \
 	$(BUILD_DIR)/src/melee/lb/lbvector.o		 	\

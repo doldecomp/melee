@@ -5,7 +5,7 @@ ifneq ($(findstring MSYS,$(shell uname)),)
   WINDOWS := 1
 endif
 
-GENERATE_MAP ?= 1
+GENERATE_MAP ?= 0
 
 VERBOSE ?= 0
 
@@ -56,7 +56,7 @@ DEP_FILES := $(O_FILES:.o=.dep)
 
 MWCC_VERSION := 1.1
 ifeq ($(EPILOGUE_PROCESS),1)
-MWCC_EPI_VERSION := 1.2.5e
+MWCC_EPI_VERSION = 1.2.5e
 MWCC_EPI_EXE := mwcceppc.exe
 endif
 MWCC_LD_VERSION := 1.2.5
@@ -94,7 +94,7 @@ ifeq ($(GENERATE_MAP),1)
 endif
 CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -O4,p -enum int -nodefaults $(INCLUDES)
 
-$(EPILOGUE_DIR)/src/lb/lbtime.o: MWCC_EPI_VERSION := 1.2.5
+$(EPILOGUE_DIR)/src/melee/lb/lbtime.o: MWCC_EPI_VERSION := 1.2.5
 
 HOSTCFLAGS := -Wall -O3 -s
 
