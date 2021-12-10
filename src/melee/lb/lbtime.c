@@ -85,6 +85,7 @@ lbl_8000B00C:
     mtlr r0
     blr 
 }
+#pragma peephole on
 
 void func_8000B028(OSCalendarTime* td, unsigned int ticks) {
   OSTicksToCalendarTime(ticks * (long long)((*(unsigned int *)0x800000F8) >> 2), td);

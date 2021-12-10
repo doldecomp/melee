@@ -6,6 +6,7 @@
 
 extern void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td);
 extern s64 OSGetTime(void);
+extern s64 __div2i(s64, s64);
 
 u32 func_8000AEC8(u32 a, u32 b);
 u32 func_8000AEE4(u32 a, int b);
