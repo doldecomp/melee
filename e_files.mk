@@ -8,5 +8,6 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/tobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/aobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/fobj.o\
+	$(EPILOGUE_DIR)/src/sysdolphin/baselib/robj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/wobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/texp.o\
