@@ -3079,3 +3079,202 @@ lbl_80201C50:
 lbl_80201C58:
 /* 80201C58 001FE838  38 60 00 01 */	li r3, 1
 /* 80201C5C 001FE83C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E4DA8
+lbl_803E4DA8:
+    .4byte 0x00000001
+    .4byte 0x00010001
+    .4byte 0x00010001
+    .4byte 0x00020001
+    .4byte 0x00010003
+    .4byte 0x00010001
+    .4byte 0x00040001
+    .4byte 0x0001000B
+    .4byte 0x00010007
+    .4byte 0x000A0001
+    .4byte 0x00110006
+    .4byte 0x00010007
+    .4byte 0x00070001
+    .4byte 0x00070008
+    .4byte 0x00010007
+    .4byte 0x00090001
+    .4byte 0x0007000C
+    .4byte 0x00010013
+    .4byte 0x000D0001
+    .4byte 0x0012000E
+    .4byte 0x00010012
+    .4byte 0x000F0001
+    .4byte 0x00120010
+    .4byte 0x00010012
+    .4byte 0x00110001
+    .4byte 0x00120012
+    .4byte 0x00010012
+    .4byte 0x00130001
+    .4byte 0x00120014
+    .4byte 0x00010012
+    .4byte 0x00150001
+    .4byte 0x00120016
+    .4byte 0x00010012
+    .4byte 0x00170001
+    .4byte 0x00120000
+.global lbl_803E4E34
+lbl_803E4E34:
+	.4byte lbl_801FF3B4
+	.4byte lbl_801FF3E0
+	.4byte lbl_801FF3E8
+	.4byte lbl_801FF3EC
+    .4byte NULL
+	.4byte lbl_801FF5B4
+	.4byte lbl_801FF6CC
+	.4byte lbl_801FF6D4
+	.4byte lbl_801FF738
+    .4byte 0xC0000000
+	.4byte lbl_801FF3F0
+	.4byte lbl_801FF434
+	.4byte lbl_801FF43C
+	.4byte lbl_801FF440
+    .4byte NULL
+	.4byte lbl_801FF924
+	.4byte lbl_801FFAD4
+	.4byte func_801FFADC
+	.4byte lbl_80200070
+    .4byte NULL
+	.4byte lbl_80200074
+	.4byte lbl_8020014C
+	.4byte lbl_80200154
+	.4byte lbl_8020045C
+    .4byte NULL
+	.4byte lbl_801FF73C
+	.4byte lbl_801FF794
+	.4byte lbl_801FF79C
+	.4byte lbl_801FF7A0
+    .4byte NULL
+	.4byte lbl_801FF7A4
+	.4byte lbl_801FF8DC
+	.4byte lbl_801FF8E4
+	.4byte lbl_801FF920
+    .4byte NULL
+.global lbl_803E4EC0
+lbl_803E4EC0:
+    .4byte 0x2F477252
+    .4byte 0x632E6461
+    .4byte 0x74000000
+.global lbl_803E4ECC
+lbl_803E4ECC:
+    .4byte 0x00000003
+    .4byte lbl_803E4E34
+    .4byte lbl_803E4EC0
+	.4byte func_801FF168
+	.4byte func_801FF164
+	.4byte lbl_801FF298
+	.4byte lbl_801FF29C
+	.4byte lbl_801FF2C0
+	.4byte lbl_80201C50
+	.4byte lbl_80201C58
+    .4byte 0x00000004
+    .4byte lbl_803E4DA8
+    .4byte 0x00000017
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+.global lbl_803E4F24
+lbl_803E4F24:
+    .asciz "grrcruise.c"
+    .balign 4
+.global lbl_803E4F30
+lbl_803E4F30:
+    .asciz "gp->u.map.chikuwa"
+    .balign 4
+.global lbl_803E4F44
+lbl_803E4F44:
+    .asciz "dynamicsdata_shipflag"
+    .balign 4
+    .asciz "gp->u.scroll.int_jobj"
+    .balign 4
+    .asciz "gp->u.scroll.cam_jobj"
+    .balign 4
+    .asciz "gp->u.scroll.ctr_jobj"
+    .balign 4
+    .asciz "translate"
+    .balign 4
+.global lbl_803E4FB0
+lbl_803E4FB0:
+    .asciz "gp->u.scroll.anim_gobj"
+    .balign 4
+.global lbl_803E4FC8
+lbl_803E4FC8:
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+.global lbl_803E4FF0
+lbl_803E4FF0:
+    .4byte 0x00200029
+    .4byte 0x002A002B
+    .4byte 0x002C002D
+    .4byte 0x002E002F
+    .4byte 0x00300021
+    .4byte 0x00220023
+    .4byte 0x00240025
+    .4byte 0x00260027
+    .4byte 0x00280000
+    .4byte 0x00060004
+    .4byte NULL
+    .4byte 0x00080005
+    .4byte NULL
+    .4byte 0x0010000A
+    .4byte NULL
+    .4byte 0x000B0006
+    .4byte NULL
+    .4byte 0x000C0007
+    .4byte NULL
+    .4byte 0x000D0008
+    .4byte NULL
+    .4byte 0x000E0009
+    .4byte NULL
+    .4byte 0x000F0008
+    .4byte NULL
+    .4byte 0x0013000C
+    .4byte 0x00000001
+    .4byte 0x0014000D
+    .4byte 0x00000001
+    .4byte 0x0015000E
+    .4byte 0x00000001
+    .4byte 0x001E000F
+    .4byte 0x00000001
+    .4byte 0x00160010
+    .4byte 0x00000001
+    .4byte 0x00170011
+    .4byte 0x00000001
+    .4byte 0x00180012
+    .4byte 0x00000001
+    .4byte 0x00190013
+    .4byte 0x00000001
+    .4byte 0x001A0014
+    .4byte 0x00000001
+    .4byte 0x001B0015
+    .4byte 0x00000001
+    .4byte 0x001C0016
+    .4byte 0x00000001
+    .4byte 0x001D0017
+    .4byte 0x00000001
+    .4byte 0x67702D3E
+    .4byte 0x752E6D61
+    .4byte 0x702E7661
+    .4byte 0x6E697368
+    .4byte NULL
+    .4byte 0x67702D3E
+    .4byte 0x752E6D61
+    .4byte 0x702E7661
+    .4byte 0x6E697368
+    .4byte 0x5B695D2E
+    .4byte 0x6A6F626A
+    .4byte NULL
+    .4byte NULL

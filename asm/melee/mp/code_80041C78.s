@@ -31470,3 +31470,22 @@ lbl_803BF790:
     .asciz "mpisland.c"
     .balign 4
     .4byte NULL
+
+
+.section .bss, "wa"
+
+.global lbl_80458810
+lbl_80458810:
+	.skip 0x58
+
+.global lbl_80458868
+lbl_80458868:
+	.skip 0x20
+
+.global lbl_80458888
+lbl_80458888:
+	.skip 0x600
+
+.global lbl_80458E88
+lbl_80458E88:
+	.skip 0x28

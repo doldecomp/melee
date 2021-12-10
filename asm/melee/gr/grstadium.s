@@ -4789,3 +4789,295 @@ func_801D511C:
 /* 801D522C 001D1E0C  38 21 00 18 */	addi r1, r1, 0x18
 /* 801D5230 001D1E10  7C 08 03 A6 */	mtlr r0
 /* 801D5234 001D1E14  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E1248
+lbl_803E1248:
+    .4byte 0x00010003
+    .4byte 0x00000002
+    .4byte 0x00030000
+    .4byte 0x00030004
+    .4byte 0x00000004
+    .4byte 0x00050000
+    .4byte 0x00050006
+    .4byte 0x00000007
+    .4byte 0x00090000
+.global lbl_803E126C
+lbl_803E126C:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+	.4byte lbl_801D1290
+	.4byte lbl_801D1388
+	.4byte lbl_801D1390
+	.4byte lbl_801D13C4
+    .4byte NULL
+	.4byte lbl_801D13E0
+	.4byte lbl_801D1518
+	.4byte lbl_801D1520
+	.4byte lbl_801D156C
+    .4byte 0xC0000000
+	.4byte lbl_801D1840
+	.4byte lbl_801D19D0
+	.4byte lbl_801D19D8
+	.4byte lbl_801D19F8
+    .4byte NULL
+	.4byte lbl_801D1648
+	.4byte lbl_801D16D4
+	.4byte lbl_801D16DC
+	.4byte lbl_801D16FC
+    .4byte NULL
+	.4byte lbl_801D1570
+	.4byte lbl_801D15FC
+	.4byte lbl_801D1604
+	.4byte lbl_801D1624
+    .4byte NULL
+	.4byte lbl_801D1720
+	.4byte lbl_801D17E0
+	.4byte lbl_801D17E8
+	.4byte lbl_801D1808
+    .4byte NULL
+	.4byte lbl_801D1DE4
+	.4byte lbl_801D1E10
+	.4byte lbl_801D1E18
+	.4byte lbl_801D1E1C
+    .4byte NULL
+	.4byte lbl_801D1DE4
+	.4byte lbl_801D1E10
+	.4byte lbl_801D1E18
+	.4byte lbl_801D1E1C
+    .4byte NULL
+	.4byte lbl_801D1A38
+	.4byte lbl_801D1B40
+	.4byte lbl_801D1B48
+	.4byte lbl_801D1D84
+    .4byte NULL
+.global lbl_803E1334
+lbl_803E1334:
+    .4byte 0x00000010
+    .4byte lbl_803E126C
+    .4byte lbl_804D45E8
+	.4byte func_801D101C
+	.4byte func_801D1018
+	.4byte lbl_801D10C8
+	.4byte lbl_801D10CC
+	.4byte lbl_801D10F0
+	.4byte lbl_801D50B8
+	.4byte lbl_801D50C0
+    .4byte 0x00000001
+    .4byte lbl_803E1248
+    .4byte 0x00000006
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+.global lbl_803E138C
+lbl_803E138C:
+    .asciz "grpstadium.c"
+    .balign 4
+    .asciz "GrdPStadiumBG_OVDummy_mat6962_GrdPStadiumDummy_0_image_desc"
+    .balign 4
+    .asciz "no such image desc!\n"
+    .balign 4
+    .asciz "no such tobj!\n"
+    .balign 4
+.global jtbl_803E1400
+jtbl_803E1400:
+	.4byte lbl_801D2134
+	.4byte lbl_801D2134
+	.4byte lbl_801D21C0
+	.4byte lbl_801D21C0
+	.4byte lbl_801D21C0
+	.4byte lbl_801D21C0
+	.4byte lbl_801D21C0
+	.4byte lbl_801D2164
+	.4byte lbl_801D2194
+	.4byte lbl_801D2134
+	.4byte lbl_801D2134
+	.4byte lbl_801D2134
+	.4byte lbl_801D2134
+	.4byte lbl_801D2134
+	.4byte lbl_801D2134
+	.4byte lbl_801D21C0
+	.4byte lbl_801D21C0
+	.4byte lbl_801D2134
+.global jtbl_803E1448
+jtbl_803E1448:
+	.4byte lbl_801D2384
+	.4byte lbl_801D2390
+	.4byte lbl_801D2418
+	.4byte lbl_801D2418
+	.4byte lbl_801D2418
+	.4byte lbl_801D2418
+	.4byte lbl_801D2418
+	.4byte lbl_801D2438
+	.4byte lbl_801D2474
+	.4byte lbl_801D23B8
+	.4byte lbl_801D2408
+	.4byte lbl_801D2408
+	.4byte lbl_801D2408
+	.4byte lbl_801D2408
+	.4byte lbl_801D23E0
+	.4byte lbl_801D2418
+	.4byte lbl_801D2418
+.global jtbl_803E148C
+jtbl_803E148C:
+	.4byte lbl_801D25D0
+	.4byte lbl_801D2614
+	.4byte lbl_801D2968
+	.4byte lbl_801D2994
+	.4byte lbl_801D29C0
+	.4byte lbl_801D29EC
+	.4byte lbl_801D2A18
+	.4byte lbl_801D27A0
+	.4byte lbl_801D282C
+	.4byte lbl_801D2664
+	.4byte lbl_801D2704
+	.4byte lbl_801D2704
+	.4byte lbl_801D2704
+	.4byte lbl_801D2704
+	.4byte lbl_801D26B4
+	.4byte lbl_801D2748
+	.4byte lbl_801D2774
+	.4byte lbl_801D2924
+.global lbl_803E14D4
+lbl_803E14D4:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+.global lbl_803E14E8
+lbl_803E14E8:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_803E14FC
+lbl_803E14FC:
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte 0x000000FA
+    .4byte 0x000000A0
+    .4byte 0x000000FA
+    .4byte 0x000000A0
+    .4byte lbl_803E14D4
+    .4byte lbl_803E14E8
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3DCCCCCD
+    .4byte 0x47000000
+    .4byte 0x41F00000
+    .4byte 0x3FAE8A72
+.global lbl_803E1534
+lbl_803E1534:
+    .asciz "SIS_GrPStadiumData"
+    .balign 4
+    .asciz "vision_gobj"
+    .balign 4
+    .asciz "gp2->win_static_p"
+    .balign 4
+    .asciz "gp2->win_dynamic_p"
+    .balign 4
+    .asciz "00:00 00"
+    .balign 4
+    .asciz "%02d:%02d %02d"
+    .balign 4
+    .4byte 0x826F828C
+    .4byte 0x82818299
+    .4byte 0x82858292
+    .4byte 0x20256420
+    .4byte 0x82638285
+    .4byte 0x82868285
+    .4byte 0x82818294
+    .4byte 0x82858284
+    .4byte NULL
+    .4byte 0x436F6D70
+    .4byte 0x75746572
+    .4byte 0x20506C61
+    .4byte 0x79657220
+    .4byte 0x44656665
+    .4byte 0x61746564
+    .4byte NULL
+    .4byte 0x2163616E
+    .4byte 0x63656C66
+    .4byte 0x6C616700
+    .4byte 0x6D61705F
+    .4byte 0x676F626A
+    .4byte NULL
+.global lbl_803E15F0
+lbl_803E15F0:
+    .asciz "GrPs1.dat"
+    .balign 4
+.global lbl_803E15FC
+lbl_803E15FC:
+    .asciz "GrPs2.dat"
+    .balign 4
+.global lbl_803E1608
+lbl_803E1608:
+    .asciz "GrPs3.dat"
+    .balign 4
+.global lbl_803E1614
+lbl_803E1614:
+    .asciz "GrPs4.dat"
+    .balign 4
+    .4byte lbl_803E15F0
+    .4byte lbl_803E15FC
+    .4byte lbl_803E1608
+    .4byte lbl_803E1614
+    .4byte 0xC2480000
+    .4byte 0x40A00000
+    .4byte 0x42480000
+    .4byte 0x42C80000
+    .4byte 0x42480000
+    .4byte 0x40A00000
+    .4byte 0x42480000
+    .4byte 0x41E23D71
+    .4byte 0x428C0000
+    .4byte 0x40A00000
+    .4byte 0x41F00000
+    .4byte 0x42576666
+    .4byte 0x428C0000
+    .4byte 0x40A00000
+    .4byte 0xC1F00000
+    .4byte 0x40A00000
+    .4byte 0x42480000
+    .4byte 0x40A00000
+    .4byte 0xC2480000
+    .4byte 0x42C80000
+    .4byte 0xC2480000
+    .4byte 0x40A00000
+    .4byte 0xC2480000
+    .4byte 0x41E23D71
+    .4byte 0xC28C0000
+    .4byte 0x40A00000
+    .4byte 0xC1F00000
+    .4byte 0x42700000
+    .4byte 0xC28C0000
+    .4byte 0x40A00000
+    .4byte 0x41F00000
+    .4byte 0x41E23D71
+    .4byte 0xC2480000
+    .4byte 0x40A00000
+    .4byte 0x42480000
+    .4byte NULL
+.global jtbl_803E16C0
+jtbl_803E16C0:
+	.4byte lbl_801D45EC
+	.4byte lbl_801D4760
+	.4byte lbl_801D4778
+	.4byte lbl_801D4810
+	.4byte lbl_801D486C
+	.4byte lbl_801D4B1C
+	.4byte lbl_801D4EEC
+    .4byte NULL

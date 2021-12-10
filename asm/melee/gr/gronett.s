@@ -2359,3 +2359,95 @@ lbl_801E57A8:
 /* 801E57B0 001E2390  38 21 00 28 */	addi r1, r1, 0x28
 /* 801E57B4 001E2394  7C 08 03 A6 */	mtlr r0
 /* 801E57B8 001E2398  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E27E0
+lbl_803E27E0:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+	.4byte lbl_801E38DC
+	.4byte lbl_801E3920
+	.4byte lbl_801E3928
+	.4byte lbl_801E392C
+    .4byte NULL
+	.4byte lbl_801E41C8
+	.4byte lbl_801E43D8
+	.4byte lbl_801E43E0
+	.4byte lbl_801E502C
+    .4byte NULL
+	.4byte lbl_801E3CE4
+	.4byte lbl_801E3D98
+	.4byte lbl_801E3DA0
+	.4byte lbl_801E40E0
+    .4byte NULL
+	.4byte lbl_801E3A34
+	.4byte lbl_801E3C58
+	.4byte lbl_801E3C60
+	.4byte lbl_801E3CE0
+    .4byte 0xC0000000
+.global lbl_803E2858
+lbl_803E2858:
+    .4byte 0x00000014
+    .4byte lbl_803E27E0
+    .4byte lbl_804D4688
+	.4byte func_801E3738
+	.4byte func_801E3734
+	.4byte lbl_801E37C4
+	.4byte lbl_801E37C8
+	.4byte lbl_801E37EC
+	.4byte lbl_801E5760
+	.4byte lbl_801E5768
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+.global lbl_803E28B0
+lbl_803E28B0:
+    .asciz "gronett.c"
+    .balign 4
+.global lbl_803E28BC
+lbl_803E28BC:
+    .asciz "gp->u.map.subject"
+    .balign 4
+.global jtbl_803E28D0
+jtbl_803E28D0:
+	.4byte lbl_801E40B4
+	.4byte lbl_801E402C
+	.4byte lbl_801E404C
+	.4byte lbl_801E40B4
+	.4byte lbl_801E406C
+	.4byte lbl_801E408C
+	.4byte lbl_801E40AC
+	.4byte lbl_801E3FFC
+.global jtbl_803E28F0
+jtbl_803E28F0:
+	.4byte lbl_801E3FC4
+	.4byte lbl_801E3E78
+	.4byte lbl_801E3E9C
+	.4byte lbl_801E3FC4
+	.4byte lbl_801E3EE0
+	.4byte lbl_801E3F04
+	.4byte lbl_801E3FA0
+	.4byte lbl_801E3DF4
+.global lbl_803E2910
+lbl_803E2910:
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4

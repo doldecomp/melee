@@ -2787,3 +2787,46 @@ lbl_801F6854:
 /* 801F685C 001F343C  38 21 00 28 */	addi r1, r1, 0x28
 /* 801F6860 001F3440  7C 08 03 A6 */	mtlr r0
 /* 801F6864 001F3444  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E3FC4
+lbl_803E3FC4:
+    .asciz "grgreatbay.c"
+    .balign 4
+    .asciz "trans_jobj"
+    .balign 4
+.global lbl_803E3FE0
+lbl_803E3FE0:
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+.global lbl_803E4008
+lbl_803E4008:
+    .asciz "translate"
+    .balign 4
+.global jtbl_803E4014
+jtbl_803E4014:
+	.4byte lbl_801F5828
+	.4byte lbl_801F56B8
+	.4byte lbl_801F56CC
+	.4byte lbl_801F5828
+	.4byte lbl_801F56F0
+	.4byte lbl_801F56CC
+	.4byte lbl_801F5720
+	.4byte lbl_801F5720
+	.4byte lbl_801F5794
+	.4byte lbl_801F57DC
+	.4byte lbl_801F5828
+	.4byte lbl_801F5828
+	.4byte lbl_801F57F8
+.global lbl_803E4048
+lbl_803E4048:
+    .4byte 0x00200014
+    .4byte 0x00170012
+    .4byte 0x0016000F
+    .4byte 0x001D0010
+    .4byte 0x001C0011
+    .4byte 0x001B0013
+    .4byte 0x00270015
+    .4byte NULL

@@ -521,3 +521,63 @@ lbl_8020B854:
 lbl_8020B85C:
 /* 8020B85C 0020843C  38 60 00 01 */	li r3, 1
 /* 8020B860 00208440  4E 80 00 20 */	blr
+
+
+.section .data
+
+.global lbl_803E5DB0
+lbl_803E5DB0:
+	.4byte lbl_8020B348
+	.4byte lbl_8020B374
+	.4byte lbl_8020B37C
+	.4byte lbl_8020B380
+    .4byte NULL
+	.4byte lbl_8020B3C0
+	.4byte lbl_8020B424
+	.4byte lbl_8020B42C
+	.4byte lbl_8020B4D4
+    .4byte 0xC0000000
+	.4byte lbl_8020B384
+	.4byte lbl_8020B3B0
+	.4byte lbl_8020B3B8
+	.4byte lbl_8020B3BC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_803E5E00
+lbl_803E5E00:
+    .4byte 0x2F47724E
+    .4byte 0x5A722E64
+    .4byte 0x61740000
+.global lbl_803E5E0C
+lbl_803E5E0C:
+    .4byte 0x00000021
+    .4byte lbl_803E5DB0
+    .4byte lbl_803E5E00
+	.4byte func_8020B164
+	.4byte func_8020B160
+	.4byte lbl_8020B1D4
+	.4byte lbl_8020B1F4
+	.4byte lbl_8020B258
+	.4byte lbl_8020B854
+	.4byte lbl_8020B85C
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+.global lbl_803E5E64
+lbl_803E5E64:
+    .asciz "grzebesroute.c"
+    .balign 4
+    .4byte NULL
