@@ -97,7 +97,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/gricemt.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grinishie1.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grinishie2.o 	 	            \
-	$(BUILD_DIR)/asm/melee/gr/grkraid_.o 		            \
+	$(BUILD_DIR)/asm/melee/gr/grkraid.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grrcruise.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grshrine.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/gryorster.o 	 	            \

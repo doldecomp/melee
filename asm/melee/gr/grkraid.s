@@ -1283,3 +1283,86 @@ lbl_801FF154:
 lbl_801FF15C:
 /* 801FF15C 001FBD3C  38 60 00 01 */	li r3, 1
 /* 801FF160 001FBD40  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E4C78
+lbl_803E4C78:
+    .4byte 0x00000003
+    .4byte 0x000C0001
+    .4byte 0x0003000C
+    .4byte 0x00020003
+    .4byte 0x000C0003
+    .4byte 0x0003000C
+    .4byte 0x00040003
+    .4byte 0x000C0005
+    .4byte 0x0003000C
+.global lbl_803E4C9C
+lbl_803E4C9C:
+	.4byte lbl_801FE1B0
+	.4byte lbl_801FE1DC
+	.4byte lbl_801FE1E4
+	.4byte lbl_801FE1E8
+    .4byte NULL
+	.4byte lbl_801FE1EC
+	.4byte lbl_801FE2C8
+	.4byte lbl_801FE2D0
+	.4byte lbl_801FE35C
+    .4byte NULL
+	.4byte lbl_801FE360
+	.4byte lbl_801FE3A4
+	.4byte lbl_801FE3AC
+	.4byte lbl_801FE3B0
+    .4byte NULL
+	.4byte lbl_801FE3B4
+	.4byte lbl_801FE438
+	.4byte lbl_801FE440
+	.4byte lbl_801FE6D4
+    .4byte 0xC0000000
+	.4byte lbl_801FE818
+	.4byte lbl_801FE9F8
+	.4byte lbl_801FEA00
+	.4byte lbl_801FF14C
+    .4byte NULL
+.global lbl_803E4D00
+lbl_803E4D00:
+    .4byte 0x2F47724B
+    .4byte 0x722E6461
+    .4byte 0x74000000
+.global lbl_803E4D0C
+lbl_803E4D0C:
+    .4byte 0x00000009
+    .4byte lbl_803E4C9C
+    .4byte lbl_803E4D00
+	.4byte func_801FDFFC
+	.4byte func_801FDFF8
+	.4byte lbl_801FE094
+	.4byte lbl_801FE098
+	.4byte lbl_801FE0BC
+	.4byte lbl_801FF154
+	.4byte lbl_801FF15C
+    .4byte 0x00000001
+    .4byte lbl_803E4C78
+    .4byte 0x00000006
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+    .4byte 0x67726B72
+    .4byte 0x6169642E
+    .4byte 0x63000000
+.global lbl_803E4D70
+lbl_803E4D70:
+    .asciz "*** Req Effect Anime %d\n"
+    .balign 4
+.global lbl_803E4D8C
+lbl_803E4D8C:
+    .asciz "Kraid Hand Pos = %f\n"
+    .balign 4
+    .4byte NULL

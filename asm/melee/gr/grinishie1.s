@@ -2537,3 +2537,113 @@ lbl_801FCBB0:
 lbl_801FCBB8:
 /* 801FCBB8 001F9798  38 60 00 01 */	li r3, 1
 /* 801FCBBC 001F979C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E48C8
+lbl_803E48C8:
+    .4byte 0x000D0003
+    .4byte 0x0003000E
+    .4byte 0x0003000E
+    .4byte 0x000F0003
+    .4byte 0x000F0010
+    .4byte 0x00030010
+    .4byte 0x00110003
+    .4byte 0x00110012
+    .4byte 0x00030012
+    .4byte 0x00130003
+    .4byte 0x00130000
+.global lbl_803E48F4
+lbl_803E48F4:
+	.4byte lbl_801FAAA0
+	.4byte lbl_801FAACC
+	.4byte lbl_801FAAD4
+	.4byte lbl_801FAAD8
+    .4byte NULL
+	.4byte lbl_801FABB4
+	.4byte lbl_801FABF4
+	.4byte lbl_801FABFC
+	.4byte lbl_801FAC00
+    .4byte NULL
+	.4byte lbl_801FAC04
+	.4byte lbl_801FAC50
+	.4byte lbl_801FAC58
+	.4byte lbl_801FAD80
+    .4byte NULL
+	.4byte lbl_801FAADC
+	.4byte lbl_801FAB60
+	.4byte lbl_801FAB68
+	.4byte lbl_801FABB0
+    .4byte 0xC0000000
+.global lbl_803E4944
+lbl_803E4944:
+    .4byte 0x2F477249
+    .4byte 0x312E6461
+    .4byte 0x74000000
+.global lbl_803E4950
+lbl_803E4950:
+    .4byte 0x00000018
+    .4byte lbl_803E48F4
+    .4byte lbl_803E4944
+	.4byte func_801FA90C
+	.4byte func_801FA908
+	.4byte lbl_801FA984
+	.4byte lbl_801FA988
+	.4byte lbl_801FA9AC
+	.4byte lbl_801FCBB0
+	.4byte lbl_801FCBB8
+    .4byte 0x00000001
+    .4byte lbl_803E48C8
+    .4byte 0x00000007
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+.global lbl_803E49A8
+lbl_803E49A8:
+    .asciz "grinishie1.c"
+    .balign 4
+    .4byte 0x000D0003
+    .4byte 0x000E000E
+    .4byte 0x000F000F
+    .4byte 0x00100010
+    .4byte 0x00110011
+    .4byte 0x00120012
+    .4byte 0x00130013
+    .4byte 0x000B0014
+    .4byte 0x000C0015
+    .4byte 0x00010004
+    .4byte 0x00020005
+    .4byte 0x00030006
+    .4byte 0x00040007
+    .4byte 0x00050008
+    .4byte 0x00060009
+    .4byte 0x0007000A
+    .4byte 0x0008000B
+    .4byte 0x0009000C
+    .4byte 0x000A000D
+    .4byte 0x25733A25
+    .4byte 0x643A206F
+    .4byte 0x696F692E
+    .4byte 0x2E0A0000
+    .4byte 0x69213D48
+    .4byte 0x4154454E
+    .4byte 0x415F4150
+    .4byte 0x50454152
+    .4byte 0x5F434845
+    .4byte 0x434B4C4F
+    .4byte 0x4F500000
+.global lbl_803E4A30
+lbl_803E4A30:
+    .asciz "!mapgp->u.map.block[ix].hatena_gobj"
+    .balign 4
+.global lbl_803E4A54
+lbl_803E4A54:
+    .asciz "map_gobj"
+    .balign 4
