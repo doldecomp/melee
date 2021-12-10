@@ -843,3 +843,56 @@ func_80202B5C:
 func_80202B64:
 /* 80202B64 001FF744  38 60 00 01 */	li r3, 1
 /* 80202B68 001FF748  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E5198
+lbl_803E5198:
+	.4byte lbl_80202124
+	.4byte lbl_80202150
+	.4byte lbl_80202158
+	.4byte lbl_8020215C
+    .4byte NULL
+	.4byte lbl_802021AC
+	.4byte lbl_8020224C
+	.4byte lbl_80202254
+	.4byte lbl_802022A0
+    .4byte 0xC0000000
+.global lbl_803E51C0
+lbl_803E51C0:
+    .4byte 0x2F477259
+    .4byte 0x742E6461
+    .4byte 0x74000000
+.global lbl_803E51CC
+lbl_803E51CC:
+    .4byte 0x0000000B
+    .4byte lbl_803E5198
+    .4byte lbl_803E51C0
+	.4byte func_80201FA4
+	.4byte func_80201FA0
+	.4byte lbl_8020200C
+	.4byte lbl_80202010
+	.4byte lbl_80202034
+	.4byte func_80202B5C
+	.4byte func_80202B64
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+    .4byte 0x6772796F
+    .4byte 0x72737465
+    .4byte 0x722E6300
+.global lbl_803E5230
+lbl_803E5230:
+    .asciz "*** End Frame = %d\n"
+    .balign 4
+    .4byte NULL

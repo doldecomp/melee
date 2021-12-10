@@ -684,3 +684,110 @@ lbl_8021F830:
 lbl_8021F838:
 /* 8021F838 0021C418  38 60 00 01 */	li r3, 1
 /* 8021F83C 0021C41C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E83B8
+lbl_803E83B8:
+    .4byte 0x001D001E
+    .4byte 0x001F0020
+    .4byte 0x00210022
+    .4byte 0x00230024
+    .4byte 0x00250026
+    .4byte 0x00270028
+    .4byte 0x0029002A
+    .4byte 0x002B002C
+    .4byte 0x002D002E
+    .4byte 0x002F0030
+    .4byte 0x00310032
+    .4byte 0x00330034
+    .4byte 0x00350036
+    .4byte NULL
+    .4byte 0x00000015
+    .4byte 0x00000001
+    .4byte 0x00000016
+    .4byte 0x00000014
+    .4byte 0x00000002
+    .4byte 0x00000019
+    .4byte 0x00000003
+    .4byte 0x0000000E
+    .4byte 0x00000004
+    .4byte 0x00000005
+    .4byte 0x00000007
+    .4byte 0x00000006
+    .4byte 0x00000008
+    .4byte 0x00000009
+    .4byte 0x0000000A
+    .4byte 0x0000000B
+    .4byte 0x00000018
+    .4byte 0x0000000C
+    .4byte 0x0000000D
+    .4byte 0x0000000F
+    .4byte 0x00000010
+    .4byte 0x00000011
+    .4byte 0x00000012
+    .4byte 0x00000017
+    .4byte 0xFFFFFFFF
+.global lbl_803E8454
+lbl_803E8454:
+	.4byte lbl_8021F0D8
+	.4byte lbl_8021F170
+	.4byte lbl_8021F178
+	.4byte lbl_8021F17C
+    .4byte NULL
+	.4byte lbl_8021F180
+	.4byte lbl_8021F41C
+	.4byte lbl_8021F474
+	.4byte lbl_8021F4BC
+    .4byte 0xC0000000
+	.4byte lbl_8021F5C8
+	.4byte lbl_8021F5CC
+	.4byte lbl_8021F5D4
+	.4byte lbl_8021F5D8
+    .4byte NULL
+	.4byte lbl_8021F5DC
+	.4byte lbl_8021F618
+	.4byte lbl_8021F620
+	.4byte lbl_8021F624
+    .4byte NULL
+	.4byte lbl_8021F6F8
+	.4byte lbl_8021F6FC
+	.4byte lbl_8021F704
+	.4byte lbl_8021F708
+    .4byte NULL
+.global lbl_803E84B8
+lbl_803E84B8:
+    .4byte 0x2F477248
+    .4byte 0x652E6461
+    .4byte 0x74000000
+.global lbl_803E84C4
+lbl_803E84C4:
+    .4byte 0x00000042
+    .4byte lbl_803E8454
+    .4byte lbl_803E84B8
+	.4byte lbl_8021EF3C
+	.4byte func_8021EF38
+	.4byte lbl_8021EFBC
+	.4byte lbl_8021EFC0
+	.4byte lbl_8021EFE4
+	.4byte lbl_8021F830
+	.4byte lbl_8021F838
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+.global lbl_803E851C
+lbl_803E851C:
+    .asciz "grheal.c"
+    .balign 4
+    .asciz "*** Not found Next Player!(%d)\n"
+    .balign 4

@@ -1440,3 +1440,75 @@ lbl_802107C8:
 /* 802107D0 0020D3B0  38 21 00 28 */	addi r1, r1, 0x28
 /* 802107D4 0020D3B4  7C 08 03 A6 */	mtlr r0
 /* 802107D8 0020D3B8  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E6580
+lbl_803E6580:
+    .4byte 0x00000003
+    .4byte 0x00010001
+    .4byte 0x00030002
+.global lbl_803E658C
+lbl_803E658C:
+	.4byte lbl_8020F618
+	.4byte lbl_8020F644
+	.4byte lbl_8020F64C
+	.4byte lbl_8020F650
+    .4byte NULL
+	.4byte lbl_8020F6E4
+	.4byte lbl_8020F880
+	.4byte lbl_8020F888
+	.4byte lbl_80210058
+    .4byte NULL
+	.4byte lbl_8021005C
+	.4byte lbl_802100F4
+	.4byte lbl_802100FC
+	.4byte lbl_80210450
+    .4byte NULL
+	.4byte lbl_8020F654
+	.4byte lbl_8020F6B4
+	.4byte lbl_8020F6BC
+	.4byte lbl_8020F6E0
+    .4byte 0xC0000000
+.global lbl_803E65DC
+lbl_803E65DC:
+    .4byte 0x2F47724F
+    .4byte 0x6B2E6461
+    .4byte 0x74000000
+.global lbl_803E65E8
+lbl_803E65E8:
+    .4byte 0x0000001E
+    .4byte lbl_803E658C
+    .4byte lbl_803E65DC
+	.4byte lbl_8020F46C
+	.4byte func_8020F468
+	.4byte lbl_8020F4E4
+	.4byte lbl_8020F4E8
+	.4byte lbl_8020F524
+	.4byte lbl_80210780
+	.4byte lbl_80210788
+    .4byte 0x00000001
+    .4byte lbl_803E6580
+    .4byte 0x00000002
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+.global lbl_803E6640
+lbl_803E6640:
+    .asciz "groldkongo.c"
+    .balign 4
+.global lbl_803E6650
+lbl_803E6650:
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+.global lbl_803E6678
+lbl_803E6678:
+    .asciz "gp->u.taru.keep"
+    .balign 4

@@ -1499,3 +1499,113 @@ lbl_802182B4:
 lbl_802182BC:
 /* 802182BC 00214E9C  38 60 00 01 */	li r3, 1
 /* 802182C0 00214EA0  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E7940
+lbl_803E7940:
+	.4byte lbl_80217030
+	.4byte lbl_8021705C
+	.4byte lbl_80217064
+	.4byte lbl_80217068
+    .4byte NULL
+	.4byte lbl_802173D4
+	.4byte lbl_80217430
+	.4byte lbl_80217438
+	.4byte lbl_8021743C
+    .4byte NULL
+	.4byte lbl_8021707C
+	.4byte lbl_802171CC
+	.4byte lbl_802171D4
+	.4byte lbl_802173D0
+    .4byte 0xC0000000
+	.4byte lbl_80217648
+	.4byte lbl_802176B4
+	.4byte lbl_802176BC
+	.4byte lbl_80217CD0
+    .4byte NULL
+	.4byte lbl_80217CD4
+	.4byte lbl_80217D28
+	.4byte lbl_80217D30
+	.4byte lbl_80217DA4
+    .4byte NULL
+	.4byte lbl_80217450
+	.4byte lbl_802174E4
+	.4byte lbl_802174EC
+	.4byte lbl_80217644
+    .4byte NULL
+	.4byte lbl_80217DA8
+	.4byte lbl_80217DFC
+	.4byte lbl_80217E04
+	.4byte lbl_80217E78
+    .4byte NULL
+	.4byte lbl_80217E7C
+	.4byte lbl_80217E80
+	.4byte lbl_80217E88
+	.4byte lbl_80217E8C
+    .4byte NULL
+	.4byte lbl_80217E90
+	.4byte lbl_80217EE8
+	.4byte lbl_80217EF0
+	.4byte lbl_8021805C
+    .4byte NULL
+.global lbl_803E79F4
+lbl_803E79F4:
+    .4byte 0x2F477246
+    .4byte 0x7A2E6461
+    .4byte 0x74000000
+.global lbl_803E7A00
+lbl_803E7A00:
+    .4byte 0x0000001B
+    .4byte lbl_803E7940
+    .4byte lbl_803E79F4
+	.4byte lbl_80216E78
+	.4byte func_80216E74
+	.4byte lbl_80216F38
+	.4byte lbl_80216F3C
+	.4byte lbl_80216F40
+	.4byte lbl_802182B4
+	.4byte lbl_802182BC
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+    .4byte 0x6772666C
+    .4byte 0x61747A6F
+    .4byte 0x6E652E63
+    .4byte NULL
+.global lbl_803E7A68
+lbl_803E7A68:
+    .4byte 0x00000001
+    .4byte 0x0002FFFF
+    .4byte 0xFFFF0003
+    .4byte 0x00040005
+    .4byte 0x00060007
+    .4byte 0x00080009
+    .4byte 0x000A000B
+    .4byte 0x000C000D
+    .4byte 0x000E000F
+    .4byte 0x00100011
+    .4byte 0x0012FFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFF0013
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0x0014FFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFF0015
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL

@@ -471,3 +471,87 @@ func_8020740C:
 func_80207414:
 /* 80207414 00203FF4  38 60 00 01 */	li r3, 1
 /* 80207418 00203FF8  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E56B8
+lbl_803E56B8:
+    .4byte 0x00000002
+    .4byte 0x00010001
+    .4byte 0x00020002
+    .4byte 0x00020002
+    .4byte 0x00030003
+    .4byte 0x00020004
+    .4byte 0x00040002
+    .4byte 0x00050005
+    .4byte 0x00020006
+    .4byte 0x00060002
+    .4byte 0x00070007
+    .4byte 0x00020008
+    .4byte 0x00080002
+    .4byte 0x00090009
+    .4byte 0x0002000A
+    .4byte 0x000A0002
+    .4byte 0x000B000C
+    .4byte 0x00020010
+    .4byte 0x000D0002
+    .4byte 0x00110000
+.global lbl_803E5708
+lbl_803E5708:
+    .4byte func_80207130
+    .4byte func_8020715C
+    .4byte func_80207164
+    .4byte func_80207168
+    .4byte NULL
+    .4byte func_802073D0
+    .4byte func_802073FC
+    .4byte func_80207404
+    .4byte func_80207408
+    .4byte NULL
+    .4byte func_8020716C
+    .4byte func_802071BC
+    .4byte func_802071C4
+    .4byte func_802073AC
+    .4byte 0xC0000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_803E5758
+lbl_803E5758:
+    .4byte 0x2F477254
+    .4byte 0x652E6461
+    .4byte 0x74000000
+.global lbl_803E5764
+lbl_803E5764:
+    .4byte 0x00000001
+    .4byte lbl_803E5708
+    .4byte lbl_803E5758
+    .4byte func_80206E30
+    .4byte func_80206E2C
+    .4byte func_80207014
+    .4byte func_80207018
+    .4byte func_8020703C
+    .4byte func_8020740C
+    .4byte func_80207414
+    .4byte 0x00000001
+    .4byte lbl_803E56B8
+    .4byte 0x0000000D
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+    .4byte 0x67727465
+    .4byte 0x73742E63
+    .4byte NULL
+.global lbl_803E57C8
+lbl_803E57C8:
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
