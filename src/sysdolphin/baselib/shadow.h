@@ -22,8 +22,18 @@ typedef struct _HSD_Shadow {
     void* user_data; // 0x24
 } HSD_Shadow;
 
-/*typedef struct _HSD_ShadowDesc {
-
-} HSD_ShadowDesc;*/
+typedef struct _HSD_ViewingRect {
+    Vec origin;
+    Vec up_v;
+    Vec right_v;
+    Vec eye_v;
+    Vec eye_vn;
+    f32 distance;
+    f32 top;
+    f32 bottom;
+    f32 left;
+    f32 right;
+    f32 perspective;
+} HSD_ViewingRect;
 
 #endif
