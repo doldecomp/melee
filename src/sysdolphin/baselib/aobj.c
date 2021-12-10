@@ -323,9 +323,9 @@ asm HSD_AObj* HSD_AObjAlloc(void)
 {
     nofralloc
     /* 8036453C 0036111C  7C 08 02 A6 */	mflr r0
-    /* 80364540 00361120  3C 60 80 4C */	lis r3, lbl_804C0880@ha
+    /* 80364540 00361120  3C 60 80 4C */	lis r3, aobj_alloc_data@ha
     /* 80364544 00361124  90 01 00 04 */	stw r0, 4(r1)
-    /* 80364548 00361128  38 63 08 80 */	addi r3, r3, lbl_804C0880@l
+    /* 80364548 00361128  38 63 08 80 */	addi r3, r3, aobj_alloc_data@l
     /* 8036454C 0036112C  94 21 FF F0 */	stwu r1, -0x10(r1)
     /* 80364550 00361130  93 E1 00 0C */	stw r31, 0xc(r1)
     /* 80364554 00361134  48 01 66 75 */	bl HSD_ObjAlloc
