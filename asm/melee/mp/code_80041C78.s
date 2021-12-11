@@ -28968,6 +28968,52 @@ lbl_8005B4A0:
 /* 8005B4B4 00058094  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B73E8
+lbl_803B73E8:
+    .4byte 0x00000001
+    .4byte 0x806060FF
+    .4byte 0x00000002
+    .4byte 0x40FF40FF
+    .4byte 0x00000003
+    .4byte 0xC06060FF
+    .4byte 0x00000004
+    .4byte 0xC08040FF
+    .4byte 0x00000005
+    .4byte 0x404040FF
+    .4byte 0x00000006
+    .4byte 0x604040FF
+    .4byte 0x00000007
+    .4byte 0xC0C060FF
+    .4byte 0x00000008
+    .4byte 0xFFFF60FF
+    .4byte 0x00000009
+    .4byte 0xC0FFC0FF
+    .4byte 0x0000000A
+    .4byte 0x4040FFFF
+    .4byte 0x0000000B
+    .4byte 0x40FFFFFF
+    .4byte 0x0000000C
+    .4byte 0xC0C0FFFF
+    .4byte 0x0000000D
+    .4byte 0xC0FF40FF
+    .4byte 0x0000000E
+    .4byte 0xFFFFFFFF
+    .4byte 0x0000000F
+    .4byte 0xC0C0FFFF
+    .4byte 0x00000010
+    .4byte 0xC0C0C0FF
+    .4byte 0x00000011
+    .4byte 0x0C0C0CFF
+    .4byte 0x00000012
+    .4byte 0xFFFFC0FF
+    .4byte 0x00000013
+    .4byte 0xFF0505FF
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803BD270
@@ -31539,6 +31585,82 @@ lbl_804D3990:
 lbl_804D3998:
     .asciz "!loop"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6488
+lbl_804D6488:
+	.skip 0x4
+.global lbl_804D648C
+lbl_804D648C:
+	.skip 0x4
+.global lbl_804D6490
+lbl_804D6490:
+	.skip 0x4
+.global lbl_804D6494
+lbl_804D6494:
+	.skip 0x4
+.global lbl_804D6498
+lbl_804D6498:
+	.skip 0x4
+.global lbl_804D649C
+lbl_804D649C:
+	.skip 0x4
+.global lbl_804D64A0
+lbl_804D64A0:
+	.skip 0x4
+.global lbl_804D64A4
+lbl_804D64A4:
+	.skip 0x4
+.global lbl_804D64A8
+lbl_804D64A8:
+	.skip 0x4
+.global lbl_804D64AC
+lbl_804D64AC:
+	.skip 0x4
+.global lbl_804D64B0
+lbl_804D64B0:
+	.skip 0x4
+.global lbl_804D64B4
+lbl_804D64B4:
+	.skip 0x4
+.global lbl_804D64B8
+lbl_804D64B8:
+	.skip 0x4
+.global lbl_804D64BC
+lbl_804D64BC:
+	.skip 0x4
+.global lbl_804D64C0
+lbl_804D64C0:
+	.skip 0x4
+.global lbl_804D64C4
+lbl_804D64C4:
+	.skip 0x4
+.global lbl_804D64C8
+lbl_804D64C8:
+	.skip 0x4
+.global lbl_804D64CC
+lbl_804D64CC:
+	.skip 0x4
+.global lbl_804D64D0
+lbl_804D64D0:
+	.skip 0x4
+.global lbl_804D64D4
+lbl_804D64D4:
+	.skip 0x4
+.global lbl_804D64D8
+lbl_804D64D8:
+	.skip 0x4
+.global lbl_804D64DC
+lbl_804D64DC:
+	.skip 0x4
+.global lbl_804D64E0
+lbl_804D64E0:
+	.skip 0x4
+.global lbl_804D64E4
+lbl_804D64E4:
+	.skip 0x4
 
 
 .section .sdata2

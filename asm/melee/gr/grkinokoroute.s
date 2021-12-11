@@ -1414,6 +1414,44 @@ lbl_8020879C:
 /* 802087AC 0020538C  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B82E8
+lbl_803B82E8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B82F4
+lbl_803B82F4:
+    .4byte 0x00010002
+    .4byte 0x00030004
+    .4byte 0x00050006
+    .4byte 0x00070008
+    .4byte 0x0009000A
+    .4byte 0x000B000C
+    .4byte 0x000D000E
+    .4byte 0x000F0010
+    .4byte 0x00110012
+    .4byte 0x00130014
+    .4byte 0x00150016
+    .4byte 0x00170018
+    .4byte 0x0019001A
+    .4byte 0x001B001C
+    .4byte 0x001D001E
+    .4byte 0x001F0020
+    .4byte 0x00210022
+    .4byte 0x00230024
+    .4byte 0x00250026
+    .4byte 0x00270028
+    .4byte 0x0029002A
+    .4byte 0x002B002C
+    .4byte 0x002D002E
+    .4byte 0x002F0030
+    .4byte 0x00310032
+    .4byte 0x00330000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E57F0

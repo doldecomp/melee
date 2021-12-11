@@ -4313,3 +4313,14 @@ lbl_8023B0E0:
 /* 8023B0F0 00237CD0  7C 08 03 A6 */	mtlr r0
 /* 8023B0F4 00237CD4  4E 80 00 20 */	blr 
 
+
+.section .rodata
+
+.global lbl_803B8510
+lbl_803B8510:
+    .4byte lbl_803ED568
+    .4byte lbl_803ED574
+    .4byte lbl_803ED580
+    .4byte lbl_803ED58C
+    .4byte lbl_803ED598
+    .4byte lbl_803ED5A4

@@ -1442,6 +1442,22 @@ lbl_802107C8:
 /* 802107D8 0020D3B8  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8408
+lbl_803B8408:
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte 0x00000169
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x000000B4
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E6580

@@ -1608,3 +1608,35 @@ TRKTargetSetInputPendingPtr:
 /* 8032A61C 003271FC  38 84 4B F0 */	addi r4, r4, lbl_804A4BF0@l
 /* 8032A620 00327200  90 64 00 A0 */	stw r3, 0xa0(r4)
 /* 8032A624 00327204  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B93C0
+lbl_803B93C0:
+    .4byte 0x00000000
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000001
+    .4byte 0x00000001
+.global lbl_803B93D0
+lbl_803B93D0:
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+.global lbl_803B93E4
+lbl_803B93E4:
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+.global lbl_803B93F8
+lbl_803B93F8:
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x60000000
+    .4byte 0x00000000

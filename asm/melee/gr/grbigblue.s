@@ -11755,6 +11755,62 @@ lbl_801EFC54:
 /* 801EFC64 001EC844  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8108
+lbl_803B8108:
+    .4byte 0xBF800000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B8114
+lbl_803B8114:
+    .4byte 0x42600000
+    .4byte 0x42200000
+    .4byte 0x41C00000
+.global lbl_803B8120
+lbl_803B8120:
+    .4byte 0x0000000C
+    .4byte 0x00000015
+    .4byte 0x0000001F
+    .4byte 0x00000019
+    .4byte 0x00000004
+.global lbl_803B8134
+lbl_803B8134:
+    .4byte 0x00000021
+    .4byte 0x00000023
+    .4byte 0x00000026
+    .4byte 0x00000027
+    .4byte 0x00000028
+    .4byte 0x00000024
+    .4byte 0x00000025
+    .4byte 0x00000029
+    .4byte 0x0000002A
+    .4byte 0x0000002B
+    .4byte 0x0000002C
+    .4byte 0x0000002D
+    .4byte 0x0000002E
+    .4byte 0x0000002F
+    .4byte 0x00000030
+    .4byte 0x00000031
+    .4byte 0x00000032
+    .4byte 0x00000033
+    .4byte 0x00000034
+    .4byte 0x00000035
+    .4byte 0x00000036
+    .4byte 0x00000037
+    .4byte 0x00000038
+    .4byte 0x00000039
+    .4byte 0x0000003A
+    .4byte 0x0000003B
+    .4byte 0x0000003C
+    .4byte 0x0000003D
+    .4byte 0x0000003E
+    .4byte 0x0000003F
+    .4byte 0x00000040
+    .4byte 0x00000041
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E2938

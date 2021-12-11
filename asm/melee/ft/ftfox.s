@@ -6525,3 +6525,20 @@ func_800EACD8:
 /* 800EAD58 000E7938  38 21 00 40 */	addi r1, r1, 0x40
 /* 800EAD5C 000E793C  7C 08 03 A6 */	mtlr r0
 /* 800EAD60 000E7940  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D3D80
+lbl_804D3D80:
+    .4byte 0x0001AE17
+    .4byte 0x0001AE1A
+.global lbl_804D3D88
+lbl_804D3D88:
+    .4byte 0x00018703
+    .4byte 0x00018706
+.global lbl_804D3D90
+lbl_804D3D90:
+    .asciz "0"
+    .balign 4
+    .4byte NULL

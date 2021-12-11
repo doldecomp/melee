@@ -2216,3 +2216,23 @@ _HSD_RObjForgetMemory:
 /* 8037CD74 00379954  90 0D C0 48 */	stw r0, lbl_804D76E8@sda21(r13)
 /* 8037CD78 00379958  90 0D C0 4C */	stw r0, lbl_804D76EC@sda21(r13)
 /* 8037CD7C 0037995C  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B9580
+lbl_803B9580:
+	.float 0
+    .float 0
+    .float 0
+.global lbl_803B958C
+lbl_803B958C:
+	.float 1
+    .float 1
+    .float 1
+.global lbl_803B9598
+lbl_803B9598:
+	.float 0
+    .float 1
+    .float 0
+    .4byte NULL

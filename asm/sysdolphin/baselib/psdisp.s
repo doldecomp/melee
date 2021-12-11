@@ -4581,3 +4581,21 @@ lbl_803A38C4:
 /* 803A3914 003A04F4  38 21 09 A0 */	addi r1, r1, 0x9a0
 /* 803A3918 003A04F8  7C 08 03 A6 */	mtlr r0
 /* 803A391C 003A04FC  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B9628
+lbl_803B9628:
+    .4byte 0x3F800000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000

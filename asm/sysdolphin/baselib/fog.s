@@ -611,3 +611,25 @@ func_8037E178:
 /* 8037E1B0 0037AD90  38 21 00 08 */	addi r1, r1, 8
 /* 8037E1B4 0037AD94  7C 08 03 A6 */	mtlr r0
 /* 8037E1B8 0037AD98  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B95A8
+lbl_803B95A8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000

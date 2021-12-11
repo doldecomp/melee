@@ -5691,3 +5691,23 @@ func_803737F4:
 /* 80373894 00370474  38 21 00 10 */	addi r1, r1, 0x10
 /* 80373898 00370478  7C 08 03 A6 */	mtlr r0
 /* 8037389C 0037047C  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B94B8
+lbl_803B94B8:
+	.float 1
+    .float 1
+    .float 1
+.global lbl_803B94C4
+lbl_803B94C4:
+	.4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_803B94D0
+lbl_803B94D0:
+	.float 1
+    .float 1
+    .float 1
+    .4byte NULL

@@ -7149,6 +7149,30 @@ lbl_801E3018:
 /* 801E3028 001DFC08  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8090
+lbl_803B8090:
+    .4byte 0x3F800000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B809C
+lbl_803B809C:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B80A8
+lbl_803B80A8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B80B4
+lbl_803B80B4:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E1D38

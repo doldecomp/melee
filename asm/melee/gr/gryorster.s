@@ -845,6 +845,22 @@ func_80202B64:
 /* 80202B68 001FF748  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B82A8
+lbl_803B82A8:
+    .4byte 0x0000000A
+    .4byte 0x0000000B
+    .4byte 0x0000000C
+    .4byte 0x0000000D
+    .4byte 0x0000000E
+    .4byte 0x0000000F
+    .4byte 0x00000010
+    .4byte 0x00000011
+    .4byte 0x00000012
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E5198

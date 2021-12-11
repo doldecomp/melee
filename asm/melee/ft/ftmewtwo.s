@@ -4396,3 +4396,17 @@ lbl_80148B60:
 /* 80148B6C 0014574C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80148B70 00145750  7C 08 03 A6 */	mtlr r0
 /* 80148B74 00145754  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B75D0
+lbl_803B75D0:
+    .4byte 0x00000000
+    .4byte 0x40E00000
+    .4byte 0x00000000
+.global lbl_803B75DC
+lbl_803B75DC:
+    .4byte 0x00000000
+    .4byte 0x40E00000
+    .4byte 0x00000000

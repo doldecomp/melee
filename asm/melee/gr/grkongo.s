@@ -3671,6 +3671,30 @@ lbl_801D848C:
 /* 801D849C 001D507C  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7FB0
+lbl_803B7FB0:
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte 0x00000169
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x000000B4
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B7FD4
+lbl_803B7FD4:
+    .4byte 0x00000007
+    .4byte 0x00000004
+    .4byte 0x00000008
+    .4byte 0x00000005
+    .4byte 0x00000009
+    .4byte 0x00000006
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E16E0

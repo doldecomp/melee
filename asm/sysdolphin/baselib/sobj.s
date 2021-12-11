@@ -1359,3 +1359,17 @@ func_803A55DC:
 /* 803A578C 003A236C  38 21 00 90 */	addi r1, r1, 0x90
 /* 803A5790 003A2370  7C 08 03 A6 */	mtlr r0
 /* 803A5794 003A2374  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B9658
+lbl_803B9658:
+	.float 0
+    .float 0
+    .float 1
+.global lbl_803B9664
+lbl_803B9664:
+	.float 0
+    .float 0
+    .float 0

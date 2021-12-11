@@ -4160,3 +4160,13 @@ func_8023EA08:
 /* 8023EA20 0023B600  38 21 00 08 */	addi r1, r1, 8
 /* 8023EA24 0023B604  7C 08 03 A6 */	mtlr r0
 /* 8023EA28 0023B608  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B8528
+lbl_803B8528:
+    .4byte 0xBF000000
+    .4byte 0x3F333333
+    .4byte 0x00000000
+    .4byte 0x00000000

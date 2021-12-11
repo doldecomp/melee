@@ -1244,6 +1244,16 @@ func_8015CC14:
 /* 8015CC30 00159810  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B75E8
+lbl_803B75E8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803D49C0
@@ -1264,3 +1274,15 @@ jtbl_803D4A2C:
 	.4byte lbl_8015C5CC
 	.4byte lbl_8015C5D4
 	.4byte lbl_8015C5D4
+
+
+.section .sdata
+
+.global lbl_804D3ED0
+lbl_804D3ED0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3ED8
+lbl_804D3ED8:
+    .asciz "jobj"
+    .balign 4

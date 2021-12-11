@@ -1196,3 +1196,12 @@ lbl_800E08B8:
 /* 800E08C0 000DD4A0  38 21 00 18 */	addi r1, r1, 0x18
 /* 800E08C4 000DD4A4  7C 08 03 A6 */	mtlr r0
 /* 800E08C8 000DD4A8  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D3D78
+lbl_804D3D78:
+    .asciz "0"
+    .balign 4
+    .4byte NULL

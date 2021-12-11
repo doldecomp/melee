@@ -6846,3 +6846,32 @@ lbl_8014222C:
 /* 801422DC 0013EEBC  38 21 00 20 */	addi r1, r1, 0x20
 /* 801422E0 0013EEC0  7C 08 03 A6 */	mtlr r0
 /* 801422E4 0013EEC4  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D3E80
+lbl_804D3E80:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3E88
+lbl_804D3E88:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3E90
+lbl_804D3E90:
+    .asciz "mtx"
+    .balign 4
+    .4byte NULL
+.global lbl_804D3E98
+lbl_804D3E98:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3EA0
+lbl_804D3EA0:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3EA8
+lbl_804D3EA8:
+    .asciz "scale"
+    .balign 4

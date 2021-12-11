@@ -35754,3 +35754,99 @@ func_8010D740:
 /* 8010D768 0010A348  38 21 00 08 */	addi r1, r1, 8
 /* 8010D76C 0010A34C  7C 08 03 A6 */	mtlr r0
 /* 8010D770 0010A350  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B7548
+lbl_803B7548:
+	.float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .4byte NULL
+.global lbl_803B7570
+lbl_803B7570:
+	.float 0
+    .float 4
+    .float 0
+.global lbl_803B757C
+lbl_803B757C:
+	.float 0
+    .float 4
+    .float 0
+
+
+.section .sdata
+
+.global lbl_804D3D98
+lbl_804D3D98:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3DA0
+lbl_804D3DA0:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3DA8
+lbl_804D3DA8:
+    .asciz "mtx"
+    .balign 4
+.global lbl_804D3DAC
+lbl_804D3DAC:
+    .asciz "0"
+    .balign 4
+.global lbl_804D3DB0
+lbl_804D3DB0:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+.global lbl_804D3DB8
+lbl_804D3DB8:
+    .4byte 0x0001AE17
+    .4byte 0x0001AE1A
+.global lbl_804D3DC0
+lbl_804D3DC0:
+    .4byte 0x00018703
+    .4byte 0x00018706
+.global lbl_804D3DC8
+lbl_804D3DC8:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+.global lbl_804D3DD0
+lbl_804D3DD0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3DD8
+lbl_804D3DD8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3DE0
+lbl_804D3DE0:
+    .asciz "scale"
+    .balign 4
+.global lbl_804D3DE8
+lbl_804D3DE8:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3DF0
+lbl_804D3DF0:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3DF8
+lbl_804D3DF8:
+    .asciz "scale"
+    .balign 4
+.global lbl_804D3E00
+lbl_804D3E00:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3E08
+lbl_804D3E08:
+    .asciz "jobj"
+    .balign 4

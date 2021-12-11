@@ -7874,3 +7874,23 @@ func_8011B4E4:
 /* 8011B510 001180F0  38 21 00 08 */	addi r1, r1, 8
 /* 8011B514 001180F4  7C 08 03 A6 */	mtlr r0
 /* 8011B518 001180F8  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B7598
+lbl_803B7598:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B75A4
+lbl_803B75A4:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B75B0
+lbl_803B75B0:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000

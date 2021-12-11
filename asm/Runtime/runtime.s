@@ -495,3 +495,12 @@ lbl_80322F08:
 lbl_80322F18:
 /* 80322F18 0031FAF8  38 21 00 10 */	addi r1, r1, 0x10
 /* 80322F1C 0031FAFC  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B8B90
+lbl_803B8B90:
+	.double 0
+    .double 4.294967296E9
+    .double 2.147483648E9

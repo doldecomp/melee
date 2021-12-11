@@ -5147,3 +5147,13 @@ lbl_80114788:
 /* 801147B4 00111394  38 21 00 20 */	addi r1, r1, 0x20
 /* 801147B8 00111398  7C 08 03 A6 */	mtlr r0
 /* 801147BC 0011139C  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B7588
+lbl_803B7588:
+	.float 1.8
+    .float 0
+    .float 0
+    .4byte NULL

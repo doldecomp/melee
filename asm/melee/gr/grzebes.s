@@ -5130,6 +5130,58 @@ func_801DCCC8:
 /* 801DCCF8 001D98D8  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7FF0
+lbl_803B7FF0:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x41033333
+    .4byte 0xC091999A
+    .4byte 0x00000000
+    .4byte 0x40F2E148
+    .4byte 0x40200000
+    .4byte 0x00000000
+    .4byte 0x41096C8B
+    .4byte 0x3F9B851F
+    .4byte 0x00000000
+    .4byte 0x41B9353F
+    .4byte 0x3F9A7EFA
+    .4byte 0x00000000
+.global lbl_803B802C
+lbl_803B802C:
+    .4byte 0x41C0CCCD
+    .4byte 0xC0933333
+    .4byte 0x00000000
+.global lbl_803B8038
+lbl_803B8038:
+    .4byte 0x41C06666
+    .4byte 0x400CCCCD
+    .4byte 0x00000000
+.global lbl_803B8044
+lbl_803B8044:
+    .4byte 0x3F800000
+    .4byte 0x3F8CCCCD
+    .4byte 0x3F800000
+    .4byte 0x3F99999A
+    .4byte 0x3F8CCCCD
+    .4byte 0x3F800000
+    .4byte 0x3F800000
+    .4byte 0x40F2E148
+    .4byte 0x40200000
+    .4byte 0x00000000
+    .4byte 0x41C06666
+    .4byte 0x400CCCCD
+    .4byte 0x00000000
+    .4byte 0x41033333
+    .4byte 0xC091999A
+    .4byte 0x00000000
+    .4byte 0x41C0CCCD
+    .4byte 0xC0933333
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E1A10

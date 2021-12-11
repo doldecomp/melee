@@ -3727,3 +3727,15 @@ func_8012B668:
 /* 8012B6DC 001282BC  38 21 00 20 */	addi r1, r1, 0x20
 /* 8012B6E0 001282C0  7C 08 03 A6 */	mtlr r0
 /* 8012B6E4 001282C4  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D3E30
+lbl_804D3E30:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3E38
+lbl_804D3E38:
+    .asciz "jobj"
+    .balign 4

@@ -4580,3 +4580,15 @@ lbl_80128304:
 /* 80128320 00124F00  38 21 00 08 */	addi r1, r1, 8
 /* 80128324 00124F04  7C 08 03 A6 */	mtlr r0
 /* 80128328 00124F08  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D3E20
+lbl_804D3E20:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3E28
+lbl_804D3E28:
+    .asciz "jobj"
+    .balign 4

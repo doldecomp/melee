@@ -2455,6 +2455,26 @@ lbl_8021C748:
 /* 8021C74C 0021932C  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8480
+lbl_803B8480:
+    .4byte 0x3F800000
+    .4byte 0x3F800000
+    .4byte 0x3F800000
+.global lbl_803B848C
+lbl_803B848C:
+    .4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000
+.global lbl_803B8498
+lbl_803B8498:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E7EB0

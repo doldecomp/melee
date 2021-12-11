@@ -5401,6 +5401,19 @@ lbl_804D39BC:
     .4byte NULL
 
 
+.section .sbss
+
+.global lbl_804D64E8
+lbl_804D64E8:
+	.skip 0x4
+.global lbl_804D64EC
+lbl_804D64EC:
+	.skip 0x4
+.global lbl_804D64F0
+lbl_804D64F0:
+	.skip 0x8
+
+
 .section .sdata2
 
 .global lbl_804D8168

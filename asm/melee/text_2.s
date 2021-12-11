@@ -45984,6 +45984,78 @@ lbl_801CAF9C:
 /* 801CAFB8 001C7B98  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7D68
+lbl_803B7D68:
+	.float 0
+    .float 0
+    .float 1
+.global lbl_803B7D74
+lbl_803B7D74:
+	.float 0
+    .float 0
+    .float 0
+.global lbl_803B7D80
+lbl_803B7D80:
+    .4byte 0x00000002
+    .4byte 0x00000003
+    .4byte 0x00000004
+    .4byte 0x00000005
+    .4byte 0x00000006
+    .4byte 0x00000007
+    .4byte 0x00000008
+    .4byte 0x00000009
+    .4byte 0x0000000A
+    .4byte 0x0000000B
+    .4byte 0x0000000C
+    .4byte 0x0000000D
+    .4byte 0x0000000E
+    .4byte 0x0000000F
+    .4byte 0x00000010
+    .4byte 0x00000011
+    .4byte 0x00000012
+    .4byte 0x00000013
+    .4byte 0x00000014
+    .4byte 0x00000015
+    .4byte 0x00000018
+    .4byte 0x00000019
+    .4byte 0x0000001C
+    .4byte 0x0000001D
+    .4byte 0x0000001E
+    .4byte 0x00000024
+    .4byte 0x00000025
+.global lbl_803B7DEC
+lbl_803B7DEC:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000006
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B7E0C
+lbl_803B7E0C:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x3F800000
+    .4byte 0x3F800000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803DA788

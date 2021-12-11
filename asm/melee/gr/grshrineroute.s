@@ -3022,6 +3022,36 @@ lbl_8020B14C:
 /* 8020B15C 00207D3C  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8360
+lbl_803B8360:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B836C
+lbl_803B836C:
+    .4byte 0x00000000
+    .4byte 0x42C80000
+    .4byte 0x00000000
+.global lbl_803B8378
+lbl_803B8378:
+    .4byte 0x00000000
+    .4byte 0x42C80000
+    .4byte 0x00000000
+.global lbl_803B8384
+lbl_803B8384:
+    .4byte 0xC38EF70A
+    .4byte 0xC362199A
+    .4byte 0x00000000
+.global lbl_803B8390
+lbl_803B8390:
+    .4byte 0xC3218F5C
+    .4byte 0xC362199A
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E58E0

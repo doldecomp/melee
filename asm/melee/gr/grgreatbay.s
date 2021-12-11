@@ -2789,6 +2789,36 @@ lbl_801F6854:
 /* 801F6864 001F3444  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B81C8
+lbl_803B81C8:
+    .4byte 0x3F7D70A4
+    .4byte 0x420EE148
+    .4byte 0x00000000
+.global lbl_803B81D4
+lbl_803B81D4:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000001
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0xBF800000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x80000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E3FC4

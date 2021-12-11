@@ -1285,6 +1285,16 @@ lbl_801FF15C:
 /* 801FF160 001FBD40  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8278
+lbl_803B8278:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E4C78
