@@ -11,43 +11,12 @@ extern void* lbl_804D7604; // chan_chan
 extern void* lbl_804D760C;
 
 
-// This function isn't matching because the externs. Once split properly, it will match.
-#ifdef NON_MATCHING
 void HSD_RenderInitAllocData(void)
 {
     HSD_ObjAllocInit(&render_alloc_data, 0x1C, 4);
     HSD_ObjAllocInit(&tevreg_alloc_data, 0x14, 4);
     HSD_ObjAllocInit(&chan_alloc_data, 0x30, 4);
 }
-#else
-asm void HSD_RenderInitAllocData(void) 
-{
-    nofralloc
-/* 80362024 0035EC04  7C 08 02 A6 */	mflr r0
-/* 80362028 0035EC08  3C 60 80 4C */	lis r3, render_alloc_data@ha
-/* 8036202C 0035EC0C  90 01 00 04 */	stw r0, 4(r1)
-/* 80362030 0035EC10  38 80 00 1C */	li r4, 0x1c
-/* 80362034 0035EC14  38 A0 00 04 */	li r5, 4
-/* 80362038 0035EC18  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8036203C 0035EC1C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80362040 0035EC20  3B E3 07 F8 */	addi r31, r3, render_alloc_data@l
-/* 80362044 0035EC24  38 7F 00 00 */	addi r3, r31, 0
-/* 80362048 0035EC28  48 01 8D 01 */	bl HSD_ObjAllocInit
-/* 8036204C 0035EC2C  38 7F 00 2C */	addi r3, r31, 0x2c
-/* 80362050 0035EC30  38 80 00 14 */	li r4, 0x14
-/* 80362054 0035EC34  38 A0 00 04 */	li r5, 4
-/* 80362058 0035EC38  48 01 8C F1 */	bl HSD_ObjAllocInit
-/* 8036205C 0035EC3C  38 7F 00 58 */	addi r3, r31, 0x58
-/* 80362060 0035EC40  38 80 00 30 */	li r4, 0x30
-/* 80362064 0035EC44  38 A0 00 04 */	li r5, 4
-/* 80362068 0035EC48  48 01 8C E1 */	bl HSD_ObjAllocInit
-/* 8036206C 0035EC4C  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 80362070 0035EC50  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 80362074 0035EC54  38 21 00 10 */	addi r1, r1, 0x10
-/* 80362078 0035EC58  7C 08 03 A6 */	mtlr r0
-/* 8036207C 0035EC5C  4E 80 00 20 */	blr 
-}
-#endif
 
 HSD_ObjAllocData* HSD_RenderGetAllocData(void)
 {
