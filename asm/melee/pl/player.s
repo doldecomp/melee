@@ -6235,3 +6235,13 @@ lbl_804D3940:
     .asciz "0"
     .balign 4
     .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804D7F10
+lbl_804D7F10:
+	.4byte 0x00000000
+.global lbl_804D7F14
+lbl_804D7F14:
+	.4byte 0x3F800000
