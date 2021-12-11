@@ -6,6 +6,7 @@
 #include "sysdolphin/baselib/objalloc.h"
 
 #include "sysdolphin/baselib/aobj.h"
+#include "sysdolphin/baselib/fobj.h"
 #include "sysdolphin/baselib/jobj.h"
 
 #define TYPE_MASK 0x70000000
@@ -89,5 +90,6 @@ void HSD_RObjInitAllocData(void);
 HSD_ObjAllocData* HSD_RObjGetAllocData(void);
 HSD_ObjAllocData* HSD_RvalueObjGetAllocData(void);
 void HSD_RObjSetFlags(HSD_RObj* robj, u32 flags);
+HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype);
 
 #endif
