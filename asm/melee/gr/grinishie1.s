@@ -12,9 +12,9 @@ func_801FA90C:
 /* 801FA910 001F74F0  90 01 00 04 */	stw r0, 4(r1)
 /* 801FA914 001F74F4  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801FA918 001F74F8  4B FC A0 E1 */	bl func_801C49F8
-/* 801FA91C 001F74FC  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 801FA91C 001F74FC  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801FA920 001F7500  90 6D B3 58 */	stw r3, lbl_804D69F8@sda21(r13)
-/* 801FA924 001F7504  38 64 E6 C8 */	addi r3, r4, lbl_8049E6C8@l
+/* 801FA924 001F7504  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 801FA928 001F7508  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 801FA92C 001F750C  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 801FA930 001F7510  38 60 00 00 */	li r3, 0
@@ -2454,9 +2454,9 @@ lbl_801FCAA4:
 .global func_801FCAAC
 func_801FCAAC:
 /* 801FCAAC 001F968C  7C 08 02 A6 */	mflr r0
-/* 801FCAB0 001F9690  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 801FCAB0 001F9690  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801FCAB4 001F9694  90 01 00 04 */	stw r0, 4(r1)
-/* 801FCAB8 001F9698  38 84 E6 C8 */	addi r4, r4, lbl_8049E6C8@l
+/* 801FCAB8 001F9698  38 84 E6 C8 */	addi r4, r4, stage_info@l
 /* 801FCABC 001F969C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801FCAC0 001F96A0  80 04 00 88 */	lwz r0, 0x88(r4)
 /* 801FCAC4 001F96A4  2C 00 00 18 */	cmpwi r0, 0x18

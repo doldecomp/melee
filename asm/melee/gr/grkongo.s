@@ -12,9 +12,9 @@ func_801D523C:
 /* 801D5240 001D1E20  90 01 00 04 */	stw r0, 4(r1)
 /* 801D5244 001D1E24  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801D5248 001D1E28  4B FE F7 B1 */	bl func_801C49F8
-/* 801D524C 001D1E2C  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 801D524C 001D1E2C  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801D5250 001D1E30  90 6D B2 E0 */	stw r3, lbl_804D6980@sda21(r13)
-/* 801D5254 001D1E34  38 64 E6 C8 */	addi r3, r4, lbl_8049E6C8@l
+/* 801D5254 001D1E34  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 801D5258 001D1E38  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 801D525C 001D1E3C  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 801D5260 001D1E40  38 60 00 00 */	li r3, 0

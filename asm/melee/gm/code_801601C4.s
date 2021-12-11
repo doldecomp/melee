@@ -8402,8 +8402,8 @@ lbl_80167230:
 /* 80167240 00163E20  EC 01 00 2A */	fadds f0, f1, f0
 /* 80167244 00163E24  D0 01 00 1C */	stfs f0, 0x1c(r1)
 /* 80167248 00163E28  4B EC BB 39 */	bl func_80032D80
-/* 8016724C 00163E2C  3C 60 80 4A */	lis r3, lbl_8049E6C8@ha
-/* 80167250 00163E30  38 63 E6 C8 */	addi r3, r3, lbl_8049E6C8@l
+/* 8016724C 00163E2C  3C 60 80 4A */	lis r3, stage_info@ha
+/* 80167250 00163E30  38 63 E6 C8 */	addi r3, r3, stage_info@l
 /* 80167254 00163E34  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 80167258 00163E38  54 00 F7 FF */	rlwinm. r0, r0, 0x1e, 0x1f, 0x1f
 /* 8016725C 00163E3C  40 82 00 1C */	bne lbl_80167278
@@ -8740,8 +8740,8 @@ lbl_801676E0:
 lbl_801676E4:
 /* 801676E4 001642C4  7F 83 E3 78 */	mr r3, r28
 /* 801676E8 001642C8  4B EC AC 49 */	bl func_80032330
-/* 801676EC 001642CC  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
-/* 801676F0 001642D0  38 84 E6 C8 */	addi r4, r4, lbl_8049E6C8@l
+/* 801676EC 001642CC  3C 80 80 4A */	lis r4, stage_info@ha
+/* 801676F0 001642D0  38 84 E6 C8 */	addi r4, r4, stage_info@l
 /* 801676F4 001642D4  88 04 00 8C */	lbz r0, 0x8c(r4)
 /* 801676F8 001642D8  7C 7F 07 74 */	extsb r31, r3
 /* 801676FC 001642DC  54 00 EF FF */	rlwinm. r0, r0, 0x1d, 0x1f, 0x1f

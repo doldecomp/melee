@@ -1,6 +1,6 @@
 #include "grtmars.h"
 
-extern int* lbl_8049E6C8;
+extern int* stage_info;
 extern int* lbl_803E8EB0;
 
 void GrTMars_80221EF4(void)
@@ -12,9 +12,9 @@ asm void GrTMars_80221EF8(void)
 {
     nofralloc
 /* 80221EF8 0021EAD8  7C 08 02 A6 */	mflr r0
-/* 80221EFC 0021EADC  3C 60 80 4A */	lis r3, lbl_8049E6C8@ha
+/* 80221EFC 0021EADC  3C 60 80 4A */	lis r3, stage_info@ha
 /* 80221F00 0021EAE0  90 01 00 04 */	stw r0, 4(r1)
-/* 80221F04 0021EAE4  38 63 E6 C8 */	addi r3, r3, lbl_8049E6C8@l
+/* 80221F04 0021EAE4  38 63 E6 C8 */	addi r3, r3, stage_info@l
 /* 80221F08 0021EAE8  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 80221F0C 0021EAEC  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80221F10 0021EAF0  38 80 00 01 */	li r4, 1

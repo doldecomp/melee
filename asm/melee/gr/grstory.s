@@ -12,9 +12,9 @@ func_801E3030:
 /* 801E3034 001DFC14  90 01 00 04 */	stw r0, 4(r1)
 /* 801E3038 001DFC18  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801E303C 001DFC1C  4B FE 19 BD */	bl func_801C49F8
-/* 801E3040 001DFC20  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 801E3040 001DFC20  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801E3044 001DFC24  90 6D B3 18 */	stw r3, lbl_804D69B8@sda21(r13)
-/* 801E3048 001DFC28  38 64 E6 C8 */	addi r3, r4, lbl_8049E6C8@l
+/* 801E3048 001DFC28  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 801E304C 001DFC2C  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 801E3050 001DFC30  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 801E3054 001DFC34  38 60 00 00 */	li r3, 0

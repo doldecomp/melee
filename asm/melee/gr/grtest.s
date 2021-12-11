@@ -9,9 +9,9 @@ func_80206E2C:
 .global func_80206E30
 func_80206E30:
 /* 80206E30 00203A10  7C 08 02 A6 */	mflr r0
-/* 80206E34 00203A14  3C 60 80 4A */	lis r3, lbl_8049E6C8@ha
+/* 80206E34 00203A14  3C 60 80 4A */	lis r3, stage_info@ha
 /* 80206E38 00203A18  90 01 00 04 */	stw r0, 4(r1)
-/* 80206E3C 00203A1C  38 63 E6 C8 */	addi r3, r3, lbl_8049E6C8@l
+/* 80206E3C 00203A1C  38 63 E6 C8 */	addi r3, r3, stage_info@l
 /* 80206E40 00203A20  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 80206E44 00203A24  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80206E48 00203A28  38 80 00 01 */	li r4, 1

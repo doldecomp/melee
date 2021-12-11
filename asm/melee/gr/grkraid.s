@@ -12,9 +12,9 @@ func_801FDFFC:
 /* 801FE000 001FABE0  90 01 00 04 */	stw r0, 4(r1)
 /* 801FE004 001FABE4  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801FE008 001FABE8  4B FC 69 F1 */	bl func_801C49F8
-/* 801FE00C 001FABEC  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 801FE00C 001FABEC  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801FE010 001FABF0  90 6D B3 68 */	stw r3, lbl_804D6A08@sda21(r13)
-/* 801FE014 001FABF4  38 64 E6 C8 */	addi r3, r4, lbl_8049E6C8@l
+/* 801FE014 001FABF4  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 801FE018 001FABF8  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 801FE01C 001FABFC  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 801FE020 001FAC00  38 60 00 00 */	li r3, 0
