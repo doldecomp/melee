@@ -138,3 +138,46 @@ lbl_803B93A0:
     .4byte 0x2076302E
     .4byte 0x38000000
     .4byte 0x00000000
+
+
+.section .bss, "wa"
+
+.global lbl_804A3148
+lbl_804A3148:
+	.skip 0x28
+.global lbl_804A3170
+lbl_804A3170:
+	.skip 0x8
+.global lbl_804A3178
+lbl_804A3178:
+	.skip 0x19B0
+.global lbl_804A4B28
+lbl_804A4B28:
+	.skip 0x14
+.global lbl_804A4B3C
+lbl_804A4B3C:
+	.skip 0x4
+.global lbl_804A4B40
+lbl_804A4B40:
+	.skip 0x8
+.global lbl_804A4B48
+lbl_804A4B48:
+	.skip 0x4
+.global lbl_804A4B4C
+lbl_804A4B4C:
+	.skip 0x94
+.global lbl_804A4BE0
+lbl_804A4BE0:
+	.skip 0x10
+.global lbl_804A4BF0
+lbl_804A4BF0:
+	.skip 0xA8
+.global lbl_804A4C98
+lbl_804A4C98:
+	.skip 0x430
+.global lbl_804A50C8
+lbl_804A50C8:
+	.skip 0x8
+.global lbl_804A50D0
+lbl_804A50D0:
+	.skip 0x10

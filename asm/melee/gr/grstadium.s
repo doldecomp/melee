@@ -5113,3 +5113,10 @@ jtbl_803E16C0:
 	.4byte lbl_801D4B1C
 	.4byte lbl_801D4EEC
     .4byte NULL
+
+
+.section .bss, "wa"
+
+.global lbl_8049F040
+lbl_8049F040:
+	.skip 0x100

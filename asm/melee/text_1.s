@@ -4235,6 +4235,22 @@ lbl_803D4AC8:
     .4byte NULL
 
 
+.section .bss, "wa"
+
+.global lbl_8045A6C0
+lbl_8045A6C0:
+	.skip 0x10A30
+.global lbl_8046B0F0
+lbl_8046B0F0:
+	.skip 0x18
+.global lbl_8046B108
+lbl_8046B108:
+	.skip 0xF0
+.global lbl_8046B1F8
+lbl_8046B1F8:
+	.skip 0x180
+
+
 .section .sdata
 
 .global lbl_804D3EE0

@@ -5401,3 +5401,16 @@ lbl_803E1D28:
     .asciz "translate"
     .balign 4
     .4byte NULL
+
+
+.section .bss, "wa"
+
+.global lbl_8049F140
+lbl_8049F140:
+	.skip 0x18
+.global lbl_8049F158
+lbl_8049F158:
+	.skip 0x18
+.global lbl_8049F170
+lbl_8049F170:
+	.skip 0x2D0

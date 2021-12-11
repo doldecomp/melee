@@ -5884,3 +5884,34 @@ func_8035DD8C:
 /* 8035DD8C 0035A96C  90 6D A5 D0 */	stw r3, lbl_804D5C70@sda21(r13)
 /* 8035DD90 0035A970  90 8D A5 D4 */	stw r4, lbl_804D5C74@sda21(r13)
 /* 8035DD94 0035A974  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A8D78
+lbl_804A8D78:
+	.skip 0x80
+.global lbl_804A8DF8
+lbl_804A8DF8:
+	.skip 0x88
+.global lbl_804A8E80
+lbl_804A8E80:
+	.skip 0x1680
+.global lbl_804AA500
+lbl_804AA500:
+	.skip 0x1680
+.global lbl_804ABB80
+lbl_804ABB80:
+	.skip 0x600
+.global lbl_804AC180
+lbl_804AC180:
+	.skip 0x7B8
+.global lbl_804AC938
+lbl_804AC938:
+	.skip 0x4068
+.global lbl_804B09A0
+lbl_804B09A0:
+	.skip 0x40
+.global lbl_804B09E0
+lbl_804B09E0:
+	.skip 0xFE00

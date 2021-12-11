@@ -151,3 +151,10 @@ lbl_8033A334:
 /* 8033A33C 00336F1C  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033A340 00336F20  7C 08 03 A6 */	mtlr r0
 /* 8033A344 00336F24  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A7638
+lbl_804A7638:
+	.skip 0x20

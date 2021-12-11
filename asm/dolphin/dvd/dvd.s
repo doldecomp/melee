@@ -2616,3 +2616,13 @@ lbl_8033A12C:
 /* 8033A144 00336D24  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8033A148 00336D28  38 21 00 20 */	addi r1, r1, 0x20
 /* 8033A14C 00336D2C  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A7560
+lbl_804A7560:
+	.skip 0x80
+.global lbl_804A75E0
+lbl_804A75E0:
+	.skip 0x58

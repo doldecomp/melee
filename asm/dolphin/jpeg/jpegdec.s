@@ -6981,3 +6981,16 @@ lbl_803B9410:
     .4byte 0x80000000
     .4byte 0x3FD1A855
     .4byte 0xE0000000
+
+
+.section .bss, "wa"
+
+.global lbl_804A7300
+lbl_804A7300:
+	.skip 0x100
+.global lbl_804A7400
+lbl_804A7400:
+	.skip 0x7C
+.global lbl_804A747C
+lbl_804A747C:
+	.skip 0xC

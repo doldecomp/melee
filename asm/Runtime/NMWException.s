@@ -63,3 +63,10 @@ lbl_803227C4:
 /* 803227C4 0031F3A4  38 60 FF FF */	li r3, -1
 lbl_803227C8:
 /* 803227C8 0031F3A8  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A2F38
+lbl_804A2F38:
+	.skip 0x10

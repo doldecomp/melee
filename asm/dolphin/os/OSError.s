@@ -276,3 +276,10 @@ lbl_80345A3C:
 /* 80345A64 00342644  38 21 00 38 */	addi r1, r1, 0x38
 /* 80345A68 00342648  7C 08 03 A6 */	mtlr r0
 /* 80345A6C 0034264C  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global __OSErrorTable
+__OSErrorTable:
+	.skip 0x40

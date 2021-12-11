@@ -11782,3 +11782,64 @@ lbl_803B8500:
     .4byte 0x3F800000
     .4byte 0x00000000
     .4byte 0x00000000
+
+
+.section .bss, "wa"
+
+.global lbl_804A04F0
+lbl_804A04F0:
+	.skip 0x18
+.global lbl_804A0508
+lbl_804A0508:
+	.skip 0x10
+.global lbl_804A0518
+lbl_804A0518:
+	.skip 0x30
+.global lbl_804A0548
+lbl_804A0548:
+	.skip 0x10
+.global lbl_804A0558
+lbl_804A0558:
+	.skip 0x10
+.global lbl_804A0568
+lbl_804A0568:
+	.skip 0x10
+.global lbl_804A0578
+lbl_804A0578:
+	.skip 0x10
+.global lbl_804A0588
+lbl_804A0588:
+	.skip 0x10
+.global lbl_804A0598
+lbl_804A0598:
+	.skip 0x10
+.global lbl_804A05A8
+lbl_804A05A8:
+	.skip 0x10
+.global lbl_804A05B8
+lbl_804A05B8:
+	.skip 0x10
+.global lbl_804A05C8
+lbl_804A05C8:
+	.skip 0x10
+.global lbl_804A05D8
+lbl_804A05D8:
+	.skip 0x10
+.global lbl_804A05E8
+lbl_804A05E8:
+	.skip 0x10
+.global lbl_804A05F8
+lbl_804A05F8:
+	.skip 0x10
+.global lbl_804A0608
+lbl_804A0608:
+	.skip 0x10
+.global lbl_804A0618
+lbl_804A0618:
+	.skip 0x10
+.global lbl_804A0628
+lbl_804A0628:
+	.skip 0x10
+.global lbl_804A0638
+lbl_804A0638:
+	.skip 0x10

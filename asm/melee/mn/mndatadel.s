@@ -1747,3 +1747,16 @@ func_80250170:
 /* 802502C0 0024CEA0  38 21 00 60 */	addi r1, r1, 0x60
 /* 802502C4 0024CEA4  7C 08 03 A6 */	mtlr r0
 /* 802502C8 0024CEA8  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A0918
+lbl_804A0918:
+	.skip 0x10
+.global lbl_804A0928
+lbl_804A0928:
+	.skip 0x10
+.global lbl_804A0938
+lbl_804A0938:
+	.skip 0x10

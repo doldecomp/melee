@@ -10010,3 +10010,37 @@ lbl_8024744C:
 /* 802474B8 00244098  38 21 00 98 */	addi r1, r1, 0x98
 /* 802474BC 0024409C  7C 08 03 A6 */	mtlr r0
 /* 802474C0 002440A0  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A0750
+lbl_804A0750:
+	.skip 0x1C
+.global lbl_804A076C
+lbl_804A076C:
+	.skip 0x78
+.global lbl_804A07E4
+lbl_804A07E4:
+	.skip 0x10
+.global lbl_804A07F4
+lbl_804A07F4:
+	.skip 0x10
+.global lbl_804A0804
+lbl_804A0804:
+	.skip 0x10
+.global lbl_804A0814
+lbl_804A0814:
+	.skip 0x10
+.global lbl_804A0824
+lbl_804A0824:
+	.skip 0x10
+.global lbl_804A0834
+lbl_804A0834:
+	.skip 0x10
+.global lbl_804A0844
+lbl_804A0844:
+	.skip 0x10
+.global lbl_804A0854
+lbl_804A0854:
+	.skip 0x14

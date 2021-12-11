@@ -87,3 +87,13 @@ lbl_803B7260:
     .4byte __fini_cpp_exceptions
     .4byte __destroy_global_chain
     .4byte NULL
+
+
+.section .bss, "wa"
+
+.global lbl_804A2F48
+lbl_804A2F48:
+	.skip 0x100
+.global lbl_804A3048
+lbl_804A3048:
+	.skip 0x100

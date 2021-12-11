@@ -6913,6 +6913,16 @@ lbl_803C0610:
     .balign 4
 
 
+.section .bss, "wa"
+
+.global lbl_80458FD0
+lbl_80458FD0:
+	.skip 0x2C
+.global lbl_80458FFC
+lbl_80458FFC:
+	.skip 0x2C
+
+
 .section .sdata
 
 .global lbl_804D3A00

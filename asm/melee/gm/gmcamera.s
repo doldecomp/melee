@@ -1568,3 +1568,13 @@ lbl_803DA758:
     .4byte 0x3F333333
     .4byte NULL
     .4byte 0x43800000
+
+
+.section .bss, "wa"
+
+.global lbl_80479BC8
+lbl_80479BC8:
+	.skip 0x58
+.global lbl_80479C20
+lbl_80479C20:
+	.skip 0x10

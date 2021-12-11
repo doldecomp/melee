@@ -989,3 +989,10 @@ func_8024A09C:
 /* 8024A15C 00246D3C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8024A160 00246D40  7C 08 03 A6 */	mtlr r0
 /* 8024A164 00246D44  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A08A8
+lbl_804A08A8:
+	.skip 0x10

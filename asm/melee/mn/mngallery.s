@@ -1191,3 +1191,16 @@ lbl_803B8544:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
+
+
+.section .bss, "wa"
+
+.global lbl_804A0B90
+lbl_804A0B90:
+	.skip 0x10
+.global lbl_804A0BA0
+lbl_804A0BA0:
+	.skip 0x10
+.global lbl_804A0BB0
+lbl_804A0BB0:
+	.skip 0x10

@@ -1905,3 +1905,16 @@ func_803503A8:
 /* 803503D8 0034CFB8  38 21 00 10 */	addi r1, r1, 0x10
 /* 803503DC 0034CFBC  7C 08 03 A6 */	mtlr r0
 /* 803503E0 0034CFC0  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A89F0
+lbl_804A89F0:
+	.skip 0x78
+.global lbl_804A8A68
+lbl_804A8A68:
+	.skip 0x78
+.global lbl_804A8AE0
+lbl_804A8AE0:
+	.skip 0x58

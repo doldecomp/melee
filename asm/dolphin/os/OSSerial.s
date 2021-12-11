@@ -1624,3 +1624,25 @@ lbl_8034AB54:
 /* 8034AB74 00347754  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8034AB78 00347758  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034AB7C 0034775C  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global Packet
+Packet:
+	.skip 0x80
+.global Alarm
+Alarm:
+	.skip 0xA0
+.global lbl_804A7ED8
+lbl_804A7ED8:
+	.skip 0x20
+.global lbl_804A7EF8
+lbl_804A7EF8:
+	.skip 0x20
+.global lbl_804A7F18
+lbl_804A7F18:
+	.skip 0x40
+.global lbl_804A7F58
+lbl_804A7F58:
+	.skip 0x60

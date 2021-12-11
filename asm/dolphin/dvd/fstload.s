@@ -158,3 +158,13 @@ lbl_8033A6A0:
 /* 8033A6D4 003372B4  83 A1 00 54 */	lwz r29, 0x54(r1)
 /* 8033A6D8 003372B8  38 21 00 60 */	addi r1, r1, 0x60
 /* 8033A6DC 003372BC  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A7658
+lbl_804A7658:
+	.skip 0x40
+.global lbl_804A7698
+lbl_804A7698:
+	.skip 0x30
