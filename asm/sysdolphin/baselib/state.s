@@ -282,8 +282,8 @@ lbl_80361964:
 /* 80361994 0035E574  7C 08 03 A6 */	mtlr r0
 /* 80361998 0035E578  4E 80 00 20 */	blr 
 
-.global func_8036199C
-func_8036199C:
+.global HSD_SetupRenderMode
+HSD_SetupRenderMode:
 /* 8036199C 0035E57C  7C 08 02 A6 */	mflr r0
 /* 803619A0 0035E580  90 01 00 04 */	stw r0, 4(r1)
 /* 803619A4 0035E584  94 21 FF 78 */	stwu r1, -0x88(r1)
@@ -726,7 +726,7 @@ lbl_80361F4C:
 /* 80361F4C 0035EB2C  7C 08 02 A6 */	mflr r0
 /* 80361F50 0035EB30  90 01 00 04 */	stw r0, 4(r1)
 /* 80361F54 0035EB34  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80361F58 0035EB38  48 00 A2 ED */	bl func_8036C244
+/* 80361F58 0035EB38  48 00 A2 ED */	bl HSD_ClearVtxDesc
 /* 80361F5C 0035EB3C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80361F60 0035EB40  38 21 00 08 */	addi r1, r1, 8
 /* 80361F64 0035EB44  7C 08 03 A6 */	mtlr r0
