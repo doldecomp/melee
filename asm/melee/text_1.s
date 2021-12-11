@@ -4233,3 +4233,23 @@ lbl_803D4AC8:
     .asciz "#             Hour %d Min %d Sec %d \n"
     .balign 4
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D3EE0
+lbl_804D3EE0:
+    .4byte lbl_8045A6C0
+.global lbl_804D3EE4
+lbl_804D3EE4:
+    .4byte 0x00000000
+.global lbl_804D3EE8
+lbl_804D3EE8:
+    .4byte 0x230A0000
+.global lbl_804D3EEC
+lbl_804D3EEC:
+    .4byte 0x23202573
+    .4byte 0x0A000000
+.global lbl_804D3EF4
+lbl_804D3EF4:
+    .4byte 0x230A0A00

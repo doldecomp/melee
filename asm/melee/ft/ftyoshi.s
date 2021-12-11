@@ -8209,3 +8209,40 @@ lbl_8013295C:
 /* 80132A00 0012F5E0  38 21 00 20 */	addi r1, r1, 0x20
 /* 80132A04 0012F5E4  7C 08 03 A6 */	mtlr r0
 /* 80132A08 0012F5E8  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D3E40
+lbl_804D3E40:
+    .asciz "aobj.h"
+    .balign 4
+.global lbl_804D3E48
+lbl_804D3E48:
+    .asciz "aobj"
+    .balign 4
+.global lbl_804D3E50
+lbl_804D3E50:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+.global lbl_804D3E58
+lbl_804D3E58:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3E60
+lbl_804D3E60:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3E68
+lbl_804D3E68:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3E70
+lbl_804D3E70:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3E78
+lbl_804D3E78:
+    .asciz "scale"
+    .balign 4

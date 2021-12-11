@@ -7136,3 +7136,15 @@ func_80155E10:
 .global func_80155E14
 func_80155E14:
 /* 80155E14 001529F4  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D3EB0
+lbl_804D3EB0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3EB8
+lbl_804D3EB8:
+    .asciz "jobj"
+    .balign 4

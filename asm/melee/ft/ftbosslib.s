@@ -1264,3 +1264,15 @@ jtbl_803D4A2C:
 	.4byte lbl_8015C5CC
 	.4byte lbl_8015C5D4
 	.4byte lbl_8015C5D4
+
+
+.section .sdata
+
+.global lbl_804D3ED0
+lbl_804D3ED0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3ED8
+lbl_804D3ED8:
+    .asciz "jobj"
+    .balign 4
