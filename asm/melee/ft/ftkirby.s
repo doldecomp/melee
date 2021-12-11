@@ -35756,6 +35756,32 @@ func_8010D740:
 /* 8010D770 0010A350  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7548
+lbl_803B7548:
+	.float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .4byte NULL
+.global lbl_803B7570
+lbl_803B7570:
+	.float 0
+    .float 4
+    .float 0
+.global lbl_803B757C
+lbl_803B757C:
+	.float 0
+    .float 4
+    .float 0
+
+
 .section .sdata
 
 .global lbl_804D3D98

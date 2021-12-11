@@ -4064,6 +4064,20 @@ lbl_80206E14:
 /* 80206E28 00203A08  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B82D0
+lbl_803B82D0:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B82DC
+lbl_803B82DC:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E5348

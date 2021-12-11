@@ -950,6 +950,18 @@ lbl_8020F454:
 /* 8020F464 0020C044  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B83F0
+lbl_803B83F0:
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x00000003
+    .4byte 0x00000004
+    .4byte 0x00000005
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E6488

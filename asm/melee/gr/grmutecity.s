@@ -3532,6 +3532,16 @@ lbl_801F2CF4:
 /* 801F2D08 001EF8E8  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B81B8
+lbl_803B81B8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E30B0

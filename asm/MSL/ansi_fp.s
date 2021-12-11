@@ -285,3 +285,111 @@ lbl_8032343C:
 /* 80323450 00320030  83 A1 00 54 */	lwz r29, 0x54(r1)
 /* 80323454 00320034  38 21 00 68 */	addi r1, r1, 0x68
 /* 80323458 00320038  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B8BA8
+lbl_803B8BA8:
+    .4byte 0x40240000
+    .4byte 0x00000000
+    .4byte 0x40590000
+    .4byte 0x00000000
+    .4byte 0x40C38800
+    .4byte 0x00000000
+    .4byte 0x4197D784
+    .4byte 0x00000000
+    .4byte 0x4341C379
+    .4byte 0x37E08000
+    .4byte 0x4693B8B5
+    .4byte 0xB5056E17
+    .4byte 0x4D384F03
+    .4byte 0xE93FF9F5
+    .4byte 0x5A827748
+    .4byte 0xF9301D32
+    .4byte 0x75154FDD
+    .4byte 0x7F73BF3C
+.global lbl_803B8BF0
+lbl_803B8BF0:
+    .4byte 0x40240000
+    .4byte 0x00000000
+    .4byte 0x40590000
+    .4byte 0x00000000
+    .4byte 0x408F4000
+    .4byte 0x00000000
+    .4byte 0x40C38800
+    .4byte 0x00000000
+    .4byte 0x40F86A00
+    .4byte 0x00000000
+    .4byte 0x412E8480
+    .4byte 0x00000000
+    .4byte 0x416312D0
+    .4byte 0x00000000
+    .4byte 0x4197D784
+    .4byte 0x00000000
+.global lbl_803B8C30
+lbl_803B8C30:
+    .4byte 0x01010101
+    .4byte 0x01010101
+    .4byte 0x01020202
+    .4byte 0x02020101
+    .4byte 0x01010101
+    .4byte 0x01010101
+    .4byte 0x01010101
+    .4byte 0x01010101
+    .4byte 0x04080808
+    .4byte 0x08080808
+    .4byte 0x08080808
+    .4byte 0x08080808
+    .4byte 0x30303030
+    .4byte 0x30303030
+    .4byte 0x30300808
+    .4byte 0x08080808
+    .4byte 0x08A0A0A0
+    .4byte 0xA0A0A080
+    .4byte 0x80808080
+    .4byte 0x80808080
+    .4byte 0x80808080
+    .4byte 0x80808080
+    .4byte 0x80808008
+    .4byte 0x08080808
+    .4byte 0x08606060
+    .4byte 0x60606040
+    .4byte 0x40404040
+    .4byte 0x40404040
+    .4byte 0x40404040
+    .4byte 0x40404040
+    .4byte 0x40404008
+    .4byte 0x08080801
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000

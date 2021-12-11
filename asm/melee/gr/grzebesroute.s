@@ -523,6 +523,28 @@ lbl_8020B85C:
 /* 8020B860 00208440  4E 80 00 20 */	blr
 
 
+.section .rodata
+
+.global lbl_803B83A0
+lbl_803B83A0:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0xC1F00000
+    .4byte 0x42480000
+    .4byte 0x00000000
+    .4byte 0x442A0000
+    .4byte 0xC1A00000
+    .4byte 0xC0A00000
+    .4byte 0x44750000
+    .4byte 0x40A00000
+    .4byte 0x00000000
+    .4byte 0x43570000
+    .4byte 0xC2480000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E5DB0

@@ -1244,6 +1244,16 @@ func_8015CC14:
 /* 8015CC30 00159810  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B75E8
+lbl_803B75E8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803D49C0

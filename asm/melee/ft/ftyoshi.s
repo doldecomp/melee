@@ -8211,6 +8211,16 @@ lbl_8013295C:
 /* 80132A08 0012F5E8  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B75C0
+lbl_803B75C0:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .sdata
 
 .global lbl_804D3E40

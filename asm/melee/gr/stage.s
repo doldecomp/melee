@@ -744,3 +744,13 @@ func_8022532C:
 /* 80225368 00221F48  38 21 00 18 */	addi r1, r1, 0x18
 /* 8022536C 00221F4C  7C 08 03 A6 */	mtlr r0
 /* 80225370 00221F50  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B84C8
+lbl_803B84C8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0xC2C80000
+    .4byte 0x00000000

@@ -666,3 +666,47 @@ lbl_80375878:
 /* 80375880 00372460  38 21 00 80 */	addi r1, r1, 0x80
 /* 80375884 00372464  7C 08 03 A6 */	mtlr r0
 /* 80375888 00372468  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B94E0
+lbl_803B94E0:
+	.4byte _HSD_AObjForgetMemory
+    .4byte _HSD_DispForgetMemory
+    .4byte _HSD_IDForgetMemory
+    .4byte _HSD_ObjAllocForgetMemory
+    .4byte _HSD_RandForgetMemory
+    .4byte _HSD_RObjForgetMemory
+    .4byte NULL
+.global lbl_803B94FC
+lbl_803B94FC:
+    .4byte HSD_AObjGetAllocData
+    .4byte lbl_804D5E20
+    .4byte HSD_FObjGetAllocData
+    .4byte lbl_804D5E28
+    .4byte HSD_IDGetAllocData
+    .4byte lbl_804D5E30
+    .4byte HSD_SListGetAllocData
+    .4byte lbl_804D5E34
+    .4byte HSD_DListGetAllocData
+    .4byte lbl_804D5E3C
+    .4byte HSD_VecGetAllocData
+    .4byte lbl_804D5E44
+    .4byte HSD_MtxGetAllocData
+    .4byte lbl_804D5E48
+    .4byte HSD_RObjGetAllocData
+    .4byte lbl_804D5E4C
+    .4byte HSD_RvalueObjGetAllocData
+    .4byte lbl_804D5E54
+    .4byte HSD_ShadowGetAllocData
+    .4byte lbl_804D5E5C
+    .4byte HSD_RenderGetAllocData
+    .4byte lbl_804D5E64
+    .4byte HSD_ChanGetAllocData
+    .4byte lbl_804D5E6C
+    .4byte HSD_TevRegGetAllocData
+    .4byte lbl_804D5E74
+	.4byte NULL
+    .4byte NULL
+    .4byte NULL

@@ -2674,3 +2674,17 @@ func_80367688:
 /* 803676EC 003642CC  38 21 00 10 */	addi r1, r1, 0x10
 /* 803676F0 003642D0  7C 08 03 A6 */	mtlr r0
 /* 803676F4 003642D4  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B94A0
+lbl_803B94A0:
+	.float 0
+    .float 0
+    .float 0
+.global lbl_803B94AC
+lbl_803B94AC:
+	.float 0
+    .float 0
+    .float 0

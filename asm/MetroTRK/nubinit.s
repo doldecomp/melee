@@ -124,3 +124,17 @@ lbl_80326C60:
 lbl_80326C64:
 /* 80326C64 00323844  38 21 00 10 */	addi r1, r1, 0x10
 /* 80326C68 00323848  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B93A0
+lbl_803B93A0:
+    .4byte 0x4D657472
+    .4byte 0x6F54524B
+    .4byte 0x20666F72
+    .4byte 0x20446F6C
+    .4byte 0x7068696E
+    .4byte 0x2076302E
+    .4byte 0x38000000
+    .4byte 0x00000000

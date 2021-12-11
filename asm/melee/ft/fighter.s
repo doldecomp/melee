@@ -6860,6 +6860,20 @@ lbl_8006DB58:
 /* 8006DBF0 0006A7D0  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7488
+lbl_803B7488:
+	.float 0
+    .float 0
+    .float 0
+.global lbl_803B7494
+lbl_803B7494:
+	.float 0
+    .float 0
+    .float 0
+
+
 .section .data
 
 .global lbl_803C0530

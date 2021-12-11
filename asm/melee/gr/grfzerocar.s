@@ -853,6 +853,22 @@ lbl_801CBB54:
 /* 801CBB80 001C8760  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7E50
+lbl_803B7E50:
+	.float 1
+    .float 1
+    .float 1
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 1
+
+
 .section .data
 
 .global lbl_803E0BD8

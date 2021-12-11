@@ -318,3 +318,13 @@ lbl_80223560:
 lbl_80223578:
 /* 80223578 00220158  38 60 00 01 */	li r3, 1
 /* 8022357C 0022015C  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B84B8
+lbl_803B84B8:
+    .4byte 0x00370039
+    .4byte 0x003B003D
+    .4byte 0x003F0041
+    .4byte 0x0043FFFF

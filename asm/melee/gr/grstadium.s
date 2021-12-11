@@ -4791,6 +4791,38 @@ func_801D511C:
 /* 801D5234 001D1E14  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7F68
+lbl_803B7F68:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B7F74
+lbl_803B7F74:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B7F80
+lbl_803B7F80:
+    .4byte 0x00000000
+    .4byte 0xC2C80000
+    .4byte 0xC4250000
+.global lbl_803B7F8C
+lbl_803B7F8C:
+    .4byte 0x00000050
+    .4byte 0x00000040
+    .4byte 0x00000030
+    .4byte 0x00000020
+.global lbl_803B7F9C
+lbl_803B7F9C:
+    .4byte 0x00000003
+    .4byte 0x00000004
+    .4byte 0x00000006
+    .4byte 0x00000009
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E1248

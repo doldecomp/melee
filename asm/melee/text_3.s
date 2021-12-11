@@ -11762,3 +11762,23 @@ lbl_80233A54:
 /* 80233A8C 0023066C  38 21 00 08 */	addi r1, r1, 8
 /* 80233A90 00230670  7C 08 03 A6 */	mtlr r0
 /* 80233A94 00230674  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B84E8
+lbl_803B84E8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B84F4
+lbl_803B84F4:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B8500
+lbl_803B8500:
+    .4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000
+    .4byte 0x00000000

@@ -4594,6 +4594,32 @@ lbl_801FA900:
 /* 801FA904 001F74E4  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8220
+lbl_803B8220:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0xC1000000
+    .4byte 0x41700000
+    .4byte 0x00000000
+    .4byte 0x41000000
+    .4byte 0x41700000
+    .4byte 0x00000000
+    .4byte 0xC1C00000
+    .4byte 0x41700000
+    .4byte 0x00000000
+    .4byte 0x41C00000
+    .4byte 0x41700000
+    .4byte 0x00000000
+.global lbl_803B825C
+lbl_803B825C:
+    .4byte 0x00010002
+    .4byte 0x00030004
+    .4byte 0x00050000
+
+
 .section .data
 
 .global lbl_803E4068

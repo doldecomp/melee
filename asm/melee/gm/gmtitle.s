@@ -1072,6 +1072,18 @@ lbl_801A2210:
 /* 801A2220 0019EE00  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7D50
+lbl_803B7D50:
+	.asciz "GmTtAll.dat"
+    .balign 4
+.global lbl_803B7D5C
+lbl_803B7D5C:
+	.asciz "GmTtAll.usd"
+    .balign 4
+
+
 .section .data
 
 .global lbl_803DA4F0

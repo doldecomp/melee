@@ -6939,3 +6939,45 @@ lbl_80335C8C:
 /* 80335E50 00332A30  38 21 00 10 */	addi r1, r1, 0x10
 /* 80335E54 00332A34  7C 08 03 A6 */	mtlr r0
 /* 80335E58 00332A38  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B9410
+lbl_803B9410:
+    .4byte 0x00010810
+    .4byte 0x0902030A
+    .4byte 0x11182019
+    .4byte 0x120B0405
+    .4byte 0x0C131A21
+    .4byte 0x28302922
+    .4byte 0x1B140D06
+    .4byte 0x070E151C
+    .4byte 0x232A3138
+    .4byte 0x39322B24
+    .4byte 0x1D160F17
+    .4byte 0x1E252C33
+    .4byte 0x3A3B342D
+    .4byte 0x261F272E
+    .4byte 0x353C3D36
+    .4byte 0x2F373E3F
+    .4byte 0x3F3F3F3F
+    .4byte 0x3F3F3F3F
+    .4byte 0x3F3F3F3F
+    .4byte 0x3F3F3F3F
+    .4byte 0x3FF00000
+    .4byte 0x00000000
+    .4byte 0x3FF63150
+    .4byte 0xC0000000
+    .4byte 0x3FF4E7AE
+    .4byte 0xA0000000
+    .4byte 0x3FF2D062
+    .4byte 0xE0000000
+    .4byte 0x3FF00000
+    .4byte 0x00000000
+    .4byte 0x3FE92469
+    .4byte 0xC0000000
+    .4byte 0x3FE1517A
+    .4byte 0x80000000
+    .4byte 0x3FD1A855
+    .4byte 0xE0000000

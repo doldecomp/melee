@@ -1177,3 +1177,17 @@ func_80259868:
 /* 802599E0 002565C0  38 21 00 78 */	addi r1, r1, 0x78
 /* 802599E4 002565C4  7C 08 03 A6 */	mtlr r0
 /* 802599E8 002565C8  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B8538
+lbl_803B8538:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x3F800000
+.global lbl_803B8544
+lbl_803B8544:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000

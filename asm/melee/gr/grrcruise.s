@@ -3081,6 +3081,16 @@ lbl_80201C58:
 /* 80201C5C 001FE83C  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8288
+lbl_803B8288:
+    .4byte 0x3F800000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E4DA8

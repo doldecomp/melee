@@ -9981,6 +9981,30 @@ func_800316B4:
 /* 80031720 0002E300  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B73B8
+lbl_803B73B8:
+	.float 0
+    .float 0
+    .float -1
+.global lbl_803B73C4
+lbl_803B73C4:
+	.float 0
+    .float 0
+    .float 0
+.global lbl_803B73D0
+lbl_803B73D0:
+	.float 0
+    .float 1
+    .float 0
+.global lbl_803B73DC
+lbl_803B73DC:
+	.float 0
+    .float 1
+    .float 0
+
+
 .section .data
 
 .global lbl_803BCB18

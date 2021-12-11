@@ -721,3 +721,13 @@ lbl_8037F180:
 /* 8037F1A4 0037BD84  38 21 00 48 */	addi r1, r1, 0x48
 /* 8037F1A8 0037BD88  7C 08 03 A6 */	mtlr r0
 /* 8037F1AC 0037BD8C  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B95E8
+lbl_803B95E8:
+	.long 1
+    .long 2
+    .long 0
+    .4byte NULL

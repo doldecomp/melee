@@ -1746,6 +1746,20 @@ func_801CD2D4:
 /* 801CD334 001C9F14  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7E78
+lbl_803B7E78:
+	.float 0
+    .float 0
+    .float 0
+.global lbl_803B7E84
+lbl_803B7E84:
+	.float 0
+    .float 1
+    .float -27
+
+
 .section .data
 
 .global lbl_803E0D60

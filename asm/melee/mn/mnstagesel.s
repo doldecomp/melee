@@ -2362,3 +2362,13 @@ func_8025BC08:
 /* 8025BC14 002587F4  7C 63 02 14 */	add r3, r3, r0
 /* 8025BC18 002587F8  88 63 00 0B */	lbz r3, 0xb(r3)
 /* 8025BC1C 002587FC  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B8550
+lbl_803B8550:
+    .4byte 0x00000000
+    .4byte 0xC1500000
+    .4byte 0x00000000
+    .4byte 0x00000000

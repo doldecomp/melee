@@ -2845,6 +2845,16 @@ lbl_8020DFC8:
 /* 8020DFD8 0020ABB8  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B83E0
+lbl_803B83E0:
+    .4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E5E78

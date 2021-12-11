@@ -3508,3 +3508,23 @@ lbl_8038EA40:
 /* 8038EA44 0038B624  38 21 00 08 */	addi r1, r1, 8
 /* 8038EA48 0038B628  7C 08 03 A6 */	mtlr r0
 /* 8038EA4C 0038B62C  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B95F8
+lbl_803B95F8:
+    .4byte 0x000006FD
+    .4byte 0x000007CF
+    .4byte 0x0000091D
+    .4byte 0x000001B1
+    .4byte 0x00000095
+    .4byte 0x0000002F
+    .4byte 0x00000049
+    .4byte 0x00000043
+.global lbl_803B9618
+lbl_803B9618:
+    .4byte 0x000006FD
+    .4byte 0x000007CF
+    .4byte 0x000001B1
+    .4byte 0x00000095

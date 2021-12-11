@@ -4371,6 +4371,84 @@ func_801D0FF0:
 /* 801D1014 001CDBF4  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B7E90
+lbl_803B7E90:
+	.float 1
+    .float 0
+    .float 0
+.global lbl_803B7E9C
+lbl_803B7E9C:
+    .4byte 0xC3808000
+    .4byte 0x41580000
+    .4byte 0xC37C0000
+.global lbl_803B7EA8
+lbl_803B7EA8:
+    .4byte 0x00420006
+    .4byte 0x004C0006
+    .4byte 0x00550006
+    .4byte 0x005E0006
+.global lbl_803B7EB8
+lbl_803B7EB8:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_803B7EC8
+lbl_803B7EC8:
+    .4byte 0x02010201
+    .4byte 0x02010201
+    .4byte 0x02010201
+    .4byte 0x01010101
+    .4byte 0x01010101
+    .4byte 0x01010101
+    .4byte 0x01010101
+    .4byte 0x01010102
+    .4byte 0x01020102
+    .4byte 0x01FF0000
+.global lbl_803B7EF0
+lbl_803B7EF0:
+    .4byte 0x00000064
+    .4byte 0x00000064
+    .4byte 0x00000064
+.global lbl_803B7EFC
+lbl_803B7EFC:
+    .4byte 0x00030010
+    .4byte 0x00030011
+    .4byte 0x0003000E
+    .4byte 0x0003000F
+    .4byte 0x00030012
+    .4byte 0x00030013
+    .4byte 0x00030015
+    .4byte 0x00030016
+    .4byte 0x00030014
+    .4byte 0x00060002
+    .4byte 0x00060005
+.global lbl_803B7F28
+lbl_803B7F28:
+    .4byte func_801D0550
+    .4byte func_801D059C
+    .4byte func_801D05E8
+    .4byte func_801D0634
+    .4byte func_801D0680
+.global lbl_803B7F3C
+lbl_803B7F3C:
+    .4byte func_801D06CC
+    .4byte func_801D0744
+    .4byte func_801D07BC
+    .4byte func_801D0834
+    .4byte func_801D08AC
+.global lbl_803B7F50
+lbl_803B7F50:
+    .4byte 0x40800000
+    .4byte 0x40C00000
+    .4byte 0x40E00000
+    .4byte 0x40C00000
+    .4byte 0x40800000
+    .4byte 0xBF800000
+
+
 .section .data
 
 .global lbl_803E0FE8

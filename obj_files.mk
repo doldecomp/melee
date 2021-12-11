@@ -354,9 +354,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sislib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/code_803A949C.o		\
 
-RODATA_O_FILES :=                                   \
-    $(BUILD_DIR)/asm/rodata.o
-
 DATA_O_FILES :=                                     \
     $(BUILD_DIR)/asm/data.o
 

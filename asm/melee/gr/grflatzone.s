@@ -1501,6 +1501,16 @@ lbl_802182BC:
 /* 802182C0 00214EA0  4E 80 00 20 */	blr 
 
 
+.section .rodata
+
+.global lbl_803B8430
+lbl_803B8430:
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
 .section .data
 
 .global lbl_803E7940

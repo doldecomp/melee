@@ -4056,3 +4056,19 @@ lbl_800EE514:
 /* 800EE51C 000EB0FC  38 21 00 58 */	addi r1, r1, 0x58
 /* 800EE520 000EB100  7C 08 03 A6 */	mtlr r0
 /* 800EE524 000EB104  4E 80 00 20 */	blr 
+
+
+.section .rodata
+
+.global lbl_803B7520
+lbl_803B7520:
+	.float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .float 0
+    .4byte NULL
