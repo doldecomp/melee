@@ -152,6 +152,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtgamewatch.o 	            \
 	$(BUILD_DIR)/asm/melee/gr/grtemblem.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtganon.o 		            \
+	$(BUILD_DIR)/src/melee/gr/stage.o 	            		\
 	$(BUILD_DIR)/asm/melee/gr/stage.o 	            		\
 															\
 	$(BUILD_DIR)/asm/melee/db/code_80225374.o              	\

@@ -12,9 +12,9 @@ func_80201FA4:
 /* 80201FA8 001FEB88  90 01 00 04 */	stw r0, 4(r1)
 /* 80201FAC 001FEB8C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80201FB0 001FEB90  4B FC 2A 49 */	bl func_801C49F8
-/* 80201FB4 001FEB94  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 80201FB4 001FEB94  3C 80 80 4A */	lis r4, stage_info@ha
 /* 80201FB8 001FEB98  90 6D B3 80 */	stw r3, lbl_804D6A20@sda21(r13)
-/* 80201FBC 001FEB9C  38 64 E6 C8 */	addi r3, r4, lbl_8049E6C8@l
+/* 80201FBC 001FEB9C  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 80201FC0 001FEBA0  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 80201FC4 001FEBA4  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 80201FC8 001FEBA8  38 60 00 00 */	li r3, 0

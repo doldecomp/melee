@@ -12803,9 +12803,9 @@ func_8004D17C:
 
 .global func_8004D184
 func_8004D184:
-/* 8004D184 00049D64  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 8004D184 00049D64  3C 80 80 4A */	lis r4, stage_info@ha
 /* 8004D188 00049D68  80 E3 00 00 */	lwz r7, 0(r3)
-/* 8004D18C 00049D6C  38 84 E6 C8 */	addi r4, r4, lbl_8049E6C8@l
+/* 8004D18C 00049D6C  38 84 E6 C8 */	addi r4, r4, stage_info@l
 /* 8004D190 00049D70  80 04 00 88 */	lwz r0, 0x88(r4)
 /* 8004D194 00049D74  2C 00 00 11 */	cmpwi r0, 0x11
 /* 8004D198 00049D78  4D 82 00 20 */	beqlr 
@@ -23652,8 +23652,8 @@ lbl_800569D0:
 
 .global func_800569EC
 func_800569EC:
-/* 800569EC 000535CC  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
-/* 800569F0 000535D0  38 84 E6 C8 */	addi r4, r4, lbl_8049E6C8@l
+/* 800569EC 000535CC  3C 80 80 4A */	lis r4, stage_info@ha
+/* 800569F0 000535D0  38 84 E6 C8 */	addi r4, r4, stage_info@l
 /* 800569F4 000535D4  80 04 00 88 */	lwz r0, 0x88(r4)
 /* 800569F8 000535D8  3C 80 80 3C */	lis r4, lbl_803BF248@ha
 /* 800569FC 000535DC  38 84 F2 48 */	addi r4, r4, lbl_803BF248@l
@@ -23667,8 +23667,8 @@ func_800569EC:
 
 .global func_80056A1C
 func_80056A1C:
-/* 80056A1C 000535FC  3C A0 80 4A */	lis r5, lbl_8049E6C8@ha
-/* 80056A20 00053600  38 A5 E6 C8 */	addi r5, r5, lbl_8049E6C8@l
+/* 80056A1C 000535FC  3C A0 80 4A */	lis r5, stage_info@ha
+/* 80056A20 00053600  38 A5 E6 C8 */	addi r5, r5, stage_info@l
 /* 80056A24 00053604  80 05 00 88 */	lwz r0, 0x88(r5)
 /* 80056A28 00053608  3C A0 80 3C */	lis r5, lbl_803BF248@ha
 /* 80056A2C 0005360C  38 A5 F2 48 */	addi r5, r5, lbl_803BF248@l
@@ -23684,8 +23684,8 @@ func_80056A1C:
 
 .global func_80056A54
 func_80056A54:
-/* 80056A54 00053634  3C A0 80 4A */	lis r5, lbl_8049E6C8@ha
-/* 80056A58 00053638  38 A5 E6 C8 */	addi r5, r5, lbl_8049E6C8@l
+/* 80056A54 00053634  3C A0 80 4A */	lis r5, stage_info@ha
+/* 80056A58 00053638  38 A5 E6 C8 */	addi r5, r5, stage_info@l
 /* 80056A5C 0005363C  80 05 00 88 */	lwz r0, 0x88(r5)
 /* 80056A60 00053640  3C A0 80 3C */	lis r5, lbl_803BF248@ha
 /* 80056A64 00053644  38 A5 F2 48 */	addi r5, r5, lbl_803BF248@l
@@ -23701,8 +23701,8 @@ func_80056A54:
 
 .global func_80056A8C
 func_80056A8C:
-/* 80056A8C 0005366C  3C A0 80 4A */	lis r5, lbl_8049E6C8@ha
-/* 80056A90 00053670  38 A5 E6 C8 */	addi r5, r5, lbl_8049E6C8@l
+/* 80056A8C 0005366C  3C A0 80 4A */	lis r5, stage_info@ha
+/* 80056A90 00053670  38 A5 E6 C8 */	addi r5, r5, stage_info@l
 /* 80056A94 00053674  80 05 00 88 */	lwz r0, 0x88(r5)
 /* 80056A98 00053678  3C A0 80 3C */	lis r5, lbl_803BF248@ha
 /* 80056A9C 0005367C  38 A5 F2 48 */	addi r5, r5, lbl_803BF248@l
@@ -23718,8 +23718,8 @@ func_80056A8C:
 
 .global func_80056AC4
 func_80056AC4:
-/* 80056AC4 000536A4  3C A0 80 4A */	lis r5, lbl_8049E6C8@ha
-/* 80056AC8 000536A8  38 A5 E6 C8 */	addi r5, r5, lbl_8049E6C8@l
+/* 80056AC4 000536A4  3C A0 80 4A */	lis r5, stage_info@ha
+/* 80056AC8 000536A8  38 A5 E6 C8 */	addi r5, r5, stage_info@l
 /* 80056ACC 000536AC  80 05 00 88 */	lwz r0, 0x88(r5)
 /* 80056AD0 000536B0  3C A0 80 3C */	lis r5, lbl_803BF248@ha
 /* 80056AD4 000536B4  38 A5 F2 48 */	addi r5, r5, lbl_803BF248@l
@@ -23735,8 +23735,8 @@ func_80056AC4:
 
 .global func_80056AFC
 func_80056AFC:
-/* 80056AFC 000536DC  3C A0 80 4A */	lis r5, lbl_8049E6C8@ha
-/* 80056B00 000536E0  38 A5 E6 C8 */	addi r5, r5, lbl_8049E6C8@l
+/* 80056AFC 000536DC  3C A0 80 4A */	lis r5, stage_info@ha
+/* 80056B00 000536E0  38 A5 E6 C8 */	addi r5, r5, stage_info@l
 /* 80056B04 000536E4  80 05 00 88 */	lwz r0, 0x88(r5)
 /* 80056B08 000536E8  3C A0 80 3C */	lis r5, lbl_803BF248@ha
 /* 80056B0C 000536EC  38 A5 F2 48 */	addi r5, r5, lbl_803BF248@l
@@ -23752,8 +23752,8 @@ func_80056AFC:
 
 .global func_80056B34
 func_80056B34:
-/* 80056B34 00053714  3C A0 80 4A */	lis r5, lbl_8049E6C8@ha
-/* 80056B38 00053718  38 A5 E6 C8 */	addi r5, r5, lbl_8049E6C8@l
+/* 80056B34 00053714  3C A0 80 4A */	lis r5, stage_info@ha
+/* 80056B38 00053718  38 A5 E6 C8 */	addi r5, r5, stage_info@l
 /* 80056B3C 0005371C  80 05 00 88 */	lwz r0, 0x88(r5)
 /* 80056B40 00053720  3C A0 80 3C */	lis r5, lbl_803BF248@ha
 /* 80056B44 00053724  38 A5 F2 48 */	addi r5, r5, lbl_803BF248@l

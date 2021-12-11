@@ -12,9 +12,9 @@ func_801D84A4:
 /* 801D84A8 001D5088  90 01 00 04 */	stw r0, 4(r1)
 /* 801D84AC 001D508C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801D84B0 001D5090  4B FE C5 49 */	bl func_801C49F8
-/* 801D84B4 001D5094  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 801D84B4 001D5094  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801D84B8 001D5098  90 6D B2 F0 */	stw r3, lbl_804D6990@sda21(r13)
-/* 801D84BC 001D509C  38 64 E6 C8 */	addi r3, r4, lbl_8049E6C8@l
+/* 801D84BC 001D509C  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 801D84C0 001D50A0  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 801D84C4 001D50A4  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 801D84C8 001D50A8  38 60 00 00 */	li r3, 0

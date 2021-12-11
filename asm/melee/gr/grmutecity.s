@@ -12,9 +12,9 @@ func_801EFC6C:
 /* 801EFC70 001EC850  90 01 00 04 */	stw r0, 4(r1)
 /* 801EFC74 001EC854  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801EFC78 001EC858  4B FD 4D 81 */	bl func_801C49F8
-/* 801EFC7C 001EC85C  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 801EFC7C 001EC85C  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801EFC80 001EC860  90 6D B3 30 */	stw r3, lbl_804D69D0@sda21(r13)
-/* 801EFC84 001EC864  38 64 E6 C8 */	addi r3, r4, lbl_8049E6C8@l
+/* 801EFC84 001EC864  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 801EFC88 001EC868  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 801EFC8C 001EC86C  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 801EFC90 001EC870  38 80 00 00 */	li r4, 0

@@ -1,6 +1,6 @@
 #include "grtness.h"
 
-extern int* lbl_8049E6C8;
+extern int* stage_info;
 extern int* lbl_803E9030;
 
 void GrTNess_802225D0(void)
@@ -12,9 +12,9 @@ asm void GrTNess_802225D4(void)
 {
     nofralloc
 /* 802225D4 0021F1B4  7C 08 02 A6 */	mflr r0
-/* 802225D8 0021F1B8  3C 60 80 4A */	lis r3, lbl_8049E6C8@ha
+/* 802225D8 0021F1B8  3C 60 80 4A */	lis r3, stage_info@ha
 /* 802225DC 0021F1BC  90 01 00 04 */	stw r0, 4(r1)
-/* 802225E0 0021F1C0  38 63 E6 C8 */	addi r3, r3, lbl_8049E6C8@l
+/* 802225E0 0021F1C0  38 63 E6 C8 */	addi r3, r3, stage_info@l
 /* 802225E4 0021F1C4  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 802225E8 0021F1C8  94 21 FF F8 */	stwu r1, -8(r1)
 /* 802225EC 0021F1CC  38 80 00 01 */	li r4, 1

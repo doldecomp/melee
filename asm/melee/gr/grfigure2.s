@@ -8,9 +8,9 @@ func_8020E274:
 /* 8020E278 0020AE58  90 01 00 04 */	stw r0, 4(r1)
 /* 8020E27C 0020AE5C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8020E280 0020AE60  4B FB 67 79 */	bl func_801C49F8
-/* 8020E284 0020AE64  3C 80 80 4A */	lis r4, lbl_8049E6C8@ha
+/* 8020E284 0020AE64  3C 80 80 4A */	lis r4, stage_info@ha
 /* 8020E288 0020AE68  90 6D B3 D8 */	stw r3, lbl_804D6A78@sda21(r13)
-/* 8020E28C 0020AE6C  38 64 E6 C8 */	addi r3, r4, lbl_8049E6C8@l
+/* 8020E28C 0020AE6C  38 64 E6 C8 */	addi r3, r4, stage_info@l
 /* 8020E290 0020AE70  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 8020E294 0020AE74  88 03 00 8C */	lbz r0, 0x8c(r3)
 /* 8020E298 0020AE78  38 60 00 00 */	li r3, 0

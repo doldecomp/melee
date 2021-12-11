@@ -8,9 +8,9 @@ func_8021FC60:
 .global lbl_8021FC64
 lbl_8021FC64:
 /* 8021FC64 0021C844  7C 08 02 A6 */	mflr r0
-/* 8021FC68 0021C848  3C 60 80 4A */	lis r3, lbl_8049E6C8@ha
+/* 8021FC68 0021C848  3C 60 80 4A */	lis r3, stage_info@ha
 /* 8021FC6C 0021C84C  90 01 00 04 */	stw r0, 4(r1)
-/* 8021FC70 0021C850  38 63 E6 C8 */	addi r3, r3, lbl_8049E6C8@l
+/* 8021FC70 0021C850  38 63 E6 C8 */	addi r3, r3, stage_info@l
 /* 8021FC74 0021C854  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 8021FC78 0021C858  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8021FC7C 0021C85C  38 80 00 01 */	li r4, 1

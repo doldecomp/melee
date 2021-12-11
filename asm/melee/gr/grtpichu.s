@@ -8,9 +8,9 @@ func_80222B98:
 .global lbl_80222B9C
 lbl_80222B9C:
 /* 80222B9C 0021F77C  7C 08 02 A6 */	mflr r0
-/* 80222BA0 0021F780  3C 60 80 4A */	lis r3, lbl_8049E6C8@ha
+/* 80222BA0 0021F780  3C 60 80 4A */	lis r3, stage_info@ha
 /* 80222BA4 0021F784  90 01 00 04 */	stw r0, 4(r1)
-/* 80222BA8 0021F788  38 63 E6 C8 */	addi r3, r3, lbl_8049E6C8@l
+/* 80222BA8 0021F788  38 63 E6 C8 */	addi r3, r3, stage_info@l
 /* 80222BAC 0021F78C  38 A3 00 8C */	addi r5, r3, 0x8c
 /* 80222BB0 0021F790  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80222BB4 0021F794  38 80 00 01 */	li r4, 1
