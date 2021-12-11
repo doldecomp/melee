@@ -6897,3 +6897,20 @@ lbl_803C05AC:
 lbl_803C0610:
     .asciz "ellegal flag fp->no_reaction_always\n"
     .balign 4
+
+
+.section .sdata
+
+.global lbl_804D3A00
+lbl_804D3A00:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3A08
+lbl_804D3A08:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3A10
+lbl_804D3A10:
+    .asciz "0"
+    .balign 4
+    .4byte NULL

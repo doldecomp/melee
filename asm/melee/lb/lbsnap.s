@@ -1206,3 +1206,12 @@ lbl_803BAD9C:
     .asciz "MemSnapIconData"
     .balign 4
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D3828
+lbl_804D3828:
+    .asciz "%u"
+    .balign 4
+    .4byte NULL

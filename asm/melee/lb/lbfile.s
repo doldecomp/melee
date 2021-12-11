@@ -683,6 +683,27 @@ lbl_80432058:
 	.skip 0x20
 
 
+.section .sdata
+
+.global lbl_804D37A8
+lbl_804D37A8:
+    .asciz "NULL"
+    .balign 4
+.global lbl_804D37B0
+lbl_804D37B0:
+    .asciz "usd"
+    .balign 4
+.global lbl_804D37B4
+lbl_804D37B4:
+    .asciz "dat"
+    .balign 4
+.global lbl_804D37B8
+lbl_804D37B8:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D63C8

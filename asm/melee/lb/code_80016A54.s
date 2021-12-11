@@ -8138,6 +8138,67 @@ lbl_80433380:
 	.skip 0x60
 
 
+.section .sdata
+
+.global lbl_804D37C0
+lbl_804D37C0:
+    .asciz "0"
+    .balign 4
+.global lbl_804D37C4
+lbl_804D37C4:
+    .asciz "archive"
+    .balign 4
+    .4byte NULL
+.global lbl_804D37D0
+lbl_804D37D0:
+    .asciz "lbdvd.c"
+    .balign 4
+.global lbl_804D37D8
+lbl_804D37D8:
+    .4byte 0x25642C20
+    .4byte 0x25640A00
+.global lbl_804D37E0
+lbl_804D37E0:
+    .asciz "0"
+    .balign 4
+.global lbl_804D37E4
+lbl_804D37E4:
+    .asciz "ItCo."
+    .balign 4
+.global lbl_804D37EC
+lbl_804D37EC:
+    .asciz "IfAll"
+    .balign 4
+.global lbl_804D37F4
+lbl_804D37F4:
+    .4byte 0x00000004
+    .4byte 0x00000005
+    .4byte 0x00000000
+.global lbl_804D3800
+lbl_804D3800:
+    .4byte 0x00000000
+.global lbl_804D3804
+lbl_804D3804:
+    .asciz "%s"
+    .balign 4
+.global lbl_804D3808
+lbl_804D3808:
+    .4byte 0x41AC0000
+    .4byte 0x41840000
+.global lbl_804D3810
+lbl_804D3810:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D3818
+lbl_804D3818:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3820
+lbl_804D3820:
+    .asciz "NtMemAc"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D63D0
