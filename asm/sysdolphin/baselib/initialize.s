@@ -7,10 +7,10 @@ HSD_AllocateXFB:
 /* 80374F7C 00371B5C  7C 08 02 A6 */	mflr r0
 /* 80374F80 00371B60  28 04 00 00 */	cmplwi r4, 0
 /* 80374F84 00371B64  90 01 00 04 */	stw r0, 4(r1)
-/* 80374F88 00371B68  3C A0 80 4C */	lis r5, lbl_804C0948@ha
+/* 80374F88 00371B68  3C A0 80 4C */	lis r5, FrameBuffer@ha
 /* 80374F8C 00371B6C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80374F90 00371B70  BF 61 00 1C */	stmw r27, 0x1c(r1)
-/* 80374F94 00371B74  3B E5 09 48 */	addi r31, r5, lbl_804C0948@l
+/* 80374F94 00371B74  3B E5 09 48 */	addi r31, r5, FrameBuffer@l
 /* 80374F98 00371B78  3B 83 00 00 */	addi r28, r3, 0
 /* 80374F9C 00371B7C  40 82 00 0C */	bne lbl_80374FA8
 /* 80374FA0 00371B80  38 60 00 00 */	li r3, 0
@@ -260,12 +260,12 @@ lbl_803752C8:
 .global HSD_OSInit
 HSD_OSInit:
 /* 80375304 00371EE4  7C 08 02 A6 */	mflr r0
-/* 80375308 00371EE8  3C 60 80 4C */	lis r3, lbl_804C0948@ha
+/* 80375308 00371EE8  3C 60 80 4C */	lis r3, FrameBuffer@ha
 /* 8037530C 00371EEC  90 01 00 04 */	stw r0, 4(r1)
 /* 80375310 00371EF0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80375314 00371EF4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80375318 00371EF8  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8037531C 00371EFC  3B C3 09 48 */	addi r30, r3, lbl_804C0948@l
+/* 8037531C 00371EFC  3B C3 09 48 */	addi r30, r3, FrameBuffer@l
 /* 80375320 00371F00  93 A1 00 0C */	stw r29, 0xc(r1)
 /* 80375324 00371F04  93 81 00 08 */	stw r28, 8(r1)
 /* 80375328 00371F08  4B FC F1 A9 */	bl OSGetArenaLo
@@ -577,7 +577,7 @@ lbl_8037572C:
 /* 80375744 00372324  91 01 00 1C */	stw r8, 0x1c(r1)
 /* 80375748 00372328  91 21 00 20 */	stw r9, 0x20(r1)
 /* 8037574C 0037232C  91 41 00 24 */	stw r10, 0x24(r1)
-/* 80375750 00372330  80 0D C0 2C */	lwz r0, lbl_804D76CC@sda21(r13)
+/* 80375750 00372330  80 0D C0 2C */	lwz r0, init_done@sda21(r13)
 /* 80375754 00372334  2C 00 00 00 */	cmpwi r0, 0
 /* 80375758 00372338  41 82 00 30 */	beq lbl_80375788
 /* 8037575C 0037233C  80 0D C0 30 */	lwz r0, lbl_804D76D0@sda21(r13)
@@ -619,7 +619,7 @@ lbl_803757D0:
 /* 803757DC 003723BC  80 03 00 00 */	lwz r0, 0(r3)
 /* 803757E0 003723C0  28 00 00 00 */	cmplwi r0, 0
 /* 803757E4 003723C4  41 82 00 90 */	beq lbl_80375874
-/* 803757E8 003723C8  90 0D A7 6C */	stw r0, lbl_804D5E0C@sda21(r13)
+/* 803757E8 003723C8  90 0D A7 6C */	stw r0, iparam_fifo_size@sda21(r13)
 /* 803757EC 003723CC  3B E0 00 01 */	li r31, 1
 /* 803757F0 003723D0  48 00 00 84 */	b lbl_80375874
 lbl_803757F4:
@@ -657,7 +657,7 @@ lbl_80375860:
 /* 80375864 00372444  38 80 00 01 */	li r4, 1
 /* 80375868 00372448  4B FA CD B9 */	bl __va_arg
 /* 8037586C 0037244C  80 03 00 00 */	lwz r0, 0(r3)
-/* 80375870 00372450  90 0D A7 64 */	stw r0, lbl_804D5E04@sda21(r13)
+/* 80375870 00372450  90 0D A7 64 */	stw r0, rmode@sda21(r13)
 lbl_80375874:
 /* 80375874 00372454  7F E3 FB 78 */	mr r3, r31
 lbl_80375878:
@@ -710,3 +710,15 @@ lbl_803B94FC:
 	.4byte NULL
     .4byte NULL
     .4byte NULL
+
+
+.section .bss, "wa"
+
+.skip 0x4
+
+.global FrameBuffer
+FrameBuffer:
+    .skip 0xC
+.global memReport
+memReport:
+    .skip 0x2C

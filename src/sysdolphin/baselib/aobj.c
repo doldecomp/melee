@@ -4,7 +4,7 @@
 
 #include "sysdolphin/baselib/jobj.h"
 
-extern HSD_ObjAllocData aobj_alloc_data;
+HSD_ObjAllocData aobj_alloc_data;
 
 extern char* lbl_804D5D08;
 extern char* lbl_804D5D10;
@@ -24,7 +24,7 @@ extern s32 lbl_804D762C;
 extern const f32 lbl_804DE43C; // 1.0F
 extern const f32 lbl_804DE438; // 0.0F
 
-extern HSD_SList* lbl_804D7628;
+extern HSD_SList* endcallback_list;
 
 void HSD_AObjInitAllocData(void)
 {
@@ -78,7 +78,7 @@ void HSD_AObjInvokeCallBacks(void)
     HSD_SList* list;
 
     if (lbl_804D762C != 0 && lbl_804D7630 == 0) {
-        list = lbl_804D7628;
+        list = endcallback_list;
         while (list) {
             void (*func)(void) = list->data;
             (*func)();
@@ -1370,5 +1370,5 @@ void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
 
 void _HSD_AObjForgetMemory(void)
 {
-    lbl_804D7628 = NULL;
+    endcallback_list = NULL;
 }

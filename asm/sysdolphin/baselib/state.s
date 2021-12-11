@@ -785,3 +785,10 @@ lbl_80362000:
 /* 80362018 0035EBF8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036201C 0035EBFC  7C 08 03 A6 */	mtlr r0
 /* 80362020 0035EC00  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804C07E0
+lbl_804C07E0:
+	.skip 0x18

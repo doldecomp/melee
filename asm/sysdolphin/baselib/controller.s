@@ -1608,3 +1608,19 @@ lbl_803B9570:
     .4byte 0x40000000
     .4byte 0x20000000
     .4byte 0x10000000
+
+
+.section .bss, "wa"
+
+.global lbl_804C1F78
+lbl_804C1F78:
+	.skip 0x34
+.global lbl_804C1FAC
+lbl_804C1FAC:
+	.skip 0x110
+.global lbl_804C20BC
+lbl_804C20BC:
+	.skip 0x110
+.global lbl_804C21CC
+lbl_804C21CC:
+	.skip 0x114

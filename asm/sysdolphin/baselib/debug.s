@@ -129,3 +129,10 @@ lbl_803882EC:
 /* 80388314 00384EF4  38 21 00 28 */	addi r1, r1, 0x28
 /* 80388318 00384EF8  7C 08 03 A6 */	mtlr r0
 /* 8038831C 00384EFC  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804C2608
+lbl_804C2608:
+	.skip 0x2D8

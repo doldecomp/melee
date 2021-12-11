@@ -2688,3 +2688,12 @@ lbl_803B94AC:
 	.float 0
     .float 0
     .float 0
+
+
+.section .bss, "wa"
+
+.skip 0x4
+
+.global lbl_804C08B0
+lbl_804C08B0:
+	.skip 0x28

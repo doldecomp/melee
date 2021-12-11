@@ -1,24 +1,24 @@
 #include "sysdolphin/baselib/robj.h"
 
-extern HSD_ObjAllocData lbl_804C2368; // robj_alloc_data
-extern HSD_ObjAllocData lbl_804C2394; // rvalue_alloc_data
+HSD_ObjAllocData robj_alloc_data; // robj_alloc_data
+HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
 
 extern const f64 lbl_804DE6A0; // 1.75
 
 void HSD_RObjInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C2368, sizeof(HSD_RObj), 4);
-    HSD_ObjAllocInit(&lbl_804C2394, sizeof(HSD_Rvalue), 4);
+    HSD_ObjAllocInit(&robj_alloc_data, sizeof(HSD_RObj), 4);
+    HSD_ObjAllocInit(&rvalue_alloc_data, sizeof(HSD_Rvalue), 4);
 }
 
 HSD_ObjAllocData* HSD_RObjGetAllocData(void)
 {
-    return &lbl_804C2368;
+    return &robj_alloc_data;
 }
 
 HSD_ObjAllocData* HSD_RvalueObjGetAllocData(void)
 {
-    return &lbl_804C2394;
+    return &rvalue_alloc_data;
 }
 
 void HSD_RObjSetFlags(HSD_RObj* robj, u32 flags)

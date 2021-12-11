@@ -1179,3 +1179,16 @@ lbl_8038FA88:
 /* 8038FA9C 0038C67C  38 21 00 38 */	addi r1, r1, 0x38
 /* 8038FAA0 0038C680  7C 08 03 A6 */	mtlr r0
 /* 8038FAA4 0038C684  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804C62A0
+lbl_804C62A0:
+	.skip 0x80
+.global lbl_804C6320
+lbl_804C6320:
+	.skip 0x10
+.global lbl_804C6330
+lbl_804C6330:
+	.skip 0x8050

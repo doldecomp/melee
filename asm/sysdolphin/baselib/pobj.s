@@ -3669,3 +3669,12 @@ func_8036EB88:
 /* 8036EC04 0036B7E4  38 21 00 10 */	addi r1, r1, 0x10
 /* 8036EC08 0036B7E8  7C 08 03 A6 */	mtlr r0
 /* 8036EC0C 0036B7EC  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.skip 0x4
+
+.global lbl_804C0908
+lbl_804C0908:
+	.skip 0x10

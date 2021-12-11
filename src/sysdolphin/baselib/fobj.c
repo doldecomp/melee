@@ -1,15 +1,15 @@
 #include "sysdolphin/baselib/fobj.h"
 
-extern HSD_ObjAllocData lbl_804C08D8;
+HSD_ObjAllocData fobj_alloc_data;
 
 HSD_ObjAllocData* HSD_FObjGetAllocData(void)
 {
-    return &lbl_804C08D8;
+    return &fobj_alloc_data;
 }
 
 void HSD_FObjInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C08D8, sizeof(HSD_FObj), 4);
+    HSD_ObjAllocInit(&fobj_alloc_data, sizeof(HSD_FObj), 4);
 }
 
 void HSD_FObjRemove(HSD_FObj* fobj)

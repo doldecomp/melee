@@ -635,3 +635,19 @@ lbl_8039154C:
 /* 80391574 0038E154  38 21 00 18 */	addi r1, r1, 0x18
 /* 80391578 0038E158  7C 08 03 A6 */	mtlr r0
 /* 8039157C 0038E15C  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804CE380
+lbl_804CE380:
+	.skip 0xC
+.global lbl_804CE38C
+lbl_804CE38C:
+	.skip 0x2C
+.global lbl_804CE3B8
+lbl_804CE3B8:
+	.skip 0x2C
+.global lbl_804CE3E4
+lbl_804CE3E4:
+	.skip 0x14

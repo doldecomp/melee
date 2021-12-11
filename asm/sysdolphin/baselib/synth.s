@@ -4008,3 +4008,28 @@ HSD_SynthInit:
 /* 8038BB28 00388708  38 21 00 48 */	addi r1, r1, 0x48
 /* 8038BB2C 0038870C  7C 08 03 A6 */	mtlr r0
 /* 8038BB30 00388710  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804C28E0
+lbl_804C28E0:
+	.skip 0x100
+.global lbl_804C29E0
+lbl_804C29E0:
+	.skip 0x80
+.global lbl_804C2A60
+lbl_804C2A60:
+	.skip 0x60
+.global lbl_804C2AC0
+lbl_804C2AC0:
+	.skip 0x20
+.global lbl_804C2AE0
+lbl_804C2AE0:
+	.skip 0x184
+.global lbl_804C2C64
+lbl_804C2C64:
+	.skip 0x18DC
+.global lbl_804C4540
+lbl_804C4540:
+	.skip 0x60
