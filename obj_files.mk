@@ -34,7 +34,10 @@ TEXT_O_FILES := 						            \
 													\
 	$(BUILD_DIR)/asm/melee/mp/code_80041C78.o 		\
 													\
-	$(BUILD_DIR)/asm/melee/ef/code_8005B4B8.o		\
+	$(BUILD_DIR)/asm/melee/ef/eflib.o				\
+	$(BUILD_DIR)/asm/melee/ef/efsync.o				\
+	$(BUILD_DIR)/asm/melee/ef/code_80061D70.o		\
+	$(BUILD_DIR)/asm/melee/ef/efasync.o				\
 													\
 	$(BUILD_DIR)/asm/melee/ft/fighter.o 			\
 	$(BUILD_DIR)/asm/melee/ft/code_8006DBF4.o 		\

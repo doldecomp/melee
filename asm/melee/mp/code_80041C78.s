@@ -31489,3 +31489,53 @@ lbl_80458888:
 .global lbl_80458E88
 lbl_80458E88:
 	.skip 0x28
+
+
+.section .sdata
+
+.global lbl_804D3948
+lbl_804D3948:
+    .asciz "0"
+    .balign 4
+.global lbl_804D394C
+lbl_804D394C:
+    .4byte 0x6572726F
+    .4byte 0x720A0000
+    .4byte 0x00000000
+.global lbl_804D3958
+lbl_804D3958:
+    .asciz "mplib.c"
+    .balign 4
+.global lbl_804D3960
+lbl_804D3960:
+    .asciz "0"
+    .balign 4
+.global lbl_804D3964
+lbl_804D3964:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D396C
+lbl_804D396C:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D3974
+lbl_804D3974:
+    .asciz "gobj"
+    .balign 4
+.global lbl_804D397C
+lbl_804D397C:
+    .4byte 0x00000001
+    .4byte 0x00020003
+.global lbl_804D3984
+lbl_804D3984:
+    .4byte 0x00040005
+    .4byte 0x00060007
+    .4byte 0x00000000
+.global lbl_804D3990
+lbl_804D3990:
+    .asciz "mpisp"
+    .balign 4
+.global lbl_804D3998
+lbl_804D3998:
+    .asciz "!loop"
+    .balign 4

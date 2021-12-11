@@ -10166,6 +10166,15 @@ lbl_80453060:
 	.skip 0x20
 
 
+.section .sdata
+
+.global lbl_804D3938
+lbl_804D3938:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6458

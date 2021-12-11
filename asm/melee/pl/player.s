@@ -6226,3 +6226,12 @@ lbl_80453080:
 .global lbl_804587E0
 lbl_804587E0:
 	.skip 0x30
+
+
+.section .sdata
+
+.global lbl_804D3940
+lbl_804D3940:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
