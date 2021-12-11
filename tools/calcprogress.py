@@ -31,8 +31,8 @@ import math
 #                                             #
 ###############################################
 
-DOL_PATH = "../baserom.dol"
-MAP_PATH = "../build/ssbm.us.1.2/GALE01.map"
+DOL_PATH = "baserom.dol"
+MAP_PATH = "build/ssbm.us.1.2/GALE01.map"
 
 MEM1_HI = 0x81700000 
 MEM1_LO = 0x80003100

@@ -131,6 +131,9 @@ $(LDSCRIPT): ldscript.lcf
 %.dol: %.elf $(ELF2DOL)
 	@echo Converting $< to $@
 	$(QUIET) $(ELF2DOL) $< $@
+ifeq ($(GENERATE_MAP),1)
+	$(QUIET) $(PYTHON) tools/calcprogress.py $@
+endif
 
 clean:
 	rm -f -d -r build $(ELF2DOL)
