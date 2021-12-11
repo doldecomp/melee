@@ -2198,3 +2198,29 @@ lbl_804D39D8:
 lbl_804D39E0:
     .asciz "jobj"
     .balign 4
+
+
+.section .sdata2
+
+.global lbl_804D81D0
+lbl_804D81D0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D81D8
+lbl_804D81D8:
+	.4byte 0xBFF921FB
+	.4byte 0x54442D18
+.global lbl_804D81E0
+lbl_804D81E0:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804D81E8
+lbl_804D81E8:
+	.4byte 0x3FC90FDB
+.global lbl_804D81EC
+lbl_804D81EC:
+	.4byte 0x40C00000
+.global lbl_804D81F0
+lbl_804D81F0:
+	.4byte 0xBFC90FDB
+	.4byte 0x00000000
