@@ -215,6 +215,6 @@ void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
 
 void _HSD_IDForgetMemory(void)
 {
-    memset(&default_table, 0, 0x194);
+    memset(&default_table, 0, sizeof(HSD_IDTable));
 }
 #pragma pop
