@@ -19,7 +19,7 @@ void HSD_IDInitAllocData(void)
 
 void HSD_IDSetup(void)
 {
-    memset(&default_table, 0, 101);
+    memset(&default_table, 0, sizeof(HSD_IDTable));
 }
 
 #ifdef NON_MATCHING
@@ -33,7 +33,7 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
     }
 
     hash_key = hash(id);
-    entry = &table->table[hash_key];
+    entry = table->table[hash_key];
 
     while (entry != NULL && entry->id != id) {
         entry = entry->next;
@@ -46,8 +46,8 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
         }
         entry->id = id;
         entry->data = data;
-        entry->next = &table->table[hash_key];
-        table->table[hash_key].next = entry;
+        entry->next = table->table[hash_key];
+        table->table[hash_key]->next = entry;
     } else {
         entry->id = id;
         entry->data = data;
