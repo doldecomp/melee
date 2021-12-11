@@ -130,64 +130,35 @@ lbl_8037CEC8:
 }
 #endif
 
-asm void HSD_IDRemoveByIDFromTable(HSD_IDTable* table, u32 id)
-{
-    nofralloc
-/* 8037CEE8 00379AC8  7C 08 02 A6 */	mflr r0
-/* 8037CEEC 00379ACC  28 03 00 00 */	cmplwi r3, 0
-/* 8037CEF0 00379AD0  90 01 00 04 */	stw r0, 4(r1)
-/* 8037CEF4 00379AD4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8037CEF8 00379AD8  40 82 00 0C */	bne lbl_8037CF04
-/* 8037CEFC 00379ADC  3C 60 80 4C */	lis r3, default_table@ha
-/* 8037CF00 00379AE0  38 63 23 EC */	addi r3, r3, default_table@l
-lbl_8037CF04:
-/* 8037CF04 00379AE4  3C A0 44 70 */	lis r5, 0x4470
-/* 8037CF08 00379AE8  38 05 86 57 */	addi r0, r5, -0x79A9
-/* 8037CF0C 00379AEC  7C A0 20 16 */	mulhwu r5, r0, r4
-/* 8037CF10 00379AF0  7C 05 20 50 */	subf r0, r5, r4
-/* 8037CF14 00379AF4  54 00 F8 7E */	srwi r0, r0, 1
-/* 8037CF18 00379AF8  7C 00 2A 14 */	add r0, r0, r5
-/* 8037CF1C 00379AFC  54 00 D1 BE */	srwi r0, r0, 6
-/* 8037CF20 00379B00  1C 00 00 65 */	mulli r0, r0, 0x65
-/* 8037CF24 00379B04  7C 00 20 50 */	subf r0, r0, r4
-/* 8037CF28 00379B08  54 00 10 3A */	slwi r0, r0, 2
-/* 8037CF2C 00379B0C  7C 63 02 14 */	add r3, r3, r0
-/* 8037CF30 00379B10  80 A3 00 00 */	lwz r5, 0(r3)
-/* 8037CF34 00379B14  38 C0 00 00 */	li r6, 0
-/* 8037CF38 00379B18  48 00 00 48 */	b lbl_8037CF80
-lbl_8037CF3C:
-/* 8037CF3C 00379B1C  80 05 00 04 */	lwz r0, 4(r5)
-/* 8037CF40 00379B20  7C 00 20 40 */	cmplw r0, r4
-/* 8037CF44 00379B24  40 82 00 34 */	bne lbl_8037CF78
-/* 8037CF48 00379B28  28 06 00 00 */	cmplwi r6, 0
-/* 8037CF4C 00379B2C  41 82 00 10 */	beq lbl_8037CF5C
-/* 8037CF50 00379B30  80 05 00 00 */	lwz r0, 0(r5)
-/* 8037CF54 00379B34  90 06 00 00 */	stw r0, 0(r6)
-/* 8037CF58 00379B38  48 00 00 0C */	b lbl_8037CF64
-lbl_8037CF5C:
-/* 8037CF5C 00379B3C  80 05 00 00 */	lwz r0, 0(r5)
-/* 8037CF60 00379B40  90 03 00 00 */	stw r0, 0(r3)
-lbl_8037CF64:
-/* 8037CF64 00379B44  3C 60 80 4C */	lis r3, hsd_iddata@ha
-/* 8037CF68 00379B48  38 63 23 C0 */	addi r3, r3, hsd_iddata@l
-/* 8037CF6C 00379B4C  38 85 00 00 */	addi r4, r5, 0
-/* 8037CF70 00379B50  4B FF DD B1 */	bl HSD_ObjFree
-/* 8037CF74 00379B54  48 00 00 14 */	b lbl_8037CF88
-lbl_8037CF78:
-/* 8037CF78 00379B58  7C A6 2B 78 */	mr r6, r5
-/* 8037CF7C 00379B5C  80 A5 00 00 */	lwz r5, 0(r5)
-lbl_8037CF80:
-/* 8037CF80 00379B60  28 05 00 00 */	cmplwi r5, 0
-/* 8037CF84 00379B64  40 82 FF B8 */	bne lbl_8037CF3C
-lbl_8037CF88:
-/* 8037CF88 00379B68  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8037CF8C 00379B6C  38 21 00 08 */	addi r1, r1, 8
-/* 8037CF90 00379B70  7C 08 03 A6 */	mtlr r0
-/* 8037CF94 00379B74  4E 80 00 20 */	blr 
-}
-
 #pragma push
 #pragma peephole on
+inline void IDEntryFree(IDEntry* entry) {
+    HSD_ObjFree(&hsd_iddata, entry);
+}
+
+void HSD_IDRemoveByIDFromTable(HSD_IDTable* table, u32 id) {
+    IDEntry* entry;
+    IDEntry* prev;
+
+    if (table == NULL) {
+        table = &default_table;
+    }
+
+    prev = NULL;
+    for (entry = table->table[hash(id)]; entry != NULL; entry = entry->next) {
+        if (entry->id == id) {
+            if (prev != NULL) {
+                prev->next = entry->next;
+            } else {
+                table->table[hash(id)] = entry->next;
+            }
+            IDEntryFree(entry);
+            return;
+        }
+        prev = entry;
+    }
+}
+
 void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
 {
     IDEntry* entry;
