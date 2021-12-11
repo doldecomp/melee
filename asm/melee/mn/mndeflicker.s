@@ -417,3 +417,10 @@ func_8024A6C4:
 /* 8024A784 00247364  38 21 00 20 */	addi r1, r1, 0x20
 /* 8024A788 00247368  7C 08 03 A6 */	mtlr r0
 /* 8024A78C 0024736C  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A08B8
+lbl_804A08B8:
+	.skip 0x10

@@ -2147,3 +2147,19 @@ func_80249174:
 /* 802492C0 00245EA0  38 21 00 80 */	addi r1, r1, 0x80
 /* 802492C4 00245EA4  7C 08 03 A6 */	mtlr r0
 /* 802492C8 00245EA8  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A0868
+lbl_804A0868:
+	.skip 0x10
+.global lbl_804A0878
+lbl_804A0878:
+	.skip 0x10
+.global lbl_804A0888
+lbl_804A0888:
+	.skip 0x10
+.global lbl_804A0898
+lbl_804A0898:
+	.skip 0x10

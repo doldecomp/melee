@@ -13955,8 +13955,8 @@ lbl_804DE580:
 lbl_804DE588:
 	.4byte 0x40080000
 	.4byte 0x00000000
-.global lbl_804DE590
-lbl_804DE590:
+.global black
+black:
 	.4byte 0x00000000
 .global lbl_804DE594
 lbl_804DE594:

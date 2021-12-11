@@ -1055,3 +1055,13 @@ lbl_80252874:
 /* 802528EC 0024F4CC  38 21 00 28 */	addi r1, r1, 0x28
 /* 802528F0 0024F4D0  7C 08 03 A6 */	mtlr r0
 /* 802528F4 0024F4D4  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A0958
+lbl_804A0958:
+	.skip 0x10
+.global lbl_804A0968
+lbl_804A0968:
+	.skip 0x48

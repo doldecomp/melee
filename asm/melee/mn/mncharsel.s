@@ -12411,3 +12411,13 @@ lbl_80266F28:
 /* 80266F30 00263B10  38 21 00 28 */	addi r1, r1, 0x28
 /* 80266F34 00263B14  7C 08 03 A6 */	mtlr r0
 /* 80266F38 00263B18  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A0BC0
+lbl_804A0BC0:
+	.skip 0x10
+.global lbl_804A0BD0
+lbl_804A0BD0:
+	.skip 0x10

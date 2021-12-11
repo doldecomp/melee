@@ -1403,3 +1403,13 @@ func_8037A750:
 /* 8037A774 00377354  38 21 00 08 */	addi r1, r1, 8
 /* 8037A778 00377358  7C 08 03 A6 */	mtlr r0
 /* 8037A77C 0037735C  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804C2310
+lbl_804C2310:
+	.skip 0x2C
+.global lbl_804C233C
+lbl_804C233C:
+	.skip 0x2C

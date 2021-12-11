@@ -2622,3 +2622,10 @@ lbl_8032EA70:
 /* 8032EA78 0032B658  38 21 00 40 */	addi r1, r1, 0x40
 /* 8032EA7C 0032B65C  7C 08 03 A6 */	mtlr r0
 /* 8032EA80 0032B660  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A50E0
+lbl_804A50E0:
+	.skip 0x220

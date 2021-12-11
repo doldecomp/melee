@@ -1651,3 +1651,10 @@ func_8024BEE0:
 /* 8024BFD4 00248BB4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8024BFD8 00248BB8  7C 08 03 A6 */	mtlr r0
 /* 8024BFDC 00248BBC  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A08C8
+lbl_804A08C8:
+	.skip 0x10

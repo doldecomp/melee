@@ -612,3 +612,10 @@ lbl_80253104:
 /* 80253178 0024FD58  38 21 00 38 */	addi r1, r1, 0x38
 /* 8025317C 0024FD5C  7C 08 03 A6 */	mtlr r0
 /* 80253180 0024FD60  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A09B0
+lbl_804A09B0:
+	.skip 0x60

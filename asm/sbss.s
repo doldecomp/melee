@@ -2595,8 +2595,8 @@ lbl_804D7620:
 .global lbl_804D7624
 lbl_804D7624:
 	.skip 0x4
-.global lbl_804D7628
-lbl_804D7628:
+.global endcallback_list
+endcallback_list:
 	.skip 0x4
 .global lbl_804D762C
 lbl_804D762C:
@@ -2703,14 +2703,14 @@ lbl_804D76BC:
 .global lbl_804D76C0
 lbl_804D76C0:
 	.skip 0x4
-.global lbl_804D76C4
-lbl_804D76C4:
+.global DefaultFifoObj
+DefaultFifoObj:
 	.skip 0x4
 .global lbl_804D76C8
 lbl_804D76C8:
 	.skip 0x4
-.global lbl_804D76CC
-lbl_804D76CC:
+.global init_done
+init_done:
 	.skip 0x4
 .global lbl_804D76D0
 lbl_804D76D0:

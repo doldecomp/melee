@@ -1121,3 +1121,10 @@ lbl_803801B0:
 /* 803801D8 0037CDB8  38 21 00 88 */	addi r1, r1, 0x88
 /* 803801DC 0037CDBC  7C 08 03 A6 */	mtlr r0
 /* 803801E0 0037CDC0  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804C25D8
+lbl_804C25D8:
+	.skip 0x30

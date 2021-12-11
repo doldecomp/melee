@@ -4465,14 +4465,14 @@ lbl_804D5DF4:
 .global lbl_804D5E00
 lbl_804D5E00:
     .4byte 0xFFFFFFFF
-.global lbl_804D5E04
-lbl_804D5E04:
+.global rmode
+rmode:
     .4byte lbl_80401168
 .global lbl_804D5E08
 lbl_804D5E08:
     .4byte 0x00000002
-.global lbl_804D5E0C
-lbl_804D5E0C:
+.global iparam_fifo_size
+iparam_fifo_size:
     .4byte 0x00040000
 .global lbl_804D5E10
 lbl_804D5E10:

@@ -215,3 +215,13 @@ lbl_8037E6B0:
 /* 8037E6B8 0037B298  38 21 00 18 */	addi r1, r1, 0x18
 /* 8037E6BC 0037B29C  7C 08 03 A6 */	mtlr r0
 /* 8037E6C0 0037B2A0  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global slist_alloc_data
+slist_alloc_data:
+	.skip 0x2C
+.global dlist_alloc_data
+dlist_alloc_data:
+	.skip 0x2C

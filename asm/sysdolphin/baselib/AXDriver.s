@@ -3528,3 +3528,16 @@ lbl_803B9618:
     .4byte 0x000007CF
     .4byte 0x000001B1
     .4byte 0x00000095
+
+
+.section .bss, "wa"
+
+.global lbl_804C45A0
+lbl_804C45A0:
+	.skip 0x1380
+.global lbl_804C5920
+lbl_804C5920:
+	.skip 0x100
+.global lbl_804C5A20
+lbl_804C5A20:
+	.skip 0x880

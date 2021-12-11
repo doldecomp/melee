@@ -1952,3 +1952,13 @@ lbl_8034E944:
 /* 8034E958 0034B538  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034E95C 0034B53C  7C 08 03 A6 */	mtlr r0
 /* 8034E960 0034B540  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A89A0
+lbl_804A89A0:
+	.skip 0x10
+.global lbl_804A89B0
+lbl_804A89B0:
+	.skip 0x40

@@ -2512,6 +2512,13 @@ jtbl_803BF870:
     .4byte lbl_80061CE4
 
 
+.section .bss, "wa"
+
+.global lbl_80458FA0
+lbl_80458FA0:
+	.skip 0x30
+
+
 .section .sdata
 
 .global lbl_804D39C8

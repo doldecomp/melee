@@ -1020,9 +1020,9 @@ lbl_8036B828:
 .global func_8036B848
 func_8036B848:
 /* 8036B848 00368428  7C 08 02 A6 */	mflr r0
-/* 8036B84C 0036842C  3C 60 80 4C */	lis r3, lbl_804C08D8@ha
+/* 8036B84C 0036842C  3C 60 80 4C */	lis r3, fobj_alloc_data@ha
 /* 8036B850 00368430  90 01 00 04 */	stw r0, 4(r1)
-/* 8036B854 00368434  38 63 08 D8 */	addi r3, r3, lbl_804C08D8@l
+/* 8036B854 00368434  38 63 08 D8 */	addi r3, r3, fobj_alloc_data@l
 /* 8036B858 00368438  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8036B85C 0036843C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8036B860 00368440  48 00 F3 69 */	bl HSD_ObjAlloc
@@ -1047,10 +1047,10 @@ lbl_8036B87C:
 .global HSD_FObjFree
 HSD_FObjFree:
 /* 8036B8A4 00368484  7C 08 02 A6 */	mflr r0
-/* 8036B8A8 00368488  3C A0 80 4C */	lis r5, lbl_804C08D8@ha
+/* 8036B8A8 00368488  3C A0 80 4C */	lis r5, fobj_alloc_data@ha
 /* 8036B8AC 0036848C  90 01 00 04 */	stw r0, 4(r1)
 /* 8036B8B0 00368490  38 83 00 00 */	addi r4, r3, 0
-/* 8036B8B4 00368494  38 65 08 D8 */	addi r3, r5, lbl_804C08D8@l
+/* 8036B8B4 00368494  38 65 08 D8 */	addi r3, r5, fobj_alloc_data@l
 /* 8036B8B8 00368498  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8036B8BC 0036849C  48 00 F4 65 */	bl HSD_ObjFree
 /* 8036B8C0 003684A0  80 01 00 0C */	lwz r0, 0xc(r1)

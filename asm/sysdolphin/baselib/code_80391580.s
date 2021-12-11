@@ -16434,3 +16434,52 @@ lbl_8039F774:
 /* 8039F780 0039C360  38 21 00 20 */	addi r1, r1, 0x20
 /* 8039F784 0039C364  7C 08 03 A6 */	mtlr r0
 /* 8039F788 0039C368  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804CE3F8
+lbl_804CE3F8:
+	.skip 0x330
+.global lbl_804CE728
+lbl_804CE728:
+	.skip 0x418
+.global lbl_804CEB40
+lbl_804CEB40:
+	.skip 0xC00
+.global lbl_804CF740
+lbl_804CF740:
+	.skip 0xA8
+.global lbl_804CF7E8
+lbl_804CF7E8:
+	.skip 0x28
+.global lbl_804CF810
+lbl_804CF810:
+	.skip 0xD8
+.global lbl_804CF8E8
+lbl_804CF8E8:
+	.skip 0x1000
+.global lbl_804D08E8
+lbl_804D08E8:
+	.skip 0x20
+.global lbl_804D0908
+lbl_804D0908:
+	.skip 0x248
+.global lbl_804D0B50
+lbl_804D0B50:
+	.skip 0x104
+.global lbl_804D0C54
+lbl_804D0C54:
+	.skip 0x104
+.global lbl_804D0D58
+lbl_804D0D58:
+	.skip 0x104
+.global lbl_804D0E5C
+lbl_804D0E5C:
+	.skip 0x104
+.global lbl_804D0F60
+lbl_804D0F60:
+	.skip 0x30
+.global lbl_804D0F90
+lbl_804D0F90:
+	.skip 0x30

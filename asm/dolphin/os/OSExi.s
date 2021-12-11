@@ -1775,3 +1775,10 @@ lbl_803472F8:
 /* 80347300 00343EE0  38 21 00 40 */	addi r1, r1, 0x40
 /* 80347304 00343EE4  7C 08 03 A6 */	mtlr r0
 /* 80347308 00343EE8  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A7C80
+lbl_804A7C80:
+	.skip 0xC0

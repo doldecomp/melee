@@ -2,9 +2,9 @@
 
 extern void* lbl_80405B98;
 
-extern HSD_ObjAllocData lbl_804C07F8; // render_alloc_data
-extern HSD_ObjAllocData lbl_804C0824; // tevreg_alloc_data
-extern HSD_ObjAllocData lbl_804C0850; // chan_alloc_data
+HSD_ObjAllocData render_alloc_data;
+HSD_ObjAllocData tevreg_alloc_data;
+HSD_ObjAllocData chan_alloc_data;
 
 extern s32 lbl_804D7600; // state_num_chans
 extern void* lbl_804D7604; // chan_chan
@@ -15,22 +15,22 @@ extern void* lbl_804D760C;
 #ifdef NON_MATCHING
 void HSD_RenderInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C07F8, 0x1C, 4);
-    HSD_ObjAllocInit(&lbl_804C0824, 0x14, 4);
-    HSD_ObjAllocInit(&lbl_804C0850, 0x30, 4);
+    HSD_ObjAllocInit(&render_alloc_data, 0x1C, 4);
+    HSD_ObjAllocInit(&tevreg_alloc_data, 0x14, 4);
+    HSD_ObjAllocInit(&chan_alloc_data, 0x30, 4);
 }
 #else
 asm void HSD_RenderInitAllocData(void) 
 {
     nofralloc
 /* 80362024 0035EC04  7C 08 02 A6 */	mflr r0
-/* 80362028 0035EC08  3C 60 80 4C */	lis r3, lbl_804C07F8@ha
+/* 80362028 0035EC08  3C 60 80 4C */	lis r3, render_alloc_data@ha
 /* 8036202C 0035EC0C  90 01 00 04 */	stw r0, 4(r1)
 /* 80362030 0035EC10  38 80 00 1C */	li r4, 0x1c
 /* 80362034 0035EC14  38 A0 00 04 */	li r5, 4
 /* 80362038 0035EC18  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8036203C 0035EC1C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80362040 0035EC20  3B E3 07 F8 */	addi r31, r3, lbl_804C07F8@l
+/* 80362040 0035EC20  3B E3 07 F8 */	addi r31, r3, render_alloc_data@l
 /* 80362044 0035EC24  38 7F 00 00 */	addi r3, r31, 0
 /* 80362048 0035EC28  48 01 8D 01 */	bl HSD_ObjAllocInit
 /* 8036204C 0035EC2C  38 7F 00 2C */	addi r3, r31, 0x2c
@@ -51,17 +51,17 @@ asm void HSD_RenderInitAllocData(void)
 
 HSD_ObjAllocData* HSD_RenderGetAllocData(void)
 {
-    return &lbl_804C07F8;
+    return &render_alloc_data;
 }
 
 HSD_ObjAllocData* HSD_TevRegGetAllocData(void)
 {
-    return &lbl_804C0824;
+    return &tevreg_alloc_data;
 }
 
 HSD_ObjAllocData* HSD_ChanGetAllocData(void)
 {
-    return &lbl_804C0850;
+    return &chan_alloc_data;
 }
 
 asm void HSD_SetupChannel(void* ch)

@@ -1017,3 +1017,13 @@ __DVDLowSetWAType:
 /* 80337928 00334508  7C 08 03 A6 */	mtlr r0
 /* 8033792C 0033450C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80337930 00334510  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A7488
+lbl_804A7488:
+	.skip 0x68
+.global lbl_804A74F0
+lbl_804A74F0:
+	.skip 0x70

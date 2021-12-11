@@ -1,25 +1,25 @@
 #include "sysdolphin/baselib/id.h"
 
-extern HSD_ObjAllocData lbl_804C23C0; // hsd_iddata
+HSD_ObjAllocData hsd_iddata;
 
-extern struct _HSD_IDTable lbl_804C23EC; // default_table
+HSD_IDTable default_table;
 
 extern char* lbl_804D5EE8; // "id.c"
 extern char* lbl_804D5EF0;
 
 HSD_ObjAllocData* HSD_IDGetAllocData(void)
 {
-    return &lbl_804C23C0;
+    return &hsd_iddata;
 }
 
 void HSD_IDInitAllocData(void)
 {
-    HSD_ObjAllocInit(&lbl_804C23C0, sizeof(IDEntry), 4);
+    HSD_ObjAllocInit(&hsd_iddata, sizeof(IDEntry), 4);
 }
 
 void HSD_IDSetup(void)
 {
-    memset(&lbl_804C23EC, 0, 0x194); // The partial memset doesn't quite make sense, but it matches
+    memset(&default_table, 0, sizeof(HSD_IDTable));
 }
 
 #ifdef NON_MATCHING
@@ -29,25 +29,25 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
     u32 hash_key;
 
     if (table == NULL) {
-        table = &lbl_804C23EC;
+        table = &default_table;
     }
 
     hash_key = hash(id);
-    entry = &table->table[hash_key];
+    entry = table->table[hash_key];
 
     while (entry != NULL && entry->id != id) {
         entry = entry->next;
     }
 
     if (entry == NULL) {
-        entry = HSD_ObjAlloc(&lbl_804C23C0);
+        entry = HSD_ObjAlloc(&hsd_iddata);
         if (entry == NULL) {
             __assert(lbl_804D5EE8, 67, lbl_804D5EF0);
         }
         entry->id = id;
         entry->data = data;
-        entry->next = &table->table[hash_key];
-        table->table[hash_key].next = entry;
+        entry->next = table->table[hash_key];
+        table->table[hash_key]->next = entry;
     } else {
         entry->id = id;
         entry->data = data;
@@ -68,8 +68,8 @@ asm void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
 /* 8037CE0C 003799EC  93 A1 00 2C */	stw r29, 0x2c(r1)
 /* 8037CE10 003799F0  93 81 00 28 */	stw r28, 0x28(r1)
 /* 8037CE14 003799F4  40 82 00 0C */	bne lbl_8037CE20
-/* 8037CE18 003799F8  3C 60 80 4C */	lis r3, lbl_804C23EC@ha
-/* 8037CE1C 003799FC  38 63 23 EC */	addi r3, r3, lbl_804C23EC@l
+/* 8037CE18 003799F8  3C 60 80 4C */	lis r3, default_table@ha
+/* 8037CE1C 003799FC  38 63 23 EC */	addi r3, r3, default_table@l
 lbl_8037CE20:
 /* 8037CE20 00379A00  3C 80 44 70 */	lis r4, 0x4470
 /* 8037CE24 00379A04  38 04 86 57 */	addi r0, r4, -0x79A9
@@ -99,8 +99,8 @@ lbl_8037CE6C:
 /* 8037CE78 00379A58  93 E3 00 08 */	stw r31, 8(r3)
 /* 8037CE7C 00379A5C  48 00 00 4C */	b lbl_8037CEC8
 lbl_8037CE80:
-/* 8037CE80 00379A60  3C 60 80 4C */	lis r3, lbl_804C23C0@ha
-/* 8037CE84 00379A64  38 63 23 C0 */	addi r3, r3, lbl_804C23C0@l
+/* 8037CE80 00379A60  3C 60 80 4C */	lis r3, hsd_iddata@ha
+/* 8037CE84 00379A64  38 63 23 C0 */	addi r3, r3, hsd_iddata@l
 /* 8037CE88 00379A68  4B FF DD 41 */	bl HSD_ObjAlloc
 /* 8037CE8C 00379A6C  7C 7D 1B 79 */	or. r29, r3, r3
 /* 8037CE90 00379A70  40 82 00 14 */	bne lbl_8037CEA4
@@ -138,8 +138,8 @@ asm void HSD_IDRemoveByIDFromTable(HSD_IDTable* table, u32 id)
 /* 8037CEF0 00379AD0  90 01 00 04 */	stw r0, 4(r1)
 /* 8037CEF4 00379AD4  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8037CEF8 00379AD8  40 82 00 0C */	bne lbl_8037CF04
-/* 8037CEFC 00379ADC  3C 60 80 4C */	lis r3, lbl_804C23EC@ha
-/* 8037CF00 00379AE0  38 63 23 EC */	addi r3, r3, lbl_804C23EC@l
+/* 8037CEFC 00379ADC  3C 60 80 4C */	lis r3, default_table@ha
+/* 8037CF00 00379AE0  38 63 23 EC */	addi r3, r3, default_table@l
 lbl_8037CF04:
 /* 8037CF04 00379AE4  3C A0 44 70 */	lis r5, 0x4470
 /* 8037CF08 00379AE8  38 05 86 57 */	addi r0, r5, -0x79A9
@@ -168,8 +168,8 @@ lbl_8037CF5C:
 /* 8037CF5C 00379B3C  80 05 00 00 */	lwz r0, 0(r5)
 /* 8037CF60 00379B40  90 03 00 00 */	stw r0, 0(r3)
 lbl_8037CF64:
-/* 8037CF64 00379B44  3C 60 80 4C */	lis r3, lbl_804C23C0@ha
-/* 8037CF68 00379B48  38 63 23 C0 */	addi r3, r3, lbl_804C23C0@l
+/* 8037CF64 00379B44  3C 60 80 4C */	lis r3, hsd_iddata@ha
+/* 8037CF68 00379B48  38 63 23 C0 */	addi r3, r3, hsd_iddata@l
 /* 8037CF6C 00379B4C  38 85 00 00 */	addi r4, r5, 0
 /* 8037CF70 00379B50  4B FF DD B1 */	bl HSD_ObjFree
 /* 8037CF74 00379B54  48 00 00 14 */	b lbl_8037CF88
@@ -193,10 +193,10 @@ void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
     IDEntry* entry;
 
     if (table == NULL) {
-        table = &lbl_804C23EC;
+        table = &default_table;
     }
 
-    entry = (&table->table[0].next)[hash(id)];
+    entry = table->table[hash(id)];
     while (entry != NULL) {
         if (entry->id == id) {
             if (success != NULL) {
@@ -215,6 +215,6 @@ void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
 
 void _HSD_IDForgetMemory(void)
 {
-    memset(&lbl_804C23EC, 0, 0x194);
+    memset(&default_table, 0, sizeof(HSD_IDTable));
 }
 #pragma pop

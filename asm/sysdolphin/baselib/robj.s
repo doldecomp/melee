@@ -1529,9 +1529,9 @@ lbl_8037C420:
 .global func_8037C444
 func_8037C444:
 /* 8037C444 00379024  7C 08 02 A6 */	mflr r0
-/* 8037C448 00379028  3C 60 80 4C */	lis r3, lbl_804C2368@ha
+/* 8037C448 00379028  3C 60 80 4C */	lis r3, robj_alloc_data@ha
 /* 8037C44C 0037902C  90 01 00 04 */	stw r0, 4(r1)
-/* 8037C450 00379030  38 63 23 68 */	addi r3, r3, lbl_804C2368@l
+/* 8037C450 00379030  38 63 23 68 */	addi r3, r3, robj_alloc_data@l
 /* 8037C454 00379034  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8037C458 00379038  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8037C45C 0037903C  4B FF E7 6D */	bl HSD_ObjAlloc
@@ -1556,10 +1556,10 @@ lbl_8037C478:
 .global func_8037C4A0
 func_8037C4A0:
 /* 8037C4A0 00379080  7C 08 02 A6 */	mflr r0
-/* 8037C4A4 00379084  3C A0 80 4C */	lis r5, lbl_804C2368@ha
+/* 8037C4A4 00379084  3C A0 80 4C */	lis r5, robj_alloc_data@ha
 /* 8037C4A8 00379088  90 01 00 04 */	stw r0, 4(r1)
 /* 8037C4AC 0037908C  38 83 00 00 */	addi r4, r3, 0
-/* 8037C4B0 00379090  38 65 23 68 */	addi r3, r5, lbl_804C2368@l
+/* 8037C4B0 00379090  38 65 23 68 */	addi r3, r5, robj_alloc_data@l
 /* 8037C4B4 00379094  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8037C4B8 00379098  4B FF E8 69 */	bl HSD_ObjFree
 /* 8037C4BC 0037909C  80 01 00 0C */	lwz r0, 0xc(r1)
@@ -1909,11 +1909,11 @@ lbl_8037C950:
 .global func_8037C958
 func_8037C958:
 /* 8037C958 00379538  7C 08 02 A6 */	mflr r0
-/* 8037C95C 0037953C  3C 80 80 4C */	lis r4, lbl_804C2394@ha
+/* 8037C95C 0037953C  3C 80 80 4C */	lis r4, rvalue_alloc_data@ha
 /* 8037C960 00379540  90 01 00 04 */	stw r0, 4(r1)
 /* 8037C964 00379544  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8037C968 00379548  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8037C96C 0037954C  3B E4 23 94 */	addi r31, r4, lbl_804C2394@l
+/* 8037C96C 0037954C  3B E4 23 94 */	addi r31, r4, rvalue_alloc_data@l
 /* 8037C970 00379550  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8037C974 00379554  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8037C978 00379558  3B A3 00 00 */	addi r29, r3, 0
@@ -1971,8 +1971,8 @@ lbl_8037CA14:
 /* 8037CA28 00379608  40 82 00 08 */	bne lbl_8037CA30
 /* 8037CA2C 0037960C  48 00 00 68 */	b lbl_8037CA94
 lbl_8037CA30:
-/* 8037CA30 00379610  3C 60 80 4C */	lis r3, lbl_804C2394@ha
-/* 8037CA34 00379614  3B E3 23 94 */	addi r31, r3, lbl_804C2394@l
+/* 8037CA30 00379610  3C 60 80 4C */	lis r3, rvalue_alloc_data@ha
+/* 8037CA34 00379614  3B E3 23 94 */	addi r31, r3, rvalue_alloc_data@l
 /* 8037CA38 00379618  48 00 00 4C */	b lbl_8037CA84
 lbl_8037CA3C:
 /* 8037CA3C 0037961C  7F E3 FB 78 */	mr r3, r31
@@ -2040,8 +2040,8 @@ lbl_8037CAFC:
 /* 8037CB10 003796F0  40 82 00 08 */	bne lbl_8037CB18
 /* 8037CB14 003796F4  48 00 00 68 */	b lbl_8037CB7C
 lbl_8037CB18:
-/* 8037CB18 003796F8  3C 60 80 4C */	lis r3, lbl_804C2394@ha
-/* 8037CB1C 003796FC  3B E3 23 94 */	addi r31, r3, lbl_804C2394@l
+/* 8037CB18 003796F8  3C 60 80 4C */	lis r3, rvalue_alloc_data@ha
+/* 8037CB1C 003796FC  3B E3 23 94 */	addi r31, r3, rvalue_alloc_data@l
 /* 8037CB20 00379700  48 00 00 4C */	b lbl_8037CB6C
 lbl_8037CB24:
 /* 8037CB24 00379704  7F E3 FB 78 */	mr r3, r31

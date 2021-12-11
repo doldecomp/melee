@@ -81554,3 +81554,133 @@ lbl_803DA4B0:
 lbl_803DA4D8:
     .asciz "ScGamPause_scene_data"
     .balign 4
+
+
+.section .bss, "wa"
+
+.global lbl_8046B378
+lbl_8046B378:
+	.skip 0x110
+.global lbl_8046B488
+lbl_8046B488:
+	.skip 0x1E0
+.global lbl_8046B668
+lbl_8046B668:
+	.skip 0x38
+.global lbl_8046B6A0
+lbl_8046B6A0:
+	.skip 0x2528
+.global lbl_8046DBC8
+lbl_8046DBC8:
+	.skip 0x10
+.global lbl_8046DBD8
+lbl_8046DBD8:
+	.skip 0x10
+.global lbl_8046DBE8
+lbl_8046DBE8:
+	.skip 0x5A8
+.global lbl_8046E190
+lbl_8046E190:
+	.skip 0x20
+.global lbl_8046E1B0
+lbl_8046E1B0:
+	.skip 0x1DC
+.global lbl_8046E38C
+lbl_8046E38C:
+	.skip 0x10
+.global lbl_8046E39C
+lbl_8046E39C:
+	.skip 0x10
+.global lbl_8046E3AC
+lbl_8046E3AC:
+	.skip 0x2314
+.global lbl_804706C0
+lbl_804706C0:
+	.skip 0x18
+.global lbl_804706D8
+lbl_804706D8:
+	.skip 0x30
+.global lbl_80470708
+lbl_80470708:
+    .skip 0x148
+.global lbl_80470850
+lbl_80470850:
+    .skip 0x1C
+.global lbl_8047086C
+lbl_8047086C:
+    .skip 0x228C
+.global lbl_80472AF8
+lbl_80472AF8:
+    .skip 0x138
+.global lbl_80472C30
+lbl_80472C30:
+	.skip 0x80
+.global lbl_80472CB0
+lbl_80472CB0:
+	.skip 0x78
+.global lbl_80472D28
+lbl_80472D28:
+	.skip 0x120
+.global lbl_80472E48
+lbl_80472E48:
+	.skip 0x80
+.global lbl_80472EC8
+lbl_80472EC8:
+	.skip 0x10
+.global lbl_80472ED8
+lbl_80472ED8:
+	.skip 0x6BC
+.global lbl_80473594
+lbl_80473594:
+	.skip 0x14
+.global lbl_804735A8
+lbl_804735A8:
+	.skip 0x40
+.global lbl_804735E8
+lbl_804735E8:
+	.skip 0xA4
+.global lbl_8047368C
+lbl_8047368C:
+	.skip 0x24
+.global lbl_804736B0
+lbl_804736B0:
+	.skip 0x10
+.global lbl_804736C0
+lbl_804736C0:
+	.skip 0x40
+.global lbl_80473700
+lbl_80473700:
+	.skip 0x114
+.global lbl_80473814
+lbl_80473814:
+	.skip 0x204
+.global lbl_80473A18
+lbl_80473A18:
+	.skip 0xA0
+.global lbl_80473AB8
+lbl_80473AB8:
+	.skip 0x3700
+.global lbl_804771B8
+lbl_804771B8:
+	.skip 0xC
+.global lbl_804771C4
+lbl_804771C4:
+	.skip 0x574
+.global lbl_80477738
+lbl_80477738:
+	.skip 0x2280
+.global lbl_804799B8
+lbl_804799B8:
+	.skip 0x20
+.global lbl_804799D8
+lbl_804799D8:
+	.skip 0x80
+.global lbl_80479A58
+lbl_80479A58:
+	.skip 0x40
+.global lbl_80479A98
+lbl_80479A98:
+	.skip 0x78
+.global lbl_80479B10
+lbl_80479B10:
+	.skip 0x18

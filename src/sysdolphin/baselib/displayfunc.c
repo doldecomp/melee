@@ -14,9 +14,9 @@ typedef struct _HSD_ZList {
   struct _HSD_ZList *next;
 } HSD_ZList;
 
-extern HSD_ObjAllocData lbl_804C0918;
+HSD_ObjAllocData zlist_alloc_data;
 
 void HSD_ZListInitAllocData(void)
 {
-  HSD_ObjAllocInit(&lbl_804C0918, sizeof(HSD_ZList), 4);
+  HSD_ObjAllocInit(&zlist_alloc_data, sizeof(HSD_ZList), 4);
 }

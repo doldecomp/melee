@@ -157,3 +157,10 @@ lbl_803482E0:
 /* 80348304 00344EE4  83 A1 03 3C */	lwz r29, 0x33c(r1)
 /* 80348308 00344EE8  38 21 03 48 */	addi r1, r1, 0x348
 /* 8034830C 00344EEC  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A7D40
+lbl_804A7D40:
+	.skip 0x20

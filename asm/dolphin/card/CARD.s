@@ -7445,3 +7445,13 @@ lbl_80358A80:
 /* 80358A88 00355668  38 21 00 48 */	addi r1, r1, 0x48
 /* 80358A8C 0035566C  7C 08 03 A6 */	mtlr r0
 /* 80358A90 00355670  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A8B38
+lbl_804A8B38:
+	.skip 0x220
+.global lbl_804A8D58
+lbl_804A8D58:
+	.skip 0x20

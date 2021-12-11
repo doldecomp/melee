@@ -4599,3 +4599,10 @@ lbl_803B9628:
     .4byte 0x00000000
     .4byte 0x3F800000
     .4byte 0x00000000
+
+
+.section .bss, "wa"
+
+.global lbl_804D0FC0
+lbl_804D0FC0:
+	.skip 0xF0

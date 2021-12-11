@@ -860,3 +860,10 @@ lbl_8032F614:
 /* 8032F624 0032C204  4E 80 00 20 */	blr 
 /* 8032F628 0032C208  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
 /* 8032F62C 0032C20C  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
+
+
+.section .bss, "wa"
+
+.global lbl_804A5300
+lbl_804A5300:
+	.skip 0x2000

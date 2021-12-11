@@ -4324,3 +4324,19 @@ lbl_803B8510:
     .4byte lbl_803ED58C
     .4byte lbl_803ED598
     .4byte lbl_803ED5A4
+
+
+.section .bss, "wa"
+
+.global lbl_804A0648
+lbl_804A0648:
+	.skip 0x78
+.global lbl_804A06C0
+lbl_804A06C0:
+	.skip 0x10
+.global lbl_804A06D0
+lbl_804A06D0:
+	.skip 0x10
+.global lbl_804A06E0
+lbl_804A06E0:
+	.skip 0x10

@@ -543,3 +543,10 @@ func_8024CD64:
 /* 8024CE68 00249A48  38 21 00 28 */	addi r1, r1, 0x28
 /* 8024CE6C 00249A4C  7C 08 03 A6 */	mtlr r0
 /* 8024CE70 00249A50  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A08E8
+lbl_804A08E8:
+	.skip 0x10

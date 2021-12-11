@@ -3,35 +3,35 @@
 #include "sysdolphin/baselib/leak.h"
 #include "sysdolphin/baselib/video.h"
 
-extern void* lbl_804C0948[HSD_VI_XFB_MAX]; //FrameBuffer
+extern void* FrameBuffer[HSD_VI_XFB_MAX]; //FrameBuffer
 
-extern HSD_MemReport lbl_804C0954; //memReport
+extern HSD_MemReport memReport; //memReport
 
-extern GXRenderModeObj* lbl_804D5E04; //rmode
+extern GXRenderModeObj* rmode; //rmode
 
-extern GXColor lbl_804DE590; //black
+extern GXColor black; //black
 
-extern u32 lbl_804D5E0C; //iparam_fifo_size
+extern u32 iparam_fifo_size; //iparam_fifo_size
 
-extern GXFifoObj* lbl_804D76C4; //DefaultFifoObj
+extern GXFifoObj* DefaultFifoObj; //DefaultFifoObj
 
-extern s32 lbl_804D76CC; //init_done
+extern s32 init_done; //init_done
 
 asm void HSD_InitComponent(void)
 {
     nofralloc
 /* 80374E48 00371A28  7C 08 02 A6 */	mflr r0
-/* 80374E4C 00371A2C  3C 60 80 4C */	lis r3, lbl_804C0948@ha
+/* 80374E4C 00371A2C  3C 60 80 4C */	lis r3, FrameBuffer@ha
 /* 80374E50 00371A30  90 01 00 04 */	stw r0, 4(r1)
 /* 80374E54 00371A34  94 21 FF 98 */	stwu r1, -0x68(r1)
 /* 80374E58 00371A38  93 E1 00 64 */	stw r31, 0x64(r1)
-/* 80374E5C 00371A3C  3B E3 09 48 */	addi r31, r3, lbl_804C0948@l
+/* 80374E5C 00371A3C  3B E3 09 48 */	addi r31, r3, FrameBuffer@l
 /* 80374E60 00371A40  93 C1 00 60 */	stw r30, 0x60(r1)
 /* 80374E64 00371A44  48 00 04 A1 */	bl HSD_OSInit
-/* 80374E68 00371A48  81 0D A7 64 */	lwz r8, lbl_804D5E04(r13)
+/* 80374E68 00371A48  81 0D A7 64 */	lwz r8, rmode(r13)
 /* 80374E6C 00371A4C  3C 60 01 00 */	lis r3, 0x00FFFFFF@ha
 /* 80374E70 00371A50  3B C0 00 01 */	li r30, 1
-/* 80374E74 00371A54  80 82 EB B0 */	lwz r4, lbl_804DE590(r2)
+/* 80374E74 00371A54  80 82 EB B0 */	lwz r4, black(r2)
 /* 80374E78 00371A58  80 E8 00 00 */	lwz r7, 0(r8)
 /* 80374E7C 00371A5C  80 C8 00 04 */	lwz r6, 4(r8)
 /* 80374E80 00371A60  38 A0 00 00 */	li r5, 0
@@ -83,7 +83,7 @@ asm void HSD_InitComponent(void)
 /* 80374F38 00371B18  4B FD A3 DD */	bl VIWaitForRetrace
 /* 80374F3C 00371B1C  48 00 06 79 */	bl HSD_ObjInit
 /* 80374F40 00371B20  48 01 32 A5 */	bl func_803881E4
-/* 80374F44 00371B24  93 CD C0 2C */	stw r30, lbl_804D76CC(r13)
+/* 80374F44 00371B24  93 CD C0 2C */	stw r30, init_done(r13)
 /* 80374F48 00371B28  80 01 00 6C */	lwz r0, 0x6c(r1)
 /* 80374F4C 00371B2C  83 E1 00 64 */	lwz r31, 0x64(r1)
 /* 80374F50 00371B30  83 C1 00 60 */	lwz r30, 0x60(r1)
@@ -94,8 +94,8 @@ asm void HSD_InitComponent(void)
 
 void HSD_GXSetFifoObj(GXFifoObj* fifo) 
 {
-    lbl_804C0954.gxfifo = lbl_804D5E0C;
-    lbl_804D76C4 = fifo;
+    memReport.gxfifo = iparam_fifo_size;
+    DefaultFifoObj = fifo;
 }
 
 void HSD_DVDInit(void)

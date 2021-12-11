@@ -1719,3 +1719,10 @@ lbl_80251984:
 /* 802519FC 0024E5DC  38 21 00 28 */	addi r1, r1, 0x28
 /* 80251A00 0024E5E0  7C 08 03 A6 */	mtlr r0
 /* 80251A04 0024E5E4  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804A0948
+lbl_804A0948:
+	.skip 0x10

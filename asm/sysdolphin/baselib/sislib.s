@@ -4423,3 +4423,13 @@ func_803A947C:
 /* 803A9490 003A6070  38 21 00 08 */	addi r1, r1, 8
 /* 803A9494 003A6074  7C 08 03 A6 */	mtlr r0
 /* 803A9498 003A6078  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+
+.global lbl_804D1110
+lbl_804D1110:
+	.skip 0x14
+.global lbl_804D1124
+lbl_804D1124:
+	.skip 0x14

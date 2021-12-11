@@ -4817,3 +4817,31 @@ lbl_803B84D8:
     .4byte 0x3F800000
     .4byte 0x00000000
     .4byte 0x00000000
+
+
+.section .bss, "wa"
+
+.global lbl_8049FA00
+lbl_8049FA00:
+	.skip 0x50
+.global lbl_8049FA50
+lbl_8049FA50:
+	.skip 0x50
+.global lbl_8049FAA0
+lbl_8049FAA0:
+	.skip 0x28
+.global lbl_8049FAC8
+lbl_8049FAC8:
+	.skip 0x350
+.global lbl_8049FE18
+lbl_8049FE18:
+	.skip 0x1EC
+.global lbl_804A0004
+lbl_804A0004:
+	.skip 0x3BC
+.global lbl_804A03C0
+lbl_804A03C0:
+	.skip 0xC0
+.global lbl_804A0480
+lbl_804A0480:
+	.skip 0x70
