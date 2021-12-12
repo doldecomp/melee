@@ -2,36 +2,6 @@
 
 .section .text  # 0x80224A54 - 0x80225370
 
-.global func_80224B98
-func_80224B98:
-/* 80224B98 00221778  3C 60 80 4A */	lis r3, stage_info@ha
-/* 80224B9C 0022177C  C0 42 C2 F4 */	lfs f2, lbl_804DBCD4@sda21(r2)
-/* 80224BA0 00221780  38 63 E6 C8 */	addi r3, r3, stage_info@l
-/* 80224BA4 00221784  C0 63 00 14 */	lfs f3, 0x14(r3)
-/* 80224BA8 00221788  C0 23 00 0C */	lfs f1, 0xc(r3)
-/* 80224BAC 0022178C  C0 03 00 80 */	lfs f0, 0x80(r3)
-/* 80224BB0 00221790  EC 21 18 2A */	fadds f1, f1, f3
-/* 80224BB4 00221794  EC 00 18 2A */	fadds f0, f0, f3
-/* 80224BB8 00221798  EC 01 00 2A */	fadds f0, f1, f0
-/* 80224BBC 0022179C  EC 22 00 32 */	fmuls f1, f2, f0
-/* 80224BC0 002217A0  4E 80 00 20 */	blr 
-
-.global func_80224BC4
-func_80224BC4:
-/* 80224BC4 002217A4  3C 60 80 4A */	lis r3, stage_info@ha
-/* 80224BC8 002217A8  C0 42 C2 F4 */	lfs f2, lbl_804DBCD4@sda21(r2)
-/* 80224BCC 002217AC  38 63 E6 C8 */	addi r3, r3, stage_info@l
-/* 80224BD0 002217B0  C0 63 00 14 */	lfs f3, 0x14(r3)
-/* 80224BD4 002217B4  C0 23 00 0C */	lfs f1, 0xc(r3)
-/* 80224BD8 002217B8  C0 03 00 80 */	lfs f0, 0x80(r3)
-/* 80224BDC 002217BC  EC 21 18 2A */	fadds f1, f1, f3
-/* 80224BE0 002217C0  EC 00 18 2A */	fadds f0, f0, f3
-/* 80224BE4 002217C4  EC 01 00 2A */	fadds f0, f1, f0
-/* 80224BE8 002217C8  EC 02 00 32 */	fmuls f0, f2, f0
-/* 80224BEC 002217CC  EC 01 00 2A */	fadds f0, f1, f0
-/* 80224BF0 002217D0  EC 22 00 32 */	fmuls f1, f2, f0
-/* 80224BF4 002217D4  4E 80 00 20 */	blr 
-
 .global func_80224BF8
 func_80224BF8:
 /* 80224BF8 002217D8  3C 80 80 4A */	lis r4, stage_info@ha

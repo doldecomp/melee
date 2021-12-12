@@ -2,6 +2,8 @@
 
 extern struct _StageInfo stage_info;
 
+extern f32 unk_multiplier_804DBCD8;
+
 extern f32 lbl_804DBCD0; // 0.017453f
 
 f32 func_80224A54()
@@ -67,14 +69,29 @@ f32 func_80224B50() {
     return stage_info.blast_zone.left + stage_info.cam_info.cam_x_offset;
 }
 
-f32 func_80224B68(void) {
+f32 func_80224B68() {
     return stage_info.blast_zone.top + stage_info.cam_info.cam_y_offset;
 }
 
-f32 func_80224B80(void) {
+f32 func_80224B80() {
    return stage_info.blast_zone.bottom + stage_info.cam_info.cam_y_offset;
 }
 
+f32 func_80224B98() {
+    f32 cam_y_offset = stage_info.cam_info.cam_y_offset;
+    f32 y_pos = stage_info.cam_info.cam_bounds_bottom + cam_y_offset + (stage_info.blast_zone.bottom + cam_y_offset);
+    return unk_multiplier_804DBCD8 * y_pos;
+}
 
+f32 func_80224BC4() {
+
+    f32 cam_y_offset = stage_info.cam_info.cam_y_offset;
+    f32 cam_bounds_bottom_offset = stage_info.cam_info.cam_bounds_bottom + cam_y_offset;
+
+    f32 y_pos = stage_info.blast_zone.bottom + cam_y_offset + cam_bounds_bottom_offset;
+    f32 y_pos_product = unk_multiplier_804DBCD8 * y_pos;
+
+    return unk_multiplier_804DBCD8 * (cam_bounds_bottom_offset + y_pos_product);
+}
 
 

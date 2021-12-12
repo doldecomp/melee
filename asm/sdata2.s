@@ -4564,8 +4564,8 @@ lbl_804DBCC8:
 .global lbl_804DBCD0
 lbl_804DBCD0:
 	.4byte 0x3C8EFA35
-.global lbl_804DBCD4
-lbl_804DBCD4:
+.global unk_multiplier_804DBCD8
+unk_multiplier_804DBCD8:
 	.4byte 0x3F000000
 .global lbl_804DBCD8
 lbl_804DBCD8:
