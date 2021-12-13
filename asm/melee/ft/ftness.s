@@ -2,7 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_801147C0
+.global func_801147C0 # decompiled
 func_801147C0:
 /* 801147C0 001113A0  7C 08 02 A6 */	mflr r0
 /* 801147C4 001113A4  38 80 00 00 */	li r4, 0
@@ -105,7 +105,7 @@ lbl_801148F8:
 /* 80114934 00111514  7C 08 03 A6 */	mtlr r0
 /* 80114938 00111518  4E 80 00 20 */	blr 
 
-.global func_8011493C
+.global func_8011493C # decompiled
 func_8011493C:
 /* 8011493C 0011151C  7C 08 02 A6 */	mflr r0
 /* 80114940 00111520  90 01 00 04 */	stw r0, 4(r1)
@@ -116,7 +116,7 @@ func_8011493C:
 /* 80114954 00111534  7C 08 03 A6 */	mtlr r0
 /* 80114958 00111538  4E 80 00 20 */	blr 
 
-.global func_8011495C
+.global func_8011495C # decompiled
 func_8011495C:
 /* 8011495C 0011153C  80 63 02 D4 */	lwz r3, 0x2d4(r3)
 /* 80114960 00111540  C0 23 00 94 */	lfs f1, 0x94(r3)
@@ -188,7 +188,7 @@ lbl_80114A2C:
 /* 80114A40 00111620  7C 08 03 A6 */	mtlr r0
 /* 80114A44 00111624  4E 80 00 20 */	blr 
 
-.global func_80114A48
+.global func_80114A48 # decompiled
 func_80114A48:
 /* 80114A48 00111628  7C 08 02 A6 */	mflr r0
 /* 80114A4C 0011162C  90 01 00 04 */	stw r0, 4(r1)
