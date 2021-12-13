@@ -1,17 +1,5 @@
 .section .sbss  # 0x804D63A0 - 0x804D79C9
 
-.global lbl_804D6AC0
-lbl_804D6AC0:
-	.skip 0x8
-.global lbl_804D6AC8
-lbl_804D6AC8:
-	.skip 0x4
-.global lbl_804D6ACC
-lbl_804D6ACC:
-	.skip 0x4
-.global lbl_804D6AD0
-lbl_804D6AD0:
-	.skip 0x8
 .global lbl_804D6AD8
 lbl_804D6AD8:
 	.skip 0x4
@@ -1072,78 +1060,7 @@ lbl_804D70F4:
 lbl_804D70F8:
 	.skip 0x8
 
-.global lbl_804D7210
-lbl_804D7210:
-	.skip 0x8
-.global lbl_804D7218
-lbl_804D7218:
-	.skip 0x4
-.global lbl_804D721C
-lbl_804D721C:
-	.skip 0x4
-.global lbl_804D7220
-lbl_804D7220:
-	.skip 0x4
-.global lbl_804D7224
-lbl_804D7224:
-	.skip 0x4
-.global lbl_804D7228
-lbl_804D7228:
-	.skip 0x4
-.global lbl_804D722C
-lbl_804D722C:
-	.skip 0x4
-.global StopAtNextInt
-StopAtNextInt:
-	.skip 0x4
-.global lbl_804D7234
-lbl_804D7234:
-	.skip 0x4
-.global lbl_804D7238
-lbl_804D7238:
-	.skip 0x4
-.global lbl_804D723C
-lbl_804D723C:
-	.skip 0x4
-.global LastResetEnd
-LastResetEnd:
-	.skip 0x4
-.global lbl_804D7244
-lbl_804D7244:
-	.skip 0x4
-.global ResetOccurred
-ResetOccurred:
-	.skip 0x4
-.global lbl_804D724C
-lbl_804D724C:
-	.skip 0x4
-.global Breaking
-Breaking:
-	.skip 0x4
-.global lbl_804D7254
-lbl_804D7254:
-	.skip 0x4
-.global lbl_804D7258
-lbl_804D7258:
-	.skip 0x8
-.global lbl_804D7260
-lbl_804D7260:
-	.skip 0x4
-.global lbl_804D7264
-lbl_804D7264:
-	.skip 0x4
-.global lbl_804D7268
-lbl_804D7268:
-	.skip 0x4
-.global lbl_804D726C
-lbl_804D726C:
-	.skip 0x4
-.global lbl_804D7270
-lbl_804D7270:
-	.skip 0x4
-.global lbl_804D7274
-lbl_804D7274:
-	.skip 0x4
+
 .global lbl_804D7278
 lbl_804D7278:
 	.skip 0x4

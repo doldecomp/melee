@@ -176,3 +176,28 @@ lbl_803361F4:
 /* 80336200 00332DE0  7C 08 03 A6 */	mtlr r0
 /* 80336204 00332DE4  38 21 00 18 */	addi r1, r1, 0x18
 /* 80336208 00332DE8  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7210
+lbl_804D7210:
+	.skip 0x8
+.global lbl_804D7218
+lbl_804D7218:
+	.skip 0x4
+.global lbl_804D721C
+lbl_804D721C:
+	.skip 0x4
+.global lbl_804D7220
+lbl_804D7220:
+	.skip 0x4
+.global lbl_804D7224
+lbl_804D7224:
+	.skip 0x4
+.global lbl_804D7228
+lbl_804D7228:
+	.skip 0x4
+.global lbl_804D722C
+lbl_804D722C:
+	.skip 0x4

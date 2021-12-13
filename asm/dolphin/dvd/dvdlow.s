@@ -1027,3 +1027,58 @@ lbl_804A7488:
 .global lbl_804A74F0
 lbl_804A74F0:
 	.skip 0x70
+
+
+.section .sbss
+
+.global StopAtNextInt
+StopAtNextInt:
+	.skip 0x4
+.global lbl_804D7234
+lbl_804D7234:
+	.skip 0x4
+.global lbl_804D7238
+lbl_804D7238:
+	.skip 0x4
+.global lbl_804D723C
+lbl_804D723C:
+	.skip 0x4
+.global LastResetEnd
+LastResetEnd:
+	.skip 0x4
+.global lbl_804D7244
+lbl_804D7244:
+	.skip 0x4
+.global ResetOccurred
+ResetOccurred:
+	.skip 0x4
+.global lbl_804D724C
+lbl_804D724C:
+	.skip 0x4
+.global Breaking
+Breaking:
+	.skip 0x4
+.global lbl_804D7254
+lbl_804D7254:
+	.skip 0x4
+.global lbl_804D7258
+lbl_804D7258:
+	.skip 0x8
+.global lbl_804D7260
+lbl_804D7260:
+	.skip 0x4
+.global lbl_804D7264
+lbl_804D7264:
+	.skip 0x4
+.global lbl_804D7268
+lbl_804D7268:
+	.skip 0x4
+.global lbl_804D726C
+lbl_804D726C:
+	.skip 0x4
+.global lbl_804D7270
+lbl_804D7270:
+	.skip 0x4
+.global lbl_804D7274
+lbl_804D7274:
+	.skip 0x4
