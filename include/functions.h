@@ -8713,7 +8713,7 @@ void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 // ? HSD_ListInitAllocData(?);
 // ? HSD_SListAlloc(?);
 // ? HSD_SListAllocAndAppend(?);
-// ? HSD_SListPrepend(?);
+// ? HSD_SListAllocAndPrepend(?);
 // ? HSD_SListAppendList(?);
 // ? HSD_SListPrependList(?);
 // ? HSD_SListRemove(?);
