@@ -5,7 +5,7 @@
 #include <dolphin/types.h>
 #include "melee/ft/fighter.h"
 struct ftNess {
-    u8 padding[0x94];
+    u8 unkData[0x94];
     f32 unk94;
 };
 s32 func_8026B2B4(s32 arg);
