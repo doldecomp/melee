@@ -553,8 +553,8 @@ lbl_8033BEC4:
 /* 8033BEF8 00338AD8  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BEFC 00338ADC  4E 80 00 20 */	blr 
 
-.global func_8033BF00
-func_8033BF00:
+.global GXSetVtxDesc
+GXSetVtxDesc:
 /* 8033BF00 00338AE0  28 03 00 19 */	cmplwi r3, 0x19
 /* 8033BF04 00338AE4  41 81 03 00 */	bgt lbl_8033C204
 /* 8033BF08 00338AE8  3C A0 80 40 */	lis r5, jtbl_80401048@ha
@@ -939,8 +939,8 @@ func_8033C3C8:
 /* 8033C40C 00338FEC  90 03 04 F0 */	stw r0, 0x4f0(r3)
 /* 8033C410 00338FF0  4E 80 00 20 */	blr 
 
-.global func_8033C414
-func_8033C414:
+.global GXSetVtxAttrFmt
+GXSetVtxAttrFmt:
 /* 8033C414 00338FF4  38 04 FF F7 */	addi r0, r4, -9
 /* 8033C418 00338FF8  81 0D A5 08 */	lwz r8, lbl_804D5BA8@sda21(r13)
 /* 8033C41C 00338FFC  54 64 10 3A */	slwi r4, r3, 2
@@ -6858,8 +6858,8 @@ func_803414D0:
 /* 80341508 0033E0E8  7C 08 03 A6 */	mtlr r0
 /* 8034150C 0033E0EC  4E 80 00 20 */	blr 
 
-.global func_80341510
-func_80341510:
+.global GXSetCurrentMtx
+GXSetCurrentMtx:
 /* 80341510 0033E0F0  7C 08 02 A6 */	mflr r0
 /* 80341514 0033E0F4  90 01 00 04 */	stw r0, 4(r1)
 /* 80341518 0033E0F8  94 21 FF F8 */	stwu r1, -8(r1)

@@ -20,3 +20,15 @@ void HSD_ZListInitAllocData(void)
 {
   HSD_ObjAllocInit(&zlist_alloc_data, sizeof(HSD_ZList), 4);
 }
+
+void HSD_StateInitDirect(int vtxfmt, u32 param_2)
+{
+    HSD_ClearVtxDesc();
+    GXSetVtxAttrFmt(vtxfmt, 9, 1, 4, 0);
+    GXSetVtxAttrFmt(vtxfmt, 0xB, 1, 5, 0);
+    HSD_StateInitTev();
+    HSD_SetupRenderMode(param_2 | 0x28000000);
+    GXSetVtxDesc(9, 1);
+    GXSetVtxDesc(0xB, 1);
+    GXSetCurrentMtx(0);
+}
