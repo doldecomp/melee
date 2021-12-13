@@ -210,7 +210,7 @@ lbl_80114A7C:
 /* 80114A88 00111668  7C 08 03 A6 */	mtlr r0
 /* 80114A8C 0011166C  4E 80 00 20 */	blr 
 
-.global func_80114A90
+.global func_80114A90 # decompiled
 func_80114A90:
 /* 80114A90 00111670  7C 08 02 A6 */	mflr r0
 /* 80114A94 00111674  90 01 00 04 */	stw r0, 4(r1)

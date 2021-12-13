@@ -16,4 +16,8 @@ struct Fighter {
     u32 unk224C;
     u32 unkData2250[0x19c];
 };
+struct ftAttributes {
+    u8 unkData[0x94];
+    f32 unk94;
+};
 #endif
