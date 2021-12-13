@@ -191,11 +191,10 @@ char* HSD_ArchiveGetExtern(HSD_Archive* archive, s32 offset)
     }
     return archive->symbols + archive->extern_info[offset].symbol;
 }
-#pragma pop
 
-#ifdef NON_MATCHING
 void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
 {
+    u32 next;
     u32 offset;
     int i;
     
@@ -212,70 +211,9 @@ void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
     }
 
     while (offset != -1 && offset < archive->header.data_size) {
-        u32 next = *(u32*)((u32*)archive->data)[offset];
+        next = *(u32*)((u32)archive->data + offset);
+        *(u32*)((u32)archive->data + offset) = (u32)addr;
         offset = next;
-        *(u32*)archive->data = (u32)addr;
     }
 }
-#else
-asm void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
-{
-    nofralloc
-/* 80380434 0037D014  7C 08 02 A6 */	mflr r0
-/* 80380438 0037D018  90 01 00 04 */	stw r0, 4(r1)
-/* 8038043C 0037D01C  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 80380440 0037D020  BF 41 00 18 */	stmw r26, 0x18(r1)
-/* 80380444 0037D024  3B 80 00 00 */	li r28, 0
-/* 80380448 0037D028  3B E3 00 00 */	addi r31, r3, 0
-/* 8038044C 0037D02C  3B 44 00 00 */	addi r26, r4, 0
-/* 80380450 0037D030  3B 65 00 00 */	addi r27, r5, 0
-/* 80380454 0037D034  57 9E 18 38 */	slwi r30, r28, 3
-/* 80380458 0037D038  3B A0 FF FF */	li r29, -1
-/* 8038045C 0037D03C  48 00 00 40 */	b lbl_8038049C
-lbl_80380460:
-/* 80380460 0037D040  80 9F 00 2C */	lwz r4, 0x2c(r31)
-/* 80380464 0037D044  38 1E 00 04 */	addi r0, r30, 4
-/* 80380468 0037D048  80 BF 00 30 */	lwz r5, 0x30(r31)
-/* 8038046C 0037D04C  7F 43 D3 78 */	mr r3, r26
-/* 80380470 0037D050  7C 04 00 2E */	lwzx r0, r4, r0
-/* 80380474 0037D054  7C 85 02 14 */	add r4, r5, r0
-/* 80380478 0037D058  4B FA 54 71 */	bl strcmp
-/* 8038047C 0037D05C  2C 03 00 00 */	cmpwi r3, 0
-/* 80380480 0037D060  40 82 00 14 */	bne lbl_80380494
-/* 80380484 0037D064  80 7F 00 2C */	lwz r3, 0x2c(r31)
-/* 80380488 0037D068  57 80 18 38 */	slwi r0, r28, 3
-/* 8038048C 0037D06C  7F A3 00 2E */	lwzx r29, r3, r0
-/* 80380490 0037D070  48 00 00 18 */	b lbl_803804A8
-lbl_80380494:
-/* 80380494 0037D074  3B DE 00 08 */	addi r30, r30, 8
-/* 80380498 0037D078  3B 9C 00 01 */	addi r28, r28, 1
-lbl_8038049C:
-/* 8038049C 0037D07C  80 1F 00 10 */	lwz r0, 0x10(r31)
-/* 803804A0 0037D080  7C 1C 00 40 */	cmplw r28, r0
-/* 803804A4 0037D084  41 80 FF BC */	blt lbl_80380460
-lbl_803804A8:
-/* 803804A8 0037D088  3C 1D 00 01 */	addis r0, r29, 1
-/* 803804AC 0037D08C  28 00 FF FF */	cmplwi r0, 0xffff
-/* 803804B0 0037D090  40 82 00 1C */	bne lbl_803804CC
-/* 803804B4 0037D094  48 00 00 30 */	b lbl_803804E4
-/* 803804B8 0037D098  48 00 00 14 */	b lbl_803804CC
-lbl_803804BC:
-/* 803804BC 0037D09C  80 1F 00 20 */	lwz r0, 0x20(r31)
-/* 803804C0 0037D0A0  7C 60 EA 14 */	add r3, r0, r29
-/* 803804C4 0037D0A4  83 A3 00 00 */	lwz r29, 0(r3)
-/* 803804C8 0037D0A8  93 63 00 00 */	stw r27, 0(r3)
-lbl_803804CC:
-/* 803804CC 0037D0AC  3C 1D 00 01 */	addis r0, r29, 1
-/* 803804D0 0037D0B0  28 00 FF FF */	cmplwi r0, 0xffff
-/* 803804D4 0037D0B4  41 82 00 10 */	beq lbl_803804E4
-/* 803804D8 0037D0B8  80 1F 00 04 */	lwz r0, 4(r31)
-/* 803804DC 0037D0BC  7C 1D 00 40 */	cmplw r29, r0
-/* 803804E0 0037D0C0  41 80 FF DC */	blt lbl_803804BC
-lbl_803804E4:
-/* 803804E4 0037D0C4  BB 41 00 18 */	lmw r26, 0x18(r1)
-/* 803804E8 0037D0C8  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 803804EC 0037D0CC  38 21 00 30 */	addi r1, r1, 0x30
-/* 803804F0 0037D0D0  7C 08 03 A6 */	mtlr r0
-/* 803804F4 0037D0D4  4E 80 00 20 */	blr 
-}
-#endif
+#pragma pop
