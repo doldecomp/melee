@@ -3678,3 +3678,28 @@ func_8036EB88:
 .global lbl_804C0908
 lbl_804C0908:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D7660
+lbl_804D7660:
+	.skip 0x4
+.global lbl_804D7664
+lbl_804D7664:
+	.skip 0x4
+.global lbl_804D7668
+lbl_804D7668:
+	.skip 0x4
+.global lbl_804D766C
+lbl_804D766C:
+	.skip 0x4
+.global lbl_804D7670
+lbl_804D7670:
+	.skip 0x4
+.global lbl_804D7674
+lbl_804D7674:
+	.skip 0x4
+.global lbl_804D7678
+lbl_804D7678:
+	.skip 0x8

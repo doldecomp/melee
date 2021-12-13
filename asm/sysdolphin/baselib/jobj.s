@@ -5711,3 +5711,25 @@ lbl_803B94D0:
     .float 1
     .float 1
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D7680
+lbl_804D7680:
+	.skip 0x4
+.global lbl_804D7684
+lbl_804D7684:
+	.skip 0x4
+.global lbl_804D7688
+lbl_804D7688:
+	.skip 0x4
+.global lbl_804D768C
+lbl_804D768C:
+	.skip 0x4
+.global lbl_804D7690
+lbl_804D7690:
+	.skip 0x4
+.global lbl_804D7694
+lbl_804D7694:
+	.skip 0x4

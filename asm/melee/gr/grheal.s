@@ -801,3 +801,10 @@ lbl_803E851C:
     .balign 4
     .asciz "*** Not found Next Player!(%d)\n"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6AF0
+lbl_804D6AF0:
+	.skip 0x8

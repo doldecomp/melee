@@ -281,3 +281,10 @@ lbl_80220EF4:
 lbl_80220F08:
 /* 80220F08 0021DAE8  38 60 00 01 */	li r3, 1
 /* 80220F0C 0021DAEC  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D6B00
+lbl_804D6B00:
+	.skip 0x8
