@@ -20,4 +20,12 @@ struct ftAttributes2D4 {
     u8 unkData[0x94];
     f32 unk94;
 };
+void func_800704F0(struct _HSD_GObj* arg0, s32 arg1, f32 arg2);
+void func_80070CC4(struct _HSD_GObj* arg0, int arg1);
+void func_80070FB4(struct _HSD_GObj* arg0, s32 arg1, s32 arg2);
+void func_80074A4C(struct _HSD_GObj* arg0, int arg1, int arg2);
+// .sdata2
+float lbl_804D96B0;
+
 #endif
+

@@ -31,3 +31,7 @@ void func_80114AD8(struct _HSD_GObj* arg0, s32 arg1) {
         func_80070CC4(arg0, 1);
     }
 }
+void func_80114B6C(struct _HSD_GObj* arg0) {
+    func_800704F0(arg0, 1, lbl_804D96B0);
+    func_800704F0(arg0, 0, lbl_804D96B0);
+}
