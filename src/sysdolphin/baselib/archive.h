@@ -46,7 +46,7 @@ typedef struct _HSD_Archive {
 
 s32 HSD_ArchiveParse(HSD_Archive*, u8*, u32);
 void* HSD_ArchiveGetPublicAddress(HSD_Archive*, char*);
-char* HSD_ArchiveGetExtern(HSD_Archive*, u32);
+char* HSD_ArchiveGetExtern(HSD_Archive*, s32);
 void HSD_ArchiveLocateExtern(HSD_Archive*, char*, void*);
 
 #endif

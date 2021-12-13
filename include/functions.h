@@ -7371,7 +7371,7 @@ void __cvt_dbl_usll(void);
 // ? func_803257C4(?);
 // ? func_80325878(?);
 // ? func_803258A8(?);
-// ? func_803258E8(?);
+int strcmp(char*, char*);
 // ? func_80325A0C(?);
 // ? func_80325A50(?);
 // ? func_80325B04(?);
