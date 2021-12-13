@@ -17,6 +17,35 @@ extern GXFifoObj* DefaultFifoObj; //DefaultFifoObj
 
 extern s32 init_done; //init_done
 
+#ifdef NON_MATCHING
+void HSD_InitComponent(void) {
+    HSD_OSInit();
+    {
+        HSD_VIStatus vi_status;
+        GXColor black = { 0, 0, 0, 0 };
+
+        vi_status.rmode = *rmode;
+        vi_status.black = GX_TRUE;
+        vi_status.vf = GX_TRUE;
+        vi_status.gamma = GX_GM_1_0;
+        vi_status.clear_clr = black;
+        vi_status.clear_z = GX_MAX_Z24;
+        vi_status.update_clr = GX_ENABLE;
+        vi_status.update_alpha = GX_ENABLE;
+        vi_status.update_z = GX_ENABLE;
+
+        HSD_VIInit(&vi_status, FrameBuffer[0], FrameBuffer[1], FrameBuffer[2]);
+    }
+
+    HSD_GXInit();
+    HSD_DVDInit();
+    HSD_IDSetup();
+    VIWaitForRetrace();
+    HSD_ObjInit();
+    func_803881E4();
+    init_done = TRUE;
+}
+#else
 asm void HSD_InitComponent(void)
 {
     nofralloc
@@ -91,6 +120,7 @@ asm void HSD_InitComponent(void)
 /* 80374F58 00371B38  7C 08 03 A6 */	mtlr r0
 /* 80374F5C 00371B3C  4E 80 00 20 */	blr 
 }
+#endif
 
 void HSD_GXSetFifoObj(GXFifoObj* fifo) 
 {

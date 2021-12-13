@@ -162,34 +162,12 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
     }
 }
 
-asm f32 fmod(f64 x, f64 y) 
-{
-    nofralloc
-    /* 80364340 00360F20  7C 08 02 A6 */	mflr r0
-    /* 80364344 00360F24  90 01 00 04 */	stw r0, 4(r1)
-    /* 80364348 00360F28  94 21 FF D8 */	stwu r1, -0x28(r1)
-    /* 8036434C 00360F2C  DB E1 00 20 */	stfd f31, 0x20(r1)
-    /* 80364350 00360F30  FF E0 10 90 */	fmr f31, f2
-    /* 80364354 00360F34  DB C1 00 18 */	stfd f30, 0x18(r1)
-    /* 80364358 00360F38  FF C0 08 90 */	fmr f30, f1
-    /* 8036435C 00360F3C  FC 20 FA 10 */	fabs f1, f31
-    /* 80364360 00360F40  FC 00 F2 10 */	fabs f0, f30
-    /* 80364364 00360F44  FC 01 00 40 */	fcmpo cr0, f1, f0
-    /* 80364368 00360F48  40 81 00 0C */	ble lbl_80364374
-    /* 8036436C 00360F4C  FC 20 F0 90 */	fmr f1, f30
-    /* 80364370 00360F50  48 00 00 14 */	b lbl_80364384
-lbl_80364374:
-    /* 80364374 00360F54  EC 3E F8 24 */	fdivs f1, f30, f31
-    /* 80364378 00360F58  4B FB EA DD */	bl __cvt_dbl_usll
-    /* 8036437C 00360F5C  4B FB EA 25 */	bl __cvt_sll_flt
-    /* 80364380 00360F60  EC 3F F0 7C */	fnmsubs f1, f31, f1, f30
-lbl_80364384:
-    /* 80364384 00360F64  80 01 00 2C */	lwz r0, 0x2c(r1)
-    /* 80364388 00360F68  CB E1 00 20 */	lfd f31, 0x20(r1)
-    /* 8036438C 00360F6C  CB C1 00 18 */	lfd f30, 0x18(r1)
-    /* 80364390 00360F70  38 21 00 28 */	addi r1, r1, 0x28
-    /* 80364394 00360F74  7C 08 03 A6 */	mtlr r0
-    /* 80364398 00360F78  4E 80 00 20 */	blr 
+float fmod(float a, float b) {
+    long long quotient;
+    if (__fabs(b) > __fabs(a))
+        return a;
+    quotient = a / b;
+    return a - b * quotient;
 }
 
 asm HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)

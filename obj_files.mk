@@ -197,7 +197,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/MSL/PPC_EABI/critical_regions.gamecube.o 	\
 	$(BUILD_DIR)/src/MSL/ctype.o                    \
 	$(BUILD_DIR)/asm/MSL/direct_io.o                \
-	$(BUILD_DIR)/asm/MSL/cstring.o                  \
+	$(BUILD_DIR)/src/MSL/cstring.o                  \
 	$(BUILD_DIR)/asm/MSL/mem_funcs.o                \
 	$(BUILD_DIR)/asm/MSL/printf.o                   \
 	$(BUILD_DIR)/src/MSL/rand.o                     \
@@ -321,13 +321,13 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/wobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fog.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/perf.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/list.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/list.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/object.o    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/quatlib.o   \
 	$(BUILD_DIR)/src/sysdolphin/baselib/memory.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/memory.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/shadow.o	\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/archive.o	\
+	$(BUILD_DIR)/src/sysdolphin/baselib/archive.o	\
 	$(BUILD_DIR)/src/sysdolphin/baselib/random.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/bytecode.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/class.o			\
