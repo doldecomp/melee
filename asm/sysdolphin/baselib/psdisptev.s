@@ -551,3 +551,10 @@ lbl_803A4128:
 /* 803A412C 003A0D0C  38 21 00 08 */	addi r1, r1, 8
 /* 803A4130 003A0D10  7C 08 03 A6 */	mtlr r0
 /* 803A4134 003A0D14  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7950
+lbl_804D7950:
+	.skip 0x8

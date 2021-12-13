@@ -1064,3 +1064,16 @@ lbl_80382A2C:
 /* 80382A34 0037F614  38 21 00 30 */	addi r1, r1, 0x30
 /* 80382A38 0037F618  7C 08 03 A6 */	mtlr r0
 /* 80382A3C 0037F61C  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7700
+lbl_804D7700:
+	.skip 0x4
+.global lbl_804D7704
+lbl_804D7704:
+	.skip 0x4
+.global lbl_804D7708
+lbl_804D7708:
+	.skip 0x8

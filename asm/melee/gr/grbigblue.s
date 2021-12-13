@@ -12302,3 +12302,10 @@ jtbl_803E3064:
     .4byte 0x725F4D61
     .4byte 0x78000000
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D69C8
+lbl_804D69C8:
+	.skip 0x8
