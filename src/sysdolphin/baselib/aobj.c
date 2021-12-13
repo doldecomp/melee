@@ -164,7 +164,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
 
 float fmod(float a, float b) {
     long long quotient;
-    if (fabs(b) > fabs(a))
+    if (__fabs(b) > __fabs(a))
         return a;
     quotient = a / b;
     return a - b * quotient;
