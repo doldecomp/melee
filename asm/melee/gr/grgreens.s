@@ -4398,3 +4398,16 @@ lbl_803E7840:
 .global lbl_8049F9E0
 lbl_8049F9E0:
 	.skip 0x20
+
+
+.section .sbss
+
+.global lbl_804D6AA8
+lbl_804D6AA8:
+	.skip 0x4
+.global lbl_804D6AAC
+lbl_804D6AAC:
+	.skip 0x1
+.global lbl_804D6AAD
+lbl_804D6AAD:
+	.skip 0x3

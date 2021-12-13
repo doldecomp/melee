@@ -1,83 +1,5 @@
 .section .sbss  # 0x804D63A0 - 0x804D79C9
 
-.global lbl_804D6A18
-lbl_804D6A18:
-	.skip 0x8
-.global lbl_804D6A20
-lbl_804D6A20:
-	.skip 0x8
-.global lbl_804D6A28
-lbl_804D6A28:
-	.skip 0x8
-.global lbl_804D6A30
-lbl_804D6A30:
-	.skip 0x4
-.global lbl_804D6A34
-lbl_804D6A34:
-	.skip 0x4
-.global lbl_804D6A38
-lbl_804D6A38:
-	.skip 0x4
-.global lbl_804D6A3C
-lbl_804D6A3C:
-	.skip 0x4
-.global lbl_804D6A40
-lbl_804D6A40:
-	.skip 0x8
-.global lbl_804D6A48
-lbl_804D6A48:
-	.skip 0x8
-.global lbl_804D6A50
-lbl_804D6A50:
-	.skip 0x8
-.global lbl_804D6A58
-lbl_804D6A58:
-	.skip 0x8
-.global lbl_804D6A60
-lbl_804D6A60:
-	.skip 0x8
-.global lbl_804D6A68
-lbl_804D6A68:
-	.skip 0x8
-.global lbl_804D6A70
-lbl_804D6A70:
-	.skip 0x8
-.global lbl_804D6A78
-lbl_804D6A78:
-	.skip 0x8
-.global lbl_804D6A80
-lbl_804D6A80:
-	.skip 0x8
-.global lbl_804D6A88
-lbl_804D6A88:
-	.skip 0x8
-.global lbl_804D6A90
-lbl_804D6A90:
-	.skip 0x8
-.global lbl_804D6A98
-lbl_804D6A98:
-	.skip 0x4
-.global lbl_804D6A9C
-lbl_804D6A9C:
-	.skip 0x4
-.global lbl_804D6AA0
-lbl_804D6AA0:
-	.skip 0x8
-.global lbl_804D6AA8
-lbl_804D6AA8:
-	.skip 0x4
-.global lbl_804D6AAC
-lbl_804D6AAC:
-	.skip 0x1
-.global lbl_804D6AAD
-lbl_804D6AAD:
-	.skip 0x3
-.global lbl_804D6AB0
-lbl_804D6AB0:
-	.skip 0x8
-.global lbl_804D6AB8
-lbl_804D6AB8:
-	.skip 0x8
 .global lbl_804D6AC0
 lbl_804D6AC0:
 	.skip 0x8
@@ -1149,39 +1071,7 @@ lbl_804D70F4:
 .global lbl_804D70F8
 lbl_804D70F8:
 	.skip 0x8
-.global Ydchuff
-Ydchuff:
-	.skip 0x20
-.global Udchuff
-Udchuff:
-	.skip 0x20
-.global Vdchuff
-Vdchuff:
-	.skip 0x20
-.global Yachuff
-Yachuff:
-	.skip 0x20
-.global Uachuff
-Uachuff:
-	.skip 0x20
-.global Vachuff
-Vachuff:
-	.skip 0x20
-.global lbl_804D71C0
-lbl_804D71C0:
-	.skip 0x20
-.global lbl_804D71E0
-lbl_804D71E0:
-	.skip 0x20
-.global lbl_804D7200
-lbl_804D7200:
-	.skip 0x8
-.global lbl_804D7208
-lbl_804D7208:
-	.skip 0x4
-.global lbl_804D720C
-lbl_804D720C:
-	.skip 0x4
+
 .global lbl_804D7210
 lbl_804D7210:
 	.skip 0x8
@@ -1970,55 +1860,4 @@ lbl_804D7690:
 	.skip 0x4
 .global lbl_804D7694
 lbl_804D7694:
-	.skip 0x4
-.global lbl_804D7698
-lbl_804D7698:
-	.skip 0x4
-.global lbl_804D769C
-lbl_804D769C:
-	.skip 0x4
-.global lbl_804D76A0
-lbl_804D76A0:
-	.skip 0x4
-.global lbl_804D76A4
-lbl_804D76A4:
-	.skip 0x4
-.global lbl_804D76A8
-lbl_804D76A8:
-	.skip 0x4
-.global lbl_804D76AC
-lbl_804D76AC:
-	.skip 0x4
-.global lbl_804D76B0
-lbl_804D76B0:
-	.skip 0x4
-.global lbl_804D76B4
-lbl_804D76B4:
-	.skip 0x4
-.global lbl_804D76B8
-lbl_804D76B8:
-	.skip 0x4
-.global lbl_804D76BC
-lbl_804D76BC:
-	.skip 0x4
-.global lbl_804D76C0
-lbl_804D76C0:
-	.skip 0x4
-.global DefaultFifoObj
-DefaultFifoObj:
-	.skip 0x4
-.global lbl_804D76C8
-lbl_804D76C8:
-	.skip 0x4
-.global init_done
-init_done:
-	.skip 0x4
-.global lbl_804D76D0
-lbl_804D76D0:
-	.skip 0x8
-.global lbl_804D76D8
-lbl_804D76D8:
-	.skip 0x4
-.global lbl_804D76DC
-lbl_804D76DC:
 	.skip 0x4

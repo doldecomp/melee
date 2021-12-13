@@ -1034,3 +1034,10 @@ lbl_803E6574:
     .4byte 0x00000001
     .4byte 0x00010005
     .4byte 0x00020009
+
+
+.section .sbss
+
+.global lbl_804D6A88
+lbl_804D6A88:
+	.skip 0x8

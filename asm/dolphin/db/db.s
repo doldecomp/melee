@@ -83,3 +83,13 @@ lbl_80335FA0:
 /* 80335FBC 00332B9C  91 41 00 24 */	stw r10, 0x24(r1)
 /* 80335FC0 00332BA0  38 21 00 70 */	addi r1, r1, 0x70
 /* 80335FC4 00332BA4  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7208
+lbl_804D7208:
+	.skip 0x4
+.global lbl_804D720C
+lbl_804D720C:
+	.skip 0x4

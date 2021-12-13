@@ -555,3 +555,10 @@ lbl_803E5764:
 lbl_803E57C8:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6A48
+lbl_804D6A48:
+	.skip 0x8

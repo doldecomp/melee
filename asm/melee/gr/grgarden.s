@@ -889,3 +889,10 @@ lbl_803E52E0:
     .4byte 0x7264656E
     .4byte 0x2E630000
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A28
+lbl_804D6A28:
+	.skip 0x8

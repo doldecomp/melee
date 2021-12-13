@@ -1518,3 +1518,10 @@ lbl_803E7CCC:
     .4byte 0x4490B5D3
     .4byte 0x43B14DAC
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6AB8
+lbl_804D6AB8:
+	.skip 0x8

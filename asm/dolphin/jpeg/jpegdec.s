@@ -6994,3 +6994,34 @@ lbl_804A7400:
 .global lbl_804A747C
 lbl_804A747C:
 	.skip 0xC
+
+
+.section .sbss
+
+.global Ydchuff
+Ydchuff:
+	.skip 0x20
+.global Udchuff
+Udchuff:
+	.skip 0x20
+.global Vdchuff
+Vdchuff:
+	.skip 0x20
+.global Yachuff
+Yachuff:
+	.skip 0x20
+.global Uachuff
+Uachuff:
+	.skip 0x20
+.global Vachuff
+Vachuff:
+	.skip 0x20
+.global lbl_804D71C0
+lbl_804D71C0:
+	.skip 0x20
+.global lbl_804D71E0
+lbl_804D71E0:
+	.skip 0x20
+.global lbl_804D7200
+lbl_804D7200:
+	.skip 0x8

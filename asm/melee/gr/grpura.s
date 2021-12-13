@@ -2654,3 +2654,10 @@ lbl_803E7620:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6AA0
+lbl_804D6AA0:
+	.skip 0x8

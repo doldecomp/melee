@@ -722,3 +722,28 @@ FrameBuffer:
 .global memReport
 memReport:
     .skip 0x2C
+
+
+.section .sbss
+
+.global lbl_804D76B8
+lbl_804D76B8:
+	.skip 0x4
+.global lbl_804D76BC
+lbl_804D76BC:
+	.skip 0x4
+.global lbl_804D76C0
+lbl_804D76C0:
+	.skip 0x4
+.global DefaultFifoObj
+DefaultFifoObj:
+	.skip 0x4
+.global lbl_804D76C8
+lbl_804D76C8:
+	.skip 0x4
+.global init_done
+init_done:
+	.skip 0x4
+.global lbl_804D76D0
+lbl_804D76D0:
+	.skip 0x8
