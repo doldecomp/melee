@@ -4,7 +4,7 @@
 #include <dolphin/types.h>
 struct Fighter {
     u8 unkData0[0x2D4];
-    u8* ftData[0x10C];
+    u8* unk2D4;
     u8 unkData2D8[0x169C];
     s32 unk1974;
     u8 unkData1978[0x8B8];
