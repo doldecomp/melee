@@ -321,7 +321,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/wobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fog.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/perf.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/list.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/list.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/object.o    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/quatlib.o   \
 	$(BUILD_DIR)/src/sysdolphin/baselib/memory.o	\

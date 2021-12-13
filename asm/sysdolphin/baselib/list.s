@@ -98,8 +98,8 @@ lbl_8037E4FC:
 /* 8037E530 0037B110  7C 08 03 A6 */	mtlr r0
 /* 8037E534 0037B114  4E 80 00 20 */	blr 
 
-.global HSD_SListPrepend
-HSD_SListPrepend:
+.global HSD_SListAllocAndPrepend
+HSD_SListAllocAndPrepend:
 /* 8037E538 0037B118  7C 08 02 A6 */	mflr r0
 /* 8037E53C 0037B11C  3C A0 80 4C */	lis r5, slist_alloc_data@ha
 /* 8037E540 0037B120  90 01 00 04 */	stw r0, 4(r1)
