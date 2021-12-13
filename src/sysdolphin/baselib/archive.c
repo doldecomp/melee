@@ -1,9 +1,70 @@
-.include "macros.inc"
+#include <string.h>
 
-.section .text  # 0x80005940 - 0x803B7240
+#include "sysdolphin/baselib/archive.h"
 
-.global HSD_ArchiveParse
-HSD_ArchiveParse:
+extern char* lbl_804074A8;
+
+inline void Locate(HSD_Archive* archive)
+{
+    int i;
+    u32* ptr;
+
+    for (i = 0; i < archive->header.nb_reloc; i++) {
+        ptr = (u32*)(archive->data + archive->reloc_info[i].offset);
+        *ptr += (u32)archive->data;
+    }
+}
+
+
+// Non-matching because we can't extern the string due to section
+#ifdef NON_MATCHING
+s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
+{
+    u32 offset;
+    
+    if (archive == NULL) {
+        return -1;
+    }
+
+    memset(archive, 0, sizeof(HSD_Archive));
+    archive->flags |= 1;
+    memcpy(archive, src, sizeof(HSD_ArchiveHeader));
+
+    if (archive->header.file_size != file_size) {
+        OSReport("HSD_ArchiveParse: byte-order mismatch! Please check data format %x %x\n", archive->header.file_size, file_size);
+        return -1;
+    }
+
+    offset = sizeof(HSD_ArchiveHeader);
+    if (archive->header.data_size != 0) { // Body Size
+        archive->data = src + 0x20;
+        offset = archive->header.data_size + 0x20;
+    }
+    if (archive->header.nb_reloc != 0) { // Relocation Size
+        archive->reloc_info = (HSD_ArchiveRelocationInfo*)((s32)src + offset);
+        offset = offset + archive->header.nb_reloc * 4;
+    }
+    if (archive->header.nb_public != 0) { // Root Size
+        archive->public_info = (HSD_ArchivePublicInfo*)((s32)src + offset);
+        offset = offset + archive->header.nb_public * 8;
+    }
+    if (archive->header.nb_extern != 0) { // XRef Size
+        archive->extern_info = (HSD_ArchiveExternInfo*)((s32)src + offset);
+        offset = offset + archive->header.nb_extern * 8;
+    }
+    if (offset < archive->header.file_size) { // File Size
+        archive->symbols = (char*)((s32)src + offset);
+    }
+
+    archive->top_ptr = (void*)src;
+    Locate(archive);
+
+    return 0;
+}
+#else
+asm s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
+{
+    nofralloc
 /* 803801E4 0037CDC4  7C 08 02 A6 */	mflr r0
 /* 803801E8 0037CDC8  90 01 00 04 */	stw r0, 4(r1)
 /* 803801EC 0037CDCC  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -107,76 +168,59 @@ lbl_8038033C:
 /* 8038034C 0037CF2C  38 21 00 28 */	addi r1, r1, 0x28
 /* 80380350 0037CF30  7C 08 03 A6 */	mtlr r0
 /* 80380354 0037CF34  4E 80 00 20 */	blr 
+}
+#endif
 
-.global HSD_ArchiveGetPublicAddress
-HSD_ArchiveGetPublicAddress:
-/* 80380358 0037CF38  7C 08 02 A6 */	mflr r0
-/* 8038035C 0037CF3C  90 01 00 04 */	stw r0, 4(r1)
-/* 80380360 0037CF40  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 80380364 0037CF44  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 80380368 0037CF48  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8038036C 0037CF4C  3B C0 00 00 */	li r30, 0
-/* 80380370 0037CF50  57 DF 18 38 */	slwi r31, r30, 3
-/* 80380374 0037CF54  93 A1 00 14 */	stw r29, 0x14(r1)
-/* 80380378 0037CF58  3B A4 00 00 */	addi r29, r4, 0
-/* 8038037C 0037CF5C  93 81 00 10 */	stw r28, 0x10(r1)
-/* 80380380 0037CF60  3B 83 00 00 */	addi r28, r3, 0
-/* 80380384 0037CF64  48 00 00 48 */	b lbl_803803CC
-lbl_80380388:
-/* 80380388 0037CF68  80 7C 00 28 */	lwz r3, 0x28(r28)
-/* 8038038C 0037CF6C  38 1F 00 04 */	addi r0, r31, 4
-/* 80380390 0037CF70  80 BC 00 30 */	lwz r5, 0x30(r28)
-/* 80380394 0037CF74  7F A4 EB 78 */	mr r4, r29
-/* 80380398 0037CF78  7C 03 00 2E */	lwzx r0, r3, r0
-/* 8038039C 0037CF7C  7C 65 02 14 */	add r3, r5, r0
-/* 803803A0 0037CF80  4B FA 55 49 */	bl func_803258E8
-/* 803803A4 0037CF84  2C 03 00 00 */	cmpwi r3, 0
-/* 803803A8 0037CF88  40 82 00 1C */	bne lbl_803803C4
-/* 803803AC 0037CF8C  80 7C 00 28 */	lwz r3, 0x28(r28)
-/* 803803B0 0037CF90  57 C0 18 38 */	slwi r0, r30, 3
-/* 803803B4 0037CF94  80 9C 00 20 */	lwz r4, 0x20(r28)
-/* 803803B8 0037CF98  7C 03 00 2E */	lwzx r0, r3, r0
-/* 803803BC 0037CF9C  7C 64 02 14 */	add r3, r4, r0
-/* 803803C0 0037CFA0  48 00 00 1C */	b lbl_803803DC
-lbl_803803C4:
-/* 803803C4 0037CFA4  3B FF 00 08 */	addi r31, r31, 8
-/* 803803C8 0037CFA8  3B DE 00 01 */	addi r30, r30, 1
-lbl_803803CC:
-/* 803803CC 0037CFAC  80 1C 00 0C */	lwz r0, 0xc(r28)
-/* 803803D0 0037CFB0  7C 1E 00 40 */	cmplw r30, r0
-/* 803803D4 0037CFB4  41 80 FF B4 */	blt lbl_80380388
-/* 803803D8 0037CFB8  38 60 00 00 */	li r3, 0
-lbl_803803DC:
-/* 803803DC 0037CFBC  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 803803E0 0037CFC0  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 803803E4 0037CFC4  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 803803E8 0037CFC8  83 A1 00 14 */	lwz r29, 0x14(r1)
-/* 803803EC 0037CFCC  83 81 00 10 */	lwz r28, 0x10(r1)
-/* 803803F0 0037CFD0  38 21 00 20 */	addi r1, r1, 0x20
-/* 803803F4 0037CFD4  7C 08 03 A6 */	mtlr r0
-/* 803803F8 0037CFD8  4E 80 00 20 */	blr 
+#pragma push
+#pragma peephole on
+void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols) {
+    int i;
+    
+    for (i = 0; i < archive->header.nb_public; i++) {
+        if (strcmp(archive->symbols + archive->public_info[i].symbol, symbols) == 0) // If both strings are equal, we've found the node
+            return archive->data + archive->public_info[i].offset;;
+    }
 
-.global HSD_ArchiveGetExtern
-HSD_ArchiveGetExtern:
-/* 803803FC 0037CFDC  2C 04 00 00 */	cmpwi r4, 0
-/* 80380400 0037CFE0  41 80 00 10 */	blt lbl_80380410
-/* 80380404 0037CFE4  80 03 00 10 */	lwz r0, 0x10(r3)
-/* 80380408 0037CFE8  7C 00 20 40 */	cmplw r0, r4
-/* 8038040C 0037CFEC  41 81 00 0C */	bgt lbl_80380418
-lbl_80380410:
-/* 80380410 0037CFF0  38 60 00 00 */	li r3, 0
-/* 80380414 0037CFF4  4E 80 00 20 */	blr 
-lbl_80380418:
-/* 80380418 0037CFF8  80 A3 00 2C */	lwz r5, 0x2c(r3)
-/* 8038041C 0037CFFC  54 80 18 38 */	slwi r0, r4, 3
-/* 80380420 0037D000  80 83 00 30 */	lwz r4, 0x30(r3)
-/* 80380424 0037D004  7C 65 02 14 */	add r3, r5, r0
-/* 80380428 0037D008  80 03 00 04 */	lwz r0, 4(r3)
-/* 8038042C 0037D00C  7C 64 02 14 */	add r3, r4, r0
-/* 80380430 0037D010  4E 80 00 20 */	blr 
+    return NULL;
+}
 
-.global HSD_ArchiveLocateExtern
-HSD_ArchiveLocateExtern:
+char* HSD_ArchiveGetExtern(HSD_Archive* archive, s32 offset)
+{
+    if (offset < 0 || archive->header.nb_extern <= offset) {
+        return NULL;
+    }
+    return archive->symbols + archive->extern_info[offset].symbol;
+}
+#pragma pop
+
+#ifdef NON_MATCHING
+void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
+{
+    u32 offset;
+    int i;
+    
+    offset = -1;
+    for (i = 0; i < archive->header.nb_extern; i++){
+        if (strcmp(symbols, archive->symbols + archive->extern_info[i].symbol) == 0) {
+            offset = archive->extern_info[i].offset;
+            break;
+        }
+    }
+
+    if (offset == -1){
+        return;
+    }
+
+    while (offset != -1 && offset < archive->header.data_size) {
+        u32 next = *(u32*)((u32*)archive->data)[offset];
+        offset = next;
+        *(u32*)archive->data = (u32)addr;
+    }
+}
+#else
+asm void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
+{
+    nofralloc
 /* 80380434 0037D014  7C 08 02 A6 */	mflr r0
 /* 80380438 0037D018  90 01 00 04 */	stw r0, 4(r1)
 /* 8038043C 0037D01C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -195,7 +239,7 @@ lbl_80380460:
 /* 8038046C 0037D04C  7F 43 D3 78 */	mr r3, r26
 /* 80380470 0037D050  7C 04 00 2E */	lwzx r0, r4, r0
 /* 80380474 0037D054  7C 85 02 14 */	add r4, r5, r0
-/* 80380478 0037D058  4B FA 54 71 */	bl func_803258E8
+/* 80380478 0037D058  4B FA 54 71 */	bl strcmp
 /* 8038047C 0037D05C  2C 03 00 00 */	cmpwi r3, 0
 /* 80380480 0037D060  40 82 00 14 */	bne lbl_80380494
 /* 80380484 0037D064  80 7F 00 2C */	lwz r3, 0x2c(r31)
@@ -233,3 +277,5 @@ lbl_803804E4:
 /* 803804EC 0037D0CC  38 21 00 30 */	addi r1, r1, 0x30
 /* 803804F0 0037D0D0  7C 08 03 A6 */	mtlr r0
 /* 803804F4 0037D0D4  4E 80 00 20 */	blr 
+}
+#endif

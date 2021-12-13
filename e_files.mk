@@ -12,3 +12,4 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/wobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/texp.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/list.o\
+	$(EPILOGUE_DIR)/src/sysdolphin/baselib/archive.o\
