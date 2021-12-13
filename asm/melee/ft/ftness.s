@@ -232,7 +232,7 @@ lbl_80114AC4:
 /* 80114AD0 001116B0  7C 08 03 A6 */	mtlr r0
 /* 80114AD4 001116B4  4E 80 00 20 */	blr 
 
-.global func_80114AD8
+.global func_80114AD8 # decompiled
 func_80114AD8:
 /* 80114AD8 001116B8  7C 08 02 A6 */	mflr r0
 /* 80114ADC 001116BC  38 A0 FF FF */	li r5, -1

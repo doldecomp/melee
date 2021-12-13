@@ -25,3 +25,9 @@ void func_80114A90(struct _HSD_GObj* arg0) {
         func_80070C48(arg0, 1);
     }
 }
+void func_80114AD8(struct _HSD_GObj* arg0, s32 arg1) {
+    func_80070FB4(arg0, 1, -1);
+    if (arg1 != 0) {
+        func_80070CC4(arg0, 1);
+    }
+}

@@ -13,4 +13,5 @@ void func_8011493C(s32 arg);
 f32 func_8011495C(struct Fighter* arg0);
 void func_80114A48(struct _HSD_GObj* arg0);
 void func_80114A90(struct _HSD_GObj* arg0);
+void func_80070FB4(struct _HSD_GObj* arg0, s32 arg1, s32 arg2);
 #endif
