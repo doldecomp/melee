@@ -1631,3 +1631,10 @@ lbl_803E4C00:
     .4byte 0x736C6174
     .4byte 0x65000000
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A00
+lbl_804D6A00:
+	.skip 0x8

@@ -2860,3 +2860,10 @@ lbl_803E4048:
     .4byte 0x001B0013
     .4byte 0x00270015
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D69E0
+lbl_804D69E0:
+	.skip 0x8

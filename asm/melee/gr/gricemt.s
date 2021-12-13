@@ -5168,3 +5168,19 @@ lbl_803E4800:
     .4byte 0x49454C44
     .4byte 0x5F4D4158
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D69E8
+lbl_804D69E8:
+	.skip 0x4
+.global lbl_804D69EC
+lbl_804D69EC:
+	.skip 0x4
+.global lbl_804D69F0
+lbl_804D69F0:
+	.skip 0x4
+.global lbl_804D69F4
+lbl_804D69F4:
+	.skip 0x4

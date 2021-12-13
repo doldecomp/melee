@@ -1,35 +1,5 @@
 .section .sbss  # 0x804D63A0 - 0x804D79C9
 
-.global lbl_804D69E0
-lbl_804D69E0:
-	.skip 0x8
-.global lbl_804D69E8
-lbl_804D69E8:
-	.skip 0x4
-.global lbl_804D69EC
-lbl_804D69EC:
-	.skip 0x4
-.global lbl_804D69F0
-lbl_804D69F0:
-	.skip 0x4
-.global lbl_804D69F4
-lbl_804D69F4:
-	.skip 0x4
-.global lbl_804D69F8
-lbl_804D69F8:
-	.skip 0x8
-.global lbl_804D6A00
-lbl_804D6A00:
-	.skip 0x8
-.global lbl_804D6A08
-lbl_804D6A08:
-	.skip 0x4
-.global lbl_804D6A0C
-lbl_804D6A0C:
-	.skip 0x4
-.global lbl_804D6A10
-lbl_804D6A10:
-	.skip 0x8
 .global lbl_804D6A18
 lbl_804D6A18:
 	.skip 0x8
@@ -2052,15 +2022,3 @@ lbl_804D76D8:
 .global lbl_804D76DC
 lbl_804D76DC:
 	.skip 0x4
-.global lbl_804D76E0
-lbl_804D76E0:
-	.skip 0x8
-.global lbl_804D76E8
-lbl_804D76E8:
-	.skip 0x4
-.global lbl_804D76EC
-lbl_804D76EC:
-	.skip 0x4
-.global lbl_804D76F0
-lbl_804D76F0:
-	.skip 0x8
