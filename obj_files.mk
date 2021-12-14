@@ -22,7 +22,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.o 		\
 	$(BUILD_DIR)/asm/melee/lb/lbfile.o 				\
-	$(BUILD_DIR)/asm/melee/lb/code_80016A54.o		\
+	$(BUILD_DIR)/asm/melee/lb/lbarchive.o			\
+	$(BUILD_DIR)/asm/melee/lb/lbdvd.o				\
+	$(BUILD_DIR)/asm/melee/lb/code_80019230.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8.o		\
 	                                                \
@@ -76,8 +78,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/ftcrazyhand.o 				\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.o 		            \
 															\
-	$(BUILD_DIR)/asm/melee/text_1.o 		 	            \
-															\
+	$(BUILD_DIR)/asm/melee/gm/gmmain.o 		 	            \
 	$(BUILD_DIR)/asm/melee/gm/code_801601C4.o 		 	    \
 	$(BUILD_DIR)/asm/melee/gm/gmtitle.o 		 			\
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.o 		 			\
