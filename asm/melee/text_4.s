@@ -9743,11 +9743,11 @@ lbl_802FBD14:
 /* 802FBDC8 002F89A8  38 81 00 1C */	addi r4, r1, 0x1c
 /* 802FBDCC 002F89AC  4B D3 AB AD */	bl func_80036978
 /* 802FBDD0 002F89B0  3B 60 00 01 */	li r27, 1
-/* 802FBDD4 002F89B4  4B F2 8C 81 */	bl func_80224A54
+/* 802FBDD4 002F89B4  4B F2 8C 81 */	bl get_cam_bounds_left_offset
 /* 802FBDD8 002F89B8  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FBDDC 002F89BC  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FBDE0 002F89C0  41 80 00 18 */	blt lbl_802FBDF8
-/* 802FBDE4 002F89C4  4B F2 8C 85 */	bl func_80224A68
+/* 802FBDE4 002F89C4  4B F2 8C 85 */	bl get_cam_bounds_right_offset
 /* 802FBDE8 002F89C8  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FBDEC 002F89CC  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FBDF0 002F89D0  41 81 00 08 */	bgt lbl_802FBDF8
@@ -9758,23 +9758,23 @@ lbl_802FBDF8:
 /* 802FBE00 002F89E0  C0 02 E1 28 */	lfs f0, lbl_804DDB08@sda21(r2)
 /* 802FBE04 002F89E4  48 00 00 E4 */	b lbl_802FBEE8
 lbl_802FBE08:
-/* 802FBE08 002F89E8  4B F2 8C 4D */	bl func_80224A54
+/* 802FBE08 002F89E8  4B F2 8C 4D */	bl get_cam_bounds_left_offset
 /* 802FBE0C 002F89EC  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FBE10 002F89F0  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FBE14 002F89F4  40 80 00 0C */	bge lbl_802FBE20
 /* 802FBE18 002F89F8  C0 02 E1 28 */	lfs f0, lbl_804DDB08@sda21(r2)
 /* 802FBE1C 002F89FC  48 00 00 48 */	b lbl_802FBE64
 lbl_802FBE20:
-/* 802FBE20 002F8A00  4B F2 8C 49 */	bl func_80224A68
+/* 802FBE20 002F8A00  4B F2 8C 49 */	bl get_cam_bounds_right_offset
 /* 802FBE24 002F8A04  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FBE28 002F8A08  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FBE2C 002F8A0C  40 81 00 0C */	ble lbl_802FBE38
 /* 802FBE30 002F8A10  C0 02 E1 2C */	lfs f0, lbl_804DDB0C@sda21(r2)
 /* 802FBE34 002F8A14  48 00 00 30 */	b lbl_802FBE64
 lbl_802FBE38:
-/* 802FBE38 002F8A18  4B F2 8C 31 */	bl func_80224A68
+/* 802FBE38 002F8A18  4B F2 8C 31 */	bl get_cam_bounds_right_offset
 /* 802FBE3C 002F8A1C  FF 00 08 90 */	fmr f24, f1
-/* 802FBE40 002F8A20  4B F2 8C 15 */	bl func_80224A54
+/* 802FBE40 002F8A20  4B F2 8C 15 */	bl get_cam_bounds_left_offset
 /* 802FBE44 002F8A24  EC 21 C0 2A */	fadds f1, f1, f24
 /* 802FBE48 002F8A28  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FBE4C 002F8A2C  EC 3E 00 72 */	fmuls f1, f30, f1
@@ -9790,30 +9790,30 @@ lbl_802FBE64:
 /* 802FBE6C 002F8A4C  80 01 00 FC */	lwz r0, 0xfc(r1)
 /* 802FBE70 002F8A50  34 00 FF FF */	addic. r0, r0, -1
 /* 802FBE74 002F8A54  40 82 00 38 */	bne lbl_802FBEAC
-/* 802FBE78 002F8A58  4B F2 8B DD */	bl func_80224A54
+/* 802FBE78 002F8A58  4B F2 8B DD */	bl get_cam_bounds_left_offset
 /* 802FBE7C 002F8A5C  FF 20 08 90 */	fmr f25, f1
-/* 802FBE80 002F8A60  4B F2 8B E9 */	bl func_80224A68
+/* 802FBE80 002F8A60  4B F2 8B E9 */	bl get_cam_bounds_right_offset
 /* 802FBE84 002F8A64  FF 00 08 90 */	fmr f24, f1
-/* 802FBE88 002F8A68  4B F2 8B CD */	bl func_80224A54
+/* 802FBE88 002F8A68  4B F2 8B CD */	bl get_cam_bounds_left_offset
 /* 802FBE8C 002F8A6C  EC 01 C0 2A */	fadds f0, f1, f24
 /* 802FBE90 002F8A70  EF 1E C8 38 */	fmsubs f24, f30, f0, f25
-/* 802FBE94 002F8A74  4B F2 8B C1 */	bl func_80224A54
+/* 802FBE94 002F8A74  4B F2 8B C1 */	bl get_cam_bounds_left_offset
 /* 802FBE98 002F8A78  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FBE9C 002F8A7C  EC 00 08 28 */	fsubs f0, f0, f1
 /* 802FBEA0 002F8A80  EC 00 C0 24 */	fdivs f0, f0, f24
 /* 802FBEA4 002F8A84  EC 1D 00 28 */	fsubs f0, f29, f0
 /* 802FBEA8 002F8A88  48 00 00 40 */	b lbl_802FBEE8
 lbl_802FBEAC:
-/* 802FBEAC 002F8A8C  4B F2 8B BD */	bl func_80224A68
+/* 802FBEAC 002F8A8C  4B F2 8B BD */	bl get_cam_bounds_right_offset
 /* 802FBEB0 002F8A90  FF 20 08 90 */	fmr f25, f1
-/* 802FBEB4 002F8A94  4B F2 8B B5 */	bl func_80224A68
+/* 802FBEB4 002F8A94  4B F2 8B B5 */	bl get_cam_bounds_right_offset
 /* 802FBEB8 002F8A98  FF 00 08 90 */	fmr f24, f1
-/* 802FBEBC 002F8A9C  4B F2 8B 99 */	bl func_80224A54
+/* 802FBEBC 002F8A9C  4B F2 8B 99 */	bl get_cam_bounds_left_offset
 /* 802FBEC0 002F8AA0  EC 01 C0 2A */	fadds f0, f1, f24
 /* 802FBEC4 002F8AA4  EF 3E C8 3C */	fnmsubs f25, f30, f0, f25
-/* 802FBEC8 002F8AA8  4B F2 8B A1 */	bl func_80224A68
+/* 802FBEC8 002F8AA8  4B F2 8B A1 */	bl get_cam_bounds_right_offset
 /* 802FBECC 002F8AAC  FF 00 08 90 */	fmr f24, f1
-/* 802FBED0 002F8AB0  4B F2 8B 85 */	bl func_80224A54
+/* 802FBED0 002F8AB0  4B F2 8B 85 */	bl get_cam_bounds_left_offset
 /* 802FBED4 002F8AB4  EC 21 C0 2A */	fadds f1, f1, f24
 /* 802FBED8 002F8AB8  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FBEDC 002F8ABC  EC 1E 00 7C */	fnmsubs f0, f30, f1, f0
@@ -9822,11 +9822,11 @@ lbl_802FBEAC:
 lbl_802FBEE8:
 /* 802FBEE8 002F8AC8  EF 3D 00 28 */	fsubs f25, f29, f0
 /* 802FBEEC 002F8ACC  3B 60 00 01 */	li r27, 1
-/* 802FBEF0 002F8AD0  4B F2 8B 91 */	bl func_80224A80
+/* 802FBEF0 002F8AD0  4B F2 8B 91 */	bl get_cam_bounds_top_offset
 /* 802FBEF4 002F8AD4  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FBEF8 002F8AD8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FBEFC 002F8ADC  41 81 00 18 */	bgt lbl_802FBF14
-/* 802FBF00 002F8AE0  4B F2 8B 99 */	bl func_80224A98
+/* 802FBF00 002F8AE0  4B F2 8B 99 */	bl get_cam_bounds_bottom_offset
 /* 802FBF04 002F8AE4  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FBF08 002F8AE8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FBF0C 002F8AEC  41 80 00 08 */	blt lbl_802FBF14
@@ -9837,23 +9837,23 @@ lbl_802FBF14:
 /* 802FBF1C 002F8AFC  C0 02 E1 28 */	lfs f0, lbl_804DDB08@sda21(r2)
 /* 802FBF20 002F8B00  48 00 00 E4 */	b lbl_802FC004
 lbl_802FBF24:
-/* 802FBF24 002F8B04  4B F2 8B 5D */	bl func_80224A80
+/* 802FBF24 002F8B04  4B F2 8B 5D */	bl get_cam_bounds_top_offset
 /* 802FBF28 002F8B08  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FBF2C 002F8B0C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FBF30 002F8B10  40 81 00 0C */	ble lbl_802FBF3C
 /* 802FBF34 002F8B14  C0 02 E1 28 */	lfs f0, lbl_804DDB08@sda21(r2)
 /* 802FBF38 002F8B18  48 00 00 48 */	b lbl_802FBF80
 lbl_802FBF3C:
-/* 802FBF3C 002F8B1C  4B F2 8B 5D */	bl func_80224A98
+/* 802FBF3C 002F8B1C  4B F2 8B 5D */	bl get_cam_bounds_bottom_offset
 /* 802FBF40 002F8B20  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FBF44 002F8B24  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FBF48 002F8B28  40 80 00 0C */	bge lbl_802FBF54
 /* 802FBF4C 002F8B2C  C0 02 E1 2C */	lfs f0, lbl_804DDB0C@sda21(r2)
 /* 802FBF50 002F8B30  48 00 00 30 */	b lbl_802FBF80
 lbl_802FBF54:
-/* 802FBF54 002F8B34  4B F2 8B 45 */	bl func_80224A98
+/* 802FBF54 002F8B34  4B F2 8B 45 */	bl get_cam_bounds_bottom_offset
 /* 802FBF58 002F8B38  FF 00 08 90 */	fmr f24, f1
-/* 802FBF5C 002F8B3C  4B F2 8B 25 */	bl func_80224A80
+/* 802FBF5C 002F8B3C  4B F2 8B 25 */	bl get_cam_bounds_top_offset
 /* 802FBF60 002F8B40  EC 21 C0 2A */	fadds f1, f1, f24
 /* 802FBF64 002F8B44  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FBF68 002F8B48  EC 3E 00 72 */	fmuls f1, f30, f1
@@ -9869,30 +9869,30 @@ lbl_802FBF80:
 /* 802FBF88 002F8B68  80 01 00 FC */	lwz r0, 0xfc(r1)
 /* 802FBF8C 002F8B6C  34 00 FF FF */	addic. r0, r0, -1
 /* 802FBF90 002F8B70  40 82 00 38 */	bne lbl_802FBFC8
-/* 802FBF94 002F8B74  4B F2 8A ED */	bl func_80224A80
+/* 802FBF94 002F8B74  4B F2 8A ED */	bl get_cam_bounds_top_offset
 /* 802FBF98 002F8B78  FF 40 08 90 */	fmr f26, f1
-/* 802FBF9C 002F8B7C  4B F2 8A FD */	bl func_80224A98
+/* 802FBF9C 002F8B7C  4B F2 8A FD */	bl get_cam_bounds_bottom_offset
 /* 802FBFA0 002F8B80  FF 00 08 90 */	fmr f24, f1
-/* 802FBFA4 002F8B84  4B F2 8A DD */	bl func_80224A80
+/* 802FBFA4 002F8B84  4B F2 8A DD */	bl get_cam_bounds_top_offset
 /* 802FBFA8 002F8B88  EC 01 C0 2A */	fadds f0, f1, f24
 /* 802FBFAC 002F8B8C  EF 1E D0 3C */	fnmsubs f24, f30, f0, f26
-/* 802FBFB0 002F8B90  4B F2 8A D1 */	bl func_80224A80
+/* 802FBFB0 002F8B90  4B F2 8A D1 */	bl get_cam_bounds_top_offset
 /* 802FBFB4 002F8B94  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FBFB8 002F8B98  EC 01 00 28 */	fsubs f0, f1, f0
 /* 802FBFBC 002F8B9C  EC 00 C0 24 */	fdivs f0, f0, f24
 /* 802FBFC0 002F8BA0  EC 1D 00 28 */	fsubs f0, f29, f0
 /* 802FBFC4 002F8BA4  48 00 00 40 */	b lbl_802FC004
 lbl_802FBFC8:
-/* 802FBFC8 002F8BA8  4B F2 8A D1 */	bl func_80224A98
+/* 802FBFC8 002F8BA8  4B F2 8A D1 */	bl get_cam_bounds_bottom_offset
 /* 802FBFCC 002F8BAC  FF 40 08 90 */	fmr f26, f1
-/* 802FBFD0 002F8BB0  4B F2 8A C9 */	bl func_80224A98
+/* 802FBFD0 002F8BB0  4B F2 8A C9 */	bl get_cam_bounds_bottom_offset
 /* 802FBFD4 002F8BB4  FF 00 08 90 */	fmr f24, f1
-/* 802FBFD8 002F8BB8  4B F2 8A A9 */	bl func_80224A80
+/* 802FBFD8 002F8BB8  4B F2 8A A9 */	bl get_cam_bounds_top_offset
 /* 802FBFDC 002F8BBC  EC 01 C0 2A */	fadds f0, f1, f24
 /* 802FBFE0 002F8BC0  EF 5E D0 38 */	fmsubs f26, f30, f0, f26
-/* 802FBFE4 002F8BC4  4B F2 8A B5 */	bl func_80224A98
+/* 802FBFE4 002F8BC4  4B F2 8A B5 */	bl get_cam_bounds_bottom_offset
 /* 802FBFE8 002F8BC8  FF 00 08 90 */	fmr f24, f1
-/* 802FBFEC 002F8BCC  4B F2 8A 95 */	bl func_80224A80
+/* 802FBFEC 002F8BCC  4B F2 8A 95 */	bl get_cam_bounds_top_offset
 /* 802FBFF0 002F8BD0  EC 21 C0 2A */	fadds f1, f1, f24
 /* 802FBFF4 002F8BD4  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FBFF8 002F8BD8  EC 1E 00 78 */	fmsubs f0, f30, f1, f0
@@ -9903,23 +9903,23 @@ lbl_802FC004:
 /* 802FC008 002F8BE8  3B 61 00 28 */	addi r27, r1, 0x28
 /* 802FC00C 002F8BEC  3B 80 00 00 */	li r28, 0
 lbl_802FC010:
-/* 802FC010 002F8BF0  4B F2 8A 71 */	bl func_80224A80
+/* 802FC010 002F8BF0  4B F2 8A 71 */	bl get_cam_bounds_top_offset
 /* 802FC014 002F8BF4  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FC018 002F8BF8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FC01C 002F8BFC  40 81 00 0C */	ble lbl_802FC028
 /* 802FC020 002F8C00  C2 E2 E1 28 */	lfs f23, lbl_804DDB08@sda21(r2)
 /* 802FC024 002F8C04  48 00 00 48 */	b lbl_802FC06C
 lbl_802FC028:
-/* 802FC028 002F8C08  4B F2 8A 71 */	bl func_80224A98
+/* 802FC028 002F8C08  4B F2 8A 71 */	bl get_cam_bounds_bottom_offset
 /* 802FC02C 002F8C0C  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FC030 002F8C10  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FC034 002F8C14  40 80 00 0C */	bge lbl_802FC040
 /* 802FC038 002F8C18  C2 E2 E1 2C */	lfs f23, lbl_804DDB0C@sda21(r2)
 /* 802FC03C 002F8C1C  48 00 00 30 */	b lbl_802FC06C
 lbl_802FC040:
-/* 802FC040 002F8C20  4B F2 8A 59 */	bl func_80224A98
+/* 802FC040 002F8C20  4B F2 8A 59 */	bl get_cam_bounds_bottom_offset
 /* 802FC044 002F8C24  FF 00 08 90 */	fmr f24, f1
-/* 802FC048 002F8C28  4B F2 8A 39 */	bl func_80224A80
+/* 802FC048 002F8C28  4B F2 8A 39 */	bl get_cam_bounds_top_offset
 /* 802FC04C 002F8C2C  EC 21 C0 2A */	fadds f1, f1, f24
 /* 802FC050 002F8C30  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 802FC054 002F8C34  EC 3E 00 72 */	fmuls f1, f30, f1
@@ -9930,23 +9930,23 @@ lbl_802FC040:
 lbl_802FC068:
 /* 802FC068 002F8C48  C2 E2 E1 38 */	lfs f23, lbl_804DDB18@sda21(r2)
 lbl_802FC06C:
-/* 802FC06C 002F8C4C  4B F2 89 E9 */	bl func_80224A54
+/* 802FC06C 002F8C4C  4B F2 89 E9 */	bl get_cam_bounds_left_offset
 /* 802FC070 002F8C50  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FC074 002F8C54  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FC078 002F8C58  40 80 00 0C */	bge lbl_802FC084
 /* 802FC07C 002F8C5C  C0 22 E1 28 */	lfs f1, lbl_804DDB08@sda21(r2)
 /* 802FC080 002F8C60  48 00 00 48 */	b lbl_802FC0C8
 lbl_802FC084:
-/* 802FC084 002F8C64  4B F2 89 E5 */	bl func_80224A68
+/* 802FC084 002F8C64  4B F2 89 E5 */	bl get_cam_bounds_right_offset
 /* 802FC088 002F8C68  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FC08C 002F8C6C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 802FC090 002F8C70  40 81 00 0C */	ble lbl_802FC09C
 /* 802FC094 002F8C74  C0 22 E1 2C */	lfs f1, lbl_804DDB0C@sda21(r2)
 /* 802FC098 002F8C78  48 00 00 30 */	b lbl_802FC0C8
 lbl_802FC09C:
-/* 802FC09C 002F8C7C  4B F2 89 CD */	bl func_80224A68
+/* 802FC09C 002F8C7C  4B F2 89 CD */	bl get_cam_bounds_right_offset
 /* 802FC0A0 002F8C80  FF 00 08 90 */	fmr f24, f1
-/* 802FC0A4 002F8C84  4B F2 89 B1 */	bl func_80224A54
+/* 802FC0A4 002F8C84  4B F2 89 B1 */	bl get_cam_bounds_left_offset
 /* 802FC0A8 002F8C88  EC 21 C0 2A */	fadds f1, f1, f24
 /* 802FC0AC 002F8C8C  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 802FC0B0 002F8C90  EC 3E 00 72 */	fmuls f1, f30, f1

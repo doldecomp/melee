@@ -4561,14 +4561,14 @@ lbl_804DBCC4:
 lbl_804DBCC8:
 	.4byte 0x43020000
 	.4byte 0x00000000
-.global lbl_804DBCD0
-lbl_804DBCD0:
+.global degrees_2_radians
+degrees_2_radians:
 	.4byte 0x3C8EFA35
-.global unk_multiplier_804DBCD8
-unk_multiplier_804DBCD8:
+.global unk_one_half_const_804DBCD8
+unk_one_half_const_804DBCD8:
 	.4byte 0x3F000000
-.global lbl_804DBCD8
-lbl_804DBCD8:
+.global unk_zero_const_804DBCD8
+unk_zero_const_804DBCD8:
 	.4byte 0x00000000
 .global lbl_804DBCDC
 lbl_804DBCDC:

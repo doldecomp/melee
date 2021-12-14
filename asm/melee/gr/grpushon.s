@@ -166,34 +166,34 @@ lbl_802184CC:
 /* 802184EC 002150CC  4B FA B4 D5 */	bl func_801C39C0
 /* 802184F0 002150D0  4B FA B6 C5 */	bl func_801C3BB4
 /* 802184F4 002150D4  38 61 00 10 */	addi r3, r1, 0x10
-/* 802184F8 002150D8  48 00 C7 01 */	bl func_80224BF8
-/* 802184FC 002150DC  48 00 C6 6D */	bl func_80224B68
+/* 802184F8 002150D8  48 00 C7 01 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 802184FC 002150DC  48 00 C6 6D */	bl get_blast_zone_top_offset
 /* 80218500 002150E0  FF E0 08 90 */	fmr f31, f1
-/* 80218504 002150E4  48 00 C5 7D */	bl func_80224A80
+/* 80218504 002150E4  48 00 C5 7D */	bl get_cam_bounds_top_offset
 /* 80218508 002150E8  EC 41 F8 2A */	fadds f2, f1, f31
 /* 8021850C 002150EC  C0 22 C1 10 */	lfs f1, lbl_804DBAF0@sda21(r2)
 /* 80218510 002150F0  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 80218514 002150F4  EC 21 00 B8 */	fmsubs f1, f1, f2, f0
 /* 80218518 002150F8  4B FA B3 69 */	bl func_801C3880
-/* 8021851C 002150FC  48 00 C6 65 */	bl func_80224B80
+/* 8021851C 002150FC  48 00 C6 65 */	bl get_blast_zone_bottom_offset
 /* 80218520 00215100  FF E0 08 90 */	fmr f31, f1
-/* 80218524 00215104  48 00 C5 75 */	bl func_80224A98
+/* 80218524 00215104  48 00 C5 75 */	bl get_cam_bounds_bottom_offset
 /* 80218528 00215108  EC 41 F8 2A */	fadds f2, f1, f31
 /* 8021852C 0021510C  C0 22 C1 10 */	lfs f1, lbl_804DBAF0@sda21(r2)
 /* 80218530 00215110  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 80218534 00215114  EC 21 00 B8 */	fmsubs f1, f1, f2, f0
 /* 80218538 00215118  4B FA B3 59 */	bl func_801C3890
-/* 8021853C 0021511C  48 00 C6 15 */	bl func_80224B50
+/* 8021853C 0021511C  48 00 C6 15 */	bl get_blast_zone_left_offset
 /* 80218540 00215120  FF E0 08 90 */	fmr f31, f1
-/* 80218544 00215124  48 00 C5 11 */	bl func_80224A54
+/* 80218544 00215124  48 00 C5 11 */	bl get_cam_bounds_left_offset
 /* 80218548 00215128  EC 41 F8 2A */	fadds f2, f1, f31
 /* 8021854C 0021512C  C0 22 C1 10 */	lfs f1, lbl_804DBAF0@sda21(r2)
 /* 80218550 00215130  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 80218554 00215134  EC 21 00 B8 */	fmsubs f1, f1, f2, f0
 /* 80218558 00215138  4B FA B3 49 */	bl func_801C38A0
-/* 8021855C 0021513C  48 00 C5 DD */	bl func_80224B38
+/* 8021855C 0021513C  48 00 C5 DD */	bl get_blast_zone_right_offset
 /* 80218560 00215140  FF E0 08 90 */	fmr f31, f1
-/* 80218564 00215144  48 00 C5 05 */	bl func_80224A68
+/* 80218564 00215144  48 00 C5 05 */	bl get_cam_bounds_right_offset
 /* 80218568 00215148  EC 41 F8 2A */	fadds f2, f1, f31
 /* 8021856C 0021514C  C0 22 C1 10 */	lfs f1, lbl_804DBAF0@sda21(r2)
 /* 80218570 00215150  C0 01 00 10 */	lfs f0, 0x10(r1)
