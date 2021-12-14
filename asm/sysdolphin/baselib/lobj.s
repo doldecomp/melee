@@ -2701,6 +2701,7 @@ lbl_804C08B0:
 
 .section .sbss
 
+    .skip 0x4
 .global lbl_804D7638
 lbl_804D7638:
 	.skip 0x4
