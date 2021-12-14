@@ -94,14 +94,7 @@ f32 calc_unk_cam_y_bounds_80224BC4() {
     return unk_one_half_const_804DBCD8 * (cam_bounds_bottom_offset + y_pos_product);
 }
 
-/// Delete this when find the correct struct for the func: unk_set_vec3_to_cam_offset_80224BF8
-struct PlaceholderVec3Struct {
-    f32 x;
-    f32 y;
-    f32 z;
-};
-
-f32 unk_set_vec3_to_cam_offset_80224BF8(struct PlaceholderVec3Struct *vec3, f32 arg8) {
+f32 unk_set_vec3_to_cam_offset_80224BF8(Vec *vec3, f32 arg8) {
     vec3->x = stage_info.cam_info.cam_x_offset;
     vec3->y = stage_info.cam_info.cam_y_offset;
     vec3->z = unk_zero_const_804DBCD8;
