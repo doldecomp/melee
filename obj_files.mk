@@ -307,6 +307,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/sysdolphin/baselib/initialize.o 		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/initialize.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/video.o				\
+	$(BUILD_DIR)/src/sysdolphin/baselib/controller.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/controller.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/rumble.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/spline.o	\

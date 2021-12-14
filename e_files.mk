@@ -14,3 +14,4 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/list.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/archive.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/displayfunc.o\
+	$(EPILOGUE_DIR)/src/sysdolphin/baselib/controller.o\
