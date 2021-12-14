@@ -204,7 +204,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MSL/string.o                   \
 	$(BUILD_DIR)/asm/MSL/strtoul.o                  \
 	$(BUILD_DIR)/asm/MSL/console_io.o               \
-	$(BUILD_DIR)/asm/MSL/wchar_io.o                 \
+	$(BUILD_DIR)/src/MSL/wchar_io.o                 \
 	$(BUILD_DIR)/asm/MSL/math.o                     \
                                                     \
 	$(BUILD_DIR)/asm/MetroTRK/mainloop.o            \
