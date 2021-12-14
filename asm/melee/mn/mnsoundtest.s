@@ -5,9 +5,9 @@
 .global func_8024A790
 func_8024A790:
 /* 8024A790 00247370  7C 08 02 A6 */	mflr r0
-/* 8024A794 00247374  3C 80 80 4C */	lis r4, lbl_804C20BC@ha
+/* 8024A794 00247374  3C 80 80 4C */	lis r4, HSD_PadCopyStatus@ha
 /* 8024A798 00247378  90 01 00 04 */	stw r0, 4(r1)
-/* 8024A79C 0024737C  38 84 20 BC */	addi r4, r4, lbl_804C20BC@l
+/* 8024A79C 0024737C  38 84 20 BC */	addi r4, r4, HSD_PadCopyStatus@l
 /* 8024A7A0 00247380  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8024A7A4 00247384  DB E1 00 48 */	stfd f31, 0x48(r1)
 /* 8024A7A8 00247388  DB C1 00 40 */	stfd f30, 0x40(r1)

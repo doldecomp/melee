@@ -1584,12 +1584,12 @@ lbl_803B9570:
 .global HSD_PadLibData
 HSD_PadLibData:
 	.skip 0x34
-.global lbl_804C1FAC
-lbl_804C1FAC:
+.global HSD_PadMasterStatus
+HSD_PadMasterStatus:
 	.skip 0x110
-.global lbl_804C20BC
-lbl_804C20BC:
+.global HSD_PadCopyStatus
+HSD_PadCopyStatus:
 	.skip 0x110
-.global lbl_804C21CC
-lbl_804C21CC:
+.global HSD_PadRumbleData
+HSD_PadRumbleData:
 	.skip 0x114

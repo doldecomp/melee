@@ -1,6 +1,9 @@
 #include "sysdolphin/baselib/controller.h"
 
 extern PadLibData HSD_PadLibData;
+extern HSD_PadStatus HSD_PadMasterStatus[4];
+extern HSD_PadStatus HSD_PadCopyStatus[4];
+extern HSD_RumbleData HSD_PadRumbleData[4];
 
 u8 HSD_PadGetRawQueueCount(void)
 {
