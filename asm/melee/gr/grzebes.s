@@ -5416,6 +5416,27 @@ lbl_8049F170:
 	.skip 0x2D0
 
 
+.section .sdata
+
+.global lbl_804D4630
+lbl_804D4630:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4638
+lbl_804D4638:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4640
+lbl_804D4640:
+    .asciz "yaku"
+    .balign 4
+.global lbl_804D4648
+lbl_804D4648:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6990

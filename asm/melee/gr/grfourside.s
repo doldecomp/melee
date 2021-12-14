@@ -1762,6 +1762,18 @@ lbl_803E3F6C:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D46E8
+lbl_804D46E8:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D46F0
+lbl_804D46F0:
+    .asciz "jobj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D69D8

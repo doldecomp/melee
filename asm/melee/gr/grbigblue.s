@@ -12304,6 +12304,27 @@ jtbl_803E3064:
     .4byte NULL
 
 
+.section .sdata
+
+
+.global lbl_804D46A8
+lbl_804D46A8:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D46B0
+lbl_804D46B0:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D46B8
+lbl_804D46B8:
+    .asciz "0"
+    .balign 4
+.global lbl_804D46BC
+lbl_804D46BC:
+    .asciz "gp2"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D69C8
