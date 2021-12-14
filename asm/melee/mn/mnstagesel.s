@@ -2372,3 +2372,40 @@ lbl_803B8550:
     .4byte 0xC1500000
     .4byte 0x00000000
     .4byte 0x00000000
+
+
+.section .sbss
+
+.global lbl_804D6C90
+lbl_804D6C90:
+	.skip 0x4
+.global lbl_804D6C94
+lbl_804D6C94:
+	.skip 0x4
+.global lbl_804D6C98
+lbl_804D6C98:
+	.skip 0x4
+.global lbl_804D6C9C
+lbl_804D6C9C:
+	.skip 0x4
+.global lbl_804D6CA0
+lbl_804D6CA0:
+	.skip 0x4
+.global lbl_804D6CA4
+lbl_804D6CA4:
+	.skip 0x4
+.global lbl_804D6CA8
+lbl_804D6CA8:
+	.skip 0x4
+.global lbl_804D6CAC
+lbl_804D6CAC:
+	.skip 0x1
+.global lbl_804D6CAD
+lbl_804D6CAD:
+	.skip 0x1
+.global lbl_804D6CAE
+lbl_804D6CAE:
+	.skip 0x1
+.global lbl_804D6CAF
+lbl_804D6CAF:
+	.skip 0x1

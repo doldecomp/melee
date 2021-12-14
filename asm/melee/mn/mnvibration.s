@@ -2163,3 +2163,10 @@ lbl_804A0888:
 .global lbl_804A0898
 lbl_804A0898:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6C28
+lbl_804D6C28:
+	.skip 0x8

@@ -996,3 +996,10 @@ func_8024A09C:
 .global lbl_804A08A8
 lbl_804A08A8:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6C30
+lbl_804D6C30:
+	.skip 0x8

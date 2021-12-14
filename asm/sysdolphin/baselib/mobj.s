@@ -1359,3 +1359,19 @@ func_80363F28:
 /* 80363FBC 00360B9C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80363FC0 00360BA0  7C 08 03 A6 */	mtlr r0
 /* 80363FC4 00360BA4  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7618
+lbl_804D7618:
+	.skip 0x4
+.global lbl_804D761C
+lbl_804D761C:
+	.skip 0x4
+.global lbl_804D7620
+lbl_804D7620:
+	.skip 0x4
+.global lbl_804D7624
+lbl_804D7624:
+	.skip 0x4

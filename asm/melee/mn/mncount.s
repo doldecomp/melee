@@ -1726,3 +1726,10 @@ lbl_80251984:
 .global lbl_804A0948
 lbl_804A0948:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6C70
+lbl_804D6C70:
+	.skip 0x8
