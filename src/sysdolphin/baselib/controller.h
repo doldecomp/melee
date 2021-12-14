@@ -110,4 +110,7 @@ typedef struct _PadLibData {
     } rumble_info;
 } PadLibData;
 
+u8 HSD_PadGetRawQueueCount(void);
+s32 HSD_PadGetResetSwitch(void);
+
 #endif

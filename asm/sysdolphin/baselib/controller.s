@@ -2,19 +2,6 @@
 
 .section .text  # 0x8037699C - 0x8037808C
 
-.global func_803769D8
-func_803769D8:
-/* 803769D8 003735B8  3C 60 80 4C */	lis r3, HSD_PadLibData@ha
-/* 803769DC 003735BC  38 63 1F 78 */	addi r3, r3, HSD_PadLibData@l
-/* 803769E0 003735C0  88 03 00 2B */	lbz r0, 0x2b(r3)
-/* 803769E4 003735C4  28 00 00 00 */	cmplwi r0, 0
-/* 803769E8 003735C8  41 82 00 0C */	beq lbl_803769F4
-/* 803769EC 003735CC  38 60 00 01 */	li r3, 1
-/* 803769F0 003735D0  4E 80 00 20 */	blr 
-lbl_803769F4:
-/* 803769F4 003735D4  38 60 00 00 */	li r3, 0
-/* 803769F8 003735D8  4E 80 00 20 */	blr 
-
 .global func_803769FC
 func_803769FC:
 /* 803769FC 003735DC  7C 08 02 A6 */	mflr r0

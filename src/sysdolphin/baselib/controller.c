@@ -15,3 +15,10 @@ u8 HSD_PadGetRawQueueCount(void)
     
     return queue_count;
 }
+
+s32 HSD_PadGetResetSwitch(void)
+{
+    PadLibData* p = &HSD_PadLibData;
+
+    return (p->reset_switch != 0) ? TRUE : FALSE;
+}

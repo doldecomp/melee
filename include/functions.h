@@ -8596,7 +8596,7 @@ void HSD_ObjInit(void);
 // ? func_803767A0(?);
 void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1, void* xfb2);
 // ? HSD_PadGetRawQueueCount(?);
-// ? func_803769D8(?);
+// ? HSD_PadGetResetSwitch(?);
 // ? func_803769FC(?);
 // ? func_80376D04(?);
 // ? func_80376E48(?);
