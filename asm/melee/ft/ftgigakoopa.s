@@ -276,3 +276,13 @@ lbl_8014F9B4:
 /* 8014F9C0 0014C5A0  7C 63 02 14 */	add r3, r3, r0
 /* 8014F9C4 0014C5A4  80 63 FF C8 */	lwz r3, -0x38(r3)
 /* 8014F9C8 0014C5A8  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D9E68
+lbl_804D9E68:
+	.4byte 0x40400000
+.global lbl_804D9E6C
+lbl_804D9E6C:
+	.4byte 0x00000000

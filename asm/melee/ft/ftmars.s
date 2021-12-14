@@ -3580,3 +3580,93 @@ lbl_801392B4:
 /* 801392D0 00135EB0  38 21 00 40 */	addi r1, r1, 0x40
 /* 801392D4 00135EB4  7C 08 03 A6 */	mtlr r0
 /* 801392D8 00135EB8  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D9B08
+lbl_804D9B08:
+	.4byte 0x40400000
+.global lbl_804D9B0C
+lbl_804D9B0C:
+	.4byte 0x00000000
+.global lbl_804D9B10
+lbl_804D9B10:
+	.4byte 0x00000000
+.global lbl_804D9B14
+lbl_804D9B14:
+	.4byte 0x3F800000
+.global lbl_804D9B18
+lbl_804D9B18:
+	.4byte 0x3F000000
+.global lbl_804D9B1C
+lbl_804D9B1C:
+	.4byte 0x3D4CCCCD
+.global lbl_804D9B20
+lbl_804D9B20:
+	.4byte 0x3F860A92
+.global lbl_804D9B24
+lbl_804D9B24:
+	.4byte 0x41100000
+.global lbl_804D9B28
+lbl_804D9B28:
+	.4byte 0x3F666666
+.global lbl_804D9B2C
+lbl_804D9B2C:
+	.4byte 0x3CA3D70A
+.global lbl_804D9B30
+lbl_804D9B30:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804D9B38
+lbl_804D9B38:
+	.4byte 0x00000000
+.global lbl_804D9B3C
+lbl_804D9B3C:
+	.4byte 0x3F800000
+.global lbl_804D9B40
+lbl_804D9B40:
+	.4byte 0x00000000
+.global lbl_804D9B44
+lbl_804D9B44:
+	.4byte 0x3F800000
+.global lbl_804D9B48
+lbl_804D9B48:
+	.4byte 0x3FF00000
+	.4byte 0x00000000
+.global lbl_804D9B50
+lbl_804D9B50:
+	.4byte 0x3C8EFA35
+	.4byte 0x00000000
+.global lbl_804D9B58
+lbl_804D9B58:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804D9B60
+lbl_804D9B60:
+	.4byte 0xBF800000
+	.4byte 0x00000000
+.global lbl_804D9B68
+lbl_804D9B68:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804D9B70
+lbl_804D9B70:
+	.4byte 0x00000000
+.global lbl_804D9B74
+lbl_804D9B74:
+	.4byte 0x3F800000
+.global lbl_804D9B78
+lbl_804D9B78:
+	.4byte 0x3F666666
+.global lbl_804D9B7C
+lbl_804D9B7C:
+	.4byte 0x3CA3D70A
+.global lbl_804D9B80
+lbl_804D9B80:
+	.4byte 0x3F860A92
+	.4byte 0x00000000
+.global lbl_804D9B88
+lbl_804D9B88:
+	.4byte 0x43300000
+	.4byte 0x80000000

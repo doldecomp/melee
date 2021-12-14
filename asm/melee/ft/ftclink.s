@@ -682,3 +682,13 @@ func_8014947C:
 /* 80149490 00146070  38 21 00 08 */	addi r1, r1, 8
 /* 80149494 00146074  7C 08 03 A6 */	mtlr r0
 /* 80149498 00146078  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D9DA0
+lbl_804D9DA0:
+	.4byte 0x40400000
+.global lbl_804D9DA4
+lbl_804D9DA4:
+	.4byte 0x00000000
