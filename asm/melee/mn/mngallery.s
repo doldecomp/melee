@@ -315,9 +315,9 @@ lbl_80258DA4:
 .global func_80258DBC
 func_80258DBC:
 /* 80258DBC 0025599C  7C 08 02 A6 */	mflr r0
-/* 80258DC0 002559A0  3C 60 80 4C */	lis r3, lbl_804C20BC@ha
+/* 80258DC0 002559A0  3C 60 80 4C */	lis r3, HSD_PadCopyStatus@ha
 /* 80258DC4 002559A4  90 01 00 04 */	stw r0, 4(r1)
-/* 80258DC8 002559A8  38 C3 20 BC */	addi r6, r3, lbl_804C20BC@l
+/* 80258DC8 002559A8  38 C3 20 BC */	addi r6, r3, HSD_PadCopyStatus@l
 /* 80258DCC 002559AC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80258DD0 002559B0  93 E1 00 2C */	stw r31, 0x2c(r1)
 /* 80258DD4 002559B4  7C 9F 23 78 */	mr r31, r4

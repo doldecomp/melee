@@ -221,9 +221,9 @@ lbl_801FE2C8:
 .global lbl_801FE2D0
 lbl_801FE2D0:
 /* 801FE2D0 001FAEB0  7C 08 02 A6 */	mflr r0
-/* 801FE2D4 001FAEB4  3C 80 80 4C */	lis r4, lbl_804C1FAC@ha
+/* 801FE2D4 001FAEB4  3C 80 80 4C */	lis r4, HSD_PadMasterStatus@ha
 /* 801FE2D8 001FAEB8  90 01 00 04 */	stw r0, 4(r1)
-/* 801FE2DC 001FAEBC  38 84 1F AC */	addi r4, r4, lbl_804C1FAC@l
+/* 801FE2DC 001FAEBC  38 84 1F AC */	addi r4, r4, HSD_PadMasterStatus@l
 /* 801FE2E0 001FAEC0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 801FE2E4 001FAEC4  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 801FE2E8 001FAEC8  93 C1 00 18 */	stw r30, 0x18(r1)
