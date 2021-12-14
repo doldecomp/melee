@@ -6244,3 +6244,121 @@ lbl_804D3E10:
 lbl_804D3E18:
     .asciz "jobj"
     .balign 4
+
+
+.section .sdata2
+
+.global lbl_804D9830
+lbl_804D9830:
+	.4byte 0x00000000
+.global lbl_804D9834
+lbl_804D9834:
+	.4byte 0x40400000
+.global lbl_804D9838
+lbl_804D9838:
+	.4byte 0x00000000
+.global lbl_804D983C
+lbl_804D983C:
+	.4byte 0x3F800000
+.global lbl_804D9840
+lbl_804D9840:
+	.4byte 0xC1200000
+	.4byte 0x00000000
+.global lbl_804D9848
+lbl_804D9848:
+	.4byte 0x00000000
+.global lbl_804D984C
+lbl_804D984C:
+	.4byte 0x3F800000
+.global lbl_804D9850
+lbl_804D9850:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D9858
+lbl_804D9858:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804D9860
+lbl_804D9860:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D9868
+lbl_804D9868:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804D9870
+lbl_804D9870:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804D9878
+lbl_804D9878:
+	.4byte 0x40400000
+.global lbl_804D987C
+lbl_804D987C:
+	.4byte 0x40A00000
+.global lbl_804D9880
+lbl_804D9880:
+	.4byte 0x3F800000
+.global lbl_804D9884
+lbl_804D9884:
+	.4byte 0xBF800000
+.global lbl_804D9888
+lbl_804D9888:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804D9890
+lbl_804D9890:
+	.4byte 0x00000000
+.global lbl_804D9894
+lbl_804D9894:
+	.4byte 0x3F800000
+.global lbl_804D9898
+lbl_804D9898:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D98A0
+lbl_804D98A0:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804D98A8
+lbl_804D98A8:
+	.4byte 0x00000000
+.global lbl_804D98AC
+lbl_804D98AC:
+	.4byte 0x41000000
+.global lbl_804D98B0
+lbl_804D98B0:
+	.4byte 0x3F800000
+.global lbl_804D98B4
+lbl_804D98B4:
+	.4byte 0xBF800000
+.global lbl_804D98B8
+lbl_804D98B8:
+	.4byte 0x40800000
+.global lbl_804D98BC
+lbl_804D98BC:
+	.4byte 0x40E00000
+.global lbl_804D98C0
+lbl_804D98C0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D98C8
+lbl_804D98C8:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804D98D0
+lbl_804D98D0:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804D98D8
+lbl_804D98D8:
+	.4byte 0x3F800000
+	.4byte 0x00000000
+.global lbl_804D98E0
+lbl_804D98E0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D98E8
+lbl_804D98E8:
+	.4byte 0x3FC00000
+	.4byte 0x00000000

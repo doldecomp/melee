@@ -307,3 +307,13 @@ func_8014A20C:
 /* 8014A244 00146E24  38 21 00 18 */	addi r1, r1, 0x18
 /* 8014A248 00146E28  7C 08 03 A6 */	mtlr r0
 /* 8014A24C 00146E2C  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D9DB8
+lbl_804D9DB8:
+	.4byte 0x40400000
+.global lbl_804D9DBC
+lbl_804D9DBC:
+	.4byte 0x00000000

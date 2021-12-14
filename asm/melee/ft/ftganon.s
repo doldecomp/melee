@@ -229,3 +229,11 @@ func_8014EEAC:
 /* 8014EEEC 0014BACC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8014EEF0 0014BAD0  7C 08 03 A6 */	mtlr r0
 /* 8014EEF4 0014BAD4  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D9E58
+lbl_804D9E58:
+	.4byte 0x00000000
+	.4byte 0x00000000

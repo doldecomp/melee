@@ -475,3 +475,13 @@ func_80149AAC:
 /* 80149AC0 001466A0  38 21 00 08 */	addi r1, r1, 8
 /* 80149AC4 001466A4  7C 08 03 A6 */	mtlr r0
 /* 80149AC8 001466A8  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D9DA8
+lbl_804D9DA8:
+	.4byte 0x40400000
+.global lbl_804D9DAC
+lbl_804D9DAC:
+	.4byte 0x00000000
