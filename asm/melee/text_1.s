@@ -4269,3 +4269,13 @@ lbl_804D3EEC:
 .global lbl_804D3EF4
 lbl_804D3EF4:
     .4byte 0x230A0A00
+
+
+.section .sbss
+
+.global lbl_804D6590
+lbl_804D6590:
+	.skip 0x4
+.global lbl_804D6594
+lbl_804D6594:
+	.skip 0x4

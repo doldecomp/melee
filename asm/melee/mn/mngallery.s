@@ -1204,3 +1204,13 @@ lbl_804A0BA0:
 .global lbl_804A0BB0
 lbl_804A0BB0:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6C88
+lbl_804D6C88:
+	.skip 0x4
+.global lbl_804D6C8C
+lbl_804D6C8C:
+	.skip 0x4

@@ -3484,3 +3484,13 @@ func_80361548:
 /* 803615C4 0035E1A4  38 21 00 10 */	addi r1, r1, 0x10
 /* 803615C8 0035E1A8  7C 08 03 A6 */	mtlr r0
 /* 803615CC 0035E1AC  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D75A8
+lbl_804D75A8:
+	.skip 0x4
+.global lbl_804D75AC
+lbl_804D75AC:
+	.skip 0x4

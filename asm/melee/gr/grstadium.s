@@ -5120,3 +5120,10 @@ jtbl_803E16C0:
 .global lbl_8049F040
 lbl_8049F040:
 	.skip 0x100
+
+
+.section .sbss
+
+.global lbl_804D6978
+lbl_804D6978:
+	.skip 0x8

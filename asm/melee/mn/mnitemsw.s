@@ -2206,3 +2206,13 @@ func_802358C0:
 /* 80235930 00232510  38 21 00 08 */	addi r1, r1, 8
 /* 80235934 00232514  7C 08 03 A6 */	mtlr r0
 /* 80235938 00232518  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D6BE8
+lbl_804D6BE8:
+	.skip 0x4
+.global lbl_804D6BEC
+lbl_804D6BEC:
+	.skip 0x4

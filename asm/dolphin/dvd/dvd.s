@@ -2626,3 +2626,64 @@ lbl_804A7560:
 .global lbl_804A75E0
 lbl_804A75E0:
 	.skip 0x58
+
+
+.section .sbss
+
+.global lbl_804D7290
+lbl_804D7290:
+	.skip 0x8
+.global executing
+executing:
+	.skip 0x4
+.global lbl_804D729C
+lbl_804D729C:
+	.skip 0x4
+.global lbl_804D72A0
+lbl_804D72A0:
+	.skip 0x4
+.global lbl_804D72A4
+lbl_804D72A4:
+	.skip 0x4
+.global lbl_804D72A8
+lbl_804D72A8:
+	.skip 0x4
+.global AutoFinishing
+AutoFinishing:
+	.skip 0x4
+.global lbl_804D72B0
+lbl_804D72B0:
+	.skip 0x4
+.global lbl_804D72B4
+lbl_804D72B4:
+	.skip 0x4
+.global lbl_804D72B8
+lbl_804D72B8:
+	.skip 0x4
+.global lbl_804D72BC
+lbl_804D72BC:
+	.skip 0x4
+.global lbl_804D72C0
+lbl_804D72C0:
+	.skip 0x4
+.global lbl_804D72C4
+lbl_804D72C4:
+	.skip 0x4
+.global lbl_804D72C8
+lbl_804D72C8:
+	.skip 0x4
+.global lbl_804D72CC
+lbl_804D72CC:
+	.skip 0x4
+.global lbl_804D72D0
+lbl_804D72D0:
+	.skip 0x4
+.global lbl_804D72D4
+lbl_804D72D4:
+	.skip 0x4
+.global lbl_804D72D8
+lbl_804D72D8:
+	.skip 0x4
+.global lbl_804D72DC
+lbl_804D72DC:
+	.skip 0x4

@@ -351,3 +351,10 @@ _HSD_ObjAllocForgetMemory:
 /* 8037AE28 00377A08  38 00 00 00 */	li r0, 0
 /* 8037AE2C 00377A0C  90 0D C0 40 */	stw r0, lbl_804D76E0@sda21(r13)
 /* 8037AE30 00377A10  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D76E0
+lbl_804D76E0:
+	.skip 0x8

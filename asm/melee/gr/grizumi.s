@@ -1930,3 +1930,10 @@ lbl_803E0F20:
     .4byte 0x64657363
     .4byte 0x290A0000
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6968
+lbl_804D6968:
+	.skip 0x8

@@ -4433,3 +4433,25 @@ lbl_804D1110:
 .global lbl_804D1124
 lbl_804D1124:
 	.skip 0x14
+
+
+.section .sbss
+
+.global lbl_804D7968
+lbl_804D7968:
+	.skip 0x4
+.global lbl_804D796C
+lbl_804D796C:
+	.skip 0x4
+.global lbl_804D7970
+lbl_804D7970:
+	.skip 0x4
+.global lbl_804D7974
+lbl_804D7974:
+	.skip 0x4
+.global lbl_804D7978
+lbl_804D7978:
+	.skip 0x4
+.global lbl_804D797C
+lbl_804D797C:
+	.skip 0x4

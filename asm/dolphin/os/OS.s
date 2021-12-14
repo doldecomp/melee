@@ -628,3 +628,28 @@ __OSGetDIConfig:
 /* 80343714 003402F4  80 03 00 24 */	lwz r0, 0x24(r3)
 /* 80343718 003402F8  54 03 06 3E */	clrlwi r3, r0, 0x18
 /* 8034371C 003402FC  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global BootInfo
+BootInfo:
+	.skip 0x4
+.global BI2DebugFlag
+BI2DebugFlag:
+	.skip 0x4
+.global BI2DebugFlagHolder
+BI2DebugFlagHolder:
+	.skip 0x4
+.global AreWeInitialized
+AreWeInitialized:
+	.skip 0x4
+.global OSExceptionTable
+OSExceptionTable:
+	.skip 0x8
+.global __OSStartTime
+__OSStartTime:
+	.skip 0x4
+.global lbl_804D7354
+lbl_804D7354:
+	.skip 0x4

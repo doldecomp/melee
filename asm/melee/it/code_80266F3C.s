@@ -25878,3 +25878,49 @@ lbl_804A0E70:
 .global lbl_804A0F60
 lbl_804A0F60:
 	.skip 0x78
+
+
+.section .sbss
+
+.global lbl_804D6D00
+lbl_804D6D00:
+	.skip 0x4
+.global lbl_804D6D04
+lbl_804D6D04:
+	.skip 0x4
+.global lbl_804D6D08
+lbl_804D6D08:
+	.skip 0x4
+.global lbl_804D6D0C
+lbl_804D6D0C:
+	.skip 0x4
+.global lbl_804D6D10
+lbl_804D6D10:
+	.skip 0x4
+.global lbl_804D6D14
+lbl_804D6D14:
+	.skip 0x4
+.global lbl_804D6D18
+lbl_804D6D18:
+	.skip 0x4
+.global lbl_804D6D1C
+lbl_804D6D1C:
+	.skip 0x4
+.global lbl_804D6D20
+lbl_804D6D20:
+	.skip 0x4
+.global lbl_804D6D24
+lbl_804D6D24:
+	.skip 0x4
+.global lbl_804D6D28
+lbl_804D6D28:
+	.skip 0x8
+.global lbl_804D6D30
+lbl_804D6D30:
+	.skip 0x8
+.global lbl_804D6D38
+lbl_804D6D38:
+	.skip 0x8
+.global lbl_804D6D40
+lbl_804D6D40:
+	.skip 0x8

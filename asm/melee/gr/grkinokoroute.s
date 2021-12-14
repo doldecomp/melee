@@ -1520,3 +1520,10 @@ lbl_803E584C:
     .4byte 0x6A262665
     .4byte 0x76655F6A
     .4byte 0x6F626A00
+
+
+.section .sbss
+
+.global lbl_804D6A50
+lbl_804D6A50:
+	.skip 0x8

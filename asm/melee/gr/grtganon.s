@@ -275,3 +275,10 @@ lbl_80224A38:
 lbl_80224A4C:
 /* 80224A4C 0022162C  38 60 00 01 */	li r3, 1
 /* 80224A50 00221630  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D6B18
+lbl_804D6B18:
+	.skip 0x8

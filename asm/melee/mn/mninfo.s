@@ -1065,3 +1065,10 @@ lbl_804A0958:
 .global lbl_804A0968
 lbl_804A0968:
 	.skip 0x48
+
+
+.section .sbss
+
+.global lbl_804D6C78
+lbl_804D6C78:
+	.skip 0x8

@@ -165,3 +165,13 @@ lbl_8037E3CC:
 /* 8037E3F0 0037AFD0  38 21 00 18 */	addi r1, r1, 0x18
 /* 8037E3F4 0037AFD4  7C 08 03 A6 */	mtlr r0
 /* 8037E3F8 0037AFD8  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D76F8
+lbl_804D76F8:
+	.skip 0x4
+.global lbl_804D76FC
+lbl_804D76FC:
+	.skip 0x4

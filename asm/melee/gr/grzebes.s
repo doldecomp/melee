@@ -5414,3 +5414,16 @@ lbl_8049F158:
 .global lbl_8049F170
 lbl_8049F170:
 	.skip 0x2D0
+
+
+.section .sbss
+
+.global lbl_804D6990
+lbl_804D6990:
+	.skip 0x4
+.global lbl_804D6994
+lbl_804D6994:
+	.skip 0x4
+.global lbl_804D6998
+lbl_804D6998:
+	.skip 0x8

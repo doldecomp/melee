@@ -2322,3 +2322,19 @@ lbl_8034CAA8:
 .global lbl_804A7FB8
 lbl_804A7FB8:
 	.skip 0x9E8
+
+
+.section .sbss
+
+.global lbl_804D73D8
+lbl_804D73D8:
+	.skip 0x4
+.global lbl_804D73DC
+lbl_804D73DC:
+	.skip 0x4
+.global lbl_804D73E0
+lbl_804D73E0:
+	.skip 0x8
+.global lbl_804D73E8
+lbl_804D73E8:
+	.skip 0x8

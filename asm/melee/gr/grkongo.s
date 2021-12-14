@@ -3907,3 +3907,13 @@ lbl_803E19F4:
 lbl_803E1A00:
     .asciz "gp->u.taru.keep"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6980
+lbl_804D6980:
+	.skip 0x4
+.global lbl_804D6984
+lbl_804D6984:
+	.skip 0xC

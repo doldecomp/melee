@@ -46,3 +46,10 @@ func_80344514:
 /* 80344528 00341108  7C 83 00 38 */	and r3, r4, r0
 /* 8034452C 0034110C  90 6D BC D0 */	stw r3, __OSArenaHi@sda21(r13)
 /* 80344530 00341110  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global __OSArenaHi
+__OSArenaHi:
+	.skip 0x8

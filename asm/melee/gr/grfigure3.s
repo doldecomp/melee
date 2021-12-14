@@ -266,3 +266,10 @@ lbl_803E6420:
     .4byte 0x67757265
     .4byte 0x332E6300
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A80
+lbl_804D6A80:
+	.skip 0x8

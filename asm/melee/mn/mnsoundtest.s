@@ -1658,3 +1658,19 @@ func_8024BEE0:
 .global lbl_804A08C8
 lbl_804A08C8:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6C40
+lbl_804D6C40:
+	.skip 0x4
+.global lbl_804D6C44
+lbl_804D6C44:
+	.skip 0x4
+.global lbl_804D6C48
+lbl_804D6C48:
+	.skip 0x4
+.global lbl_804D6C4C
+lbl_804D6C4C:
+	.skip 0x4

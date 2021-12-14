@@ -603,3 +603,10 @@ lbl_803E5E64:
     .asciz "grzebesroute.c"
     .balign 4
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A60
+lbl_804D6A60:
+	.skip 0x8

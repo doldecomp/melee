@@ -3047,3 +3047,22 @@ lbl_803E8294:
     .4byte 0x6A5B335D
     .4byte NULL
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6AD8
+lbl_804D6AD8:
+	.skip 0x4
+.global lbl_804D6ADC
+lbl_804D6ADC:
+	.skip 0x4
+.global lbl_804D6AE0
+lbl_804D6AE0:
+	.skip 0x4
+.global lbl_804D6AE4
+lbl_804D6AE4:
+	.skip 0x4
+.global lbl_804D6AE8
+lbl_804D6AE8:
+	.skip 0x8

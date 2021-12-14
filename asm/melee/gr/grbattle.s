@@ -800,3 +800,13 @@ lbl_803E7E38:
     .4byte 0x5F42475F
     .4byte 0x4D415800
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6AC8
+lbl_804D6AC8:
+	.skip 0x4
+.global lbl_804D6ACC
+lbl_804D6ACC:
+	.skip 0x4

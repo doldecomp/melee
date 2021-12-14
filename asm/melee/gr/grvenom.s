@@ -4311,3 +4311,22 @@ lbl_803E5680:
     .4byte 0x00000001
     .4byte 0x00000001
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A30
+lbl_804D6A30:
+	.skip 0x4
+.global lbl_804D6A34
+lbl_804D6A34:
+	.skip 0x4
+.global lbl_804D6A38
+lbl_804D6A38:
+	.skip 0x4
+.global lbl_804D6A3C
+lbl_804D6A3C:
+	.skip 0x4
+.global lbl_804D6A40
+lbl_804D6A40:
+	.skip 0x8

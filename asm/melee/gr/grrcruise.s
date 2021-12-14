@@ -3288,3 +3288,10 @@ lbl_803E4FF0:
     .4byte 0x6A6F626A
     .4byte NULL
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A10
+lbl_804D6A10:
+	.skip 0x8

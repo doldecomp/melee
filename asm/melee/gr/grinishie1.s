@@ -2657,3 +2657,10 @@ lbl_803E4A30:
 lbl_803E4A54:
     .asciz "map_gobj"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D69F8
+lbl_804D69F8:
+	.skip 0x8

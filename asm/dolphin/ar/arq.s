@@ -272,3 +272,37 @@ lbl_8035224C:
 /* 80352264 0034EE44  83 A1 00 2C */	lwz r29, 0x2c(r1)
 /* 80352268 0034EE48  38 21 00 38 */	addi r1, r1, 0x38
 /* 8035226C 0034EE4C  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global __ARQRequestQueueHi
+__ARQRequestQueueHi:
+	.skip 0x4
+.global __ARQRequestTailHi
+__ARQRequestTailHi:
+	.skip 0x4
+.global __ARQRequestQueueLo
+__ARQRequestQueueLo:
+	.skip 0x4
+.global __ARQRequestTailLo
+__ARQRequestTailLo:
+	.skip 0x4
+.global __ARQRequestPendingHi
+__ARQRequestPendingHi:
+	.skip 0x4
+.global __ARQRequestPendingLo
+__ARQRequestPendingLo:
+	.skip 0x4
+.global __ARQCallbackHi
+__ARQCallbackHi:
+	.skip 0x4
+.global __ARQCallbackLo
+__ARQCallbackLo:
+	.skip 0x4
+.global __ARQChunkSize
+__ARQChunkSize:
+	.skip 0x4
+.global __ARQ_init_flag
+__ARQ_init_flag:
+	.skip 0x4

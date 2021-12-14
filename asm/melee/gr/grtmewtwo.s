@@ -312,3 +312,10 @@ lbl_802225B4:
 lbl_802225C8:
 /* 802225C8 0021F1A8  38 60 00 01 */	li r3, 1
 /* 802225CC 0021F1AC  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D6B08
+lbl_804D6B08:
+	.skip 0x8

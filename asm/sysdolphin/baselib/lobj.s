@@ -2697,3 +2697,29 @@ lbl_803B94AC:
 .global lbl_804C08B0
 lbl_804C08B0:
 	.skip 0x28
+
+
+.section .sbss
+
+    .skip 0x4
+.global lbl_804D7638
+lbl_804D7638:
+	.skip 0x4
+.global lbl_804D763C
+lbl_804D763C:
+	.skip 0x4
+.global lbl_804D7640
+lbl_804D7640:
+	.skip 0x4
+.global lbl_804D7644
+lbl_804D7644:
+	.skip 0x4
+.global lbl_804D7648
+lbl_804D7648:
+	.skip 0x4
+.global lbl_804D764C
+lbl_804D764C:
+	.skip 0x4
+.global lbl_804D7650
+lbl_804D7650:
+	.skip 0x8

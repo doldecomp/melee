@@ -52521,3 +52521,373 @@ lbl_8049EFA0:
 .global lbl_8049F030
 lbl_8049F030:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6720
+lbl_804D6720:
+	.skip 0x4
+.global lbl_804D6724
+lbl_804D6724:
+	.skip 0x4
+.global lbl_804D6728
+lbl_804D6728:
+	.skip 0x4
+.global lbl_804D672C
+lbl_804D672C:
+	.skip 0x4
+.global lbl_804D6730
+lbl_804D6730:
+	.skip 0x8
+.global lbl_804D6738
+lbl_804D6738:
+	.skip 0x4
+.global lbl_804D673C
+lbl_804D673C:
+	.skip 0x4
+.global lbl_804D6740
+lbl_804D6740:
+	.skip 0x4
+.global lbl_804D6744
+lbl_804D6744:
+	.skip 0x4
+.global lbl_804D6748
+lbl_804D6748:
+	.skip 0x4
+.global lbl_804D674C
+lbl_804D674C:
+	.skip 0x4
+.global lbl_804D6750
+lbl_804D6750:
+	.skip 0x4
+.global lbl_804D6754
+lbl_804D6754:
+	.skip 0x4
+.global lbl_804D6758
+lbl_804D6758:
+	.skip 0x4
+.global lbl_804D675C
+lbl_804D675C:
+	.skip 0x4
+.global lbl_804D6760
+lbl_804D6760:
+	.skip 0x8
+.global lbl_804D6768
+lbl_804D6768:
+	.skip 0x4
+.global lbl_804D676C
+lbl_804D676C:
+	.skip 0x4
+.global lbl_804D6770
+lbl_804D6770:
+	.skip 0x4
+.global lbl_804D6774
+lbl_804D6774:
+	.skip 0x4
+.global lbl_804D6778
+lbl_804D6778:
+	.skip 0x4
+.global lbl_804D677C
+lbl_804D677C:
+	.skip 0x4
+.global lbl_804D6780
+lbl_804D6780:
+	.skip 0x4
+.global lbl_804D6784
+lbl_804D6784:
+	.skip 0x4
+.global lbl_804D6788
+lbl_804D6788:
+	.skip 0x8
+.global lbl_804D6790
+lbl_804D6790:
+	.skip 0x4
+.global lbl_804D6794
+lbl_804D6794:
+	.skip 0x4
+.global lbl_804D6798
+lbl_804D6798:
+	.skip 0x4
+.global lbl_804D679C
+lbl_804D679C:
+	.skip 0x4
+.global lbl_804D67A0
+lbl_804D67A0:
+	.skip 0x4
+.global lbl_804D67A4
+lbl_804D67A4:
+	.skip 0x4
+.global lbl_804D67A8
+lbl_804D67A8:
+	.skip 0x4
+.global lbl_804D67AC
+lbl_804D67AC:
+	.skip 0x4
+.global lbl_804D67B0
+lbl_804D67B0:
+	.skip 0x4
+.global lbl_804D67B4
+lbl_804D67B4:
+	.skip 0x4
+.global lbl_804D67B8
+lbl_804D67B8:
+	.skip 0x4
+.global lbl_804D67BC
+lbl_804D67BC:
+	.skip 0x4
+.global lbl_804D67C0
+lbl_804D67C0:
+	.skip 0x4
+.global lbl_804D67C4
+lbl_804D67C4:
+	.skip 0x4
+.global lbl_804D67C8
+lbl_804D67C8:
+	.skip 0x1
+.global lbl_804D67C9
+lbl_804D67C9:
+	.skip 0x7
+.global lbl_804D67D0
+lbl_804D67D0:
+	.skip 0x4
+.global lbl_804D67D4
+lbl_804D67D4:
+	.skip 0x4
+.global lbl_804D67D8
+lbl_804D67D8:
+	.skip 0x4
+.global lbl_804D67DC
+lbl_804D67DC:
+	.skip 0x4
+.global lbl_804D67E0
+lbl_804D67E0:
+	.skip 0x1
+.global lbl_804D67E1
+lbl_804D67E1:
+	.skip 0x1
+.global lbl_804D67E2
+lbl_804D67E2:
+	.skip 0x2
+.global lbl_804D67E4
+lbl_804D67E4:
+	.skip 0x4
+.global lbl_804D67E8
+lbl_804D67E8:
+	.skip 0x4
+.global lbl_804D67EC
+lbl_804D67EC:
+	.skip 0x4
+.global lbl_804D67F0
+lbl_804D67F0:
+	.skip 0x4
+.global lbl_804D67F4
+lbl_804D67F4:
+	.skip 0x4
+.global lbl_804D67F8
+lbl_804D67F8:
+	.skip 0x4
+.global lbl_804D67FC
+lbl_804D67FC:
+	.skip 0x4
+.global lbl_804D6800
+lbl_804D6800:
+	.skip 0x4
+.global lbl_804D6804
+lbl_804D6804:
+	.skip 0x8
+.global lbl_804D680C
+lbl_804D680C:
+	.skip 0x4
+.global lbl_804D6810
+lbl_804D6810:
+	.skip 0x4
+.global lbl_804D6814
+lbl_804D6814:
+	.skip 0x4
+.global lbl_804D6818
+lbl_804D6818:
+	.skip 0x4
+.global lbl_804D681C
+lbl_804D681C:
+	.skip 0x4
+.global lbl_804D6820
+lbl_804D6820:
+	.skip 0x4
+.global lbl_804D6824
+lbl_804D6824:
+	.skip 0x4
+.global lbl_804D6828
+lbl_804D6828:
+	.skip 0x4
+.global lbl_804D682C
+lbl_804D682C:
+	.skip 0x4
+.global lbl_804D6830
+lbl_804D6830:
+	.skip 0x4
+.global lbl_804D6834
+lbl_804D6834:
+	.skip 0x4
+.global lbl_804D6838
+lbl_804D6838:
+	.skip 0x4
+.global lbl_804D683C
+lbl_804D683C:
+	.skip 0x4
+.global lbl_804D6840
+lbl_804D6840:
+	.skip 0x4
+.global lbl_804D6844
+lbl_804D6844:
+	.skip 0x4
+.global lbl_804D6848
+lbl_804D6848:
+	.skip 0x4
+.global lbl_804D684C
+lbl_804D684C:
+	.skip 0x4
+.global lbl_804D6850
+lbl_804D6850:
+	.skip 0x8
+.global lbl_804D6858
+lbl_804D6858:
+	.skip 0x8
+.global lbl_804D6860
+lbl_804D6860:
+    .skip 8
+.global lbl_804D6868
+lbl_804D6868:
+	.skip 0x4
+.global lbl_804D686C
+lbl_804D686C:
+	.skip 0x4
+.global lbl_804D6870
+lbl_804D6870:
+	.skip 0x2
+.global lbl_804D6872
+lbl_804D6872:
+	.skip 0x6
+.global lbl_804D6878
+lbl_804D6878:
+    .skip 0x8
+.global lbl_804D6880
+lbl_804D6880:
+    .skip 0x4
+.global lbl_804D6884
+lbl_804D6884:
+    .skip 0x8
+.global lbl_804D688C
+lbl_804D688C:
+    .skip 0x4
+.global lbl_804D6890
+lbl_804D6890:
+    .skip 0x8
+.global lbl_804D6898
+lbl_804D6898:
+    .skip 0x4
+.global lbl_804D689C
+lbl_804D689C:
+    .skip 0x8
+.global lbl_804D68A4
+lbl_804D68A4:
+    .skip 0xC
+.global lbl_804D68B0
+lbl_804D68B0:
+    .skip 0x8
+.global lbl_804D68B8
+lbl_804D68B8:
+    .skip 0x4
+.global lbl_804D68BC
+lbl_804D68BC:
+    .skip 0x4
+.global lbl_804D68C0
+lbl_804D68C0:
+	.skip 0x1
+.global lbl_804D68C1
+lbl_804D68C1:
+	.skip 0x7
+.global lbl_804D68C8
+lbl_804D68C8:
+    .skip 0x8
+.global lbl_804D68D0 
+lbl_804D68D0:
+    .skip 0x8
+.global lbl_804D68D8
+lbl_804D68D8:
+	.skip 0x8
+.global lbl_804D68E0
+lbl_804D68E0:
+    .skip 0x8
+.global lbl_804D68E8
+lbl_804D68E8:
+	.skip 0x1
+.global lbl_804D68E9
+lbl_804D68E9:
+	.skip 0x7
+.global lbl_804D68F0
+lbl_804D68F0:
+	.skip 0x1
+.global lbl_804D68F1
+lbl_804D68F1:
+	.skip 0x7
+.global lbl_804D68F8
+lbl_804D68F8:
+	.skip 0x1
+.global lbl_804D68F9
+lbl_804D68F9:
+	.skip 0x7
+.global lbl_804D6900
+lbl_804D6900:
+	.skip 0x8
+.global lbl_804D6908
+lbl_804D6908:
+    .skip 0x8
+.global lbl_804D6910
+lbl_804D6910:
+    .skip 0x8
+.global lbl_804D6918
+lbl_804D6918:
+    .skip 0x8
+.global lbl_804D6920
+lbl_804D6920:
+    .skip 0x8
+.global lbl_804D6928
+lbl_804D6928:
+    .skip 0x4
+.global lbl_804D692C
+lbl_804D692C:
+    .skip 0x4
+.global lbl_804D6930
+lbl_804D6930:
+    .skip 0x8
+.global lbl_804D6938
+lbl_804D6938:
+    .skip 0x4
+.global lbl_804D693C
+lbl_804D693C:
+    .skip 0x4
+.global lbl_804D6940
+lbl_804D6940:
+    .skip 0x8
+.global lbl_804D6948
+lbl_804D6948:
+    .skip 0x8
+.global lbl_804D6950
+lbl_804D6950:
+	.skip 0x4
+.global lbl_804D6954
+lbl_804D6954:
+	.skip 0x4
+.global lbl_804D6958
+lbl_804D6958:
+	.skip 0x4
+.global lbl_804D695C
+lbl_804D695C:
+	.skip 0x4
+.global lbl_804D6960
+lbl_804D6960:
+	.skip 0x4
+.global lbl_804D6964
+lbl_804D6964:
+	.skip 0x4

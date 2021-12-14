@@ -2629,3 +2629,28 @@ lbl_8032EA70:
 .global lbl_804A50E0
 lbl_804A50E0:
 	.skip 0x220
+
+
+.section .sbss
+
+.global lbl_804D70B0
+lbl_804D70B0:
+	.skip 0x4
+.global lbl_804D70B4
+lbl_804D70B4:
+	.skip 0x4
+.global lbl_804D70B8
+lbl_804D70B8:
+	.skip 0x4
+.global lbl_804D70BC
+lbl_804D70BC:
+	.skip 0x4
+.global lbl_804D70C0
+lbl_804D70C0:
+	.skip 0x4
+.global lbl_804D70C4
+lbl_804D70C4:
+	.skip 0x4
+.global lbl_804D70C8
+lbl_804D70C8:
+	.skip 0x8

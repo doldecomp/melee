@@ -7807,3 +7807,22 @@ lbl_803E26C4:
 lbl_803E26DC:
     .asciz "SIS_GrCorneriaData"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D69A0
+lbl_804D69A0:
+	.skip 0x4
+.global lbl_804D69A4
+lbl_804D69A4:
+	.skip 0x4
+.global lbl_804D69A8
+lbl_804D69A8:
+	.skip 0x4
+.global lbl_804D69AC
+lbl_804D69AC:
+	.skip 0x4
+.global lbl_804D69B0
+lbl_804D69B0:
+	.skip 0x8

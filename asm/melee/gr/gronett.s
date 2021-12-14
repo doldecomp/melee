@@ -2481,3 +2481,13 @@ jtbl_803E28F0:
 lbl_803E2910:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D69C0
+lbl_804D69C0:
+	.skip 0x4
+.global lbl_804D69C4
+lbl_804D69C4:
+	.skip 0x4

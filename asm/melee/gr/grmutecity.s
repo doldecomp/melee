@@ -4336,3 +4336,13 @@ lbl_8049F440:
 .global lbl_8049F4B8
 lbl_8049F4B8:
 	.skip 0x528
+
+
+.section .sbss
+
+.global lbl_804D69D0
+lbl_804D69D0:
+	.skip 0x4
+.global lbl_804D69D4
+lbl_804D69D4:
+	.skip 0x4

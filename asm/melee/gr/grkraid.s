@@ -1376,3 +1376,13 @@ lbl_803E4D8C:
     .asciz "Kraid Hand Pos = %f\n"
     .balign 4
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A08
+lbl_804D6A08:
+	.skip 0x4
+.global lbl_804D6A0C
+lbl_804D6A0C:
+	.skip 0x4

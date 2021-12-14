@@ -912,3 +912,10 @@ lbl_803E5230:
     .asciz "*** End Frame = %d\n"
     .balign 4
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A20
+lbl_804D6A20:
+	.skip 0x8
