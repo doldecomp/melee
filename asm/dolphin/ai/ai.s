@@ -629,3 +629,52 @@ lbl_80350C54:
 /* 80350C80 0034D860  38 21 00 30 */	addi r1, r1, 0x30
 /* 80350C84 0034D864  7C 08 03 A6 */	mtlr r0
 /* 80350C88 0034D868  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global __AIS_Callback
+__AIS_Callback:
+	.skip 0x4
+.global __AID_Callback
+__AID_Callback:
+	.skip 0x4
+.global __CallbackStack
+__CallbackStack:
+	.skip 0x4
+.global __OldStack
+__OldStack:
+	.skip 0x4
+.global __AI_init_flag
+__AI_init_flag:
+	.skip 0x8
+.global bound_32KHz
+bound_32KHz:
+	.skip 0x4
+.global lbl_804D748C
+lbl_804D748C:
+	.skip 0x4
+.global bound_48KHz
+bound_48KHz:
+	.skip 0x4
+.global lbl_804D7494
+lbl_804D7494:
+	.skip 0x4
+.global min_wait
+min_wait:
+	.skip 0x4
+.global lbl_804D749C
+lbl_804D749C:
+	.skip 0x4
+.global max_wait
+max_wait:
+	.skip 0x4
+.global lbl_804D74A4
+lbl_804D74A4:
+	.skip 0x4
+.global buffer
+buffer:
+	.skip 0x4
+.global lbl_804D74AC
+lbl_804D74AC:
+	.skip 0x4

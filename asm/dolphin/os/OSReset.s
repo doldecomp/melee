@@ -309,3 +309,10 @@ lbl_803486CC:
 /* 803486DC 003452BC  54 03 E8 FE */	srwi r3, r0, 3
 lbl_803486E0:
 /* 803486E0 003452C0  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global ResetFunctionQueue
+ResetFunctionQueue:
+	.skip 0x8

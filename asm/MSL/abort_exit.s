@@ -81,6 +81,7 @@ lbl_80323090:
 /* 803230A4 0031FC84  4E 80 00 20 */	blr 
 
 .section .dtors, "wa"  # 0x803B7260 - 0x803B7280
+
 .global lbl_803B7260
 lbl_803B7260:
 	.4byte __destroy_global_chain
@@ -97,3 +98,22 @@ lbl_804A2F48:
 .global lbl_804A3048
 lbl_804A3048:
 	.skip 0x100
+
+
+.section .sbss
+
+.global lbl_804D7060
+lbl_804D7060:
+	.skip 0x4
+.global lbl_804D7064
+lbl_804D7064:
+	.skip 0x4
+.global lbl_804D7068
+lbl_804D7068:
+	.skip 0x4
+.global lbl_804D706C
+lbl_804D706C:
+	.skip 0x4
+.global lbl_804D7070
+lbl_804D7070:
+	.skip 0x8

@@ -602,3 +602,13 @@ func_8035E4E4:
 /* 8035E554 0035B134  38 21 00 10 */	addi r1, r1, 0x10
 /* 8035E558 0035B138  7C 08 03 A6 */	mtlr r0
 /* 8035E55C 0035B13C  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D75A0
+lbl_804D75A0:
+	.skip 0x4
+.global lbl_804D75A4
+lbl_804D75A4:
+	.skip 0x4

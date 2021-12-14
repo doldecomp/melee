@@ -792,3 +792,76 @@ lbl_80362000:
 .global lbl_804C07E0
 lbl_804C07E0:
 	.skip 0x18
+
+
+.section .sbss
+
+.global lbl_804D75B0
+lbl_804D75B0:
+	.skip 0x4
+.global lbl_804D75B4
+lbl_804D75B4:
+	.skip 0x4
+.global lbl_804D75B8
+lbl_804D75B8:
+	.skip 0x4
+.global lbl_804D75BC
+lbl_804D75BC:
+	.skip 0x4
+.global lbl_804D75C0
+lbl_804D75C0:
+	.skip 0x4
+.global lbl_804D75C4
+lbl_804D75C4:
+	.skip 0x4
+.global lbl_804D75C8
+lbl_804D75C8:
+	.skip 0x4
+.global lbl_804D75CC
+lbl_804D75CC:
+	.skip 0x4
+.global lbl_804D75D0
+lbl_804D75D0:
+	.skip 0x4
+.global lbl_804D75D4
+lbl_804D75D4:
+	.skip 0x4
+.global lbl_804D75D8
+lbl_804D75D8:
+	.skip 0x4
+.global lbl_804D75DC
+lbl_804D75DC:
+	.skip 0x4
+.global lbl_804D75E0
+lbl_804D75E0:
+	.skip 0x4
+.global lbl_804D75E4
+lbl_804D75E4:
+	.skip 0x4
+.global lbl_804D75E8
+lbl_804D75E8:
+	.skip 0x4
+.global lbl_804D75EC
+lbl_804D75EC:
+	.skip 0x4
+.global lbl_804D75F0
+lbl_804D75F0:
+	.skip 0x1
+.global lbl_804D75F1
+lbl_804D75F1:
+	.skip 0x1
+.global lbl_804D75F2
+lbl_804D75F2:
+	.skip 0x1
+.global lbl_804D75F3
+lbl_804D75F3:
+	.skip 0x1
+.global lbl_804D75F4
+lbl_804D75F4:
+	.skip 0x1
+.global lbl_804D75F5
+lbl_804D75F5:
+	.skip 0x1
+.global lbl_804D75F6
+lbl_804D75F6:
+	.skip 0x2
