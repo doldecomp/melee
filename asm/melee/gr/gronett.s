@@ -2483,6 +2483,26 @@ lbl_803E2910:
     .balign 4
 
 
+.section .sdata
+
+.global lbl_804D4688
+lbl_804D4688:
+    .4byte 0x2F47724F
+    .4byte 0x74000000
+.global lbl_804D4690
+lbl_804D4690:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4698
+lbl_804D4698:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D46A0
+lbl_804D46A0:
+    .asciz "archive"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D69C0

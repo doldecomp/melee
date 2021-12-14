@@ -1578,3 +1578,23 @@ lbl_80479BC8:
 .global lbl_80479C20
 lbl_80479C20:
 	.skip 0x10
+
+
+.section .sdata
+
+.global lbl_804D4248
+lbl_804D4248:
+    .asciz "SdVsCam"
+    .balign 4
+.global lbl_804D4250
+lbl_804D4250:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4258
+lbl_804D4258:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4260
+lbl_804D4260:
+    .asciz "IfVsCam"
+    .balign 4

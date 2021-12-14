@@ -5170,6 +5170,39 @@ lbl_803E4800:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D4710
+lbl_804D4710:
+    .asciz "gobj"
+    .balign 4
+.global lbl_804D4718
+lbl_804D4718:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4720
+lbl_804D4720:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4728
+lbl_804D4728:
+    .asciz "mgobj"
+    .balign 4
+.global lbl_804D4730
+lbl_804D4730:
+    .asciz "max"
+    .balign 4
+.global lbl_804D4734
+lbl_804D4734:
+    .asciz "bg_gobj"
+    .balign 4
+.global lbl_804D473C
+lbl_804D473C:
+    .asciz "bg_gp"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D69E8

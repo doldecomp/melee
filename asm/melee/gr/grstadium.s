@@ -5122,6 +5122,46 @@ lbl_8049F040:
 	.skip 0x100
 
 
+.section .sdata
+
+.global lbl_804D45E8
+lbl_804D45E8:
+    .4byte 0x2F477250
+    .4byte 0x73000000
+.global lbl_804D45F0
+lbl_804D45F0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D45F8
+lbl_804D45F8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4600
+lbl_804D4600:
+    .asciz "0"
+    .balign 4
+.global lbl_804D4604
+lbl_804D4604:
+    .asciz "gp2"
+    .balign 4
+.global lbl_804D4608
+lbl_804D4608:
+    .asciz "%d"
+    .balign 4
+.global lbl_804D460C
+lbl_804D460C:
+    .asciz "%3d"
+    .balign 4
+.global lbl_804D4610
+lbl_804D4610:
+    .asciz "%s"
+    .balign 4
+.global lbl_804D4614
+lbl_804D4614:
+    .asciz "gp"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6978
