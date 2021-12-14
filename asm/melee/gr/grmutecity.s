@@ -219,36 +219,36 @@ lbl_801EFEE4:
 /* 801EFF68 001ECB48  88 1F 00 10 */	lbz r0, 0x10(r31)
 /* 801EFF6C 001ECB4C  50 80 17 7A */	rlwimi r0, r4, 2, 0x1d, 0x1d
 /* 801EFF70 001ECB50  98 1F 00 10 */	stb r0, 0x10(r31)
-/* 801EFF74 001ECB54  48 03 4C 85 */	bl func_80224BF8
-/* 801EFF78 001ECB58  48 03 4B 09 */	bl func_80224A80
+/* 801EFF74 001ECB54  48 03 4C 85 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 801EFF78 001ECB58  48 03 4B 09 */	bl get_cam_bounds_top_offset
 /* 801EFF7C 001ECB5C  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 801EFF80 001ECB60  EC 01 00 28 */	fsubs f0, f1, f0
 /* 801EFF84 001ECB64  D0 1F 01 14 */	stfs f0, 0x114(r31)
-/* 801EFF88 001ECB68  48 03 4B 11 */	bl func_80224A98
+/* 801EFF88 001ECB68  48 03 4B 11 */	bl get_cam_bounds_bottom_offset
 /* 801EFF8C 001ECB6C  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 801EFF90 001ECB70  EC 01 00 28 */	fsubs f0, f1, f0
 /* 801EFF94 001ECB74  D0 1F 01 18 */	stfs f0, 0x118(r31)
-/* 801EFF98 001ECB78  48 03 4A BD */	bl func_80224A54
+/* 801EFF98 001ECB78  48 03 4A BD */	bl get_cam_bounds_left_offset
 /* 801EFF9C 001ECB7C  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 801EFFA0 001ECB80  EC 01 00 28 */	fsubs f0, f1, f0
 /* 801EFFA4 001ECB84  D0 1F 01 1C */	stfs f0, 0x11c(r31)
-/* 801EFFA8 001ECB88  48 03 4A C1 */	bl func_80224A68
+/* 801EFFA8 001ECB88  48 03 4A C1 */	bl get_cam_bounds_right_offset
 /* 801EFFAC 001ECB8C  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 801EFFB0 001ECB90  EC 01 00 28 */	fsubs f0, f1, f0
 /* 801EFFB4 001ECB94  D0 1F 01 20 */	stfs f0, 0x120(r31)
-/* 801EFFB8 001ECB98  48 03 4B B1 */	bl func_80224B68
+/* 801EFFB8 001ECB98  48 03 4B B1 */	bl get_blast_zone_top_offset
 /* 801EFFBC 001ECB9C  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 801EFFC0 001ECBA0  EC 01 00 28 */	fsubs f0, f1, f0
 /* 801EFFC4 001ECBA4  D0 1F 01 24 */	stfs f0, 0x124(r31)
-/* 801EFFC8 001ECBA8  48 03 4B B9 */	bl func_80224B80
+/* 801EFFC8 001ECBA8  48 03 4B B9 */	bl get_blast_zone_bottom_offset
 /* 801EFFCC 001ECBAC  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 801EFFD0 001ECBB0  EC 01 00 28 */	fsubs f0, f1, f0
 /* 801EFFD4 001ECBB4  D0 1F 01 28 */	stfs f0, 0x128(r31)
-/* 801EFFD8 001ECBB8  48 03 4B 79 */	bl func_80224B50
+/* 801EFFD8 001ECBB8  48 03 4B 79 */	bl get_blast_zone_left_offset
 /* 801EFFDC 001ECBBC  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 801EFFE0 001ECBC0  EC 01 00 28 */	fsubs f0, f1, f0
 /* 801EFFE4 001ECBC4  D0 1F 01 2C */	stfs f0, 0x12c(r31)
-/* 801EFFE8 001ECBC8  48 03 4B 51 */	bl func_80224B38
+/* 801EFFE8 001ECBC8  48 03 4B 51 */	bl get_blast_zone_right_offset
 /* 801EFFEC 001ECBCC  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 801EFFF0 001ECBD0  38 60 00 1D */	li r3, 0x1d
 /* 801EFFF4 001ECBD4  EC 01 00 28 */	fsubs f0, f1, f0

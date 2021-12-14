@@ -33533,7 +33533,7 @@ lbl_801C0B80:
 /* 801C0BA0 001BD780  38 7E 00 00 */	addi r3, r30, 0
 /* 801C0BA4 001BD784  38 9F 00 00 */	addi r4, r31, 0
 /* 801C0BA8 001BD788  4B E7 1B 25 */	bl func_800326CC
-/* 801C0BAC 001BD78C  48 06 3F BD */	bl func_80224B68
+/* 801C0BAC 001BD78C  48 06 3F BD */	bl get_blast_zone_top_offset
 /* 801C0BB0 001BD790  C0 02 B2 F0 */	lfs f0, lbl_804DACD0@sda21(r2)
 /* 801C0BB4 001BD794  38 60 00 64 */	li r3, 0x64
 /* 801C0BB8 001BD798  EC 00 08 2A */	fadds f0, f0, f1
@@ -36119,7 +36119,7 @@ lbl_801C2EA0:
 /* 801C2EA0 001BFA80  2C 03 00 04 */	cmpwi r3, 4
 /* 801C2EA4 001BFA84  40 82 00 14 */	bne lbl_801C2EB8
 /* 801C2EA8 001BFA88  7F E3 FB 78 */	mr r3, r31
-/* 801C2EAC 001BFA8C  48 06 1D 4D */	bl func_80224BF8
+/* 801C2EAC 001BFA8C  48 06 1D 4D */	bl unk_set_vec3_to_cam_offset_80224BF8
 /* 801C2EB0 001BFA90  38 60 00 01 */	li r3, 1
 /* 801C2EB4 001BFA94  48 00 00 08 */	b lbl_801C2EBC
 lbl_801C2EB8:
@@ -45499,27 +45499,27 @@ func_801CA8B4:
 /* 801CA900 001C74E0  88 1B 00 0A */	lbz r0, 0xa(r27)
 /* 801CA904 001C74E4  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 801CA908 001C74E8  41 82 02 D8 */	beq lbl_801CABE0
-/* 801CA90C 001C74EC  48 05 A2 2D */	bl func_80224B38
+/* 801CA90C 001C74EC  48 05 A2 2D */	bl get_blast_zone_right_offset
 /* 801CA910 001C74F0  FF 80 08 90 */	fmr f28, f1
-/* 801CA914 001C74F4  48 05 A2 3D */	bl func_80224B50
+/* 801CA914 001C74F4  48 05 A2 3D */	bl get_blast_zone_left_offset
 /* 801CA918 001C74F8  FF A0 08 90 */	fmr f29, f1
-/* 801CA91C 001C74FC  48 05 A2 4D */	bl func_80224B68
+/* 801CA91C 001C74FC  48 05 A2 4D */	bl get_blast_zone_top_offset
 /* 801CA920 001C7500  FF C0 08 90 */	fmr f30, f1
-/* 801CA924 001C7504  48 05 A2 5D */	bl func_80224B80
+/* 801CA924 001C7504  48 05 A2 5D */	bl get_blast_zone_bottom_offset
 /* 801CA928 001C7508  FF E0 08 90 */	fmr f31, f1
-/* 801CA92C 001C750C  48 05 A1 3D */	bl func_80224A68
+/* 801CA92C 001C750C  48 05 A1 3D */	bl get_cam_bounds_right_offset
 /* 801CA930 001C7510  EC 3C 08 2A */	fadds f1, f28, f1
 /* 801CA934 001C7514  C0 02 B3 D0 */	lfs f0, lbl_804DADB0@sda21(r2)
 /* 801CA938 001C7518  EF 60 00 72 */	fmuls f27, f0, f1
-/* 801CA93C 001C751C  48 05 A1 19 */	bl func_80224A54
+/* 801CA93C 001C751C  48 05 A1 19 */	bl get_cam_bounds_left_offset
 /* 801CA940 001C7520  EC 3D 08 2A */	fadds f1, f29, f1
 /* 801CA944 001C7524  C0 02 B3 D0 */	lfs f0, lbl_804DADB0@sda21(r2)
 /* 801CA948 001C7528  EF 40 00 72 */	fmuls f26, f0, f1
-/* 801CA94C 001C752C  48 05 A1 35 */	bl func_80224A80
+/* 801CA94C 001C752C  48 05 A1 35 */	bl get_cam_bounds_top_offset
 /* 801CA950 001C7530  EC 3E 08 2A */	fadds f1, f30, f1
 /* 801CA954 001C7534  C0 02 B3 D0 */	lfs f0, lbl_804DADB0@sda21(r2)
 /* 801CA958 001C7538  EF 20 00 72 */	fmuls f25, f0, f1
-/* 801CA95C 001C753C  48 05 A1 3D */	bl func_80224A98
+/* 801CA95C 001C753C  48 05 A1 3D */	bl get_cam_bounds_bottom_offset
 /* 801CA960 001C7540  EC 3F 08 2A */	fadds f1, f31, f1
 /* 801CA964 001C7544  C0 02 B3 D0 */	lfs f0, lbl_804DADB0@sda21(r2)
 /* 801CA968 001C7548  3B 1B 00 08 */	addi r24, r27, 8

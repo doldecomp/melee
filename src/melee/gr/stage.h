@@ -4,6 +4,7 @@
 #include <global.h>
 
 #include <dolphin/types.h>
+#include <dolphin/mtx/mtxtypes.h>
 
 
 // This struct is based in part on the datasheet
