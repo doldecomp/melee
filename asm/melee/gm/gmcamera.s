@@ -413,9 +413,9 @@ lbl_801A277C:
 .global lbl_801A2798
 lbl_801A2798:
 /* 801A2798 0019F378  7C 08 02 A6 */	mflr r0
-/* 801A279C 0019F37C  3C 60 80 4C */	lis r3, lbl_804C20BC@ha
+/* 801A279C 0019F37C  3C 60 80 4C */	lis r3, HSD_PadCopyStatus@ha
 /* 801A27A0 0019F380  90 01 00 04 */	stw r0, 4(r1)
-/* 801A27A4 0019F384  38 63 20 BC */	addi r3, r3, lbl_804C20BC@l
+/* 801A27A4 0019F384  38 63 20 BC */	addi r3, r3, HSD_PadCopyStatus@l
 /* 801A27A8 0019F388  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801A27AC 0019F38C  80 63 00 D4 */	lwz r3, 0xd4(r3)
 /* 801A27B0 0019F390  54 60 05 AD */	rlwinm. r0, r3, 0, 0x16, 0x16
@@ -646,8 +646,8 @@ lbl_801A2ADC:
 /* 801A2AE0 0019F6C0  48 00 05 69 */	bl func_801A3048
 /* 801A2AE4 0019F6C4  48 00 00 B8 */	b lbl_801A2B9C
 lbl_801A2AE8:
-/* 801A2AE8 0019F6C8  3C 60 80 4C */	lis r3, lbl_804C20BC@ha
-/* 801A2AEC 0019F6CC  38 63 20 BC */	addi r3, r3, lbl_804C20BC@l
+/* 801A2AE8 0019F6C8  3C 60 80 4C */	lis r3, HSD_PadCopyStatus@ha
+/* 801A2AEC 0019F6CC  38 63 20 BC */	addi r3, r3, HSD_PadCopyStatus@l
 /* 801A2AF0 0019F6D0  80 63 00 D4 */	lwz r3, 0xd4(r3)
 /* 801A2AF4 0019F6D4  54 60 05 EF */	rlwinm. r0, r3, 0, 0x17, 0x17
 /* 801A2AF8 0019F6D8  41 82 00 8C */	beq lbl_801A2B84
@@ -706,9 +706,9 @@ lbl_801A2B9C:
 .global lbl_801A2BB0
 lbl_801A2BB0:
 /* 801A2BB0 0019F790  7C 08 02 A6 */	mflr r0
-/* 801A2BB4 0019F794  3C 60 80 4C */	lis r3, lbl_804C20BC@ha
+/* 801A2BB4 0019F794  3C 60 80 4C */	lis r3, HSD_PadCopyStatus@ha
 /* 801A2BB8 0019F798  90 01 00 04 */	stw r0, 4(r1)
-/* 801A2BBC 0019F79C  38 63 20 BC */	addi r3, r3, lbl_804C20BC@l
+/* 801A2BBC 0019F79C  38 63 20 BC */	addi r3, r3, HSD_PadCopyStatus@l
 /* 801A2BC0 0019F7A0  94 21 FF F8 */	stwu r1, -8(r1)
 /* 801A2BC4 0019F7A4  80 03 00 D4 */	lwz r0, 0xd4(r3)
 /* 801A2BC8 0019F7A8  54 00 05 AD */	rlwinm. r0, r0, 0, 0x16, 0x16
@@ -840,8 +840,8 @@ lbl_801A2D84:
 /* 801A2D88 0019F968  48 00 02 C1 */	bl func_801A3048
 /* 801A2D8C 0019F96C  48 00 02 14 */	b lbl_801A2FA0
 lbl_801A2D90:
-/* 801A2D90 0019F970  3C 60 80 4C */	lis r3, lbl_804C20BC@ha
-/* 801A2D94 0019F974  38 63 20 BC */	addi r3, r3, lbl_804C20BC@l
+/* 801A2D90 0019F970  3C 60 80 4C */	lis r3, HSD_PadCopyStatus@ha
+/* 801A2D94 0019F974  38 63 20 BC */	addi r3, r3, HSD_PadCopyStatus@l
 /* 801A2D98 0019F978  80 83 00 D4 */	lwz r4, 0xd4(r3)
 /* 801A2D9C 0019F97C  70 80 11 00 */	andi. r0, r4, 0x1100
 /* 801A2DA0 0019F980  41 82 00 38 */	beq lbl_801A2DD8
@@ -1578,3 +1578,23 @@ lbl_80479BC8:
 .global lbl_80479C20
 lbl_80479C20:
 	.skip 0x10
+
+
+.section .sdata
+
+.global lbl_804D4248
+lbl_804D4248:
+    .asciz "SdVsCam"
+    .balign 4
+.global lbl_804D4250
+lbl_804D4250:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4258
+lbl_804D4258:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4260
+lbl_804D4260:
+    .asciz "IfVsCam"
+    .balign 4

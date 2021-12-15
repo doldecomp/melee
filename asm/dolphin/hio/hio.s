@@ -919,3 +919,19 @@ lbl_8032C734:
 /* 8032C740 00329320  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032C744 00329324  7C 08 03 A6 */	mtlr r0
 /* 8032C748 00329328  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D70A0
+lbl_804D70A0:
+	.skip 0x4
+.global lbl_804D70A4
+lbl_804D70A4:
+	.skip 0x4
+.global lbl_804D70A8
+lbl_804D70A8:
+	.skip 0x4
+.global lbl_804D70AC
+lbl_804D70AC:
+	.skip 0x4

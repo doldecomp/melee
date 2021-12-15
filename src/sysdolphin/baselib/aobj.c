@@ -18,13 +18,13 @@ extern s32 lbl_8040603C;
 extern void* jtbl_80406058;
 extern void* jtbl_8040608C;
 
-extern s32 lbl_804D7630;
-extern s32 lbl_804D762C;
-
 extern const f32 lbl_804DE43C; // 1.0F
 extern const f32 lbl_804DE438; // 0.0F
 
-extern HSD_SList* endcallback_list;
+static HSD_SList* endcallback_list;
+
+static s32 lbl_804D762C;
+static s32 lbl_804D7630;
 
 void HSD_AObjInitAllocData(void)
 {

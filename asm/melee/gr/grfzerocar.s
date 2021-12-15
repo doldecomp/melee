@@ -971,3 +971,24 @@ lbl_803E0BD8:
     .4byte 0x6A6F626A
     .4byte NULL
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D4598
+lbl_804D4598:
+    .asciz "archive"
+    .balign 4
+.global lbl_804D45A0
+lbl_804D45A0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D45A8
+lbl_804D45A8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D45B0
+lbl_804D45B0:
+    .asciz "0"
+    .balign 4
+    .4byte NULL

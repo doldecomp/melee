@@ -300,3 +300,10 @@ lbl_80325EE4:
 /* 80325F0C 00322AEC  38 21 00 60 */	addi r1, r1, 0x60
 /* 80325F10 00322AF0  7C 08 03 A6 */	mtlr r0
 /* 80325F14 00322AF4  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7078
+lbl_804D7078:
+	.skip 0x8

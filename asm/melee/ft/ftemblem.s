@@ -228,3 +228,13 @@ func_8014F1AC:
 /* 8014F1E4 0014BDC4  38 21 00 18 */	addi r1, r1, 0x18
 /* 8014F1E8 0014BDC8  7C 08 03 A6 */	mtlr r0
 /* 8014F1EC 0014BDCC  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D9E60
+lbl_804D9E60:
+	.4byte 0x40400000
+.global lbl_804D9E64
+lbl_804D9E64:
+	.4byte 0x00000000

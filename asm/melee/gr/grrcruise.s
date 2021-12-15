@@ -701,7 +701,7 @@ func_801FFADC:
 /* 801FFB08 001FC6E8  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 801FFB0C 001FC6EC  40 82 05 40 */	bne lbl_8020004C
 /* 801FFB10 001FC6F0  38 61 00 4C */	addi r3, r1, 0x4c
-/* 801FFB14 001FC6F4  48 02 50 E5 */	bl func_80224BF8
+/* 801FFB14 001FC6F4  48 02 50 E5 */	bl unk_set_vec3_to_cam_offset_80224BF8
 /* 801FFB18 001FC6F8  80 1D 00 EC */	lwz r0, 0xec(r29)
 /* 801FFB1C 001FC6FC  28 00 00 00 */	cmplwi r0, 0
 /* 801FFB20 001FC700  40 82 00 1C */	bne lbl_801FFB3C
@@ -717,7 +717,7 @@ lbl_801FFB3C:
 /* 801FFB44 001FC724  80 84 00 2C */	lwz r4, 0x2c(r4)
 /* 801FFB48 001FC728  83 C4 00 F0 */	lwz r30, 0xf0(r4)
 /* 801FFB4C 001FC72C  83 E4 00 F4 */	lwz r31, 0xf4(r4)
-/* 801FFB50 001FC730  48 02 50 A9 */	bl func_80224BF8
+/* 801FFB50 001FC730  48 02 50 A9 */	bl unk_set_vec3_to_cam_offset_80224BF8
 /* 801FFB54 001FC734  38 7F 00 00 */	addi r3, r31, 0
 /* 801FFB58 001FC738  38 A1 00 18 */	addi r5, r1, 0x18
 /* 801FFB5C 001FC73C  38 80 00 00 */	li r4, 0
@@ -2087,7 +2087,7 @@ lbl_80200EA0:
 /* 80200EB4 001FDA94  38 AD 90 E8 */	addi r5, r13, lbl_804D4788@sda21
 /* 80200EB8 001FDA98  48 18 73 69 */	bl __assert
 lbl_80200EBC:
-/* 80200EBC 001FDA9C  48 02 3B DD */	bl func_80224A98
+/* 80200EBC 001FDA9C  48 02 3B DD */	bl get_cam_bounds_bottom_offset
 /* 80200EC0 001FDAA0  C0 1A 00 3C */	lfs f0, 0x3c(r26)
 /* 80200EC4 001FDAA4  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 80200EC8 001FDAA8  4C 40 13 82 */	cror 2, 0, 2
@@ -3288,3 +3288,10 @@ lbl_803E4FF0:
     .4byte 0x6A6F626A
     .4byte NULL
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A10
+lbl_804D6A10:
+	.skip 0x8

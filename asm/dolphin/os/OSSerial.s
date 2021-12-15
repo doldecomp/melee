@@ -1646,3 +1646,16 @@ lbl_804A7F18:
 .global lbl_804A7F58
 lbl_804A7F58:
 	.skip 0x60
+
+
+.section .sbss
+
+.global lbl_804D73C8
+lbl_804D73C8:
+	.skip 0x4
+.global lbl_804D73CC
+lbl_804D73CC:
+	.skip 0x4
+.global lbl_804D73D0
+lbl_804D73D0:
+	.skip 0x8

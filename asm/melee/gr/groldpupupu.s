@@ -1655,3 +1655,13 @@ lbl_803E6748:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6A98
+lbl_804D6A98:
+	.skip 0x4
+.global lbl_804D6A9C
+lbl_804D6A9C:
+	.skip 0x4

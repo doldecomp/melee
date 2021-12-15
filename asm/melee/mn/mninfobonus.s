@@ -321,8 +321,8 @@ lbl_80252D68:
 /* 80252D68 0024F948  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
 /* 80252D6C 0024F94C  2C 00 00 03 */	cmpwi r0, 3
 /* 80252D70 0024F950  41 80 00 38 */	blt lbl_80252DA8
-/* 80252D74 0024F954  3C 60 80 4C */	lis r3, lbl_804C20BC@ha
-/* 80252D78 0024F958  38 63 20 BC */	addi r3, r3, lbl_804C20BC@l
+/* 80252D74 0024F954  3C 60 80 4C */	lis r3, HSD_PadCopyStatus@ha
+/* 80252D78 0024F958  38 63 20 BC */	addi r3, r3, HSD_PadCopyStatus@l
 /* 80252D7C 0024F95C  80 63 00 00 */	lwz r3, 0(r3)
 /* 80252D80 0024F960  54 60 06 73 */	rlwinm. r0, r3, 0, 0x19, 0x19
 /* 80252D84 0024F964  41 82 00 24 */	beq lbl_80252DA8
@@ -619,3 +619,10 @@ lbl_80253104:
 .global lbl_804A09B0
 lbl_804A09B0:
 	.skip 0x60
+
+
+.section .sbss
+
+.global lbl_804D6C80
+lbl_804D6C80:
+	.skip 0x8

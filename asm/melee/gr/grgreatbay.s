@@ -2493,7 +2493,7 @@ lbl_801F6448:
 /* 801F6450 001F3030  4B E1 4D 7D */	bl func_8000B1CC
 /* 801F6454 001F3034  C0 02 BB 58 */	lfs f0, lbl_804DB538@sda21(r2)
 /* 801F6458 001F3038  D0 01 00 68 */	stfs f0, 0x68(r1)
-/* 801F645C 001F303C  48 02 E7 25 */	bl func_80224B80
+/* 801F645C 001F303C  48 02 E7 25 */	bl get_blast_zone_bottom_offset
 /* 801F6460 001F3040  C0 01 00 64 */	lfs f0, 0x64(r1)
 /* 801F6464 001F3044  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801F6468 001F3048  4C 40 13 82 */	cror 2, 0, 2
@@ -2860,3 +2860,27 @@ lbl_803E4048:
     .4byte 0x001B0013
     .4byte 0x00270015
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D46F8
+lbl_804D46F8:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4700
+lbl_804D4700:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4708
+lbl_804D4708:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D69E0
+lbl_804D69E0:
+	.skip 0x8

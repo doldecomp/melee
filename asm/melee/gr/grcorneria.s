@@ -2238,28 +2238,28 @@ func_801DEC08:
 /* 801DEC10 001DB7F0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 801DEC14 001DB7F4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 801DEC18 001DB7F8  7C 7F 1B 78 */	mr r31, r3
-/* 801DEC1C 001DB7FC  48 04 5F 1D */	bl func_80224B38
+/* 801DEC1C 001DB7FC  48 04 5F 1D */	bl get_blast_zone_right_offset
 /* 801DEC20 001DB800  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801DEC24 001DB804  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DEC28 001DB808  40 81 00 0C */	ble lbl_801DEC34
 /* 801DEC2C 001DB80C  38 60 00 01 */	li r3, 1
 /* 801DEC30 001DB810  48 00 00 50 */	b lbl_801DEC80
 lbl_801DEC34:
-/* 801DEC34 001DB814  48 04 5F 1D */	bl func_80224B50
+/* 801DEC34 001DB814  48 04 5F 1D */	bl get_blast_zone_left_offset
 /* 801DEC38 001DB818  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801DEC3C 001DB81C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DEC40 001DB820  40 80 00 0C */	bge lbl_801DEC4C
 /* 801DEC44 001DB824  38 60 00 01 */	li r3, 1
 /* 801DEC48 001DB828  48 00 00 38 */	b lbl_801DEC80
 lbl_801DEC4C:
-/* 801DEC4C 001DB82C  48 04 5F 1D */	bl func_80224B68
+/* 801DEC4C 001DB82C  48 04 5F 1D */	bl get_blast_zone_top_offset
 /* 801DEC50 001DB830  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 801DEC54 001DB834  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DEC58 001DB838  40 81 00 0C */	ble lbl_801DEC64
 /* 801DEC5C 001DB83C  38 60 00 01 */	li r3, 1
 /* 801DEC60 001DB840  48 00 00 20 */	b lbl_801DEC80
 lbl_801DEC64:
-/* 801DEC64 001DB844  48 04 5F 1D */	bl func_80224B80
+/* 801DEC64 001DB844  48 04 5F 1D */	bl get_blast_zone_bottom_offset
 /* 801DEC68 001DB848  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 801DEC6C 001DB84C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DEC70 001DB850  40 80 00 0C */	bge lbl_801DEC7C
@@ -2285,7 +2285,7 @@ func_801DEC94:
 /* 801DECAC 001DB88C  C0 23 00 08 */	lfs f1, 8(r3)
 /* 801DECB0 001DB890  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 801DECB4 001DB894  40 81 00 84 */	ble lbl_801DED38
-/* 801DECB8 001DB898  48 04 5E 81 */	bl func_80224B38
+/* 801DECB8 001DB898  48 04 5E 81 */	bl get_blast_zone_right_offset
 /* 801DECBC 001DB89C  C0 42 B7 EC */	lfs f2, lbl_804DB1CC@sda21(r2)
 /* 801DECC0 001DB8A0  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801DECC4 001DB8A4  EC 21 10 28 */	fsubs f1, f1, f2
@@ -2294,7 +2294,7 @@ func_801DEC94:
 /* 801DECD0 001DB8B0  38 60 00 01 */	li r3, 1
 /* 801DECD4 001DB8B4  48 00 00 68 */	b lbl_801DED3C
 lbl_801DECD8:
-/* 801DECD8 001DB8B8  48 04 5E 79 */	bl func_80224B50
+/* 801DECD8 001DB8B8  48 04 5E 79 */	bl get_blast_zone_left_offset
 /* 801DECDC 001DB8BC  C0 42 B7 EC */	lfs f2, lbl_804DB1CC@sda21(r2)
 /* 801DECE0 001DB8C0  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801DECE4 001DB8C4  EC 22 08 2A */	fadds f1, f2, f1
@@ -2303,7 +2303,7 @@ lbl_801DECD8:
 /* 801DECF0 001DB8D0  38 60 00 01 */	li r3, 1
 /* 801DECF4 001DB8D4  48 00 00 48 */	b lbl_801DED3C
 lbl_801DECF8:
-/* 801DECF8 001DB8D8  48 04 5E 71 */	bl func_80224B68
+/* 801DECF8 001DB8D8  48 04 5E 71 */	bl get_blast_zone_top_offset
 /* 801DECFC 001DB8DC  C0 42 B7 EC */	lfs f2, lbl_804DB1CC@sda21(r2)
 /* 801DED00 001DB8E0  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 801DED04 001DB8E4  EC 21 10 28 */	fsubs f1, f1, f2
@@ -2312,7 +2312,7 @@ lbl_801DECF8:
 /* 801DED10 001DB8F0  38 60 00 01 */	li r3, 1
 /* 801DED14 001DB8F4  48 00 00 28 */	b lbl_801DED3C
 lbl_801DED18:
-/* 801DED18 001DB8F8  48 04 5E 69 */	bl func_80224B80
+/* 801DED18 001DB8F8  48 04 5E 69 */	bl get_blast_zone_bottom_offset
 /* 801DED1C 001DB8FC  C0 42 B7 EC */	lfs f2, lbl_804DB1CC@sda21(r2)
 /* 801DED20 001DB900  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 801DED24 001DB904  EC 22 08 2A */	fadds f1, f2, f1
@@ -2779,28 +2779,28 @@ lbl_801DF394:
 /* 801DF39C 001DBF7C  41 82 04 C0 */	beq lbl_801DF85C
 /* 801DF3A0 001DBF80  3B 60 00 00 */	li r27, 0
 /* 801DF3A4 001DBF84  93 7F 00 FC */	stw r27, 0xfc(r31)
-/* 801DF3A8 001DBF88  48 04 57 91 */	bl func_80224B38
+/* 801DF3A8 001DBF88  48 04 57 91 */	bl get_blast_zone_right_offset
 /* 801DF3AC 001DBF8C  C0 01 00 7C */	lfs f0, 0x7c(r1)
 /* 801DF3B0 001DBF90  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DF3B4 001DBF94  40 81 00 0C */	ble lbl_801DF3C0
 /* 801DF3B8 001DBF98  3B 60 00 01 */	li r27, 1
 /* 801DF3BC 001DBF9C  48 00 00 48 */	b lbl_801DF404
 lbl_801DF3C0:
-/* 801DF3C0 001DBFA0  48 04 57 91 */	bl func_80224B50
+/* 801DF3C0 001DBFA0  48 04 57 91 */	bl get_blast_zone_left_offset
 /* 801DF3C4 001DBFA4  C0 01 00 7C */	lfs f0, 0x7c(r1)
 /* 801DF3C8 001DBFA8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DF3CC 001DBFAC  40 80 00 0C */	bge lbl_801DF3D8
 /* 801DF3D0 001DBFB0  3B 60 00 01 */	li r27, 1
 /* 801DF3D4 001DBFB4  48 00 00 30 */	b lbl_801DF404
 lbl_801DF3D8:
-/* 801DF3D8 001DBFB8  48 04 57 91 */	bl func_80224B68
+/* 801DF3D8 001DBFB8  48 04 57 91 */	bl get_blast_zone_top_offset
 /* 801DF3DC 001DBFBC  C0 01 00 80 */	lfs f0, 0x80(r1)
 /* 801DF3E0 001DBFC0  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DF3E4 001DBFC4  40 81 00 0C */	ble lbl_801DF3F0
 /* 801DF3E8 001DBFC8  3B 60 00 01 */	li r27, 1
 /* 801DF3EC 001DBFCC  48 00 00 18 */	b lbl_801DF404
 lbl_801DF3F0:
-/* 801DF3F0 001DBFD0  48 04 57 91 */	bl func_80224B80
+/* 801DF3F0 001DBFD0  48 04 57 91 */	bl get_blast_zone_bottom_offset
 /* 801DF3F4 001DBFD4  C0 01 00 80 */	lfs f0, 0x80(r1)
 /* 801DF3F8 001DBFD8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DF3FC 001DBFDC  40 80 00 08 */	bge lbl_801DF404
@@ -4715,8 +4715,8 @@ func_801E0E40:
 /* 801E0E60 001DDA40  2C 03 00 00 */	cmpwi r3, 0
 /* 801E0E64 001DDA44  41 82 00 B8 */	beq lbl_801E0F1C
 lbl_801E0E68:
-/* 801E0E68 001DDA48  3C 60 80 4C */	lis r3, lbl_804C1FAC@ha
-/* 801E0E6C 001DDA4C  38 63 1F AC */	addi r3, r3, lbl_804C1FAC@l
+/* 801E0E68 001DDA48  3C 60 80 4C */	lis r3, HSD_PadMasterStatus@ha
+/* 801E0E6C 001DDA4C  38 63 1F AC */	addi r3, r3, HSD_PadMasterStatus@l
 /* 801E0E70 001DDA50  83 E3 00 4C */	lwz r31, 0x4c(r3)
 /* 801E0E74 001DDA54  57 E0 06 75 */	rlwinm. r0, r31, 0, 0x19, 0x1a
 /* 801E0E78 001DDA58  41 82 00 A4 */	beq lbl_801E0F1C
@@ -7807,3 +7807,58 @@ lbl_803E26C4:
 lbl_803E26DC:
     .asciz "SIS_GrCorneriaData"
     .balign 4
+
+
+.section .sdata
+
+.global lbl_804D4650
+lbl_804D4650:
+    .4byte 0x2F477243
+    .4byte 0x6E000000
+.global lbl_804D4658
+lbl_804D4658:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4660
+lbl_804D4660:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4668
+lbl_804D4668:
+    .asciz "0"
+    .balign 4
+.global lbl_804D466C
+lbl_804D466C:
+    .4byte 0xFFFFFFFF
+.global lbl_804D4670
+lbl_804D4670:
+    .asciz "wgobj"
+    .balign 4
+.global lbl_804D4678
+lbl_804D4678:
+    .asciz "gobj"
+    .balign 4
+.global lbl_804D4680
+lbl_804D4680:
+    .asciz "gp"
+    .balign 4
+    .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D69A0
+lbl_804D69A0:
+	.skip 0x4
+.global lbl_804D69A4
+lbl_804D69A4:
+	.skip 0x4
+.global lbl_804D69A8
+lbl_804D69A8:
+	.skip 0x4
+.global lbl_804D69AC
+lbl_804D69AC:
+	.skip 0x4
+.global lbl_804D69B0
+lbl_804D69B0:
+	.skip 0x8

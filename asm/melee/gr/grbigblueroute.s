@@ -3108,3 +3108,10 @@ lbl_803E623C:
     .balign 4
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6A68
+lbl_804D6A68:
+	.skip 0x8

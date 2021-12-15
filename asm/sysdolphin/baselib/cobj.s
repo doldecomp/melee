@@ -3624,3 +3624,13 @@ func_8036A8BC:
 /* 8036A92C 0036750C  38 21 00 10 */	addi r1, r1, 0x10
 /* 8036A930 00367510  7C 08 03 A6 */	mtlr r0
 /* 8036A934 00367514  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7658
+lbl_804D7658:
+	.skip 0x4
+.global lbl_804D765C
+lbl_804D765C:
+	.skip 0x4

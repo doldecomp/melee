@@ -7833,3 +7833,52 @@ func_80342194:
 /* 80342198 0033ED78  38 00 00 04 */	li r0, 4
 /* 8034219C 0033ED7C  B0 03 00 04 */	sth r0, 4(r3)
 /* 803421A0 0033ED80  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D72F0
+lbl_804D72F0:
+	.skip 0x4
+.global lbl_804D72F4
+lbl_804D72F4:
+	.skip 0x4
+.global lbl_804D72F8
+lbl_804D72F8:
+	.skip 0x4
+.global lbl_804D72FC
+lbl_804D72FC:
+	.skip 0x4
+.global lbl_804D7300
+lbl_804D7300:
+	.skip 0x4
+.global lbl_804D7304
+lbl_804D7304:
+	.skip 0x4
+.global lbl_804D7308
+lbl_804D7308:
+	.skip 0x4
+.global lbl_804D730C
+lbl_804D730C:
+	.skip 0x4
+.global lbl_804D7310
+lbl_804D7310:
+	.skip 0x4
+.global lbl_804D7314
+lbl_804D7314:
+	.skip 0x4
+.global lbl_804D7318
+lbl_804D7318:
+	.skip 0x8
+.global lbl_804D7320
+lbl_804D7320:
+	.skip 0x4
+.global lbl_804D7324
+lbl_804D7324:
+	.skip 0x4
+.global lbl_804D7328
+lbl_804D7328:
+	.skip 0x4
+.global lbl_804D732C
+lbl_804D732C:
+	.skip 0xC

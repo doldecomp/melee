@@ -1476,3 +1476,31 @@ _HSD_DispForgetMemory:
 /* 80374E3C 00371A1C  90 0D A7 44 */	stw r0, lbl_804D5DE4@sda21(r13)
 /* 80374E40 00371A20  90 AD C0 14 */	stw r5, lbl_804D76B4@sda21(r13)
 /* 80374E44 00371A24  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7698
+lbl_804D7698:
+	.skip 0x4
+.global lbl_804D769C
+lbl_804D769C:
+	.skip 0x4
+.global lbl_804D76A0
+lbl_804D76A0:
+	.skip 0x4
+.global lbl_804D76A4
+lbl_804D76A4:
+	.skip 0x4
+.global lbl_804D76A8
+lbl_804D76A8:
+	.skip 0x4
+.global lbl_804D76AC
+lbl_804D76AC:
+	.skip 0x4
+.global lbl_804D76B0
+lbl_804D76B0:
+	.skip 0x4
+.global lbl_804D76B4
+lbl_804D76B4:
+	.skip 0x4

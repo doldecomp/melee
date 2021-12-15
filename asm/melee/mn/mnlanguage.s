@@ -460,3 +460,10 @@ func_8024C5C0:
 .global lbl_804A08D8
 lbl_804A08D8:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6C50
+lbl_804D6C50:
+	.skip 0x8

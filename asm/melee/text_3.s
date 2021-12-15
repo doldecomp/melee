@@ -2606,8 +2606,8 @@ func_8022BA1C:
 /* 8022BA34 00228614  DB C1 00 A0 */	stfd f30, 0xa0(r1)
 /* 8022BA38 00228618  93 E1 00 9C */	stw r31, 0x9c(r1)
 /* 8022BA3C 0022861C  83 E3 00 28 */	lwz r31, 0x28(r3)
-/* 8022BA40 00228620  3C 60 80 4C */	lis r3, lbl_804C20BC@ha
-/* 8022BA44 00228624  38 63 20 BC */	addi r3, r3, lbl_804C20BC@l
+/* 8022BA40 00228620  3C 60 80 4C */	lis r3, HSD_PadCopyStatus@ha
+/* 8022BA44 00228624  38 63 20 BC */	addi r3, r3, HSD_PadCopyStatus@l
 /* 8022BA48 00228628  C0 22 C3 E8 */	lfs f1, lbl_804DBDC8@sda21(r2)
 /* 8022BA4C 0022862C  7C 83 02 14 */	add r4, r3, r0
 /* 8022BA50 00228630  C0 44 00 28 */	lfs f2, 0x28(r4)
@@ -11843,3 +11843,52 @@ lbl_804A0628:
 .global lbl_804A0638
 lbl_804A0638:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6BA8
+lbl_804D6BA8:
+	.skip 0x4
+.global lbl_804D6BAC
+lbl_804D6BAC:
+	.skip 0x4
+.global lbl_804D6BB0
+lbl_804D6BB0:
+	.skip 0x4
+.global lbl_804D6BB4
+lbl_804D6BB4:
+	.skip 0x1
+.global lbl_804D6BB5
+lbl_804D6BB5:
+	.skip 0x3
+.global lbl_804D6BB8
+lbl_804D6BB8:
+	.skip 0x4
+.global lbl_804D6BBC
+lbl_804D6BBC:
+	.skip 0x4
+.global lbl_804D6BC0
+lbl_804D6BC0:
+	.skip 0x4
+.global lbl_804D6BC4
+lbl_804D6BC4:
+	.skip 0x4
+.global lbl_804D6BC8
+lbl_804D6BC8:
+	.skip 0x8
+.global lbl_804D6BD0
+lbl_804D6BD0:
+	.skip 0x4
+.global lbl_804D6BD4
+lbl_804D6BD4:
+	.skip 0x4
+.global lbl_804D6BD8
+lbl_804D6BD8:
+	.skip 0x8
+.global lbl_804D6BE0
+lbl_804D6BE0:
+	.skip 0x4
+.global lbl_804D6BE4
+lbl_804D6BE4:
+	.skip 0x4

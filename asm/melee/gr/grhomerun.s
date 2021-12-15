@@ -32,14 +32,14 @@ lbl_8021C754:
 /* 8021C7AC 0021938C  4B FA 72 15 */	bl func_801C39C0
 /* 8021C7B0 00219390  4B FA 74 05 */	bl func_801C3BB4
 /* 8021C7B4 00219394  38 61 00 08 */	addi r3, r1, 8
-/* 8021C7B8 00219398  48 00 84 41 */	bl func_80224BF8
-/* 8021C7BC 0021939C  48 00 82 AD */	bl func_80224A68
+/* 8021C7B8 00219398  48 00 84 41 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 8021C7BC 0021939C  48 00 82 AD */	bl get_cam_bounds_right_offset
 /* 8021C7C0 002193A0  C0 41 00 08 */	lfs f2, 8(r1)
 /* 8021C7C4 002193A4  C0 02 C2 38 */	lfs f0, lbl_804DBC18@sda21(r2)
 /* 8021C7C8 002193A8  EC 21 10 28 */	fsubs f1, f1, f2
 /* 8021C7CC 002193AC  EC 20 00 72 */	fmuls f1, f0, f1
 /* 8021C7D0 002193B0  4B FA 70 DD */	bl func_801C38AC
-/* 8021C7D4 002193B4  48 00 83 65 */	bl func_80224B38
+/* 8021C7D4 002193B4  48 00 83 65 */	bl get_blast_zone_right_offset
 /* 8021C7D8 002193B8  C0 41 00 08 */	lfs f2, 8(r1)
 /* 8021C7DC 002193BC  C0 02 C2 38 */	lfs f0, lbl_804DBC18@sda21(r2)
 /* 8021C7E0 002193C0  EC 21 10 28 */	fsubs f1, f1, f2
@@ -3047,3 +3047,22 @@ lbl_803E8294:
     .4byte 0x6A5B335D
     .4byte NULL
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D6AD8
+lbl_804D6AD8:
+	.skip 0x4
+.global lbl_804D6ADC
+lbl_804D6ADC:
+	.skip 0x4
+.global lbl_804D6AE0
+lbl_804D6AE0:
+	.skip 0x4
+.global lbl_804D6AE4
+lbl_804D6AE4:
+	.skip 0x4
+.global lbl_804D6AE8
+lbl_804D6AE8:
+	.skip 0x8

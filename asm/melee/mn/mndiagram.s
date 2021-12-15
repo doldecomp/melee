@@ -10044,3 +10044,16 @@ lbl_804A0844:
 .global lbl_804A0854
 lbl_804A0854:
 	.skip 0x14
+
+
+.section .sbss
+
+.global lbl_804D6C10
+lbl_804D6C10:
+	.skip 0x8
+.global lbl_804D6C18
+lbl_804D6C18:
+	.skip 0x8
+.global lbl_804D6C20
+lbl_804D6C20:
+	.skip 0x8

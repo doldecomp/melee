@@ -424,3 +424,13 @@ func_8024A6C4:
 .global lbl_804A08B8
 lbl_804A08B8:
 	.skip 0x10
+
+
+.section .sbss
+
+.global lbl_804D6C38
+lbl_804D6C38:
+	.skip 0x4
+.global lbl_804D6C3C
+lbl_804D6C3C:
+	.skip 0x4

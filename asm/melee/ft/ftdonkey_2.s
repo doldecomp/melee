@@ -2984,3 +2984,51 @@ func_80110074:
 /* 80110088 0010CC68  38 21 00 08 */	addi r1, r1, 8
 /* 8011008C 0010CC6C  7C 08 03 A6 */	mtlr r0
 /* 80110090 0010CC70  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D95B0
+lbl_804D95B0:
+	.4byte 0x40400000
+.global lbl_804D95B4
+lbl_804D95B4:
+	.4byte 0x00000000
+.global lbl_804D95B8
+lbl_804D95B8:
+	.4byte 0x3FC00000
+.global lbl_804D95BC
+lbl_804D95BC:
+	.4byte 0x40000000
+.global lbl_804D95C0
+lbl_804D95C0:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804D95C8
+lbl_804D95C8:
+	.4byte 0x00000000
+.global lbl_804D95CC
+lbl_804D95CC:
+	.4byte 0x3F800000
+.global lbl_804D95D0
+lbl_804D95D0:
+	.4byte 0x00000000
+.global lbl_804D95D4
+lbl_804D95D4:
+	.4byte 0x3F800000
+.global lbl_804D95D8
+lbl_804D95D8:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804D95E0
+lbl_804D95E0:
+	.4byte 0x00000000
+.global lbl_804D95E4
+lbl_804D95E4:
+	.4byte 0x3F800000
+.global lbl_804D95E8
+lbl_804D95E8:
+	.4byte 0x00000000
+.global lbl_804D95EC
+lbl_804D95EC:
+	.4byte 0x3F800000

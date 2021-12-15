@@ -4611,3 +4611,31 @@ lbl_803E11A4:
     .4byte 0x5F666C61
     .4byte 0x67360000
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D45D0
+lbl_804D45D0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D45D8
+lbl_804D45D8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D45E0
+lbl_804D45E0:
+    .4byte 0x3C8EFA35
+.global lbl_804D45E4
+lbl_804D45E4:
+    .4byte 0x01000000
+
+
+.section .sbss
+
+.global lbl_804D6970
+lbl_804D6970:
+	.skip 0x4
+.global lbl_804D6974
+lbl_804D6974:
+	.skip 0x4

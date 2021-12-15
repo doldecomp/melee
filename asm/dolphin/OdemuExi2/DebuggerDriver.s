@@ -759,3 +759,25 @@ DBClose:
 Hu_IsStub:
 /* 8032BA64 00328644  38 60 00 00 */	li r3, 0
 /* 8032BA68 00328648  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7088
+lbl_804D7088:
+	.skip 0x4
+.global lbl_804D708C
+lbl_804D708C:
+	.skip 0x4
+.global lbl_804D7090
+lbl_804D7090:
+	.skip 0x4
+.global lbl_804D7094
+lbl_804D7094:
+	.skip 0x4
+.global lbl_804D7098
+lbl_804D7098:
+	.skip 0x4
+.global lbl_804D709C
+lbl_804D709C:
+	.skip 0x4

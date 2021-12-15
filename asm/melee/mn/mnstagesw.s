@@ -1971,3 +1971,13 @@ func_80237410:
 /* 80237490 00234070  38 21 00 10 */	addi r1, r1, 0x10
 /* 80237494 00234074  7C 08 03 A6 */	mtlr r0
 /* 80237498 00234078  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D6BF0
+lbl_804D6BF0:
+	.skip 0x4
+.global lbl_804D6BF4
+lbl_804D6BF4:
+	.skip 0x4

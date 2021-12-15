@@ -328,3 +328,10 @@ lbl_803B84B8:
     .4byte 0x003B003D
     .4byte 0x003F0041
     .4byte 0x0043FFFF
+
+
+.section .sbss
+
+.global lbl_804D6B10
+lbl_804D6B10:
+	.skip 0x8

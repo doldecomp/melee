@@ -1528,3 +1528,10 @@ lbl_803E6650:
 lbl_803E6678:
     .asciz "gp->u.taru.keep"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6A90
+lbl_804D6A90:
+	.skip 0x8

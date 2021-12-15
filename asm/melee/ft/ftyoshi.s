@@ -8256,3 +8256,111 @@ lbl_804D3E70:
 lbl_804D3E78:
     .asciz "scale"
     .balign 4
+
+
+.section .sdata2
+
+.global lbl_804D9A18
+lbl_804D9A18:
+	.4byte 0x00000000
+.global lbl_804D9A1C
+lbl_804D9A1C:
+	.4byte 0x3F800000
+.global lbl_804D9A20
+lbl_804D9A20:
+	.4byte 0x40400000
+	.4byte 0x00000000
+.global lbl_804D9A28
+lbl_804D9A28:
+	.4byte 0x3F800000
+.global lbl_804D9A2C
+lbl_804D9A2C:
+	.4byte 0x00000000
+.global lbl_804D9A30
+lbl_804D9A30:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804D9A38
+lbl_804D9A38:
+	.4byte 0x00000000
+.global lbl_804D9A3C
+lbl_804D9A3C:
+	.4byte 0x3F800000
+.global lbl_804D9A40
+lbl_804D9A40:
+	.4byte 0x00000000
+.global lbl_804D9A44
+lbl_804D9A44:
+	.4byte 0x3F800000
+.global lbl_804D9A48
+lbl_804D9A48:
+	.4byte 0x400921FB
+	.4byte 0x54442D18
+.global lbl_804D9A50
+lbl_804D9A50:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804D9A58
+lbl_804D9A58:
+	.4byte 0xBF800000
+.global lbl_804D9A5C
+lbl_804D9A5C:
+	.4byte 0x3F800000
+.global lbl_804D9A60
+lbl_804D9A60:
+	.4byte 0x00000000
+.global lbl_804D9A64
+lbl_804D9A64:
+	.4byte 0x41A00000
+.global lbl_804D9A68
+lbl_804D9A68:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804D9A70
+lbl_804D9A70:
+	.4byte 0x00000000
+.global lbl_804D9A74
+lbl_804D9A74:
+	.4byte 0x3F800000
+.global lbl_804D9A78
+lbl_804D9A78:
+	.4byte 0x3F000000
+	.4byte 0x00000000
+.global lbl_804D9A80
+lbl_804D9A80:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804D9A88
+lbl_804D9A88:
+	.4byte 0x401921FB
+	.4byte 0x54442D18
+.global lbl_804D9A90
+lbl_804D9A90:
+	.4byte 0xBF800000
+	.4byte 0x00000000
+.global lbl_804D9A98
+lbl_804D9A98:
+	.4byte 0x3FD015BF
+	.4byte 0x9217271A
+.global lbl_804D9AA0
+lbl_804D9AA0:
+	.4byte 0x3F333333
+	.4byte 0x00000000
+.global lbl_804D9AA8
+lbl_804D9AA8:
+	.4byte 0x400921FB
+	.4byte 0x54442D18
+.global lbl_804D9AB0
+lbl_804D9AB0:
+	.4byte 0x4012D97C
+	.4byte 0x7F3321D2
+.global lbl_804D9AB8
+lbl_804D9AB8:
+	.4byte 0x3FBACEE9
+	.4byte 0xF37BEBD5
+.global lbl_804D9AC0
+lbl_804D9AC0:
+	.4byte 0xBD4CCCCD
+.global lbl_804D9AC4
+lbl_804D9AC4:
+	.4byte 0x3C23D70A

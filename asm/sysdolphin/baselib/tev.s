@@ -804,3 +804,22 @@ lbl_80362D24:
 /* 80362D24 0035F904  38 00 00 00 */	li r0, 0
 /* 80362D28 0035F908  90 0D BF 5C */	stw r0, lbl_804D75FC@sda21(r13)
 /* 80362D2C 0035F90C  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D75F8
+lbl_804D75F8:
+	.skip 0x4
+.global lbl_804D75FC
+lbl_804D75FC:
+	.skip 0x4
+.global lbl_804D7600
+lbl_804D7600:
+	.skip 0x4
+.global lbl_804D7604
+lbl_804D7604:
+	.skip 0x8
+.global lbl_804D760C
+lbl_804D760C:
+	.skip 0xC

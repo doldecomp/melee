@@ -256,3 +256,13 @@ func_80149DC8:
 /* 80149E28 00146A08  38 21 00 18 */	addi r1, r1, 0x18
 /* 80149E2C 00146A0C  7C 08 03 A6 */	mtlr r0
 /* 80149E30 00146A10  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804D9DB0
+lbl_804D9DB0:
+	.4byte 0x40400000
+.global lbl_804D9DB4
+lbl_804D9DB4:
+	.4byte 0x00000000

@@ -1325,3 +1325,10 @@ lbl_803B9664:
 .global lbl_804D10E0
 lbl_804D10E0:
 	.skip 0x30
+
+
+.section .sbss
+
+.global lbl_804D7960
+lbl_804D7960:
+	.skip 0x8

@@ -867,3 +867,40 @@ lbl_8032F614:
 .global lbl_804A5300
 lbl_804A5300:
 	.skip 0x2000
+
+
+.section .sbss
+
+.global lbl_804D70D0
+lbl_804D70D0:
+	.skip 0x4
+.global lbl_804D70D4
+lbl_804D70D4:
+	.skip 0x4
+.global lbl_804D70D8
+lbl_804D70D8:
+	.skip 0x4
+.global lbl_804D70DC
+lbl_804D70DC:
+	.skip 0x4
+.global lbl_804D70E0
+lbl_804D70E0:
+	.skip 0x4
+.global lbl_804D70E4
+lbl_804D70E4:
+	.skip 0x4
+.global lbl_804D70E8
+lbl_804D70E8:
+	.skip 0x4
+.global lbl_804D70EC
+lbl_804D70EC:
+	.skip 0x4
+.global lbl_804D70F0
+lbl_804D70F0:
+	.skip 0x4
+.global lbl_804D70F4
+lbl_804D70F4:
+	.skip 0x4
+.global lbl_804D70F8
+lbl_804D70F8:
+	.skip 0x8

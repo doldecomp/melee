@@ -22,7 +22,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.o 		\
 	$(BUILD_DIR)/asm/melee/lb/lbfile.o 				\
-	$(BUILD_DIR)/asm/melee/lb/code_80016A54.o		\
+	$(BUILD_DIR)/asm/melee/lb/lbarchive.o			\
+	$(BUILD_DIR)/asm/melee/lb/lbdvd.o				\
+	$(BUILD_DIR)/asm/melee/lb/code_80019230.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8.o		\
 	                                                \
@@ -76,8 +78,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/ftcrazyhand.o 				\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.o 		            \
 															\
-	$(BUILD_DIR)/asm/melee/text_1.o 		 	            \
-															\
+	$(BUILD_DIR)/asm/melee/gm/gmmain.o 		 	            \
 	$(BUILD_DIR)/asm/melee/gm/code_801601C4.o 		 	    \
 	$(BUILD_DIR)/asm/melee/gm/gmtitle.o 		 			\
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.o 		 			\
@@ -204,7 +205,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MSL/string.o                   \
 	$(BUILD_DIR)/asm/MSL/strtoul.o                  \
 	$(BUILD_DIR)/asm/MSL/console_io.o               \
-	$(BUILD_DIR)/asm/MSL/wchar_io.o                 \
+	$(BUILD_DIR)/src/MSL/wchar_io.o                 \
 	$(BUILD_DIR)/asm/MSL/math.o                     \
                                                     \
 	$(BUILD_DIR)/asm/MetroTRK/mainloop.o            \
@@ -307,6 +308,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/sysdolphin/baselib/initialize.o 		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/initialize.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/video.o				\
+	$(BUILD_DIR)/src/sysdolphin/baselib/controller.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/controller.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/rumble.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/spline.o	\
@@ -360,9 +362,6 @@ DATA_O_FILES :=                                     \
 
 SDATA_O_FILES :=                                    \
     $(BUILD_DIR)/asm/sdata.o
-
-SBSS_O_FILES :=                                     \
-    $(BUILD_DIR)/asm/sbss.o
 
 SDATA2_O_FILES :=                                   \
     $(BUILD_DIR)/asm/sdata2.o

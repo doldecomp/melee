@@ -2648,3 +2648,10 @@ jtbl_803E80F8:
 	.4byte lbl_8021C27C
 	.4byte lbl_8021C290
 	.4byte lbl_8021C2D8
+
+
+.section .sbss
+
+.global lbl_804D6AD0
+lbl_804D6AD0:
+	.skip 0x8

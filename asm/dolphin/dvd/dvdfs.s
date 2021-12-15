@@ -368,3 +368,25 @@ lbl_80337DD8:
 /* 80337DDC 003349BC  38 21 00 08 */	addi r1, r1, 8
 /* 80337DE0 003349C0  7C 08 03 A6 */	mtlr r0
 /* 80337DE4 003349C4  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D7278
+lbl_804D7278:
+	.skip 0x4
+.global FstStart
+FstStart:
+	.skip 0x4
+.global FstStringStart
+FstStringStart:
+	.skip 0x4
+.global MaxEntryNum
+MaxEntryNum:
+	.skip 0x4
+.global currentDirectory
+currentDirectory:
+	.skip 0x4
+.global __DVDLongFileNameFlag
+__DVDLongFileNameFlag:
+	.skip 0x4

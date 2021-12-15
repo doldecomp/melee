@@ -31,7 +31,7 @@ lbl_8021EF3C:
 /* 8021EF90 0021BB70  48 00 00 5D */	bl func_8021EFEC
 /* 8021EF94 0021BB74  4B FA 4A 2D */	bl func_801C39C0
 /* 8021EF98 0021BB78  4B FA 4C 1D */	bl func_801C3BB4
-/* 8021EF9C 0021BB7C  48 00 5B CD */	bl func_80224B68
+/* 8021EF9C 0021BB7C  48 00 5B CD */	bl get_blast_zone_top_offset
 /* 8021EFA0 0021BB80  C0 02 C2 B8 */	lfs f0, lbl_804DBC98@sda21(r2)
 /* 8021EFA4 0021BB84  EC 20 00 72 */	fmuls f1, f0, f1
 /* 8021EFA8 0021BB88  4B FA 49 D9 */	bl func_801C3980
@@ -801,3 +801,10 @@ lbl_803E851C:
     .balign 4
     .asciz "*** Not found Next Player!(%d)\n"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6AF0
+lbl_804D6AF0:
+	.skip 0x8

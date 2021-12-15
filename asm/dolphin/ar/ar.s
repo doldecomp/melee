@@ -1235,3 +1235,25 @@ lbl_80351EBC:
 /* 80351ED0 0034EAB0  38 21 01 40 */	addi r1, r1, 0x140
 /* 80351ED4 0034EAB4  7C 08 03 A6 */	mtlr r0
 /* 80351ED8 0034EAB8  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global __AR_Callback
+__AR_Callback:
+	.skip 0x4
+.global __AR_Size
+__AR_Size:
+	.skip 0x4
+.global __AR_StackPointer
+__AR_StackPointer:
+	.skip 0x4
+.global __AR_FreeBlocks
+__AR_FreeBlocks:
+	.skip 0x4
+.global __AR_BlockLength
+__AR_BlockLength:
+	.skip 0x4
+.global __AR_init_flag
+__AR_init_flag:
+	.skip 0x4

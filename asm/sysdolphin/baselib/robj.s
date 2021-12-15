@@ -2236,3 +2236,13 @@ lbl_803B9598:
     .float 1
     .float 0
     .4byte NULL
+
+
+.section .sbss
+
+.global lbl_804D76E8
+lbl_804D76E8:
+	.skip 0x4
+.global lbl_804D76EC
+lbl_804D76EC:
+	.skip 0x4

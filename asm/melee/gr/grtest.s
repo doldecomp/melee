@@ -287,9 +287,9 @@ func_802071BC:
 .global func_802071C4
 func_802071C4:
 /* 802071C4 00203DA4  7C 08 02 A6 */	mflr r0
-/* 802071C8 00203DA8  3C 80 80 4C */	lis r4, lbl_804C1FAC@ha
+/* 802071C8 00203DA8  3C 80 80 4C */	lis r4, HSD_PadMasterStatus@ha
 /* 802071CC 00203DAC  90 01 00 04 */	stw r0, 4(r1)
-/* 802071D0 00203DB0  38 84 1F AC */	addi r4, r4, lbl_804C1FAC@l
+/* 802071D0 00203DB0  38 84 1F AC */	addi r4, r4, HSD_PadMasterStatus@l
 /* 802071D4 00203DB4  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 802071D8 00203DB8  DB E1 00 28 */	stfd f31, 0x28(r1)
 /* 802071DC 00203DBC  93 E1 00 24 */	stw r31, 0x24(r1)
@@ -319,8 +319,8 @@ lbl_80207234:
 /* 80207234 00203E14  C0 02 BE 3C */	lfs f0, lbl_804DB81C@sda21(r2)
 /* 80207238 00203E18  D0 0D B3 A8 */	stfs f0, lbl_804D6A48@sda21(r13)
 lbl_8020723C:
-/* 8020723C 00203E1C  3C 60 80 4C */	lis r3, lbl_804C1FAC@ha
-/* 80207240 00203E20  38 63 1F AC */	addi r3, r3, lbl_804C1FAC@l
+/* 8020723C 00203E1C  3C 60 80 4C */	lis r3, HSD_PadMasterStatus@ha
+/* 80207240 00203E20  38 63 1F AC */	addi r3, r3, HSD_PadMasterStatus@l
 /* 80207244 00203E24  80 03 00 90 */	lwz r0, 0x90(r3)
 /* 80207248 00203E28  54 00 05 EF */	rlwinm. r0, r0, 0, 0x17, 0x17
 /* 8020724C 00203E2C  41 82 00 4C */	beq lbl_80207298
@@ -345,8 +345,8 @@ lbl_80207290:
 /* 80207290 00203E70  C0 02 BE 3C */	lfs f0, lbl_804DB81C@sda21(r2)
 /* 80207294 00203E74  D0 0D B3 A8 */	stfs f0, lbl_804D6A48@sda21(r13)
 lbl_80207298:
-/* 80207298 00203E78  3C 60 80 4C */	lis r3, lbl_804C1FAC@ha
-/* 8020729C 00203E7C  38 63 1F AC */	addi r3, r3, lbl_804C1FAC@l
+/* 80207298 00203E78  3C 60 80 4C */	lis r3, HSD_PadMasterStatus@ha
+/* 8020729C 00203E7C  38 63 1F AC */	addi r3, r3, HSD_PadMasterStatus@l
 /* 802072A0 00203E80  80 63 00 44 */	lwz r3, 0x44(r3)
 /* 802072A4 00203E84  54 60 05 6B */	rlwinm. r0, r3, 0, 0x15, 0x15
 /* 802072A8 00203E88  41 82 00 20 */	beq lbl_802072C8
@@ -555,3 +555,10 @@ lbl_803E5764:
 lbl_803E57C8:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
+
+
+.section .sbss
+
+.global lbl_804D6A48
+lbl_804D6A48:
+	.skip 0x8

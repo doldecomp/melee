@@ -638,3 +638,10 @@ func_8037D900:
 /* 8037D964 0037A544  38 21 00 10 */	addi r1, r1, 0x10
 /* 8037D968 0037A548  7C 08 03 A6 */	mtlr r0
 /* 8037D96C 0037A54C  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global lbl_804D76F0
+lbl_804D76F0:
+	.skip 0x8

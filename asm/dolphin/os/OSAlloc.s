@@ -495,3 +495,19 @@ lbl_803444B8:
 /* 803444BC 0034109C  38 21 00 08 */	addi r1, r1, 8
 /* 803444C0 003410A0  7C 08 03 A6 */	mtlr r0
 /* 803444C4 003410A4  4E 80 00 20 */	blr 
+
+
+.section .sbss
+
+.global HeapArray
+HeapArray:
+	.skip 0x4
+.global NumHeaps
+NumHeaps:
+	.skip 0x4
+.global ArenaStart
+ArenaStart:
+	.skip 0x4
+.global ArenaEnd
+ArenaEnd:
+	.skip 0x4

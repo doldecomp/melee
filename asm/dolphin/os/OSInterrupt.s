@@ -652,3 +652,22 @@ lbl_80347B80:
 /* 80347BC0 003447A0  7C 17 E2 A6 */	mfspr r0, 0x397
 /* 80347BC4 003447A4  90 04 01 C0 */	stw r0, 0x1c0(r4)
 /* 80347BC8 003447A8  4B FF FC 74 */	b lbl_8034783C
+
+
+.section .sbss
+
+.global lbl_804D7378
+lbl_804D7378:
+	.skip 0x4
+.global __OSLastInterruptSrr0
+__OSLastInterruptSrr0:
+	.skip 0x4
+.global __OSLastInterrupt
+__OSLastInterrupt:
+	.skip 0x8
+.global __OSLastInterruptTime
+__OSLastInterruptTime:
+	.skip 0x4
+.global lbl_804D738C
+lbl_804D738C:
+	.skip 0x4

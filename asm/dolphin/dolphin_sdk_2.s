@@ -1962,3 +1962,40 @@ lbl_804A89A0:
 .global lbl_804A89B0
 lbl_804A89B0:
 	.skip 0x40
+
+
+.section .sbss
+
+.global lbl_804D73F0
+lbl_804D73F0:
+	.skip 0x4
+.global lbl_804D73F4
+lbl_804D73F4:
+	.skip 0x4
+.global lbl_804D73F8
+lbl_804D73F8:
+	.skip 0x4
+.global lbl_804D73FC
+lbl_804D73FC:
+	.skip 0x4
+.global lbl_804D7400
+lbl_804D7400:
+	.skip 0x4
+.global lbl_804D7404
+lbl_804D7404:
+	.skip 0x4
+.global lbl_804D7408
+lbl_804D7408:
+	.skip 0x4
+.global lbl_804D740C
+lbl_804D740C:
+	.skip 0x4
+.global lbl_804D7410
+lbl_804D7410:
+	.skip 0x4
+.global lbl_804D7414
+lbl_804D7414:
+	.skip 0x4
+.global __PADSpec
+__PADSpec:
+	.skip 0x8
