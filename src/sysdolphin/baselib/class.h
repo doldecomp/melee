@@ -49,5 +49,6 @@ typedef struct _HSD_MemoryEntry {
 } HSD_MemoryEntry;
 
 //void hsdDelete(void* object);
+void ClassInfoInit(HSD_ClassInfo* info);
 
 #endif

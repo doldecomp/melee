@@ -335,6 +335,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/sysdolphin/baselib/archive.o	\
 	$(BUILD_DIR)/src/sysdolphin/baselib/random.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/bytecode.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/class.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/class.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/hash.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/texp.o			\
