@@ -330,6 +330,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/quatlib.o   \
 	$(BUILD_DIR)/src/sysdolphin/baselib/memory.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/memory.o	\
+	$(BUILD_DIR)/src/sysdolphin/baselib/shadow.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/shadow.o	\
 	$(BUILD_DIR)/src/sysdolphin/baselib/archive.o	\
 	$(BUILD_DIR)/src/sysdolphin/baselib/random.o	\

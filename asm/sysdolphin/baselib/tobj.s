@@ -391,7 +391,7 @@ func_8035ED28:
 /* 8035ED54 0035B934  28 03 00 00 */	cmplwi r3, 0
 /* 8035ED58 0035B938  40 82 00 10 */	bne lbl_8035ED68
 lbl_8035ED5C:
-/* 8035ED5C 0035B93C  48 00 24 31 */	bl func_8036118C
+/* 8035ED5C 0035B93C  48 00 24 31 */	bl allocShadowTObj
 /* 8035ED60 0035B940  7C 7F 1B 78 */	mr r31, r3
 /* 8035ED64 0035B944  48 00 00 20 */	b lbl_8035ED84
 lbl_8035ED68:
@@ -3163,8 +3163,8 @@ lbl_80361184:
 /* 80361184 0035DD64  80 63 00 08 */	lwz r3, 8(r3)
 /* 80361188 0035DD68  4E 80 00 20 */	blr 
 
-.global func_8036118C
-func_8036118C:
+.global allocShadowTObj
+allocShadowTObj:
 /* 8036118C 0035DD6C  7C 08 02 A6 */	mflr r0
 /* 80361190 0035DD70  90 01 00 04 */	stw r0, 4(r1)
 /* 80361194 0035DD74  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3276,8 +3276,8 @@ lbl_803612D0:
 /* 803612F0 0035DED0  7C 08 03 A6 */	mtlr r0
 /* 803612F4 0035DED4  4E 80 00 20 */	blr 
 
-.global func_803612F8
-func_803612F8:
+.global HSD_ImageDescAlloc
+HSD_ImageDescAlloc:
 /* 803612F8 0035DED8  7C 08 02 A6 */	mflr r0
 /* 803612FC 0035DEDC  38 60 00 18 */	li r3, 0x18
 /* 80361300 0035DEE0  90 01 00 04 */	stw r0, 4(r1)
