@@ -23452,9 +23452,9 @@ lbl_80404C50:
     .4byte 0x3DD01000
     .4byte 0x3F4D5E00
     .4byte 0x3DC7B000
-.global lbl_80405450
-lbl_80405450:
-    .4byte func_8035E4E4
+.global hsdDObj
+hsdDObj:
+    .4byte DObjInfoInit
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25258,8 +25258,8 @@ lbl_804074F0:
     .balign 4
     .asciz "unexpected opcode 0x%x.\n"
     .balign 4
-.global lbl_80407590
-lbl_80407590:
+.global hsdClass
+hsdClass:
     .4byte func_803822C0
     .4byte NULL
     .4byte NULL

@@ -4,8 +4,10 @@
 #include <global.h>
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*)o)
-#define HSD_CLASS_METHOD(o) (o->parent.class_info)
+#define HSD_CLASS_METHOD(o) (((HSD_Class*)o)->class_info)
 #define HSD_PARENT_INFO(o) ((o)->parent.head.parent)
+
+#define next_p(p) (p != NULL ? p->next : NULL)
 
 typedef struct _HSD_Class {
     struct _HSD_ClassInfo* class_info;
@@ -45,5 +47,7 @@ typedef struct _HSD_MemoryEntry {
     struct _HSD_FreeList* free_list;
     struct _HSD_MemoryEntry* next;
 } HSD_MemoryEntry;
+
+//void hsdDelete(void* object);
 
 #endif
