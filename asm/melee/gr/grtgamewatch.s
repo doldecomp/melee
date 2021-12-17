@@ -232,3 +232,63 @@ lbl_802243E4:
 lbl_802243EC:
 /* 802243EC 00220FCC  38 60 00 01 */	li r3, 1
 /* 802243F0 00220FD0  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_803E96F8
+lbl_803E96F8:
+	.4byte lbl_8022429C
+	.4byte lbl_802242C8
+	.4byte lbl_802242D0
+	.4byte lbl_802242D4
+    .4byte NULL
+	.4byte lbl_80224368
+	.4byte lbl_802243B8
+	.4byte lbl_802243C0
+	.4byte lbl_802243E0
+    .4byte NULL
+	.4byte lbl_802242D8
+	.4byte lbl_80224328
+	.4byte lbl_80224330
+	.4byte lbl_80224364
+    .4byte 0xC0000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_803E9748
+lbl_803E9748:
+    .4byte 0x2F477254
+    .4byte 0x47772E64
+    .4byte 0x61740000
+.global lbl_803E9754
+lbl_803E9754:
+    .4byte 0x0000003F
+    .4byte lbl_803E96F8
+    .4byte lbl_803E9748
+	.4byte lbl_80224114
+	.4byte func_80224110
+	.4byte lbl_80224184
+	.4byte lbl_80224188
+	.4byte lbl_802241AC
+	.4byte lbl_802243E4
+	.4byte lbl_802243EC
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x25733A25
+    .4byte 0x643A2063
+    .4byte 0x6F756C64
+    .4byte 0x6E207420
+    .4byte 0x67657420
+    .4byte 0x676F626A
+    .4byte 0x2869643D
+    .4byte 0x2564290A
+    .4byte NULL
+    .4byte 0x67727467
+    .4byte 0x616D6577
+    .4byte 0x61746368
+    .4byte 0x2E630000
+    .4byte NULL

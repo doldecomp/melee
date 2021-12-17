@@ -4819,6 +4819,515 @@ lbl_803B84D8:
     .4byte 0x00000000
 
 
+.section .data
+
+.global lbl_803EA6C8
+lbl_803EA6C8:
+    .asciz "DATE Feb 13 2002  TIME 22:06:27"
+    .balign 4
+.global lbl_803EA6E8
+lbl_803EA6E8:
+    .asciz "DbCo.dat"
+    .balign 4
+.global lbl_803EA6F4
+lbl_803EA6F4:
+    .asciz "dbLoadCommonData"
+    .balign 4
+.global lbl_803EA708
+lbl_803EA708:
+    .asciz "[all PLink num] -- Report --\n"
+    .balign 4
+.global lbl_803EA728
+lbl_803EA728:
+    .asciz "------------------------------------------------------------\n"
+    .balign 4
+.global lbl_803EA768
+lbl_803EA768:
+    .asciz "------ Thread info ------\n"
+    .balign 4
+.global lbl_803EA784
+lbl_803EA784:
+    .asciz "base:%x, end:%x, size:%d peak:%d \n"
+    .balign 4
+.global lbl_803EA7A8
+lbl_803EA7A8:
+    .asciz "Capsule "
+    .balign 4
+.global lbl_803EA7B4
+lbl_803EA7B4:
+    .asciz "Box     "
+    .balign 4
+.global lbl_803EA7C0
+lbl_803EA7C0:
+    .asciz "Taru    "
+    .balign 4
+.global lbl_803EA7CC
+lbl_803EA7CC:
+    .asciz "Egg     "
+    .balign 4
+.global lbl_803EA7D8
+lbl_803EA7D8:
+    .asciz "Kusudama"
+    .balign 4
+.global lbl_803EA7E4
+lbl_803EA7E4:
+    .asciz "TaruCann"
+    .balign 4
+.global lbl_803EA7F0
+lbl_803EA7F0:
+    .asciz "BombHei "
+    .balign 4
+.global lbl_803EA7FC
+lbl_803EA7FC:
+    .asciz "Dosei   "
+    .balign 4
+.global lbl_803EA808
+lbl_803EA808:
+    .asciz "Heart   "
+    .balign 4
+.global lbl_803EA814
+lbl_803EA814:
+    .asciz "Tomato  "
+    .balign 4
+.global lbl_803EA820
+lbl_803EA820:
+    .asciz "Star    "
+    .balign 4
+.global lbl_803EA82C
+lbl_803EA82C:
+    .asciz "Bat     "
+    .balign 4
+.global lbl_803EA838
+lbl_803EA838:
+    .asciz "Sword   "
+    .balign 4
+.global lbl_803EA844
+lbl_803EA844:
+    .asciz "Parasol "
+    .balign 4
+.global lbl_803EA850
+lbl_803EA850:
+    .asciz "G Shell "
+    .balign 4
+.global lbl_803EA85C
+lbl_803EA85C:
+    .asciz "R Shell "
+    .balign 4
+.global lbl_803EA868
+lbl_803EA868:
+    .asciz "L Gun   "
+    .balign 4
+.global lbl_803EA874
+lbl_803EA874:
+    .asciz "Freeze  "
+    .balign 4
+.global lbl_803EA880
+lbl_803EA880:
+    .asciz "Foods   "
+    .balign 4
+.global lbl_803EA88C
+lbl_803EA88C:
+    .asciz "MSBomb  "
+    .balign 4
+.global lbl_803EA898
+lbl_803EA898:
+    .asciz "Flipper "
+    .balign 4
+.global lbl_803EA8A4
+lbl_803EA8A4:
+    .asciz "S Scope "
+    .balign 4
+.global lbl_803EA8B0
+lbl_803EA8B0:
+    .asciz "StarRod "
+    .balign 4
+.global lbl_803EA8BC
+lbl_803EA8BC:
+    .asciz "LipStick"
+    .balign 4
+.global lbl_803EA8C8
+lbl_803EA8C8:
+    .asciz "Harisen "
+    .balign 4
+.global lbl_803EA8D4
+lbl_803EA8D4:
+    .asciz "F Flower"
+    .balign 4
+.global lbl_803EA8E0
+lbl_803EA8E0:
+    .asciz "Kinoko  "
+    .balign 4
+.global lbl_803EA8EC
+lbl_803EA8EC:
+    .asciz "DKinoko "
+    .balign 4
+.global lbl_803EA8F8
+lbl_803EA8F8:
+    .asciz "Hammer  "
+    .balign 4
+.global lbl_803EA904
+lbl_803EA904:
+    .asciz "WStar   "
+    .balign 4
+.global lbl_803EA910
+lbl_803EA910:
+    .asciz "ScBall  "
+    .balign 4
+.global lbl_803EA91C
+lbl_803EA91C:
+    .asciz "RabbitC "
+    .balign 4
+.global lbl_803EA928
+lbl_803EA928:
+    .asciz "MetalB  "
+    .balign 4
+.global lbl_803EA934
+lbl_803EA934:
+    .asciz "Spycloak"
+    .balign 4
+.global lbl_803EA940
+lbl_803EA940:
+    .asciz "M Ball  "
+    .balign 4
+    .4byte lbl_803EA7A8
+    .4byte lbl_803EA7B4
+    .4byte lbl_803EA7C0
+    .4byte lbl_803EA7CC
+    .4byte lbl_803EA7D8
+    .4byte lbl_803EA7E4
+    .4byte lbl_803EA7F0
+    .4byte lbl_803EA7FC
+    .4byte lbl_803EA808
+    .4byte lbl_803EA814
+    .4byte lbl_803EA820
+    .4byte lbl_803EA82C
+    .4byte lbl_803EA838
+    .4byte lbl_803EA844
+    .4byte lbl_803EA850
+    .4byte lbl_803EA85C
+    .4byte lbl_803EA868
+    .4byte lbl_803EA874
+    .4byte lbl_803EA880
+    .4byte lbl_803EA88C
+    .4byte lbl_803EA898
+    .4byte lbl_803EA8A4
+    .4byte lbl_803EA8B0
+    .4byte lbl_803EA8BC
+    .4byte lbl_803EA8C8
+    .4byte lbl_803EA8D4
+    .4byte lbl_803EA8E0
+    .4byte lbl_803EA8EC
+    .4byte lbl_803EA8F8
+    .4byte lbl_803EA904
+    .4byte lbl_803EA910
+    .4byte lbl_803EA91C
+    .4byte lbl_803EA928
+    .4byte lbl_803EA934
+    .4byte lbl_803EA940
+.global lbl_803EA9D8
+lbl_803EA9D8:
+    .asciz "Tosakinto"
+    .balign 4
+.global lbl_803EA9E4
+lbl_803EA9E4:
+    .asciz "Chicorita"
+    .balign 4
+.global lbl_803EA9F0
+lbl_803EA9F0:
+    .asciz "Matadogas"
+    .balign 4
+.global lbl_803EA9FC
+lbl_803EA9FC:
+    .asciz "Lizardon"
+    .balign 4
+.global lbl_803EAA08
+lbl_803EAA08:
+    .asciz "Kireihana"
+    .balign 4
+.global lbl_803EAA14
+lbl_803EAA14:
+    .asciz "Marumine"
+    .balign 4
+.global lbl_803EAA20
+lbl_803EAA20:
+    .asciz "Hitodeman"
+    .balign 4
+.global lbl_803EAA2C
+lbl_803EAA2C:
+    .asciz "Porygon2"
+    .balign 4
+.global lbl_803EAA38
+lbl_803EAA38:
+    .asciz "Hinoarashi"
+    .balign 4
+.global lbl_803EAA44
+lbl_803EAA44:
+    .asciz "Fushigibana"
+    .balign 4
+    .4byte lbl_804D4A18
+    .4byte lbl_803EA9D8
+    .4byte lbl_803EA9E4
+    .4byte lbl_804D4A20
+    .4byte lbl_804D4A28
+    .4byte lbl_803EA9F0
+    .4byte lbl_803EA9FC
+    .4byte lbl_804D4A30
+    .4byte lbl_804D4A38
+    .4byte lbl_804D4A40
+    .4byte lbl_804D4A48
+    .4byte lbl_804D4A50
+    .4byte lbl_804D4A58
+    .4byte lbl_804D4A60
+    .4byte lbl_804D4A68
+    .4byte lbl_804D4A70
+    .4byte lbl_803EAA08
+    .4byte lbl_803EAA14
+    .4byte lbl_804D4A78
+    .4byte lbl_804D4A80
+    .4byte lbl_804D4A88
+    .4byte lbl_804D4A90
+    .4byte lbl_804D4A98
+    .4byte lbl_804D4AA0
+    .4byte lbl_804D4AA4
+    .4byte lbl_803EAA20
+    .4byte lbl_804D4AAC
+    .4byte lbl_803EAA2C
+    .4byte lbl_803EAA38
+    .4byte lbl_804D4AB4
+    .4byte lbl_803EAA44
+.global lbl_803EAACC
+lbl_803EAACC:
+    .asciz "Kuriboh "
+    .balign 4
+.global lbl_803EAAD8
+lbl_803EAAD8:
+    .asciz "Leadead "
+    .balign 4
+.global lbl_803EAAE4
+lbl_803EAAE4:
+    .asciz "Octarock"
+    .balign 4
+.global lbl_803EAAF0
+lbl_803EAAF0:
+    .asciz "Ottosei "
+    .balign 4
+    .4byte lbl_803EAACC
+    .4byte lbl_803EAAD8
+    .4byte lbl_803EAAE4
+    .4byte lbl_803EAAF0
+.global lbl_803EAB0C
+lbl_803EAB0C:
+    .asciz "old-Kuri"
+    .balign 4
+.global lbl_803EAB18
+lbl_803EAB18:
+    .asciz "Mato    "
+    .balign 4
+.global lbl_803EAB24
+lbl_803EAB24:
+    .asciz "Heiho   "
+    .balign 4
+.global lbl_803EAB30
+lbl_803EAB30:
+    .asciz "Nokonoko"
+    .balign 4
+.global lbl_803EAB3C
+lbl_803EAB3C:
+    .asciz "Patapata"
+    .balign 4
+.global lbl_803EAB48
+lbl_803EAB48:
+    .asciz "likelike"
+    .balign 4
+.global lbl_803EAB54
+lbl_803EAB54:
+    .asciz "old-lead"
+    .balign 4
+.global lbl_803EAB60
+lbl_803EAB60:
+    .asciz "old-octa"
+    .balign 4
+.global lbl_803EAB6C
+lbl_803EAB6C:
+    .asciz "old-otto"
+    .balign 4
+.global lbl_803EAB78
+lbl_803EAB78:
+    .asciz "whitebea"
+    .balign 4
+.global lbl_803EAB84
+lbl_803EAB84:
+    .asciz "klap    "
+    .balign 4
+.global lbl_803EAB90
+lbl_803EAB90:
+    .asciz "zgshell "
+    .balign 4
+.global lbl_803EAB9C
+lbl_803EAB9C:
+    .asciz "zrshell "
+    .balign 4
+    .4byte lbl_803EAB0C
+    .4byte lbl_803EAB18
+    .4byte lbl_803EAB24
+    .4byte lbl_803EAB30
+    .4byte lbl_803EAB3C
+    .4byte lbl_803EAB48
+    .4byte lbl_803EAB54
+    .4byte lbl_803EAB60
+    .4byte lbl_803EAB6C
+    .4byte lbl_803EAB78
+    .4byte lbl_803EAB84
+    .4byte lbl_803EAB90
+    .4byte lbl_803EAB9C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x4974656D
+    .4byte 0x3D256420
+    .4byte 0x466F6F64
+    .4byte 0x733D2564
+    .4byte 0x2059616B
+    .4byte 0x753D2564
+    .4byte 0x2053705F
+    .4byte 0x4974656D
+    .4byte 0x3D256420
+    .4byte 0x506F6B65
+    .4byte 0x6D6F6E3D
+    .4byte 0x25642050
+    .4byte 0x6F6B6553
+    .4byte 0x686F743D
+    .4byte 0x25642043
+    .4byte 0x5A616B6F
+    .4byte 0x3D256420
+    .4byte 0x435A616B
+    .4byte 0x6F53686F
+    .4byte 0x743D2564
+    .4byte 0x205A616B
+    .4byte 0x6F3D2564
+    .4byte 0x205A616B
+    .4byte 0x6F53686F
+    .4byte 0x743D2564
+    .4byte 0x2053686F
+    .4byte 0x743D2564
+    .4byte 0x20457463
+    .4byte 0x3D25640A
+    .4byte NULL
+    .4byte 0x4974656D
+    .4byte 0x2D3E2025
+    .4byte 0x73202050
+    .4byte 0x6F6B656D
+    .4byte 0x6F6E2D3E
+    .4byte 0x20257300
+.global lbl_803EACA0
+lbl_803EACA0:
+    .asciz "Item Max Over.\n"
+    .balign 4
+.global lbl_803EACB0
+lbl_803EACB0:
+    .asciz "couldn't get Item struct.(CZako)\n"
+    .balign 4
+    .4byte NULL
+.global lbl_803EACD8
+lbl_803EACD8:
+    .asciz "A B  C D E    F    G"
+    .balign 4
+.global lbl_803EACF0
+lbl_803EACF0:
+    .asciz "\n%d %d %2d %d %2.2f %2.2f %2.2f"
+    .balign 4
+.global lbl_803EAD10
+lbl_803EAD10:
+    .asciz "EYE %d,%d,%d"
+    .balign 4
+    .asciz "INT %d,%d,%d"
+    .balign 4
+    .asciz "FOV %d  ANG %d"
+    .balign 4
+.global lbl_803EAD40
+lbl_803EAD40:
+    .4byte 0x00000003
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte 0x46474D3A
+    .4byte 0x4F464620
+    .4byte 0x2042474D
+    .4byte 0x3A4F4646
+    .4byte NULL
+    .4byte 0x46474D3A
+    .4byte 0x4F464620
+    .4byte 0x2042474D
+    .4byte 0x3A4F4E20
+    .4byte NULL
+    .4byte 0x46474D3A
+    .4byte 0x4F4E2020
+    .4byte 0x2042474D
+    .4byte 0x3A4F4646
+    .4byte NULL
+    .4byte 0x46474D3A
+    .4byte 0x4F4E2020
+    .4byte 0x2042474D
+    .4byte 0x3A4F4E20
+    .4byte NULL
+    .4byte 0x50566F69
+    .4byte 0x63652020
+    .4byte 0x25336420
+    .4byte 0x20253364
+    .4byte 0x0A000000
+    .4byte 0x56566F69
+    .4byte 0x63652020
+    .4byte 0x25336420
+    .4byte 0x20253364
+    .4byte NULL
+.global lbl_803EADC8
+lbl_803EADC8:
+    .asciz "cant find xfb!\n"
+    .balign 4
+    .asciz "dbscreenshot.c"
+    .balign 4
+    .asciz "USB:shot/screenshot%02d.frb"
+    .balign 4
+    .4byte NULL
+.global lbl_803EAE08
+lbl_803EAE08:
+    .4byte NULL
+    .4byte 0xFF0000FF
+    .4byte lbl_8040FF80
+    .4byte 0x000000FF
+    .4byte 0x31502025
+    .4byte 0x37642032
+    .4byte 0x50202537
+    .4byte 0x640A0000
+    .4byte 0x33502025
+    .4byte 0x37642034
+    .4byte 0x50202537
+    .4byte 0x640A0000
+    .4byte 0x25645020
+    .4byte 0x73637265
+    .4byte 0x656E2025
+    .4byte 0x64000000
+    .4byte 0x73637265
+    .4byte 0x656E206F
+    .4byte 0x76657221
+    .4byte 0x21000000
+.global lbl_803EAE58
+lbl_803EAE58:
+    .asciz "objalloc.h"
+    .balign 4
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_8049FA00
