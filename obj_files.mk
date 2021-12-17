@@ -139,8 +139,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtkoopa.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtlink.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtluigi.o 		            \
+	$(BUILD_DIR)/asm/melee/gr/grtmars.o 					\
 	$(BUILD_DIR)/src/melee/gr/grtmars.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtmewtwo.o 		            \
+	$(BUILD_DIR)/asm/melee/gr/grtness.o 					\
 	$(BUILD_DIR)/src/melee/gr/grtness.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtpeach.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtpichu.o 		            \
@@ -287,7 +289,7 @@ TEXT_O_FILES := 						            \
                                                     \
 	$(BUILD_DIR)/asm/dolphin/ax/AX.o 				\
                                                     \
-	$(BUILD_DIR)/asm/sysdolphin/baselib/dobj.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.o		\
