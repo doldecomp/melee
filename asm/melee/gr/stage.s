@@ -2,7 +2,6 @@
 
 .section .text  # 0x80224A54 - 0x80225370
 
-
 .global func_80224E64
 func_80224E64:
 /* 80224E64 00221A44  7C 08 02 A6 */	mflr r0
@@ -111,6 +110,7 @@ lbl_80224FB8:
 /* 80224FD0 00221BB0  38 21 00 40 */	addi r1, r1, 0x40
 /* 80224FD4 00221BB4  7C 08 03 A6 */	mtlr r0
 /* 80224FD8 00221BB8  4E 80 00 20 */	blr 
+
 
 .global func_80224FDC
 func_80224FDC:
@@ -401,12 +401,12 @@ lbl_803B84C8:
 
 
 .section .data
-
 .global lbl_803E9940
 lbl_803E9940:
     .asciz "no!=St_Player_InitPos_None"
     .balign 4
     .4byte NULL
+
 .global lbl_803E9960
 lbl_803E9960:
     .4byte NULL

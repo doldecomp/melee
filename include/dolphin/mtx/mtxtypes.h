@@ -15,6 +15,11 @@ typedef struct
 
 typedef struct
 {
+    s32 x, y, z;
+} S32Vec, *S32VecPtr;
+
+typedef struct
+{
 	f32 x, y, z, w;
 } Quaternion, *QuaternionPtr, Qtrn, *QtrnPtr;
 
