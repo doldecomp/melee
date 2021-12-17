@@ -283,3 +283,11 @@ lbl_80345A3C:
 .global __OSErrorTable
 __OSErrorTable:
 	.skip 0x40
+
+
+.section .sdata
+
+.global lbl_804D5C18
+lbl_804D5C18:
+    .4byte 0x0A000000
+    .4byte 0x00000000

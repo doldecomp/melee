@@ -605,6 +605,19 @@ lbl_803E5E64:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D4840
+lbl_804D4840:
+    .asciz "gobj"
+    .balign 4
+.global lbl_804D4848
+lbl_804D4848:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6A60

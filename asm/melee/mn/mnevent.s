@@ -1861,6 +1861,31 @@ lbl_804A0908:
 	.skip 0x10
 
 
+.section .sdata
+
+.global lbl_804D5028
+lbl_804D5028:
+    .4byte 0xCABC9FFF
+.global lbl_804D502C
+lbl_804D502C:
+    .4byte 0x000000FF
+.global lbl_804D5030
+lbl_804D5030:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5038
+lbl_804D5038:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5040
+lbl_804D5040:
+    .asciz "%d"
+    .balign 4
+.global lbl_804D5044
+lbl_804D5044:
+    .4byte 0x817C0000
+
+
 .section .sbss
 
 .global lbl_804D6C60

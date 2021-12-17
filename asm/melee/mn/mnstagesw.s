@@ -1973,6 +1973,22 @@ func_80237410:
 /* 80237498 00234078  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D4BB8
+lbl_804D4BB8:
+    .4byte 0x00000000
+    .4byte 0x3F800000
+.global lbl_804D4BC0
+lbl_804D4BC0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4BC8
+lbl_804D4BC8:
+    .asciz "jobj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6BF0

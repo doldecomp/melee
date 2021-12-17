@@ -2030,3 +2030,12 @@ lbl_803B8F30:
     .4byte 0x6600496E
     .4byte 0x66004E61
     .4byte 0x4E000000
+
+
+.section .sdata
+
+    .4byte NULL
+.global lbl_804D5B48
+lbl_804D5B48:
+    .4byte 0x00000000
+    .4byte 0x00000000

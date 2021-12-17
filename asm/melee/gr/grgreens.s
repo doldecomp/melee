@@ -4400,6 +4400,23 @@ lbl_8049F9E0:
 	.skip 0x20
 
 
+.section .sdata
+
+.global lbl_804D4908
+lbl_804D4908:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4910
+lbl_804D4910:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4918
+lbl_804D4918:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6AA8

@@ -1267,3 +1267,26 @@ lbl_803E9960:
     .4byte 0x00000024
     .4byte NULL
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D49E8
+lbl_804D49E8:
+    .4byte 0x00000002
+    .4byte 0x00000000
+.global lbl_804D49F0
+lbl_804D49F0:
+    .4byte 0x0000000C
+.global lbl_804D49F4
+lbl_804D49F4:
+    .4byte 0x00000002
+.global lbl_804D49F8
+lbl_804D49F8:
+    .asciz "stage.c"
+    .balign 4
+.global lbl_804D4A00
+lbl_804D4A00:
+    .asciz "0"
+    .balign 4
+    .4byte NULL

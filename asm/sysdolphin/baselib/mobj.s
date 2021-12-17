@@ -1361,6 +1361,31 @@ func_80363F28:
 /* 80363FC4 00360BA4  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5CE0
+lbl_804D5CE0:
+    .asciz "mobj.c"
+    .balign 4
+.global lbl_804D5CE8
+lbl_804D5CE8:
+    .asciz "mobj"
+    .balign 4
+.global lbl_804D5CF0
+lbl_804D5CF0:
+    .asciz "list"
+    .balign 4
+.global lbl_804D5CF8
+lbl_804D5CF8:
+    .asciz "mat"
+    .balign 4
+.global lbl_804D5CFC
+lbl_804D5CFC:
+    .asciz "tobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7618

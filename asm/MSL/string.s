@@ -268,3 +268,14 @@ lbl_80325B0C:
 /* 80325B18 003226F8  40 82 FF F4 */	bne lbl_80325B0C
 /* 80325B1C 003226FC  7C 83 23 78 */	mr r3, r4
 /* 80325B20 00322700  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+    .4byte NULL
+.global lbl_804D5B58
+lbl_804D5B58:
+    .4byte 0x80808080
+.global lbl_804D5B5C
+lbl_804D5B5C:
+    .4byte 0xFEFEFEFF

@@ -5356,6 +5356,174 @@ lbl_804A0480:
 	.skip 0x70
 
 
+.section .sdata
+
+.global lbl_804D4A08
+lbl_804D4A08:
+	.long 1
+.global lbl_804D4A0C
+lbl_804D4A0C:
+    .asciz "%5d "
+    .balign 4
+.global lbl_804D4A14
+lbl_804D4A14:
+    .4byte 0x0A000000
+.global lbl_804D4A18
+lbl_804D4A18:
+    .4byte 0x52616E64
+    .4byte 0x6F6D0000
+.global lbl_804D4A20
+lbl_804D4A20:
+    .4byte 0x4B616269
+    .4byte 0x676F6E00
+.global lbl_804D4A28
+lbl_804D4A28:
+    .4byte 0x4B616D65
+    .4byte 0x78000000
+.global lbl_804D4A30
+lbl_804D4A30:
+    .4byte 0x46697265
+    .4byte 0x00000000
+.global lbl_804D4A38
+lbl_804D4A38:
+    .4byte 0x5468756E
+    .4byte 0x64657200
+.global lbl_804D4A40
+lbl_804D4A40:
+    .4byte 0x46726565
+    .4byte 0x7A657200
+.global lbl_804D4A48
+lbl_804D4A48:
+    .4byte 0x536F6E61
+    .4byte 0x6E730000
+.global lbl_804D4A50
+lbl_804D4A50:
+    .4byte 0x48617373
+    .4byte 0x616D0000
+.global lbl_804D4A58
+lbl_804D4A58:
+    .4byte 0x556E6B6E
+    .4byte 0x6F776E00
+.global lbl_804D4A60
+lbl_804D4A60:
+    .4byte 0x456E7465
+    .4byte 0x69000000
+.global lbl_804D4A68
+lbl_804D4A68:
+    .4byte 0x5261696B
+    .4byte 0x6F750000
+.global lbl_804D4A70
+lbl_804D4A70:
+    .4byte 0x5375696B
+    .4byte 0x756E0000
+.global lbl_804D4A78
+lbl_804D4A78:
+    .4byte 0x4C756769
+    .4byte 0x61000000
+.global lbl_804D4A80
+lbl_804D4A80:
+    .4byte 0x486F756F
+    .4byte 0x75000000
+.global lbl_804D4A88
+lbl_804D4A88:
+    .4byte 0x4D657461
+    .4byte 0x6D6F6E00
+.global lbl_804D4A90
+lbl_804D4A90:
+    .4byte 0x50697070
+    .4byte 0x69000000
+.global lbl_804D4A98
+lbl_804D4A98:
+    .4byte 0x546F6765
+    .4byte 0x70790000
+.global lbl_804D4AA0
+lbl_804D4AA0:
+    .4byte 0x4D657700
+.global lbl_804D4AA4
+lbl_804D4AA4:
+    .4byte 0x43657265
+    .4byte 0x62690000
+.global lbl_804D4AAC
+lbl_804D4AAC:
+    .4byte 0x4C75636B
+    .4byte 0x79000000
+.global lbl_804D4AB4
+lbl_804D4AB4:
+    .4byte 0x4D617269
+    .4byte 0x6C000000
+    .4byte 0x00000000
+.global lbl_804D4AC0
+lbl_804D4AC0:
+	.4byte 0x0A000000
+.global lbl_804D4AC4
+lbl_804D4AC4:
+    .asciz "%d %s"
+    .balign 4
+.global lbl_804D4ACC
+lbl_804D4ACC:
+    .asciz "%d %d"
+    .balign 4
+.global lbl_804D4AD4
+lbl_804D4AD4:
+    .asciz "%s"
+    .balign 4
+.global lbl_804D4AD8
+lbl_804D4AD8:
+    .asciz "%d"
+    .balign 4
+.global lbl_804D4ADC
+lbl_804D4ADC:
+    .asciz "%03.2f"
+    .balign 4
+.global lbl_804D4AE4
+lbl_804D4AE4:
+    .asciz "L"
+    .balign 4
+.global lbl_804D4AE8
+lbl_804D4AE8:
+    .asciz " "
+    .balign 4
+.global lbl_804D4AEC
+lbl_804D4AEC:
+    .asciz "R"
+    .balign 4
+.global lbl_804D4AF0
+lbl_804D4AF0:
+    .asciz "T"
+    .balign 4
+    .4byte NULL
+.global lbl_804D4AF8
+lbl_804D4AF8:
+	.long 1
+    .4byte NULL
+.global lbl_804D4B00
+lbl_804D4B00:
+    .asciz "0"
+    .balign 4
+.global lbl_804D4B04
+lbl_804D4B04:
+    .asciz "USB:"
+    .balign 4
+    .4byte NULL
+.global lbl_804D4B10
+lbl_804D4B10:
+    .4byte 0x25730A00
+    .4byte 0x00000000
+.global lbl_804D4B18
+lbl_804D4B18:
+    .asciz "%s"
+    .balign 4
+.global lbl_804D4B1C
+lbl_804D4B1C:
+    .asciz "%s : %d"
+    .balign 4
+    .4byte NULL
+.global lbl_804D4B28
+lbl_804D4B28:
+    .asciz "data"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6B20

@@ -7835,6 +7835,56 @@ func_80342194:
 /* 803421A0 0033ED80  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5BA8
+lbl_804D5BA8:
+    .4byte lbl_804A76C8
+    .4byte 0x00000000
+.global lbl_804D5BB0
+lbl_804D5BB0:
+    .4byte 0x00040102
+.global lbl_804D5BB4
+lbl_804D5BB4:
+    .4byte 0x00080102
+.global lbl_804D5BB8
+lbl_804D5BB8:
+    .4byte 0x000C0102
+    .4byte 0x00000000
+.global lbl_804D5BC0
+lbl_804D5BC0:
+    .4byte 0x80818283
+    .4byte 0xA0A1A2A3
+.global lbl_804D5BC8
+lbl_804D5BC8:
+    .4byte 0x84858687
+    .4byte 0xA4A5A6A7
+.global lbl_804D5BD0
+lbl_804D5BD0:
+    .4byte 0x88898A8B
+    .4byte 0xA8A9AAAB
+.global lbl_804D5BD8
+lbl_804D5BD8:
+    .4byte 0x8C8D8E8F
+    .4byte 0xACADAEAF
+.global lbl_804D5BE0
+lbl_804D5BE0:
+    .4byte 0x90919293
+    .4byte 0xB0B1B2B3
+.global lbl_804D5BE8
+lbl_804D5BE8:
+    .4byte 0x94959697
+    .4byte 0xB4B5B6B7
+.global lbl_804D5BF0
+lbl_804D5BF0:
+    .4byte 0x98999A9B
+    .4byte 0xB8B9BABB
+.global lbl_804D5BF8
+lbl_804D5BF8:
+    .4byte 0x00040105
+    .4byte 0x02060000
+
+
 .section .sbss
 
 .global lbl_804D72F0

@@ -3110,6 +3110,34 @@ lbl_803E623C:
     .balign 4
 
 
+.section .sdata
+
+.global lbl_804D4850
+lbl_804D4850:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4858
+lbl_804D4858:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4860
+lbl_804D4860:
+    .asciz "0"
+    .balign 4
+.global lbl_804D4864
+lbl_804D4864:
+    .asciz "gobj"
+    .balign 4
+.global lbl_804D486C
+lbl_804D486C:
+    .asciz "gp"
+    .balign 4
+.global lbl_804D4870
+lbl_804D4870:
+    .asciz "archive"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6A68

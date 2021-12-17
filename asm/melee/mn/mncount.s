@@ -1728,6 +1728,25 @@ lbl_804A0948:
 	.skip 0x10
 
 
+.section .sdata
+
+.global lbl_804D5058
+lbl_804D5058:
+    .4byte 0xAAAAAAFF
+.global lbl_804D505C
+lbl_804D505C:
+    .asciz "%u:%s"
+    .balign 4
+.global lbl_804D5064
+lbl_804D5064:
+    .4byte 0x817C2000
+.global lbl_804D5068
+lbl_804D5068:
+    .asciz "%u"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6C70

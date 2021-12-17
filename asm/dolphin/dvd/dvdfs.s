@@ -370,6 +370,14 @@ lbl_80337DD8:
 /* 80337DE4 003349C4  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5B88
+lbl_804D5B88:
+    .asciz "dvdfs.c"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D7278

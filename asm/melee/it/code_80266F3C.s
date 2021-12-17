@@ -25880,6 +25880,103 @@ lbl_804A0F60:
 	.skip 0x78
 
 
+.section .sdata
+
+.global lbl_804D5148
+lbl_804D5148:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5150
+lbl_804D5150:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5158
+lbl_804D5158:
+    .asciz "item.c"
+    .balign 4
+.global lbl_804D5160
+lbl_804D5160:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+.global lbl_804D5168
+lbl_804D5168:
+    .4byte 0xFF408080
+    .4byte 0x00000000
+.global lbl_804D5170
+lbl_804D5170:
+    .asciz "0"
+    .balign 4
+.global lbl_804D5174
+lbl_804D5174:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D517C
+lbl_804D517C:
+    .asciz "jobj"
+    .balign 4
+    .4byte NULL
+.global lbl_804D5188
+lbl_804D5188:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5190
+lbl_804D5190:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5198
+lbl_804D5198:
+    .asciz "0"
+    .balign 4
+.global lbl_804D519C
+lbl_804D519C:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D51A4
+lbl_804D51A4:
+    .asciz "jobj"
+    .balign 4
+    .4byte NULL
+.global lbl_804D51B0
+lbl_804D51B0:
+    .asciz "it_mobj"
+    .balign 4
+.global lbl_804D51B8
+lbl_804D51B8:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+.global lbl_804D51C0
+lbl_804D51C0:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+.global lbl_804D51C8
+lbl_804D51C8:
+    .4byte func_80279AF0
+    .4byte func_80279B10
+.global lbl_804D51D0
+lbl_804D51D0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D51D8
+lbl_804D51D8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D51E0
+lbl_804D51E0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D51E8
+lbl_804D51E8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D51F0
+lbl_804D51F0:
+    .asciz "jobj.h"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6D00

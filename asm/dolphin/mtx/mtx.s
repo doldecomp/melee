@@ -628,3 +628,11 @@ C_MTXLightOrtho:
 /* 80342A9C 0033F67C  D0 63 00 28 */	stfs f3, 0x28(r3)
 /* 80342AA0 0033F680  D1 63 00 2C */	stfs f11, 0x2c(r3)
 /* 80342AA4 0033F684  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5C00
+lbl_804D5C00:
+    .4byte 0x00000000
+    .4byte 0x3F800000

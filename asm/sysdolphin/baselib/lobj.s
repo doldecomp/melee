@@ -2699,6 +2699,37 @@ lbl_804C08B0:
 	.skip 0x28
 
 
+.section .sdata
+
+.global lbl_804D5D18
+lbl_804D5D18:
+    .asciz "lobj.c"
+    .balign 4
+.global lbl_804D5D20
+lbl_804D5D20:
+    .asciz "0"
+    .balign 4
+.global lbl_804D5D24
+lbl_804D5D24:
+    .asciz "lobj"
+    .balign 4
+.global lbl_804D5D2C
+lbl_804D5D2C:
+    .asciz "lobj.h"
+    .balign 4
+.global lbl_804D5D34
+lbl_804D5D34:
+    .asciz "new"
+    .balign 4
+.global lbl_804D5D38
+lbl_804D5D38:
+	.4byte NULL
+.global lbl_804D5D3C
+lbl_804D5D3C:
+    .asciz "*p"
+    .balign 4
+
+
 .section .sbss
 
     .skip 0x4

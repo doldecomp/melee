@@ -167,3 +167,11 @@ lbl_8034CD5C:
 /* 8034CD7C 0034995C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034CD80 00349960  7C 08 03 A6 */	mtlr r0
 /* 8034CD84 00349964  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5C30
+lbl_804D5C30:
+    .4byte 0x1EB40F48
+    .4byte 0x280F3B1F

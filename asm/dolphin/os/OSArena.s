@@ -48,6 +48,14 @@ func_80344514:
 /* 80344530 00341110  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global __OSArenaLo
+__OSArenaLo:
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global __OSArenaHi

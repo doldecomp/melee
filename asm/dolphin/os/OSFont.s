@@ -31,3 +31,11 @@ lbl_80347354:
 lbl_8034735C:
 /* 8034735C 00343F3C  A0 6D A5 80 */	lhz r3, lbl_804D5C20@sda21(r13)
 /* 80347360 00343F40  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5C20
+lbl_804D5C20:
+    .4byte 0xFFFF0000
+    .4byte 0x00000000

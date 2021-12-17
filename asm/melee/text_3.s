@@ -14273,6 +14273,78 @@ lbl_804A0638:
 	.skip 0x10
 
 
+.section .sdata
+
+.global lbl_804D4B30
+lbl_804D4B30:
+    .4byte 0x008B008C
+    .4byte 0x008D0000
+.global lbl_804D4B38
+lbl_804D4B38:
+    .4byte 0x00960097
+    .4byte 0x00980099
+.global lbl_804D4B40
+lbl_804D4B40:
+    .4byte 0x00A400A5
+    .4byte 0x00A60000
+.global lbl_804D4B48
+lbl_804D4B48:
+    .4byte 0x00A800A9
+    .4byte 0x00AA0000
+.global lbl_804D4B50
+lbl_804D4B50:
+    .4byte 0x5A73FFFF
+.global lbl_804D4B54
+lbl_804D4B54:
+    .4byte 0xFF5A41FF
+.global lbl_804D4B58
+lbl_804D4B58:
+    .4byte 0x0ED241FF
+.global lbl_804D4B5C
+lbl_804D4B5C:
+    .4byte 0xF0C85AFF
+.global lbl_804D4B60
+lbl_804D4B60:
+    .4byte 0x9B41FFFF
+.global lbl_804D4B64
+lbl_804D4B64:
+    .4byte 0xFFC800FF
+.global lbl_804D4B68
+lbl_804D4B68:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4B70
+lbl_804D4B70:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4B78
+lbl_804D4B78:
+    .asciz "MnMaAll"
+    .balign 4
+.global lbl_804D4B80
+lbl_804D4B80:
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_804D4B88
+lbl_804D4B88:
+    .4byte 0x40800000
+    .4byte 0x40A00000
+.global lbl_804D4B90
+lbl_804D4B90:
+    .4byte 0x3F800000
+.global lbl_804D4B94
+lbl_804D4B94:
+    .2byte 0x0163
+.global lbl_804D4B96
+lbl_804D4B96:
+    .asciz "+"
+    .balign 4
+.global lbl_804D4B98
+lbl_804D4B98:
+    .4byte 0x3F800000
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global lbl_804D6BA8

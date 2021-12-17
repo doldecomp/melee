@@ -3626,6 +3626,23 @@ func_8036A8BC:
 /* 8036A934 00367514  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5D40
+lbl_804D5D40:
+    .asciz "cobj.c"
+    .balign 4
+.global lbl_804D5D48
+lbl_804D5D48:
+    .asciz "cobj"
+    .balign 4
+.global lbl_804D5D50
+lbl_804D5D50:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7658

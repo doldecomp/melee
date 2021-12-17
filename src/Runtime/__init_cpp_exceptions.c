@@ -1,7 +1,7 @@
 #include <dolphin/types.h>
 
 extern const void* lbl_80005918; //info
-extern s32 fragmentID; //fragmentID
+s32 fragmentID = -2;
 
 extern s32 __register_fragment(struct __eti_init_info *, char*);
 extern void __unregister_fragment(s32);

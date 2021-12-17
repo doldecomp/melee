@@ -1964,6 +1964,38 @@ lbl_804A89B0:
 	.skip 0x40
 
 
+.section .sdata
+
+.global lbl_804D5C38
+lbl_804D5C38:
+    .4byte 0x00000020
+.global lbl_804D5C3C
+lbl_804D5C3C:
+    .4byte 0xF0000000
+.global lbl_804D5C40
+lbl_804D5C40:
+    .4byte 0x00000300
+.global lbl_804D5C44
+lbl_804D5C44:
+    .4byte 0x00000005
+.global lbl_804D5C48
+lbl_804D5C48:
+    .4byte lbl_8034E2A8
+.global lbl_804D5C4C
+lbl_804D5C4C:
+    .asciz "A"
+    .balign 4
+.global lbl_804D5C50
+lbl_804D5C50:
+    .asciz "B"
+    .balign 4
+.global lbl_804D5C54
+lbl_804D5C54:
+    .asciz "Pad.c"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D73F0

@@ -497,6 +497,14 @@ lbl_803444B8:
 /* 803444C4 003410A4  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global __OSCurrHeap
+__OSCurrHeap:
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global HeapArray

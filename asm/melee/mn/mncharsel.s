@@ -12423,6 +12423,82 @@ lbl_804A0BD0:
 	.skip 0x10
 
 
+.section .sdata
+
+.global lbl_804D50C8
+lbl_804D50C8:
+    .4byte 0x01020408
+.global lbl_804D50CC
+lbl_804D50CC:
+    .4byte 0x01000002
+.global lbl_804D50D0
+lbl_804D50D0:
+    .4byte 0x02000100
+    .4byte 0x05030400
+.global lbl_804D50D8
+lbl_804D50D8:
+    .4byte 0x02000801
+    .4byte 0x07070707
+.global lbl_804D50E0
+lbl_804D50E0:
+    .4byte 0x00010300
+.global lbl_804D50E4
+lbl_804D50E4:
+    .asciz "%02d"
+    .balign 4
+.global lbl_804D50EC
+lbl_804D50EC:
+    .asciz "99"
+    .balign 4
+.global lbl_804D50F0
+lbl_804D50F0:
+    .asciz "%08d"
+    .balign 4
+.global lbl_804D50F8
+lbl_804D50F8:
+    .asciz "%09d"
+    .balign 4
+.global lbl_804D5100
+lbl_804D5100:
+    .4byte 0x2564208C
+    .4byte 0xC2000000
+.global lbl_804D5108
+lbl_804D5108:
+    .4byte 0x25642081
+    .4byte 0x40000000
+.global lbl_804D5110
+lbl_804D5110:
+    .asciz "%.1f"
+    .balign 4
+.global lbl_804D5118
+lbl_804D5118:
+    .asciz "%d"
+    .balign 4
+.global lbl_804D511C
+lbl_804D511C:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5124
+lbl_804D5124:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D512C
+lbl_804D512C:
+    .asciz "lobj.h"
+    .balign 4
+.global lbl_804D5134
+lbl_804D5134:
+    .asciz "lobj"
+    .balign 4
+.global lbl_804D513C
+lbl_804D513C:
+    .4byte 0x828D0000
+.global lbl_804D5140
+lbl_804D5140:
+    .4byte 0x82658294
+    .4byte 0x81440000
+
+
 .section .sbss
 
 .global lbl_804D6CB0

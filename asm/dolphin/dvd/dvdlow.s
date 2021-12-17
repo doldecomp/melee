@@ -1029,6 +1029,14 @@ lbl_804A74F0:
 	.skip 0x70
 
 
+.section .sdata
+
+.global lbl_804D5B80
+lbl_804D5B80:
+    .4byte 0x00000001
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global StopAtNextInt
