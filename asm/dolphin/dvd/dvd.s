@@ -2628,6 +2628,14 @@ lbl_804A75E0:
 	.skip 0x58
 
 
+.section .sdata
+
+.global lbl_804D5B90
+lbl_804D5B90:
+    .4byte 0x00000001
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global lbl_804D7290

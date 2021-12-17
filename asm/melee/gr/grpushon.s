@@ -1520,6 +1520,29 @@ lbl_803E7CCC:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D4930
+lbl_804D4930:
+    .asciz "0"
+    .balign 4
+.global lbl_804D4934
+lbl_804D4934:
+    .4byte 0x41800000
+.global lbl_804D4938
+lbl_804D4938:
+    .asciz "lobj.h"
+    .balign 4
+.global lbl_804D4940
+lbl_804D4940:
+    .asciz "lobj"
+    .balign 4
+.global lbl_804D4948
+lbl_804D4948:
+    .4byte 0x41800000
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global lbl_804D6AB8

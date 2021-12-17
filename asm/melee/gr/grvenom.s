@@ -4313,6 +4313,34 @@ lbl_803E5680:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D47B8
+lbl_804D47B8:
+    .asciz "/GrVe"
+    .balign 4
+.global lbl_804D47C0
+lbl_804D47C0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D47C8
+lbl_804D47C8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D47D0
+lbl_804D47D0:
+    .asciz "aobj.h"
+    .balign 4
+.global lbl_804D47D8
+lbl_804D47D8:
+    .asciz "aobj"
+    .balign 4
+.global lbl_804D47E0
+lbl_804D47E0:
+    .asciz "wgobj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6A30

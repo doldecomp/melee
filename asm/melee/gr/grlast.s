@@ -2650,6 +2650,35 @@ jtbl_803E80F8:
 	.4byte lbl_8021C2D8
 
 
+.section .sdata
+
+.global lbl_804D4968
+lbl_804D4968:
+    .4byte 0x00000003
+    .4byte 0x00000000
+.global lbl_804D4970
+lbl_804D4970:
+    .asciz "gobj"
+    .balign 4
+.global lbl_804D4978
+lbl_804D4978:
+    .asciz "gp"
+    .balign 4
+.global lbl_804D497C
+lbl_804D497C:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4984
+lbl_804D4984:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D498C
+lbl_804D498C:
+    .asciz "aobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6AD0

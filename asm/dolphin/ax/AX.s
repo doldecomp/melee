@@ -5917,6 +5917,20 @@ lbl_804B09E0:
 	.skip 0xFE00
 
 
+.section .sdata
+
+.global lbl_804D5C68
+lbl_804D5C68:
+    .4byte 0x19E00000
+    .4byte 0x00000000
+.global lbl_804D5C70
+lbl_804D5C70:
+    .4byte func_8035DD3C
+.global lbl_804D5C74
+lbl_804D5C74:
+    .4byte func_8035DD64
+
+
 .section .sbss
 
 .global lbl_804D74F0

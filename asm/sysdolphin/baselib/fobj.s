@@ -1057,3 +1057,16 @@ HSD_FObjFree:
 /* 8036B8C4 003684A4  38 21 00 08 */	addi r1, r1, 8
 /* 8036B8C8 003684A8  7C 08 03 A6 */	mtlr r0
 /* 8036B8CC 003684AC  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5D58
+lbl_804D5D58:
+    .asciz "fobj.c"
+    .balign 4
+.global lbl_804D5D60
+lbl_804D5D60:
+    .asciz "new"
+    .balign 4
+    .4byte NULL

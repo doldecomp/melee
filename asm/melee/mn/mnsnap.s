@@ -6136,3 +6136,24 @@ lbl_80258718:
 .global lbl_804A0A10
 lbl_804A0A10:
 	.skip 0x180
+
+
+.section .sdata
+
+.global lbl_804D5070
+lbl_804D5070:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5078
+lbl_804D5078:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5080
+lbl_804D5080:
+    .asciz "%03d"
+    .balign 4
+.global lbl_804D5088
+lbl_804D5088:
+    .asciz "%d"
+    .balign 4
+    .4byte NULL

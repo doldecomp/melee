@@ -803,6 +803,18 @@ lbl_803E851C:
     .balign 4
 
 
+.section .sdata
+
+.global lbl_804D49D8
+lbl_804D49D8:
+    .4byte 0x00070008
+    .4byte 0x00090000
+.global lbl_804D49E0
+lbl_804D49E0:
+    .asciz "gobj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6AF0

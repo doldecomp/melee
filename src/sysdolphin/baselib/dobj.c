@@ -10,9 +10,10 @@ static HSD_DObjInfo* default_class = NULL;
 static HSD_DObj* current_dobj = NULL;
 
 extern char* lbl_80405494; // "mobj has unexpected blending flags (0x%x)."
-extern char* lbl_804D5C78; // "dobj.c"
-extern char* lbl_804D5C80; // NULL
-extern char* lbl_804D5C84; // "dobj"
+
+static char lbl_804D5C78[6] = "dobj.c"; // "dobj.c"
+static char lbl_804D5C80[1] = "";
+static char lbl_804D5C84[4] = "dobj";
 
 extern HSD_Class hsdClass;
 extern char* lbl_80405548;
@@ -191,7 +192,7 @@ static int DObjLoad(HSD_DObj* dobj, HSD_DObjDesc* desc)
                 break;
             default:
                 OSReport(lbl_80405494);
-                HSD_Panic(lbl_80405494, 312, lbl_804D5C80);
+                HSD_Panic("dobj.c", 312, NULL);
         }
     }
     return 0;
@@ -291,7 +292,7 @@ HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
     }else {
         dobj = HSD_DOBJ(hsdNew());
         if (dobj == NULL) {
-            __assert(lbl_804D5C78, 378, lbl_804D5C84);
+            __assert("dobj.c", 378, lbl_804D5C84);
         }
     }
     HSD_DOBJ_METHOD(dobj)->load(dobj, desc);
@@ -380,7 +381,7 @@ HSD_DObj* HSD_DObjAlloc(void)
 {
     HSD_DObj* dobj = (HSD_DObj*)hsdNew((HSD_ClassInfo*)(default_class ? default_class : &hsdDObj));
     if (dobj == NULL){
-        __assert(lbl_804D5C78, 0x20D, lbl_804D5C84);
+        __assert("dobj.c", 0x20D, lbl_804D5C84);
     }
     return dobj;
 }

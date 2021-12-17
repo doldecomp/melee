@@ -3486,6 +3486,46 @@ func_80361548:
 /* 803615CC 0035E1AC  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+    .4byte NULL
+    .4byte NULL
+.global lbl_804D5C90
+lbl_804D5C90:
+    .asciz "tobj.c"
+    .balign 4
+.global lbl_804D5C98
+lbl_804D5C98:
+    .asciz "tobj"
+    .balign 4
+.global lbl_804D5CA0
+lbl_804D5CA0:
+    .asciz "cobj"
+    .balign 4
+.global lbl_804D5CA8
+lbl_804D5CA8:
+    .asciz "0"
+    .balign 4
+.global lbl_804D5CAC
+lbl_804D5CAC:
+    .asciz "tlut"
+    .balign 4
+.global lbl_804D5CB4
+lbl_804D5CB4:
+	.4byte NULL
+.global lbl_804D5CB8
+lbl_804D5CB8:
+    .asciz "new"
+    .balign 4
+.global lbl_804D5CBC
+lbl_804D5CBC:
+    .asciz "tev"
+    .balign 4
+.global lbl_804D5CC0
+lbl_804D5CC0:
+    .asciz "idesc"
+    .balign 4
+
 .section .sbss
 
 .global lbl_804D75A8

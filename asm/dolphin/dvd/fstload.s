@@ -170,6 +170,22 @@ lbl_804A7698:
 	.skip 0x30
 
 
+.section .sdata
+
+.global lbl_804D5B98
+lbl_804D5B98:
+    .4byte 0x0A000000
+.global lbl_804D5B9C
+lbl_804D5B9C:
+    .asciz "OFF"
+    .balign 4
+.global lbl_804D5BA0
+lbl_804D5BA0:
+    .asciz "ON"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D72E0

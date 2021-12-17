@@ -806,6 +806,19 @@ lbl_80362D24:
 /* 80362D2C 0035F90C  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5CD0
+lbl_804D5CD0:
+    .asciz "tev.c"
+    .balign 4
+.global lbl_804D5CD8
+lbl_804D5CD8:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D75F8

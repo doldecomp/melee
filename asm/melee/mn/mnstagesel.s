@@ -2374,6 +2374,30 @@ lbl_803B8550:
     .4byte 0x00000000
 
 
+.section .sdata
+
+.global lbl_804D50A0
+lbl_804D50A0:
+    .4byte 0xFF000000
+.global lbl_804D50A4
+lbl_804D50A4:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D50AC
+lbl_804D50AC:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D50B4
+lbl_804D50B4:
+    .asciz "lobj.h"
+    .balign 4
+.global lbl_804D50BC
+lbl_804D50BC:
+    .asciz "lobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6C90

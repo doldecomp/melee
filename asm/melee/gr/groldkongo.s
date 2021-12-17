@@ -1530,6 +1530,23 @@ lbl_803E6678:
     .balign 4
 
 
+.section .sdata
+
+.global lbl_804D4888
+lbl_804D4888:
+    .asciz "0"
+    .balign 4
+.global lbl_804D488C
+lbl_804D488C:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4894
+lbl_804D4894:
+    .asciz "jobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6A90

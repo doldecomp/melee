@@ -2165,6 +2165,26 @@ lbl_804A0898:
 	.skip 0x10
 
 
+.section .sdata
+
+.global lbl_804D4FE8
+lbl_804D4FE8:
+    .4byte 0x00160015
+    .4byte 0x00140013
+.global lbl_804D4FF0
+lbl_804D4FF0:
+    .4byte 0x20010000
+.global lbl_804D4FF4
+lbl_804D4FF4:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4FFC
+lbl_804D4FFC:
+    .asciz "jobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D6C28

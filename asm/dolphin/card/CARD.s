@@ -7455,3 +7455,11 @@ lbl_804A8B38:
 .global lbl_804A8D58
 lbl_804A8D58:
 	.skip 0x20
+
+
+.section .sdata
+
+.global lbl_804D5C60
+lbl_804D5C60:
+    .4byte 0xFFFF0000
+    .4byte 0x00000000
