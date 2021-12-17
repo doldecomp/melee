@@ -2923,8 +2923,8 @@ func_80369FF4:
 /* 8036A008 00366BE8  90 03 00 20 */	stw r0, 0x20(r3)
 /* 8036A00C 00366BEC  4E 80 00 20 */	blr 
 
-.global func_8036A010
-func_8036A010:
+.global HSD_CObjSetScissorx4
+HSD_CObjSetScissorx4:
 /* 8036A010 00366BF0  28 03 00 00 */	cmplwi r3, 0
 /* 8036A014 00366BF4  4D 82 00 20 */	beqlr 
 /* 8036A018 00366BF8  B0 83 00 1C */	sth r4, 0x1c(r3)
@@ -3000,8 +3000,8 @@ func_8036A0E4:
 /* 8036A108 00366CE8  90 03 00 18 */	stw r0, 0x18(r3)
 /* 8036A10C 00366CEC  4E 80 00 20 */	blr 
 
-.global func_8036A110
-func_8036A110:
+.global HSD_CObjSetViewportfx4
+HSD_CObjSetViewportfx4:
 /* 8036A110 00366CF0  28 03 00 00 */	cmplwi r3, 0
 /* 8036A114 00366CF4  4D 82 00 20 */	beqlr 
 /* 8036A118 00366CF8  D0 23 00 0C */	stfs f1, 0xc(r3)
@@ -3139,8 +3139,8 @@ func_8036A288:
 /* 8036A288 00366E68  80 6D BF BC */	lwz r3, lbl_804D765C@sda21(r13)
 /* 8036A28C 00366E6C  4E 80 00 20 */	blr 
 
-.global func_8036A290
-func_8036A290:
+.global HSD_CObjAlloc
+HSD_CObjAlloc:
 /* 8036A290 00366E70  7C 08 02 A6 */	mflr r0
 /* 8036A294 00366E74  90 01 00 04 */	stw r0, 4(r1)
 /* 8036A298 00366E78  94 21 FF F0 */	stwu r1, -0x10(r1)
