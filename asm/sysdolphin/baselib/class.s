@@ -2,23 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ClassInfoInit
-ClassInfoInit:
-/* 80381BE4 0037E7C4  7C 08 02 A6 */	mflr r0
-/* 80381BE8 0037E7C8  90 01 00 04 */	stw r0, 4(r1)
-/* 80381BEC 0037E7CC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80381BF0 0037E7D0  80 03 00 04 */	lwz r0, 4(r3)
-/* 80381BF4 0037E7D4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
-/* 80381BF8 0037E7D8  40 82 00 10 */	bne lbl_80381C08
-/* 80381BFC 0037E7DC  81 83 00 00 */	lwz r12, 0(r3)
-/* 80381C00 0037E7E0  7D 88 03 A6 */	mtlr r12
-/* 80381C04 0037E7E4  4E 80 00 21 */	blrl 
-lbl_80381C08:
-/* 80381C08 0037E7E8  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80381C0C 0037E7EC  38 21 00 08 */	addi r1, r1, 8
-/* 80381C10 0037E7F0  7C 08 03 A6 */	mtlr r0
-/* 80381C14 0037E7F4  4E 80 00 20 */	blr 
-
 .global hsdInitClassInfo
 hsdInitClassInfo:
 /* 80381C18 0037E7F8  7C 08 02 A6 */	mflr r0

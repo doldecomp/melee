@@ -17,3 +17,4 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/controller.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/shadow.o\
+	$(EPILOGUE_DIR)/src/sysdolphin/baselib/class.o\
