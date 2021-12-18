@@ -18,3 +18,4 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/shadow.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/class.o\
+	$(EPILOGUE_DIR)/src/sysdolphin/baselib/pobj.o\
