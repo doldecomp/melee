@@ -4,6 +4,8 @@ extern char lbl_804075CC[];
 extern char lbl_80407604[];
 
 extern char lbl_804D5FA8[8]; // "class.c\0";
+extern char lbl_804D5FB0[2];
+
 
 void ClassInfoInit(HSD_ClassInfo* info)
 {
@@ -38,5 +40,13 @@ void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, cha
         memcpy(&class_info->alloc, &parent_info->alloc, parent_info->head.info_size - 0x28);
         class_info->head.next = parent_info->head.child;
         parent_info->head.child = class_info;
+    }
+}
+
+void OSReport_PrintSpaces(s32 count) {
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        OSReport(lbl_804D5FB0);
     }
 }
