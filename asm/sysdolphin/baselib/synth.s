@@ -4035,6 +4035,29 @@ lbl_804C4540:
 	.skip 0x60
 
 
+.section .sdata
+
+.global lbl_804D6018
+lbl_804D6018:
+    .4byte 0xFFFFFFFF
+.global lbl_804D601C
+lbl_804D601C:
+    .asciz "synth.c"
+    .balign 4
+.global lbl_804D6024
+lbl_804D6024:
+    .asciz "p"
+    .balign 4
+.global lbl_804D6028
+lbl_804D6028:
+    .4byte 0x00000000
+    .4byte 0x00000000
+.global lbl_804D6030
+lbl_804D6030:
+    .4byte 0x3F800000
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global lbl_804D7710

@@ -252,3 +252,16 @@ lbl_80388148:
 /* 80388150 00384D30  38 21 00 40 */	addi r1, r1, 0x40
 /* 80388154 00384D34  7C 08 03 A6 */	mtlr r0
 /* 80388158 00384D38  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D6000
+lbl_804D6000:
+    .asciz " "
+    .balign 4
+.global lbl_804D6004
+lbl_804D6004:
+    .4byte 0x646F6E65
+    .4byte 0x2E0A0000
+    .4byte 0x00000000

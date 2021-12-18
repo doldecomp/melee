@@ -640,6 +640,31 @@ func_8037D900:
 /* 8037D96C 0037A54C  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5EF8
+lbl_804D5EF8:
+    .asciz "wobj.c"
+    .balign 4
+.global lbl_804D5F00
+lbl_804D5F00:
+    .asciz "jp"
+    .balign 4
+.global lbl_804D5F04
+lbl_804D5F04:
+    .asciz "wobj"
+    .balign 4
+.global lbl_804D5F0C
+lbl_804D5F0C:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5F14
+lbl_804D5F14:
+    .asciz "jobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D76F0

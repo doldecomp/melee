@@ -2238,6 +2238,41 @@ lbl_803B9598:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D5EB8
+lbl_804D5EB8:
+    .asciz "robj.c"
+    .balign 4
+.global lbl_804D5EC0
+lbl_804D5EC0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5EC8
+lbl_804D5EC8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5ED0
+lbl_804D5ED0:
+    .asciz "obj"
+    .balign 4
+.global lbl_804D5ED4
+lbl_804D5ED4:
+    .asciz "new"
+    .balign 4
+.global lbl_804D5ED8
+lbl_804D5ED8:
+	.4byte NULL
+.global lbl_804D5EDC
+lbl_804D5EDC:
+    .asciz "rvalue"
+    .balign 4
+.global lbl_804D5EE4
+lbl_804D5EE4:
+    .asciz "0"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D76E8

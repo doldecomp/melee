@@ -353,6 +353,14 @@ _HSD_ObjAllocForgetMemory:
 /* 8037AE30 00377A10  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5EB0
+lbl_804D5EB0:
+    .asciz "data"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D76E0

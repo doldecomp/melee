@@ -31,3 +31,12 @@ lbl_8037F230:
 /* 8037F238 0037BE18  38 21 00 18 */	addi r1, r1, 0x18
 /* 8037F23C 0037BE1C  7C 08 03 A6 */	mtlr r0
 /* 8037F240 0037BE20  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5F70
+lbl_804D5F70:
+    .asciz "adr"
+    .balign 4
+    .4byte NULL

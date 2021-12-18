@@ -16108,6 +16108,14 @@ lbl_804D2E70:
 	.skip 0x824
 
 
+.section .sdata
+
+.global lbl_804D6398
+lbl_804D6398:
+	.long 3
+
+
+
 .section .sbss
 
 .global lbl_804D7980

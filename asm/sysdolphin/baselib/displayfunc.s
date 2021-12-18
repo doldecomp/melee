@@ -1478,6 +1478,35 @@ _HSD_DispForgetMemory:
 /* 80374E44 00371A24  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5DD8
+lbl_804D5DD8:
+    .4byte 0x00000000
+.global lbl_804D5DDC
+lbl_804D5DDC:
+    .4byte lbl_804D76A4
+.global lbl_804D5DE0
+lbl_804D5DE0:
+    .4byte lbl_804D76A8
+.global lbl_804D5DE4
+lbl_804D5DE4:
+    .4byte lbl_804D76B0
+.global lbl_804D5DE8
+lbl_804D5DE8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5DF0
+lbl_804D5DF0:
+    .asciz "x"
+    .balign 4
+.global lbl_804D5DF4
+lbl_804D5DF4:
+    .asciz "jobj.h"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7698

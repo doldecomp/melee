@@ -364,8 +364,5 @@ TEXT_O_FILES := 						            \
 DATA_O_FILES :=                                     \
     $(BUILD_DIR)/asm/data.o
 
-SDATA_O_FILES :=                                    \
-    $(BUILD_DIR)/asm/sdata.o
-
 SDATA2_O_FILES :=                                   \
     $(BUILD_DIR)/asm/sdata2.o

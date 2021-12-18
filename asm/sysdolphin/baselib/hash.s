@@ -133,3 +133,11 @@ lbl_80382BE0:
 /* 80382BF4 0037F7D4  38 21 00 28 */	addi r1, r1, 0x28
 /* 80382BF8 0037F7D8  7C 08 03 A6 */	mtlr r0
 /* 80382BFC 0037F7DC  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5FC0
+lbl_804D5FC0:
+    .asciz "hash.c"
+    .balign 4

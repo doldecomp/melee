@@ -3489,7 +3489,6 @@ func_80361548:
 .section .sdata
 
     .4byte NULL
-    .4byte NULL
 .global lbl_804D5C90
 lbl_804D5C90:
     .asciz "tobj.c"

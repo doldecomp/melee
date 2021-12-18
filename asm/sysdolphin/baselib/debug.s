@@ -136,3 +136,11 @@ lbl_803882EC:
 .global lbl_804C2608
 lbl_804C2608:
 	.skip 0x2D8
+
+
+.section .sdata
+
+.global lbl_804D6010
+lbl_804D6010:
+    .4byte 0x00000000
+    .4byte 0x00000000

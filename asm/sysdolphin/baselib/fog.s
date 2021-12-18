@@ -633,3 +633,23 @@ lbl_803B95A8:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
+
+
+.section .sdata
+
+.global lbl_804D5F20
+lbl_804D5F20:
+    .asciz "fog.c"
+    .balign 4
+.global lbl_804D5F28
+lbl_804D5F28:
+    .asciz "fog"
+    .balign 4
+.global lbl_804D5F2C
+lbl_804D5F2C:
+    .asciz "adj"
+    .balign 4
+.global lbl_804D5F30
+lbl_804D5F30:
+    .asciz "hsd_fog"
+    .balign 4

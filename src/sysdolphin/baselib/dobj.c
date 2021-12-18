@@ -11,9 +11,9 @@ static HSD_DObj* current_dobj = NULL;
 
 extern char* lbl_80405494; // "mobj has unexpected blending flags (0x%x)."
 
-static char lbl_804D5C78[6] = "dobj.c"; // "dobj.c"
+static char lbl_804D5C78[7] = "dobj.c\0"; // "dobj.c"
 static char lbl_804D5C80[1] = "";
-static char lbl_804D5C84[4] = "dobj";
+static char lbl_804D5C84[8] = "dobj\0";
 
 extern HSD_Class hsdClass;
 extern char* lbl_80405548;

@@ -4608,6 +4608,18 @@ lbl_804D0FC0:
 	.skip 0xF0
 
 
+.section .sdata
+
+.global lbl_804D6380
+lbl_804D6380:
+    .asciz "{"
+    .balign 4
+.global lbl_804D6384
+lbl_804D6384:
+    .asciz "0"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D7908

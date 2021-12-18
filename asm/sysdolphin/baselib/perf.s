@@ -167,6 +167,18 @@ lbl_8037E3CC:
 /* 8037E3F8 0037AFD8  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5F38
+lbl_804D5F38:
+    .asciz "perf.c"
+    .balign 4
+.global lbl_804D5F40
+lbl_804D5F40:
+    .asciz "n < 32"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D76F8

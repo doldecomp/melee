@@ -1040,3 +1040,20 @@ lbl_803801B0:
 .global shadow_alloc_data
 shadow_alloc_data:
 	.skip 0x30
+
+
+.section .sdata
+
+.global lbl_804D5F78
+lbl_804D5F78:
+    .asciz "shadow"
+    .balign 4
+.global lbl_804D5F80
+lbl_804D5F80:
+    .asciz "0"
+    .balign 4
+.global lbl_804D5F84
+lbl_804D5F84:
+    .asciz "rect"
+    .balign 4
+    .4byte NULL
