@@ -7855,7 +7855,7 @@ void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSr
 // ? func_80343A30(?);
 // ? OSCancelAlarm(?);
 // ? DLInsert(?);
-// ? OSAllocFromHeap(?);
+void* OSAllocFromHeap(void*, s32);
 // ? OSFreeToHeap(?);
 // ? func_80344068(?);
 // ? OSInitAlloc(?);
@@ -8571,7 +8571,7 @@ void HSD_EraseRect();
 // ? func_80375194(?);
 void HSD_GXInit(void);
 void HSD_OSInit(void);
-// ? HSD_GetHeap(?);
+void* HSD_GetHeap();
 // ? func_8037540C(?);
 // ? func_80375414(?);
 // ? func_80375428(?);

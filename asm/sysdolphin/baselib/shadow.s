@@ -1043,7 +1043,7 @@ shadow_alloc_data:
 
 
 .section .sdata
-
+    .4byte NULL
 .global lbl_804D5F78
 lbl_804D5F78:
     .asciz "shadow"
