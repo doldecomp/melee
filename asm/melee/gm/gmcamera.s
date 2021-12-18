@@ -1598,3 +1598,39 @@ lbl_804D4258:
 lbl_804D4260:
     .asciz "IfVsCam"
     .balign 4
+
+
+.section .sdata2
+
+.global lbl_804DA9B8
+lbl_804DA9B8:
+	.4byte 0x00000000
+.global lbl_804DA9BC
+lbl_804DA9BC:
+	.4byte 0x44200000
+.global lbl_804DA9C0
+lbl_804DA9C0:
+	.4byte 0x42000000
+.global lbl_804DA9C4
+lbl_804DA9C4:
+	.4byte 0x40A00000
+.global lbl_804DA9C8
+lbl_804DA9C8:
+	.4byte 0xC0A00000
+.global lbl_804DA9CC
+lbl_804DA9CC:
+	.4byte 0x3F800000
+.global lbl_804DA9D0
+lbl_804DA9D0:
+	.4byte 0x40000000
+	.4byte 0x00000000
+.global lbl_804DA9D8
+lbl_804DA9D8:
+	.4byte 0x00000000
+.global lbl_804DA9DC
+lbl_804DA9DC:
+	.4byte 0x44649249
+.global lbl_804DA9E0
+lbl_804DA9E0:
+	.4byte 0x42800000
+	.4byte 0x00000000
