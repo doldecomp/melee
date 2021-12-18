@@ -3680,6 +3680,39 @@ lbl_804C0908:
 	.skip 0x10
 
 
+.section .sdata
+
+.global lbl_804D5D68
+lbl_804D5D68:
+    .asciz "pobj.c"
+    .balign 4
+.global lbl_804D5D70
+lbl_804D5D70:
+    .asciz "pobj"
+    .balign 4
+.global lbl_804D5D78
+lbl_804D5D78:
+    .asciz "obj"
+    .balign 4
+.global lbl_804D5D7C
+lbl_804D5D7C:
+    .asciz "mark"
+    .balign 4
+.global lbl_804D5D84
+lbl_804D5D84:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5D8C
+lbl_804D5D8C:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5D94
+lbl_804D5D94:
+    .asciz "jp->mtx"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7660

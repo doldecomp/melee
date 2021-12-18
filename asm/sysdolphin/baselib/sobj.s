@@ -1327,6 +1327,14 @@ lbl_804D10E0:
 	.skip 0x30
 
 
+.section .sdata
+
+.global lbl_804D6388
+lbl_804D6388:
+    .asciz "sobj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D7960

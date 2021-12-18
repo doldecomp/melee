@@ -3151,3 +3151,28 @@ lbl_8038577C:
 /* 8038578C 0038236C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80385790 00382370  7C 08 03 A6 */	mtlr r0
 /* 80385794 00382374  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5FC8
+lbl_804D5FC8:
+    .asciz "texp.c"
+    .balign 4
+.global lbl_804D5FD0
+lbl_804D5FD0:
+    .asciz "texp"
+    .balign 4
+.global lbl_804D5FD8
+lbl_804D5FD8:
+    .asciz "0"
+    .balign 4
+.global lbl_804D5FDC
+lbl_804D5FDC:
+    .asciz "desc"
+    .balign 4
+.global lbl_804D5FE4
+lbl_804D5FE4:
+    .asciz "tevdesc"
+    .balign 4
+    .4byte NULL

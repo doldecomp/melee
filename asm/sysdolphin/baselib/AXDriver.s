@@ -3543,6 +3543,25 @@ lbl_804C5A20:
 	.skip 0x880
 
 
+.section .sdata
+
+.global lbl_804D6038
+lbl_804D6038:
+    .4byte 0xFFFFFFFF
+.global lbl_804D603C
+lbl_804D603C:
+    .4byte 0x00000002
+.global lbl_804D6040
+lbl_804D6040:
+    .asciz "0"
+    .balign 4
+.global lbl_804D6044
+lbl_804D6044:
+    .asciz "vID > 0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7788

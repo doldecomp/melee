@@ -4,8 +4,8 @@ HSD_ObjAllocData hsd_iddata;
 
 HSD_IDTable default_table;
 
-extern char* lbl_804D5EE8; // "id.c"
-extern char* lbl_804D5EF0;
+static char lbl_804D5EE8[5] = "id.c\0"; // "id.c"
+static char lbl_804D5EF0[6] = "entry\0";
 
 HSD_ObjAllocData* HSD_IDGetAllocData(void)
 {

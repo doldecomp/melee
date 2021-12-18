@@ -1613,3 +1613,15 @@ lbl_80381BB0:
 /* 80381BD8 0037E7B8  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 80381BDC 0037E7BC  7C 08 03 A6 */	mtlr r0
 /* 80381BE0 0037E7C0  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5F98
+lbl_804D5F98:
+    .4byte 0x00000000
+.global lbl_804D5F9C
+lbl_804D5F9C:
+    .asciz "stack"
+    .balign 4
+    .4byte NULL

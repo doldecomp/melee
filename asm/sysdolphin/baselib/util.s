@@ -156,3 +156,16 @@ lbl_8037A93C:
 /* 8037A940 00377520  38 21 00 08 */	addi r1, r1, 8
 /* 8037A944 00377524  7C 08 03 A6 */	mtlr r0
 /* 8037A948 00377528  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5EA0
+lbl_804D5EA0:
+    .asciz "util.c"
+    .balign 4
+.global lbl_804D5EA8
+lbl_804D5EA8:
+    .asciz "0"
+    .balign 4
+    .4byte NULL

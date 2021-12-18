@@ -23,15 +23,13 @@ HSD_ObjAllocData *HSD_DListGetAllocData()
     return &dlist_alloc_data;
 }
 
-extern char lbl_804D5F48[7]; // "list.c"
-extern char lbl_804D5F50[5]; // "list"
 HSD_SList *HSD_SListAlloc()
 {
     HSD_SList *list;
 
     list = HSD_ObjAlloc(&slist_alloc_data);
     if (list == NULL) {
-        __assert(lbl_804D5F48, 76, lbl_804D5F50);
+        __assert(__FILE__, 76, "list");
     }
 
     memset(list, 0, sizeof(HSD_SList));
@@ -44,7 +42,7 @@ static inline HSD_SList *HSD_SListAlloc_inline()
 
     list = HSD_ObjAlloc(&slist_alloc_data);
     if (list == NULL) {
-        __assert(lbl_804D5F48, 76, lbl_804D5F50);
+        __assert(__FILE__, 76, "list");
     }
 
     memset(list, 0, sizeof(HSD_SList));
@@ -71,11 +69,10 @@ HSD_SList *HSD_SListAllocAndPrepend(HSD_SList *next, void *data)
     return HSD_SListPrependList(next, list);
 }
 
-extern char lbl_804D5F58[5]; // "next"
 HSD_SList *HSD_SListAppendList(HSD_SList *list, HSD_SList *next)
 {
     if (next == NULL) {
-        __assert(lbl_804D5F48, 179, lbl_804D5F58);
+        __assert(__FILE__, 179, "next");
     }
 
     if (list != NULL) {
@@ -89,11 +86,10 @@ HSD_SList *HSD_SListAppendList(HSD_SList *list, HSD_SList *next)
     }
 }
 
-extern char lbl_804D5F60[5]; // "prev"
 HSD_SList *HSD_SListPrependList(HSD_SList *list, HSD_SList *prev)
 {
     if (prev == NULL) {
-        __assert(lbl_804D5F48, 202, lbl_804D5F60);
+        __assert(__FILE__, 202, "prev");
     }
 
     prev->next = list;

@@ -6,9 +6,9 @@
 
 HSD_ObjAllocData aobj_alloc_data;
 
-static char lbl_804D5D08[6] = "aobj.c";
-static char lbl_804D5D10[3] = "new";
-static char lbl_804D5D14[3] = "obj";
+static char lbl_804D5D08[7] = "aobj.c\0";
+static char lbl_804D5D10[4] = "new\0";
+static char lbl_804D5D14[4] = "obj\0";
 
 extern s32 lbl_80405FB8;
 extern s32 lbl_80405FC4;

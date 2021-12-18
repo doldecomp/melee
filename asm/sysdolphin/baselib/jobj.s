@@ -5713,6 +5713,42 @@ lbl_803B94D0:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D5DA0
+lbl_804D5DA0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5DA8
+lbl_804D5DA8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5DB0
+lbl_804D5DB0:
+    .asciz "jobj.c"
+    .balign 4
+.global lbl_804D5DB8
+lbl_804D5DB8:
+    .asciz "jp"
+    .balign 4
+.global lbl_804D5DBC
+lbl_804D5DBC:
+    .asciz "cobj"
+    .balign 4
+.global lbl_804D5DC4
+lbl_804D5DC4:
+    .asciz "prev"
+    .balign 4
+.global lbl_804D5DCC
+lbl_804D5DCC:
+    .asciz "eff"
+    .balign 4
+.global lbl_804D5DD0
+lbl_804D5DD0:
+    .asciz "robj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D7680

@@ -4435,6 +4435,14 @@ lbl_804D1124:
 	.skip 0x14
 
 
+.section .sdata
+
+.global lbl_804D6390
+lbl_804D6390:
+	.4byte NULL
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7968

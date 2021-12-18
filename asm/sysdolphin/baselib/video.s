@@ -1281,6 +1281,14 @@ lbl_804C1D80:
 	.skip 0x1F8
 
 
+.section .sdata
+
+.global lbl_804D5E88
+lbl_804D5E88:
+    .asciz "video.c"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D76D8

@@ -1060,3 +1060,20 @@ lbl_804D7704:
 .global lbl_804D7708
 lbl_804D7708:
 	.skip 0x8
+
+
+.section .sdata
+
+.global lbl_804D5FA8
+lbl_804D5FA8:
+    .asciz "class.c"
+    .balign 4
+.global lbl_804D5FB0
+lbl_804D5FB0:
+    .asciz " "
+    .balign 4
+.global lbl_804D5FB4
+lbl_804D5FB4:
+    .asciz "object"
+    .balign 4
+    .4byte NULL

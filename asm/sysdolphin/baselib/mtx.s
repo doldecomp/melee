@@ -1413,3 +1413,19 @@ lbl_804C2310:
 .global lbl_804C233C
 lbl_804C233C:
 	.skip 0x2C
+
+
+.section .sdata
+
+.global lbl_804D5E90
+lbl_804D5E90:
+    .asciz "mtx.c"
+    .balign 4
+.global lbl_804D5E98
+lbl_804D5E98:
+    .asciz "vec"
+    .balign 4
+.global lbl_804D5E9C
+lbl_804D5E9C:
+    .asciz "mtx"
+    .balign 4

@@ -526,3 +526,11 @@ lbl_80390628:
 /* 80390630 0038D210  38 21 00 48 */	addi r1, r1, 0x48
 /* 80390634 0038D214  7C 08 03 A6 */	mtlr r0
 /* 80390638 0038D218  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D6068
+lbl_804D6068:
+    .asciz "gobj"
+    .balign 4

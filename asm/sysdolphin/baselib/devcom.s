@@ -1194,6 +1194,22 @@ lbl_804C6330:
 	.skip 0x8050
 
 
+.section .sdata
+
+.global lbl_804D6050
+lbl_804D6050:
+	.long 4
+.global lbl_804D6054
+lbl_804D6054:
+    .asciz "0"
+    .balign 4
+.global lbl_804D6058
+lbl_804D6058:
+    .asciz "dc"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D77F0
