@@ -7,8 +7,6 @@
 
 #include "sysdolphin/baselib/objalloc.h"
 
-#define hash(s) (s % 0x65)
-
 typedef struct _IDEntry {
     struct _IDEntry* next;
     u32 id;
