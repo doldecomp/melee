@@ -220,7 +220,7 @@ typedef struct _HSD_TObjTev {
     u8 alpha_clamp;
     u8 color_a, color_b, color_c, color_d;
     u8 alpha_a, alpha_b, alpha_c, alpha_d;
-    GXColor constant, tev0, tev1;
+    GXColor konst, tev0, tev1;
     u32 active;
 } HSD_TObjTev;
 
@@ -235,7 +235,7 @@ typedef struct _HSD_TObjTevDesc {
     u8 alpha_clamp;
     u8 color_a, color_b, color_c, color_d;
     u8 alpha_a, alpha_b, alpha_c, alpha_d;
-    GXColor constant, tev0, tev1;
+    GXColor konst, tev0, tev1;
     u32 active;
 } HSD_TObjTevDesc;
 
