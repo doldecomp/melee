@@ -236,6 +236,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/jpeg/jpegdec.o         \
 	$(BUILD_DIR)/src/dolphin/base/PPCArch.o	        \
 	$(BUILD_DIR)/asm/dolphin/db/db.o                \
+	$(BUILD_DIR)/src/dolphin/dsp/dsp.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_debug.o        \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_task.o         \
