@@ -271,9 +271,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/os/OSResetSW.o         \
 	$(BUILD_DIR)/asm/dolphin/os/OSRtc.o             \
 	$(BUILD_DIR)/asm/dolphin/os/OSSerial.o          \
-                                                    \
-	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_1.o                \
-                                                    \
+	$(BUILD_DIR)/asm/dolphin/os/OSSync.o            \
+	$(BUILD_DIR)/asm/dolphin/os/OSThread.o          \
+	$(BUILD_DIR)/asm/dolphin/os/OSTime.o            \
+	$(BUILD_DIR)/asm/dolphin/os/OSUartExi.o         \
 	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init.o      \
 	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.o      \
                                                     \
