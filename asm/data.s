@@ -24189,18 +24189,18 @@ lbl_80405FC4:
     .balign 4
 .global jtbl_80405FEC
 jtbl_80405FEC:
-    .4byte func_803645D8 + 0x2C
-    .4byte func_803645D8 + 0x3C
-    .4byte func_803645D8 + 0x50
-    .4byte func_803645D8 + 0x64
-    .4byte func_803645D8 + 0x78
-    .4byte func_803645D8 + 0x98
-    .4byte func_803645D8 + 0xAC
-    .4byte func_803645D8 + 0xC0
-    .4byte func_803645D8 + 0x88
-    .4byte func_803645D8 + 0xD4
-    .4byte func_803645D8 + 0xE8
-    .4byte func_803645D8 + 0xFC
+    .4byte callbackForeachFunc + 0x2C
+    .4byte callbackForeachFunc + 0x3C
+    .4byte callbackForeachFunc + 0x50
+    .4byte callbackForeachFunc + 0x64
+    .4byte callbackForeachFunc + 0x78
+    .4byte callbackForeachFunc + 0x98
+    .4byte callbackForeachFunc + 0xAC
+    .4byte callbackForeachFunc + 0xC0
+    .4byte callbackForeachFunc + 0x88
+    .4byte callbackForeachFunc + 0xD4
+    .4byte callbackForeachFunc + 0xE8
+    .4byte callbackForeachFunc + 0xFC
 .global lbl_8040601C
 lbl_8040601C:
     .asciz "unexpected argument format.\n"
@@ -24211,33 +24211,33 @@ lbl_8040603C:
     .balign 4
 .global jtbl_80406058
 jtbl_80406058:
-    .4byte func_80364C08 + 0x6DC
-    .4byte func_80364C08 + 0x6DC
-    .4byte func_80364C08 + 0x50C
-    .4byte func_80364C08 + 0x224
-    .4byte func_80364C08 + 0x6DC
-    .4byte func_80364C08 + 0x6A4
-    .4byte func_80364C08 + 0x124
-    .4byte func_80364C08 + 0x424
-    .4byte func_80364C08 + 0x310
-    .4byte func_80364C08 + 0x38C
-    .4byte func_80364C08 + 0x5E4
-    .4byte func_80364C08 + 0x3E0
-    .4byte func_80364C08 + 0x628
+    .4byte HSD_ForeachAnim + 0x6DC
+    .4byte HSD_ForeachAnim + 0x6DC
+    .4byte HSD_ForeachAnim + 0x50C
+    .4byte HSD_ForeachAnim + 0x224
+    .4byte HSD_ForeachAnim + 0x6DC
+    .4byte HSD_ForeachAnim + 0x6A4
+    .4byte HSD_ForeachAnim + 0x124
+    .4byte HSD_ForeachAnim + 0x424
+    .4byte HSD_ForeachAnim + 0x310
+    .4byte HSD_ForeachAnim + 0x38C
+    .4byte HSD_ForeachAnim + 0x5E4
+    .4byte HSD_ForeachAnim + 0x3E0
+    .4byte HSD_ForeachAnim + 0x628
 .global jtbl_8040608C
 jtbl_8040608C:
-    .4byte func_80364C08 + 0x104
-    .4byte func_80364C08 + 0xA4
-    .4byte func_80364C08 + 0xC0
-    .4byte func_80364C08 + 0xD8
-    .4byte func_80364C08 + 0x104
-    .4byte func_80364C08 + 0xA4
-    .4byte func_80364C08 + 0xC0
-    .4byte func_80364C08 + 0xD8
-    .4byte func_80364C08 + 0x104
-    .4byte func_80364C08 + 0xA4
-    .4byte func_80364C08 + 0xC0
-    .4byte func_80364C08 + 0xD8
+    .4byte HSD_ForeachAnim + 0x104
+    .4byte HSD_ForeachAnim + 0xA4
+    .4byte HSD_ForeachAnim + 0xC0
+    .4byte HSD_ForeachAnim + 0xD8
+    .4byte HSD_ForeachAnim + 0x104
+    .4byte HSD_ForeachAnim + 0xA4
+    .4byte HSD_ForeachAnim + 0xC0
+    .4byte HSD_ForeachAnim + 0xD8
+    .4byte HSD_ForeachAnim + 0x104
+    .4byte HSD_ForeachAnim + 0xA4
+    .4byte HSD_ForeachAnim + 0xC0
+    .4byte HSD_ForeachAnim + 0xD8
     .4byte NULL
 .global lbl_804060C0
 lbl_804060C0:
