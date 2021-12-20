@@ -342,7 +342,7 @@ void HSD_AObjFree(HSD_AObj* aobj)
 }
 #pragma pop
 
-asm void func_803645D8(void)
+asm void callbackForeachFunc(HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, FObjData *arg)
 {
     nofralloc
     /* 803645D8 003611B8  7C 08 02 A6 */	mflr r0
@@ -419,7 +419,7 @@ lbl_803646E4:
     /* 803646F0 003612D0  4E 80 00 20 */	blr 
 }
 
-asm void func_803646F4(void)
+asm void TObjForeachAnim(void)
 {
     nofralloc
     /* 803646F4 003612D4  7C 08 02 A6 */	mflr r0
@@ -443,7 +443,7 @@ lbl_8036471C:
     /* 80364738 00361318  38 FD 00 00 */	addi r7, r29, 0
     /* 8036473C 0036131C  39 1E 00 00 */	addi r8, r30, 0
     /* 80364740 00361320  38 A0 00 0B */	li r5, 0xb
-    /* 80364744 00361324  4B FF FE 95 */	bl func_803645D8
+    /* 80364744 00361324  4B FF FE 95 */	bl callbackForeachFunc
 lbl_80364748:
     /* 80364748 00361328  83 7B 00 08 */	lwz r27, 8(r27)
 lbl_8036474C:
@@ -456,7 +456,7 @@ lbl_8036474C:
     /* 80364764 00361344  4E 80 00 20 */	blr 
 }
 
-asm void func_80364768(void)
+asm void RObjForeachAnim(void)
 {
     nofralloc
     /* 80364768 00361348  7C 08 02 A6 */	mflr r0
@@ -480,7 +480,7 @@ lbl_80364790:
     /* 803647AC 0036138C  38 FD 00 00 */	addi r7, r29, 0
     /* 803647B0 00361390  39 1E 00 00 */	addi r8, r30, 0
     /* 803647B4 00361394  38 A0 00 0A */	li r5, 0xa
-    /* 803647B8 00361398  4B FF FE 21 */	bl func_803645D8
+    /* 803647B8 00361398  4B FF FE 21 */	bl callbackForeachFunc
 lbl_803647BC:
     /* 803647BC 0036139C  83 7B 00 00 */	lwz r27, 0(r27)
 lbl_803647C0:
@@ -520,7 +520,7 @@ lbl_80364810:
     /* 8036482C 0036140C  38 FE 00 00 */	addi r7, r30, 0
     /* 80364830 00361410  39 1F 00 00 */	addi r8, r31, 0
     /* 80364834 00361414  38 A0 00 03 */	li r5, 3
-    /* 80364838 00361418  4B FF FD A1 */	bl func_803645D8
+    /* 80364838 00361418  4B FF FD A1 */	bl callbackForeachFunc
 lbl_8036483C:
     /* 8036483C 0036141C  83 7C 00 08 */	lwz r27, 8(r28)
     /* 80364840 00361420  28 1B 00 00 */	cmplwi r27, 0
@@ -535,7 +535,7 @@ lbl_8036483C:
     /* 80364864 00361444  38 FE 00 00 */	addi r7, r30, 0
     /* 80364868 00361448  39 1F 00 00 */	addi r8, r31, 0
     /* 8036486C 0036144C  38 A0 00 08 */	li r5, 8
-    /* 80364870 00361450  4B FF FD 69 */	bl func_803645D8
+    /* 80364870 00361450  4B FF FD 69 */	bl callbackForeachFunc
 lbl_80364874:
     /* 80364874 00361454  83 7B 00 08 */	lwz r27, 8(r27)
     /* 80364878 00361458  48 00 00 34 */	b lbl_803648AC
@@ -550,7 +550,7 @@ lbl_8036487C:
     /* 80364898 00361478  38 FE 00 00 */	addi r7, r30, 0
     /* 8036489C 0036147C  39 1F 00 00 */	addi r8, r31, 0
     /* 803648A0 00361480  38 A0 00 0B */	li r5, 0xb
-    /* 803648A4 00361484  4B FF FD 35 */	bl func_803645D8
+    /* 803648A4 00361484  4B FF FD 35 */	bl callbackForeachFunc
 lbl_803648A8:
     /* 803648A8 00361488  83 7B 00 08 */	lwz r27, 8(r27)
 lbl_803648AC:
@@ -576,7 +576,7 @@ lbl_803648B4:
     /* 803648F4 003614D4  38 FE 00 00 */	addi r7, r30, 0
     /* 803648F8 003614D8  39 1F 00 00 */	addi r8, r31, 0
     /* 803648FC 003614DC  38 A0 00 09 */	li r5, 9
-    /* 80364900 003614E0  4B FF FC D9 */	bl func_803645D8
+    /* 80364900 003614E0  4B FF FC D9 */	bl callbackForeachFunc
 lbl_80364904:
     /* 80364904 003614E4  83 9C 00 04 */	lwz r28, 4(r28)
 lbl_80364908:
@@ -617,7 +617,7 @@ lbl_8036495C:
     /* 80364978 00361558  38 FC 00 00 */	addi r7, r28, 0
     /* 8036497C 0036155C  39 1D 00 00 */	addi r8, r29, 0
     /* 80364980 00361560  38 A0 00 06 */	li r5, 6
-    /* 80364984 00361564  4B FF FC 55 */	bl func_803645D8
+    /* 80364984 00361564  4B FF FC 55 */	bl callbackForeachFunc
 lbl_80364988:
     /* 80364988 00361568  80 19 00 14 */	lwz r0, 0x14(r25)
     /* 8036498C 0036156C  70 00 40 20 */	andi. r0, r0, 0x4020
@@ -645,7 +645,7 @@ lbl_803649BC:
     /* 803649D8 003615B8  38 FC 00 00 */	addi r7, r28, 0
     /* 803649DC 003615BC  39 1D 00 00 */	addi r8, r29, 0
     /* 803649E0 003615C0  38 A0 00 03 */	li r5, 3
-    /* 803649E4 003615C4  4B FF FB F5 */	bl func_803645D8
+    /* 803649E4 003615C4  4B FF FB F5 */	bl callbackForeachFunc
 lbl_803649E8:
     /* 803649E8 003615C8  82 BE 00 08 */	lwz r21, 8(r30)
     /* 803649EC 003615CC  28 15 00 00 */	cmplwi r21, 0
@@ -660,14 +660,14 @@ lbl_803649E8:
     /* 80364A10 003615F0  38 FC 00 00 */	addi r7, r28, 0
     /* 80364A14 003615F4  39 1D 00 00 */	addi r8, r29, 0
     /* 80364A18 003615F8  38 A0 00 08 */	li r5, 8
-    /* 80364A1C 003615FC  4B FF FB BD */	bl func_803645D8
+    /* 80364A1C 003615FC  4B FF FB BD */	bl callbackForeachFunc
 lbl_80364A20:
     /* 80364A20 00361600  80 75 00 08 */	lwz r3, 8(r21)
     /* 80364A24 00361604  38 9A 00 00 */	addi r4, r26, 0
     /* 80364A28 00361608  38 BB 00 00 */	addi r5, r27, 0
     /* 80364A2C 0036160C  38 DC 00 00 */	addi r6, r28, 0
     /* 80364A30 00361610  38 FD 00 00 */	addi r7, r29, 0
-    /* 80364A34 00361614  4B FF FC C1 */	bl func_803646F4
+    /* 80364A34 00361614  4B FF FC C1 */	bl TObjForeachAnim
 lbl_80364A38:
     /* 80364A38 00361618  2C 16 00 00 */	cmpwi r22, 0
     /* 80364A3C 0036161C  80 9E 00 0C */	lwz r4, 0xc(r30)
@@ -688,7 +688,7 @@ lbl_80364A38:
     /* 80364A78 00361658  38 FC 00 00 */	addi r7, r28, 0
     /* 80364A7C 0036165C  39 1D 00 00 */	addi r8, r29, 0
     /* 80364A80 00361660  38 A0 00 09 */	li r5, 9
-    /* 80364A84 00361664  4B FF FB 55 */	bl func_803645D8
+    /* 80364A84 00361664  4B FF FB 55 */	bl callbackForeachFunc
 lbl_80364A88:
     /* 80364A88 00361668  83 DE 00 04 */	lwz r30, 4(r30)
 lbl_80364A8C:
@@ -709,7 +709,7 @@ lbl_80364AA0:
     /* 80364ABC 0036169C  38 FC 00 00 */	addi r7, r28, 0
     /* 80364AC0 003616A0  39 1D 00 00 */	addi r8, r29, 0
     /* 80364AC4 003616A4  38 A0 00 0A */	li r5, 0xa
-    /* 80364AC8 003616A8  4B FF FB 11 */	bl func_803645D8
+    /* 80364AC8 003616A8  4B FF FB 11 */	bl callbackForeachFunc
 lbl_80364ACC:
     /* 80364ACC 003616AC  83 18 00 00 */	lwz r24, 0(r24)
 lbl_80364AD0:
@@ -740,7 +740,7 @@ lbl_80364B08:
     /* 80364B28 00361708  38 FC 00 00 */	addi r7, r28, 0
     /* 80364B2C 0036170C  39 1D 00 00 */	addi r8, r29, 0
     /* 80364B30 00361710  38 A0 00 06 */	li r5, 6
-    /* 80364B34 00361714  4B FF FA A5 */	bl func_803645D8
+    /* 80364B34 00361714  4B FF FA A5 */	bl callbackForeachFunc
 lbl_80364B38:
     /* 80364B38 00361718  80 19 00 14 */	lwz r0, 0x14(r25)
     /* 80364B3C 0036171C  70 00 40 20 */	andi. r0, r0, 0x4020
@@ -772,7 +772,7 @@ lbl_80364B78:
     /* 80364B94 00361774  38 FC 00 00 */	addi r7, r28, 0
     /* 80364B98 00361778  39 1D 00 00 */	addi r8, r29, 0
     /* 80364B9C 0036177C  38 A0 00 0A */	li r5, 0xa
-    /* 80364BA0 00361780  4B FF FA 39 */	bl func_803645D8
+    /* 80364BA0 00361780  4B FF FA 39 */	bl callbackForeachFunc
 lbl_80364BA4:
     /* 80364BA4 00361784  83 18 00 00 */	lwz r24, 0(r24)
 lbl_80364BA8:
@@ -807,7 +807,7 @@ lbl_80364BF4:
     /* 80364C04 003617E4  4E 80 00 20 */	blr 
 }
 
-asm void func_80364C08(void)
+asm void HSD_ForeachAnim(void)
 {
     nofralloc
     /* 80364C08 003617E8  7C 08 02 A6 */	mflr r0
@@ -904,7 +904,7 @@ lbl_80364D44:
     /* 80364D64 00361944  38 FF 00 00 */	addi r7, r31, 0
     /* 80364D68 00361948  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80364D6C 0036194C  38 A0 00 06 */	li r5, 6
-    /* 80364D70 00361950  4B FF F8 69 */	bl func_803645D8
+    /* 80364D70 00361950  4B FF F8 69 */	bl callbackForeachFunc
 lbl_80364D74:
     /* 80364D74 00361954  80 1B 00 14 */	lwz r0, 0x14(r27)
     /* 80364D78 00361958  70 00 40 20 */	andi. r0, r0, 0x4020
@@ -937,7 +937,7 @@ lbl_80364DB8:
     /* 80364DD4 003619B4  38 FF 00 00 */	addi r7, r31, 0
     /* 80364DD8 003619B8  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80364DDC 003619BC  38 A0 00 0A */	li r5, 0xa
-    /* 80364DE0 003619C0  4B FF F7 F9 */	bl func_803645D8
+    /* 80364DE0 003619C0  4B FF F7 F9 */	bl callbackForeachFunc
 lbl_80364DE4:
     /* 80364DE4 003619C4  83 9C 00 00 */	lwz r28, 0(r28)
 lbl_80364DE8:
@@ -975,7 +975,7 @@ lbl_80364E3C:
     /* 80364E58 00361A38  38 FF 00 00 */	addi r7, r31, 0
     /* 80364E5C 00361A3C  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80364E60 00361A40  38 A0 00 03 */	li r5, 3
-    /* 80364E64 00361A44  4B FF F7 75 */	bl func_803645D8
+    /* 80364E64 00361A44  4B FF F7 75 */	bl callbackForeachFunc
 lbl_80364E68:
     /* 80364E68 00361A48  83 1B 00 08 */	lwz r24, 8(r27)
     /* 80364E6C 00361A4C  28 18 00 00 */	cmplwi r24, 0
@@ -990,14 +990,14 @@ lbl_80364E68:
     /* 80364E90 00361A70  38 FF 00 00 */	addi r7, r31, 0
     /* 80364E94 00361A74  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80364E98 00361A78  38 A0 00 08 */	li r5, 8
-    /* 80364E9C 00361A7C  4B FF F7 3D */	bl func_803645D8
+    /* 80364E9C 00361A7C  4B FF F7 3D */	bl callbackForeachFunc
 lbl_80364EA0:
     /* 80364EA0 00361A80  80 78 00 08 */	lwz r3, 8(r24)
     /* 80364EA4 00361A84  38 9D 00 00 */	addi r4, r29, 0
     /* 80364EA8 00361A88  38 BE 00 00 */	addi r5, r30, 0
     /* 80364EAC 00361A8C  38 DF 00 00 */	addi r6, r31, 0
     /* 80364EB0 00361A90  38 E1 00 7C */	addi r7, r1, 0x7c
-    /* 80364EB4 00361A94  4B FF F8 41 */	bl func_803646F4
+    /* 80364EB4 00361A94  4B FF F8 41 */	bl TObjForeachAnim
 lbl_80364EB8:
     /* 80364EB8 00361A98  2C 19 00 00 */	cmpwi r25, 0
     /* 80364EBC 00361A9C  80 9B 00 0C */	lwz r4, 0xc(r27)
@@ -1018,7 +1018,7 @@ lbl_80364EB8:
     /* 80364EF8 00361AD8  38 FF 00 00 */	addi r7, r31, 0
     /* 80364EFC 00361ADC  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80364F00 00361AE0  38 A0 00 09 */	li r5, 9
-    /* 80364F04 00361AE4  4B FF F6 D5 */	bl func_803645D8
+    /* 80364F04 00361AE4  4B FF F6 D5 */	bl callbackForeachFunc
 lbl_80364F08:
     /* 80364F08 00361AE8  83 7B 00 04 */	lwz r27, 4(r27)
 lbl_80364F0C:
@@ -1037,7 +1037,7 @@ lbl_80364F0C:
     /* 80364F3C 00361B1C  38 FF 00 00 */	addi r7, r31, 0
     /* 80364F40 00361B20  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80364F44 00361B24  38 A0 00 08 */	li r5, 8
-    /* 80364F48 00361B28  4B FF F6 91 */	bl func_803645D8
+    /* 80364F48 00361B28  4B FF F6 91 */	bl callbackForeachFunc
 lbl_80364F4C:
     /* 80364F4C 00361B2C  83 7B 00 08 */	lwz r27, 8(r27)
     /* 80364F50 00361B30  57 B9 05 6A */	rlwinm r25, r29, 0, 0x15, 0x15
@@ -1053,7 +1053,7 @@ lbl_80364F58:
     /* 80364F74 00361B54  38 FF 00 00 */	addi r7, r31, 0
     /* 80364F78 00361B58  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80364F7C 00361B5C  38 A0 00 0B */	li r5, 0xb
-    /* 80364F80 00361B60  4B FF F6 59 */	bl func_803645D8
+    /* 80364F80 00361B60  4B FF F6 59 */	bl callbackForeachFunc
 lbl_80364F84:
     /* 80364F84 00361B64  83 7B 00 08 */	lwz r27, 8(r27)
 lbl_80364F88:
@@ -1079,7 +1079,7 @@ lbl_80364F88:
     /* 80364FD4 00361BB4  38 FF 00 00 */	addi r7, r31, 0
     /* 80364FD8 00361BB8  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80364FDC 00361BBC  38 A0 00 09 */	li r5, 9
-    /* 80364FE0 00361BC0  4B FF F5 F9 */	bl func_803645D8
+    /* 80364FE0 00361BC0  4B FF F5 F9 */	bl callbackForeachFunc
     /* 80364FE4 00361BC4  48 00 03 14 */	b lbl_803652F8
     /* 80364FE8 00361BC8  57 B9 05 6A */	rlwinm r25, r29, 0, 0x15, 0x15
     /* 80364FEC 00361BCC  48 00 00 34 */	b lbl_80365020
@@ -1094,7 +1094,7 @@ lbl_80364FF0:
     /* 8036500C 00361BEC  38 FF 00 00 */	addi r7, r31, 0
     /* 80365010 00361BF0  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80365014 00361BF4  38 A0 00 0B */	li r5, 0xb
-    /* 80365018 00361BF8  4B FF F5 C1 */	bl func_803645D8
+    /* 80365018 00361BF8  4B FF F5 C1 */	bl callbackForeachFunc
 lbl_8036501C:
     /* 8036501C 00361BFC  83 7B 00 08 */	lwz r27, 8(r27)
 lbl_80365020:
@@ -1115,7 +1115,7 @@ lbl_80365038:
     /* 80365054 00361C34  38 FF 00 00 */	addi r7, r31, 0
     /* 80365058 00361C38  39 01 00 7C */	addi r8, r1, 0x7c
     /* 8036505C 00361C3C  38 A0 00 07 */	li r5, 7
-    /* 80365060 00361C40  4B FF F5 79 */	bl func_803645D8
+    /* 80365060 00361C40  4B FF F5 79 */	bl callbackForeachFunc
 lbl_80365064:
     /* 80365064 00361C44  83 1B 00 18 */	lwz r24, 0x18(r27)
     /* 80365068 00361C48  28 18 00 00 */	cmplwi r24, 0
@@ -1130,14 +1130,14 @@ lbl_80365064:
     /* 8036508C 00361C6C  38 FF 00 00 */	addi r7, r31, 0
     /* 80365090 00361C70  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80365094 00361C74  38 A0 00 0C */	li r5, 0xc
-    /* 80365098 00361C78  4B FF F5 41 */	bl func_803645D8
+    /* 80365098 00361C78  4B FF F5 41 */	bl callbackForeachFunc
 lbl_8036509C:
     /* 8036509C 00361C7C  80 78 00 1C */	lwz r3, 0x1c(r24)
     /* 803650A0 00361C80  38 9D 00 00 */	addi r4, r29, 0
     /* 803650A4 00361C84  38 BE 00 00 */	addi r5, r30, 0
     /* 803650A8 00361C88  38 DF 00 00 */	addi r6, r31, 0
     /* 803650AC 00361C8C  38 E1 00 7C */	addi r7, r1, 0x7c
-    /* 803650B0 00361C90  4B FF F6 B9 */	bl func_80364768
+    /* 803650B0 00361C90  4B FF F6 B9 */	bl RObjForeachAnim
 lbl_803650B4:
     /* 803650B4 00361C94  83 1B 00 1C */	lwz r24, 0x1c(r27)
     /* 803650B8 00361C98  28 18 00 00 */	cmplwi r24, 0
@@ -1152,14 +1152,14 @@ lbl_803650B4:
     /* 803650DC 00361CBC  38 FF 00 00 */	addi r7, r31, 0
     /* 803650E0 00361CC0  39 01 00 7C */	addi r8, r1, 0x7c
     /* 803650E4 00361CC4  38 A0 00 0C */	li r5, 0xc
-    /* 803650E8 00361CC8  4B FF F4 F1 */	bl func_803645D8
+    /* 803650E8 00361CC8  4B FF F4 F1 */	bl callbackForeachFunc
 lbl_803650EC:
     /* 803650EC 00361CCC  80 78 00 1C */	lwz r3, 0x1c(r24)
     /* 803650F0 00361CD0  38 9D 00 00 */	addi r4, r29, 0
     /* 803650F4 00361CD4  38 BE 00 00 */	addi r5, r30, 0
     /* 803650F8 00361CD8  38 DF 00 00 */	addi r6, r31, 0
     /* 803650FC 00361CDC  38 E1 00 7C */	addi r7, r1, 0x7c
-    /* 80365100 00361CE0  4B FF F6 69 */	bl func_80364768
+    /* 80365100 00361CE0  4B FF F6 69 */	bl RObjForeachAnim
 lbl_80365104:
     /* 80365104 00361CE4  83 7B 00 0C */	lwz r27, 0xc(r27)
 lbl_80365108:
@@ -1178,7 +1178,7 @@ lbl_80365108:
     /* 80365138 00361D18  38 FF 00 00 */	addi r7, r31, 0
     /* 8036513C 00361D1C  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80365140 00361D20  38 A0 00 02 */	li r5, 2
-    /* 80365144 00361D24  4B FF F4 95 */	bl func_803645D8
+    /* 80365144 00361D24  4B FF F4 95 */	bl callbackForeachFunc
 lbl_80365148:
     /* 80365148 00361D28  83 1B 00 24 */	lwz r24, 0x24(r27)
     /* 8036514C 00361D2C  28 18 00 00 */	cmplwi r24, 0
@@ -1193,14 +1193,14 @@ lbl_80365148:
     /* 80365170 00361D50  38 FF 00 00 */	addi r7, r31, 0
     /* 80365174 00361D54  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80365178 00361D58  38 A0 00 0C */	li r5, 0xc
-    /* 8036517C 00361D5C  4B FF F4 5D */	bl func_803645D8
+    /* 8036517C 00361D5C  4B FF F4 5D */	bl callbackForeachFunc
 lbl_80365180:
     /* 80365180 00361D60  80 78 00 1C */	lwz r3, 0x1c(r24)
     /* 80365184 00361D64  38 9D 00 00 */	addi r4, r29, 0
     /* 80365188 00361D68  38 BE 00 00 */	addi r5, r30, 0
     /* 8036518C 00361D6C  38 DF 00 00 */	addi r6, r31, 0
     /* 80365190 00361D70  38 E1 00 7C */	addi r7, r1, 0x7c
-    /* 80365194 00361D74  4B FF F5 D5 */	bl func_80364768
+    /* 80365194 00361D74  4B FF F5 D5 */	bl RObjForeachAnim
 lbl_80365198:
     /* 80365198 00361D78  83 1B 00 28 */	lwz r24, 0x28(r27)
     /* 8036519C 00361D7C  28 18 00 00 */	cmplwi r24, 0
@@ -1215,14 +1215,14 @@ lbl_80365198:
     /* 803651C0 00361DA0  38 FF 00 00 */	addi r7, r31, 0
     /* 803651C4 00361DA4  39 01 00 7C */	addi r8, r1, 0x7c
     /* 803651C8 00361DA8  38 A0 00 0C */	li r5, 0xc
-    /* 803651CC 00361DAC  4B FF F4 0D */	bl func_803645D8
+    /* 803651CC 00361DAC  4B FF F4 0D */	bl callbackForeachFunc
 lbl_803651D0:
     /* 803651D0 00361DB0  80 78 00 1C */	lwz r3, 0x1c(r24)
     /* 803651D4 00361DB4  38 9D 00 00 */	addi r4, r29, 0
     /* 803651D8 00361DB8  38 BE 00 00 */	addi r5, r30, 0
     /* 803651DC 00361DBC  38 DF 00 00 */	addi r6, r31, 0
     /* 803651E0 00361DC0  38 E1 00 7C */	addi r7, r1, 0x7c
-    /* 803651E4 00361DC4  4B FF F5 85 */	bl func_80364768
+    /* 803651E4 00361DC4  4B FF F5 85 */	bl RObjForeachAnim
     /* 803651E8 00361DC8  48 00 01 10 */	b lbl_803652F8
     /* 803651EC 00361DCC  57 B9 05 AC */	rlwinm r25, r29, 0, 0x16, 0x16
     /* 803651F0 00361DD0  48 00 00 34 */	b lbl_80365224
@@ -1237,7 +1237,7 @@ lbl_803651F4:
     /* 80365210 00361DF0  38 FF 00 00 */	addi r7, r31, 0
     /* 80365214 00361DF4  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80365218 00361DF8  38 A0 00 0A */	li r5, 0xa
-    /* 8036521C 00361DFC  4B FF F3 BD */	bl func_803645D8
+    /* 8036521C 00361DFC  4B FF F3 BD */	bl callbackForeachFunc
 lbl_80365220:
     /* 80365220 00361E00  83 7B 00 00 */	lwz r27, 0(r27)
 lbl_80365224:
@@ -1256,7 +1256,7 @@ lbl_80365224:
     /* 80365254 00361E34  38 FF 00 00 */	addi r7, r31, 0
     /* 80365258 00361E38  39 01 00 7C */	addi r8, r1, 0x7c
     /* 8036525C 00361E3C  38 A0 00 0C */	li r5, 0xc
-    /* 80365260 00361E40  4B FF F3 79 */	bl func_803645D8
+    /* 80365260 00361E40  4B FF F3 79 */	bl callbackForeachFunc
 lbl_80365264:
     /* 80365264 00361E44  83 7B 00 1C */	lwz r27, 0x1c(r27)
     /* 80365268 00361E48  57 B9 05 AC */	rlwinm r25, r29, 0, 0x16, 0x16
@@ -1272,7 +1272,7 @@ lbl_80365270:
     /* 8036528C 00361E6C  38 FF 00 00 */	addi r7, r31, 0
     /* 80365290 00361E70  39 01 00 7C */	addi r8, r1, 0x7c
     /* 80365294 00361E74  38 A0 00 0A */	li r5, 0xa
-    /* 80365298 00361E78  4B FF F3 41 */	bl func_803645D8
+    /* 80365298 00361E78  4B FF F3 41 */	bl callbackForeachFunc
 lbl_8036529C:
     /* 8036529C 00361E7C  83 7B 00 00 */	lwz r27, 0(r27)
 lbl_803652A0:
@@ -1291,7 +1291,7 @@ lbl_803652A0:
     /* 803652D0 00361EB0  38 FF 00 00 */	addi r7, r31, 0
     /* 803652D4 00361EB4  39 01 00 7C */	addi r8, r1, 0x7c
     /* 803652D8 00361EB8  38 A0 00 05 */	li r5, 5
-    /* 803652DC 00361EBC  4B FF F2 FD */	bl func_803645D8
+    /* 803652DC 00361EBC  4B FF F2 FD */	bl callbackForeachFunc
     /* 803652E0 00361EC0  48 00 00 18 */	b lbl_803652F8
 lbl_803652E4:
     /* 803652E4 00361EC4  3C 60 80 40 */	lis r3, lbl_8040603C@ha

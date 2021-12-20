@@ -16,6 +16,22 @@
 #define AOBJ_LOOP (1 << 29)
 #define AOBJ_NO_ANIM (1 << 30)
 
+typedef enum _AObj_Arg_Type
+{
+    AOBJ_ARG_A,
+    AOBJ_ARG_AF,
+    AOBJ_ARG_AV,
+    AOBJ_ARG_AU,
+    AOBJ_ARG_AO,
+    AOBJ_ARG_AOF,
+    AOBJ_ARG_AOV,
+    AOBJ_ARG_AOU,
+    AOBJ_ARG_AOT,
+    AOBJ_ARG_AOTF,
+    AOBJ_ARG_AOTV,
+    AOBJ_ARG_AOTU,
+} AObj_Arg_Type;
+
 typedef struct _HSD_AObj {
     u32 flags;
     f32 curr_frame;
@@ -57,8 +73,8 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc);
 void HSD_AObjRemove(HSD_AObj* aobj);
 HSD_AObj* HSD_AObjAlloc(void);
 void HSD_AObjFree(HSD_AObj* aobj);
-void func_803645D8(void);
-void func_803646F4(void);
+void callbackForeachFunc(HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, FObjData *arg);
+void TObjForeachAnim(void);
 void func_803647DC(void);
 void func_80364924(void);
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate);
