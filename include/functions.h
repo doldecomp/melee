@@ -7590,7 +7590,7 @@ f32 tanf(f32);
 // ? PPCMthid2(?);
 // ? PPCMtwpar(?);
 // ? DBInit(?);
-// ? func_80335EE8(?);
+// ? DBIsDebuggerPresent(?);
 // ? __DBIsExceptionMarked(?);
 // ? DBPrintf(?);
 // ? DSPCheckMailToDSP(?);
