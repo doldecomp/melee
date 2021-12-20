@@ -25,6 +25,11 @@ typedef struct _GXRenderModeObj {
 	u8  vfilter[7];
 } GXRenderModeObj;
 
+typedef struct _GXLightObj
+{
+    u32 dummy[16];
+} GXLightObj;
+
 typedef struct _GXColor {
     u8 r, g, b, a;
 } GXColor;
@@ -75,5 +80,7 @@ typedef struct _GXColorS10 {
 #define GX_GM_2_2           2
 
 #define GX_MAX_Z24          0x00ffffff
+
+#define MAX_GXLIGHT         9
 
 #endif
