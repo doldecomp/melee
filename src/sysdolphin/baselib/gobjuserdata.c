@@ -16,7 +16,7 @@ void GObj_InitUserData(HSD_GObj *gobj, u8 kind, void (*remove_func)(), void *dat
 
 void GObj_RemoveUserData(HSD_GObj *gobj)
 {
-    if (gobj->user_data_kind == (u8)HSD_GOBJ_USER_DATA_NONE)
+    if (gobj->user_data_kind == HSD_GOBJ_USER_DATA_NONE)
         return;
     
     if (gobj->user_data_remove_func == NULL) {
