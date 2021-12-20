@@ -2,94 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global DSPCheckMailToDSP
-DSPCheckMailToDSP:
-/* 80335FC8 00332BA8  3C 60 CC 00 */	lis r3, 0xCC005000@ha
-/* 80335FCC 00332BAC  A0 03 50 00 */	lhz r0, 0xCC005000@l(r3)
-/* 80335FD0 00332BB0  54 03 8F FE */	rlwinm r3, r0, 0x11, 0x1f, 0x1f
-/* 80335FD4 00332BB4  4E 80 00 20 */	blr 
-
-.global func_80335FD8
-func_80335FD8:
-/* 80335FD8 00332BB8  3C 60 CC 00 */	lis r3, 0xCC005004@ha
-/* 80335FDC 00332BBC  A0 03 50 04 */	lhz r0, 0xCC005004@l(r3)
-/* 80335FE0 00332BC0  54 03 8F FE */	rlwinm r3, r0, 0x11, 0x1f, 0x1f
-/* 80335FE4 00332BC4  4E 80 00 20 */	blr 
-
-.global func_80335FE8
-func_80335FE8:
-/* 80335FE8 00332BC8  3C 60 CC 00 */	lis r3, 0xCC005000@ha
-/* 80335FEC 00332BCC  38 63 50 00 */	addi r3, r3, 0xCC005000@l
-/* 80335FF0 00332BD0  A0 03 00 04 */	lhz r0, 4(r3)
-/* 80335FF4 00332BD4  A0 63 00 06 */	lhz r3, 6(r3)
-/* 80335FF8 00332BD8  50 03 80 1E */	rlwimi r3, r0, 0x10, 0, 0xf
-/* 80335FFC 00332BDC  4E 80 00 20 */	blr 
-
-.global func_80336000
-func_80336000:
-/* 80336000 00332BE0  3C 80 CC 00 */	lis r4, 0xCC005000@ha
-/* 80336004 00332BE4  54 60 84 3E */	srwi r0, r3, 0x10
-/* 80336008 00332BE8  B0 04 50 00 */	sth r0, 0xCC005000@l(r4)
-/* 8033600C 00332BEC  B0 64 50 02 */	sth r3, 0x5002(r4)
-/* 80336010 00332BF0  4E 80 00 20 */	blr 
-
-.global func_80336014
-func_80336014:
-/* 80336014 00332BF4  7C 08 02 A6 */	mflr r0
-/* 80336018 00332BF8  3C 60 80 40 */	lis r3, lbl_80400C08@ha
-/* 8033601C 00332BFC  90 01 00 04 */	stw r0, 4(r1)
-/* 80336020 00332C00  38 63 0C 08 */	addi r3, r3, lbl_80400C08@l
-/* 80336024 00332C04  4C C6 31 82 */	crclr 6
-/* 80336028 00332C08  38 83 00 20 */	addi r4, r3, 0x20
-/* 8033602C 00332C0C  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 80336030 00332C10  38 A3 00 2C */	addi r5, r3, 0x2c
-/* 80336034 00332C14  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80336038 00332C18  48 00 01 D5 */	bl __DSP_debug_printf
-/* 8033603C 00332C1C  80 0D BB 70 */	lwz r0, lbl_804D7210@sda21(r13)
-/* 80336040 00332C20  2C 00 00 01 */	cmpwi r0, 1
-/* 80336044 00332C24  41 82 00 74 */	beq lbl_803360B8
-/* 80336048 00332C28  48 01 13 1D */	bl OSDisableInterrupts
-/* 8033604C 00332C2C  3C 80 80 33 */	lis r4, __DSPHandler@ha
-/* 80336050 00332C30  3B E3 00 00 */	addi r31, r3, 0
-/* 80336054 00332C34  38 84 62 5C */	addi r4, r4, __DSPHandler@l
-/* 80336058 00332C38  38 60 00 07 */	li r3, 7
-/* 8033605C 00332C3C  48 01 13 55 */	bl __OSSetInterruptHandler
-/* 80336060 00332C40  3C 60 01 00 */	lis r3, 0x100
-/* 80336064 00332C44  48 01 17 51 */	bl __OSUnmaskInterrupts
-/* 80336068 00332C48  3C 60 CC 00 */	lis r3, 0xCC005000@ha
-/* 8033606C 00332C4C  38 C3 50 00 */	addi r6, r3, 0xCC005000@l
-/* 80336070 00332C50  A0 63 50 0A */	lhz r3, 0x500a(r3)
-/* 80336074 00332C54  38 00 FF 57 */	li r0, -169
-/* 80336078 00332C58  7C 60 00 38 */	and r0, r3, r0
-/* 8033607C 00332C5C  60 00 08 00 */	ori r0, r0, 0x800
-/* 80336080 00332C60  B0 06 00 0A */	sth r0, 0xa(r6)
-/* 80336084 00332C64  38 A0 FF 53 */	li r5, -173
-/* 80336088 00332C68  38 80 00 00 */	li r4, 0
-/* 8033608C 00332C6C  A0 E6 00 0A */	lhz r7, 0xa(r6)
-/* 80336090 00332C70  38 00 00 01 */	li r0, 1
-/* 80336094 00332C74  38 7F 00 00 */	addi r3, r31, 0
-/* 80336098 00332C78  7C E5 28 38 */	and r5, r7, r5
-/* 8033609C 00332C7C  B0 A6 00 0A */	sth r5, 0xa(r6)
-/* 803360A0 00332C80  90 8D BB 80 */	stw r4, lbl_804D7220@sda21(r13)
-/* 803360A4 00332C84  90 8D BB 8C */	stw r4, lbl_804D722C@sda21(r13)
-/* 803360A8 00332C88  90 8D BB 84 */	stw r4, lbl_804D7224@sda21(r13)
-/* 803360AC 00332C8C  90 8D BB 88 */	stw r4, lbl_804D7228@sda21(r13)
-/* 803360B0 00332C90  90 0D BB 70 */	stw r0, lbl_804D7210@sda21(r13)
-/* 803360B4 00332C94  48 01 12 D9 */	bl OSRestoreInterrupts
-lbl_803360B8:
-/* 803360B8 00332C98  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 803360BC 00332C9C  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 803360C0 00332CA0  38 21 00 10 */	addi r1, r1, 0x10
-/* 803360C4 00332CA4  7C 08 03 A6 */	mtlr r0
-/* 803360C8 00332CA8  4E 80 00 20 */	blr 
-
-.global func_803360CC
-func_803360CC:
-/* 803360CC 00332CAC  80 6D BB 70 */	lwz r3, lbl_804D7210@sda21(r13)
-/* 803360D0 00332CB0  4E 80 00 20 */	blr 
-
-.global func_803360D4
-func_803360D4:
+.global DSPAddTask
+DSPAddTask:
 /* 803360D4 00332CB4  7C 08 02 A6 */	mflr r0
 /* 803360D8 00332CB8  90 01 00 04 */	stw r0, 4(r1)
 /* 803360DC 00332CBC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -106,7 +20,7 @@ func_803360D4:
 /* 80336108 00332CE8  38 7F 00 00 */	addi r3, r31, 0
 /* 8033610C 00332CEC  90 1E 00 08 */	stw r0, 8(r30)
 /* 80336110 00332CF0  48 01 12 7D */	bl OSRestoreInterrupts
-/* 80336114 00332CF4  80 0D BB 88 */	lwz r0, lbl_804D7228@sda21(r13)
+/* 80336114 00332CF4  80 0D BB 88 */	lwz r0, __DSP_first_task@sda21(r13)
 /* 80336118 00332CF8  7C 1E 00 40 */	cmplw r30, r0
 /* 8033611C 00332CFC  40 82 00 0C */	bne lbl_80336128
 /* 80336120 00332D00  7F C3 F3 78 */	mr r3, r30
@@ -120,8 +34,8 @@ lbl_80336128:
 /* 8033613C 00332D1C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80336140 00332D20  4E 80 00 20 */	blr 
 
-.global func_80336144
-func_80336144:
+.global DSPAssertTask
+DSPAssertTask:
 /* 80336144 00332D24  7C 08 02 A6 */	mflr r0
 /* 80336148 00332D28  90 01 00 04 */	stw r0, 4(r1)
 /* 8033614C 00332D2C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -129,14 +43,14 @@ func_80336144:
 /* 80336154 00332D34  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80336158 00332D38  7C 7E 1B 78 */	mr r30, r3
 /* 8033615C 00332D3C  48 01 12 09 */	bl OSDisableInterrupts
-/* 80336160 00332D40  80 8D BB 8C */	lwz r4, lbl_804D722C@sda21(r13)
+/* 80336160 00332D40  80 8D BB 8C */	lwz r4, __DSP_curr_task@sda21(r13)
 /* 80336164 00332D44  3B E3 00 00 */	addi r31, r3, 0
 /* 80336168 00332D48  7C 04 F0 40 */	cmplw r4, r30
 /* 8033616C 00332D4C  40 82 00 20 */	bne lbl_8033618C
 /* 80336170 00332D50  38 00 00 01 */	li r0, 1
-/* 80336174 00332D54  93 CD BB 7C */	stw r30, lbl_804D721C@sda21(r13)
+/* 80336174 00332D54  93 CD BB 7C */	stw r30, __DSP_rude_task@sda21(r13)
 /* 80336178 00332D58  7F E3 FB 78 */	mr r3, r31
-/* 8033617C 00332D5C  90 0D BB 78 */	stw r0, lbl_804D7218@sda21(r13)
+/* 8033617C 00332D5C  90 0D BB 78 */	stw r0, __DSP_rude_task_pending@sda21(r13)
 /* 80336180 00332D60  48 01 12 0D */	bl OSRestoreInterrupts
 /* 80336184 00332D64  7F C3 F3 78 */	mr r3, r30
 /* 80336188 00332D68  48 00 00 6C */	b lbl_803361F4
@@ -146,8 +60,8 @@ lbl_8033618C:
 /* 80336194 00332D74  7C 03 00 40 */	cmplw r3, r0
 /* 80336198 00332D78  40 80 00 50 */	bge lbl_803361E8
 /* 8033619C 00332D7C  38 00 00 01 */	li r0, 1
-/* 803361A0 00332D80  93 CD BB 7C */	stw r30, lbl_804D721C@sda21(r13)
-/* 803361A4 00332D84  90 0D BB 78 */	stw r0, lbl_804D7218@sda21(r13)
+/* 803361A0 00332D80  93 CD BB 7C */	stw r30, __DSP_rude_task@sda21(r13)
+/* 803361A4 00332D84  90 0D BB 78 */	stw r0, __DSP_rude_task_pending@sda21(r13)
 /* 803361A8 00332D88  80 04 00 00 */	lwz r0, 0(r4)
 /* 803361AC 00332D8C  28 00 00 01 */	cmplwi r0, 1
 /* 803361B0 00332D90  40 82 00 28 */	bne lbl_803361D8
@@ -180,24 +94,6 @@ lbl_803361F4:
 
 .section .sbss
 
-.global lbl_804D7210
-lbl_804D7210:
+.global __DSP_init_flag
+__DSP_init_flag:
 	.skip 0x8
-.global lbl_804D7218
-lbl_804D7218:
-	.skip 0x4
-.global lbl_804D721C
-lbl_804D721C:
-	.skip 0x4
-.global lbl_804D7220
-lbl_804D7220:
-	.skip 0x4
-.global lbl_804D7224
-lbl_804D7224:
-	.skip 0x4
-.global lbl_804D7228
-lbl_804D7228:
-	.skip 0x4
-.global lbl_804D722C
-lbl_804D722C:
-	.skip 0x4
