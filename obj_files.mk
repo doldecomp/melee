@@ -227,7 +227,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MetroTRK/dolphin_trk_glue.o    \
 	$(BUILD_DIR)/asm/MetroTRK/targcont.o            \
 													\
-	$(BUILD_DIR)/asm/dolphin/amcstubs/AmcExi2Stubs.o		\
+	$(BUILD_DIR)/src/dolphin/amcstubs/AmcExi2Stubs.o		\
 	$(BUILD_DIR)/asm/dolphin/OdemuExi2/DebuggerDriver.o     \
 	$(BUILD_DIR)/asm/dolphin/hio/hio.o              \
 	$(BUILD_DIR)/asm/dolphin/mcc/mcc.o              \
