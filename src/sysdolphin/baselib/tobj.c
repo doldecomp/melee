@@ -2,6 +2,9 @@
 
 #include "sysdolphin/baselib/aobj.h"
 
+extern char lbl_804055B8[];
+extern char lbl_804D5C90[7];// = "tobj.c\0";
+
 inline void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
     if (tobj == NULL){
@@ -118,3 +121,101 @@ void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
 {
     HSD_TObjReqAnimAllByFlags_inline(tobj, startframe, TOBJ_ANIM);
 }
+
+// Non-matching due to jump table
+#ifdef NON_MATCHING
+static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
+{
+    HSD_TObj* tobj = obj;
+
+    if (tobj == NULL)
+        return;
+
+    switch (type) {
+    case HSD_A_T_TIMG: {
+        int n;
+        if (tobj->imagetbl == NULL){
+            __assert(lbl_804D5C90, 276, lbl_804055B8);
+        }
+        n = (int)val->fv;
+        if (tobj->imagetbl[n]) {
+            tobj->imagedesc = tobj->imagetbl[n];
+        }
+    } break;
+    case HSD_A_T_TCLT: {
+        if (tobj->tluttbl) {
+            tobj->tlut_no = (u8)val->fv;
+        }
+    } break;
+    case HSD_A_T_BLEND:
+        tobj->blending = val->fv;
+        break;
+    case HSD_A_T_ROTX:
+        tobj->rotate.x = val->fv;
+        goto mtxdirty;
+    case HSD_A_T_ROTY:
+        tobj->rotate.y = val->fv;
+        goto mtxdirty;
+    case HSD_A_T_ROTZ:
+        tobj->rotate.z = val->fv;
+        goto mtxdirty;
+    case HSD_A_T_TRAU:
+        tobj->translate.x = val->fv;
+        goto mtxdirty;
+    case HSD_A_T_TRAV:
+        tobj->translate.y = val->fv;
+        goto mtxdirty;
+    case HSD_A_T_SCAU:
+        tobj->scale.x = val->fv;
+        goto mtxdirty;
+    case HSD_A_T_SCAV:
+        tobj->scale.y = val->fv;
+        goto mtxdirty;
+    mtxdirty:
+        tobj->flags |= TEX_MTX_DIRTY;
+        break;
+    case HSD_A_T_LOD_BIAS:
+        tobj->lod->LODBias = val->fv;
+        break;
+    case HSD_A_T_KONST_R:
+        tobj->tev->konst.r = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_KONST_G:
+        tobj->tev->konst.g = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_KONST_B:
+        tobj->tev->konst.b = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_KONST_A:
+        tobj->tev->konst.a = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TEV0_R:
+        tobj->tev->tev0.r = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TEV0_G:
+        tobj->tev->tev0.g = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TEV0_B:
+        tobj->tev->tev0.b = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TEV0_A:
+        tobj->tev->tev0.a = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TEV1_R:
+        tobj->tev->tev1.r = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TEV1_G:
+        tobj->tev->tev1.g = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TEV1_B:
+        tobj->tev->tev1.b = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TEV1_A:
+        tobj->tev->tev1.a = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_T_TS_BLEND:
+        tobj->blending = val->fv;
+        break;
+    }
+}
+#endif
