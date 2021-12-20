@@ -352,7 +352,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjplink.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjgxlink.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjobject.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjuserdata.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/gobjuserdata.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobj.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobj.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/code_80391580.o		\
