@@ -370,6 +370,19 @@ lbl_80337DD8:
 /* 80337DE4 003349C4  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80400D80
+lbl_80400D80:
+    .asciz "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n"
+    .balign 4
+.global lbl_80400E48
+lbl_80400E48:
+    .asciz "DVDReadAsync(): specified area is out of the file  "
+    .balign 4
+    .4byte NULL
+
+
 .section .sdata
 
 .global lbl_804D5B88

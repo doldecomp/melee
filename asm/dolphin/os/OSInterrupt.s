@@ -654,6 +654,24 @@ lbl_80347B80:
 /* 80347BC8 003447A8  4B FF FC 74 */	b lbl_8034783C
 
 
+.section .data
+
+.global lbl_80402318
+lbl_80402318:
+    .4byte 0x00000100
+    .4byte 0x00000040
+    .4byte 0xF8000000
+    .4byte 0x00000200
+    .4byte 0x00000080
+    .4byte 0x00003000
+    .4byte 0x00000020
+    .4byte 0x03FF8C00
+    .4byte 0x04000000
+    .4byte 0x00004000
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7378

@@ -2618,6 +2618,79 @@ lbl_8033A12C:
 /* 8033A14C 00336D2C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80400E80
+lbl_80400E80:
+    .asciz "app booted via JTAG\n"
+    .balign 4
+    .asciz "load fst\n"
+    .balign 4
+    .asciz "app booted from bootrom\n"
+    .balign 4
+    .asciz "bootrom\n"
+    .balign 4
+.global jtbl_80400ECC
+jtbl_80400ECC:
+	.4byte lbl_80338FC4
+	.4byte lbl_80338E84
+	.4byte lbl_80338E9C
+	.4byte lbl_80338EB4
+	.4byte lbl_80338EE4
+	.4byte lbl_80338FA8
+	.4byte lbl_80338EFC
+	.4byte lbl_80338ECC
+.global jtbl_80400EEC
+jtbl_80400EEC:
+	.4byte lbl_803392A4
+	.4byte lbl_80339060
+	.4byte lbl_803390BC
+	.4byte lbl_803390E0
+	.4byte lbl_80339060
+	.4byte lbl_80339034
+	.4byte lbl_80339100
+	.4byte lbl_80339164
+	.4byte lbl_80339190
+	.4byte lbl_803391C4
+	.4byte lbl_803391E8
+	.4byte lbl_8033920C
+	.4byte lbl_80339230
+	.4byte lbl_80339254
+	.4byte lbl_8033927C
+	.4byte lbl_803390F0
+.global jtbl_80400F2C
+jtbl_80400F2C:
+	.4byte lbl_80339C58
+	.4byte lbl_80339C58
+	.4byte lbl_80339C78
+	.4byte lbl_80339CBC
+	.4byte lbl_80339D08
+	.4byte lbl_80339D84
+	.4byte lbl_80339D84
+	.4byte lbl_80339D84
+	.4byte lbl_80339D84
+	.4byte lbl_80339E50
+	.4byte lbl_80339E50
+	.4byte lbl_80339C58
+	.4byte lbl_80339D84
+.global jtbl_80400F60
+jtbl_80400F60:
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FF0
+	.4byte lbl_80339FE0
+	.4byte lbl_80339FE0
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FF0
+	.4byte lbl_80339FE0
+	.4byte lbl_80339FE0
+	.4byte lbl_80339FE8
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804A7560

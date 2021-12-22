@@ -2624,6 +2624,18 @@ lbl_8032EA70:
 /* 8032EA80 0032B660  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_804008D8
+lbl_804008D8:
+    .asciz "HUDSON/USB2EXI/INITCODE/TARGET"
+    .balign 4
+.global lbl_804008F8
+lbl_804008F8:
+    .asciz "HUDSON/USB2EXI/INITCODE/HOST"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .global lbl_804A50E0

@@ -277,11 +277,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/os/OSUartExi.o         \
 	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init.o      \
 	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.o      \
-                                                    \
 	$(BUILD_DIR)/asm/dolphin/pad/Padclamp.o  		\
-                                                    \
-	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_2.o                \
-                                                    \
+	$(BUILD_DIR)/asm/dolphin/pad/Pad.o              \
 	$(BUILD_DIR)/asm/dolphin/vi/vi.o  				\
 	$(BUILD_DIR)/asm/dolphin/ai/ai.o                \
 	$(BUILD_DIR)/asm/dolphin/ar/ar.o                \

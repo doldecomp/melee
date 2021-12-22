@@ -221,3 +221,13 @@ lbl_80347EB0:
 /* 80347ED0 00344AB0  83 A1 00 3C */	lwz r29, 0x3c(r1)
 /* 80347ED4 00344AB4  38 21 00 48 */	addi r1, r1, 0x48
 /* 80347ED8 00344AB8  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80402348
+lbl_80402348:
+    .4byte OSOnReset
+    .4byte 0x0000007F
+    .4byte NULL
+    .4byte NULL
