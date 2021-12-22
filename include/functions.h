@@ -7816,7 +7816,7 @@ void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSr
 // ? PSMTXIdentity(?);
 // ? PSMTXCopy(?);
 // ? PSMTXConcat(?);
-// ? func_803422D0(?);
+// ? PSMTXTranspose(?);
 // ? PSMTXInverse(?);
 // ? PSMTXRotRad(?);
 // ? PSMTXRotTrig(?);
@@ -7830,7 +7830,7 @@ void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSr
 // ? C_MTXLightOrtho(?);
 // ? PSMTXMUltiVec(?);
 // ? PSMTXMultVecSR(?);
-// ? func_80342B50(?);
+// ? C_MTXFrustum(?);
 // ? C_MTXPerspective(?);
 // ? C_MTXOrtho(?);
 // ? PSVECAdd(?);
@@ -8069,7 +8069,7 @@ void VIWaitForRetrace(void);
 // ? ARRegisterDMACallback(?);
 // ? ARStartDMA(?);
 // ? ARAlloc(?);
-// ? func_80350E28(?);
+// ? ARFree(?);
 // ? ARInit(?);
 // ? ARGetSize(?);
 // ? func_80351010(?);

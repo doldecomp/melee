@@ -102,3 +102,13 @@ PSVECCrossProduct:
 /* 80342E88 0033FA68  11 40 50 50 */	ps_neg f10, f10
 /* 80342E8C 0033FA6C  F1 45 00 04 */	psq_st f10, 4(r5), 0, qr0
 /* 80342E90 0033FA70  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804DE340
+lbl_804DE340:
+	.4byte 0x3F000000
+.global lbl_804DE344
+lbl_804DE344:
+	.4byte 0x40400000

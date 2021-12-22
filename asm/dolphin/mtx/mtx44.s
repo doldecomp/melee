@@ -2,8 +2,8 @@
 
 .section .text  # 0x80342B50 - 0x80342D50
 
-.global func_80342B50
-func_80342B50:
+.global C_MTXFrustum
+C_MTXFrustum:
 /* 80342B50 0033F730  ED 24 18 28 */	fsubs f9, f4, f3
 /* 80342B54 0033F734  C1 42 E9 48 */	lfs f10, lbl_804DE328@sda21(r2)
 /* 80342B58 0033F738  EC 01 10 28 */	fsubs f0, f1, f2
@@ -139,3 +139,25 @@ C_MTXOrtho:
 /* 80342D48 0033F928  D0 63 00 38 */	stfs f3, 0x38(r3)
 /* 80342D4C 0033F92C  D1 23 00 3C */	stfs f9, 0x3c(r3)
 /* 80342D50 0033F930  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804DE328
+lbl_804DE328:
+	.4byte 0x3F800000
+.global lbl_804DE32C
+lbl_804DE32C:
+	.4byte 0x40000000
+.global lbl_804DE330
+lbl_804DE330:
+	.4byte 0x00000000
+.global lbl_804DE334
+lbl_804DE334:
+	.4byte 0xBF800000
+.global lbl_804DE338
+lbl_804DE338:
+	.4byte 0x3F000000
+.global lbl_804DE33C
+lbl_804DE33C:
+	.4byte 0x3C8EFA35
