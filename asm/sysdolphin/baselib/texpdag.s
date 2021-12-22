@@ -2819,3 +2819,13 @@ lbl_804D5FF8:
 .global lbl_804D5FFC
 lbl_804D5FFC:
 	.4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804DE7E8
+lbl_804DE7E8:
+	.4byte 0x00000000
+.global lbl_804DE7EC
+lbl_804DE7EC:
+	.4byte 0x00000000

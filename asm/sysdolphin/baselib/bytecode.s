@@ -1625,3 +1625,37 @@ lbl_804D5F9C:
     .asciz "stack"
     .balign 4
     .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804DE7A0
+lbl_804DE7A0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE7A8
+lbl_804DE7A8:
+	.4byte 0x3F91DF46
+	.4byte 0xA2529D39
+.global lbl_804DE7B0
+lbl_804DE7B0:
+	.4byte 0x404CA5DC
+	.4byte 0x1A63C1F8
+.global lbl_804DE7B8
+lbl_804DE7B8:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE7C0
+lbl_804DE7C0:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DE7C8
+lbl_804DE7C8:
+	.4byte 0x42B40000
+.global lbl_804DE7CC
+lbl_804DE7CC:
+	.4byte 0xC2B40000
+.global lbl_804DE7D0
+lbl_804DE7D0:
+	.4byte 0x43300000
+	.4byte 0x80000000
