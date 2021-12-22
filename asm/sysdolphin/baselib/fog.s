@@ -653,3 +653,31 @@ lbl_804D5F2C:
 lbl_804D5F30:
     .asciz "hsd_fog"
     .balign 4
+
+
+.section .sdata2
+
+.global lbl_804DE6F0
+lbl_804DE6F0:
+	.4byte 0x00000000
+.global lbl_804DE6F4
+lbl_804DE6F4:
+	.4byte 0x00000000
+.global lbl_804DE6F8
+lbl_804DE6F8:
+	.4byte 0x44200000
+.global lbl_804DE6FC
+lbl_804DE6FC:
+	.4byte 0xBF800000
+.global lbl_804DE700
+lbl_804DE700:
+	.4byte 0x3F800000
+	.4byte 0x00000000
+.global lbl_804DE708
+lbl_804DE708:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DE710
+lbl_804DE710:
+	.4byte 0x437F0000
+	.4byte 0x00000000

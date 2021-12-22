@@ -951,3 +951,27 @@ lbl_804D5D60:
     .asciz "new"
     .balign 4
     .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804DE4D0
+lbl_804DE4D0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE4D8
+lbl_804DE4D8:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DE4E0
+lbl_804DE4E0:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DE4E8
+lbl_804DE4E8:
+	.4byte 0x3FF00000
+	.4byte 0x00000000
+.global lbl_804DE4F0
+lbl_804DE4F0:
+	.4byte 0x00000000
+	.4byte 0x00000000

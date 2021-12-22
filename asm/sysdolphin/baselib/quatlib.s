@@ -731,3 +731,47 @@ lbl_803B95E8:
     .long 2
     .long 0
     .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804DE720
+lbl_804DE720:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE728
+lbl_804DE728:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE730
+lbl_804DE730:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DE738
+lbl_804DE738:
+	.4byte 0x3F800000
+.global lbl_804DE73C
+lbl_804DE73C:
+	.4byte 0x3F000000
+.global lbl_804DE740
+lbl_804DE740:
+	.4byte 0x3EE4F8B5
+	.4byte 0x88E368F1
+.global lbl_804DE748
+lbl_804DE748:
+	.4byte 0x00800000
+.global lbl_804DE74C
+lbl_804DE74C:
+	.4byte 0x2EDBE6FF
+.global lbl_804DE750
+lbl_804DE750:
+	.4byte 0x3FF00000
+	.4byte 0x00000000
+.global lbl_804DE758
+lbl_804DE758:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804DE760
+lbl_804DE760:
+	.4byte 0x40000000
+	.4byte 0x00000000

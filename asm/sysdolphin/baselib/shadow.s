@@ -1057,3 +1057,35 @@ lbl_804D5F84:
     .asciz "rect"
     .balign 4
     .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804DE768
+lbl_804DE768:
+	.4byte 0x3F000000
+.global lbl_804DE76C
+lbl_804DE76C:
+	.4byte 0xBF000000
+.global lbl_804DE770
+lbl_804DE770:
+	.4byte 0x00000000
+.global lbl_804DE774
+lbl_804DE774:
+	.4byte 0x43800000
+.global lbl_804DE778
+lbl_804DE778:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DE780
+lbl_804DE780:
+	.4byte 0x3F99999A
+.global lbl_804DE784
+lbl_804DE784:
+	.4byte 0xBF8CCCCD
+.global lbl_804DE788
+lbl_804DE788:
+	.4byte 0xFF7FFFFF
+.global lbl_804DE78C
+lbl_804DE78C:
+	.4byte 0x7F7FFFFF
