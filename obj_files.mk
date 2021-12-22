@@ -290,6 +290,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/card/CARD.o			\
                                                     \
 	$(BUILD_DIR)/asm/dolphin/ax/AX.o 				\
+	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.o 			\
                                                     \
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.o		\
@@ -365,6 +366,3 @@ TEXT_O_FILES := 						            \
 
 DATA_O_FILES :=                                     \
     $(BUILD_DIR)/asm/data.o
-
-SDATA2_O_FILES :=                                   \
-    $(BUILD_DIR)/asm/sdata2.o

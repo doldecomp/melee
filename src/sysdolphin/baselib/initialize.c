@@ -9,14 +9,13 @@ extern HSD_MemReport memReport; //memReport
 
 extern GXRenderModeObj* rmode; //rmode
 
-extern GXColor black; //black
-
 extern u32 iparam_fifo_size; //iparam_fifo_size
 
 extern GXFifoObj* DefaultFifoObj; //DefaultFifoObj
 
 extern s32 init_done; //init_done
 
+// Matching but won't actually match until FrameBuffer is declared in the file
 #ifdef NON_MATCHING
 void HSD_InitComponent(void) {
     HSD_OSInit();
@@ -46,6 +45,8 @@ void HSD_InitComponent(void) {
     init_done = TRUE;
 }
 #else
+static const GXColor black = {0, 0, 0, 0}; //black
+
 asm void HSD_InitComponent(void)
 {
     nofralloc

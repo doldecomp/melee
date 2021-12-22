@@ -601,3 +601,35 @@ lbl_803E274C:
 .global lbl_804D69B8
 lbl_804D69B8:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DB270
+lbl_804DB270:
+	.4byte 0x00000000
+.global lbl_804DB274
+lbl_804DB274:
+	.4byte 0x3F800000
+.global lbl_804DB278
+lbl_804DB278:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DB280
+lbl_804DB280:
+	.4byte 0xC3920000
+.global lbl_804DB284
+lbl_804DB284:
+	.4byte 0x43980000
+.global lbl_804DB288
+lbl_804DB288:
+	.4byte 0x40000000
+.global lbl_804DB28C
+lbl_804DB28C:
+	.4byte 0x41C80000
+.global lbl_804DB290
+lbl_804DB290:
+	.4byte 0x3F000000
+.global lbl_804DB294
+lbl_804DB294:
+	.4byte 0x40400000

@@ -86,8 +86,8 @@ PSMTXConcat:
 /* 803422C8 0033EEA8  38 21 00 40 */	addi r1, r1, 0x40
 /* 803422CC 0033EEAC  4E 80 00 20 */	blr 
 
-.global func_803422D0
-func_803422D0:
+.global PSMTXTranspose
+PSMTXTranspose:
 /* 803422D0 0033EEB0  C0 02 E9 34 */	lfs f0, lbl_804DE314@sda21(r2)
 /* 803422D4 0033EEB4  E0 23 00 00 */	psq_l f1, 0(r3), 0, qr0
 /* 803422D8 0033EEB8  D0 04 00 2C */	stfs f0, 0x2c(r4)
@@ -636,3 +636,25 @@ C_MTXLightOrtho:
 lbl_804D5C00:
     .4byte 0x00000000
     .4byte 0x3F800000
+
+
+.section .sdata2
+
+.global lbl_804DE310
+lbl_804DE310:
+	.4byte 0x3F800000
+.global lbl_804DE314
+lbl_804DE314:
+	.4byte 0x00000000
+.global lbl_804DE318
+lbl_804DE318:
+	.4byte 0x40000000
+.global lbl_804DE31C
+lbl_804DE31C:
+	.4byte 0xBF800000
+.global lbl_804DE320
+lbl_804DE320:
+	.4byte 0x3F000000
+.global lbl_804DE324
+lbl_804DE324:
+	.4byte 0x3C8EFA35

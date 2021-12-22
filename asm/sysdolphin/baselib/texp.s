@@ -3176,3 +3176,15 @@ lbl_804D5FE4:
     .asciz "tevdesc"
     .balign 4
     .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804DE7D8
+lbl_804DE7D8:
+	.4byte 0x437F0000
+	.4byte 0x00000000
+.global lbl_804DE7E0
+lbl_804DE7E0:
+	.4byte 0x406FE000
+	.4byte 0x00000000

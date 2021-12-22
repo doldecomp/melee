@@ -1593,3 +1593,63 @@ HSD_PadCopyStatus:
 .global HSD_PadRumbleData
 HSD_PadRumbleData:
 	.skip 0x114
+
+
+.section .sdata2
+
+.global lbl_804DE5B0
+lbl_804DE5B0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE5B8
+lbl_804DE5B8:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE5C0
+lbl_804DE5C0:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DE5C8
+lbl_804DE5C8:
+	.4byte 0x2EDBE6FF
+	.4byte 0x00000000
+.global lbl_804DE5D0
+lbl_804DE5D0:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DE5D8
+lbl_804DE5D8:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE5E0
+lbl_804DE5E0:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804DE5E8
+lbl_804DE5E8:
+	.4byte 0xBFF921FB
+	.4byte 0x54442D18
+.global lbl_804DE5F0
+lbl_804DE5F0:
+	.4byte 0x3F000000
+	.4byte 0x00000000
+.global lbl_804DE5F8
+lbl_804DE5F8:
+	.4byte 0xC002D97C
+	.4byte 0x7F3321D2
+.global lbl_804DE600
+lbl_804DE600:
+	.4byte 0xBFE921FB
+	.4byte 0x54442D18
+.global lbl_804DE608
+lbl_804DE608:
+	.4byte 0x3FE921FB
+	.4byte 0x54442D18
+.global lbl_804DE610
+lbl_804DE610:
+	.4byte 0x4002D97C
+	.4byte 0x7F3321D2
+.global lbl_804DE618
+lbl_804DE618:
+	.4byte 0x43300000
+	.4byte 0x00000000

@@ -612,3 +612,45 @@ func_803792C8:
 /* 80379304 00375EE4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80379308 00375EE8  7C 08 03 A6 */	mtlr r0
 /* 8037930C 00375EEC  4E 80 00 20 */	blr 
+
+
+.section .sdata2
+
+.global lbl_804DE620
+lbl_804DE620:
+	.4byte 0x40000000
+.global lbl_804DE624
+lbl_804DE624:
+	.4byte 0x40400000
+.global lbl_804DE628
+lbl_804DE628:
+	.4byte 0x3F800000
+.global lbl_804DE62C
+lbl_804DE62C:
+	.4byte 0x3E2AAAAB
+.global lbl_804DE630
+lbl_804DE630:
+	.4byte 0x40800000
+.global lbl_804DE634
+lbl_804DE634:
+	.4byte 0x40C00000
+.global lbl_804DE638
+lbl_804DE638:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE640
+lbl_804DE640:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DE648
+lbl_804DE648:
+	.4byte 0xBA83126F
+.global lbl_804DE64C
+lbl_804DE64C:
+	.4byte 0x3E000000
+.global lbl_804DE650
+lbl_804DE650:
+	.4byte 0x3F000000
+.global lbl_804DE654
+lbl_804DE654:
+	.4byte 0x3727C5AC

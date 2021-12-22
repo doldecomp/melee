@@ -393,3 +393,27 @@ lbl_803B8C30:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
+
+
+.section .sdata2
+
+.global lbl_804DE160
+lbl_804DE160:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE168
+lbl_804DE168:
+	.4byte 0x3FF00000
+	.4byte 0x00000000
+.global lbl_804DE170
+lbl_804DE170:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DE178
+lbl_804DE178:
+	.4byte 0x3FB99999
+	.4byte 0x9999999A
+.global lbl_804DE180
+lbl_804DE180:
+	.4byte 0x40240000
+	.4byte 0x00000000

@@ -2701,3 +2701,31 @@ lightmask_attnfunc:
 .global lightmask_alpha
 lightmask_alpha:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DE440
+lbl_804DE440:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE448
+lbl_804DE448:
+	.4byte 0x406FE000
+	.4byte 0x00000000
+.global lbl_804DE450
+lbl_804DE450:
+	.4byte 0x3F000000
+.global lbl_804DE454
+lbl_804DE454:
+	.4byte 0x00000000
+.global lbl_804DE458
+lbl_804DE458:
+	.4byte 0x3F800000
+.global lbl_804DE45C
+lbl_804DE45C:
+	.4byte 0x42480000
+.global lbl_804DE460
+lbl_804DE460:
+	.4byte 0x49800000
+	.4byte 0x00000000

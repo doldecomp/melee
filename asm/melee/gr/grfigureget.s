@@ -615,3 +615,35 @@ lbl_803E7D34:
 .global lbl_804D6AC0
 lbl_804D6AC0:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DBB40
+lbl_804DBB40:
+	.4byte 0x42820000
+.global lbl_804DBB44
+lbl_804DBB44:
+	.4byte 0x42960000
+.global lbl_804DBB48
+lbl_804DBB48:
+	.4byte 0x00000000
+.global lbl_804DBB4C
+lbl_804DBB4C:
+	.4byte 0x3F000000
+.global lbl_804DBB50
+lbl_804DBB50:
+	.4byte 0x41A00000
+.global lbl_804DBB54
+lbl_804DBB54:
+	.4byte 0xBF800000
+.global lbl_804DBB58
+lbl_804DBB58:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DBB60
+lbl_804DBB60:
+	.4byte 0x40900000
+.global lbl_804DBB64
+lbl_804DBB64:
+	.4byte 0xC0900000

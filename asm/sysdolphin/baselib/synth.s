@@ -4147,3 +4147,57 @@ lbl_804D7780:
 .global lbl_804D7784
 lbl_804D7784:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DE7F0
+lbl_804DE7F0:
+	.4byte 0x00000000
+.global lbl_804DE7F4
+lbl_804DE7F4:
+	.4byte 0x00000000
+.global lbl_804DE7F8
+lbl_804DE7F8:
+	.4byte 0x3803126F
+.global lbl_804DE7FC
+lbl_804DE7FC:
+	.4byte 0x3B808081
+.global lbl_804DE800
+lbl_804DE800:
+	.4byte 0x46FFFE00
+.global lbl_804DE804
+lbl_804DE804:
+	.4byte 0x47800000
+.global lbl_804DE808
+lbl_804DE808:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DE810
+lbl_804DE810:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DE818
+lbl_804DE818:
+	.4byte 0x3F701010
+	.4byte 0x10101010
+.global lbl_804DE820
+lbl_804DE820:
+	.4byte 0x00000000
+.global lbl_804DE824
+lbl_804DE824:
+	.4byte 0x3F800000
+.global lbl_804DE828
+lbl_804DE828:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE830
+lbl_804DE830:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DE838
+lbl_804DE838:
+	.4byte 0x46B50389
+.global lbl_804DE83C
+lbl_804DE83C:
+	.4byte 0x3F000000
