@@ -283,8 +283,21 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/ai/ai.o                \
 	$(BUILD_DIR)/asm/dolphin/ar/ar.o                \
 	$(BUILD_DIR)/asm/dolphin/ar/arq.o               \
-                                                    \
-	$(BUILD_DIR)/asm/dolphin/card/CARD.o			\
+	$(BUILD_DIR)/asm/dolphin/card/CARDBios.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDUnlock.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDRdrw.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDBlock.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDDir.o			\
+	$(BUILD_DIR)/asm/dolphin/card/CARDCheck.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDMount.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDFormat.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDOpen.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDCreate.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDRead.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDWrite.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDDelete.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDStat.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDRename.o		\
                                                     \
 	$(BUILD_DIR)/asm/dolphin/ax/AX.o 				\
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.o 			\
