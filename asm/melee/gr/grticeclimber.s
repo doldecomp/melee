@@ -413,3 +413,19 @@ lbl_803E8B5C:
     .4byte 0x003A003B
     .4byte 0x003C003D
     .4byte 0xFFFF0000
+
+
+.section .sdata2
+
+.global lbl_804DBCB8
+lbl_804DBCB8:
+	.4byte 0x00000000
+.global lbl_804DBCBC
+lbl_804DBCBC:
+	.4byte 0x3F800000
+.global lbl_804DBCC0
+lbl_804DBCC0:
+	.4byte 0xBF800000
+.global lbl_804DBCC4
+lbl_804DBCC4:
+	.4byte 0x40800000
