@@ -640,6 +640,43 @@ func_8037D900:
 /* 8037D96C 0037A54C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406FD0
+lbl_80406FD0:
+    .4byte func_8037D900
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80407010
+lbl_80407010:
+    .asciz "wobj->aobj"
+    .balign 4
+.global lbl_8040701C
+lbl_8040701C:
+    .asciz "jp->u.spline"
+    .balign 4
+    .asciz "hsdIsDescendantOf(info, &hsdWObj)"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "had_wobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .sdata
 
 .global lbl_804D5EF8

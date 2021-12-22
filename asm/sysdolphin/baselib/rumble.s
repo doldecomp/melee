@@ -715,6 +715,16 @@ lbl_80378A24:
 /* 80378A30 00375610  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406DE0
+lbl_80406DE0:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804C22E0

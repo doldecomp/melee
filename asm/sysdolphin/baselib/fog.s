@@ -635,6 +635,80 @@ lbl_803B95A8:
     .4byte 0x00000000
 
 
+.section .data
+
+.global lbl_80407078
+lbl_80407078:
+    .4byte func_8037E120
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_804070B4
+lbl_804070B4:
+    .4byte func_8037E178
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_804070F0
+lbl_804070F0:
+    .asciz "You must specify CObj first.\n"
+    .balign 4
+.global jtbl_80407110
+jtbl_80407110:
+	.4byte lbl_8037E044
+	.4byte lbl_8037DF8C
+	.4byte lbl_8037DF98
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037DFA4
+	.4byte lbl_8037DFC4
+	.4byte lbl_8037DFE4
+	.4byte lbl_8037E004
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E024
+    .4byte 0x73797364
+    .4byte 0x6F6C7068
+    .4byte 0x696E5F62
+    .4byte 0x6173655F
+    .4byte 0x6C696272
+    .4byte 0x61727900
+    .4byte 0x6873645F
+    .4byte 0x666F6761
+    .4byte 0x646A0000
+
+
 .section .sdata
 
 .global lbl_804D5F20

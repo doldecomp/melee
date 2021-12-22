@@ -3626,6 +3626,88 @@ func_8036A8BC:
 /* 8036A934 00367514  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406220
+lbl_80406220:
+    .4byte func_8036A8BC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global jtbl_80406260
+jtbl_80406260:
+	.4byte lbl_80367AA0
+	.4byte lbl_8036798C
+	.4byte lbl_803679B0
+	.4byte lbl_803679D4
+	.4byte lbl_80367AA0
+	.4byte lbl_803679F8
+	.4byte lbl_80367A1C
+	.4byte lbl_80367A40
+	.4byte lbl_80367AA0
+	.4byte lbl_80367A64
+	.4byte lbl_80367A74
+	.4byte lbl_80367A84
+	.4byte lbl_80367A94
+.global lbl_80406294
+lbl_80406294:
+    .asciz "unkown type of render pass.\n"
+    .balign 4
+.global lbl_804062B4
+lbl_804062B4:
+    .asciz "cobj->eyepos"
+    .balign 4
+.global lbl_804062C4
+lbl_804062C4:
+    .asciz "cobj->interest"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte 0x68736449
+    .4byte 0x73446573
+    .4byte 0x63656E64
+    .4byte 0x616E744F
+    .4byte 0x6628696E
+    .4byte 0x666F2C20
+    .4byte 0x26687364
+    .4byte 0x434F626A
+    .4byte 0x29000000
+.global lbl_8040631C
+lbl_8040631C:
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte 0x73797364
+    .4byte 0x6F6C7068
+    .4byte 0x696E5F62
+    .4byte 0x6173655F
+    .4byte 0x6C696272
+    .4byte 0x61727900
+    .4byte 0x6873645F
+    .4byte 0x636F626A
+    .4byte NULL
+    .4byte NULL
+
+
 .section .sdata
 
 .global lbl_804D5D40

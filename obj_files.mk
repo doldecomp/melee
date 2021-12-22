@@ -303,6 +303,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.o 			\
                                                     \
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.o		\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/dobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.o		\
@@ -310,6 +311,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tev.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/mobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/aobj.o	    \
+	$(BUILD_DIR)/asm/sysdolphin/baselib/aobj.o	    \
 	$(BUILD_DIR)/src/sysdolphin/baselib/lobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/lobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/cobj.o		\
@@ -341,6 +343,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/perf.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/list.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/object.o    \
+	$(BUILD_DIR)/asm/sysdolphin/baselib/object.o    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/quatlib.o   \
 	$(BUILD_DIR)/src/sysdolphin/baselib/memory.o	\
 	$(BUILD_DIR)/src/sysdolphin/baselib/shadow.o	\

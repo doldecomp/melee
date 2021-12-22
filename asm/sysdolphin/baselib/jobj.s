@@ -5713,6 +5713,171 @@ lbl_803B94D0:
     .4byte NULL
 
 
+.section .data
+
+.global lbl_80406708
+lbl_80406708:
+    .4byte func_803737F4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80406758
+lbl_80406758:
+    .asciz "jobj->parent"
+    .balign 4
+    .asciz "jobj->aobj"
+    .balign 4
+    .asciz "jp->u.spline"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+.global jtbl_804067AC
+jtbl_804067AC:
+	.4byte lbl_80370768
+	.4byte lbl_80370004
+	.4byte lbl_803700C4
+	.4byte lbl_80370158
+	.4byte lbl_8036FE0C
+	.4byte lbl_803701EC
+	.4byte lbl_80370264
+	.4byte lbl_803702DC
+	.4byte lbl_80370354
+	.4byte lbl_803703F4
+	.4byte lbl_80370494
+	.4byte lbl_80370564
+	.4byte lbl_80370534
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_80370610
+	.4byte lbl_8037063C
+	.4byte lbl_80370658
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370678
+	.4byte lbl_80370694
+	.4byte lbl_803706B0
+	.4byte lbl_803706CC
+	.4byte lbl_803706E8
+	.4byte lbl_803706E8
+	.4byte lbl_803706E8
+	.4byte lbl_803706E8
+.global lbl_80406894
+lbl_80406894:
+    .asciz "hsdIsDescendantOf(info, &hsdJObj)"
+    .balign 4
+    .asciz "jobj_root"
+    .balign 4
+    .asciz "jobj_root == NULL"
+    .balign 4
+    .asciz "jobj->child"
+    .balign 4
+.global lbl_804068E4
+lbl_804068E4:
+    .asciz "object.h"
+    .balign 4
+    .asciz "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF"
+    .balign 4
+.global lbl_80406918
+lbl_80406918:
+    .asciz "HSD_OBJ(o)->ref_count_individual != 0"
+    .balign 4
+    .asciz "child->next == NULL"
+    .balign 4
+    .asciz "child should be a orphan.\n"
+    .balign 4
+    .asciz "child->parent == NULL"
+    .balign 4
+    .asciz "child should not have siblings"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_INSTANCE)"
+    .balign 4
+    .asciz "last != child"
+    .balign 4
+.global lbl_804069D8
+lbl_804069D8:
+    .asciz "can not find specified jobj. maybe jobj tree is broken.\n"
+    .balign 4
+    .asciz "jobj[%d,%d]"
+    .balign 4
+    .asciz "SKELETON_ROOT "
+    .balign 4
+    .asciz "SKELETON "
+    .balign 4
+    .asciz "ENVELOPE_MODEL "
+    .balign 4
+    .asciz "EFFECTOR "
+    .balign 4
+    .asciz "  rot(L): "
+    .balign 4
+    .asciz "  sca(L): "
+    .balign 4
+    .asciz "  tra(L): "
+    .balign 4
+    .asciz "  rot(G): "
+    .balign 4
+    .asciz "  sca(G): "
+    .balign 4
+    .asciz "  tra(G): "
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_jobj"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+
 .section .sdata
 
 .global lbl_804D5DA0

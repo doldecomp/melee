@@ -712,6 +712,36 @@ lbl_803B94FC:
     .4byte NULL
 
 
+.section .data
+
+.global lbl_80406BC0
+lbl_80406BC0:
+    .asciz "initialize.c"
+    .balign 4
+.global lbl_80406BD0
+lbl_80406BD0:
+    .asciz "No memory space remains for XFB.\n"
+    .balign 4
+    .asciz "cannot allocate memory for gx fifo.\n"
+    .balign 4
+    .asciz "no space remains for gx fifo.\n"
+    .balign 4
+.global lbl_80406C3C
+lbl_80406C3C:
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "pix_fmt != GX_PF_RGB565_Z16"
+    .balign 4
+    .asciz "objalloc.h"
+    .balign 4
+    .asciz "objalloc: %s\tusing %d\tfreed %d\tpeak %d\n"
+    .balign 4
+.global lbl_80406CA4
+lbl_80406CA4:
+    .asciz "init parameter should be set before invoking HSD_Init().\n"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .skip 0x4

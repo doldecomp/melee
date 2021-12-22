@@ -2637,6 +2637,82 @@ lbl_803B94AC:
     .float 0
 
 
+.section .data
+
+.global lbl_804060C0
+lbl_804060C0:
+    .4byte func_80367688
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global jtbl_80406100
+jtbl_80406100:
+	.4byte lbl_8036559C
+	.4byte lbl_803655BC
+	.4byte lbl_803655DC
+	.4byte lbl_803654B8
+	.4byte lbl_803654E8
+	.4byte lbl_8036550C
+	.4byte lbl_80365530
+	.4byte lbl_80365554
+	.4byte lbl_8036556C
+	.4byte lbl_80365584
+	.4byte lbl_803654E8
+	.4byte lbl_8036550C
+	.4byte lbl_80365530
+	.4byte lbl_803655FC
+.global lbl_80406138
+lbl_80406138:
+    .asciz "object.h"
+    .balign 4
+.global lbl_80406144
+lbl_80406144:
+    .asciz "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF"
+    .balign 4
+.global jtbl_8040616C
+jtbl_8040616C:
+	.4byte lbl_80366B84
+	.4byte lbl_80366B8C
+	.4byte lbl_80366B94
+	.4byte lbl_80366B9C
+	.4byte lbl_80366BA4
+	.4byte lbl_80366BAC
+	.4byte lbl_80366BB4
+	.4byte lbl_80366BBC
+	.4byte lbl_80366BC4
+.global lbl_80406190
+lbl_80406190:
+    .asciz "lobj->position"
+    .balign 4
+.global lbl_804061A0
+lbl_804061A0:
+    .asciz "lobj->interest"
+    .balign 4
+    .asciz "hsdIsDescendantOf(info, &hsdLObj)"
+    .balign 4
+.global lbl_804061D4
+lbl_804061D4:
+    .asciz "unexpected lightdesc flags (%x)\n"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_lobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .skip 0x4
