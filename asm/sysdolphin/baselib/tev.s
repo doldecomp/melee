@@ -806,6 +806,188 @@ lbl_80362D24:
 /* 80362D2C 0035F90C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80405B98
+lbl_80405B98:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80405BC8
+lbl_80405BC8:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000003
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+.global jtbl_80405C88
+jtbl_80405C88:
+	.4byte lbl_80362794
+	.4byte lbl_8036279C
+	.4byte lbl_803627A4
+	.4byte lbl_803627AC
+	.4byte lbl_803627B4
+	.4byte lbl_803627BC
+	.4byte lbl_803627C4
+	.4byte lbl_803627CC
+	.4byte lbl_803627D4
+	.4byte lbl_803627DC
+	.4byte lbl_803627E4
+	.4byte lbl_803627EC
+	.4byte lbl_803627F4
+	.4byte lbl_803627FC
+	.4byte lbl_80362804
+	.4byte lbl_8036280C
+.global jtbl_80405CC8
+jtbl_80405CC8:
+	.4byte lbl_80362864
+	.4byte lbl_8036286C
+	.4byte lbl_80362874
+	.4byte lbl_8036287C
+	.4byte lbl_80362884
+	.4byte lbl_8036288C
+	.4byte lbl_80362894
+	.4byte lbl_8036289C
+	.4byte lbl_803628A4
+	.4byte lbl_803628AC
+	.4byte lbl_803628B4
+	.4byte lbl_803628BC
+	.4byte lbl_803628C4
+	.4byte lbl_803628CC
+	.4byte lbl_803628D4
+	.4byte lbl_803628DC
+.global jtbl_80405D08
+jtbl_80405D08:
+	.4byte lbl_80362934
+	.4byte lbl_8036293C
+	.4byte lbl_80362944
+	.4byte lbl_8036294C
+	.4byte lbl_80362954
+	.4byte lbl_8036295C
+	.4byte lbl_80362964
+	.4byte lbl_8036296C
+	.4byte lbl_80362974
+	.4byte lbl_8036297C
+	.4byte lbl_80362984
+	.4byte lbl_8036298C
+	.4byte lbl_80362994
+	.4byte lbl_8036299C
+	.4byte lbl_803629A4
+	.4byte lbl_803629AC
+.global jtbl_80405D48
+jtbl_80405D48:
+	.4byte lbl_80362B9C
+	.4byte lbl_80362BBC
+	.4byte lbl_80362BDC
+	.4byte lbl_80362BFC
+	.4byte lbl_80362C1C
+	.4byte lbl_80362C3C
+	.4byte lbl_80362C5C
+	.4byte lbl_80362C7C
+.global lbl_80405D68
+lbl_80405D68:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000003
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+
+
 .section .sdata
 
 .global lbl_804D5CD0

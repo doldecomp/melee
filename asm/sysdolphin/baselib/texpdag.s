@@ -2807,6 +2807,49 @@ lbl_80387DD0:
 /* 80387DF4 003849D4  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80407AA0
+lbl_80407AA0:
+    .asciz "texpdag.c"
+    .balign 4
+    .asciz "HSD_TExpGetType(root) == HSD_TE_TEV"
+    .balign 4
+    .asciz "j<HSD_TEXP_MAX_NUM"
+    .balign 4
+    .4byte 0x00000002
+    .4byte 0x00000004
+    .4byte 0x00000006
+    .4byte NULL
+    .4byte 0x00000003
+    .4byte 0x00000005
+    .4byte 0x00000007
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x00000003
+    .4byte NULL
+    .4byte NULL
+.global lbl_80407B18
+lbl_80407B18:
+	.4byte lbl_80386AD4
+	.4byte lbl_80386AD4
+	.4byte lbl_80386D68
+	.4byte lbl_80386D68
+	.4byte lbl_80386D68
+	.4byte lbl_80386D68
+	.4byte lbl_80386D68
+	.4byte lbl_80386D68
+	.4byte lbl_80386C28
+	.4byte lbl_80386CD0
+	.4byte lbl_80386C28
+	.4byte lbl_80386CD0
+	.4byte lbl_80386C28
+	.4byte lbl_80386CD0
+	.4byte lbl_80386C28
+	.4byte lbl_80386CD0
+
+
 .section .sdata
 
 .global lbl_804D5FF0

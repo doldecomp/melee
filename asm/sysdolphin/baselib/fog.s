@@ -578,8 +578,8 @@ func_8037E120:
 /* 8037E138 0037AD18  39 00 00 20 */	li r8, 0x20
 /* 8037E13C 0037AD1C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8037E140 0037AD20  3B E3 70 78 */	addi r31, r3, lbl_80407078@l
-/* 8037E144 0037AD24  3C 60 80 40 */	lis r3, lbl_804072A8@ha
-/* 8037E148 0037AD28  38 83 72 A8 */	addi r4, r3, lbl_804072A8@l
+/* 8037E144 0037AD24  3C 60 80 40 */	lis r3, hsdObj@ha
+/* 8037E148 0037AD28  38 83 72 A8 */	addi r4, r3, hsdObj@l
 /* 8037E14C 0037AD2C  38 7F 00 00 */	addi r3, r31, 0
 /* 8037E150 0037AD30  38 BF 00 EC */	addi r5, r31, 0xec
 /* 8037E154 0037AD34  48 00 3A C5 */	bl hsdInitClassInfo
@@ -598,9 +598,9 @@ func_8037E178:
 /* 8037E17C 0037AD5C  3C 60 80 40 */	lis r3, lbl_80407078@ha
 /* 8037E180 0037AD60  90 01 00 04 */	stw r0, 4(r1)
 /* 8037E184 0037AD64  38 C3 70 78 */	addi r6, r3, lbl_80407078@l
-/* 8037E188 0037AD68  3C 60 80 40 */	lis r3, lbl_804072A8@ha
+/* 8037E188 0037AD68  3C 60 80 40 */	lis r3, hsdObj@ha
 /* 8037E18C 0037AD6C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8037E190 0037AD70  38 83 72 A8 */	addi r4, r3, lbl_804072A8@l
+/* 8037E190 0037AD70  38 83 72 A8 */	addi r4, r3, hsdObj@l
 /* 8037E194 0037AD74  38 66 00 3C */	addi r3, r6, 0x3c
 /* 8037E198 0037AD78  38 A6 00 EC */	addi r5, r6, 0xec
 /* 8037E19C 0037AD7C  38 C6 01 04 */	addi r6, r6, 0x104
@@ -633,6 +633,80 @@ lbl_803B95A8:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
+
+
+.section .data
+
+.global lbl_80407078
+lbl_80407078:
+    .4byte func_8037E120
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_804070B4
+lbl_804070B4:
+    .4byte func_8037E178
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_804070F0
+lbl_804070F0:
+    .asciz "You must specify CObj first.\n"
+    .balign 4
+.global jtbl_80407110
+jtbl_80407110:
+	.4byte lbl_8037E044
+	.4byte lbl_8037DF8C
+	.4byte lbl_8037DF98
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037DFA4
+	.4byte lbl_8037DFC4
+	.4byte lbl_8037DFE4
+	.4byte lbl_8037E004
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E044
+	.4byte lbl_8037E024
+    .4byte 0x73797364
+    .4byte 0x6F6C7068
+    .4byte 0x696E5F62
+    .4byte 0x6173655F
+    .4byte 0x6C696272
+    .4byte 0x61727900
+    .4byte 0x6873645F
+    .4byte 0x666F6761
+    .4byte 0x646A0000
 
 
 .section .sdata

@@ -3628,6 +3628,164 @@ func_8036EB88:
 /* 8036EC0C 0036B7EC  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406398
+lbl_80406398:
+    .4byte func_8036EB88
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_804063E0
+lbl_804063E0:
+    .asciz "pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.shape_set"
+    .balign 4
+.global lbl_80406418
+lbl_80406418:
+    .asciz "envelope"
+    .balign 4
+.global lbl_80406424
+lbl_80406424:
+    .asciz "shape_set"
+    .balign 4
+.global lbl_80406430
+lbl_80406430:
+    .asciz "pobj: unexected type.\n"
+    .balign 4
+.global lbl_80406448
+lbl_80406448:
+    .asciz "hsdIsDescendantOf(info, &hsdPObj)"
+    .balign 4
+    .asciz "env->jobj"
+    .balign 4
+    .asciz "object.h"
+    .balign 4
+    .asciz "HSD_OBJ(o)->ref_count_individual != 0"
+    .balign 4
+    .asciz "pobj->u.jobj"
+    .balign 4
+.global lbl_804064BC
+lbl_804064BC:
+    .asciz "shape_set->vertex_desc->comp_cnt == GX_POS_XYZ"
+    .balign 4
+.global lbl_804064EC
+lbl_804064EC:
+    .asciz "unexpected vertex type.\n"
+    .balign 4
+.global lbl_80406508
+lbl_80406508:
+    .asciz "shape_set->normal_desc->comp_cnt == GX_NRM_XYZ"
+    .balign 4
+.global lbl_80406538
+lbl_80406538:
+    .asciz "unexpected normal type."
+    .balign 4
+    .asciz "shape_set->normal_desc->attr == GX_VA_NBT"
+    .balign 4
+.global lbl_8040657C
+lbl_8040657C:
+    .asciz "attr(%d) is not supported by sysdolphin\n"
+    .balign 4
+.global lbl_804065A8
+lbl_804065A8:
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D588
+    .4byte lbl_8036D5D0
+    .4byte lbl_8036D6C0
+    .4byte lbl_8036D6C0
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D78C
+    .4byte lbl_8036D78C
+    .4byte lbl_8036D78C
+    .4byte lbl_8036D78C
+    .4byte lbl_8036D618
+    .4byte 0x76657274
+    .4byte 0x65785F62
+    .4byte 0x75666665
+    .4byte 0x725F7369
+    .4byte 0x7A65203E
+    .4byte 0x3D207368
+    .4byte 0x6170655F
+    .4byte 0x7365742D
+    .4byte 0x3E6E625F
+    .4byte 0x76657274
+    .4byte 0x65785F69
+    .4byte 0x6E646578
+    .4byte NULL
+    .4byte 0x6E6F726D
+    .4byte 0x616C5F62
+    .4byte 0x75666665
+    .4byte 0x725F7369
+    .4byte 0x7A65203E
+    .4byte 0x3D207368
+    .4byte 0x6170655F
+    .4byte 0x7365742D
+    .4byte 0x3E6E625F
+    .4byte 0x6E6F726D
+    .4byte 0x616C5F69
+    .4byte 0x6E646578
+    .4byte NULL
+    .4byte 0x6E6F726D
+    .4byte 0x616C5F62
+    .4byte 0x75666665
+    .4byte 0x725F7369
+    .4byte 0x7A65203E
+    .4byte 0x3D207368
+    .4byte 0x6170655F
+    .4byte 0x7365742D
+    .4byte 0x3E6E625F
+    .4byte 0x6E6F726D
+    .4byte 0x616C5F69
+    .4byte 0x6E646578
+    .4byte 0x202A2033
+    .4byte NULL
+    .4byte 0x656E7665
+    .4byte 0x6C6F7065
+    .4byte 0x2D3E6A6F
+    .4byte 0x626A0000
+    .4byte 0x6A702D3E
+    .4byte 0x656E7665
+    .4byte 0x6C6F7065
+    .4byte 0x6D747800
+.global lbl_804066D0
+lbl_804066D0:
+    .asciz "pobj->u.shape_set"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_pobj"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .skip 0x4

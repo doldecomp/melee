@@ -618,8 +618,8 @@ func_8037D900:
 /* 8037D914 0037A4F4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8037D918 0037A4F8  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8037D91C 0037A4FC  3B E3 6F D0 */	addi r31, r3, lbl_80406FD0@l
-/* 8037D920 0037A500  3C 60 80 40 */	lis r3, lbl_804072A8@ha
-/* 8037D924 0037A504  38 83 72 A8 */	addi r4, r3, lbl_804072A8@l
+/* 8037D920 0037A500  3C 60 80 40 */	lis r3, hsdObj@ha
+/* 8037D924 0037A504  38 83 72 A8 */	addi r4, r3, hsdObj@l
 /* 8037D928 0037A508  38 7F 00 00 */	addi r3, r31, 0
 /* 8037D92C 0037A50C  38 BF 00 80 */	addi r5, r31, 0x80
 /* 8037D930 0037A510  38 DF 00 98 */	addi r6, r31, 0x98
@@ -638,6 +638,43 @@ func_8037D900:
 /* 8037D964 0037A544  38 21 00 10 */	addi r1, r1, 0x10
 /* 8037D968 0037A548  7C 08 03 A6 */	mtlr r0
 /* 8037D96C 0037A54C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80406FD0
+lbl_80406FD0:
+    .4byte func_8037D900
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80407010
+lbl_80407010:
+    .asciz "wobj->aobj"
+    .balign 4
+.global lbl_8040701C
+lbl_8040701C:
+    .asciz "jp->u.spline"
+    .balign 4
+    .asciz "hsdIsDescendantOf(info, &hsdWObj)"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "had_wobj"
+    .balign 4
+    .4byte NULL
 
 
 .section .sdata

@@ -1320,6 +1320,69 @@ lbl_803B9664:
     .float 0
 
 
+.section .data
+
+.global lbl_8040C3A0
+lbl_8040C3A0:
+	.4byte func_803A4740
+.global lbl_8040C3A4
+lbl_8040C3A4:
+    .4byte NULL
+    .4byte 0x01000000
+    .4byte lbl_8040C3A0
+.global lbl_8040C3B0
+lbl_8040C3B0:
+    .asciz "sobjlib.c"
+    .balign 4
+.global lbl_8040C3BC
+lbl_8040C3BC:
+    .asciz "BadOBJ for SOBJ-displayfunc\n"
+    .balign 4
+.global jtbl_8040C3DC
+jtbl_8040C3DC:
+	.4byte lbl_803A512C
+	.4byte lbl_803A512C
+	.4byte lbl_803A51C0
+	.4byte lbl_803A51C0
+	.4byte lbl_803A5254
+	.4byte lbl_803A52D4
+	.4byte lbl_803A52D4
+	.4byte lbl_803A5350
+	.4byte lbl_803A52D4
+	.4byte lbl_803A52D4
+	.4byte lbl_803A52D4
+	.4byte lbl_803A5350
+	.4byte lbl_803A5350
+	.4byte lbl_803A5350
+	.4byte lbl_803A52D4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xFFFFFF00
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte 0x000000FF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .asciz "Out CameraDisp Range\n"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .global lbl_804D10E0

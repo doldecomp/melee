@@ -42,7 +42,7 @@ ifeq ($(EPILOGUE_PROCESS),1)
 include e_files.mk
 endif
 
-O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES) $(DATA_O_FILES)
+O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES)
 
 ifeq ($(EPILOGUE_PROCESS),1)
 E_FILES := $(EPILOGUE_UNSCHEDULED)
@@ -162,17 +162,11 @@ $(BUILD_DIR)/%.o: %.c
 	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
 
 ifeq ($(EPILOGUE_PROCESS),1)
+$(EPILOGUE_DIR)/%.o: %.s
+	@echo Assembling $<
+	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
+
 $(EPILOGUE_DIR)/%.o: %.c $(BUILD_DIR)/%.o
-	@echo Frank is fixing $<
-	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
-	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
-
-$(EPILOGUE_DIR)/%.o: %.cp $(BUILD_DIR)/%.o
-	@echo Frank is fixing $<
-	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
-	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
-
-$(EPILOGUE_DIR)/%.o: %.cpp $(BUILD_DIR)/%.o
 	@echo Frank is fixing $<
 	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
 	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)

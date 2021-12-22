@@ -158,6 +158,36 @@ lbl_8037A93C:
 /* 8037A948 00377528  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406DF0
+lbl_80406DF0:
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+.global jtbl_80406E20
+jtbl_80406E20:
+	.4byte lbl_8037A8D8
+	.4byte lbl_8037A8E0
+	.4byte lbl_8037A8E8
+	.4byte lbl_8037A8F0
+	.4byte lbl_8037A8F8
+	.4byte lbl_8037A900
+	.4byte lbl_8037A908
+	.4byte lbl_8037A910
+	.4byte lbl_8037A918
+	.4byte lbl_8037A920
+
+
 .section .sdata
 
 .global lbl_804D5EA0

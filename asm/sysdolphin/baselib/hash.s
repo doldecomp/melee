@@ -135,6 +135,14 @@ lbl_80382BE0:
 /* 80382BFC 0037F7DC  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80407720
+lbl_80407720:
+    .asciz "idx < hash->table_size"
+    .balign 4
+
+
 .section .sdata
 
 .global lbl_804D5FC0

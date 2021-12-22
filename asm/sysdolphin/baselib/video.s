@@ -1271,6 +1271,26 @@ lbl_80376970:
 /* 80376998 00373578  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406CE0
+lbl_80406CE0:
+    .asciz "idx != -1"
+    .balign 4
+.global lbl_80406CEC
+lbl_80406CEC:
+    .asciz "unexpected type of render pass.\n"
+    .balign 4
+.global lbl_80406D10
+lbl_80406D10:
+    .asciz "_p->xfb[idx].status == HSD_VI_XFB_DRAWING"
+    .balign 4
+.global lbl_80406D3C
+lbl_80406D3C:
+    .asciz "_p->xfb[idx].status == HSD_VI_XFB_WAITDONE"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .global lbl_804C0980

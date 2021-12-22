@@ -304,3 +304,20 @@ func_803909D8:
 /* 80390A30 0038D610  38 21 00 30 */	addi r1, r1, 0x30
 /* 80390A34 0038D614  7C 08 03 A6 */	mtlr r0
 /* 80390A38 0038D618  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_804084F0
+lbl_804084F0:
+    .asciz "gobjgxlink.c"
+    .balign 4
+.global lbl_80408500
+lbl_80408500:
+    .asciz "gx_link <= HSD_GObjLibInitData.gx_link_max"
+    .balign 4
+.global lbl_8040852C
+lbl_8040852C:
+    .asciz "gobj->gx_link != HSD_GOBJ_GXLINK_NONE"
+    .balign 4
+    .4byte NULL

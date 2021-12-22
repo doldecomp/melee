@@ -940,6 +940,16 @@ HSD_FObjFree:
 /* 8036B8CC 003684AC  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406350
+lbl_80406350:
+    .asciz "st == FOBJ_LOAD_WAIT"
+    .balign 4
+    .asciz "st == FOBJ_LOAD_DATA0 || st == FOBJ_LOAD_DATA"
+    .balign 4
+
+
 .section .sdata
 
 .global lbl_804D5D58

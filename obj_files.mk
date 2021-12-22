@@ -303,6 +303,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.o 			\
                                                     \
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.o		\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/dobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.o		\
@@ -310,6 +311,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tev.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/mobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/aobj.o	    \
+	$(BUILD_DIR)/asm/sysdolphin/baselib/aobj.o	    \
 	$(BUILD_DIR)/src/sysdolphin/baselib/lobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/lobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/cobj.o		\
@@ -370,9 +372,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psappsrt.o			\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/sobj.o				\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sislib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/code_803A949C.o		\
-
-DATA_O_FILES :=                                     \
-    $(BUILD_DIR)/asm/data.o

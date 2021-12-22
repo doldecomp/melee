@@ -5656,8 +5656,8 @@ func_803737F4:
 /* 80373808 003703E8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8037380C 003703EC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80373810 003703F0  3B E3 67 08 */	addi r31, r3, lbl_80406708@l
-/* 80373814 003703F4  3C 60 80 40 */	lis r3, lbl_804072A8@ha
-/* 80373818 003703F8  38 83 72 A8 */	addi r4, r3, lbl_804072A8@l
+/* 80373814 003703F4  3C 60 80 40 */	lis r3, hsdObj@ha
+/* 80373818 003703F8  38 83 72 A8 */	addi r4, r3, hsdObj@l
 /* 8037381C 003703FC  38 7F 00 00 */	addi r3, r31, 0
 /* 80373820 00370400  38 BF 03 98 */	addi r5, r31, 0x398
 /* 80373824 00370404  38 DF 03 B0 */	addi r6, r31, 0x3b0
@@ -5710,6 +5710,171 @@ lbl_803B94D0:
 	.float 1
     .float 1
     .float 1
+    .4byte NULL
+
+
+.section .data
+
+.global lbl_80406708
+lbl_80406708:
+    .4byte func_803737F4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80406758
+lbl_80406758:
+    .asciz "jobj->parent"
+    .balign 4
+    .asciz "jobj->aobj"
+    .balign 4
+    .asciz "jp->u.spline"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+.global jtbl_804067AC
+jtbl_804067AC:
+	.4byte lbl_80370768
+	.4byte lbl_80370004
+	.4byte lbl_803700C4
+	.4byte lbl_80370158
+	.4byte lbl_8036FE0C
+	.4byte lbl_803701EC
+	.4byte lbl_80370264
+	.4byte lbl_803702DC
+	.4byte lbl_80370354
+	.4byte lbl_803703F4
+	.4byte lbl_80370494
+	.4byte lbl_80370564
+	.4byte lbl_80370534
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_80370594
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_803705E0
+	.4byte lbl_80370610
+	.4byte lbl_8037063C
+	.4byte lbl_80370658
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370768
+	.4byte lbl_80370678
+	.4byte lbl_80370694
+	.4byte lbl_803706B0
+	.4byte lbl_803706CC
+	.4byte lbl_803706E8
+	.4byte lbl_803706E8
+	.4byte lbl_803706E8
+	.4byte lbl_803706E8
+.global lbl_80406894
+lbl_80406894:
+    .asciz "hsdIsDescendantOf(info, &hsdJObj)"
+    .balign 4
+    .asciz "jobj_root"
+    .balign 4
+    .asciz "jobj_root == NULL"
+    .balign 4
+    .asciz "jobj->child"
+    .balign 4
+.global lbl_804068E4
+lbl_804068E4:
+    .asciz "object.h"
+    .balign 4
+    .asciz "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF"
+    .balign 4
+.global lbl_80406918
+lbl_80406918:
+    .asciz "HSD_OBJ(o)->ref_count_individual != 0"
+    .balign 4
+    .asciz "child->next == NULL"
+    .balign 4
+    .asciz "child should be a orphan.\n"
+    .balign 4
+    .asciz "child->parent == NULL"
+    .balign 4
+    .asciz "child should not have siblings"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_INSTANCE)"
+    .balign 4
+    .asciz "last != child"
+    .balign 4
+.global lbl_804069D8
+lbl_804069D8:
+    .asciz "can not find specified jobj. maybe jobj tree is broken.\n"
+    .balign 4
+    .asciz "jobj[%d,%d]"
+    .balign 4
+    .asciz "SKELETON_ROOT "
+    .balign 4
+    .asciz "SKELETON "
+    .balign 4
+    .asciz "ENVELOPE_MODEL "
+    .balign 4
+    .asciz "EFFECTOR "
+    .balign 4
+    .asciz "  rot(L): "
+    .balign 4
+    .asciz "  sca(L): "
+    .balign 4
+    .asciz "  tra(L): "
+    .balign 4
+    .asciz "  rot(G): "
+    .balign 4
+    .asciz "  sca(G): "
+    .balign 4
+    .asciz "  tra(G): "
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_jobj"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
     .4byte NULL
 
 

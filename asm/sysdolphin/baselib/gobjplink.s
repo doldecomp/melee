@@ -528,6 +528,18 @@ lbl_80390628:
 /* 80390638 0038D218  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_804084B8
+lbl_804084B8:
+    .asciz "gobjplink.c"
+    .balign 4
+.global lbl_804084C4
+lbl_804084C4:
+    .asciz "p_link <= HSD_GObjLibInitData.p_link_max"
+    .balign 4
+
+
 .section .sdata
 
 .global lbl_804D6068

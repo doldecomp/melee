@@ -637,6 +637,35 @@ lbl_8039154C:
 /* 8039157C 0038E15C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+    .4byte NULL
+.global lbl_804085F0
+lbl_804085F0:
+    .4byte 0x00000001
+    .4byte 0x00000004
+    .4byte 0x00000002
+    .4byte NULL
+.global lbl_80408600
+lbl_80408600:
+	.4byte lbl_80391120
+	.4byte func_80366BD4
+	.4byte HSD_JObjRemoveAll
+	.4byte lbl_803911C0
+.global lbl_80408610
+lbl_80408610:
+    .4byte NULL
+    .4byte 0x04000000
+    .4byte lbl_80408600
+    .4byte NULL
+.global lbl_80408620
+lbl_80408620:
+    .4byte 0x3F3F0200
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804CE380

@@ -131,6 +131,18 @@ lbl_803882EC:
 /* 8038831C 00384EFC  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80407D60
+lbl_80407D60:
+    .asciz "assertion \"%s\" failed"
+    .balign 4
+.global lbl_80407D78
+lbl_80407D78:
+    .asciz "%s in %s on line %d.\n"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .global lbl_804C2608
