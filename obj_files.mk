@@ -248,6 +248,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/dvd/fstload.o          \
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GXMisc.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GX.o                \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx.o              \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtxvec.o           \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx44.o            \
