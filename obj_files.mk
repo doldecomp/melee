@@ -373,9 +373,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psappsrt.o			\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/sobj.o				\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sislib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/code_803A949C.o		\
-
-DATA_O_FILES :=                                     \
-    $(BUILD_DIR)/asm/data.o

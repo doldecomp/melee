@@ -4010,6 +4010,130 @@ HSD_SynthInit:
 /* 8038BB30 00388710  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80407D90
+lbl_80407D90:
+    .asciz "audio heap overflow.\n"
+    .balign 4
+    .asciz "Can't load SFX file; bank(id=%d) buffer overflow.\n"
+    .balign 4
+    .asciz "hsd_SynthSFXBankHead[bankID + 1] - hsd_SynthSFXBank[bankID] >= hsd_SynthSFXLoadBuf[1]"
+    .balign 4
+.global lbl_80407E34
+lbl_80407E34:
+    .asciz "invalid bankID = %d; filename = %s\n"
+    .balign 4
+.global lbl_80407E58
+lbl_80407E58:
+    .asciz "(bankID >= 0 && bankID < hsd_SynthSFXBankNum)"
+    .balign 4
+.global lbl_80407E88
+lbl_80407E88:
+    .asciz "bank overflow\n"
+    .balign 4
+.global lbl_80407E98
+lbl_80407E98:
+    .asciz "hsd_SynthSFXBankHead[hsd_SynthSFXBankNum + 1] <= hsd_SynthSFXBankAREnd"
+    .balign 4
+    .asciz "bank stack underflow\n"
+    .balign 4
+    .asciz "hsd_SynthSFXBankNum"
+    .balign 4
+.global lbl_80407F0C
+lbl_80407F0C:
+    .asciz "sfxGroupDataReaddressCounter > 0"
+    .balign 4
+    .asciz "Can't relocate SFX group; bank = %d; sfxgroup = %d\n"
+    .balign 4
+    .asciz "hsd_SynthSFXBank[bankID] + group->arsize <= hsd_SynthSFXBankHead[bankID + 1]"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80407FD8
+lbl_80407FD8:
+    .4byte 0x00010000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80407FE8
+lbl_80407FE8:
+    .asciz "sfx group ID %d out of range."
+    .balign 4
+.global lbl_80408008
+lbl_80408008:
+    .asciz "group >= 0 && group < HSD_SYNTHSFXGROUP_MAX"
+    .balign 4
+.global lbl_80408034
+lbl_80408034:
+    .asciz "flag >= 0 && flag < USERVOL_NUM"
+    .balign 4
+.global lbl_80408054
+lbl_80408054:
+    .asciz "flag == 0 || flag == 1"
+    .balign 4
+    .4byte NULL
+    .4byte 0x01010202
+    .4byte 0x03030404
+    .4byte 0x05050606
+    .4byte 0x07070808
+    .4byte 0x09090A0A
+    .4byte 0x0B0B0C0C
+    .4byte 0x0D0D0E0E
+    .4byte 0x0F0F1010
+    .4byte 0x11111212
+    .4byte 0x13131414
+    .4byte 0x15151616
+    .4byte 0x16171717
+    .4byte 0x17181818
+    .4byte 0x18191919
+    .4byte 0x19191A1A
+    .4byte 0x1A1A1A1A
+    .4byte 0x1B1B1B1B
+    .4byte 0x1B1B1B1C
+    .4byte 0x1C1C1C1C
+    .4byte 0x1C1C1C1D
+    .4byte 0x1D1D1D1D
+    .4byte 0x1D1D1D1D
+    .4byte 0x1E1E1E1E
+    .4byte 0x1E1E1E1E
+    .4byte 0x1E1E1F1F
+    .4byte 0x1F1F1F1F
+    .4byte 0x1F1F1F1F
+    .4byte 0x1F1F1F1F
+    .4byte 0x1F1F1F1F
+    .4byte 0x1F1F1F1F
+    .4byte 0x1F1F1F1F
+.global lbl_804080EC
+lbl_804080EC:
+    .asciz "entry->voice[1]"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804C28E0

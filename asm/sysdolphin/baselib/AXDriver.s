@@ -3530,6 +3530,130 @@ lbl_803B9618:
     .4byte 0x00000095
 
 
+.section .data
+
+.global lbl_80408140
+lbl_80408140:
+    .asciz "axdriver.c"
+    .balign 4
+.global lbl_8040814C
+lbl_8040814C:
+    .asciz "axfxallocsize < axfxmaxsize"
+    .balign 4
+.global lbl_80408168
+lbl_80408168:
+    .asciz "*head != v"
+    .balign 4
+.global lbl_80408174
+lbl_80408174:
+    .asciz "(v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE || (v->flags&SMSTATE_MASK) == SMSTATE_SLEEP"
+    .balign 4
+.global lbl_804081CC
+lbl_804081CC:
+    .asciz "(v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE"
+    .balign 4
+.global jtbl_804081F8
+jtbl_804081F8:
+	.4byte lbl_8038C698
+	.4byte lbl_8038C6A0
+	.4byte lbl_8038C6A0
+	.4byte lbl_8038C6A0
+	.4byte lbl_8038C6A0
+	.4byte lbl_8038C6A0
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6B0
+	.4byte lbl_8038C6B0
+	.4byte lbl_8038C6A0
+	.4byte lbl_8038C6A0
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A8
+	.4byte lbl_8038C6A0
+	.4byte lbl_8038C6A0
+.global lbl_80408250
+lbl_80408250:
+	.4byte lbl_8038CBEC
+	.4byte lbl_8038C7C8
+	.4byte lbl_8038C764
+	.4byte lbl_8038C78C
+	.4byte lbl_8038C7E4
+	.4byte lbl_8038C800
+	.4byte lbl_8038C868
+	.4byte lbl_8038C884
+	.4byte lbl_8038C8E4
+	.4byte lbl_8038C900
+	.4byte lbl_8038C960
+	.4byte lbl_8038C97C
+	.4byte lbl_8038C9DC
+	.4byte lbl_8038C9F8
+	.4byte lbl_8038CBD4
+	.4byte lbl_8038CBBC
+	.4byte lbl_8038CA5C
+	.4byte lbl_8038CABC
+	.4byte lbl_8038CB28
+	.4byte lbl_8038CB50
+	.4byte lbl_8038CA84
+	.4byte lbl_8038CAA0
+.global lbl_804082A8
+lbl_804082A8:
+	.4byte lbl_8038C70C
+	.4byte lbl_8038C714
+	.4byte lbl_8038C714
+	.4byte lbl_8038C714
+	.4byte lbl_8038C714
+	.4byte lbl_8038C714
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C724
+	.4byte lbl_8038C724
+	.4byte lbl_8038C714
+	.4byte lbl_8038C714
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C71C
+	.4byte lbl_8038C714
+	.4byte lbl_8038C714
+    .4byte 0x76202626
+    .4byte 0x20762D3E
+    .4byte 0x76494420
+    .4byte 0x3D3D2076
+    .4byte 0x49440000
+    .4byte 0x76696468
+    .4byte 0x69676820
+    .4byte 0x65786365
+    .4byte 0x65647320
+    .4byte 0x74686520
+    .4byte 0x6D617820
+    .4byte 0x76616C75
+    .4byte 0x650A0000
+.global lbl_80408334
+lbl_80408334:
+    .asciz "can not open %s\n"
+    .balign 4
+.global lbl_80408348
+lbl_80408348:
+    .asciz "file size of \"%s\" is 0\n"
+    .balign 4
+    .asciz "channel == 0 || channel == 1"
+    .balign 4
+    .asciz "0 <= type && type <= 4"
+    .balign 4
+    .asciz "type == 0 || param != NULL"
+    .balign 4
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804C45A0

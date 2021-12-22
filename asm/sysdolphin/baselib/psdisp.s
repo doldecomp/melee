@@ -4601,6 +4601,37 @@ lbl_803B9628:
     .4byte 0x00000000
 
 
+.section .data
+
+.global lbl_8040C300
+lbl_8040C300:
+    .asciz "object.h"
+    .balign 4
+    .asciz "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00010000
+    .4byte 0x01000101
+    .4byte 0x01010100
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte 0x01010100
+    .4byte 0x01000101
+    .4byte 0x00010000
+.global lbl_8040C360
+lbl_8040C360:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .asciz "Particle:setBlendMode:Unknown mode\n"
+    .balign 4
+    .asciz "psdisp.c"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .global lbl_804D0FC0
