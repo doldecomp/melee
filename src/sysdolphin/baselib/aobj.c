@@ -18,9 +18,6 @@ extern s32 lbl_8040603C;
 extern void* jtbl_80406058;
 extern void* jtbl_8040608C;
 
-extern const f32 lbl_804DE43C; // 1.0F
-extern const f32 lbl_804DE438; // 0.0F
-
 static HSD_SList* endcallback_list;
 
 static s32 lbl_804D762C;
@@ -120,7 +117,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
 
     if (aobj->flags & AOBJ_FIRST_PLAY) {
         aobj->flags &= 0xF7FFFFFF;
-        rate = lbl_804DE438;
+        rate = 0.0f;
     } else {
         rate = aobj->framerate;
         aobj->curr_frame += aobj->framerate;
@@ -138,7 +135,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
         } else {
             aobj->curr_frame = aobj->end_frame;
         }
-        rate = lbl_804DE438;
+        rate = 0.0f;
         aobj->flags |= AOBJ_REWINDED;
     } else {
         aobj->flags &= 0xFBFFFFFF;
@@ -191,7 +188,7 @@ asm HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
     /* 803643D8 00360FB8  90 1F 00 00 */	stw r0, 0(r31)
 lbl_803643DC:
     /* 803643DC 00360FBC  7F E3 FB 78 */	mr r3, r31
-    /* 803643E0 00360FC0  C0 22 EA 58 */	lfs f1, lbl_804DE438
+    /* 803643E0 00360FC0  C0 22 EA 58 */	lfs f1, 0.0f
     /* 803643E4 00360FC4  48 00 0F 39 */	bl HSD_AObjSetRewindFrame
     /* 803643E8 00360FC8  7F E3 FB 78 */	mr r3, r31
     /* 803643EC 00360FCC  C0 3D 00 04 */	lfs f1, 4(r29)
@@ -321,7 +318,7 @@ lbl_80364570:
     /* 80364580 00361160  3C 00 40 00 */	lis r0, 0x4000
     /* 80364584 00361164  90 1F 00 00 */	stw r0, 0(r31)
     /* 80364588 00361168  7F E3 FB 78 */	mr r3, r31
-    /* 8036458C 0036116C  C0 02 EA 5C */	lfs f0, lbl_804DE43C(r2)
+    /* 8036458C 0036116C  C0 02 EA 5C */	lfs f0, 1.0f
     /* 80364590 00361170  D0 1F 00 10 */	stfs f0, 0x10(r31)
     /* 80364594 00361174  80 01 00 14 */	lwz r0, 0x14(r1)
     /* 80364598 00361178  83 E1 00 0C */	lwz r31, 0xc(r1)

@@ -1400,3 +1400,15 @@ lbl_804D7620:
 .global lbl_804D7624
 lbl_804D7624:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DE428
+lbl_804DE428:
+	.4byte 0x406FE000
+	.4byte 0x00000000
+.global lbl_804DE430
+lbl_804DE430:
+	.4byte 0x3F800000
+	.4byte 0x00000000

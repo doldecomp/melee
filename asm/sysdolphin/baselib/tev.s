@@ -836,3 +836,11 @@ lbl_804D7604:
 .global lbl_804D760C
 lbl_804D760C:
 	.skip 0xC
+
+
+.section .sdata2
+
+.global lbl_804DE420
+lbl_804DE420:
+	.4byte 0x406FE000
+	.4byte 0x00000000
