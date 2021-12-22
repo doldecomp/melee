@@ -1193,6 +1193,43 @@ lbl_803B8544:
     .4byte 0x00000000
 
 
+.section .data
+
+.global lbl_803F0570
+lbl_803F0570:
+    .asciz "MvOmake15.mth"
+    .balign 4
+.global lbl_803F0580
+lbl_803F0580:
+    .asciz "MvHowTo.mth"
+    .balign 4
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mngallery.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .asciz "cursor_user_data"
+    .balign 4
+    .asciz "MenMainConGa_Top_joint"
+    .balign 4
+    .asciz "MenMainConGa_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConGa_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConGa_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_animjoint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_shapeanim_joint"
+    .balign 4
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804A0B90

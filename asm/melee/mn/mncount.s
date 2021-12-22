@@ -1721,6 +1721,116 @@ lbl_80251984:
 /* 80251A04 0024E5E4  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_803EFA88
+lbl_803EFA88:
+    .4byte NULL
+    .4byte 0x41980000
+    .4byte 0xBDCCCCCD
+    .4byte 0x41A00000
+    .4byte 0x41E80000
+    .4byte 0xBDCCCCCD
+.global lbl_803EFAA0
+lbl_803EFAA0:
+    .4byte NULL
+    .4byte 0x43470000
+    .4byte NULL
+.global lbl_803EFAAC
+lbl_803EFAAC:
+    .4byte 0x00C900CA
+    .4byte 0x00CB00CC
+    .4byte 0x00CD00CE
+    .4byte 0x00CF00D0
+    .4byte 0x00D100D2
+    .4byte 0x00D300D4
+    .4byte 0x00D500D6
+    .4byte 0x00D700D8
+    .4byte 0x00D900DA
+    .4byte 0x00DB00DC
+    .4byte 0x00DD00DE
+    .4byte 0x00DF00E0
+    .4byte 0x00E100E2
+    .4byte 0x00E300E4
+    .4byte 0x00E500E6
+.global jtbl_803EFAE8
+jtbl_803EFAE8:
+	.4byte lbl_80250CB4
+	.4byte lbl_80250CC8
+	.4byte lbl_80250CDC
+	.4byte lbl_80250D2C
+	.4byte lbl_80250D44
+	.4byte lbl_80250D5C
+	.4byte lbl_80250D74
+	.4byte lbl_80250D8C
+	.4byte lbl_80250DA0
+	.4byte lbl_80250DB4
+.global jtbl_803EFB10
+jtbl_803EFB10:
+	.4byte lbl_80250E20
+	.4byte lbl_80250E2C
+	.4byte lbl_80250E38
+	.4byte lbl_80250E40
+	.4byte lbl_80250E4C
+	.4byte lbl_80250E58
+	.4byte lbl_80250E64
+	.4byte lbl_80250E6C
+	.4byte lbl_80250E78
+	.4byte lbl_80250E84
+	.4byte lbl_80250E90
+	.4byte lbl_80250E9C
+	.4byte lbl_80250EA8
+	.4byte lbl_80250EB4
+	.4byte lbl_80250EC0
+	.4byte lbl_80250ECC
+	.4byte lbl_80250ED8
+	.4byte lbl_80250F0C
+	.4byte lbl_80250F40
+	.4byte lbl_80250F48
+    .4byte 0x43616E27
+    .4byte 0x74206765
+    .4byte 0x74207573
+    .4byte 0x65725F64
+    .4byte 0x6174612E
+    .4byte 0x0A000000
+    .4byte 0x6D6E636F
+    .4byte 0x756E742E
+    .4byte 0x63000000
+    .4byte 0x75736572
+    .4byte 0x5F646174
+    .4byte 0x61000000
+    .4byte 0x4D656E4D
+    .4byte 0x61696E43
+    .4byte 0x6F6E436F
+    .4byte 0x5F546F70
+    .4byte 0x5F6A6F69
+    .4byte 0x6E740000
+    .4byte 0x4D656E4D
+    .4byte 0x61696E43
+    .4byte 0x6F6E436F
+    .4byte 0x5F546F70
+    .4byte 0x5F616E69
+    .4byte 0x6D6A6F69
+    .4byte 0x6E740000
+    .4byte 0x4D656E4D
+    .4byte 0x61696E43
+    .4byte 0x6F6E436F
+    .4byte 0x5F546F70
+    .4byte 0x5F6D6174
+    .4byte 0x616E696D
+    .4byte 0x5F6A6F69
+    .4byte 0x6E740000
+    .4byte 0x4D656E4D
+    .4byte 0x61696E43
+    .4byte 0x6F6E436F
+    .4byte 0x5F546F70
+    .4byte 0x5F736861
+    .4byte 0x7065616E
+    .4byte 0x696D5F6A
+    .4byte 0x6F696E74
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804A0948

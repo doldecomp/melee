@@ -302,6 +302,30 @@ lbl_80325EE4:
 /* 80325F14 00322AF4  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80400728
+lbl_80400728:
+	.4byte lbl_80325EB4
+	.4byte lbl_80325C98
+	.4byte lbl_80325D34
+	.4byte lbl_80325EB4
+	.4byte lbl_80325D7C
+	.4byte lbl_80325EB4
+	.4byte lbl_80325EB4
+	.4byte lbl_80325EB4
+	.4byte lbl_80325DCC
+	.4byte lbl_80325EB4
+	.4byte lbl_80325EB4
+	.4byte lbl_80325EB4
+	.4byte lbl_80325EB4
+	.4byte lbl_80325EB4
+	.4byte lbl_80325EB4
+	.4byte lbl_80325EB4
+	.4byte lbl_80325DCC
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7078

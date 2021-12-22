@@ -14196,19 +14196,12 @@ lbl_803ED2E8:
     .4byte 0x003D3C00
     .4byte 0x3F3E4041
     .4byte NULL
-    .4byte 0x43616E27
-    .4byte 0x74206765
-    .4byte 0x74207573
-    .4byte 0x65725F64
-    .4byte 0x6174612E
-    .4byte 0x0A000000
-    .4byte 0x6D6E7275
-    .4byte 0x6C65706C
-    .4byte 0x75732E63
-    .4byte NULL
-    .4byte 0x75736572
-    .4byte 0x5F646174
-    .4byte 0x61000000
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mnruleplus.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
     .4byte NULL
 
 
