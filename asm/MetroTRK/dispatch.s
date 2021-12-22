@@ -46,3 +46,43 @@ lbl_80327724:
 /* 80327734 00324314  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327738 00324318  7C 08 03 A6 */	mtlr r0
 /* 8032773C 0032431C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80400788
+lbl_80400788:
+	.4byte lbl_8032785C
+	.4byte lbl_80327884
+	.4byte lbl_803278AC
+	.4byte TRKDoReset
+	.4byte TRKDoVersions
+	.4byte TRKDoSupportMask
+	.4byte TRKDoCPUType
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte TRKDoReadMemory
+	.4byte TRKDoWriteMemory
+	.4byte TRKDoReadRegisters
+	.4byte TRKDoWriteRegisters
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte TRKDoFlushCache
+	.4byte lbl_8032785C
+	.4byte TRKDoContinue
+	.4byte TRKDoStep
+	.4byte TRKDoStop
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+	.4byte lbl_8032785C
+    .4byte NULL
+    .4byte NULL

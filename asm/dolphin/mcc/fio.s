@@ -862,6 +862,49 @@ lbl_8032F614:
 /* 8032F62C 0032C20C  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
 
 
+.section .data
+
+.global lbl_80400918
+lbl_80400918:
+    .asciz "Error:Time is over.\n"
+    .balign 4
+    .asciz "UNLOCKED"
+    .balign 4
+    .asciz "DISCONNECT"
+    .balign 4
+    .asciz "HOST_OPEN"
+    .balign 4
+    .asciz "TARGET_OPEN"
+    .balign 4
+    .asciz "CONNECTED"
+    .balign 4
+    .asciz "%2d: FirstBlock:%02d,BlockLength:%02d,Connect:%s,Lock:%s.\n"
+    .balign 4
+    .asciz "[fio] Error: %s\n"
+    .balign 4
+    .asciz "fioPacketSendPacket.MCCWrite.NG"
+    .balign 4
+    .asciz "fioPacketSendPacket.MCCNotify.NG"
+    .balign 4
+    .asciz "fioPacketResultRead.MCCClose.NG"
+    .balign 4
+    .asciz "fioPacketResultRead.MCCStreamOpen.NG"
+    .balign 4
+    .asciz "fioPacketResultRead.MCCStreamRead.NG(Err:%d)"
+    .balign 4
+    .asciz "MCCStream:MCCStreamClose.NG\n"
+    .balign 4
+    .asciz "MCCStream:MCCOpen.NG\n"
+    .balign 4
+    .asciz "fioPacketResultWrite.MCCClose.NG"
+    .balign 4
+    .asciz "fioPacketResultWrite.MCCStreamOpen.NG"
+    .balign 4
+    .asciz "fioPacketResultWrite.MCCStreamWrite.NG"
+    .balign 4
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804A5300

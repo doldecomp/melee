@@ -632,6 +632,28 @@ lbl_80336ABC:
 /* 80336AD8 003336B8  90 03 00 3C */	stw r0, 0x3c(r3)
 /* 80336ADC 003336BC  4E 80 00 20 */	blr 
 
+
+.section .data
+
+.global lbl_80400C40
+lbl_80400C40:
+    .asciz "DSP is booting task: 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : IRAM MMEM ADDR: 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : IRAM DSP ADDR : 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : IRAM LENGTH   : 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : DRAM MMEM ADDR: 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_boot_task()  : Start Vector  : 0x%08X\n"
+    .balign 4
+    .asciz "__DSP_add_task() : Added task    : 0x%08X\n"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global __DSP_rude_task_pending

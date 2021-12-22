@@ -1837,3 +1837,25 @@ lbl_80328F34:
 /* 80328F44 00325B24  80 01 00 04 */	lwz r0, 4(r1)
 /* 80328F48 00325B28  7C 08 03 A6 */	mtlr r0
 /* 80328F4C 00325B2C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global jtbl_80400810
+jtbl_80400810:
+	.4byte lbl_80327F64
+	.4byte lbl_80327F84
+	.4byte lbl_80327F5C
+	.4byte lbl_80327F84
+	.4byte lbl_80327F6C
+	.4byte lbl_80327F74
+	.4byte lbl_80327F7C
+.global jtbl_8040082C
+jtbl_8040082C:
+	.4byte lbl_80328160
+	.4byte lbl_80328180
+	.4byte lbl_80328158
+	.4byte lbl_80328180
+	.4byte lbl_80328168
+	.4byte lbl_80328170
+	.4byte lbl_80328178

@@ -1640,3 +1640,25 @@ lbl_803B93F8:
     .4byte 0x60000000
     .4byte 0x60000000
     .4byte 0x00000000
+
+
+.section .data
+
+.global lbl_80400848
+lbl_80400848:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80400854
+lbl_80400854:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x01000000
+.global lbl_80400864
+lbl_80400864:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL

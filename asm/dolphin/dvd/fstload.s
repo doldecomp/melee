@@ -160,6 +160,22 @@ lbl_8033A6A0:
 /* 8033A6DC 003372BC  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80400FD8
+lbl_80400FD8:
+    .asciz "  Game Name ... %c%c%c%c\n"
+    .balign 4
+    .asciz "  Company ..... %c%c\n"
+    .balign 4
+    .asciz "  Disk # ...... %d\n"
+    .balign 4
+    .asciz "  Game ver .... %d\n"
+    .balign 4
+    .asciz "  Streaming ... %s\n"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .global lbl_804A7658

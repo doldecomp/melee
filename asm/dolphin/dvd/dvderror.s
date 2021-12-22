@@ -104,3 +104,25 @@ lbl_8033A47C:
 /* 8033A494 00337074  38 21 00 20 */	addi r1, r1, 0x20
 /* 8033A498 00337078  7C 08 03 A6 */	mtlr r0
 /* 8033A49C 0033707C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80400F98
+lbl_80400F98:
+    .4byte NULL
+    .4byte 0x00023A00
+    .4byte 0x00062800
+    .4byte 0x00030200
+    .4byte 0x00031100
+    .4byte 0x00052000
+    .4byte 0x00052001
+    .4byte 0x00052100
+    .4byte 0x00052400
+    .4byte 0x00052401
+    .4byte 0x00052402
+    .4byte 0x000B5A01
+    .4byte 0x00056300
+    .4byte 0x00020401
+    .4byte 0x00020400
+    .4byte 0x00040800

@@ -1626,6 +1626,64 @@ lbl_8034AB54:
 /* 8034AB7C 0034775C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80402358
+lbl_80402358:
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_8040236C
+lbl_8040236C:
+    .4byte 0x00000008
+    .4byte 0x00000008
+    .4byte 0x00000008
+    .4byte 0x00000008
+    .4byte 0x4E6F2072
+    .4byte 0x6573706F
+    .4byte 0x6E736500
+    .4byte 0x4E363420
+    .4byte 0x636F6E74
+    .4byte 0x726F6C6C
+    .4byte 0x65720000
+    .4byte 0x4E363420
+    .4byte 0x6D696372
+    .4byte 0x6F70686F
+    .4byte 0x6E650000
+    .4byte 0x4E363420
+    .4byte 0x6B657962
+    .4byte 0x6F617264
+    .4byte NULL
+    .4byte 0x4E363420
+    .4byte 0x6D6F7573
+    .4byte 0x65000000
+    .4byte 0x47616D65
+    .4byte 0x426F7920
+    .4byte 0x41647661
+    .4byte 0x6E636500
+    .4byte 0x5374616E
+    .4byte 0x64617264
+    .4byte 0x20636F6E
+    .4byte 0x74726F6C
+    .4byte 0x6C657200
+    .4byte 0x57697265
+    .4byte 0x6C657373
+    .4byte 0x20726563
+    .4byte 0x65697665
+    .4byte 0x72000000
+    .4byte 0x57617665
+    .4byte 0x42697264
+    .4byte 0x20636F6E
+    .4byte 0x74726F6C
+    .4byte 0x6C657200
+    .4byte 0x4B657962
+    .4byte 0x6F617264
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global Packet

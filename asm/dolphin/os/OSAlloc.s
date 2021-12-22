@@ -497,6 +497,51 @@ lbl_803444B8:
 /* 803444C4 003410A4  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_804017D8
+lbl_804017D8:
+    .asciz "OSCheckHeap: Failed HeapArray in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed 0 <= heap && heap < NumHeaps in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed 0 <= hd->size in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed hd->allocated == NULL || hd->allocated->prev == NULL in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed InRange(cell, ArenaStart, ArenaEnd) in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed OFFSET(cell, ALIGNMENT) == 0 in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed cell->next == NULL || cell->next->prev == cell in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed MINOBJSIZE <= cell->size in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed OFFSET(cell->size, ALIGNMENT) == 0 in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed 0 < total && total <= hd->size in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed hd->free == NULL || hd->free->prev == NULL in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed cell->next == NULL || (char*) cell + cell->size < (char*) cell->next in %d"
+    .balign 4
+    .asciz "OSCheckHeap: Failed total == hd->size in %d"
+    .balign 4
+    .asciz "\nOSDumpHeap(%d):\n"
+    .balign 4
+    .asciz "--------Inactive\n"
+    .balign 4
+    .asciz "addr\tsize\t\tend\tprev\tnext\n"
+    .balign 4
+    .asciz "--------Allocated\n"
+    .balign 4
+    .asciz "%x\t%d\t%x\t%x\t%x\n"
+    .balign 4
+    .asciz "--------Free\n"
+    .balign 4
+    .4byte NULL
+
+
 .section .sdata
 
 .global __OSCurrHeap

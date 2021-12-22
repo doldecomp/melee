@@ -85,6 +85,14 @@ lbl_80335FA0:
 /* 80335FC4 00332BA4  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80400BF0
+lbl_80400BF0:
+    .asciz "DBExceptionDestination\n"
+    .balign 4
+
+
 .section .sbss
 
 .global __DBInterface
