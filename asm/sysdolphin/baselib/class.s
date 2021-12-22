@@ -959,31 +959,6 @@ lbl_80382A2C:
 
 .section .data
 
-.global hsdClass
-hsdClass:
-    .4byte func_803822C0
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-.global lbl_804075CC
-lbl_804075CC:
-    .asciz "class_info->head.obj_size >= parent_info->head.obj_size"
-    .balign 4
-.global lbl_80407604
-lbl_80407604:
-    .asciz "class_info->head.info_size >= parent_info->head.info_size"
-    .balign 4
     .asciz "entry %d <null>\n"
     .balign 4
     .asciz "entry %d - %d <null>\n"

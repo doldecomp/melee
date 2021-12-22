@@ -2,14 +2,6 @@
 
 .include "macros.inc"
 
-.global lbl_80405FB8
-lbl_80405FB8:
-    .asciz "object.h"
-    .balign 4
-.global lbl_80405FC4
-lbl_80405FC4:
-    .asciz "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF"
-    .balign 4
 .global jtbl_80405FEC
 jtbl_80405FEC:
     .4byte callbackForeachFunc + 0x2C

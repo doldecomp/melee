@@ -1,11 +1,11 @@
 #include "sysdolphin/baselib/class.h"
 
-extern char lbl_804075CC[];
-extern char lbl_80407604[];
+extern void func_803822C0();
+
+HSD_ClassInfo hsdClass = { func_803822C0 };
 
 extern char lbl_804D5FA8[8]; // "class.c\0";
 extern char lbl_804D5FB0[2];
-
 
 void ClassInfoInit(HSD_ClassInfo* info)
 {
@@ -32,10 +32,10 @@ void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, cha
             (*parent_info->head.info_init)();
         }
         if (class_info->head.obj_size < parent_info->head.obj_size) {
-            __assert(lbl_804D5FA8, 94, lbl_804075CC);
+            __assert(lbl_804D5FA8, 94, "class_info->head.obj_size >= parent_info->head.obj_size");
         }
         if (class_info->head.info_size < parent_info->head.info_size) {
-            __assert(lbl_804D5FA8, 95, lbl_80407604);
+            __assert(lbl_804D5FA8, 95, "class_info->head.info_size >= parent_info->head.info_size");
         }
         memcpy(&class_info->alloc, &parent_info->alloc, parent_info->head.info_size - 0x28);
         class_info->head.next = parent_info->head.child;

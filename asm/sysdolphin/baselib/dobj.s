@@ -2,25 +2,6 @@
 
 .include "macros.inc"
 
-.global hsdDObj
-hsdDObj:
-    .4byte DObjInfoInit
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
 .global lbl_80405494
 lbl_80405494:
     .asciz "mobj has unexpected blending flags (0x%x)."
