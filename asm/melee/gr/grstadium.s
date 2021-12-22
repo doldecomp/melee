@@ -5167,3 +5167,127 @@ lbl_804D4614:
 .global lbl_804D6978
 lbl_804D6978:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DAEF8
+lbl_804DAEF8:
+	.4byte 0x00000000
+.global lbl_804DAEFC
+lbl_804DAEFC:
+	.4byte 0x41F00000
+.global lbl_804DAF00
+lbl_804DAF00:
+	.4byte 0xC1C80000
+.global lbl_804DAF04
+lbl_804DAF04:
+	.4byte 0x41C80000
+.global lbl_804DAF08
+lbl_804DAF08:
+	.4byte 0x41200000
+.global lbl_804DAF0C
+lbl_804DAF0C:
+	.4byte 0xC1200000
+.global lbl_804DAF10
+lbl_804DAF10:
+	.4byte 0xBC0EFA35
+	.4byte 0x00000000
+.global lbl_804DAF18
+lbl_804DAF18:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DAF20
+lbl_804DAF20:
+	.4byte 0xC3200000
+.global lbl_804DAF24
+lbl_804DAF24:
+	.4byte 0x437A0000
+.global lbl_804DAF28
+lbl_804DAF28:
+	.4byte 0x43200000
+.global lbl_804DAF2C
+lbl_804DAF2C:
+	.4byte 0x42780000
+.global lbl_804DAF30
+lbl_804DAF30:
+	.4byte 0x42F80000
+.global lbl_804DAF34
+lbl_804DAF34:
+	.4byte 0x42200000
+.global lbl_804DAF38
+lbl_804DAF38:
+	.4byte 0x42A00000
+.global lbl_804DAF3C
+lbl_804DAF3C:
+	.4byte 0xFFFFFFFF
+.global lbl_804DAF40
+lbl_804DAF40:
+	.4byte 0x3EA00000
+.global lbl_804DAF44
+lbl_804DAF44:
+	.4byte 0x3F200000
+.global lbl_804DAF48
+lbl_804DAF48:
+	.4byte 0x3E851EB8
+.global lbl_804DAF4C
+lbl_804DAF4C:
+	.4byte 0x428C0000
+.global lbl_804DAF50
+lbl_804DAF50:
+	.4byte 0x433A0000
+.global lbl_804DAF54
+lbl_804DAF54:
+	.4byte 0x42700000
+.global lbl_804DAF58
+lbl_804DAF58:
+	.4byte 0x42FA0000
+.global lbl_804DAF5C
+lbl_804DAF5C:
+	.4byte 0x42F00000
+.global lbl_804DAF60
+lbl_804DAF60:
+	.4byte 0xC0C0FFFF
+.global lbl_804DAF64
+lbl_804DAF64:
+	.4byte 0x3FC00000
+.global lbl_804DAF68
+lbl_804DAF68:
+	.4byte 0x42500000
+.global lbl_804DAF6C
+lbl_804DAF6C:
+	.4byte 0xC0400000
+.global lbl_804DAF70
+lbl_804DAF70:
+	.4byte 0xFFFFFFFF
+.global lbl_804DAF74
+lbl_804DAF74:
+	.4byte 0x42600000
+.global lbl_804DAF78
+lbl_804DAF78:
+	.4byte 0x3ED70A3D
+.global lbl_804DAF7C
+lbl_804DAF7C:
+	.4byte 0x3F99999A
+.global lbl_804DAF80
+lbl_804DAF80:
+	.4byte 0x3F800000
+.global lbl_804DAF84
+lbl_804DAF84:
+	.4byte 0x3F4CCCCD
+.global lbl_804DAF88
+lbl_804DAF88:
+	.4byte 0x3FA00000
+.global lbl_804DAF8C
+lbl_804DAF8C:
+	.4byte 0x437F0000
+.global lbl_804DAF90
+lbl_804DAF90:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DAF98
+lbl_804DAF98:
+	.4byte 0x3F733333
+.global lbl_804DAF9C
+lbl_804DAF9C:
+	.4byte 0x3D4CCCCD

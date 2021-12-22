@@ -992,3 +992,25 @@ lbl_804D45B0:
     .asciz "0"
     .balign 4
     .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804DADB8
+lbl_804DADB8:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DADC0
+lbl_804DADC0:
+	.4byte 0x3FF00000
+	.4byte 0x00000000
+.global lbl_804DADC8
+lbl_804DADC8:
+	.4byte 0x3F800000
+.global lbl_804DADCC
+lbl_804DADCC:
+	.4byte 0x3F8CCCCD
+.global lbl_804DADD0
+lbl_804DADD0:
+	.4byte 0x3F666666
+	.4byte 0x00000000
