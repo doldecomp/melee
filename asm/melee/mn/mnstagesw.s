@@ -1973,6 +1973,52 @@ func_80237410:
 /* 80237498 00234078  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_803ED488
+lbl_803ED488:
+    .4byte NULL
+    .4byte 0x43470000
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x41100000
+    .4byte 0xBDCCCCCD
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xBDCCCCCD
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xBDCCCCCD
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xBDCCCCCD
+.global lbl_803ED4C4
+lbl_803ED4C4:
+    .4byte 0x00010203
+    .4byte 0x04050607
+    .4byte 0x08090B0A
+    .4byte 0x181A1C0C
+    .4byte 0x0D0E0F10
+    .4byte 0x11121314
+    .4byte 0x15161719
+    .4byte 0x1B000000
+    .4byte 0x0809110A
+    .4byte 0x0C060B07
+    .4byte 0x0E0D1D17
+    .4byte 0x0F101213
+    .4byte 0x14151A1B
+    .4byte 0x1C16181F
+    .4byte 0x20212223
+    .4byte 0x24000000
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mnstagesw.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .4byte NULL
+
+
 .section .sdata
 
 .global lbl_804D4BB8

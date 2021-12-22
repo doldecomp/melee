@@ -2208,6 +2208,92 @@ func_802358C0:
 /* 80235938 00232518  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_803ED340
+lbl_803ED340:
+    .4byte NULL
+    .4byte 0x41100000
+    .4byte 0xBDCCCCCD
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xBDCCCCCD
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xBDCCCCCD
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xBDCCCCCD
+.global lbl_803ED370
+lbl_803ED370:
+    .4byte NULL
+    .4byte 0x41200000
+    .4byte 0xBDCCCCCD
+    .4byte NULL
+    .4byte 0x43470000
+    .4byte NULL
+    .4byte 0x41200000
+    .4byte 0x41300000
+    .4byte 0x41000000
+    .4byte 0x41100000
+    .4byte 0x40C00000
+    .4byte 0x40E00000
+    .4byte 0x40800000
+    .4byte 0x40A00000
+    .4byte 0x40000000
+    .4byte 0x40400000
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte 0x40000000
+    .4byte 0x40400000
+    .4byte 0x40800000
+    .4byte 0x40A00000
+    .4byte 0x40C00000
+    .4byte 0x40E00000
+    .4byte 0x41000000
+    .4byte 0x41100000
+    .4byte 0x41200000
+    .4byte 0x41300000
+    .4byte 0x41400000
+    .4byte 0x41500000
+    .4byte 0x41600000
+    .4byte 0x41700000
+    .4byte 0x41800000
+    .4byte 0x41880000
+    .4byte 0x41900000
+    .4byte 0x41980000
+    .4byte 0x41A00000
+    .4byte 0x41A80000
+    .4byte 0x41B00000
+    .4byte 0x41B80000
+    .4byte 0x41C80000
+    .4byte 0x41C00000
+    .4byte 0x41D00000
+    .4byte 0x41D80000
+    .4byte 0x41E80000
+    .4byte 0x41E00000
+    .4byte 0x41F00000
+    .4byte 0x41F80000
+.global lbl_803ED438
+lbl_803ED438:
+    .4byte 0x05120A1E
+    .4byte 0x0D18030E
+    .4byte 0x171B0109
+    .4byte 0x08071504
+    .4byte 0x06020F00
+    .4byte 0x110B1F1A
+    .4byte 0x14191016
+    .4byte 0x131D0C00
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mnitemsw.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+
+
 .section .sdata
 
 .global lbl_804D4BA0
