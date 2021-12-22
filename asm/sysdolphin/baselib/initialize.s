@@ -833,9 +833,6 @@ lbl_804D76D0:
 
 .section .sdata2
 
-.global black
-black:
-	.4byte 0x00000000
 .global lbl_804DE594
 lbl_804DE594:
 	.4byte 0x3F800000
