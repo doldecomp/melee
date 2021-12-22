@@ -729,6 +729,22 @@ lbl_803B9378:
     .4byte 0x3F490FDB
 
 
+.section .data
+
+.global lbl_80400770
+lbl_80400770:
+    .4byte 0x7FFFFFFF
+.global lbl_80400774
+lbl_80400774:
+    .4byte 0x7F800000
+.global lbl_80400778
+lbl_80400778:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+
 .section .sdata2
 
 .global lbl_804DE190
