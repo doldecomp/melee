@@ -2,20 +2,6 @@
 
 .include "macros.inc"
 
-.global jtbl_80405FEC
-jtbl_80405FEC:
-    .4byte callbackForeachFunc + 0x2C
-    .4byte callbackForeachFunc + 0x3C
-    .4byte callbackForeachFunc + 0x50
-    .4byte callbackForeachFunc + 0x64
-    .4byte callbackForeachFunc + 0x78
-    .4byte callbackForeachFunc + 0x98
-    .4byte callbackForeachFunc + 0xAC
-    .4byte callbackForeachFunc + 0xC0
-    .4byte callbackForeachFunc + 0x88
-    .4byte callbackForeachFunc + 0xD4
-    .4byte callbackForeachFunc + 0xE8
-    .4byte callbackForeachFunc + 0xFC
 .global lbl_8040601C
 lbl_8040601C:
     .asciz "unexpected argument format.\n"
