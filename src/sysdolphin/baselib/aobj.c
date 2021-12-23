@@ -286,7 +286,7 @@ HSD_AObj* HSD_AObjAlloc(void)
     HSD_AObj* aobj = (HSD_AObj*)HSD_ObjAlloc(&aobj_alloc_data);
     if (aobj == NULL)
     {
-        __assert(__FILE__, 489, "0");
+        __assert(lbl_804D5D08, 489, "0");
     }
     memset(aobj, 0, sizeof(HSD_AObj));
     aobj->flags = AOBJ_NO_ANIM;
@@ -337,84 +337,49 @@ void HSD_AObjFree(HSD_AObj* aobj)
     
     HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*)aobj);
 }
-#pragma pop
 
-asm void callbackForeachFunc(HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, FObjData *arg)
+void callbackForeachFunc(struct _HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg *arg)
 {
-    nofralloc
-    /* 803645D8 003611B8  7C 08 02 A6 */	mflr r0
-    /* 803645DC 003611BC  28 07 00 0B */	cmplwi r7, 0xb
-    /* 803645E0 003611C0  90 01 00 04 */	stw r0, 4(r1)
-    /* 803645E4 003611C4  94 21 FF F8 */	stwu r1, -8(r1)
-    /* 803645E8 003611C8  41 81 00 FC */	bgt lbl_803646E4
-    /* 803645EC 003611CC  3D 20 80 40 */	lis r9, jtbl_80405FEC@ha
-    /* 803645F0 003611D0  39 29 5F EC */	addi r9, r9, jtbl_80405FEC@l
-    /* 803645F4 003611D4  54 E0 10 3A */	slwi r0, r7, 2
-    /* 803645F8 003611D8  7C 09 00 2E */	lwzx r0, r9, r0
-    /* 803645FC 003611DC  7C 09 03 A6 */	mtctr r0
-    /* 80364600 003611E0  4E 80 04 20 */	bctr 
-    /* 80364604 003611E4  39 86 00 00 */	addi r12, r6, 0
-    /* 80364608 003611E8  7D 88 03 A6 */	mtlr r12
-    /* 8036460C 003611EC  4E 80 00 21 */	blrl 
-    /* 80364610 003611F0  48 00 00 D4 */	b lbl_803646E4
-    /* 80364614 003611F4  7C CC 33 78 */	mr r12, r6
-    /* 80364618 003611F8  C0 28 00 00 */	lfs f1, 0(r8)
-    /* 8036461C 003611FC  7D 88 03 A6 */	mtlr r12
-    /* 80364620 00361200  4E 80 00 21 */	blrl 
-    /* 80364624 00361204  48 00 00 C0 */	b lbl_803646E4
-    /* 80364628 00361208  7C CC 33 78 */	mr r12, r6
-    /* 8036462C 0036120C  80 88 00 00 */	lwz r4, 0(r8)
-    /* 80364630 00361210  7D 88 03 A6 */	mtlr r12
-    /* 80364634 00361214  4E 80 00 21 */	blrl 
-    /* 80364638 00361218  48 00 00 AC */	b lbl_803646E4
-    /* 8036463C 0036121C  7C CC 33 78 */	mr r12, r6
-    /* 80364640 00361220  80 88 00 00 */	lwz r4, 0(r8)
-    /* 80364644 00361224  7D 88 03 A6 */	mtlr r12
-    /* 80364648 00361228  4E 80 00 21 */	blrl 
-    /* 8036464C 0036122C  48 00 00 98 */	b lbl_803646E4
-    /* 80364650 00361230  39 86 00 00 */	addi r12, r6, 0
-    /* 80364654 00361234  7D 88 03 A6 */	mtlr r12
-    /* 80364658 00361238  4E 80 00 21 */	blrl 
-    /* 8036465C 0036123C  48 00 00 88 */	b lbl_803646E4
-    /* 80364660 00361240  39 86 00 00 */	addi r12, r6, 0
-    /* 80364664 00361244  7D 88 03 A6 */	mtlr r12
-    /* 80364668 00361248  4E 80 00 21 */	blrl 
-    /* 8036466C 0036124C  48 00 00 78 */	b lbl_803646E4
-    /* 80364670 00361250  7C CC 33 78 */	mr r12, r6
-    /* 80364674 00361254  C0 28 00 00 */	lfs f1, 0(r8)
-    /* 80364678 00361258  7D 88 03 A6 */	mtlr r12
-    /* 8036467C 0036125C  4E 80 00 21 */	blrl 
-    /* 80364680 00361260  48 00 00 64 */	b lbl_803646E4
-    /* 80364684 00361264  7C CC 33 78 */	mr r12, r6
-    /* 80364688 00361268  80 A8 00 00 */	lwz r5, 0(r8)
-    /* 8036468C 0036126C  7D 88 03 A6 */	mtlr r12
-    /* 80364690 00361270  4E 80 00 21 */	blrl 
-    /* 80364694 00361274  48 00 00 50 */	b lbl_803646E4
-    /* 80364698 00361278  7C CC 33 78 */	mr r12, r6
-    /* 8036469C 0036127C  80 A8 00 00 */	lwz r5, 0(r8)
-    /* 803646A0 00361280  7D 88 03 A6 */	mtlr r12
-    /* 803646A4 00361284  4E 80 00 21 */	blrl 
-    /* 803646A8 00361288  48 00 00 3C */	b lbl_803646E4
-    /* 803646AC 0036128C  7C CC 33 78 */	mr r12, r6
-    /* 803646B0 00361290  C0 28 00 00 */	lfs f1, 0(r8)
-    /* 803646B4 00361294  7D 88 03 A6 */	mtlr r12
-    /* 803646B8 00361298  4E 80 00 21 */	blrl 
-    /* 803646BC 0036129C  48 00 00 28 */	b lbl_803646E4
-    /* 803646C0 003612A0  7C CC 33 78 */	mr r12, r6
-    /* 803646C4 003612A4  80 C8 00 00 */	lwz r6, 0(r8)
-    /* 803646C8 003612A8  7D 88 03 A6 */	mtlr r12
-    /* 803646CC 003612AC  4E 80 00 21 */	blrl 
-    /* 803646D0 003612B0  48 00 00 14 */	b lbl_803646E4
-    /* 803646D4 003612B4  7C CC 33 78 */	mr r12, r6
-    /* 803646D8 003612B8  80 C8 00 00 */	lwz r6, 0(r8)
-    /* 803646DC 003612BC  7D 88 03 A6 */	mtlr r12
-    /* 803646E0 003612C0  4E 80 00 21 */	blrl 
-lbl_803646E4:
-    /* 803646E4 003612C4  80 01 00 0C */	lwz r0, 0xc(r1)
-    /* 803646E8 003612C8  38 21 00 08 */	addi r1, r1, 8
-    /* 803646EC 003612CC  7C 08 03 A6 */	mtlr r0
-    /* 803646F0 003612D0  4E 80 00 20 */	blr 
+    switch(arg_type) {
+        case AOBJ_ARG_A:
+            (*func)(aobj);
+            return;
+        case AOBJ_ARG_AF:
+            (*func)(aobj, arg->f);
+            return;
+        case AOBJ_ARG_AV:
+            (*func)(aobj, arg->v);
+            return;
+        case AOBJ_ARG_AU:
+            (*func)(aobj, arg->d);
+            return;
+        case AOBJ_ARG_AO:
+            (*func)(aobj, obj);
+            return;
+        case AOBJ_ARG_AOT:
+            (*func)(aobj, obj, type);
+            return;
+        case AOBJ_ARG_AOF:
+            (*func)(aobj, obj, arg->f);
+            return;
+        case AOBJ_ARG_AOV:
+            (*func)(aobj, obj, arg->v);
+            return;
+        case AOBJ_ARG_AOU:
+            (*func)(aobj, obj, arg->d);
+            return;
+        case AOBJ_ARG_AOTF:
+            (*func)(aobj, obj, type, arg->f);
+            return;
+        case AOBJ_ARG_AOTV:
+            (*func)(aobj, obj, type, arg->v);
+            return;
+        case AOBJ_ARG_AOTU:
+            (*func)(aobj, obj, type, (u32)arg->d);
+            return;
+    }
 }
+#pragma pop
 
 asm void TObjForeachAnim(void)
 {
