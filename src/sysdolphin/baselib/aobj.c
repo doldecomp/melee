@@ -12,7 +12,6 @@ static char lbl_804D5D14[4] = "obj\0";
 
 char lbl_80405FB8[9] = "object.h\0";
 char lbl_80405FC4[39] = "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF\0";
-extern void* jtbl_80405FEC;
 extern s32 lbl_8040601C;
 extern s32 lbl_8040603C;
 extern void* jtbl_80406058;
