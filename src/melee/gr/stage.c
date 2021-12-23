@@ -2,24 +2,37 @@
 
 extern struct _StageInfo stage_info;
 
+///// Temp unknown structs
+struct StructPairWithStageID { s32 stage_id; s32 regular_number; };
+struct StructNumberAndVecp { s32 number; S32Vec* vec; };  // 2nd var is pointer to 12 bytes probably vec
+
 extern f32 degrees_2_radians; // 0.017453f
 extern f32 unk_one_half_const_804DBCD8; // 0.5
 extern f32 unk_zero_const_804DBCD8; //0.0
-extern Vec lbl_803B84C8; 
-extern void func_801C2D24(s32 arg0, s32 arg1);
 
-// char *lbl_803E9940 = "no!=St_Player_InitPos_None";
-// extern char *lbl_803E9940[];
 extern s32 lbl_804D49F8;
 extern f32 lbl_804DBCDC;
 extern f32 lbl_804DBCE0;
 extern f32 lbl_804DBCE4;
 extern f32 lbl_804DBCE8;
+
+// char *lbl_803E9940 = "no!=St_Player_InitPos_None";
+// extern char *lbl_803E9940[];
+
+extern Vec unk_Vec_803B84C8; 
+extern S32Vec unk_arr_of_vectors_803E9960[];
+
+extern struct StructPairWithStageID unk_struct_804D49F0;
+extern struct StructNumberAndVecp unk_struct_804D49E8;
+
+
 extern void func_80051EC8();
-
-extern s32 lbl_804D49E8;
-
-extern S32Vec lbl_803E9960[];
+extern s32 func_801C2D24(s32 arg0, Vec* arg1);
+extern void func_801C0754(struct StructPairWithStageID*);
+extern void func_801C0800(struct StructPairWithStageID*);
+extern void func_801C0F78(struct StructPairWithStageID*);
+extern void func_801C0FB8(struct StructPairWithStageID*);
+extern void func_801C1074(struct StructPairWithStageID*, s32 arg1);
 
 
 f32 get_cam_bounds_left_offset()
@@ -147,7 +160,7 @@ f32 get_cam_angle_radians_right() {
 
 void func_80224CAC(Vec *arg0) {
 
-    Vec another_vec = lbl_803B84C8;
+    Vec another_vec = unk_Vec_803B84C8;
     Vec rot_vec;
     
     *arg0 = stage_info.cam_info.fixed_cam_pos;
@@ -214,12 +227,15 @@ asm s32 func_80224DC8(s32 arg0) {
     /* 80224E34 00221A14  4E 80 00 20 */	blr 
 }
 
-asm void func_80224E38(s32 arg0, s32 arg1) {
+
+ /* void func_80224E38(Vec* arg0, s32 arg1) {  func_801C2D24(arg1 + 4, arg0); } */   /// this function matched 100% on decomp.me but not here
+
+asm void func_80224E38(Vec* arg0, s32 arg1) {
     nofralloc
     /* 80224E38 00221A18  7C 08 02 A6 */	mflr r0
     /* 80224E3C 00221A1C  90 01 00 04 */	stw r0, 4(r1)
     /* 80224E40 00221A20  38 03 00 00 */	addi r0, r3, 0
-    /* 80224E44 00221A24  38 64 00 04 */	addi r3, r4, 4
+    /* 80224E44 00221A24  38 64 00 04 */	addi r3, r4, 4       
     /* 80224E48 00221A28  94 21 FF F8 */	stwu r1, -8(r1)
     /* 80224E4C 00221A2C  7C 04 03 78 */	mr r4, r0
     /* 80224E50 00221A30  4B F9 DE D5 */	bl func_801C2D24
@@ -367,60 +383,75 @@ asm void func_80224E38(s32 arg0, s32 arg1) {
 
 
 ///func_80225194 HERE
-// s32 func_80225194() {   /// matching but can't compile a match because other functions above
-//     return lbl_804D49E8;
+// s32 func_80225194() {  
+//     return unk_struct_804D49E8.number;
 // }
 
 
 // s32 func_8022519C(s32 arg0) {
-//     return lbl_803E9960[arg0].x;
+//     return unk_arr_of_vectors_803E9960[arg0].x;
 // }
 
 // s32 func_802251B4(s32 arg0, s32 arg1) {
-//     return func_801C06B8(lbl_803E9960[arg0].x);
+//     return func_801C06B8(unk_arr_of_vectors_803E9960[arg0].x);
 // }
 
-///////////////func_802251E8 HERE//////////////////
 
-// struct S32Vec { s32 x; s32 y; s32 z;  };
-// struct Pair { s32 stage_id; s32 regular_number; };
+// void func_802251E8(s32 arg0, s32* unused) {
+//     struct StructPairWithStageID local_data;
 
+//     unk_struct_804D49E8.number = arg0;
+//     unk_struct_804D49E8.vec = &unk_arr_of_vectors_803E9960[arg0];
 
-// struct SpecialStruct { s32 number; struct S32Vec* vec; };  // 2nd var is pointer to 12 bytes probably vec
+//     local_data = unk_struct_804D49F0;
 
-// extern func_801C0754(struct Pair*);                    /* extern */
-// extern struct SpecialStruct lbl_804D49E8;
-// extern s32 lbl_804D49F0;
-// extern s32 lbl_804D49F4;
-
-// extern struct S32Vec lbl_803E9960[];  /// 12 bytes for sure
-
-// void func_802251E8(s32 arg0) {
-//     struct Pair  sp10;
-
-//     struct SpecialStruct *rawr;
-
-
-//     lbl_804D49E8.number = arg0;
-//     lbl_804D49E8.vec = &lbl_803E9960[arg0];
-//     sp10.stage_id = lbl_804D49F0;
-//     sp10.regular_number = lbl_804D49F4;
-
-//     sp10.stage_id = lbl_804D49E8.vec->x;
-
-//     sp10.regular_number = lbl_804D49E8.number;
-
+//     local_data.stage_id = unk_struct_804D49E8.vec->x;
+//     local_data.regular_number = unk_struct_804D49E8.number;
     
-//     func_801C0754(&sp10);
+//     func_801C0754(&local_data); 
 // }
 
 
-//////////////////  These last 4 functions are all similar to the above function, 
-///////////////// should be able to get them to match after compiling
-///func_8022524C HERE
+// void func_8022524C() {
+//     struct StructPairWithStageID local_data;
 
-///func_80225298 HERE
+//     local_data = unk_struct_804D49F0;
 
-///func_802252E4 HERE
+//     local_data.stage_id = unk_struct_804D49E8.vec->x;
+//     local_data.regular_number = unk_struct_804D49E8.number;
+    
+//     func_801C0800(&local_data); 
+// }
 
-///func_8022532C HERE
+// void func_80225298() {
+//     struct StructPairWithStageID local_data;
+
+//     local_data = unk_struct_804D49F0;
+
+//     local_data.stage_id = unk_struct_804D49E8.vec->x;
+//     local_data.regular_number = unk_struct_804D49E8.number;
+    
+//     func_801C0F78(&local_data); 
+// }
+
+// void func_802252E4(s32 arg0, s32 unused) {
+//     struct StructPairWithStageID local_data;
+
+//     local_data = unk_struct_804D49F0;
+
+//     local_data.stage_id = unk_struct_804D49E8.vec->x;
+//     local_data.regular_number = arg0;
+    
+//     func_801C0FB8(&local_data); 
+// }
+
+// void func_8022532C(s32 arg0, s32 arg1) {
+//     struct StructPairWithStageID local_data;
+
+//     local_data = unk_struct_804D49F0;
+
+//     local_data.stage_id = unk_struct_804D49E8.vec->x;
+//     local_data.regular_number = arg0;
+    
+//     func_801C1074(&local_data, arg1); 
+// }

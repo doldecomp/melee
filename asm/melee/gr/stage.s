@@ -225,7 +225,7 @@ lbl_80225138:
 /* 80225140 00221D20  38 AD 93 60 */	addi r5, r13, lbl_804D4A00@sda21
 /* 80225144 00221D24  48 16 30 DD */	bl __assert
 lbl_80225148:
-/* 80225148 00221D28  80 6D 93 48 */	lwz r3, lbl_804D49E8@sda21(r13)
+/* 80225148 00221D28  80 6D 93 48 */	lwz r3, unk_struct_804D49E8@sda21(r13)
 /* 8022514C 00221D2C  38 9F 00 00 */	addi r4, r31, 0
 /* 80225150 00221D30  38 A1 00 0C */	addi r5, r1, 0xc
 /* 80225154 00221D34  4B F9 D7 59 */	bl func_801C28AC
@@ -247,14 +247,14 @@ lbl_80225148:
 
 .global func_80225194
 func_80225194:
-/* 80225194 00221D74  80 6D 93 48 */	lwz r3, lbl_804D49E8@sda21(r13)
+/* 80225194 00221D74  80 6D 93 48 */	lwz r3, unk_struct_804D49E8@sda21(r13)
 /* 80225198 00221D78  4E 80 00 20 */	blr 
 
 .global func_8022519C
 func_8022519C:
 /* 8022519C 00221D7C  1C 83 00 0C */	mulli r4, r3, 0xc
-/* 802251A0 00221D80  3C 60 80 3F */	lis r3, lbl_803E9960@ha
-/* 802251A4 00221D84  38 03 99 60 */	addi r0, r3, lbl_803E9960@l
+/* 802251A0 00221D80  3C 60 80 3F */	lis r3, unk_arr_of_vectors_803B84C8@ha
+/* 802251A4 00221D84  38 03 99 60 */	addi r0, r3, unk_arr_of_vectors_803B84C8@l
 /* 802251A8 00221D88  7C 60 22 14 */	add r3, r0, r4
 /* 802251AC 00221D8C  80 63 00 00 */	lwz r3, 0(r3)
 /* 802251B0 00221D90  4E 80 00 20 */	blr 
@@ -264,9 +264,9 @@ func_802251B4:
 /* 802251B4 00221D94  7C 08 02 A6 */	mflr r0
 /* 802251B8 00221D98  1C 83 00 0C */	mulli r4, r3, 0xc
 /* 802251BC 00221D9C  90 01 00 04 */	stw r0, 4(r1)
-/* 802251C0 00221DA0  3C 60 80 3F */	lis r3, lbl_803E9960@ha
+/* 802251C0 00221DA0  3C 60 80 3F */	lis r3, unk_arr_of_vectors_803B84C8@ha
 /* 802251C4 00221DA4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 802251C8 00221DA8  38 03 99 60 */	addi r0, r3, lbl_803E9960@l
+/* 802251C8 00221DA8  38 03 99 60 */	addi r0, r3, unk_arr_of_vectors_803B84C8@l
 /* 802251CC 00221DAC  7C 60 22 14 */	add r3, r0, r4
 /* 802251D0 00221DB0  80 63 00 00 */	lwz r3, 0(r3)
 /* 802251D4 00221DB4  4B F9 B4 E5 */	bl func_801C06B8
@@ -281,17 +281,17 @@ func_802251E8:
 /* 802251EC 00221DCC  1C 83 00 0C */	mulli r4, r3, 0xc
 /* 802251F0 00221DD0  90 01 00 04 */	stw r0, 4(r1)
 /* 802251F4 00221DD4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 802251F8 00221DD8  38 AD 93 48 */	addi r5, r13, lbl_804D49E8@sda21
-/* 802251FC 00221DDC  90 6D 93 48 */	stw r3, lbl_804D49E8@sda21(r13)
-/* 80225200 00221DE0  3C 60 80 3F */	lis r3, lbl_803E9960@ha
-/* 80225204 00221DE4  38 03 99 60 */	addi r0, r3, lbl_803E9960@l
+/* 802251F8 00221DD8  38 AD 93 48 */	addi r5, r13, unk_struct_804D49E8@sda21
+/* 802251FC 00221DDC  90 6D 93 48 */	stw r3, unk_struct_804D49E8@sda21(r13)
+/* 80225200 00221DE0  3C 60 80 3F */	lis r3, unk_arr_of_vectors_803B84C8@ha
+/* 80225204 00221DE4  38 03 99 60 */	addi r0, r3, unk_arr_of_vectors_803B84C8@l
 /* 80225208 00221DE8  7C 00 22 14 */	add r0, r0, r4
 /* 8022520C 00221DEC  90 05 00 04 */	stw r0, 4(r5)
 /* 80225210 00221DF0  38 61 00 10 */	addi r3, r1, 0x10
-/* 80225214 00221DF4  80 0D 93 50 */	lwz r0, lbl_804D49F0@sda21(r13)
+/* 80225214 00221DF4  80 0D 93 50 */	lwz r0, unk_struct_804D49F0@sda21(r13)
 /* 80225218 00221DF8  80 8D 93 54 */	lwz r4, lbl_804D49F4@sda21(r13)
 /* 8022521C 00221DFC  90 01 00 10 */	stw r0, 0x10(r1)
-/* 80225220 00221E00  80 0D 93 48 */	lwz r0, lbl_804D49E8@sda21(r13)
+/* 80225220 00221E00  80 0D 93 48 */	lwz r0, unk_struct_804D49E8@sda21(r13)
 /* 80225224 00221E04  90 81 00 14 */	stw r4, 0x14(r1)
 /* 80225228 00221E08  80 85 00 04 */	lwz r4, 4(r5)
 /* 8022522C 00221E0C  80 84 00 00 */	lwz r4, 0(r4)
@@ -306,14 +306,14 @@ func_802251E8:
 .global func_8022524C
 func_8022524C:
 /* 8022524C 00221E2C  7C 08 02 A6 */	mflr r0
-/* 80225250 00221E30  38 8D 93 48 */	addi r4, r13, lbl_804D49E8@sda21
+/* 80225250 00221E30  38 8D 93 48 */	addi r4, r13, unk_struct_804D49E8@sda21
 /* 80225254 00221E34  90 01 00 04 */	stw r0, 4(r1)
 /* 80225258 00221E38  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8022525C 00221E3C  80 0D 93 50 */	lwz r0, lbl_804D49F0@sda21(r13)
+/* 8022525C 00221E3C  80 0D 93 50 */	lwz r0, unk_struct_804D49F0@sda21(r13)
 /* 80225260 00221E40  38 61 00 08 */	addi r3, r1, 8
 /* 80225264 00221E44  80 AD 93 54 */	lwz r5, lbl_804D49F4@sda21(r13)
 /* 80225268 00221E48  90 01 00 08 */	stw r0, 8(r1)
-/* 8022526C 00221E4C  80 0D 93 48 */	lwz r0, lbl_804D49E8@sda21(r13)
+/* 8022526C 00221E4C  80 0D 93 48 */	lwz r0, unk_struct_804D49E8@sda21(r13)
 /* 80225270 00221E50  90 A1 00 0C */	stw r5, 0xc(r1)
 /* 80225274 00221E54  80 84 00 04 */	lwz r4, 4(r4)
 /* 80225278 00221E58  80 84 00 00 */	lwz r4, 0(r4)
@@ -328,14 +328,14 @@ func_8022524C:
 .global func_80225298
 func_80225298:
 /* 80225298 00221E78  7C 08 02 A6 */	mflr r0
-/* 8022529C 00221E7C  38 8D 93 48 */	addi r4, r13, lbl_804D49E8@sda21
+/* 8022529C 00221E7C  38 8D 93 48 */	addi r4, r13, unk_struct_804D49E8@sda21
 /* 802252A0 00221E80  90 01 00 04 */	stw r0, 4(r1)
 /* 802252A4 00221E84  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 802252A8 00221E88  80 0D 93 50 */	lwz r0, lbl_804D49F0@sda21(r13)
+/* 802252A8 00221E88  80 0D 93 50 */	lwz r0, unk_struct_804D49F0@sda21(r13)
 /* 802252AC 00221E8C  38 61 00 08 */	addi r3, r1, 8
 /* 802252B0 00221E90  80 AD 93 54 */	lwz r5, lbl_804D49F4@sda21(r13)
 /* 802252B4 00221E94  90 01 00 08 */	stw r0, 8(r1)
-/* 802252B8 00221E98  80 0D 93 48 */	lwz r0, lbl_804D49E8@sda21(r13)
+/* 802252B8 00221E98  80 0D 93 48 */	lwz r0, unk_struct_804D49E8@sda21(r13)
 /* 802252BC 00221E9C  90 A1 00 0C */	stw r5, 0xc(r1)
 /* 802252C0 00221EA0  80 84 00 04 */	lwz r4, 4(r4)
 /* 802252C4 00221EA4  80 84 00 00 */	lwz r4, 0(r4)
@@ -350,10 +350,10 @@ func_80225298:
 .global func_802252E4
 func_802252E4:
 /* 802252E4 00221EC4  7C 08 02 A6 */	mflr r0
-/* 802252E8 00221EC8  38 8D 93 48 */	addi r4, r13, lbl_804D49E8@sda21
+/* 802252E8 00221EC8  38 8D 93 48 */	addi r4, r13, unk_struct_804D49E8@sda21
 /* 802252EC 00221ECC  90 01 00 04 */	stw r0, 4(r1)
 /* 802252F0 00221ED0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 802252F4 00221ED4  80 AD 93 50 */	lwz r5, lbl_804D49F0@sda21(r13)
+/* 802252F4 00221ED4  80 AD 93 50 */	lwz r5, unk_struct_804D49F0@sda21(r13)
 /* 802252F8 00221ED8  80 0D 93 54 */	lwz r0, lbl_804D49F4@sda21(r13)
 /* 802252FC 00221EDC  90 A1 00 10 */	stw r5, 0x10(r1)
 /* 80225300 00221EE0  90 01 00 14 */	stw r0, 0x14(r1)
@@ -371,10 +371,10 @@ func_802252E4:
 .global func_8022532C
 func_8022532C:
 /* 8022532C 00221F0C  7C 08 02 A6 */	mflr r0
-/* 80225330 00221F10  38 AD 93 48 */	addi r5, r13, lbl_804D49E8@sda21
+/* 80225330 00221F10  38 AD 93 48 */	addi r5, r13, unk_struct_804D49E8@sda21
 /* 80225334 00221F14  90 01 00 04 */	stw r0, 4(r1)
 /* 80225338 00221F18  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8022533C 00221F1C  80 CD 93 50 */	lwz r6, lbl_804D49F0@sda21(r13)
+/* 8022533C 00221F1C  80 CD 93 50 */	lwz r6, unk_struct_804D49F0@sda21(r13)
 /* 80225340 00221F20  80 0D 93 54 */	lwz r0, lbl_804D49F4@sda21(r13)
 /* 80225344 00221F24  90 C1 00 10 */	stw r6, 0x10(r1)
 /* 80225348 00221F28  90 01 00 14 */	stw r0, 0x14(r1)
@@ -392,8 +392,8 @@ func_8022532C:
 
 .section .rodata
 
-.global lbl_803B84C8
-lbl_803B84C8:
+.global unk_Vec_803B84C8
+unk_Vec_803B84C8:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0xC2C80000
@@ -407,8 +407,8 @@ lbl_803E9940:
     .balign 4
     .4byte NULL
 
-.global lbl_803E9960
-lbl_803E9960:
+.global unk_arr_of_vectors_803B84C8
+unk_arr_of_vectors_803B84C8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1271,12 +1271,12 @@ lbl_803E9960:
 
 .section .sdata
 
-.global lbl_804D49E8
-lbl_804D49E8:
+.global unk_struct_804D49E8
+unk_struct_804D49E8:
     .4byte 0x00000002
     .4byte 0x00000000
-.global lbl_804D49F0
-lbl_804D49F0:
+.global unk_struct_804D49F0
+unk_struct_804D49F0:
     .4byte 0x0000000C
 .global lbl_804D49F4
 lbl_804D49F4:
