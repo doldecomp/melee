@@ -1579,6 +1579,44 @@ lbl_803B9570:
     .4byte 0x10000000
 
 
+.section .data
+
+.global lbl_80406D68
+lbl_80406D68:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x01000000
+.global lbl_80406DAC
+lbl_80406DAC:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x0000002D
+    .4byte 0x00000008
+    .4byte 0x001E0000
+    .4byte NULL
+    .4byte 0x00007F00
+    .4byte 0x00FF0000
+    .4byte 0xFF007FFF
+    .4byte 0xFF000000
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global HSD_PadLibData

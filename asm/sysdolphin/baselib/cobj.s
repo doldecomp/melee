@@ -3601,8 +3601,8 @@ func_8036A8BC:
 /* 8036A8D0 003674B0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8036A8D4 003674B4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8036A8D8 003674B8  3B E3 62 20 */	addi r31, r3, lbl_80406220@l
-/* 8036A8DC 003674BC  3C 60 80 40 */	lis r3, lbl_804072A8@ha
-/* 8036A8E0 003674C0  38 83 72 A8 */	addi r4, r3, lbl_804072A8@l
+/* 8036A8DC 003674BC  3C 60 80 40 */	lis r3, hsdObj@ha
+/* 8036A8E0 003674C0  38 83 72 A8 */	addi r4, r3, hsdObj@l
 /* 8036A8E4 003674C4  38 7F 00 00 */	addi r3, r31, 0
 /* 8036A8E8 003674C8  38 BF 01 08 */	addi r5, r31, 0x108
 /* 8036A8EC 003674CC  38 DF 01 20 */	addi r6, r31, 0x120
@@ -3624,6 +3624,88 @@ func_8036A8BC:
 /* 8036A92C 0036750C  38 21 00 10 */	addi r1, r1, 0x10
 /* 8036A930 00367510  7C 08 03 A6 */	mtlr r0
 /* 8036A934 00367514  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80406220
+lbl_80406220:
+    .4byte func_8036A8BC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global jtbl_80406260
+jtbl_80406260:
+	.4byte lbl_80367AA0
+	.4byte lbl_8036798C
+	.4byte lbl_803679B0
+	.4byte lbl_803679D4
+	.4byte lbl_80367AA0
+	.4byte lbl_803679F8
+	.4byte lbl_80367A1C
+	.4byte lbl_80367A40
+	.4byte lbl_80367AA0
+	.4byte lbl_80367A64
+	.4byte lbl_80367A74
+	.4byte lbl_80367A84
+	.4byte lbl_80367A94
+.global lbl_80406294
+lbl_80406294:
+    .asciz "unkown type of render pass.\n"
+    .balign 4
+.global lbl_804062B4
+lbl_804062B4:
+    .asciz "cobj->eyepos"
+    .balign 4
+.global lbl_804062C4
+lbl_804062C4:
+    .asciz "cobj->interest"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte 0x68736449
+    .4byte 0x73446573
+    .4byte 0x63656E64
+    .4byte 0x616E744F
+    .4byte 0x6628696E
+    .4byte 0x666F2C20
+    .4byte 0x26687364
+    .4byte 0x434F626A
+    .4byte 0x29000000
+.global lbl_8040631C
+lbl_8040631C:
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte 0x73797364
+    .4byte 0x6F6C7068
+    .4byte 0x696E5F62
+    .4byte 0x6173655F
+    .4byte 0x6C696272
+    .4byte 0x61727900
+    .4byte 0x6873645F
+    .4byte 0x636F626A
+    .4byte NULL
+    .4byte NULL
 
 
 .section .sdata

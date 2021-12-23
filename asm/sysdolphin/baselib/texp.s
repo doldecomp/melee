@@ -2846,7 +2846,7 @@ lbl_8038536C:
 /* 80385370 00381F50  40 82 FB F0 */	bne lbl_80384F60
 /* 80385374 00381F54  28 1E 00 00 */	cmplwi r30, 0
 /* 80385378 00381F58  41 82 00 B4 */	beq lbl_8038542C
-/* 8038537C 00381F5C  4B FB 79 A1 */	bl func_8033CD1C
+/* 8038537C 00381F5C  4B FB 79 A1 */	bl GXPixModeSync
 /* 80385380 00381F60  3B 20 00 00 */	li r25, 0
 /* 80385384 00381F64  57 20 10 3A */	slwi r0, r25, 2
 /* 80385388 00381F68  7F 5C 02 14 */	add r26, r28, r0
@@ -2893,7 +2893,7 @@ lbl_8038540C:
 /* 8038541C 00381FFC  41 80 FF D0 */	blt lbl_803853EC
 /* 80385420 00382000  38 60 00 10 */	li r3, 0x10
 /* 80385424 00382004  4B FD CB A1 */	bl func_80361FC4
-/* 80385428 00382008  4B FB 78 F5 */	bl func_8033CD1C
+/* 80385428 00382008  4B FB 78 F5 */	bl GXPixModeSync
 lbl_8038542C:
 /* 8038542C 0038200C  BB 21 00 54 */	lmw r25, 0x54(r1)
 /* 80385430 00382010  80 01 00 84 */	lwz r0, 0x84(r1)
@@ -3151,6 +3151,171 @@ lbl_8038577C:
 /* 8038578C 0038236C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80385790 00382370  7C 08 03 A6 */	mtlr r0
 /* 80385794 00382374  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80407738
+lbl_80407738:
+    .asciz "texp_list"
+    .balign 4
+.global lbl_80407744
+lbl_80407744:
+    .asciz "texp->cnst.ctype == type"
+    .balign 4
+.global lbl_80407760
+lbl_80407760:
+    .asciz "HSD_TExpGetType(texp) == HSD_TE_TEV"
+    .balign 4
+    .asciz "tev can't select multiple konst input.\n"
+    .balign 4
+    .asciz "sel == HSD_TE_RGB || sel == HSD_TE_A"
+    .balign 4
+    .asciz "idx == 3 || sel != HSD_TE_RGB || exp->tev.c_clamp"
+    .balign 4
+    .asciz "idx == 3 || sel != HSD_TE_A || exp->tev.a_clamp"
+    .balign 4
+    .asciz "swap == HSD_TE_UNDEF || tev->tex_swap == swap"
+    .balign 4
+    .asciz "swap == HSD_TE_UNDEF || tev->ras_swap == swap"
+    .balign 4
+.global jtbl_80407898
+jtbl_80407898:
+	.4byte lbl_803835CC
+	.4byte lbl_803835D4
+	.4byte lbl_803835DC
+	.4byte lbl_803835FC
+	.4byte lbl_803835E4
+	.4byte lbl_803835EC
+	.4byte lbl_803835F4
+    .4byte 0x7465762D
+    .4byte 0x3E6B6173
+    .4byte 0x656C203D
+    .4byte 0x3D206B73
+    .4byte 0x656C0000
+    .4byte 0x73656C20
+    .4byte 0x3D3D2048
+    .4byte 0x53445F54
+    .4byte 0x455F4100
+    .4byte 0x69647820
+    .4byte 0x3D3D2033
+    .4byte 0x207C7C20
+    .4byte 0x6578702D
+    .4byte 0x3E746576
+    .4byte 0x2E615F63
+    .4byte 0x6C616D70
+    .4byte NULL
+    .4byte 0x73656C20
+    .4byte 0x3D3D2048
+    .4byte 0x53445F54
+    .4byte 0x455F4120
+    .4byte 0x7C7C2073
+    .4byte 0x656C203D
+    .4byte 0x3D204853
+    .4byte 0x445F5445
+    .4byte 0x5F580000
+    .4byte 0x6578702D
+    .4byte 0x3E636E73
+    .4byte 0x742E636F
+    .4byte 0x6D70203D
+    .4byte 0x3D204853
+    .4byte 0x445F5445
+    .4byte 0x5F580000
+.global jtbl_80407938
+jtbl_80407938:
+	.4byte lbl_80383C58
+	.4byte lbl_80383C60
+	.4byte lbl_80383C68
+	.4byte lbl_80383C70
+	.4byte lbl_80383C78
+	.4byte lbl_80383C80
+	.4byte lbl_80383C88
+    .4byte 0x00000003
+    .4byte 0x00000005
+    .4byte 0x00000007
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x00000004
+    .4byte 0x00000006
+    .4byte NULL
+.global lbl_80407974
+lbl_80407974:
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x00000003
+    .4byte NULL
+    .4byte 0x00000010
+    .4byte 0x00000014
+    .4byte 0x00000018
+    .4byte 0x0000001C
+    .4byte 0x00000011
+    .4byte 0x00000015
+    .4byte 0x00000019
+    .4byte 0x0000001D
+    .4byte 0x00000012
+    .4byte 0x00000016
+    .4byte 0x0000001A
+    .4byte 0x0000001E
+    .4byte 0x00000013
+    .4byte 0x00000017
+    .4byte 0x0000001B
+    .4byte 0x0000001F
+    .4byte 0x0000000C
+    .4byte 0x0000000D
+    .4byte 0x0000000E
+    .4byte 0x0000000F
+    .4byte 0x00000010
+    .4byte 0x00000014
+    .4byte 0x00000018
+    .4byte 0x0000001C
+    .4byte 0x00000011
+    .4byte 0x00000015
+    .4byte 0x00000019
+    .4byte 0x0000001D
+    .4byte 0x00000012
+    .4byte 0x00000016
+    .4byte 0x0000001A
+    .4byte 0x0000001E
+    .4byte 0x00000013
+    .4byte 0x00000017
+    .4byte 0x0000001B
+    .4byte 0x0000001F
+.global lbl_80407A14
+lbl_80407A14:
+    .asciz "val >= 0"
+    .balign 4
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x00000003
+    .4byte NULL
+    .4byte 0x7465762D
+    .4byte 0x3E635F64
+    .4byte 0x73742021
+    .4byte 0x3D204853
+    .4byte 0x445F5445
+    .4byte 0x5F554E44
+    .4byte 0x45460000
+    .4byte 0x7465762D
+    .4byte 0x3E615F64
+    .4byte 0x73742021
+    .4byte 0x3D204853
+    .4byte 0x445F5445
+    .4byte 0x5F554E44
+    .4byte 0x45460000
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x00000003
+    .4byte 0x00000001
+    .4byte 0x00000002
+    .4byte 0x00000003
+    .4byte 0x636C6973
+    .4byte 0x742D3E74
+    .4byte 0x79706520
+    .4byte 0x3D3D2048
+    .4byte 0x53445F54
+    .4byte 0x455F434E
+    .4byte 0x53540000
 
 
 .section .sdata

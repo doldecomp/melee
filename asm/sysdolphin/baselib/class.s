@@ -957,6 +957,37 @@ lbl_80382A2C:
 /* 80382A3C 0037F61C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+    .asciz "entry %d <null>\n"
+    .balign 4
+    .asciz "entry %d - %d <null>\n"
+    .balign 4
+    .asciz "entry %d(%d)"
+    .balign 4
+    .asciz "  nb_alloc %d nb_free %d\n"
+    .balign 4
+.global lbl_80407698
+lbl_80407698:
+    .asciz "idx >= 0"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_class"
+    .balign 4
+.global lbl_804076C8
+lbl_804076C8:
+    .asciz "class_info"
+    .balign 4
+    .asciz "info_hash"
+    .balign 4
+    .asciz "<class %s>\n"
+    .balign 4
+    .asciz "    info %d object %d nb_exist %d nb_peak %d\n"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7700

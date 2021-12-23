@@ -21,7 +21,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/lb/lbvector.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.o 		\
+	$(BUILD_DIR)/asm/melee/lb/lbheap.o 				\
+	$(BUILD_DIR)/src/melee/lb/lbfile.o 				\
 	$(BUILD_DIR)/asm/melee/lb/lbfile.o 				\
+	$(BUILD_DIR)/src/melee/lb/lbarchive.o			\
 	$(BUILD_DIR)/asm/melee/lb/lbarchive.o			\
 	$(BUILD_DIR)/asm/melee/lb/lbdvd.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_80019230.o		\
@@ -248,6 +251,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/dvd/fstload.o          \
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GXMisc.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GX.o                \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx.o              \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtxvec.o           \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx44.o            \
@@ -303,6 +309,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.o 			\
                                                     \
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.o		\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/dobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.o		\
@@ -310,6 +317,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tev.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/mobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/aobj.o	    \
+	$(BUILD_DIR)/asm/sysdolphin/baselib/aobj.o	    \
 	$(BUILD_DIR)/src/sysdolphin/baselib/lobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/lobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/cobj.o		\
@@ -361,6 +369,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/devcom.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjproc.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjplink.o			\
+	$(BUILD_DIR)/src/sysdolphin/baselib/gobjgxlink.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjgxlink.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjobject.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjuserdata.o		\
@@ -370,9 +379,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psappsrt.o			\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/sobj.o				\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sislib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/code_803A949C.o		\
-
-DATA_O_FILES :=                                     \
-    $(BUILD_DIR)/asm/data.o

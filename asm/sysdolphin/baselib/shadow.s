@@ -425,7 +425,7 @@ lbl_8037F970:
 /* 8037F970 0037C550  80 7F 00 00 */	lwz r3, 0(r31)
 /* 8037F974 0037C554  38 80 00 01 */	li r4, 1
 /* 8037F978 0037C558  4B FB E3 45 */	bl func_8033DCBC
-/* 8037F97C 0037C55C  4B FB D3 A1 */	bl func_8033CD1C
+/* 8037F97C 0037C55C  4B FB D3 A1 */	bl GXPixModeSync
 /* 8037F980 0037C560  4B FB F8 F1 */	bl func_8033F270
 /* 8037F984 0037C564  7F C3 F3 78 */	mr r3, r30
 /* 8037F988 0037C568  48 00 02 15 */	bl makeMatrix
@@ -1033,6 +1033,100 @@ lbl_803801B0:
 /* 803801D8 0037CDB8  38 21 00 88 */	addi r1, r1, 0x88
 /* 803801DC 0037CDBC  7C 08 03 A6 */	mtlr r0
 /* 803801E0 0037CDC0  4E 80 00 20 */	blr 
+
+
+.section .data
+
+    .4byte NULL
+.global lbl_80407310
+lbl_80407310:
+    .asciz "shadow.c"
+    .balign 4
+    .asciz "width > 0"
+    .balign 4
+    .asciz "height > 0"
+    .balign 4
+    .asciz "size > 0"
+    .balign 4
+    .4byte NULL
+    .4byte 0x00000004
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte 0x000000FF
+    .4byte 0x00000004
+    .4byte NULL
+    .4byte 0x0000000F
+    .4byte 0x0000000F
+    .4byte 0x0000000F
+    .4byte 0x0000000A
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x01000000
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000007
+    .4byte 0x00000007
+    .4byte 0x00000007
+    .4byte 0x00000005
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x01000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x09000000
+    .4byte 0x0004050F
+    .4byte 0x07070007
+    .4byte 0x73686164
+    .4byte 0x6F772D3E
+    .4byte 0x63616D65
+    .4byte 0x72610000
+    .4byte 0x73686164
+    .4byte 0x6F772D3E
+    .4byte 0x74657874
+    .4byte 0x75726500
+    .4byte 0x73686164
+    .4byte 0x6F772D3E
+    .4byte 0x74657874
+    .4byte 0x7572652D
+    .4byte 0x3E696D61
+    .4byte 0x67656465
+    .4byte 0x73630000
+    .4byte 0x64697374
+    .4byte 0x616E6365
+    .4byte 0x203E2030
+    .4byte 0x2E304600
+.global lbl_8040743C
+lbl_8040743C:
+    .asciz "object.h"
+    .balign 4
+.global lbl_80407448
+lbl_80407448:
+    .asciz "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF"
+    .balign 4
+    .asciz "scale > 0.0F"
+    .balign 4
+    .asciz "position"
+    .balign 4
+    .asciz "radius > 0.0F"
+    .balign 4
+    .asciz "a > 0.0F"
+    .balign 4
 
 
 .section .bss, "wa"

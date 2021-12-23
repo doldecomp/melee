@@ -3,7 +3,7 @@
 #include "sysdolphin/baselib/aobj.h"
 #include "sysdolphin/baselib/pobj.h"
 
-extern HSD_DObjInfo hsdDObj; // hsdDObj
+HSD_DObjInfo hsdDObj = { DObjInfoInit };
 
 static HSD_DObjInfo* default_class = NULL;
 

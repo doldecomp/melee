@@ -787,6 +787,102 @@ lbl_80362000:
 /* 80362020 0035EC00  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80405A38
+lbl_80405A38:
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0x01000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000004
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0x01000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte 0x000000FF
+    .4byte 0x01000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000004
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+.global lbl_80405B58
+lbl_80405B58:
+    .4byte 0x00000001
+	.4byte lbl_80361F34
+    .4byte 0x00000002
+	.4byte lbl_80361F4C
+    .4byte 0x00000004
+	.4byte lbl_80362CA0
+    .4byte 0x00000008
+	.4byte lbl_80362CF8
+    .4byte 0x00000010
+	.4byte lbl_80362D04
+    .4byte 0x00000020
+	.4byte lbl_80362D24
+    .4byte 0x00000040
+	.4byte lbl_80361F6C
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804C07E0

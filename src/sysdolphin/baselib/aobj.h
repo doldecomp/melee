@@ -32,6 +32,12 @@ typedef enum _AObj_Arg_Type
     AOBJ_ARG_AOTU,
 } AObj_Arg_Type;
 
+typedef union _callbackArg {
+    f32 f;
+    u32 d;
+    void* v;
+} callbackArg;
+
 typedef struct _HSD_AObj {
     u32 flags;
     f32 curr_frame;
@@ -73,7 +79,7 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc);
 void HSD_AObjRemove(HSD_AObj* aobj);
 HSD_AObj* HSD_AObjAlloc(void);
 void HSD_AObjFree(HSD_AObj* aobj);
-void callbackForeachFunc(HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, FObjData *arg);
+void callbackForeachFunc(HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg *arg);
 void TObjForeachAnim(void);
 void func_803647DC(void);
 void func_80364924(void);

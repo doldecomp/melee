@@ -204,7 +204,7 @@ lbl_80019484:
 /* 800194CC 000160AC  38 AD 81 64 */	addi r5, r13, lbl_804D3804@sda21
 /* 800194D0 000160B0  48 38 DB D1 */	bl func_803A70A0
 lbl_800194D4:
-/* 800194D4 000160B4  48 32 33 C5 */	bl func_8033C898
+/* 800194D4 000160B4  48 32 33 C5 */	bl GXInvalidateVtxCache
 /* 800194D8 000160B8  48 32 5D 99 */	bl func_8033F270
 /* 800194DC 000160BC  38 60 00 00 */	li r3, 0
 /* 800194E0 000160C0  48 35 C0 59 */	bl func_80375538
@@ -4966,3 +4966,49 @@ lbl_804D3820:
 .global lbl_804D63D0
 lbl_804D63D0:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804D7C80
+lbl_804D7C80:
+	.4byte 0x3F2B851F
+.global lbl_804D7C84
+lbl_804D7C84:
+	.4byte 0x3F400000
+.global lbl_804D7C88
+lbl_804D7C88:
+	.4byte 0x3F147AE1
+.global lbl_804D7C8C
+lbl_804D7C8C:
+	.4byte 0x3F333333
+.global lbl_804D7C90
+lbl_804D7C90:
+	.4byte 0x00000000
+.global lbl_804D7C94
+lbl_804D7C94:
+	.4byte 0xC2880000
+.global lbl_804D7C98
+lbl_804D7C98:
+	.4byte 0xC2080000
+	.4byte 0x00000000
+.global lbl_804D7CA0
+lbl_804D7CA0:
+	.4byte 0x3C888889
+	.4byte 0x00000000
+.global lbl_804D7CA8
+lbl_804D7CA8:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804D7CB0
+lbl_804D7CB0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D7CB8
+lbl_804D7CB8:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804D7CC0
+lbl_804D7CC0:
+	.4byte 0x00000000
+	.4byte 0x00000000

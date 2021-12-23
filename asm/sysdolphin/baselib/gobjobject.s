@@ -95,3 +95,16 @@ lbl_80390B54:
 /* 80390B5C 0038D73C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80390B60 0038D740  7C 08 03 A6 */	mtlr r0
 /* 80390B64 0038D744  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80408558
+lbl_80408558:
+    .asciz "gobjobject.c"
+    .balign 4
+.global lbl_80408568
+lbl_80408568:
+    .asciz "gobj->obj_kind == HSD_GOBJ_OBJ_NONE"
+    .balign 4
+    .4byte NULL

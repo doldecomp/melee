@@ -616,7 +616,7 @@ lbl_80376080:
 /* 803760D0 00372CB0  38 7F 00 00 */	addi r3, r31, 0
 /* 803760D4 00372CB4  38 80 00 01 */	li r4, 1
 /* 803760D8 00372CB8  4B FC 7A 75 */	bl func_8033DB4C
-/* 803760DC 00372CBC  4B FC 6C 41 */	bl func_8033CD1C
+/* 803760DC 00372CBC  4B FC 6C 41 */	bl GXPixModeSync
 /* 803760E0 00372CC0  48 00 00 C4 */	b lbl_803761A4
 lbl_803760E4:
 /* 803760E4 00372CC4  A0 DE 00 06 */	lhz r6, 6(r30)
@@ -668,7 +668,7 @@ lbl_8037618C:
 /* 80376198 00372D78  38 80 02 07 */	li r4, 0x207
 /* 8037619C 00372D7C  48 01 20 DD */	bl HSD_Panic
 lbl_803761A0:
-/* 803761A0 00372D80  4B FC 6B 7D */	bl func_8033CD1C
+/* 803761A0 00372D80  4B FC 6B 7D */	bl GXPixModeSync
 lbl_803761A4:
 /* 803761A4 00372D84  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 803761A8 00372D88  83 E1 00 34 */	lwz r31, 0x34(r1)
@@ -738,7 +738,7 @@ lbl_80376268:
 /* 80376288 00372E68  4B FD 11 05 */	bl OSRestoreInterrupts
 /* 8037628C 00372E6C  48 00 00 08 */	b lbl_80376294
 lbl_80376290:
-/* 80376290 00372E70  4B FC 6A 41 */	bl func_8033CCD0
+/* 80376290 00372E70  4B FC 6A 41 */	bl GXWaitDrawDone
 lbl_80376294:
 /* 80376294 00372E74  4B FF FB CD */	bl func_80375E60
 /* 80376298 00372E78  2C 03 00 00 */	cmpwi r3, 0
@@ -746,7 +746,7 @@ lbl_80376294:
 /* 803762A0 00372E80  38 00 00 01 */	li r0, 1
 /* 803762A4 00372E84  90 1E 15 E0 */	stw r0, 0x15e0(r30)
 /* 803762A8 00372E88  93 BE 15 E4 */	stw r29, 0x15e4(r30)
-/* 803762AC 00372E8C  4B FC 69 8D */	bl func_8033CC38
+/* 803762AC 00372E8C  4B FC 69 8D */	bl GXSetDrawDone
 lbl_803762B0:
 /* 803762B0 00372E90  BB 61 00 24 */	lmw r27, 0x24(r1)
 /* 803762B4 00372E94  80 01 00 3C */	lwz r0, 0x3c(r1)
@@ -1219,7 +1219,7 @@ lbl_803768A4:
 /* 803768E0 003734C0  93 BF 15 DC */	stw r29, 0x15dc(r31)
 /* 803768E4 003734C4  93 BF 15 E0 */	stw r29, 0x15e0(r31)
 /* 803768E8 003734C8  93 BF 15 E4 */	stw r29, 0x15e4(r31)
-/* 803768EC 003734CC  4B FC 66 1D */	bl func_8033CF08
+/* 803768EC 003734CC  4B FC 66 1D */	bl GXSetDrawDoneCallback
 /* 803768F0 003734D0  93 BF 15 E8 */	stw r29, 0x15e8(r31)
 /* 803768F4 003734D4  4B FD 9A 39 */	bl func_8035032C
 /* 803768F8 003734D8  28 03 00 00 */	cmplwi r3, 0
@@ -1269,6 +1269,26 @@ lbl_80376970:
 /* 80376990 00373570  38 21 00 38 */	addi r1, r1, 0x38
 /* 80376994 00373574  7C 08 03 A6 */	mtlr r0
 /* 80376998 00373578  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80406CE0
+lbl_80406CE0:
+    .asciz "idx != -1"
+    .balign 4
+.global lbl_80406CEC
+lbl_80406CEC:
+    .asciz "unexpected type of render pass.\n"
+    .balign 4
+.global lbl_80406D10
+lbl_80406D10:
+    .asciz "_p->xfb[idx].status == HSD_VI_XFB_DRAWING"
+    .balign 4
+.global lbl_80406D3C
+lbl_80406D3C:
+    .asciz "_p->xfb[idx].status == HSD_VI_XFB_WAITDONE"
+    .balign 4
 
 
 .section .bss, "wa"
