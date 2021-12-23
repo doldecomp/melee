@@ -5,6 +5,8 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/lb/lbcommand.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbvector.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbtime.o\
+	$(EPILOGUE_DIR)/src/melee/lb/lbfile.o\
+	$(EPILOGUE_DIR)/src/melee/lb/lbarchive.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/tobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/aobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/fobj.o\
@@ -23,3 +25,4 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/lobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/gobjuserdata.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/random.o\
+
