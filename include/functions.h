@@ -8895,7 +8895,7 @@ void func_8038FD54();
 // ? func_803901F0(?);
 // ? func_80390228(?);
 // ? func_8039032C(?);
-// ? func_8039063C(?);
+// ? GObj_GXReorder(?);
 void func_8039069C();
 // ? func_8039075C(?);
 // ? func_803907C8(?);

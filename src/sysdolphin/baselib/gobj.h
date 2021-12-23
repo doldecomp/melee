@@ -5,8 +5,8 @@
 
 typedef struct _HSD_GObj {
     u16 classifier;
-    s8 p_link;
-    s8 gx_link;
+    u8 p_link;
+    u8 gx_link;
     u8 p_priority;
     u8 render_priority;
     s8 obj_kind;
