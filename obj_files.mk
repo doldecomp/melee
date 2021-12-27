@@ -37,7 +37,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/pl/player.o 		 	    \
 	$(BUILD_DIR)/asm/melee/pl/code_8003715C.o 		\
 													\
-	$(BUILD_DIR)/asm/melee/mp/code_80041C78.o 		\
+	$(BUILD_DIR)/asm/melee/mp/mpcoll.o 				\
+	$(BUILD_DIR)/asm/melee/mp/mplib.o 				\
+	$(BUILD_DIR)/asm/melee/mp/mpisland.o 			\
 													\
 	$(BUILD_DIR)/asm/melee/ef/eflib.o				\
 	$(BUILD_DIR)/asm/melee/ef/efsync.o				\
