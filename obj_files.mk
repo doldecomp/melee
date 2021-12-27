@@ -200,6 +200,13 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/it/code_80266F3C.o              	\
 	$(BUILD_DIR)/asm/melee/it/code_8027CF30.o              	\
 															\
+	$(BUILD_DIR)/asm/melee/if/ifall.o                      	\
+	$(BUILD_DIR)/asm/melee/if/iftime.o                      \
+	$(BUILD_DIR)/asm/melee/if/ifstatus.o                   	\
+	$(BUILD_DIR)/asm/melee/if/code_802F7288.o               \
+	$(BUILD_DIR)/asm/melee/if/ifstock.o                     \
+	$(BUILD_DIR)/asm/melee/if/ifmagnify.o                   \
+															\
 	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
