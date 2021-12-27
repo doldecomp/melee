@@ -8896,7 +8896,7 @@ void func_8038FD54();
 // ? func_80390228(?);
 // ? func_8039032C(?);
 // ? GObj_GXReorder(?);
-void func_8039069C();
+// void GObj_SetupGXLink();
 // ? func_8039075C(?);
 // ? func_803907C8(?);
 // ? func_8039084C(?);

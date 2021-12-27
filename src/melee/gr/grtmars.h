@@ -5,6 +5,7 @@
 #include "functions.h"
 
 #include "sysdolphin/baselib/gobj.h"
+#include "sysdolphin/baselib/gobjgxlink.h"
 
 void GrTMars_80221EF4(void);
 void GrTMars_80221EF8(void);
