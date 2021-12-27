@@ -3,6 +3,8 @@
 
 #include <dolphin/types.h>
 
+#include "sysdolphin/baselib/objalloc.h"
+
 typedef struct _HSD_GObj {
     u16 classifier;
     u8 p_link;
@@ -16,7 +18,7 @@ typedef struct _HSD_GObj {
     struct _HSD_GObj* next_gx; //0x10
     struct _HSD_GObj* prev_gx; //0x14
     struct _HSD_GObjProc* proc; //0x18
-    void (*render_cb)(struct _HSD_GObj* gobj, int code); //0x1C
+    void (*render_cb)(struct _HSD_GObj* gobj, s32 code); //0x1C
     u64 gxlink_prios;
     void* hsd_obj;
     void* user_data;
@@ -35,6 +37,16 @@ typedef struct _HSD_GObjProc {
     struct _HSD_GObj* gobj; //0x10
     void (*callback)(struct _HSD_GObj*); //0x14
 } HSD_GObjProc;
+
+typedef struct _HSD_GObjLibInitData {
+    u8 p_link_max; //804CE380
+    u8 gx_link_max; //804CE381
+    u8 gproc_pri_max; //804CE382
+    u32 unk_1; //804CE384
+    u32* unk_2; //804CE388
+    HSD_ObjAllocData gobj_def; //804CE38C
+    HSD_ObjAllocData gobj_proc_def; //804CE3B8
+} HSD_GObjLibInitData;
 
 #endif
 
