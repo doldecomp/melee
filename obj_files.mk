@@ -186,6 +186,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mnname.o                   	\
 	$(BUILD_DIR)/asm/melee/mn/code_8023B0F8.o               \
 	$(BUILD_DIR)/asm/melee/mn/mndiagram.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mndiagram2.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mndiagram3.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mnvibration.o                 \
 	$(BUILD_DIR)/asm/melee/mn/mnsound.o                 	\
 	$(BUILD_DIR)/asm/melee/mn/mndeflicker.o               	\
