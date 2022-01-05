@@ -14,8 +14,12 @@ lbl_80405494:
     .balign 4
     .asciz "dobj->mobj == mobj"
     .balign 4
+.global lbl_80405548
+lbl_80405548:
     .asciz "sysdolphin_base_library"
     .balign 4
+.global lbl_80405560
+lbl_80405560:
     .asciz "hsd_dobj"
     .balign 4
     .4byte NULL
