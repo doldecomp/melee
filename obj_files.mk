@@ -65,6 +65,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmario.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalcon.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftfox.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftlink.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.o 		\
@@ -81,8 +82,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftmewtwo.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftclink.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdrmario.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalco.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.o 		\
