@@ -17,7 +17,7 @@ enum __ReadProcActions
 	__TestForError
 };
 
-//func_803257E8
+//lbl_803257E8
 int __StringRead(void * isc, int ch, int Action) {
     char RetVal;
 
