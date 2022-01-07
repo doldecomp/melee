@@ -7369,7 +7369,7 @@ void __cvt_dbl_usll(void);
 // ? func_803252E4(?);
 // ? func_803257BC(?);
 // ? func_803257C4(?);
-int __StringRead(void *, int, in);
+int __StringRead(void *, int, int);
 char* strchr(char*,  int);
 int strncmp(const char*, const char*, unsigned long);
 int strcmp(char*, char*);
