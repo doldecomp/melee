@@ -7373,7 +7373,8 @@ int __StringRead(void *, int, in);
 char* strchr(char*,  int);
 int strncmp(const char*, const char*, unsigned long);
 int strcmp(char*, char*);
-char* strncpy(char* __restrict, const char * __restrict, unsigned long)
+char* strncpy(char* __restrict, const char * __restrict, unsigned long);
+char * strcpy(char * __restrict, const char * __restrict);
 unsigned long strlen(const char*);
 // ? func_80325B04(?);
 // ? func_80325B24(?);
