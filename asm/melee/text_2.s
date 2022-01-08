@@ -39550,7 +39550,7 @@ func_801C5AEC:
 /* 801C5AF4 001C26D4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 801C5AF8 001C26D8  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 801C5AFC 001C26DC  7C 7F 1B 78 */	mr r31, r3
-/* 801C5B00 001C26E0  4B E4 84 0D */	bl func_8000DF0C
+/* 801C5B00 001C26E0  4B E4 84 0D */	bl lbvector_euler_angles_from_onb
 /* 801C5B04 001C26E4  C0 3F 00 00 */	lfs f1, 0(r31)
 /* 801C5B08 001C26E8  C0 02 B2 C4 */	lfs f0, lbl_804DACA4@sda21(r2)
 /* 801C5B0C 001C26EC  FC 01 00 40 */	fcmpo cr0, f1, f0

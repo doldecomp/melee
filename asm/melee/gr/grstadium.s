@@ -2571,7 +2571,7 @@ func_801D32D0:
 /* 801D3344 001CFF24  38 81 00 28 */	addi r4, r1, 0x28
 /* 801D3348 001CFF28  38 A1 00 1C */	addi r5, r1, 0x1c
 /* 801D334C 001CFF2C  38 C0 00 00 */	li r6, 0
-/* 801D3350 001CFF30  4B E3 AE C1 */	bl func_8000E210
+/* 801D3350 001CFF30  4B E3 AE C1 */	bl lbvector_project_world_to_screen_coord
 /* 801D3354 001CFF34  C0 21 00 1C */	lfs f1, 0x1c(r1)
 /* 801D3358 001CFF38  C0 02 B5 4C */	lfs f0, lbl_804DAF2C@sda21(r2)
 /* 801D335C 001CFF3C  EC 01 00 28 */	fsubs f0, f1, f0

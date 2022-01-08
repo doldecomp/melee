@@ -865,7 +865,7 @@ lbl_8021B0F0:
 /* 8021B1AC 00217D8C  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8021B1B0 00217D90  38 81 00 14 */	addi r4, r1, 0x14
 /* 8021B1B4 00217D94  38 A1 00 20 */	addi r5, r1, 0x20
-/* 8021B1B8 00217D98  4B DF 2E 3D */	bl func_8000DFF4
+/* 8021B1B8 00217D98  4B DF 2E 3D */	bl lbvector_euler_angles_from_implicit_onb
 /* 8021B1BC 00217D9C  80 7F 00 E0 */	lwz r3, 0xe0(r31)
 /* 8021B1C0 00217DA0  38 00 00 00 */	li r0, 0
 /* 8021B1C4 00217DA4  80 81 00 38 */	lwz r4, 0x38(r1)

@@ -21,34 +21,34 @@ Vec *lbvector_crossprod_normalized(Vec *a, Vec *b, Vec *c);
 
 extern float func_80022D1C(float);
 
-float func_8000D620(Vec *a, Vec *b);
-float func_8000D790(Vec *a, Vec *b);
+float lbvecttor_angle(Vec *a, Vec *b);
+float lbvector_angle_xy(Vec *a, Vec *b);
 
 static float sin(float angle);
 static float cos(float angle);
 
-void func_8000D8F4(Vec *a, Vec *b, float angle);
+void lbvector_rotate_about_unit_axis(Vec *v, Vec *axis, float angle);
 void lbvector_rotate(Vec *v, int axis, float angle);
 
 float dummy(void);
-void func_8000DC6C(Vec *a, Vec *b);
-float func_8000DCA8(Vec *a, Vec *b);
-Vec *func_8000DDAC(Vec *a, Vec *b, Vec *result, float scale);
+void lbvector_mirror(Vec *a, Vec *b);
+float lbvector_cos_angle(Vec *a, Vec *b);
+Vec *lbvector_lerp(Vec *a, Vec *b, Vec *result, float scale);
 Vec *func_8000DE38(Mtx m, Vec *v, float c);
 
 extern float func_80022DBC(float);
 extern float func_80022C30(float, float);
 
-Vec *func_8000DF0C(Vec *a, Vec *b, Vec *c, Vec *d);
-Vec *func_8000DFF4(Vec *a, Vec *b, Vec *c);
-Vec *func_8000E138(Vec *v, Vec *rot);
-float func_8000E19C(float n);
+Vec *lbvector_euler_angles_from_onb(Vec *result_angles, Vec *a, Vec *b, Vec *c);
+Vec *lbvector_euler_angles_from_implicit_onb(Vec *result_angles, Vec *a, Vec *c);
+Vec *lbvector_apply_euler_rotation(Vec *v, Vec *angles);
+float lbvector_sqrtf_accurate(float x);
 
 extern MtxPtr func_80369688(HSD_CObj *);
 
-Vec *func_8000E210(HSD_CObj *cobj, const Point3d *pos3d, Point3d *screenCoords, int d);
-void func_8000E530(Mtx m, Vec *v);
-float func_8000E838(Vec *a, Vec *b, Vec *c, Vec *d);
+Vec *lbvector_project_world_to_screen_coord(HSD_CObj *cobj, const Point3d *pos3d, Point3d *screenCoords, int d);
+void lbvector_create_euler_matrix(Mtx m, Vec *angles);
+float lbvector_some_camera_vector_computation(Vec *a, Vec *b, Vec *c, Vec *d);
 
 
 #endif

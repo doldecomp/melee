@@ -4319,7 +4319,7 @@ lbl_8002C824:
 /* 8002C870 00029450  EC 20 08 28 */	fsubs f1, f0, f1
 /* 8002C874 00029454  38 7C 00 00 */	addi r3, r28, 0
 /* 8002C878 00029458  38 81 00 28 */	addi r4, r1, 0x28
-/* 8002C87C 0002945C  4B FE 10 79 */	bl func_8000D8F4
+/* 8002C87C 0002945C  4B FE 10 79 */	bl lbvector_rotate_about_unit_axis
 /* 8002C880 00029460  48 00 00 24 */	b lbl_8002C8A4
 lbl_8002C884:
 /* 8002C884 00029464  C0 1A 00 18 */	lfs f0, 0x18(r26)
@@ -4329,7 +4329,7 @@ lbl_8002C884:
 /* 8002C894 00029474  EC 20 08 28 */	fsubs f1, f0, f1
 /* 8002C898 00029478  38 7C 00 00 */	addi r3, r28, 0
 /* 8002C89C 0002947C  38 81 00 28 */	addi r4, r1, 0x28
-/* 8002C8A0 00029480  4B FE 10 55 */	bl func_8000D8F4
+/* 8002C8A0 00029480  4B FE 10 55 */	bl lbvector_rotate_about_unit_axis
 lbl_8002C8A4:
 /* 8002C8A4 00029484  C0 3C 00 00 */	lfs f1, 0(r28)
 /* 8002C8A8 00029488  C0 5E 00 00 */	lfs f2, 0(r30)
@@ -4340,7 +4340,7 @@ lbl_8002C8A4:
 /* 8002C8BC 0002949C  EC 20 08 28 */	fsubs f1, f0, f1
 /* 8002C8C0 000294A0  38 7C 00 00 */	addi r3, r28, 0
 /* 8002C8C4 000294A4  38 81 00 1C */	addi r4, r1, 0x1c
-/* 8002C8C8 000294A8  4B FE 10 2D */	bl func_8000D8F4
+/* 8002C8C8 000294A8  4B FE 10 2D */	bl lbvector_rotate_about_unit_axis
 /* 8002C8CC 000294AC  48 00 00 24 */	b lbl_8002C8F0
 lbl_8002C8D0:
 /* 8002C8D0 000294B0  C0 1A 00 24 */	lfs f0, 0x24(r26)
@@ -4350,7 +4350,7 @@ lbl_8002C8D0:
 /* 8002C8E0 000294C0  EC 20 08 28 */	fsubs f1, f0, f1
 /* 8002C8E4 000294C4  38 7C 00 00 */	addi r3, r28, 0
 /* 8002C8E8 000294C8  38 81 00 1C */	addi r4, r1, 0x1c
-/* 8002C8EC 000294CC  4B FE 10 09 */	bl func_8000D8F4
+/* 8002C8EC 000294CC  4B FE 10 09 */	bl lbvector_rotate_about_unit_axis
 lbl_8002C8F0:
 /* 8002C8F0 000294D0  BB 41 00 48 */	lmw r26, 0x48(r1)
 /* 8002C8F4 000294D4  80 01 00 6C */	lwz r0, 0x6c(r1)
@@ -9121,7 +9121,7 @@ func_80030BBC:
 /* 80030BF0 0002D7D0  83 E5 00 28 */	lwz r31, 0x28(r5)
 /* 80030BF4 0002D7D4  38 A1 00 28 */	addi r5, r1, 0x28
 /* 80030BF8 0002D7D8  38 7F 00 00 */	addi r3, r31, 0
-/* 80030BFC 0002D7DC  4B FD D6 15 */	bl func_8000E210
+/* 80030BFC 0002D7DC  4B FD D6 15 */	bl lbvector_project_world_to_screen_coord
 /* 80030C00 0002D7E0  28 03 00 00 */	cmplwi r3, 0
 /* 80030C04 0002D7E4  40 82 00 0C */	bne lbl_80030C10
 /* 80030C08 0002D7E8  38 60 00 00 */	li r3, 0
@@ -9219,7 +9219,7 @@ func_80030CFC:
 /* 80030D44 0002D924  38 81 00 50 */	addi r4, r1, 0x50
 /* 80030D48 0002D928  38 BE 00 1C */	addi r5, r30, 0x1c
 /* 80030D4C 0002D92C  38 C1 00 38 */	addi r6, r1, 0x38
-/* 80030D50 0002D930  4B FD DA E9 */	bl func_8000E838
+/* 80030D50 0002D930  4B FD DA E9 */	bl lbvector_some_camera_vector_computation
 /* 80030D54 0002D934  C0 1E 00 3C */	lfs f0, 0x3c(r30)
 /* 80030D58 0002D938  EC 00 F8 2A */	fadds f0, f0, f31
 /* 80030D5C 0002D93C  FC 01 00 40 */	fcmpo cr0, f1, f0
