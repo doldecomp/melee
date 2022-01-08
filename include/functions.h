@@ -7376,7 +7376,6 @@ int strcmp(char*, char*);
 char* strncpy(char* __restrict, const char * __restrict, unsigned long);
 char * strcpy(char * __restrict, const char * __restrict);
 unsigned long strlen(const char*);
-// ? func_80325B04(?);
 // ? func_80325B24(?);
 // ? func_80325BD0(?);
 // ? func_80326098(?);

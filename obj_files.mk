@@ -225,7 +225,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MSL/mem_funcs.o                \
 	$(BUILD_DIR)/asm/MSL/printf.o                   \
 	$(BUILD_DIR)/src/MSL/rand.o                     \
-	$(BUILD_DIR)/asm/MSL/string.o                   \
+	$(BUILD_DIR)/src/MSL/string.o                   \
 	$(BUILD_DIR)/asm/MSL/strtoul.o                  \
 	$(BUILD_DIR)/asm/MSL/console_io.o               \
 	$(BUILD_DIR)/src/MSL/wchar_io.o                 \
