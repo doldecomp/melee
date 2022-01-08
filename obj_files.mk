@@ -56,10 +56,16 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/code_8007C114.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_8007C630.o 		\
 	$(BUILD_DIR)/asm/melee/ft/ftcommon.o 			\
-	$(BUILD_DIR)/asm/melee/ft/code_800804EC.o 		\
+	$(BUILD_DIR)/asm/melee/ft/ftdrawcommon.o 		\
+	$(BUILD_DIR)/asm/melee/ft/ftcliffcommon.o 		\
+	$(BUILD_DIR)/asm/melee/ft/ftwalljump.o 			\
+	$(BUILD_DIR)/asm/melee/ft/code_80081938.o 		\
+	$(BUILD_DIR)/asm/melee/ft/code_80081B38.o 		\
+	$(BUILD_DIR)/asm/melee/ft/code_8008521C.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmario.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalcon.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftfox.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftlink.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.o 		\
@@ -76,8 +82,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftmewtwo.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftclink.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdrmario.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalco.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.o 		\
@@ -179,8 +187,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesw.o                   \
 	$(BUILD_DIR)/asm/melee/mn/mnname.o                   	\
-	$(BUILD_DIR)/asm/melee/mn/code_8023B0F8.o               \
+	$(BUILD_DIR)/asm/melee/mn/mnnamenew.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mndiagram.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mndiagram2.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mndiagram3.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mnvibration.o                 \
 	$(BUILD_DIR)/asm/melee/mn/mnsound.o                 	\
 	$(BUILD_DIR)/asm/melee/mn/mndeflicker.o               	\

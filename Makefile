@@ -95,6 +95,7 @@ endif
 CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults $(INCLUDES)
 
 $(EPILOGUE_DIR)/src/melee/lb/lbtime.o: CC_EPI := $(CC)
+$(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.o: CC_EPI := $(CC)
 
 HOSTCFLAGS := -Wall -O3 -s
 
@@ -157,7 +158,7 @@ $(BUILD_DIR)/%.o: %.s
 	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.c
-	@echo Compiling $<
+	@echo "Compiling " $<
 	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) -MT $@ $< >/dev/null
 	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
 
