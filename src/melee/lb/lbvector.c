@@ -17,9 +17,9 @@ extern inline float sqrtf_accurate(float x)
         guess = _half*guess*(_three - guess*guess*x);  // now have 32 sig bits
         guess = _half*guess*(_three - guess*guess*x);  // extra iteration
         y=(float)(x*guess);
-        return y ;
+        return y;
     }
-    return x ;
+    return x;
 }
 
 static float lbvector_len(Vec *vec)
@@ -259,10 +259,10 @@ float dummy(void) { return 2.0f; } // needed here to force order of floats in .s
 // 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a at the plane that is perpendicular to b and contains the origin.
 void lbvector_mirror(Vec *a, Vec *unit_mirror_axis)
 {
-    float f2 = (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
+    float f = (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
 
-    a->x += unit_mirror_axis->x * f2;
-    a->y += unit_mirror_axis->y * f2;
+    a->x += unit_mirror_axis->x * f;
+    a->y += unit_mirror_axis->y * f;
 }
 
 // 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between a and b.
@@ -318,7 +318,7 @@ extern float func_80022C30(float, float); // atan2
 // with 3 rotations about the x,y,z axes in that order.
 Vec *lbvector_euler_angles_from_onb(Vec *result_angles, Vec *a, Vec *b, Vec *c)
 {
-    if (b->z == -1.0f || c->z == 1.0f)
+    if (b->z == -1.0f || b->z == 1.0f)
     {
         if (b->z == -1.0f)
         {
@@ -346,11 +346,11 @@ Vec *lbvector_euler_angles_from_onb(Vec *result_angles, Vec *a, Vec *b, Vec *c)
 // in that order, the standard basis (e1,e2,e3) is rotated onto (c cross a,c,a).
 Vec *lbvector_euler_angles_from_implicit_onb(Vec *result_angles, Vec *a, Vec *c)
 {
-    Vec sp18;
+    Vec b;
 
-    PSVECCrossProduct(c, a, &sp18);
-    lbvector_normalize(&sp18);
-    func_8000DF0C(result_angles, a, &sp18, c);
+    PSVECCrossProduct(c, a, &b);
+    lbvector_normalize(&b);
+    lbvector_euler_angles_from_onb(result_angles, a, &b, c);
     return result_angles;
 }
 
