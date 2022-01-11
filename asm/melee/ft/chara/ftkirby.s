@@ -6153,7 +6153,7 @@ func_800F37EC:
 /* 800F39F4 000F05D4  C0 1F 23 D4 */	lfs f0, 0x23d4(r31)
 /* 800F39F8 000F05D8  EC 01 00 2A */	fadds f0, f1, f0
 /* 800F39FC 000F05DC  D0 1F 23 D8 */	stfs f0, 0x23d8(r31)
-/* 800F3A00 000F05E0  4B F1 98 ED */	bl lbvector_normalize
+/* 800F3A00 000F05E0  4B F1 98 ED */	bl lbvector_Normalize
 /* 800F3A04 000F05E4  C0 1F 23 D8 */	lfs f0, 0x23d8(r31)
 /* 800F3A08 000F05E8  38 80 00 03 */	li r4, 3
 /* 800F3A0C 000F05EC  C0 62 99 BC */	lfs f3, lbl_804D939C@sda21(r2)

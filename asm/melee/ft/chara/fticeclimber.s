@@ -2423,7 +2423,7 @@ func_80120E68:
 /* 80120EE4 0011DAC4  C0 02 9E 9C */	lfs f0, lbl_804D987C@sda21(r2)
 /* 80120EE8 0011DAC8  EC 01 00 2A */	fadds f0, f1, f0
 /* 80120EEC 0011DACC  D0 1F 00 84 */	stfs f0, 0x84(r31)
-/* 80120EF0 0011DAD0  4B EE C3 FD */	bl lbvector_normalize
+/* 80120EF0 0011DAD0  4B EE C3 FD */	bl lbvector_Normalize
 /* 80120EF4 0011DAD4  C0 7F 00 B0 */	lfs f3, 0xb0(r31)
 /* 80120EF8 0011DAD8  C0 1D 00 B0 */	lfs f0, 0xb0(r29)
 /* 80120EFC 0011DADC  C0 5F 00 B4 */	lfs f2, 0xb4(r31)
