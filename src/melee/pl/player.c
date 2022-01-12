@@ -3,7 +3,7 @@
 extern StaticPlayer lbl_80453080[4];
 
 extern char* lbl_803BCDC0;
-extern u32 lbl_803BCDE0[];
+extern S8Vec lbl_803BCDE0[];
 extern char* lbl_803BCE44;
 extern char* lbl_803BCE60;
 
@@ -481,6 +481,16 @@ lbl_80031C9C:
 /* 80031CAC 0002E88C  4E 80 00 20 */	blr 
 }
 
+#ifdef NON_MATCHING
+void Player_80031CB0(s32 id, s32 slot) {
+    if ( lbl_803BCDE0[id].x != -1) {
+        func_800855C8(lbl_803BCDE0[id].x, slot);
+    }
+    if ( lbl_803BCDE0[id].y != -1) {
+        func_800855C8(lbl_803BCDE0[id].y, slot);
+    }
+}
+#else
 asm void Player_80031CB0(s32 id, s32 slot)
 {
     nofralloc
@@ -518,6 +528,7 @@ lbl_80031D14:
 /* 80031D24 0002E904  7C 08 03 A6 */	mtlr r0
 /* 80031D28 0002E908  4E 80 00 20 */	blr 
 }
+#endif
 
 asm void Player_80031D2C(s32 id, s32 slot)
 {

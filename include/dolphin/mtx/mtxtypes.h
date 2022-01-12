@@ -15,6 +15,11 @@ typedef struct
 
 typedef struct
 {
+    s8 x, y, z;
+} S8Vec, *S8VecPtr;
+
+typedef struct
+{
 	f32 x, y, z, w;
 } Quaternion, *QuaternionPtr, Qtrn, *QtrnPtr;
 
