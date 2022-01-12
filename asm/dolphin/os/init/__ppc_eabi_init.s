@@ -5,5 +5,5 @@
 .global lbl_803B7240
 lbl_803B7240:
 	.4byte __init_cpp_exceptions
-    .4byte func_80326578
+    .4byte __sinit_trigf_c
     .4byte NULL
