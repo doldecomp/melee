@@ -4,6 +4,38 @@
 #include <global.h>
 
 #include <dolphin/types.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+
+
+typedef struct PlayerEntity PlayerEntity;
+
+struct PlayerEntity
+{
+    s16 entity_class; //0x0004 indicates a Player.  Ex. 0x00040805
+    s8 p_link;
+    s8 gx_link;
+    s8 p_priority;
+    s8 gx_render_priority;
+    s8 obj_kind;
+    s8 data_kind;
+    PlayerEntity* next_player;
+    PlayerEntity* prev_player;
+
+    PlayerEntity* next_gx_player;
+    PlayerEntity* prev_gx_player;
+
+    HSD_GObjProc* gobjproc;
+    s32 gxcallback_render_function;
+    s64 notused;
+
+    HSD_JObj* Jobj;
+
+    void* player_character_data;
+    void* destructor_func;
+    void* some_linked_list;
+
+};
 
 typedef struct _StaticPlayer
 {
@@ -11,7 +43,7 @@ typedef struct _StaticPlayer
     /*0x04*/ s32 player_character; //(External ID)
     /*0x08*/ s32 slot_type; // (0x0000000 is HMN, 0x00000001 is CPU, 0x00000002 is Demo, 0x00000003 n/a)
 
-    /*0x0C*/ s16 transformed; // 0x0001 for normal, 0x0100 for transformed (Probably Zelda/Sheik only)
+    /*0x0C*/ u8 transformed[2]; // 0x0001 for normal, 0x0100 for transformed (Probably Zelda/Sheik only)
     /*0x0E*/ s16 unk0E;
 
     /*0x10-0x1B*/ Vec nametag_pos;  ///Horizontal, Vertical, Depth (floats)
@@ -78,10 +110,14 @@ typedef struct _StaticPlayer
     /*0xAE*/ s8 unkAE;
     /*0xAF*/ s8 unkAF;
 
-    /*0xB0*/ void* player_entity;
-    /*0xB4*/ void* sub_character_entity; //Used for followers, such as Nana
+    /*0xB0*/ PlayerEntity* player_entity[2];
+    /*0xB4*/ /*void* sub_character_entity;*/ //Used for followers, such as Nana
 
-    /*0xB8*/ s32 stale_move_table_current_write_index; // Zero-Indexed. Rolls over after 9. Increments after each write.
+    /*0xB8*/ s8 unkB8;
+
+
+    /*0xBC*/ s32 stale_move_table_current_write_index; // Zero-Indexed. Rolls over after 9. Increments after each write.
+
 
     /*0xC0*/ s32 stale_move_index_0;  //1st Short is the move ID,  2nd Short is the # of action states that character has gone through this game
     /*0xC4*/ s32 stale_move_index_1;

@@ -68,6 +68,29 @@ lbl_8003176C:
 }
 #endif
 
+#ifdef NON_MATCHING
+void Player_80031790(s32 slot) {
+
+    StaticPlayer* player;
+    s32 phi_r30;
+    int i;
+
+    Player_CheckSlot(slot, 102);
+    player = &lbl_80453080[slot];
+
+    if ((player->slot_type == 0) || (player->slot_type == 1)) {
+        for (i = 0; i < 2; i++) {  
+            /// transformed will either be [1,0] (normal) or [0,1] (transformed)
+            /// checks to see if the player is in a transformed state, and calls
+            /// the function only once depending on the state
+            if ((player->player_entity[player->transformed[i]]) != 0) {
+                func_800867E8(player->player_entity[player->transformed[i]]);
+                ///func_800867E8 load player entity?, transformed or normal
+            }
+        }
+    }
+}
+#else
 asm void Player_80031790(s32 slot)
 {
     nofralloc
@@ -124,6 +147,7 @@ lbl_80031830:
 /* 80031840 0002E420  7C 08 03 A6 */	mtlr r0
 /* 80031844 0002E424  4E 80 00 20 */	blr 
 }
+#endif
 
 asm void Player_80031848(s32 slot)
 {
