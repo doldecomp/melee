@@ -597,7 +597,7 @@ func_80021C48();
 // ? Player_GetPtrForSlot(?);
 // ? Player_80031790(?);
 // ? Player_80031848(?);
-// ? Player_80031900(?);
+// ? func_8008688C_all_players(?);
 // ? Player_800319C4(?);
 // ? Player_80031AD0(?);
 // ? Player_80031CB0(?);

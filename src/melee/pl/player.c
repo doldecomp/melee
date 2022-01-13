@@ -19,7 +19,7 @@ extern void func_800D4FF4();
 
 void inline Player_CheckSlot(s32 slot, u32 line)
 {
-    if (slot < 0 || 6 < slot) {
+    if (slot < 0 || 6 <= slot) {
         OSReport("cant get player struct! %d\n", slot);
         __assert(__FILE__, line, "0");
     }
@@ -72,7 +72,6 @@ lbl_8003176C:
 void Player_80031790(s32 slot) {
 
     StaticPlayer* player;
-    s32 phi_r30;
     int i;
 
     Player_CheckSlot(slot, 102);
@@ -83,7 +82,7 @@ void Player_80031790(s32 slot) {
             /// transformed will either be [1,0] (normal) or [0,1] (transformed)
             /// checks to see if the player is in a transformed state, and calls
             /// the function only once depending on the state
-            if ((player->player_entity[player->transformed[i]]) != 0) {
+            if ((player->player_entity[player->transformed[i]])) {
                 func_800867E8(player->player_entity[player->transformed[i]]);
             }
         }
@@ -151,7 +150,6 @@ lbl_80031830:
 #ifdef NON_MATCHING
 void Player_80031848(s32 slot) {
     StaticPlayer* player;
-    s32 phi_r30;
     int i;
 
     Player_CheckSlot(slot, 102);
@@ -162,7 +160,7 @@ void Player_80031848(s32 slot) {
             /// transformed will either be [1,0] (normal) or [0,1] (transformed)
             /// checks to see if the player is in a transformed state, and calls
             /// the function only once depending on the state
-            if ((player->player_entity[player->transformed[i]]) != 0) {
+            if ((player->player_entity[player->transformed[i]])) {
                 func_8008688C(player->player_entity[player->transformed[i]]);
             }
         }
@@ -227,7 +225,28 @@ lbl_800318E8:
 }
 #endif
 
-asm void Player_80031900(s32 slot) 
+#ifdef NON_MATCHING
+void inline func_8008688C_wrapper(StaticPlayer* player)
+{
+    if ((player->slot_type == 0) || (player->slot_type == 1)) {
+        s32 i;
+        for (i = 0; i < 2; i++) {  
+            if ((player->player_entity[player->transformed[i]])) {
+                func_8008688C(player->player_entity[player->transformed[i]]);
+            }
+        }
+    }
+}
+void func_8008688C_all_players() {
+    s32 slot;
+    for (slot = 0; slot < 6; slot++) {
+        StaticPlayer* player = &lbl_80453080[slot];
+        Player_CheckSlot(slot, 102);
+        func_8008688C_wrapper(player);
+    }
+}
+#else
+asm void func_8008688C_all_players(s32 slot) 
 {
     nofralloc
 /* 80031900 0002E4E0  7C 08 02 A6 */	mflr r0
@@ -287,8 +306,38 @@ lbl_800319A0:
 /* 800319BC 0002E59C  7C 08 03 A6 */	mtlr r0
 /* 800319C0 0002E5A0  4E 80 00 20 */	blr 
 }
+#endif
 
-asm BOOL Player_800319C4(s32 slot, BOOL param_2)
+#ifdef NON_MATCHING
+BOOL Player_800319C4(s32 slot, BOOL arg1, s32 unused) {
+
+    s32 i;
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot, 102);
+    player = (&lbl_80453080[slot]);
+
+
+    if (arg1) {
+        for (i = 0; i < 2; i++) {
+            if (!player->player_entity[player->transformed[i]]) {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
+            return FALSE;
+        } 
+    }
+    
+    return TRUE;
+
+}
+#else
+asm BOOL Player_800319C4(s32 slot, BOOL arg1, s32 unused)
 {
     nofralloc
 /* 800319C4 0002E5A4  7C 08 02 A6 */	mflr r0
@@ -367,6 +416,7 @@ lbl_80031AB8:
 /* 80031AC8 0002E6A8  7C 08 03 A6 */	mtlr r0
 /* 80031ACC 0002E6AC  4E 80 00 20 */	blr 
 }
+#endif
 
 asm void Player_80031AD0(s32 slot)
 {
