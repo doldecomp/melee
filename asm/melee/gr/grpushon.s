@@ -645,7 +645,7 @@ lbl_80218B6C:
 /* 80218B98 00215778  54 00 10 3A */	slwi r0, r0, 2
 /* 80218B9C 0021577C  7C 1F 04 2E */	lfsx f0, r31, r0
 /* 80218BA0 00215780  EF 9B 00 24 */	fdivs f28, f27, f0
-/* 80218BA4 00215784  4B DF 49 21 */	bl lbvector_sub
+/* 80218BA4 00215784  4B DF 49 21 */	bl lbvector_Sub
 /* 80218BA8 00215788  C0 01 01 04 */	lfs f0, 0x104(r1)
 /* 80218BAC 0021578C  FC 00 F0 40 */	fcmpo cr0, f0, f30
 /* 80218BB0 00215790  40 80 00 1C */	bge lbl_80218BCC
@@ -658,7 +658,7 @@ lbl_80218BC4:
 /* 80218BC8 002157A8  EF 9C 00 32 */	fmuls f28, f28, f0
 lbl_80218BCC:
 /* 80218BCC 002157AC  38 61 01 00 */	addi r3, r1, 0x100
-/* 80218BD0 002157B0  4B DF 47 1D */	bl lbvector_normalize
+/* 80218BD0 002157B0  4B DF 47 1D */	bl lbvector_Normalize
 /* 80218BD4 002157B4  C0 01 01 00 */	lfs f0, 0x100(r1)
 /* 80218BD8 002157B8  38 61 00 3C */	addi r3, r1, 0x3c
 /* 80218BDC 002157BC  38 81 01 00 */	addi r4, r1, 0x100
@@ -670,7 +670,7 @@ lbl_80218BCC:
 /* 80218BF4 002157D4  C0 01 01 08 */	lfs f0, 0x108(r1)
 /* 80218BF8 002157D8  EC 00 07 32 */	fmuls f0, f0, f28
 /* 80218BFC 002157DC  D0 01 01 08 */	stfs f0, 0x108(r1)
-/* 80218C00 002157E0  4B DF 48 6D */	bl lbvector_add
+/* 80218C00 002157E0  4B DF 48 6D */	bl lbvector_Add
 lbl_80218C04:
 /* 80218C04 002157E4  3B 5A 00 04 */	addi r26, r26, 4
 /* 80218C08 002157E8  3B 7B 00 01 */	addi r27, r27, 1
@@ -716,7 +716,7 @@ lbl_80218C90:
 /* 80218CA0 00215880  D0 01 00 40 */	stfs f0, 0x40(r1)
 lbl_80218CA4:
 /* 80218CA4 00215884  38 61 00 3C */	addi r3, r1, 0x3c
-/* 80218CA8 00215888  4B DF 46 45 */	bl lbvector_normalize
+/* 80218CA8 00215888  4B DF 46 45 */	bl lbvector_Normalize
 /* 80218CAC 0021588C  C0 01 00 3C */	lfs f0, 0x3c(r1)
 /* 80218CB0 00215890  38 61 00 3C */	addi r3, r1, 0x3c
 /* 80218CB4 00215894  C0 22 C1 18 */	lfs f1, lbl_804DBAF8@sda21(r2)
@@ -729,7 +729,7 @@ lbl_80218CA4:
 /* 80218CD0 002158B0  C0 01 00 44 */	lfs f0, 0x44(r1)
 /* 80218CD4 002158B4  EC 00 00 72 */	fmuls f0, f0, f1
 /* 80218CD8 002158B8  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 80218CDC 002158BC  4B DF 47 91 */	bl lbvector_add
+/* 80218CDC 002158BC  4B DF 47 91 */	bl lbvector_Add
 /* 80218CE0 002158C0  80 7E 01 6C */	lwz r3, 0x16c(r30)
 /* 80218CE4 002158C4  38 81 00 3C */	addi r4, r1, 0x3c
 /* 80218CE8 002158C8  48 14 E0 01 */	bl func_80366CE8

@@ -36029,7 +36029,7 @@ func_801C2D24:
 /* 801C2D54 001BF934  4B FF FF D1 */	bl func_801C2D24
 /* 801C2D58 001BF938  38 7F 00 00 */	addi r3, r31, 0
 /* 801C2D5C 001BF93C  38 81 00 20 */	addi r4, r1, 0x20
-/* 801C2D60 001BF940  4B E4 A7 0D */	bl lbvector_add
+/* 801C2D60 001BF940  4B E4 A7 0D */	bl lbvector_Add
 /* 801C2D64 001BF944  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801C2D68 001BF948  38 60 00 01 */	li r3, 1
 /* 801C2D6C 001BF94C  C0 22 B2 F8 */	lfs f1, lbl_804DACD8@sda21(r2)
@@ -36053,7 +36053,7 @@ lbl_801C2D94:
 /* 801C2DB0 001BF990  4B FF FF 75 */	bl func_801C2D24
 /* 801C2DB4 001BF994  38 7F 00 00 */	addi r3, r31, 0
 /* 801C2DB8 001BF998  38 81 00 14 */	addi r4, r1, 0x14
-/* 801C2DBC 001BF99C  4B E4 A6 B1 */	bl lbvector_add
+/* 801C2DBC 001BF99C  4B E4 A6 B1 */	bl lbvector_Add
 /* 801C2DC0 001BF9A0  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801C2DC4 001BF9A4  38 60 00 01 */	li r3, 1
 /* 801C2DC8 001BF9A8  C0 22 B2 F8 */	lfs f1, lbl_804DACD8@sda21(r2)
@@ -38393,7 +38393,7 @@ func_801C4B50:
 /* 801C4B94 001C1774  38 61 00 30 */	addi r3, r1, 0x30
 /* 801C4B98 001C1778  4B E4 9E 59 */	bl func_8000E9F0
 /* 801C4B9C 001C177C  38 61 00 30 */	addi r3, r1, 0x30
-/* 801C4BA0 001C1780  4B E4 87 4D */	bl lbvector_normalize
+/* 801C4BA0 001C1780  4B E4 87 4D */	bl lbvector_Normalize
 /* 801C4BA4 001C1784  C0 21 00 34 */	lfs f1, 0x34(r1)
 /* 801C4BA8 001C1788  C0 02 B2 C4 */	lfs f0, lbl_804DACA4@sda21(r2)
 /* 801C4BAC 001C178C  FC 01 00 40 */	fcmpo cr0, f1, f0
@@ -38419,11 +38419,11 @@ lbl_801C4BF0:
 /* 801C4BF0 001C17D0  38 61 00 30 */	addi r3, r1, 0x30
 /* 801C4BF4 001C17D4  38 81 00 18 */	addi r4, r1, 0x18
 /* 801C4BF8 001C17D8  38 A1 00 24 */	addi r5, r1, 0x24
-/* 801C4BFC 001C17DC  4B E4 89 35 */	bl lbvector_crossprod_normalized
+/* 801C4BFC 001C17DC  4B E4 89 35 */	bl lbvector_CrossprodNormalized
 /* 801C4C00 001C17E0  38 61 00 24 */	addi r3, r1, 0x24
 /* 801C4C04 001C17E4  38 81 00 30 */	addi r4, r1, 0x30
 /* 801C4C08 001C17E8  38 A1 00 18 */	addi r5, r1, 0x18
-/* 801C4C0C 001C17EC  4B E4 89 25 */	bl lbvector_crossprod_normalized
+/* 801C4C0C 001C17EC  4B E4 89 25 */	bl lbvector_CrossprodNormalized
 /* 801C4C10 001C17F0  C0 21 00 2C */	lfs f1, 0x2c(r1)
 /* 801C4C14 001C17F4  4B E5 E1 A9 */	bl func_80022DBC
 /* 801C4C18 001C17F8  C0 41 00 2C */	lfs f2, 0x2c(r1)
@@ -39550,7 +39550,7 @@ func_801C5AEC:
 /* 801C5AF4 001C26D4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 801C5AF8 001C26D8  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 801C5AFC 001C26DC  7C 7F 1B 78 */	mr r31, r3
-/* 801C5B00 001C26E0  4B E4 84 0D */	bl func_8000DF0C
+/* 801C5B00 001C26E0  4B E4 84 0D */	bl lbvector_EulerAnglesFromONB
 /* 801C5B04 001C26E4  C0 3F 00 00 */	lfs f1, 0(r31)
 /* 801C5B08 001C26E8  C0 02 B2 C4 */	lfs f0, lbl_804DACA4@sda21(r2)
 /* 801C5B0C 001C26EC  FC 01 00 40 */	fcmpo cr0, f1, f0

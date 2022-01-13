@@ -142,7 +142,7 @@ void func_80224CAC(Vec *arg0) {
     rot_vec.y = degrees_2_radians * stage_info.cam_info.fixed_cam_horz_angle;
     rot_vec.z = unk_zero_const_804DBCD8;
 
-    func_8000E138(&another_vec, &rot_vec);
+    lbvector_ApplyEulerRotation(&another_vec, &rot_vec);
 
     {
         Vec last_vec;
