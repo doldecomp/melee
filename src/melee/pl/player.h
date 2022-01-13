@@ -8,35 +8,6 @@
 #include <sysdolphin/baselib/jobj.h>
 
 
-typedef struct PlayerEntity PlayerEntity;
-
-struct PlayerEntity
-{
-    s16 entity_class; //0x0004 indicates a Player.  Ex. 0x00040805
-    s8 p_link;
-    s8 gx_link;
-    s8 p_priority;
-    s8 gx_render_priority;
-    s8 obj_kind;
-    s8 data_kind;
-    PlayerEntity* next_player;
-    PlayerEntity* prev_player;
-
-    PlayerEntity* next_gx_player;
-    PlayerEntity* prev_gx_player;
-
-    HSD_GObjProc* gobjproc;
-    s32 gxcallback_render_function;
-    s64 notused;
-
-    HSD_JObj* Jobj;
-
-    void* player_character_data;
-    void* destructor_func;
-    void* some_linked_list;
-
-};
-
 typedef struct _StaticPlayer
 {
     /*0x00*/ s32 player_state;  // 0x02 In-Game (includes dead). 0x00 Otherwise.
@@ -110,7 +81,7 @@ typedef struct _StaticPlayer
     /*0xAE*/ s8 unkAE;
     /*0xAF*/ s8 unkAF;
 
-    /*0xB0*/ PlayerEntity* player_entity[2];
+    /*0xB0*/ HSD_GObj* player_entity[2];
     /*0xB4*/ /*void* sub_character_entity;*/ //Used for followers, such as Nana
 
     /*0xB8*/ s8 unkB8;

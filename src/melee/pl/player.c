@@ -17,11 +17,11 @@ extern void func_802F6E1C();
 extern void func_800D4FF4();
 
 
-void inline Player_CheckSlot(s32 slot, u32 line)
+void inline Player_CheckSlot(s32 slot)
 {
     if (slot < 0 || 6 <= slot) {
         OSReport("cant get player struct! %d\n", slot);
-        __assert(__FILE__, line, "0");
+        __assert(__FILE__, 0x66, "0");
     }
 }
 
@@ -29,7 +29,7 @@ void inline Player_CheckSlot(s32 slot, u32 line)
 #ifdef NON_MATCHING
 StaticPlayer* Player_GetPtrForSlot(s32 slot)
 {
-    Player_CheckSlot(slot, 102);
+    Player_CheckSlot(slot);
     return &lbl_80453080[slot];
 }
 #else
@@ -74,7 +74,7 @@ void Player_80031790(s32 slot) {
     StaticPlayer* player;
     int i;
 
-    Player_CheckSlot(slot, 102);
+    Player_CheckSlot(slot);
     player = &lbl_80453080[slot];
 
     if ((player->slot_type == 0) || (player->slot_type == 1)) {
@@ -152,7 +152,7 @@ void Player_80031848(s32 slot) {
     StaticPlayer* player;
     int i;
 
-    Player_CheckSlot(slot, 102);
+    Player_CheckSlot(slot);
     player = &lbl_80453080[slot];
 
     if ((player->slot_type == 0) || (player->slot_type == 1)) {
@@ -241,7 +241,7 @@ void func_8008688C_all_players() {
     s32 slot;
     for (slot = 0; slot < 6; slot++) {
         StaticPlayer* player = &lbl_80453080[slot];
-        Player_CheckSlot(slot, 102);
+        Player_CheckSlot(slot);
         func_8008688C_wrapper(player);
     }
 }
@@ -314,7 +314,7 @@ BOOL Player_800319C4(s32 slot, BOOL arg1, s32 unused) {
     s32 i;
     StaticPlayer* player;
 
-    Player_CheckSlot(slot, 102);
+    Player_CheckSlot(slot);
     player = (&lbl_80453080[slot]);
 
 
