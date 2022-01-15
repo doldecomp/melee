@@ -239,6 +239,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MSL/strtoul.o                  \
 	$(BUILD_DIR)/asm/MSL/console_io.o               \
 	$(BUILD_DIR)/src/MSL/wchar_io.o                 \
+	$(BUILD_DIR)/asm/MSL/math_1.o                   \
+	$(BUILD_DIR)/asm/MSL/trigf.o                    \
 	$(BUILD_DIR)/asm/MSL/math.o                     \
                                                     \
 	$(BUILD_DIR)/asm/MetroTRK/mainloop.o            \
