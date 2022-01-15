@@ -3498,7 +3498,7 @@ lbl_80021484:
 /* 800214A0 0001E080  80 9E 00 04 */	lwz r4, 4(r30)
 /* 800214A4 0001E084  C0 04 00 6C */	lfs f0, 0x6c(r4)
 /* 800214A8 0001E088  D0 01 00 68 */	stfs f0, 0x68(r1)
-/* 800214AC 0001E08C  4B FE BE 41 */	bl lbvector_normalize
+/* 800214AC 0001E08C  4B FE BE 41 */	bl lbvector_Normalize
 /* 800214B0 0001E090  C0 01 00 64 */	lfs f0, 0x64(r1)
 /* 800214B4 0001E094  38 7E 00 0C */	addi r3, r30, 0xc
 /* 800214B8 0001E098  C0 5E 00 1C */	lfs f2, 0x1c(r30)
@@ -3559,7 +3559,7 @@ lbl_80021484:
 /* 80021594 0001E174  C0 1E 00 20 */	lfs f0, 0x20(r30)
 /* 80021598 0001E178  EC 03 00 7A */	fmadds f0, f3, f1, f0
 /* 8002159C 0001E17C  D0 1E 00 20 */	stfs f0, 0x20(r30)
-/* 800215A0 0001E180  4B FE BF 59 */	bl lbvector_diff
+/* 800215A0 0001E180  4B FE BF 59 */	bl lbvector_Diff
 /* 800215A4 0001E184  C0 21 00 64 */	lfs f1, 0x64(r1)
 /* 800215A8 0001E188  C0 03 00 04 */	lfs f0, 4(r3)
 /* 800215AC 0001E18C  C0 41 00 60 */	lfs f2, 0x60(r1)
@@ -3600,22 +3600,22 @@ lbl_80021628:
 /* 80021634 0001E214  EC 00 01 32 */	fmuls f0, f0, f4
 /* 80021638 0001E218  38 A1 00 2C */	addi r5, r1, 0x2c
 /* 8002163C 0001E21C  D0 1E 00 48 */	stfs f0, 0x48(r30)
-/* 80021640 0001E220  4B FE BE B9 */	bl lbvector_diff
+/* 80021640 0001E220  4B FE BE B9 */	bl lbvector_Diff
 /* 80021644 0001E224  38 7E 00 18 */	addi r3, r30, 0x18
 /* 80021648 0001E228  38 9E 00 0C */	addi r4, r30, 0xc
 /* 8002164C 0001E22C  38 A1 00 38 */	addi r5, r1, 0x38
-/* 80021650 0001E230  4B FE BE A9 */	bl lbvector_diff
+/* 80021650 0001E230  4B FE BE A9 */	bl lbvector_Diff
 /* 80021654 0001E234  38 61 00 2C */	addi r3, r1, 0x2c
 /* 80021658 0001E238  38 81 00 38 */	addi r4, r1, 0x38
-/* 8002165C 0001E23C  4B FE BF C5 */	bl func_8000D620
+/* 8002165C 0001E23C  4B FE BF C5 */	bl lbvector_Angle
 /* 80021660 0001E240  FF E0 08 90 */	fmr f31, f1
 /* 80021664 0001E244  38 7E 00 24 */	addi r3, r30, 0x24
 /* 80021668 0001E248  38 9E 00 18 */	addi r4, r30, 0x18
 /* 8002166C 0001E24C  38 A1 00 2C */	addi r5, r1, 0x2c
-/* 80021670 0001E250  4B FE BE 89 */	bl lbvector_diff
+/* 80021670 0001E250  4B FE BE 89 */	bl lbvector_Diff
 /* 80021674 0001E254  38 61 00 2C */	addi r3, r1, 0x2c
 /* 80021678 0001E258  38 81 00 38 */	addi r4, r1, 0x38
-/* 8002167C 0001E25C  4B FE BF A5 */	bl func_8000D620
+/* 8002167C 0001E25C  4B FE BF A5 */	bl lbvector_Angle
 /* 80021680 0001E260  C0 9E 00 0C */	lfs f4, 0xc(r30)
 /* 80021684 0001E264  C0 7E 00 3C */	lfs f3, 0x3c(r30)
 /* 80021688 0001E268  C0 5E 00 10 */	lfs f2, 0x10(r30)
