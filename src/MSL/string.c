@@ -1,8 +1,8 @@
 #define EOF -1
 #pragma ANSI_strict off
 
-static int lbl_804D5B58 = 80808080L; // = K1
-static int lbl_804D5B5C = 0xfefefeffL; // = K2
+static unsigned int lbl_804D5B58 = 0x80808080L; // = K1
+static unsigned int lbl_804D5B5C = 0xfefefeffL; // = K2
 
 typedef struct
 {
