@@ -1270,14 +1270,14 @@ lbl_80374B00:
 /* 80374B34 00371714  38 80 00 00 */	li r4, 0
 /* 80374B38 00371718  4B FC A4 99 */	bl func_8033EFD0
 /* 80374B3C 0037171C  38 60 00 01 */	li r3, 1
-/* 80374B40 00371720  4B FC 80 39 */	bl func_8033CB78
+/* 80374B40 00371720  4B FC 80 39 */	bl GXSetNumTexGens
 /* 80374B44 00371724  38 60 00 00 */	li r3, 0
 /* 80374B48 00371728  38 80 00 01 */	li r4, 1
 /* 80374B4C 0037172C  38 A0 00 04 */	li r5, 4
 /* 80374B50 00371730  38 C0 00 3C */	li r6, 0x3c
 /* 80374B54 00371734  38 E0 00 00 */	li r7, 0
 /* 80374B58 00371738  39 00 00 7D */	li r8, 0x7d
-/* 80374B5C 0037173C  4B FC 7D 4D */	bl func_8033C8A8
+/* 80374B5C 0037173C  4B FC 7D 4D */	bl GXSetTexCoordGen2
 /* 80374B60 00371740  38 60 00 01 */	li r3, 1
 /* 80374B64 00371744  4B FC BC 2D */	bl func_80340790
 /* 80374B68 00371748  38 60 00 00 */	li r3, 0
@@ -1295,7 +1295,7 @@ lbl_80374B00:
 /* 80374B98 00371778  48 00 00 34 */	b lbl_80374BCC
 lbl_80374B9C:
 /* 80374B9C 0037177C  38 60 00 00 */	li r3, 0
-/* 80374BA0 00371780  4B FC 7F D9 */	bl func_8033CB78
+/* 80374BA0 00371780  4B FC 7F D9 */	bl GXSetNumTexGens
 /* 80374BA4 00371784  38 60 00 01 */	li r3, 1
 /* 80374BA8 00371788  4B FC BB E9 */	bl func_80340790
 /* 80374BAC 0037178C  38 60 00 00 */	li r3, 0
@@ -1358,7 +1358,7 @@ lbl_80374C54:
 /* 80374C74 00371854  39 00 00 00 */	li r8, 0
 /* 80374C78 00371858  39 20 00 02 */	li r9, 2
 /* 80374C7C 0037185C  4B FC 99 2D */	bl GXSetChanCtrl
-/* 80374C80 00371860  4B FC 77 49 */	bl func_8033C3C8
+/* 80374C80 00371860  4B FC 77 49 */	bl GXClearVtxDesc
 /* 80374C84 00371864  38 60 00 00 */	li r3, 0
 /* 80374C88 00371868  38 80 00 09 */	li r4, 9
 /* 80374C8C 0037186C  38 A0 00 01 */	li r5, 1
@@ -1478,6 +1478,98 @@ _HSD_DispForgetMemory:
 /* 80374E44 00371A24  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406AE0
+lbl_80406AE0:
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+.global lbl_80406AEC
+lbl_80406AEC:
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+.global lbl_80406B04
+lbl_80406B04:
+    .asciz "displayfunc.c"
+    .balign 4
+.global lbl_80406B14
+lbl_80406B14:
+    .asciz "unkown type of billboard.\n"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80406B40
+lbl_80406B40:
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+    .4byte 0xFFFFFFFF
+
+
+.section .sdata
+
+.global lbl_804D5DD8
+lbl_804D5DD8:
+    .4byte 0x00000000
+.global lbl_804D5DDC
+lbl_804D5DDC:
+    .4byte lbl_804D76A4
+.global lbl_804D5DE0
+lbl_804D5DE0:
+    .4byte lbl_804D76A8
+.global lbl_804D5DE4
+lbl_804D5DE4:
+    .4byte lbl_804D76B0
+.global lbl_804D5DE8
+lbl_804D5DE8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5DF0
+lbl_804D5DF0:
+    .asciz "x"
+    .balign 4
+.global lbl_804D5DF4
+lbl_804D5DF4:
+    .asciz "jobj.h"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7698
@@ -1504,3 +1596,19 @@ lbl_804D76B0:
 .global lbl_804D76B4
 lbl_804D76B4:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DE578
+lbl_804DE578:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE580
+lbl_804DE580:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE588
+lbl_804DE588:
+	.4byte 0x40080000
+	.4byte 0x00000000

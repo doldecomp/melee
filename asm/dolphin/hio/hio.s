@@ -921,6 +921,14 @@ lbl_8032C734:
 /* 8032C748 00329328  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5B68
+lbl_804D5B68:
+    .4byte 0xFFFFFFFF
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global lbl_804D70A0

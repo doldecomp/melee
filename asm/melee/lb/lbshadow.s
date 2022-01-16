@@ -770,7 +770,7 @@ lbl_8000F4B4:
 /* 8000F4C4 0000C0A4  41 82 00 24 */	beq lbl_8000F4E8
 /* 8000F4C8 0000C0A8  38 61 00 C0 */	addi r3, r1, 0xc0
 /* 8000F4CC 0000C0AC  38 81 00 B4 */	addi r4, r1, 0xb4
-/* 8000F4D0 0000C0B0  4B FF DF F5 */	bl lbvector_sub
+/* 8000F4D0 0000C0B0  4B FF DF F5 */	bl lbvector_Sub
 /* 8000F4D4 0000C0B4  C0 02 81 90 */	lfs f0, lbl_804D7B70@sda21(r2)
 /* 8000F4D8 0000C0B8  D0 01 00 BC */	stfs f0, 0xbc(r1)
 /* 8000F4DC 0000C0BC  D0 01 00 B8 */	stfs f0, 0xb8(r1)
@@ -785,7 +785,7 @@ lbl_8000F4F8:
 /* 8000F4F8 0000C0D8  38 61 00 C0 */	addi r3, r1, 0xc0
 /* 8000F4FC 0000C0DC  38 81 00 B4 */	addi r4, r1, 0xb4
 /* 8000F500 0000C0E0  38 A1 00 9C */	addi r5, r1, 0x9c
-/* 8000F504 0000C0E4  4B FF DF F5 */	bl lbvector_diff
+/* 8000F504 0000C0E4  4B FF DF F5 */	bl lbvector_Diff
 /* 8000F508 0000C0E8  C0 21 00 9C */	lfs f1, 0x9c(r1)
 /* 8000F50C 0000C0EC  C0 01 00 A0 */	lfs f0, 0xa0(r1)
 /* 8000F510 0000C0F0  EC 41 00 72 */	fmuls f2, f1, f1
@@ -850,9 +850,9 @@ lbl_8000F5C0:
 /* 8000F5F4 0000C1D4  38 A1 00 84 */	addi r5, r1, 0x84
 /* 8000F5F8 0000C1D8  D0 21 00 A8 */	stfs f1, 0xa8(r1)
 /* 8000F5FC 0000C1DC  D0 01 00 AC */	stfs f0, 0xac(r1)
-/* 8000F600 0000C1E0  4B FF DE F9 */	bl lbvector_diff
+/* 8000F600 0000C1E0  4B FF DE F9 */	bl lbvector_Diff
 /* 8000F604 0000C1E4  38 61 00 84 */	addi r3, r1, 0x84
-/* 8000F608 0000C1E8  4B FF DC E5 */	bl lbvector_normalize
+/* 8000F608 0000C1E8  4B FF DC E5 */	bl lbvector_Normalize
 /* 8000F60C 0000C1EC  C0 A2 81 B0 */	lfs f5, lbl_804D7B90@sda21(r2)
 /* 8000F610 0000C1F0  FC 01 28 40 */	fcmpo cr0, f1, f5
 /* 8000F614 0000C1F4  40 80 00 34 */	bge lbl_8000F648
@@ -872,11 +872,11 @@ lbl_8000F648:
 /* 8000F648 0000C228  38 61 00 A8 */	addi r3, r1, 0xa8
 /* 8000F64C 0000C22C  38 81 00 84 */	addi r4, r1, 0x84
 /* 8000F650 0000C230  38 A1 00 90 */	addi r5, r1, 0x90
-/* 8000F654 0000C234  4B FF DE DD */	bl lbvector_crossprod_normalized
+/* 8000F654 0000C234  4B FF DE DD */	bl lbvector_CrossprodNormalized
 /* 8000F658 0000C238  38 61 00 84 */	addi r3, r1, 0x84
 /* 8000F65C 0000C23C  38 81 00 90 */	addi r4, r1, 0x90
 /* 8000F660 0000C240  38 A1 00 A8 */	addi r5, r1, 0xa8
-/* 8000F664 0000C244  4B FF DE CD */	bl lbvector_crossprod_normalized
+/* 8000F664 0000C244  4B FF DE CD */	bl lbvector_CrossprodNormalized
 /* 8000F668 0000C248  48 00 00 18 */	b lbl_8000F680
 lbl_8000F66C:
 /* 8000F66C 0000C24C  C0 22 81 90 */	lfs f1, lbl_804D7B70@sda21(r2)

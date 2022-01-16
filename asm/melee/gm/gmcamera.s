@@ -760,7 +760,7 @@ lbl_801A2C44:
 /* 801A2C6C 0019F84C  38 E0 00 06 */	li r7, 6
 /* 801A2C70 0019F850  39 00 00 00 */	li r8, 0
 /* 801A2C74 0019F854  39 20 00 00 */	li r9, 0
-/* 801A2C78 0019F858  48 1C 1F 91 */	bl func_80364C08
+/* 801A2C78 0019F858  48 1C 1F 91 */	bl HSD_ForeachAnim
 /* 801A2C7C 0019F85C  38 00 00 00 */	li r0, 0
 /* 801A2C80 0019F860  4C C6 31 82 */	crclr 6
 /* 801A2C84 0019F864  94 1F 00 18 */	stwu r0, 0x18(r31)
@@ -1213,7 +1213,7 @@ lbl_801A3250:
 /* 801A32AC 0019FE8C  38 9D 00 00 */	addi r4, r29, 0
 /* 801A32B0 0019FE90  38 A0 00 0B */	li r5, 0xb
 /* 801A32B4 0019FE94  38 C0 00 00 */	li r6, 0
-/* 801A32B8 0019FE98  48 1E D3 E5 */	bl func_8039069C
+/* 801A32B8 0019FE98  48 1E D3 E5 */	bl GObj_SetupGXLink
 /* 801A32BC 0019FE9C  80 7F 00 00 */	lwz r3, 0(r31)
 /* 801A32C0 0019FEA0  38 9E 01 0C */	addi r4, r30, 0x10c
 /* 801A32C4 0019FEA4  48 1D D0 95 */	bl HSD_ArchiveGetPublicAddress
@@ -1235,7 +1235,7 @@ lbl_801A3250:
 /* 801A3304 0019FEE4  38 9D 00 00 */	addi r4, r29, 0
 /* 801A3308 0019FEE8  38 A0 00 0B */	li r5, 0xb
 /* 801A330C 0019FEEC  38 C0 00 00 */	li r6, 0
-/* 801A3310 0019FEF0  48 1E D3 8D */	bl func_8039069C
+/* 801A3310 0019FEF0  48 1E D3 8D */	bl GObj_SetupGXLink
 /* 801A3314 0019FEF4  38 7B 00 00 */	addi r3, r27, 0
 /* 801A3318 0019FEF8  38 9A 00 00 */	addi r4, r26, 0
 /* 801A331C 0019FEFC  38 A0 00 00 */	li r5, 0
@@ -1598,3 +1598,39 @@ lbl_804D4258:
 lbl_804D4260:
     .asciz "IfVsCam"
     .balign 4
+
+
+.section .sdata2
+
+.global lbl_804DA9B8
+lbl_804DA9B8:
+	.4byte 0x00000000
+.global lbl_804DA9BC
+lbl_804DA9BC:
+	.4byte 0x44200000
+.global lbl_804DA9C0
+lbl_804DA9C0:
+	.4byte 0x42000000
+.global lbl_804DA9C4
+lbl_804DA9C4:
+	.4byte 0x40A00000
+.global lbl_804DA9C8
+lbl_804DA9C8:
+	.4byte 0xC0A00000
+.global lbl_804DA9CC
+lbl_804DA9CC:
+	.4byte 0x3F800000
+.global lbl_804DA9D0
+lbl_804DA9D0:
+	.4byte 0x40000000
+	.4byte 0x00000000
+.global lbl_804DA9D8
+lbl_804DA9D8:
+	.4byte 0x00000000
+.global lbl_804DA9DC
+lbl_804DA9DC:
+	.4byte 0x44649249
+.global lbl_804DA9E0
+lbl_804DA9E0:
+	.4byte 0x42800000
+	.4byte 0x00000000

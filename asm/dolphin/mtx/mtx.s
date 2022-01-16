@@ -86,8 +86,8 @@ PSMTXConcat:
 /* 803422C8 0033EEA8  38 21 00 40 */	addi r1, r1, 0x40
 /* 803422CC 0033EEAC  4E 80 00 20 */	blr 
 
-.global func_803422D0
-func_803422D0:
+.global PSMTXTranspose
+PSMTXTranspose:
 /* 803422D0 0033EEB0  C0 02 E9 34 */	lfs f0, lbl_804DE314@sda21(r2)
 /* 803422D4 0033EEB4  E0 23 00 00 */	psq_l f1, 0(r3), 0, qr0
 /* 803422D8 0033EEB8  D0 04 00 2C */	stfs f0, 0x2c(r4)
@@ -187,11 +187,11 @@ PSMTXRotRad:
 /* 80342434 0033F014  7C 7E 1B 78 */	mr r30, r3
 /* 80342438 0033F018  7C 9F 23 78 */	mr r31, r4
 /* 8034243C 0033F01C  FC 20 F8 90 */	fmr f1, f31
-/* 80342440 0033F020  4B FE 3F 95 */	bl func_803263D4
+/* 80342440 0033F020  4B FE 3F 95 */	bl sinf
 /* 80342444 0033F024  FC 00 08 90 */	fmr f0, f1
 /* 80342448 0033F028  FC 20 F8 90 */	fmr f1, f31
 /* 8034244C 0033F02C  FF E0 00 90 */	fmr f31, f0
-/* 80342450 0033F030  4B FE 3D F1 */	bl func_80326240
+/* 80342450 0033F030  4B FE 3D F1 */	bl cosf
 /* 80342454 0033F034  FC 00 08 90 */	fmr f0, f1
 /* 80342458 0033F038  7F C3 F3 78 */	mr r3, r30
 /* 8034245C 0033F03C  FC 20 F8 90 */	fmr f1, f31
@@ -274,10 +274,10 @@ PSMTXRotAxisRad:
 /* 80342568 0033F148  FC 20 D8 90 */	fmr f1, f27
 /* 8034256C 0033F14C  C3 82 E9 34 */	lfs f28, lbl_804DE314@sda21(r2)
 /* 80342570 0033F150  3B E1 00 14 */	addi r31, r1, 0x14
-/* 80342574 0033F154  4B FE 3E 61 */	bl func_803263D4
+/* 80342574 0033F154  4B FE 3E 61 */	bl sinf
 /* 80342578 0033F158  FF C0 08 90 */	fmr f30, f1
 /* 8034257C 0033F15C  FC 20 D8 90 */	fmr f1, f27
-/* 80342580 0033F160  4B FE 3C C1 */	bl func_80326240
+/* 80342580 0033F160  4B FE 3C C1 */	bl cosf
 /* 80342584 0033F164  FF E0 08 90 */	fmr f31, f1
 /* 80342588 0033F168  C0 02 E9 30 */	lfs f0, lbl_804DE310@sda21(r2)
 /* 8034258C 0033F16C  7F C3 F3 78 */	mr r3, r30
@@ -628,3 +628,33 @@ C_MTXLightOrtho:
 /* 80342A9C 0033F67C  D0 63 00 28 */	stfs f3, 0x28(r3)
 /* 80342AA0 0033F680  D1 63 00 2C */	stfs f11, 0x2c(r3)
 /* 80342AA4 0033F684  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5C00
+lbl_804D5C00:
+    .4byte 0x00000000
+    .4byte 0x3F800000
+
+
+.section .sdata2
+
+.global lbl_804DE310
+lbl_804DE310:
+	.4byte 0x3F800000
+.global lbl_804DE314
+lbl_804DE314:
+	.4byte 0x00000000
+.global lbl_804DE318
+lbl_804DE318:
+	.4byte 0x40000000
+.global lbl_804DE31C
+lbl_804DE31C:
+	.4byte 0xBF800000
+.global lbl_804DE320
+lbl_804DE320:
+	.4byte 0x3F000000
+.global lbl_804DE324
+lbl_804DE324:
+	.4byte 0x3C8EFA35

@@ -42,8 +42,8 @@ ifeq ($(EPILOGUE_PROCESS),1)
 include e_files.mk
 endif
 
-O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES) $(DATA_O_FILES)    \
-           $(SDATA_O_FILES) $(SDATA2_O_FILES)
+O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES)
+
 ifeq ($(EPILOGUE_PROCESS),1)
 E_FILES := $(EPILOGUE_UNSCHEDULED)
 endif
@@ -95,6 +95,7 @@ endif
 CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults $(INCLUDES)
 
 $(EPILOGUE_DIR)/src/melee/lb/lbtime.o: CC_EPI := $(CC)
+$(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.o: CC_EPI := $(CC)
 
 HOSTCFLAGS := -Wall -O3 -s
 
@@ -157,22 +158,16 @@ $(BUILD_DIR)/%.o: %.s
 	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.c
-	@echo Compiling $<
+	@echo "Compiling " $<
 	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) -MT $@ $< >/dev/null
 	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
 
 ifeq ($(EPILOGUE_PROCESS),1)
+$(EPILOGUE_DIR)/%.o: %.s
+	@echo Assembling $<
+	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
+
 $(EPILOGUE_DIR)/%.o: %.c $(BUILD_DIR)/%.o
-	@echo Frank is fixing $<
-	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
-	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
-
-$(EPILOGUE_DIR)/%.o: %.cp $(BUILD_DIR)/%.o
-	@echo Frank is fixing $<
-	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
-	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
-
-$(EPILOGUE_DIR)/%.o: %.cpp $(BUILD_DIR)/%.o
 	@echo Frank is fixing $<
 	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
 	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)

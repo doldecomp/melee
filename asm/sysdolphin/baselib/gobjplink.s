@@ -244,7 +244,7 @@ lbl_80390254:
 /* 80390280 0038CE60  48 00 00 98 */	b lbl_80390318
 lbl_80390284:
 /* 80390284 0038CE64  7F E3 FB 78 */	mr r3, r31
-/* 80390288 0038CE68  48 00 09 5D */	bl func_80390BE4
+/* 80390288 0038CE68  48 00 09 5D */	bl GObj_RemoveUserData
 /* 8039028C 0038CE6C  7F E3 FB 78 */	mr r3, r31
 /* 80390290 0038CE70  48 00 08 7D */	bl func_80390B0C
 /* 80390294 0038CE74  7F E3 FB 78 */	mr r3, r31
@@ -526,3 +526,23 @@ lbl_80390628:
 /* 80390630 0038D210  38 21 00 48 */	addi r1, r1, 0x48
 /* 80390634 0038D214  7C 08 03 A6 */	mtlr r0
 /* 80390638 0038D218  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_804084B8
+lbl_804084B8:
+    .asciz "gobjplink.c"
+    .balign 4
+.global lbl_804084C4
+lbl_804084C4:
+    .asciz "p_link <= HSD_GObjLibInitData.p_link_max"
+    .balign 4
+
+
+.section .sdata
+
+.global lbl_804D6068
+lbl_804D6068:
+    .asciz "gobj"
+    .balign 4

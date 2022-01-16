@@ -712,6 +712,36 @@ lbl_803B94FC:
     .4byte NULL
 
 
+.section .data
+
+.global lbl_80406BC0
+lbl_80406BC0:
+    .asciz "initialize.c"
+    .balign 4
+.global lbl_80406BD0
+lbl_80406BD0:
+    .asciz "No memory space remains for XFB.\n"
+    .balign 4
+    .asciz "cannot allocate memory for gx fifo.\n"
+    .balign 4
+    .asciz "no space remains for gx fifo.\n"
+    .balign 4
+.global lbl_80406C3C
+lbl_80406C3C:
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "pix_fmt != GX_PF_RGB565_Z16"
+    .balign 4
+    .asciz "objalloc.h"
+    .balign 4
+    .asciz "objalloc: %s\tusing %d\tfreed %d\tpeak %d\n"
+    .balign 4
+.global lbl_80406CA4
+lbl_80406CA4:
+    .asciz "init parameter should be set before invoking HSD_Init().\n"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .skip 0x4
@@ -722,6 +752,88 @@ FrameBuffer:
 .global memReport
 memReport:
     .skip 0x2C
+
+
+.section .sdata
+
+.global lbl_804D5E00
+lbl_804D5E00:
+    .4byte 0xFFFFFFFF
+.global rmode
+rmode:
+    .4byte lbl_80401168
+.global lbl_804D5E08
+lbl_804D5E08:
+    .4byte 0x00000002
+.global iparam_fifo_size
+iparam_fifo_size:
+    .4byte 0x00040000
+.global lbl_804D5E10
+lbl_804D5E10:
+    .4byte 0x00000002
+.global lbl_804D5E14
+lbl_804D5E14:
+    .4byte 0x00000004
+.global lbl_804D5E18
+lbl_804D5E18:
+    .4byte 0x00080000
+.global lbl_804D5E1C
+lbl_804D5E1C:
+    .4byte 0x00000000
+.global lbl_804D5E20
+lbl_804D5E20:
+    .4byte 0x616F626A
+    .4byte 0x00000000
+.global lbl_804D5E28
+lbl_804D5E28:
+    .4byte 0x666F626A
+    .4byte 0x00000000
+.global lbl_804D5E30
+lbl_804D5E30:
+    .4byte 0x69640000
+.global lbl_804D5E34
+lbl_804D5E34:
+    .4byte 0x736C6973
+    .4byte 0x74000000
+.global lbl_804D5E3C
+lbl_804D5E3C:
+    .4byte 0x646C6973
+    .4byte 0x74000000
+.global lbl_804D5E44
+lbl_804D5E44:
+    .4byte 0x76656300
+.global lbl_804D5E48
+lbl_804D5E48:
+    .4byte 0x6D747800
+.global lbl_804D5E4C
+lbl_804D5E4C:
+    .4byte 0x726F626A
+    .4byte 0x00000000
+.global lbl_804D5E54
+lbl_804D5E54:
+    .4byte 0x7276616C
+    .4byte 0x00000000
+.global lbl_804D5E5C
+lbl_804D5E5C:
+    .4byte 0x73686164
+    .4byte 0x6F770000
+.global lbl_804D5E64
+lbl_804D5E64:
+    .4byte 0x72656E64
+    .4byte 0x65720000
+.global lbl_804D5E6C
+lbl_804D5E6C:
+    .4byte 0x6368616E
+    .4byte 0x00000000
+.global lbl_804D5E74
+lbl_804D5E74:
+    .4byte 0x74657672
+    .4byte 0x65670000
+.global lbl_804D5E7C
+lbl_804D5E7C:
+    .asciz "data"
+    .balign 4
+    .4byte NULL
 
 
 .section .sbss
@@ -747,3 +859,14 @@ init_done:
 .global lbl_804D76D0
 lbl_804D76D0:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DE594
+lbl_804DE594:
+	.4byte 0x3F800000
+.global lbl_804DE598
+lbl_804DE598:
+	.4byte 0x00000000
+	.4byte 0x00000000

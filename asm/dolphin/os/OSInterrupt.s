@@ -619,7 +619,7 @@ lbl_80347B34:
 /* 80347B44 00344724  7D 88 03 A6 */	mtlr r12
 /* 80347B48 00344728  4E 80 00 21 */	blrl 
 /* 80347B4C 0034472C  48 00 32 3D */	bl OSEnableScheduler
-/* 80347B50 00344730  48 00 36 DD */	bl func_8034B22C
+/* 80347B50 00344730  48 00 36 DD */	bl __OSReschedule
 /* 80347B54 00344734  7F C3 F3 78 */	mr r3, r30
 /* 80347B58 00344738  4B FF D6 1D */	bl OSLoadContext
 lbl_80347B5C:
@@ -652,6 +652,24 @@ lbl_80347B80:
 /* 80347BC0 003447A0  7C 17 E2 A6 */	mfspr r0, 0x397
 /* 80347BC4 003447A4  90 04 01 C0 */	stw r0, 0x1c0(r4)
 /* 80347BC8 003447A8  4B FF FC 74 */	b lbl_8034783C
+
+
+.section .data
+
+.global lbl_80402318
+lbl_80402318:
+    .4byte 0x00000100
+    .4byte 0x00000040
+    .4byte 0xF8000000
+    .4byte 0x00000200
+    .4byte 0x00000080
+    .4byte 0x00003000
+    .4byte 0x00000020
+    .4byte 0x03FF8C00
+    .4byte 0x04000000
+    .4byte 0x00004000
+    .4byte 0xFFFFFFFF
+    .4byte NULL
 
 
 .section .sbss

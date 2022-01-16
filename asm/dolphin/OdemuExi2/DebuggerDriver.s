@@ -761,6 +761,14 @@ Hu_IsStub:
 /* 8032BA68 00328648  4E 80 00 20 */	blr 
 
 
+.section .sdata
+
+.global lbl_804D5B60
+lbl_804D5B60:
+    .4byte 0x80000000
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global lbl_804D7088

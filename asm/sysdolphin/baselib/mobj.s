@@ -1361,6 +1361,139 @@ func_80363F28:
 /* 80363FC4 00360BA4  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80405E28
+lbl_80405E28:
+    .4byte func_80363F28
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global jtbl_80405E78
+jtbl_80405E78:
+	.4byte lbl_803630F4
+	.4byte lbl_80362F18
+	.4byte lbl_80362F3C
+	.4byte lbl_80362F60
+	.4byte lbl_80362F84
+	.4byte lbl_80362FA8
+	.4byte lbl_80362FCC
+	.4byte lbl_80363008
+	.4byte lbl_8036302C
+	.4byte lbl_80363050
+	.4byte lbl_80362FF0
+	.4byte lbl_80363074
+	.4byte lbl_803630A0
+	.4byte lbl_803630CC
+    .4byte 0x68736449
+    .4byte 0x73446573
+    .4byte 0x63656E64
+    .4byte 0x616E744F
+    .4byte 0x6628696E
+    .4byte 0x666F2C20
+    .4byte 0x26687364
+    .4byte 0x4D4F626A
+    .4byte 0x29000000
+.global lbl_80405ED4
+lbl_80405ED4:
+    .asciz "mobj->tevdesc"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000007
+    .4byte 0x00000013
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000004
+    .4byte 0x3F800000
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x63616E6E
+    .4byte 0x6F742061
+    .4byte 0x6C6C6F63
+    .4byte 0x61746520
+    .4byte 0x746F626A
+    .4byte 0x20666F72
+    .4byte 0x20746F6F
+    .4byte 0x6E2E0000
+    .4byte 0x746F626A
+    .4byte 0x5F746F6F
+    .4byte 0x6E000000
+    .4byte 0x6D6F626A
+    .4byte 0x2D3E7265
+    .4byte 0x6E646572
+    .4byte 0x6D6F6465
+    .4byte 0x2652454E
+    .4byte 0x4445525F
+    .4byte 0x53504543
+    .4byte 0x554C4152
+    .4byte NULL
+    .4byte 0x73797364
+    .4byte 0x6F6C7068
+    .4byte 0x696E5F62
+    .4byte 0x6173655F
+    .4byte 0x6C696272
+    .4byte 0x61727900
+    .4byte 0x6873645F
+    .4byte 0x6D6F626A
+    .4byte NULL
+    .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D5CE0
+lbl_804D5CE0:
+    .asciz "mobj.c"
+    .balign 4
+.global lbl_804D5CE8
+lbl_804D5CE8:
+    .asciz "mobj"
+    .balign 4
+.global lbl_804D5CF0
+lbl_804D5CF0:
+    .asciz "list"
+    .balign 4
+.global lbl_804D5CF8
+lbl_804D5CF8:
+    .asciz "mat"
+    .balign 4
+.global lbl_804D5CFC
+lbl_804D5CFC:
+    .asciz "tobj"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7618
@@ -1375,3 +1508,15 @@ lbl_804D7620:
 .global lbl_804D7624
 lbl_804D7624:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DE428
+lbl_804DE428:
+	.4byte 0x406FE000
+	.4byte 0x00000000
+.global lbl_804DE430
+lbl_804DE430:
+	.4byte 0x3F800000
+	.4byte 0x00000000

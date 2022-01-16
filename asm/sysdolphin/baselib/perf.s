@@ -167,6 +167,98 @@ lbl_8037E3CC:
 /* 8037E3F8 0037AFD8  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80407188
+lbl_80407188:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_80407218
+lbl_80407218:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D5F38
+lbl_804D5F38:
+    .asciz "perf.c"
+    .balign 4
+.global lbl_804D5F40
+lbl_804D5F40:
+    .asciz "n < 32"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D76F8
@@ -175,3 +267,11 @@ lbl_804D76F8:
 .global lbl_804D76FC
 lbl_804D76FC:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DE718
+lbl_804DE718:
+	.4byte 0x43300000
+	.4byte 0x00000000

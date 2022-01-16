@@ -156,3 +156,46 @@ lbl_8037A93C:
 /* 8037A940 00377520  38 21 00 08 */	addi r1, r1, 8
 /* 8037A944 00377524  7C 08 03 A6 */	mtlr r0
 /* 8037A948 00377528  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80406DF0
+lbl_80406DF0:
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+.global jtbl_80406E20
+jtbl_80406E20:
+	.4byte lbl_8037A8D8
+	.4byte lbl_8037A8E0
+	.4byte lbl_8037A8E8
+	.4byte lbl_8037A8F0
+	.4byte lbl_8037A8F8
+	.4byte lbl_8037A900
+	.4byte lbl_8037A908
+	.4byte lbl_8037A910
+	.4byte lbl_8037A918
+	.4byte lbl_8037A920
+
+
+.section .sdata
+
+.global lbl_804D5EA0
+lbl_804D5EA0:
+    .asciz "util.c"
+    .balign 4
+.global lbl_804D5EA8
+lbl_804D5EA8:
+    .asciz "0"
+    .balign 4
+    .4byte NULL

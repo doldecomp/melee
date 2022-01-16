@@ -2,115 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ClassInfoInit
-ClassInfoInit:
-/* 80381BE4 0037E7C4  7C 08 02 A6 */	mflr r0
-/* 80381BE8 0037E7C8  90 01 00 04 */	stw r0, 4(r1)
-/* 80381BEC 0037E7CC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80381BF0 0037E7D0  80 03 00 04 */	lwz r0, 4(r3)
-/* 80381BF4 0037E7D4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
-/* 80381BF8 0037E7D8  40 82 00 10 */	bne lbl_80381C08
-/* 80381BFC 0037E7DC  81 83 00 00 */	lwz r12, 0(r3)
-/* 80381C00 0037E7E0  7D 88 03 A6 */	mtlr r12
-/* 80381C04 0037E7E4  4E 80 00 21 */	blrl 
-lbl_80381C08:
-/* 80381C08 0037E7E8  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80381C0C 0037E7EC  38 21 00 08 */	addi r1, r1, 8
-/* 80381C10 0037E7F0  7C 08 03 A6 */	mtlr r0
-/* 80381C14 0037E7F4  4E 80 00 20 */	blr 
-
-.global hsdInitClassInfo
-hsdInitClassInfo:
-/* 80381C18 0037E7F8  7C 08 02 A6 */	mflr r0
-/* 80381C1C 0037E7FC  90 01 00 04 */	stw r0, 4(r1)
-/* 80381C20 0037E800  38 00 00 01 */	li r0, 1
-/* 80381C24 0037E804  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 80381C28 0037E808  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 80381C2C 0037E80C  7C 9F 23 79 */	or. r31, r4, r4
-/* 80381C30 0037E810  7D 04 07 34 */	extsh r4, r8
-/* 80381C34 0037E814  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 80381C38 0037E818  3B C3 00 00 */	addi r30, r3, 0
-/* 80381C3C 0037E81C  90 03 00 04 */	stw r0, 4(r3)
-/* 80381C40 0037E820  38 00 00 00 */	li r0, 0
-/* 80381C44 0037E824  90 A3 00 08 */	stw r5, 8(r3)
-/* 80381C48 0037E828  7C E3 07 34 */	extsh r3, r7
-/* 80381C4C 0037E82C  90 DE 00 0C */	stw r6, 0xc(r30)
-/* 80381C50 0037E830  B0 9E 00 10 */	sth r4, 0x10(r30)
-/* 80381C54 0037E834  B0 7E 00 12 */	sth r3, 0x12(r30)
-/* 80381C58 0037E838  93 FE 00 14 */	stw r31, 0x14(r30)
-/* 80381C5C 0037E83C  90 1E 00 1C */	stw r0, 0x1c(r30)
-/* 80381C60 0037E840  90 1E 00 18 */	stw r0, 0x18(r30)
-/* 80381C64 0037E844  90 1E 00 20 */	stw r0, 0x20(r30)
-/* 80381C68 0037E848  90 1E 00 24 */	stw r0, 0x24(r30)
-/* 80381C6C 0037E84C  41 82 00 84 */	beq lbl_80381CF0
-/* 80381C70 0037E850  80 1F 00 04 */	lwz r0, 4(r31)
-/* 80381C74 0037E854  54 00 07 FF */	clrlwi. r0, r0, 0x1f
-/* 80381C78 0037E858  40 82 00 10 */	bne lbl_80381C88
-/* 80381C7C 0037E85C  81 9F 00 00 */	lwz r12, 0(r31)
-/* 80381C80 0037E860  7D 88 03 A6 */	mtlr r12
-/* 80381C84 0037E864  4E 80 00 21 */	blrl 
-lbl_80381C88:
-/* 80381C88 0037E868  A8 7E 00 10 */	lha r3, 0x10(r30)
-/* 80381C8C 0037E86C  A8 1F 00 10 */	lha r0, 0x10(r31)
-/* 80381C90 0037E870  7C 03 00 00 */	cmpw r3, r0
-/* 80381C94 0037E874  40 80 00 18 */	bge lbl_80381CAC
-/* 80381C98 0037E878  3C 60 80 40 */	lis r3, lbl_804075CC@ha
-/* 80381C9C 0037E87C  38 A3 75 CC */	addi r5, r3, lbl_804075CC@l
-/* 80381CA0 0037E880  38 6D A9 08 */	addi r3, r13, lbl_804D5FA8@sda21
-/* 80381CA4 0037E884  38 80 00 5E */	li r4, 0x5e
-/* 80381CA8 0037E888  48 00 65 79 */	bl __assert
-lbl_80381CAC:
-/* 80381CAC 0037E88C  A8 7E 00 12 */	lha r3, 0x12(r30)
-/* 80381CB0 0037E890  A8 1F 00 12 */	lha r0, 0x12(r31)
-/* 80381CB4 0037E894  7C 03 00 00 */	cmpw r3, r0
-/* 80381CB8 0037E898  40 80 00 18 */	bge lbl_80381CD0
-/* 80381CBC 0037E89C  3C 60 80 40 */	lis r3, lbl_80407604@ha
-/* 80381CC0 0037E8A0  38 A3 76 04 */	addi r5, r3, lbl_80407604@l
-/* 80381CC4 0037E8A4  38 6D A9 08 */	addi r3, r13, lbl_804D5FA8@sda21
-/* 80381CC8 0037E8A8  38 80 00 5F */	li r4, 0x5f
-/* 80381CCC 0037E8AC  48 00 65 55 */	bl __assert
-lbl_80381CD0:
-/* 80381CD0 0037E8B0  A8 BF 00 12 */	lha r5, 0x12(r31)
-/* 80381CD4 0037E8B4  38 7E 00 28 */	addi r3, r30, 0x28
-/* 80381CD8 0037E8B8  38 9F 00 28 */	addi r4, r31, 0x28
-/* 80381CDC 0037E8BC  38 A5 FF D8 */	addi r5, r5, -40
-/* 80381CE0 0037E8C0  4B C8 15 15 */	bl memcpy
-/* 80381CE4 0037E8C4  80 1F 00 1C */	lwz r0, 0x1c(r31)
-/* 80381CE8 0037E8C8  90 1E 00 18 */	stw r0, 0x18(r30)
-/* 80381CEC 0037E8CC  93 DF 00 1C */	stw r30, 0x1c(r31)
-lbl_80381CF0:
-/* 80381CF0 0037E8D0  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 80381CF4 0037E8D4  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 80381CF8 0037E8D8  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 80381CFC 0037E8DC  38 21 00 28 */	addi r1, r1, 0x28
-/* 80381D00 0037E8E0  7C 08 03 A6 */	mtlr r0
-/* 80381D04 0037E8E4  4E 80 00 20 */	blr 
-
-.global func_80381D08
-func_80381D08:
-/* 80381D08 0037E8E8  7C 08 02 A6 */	mflr r0
-/* 80381D0C 0037E8EC  90 01 00 04 */	stw r0, 4(r1)
-/* 80381D10 0037E8F0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80381D14 0037E8F4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80381D18 0037E8F8  3B E0 00 00 */	li r31, 0
-/* 80381D1C 0037E8FC  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80381D20 0037E900  3B C3 00 00 */	addi r30, r3, 0
-/* 80381D24 0037E904  48 00 00 14 */	b lbl_80381D38
-lbl_80381D28:
-/* 80381D28 0037E908  38 6D A9 10 */	addi r3, r13, lbl_804D5FB0@sda21
-/* 80381D2C 0037E90C  4C C6 31 82 */	crclr 6
-/* 80381D30 0037E910  4B FC 39 79 */	bl OSReport
-/* 80381D34 0037E914  3B FF 00 01 */	addi r31, r31, 1
-lbl_80381D38:
-/* 80381D38 0037E918  7C 1F F0 00 */	cmpw r31, r30
-/* 80381D3C 0037E91C  41 80 FF EC */	blt lbl_80381D28
-/* 80381D40 0037E920  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80381D44 0037E924  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80381D48 0037E928  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80381D4C 0037E92C  38 21 00 18 */	addi r1, r1, 0x18
-/* 80381D50 0037E930  7C 08 03 A6 */	mtlr r0
-/* 80381D54 0037E934  4E 80 00 20 */	blr 
-
 .global func_80381D58
 func_80381D58:
 /* 80381D58 0037E938  7C 08 02 A6 */	mflr r0
@@ -949,13 +840,13 @@ lbl_8038289C:
 /* 803828A0 0037F480  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 803828A4 0037F484  41 82 01 88 */	beq lbl_80382A2C
 /* 803828A8 0037F488  7F C3 F3 78 */	mr r3, r30
-/* 803828AC 0037F48C  4B FF F4 5D */	bl func_80381D08
+/* 803828AC 0037F48C  4B FF F4 5D */	bl OSReport_PrintSpaces
 /* 803828B0 0037F490  80 9F 00 0C */	lwz r4, 0xc(r31)
 /* 803828B4 0037F494  38 7F 01 50 */	addi r3, r31, 0x150
 /* 803828B8 0037F498  4C C6 31 82 */	crclr 6
 /* 803828BC 0037F49C  4B FC 2D ED */	bl OSReport
 /* 803828C0 0037F4A0  7F C3 F3 78 */	mr r3, r30
-/* 803828C4 0037F4A4  4B FF F4 45 */	bl func_80381D08
+/* 803828C4 0037F4A4  4B FF F4 45 */	bl OSReport_PrintSpaces
 /* 803828C8 0037F4A8  A8 9F 00 12 */	lha r4, 0x12(r31)
 /* 803828CC 0037F4AC  38 7F 01 5C */	addi r3, r31, 0x15c
 /* 803828D0 0037F4B0  A8 BF 00 10 */	lha r5, 0x10(r31)
@@ -1028,13 +919,13 @@ lbl_803829B4:
 /* 803829B8 0037F598  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 803829BC 0037F59C  41 82 00 64 */	beq lbl_80382A20
 /* 803829C0 0037F5A0  7F C3 F3 78 */	mr r3, r30
-/* 803829C4 0037F5A4  4B FF F3 45 */	bl func_80381D08
+/* 803829C4 0037F5A4  4B FF F3 45 */	bl OSReport_PrintSpaces
 /* 803829C8 0037F5A8  80 9B 00 0C */	lwz r4, 0xc(r27)
 /* 803829CC 0037F5AC  38 7F 01 50 */	addi r3, r31, 0x150
 /* 803829D0 0037F5B0  4C C6 31 82 */	crclr 6
 /* 803829D4 0037F5B4  4B FC 2C D5 */	bl OSReport
 /* 803829D8 0037F5B8  7F C3 F3 78 */	mr r3, r30
-/* 803829DC 0037F5BC  4B FF F3 2D */	bl func_80381D08
+/* 803829DC 0037F5BC  4B FF F3 2D */	bl OSReport_PrintSpaces
 /* 803829E0 0037F5C0  A8 9B 00 12 */	lha r4, 0x12(r27)
 /* 803829E4 0037F5C4  38 7F 01 5C */	addi r3, r31, 0x15c
 /* 803829E8 0037F5C8  A8 BB 00 10 */	lha r5, 0x10(r27)
@@ -1066,6 +957,37 @@ lbl_80382A2C:
 /* 80382A3C 0037F61C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+    .asciz "entry %d <null>\n"
+    .balign 4
+    .asciz "entry %d - %d <null>\n"
+    .balign 4
+    .asciz "entry %d(%d)"
+    .balign 4
+    .asciz "  nb_alloc %d nb_free %d\n"
+    .balign 4
+.global lbl_80407698
+lbl_80407698:
+    .asciz "idx >= 0"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_class"
+    .balign 4
+.global lbl_804076C8
+lbl_804076C8:
+    .asciz "class_info"
+    .balign 4
+    .asciz "info_hash"
+    .balign 4
+    .asciz "<class %s>\n"
+    .balign 4
+    .asciz "    info %d object %d nb_exist %d nb_peak %d\n"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7700
@@ -1077,3 +999,20 @@ lbl_804D7704:
 .global lbl_804D7708
 lbl_804D7708:
 	.skip 0x8
+
+
+.section .sdata
+
+.global lbl_804D5FA8
+lbl_804D5FA8:
+    .asciz "class.c"
+    .balign 4
+.global lbl_804D5FB0
+lbl_804D5FB0:
+    .asciz " "
+    .balign 4
+.global lbl_804D5FB4
+lbl_804D5FB4:
+    .asciz "object"
+    .balign 4
+    .4byte NULL

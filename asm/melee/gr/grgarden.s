@@ -108,7 +108,7 @@ func_80202C78:
 /* 80202CD0 001FF8B0  90 1F 00 0C */	stw r0, 0xc(r31)
 /* 80202CD4 001FF8B4  38 A0 00 03 */	li r5, 3
 /* 80202CD8 001FF8B8  38 C0 00 00 */	li r6, 0
-/* 80202CDC 001FF8BC  48 18 D9 C1 */	bl func_8039069C
+/* 80202CDC 001FF8BC  48 18 D9 C1 */	bl GObj_SetupGXLink
 /* 80202CE0 001FF8C0  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 80202CE4 001FF8C4  28 00 00 00 */	cmplwi r0, 0
 /* 80202CE8 001FF8C8  41 82 00 08 */	beq lbl_80202CF0
@@ -891,8 +891,42 @@ lbl_803E52E0:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D47A8
+lbl_804D47A8:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D47B0
+lbl_804D47B0:
+    .asciz "jobj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6A28
 lbl_804D6A28:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DB718
+lbl_804DB718:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DB720
+lbl_804DB720:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DB728
+lbl_804DB728:
+	.4byte 0x41200000
+.global lbl_804DB72C
+lbl_804DB72C:
+	.4byte 0xC1F00000
+.global lbl_804DB730
+lbl_804DB730:
+	.4byte 0xC1A00000
+	.4byte 0x00000000

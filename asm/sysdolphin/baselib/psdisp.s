@@ -9,7 +9,7 @@ func_8039F78C:
 /* 8039F794 0039C374  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8039F798 0039C378  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8039F79C 0039C37C  7C 7F 1B 78 */	mr r31, r3
-/* 8039F7A0 0039C380  4B F9 CC 29 */	bl func_8033C3C8
+/* 8039F7A0 0039C380  4B F9 CC 29 */	bl GXClearVtxDesc
 /* 8039F7A4 0039C384  2C 1F 00 03 */	cmpwi r31, 3
 /* 8039F7A8 0039C388  41 82 00 84 */	beq lbl_8039F82C
 /* 8039F7AC 0039C38C  40 80 00 1C */	bge lbl_8039F7C8
@@ -111,16 +111,16 @@ func_8039F89C:
 /* 8039F900 0039C4E0  48 00 00 F4 */	b lbl_8039F9F4
 lbl_8039F904:
 /* 8039F904 0039C4E4  C0 3B 00 38 */	lfs f1, 0x38(r27)
-/* 8039F908 0039C4E8  4B F8 6A CD */	bl func_803263D4
+/* 8039F908 0039C4E8  4B F8 6A CD */	bl sinf
 /* 8039F90C 0039C4EC  FF 80 08 90 */	fmr f28, f1
 /* 8039F910 0039C4F0  C0 3B 00 3C */	lfs f1, 0x3c(r27)
-/* 8039F914 0039C4F4  4B F8 6A C1 */	bl func_803263D4
+/* 8039F914 0039C4F4  4B F8 6A C1 */	bl sinf
 /* 8039F918 0039C4F8  FF A0 08 90 */	fmr f29, f1
 /* 8039F91C 0039C4FC  C0 3B 00 38 */	lfs f1, 0x38(r27)
-/* 8039F920 0039C500  4B F8 69 21 */	bl func_80326240
+/* 8039F920 0039C500  4B F8 69 21 */	bl cosf
 /* 8039F924 0039C504  FF C0 08 90 */	fmr f30, f1
 /* 8039F928 0039C508  C0 3B 00 3C */	lfs f1, 0x3c(r27)
-/* 8039F92C 0039C50C  4B F8 69 15 */	bl func_80326240
+/* 8039F92C 0039C50C  4B F8 69 15 */	bl cosf
 /* 8039F930 0039C510  C3 5F 00 48 */	lfs f26, 0x48(r31)
 /* 8039F934 0039C514  FF E0 08 90 */	fmr f31, f1
 /* 8039F938 0039C518  C0 02 F0 30 */	lfs f0, lbl_804DEA10@sda21(r2)
@@ -145,10 +145,10 @@ lbl_8039F974:
 /* 8039F97C 0039C55C  C0 1B 00 30 */	lfs f0, 0x30(r27)
 /* 8039F980 0039C560  FC 20 C0 90 */	fmr f1, f24
 /* 8039F984 0039C564  EF 5A 00 32 */	fmuls f26, f26, f0
-/* 8039F988 0039C568  4B F8 68 B9 */	bl func_80326240
+/* 8039F988 0039C568  4B F8 68 B9 */	bl cosf
 /* 8039F98C 0039C56C  EF 3A 00 72 */	fmuls f25, f26, f1
 /* 8039F990 0039C570  FC 20 C0 90 */	fmr f1, f24
-/* 8039F994 0039C574  4B F8 6A 41 */	bl func_803263D4
+/* 8039F994 0039C574  4B F8 6A 41 */	bl sinf
 /* 8039F998 0039C578  EC 1B 07 72 */	fmuls f0, f27, f29
 /* 8039F99C 0039C57C  C0 7F 00 24 */	lfs f3, 0x24(r31)
 /* 8039F9A0 0039C580  EC DA 00 72 */	fmuls f6, f26, f1
@@ -1049,7 +1049,7 @@ lbl_803A061C:
 /* 803A0634 0039D214  38 8E 00 40 */	addi r4, r14, 0x40
 /* 803A0638 0039D218  38 60 00 0D */	li r3, 0xd
 /* 803A063C 0039D21C  38 A0 00 02 */	li r5, 2
-/* 803A0640 0039D220  4B F9 C1 CD */	bl func_8033C80C
+/* 803A0640 0039D220  4B F9 C1 CD */	bl GXSetArray
 /* 803A0644 0039D224  38 60 00 00 */	li r3, 0
 /* 803A0648 0039D228  38 80 00 09 */	li r4, 9
 /* 803A064C 0039D22C  38 A0 00 01 */	li r5, 1
@@ -1245,7 +1245,7 @@ lbl_803A08FC:
 /* 803A0918 0039D4F8  4B F9 DC 91 */	bl GXSetChanCtrl
 /* 803A091C 0039D4FC  48 00 00 E4 */	b lbl_803A0A00
 lbl_803A0920:
-/* 803A0920 0039D500  4B FC 4A CD */	bl func_803653EC
+/* 803A0920 0039D500  4B FC 4A CD */	bl HSD_LObjGetLightMaskAttnFunc
 /* 803A0924 0039D504  2C 03 00 00 */	cmpwi r3, 0
 /* 803A0928 0039D508  41 82 00 0C */	beq lbl_803A0934
 /* 803A092C 0039D50C  3A E0 00 01 */	li r23, 1
@@ -1253,7 +1253,7 @@ lbl_803A0920:
 lbl_803A0934:
 /* 803A0934 0039D514  3A E0 00 02 */	li r23, 2
 lbl_803A0938:
-/* 803A0938 0039D518  4B FC 4A AD */	bl func_803653E4
+/* 803A0938 0039D518  4B FC 4A AD */	bl HSD_LObjGetLightMaskDiffuse
 /* 803A093C 0039D51C  38 E3 00 00 */	addi r7, r3, 0
 /* 803A0940 0039D520  39 37 00 00 */	addi r9, r23, 0
 /* 803A0944 0039D524  38 60 00 00 */	li r3, 0
@@ -1272,7 +1272,7 @@ lbl_803A0938:
 /* 803A0978 0039D558  4B F9 DC 31 */	bl GXSetChanCtrl
 /* 803A097C 0039D55C  48 00 00 84 */	b lbl_803A0A00
 lbl_803A0980:
-/* 803A0980 0039D560  4B FC 4A 6D */	bl func_803653EC
+/* 803A0980 0039D560  4B FC 4A 6D */	bl HSD_LObjGetLightMaskAttnFunc
 /* 803A0984 0039D564  2C 03 00 00 */	cmpwi r3, 0
 /* 803A0988 0039D568  41 82 00 0C */	beq lbl_803A0994
 /* 803A098C 0039D56C  3A E0 00 01 */	li r23, 1
@@ -1280,7 +1280,7 @@ lbl_803A0980:
 lbl_803A0994:
 /* 803A0994 0039D574  3A E0 00 02 */	li r23, 2
 lbl_803A0998:
-/* 803A0998 0039D578  4B FC 4A 4D */	bl func_803653E4
+/* 803A0998 0039D578  4B FC 4A 4D */	bl HSD_LObjGetLightMaskDiffuse
 /* 803A099C 0039D57C  38 E3 00 00 */	addi r7, r3, 0
 /* 803A09A0 0039D580  39 37 00 00 */	addi r9, r23, 0
 /* 803A09A4 0039D584  38 60 00 00 */	li r3, 0
@@ -1368,7 +1368,7 @@ lbl_803A0ABC:
 /* 803A0AD8 0039D6B8  4B F9 D9 1D */	bl GXSetChanMatColor
 lbl_803A0ADC:
 /* 803A0ADC 0039D6BC  38 60 01 00 */	li r3, 0x100
-/* 803A0AE0 0039D6C0  4B FC 49 2D */	bl func_8036540C
+/* 803A0AE0 0039D6C0  4B FC 49 2D */	bl HSD_LObjGetActiveByID
 /* 803A0AE4 0039D6C4  7C 64 1B 79 */	or. r4, r3, r3
 /* 803A0AE8 0039D6C8  41 82 00 18 */	beq lbl_803A0B00
 /* 803A0AEC 0039D6CC  38 61 06 C0 */	addi r3, r1, 0x6c0
@@ -1671,7 +1671,7 @@ lbl_803A0F0C:
 /* 803A0F28 0039DB08  38 C0 00 1E */	li r6, 0x1e
 /* 803A0F2C 0039DB0C  38 E0 00 00 */	li r7, 0
 /* 803A0F30 0039DB10  39 00 00 7D */	li r8, 0x7d
-/* 803A0F34 0039DB14  4B F9 B9 75 */	bl func_8033C8A8
+/* 803A0F34 0039DB14  4B F9 B9 75 */	bl GXSetTexCoordGen2
 lbl_803A0F38:
 /* 803A0F38 0039DB18  88 1E 00 08 */	lbz r0, 8(r30)
 /* 803A0F3C 0039DB1C  88 7E 00 09 */	lbz r3, 9(r30)
@@ -3338,10 +3338,10 @@ lbl_803A2728:
 /* 803A2740 0039F320  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 803A2744 0039F324  40 81 00 40 */	ble lbl_803A2784
 /* 803A2748 0039F328  FC 20 90 90 */	fmr f1, f18
-/* 803A274C 0039F32C  4B F8 3A F5 */	bl func_80326240
+/* 803A274C 0039F32C  4B F8 3A F5 */	bl cosf
 /* 803A2750 0039F330  FE 80 08 90 */	fmr f20, f1
 /* 803A2754 0039F334  FC 20 90 90 */	fmr f1, f18
-/* 803A2758 0039F338  4B F8 3C 7D */	bl func_803263D4
+/* 803A2758 0039F338  4B F8 3C 7D */	bl sinf
 /* 803A275C 0039F33C  FC 80 C8 90 */	fmr f4, f25
 /* 803A2760 0039F340  EC A1 06 B2 */	fmuls f5, f1, f26
 /* 803A2764 0039F344  EC 54 06 B2 */	fmuls f2, f20, f26
@@ -4601,11 +4601,54 @@ lbl_803B9628:
     .4byte 0x00000000
 
 
+.section .data
+
+.global lbl_8040C300
+lbl_8040C300:
+    .asciz "object.h"
+    .balign 4
+    .asciz "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00010000
+    .4byte 0x01000101
+    .4byte 0x01010100
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte 0x01010100
+    .4byte 0x01000101
+    .4byte 0x00010000
+.global lbl_8040C360
+lbl_8040C360:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .asciz "Particle:setBlendMode:Unknown mode\n"
+    .balign 4
+    .asciz "psdisp.c"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .global lbl_804D0FC0
 lbl_804D0FC0:
 	.skip 0xF0
+
+
+.section .sdata
+
+.global lbl_804D6380
+lbl_804D6380:
+    .asciz "{"
+    .balign 4
+.global lbl_804D6384
+lbl_804D6384:
+    .asciz "0"
+    .balign 4
 
 
 .section .sbss
@@ -4661,3 +4704,61 @@ lbl_804D7944:
 .global lbl_804D7948
 lbl_804D7948:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DEA10
+lbl_804DEA10:
+	.4byte 0x00000000
+.global lbl_804DEA14
+lbl_804DEA14:
+	.4byte 0x34000000
+.global lbl_804DEA18
+lbl_804DEA18:
+	.4byte 0x40000000
+.global lbl_804DEA1C
+lbl_804DEA1C:
+	.4byte 0x3F800000
+.global lbl_804DEA20
+lbl_804DEA20:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DEA28
+lbl_804DEA28:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DEA30
+lbl_804DEA30:
+	.4byte 0x40454000
+	.4byte 0x00000000
+.global lbl_804DEA38
+lbl_804DEA38:
+	.4byte 0x437F0000
+.global lbl_804DEA3C
+lbl_804DEA3C:
+	.4byte 0x40C00000
+.global lbl_804DEA40
+lbl_804DEA40:
+	.4byte 0xBF800000
+.global lbl_804DEA44
+lbl_804DEA44:
+	.4byte 0x00800000
+.global lbl_804DEA48
+lbl_804DEA48:
+	.4byte 0x3FC90FDB
+.global lbl_804DEA4C
+lbl_804DEA4C:
+	.4byte 0xBFC90FDB
+.global lbl_804DEA50
+lbl_804DEA50:
+	.4byte 0x3F847AE1
+	.4byte 0x47AE147B
+.global lbl_804DEA58
+lbl_804DEA58:
+	.4byte 0x3F000000
+	.4byte 0x00000000
+.global lbl_804DEA60
+lbl_804DEA60:
+	.4byte 0x43300000
+	.4byte 0x00000000

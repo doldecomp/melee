@@ -169,7 +169,7 @@ lbl_803458B8:
 /* 803458F4 003424D4  38 DB 00 00 */	addi r6, r27, 0
 /* 803458F8 003424D8  4E 80 00 21 */	blrl 
 /* 803458FC 003424DC  48 00 54 8D */	bl OSEnableScheduler
-/* 80345900 003424E0  48 00 59 2D */	bl func_8034B22C
+/* 80345900 003424E0  48 00 59 2D */	bl __OSReschedule
 /* 80345904 003424E4  7F E3 FB 78 */	mr r3, r31
 /* 80345908 003424E8  4B FF F8 6D */	bl OSLoadContext
 lbl_8034590C:
@@ -278,8 +278,71 @@ lbl_80345A3C:
 /* 80345A6C 0034264C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80401FF8
+lbl_80401FF8:
+    .asciz " in \"%s\" on line %d.\n"
+    .balign 4
+    .asciz "\nAddress:      Back Chain    LR Save\n"
+    .balign 4
+    .asciz "0x%08x:   0x%08x    0x%08x\n"
+    .balign 4
+    .asciz "Non-recoverable Exception %d"
+    .balign 4
+    .asciz "Unhandled Exception %d"
+    .balign 4
+    .asciz "\nDSISR = 0x%08x                   DAR  = 0x%08x\n"
+    .balign 4
+    .asciz "TB = 0x%016llx\n"
+    .balign 4
+    .asciz "\nInstruction at 0x%x (read from SRR0) attempted to access invalid address 0x%x (read from DAR)\n"
+    .balign 4
+    .asciz "\nAttempted to fetch instruction from invalid address 0x%x (read from SRR0)\n"
+    .balign 4
+    .asciz "\nInstruction at 0x%x (read from SRR0) attempted to access unaligned address 0x%x (read from DAR)\n"
+    .balign 4
+    .asciz "\nProgram exception : Possible illegal instruction/operation at or around 0x%x (read from SRR0)\n"
+    .balign 4
+    .asciz "AI DMA Address =   0x%04x%04x\n"
+    .balign 4
+    .asciz "ARAM DMA Address = 0x%04x%04x\n"
+    .balign 4
+    .asciz "DI DMA Address =   0x%08x\n"
+    .balign 4
+    .asciz "\nLast interrupt (%d): SRR0 = 0x%08x  TB = 0x%016llx\n"
+    .balign 4
+.global jtbl_804022D4
+jtbl_804022D4:
+	.4byte lbl_80345A3C
+	.4byte lbl_80345A3C
+	.4byte lbl_80345994
+	.4byte lbl_803459AC
+	.4byte lbl_80345A3C
+	.4byte lbl_803459C0
+	.4byte lbl_803459D8
+	.4byte lbl_80345A3C
+	.4byte lbl_80345A3C
+	.4byte lbl_80345A3C
+	.4byte lbl_80345A3C
+	.4byte lbl_80345A3C
+	.4byte lbl_80345A3C
+	.4byte lbl_80345A3C
+	.4byte lbl_80345A3C
+	.4byte lbl_803459F0
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global __OSErrorTable
 __OSErrorTable:
 	.skip 0x40
+
+
+.section .sdata
+
+.global lbl_804D5C18
+lbl_804D5C18:
+    .4byte 0x0A000000
+    .4byte 0x00000000

@@ -1,14 +1,14 @@
 #include "rand.h"
 
-extern u32 lbl_804D5B50;
+static unsigned long int next = 1;
 
-void srand(u32 seed)
+void srand(unsigned int seed)
 {
-    lbl_804D5B50 = seed;
+    next = seed;
 }
 
-s32 rand(void)
+int rand(void)
 {
-    lbl_804D5B50 = lbl_804D5B50 * 1103515245 + 12345;
-	return ((lbl_804D5B50 >> 16) & 0x7FFF);
+    next = next * 1103515245 + 12345;
+	return ((next >> 16) & 0x7FFF);
 }

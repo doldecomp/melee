@@ -5,6 +5,7 @@
 
 #include <dolphin/types.h>
 
+#include "sysdolphin/baselib/objalloc.h"
 #include "sysdolphin/baselib/cobj.h"
 #include "sysdolphin/baselib/tobj.h"
 #include "sysdolphin/baselib/list.h"
@@ -35,5 +36,9 @@ typedef struct _HSD_ViewingRect {
     f32 right;
     f32 perspective;
 } HSD_ViewingRect;
+
+HSD_ObjAllocData* HSD_ShadowGetAllocData(void);
+void HSD_ShadowInitAllocData(void);
+HSD_Shadow* HSD_ShadowAlloc(void);
 
 #endif

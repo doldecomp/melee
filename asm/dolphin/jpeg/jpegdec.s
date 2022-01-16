@@ -6983,6 +6983,50 @@ lbl_803B9410:
     .4byte 0xE0000000
 
 
+.section .data
+
+.global lbl_80400B28
+lbl_80400B28:
+    .asciz "ERROR: THP only supports 4:2:0!!!\n"
+    .balign 4
+.global lbl_80400B4C
+lbl_80400B4C:
+    .asciz "THP does not support anything other than 4:2:0!\n"
+    .balign 4
+.global lbl_80400B80
+lbl_80400B80:
+    .4byte NULL
+    .4byte 0x00001000
+    .4byte 0x00000001
+    .4byte 0x00000400
+    .4byte 0x00000002
+    .4byte 0x00000400
+    .4byte 0x00000003
+    .4byte 0x00000400
+    .4byte 0x00000004
+    .4byte 0x00000400
+.global lbl_80400BA8
+lbl_80400BA8:
+    .4byte NULL
+    .4byte 0x00001000
+    .4byte 0x00000001
+    .4byte 0x00000200
+    .4byte 0x00000002
+    .4byte 0x00000200
+    .4byte 0x00000003
+    .4byte 0x00000200
+    .4byte 0x00000004
+    .4byte 0x00000200
+    .4byte 0x00000005
+    .4byte 0x00000200
+    .4byte 0x00000006
+    .4byte 0x00000200
+    .4byte 0x00000007
+    .4byte 0x00000200
+    .4byte 0x00000008
+    .4byte 0x00000200
+
+
 .section .bss, "wa"
 
 .global lbl_804A7300
@@ -7025,3 +7069,39 @@ lbl_804D71E0:
 .global lbl_804D7200
 lbl_804D7200:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DE1D0
+lbl_804DE1D0:
+	.4byte 0x4A464946
+.global lbl_804DE1D4
+lbl_804DE1D4:
+	.4byte 0x00000000
+.global lbl_804DE1D8
+lbl_804DE1D8:
+	.4byte 0x4A464946
+.global lbl_804DE1DC
+lbl_804DE1DC:
+	.4byte 0x00000000
+.global lbl_804DE1E0
+lbl_804DE1E0:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DE1E8
+lbl_804DE1E8:
+	.4byte 0x3FB504F3
+.global lbl_804DE1EC
+lbl_804DE1EC:
+	.4byte 0x3FEC835E
+.global lbl_804DE1F0
+lbl_804DE1F0:
+	.4byte 0x3F8A8BD4
+.global lbl_804DE1F4
+lbl_804DE1F4:
+	.4byte 0xC0273D75
+.global lbl_804DE1F8
+lbl_804DE1F8:
+	.4byte 0x44800000
+	.4byte 0x00000000

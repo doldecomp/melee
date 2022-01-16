@@ -185,7 +185,7 @@ func_801E59F8:
 /* 801E5A54 001E2634  90 1F 00 0C */	stw r0, 0xc(r31)
 /* 801E5A58 001E2638  38 A0 00 03 */	li r5, 3
 /* 801E5A5C 001E263C  38 C0 00 00 */	li r6, 0
-/* 801E5A60 001E2640  48 1A AC 3D */	bl func_8039069C
+/* 801E5A60 001E2640  48 1A AC 3D */	bl GObj_SetupGXLink
 /* 801E5A64 001E2644  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 801E5A68 001E2648  28 00 00 00 */	cmplwi r0, 0
 /* 801E5A6C 001E264C  41 82 00 08 */	beq lbl_801E5A74
@@ -2090,10 +2090,10 @@ lbl_801E744C:
 /* 801E74BC 001E409C  D0 01 01 30 */	stfs f0, 0x130(r1)
 /* 801E74C0 001E40A0  D3 E1 01 38 */	stfs f31, 0x138(r1)
 /* 801E74C4 001E40A4  D3 E1 01 34 */	stfs f31, 0x134(r1)
-/* 801E74C8 001E40A8  4B E2 6C 71 */	bl func_8000E138
+/* 801E74C8 001E40A8  4B E2 6C 71 */	bl lbvector_ApplyEulerRotation
 /* 801E74CC 001E40AC  38 61 01 30 */	addi r3, r1, 0x130
 /* 801E74D0 001E40B0  38 81 01 3C */	addi r4, r1, 0x13c
-/* 801E74D4 001E40B4  4B E2 5F 99 */	bl lbvector_add
+/* 801E74D4 001E40B4  4B E2 5F 99 */	bl lbvector_Add
 /* 801E74D8 001E40B8  80 7D 00 0C */	lwz r3, 0xc(r29)
 /* 801E74DC 001E40BC  80 1D 00 10 */	lwz r0, 0x10(r29)
 /* 801E74E0 001E40C0  90 61 00 BC */	stw r3, 0xbc(r1)
@@ -2117,10 +2117,10 @@ lbl_801E744C:
 /* 801E7528 001E4108  D0 01 01 24 */	stfs f0, 0x124(r1)
 /* 801E752C 001E410C  D3 E1 01 2C */	stfs f31, 0x12c(r1)
 /* 801E7530 001E4110  D3 E1 01 28 */	stfs f31, 0x128(r1)
-/* 801E7534 001E4114  4B E2 6C 05 */	bl func_8000E138
+/* 801E7534 001E4114  4B E2 6C 05 */	bl lbvector_ApplyEulerRotation
 /* 801E7538 001E4118  38 61 01 24 */	addi r3, r1, 0x124
 /* 801E753C 001E411C  38 81 01 3C */	addi r4, r1, 0x13c
-/* 801E7540 001E4120  4B E2 5F 2D */	bl lbvector_add
+/* 801E7540 001E4120  4B E2 5F 2D */	bl lbvector_Add
 /* 801E7544 001E4124  80 7E 01 10 */	lwz r3, 0x110(r30)
 /* 801E7548 001E4128  2C 03 00 00 */	cmpwi r3, 0
 /* 801E754C 001E412C  41 82 00 10 */	beq lbl_801E755C
@@ -4067,7 +4067,7 @@ lbl_801E9090:
 /* 801E90A4 001E5C84  90 01 00 24 */	stw r0, 0x24(r1)
 /* 801E90A8 001E5C88  80 1D 00 40 */	lwz r0, 0x40(r29)
 /* 801E90AC 001E5C8C  90 01 00 28 */	stw r0, 0x28(r1)
-/* 801E90B0 001E5C90  4B E2 43 BD */	bl lbvector_add
+/* 801E90B0 001E5C90  4B E2 43 BD */	bl lbvector_Add
 /* 801E90B4 001E5C94  38 60 00 00 */	li r3, 0
 /* 801E90B8 001E5C98  4B FD 9C 3D */	bl func_801C2CF4
 /* 801E90BC 001E5C9C  7C 7D 1B 79 */	or. r29, r3, r3
@@ -4124,7 +4124,7 @@ lbl_801E9160:
 /* 801E9174 001E5D54  90 01 00 24 */	stw r0, 0x24(r1)
 /* 801E9178 001E5D58  80 1D 00 40 */	lwz r0, 0x40(r29)
 /* 801E917C 001E5D5C  90 01 00 28 */	stw r0, 0x28(r1)
-/* 801E9180 001E5D60  4B E2 42 ED */	bl lbvector_add
+/* 801E9180 001E5D60  4B E2 42 ED */	bl lbvector_Add
 /* 801E9184 001E5D64  38 60 00 01 */	li r3, 1
 /* 801E9188 001E5D68  4B FD 9B 6D */	bl func_801C2CF4
 /* 801E918C 001E5D6C  7C 7D 1B 79 */	or. r29, r3, r3
@@ -4181,7 +4181,7 @@ lbl_801E9230:
 /* 801E9244 001E5E24  90 01 00 24 */	stw r0, 0x24(r1)
 /* 801E9248 001E5E28  80 1D 00 40 */	lwz r0, 0x40(r29)
 /* 801E924C 001E5E2C  90 01 00 28 */	stw r0, 0x28(r1)
-/* 801E9250 001E5E30  4B E2 42 1D */	bl lbvector_add
+/* 801E9250 001E5E30  4B E2 42 1D */	bl lbvector_Add
 /* 801E9254 001E5E34  38 60 00 02 */	li r3, 2
 /* 801E9258 001E5E38  4B FD 9A 9D */	bl func_801C2CF4
 /* 801E925C 001E5E3C  7C 7D 1B 79 */	or. r29, r3, r3
@@ -4238,7 +4238,7 @@ lbl_801E9300:
 /* 801E9314 001E5EF4  90 01 00 24 */	stw r0, 0x24(r1)
 /* 801E9318 001E5EF8  80 1D 00 40 */	lwz r0, 0x40(r29)
 /* 801E931C 001E5EFC  90 01 00 28 */	stw r0, 0x28(r1)
-/* 801E9320 001E5F00  4B E2 41 4D */	bl lbvector_add
+/* 801E9320 001E5F00  4B E2 41 4D */	bl lbvector_Add
 /* 801E9324 001E5F04  38 60 00 03 */	li r3, 3
 /* 801E9328 001E5F08  4B FD 99 CD */	bl func_801C2CF4
 /* 801E932C 001E5F0C  7C 7D 1B 79 */	or. r29, r3, r3
@@ -4346,10 +4346,10 @@ lbl_801E946C:
 /* 801E949C 001E607C  D0 21 00 C4 */	stfs f1, 0xc4(r1)
 /* 801E94A0 001E6080  D0 01 00 CC */	stfs f0, 0xcc(r1)
 /* 801E94A4 001E6084  D0 01 00 C8 */	stfs f0, 0xc8(r1)
-/* 801E94A8 001E6088  4B E2 4C 91 */	bl func_8000E138
+/* 801E94A8 001E6088  4B E2 4C 91 */	bl lbvector_ApplyEulerRotation
 /* 801E94AC 001E608C  38 61 00 C4 */	addi r3, r1, 0xc4
 /* 801E94B0 001E6090  38 81 00 D0 */	addi r4, r1, 0xd0
-/* 801E94B4 001E6094  4B E2 3F B9 */	bl lbvector_add
+/* 801E94B4 001E6094  4B E2 3F B9 */	bl lbvector_Add
 /* 801E94B8 001E6098  C0 22 B9 A0 */	lfs f1, lbl_804DB380@sda21(r2)
 /* 801E94BC 001E609C  38 61 00 B8 */	addi r3, r1, 0xb8
 /* 801E94C0 001E60A0  C0 02 B9 14 */	lfs f0, lbl_804DB2F4@sda21(r2)
@@ -4357,10 +4357,10 @@ lbl_801E946C:
 /* 801E94C8 001E60A8  D0 21 00 B8 */	stfs f1, 0xb8(r1)
 /* 801E94CC 001E60AC  D0 01 00 C0 */	stfs f0, 0xc0(r1)
 /* 801E94D0 001E60B0  D0 01 00 BC */	stfs f0, 0xbc(r1)
-/* 801E94D4 001E60B4  4B E2 4C 65 */	bl func_8000E138
+/* 801E94D4 001E60B4  4B E2 4C 65 */	bl lbvector_ApplyEulerRotation
 /* 801E94D8 001E60B8  38 61 00 B8 */	addi r3, r1, 0xb8
 /* 801E94DC 001E60BC  38 81 00 D0 */	addi r4, r1, 0xd0
-/* 801E94E0 001E60C0  4B E2 3F 8D */	bl lbvector_add
+/* 801E94E0 001E60C0  4B E2 3F 8D */	bl lbvector_Add
 /* 801E94E4 001E60C4  88 1E 00 C4 */	lbz r0, 0xc4(r30)
 /* 801E94E8 001E60C8  7C 00 07 75 */	extsb. r0, r0
 /* 801E94EC 001E60CC  41 82 00 14 */	beq lbl_801E9500
@@ -5234,10 +5234,10 @@ lbl_801EA0F4:
 /* 801EA134 001E6D14  D0 21 00 84 */	stfs f1, 0x84(r1)
 /* 801EA138 001E6D18  D0 01 00 8C */	stfs f0, 0x8c(r1)
 /* 801EA13C 001E6D1C  D0 01 00 88 */	stfs f0, 0x88(r1)
-/* 801EA140 001E6D20  4B E2 3F F9 */	bl func_8000E138
+/* 801EA140 001E6D20  4B E2 3F F9 */	bl lbvector_ApplyEulerRotation
 /* 801EA144 001E6D24  38 61 00 84 */	addi r3, r1, 0x84
 /* 801EA148 001E6D28  38 81 00 90 */	addi r4, r1, 0x90
-/* 801EA14C 001E6D2C  4B E2 33 21 */	bl lbvector_add
+/* 801EA14C 001E6D2C  4B E2 33 21 */	bl lbvector_Add
 /* 801EA150 001E6D30  4B FD 63 49 */	bl func_801C0498
 /* 801EA154 001E6D34  C0 02 B9 AC */	lfs f0, lbl_804DB38C@sda21(r2)
 /* 801EA158 001E6D38  38 61 00 78 */	addi r3, r1, 0x78
@@ -5250,10 +5250,10 @@ lbl_801EA0F4:
 /* 801EA174 001E6D54  D0 21 00 78 */	stfs f1, 0x78(r1)
 /* 801EA178 001E6D58  D0 01 00 80 */	stfs f0, 0x80(r1)
 /* 801EA17C 001E6D5C  D0 01 00 7C */	stfs f0, 0x7c(r1)
-/* 801EA180 001E6D60  4B E2 3F B9 */	bl func_8000E138
+/* 801EA180 001E6D60  4B E2 3F B9 */	bl lbvector_ApplyEulerRotation
 /* 801EA184 001E6D64  38 61 00 78 */	addi r3, r1, 0x78
 /* 801EA188 001E6D68  38 81 00 90 */	addi r4, r1, 0x90
-/* 801EA18C 001E6D6C  4B E2 32 E1 */	bl lbvector_add
+/* 801EA18C 001E6D6C  4B E2 32 E1 */	bl lbvector_Add
 /* 801EA190 001E6D70  88 1F 00 C4 */	lbz r0, 0xc4(r31)
 /* 801EA194 001E6D74  7C 00 07 74 */	extsb r0, r0
 /* 801EA198 001E6D78  2C 00 00 01 */	cmpwi r0, 1
@@ -6409,7 +6409,7 @@ lbl_801EB1A0:
 /* 801EB1C0 001E7DA0  38 61 00 14 */	addi r3, r1, 0x14
 /* 801EB1C4 001E7DA4  38 81 00 20 */	addi r4, r1, 0x20
 /* 801EB1C8 001E7DA8  38 A1 00 2C */	addi r5, r1, 0x2c
-/* 801EB1CC 001E7DAC  4B E2 23 2D */	bl lbvector_diff
+/* 801EB1CC 001E7DAC  4B E2 23 2D */	bl lbvector_Diff
 /* 801EB1D0 001E7DB0  C0 01 00 2C */	lfs f0, 0x2c(r1)
 /* 801EB1D4 001E7DB4  D0 1B 00 08 */	stfs f0, 8(r27)
 /* 801EB1D8 001E7DB8  C0 01 00 30 */	lfs f0, 0x30(r1)
@@ -7306,13 +7306,13 @@ lbl_801EBE64:
 /* 801EBE70 001E8A50  38 7E 00 D4 */	addi r3, r30, 0xd4
 /* 801EBE74 001E8A54  38 9E 00 C8 */	addi r4, r30, 0xc8
 /* 801EBE78 001E8A58  38 BE 00 E0 */	addi r5, r30, 0xe0
-/* 801EBE7C 001E8A5C  4B E2 16 7D */	bl lbvector_diff
+/* 801EBE7C 001E8A5C  4B E2 16 7D */	bl lbvector_Diff
 /* 801EBE80 001E8A60  4B FD 46 19 */	bl func_801C0498
 /* 801EBE84 001E8A64  80 6D B3 28 */	lwz r3, lbl_804D69C8@sda21(r13)
 /* 801EBE88 001E8A68  C0 03 00 7C */	lfs f0, 0x7c(r3)
 /* 801EBE8C 001E8A6C  EF C0 00 72 */	fmuls f30, f0, f1
 /* 801EBE90 001E8A70  C0 3E 00 F8 */	lfs f1, 0xf8(r30)
-/* 801EBE94 001E8A74  48 13 A5 41 */	bl func_803263D4
+/* 801EBE94 001E8A74  48 13 A5 41 */	bl sinf
 /* 801EBE98 001E8A78  EC 01 07 B2 */	fmuls f0, f1, f30
 /* 801EBE9C 001E8A7C  38 60 00 01 */	li r3, 1
 /* 801EBEA0 001E8A80  D0 1E 00 EC */	stfs f0, 0xec(r30)
@@ -7376,15 +7376,15 @@ lbl_801EBF58:
 /* 801EBF6C 001E8B4C  D0 01 00 4C */	stfs f0, 0x4c(r1)
 /* 801EBF70 001E8B50  C0 1E 00 D0 */	lfs f0, 0xd0(r30)
 /* 801EBF74 001E8B54  D0 01 00 50 */	stfs f0, 0x50(r1)
-/* 801EBF78 001E8B58  4B E2 15 4D */	bl lbvector_sub
+/* 801EBF78 001E8B58  4B E2 15 4D */	bl lbvector_Sub
 /* 801EBF7C 001E8B5C  C0 02 B9 14 */	lfs f0, lbl_804DB2F4@sda21(r2)
 /* 801EBF80 001E8B60  FC 00 F8 00 */	fcmpu cr0, f0, f31
 /* 801EBF84 001E8B64  41 82 00 40 */	beq lbl_801EBFC4
 /* 801EBF88 001E8B68  FC 20 F8 90 */	fmr f1, f31
-/* 801EBF8C 001E8B6C  48 13 A4 49 */	bl func_803263D4
+/* 801EBF8C 001E8B6C  48 13 A4 49 */	bl sinf
 /* 801EBF90 001E8B70  FF C0 08 90 */	fmr f30, f1
 /* 801EBF94 001E8B74  FC 20 F8 90 */	fmr f1, f31
-/* 801EBF98 001E8B78  48 13 A2 A9 */	bl func_80326240
+/* 801EBF98 001E8B78  48 13 A2 A9 */	bl cosf
 /* 801EBF9C 001E8B7C  C0 41 00 4C */	lfs f2, 0x4c(r1)
 /* 801EBFA0 001E8B80  C0 61 00 48 */	lfs f3, 0x48(r1)
 /* 801EBFA4 001E8B84  FC 02 07 B2 */	fmul f0, f2, f30
@@ -7398,7 +7398,7 @@ lbl_801EBF58:
 lbl_801EBFC4:
 /* 801EBFC4 001E8BA4  38 61 00 48 */	addi r3, r1, 0x48
 /* 801EBFC8 001E8BA8  38 81 00 30 */	addi r4, r1, 0x30
-/* 801EBFCC 001E8BAC  4B E2 14 A1 */	bl lbvector_add
+/* 801EBFCC 001E8BAC  4B E2 14 A1 */	bl lbvector_Add
 /* 801EBFD0 001E8BB0  C0 01 00 48 */	lfs f0, 0x48(r1)
 /* 801EBFD4 001E8BB4  D0 1E 00 C8 */	stfs f0, 0xc8(r30)
 /* 801EBFD8 001E8BB8  C0 01 00 4C */	lfs f0, 0x4c(r1)
@@ -7618,14 +7618,14 @@ lbl_801EC2D0:
 /* 801EC2D4 001E8EB4  38 61 00 48 */	addi r3, r1, 0x48
 /* 801EC2D8 001E8EB8  38 80 00 04 */	li r4, 4
 /* 801EC2DC 001E8EBC  FC 20 00 50 */	fneg f1, f0
-/* 801EC2E0 001E8EC0  4B E2 18 21 */	bl lbvector_rotate
+/* 801EC2E0 001E8EC0  4B E2 18 21 */	bl lbvector_Rotate
 /* 801EC2E4 001E8EC4  C0 02 B9 14 */	lfs f0, lbl_804DB2F4@sda21(r2)
 /* 801EC2E8 001E8EC8  38 61 00 48 */	addi r3, r1, 0x48
 /* 801EC2EC 001E8ECC  38 80 00 04 */	li r4, 4
 /* 801EC2F0 001E8ED0  D0 01 00 50 */	stfs f0, 0x50(r1)
 /* 801EC2F4 001E8ED4  D0 01 00 48 */	stfs f0, 0x48(r1)
 /* 801EC2F8 001E8ED8  C0 3E 00 F8 */	lfs f1, 0xf8(r30)
-/* 801EC2FC 001E8EDC  4B E2 18 05 */	bl lbvector_rotate
+/* 801EC2FC 001E8EDC  4B E2 18 05 */	bl lbvector_Rotate
 /* 801EC300 001E8EE0  38 60 00 02 */	li r3, 2
 /* 801EC304 001E8EE4  4B FD 68 A1 */	bl func_801C2BA4
 /* 801EC308 001E8EE8  28 03 00 00 */	cmplwi r3, 0
@@ -9397,7 +9397,7 @@ lbl_801EDB7C:
 /* 801EDBCC 001EA7AC  D0 04 00 00 */	stfs f0, 0(r4)
 lbl_801EDBD0:
 /* 801EDBD0 001EA7B0  C0 24 00 00 */	lfs f1, 0(r4)
-/* 801EDBD4 001EA7B4  48 13 88 01 */	bl func_803263D4
+/* 801EDBD4 001EA7B4  48 13 88 01 */	bl sinf
 /* 801EDBD8 001EA7B8  C0 17 00 00 */	lfs f0, 0(r23)
 /* 801EDBDC 001EA7BC  EF 80 00 72 */	fmuls f28, f0, f1
 /* 801EDBE0 001EA7C0  4B FD 28 B9 */	bl func_801C0498
@@ -9515,7 +9515,7 @@ lbl_801EDD6C:
 /* 801EDD84 001EA964  C0 03 00 84 */	lfs f0, 0x84(r3)
 /* 801EDD88 001EA968  EF A0 00 72 */	fmuls f29, f0, f1
 /* 801EDD8C 001EA96C  FC 20 F8 90 */	fmr f1, f31
-/* 801EDD90 001EA970  48 13 86 45 */	bl func_803263D4
+/* 801EDD90 001EA970  48 13 86 45 */	bl sinf
 /* 801EDD94 001EA974  EC 01 07 72 */	fmuls f0, f1, f29
 /* 801EDD98 001EA978  7C 79 E2 14 */	add r3, r25, r28
 /* 801EDD9C 001EA97C  D0 03 01 0C */	stfs f0, 0x10c(r3)
@@ -12330,3 +12330,189 @@ lbl_804D46BC:
 .global lbl_804D69C8
 lbl_804D69C8:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DB2F0
+lbl_804DB2F0:
+	.4byte 0x3F800000
+.global lbl_804DB2F4
+lbl_804DB2F4:
+	.4byte 0x00000000
+.global lbl_804DB2F8
+lbl_804DB2F8:
+	.4byte 0x3F860A92
+.global lbl_804DB2FC
+lbl_804DB2FC:
+	.4byte 0xC7C35000
+.global lbl_804DB300
+lbl_804DB300:
+	.4byte 0x47C35000
+.global lbl_804DB304
+lbl_804DB304:
+	.4byte 0x3FC90FDB
+.global lbl_804DB308
+lbl_804DB308:
+	.4byte 0x41200000
+.global lbl_804DB30C
+lbl_804DB30C:
+	.4byte 0x43FA0000
+.global lbl_804DB310
+lbl_804DB310:
+	.4byte 0xFF7FFFFF
+.global lbl_804DB314
+lbl_804DB314:
+	.4byte 0x42A00000
+.global lbl_804DB318
+lbl_804DB318:
+	.4byte 0x40000000
+.global lbl_804DB31C
+lbl_804DB31C:
+	.4byte 0x41C80000
+.global lbl_804DB320
+lbl_804DB320:
+	.4byte 0x3C8EFA35
+.global lbl_804DB324
+lbl_804DB324:
+	.4byte 0x42652EE1
+.global lbl_804DB328
+lbl_804DB328:
+	.4byte 0x41F00000
+.global lbl_804DB32C
+lbl_804DB32C:
+	.4byte 0x3F060A92
+.global lbl_804DB330
+lbl_804DB330:
+	.4byte 0xC1F00000
+.global lbl_804DB334
+lbl_804DB334:
+	.4byte 0xBF060A92
+.global lbl_804DB338
+lbl_804DB338:
+	.4byte 0x42820000
+.global lbl_804DB33C
+lbl_804DB33C:
+	.4byte 0x3F91361E
+.global lbl_804DB340
+lbl_804DB340:
+	.4byte 0xC2820000
+.global lbl_804DB344
+lbl_804DB344:
+	.4byte 0xBF91361E
+.global lbl_804DB348
+lbl_804DB348:
+	.4byte 0x41A00000
+.global lbl_804DB34C
+lbl_804DB34C:
+	.4byte 0x41840000
+.global lbl_804DB350
+lbl_804DB350:
+	.4byte 0x3F000000
+.global lbl_804DB354
+lbl_804DB354:
+	.4byte 0x42480000
+.global lbl_804DB358
+lbl_804DB358:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DB360
+lbl_804DB360:
+	.4byte 0x447A0000
+	.4byte 0x00000000
+.global lbl_804DB368
+lbl_804DB368:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DB370
+lbl_804DB370:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DB378
+lbl_804DB378:
+	.4byte 0x41000000
+.global lbl_804DB37C
+lbl_804DB37C:
+	.4byte 0x40A00000
+.global lbl_804DB380
+lbl_804DB380:
+	.4byte 0xC2480000
+.global lbl_804DB384
+lbl_804DB384:
+	.4byte 0x42700000
+.global lbl_804DB388
+lbl_804DB388:
+	.4byte 0x430C0000
+.global lbl_804DB38C
+lbl_804DB38C:
+	.4byte 0x42880000
+.global lbl_804DB390
+lbl_804DB390:
+	.4byte 0x42500000
+.global lbl_804DB394
+lbl_804DB394:
+	.4byte 0x40800000
+.global lbl_804DB398
+lbl_804DB398:
+	.4byte 0x3DCCCCCD
+.global lbl_804DB39C
+lbl_804DB39C:
+	.4byte 0xBF800000
+.global lbl_804DB3A0
+lbl_804DB3A0:
+	.4byte 0x7F7FFFFF
+.global lbl_804DB3A4
+lbl_804DB3A4:
+	.4byte 0xC47A0000
+.global lbl_804DB3A8
+lbl_804DB3A8:
+	.4byte 0x3E800000
+.global lbl_804DB3AC
+lbl_804DB3AC:
+	.4byte 0xC42F0000
+.global lbl_804DB3B0
+lbl_804DB3B0:
+	.4byte 0x3E32B8C2
+.global lbl_804DB3B4
+lbl_804DB3B4:
+	.4byte 0xC3960000
+.global lbl_804DB3B8
+lbl_804DB3B8:
+	.4byte 0xC032B8C2
+.global lbl_804DB3BC
+lbl_804DB3BC:
+	.4byte 0x42F00000
+.global lbl_804DB3C0
+lbl_804DB3C0:
+	.4byte 0x40400000
+.global lbl_804DB3C4
+lbl_804DB3C4:
+	.4byte 0x3B64C388
+.global lbl_804DB3C8
+lbl_804DB3C8:
+	.4byte 0x400921FB
+	.4byte 0x54442D18
+.global lbl_804DB3D0
+lbl_804DB3D0:
+	.4byte 0x401921FB
+	.4byte 0x54442D18
+.global lbl_804DB3D8
+lbl_804DB3D8:
+	.4byte 0xC00921FB
+	.4byte 0x54442D18
+.global lbl_804DB3E0
+lbl_804DB3E0:
+	.4byte 0x3F19999A
+.global lbl_804DB3E4
+lbl_804DB3E4:
+	.4byte 0xBF000000
+.global lbl_804DB3E8
+lbl_804DB3E8:
+	.4byte 0xC4FA0000
+.global lbl_804DB3EC
+lbl_804DB3EC:
+	.4byte 0x3C888889
+.global lbl_804DB3F0
+lbl_804DB3F0:
+	.4byte 0xC1200000
+	.4byte 0x00000000

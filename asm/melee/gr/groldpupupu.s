@@ -94,7 +94,7 @@ func_802108B4:
 /* 8021090C 0020D4EC  90 1F 00 0C */	stw r0, 0xc(r31)
 /* 80210910 0020D4F0  38 A0 00 03 */	li r5, 3
 /* 80210914 0020D4F4  38 C0 00 00 */	li r6, 0
-/* 80210918 0020D4F8  48 17 FD 85 */	bl func_8039069C
+/* 80210918 0020D4F8  48 17 FD 85 */	bl GObj_SetupGXLink
 /* 8021091C 0020D4FC  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 80210920 0020D500  28 00 00 00 */	cmplwi r0, 0
 /* 80210924 0020D504  41 82 00 08 */	beq lbl_8021092C
@@ -1657,6 +1657,46 @@ lbl_803E6748:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D48A0
+lbl_804D48A0:
+    .4byte 0x00000004
+    .4byte 0x00000000
+.global lbl_804D48A8
+lbl_804D48A8:
+    .4byte 0x00000005
+    .4byte 0x00000001
+.global lbl_804D48B0
+lbl_804D48B0:
+    .4byte 0x00000002
+    .4byte 0x00000003
+.global lbl_804D48B8
+lbl_804D48B8:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D48C0
+lbl_804D48C0:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D48C8
+lbl_804D48C8:
+    .4byte 0x00000004
+    .4byte 0x00000000
+.global lbl_804D48D0
+lbl_804D48D0:
+    .4byte 0x00000005
+    .4byte 0x00000001
+.global lbl_804D48D8
+lbl_804D48D8:
+    .4byte 0x00000002
+    .4byte 0x00000003
+.global lbl_804D48E0
+lbl_804D48E0:
+    .4byte 0x00000001
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global lbl_804D6A98
@@ -1665,3 +1705,47 @@ lbl_804D6A98:
 .global lbl_804D6A9C
 lbl_804D6A9C:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DBA20
+lbl_804DBA20:
+	.4byte 0xC1200000
+.global lbl_804DBA24
+lbl_804DBA24:
+	.4byte 0x43480000
+.global lbl_804DBA28
+lbl_804DBA28:
+	.4byte 0x42480000
+.global lbl_804DBA2C
+lbl_804DBA2C:
+	.4byte 0x41200000
+.global lbl_804DBA30
+lbl_804DBA30:
+	.4byte 0xC3480000
+.global lbl_804DBA34
+lbl_804DBA34:
+	.4byte 0x41A00000
+.global lbl_804DBA38
+lbl_804DBA38:
+	.4byte 0x40000000
+.global lbl_804DBA3C
+lbl_804DBA3C:
+	.4byte 0x3F800000
+.global lbl_804DBA40
+lbl_804DBA40:
+	.4byte 0xC3160000
+.global lbl_804DBA44
+lbl_804DBA44:
+	.4byte 0x42200000
+.global lbl_804DBA48
+lbl_804DBA48:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DBA50
+lbl_804DBA50:
+	.4byte 0x00000000
+.global lbl_804DBA54
+lbl_804DBA54:
+	.4byte 0x3F000000

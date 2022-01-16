@@ -660,7 +660,7 @@ func_80249C08:
 /* 80249C6C 0024684C  38 7D 00 00 */	addi r3, r29, 0
 /* 80249C70 00246850  38 A0 00 04 */	li r5, 4
 /* 80249C74 00246854  38 C0 00 80 */	li r6, 0x80
-/* 80249C78 00246858  48 14 6A 25 */	bl func_8039069C
+/* 80249C78 00246858  48 14 6A 25 */	bl GObj_SetupGXLink
 /* 80249C7C 0024685C  80 9B 00 04 */	lwz r4, 4(r27)
 /* 80249C80 00246860  7F 83 E3 78 */	mr r3, r28
 /* 80249C84 00246864  80 BB 00 08 */	lwz r5, 8(r27)
@@ -696,7 +696,7 @@ lbl_80249CC8:
 /* 80249CF8 002468D8  38 7D 00 00 */	addi r3, r29, 0
 /* 80249CFC 002468DC  38 DB 00 00 */	addi r6, r27, 0
 /* 80249D00 002468E0  38 80 00 00 */	li r4, 0
-/* 80249D04 002468E4  48 14 6E 65 */	bl func_80390B68
+/* 80249D04 002468E4  48 14 6E 65 */	bl GObj_InitUserData
 /* 80249D08 002468E8  3C 60 80 25 */	lis r3, lbl_80249A1C@ha
 /* 80249D0C 002468EC  38 83 9A 1C */	addi r4, r3, lbl_80249A1C@l
 /* 80249D10 002468F0  38 7D 00 00 */	addi r3, r29, 0
@@ -991,6 +991,80 @@ func_8024A09C:
 /* 8024A164 00246D44  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_803EEED8
+lbl_803EEED8:
+    .4byte NULL
+    .4byte 0x43470000
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x41E80000
+    .4byte NULL
+    .4byte 0x41F00000
+    .4byte 0x426C0000
+    .4byte 0x41F00000
+    .4byte 0x41200000
+    .4byte 0x41700000
+    .4byte 0xBDCCCCCD
+    .4byte NULL
+    .4byte 0x40A00000
+    .4byte 0xBDCCCCCD
+.global lbl_803EEF14
+lbl_803EEF14:
+    .4byte NULL
+    .4byte 0x40400000
+    .4byte 0xBDCCCCCD
+.global lbl_803EEF20
+lbl_803EEF20:
+    .4byte 0x40800000
+    .4byte 0x40E00000
+    .4byte 0xBDCCCCCD
+    .4byte 0x43616E27
+    .4byte 0x74206765
+    .4byte 0x74207573
+    .4byte 0x65725F64
+    .4byte 0x6174612E
+    .4byte 0x0A000000
+    .4byte 0x6D6E736F
+    .4byte 0x756E642E
+    .4byte 0x63000000
+    .4byte 0x75736572
+    .4byte 0x5F646174
+    .4byte 0x61000000
+    .4byte 0x4D656E4D
+    .4byte 0x61696E43
+    .4byte 0x6F6E536F
+    .4byte 0x5F546F70
+    .4byte 0x5F6A6F69
+    .4byte 0x6E740000
+    .4byte 0x4D656E4D
+    .4byte 0x61696E43
+    .4byte 0x6F6E536F
+    .4byte 0x5F546F70
+    .4byte 0x5F616E69
+    .4byte 0x6D6A6F69
+    .4byte 0x6E740000
+    .4byte 0x4D656E4D
+    .4byte 0x61696E43
+    .4byte 0x6F6E536F
+    .4byte 0x5F546F70
+    .4byte 0x5F6D6174
+    .4byte 0x616E696D
+    .4byte 0x5F6A6F69
+    .4byte 0x6E740000
+    .4byte 0x4D656E4D
+    .4byte 0x61696E43
+    .4byte 0x6F6E536F
+    .4byte 0x5F546F70
+    .4byte 0x5F736861
+    .4byte 0x7065616E
+    .4byte 0x696D5F6A
+    .4byte 0x6F696E74
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804A08A8
@@ -998,8 +1072,54 @@ lbl_804A08A8:
 	.skip 0x10
 
 
+.section .sdata
+
+.global lbl_804D5008
+lbl_804D5008:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5010
+lbl_804D5010:
+    .asciz "jobj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6C30
 lbl_804D6C30:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DC068
+lbl_804DC068:
+	.4byte 0x43480000
+	.4byte 0x00000000
+.global lbl_804DC070
+lbl_804DC070:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DC078
+lbl_804DC078:
+	.4byte 0xC1180000
+.global lbl_804DC07C
+lbl_804DC07C:
+	.4byte 0x4111999A
+.global lbl_804DC080
+lbl_804DC080:
+	.4byte 0x41880000
+.global lbl_804DC084
+lbl_804DC084:
+	.4byte 0x43B65777
+.global lbl_804DC088
+lbl_804DC088:
+	.4byte 0x42198D06
+.global lbl_804DC08C
+lbl_804DC08C:
+	.4byte 0x3D5566CF
+.global lbl_804DC090
+lbl_804DC090:
+	.4byte 0x00000000
+	.4byte 0x00000000

@@ -81,7 +81,7 @@ func_80220FB4:
 /* 8022100C 0021DBEC  90 1F 00 0C */	stw r0, 0xc(r31)
 /* 80221010 0021DBF0  38 A0 00 03 */	li r5, 3
 /* 80221014 0021DBF4  38 C0 00 00 */	li r6, 0
-/* 80221018 0021DBF8  48 16 F6 85 */	bl func_8039069C
+/* 80221018 0021DBF8  48 16 F6 85 */	bl GObj_SetupGXLink
 /* 8022101C 0021DBFC  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 80221020 0021DC00  28 00 00 00 */	cmplwi r0, 0
 /* 80221024 0021DC04  41 82 00 08 */	beq lbl_8022102C
@@ -413,3 +413,19 @@ lbl_803E8B5C:
     .4byte 0x003A003B
     .4byte 0x003C003D
     .4byte 0xFFFF0000
+
+
+.section .sdata2
+
+.global lbl_804DBCB8
+lbl_804DBCB8:
+	.4byte 0x00000000
+.global lbl_804DBCBC
+lbl_804DBCBC:
+	.4byte 0x3F800000
+.global lbl_804DBCC0
+lbl_804DBCC0:
+	.4byte 0xBF800000
+.global lbl_804DBCC4
+lbl_804DBCC4:
+	.4byte 0x40800000

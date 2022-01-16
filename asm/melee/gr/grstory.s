@@ -84,7 +84,7 @@ func_801E30D8:
 /* 801E3130 001DFD10  90 1F 00 0C */	stw r0, 0xc(r31)
 /* 801E3134 001DFD14  38 A0 00 03 */	li r5, 3
 /* 801E3138 001DFD18  38 C0 00 00 */	li r6, 0
-/* 801E313C 001DFD1C  48 1A D5 61 */	bl func_8039069C
+/* 801E313C 001DFD1C  48 1A D5 61 */	bl GObj_SetupGXLink
 /* 801E3140 001DFD20  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 801E3144 001DFD24  28 00 00 00 */	cmplwi r0, 0
 /* 801E3148 001DFD28  41 82 00 08 */	beq lbl_801E3150
@@ -601,3 +601,35 @@ lbl_803E274C:
 .global lbl_804D69B8
 lbl_804D69B8:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DB270
+lbl_804DB270:
+	.4byte 0x00000000
+.global lbl_804DB274
+lbl_804DB274:
+	.4byte 0x3F800000
+.global lbl_804DB278
+lbl_804DB278:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DB280
+lbl_804DB280:
+	.4byte 0xC3920000
+.global lbl_804DB284
+lbl_804DB284:
+	.4byte 0x43980000
+.global lbl_804DB288
+lbl_804DB288:
+	.4byte 0x40000000
+.global lbl_804DB28C
+lbl_804DB28C:
+	.4byte 0x41C80000
+.global lbl_804DB290
+lbl_804DB290:
+	.4byte 0x3F000000
+.global lbl_804DB294
+lbl_804DB294:
+	.4byte 0x40400000

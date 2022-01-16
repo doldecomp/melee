@@ -114,7 +114,7 @@ func_802088C0:
 /* 8020891C 002054FC  90 1F 00 0C */	stw r0, 0xc(r31)
 /* 80208920 00205500  38 A0 00 03 */	li r5, 3
 /* 80208924 00205504  38 C0 00 00 */	li r6, 0
-/* 80208928 00205508  48 18 7D 75 */	bl func_8039069C
+/* 80208928 00205508  48 18 7D 75 */	bl GObj_SetupGXLink
 /* 8020892C 0020550C  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 80208930 00205510  28 00 00 00 */	cmplwi r0, 0
 /* 80208934 00205514  41 82 00 08 */	beq lbl_8020893C
@@ -518,7 +518,7 @@ lbl_80208EA4:
 /* 80208EB8 00205A98  90 1C 00 DC */	stw r0, 0xdc(r28)
 /* 80208EBC 00205A9C  80 1F 00 40 */	lwz r0, 0x40(r31)
 /* 80208EC0 00205AA0  90 1C 00 E0 */	stw r0, 0xe0(r28)
-/* 80208EC4 00205AA4  4B E0 46 01 */	bl lbvector_sub
+/* 80208EC4 00205AA4  4B E0 46 01 */	bl lbvector_Sub
 lbl_80208EC8:
 /* 80208EC8 00205AA8  3B 7B 00 01 */	addi r27, r27, 1
 /* 80208ECC 00205AAC  2C 1B 00 03 */	cmpwi r27, 3
@@ -1275,7 +1275,7 @@ lbl_80209924:
 /* 80209948 00206528  48 01 B2 B1 */	bl unk_set_vec3_to_cam_offset_80224BF8
 /* 8020994C 0020652C  38 61 00 5C */	addi r3, r1, 0x5c
 /* 80209950 00206530  38 81 00 50 */	addi r4, r1, 0x50
-/* 80209954 00206534  4B E0 3B 71 */	bl lbvector_sub
+/* 80209954 00206534  4B E0 3B 71 */	bl lbvector_Sub
 /* 80209958 00206538  C0 01 00 5C */	lfs f0, 0x5c(r1)
 /* 8020995C 0020653C  38 61 00 50 */	addi r3, r1, 0x50
 /* 80209960 00206540  38 81 00 5C */	addi r4, r1, 0x5c
@@ -1287,7 +1287,7 @@ lbl_80209924:
 /* 80209978 00206558  C0 01 00 64 */	lfs f0, 0x64(r1)
 /* 8020997C 0020655C  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 80209980 00206560  D0 01 00 64 */	stfs f0, 0x64(r1)
-/* 80209984 00206564  4B E0 3A E9 */	bl lbvector_add
+/* 80209984 00206564  4B E0 3A E9 */	bl lbvector_Add
 /* 80209988 00206568  C0 21 00 50 */	lfs f1, 0x50(r1)
 /* 8020998C 0020656C  C0 41 00 54 */	lfs f2, 0x54(r1)
 /* 80209990 00206570  4B FB 9F 2D */	bl func_801C38BC
@@ -2087,7 +2087,7 @@ lbl_8020A464:
 /* 8020A474 00207054  54 03 10 3A */	slwi r3, r0, 2
 /* 8020A478 00207058  38 03 00 C8 */	addi r0, r3, 0xc8
 /* 8020A47C 0020705C  7C 7E 00 2E */	lwzx r3, r30, r0
-/* 8020A480 00207060  48 15 AF 4D */	bl func_803653CC
+/* 8020A480 00207060  48 15 AF 4D */	bl HSD_LObjClearFlags
 /* 8020A484 00207064  48 00 00 1C */	b lbl_8020A4A0
 lbl_8020A488:
 /* 8020A488 00207068  80 1A 00 00 */	lwz r0, 0(r26)
@@ -2095,7 +2095,7 @@ lbl_8020A488:
 /* 8020A490 00207070  54 03 10 3A */	slwi r3, r0, 2
 /* 8020A494 00207074  38 03 00 C8 */	addi r0, r3, 0xc8
 /* 8020A498 00207078  7C 7E 00 2E */	lwzx r3, r30, r0
-/* 8020A49C 0020707C  48 15 AF 19 */	bl func_803653B4
+/* 8020A49C 0020707C  48 15 AF 19 */	bl HSD_LObjSetFlags
 lbl_8020A4A0:
 /* 8020A4A0 00207080  3B 5A 00 04 */	addi r26, r26, 4
 /* 8020A4A4 00207084  3B 7B 00 01 */	addi r27, r27, 1
@@ -2137,7 +2137,7 @@ lbl_8020A500:
 /* 8020A52C 0020710C  54 00 10 3A */	slwi r0, r0, 2
 /* 8020A530 00207110  7C 1F 04 2E */	lfsx f0, r31, r0
 /* 8020A534 00207114  EF 9B 00 24 */	fdivs f28, f27, f0
-/* 8020A538 00207118  4B E0 2F 8D */	bl lbvector_sub
+/* 8020A538 00207118  4B E0 2F 8D */	bl lbvector_Sub
 /* 8020A53C 0020711C  C0 01 01 04 */	lfs f0, 0x104(r1)
 /* 8020A540 00207120  FC 00 F0 40 */	fcmpo cr0, f0, f30
 /* 8020A544 00207124  40 80 00 1C */	bge lbl_8020A560
@@ -2150,7 +2150,7 @@ lbl_8020A558:
 /* 8020A55C 0020713C  EF 9C 00 32 */	fmuls f28, f28, f0
 lbl_8020A560:
 /* 8020A560 00207140  38 61 01 00 */	addi r3, r1, 0x100
-/* 8020A564 00207144  4B E0 2D 89 */	bl lbvector_normalize
+/* 8020A564 00207144  4B E0 2D 89 */	bl lbvector_Normalize
 /* 8020A568 00207148  C0 01 01 00 */	lfs f0, 0x100(r1)
 /* 8020A56C 0020714C  38 61 00 3C */	addi r3, r1, 0x3c
 /* 8020A570 00207150  38 81 01 00 */	addi r4, r1, 0x100
@@ -2162,7 +2162,7 @@ lbl_8020A560:
 /* 8020A588 00207168  C0 01 01 08 */	lfs f0, 0x108(r1)
 /* 8020A58C 0020716C  EC 00 07 32 */	fmuls f0, f0, f28
 /* 8020A590 00207170  D0 01 01 08 */	stfs f0, 0x108(r1)
-/* 8020A594 00207174  4B E0 2E D9 */	bl lbvector_add
+/* 8020A594 00207174  4B E0 2E D9 */	bl lbvector_Add
 lbl_8020A598:
 /* 8020A598 00207178  3B 5A 00 04 */	addi r26, r26, 4
 /* 8020A59C 0020717C  3B 7B 00 01 */	addi r27, r27, 1
@@ -2208,7 +2208,7 @@ lbl_8020A624:
 /* 8020A634 00207214  D0 01 00 40 */	stfs f0, 0x40(r1)
 lbl_8020A638:
 /* 8020A638 00207218  38 61 00 3C */	addi r3, r1, 0x3c
-/* 8020A63C 0020721C  4B E0 2C B1 */	bl lbvector_normalize
+/* 8020A63C 0020721C  4B E0 2C B1 */	bl lbvector_Normalize
 /* 8020A640 00207220  C0 01 00 3C */	lfs f0, 0x3c(r1)
 /* 8020A644 00207224  38 61 00 3C */	addi r3, r1, 0x3c
 /* 8020A648 00207228  C0 22 BF 1C */	lfs f1, lbl_804DB8FC@sda21(r2)
@@ -2221,7 +2221,7 @@ lbl_8020A638:
 /* 8020A664 00207244  C0 01 00 44 */	lfs f0, 0x44(r1)
 /* 8020A668 00207248  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8020A66C 0020724C  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 8020A670 00207250  4B E0 2D FD */	bl lbvector_add
+/* 8020A670 00207250  4B E0 2D FD */	bl lbvector_Add
 /* 8020A674 00207254  80 7E 01 6C */	lwz r3, 0x16c(r30)
 /* 8020A678 00207258  38 81 00 3C */	addi r4, r1, 0x3c
 /* 8020A67C 0020725C  48 15 C6 6D */	bl func_80366CE8
@@ -2230,7 +2230,7 @@ lbl_8020A638:
 /* 8020A688 00207268  48 15 C7 29 */	bl func_80366DB0
 /* 8020A68C 0020726C  80 7E 01 6C */	lwz r3, 0x16c(r30)
 /* 8020A690 00207270  38 80 04 00 */	li r4, 0x400
-/* 8020A694 00207274  48 15 AD 21 */	bl func_803653B4
+/* 8020A694 00207274  48 15 AD 21 */	bl HSD_LObjSetFlags
 /* 8020A698 00207278  80 61 00 B8 */	lwz r3, 0xb8(r1)
 /* 8020A69C 0020727C  3B E1 00 60 */	addi r31, r1, 0x60
 /* 8020A6A0 00207280  80 01 00 B4 */	lwz r0, 0xb4(r1)
@@ -2395,7 +2395,7 @@ func_8020A8A4:
 /* 8020A8D8 002074B8  FF C0 00 72 */	fmul f30, f0, f1
 /* 8020A8DC 002074BC  FF C0 F0 18 */	frsp f30, f30
 /* 8020A8E0 002074C0  FC 20 F0 90 */	fmr f1, f30
-/* 8020A8E4 002074C4  48 11 B9 5D */	bl func_80326240
+/* 8020A8E4 002074C4  48 11 B9 5D */	bl cosf
 /* 8020A8E8 002074C8  83 DF 00 C4 */	lwz r30, 0xc4(r31)
 /* 8020A8EC 002074CC  C0 02 BF 24 */	lfs f0, lbl_804DB904@sda21(r2)
 /* 8020A8F0 002074D0  28 1E 00 00 */	cmplwi r30, 0
@@ -2432,7 +2432,7 @@ lbl_8020A954:
 /* 8020A960 00207540  48 16 89 89 */	bl HSD_JObjSetMtxDirtySub
 lbl_8020A964:
 /* 8020A964 00207544  FC 20 F0 90 */	fmr f1, f30
-/* 8020A968 00207548  48 11 BA 6D */	bl func_803263D4
+/* 8020A968 00207548  48 11 BA 6D */	bl sinf
 /* 8020A96C 0020754C  83 DF 00 C4 */	lwz r30, 0xc4(r31)
 /* 8020A970 00207550  C0 02 BF 24 */	lfs f0, lbl_804DB904@sda21(r2)
 /* 8020A974 00207554  28 1E 00 00 */	cmplwi r30, 0
@@ -2635,7 +2635,7 @@ lbl_8020AC0C:
 /* 8020AC18 002077F8  48 15 C0 D1 */	bl func_80366CE8
 /* 8020AC1C 002077FC  38 7F 00 00 */	addi r3, r31, 0
 /* 8020AC20 00207800  38 80 00 20 */	li r4, 0x20
-/* 8020AC24 00207804  48 15 A7 91 */	bl func_803653B4
+/* 8020AC24 00207804  48 15 A7 91 */	bl HSD_LObjSetFlags
 lbl_8020AC28:
 /* 8020AC28 00207808  7F E3 FB 78 */	mr r3, r31
 lbl_8020AC2C:
@@ -3379,8 +3379,145 @@ lbl_803E5D90:
     .4byte NULL
 
 
+.section .sdata
+
+.global lbl_804D4808
+lbl_804D4808:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4810
+lbl_804D4810:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D4818
+lbl_804D4818:
+    .asciz "lgobj"
+    .balign 4
+.global lbl_804D4820
+lbl_804D4820:
+    .asciz "0"
+    .balign 4
+.global lbl_804D4824
+lbl_804D4824:
+    .4byte 0x41800000
+.global lbl_804D4828
+lbl_804D4828:
+    .asciz "lobj.h"
+    .balign 4
+.global lbl_804D4830
+lbl_804D4830:
+    .asciz "lobj"
+    .balign 4
+.global lbl_804D4838
+lbl_804D4838:
+    .4byte 0x41800000
+    .4byte 0x00000000
+
+
 .section .sbss
 
 .global lbl_804D6A58
 lbl_804D6A58:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DB880
+lbl_804DB880:
+	.4byte 0x00000000
+.global lbl_804DB884
+lbl_804DB884:
+	.4byte 0x41F00000
+.global lbl_804DB888
+lbl_804DB888:
+	.4byte 0x3F800000
+	.4byte 0x00000000
+.global lbl_804DB890
+lbl_804DB890:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DB898
+lbl_804DB898:
+	.4byte 0x379268A9
+.global lbl_804DB89C
+lbl_804DB89C:
+	.4byte 0x389268A9
+.global lbl_804DB8A0
+lbl_804DB8A0:
+	.4byte 0xBF800000
+.global lbl_804DB8A4
+lbl_804DB8A4:
+	.4byte 0x3F7D70A4
+.global lbl_804DB8A8
+lbl_804DB8A8:
+	.4byte 0x3A64C388
+.global lbl_804DB8AC
+lbl_804DB8AC:
+	.4byte 0xBA64C388
+.global lbl_804DB8B0
+lbl_804DB8B0:
+	.4byte 0x3E860A92
+.global lbl_804DB8B4
+lbl_804DB8B4:
+	.4byte 0xBE860A92
+.global lbl_804DB8B8
+lbl_804DB8B8:
+	.4byte 0x3E32B8C2
+.global lbl_804DB8BC
+lbl_804DB8BC:
+	.4byte 0xBE32B8C2
+.global lbl_804DB8C0
+lbl_804DB8C0:
+	.4byte 0x401921FB
+	.4byte 0x54442D18
+.global lbl_804DB8C8
+lbl_804DB8C8:
+	.4byte 0xC01921FB
+	.4byte 0x54442D18
+.global lbl_804DB8D0
+lbl_804DB8D0:
+	.4byte 0xC2C80000
+	.4byte 0x00000000
+.global lbl_804DB8D8
+lbl_804DB8D8:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DB8E0
+lbl_804DB8E0:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DB8E8
+lbl_804DB8E8:
+	.4byte 0x41200000
+.global lbl_804DB8EC
+lbl_804DB8EC:
+	.4byte 0x7F7FFFFF
+.global lbl_804DB8F0
+lbl_804DB8F0:
+	.4byte 0x41700000
+.global lbl_804DB8F4
+lbl_804DB8F4:
+	.4byte 0x3C23D70A
+.global lbl_804DB8F8
+lbl_804DB8F8:
+	.4byte 0x42C80000
+.global lbl_804DB8FC
+lbl_804DB8FC:
+	.4byte 0x41A00000
+.global lbl_804DB900
+lbl_804DB900:
+	.4byte 0x42480000
+.global lbl_804DB904
+lbl_804DB904:
+	.4byte 0x43960000
+.global lbl_804DB908
+lbl_804DB908:
+	.4byte 0x3D32B8C2
+.global lbl_804DB90C
+lbl_804DB90C:
+	.4byte 0x40000000
+.global lbl_804DB910
+lbl_804DB910:
+	.4byte 0x3F333333
+	.4byte 0x00000000

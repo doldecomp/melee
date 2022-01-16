@@ -410,7 +410,7 @@ lbl_80380B40:
 /* 80380B40 0037D720  C0 17 00 04 */	lfs f0, 4(r23)
 /* 80380B44 0037D724  FC 3B 00 32 */	fmul f1, f27, f0
 /* 80380B48 0037D728  FC 20 08 18 */	frsp f1, f1
-/* 80380B4C 0037D72C  4B FA 58 89 */	bl func_803263D4
+/* 80380B4C 0037D72C  4B FA 58 89 */	bl sinf
 /* 80380B50 0037D730  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 80380B54 0037D734  80 01 00 30 */	lwz r0, 0x30(r1)
 /* 80380B58 0037D738  90 17 00 04 */	stw r0, 4(r23)
@@ -426,7 +426,7 @@ lbl_80380B78:
 /* 80380B78 0037D758  C0 17 00 04 */	lfs f0, 4(r23)
 /* 80380B7C 0037D75C  FC 3B 00 32 */	fmul f1, f27, f0
 /* 80380B80 0037D760  FC 20 08 18 */	frsp f1, f1
-/* 80380B84 0037D764  4B FA 56 BD */	bl func_80326240
+/* 80380B84 0037D764  4B FA 56 BD */	bl cosf
 /* 80380B88 0037D768  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 80380B8C 0037D76C  80 01 00 30 */	lwz r0, 0x30(r1)
 /* 80380B90 0037D770  90 17 00 04 */	stw r0, 4(r23)
@@ -1613,3 +1613,69 @@ lbl_80381BB0:
 /* 80381BD8 0037E7B8  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 80381BDC 0037E7BC  7C 08 03 A6 */	mtlr r0
 /* 80381BE0 0037E7C0  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_804074F0
+lbl_804074F0:
+    .asciz "bytecode.c"
+    .balign 4
+    .asciz "operand < nb_args"
+    .balign 4
+    .asciz "specified stack doesn't exist (%d).\n"
+    .balign 4
+    .asciz "not yet implemented.\n"
+    .balign 4
+    .asciz "unexpected byte code.\n"
+    .balign 4
+    .asciz "stack->next"
+    .balign 4
+    .asciz "unexpected opcode 0x%x.\n"
+    .balign 4
+
+
+.section .sdata
+
+.global lbl_804D5F98
+lbl_804D5F98:
+    .4byte 0x00000000
+.global lbl_804D5F9C
+lbl_804D5F9C:
+    .asciz "stack"
+    .balign 4
+    .4byte NULL
+
+
+.section .sdata2
+
+.global lbl_804DE7A0
+lbl_804DE7A0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE7A8
+lbl_804DE7A8:
+	.4byte 0x3F91DF46
+	.4byte 0xA2529D39
+.global lbl_804DE7B0
+lbl_804DE7B0:
+	.4byte 0x404CA5DC
+	.4byte 0x1A63C1F8
+.global lbl_804DE7B8
+lbl_804DE7B8:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE7C0
+lbl_804DE7C0:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DE7C8
+lbl_804DE7C8:
+	.4byte 0x42B40000
+.global lbl_804DE7CC
+lbl_804DE7CC:
+	.4byte 0xC2B40000
+.global lbl_804DE7D0
+lbl_804DE7D0:
+	.4byte 0x43300000
+	.4byte 0x80000000

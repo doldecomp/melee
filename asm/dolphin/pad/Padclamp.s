@@ -92,8 +92,8 @@ lbl_8034CC6C:
 /* 8034CC78 00349858  98 04 00 00 */	stb r0, 0(r4)
 /* 8034CC7C 0034985C  4E 80 00 20 */	blr 
 
-.global func_8034CC80
-func_8034CC80:
+.global PADClamp
+PADClamp:
 /* 8034CC80 00349860  7C 08 02 A6 */	mflr r0
 /* 8034CC84 00349864  90 01 00 04 */	stw r0, 4(r1)
 /* 8034CC88 00349868  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -167,3 +167,11 @@ lbl_8034CD5C:
 /* 8034CD7C 0034995C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034CD80 00349960  7C 08 03 A6 */	mtlr r0
 /* 8034CD84 00349964  4E 80 00 20 */	blr 
+
+
+.section .sdata
+
+.global lbl_804D5C30
+lbl_804D5C30:
+    .4byte 0x1EB40F48
+    .4byte 0x280F3B1F

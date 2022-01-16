@@ -191,3 +191,41 @@ lbl_803447A8:
 /* 803447BC 0034139C  7C 08 03 A6 */	mtlr r0
 /* 803447C0 003413A0  38 21 00 10 */	addi r1, r1, 0x10
 /* 803447C4 003413A4  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80401B70
+lbl_80401B70:
+    .4byte 0x029F0010
+    .4byte 0x029F0033
+    .4byte 0x029F0034
+    .4byte 0x029F0035
+    .4byte 0x029F0036
+    .4byte 0x029F0037
+    .4byte 0x029F0038
+    .4byte 0x029F0039
+    .4byte 0x12061203
+    .4byte 0x12041205
+    .4byte 0x00808000
+    .4byte 0x0088FFFF
+    .4byte 0x00841000
+    .4byte 0x0064001D
+    .4byte 0x02180000
+    .4byte 0x81001C1E
+    .4byte 0x00441B1E
+    .4byte 0x00840800
+    .4byte 0x00640027
+    .4byte 0x191E0000
+    .4byte 0x00DEFFFC
+    .4byte 0x02A08000
+    .4byte 0x029C0028
+    .4byte 0x16FC0054
+    .4byte 0x16FD4348
+    .4byte 0x002102FF
+    .4byte 0x02FF02FF
+    .4byte 0x02FF02FF
+    .4byte 0x02FF02FF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL

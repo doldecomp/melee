@@ -30,7 +30,7 @@ DVDInit:
 /* 80337E44 00334A24  38 60 04 00 */	li r3, 0x400
 /* 80337E48 00334A28  48 00 F9 6D */	bl __OSUnmaskInterrupts
 /* 80337E4C 00334A2C  38 6D BB F0 */	addi r3, r13, lbl_804D7290@sda21
-/* 80337E50 00334A30  48 01 2E DD */	bl func_8034AD2C
+/* 80337E50 00334A30  48 01 2E DD */	bl OSInitThreadQueue
 /* 80337E54 00334A34  3C 60 CC 00 */	lis r3, 0xCC006000@ha
 /* 80337E58 00334A38  38 00 00 2A */	li r0, 0x2a
 /* 80337E5C 00334A3C  90 03 60 00 */	stw r0, 0xCC006000@l(r3)
@@ -2431,7 +2431,7 @@ lbl_80339EB4:
 /* 80339EF0 00336AD0  41 82 00 10 */	beq lbl_80339F00
 lbl_80339EF4:
 /* 80339EF4 00336AD4  38 6D BB F0 */	addi r3, r13, lbl_804D7290@sda21
-/* 80339EF8 00336AD8  48 01 1B 1D */	bl func_8034BA14
+/* 80339EF8 00336AD8  48 01 1B 1D */	bl OSSleepThread
 /* 80339EFC 00336ADC  4B FF FF B8 */	b lbl_80339EB4
 lbl_80339F00:
 /* 80339F00 00336AE0  7F E3 FB 78 */	mr r3, r31
@@ -2449,7 +2449,7 @@ lbl_80339F24:
 /* 80339F28 00336B08  38 6D BB F0 */	addi r3, r13, lbl_804D7290@sda21
 /* 80339F2C 00336B0C  90 01 00 04 */	stw r0, 4(r1)
 /* 80339F30 00336B10  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80339F34 00336B14  48 01 1B CD */	bl func_8034BB00
+/* 80339F34 00336B14  48 01 1B CD */	bl OSWakeupThread
 /* 80339F38 00336B18  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80339F3C 00336B1C  38 21 00 08 */	addi r1, r1, 8
 /* 80339F40 00336B20  7C 08 03 A6 */	mtlr r0
@@ -2618,6 +2618,79 @@ lbl_8033A12C:
 /* 8033A14C 00336D2C  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80400E80
+lbl_80400E80:
+    .asciz "app booted via JTAG\n"
+    .balign 4
+    .asciz "load fst\n"
+    .balign 4
+    .asciz "app booted from bootrom\n"
+    .balign 4
+    .asciz "bootrom\n"
+    .balign 4
+.global jtbl_80400ECC
+jtbl_80400ECC:
+	.4byte lbl_80338FC4
+	.4byte lbl_80338E84
+	.4byte lbl_80338E9C
+	.4byte lbl_80338EB4
+	.4byte lbl_80338EE4
+	.4byte lbl_80338FA8
+	.4byte lbl_80338EFC
+	.4byte lbl_80338ECC
+.global jtbl_80400EEC
+jtbl_80400EEC:
+	.4byte lbl_803392A4
+	.4byte lbl_80339060
+	.4byte lbl_803390BC
+	.4byte lbl_803390E0
+	.4byte lbl_80339060
+	.4byte lbl_80339034
+	.4byte lbl_80339100
+	.4byte lbl_80339164
+	.4byte lbl_80339190
+	.4byte lbl_803391C4
+	.4byte lbl_803391E8
+	.4byte lbl_8033920C
+	.4byte lbl_80339230
+	.4byte lbl_80339254
+	.4byte lbl_8033927C
+	.4byte lbl_803390F0
+.global jtbl_80400F2C
+jtbl_80400F2C:
+	.4byte lbl_80339C58
+	.4byte lbl_80339C58
+	.4byte lbl_80339C78
+	.4byte lbl_80339CBC
+	.4byte lbl_80339D08
+	.4byte lbl_80339D84
+	.4byte lbl_80339D84
+	.4byte lbl_80339D84
+	.4byte lbl_80339D84
+	.4byte lbl_80339E50
+	.4byte lbl_80339E50
+	.4byte lbl_80339C58
+	.4byte lbl_80339D84
+.global jtbl_80400F60
+jtbl_80400F60:
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FF0
+	.4byte lbl_80339FE0
+	.4byte lbl_80339FE0
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FE8
+	.4byte lbl_80339FF0
+	.4byte lbl_80339FE0
+	.4byte lbl_80339FE0
+	.4byte lbl_80339FE8
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804A7560
@@ -2626,6 +2699,14 @@ lbl_804A7560:
 .global lbl_804A75E0
 lbl_804A75E0:
 	.skip 0x58
+
+
+.section .sdata
+
+.global lbl_804D5B90
+lbl_804D5B90:
+    .4byte 0x00000001
+    .4byte 0x00000000
 
 
 .section .sbss

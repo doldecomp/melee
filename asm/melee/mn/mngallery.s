@@ -118,7 +118,7 @@ func_80258A08:
 /* 80258AE4 002556C4  90 61 00 1C */	stw r3, 0x1c(r1)
 /* 80258AE8 002556C8  B0 A1 00 3A */	sth r5, 0x3a(r1)
 /* 80258AEC 002556CC  B0 A1 00 32 */	sth r5, 0x32(r1)
-/* 80258AF0 002556D0  48 11 17 A1 */	bl func_8036A290
+/* 80258AF0 002556D0  48 11 17 A1 */	bl HSD_CObjAlloc
 /* 80258AF4 002556D4  3B E3 00 00 */	addi r31, r3, 0
 /* 80258AF8 002556D8  38 80 00 03 */	li r4, 3
 /* 80258AFC 002556DC  48 11 16 49 */	bl func_8036A144
@@ -203,7 +203,7 @@ lbl_80258C04:
 /* 80258C28 00255808  38 7F 00 00 */	addi r3, r31, 0
 /* 80258C2C 0025580C  38 A0 00 08 */	li r5, 8
 /* 80258C30 00255810  38 C0 00 80 */	li r6, 0x80
-/* 80258C34 00255814  48 13 7A 69 */	bl func_8039069C
+/* 80258C34 00255814  48 13 7A 69 */	bl GObj_SetupGXLink
 /* 80258C38 00255818  88 1D 00 02 */	lbz r0, 2(r29)
 /* 80258C3C 0025581C  28 00 00 00 */	cmplwi r0, 0
 /* 80258C40 00255820  40 82 00 2C */	bne lbl_80258C6C
@@ -961,7 +961,7 @@ func_8025963C:
 /* 80259698 00256278  38 7D 00 00 */	addi r3, r29, 0
 /* 8025969C 0025627C  38 A0 00 04 */	li r5, 4
 /* 802596A0 00256280  38 C0 00 80 */	li r6, 0x80
-/* 802596A4 00256284  48 13 6F F9 */	bl func_8039069C
+/* 802596A4 00256284  48 13 6F F9 */	bl GObj_SetupGXLink
 /* 802596A8 00256288  80 9A 00 04 */	lwz r4, 4(r26)
 /* 802596AC 0025628C  7E C3 B3 78 */	mr r3, r22
 /* 802596B0 00256290  80 BA 00 08 */	lwz r5, 8(r26)
@@ -992,7 +992,7 @@ lbl_802596FC:
 /* 80259710 002562F0  38 BF 00 00 */	addi r5, r31, 0
 /* 80259714 002562F4  38 D6 00 00 */	addi r6, r22, 0
 /* 80259718 002562F8  38 80 00 00 */	li r4, 0
-/* 8025971C 002562FC  48 13 74 4D */	bl func_80390B68
+/* 8025971C 002562FC  48 13 74 4D */	bl GObj_InitUserData
 /* 80259720 00256300  3C 60 80 26 */	lis r3, lbl_802590C4@ha
 /* 80259724 00256304  38 83 90 C4 */	addi r4, r3, lbl_802590C4@l
 /* 80259728 00256308  38 7D 00 00 */	addi r3, r29, 0
@@ -1028,7 +1028,7 @@ lbl_80259764:
 /* 8025979C 0025637C  38 9B 00 00 */	addi r4, r27, 0
 /* 802597A0 00256380  38 A0 00 04 */	li r5, 4
 /* 802597A4 00256384  38 C0 00 80 */	li r6, 0x80
-/* 802597A8 00256388  48 13 6E F5 */	bl func_8039069C
+/* 802597A8 00256388  48 13 6E F5 */	bl GObj_SetupGXLink
 /* 802597AC 0025638C  80 9A 00 04 */	lwz r4, 4(r26)
 /* 802597B0 00256390  7F 03 C3 78 */	mr r3, r24
 /* 802597B4 00256394  80 BA 00 08 */	lwz r5, 8(r26)
@@ -1057,7 +1057,7 @@ lbl_80259800:
 /* 8025980C 002563EC  92 F8 00 04 */	stw r23, 4(r24)
 /* 80259810 002563F0  38 D8 00 00 */	addi r6, r24, 0
 /* 80259814 002563F4  38 80 00 00 */	li r4, 0
-/* 80259818 002563F8  48 13 73 51 */	bl func_80390B68
+/* 80259818 002563F8  48 13 73 51 */	bl GObj_InitUserData
 /* 8025981C 002563FC  38 76 00 00 */	addi r3, r22, 0
 /* 80259820 00256400  38 9C 00 00 */	addi r4, r28, 0
 /* 80259824 00256404  38 A0 00 00 */	li r5, 0
@@ -1193,6 +1193,43 @@ lbl_803B8544:
     .4byte 0x00000000
 
 
+.section .data
+
+.global lbl_803F0570
+lbl_803F0570:
+    .asciz "MvOmake15.mth"
+    .balign 4
+.global lbl_803F0580
+lbl_803F0580:
+    .asciz "MvHowTo.mth"
+    .balign 4
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mngallery.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .asciz "cursor_user_data"
+    .balign 4
+    .asciz "MenMainConGa_Top_joint"
+    .balign 4
+    .asciz "MenMainConGa_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConGa_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConGa_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_animjoint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainCursorGa_Top_shapeanim_joint"
+    .balign 4
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804A0B90
@@ -1206,6 +1243,18 @@ lbl_804A0BB0:
 	.skip 0x10
 
 
+.section .sdata
+
+.global lbl_804D5090
+lbl_804D5090:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5098
+lbl_804D5098:
+    .asciz "jobj"
+    .balign 4
+
+
 .section .sbss
 
 .global lbl_804D6C88
@@ -1214,3 +1263,49 @@ lbl_804D6C88:
 .global lbl_804D6C8C
 lbl_804D6C8C:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DC358
+lbl_804DC358:
+	.4byte 0x42C00000
+.global lbl_804DC35C
+lbl_804DC35C:
+	.4byte 0x42900000
+.global lbl_804DC360
+lbl_804DC360:
+	.4byte 0x00000000
+.global lbl_804DC364
+lbl_804DC364:
+	.4byte 0x40000000
+.global lbl_804DC368
+lbl_804DC368:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DC370
+lbl_804DC370:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DC378
+lbl_804DC378:
+	.4byte 0x3F800000
+.global lbl_804DC37C
+lbl_804DC37C:
+	.4byte 0xC1180000
+.global lbl_804DC380
+lbl_804DC380:
+	.4byte 0x4111999A
+.global lbl_804DC384
+lbl_804DC384:
+	.4byte 0x41880000
+.global lbl_804DC388
+lbl_804DC388:
+	.4byte 0x43B65777
+.global lbl_804DC38C
+lbl_804DC38C:
+	.4byte 0x42198D06
+.global lbl_804DC390
+lbl_804DC390:
+	.4byte 0x3D5566CF
+	.4byte 0x00000000

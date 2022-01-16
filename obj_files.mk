@@ -21,20 +21,26 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/lb/lbvector.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.o 		\
+	$(BUILD_DIR)/asm/melee/lb/lbheap.o 				\
+	$(BUILD_DIR)/src/melee/lb/lbfile.o 				\
 	$(BUILD_DIR)/asm/melee/lb/lbfile.o 				\
+	$(BUILD_DIR)/src/melee/lb/lbarchive.o			\
 	$(BUILD_DIR)/asm/melee/lb/lbarchive.o			\
 	$(BUILD_DIR)/asm/melee/lb/lbdvd.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_80019230.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8.o		\
 	                                                \
-	$(BUILD_DIR)/asm/melee/cm/code_80028B9C.o 		\
+	$(BUILD_DIR)/asm/melee/cm/camera.o 				\
+	$(BUILD_DIR)/asm/melee/cm/cmsnap.o 				\
 													\
 	$(BUILD_DIR)/src/melee/pl/player.o 		 	    \
 	$(BUILD_DIR)/asm/melee/pl/player.o 		 	    \
 	$(BUILD_DIR)/asm/melee/pl/code_8003715C.o 		\
 													\
-	$(BUILD_DIR)/asm/melee/mp/code_80041C78.o 		\
+	$(BUILD_DIR)/asm/melee/mp/mpcoll.o 				\
+	$(BUILD_DIR)/asm/melee/mp/mplib.o 				\
+	$(BUILD_DIR)/asm/melee/mp/mpisland.o 			\
 													\
 	$(BUILD_DIR)/asm/melee/ef/eflib.o				\
 	$(BUILD_DIR)/asm/melee/ef/efsync.o				\
@@ -42,40 +48,56 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ef/efasync.o				\
 													\
 	$(BUILD_DIR)/asm/melee/ft/fighter.o 			\
-	$(BUILD_DIR)/asm/melee/ft/code_8006DBF4.o 		\
-	$(BUILD_DIR)/asm/melee/ft/ftdonkey_1.o 		    \
-	$(BUILD_DIR)/asm/melee/ft/ftmario.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/ftfalcon.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftfox.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/ftlink.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/ftkirby.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/ftdonkey_2.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftseak.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/ftness.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/ftpeach.o 			            \
-	$(BUILD_DIR)/asm/melee/ft/fticeclimber.o 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftpikachu.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftsamus.o 		 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftyoshi.o 		 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftkoopa.o 		 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftmars.o 		 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftzelda.o 		 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftpurin.o 		 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftluigi.o 		 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftmewtwo.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftclink.o 					\
-	$(BUILD_DIR)/asm/melee/ft/ftdrmario.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftfalco.o 					\
-	$(BUILD_DIR)/asm/melee/ft/ftpichu.o 					\
-	$(BUILD_DIR)/asm/melee/ft/ftgamewatch.o 				\
-	$(BUILD_DIR)/asm/melee/ft/ftganon.o 					\
-	$(BUILD_DIR)/asm/melee/ft/ftemblem.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftzakoboy.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftzakogirl.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftgigakoopa.o 				\
-	$(BUILD_DIR)/asm/melee/ft/ftsandbag.o 		            \
-	$(BUILD_DIR)/asm/melee/ft/ftmasterhand.o 	            \
-	$(BUILD_DIR)/asm/melee/ft/ftcrazyhand.o 				\
+	$(BUILD_DIR)/asm/melee/ft/ftanim.o 				\
+	$(BUILD_DIR)/asm/melee/ft/ftaction.o 			\
+	$(BUILD_DIR)/asm/melee/ft/ftparts.o 			\
+	$(BUILD_DIR)/asm/melee/ft/ftcamera.o 			\
+	$(BUILD_DIR)/asm/melee/ft/ftcoll.o 				\
+	$(BUILD_DIR)/asm/melee/ft/code_8007C114.o 		\
+	$(BUILD_DIR)/asm/melee/ft/code_8007C630.o 		\
+	$(BUILD_DIR)/asm/melee/ft/ftcommon.o 			\
+	$(BUILD_DIR)/asm/melee/ft/ftdrawcommon.o 		\
+	$(BUILD_DIR)/asm/melee/ft/ftcliffcommon.o 		\
+	$(BUILD_DIR)/asm/melee/ft/ftwalljump.o 			\
+	$(BUILD_DIR)/asm/melee/ft/code_80081938.o 		\
+	$(BUILD_DIR)/asm/melee/ft/code_80081B38.o 		\
+	$(BUILD_DIR)/asm/melee/ft/code_8008521C.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftmario.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftfalcon.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftfox.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftlink.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftness.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftpeach.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/fticeclimber.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftsamus.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftkoopa.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftmars.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftmewtwo.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftclink.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftdrmario.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftfalco.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftganon.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftemblem.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftzakoboy.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftzakogirl.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftgigakoopa.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftsandbag.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.o 	\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.o 		            \
 															\
 	$(BUILD_DIR)/asm/melee/gm/gmmain.o 		 	            \
@@ -165,8 +187,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mnitemsw.o                    \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesw.o                   \
 	$(BUILD_DIR)/asm/melee/mn/mnname.o                   	\
-	$(BUILD_DIR)/asm/melee/mn/code_8023B0F8.o               \
+	$(BUILD_DIR)/asm/melee/mn/mnnamenew.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mndiagram.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mndiagram2.o               	\
+	$(BUILD_DIR)/asm/melee/mn/mndiagram3.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mnvibration.o                 \
 	$(BUILD_DIR)/asm/melee/mn/mnsound.o                 	\
 	$(BUILD_DIR)/asm/melee/mn/mndeflicker.o               	\
@@ -186,6 +210,13 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/it/code_80266F3C.o              	\
 	$(BUILD_DIR)/asm/melee/it/code_8027CF30.o              	\
 															\
+	$(BUILD_DIR)/asm/melee/if/ifall.o                      	\
+	$(BUILD_DIR)/asm/melee/if/iftime.o                      \
+	$(BUILD_DIR)/asm/melee/if/ifstatus.o                   	\
+	$(BUILD_DIR)/asm/melee/if/code_802F7288.o               \
+	$(BUILD_DIR)/asm/melee/if/ifstock.o                     \
+	$(BUILD_DIR)/asm/melee/if/ifmagnify.o                   \
+															\
 	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
 	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
@@ -204,10 +235,12 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MSL/mem_funcs.o                \
 	$(BUILD_DIR)/asm/MSL/printf.o                   \
 	$(BUILD_DIR)/src/MSL/rand.o                     \
-	$(BUILD_DIR)/asm/MSL/string.o                   \
+	$(BUILD_DIR)/src/MSL/string.o                   \
 	$(BUILD_DIR)/asm/MSL/strtoul.o                  \
 	$(BUILD_DIR)/asm/MSL/console_io.o               \
 	$(BUILD_DIR)/src/MSL/wchar_io.o                 \
+	$(BUILD_DIR)/asm/MSL/math_1.o                   \
+	$(BUILD_DIR)/asm/MSL/trigf.o                    \
 	$(BUILD_DIR)/asm/MSL/math.o                     \
                                                     \
 	$(BUILD_DIR)/asm/MetroTRK/mainloop.o            \
@@ -227,15 +260,16 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/MetroTRK/dolphin_trk_glue.o    \
 	$(BUILD_DIR)/asm/MetroTRK/targcont.o            \
 													\
-	$(BUILD_DIR)/asm/dolphin/amcstubs/AmcExi2Stubs.o		\
+	$(BUILD_DIR)/src/dolphin/amcstubs/AmcExi2Stubs.o		\
 	$(BUILD_DIR)/asm/dolphin/OdemuExi2/DebuggerDriver.o     \
 	$(BUILD_DIR)/asm/dolphin/hio/hio.o              \
 	$(BUILD_DIR)/asm/dolphin/mcc/mcc.o              \
 	$(BUILD_DIR)/asm/dolphin/mcc/fio.o              \
 	$(BUILD_DIR)/asm/dolphin/thp/THPDec.o           \
 	$(BUILD_DIR)/asm/dolphin/jpeg/jpegdec.o         \
-	$(BUILD_DIR)/asm/dolphin/base/PPCArch.o	        \
+	$(BUILD_DIR)/src/dolphin/base/PPCArch.o	        \
 	$(BUILD_DIR)/asm/dolphin/db/db.o                \
+	$(BUILD_DIR)/src/dolphin/dsp/dsp.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_debug.o        \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_task.o         \
@@ -247,6 +281,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/dvd/fstload.o          \
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GXMisc.o            \
+	$(BUILD_DIR)/asm/dolphin/gx/GX.o                \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx.o              \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtxvec.o           \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx44.o            \
@@ -270,26 +307,39 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/os/OSResetSW.o         \
 	$(BUILD_DIR)/asm/dolphin/os/OSRtc.o             \
 	$(BUILD_DIR)/asm/dolphin/os/OSSerial.o          \
-                                                    \
-	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_1.o                \
-                                                    \
+	$(BUILD_DIR)/asm/dolphin/os/OSSync.o            \
+	$(BUILD_DIR)/asm/dolphin/os/OSThread.o          \
+	$(BUILD_DIR)/asm/dolphin/os/OSTime.o            \
+	$(BUILD_DIR)/asm/dolphin/os/OSUartExi.o         \
 	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init.o      \
 	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.o      \
-                                                    \
 	$(BUILD_DIR)/asm/dolphin/pad/Padclamp.o  		\
-                                                    \
-	$(BUILD_DIR)/asm/dolphin/dolphin_sdk_2.o                \
-                                                    \
+	$(BUILD_DIR)/asm/dolphin/pad/Pad.o              \
 	$(BUILD_DIR)/asm/dolphin/vi/vi.o  				\
 	$(BUILD_DIR)/asm/dolphin/ai/ai.o                \
 	$(BUILD_DIR)/asm/dolphin/ar/ar.o                \
 	$(BUILD_DIR)/asm/dolphin/ar/arq.o               \
-                                                    \
-	$(BUILD_DIR)/asm/dolphin/card/CARD.o			\
+	$(BUILD_DIR)/asm/dolphin/card/CARDBios.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDUnlock.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDRdrw.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDBlock.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDDir.o			\
+	$(BUILD_DIR)/asm/dolphin/card/CARDCheck.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDMount.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDFormat.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDOpen.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDCreate.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDRead.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDWrite.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDDelete.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDStat.o		\
+	$(BUILD_DIR)/asm/dolphin/card/CARDRename.o		\
                                                     \
 	$(BUILD_DIR)/asm/dolphin/ax/AX.o 				\
+	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.o 			\
                                                     \
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.o		\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/dobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.o		\
@@ -297,6 +347,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tev.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/mobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/aobj.o	    \
+	$(BUILD_DIR)/asm/sysdolphin/baselib/aobj.o	    \
+	$(BUILD_DIR)/src/sysdolphin/baselib/lobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/lobj.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/cobj.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/cobj.o		\
@@ -329,11 +381,12 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/sysdolphin/baselib/object.o    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/quatlib.o   \
 	$(BUILD_DIR)/src/sysdolphin/baselib/memory.o	\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/memory.o	\
+	$(BUILD_DIR)/src/sysdolphin/baselib/shadow.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/shadow.o	\
 	$(BUILD_DIR)/src/sysdolphin/baselib/archive.o	\
 	$(BUILD_DIR)/src/sysdolphin/baselib/random.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/bytecode.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/class.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/class.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/hash.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/texp.o			\
@@ -346,24 +399,16 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/devcom.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjproc.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjplink.o			\
+	$(BUILD_DIR)/src/sysdolphin/baselib/gobjgxlink.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjgxlink.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjobject.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjuserdata.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/gobjuserdata.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobj.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobj.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/code_80391580.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psappsrt.o			\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/sobj.o				\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sislib.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/code_803A949C.o		\
-
-DATA_O_FILES :=                                     \
-    $(BUILD_DIR)/asm/data.o
-
-SDATA_O_FILES :=                                    \
-    $(BUILD_DIR)/asm/sdata.o
-
-SDATA2_O_FILES :=                                   \
-    $(BUILD_DIR)/asm/sdata2.o

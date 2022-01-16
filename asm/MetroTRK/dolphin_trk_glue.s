@@ -259,3 +259,17 @@ TRK_board_display:
 /* 8032AF74 00327B54  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AF78 00327B58  7C 08 03 A6 */	mtlr r0
 /* 8032AF7C 00327B5C  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_804008B8
+lbl_804008B8:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL

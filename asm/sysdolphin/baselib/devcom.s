@@ -1181,6 +1181,29 @@ lbl_8038FA88:
 /* 8038FAA4 0038C684  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_804083B8
+lbl_804083B8:
+    .asciz "devcom.c"
+    .balign 4
+    .asciz "dvdDC->size <= DEVCOM_BUF_SIZE"
+    .balign 4
+    .asciz "dvdDC->callback"
+    .balign 4
+    .asciz "!(HSD_DevComGetDestType(type) == DEVCOMDEST_SBUF && size > DEVCOM_BUF_SIZE)"
+    .balign 4
+    .asciz "src % 32 == 0"
+    .balign 4
+    .asciz "dest % 32 == 0"
+    .balign 4
+    .asciz "size % 32 == 0"
+    .balign 4
+    .asciz "size != 0"
+    .balign 4
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804C62A0
@@ -1192,6 +1215,22 @@ lbl_804C6320:
 .global lbl_804C6330
 lbl_804C6330:
 	.skip 0x8050
+
+
+.section .sdata
+
+.global lbl_804D6050
+lbl_804D6050:
+	.long 4
+.global lbl_804D6054
+lbl_804D6054:
+    .asciz "0"
+    .balign 4
+.global lbl_804D6058
+lbl_804D6058:
+    .asciz "dc"
+    .balign 4
+    .4byte NULL
 
 
 .section .sbss

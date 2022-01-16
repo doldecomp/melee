@@ -21,11 +21,11 @@ lbl_80361600:
 /* 80361600 0035E1E0  48 00 0D D1 */	bl HSD_StateSetNumChans
 /* 80361604 0035E1E4  28 1B 00 00 */	cmplwi r27, 0
 /* 80361608 0035E1E8  41 82 00 74 */	beq lbl_8036167C
-/* 8036160C 0035E1EC  48 00 3D F1 */	bl func_803653FC
+/* 8036160C 0035E1EC  48 00 3D F1 */	bl HSD_LObjGetLightMaskSpecular
 /* 80361610 0035E1F0  90 7F 00 20 */	stw r3, 0x20(r31)
 /* 80361614 0035E1F4  7F E3 FB 78 */	mr r3, r31
 /* 80361618 0035E1F8  48 00 0A 8D */	bl HSD_SetupChannel
-/* 8036161C 0035E1FC  48 00 3D E9 */	bl func_80365404
+/* 8036161C 0035E1FC  48 00 3D E9 */	bl HSD_LObjGetNbActive
 /* 80361620 0035E200  3C 80 80 4C */	lis r4, lbl_804C07E0@ha
 /* 80361624 0035E204  3B A3 00 00 */	addi r29, r3, 0
 /* 80361628 0035E208  3B C4 07 E0 */	addi r30, r4, lbl_804C07E0@l
@@ -34,7 +34,7 @@ lbl_80361600:
 /* 80361634 0035E214  48 00 00 40 */	b lbl_80361674
 lbl_80361638:
 /* 80361638 0035E218  7F 43 D3 78 */	mr r3, r26
-/* 8036163C 0035E21C  48 00 3E 1D */	bl func_80365458
+/* 8036163C 0035E21C  48 00 3E 1D */	bl HSD_LObjGetActiveByIndex
 /* 80361640 0035E220  28 03 00 00 */	cmplwi r3, 0
 /* 80361644 0035E224  41 82 00 2C */	beq lbl_80361670
 /* 80361648 0035E228  28 1B 00 00 */	cmplwi r27, 0
@@ -72,7 +72,7 @@ lbl_803616A4:
 /* 803616AC 0035E28C  48 00 00 B8 */	b lbl_80361764
 lbl_803616B0:
 /* 803616B0 0035E290  38 60 01 00 */	li r3, 0x100
-/* 803616B4 0035E294  48 00 3D 59 */	bl func_8036540C
+/* 803616B4 0035E294  48 00 3D 59 */	bl HSD_LObjGetActiveByID
 /* 803616B8 0035E298  7C 7E 1B 79 */	or. r30, r3, r3
 /* 803616BC 0035E29C  41 82 00 28 */	beq lbl_803616E4
 /* 803616C0 0035E2A0  A0 1E 00 08 */	lhz r0, 8(r30)
@@ -88,11 +88,11 @@ lbl_803616E4:
 /* 803616E4 0035E2C4  80 0D A6 28 */	lwz r0, lbl_804D5CC8@sda21(r13)
 /* 803616E8 0035E2C8  90 1F 00 6C */	stw r0, 0x6c(r31)
 lbl_803616EC:
-/* 803616EC 0035E2CC  48 00 3C F9 */	bl func_803653E4
+/* 803616EC 0035E2CC  48 00 3C F9 */	bl HSD_LObjGetLightMaskDiffuse
 /* 803616F0 0035E2D0  90 7F 00 80 */	stw r3, 0x80(r31)
 /* 803616F4 0035E2D4  38 7F 00 60 */	addi r3, r31, 0x60
 /* 803616F8 0035E2D8  48 00 09 AD */	bl HSD_SetupChannel
-/* 803616FC 0035E2DC  48 00 3C F9 */	bl func_803653F4
+/* 803616FC 0035E2DC  48 00 3C F9 */	bl HSD_LObjGetLightMaskAlpha
 /* 80361700 0035E2E0  38 9F 00 B0 */	addi r4, r31, 0xb0
 /* 80361704 0035E2E4  28 1E 00 00 */	cmplwi r30, 0
 /* 80361708 0035E2E8  90 7F 00 B0 */	stw r3, 0xb0(r31)
@@ -787,11 +787,115 @@ lbl_80362000:
 /* 80362020 0035EC00  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80405A38
+lbl_80405A38:
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0x01000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000004
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte 0x01000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte 0x000000FF
+    .4byte 0x01000000
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000001
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x000000FF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000004
+    .4byte NULL
+    .4byte NULL
+    .4byte 0xFFFFFFFF
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x00000002
+    .4byte 0x00000002
+    .4byte NULL
+.global lbl_80405B58
+lbl_80405B58:
+    .4byte 0x00000001
+	.4byte lbl_80361F34
+    .4byte 0x00000002
+	.4byte lbl_80361F4C
+    .4byte 0x00000004
+	.4byte lbl_80362CA0
+    .4byte 0x00000008
+	.4byte lbl_80362CF8
+    .4byte 0x00000010
+	.4byte lbl_80362D04
+    .4byte 0x00000020
+	.4byte lbl_80362D24
+    .4byte 0x00000040
+	.4byte lbl_80361F6C
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global lbl_804C07E0
 lbl_804C07E0:
 	.skip 0x18
+
+
+.section .sdata
+
+.global lbl_804D5CC8
+lbl_804D5CC8:
+	.4byte 0x000000FF
+    .4byte NULL
 
 
 .section .sbss
@@ -865,3 +969,11 @@ lbl_804D75F5:
 .global lbl_804D75F6
 lbl_804D75F6:
 	.skip 0x2
+
+
+.section .sdata2
+
+.global lbl_804DE418
+lbl_804DE418:
+	.4byte 0x406FE000
+	.4byte 0x00000000

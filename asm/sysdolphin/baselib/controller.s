@@ -14,7 +14,7 @@ func_803769FC:
 /* 80376A18 003735F8  3B C3 00 00 */	addi r30, r3, 0
 /* 80376A1C 003735FC  48 00 1C D5 */	bl func_803786F0
 /* 80376A20 00373600  38 61 00 2C */	addi r3, r1, 0x2c
-/* 80376A24 00373604  4B FD 6F DD */	bl func_8034DA00
+/* 80376A24 00373604  4B FD 6F DD */	bl PADRead
 /* 80376A28 00373608  2C 1E 00 00 */	cmpwi r30, 0
 /* 80376A2C 0037360C  41 82 00 5C */	beq lbl_80376A88
 /* 80376A30 00373610  88 01 00 36 */	lbz r0, 0x36(r1)
@@ -191,7 +191,7 @@ lbl_80376C90:
 lbl_80376CAC:
 /* 80376CAC 0037388C  28 03 00 00 */	cmplwi r3, 0
 /* 80376CB0 00373890  41 82 00 08 */	beq lbl_80376CB8
-/* 80376CB4 00373894  4B FD 69 35 */	bl func_8034D5E8
+/* 80376CB4 00373894  4B FD 69 35 */	bl PADReset
 lbl_80376CB8:
 /* 80376CB8 00373898  4B FD 1D B9 */	bl OSGetResetSwitchState
 /* 80376CBC 0037389C  2C 03 00 00 */	cmpwi r3, 0
@@ -1349,7 +1349,7 @@ lbl_80377D48:
 /* 80377D5C 0037493C  38 60 00 01 */	li r3, 1
 /* 80377D60 00374940  4B FF EF A5 */	bl func_80376D04
 /* 80377D64 00374944  3C 60 F0 00 */	lis r3, 0xf000
-/* 80377D68 00374948  4B FD 59 81 */	bl func_8034D6E8
+/* 80377D68 00374948  4B FD 59 81 */	bl PADRecalibrate
 /* 80377D6C 0037494C  38 00 00 00 */	li r0, 0
 /* 80377D70 00374950  98 1F 00 2B */	stb r0, 0x2b(r31)
 /* 80377D74 00374954  7F C3 F3 78 */	mr r3, r30
@@ -1561,7 +1561,7 @@ lbl_8037805C:
 /* 8037806C 00374C4C  42 00 FF F0 */	bdnz lbl_8037805C
 /* 80378070 00374C50  80 04 00 08 */	lwz r0, 8(r4)
 /* 80378074 00374C54  90 05 00 08 */	stw r0, 8(r5)
-/* 80378078 00374C58  4B FD 57 75 */	bl func_8034D7EC
+/* 80378078 00374C58  4B FD 57 75 */	bl PADInit
 /* 8037807C 00374C5C  80 01 00 7C */	lwz r0, 0x7c(r1)
 /* 80378080 00374C60  83 E1 00 74 */	lwz r31, 0x74(r1)
 /* 80378084 00374C64  38 21 00 78 */	addi r1, r1, 0x78
@@ -1579,6 +1579,44 @@ lbl_803B9570:
     .4byte 0x10000000
 
 
+.section .data
+
+.global lbl_80406D68
+lbl_80406D68:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x01000000
+.global lbl_80406DAC
+lbl_80406DAC:
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x0000002D
+    .4byte 0x00000008
+    .4byte 0x001E0000
+    .4byte NULL
+    .4byte 0x00007F00
+    .4byte 0x00FF0000
+    .4byte 0xFF007FFF
+    .4byte 0xFF000000
+    .4byte NULL
+    .4byte NULL
+
+
 .section .bss, "wa"
 
 .global HSD_PadLibData
@@ -1593,3 +1631,63 @@ HSD_PadCopyStatus:
 .global HSD_PadRumbleData
 HSD_PadRumbleData:
 	.skip 0x114
+
+
+.section .sdata2
+
+.global lbl_804DE5B0
+lbl_804DE5B0:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE5B8
+lbl_804DE5B8:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE5C0
+lbl_804DE5C0:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DE5C8
+lbl_804DE5C8:
+	.4byte 0x2EDBE6FF
+	.4byte 0x00000000
+.global lbl_804DE5D0
+lbl_804DE5D0:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DE5D8
+lbl_804DE5D8:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE5E0
+lbl_804DE5E0:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804DE5E8
+lbl_804DE5E8:
+	.4byte 0xBFF921FB
+	.4byte 0x54442D18
+.global lbl_804DE5F0
+lbl_804DE5F0:
+	.4byte 0x3F000000
+	.4byte 0x00000000
+.global lbl_804DE5F8
+lbl_804DE5F8:
+	.4byte 0xC002D97C
+	.4byte 0x7F3321D2
+.global lbl_804DE600
+lbl_804DE600:
+	.4byte 0xBFE921FB
+	.4byte 0x54442D18
+.global lbl_804DE608
+lbl_804DE608:
+	.4byte 0x3FE921FB
+	.4byte 0x54442D18
+.global lbl_804DE610
+lbl_804DE610:
+	.4byte 0x4002D97C
+	.4byte 0x7F3321D2
+.global lbl_804DE618
+lbl_804DE618:
+	.4byte 0x43300000
+	.4byte 0x00000000

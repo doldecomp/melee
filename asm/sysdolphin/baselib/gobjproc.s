@@ -352,3 +352,21 @@ lbl_8038FF40:
 /* 8038FF50 0038CB30  38 21 00 28 */	addi r1, r1, 0x28
 /* 8038FF54 0038CB34  7C 08 03 A6 */	mtlr r0
 /* 8038FF58 0038CB38  4E 80 00 20 */	blr 
+
+
+.section .data
+
+.global lbl_80408480
+lbl_80408480:
+    .asciz "gobjproc.c"
+    .balign 4
+    .asciz "pri <= HSD_GObjLibInitData.gproc_pri_max"
+    .balign 4
+
+
+.section .sdata
+
+.global lbl_804D6060
+lbl_804D6060:
+    .asciz "gproc"
+    .balign 4

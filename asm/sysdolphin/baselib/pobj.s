@@ -2,49 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global HSD_PObjRemoveAnimAllByFlags
-HSD_PObjRemoveAnimAllByFlags:
-/* 8036B8E8 003684C8  7C 08 02 A6 */	mflr r0
-/* 8036B8EC 003684CC  28 03 00 00 */	cmplwi r3, 0
-/* 8036B8F0 003684D0  90 01 00 04 */	stw r0, 4(r1)
-/* 8036B8F4 003684D4  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8036B8F8 003684D8  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8036B8FC 003684DC  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8036B900 003684E0  93 A1 00 14 */	stw r29, 0x14(r1)
-/* 8036B904 003684E4  93 81 00 10 */	stw r28, 0x10(r1)
-/* 8036B908 003684E8  41 82 00 50 */	beq lbl_8036B958
-/* 8036B90C 003684EC  3B 83 00 00 */	addi r28, r3, 0
-/* 8036B910 003684F0  54 9D 07 38 */	rlwinm r29, r4, 0, 0x1c, 0x1c
-/* 8036B914 003684F4  3B E0 00 00 */	li r31, 0
-/* 8036B918 003684F8  48 00 00 38 */	b lbl_8036B950
-lbl_8036B91C:
-/* 8036B91C 003684FC  28 1C 00 00 */	cmplwi r28, 0
-/* 8036B920 00368500  41 82 00 2C */	beq lbl_8036B94C
-/* 8036B924 00368504  28 1D 00 00 */	cmplwi r29, 0
-/* 8036B928 00368508  41 82 00 24 */	beq lbl_8036B94C
-/* 8036B92C 0036850C  A0 1C 00 0C */	lhz r0, 0xc(r28)
-/* 8036B930 00368510  54 00 04 A6 */	rlwinm r0, r0, 0, 0x12, 0x13
-/* 8036B934 00368514  2C 00 10 00 */	cmpwi r0, 0x1000
-/* 8036B938 00368518  40 82 00 14 */	bne lbl_8036B94C
-/* 8036B93C 0036851C  83 DC 00 14 */	lwz r30, 0x14(r28)
-/* 8036B940 00368520  80 7E 00 20 */	lwz r3, 0x20(r30)
-/* 8036B944 00368524  4B FF 8B 89 */	bl HSD_AObjRemove
-/* 8036B948 00368528  93 FE 00 20 */	stw r31, 0x20(r30)
-lbl_8036B94C:
-/* 8036B94C 0036852C  83 9C 00 04 */	lwz r28, 4(r28)
-lbl_8036B950:
-/* 8036B950 00368530  28 1C 00 00 */	cmplwi r28, 0
-/* 8036B954 00368534  40 82 FF C8 */	bne lbl_8036B91C
-lbl_8036B958:
-/* 8036B958 00368538  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8036B95C 0036853C  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8036B960 00368540  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 8036B964 00368544  83 A1 00 14 */	lwz r29, 0x14(r1)
-/* 8036B968 00368548  83 81 00 10 */	lwz r28, 0x10(r1)
-/* 8036B96C 0036854C  38 21 00 20 */	addi r1, r1, 0x20
-/* 8036B970 00368550  7C 08 03 A6 */	mtlr r0
-/* 8036B974 00368554  4E 80 00 20 */	blr 
-
 .global HSD_PObjAddAnimAll
 HSD_PObjAddAnimAll:
 /* 8036B978 00368558  7C 08 02 A6 */	mflr r0
@@ -711,7 +668,7 @@ HSD_ClearVtxDesc:
 /* 8036C244 00368E24  7C 08 02 A6 */	mflr r0
 /* 8036C248 00368E28  90 01 00 04 */	stw r0, 4(r1)
 /* 8036C24C 00368E2C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8036C250 00368E30  4B FD 01 79 */	bl func_8033C3C8
+/* 8036C250 00368E30  4B FD 01 79 */	bl GXClearVtxDesc
 /* 8036C254 00368E34  38 00 00 00 */	li r0, 0
 /* 8036C258 00368E38  90 0D BF D4 */	stw r0, lbl_804D7674@sda21(r13)
 /* 8036C25C 00368E3C  90 0D BF D8 */	stw r0, lbl_804D7678@sda21(r13)
@@ -741,7 +698,7 @@ lbl_8036C29C:
 /* 8036C2AC 00368E8C  80 7F 00 00 */	lwz r3, 0(r31)
 /* 8036C2B0 00368E90  80 9F 00 14 */	lwz r4, 0x14(r31)
 /* 8036C2B4 00368E94  54 05 06 3E */	clrlwi r5, r0, 0x18
-/* 8036C2B8 00368E98  4B FD 05 55 */	bl func_8033C80C
+/* 8036C2B8 00368E98  4B FD 05 55 */	bl GXSetArray
 lbl_8036C2BC:
 /* 8036C2BC 00368E9C  3B FF 00 18 */	addi r31, r31, 0x18
 lbl_8036C2C0:
@@ -769,7 +726,7 @@ func_8036C2E8:
 /* 8036C304 00368EE4  80 1E 00 08 */	lwz r0, 8(r30)
 /* 8036C308 00368EE8  7C 03 00 40 */	cmplw r3, r0
 /* 8036C30C 00368EEC  41 82 00 60 */	beq lbl_8036C36C
-/* 8036C310 00368EF0  4B FD 00 B9 */	bl func_8033C3C8
+/* 8036C310 00368EF0  4B FD 00 B9 */	bl GXClearVtxDesc
 /* 8036C314 00368EF4  83 FE 00 08 */	lwz r31, 8(r30)
 /* 8036C318 00368EF8  48 00 00 40 */	b lbl_8036C358
 lbl_8036C31C:
@@ -828,7 +785,7 @@ lbl_8036C3C4:
 /* 8036C3C8 00368FA8  80 7F 00 00 */	lwz r3, 0(r31)
 /* 8036C3CC 00368FAC  80 9F 00 14 */	lwz r4, 0x14(r31)
 /* 8036C3D0 00368FB0  54 05 06 3E */	clrlwi r5, r0, 0x18
-/* 8036C3D4 00368FB4  4B FD 04 39 */	bl func_8033C80C
+/* 8036C3D4 00368FB4  4B FD 04 39 */	bl GXSetArray
 lbl_8036C3D8:
 /* 8036C3D8 00368FB8  3B FF 00 18 */	addi r31, r31, 0x18
 lbl_8036C3DC:
@@ -850,7 +807,7 @@ func_8036C404:
 /* 8036C40C 00368FEC  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8036C410 00368FF0  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8036C414 00368FF4  7C 7F 1B 78 */	mr r31, r3
-/* 8036C418 00368FF8  4B FC FF B1 */	bl func_8033C3C8
+/* 8036C418 00368FF8  4B FC FF B1 */	bl GXClearVtxDesc
 /* 8036C41C 00368FFC  83 FF 00 08 */	lwz r31, 8(r31)
 /* 8036C420 00369000  48 00 00 8C */	b lbl_8036C4AC
 lbl_8036C424:
@@ -3671,6 +3628,164 @@ func_8036EB88:
 /* 8036EC0C 0036B7EC  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406398
+lbl_80406398:
+    .4byte func_8036EB88
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global lbl_804063E0
+lbl_804063E0:
+    .asciz "pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.shape_set"
+    .balign 4
+.global lbl_80406418
+lbl_80406418:
+    .asciz "envelope"
+    .balign 4
+.global lbl_80406424
+lbl_80406424:
+    .asciz "shape_set"
+    .balign 4
+.global lbl_80406430
+lbl_80406430:
+    .asciz "pobj: unexected type.\n"
+    .balign 4
+.global lbl_80406448
+lbl_80406448:
+    .asciz "hsdIsDescendantOf(info, &hsdPObj)"
+    .balign 4
+    .asciz "env->jobj"
+    .balign 4
+    .asciz "object.h"
+    .balign 4
+    .asciz "HSD_OBJ(o)->ref_count_individual != 0"
+    .balign 4
+    .asciz "pobj->u.jobj"
+    .balign 4
+.global lbl_804064BC
+lbl_804064BC:
+    .asciz "shape_set->vertex_desc->comp_cnt == GX_POS_XYZ"
+    .balign 4
+.global lbl_804064EC
+lbl_804064EC:
+    .asciz "unexpected vertex type.\n"
+    .balign 4
+.global lbl_80406508
+lbl_80406508:
+    .asciz "shape_set->normal_desc->comp_cnt == GX_NRM_XYZ"
+    .balign 4
+.global lbl_80406538
+lbl_80406538:
+    .asciz "unexpected normal type."
+    .balign 4
+    .asciz "shape_set->normal_desc->attr == GX_VA_NBT"
+    .balign 4
+.global lbl_8040657C
+lbl_8040657C:
+    .asciz "attr(%d) is not supported by sysdolphin\n"
+    .balign 4
+.global lbl_804065A8
+lbl_804065A8:
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D580
+    .4byte lbl_8036D588
+    .4byte lbl_8036D5D0
+    .4byte lbl_8036D6C0
+    .4byte lbl_8036D6C0
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D694
+    .4byte lbl_8036D78C
+    .4byte lbl_8036D78C
+    .4byte lbl_8036D78C
+    .4byte lbl_8036D78C
+    .4byte lbl_8036D618
+    .4byte 0x76657274
+    .4byte 0x65785F62
+    .4byte 0x75666665
+    .4byte 0x725F7369
+    .4byte 0x7A65203E
+    .4byte 0x3D207368
+    .4byte 0x6170655F
+    .4byte 0x7365742D
+    .4byte 0x3E6E625F
+    .4byte 0x76657274
+    .4byte 0x65785F69
+    .4byte 0x6E646578
+    .4byte NULL
+    .4byte 0x6E6F726D
+    .4byte 0x616C5F62
+    .4byte 0x75666665
+    .4byte 0x725F7369
+    .4byte 0x7A65203E
+    .4byte 0x3D207368
+    .4byte 0x6170655F
+    .4byte 0x7365742D
+    .4byte 0x3E6E625F
+    .4byte 0x6E6F726D
+    .4byte 0x616C5F69
+    .4byte 0x6E646578
+    .4byte NULL
+    .4byte 0x6E6F726D
+    .4byte 0x616C5F62
+    .4byte 0x75666665
+    .4byte 0x725F7369
+    .4byte 0x7A65203E
+    .4byte 0x3D207368
+    .4byte 0x6170655F
+    .4byte 0x7365742D
+    .4byte 0x3E6E625F
+    .4byte 0x6E6F726D
+    .4byte 0x616C5F69
+    .4byte 0x6E646578
+    .4byte 0x202A2033
+    .4byte NULL
+    .4byte 0x656E7665
+    .4byte 0x6C6F7065
+    .4byte 0x2D3E6A6F
+    .4byte 0x626A0000
+    .4byte 0x6A702D3E
+    .4byte 0x656E7665
+    .4byte 0x6C6F7065
+    .4byte 0x6D747800
+.global lbl_804066D0
+lbl_804066D0:
+    .asciz "pobj->u.shape_set"
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "hsd_pobj"
+    .balign 4
+
+
 .section .bss, "wa"
 
 .skip 0x4
@@ -3678,6 +3793,39 @@ func_8036EB88:
 .global lbl_804C0908
 lbl_804C0908:
 	.skip 0x10
+
+
+.section .sdata
+
+.global lbl_804D5D68
+lbl_804D5D68:
+    .asciz "pobj.c"
+    .balign 4
+.global lbl_804D5D70
+lbl_804D5D70:
+    .asciz "pobj"
+    .balign 4
+.global lbl_804D5D78
+lbl_804D5D78:
+    .asciz "obj"
+    .balign 4
+.global lbl_804D5D7C
+lbl_804D5D7C:
+    .asciz "mark"
+    .balign 4
+.global lbl_804D5D84
+lbl_804D5D84:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D5D8C
+lbl_804D5D8C:
+    .asciz "jobj"
+    .balign 4
+.global lbl_804D5D94
+lbl_804D5D94:
+    .asciz "jp->mtx"
+    .balign 4
+    .4byte NULL
 
 
 .section .sbss
@@ -3703,3 +3851,31 @@ lbl_804D7674:
 .global lbl_804D7678
 lbl_804D7678:
 	.skip 0x8
+
+
+.section .sdata2
+
+.global lbl_804DE4F8
+lbl_804DE4F8:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE500
+lbl_804DE500:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DE508
+lbl_804DE508:
+	.4byte 0x43300000
+	.4byte 0x80000000
+.global lbl_804DE510
+lbl_804DE510:
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_804DE518
+lbl_804DE518:
+	.4byte 0x3FF00000
+	.4byte 0x00000000
+.global lbl_804DE520
+lbl_804DE520:
+	.4byte 0x3F800000
+	.4byte 0x00000000

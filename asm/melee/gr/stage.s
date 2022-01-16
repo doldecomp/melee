@@ -1267,3 +1267,52 @@ lbl_803E9960:
     .4byte 0x00000024
     .4byte NULL
     .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D49E8
+lbl_804D49E8:
+    .4byte 0x00000002
+    .4byte 0x00000000
+.global lbl_804D49F0
+lbl_804D49F0:
+    .4byte 0x0000000C
+.global lbl_804D49F4
+lbl_804D49F4:
+    .4byte 0x00000002
+.global lbl_804D49F8
+lbl_804D49F8:
+    .asciz "stage.c"
+    .balign 4
+.global lbl_804D4A00
+lbl_804D4A00:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
+.section .sdata2
+
+.global degrees_2_radians
+degrees_2_radians:
+	.4byte 0x3C8EFA35
+.global unk_one_half_const_804DBCD8
+unk_one_half_const_804DBCD8:
+	.4byte 0x3F000000
+.global unk_zero_const_804DBCD8
+unk_zero_const_804DBCD8:
+	.4byte 0x00000000
+.global lbl_804DBCDC
+lbl_804DBCDC:
+	.4byte 0xC1200000
+.global lbl_804DBCE0
+lbl_804DBCE0:
+	.4byte 0x41200000
+.global lbl_804DBCE4
+lbl_804DBCE4:
+	.4byte 0x42C80000
+.global lbl_804DBCE8
+lbl_804DBCE8:
+	.4byte 0xC2C80000
+	.4byte 0x00000000

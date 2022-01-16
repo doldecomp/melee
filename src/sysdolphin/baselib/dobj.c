@@ -3,19 +3,19 @@
 #include "sysdolphin/baselib/aobj.h"
 #include "sysdolphin/baselib/pobj.h"
 
-extern HSD_DObjInfo hsdDObj; // hsdDObj
+HSD_DObjInfo hsdDObj = { DObjInfoInit };
 
 static HSD_DObjInfo* default_class = NULL;
 
 static HSD_DObj* current_dobj = NULL;
 
-extern char* lbl_80405494; // "mobj has unexpected blending flags (0x%x)."
-extern char* lbl_804D5C78; // "dobj.c"
-extern char* lbl_804D5C80; // NULL
-extern char* lbl_804D5C84; // "dobj"
+static char lbl_804D5C78[7] = "dobj.c\0";
+static char lbl_804D5C80[1] = "\0";
+static char lbl_804D5C84[5] = "dobj\0";
 
-extern HSD_Class hsdClass;
-extern char* lbl_80405548;
+extern char lbl_80405494[]; // "mobj has unexpected blending flags (0x%x)."
+extern char lbl_80405548[]; // "sysdolphin_base_library"
+extern char lbl_80405560[]; // "hsd_dobj"
 
 void HSD_DObjSetCurrent(HSD_DObj* dobj)
 {
@@ -170,8 +170,6 @@ inline void HSD_DObjModifyFlags_inline(HSD_DObj* dobj, u32 flags, u32 mask)
     dobj->flags = dobj->flags & ~mask | flags & mask;
 }
 
-// Non-matching due to section of the strings
-#ifdef NON_MATCHING
 static int DObjLoad(HSD_DObj* dobj, HSD_DObjDesc* desc)
 {
     dobj->next = HSD_DObjLoadDesc(desc->next);
@@ -184,101 +182,19 @@ static int DObjLoad(HSD_DObj* dobj, HSD_DObjDesc* desc)
                 HSD_DObjModifyFlags_inline(dobj, 2, 0xE);
                 break;
             case 0x40000000:
-                HSD_DObjModifyFlags_inline(dobj, 4, 0xE);
-                break;
-            case 0x60000000:
                 HSD_DObjModifyFlags_inline(dobj, 8, 0xE);
                 break;
+            case 0x60000000:
+                HSD_DObjModifyFlags_inline(dobj, 4, 0xE);
+                break;
             default:
-                OSReport(lbl_80405494);
-                HSD_Panic(lbl_80405494, 312, lbl_804D5C80);
+                OSReport(lbl_80405494, dobj->mobj->rendermode);
+                HSD_Panic(lbl_804D5C78, 312, lbl_804D5C80);
         }
     }
     return 0;
 }
-#else
-asm int DObjLoad(HSD_DObj* dobj, HSD_DObjDesc* desc)
-{
-    nofralloc
-/* 8035E0A4 0035AC84  7C 08 02 A6 */	mflr r0
-/* 8035E0A8 0035AC88  90 01 00 04 */	stw r0, 4(r1)
-/* 8035E0AC 0035AC8C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8035E0B0 0035AC90  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8035E0B4 0035AC94  3B E4 00 00 */	addi r31, r4, 0
-/* 8035E0B8 0035AC98  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8035E0BC 0035AC9C  3B C3 00 00 */	addi r30, r3, 0
-/* 8035E0C0 0035ACA0  80 64 00 04 */	lwz r3, 4(r4)
-/* 8035E0C4 0035ACA4  48 00 00 F1 */	bl HSD_DObjLoadDesc
-/* 8035E0C8 0035ACA8  90 7E 00 04 */	stw r3, 4(r30)
-/* 8035E0CC 0035ACAC  80 7F 00 08 */	lwz r3, 8(r31)
-/* 8035E0D0 0035ACB0  48 00 51 15 */	bl HSD_MObjLoadDesc
-/* 8035E0D4 0035ACB4  90 7E 00 08 */	stw r3, 8(r30)
-/* 8035E0D8 0035ACB8  80 7F 00 0C */	lwz r3, 0xc(r31)
-/* 8035E0DC 0035ACBC  48 00 DD 89 */	bl HSD_PObjLoadDesc
-/* 8035E0E0 0035ACC0  90 7E 00 0C */	stw r3, 0xc(r30)
-/* 8035E0E4 0035ACC4  80 7E 00 08 */	lwz r3, 8(r30)
-/* 8035E0E8 0035ACC8  28 03 00 00 */	cmplwi r3, 0
-/* 8035E0EC 0035ACCC  41 82 00 AC */	beq lbl_8035E198
-/* 8035E0F0 0035ACD0  80 83 00 04 */	lwz r4, 4(r3)
-/* 8035E0F4 0035ACD4  3C 00 40 00 */	lis r0, 0x4000
-/* 8035E0F8 0035ACD8  54 83 00 44 */	rlwinm r3, r4, 0, 1, 2
-/* 8035E0FC 0035ACDC  7C 03 00 00 */	cmpw r3, r0
-/* 8035E100 0035ACE0  41 82 00 40 */	beq lbl_8035E140
-/* 8035E104 0035ACE4  40 80 00 10 */	bge lbl_8035E114
-/* 8035E108 0035ACE8  2C 03 00 00 */	cmpwi r3, 0
-/* 8035E10C 0035ACEC  41 82 00 18 */	beq lbl_8035E124
-/* 8035E110 0035ACF0  48 00 00 68 */	b lbl_8035E178
-lbl_8035E114:
-/* 8035E114 0035ACF4  3C 00 60 00 */	lis r0, 0x6000
-/* 8035E118 0035ACF8  7C 03 00 00 */	cmpw r3, r0
-/* 8035E11C 0035ACFC  41 82 00 40 */	beq lbl_8035E15C
-/* 8035E120 0035AD00  48 00 00 58 */	b lbl_8035E178
-lbl_8035E124:
-/* 8035E124 0035AD04  28 1E 00 00 */	cmplwi r30, 0
-/* 8035E128 0035AD08  41 82 00 70 */	beq lbl_8035E198
-/* 8035E12C 0035AD0C  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 8035E130 0035AD10  54 00 07 F6 */	rlwinm r0, r0, 0, 0x1f, 0x1b
-/* 8035E134 0035AD14  60 00 00 02 */	ori r0, r0, 2
-/* 8035E138 0035AD18  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 8035E13C 0035AD1C  48 00 00 5C */	b lbl_8035E198
-lbl_8035E140:
-/* 8035E140 0035AD20  28 1E 00 00 */	cmplwi r30, 0
-/* 8035E144 0035AD24  41 82 00 54 */	beq lbl_8035E198
-/* 8035E148 0035AD28  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 8035E14C 0035AD2C  54 00 07 F6 */	rlwinm r0, r0, 0, 0x1f, 0x1b
-/* 8035E150 0035AD30  60 00 00 08 */	ori r0, r0, 8
-/* 8035E154 0035AD34  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 8035E158 0035AD38  48 00 00 40 */	b lbl_8035E198
-lbl_8035E15C:
-/* 8035E15C 0035AD3C  28 1E 00 00 */	cmplwi r30, 0
-/* 8035E160 0035AD40  41 82 00 38 */	beq lbl_8035E198
-/* 8035E164 0035AD44  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 8035E168 0035AD48  54 00 07 F6 */	rlwinm r0, r0, 0, 0x1f, 0x1b
-/* 8035E16C 0035AD4C  60 00 00 04 */	ori r0, r0, 4
-/* 8035E170 0035AD50  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 8035E174 0035AD54  48 00 00 24 */	b lbl_8035E198
-lbl_8035E178:
-/* 8035E178 0035AD58  3C 60 80 40 */	lis r3, lbl_80405494@ha
-/* 8035E17C 0035AD5C  4C C6 31 82 */	crclr 6
-/* 8035E180 0035AD60  38 63 54 94 */	addi r3, r3, lbl_80405494@l
-/* 8035E184 0035AD64  4B FE 75 25 */	bl OSReport
-/* 8035E188 0035AD68  38 6D A5 D8 */	addi r3, r13, lbl_804D5C78
-/* 8035E18C 0035AD6C  38 80 01 38 */	li r4, 0x138
-/* 8035E190 0035AD70  38 AD A5 E0 */	addi r5, r13, lbl_804D5C80
-/* 8035E194 0035AD74  48 02 A0 E5 */	bl HSD_Panic
-lbl_8035E198:
-/* 8035E198 0035AD78  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8035E19C 0035AD7C  38 60 00 00 */	li r3, 0
-/* 8035E1A0 0035AD80  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8035E1A4 0035AD84  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8035E1A8 0035AD88  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035E1AC 0035AD8C  7C 08 03 A6 */	mtlr r0
-/* 8035E1B0 0035AD90  4E 80 00 20 */	blr 
-}
-#endif
 
-// Non-matching due to sections
-#ifdef NON_MATCHING
 HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
 {
     HSD_DObj* dobj;
@@ -298,58 +214,7 @@ HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
 
     return dobj;
 }
-#else
-asm HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc) 
-{
-    nofralloc
-/* 8035E1B4 0035AD94  7C 08 02 A6 */	mflr r0
-/* 8035E1B8 0035AD98  90 01 00 04 */	stw r0, 4(r1)
-/* 8035E1BC 0035AD9C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8035E1C0 0035ADA0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8035E1C4 0035ADA4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8035E1C8 0035ADA8  7C 7E 1B 79 */	or. r30, r3, r3
-/* 8035E1CC 0035ADAC  40 82 00 0C */	bne lbl_8035E1D8
-/* 8035E1D0 0035ADB0  38 60 00 00 */	li r3, 0
-/* 8035E1D4 0035ADB4  48 00 00 60 */	b lbl_8035E234
-lbl_8035E1D8:
-/* 8035E1D8 0035ADB8  80 7E 00 00 */	lwz r3, 0(r30)
-/* 8035E1DC 0035ADBC  28 03 00 00 */	cmplwi r3, 0
-/* 8035E1E0 0035ADC0  41 82 00 10 */	beq lbl_8035E1F0
-/* 8035E1E4 0035ADC4  48 02 46 31 */	bl hsdSearchClassInfo
-/* 8035E1E8 0035ADC8  28 03 00 00 */	cmplwi r3, 0
-/* 8035E1EC 0035ADCC  40 82 00 10 */	bne lbl_8035E1FC
-lbl_8035E1F0:
-/* 8035E1F0 0035ADD0  48 00 00 D1 */	bl HSD_DObjAlloc
-/* 8035E1F4 0035ADD4  7C 7F 1B 78 */	mr r31, r3
-/* 8035E1F8 0035ADD8  48 00 00 20 */	b lbl_8035E218
-lbl_8035E1FC:
-/* 8035E1FC 0035ADDC  48 02 41 49 */	bl hsdNew
-/* 8035E200 0035ADE0  7C 7F 1B 79 */	or. r31, r3, r3
-/* 8035E204 0035ADE4  40 82 00 14 */	bne lbl_8035E218
-/* 8035E208 0035ADE8  38 6D A5 D8 */	addi r3, r13, lbl_804D5C78
-/* 8035E20C 0035ADEC  38 80 01 7A */	li r4, 0x17a
-/* 8035E210 0035ADF0  38 AD A5 E4 */	addi r5, r13, lbl_804D5C84
-/* 8035E214 0035ADF4  48 02 A0 0D */	bl __assert
-lbl_8035E218:
-/* 8035E218 0035ADF8  80 BF 00 00 */	lwz r5, 0(r31)
-/* 8035E21C 0035ADFC  38 7F 00 00 */	addi r3, r31, 0
-/* 8035E220 0035AE00  38 9E 00 00 */	addi r4, r30, 0
-/* 8035E224 0035AE04  81 85 00 40 */	lwz r12, 0x40(r5)
-/* 8035E228 0035AE08  7D 88 03 A6 */	mtlr r12
-/* 8035E22C 0035AE0C  4E 80 00 21 */	blrl 
-/* 8035E230 0035AE10  7F E3 FB 78 */	mr r3, r31
-lbl_8035E234:
-/* 8035E234 0035AE14  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8035E238 0035AE18  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8035E23C 0035AE1C  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8035E240 0035AE20  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035E244 0035AE24  7C 08 03 A6 */	mtlr r0
-/* 8035E248 0035AE28  4E 80 00 20 */	blr 
-}
-#endif
 
-#pragma push
-#pragma peephole on
 inline void hsdDelete(void* object)
 {
     if (object == NULL)
@@ -373,14 +238,14 @@ void HSD_DObjRemoveAll(HSD_DObj* dobj)
         HSD_DObjRemove(dobj);
     }
 }
-#pragma pop
 
+// This really does match, Frank is just breaking it.
 #ifdef NON_MATCHING
 HSD_DObj* HSD_DObjAlloc(void)
 {
     HSD_DObj* dobj = (HSD_DObj*)hsdNew((HSD_ClassInfo*)(default_class ? default_class : &hsdDObj));
     if (dobj == NULL){
-        __assert(lbl_804D5C78, 0x20D, lbl_804D5C84);
+        __assert(lbl_804D5C78, 525, lbl_804D5C84);
     }
     return dobj;
 }
@@ -392,7 +257,7 @@ asm HSD_DObj* HSD_DObjAlloc(void)
 /* 8035E2C4 0035AEA4  90 01 00 04 */	stw r0, 4(r1)
 /* 8035E2C8 0035AEA8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8035E2CC 0035AEAC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8035E2D0 0035AEB0  80 6D BF 00 */	lwz r3, default_class(r13)
+/* 8035E2D0 0035AEB0  80 6D BF 00 */	lwz r3, default_class
 /* 8035E2D4 0035AEB4  28 03 00 00 */	cmplwi r3, 0
 /* 8035E2D8 0035AEB8  41 82 00 08 */	beq lbl_8035E2E0
 /* 8035E2DC 0035AEBC  48 00 00 0C */	b lbl_8035E2E8
@@ -474,7 +339,7 @@ static void DObjAmnesia(HSD_ClassInfo* info)
 #ifdef NON_MATCHING
 static void DObjInfoInit(void)
 {
-    hsdInitClassInfo(HSD_CLASS_INFO(&hsdDObj), HSD_CLASS_INFO(&hsdClass), lbl_80405548, "hsd_dobj", sizeof(HSD_DObjInfo), sizeof(HSD_DObj));
+    hsdInitClassInfo(HSD_CLASS_INFO(&hsdDObj), HSD_CLASS_INFO(&hsdClass), lbl_80405548, lbl_80405560, sizeof(HSD_DObjInfo), sizeof(HSD_DObj));
 
     HSD_PARENT_INFO(&hsdDObj)->release = DObjRelease;
     HSD_PARENT_INFO(&hsdDObj)->amnesia = DObjAmnesia;

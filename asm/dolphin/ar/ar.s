@@ -114,8 +114,8 @@ ARAlloc:
 /* 80350E20 0034DA00  38 21 00 18 */	addi r1, r1, 0x18
 /* 80350E24 0034DA04  4E 80 00 20 */	blr 
 
-.global func_80350E28
-func_80350E28:
+.global ARFree
+ARFree:
 /* 80350E28 0034DA08  7C 08 02 A6 */	mflr r0
 /* 80350E2C 0034DA0C  90 01 00 04 */	stw r0, 4(r1)
 /* 80350E30 0034DA10  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1257,3 +1257,17 @@ __AR_BlockLength:
 .global __AR_init_flag
 __AR_init_flag:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DE348
+lbl_804DE348:
+	.4byte 0x43440000
+.global lbl_804DE34C
+lbl_804DE34C:
+	.4byte 0x4D411E7A
+.global lbl_804DE350
+lbl_804DE350:
+	.4byte 0x43300000
+	.4byte 0x00000000

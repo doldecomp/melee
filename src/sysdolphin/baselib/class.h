@@ -3,6 +3,8 @@
 
 #include <global.h>
 
+#include <dolphin/types.h>
+
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*)o)
 #define HSD_CLASS_METHOD(o) (((HSD_Class*)o)->class_info)
 #define HSD_PARENT_INFO(o) ((o)->parent.head.parent)
@@ -48,6 +50,11 @@ typedef struct _HSD_MemoryEntry {
     struct _HSD_MemoryEntry* next;
 } HSD_MemoryEntry;
 
+extern HSD_ClassInfo hsdClass;
+
 //void hsdDelete(void* object);
+void ClassInfoInit(HSD_ClassInfo* info);
+void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, char* base_class_library, char* type, s32 info_size, s32 class_size);
+void OSReport_PrintSpaces(s32 count);
 
 #endif

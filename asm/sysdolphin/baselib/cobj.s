@@ -267,7 +267,7 @@ lbl_80367BC4:
 /* 80367BD8 003647B8  C0 85 00 4C */	lfs f4, 0x4c(r5)
 /* 80367BDC 003647BC  C0 A5 00 38 */	lfs f5, 0x38(r5)
 /* 80367BE0 003647C0  C0 C5 00 3C */	lfs f6, 0x3c(r5)
-/* 80367BE4 003647C4  4B FD AF 6D */	bl func_80342B50
+/* 80367BE4 003647C4  4B FD AF 6D */	bl C_MTXFrustum
 /* 80367BE8 003647C8  48 00 00 28 */	b lbl_80367C10
 lbl_80367BEC:
 /* 80367BEC 003647CC  C0 25 00 40 */	lfs f1, 0x40(r5)
@@ -430,7 +430,7 @@ lbl_80367E28:
 /* 80367E3C 00364A1C  C0 9E 00 4C */	lfs f4, 0x4c(r30)
 /* 80367E40 00364A20  C0 BE 00 38 */	lfs f5, 0x38(r30)
 /* 80367E44 00364A24  C0 DE 00 3C */	lfs f6, 0x3c(r30)
-/* 80367E48 00364A28  4B FD AD 09 */	bl func_80342B50
+/* 80367E48 00364A28  4B FD AD 09 */	bl C_MTXFrustum
 /* 80367E4C 00364A2C  48 00 00 28 */	b lbl_80367E74
 lbl_80367E50:
 /* 80367E50 00364A30  C0 3E 00 40 */	lfs f1, 0x40(r30)
@@ -577,7 +577,7 @@ lbl_80368018:
 /* 80368058 00364C38  EC 81 00 F2 */	fmuls f4, f1, f3
 /* 8036805C 00364C3C  EC 41 00 32 */	fmuls f2, f1, f0
 /* 80368060 00364C40  FC 60 20 50 */	fneg f3, f4
-/* 80368064 00364C44  4B FD AA ED */	bl func_80342B50
+/* 80368064 00364C44  4B FD AA ED */	bl C_MTXFrustum
 /* 80368068 00364C48  48 00 00 60 */	b lbl_803680C8
 lbl_8036806C:
 /* 8036806C 00364C4C  C0 3A 00 40 */	lfs f1, 0x40(r26)
@@ -590,7 +590,7 @@ lbl_8036806C:
 /* 80368088 00364C68  C0 BA 00 38 */	lfs f5, 0x38(r26)
 /* 8036808C 00364C6C  C0 DA 00 3C */	lfs f6, 0x3c(r26)
 /* 80368090 00364C70  EC 5F 08 3C */	fnmsubs f2, f31, f0, f1
-/* 80368094 00364C74  4B FD AA BD */	bl func_80342B50
+/* 80368094 00364C74  4B FD AA BD */	bl C_MTXFrustum
 /* 80368098 00364C78  48 00 00 30 */	b lbl_803680C8
 lbl_8036809C:
 /* 8036809C 00364C7C  C0 3A 00 40 */	lfs f1, 0x40(r26)
@@ -762,7 +762,7 @@ lbl_803682C0:
 /* 80368304 00364EE4  FC 40 18 50 */	fneg f2, f3
 /* 80368308 00364EE8  EC 23 00 32 */	fmuls f1, f3, f0
 /* 8036830C 00364EEC  FC 60 20 50 */	fneg f3, f4
-/* 80368310 00364EF0  4B FD A8 41 */	bl func_80342B50
+/* 80368310 00364EF0  4B FD A8 41 */	bl C_MTXFrustum
 /* 80368314 00364EF4  48 00 00 60 */	b lbl_80368374
 lbl_80368318:
 /* 80368318 00364EF8  C0 5E 00 44 */	lfs f2, 0x44(r30)
@@ -775,7 +775,7 @@ lbl_80368318:
 /* 80368334 00364F14  C0 BE 00 38 */	lfs f5, 0x38(r30)
 /* 80368338 00364F18  C0 DE 00 3C */	lfs f6, 0x3c(r30)
 /* 8036833C 00364F1C  EC 3D 10 3A */	fmadds f1, f29, f0, f2
-/* 80368340 00364F20  4B FD A8 11 */	bl func_80342B50
+/* 80368340 00364F20  4B FD A8 11 */	bl C_MTXFrustum
 /* 80368344 00364F24  48 00 00 30 */	b lbl_80368374
 lbl_80368348:
 /* 80368348 00364F28  C0 5E 00 44 */	lfs f2, 0x44(r30)
@@ -2923,8 +2923,8 @@ func_80369FF4:
 /* 8036A008 00366BE8  90 03 00 20 */	stw r0, 0x20(r3)
 /* 8036A00C 00366BEC  4E 80 00 20 */	blr 
 
-.global func_8036A010
-func_8036A010:
+.global HSD_CObjSetScissorx4
+HSD_CObjSetScissorx4:
 /* 8036A010 00366BF0  28 03 00 00 */	cmplwi r3, 0
 /* 8036A014 00366BF4  4D 82 00 20 */	beqlr 
 /* 8036A018 00366BF8  B0 83 00 1C */	sth r4, 0x1c(r3)
@@ -3000,8 +3000,8 @@ func_8036A0E4:
 /* 8036A108 00366CE8  90 03 00 18 */	stw r0, 0x18(r3)
 /* 8036A10C 00366CEC  4E 80 00 20 */	blr 
 
-.global func_8036A110
-func_8036A110:
+.global HSD_CObjSetViewportfx4
+HSD_CObjSetViewportfx4:
 /* 8036A110 00366CF0  28 03 00 00 */	cmplwi r3, 0
 /* 8036A114 00366CF4  4D 82 00 20 */	beqlr 
 /* 8036A118 00366CF8  D0 23 00 0C */	stfs f1, 0xc(r3)
@@ -3139,8 +3139,8 @@ func_8036A288:
 /* 8036A288 00366E68  80 6D BF BC */	lwz r3, lbl_804D765C@sda21(r13)
 /* 8036A28C 00366E6C  4E 80 00 20 */	blr 
 
-.global func_8036A290
-func_8036A290:
+.global HSD_CObjAlloc
+HSD_CObjAlloc:
 /* 8036A290 00366E70  7C 08 02 A6 */	mflr r0
 /* 8036A294 00366E74  90 01 00 04 */	stw r0, 4(r1)
 /* 8036A298 00366E78  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -3601,8 +3601,8 @@ func_8036A8BC:
 /* 8036A8D0 003674B0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8036A8D4 003674B4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8036A8D8 003674B8  3B E3 62 20 */	addi r31, r3, lbl_80406220@l
-/* 8036A8DC 003674BC  3C 60 80 40 */	lis r3, lbl_804072A8@ha
-/* 8036A8E0 003674C0  38 83 72 A8 */	addi r4, r3, lbl_804072A8@l
+/* 8036A8DC 003674BC  3C 60 80 40 */	lis r3, hsdObj@ha
+/* 8036A8E0 003674C0  38 83 72 A8 */	addi r4, r3, hsdObj@l
 /* 8036A8E4 003674C4  38 7F 00 00 */	addi r3, r31, 0
 /* 8036A8E8 003674C8  38 BF 01 08 */	addi r5, r31, 0x108
 /* 8036A8EC 003674CC  38 DF 01 20 */	addi r6, r31, 0x120
@@ -3626,6 +3626,105 @@ func_8036A8BC:
 /* 8036A934 00367514  4E 80 00 20 */	blr 
 
 
+.section .data
+
+.global lbl_80406220
+lbl_80406220:
+    .4byte func_8036A8BC
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+.global jtbl_80406260
+jtbl_80406260:
+	.4byte lbl_80367AA0
+	.4byte lbl_8036798C
+	.4byte lbl_803679B0
+	.4byte lbl_803679D4
+	.4byte lbl_80367AA0
+	.4byte lbl_803679F8
+	.4byte lbl_80367A1C
+	.4byte lbl_80367A40
+	.4byte lbl_80367AA0
+	.4byte lbl_80367A64
+	.4byte lbl_80367A74
+	.4byte lbl_80367A84
+	.4byte lbl_80367A94
+.global lbl_80406294
+lbl_80406294:
+    .asciz "unkown type of render pass.\n"
+    .balign 4
+.global lbl_804062B4
+lbl_804062B4:
+    .asciz "cobj->eyepos"
+    .balign 4
+.global lbl_804062C4
+lbl_804062C4:
+    .asciz "cobj->interest"
+    .balign 4
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte 0x68736449
+    .4byte 0x73446573
+    .4byte 0x63656E64
+    .4byte 0x616E744F
+    .4byte 0x6628696E
+    .4byte 0x666F2C20
+    .4byte 0x26687364
+    .4byte 0x434F626A
+    .4byte 0x29000000
+.global lbl_8040631C
+lbl_8040631C:
+    .4byte NULL
+    .4byte 0x3F800000
+    .4byte NULL
+    .4byte 0x73797364
+    .4byte 0x6F6C7068
+    .4byte 0x696E5F62
+    .4byte 0x6173655F
+    .4byte 0x6C696272
+    .4byte 0x61727900
+    .4byte 0x6873645F
+    .4byte 0x636F626A
+    .4byte NULL
+    .4byte NULL
+
+
+.section .sdata
+
+.global lbl_804D5D40
+lbl_804D5D40:
+    .asciz "cobj.c"
+    .balign 4
+.global lbl_804D5D48
+lbl_804D5D48:
+    .asciz "cobj"
+    .balign 4
+.global lbl_804D5D50
+lbl_804D5D50:
+    .asciz "0"
+    .balign 4
+    .4byte NULL
+
+
 .section .sbss
 
 .global lbl_804D7658
@@ -3634,3 +3733,65 @@ lbl_804D7658:
 .global lbl_804D765C
 lbl_804D765C:
 	.skip 0x4
+
+
+.section .sdata2
+
+.global lbl_804DE468
+lbl_804DE468:
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_804DE470
+lbl_804DE470:
+	.4byte 0x3F000000
+.global lbl_804DE474
+lbl_804DE474:
+	.4byte 0x3C8EFA35
+.global lbl_804DE478
+lbl_804DE478:
+	.4byte 0x00000000
+.global lbl_804DE47C
+lbl_804DE47C:
+	.4byte 0x3F800000
+.global lbl_804DE480
+lbl_804DE480:
+	.4byte 0x43300000
+	.4byte 0x00000000
+.global lbl_804DE488
+lbl_804DE488:
+	.4byte 0x3F91DF46
+	.4byte 0xA0000000
+.global lbl_804DE490
+lbl_804DE490:
+	.4byte 0x40000000
+.global lbl_804DE494
+lbl_804DE494:
+	.4byte 0xBF800000
+.global lbl_804DE498
+lbl_804DE498:
+	.4byte 0x00800000
+	.4byte 0x00000000
+.global lbl_804DE4A0
+lbl_804DE4A0:
+	.4byte 0x3FF921FB
+	.4byte 0x54442D18
+.global lbl_804DE4A8
+lbl_804DE4A8:
+	.4byte 0xBFF921FB
+	.4byte 0x54442D18
+.global lbl_804DE4B0
+lbl_804DE4B0:
+	.4byte 0x3FF00000
+	.4byte 0x00000000
+.global lbl_804DE4B8
+lbl_804DE4B8:
+	.4byte 0x3F1A36E2
+	.4byte 0xEB1C432D
+.global lbl_804DE4C0
+lbl_804DE4C0:
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_804DE4C8
+lbl_804DE4C8:
+	.4byte 0x43300000
+	.4byte 0x80000000
