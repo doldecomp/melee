@@ -2,6 +2,8 @@
 
 *A* ***WIP*** *decompilation of the* ***US*** *version.*
 
+<br>
+
 ---
 
 ## ⚠ Important
@@ -17,6 +19,8 @@
 **SHA** : `08e0bf20134dfcb260699671004527b2d6bb1a45`
 
 ---
+
+<br>
 
 ## Building
 
@@ -36,6 +40,8 @@
     pacman -S gcc
     ```
 
+<br>
+
 ### Instructions
 
 1. Download <kbd>**[GC_WII_COMPILERS.zip][GC]**</kbd>
@@ -48,7 +54,11 @@
     make
     ```
 
+<br>
+
 ---
+
+<br>
 
 ## Contributions
 
