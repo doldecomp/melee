@@ -111,7 +111,7 @@ typedef struct _StaticPlayer
 StaticPlayer* Player_GetPtrForSlot(s32 slot);
 void Player_80031790(s32 slot);
 void Player_80031848(s32 slot);
-void func_8008688C_all_players();
+void Player_80031900();
 BOOL Player_800319C4(s32 slot, BOOL arg1, s32 unused);
 void Player_80031AD0(s32 slot);
 void Player_80031CB0(s32 id, s32 slot);

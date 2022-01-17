@@ -237,7 +237,7 @@ void inline func_8008688C_wrapper(StaticPlayer* player)
         }
     }
 }
-void func_8008688C_all_players() {
+void Player_80031900() {
     s32 slot;
     for (slot = 0; slot < 6; slot++) {
         StaticPlayer* player = &lbl_80453080[slot];
@@ -246,7 +246,7 @@ void func_8008688C_all_players() {
     }
 }
 #else
-asm void func_8008688C_all_players(s32 slot) 
+asm void Player_80031900(s32 slot) 
 {
     nofralloc
 /* 80031900 0002E4E0  7C 08 02 A6 */	mflr r0
@@ -601,6 +601,17 @@ lbl_80031D14:
 }
 #endif
 
+
+#ifdef NON_MATCHING
+void Player_80031D2C(s32 id, s32 slot) {
+    if ( lbl_803BCDE0[id].x != -1) {
+        func_8008578C(lbl_803BCDE0[id].x, slot);
+    }
+    if ( lbl_803BCDE0[id].y != -1) {
+        func_8008578C(lbl_803BCDE0[id].y, slot);
+    }
+}
+#else
 asm void Player_80031D2C(s32 id, s32 slot)
 {
     nofralloc
@@ -638,6 +649,7 @@ lbl_80031D90:
 /* 80031DA0 0002E980  7C 08 03 A6 */	mtlr r0
 /* 80031DA4 0002E984  4E 80 00 20 */	blr 
 }
+#endif
 
 void Player_80031DA8(s32 param_1, s32 param_2)
 {
