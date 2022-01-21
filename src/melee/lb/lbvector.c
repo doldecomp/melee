@@ -134,7 +134,8 @@ float lbvector_AngleXY(Vec* a, Vec* b)
     return 0.0f;
 }
 
-// Taylor series approximations of sin and cos
+// Approximations of sine/cosine which are the best quintic approximations for the x range (-pi,pi). They can be derived by using the Gran-Schmidt Procedure,
+// which is described in the following paper: https://math.berkeley.edu/~arash/54/notes/6_4.pdf
 
 static float sin(float angle)
 {
