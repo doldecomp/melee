@@ -38,8 +38,6 @@
     pacman -S gcc
     ```
 
-<br>
-
 ### Instructions
 
 1. Download <kbd>**[GC_WII_COMPILERS.zip][GC]**</kbd>
@@ -52,11 +50,11 @@
     make
     ```
 
-<br>
-
 ---
 
 ## Contributions
+
+Pull Requests are welcome.
 
 [Contribution Guidelines](https://github.com/doldecomp/melee/blob/master/CONTRIBUTING.md)
 
