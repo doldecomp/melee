@@ -24,7 +24,7 @@ While not all code submitted at this time conforms to this standard, it is the i
 ## <a name="naming"></a>Naming
 - Avoid naming a function that you are not matching. If you have not matched to understand the functionality, don't expect that someone else did just because they named it.
 - Affix functions within Melee related code with the file's name. While asserts may indicate this was not the case for your function, this is to make the code easier to read.
-	- Use Lower Camel Casing for the function's name if it is made up of multiple words.
+	- Use Lower Camel Casing for the function's filename if it is made up of multiple words.
 	- Use Upper Camel Casing for the function's name itself, unless it is a standard library reimplementation.
 	- Examples:
 	
