@@ -1,9 +1,8 @@
 #include "melee/pl/player.h"
 
-
 #define NON_MATCHING 1
 
-extern StaticPlayer lbl_80453080[4];
+extern StaticPlayer player_slots[4];
 
 extern struct Unk_Struct {  //lbl_803BCDC0
     char some_str[8+4];  //"PdPm.dat"
@@ -13,10 +12,10 @@ extern struct Unk_Struct {  //lbl_803BCDC0
 
 // extern char* lbl_803BCDC0;   ///probably part of struct
 // extern S8Vec lbl_803BCDE0[];  ///probably part of struct
-extern char* lbl_803BCE44;
-extern char* lbl_803BCE60;
+extern char* lbl_803BCE44; //"cant get player struct! %d\n"
+extern char* lbl_803BCE60; //"player.c"
 
-extern char* lbl_804D3940;
+extern char* lbl_804D3940; //"0"
 
 extern void func_800D4F24();
 extern void func_80390228();
@@ -39,7 +38,7 @@ void inline Player_CheckSlot(s32 slot)
 StaticPlayer* Player_GetPtrForSlot(s32 slot)
 {
     Player_CheckSlot(slot);
-    return &lbl_80453080[slot];
+    return &player_slots[slot];
 }
 #else
 asm StaticPlayer* Player_GetPtrForSlot(s32 slot)
@@ -67,8 +66,8 @@ lbl_80031744:
 lbl_8003176C:
 /* 8003176C 0002E34C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
 /* 80031770 0002E350  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80031774 0002E354  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 80031778 0002E358  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+/* 80031774 0002E354  3C 60 80 45 */	lis r3, player_slots@ha
+/* 80031778 0002E358  38 03 30 80 */	addi r0, r3, player_slots@l
 /* 8003177C 0002E35C  7C 60 22 14 */	add r3, r0, r4
 /* 80031780 0002E360  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80031784 0002E364  38 21 00 18 */	addi r1, r1, 0x18
@@ -84,7 +83,7 @@ void Player_80031790(s32 slot) {
     int i;
 
     Player_CheckSlot(slot);
-    player = &lbl_80453080[slot];
+    player = &player_slots[slot];
 
     if ((player->slot_type == 0) || (player->slot_type == 1)) {
         for (i = 0; i < 2; i++) {  
@@ -123,8 +122,8 @@ lbl_800317B4:
 /* 800317D8 0002E3B8  48 35 6A 49 */	bl __assert
 lbl_800317DC:
 /* 800317DC 0002E3BC  1C 9E 0E 90 */	mulli r4, r30, 0xe90
-/* 800317E0 0002E3C0  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 800317E4 0002E3C4  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+/* 800317E0 0002E3C0  3C 60 80 45 */	lis r3, player_slots@ha
+/* 800317E4 0002E3C4  38 03 30 80 */	addi r0, r3, player_slots@l
 /* 800317E8 0002E3C8  7F E0 22 14 */	add r31, r0, r4
 /* 800317EC 0002E3CC  80 1F 00 08 */	lwz r0, 8(r31)
 /* 800317F0 0002E3D0  2C 00 00 00 */	cmpwi r0, 0
@@ -162,7 +161,7 @@ void Player_80031848(s32 slot) {
     int i;
 
     Player_CheckSlot(slot);
-    player = &lbl_80453080[slot];
+    player = &player_slots[slot];
 
     if ((player->slot_type == 0) || (player->slot_type == 1)) {
         for (i = 0; i < 2; i++) {  
@@ -201,8 +200,8 @@ lbl_8003186C:
 /* 80031890 0002E470  48 35 69 91 */	bl __assert
 lbl_80031894:
 /* 80031894 0002E474  1C 9E 0E 90 */	mulli r4, r30, 0xe90
-/* 80031898 0002E478  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 8003189C 0002E47C  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+/* 80031898 0002E478  3C 60 80 45 */	lis r3, player_slots@ha
+/* 8003189C 0002E47C  38 03 30 80 */	addi r0, r3, player_slots@l
 /* 800318A0 0002E480  7F E0 22 14 */	add r31, r0, r4
 /* 800318A4 0002E484  80 1F 00 08 */	lwz r0, 8(r31)
 /* 800318A8 0002E488  2C 00 00 00 */	cmpwi r0, 0
@@ -250,7 +249,7 @@ void inline func_8008688C_wrapper(StaticPlayer* player)
 void Player_80031900() {
     s32 slot;
     for (slot = 0; slot < 6; slot++) {
-        StaticPlayer* player = &lbl_80453080[slot];
+        StaticPlayer* player = &player_slots[slot];
         Player_CheckSlot(slot);
         func_8008688C_wrapper(player);
     }
@@ -260,12 +259,12 @@ asm void Player_80031900(s32 slot)
 {
     nofralloc
 /* 80031900 0002E4E0  7C 08 02 A6 */	mflr r0
-/* 80031904 0002E4E4  3C 60 80 45 */	lis r3, lbl_80453080@ha
+/* 80031904 0002E4E4  3C 60 80 45 */	lis r3, player_slots@ha
 /* 80031908 0002E4E8  90 01 00 04 */	stw r0, 4(r1)
 /* 8003190C 0002E4EC  3C 80 80 3C */	lis r4, lbl_803BCE44@ha
 /* 80031910 0002E4F0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80031914 0002E4F4  BF 61 00 0C */	stmw r27, 0xc(r1)
-/* 80031918 0002E4F8  3B 83 30 80 */	addi r28, r3, lbl_80453080@l
+/* 80031918 0002E4F8  3B 83 30 80 */	addi r28, r3, player_slots@l
 /* 8003191C 0002E4FC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
 /* 80031920 0002E500  3B C4 CE 44 */	addi r30, r4, lbl_803BCE44@l
 /* 80031924 0002E504  3B E3 CE 60 */	addi r31, r3, lbl_803BCE60@l
@@ -327,7 +326,7 @@ BOOL Player_800319C4(s32 slot, BOOL arg1) {
     StaticPlayer* player;
 
     Player_CheckSlot(slot);
-    player = (&lbl_80453080[slot]);
+    player = (&player_slots[slot]);
 
 
     if (arg1) {
@@ -375,8 +374,8 @@ lbl_800319EC:
 /* 80031A10 0002E5F0  48 35 68 11 */	bl __assert
 lbl_80031A14:
 /* 80031A14 0002E5F4  1C 9E 0E 90 */	mulli r4, r30, 0xe90
-/* 80031A18 0002E5F8  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 80031A1C 0002E5FC  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+/* 80031A18 0002E5F8  3C 60 80 45 */	lis r3, player_slots@ha
+/* 80031A1C 0002E5FC  38 03 30 80 */	addi r0, r3, player_slots@l
 /* 80031A20 0002E600  2C 1F 00 00 */	cmpwi r31, 0
 /* 80031A24 0002E604  7C 80 22 14 */	add r4, r0, r4
 /* 80031A28 0002E608  41 82 00 4C */	beq lbl_80031A74
@@ -454,8 +453,8 @@ lbl_80031AF8:
 /* 80031B14 0002E6F4  48 35 67 0D */	bl __assert
 lbl_80031B18:
 /* 80031B18 0002E6F8  1C 9C 0E 90 */	mulli r4, r28, 0xe90
-/* 80031B1C 0002E6FC  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 80031B20 0002E700  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+/* 80031B1C 0002E6FC  3C 60 80 45 */	lis r3, player_slots@ha
+/* 80031B20 0002E700  38 03 30 80 */	addi r0, r3, player_slots@l
 /* 80031B24 0002E704  7F C0 22 14 */	add r30, r0, r4
 /* 80031B28 0002E708  80 1E 00 04 */	lwz r0, 4(r30)
 /* 80031B2C 0002E70C  3B BF 00 21 */	addi r29, r31, 0x21
@@ -676,10 +675,10 @@ void func_80031DC8(void func_arg(s32, s32)) {
     for (slot = 0; slot < 6; slot++) {
         Player_CheckSlot(slot);
 
-        if (lbl_80453080[slot].player_state) {
-            func_arg(lbl_803BCDC0.var_arr[lbl_80453080[slot].player_character].x, 0);
-            if (checkNegOne(&lbl_803BCDC0.var_arr[lbl_80453080[slot].player_character].y)) {
-                func_arg(lbl_803BCDC0.var_arr[lbl_80453080[slot].player_character].y, 0);
+        if (player_slots[slot].player_state) {
+            func_arg(lbl_803BCDC0.var_arr[player_slots[slot].player_character].x, 0);
+            if (checkNegOne(&lbl_803BCDC0.var_arr[player_slots[slot].player_character].y)) {
+                func_arg(lbl_803BCDC0.var_arr[player_slots[slot].player_character].y, 0);
             }
         }
     }
@@ -689,12 +688,12 @@ asm void func_80031DC8()
 {
     nofralloc
     /* 80031DC8 0002E9A8  7C 08 02 A6 */	mflr r0
-    /* 80031DCC 0002E9AC  3C 80 80 45 */	lis r4, lbl_80453080@ha
+    /* 80031DCC 0002E9AC  3C 80 80 45 */	lis r4, player_slots@ha
     /* 80031DD0 0002E9B0  90 01 00 04 */	stw r0, 4(r1)
     /* 80031DD4 0002E9B4  94 21 FF E0 */	stwu r1, -0x20(r1)
     /* 80031DD8 0002E9B8  93 E1 00 1C */	stw r31, 0x1c(r1)
     /* 80031DDC 0002E9BC  93 C1 00 18 */	stw r30, 0x18(r1)
-    /* 80031DE0 0002E9C0  3B C4 30 80 */	addi r30, r4, lbl_80453080@l
+    /* 80031DE0 0002E9C0  3B C4 30 80 */	addi r30, r4, player_slots@l
     /* 80031DE4 0002E9C4  3C 80 80 3C */	lis r4, lbl_803BCDC0@ha
     /* 80031DE8 0002E9C8  93 A1 00 14 */	stw r29, 0x14(r1)
     /* 80031DEC 0002E9CC  3B E4 CD C0 */	addi r31, r4, lbl_803BCDC0@l
@@ -782,8 +781,8 @@ asm void func_80031EBC()
     /* 80031F08 0002EAE8  48 35 63 19 */	bl __assert
     lbl_80031F0C:
     /* 80031F0C 0002EAEC  1C 9D 0E 90 */	mulli r4, r29, 0xe90
-    /* 80031F10 0002EAF0  3C 60 80 45 */	lis r3, lbl_80453080@ha
-    /* 80031F14 0002EAF4  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+    /* 80031F10 0002EAF0  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80031F14 0002EAF4  38 03 30 80 */	addi r0, r3, player_slots@l
     /* 80031F18 0002EAF8  7F E0 22 14 */	add r31, r0, r4
     /* 80031F1C 0002EAFC  3B A0 00 00 */	li r29, 0
     lbl_80031F20:
@@ -855,8 +854,8 @@ asm void func_80031FB0()
     /* 80032000 0002EBE0  48 35 62 21 */	bl __assert
     lbl_80032004:
     /* 80032004 0002EBE4  1C 9D 0E 90 */	mulli r4, r29, 0xe90
-    /* 80032008 0002EBE8  3C 60 80 45 */	lis r3, lbl_80453080@ha
-    /* 8003200C 0002EBEC  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+    /* 80032008 0002EBE8  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 8003200C 0002EBEC  38 03 30 80 */	addi r0, r3, player_slots@l
     /* 80032010 0002EBF0  7F E0 22 14 */	add r31, r0, r4
     /* 80032014 0002EBF4  7C 7F F2 14 */	add r3, r31, r30
     /* 80032018 0002EBF8  88 03 00 0C */	lbz r0, 0xc(r3)
@@ -912,8 +911,8 @@ asm void func_80032070()
     /* 800320C0 0002ECA0  48 35 61 61 */	bl __assert
     lbl_800320C4:
     /* 800320C4 0002ECA4  1C 9E 0E 90 */	mulli r4, r30, 0xe90
-    /* 800320C8 0002ECA8  3C 60 80 45 */	lis r3, lbl_80453080@ha
-    /* 800320CC 0002ECAC  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+    /* 800320C8 0002ECA8  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 800320CC 0002ECAC  38 03 30 80 */	addi r0, r3, player_slots@l
     /* 800320D0 0002ECB0  2C 1F 00 00 */	cmpwi r31, 0
     /* 800320D4 0002ECB4  7F E0 22 14 */	add r31, r0, r4
     /* 800320D8 0002ECB8  40 82 00 78 */	bne lbl_80032150
@@ -995,8 +994,8 @@ asm void func_8003219C()
     /* 800321E0 0002EDC0  48 35 60 41 */	bl __assert
     lbl_800321E4:
     /* 800321E4 0002EDC4  1C 9F 0E 90 */	mulli r4, r31, 0xe90
-    /* 800321E8 0002EDC8  3C 60 80 45 */	lis r3, lbl_80453080@ha
-    /* 800321EC 0002EDCC  38 03 30 80 */	addi r0, r3, lbl_80453080@l
+    /* 800321E8 0002EDC8  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 800321EC 0002EDCC  38 03 30 80 */	addi r0, r3, player_slots@l
     /* 800321F0 0002EDD0  7C 60 22 14 */	add r3, r0, r4
     /* 800321F4 0002EDD4  88 03 00 0C */	lbz r0, 0xc(r3)
     /* 800321F8 0002EDD8  54 00 10 3A */	slwi r0, r0, 2
