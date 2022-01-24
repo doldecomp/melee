@@ -2,27 +2,28 @@
 
 #define NON_MATCHING 1
 
-extern StaticPlayer player_slots[4];
+extern StaticPlayer player_slots[6];  // used to be [4] but I think should be 6?
 
 extern struct Unk_Struct {  //lbl_803BCDC0
     char some_str[8+4];  //"PdPm.dat"
     char another_str[16+4]; 
-    S8Vec var_arr[30];  ///lbl_803BCDE0
+    S8Vec vec_arr[30];  ///lbl_803BCDE0
 } lbl_803BCDC0;
 
 // extern char* lbl_803BCDC0;   ///probably part of struct
 // extern S8Vec lbl_803BCDE0[];  ///probably part of struct
-extern char* lbl_803BCE44; //"cant get player struct! %d\n"
+
+extern char* lbl_803BCE44; //"cant get player struct! %d\n"  /// likely apart of lbl_803BCDC0 struct
 extern char* lbl_803BCE60; //"player.c"
 
 extern char* lbl_804D3940; //"0"
 
 extern void func_800D4F24();
 extern void func_80390228();
-extern void func_8008701C();
-extern void func_800873CC();
-extern void func_802F6E1C();
-extern void func_800D4FF4();
+extern s32 func_8008701C(HSD_GObj*);
+extern s32 func_800873CC();
+extern void func_802F6E1C(s32);
+extern void func_800D4FF4(HSD_GObj*);
 
 
 void inline Player_CheckSlot(s32 slot)
@@ -429,7 +430,7 @@ lbl_80031AB8:
 }
 #endif
 
-asm void Player_80031AD0(s32 slot)
+asm void Player_80031AD0(s32 slot) /// https://decomp.me/scratch/cW4md
 {
     nofralloc
 /* 80031AD0 0002E6B0  7C 08 02 A6 */	mflr r0
@@ -565,11 +566,11 @@ lbl_80031C9C:
 
 #ifdef NON_MATCHING
 void Player_80031CB0(s32 id, s32 slot) {
-    if ( lbl_803BCDC0.var_arr[id].x != -1) {
-        func_800855C8(lbl_803BCDC0.var_arr[id].x, slot);
+    if ( lbl_803BCDC0.vec_arr[id].x != -1) {
+        func_800855C8(lbl_803BCDC0.vec_arr[id].x, slot);
     }
-    if ( lbl_803BCDC0.var_arr[id].y != -1) {
-        func_800855C8(lbl_803BCDC0.var_arr[id].y, slot);
+    if ( lbl_803BCDC0.vec_arr[id].y != -1) {
+        func_800855C8(lbl_803BCDC0.vec_arr[id].y, slot);
     }
 }
 #else
@@ -615,11 +616,11 @@ lbl_80031D14:
 
 #ifdef NON_MATCHING
 void Player_80031D2C(s32 id, s32 slot) {
-    if ( lbl_803BCDC0.var_arr[id].x != -1) {
-        func_8008578C(lbl_803BCDC0.var_arr[id].x, slot);
+    if ( lbl_803BCDC0.vec_arr[id].x != -1) {
+        func_8008578C(lbl_803BCDC0.vec_arr[id].x, slot);
     }
-    if ( lbl_803BCDC0.var_arr[id].y != -1) {
-        func_8008578C(lbl_803BCDC0.var_arr[id].y, slot);
+    if ( lbl_803BCDC0.vec_arr[id].y != -1) {
+        func_8008578C(lbl_803BCDC0.vec_arr[id].y, slot);
     }
 }
 #else
@@ -670,21 +671,21 @@ void Player_80031DA8(s32 param_1, s32 param_2)
 #ifdef NON_MATCHING
 inline checkNegOne(s8* num) { return *num != -1; }
 
-void func_80031DC8(void func_arg(s32, s32)) {
+void Player_80031DC8(void func_arg(s32, s32)) {
     s32 slot;
     for (slot = 0; slot < 6; slot++) {
         Player_CheckSlot(slot);
 
         if (player_slots[slot].player_state) {
-            func_arg(lbl_803BCDC0.var_arr[player_slots[slot].player_character].x, 0);
-            if (checkNegOne(&lbl_803BCDC0.var_arr[player_slots[slot].player_character].y)) {
-                func_arg(lbl_803BCDC0.var_arr[player_slots[slot].player_character].y, 0);
+            func_arg(lbl_803BCDC0.vec_arr[player_slots[slot].player_character].x, 0);
+            if (checkNegOne(&lbl_803BCDC0.vec_arr[player_slots[slot].player_character].y)) {
+                func_arg(lbl_803BCDC0.vec_arr[player_slots[slot].player_character].y, 0);
             }
         }
     }
 }
 #else
-asm void func_80031DC8()
+asm void Player_80031DC8()
 {
     nofralloc
     /* 80031DC8 0002E9A8  7C 08 02 A6 */	mflr r0
@@ -755,7 +756,25 @@ asm void func_80031DC8()
 }
 #endif
 
-asm void func_80031EBC()
+#ifdef NON_MATCHING
+void Player_80031EBC(s32 slot) { ///https://decomp.me/scratch/XYDYq
+
+    s32 i;
+    Player_CheckSlot(slot);
+
+    for (i = 0; i < 2; i++) {
+        StaticPlayer*player = &player_slots[slot];
+        if ((player->player_entity[player->transformed[i]])) {
+            if (!func_8008701C(player->player_entity[player->transformed[i]])) {
+                func_800D4F24(player->player_entity[player->transformed[i]], 1);
+            }
+            func_80390228(player->player_entity[player->transformed[i]]);
+        }
+    }
+
+}
+#else
+asm void Player_80031EBC()
 {
     nofralloc
     /* 80031EBC 0002EA9C  7C 08 02 A6 */	mflr r0
@@ -825,9 +844,23 @@ asm void func_80031EBC()
     /* 80031FA8 0002EB88  7C 08 03 A6 */	mtlr r0
     /* 80031FAC 0002EB8C  4E 80 00 20 */	blr 
 }
+#endif
 
+#ifdef NON_MATCHING
+void Player_80031FB0(s32 slot, s32 entity_index) { //https://decomp.me/scratch/5EHKN
 
-asm void func_80031FB0()
+    s32 unused;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+
+    player = &player_slots[slot];
+    player->player_entity[player->transformed[entity_index]] = 0;
+    if (((player->flags >> 5) & 0x1) == 0 || (Player_800319C4(slot, 0) != 0)) {
+        player->player_state = 0;
+    }
+}
+#else
+asm void Player_80031FB0()
 {
     nofralloc
     /* 80031FB0 0002EB90  7C 08 02 A6 */	mflr r0
@@ -883,8 +916,34 @@ asm void func_80031FB0()
     /* 80032068 0002EC48  7C 08 03 A6 */	mtlr r0
     /* 8003206C 0002EC4C  4E 80 00 20 */	blr 
 }
+#endif
 
-asm void func_80032070()
+#ifdef NON_MATCHING
+void Player_80032070(s32 slot, BOOL bool_arg) {   ////https://decomp.me/scratch/SP7Sh
+    StaticPlayer* player;
+    struct Unk_Struct* unkStruct = &lbl_803BCDC0;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    
+    if (bool_arg == 0) {
+        func_800D4FF4(player->player_entity[player->transformed[0]]);
+        if(((player->flags >> 5) & 0x1) 
+                && unkStruct->vec_arr[player->player_character].z == 0 
+                && func_8008701C(player->player_entity[player->transformed[1]])) 
+        {
+            func_800D4FF4(player->player_entity[player->transformed[1]]);
+        }
+        func_802F6E1C(slot);
+        return;
+    }
+
+    if (func_800873CC(player->player_entity[player->transformed[0]])) {
+        func_800D4FF4(player->player_entity[player->transformed[1]]);
+    }
+}
+#else
+asm void Player_80032070()
 {
     nofralloc
     /* 80032070 0002EC50  7C 08 02 A6 */	mflr r0
@@ -968,9 +1027,18 @@ asm void func_80032070()
     /* 80032194 0002ED74  7C 08 03 A6 */	mtlr r0
     /* 80032198 0002ED78  4E 80 00 20 */	blr 
 }
+#endif
 
 
-asm void func_8003219C()
+#ifdef NON_MATCHING
+void Player_8003219C(s32 slot) {   ///https://decomp.me/scratch/q6dzH
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    func_8008701C(player->player_entity[player->transformed[0]]);
+}
+#else
+asm void Player_8003219C()
 {
     nofralloc
     /* 8003219C 0002ED7C  7C 08 02 A6 */	mflr r0
@@ -1009,4 +1077,4 @@ asm void func_8003219C()
     /* 80032218 0002EDF8  4E 80 00 20 */	blr 
 
 }
-
+#endif

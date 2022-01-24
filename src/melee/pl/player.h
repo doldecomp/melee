@@ -117,5 +117,10 @@ void Player_80031AD0(s32 slot);
 void Player_80031CB0(s32 id, s32 slot);
 void Player_80031D2C(s32 id, s32 slot);
 void Player_80031DA8(s32 param_1, s32 param_2);
+void Player_80031DC8(void func_arg(s32, s32));
+void Player_80031EBC(s32 slot);
+void Player_80031FB0(s32 slot, s32 entity_index);
+void Player_80032070(s32 slot, BOOL bool_arg);
+void Player_8003219C(s32 slot);
 
 #endif
