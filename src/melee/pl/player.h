@@ -122,7 +122,11 @@ void Player_80031EBC(s32 slot);
 void Player_80031FB0(s32 slot, s32 entity_index);
 void Player_80032070(s32 slot, BOOL bool_arg);
 void Player_8003219C(s32 slot);
-
+BOOL Player_8003221C(s32 slot);
 s32 Player_GetPlayerState(s32 slot);
+s32 Player_GetPlayerCharacter(s32 slot);
+void Player_SetPlayerCharacter(s32 slot, s32 value);
+s32 Player_GetPlayerSlotType(s32 slot);
+s32 Player_8003248C(s32 slot, BOOL arg1);
 
 #endif
