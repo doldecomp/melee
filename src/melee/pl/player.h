@@ -21,7 +21,7 @@ typedef struct _StaticPlayer
     /*0x1C-0x27*/ Vec transformed_player_pos; 
     /*0x28-0x33*/ Vec spawn_platform_final_pos; 
 
-    /*0x34*/ s32 unk34;
+    /*0x34*/ s32 unk34;  /// maybe this is another Vec?
     /*0x38*/ s32 unk38;
     /*0x3C*/ s32 unk3C;
 
@@ -128,5 +128,10 @@ s32 Player_GetPlayerCharacter(s32 slot);
 void Player_SetPlayerCharacter(s32 slot, s32 value);
 s32 Player_GetPlayerSlotType(s32 slot);
 s32 Player_8003248C(s32 slot, BOOL arg1);
+void Player_SetSlottype(s32 slot, s32 value);
+s8 Player_800325C8(s32 slot, BOOL b);
+s8 Player_80032610(s32 slot, BOOL arg1);
+void Player_800326CC(s32 slot, Vec* arg_vec);
+void Player_80032768(s32 slot, Vec* arg_vec);
 
 #endif
