@@ -4,13 +4,19 @@
 
 extern StaticPlayer player_slots[6];  // used to be [4] but I think should be 6?  ///lbl_80453080
 
-extern struct Unk_Struct {  //lbl_803BCDC0
+struct Unk_Struct_w_Array {
     char some_str[8+4];  //"PdPm.dat"
     char another_str[16+4]; 
     S8Vec vec_arr[30];  ///lbl_803BCDE0
+};
+
+extern struct Unk_Struct {  //lbl_803BCDC0
+    char some_str[8+4];  //"PdPm.dat"
+    char another_str[16+4]; 
+    //S8Vec vec_arr[30];  ///lbl_803BCDE0
 } lbl_803BCDC0;
 
-extern S8Vec lbl_803BCDE0[];
+extern S8Vec lbl_803BCDE0[]; ///lbl_803BCDE0
 
 extern char* lbl_803BCE44; //"cant get player struct! %d\n"  /// likely apart of lbl_803BCDC0 struct
 extern char* lbl_803BCE60; //"player.c"
@@ -565,11 +571,11 @@ lbl_80031C9C:
 
 #ifdef NON_MATCHING
 void Player_80031CB0(s32 id, s32 slot) {
-    if ( lbl_803BCDC0.vec_arr[id].x != -1) {
-        func_800855C8(lbl_803BCDC0.vec_arr[id].x, slot);
+    if (lbl_803BCDE0[id].x != -1) {
+        func_800855C8(lbl_803BCDE0[id].x, slot);
     }
-    if ( lbl_803BCDC0.vec_arr[id].y != -1) {
-        func_800855C8(lbl_803BCDC0.vec_arr[id].y, slot);
+    if (lbl_803BCDE0[id].y != -1) {
+        func_800855C8(lbl_803BCDE0[id].y, slot);
     }
 }
 #else
@@ -615,11 +621,11 @@ lbl_80031D14:
 
 #ifdef NON_MATCHING
 void Player_80031D2C(s32 id, s32 slot) {
-    if ( lbl_803BCDC0.vec_arr[id].x != -1) {
-        func_8008578C(lbl_803BCDC0.vec_arr[id].x, slot);
+    if (lbl_803BCDE0[id].x != -1) {
+        func_8008578C(lbl_803BCDE0[id].x, slot);
     }
-    if ( lbl_803BCDC0.vec_arr[id].y != -1) {
-        func_8008578C(lbl_803BCDC0.vec_arr[id].y, slot);
+    if (lbl_803BCDE0[id].y != -1) {
+        func_8008578C(lbl_803BCDE0[id].y, slot);
     }
 }
 #else
@@ -670,15 +676,15 @@ void Player_80031DA8(s32 param_1, s32 param_2)
 #ifdef NON_MATCHING
 inline checkNegOne(s8* num) { return *num != -1; }
 
-void Player_80031DC8(void func_arg(s32, s32)) {
+void Player_80031DC8(void func_arg(s32, s32)) {   ////https://decomp.me/scratch/Iq3tA
     s32 slot;
     for (slot = 0; slot < 6; slot++) {
         Player_CheckSlot(slot);
 
         if (player_slots[slot].player_state) {
-            func_arg(lbl_803BCDC0.vec_arr[player_slots[slot].player_character].x, 0);
-            if (checkNegOne(&lbl_803BCDC0.vec_arr[player_slots[slot].player_character].y)) {
-                func_arg(lbl_803BCDC0.vec_arr[player_slots[slot].player_character].y, 0);
+            func_arg(((struct Unk_Struct_w_Array*) &lbl_803BCDC0)->vec_arr[player_slots[slot].player_character].x, 0);
+            if (checkNegOne(&((struct Unk_Struct_w_Array*) &lbl_803BCDC0)->vec_arr[player_slots[slot].player_character].y)) {
+                func_arg(((struct Unk_Struct_w_Array*) &lbl_803BCDC0)->vec_arr[player_slots[slot].player_character].y, 0);
             }
         }
     }
@@ -918,9 +924,9 @@ asm void Player_80031FB0()
 #endif
 
 #ifdef NON_MATCHING
-void Player_80032070(s32 slot, BOOL bool_arg) {   ////https://decomp.me/scratch/SP7Sh
+void Player_80032070(s32 slot, BOOL bool_arg) {   ////https://decomp.me/scratch/HuE3T
     StaticPlayer* player;
-    struct Unk_Struct* unkStruct = &lbl_803BCDC0;
+    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
@@ -1335,7 +1341,7 @@ asm s32 Player_GetPlayerSlotType(s32 slot) {
 s32 Player_8003248C(s32 slot, BOOL arg1) {   //https://decomp.me/scratch/3yC1W
     
     s32 slot_type;
-    struct Unk_Struct* unk_struct = &lbl_803BCDC0;
+    struct Unk_Struct_w_Array* unk_struct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
     StaticPlayer* player;
  
     Player_CheckSlot(slot);
@@ -1505,11 +1511,10 @@ asm s8 Player_800325C8(s32 slot, BOOL b)
 #ifdef NON_MATCHING
 s8 Player_80032610(s32 slot, BOOL arg1) {  ////https://decomp.me/scratch/pHTx2
 
-    struct Unk_Struct* some_struct;
+    struct Unk_Struct_w_Array* some_struct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
     StaticPlayer* player;
     s32 error_value = -1;
 
-    some_struct = &lbl_803BCDC0;
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
