@@ -1102,7 +1102,7 @@ BOOL Player_8003221C(s32 slot) {    //// https://decomp.me/scratch/jpxOM
     return 0;
 }
 #else
-asm void Player_8003219C()
+asm BOOL Player_8003221C(s32 slot)
 {
     nofralloc
     /* 8003221C 0002EDFC  7C 08 02 A6 */	mflr r0
@@ -1118,20 +1118,20 @@ asm void Player_8003219C()
     /* 80032244 0002EE24  2C 1F 00 06 */	cmpwi r31, 6
     /* 80032248 0002EE28  41 80 00 2C */	blt lbl_80032274
     lbl_8003224C:
-    /* 8003224C 0002EE2C  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 8003224C 0002EE2C  3C 60 80 3C */	lis r3, lbl_803BCE44
     /* 80032250 0002EE30  4C C6 31 82 */	crclr 6
-    /* 80032254 0002EE34  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032254 0002EE34  38 63 CE 44 */	addi r3, r3, lbl_803BCE44
     /* 80032258 0002EE38  38 9F 00 00 */	addi r4, r31, 0
     /* 8003225C 0002EE3C  48 31 34 4D */	bl OSReport
-    /* 80032260 0002EE40  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
-    /* 80032264 0002EE44  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032260 0002EE40  3C 60 80 3C */	lis r3, lbl_803BCE60
+    /* 80032264 0002EE44  38 63 CE 60 */	addi r3, r3, lbl_803BCE60
     /* 80032268 0002EE48  38 80 00 66 */	li r4, 0x66
-    /* 8003226C 0002EE4C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003226C 0002EE4C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80032270 0002EE50  48 35 5F B1 */	bl __assert
     lbl_80032274:
     /* 80032274 0002EE54  1C 9F 0E 90 */	mulli r4, r31, 0xe90
-    /* 80032278 0002EE58  3C 60 80 45 */	lis r3, player_slots@ha
-    /* 8003227C 0002EE5C  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80032278 0002EE58  3C 60 80 45 */	lis r3, player_slots
+    /* 8003227C 0002EE5C  38 03 30 80 */	addi r0, r3, player_slots
     /* 80032280 0002EE60  7C 60 22 14 */	add r3, r0, r4
     /* 80032284 0002EE64  88 03 00 0C */	lbz r0, 0xc(r3)
     /* 80032288 0002EE68  54 00 10 3A */	slwi r0, r0, 2
@@ -1164,7 +1164,7 @@ s32 Player_GetPlayerState(s32 slot) {  //https://decomp.me/scratch/495kO
     return state;
 }
 #else
-asm void Player_GetPlayerState(s32 slot)
+asm s32 Player_GetPlayerState(s32 slot)
 {
     nofralloc
     /* 800322C0 0002EEA0  7C 08 02 A6 */	mflr r0
@@ -1176,20 +1176,20 @@ asm void Player_GetPlayerState(s32 slot)
     /* 800322D8 0002EEB8  2C 1F 00 06 */	cmpwi r31, 6
     /* 800322DC 0002EEBC  41 80 00 2C */	blt lbl_80032308
     lbl_800322E0:
-    /* 800322E0 0002EEC0  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 800322E0 0002EEC0  3C 60 80 3C */	lis r3, lbl_803BCE44
     /* 800322E4 0002EEC4  4C C6 31 82 */	crclr 6
-    /* 800322E8 0002EEC8  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 800322E8 0002EEC8  38 63 CE 44 */	addi r3, r3, lbl_803BCE44
     /* 800322EC 0002EECC  38 9F 00 00 */	addi r4, r31, 0
     /* 800322F0 0002EED0  48 31 33 B9 */	bl OSReport
-    /* 800322F4 0002EED4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
-    /* 800322F8 0002EED8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 800322F4 0002EED4  3C 60 80 3C */	lis r3, lbl_803BCE60
+    /* 800322F8 0002EED8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60
     /* 800322FC 0002EEDC  38 80 00 66 */	li r4, 0x66
-    /* 80032300 0002EEE0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032300 0002EEE0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80032304 0002EEE4  48 35 5F 1D */	bl __assert
     lbl_80032308:
     /* 80032308 0002EEE8  1C 9F 0E 90 */	mulli r4, r31, 0xe90
-    /* 8003230C 0002EEEC  3C 60 80 45 */	lis r3, player_slots@ha
-    /* 80032310 0002EEF0  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 8003230C 0002EEEC  3C 60 80 45 */	lis r3, player_slots
+    /* 80032310 0002EEF0  38 03 30 80 */	addi r0, r3, player_slots
     /* 80032314 0002EEF4  7C 60 22 14 */	add r3, r0, r4
     /* 80032318 0002EEF8  80 63 00 00 */	lwz r3, 0(r3)
     /* 8003231C 0002EEFC  80 01 00 24 */	lwz r0, 0x24(r1)
@@ -1221,20 +1221,20 @@ asm s32 Player_GetPlayerCharacter(s32 slot)
     /* 80032348 0002EF28  2C 1F 00 06 */	cmpwi r31, 6
     /* 8003234C 0002EF2C  41 80 00 2C */	blt lbl_80032378
     lbl_80032350:
-    /* 80032350 0002EF30  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032350 0002EF30  3C 60 80 3C */	lis r3, lbl_803BCE44
     /* 80032354 0002EF34  4C C6 31 82 */	crclr 6
-    /* 80032358 0002EF38  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032358 0002EF38  38 63 CE 44 */	addi r3, r3, lbl_803BCE44
     /* 8003235C 0002EF3C  38 9F 00 00 */	addi r4, r31, 0
     /* 80032360 0002EF40  48 31 33 49 */	bl OSReport
-    /* 80032364 0002EF44  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
-    /* 80032368 0002EF48  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032364 0002EF44  3C 60 80 3C */	lis r3, lbl_803BCE60
+    /* 80032368 0002EF48  38 63 CE 60 */	addi r3, r3, lbl_803BCE60
     /* 8003236C 0002EF4C  38 80 00 66 */	li r4, 0x66
-    /* 80032370 0002EF50  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032370 0002EF50  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80032374 0002EF54  48 35 5E AD */	bl __assert
     lbl_80032378:
     /* 80032378 0002EF58  1C 9F 0E 90 */	mulli r4, r31, 0xe90
-    /* 8003237C 0002EF5C  3C 60 80 45 */	lis r3, player_slots@ha
-    /* 80032380 0002EF60  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 8003237C 0002EF5C  3C 60 80 45 */	lis r3, player_slots
+    /* 80032380 0002EF60  38 03 30 80 */	addi r0, r3, player_slots
     /* 80032384 0002EF64  7C 60 22 14 */	add r3, r0, r4
     /* 80032388 0002EF68  80 63 00 04 */	lwz r3, 4(r3)
     /* 8003238C 0002EF6C  80 01 00 24 */	lwz r0, 0x24(r1)
@@ -1275,7 +1275,7 @@ asm void Player_SetPlayerCharacter(s32 slot, s32 value)
     /* 800323DC 0002EFBC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800323E0 0002EFC0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800323E4 0002EFC4  38 80 00 66 */	li r4, 0x66
-    /* 800323E8 0002EFC8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800323E8 0002EFC8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800323EC 0002EFCC  48 35 5E 35 */	bl __assert
     lbl_800323F0:
     /* 800323F0 0002EFD0  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -1321,7 +1321,7 @@ asm s32 Player_GetPlayerSlotType(s32 slot) {
     /* 80032450 0002F030  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80032454 0002F034  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80032458 0002F038  38 80 00 66 */	li r4, 0x66
-    /* 8003245C 0002F03C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003245C 0002F03C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80032460 0002F040  48 35 5D C1 */	bl __assert
     lbl_80032464:
     /* 80032464 0002F044  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -1384,7 +1384,7 @@ asm s32 Player_8003248C(s32 slot, BOOL arg1)
     /* 800324CC 0002F0AC  48 31 31 DD */	bl OSReport
     /* 800324D0 0002F0B0  38 7F 00 A0 */	addi r3, r31, 0xa0
     /* 800324D4 0002F0B4  38 80 00 66 */	li r4, 0x66
-    /* 800324D8 0002F0B8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800324D8 0002F0B8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800324DC 0002F0BC  48 35 5D 45 */	bl __assert
     lbl_800324E0:
     /* 800324E0 0002F0C0  1C 9D 0E 90 */	mulli r4, r29, 0xe90
@@ -1450,7 +1450,7 @@ asm void Player_SetSlottype(s32 slot, s32 value)
     /* 80032588 0002F168  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003258C 0002F16C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80032590 0002F170  38 80 00 66 */	li r4, 0x66
-    /* 80032594 0002F174  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032594 0002F174  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80032598 0002F178  48 35 5C 89 */	bl __assert
     lbl_8003259C:
     /* 8003259C 0002F17C  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -1552,7 +1552,7 @@ asm s8 Player_80032610(s32 slot, BOOL arg1)
     /* 80032650 0002F230  48 31 30 59 */	bl OSReport
     /* 80032654 0002F234  38 7F 00 A0 */	addi r3, r31, 0xa0
     /* 80032658 0002F238  38 80 00 66 */	li r4, 0x66
-    /* 8003265C 0002F23C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003265C 0002F23C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80032660 0002F240  48 35 5B C1 */	bl __assert
     lbl_80032664:
     /* 80032664 0002F244  1C 9D 0E 90 */	mulli r4, r29, 0xe90
@@ -1622,7 +1622,7 @@ asm void Player_800326CC(s32 slot, Vec* arg_vec)
     /* 80032708 0002F2E8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003270C 0002F2EC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80032710 0002F2F0  38 80 00 66 */	li r4, 0x66
-    /* 80032714 0002F2F4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032714 0002F2F4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80032718 0002F2F8  48 35 5B 09 */	bl __assert
     lbl_8003271C:
     /* 8003271C 0002F2FC  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -1690,7 +1690,7 @@ asm void Player_80032768(s32 slot, Vec* arg_vec)
     /* 800327A4 0002F384  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800327A8 0002F388  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800327AC 0002F38C  38 80 00 66 */	li r4, 0x66
-    /* 800327B0 0002F390  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800327B0 0002F390  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800327B4 0002F394  48 35 5A 6D */	bl __assert
     lbl_800327B8:
     /* 800327B8 0002F398  1C BE 0E 90 */	mulli r5, r30, 0xe90
