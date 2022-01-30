@@ -17,9 +17,16 @@ typedef struct _StaticPlayer
     /*0x0C*/ u8 transformed[2]; // 0x0001 for normal, 0x0100 for transformed (Probably Zelda/Sheik only)
     /*0x0E*/ s16 unk0E;
 
-    /*0x10-0x1B*/ Vec nametag_pos;  ///Horizontal, Vertical, Depth (floats)
-    /*0x1C-0x27*/ Vec transformed_player_pos; 
-    /*0x28-0x33*/ Vec spawn_platform_final_pos; 
+    union {
+        struct {
+            /*0x10-0x1B*/ Vec nametag_pos;  ///Horizontal, Vertical, Depth (floats)
+            /*0x1C-0x27*/ Vec transformed_player_pos; 
+            /*0x28-0x33*/ Vec spawn_platform_final_pos; 
+        } byVecName;
+
+        Vec byIndex[3];
+    } player_poses;
+
 
     /*0x34*/ s32 unk34;  /// maybe this is another Vec?
     /*0x38*/ s32 unk38;

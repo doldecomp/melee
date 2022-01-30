@@ -1583,17 +1583,17 @@ asm s8 Player_80032610(s32 slot, BOOL arg1)
 #endif
 
 #ifdef NON_MATCHING
-void Player_800326CC(s32 slot, Vec* arg_vec) {  //https://decomp.me/scratch/W5XO8
+void Player_800326CC(s32 slot, Vec* arg_vec) {
     StaticPlayer* player;
     Vec* player_vecs;
 
     Player_CheckSlot(slot);
 
     player = &player_slots[slot];
-    player_vecs = &player->nametag_pos;  ///nametag_pos is first vec
-
+    player_vecs = player->player_poses.byIndex;
     *arg_vec = player_vecs[player->transformed[0]];
 }
+
 #else
 asm void Player_800326CC(s32 slot, Vec* arg_vec)
 {
@@ -1654,14 +1654,13 @@ void Player_80032768(s32 slot, Vec* arg_vec) { //https://decomp.me/scratch/Acnkf
 
     player = &player_slots[slot];
 
-    player_vecs = &player->nametag_pos;
+    player_vecs = player->player_poses.byIndex;
     dst_vec = &player_vecs[player->transformed[0]];
     *dst_vec = *arg_vec;
 
-    player_vecs = &player->nametag_pos;
+    player_vecs = player->player_poses.byIndex;
     dst_vec2 = &player_vecs[player->transformed[1]];
     *dst_vec2 = *arg_vec;
-
 }
 #else
 asm void Player_80032768(s32 slot, Vec* arg_vec)
