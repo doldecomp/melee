@@ -6,6 +6,8 @@
 #include <dolphin/types.h>
 
 #include "sysdolphin/baselib/object.h"
+#include "sysdolphin/baselib/aobj.h"
+#include "sysdolphin/baselib/wobj.h"
 
 #define PROJ_PERSPECTIVE 1
 #define PROJ_FRUSTRUM 2
@@ -106,5 +108,8 @@ typedef struct _HSD_CameraAnim {
 } HSD_CameraAnim;
 
 void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32 enable_depth);
+void HSD_CObjRemoveAnim(HSD_CObj* cobj);
+HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
+HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj);
 
 #endif

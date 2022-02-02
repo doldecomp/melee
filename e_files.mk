@@ -26,4 +26,4 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/gobjgxlink.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/gobjuserdata.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/random.o\
-
+	$(EPILOGUE_DIR)/src/sysdolphin/baselib/cobj.o\
