@@ -140,5 +140,9 @@ s8 Player_800325C8(s32 slot, BOOL b);
 s8 Player_80032610(s32 slot, BOOL arg1);
 void Player_800326CC(s32 slot, Vec* arg_vec);
 void Player_80032768(s32 slot, Vec* arg_vec);
+void Player_80032828(s32 slot, s32 index, Vec* arg_vec);
+void Player_800328D4(s32 slot, Vec* arg_vec);
+void Player_80032A04(s32 slot, Vec* arg_vec);
+void Player_SetFacingDirection(s32 slot, f32 direction);
 
 #endif
