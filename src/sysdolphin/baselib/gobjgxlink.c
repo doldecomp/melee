@@ -8,6 +8,8 @@ extern HSD_GObjLibInitData lbl_804CE380;
 extern char lbl_804084F0[13]; //"gobjgxlink.c"
 extern char lbl_80408500[43]; //"gx_link <= HSD_GObjLibInitData.gx_link_max"
 
+#pragma push
+#pragma dont_inline on
 void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 {
     u32 link = gobj->gx_link;
@@ -27,6 +29,7 @@ void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
         lbl_804D7820[gobj->gx_link] = gobj;
     }
 }
+#pragma pop
 
 void GObj_SetupGXLink(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u8 gx_link, u32 priority)
 {
