@@ -8306,7 +8306,7 @@ struct _HSD_ImageDesc* HSD_ImageDescAlloc();
 // ? HSD_MObjRemoveAnimByFlags(?);
 // ? HSD_MObjAddAnim(?);
 // ? HSD_MObjReqAnimByFlags(?);
-// ? func_80362E98(?);
+// ? HSD_MObjReqAnim(?);
 // ? HSD_MObjAnim(?);
 struct _HSD_MObj* HSD_MObjLoadDesc(struct _HSD_MObjDesc*);
 // ? func_8036388C(?);

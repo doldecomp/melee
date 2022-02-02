@@ -158,5 +158,8 @@ void HSD_MObjClearFlags(HSD_MObj* mobj, u32 flags);
 void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags);
 void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim);
 void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags);
+void HSD_MObjReqAnim(HSD_MObj *mobj, f32 startframe);
+
+void MObjUpdateFunc(void* obj, u32 type, FObjData* val);
 
 #endif

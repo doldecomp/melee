@@ -108,16 +108,16 @@ void HSD_DObjAddAnimAll(HSD_DObj* dobj, HSD_MatAnim* matanim, HSD_ShapeAnimDObj*
     }
 }
 
-inline void HSD_DObjReqAnimByFlags(HSD_DObj* dobj, u32 flags, f32 frame)
+inline void HSD_DObjReqAnimByFlags(HSD_DObj* dobj, f32 startframe, u32 flags)
 {
     if (dobj == NULL)
         return;
 
-    HSD_PObjReqAnimAllByFlags(dobj->pobj, flags, frame);
-    HSD_MObjReqAnimByFlags(dobj->mobj, flags, frame);
+    HSD_PObjReqAnimAllByFlags(dobj->pobj, startframe, flags);
+    HSD_MObjReqAnimByFlags(dobj->mobj, startframe, flags);
 }
 
-void HSD_DObjReqAnimAllByFlags(HSD_DObj* dobj, u32 flags, f32 frame)
+void HSD_DObjReqAnimAllByFlags(HSD_DObj* dobj, f32 startframe, u32 flags)
 {
     HSD_DObj* dp;
 
@@ -125,11 +125,11 @@ void HSD_DObjReqAnimAllByFlags(HSD_DObj* dobj, u32 flags, f32 frame)
         return;
         
     for (dp = dobj; dp != NULL; dp = dp->next) {
-        HSD_DObjReqAnimByFlags(dp, flags, frame);
+        HSD_DObjReqAnimByFlags(dp, startframe, flags);
     }
 }
 
-void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 frame)
+void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 startframe)
 {
     HSD_DObj* dp;
 
@@ -137,7 +137,7 @@ void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 frame)
         return;
     
     for (dp = dobj; dp != NULL; dp = dp->next) {
-        HSD_DObjReqAnimByFlags(dp, 0x7FF, frame);
+        HSD_DObjReqAnimByFlags(dp, startframe,  0x7FF);
     }
 }
 
