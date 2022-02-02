@@ -57,4 +57,6 @@ void ClassInfoInit(HSD_ClassInfo* info);
 void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, char* base_class_library, char* type, s32 info_size, s32 class_size);
 void OSReport_PrintSpaces(s32 count);
 
+void* hsdAllocMemPiece(u32 size);
+
 #endif

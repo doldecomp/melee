@@ -170,8 +170,8 @@ lbl_80381F8C:
 /* 80381FA0 0037EB80  7C 08 03 A6 */	mtlr r0
 /* 80381FA4 0037EB84  4E 80 00 20 */	blr 
 
-.global func_80381FA8
-func_80381FA8:
+.global hsdAllocMemPiece
+hsdAllocMemPiece:
 /* 80381FA8 0037EB88  7C 08 02 A6 */	mflr r0
 /* 80381FAC 0037EB8C  90 01 00 04 */	stw r0, 4(r1)
 /* 80381FB0 0037EB90  38 03 00 1F */	addi r0, r3, 0x1f
@@ -328,7 +328,7 @@ lbl_803821C4:
 /* 803821D0 0037EDB0  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 803821D4 0037EDB4  7C 7F 1B 78 */	mr r31, r3
 /* 803821D8 0037EDB8  A8 63 00 10 */	lha r3, 0x10(r3)
-/* 803821DC 0037EDBC  4B FF FD CD */	bl func_80381FA8
+/* 803821DC 0037EDBC  4B FF FD CD */	bl hsdAllocMemPiece
 /* 803821E0 0037EDC0  28 03 00 00 */	cmplwi r3, 0
 /* 803821E4 0037EDC4  41 82 00 24 */	beq lbl_80382208
 /* 803821E8 0037EDC8  80 9F 00 20 */	lwz r4, 0x20(r31)

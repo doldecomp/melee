@@ -43516,8 +43516,8 @@ func_801C8E74:
 /* 801C8E90 001C5A70  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 801C8E94 001C5A74  93 C1 00 08 */	stw r30, 8(r1)
 /* 801C8E98 001C5A78  3B C3 0A 20 */	addi r30, r3, lbl_803E0A20@l
-/* 801C8E9C 001C5A7C  3C 60 80 40 */	lis r3, hsdMobj@ha
-/* 801C8EA0 001C5A80  3B E3 5E 28 */	addi r31, r3, hsdMobj@l
+/* 801C8E9C 001C5A7C  3C 60 80 40 */	lis r3, hsdMObj@ha
+/* 801C8EA0 001C5A80  3B E3 5E 28 */	addi r31, r3, hsdMObj@l
 /* 801C8EA4 001C5A84  38 7E 00 00 */	addi r3, r30, 0
 /* 801C8EA8 001C5A88  38 9F 00 00 */	addi r4, r31, 0
 /* 801C8EAC 001C5A8C  38 BE 00 DC */	addi r5, r30, 0xdc

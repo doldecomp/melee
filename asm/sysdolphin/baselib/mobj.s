@@ -2,118 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global HSD_MObjAnim
-HSD_MObjAnim:
-/* 803630FC 0035FCDC  7C 08 02 A6 */	mflr r0
-/* 80363100 0035FCE0  90 01 00 04 */	stw r0, 4(r1)
-/* 80363104 0035FCE4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80363108 0035FCE8  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8036310C 0035FCEC  7C 7F 1B 79 */	or. r31, r3, r3
-/* 80363110 0035FCF0  41 82 00 20 */	beq lbl_80363130
-/* 80363114 0035FCF4  3C 80 80 36 */	lis r4, MObjUpdateFunc@ha
-/* 80363118 0035FCF8  80 7F 00 14 */	lwz r3, 0x14(r31)
-/* 8036311C 0035FCFC  38 A4 2E EC */	addi r5, r4, MObjUpdateFunc@l
-/* 80363120 0035FD00  38 9F 00 00 */	addi r4, r31, 0
-/* 80363124 0035FD04  48 00 10 6D */	bl HSD_AObjInterpretAnim
-/* 80363128 0035FD08  80 7F 00 08 */	lwz r3, 8(r31)
-/* 8036312C 0035FD0C  4B FF BA 75 */	bl func_8035EBA0
-lbl_80363130:
-/* 80363130 0035FD10  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80363134 0035FD14  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80363138 0035FD18  38 21 00 18 */	addi r1, r1, 0x18
-/* 8036313C 0035FD1C  7C 08 03 A6 */	mtlr r0
-/* 80363140 0035FD20  4E 80 00 20 */	blr 
-lbl_80363144:
-/* 80363144 0035FD24  7C 08 02 A6 */	mflr r0
-/* 80363148 0035FD28  90 01 00 04 */	stw r0, 4(r1)
-/* 8036314C 0035FD2C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80363150 0035FD30  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80363154 0035FD34  7C 9F 23 78 */	mr r31, r4
-/* 80363158 0035FD38  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8036315C 0035FD3C  7C 7E 1B 78 */	mr r30, r3
-/* 80363160 0035FD40  80 04 00 04 */	lwz r0, 4(r4)
-/* 80363164 0035FD44  90 03 00 04 */	stw r0, 4(r3)
-/* 80363168 0035FD48  80 64 00 08 */	lwz r3, 8(r4)
-/* 8036316C 0035FD4C  4B FF BB BD */	bl func_8035ED28
-/* 80363170 0035FD50  90 7E 00 08 */	stw r3, 8(r30)
-/* 80363174 0035FD54  48 00 0B 8D */	bl func_80363D00
-/* 80363178 0035FD58  90 7E 00 0C */	stw r3, 0xc(r30)
-/* 8036317C 0035FD5C  38 A0 00 14 */	li r5, 0x14
-/* 80363180 0035FD60  80 7E 00 0C */	lwz r3, 0xc(r30)
-/* 80363184 0035FD64  80 9F 00 0C */	lwz r4, 0xc(r31)
-/* 80363188 0035FD68  4B CA 00 6D */	bl memcpy
-/* 8036318C 0035FD6C  80 1E 00 04 */	lwz r0, 4(r30)
-/* 80363190 0035FD70  60 00 10 00 */	ori r0, r0, 0x1000
-/* 80363194 0035FD74  90 1E 00 04 */	stw r0, 4(r30)
-/* 80363198 0035FD78  80 1F 00 14 */	lwz r0, 0x14(r31)
-/* 8036319C 0035FD7C  28 00 00 00 */	cmplwi r0, 0
-/* 803631A0 0035FD80  41 82 00 20 */	beq lbl_803631C0
-/* 803631A4 0035FD84  38 60 00 0C */	li r3, 0xc
-/* 803631A8 0035FD88  48 01 EE 01 */	bl func_80381FA8
-/* 803631AC 0035FD8C  90 7E 00 10 */	stw r3, 0x10(r30)
-/* 803631B0 0035FD90  38 A0 00 0C */	li r5, 0xc
-/* 803631B4 0035FD94  80 7E 00 10 */	lwz r3, 0x10(r30)
-/* 803631B8 0035FD98  80 9F 00 14 */	lwz r4, 0x14(r31)
-/* 803631BC 0035FD9C  4B CA 00 39 */	bl memcpy
-lbl_803631C0:
-/* 803631C0 0035FDA0  38 00 00 00 */	li r0, 0
-/* 803631C4 0035FDA4  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 803631C8 0035FDA8  38 60 00 00 */	li r3, 0
-/* 803631CC 0035FDAC  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 803631D0 0035FDB0  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 803631D4 0035FDB4  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 803631D8 0035FDB8  38 21 00 18 */	addi r1, r1, 0x18
-/* 803631DC 0035FDBC  7C 08 03 A6 */	mtlr r0
-/* 803631E0 0035FDC0  4E 80 00 20 */	blr 
-
-.global HSD_MObjLoadDesc
-HSD_MObjLoadDesc:
-/* 803631E4 0035FDC4  7C 08 02 A6 */	mflr r0
-/* 803631E8 0035FDC8  90 01 00 04 */	stw r0, 4(r1)
-/* 803631EC 0035FDCC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 803631F0 0035FDD0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 803631F4 0035FDD4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 803631F8 0035FDD8  7C 7E 1B 79 */	or. r30, r3, r3
-/* 803631FC 0035FDDC  41 82 00 6C */	beq lbl_80363268
-/* 80363200 0035FDE0  80 7E 00 00 */	lwz r3, 0(r30)
-/* 80363204 0035FDE4  28 03 00 00 */	cmplwi r3, 0
-/* 80363208 0035FDE8  41 82 00 10 */	beq lbl_80363218
-/* 8036320C 0035FDEC  48 01 F6 09 */	bl hsdSearchClassInfo
-/* 80363210 0035FDF0  28 03 00 00 */	cmplwi r3, 0
-/* 80363214 0035FDF4  40 82 00 10 */	bne lbl_80363224
-lbl_80363218:
-/* 80363218 0035FDF8  48 00 0A 8D */	bl func_80363CA4
-/* 8036321C 0035FDFC  7C 7F 1B 78 */	mr r31, r3
-/* 80363220 0035FE00  48 00 00 20 */	b lbl_80363240
-lbl_80363224:
-/* 80363224 0035FE04  48 01 F1 21 */	bl hsdNew
-/* 80363228 0035FE08  7C 7F 1B 79 */	or. r31, r3, r3
-/* 8036322C 0035FE0C  40 82 00 14 */	bne lbl_80363240
-/* 80363230 0035FE10  38 6D A6 40 */	addi r3, r13, lbl_804D5CE0@sda21
-/* 80363234 0035FE14  38 80 01 61 */	li r4, 0x161
-/* 80363238 0035FE18  38 AD A6 48 */	addi r5, r13, lbl_804D5CE8@sda21
-/* 8036323C 0035FE1C  48 02 4F E5 */	bl __assert
-lbl_80363240:
-/* 80363240 0035FE20  80 BF 00 00 */	lwz r5, 0(r31)
-/* 80363244 0035FE24  38 7F 00 00 */	addi r3, r31, 0
-/* 80363248 0035FE28  38 9E 00 00 */	addi r4, r30, 0
-/* 8036324C 0035FE2C  81 85 00 40 */	lwz r12, 0x40(r5)
-/* 80363250 0035FE30  7D 88 03 A6 */	mtlr r12
-/* 80363254 0035FE34  4E 80 00 21 */	blrl 
-/* 80363258 0035FE38  7F E3 FB 78 */	mr r3, r31
-/* 8036325C 0035FE3C  48 00 06 31 */	bl func_8036388C
-/* 80363260 0035FE40  7F E3 FB 78 */	mr r3, r31
-/* 80363264 0035FE44  48 00 00 08 */	b lbl_8036326C
-lbl_80363268:
-/* 80363268 0035FE48  38 60 00 00 */	li r3, 0
-lbl_8036326C:
-/* 8036326C 0035FE4C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80363270 0035FE50  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80363274 0035FE54  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80363278 0035FE58  38 21 00 18 */	addi r1, r1, 0x18
-/* 8036327C 0035FE5C  7C 08 03 A6 */	mtlr r0
-/* 80363280 0035FE60  4E 80 00 20 */	blr 
-lbl_80363284:
+MObjMakeTExp:
 /* 80363284 0035FE64  7C 08 02 A6 */	mflr r0
 /* 80363288 0035FE68  90 01 00 04 */	stw r0, 4(r1)
 /* 8036328C 0035FE6C  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -523,8 +412,8 @@ lbl_80363878:
 /* 80363884 00360464  7C 08 03 A6 */	mtlr r0
 /* 80363888 00360468  4E 80 00 20 */	blr 
 
-.global func_8036388C
-func_8036388C:
+.global HSD_MObjCompileTev
+HSD_MObjCompileTev:
 /* 8036388C 0036046C  7C 08 02 A6 */	mflr r0
 /* 80363890 00360470  90 01 00 04 */	stw r0, 4(r1)
 /* 80363894 00360474  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -738,11 +627,11 @@ lbl_80363B68:
 .global func_80363B8C
 func_80363B8C:
 /* 80363B8C 0036076C  7C 08 02 A6 */	mflr r0
-/* 80363B90 00360770  3C 80 80 40 */	lis r4, hsdMobj@ha
+/* 80363B90 00360770  3C 80 80 40 */	lis r4, hsdMObj@ha
 /* 80363B94 00360774  90 01 00 04 */	stw r0, 4(r1)
 /* 80363B98 00360778  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80363B9C 0036077C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80363BA0 00360780  3B E4 5E 28 */	addi r31, r4, hsdMobj@l
+/* 80363BA0 00360780  3B E4 5E 28 */	addi r31, r4, hsdMObj@l
 /* 80363BA4 00360784  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80363BA8 00360788  3B C3 00 00 */	addi r30, r3, 0
 /* 80363BAC 0036078C  80 0D BF 80 */	lwz r0, lbl_804D7620@sda21(r13)
@@ -750,7 +639,7 @@ func_80363B8C:
 /* 80363BB4 00360794  40 82 00 3C */	bne lbl_80363BF0
 /* 80363BB8 00360798  93 DF 01 08 */	stw r30, 0x108(r31)
 /* 80363BBC 0036079C  38 7F 00 BC */	addi r3, r31, 0xbc
-/* 80363BC0 003607A0  4B FF B1 69 */	bl func_8035ED28
+/* 80363BC0 003607A0  4B FF B1 69 */	bl HSD_TObjLoadDesc
 /* 80363BC4 003607A4  90 6D BF 80 */	stw r3, lbl_804D7620@sda21(r13)
 /* 80363BC8 003607A8  80 0D BF 80 */	lwz r0, lbl_804D7620@sda21(r13)
 /* 80363BCC 003607AC  28 00 00 00 */	cmplwi r0, 0
@@ -823,19 +712,19 @@ lbl_80363C90:
 /* 80363C9C 0036087C  7C 08 03 A6 */	mtlr r0
 /* 80363CA0 00360880  4E 80 00 20 */	blr 
 
-.global func_80363CA4
-func_80363CA4:
+.global HSD_MObjAlloc
+HSD_MObjAlloc:
 /* 80363CA4 00360884  7C 08 02 A6 */	mflr r0
 /* 80363CA8 00360888  90 01 00 04 */	stw r0, 4(r1)
 /* 80363CAC 0036088C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80363CB0 00360890  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80363CB4 00360894  80 6D BF 78 */	lwz r3, lbl_804D7618@sda21(r13)
+/* 80363CB4 00360894  80 6D BF 78 */	lwz r3, default_class@sda21(r13)
 /* 80363CB8 00360898  28 03 00 00 */	cmplwi r3, 0
 /* 80363CBC 0036089C  41 82 00 08 */	beq lbl_80363CC4
 /* 80363CC0 003608A0  48 00 00 0C */	b lbl_80363CCC
 lbl_80363CC4:
-/* 80363CC4 003608A4  3C 60 80 40 */	lis r3, hsdMobj@ha
-/* 80363CC8 003608A8  38 63 5E 28 */	addi r3, r3, hsdMobj@l
+/* 80363CC4 003608A4  3C 60 80 40 */	lis r3, hsdMObj@ha
+/* 80363CC8 003608A8  38 63 5E 28 */	addi r3, r3, hsdMObj@l
 lbl_80363CCC:
 /* 80363CCC 003608AC  48 01 E6 79 */	bl hsdNew
 /* 80363CD0 003608B0  7C 7F 1B 79 */	or. r31, r3, r3
@@ -852,14 +741,14 @@ lbl_80363CE8:
 /* 80363CF8 003608D8  7C 08 03 A6 */	mtlr r0
 /* 80363CFC 003608DC  4E 80 00 20 */	blr 
 
-.global func_80363D00
-func_80363D00:
+.global HSD_MaterialAlloc
+HSD_MaterialAlloc:
 /* 80363D00 003608E0  7C 08 02 A6 */	mflr r0
 /* 80363D04 003608E4  38 60 00 14 */	li r3, 0x14
 /* 80363D08 003608E8  90 01 00 04 */	stw r0, 4(r1)
 /* 80363D0C 003608EC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80363D10 003608F0  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80363D14 003608F4  48 01 E2 95 */	bl func_80381FA8
+/* 80363D14 003608F4  48 01 E2 95 */	bl hsdAllocMemPiece
 /* 80363D18 003608F8  7C 7F 1B 79 */	or. r31, r3, r3
 /* 80363D1C 003608FC  40 82 00 14 */	bne lbl_80363D30
 /* 80363D20 00360900  38 6D A6 40 */	addi r3, r13, lbl_804D5CE0@sda21
@@ -976,8 +865,8 @@ lbl_80363E80:
 /* 80363E8C 00360A6C  38 80 00 0C */	li r4, 0xc
 /* 80363E90 00360A70  48 01 E2 DD */	bl hsdFreeMemPiece
 lbl_80363E94:
-/* 80363E94 00360A74  3C 60 80 40 */	lis r3, hsdMobj@ha
-/* 80363E98 00360A78  38 63 5E 28 */	addi r3, r3, hsdMobj@l
+/* 80363E94 00360A74  3C 60 80 40 */	lis r3, hsdMObj@ha
+/* 80363E98 00360A78  38 63 5E 28 */	addi r3, r3, hsdMObj@l
 /* 80363E9C 00360A7C  80 83 00 14 */	lwz r4, 0x14(r3)
 /* 80363EA0 00360A80  7F E3 FB 78 */	mr r3, r31
 /* 80363EA4 00360A84  81 84 00 30 */	lwz r12, 0x30(r4)
@@ -992,22 +881,22 @@ lbl_80363EC4:
 /* 80363EC4 00360AA4  7C 08 02 A6 */	mflr r0
 /* 80363EC8 00360AA8  90 01 00 04 */	stw r0, 4(r1)
 /* 80363ECC 00360AAC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80363ED0 00360AB0  80 0D BF 78 */	lwz r0, lbl_804D7618@sda21(r13)
+/* 80363ED0 00360AB0  80 0D BF 78 */	lwz r0, default_class@sda21(r13)
 /* 80363ED4 00360AB4  7C 03 00 40 */	cmplw r3, r0
 /* 80363ED8 00360AB8  40 82 00 0C */	bne lbl_80363EE4
 /* 80363EDC 00360ABC  38 00 00 00 */	li r0, 0
-/* 80363EE0 00360AC0  90 0D BF 78 */	stw r0, lbl_804D7618@sda21(r13)
+/* 80363EE0 00360AC0  90 0D BF 78 */	stw r0, default_class@sda21(r13)
 lbl_80363EE4:
-/* 80363EE4 00360AC4  3C 80 80 40 */	lis r4, hsdMobj@ha
-/* 80363EE8 00360AC8  38 04 5E 28 */	addi r0, r4, hsdMobj@l
+/* 80363EE4 00360AC4  3C 80 80 40 */	lis r4, hsdMObj@ha
+/* 80363EE8 00360AC8  38 04 5E 28 */	addi r0, r4, hsdMObj@l
 /* 80363EEC 00360ACC  7C 03 00 40 */	cmplw r3, r0
 /* 80363EF0 00360AD0  40 82 00 10 */	bne lbl_80363F00
 /* 80363EF4 00360AD4  38 00 00 00 */	li r0, 0
 /* 80363EF8 00360AD8  90 0D BF 80 */	stw r0, lbl_804D7620@sda21(r13)
 /* 80363EFC 00360ADC  90 0D BF 84 */	stw r0, lbl_804D7624@sda21(r13)
 lbl_80363F00:
-/* 80363F00 00360AE0  3C 80 80 40 */	lis r4, hsdMobj@ha
-/* 80363F04 00360AE4  38 84 5E 28 */	addi r4, r4, hsdMobj@l
+/* 80363F00 00360AE0  3C 80 80 40 */	lis r4, hsdMObj@ha
+/* 80363F04 00360AE4  38 84 5E 28 */	addi r4, r4, hsdMObj@l
 /* 80363F08 00360AE8  80 84 00 14 */	lwz r4, 0x14(r4)
 /* 80363F0C 00360AEC  81 84 00 38 */	lwz r12, 0x38(r4)
 /* 80363F10 00360AF0  7D 88 03 A6 */	mtlr r12
@@ -1017,16 +906,16 @@ lbl_80363F00:
 /* 80363F20 00360B00  7C 08 03 A6 */	mtlr r0
 /* 80363F24 00360B04  4E 80 00 20 */	blr 
 
-.global HSD_MObjInfoInit
-HSD_MObjInfoInit:
+.global MObjInfoInit
+MObjInfoInit:
 /* 80363F28 00360B08  7C 08 02 A6 */	mflr r0
-/* 80363F2C 00360B0C  3C 60 80 40 */	lis r3, hsdMobj@ha
+/* 80363F2C 00360B0C  3C 60 80 40 */	lis r3, hsdMObj@ha
 /* 80363F30 00360B10  90 01 00 04 */	stw r0, 4(r1)
 /* 80363F34 00360B14  38 E0 00 50 */	li r7, 0x50
 /* 80363F38 00360B18  39 00 00 20 */	li r8, 0x20
 /* 80363F3C 00360B1C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80363F40 00360B20  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80363F44 00360B24  3B E3 5E 28 */	addi r31, r3, hsdMobj@l
+/* 80363F44 00360B24  3B E3 5E 28 */	addi r31, r3, hsdMObj@l
 /* 80363F48 00360B28  3C 60 80 40 */	lis r3, hsdClass@ha
 /* 80363F4C 00360B2C  38 83 75 90 */	addi r4, r3, hsdClass@l
 /* 80363F50 00360B30  38 7F 00 00 */	addi r3, r31, 0
@@ -1044,12 +933,12 @@ HSD_MObjInfoInit:
 /* 80363F80 00360B60  3C 60 80 36 */	lis r3, lbl_80363B68@ha
 /* 80363F84 00360B64  90 1F 00 3C */	stw r0, 0x3c(r31)
 /* 80363F88 00360B68  38 03 3B 68 */	addi r0, r3, lbl_80363B68@l
-/* 80363F8C 00360B6C  3C 60 80 36 */	lis r3, lbl_80363144@ha
+/* 80363F8C 00360B6C  3C 60 80 36 */	lis r3, MObjLoad@ha
 /* 80363F90 00360B70  90 1F 00 4C */	stw r0, 0x4c(r31)
-/* 80363F94 00360B74  38 03 31 44 */	addi r0, r3, lbl_80363144@l
-/* 80363F98 00360B78  3C 60 80 36 */	lis r3, lbl_80363284@ha
+/* 80363F94 00360B74  38 03 31 44 */	addi r0, r3, MObjLoad@l
+/* 80363F98 00360B78  3C 60 80 36 */	lis r3, MObjMakeTExp@ha
 /* 80363F9C 00360B7C  90 1F 00 40 */	stw r0, 0x40(r31)
-/* 80363FA0 00360B80  38 03 32 84 */	addi r0, r3, lbl_80363284@l
+/* 80363FA0 00360B80  38 03 32 84 */	addi r0, r3, MObjMakeTExp@l
 /* 80363FA4 00360B84  3C 60 80 36 */	lis r3, lbl_803639AC@ha
 /* 80363FA8 00360B88  90 1F 00 44 */	stw r0, 0x44(r31)
 /* 80363FAC 00360B8C  38 03 39 AC */	addi r0, r3, lbl_803639AC@l
@@ -1063,44 +952,6 @@ HSD_MObjInfoInit:
 
 .section .data
 
-.global hsdMobj
-hsdMobj:
-    .4byte HSD_MObjInfoInit
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-.global jtbl_80405E78
-jtbl_80405E78:
-	.4byte MObjUpdateFunc + 0x208
-	.4byte MObjUpdateFunc + 0x2C
-	.4byte MObjUpdateFunc + 0x50
-	.4byte MObjUpdateFunc + 0x74
-	.4byte MObjUpdateFunc + 0x98
-	.4byte MObjUpdateFunc + 0xBC
-	.4byte MObjUpdateFunc + 0xE0
-	.4byte MObjUpdateFunc + 0x11C
-	.4byte MObjUpdateFunc + 0x140
-	.4byte MObjUpdateFunc + 0x164
-	.4byte MObjUpdateFunc + 0x104
-	.4byte MObjUpdateFunc + 0x188
-	.4byte MObjUpdateFunc + 0x1B4
-	.4byte MObjUpdateFunc + 0x1E0
     .4byte 0x68736449
     .4byte 0x73446573
     .4byte 0x63656E64
@@ -1196,8 +1047,8 @@ lbl_804D5CFC:
 
 .section .sbss
 
-.global lbl_804D7618
-lbl_804D7618:
+.global default_class
+default_class:
 	.skip 0x4
 .global current_mobj
 current_mobj:
@@ -1212,10 +1063,6 @@ lbl_804D7624:
 
 .section .sdata2
 
-.global lbl_804DE428
-lbl_804DE428:
-	.4byte 0x406FE000
-	.4byte 0x00000000
 .global lbl_804DE430
 lbl_804DE430:
 	.4byte 0x3F800000
