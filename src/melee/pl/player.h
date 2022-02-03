@@ -21,29 +21,29 @@ typedef struct _StaticPlayer
         struct {
             /*0x10-0x1B*/ Vec nametag_pos;  ///Horizontal, Vertical, Depth (floats)
             /*0x1C-0x27*/ Vec transformed_player_pos; 
-            /*0x28-0x33*/ Vec spawn_platform_final_pos; 
+            /*0x28-0x33*/ Vec spawn_platform_final_pos;
+            /*0x34-0x3f*/ Vec some_other_player_pos;
         } byVecName;
 
-        Vec byIndex[3];
+        Vec byIndex[4];
     } player_poses;
-
-
-    /*0x34*/ s32 unk34;  /// maybe this is another Vec?
-    /*0x38*/ s32 unk38;
-    /*0x3C*/ s32 unk3C;
 
     /*0x40*/ f32 facing_direction;
 
     /*0x44*/ s8 costume_id;  // 00 = normal, 01 = red, 02 = blue, 03 = green (reflected in icon immediately)
     /*0x45*/ s8 unk45;
     /*0x46*/ s8 controller_index;
-    /*0x47*/ s8 unk47;  /// 00 = red, 01 = blue, 02 = green
+    /*0x47*/ s8 unk_color;  /// 00 = red, 01 = blue, 02 = green
     /*0x48*/ s8 player_id;
     /*0x49*/ s8 cpu_level;
     /*0x4A*/ s8 cpu_type;
     /*0x4B*/ s8 handicap;
 
-    /*0x4C*/ s32 unk4C;
+    /*0x4C*/ s8 unk4C;
+    /*0x4D*/ s8 unk4D;
+    /*0x4E*/ s8 unk4E;
+    /*0x4F*/ s8 unk4F;
+
     /*0x50*/ f32 unk50;
 
     /*0x54*/ f32 attack_ratio;
@@ -143,6 +143,29 @@ void Player_80032768(s32 slot, Vec* arg_vec);
 void Player_80032828(s32 slot, s32 index, Vec* arg_vec);
 void Player_800328D4(s32 slot, Vec* arg_vec);
 void Player_80032A04(s32 slot, Vec* arg_vec);
+void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 direction);
+f32 Player_80032BB0(s32 slot);
+void Player_SetScale(s32 slot, f32 scale);
+void Player_GetSpawnPlatformPos(s32 slot, Vec* arg_vec);
+void Player_SetSpawnPlatformPos(s32 slot, Vec* arg_vec);
+void Player_GetSomePos(s32 slot, Vec* arg_vec);
+void Player_SetSomePos(s32 slot, Vec* arg_vec);
+s32 Player_80032F30(s32 slot);
+void Player_80032FA4(s32 slot, s32 arg);
+f32 Player_GetFacingDirection(s32 slot);
 void Player_SetFacingDirection(s32 slot, f32 direction);
+void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction);
+s8 Player_GetCostumeId(s32 slot);
+void Player_SetCostumeId(s32 slot, s8 costume_id);
+s8 Player_GetControllerIndex(s32 slot);
+void Player_SetControllerIndex(s32 slot, s8 controller_index);
+s8 Player_GetUnkColor(s32 slot);
+void Player_SetUnkColor(s32 slot, s8 unk_color);
+s8 Player_GetPlayerId(s32 slot);
+void Player_SetPlayerId(s32 slot, s8 player_id);
+s8 Player_GetCpuLevel(s32 slot);
+void Player_SetPlayerAndEntityCpuLevel(s32 slot, s8 cpu_level);
+s8 Player_GetCpuType(s32 slot);
+void Player_SetPlayerAndEntityCpuType(s32 slot, s8 cpu_type);
 
 #endif

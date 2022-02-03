@@ -29,6 +29,9 @@ extern s32 func_8008701C(HSD_GObj*);
 extern s32 func_800873CC();
 extern void func_802F6E1C(s32);
 extern void func_800D4FF4(HSD_GObj*);
+extern f32 func_800869F8(HSD_GObj*);
+extern void func_80087BEC(HSD_GObj*, s8);
+extern void func_80087BC0(HSD_GObj*, s8);
 
 
 void inline Player_CheckSlot(s32 slot)
@@ -1815,7 +1818,7 @@ void Player_800328D4(s32 slot, Vec* arg_vec) {  //https://decomp.me/scratch/dgJM
     
 
     for (i = 0; i < 2; i++) {
-        if (player->player_entity[player->transformed[i]] != 0) {
+        if (player->player_entity[player->transformed[i]]) {
             func_80087140(player->player_entity[player->transformed[i]]);
         }
     }
@@ -1921,7 +1924,7 @@ void Player_80032A04(s32 slot, Vec* arg_vec) {   ///https://decomp.me/scratch/Eh
 
         player->player_poses.byIndex[player->transformed[i]] = *arg_vec;
                 
-        if (player->player_entity[player->transformed[i]] != 0) {
+        if (player->player_entity[player->transformed[i]]) {
             func_80086664(player->player_entity[player->transformed[i]], arg_vec);
         }
     }
@@ -1999,7 +2002,7 @@ asm void Player_80032A04(s32 slot, Vec* arg_vec)
 #endif
 
 #ifdef NON_MATCHING
-void Player_SetFacingDirection(s32 slot, f32 direction) {   ///https://decomp.me/scratch/DxWHO
+void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 direction) {   ///https://decomp.me/scratch/DxWHO
     StaticPlayer* player;
     s32 i;
 
@@ -2008,13 +2011,13 @@ void Player_SetFacingDirection(s32 slot, f32 direction) {   ///https://decomp.me
 
     for (i = 0; i < 2; i++) {
         player->facing_direction = direction;
-        if (player->player_entity[player->transformed[i]] != 0) {
-            func_800BEC74(direction, player->player_entity[player->transformed[i]]);
+        if (player->player_entity[player->transformed[i]]) {
+            func_SetEntityFacingDirection(direction, player->player_entity[player->transformed[i]]);
         }
     }
 }
 #else
-asm void Player_SetFacingDirection(s32 slot, f32 direction) {
+asm void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 direction) {
     nofralloc
     /* 80032AF8 0002F6D8  7C 08 02 A6 */	mflr r0
     /* 80032AFC 0002F6DC  90 01 00 04 */	stw r0, 4(r1)
@@ -2054,7 +2057,7 @@ asm void Player_SetFacingDirection(s32 slot, f32 direction) {
     /* 80032B78 0002F758  28 03 00 00 */	cmplwi r3, 0
     /* 80032B7C 0002F75C  41 82 00 0C */	beq lbl_80032B88
     /* 80032B80 0002F760  FC 20 F8 90 */	fmr f1, f31
-    /* 80032B84 0002F764  48 08 C0 F1 */	bl func_800BEC74
+    /* 80032B84 0002F764  48 08 C0 F1 */	bl func_SetEntityFacingDirection
     lbl_80032B88:
     /* 80032B88 0002F768  3B DE 00 01 */	addi r30, r30, 1
     /* 80032B8C 0002F76C  2C 1E 00 02 */	cmpwi r30, 2
@@ -2066,5 +2069,1192 @@ asm void Player_SetFacingDirection(s32 slot, f32 direction) {
     /* 80032BA4 0002F784  38 21 00 20 */	addi r1, r1, 0x20
     /* 80032BA8 0002F788  7C 08 03 A6 */	mtlr r0
     /* 80032BAC 0002F78C  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+f32 Player_80032BB0(s32 slot) {   ///https://decomp.me/scratch/ETbBe
+    StaticPlayer* player;
+    f32 temp;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    temp = func_800869F8(player->player_entity[player->transformed[0]]);
+    return temp / player->model_scale;
+
+}
+#else
+asm f32 Player_80032BB0(s32 slot)
+{
+    nofralloc
+    /* 80032BB0 0002F790  7C 08 02 A6 */	mflr r0
+    /* 80032BB4 0002F794  90 01 00 04 */	stw r0, 4(r1)
+    /* 80032BB8 0002F798  94 21 FF E8 */	stwu r1, -0x18(r1)
+    /* 80032BBC 0002F79C  93 E1 00 14 */	stw r31, 0x14(r1)
+    /* 80032BC0 0002F7A0  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 80032BC4 0002F7A4  41 80 00 0C */	blt lbl_80032BD0
+    /* 80032BC8 0002F7A8  2C 1F 00 06 */	cmpwi r31, 6
+    /* 80032BCC 0002F7AC  41 80 00 2C */	blt lbl_80032BF8
+    lbl_80032BD0:
+    /* 80032BD0 0002F7B0  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032BD4 0002F7B4  4C C6 31 82 */	crclr 6
+    /* 80032BD8 0002F7B8  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032BDC 0002F7BC  38 9F 00 00 */	addi r4, r31, 0
+    /* 80032BE0 0002F7C0  48 31 2A C9 */	bl OSReport
+    /* 80032BE4 0002F7C4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80032BE8 0002F7C8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032BEC 0002F7CC  38 80 00 66 */	li r4, 0x66
+    /* 80032BF0 0002F7D0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032BF4 0002F7D4  48 35 56 2D */	bl __assert
+    lbl_80032BF8:
+    /* 80032BF8 0002F7D8  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 80032BFC 0002F7DC  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80032C00 0002F7E0  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80032C04 0002F7E4  7F E0 22 14 */	add r31, r0, r4
+    /* 80032C08 0002F7E8  88 1F 00 0C */	lbz r0, 0xc(r31)
+    /* 80032C0C 0002F7EC  54 00 10 3A */	slwi r0, r0, 2
+    /* 80032C10 0002F7F0  7C 7F 02 14 */	add r3, r31, r0
+    /* 80032C14 0002F7F4  80 63 00 B0 */	lwz r3, 0xb0(r3)
+    /* 80032C18 0002F7F8  48 05 3D E1 */	bl func_800869F8
+    /* 80032C1C 0002F7FC  C0 1F 00 5C */	lfs f0, 0x5c(r31)
+    /* 80032C20 0002F800  80 01 00 1C */	lwz r0, 0x1c(r1)
+    /* 80032C24 0002F804  EC 21 00 24 */	fdivs f1, f1, f0
+    /* 80032C28 0002F808  83 E1 00 14 */	lwz r31, 0x14(r1)
+    /* 80032C2C 0002F80C  38 21 00 18 */	addi r1, r1, 0x18
+    /* 80032C30 0002F810  7C 08 03 A6 */	mtlr r0
+    /* 80032C34 0002F814  4E 80 00 20 */	blr 
+}
+#endif
+
+
+#ifdef NON_MATCHING
+void Player_SetScale(s32 slot, f32 scale) {   ///https://decomp.me/scratch/8OwGv
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->model_scale = scale;
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
+            ftData_SetScale(scale, player->player_entity[player->transformed[i]]);
+        }
+    }
+
+}
+#else
+asm void Player_SetScale(s32 slot, f32 scale)
+{
+    nofralloc
+    /* 80032C38 0002F818  7C 08 02 A6 */	mflr r0
+    /* 80032C3C 0002F81C  90 01 00 04 */	stw r0, 4(r1)
+    /* 80032C40 0002F820  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80032C44 0002F824  DB E1 00 18 */	stfd f31, 0x18(r1)
+    /* 80032C48 0002F828  FF E0 08 90 */	fmr f31, f1
+    /* 80032C4C 0002F82C  93 E1 00 14 */	stw r31, 0x14(r1)
+    /* 80032C50 0002F830  93 C1 00 10 */	stw r30, 0x10(r1)
+    /* 80032C54 0002F834  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80032C58 0002F838  41 80 00 0C */	blt lbl_80032C64
+    /* 80032C5C 0002F83C  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80032C60 0002F840  41 80 00 2C */	blt lbl_80032C8C
+    lbl_80032C64:
+    /* 80032C64 0002F844  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032C68 0002F848  4C C6 31 82 */	crclr 6
+    /* 80032C6C 0002F84C  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032C70 0002F850  38 9E 00 00 */	addi r4, r30, 0
+    /* 80032C74 0002F854  48 31 2A 35 */	bl OSReport
+    /* 80032C78 0002F858  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80032C7C 0002F85C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032C80 0002F860  38 80 00 66 */	li r4, 0x66
+    /* 80032C84 0002F864  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032C88 0002F868  48 35 55 99 */	bl __assert
+    lbl_80032C8C:
+    /* 80032C8C 0002F86C  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80032C90 0002F870  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80032C94 0002F874  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80032C98 0002F878  7F E0 22 14 */	add r31, r0, r4
+    /* 80032C9C 0002F87C  D3 FF 00 5C */	stfs f31, 0x5c(r31)
+    /* 80032CA0 0002F880  3B C0 00 00 */	li r30, 0
+    lbl_80032CA4:
+    /* 80032CA4 0002F884  38 1E 00 0C */	addi r0, r30, 0xc
+    /* 80032CA8 0002F888  7C 1F 00 AE */	lbzx r0, r31, r0
+    /* 80032CAC 0002F88C  54 03 10 3A */	slwi r3, r0, 2
+    /* 80032CB0 0002F890  38 03 00 B0 */	addi r0, r3, 0xb0
+    /* 80032CB4 0002F894  7C 7F 00 2E */	lwzx r3, r31, r0
+    /* 80032CB8 0002F898  28 03 00 00 */	cmplwi r3, 0
+    /* 80032CBC 0002F89C  41 82 00 0C */	beq lbl_80032CC8
+    /* 80032CC0 0002F8A0  FC 20 F8 90 */	fmr f1, f31
+    /* 80032CC4 0002F8A4  48 05 39 E1 */	bl ftData_SetScale
+    lbl_80032CC8:
+    /* 80032CC8 0002F8A8  3B DE 00 01 */	addi r30, r30, 1
+    /* 80032CCC 0002F8AC  2C 1E 00 02 */	cmpwi r30, 2
+    /* 80032CD0 0002F8B0  41 80 FF D4 */	blt lbl_80032CA4
+    /* 80032CD4 0002F8B4  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80032CD8 0002F8B8  CB E1 00 18 */	lfd f31, 0x18(r1)
+    /* 80032CDC 0002F8BC  83 E1 00 14 */	lwz r31, 0x14(r1)
+    /* 80032CE0 0002F8C0  83 C1 00 10 */	lwz r30, 0x10(r1)
+    /* 80032CE4 0002F8C4  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80032CE8 0002F8C8  7C 08 03 A6 */	mtlr r0
+    /* 80032CEC 0002F8CC  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_GetSpawnPlatformPos(s32 slot, Vec* arg_vec) {  ///https://decomp.me/scratch/dQVrr
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    *arg_vec = player->player_poses.byVecName.spawn_platform_final_pos;
+}
+#else
+asm void Player_GetSpawnPlatformPos(s32 slot, Vec* arg_vec) 
+{
+    nofralloc
+    /* 80032CF0 0002F8D0  7C 08 02 A6 */	mflr r0
+    /* 80032CF4 0002F8D4  90 01 00 04 */	stw r0, 4(r1)
+    /* 80032CF8 0002F8D8  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80032CFC 0002F8DC  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80032D00 0002F8E0  3B E4 00 00 */	addi r31, r4, 0
+    /* 80032D04 0002F8E4  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 80032D08 0002F8E8  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80032D0C 0002F8EC  41 80 00 0C */	blt lbl_80032D18
+    /* 80032D10 0002F8F0  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80032D14 0002F8F4  41 80 00 2C */	blt lbl_80032D40
+    lbl_80032D18:
+    /* 80032D18 0002F8F8  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032D1C 0002F8FC  4C C6 31 82 */	crclr 6
+    /* 80032D20 0002F900  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032D24 0002F904  38 9E 00 00 */	addi r4, r30, 0
+    /* 80032D28 0002F908  48 31 29 81 */	bl OSReport
+    /* 80032D2C 0002F90C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80032D30 0002F910  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032D34 0002F914  38 80 00 66 */	li r4, 0x66
+    /* 80032D38 0002F918  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032D3C 0002F91C  48 35 54 E5 */	bl __assert
+    lbl_80032D40:
+    /* 80032D40 0002F920  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80032D44 0002F924  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80032D48 0002F928  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80032D4C 0002F92C  7C 80 22 14 */	add r4, r0, r4
+    /* 80032D50 0002F930  80 64 00 28 */	lwz r3, 0x28(r4)
+    /* 80032D54 0002F934  80 04 00 2C */	lwz r0, 0x2c(r4)
+    /* 80032D58 0002F938  90 7F 00 00 */	stw r3, 0(r31)
+    /* 80032D5C 0002F93C  90 1F 00 04 */	stw r0, 4(r31)
+    /* 80032D60 0002F940  80 04 00 30 */	lwz r0, 0x30(r4)
+    /* 80032D64 0002F944  90 1F 00 08 */	stw r0, 8(r31)
+    /* 80032D68 0002F948  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80032D6C 0002F94C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80032D70 0002F950  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80032D74 0002F954  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80032D78 0002F958  7C 08 03 A6 */	mtlr r0
+    /* 80032D7C 0002F95C  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetSpawnPlatformPos(s32 slot, Vec* arg_vec) {  ///https://decomp.me/scratch/XNLqe
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->player_poses.byVecName.spawn_platform_final_pos = *arg_vec;
+}
+#else
+asm void Player_SetSpawnPlatformPos(s32 slot, Vec* arg_vec)
+{
+    nofralloc
+    /* 80032D80 0002F960  7C 08 02 A6 */	mflr r0
+    /* 80032D84 0002F964  90 01 00 04 */	stw r0, 4(r1)
+    /* 80032D88 0002F968  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80032D8C 0002F96C  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80032D90 0002F970  3B E4 00 00 */	addi r31, r4, 0
+    /* 80032D94 0002F974  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 80032D98 0002F978  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80032D9C 0002F97C  41 80 00 0C */	blt lbl_80032DA8
+    /* 80032DA0 0002F980  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80032DA4 0002F984  41 80 00 2C */	blt lbl_80032DD0
+    lbl_80032DA8:
+    /* 80032DA8 0002F988  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032DAC 0002F98C  4C C6 31 82 */	crclr 6
+    /* 80032DB0 0002F990  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032DB4 0002F994  38 9E 00 00 */	addi r4, r30, 0
+    /* 80032DB8 0002F998  48 31 28 F1 */	bl OSReport
+    /* 80032DBC 0002F99C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80032DC0 0002F9A0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032DC4 0002F9A4  38 80 00 66 */	li r4, 0x66
+    /* 80032DC8 0002F9A8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032DCC 0002F9AC  48 35 54 55 */	bl __assert
+    lbl_80032DD0:
+    /* 80032DD0 0002F9B0  1C BE 0E 90 */	mulli r5, r30, 0xe90
+    /* 80032DD4 0002F9B4  80 7F 00 00 */	lwz r3, 0(r31)
+    /* 80032DD8 0002F9B8  80 1F 00 04 */	lwz r0, 4(r31)
+    /* 80032DDC 0002F9BC  3C 80 80 45 */	lis r4, player_slots@ha
+    /* 80032DE0 0002F9C0  38 84 30 80 */	addi r4, r4, player_slots@l
+    /* 80032DE4 0002F9C4  7C 84 2A 14 */	add r4, r4, r5
+    /* 80032DE8 0002F9C8  90 64 00 28 */	stw r3, 0x28(r4)
+    /* 80032DEC 0002F9CC  90 04 00 2C */	stw r0, 0x2c(r4)
+    /* 80032DF0 0002F9D0  80 1F 00 08 */	lwz r0, 8(r31)
+    /* 80032DF4 0002F9D4  90 04 00 30 */	stw r0, 0x30(r4)
+    /* 80032DF8 0002F9D8  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80032DFC 0002F9DC  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80032E00 0002F9E0  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80032E04 0002F9E4  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80032E08 0002F9E8  7C 08 03 A6 */	mtlr r0
+    /* 80032E0C 0002F9EC  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_GetSomePos(s32 slot, Vec* arg_vec) {  ///https://decomp.me/scratch/S1eUX
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    *arg_vec = player->player_poses.byVecName.some_other_player_pos;
+}
+#else
+asm void Player_GetSomePos(s32 slot, Vec* arg_vec) 
+{
+    nofralloc
+    /* 80032E10 0002F9F0  7C 08 02 A6 */	mflr r0
+    /* 80032E14 0002F9F4  90 01 00 04 */	stw r0, 4(r1)
+    /* 80032E18 0002F9F8  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80032E1C 0002F9FC  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80032E20 0002FA00  3B E4 00 00 */	addi r31, r4, 0
+    /* 80032E24 0002FA04  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 80032E28 0002FA08  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80032E2C 0002FA0C  41 80 00 0C */	blt lbl_80032E38
+    /* 80032E30 0002FA10  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80032E34 0002FA14  41 80 00 2C */	blt lbl_80032E60
+    lbl_80032E38:
+    /* 80032E38 0002FA18  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032E3C 0002FA1C  4C C6 31 82 */	crclr 6
+    /* 80032E40 0002FA20  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032E44 0002FA24  38 9E 00 00 */	addi r4, r30, 0
+    /* 80032E48 0002FA28  48 31 28 61 */	bl OSReport
+    /* 80032E4C 0002FA2C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80032E50 0002FA30  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032E54 0002FA34  38 80 00 66 */	li r4, 0x66
+    /* 80032E58 0002FA38  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032E5C 0002FA3C  48 35 53 C5 */	bl __assert
+    lbl_80032E60:
+    /* 80032E60 0002FA40  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80032E64 0002FA44  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80032E68 0002FA48  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80032E6C 0002FA4C  7C 80 22 14 */	add r4, r0, r4
+    /* 80032E70 0002FA50  80 64 00 34 */	lwz r3, 0x34(r4)
+    /* 80032E74 0002FA54  80 04 00 38 */	lwz r0, 0x38(r4)
+    /* 80032E78 0002FA58  90 7F 00 00 */	stw r3, 0(r31)
+    /* 80032E7C 0002FA5C  90 1F 00 04 */	stw r0, 4(r31)
+    /* 80032E80 0002FA60  80 04 00 3C */	lwz r0, 0x3c(r4)
+    /* 80032E84 0002FA64  90 1F 00 08 */	stw r0, 8(r31)
+    /* 80032E88 0002FA68  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80032E8C 0002FA6C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80032E90 0002FA70  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80032E94 0002FA74  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80032E98 0002FA78  7C 08 03 A6 */	mtlr r0
+    /* 80032E9C 0002FA7C  4E 80 00 20 */	blr 
+
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetSomePos(s32 slot, Vec* arg_vec) {  ///https://decomp.me/scratch/p2H7B
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->player_poses.byVecName.some_other_player_pos = *arg_vec;
+}
+#else
+asm void Player_SetSomePos(s32 slot, Vec* arg_vec)
+{
+    nofralloc
+    /* 80032EA0 0002FA80  7C 08 02 A6 */	mflr r0
+    /* 80032EA4 0002FA84  90 01 00 04 */	stw r0, 4(r1)
+    /* 80032EA8 0002FA88  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80032EAC 0002FA8C  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80032EB0 0002FA90  3B E4 00 00 */	addi r31, r4, 0
+    /* 80032EB4 0002FA94  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 80032EB8 0002FA98  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80032EBC 0002FA9C  41 80 00 0C */	blt lbl_80032EC8
+    /* 80032EC0 0002FAA0  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80032EC4 0002FAA4  41 80 00 2C */	blt lbl_80032EF0
+    lbl_80032EC8:
+    /* 80032EC8 0002FAA8  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032ECC 0002FAAC  4C C6 31 82 */	crclr 6
+    /* 80032ED0 0002FAB0  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032ED4 0002FAB4  38 9E 00 00 */	addi r4, r30, 0
+    /* 80032ED8 0002FAB8  48 31 27 D1 */	bl OSReport
+    /* 80032EDC 0002FABC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80032EE0 0002FAC0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032EE4 0002FAC4  38 80 00 66 */	li r4, 0x66
+    /* 80032EE8 0002FAC8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032EEC 0002FACC  48 35 53 35 */	bl __assert
+    lbl_80032EF0:
+    /* 80032EF0 0002FAD0  1C BE 0E 90 */	mulli r5, r30, 0xe90
+    /* 80032EF4 0002FAD4  80 7F 00 00 */	lwz r3, 0(r31)
+    /* 80032EF8 0002FAD8  80 1F 00 04 */	lwz r0, 4(r31)
+    /* 80032EFC 0002FADC  3C 80 80 45 */	lis r4, player_slots@ha
+    /* 80032F00 0002FAE0  38 84 30 80 */	addi r4, r4, player_slots@l
+    /* 80032F04 0002FAE4  7C 84 2A 14 */	add r4, r4, r5
+    /* 80032F08 0002FAE8  90 64 00 34 */	stw r3, 0x34(r4)
+    /* 80032F0C 0002FAEC  90 04 00 38 */	stw r0, 0x38(r4)
+    /* 80032F10 0002FAF0  80 1F 00 08 */	lwz r0, 8(r31)
+    /* 80032F14 0002FAF4  90 04 00 3C */	stw r0, 0x3c(r4)
+    /* 80032F18 0002FAF8  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80032F1C 0002FAFC  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80032F20 0002FB00  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80032F24 0002FB04  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80032F28 0002FB08  7C 08 03 A6 */	mtlr r0
+    /* 80032F2C 0002FB0C  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+s32 Player_80032F30(s32 slot) { ///https://decomp.me/scratch/CL76t
+    StaticPlayer* player;
+    s32 value;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    value = player->unk4E;
+    return value;
+}
+#else
+asm s32 Player_80032F30(s32 slot)
+{
+    nofralloc
+    /* 80032F30 0002FB10  7C 08 02 A6 */	mflr r0
+    /* 80032F34 0002FB14  90 01 00 04 */	stw r0, 4(r1)
+    /* 80032F38 0002FB18  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80032F3C 0002FB1C  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80032F40 0002FB20  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 80032F44 0002FB24  41 80 00 0C */	blt lbl_80032F50
+    /* 80032F48 0002FB28  2C 1F 00 06 */	cmpwi r31, 6
+    /* 80032F4C 0002FB2C  41 80 00 2C */	blt lbl_80032F78
+    lbl_80032F50:
+    /* 80032F50 0002FB30  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032F54 0002FB34  4C C6 31 82 */	crclr 6
+    /* 80032F58 0002FB38  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032F5C 0002FB3C  38 9F 00 00 */	addi r4, r31, 0
+    /* 80032F60 0002FB40  48 31 27 49 */	bl OSReport
+    /* 80032F64 0002FB44  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80032F68 0002FB48  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032F6C 0002FB4C  38 80 00 66 */	li r4, 0x66
+    /* 80032F70 0002FB50  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032F74 0002FB54  48 35 52 AD */	bl __assert
+    lbl_80032F78:
+    /* 80032F78 0002FB58  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 80032F7C 0002FB5C  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80032F80 0002FB60  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80032F84 0002FB64  7C 60 22 14 */	add r3, r0, r4
+    /* 80032F88 0002FB68  88 63 00 4E */	lbz r3, 0x4e(r3)
+    /* 80032F8C 0002FB6C  7C 63 07 74 */	extsb r3, r3
+    /* 80032F90 0002FB70  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80032F94 0002FB74  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80032F98 0002FB78  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80032F9C 0002FB7C  7C 08 03 A6 */	mtlr r0
+    /* 80032FA0 0002FB80  4E 80 00 20 */	blr 
+}
+#endif
+
+
+#ifdef NON_MATCHING
+void Player_80032FA4(s32 slot, s32 arg) {  ///https://decomp.me/scratch/MHqlV
+    StaticPlayer* player;
+    s32 value;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->unk4E = arg;
+}
+#else
+asm void Player_80032FA4(s32 slot, s32 arg) 
+{
+    nofralloc
+    /* 80032FA4 0002FB84  7C 08 02 A6 */	mflr r0
+    /* 80032FA8 0002FB88  90 01 00 04 */	stw r0, 4(r1)
+    /* 80032FAC 0002FB8C  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80032FB0 0002FB90  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80032FB4 0002FB94  3B E4 00 00 */	addi r31, r4, 0
+    /* 80032FB8 0002FB98  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 80032FBC 0002FB9C  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80032FC0 0002FBA0  41 80 00 0C */	blt lbl_80032FCC
+    /* 80032FC4 0002FBA4  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80032FC8 0002FBA8  41 80 00 2C */	blt lbl_80032FF4
+    lbl_80032FCC:
+    /* 80032FCC 0002FBAC  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80032FD0 0002FBB0  4C C6 31 82 */	crclr 6
+    /* 80032FD4 0002FBB4  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80032FD8 0002FBB8  38 9E 00 00 */	addi r4, r30, 0
+    /* 80032FDC 0002FBBC  48 31 26 CD */	bl OSReport
+    /* 80032FE0 0002FBC0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80032FE4 0002FBC4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80032FE8 0002FBC8  38 80 00 66 */	li r4, 0x66
+    /* 80032FEC 0002FBCC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80032FF0 0002FBD0  48 35 52 31 */	bl __assert
+    lbl_80032FF4:
+    /* 80032FF4 0002FBD4  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80032FF8 0002FBD8  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80032FFC 0002FBDC  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80033000 0002FBE0  7F E5 07 74 */	extsb r5, r31
+    /* 80033004 0002FBE4  7C 60 22 14 */	add r3, r0, r4
+    /* 80033008 0002FBE8  98 A3 00 4E */	stb r5, 0x4e(r3)
+    /* 8003300C 0002FBEC  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80033010 0002FBF0  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80033014 0002FBF4  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80033018 0002FBF8  38 21 00 20 */	addi r1, r1, 0x20
+    /* 8003301C 0002FBFC  7C 08 03 A6 */	mtlr r0
+    /* 80033020 0002FC00  4E 80 00 20 */	blr 
+}
+#endif
+
+
+#ifdef NON_MATCHING
+f32 Player_GetFacingDirection(s32 slot) {   ///https://decomp.me/scratch/HNZ62
+    StaticPlayer* player;
+    s32 value;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    return player->facing_direction;
+}
+#else
+asm f32 Player_GetFacingDirection(s32 slot)
+{
+    nofralloc
+    /* 80033024 0002FC04  7C 08 02 A6 */	mflr r0
+    /* 80033028 0002FC08  90 01 00 04 */	stw r0, 4(r1)
+    /* 8003302C 0002FC0C  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80033030 0002FC10  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80033034 0002FC14  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 80033038 0002FC18  41 80 00 0C */	blt lbl_80033044
+    /* 8003303C 0002FC1C  2C 1F 00 06 */	cmpwi r31, 6
+    /* 80033040 0002FC20  41 80 00 2C */	blt lbl_8003306C
+    lbl_80033044:
+    /* 80033044 0002FC24  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80033048 0002FC28  4C C6 31 82 */	crclr 6
+    /* 8003304C 0002FC2C  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80033050 0002FC30  38 9F 00 00 */	addi r4, r31, 0
+    /* 80033054 0002FC34  48 31 26 55 */	bl OSReport
+    /* 80033058 0002FC38  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 8003305C 0002FC3C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033060 0002FC40  38 80 00 66 */	li r4, 0x66
+    /* 80033064 0002FC44  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033068 0002FC48  48 35 51 B9 */	bl __assert
+    lbl_8003306C:
+    /* 8003306C 0002FC4C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 80033070 0002FC50  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80033074 0002FC54  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80033078 0002FC58  7C 60 22 14 */	add r3, r0, r4
+    /* 8003307C 0002FC5C  C0 23 00 40 */	lfs f1, 0x40(r3)
+    /* 80033080 0002FC60  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80033084 0002FC64  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80033088 0002FC68  38 21 00 20 */	addi r1, r1, 0x20
+    /* 8003308C 0002FC6C  7C 08 03 A6 */	mtlr r0
+    /* 80033090 0002FC70  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetFacingDirection(s32 slot, f32 direction) {  ///https://decomp.me/scratch/A84ci
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->facing_direction = direction;
+}
+#else
+asm void Player_SetFacingDirection(s32 slot, f32 direction)
+{
+    nofralloc
+    /* 80033094 0002FC74  7C 08 02 A6 */	mflr r0
+    /* 80033098 0002FC78  90 01 00 04 */	stw r0, 4(r1)
+    /* 8003309C 0002FC7C  94 21 FF D8 */	stwu r1, -0x28(r1)
+    /* 800330A0 0002FC80  DB E1 00 20 */	stfd f31, 0x20(r1)
+    /* 800330A4 0002FC84  FF E0 08 90 */	fmr f31, f1
+    /* 800330A8 0002FC88  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 800330AC 0002FC8C  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 800330B0 0002FC90  41 80 00 0C */	blt lbl_800330BC
+    /* 800330B4 0002FC94  2C 1F 00 06 */	cmpwi r31, 6
+    /* 800330B8 0002FC98  41 80 00 2C */	blt lbl_800330E4
+    lbl_800330BC:
+    /* 800330BC 0002FC9C  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 800330C0 0002FCA0  4C C6 31 82 */	crclr 6
+    /* 800330C4 0002FCA4  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 800330C8 0002FCA8  38 9F 00 00 */	addi r4, r31, 0
+    /* 800330CC 0002FCAC  48 31 25 DD */	bl OSReport
+    /* 800330D0 0002FCB0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 800330D4 0002FCB4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 800330D8 0002FCB8  38 80 00 66 */	li r4, 0x66
+    /* 800330DC 0002FCBC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800330E0 0002FCC0  48 35 51 41 */	bl __assert
+    lbl_800330E4:
+    /* 800330E4 0002FCC4  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 800330E8 0002FCC8  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 800330EC 0002FCCC  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 800330F0 0002FCD0  7C 60 22 14 */	add r3, r0, r4
+    /* 800330F4 0002FCD4  D3 E3 00 40 */	stfs f31, 0x40(r3)
+    /* 800330F8 0002FCD8  80 01 00 2C */	lwz r0, 0x2c(r1)
+    /* 800330FC 0002FCDC  CB E1 00 20 */	lfd f31, 0x20(r1)
+    /* 80033100 0002FCE0  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80033104 0002FCE4  38 21 00 28 */	addi r1, r1, 0x28
+    /* 80033108 0002FCE8  7C 08 03 A6 */	mtlr r0
+    /* 8003310C 0002FCEC  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction) {  ///https://decomp.me/scratch/S2NKb
+    StaticPlayer* player;
+    s32 unused;
+    if (!b) {
+        Player_CheckSlot(slot);
+        player = &player_slots[slot];
+        player->facing_direction = direction;
+    }
+}
+#else
+asm void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction)
+{
+    nofralloc
+    /* 80033110 0002FCF0  7C 08 02 A6 */	mflr r0
+    /* 80033114 0002FCF4  2C 04 00 00 */	cmpwi r4, 0
+    /* 80033118 0002FCF8  90 01 00 04 */	stw r0, 4(r1)
+    /* 8003311C 0002FCFC  94 21 FF D0 */	stwu r1, -0x30(r1)
+    /* 80033120 0002FD00  DB E1 00 28 */	stfd f31, 0x28(r1)
+    /* 80033124 0002FD04  FF E0 08 90 */	fmr f31, f1
+    /* 80033128 0002FD08  93 E1 00 24 */	stw r31, 0x24(r1)
+    /* 8003312C 0002FD0C  3B E3 00 00 */	addi r31, r3, 0
+    /* 80033130 0002FD10  40 82 00 50 */	bne lbl_80033180
+    /* 80033134 0002FD14  2C 1F 00 00 */	cmpwi r31, 0
+    /* 80033138 0002FD18  41 80 00 0C */	blt lbl_80033144
+    /* 8003313C 0002FD1C  2C 1F 00 06 */	cmpwi r31, 6
+    /* 80033140 0002FD20  41 80 00 2C */	blt lbl_8003316C
+    lbl_80033144:
+    /* 80033144 0002FD24  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80033148 0002FD28  4C C6 31 82 */	crclr 6
+    /* 8003314C 0002FD2C  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80033150 0002FD30  38 9F 00 00 */	addi r4, r31, 0
+    /* 80033154 0002FD34  48 31 25 55 */	bl OSReport
+    /* 80033158 0002FD38  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 8003315C 0002FD3C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033160 0002FD40  38 80 00 66 */	li r4, 0x66
+    /* 80033164 0002FD44  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033168 0002FD48  48 35 50 B9 */	bl __assert
+    lbl_8003316C:
+    /* 8003316C 0002FD4C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 80033170 0002FD50  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80033174 0002FD54  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80033178 0002FD58  7C 60 22 14 */	add r3, r0, r4
+    /* 8003317C 0002FD5C  D3 E3 00 40 */	stfs f31, 0x40(r3)
+    lbl_80033180:
+    /* 80033180 0002FD60  80 01 00 34 */	lwz r0, 0x34(r1)
+    /* 80033184 0002FD64  CB E1 00 28 */	lfd f31, 0x28(r1)
+    /* 80033188 0002FD68  83 E1 00 24 */	lwz r31, 0x24(r1)
+    /* 8003318C 0002FD6C  38 21 00 30 */	addi r1, r1, 0x30
+    /* 80033190 0002FD70  7C 08 03 A6 */	mtlr r0
+    /* 80033194 0002FD74  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+s8 Player_GetCostumeId(s32 slot) {   ///https://decomp.me/scratch/MFT7R
+    s8 costume_id;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    costume_id = player->costume_id;
+    return costume_id;
+}
+#else
+asm s8 Player_GetCostumeId(s32 slot)
+{
+    nofralloc
+    /* 80033198 0002FD78  7C 08 02 A6 */	mflr r0
+    /* 8003319C 0002FD7C  90 01 00 04 */	stw r0, 4(r1)
+    /* 800331A0 0002FD80  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 800331A4 0002FD84  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 800331A8 0002FD88  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 800331AC 0002FD8C  41 80 00 0C */	blt lbl_800331B8
+    /* 800331B0 0002FD90  2C 1F 00 06 */	cmpwi r31, 6
+    /* 800331B4 0002FD94  41 80 00 2C */	blt lbl_800331E0
+    lbl_800331B8:
+    /* 800331B8 0002FD98  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 800331BC 0002FD9C  4C C6 31 82 */	crclr 6
+    /* 800331C0 0002FDA0  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 800331C4 0002FDA4  38 9F 00 00 */	addi r4, r31, 0
+    /* 800331C8 0002FDA8  48 31 24 E1 */	bl OSReport
+    /* 800331CC 0002FDAC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 800331D0 0002FDB0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 800331D4 0002FDB4  38 80 00 66 */	li r4, 0x66
+    /* 800331D8 0002FDB8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800331DC 0002FDBC  48 35 50 45 */	bl __assert
+    lbl_800331E0:
+    /* 800331E0 0002FDC0  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 800331E4 0002FDC4  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 800331E8 0002FDC8  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 800331EC 0002FDCC  7C 60 22 14 */	add r3, r0, r4
+    /* 800331F0 0002FDD0  88 63 00 44 */	lbz r3, 0x44(r3)
+    /* 800331F4 0002FDD4  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 800331F8 0002FDD8  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 800331FC 0002FDDC  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80033200 0002FDE0  7C 08 03 A6 */	mtlr r0
+    /* 80033204 0002FDE4  4E 80 00 20 */	blr 
+
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetCostumeId(s32 slot, s8 costume_id) {  //https://decomp.me/scratch/u3A1u
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->costume_id = costume_id;
+}
+#else
+asm void Player_SetCostumeId(s32 slot, s8 costume_id)
+{
+    nofralloc
+    /* 80033208 0002FDE8  7C 08 02 A6 */	mflr r0
+    /* 8003320C 0002FDEC  90 01 00 04 */	stw r0, 4(r1)
+    /* 80033210 0002FDF0  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80033214 0002FDF4  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80033218 0002FDF8  3B E4 00 00 */	addi r31, r4, 0
+    /* 8003321C 0002FDFC  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 80033220 0002FE00  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80033224 0002FE04  41 80 00 0C */	blt lbl_80033230
+    /* 80033228 0002FE08  2C 1E 00 06 */	cmpwi r30, 6
+    /* 8003322C 0002FE0C  41 80 00 2C */	blt lbl_80033258
+    lbl_80033230:
+    /* 80033230 0002FE10  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80033234 0002FE14  4C C6 31 82 */	crclr 6
+    /* 80033238 0002FE18  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 8003323C 0002FE1C  38 9E 00 00 */	addi r4, r30, 0
+    /* 80033240 0002FE20  48 31 24 69 */	bl OSReport
+    /* 80033244 0002FE24  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80033248 0002FE28  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 8003324C 0002FE2C  38 80 00 66 */	li r4, 0x66
+    /* 80033250 0002FE30  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033254 0002FE34  48 35 4F CD */	bl __assert
+    lbl_80033258:
+    /* 80033258 0002FE38  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 8003325C 0002FE3C  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80033260 0002FE40  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80033264 0002FE44  7C 60 22 14 */	add r3, r0, r4
+    /* 80033268 0002FE48  9B E3 00 44 */	stb r31, 0x44(r3)
+    /* 8003326C 0002FE4C  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80033270 0002FE50  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80033274 0002FE54  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80033278 0002FE58  38 21 00 20 */	addi r1, r1, 0x20
+    /* 8003327C 0002FE5C  7C 08 03 A6 */	mtlr r0
+    /* 80033280 0002FE60  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+s8 Player_GetControllerIndex(s32 slot) {   ///https://decomp.me/scratch/Y9hg1
+    s8 controller_index;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    controller_index = player->controller_index;
+    return controller_index;
+}
+#else
+asm s8 Player_GetControllerIndex(s32 slot) 
+{
+    nofralloc
+    /* 80033284 0002FE64  7C 08 02 A6 */	mflr r0
+    /* 80033288 0002FE68  90 01 00 04 */	stw r0, 4(r1)
+    /* 8003328C 0002FE6C  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80033290 0002FE70  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80033294 0002FE74  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 80033298 0002FE78  41 80 00 0C */	blt lbl_800332A4
+    /* 8003329C 0002FE7C  2C 1F 00 06 */	cmpwi r31, 6
+    /* 800332A0 0002FE80  41 80 00 2C */	blt lbl_800332CC
+    lbl_800332A4:
+    /* 800332A4 0002FE84  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 800332A8 0002FE88  4C C6 31 82 */	crclr 6
+    /* 800332AC 0002FE8C  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 800332B0 0002FE90  38 9F 00 00 */	addi r4, r31, 0
+    /* 800332B4 0002FE94  48 31 23 F5 */	bl OSReport
+    /* 800332B8 0002FE98  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 800332BC 0002FE9C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 800332C0 0002FEA0  38 80 00 66 */	li r4, 0x66
+    /* 800332C4 0002FEA4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800332C8 0002FEA8  48 35 4F 59 */	bl __assert
+    lbl_800332CC:
+    /* 800332CC 0002FEAC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 800332D0 0002FEB0  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 800332D4 0002FEB4  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 800332D8 0002FEB8  7C 60 22 14 */	add r3, r0, r4
+    /* 800332DC 0002FEBC  88 63 00 46 */	lbz r3, 0x46(r3)
+    /* 800332E0 0002FEC0  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 800332E4 0002FEC4  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 800332E8 0002FEC8  38 21 00 20 */	addi r1, r1, 0x20
+    /* 800332EC 0002FECC  7C 08 03 A6 */	mtlr r0
+    /* 800332F0 0002FED0  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetControllerIndex(s32 slot, s8 controller_index) {    //https://decomp.me/scratch/mUnD7
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->controller_index = controller_index;
+}
+#else
+asm void Player_SetControllerIndex(s32 slot, s8 controller_index)
+{
+    nofralloc
+    /* 800332F4 0002FED4  7C 08 02 A6 */	mflr r0
+    /* 800332F8 0002FED8  90 01 00 04 */	stw r0, 4(r1)
+    /* 800332FC 0002FEDC  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80033300 0002FEE0  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80033304 0002FEE4  3B E4 00 00 */	addi r31, r4, 0
+    /* 80033308 0002FEE8  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 8003330C 0002FEEC  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80033310 0002FEF0  41 80 00 0C */	blt lbl_8003331C
+    /* 80033314 0002FEF4  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80033318 0002FEF8  41 80 00 2C */	blt lbl_80033344
+    lbl_8003331C:
+    /* 8003331C 0002FEFC  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80033320 0002FF00  4C C6 31 82 */	crclr 6
+    /* 80033324 0002FF04  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80033328 0002FF08  38 9E 00 00 */	addi r4, r30, 0
+    /* 8003332C 0002FF0C  48 31 23 7D */	bl OSReport
+    /* 80033330 0002FF10  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80033334 0002FF14  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033338 0002FF18  38 80 00 66 */	li r4, 0x66
+    /* 8003333C 0002FF1C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033340 0002FF20  48 35 4E E1 */	bl __assert
+    lbl_80033344:
+    /* 80033344 0002FF24  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80033348 0002FF28  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 8003334C 0002FF2C  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80033350 0002FF30  7C 60 22 14 */	add r3, r0, r4
+    /* 80033354 0002FF34  9B E3 00 46 */	stb r31, 0x46(r3)
+    /* 80033358 0002FF38  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 8003335C 0002FF3C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80033360 0002FF40  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80033364 0002FF44  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80033368 0002FF48  7C 08 03 A6 */	mtlr r0
+    /* 8003336C 0002FF4C  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+s8 Player_GetUnkColor(s32 slot) {  //https://decomp.me/scratch/xd5Nw
+    s8 unk_color;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    unk_color = player->unk_color;
+    return unk_color;
+}
+#else
+asm s8 Player_GetUnkColor(s32 slot)
+{
+    nofralloc
+    /* 80033370 0002FF50  7C 08 02 A6 */	mflr r0
+    /* 80033374 0002FF54  90 01 00 04 */	stw r0, 4(r1)
+    /* 80033378 0002FF58  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 8003337C 0002FF5C  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80033380 0002FF60  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 80033384 0002FF64  41 80 00 0C */	blt lbl_80033390
+    /* 80033388 0002FF68  2C 1F 00 06 */	cmpwi r31, 6
+    /* 8003338C 0002FF6C  41 80 00 2C */	blt lbl_800333B8
+    lbl_80033390:
+    /* 80033390 0002FF70  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80033394 0002FF74  4C C6 31 82 */	crclr 6
+    /* 80033398 0002FF78  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 8003339C 0002FF7C  38 9F 00 00 */	addi r4, r31, 0
+    /* 800333A0 0002FF80  48 31 23 09 */	bl OSReport
+    /* 800333A4 0002FF84  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 800333A8 0002FF88  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 800333AC 0002FF8C  38 80 00 66 */	li r4, 0x66
+    /* 800333B0 0002FF90  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800333B4 0002FF94  48 35 4E 6D */	bl __assert
+    lbl_800333B8:
+    /* 800333B8 0002FF98  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 800333BC 0002FF9C  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 800333C0 0002FFA0  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 800333C4 0002FFA4  7C 60 22 14 */	add r3, r0, r4
+    /* 800333C8 0002FFA8  88 63 00 47 */	lbz r3, 0x47(r3)
+    /* 800333CC 0002FFAC  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 800333D0 0002FFB0  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 800333D4 0002FFB4  38 21 00 20 */	addi r1, r1, 0x20
+    /* 800333D8 0002FFB8  7C 08 03 A6 */	mtlr r0
+    /* 800333DC 0002FFBC  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetUnkColor(s32 slot, s8 unk_color) {   //https://decomp.me/scratch/sgRAy
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->unk_color = unk_color;
+}
+#else
+asm void Player_SetUnkColor(s32 slot, s8 unk_color)
+{
+    nofralloc
+    /* 800333E0 0002FFC0  7C 08 02 A6 */	mflr r0
+    /* 800333E4 0002FFC4  90 01 00 04 */	stw r0, 4(r1)
+    /* 800333E8 0002FFC8  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 800333EC 0002FFCC  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 800333F0 0002FFD0  3B E4 00 00 */	addi r31, r4, 0
+    /* 800333F4 0002FFD4  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 800333F8 0002FFD8  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 800333FC 0002FFDC  41 80 00 0C */	blt lbl_80033408
+    /* 80033400 0002FFE0  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80033404 0002FFE4  41 80 00 2C */	blt lbl_80033430
+    lbl_80033408:
+    /* 80033408 0002FFE8  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 8003340C 0002FFEC  4C C6 31 82 */	crclr 6
+    /* 80033410 0002FFF0  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80033414 0002FFF4  38 9E 00 00 */	addi r4, r30, 0
+    /* 80033418 0002FFF8  48 31 22 91 */	bl OSReport
+    /* 8003341C 0002FFFC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80033420 00030000  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033424 00030004  38 80 00 66 */	li r4, 0x66
+    /* 80033428 00030008  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003342C 0003000C  48 35 4D F5 */	bl __assert
+    lbl_80033430:
+    /* 80033430 00030010  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80033434 00030014  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80033438 00030018  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 8003343C 0003001C  7C 60 22 14 */	add r3, r0, r4
+    /* 80033440 00030020  9B E3 00 47 */	stb r31, 0x47(r3)
+    /* 80033444 00030024  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80033448 00030028  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 8003344C 0003002C  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80033450 00030030  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80033454 00030034  7C 08 03 A6 */	mtlr r0
+    /* 80033458 00030038  4E 80 00 20 */	blr 
+}
+#endif
+
+
+#ifdef NON_MATCHING
+s8 Player_GetPlayerId(s32 slot) {  //https://decomp.me/scratch/XYjDY
+    s8 player_id;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player_id = player->player_id;
+    return player_id;
+}
+#else
+asm s8 Player_GetPlayerId(s32 slot)
+{
+    nofralloc
+    /* 8003345C 0003003C  7C 08 02 A6 */	mflr r0
+    /* 80033460 00030040  90 01 00 04 */	stw r0, 4(r1)
+    /* 80033464 00030044  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80033468 00030048  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 8003346C 0003004C  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 80033470 00030050  41 80 00 0C */	blt lbl_8003347C
+    /* 80033474 00030054  2C 1F 00 06 */	cmpwi r31, 6
+    /* 80033478 00030058  41 80 00 2C */	blt lbl_800334A4
+    lbl_8003347C:
+    /* 8003347C 0003005C  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80033480 00030060  4C C6 31 82 */	crclr 6
+    /* 80033484 00030064  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80033488 00030068  38 9F 00 00 */	addi r4, r31, 0
+    /* 8003348C 0003006C  48 31 22 1D */	bl OSReport
+    /* 80033490 00030070  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80033494 00030074  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033498 00030078  38 80 00 66 */	li r4, 0x66
+    /* 8003349C 0003007C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800334A0 00030080  48 35 4D 81 */	bl __assert
+    lbl_800334A4:
+    /* 800334A4 00030084  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 800334A8 00030088  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 800334AC 0003008C  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 800334B0 00030090  7C 60 22 14 */	add r3, r0, r4
+    /* 800334B4 00030094  88 63 00 48 */	lbz r3, 0x48(r3)
+    /* 800334B8 00030098  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 800334BC 0003009C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 800334C0 000300A0  38 21 00 20 */	addi r1, r1, 0x20
+    /* 800334C4 000300A4  7C 08 03 A6 */	mtlr r0
+    /* 800334C8 000300A8  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetPlayerId(s32 slot, s8 player_id) {  ///https://decomp.me/scratch/uC164
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->player_id = player_id;
+}
+#else
+asm void Player_SetPlayerId(s32 slot, s8 player_id)
+{
+    nofralloc
+    /* 800334CC 000300AC  7C 08 02 A6 */	mflr r0
+    /* 800334D0 000300B0  90 01 00 04 */	stw r0, 4(r1)
+    /* 800334D4 000300B4  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 800334D8 000300B8  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 800334DC 000300BC  3B E4 00 00 */	addi r31, r4, 0
+    /* 800334E0 000300C0  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 800334E4 000300C4  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 800334E8 000300C8  41 80 00 0C */	blt lbl_800334F4
+    /* 800334EC 000300CC  2C 1E 00 06 */	cmpwi r30, 6
+    /* 800334F0 000300D0  41 80 00 2C */	blt lbl_8003351C
+    lbl_800334F4:
+    /* 800334F4 000300D4  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 800334F8 000300D8  4C C6 31 82 */	crclr 6
+    /* 800334FC 000300DC  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80033500 000300E0  38 9E 00 00 */	addi r4, r30, 0
+    /* 80033504 000300E4  48 31 21 A5 */	bl OSReport
+    /* 80033508 000300E8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 8003350C 000300EC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033510 000300F0  38 80 00 66 */	li r4, 0x66
+    /* 80033514 000300F4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033518 000300F8  48 35 4D 09 */	bl __assert
+    lbl_8003351C:
+    /* 8003351C 000300FC  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80033520 00030100  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80033524 00030104  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80033528 00030108  7C 60 22 14 */	add r3, r0, r4
+    /* 8003352C 0003010C  9B E3 00 48 */	stb r31, 0x48(r3)
+    /* 80033530 00030110  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80033534 00030114  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80033538 00030118  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 8003353C 0003011C  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80033540 00030120  7C 08 03 A6 */	mtlr r0
+    /* 80033544 00030124  4E 80 00 20 */	blr 
+}
+#endif
+
+
+#ifdef NON_MATCHING
+s8 Player_GetCpuLevel(s32 slot) {    ///https://decomp.me/scratch/qHsUw
+    s8 cpu_level;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    cpu_level = player->cpu_level;
+    return cpu_level;
+}
+#else
+asm s8 Player_GetCpuLevel(s32 slot)
+{
+    nofralloc
+    /* 80033548 00030128  7C 08 02 A6 */	mflr r0
+    /* 8003354C 0003012C  90 01 00 04 */	stw r0, 4(r1)
+    /* 80033550 00030130  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80033554 00030134  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80033558 00030138  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 8003355C 0003013C  41 80 00 0C */	blt lbl_80033568
+    /* 80033560 00030140  2C 1F 00 06 */	cmpwi r31, 6
+    /* 80033564 00030144  41 80 00 2C */	blt lbl_80033590
+    lbl_80033568:
+    /* 80033568 00030148  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 8003356C 0003014C  4C C6 31 82 */	crclr 6
+    /* 80033570 00030150  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80033574 00030154  38 9F 00 00 */	addi r4, r31, 0
+    /* 80033578 00030158  48 31 21 31 */	bl OSReport
+    /* 8003357C 0003015C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80033580 00030160  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033584 00030164  38 80 00 66 */	li r4, 0x66
+    /* 80033588 00030168  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003358C 0003016C  48 35 4C 95 */	bl __assert
+    lbl_80033590:
+    /* 80033590 00030170  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 80033594 00030174  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80033598 00030178  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 8003359C 0003017C  7C 60 22 14 */	add r3, r0, r4
+    /* 800335A0 00030180  88 63 00 49 */	lbz r3, 0x49(r3)
+    /* 800335A4 00030184  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 800335A8 00030188  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 800335AC 0003018C  38 21 00 20 */	addi r1, r1, 0x20
+    /* 800335B0 00030190  7C 08 03 A6 */	mtlr r0
+    /* 800335B4 00030194  4E 80 00 20 */	blr 
+}
+#endif
+
+
+#ifdef NON_MATCHING
+void Player_SetPlayerAndEntityCpuLevel(s32 slot, s8 cpu_level) {   /////https://decomp.me/scratch/yPZB6
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->cpu_level = cpu_level;
+    for (i = 0; i < 2; i++){
+        if (player->player_entity[player->transformed[i]]) {
+            func_80087BEC(player->player_entity[player->transformed[i]], cpu_level);
+        }
+    }
+}
+#else
+asm void Player_SetPlayerAndEntityCpuLevel(s32 slot, s8 cpu_level)
+{
+    nofralloc
+    /* 800335B8 00030198  7C 08 02 A6 */	mflr r0
+    /* 800335BC 0003019C  90 01 00 04 */	stw r0, 4(r1)
+    /* 800335C0 000301A0  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 800335C4 000301A4  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 800335C8 000301A8  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 800335CC 000301AC  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 800335D0 000301B0  93 A1 00 14 */	stw r29, 0x14(r1)
+    /* 800335D4 000301B4  3B A4 00 00 */	addi r29, r4, 0
+    /* 800335D8 000301B8  41 80 00 0C */	blt lbl_800335E4
+    /* 800335DC 000301BC  2C 1E 00 06 */	cmpwi r30, 6
+    /* 800335E0 000301C0  41 80 00 2C */	blt lbl_8003360C
+    lbl_800335E4:
+    /* 800335E4 000301C4  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 800335E8 000301C8  4C C6 31 82 */	crclr 6
+    /* 800335EC 000301CC  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 800335F0 000301D0  38 9E 00 00 */	addi r4, r30, 0
+    /* 800335F4 000301D4  48 31 20 B5 */	bl OSReport
+    /* 800335F8 000301D8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 800335FC 000301DC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033600 000301E0  38 80 00 66 */	li r4, 0x66
+    /* 80033604 000301E4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033608 000301E8  48 35 4C 19 */	bl __assert
+    lbl_8003360C:
+    /* 8003360C 000301EC  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80033610 000301F0  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80033614 000301F4  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80033618 000301F8  7F E0 22 14 */	add r31, r0, r4
+    /* 8003361C 000301FC  9B BF 00 49 */	stb r29, 0x49(r31)
+    /* 80033620 00030200  3B C0 00 00 */	li r30, 0
+    lbl_80033624:
+    /* 80033624 00030204  38 1E 00 0C */	addi r0, r30, 0xc
+    /* 80033628 00030208  7C 1F 00 AE */	lbzx r0, r31, r0
+    /* 8003362C 0003020C  54 03 10 3A */	slwi r3, r0, 2
+    /* 80033630 00030210  38 03 00 B0 */	addi r0, r3, 0xb0
+    /* 80033634 00030214  7C 7F 00 2E */	lwzx r3, r31, r0
+    /* 80033638 00030218  28 03 00 00 */	cmplwi r3, 0
+    /* 8003363C 0003021C  41 82 00 0C */	beq lbl_80033648
+    /* 80033640 00030220  7F A4 EB 78 */	mr r4, r29
+    /* 80033644 00030224  48 05 45 A9 */	bl func_80087BEC
+    lbl_80033648:
+    /* 80033648 00030228  3B DE 00 01 */	addi r30, r30, 1
+    /* 8003364C 0003022C  2C 1E 00 02 */	cmpwi r30, 2
+    /* 80033650 00030230  41 80 FF D4 */	blt lbl_80033624
+    /* 80033654 00030234  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80033658 00030238  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 8003365C 0003023C  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80033660 00030240  83 A1 00 14 */	lwz r29, 0x14(r1)
+    /* 80033664 00030244  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80033668 00030248  7C 08 03 A6 */	mtlr r0
+    /* 8003366C 0003024C  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+s8 Player_GetCpuType(s32 slot) {   ///https://decomp.me/scratch/AD23P
+    s8 cpu_type;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    cpu_type = player->cpu_type;
+    return cpu_type;
+}
+#else
+asm s8 Player_GetCpuType(s32 slot)
+{
+    nofralloc
+    /* 80033670 00030250  7C 08 02 A6 */	mflr r0
+    /* 80033674 00030254  90 01 00 04 */	stw r0, 4(r1)
+    /* 80033678 00030258  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 8003367C 0003025C  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80033680 00030260  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 80033684 00030264  41 80 00 0C */	blt lbl_80033690
+    /* 80033688 00030268  2C 1F 00 06 */	cmpwi r31, 6
+    /* 8003368C 0003026C  41 80 00 2C */	blt lbl_800336B8
+    lbl_80033690:
+    /* 80033690 00030270  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80033694 00030274  4C C6 31 82 */	crclr 6
+    /* 80033698 00030278  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 8003369C 0003027C  38 9F 00 00 */	addi r4, r31, 0
+    /* 800336A0 00030280  48 31 20 09 */	bl OSReport
+    /* 800336A4 00030284  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 800336A8 00030288  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 800336AC 0003028C  38 80 00 66 */	li r4, 0x66
+    /* 800336B0 00030290  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800336B4 00030294  48 35 4B 6D */	bl __assert
+    lbl_800336B8:
+    /* 800336B8 00030298  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 800336BC 0003029C  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 800336C0 000302A0  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 800336C4 000302A4  7C 60 22 14 */	add r3, r0, r4
+    /* 800336C8 000302A8  88 63 00 4A */	lbz r3, 0x4a(r3)
+    /* 800336CC 000302AC  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 800336D0 000302B0  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 800336D4 000302B4  38 21 00 20 */	addi r1, r1, 0x20
+    /* 800336D8 000302B8  7C 08 03 A6 */	mtlr r0
+    /* 800336DC 000302BC  4E 80 00 20 */	blr 
+}
+#endif
+
+
+#ifdef NON_MATCHING
+void Player_SetPlayerAndEntityCpuType(s32 slot, s8 cpu_type) {   ///https://decomp.me/scratch/e0AfS
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->cpu_type = cpu_type;
+    for (i = 0; i < 2; i++){
+        if (player->player_entity[player->transformed[i]]) {
+            func_80087BC0(player->player_entity[player->transformed[i]], cpu_type);
+        }
+    }
+}
+#else
+asm void Player_SetPlayerAndEntityCpuType(s32 slot, s8 cpu_type)
+{
+    nofralloc
+    /* 800336E0 000302C0  7C 08 02 A6 */	mflr r0
+    /* 800336E4 000302C4  90 01 00 04 */	stw r0, 4(r1)
+    /* 800336E8 000302C8  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 800336EC 000302CC  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 800336F0 000302D0  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 800336F4 000302D4  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 800336F8 000302D8  93 A1 00 14 */	stw r29, 0x14(r1)
+    /* 800336FC 000302DC  3B A4 00 00 */	addi r29, r4, 0
+    /* 80033700 000302E0  41 80 00 0C */	blt lbl_8003370C
+    /* 80033704 000302E4  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80033708 000302E8  41 80 00 2C */	blt lbl_80033734
+    lbl_8003370C:
+    /* 8003370C 000302EC  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80033710 000302F0  4C C6 31 82 */	crclr 6
+    /* 80033714 000302F4  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80033718 000302F8  38 9E 00 00 */	addi r4, r30, 0
+    /* 8003371C 000302FC  48 31 1F 8D */	bl OSReport
+    /* 80033720 00030300  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80033724 00030304  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80033728 00030308  38 80 00 66 */	li r4, 0x66
+    /* 8003372C 0003030C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033730 00030310  48 35 4A F1 */	bl __assert
+    lbl_80033734:
+    /* 80033734 00030314  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80033738 00030318  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 8003373C 0003031C  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80033740 00030320  7F E0 22 14 */	add r31, r0, r4
+    /* 80033744 00030324  9B BF 00 4A */	stb r29, 0x4a(r31)
+    /* 80033748 00030328  3B C0 00 00 */	li r30, 0
+    lbl_8003374C:
+    /* 8003374C 0003032C  38 1E 00 0C */	addi r0, r30, 0xc
+    /* 80033750 00030330  7C 1F 00 AE */	lbzx r0, r31, r0
+    /* 80033754 00030334  54 03 10 3A */	slwi r3, r0, 2
+    /* 80033758 00030338  38 03 00 B0 */	addi r0, r3, 0xb0
+    /* 8003375C 0003033C  7C 7F 00 2E */	lwzx r3, r31, r0
+    /* 80033760 00030340  28 03 00 00 */	cmplwi r3, 0
+    /* 80033764 00030344  41 82 00 0C */	beq lbl_80033770
+    /* 80033768 00030348  7F A4 EB 78 */	mr r4, r29
+    /* 8003376C 0003034C  48 05 44 55 */	bl func_80087BC0
+    lbl_80033770:
+    /* 80033770 00030350  3B DE 00 01 */	addi r30, r30, 1
+    /* 80033774 00030354  2C 1E 00 02 */	cmpwi r30, 2
+    /* 80033778 00030358  41 80 FF D4 */	blt lbl_8003374C
+    /* 8003377C 0003035C  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80033780 00030360  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80033784 00030364  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80033788 00030368  83 A1 00 14 */	lwz r29, 0x14(r1)
+    /* 8003378C 0003036C  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80033790 00030370  7C 08 03 A6 */	mtlr r0
+    /* 80033794 00030374  4E 80 00 20 */	blr 
 }
 #endif
