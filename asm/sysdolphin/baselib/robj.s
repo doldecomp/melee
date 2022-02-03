@@ -1764,8 +1764,8 @@ expLoadDesc:
 /* 8037CA00 003795E0  90 1B 00 00 */	stw r0, 0(r27)
 /* 8037CA04 003795E4  48 00 00 10 */	b lbl_8037CA14
 lbl_8037CA08:
-/* 8037CA08 003795E8  3C 60 80 38 */	lis r3, lbl_8037C950@ha
-/* 8037CA0C 003795EC  38 03 C9 50 */	addi r0, r3, lbl_8037C950@l
+/* 8037CA08 003795E8  3C 60 80 38 */	lis r3, dummy_func@ha
+/* 8037CA0C 003795EC  38 03 C9 50 */	addi r0, r3, dummy_func@l
 /* 8037CA10 003795F0  90 1B 00 00 */	stw r0, 0(r27)
 lbl_8037CA14:
 /* 8037CA14 003795F4  83 BC 00 04 */	lwz r29, 4(r28)
