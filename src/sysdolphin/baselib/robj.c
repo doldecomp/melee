@@ -91,3 +91,31 @@ void HSD_RObjAnimAll(HSD_RObj* robj)
         HSD_RObjAnim(curr);
     }
 }
+
+void HSD_RObjRemoveAnimByFlags(HSD_RObj* robj, u32 flags)
+{
+    if (robj == NULL) {
+        return;
+    }
+        
+    if (robj->aobj != NULL && (flags & 0x80) != 0) {
+        HSD_AObjRemove(robj->aobj);
+        robj->aobj = NULL;
+    }
+}
+
+void HSD_RObjRemoveAnimAllByFlags(HSD_RObj* robj, u32 flags)
+{
+    if (robj == NULL) {
+        return;
+    }
+        
+    for (; robj != NULL; robj = robj->next) {
+        HSD_RObjRemoveAnimByFlags(robj, flags);
+    }
+}
+
+void HSD_RObjRemoveAnimAll(HSD_RObj* robj) 
+{
+    HSD_RObjRemoveAnimAllByFlags(robj, 0x7FF);
+}
