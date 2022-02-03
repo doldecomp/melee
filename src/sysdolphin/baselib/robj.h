@@ -94,5 +94,7 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype);
 void HSD_RObjAnimAll(HSD_RObj* robj);
 void HSD_RObjRemoveAnimAllByFlags(HSD_RObj* robj, u32 flags);
 void HSD_RObjRemoveAnimAll(HSD_RObj* robj);
+void HSD_RObjReqAnimAllByFlags(HSD_RObj* robj, f32 startframe, u32 flags);
+void HSD_RObjReqAnimAll(HSD_RObj* robj, f32 startframe);
 
 #endif
