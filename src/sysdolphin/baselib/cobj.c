@@ -152,7 +152,7 @@ lbl_80367840:
 
 #pragma push 
 #pragma peephole on
-inline void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
+void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
 {
     HSD_WObj* wobj;
     

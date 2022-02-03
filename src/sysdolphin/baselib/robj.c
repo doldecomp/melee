@@ -72,7 +72,7 @@ static void RObjUpdateFunc(void* obj, s32 type, FObjData val)
     robj->flags = robj->flags & 0x7fffffff;
 }
 
-inline void HSD_RObjAnim(HSD_RObj* robj)
+void HSD_RObjAnim(HSD_RObj* robj)
 {
     if (robj == NULL)
         return;

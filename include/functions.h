@@ -8656,7 +8656,7 @@ void HSD_ObjAllocInit(struct _HSD_ObjAllocData* data, u32 size, u32 align);
 // ? func_8037AE90(?);
 // ? HSD_RObjGetByType(?);
 // ? HSD_RObjAnimAll(?);
-// ? func_8037AFC0(?);
+// ? HSD_RObjRemoveAnimAllByFlags(?);
 void HSD_RObjRemoveAnimAll(struct _HSD_RObj* robj);
 // ? func_8037B0B0(?);
 void HSD_RObjReqAnimAll(struct _HSD_RObj* robj, f32 frame);
