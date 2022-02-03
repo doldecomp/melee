@@ -8262,7 +8262,7 @@ struct _HSD_DObj* HSD_DObjLoadDesc(struct _HSD_DObjDesc*);
 // ? func_80361174(?);
 struct _HSD_TObj* allocShadowTObj();
 // ? func_803611E8(?);
-// ? func_8036121C(?);
+// ? HSD_TlutAlloc(?);
 // ? HSD_TlutFree(?);
 // ? func_803612A0(?);
 struct _HSD_ImageDesc* HSD_ImageDescAlloc();
