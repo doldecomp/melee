@@ -8239,7 +8239,7 @@ struct _HSD_DObj* HSD_DObjLoadDesc(struct _HSD_DObjDesc*);
 // ? HSD_TObjReqAnimAllByFlags(?);
 // ? HSD_TObjReqAnim(?);
 // ? HSD_TObjReqAnimAll(?);
-// ? func_8035EB6C(?);
+// ? HSD_TObjAnim(?);
 // ? HSD_TObjAnimAll(?);
 // ? HSD_TObjLoadDesc(?);
 // ? HSD_TlutLoadDesc(?);

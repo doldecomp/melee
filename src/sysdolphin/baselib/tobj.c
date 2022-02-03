@@ -115,7 +115,7 @@ void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
     HSD_TObjReqAnimAllByFlags(tobj, startframe, TOBJ_ANIM);
 }
 
-void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
+static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
 {
     HSD_TObj* tobj = obj;
 
@@ -207,5 +207,27 @@ void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
     case HSD_A_T_TS_BLEND:
         tobj->blending = val->fv;
         break;
+    }
+}
+
+void HSD_TObjAnim(HSD_TObj* tobj)
+{
+    if (tobj == NULL) {
+        return;
+    }
+    
+    HSD_AObjInterpretAnim(tobj->aobj, tobj, TObjUpdateFunc);
+}
+
+void HSD_TObjAnimAll(HSD_TObj* tobj)
+{
+    HSD_TObj* i;
+
+    if (tobj == NULL) {
+        return;
+    }
+    
+    for (i = tobj; i != NULL; i = i->next) {
+        HSD_TObjAnim(i);
     }
 }
