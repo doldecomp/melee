@@ -115,9 +115,7 @@ void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
     HSD_TObjReqAnimAllByFlags(tobj, startframe, TOBJ_ANIM);
 }
 
-// Non-matching due to jump table
-#ifdef NON_MATCHING
-static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
+void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
 {
     HSD_TObj* tobj = obj;
 
@@ -128,7 +126,7 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
     case HSD_A_T_TIMG: {
         int n;
         if (tobj->imagetbl == NULL){
-            __assert(lbl_804D5C90, 276, lbl_804055B8);
+            __assert(lbl_804D5C90, 276, "tobj->imagetbl");
         }
         n = (int)val->fv;
         if (tobj->imagetbl[n]) {
@@ -211,4 +209,3 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
         break;
     }
 }
-#endif

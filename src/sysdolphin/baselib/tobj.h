@@ -268,6 +268,9 @@ void HSD_TObjAddAnimAll(HSD_TObj* tobj, HSD_TexAnim* texanim);
 void HSD_TObjReqAnimAllByFlags(HSD_TObj* tobj, f32 startframe, u32 flags);
 void HSD_TObjReqAnim(HSD_TObj* tobj, f32 startframe);
 void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe);
+
+void TObjUpdateFunc(void* obj, u32 type, FObjData* val);
+
 void HSD_TObjAnim(HSD_TObj* tobj);
 void HSD_TObjAnimAll(HSD_TObj* tobj);
 void HSD_TObjRemoveAll(HSD_TObj* tobj);
