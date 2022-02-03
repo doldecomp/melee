@@ -7,7 +7,8 @@ extern void TObjInfoInit(void);
 HSD_TObjInfo hsdTObj = { TObjInfoInit };
 
 extern char lbl_804055B8[];
-extern char lbl_804D5C90[7];// = "tobj.c\0";
+char lbl_804D5C90[7] = "tobj.c\0";
+char lbl_804D5C98[5] = "tobj\0";
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
@@ -259,4 +260,25 @@ void HSD_TObjAnimAll(HSD_TObj* tobj)
     tobj->tev = HSD_TObjTevLoadDesc(td->tev);
 
     return 0;
+}
+
+HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
+{
+    if (td != NULL) {
+        HSD_TObj* tobj;
+        HSD_ClassInfo* info;
+
+        if (!td->class_name || !(info = hsdSearchClassInfo(td->class_name))) {
+            tobj = allocShadowTObj();
+        } else {
+            tobj = hsdNew(info);
+            if (tobj == NULL) {
+                __assert(lbl_804D5C90, 468, lbl_804D5C98);
+            }
+        }
+        HSD_TOBJ_METHOD(tobj)->load(tobj, td);
+        return tobj;
+    } else {
+        return NULL;
+    }
 }

@@ -2,52 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global HSD_TObjLoadDesc
-HSD_TObjLoadDesc:
-/* 8035ED28 0035B908  7C 08 02 A6 */	mflr r0
-/* 8035ED2C 0035B90C  90 01 00 04 */	stw r0, 4(r1)
-/* 8035ED30 0035B910  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8035ED34 0035B914  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8035ED38 0035B918  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8035ED3C 0035B91C  7C 7E 1B 79 */	or. r30, r3, r3
-/* 8035ED40 0035B920  41 82 00 64 */	beq lbl_8035EDA4
-/* 8035ED44 0035B924  80 7E 00 00 */	lwz r3, 0(r30)
-/* 8035ED48 0035B928  28 03 00 00 */	cmplwi r3, 0
-/* 8035ED4C 0035B92C  41 82 00 10 */	beq lbl_8035ED5C
-/* 8035ED50 0035B930  48 02 3A C5 */	bl hsdSearchClassInfo
-/* 8035ED54 0035B934  28 03 00 00 */	cmplwi r3, 0
-/* 8035ED58 0035B938  40 82 00 10 */	bne lbl_8035ED68
-lbl_8035ED5C:
-/* 8035ED5C 0035B93C  48 00 24 31 */	bl allocShadowTObj
-/* 8035ED60 0035B940  7C 7F 1B 78 */	mr r31, r3
-/* 8035ED64 0035B944  48 00 00 20 */	b lbl_8035ED84
-lbl_8035ED68:
-/* 8035ED68 0035B948  48 02 35 DD */	bl hsdNew
-/* 8035ED6C 0035B94C  7C 7F 1B 79 */	or. r31, r3, r3
-/* 8035ED70 0035B950  40 82 00 14 */	bne lbl_8035ED84
-/* 8035ED74 0035B954  38 6D A5 F0 */	addi r3, r13, lbl_804D5C90@sda21
-/* 8035ED78 0035B958  38 80 01 D4 */	li r4, 0x1d4
-/* 8035ED7C 0035B95C  38 AD A5 F8 */	addi r5, r13, lbl_804D5C98@sda21
-/* 8035ED80 0035B960  48 02 94 A1 */	bl __assert
-lbl_8035ED84:
-/* 8035ED84 0035B964  80 BF 00 00 */	lwz r5, 0(r31)
-/* 8035ED88 0035B968  38 7F 00 00 */	addi r3, r31, 0
-/* 8035ED8C 0035B96C  38 9E 00 00 */	addi r4, r30, 0
-/* 8035ED90 0035B970  81 85 00 40 */	lwz r12, 0x40(r5)
-/* 8035ED94 0035B974  7D 88 03 A6 */	mtlr r12
-/* 8035ED98 0035B978  4E 80 00 21 */	blrl 
-/* 8035ED9C 0035B97C  7F E3 FB 78 */	mr r3, r31
-/* 8035EDA0 0035B980  48 00 00 08 */	b lbl_8035EDA8
-lbl_8035EDA4:
-/* 8035EDA4 0035B984  38 60 00 00 */	li r3, 0
-lbl_8035EDA8:
-/* 8035EDA8 0035B988  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8035EDAC 0035B98C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8035EDB0 0035B990  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8035EDB4 0035B994  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035EDB8 0035B998  7C 08 03 A6 */	mtlr r0
-/* 8035EDBC 0035B99C  4E 80 00 20 */	blr 
-
 .global HSD_TlutLoadDesc
 HSD_TlutLoadDesc:
 /* 8035EDC0 0035B9A0  7C 08 02 A6 */	mflr r0
@@ -3385,15 +3339,6 @@ jtbl_804059D0:
 
 .section .sdata
 
-    .4byte NULL
-.global lbl_804D5C90
-lbl_804D5C90:
-    .asciz "tobj.c"
-    .balign 4
-.global lbl_804D5C98
-lbl_804D5C98:
-    .asciz "tobj"
-    .balign 4
 .global lbl_804D5CA0
 lbl_804D5CA0:
     .asciz "cobj"
