@@ -2,8 +2,13 @@
 
 #include "sysdolphin/baselib/aobj.h"
 
+extern void TObjInfoInit(void);
+
+HSD_TObjInfo hsdTObj = { TObjInfoInit };
+
 extern char lbl_804055B8[];
-extern char lbl_804D5C90[7];// = "tobj.c\0";
+char lbl_804D5C90[7] = "tobj.c\0";
+char lbl_804D5C98[5] = "tobj\0";
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
@@ -111,8 +116,6 @@ void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
     HSD_TObjReqAnimAllByFlags(tobj, startframe, TOBJ_ANIM);
 }
 
-// Non-matching due to jump table
-#ifdef NON_MATCHING
 static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
 {
     HSD_TObj* tobj = obj;
@@ -124,7 +127,7 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
     case HSD_A_T_TIMG: {
         int n;
         if (tobj->imagetbl == NULL){
-            __assert(lbl_804D5C90, 276, lbl_804055B8);
+            __assert(lbl_804D5C90, 276, "tobj->imagetbl");
         }
         n = (int)val->fv;
         if (tobj->imagetbl[n]) {
@@ -207,4 +210,75 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
         break;
     }
 }
-#endif
+
+void HSD_TObjAnim(HSD_TObj* tobj)
+{
+    if (tobj == NULL) {
+        return;
+    }
+    
+    HSD_AObjInterpretAnim(tobj->aobj, tobj, TObjUpdateFunc);
+}
+
+void HSD_TObjAnimAll(HSD_TObj* tobj)
+{
+    HSD_TObj* i;
+
+    if (tobj == NULL) {
+        return;
+    }
+    
+    for (i = tobj; i != NULL; i = i->next) {
+        HSD_TObjAnim(i);
+    }
+}
+
+/*static*/ int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td)
+{
+    tobj->next = HSD_TObjLoadDesc(td->next);
+    tobj->id = td->id;
+    tobj->src = td->src;
+    tobj->mtxid = GX_IDENTITY;
+    tobj->rotate.x = td->rotate.x;
+    tobj->rotate.y = td->rotate.y;
+    tobj->rotate.z = td->rotate.z;
+    tobj->scale = td->scale;
+    tobj->translate = td->translate;
+    tobj->wrap_s = td->wrap_s;
+    tobj->wrap_t = td->wrap_t;
+    tobj->repeat_s = td->repeat_s;
+    tobj->repeat_t = td->repeat_t;
+    tobj->flags = td->blend_flags;
+    tobj->blending = td->blending;
+    tobj->magFilt = td->magFilt;
+    tobj->imagedesc = td->imagedesc;
+    tobj->tlut = HSD_TlutLoadDesc(td->tlutdesc);
+    tobj->lod = td->lod;
+    tobj->aobj = NULL;
+    tobj->flags |= TEX_MTX_DIRTY;
+    tobj->tlut_no = (u8)-1;
+    tobj->tev = HSD_TObjTevLoadDesc(td->tev);
+
+    return 0;
+}
+
+HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
+{
+    if (td != NULL) {
+        HSD_TObj* tobj;
+        HSD_ClassInfo* info;
+
+        if (!td->class_name || !(info = hsdSearchClassInfo(td->class_name))) {
+            tobj = allocShadowTObj();
+        } else {
+            tobj = hsdNew(info);
+            if (tobj == NULL) {
+                __assert(lbl_804D5C90, 468, lbl_804D5C98);
+            }
+        }
+        HSD_TOBJ_METHOD(tobj)->load(tobj, td);
+        return tobj;
+    } else {
+        return NULL;
+    }
+}

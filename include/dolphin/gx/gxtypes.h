@@ -5,6 +5,21 @@
 
 #define GX_FIFO_OBJSIZE		128
 
+typedef enum _GXTexMtx
+{
+    GX_TEXMTX0  = 30,
+    GX_TEXMTX1  = 33,
+    GX_TEXMTX2  = 36,
+    GX_TEXMTX3  = 39,
+    GX_TEXMTX4  = 42,
+    GX_TEXMTX5  = 45,
+    GX_TEXMTX6  = 48,
+    GX_TEXMTX7  = 51,
+    GX_TEXMTX8  = 54,
+    GX_TEXMTX9  = 57,
+    GX_IDENTITY = 60
+} GXTexMtx;
+
 typedef struct {
 	u8 pad[GX_FIFO_OBJSIZE];
 } GXFifoObj;

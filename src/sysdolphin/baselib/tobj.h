@@ -132,7 +132,7 @@ typedef struct _HSD_TObj {
     struct _HSD_TObj* next;
     u32 id; //GXTexMapID
     u32 src; //GXTexGenSrc
-    u32 mtxid;
+    GXTexMtx mtxid;
     Quaternion rotate;
     Vec scale;
     Vec translate;
@@ -140,7 +140,6 @@ typedef struct _HSD_TObj {
     u32 wrap_t; //GXTexWrapMode
     u8 repeat_s;
     u8 repeat_t;
-    u16 anim_id;
     u32 flags;
     f32 blending;
     u32 magFilt; //GXTexFilter
@@ -244,7 +243,6 @@ typedef struct _HSD_TObjInfo {
     void (*make_mtx)(HSD_TObj* tobj);
     int (*load)(HSD_TObj* tobj, HSD_TObjDesc* desc);
     void (*make_texp)(HSD_TObj* tobj, u32 lightmap, u32 lightmap_done, HSD_TExp** c, HSD_TExp** a, HSD_TExp** list);
-    void (*update)(void* obj, u32 type, FObjData* val);
 } HSD_TObjInfo;
 
 typedef struct _HSD_TexAnim {
@@ -271,23 +269,21 @@ void HSD_TObjReqAnim(HSD_TObj* tobj, f32 startframe);
 void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe);
 void HSD_TObjAnim(HSD_TObj* tobj);
 void HSD_TObjAnimAll(HSD_TObj* tobj);
+
+int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td);
+
+HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td);
+HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
 void HSD_TObjRemoveAll(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjAlloc(void);
 void HSD_TObjFree(HSD_TObj* tobj);
-
 void HSD_TObjSetDefaultClass(HSD_TObjInfo* info);
 HSD_TObjInfo* HSD_TObjGetDefaultClass(void);
-
-HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
 HSD_Tlut* HSD_TlutAlloc(void);
 void HSD_TlutFree(HSD_Tlut* tlut);
-
 HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
 HSD_TObjTev* HSD_TObjTevAlloc(void);
-
-HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td);
-
 HSD_ImageDesc* HSD_ImageDescAlloc(void);
 void HSD_ImageDescFree(HSD_ImageDesc* idesc);
 void HSD_ImageDescCopyFromEFB(HSD_ImageDesc* idesc, u16 origx, u16 origy, u8 clear, s32 sync);
