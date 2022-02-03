@@ -1072,11 +1072,11 @@ lbl_8035F690:
 .global func_8035F6B4
 func_8035F6B4:
 /* 8035F6B4 0035C294  7C 08 02 A6 */	mflr r0
-/* 8035F6B8 0035C298  3C 80 80 40 */	lis r4, lbl_80405570@ha
+/* 8035F6B8 0035C298  3C 80 80 40 */	lis r4, hsdTObj@ha
 /* 8035F6BC 0035C29C  90 01 00 04 */	stw r0, 4(r1)
 /* 8035F6C0 0035C2A0  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8035F6C4 0035C2A4  BF 21 00 14 */	stmw r25, 0x14(r1)
-/* 8035F6C8 0035C2A8  3B E4 55 70 */	addi r31, r4, lbl_80405570@l
+/* 8035F6C8 0035C2A8  3B E4 55 70 */	addi r31, r4, hsdTObj@l
 /* 8035F6CC 0035C2AC  3B 23 00 00 */	addi r25, r3, 0
 /* 8035F6D0 0035C2B0  3B DF 01 E4 */	addi r30, r31, 0x1e4
 /* 8035F6D4 0035C2B4  3B BF 01 E8 */	addi r29, r31, 0x1e8
@@ -2432,8 +2432,8 @@ func_80360950:
 /* 80360958 0035D538  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8036095C 0035D53C  BE C1 00 68 */	stmw r22, 0x68(r1)
 /* 80360960 0035D540  7C 76 1B 79 */	or. r22, r3, r3
-/* 80360964 0035D544  3C 60 80 40 */	lis r3, lbl_80405570@ha
-/* 80360968 0035D548  3B C3 55 70 */	addi r30, r3, lbl_80405570@l
+/* 80360964 0035D544  3C 60 80 40 */	lis r3, hsdTObj@ha
+/* 80360968 0035D548  3B C3 55 70 */	addi r30, r3, hsdTObj@l
 /* 8036096C 0035D54C  3B 80 00 00 */	li r28, 0
 /* 80360970 0035D550  3B 60 00 00 */	li r27, 0
 /* 80360974 0035D554  3B 40 00 10 */	li r26, 0x10
@@ -3174,8 +3174,8 @@ allocShadowTObj:
 /* 803611A4 0035DD84  41 82 00 08 */	beq lbl_803611AC
 /* 803611A8 0035DD88  48 00 00 0C */	b lbl_803611B4
 lbl_803611AC:
-/* 803611AC 0035DD8C  3C 60 80 40 */	lis r3, lbl_80405570@ha
-/* 803611B0 0035DD90  38 63 55 70 */	addi r3, r3, lbl_80405570@l
+/* 803611AC 0035DD8C  3C 60 80 40 */	lis r3, hsdTObj@ha
+/* 803611B0 0035DD90  38 63 55 70 */	addi r3, r3, hsdTObj@l
 lbl_803611B4:
 /* 803611B4 0035DD94  48 02 11 91 */	bl hsdNew
 /* 803611B8 0035DD98  7C 7F 1B 79 */	or. r31, r3, r3
@@ -3407,8 +3407,8 @@ lbl_8036149C:
 /* 803614AC 0035E08C  7C 83 23 78 */	mr r3, r4
 /* 803614B0 0035E090  48 01 DD 01 */	bl HSD_Free
 lbl_803614B4:
-/* 803614B4 0035E094  3C 60 80 40 */	lis r3, lbl_80405570@ha
-/* 803614B8 0035E098  38 63 55 70 */	addi r3, r3, lbl_80405570@l
+/* 803614B4 0035E094  3C 60 80 40 */	lis r3, hsdTObj@ha
+/* 803614B8 0035E098  38 63 55 70 */	addi r3, r3, hsdTObj@l
 /* 803614BC 0035E09C  80 83 00 14 */	lwz r4, 0x14(r3)
 /* 803614C0 0035E0A0  7F C3 F3 78 */	mr r3, r30
 /* 803614C4 0035E0A4  81 84 00 30 */	lwz r12, 0x30(r4)
@@ -3430,15 +3430,15 @@ lbl_803614E8:
 /* 80361500 0035E0E0  38 00 00 00 */	li r0, 0
 /* 80361504 0035E0E4  90 0D BF 08 */	stw r0, lbl_804D75A8@sda21(r13)
 lbl_80361508:
-/* 80361508 0035E0E8  3C 80 80 40 */	lis r4, lbl_80405570@ha
-/* 8036150C 0035E0EC  38 04 55 70 */	addi r0, r4, lbl_80405570@l
+/* 80361508 0035E0E8  3C 80 80 40 */	lis r4, hsdTObj@ha
+/* 8036150C 0035E0EC  38 04 55 70 */	addi r0, r4, hsdTObj@l
 /* 80361510 0035E0F0  7C 03 00 40 */	cmplw r3, r0
 /* 80361514 0035E0F4  40 82 00 0C */	bne lbl_80361520
 /* 80361518 0035E0F8  38 00 00 00 */	li r0, 0
 /* 8036151C 0035E0FC  90 0D BF 0C */	stw r0, lbl_804D75AC@sda21(r13)
 lbl_80361520:
-/* 80361520 0035E100  3C 80 80 40 */	lis r4, lbl_80405570@ha
-/* 80361524 0035E104  38 84 55 70 */	addi r4, r4, lbl_80405570@l
+/* 80361520 0035E100  3C 80 80 40 */	lis r4, hsdTObj@ha
+/* 80361524 0035E104  38 84 55 70 */	addi r4, r4, hsdTObj@l
 /* 80361528 0035E108  80 84 00 14 */	lwz r4, 0x14(r4)
 /* 8036152C 0035E10C  81 84 00 38 */	lwz r12, 0x38(r4)
 /* 80361530 0035E110  7D 88 03 A6 */	mtlr r12
@@ -3448,16 +3448,16 @@ lbl_80361520:
 /* 80361540 0035E120  7C 08 03 A6 */	mtlr r0
 /* 80361544 0035E124  4E 80 00 20 */	blr 
 
-.global func_80361548
-func_80361548:
+.global TObjInfoInit
+TObjInfoInit:
 /* 80361548 0035E128  7C 08 02 A6 */	mflr r0
-/* 8036154C 0035E12C  3C 60 80 40 */	lis r3, lbl_80405570@ha
+/* 8036154C 0035E12C  3C 60 80 40 */	lis r3, hsdTObj@ha
 /* 80361550 0035E130  90 01 00 04 */	stw r0, 4(r1)
 /* 80361554 0035E134  38 E0 00 48 */	li r7, 0x48
 /* 80361558 0035E138  39 00 00 AC */	li r8, 0xac
 /* 8036155C 0035E13C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80361560 0035E140  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80361564 0035E144  3B E3 55 70 */	addi r31, r3, lbl_80405570@l
+/* 80361564 0035E144  3B E3 55 70 */	addi r31, r3, hsdTObj@l
 /* 80361568 0035E148  3C 60 80 40 */	lis r3, hsdObj@ha
 /* 8036156C 0035E14C  38 83 72 A8 */	addi r4, r3, hsdObj@l
 /* 80361570 0035E150  38 7F 00 00 */	addi r3, r31, 0
@@ -3488,26 +3488,6 @@ func_80361548:
 
 .section .data
 
-.global lbl_80405570
-lbl_80405570:
-    .4byte func_80361548
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
 .global lbl_804055B8
 lbl_804055B8:
     .asciz "tobj->imagetbl"

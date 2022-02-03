@@ -2,6 +2,10 @@
 
 #include "sysdolphin/baselib/aobj.h"
 
+extern void TObjInfoInit(void);
+
+HSD_TObjInfo hsdTObj = { TObjInfoInit };
+
 extern char lbl_804055B8[];
 extern char lbl_804D5C90[7];// = "tobj.c\0";
 

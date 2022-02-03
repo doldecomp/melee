@@ -244,7 +244,6 @@ typedef struct _HSD_TObjInfo {
     void (*make_mtx)(HSD_TObj* tobj);
     int (*load)(HSD_TObj* tobj, HSD_TObjDesc* desc);
     void (*make_texp)(HSD_TObj* tobj, u32 lightmap, u32 lightmap_done, HSD_TExp** c, HSD_TExp** a, HSD_TExp** list);
-    void (*update)(void* obj, u32 type, FObjData* val);
 } HSD_TObjInfo;
 
 typedef struct _HSD_TexAnim {
