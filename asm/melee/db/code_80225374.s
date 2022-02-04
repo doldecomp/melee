@@ -4810,7 +4810,7 @@ lbl_80229590:
 
 
 .section .rodata
-
+    .4byte NULL
 .global lbl_803B84D8
 lbl_803B84D8:
     .4byte 0x00000000
@@ -5357,7 +5357,7 @@ lbl_804A0480:
 
 
 .section .sdata
-
+    .4byte NULL
 .global lbl_804D4A08
 lbl_804D4A08:
 	.long 1
@@ -5616,7 +5616,7 @@ lbl_804D6BA0:
 
 
 .section .sdata2
-
+    .4byte NULL
 .global lbl_804DBCF0
 lbl_804DBCF0:
 	.4byte 0x8040FFFF

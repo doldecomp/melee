@@ -7,6 +7,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/lb/lbtime.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbfile.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbarchive.o\
+	$(EPILOGUE_DIR)/src/melee/gr/stage.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/tobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/aobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/fobj.o\

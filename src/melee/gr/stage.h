@@ -54,7 +54,8 @@ typedef struct _StageInfo {
 
     u32 internal_stage_id; // 0x88
 
-    u8 data[0x6EC];
+    s8 unk8C;
+    u8 data[0x6EB];
 } StageInfo;
 
 #endif
