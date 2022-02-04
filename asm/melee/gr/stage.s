@@ -2,25 +2,11 @@
 
 .section .text  # 0x80224A54 - 0x80225370
 
-.section .rodata
-
-.global lbl_803B84C8
-lbl_803B84C8:
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0xC2C80000
-    .4byte 0x00000000
-
-
 .section .data
 
-.global lbl_803E9940
-lbl_803E9940:
-    .asciz "no!=St_Player_InitPos_None"
-    .balign 4
     .4byte NULL
-.global unk_arr_of_vectors_803E9960
-unk_arr_of_vectors_803E9960:
+.global unk_arr_803E9960
+unk_arr_803E9960:
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -879,52 +865,3 @@ unk_arr_of_vectors_803E9960:
     .4byte 0x00000024
     .4byte NULL
     .4byte NULL
-
-
-.section .sdata
-
-.global unk_struct_804D49E8
-unk_struct_804D49E8:
-    .4byte 0x00000002
-    .4byte 0x00000000
-.global unk_struct_804D49F0
-unk_struct_804D49F0:
-    .4byte 0x0000000C
-.global lbl_804D49F4
-lbl_804D49F4:
-    .4byte 0x00000002
-.global lbl_804D49F8
-lbl_804D49F8:
-    .asciz "stage.c"
-    .balign 4
-.global lbl_804D4A00
-lbl_804D4A00:
-    .asciz "0"
-    .balign 4
-    .4byte NULL
-
-
-.section .sdata2
-
-.global degrees_2_radians
-degrees_2_radians:
-	.4byte 0x3C8EFA35
-.global unk_one_half_const_804DBCD8
-unk_one_half_const_804DBCD8:
-	.4byte 0x3F000000
-.global unk_zero_const_804DBCD8
-unk_zero_const_804DBCD8:
-	.4byte 0x00000000
-.global lbl_804DBCDC
-lbl_804DBCDC:
-	.4byte 0xC1200000
-.global lbl_804DBCE0
-lbl_804DBCE0:
-	.4byte 0x41200000
-.global lbl_804DBCE4
-lbl_804DBCE4:
-	.4byte 0x42C80000
-.global lbl_804DBCE8
-lbl_804DBCE8:
-	.4byte 0xC2C80000
-	.4byte 0x00000000
