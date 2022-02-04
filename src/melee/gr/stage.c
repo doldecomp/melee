@@ -111,14 +111,10 @@ f32 calc_unk_cam_y_80224B98()
 
 f32 calc_unk_cam_y_bounds_80224BC4()
 {
+    f32 cam_offset = (stage_info.cam_info.cam_bounds_bottom + stage_info.cam_info.cam_y_offset);
+    f32 y_pos_product = 0.5F * ((stage_info.cam_info.cam_bounds_bottom + stage_info.cam_info.cam_y_offset) + (stage_info.blast_zone.bottom + stage_info.cam_info.cam_y_offset));
 
-    f32 cam_y_offset = stage_info.cam_info.cam_y_offset;
-    f32 cam_bounds_bottom_offset = stage_info.cam_info.cam_bounds_bottom + cam_y_offset;
-
-    f32 y_pos = stage_info.blast_zone.bottom + cam_y_offset + cam_bounds_bottom_offset;
-    f32 y_pos_product = 0.5F * y_pos;
-
-    return 0.5F * (cam_bounds_bottom_offset + y_pos_product);
+    return 0.5F * (cam_offset + y_pos_product);
 }
 
 f32 unk_set_vec3_to_cam_offset_80224BF8(Vec* vec3, f32 arg8)
@@ -214,7 +210,6 @@ void func_80224E64(s32 arg0, Vec* arg_vec)
 
     f32 counter_f;
     Vec internal_vec;
-    f32 zero;
 
     if (arg0 == -1) {
         __assert(__FILE__, 360, "no!=St_Player_InitPos_None\0");
@@ -245,10 +240,9 @@ void func_80224E64(s32 arg0, Vec* arg_vec)
             *arg_vec = internal_vec;
             return;
         }
-        zero = 0.0F;
-        arg_vec->z = zero;
-        arg_vec->y = zero;
-        arg_vec->x = zero;
+        arg_vec->z = 0.0F;
+        arg_vec->y = 0.0F;
+        arg_vec->x = 0.0F;
         return;
     }
     func_801C2D24(arg0, arg_vec);
