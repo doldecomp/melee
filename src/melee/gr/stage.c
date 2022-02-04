@@ -2,10 +2,19 @@
 
 extern struct _StageInfo stage_info;
 
+struct StructNumberAndVecp { s32 number; S32Vec* vec; };
+struct StructPairWithStageID { s32 stage_id; s32 regular_number; };
+
 extern f32 degrees_2_radians; // 0.017453f
 extern f32 unk_one_half_const_804DBCD8; // 0.5
 extern f32 unk_zero_const_804DBCD8; //0.0
 extern Vec lbl_803B84C8; 
+
+extern char lbl_804D4A00[1];
+
+extern struct StructPairWithStageID unk_struct_804D49F0;
+extern struct StructNumberAndVecp unk_struct_804D49E8;
+extern S32Vec unk_arr_of_vectors_803E9960[];
 
 extern f32 lbl_804DBCDC; //-10
 extern f32 lbl_804DBCE0; //10
@@ -17,9 +26,9 @@ extern s32 func_80051EC8(Vec*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32)
 extern void func_801C5A84();
 extern void func_801C5AA4();
 extern void func_80023F28();
-extern void func_801C28AC();
-extern void func_8016B3A0();
-extern void func_8016B238();
+extern s32 func_801C28AC(s32, s32, s32*);
+extern s32 func_8016B3A0();
+extern s32 func_8016B238();
 
 
 f32 get_cam_bounds_left_offset()
@@ -178,56 +187,19 @@ f32 get_cam_fixed_fov() {
     return stage_info.cam_info.fixed_cam_fov;
 }
 
-asm s32 func_80224DC8(s32 arg0) {
-    nofralloc
-    /* 80224DC8 002219A8  2C 03 00 3B */	cmpwi r3, 0x3b
-    /* 80224DCC 002219AC  38 00 00 01 */	li r0, 1
-    /* 80224DD0 002219B0  7C 04 03 78 */	mr r4, r0
-    /* 80224DD4 002219B4  7C 05 03 78 */	mr r5, r0
-    /* 80224DD8 002219B8  7C 06 03 78 */	mr r6, r0
-    /* 80224DDC 002219BC  41 82 00 10 */	beq lbl_80224DEC
-    /* 80224DE0 002219C0  2C 03 00 3F */	cmpwi r3, 0x3f
-    /* 80224DE4 002219C4  41 82 00 08 */	beq lbl_80224DEC
-    /* 80224DE8 002219C8  38 C0 00 00 */	li r6, 0
-    lbl_80224DEC:
-    /* 80224DEC 002219CC  2C 06 00 00 */	cmpwi r6, 0
-    /* 80224DF0 002219D0  40 82 00 10 */	bne lbl_80224E00
-    /* 80224DF4 002219D4  2C 03 00 42 */	cmpwi r3, 0x42
-    /* 80224DF8 002219D8  41 82 00 08 */	beq lbl_80224E00
-    /* 80224DFC 002219DC  38 A0 00 00 */	li r5, 0
-    lbl_80224E00:
-    /* 80224E00 002219E0  2C 05 00 00 */	cmpwi r5, 0
-    /* 80224E04 002219E4  40 82 00 10 */	bne lbl_80224E14
-    /* 80224E08 002219E8  2C 03 00 49 */	cmpwi r3, 0x49
-    /* 80224E0C 002219EC  41 82 00 08 */	beq lbl_80224E14
-    /* 80224E10 002219F0  38 80 00 00 */	li r4, 0
-    lbl_80224E14:
-    /* 80224E14 002219F4  2C 04 00 00 */	cmpwi r4, 0
-    /* 80224E18 002219F8  40 82 00 10 */	bne lbl_80224E28
-    /* 80224E1C 002219FC  2C 03 00 4C */	cmpwi r3, 0x4c
-    /* 80224E20 00221A00  41 82 00 08 */	beq lbl_80224E28
-    /* 80224E24 00221A04  38 00 00 00 */	li r0, 0
-    lbl_80224E28:
-    /* 80224E28 00221A08  7C 60 00 D0 */	neg r3, r0
-    /* 80224E2C 00221A0C  30 03 FF FF */	addic r0, r3, -1
-    /* 80224E30 00221A10  7C 60 19 10 */	subfe r3, r0, r3
-    /* 80224E34 00221A14  4E 80 00 20 */	blr 
+BOOL func_80224DC8(s32 arg) {
+    return (arg == 0x3b || arg == 0x3f || arg == 0x42 || arg == 0x49 || arg == 0x4c) != 0;
 }
 
 
-#pragma push
-#pragma peephole on
 void func_80224E38(Vec* arg0, s32 arg1) {   //https://decomp.me/scratch/DCquW  
     func_801C2D24(arg1 + 4, arg0);
 }
-#pragma pop
 
 extern char lbl_803E9940[26];
 extern char lbl_804D49F8[8];
 
 #ifdef NON_MATCHING
-#pragma push
-#pragma peephole on
 void func_80224E64(s32 arg0, Vec* arg_vec) {  ///Matched here just can't do strings -- https://decomp.me/scratch/ijCpa
     BOOL bool1;
 
@@ -274,7 +246,6 @@ void func_80224E64(s32 arg0, Vec* arg_vec) {  ///Matched here just can't do stri
     func_801C2D24(arg0, arg_vec);
 
 }
-#pragma pop
 #else
 asm void func_80224E64(s32 arg0, Vec* arg_vec)   //// matched here: https://decomp.me/scratch/ijCpa
 {
@@ -414,9 +385,45 @@ s32 func_80224FDC(Vec *arg0) {   ///https://decomp.me/scratch/hSlaQ
 #pragma pop
 
 
-extern f32 lbl_804D49E8[2];
-extern char lbl_804D4A00[1];
+#ifdef NON_MATCHING
+s32 func_80225074(s32 arg0) {    ////https://decomp.me/scratch/ysONg
 
+    s32 r31;
+    s32 spC;
+
+    if (func_8016B238() != 0) { 
+        if (((stage_info.unk8C >> 7) & 0x1) || (arg0 == 2)) {
+            r31 = 0x12;
+        } else {
+            r31 = 0x11;
+        }
+    }
+    else if (func_8016B3A0() != 0) {
+        if (arg0 == 2) {
+            r31 = 0x22;
+        }
+        else if (arg0 == 1) {
+            r31 = 0x64;
+        } 
+        else {
+            r31 = 0x24;
+        }
+    }
+    else if (arg0 == 0) { r31 = 4; }
+    else if (arg0 == 3) { r31 = 1; }
+    else if (arg0 == 2) { r31 = 2; }
+    else if (arg0 == 1) { r31 = 0x44; }
+    else {
+        __assert(lbl_804D49F8, 0x20E, lbl_804D4A00);
+    }
+
+    r31 = func_801C28AC(unk_struct_804D49E8.number, r31, &spC);
+    func_80023F28(spC);
+    func_801C5A84(spC);
+    func_801C5AA4(r31);
+    return arg0;
+}
+#else
 asm s32 func_80225074(s32 arg0, s32 arg1)
 {
     nofralloc 
@@ -484,7 +491,7 @@ asm s32 func_80225074(s32 arg0, s32 arg1)
     /* 80225140 00221D20  38 AD 93 60 */	addi r5, r13, lbl_804D4A00
     /* 80225144 00221D24  48 16 30 DD */	bl __assert
     lbl_80225148:
-    /* 80225148 00221D28  80 6D 93 48 */	lwz r3, lbl_804D49E8
+    /* 80225148 00221D28  80 6D 93 48 */	lwz r3, unk_struct_804D49E8
     /* 8022514C 00221D2C  38 9F 00 00 */	addi r4, r31, 0
     /* 80225150 00221D30  38 A1 00 0C */	addi r5, r1, 0xc
     /* 80225154 00221D34  4B F9 D7 59 */	bl func_801C28AC
@@ -504,3 +511,79 @@ asm s32 func_80225074(s32 arg0, s32 arg1)
     /* 8022518C 00221D6C  7C 08 03 A6 */	mtlr r0
     /* 80225190 00221D70  4E 80 00 20 */	blr 
 }
+#endif
+
+#pragma push
+#pragma peephole on
+s32 func_80225194() {  
+    return unk_struct_804D49E8.number;
+}
+
+s32 func_8022519C(s32 arg0) {
+    return unk_arr_of_vectors_803E9960[arg0].x;
+}
+
+s32 func_802251B4(s32 arg0, s32 arg1) {
+    return func_801C06B8(unk_arr_of_vectors_803E9960[arg0].x);
+}
+
+void func_802251E8(s32 arg0, s32* unused) {
+    struct StructPairWithStageID local_data;
+
+    unk_struct_804D49E8.number = arg0;
+    unk_struct_804D49E8.vec = &unk_arr_of_vectors_803E9960[arg0];
+
+    local_data = unk_struct_804D49F0;
+
+    local_data.stage_id = unk_struct_804D49E8.vec->x;
+    local_data.regular_number = unk_struct_804D49E8.number;
+    
+    func_801C0754(&local_data); 
+}
+
+
+
+void func_8022524C() {
+    struct StructPairWithStageID local_data;
+
+    local_data = unk_struct_804D49F0;
+
+    local_data.stage_id = unk_struct_804D49E8.vec->x;
+    local_data.regular_number = unk_struct_804D49E8.number;
+    
+    func_801C0800(&local_data); 
+}
+
+void func_80225298() {
+    struct StructPairWithStageID local_data;
+
+    local_data = unk_struct_804D49F0;
+
+    local_data.stage_id = unk_struct_804D49E8.vec->x;
+    local_data.regular_number = unk_struct_804D49E8.number;
+    
+    func_801C0F78(&local_data); 
+}
+
+void func_802252E4(s32 arg0, s32 unused) {
+    struct StructPairWithStageID local_data;
+
+    local_data = unk_struct_804D49F0;
+
+    local_data.stage_id = unk_struct_804D49E8.vec->x;
+    local_data.regular_number = arg0;
+    
+    func_801C0FB8(&local_data); 
+}
+
+void func_8022532C(s32 arg0, s32 arg1) {
+    struct StructPairWithStageID local_data;
+
+    local_data = unk_struct_804D49F0;
+
+    local_data.stage_id = unk_struct_804D49E8.vec->x;
+    local_data.regular_number = arg0;
+    
+    func_801C1074(&local_data, arg1); 
+}
+
