@@ -149,3 +149,31 @@ lbl_80367840:
 /* 80367870 00364450  4E 80 00 20 */	blr 
 }
 #endif
+
+#pragma push 
+#pragma peephole on
+void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
+{
+    HSD_WObj* wobj;
+    
+    if (cobj == NULL) {
+        return;
+    }
+
+    HSD_AObjRemove(cobj->aobj);
+    cobj->aobj = NULL;
+    wobj = HSD_CObjGetEyePositionWObj(cobj);
+    HSD_WObjRemoveAnim(wobj);
+    wobj = HSD_CObjGetInterestWObj(cobj);
+    HSD_WObjRemoveAnim(wobj);
+}
+
+void HSD_CObjRemoveAnim(HSD_CObj* cobj) 
+{    
+    if (cobj == NULL) {
+        return;
+    }
+
+    HSD_CObjRemoveAnimByFlags(cobj, 0x7FF);
+}
+#pragma pop

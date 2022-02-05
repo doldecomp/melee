@@ -20,44 +20,12 @@ void HSD_FObjRemove(HSD_FObj* fobj)
     HSD_FObjFree(fobj);
 }
 
-inline HSD_FObj *HSD_FObjGetNext(struct _HSD_FObj *fobj) {
-    return fobj->next;
-}
-
-inline void *HSD_FObjRemoveAll_Inlined(struct _HSD_FObj *fobj) {
-    if (!fobj)
+void HSD_FObjRemoveAll(HSD_FObj* fobj) 
+{
+    if (fobj == NULL)
         return;
     HSD_FObjRemoveAll(fobj->next);
     HSD_FObjRemove(fobj);
-}
-
-void HSD_FObjRemoveAll(HSD_FObj* fobj)
-{
-    HSD_FObj* t1;
-    HSD_FObj* t2;
-    HSD_FObj* t3;
-
-    if (fobj)
-    {
-        t3 = HSD_FObjGetNext(fobj);
-        if (t3)
-        {
-            t2 = HSD_FObjGetNext(t3);
-            if (t2)
-            {
-                HSD_FObjRemoveAll_Inlined(t2->next);
-                if (t2) {
-                    HSD_FObjFree(t2);
-                }
-            }
-            if (t3) {
-                HSD_FObjFree(t3);
-            }
-        }
-        if (fobj) {
-            HSD_FObjFree(fobj);
-        }
-    }
 }
 
 u8 HSD_FObjSetState(HSD_FObj* fobj, u8 state)
@@ -76,7 +44,7 @@ u32 HSD_FObjGetState(HSD_FObj* fobj)
 
 // Non-matching because the conversion to float currently
 #ifdef NON_MATCHING
-inline void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
+void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
 {
     if (fobj == NULL)
         return;
@@ -164,18 +132,6 @@ lbl_8036AB1C:
 
 #pragma push
 #pragma peephole on
-void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*update_func)(), f32 rate) {
-    if (fobj == NULL)
-        return;
-    
-    if (fobj->op_intrp == HSD_A_OP_KEY) {
-        HSD_FObjInterpretAnim(fobj, obj, update_func, rate);
-    }
-    
-    if (fobj != NULL)
-        fobj->flags = (0 & 0xF) | (fobj->flags & 0xF0);
-}
-
 inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
 {
     if (fobj->op_intrp == HSD_A_OP_KEY) {
@@ -183,7 +139,7 @@ inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj, void (*obj_update)(), f
     }
 }
 
-inline void HSD_FObjStopAnim_inline(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate) {
+void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate) {
     if (fobj == NULL)
         return;
     
@@ -196,7 +152,7 @@ inline void HSD_FObjStopAnim_inline(HSD_FObj* fobj, void* obj, void (*obj_update
 void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
 {
     for (; fobj != NULL; fobj = fobj->next) {
-        HSD_FObjStopAnim_inline(fobj, obj, obj_update, rate);
+        HSD_FObjStopAnim(fobj, obj, obj_update, rate);
     }
 }
 #pragma pop

@@ -6,6 +6,7 @@
 #include <dolphin/types.h>
 
 #include "sysdolphin/baselib/class.h"
+#include "sysdolphin/baselib/aobj.h"
 #include "sysdolphin/baselib/texp.h"
 #include "sysdolphin/baselib/tobj.h"
 
@@ -150,5 +151,27 @@ typedef struct _HSD_MObjInfo {
 #define HSD_MOBJ(o) ((HSD_MObj*)(o))
 #define HSD_MOBJ_INFO(i) ((HSD_MObjInfo*)(i))
 #define HSD_MOBJ_METHOD(o) HSD_MOBJ_INFO(HSD_CLASS_METHOD(o))
+
+extern HSD_MObjInfo hsdMObj;
+
+void HSD_MObjSetCurrent(HSD_MObj* mobj);
+void HSD_MObjSetFlags(HSD_MObj* mobj, u32 flags);
+void HSD_MObjClearFlags(HSD_MObj* mobj, u32 flags);
+void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags);
+void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim);
+void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags);
+void HSD_MObjReqAnim(HSD_MObj *mobj, f32 startframe);
+
+void MObjUpdateFunc(void* obj, u32 type, FObjData* val);
+
+void HSD_MObjAnim(HSD_MObj* mobj);
+
+int MObjLoad(HSD_MObj* mobj, HSD_MObjDesc* desc);
+HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc);
+
+HSD_MObj* HSD_MObjAlloc();
+HSD_Material* HSD_MaterialAlloc();
+
+void HSD_MObjCompileTev(HSD_MObj *mobj);
 
 #endif

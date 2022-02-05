@@ -92,7 +92,7 @@ LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
   LDFLAGS += -map $(MAP)
 endif
-CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults $(INCLUDES)
+CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES)
 
 $(EPILOGUE_DIR)/src/melee/lb/lbtime.o: CC_EPI := $(CC)
 $(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.o: CC_EPI := $(CC)

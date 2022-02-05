@@ -52,7 +52,7 @@ void HSD_DObjModifyFlags(HSD_DObj* dobj, u32 flags, u32 mask)
     dobj->flags = dobj->flags & ~mask | flags & mask;
 }
 
-inline void HSD_DObjRemoveAnimByFlags(HSD_DObj* dobj, u32 flags)
+void HSD_DObjRemoveAnimByFlags(HSD_DObj* dobj, u32 flags)
 {
     if (dobj == NULL)
         return;
@@ -77,7 +77,7 @@ void HSD_DObjRemoveAnimAllByFlags(HSD_DObj* dobj, u32 flags)
     }
 }
 
-inline void HSD_DObjAddAnim(HSD_DObj* dobj, HSD_MatAnim* mat_anim, HSD_ShapeAnimDObj* sh_anim)
+void HSD_DObjAddAnim(HSD_DObj* dobj, HSD_MatAnim* mat_anim, HSD_ShapeAnimDObj* sh_anim)
 {
     HSD_ShapeAnim* shapeanim;
 
@@ -108,16 +108,16 @@ void HSD_DObjAddAnimAll(HSD_DObj* dobj, HSD_MatAnim* matanim, HSD_ShapeAnimDObj*
     }
 }
 
-inline void HSD_DObjReqAnimByFlags(HSD_DObj* dobj, u32 flags, f32 frame)
+void HSD_DObjReqAnimByFlags(HSD_DObj* dobj, f32 startframe, u32 flags)
 {
     if (dobj == NULL)
         return;
 
-    HSD_PObjReqAnimAllByFlags(dobj->pobj, flags, frame);
-    HSD_MObjReqAnimByFlags(dobj->mobj, flags, frame);
+    HSD_PObjReqAnimAllByFlags(dobj->pobj, startframe, flags);
+    HSD_MObjReqAnimByFlags(dobj->mobj, startframe, flags);
 }
 
-void HSD_DObjReqAnimAllByFlags(HSD_DObj* dobj, u32 flags, f32 frame)
+void HSD_DObjReqAnimAllByFlags(HSD_DObj* dobj, f32 startframe, u32 flags)
 {
     HSD_DObj* dp;
 
@@ -125,11 +125,11 @@ void HSD_DObjReqAnimAllByFlags(HSD_DObj* dobj, u32 flags, f32 frame)
         return;
         
     for (dp = dobj; dp != NULL; dp = dp->next) {
-        HSD_DObjReqAnimByFlags(dp, flags, frame);
+        HSD_DObjReqAnimByFlags(dp, startframe, flags);
     }
 }
 
-void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 frame)
+void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 startframe)
 {
     HSD_DObj* dp;
 
@@ -137,11 +137,11 @@ void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 frame)
         return;
     
     for (dp = dobj; dp != NULL; dp = dp->next) {
-        HSD_DObjReqAnimByFlags(dp, 0x7FF, frame);
+        HSD_DObjReqAnimByFlags(dp, startframe,  0x7FF);
     }
 }
 
-inline void HSD_DObjAnim(HSD_DObj* dobj)
+void HSD_DObjAnim(HSD_DObj* dobj)
 {
     if (dobj == NULL)
         return;
@@ -162,14 +162,6 @@ void HSD_DObjAnimAll(HSD_DObj* dobj)
     }
 }
 
-inline void HSD_DObjModifyFlags_inline(HSD_DObj* dobj, u32 flags, u32 mask)
-{
-    if (dobj == NULL)
-        return;
-
-    dobj->flags = dobj->flags & ~mask | flags & mask;
-}
-
 static int DObjLoad(HSD_DObj* dobj, HSD_DObjDesc* desc)
 {
     dobj->next = HSD_DObjLoadDesc(desc->next);
@@ -179,13 +171,13 @@ static int DObjLoad(HSD_DObj* dobj, HSD_DObjDesc* desc)
     if (dobj->mobj != NULL) {
         switch (dobj->mobj->rendermode & 0x60000000) {
             case 0:
-                HSD_DObjModifyFlags_inline(dobj, 2, 0xE);
+                HSD_DObjModifyFlags(dobj, 2, 0xE);
                 break;
             case 0x40000000:
-                HSD_DObjModifyFlags_inline(dobj, 8, 0xE);
+                HSD_DObjModifyFlags(dobj, 8, 0xE);
                 break;
             case 0x60000000:
-                HSD_DObjModifyFlags_inline(dobj, 4, 0xE);
+                HSD_DObjModifyFlags(dobj, 4, 0xE);
                 break;
             default:
                 OSReport(lbl_80405494, dobj->mobj->rendermode);
@@ -224,7 +216,7 @@ inline void hsdDelete(void* object)
     HSD_CLASS_METHOD(object)->destroy((HSD_Class*)object);
 }
 
-inline void HSD_DObjRemove(HSD_DObj* dobj)
+void HSD_DObjRemove(HSD_DObj* dobj)
 {
     hsdDelete(dobj);
 }
@@ -284,7 +276,7 @@ lbl_8035E304:
 
 #pragma push
 #pragma peephole on
-inline void HSD_DObjResolveRefs(HSD_DObj* dobj, HSD_DObjDesc* desc)
+void HSD_DObjResolveRefs(HSD_DObj* dobj, HSD_DObjDesc* desc)
 {
     if (dobj == NULL || desc == NULL)
        return;

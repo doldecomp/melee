@@ -2555,7 +2555,7 @@ lbl_80151F00:
 /* 80151F38 0014EB18  38 61 00 28 */	addi r3, r1, 0x28
 /* 80151F3C 0014EB1C  38 9F 00 B0 */	addi r4, r31, 0xb0
 /* 80151F40 0014EB20  38 A1 00 1C */	addi r5, r1, 0x1c
-/* 80151F44 0014EB24  4B EB B5 B5 */	bl lbvector_diff
+/* 80151F44 0014EB24  4B EB B5 B5 */	bl lbvector_Diff
 /* 80151F48 0014EB28  C0 21 00 1C */	lfs f1, 0x1c(r1)
 /* 80151F4C 0014EB2C  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 80151F50 0014EB30  EC 41 00 72 */	fmuls f2, f1, f1
@@ -3396,7 +3396,7 @@ lbl_80152A50:
 /* 80152AC0 0014F6A0  EC 22 08 2A */	fadds f1, f2, f1
 /* 80152AC4 0014F6A4  D0 21 00 2C */	stfs f1, 0x2c(r1)
 /* 80152AC8 0014F6A8  D0 01 00 30 */	stfs f0, 0x30(r1)
-/* 80152ACC 0014F6AC  4B EB AA 2D */	bl lbvector_diff
+/* 80152ACC 0014F6AC  4B EB AA 2D */	bl lbvector_Diff
 /* 80152AD0 0014F6B0  C0 21 00 1C */	lfs f1, 0x1c(r1)
 /* 80152AD4 0014F6B4  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 80152AD8 0014F6B8  EC 41 00 72 */	fmuls f2, f1, f1
@@ -3438,7 +3438,7 @@ lbl_80152B48:
 /* 80152B64 0014F744  48 00 00 48 */	b lbl_80152BAC
 lbl_80152B68:
 /* 80152B68 0014F748  38 61 00 1C */	addi r3, r1, 0x1c
-/* 80152B6C 0014F74C  4B EB A7 81 */	bl lbvector_normalize
+/* 80152B6C 0014F74C  4B EB A7 81 */	bl lbvector_Normalize
 /* 80152B70 0014F750  C0 3E 00 28 */	lfs f1, 0x28(r30)
 /* 80152B74 0014F754  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 80152B78 0014F758  EC 3F 00 72 */	fmuls f1, f31, f1
@@ -3965,7 +3965,7 @@ lbl_80153254:
 /* 801532C0 0014FEA0  EC 22 08 2A */	fadds f1, f2, f1
 /* 801532C4 0014FEA4  D0 21 00 2C */	stfs f1, 0x2c(r1)
 /* 801532C8 0014FEA8  D0 01 00 30 */	stfs f0, 0x30(r1)
-/* 801532CC 0014FEAC  4B EB A2 2D */	bl lbvector_diff
+/* 801532CC 0014FEAC  4B EB A2 2D */	bl lbvector_Diff
 /* 801532D0 0014FEB0  C0 21 00 1C */	lfs f1, 0x1c(r1)
 /* 801532D4 0014FEB4  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 801532D8 0014FEB8  EC 41 00 72 */	fmuls f2, f1, f1
@@ -4007,7 +4007,7 @@ lbl_80153348:
 /* 80153364 0014FF44  48 00 00 48 */	b lbl_801533AC
 lbl_80153368:
 /* 80153368 0014FF48  38 61 00 1C */	addi r3, r1, 0x1c
-/* 8015336C 0014FF4C  4B EB 9F 81 */	bl lbvector_normalize
+/* 8015336C 0014FF4C  4B EB 9F 81 */	bl lbvector_Normalize
 /* 80153370 0014FF50  C0 3E 00 28 */	lfs f1, 0x28(r30)
 /* 80153374 0014FF54  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 80153378 0014FF58  EC 3F 00 72 */	fmuls f1, f31, f1
@@ -5248,7 +5248,7 @@ lbl_8015442C:
 /* 80154490 00151070  EC 22 08 2A */	fadds f1, f2, f1
 /* 80154494 00151074  D0 21 00 2C */	stfs f1, 0x2c(r1)
 /* 80154498 00151078  D0 01 00 30 */	stfs f0, 0x30(r1)
-/* 8015449C 0015107C  4B EB 90 5D */	bl lbvector_diff
+/* 8015449C 0015107C  4B EB 90 5D */	bl lbvector_Diff
 /* 801544A0 00151080  C0 21 00 1C */	lfs f1, 0x1c(r1)
 /* 801544A4 00151084  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 801544A8 00151088  EC 41 00 72 */	fmuls f2, f1, f1
@@ -5290,7 +5290,7 @@ lbl_80154518:
 /* 80154534 00151114  48 00 00 48 */	b lbl_8015457C
 lbl_80154538:
 /* 80154538 00151118  38 61 00 1C */	addi r3, r1, 0x1c
-/* 8015453C 0015111C  4B EB 8D B1 */	bl lbvector_normalize
+/* 8015453C 0015111C  4B EB 8D B1 */	bl lbvector_Normalize
 /* 80154540 00151120  C0 3E 00 28 */	lfs f1, 0x28(r30)
 /* 80154544 00151124  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 80154548 00151128  EC 3F 00 72 */	fmuls f1, f31, f1
