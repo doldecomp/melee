@@ -38,6 +38,7 @@ extern void func_800D4FF4(HSD_GObj*);
 extern f32 func_800869F8(HSD_GObj*);
 extern void func_80087BEC(HSD_GObj*, s8);
 extern void func_80087BC0(HSD_GObj*, s8);
+extern void func_800870F0(HSD_GObj*, s32);
 
 
 void inline Player_CheckSlot(s32 slot)
@@ -4335,5 +4336,347 @@ asm HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index)
     /* 8003420C 00030DEC  38 21 00 20 */	addi r1, r1, 0x20
     /* 80034210 00030DF0  7C 08 03 A6 */	mtlr r0
     /* 80034214 00030DF4  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2) {  ///https://decomp.me/scratch/lMHMA
+    StaticPlayer* temp_r3;
+    StaticPlayer* temp_r4;
+    u8 temp_r5;
+    s8* player;
+    Player_CheckSlot(slot);
+    player = (s8*)&player_slots[slot];
+    temp_r3 = ((StaticPlayer*) (player + arg1));
+    temp_r4 = (StaticPlayer*) (player + arg2);
+    temp_r5 = temp_r3->transformed[0];
+    temp_r3->transformed[0] = temp_r4->transformed[0];
+    temp_r4->transformed[0] = temp_r5;
+}
+#else
+asm void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2)
+{
+    nofralloc
+    /* 80034218 00030DF8  7C 08 02 A6 */	mflr r0
+    /* 8003421C 00030DFC  90 01 00 04 */	stw r0, 4(r1)
+    /* 80034220 00030E00  94 21 FF D8 */	stwu r1, -0x28(r1)
+    /* 80034224 00030E04  93 E1 00 24 */	stw r31, 0x24(r1)
+    /* 80034228 00030E08  3B E5 00 00 */	addi r31, r5, 0
+    /* 8003422C 00030E0C  93 C1 00 20 */	stw r30, 0x20(r1)
+    /* 80034230 00030E10  3B C4 00 00 */	addi r30, r4, 0
+    /* 80034234 00030E14  93 A1 00 1C */	stw r29, 0x1c(r1)
+    /* 80034238 00030E18  7C 7D 1B 79 */	or. r29, r3, r3
+    /* 8003423C 00030E1C  41 80 00 0C */	blt lbl_80034248
+    /* 80034240 00030E20  2C 1D 00 06 */	cmpwi r29, 6
+    /* 80034244 00030E24  41 80 00 2C */	blt lbl_80034270
+    lbl_80034248:
+    /* 80034248 00030E28  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 8003424C 00030E2C  4C C6 31 82 */	crclr 6
+    /* 80034250 00030E30  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80034254 00030E34  38 9D 00 00 */	addi r4, r29, 0
+    /* 80034258 00030E38  48 31 14 51 */	bl OSReport
+    /* 8003425C 00030E3C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80034260 00030E40  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80034264 00030E44  38 80 00 66 */	li r4, 0x66
+    /* 80034268 00030E48  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003426C 00030E4C  48 35 3F B5 */	bl __assert
+    lbl_80034270:
+    /* 80034270 00030E50  1C 9D 0E 90 */	mulli r4, r29, 0xe90
+    /* 80034274 00030E54  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80034278 00030E58  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 8003427C 00030E5C  7C 00 22 14 */	add r0, r0, r4
+    /* 80034280 00030E60  7C 60 F2 14 */	add r3, r0, r30
+    /* 80034284 00030E64  7C 80 FA 14 */	add r4, r0, r31
+    /* 80034288 00030E68  88 A3 00 0C */	lbz r5, 0xc(r3)
+    /* 8003428C 00030E6C  88 04 00 0C */	lbz r0, 0xc(r4)
+    /* 80034290 00030E70  98 03 00 0C */	stb r0, 0xc(r3)
+    /* 80034294 00030E74  98 A4 00 0C */	stb r5, 0xc(r4)
+    /* 80034298 00030E78  80 01 00 2C */	lwz r0, 0x2c(r1)
+    /* 8003429C 00030E7C  83 E1 00 24 */	lwz r31, 0x24(r1)
+    /* 800342A0 00030E80  83 C1 00 20 */	lwz r30, 0x20(r1)
+    /* 800342A4 00030E84  83 A1 00 1C */	lwz r29, 0x1c(r1)
+    /* 800342A8 00030E88  38 21 00 28 */	addi r1, r1, 0x28
+    /* 800342AC 00030E8C  7C 08 03 A6 */	mtlr r0
+    /* 800342B0 00030E90  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+s16 Player_GetStamina(s32 slot) {   ///https://decomp.me/scratch/Pvf9k
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    return player->staminas.byIndex[player->transformed[0]];
+}
+#else
+asm s16 Player_GetStamina(s32 slot)
+{
+    nofralloc
+    /* 800342B4 00030E94  7C 08 02 A6 */	mflr r0
+    /* 800342B8 00030E98  90 01 00 04 */	stw r0, 4(r1)
+    /* 800342BC 00030E9C  94 21 FF E8 */	stwu r1, -0x18(r1)
+    /* 800342C0 00030EA0  93 E1 00 14 */	stw r31, 0x14(r1)
+    /* 800342C4 00030EA4  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 800342C8 00030EA8  41 80 00 0C */	blt lbl_800342D4
+    /* 800342CC 00030EAC  2C 1F 00 06 */	cmpwi r31, 6
+    /* 800342D0 00030EB0  41 80 00 2C */	blt lbl_800342FC
+    lbl_800342D4:
+    /* 800342D4 00030EB4  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 800342D8 00030EB8  4C C6 31 82 */	crclr 6
+    /* 800342DC 00030EBC  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 800342E0 00030EC0  38 9F 00 00 */	addi r4, r31, 0
+    /* 800342E4 00030EC4  48 31 13 C5 */	bl OSReport
+    /* 800342E8 00030EC8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 800342EC 00030ECC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 800342F0 00030ED0  38 80 00 66 */	li r4, 0x66
+    /* 800342F4 00030ED4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800342F8 00030ED8  48 35 3F 29 */	bl __assert
+    lbl_800342FC:
+    /* 800342FC 00030EDC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 80034300 00030EE0  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80034304 00030EE4  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80034308 00030EE8  7C 60 22 14 */	add r3, r0, r4
+    /* 8003430C 00030EEC  88 03 00 0C */	lbz r0, 0xc(r3)
+    /* 80034310 00030EF0  54 00 08 3C */	slwi r0, r0, 1
+    /* 80034314 00030EF4  7C 63 02 14 */	add r3, r3, r0
+    /* 80034318 00030EF8  A8 63 00 60 */	lha r3, 0x60(r3)
+    /* 8003431C 00030EFC  80 01 00 1C */	lwz r0, 0x1c(r1)
+    /* 80034320 00030F00  83 E1 00 14 */	lwz r31, 0x14(r1)
+    /* 80034324 00030F04  38 21 00 18 */	addi r1, r1, 0x18
+    /* 80034328 00030F08  7C 08 03 A6 */	mtlr r0
+    /* 8003432C 00030F0C  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetHUDDamage(s32 slot,s32 arg1) {  ///https://decomp.me/scratch/AC7qV
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+
+    for (i = 0; i < 2; i++) {
+        player = &player_slots[slot];
+        player->staminas.byIndex[player->transformed[i]] = arg1;
+        if (player->player_entity[player->transformed[i]]) {
+            func_800870F0(player->player_entity[player->transformed[i]], arg1);
+        }
+    }
+}
+#else
+asm void Player_SetHUDDamage(s32 slot,s32 arg1)
+{
+    nofralloc
+    /* 80034330 00030F10  7C 08 02 A6 */	mflr r0
+    /* 80034334 00030F14  90 01 00 04 */	stw r0, 4(r1)
+    /* 80034338 00030F18  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 8003433C 00030F1C  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80034340 00030F20  3B E4 00 00 */	addi r31, r4, 0
+    /* 80034344 00030F24  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 80034348 00030F28  93 A1 00 14 */	stw r29, 0x14(r1)
+    /* 8003434C 00030F2C  93 81 00 10 */	stw r28, 0x10(r1)
+    /* 80034350 00030F30  7C 7C 1B 79 */	or. r28, r3, r3
+    /* 80034354 00030F34  41 80 00 0C */	blt lbl_80034360
+    /* 80034358 00030F38  2C 1C 00 06 */	cmpwi r28, 6
+    /* 8003435C 00030F3C  41 80 00 2C */	blt lbl_80034388
+    lbl_80034360:
+    /* 80034360 00030F40  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80034364 00030F44  4C C6 31 82 */	crclr 6
+    /* 80034368 00030F48  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 8003436C 00030F4C  38 9C 00 00 */	addi r4, r28, 0
+    /* 80034370 00030F50  48 31 13 39 */	bl OSReport
+    /* 80034374 00030F54  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80034378 00030F58  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 8003437C 00030F5C  38 80 00 66 */	li r4, 0x66
+    /* 80034380 00030F60  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034384 00030F64  48 35 3E 9D */	bl __assert
+    lbl_80034388:
+    /* 80034388 00030F68  1C 9C 0E 90 */	mulli r4, r28, 0xe90
+    /* 8003438C 00030F6C  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80034390 00030F70  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80034394 00030F74  7F A0 22 14 */	add r29, r0, r4
+    /* 80034398 00030F78  7F FE 07 34 */	extsh r30, r31
+    /* 8003439C 00030F7C  3B 80 00 00 */	li r28, 0
+    lbl_800343A0:
+    /* 800343A0 00030F80  38 9C 00 0C */	addi r4, r28, 0xc
+    /* 800343A4 00030F84  7C 9D 22 14 */	add r4, r29, r4
+    /* 800343A8 00030F88  88 04 00 00 */	lbz r0, 0(r4)
+    /* 800343AC 00030F8C  54 03 08 3C */	slwi r3, r0, 1
+    /* 800343B0 00030F90  38 03 00 60 */	addi r0, r3, 0x60
+    /* 800343B4 00030F94  7F DD 03 2E */	sthx r30, r29, r0
+    /* 800343B8 00030F98  88 04 00 00 */	lbz r0, 0(r4)
+    /* 800343BC 00030F9C  54 03 10 3A */	slwi r3, r0, 2
+    /* 800343C0 00030FA0  38 03 00 B0 */	addi r0, r3, 0xb0
+    /* 800343C4 00030FA4  7C 1D 00 2E */	lwzx r0, r29, r0
+    /* 800343C8 00030FA8  28 00 00 00 */	cmplwi r0, 0
+    /* 800343CC 00030FAC  41 82 00 20 */	beq lbl_800343EC
+    /* 800343D0 00030FB0  38 1C 00 0C */	addi r0, r28, 0xc
+    /* 800343D4 00030FB4  7C 1D 00 AE */	lbzx r0, r29, r0
+    /* 800343D8 00030FB8  38 9F 00 00 */	addi r4, r31, 0
+    /* 800343DC 00030FBC  54 03 10 3A */	slwi r3, r0, 2
+    /* 800343E0 00030FC0  38 03 00 B0 */	addi r0, r3, 0xb0
+    /* 800343E4 00030FC4  7C 7D 00 2E */	lwzx r3, r29, r0
+    /* 800343E8 00030FC8  48 05 2D 09 */	bl func_800870F0
+    lbl_800343EC:
+    /* 800343EC 00030FCC  3B 9C 00 01 */	addi r28, r28, 1
+    /* 800343F0 00030FD0  2C 1C 00 02 */	cmpwi r28, 2
+    /* 800343F4 00030FD4  41 80 FF AC */	blt lbl_800343A0
+    /* 800343F8 00030FD8  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 800343FC 00030FDC  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80034400 00030FE0  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80034404 00030FE4  83 A1 00 14 */	lwz r29, 0x14(r1)
+    /* 80034408 00030FE8  83 81 00 10 */	lwz r28, 0x10(r1)
+    /* 8003440C 00030FEC  38 21 00 20 */	addi r1, r1, 0x20
+    /* 80034410 00030FF0  7C 08 03 A6 */	mtlr r0
+    /* 80034414 00030FF4  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetStaminaByIndex(s32 slot, s32 arg1, s32 arg2) {   ///https://decomp.me/scratch/ZhD37
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+
+    player = &player_slots[slot];
+    player->staminas.byIndex[player->transformed[arg1]] = arg2;
+}
+#else
+asm void Player_SetStaminaByIndex(s32 slot, s32 arg1, s32 arg2)
+{
+    nofralloc
+    /* 80034418 00030FF8  7C 08 02 A6 */	mflr r0
+    /* 8003441C 00030FFC  90 01 00 04 */	stw r0, 4(r1)
+    /* 80034420 00031000  94 21 FF D8 */	stwu r1, -0x28(r1)
+    /* 80034424 00031004  93 E1 00 24 */	stw r31, 0x24(r1)
+    /* 80034428 00031008  3B E5 00 00 */	addi r31, r5, 0
+    /* 8003442C 0003100C  93 C1 00 20 */	stw r30, 0x20(r1)
+    /* 80034430 00031010  3B C4 00 00 */	addi r30, r4, 0
+    /* 80034434 00031014  93 A1 00 1C */	stw r29, 0x1c(r1)
+    /* 80034438 00031018  7C 7D 1B 79 */	or. r29, r3, r3
+    /* 8003443C 0003101C  41 80 00 0C */	blt lbl_80034448
+    /* 80034440 00031020  2C 1D 00 06 */	cmpwi r29, 6
+    /* 80034444 00031024  41 80 00 2C */	blt lbl_80034470
+    lbl_80034448:
+    /* 80034448 00031028  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 8003444C 0003102C  4C C6 31 82 */	crclr 6
+    /* 80034450 00031030  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80034454 00031034  38 9D 00 00 */	addi r4, r29, 0
+    /* 80034458 00031038  48 31 12 51 */	bl OSReport
+    /* 8003445C 0003103C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80034460 00031040  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80034464 00031044  38 80 00 66 */	li r4, 0x66
+    /* 80034468 00031048  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003446C 0003104C  48 35 3D B5 */	bl __assert
+    lbl_80034470:
+    /* 80034470 00031050  1C 9D 0E 90 */	mulli r4, r29, 0xe90
+    /* 80034474 00031054  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80034478 00031058  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 8003447C 0003105C  7C A0 22 14 */	add r5, r0, r4
+    /* 80034480 00031060  7C 65 F2 14 */	add r3, r5, r30
+    /* 80034484 00031064  88 03 00 0C */	lbz r0, 0xc(r3)
+    /* 80034488 00031068  7F E4 07 34 */	extsh r4, r31
+    /* 8003448C 0003106C  54 00 08 3C */	slwi r0, r0, 1
+    /* 80034490 00031070  7C 65 02 14 */	add r3, r5, r0
+    /* 80034494 00031074  B0 83 00 60 */	sth r4, 0x60(r3)
+    /* 80034498 00031078  80 01 00 2C */	lwz r0, 0x2c(r1)
+    /* 8003449C 0003107C  83 E1 00 24 */	lwz r31, 0x24(r1)
+    /* 800344A0 00031080  83 C1 00 20 */	lwz r30, 0x20(r1)
+    /* 800344A4 00031084  83 A1 00 1C */	lwz r29, 0x1c(r1)
+    /* 800344A8 00031088  38 21 00 28 */	addi r1, r1, 0x28
+    /* 800344AC 0003108C  7C 08 03 A6 */	mtlr r0
+    /* 800344B0 00031090  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+s16 Player_GetOtherStamina(s32 slot) {  ///https://decomp.me/scratch/LiPXX
+    s16 stamina; 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    stamina = player->staminas.byName.unk_other_stamina;
+    return stamina;
+}
+#else
+asm s16 Player_GetOtherStamina(s32 slot)
+{
+    nofralloc
+    /* 800344B4 00031094  7C 08 02 A6 */	mflr r0
+    /* 800344B8 00031098  90 01 00 04 */	stw r0, 4(r1)
+    /* 800344BC 0003109C  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 800344C0 000310A0  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 800344C4 000310A4  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 800344C8 000310A8  41 80 00 0C */	blt lbl_800344D4
+    /* 800344CC 000310AC  2C 1F 00 06 */	cmpwi r31, 6
+    /* 800344D0 000310B0  41 80 00 2C */	blt lbl_800344FC
+    lbl_800344D4:
+    /* 800344D4 000310B4  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 800344D8 000310B8  4C C6 31 82 */	crclr 6
+    /* 800344DC 000310BC  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 800344E0 000310C0  38 9F 00 00 */	addi r4, r31, 0
+    /* 800344E4 000310C4  48 31 11 C5 */	bl OSReport
+    /* 800344E8 000310C8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 800344EC 000310CC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 800344F0 000310D0  38 80 00 66 */	li r4, 0x66
+    /* 800344F4 000310D4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800344F8 000310D8  48 35 3D 29 */	bl __assert
+    lbl_800344FC:
+    /* 800344FC 000310DC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 80034500 000310E0  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80034504 000310E4  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80034508 000310E8  7C 60 22 14 */	add r3, r0, r4
+    /* 8003450C 000310EC  A8 63 00 64 */	lha r3, 0x64(r3)
+    /* 80034510 000310F0  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80034514 000310F4  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80034518 000310F8  38 21 00 20 */	addi r1, r1, 0x20
+    /* 8003451C 000310FC  7C 08 03 A6 */	mtlr r0
+    /* 80034520 00031100  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_SetOtherStamina(s32 slot, s32 stamina) {   ///https://decomp.me/scratch/dBgYp
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->staminas.byName.unk_other_stamina = stamina;
+}
+#else
+void Player_SetOtherStamina(s32 slot, s32 stamina)
+{
+    nofralloc
+    /* 80034524 00031104  7C 08 02 A6 */	mflr r0
+    /* 80034528 00031108  90 01 00 04 */	stw r0, 4(r1)
+    /* 8003452C 0003110C  94 21 FF E0 */	stwu r1, -0x20(r1)
+    /* 80034530 00031110  93 E1 00 1C */	stw r31, 0x1c(r1)
+    /* 80034534 00031114  3B E4 00 00 */	addi r31, r4, 0
+    /* 80034538 00031118  93 C1 00 18 */	stw r30, 0x18(r1)
+    /* 8003453C 0003111C  7C 7E 1B 79 */	or. r30, r3, r3
+    /* 80034540 00031120  41 80 00 0C */	blt lbl_8003454C
+    /* 80034544 00031124  2C 1E 00 06 */	cmpwi r30, 6
+    /* 80034548 00031128  41 80 00 2C */	blt lbl_80034574
+    lbl_8003454C:
+    /* 8003454C 0003112C  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80034550 00031130  4C C6 31 82 */	crclr 6
+    /* 80034554 00031134  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80034558 00031138  38 9E 00 00 */	addi r4, r30, 0
+    /* 8003455C 0003113C  48 31 11 4D */	bl OSReport
+    /* 80034560 00031140  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80034564 00031144  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80034568 00031148  38 80 00 66 */	li r4, 0x66
+    /* 8003456C 0003114C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034570 00031150  48 35 3C B1 */	bl __assert
+    lbl_80034574:
+    /* 80034574 00031154  1C 9E 0E 90 */	mulli r4, r30, 0xe90
+    /* 80034578 00031158  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 8003457C 0003115C  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80034580 00031160  7F E5 07 34 */	extsh r5, r31
+    /* 80034584 00031164  7C 60 22 14 */	add r3, r0, r4
+    /* 80034588 00031168  B0 A3 00 64 */	sth r5, 0x64(r3)
+    /* 8003458C 0003116C  80 01 00 24 */	lwz r0, 0x24(r1)
+    /* 80034590 00031170  83 E1 00 1C */	lwz r31, 0x1c(r1)
+    /* 80034594 00031174  83 C1 00 18 */	lwz r30, 0x18(r1)
+    /* 80034598 00031178  38 21 00 20 */	addi r1, r1, 0x20
+    /* 8003459C 0003117C  7C 08 03 A6 */	mtlr r0
+    /* 800345A0 00031180  4E 80 00 20 */	blr 
 }
 #endif

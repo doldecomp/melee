@@ -50,10 +50,15 @@ typedef struct _StaticPlayer
     /*0x58*/ f32 defense_ratio;
 
     /*0x5C*/ f32 model_scale;
-    /*0x60*/ s16 stamina_hp_lost_percent;
-    /*0x62*/ s16 starting_stamina;  //Used in modes like Sudden Death to set your starting Percentage. Otherwise Nana's or Sheik's %
-    /*0x64*/ s16 stamina_hp;
-    /*0x66*/ s16 unk66;
+    union {
+        struct {
+            /*0x60*/ s16 stamina_main; 
+            /*0x62*/ s16 stamina_alternate_or_startpercent; 
+            /*0x64*/ s16 unk_other_stamina;
+            /*0x66*/ s16 unk66;
+        } byName;
+        s16 byIndex[4];
+    } staminas;
 
     /*0x68*/ s32 falls;
     /*0x6C*/ s32 nana_falls;
@@ -190,5 +195,10 @@ s32 Player_GetUnk9C(s32 slot);
 void Player_SetUnk9C(s32 slot, s32 unk9C);
 HSD_GObj* Player_GetEntity(s32 slot);
 HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index);
+void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2);
+s16 Player_GetStamina(s32 slot);
+void Player_SetHUDDamage(s32 slot,s32 arg1);
+void Player_SetStaminaByIndex(s32 slot, s32 arg1, s32 arg2);
+s16 Player_GetOtherStamina(s32 slot);
 
 #endif
