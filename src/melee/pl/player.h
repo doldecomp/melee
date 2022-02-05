@@ -47,7 +47,7 @@ typedef struct _StaticPlayer
     /*0x50*/ f32 unk50;
 
     /*0x54*/ f32 attack_ratio;
-    /*0x58*/ f32 damage_defense_ratio;
+    /*0x58*/ f32 defense_ratio;
 
     /*0x5C*/ f32 model_scale;
     /*0x60*/ s16 stamina_hp_lost_percent;
@@ -167,5 +167,20 @@ s8 Player_GetCpuLevel(s32 slot);
 void Player_SetPlayerAndEntityCpuLevel(s32 slot, s8 cpu_level);
 s8 Player_GetCpuType(s32 slot);
 void Player_SetPlayerAndEntityCpuType(s32 slot, s8 cpu_type);
+s8 Player_GetHandicap(s32 slot);
+void Player_SetHandicap(s32 slot, s8 handicap);
+f32 Player_GetUnk50(s32 slot);
+f32 Player_GetAttackRatio(s32 slot);
+void Player_SetAttackRatio(s32 slot, f32 attack_ratio);
+f32 Player_GetDefenseRatio(s32 slot);
+void Player_SetDefenseRatio(s32 slot, f32 defense_ratio);
+f32 Player_GetModelScale(s32 slot);
+void Player_SetModelScale(s32 slot, f32 model_scale);
+s32 Player_GetStocks(s32 slot);
+s32 Player_GetP1Stock();
+void Player_SetStocks(s32 slot, s32 stocks);
+void Player_LoseStock(s32 slot);
+s32 Player_GetCoins(s32 slot);
+void Player_SetCoins(s32 slot, s32 current_coins);
 
 #endif
