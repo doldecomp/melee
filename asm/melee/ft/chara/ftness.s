@@ -7615,7 +7615,7 @@ lbl_8011B190:
 /* 8011B1A0 00117D80  54 84 EF FE */	rlwinm r4, r4, 0x1d, 0x1f, 0x1f
 /* 8011B1A4 00117D84  D8 01 00 18 */	stfd f0, 0x18(r1)
 /* 8011B1A8 00117D88  80 A1 00 1C */	lwz r5, 0x1c(r1)
-/* 8011B1AC 00117D8C  4B F1 92 6D */	bl Player_SetStaminaByIndex
+/* 8011B1AC 00117D8C  4B F1 92 6D */	bl Player_SetHPByIndex
 /* 8011B1B0 00117D90  FC 00 F8 1E */	fctiwz f0, f31
 /* 8011B1B4 00117D94  88 9F 22 1F */	lbz r4, 0x221f(r31)
 /* 8011B1B8 00117D98  88 7F 00 0C */	lbz r3, 0xc(r31)

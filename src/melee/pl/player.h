@@ -52,16 +52,15 @@ typedef struct _StaticPlayer
     /*0x5C*/ f32 model_scale;
     union {
         struct {
-            /*0x60*/ s16 stamina_main; 
-            /*0x62*/ s16 stamina_alternate_or_startpercent; 
-            /*0x64*/ s16 unk_other_stamina;
+            /*0x60*/ s16 damage_percent; 
+            /*0x62*/ s16 damage_percent_alt_or_start_hp; 
+            /*0x64*/ s16 stamina;
             /*0x66*/ s16 unk66;
         } byName;
         s16 byIndex[4];
     } staminas;
 
-    /*0x68*/ s32 falls;
-    /*0x6C*/ s32 nana_falls;
+    /*0x68 - 0x6C*/ s32 falls[2];  /// other index for nana_falls
 
     /*0x70*/ s32 p1_KOs;
     /*0x74*/ s32 p2_KOs;
@@ -89,8 +88,27 @@ typedef struct _StaticPlayer
 
     /*0xAC*/ s8 flags;
 
-    /*0xAD*/ s8 unkAD;
-    /*0xAE*/ s8 unkAE;
+    /*0xAD*/ struct {
+                u8 b0 : 1;
+                u8 b1 : 1;
+                u8 b2 : 1;
+                u8 b3 : 1;
+                u8 b4 : 1;
+                u8 b5 : 1;
+                u8 b6 : 2;
+            } more_flags;
+
+    /*0xAE*/ struct {
+                u8 b0 : 1;
+                u8 b1 : 1;
+                u8 b2 : 1;
+                u8 b3 : 1;
+                u8 b4 : 1;
+                u8 b5 : 1;
+                u8 b6 : 1;
+                u8 b7 : 1;
+            } flagsAE; 
+
     /*0xAF*/ s8 unkAF;
 
     /*0xB0*/ HSD_GObj* player_entity[2];
@@ -196,9 +214,22 @@ void Player_SetUnk9C(s32 slot, s32 unk9C);
 HSD_GObj* Player_GetEntity(s32 slot);
 HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index);
 void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2);
-s16 Player_GetStamina(s32 slot);
+s16 Player_GetDamage(s32 slot);
 void Player_SetHUDDamage(s32 slot,s32 arg1);
-void Player_SetStaminaByIndex(s32 slot, s32 arg1, s32 arg2);
+void Player_SetHPByIndex(s32 slot, s32 arg1, s32 arg2);
 s16 Player_GetOtherStamina(s32 slot);
+u32 Player_GetRemainingHP(s32 slot);
+u8 Player_GetMoreFlagsBit2(s32 slot);
+void Player_SetMoreFlagsBit2(s32 slot, u8 bit2);
+u8 Player_GetMoreFlagsBit3(s32 slot);
+void Player_SetMoreFlagsBit3(s32 slot, u8 bit3);
+void Player_SetMoreFlagsBit4(s32 slot, u8 bit4);
+u8 Player_GetMoreFlagsBit4(s32 slot);
+u8 Player_GetMoreFlagsBit5(s32 slot);
+void Player_SetMoreFlagsBit5(s32 slot, u8 bit5);
+u8 Player_GetMoreFlagsBit6(s32 slot);
+void Player_SetMoreFlagsBit6(s32 slot, u8 bit6);
+u8 Player_GetFlagsAEBit0(s32 slot);
+u32 Player_GetRemainingHPByIndex(s32 slot, s32 arg1);
 
 #endif

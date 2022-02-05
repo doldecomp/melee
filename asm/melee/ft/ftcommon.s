@@ -3036,7 +3036,7 @@ func_8007EFC8:
 /* 8007F0FC 0007BCDC  54 84 EF FE */	rlwinm r4, r4, 0x1d, 0x1f, 0x1f
 /* 8007F100 0007BCE0  D8 01 00 20 */	stfd f0, 0x20(r1)
 /* 8007F104 0007BCE4  80 A1 00 24 */	lwz r5, 0x24(r1)
-/* 8007F108 0007BCE8  4B FB 53 11 */	bl Player_SetStaminaByIndex
+/* 8007F108 0007BCE8  4B FB 53 11 */	bl Player_SetHPByIndex
 /* 8007F10C 0007BCEC  80 7F 18 F0 */	lwz r3, 0x18f0(r31)
 /* 8007F110 0007BCF0  38 00 00 0A */	li r0, 0xa
 /* 8007F114 0007BCF4  7C 09 03 A6 */	mtctr r0
