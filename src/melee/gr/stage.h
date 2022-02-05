@@ -58,4 +58,47 @@ typedef struct _StageInfo {
     u8 data[0x6EB];
 } StageInfo;
 
+f32 get_cam_bounds_left_offset();
+f32 get_cam_bounds_right_offset();
+f32 get_cam_bounds_top_offset();
+f32 get_cam_bounds_bottom_offset();
+f32 get_cam_pan_angle_radians();
+f32 get_cam_max_depth();
+f32 get_cam_zoom_rate();
+f32 get_cam_info_x20();
+f32 get_cam_info_x24();
+f32 get_cam_fixed_zoom();
+f32 get_cam_track_ratio();
+f32 get_cam_track_smooth();
+f32 get_blast_zone_right_offset();
+f32 get_blast_zone_left_offset();
+f32 get_blast_zone_top_offset();
+f32 get_blast_zone_bottom_offset();
+f32 calc_unk_cam_y_80224B98();
+f32 calc_unk_cam_y_bounds_80224BC4();
+f32 unk_set_vec3_to_cam_offset_80224BF8(Vec* vec3, f32 arg8);
+f32 get_pausecam_zpos_min();
+f32 get_pausecam_zpos_init();
+f32 get_pausecam_zpos_max();
+f32 get_cam_angle_radians_up();
+f32 get_cam_angle_radians_down();
+f32 get_cam_angle_radians_left();
+f32 get_cam_angle_radians_right();
+void func_80224CAC(Vec* arg0);
+void set_vec_to_fixed_cam_pos(Vec* arg0);
+f32 get_cam_fixed_fov();
+BOOL func_80224DC8(s32 arg);
+void func_80224E38(Vec* arg0, s32 arg1);
+void func_80224E64(s32 arg0, Vec* arg_vec);
+s32 func_80224FDC(Vec* arg0);
+s32 func_80225074(s32 arg0);
+s32 func_80225194();
+s32 func_8022519C(s32 idx);
+s32 func_802251B4(s32 idx, s32 arg1);
+void func_802251E8(s32 idx, s32* unused);
+void func_8022524C();
+void func_80225298();
+void func_802252E4(s32 idx, s32 unused);
+void func_8022532C(s32 idx, s32 arg1);
+
 #endif
