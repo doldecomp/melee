@@ -72,7 +72,7 @@ typedef struct _StaticPlayer
     /*0x8F*/ s8 unk8F;
 
     /*0x90*/ s32 current_coins;
-    /*0x94*/ s32 total_coins_collected;
+    /*0x94*/ s32 total_coins;
 
     /*0x98*/ s32 unk98;
     /*0x9C*/ s32 unk9C;
@@ -182,5 +182,13 @@ void Player_SetStocks(s32 slot, s32 stocks);
 void Player_LoseStock(s32 slot);
 s32 Player_GetCoins(s32 slot);
 void Player_SetCoins(s32 slot, s32 current_coins);
+s32 Player_GetTotalCoins(s32 slot);
+void Player_SetTotalCoins(s32 slot, s32 coins);
+s32 Player_GetUnk98(s32 slot);
+void Player_SetUnk98(s32 slot, s32 unk98);
+s32 Player_GetUnk9C(s32 slot);
+void Player_SetUnk9C(s32 slot, s32 unk9C);
+HSD_GObj* Player_GetEntity(s32 slot);
+HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index);
 
 #endif
