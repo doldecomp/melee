@@ -33,7 +33,7 @@ typedef struct _StaticPlayer
     /*0x44*/ s8 costume_id;  // 00 = normal, 01 = red, 02 = blue, 03 = green (reflected in icon immediately)
     /*0x45*/ s8 unk45;
     /*0x46*/ s8 controller_index;
-    /*0x47*/ s8 unk_color;  /// 00 = red, 01 = blue, 02 = green
+    /*0x47*/ u8 team;  /// 00 = red, 01 = blue, 02 = green
     /*0x48*/ s8 player_id;
     /*0x49*/ s8 cpu_level;
     /*0x4A*/ s8 cpu_type;
@@ -60,14 +60,9 @@ typedef struct _StaticPlayer
         s16 byIndex[4];
     } staminas;
 
-    /*0x68 - 0x6C*/ s32 falls[2];  /// other index for nana_falls
+    /*0x68 - 0x6C*/ s32 falls[2];  /// other index for nana falls
 
-    /*0x70*/ s32 p1_KOs;
-    /*0x74*/ s32 p2_KOs;
-    /*0x78*/ s32 p3_KOs;
-    /*0x7C*/ s32 p4_KOs;
-    /*0x80*/ s32 p5_KOs;
-    /*0x84*/ s32 p6_KOs;
+    /*0x70-0x87*/ s32 kos_by_player[6];
 
     /*0x88*/ s32 match_frame_count; // If -1 in zz_0035184, then it's set to MatchInfo->frame_count
     /*0x8C*/ s16 suicide_count;
@@ -182,8 +177,8 @@ s8 Player_GetCostumeId(s32 slot);
 void Player_SetCostumeId(s32 slot, s8 costume_id);
 s8 Player_GetControllerIndex(s32 slot);
 void Player_SetControllerIndex(s32 slot, s8 controller_index);
-s8 Player_GetUnkColor(s32 slot);
-void Player_SetUnkColor(s32 slot, s8 unk_color);
+s8 Player_GetTeam(s32 slot);
+void Player_SetTeam(s32 slot, s8 unk_color);
 s8 Player_GetPlayerId(s32 slot);
 void Player_SetPlayerId(s32 slot, s8 player_id);
 s8 Player_GetCpuLevel(s32 slot);
@@ -230,6 +225,12 @@ void Player_SetMoreFlagsBit5(s32 slot, u8 bit5);
 u8 Player_GetMoreFlagsBit6(s32 slot);
 void Player_SetMoreFlagsBit6(s32 slot, u8 bit6);
 u8 Player_GetFlagsAEBit0(s32 slot);
-u32 Player_GetRemainingHPByIndex(s32 slot, s32 arg1);
+u32 Player_GetRemainingHPByIndex(s32 slot, s32 index);
+s32 Player_GetFalls(s32 slot);
+s32 Player_GetFallsByIndex(s32 slot, s32 index);
+void Player_SetFalls(s32 slot, s32 falls);
+void Player_SetFallsByIndex(s32 slot, s32 index, s32 falls);
+s32 Player_GetKOsByPlayerIndex(s32 slot, s32 index);
+void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot);
 
 #endif
