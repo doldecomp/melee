@@ -292,3 +292,13 @@ HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc *tlutdesc)
     }
     return NULL;
 }
+
+HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc)
+{
+    if (tevdesc != NULL) {
+        HSD_TObjTev* new = HSD_TObjTevAlloc();
+        memcpy(new, tevdesc, sizeof(HSD_TObjTev));
+        return new;
+    }
+    return NULL;
+}

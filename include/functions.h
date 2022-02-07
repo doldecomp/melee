@@ -8264,7 +8264,7 @@ struct _HSD_TObj* allocShadowTObj();
 // ? func_803611E8(?);
 // ? HSD_TlutAlloc(?);
 // ? HSD_TlutFree(?);
-// ? func_803612A0(?);
+// ? HSD_TObjTevAlloc(?);
 struct _HSD_ImageDesc* HSD_ImageDescAlloc();
 // ? func_80361350(?);
 // ? func_80361374(?);
