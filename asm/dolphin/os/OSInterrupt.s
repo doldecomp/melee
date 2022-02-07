@@ -673,7 +673,7 @@ lbl_80402318:
 
 
 .section .sbss
-
+    .4byte NULL
 .global lbl_804D7378
 lbl_804D7378:
 	.skip 0x4
