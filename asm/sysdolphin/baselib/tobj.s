@@ -2,62 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8035EEA4
-/* 8035EEA4 0035BA84  7C 08 02 A6 */	mflr r0
-/* 8035EEA8 0035BA88  28 03 00 07 */	cmplwi r3, 7
-/* 8035EEAC 0035BA8C  90 01 00 04 */	stw r0, 4(r1)
-/* 8035EEB0 0035BA90  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8035EEB4 0035BA94  41 81 00 5C */	bgt lbl_8035EF10
-/* 8035EEB8 0035BA98  3C 80 80 40 */	lis r4, jtbl_80405644@ha
-/* 8035EEBC 0035BA9C  38 84 56 44 */	addi r4, r4, jtbl_80405644@l
-/* 8035EEC0 0035BAA0  54 60 10 3A */	slwi r0, r3, 2
-/* 8035EEC4 0035BAA4  7C 04 00 2E */	lwzx r0, r4, r0
-/* 8035EEC8 0035BAA8  7C 09 03 A6 */	mtctr r0
-/* 8035EECC 0035BAAC  4E 80 04 20 */	bctr 
-.global lbl_8035EED0
-lbl_8035EED0:
-/* 8035EED0 0035BAB0  38 60 00 40 */	li r3, 0x40
-/* 8035EED4 0035BAB4  48 00 00 54 */	b lbl_8035EF28
-.global lbl_8035EED8
-lbl_8035EED8:
-/* 8035EED8 0035BAB8  38 60 00 43 */	li r3, 0x43
-/* 8035EEDC 0035BABC  48 00 00 4C */	b lbl_8035EF28
-.global lbl_8035EEE0
-lbl_8035EEE0:
-/* 8035EEE0 0035BAC0  38 60 00 46 */	li r3, 0x46
-/* 8035EEE4 0035BAC4  48 00 00 44 */	b lbl_8035EF28
-.global lbl_8035EEE8
-lbl_8035EEE8:
-/* 8035EEE8 0035BAC8  38 60 00 49 */	li r3, 0x49
-/* 8035EEEC 0035BACC  48 00 00 3C */	b lbl_8035EF28
-.global lbl_8035EEF0
-lbl_8035EEF0:
-/* 8035EEF0 0035BAD0  38 60 00 4C */	li r3, 0x4c
-/* 8035EEF4 0035BAD4  48 00 00 34 */	b lbl_8035EF28
-.global lbl_8035EEF8
-lbl_8035EEF8:
-/* 8035EEF8 0035BAD8  38 60 00 4F */	li r3, 0x4f
-/* 8035EEFC 0035BADC  48 00 00 2C */	b lbl_8035EF28
-.global lbl_8035EF00
-lbl_8035EF00:
-/* 8035EF00 0035BAE0  38 60 00 52 */	li r3, 0x52
-/* 8035EF04 0035BAE4  48 00 00 24 */	b lbl_8035EF28
-.global lbl_8035EF08
-lbl_8035EF08:
-/* 8035EF08 0035BAE8  38 60 00 55 */	li r3, 0x55
-/* 8035EF0C 0035BAEC  48 00 00 1C */	b lbl_8035EF28
-lbl_8035EF10:
-/* 8035EF10 0035BAF0  3C 60 80 40 */	lis r3, lbl_8040562C@ha
-/* 8035EF14 0035BAF4  38 A3 56 2C */	addi r5, r3, lbl_8040562C@l
-/* 8035EF18 0035BAF8  38 6D A5 F0 */	addi r3, r13, lbl_804D5C90@sda21
-/* 8035EF1C 0035BAFC  38 80 02 3E */	li r4, 0x23e
-/* 8035EF20 0035BB00  48 02 93 59 */	bl HSD_Panic
-/* 8035EF24 0035BB04  38 60 00 00 */	li r3, 0
-lbl_8035EF28:
-/* 8035EF28 0035BB08  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8035EF2C 0035BB0C  38 21 00 08 */	addi r1, r1, 8
-/* 8035EF30 0035BB10  7C 08 03 A6 */	mtlr r0
-/* 8035EF34 0035BB14  4E 80 00 20 */	blr 
 lbl_8035EF38:
 /* 8035EF38 0035BB18  7C 08 02 A6 */	mflr r0
 /* 8035EF3C 0035BB1C  90 01 00 04 */	stw r0, 4(r1)
@@ -2998,20 +2942,6 @@ TObjInfoInit:
 
 .section .data
 
-.global lbl_8040562C
-lbl_8040562C:
-    .asciz "unexpected texmap id.\n"
-    .balign 4
-.global jtbl_80405644
-jtbl_80405644:
-	.4byte lbl_8035EED0
-	.4byte lbl_8035EED8
-	.4byte lbl_8035EEE0
-	.4byte lbl_8035EEE8
-	.4byte lbl_8035EEF0
-	.4byte lbl_8035EEF8
-	.4byte lbl_8035EF00
-	.4byte lbl_8035EF08
 .global lbl_80405664
 lbl_80405664:
     .asciz "tobj->repeat_s && tobj->repeat_t"

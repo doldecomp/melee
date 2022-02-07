@@ -20,6 +20,46 @@ typedef enum _GXTexMtx
     GX_IDENTITY = 60
 } GXTexMtx;
 
+typedef enum _GXTexMapID
+{
+    GX_TEXMAP0,
+    GX_TEXMAP1,
+    GX_TEXMAP2,
+    GX_TEXMAP3,
+    GX_TEXMAP4,
+    GX_TEXMAP5,
+    GX_TEXMAP6,
+    GX_TEXMAP7,
+    GX_MAX_TEXMAP,
+    GX_TEXMAP_NULL = 0xff,
+    GX_TEX_DISABLE = 0x100
+} GXTexMapID;
+
+typedef enum _GXPTTexMtx
+{
+    GX_PTTEXMTX0  = 64,
+    GX_PTTEXMTX1  = 67,
+    GX_PTTEXMTX2  = 70,
+    GX_PTTEXMTX3  = 73,
+    GX_PTTEXMTX4  = 76,
+    GX_PTTEXMTX5  = 79,
+    GX_PTTEXMTX6  = 82,
+    GX_PTTEXMTX7  = 85,
+    GX_PTTEXMTX8  = 88,
+    GX_PTTEXMTX9  = 91,
+    GX_PTTEXMTX10 = 94,
+    GX_PTTEXMTX11 = 97,
+    GX_PTTEXMTX12 = 100,
+    GX_PTTEXMTX13 = 103,
+    GX_PTTEXMTX14 = 106,
+    GX_PTTEXMTX15 = 109,
+    GX_PTTEXMTX16 = 112,
+    GX_PTTEXMTX17 = 115,
+    GX_PTTEXMTX18 = 118,
+    GX_PTTEXMTX19 = 121,
+    GX_PTIDENTITY = 125
+} GXPTTexMtx;
+
 typedef struct {
 	u8 pad[GX_FIFO_OBJSIZE];
 } GXFifoObj;

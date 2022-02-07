@@ -9,6 +9,7 @@ HSD_TObjInfo hsdTObj = { TObjInfoInit };
 extern HSD_TObj* tobj_head;
 
 extern char lbl_804055B8[];
+
 char lbl_804D5C90[7] = "tobj.c\0";
 char lbl_804D5C98[5] = "tobj\0";
 
@@ -325,3 +326,34 @@ HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping)
 END:
     return tp;
 }
+
+char lbl_8040562C[23] = "unexpected texmap id.\n\0";
+
+#pragma push
+#pragma force_active on
+static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
+{
+	switch(id)
+	{
+	case GX_TEXMAP0:
+		return GX_PTTEXMTX0;
+	case GX_TEXMAP1:
+		return GX_PTTEXMTX1;
+	case GX_TEXMAP2:
+		return GX_PTTEXMTX2;
+	case GX_TEXMAP3:
+		return GX_PTTEXMTX3;
+	case GX_TEXMAP4:
+		return GX_PTTEXMTX4;
+	case GX_TEXMAP5:
+		return GX_PTTEXMTX5;
+	case GX_TEXMAP6:
+		return GX_PTTEXMTX6;
+	case GX_TEXMAP7:
+		return GX_PTTEXMTX7;
+	default:
+		HSD_Panic(lbl_804D5C90, 574, lbl_8040562C);
+	}
+	return 0;
+}
+#pragma pop
