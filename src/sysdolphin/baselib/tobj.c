@@ -6,6 +6,8 @@ extern void TObjInfoInit(void);
 
 HSD_TObjInfo hsdTObj = { TObjInfoInit };
 
+extern HSD_TObj* tobj_head;
+
 extern char lbl_804055B8[];
 char lbl_804D5C90[7] = "tobj.c\0";
 char lbl_804D5C98[5] = "tobj\0";
@@ -301,4 +303,25 @@ HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc)
         return new;
     }
     return NULL;
+}
+
+HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping)
+{
+    HSD_TObj* tp;
+
+    if (from == NULL) {
+        tp = tobj_head;
+    }
+    else {
+        tp = from->next;
+    }
+
+    for (; tp != NULL; tp = tp->next) {
+        if (tobj_coord(tp) == mapping)
+            goto END;
+    }
+
+    tp = NULL;
+END:
+    return tp;
 }

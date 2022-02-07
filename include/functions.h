@@ -8247,7 +8247,7 @@ struct _HSD_DObj* HSD_DObjLoadDesc(struct _HSD_DObjDesc*);
 // ? HSD_TObjLoadDesc(?);
 // ? HSD_TlutLoadDesc(?);
 // ? HSD_TObjTevLoadDesc(?);
-// ? func_8035EE68(?);
+// ? _HSD_TObjGetCurrentByType(?);
 // ? func_8035F0EC(?);
 // ? func_8035F418(?);
 // ? func_8035F6B4(?);
