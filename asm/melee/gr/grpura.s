@@ -32,26 +32,26 @@ lbl_80211D00:
 /* 80211D58 0020E938  4B FB 1C 69 */	bl func_801C39C0
 /* 80211D5C 0020E93C  4B FB 1E 59 */	bl func_801C3BB4
 /* 80211D60 0020E940  38 61 00 08 */	addi r3, r1, 8
-/* 80211D64 0020E944  48 01 2E 95 */	bl unk_set_vec3_to_cam_offset_80224BF8
-/* 80211D68 0020E948  48 01 2D 19 */	bl get_cam_bounds_top_offset
+/* 80211D64 0020E944  48 01 2E 95 */	bl Stage_UnkSetVec3TCam_Offset
+/* 80211D68 0020E948  48 01 2D 19 */	bl Stage_GetCamBoundsTopOffset
 /* 80211D6C 0020E94C  C0 41 00 0C */	lfs f2, 0xc(r1)
 /* 80211D70 0020E950  C0 02 C0 78 */	lfs f0, lbl_804DBA58@sda21(r2)
 /* 80211D74 0020E954  EC 21 10 28 */	fsubs f1, f1, f2
 /* 80211D78 0020E958  EC 20 00 72 */	fmuls f1, f0, f1
 /* 80211D7C 0020E95C  4B FB 1B 05 */	bl func_801C3880
-/* 80211D80 0020E960  48 01 2D 19 */	bl get_cam_bounds_bottom_offset
+/* 80211D80 0020E960  48 01 2D 19 */	bl Stage_GetCamBoundsBottomOffset
 /* 80211D84 0020E964  C0 41 00 0C */	lfs f2, 0xc(r1)
 /* 80211D88 0020E968  C0 02 C0 78 */	lfs f0, lbl_804DBA58@sda21(r2)
 /* 80211D8C 0020E96C  EC 21 10 28 */	fsubs f1, f1, f2
 /* 80211D90 0020E970  EC 20 00 72 */	fmuls f1, f0, f1
 /* 80211D94 0020E974  4B FB 1A FD */	bl func_801C3890
-/* 80211D98 0020E978  48 01 2C BD */	bl get_cam_bounds_left_offset
+/* 80211D98 0020E978  48 01 2C BD */	bl Stage_GetCamBoundsLeftOffset
 /* 80211D9C 0020E97C  C0 41 00 08 */	lfs f2, 8(r1)
 /* 80211DA0 0020E980  C0 02 C0 78 */	lfs f0, lbl_804DBA58@sda21(r2)
 /* 80211DA4 0020E984  EC 21 10 28 */	fsubs f1, f1, f2
 /* 80211DA8 0020E988  EC 20 00 72 */	fmuls f1, f0, f1
 /* 80211DAC 0020E98C  4B FB 1A F5 */	bl func_801C38A0
-/* 80211DB0 0020E990  48 01 2C B9 */	bl get_cam_bounds_right_offset
+/* 80211DB0 0020E990  48 01 2C B9 */	bl Stage_GetCamBoundsRightOffset
 /* 80211DB4 0020E994  C0 41 00 08 */	lfs f2, 8(r1)
 /* 80211DB8 0020E998  C0 02 C0 78 */	lfs f0, lbl_804DBA58@sda21(r2)
 /* 80211DBC 0020E99C  EC 21 10 28 */	fsubs f1, f1, f2

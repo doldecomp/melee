@@ -9874,7 +9874,7 @@ lbl_8003F9E8:
 /* 8003F9EC 0003C5CC  38 61 00 38 */	addi r3, r1, 0x38
 /* 8003F9F0 0003C5D0  38 04 00 01 */	addi r0, r4, 1
 /* 8003F9F4 0003C5D4  90 1F 0D 98 */	stw r0, 0xd98(r31)
-/* 8003F9F8 0003C5D8  48 1E 52 01 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 8003F9F8 0003C5D8  48 1E 52 01 */	bl Stage_UnkSetVec3TCam_Offset
 /* 8003F9FC 0003C5DC  C0 5D 00 00 */	lfs f2, 0(r29)
 /* 8003FA00 0003C5E0  C0 21 00 38 */	lfs f1, 0x38(r1)
 /* 8003FA04 0003C5E4  C0 02 85 78 */	lfs f0, lbl_804D7F58@sda21(r2)

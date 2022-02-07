@@ -22,94 +22,94 @@ struct StructNumberAndStage unk_struct_804D49E8 = { 2, NULL };
 struct StructPairWithStageID unk_struct_804D49F0 = { 12, 2 };
 extern struct StructStageIDWithUnks unk_arr_803E9960[];
 
-f32 get_cam_bounds_left_offset()
+f32 Stage_GetCamBoundsLeftOffset()
 {
     return stage_info.cam_info.cam_bounds_left + stage_info.cam_info.cam_x_offset;
 }
 
-f32 get_cam_bounds_right_offset()
+f32 Stage_GetCamBoundsRightOffset()
 {
     return stage_info.cam_info.cam_bounds_right + stage_info.cam_info.cam_x_offset;
 }
 
-f32 get_cam_bounds_top_offset()
+f32 Stage_GetCamBoundsTopOffset()
 {
     return stage_info.cam_info.cam_bounds_top + stage_info.cam_info.cam_y_offset;
 }
 
-f32 get_cam_bounds_bottom_offset()
+f32 Stage_GetCamBoundsBottomOffset()
 {
     return stage_info.cam_info.cam_bounds_bottom + stage_info.cam_info.cam_y_offset;
 }
 
-f32 get_cam_pan_angle_radians()
+f32 Stage_GetCamPanAngleRadians()
 {
     return 0.0174532923847F * stage_info.cam_info.cam_pan_degrees;
 }
 
-f32 get_cam_max_depth()
+f32 Stage_GetCamMaxDepth()
 {
     return stage_info.cam_info.cam_max_depth;
 }
 
-f32 get_cam_zoom_rate()
+f32 Stage_GetCamZoomRate()
 {
     return stage_info.cam_info.cam_zoom_rate;
 }
 
-f32 get_cam_info_x20()
+f32 Stage_GetCamInfoX20()
 {
     return stage_info.cam_info.x20;
 }
 
-f32 get_cam_info_x24()
+f32 Stage_GetCamInfoX24()
 {
     return stage_info.cam_info.x24;
 }
 
-f32 get_cam_fixed_zoom()
+f32 Stage_GetCamFixedZoom()
 {
     return stage_info.cam_info.cam_fixed_zoom;
 }
 
-f32 get_cam_track_ratio()
+f32 Stage_GetCamTrackRatio()
 {
     return stage_info.cam_info.cam_track_ratio;
 }
 
-f32 get_cam_track_smooth()
+f32 Stage_GetCamTrackSmooth()
 {
     return stage_info.cam_info.cam_track_smooth;
 }
 
-f32 get_blast_zone_right_offset()
+f32 Stage_GetBlastZoneRightOffset()
 {
     return stage_info.blast_zone.right + stage_info.cam_info.cam_x_offset;
 }
 
-f32 get_blast_zone_left_offset()
+f32 Stage_GetBlastZoneLeftOffset()
 {
     return stage_info.blast_zone.left + stage_info.cam_info.cam_x_offset;
 }
 
-f32 get_blast_zone_top_offset()
+f32 Stage_GetBlastZoneTopOffset()
 {
     return stage_info.blast_zone.top + stage_info.cam_info.cam_y_offset;
 }
 
-f32 get_blast_zone_bottom_offset()
+f32 Stage_GetBlastZoneBottomOffset()
 {
     return stage_info.blast_zone.bottom + stage_info.cam_info.cam_y_offset;
 }
 
-f32 calc_unk_cam_y_80224B98()
+f32 Stage_CalcUnkCamY()
 {
     f32 cam_y_offset = stage_info.cam_info.cam_y_offset;
     f32 y_pos = stage_info.cam_info.cam_bounds_bottom + cam_y_offset + (stage_info.blast_zone.bottom + cam_y_offset);
     return 0.5F * y_pos;
 }
 
-f32 calc_unk_cam_y_bounds_80224BC4()
+f32 Stage_CalcUnkCamYBounds()
 {
     f32 cam_offset = (stage_info.cam_info.cam_bounds_bottom + stage_info.cam_info.cam_y_offset);
     f32 y_pos_product = 0.5F * ((stage_info.cam_info.cam_bounds_bottom + stage_info.cam_info.cam_y_offset) + (stage_info.blast_zone.bottom + stage_info.cam_info.cam_y_offset));
@@ -117,7 +117,7 @@ f32 calc_unk_cam_y_bounds_80224BC4()
     return 0.5F * (cam_offset + y_pos_product);
 }
 
-f32 unk_set_vec3_to_cam_offset_80224BF8(Vec* vec3, f32 arg8)
+f32 Stage_UnkSetVec3TCam_Offset(Vec* vec3, f32 arg8)
 {
     vec3->x = stage_info.cam_info.cam_x_offset;
     vec3->y = stage_info.cam_info.cam_y_offset;
@@ -125,42 +125,42 @@ f32 unk_set_vec3_to_cam_offset_80224BF8(Vec* vec3, f32 arg8)
     return arg8;
 }
 
-f32 get_pausecam_zpos_min()
+f32 Stage_GetPauseCamZPosMin()
 {
     return stage_info.cam_info.pausecam_zpos_min;
 }
 
-f32 get_pausecam_zpos_init()
+f32 Stage_GetPauseCamZPosInit()
 {
     return stage_info.cam_info.pausecam_zpos_init;
 }
 
-f32 get_pausecam_zpos_max()
+f32 Stage_GetPauseCamZPosMax()
 {
     return stage_info.cam_info.pausecam_zpos_max;
 }
 
-f32 get_cam_angle_radians_up()
+f32 Stage_GetCamAngleRadiansUp()
 {
     return 0.0174532923847F * stage_info.cam_info.cam_angle_up;
 }
 
-f32 get_cam_angle_radians_down()
+f32 Stage_GetCamAngleRadiansDown()
 {
     return 0.0174532923847F * stage_info.cam_info.cam_angle_down;
 }
 
-f32 get_cam_angle_radians_left()
+f32 Stage_GetCamAngleRadiansLeft()
 {
     return 0.0174532923847F * stage_info.cam_info.cam_angle_left;
 }
 
-f32 get_cam_angle_radians_right()
+f32 Stage_GetCamAngleRadiansRight()
 {
     return 0.0174532923847F * stage_info.cam_info.cam_angle_right;
 }
 
-void func_80224CAC(Vec* arg0)
+void Stage_80224CAC(Vec* arg0)
 {
     Vec another_vec = { 0, 0, -100.0F };
     Vec rot_vec;
@@ -184,27 +184,27 @@ void func_80224CAC(Vec* arg0)
     }
 }
 
-void set_vec_to_fixed_cam_pos(Vec* arg0)
+void Stage_SetVecToFixedCamPos(Vec* arg0)
 {
     *arg0 = stage_info.cam_info.fixed_cam_pos;
 }
 
-f32 get_cam_fixed_fov()
+f32 Stage_GetCamFixedFov()
 {
     return stage_info.cam_info.fixed_cam_fov;
 }
 
-BOOL func_80224DC8(s32 arg)
+BOOL Stage_80224DC8(s32 arg)
 {
     return (arg == 0x3b || arg == 0x3f || arg == 0x42 || arg == 0x49 || arg == 0x4c) != 0;
 }
 
-void func_80224E38(Vec* arg0, s32 arg1)
+void Stage_80224E38(Vec* arg0, s32 arg1)
 {
     func_801C2D24(arg1 + 4, arg0);
 }
 
-void func_80224E64(s32 arg0, Vec* arg_vec)
+void Stage_80224E64(s32 arg0, Vec* arg_vec)
 {
     BOOL bool1;
 
@@ -248,7 +248,7 @@ void func_80224E64(s32 arg0, Vec* arg_vec)
     func_801C2D24(arg0, arg_vec);
 }
 
-s32 func_80224FDC(Vec* arg0)
+s32 Stage_80224FDC(Vec* arg0)
 {
     s32 rand_output;
     s32 counter = 0x15;
@@ -275,7 +275,7 @@ s32 func_80224FDC(Vec* arg0)
     return 0;
 }
 
-s32 func_80225074(s32 arg0)
+s32 Stage_80225074(s32 arg0)
 {
 
     s32 r31;
@@ -314,22 +314,22 @@ s32 func_80225074(s32 arg0)
     return arg0;
 }
 
-s32 func_80225194()
+s32 Stage_80225194()
 {
     return unk_struct_804D49E8.list_idx;
 }
 
-s32 func_8022519C(s32 idx)
+s32 Stage_8022519C(s32 idx)
 {
     return unk_arr_803E9960[idx].stage_id;
 }
 
-s32 func_802251B4(s32 idx, s32 arg1)
+s32 Stage_802251B4(s32 idx, s32 arg1)
 {
     return func_801C06B8(unk_arr_803E9960[idx].stage_id);
 }
 
-void func_802251E8(s32 idx, s32* unused)
+void Stage_802251E8(s32 idx, s32* unused)
 {
     struct StructPairWithStageID local_data;
 
@@ -344,7 +344,7 @@ void func_802251E8(s32 idx, s32* unused)
     func_801C0754(&local_data);
 }
 
-void func_8022524C()
+void Stage_8022524C()
 {
     struct StructPairWithStageID local_data;
 
@@ -356,7 +356,7 @@ void func_8022524C()
     func_801C0800(&local_data);
 }
 
-void func_80225298()
+void Stage_80225298()
 {
     struct StructPairWithStageID local_data;
 
@@ -368,7 +368,7 @@ void func_80225298()
     func_801C0F78(&local_data);
 }
 
-void func_802252E4(s32 idx, s32 unused)
+void Stage_802252E4(s32 idx, s32 unused)
 {
     struct StructPairWithStageID local_data;
 
@@ -380,7 +380,7 @@ void func_802252E4(s32 idx, s32 unused)
     func_801C0FB8(&local_data);
 }
 
-void func_8022532C(s32 idx, s32 arg1)
+void Stage_8022532C(s32 idx, s32 arg1)
 {
     struct StructPairWithStageID local_data;
 
