@@ -64,8 +64,8 @@ typedef struct _StaticPlayer
 
     /*0x70-0x87*/ s32 kos_by_player[6];
 
-    /*0x88*/ s32 match_frame_count; // If -1 in zz_0035184, then it's set to MatchInfo->frame_count
-    /*0x8C*/ s16 suicide_count;
+    /*0x88*/ u32 match_frame_count; // If -1 in zz_0035184, then it's set to MatchInfo->frame_count
+    /*0x8C*/ u16 suicide_count;
 
     /*0x8E*/ s8 stocks;
     /*0x8F*/ s8 unk8F;
@@ -232,5 +232,11 @@ void Player_SetFalls(s32 slot, s32 falls);
 void Player_SetFallsByIndex(s32 slot, s32 index, s32 falls);
 s32 Player_GetKOsByPlayerIndex(s32 slot, s32 index);
 void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot);
+u32 Player_GetMatchFrameCount(s32 slot);
+void Player_UpdateMatchFrameCount(s32 slot, BOOL condition);
+u16 Player_GetSuicideCount(s32 slot);
+void Player_SetSuicideCount(s32 slot, u32 suicide_count);
+void Player_IncSuicideCount(s32 slot, s32 condition);
+BOOL Player_800353BC(s32 slot);
 
 #endif
