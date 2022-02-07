@@ -867,15 +867,14 @@ asm void Player_80031EBC()
 #endif
 
 #ifdef NON_MATCHING
-void Player_80031FB0(s32 slot, s32 entity_index) { //https://decomp.me/scratch/5EHKN
-
+void Player_80031FB0(s32 slot, s32 entity_index) { //https://decomp.me/scratch/SOkHz
     s32 unused;
     StaticPlayer* player;
     Player_CheckSlot(slot);
 
     player = &player_slots[slot];
     player->player_entity[player->transformed[entity_index]] = 0;
-    if (((player->flags >> 5) & 0x1) == 0 || (Player_800319C4(slot, 0) != 0)) {
+    if (((player->flags.b2 == 0) || Player_800319C4(slot, 0) != 0)) {
         player->player_state = 0;
     }
 }
@@ -939,7 +938,7 @@ asm void Player_80031FB0()
 #endif
 
 #ifdef NON_MATCHING
-void Player_80032070(s32 slot, BOOL bool_arg) {   ////https://decomp.me/scratch/HuE3T
+void Player_80032070(s32 slot, BOOL bool_arg) {   //// https://decomp.me/scratch/x7Gfq
     StaticPlayer* player;
     struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
     Player_CheckSlot(slot);
@@ -948,7 +947,7 @@ void Player_80032070(s32 slot, BOOL bool_arg) {   ////https://decomp.me/scratch/
     
     if (bool_arg == 0) {
         func_800D4FF4(player->player_entity[player->transformed[0]]);
-        if(((player->flags >> 5) & 0x1) 
+        if((player->flags.b2) 
                 && unkStruct->vec_arr[player->player_character].z == 0 
                 && func_8008701C(player->player_entity[player->transformed[1]])) 
         {
@@ -6119,13 +6118,13 @@ asm void Player_IncSuicideCount(s32 slot, s32 condition)
 #endif
 
 #ifdef NON_MATCHING
-BOOL Player_800353BC(s32 slot) {   ///https://decomp.me/scratch/0OB65
+BOOL Player_800353BC(s32 slot) {   ///https://decomp.me/scratch/S7Iuv
     StaticPlayer* player;
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    if (player->player_state == 2 && ((player->flags >> 7) & 0x1)) {
+    if (player->player_state == 2 && (player->flags.b0)) {
         return 1;
     }
 
@@ -6187,7 +6186,7 @@ BOOL Player_8003544C(s32 slot, BOOL condition) {  ///https://decomp.me/scratch/c
         Player_CheckSlot(slot);
         player = &player_slots[slot];
 
-        if (player->player_state == 2 && ((player->flags >> 7) & 0x1)) {
+        if (player->player_state == 2 && (player->flags.b0)) {
             return TRUE;
         }
     }
