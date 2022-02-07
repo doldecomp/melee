@@ -274,6 +274,9 @@ int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td);
 
 HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td);
 HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
+HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
+HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping);
+
 void HSD_TObjRemoveAll(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjAlloc(void);
@@ -282,7 +285,6 @@ void HSD_TObjSetDefaultClass(HSD_TObjInfo* info);
 HSD_TObjInfo* HSD_TObjGetDefaultClass(void);
 HSD_Tlut* HSD_TlutAlloc(void);
 void HSD_TlutFree(HSD_Tlut* tlut);
-HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
 HSD_TObjTev* HSD_TObjTevAlloc(void);
 HSD_ImageDesc* HSD_ImageDescAlloc(void);
 void HSD_ImageDescFree(HSD_ImageDesc* idesc);
@@ -299,7 +301,5 @@ u32 HSD_TexMtx2Index(u32 texmtx);
 u32 HSD_Index2TexMtx(u32 index);
 u8 HSD_Index2TexMap(u32 index);
 u32 HSD_TexMap2Index(u8 mapid);
-
-HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping);
 
 #endif
