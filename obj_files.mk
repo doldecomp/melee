@@ -219,7 +219,7 @@ TEXT_O_FILES := 						            \
 															\
 	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
-	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
+	$(BUILD_DIR)/src/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
 	$(BUILD_DIR)/src/Runtime/Gecko_setjmp.o         	\
 	$(BUILD_DIR)/asm/Runtime/runtime.o              	\
