@@ -81,7 +81,15 @@ typedef struct _StaticPlayer
 
     /*0xA8*/ s32 nametag_slot_id;
 
-    /*0xAC*/ s8 flags;
+    /*0xAC*/ struct {
+                u8 b0 : 1;
+                u8 b1 : 1;
+                u8 b2 : 1;
+                u8 b3 : 1;
+                u8 b4 : 1;
+                u8 b5 : 1;
+                u8 b6 : 2;
+            } flags;
 
     /*0xAD*/ struct {
                 u8 b0 : 1;
@@ -238,5 +246,7 @@ u16 Player_GetSuicideCount(s32 slot);
 void Player_SetSuicideCount(s32 slot, u32 suicide_count);
 void Player_IncSuicideCount(s32 slot, s32 condition);
 BOOL Player_800353BC(s32 slot);
+BOOL Player_8003544C(s32 slot, BOOL condition);
+void Player_SetFlagsBit0(s32 slot, s32 bit0);
 
 #endif
