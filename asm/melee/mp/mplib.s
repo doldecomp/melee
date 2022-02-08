@@ -14972,13 +14972,13 @@ func_8005A340:
 /* 8005A3B0 00056F90  38 61 00 7C */	addi r3, r1, 0x7c
 /* 8005A3B4 00056F94  38 80 00 00 */	li r4, 0
 /* 8005A3B8 00056F98  48 2E 70 DD */	bl func_80341494
-/* 8005A3BC 00056F9C  48 1C A7 95 */	bl get_blast_zone_left_offset
+/* 8005A3BC 00056F9C  48 1C A7 95 */	bl Stage_GetBlastZoneLeftOffset
 /* 8005A3C0 00056FA0  FF E0 08 90 */	fmr f31, f1
-/* 8005A3C4 00056FA4  48 1C A7 75 */	bl get_blast_zone_right_offset
+/* 8005A3C4 00056FA4  48 1C A7 75 */	bl Stage_GetBlastZoneRightOffset
 /* 8005A3C8 00056FA8  FF C0 08 90 */	fmr f30, f1
-/* 8005A3CC 00056FAC  48 1C A7 B5 */	bl get_blast_zone_bottom_offset
+/* 8005A3CC 00056FAC  48 1C A7 B5 */	bl Stage_GetBlastZoneBottomOffset
 /* 8005A3D0 00056FB0  FF A0 08 90 */	fmr f29, f1
-/* 8005A3D4 00056FB4  48 1C A7 95 */	bl get_blast_zone_top_offset
+/* 8005A3D4 00056FB4  48 1C A7 95 */	bl Stage_GetBlastZoneTopOffset
 /* 8005A3D8 00056FB8  80 82 87 64 */	lwz r4, lbl_804D8144@sda21(r2)
 /* 8005A3DC 00056FBC  FF 80 08 90 */	fmr f28, f1
 /* 8005A3E0 00056FC0  80 02 87 60 */	lwz r0, lbl_804D8140@sda21(r2)
@@ -15045,13 +15045,13 @@ func_8005A340:
 /* 8005A4D4 000570B4  D3 FF 80 00 */	stfs f31, -0x8000(r31)
 /* 8005A4D8 000570B8  D3 BF 80 00 */	stfs f29, -0x8000(r31)
 /* 8005A4DC 000570BC  D0 1F 80 00 */	stfs f0, -0x8000(r31)
-/* 8005A4E0 000570C0  48 1C A5 75 */	bl get_cam_bounds_left_offset
+/* 8005A4E0 000570C0  48 1C A5 75 */	bl Stage_GetCamBoundsLeftOffset
 /* 8005A4E4 000570C4  FF 80 08 90 */	fmr f28, f1
-/* 8005A4E8 000570C8  48 1C A5 81 */	bl get_cam_bounds_right_offset
+/* 8005A4E8 000570C8  48 1C A5 81 */	bl Stage_GetCamBoundsRightOffset
 /* 8005A4EC 000570CC  FF A0 08 90 */	fmr f29, f1
-/* 8005A4F0 000570D0  48 1C A5 A9 */	bl get_cam_bounds_bottom_offset
+/* 8005A4F0 000570D0  48 1C A5 A9 */	bl Stage_GetCamBoundsBottomOffset
 /* 8005A4F4 000570D4  FF C0 08 90 */	fmr f30, f1
-/* 8005A4F8 000570D8  48 1C A5 89 */	bl get_cam_bounds_top_offset
+/* 8005A4F8 000570D8  48 1C A5 89 */	bl Stage_GetCamBoundsTopOffset
 /* 8005A4FC 000570DC  80 82 87 6C */	lwz r4, lbl_804D814C@sda21(r2)
 /* 8005A500 000570E0  FF E0 08 90 */	fmr f31, f1
 /* 8005A504 000570E4  80 02 87 68 */	lwz r0, lbl_804D8148@sda21(r2)

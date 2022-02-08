@@ -341,7 +341,7 @@ __OSErrorTable:
 
 
 .section .sdata
-
+    .4byte NULL
 .global lbl_804D5C18
 lbl_804D5C18:
     .4byte 0x0A000000

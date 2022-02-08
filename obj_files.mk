@@ -219,7 +219,7 @@ TEXT_O_FILES := 						            \
 															\
 	$(BUILD_DIR)/asm/melee/text_4.o                      	\
 														\
-	$(BUILD_DIR)/asm/Runtime/__va_arg.o             	\
+	$(BUILD_DIR)/src/Runtime/__va_arg.o             	\
 	$(BUILD_DIR)/asm/Runtime/NMWException.o         	\
 	$(BUILD_DIR)/src/Runtime/Gecko_setjmp.o         	\
 	$(BUILD_DIR)/asm/Runtime/runtime.o              	\
@@ -290,8 +290,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/mtx/vec.o              \
 	$(BUILD_DIR)/asm/dolphin/os/OS.o                \
 	$(BUILD_DIR)/asm/dolphin/os/OSAlarm.o           \
+	$(BUILD_DIR)/src/dolphin/os/OSAlloc.o           \
 	$(BUILD_DIR)/asm/dolphin/os/OSAlloc.o           \
-	$(BUILD_DIR)/asm/dolphin/os/OSArena.o           \
+	$(BUILD_DIR)/src/dolphin/os/OSArena.o           \
 	$(BUILD_DIR)/asm/dolphin/os/OSAudioSystem.o     \
 	$(BUILD_DIR)/asm/dolphin/os/OSCache.o           \
 	$(BUILD_DIR)/asm/dolphin/os/OSContext.o         \

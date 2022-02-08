@@ -2,10 +2,8 @@
 #define _lbtime_h_
 
 #include <global.h>
-#include <dolphin/os/os.h>
+#include <dolphin/os/OSTime.h>
 
-extern void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td);
-extern s64 OSGetTime(void);
 extern s64 __div2i(s64, s64);
 
 u32 func_8000AEC8(u32 a, u32 b);
