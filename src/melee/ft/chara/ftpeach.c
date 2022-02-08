@@ -1,5 +1,11 @@
 #include "ftpeach.h"
 
+typedef struct _PairStruct {
+    f32 unk0;
+    f32 unk4;
+    u8 padding[0xB8];
+} PairStruct;
+
 void func_8011B51C(HSD_GObj* gobj) 
 {
     Fighter* ft;
@@ -35,5 +41,25 @@ void func_8011B51C(HSD_GObj* gobj)
 
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {
+    Fighter* player = gobj->user_data;
+    ftData* ftDataInfo = player->x10C_ftData;
+    PairStruct* extAtrrs = (PairStruct*)ftDataInfo->ext_attr;
+    void** items = ftDataInfo->items;
+
+    extAtrrs->unk0 = func_8001E8F8(func_80085E50(player, 18));
+    extAtrrs->unk4 = func_8001E8F8(func_80085E50(player, 19));
+
+    {
+        PairStruct *dest = (PairStruct *)player->x2D8_specialAttributes2;
+        PairStruct *src = (PairStruct *)player->x10C_ftData->ext_attr;
+        u32 *attr = (u32 *)&player->x2D4_specialAttributes;
+        *dest = *src;
+        *attr = (u32)dest;
+    }
     
+    func_8026B3F8(items[0], 98);
+    func_8026B3F8(items[1], 99);
+    func_8026B3F8(items[2], 103);
+    func_8026B3F8(items[3], 104);
+    func_8026B3F8(items[4], 111);
 }
