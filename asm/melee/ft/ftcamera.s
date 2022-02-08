@@ -62,7 +62,7 @@ func_80076064:
 /* 800760E8 00072CC8  40 82 00 28 */	bne lbl_80076110
 /* 800760EC 00072CCC  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 800760F0 00072CD0  D0 1F 00 40 */	stfs f0, 0x40(r31)
-/* 800760F4 00072CD4  48 1A EA 15 */	bl get_cam_fixed_zoom
+/* 800760F4 00072CD4  48 1A EA 15 */	bl Stage_GetCamFixedZoom
 /* 800760F8 00072CD8  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 800760FC 00072CDC  EC 00 00 72 */	fmuls f0, f0, f1
 /* 80076100 00072CE0  D0 1F 00 44 */	stfs f0, 0x44(r31)
@@ -70,7 +70,7 @@ func_80076064:
 /* 80076108 00072CE8  D0 1F 00 28 */	stfs f0, 0x28(r31)
 /* 8007610C 00072CEC  48 00 00 2C */	b lbl_80076138
 lbl_80076110:
-/* 80076110 00072CF0  48 1A E9 F9 */	bl get_cam_fixed_zoom
+/* 80076110 00072CF0  48 1A E9 F9 */	bl Stage_GetCamFixedZoom
 /* 80076114 00072CF4  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 80076118 00072CF8  FC 00 00 50 */	fneg f0, f0
 /* 8007611C 00072CFC  EC 00 00 72 */	fmuls f0, f0, f1
@@ -156,7 +156,7 @@ func_800761C8:
 /* 8007624C 00072E2C  40 82 00 28 */	bne lbl_80076274
 /* 80076250 00072E30  C0 01 00 18 */	lfs f0, 0x18(r1)
 /* 80076254 00072E34  D0 1E 00 40 */	stfs f0, 0x40(r30)
-/* 80076258 00072E38  48 1A E8 B1 */	bl get_cam_fixed_zoom
+/* 80076258 00072E38  48 1A E8 B1 */	bl Stage_GetCamFixedZoom
 /* 8007625C 00072E3C  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 80076260 00072E40  EC 00 00 72 */	fmuls f0, f0, f1
 /* 80076264 00072E44  D0 1E 00 44 */	stfs f0, 0x44(r30)
@@ -164,7 +164,7 @@ func_800761C8:
 /* 8007626C 00072E4C  D0 1E 00 28 */	stfs f0, 0x28(r30)
 /* 80076270 00072E50  48 00 00 2C */	b lbl_8007629C
 lbl_80076274:
-/* 80076274 00072E54  48 1A E8 95 */	bl get_cam_fixed_zoom
+/* 80076274 00072E54  48 1A E8 95 */	bl Stage_GetCamFixedZoom
 /* 80076278 00072E58  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 8007627C 00072E5C  FC 00 00 50 */	fneg f0, f0
 /* 80076280 00072E60  EC 00 00 72 */	fmuls f0, f0, f1
@@ -223,8 +223,8 @@ func_80076320:
 /* 80076338 00072F18  83 E4 08 90 */	lwz r31, 0x890(r4)
 /* 8007633C 00072F1C  4B FF FE 8D */	bl func_800761C8
 /* 80076340 00072F20  38 61 00 10 */	addi r3, r1, 0x10
-/* 80076344 00072F24  48 1A E8 B5 */	bl unk_set_vec3_to_cam_offset_80224BF8
-/* 80076348 00072F28  48 1A E8 21 */	bl get_blast_zone_top_offset
+/* 80076344 00072F24  48 1A E8 B5 */	bl Stage_UnkSetVec3TCam_Offset
+/* 80076348 00072F28  48 1A E8 21 */	bl Stage_GetBlastZoneTopOffset
 /* 8007634C 00072F2C  C0 41 00 14 */	lfs f2, 0x14(r1)
 /* 80076350 00072F30  C0 02 88 F8 */	lfs f0, lbl_804D82D8@sda21(r2)
 /* 80076354 00072F34  EC 21 10 28 */	fsubs f1, f1, f2
@@ -237,17 +237,17 @@ func_80076320:
 /* 80076370 00072F50  38 80 00 89 */	li r4, 0x89
 /* 80076374 00072F54  48 31 1E AD */	bl __assert
 lbl_80076378:
-/* 80076378 00072F58  48 1A E7 F1 */	bl get_blast_zone_top_offset
+/* 80076378 00072F58  48 1A E7 F1 */	bl Stage_GetBlastZoneTopOffset
 /* 8007637C 00072F5C  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 80076380 00072F60  EF E1 00 28 */	fsubs f31, f1, f0
-/* 80076384 00072F64  48 1A E6 FD */	bl get_cam_bounds_top_offset
+/* 80076384 00072F64  48 1A E6 FD */	bl Stage_GetCamBoundsTopOffset
 /* 80076388 00072F68  C0 41 00 14 */	lfs f2, 0x14(r1)
 /* 8007638C 00072F6C  C0 1F 00 10 */	lfs f0, 0x10(r31)
 /* 80076390 00072F70  EC 21 10 28 */	fsubs f1, f1, f2
 /* 80076394 00072F74  EC 00 00 72 */	fmuls f0, f0, f1
 /* 80076398 00072F78  EC 00 F8 24 */	fdivs f0, f0, f31
 /* 8007639C 00072F7C  D0 1F 00 10 */	stfs f0, 0x10(r31)
-/* 800763A0 00072F80  48 1A E7 C9 */	bl get_blast_zone_top_offset
+/* 800763A0 00072F80  48 1A E7 C9 */	bl Stage_GetBlastZoneTopOffset
 /* 800763A4 00072F84  D0 3F 00 14 */	stfs f1, 0x14(r31)
 /* 800763A8 00072F88  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 800763AC 00072F8C  CB E1 00 28 */	lfd f31, 0x28(r1)
