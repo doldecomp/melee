@@ -4,17 +4,23 @@
 
 extern StaticPlayer player_slots[6];  // used to be [4] but I think should be 6?  ///lbl_80453080
 
+extern struct _HSD_ObjAllocData lbl_804587E0;
+
 struct Unk_Struct_w_Array {
     char some_str[8+4];  //"PdPm.dat"
     char another_str[16+4]; 
     S8Vec vec_arr[30];  ///lbl_803BCDE0
 };
 
-extern struct Unk_Struct {  //lbl_803BCDC0
-    char some_str[8+4];  //"PdPm.dat"
-    char another_str[16+4]; 
-    //S8Vec vec_arr[30];  ///lbl_803BCDE0
-} lbl_803BCDC0;
+// extern struct Unk_Struct {  //lbl_803BCDC0
+//     char some_str[8+4];  //"PdPm.dat"
+//     char another_str[16+4]; 
+//     //S8Vec vec_arr[30];  ///lbl_803BCDE0
+// } lbl_803BCDC0;
+
+extern char lbl_803BCDC0[8+4];
+extern char lbl_803BCDCC[16+4];
+
 
 extern S8Vec lbl_803BCDE0[]; ///lbl_803BCDE0
 
@@ -22,6 +28,8 @@ extern char* lbl_803BCE44; //"cant get player struct! %d\n"  /// likely apart of
 extern char* lbl_803BCE60; //"player.c"
 
 extern char* lbl_804D3940; //"0"
+
+extern s32 lbl_804D6470;
 
 extern f32 lbl_804D7F10;
 extern f32 lbl_804D7F14;
@@ -56,7 +64,12 @@ extern void func_80086A4C(HSD_GObj*, f32);
 extern void func_80087BAC(HSD_GObj*, s32);
 extern void func_80086BB4(HSD_GObj*);
 extern void func_80086B90(HSD_GObj*, s32);
-
+extern void func_8003891C(s32);
+extern void func_80038F10(s32);
+extern void func_8003715C();
+extern void func_80037590();
+extern void func_80067A84();
+void func_80016C64(char*, s32**, char*, s32, ...);
 
 void inline Player_CheckSlot(s32 slot)
 {
@@ -8677,5 +8690,151 @@ asm void Player_InitOrResetPlayer(s32 slot)
     /* 80036CE4 000338C4  38 21 00 58 */	addi r1, r1, 0x58
     /* 80036CE8 000338C8  7C 08 03 A6 */	mtlr r0
     /* 80036CEC 000338CC  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_80036CF0(s32 slot) {   ///https://decomp.me/scratch/H2aRD
+    Player_InitOrResetPlayer(slot);
+    func_8003891C(slot);
+}
+#else
+asm void Player_80036CF0(s32 slot)
+{
+    nofralloc
+    /* 80036CF0 000338D0  7C 08 02 A6 */	mflr r0
+    /* 80036CF4 000338D4  90 01 00 04 */	stw r0, 4(r1)
+    /* 80036CF8 000338D8  94 21 FF E8 */	stwu r1, -0x18(r1)
+    /* 80036CFC 000338DC  93 E1 00 14 */	stw r31, 0x14(r1)
+    /* 80036D00 000338E0  7C 7F 1B 78 */	mr r31, r3
+    /* 80036D04 000338E4  4B FF FD 05 */	bl Player_InitOrResetPlayer
+    /* 80036D08 000338E8  7F E3 FB 78 */	mr r3, r31
+    /* 80036D0C 000338EC  48 00 1C 11 */	bl func_8003891C
+    /* 80036D10 000338F0  80 01 00 1C */	lwz r0, 0x1c(r1)
+    /* 80036D14 000338F4  83 E1 00 14 */	lwz r31, 0x14(r1)
+    /* 80036D18 000338F8  38 21 00 18 */	addi r1, r1, 0x18
+    /* 80036D1C 000338FC  7C 08 03 A6 */	mtlr r0
+    /* 80036D20 00033900  4E 80 00 20 */	blr 
+}
+#endif
+
+
+#ifdef NON_MATCHING
+void Player_80036D24(s32 slot) {   ///https://decomp.me/scratch/psnmG
+    Player_InitOrResetPlayer(slot);
+    func_80038F10(slot);
+}
+#else
+asm void Player_80036D24(s32 slot)
+{
+    nofralloc
+    /* 80036D24 00033904  7C 08 02 A6 */	mflr r0
+    /* 80036D28 00033908  90 01 00 04 */	stw r0, 4(r1)
+    /* 80036D2C 0003390C  94 21 FF E8 */	stwu r1, -0x18(r1)
+    /* 80036D30 00033910  93 E1 00 14 */	stw r31, 0x14(r1)
+    /* 80036D34 00033914  7C 7F 1B 78 */	mr r31, r3
+    /* 80036D38 00033918  4B FF FC D1 */	bl Player_InitOrResetPlayer
+    /* 80036D3C 0003391C  7F E3 FB 78 */	mr r3, r31
+    /* 80036D40 00033920  48 00 21 D1 */	bl func_80038F10
+    /* 80036D44 00033924  80 01 00 1C */	lwz r0, 0x1c(r1)
+    /* 80036D48 00033928  83 E1 00 14 */	lwz r31, 0x14(r1)
+    /* 80036D4C 0003392C  38 21 00 18 */	addi r1, r1, 0x18
+    /* 80036D50 00033930  7C 08 03 A6 */	mtlr r0
+    /* 80036D54 00033934  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_InitAllPlayers() {   ///https://decomp.me/scratch/0eeR5
+    s32 i;
+    func_8003715C();
+    func_80037590();
+
+    for (i = 0; i < 6; i++) {
+        Player_InitOrResetPlayer(i);
+        func_8003891C(i);
+    }
+}
+#else
+void Player_InitAllPlayers()
+{
+    nofralloc
+    /* 80036D58 00033938  7C 08 02 A6 */	mflr r0
+    /* 80036D5C 0003393C  90 01 00 04 */	stw r0, 4(r1)
+    /* 80036D60 00033940  94 21 FF F0 */	stwu r1, -0x10(r1)
+    /* 80036D64 00033944  93 E1 00 0C */	stw r31, 0xc(r1)
+    /* 80036D68 00033948  48 00 03 F5 */	bl func_8003715C
+    /* 80036D6C 0003394C  48 00 08 25 */	bl func_80037590
+    /* 80036D70 00033950  3B E0 00 00 */	li r31, 0
+    lbl_80036D74:
+    /* 80036D74 00033954  7F E3 FB 78 */	mr r3, r31
+    /* 80036D78 00033958  4B FF FC 91 */	bl Player_InitOrResetPlayer
+    /* 80036D7C 0003395C  7F E3 FB 78 */	mr r3, r31
+    /* 80036D80 00033960  48 00 1B 9D */	bl func_8003891C
+    /* 80036D84 00033964  3B FF 00 01 */	addi r31, r31, 1
+    /* 80036D88 00033968  2C 1F 00 06 */	cmpwi r31, 6
+    /* 80036D8C 0003396C  41 80 FF E8 */	blt lbl_80036D74
+    /* 80036D90 00033970  80 01 00 14 */	lwz r0, 0x14(r1)
+    /* 80036D94 00033974  83 E1 00 0C */	lwz r31, 0xc(r1)
+    /* 80036D98 00033978  38 21 00 10 */	addi r1, r1, 0x10
+    /* 80036D9C 0003397C  7C 08 03 A6 */	mtlr r0
+    /* 80036DA0 00033980  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_80036DA4() {  ///https://decomp.me/scratch/eQam5
+    HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
+    func_80067A84();
+}
+#else
+asm void Player_80036DA4()
+{
+    nofralloc
+    /* 80036DA4 00033984  7C 08 02 A6 */	mflr r0
+    /* 80036DA8 00033988  3C 60 80 46 */	lis r3, lbl_804587E0@ha
+    /* 80036DAC 0003398C  90 01 00 04 */	stw r0, 4(r1)
+    /* 80036DB0 00033990  38 63 87 E0 */	addi r3, r3, lbl_804587E0@l
+    /* 80036DB4 00033994  38 80 00 08 */	li r4, 8
+    /* 80036DB8 00033998  94 21 FF F8 */	stwu r1, -8(r1)
+    /* 80036DBC 0003399C  38 A0 00 04 */	li r5, 4
+    /* 80036DC0 000339A0  48 34 3F 89 */	bl HSD_ObjAllocInit
+    /* 80036DC4 000339A4  48 03 0C C1 */	bl func_80067A84
+    /* 80036DC8 000339A8  80 01 00 0C */	lwz r0, 0xc(r1)
+    /* 80036DCC 000339AC  38 21 00 08 */	addi r1, r1, 8
+    /* 80036DD0 000339B0  7C 08 03 A6 */	mtlr r0
+    /* 80036DD4 000339B4  4E 80 00 20 */	blr 
+}
+#endif
+
+#ifdef NON_MATCHING
+void Player_80036DD8() {   ///https://decomp.me/scratch/ZBVvR
+    s32 *sp8;
+
+    func_80016C64(lbl_803BCDC0, &sp8, lbl_803BCDCC, 0);
+    lbl_804D6470 = *sp8;
+}
+#else
+asm void Player_80036DD8()
+{
+    nofralloc
+    /* 80036DD8 000339B8  7C 08 02 A6 */	mflr r0
+    /* 80036DDC 000339BC  3C 60 80 3C */	lis r3, lbl_803BCDC0@ha
+    /* 80036DE0 000339C0  90 01 00 04 */	stw r0, 4(r1)
+    /* 80036DE4 000339C4  3C 80 80 3C */	lis r4, lbl_803BCDCC@ha
+    /* 80036DE8 000339C8  4C C6 31 82 */	crclr 6
+    /* 80036DEC 000339CC  38 63 CD C0 */	addi r3, r3, lbl_803BCDC0@l
+    /* 80036DF0 000339D0  94 21 FF F0 */	stwu r1, -0x10(r1)
+    /* 80036DF4 000339D4  38 A4 CD CC */	addi r5, r4, lbl_803BCDCC@l
+    /* 80036DF8 000339D8  38 81 00 08 */	addi r4, r1, 8
+    /* 80036DFC 000339DC  38 C0 00 00 */	li r6, 0
+    /* 80036E00 000339E0  4B FD FE 65 */	bl func_80016C64
+    /* 80036E04 000339E4  80 61 00 08 */	lwz r3, 8(r1)
+    /* 80036E08 000339E8  80 03 00 00 */	lwz r0, 0(r3)
+    /* 80036E0C 000339EC  90 0D AD D0 */	stw r0, lbl_804D6470@sda21(r13)
+    /* 80036E10 000339F0  80 01 00 14 */	lwz r0, 0x14(r1)
+    /* 80036E14 000339F4  38 21 00 10 */	addi r1, r1, 0x10
+    /* 80036E18 000339F8  7C 08 03 A6 */	mtlr r0
+    /* 80036E1C 000339FC  4E 80 00 20 */	blr 
 }
 #endif
