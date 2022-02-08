@@ -72,6 +72,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftness.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftpeach.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpeach.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/fticeclimber.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.o 	\
