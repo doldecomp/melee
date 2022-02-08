@@ -57,9 +57,9 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
         *attr = (u32)dest;
     }
     
-    func_8026B3F8(items[0], 98);
-    func_8026B3F8(items[1], 99);
-    func_8026B3F8(items[2], 103);
-    func_8026B3F8(items[3], 104);
-    func_8026B3F8(items[4], 111);
+    func_8026B3F8(items[0], ITEM_PEACH_UNK);
+    func_8026B3F8(items[1], ITEM_PEACH_TURNIP);
+    func_8026B3F8(items[2], ITEM_PEACH_PARASOL);
+    func_8026B3F8(items[3], ITEM_PEACH_TOAD);
+    func_8026B3F8(items[4], ITEM_PEACH_TOAD_SPORE);
 }
