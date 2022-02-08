@@ -748,7 +748,7 @@ void func_80023F28();
 // ? Player_80036844(?);
 // ? Player_800368F8(?);
 // ? Player_80036978(?);
-// ? func_80036A08(?);
+// ? Player_InitOrResetPlayer(?);
 // ? func_80036CF0(?);
 // ? func_80036D24(?);
 // ? func_80036D58(?);

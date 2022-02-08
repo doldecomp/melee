@@ -23,6 +23,8 @@ extern char* lbl_803BCE60; //"player.c"
 
 extern char* lbl_804D3940; //"0"
 
+extern f32 lbl_804D7F10;
+extern f32 lbl_804D7F14;
 
 extern void ftData_SetScale();
 extern void func_SetEntityFacingDirection();
@@ -8372,4 +8374,308 @@ asm void Player_80036978(s32 slot, s32 arg1)
 #endif
 
 
-///https://decomp.me/scratch/VrWyd
+
+#ifdef NON_MATCHING
+void Player_InitOrResetPlayer(s32 slot) {   ///https://decomp.me/scratch/VrWyd
+    StaticPlayer* player;
+    u8 *transformed0;
+    u8 *transformed1;
+    f32 zerofloat;
+    f32 onefloat;
+    s32 unused[16];
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    player->player_state = 0;
+    player->player_character = 8;
+    transformed0 = &player->transformed[0];
+    transformed1 = &player->transformed[1];
+
+    zerofloat = lbl_804D7F10;
+    player->player_poses.byIndex[*transformed0].z = zerofloat;
+    player->player_poses.byIndex[*transformed0].y = zerofloat;
+    player->player_poses.byIndex[*transformed0].x = zerofloat;
+
+    player->player_poses.byIndex[*transformed1].z = zerofloat;
+    player->player_poses.byIndex[*transformed1].y = zerofloat;
+    player->player_poses.byIndex[*transformed1].x = zerofloat;
+
+    player->player_poses.byIndex[2].z = zerofloat;
+    player->player_poses.byIndex[2].y = zerofloat;
+    player->player_poses.byIndex[2].x = zerofloat;
+    player->player_poses.byIndex[3].z = zerofloat;
+    player->player_poses.byIndex[3].y = zerofloat;
+    player->player_poses.byIndex[3].x = zerofloat;
+
+    player->costume_id = 0;
+    player->slot_type = 3;
+    player->transformed[0] = 0;
+    player->transformed[1] =  1;
+
+    player->unk45 = 0;
+    player->controller_index = 0;
+    player->team = 0;
+    player->player_id = 0;
+    player->cpu_level = 0;
+
+    player->cpu_type = 4;
+
+    player->handicap = 0;
+    player->unk4C = 0;
+
+    player->unk4D = 4;
+    player->unk4E = -1;
+
+    onefloat = lbl_804D7F14;
+    player->unk50 = onefloat;
+    player->attack_ratio = onefloat;
+    player->defense_ratio = onefloat;
+    player->model_scale = onefloat;
+
+    player->staminas.byIndex[player->transformed[0]] = 0;
+    player->staminas.byIndex[player->transformed[1]] = 0;
+    player->staminas.byIndex[2] = 0;
+
+    player->falls[player->transformed[0]] =  0;
+    player->falls[player->transformed[1]] =  0;
+
+    player->kos_by_player[0] = 0;
+    player->kos_by_player[1] = 0;
+    player->kos_by_player[2] = 0;
+    player->kos_by_player[3] = 0;
+    player->kos_by_player[4] = 0;
+    player->kos_by_player[5] = 0;
+
+    player->match_frame_count = -1;
+    player->suicide_count = 0;
+    player->stocks = 0;
+
+    player->current_coins = 0;
+    player->total_coins = 0;
+    player->unk98 = 0;
+    player->unk9C = 0;
+
+    player->joystick_direction_input_count[*transformed0] = 0;
+    player->joystick_direction_input_count[*transformed1] = 0;
+
+    player->flags.b0 = 0;
+    player->nametag_slot_id = 0;
+    player->flags.b1 = 0;
+    player->flags.b2 = 0;
+    player->flags.b3 = 0;
+    player->flags.b4 = 0;
+    player->flags.b5 = 0;
+    player->flags.b6 = 0;
+    player->flags.b7 = 0;
+
+    player->more_flags.b0 = 0;
+    player->more_flags.b1 = 0;
+    player->more_flags.b2 = 0;
+    player->more_flags.b3 = 0;
+    player->more_flags.b4 = 0;
+    player->more_flags.b5 = 0;
+    player->more_flags.b6 = 0;
+
+    player->flagsAE.b0 = 0;
+    player->flagsAE.b1 = 0;
+
+    player->player_entity[*transformed0] = 0;
+    player->player_entity[*transformed1] = 0;
+
+    player->struct_func = 0;
+}
+#else
+asm void Player_InitOrResetPlayer(s32 slot)
+{
+    nofralloc
+    /* 80036A08 000335E8  7C 08 02 A6 */	mflr r0
+    /* 80036A0C 000335EC  90 01 00 04 */	stw r0, 4(r1)
+    /* 80036A10 000335F0  94 21 FF A8 */	stwu r1, -0x58(r1)
+    /* 80036A14 000335F4  93 E1 00 54 */	stw r31, 0x54(r1)
+    /* 80036A18 000335F8  7C 7F 1B 79 */	or. r31, r3, r3
+    /* 80036A1C 000335FC  41 80 00 0C */	blt lbl_80036A28
+    /* 80036A20 00033600  2C 1F 00 06 */	cmpwi r31, 6
+    /* 80036A24 00033604  41 80 00 2C */	blt lbl_80036A50
+    lbl_80036A28:
+    /* 80036A28 00033608  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
+    /* 80036A2C 0003360C  4C C6 31 82 */	crclr 6
+    /* 80036A30 00033610  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
+    /* 80036A34 00033614  38 9F 00 00 */	addi r4, r31, 0
+    /* 80036A38 00033618  48 30 EC 71 */	bl OSReport
+    /* 80036A3C 0003361C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
+    /* 80036A40 00033620  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
+    /* 80036A44 00033624  38 80 00 66 */	li r4, 0x66
+    /* 80036A48 00033628  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80036A4C 0003362C  48 35 17 D5 */	bl __assert
+    lbl_80036A50:
+    /* 80036A50 00033630  1C 9F 0E 90 */	mulli r4, r31, 0xe90
+    /* 80036A54 00033634  3C 60 80 45 */	lis r3, player_slots@ha
+    /* 80036A58 00033638  38 03 30 80 */	addi r0, r3, player_slots@l
+    /* 80036A5C 0003363C  7C 60 22 14 */	add r3, r0, r4
+    /* 80036A60 00033640  38 00 00 00 */	li r0, 0
+    /* 80036A64 00033644  90 03 00 00 */	stw r0, 0(r3)
+    /* 80036A68 00033648  38 A0 00 08 */	li r5, 8
+    /* 80036A6C 0003364C  38 83 00 0C */	addi r4, r3, 0xc
+    /* 80036A70 00033650  90 A3 00 04 */	stw r5, 4(r3)
+    /* 80036A74 00033654  38 A3 00 0D */	addi r5, r3, 0xd
+    /* 80036A78 00033658  39 20 00 03 */	li r9, 3
+    /* 80036A7C 0003365C  88 E3 00 0C */	lbz r7, 0xc(r3)
+    /* 80036A80 00033660  39 00 00 01 */	li r8, 1
+    /* 80036A84 00033664  C0 02 85 30 */	lfs f0, lbl_804D7F10@sda21(r2)
+    /* 80036A88 00033668  38 C0 00 04 */	li r6, 4
+    /* 80036A8C 0003366C  1C E7 00 0C */	mulli r7, r7, 0xc
+    /* 80036A90 00033670  7C E3 3A 14 */	add r7, r3, r7
+    /* 80036A94 00033674  D0 07 00 18 */	stfs f0, 0x18(r7)
+    /* 80036A98 00033678  38 E0 FF FF */	li r7, -1
+    /* 80036A9C 0003367C  89 43 00 0C */	lbz r10, 0xc(r3)
+    /* 80036AA0 00033680  1D 4A 00 0C */	mulli r10, r10, 0xc
+    /* 80036AA4 00033684  7D 43 52 14 */	add r10, r3, r10
+    /* 80036AA8 00033688  D0 0A 00 14 */	stfs f0, 0x14(r10)
+    /* 80036AAC 0003368C  89 43 00 0C */	lbz r10, 0xc(r3)
+    /* 80036AB0 00033690  1D 4A 00 0C */	mulli r10, r10, 0xc
+    /* 80036AB4 00033694  7D 43 52 14 */	add r10, r3, r10
+    /* 80036AB8 00033698  D0 0A 00 10 */	stfs f0, 0x10(r10)
+    /* 80036ABC 0003369C  89 43 00 0D */	lbz r10, 0xd(r3)
+    /* 80036AC0 000336A0  1D 4A 00 0C */	mulli r10, r10, 0xc
+    /* 80036AC4 000336A4  7D 43 52 14 */	add r10, r3, r10
+    /* 80036AC8 000336A8  D0 0A 00 18 */	stfs f0, 0x18(r10)
+    /* 80036ACC 000336AC  89 43 00 0D */	lbz r10, 0xd(r3)
+    /* 80036AD0 000336B0  1D 4A 00 0C */	mulli r10, r10, 0xc
+    /* 80036AD4 000336B4  7D 43 52 14 */	add r10, r3, r10
+    /* 80036AD8 000336B8  D0 0A 00 14 */	stfs f0, 0x14(r10)
+    /* 80036ADC 000336BC  89 43 00 0D */	lbz r10, 0xd(r3)
+    /* 80036AE0 000336C0  1D 4A 00 0C */	mulli r10, r10, 0xc
+    /* 80036AE4 000336C4  7D 43 52 14 */	add r10, r3, r10
+    /* 80036AE8 000336C8  D0 0A 00 10 */	stfs f0, 0x10(r10)
+    /* 80036AEC 000336CC  D0 03 00 30 */	stfs f0, 0x30(r3)
+    /* 80036AF0 000336D0  D0 03 00 2C */	stfs f0, 0x2c(r3)
+    /* 80036AF4 000336D4  D0 03 00 28 */	stfs f0, 0x28(r3)
+    /* 80036AF8 000336D8  D0 03 00 3C */	stfs f0, 0x3c(r3)
+    /* 80036AFC 000336DC  D0 03 00 38 */	stfs f0, 0x38(r3)
+    /* 80036B00 000336E0  D0 03 00 34 */	stfs f0, 0x34(r3)
+    /* 80036B04 000336E4  98 03 00 44 */	stb r0, 0x44(r3)
+    /* 80036B08 000336E8  91 23 00 08 */	stw r9, 8(r3)
+    /* 80036B0C 000336EC  98 03 00 0C */	stb r0, 0xc(r3)
+    /* 80036B10 000336F0  99 03 00 0D */	stb r8, 0xd(r3)
+    /* 80036B14 000336F4  98 03 00 45 */	stb r0, 0x45(r3)
+    /* 80036B18 000336F8  98 03 00 46 */	stb r0, 0x46(r3)
+    /* 80036B1C 000336FC  98 03 00 47 */	stb r0, 0x47(r3)
+    /* 80036B20 00033700  98 03 00 48 */	stb r0, 0x48(r3)
+    /* 80036B24 00033704  98 03 00 49 */	stb r0, 0x49(r3)
+    /* 80036B28 00033708  98 C3 00 4A */	stb r6, 0x4a(r3)
+    /* 80036B2C 0003370C  98 03 00 4B */	stb r0, 0x4b(r3)
+    /* 80036B30 00033710  98 03 00 4C */	stb r0, 0x4c(r3)
+    /* 80036B34 00033714  98 C3 00 4D */	stb r6, 0x4d(r3)
+    /* 80036B38 00033718  98 E3 00 4E */	stb r7, 0x4e(r3)
+    /* 80036B3C 0003371C  C0 02 85 34 */	lfs f0, lbl_804D7F14@sda21(r2)
+    /* 80036B40 00033720  D0 03 00 50 */	stfs f0, 0x50(r3)
+    /* 80036B44 00033724  D0 03 00 54 */	stfs f0, 0x54(r3)
+    /* 80036B48 00033728  D0 03 00 58 */	stfs f0, 0x58(r3)
+    /* 80036B4C 0003372C  D0 03 00 5C */	stfs f0, 0x5c(r3)
+    /* 80036B50 00033730  88 C3 00 0C */	lbz r6, 0xc(r3)
+    /* 80036B54 00033734  54 C6 08 3C */	slwi r6, r6, 1
+    /* 80036B58 00033738  7C C3 32 14 */	add r6, r3, r6
+    /* 80036B5C 0003373C  B0 06 00 60 */	sth r0, 0x60(r6)
+    /* 80036B60 00033740  88 C3 00 0D */	lbz r6, 0xd(r3)
+    /* 80036B64 00033744  54 C6 08 3C */	slwi r6, r6, 1
+    /* 80036B68 00033748  7C C3 32 14 */	add r6, r3, r6
+    /* 80036B6C 0003374C  B0 06 00 60 */	sth r0, 0x60(r6)
+    /* 80036B70 00033750  B0 03 00 64 */	sth r0, 0x64(r3)
+    /* 80036B74 00033754  88 C3 00 0C */	lbz r6, 0xc(r3)
+    /* 80036B78 00033758  54 C6 10 3A */	slwi r6, r6, 2
+    /* 80036B7C 0003375C  7C C3 32 14 */	add r6, r3, r6
+    /* 80036B80 00033760  90 06 00 68 */	stw r0, 0x68(r6)
+    /* 80036B84 00033764  88 C3 00 0D */	lbz r6, 0xd(r3)
+    /* 80036B88 00033768  54 C6 10 3A */	slwi r6, r6, 2
+    /* 80036B8C 0003376C  7C C3 32 14 */	add r6, r3, r6
+    /* 80036B90 00033770  90 06 00 68 */	stw r0, 0x68(r6)
+    /* 80036B94 00033774  90 03 00 70 */	stw r0, 0x70(r3)
+    /* 80036B98 00033778  90 03 00 74 */	stw r0, 0x74(r3)
+    /* 80036B9C 0003377C  90 03 00 78 */	stw r0, 0x78(r3)
+    /* 80036BA0 00033780  90 03 00 7C */	stw r0, 0x7c(r3)
+    /* 80036BA4 00033784  90 03 00 80 */	stw r0, 0x80(r3)
+    /* 80036BA8 00033788  90 03 00 84 */	stw r0, 0x84(r3)
+    /* 80036BAC 0003378C  90 E3 00 88 */	stw r7, 0x88(r3)
+    /* 80036BB0 00033790  B0 03 00 8C */	sth r0, 0x8c(r3)
+    /* 80036BB4 00033794  98 03 00 8E */	stb r0, 0x8e(r3)
+    /* 80036BB8 00033798  90 03 00 90 */	stw r0, 0x90(r3)
+    /* 80036BBC 0003379C  90 03 00 94 */	stw r0, 0x94(r3)
+    /* 80036BC0 000337A0  90 03 00 98 */	stw r0, 0x98(r3)
+    /* 80036BC4 000337A4  90 03 00 9C */	stw r0, 0x9c(r3)
+    /* 80036BC8 000337A8  88 C4 00 00 */	lbz r6, 0(r4)
+    /* 80036BCC 000337AC  54 C6 10 3A */	slwi r6, r6, 2
+    /* 80036BD0 000337B0  7C C3 32 14 */	add r6, r3, r6
+    /* 80036BD4 000337B4  90 06 00 A0 */	stw r0, 0xa0(r6)
+    /* 80036BD8 000337B8  88 C5 00 00 */	lbz r6, 0(r5)
+    /* 80036BDC 000337BC  54 C6 10 3A */	slwi r6, r6, 2
+    /* 80036BE0 000337C0  7C C3 32 14 */	add r6, r3, r6
+    /* 80036BE4 000337C4  90 06 00 A0 */	stw r0, 0xa0(r6)
+    /* 80036BE8 000337C8  88 C3 00 AC */	lbz r6, 0xac(r3)
+    /* 80036BEC 000337CC  50 06 3E 30 */	rlwimi r6, r0, 7, 0x18, 0x18
+    /* 80036BF0 000337D0  98 C3 00 AC */	stb r6, 0xac(r3)
+    /* 80036BF4 000337D4  90 03 00 A8 */	stw r0, 0xa8(r3)
+    /* 80036BF8 000337D8  88 C3 00 AC */	lbz r6, 0xac(r3)
+    /* 80036BFC 000337DC  50 06 36 72 */	rlwimi r6, r0, 6, 0x19, 0x19
+    /* 80036C00 000337E0  98 C3 00 AC */	stb r6, 0xac(r3)
+    /* 80036C04 000337E4  88 C3 00 AC */	lbz r6, 0xac(r3)
+    /* 80036C08 000337E8  50 06 2E B4 */	rlwimi r6, r0, 5, 0x1a, 0x1a
+    /* 80036C0C 000337EC  98 C3 00 AC */	stb r6, 0xac(r3)
+    /* 80036C10 000337F0  88 C3 00 AC */	lbz r6, 0xac(r3)
+    /* 80036C14 000337F4  50 06 26 F6 */	rlwimi r6, r0, 4, 0x1b, 0x1b
+    /* 80036C18 000337F8  98 C3 00 AC */	stb r6, 0xac(r3)
+    /* 80036C1C 000337FC  88 C3 00 AC */	lbz r6, 0xac(r3)
+    /* 80036C20 00033800  50 06 1F 38 */	rlwimi r6, r0, 3, 0x1c, 0x1c
+    /* 80036C24 00033804  98 C3 00 AC */	stb r6, 0xac(r3)
+    /* 80036C28 00033808  88 C3 00 AC */	lbz r6, 0xac(r3)
+    /* 80036C2C 0003380C  50 06 17 7A */	rlwimi r6, r0, 2, 0x1d, 0x1d
+    /* 80036C30 00033810  98 C3 00 AC */	stb r6, 0xac(r3)
+    /* 80036C34 00033814  88 C3 00 AC */	lbz r6, 0xac(r3)
+    /* 80036C38 00033818  50 06 0F BC */	rlwimi r6, r0, 1, 0x1e, 0x1e
+    /* 80036C3C 0003381C  98 C3 00 AC */	stb r6, 0xac(r3)
+    /* 80036C40 00033820  88 C3 00 AC */	lbz r6, 0xac(r3)
+    /* 80036C44 00033824  50 06 07 FE */	rlwimi r6, r0, 0, 0x1f, 0x1f
+    /* 80036C48 00033828  98 C3 00 AC */	stb r6, 0xac(r3)
+    /* 80036C4C 0003382C  88 C3 00 AD */	lbz r6, 0xad(r3)
+    /* 80036C50 00033830  50 06 3E 30 */	rlwimi r6, r0, 7, 0x18, 0x18
+    /* 80036C54 00033834  98 C3 00 AD */	stb r6, 0xad(r3)
+    /* 80036C58 00033838  88 C3 00 AD */	lbz r6, 0xad(r3)
+    /* 80036C5C 0003383C  50 06 36 72 */	rlwimi r6, r0, 6, 0x19, 0x19
+    /* 80036C60 00033840  98 C3 00 AD */	stb r6, 0xad(r3)
+    /* 80036C64 00033844  88 C3 00 AD */	lbz r6, 0xad(r3)
+    /* 80036C68 00033848  50 06 2E B4 */	rlwimi r6, r0, 5, 0x1a, 0x1a
+    /* 80036C6C 0003384C  98 C3 00 AD */	stb r6, 0xad(r3)
+    /* 80036C70 00033850  88 C3 00 AD */	lbz r6, 0xad(r3)
+    /* 80036C74 00033854  50 06 26 F6 */	rlwimi r6, r0, 4, 0x1b, 0x1b
+    /* 80036C78 00033858  98 C3 00 AD */	stb r6, 0xad(r3)
+    /* 80036C7C 0003385C  88 C3 00 AD */	lbz r6, 0xad(r3)
+    /* 80036C80 00033860  50 06 1F 38 */	rlwimi r6, r0, 3, 0x1c, 0x1c
+    /* 80036C84 00033864  98 C3 00 AD */	stb r6, 0xad(r3)
+    /* 80036C88 00033868  88 C3 00 AD */	lbz r6, 0xad(r3)
+    /* 80036C8C 0003386C  50 06 17 7A */	rlwimi r6, r0, 2, 0x1d, 0x1d
+    /* 80036C90 00033870  98 C3 00 AD */	stb r6, 0xad(r3)
+    /* 80036C94 00033874  88 C3 00 AD */	lbz r6, 0xad(r3)
+    /* 80036C98 00033878  50 06 07 BE */	rlwimi r6, r0, 0, 0x1e, 0x1f
+    /* 80036C9C 0003387C  98 C3 00 AD */	stb r6, 0xad(r3)
+    /* 80036CA0 00033880  88 C3 00 AE */	lbz r6, 0xae(r3)
+    /* 80036CA4 00033884  50 06 3E 30 */	rlwimi r6, r0, 7, 0x18, 0x18
+    /* 80036CA8 00033888  98 C3 00 AE */	stb r6, 0xae(r3)
+    /* 80036CAC 0003388C  88 C3 00 AE */	lbz r6, 0xae(r3)
+    /* 80036CB0 00033890  50 06 36 72 */	rlwimi r6, r0, 6, 0x19, 0x19
+    /* 80036CB4 00033894  98 C3 00 AE */	stb r6, 0xae(r3)
+    /* 80036CB8 00033898  88 84 00 00 */	lbz r4, 0(r4)
+    /* 80036CBC 0003389C  54 84 10 3A */	slwi r4, r4, 2
+    /* 80036CC0 000338A0  7C 83 22 14 */	add r4, r3, r4
+    /* 80036CC4 000338A4  90 04 00 B0 */	stw r0, 0xb0(r4)
+    /* 80036CC8 000338A8  88 85 00 00 */	lbz r4, 0(r5)
+    /* 80036CCC 000338AC  54 84 10 3A */	slwi r4, r4, 2
+    /* 80036CD0 000338B0  7C 83 22 14 */	add r4, r3, r4
+    /* 80036CD4 000338B4  90 04 00 B0 */	stw r0, 0xb0(r4)
+    /* 80036CD8 000338B8  90 03 00 B8 */	stw r0, 0xb8(r3)
+    /* 80036CDC 000338BC  80 01 00 5C */	lwz r0, 0x5c(r1)
+    /* 80036CE0 000338C0  83 E1 00 54 */	lwz r31, 0x54(r1)
+    /* 80036CE4 000338C4  38 21 00 58 */	addi r1, r1, 0x58
+    /* 80036CE8 000338C8  7C 08 03 A6 */	mtlr r0
+    /* 80036CEC 000338CC  4E 80 00 20 */	blr 
+}
+#endif

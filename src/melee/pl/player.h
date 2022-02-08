@@ -291,5 +291,6 @@ void Player_80036790(s32 slot, f32 arg1);
 void Player_80036844(s32 slot, s32 arg1);
 void Player_800368F8(s32 slot);
 void Player_80036978(s32 slot, s32 arg1);
+void Player_InitOrResetPlayer(s32 slot);
 
 #endif
