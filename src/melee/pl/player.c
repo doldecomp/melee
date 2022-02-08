@@ -42,6 +42,7 @@ extern void func_800870F0(HSD_GObj*, s32);
 extern void func_802F6D10(s32);
 extern void func_802F6AF8(s32);
 extern void func_802F69C0(s32, s32);
+extern void func_802F6C04(s32);
 extern s32 func_8016B168();
 extern s32 func_8016AEDC();
 extern BOOL func_80086F4C(HSD_GObj*);
@@ -3304,7 +3305,7 @@ asm s8 Player_GetHandicap(s32 slot)
     /* 800337CC 000303AC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800337D0 000303B0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800337D4 000303B4  38 80 00 66 */	li r4, 0x66
-    /* 800337D8 000303B8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800337D8 000303B8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800337DC 000303BC  48 35 4A 45 */	bl __assert
     lbl_800337E0:
     /* 800337E0 000303C0  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3328,7 +3329,7 @@ void Player_SetHandicap(s32 slot, s8 handicap) {   ///https://decomp.me/scratch/
     player->handicap = handicap;
 }
 #else
-void Player_SetHandicap(s32 slot, s8 handicap) 
+asm void Player_SetHandicap(s32 slot, s8 handicap) 
 {
     nofralloc
     /* 80033808 000303E8  7C 08 02 A6 */	mflr r0
@@ -3350,7 +3351,7 @@ void Player_SetHandicap(s32 slot, s8 handicap)
     /* 80033844 00030424  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033848 00030428  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 8003384C 0003042C  38 80 00 66 */	li r4, 0x66
-    /* 80033850 00030430  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033850 00030430  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033854 00030434  48 35 49 CD */	bl __assert
     lbl_80033858:
     /* 80033858 00030438  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -3397,7 +3398,7 @@ asm f32 Player_GetUnk50(s32 slot)
     /* 800338B8 00030498  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800338BC 0003049C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800338C0 000304A0  38 80 00 66 */	li r4, 0x66
-    /* 800338C4 000304A4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800338C4 000304A4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800338C8 000304A8  48 35 49 59 */	bl __assert
     lbl_800338CC:
     /* 800338CC 000304AC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3443,7 +3444,7 @@ asm f32 Player_GetAttackRatio(s32 slot)
     /* 80033928 00030508  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003392C 0003050C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033930 00030510  38 80 00 66 */	li r4, 0x66
-    /* 80033934 00030514  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033934 00030514  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033938 00030518  48 35 48 E9 */	bl __assert
     lbl_8003393C:
     /* 8003393C 0003051C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3489,7 +3490,7 @@ asm void Player_SetAttackRatio(s32 slot, f32 attack_ratio)
     /* 800339A0 00030580  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800339A4 00030584  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800339A8 00030588  38 80 00 66 */	li r4, 0x66
-    /* 800339AC 0003058C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800339AC 0003058C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800339B0 00030590  48 35 48 71 */	bl __assert
     lbl_800339B4:
     /* 800339B4 00030594  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3536,7 +3537,7 @@ asm f32 Player_GetDefenseRatio(s32 slot)
     /* 80033A14 000305F4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033A18 000305F8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033A1C 000305FC  38 80 00 66 */	li r4, 0x66
-    /* 80033A20 00030600  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033A20 00030600  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033A24 00030604  48 35 47 FD */	bl __assert
     lbl_80033A28:
     /* 80033A28 00030608  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3582,7 +3583,7 @@ asm void Player_SetDefenseRatio(s32 slot, f32 defense_ratio)
     /* 80033A8C 0003066C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033A90 00030670  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033A94 00030674  38 80 00 66 */	li r4, 0x66
-    /* 80033A98 00030678  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033A98 00030678  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033A9C 0003067C  48 35 47 85 */	bl __assert
     lbl_80033AA0:
     /* 80033AA0 00030680  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3629,7 +3630,7 @@ asm f32 Player_GetModelScale(s32 slot)
     /* 80033B00 000306E0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033B04 000306E4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033B08 000306E8  38 80 00 66 */	li r4, 0x66
-    /* 80033B0C 000306EC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033B0C 000306EC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033B10 000306F0  48 35 47 11 */	bl __assert
     lbl_80033B14:
     /* 80033B14 000306F4  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3675,7 +3676,7 @@ asm void Player_SetModelScale(s32 slot, f32 model_scale)
     /* 80033B78 00030758  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033B7C 0003075C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033B80 00030760  38 80 00 66 */	li r4, 0x66
-    /* 80033B84 00030764  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033B84 00030764  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033B88 00030768  48 35 46 99 */	bl __assert
     lbl_80033B8C:
     /* 80033B8C 0003076C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3741,7 +3742,7 @@ asm s32 Player_GetStocks(s32 slot)
     /* 80033C0C 000307EC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033C10 000307F0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033C14 000307F4  38 80 00 66 */	li r4, 0x66
-    /* 80033C18 000307F8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033C18 000307F8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033C1C 000307FC  48 35 46 05 */	bl __assert
     lbl_80033C20:
     /* 80033C20 00030800  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3806,7 +3807,7 @@ asm void Player_SetStocks(s32 slot, s32 stocks)
     /* 80033C9C 0003087C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033CA0 00030880  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033CA4 00030884  38 80 00 66 */	li r4, 0x66
-    /* 80033CA8 00030888  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033CA8 00030888  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033CAC 0003088C  48 35 45 75 */	bl __assert
     lbl_80033CB0:
     /* 80033CB0 00030890  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -3854,7 +3855,7 @@ asm void Player_LoseStock(s32 slot)
     /* 80033D14 000308F4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033D18 000308F8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033D1C 000308FC  38 80 00 66 */	li r4, 0x66
-    /* 80033D20 00030900  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033D20 00030900  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033D24 00030904  48 35 44 FD */	bl __assert
     lbl_80033D28:
     /* 80033D28 00030908  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3905,7 +3906,7 @@ asm s32 Player_GetCoins(s32 slot)
     /* 80033D94 00030974  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033D98 00030978  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033D9C 0003097C  38 80 00 66 */	li r4, 0x66
-    /* 80033DA0 00030980  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033DA0 00030980  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033DA4 00030984  48 35 44 7D */	bl __assert
     lbl_80033DA8:
     /* 80033DA8 00030988  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -3951,7 +3952,7 @@ asm void Player_SetCoins(s32 slot, s32 current_coins)
     /* 80033E0C 000309EC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033E10 000309F0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033E14 000309F4  38 80 00 66 */	li r4, 0x66
-    /* 80033E18 000309F8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033E18 000309F8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033E1C 000309FC  48 35 44 05 */	bl __assert
     lbl_80033E20:
     /* 80033E20 00030A00  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -3998,7 +3999,7 @@ asm s32 Player_GetTotalCoins(s32 slot)
     /* 80033E80 00030A60  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033E84 00030A64  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033E88 00030A68  38 80 00 66 */	li r4, 0x66
-    /* 80033E8C 00030A6C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033E8C 00030A6C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033E90 00030A70  48 35 43 91 */	bl __assert
     lbl_80033E94:
     /* 80033E94 00030A74  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -4044,7 +4045,7 @@ asm void Player_SetTotalCoins(s32 slot, s32 coins)
     /* 80033EF8 00030AD8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033EFC 00030ADC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033F00 00030AE0  38 80 00 66 */	li r4, 0x66
-    /* 80033F04 00030AE4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033F04 00030AE4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033F08 00030AE8  48 35 43 19 */	bl __assert
     lbl_80033F0C:
     /* 80033F0C 00030AEC  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -4091,7 +4092,7 @@ asm s32 Player_GetUnk98(s32 slot)
     /* 80033F6C 00030B4C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033F70 00030B50  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033F74 00030B54  38 80 00 66 */	li r4, 0x66
-    /* 80033F78 00030B58  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033F78 00030B58  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033F7C 00030B5C  48 35 42 A5 */	bl __assert
     lbl_80033F80:
     /* 80033F80 00030B60  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -4137,7 +4138,7 @@ asm void Player_SetUnk98(s32 slot, s32 unk98)
     /* 80033FE4 00030BC4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80033FE8 00030BC8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80033FEC 00030BCC  38 80 00 66 */	li r4, 0x66
-    /* 80033FF0 00030BD0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80033FF0 00030BD0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80033FF4 00030BD4  48 35 42 2D */	bl __assert
     lbl_80033FF8:
     /* 80033FF8 00030BD8  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -4184,7 +4185,7 @@ asm s32 Player_GetUnk9C(s32 slot)
     /* 80034058 00030C38  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003405C 00030C3C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034060 00030C40  38 80 00 66 */	li r4, 0x66
-    /* 80034064 00030C44  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034064 00030C44  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034068 00030C48  48 35 41 B9 */	bl __assert
     lbl_8003406C:
     /* 8003406C 00030C4C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -4230,7 +4231,7 @@ asm void Player_SetUnk9C(s32 slot, s32 unk9C)
     /* 800340D0 00030CB0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800340D4 00030CB4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800340D8 00030CB8  38 80 00 66 */	li r4, 0x66
-    /* 800340DC 00030CBC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800340DC 00030CBC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800340E0 00030CC0  48 35 41 41 */	bl __assert
     lbl_800340E4:
     /* 800340E4 00030CC4  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -4275,7 +4276,7 @@ asm HSD_GObj* Player_GetEntity(s32 slot)
     /* 80034144 00030D24  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034148 00030D28  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 8003414C 00030D2C  38 80 00 66 */	li r4, 0x66
-    /* 80034150 00030D30  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034150 00030D30  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034154 00030D34  48 35 40 CD */	bl __assert
     lbl_80034158:
     /* 80034158 00030D38  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -4326,7 +4327,7 @@ asm HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index)
     /* 800341C8 00030DA8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800341CC 00030DAC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800341D0 00030DB0  38 80 00 66 */	li r4, 0x66
-    /* 800341D4 00030DB4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800341D4 00030DB4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800341D8 00030DB8  48 35 40 49 */	bl __assert
     lbl_800341DC:
     /* 800341DC 00030DBC  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -4383,7 +4384,7 @@ asm void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2)
     /* 8003425C 00030E3C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034260 00030E40  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034264 00030E44  38 80 00 66 */	li r4, 0x66
-    /* 80034268 00030E48  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034268 00030E48  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003426C 00030E4C  48 35 3F B5 */	bl __assert
     lbl_80034270:
     /* 80034270 00030E50  1C 9D 0E 90 */	mulli r4, r29, 0xe90
@@ -4434,7 +4435,7 @@ asm s16 Player_GetDamage(s32 slot)
     /* 800342E8 00030EC8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800342EC 00030ECC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800342F0 00030ED0  38 80 00 66 */	li r4, 0x66
-    /* 800342F4 00030ED4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800342F4 00030ED4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800342F8 00030ED8  48 35 3F 29 */	bl __assert
     lbl_800342FC:
     /* 800342FC 00030EDC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -4492,7 +4493,7 @@ asm void Player_SetHUDDamage(s32 slot,s32 arg1)
     /* 80034374 00030F54  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034378 00030F58  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 8003437C 00030F5C  38 80 00 66 */	li r4, 0x66
-    /* 80034380 00030F60  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034380 00030F60  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034384 00030F64  48 35 3E 9D */	bl __assert
     lbl_80034388:
     /* 80034388 00030F68  1C 9C 0E 90 */	mulli r4, r28, 0xe90
@@ -4569,7 +4570,7 @@ asm void Player_SetHPByIndex(s32 slot, s32 arg1, s32 arg2)
     /* 8003445C 0003103C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034460 00031040  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034464 00031044  38 80 00 66 */	li r4, 0x66
-    /* 80034468 00031048  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034468 00031048  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003446C 0003104C  48 35 3D B5 */	bl __assert
     lbl_80034470:
     /* 80034470 00031050  1C 9D 0E 90 */	mulli r4, r29, 0xe90
@@ -4622,7 +4623,7 @@ asm s16 Player_GetOtherStamina(s32 slot)
     /* 800344E8 000310C8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800344EC 000310CC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800344F0 000310D0  38 80 00 66 */	li r4, 0x66
-    /* 800344F4 000310D4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800344F4 000310D4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800344F8 000310D8  48 35 3D 29 */	bl __assert
     lbl_800344FC:
     /* 800344FC 000310DC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -4646,7 +4647,7 @@ void Player_SetOtherStamina(s32 slot, s32 stamina) {   ///https://decomp.me/scra
     player->staminas.byName.stamina = stamina;
 }
 #else
-void Player_SetOtherStamina(s32 slot, s32 stamina)
+asm void Player_SetOtherStamina(s32 slot, s32 stamina)
 {
     nofralloc
     /* 80034524 00031104  7C 08 02 A6 */	mflr r0
@@ -4668,7 +4669,7 @@ void Player_SetOtherStamina(s32 slot, s32 stamina)
     /* 80034560 00031140  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034564 00031144  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034568 00031148  38 80 00 66 */	li r4, 0x66
-    /* 8003456C 0003114C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003456C 0003114C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034570 00031150  48 35 3C B1 */	bl __assert
     lbl_80034574:
     /* 80034574 00031154  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -4719,7 +4720,7 @@ asm u32 Player_GetRemainingHP(s32 slot)
     /* 800345D8 000311B8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800345DC 000311BC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800345E0 000311C0  38 80 00 66 */	li r4, 0x66
-    /* 800345E4 000311C4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800345E4 000311C4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800345E8 000311C8  48 35 3C 39 */	bl __assert
     lbl_800345EC:
     /* 800345EC 000311CC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -4875,7 +4876,7 @@ asm u8 Player_GetMoreFlagsBit3(s32 slot)
     /* 80034760 00031340  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034764 00031344  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034768 00031348  38 80 00 66 */	li r4, 0x66
-    /* 8003476C 0003134C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003476C 0003134C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034770 00031350  48 35 3A B1 */	bl __assert
     lbl_80034774:
     /* 80034774 00031354  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -4924,7 +4925,7 @@ asm void Player_SetMoreFlagsBit3(s32 slot, u8 bit3)
     /* 800347DC 000313BC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800347E0 000313C0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800347E4 000313C4  38 80 00 66 */	li r4, 0x66
-    /* 800347E8 000313C8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800347E8 000313C8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800347EC 000313CC  48 35 3A 35 */	bl __assert
     lbl_800347F0:
     /* 800347F0 000313D0  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -4975,7 +4976,7 @@ asm void Player_SetMoreFlagsBit4(s32 slot, u8 bit4)
     /* 80034860 00031440  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034864 00031444  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034868 00031448  38 80 00 66 */	li r4, 0x66
-    /* 8003486C 0003144C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003486C 0003144C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034870 00031450  48 35 39 B1 */	bl __assert
     lbl_80034874:
     /* 80034874 00031454  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5026,7 +5027,7 @@ asm u8 Player_GetMoreFlagsBit4(s32 slot)
     /* 800348DC 000314BC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800348E0 000314C0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800348E4 000314C4  38 80 00 66 */	li r4, 0x66
-    /* 800348E8 000314C8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800348E8 000314C8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800348EC 000314CC  48 35 39 35 */	bl __assert
     lbl_800348F0:
     /* 800348F0 000314D0  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -5075,7 +5076,7 @@ asm u8 Player_GetMoreFlagsBit5(s32 slot)
     /* 80034950 00031530  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034954 00031534  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034958 00031538  38 80 00 66 */	li r4, 0x66
-    /* 8003495C 0003153C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003495C 0003153C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034960 00031540  48 35 38 C1 */	bl __assert
     lbl_80034964:
     /* 80034964 00031544  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -5125,7 +5126,7 @@ asm void Player_SetMoreFlagsBit5(s32 slot, u8 bit5)
     /* 800349CC 000315AC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800349D0 000315B0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800349D4 000315B4  38 80 00 66 */	li r4, 0x66
-    /* 800349D8 000315B8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800349D8 000315B8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800349DC 000315BC  48 35 38 45 */	bl __assert
     lbl_800349E0:
     /* 800349E0 000315C0  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5176,7 +5177,7 @@ asm u8 Player_GetMoreFlagsBit6(s32 slot)
     /* 80034A48 00031628  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034A4C 0003162C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034A50 00031630  38 80 00 66 */	li r4, 0x66
-    /* 80034A54 00031634  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034A54 00031634  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034A58 00031638  48 35 37 C9 */	bl __assert
     lbl_80034A5C:
     /* 80034A5C 0003163C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -5226,7 +5227,7 @@ asm void Player_SetMoreFlagsBit6(s32 slot, u8 bit6)
     /* 80034AC4 000316A4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034AC8 000316A8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034ACC 000316AC  38 80 00 66 */	li r4, 0x66
-    /* 80034AD0 000316B0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034AD0 000316B0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034AD4 000316B4  48 35 37 4D */	bl __assert
     lbl_80034AD8:
     /* 80034AD8 000316B8  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5277,7 +5278,7 @@ asm u8 Player_GetFlagsAEBit0(s32 slot)
     /* 80034B40 00031720  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034B44 00031724  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034B48 00031728  38 80 00 66 */	li r4, 0x66
-    /* 80034B4C 0003172C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034B4C 0003172C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034B50 00031730  48 35 36 D1 */	bl __assert
     lbl_80034B54:
     /* 80034B54 00031734  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -5326,7 +5327,7 @@ asm void Player_SetFlagsAEBit0(s32 slot, u8 bit0)
     /* 80034BBC 0003179C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034BC0 000317A0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034BC4 000317A4  38 80 00 66 */	li r4, 0x66
-    /* 80034BC8 000317A8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034BC8 000317A8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034BCC 000317AC  48 35 36 55 */	bl __assert
     lbl_80034BD0:
     /* 80034BD0 000317B0  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5382,7 +5383,7 @@ asm u32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
     /* 80034C40 00031820  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034C44 00031824  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034C48 00031828  38 80 00 66 */	li r4, 0x66
-    /* 80034C4C 0003182C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034C4C 0003182C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034C50 00031830  48 35 35 D1 */	bl __assert
     lbl_80034C54:
     /* 80034C54 00031834  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5444,7 +5445,7 @@ asm s32 Player_GetFalls(s32 slot)
     /* 80034CDC 000318BC  48 31 09 CD */	bl OSReport
     /* 80034CE0 000318C0  38 7F 00 A0 */	addi r3, r31, 0xa0
     /* 80034CE4 000318C4  38 80 00 66 */	li r4, 0x66
-    /* 80034CE8 000318C8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034CE8 000318C8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034CEC 000318CC  48 35 35 35 */	bl __assert
     lbl_80034CF0:
     /* 80034CF0 000318D0  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5518,7 +5519,7 @@ asm s32 Player_GetFallsByIndex(s32 slot, s32 index)
     /* 80034DB4 00031994  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034DB8 00031998  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034DBC 0003199C  38 80 00 66 */	li r4, 0x66
-    /* 80034DC0 000319A0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034DC0 000319A0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034DC4 000319A4  48 35 34 5D */	bl __assert
     lbl_80034DC8:
     /* 80034DC8 000319A8  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5569,7 +5570,7 @@ asm void Player_SetFalls(s32 slot, s32 falls) {
     /* 80034E40 00031A20  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034E44 00031A24  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034E48 00031A28  38 80 00 66 */	li r4, 0x66
-    /* 80034E4C 00031A2C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034E4C 00031A2C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034E50 00031A30  48 35 33 D1 */	bl __assert
     lbl_80034E54:
     /* 80034E54 00031A34  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5622,7 +5623,7 @@ asm void Player_SetFallsByIndex(s32 slot, s32 index, s32 falls)
     /* 80034ED0 00031AB0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034ED4 00031AB4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034ED8 00031AB8  38 80 00 66 */	li r4, 0x66
-    /* 80034EDC 00031ABC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034EDC 00031ABC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034EE0 00031AC0  48 35 33 41 */	bl __assert
     lbl_80034EE4:
     /* 80034EE4 00031AC4  1C 9D 0E 90 */	mulli r4, r29, 0xe90
@@ -5675,7 +5676,7 @@ asm s32 Player_GetKOsByPlayerIndex(s32 slot, s32 index)
     /* 80034F60 00031B40  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80034F64 00031B44  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80034F68 00031B48  38 80 00 66 */	li r4, 0x66
-    /* 80034F6C 00031B4C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034F6C 00031B4C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80034F70 00031B50  48 35 32 B1 */	bl __assert
     lbl_80034F74:
     /* 80034F74 00031B54  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5763,7 +5764,7 @@ asm void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot)
     /* 80034FF0 00031BD0  48 31 06 B9 */	bl OSReport
     /* 80034FF4 00031BD4  38 7D 00 A0 */	addi r3, r29, 0xa0
     /* 80034FF8 00031BD8  38 80 00 66 */	li r4, 0x66
-    /* 80034FFC 00031BDC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80034FFC 00031BDC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035000 00031BE0  48 35 32 21 */	bl __assert
     lbl_80035004:
     /* 80035004 00031BE4  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5801,7 +5802,7 @@ asm void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot)
     /* 80035078 00031C58  48 31 06 31 */	bl OSReport
     /* 8003507C 00031C5C  38 7D 00 A0 */	addi r3, r29, 0xa0
     /* 80035080 00031C60  38 80 00 66 */	li r4, 0x66
-    /* 80035084 00031C64  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035084 00031C64  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035088 00031C68  48 35 31 99 */	bl __assert
     lbl_8003508C:
     /* 8003508C 00031C6C  2C 1F 00 00 */	cmpwi r31, 0
@@ -5815,7 +5816,7 @@ asm void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot)
     /* 800350A8 00031C88  48 31 06 01 */	bl OSReport
     /* 800350AC 00031C8C  38 7D 00 A0 */	addi r3, r29, 0xa0
     /* 800350B0 00031C90  38 80 00 66 */	li r4, 0x66
-    /* 800350B4 00031C94  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800350B4 00031C94  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800350B8 00031C98  48 35 31 69 */	bl __assert
     lbl_800350BC:
     /* 800350BC 00031C9C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -5876,7 +5877,7 @@ asm u32 Player_GetMatchFrameCount(s32 slot)
     /* 80035148 00031D28  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003514C 00031D2C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035150 00031D30  38 80 00 66 */	li r4, 0x66
-    /* 80035154 00031D34  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035154 00031D34  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035158 00031D38  48 35 30 C9 */	bl __assert
     lbl_8003515C:
     /* 8003515C 00031D3C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -5926,7 +5927,7 @@ asm void Player_UpdateMatchFrameCount(s32 slot, BOOL condition)
     /* 800351C0 00031DA0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800351C4 00031DA4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800351C8 00031DA8  38 80 00 66 */	li r4, 0x66
-    /* 800351CC 00031DAC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800351CC 00031DAC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800351D0 00031DB0  48 35 30 51 */	bl __assert
     lbl_800351D4:
     /* 800351D4 00031DB4  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -5982,7 +5983,7 @@ asm u16 Player_GetSuicideCount(s32 slot)
     /* 80035250 00031E30  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035254 00031E34  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035258 00031E38  38 80 00 66 */	li r4, 0x66
-    /* 8003525C 00031E3C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003525C 00031E3C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035260 00031E40  48 35 2F C1 */	bl __assert
     lbl_80035264:
     /* 80035264 00031E44  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6009,7 +6010,7 @@ void Player_SetSuicideCount(s32 slot, u32 suicide_count) {  ///https://decomp.me
     player->suicide_count = suicide_count;
 }
 #else
-void Player_SetSuicideCount(s32 slot, u32 suicide_count)
+asm void Player_SetSuicideCount(s32 slot, u32 suicide_count)
 {
     nofralloc
     /* 8003528C 00031E6C  7C 08 02 A6 */	mflr r0
@@ -6038,7 +6039,7 @@ void Player_SetSuicideCount(s32 slot, u32 suicide_count)
     /* 800352E0 00031EC0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800352E4 00031EC4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800352E8 00031EC8  38 80 00 66 */	li r4, 0x66
-    /* 800352EC 00031ECC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800352EC 00031ECC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800352F0 00031ED0  48 35 2F 31 */	bl __assert
     lbl_800352F4:
     /* 800352F4 00031ED4  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -6072,7 +6073,7 @@ void Player_IncSuicideCount(s32 slot, s32 condition) {   ///https://decomp.me/sc
         }
     }
 }
-#elif
+#else
 asm void Player_IncSuicideCount(s32 slot, s32 condition)
 {
     nofralloc
@@ -6095,7 +6096,7 @@ asm void Player_IncSuicideCount(s32 slot, s32 condition)
     /* 8003535C 00031F3C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035360 00031F40  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035364 00031F44  38 80 00 66 */	li r4, 0x66
-    /* 80035368 00031F48  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035368 00031F48  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003536C 00031F4C  48 35 2E B5 */	bl __assert
     lbl_80035370:
     /* 80035370 00031F50  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -6154,7 +6155,7 @@ asm BOOL Player_800353BC(s32 slot) {
     /* 800353F0 00031FD0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800353F4 00031FD4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800353F8 00031FD8  38 80 00 66 */	li r4, 0x66
-    /* 800353FC 00031FDC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800353FC 00031FDC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035400 00031FE0  48 35 2E 21 */	bl __assert
     lbl_80035404:
     /* 80035404 00031FE4  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6221,7 +6222,7 @@ asm BOOL Player_8003544C(s32 slot, BOOL condition)
     /* 8003548C 0003206C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035490 00032070  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035494 00032074  38 80 00 66 */	li r4, 0x66
-    /* 80035498 00032078  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035498 00032078  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003549C 0003207C  48 35 2D 85 */	bl __assert
     lbl_800354A0:
     /* 800354A0 00032080  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6276,7 +6277,7 @@ asm void Player_SetFlagsBit0(s32 slot, s32 bit0) {
     /* 80035524 00032104  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035528 00032108  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 8003552C 0003210C  38 80 00 66 */	li r4, 0x66
-    /* 80035530 00032110  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035530 00032110  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035534 00032114  48 35 2C ED */	bl __assert
     lbl_80035538:
     /* 80035538 00032118  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -6326,7 +6327,7 @@ asm s8 Player_GetNametagSlotID(s32 slot)
     /* 800355A0 00032180  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800355A4 00032184  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800355A8 00032188  38 80 00 66 */	li r4, 0x66
-    /* 800355AC 0003218C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800355AC 0003218C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800355B0 00032190  48 35 2C 71 */	bl __assert
     lbl_800355B4:
     /* 800355B4 00032194  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6373,7 +6374,7 @@ asm void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id)
     /* 8003561C 000321FC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035620 00032200  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035624 00032204  38 80 00 66 */	li r4, 0x66
-    /* 80035628 00032208  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035628 00032208  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003562C 0003220C  48 35 2B F5 */	bl __assert
     lbl_80035630:
     /* 80035630 00032210  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -6421,7 +6422,7 @@ asm u8 Player_GetFlagsBit1(s32 slot)
     /* 80035690 00032270  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035694 00032274  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035698 00032278  38 80 00 66 */	li r4, 0x66
-    /* 8003569C 0003227C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003569C 0003227C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800356A0 00032280  48 35 2B 81 */	bl __assert
     lbl_800356A4:
     /* 800356A4 00032284  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6467,7 +6468,7 @@ asm void Player_SetFlagsBit1(s32 slot)
     /* 80035704 000322E4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035708 000322E8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 8003570C 000322EC  38 80 00 66 */	li r4, 0x66
-    /* 80035710 000322F0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035710 000322F0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035714 000322F4  48 35 2B 0D */	bl __assert
     lbl_80035718:
     /* 80035718 000322F8  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6516,7 +6517,7 @@ asm void Player_UnsetFlagsBit1(s32 slot)
     /* 80035780 00032360  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035784 00032364  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035788 00032368  38 80 00 66 */	li r4, 0x66
-    /* 8003578C 0003236C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 8003578C 0003236C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035790 00032370  48 35 2A 91 */	bl __assert
     lbl_80035794:
     /* 80035794 00032374  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6565,7 +6566,7 @@ asm u8 Player_GetFlagsBit3(s32 slot)
     /* 800357FC 000323DC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035800 000323E0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035804 000323E4  38 80 00 66 */	li r4, 0x66
-    /* 80035808 000323E8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035808 000323E8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003580C 000323EC  48 35 2A 15 */	bl __assert
     lbl_80035810:
     /* 80035810 000323F0  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6612,7 +6613,7 @@ asm void Player_SetFlagsBit3(s32 slot, u8 bit3)
     /* 80035878 00032458  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003587C 0003245C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035880 00032460  38 80 00 66 */	li r4, 0x66
-    /* 80035884 00032464  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035884 00032464  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035888 00032468  48 35 29 99 */	bl __assert
     lbl_8003588C:
     /* 8003588C 0003246C  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -6662,7 +6663,7 @@ asm u8 Player_GetFlagsBit4(s32 slot)
     /* 800358F4 000324D4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800358F8 000324D8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800358FC 000324DC  38 80 00 66 */	li r4, 0x66
-    /* 80035900 000324E0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035900 000324E0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035904 000324E4  48 35 29 1D */	bl __assert
     lbl_80035908:
     /* 80035908 000324E8  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6709,7 +6710,7 @@ asm u8 Player_GetFlagsBit5(s32 slot)
     /* 80035968 00032548  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003596C 0003254C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035970 00032550  38 80 00 66 */	li r4, 0x66
-    /* 80035974 00032554  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035974 00032554  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035978 00032558  48 35 28 A9 */	bl __assert
     lbl_8003597C:
     /* 8003597C 0003255C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6756,7 +6757,7 @@ asm void Player_SetFlagsBit5(s32 slot, u8 bit5)
     /* 800359E4 000325C4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800359E8 000325C8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800359EC 000325CC  38 80 00 66 */	li r4, 0x66
-    /* 800359F0 000325D0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800359F0 000325D0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800359F4 000325D4  48 35 28 2D */	bl __assert
     lbl_800359F8:
     /* 800359F8 000325D8  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -6806,7 +6807,7 @@ asm u8 Player_GetFlagsBit6(s32 slot)
     /* 80035A60 00032640  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035A64 00032644  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035A68 00032648  38 80 00 66 */	li r4, 0x66
-    /* 80035A6C 0003264C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035A6C 0003264C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035A70 00032650  48 35 27 B1 */	bl __assert
     lbl_80035A74:
     /* 80035A74 00032654  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6853,7 +6854,7 @@ asm void Player_SetFlagsBit6(s32 slot, u8 bit6)
     /* 80035ADC 000326BC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035AE0 000326C0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035AE4 000326C4  38 80 00 66 */	li r4, 0x66
-    /* 80035AE8 000326C8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035AE8 000326C8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035AEC 000326CC  48 35 27 35 */	bl __assert
     lbl_80035AF0:
     /* 80035AF0 000326D0  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -6902,7 +6903,7 @@ asm u8 Player_GetFlagsBit7(s32 slot)
     /* 80035B58 00032738  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035B5C 0003273C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035B60 00032740  38 80 00 66 */	li r4, 0x66
-    /* 80035B64 00032744  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035B64 00032744  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035B68 00032748  48 35 26 B9 */	bl __assert
     lbl_80035B6C:
     /* 80035B6C 0003274C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -6949,7 +6950,7 @@ asm void Player_SetFlagsBit7(s32 slot, u8 bit7)
     /* 80035BD4 000327B4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035BD8 000327B8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035BDC 000327BC  38 80 00 66 */	li r4, 0x66
-    /* 80035BE0 000327C0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035BE0 000327C0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035BE4 000327C4  48 35 26 3D */	bl __assert
     lbl_80035BE8:
     /* 80035BE8 000327C8  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -6998,7 +6999,7 @@ asm u8 Player_GetMoreFlagsBit0(s32 slot)
     /* 80035C50 00032830  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035C54 00032834  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035C58 00032838  38 80 00 66 */	li r4, 0x66
-    /* 80035C5C 0003283C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035C5C 0003283C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035C60 00032840  48 35 25 C1 */	bl __assert
     lbl_80035C64:
     /* 80035C64 00032844  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7045,7 +7046,7 @@ asm u8 Player_GetMoreFlagsBit1(s32 slot)
     /* 80035CC4 000328A4  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035CC8 000328A8  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035CCC 000328AC  38 80 00 66 */	li r4, 0x66
-    /* 80035CD0 000328B0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035CD0 000328B0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035CD4 000328B4  48 35 25 4D */	bl __assert
     lbl_80035CD8:
     /* 80035CD8 000328B8  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7092,7 +7093,7 @@ asm void Player_SetMoreFlagsBit1(s32 slot, u8 bit1)
     /* 80035D40 00032920  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035D44 00032924  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035D48 00032928  38 80 00 66 */	li r4, 0x66
-    /* 80035D4C 0003292C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035D4C 0003292C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035D50 00032930  48 35 24 D1 */	bl __assert
     lbl_80035D54:
     /* 80035D54 00032934  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -7141,7 +7142,7 @@ asm u8 Player_GetUnk4D(s32 slot)
     /* 80035DBC 0003299C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035DC0 000329A0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035DC4 000329A4  38 80 00 66 */	li r4, 0x66
-    /* 80035DC8 000329A8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035DC8 000329A8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035DCC 000329AC  48 35 24 55 */	bl __assert
     lbl_80035DD0:
     /* 80035DD0 000329B0  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7166,7 +7167,7 @@ void Player_SetUnk4D(s32 slot, s8 unk4D) {   ////https://decomp.me/scratch/g6rY1
     player->unk4D = unk4D;
 }
 #else
-void Player_SetUnk4D(s32 slot, s8 unk4D)
+asm void Player_SetUnk4D(s32 slot, s8 unk4D)
 {
     nofralloc
     /* 80035DF8 000329D8  7C 08 02 A6 */	mflr r0
@@ -7188,7 +7189,7 @@ void Player_SetUnk4D(s32 slot, s8 unk4D)
     /* 80035E34 00032A14  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035E38 00032A18  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035E3C 00032A1C  38 80 00 66 */	li r4, 0x66
-    /* 80035E40 00032A20  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035E40 00032A20  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035E44 00032A24  48 35 23 DD */	bl __assert
     lbl_80035E48:
     /* 80035E48 00032A28  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -7235,7 +7236,7 @@ asm u8 Player_GetFlagsAEBit1(s32 slot)
     /* 80035EA8 00032A88  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035EAC 00032A8C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035EB0 00032A90  38 80 00 66 */	li r4, 0x66
-    /* 80035EB4 00032A94  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035EB4 00032A94  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035EB8 00032A98  48 35 23 69 */	bl __assert
     lbl_80035EBC:
     /* 80035EBC 00032A9C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7283,7 +7284,7 @@ asm u8 Player_SetFlagsAEBit1(s32 slot, u8 bit1)
     /* 80035F24 00032B04  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035F28 00032B08  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035F2C 00032B0C  38 80 00 66 */	li r4, 0x66
-    /* 80035F30 00032B10  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035F30 00032B10  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035F34 00032B14  48 35 22 ED */	bl __assert
     lbl_80035F38:
     /* 80035F38 00032B18  1C BE 0E 90 */	mulli r5, r30, 0xe90
@@ -7332,7 +7333,7 @@ asm u8 Player_GetUnk4C(s32 slot)
     /* 80035FA0 00032B80  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80035FA4 00032B84  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80035FA8 00032B88  38 80 00 66 */	li r4, 0x66
-    /* 80035FAC 00032B8C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80035FAC 00032B8C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80035FB0 00032B90  48 35 22 71 */	bl __assert
     lbl_80035FB4:
     /* 80035FB4 00032B94  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7377,7 +7378,7 @@ asm void Player_SetUnk4C(s32 slot, u8 unk4C) {
     /* 80036018 00032BF8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003601C 00032BFC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80036020 00032C00  38 80 00 66 */	li r4, 0x66
-    /* 80036024 00032C04  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80036024 00032C04  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80036028 00032C08  48 35 21 F9 */	bl __assert
     lbl_8003602C:
     /* 8003602C 00032C0C  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -7422,7 +7423,7 @@ asm void Player_80036058(s32 slot)
     /* 8003608C 00032C6C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80036090 00032C70  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80036094 00032C74  38 80 00 66 */	li r4, 0x66
-    /* 80036098 00032C78  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80036098 00032C78  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003609C 00032C7C  48 35 21 85 */	bl __assert
     lbl_800360A0:
     /* 800360A0 00032C80  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7470,7 +7471,7 @@ asm void Player_800360D8(s32 slot)
     /* 8003610C 00032CEC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80036110 00032CF0  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80036114 00032CF4  38 80 00 66 */	li r4, 0x66
-    /* 80036118 00032CF8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80036118 00032CF8  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003611C 00032CFC  48 35 21 05 */	bl __assert
     lbl_80036120:
     /* 80036120 00032D00  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7520,7 +7521,7 @@ asm void Player_SetStructFunc(s32 slot, void* arg_func)
     /* 80036194 00032D74  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80036198 00032D78  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 8003619C 00032D7C  38 80 00 66 */	li r4, 0x66
-    /* 800361A0 00032D80  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800361A0 00032D80  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800361A4 00032D84  48 35 20 7D */	bl __assert
     lbl_800361A8:
     /* 800361A8 00032D88  1C 9E 0E 90 */	mulli r4, r30, 0xe90
@@ -7567,7 +7568,7 @@ asm s32* Player_GetTotalAttackCountPtr(s32 slot)
     /* 80036208 00032DE8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003620C 00032DEC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80036210 00032DF0  38 80 00 66 */	li r4, 0x66
-    /* 80036214 00032DF4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80036214 00032DF4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80036218 00032DF8  48 35 20 09 */	bl __assert
     lbl_8003621C:
     /* 8003621C 00032DFC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7613,7 +7614,7 @@ asm s32* Player_GetStaleMoveTableIndexPtr(s32 slot)
     /* 80036278 00032E58  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003627C 00032E5C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80036280 00032E60  38 80 00 66 */	li r4, 0x66
-    /* 80036284 00032E64  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80036284 00032E64  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80036288 00032E68  48 35 1F 99 */	bl __assert
     lbl_8003628C:
     /* 8003628C 00032E6C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7659,7 +7660,7 @@ asm s32* Player_GetUnk6A8Ptr(s32 slot)
     /* 800362E8 00032EC8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800362EC 00032ECC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800362F0 00032ED0  38 80 00 66 */	li r4, 0x66
-    /* 800362F4 00032ED4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800362F4 00032ED4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800362F8 00032ED8  48 35 1F 29 */	bl __assert
     lbl_800362FC:
     /* 800362FC 00032EDC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7705,7 +7706,7 @@ asm s32* Player_GetStaleMoveTableIndexPtr2(s32 slot)
     /* 80036358 00032F38  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 8003635C 00032F3C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80036360 00032F40  38 80 00 66 */	li r4, 0x66
-    /* 80036364 00032F44  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80036364 00032F44  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 80036368 00032F48  48 35 1E B9 */	bl __assert
     lbl_8003636C:
     /* 8003636C 00032F4C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7756,7 +7757,7 @@ asm s32 Player_80036394(s32 slot)
     /* 800363C8 00032FA8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 800363CC 00032FAC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 800363D0 00032FB0  38 80 00 66 */	li r4, 0x66
-    /* 800363D4 00032FB4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 800363D4 00032FB4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 800363D8 00032FB8  48 35 1E 49 */	bl __assert
     lbl_800363DC:
     /* 800363DC 00032FBC  1C 9F 0E 90 */	mulli r4, r31, 0xe90
@@ -7818,7 +7819,7 @@ asm s32 Player_80036428(s32 slot)
     /* 8003645C 0003303C  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
     /* 80036460 00033040  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
     /* 80036464 00033044  38 80 00 66 */	li r4, 0x66
-    /* 80036468 00033048  38 AD 82 A0 */	addi r5, r13, lbl_804D3940@sda21
+    /* 80036468 00033048  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
     /* 8003646C 0003304C  48 35 1D B5 */	bl __assert
     lbl_80036470:
     /* 80036470 00033050  1C 9F 0E 90 */	mulli r4, r31, 0xe90
