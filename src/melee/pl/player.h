@@ -88,7 +88,8 @@ typedef struct _StaticPlayer
                 u8 b3 : 1;
                 u8 b4 : 1;
                 u8 b5 : 1;
-                u8 b6 : 2;
+                u8 b6 : 1;
+                u8 b7 : 1;
             } flags;
 
     /*0xAD*/ struct {
@@ -117,7 +118,7 @@ typedef struct _StaticPlayer
     /*0xB0*/ HSD_GObj* player_entity[2];
     /*0xB4*/ /*void* sub_character_entity;*/ //Used for followers, such as Nana
 
-    /*0xB8*/ s8 unkB8;
+    /*0xB8*/ void (*struct_func) (s32 slot);
 
 
     /*0xBC*/ s32 stale_move_table_current_write_index; // Zero-Indexed. Rolls over after 9. Increments after each write.
@@ -134,10 +135,12 @@ typedef struct _StaticPlayer
     /*0xE0*/ s32 stale_move_index_8;
     /*0xE4*/ s32 stale_move_index_9;
 
-    /*0xE8*/ s32 total_player_attack_count;
+    /*0xE8*/ s32 total_attack_count;
     /*0xEC*/ s32 unkEC;
 
-    /*0xF0*/ u8 buffer[0xDA0];  ///3488 bytes total
+    /*0xF0*/ u8 buffer[0x5B8];
+    /*0x6A8*/ s32 unk6A8;
+    /*0x6AC*/ u8 more_buffer[0x7E4];
 
 } StaticPlayer;
 
@@ -248,5 +251,37 @@ void Player_IncSuicideCount(s32 slot, s32 condition);
 BOOL Player_800353BC(s32 slot);
 BOOL Player_8003544C(s32 slot, BOOL condition);
 void Player_SetFlagsBit0(s32 slot, s32 bit0);
+s8 Player_GetNametagSlotID(s32 slot);
+void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id);
+u8 Player_GetFlagsBit1(s32 slot);
+void Player_SetFlagsBit1(s32 slot);
+void Player_UnsetFlagsBit1(s32 slot);
+u8 Player_GetFlagsBit3(s32 slot);
+void Player_SetFlagsBit3(s32 slot, u8 bit3);
+u8 Player_GetFlagsBit4(s32 slot);
+u8 Player_GetFlagsBit5(s32 slot);
+void Player_SetFlagsBit5(s32 slot, u8 bit5);
+u8 Player_GetFlagsBit6(s32 slot);
+void Player_SetFlagsBit6(s32 slot, u8 bit6);
+u8 Player_GetFlagsBit7(s32 slot);
+void Player_SetFlagsBit7(s32 slot, u8 bit7);
+u8 Player_GetMoreFlagsBit0(s32 slot);
+u8 Player_GetMoreFlagsBit1(s32 slot);
+void Player_SetMoreFlagsBit1(s32 slot, u8 bit1);
+u8 Player_GetUnk4D(s32 slot);
+void Player_SetUnk4D(s32 slot, s8 unk4D);
+u8 Player_GetFlagsAEBit1(s32 slot);
+u8 Player_SetFlagsAEBit1(s32 slot, u8 bit1); ///actually returns void
+u8 Player_GetUnk4C(s32 slot);
+void Player_SetUnk4C(s32 slot, u8 unk4C);
+void Player_80036058(s32 slot);
+void Player_800360D8(s32 slot);
+void Player_SetStructFunc(s32 slot, void* arg_func);
+s32* Player_GetTotalAttackCountPtr(s32 slot);
+s32* Player_GetStaleMoveTableIndexPtr(s32 slot);
+s32* Player_GetUnk6A8Ptr(s32 slot);
+s32* Player_GetStaleMoveTableIndexPtr2(s32 slot);
+s32 Player_80036394(s32 slot);
+s32 Player_80036428(s32 slot);
 
 #endif
