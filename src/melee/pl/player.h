@@ -62,7 +62,7 @@ typedef struct _StaticPlayer
 
     /*0x68 - 0x6C*/ s32 falls[2];  /// other index for nana falls
 
-    /*0x70-0x87*/ s32 kos_by_player[6];
+    /*0x70-0x84*/ s32 kos_by_player[6];
 
     /*0x88*/ u32 match_frame_count; // If -1 in zz_0035184, then it's set to MatchInfo->frame_count
     /*0x8C*/ u16 suicide_count;
@@ -76,8 +76,7 @@ typedef struct _StaticPlayer
     /*0x98*/ s32 unk98;
     /*0x9C*/ s32 unk9C;
 
-    /*0xA0*/ s32 joystick_direction_input_count; // Incremented every time you move the joystick a different direction from neutral.
-    /*0xA4*/ s32 unkA4;
+    /*0xA0-A4*/ s32 joystick_direction_input_count[2]; // Incremented every time you move the joystick a different direction from neutral.
 
     /*0xA8*/ s32 nametag_slot_id;
 
@@ -283,5 +282,14 @@ s32* Player_GetUnk6A8Ptr(s32 slot);
 s32* Player_GetStaleMoveTableIndexPtr2(s32 slot);
 s32 Player_80036394(s32 slot);
 s32 Player_80036428(s32 slot);
+void Player_SetUnk45(s32 slot, s8 unk45);
+u8 Player_GetUnk45(s32 slot);
+void Player_UpdateJoystickCountByIndex(s32 slot, s32 index);
+s32 Player_GetJoystickCountByIndex(s32 slot, s32 index);
+void Player_800366DC(s32 slot, s32 arg1);
+void Player_80036790(s32 slot, f32 arg1);
+void Player_80036844(s32 slot, s32 arg1);
+void Player_800368F8(s32 slot);
+void Player_80036978(s32 slot, s32 arg1);
 
 #endif
