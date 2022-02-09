@@ -297,5 +297,7 @@ void Player_80036D24(s32 slot);
 void Player_InitAllPlayers();
 void Player_80036DA4();
 void Player_80036DD8();
+void Player_80036E20(s32 arg0, s32 arg1, s32 arg2);
+s32 Player_80036EA0(s32 slot);
 
 #endif
