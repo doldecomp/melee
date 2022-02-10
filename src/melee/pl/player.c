@@ -22,6 +22,24 @@ struct Unk_Struct {
     } bits;
 };
 
+
+struct Unk_Struct2 {
+    s32 unk0;
+    u8 unk4;
+    s8 unk8;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } bits;
+};
+
+
 struct Unk_Struct_w_Array {
     char some_str[8+4];  //"PdPm.dat"
     char another_str[16+4]; 
@@ -89,7 +107,7 @@ extern void func_80016C64(char*, s32**, char*, s32, ...);
 extern void func_800BEB60(s32, s32, s32);
 extern s32 func_800865F0(HSD_GObj*);
 extern HSD_GObj* func_800BE7E0(struct Unk_Struct*);
-
+extern HSD_GObj* func_80068E98(struct Unk_Struct2*);
 
 void inline Player_CheckSlot(s32 slot)
 {
@@ -495,7 +513,74 @@ lbl_80031AB8:
 }
 #endif
 
-asm void Player_80031AD0(s32 slot) /// https://decomp.me/scratch/tfUzD
+#ifdef NON_MATCHING
+void Player_80031AD0(s32 slot) {   ////https://decomp.me/scratch/1KLIF  /// Only function not matching -- TODO -- 1 register swap
+
+    s8* temp_vec;
+
+    struct Unk_Struct2 some_struct;
+    s32 temp;
+    s32 temp2;
+    s8 temp3;
+    // s32 buffer_[1]; 
+    struct Unk_Struct2 some_struct2;
+
+    s32 buffer[3]; 
+
+    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
+
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    temp_vec = (s8*) (&unkStruct->vec_arr) + 1;
+    if (temp_vec[player->player_character * 3] != -1) {
+        player->flags.b2 = 1;
+    }
+
+    // temp_vec = unkStruct->vec_arr.vec_arr;
+    // temp_vec = (S8Vec*) (&unkStruct->vec_arr[0].y);
+    // // temp_vec += 0x8; //(S8Vec*) &unkStruct->vec_arr.vec_arr[0].y;
+    // if (checkNegOne(&temp_vec[player->player_character].x)) {
+    //     player->flags.b2 = 1;
+    // }
+
+    temp = unkStruct->vec_arr[player->player_character].x;
+    Player_CheckSlot(slot);
+
+    some_struct.unk0 = temp;
+    some_struct.unk4 = slot;
+    some_struct.bits.b0 = 0; 
+    some_struct.bits.b1 = 0;  
+    some_struct.unk8 = -1;
+
+    player->player_entity[0] = func_80068E98(&some_struct);
+    player->player_state = 2;
+    temp = temp_vec[player->player_character * 3];
+    if (temp != -1) {
+        temp2 = unkStruct->vec_arr[player->player_character].z;
+        Player_CheckSlot(slot);
+        some_struct2.unk0 = temp;
+        some_struct2.unk4 = slot;
+        some_struct2.bits.b0 = 1;  
+        some_struct2.bits.b1 = temp2; 
+        some_struct2.unk8 = -1;
+
+        player->player_entity[1] = func_80068E98(&some_struct2);
+        if (player->player_state != 1) {
+            player->player_state = 2;
+        }
+    }
+    if (player->player_state == 2) {
+        if (player->struct_func != 0) {
+            player->struct_func(slot);
+        }
+    }
+    
+}
+#else
+asm void Player_80031AD0(s32 slot)
 {
     nofralloc
 /* 80031AD0 0002E6B0  7C 08 02 A6 */	mflr r0
@@ -628,6 +713,7 @@ lbl_80031C9C:
 /* 80031CA8 0002E888  7C 08 03 A6 */	mtlr r0
 /* 80031CAC 0002E88C  4E 80 00 20 */	blr 
 }
+#endif
 
 #ifdef NON_MATCHING
 void Player_80031CB0(s32 id, s32 slot) {
