@@ -119,7 +119,7 @@ void inline Player_CheckSlot(s32 slot)
 
 // Matches when everything is moved over
 #ifdef NON_MATCHING
-StaticPlayer* Player_GetPtrForSlot(s32 slot)
+StaticPlayer* Player_GetPtrForSlot(s32 slot)   //// https://decomp.me/scratch/hmGdk
 {
     Player_CheckSlot(slot);
     return &player_slots[slot];
@@ -161,7 +161,7 @@ lbl_8003176C:
 #endif
 
 #ifdef NON_MATCHING
-void Player_80031790(s32 slot) {
+void Player_80031790(s32 slot) {   ///https://decomp.me/scratch/9pP0Z
 
     StaticPlayer* player;
     int i;
@@ -240,7 +240,7 @@ lbl_80031830:
 #endif
 
 #ifdef NON_MATCHING
-void Player_80031848(s32 slot) {
+void Player_80031848(s32 slot) {   ////https://decomp.me/scratch/FBhTW
     StaticPlayer* player;
     int i;
 
@@ -318,7 +318,7 @@ lbl_800318E8:
 #endif
 
 #ifdef NON_MATCHING
-void inline func_8008688C_wrapper(StaticPlayer* player)
+void inline func_8008688C_wrapper(StaticPlayer* player)   
 {
     if ((player->slot_type == 0) || (player->slot_type == 1)) {
         s32 i;
@@ -330,7 +330,7 @@ void inline func_8008688C_wrapper(StaticPlayer* player)
     }
 }
 
-void Player_80031900() {
+void Player_80031900() {   ///https://decomp.me/scratch/xsIjm
     s32 slot;
     for (slot = 0; slot < 6; slot++) {
         StaticPlayer* player = &player_slots[slot];
@@ -402,7 +402,7 @@ lbl_800319A0:
 #endif
 
 #ifdef NON_MATCHING
-BOOL Player_800319C4(s32 slot, BOOL arg1) {
+BOOL Player_800319C4(s32 slot, BOOL arg1) {    ///https://decomp.me/scratch/6QKX7
 
     s32 unused;
 
@@ -708,7 +708,7 @@ lbl_80031C9C:
 #endif
 
 #ifdef NON_MATCHING
-void Player_80031CB0(s32 id, s32 slot) {
+void Player_80031CB0(s32 id, s32 slot) {   ///https://decomp.me/scratch/LRPL8
     if (lbl_803BCDE0[id].x != -1) {
         func_800855C8(lbl_803BCDE0[id].x, slot);
     }
@@ -1061,7 +1061,7 @@ asm void Player_80031FB0()
 #endif
 
 #ifdef NON_MATCHING
-void Player_80032070(s32 slot, BOOL bool_arg) {   //// https://decomp.me/scratch/x7Gfq
+void Player_80032070(s32 slot, BOOL bool_arg) {   //// https://decomp.me/scratch/oHfiV
     StaticPlayer* player;
     struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
     Player_CheckSlot(slot);
@@ -1558,7 +1558,7 @@ asm s32 Player_8003248C(s32 slot, BOOL arg1)
 #endif
 
 #ifdef NON_MATCHING
-void Player_SetSlottype(s32 slot, s32 value) {
+void Player_SetSlottype(s32 slot, s32 value) {  ///https://decomp.me/scratch/DvmW6
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1606,7 +1606,7 @@ asm void Player_SetSlottype(s32 slot, s32 value)
 #endif
 
 #ifdef NON_MATCHING
-s8 Player_800325C8(s32 slot, BOOL b) {
+s8 Player_800325C8(s32 slot, BOOL b) {  ///https://decomp.me/scratch/pzY2P
     
     
     if (!b) {
