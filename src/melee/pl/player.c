@@ -103,15 +103,18 @@ ftMapping lbl_803BCDE0[33] = {   //////lbl_803BCDE0
 
 ////.bss
 StaticPlayer player_slots[6];  ///lbl_80453080
-struct _HSD_ObjAllocData lbl_804587E0;
+struct {
+    struct _HSD_ObjAllocData hsd_ObjAllocData;
+    u32 align;
+} lbl_804587E0;
 
 /////.sdata
-char lbl_803BCE44[27] = "cant get player struct! %d\n"; 
-char lbl_803BCE60[8] = "player.c";
-char lbl_804D3940[1] = "0";
+// char lbl_803BCE44[] = "cant get player struct! %d\n"; 
+// char lbl_803BCE60[8] = "player.c";
+// char lbl_804D3940[] = "0";
 
-f32 lbl_804D7F10 = 0.0f;
-f32 lbl_804D7F14 = 1.0f;
+// f32 lbl_804D7F10 = 0.0f;
+// f32 lbl_804D7F14 = 1.0f;
 
 extern s32 lbl_804D6470;
 
@@ -866,14 +869,15 @@ void Player_80031DA8(s32 param_1, s32 param_2)
 ////https://decomp.me/scratch/Iq3tA    old match that used struct casting to access the data
 //// https://decomp.me/scratch/NmgTm  new match only works if it loads from .data start ///TODO
 void Player_80031DC8(void func_arg(s32, s32)) {  
+
     s32 slot;
     for (slot = 0; slot < 6; slot++) {
         Player_CheckSlot(slot);
 
         if (player_slots[slot].player_state) {
-            func_arg(((struct Unk_Struct_w_Array*) &lbl_803BCDC0)->vec_arr[player_slots[slot].player_character].x, 0);
-            if (checkNegOne(&((struct Unk_Struct_w_Array*) &lbl_803BCDC0)->vec_arr[player_slots[slot].player_character].y)) {
-                func_arg(((struct Unk_Struct_w_Array*) &lbl_803BCDC0)->vec_arr[player_slots[slot].player_character].y, 0);
+            func_arg(lbl_803BCDE0[player_slots[slot].player_character].internal_id, 0);
+            if (checkNegOne(&lbl_803BCDE0[player_slots[slot].player_character].extra_internal_id)) {
+                func_arg(lbl_803BCDE0[player_slots[slot].player_character].extra_internal_id, 0);
             }
         }
     }
@@ -8545,7 +8549,7 @@ void Player_InitOrResetPlayer(s32 slot) {   ///https://decomp.me/scratch/VrWyd
     u8 *transformed1;
     f32 zerofloat;
     f32 onefloat;
-    s32 unused[16];
+    s32 unused[14];
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -8555,7 +8559,7 @@ void Player_InitOrResetPlayer(s32 slot) {   ///https://decomp.me/scratch/VrWyd
     transformed0 = &player->transformed[0];
     transformed1 = &player->transformed[1];
 
-    zerofloat = lbl_804D7F10;
+    zerofloat = 0.0f;
     player->player_poses.byIndex[*transformed0].z = zerofloat;
     player->player_poses.byIndex[*transformed0].y = zerofloat;
     player->player_poses.byIndex[*transformed0].x = zerofloat;
@@ -8590,7 +8594,7 @@ void Player_InitOrResetPlayer(s32 slot) {   ///https://decomp.me/scratch/VrWyd
     player->unk4D = 4;
     player->unk4E = -1;
 
-    onefloat = lbl_804D7F14;
+    onefloat = 1.0;
     player->unk50 = onefloat;
     player->attack_ratio = onefloat;
     player->defense_ratio = onefloat;
@@ -8934,7 +8938,7 @@ void Player_InitAllPlayers()
 
 #ifdef NON_MATCHING
 void Player_80036DA4() {  ///https://decomp.me/scratch/eQam5
-    HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
+    HSD_ObjAllocInit(&lbl_804587E0.hsd_ObjAllocData, 8, 4);
     func_80067A84();
 }
 #else
