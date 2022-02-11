@@ -94,8 +94,10 @@ ifeq ($(GENERATE_MAP),1)
 endif
 CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES)
 
+$(EPILOGUE_DIR)/src/melee/pl/player.o: CC_EPI := $(CC)
 $(EPILOGUE_DIR)/src/melee/lb/lbtime.o: CC_EPI := $(CC)
 $(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.o: CC_EPI := $(CC)
+
 
 HOSTCFLAGS := -Wall -O3 -s
 

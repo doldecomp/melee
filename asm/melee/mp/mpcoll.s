@@ -12828,6 +12828,7 @@ lbl_80458810:
 
 
 .section .sdata
+.balign 8
 
 .global lbl_804D3948
 lbl_804D3948:
