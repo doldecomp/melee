@@ -5608,13 +5608,13 @@ asm s32 Player_GetFalls(s32 slot)
 #endif
 
 #ifdef NON_MATCHING
-s32 Player_GetFallsByIndex(s32 slot, s32 index) {  ///https://decomp.me/scratch/HWwXV
+s32 Player_GetFallsByIndex(s32 slot, s32 arg1) {  ///https://decomp.me/scratch/biT7z
     StaticPlayer* player;
-    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
+    s32 falls;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-
-    return player->falls[player->transformed[index]];
+    falls = player->falls[player->transformed[arg1]];
+    return falls;
 }
 #else
 asm s32 Player_GetFallsByIndex(s32 slot, s32 index)
