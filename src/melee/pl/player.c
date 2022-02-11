@@ -2,34 +2,37 @@
 
 #define NON_MATCHING 1
 
-extern StaticPlayer player_slots[6];  // used to be [4] but I think should be 6?  ///lbl_80453080
 
-extern struct _HSD_ObjAllocData lbl_804587E0;
+typedef struct _ftMapping {
+    s8 internal_id;
+    s8 extra_internal_id;
+    s8 has_transformation;
+} ftMapping;
 
-struct Unk_Struct {
-    s32 unk0;
-    u8 unk4;
-    s32 unk8;
-    struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } bits;
-};
-
-
-struct Unk_Struct2 {
-    s32 unk0;
-    u8 unk4;
+struct plAllocInfo {
+    s32 internal_id;
+    u8 slot;
     s8 unk8;
     struct {
         u8 b0 : 1;
-        u8 b1 : 1;
+        u8 has_transformation : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } bits;
+};
+
+/// TODO probably the same struct as above, figure out how to make them work as one
+struct plAllocInfo2 {
+    s32 internal_id;
+    u8 slot;
+    s32 unk8;
+    struct {
+        u8 b0 : 1;
+        u8 has_transformation : 1;
         u8 b2 : 1;
         u8 b3 : 1;
         u8 b4 : 1;
@@ -40,34 +43,77 @@ struct Unk_Struct2 {
 };
 
 
-
+/// TODO delete after fixing functions that use this
 struct Unk_Struct_w_Array {
     char some_str[8+4];  //"PdPm.dat"
     char another_str[16+4]; 
     S8Vec vec_arr[30];  ///lbl_803BCDE0
 };
 
+///// delete all these comments
 // extern struct Unk_Struct {  //lbl_803BCDC0
 //     char some_str[8+4];  //"PdPm.dat"
 //     char another_str[16+4]; 
 //     //S8Vec vec_arr[30];  ///lbl_803BCDE0
 // } lbl_803BCDC0;
+// extern char lbl_803BCDC0[8+4];
+// extern char lbl_803BCDCC[16+4];
+// extern S8Vec lbl_803BCDE0[]; ///lbl_803BCDE0
 
-extern char lbl_803BCDC0[8+4];
-extern char lbl_803BCDCC[16+4];
+
+//// .data
+char lbl_803BCDC0[] = "PdPm.dat"; 
+char lbl_803BCDCC[] = "plLoadCommonData"; 
+ftMapping lbl_803BCDE0[33] = {   //////lbl_803BCDE0
+    { 0x02, 0xFF, 0x00 },
+    { 0x03, 0xFF, 0x00 },
+    { 0x01, 0xFF, 0x00 },
+    { 0x18, 0xFF, 0x00 },
+    { 0x04, 0xFF, 0x00 },
+    { 0x05, 0xFF, 0x00 },
+    { 0x06, 0xFF, 0x00 },
+    { 0x11, 0xFF, 0x00 },
+    { 0x00, 0xFF, 0x00 },
+    { 0x12, 0xFF, 0x00 },
+    { 0x10, 0xFF, 0x00 },
+    { 0x08, 0xFF, 0x00 },
+    { 0x09, 0xFF, 0x00 },
+    { 0x0C, 0xFF, 0x00 },
+    { 0x0A, 0x0B, 0x00 },
+    { 0x0F, 0xFF, 0x00 },
+    { 0x0D, 0xFF, 0x00 },
+    { 0x0E, 0xFF, 0x00 },
+    { 0x13, 0x07, 0x01 },
+    { 0x07, 0x13, 0x01 },
+    { 0x16, 0xFF, 0x00 },
+    { 0x14, 0xFF, 0x00 },
+    { 0x15, 0xFF, 0x00 },
+    { 0x1A, 0xFF, 0x00 },
+    { 0x17, 0xFF, 0x00 },
+    { 0x19, 0xFF, 0x00 },
+    { 0x1B, 0xFF, 0x00 },
+    { 0x1D, 0xFF, 0x00 },
+    { 0x1E, 0xFF, 0x00 },
+    { 0x1F, 0xFF, 0x00 },
+    { 0x1C, 0xFF, 0x00 },
+    { 0x20, 0xFF, 0x00 },
+    { 0x0A, 0xFF, 0x00 }
+}; ///lbl_803BCDE0
 
 
-extern S8Vec lbl_803BCDE0[]; ///lbl_803BCDE0
+////.bss
+StaticPlayer player_slots[6];  ///lbl_80453080
+struct _HSD_ObjAllocData lbl_804587E0;
 
-extern char* lbl_803BCE44; //"cant get player struct! %d\n"  /// likely apart of lbl_803BCDC0 struct
-extern char* lbl_803BCE60; //"player.c"
+/////.sdata
+char lbl_803BCE44[27] = "cant get player struct! %d\n"; 
+char lbl_803BCE60[8] = "player.c";
+char lbl_804D3940[1] = "0";
 
-extern char* lbl_804D3940; //"0"
+f32 lbl_804D7F10 = 0.0f;
+f32 lbl_804D7F14 = 1.0f;
 
 extern s32 lbl_804D6470;
-
-extern f32 lbl_804D7F10;
-extern f32 lbl_804D7F14;
 
 extern void ftData_SetScale();
 extern void func_SetEntityFacingDirection();
@@ -107,8 +153,11 @@ extern void func_80067A84();
 extern void func_80016C64(char*, s32**, char*, s32, ...);
 extern void func_800BEB60(s32, s32, s32);
 extern s32 func_800865F0(HSD_GObj*);
-extern HSD_GObj* func_800BE7E0(struct Unk_Struct*);
-extern HSD_GObj* func_80068E98(struct Unk_Struct2*);
+extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
+extern HSD_GObj* func_80068E98(struct plAllocInfo*);
+
+//// TODO after match this can probably be:  inline checkNegOne(ftMapping* data) { return data->extra_internal_id != -1; }
+inline checkNegOne(s8* num) { return *num != -1; }
 
 void inline Player_CheckSlot(s32 slot)
 {
@@ -515,51 +564,51 @@ lbl_80031AB8:
 #endif
 
 #ifdef NON_MATCHING
-void Player_80031AD0(s32 slot) {  ///https://decomp.me/scratch/VtNLl
+void Player_80031AD0(s32 slot) {  ///https://decomp.me/scratch/lYkLv
 
-    S8Vec* unused_vec;
-
-    struct Unk_Struct2 first_struct;
-    s32 struct_unk0;
-    s32 struct_bits_bit1;
+    struct plAllocInfo first_struct;
+    s32 internal_id;
+    s32 has_transformation;
     s8 byte_check;
-    S8Vec* temp_vec2;
+    s8* offset_arr;
     s32 unused;
-    struct Unk_Struct2 second_struct;
+    StaticPlayer* player;
+
+    struct plAllocInfo second_struct;
 
     s32 unused_buffer[3]; 
 
-    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
-
-    StaticPlayer* player;
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    temp_vec2 = unused_vec = (S8Vec*) (&unkStruct->vec_arr[0].y);
-    if (temp_vec2[player->player_character].x != -1) {
+    /// the commented line below makes more sense, but is off by one byte.
+    //  temp_vec = unused_ptr = lbl_803BCDE0;    //// replace
+    offset_arr = (s8*) (&lbl_803BCDE0[0].extra_internal_id);
+    if (offset_arr[player->player_character * sizeof(ftMapping)] != -1) {
         player->flags.b2 = 1;
     }
 
-    struct_unk0 = unkStruct->vec_arr[player->player_character].x;
+    internal_id = lbl_803BCDE0[player->player_character].internal_id;
     Player_CheckSlot(slot);
 
-    first_struct.unk0 = struct_unk0;
-    first_struct.unk4 = slot;
+    first_struct.internal_id = internal_id;
+    first_struct.slot = slot;
     first_struct.bits.b0 = 0; 
-    first_struct.bits.b1 = 0;  
+    first_struct.bits.has_transformation = 0;  
     first_struct.unk8 = -1;
 
     player->player_entity[0] = func_80068E98(&first_struct);
     player->player_state = 2;
-    struct_unk0 = byte_check = temp_vec2[player->player_character].x;
+
+    internal_id = byte_check = offset_arr[player->player_character * sizeof(ftMapping)];
     if (byte_check != -1) {
-        struct_bits_bit1 = unkStruct->vec_arr[player->player_character].z;
+        has_transformation = lbl_803BCDE0[player->player_character].has_transformation;
         Player_CheckSlot(slot);
-        second_struct.unk0 = struct_unk0;
-        second_struct.unk4 = slot;
+        second_struct.internal_id = internal_id;
+        second_struct.slot = slot;
         second_struct.bits.b0 = 1;  
-        second_struct.bits.b1 = struct_bits_bit1; 
+        second_struct.bits.has_transformation = has_transformation; 
         second_struct.unk8 = -1;
 
         player->player_entity[1] = func_80068E98(&second_struct);
@@ -711,11 +760,11 @@ lbl_80031C9C:
 
 #ifdef NON_MATCHING
 void Player_80031CB0(s32 id, s32 slot) {   ///https://decomp.me/scratch/LRPL8
-    if (lbl_803BCDE0[id].x != -1) {
-        func_800855C8(lbl_803BCDE0[id].x, slot);
+    if (lbl_803BCDE0[id].internal_id != -1) {
+        func_800855C8(lbl_803BCDE0[id].internal_id, slot);
     }
-    if (lbl_803BCDE0[id].y != -1) {
-        func_800855C8(lbl_803BCDE0[id].y, slot);
+    if (lbl_803BCDE0[id].extra_internal_id != -1) {
+        func_800855C8(lbl_803BCDE0[id].extra_internal_id, slot);
     }
 }
 #else
@@ -761,11 +810,11 @@ lbl_80031D14:
 
 #ifdef NON_MATCHING
 void Player_80031D2C(s32 id, s32 slot) {   ///https://decomp.me/scratch/50Zi6
-    if (lbl_803BCDE0[id].x != -1) {
-        func_8008578C(lbl_803BCDE0[id].x, slot);
+    if (lbl_803BCDE0[id].internal_id != -1) {
+        func_8008578C(lbl_803BCDE0[id].internal_id, slot);
     }
-    if (lbl_803BCDE0[id].y != -1) {
-        func_8008578C(lbl_803BCDE0[id].y, slot);
+    if (lbl_803BCDE0[id].extra_internal_id != -1) {
+        func_8008578C(lbl_803BCDE0[id].extra_internal_id, slot);
     }
 }
 #else
@@ -814,9 +863,9 @@ void Player_80031DA8(s32 param_1, s32 param_2)
 }
 
 #ifdef NON_MATCHING
-inline checkNegOne(s8* num) { return *num != -1; }
-
-void Player_80031DC8(void func_arg(s32, s32)) {   ////https://decomp.me/scratch/Iq3tA
+////https://decomp.me/scratch/Iq3tA    old match that used struct casting to access the data
+//// https://decomp.me/scratch/NmgTm  new match only works if it loads from .data start ///TODO
+void Player_80031DC8(void func_arg(s32, s32)) {  
     s32 slot;
     for (slot = 0; slot < 6; slot++) {
         Player_CheckSlot(slot);
@@ -1063,7 +1112,9 @@ asm void Player_80031FB0()
 #endif
 
 #ifdef NON_MATCHING
-void Player_80032070(s32 slot, BOOL bool_arg) {   //// https://decomp.me/scratch/oHfiV
+/// new match https://decomp.me/scratch/oHfiV  TODO
+//// old match https://decomp.me/scratch/8otnq
+void Player_80032070(s32 slot, BOOL bool_arg) {   
     StaticPlayer* player;
     struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
     Player_CheckSlot(slot);
@@ -1612,10 +1663,10 @@ s8 Player_800325C8(s32 slot, BOOL b) {  ///https://decomp.me/scratch/pzY2P
     
     
     if (!b) {
-        return lbl_803BCDE0[slot].x;
+        return lbl_803BCDE0[slot].internal_id;
     }
     else if (b == 1) {
-        return lbl_803BCDE0[slot].y;
+        return lbl_803BCDE0[slot].extra_internal_id;
     }
 
     return -1;
@@ -9048,31 +9099,29 @@ asm s32 Player_80036EA0(s32 slot)
 #endif
 
 #ifdef NON_MATCHING
-void Player_80036F34(s32 slot, s32 arg1) {   ///https://decomp.me/scratch/akDwH
-    struct Unk_Struct some_struct;
+//// old match with struct casting:  ///https://decomp.me/scratch/akDwH
+void Player_80036F34(s32 slot, s32 arg1) {    ///new and current match: https://decomp.me/scratch/OWKYS
+    struct plAllocInfo2 some_struct;
     u8 unused;
-
-    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
 
     StaticPlayer* player;
     
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    some_struct.unk0 = unkStruct->vec_arr[player->player_character].x;  /// stored at 0x14
-    some_struct.unk4 = (slot );  /// stored at 0x18
-    some_struct.bits.b1 = 0;  /// stored at 0x20
-    some_struct.unk8 = arg1;  /// stored at 0x1c
+    some_struct.internal_id = lbl_803BCDE0[player->player_character].internal_id;
+    some_struct.slot = slot;  
+    some_struct.bits.has_transformation = 0; 
+    some_struct.unk8 = arg1;  
     some_struct.bits.b0 = 0;
 
 
     player->slot_type = 2;
     player->player_entity[0] = func_800BE7E0(&some_struct);
-    if ((unkStruct->vec_arr[player->player_character].y != -1) && (unkStruct->vec_arr[player->player_character].z == 0)) {
-        some_struct.unk0 = unkStruct->vec_arr[player->player_character].y;
-        some_struct.bits.b1 = 1;
+    if ((lbl_803BCDE0[player->player_character].extra_internal_id != -1) && (lbl_803BCDE0[player->player_character].has_transformation == 0)) {
+        some_struct.internal_id = lbl_803BCDE0[player->player_character].extra_internal_id;
+        some_struct.bits.has_transformation = 1;
         player->player_entity[1] = func_800BE7E0(&some_struct);
-    }
-
+    }  
 }
 #else
 asm void Player_80036F34(s32 slot, s32 arg1)
@@ -9157,31 +9206,29 @@ asm void Player_80036F34(s32 slot, s32 arg1)
 #endif
 
 #ifdef NON_MATCHING
-void Player_80037054(s32 slot, s32 arg1) {  //https://decomp.me/scratch/OlKMt
-    struct Unk_Struct some_struct;
+/// old match with struct casting  //https://decomp.me/scratch/OlKMt 
+void Player_80037054(s32 slot, s32 arg1) {  /// new and current match: https://decomp.me/scratch/Hwk7w
+    struct plAllocInfo2 some_struct;
     u8 unused;
-
-    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
 
     StaticPlayer* player;
     
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    some_struct.unk0 = unkStruct->vec_arr[player->player_character].x;  /// stored at 0x14
-    some_struct.unk4 = (slot );  /// stored at 0x18
-    some_struct.bits.b1 = 0;  /// stored at 0x20
-    some_struct.unk8 = arg1;  /// stored at 0x1c
+    some_struct.internal_id = lbl_803BCDE0[player->player_character].internal_id;  
+    some_struct.slot = slot;  
+    some_struct.bits.has_transformation = 0;  
+    some_struct.unk8 = arg1;  
     some_struct.bits.b0 = 1;
 
 
     player->slot_type = 2;
     player->player_entity[0] = func_800BE7E0(&some_struct);
-    if ((unkStruct->vec_arr[player->player_character].y != -1) && (unkStruct->vec_arr[player->player_character].z == 0)) {
-        some_struct.unk0 = unkStruct->vec_arr[player->player_character].y;
-        some_struct.bits.b1 = 1;
+    if ((lbl_803BCDE0[player->player_character].extra_internal_id != -1) && (lbl_803BCDE0[player->player_character].has_transformation == 0)) {
+        some_struct.internal_id = lbl_803BCDE0[player->player_character].extra_internal_id;
+        some_struct.bits.has_transformation = 1;
         player->player_entity[1] = func_800BE7E0(&some_struct);
     }
-
 }
 #else
 asm void Player_80037054(s32 slot, s32 arg1)
