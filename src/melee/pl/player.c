@@ -40,6 +40,7 @@ struct Unk_Struct2 {
 };
 
 
+
 struct Unk_Struct_w_Array {
     char some_str[8+4];  //"PdPm.dat"
     char another_str[16+4]; 
@@ -514,17 +515,19 @@ lbl_80031AB8:
 #endif
 
 #ifdef NON_MATCHING
-void Player_80031AD0(s32 slot) {   ////https://decomp.me/scratch/1KLIF  /// Only function not matching -- TODO -- 1 register swap
+void Player_80031AD0(s32 slot) {  ///https://decomp.me/scratch/VtNLl
 
-    s8* temp_vec;
+    S8Vec* unused_vec;
 
-    struct Unk_Struct2 some_struct;
-    s32 temp;
-    s32 temp2;
-    s8 temp3;
-    struct Unk_Struct2 some_struct2;
+    struct Unk_Struct2 first_struct;
+    s32 struct_unk0;
+    s32 struct_bits_bit1;
+    s8 byte_check;
+    S8Vec* temp_vec2;
+    s32 unused;
+    struct Unk_Struct2 second_struct;
 
-    s32 buffer[3]; 
+    s32 unused_buffer[3]; 
 
     struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &lbl_803BCDC0;
 
@@ -533,33 +536,33 @@ void Player_80031AD0(s32 slot) {   ////https://decomp.me/scratch/1KLIF  /// Only
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    temp_vec = (s8*) (&unkStruct->vec_arr) + 1;
-    if (temp_vec[player->player_character * 3] != -1) {
+    temp_vec2 = unused_vec = (S8Vec*) (&unkStruct->vec_arr[0].y);
+    if (temp_vec2[player->player_character].x != -1) {
         player->flags.b2 = 1;
     }
 
-    temp = unkStruct->vec_arr[player->player_character].x;
+    struct_unk0 = unkStruct->vec_arr[player->player_character].x;
     Player_CheckSlot(slot);
 
-    some_struct.unk0 = temp;
-    some_struct.unk4 = slot;
-    some_struct.bits.b0 = 0; 
-    some_struct.bits.b1 = 0;  
-    some_struct.unk8 = -1;
+    first_struct.unk0 = struct_unk0;
+    first_struct.unk4 = slot;
+    first_struct.bits.b0 = 0; 
+    first_struct.bits.b1 = 0;  
+    first_struct.unk8 = -1;
 
-    player->player_entity[0] = func_80068E98(&some_struct);
+    player->player_entity[0] = func_80068E98(&first_struct);
     player->player_state = 2;
-    temp = temp_vec[player->player_character * 3];
-    if (temp != -1) {
-        temp2 = unkStruct->vec_arr[player->player_character].z;
+    struct_unk0 = byte_check = temp_vec2[player->player_character].x;
+    if (byte_check != -1) {
+        struct_bits_bit1 = unkStruct->vec_arr[player->player_character].z;
         Player_CheckSlot(slot);
-        some_struct2.unk0 = temp;
-        some_struct2.unk4 = slot;
-        some_struct2.bits.b0 = 1;  
-        some_struct2.bits.b1 = temp2; 
-        some_struct2.unk8 = -1;
+        second_struct.unk0 = struct_unk0;
+        second_struct.unk4 = slot;
+        second_struct.bits.b0 = 1;  
+        second_struct.bits.b1 = struct_bits_bit1; 
+        second_struct.unk8 = -1;
 
-        player->player_entity[1] = func_80068E98(&some_struct2);
+        player->player_entity[1] = func_80068E98(&second_struct);
         if (player->player_state != 1) {
             player->player_state = 2;
         }
@@ -569,7 +572,6 @@ void Player_80031AD0(s32 slot) {   ////https://decomp.me/scratch/1KLIF  /// Only
             player->struct_func(slot);
         }
     }
-    
 }
 #else
 asm void Player_80031AD0(s32 slot)
