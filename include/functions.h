@@ -8636,7 +8636,7 @@ void func_80379310();
 // ? func_80379C24(?);
 // ? func_80379F6C(?);
 // ? func_80379F88(?);
-// ? func_8037A120(?);
+void HSD_MkRotationMtx(Mtx, Quaternion*);
 // ? func_8037A230(?);
 void func_8037A250();
 // ? func_8037A43C(?);

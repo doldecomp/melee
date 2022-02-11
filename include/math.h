@@ -3,6 +3,8 @@
 
 #pragma cplusplus on
 
+#define FLT_EPSILON 1.00000001335e-10
+
 extern inline float sqrtf(float x)
 {
 static const double _half=.5;
