@@ -55,7 +55,9 @@ typedef struct _Fighter {
     u32 data_filler_2[(0x618 - 0x2DC) / 4];
     /* 0x618 */ s8 x618_flag;
     /* 0x619 */ s8 x619_flag;
-    u32 data_filler_3[(0x2226 - 0x61C) / 4];
+    u32 data_filler_3[(0x2224 - 0x61C) / 4];
+    /* 0x2227 */ u8 x2224;
+    /* 0x2227 */ u8 x2225;
     /* 0x2226 */ Unk_Struct x2226_flag;
     /* 0x2227 */ u8 x2227;
     /* 0x2228 */ Unk_Struct x2228_flag;
