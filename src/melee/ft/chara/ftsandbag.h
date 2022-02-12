@@ -12,6 +12,6 @@
 void ftSandbag_OnLoad(HSD_GObj* gobj);
 void func_8014FA30(Fighter* fighter);
 u32 func_8014FB78(HSD_GObj* gobj);
-void func_8014FBA4(HSD_GObj* gobj)
+void func_8014FBA4(HSD_GObj* gobj);
 
 #endif
