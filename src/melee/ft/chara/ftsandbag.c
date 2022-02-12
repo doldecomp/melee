@@ -16,6 +16,8 @@ typedef struct _UnkFighterStruct
 
 extern struct UnkFighterStruct* lbl_804D6554;
 
+void func_8014F9CC() {}
+
 void ftSandbag_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fighter = gobj->user_data;
@@ -39,7 +41,12 @@ void ftSandbag_OnLoad(HSD_GObj* gobj)
     func_8014FA30(fighter);
 }
 
-u32 func_8014FB78(HSD_GObj* gobj) {
+void func_8014FB9C() {}
+
+void func_8014FBA0() {}
+
+u32 func_8014FB78(HSD_GObj* gobj)
+{
     Fighter* fighter = gobj->user_data;
     ftData* fighter_data = fighter->x10C_ftData;
 
@@ -56,7 +63,8 @@ u32 func_8014FB78(HSD_GObj* gobj) {
     return ext_attr_first;
 }
 
-void func_8014FBA4(HSD_GObj* gobj) {
+void func_8014FBA4(HSD_GObj* gobj)
+{
     f32 temp_f1;
 
     Fighter* fighter = gobj->user_data;
@@ -68,7 +76,8 @@ void func_8014FBA4(HSD_GObj* gobj) {
     //func_8007EFC0(fighter, lbl_804D6554->x5F0);
 }
 
-void func_8014FA30(Fighter* fighter) {
+void func_8014FA30(Fighter* fighter)
+{
     FighterBone* bones = fighter->x5E8_fighterBones;
     func_8000C1C0(bones[5].x0_joint, bones[12].x0_joint);
     bones = fighter->x5E8_fighterBones;
@@ -98,20 +107,15 @@ void func_8014FA30(Fighter* fighter) {
     func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 2, -1.50098f);
 }
 
-void lbl_8014FC28() {
+void lbl_8014FC28()
+{
     func_80084F3C();
 }
 
-
-void lbl_8014FC48() {
+void lbl_8014FC48()
+{
     func_80083F88();
 }
-
-void func_8014F9CC() {}
-
-void func_8014FB9C() {}
-
-void func_8014FBA0() {}
 
 void lbl_8014FC20() {}
 
