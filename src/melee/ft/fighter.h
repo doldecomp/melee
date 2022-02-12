@@ -32,6 +32,19 @@ typedef struct _ftData
     void* x58;
 } ftData;
 
+typedef struct _Unk_Struct {
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } bits;
+} Unk_Struct;
+
 typedef struct _Fighter {
     /* 0x00 */ HSD_GObj* x0_fighter;
     u32 data_filler_0[(0x10C - 0x4) / 4];
@@ -42,7 +55,11 @@ typedef struct _Fighter {
     u32 data_filler_2[(0x618 - 0x2DC) / 4];
     /* 0x618 */ s8 x618_flag;
     /* 0x619 */ s8 x619_flag;
-    u32 data_filler_3[(0x222C - 0x61C) / 4];
+    u32 data_filler_3[(0x2226 - 0x61C) / 4];
+    /* 0x2226 */ Unk_Struct x2226_flag;
+    /* 0x2227 */ u8 x2227;
+    /* 0x2228 */ Unk_Struct x2228_flag;
+    u32 data_filler_4[0x4];
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
