@@ -47,9 +47,9 @@ typedef struct _Unk_Struct {
 
 typedef struct _FighterBone
 {
-    u32 *joint; // 0x00
-    u32 *joint2; // 0x04 used for interpolation
-    u32 padding[2];
+    u32 *x0_joint; // 0x00
+    u32 *x4_joint2; // 0x04 used for interpolation
+    u32 data_filler[2];
 } FighterBone;
 
 typedef struct _Fighter {

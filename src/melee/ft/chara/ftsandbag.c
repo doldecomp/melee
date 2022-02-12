@@ -70,30 +70,49 @@ void func_8014FBA4(HSD_GObj* gobj) {
 
 void func_8014FA30(Fighter* fighter) {
     FighterBone* bones = fighter->x5E8_fighterBones;
-    func_8000C1C0(bones[5].joint, bones[12].joint);
+    func_8000C1C0(bones[5].x0_joint, bones[12].x0_joint);
     bones = fighter->x5E8_fighterBones;
-    func_8000C1C0(bones[5].joint2, bones[12].joint2);
+    func_8000C1C0(bones[5].x4_joint2, bones[12].x4_joint2);
     bones = fighter->x5E8_fighterBones;
-    func_8000C1C0(bones[5].joint, bones[17].joint);
+    func_8000C1C0(bones[5].x0_joint, bones[17].x0_joint);
     bones = fighter->x5E8_fighterBones;
-    func_8000C1C0(bones[5].joint2, bones[17].joint2);
+    func_8000C1C0(bones[5].x4_joint2, bones[17].x4_joint2);
     bones = fighter->x5E8_fighterBones;
-    func_8000C228(bones[7].joint, bones[37].joint);
+    func_8000C228(bones[7].x0_joint, bones[37].x0_joint);
     bones = fighter->x5E8_fighterBones;
-    func_8000C228(bones[7].joint2, bones[37].joint2);
+    func_8000C228(bones[7].x4_joint2, bones[37].x4_joint2);
 
-    func_8000C420(fighter->x5E8_fighterBones[7].joint, 1, -1.5708f);
-    func_8000C420(fighter->x5E8_fighterBones[7].joint, 2, -1.5708f);
-    func_8000C420(fighter->x5E8_fighterBones[7].joint2, 1, -1.5708f);
-    func_8000C420(fighter->x5E8_fighterBones[7].joint2, 2, -1.5708f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x0_joint, 1, -1.5708f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x0_joint, 2, -1.5708f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x4_joint2, 1, -1.5708f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x4_joint2, 2, -1.5708f);
 
     bones = fighter->x5E8_fighterBones;
-    func_8000C228(bones[6].joint, bones[5].joint);
+    func_8000C228(bones[6].x0_joint, bones[5].x0_joint);
     bones = fighter->x5E8_fighterBones;
-    func_8000C228(bones[6].joint2, bones[5].joint2);
+    func_8000C228(bones[6].x4_joint2, bones[5].x4_joint2);
 
-    func_8000C420(fighter->x5E8_fighterBones[6].joint, 1, -1.50098f);
-    func_8000C420(fighter->x5E8_fighterBones[6].joint, 2, -1.50098f);
-    func_8000C420(fighter->x5E8_fighterBones[6].joint2, 1, -1.50098f);
-    func_8000C420(fighter->x5E8_fighterBones[6].joint2, 2, -1.50098f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x0_joint, 1, -1.50098f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x0_joint, 2, -1.50098f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 1, -1.50098f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 2, -1.50098f);
 }
+
+void lbl_8014FC28() {
+    func_80084F3C();
+}
+
+
+void lbl_8014FC48() {
+    func_80083F88();
+}
+
+void func_8014F9CC() {}
+
+void func_8014FB9C() {}
+
+void func_8014FBA0() {}
+
+void lbl_8014FC20() {}
+
+void lbl_8014FC24() {}
