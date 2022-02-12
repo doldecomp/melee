@@ -45,6 +45,13 @@ typedef struct _Unk_Struct {
     } bits;
 } Unk_Struct;
 
+typedef struct _FighterBone
+{
+    u32 *joint; // 0x00
+    u32 *joint2; // 0x04 used for interpolation
+    u32 padding[2];
+} FighterBone;
+
 typedef struct _Fighter {
     /* 0x00 */ HSD_GObj* x0_fighter;
     u32 data_filler_0[(0xE0 - 0x4) / 4];
@@ -54,7 +61,9 @@ typedef struct _Fighter {
     u32 data_filler_2[(0x2D4 - 0x110) / 4];
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
-    u32 data_filler_3[(0x618 - 0x2DC) / 4];
+    u32 data_filler_3[(0x5E8 - 0x2DC) / 4];
+    /* 0x538 */ FighterBone* x5E8_fighterBones;
+    u32 data_filler_6[(0x618 - 0x5EC) / 4];
     /* 0x618 */ s8 x618_flag;
     /* 0x619 */ s8 x619_flag;
     u32 data_filler_4[(0x2224 - 0x61C) / 4];
