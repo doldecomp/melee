@@ -14,7 +14,7 @@ typedef struct _UnkFighterStruct
     u32 data_filler_1[(0x810 - 0x5f4) / 4];
 } UnkFighterStruct;
 
-extern struct UnkFighterStruct* lbl_804D6554;
+extern UnkFighterStruct* lbl_804D6554;
 
 void func_8014F9CC() {}
 
@@ -39,41 +39,6 @@ void ftSandbag_OnLoad(HSD_GObj* gobj)
     fighter->x2226_flag.bits.b0 = 1;
 
     func_8014FA30(fighter);
-}
-
-void func_8014FB9C() {}
-
-void func_8014FBA0() {}
-
-u32 func_8014FB78(HSD_GObj* gobj)
-{
-    Fighter* fighter = gobj->user_data;
-    ftData* fighter_data = fighter->x10C_ftData;
-
-    PairStruct *special_attr = (PairStruct *)fighter->x2D4_specialAttributes;
-
-    PairStruct* ext_attr = (PairStruct *)fighter_data->ext_attr;
-
-    s32 ext_attr_first = ext_attr->x0_first;
-    s32 ext_attr_second = ext_attr->x4_second;
-
-    special_attr->x0_first = ext_attr_first;
-    special_attr->x4_second = ext_attr_second;
-
-    return ext_attr_first;
-}
-
-void func_8014FBA4(HSD_GObj* gobj)
-{
-    f32 temp_f1;
-
-    Fighter* fighter = gobj->user_data;
-    if ((s32) fighter->xE0_airState == 1) {
-        func_8007D7FC(fighter);
-    }
-
-    func_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
-    //func_8007EFC0(fighter, lbl_804D6554->x5F0);
 }
 
 void func_8014FA30(Fighter* fighter)
@@ -107,6 +72,45 @@ void func_8014FA30(Fighter* fighter)
     func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 2, -1.50098f);
 }
 
+u32 func_8014FB78(HSD_GObj* gobj)
+{
+    Fighter* fighter = gobj->user_data;
+    ftData* fighter_data = fighter->x10C_ftData;
+
+    PairStruct *special_attr = (PairStruct *)fighter->x2D4_specialAttributes;
+
+    PairStruct* ext_attr = (PairStruct *)fighter_data->ext_attr;
+
+    s32 ext_attr_first = ext_attr->x0_first;
+    s32 ext_attr_second = ext_attr->x4_second;
+
+    special_attr->x0_first = ext_attr_first;
+    special_attr->x4_second = ext_attr_second;
+
+    return ext_attr_first;
+}
+
+void func_8014FB9C() {}
+
+void func_8014FBA0() {}
+
+void func_8014FBA4(HSD_GObj* gobj)
+{
+    f32 temp_f1;
+
+    Fighter* fighter = gobj->user_data;
+    if ((s32) fighter->xE0_airState == 1) {
+        func_8007D7FC(fighter);
+    }
+
+    func_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
+    func_8007EFC0(fighter, lbl_804D6554->x5F0);
+}
+
+void lbl_8014FC20() {}
+
+void lbl_8014FC24() {}
+
 void lbl_8014FC28()
 {
     func_80084F3C();
@@ -116,7 +120,3 @@ void lbl_8014FC48()
 {
     func_80083F88();
 }
-
-void lbl_8014FC20() {}
-
-void lbl_8014FC24() {}
