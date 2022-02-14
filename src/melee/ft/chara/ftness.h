@@ -8,8 +8,13 @@
 #include "melee/ft/fighter.h"
 
 typedef struct _ftNessAttributes {
-    u8 data[0x94];
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    u8 data[0x94 - 0x10];
     f32 unk94;
+    u8 data2[0xD9 - 0x98];
 } ftNessAttributes;
 
 void func_801147C0(HSD_GObj* gobj, s32 arg1);
