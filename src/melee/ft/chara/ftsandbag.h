@@ -9,12 +9,12 @@
 
 #include "melee/ft/fighter.h"
 
-void func_8014F9CC();
+void ftSandbag_OnDeath();
 void ftSandbag_OnLoad(HSD_GObj* gobj);
 void func_8014FA30(Fighter* fighter);
 u32 func_8014FB78(HSD_GObj* gobj);
 
-void func_8014FB9C();
+void ftSandbag_OnKnockbackEnter();
 void func_8014FBA0();
 
 void func_8014FBA4(HSD_GObj* gobj);

@@ -15,7 +15,7 @@ typedef struct _UnkFighterStruct
 
 extern UnkFighterStruct* lbl_804D6554;
 
-void func_8014F9CC() {}
+void ftSandbag_OnDeath() {}
 
 void ftSandbag_OnLoad(HSD_GObj* gobj)
 {
@@ -82,7 +82,7 @@ u32 func_8014FB78(HSD_GObj* gobj)
     return ext_attr_first;
 }
 
-void func_8014FB9C() {}
+void ftSandbag_OnKnockbackEnter() {}
 
 void func_8014FBA0() {}
 
