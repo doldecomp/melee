@@ -49,3 +49,11 @@ void func_800E55A8(HSD_GObj* gobj, s32 arg1)
         }
     }
 }
+
+void func_800E5688(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+
+    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
+        func_80070CC4(gobj, 1);
+    }
+}

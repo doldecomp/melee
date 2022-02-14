@@ -1243,7 +1243,7 @@ void func_800693AC(void*, s32, s32, s32, f32, f32, f32);
 // ? func_80070A10(?);
 // ? ftAnim_ApplyPartAnim(?);
 void func_80070C48(struct _HSD_GObj*, s32);
-// ? func_80070CC4(?);
+void func_80070CC4(struct _HSD_GObj*, s32); 
 // ? func_80070E74(?);
 // ? func_80070F28(?);
 void func_80070FB4(struct _HSD_GObj*, s32, s32);
