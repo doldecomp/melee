@@ -54,7 +54,7 @@ void func_800E5688(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
 
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
+    if (func_8026B2B4(ft->x1974_heldItem) == NULL) {
         func_80070CC4(gobj, 1);
     }
 }
@@ -63,7 +63,7 @@ void func_800E56D0(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
 
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
+    if (func_8026B2B4(ft->x1974_heldItem) == NULL) {
         func_80070C48(gobj, 1);
     }
 }

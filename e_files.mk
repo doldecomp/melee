@@ -8,6 +8,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/lb/lbfile.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbarchive.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftfox.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftness.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpeach.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftsandbag.o\
 	$(EPILOGUE_DIR)/src/melee/gr/stage.o\
