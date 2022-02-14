@@ -59,7 +59,7 @@ ifeq ($(EPILOGUE_PROCESS),1)
 MWCC_EPI_VERSION := 1.2.5e
 MWCC_EPI_EXE := mwcceppc.exe
 endif
-MWCC_LD_VERSION := 1.2.5
+MWCC_LD_VERSION := 1.1
 
 # Programs
 ifeq ($(WINDOWS),1)
