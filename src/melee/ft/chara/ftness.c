@@ -194,32 +194,16 @@ void func_80114AD8(HSD_GObj* gobj, s32 arg1)
         func_80070CC4(gobj, 1);
     }
 }
-#pragma pop
 
-asm void func_80114B2C(HSD_GObj* gobj)
+void func_80114B2C(HSD_GObj* gobj) 
 {
-    nofralloc
-/* 80114B2C 0011170C  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 80114B30 00111710  38 00 00 1B */	li r0, 0x1b
-/* 80114B34 00111714  7C 09 03 A6 */	mtctr r0
-/* 80114B38 00111718  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 80114B3C 0011171C  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 80114B40 00111720  80 84 00 04 */	lwz r4, 4(r4)
-/* 80114B44 00111724  38 A3 FF F8 */	addi r5, r3, -8
-/* 80114B48 00111728  38 84 FF F8 */	addi r4, r4, -8
-lbl_80114B4C:
-/* 80114B4C 0011172C  84 64 00 08 */	lwzu r3, 8(r4)
-/* 80114B50 00111730  80 04 00 04 */	lwz r0, 4(r4)
-/* 80114B54 00111734  94 65 00 08 */	stwu r3, 8(r5)
-/* 80114B58 00111738  90 05 00 04 */	stw r0, 4(r5)
-/* 80114B5C 0011173C  42 00 FF F0 */	bdnz lbl_80114B4C
-/* 80114B60 00111740  80 04 00 08 */	lwz r0, 8(r4)
-/* 80114B64 00111744  90 05 00 08 */	stw r0, 8(r5)
-/* 80114B68 00111748  4E 80 00 20 */	blr 
+    Fighter* ft = gobj->user_data;
+    
+    ftNessAttributes* sA2 = (ftNessAttributes*)ft->x2D4_specialAttributes;
+    ftNessAttributes* ext_attr = (ftNessAttributes*)ft->x10C_ftData->ext_attr;
+    *sA2 = *ext_attr;
 }
 
-#pragma push
-#pragma peephole on
 void func_80114B6C(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, lbl_804D96B0);
