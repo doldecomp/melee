@@ -1,4 +1,4 @@
-#include "dolphin/dsp/dsp.h"
+#include <dolphin/dsp/dsp.h>
 
 extern BOOL __DSP_init_flag;
 
