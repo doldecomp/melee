@@ -48,20 +48,20 @@ void func_8014FA30(Fighter* fighter)
     bones = fighter->x5E8_fighterBones;
     func_8000C228(bones[7].x4_joint2, bones[37].x4_joint2);
 
-    func_8000C420(fighter->x5E8_fighterBones[7].x0_joint, 1, -1.5708f);
-    func_8000C420(fighter->x5E8_fighterBones[7].x0_joint, 2, -1.5708f);
-    func_8000C420(fighter->x5E8_fighterBones[7].x4_joint2, 1, -1.5708f);
-    func_8000C420(fighter->x5E8_fighterBones[7].x4_joint2, 2, -1.5708f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x0_joint, 1, -1.57079637f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x0_joint, 2, -1.57079637f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x4_joint2, 1, -1.57079637f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x4_joint2, 2, -1.57079637f);
 
     bones = fighter->x5E8_fighterBones;
     func_8000C228(bones[6].x0_joint, bones[5].x0_joint);
     bones = fighter->x5E8_fighterBones;
     func_8000C228(bones[6].x4_joint2, bones[5].x4_joint2);
 
-    func_8000C420(fighter->x5E8_fighterBones[6].x0_joint, 1, -1.50098f);
-    func_8000C420(fighter->x5E8_fighterBones[6].x0_joint, 2, -1.50098f);
-    func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 1, -1.50098f);
-    func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 2, -1.50098f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x0_joint, 1, -1.50098311f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x0_joint, 2, -1.50098311f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 1, -1.50098311f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 2, -1.50098311f);
 }
 
 u32 func_8014FB78(HSD_GObj* gobj)
