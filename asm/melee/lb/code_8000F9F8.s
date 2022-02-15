@@ -6671,7 +6671,7 @@ lbl_800158B4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BA150
 lbl_803BA150:
     .asciz "active deffect:"
