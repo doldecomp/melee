@@ -35,7 +35,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/cm/cmsnap.o 				\
 													\
 	$(BUILD_DIR)/src/melee/pl/player.o 		 	    \
-	$(BUILD_DIR)/asm/melee/pl/player.o 		 	    \
 	$(BUILD_DIR)/asm/melee/pl/code_8003715C.o 		\
 													\
 	$(BUILD_DIR)/asm/melee/mp/mpcoll.o 				\
