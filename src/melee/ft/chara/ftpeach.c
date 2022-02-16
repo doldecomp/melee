@@ -23,7 +23,7 @@ void func_8011B51C(HSD_GObj* gobj)
     func_80074A4C(gobj, 3, -1);
     func_80074A4C(gobj, 4, 0);
 
-    switch (ft->x619_flag)
+    switch (ft->x619_costumeID)
     {
         case 1:
             func_80074A4C(gobj, 1, -1);
