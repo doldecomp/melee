@@ -5,6 +5,11 @@
 
 #include "sysdolphin/baselib/gobj.h"
 
+typedef struct _CommonAttributes {
+    u8 padding[0x498];
+    u32 x498_ledgeCooldownTime;
+} CommonAttributes;
+
 typedef struct _ftData
 {
     /* 0x00 */ s32* common_attr;
@@ -52,29 +57,60 @@ typedef struct _FighterBone
     u32 data_filler[2];
 } FighterBone;
 
+typedef struct _CameraBox
+{
+    u32 data_filler[3];
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xC_flag;
+} CameraBox;
+
+typedef struct _CollData
+{
+    u8 data[0x1A0];
+} CollData;
+
 typedef struct _Fighter {
     /* 0x00 */ HSD_GObj* x0_fighter;
-    u32 data_filler_0[(0xE0 - 0x4) / 4];
+    u32 data_filler_0[(0x2C - 0x4) / 4];
+    float x2C_facingDirection;
+    u32 data_filler_1[(0xB0 - 0x30) / 4];
+    Vec xB0_pos;
+    u32 data_filler_2[(0xE0 - 0xBC) / 4];
     u32 xE0_airState;
-    u32 data_filler_1[(0x10C - 0xE4) / 4];
+    u32 data_filler_3[(0x10C - 0xE4) / 4];
     /* 0x10C */ ftData* x10C_ftData;
-    u32 data_filler_2[(0x2D4 - 0x110) / 4];
+    u32 data_filler_4[(0x2D4 - 0x110) / 4];
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
-    u32 data_filler_3[(0x5E8 - 0x2DC) / 4];
+    u32 data_filler_5[(0x5E8 - 0x2DC) / 4];
     /* 0x538 */ FighterBone* x5E8_fighterBones;
-    u32 data_filler_4[(0x618 - 0x5EC) / 4];
+    u32 data_filler_6[(0x618 - 0x5EC) / 4];
     /* 0x618 */ s8 x618_flag;
     /* 0x619 */ s8 x619_flag;
-    u32 data_filler_5[(0x1974 - 0x61C) / 4];
+    u32 data_filler_7[(0x68C - 0x61C) / 4];
+    Vec x68C;
+    u32 data_filler_8[(0x6F0 - 0x698) / 4];
+    CollData x6F0_collData;
+    CameraBox* x890;
+    u32 data_filler_9[(0x2064 - 0x894) / 4];
+    u32 x2064_ledgeCooldown;
+    u32 data_filler_10[(0x2224 - 0x2068) / 4];
     /* 0x1974 */ void* x1974_heldItem;
-    u32 data_filler_6[(0x2224 - 0x1978) / 4];
+    u32 data_filler_11[(0x2224 - 0x1978) / 4];
     /* 0x2224 */ u8 x2224;
     /* 0x2225 */ u8 x2225;
     /* 0x2226 */ UnkFlagStruct x2226_flag;
     /* 0x2227 */ u8 x2227;
     /* 0x2228 */ UnkFlagStruct x2228_flag;
-    /* 0x2229 */ u8 data_filler_7[3];
+    /* 0x2229 */ u8 data_filler_12[3];
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -84,6 +120,8 @@ typedef struct _Fighter {
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
     /* 0x224C */ u32 x224C;
+    u32 data_filler_13[(0x2340 - 0x2250) / 4];
+    u32 x2340_stateVar;                 //
 } Fighter;
 
 #endif
