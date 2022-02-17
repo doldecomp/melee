@@ -2,9 +2,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include "fighter.h"
 
-void func_800C1E64(HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32); // UnclePunch Map file: AS_203_PassiveWalljump_Walljump.
-s32 func_800567C0(s32 /*wallID?*/, Vec* /*ecb_side_vertex?*/, Vec* result); // UnclePunch Map file: Collision_GetPositionDifference.
-
 extern ftCommonData* lbl_804D6554; // defined in fighter.s
 #define p_ftcommon_r4 lbl_804D6554
 
