@@ -46,6 +46,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ef/code_80061D70.o		\
 	$(BUILD_DIR)/asm/melee/ef/efasync.o				\
 													\
+	$(BUILD_DIR)/src/melee/ft/fighter.o 			\
 	$(BUILD_DIR)/asm/melee/ft/fighter.o 			\
 	$(BUILD_DIR)/asm/melee/ft/ftanim.o 				\
 	$(BUILD_DIR)/asm/melee/ft/ftaction.o 			\
