@@ -505,7 +505,7 @@ lbl_80344DFC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80401BF0
 lbl_80401BF0:
     .asciz ">>> L2 INVALIDATE : SHOULD NEVER HAPPEN\n"

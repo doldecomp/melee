@@ -713,7 +713,7 @@ lbl_803B94FC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406BC0
 lbl_80406BC0:
     .asciz "initialize.c"

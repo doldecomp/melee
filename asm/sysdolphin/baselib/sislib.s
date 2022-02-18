@@ -4426,7 +4426,7 @@ func_803A947C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_8040C490
 lbl_8040C490:
     .4byte NULL

@@ -1580,7 +1580,7 @@ lbl_803B9570:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406D68
 lbl_80406D68:
     .4byte NULL

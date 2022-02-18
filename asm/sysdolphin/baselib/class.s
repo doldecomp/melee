@@ -958,7 +958,7 @@ lbl_80382A2C:
 
 
 .section .data
-
+    .balign 8
     .asciz "entry %d <null>\n"
     .balign 4
     .asciz "entry %d - %d <null>\n"

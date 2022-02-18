@@ -532,7 +532,7 @@ lbl_802F3AC0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F94D0
 lbl_803F94D0:
     .asciz "ScInfDmg_scene_data"

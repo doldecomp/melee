@@ -1322,7 +1322,7 @@ func_802FC998:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F97C0
 lbl_803F97C0:
     .4byte NULL

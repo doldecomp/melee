@@ -1036,8 +1036,7 @@ lbl_803801B0:
 
 
 .section .data
-
-    .4byte NULL
+    .balign 8
 .global lbl_80407310
 lbl_80407310:
     .asciz "shadow.c"

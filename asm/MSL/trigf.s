@@ -1,5 +1,7 @@
 .include "macros.inc"
+
 .section .text, "ax"
+
 .global tanf
 tanf:
 /* 803261BC 00322D9C  7C 08 02 A6 */	mflr r0
@@ -287,6 +289,7 @@ tmp_float:
 	.float 1.867365E-11
 
 .section .data, "wa"
+    .balign 8
 .global lbl_80400770
 lbl_80400770:
     .4byte 0x7FFFFFFF

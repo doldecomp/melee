@@ -279,7 +279,7 @@ lbl_80345A3C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80401FF8
 lbl_80401FF8:
     .asciz " in \"%s\" on line %d.\n"

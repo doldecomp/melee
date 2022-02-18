@@ -4011,7 +4011,7 @@ HSD_SynthInit:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407D90
 lbl_80407D90:
     .asciz "audio heap overflow.\n"
