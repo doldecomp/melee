@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80149ACC
-func_80149ACC:
+.global ftFalco_OnDeath
+ftFalco_OnDeath:
 /* 80149ACC 001466AC  7C 08 02 A6 */	mflr r0
 /* 80149AD0 001466B0  38 A0 00 00 */	li r5, 0
 /* 80149AD4 001466B4  90 01 00 04 */	stw r0, 4(r1)

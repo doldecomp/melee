@@ -1,6 +1,6 @@
 #include "ftdrmario.h"
 
-void func_8014949C(HSD_GObj* gobj) {
+void ftDrMario_OnDeath(HSD_GObj* gobj) {
     Fighter* ft = (Fighter*)gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     ft->x2234 = 0;

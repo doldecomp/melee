@@ -6,7 +6,7 @@ typedef struct _PairStruct {
     u8 padding[0xB8];
 } PairStruct;
 
-void func_8011B51C(HSD_GObj* gobj) 
+void ftPeach_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft;
 

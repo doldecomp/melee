@@ -65,8 +65,8 @@ lbl_80148C48:
 /* 80148C5C 0014583C  7C 08 03 A6 */	mtlr r0
 /* 80148C60 00145840  4E 80 00 20 */	blr 
 
-.global func_80148C64
-func_80148C64:
+.global ftCLink_OnDeath
+ftCLink_OnDeath:
 /* 80148C64 00145844  7C 08 02 A6 */	mflr r0
 /* 80148C68 00145848  38 80 00 00 */	li r4, 0
 /* 80148C6C 0014584C  90 01 00 04 */	stw r0, 4(r1)

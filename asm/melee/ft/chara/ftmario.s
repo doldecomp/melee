@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_800E08CC
-func_800E08CC:
+.global ftMario_OnDeath
+ftMario_OnDeath:
 /* 800E08CC 000DD4AC  7C 08 02 A6 */	mflr r0
 /* 800E08D0 000DD4B0  38 80 00 00 */	li r4, 0
 /* 800E08D4 000DD4B4  90 01 00 04 */	stw r0, 4(r1)

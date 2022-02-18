@@ -45,8 +45,8 @@ lbl_800EE5B0:
 /* 800EE5B8 000EB198  42 00 FF 88 */	bdnz lbl_800EE540
 /* 800EE5BC 000EB19C  4E 80 00 20 */	blr 
 
-.global func_800EE5C0
-func_800EE5C0:
+.global ftKirby_OnDeath
+ftKirby_OnDeath:
 /* 800EE5C0 000EB1A0  7C 08 02 A6 */	mflr r0
 /* 800EE5C4 000EB1A4  38 80 00 00 */	li r4, 0
 /* 800EE5C8 000EB1A8  90 01 00 04 */	stw r0, 4(r1)
@@ -35739,8 +35739,8 @@ func_8010D6D0:
 /* 8010D738 0010A318  7C 08 03 A6 */	mtlr r0
 /* 8010D73C 0010A31C  4E 80 00 20 */	blr 
 
-.global func_8010D740
-func_8010D740:
+.global ftDonkey_OnDeath
+ftDonkey_OnDeath:
 /* 8010D740 0010A320  7C 08 02 A6 */	mflr r0
 /* 8010D744 0010A324  38 A0 00 00 */	li r5, 0
 /* 8010D748 0010A328  90 01 00 04 */	stw r0, 4(r1)

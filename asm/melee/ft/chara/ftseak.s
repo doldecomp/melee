@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80110094
-func_80110094:
+.global ftSeak_OnDeath
+ftSeak_OnDeath:
 /* 80110094 0010CC74  7C 08 02 A6 */	mflr r0
 /* 80110098 0010CC78  38 80 00 00 */	li r4, 0
 /* 8011009C 0010CC7C  90 01 00 04 */	stw r0, 4(r1)
