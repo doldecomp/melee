@@ -3,8 +3,7 @@
 .section .text  # 0x80224A54 - 0x80225370
 
 .section .data
-
-    .4byte NULL
+    .balign 8
 .global unk_arr_803E9960
 unk_arr_803E9960:
     .4byte NULL

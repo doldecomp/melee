@@ -235,7 +235,7 @@ lbl_80222B90:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E90F0
 lbl_803E90F0:
 	.4byte lbl_80222A40

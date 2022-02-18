@@ -964,7 +964,7 @@ lbl_80081278:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C0EB0
 lbl_803C0EB0:
     .asciz "translate"

@@ -1055,7 +1055,7 @@ lbl_803B73E8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BF790
 lbl_803BF790:
     .asciz "mpisland.c"

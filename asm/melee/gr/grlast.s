@@ -2476,7 +2476,7 @@ lbl_803B8498:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E7EB0
 lbl_803E7EB0:
     .asciz "grlast.c"

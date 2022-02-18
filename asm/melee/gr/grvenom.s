@@ -4079,7 +4079,7 @@ lbl_803B82DC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E5348
 lbl_803E5348:
     .4byte 0x00000005

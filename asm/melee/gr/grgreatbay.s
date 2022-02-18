@@ -2820,7 +2820,9 @@ lbl_803B81D4:
 
 
 .section .data
-
+    .balign 8
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E3FC4
 lbl_803E3FC4:
     .asciz "grgreatbay.c"

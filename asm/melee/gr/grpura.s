@@ -1729,7 +1729,7 @@ lbl_8021343C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E6800
 lbl_803E6800:
 	.4byte lbl_80211EF0

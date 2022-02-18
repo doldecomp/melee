@@ -3808,7 +3808,7 @@ lbl_80071014:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C0638
 lbl_803C0638:
     .asciz "fighter joint depth num over!\n"
