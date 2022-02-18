@@ -2,11 +2,12 @@
 #define _fighter_h_
 
 #include <dolphin/types.h>
+#include <dolphin/mtx/mtxtypes.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
 typedef struct _Vec2 { float x, y;    } Vec2;
-typedef struct _Vec3 { float x, y, z; } Vec3;
+typedef Vec Vec3;
 typedef struct _Quat { float x, y, z, w; } Quat; // @TODO: xyzw order correct?
 
 typedef void* JOBJ;
@@ -1858,29 +1859,6 @@ void func_80022C30();
 void func_80029020();
 void func_800290D4();
 void func_80031144();
-void Player_80031FB0();
-void Player_800326CC();
-void Player_80032828();
-void Player_GetFacingDirection();
-void Player_SetFacingDirectionConditional();
-void Player_GetCostumeId();
-void Player_GetControllerIndex();
-void Player_GetTeam();
-void Player_GetPlayerId();
-void Player_GetCpuLevel();
-void Player_GetCpuType();
-void Player_GetModelScale();
-void Player_GetDamage();
-void Player_SetHPByIndex();
-void Player_GetMoreFlagsBit2();
-void Player_GetMoreFlagsBit3();
-void Player_GetMoreFlagsBit6();
-void Player_GetFlagsAEBit0();
-void Player_GetFlagsBit3();
-void Player_GetFlagsBit5();
-void Player_GetFlagsBit6();
-void Player_GetFlagsBit7();
-void Player_GetMoreFlagsBit1();
 void func_80037C60();
 void func_8003E058();
 void func_8003EC9C();
@@ -1905,7 +1883,7 @@ void func_800686E4();
 void func_8006876C();
 void func_80068854();
 void func_80068914();
-void func_80068E40();
+u32 func_80068E40();
 void func_80068E64();
 void func_80068E98();
 void func_800693AC(void*, s32, s32, s32, f32, f32, f32);
@@ -2030,7 +2008,7 @@ void func_8007FF74();
 void func_8007FFD8();
 void func_8008021C();
 void func_8008031C();
-void func_800804EC();
+f32 func_800804EC(Fighter*); // DataOffset_PlayerScale_MultiplyBySomething, returns fighter->x40*fighter->x34
 void func_800804FC();
 void func_80080E18();
 void func_80081938();
@@ -2174,7 +2152,6 @@ void func_800686E4();
 void func_8006876C();
 void func_80068854();
 void func_80068914();
-void func_80068E40();
 void func_80068E64();
 void func_80068E98();
 void func_800693AC(void*, s32, s32, s32, f32, f32, f32);
