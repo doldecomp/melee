@@ -1082,7 +1082,7 @@ s32 func_80051EC8(Vec*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
 // ? func_800566F8(?);
 // ? func_80056710(?);
 // ? func_80056758(?);
-// ? func_800567C0(?);
+s32 func_800567C0(s32 /*wallID?*/, Vec* /*ecb_side_vertex?*/, Vec* result); // UnclePunch Map file: Collision_GetPositionDifference
 // ? func_800569EC(?);
 // ? func_80056A1C(?);
 // ? func_80056A54(?);
@@ -2310,7 +2310,7 @@ void func_8008688C();
 // ? func_800C18A8(?);
 // ? func_800C1D38(?);
 // ? func_800C1E0C(?);
-// ? func_800C1E64(?);
+void func_800C1E64(struct _HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32); // UnclePunch Map file: AS_203_PassiveWalljump_Walljump
 // ? func_800C23A0(?);
 // ? func_800C23FC(?);
 // ? func_800C2600(?);
