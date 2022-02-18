@@ -4327,7 +4327,7 @@ lbl_803B8510:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803ED538
 lbl_803ED538:
 	.float 0

@@ -1840,7 +1840,7 @@ lbl_80328F34:
 
 
 .section .data
-
+    .balign 8
 .global jtbl_80400810
 jtbl_80400810:
 	.4byte lbl_80327F64

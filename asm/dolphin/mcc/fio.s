@@ -863,7 +863,7 @@ lbl_8032F614:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400918
 lbl_80400918:
     .asciz "Error:Time is over.\n"

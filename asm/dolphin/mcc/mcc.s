@@ -2625,7 +2625,7 @@ lbl_8032EA70:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804008D8
 lbl_804008D8:
     .asciz "HUDSON/USB2EXI/INITCODE/TARGET"

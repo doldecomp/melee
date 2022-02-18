@@ -2619,7 +2619,7 @@ lbl_8033A12C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400E80
 lbl_80400E80:
     .asciz "app booted via JTAG\n"

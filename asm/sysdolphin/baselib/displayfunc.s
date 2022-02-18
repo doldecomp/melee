@@ -1479,7 +1479,7 @@ _HSD_DispForgetMemory:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406AE0
 lbl_80406AE0:
     .4byte NULL

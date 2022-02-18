@@ -1001,7 +1001,7 @@ lbl_802F48FC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F94E8
 lbl_803F94E8:
     .asciz "ScInfTim_scene_models"

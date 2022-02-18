@@ -1194,7 +1194,7 @@ lbl_803B8544:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F0570
 lbl_803F0570:
     .asciz "MvOmake15.mth"

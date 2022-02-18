@@ -618,7 +618,7 @@ __OSContextInit:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80401E20
 lbl_80401E20:
     .asciz "------------------------- Context 0x%08x -------------------------\n"

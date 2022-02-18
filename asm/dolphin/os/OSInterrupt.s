@@ -655,7 +655,7 @@ lbl_80347B80:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402318
 lbl_80402318:
     .4byte 0x00000100

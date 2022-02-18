@@ -93,7 +93,7 @@ lbl_803361F4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400C08
 lbl_80400C08:
     .asciz "DSPInit(): Build Date: %s %s\n"

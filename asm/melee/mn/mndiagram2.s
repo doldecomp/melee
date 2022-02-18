@@ -2482,8 +2482,7 @@ lbl_80245B90:
 
 
 .section .data
-
-
+    .balign 8
 .global lbl_803EEAD0
 lbl_803EEAD0:
     .4byte 0xC0200000

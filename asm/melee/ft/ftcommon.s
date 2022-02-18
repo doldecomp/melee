@@ -4493,7 +4493,7 @@ lbl_803B74A0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C0D58
 lbl_803C0D58:
     .asciz "ftcommon.c"

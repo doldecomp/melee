@@ -159,7 +159,7 @@ lbl_8037A93C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406DF0
 lbl_80406DF0:
     .4byte 0x3F800000

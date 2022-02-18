@@ -132,7 +132,7 @@ lbl_803882EC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407D60
 lbl_80407D60:
     .asciz "assertion \"%s\" failed"

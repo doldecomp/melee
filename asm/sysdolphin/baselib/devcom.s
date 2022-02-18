@@ -1182,7 +1182,7 @@ lbl_8038FA88:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804083B8
 lbl_804083B8:
     .asciz "devcom.c"

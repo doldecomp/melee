@@ -1782,7 +1782,7 @@ lbl_8034C3C8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402420
 lbl_80402420:
     .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head != NULL && RunQueue[prio].tail != NULL in %d\n"

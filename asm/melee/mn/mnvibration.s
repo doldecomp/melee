@@ -2150,7 +2150,7 @@ func_80249174:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EECE0
 lbl_803EECE0:
     .4byte NULL

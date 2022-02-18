@@ -258,7 +258,7 @@ lbl_80076378:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C0C08
 lbl_803C0C08:
     .asciz "ftcamera.c"

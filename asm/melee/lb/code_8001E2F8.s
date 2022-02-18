@@ -12261,7 +12261,7 @@ func_80028B90:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BADB0
 lbl_803BADB0:
     .asciz "lbmthp.c"
@@ -14309,7 +14309,6 @@ lbl_803BCA24:
     .4byte 0x7929203C
     .4byte 0x2037312A
     .4byte 0x31303234
-    .4byte NULL
     .4byte NULL
 
 

@@ -1967,7 +1967,7 @@ lbl_8034E944:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402C90
 lbl_80402C90:
     .4byte PADOnReset

@@ -818,7 +818,7 @@ func_80203624:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E5248
 lbl_803E5248:
 	.4byte lbl_80202D60

@@ -2033,14 +2033,12 @@ lbl_803B8F30:
 
 
 .section .data
-
-    .balign 4
+    .balign 8
 .global lbl_80400430
 lbl_80400430:
 	.4byte NULL
     .4byte 0x08800000
     .4byte NULL
-
     .balign 4
 .global lbl_8040043C
 lbl_8040043C:

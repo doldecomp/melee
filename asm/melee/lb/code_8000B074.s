@@ -2248,7 +2248,7 @@ func_8000CE40:
 /* 8000CE4C 00009A2C  4E 80 00 20 */	blr 
 
 .section .data
-
+    .balign 8
 .global lbl_803B9FC0
 lbl_803B9FC0:
     .4byte 0x0000000E

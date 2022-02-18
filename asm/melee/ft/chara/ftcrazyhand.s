@@ -6950,7 +6950,7 @@ lbl_8015BCE8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803D4878
 lbl_803D4878:
     .4byte 0x00000157

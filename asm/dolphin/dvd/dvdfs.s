@@ -371,7 +371,7 @@ lbl_80337DD8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400D80
 lbl_80400D80:
     .asciz "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n"
