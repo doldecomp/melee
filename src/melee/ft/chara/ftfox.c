@@ -7,7 +7,7 @@ BOOL func_800E5534(HSD_GObj* gobj)
     return ft->x222C ? TRUE : FALSE;
 }
 
-void func_800E5554(HSD_GObj* gobj)
+void ftFox_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = (Fighter*)gobj->user_data;
     

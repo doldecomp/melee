@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8014F418
-func_8014F418:
+.global ftZakoGirl_OnDeath
+ftZakoGirl_OnDeath:
 /* 8014F418 0014BFF8  7C 08 02 A6 */	mflr r0
 /* 8014F41C 0014BFFC  38 80 00 00 */	li r4, 0
 /* 8014F420 0014C000  90 01 00 04 */	stw r0, 4(r1)

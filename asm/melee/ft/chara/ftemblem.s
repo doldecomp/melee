@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8014EEF8
-func_8014EEF8:
+.global ftRoy_OnDeath
+ftRoy_OnDeath:
 /* 8014EEF8 0014BAD8  7C 08 02 A6 */	mflr r0
 /* 8014EEFC 0014BADC  38 80 00 00 */	li r4, 0
 /* 8014EF00 0014BAE0  90 01 00 04 */	stw r0, 4(r1)

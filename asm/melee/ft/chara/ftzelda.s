@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_801392DC
-func_801392DC:
+.global ftZelda_OnDeath
+ftZelda_OnDeath:
 /* 801392DC 00135EBC  7C 08 02 A6 */	mflr r0
 /* 801392E0 00135EC0  38 80 00 00 */	li r4, 0
 /* 801392E4 00135EC4  90 01 00 04 */	stw r0, 4(r1)

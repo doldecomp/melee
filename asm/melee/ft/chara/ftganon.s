@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8014EBFC
-func_8014EBFC:
+.global ftGanon_OnDeath
+ftGanon_OnDeath:
 /* 8014EBFC 0014B7DC  7C 08 02 A6 */	mflr r0
 /* 8014EC00 0014B7E0  38 80 00 00 */	li r4, 0
 /* 8014EC04 0014B7E4  90 01 00 04 */	stw r0, 4(r1)

@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_801422E8
-func_801422E8:
+.global ftLuigi_OnDeath
+ftLuigi_OnDeath:
 /* 801422E8 0013EEC8  7C 08 02 A6 */	mflr r0
 /* 801422EC 0013EECC  38 80 00 00 */	li r4, 0
 /* 801422F0 0013EED0  90 01 00 04 */	stw r0, 4(r1)

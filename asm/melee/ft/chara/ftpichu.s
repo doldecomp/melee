@@ -35,8 +35,8 @@ ftPichu_OnLoad:
 /* 80149EA4 00146A84  7C 08 03 A6 */	mtlr r0
 /* 80149EA8 00146A88  4E 80 00 20 */	blr 
 
-.global func_80149EAC
-func_80149EAC:
+.global ftPichu_OnDeath
+ftPichu_OnDeath:
 /* 80149EAC 00146A8C  7C 08 02 A6 */	mflr r0
 /* 80149EB0 00146A90  38 80 00 00 */	li r4, 0
 /* 80149EB4 00146A94  90 01 00 04 */	stw r0, 4(r1)

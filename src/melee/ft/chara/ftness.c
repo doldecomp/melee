@@ -2,7 +2,7 @@
 
 extern f32 lbl_804D96B0;
 
-void func_801147C0(HSD_GObj* gobj, s32 arg1)
+void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* ft = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
