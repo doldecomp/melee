@@ -1803,7 +1803,7 @@ lbl_80068B08:
 
 #pragma push
 #pragma peephole on
-// Add1toSpawnNumberTotal, returns spawn number before incrementing
+// increments the spawn number, returns the spawn number value before incrementing
 u32 func_80068E40()
 {
 	u32 spawnNum = lbl_804D64F8++;
