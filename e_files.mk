@@ -10,6 +10,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/ft/ftwalljump.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftfox.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftganon.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftkoopa.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmario.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftness.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpeach.o\
