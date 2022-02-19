@@ -31,6 +31,33 @@ typedef struct _UnkFlagStruct {
     } bits;
 } UnkFlagStruct;
 
+typedef struct _ThrowFlags
+{
+	union
+	{
+		struct
+		{
+			u8 b0 : 1;
+			u8 b1 : 1;
+			u8 b2 : 1;
+			u8 b3 : 1;
+			u8 b4 : 1;
+			u8 b5 : 1;
+			u8 b6 : 1;
+			u8 b7 : 1;
+		};
+		u32 flags;
+	};
+} ThrowFlags;
+
+typedef struct _ftcmd_var
+{
+	/* 0x0 */ u32 x0_flag0;
+	/* 0x4 */ u32 x4_flag1;
+	/* 0x8 */ u32 x8_flag2;
+	/* 0xC */ u32 xC_flag3;
+} ftcmd_var;
+
 typedef struct _FighterBone
 {
 	/* 0x0 */ u32* x0_joint;
@@ -89,7 +116,13 @@ typedef struct _Fighter {
 	/* 0x210C */ u8 x210C_walljumpInputTimer;
 	u8 filler_x210C[3];
 	/* 0x2110 */ f32 x2110_walljumpWallSide;
-	u8 filler_x2110[0x2224 - 0x2114];
+	u8 filler_x2110[0x2200 - 0x2114];
+    /* 0x2200 */ ftcmd_var x2200_ftcmd_var;
+	/* 0x2210 */ ThrowFlags x2210_ThrowFlags;
+	/* 0x2214 */ u32 x2214;
+	/* 0x2218 */ u32 x2218;
+	/* 0x221C */ u32 x221C;
+	/* 0x2220 */ u32 x2220;
 	/* 0x2224 */ UnkFlagStruct x2224_flag;
 	u8 filler_x2225;
 	/* 0x2226 */ UnkFlagStruct x2226_flag;
@@ -105,7 +138,12 @@ typedef struct _Fighter {
 	/* 0x2244 */ u32 x2244;
 	/* 0x2248 */ u32 x2248;
 	/* 0x224C */ u32 x224C;
-	u8 filler_x224C[0x2354-0x2250];
+	u8 filler_x224C[0x2340-0x2250];
+	/* 0x2340 */ u32 x2340_stateVar1;
+	/* 0x2344 */ u32 x2344_stateVar2;
+	/* 0x2348 */ u32 x2348_stateVar3;
+	/* 0x234C */ u32 x234C_stateVar4;
+	/* 0x2350 */ u32 x2350_stateVar5;
 	/* 0x2354 */ float x2354_stateVar6;
 	/* 0x2358 */ float x2358_stateVar7;
 } Fighter;
