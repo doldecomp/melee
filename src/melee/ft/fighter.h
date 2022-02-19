@@ -130,7 +130,9 @@ typedef struct _Fighter {
 	/* 0x2226 */ UnkFlagStruct x2226_flag;
 	u8 filler_x2227;
 	/* 0x2228 */ UnkFlagStruct x2228_flag;
-	u8 filler_x2228[3];
+	u8 filler_x2229;
+	/* 0x222A */ UnkFlagStruct x222A_flag;
+	u8 filler_x222B;
 	/* 0x222C */ u32 x222C;
 	/* 0x2230 */ u32 x2230;
 	/* 0x2234 */ u32 x2234;
