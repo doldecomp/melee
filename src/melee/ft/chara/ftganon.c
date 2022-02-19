@@ -1,7 +1,5 @@
 #include "ftganon.h"
 
-extern float lbl_804D9E58;
-
 void ftGanon_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
@@ -77,12 +75,12 @@ void func_8014EE40(HSD_GObj* gobj)
 
 void func_8014EE60(HSD_GObj* gobj)
 {
-    ftAnim_ApplyPartAnim(gobj, 3, 3, lbl_804D9E58);
-    ftAnim_ApplyPartAnim(gobj, 4, 3, lbl_804D9E58);
+    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
 }
 
 void func_8014EEAC(HSD_GObj* gobj)
 {
-    ftAnim_ApplyPartAnim(gobj, 3, 2, lbl_804D9E58);
-    ftAnim_ApplyPartAnim(gobj, 4, 2, lbl_804D9E58);
+    ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
 }
