@@ -1,8 +1,5 @@
 #include "ftzakoboy.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
-
 void ftZakoBoy_OnDeath(HSD_GObj* gobj)
 {
     func_80074A4C(gobj, 0, 0);
