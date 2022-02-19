@@ -13,6 +13,8 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftness.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpeach.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftsandbag.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakoboy.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakogirl.o\
 	$(EPILOGUE_DIR)/src/melee/gr/stage.o\
 	$(EPILOGUE_DIR)/src/melee/pl/player.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/tobj.o\
