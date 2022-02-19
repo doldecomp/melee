@@ -62,6 +62,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/code_80081B38.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_8008521C.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftmario.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmario.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalcon.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftfox.o 		\
