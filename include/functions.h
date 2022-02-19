@@ -2739,7 +2739,7 @@ void func_800E2B40(struct _HSD_GObj*);
 // ? func_800E526C(?);
 // ? func_800E5534(?);
 // ? func_800E576C(?);
-// ? func_800E5858(?);
+void func_800E5858(struct _HSD_GObj*);
 // ? func_800E5970(?);
 // ? func_800E59BC(?);
 // ? func_800E5A90(?);
