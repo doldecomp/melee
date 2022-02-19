@@ -70,7 +70,9 @@ typedef struct _CollData
 } CollData;
 
 typedef struct _Fighter {
-	u8 filler_x0[0xB0 - 0x0];
+	u8 filler_x0[0x2C - 0x0];
+	/* 0x2C */ f32 x2C_facing_direction;
+	u8 filler_x2C[0xB0 - 0x30];
 	/* 0xB0 */ Vec3 xB0_pos;
 	u8 filler_xB0[0xC8 - 0xB0 - 12];
 	/* 0xC8 */ Vec3 xC8_pos_delta;
@@ -97,12 +99,16 @@ typedef struct _Fighter {
 	/* 0x6F0 */ CollData x6F0_collData;
 	u8 filler_x6F0[0x8AC - 0x6F0 - sizeof(CollData)];
 	/* 0x8AC */ s32 x8AC_animSkeleton;
-	u8 filler_x8AC[0x1969 - 0x8B0];
+	u8 filler_x8AC[0x18B0 - 0x8B0];
+	/* 0x18B0 */ f32 x18B0;
+	u8 filler_x18B0[0x1969 - 0x18B4];
 	/* 0x1969 */ u8 x1969_walljumpUsed;
 	/* 0x196C */ int x196C;
 	/* 0x1970 */ int x1970;
 	/* 0x1974 */ void* x1974_heldItem;
-	u8 filler_x1974[0x210C - 0x1978];
+	u8 filler_x1974[0x1A58 - 0x1978];
+	/* 0x1A58 */ u32 x1A58;
+	u8 filler_x1A58[0x210C - 0x1A5C];
 	/* 0x210C */ u8 x210C_walljumpInputTimer;
 	u8 filler_x210C[3];
 	/* 0x2110 */ f32 x2110_walljumpWallSide;
