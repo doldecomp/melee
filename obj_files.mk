@@ -92,7 +92,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalco.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftganon.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftganon.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftemblem.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftzakoboy.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftzakogirl.o 	\
