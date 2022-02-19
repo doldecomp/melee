@@ -436,19 +436,19 @@ void func_80132F94(HSD_GObj *gobj)
     return;
 }
 
-// void func_8013302C(HSD_GObj *gobj)
-// {
-//     Fighter *ft = gobj->user_data;
+void func_8013302C(HSD_GObj *gobj)
+{
+    Fighter *ft = gobj->user_data;
 
-//     if(ft->x2344_stateVar2 != 0) {
-//         func_800693AC(gobj, 349, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
-//     } else {
-//         func_800693AC(gobj, 348, 0x0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
-//     }
-//     ft->x2222_flag.bits.b0 = 1;
-//     func_8007E2F4(ft, 0x1FF);
-//     func_8007E2FC(gobj);
-//     ft->x2340_stateVar1 = 0;
-//     ft->x2200_ftcmd_var.x0_flag0 = 0;
-//     return;
-// }
+    if((s32)ft->x2344_stateVar2 != 0) {
+        func_800693AC(gobj, 349, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+    } else {
+        func_800693AC(gobj, 348, 0x0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+    }
+    ft->x2222_flag.bits.b2 = 1;
+    func_8007E2F4(ft, 0x1FF);
+    func_8007E2FC(gobj);
+    ft->x2340_stateVar1 = 0;
+    ft->x2200_ftcmd_var0 = 0;
+    return;
+}

@@ -33,10 +33,8 @@ typedef struct _UnkFlagStruct {
 
 typedef struct _ThrowFlags
 {
-	union
-	{
-		struct
-		{
+	union {
+		struct {
 			u8 b0 : 1;
 			u8 b1 : 1;
 			u8 b2 : 1;
@@ -117,7 +115,10 @@ typedef struct _Fighter {
 	/* 0x2214 */ u32 x2214;
 	/* 0x2218 */ u32 x2218;
 	/* 0x221C */ u32 x221C;
-	/* 0x2220 */ u32 x2220;
+	u8 filler_x2220;
+	u8 filler_x2221;
+	/* 0x2222 */ UnkFlagStruct x2222_flag;
+	u8 filler_x2223;
 	/* 0x2224 */ UnkFlagStruct x2224_flag;
 	u8 filler_x2225;
 	/* 0x2226 */ UnkFlagStruct x2226_flag;
