@@ -97,7 +97,9 @@ typedef struct _Fighter {
 	/* 0x6F0 */ CollData x6F0_collData;
 	u8 filler_x6F0[0x8AC - 0x6F0 - sizeof(CollData)];
 	/* 0x8AC */ s32 x8AC_animSkeleton;
-	u8 filler_x8AC[0x1969 - 0x8B0];
+	u8 filler_x8AC[0x18B0 - 0x8B0];
+	/* 0x18B0 */ f32 x18B0;
+	u8 filler_x18B0[0x1969 - 0x18B4];
 	/* 0x1969 */ u8 x1969_walljumpUsed;
 	/* 0x196C */ int x196C;
 	/* 0x1970 */ int x1970;

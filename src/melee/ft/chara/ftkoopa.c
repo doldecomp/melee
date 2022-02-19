@@ -13,32 +13,21 @@ extern const f32 lbl_804D9ACC; //0.0
 extern const f32 lbl_804D9ADC; //1.0
 extern const f32 lbl_804D9AD8; //0.0
 
-asm void ftKoopa_OnDeath(HSD_GObj* gobj) {
-    nofralloc
-/* 80132A0C 0012F5EC  7C 08 02 A6 */	mflr r0
-/* 80132A10 0012F5F0  38 80 00 00 */	li r4, 0
-/* 80132A14 0012F5F4  90 01 00 04 */	stw r0, 4(r1)
-/* 80132A18 0012F5F8  38 A0 00 00 */	li r5, 0
-/* 80132A1C 0012F5FC  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 80132A20 0012F600  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 80132A24 0012F604  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 80132A28 0012F608  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 80132A2C 0012F60C  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
-/* 80132A30 0012F610  4B F4 20 1D */	bl func_80074A4C
-/* 80132A34 0012F614  C0 1E 00 00 */	lfs f0, 0(r30)
-/* 80132A38 0012F618  D0 1F 18 B0 */	stfs f0, 0x18b0(r31)
-/* 80132A3C 0012F61C  C0 1E 00 10 */	lfs f0, 0x10(r30)
-/* 80132A40 0012F620  D0 1F 22 2C */	stfs f0, 0x222c(r31)
-/* 80132A44 0012F624  C0 1E 00 18 */	lfs f0, 0x18(r30)
-/* 80132A48 0012F628  D0 1F 22 30 */	stfs f0, 0x2230(r31)
-/* 80132A4C 0012F62C  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 80132A50 0012F630  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 80132A54 0012F634  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 80132A58 0012F638  38 21 00 20 */	addi r1, r1, 0x20
-/* 80132A5C 0012F63C  7C 08 03 A6 */	mtlr r0
-/* 80132A60 0012F640  4E 80 00 20 */	blr 
+void ftKoopa_OnDeath(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+    ftKoopaAttributes* koopaAttr = ft->x2D4_specialAttributes;
+    ftKoopaVars* ftVars;
+    f32 unk = 0.0;
+    f32 unk1 = 0.0;
+    
+    func_80074A4C(gobj, 0, 0);
+
+    ftVars = (ftKoopaVars*)&ft->x222C;
+    
+    ft->x18B0 = koopaAttr->x0;
+    ftVars->x0 = koopaAttr->x10;
+    ftVars->x4 = koopaAttr->x18;
 }
-#pragma peephole on
 
 asm void func_80132A64(HSD_GObj* gobj) {
     nofralloc
@@ -293,37 +282,37 @@ void func_80132D7C(HSD_GObj *gobj) {
 
 f32 func_80132DC0(HSD_GObj *gobj) {
     Fighter *ft = gobj->user_data;
-    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->unk4C;
+    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->x4C;
 }
 
 f32 func_80132DD0(HSD_GObj *gobj) {
     Fighter *ft = gobj->user_data;
-    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->unk48;
+    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->x48;
 }
 
 f32 func_80132DE0(HSD_GObj *gobj) {
     Fighter *ft = gobj->user_data;
-    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->unk44;
+    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->x44;
 }
 
 f32 func_80132DF0(HSD_GObj *gobj) {
     Fighter *ft = gobj->user_data;
-    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->unk40;
+    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->x40;
 }
 
 f32 func_80132E00(HSD_GObj *gobj) {
     Fighter *ft = gobj->user_data;
-    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->unk3C;
+    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->x3C;
 }
 
 f32 func_80132E10(HSD_GObj *gobj) {
     Fighter *ft = gobj->user_data;
-    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->unk34;
+    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->x34;
 }
 
 f32 func_80132E20(HSD_GObj *gobj) {
     Fighter *ft = gobj->user_data;
-    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->unk38;
+    return ((ftKoopaAttributes*)ft->x2D4_specialAttributes)->x38;
 }
 
 asm void func_80132E30() {
