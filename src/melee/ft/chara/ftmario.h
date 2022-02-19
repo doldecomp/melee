@@ -1,5 +1,5 @@
-#ifndef _ftness_h_
-#define _ftness_h_
+#ifndef _ftmario_h_
+#define _ftmario_h_
 
 #include <global.h>
 
