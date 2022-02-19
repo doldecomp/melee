@@ -50,14 +50,6 @@ typedef struct _ThrowFlags
 	};
 } ThrowFlags;
 
-typedef struct _ftcmd_var
-{
-	/* 0x0 */ u32 x0_flag0;
-	/* 0x4 */ u32 x4_flag1;
-	/* 0x8 */ u32 x8_flag2;
-	/* 0xC */ u32 xC_flag3;
-} ftcmd_var;
-
 typedef struct _FighterBone
 {
 	/* 0x0 */ u32* x0_joint;
@@ -117,7 +109,10 @@ typedef struct _Fighter {
 	u8 filler_x210C[3];
 	/* 0x2110 */ f32 x2110_walljumpWallSide;
 	u8 filler_x2110[0x2200 - 0x2114];
-    /* 0x2200 */ ftcmd_var x2200_ftcmd_var;
+    /* 0x2200 */ u32 x2200_ftcmd_var0;
+	/* 0x2204 */ u32 x2200_ftcmd_var1;
+	/* 0x2208 */ u32 x2200_ftcmd_var2;
+	/* 0x220C */ u32 x2200_ftcmd_var3;
 	/* 0x2210 */ ThrowFlags x2210_ThrowFlags;
 	/* 0x2214 */ u32 x2214;
 	/* 0x2218 */ u32 x2218;
