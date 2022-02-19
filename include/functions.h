@@ -1241,7 +1241,7 @@ void func_800704F0(struct _HSD_GObj*, s32, f32);
 // ? func_800707B0(?);
 // ? func_80070904(?);
 // ? func_80070A10(?);
-// ? ftAnim_ApplyPartAnim(?);
+void ftAnim_ApplyPartAnim(struct _HSD_GObj*, s32, s32, f32);
 void func_80070C48(struct _HSD_GObj*, s32);
 void func_80070CC4(struct _HSD_GObj*, s32); 
 // ? func_80070E74(?);
@@ -2731,8 +2731,8 @@ void func_800C1E64(struct _HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32); //
 // ? func_800E1428(?);
 // ? func_800E18B8(?);
 // ? func_800E198C(?);
-// ? func_800E2AAC(?);
-// ? func_800E2B40(?);
+void func_800E2AAC(struct _Fighter*); // UnclePunch map file: FighterOnLoad_Ganondorf
+void func_800E2B40(struct _HSD_GObj*);
 // ? func_800E3278(?);
 // ? func_800E3EAC(?);
 // ? func_800E4D7C(?);
