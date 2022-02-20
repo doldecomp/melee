@@ -91,13 +91,13 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdrmario.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftfalco.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftpichu.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftganon.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftemblem.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftemblem.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftzakoboy.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftzakogirl.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftgigakoopa.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftgigakoopa.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftsandbag.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.o 	\
