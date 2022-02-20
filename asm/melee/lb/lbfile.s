@@ -644,14 +644,14 @@ lbl_803BA540:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80432058
 lbl_80432058:
 	.skip 0x20
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D37A8
 lbl_804D37A8:
     .asciz "NULL"
@@ -672,7 +672,7 @@ lbl_804D37B8:
 
 
 .section .sbss
-
+    .balign 8
 .global cancel
 cancel:
 	.skip 0x8

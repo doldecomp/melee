@@ -724,7 +724,7 @@ lbl_803BA5F0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D37C0
 lbl_804D37C0:
     .asciz "0"
