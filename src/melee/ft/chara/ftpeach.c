@@ -6,7 +6,7 @@ typedef struct _PairStruct {
     u8 padding[0xB8];
 } PairStruct;
 
-void func_8011B51C(HSD_GObj* gobj) 
+void ftPeach_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft;
 
@@ -44,7 +44,7 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
     Fighter* player = gobj->user_data;
     ftData* ftDataInfo = player->x10C_ftData;
     PairStruct* extAtrrs = (PairStruct*)ftDataInfo->ext_attr;
-    void** items = ftDataInfo->items;
+    void** items = ftDataInfo->x48_items;
 
     extAtrrs->unk0 = func_8001E8F8(func_80085E50(player, 18));
     extAtrrs->unk4 = func_8001E8F8(func_80085E50(player, 19));

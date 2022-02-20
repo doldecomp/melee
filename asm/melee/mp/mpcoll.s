@@ -12783,7 +12783,7 @@ lbl_8004D14C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BD270
 lbl_803BD270:
     .asciz "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n"

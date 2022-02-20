@@ -546,7 +546,7 @@ func_8024CD64:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EF668
 lbl_803EF668:
     .4byte NULL

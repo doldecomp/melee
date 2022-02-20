@@ -354,7 +354,7 @@ _HSD_ObjAllocForgetMemory:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406E48
 lbl_80406E48:
     .4byte NULL

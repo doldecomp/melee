@@ -222,7 +222,7 @@ func_803909D8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804084F0
 lbl_804084F0:
     .asciz "gobjgxlink.c"

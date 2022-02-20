@@ -185,8 +185,8 @@ func_8012B918:
 /* 8012B958 00128538  7C 08 03 A6 */	mtlr r0
 /* 8012B95C 0012853C  4E 80 00 20 */	blr 
 
-.global func_8012B960
-func_8012B960:
+.global ftYoshi_OnDeath
+ftYoshi_OnDeath:
 /* 8012B960 00128540  7C 08 02 A6 */	mflr r0
 /* 8012B964 00128544  38 80 00 00 */	li r4, 0
 /* 8012B968 00128548  90 01 00 04 */	stw r0, 4(r1)

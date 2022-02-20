@@ -16437,7 +16437,7 @@ lbl_8039F774:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80408630
 lbl_80408630:
     .4byte 0x00606066

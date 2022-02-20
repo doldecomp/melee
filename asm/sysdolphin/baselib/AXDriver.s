@@ -3531,7 +3531,7 @@ lbl_803B9618:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80408140
 lbl_80408140:
     .asciz "axdriver.c"

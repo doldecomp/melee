@@ -173,7 +173,7 @@ TRKInitializeTarget:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400878
 lbl_80400878:
     .4byte 0x00000100

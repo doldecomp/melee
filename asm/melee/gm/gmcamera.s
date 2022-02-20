@@ -1479,7 +1479,7 @@ func_801A367C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803DA630
 lbl_803DA630:
     .4byte 0x3F19999A

@@ -2112,7 +2112,7 @@ lbl_80063908:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BF9D0
 lbl_803BF9D0:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"

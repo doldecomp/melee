@@ -456,7 +456,7 @@ func_8024C5C0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EF5A0
 lbl_803EF5A0:
     .4byte NULL

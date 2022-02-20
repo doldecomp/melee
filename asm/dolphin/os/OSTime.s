@@ -323,7 +323,7 @@ lbl_8034C7E8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402C30
 lbl_80402C30:
     .4byte NULL

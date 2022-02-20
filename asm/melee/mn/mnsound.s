@@ -992,7 +992,7 @@ func_8024A09C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EEED8
 lbl_803EEED8:
     .4byte NULL

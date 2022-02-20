@@ -9,6 +9,6 @@
 
 #include "melee/ft/fighter.h"
 
-void func_80144DFC(HSD_GObj* gobj);
+void ftMewtwo_OnDeath(HSD_GObj* gobj);
 
 #endif

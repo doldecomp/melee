@@ -212,7 +212,7 @@ lbl_8020E4FC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E6328
 lbl_803E6328:
 	.4byte lbl_8020E3FC

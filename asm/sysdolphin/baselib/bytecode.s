@@ -1616,7 +1616,7 @@ lbl_80381BB0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804074F0
 lbl_804074F0:
     .asciz "bytecode.c"

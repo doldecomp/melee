@@ -12473,8 +12473,7 @@ lbl_80041C4C:
 
 
 .section .data
-.balign 8
-
+    .balign 8
 .global lbl_803BCE70
 lbl_803BCE70:
     .4byte 0xFFFFFFFF

@@ -4773,7 +4773,7 @@ lbl_8001D280:
 
 
 .section .data
-
+    .balign 8
 .global jtbl_803BAAA8
 jtbl_803BAAA8:
     .4byte lbl_80019284

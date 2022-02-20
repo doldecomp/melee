@@ -49,7 +49,7 @@ lbl_80327724:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400788
 lbl_80400788:
 	.4byte lbl_8032785C

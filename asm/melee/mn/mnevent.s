@@ -1852,7 +1852,7 @@ lbl_8024E8F8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EF740
 lbl_803EF740:
     .4byte NULL

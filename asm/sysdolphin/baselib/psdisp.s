@@ -4602,7 +4602,7 @@ lbl_803B9628:
 
 
 .section .data
-
+    .balign 8
 .global lbl_8040C300
 lbl_8040C300:
     .asciz "object.h"

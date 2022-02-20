@@ -62,6 +62,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/code_80081B38.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_8008521C.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftmario.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmario.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalcon.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftfox.o 		\
@@ -78,6 +79,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftsamus.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftkoopa.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkoopa.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmars.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.o 		\
@@ -88,14 +90,14 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftclink.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdrmario.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftfalco.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftfalco.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftpichu.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftganon.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftemblem.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftzakoboy.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftzakogirl.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftgigakoopa.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftganon.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftemblem.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftzakoboy.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftzakogirl.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftgigakoopa.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftsandbag.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.o 	\

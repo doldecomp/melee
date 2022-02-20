@@ -699,7 +699,7 @@ lbl_8001749C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BA588
 lbl_803BA588:
     .asciz "HSD_ArchiveParse error!\n"

@@ -6875,7 +6875,7 @@ lbl_803B7494:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C0530
 lbl_803C0530:
     .asciz "PlCo.dat"

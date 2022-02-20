@@ -5714,7 +5714,7 @@ lbl_803B94D0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406708
 lbl_80406708:
     .4byte func_803737F4

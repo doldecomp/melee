@@ -1272,7 +1272,7 @@ lbl_80376970:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406CE0
 lbl_80406CE0:
     .asciz "idx != -1"

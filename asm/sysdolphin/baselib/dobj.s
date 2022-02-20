@@ -1,6 +1,6 @@
-.section .data  # 0x803B9840 - 0x804316C0
-
 .include "macros.inc"
+
+.section .data  # 0x803B9840 - 0x804316C0
 
 .global lbl_80405494
 lbl_80405494:

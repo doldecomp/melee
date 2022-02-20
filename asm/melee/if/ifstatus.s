@@ -2942,7 +2942,7 @@ lbl_802F725C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F9598
 lbl_803F9598:
     .asciz "DmgNum_scene_models"

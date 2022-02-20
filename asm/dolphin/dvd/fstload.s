@@ -161,7 +161,7 @@ lbl_8033A6A0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400FD8
 lbl_80400FD8:
     .asciz "  Game Name ... %c%c%c%c\n"

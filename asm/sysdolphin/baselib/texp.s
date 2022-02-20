@@ -3154,7 +3154,7 @@ lbl_8038577C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407738
 lbl_80407738:
     .asciz "texp_list"
