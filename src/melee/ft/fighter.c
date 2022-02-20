@@ -219,9 +219,9 @@ void func_80067BB4(HSD_GObj* pPlayerEntity)
 	if (jobj == 0U)
 		__assert("jobj.h"/*lbl_804D3A00*/, /*line*/0x2F8, "jobj"/*lbl_804D3A08*/);
 	//@60
-	jobj->x2C_scale = scale_sp14;
+	jobj->scale = scale_sp14;
 	//@78
-	if ((jobj->x14_flags & 0x02000000) == 0)
+	if ((jobj->flags & 0x02000000) == 0)
 	{
 		//@84
 		if (jobj)
@@ -230,7 +230,7 @@ void func_80067BB4(HSD_GObj* pPlayerEntity)
 			if (jobj == 0)
 				__assert("jobj.h"/*lbl_804D3A00*/, 0x234, "jobj"/*lbl_804D3A08*/);
 			//@a0
-			if ((!(jobj->x14_flags & 0x800000) && (jobj->x14_flags & 0x40)) == 0)
+			if ((!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) == 0)
 				HSD_JObjSetMtxDirtySub(jobj);
 		}
 	}
