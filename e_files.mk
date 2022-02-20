@@ -17,6 +17,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmario.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftness.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpeach.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpichu.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftsandbag.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakoboy.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakogirl.o\
