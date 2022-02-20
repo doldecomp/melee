@@ -366,11 +366,11 @@ void func_80067C98(Fighter* r27)
 	r27->xC8_pos_delta.z /*xD0*/ = 0.0f;//lbl_804D8254
 	r27->xC8_pos_delta.y /*xCC*/ = 0.0f;//lbl_804D8254
 	r27->xC8_pos_delta.x = 0.0f;//lbl_804D8254
-	r27->x894_animFrame = 0.0f;//lbl_804D8254
-	r27->x898_animUnk = 0.0f;//lbl_804D8254
+	r27->x894 = 0.0f;//lbl_804D8254
+	r27->x898 = 0.0f;//lbl_804D8254
 
-	r27->x89C_animRate = 1.0f;//lbl_804D8250
-	r27->x8A0_animUnk = 1.0f;//lbl_804D8250
+	r27->x89C = 1.0f;//lbl_804D8250
+	r27->x8A0 = 1.0f;//lbl_804D8250
 	r27->x1850_forceApplied = 0.0f;//lbl_804D8254
 	r27->x18A4_knockbackMagnitude = 0.0f;//lbl_804D8254
 	r27->x18A8 = 0.0f;//lbl_804D8254

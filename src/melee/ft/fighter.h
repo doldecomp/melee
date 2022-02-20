@@ -134,14 +134,16 @@ typedef struct _Fighter {
 	u8 filler_x6E4[0x6F0 - 0x6E4];
 	/* 0x6F0 */ CollData x6F0_collData;
 	u8 filler_x6F0[0x894 - 0x6F0 - sizeof(CollData)];
-	/* 0x894 */ f32 x894_animFrame;
-	/* 0x898 */ f32 x898_animUnk;
-	/* 0x89C */ f32 x89C_animRate;
-	/* 0x8A0 */ f32 x8A0_animUnk;
+	/* 0x894 */ f32 x894;
+	/* 0x898 */ f32 x898;
+	/* 0x89C */ f32 x89C;
+	/* 0x8A0 */ f32 x8A0;
 	s32 filler_x8A4[2];
 	/* 0x8AC */ s32 x8AC_animSkeleton;
-	u8 filler_x8AC[0x1064 - 0x8B0];
-    /* 0x1064 */ ftHit x1064_thrownHitbox;
+	u8 filler_x8AC[0x914 - 0x8B0];
+	/* 0x914 */ f32 x914;
+	u8 filler_x918[0x1064 - 0x918];
+    	/* 0x1064 */ ftHit x1064_thrownHitbox;
 	u8 filler_x1064[0x1828 - 0x1064 - sizeof(ftHit)];
 	/* 0x1828 */ s32 x1828;
 	s32 filler_x182C;
@@ -227,8 +229,8 @@ typedef struct _Fighter {
     /* 0x1A52 */ s8 x1A52;
     /* 0x1A53 */ s8 x1A53;
 	s32 filler_x1A54;
-	/* 0x1A58 */ u32 x1A58; // HSD_GObj* grabAttacker ?
-	/* 0x1A5C */ u32 x1A5C; // HSD_GObj* grabVictim ?
+	/* 0x1A58 */ HSD_GObj* x1A58; // grabAttacker?
+	/* 0x1A5C */ HSD_GObj* x1A5C; // grabVictim?
 	/* 0x1A60 */ s32 x1A60;
 	/* 0x1A64 */ s32 x1A64;
 	u8 filler_x1A68[0x2008-0x1A68];
@@ -383,7 +385,6 @@ typedef struct _Fighter {
 	/* 0x2354 */ float x2354_stateVar6;
 	/* 0x2358 */ float x2358_stateVar7;
 } Fighter;
-
 
 typedef struct // ftCommonData
 {
