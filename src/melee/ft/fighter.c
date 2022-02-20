@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "sysdolphin/baselib/gobjgxlink.h"
 #include "sysdolphin/baselib/gobj.h"
+#include "sysdolphin/baselib/jobj.h"
 #include "sysdolphin/baselib/gobjuserdata.h"
 #include "melee/gr/stage.h"
 #include "melee/pl/player.h"
@@ -36,8 +37,8 @@ extern void* ft_OnAbsorb; // asm/melee/ft/code_8008521C.s
 extern s32 lbl_804D4A08;
 extern u8 lbl_804D7849;
 
-void HSD_JObjSetMtxDirtySub(JOBJ*); // sysdolphin/baselib/jobj.s
-void HSD_JObjRemoveAll(JOBJ*); // sysdolphin/baselib/jobj.s
+void HSD_JObjSetMtxDirtySub(HSD_JObj*); // sysdolphin/baselib/jobj.s
+void HSD_JObjRemoveAll(HSD_JObj*); // sysdolphin/baselib/jobj.s
 void ft_OnDeath(); // asm/melee/ft/code_8008521C.s
 void ft_OnLoad(); // asm/melee/ft/code_8008521C.s
 void PSVECAdd(Vec3* a, Vec3* b, Vec3* result); // asm/dolphin/mtx/vec.s
@@ -200,7 +201,7 @@ void func_80067BB4(HSD_GObj* pPlayerEntity)
     //@14
     Fighter* pFighter = pPlayerEntity->user_data;//x2c r31
     //@18
-    JOBJ* jobj = pPlayerEntity->hsd_obj;//x28 r30
+    HSD_JObj* jobj = pPlayerEntity->hsd_obj;//x28 r30
     //@1c
     f32 modelScale_f1 = func_8007F694(pFighter); //PlayerLoadModelScale
     //@24
@@ -5781,7 +5782,7 @@ lbl_8006C5D4:
 void func_8006C5F4(HSD_GObj* pPlayerEntityStruct/*r3*/)
 {
     Fighter* pFighter = (Fighter*) pPlayerEntityStruct->user_data;
-	if (!pFighter->x221F_4_sleep)
+	if (!pFighter->x221F_flag.bits.b3)
 		func_80089B08(pPlayerEntityStruct);
 }
 #pragma pop

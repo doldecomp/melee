@@ -29,8 +29,8 @@ void ftSandbag_OnLoad(HSD_GObj* gobj)
 
     fighter->x2D4_specialAttributes = special_attr_2;
 
-    fighter->x2228_3 = 1;
-    fighter->x2226_1 = 1;
+    fighter->x2228_flag.bits.b2 = 1;
+    fighter->x2226_flag.bits.b0 = 1;
 
     func_8014FA30(fighter);
 }
