@@ -59,5 +59,6 @@ typedef struct _ftKoopaVars {
 
 void func_80132EFC(HSD_GObj *gobj);
 void func_8013302C(HSD_GObj *gobj);
+void func_801330E4(HSD_GObj* gobj);
 
 #endif
