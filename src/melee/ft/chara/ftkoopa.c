@@ -5,7 +5,6 @@ extern void* func_801330E4(struct HSD_GObj*);
 extern void* func_800BC8D4(struct HSD_GObj*);
 extern void* func_800DE7C0();
 extern void* func_800DE2A8();
-extern void* func_8007E2F4();
 
 extern const f32 lbl_804D9AC8; //3.0
 extern const f32 lbl_804D9ACC; //0.0
