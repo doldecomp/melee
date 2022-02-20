@@ -84,14 +84,14 @@ typedef struct _HSD_JObj {
     struct _HSD_JObj* next;
     struct _HSD_JObj* parent;
     struct _HSD_JObj* child;
-    u32 flags;
+    u32 x14_flags;
     union {
         HSD_SList* ptcl;
         struct _HSD_DObj* dobj;
         struct _HSD_Spline* spline;
     } u;
     Quaternion rotate;
-    Vec scale;
+    Vec x2C_scale;
     Vec translate;
     Mtx mtx;
     Vec* scl;

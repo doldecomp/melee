@@ -9,7 +9,7 @@
 #include "melee/pl/player.h"
 
 // TODO: put this in functions.h, same for ftkoopa.c
-extern void* func_8007E2F4();
+extern void* func_8007E2F4(); // ftcommon.s
 
 #include "sysdolphin/baselib/controller.h"
 extern HSD_RumbleData HSD_PadRumbleData[4];
@@ -168,72 +168,72 @@ void func_80067ABC()
 
 	// copy 23 4-byte chunks from pData to lbl_804D6554 in reverse order
 	// Would be nice to find a less repetitive way for this, loop unrolling only works up to 8 iterations.
-    //for(i=0; i<23; i++)
-    //   (&lbl_804D64FC)[23-1-i] = pData[i];
-    lbl_804D6554 = pData[0];
-    lbl_804D6550 = pData[1];
-    lbl_804D654C = pData[2];
-    lbl_804D6548 = pData[3];
-    lbl_804D6544 = pData[4];
-    lbl_804D6540 = pData[5];
-    lbl_804D653C = pData[6];
-    lbl_804D6538 = pData[7];
-    lbl_804D6534 = pData[8];
-    lbl_804D6530 = pData[9];
-    lbl_804D652C = pData[10];
-    lbl_804D6528 = pData[11];
-    lbl_804D6524 = pData[12];
-    lbl_804D6520 = pData[13];
-    lbl_804D651C = pData[14];
-    lbl_804D6518 = pData[15];
-    lbl_804D6514 = pData[16];
-    lbl_804D6510 = pData[17];
-    lbl_804D650C = pData[18];
-    lbl_804D6508 = pData[19];
-    lbl_804D6504 = pData[20];
-    lbl_804D6500 = pData[21];
-    lbl_804D64FC = pData[22];
+	//for(i=0; i<23; i++)
+	//   (&lbl_804D64FC)[23-1-i] = pData[i];
+	lbl_804D6554 = pData[0];
+	lbl_804D6550 = pData[1];
+	lbl_804D654C = pData[2];
+	lbl_804D6548 = pData[3];
+	lbl_804D6544 = pData[4];
+	lbl_804D6540 = pData[5];
+	lbl_804D653C = pData[6];
+	lbl_804D6538 = pData[7];
+	lbl_804D6534 = pData[8];
+	lbl_804D6530 = pData[9];
+	lbl_804D652C = pData[10];
+	lbl_804D6528 = pData[11];
+	lbl_804D6524 = pData[12];
+	lbl_804D6520 = pData[13];
+	lbl_804D651C = pData[14];
+	lbl_804D6518 = pData[15];
+	lbl_804D6514 = pData[16];
+	lbl_804D6510 = pData[17];
+	lbl_804D650C = pData[18];
+	lbl_804D6508 = pData[19];
+	lbl_804D6504 = pData[20];
+	lbl_804D6500 = pData[21];
+	lbl_804D64FC = pData[22];
 } 
 
 #ifdef FIGHTER_DONE
 // https://decomp.me/scratch/1sx2v
 void func_80067BB4(HSD_GObj* pPlayerEntity)
 {
-    Vec3 scale_sp14;
-    s32 dummy[2];
-    //@14
-    Fighter* pFighter = pPlayerEntity->user_data;//x2c r31
-    //@18
-    HSD_JObj* jobj = pPlayerEntity->hsd_obj;//x28 r30
-    //@1c
-    f32 modelScale_f1 = func_8007F694(pFighter); //PlayerLoadModelScale
-    //@24
-    if (pFighter->x34_scale.z != /*1.0f*/lbl_804D8250)
-        scale_sp14.x = pFighter->x34_scale.z;
-    else
-        scale_sp14.x = modelScale_f1;
-    //@40
-    scale_sp14.y = modelScale_f1;
-    scale_sp14.z = modelScale_f1;
-    //@44,4c...
-    if (jobj == 0U)
-        __assert(/*"jobj.h"*/lbl_804D3A00, /*line*/0x2F8, /*"jobj"*/lbl_804D3A08);
-    //@60
-    jobj->x2C_scale = scale_sp14;
-    //@78
-    if ((jobj->x14_flags & 0x02000000) == 0)
-    {
-        //@84
-        if (jobj)
-        {
-            //@8c
-            if (jobj == 0)
-                __assert(/*"jobj.h"*/lbl_804D3A00, 0x234, /*"jobj"*/lbl_804D3A08);
-            //@a0
-            if ((!(jobj->x14_flags & 0x800000) && (jobj->x14_flags & 0x40)) == 0)
-                HSD_JObjSetMtxDirtySub(jobj);
-        }
-    }
+	Vec3 scale_sp14;
+	s32 dummy[2];
+	//@14
+	Fighter* pFighter = pPlayerEntity->user_data;//x2c r31
+	//@18
+	HSD_JObj* jobj = pPlayerEntity->hsd_obj;//x28 r30
+	//@1c
+	f32 modelScale_f1 = func_8007F694(pFighter); //PlayerLoadModelScale
+	//@24
+	if (pFighter->x34_scale.z != /*1.0f*/lbl_804D8250)
+		scale_sp14.x = pFighter->x34_scale.z;
+	else
+		scale_sp14.x = modelScale_f1;
+	//@40
+	scale_sp14.y = modelScale_f1;
+	scale_sp14.z = modelScale_f1;
+	//@44,4c...
+	if (jobj == 0U)
+		__assert("jobj.h"/*lbl_804D3A00*/, /*line*/0x2F8, "jobj"/*lbl_804D3A08*/);
+	//@60
+	jobj->x2C_scale = scale_sp14;
+	//@78
+	if ((jobj->x14_flags & 0x02000000) == 0)
+	{
+		//@84
+		if (jobj)
+		{
+			//@8c
+			if (jobj == 0)
+				__assert("jobj.h"/*lbl_804D3A00*/, 0x234, "jobj"/*lbl_804D3A08*/);
+			//@a0
+			if ((!(jobj->x14_flags & 0x800000) && (jobj->x14_flags & 0x40)) == 0)
+				HSD_JObjSetMtxDirtySub(jobj);
+		}
+	}
 }
 #else
 asm void func_80067BB4()
@@ -306,7 +306,6 @@ lbl_80067C80:
 #endif
 
 #ifdef WONT_COMPILE
-//#if 1
 // one addi r3,r27,0 should be a mr r3,r27, and it should be in a different place. 100% match otherwise.
 // https://decomp.me/scratch/HXrlP
 void func_800C88A0(Fighter*);
@@ -321,121 +320,121 @@ void func_80067C98(Fighter* r27)
 	Vec3 spC_player_coord;
 	f32 x,y,z;
 
-	r27->x8_spawn_num = func_80068E40();
+	r27->x8_spawnNum = func_80068E40();
 	Player_800326CC(r27->xC_playerID, &spC_player_coord); //PlayerBlock_LoadPlayerCoords_StoreToR4
 	r27->x2C_facing_direction = Player_GetFacingDirection(r27->xC_playerID); // PlayerBlock_LoadFacingDirection
 
 	spC_player_coord.x = r27->x2C_facing_direction * func_800804EC(r27) + spC_player_coord.x;
 	x = spC_player_coord.x;
 	r27->xB0_pos.x = x;
-	r27->xBC_pos_prev.x = x;
+	r27->xBC_prevPos.x = x;
 
 	y = spC_player_coord.y;
 	r27->xB0_pos.y = y;
-	r27->xBC_pos_prev.y = y;
+	r27->xBC_prevPos.y = y;
 
 	z = spC_player_coord.z;
 	r27->xB0_pos.z = z;
-	r27->xBC_pos_prev.z = z;
+	r27->xBC_prevPos.z = z;
 
-	r27->x30_facing_direction_repeated = r27->x2C_facing_direction;
+	r27->x30_facingDirectionRepeated = r27->x2C_facing_direction;
 	r27->x34_scale.y = r27->x34_scale.x;
 
-	r27->x2220_6 = 0;
-	r27->x2220_7 = 0;
+	r27->x2220_flag.bits.b5 = 0;
+	r27->x2220_flag.bits.b6 = 0;
 
 	r27->x200C = 0;
 	r27->x2010 = 0;
 	r27->x2008 = 0;
 
-	r27->x2219_2 = 0;
-	r27->x2219_3 = 0;
-	r27->x2219_4 = 0;
-	r27->x2219_5 = 0;
-	r27->x221A_6 = 0;
-	r27->x221A_7 = 0;
-	r27->x221D_3 = 0;
-	r27->x221E_8 = 0;
-	r27->x2220_8 = 0;
-	r27->x2221_5 = 0;
-	r27->x2221_6 = 0;
-	r27->x2221_7 = 1;
-	r27->x2221_8 = 0;
+	r27->x2219_flag.bits.b1 = 0;
+	r27->x2219_flag.bits.b2 = 0;
+	r27->x2219_flag.bits.b3 = 0;
+	r27->x2219_flag.bits.b4 = 0;
+	r27->x221A_flag.bits.b5 = 0;
+	r27->x221A_flag.bits.b6 = 0;
+	r27->x221D_2 = 0;
+	r27->x221E_flag.bits.b7 = 0;
+	r27->x2220_flag.bits.b7 = 0;
+	r27->x2221_flag.bits.b4 = 0;
+	r27->x2221_flag.bits.b5 = 0;
+	r27->x2221_flag.bits.b6 = 1;
+	r27->x2221_flag.bits.b7 = 0;
 
 	r27->x61D = 255;
 
-	r27->xc8_pos_delta.z /*xD0*/ = 0.0f;//lbl_804D8254
-	r27->xc8_pos_delta.y /*xCC*/ = 0.0f;//lbl_804D8254
-	r27->xc8_pos_delta.x = 0.0f;//lbl_804D8254
-	r27->x894_anim_frame = 0.0f;//lbl_804D8254
-	r27->x898 = 0.0f;//lbl_804D8254
+	r27->xC8_pos_delta.z /*xD0*/ = 0.0f;//lbl_804D8254
+	r27->xC8_pos_delta.y /*xCC*/ = 0.0f;//lbl_804D8254
+	r27->xC8_pos_delta.x = 0.0f;//lbl_804D8254
+	r27->x894_animFrame = 0.0f;//lbl_804D8254
+	r27->x898_animUnk = 0.0f;//lbl_804D8254
 
-	r27->x89C_anim_rate = 1.0f;//lbl_804D8250
-	r27->x8A0 = 1.0f;//lbl_804D8250
-	r27->x1850_force_applied = 0.0f;//lbl_804D8254
+	r27->x89C_animRate = 1.0f;//lbl_804D8250
+	r27->x8A0_animUnk = 1.0f;//lbl_804D8250
+	r27->x1850_forceApplied = 0.0f;//lbl_804D8254
 	r27->x18A4_knockbackMagnitude = 0.0f;//lbl_804D8254
 	r27->x18A8 = 0.0f;//lbl_804D8254
-	r27->x18ac_time_since_hit = -1;
+	r27->x18AC_timeSinceHit = -1;
 	r27->x18B0 = 0.0f;//lbl_804D8254
-	r27->x18b4_armor = 0.0f;//lbl_804D8254
+	r27->x18B4_armor = 0.0f;//lbl_804D8254
 	r27->x1828 = 0;
 
-	r27->x221C_7_hitstun = 0;
+	r27->x221C_6_hitstun = 0;
 
 	r27->x18A0 = 0.0f;//lbl_804D8254
-	r27->x1968_jumps_used = 0;
-	r27->x1969_walljumps_used = 0;
-	r27->x196C_hitlag_mult = 0.0f;//lbl_804D8254
-	r27->x2064_ledge_cooldown = 0;
+	r27->x1968_jumpsUsed = 0;
+	r27->x1969_walljumpUsed = 0;
+	r27->x196C_hitlagMult = 0.0f;//lbl_804D8254
+	r27->x2064_ledgeCooldown = 0;
 
 	//@1b4
 	r27->x1830_percent = (f32) Player_GetDamage(r27->xC_playerID);
 
-	r27->x1838_percent_temp = 0.0f;//lbl_804D8254
+	r27->x1838_percentTemp = 0.0f;//lbl_804D8254
 
 	r27->x183C = 0;
 	r27->x18C0 = 0;
 
-	r27->x18C4_source_playerID = 6;
+	r27->x18C4 = 6;
 	r27->x18C8 = -1;
 	r27->x18F0 = 0;
 	r27->x18CC = 0;
 	r27->x18D0 = -10;
 
-	r27->x221F_6 = 0;
-	r27->x2221_2 = 0;
+	r27->x221F_flag.bits.b5 = 0;
+	r27->x2221_flag.bits.b1 = 0;
 
 	r27->x18F4 = 0;
 	r27->x18F8 = 1;
-	r27->x18FA_model_shift_frames = 0;
+	r27->x18FA = 0;
 	r27->x18FD = 0;
 	r27->x18FC = 0;
 	r27->x1834 = 0.0f;//lbl_804D8254
 
-	r27->x2222_3 = 0;
+	r27->x2222_flag.bits.b2 = 0;
 
 	r27->x1840 = 0;
 
-	r27->x2219_6_freeze = 0;
-	r27->x2219_7 = 0;
-	r27->x2219_8 = 0;
-	r27->x221A_1 = 0;
-	r27->x221A_2 = 0;
+	r27->x2219_flag.bits.b5 = 0; // freeze bit?
+	r27->x2219_flag.bits.b6 = 0;
+	r27->x2219_flag.bits.b7 = 0;
+	r27->x221A_flag.bits.b0 = 0;
+	r27->x221A_flag.bits.b1 = 0;
 
 	r27->x1954 = 0.0f;//lbl_804D8254
 	r27->x1958 = 0.0f;//lbl_804D8254
 
-	r27->x221A_3 = 0;
+	r27->x221A_flag.bits.b2 = 0;
 
-	r27->x195C_hitlag_frames = 0.0f;//lbl_804D8254
+	r27->x195C_hitlagFrames = 0.0f;//lbl_804D8254
 
-	r27->x221A_4 = 0;
-	r27->x1960_vibrate_mult = 1.0f;//lbl_804D8250
+	r27->x221A_flag.bits.b3 = 0;
+	r27->x1960_vibrateMult = 1.0f;//lbl_804D8250
 	r27->x1964 = 0.0f;//lbl_804D8254
 	r27->x189C = 0.0f;//lbl_804D8254
 
-	r27->x2220_4 = 0;
-	r27->x2220_5 = 0;
+	r27->x2220_flag.bits.b3 = 0;
+	r27->x2220_flag.bits.b4 = 0;
 
 	r27->x1914 = 0;
 	r27->x1918 = 0;
@@ -443,57 +442,57 @@ void func_80067C98(Fighter* r27)
 	r27->x1924 = 0;
 	r27->x1928 = 0.0f;//lbl_804D8254
 
-	r27->x2223_6 = 0;
+	r27->x2223_flag.bits.b5 = 0;
 
 	r27->x1950 = 0;
 	r27->x1948 = 0;
 
-	r27->x2223_5 = 0;
+	r27->x2223_flag.bits.b4 = 0;
 
-	r27->xF8_player_nudge_vel.y/*FC*/ = 0.0f;//lbl_804D8254
-	r27->xF8_player_nudge_vel.x/*F8*/ = 0.0f;//lbl_804D8254
+	r27->xF8_playerNudgeVel.y/*FC*/ = 0.0f;//lbl_804D8254
+	r27->xF8_playerNudgeVel.x/*F8*/ = 0.0f;//lbl_804D8254
 	r27->x100 = -1.0f;//lbl_804D8258;
 
-	r27->x2222_8 = 0;
-	r27->x2223_1 = 0;
-	r27->x221A_5 = 0;
-	r27->x2219_1 = 0;
+	r27->x2222_flag.bits.b7 = 0;
+	r27->x2223_flag.bits.b0 = 0;
+	r27->x221A_flag.bits.b4 = 0;
+	r27->x2219_flag.bits.b0 = 0;
 
-	r27->x20A0_accessory = 0;
-	r27->x2210 = 0;
-	r27->x2214_throw_timerval = 0.0f;//lbl_804D8254
+	r27->x20A0 = 0;
+	r27->x2210_ThrowFlags.flags = 0;
+	r27->x2214 = 0.0f;//lbl_804D8254
 	r27->x1974_heldItem = 0;
 	r27->x1978 = 0;
 
-	r27->x221E_4 = 1;
+	r27->x221E_flag.bits.b3 = 1;
 
-	r27->x1984_item_held_spec = 0;
-	r27->x1988_hurtstatus.x1988_script = 0;
-	r27->x1988_hurtstatus.x198C_game = 0;
+	r27->x1984_heldItemSpec = 0;
+	r27->x1988 = 0;
+	r27->x198C = 0;
 
-	r27->x2221_1 = 0;
+	r27->x2221_flag.bits.b0 = 0;
 
-	r27->x1988_hurtstatus.x1990_ledge_intang_left = 0;
-	r27->x1988_hurtstatus.x1994_respawn_intang_left = 0;
+	r27->x1990 = 0;
+	r27->x1994 = 0;
 
-	r27->x221D_7 = 0;
-	r27->x221B_6 = 0;
+	r27->x221D_6 = 0;
+	r27->x221B_flag.bits.b5 = 0;
 
-	r27->grab.x1A58_attacker = 0;
-	r27->grab.x1A5C_victim = 0;
+	r27->x1A58 = 0;
+	r27->x1A5C = 0;
 
-	r27->x221B_7 = 0;
+	r27->x221B_flag.bits.b6 = 0;
 
-	r27->grab.x1A60 = 0;
-	r27->grab.x1A64 = 0;
+	r27->x1A60 = 0;
+	r27->x1A64 = 0;
 
-	r27->x221B_8 = 0;
-	r27->x221C_1 = 0;
+	r27->x221B_flag.bits.b7 = 0;
+	r27->x221C_0 = 0;
 
-	r27->x1064_thrown_hitbox.x134 /*x1198*/ = 0;
+	r27->x1064_thrownHitbox.x134 /*x1198*/ = 0;
 	r27->x221C_u16_y = 0;
 	r27->x20AC = 0;
-	r27->x221C_6 = 0;
+	r27->x221C_5 = 0;
 
 	r27->x214C = -1;
 	r27->x2148 = -1;
@@ -506,49 +505,48 @@ void func_80067C98(Fighter* r27)
 	r27->x2168 = 0;
 	r27->x2164 = 0;
 	r27->x208C = 0;
-	r27->x2090 = (s16) 0;
-	r27->x2098 = (s16) 0;
-	r27->x2092 = (s16) 0;
-	r27->x2094_victim = 0;
-	r27->shield.x1998_health = ((f32*)lbl_804D6554)[0x260/sizeof(f32)];
+	r27->x2090 = 0;
+	r27->x2098 = 0;
+	r27->x2092 = 0;
+	r27->x2094 = 0;
+	r27->x1998_shieldHealth = ((f32*)lbl_804D6554)[0x260/sizeof(f32)];
 
-	r27->x221A_8 = 0;
-	r27->x221B_1 = 0;
-	r27->x221B_2 = 0;
-	r27->x221B_4 = 0;
-	r27->x221B_5 = 0;
-	r27->x221C_4 = 0;
-	r27->x221C_2 = 0;
+	r27->x221A_flag.bits.b7 = 0;
+	r27->x221B_flag.bits.b0 = 0;
+	r27->x221B_flag.bits.b1 = 0;
+	r27->x221B_flag.bits.b3 = 0;
+	r27->x221B_flag.bits.b4 = 0;
 	r27->x221C_3 = 0;
+	r27->x221C_1 = 0;
 
-	r27->shield.x19A0_dmg_taken = 0;
-	r27->shield.x19A4_dmg_taken2 = 0;
-	r27->shield.x199C_lightshield_amt = 0.0f;//lbl_804D8254
-	r27->shield.x19A8_dmg_source = 0;
-	r27->shield.x19B4 = 0.0f;//lbl_804D8254
-	r27->shield.x19B8 = 0.0f;//lbl_804D8254
-	r27->shield.x19BC_dmg_taken3 = 6;
+	r27->x19A0_shieldDamageTaken = 0;
+	r27->x19A4_shieldDamageTaken2 = 0;
+	r27->x199C_shieldLightshieldAmt = 0.0f;//lbl_804D8254
+	r27->x19A8_shieldDamageSource = 0;
+	r27->x19B4_shieldUnk = 0.0f;//lbl_804D8254
+	r27->x19B8_shieldUnk = 0.0f;//lbl_804D8254
+	r27->x19BC_shieldDamageTaken3 = 6;
 
-	r27->x221F_7 = 0;
-	r27->x2218_4 = 0;
-	r27->x2218_5 = 0;
-	r27->absorb_hit.x1A3C = 0;
-	r27->reflect_hit.x1A2C_hit_direction = 0.0f;//lbl_804D8254
-	r27->x2218_7 = 0; // addi r3, r27, 0
-	r27->x2218_8 = 0;
+	r27->x221F_flag.bits.b6 = 0;
+	r27->x2218_flag.bits.b3 = 0;
+	r27->x2218_flag.bits.b4 = 0;
+	r27->x1A3C = 0;
+	r27->x1A2C_reflectHitDirection = 0.0f;//lbl_804D8254
+	r27->x2218_flag.bits.b6 = 0; // addi r3, r27, 0
+	r27->x2218_flag.bits.b7 = 0;
 
-	r27->absorb_hit.x1A40_hit_direction = 0.0f;//lbl_804D8254
+	r27->x1A40 = 0.0f;//lbl_804D8254
 	// -> mr r3, r27
-	r27->absorb_hit.x1A44_dmg_taken = 0;
-	r27->absorb_hit.x1A48_hits_taken = 0;
+	r27->x1A44 = 0;
+	r27->x1A48 = 0;
 
-	r27->x68C_transN_pos.z/*x694*/ = 0.0f;//lbl_804D8254
-	r27->x68C_transN_pos.y/*x690*/ = 0.0f;//lbl_804D8254
-	r27->x68C_transN_pos.x/*x68C*/ = 0.0f;//lbl_804D8254
-	r27->x6A4_transN_offset.z/*x6AC*/ = 0.0f;//lbl_804D8254
-	r27->x6A4_transN_offset.y/*x6A8*/ = 0.0f;//lbl_804D8254
-	r27->x6A4_transN_offset.x/*x6A4*/ = 0.0f;//lbl_804D8254
-	r27->x6BC_input_stickangle = 0.0f;//lbl_804D8254
+	r27->x68C_transNPos.z/*x694*/ = 0.0f;//lbl_804D8254
+	r27->x68C_transNPos.y/*x690*/ = 0.0f;//lbl_804D8254
+	r27->x68C_transNPos.x/*x68C*/ = 0.0f;//lbl_804D8254
+	r27->x6A4_transNOffset.z/*x6AC*/ = 0.0f;//lbl_804D8254
+	r27->x6A4_transNOffset.y/*x6A8*/ = 0.0f;//lbl_804D8254
+	r27->x6A4_transNOffset.x/*x6A4*/ = 0.0f;//lbl_804D8254
+	r27->x6BC_inputStickangle = 0.0f;//lbl_804D8254
 	// TODO: following three elements probably a vector because of the reverse order init that happens a lot with vectors
 	r27->x6C8 = 0.0f;//lbl_804D8254
 	r27->x6C4 = 0.0f;//lbl_804D8254
@@ -559,17 +557,17 @@ void func_80067C98(Fighter* r27)
 	r27->x6D8 = 0.0f;//lbl_804D8254
 
 	r27->x209C = (s16) 0;
-	r27->x2224_2 = 0;
+	r27->x2224_flag.bits.b1 = 0;
 	r27->x21E4_callback_OnDeath2 = 0;
-	r27->afterimage.x2100_afterimage_state = -1;
-	r27->afterimage.x2101_1_to_7 = 0;
+	r27->x2100 = -1;
+	r27->x2101_bits_0to6 = 0;
 	r27->x21B4_callback_Accessory2 = 0;
 	r27->x21B8_callback_Accessory3 = 0;
 	r27->x21E0_callback_OnDeath = 0;
 	r27->x21E8_callback_OnDeath3 = 0;
-	r27->x221E_5 = 1;
+	r27->x221E_flag.bits.b4 = 1;
 	r27->x197C = 0;
-	r27->x2223_8 = 0;
+	r27->x2223_flag.bits.b7 = 0;
 	r27->x2028 = 0;
 	r27->x202C = 0;
 
@@ -577,42 +575,42 @@ void func_80067C98(Fighter* r27)
 	func_800C88A0(r27=r27+0); // TODO: make the compiler use mr r3,r27 instead of addi r3,r27,0 to pass the argument
 
 	//@598
-	r27->x2227_4 = 0;
+	r27->x2227_flag.bits.b3 = 0;
 	r27->x2034 = 0;
 	r27->x2038 = 0;
-	r27->x1980_item_head = 0;
+	r27->x1980 = 0;
 
 	//@5b4 TODO: write the assembly pattern that this generates down somewhere
-	r27->x2224_3 = r27->x2224_4 = 0;
+	r27->x2224_flag.bits.b2 = r27->x2224_flag.bits.b3 = 0;
 
 	//@5d0
-	r27->x2224_5 = 0;
+	r27->x2224_flag.bits.b4 = 0;
 	r27->x2108 = 0;
-	r27->x2224_6 = 0;
-	r27->grab.x1A53 = (s8) 0;
-	r27->grab.x1A52 = (s8) 0;
-	r27->x210C = (u8) 254;
+	r27->x2224_flag.bits.b5 = 0;
+	r27->x1A53 = (s8) 0;
+	r27->x1A52 = (s8) 0;
+	r27->x210C_walljumpInputTimer = 254;
 	r27->x1910 = 0;
-	r27->x2225_1 = 0;
-	r27->x2225_3 = 1;
-	r27->x2225_5 = 0;
+	r27->x2225_flag.bits.b0 = 0;
+	r27->x2225_flag.bits.b2 = 1;
+	r27->x2225_flag.bits.b4 = 0;
 	func_800DEEA8(r27->x0_fighter);
 	r27->x18BC = 0.0f;//lbl_804D8254
 	r27->x18B8 = 0.0f;//lbl_804D8254
-	r27->x2226_3 = 0;
+	r27->x2226_flag.bits.b2 = 0;
 	r27->x2170 = 0.0f;//lbl_804D8254
-	r27->x2225_7 = r27->x2225_6;
+	r27->x2225_flag.bits.b6 = r27->x2225_flag.bits.b5;
 	r27->x1908 = -1;
 	r27->x190C = 0;
-	r27->x2227_5 = 0;
-	r27->smash.x2138_since_hitbox = -1.0f;//lbl_804D8258;
+	r27->x2227_flag.bits.b4 = 0;
+	r27->x2138_smashSinceHitbox = -1.0f;//lbl_804D8258;
 	r27->x213C = -1;
-	r27->x2227_6 = 0;
-	r27->x2228_2 = 0;
+	r27->x2227_flag.bits.b5 = 0;
+	r27->x2228_flag.bits.b1 = 0;
 	r27->x2140 = 0.0f;//lbl_804D8254
-	r27->x2227_7 = 0;
+	r27->x2227_flag.bits.b6 = 0;
 	r27->x2180 = 6;
-	r27->x2229_5 = 1;
+	r27->x2229_flag.bits.b4 = 1;
 }
 #else
 asm void func_80067C98()
@@ -1051,7 +1049,6 @@ asm void func_80067C98()
 /* 80068350 00064F30  4E 80 00 20 */	blr  
 }
 #endif
-
 
 // https://decomp.me/scratch/pmxBU
 asm void func_80068354()
