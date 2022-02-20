@@ -49,28 +49,28 @@ double frexp(double x, int* exponent) {
 	return x;
 }
 
-double func_803261B4(double param_1)
+double fabsf__Ff(double param_1)
 {
     return fabs(param_1);
 }
 
 float tanf(float x)
 {
-    // tan(x) == sin(x) / cos(x)?
+    // tan(x) == sin(x) / cos(x)
     return func_80326220(x) / func_80326200(x);
 }
 
-float func_80326200(float x)
+float cos__Ff(float x)
 {
     return func_80326240(x);
 }
 
-float func_80326220(float x)
+float sin__Ff(float x)
 {
     return func_803263D4(x);
 }
 
-float func_80326240(float x) {
+float cosf(float x) {
     float z = __two_over_pi * x;
 
     //note we multiply n by 2 below because the polynomial we are using is for [o,pi/4]. n is the nearest multiple
@@ -110,7 +110,7 @@ float func_80326240(float x) {
     return z * __sincos_on_quadrant[n + 1]; // sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple of pi/2(not pi)
 }
 
-float func_803263D4(float x) {
+float sinf(float x) {
     float z = __two_over_pi * x;
     //note we multiply n by 2 below because the polynomial we are using is for [o,pi/4]. n is the nearest multiple
     // of pi/2 not pi/4.
