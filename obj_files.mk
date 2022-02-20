@@ -97,7 +97,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftemblem.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftzakoboy.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftzakogirl.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftgigakoopa.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftgigakoopa.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftsandbag.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.o 	\
