@@ -71,8 +71,8 @@ typedef struct _CollData
 
 typedef struct _HitVictim
 {
-    void *data; // userdata of the object that was hit
-    int timer;  // items use this to wait until hitting this gobj again
+	void *data; // userdata of the object that was hit
+	int timer;  // items use this to wait until hitting this gobj again
 } HitVictim;
 
 typedef struct _ftHit
@@ -143,7 +143,7 @@ typedef struct _Fighter {
 	u8 filler_x8AC[0x914 - 0x8B0];
 	/* 0x914 */ f32 x914;
 	u8 filler_x918[0x1064 - 0x918];
-    	/* 0x1064 */ ftHit x1064_thrownHitbox;
+	/* 0x1064 */ ftHit x1064_thrownHitbox;
 	u8 filler_x1064[0x1828 - 0x1064 - sizeof(ftHit)];
 	/* 0x1828 */ s32 x1828;
 	s32 filler_x182C;
@@ -226,8 +226,8 @@ typedef struct _Fighter {
 	/* 0x1A44 */ s32 x1A44;
 	/* 0x1A48 */ s32 x1A48;
 	u8 filler_x1A4C[0x1A52 - 0x1A4C];
-    /* 0x1A52 */ s8 x1A52;
-    /* 0x1A53 */ s8 x1A53;
+	/* 0x1A52 */ s8 x1A52;
+	/* 0x1A53 */ s8 x1A53;
 	s32 filler_x1A54;
 	/* 0x1A58 */ HSD_GObj* x1A58; // grabAttacker?
 	/* 0x1A5C */ HSD_GObj* x1A5C; // grabVictim?
@@ -249,7 +249,7 @@ typedef struct _Fighter {
 	/* 0x208C */ s32 x208C;
 	/* 0x2090 */ s16 x2090;
 	/* 0x2092 */ s16 x2092;
-    /* 0x2094 */ s32 x2094;
+	/* 0x2094 */ s32 x2094;
 	/* 0x2098 */ s16 x2098;
 	s16 filler_x209A;
 	/* 0x209C */ s16 x209C;
@@ -313,7 +313,7 @@ typedef struct _Fighter {
 	void (*x21F4_callback_OnHurtboxDetect)(HSD_GObj *fighter);
 	void (*x21F8_callback_OnSpin)(HSD_GObj *fighter);
 	u8 filler_x21FC[0x2200 - 0x21FC];
-    /* 0x2200 */ u32 x2200_ftcmd_var0;
+	/* 0x2200 */ u32 x2200_ftcmd_var0;
 	/* 0x2204 */ u32 x2200_ftcmd_var1;
 	/* 0x2208 */ u32 x2200_ftcmd_var2;
 	/* 0x220C */ u32 x2200_ftcmd_var3;
