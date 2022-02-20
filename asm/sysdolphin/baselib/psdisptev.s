@@ -554,7 +554,7 @@ lbl_803A4128:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7950
 lbl_804D7950:
 	.skip 0x8

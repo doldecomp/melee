@@ -365,7 +365,7 @@ lbl_80408480:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6060
 lbl_804D6060:
     .asciz "gproc"

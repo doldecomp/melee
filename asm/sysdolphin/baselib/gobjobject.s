@@ -107,4 +107,3 @@ lbl_80408558:
 lbl_80408568:
     .asciz "gobj->obj_kind == HSD_GOBJ_OBJ_NONE"
     .balign 4
-    .4byte NULL

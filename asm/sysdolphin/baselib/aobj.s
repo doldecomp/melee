@@ -39,4 +39,3 @@ jtbl_8040608C:
     .4byte HSD_ForeachAnim + 0xA4
     .4byte HSD_ForeachAnim + 0xC0
     .4byte HSD_ForeachAnim + 0xD8
-    .4byte NULL
