@@ -77,46 +77,7 @@ typedef struct _HitVictim
 
 typedef struct _ftHit
 {
-	int active;                   // 0x0
-	int x4;                       // 0x4
-	int dmg;                      // 0x8
-	float dmg_f;                  // 0xc
-	Vec3 offset;                  // 0x10
-	float size;                   // 0x1c
-	int angle;                    // 0x20
-	int kb_growth;                // 0x24
-	int wdsk;                     // 0x28
-	int kb;                       // 0x2c
-	int attribute;                // 0x30
-	int shield_dmg;               // 0x34
-	int hitsound_severity;        // 0x38. hurtbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both
-	int hitsound_kind;            // 0x3c
-	char x40;                     // 0x40
-	char x41;                     // 0x41
-	unsigned char x421 : 1;       // 0x42 0x80
-	unsigned char x422 : 1;       // 0x42 0x40
-	unsigned char x423 : 1;       // 0x42 0x20
-	unsigned char x424 : 1;       // 0x42 0x10
-	unsigned char no_hurt : 1;    // 0x42 0x08      ignore hurtbox
-	unsigned char no_reflect : 1; // 0x42 0x04      ignore reflect?
-	unsigned char x427 : 1;       // 0x42 0x02
-	unsigned char x428 : 1;       // 0x42 0x01
-	unsigned char x431 : 1;       // 0x43 0x80
-	unsigned char x432 : 1;       // 0x43 0x40
-	unsigned char hit_all : 1;    // 0x43 0x20
-	unsigned char x434 : 1;       // 0x43 0x10
-	unsigned char x435 : 1;       // 0x43 0x08
-	unsigned char x436 : 1;       // 0x43 0x04
-	unsigned char x437 : 1;       // 0x43 0x02
-	unsigned char x438 : 1;       // 0x43 0x01
-	u8 x44;                       // 0x44
-	u8 victim_num;                // 0x45
-	void *bone;                   // 0x48
-	Vec3 pos;                     // 0x4c
-	Vec3 pos_prev;                // 0x58
-	Vec3 pos_coll;                // 0x64   position of hurt collision
-	float coll_distance;          // 0x70   Distance From Collding FtHurt (Used for phantom hit collision calculation)
-	HitVictim victims[24];        // 0x74
+	u8 filler_x0[0x134];
 	int x134;                     // 0x134, flags of some sort
 } ftHit;
 
