@@ -3,9 +3,10 @@
 
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
-#include <sysdolphin/baselib/gobj.h>
 
-typedef struct { float x, y; } Vec2;
+#include "sysdolphin/baselib/gobj.h"
+
+typedef struct { float x, y;    } Vec2;
 typedef Vec Vec3;
 
 typedef struct _ftData
@@ -30,6 +31,23 @@ typedef struct _UnkFlagStruct {
     } bits;
 } UnkFlagStruct;
 
+typedef struct _ThrowFlags
+{
+	union {
+		struct {
+			u8 b0 : 1;
+			u8 b1 : 1;
+			u8 b2 : 1;
+			u8 b3 : 1;
+			u8 b4 : 1;
+			u8 b5 : 1;
+			u8 b6 : 1;
+			u8 b7 : 1;
+		};
+		u32 flags;
+	};
+} ThrowFlags;
+
 typedef struct _FighterBone
 {
 	/* 0x0 */ u32* x0_joint;
@@ -52,7 +70,9 @@ typedef struct _CollData
 } CollData;
 
 typedef struct _Fighter {
-	u8 filler_x0[0xB0 - 0x0];
+	u8 filler_x0[0x2C - 0x0];
+	/* 0x2C */ f32 x2C_facing_direction;
+	u8 filler_x2C[0xB0 - 0x30];
 	/* 0xB0 */ Vec3 xB0_pos;
 	u8 filler_xB0[0xC8 - 0xB0 - 12];
 	/* 0xC8 */ Vec3 xC8_pos_delta;
@@ -70,7 +90,7 @@ typedef struct _Fighter {
 	/* 0x5E8 */ FighterBone* x5E8_fighterBones;
 	u8 filler_x5E8[0x618 - 0x5EC];
 	/* 0x618 */ s8 x618_flag;
-	/* 0x619 */ s8 x619_costumeID;
+	/* 0x619 */ s8 x619_flag;
 	u8 filler_x619[0x620 - 0x61A];
 	/* 0x620 */ f32 x620_lstick_x;
 	u8 filler_x620[0x670 - 0x624];
@@ -79,24 +99,41 @@ typedef struct _Fighter {
 	/* 0x6F0 */ CollData x6F0_collData;
 	u8 filler_x6F0[0x8AC - 0x6F0 - sizeof(CollData)];
 	/* 0x8AC */ s32 x8AC_animSkeleton;
-	u8 filler_x8AC[0x1969 - 0x8B0];
+	u8 filler_x8AC[0x18B0 - 0x8B0];
+	/* 0x18B0 */ f32 x18B0;
+	u8 filler_x18B0[0x1969 - 0x18B4];
 	/* 0x1969 */ u8 x1969_walljumpUsed;
 	/* 0x196C */ int x196C;
 	/* 0x1970 */ int x1970;
 	/* 0x1974 */ void* x1974_heldItem;
-	u8 filler_x1974[0x210C - 0x1978];
+	u8 filler_x1974[0x1A58 - 0x1978];
+	/* 0x1A58 */ u32 x1A58;
+	u8 filler_x1A58[0x210C - 0x1A5C];
 	/* 0x210C */ u8 x210C_walljumpInputTimer;
 	u8 filler_x210C[3];
 	/* 0x2110 */ f32 x2110_walljumpWallSide;
-	u8 filler_x2110[0x221F - 0x2114];
+	u8 filler_x2110[0x2200 - 0x2114];
+    /* 0x2200 */ u32 x2200_ftcmd_var0;
+	/* 0x2204 */ u32 x2200_ftcmd_var1;
+	/* 0x2208 */ u32 x2200_ftcmd_var2;
+	/* 0x220C */ u32 x2200_ftcmd_var3;
+	/* 0x2210 */ ThrowFlags x2210_ThrowFlags;
+	/* 0x2214 */ u32 x2214;
+	/* 0x2218 */ u32 x2218;
+	u8 filler_x221C[3];
 	/* 0x221F */ UnkFlagStruct x221F_flag;
-	u8 filler_x221F[0x2224 - 0x2220];
+	u8 filler_x2220;
+	u8 filler_x2221;
+	/* 0x2222 */ UnkFlagStruct x2222_flag;
+	u8 filler_x2223;
 	/* 0x2224 */ UnkFlagStruct x2224_flag;
 	u8 filler_x2225;
 	/* 0x2226 */ UnkFlagStruct x2226_flag;
 	u8 filler_x2227;
 	/* 0x2228 */ UnkFlagStruct x2228_flag;
-	u8 filler_x2228[3];
+	u8 filler_x2229;
+	/* 0x222A */ UnkFlagStruct x222A_flag;
+	u8 filler_x222B;
 	/* 0x222C */ u32 x222C;
 	/* 0x2230 */ u32 x2230;
 	/* 0x2234 */ u32 x2234;
@@ -106,12 +143,17 @@ typedef struct _Fighter {
 	/* 0x2244 */ u32 x2244;
 	/* 0x2248 */ u32 x2248;
 	/* 0x224C */ u32 x224C;
-	u8 filler_x224C[0x2354-0x2250];
+	u8 filler_x224C[0x2340-0x2250];
+	/* 0x2340 */ u32 x2340_stateVar1;
+	/* 0x2344 */ u32 x2344_stateVar2;
+	/* 0x2348 */ u32 x2348_stateVar3;
+	/* 0x234C */ u32 x234C_stateVar4;
+	/* 0x2350 */ u32 x2350_stateVar5;
 	/* 0x2354 */ float x2354_stateVar6;
 	/* 0x2358 */ float x2358_stateVar7;
 } Fighter;
 
-typedef struct ftCommonData
+typedef struct // ftCommonData
 {
 	u8 filler_x0[0x768-0x0];
 	/* 0x768 */ float x768;
@@ -140,7 +182,6 @@ void func_80040B8C();
 void func_800411C4();
 void func_80041280();
 void func_8004CBF4();
-void func_800567C0();
 void func_8006737C();
 void func_80067624();
 void func_80067688();
@@ -261,7 +302,6 @@ void func_8007DB24();
 void func_8007DB58();
 void func_8007E0E4();
 void func_8007E2A4();
-void func_8007E2F4();
 void func_8007E2FC();
 void func_8007E83C();
 void func_8007E994();

@@ -3629,7 +3629,7 @@ func_8036EB88:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406398
 lbl_80406398:
     .4byte func_8036EB88

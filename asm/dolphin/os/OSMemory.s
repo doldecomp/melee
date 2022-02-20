@@ -224,7 +224,7 @@ lbl_80347EB0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402348
 lbl_80402348:
     .4byte OSOnReset

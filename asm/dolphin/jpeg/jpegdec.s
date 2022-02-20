@@ -6984,7 +6984,7 @@ lbl_803B9410:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400B28
 lbl_80400B28:
     .asciz "ERROR: THP only supports 4:2:0!!!\n"

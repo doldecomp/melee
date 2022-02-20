@@ -420,7 +420,7 @@ func_8024A6C4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EEFD8
 lbl_803EEFD8:
     .4byte NULL

@@ -194,7 +194,7 @@ lbl_803447A8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80401B70
 lbl_80401B70:
     .4byte 0x029F0010

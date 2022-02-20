@@ -1,6 +1,6 @@
 #include "ftmewtwo.h"
 
-void func_80144DFC(HSD_GObj* gobj) {
+void ftMewtwo_OnDeath(HSD_GObj* gobj) {
     Fighter* ft = (Fighter*)gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     ft->x222C = 0;

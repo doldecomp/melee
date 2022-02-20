@@ -9,6 +9,6 @@
 
 #include "melee/ft/fighter.h"
 
-void func_8014949C(HSD_GObj* gobj);
+void ftDrMario_OnDeath(HSD_GObj* gobj);
 
 #endif

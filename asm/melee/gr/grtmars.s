@@ -1,7 +1,7 @@
 .include "macros.inc"
 
 .section .data
-
+    .balign 8
 .global lbl_803E8EB0
 lbl_803E8EB0:
     .4byte GrTMars_80222080

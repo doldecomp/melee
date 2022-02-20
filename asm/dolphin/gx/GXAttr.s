@@ -1097,7 +1097,7 @@ GXSetNumTexGens:
 
 
 .section .data
-
+    .balign 8
 .global jtbl_80401048
 jtbl_80401048:
 	.4byte lbl_8033BF20

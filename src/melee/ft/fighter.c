@@ -8,6 +8,9 @@
 #include "melee/gr/stage.h"
 #include "melee/pl/player.h"
 
+// TODO: put this in functions.h, same for ftkoopa.c
+extern void* func_8007E2F4();
+
 #include "sysdolphin/baselib/controller.h"
 extern HSD_RumbleData HSD_PadRumbleData[4];
 

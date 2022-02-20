@@ -3897,7 +3897,7 @@ lbl_802FB6D8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F97A8
 lbl_803F97A8:
     .asciz "Stc_scemdls"

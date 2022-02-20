@@ -1368,7 +1368,7 @@ lbl_803534FC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402FF0
 lbl_80402FF0:
     .4byte OnReset

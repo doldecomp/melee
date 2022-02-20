@@ -941,7 +941,7 @@ HSD_FObjFree:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406350
 lbl_80406350:
     .asciz "st == FOBJ_LOAD_WAIT"

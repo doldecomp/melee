@@ -622,7 +622,7 @@ lbl_80016134:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BA380
 lbl_803BA380:
     .4byte 0x00000002
@@ -705,7 +705,6 @@ lbl_803BA43C:
     .balign 4
     .asciz "   ARAM Total : %5d KB( %8d)\n"
     .balign 4
-    .4byte NULL
 
 
 .section .bss

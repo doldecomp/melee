@@ -5183,7 +5183,7 @@ lbl_803B8044:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E1A10
 lbl_803E1A10:
     .4byte 0x00010006

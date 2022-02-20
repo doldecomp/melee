@@ -6738,7 +6738,7 @@ lbl_8007C0FC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C0C40
 lbl_803C0C40:
     .4byte 0x0000008D

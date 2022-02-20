@@ -5346,7 +5346,7 @@ lbl_8005FDB8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BF7A0
 lbl_803BF7A0:
     .asciz "Duplicate Free %08X\n"

@@ -11812,7 +11812,7 @@ lbl_803B8134:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E2938
 lbl_803E2938:
     .4byte 0x00240022

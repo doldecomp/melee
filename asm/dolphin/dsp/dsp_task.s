@@ -634,7 +634,7 @@ lbl_80336ABC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400C40
 lbl_80400C40:
     .asciz "DSP is booting task: 0x%08X\n"

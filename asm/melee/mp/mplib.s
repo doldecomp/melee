@@ -15185,7 +15185,7 @@ lbl_8005A6C0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BD3D8
 lbl_803BD3D8:
     .4byte 0x3F800000

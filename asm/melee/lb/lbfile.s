@@ -616,7 +616,7 @@ lbl_80016A40:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BA508
 lbl_803BA508:
     .asciz "lbfile.c"

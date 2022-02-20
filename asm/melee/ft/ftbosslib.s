@@ -1212,7 +1212,7 @@ lbl_803B75E8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803D49C0
 lbl_803D49C0:
     .asciz "boss is human or boss!\n"

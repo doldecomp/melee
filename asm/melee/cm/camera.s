@@ -9903,7 +9903,7 @@ lbl_803B73DC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BCB18
 lbl_803BCB18:
     .4byte func_8002B3D4
@@ -10059,7 +10059,6 @@ lbl_803BCCA0:
     .4byte 0x44960000
     .4byte 0xBE4CCCCD
     .4byte 0x3F99999A
-    .4byte NULL
 
 
 .section .bss

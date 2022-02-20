@@ -4820,7 +4820,7 @@ lbl_803B84D8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EA6C8
 lbl_803EA6C8:
     .asciz "DATE Feb 13 2002  TIME 22:06:27"

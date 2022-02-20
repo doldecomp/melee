@@ -5871,7 +5871,7 @@ func_8035DD8C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804031A0
 lbl_804031A0:
     .4byte 0x00000DF8

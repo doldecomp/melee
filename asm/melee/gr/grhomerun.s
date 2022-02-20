@@ -2880,7 +2880,7 @@ func_8021EF10:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E8140
 lbl_803E8140:
 	.4byte lbl_8021C914

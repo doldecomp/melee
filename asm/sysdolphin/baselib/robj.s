@@ -2044,7 +2044,7 @@ lbl_803B9598:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406E68
 lbl_80406E68:
     .asciz "rp->u.jobj"

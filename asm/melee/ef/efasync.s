@@ -4864,7 +4864,7 @@ func_80067980:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BFB00
 lbl_803BFB00:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"

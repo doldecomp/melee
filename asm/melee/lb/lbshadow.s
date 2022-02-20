@@ -1132,7 +1132,7 @@ lbl_8000F9D4:
 
 .section .data
 
-    .4byte NULL
+    .balign 8
 
 .global lbl_803BA0D8
 lbl_803BA0D8:
@@ -1162,7 +1162,6 @@ lbl_803BA0FC:
     .4byte NULL
     .asciz "coudn t get light position ...\n"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata

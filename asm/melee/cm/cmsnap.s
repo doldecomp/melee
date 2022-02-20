@@ -107,7 +107,7 @@ func_800316B4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BCD90
 lbl_803BCD90:
     .asciz "cmsnap.c"

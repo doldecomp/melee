@@ -2808,7 +2808,7 @@ lbl_80387DD0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407AA0
 lbl_80407AA0:
     .asciz "texpdag.c"

@@ -6,7 +6,7 @@ typedef struct _PairStruct {
     u8 padding[0xB8];
 } PairStruct;
 
-void func_8011B51C(HSD_GObj* gobj) 
+void ftPeach_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft;
 
@@ -23,7 +23,7 @@ void func_8011B51C(HSD_GObj* gobj)
     func_80074A4C(gobj, 3, -1);
     func_80074A4C(gobj, 4, 0);
 
-    switch (ft->x619_costumeID)
+    switch (ft->x619_flag)
     {
         case 1:
             func_80074A4C(gobj, 1, -1);

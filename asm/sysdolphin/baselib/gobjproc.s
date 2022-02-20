@@ -355,7 +355,7 @@ lbl_8038FF40:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80408480
 lbl_80408480:
     .asciz "gobjproc.c"

@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8013C318
-func_8013C318:
+.global ftPurin_OnDeath
+ftPurin_OnDeath:
 /* 8013C318 00138EF8  7C 08 02 A6 */	mflr r0
 /* 8013C31C 00138EFC  38 80 00 00 */	li r4, 0
 /* 8013C320 00138F00  90 01 00 04 */	stw r0, 4(r1)

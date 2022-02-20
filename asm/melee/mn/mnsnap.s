@@ -6132,7 +6132,7 @@ lbl_80258718:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F0168
 lbl_803F0168:
     .asciz "mnsnap.c"

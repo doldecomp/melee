@@ -107,7 +107,7 @@ lbl_8033A47C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400F98
 lbl_80400F98:
     .4byte NULL
