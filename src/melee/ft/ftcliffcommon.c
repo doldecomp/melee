@@ -26,7 +26,56 @@ BOOL func_80081298(HSD_GObj* gobj) {
     return FALSE;
 }
 
-// func_80081370
+typedef struct _UnkParameterStruct {
+    u8 data_filler_0[0x10];
+    f32 x10[2];
+    u8 data_filler_1[0x1];
+} UnkParameterStruct;
+
+void func_80081370(HSD_GObj* gobj) {
+    f32 facingDirection;
+    f32 ledgeDirection;
+
+    Fighter* fighter = gobj->user_data;
+    UnkParameterStruct unkParam;
+
+    if ((fighter->x6F0_collData.x134_envFlags & 0x01000000) != 0) {
+        ledgeDirection = 1.0f;
+    } else {
+        ledgeDirection = -1.0f;
+    }
+    facingDirection = fighter->x2C_facingDirection;
+    if (facingDirection != ledgeDirection) {
+        fighter->x2C_facingDirection = -facingDirection;
+    }
+    func_8007D780(fighter);
+    func_8007D5D4(fighter);
+    func_800693AC(gobj, 0xFC, 0, 0, 0.0f, 1.0f, 0.0f);
+    func_8006EBA4(gobj);
+    func_8007D5D4(fighter);
+    func_8007EFC0(fighter, lbl_804D6554->x5F0);
+    func_8007E2FC(gobj);
+    fighter->x221D_flag.bits.b7 = 1;
+    if (fighter->x2C_facingDirection > 0.0f) {
+        fighter->x2340_stateVar = fighter->x6F0_collData.x44;
+    } else {
+        fighter->x2340_stateVar = fighter->x6F0_collData.x40;
+    }
+    func_80081544(gobj);
+    func_800881D8(fighter, fighter->x10C_ftData->x4C_collisionData->x28, 0x7F, 0x40);
+    func_8007E2F4(fighter, 0x1FF);
+    func_8007EBAC(fighter, 0xC, 0);
+
+    if (fighter->x2C_facingDirection > 0.0f) {
+        func_80053ECC(fighter->x2340_stateVar, unkParam.x10);
+    }
+    else
+    {
+        func_80053DA4(fighter->x2340_stateVar, unkParam.x10);
+    }
+    efAsync_Spawn(gobj, (void*) ((u32) gobj->user_data + 0x60C), 2, 0x41C, 0, &unkParam.x10);
+    func_80088148(fighter, 4, 0x7F, 0x40);
+}
 
 void func_80081504(s32 arg0)
 {
