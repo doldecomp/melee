@@ -1,4 +1,4 @@
-#include "./math.h"
+#include "MSL/math.h"
 #include <math.h>
 
 #define __HI(x) *(int*)&x
