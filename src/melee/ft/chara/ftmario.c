@@ -1,6 +1,9 @@
 #include "ftmario.h"
 
 extern void func_800E1368(void);
+extern const f32 lbl_804D9190;
+extern const f32 lbl_804D9194;
+extern s32 lbl_803C5A20[];
 
 void ftMario_OnDeath(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
@@ -45,21 +48,11 @@ void ftMario_OnLoad(HSD_GObj* gobj) {
     func_8026B3F8(items[2], sA->x14);
 }
 
-asm void lbl_800E0A00(void)
+void func_800E0A00(void)
 {
-    nofralloc
-/* 800E0A00 000DD5E0  7C 08 02 A6 */	mflr r0
-/* 800E0A04 000DD5E4  90 01 00 04 */	stw r0, 4(r1)
-/* 800E0A08 000DD5E8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800E0A0C 000DD5EC  48 00 09 5D */	bl func_800E1368
-/* 800E0A10 000DD5F0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800E0A14 000DD5F4  38 21 00 08 */	addi r1, r1, 8
-/* 800E0A18 000DD5F8  7C 08 03 A6 */	mtlr r0
-/* 800E0A1C 000DD5FC  4E 80 00 20 */	blr 
+    func_800E1368();
 }
 
-#pragma push
-#pragma peephole on
 void func_800E0A20(HSD_GObj* gobj, s32 arg1) {
     s32 switched_res, result, unused;
 
@@ -88,4 +81,80 @@ void func_800E0A20(HSD_GObj* gobj, s32 arg1) {
         }
     }
 }
-#pragma pop
+
+void func_800E0B00(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+
+    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
+        func_80070CC4(gobj, 1);
+    }
+}
+
+void func_800E0B48(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+
+    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
+        func_80070C48(gobj, 1);
+    }
+}
+
+void func_800E0B90(HSD_GObj* gobj, s32 arg1)
+{
+    func_80070FB4(gobj, 1, -1);
+    if (arg1 != 0) {
+        func_80070CC4(gobj, 1);
+    }
+}
+
+void func_800E0BE4(HSD_GObj* gobj) {
+    Fighter* ft;
+    ftData* ftDataInfo;
+    ftMarioAttributes *sA, *ext_attr;
+
+    ft = gobj->user_data;
+    ftDataInfo = ft->x10C_ftData;
+    
+    ext_attr = (ftMarioAttributes*)ft->x10C_ftData->ext_attr;
+    sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+
+    *sA = *ext_attr;
+    
+}
+
+void func_800E0C24(HSD_GObj* gobj) {
+    func_800704F0(gobj, 1, lbl_804D9190);
+    func_800704F0(gobj, 0, lbl_804D9190);
+}
+
+void func_800E0C68(HSD_GObj* gobj) {
+    func_800704F0(gobj, 1, lbl_804D9194);
+    func_800704F0(gobj, 0, lbl_804D9194);
+}
+
+void func_800E0CAC(s32 arg0, u32* arg1, u32* arg2) {
+    if (arg0 != 10) {
+        if (arg0 >= 10)
+            return;
+        if (arg0 < 9)
+            return;
+        *arg2 = 0xe;
+        *arg1 = 0xe;
+    } else {
+        *arg2 = 0xf;
+        *arg1 = 0xf;
+    }
+}
+
+s32 func_800E0CE0(s32 arg0) {
+    int offset;
+    
+    switch (arg0) {
+        case 9:
+            offset = 0xe;
+            break;
+        case 10:
+            offset = 0xf;
+    }
+
+    return lbl_803C5A20[offset - 0xe];
+}

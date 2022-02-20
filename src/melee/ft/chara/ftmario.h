@@ -18,7 +18,15 @@ typedef struct _ftMarioAttributes {
 void ftMario_OnDeath(HSD_GObj* gobj);
 void func_800E0920(Fighter* ft);
 void ftMario_OnLoad(HSD_GObj* gobj);
-void lbl_800E0A00(void);
+void func_800E0A00(void);
 void func_800E0A20(HSD_GObj* gobj, s32 arg1);
+void func_800E0B00(HSD_GObj* gobj);
+void func_800E0B48(HSD_GObj* gobj);
+void func_800E0B90(HSD_GObj* gobj, s32 arg1);
+void func_800E0BE4(HSD_GObj* gobj);
+void func_800E0C24(HSD_GObj* gobj);
+void func_800E0C68(HSD_GObj* gobj);
+void func_800E0CAC(s32 arg1, u32* arg2, u32* arg3);
+s32 func_800E0CE0(s32 arg0);
 
 #endif
