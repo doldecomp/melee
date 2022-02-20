@@ -494,6 +494,21 @@ func_800EEB7C:
 /* 800EEBB8 000EB798  7C 08 03 A6 */	mtlr r0
 /* 800EEBBC 000EB79C  4E 80 00 20 */	blr 
 
+/*
+https://decomp.me/scratch/JPK5Y
+void func_800EEBC0(s32 arg0, s32* arg1, s32* arg2)
+{
+    if (arg0 != 0xE) {
+        if (arg0 < 0xE && arg0 >= 0xB) {
+            *arg1 = 0xE;
+            *arg2 = 0x10;
+        }
+    } else {
+        *arg2 = 0x11;
+        *arg1 = 0x11;
+    }
+}
+*/
 .global func_800EEBC0
 func_800EEBC0:
 /* 800EEBC0 000EB7A0  2C 03 00 0E */	cmpwi r3, 0xe
