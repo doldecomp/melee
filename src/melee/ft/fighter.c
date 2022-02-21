@@ -1050,7 +1050,7 @@ asm void func_80067C98()
 }
 #endif
 
-// https://decomp.me/scratch/pmxBU
+// https://decomp.me/scratch/NBWRY
 asm void func_80068354()
 {
 	nofralloc 
