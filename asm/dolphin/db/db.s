@@ -94,7 +94,7 @@ lbl_80400BF0:
 
 
 .section .sbss
-
+    .balign 8
 .global __DBInterface
 __DBInterface:
 	.skip 0x4

@@ -1030,7 +1030,7 @@ lbl_804A74F0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B80
 lbl_804D5B80:
     .4byte 0x00000001
@@ -1038,7 +1038,7 @@ lbl_804D5B80:
 
 
 .section .sbss
-
+    .balign 8
 .global StopAtNextInt
 StopAtNextInt:
 	.skip 0x4

@@ -6942,7 +6942,7 @@ lbl_80335C8C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B9410
 lbl_803B9410:
     .4byte 0x00010810
@@ -7041,7 +7041,7 @@ lbl_804A747C:
 
 
 .section .sbss
-
+    .balign 8
 .global Ydchuff
 Ydchuff:
 	.skip 0x20
@@ -7068,11 +7068,11 @@ lbl_804D71E0:
 	.skip 0x20
 .global lbl_804D7200
 lbl_804D7200:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE1D0
 lbl_804DE1D0:
 	.4byte 0x4A464946

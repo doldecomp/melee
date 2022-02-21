@@ -1238,7 +1238,7 @@ lbl_80351EBC:
 
 
 .section .sbss
-
+    .balign 8
 .global __AR_Callback
 __AR_Callback:
 	.skip 0x4
@@ -1260,7 +1260,7 @@ __AR_init_flag:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE348
 lbl_804DE348:
 	.4byte 0x43440000

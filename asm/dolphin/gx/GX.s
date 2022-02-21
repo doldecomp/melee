@@ -6286,11 +6286,10 @@ jtbl_80401584:
 	.4byte lbl_80341E08
 	.4byte lbl_80341E24
 	.4byte lbl_80341E40
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5BC0
 lbl_804D5BC0:
     .4byte 0x80818283
@@ -6326,7 +6325,7 @@ lbl_804D5BF8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE220
 lbl_804DE220:
 	.4byte 0x43800000

@@ -913,7 +913,7 @@ lbl_804A5300:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B78
 lbl_804D5B78:
     .byte 0x01
@@ -927,7 +927,7 @@ lbl_804D5B7C:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D70D0
 lbl_804D70D0:
 	.skip 0x4
@@ -960,4 +960,4 @@ lbl_804D70F4:
 	.skip 0x4
 .global lbl_804D70F8
 lbl_804D70F8:
-	.skip 0x8
+	.skip 0x4

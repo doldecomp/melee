@@ -187,7 +187,7 @@ lbl_804A7698:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B98
 lbl_804D5B98:
     .4byte 0x0A000000
@@ -199,11 +199,10 @@ lbl_804D5B9C:
 lbl_804D5BA0:
     .asciz "ON"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D72E0
 lbl_804D72E0:
 	.skip 0x4
@@ -212,4 +211,4 @@ lbl_804D72E4:
 	.skip 0x4
 .global lbl_804D72E8
 lbl_804D72E8:
-	.skip 0x8
+	.skip 0x4
