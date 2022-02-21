@@ -4483,13 +4483,12 @@ func_800804FC:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B74A0
 lbl_803B74A0:
 	.float 0
     .float 0
     .float 0
-    .4byte NULL
 
 
 .section .data
@@ -4566,11 +4565,10 @@ jtbl_803C0E90:
     .4byte lbl_8007E9F4
     .4byte lbl_8007E9FC
     .4byte lbl_8007EA04
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3A70
 lbl_804D3A70:
     .asciz "0"
@@ -4583,11 +4581,10 @@ lbl_804D3A74:
 lbl_804D3A7C:
     .asciz "jobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8330
 lbl_804D8330:
 	.4byte 0x00000000

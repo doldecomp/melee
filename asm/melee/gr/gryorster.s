@@ -846,7 +846,7 @@ func_80202B64:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B82A8
 lbl_803B82A8:
     .4byte 0x0000000A
@@ -911,11 +911,10 @@ lbl_803E51CC:
 lbl_803E5230:
     .asciz "*** End Frame = %d\n"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4798
 lbl_804D4798:
     .asciz "jobj.h"
@@ -927,14 +926,14 @@ lbl_804D47A0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A20
 lbl_804D6A20:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB6F0
 lbl_804DB6F0:
 	.4byte 0x00000000

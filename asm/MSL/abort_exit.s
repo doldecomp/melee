@@ -81,7 +81,7 @@ lbl_80323090:
 /* 803230A4 0031FC84  4E 80 00 20 */	blr 
 
 .section .dtors, "wa"  # 0x803B7260 - 0x803B7280
-
+    .balign 8
 .global lbl_803B7260
 lbl_803B7260:
 	.4byte __destroy_global_chain
@@ -91,7 +91,7 @@ lbl_803B7260:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A2F48
 lbl_804A2F48:
 	.skip 0x100
@@ -101,7 +101,7 @@ lbl_804A3048:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7060
 lbl_804D7060:
 	.skip 0x4

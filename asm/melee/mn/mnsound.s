@@ -1066,14 +1066,14 @@ lbl_803EEF20:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A08A8
 lbl_804A08A8:
 	.skip 0x10
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5008
 lbl_804D5008:
     .asciz "jobj.h"
@@ -1085,14 +1085,14 @@ lbl_804D5010:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C30
 lbl_804D6C30:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC068
 lbl_804DC068:
 	.4byte 0x43480000

@@ -4232,11 +4232,10 @@ lbl_803D4AC8:
     .balign 4
     .asciz "#             Hour %d Min %d Sec %d \n"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8045A6C0
 lbl_8045A6C0:
 	.skip 0x10A30
@@ -4252,7 +4251,7 @@ lbl_8046B1F8:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3EE0
 lbl_804D3EE0:
     .4byte lbl_8045A6C0
@@ -4272,7 +4271,7 @@ lbl_804D3EF4:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6590
 lbl_804D6590:
 	.skip 0x4
@@ -4282,7 +4281,7 @@ lbl_804D6594:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DA228
 lbl_804DA228:
 	.4byte 0x42C80000

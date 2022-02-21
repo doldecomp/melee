@@ -655,7 +655,7 @@ lbl_80400C40:
 
 
 .section .sbss
-
+    .balign 8
 .global __DSP_rude_task_pending
 __DSP_rude_task_pending:
 	.skip 0x4

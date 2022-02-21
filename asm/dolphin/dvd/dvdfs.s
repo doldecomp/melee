@@ -380,11 +380,10 @@ lbl_80400D80:
 lbl_80400E48:
     .asciz "DVDReadAsync(): specified area is out of the file  "
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B88
 lbl_804D5B88:
     .asciz "dvdfs.c"
@@ -392,7 +391,7 @@ lbl_804D5B88:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7278
 lbl_804D7278:
 	.skip 0x4

@@ -12902,7 +12902,7 @@ lbl_803F10D4:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0BC0
 lbl_804A0BC0:
 	.skip 0x10
@@ -12912,7 +12912,7 @@ lbl_804A0BD0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D50C8
 lbl_804D50C8:
     .4byte 0x01020408
@@ -12988,7 +12988,7 @@ lbl_804D5140:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6CB0
 lbl_804D6CB0:
 	.skip 0x4
@@ -13070,7 +13070,7 @@ lbl_804D6CF9:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC3E0
 lbl_804DC3E0:
 	.4byte 0x43480000

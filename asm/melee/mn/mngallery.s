@@ -1180,7 +1180,7 @@ func_80259868:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8538
 lbl_803B8538:
     .4byte 0x00000000
@@ -1227,11 +1227,10 @@ lbl_803F0580:
     .balign 4
     .asciz "MenMainCursorGa_Top_shapeanim_joint"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0B90
 lbl_804A0B90:
 	.skip 0x10
@@ -1244,7 +1243,7 @@ lbl_804A0BB0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5090
 lbl_804D5090:
     .asciz "jobj.h"
@@ -1256,7 +1255,7 @@ lbl_804D5098:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C88
 lbl_804D6C88:
 	.skip 0x4
@@ -1266,7 +1265,7 @@ lbl_804D6C8C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC358
 lbl_804DC358:
 	.4byte 0x42C00000

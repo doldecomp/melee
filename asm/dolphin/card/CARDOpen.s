@@ -445,7 +445,7 @@ __CARDIsOpened:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A8D58
 lbl_804A8D58:
 	.skip 0x20

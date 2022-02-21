@@ -4595,7 +4595,7 @@ lbl_801FA900:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8220
 lbl_803B8220:
     .4byte 0x00000000
@@ -5171,7 +5171,7 @@ lbl_803E4800:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4710
 lbl_804D4710:
     .asciz "gobj"
@@ -5200,11 +5200,10 @@ lbl_804D4734:
 lbl_804D473C:
     .asciz "bg_gp"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D69E8
 lbl_804D69E8:
 	.skip 0x4

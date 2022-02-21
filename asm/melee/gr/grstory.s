@@ -597,14 +597,14 @@ lbl_803E274C:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D69B8
 lbl_804D69B8:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB270
 lbl_804DB270:
 	.4byte 0x00000000

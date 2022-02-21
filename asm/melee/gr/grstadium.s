@@ -4792,7 +4792,7 @@ func_801D511C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7F68
 lbl_803B7F68:
     .4byte 0x00000000
@@ -5112,18 +5112,17 @@ jtbl_803E16C0:
 	.4byte lbl_801D486C
 	.4byte lbl_801D4B1C
 	.4byte lbl_801D4EEC
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8049F040
 lbl_8049F040:
 	.skip 0x100
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D45E8
 lbl_804D45E8:
     .4byte 0x2F477250
@@ -5163,14 +5162,14 @@ lbl_804D4614:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6978
 lbl_804D6978:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DAEF8
 lbl_804DAEF8:
 	.4byte 0x00000000

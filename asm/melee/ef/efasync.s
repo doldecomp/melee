@@ -5492,7 +5492,7 @@ jtbl_803C050C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D39E8
 lbl_804D39E8:
     .asciz "jobj.h"
@@ -5505,11 +5505,10 @@ lbl_804D39F0:
 lbl_804D39F8:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D81F8
 lbl_804D81F8:
 	.4byte 0x3E99999A

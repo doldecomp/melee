@@ -142,7 +142,7 @@ C_MTXOrtho:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE328
 lbl_804DE328:
 	.4byte 0x3F800000

@@ -2016,11 +2016,10 @@ lbl_803ED4C4:
     .balign 4
     .asciz "user_data"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4BB8
 lbl_804D4BB8:
     .4byte 0x00000000
@@ -2036,7 +2035,7 @@ lbl_804D4BC8:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6BF0
 lbl_804D6BF0:
 	.skip 0x4
@@ -2046,7 +2045,7 @@ lbl_804D6BF4:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBEA8
 lbl_804DBEA8:
 	.4byte 0xBFCCCCCD

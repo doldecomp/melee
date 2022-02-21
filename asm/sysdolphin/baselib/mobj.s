@@ -952,6 +952,7 @@ MObjInfoInit:
 
 .section .data
     .balign 8
+lbl_80405EB0:
     .4byte 0x68736449
     .4byte 0x73446573
     .4byte 0x63656E64
