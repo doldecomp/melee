@@ -666,6 +666,7 @@ lbl_80408620:
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_804CE380
 lbl_804CE380:
 	.skip 0xC

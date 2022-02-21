@@ -1020,7 +1020,7 @@ __DVDLowSetWAType:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A7488
 lbl_804A7488:
 	.skip 0x68

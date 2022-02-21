@@ -913,6 +913,7 @@ lbl_803F9798:
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_804A1340
 lbl_804A1340:
 	.skip 0x38

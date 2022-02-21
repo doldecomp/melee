@@ -90,10 +90,7 @@ ftMapping ftMapping_list[33] = {   //////ftMapping_list
 
 ////.bss
 StaticPlayer player_slots[6]; 
-struct {  /// TODO what is with this thing?
-    struct _HSD_ObjAllocData hsd_ObjAllocData;
-    u32 align;
-} lbl_804587E0;
+HSD_ObjAllocData lbl_804587E0;
 
 extern s32 lbl_804D6470;
 
@@ -1916,7 +1913,7 @@ void Player_InitAllPlayers() {
 }
 
 void Player_80036DA4() { 
-    HSD_ObjAllocInit(&lbl_804587E0.hsd_ObjAllocData, 8, 4);
+    HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
     func_80067A84();
 }
 

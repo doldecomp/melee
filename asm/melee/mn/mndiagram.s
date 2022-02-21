@@ -6010,6 +6010,7 @@ lbl_803EE774:
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_804A0750
 lbl_804A0750:
 	.skip 0x1C
@@ -6031,6 +6032,15 @@ lbl_804A0814:
 .global lbl_804A0824
 lbl_804A0824:
 	.skip 0x10
+.global lbl_804A0834
+lbl_804A0834:
+	.skip 0x10
+.global lbl_804A0844
+lbl_804A0844:
+	.skip 0x10
+.global lbl_804A0854
+lbl_804A0854:
+	.skip 0x14
 
 
 .section .sdata

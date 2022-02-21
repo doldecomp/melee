@@ -5513,6 +5513,7 @@ lbl_803EE724:
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_804A0648
 lbl_804A0648:
 	.skip 0x78

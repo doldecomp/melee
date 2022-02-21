@@ -10062,6 +10062,7 @@ lbl_803BCCA0:
 
 
 .section .bss
+    .balign 8
 .global lbl_80452C68
 lbl_80452C68:
 	.skip 0x39C

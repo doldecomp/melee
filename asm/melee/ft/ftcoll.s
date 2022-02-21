@@ -6793,6 +6793,7 @@ lbl_803C0CF0:
 
 
 .section .bss
+    .balign 8
 .global lbl_80459278
 lbl_80459278:
 	.skip 0x320

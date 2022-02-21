@@ -902,11 +902,10 @@ lbl_80400918:
     .balign 4
     .asciz "fioPacketResultWrite.MCCStreamWrite.NG"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A5300
 lbl_804A5300:
 	.skip 0x2000

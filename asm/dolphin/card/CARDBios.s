@@ -1377,7 +1377,7 @@ lbl_80402FF0:
     .4byte NULL
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A8B38
 lbl_804A8B38:
 	.skip 0x220

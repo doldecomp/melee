@@ -3270,6 +3270,7 @@ lbl_803C0BD0:
 
 
 .section .bss
+    .balign 8
 .global lbl_80459028
 lbl_80459028:
 	.skip 0x2C

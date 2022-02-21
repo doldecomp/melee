@@ -160,14 +160,14 @@ lbl_803482E0:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A7D40
 lbl_804A7D40:
 	.skip 0x20
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7390
 lbl_804D7390:
 	.skip 0x4

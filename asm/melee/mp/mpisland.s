@@ -1060,10 +1060,10 @@ lbl_803B73E8:
 lbl_803BF790:
     .asciz "mpisland.c"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_80458E88
 lbl_80458E88:
 	.skip 0x28

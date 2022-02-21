@@ -5400,10 +5400,10 @@ lbl_803E1CEC:
 lbl_803E1D28:
     .asciz "translate"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_8049F140
 lbl_8049F140:
 	.skip 0x18

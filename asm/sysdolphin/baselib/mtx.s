@@ -1406,6 +1406,7 @@ func_8037A750:
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_804C2310
 lbl_804C2310:
 	.skip 0x2C

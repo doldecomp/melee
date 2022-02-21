@@ -5115,6 +5115,7 @@ jtbl_803E16C0:
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_8049F040
 lbl_8049F040:
 	.skip 0x100

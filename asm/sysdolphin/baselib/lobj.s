@@ -2713,6 +2713,7 @@ lbl_804061D4:
 
 
 .section .bss, "wa"
+    .balign 8
 .global active_lights
 active_lights:
 	.skip 0x28

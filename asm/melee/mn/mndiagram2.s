@@ -2571,12 +2571,6 @@ jtbl_803EEB78:
     .4byte NULL
 
 
-.section .bss, "wa"
-.global lbl_804A0834
-lbl_804A0834:
-	.skip 0x10
-
-
 .section .sdata
     .balign 8
 .global lbl_804D4FB8

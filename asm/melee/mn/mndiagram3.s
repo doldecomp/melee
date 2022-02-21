@@ -1839,15 +1839,6 @@ lbl_803EEC4C:
     .4byte 0x61000000
 
 
-.section .bss, "wa"
-.global lbl_804A0844
-lbl_804A0844:
-	.skip 0x10
-.global lbl_804A0854
-lbl_804A0854:
-	.skip 0x14
-
-
 .section .sdata
     .balign 8
 .global lbl_804D4FD8

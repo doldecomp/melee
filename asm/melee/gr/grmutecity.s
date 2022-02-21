@@ -4328,6 +4328,7 @@ lbl_803E3B7C:
 
 
 .section .bss, "wa"
+    .balign 8
 .global lbl_8049F440
 lbl_8049F440:
 	.skip 0x78
@@ -4337,7 +4338,7 @@ lbl_8049F4B8:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D46C0
 lbl_804D46C0:
     .asciz "0"
