@@ -391,7 +391,7 @@ lbl_80407B58:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6000
 lbl_804D6000:
     .asciz " "

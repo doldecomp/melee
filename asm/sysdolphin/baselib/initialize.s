@@ -669,7 +669,7 @@ lbl_80375878:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B94E0
 lbl_803B94E0:
 	.4byte _HSD_AObjForgetMemory
@@ -743,9 +743,7 @@ lbl_80406CA4:
 
 
 .section .bss, "wa"
-
-.skip 0x4
-
+    .balign 8
 .global FrameBuffer
 FrameBuffer:
     .skip 0xC
@@ -755,7 +753,7 @@ memReport:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5E00
 lbl_804D5E00:
     .4byte 0xFFFFFFFF
@@ -833,11 +831,10 @@ lbl_804D5E74:
 lbl_804D5E7C:
     .asciz "data"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D76B8
 lbl_804D76B8:
 	.skip 0x4
@@ -858,11 +855,10 @@ init_done:
 	.skip 0x4
 .global lbl_804D76D0
 lbl_804D76D0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
 .global lbl_804DE594
 lbl_804DE594:
 	.4byte 0x3F800000

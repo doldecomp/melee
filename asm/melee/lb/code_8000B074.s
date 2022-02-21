@@ -2247,6 +2247,7 @@ func_8000CE40:
 /* 8000CE48 00009A28  90 83 00 18 */	stw r4, 0x18(r3)
 /* 8000CE4C 00009A2C  4E 80 00 20 */	blr 
 
+
 .section .data
     .balign 8
 .global lbl_803B9FC0
@@ -2307,7 +2308,7 @@ lbl_803BA040:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3710
 lbl_804D3710:
     .asciz "jobj.h"
@@ -2320,7 +2321,7 @@ lbl_804D3718:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7A58
 lbl_804D7A58:
 	.4byte 0x00000000

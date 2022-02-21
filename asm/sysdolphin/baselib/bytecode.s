@@ -1636,7 +1636,7 @@ lbl_804074F0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5F98
 lbl_804D5F98:
     .4byte 0x00000000
@@ -1644,11 +1644,10 @@ lbl_804D5F98:
 lbl_804D5F9C:
     .asciz "stack"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE7A0
 lbl_804DE7A0:
 	.4byte 0x00000000
