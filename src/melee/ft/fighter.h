@@ -158,8 +158,8 @@ typedef struct _ThrowFlags
 
 typedef struct _FighterBone
 {
-  /* 0x0 */ u32* x0_joint;
-  /* 0x4 */ u32* x4_joint2; // used for interpolation
+  /* 0x0 */ u8* x0_joint;
+  /* 0x4 */ u8* x4_joint2; // used for interpolation
   u32 data_filler[2];
 } FighterBone;
 
