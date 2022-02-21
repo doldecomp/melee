@@ -8,6 +8,9 @@
 #include "melee/gr/stage.h"
 #include "melee/pl/player.h"
 
+// uncomment to compile the C functions instead of the inline asm functions
+// #define FIGHTER_DONE
+
 // external functions TODO: check which of these can be #included instead. Move to functions.h when we figure out the prototypes
 void func_8000B1CC();
 void func_8000D148();
@@ -184,7 +187,7 @@ void func_800C61B0();
 void func_800C8064();
 void func_800C8540();
 void func_800C884C();
-void func_800C88A0();
+void func_800C88A0(Fighter*);
 void func_800C8A64();
 void func_800C8B2C();
 void func_800C8C84();
@@ -202,7 +205,7 @@ void func_800D67C4();
 void func_800D688C();
 void func_800D6928();
 void func_800D71D8();
-void func_800DEEA8();
+void func_800DEEA8(HSD_GObj* fighter);
 void func_800DEF38();
 void func_800DF0D0();
 void func_800F1D24();
@@ -374,14 +377,14 @@ s32 lbl_804D6554 = 0; // struct or f32[] pointer
  
 extern const f32 lbl_804D8250;// = 1.0f;
 extern const f32 lbl_804D8254;// = 0.0f;
-extern const f32 lbl_804D8258;// = [-1.0, 0.0];
+extern const f32 lbl_804D8258;// = -1.0f;
 extern const f32 lbl_804D8260;// used for int to float casting
-extern const f64 lbl_804D8268;// = [8.55, 0.0];
+extern const f32 lbl_804D8268;// = 8.55f
 extern const f64 lbl_804D8270;// = 1.5707963267948966;
-extern const f32 lbl_804D8278;// probably also used for int to float casting
-extern const f64 lbl_804D8280;// = 0.5; // = [1.75, 0.0];
+extern const f64 lbl_804D8278;// probably also used for int to float casting
+extern const f64 lbl_804D8280;// = 0.5;
 extern const f64 lbl_804D8288;// = 3.0;
-extern const f32 lbl_804D8290;//[2] = [999.0, 0.0];
+extern const f32 lbl_804D8290;// = 999.0;
 
 void func_800679B0()
 { 
@@ -453,6 +456,7 @@ void func_80067ABC()
 
 #ifdef FIGHTER_DONE
 // https://decomp.me/scratch/1sx2v
+// Matches
 void func_80067BB4(HSD_GObj* pPlayerEntity)
 {
 	Vec3 scale_sp14;
@@ -561,15 +565,10 @@ lbl_80067C80:
 }
 #endif
 
-#ifdef WONT_COMPILE
-// one addi r3,r27,0 should be a mr r3,r27, and it should be in a different place. 100% match otherwise.
+#ifdef FIGHTER_DONE
 // https://decomp.me/scratch/HXrlP
-void func_800C88A0(Fighter*);
-void func_800DEEA8(HSD_GObj* fighter);
-
-//const f32 lbl_804D8250 = 1.0f;
-//const f32 lbl_804D8254 = 0.0f;
-//const f32 lbl_804D8258 = -1.0f;
+// No Match
+// one addi r3,r27,0 should be a mr r3,r27, and it should be in a different place
 
 void func_80067C98(Fighter* r27)
 {
@@ -1306,9 +1305,9 @@ asm void func_80067C98()
 }
 #endif
 
-#if 0
+#ifdef FIGHTER_DONE
 // https://decomp.me/scratch/NBWRY
-// Matches, doesn't OK
+// Matches
 
 typedef struct
 {
