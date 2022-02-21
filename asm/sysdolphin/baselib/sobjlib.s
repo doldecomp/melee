@@ -1384,7 +1384,6 @@ jtbl_8040C3DC:
 
 
 .section .bss, "wa"
-    .balign 8
 .global lbl_804D10E0
 lbl_804D10E0:
 	.skip 0x30

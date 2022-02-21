@@ -17648,7 +17648,6 @@ lbl_803BF760:
 
 
 .section .bss, "wa"
-    .balign 8
 .global lbl_80458868
 lbl_80458868:
 	.skip 0x20

@@ -3909,7 +3909,6 @@ lbl_803F97B4:
 
 
 .section .bss, "wa"
-    .balign 8
 .global lbl_804A1378
 lbl_804A1378:
 	.skip 0x3FC

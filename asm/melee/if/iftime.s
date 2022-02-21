@@ -1019,7 +1019,6 @@ lbl_803F94E8:
 
 
 .section .bss, "wa"
-    .balign 8
 .global lbl_804A1078
 lbl_804A1078:
 	.skip 0x50

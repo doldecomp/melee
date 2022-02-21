@@ -1129,7 +1129,6 @@ lbl_80407448:
 
 
 .section .bss, "wa"
-    .balign 8
 .global shadow_alloc_data
 shadow_alloc_data:
 	.skip 0x30

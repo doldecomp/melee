@@ -20182,7 +20182,6 @@ jtbl_8040C2D8:
 
 
 .section .bss, "wa"
-    .balign 8
 .global lbl_804CE3F8
 lbl_804CE3F8:
 	.skip 0x330

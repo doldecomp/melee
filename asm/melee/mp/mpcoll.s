@@ -12821,7 +12821,6 @@ lbl_803BD3C8:
 
 
 .section .bss
-    .balign 8
 .global lbl_80458810
 lbl_80458810:
 	.skip 0x58

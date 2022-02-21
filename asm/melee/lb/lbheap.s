@@ -708,7 +708,6 @@ lbl_803BA43C:
 
 
 .section .bss
-    .balign 8
 .global lbl_80431FA0
 lbl_80431FA0:
 	.skip 0xB8

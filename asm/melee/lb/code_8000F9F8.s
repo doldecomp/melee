@@ -6810,7 +6810,6 @@ lbl_803B72B4:
 
 
 .section .bss, "wa"
-    .balign 8
 .global lbl_804316C0
 lbl_804316C0:
 	.skip 0x1F0

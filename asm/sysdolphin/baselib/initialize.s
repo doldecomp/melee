@@ -743,7 +743,6 @@ lbl_80406CA4:
 
 
 .section .bss, "wa"
-    .balign 8
 .global FrameBuffer
 FrameBuffer:
     .skip 0xC

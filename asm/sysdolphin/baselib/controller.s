@@ -1618,7 +1618,6 @@ lbl_80406DAC:
 
 
 .section .bss, "wa"
-    .balign 8
 .global HSD_PadLibData
 HSD_PadLibData:
 	.skip 0x34
