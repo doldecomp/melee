@@ -989,7 +989,7 @@ lbl_804076C8:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7700
 lbl_804D7700:
 	.skip 0x4
@@ -1002,7 +1002,7 @@ lbl_804D7708:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5FA8
 lbl_804D5FA8:
     .asciz "class.c"
@@ -1015,4 +1015,3 @@ lbl_804D5FB0:
 lbl_804D5FB4:
     .asciz "object"
     .balign 4
-    .4byte NULL

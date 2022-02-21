@@ -708,14 +708,14 @@ lbl_803BA43C:
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80431FA0
 lbl_80431FA0:
 	.skip 0xB8
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D37A0
 lbl_804D37A0:
     .asciz "%s :"

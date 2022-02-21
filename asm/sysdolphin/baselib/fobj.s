@@ -951,7 +951,7 @@ lbl_80406350:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5D58
 lbl_804D5D58:
     .asciz "fobj.c"
@@ -960,11 +960,10 @@ lbl_804D5D58:
 lbl_804D5D60:
     .asciz "new"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE4D0
 lbl_804DE4D0:
 	.4byte 0x00000000

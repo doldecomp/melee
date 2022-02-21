@@ -1210,7 +1210,7 @@ void func_8006EBA4(struct _HSD_GObj*);
 // ? func_8006EED4(?);
 // ? func_8006F0FC(?);
 // ? ftAnim_SetAnimRate(?);
-s32 func_8006F238(void);
+s32 func_8006F238();
 // ? func_8006F368(?);
 // ? func_8006F3DC(?);
 // ? func_8006F484(?);

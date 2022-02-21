@@ -144,7 +144,7 @@ lbl_80407720:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5FC0
 lbl_804D5FC0:
     .asciz "hash.c"

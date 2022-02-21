@@ -28,6 +28,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/lbarchive.o			\
 	$(BUILD_DIR)/asm/melee/lb/lbdvd.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_80019230.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_80019880.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8.o		\
 	                                                \

@@ -150,9 +150,12 @@ typedef struct _Fighter {
   u8 filler_x68C[0x6F0 - 0x698];
   /* 0x6F0 */ CollData x6F0_collData;
   /* 0x890 */ CameraBox* x890;
-  u8 filler_x890[0x8AC - 0x894];
+  /* 0x894 */ f32 x894;
+  u8 filler_x894[0x8AC - 0x898];
   /* 0x8AC */ s32 x8AC_animSkeleton;
-  u8 filler_x8AC[0x18B0 - 0x8B0];
+  u8 filler_x8AC[0x914 - 0x8B0];
+	/* 0x914 */ f32 x914;
+	u8 filler_x914[0x18B0 - 0x918];
   /* 0x18B0 */ f32 x18B0;
   u8 filler_x18B0[0x1969 - 0x18B4];
   /* 0x1969 */ u8 x1969_walljumpUsed;
@@ -160,7 +163,7 @@ typedef struct _Fighter {
   /* 0x1970 */ int x1970;
   /* 0x1974 */ void* x1974_heldItem;
   u8 filler_x1974[0x1A58 - 0x1978];
-  /* 0x1A58 */ u32 x1A58;
+  /* 0x1A58 */ HSD_GObj* x1A58;
   u8 filler_x1A58[0x2064 - 0x1A5C];
   u32 x2064_ledgeCooldown;
   u8 filler_x2064[0x210C - 0x2068];
