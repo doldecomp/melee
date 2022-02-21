@@ -1832,14 +1832,14 @@ jtbl_803EFB10:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0948
 lbl_804A0948:
 	.skip 0x10
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5058
 lbl_804D5058:
     .4byte 0xAAAAAAFF
@@ -1854,18 +1854,17 @@ lbl_804D5064:
 lbl_804D5068:
     .asciz "%u"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C70
 lbl_804D6C70:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC1D8
 lbl_804DC1D8:
 	.4byte 0xC1500000

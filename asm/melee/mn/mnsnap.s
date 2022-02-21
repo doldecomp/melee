@@ -6347,14 +6347,14 @@ jtbl_803F028C:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0A10
 lbl_804A0A10:
 	.skip 0x180
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5070
 lbl_804D5070:
     .asciz "jobj"
@@ -6371,11 +6371,10 @@ lbl_804D5080:
 lbl_804D5088:
     .asciz "%d"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC2C0
 lbl_804DC2C0:
 	.4byte 0x00000000
