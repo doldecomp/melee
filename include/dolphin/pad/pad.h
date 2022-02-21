@@ -15,4 +15,6 @@ typedef struct PADStatus
     s8  err;
 } PADStatus;
 
+void PADControlMotor(int chan, u32 command);
+
 #endif
