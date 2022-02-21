@@ -1,17 +1,23 @@
 #include "fighter.h"
 
-#include "functions.h"
-#include "sysdolphin/baselib/gobjgxlink.h"
-#include "sysdolphin/baselib/gobj.h"
-#include "sysdolphin/baselib/jobj.h"
-#include "sysdolphin/baselib/gobjuserdata.h"
-#include "melee/gr/stage.h"
-#include "melee/pl/player.h"
+#include <functions.h>
+#include <melee/pl/player.h>
+#include <melee/gr/stage.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 // uncomment to compile the C functions instead of the inline asm functions
 // #define FIGHTER_DONE
 
-// external functions TODO: check which of these can be #included instead. Move to functions.h when we figure out the prototypes
+// ==== external functions ====
+// ============================
+// TODO: put this in functions.h, same for ftkoopa.c
+extern void* func_8007E2F4(); // ftcommon.s
+
+// TODO: check which of these can be #included instead. Move to functions.h when we figure out the prototypes
 void func_8000B1CC();
 void func_8000D148();
 void func_8000ED54();
@@ -264,43 +270,6 @@ void func_800C89A0(HSD_GObj*);
 void func_800C8FC4(HSD_GObj*);
 void func_800D105C(HSD_GObj*);
 
-// extern variables
-typedef void (*ft_callback)(HSD_GObj* gobj);
-extern ft_callback ft_OnLoad[33]; // One load callback for every character. asm/melee/ft/code_8008521C.s:106254
-extern ft_callback ft_OnDeath[33]; // One death callback for every character. asm/melee/ft/code_8008521C.s:106291
-
-// TODO: put this in functions.h, same for ftkoopa.c
-extern void* func_8007E2F4(); // ftcommon.s
-
-#include "sysdolphin/baselib/controller.h"
-extern HSD_RumbleData HSD_PadRumbleData[4];
-
-// include random.h for HSD_Randi(s32 max_val)
-#include <sysdolphin/baselib/random.h>
-
-extern char* stage_info;
-
-// @ha @l labels
-extern s32 lbl_803C0EC0; // ft/code_8008521C.s
-
-// TODO: rename lbl_803C10D0 to something like func_ptrs
-typedef void (*fn_ptr_t)();
-extern fn_ptr_t lbl_803C10D0[33]; // ft/code_8008521C.s
-
-extern s32 lbl_803C125C; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C12E0; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C1DB4; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C26FC; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C2800; // asm/melee/ft/code_8008521C.s
-extern HSD_ObjAllocData lbl_804590AC; // ft/ftparts.s
-extern s32 lbl_804598B8; // asm/melee/ft/code_8008521C.s
-
-extern void* ft_OnAbsorb; // asm/melee/ft/code_8008521C.s
-
-// lbl_xxx(r13) labels
-extern s32 lbl_804D4A08;
-extern u8 lbl_804D7849;
-
 void HSD_JObjSetMtxDirtySub(void*); // sysdolphin/baselib/jobj.s
 void HSD_JObjRemoveAll(HSD_JObj*); // sysdolphin/baselib/jobj.s
 void PSVECAdd(Vec3* a, Vec3* b, Vec3* result); // asm/dolphin/mtx/vec.s
@@ -309,6 +278,39 @@ void* HSD_JObjGetMtxPtr(); // asm/melee/lb/lbcollision.s
 void* HSD_JObjSetupMatrixSub(); // asm/sysdolphin/baselib/jobj.s
 void* HSD_JObjAnimAll(); // asm/sysdolphin/baselib/jobj.s
 
+// ==== external variables ====
+// ============================
+typedef void (*ft_callback)(HSD_GObj* gobj);
+extern ft_callback ft_OnLoad[33];  // One load  callback for every character. asm/melee/ft/code_8008521C.s:106254
+extern ft_callback ft_OnDeath[33]; // One death callback for every character. asm/melee/ft/code_8008521C.s:106291
+
+typedef void (*fn_ptr_t)();
+extern fn_ptr_t lbl_803C10D0[33]; // ft/code_8008521C.s
+
+extern void* ft_OnAbsorb; // asm/melee/ft/code_8008521C.s
+
+extern s32 lbl_803C0EC0; // asm/melee/ft/code_8008521C.s
+extern s32 lbl_803C125C; // asm/melee/ft/code_8008521C.s
+extern s32 lbl_803C12E0; // asm/melee/ft/code_8008521C.s
+extern s32 lbl_803C1DB4; // asm/melee/ft/code_8008521C.s
+extern s32 lbl_803C26FC; // asm/melee/ft/code_8008521C.s
+extern s32 lbl_803C2800; // asm/melee/ft/code_8008521C.s
+extern s32 lbl_804598B8; // asm/melee/ft/code_8008521C.s
+
+extern HSD_ObjAllocData lbl_804590AC; // ft/ftparts.s
+
+#include "sysdolphin/baselib/controller.h"
+extern HSD_RumbleData HSD_PadRumbleData[4];
+
+typedef struct StageInfo { u8 filler[0x748]; };
+extern StageInfo* stage_info;
+
+extern void* lbl_804D4A08; // asm/melee/db/code_80225374.s
+extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
+
+
+// ==== fighter.c variables ====
+// =============================
 
 // .section .rodata
 
@@ -386,6 +388,10 @@ extern const f64 lbl_804D8280;// = 0.5;
 extern const f64 lbl_804D8288;// = 3.0;
 extern const f32 lbl_804D8290;// = 999.0;
 
+
+// ==== fighter.c functions ====
+// =============================
+
 void func_800679B0()
 { 
 	s32 i;
@@ -423,12 +429,12 @@ void func_80067A84()
 void func_80067ABC()
 {
     s32* pData;
-    func_80016C64(lbl_803C0530, &pData, lbl_803C053C, 0); // from lbarchive.s
+    func_80016C64(lbl_803C0530, &pData, lbl_803C053C, 0);
 
-	// copy 23 4-byte chunks from pData to lbl_804D6554 in reverse order
-	// Would be nice to find a less repetitive way for this, loop unrolling only works up to 8 iterations.
-	//for(i=0; i<23; i++)
+	// copy 23 4-byte chunks from pData to lbl_804D6554 in reverse order, equivalent to this:
+	// for(i=0; i<23; i++)
 	//   (&lbl_804D64FC)[23-1-i] = pData[i];
+	// loop unrolling doesn't work (only up to 8 elements)
 	lbl_804D6554 = pData[0];
 	lbl_804D6550 = pData[1];
 	lbl_804D654C = pData[2];
@@ -481,18 +487,14 @@ void func_80067BB4(HSD_GObj* pPlayerEntity)
 	//@60
 	jobj->scale = scale_sp14;
 	//@78
-	if ((jobj->flags & 0x02000000) == 0)
+	if (((jobj->flags & 0x02000000) == 0) && jobj)
 	{
-		//@84
-		if (jobj)
-		{
-			//@8c
-			if (jobj == 0)
-				__assert("jobj.h"/*lbl_804D3A00*/, 0x234, "jobj"/*lbl_804D3A08*/);
-			//@a0
-			if ((!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) == 0)
-				HSD_JObjSetMtxDirtySub(jobj);
-		}
+		//@8c
+		if (jobj == 0)
+			__assert("jobj.h"/*lbl_804D3A00*/, 0x234, "jobj"/*lbl_804D3A08*/);
+		//@a0
+		if ((!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) == 0)
+			HSD_JObjSetMtxDirtySub(jobj);
 	}
 }
 #else
@@ -569,7 +571,6 @@ lbl_80067C80:
 // https://decomp.me/scratch/HXrlP
 // No Match
 // one addi r3,r27,0 should be a mr r3,r27, and it should be in a different place
-
 void func_80067C98(Fighter* r27)
 {
 	Vec3 spC_player_coord;
@@ -1308,7 +1309,6 @@ asm void func_80067C98()
 #ifdef FIGHTER_DONE
 // https://decomp.me/scratch/NBWRY
 // Matches
-
 typedef struct
 {
     u8 filler_0[0x14];

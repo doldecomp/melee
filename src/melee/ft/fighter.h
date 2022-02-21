@@ -325,11 +325,11 @@ typedef struct _Fighter {
 	u8 filler_x2174[0x2180 - 0x2174];
 	/* 0x2180 */ s32 x2180;
 	u8 filler_x2184[0x2190 - 0x2184];
-	// callback struct
-	void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter);
-	void (*x2194_callback_x2194)(HSD_GObj *fighter);
-	void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj *fighter);
-	void (*x219C_callback_IASA)(HSD_GObj *fighter);
+	// callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
+	void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
+	void (*x2194_callback_x2194)(HSD_GObj *fighter); // used
+	void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj *fighter); // used
+	void (*x219C_callback_IASA)(HSD_GObj *fighter); // used
 	void (*x21A0_callback_Anim)(HSD_GObj *fighter);
 	void (*x21A4_callback_Phys)(HSD_GObj *fighter); // xused
 	void (*x21A8_callback_Coll)(HSD_GObj *fighter);
@@ -349,11 +349,7 @@ typedef struct _Fighter {
 	void (*x21E0_callback_OnDeath)(HSD_GObj *fighter); // used
 	void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
 	void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
-	void (*x21EC_callback_OnActionStateChange)(HSD_GObj *fighter);
-	void (*x21F0_callback_OnTakeDamage2)(HSD_GObj *fighter);
-	void (*x21F4_callback_OnHurtboxDetect)(HSD_GObj *fighter);
-	void (*x21F8_callback_OnSpin)(HSD_GObj *fighter);
-	u8 filler_x21FC[0x2200 - 0x21FC];
+	u8 filler_x21EC[0x2200 - 0x21EC];
 	/* 0x2200 */ u32 x2200_ftcmd_var0;
 	/* 0x2204 */ u32 x2200_ftcmd_var1;
 	/* 0x2208 */ u32 x2200_ftcmd_var2;
