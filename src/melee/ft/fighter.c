@@ -8,6 +8,264 @@
 #include "melee/gr/stage.h"
 #include "melee/pl/player.h"
 
+// external functions TODO: check which of these can be #included instead. Move to functions.h when we figure out the prototypes
+void func_8000B1CC();
+void func_8000D148();
+void func_8000ED54();
+void func_8000EE8C();
+void func_80016C64(char*, s32**, char*, s32, ...); // from lbarchive.s
+void func_80022C30();
+void func_80029020();
+void func_800290D4();
+void func_80031144();
+void func_80037C60();
+void func_8003E058();
+void func_8003EC9C();
+void func_8003FAA8();
+void func_8003FE1C();
+void func_80040330();
+void func_80040B8C();
+void func_800411C4();
+void func_80041280();
+void func_8004CBF4();
+void func_8006737C();
+void func_80067624();
+u32 func_80068E40();
+void func_8006E9B4();
+void func_8006EBA4();
+void func_8006EBE8();
+void func_8006F0FC();
+void func_8006FE48();
+void func_80070308();
+void func_80070654();
+void func_80070758();
+void func_8007077C();
+void func_80070E74();
+void func_80070F28();
+void func_80070FD0();
+void func_80073240();
+void func_80073354();
+void func_8007349C();
+void func_80073758();
+void func_80074148();
+void func_80074170();
+void func_800743E0();
+void func_800749CC();
+void func_80074A8C();
+void func_80074E58();
+void func_8007500C();
+void func_8007584C();
+void func_8007592C();
+void func_80075AF0();
+void func_80075CB4();
+void func_800764DC();
+void func_80076528();
+void func_800765AC();
+void func_800765E0();
+void func_80078754();
+void func_80078A2C();
+void func_80078C70();
+void func_8007925C();
+void func_8007AB48();
+void func_8007AB80();
+void func_8007AE80();
+void func_8007AF28();
+void func_8007B320();
+void func_8007B4E0();
+void func_8007B62C();
+void func_8007B6EC();
+void func_8007B760();
+void func_8007B8CC();
+void func_8007B8E8();
+void func_8007B924();
+void func_8007BA0C();
+void func_8007BAC0();
+void func_8007BBCC();
+void func_8007BC90();
+void func_8007BE3C();
+void func_8007C114();
+void func_8007C224();
+void func_8007C4BC();
+void func_8007C6DC();
+void func_8007C77C();
+void func_8007CC78();
+void func_8007CCA0();
+void func_8007CD6C();
+void func_8007CDA4();
+void func_8007CDF8();
+void func_8007CE4C();
+void func_8007D5BC();
+void func_8007D92C();
+void func_8007DA74();
+void func_8007DB24();
+void func_8007DB58();
+void func_8007E0E4();
+void func_8007E2A4();
+void func_8007E83C();
+void func_8007E994();
+void func_8007EA90();
+void func_8007EBAC();
+void func_8007ECD4();
+void func_8007ED50();
+void func_8007EE0C();
+void func_8007F578();
+f32 func_8007F694(Fighter*); // ftcommon.s PlayerLoadModelScale
+void func_8007F8E8();
+void func_8007F9B4();
+void func_8007FC7C();
+void func_8007FF74();
+void func_8007FFD8();
+void func_8008021C();
+void func_8008031C();
+f32 func_800804EC(Fighter*); // DataOffset_PlayerScale_MultiplyBySomething, returns fighter->x40*fighter->x34
+void func_800804FC();
+void func_80080E18();
+void func_800819A8();
+void func_80084A40();
+void func_800852B0();
+void func_8008549C();
+void func_8008572C();
+void func_80085820();
+void func_800859A8();
+void func_80085B10();
+void func_80085CD8();
+void func_800867E8();
+void func_800880D8();
+void func_80088148();
+void func_80088640();
+void func_800887CC();
+void func_80088884();
+void func_800888E0();
+void func_80088C5C();
+void func_800890D0();
+void func_800895E0();
+void func_80089B08(HSD_GObj* pPlayerEntityStruct);
+void func_8008D930();
+void func_8008E908();
+void func_8008E984();
+void func_8008E9D0();
+void func_8008EB58();
+void func_8008EC90();
+void func_80090594();
+void func_80090718();
+void func_80095744();
+void func_800964FC();
+void func_800968C8();
+void func_80098B20();
+void func_80098C9C();
+void func_80099D9C();
+void func_8009CF84();
+void func_8009E0A8();
+void func_8009E0D4();
+void func_8009E7B4();
+void func_8009F4A4();
+void func_8009F578();
+void func_800A0DA4();
+void func_800A17E4();
+void func_800A1874();
+void func_800A1904();
+void func_800A1948();
+void func_800A198C();
+void func_800A1994();
+void func_800A1A24();
+void func_800A2040();
+void func_800B3900();
+void func_800BFD04();
+void func_800BFFD0();
+void func_800C0134();
+void func_800C0200();
+void func_800C0408();
+void func_800C0694();
+void func_800C0A98();
+void func_800C2FD8();
+void func_800C37A0();
+void func_800C511C();
+void func_800C61B0();
+void func_800C8064();
+void func_800C8540();
+void func_800C884C();
+void func_800C88A0();
+void func_800C8A64();
+void func_800C8B2C();
+void func_800C8C84();
+void func_800C8D00();
+void func_800C8F6C();
+void func_800C9034();
+void func_800CAE80();
+void func_800D0FA0();
+void func_800D14E4();
+void func_800D1A8C();
+void func_800D1E80();
+void func_800D237C();
+void func_800D3158();
+void func_800D67C4();
+void func_800D688C();
+void func_800D6928();
+void func_800D71D8();
+void func_800DEEA8();
+void func_800DEF38();
+void func_800DF0D0();
+void func_800F1D24();
+void func_800F5BA4();
+void func_800F5C34();
+void func_8014FE10();
+void func_8014FE58();
+void func_80155FCC();
+void func_80156014();
+void func_8016B0FC();
+void func_8016B1C4();
+void func_8016B41C();
+void func_801A45E8();
+void func_8026A8EC();
+void func_8026ABD8();
+void func_8026B300();
+void func_8026B30C();
+void func_8026B588();
+void func_8026B594();
+void func_8026B7F8();
+void func_8027B4A4();
+void func_802FB6E8();
+void func_802FC998();
+void func_80322258();
+void cosf();
+void sinf();
+void func_80366BD4();
+void func_80379310();
+void func_8037A250();
+void func_8038FD54();
+void func_803901F0();
+void func_80390A70();
+
+void func_80067688(void*);
+void func_80076064(Fighter*);
+void func_8007AFF8(HSD_GObj*);
+void func_8007B0C0(HSD_GObj*, s32);
+void func_8007C17C(HSD_GObj*);
+void func_8007C630(HSD_GObj*);
+void func_8007D5D4(Fighter*);
+void func_8007D6A4(Fighter*);
+void func_8007E2FC(HSD_GObj*);
+f32 func_8007F694(Fighter*);
+void func_80081938(HSD_GObj*);
+void func_80081B38(HSD_GObj*);
+s32 func_80082A68(HSD_GObj*);
+void func_80088A50(Fighter*);
+void func_800890BC(Fighter*);
+void func_800892D4(Fighter*);
+void func_800A101C(Fighter*, s8, s8, s32);
+void func_800BFFAC(Fighter*);
+void func_800C0074(Fighter*);
+void func_800C09B4(HSD_GObj*);
+void func_800C8438(HSD_GObj*);
+void func_800C89A0(HSD_GObj*);
+void func_800C8FC4(HSD_GObj*);
+void func_800D105C(HSD_GObj*);
+
+// extern variables
+typedef void (*ft_callback)(HSD_GObj* gobj);
+extern ft_callback ft_OnLoad[33]; // One load callback for every character. asm/melee/ft/code_8008521C.s:106254
+extern ft_callback ft_OnDeath[33]; // One death callback for every character. asm/melee/ft/code_8008521C.s:106291
+
 // TODO: put this in functions.h, same for ftkoopa.c
 extern void* func_8007E2F4(); // ftcommon.s
 
@@ -40,10 +298,8 @@ extern void* ft_OnAbsorb; // asm/melee/ft/code_8008521C.s
 extern s32 lbl_804D4A08;
 extern u8 lbl_804D7849;
 
-void HSD_JObjSetMtxDirtySub(HSD_JObj*); // sysdolphin/baselib/jobj.s
+void HSD_JObjSetMtxDirtySub(void*); // sysdolphin/baselib/jobj.s
 void HSD_JObjRemoveAll(HSD_JObj*); // sysdolphin/baselib/jobj.s
-void ft_OnDeath(); // asm/melee/ft/code_8008521C.s
-void ft_OnLoad(); // asm/melee/ft/code_8008521C.s
 void PSVECAdd(Vec3* a, Vec3* b, Vec3* result); // asm/dolphin/mtx/vec.s
 void PSMTXConcat(); // asm/dolphin/mtx/mtx.s
 void* HSD_JObjGetMtxPtr(); // asm/melee/lb/lbcollision.s
@@ -1050,7 +1306,133 @@ asm void func_80067C98()
 }
 #endif
 
+#if 0
 // https://decomp.me/scratch/NBWRY
+// Matches, doesn't OK
+
+typedef struct
+{
+    u8 filler_0[0x14];
+    s32 x14_flags; // _HSD_GObj* prev_gx
+    u8 filler_18[0x2C-0x18];
+    Vec3 x2C_pos; // userdata
+    Vec3 x38_pos; // HSD_OBJ object
+} S;
+
+void func_80068354(HSD_GObj* fighterObj/*r30*/) {
+	void (*temp_r12)(HSD_GObj* gobj);
+    Vec3 vec_sp20;
+    f32 temp_f1;
+    Fighter* fighter2_r29;
+    s32 temp_r4;
+    S* test;
+    S* temp_r28;
+    s32 dummy[5];
+
+    //@20
+    Fighter* fighter_r31 = fighterObj->user_data;
+    //@24
+    func_80067C98(fighter_r31);
+    //@2c
+    test = temp_r28 = fighterObj->hsd_obj;
+    if (test == 0) __assert("jobj.h"/*lbl_804D3A00*/, 916, "jobj"/*lbl_804D3A08*/);
+    //@48 @MeleeBug: this condition will never be triggered
+    if (&fighter_r31->xB0_pos == 0) __assert("jobj.h"/*lbl_804D3A00*/, 917, "translate"/*lbl_803C0550*/);
+    //@64
+    temp_r28->x38_pos = fighter_r31->xB0_pos;
+    //@7c
+    if( (temp_r28->x14_flags & 0x02000000) == 0 && (temp_r28 != 0)) 
+    {
+        //@a4
+        if (temp_r28 == 0) __assert("jobj.h"/*lbl_804D3A00*/, 564, "jobj"/*lbl_804D3A08*/);
+        temp_r4 = temp_r28->x14_flags;
+        if ((((temp_r4 & 0x800000) == 0) && (temp_r4 & 0x40)) == 0)
+            HSD_JObjSetMtxDirtySub(temp_r28);
+    }
+    //@d0
+    func_800D105C(fighterObj);
+    func_800C09B4(fighterObj);
+    func_8007E2FC(fighterObj);
+    func_80088A50(fighter_r31);
+    func_800890BC(fighter_r31);
+    func_800892D4(fighter_r31);
+    func_80081B38(fighterObj);
+    func_80081938(fighterObj);
+    //@110
+    if (fighter_r31->x2135 == -1)
+    {
+        if (func_80082A68(fighterObj) && !fighter_r31->x2229_flag.bits.b6)
+            func_8007D6A4(fighter_r31);
+        else
+            func_8007D5D4(fighter_r31);
+    }
+    else
+        func_8007D5D4(fighter_r31);
+    //@15c
+    func_80076064(fighter_r31);
+    //@164
+    temp_r28 = fighterObj->hsd_obj;
+    if (temp_r28 == 0) __assert("jobj.h"/*lbl_804D3A00*/, 916, "jobj"/*lbl_804D3A08*/);
+    //@180 @MeleeBug: this condition will never be triggered
+    if (&fighter_r31->xB0_pos == 0) __assert("jobj.h"/*lbl_804D3A00*/, 917, "translate"/*lbl_803C0550*/);
+    //@19c
+    temp_r28->x38_pos = fighter_r31->xB0_pos;
+    //@1b4
+    if ( (temp_r28->x14_flags & 0x02000000) == 0 && (temp_r28 != 0))
+    {
+            if (temp_r28 == 0) __assert("jobj.h"/*lbl_804D3A00*/, 564, "jobj"/*lbl_804D3A08*/);
+            temp_r4 = temp_r28->x14_flags;
+            if ((((temp_r4 & 0x800000) == 0) && (temp_r4 & 0x40)) == 0)
+                HSD_JObjSetMtxDirtySub(temp_r28);
+    }
+    //@208
+    func_8006C0F0(fighterObj);
+    //@210
+        temp_r28 = fighterObj->hsd_obj;
+
+    fighter2_r29 = fighterObj->user_data;
+    //@218
+    temp_f1 = func_8007F694(fighterObj->user_data);
+    //@220
+    if (1.0f/*lbl_804D8250*/ != fighter2_r29->x34_scale.z)
+        vec_sp20.x = fighter2_r29->x34_scale.z;
+    else
+        //@238
+        vec_sp20.x = temp_f1;
+    //@23c
+    vec_sp20.y = temp_f1;
+    vec_sp20.z = temp_f1;
+    //@248
+    if (temp_r28 == 0) __assert("jobj.h"/*lbl_804D3A00*/, 760, "jobj"/*lbl_804D3A08*/);
+    //@25c
+    temp_r28->x2C_pos = vec_sp20;
+    //@274
+    if ( (temp_r28->x14_flags & 0x02000000) == 0 && (temp_r28 != 0))
+    {
+        if (temp_r28 == 0) __assert("jobj.h"/*lbl_804D3A00*/, 564, "jobj"/*lbl_804D3A08*/);
+        temp_r4 = temp_r28->x14_flags;
+        if ((((temp_r4 & 0x800000) == 0) && (temp_r4 & 0x40)) == 0)
+            HSD_JObjSetMtxDirtySub(temp_r28);
+    }
+    //@2c8
+    func_800BFFAC(fighter_r31);
+    func_800C0074(fighter_r31);
+    func_800C8438(fighterObj);
+    func_800C89A0(fighterObj);
+    func_800C8FC4(fighterObj);
+    func_8007AFF8(fighterObj);
+    func_8007B0C0(fighterObj, 0);
+    //@304
+    if (ft_OnDeath[fighter_r31->x4_fighterID])
+        ft_OnDeath[fighter_r31->x4_fighterID](fighterObj);
+    //@330
+    func_800A101C(fighter_r31, Player_GetCpuType(fighter_r31->xC_playerID), Player_GetCpuLevel(fighter_r31->xC_playerID), 0);
+    //@358
+    func_80067688(&fighter_r31->x60C);
+    func_8007C17C(fighterObj);
+    func_8007C630(fighterObj);
+}
+#else
 asm void func_80068354()
 {
 	nofralloc 
@@ -1303,7 +1685,7 @@ lbl_80068684:
 /* 800686DC 000652BC  7C 08 03 A6 */	mtlr r0
 /* 800686E0 000652C0  4E 80 00 20 */	blr  
 }
-
+#endif
 
 asm void func_800686E4()
 {
@@ -5404,7 +5786,7 @@ lbl_8006C0D4:
 }
 
 
-asm void func_8006C0F0()
+asm void func_8006C0F0(HSD_GObj* fighterObj)
 {
 	nofralloc 
 /* 8006C0F0 00068CD0  7C 08 02 A6 */	mflr r0
