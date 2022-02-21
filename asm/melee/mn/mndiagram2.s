@@ -2481,6 +2481,11 @@ lbl_80245B90:
 /* 80245BA0 00242780  4E 80 00 20 */	blr 
 
 
+.section .bss, "wa"
+.global lbl_804A0834
+lbl_804A0834:
+	.skip 0x10
+
 .section .data
     .balign 8
 .global lbl_803EEAD0
@@ -2569,13 +2574,6 @@ jtbl_803EEB78:
     .4byte 0x5F646174
     .4byte 0x61000000
     .4byte NULL
-
-
-.section .bss, "wa"
-.global lbl_804A0834
-lbl_804A0834:
-	.skip 0x10
-
 
 .section .sdata
     .balign 8

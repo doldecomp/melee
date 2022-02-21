@@ -2821,6 +2821,7 @@ lbl_803B81D4:
 
 .section .data
     .balign 8
+lbl_803E3FA0:
     .asciz "%s:%d: couldn t get gobj(id=%d)\n"
     .balign 4
 .global lbl_803E3FC4
@@ -2861,7 +2862,6 @@ lbl_803E4048:
     .4byte 0x001C0011
     .4byte 0x001B0013
     .4byte 0x00270015
-    .4byte NULL
 
 
 .section .sdata
