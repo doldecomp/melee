@@ -1877,7 +1877,7 @@ void func_800881D8(struct _Fighter*, u32, u32, u32);
 // ? func_80092C54(?);
 // ? func_80092E10(?);
 // ? func_80092E30(?);
-// ? func_80092ED8(?);
+f32 func_80092ED8(void*, void*, f32);
 // ? func_80092F2C(?);
 // ? func_80093628(?);
 // ? func_8009365C(?);
