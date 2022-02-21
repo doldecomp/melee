@@ -17648,7 +17648,7 @@ lbl_803BF760:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80458868
 lbl_80458868:
 	.skip 0x20
@@ -17659,7 +17659,7 @@ lbl_80458888:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3958
 lbl_804D3958:
     .asciz "mplib.c"
@@ -17688,11 +17688,10 @@ lbl_804D397C:
 lbl_804D3984:
     .4byte 0x00040005
     .4byte 0x00060007
-    .4byte 0x00000000
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D64B0
 lbl_804D64B0:
 	.skip 0x4
@@ -17738,7 +17737,7 @@ lbl_804D64E4:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8018
 lbl_804D8018:
 	.4byte 0x7F7FFFFF

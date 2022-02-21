@@ -3496,7 +3496,7 @@ func_8013C2F8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9B90
 lbl_804D9B90:
 	.4byte 0x40400000

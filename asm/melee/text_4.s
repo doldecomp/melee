@@ -43233,7 +43233,7 @@ lbl_80322610:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8780
 lbl_803B8780:
     .4byte 0x00000000
@@ -43537,7 +43537,6 @@ lbl_803B8AE0:
     .4byte lbl_803FFD84
     .4byte lbl_803FFD90
     .4byte lbl_803FFB68
-    .4byte NULL
 
 
 .section .data
@@ -50265,11 +50264,10 @@ lbl_804003A0:
     .balign 4
     .asciz "standScene"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A1ED0
 lbl_804A1ED0:
 	.skip 0x10
@@ -50336,7 +50334,7 @@ lbl_804A2F08:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5800
 lbl_804D5800:
     .asciz "jobj.h"
@@ -50788,7 +50786,7 @@ lbl_804D5B38:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6D68
 lbl_804D6D68:
 	.skip 0x4
@@ -51304,11 +51302,11 @@ lbl_804D704C:
 	.skip 0x4
 .global lbl_804D7050
 lbl_804D7050:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DDB68
 lbl_804DDB68:
 	.4byte 0x41900000

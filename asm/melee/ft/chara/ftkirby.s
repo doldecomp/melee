@@ -35772,7 +35772,7 @@ ftDonkey_OnDeath:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7548
 lbl_803B7548:
 	.float 0
@@ -35798,7 +35798,7 @@ lbl_803B757C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3D98
 lbl_804D3D98:
     .asciz "jobj.h"
@@ -35868,7 +35868,7 @@ lbl_804D3E08:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9350
 lbl_804D9350:
 	.4byte 0x43300000

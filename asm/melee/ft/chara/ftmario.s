@@ -2010,7 +2010,7 @@ lbl_800E2874:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9190
 lbl_804D9190:
 	.4byte 0x40400000

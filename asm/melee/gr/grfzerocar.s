@@ -854,7 +854,7 @@ lbl_801CBB54:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7E50
 lbl_803B7E50:
 	.float 1
@@ -974,7 +974,7 @@ lbl_803E0BD8:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4598
 lbl_804D4598:
     .asciz "archive"
@@ -991,11 +991,10 @@ lbl_804D45A8:
 lbl_804D45B0:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DADB8
 lbl_804DADB8:
 	.4byte 0x00000000

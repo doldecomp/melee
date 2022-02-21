@@ -498,7 +498,7 @@ lbl_80322F18:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8B90
 lbl_803B8B90:
 	.double 0

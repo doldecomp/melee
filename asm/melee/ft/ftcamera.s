@@ -267,11 +267,10 @@ lbl_803C0C08:
 lbl_803C0C14:
     .asciz "stGetPlyDeadUp() - center_pos.y != 0.0F"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D82D0
 lbl_804D82D0:
 	.4byte 0x3F800000

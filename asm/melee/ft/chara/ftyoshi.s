@@ -8212,7 +8212,7 @@ lbl_8013295C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B75C0
 lbl_803B75C0:
     .4byte 0x00000000
@@ -8222,7 +8222,7 @@ lbl_803B75C0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3E40
 lbl_804D3E40:
     .asciz "aobj.h"
@@ -8259,7 +8259,7 @@ lbl_804D3E78:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9A18
 lbl_804D9A18:
 	.4byte 0x00000000

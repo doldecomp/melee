@@ -4065,7 +4065,7 @@ lbl_80206E14:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B82D0
 lbl_803B82D0:
     .4byte 0x00000000
@@ -4314,7 +4314,7 @@ lbl_803E5680:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D47B8
 lbl_804D47B8:
     .asciz "/GrVe"
@@ -4342,7 +4342,7 @@ lbl_804D47E0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A30
 lbl_804D6A30:
 	.skip 0x4
@@ -4357,11 +4357,11 @@ lbl_804D6A3C:
 	.skip 0x4
 .global lbl_804D6A40
 lbl_804D6A40:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB738
 lbl_804DB738:
 	.4byte 0xBF800000

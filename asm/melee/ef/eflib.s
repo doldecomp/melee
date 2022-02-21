@@ -5373,11 +5373,10 @@ lbl_803BF804:
 lbl_803BF81C:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80458EB0
 lbl_80458EB0:
 	.skip 0x30
@@ -5390,7 +5389,7 @@ lbl_80458F60:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D39A0
 lbl_804D39A0:
     .asciz "eflib.c"
@@ -5411,11 +5410,10 @@ lbl_804D39B4:
 lbl_804D39BC:
     .asciz "scale"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D64E8
 lbl_804D64E8:
 	.skip 0x4
@@ -5428,7 +5426,7 @@ lbl_804D64F0:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8168
 lbl_804D8168:
 	.4byte 0x41200000

@@ -5150,17 +5150,16 @@ lbl_80114788:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7588
 lbl_803B7588:
 	.float 1.8
     .float 0
     .float 0
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D95F0
 lbl_804D95F0:
 	.4byte 0x40400000

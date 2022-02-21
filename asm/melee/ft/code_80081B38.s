@@ -4022,7 +4022,7 @@ func_80085204:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D83A8
 lbl_804D83A8:
 	.4byte 0x41200000

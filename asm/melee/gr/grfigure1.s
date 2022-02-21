@@ -272,7 +272,7 @@ lbl_803E62C0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A70
 lbl_804D6A70:
-	.skip 0x8
+	.skip 0x4

@@ -218,7 +218,7 @@ lbl_8007C918:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8328
 lbl_804D8328:
 	.4byte 0x00000000

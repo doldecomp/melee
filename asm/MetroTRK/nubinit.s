@@ -127,7 +127,7 @@ lbl_80326C64:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B93A0
 lbl_803B93A0:
     .4byte 0x4D657472
@@ -141,7 +141,7 @@ lbl_803B93A0:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A3148
 lbl_804A3148:
 	.skip 0x28

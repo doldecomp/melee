@@ -1571,7 +1571,7 @@ lbl_803DA758:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80479BC8
 lbl_80479BC8:
 	.skip 0x58
@@ -1581,7 +1581,7 @@ lbl_80479C20:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4248
 lbl_804D4248:
     .asciz "SdVsCam"
@@ -1601,7 +1601,7 @@ lbl_804D4260:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DA9B8
 lbl_804DA9B8:
 	.4byte 0x00000000
