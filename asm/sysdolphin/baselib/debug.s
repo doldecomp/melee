@@ -132,7 +132,7 @@ lbl_803882EC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407D60
 lbl_80407D60:
     .asciz "assertion \"%s\" failed"
@@ -144,14 +144,14 @@ lbl_80407D78:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804C2608
 lbl_804C2608:
 	.skip 0x2D8
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6010
 lbl_804D6010:
     .4byte 0x00000000

@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_800E2888
-func_800E2888:
+.global ftCFalcon_OnDeath
+ftCFalcon_OnDeath:
 /* 800E2888 000DF468  7C 08 02 A6 */	mflr r0
 /* 800E288C 000DF46C  38 80 00 00 */	li r4, 0
 /* 800E2890 000DF470  90 01 00 04 */	stw r0, 4(r1)
@@ -3275,7 +3275,7 @@ lbl_800E550C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D91F8
 lbl_804D91F8:
 	.4byte 0x40000000

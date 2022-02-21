@@ -1502,17 +1502,16 @@ lbl_802182BC:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8430
 lbl_803B8430:
-    .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E7940
 lbl_803E7940:
 	.4byte lbl_80217030
@@ -1622,7 +1621,7 @@ lbl_803E7A68:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4920
 lbl_804D4920:
     .asciz "jobj.h"
@@ -1634,14 +1633,14 @@ lbl_804D4928:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AB0
 lbl_804D6AB0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBAB8
 lbl_804DBAB8:
 	.4byte 0x3F800000

@@ -18,7 +18,7 @@ typedef struct _ftFoxAttributes {
 } ftFoxAttributes;
 
 BOOL func_800E5534(HSD_GObj* gobj);
-void func_800E5554(HSD_GObj* gobj);
+void ftFox_OnDeath(HSD_GObj* gobj);
 void func_800E5588(HSD_GObj* gobj);
 void func_800E55A8(HSD_GObj* gobj, s32 arg1);
 void func_800E5688(HSD_GObj* gobj);

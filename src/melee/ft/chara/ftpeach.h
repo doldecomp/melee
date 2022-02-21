@@ -15,6 +15,6 @@
 #define ITEM_PEACH_TOAD 104
 #define ITEM_PEACH_TOAD_SPORE 111
 
-void func_8011B51C(HSD_GObj* gobj);
+void ftPeach_OnDeath(HSD_GObj* gobj);
 
 #endif

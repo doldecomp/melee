@@ -1,6 +1,6 @@
-.section .data  # 0x803B9840 - 0x804316C0
-
 .include "macros.inc"
+
+.section .data  # 0x803B9840 - 0x804316C0
 
 .global lbl_80405494
 lbl_80405494:
@@ -22,4 +22,3 @@ lbl_80405548:
 lbl_80405560:
     .asciz "hsd_dobj"
     .balign 4
-    .4byte NULL

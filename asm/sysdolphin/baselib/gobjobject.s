@@ -98,7 +98,7 @@ lbl_80390B54:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80408558
 lbl_80408558:
     .asciz "gobjobject.c"
@@ -107,4 +107,3 @@ lbl_80408558:
 lbl_80408568:
     .asciz "gobj->obj_kind == HSD_GOBJ_OBJ_NONE"
     .balign 4
-    .4byte NULL

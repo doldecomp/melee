@@ -951,7 +951,8 @@ MObjInfoInit:
 
 
 .section .data
-
+    .balign 8
+lbl_80405EB0:
     .4byte 0x68736449
     .4byte 0x73446573
     .4byte 0x63656E64
@@ -1021,7 +1022,7 @@ lbl_80405ED4:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5CE0
 lbl_804D5CE0:
     .asciz "mobj.c"
@@ -1042,11 +1043,10 @@ lbl_804D5CF8:
 lbl_804D5CFC:
     .asciz "tobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global default_class
 default_class:
 	.skip 0x4
@@ -1062,7 +1062,7 @@ lbl_804D7624:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE430
 lbl_804DE430:
 	.4byte 0x3F800000

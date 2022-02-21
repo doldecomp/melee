@@ -355,8 +355,9 @@ lbl_8000D2E0:
 /* 8000D2E4 00009EC4  38 21 00 30 */	addi r1, r1, 0x30
 /* 8000D2E8 00009EC8  4E 80 00 20 */	blr 
 
-.section .sdata2
 
+.section .sdata2
+    .balign 8
 .global lbl_804D7A68
 lbl_804D7A68:
 	.4byte 0x3FF921FB

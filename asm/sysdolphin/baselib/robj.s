@@ -2024,7 +2024,7 @@ _HSD_RObjForgetMemory:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B9580
 lbl_803B9580:
 	.float 0
@@ -2040,11 +2040,10 @@ lbl_803B9598:
 	.float 0
     .float 1
     .float 0
-    .4byte NULL
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406E68
 lbl_80406E68:
     .asciz "rp->u.jobj"
@@ -2103,7 +2102,7 @@ lbl_80406F2C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5EB8
 lbl_804D5EB8:
     .asciz "robj.c"
@@ -2138,7 +2137,7 @@ lbl_804D5EE4:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D76E8
 lbl_804D76E8:
 	.skip 0x4
@@ -2148,7 +2147,7 @@ lbl_804D76EC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE6A0
 lbl_804DE6A0:
 	.4byte 0x3FE00000

@@ -14,8 +14,8 @@ lbl_800EAD7C:
 /* 800EAD7C 000E795C  38 60 00 00 */	li r3, 0
 /* 800EAD80 000E7960  4E 80 00 20 */	blr 
 
-.global func_800EAD84
-func_800EAD84:
+.global ftLink_OnDeath
+ftLink_OnDeath:
 /* 800EAD84 000E7964  7C 08 02 A6 */	mflr r0
 /* 800EAD88 000E7968  38 80 00 00 */	li r4, 0
 /* 800EAD8C 000E796C  90 01 00 04 */	stw r0, 4(r1)
@@ -4059,7 +4059,7 @@ lbl_800EE514:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7520
 lbl_803B7520:
 	.float 0
@@ -4071,11 +4071,10 @@ lbl_803B7520:
     .float 0
     .float 0
     .float 0
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D92D8
 lbl_804D92D8:
 	.4byte 0x3F800000

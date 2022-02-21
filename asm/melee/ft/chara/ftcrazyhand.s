@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80155E18
-func_80155E18:
+.global ftCrazyhand_OnDeath
+ftCrazyhand_OnDeath:
 /* 80155E18 001529F8  4E 80 00 20 */	blr 
 
 .global ftCrazyhand_OnLoad
@@ -6950,7 +6950,7 @@ lbl_8015BCE8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803D4878
 lbl_803D4878:
     .4byte 0x00000157
@@ -7042,7 +7042,7 @@ jtbl_803D4998:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3EC0
 lbl_804D3EC0:
     .asciz "jobj.h"
@@ -7054,7 +7054,7 @@ lbl_804D3EC8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DA050
 lbl_804DA050:
 	.4byte 0x00000000

@@ -12473,8 +12473,7 @@ lbl_80041C4C:
 
 
 .section .data
-.balign 8
-
+    .balign 8
 .global lbl_803BCE70
 lbl_803BCE70:
     .4byte 0xFFFFFFFF
@@ -12670,7 +12669,7 @@ lbl_803BD260:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6470
 lbl_804D6470:
 	.skip 0x8
@@ -12683,7 +12682,7 @@ lbl_804D6480:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7F18
 lbl_804D7F18:
 	.4byte 0x00000000

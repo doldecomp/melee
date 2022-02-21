@@ -60,8 +60,8 @@ lbl_8012441C:
 /* 8012446C 0012104C  7C 08 03 A6 */	mtlr r0
 /* 80124470 00121050  4E 80 00 20 */	blr 
 
-.global func_80124474
-func_80124474:
+.global ftPikachu_OnDeath
+ftPikachu_OnDeath:
 /* 80124474 00121054  7C 08 02 A6 */	mflr r0
 /* 80124478 00121058  38 80 00 00 */	li r4, 0
 /* 8012447C 0012105C  90 01 00 04 */	stw r0, 4(r1)
@@ -4583,7 +4583,7 @@ lbl_80128304:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3E20
 lbl_804D3E20:
     .asciz "jobj.h"
@@ -4595,7 +4595,7 @@ lbl_804D3E28:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D98F0
 lbl_804D98F0:
 	.4byte 0x3F800000

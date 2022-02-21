@@ -3154,7 +3154,7 @@ lbl_8038577C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407738
 lbl_80407738:
     .asciz "texp_list"
@@ -3319,7 +3319,7 @@ lbl_80407A14:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5FC8
 lbl_804D5FC8:
     .asciz "texp.c"
@@ -3340,11 +3340,10 @@ lbl_804D5FDC:
 lbl_804D5FE4:
     .asciz "tevdesc"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE7D8
 lbl_804DE7D8:
 	.4byte 0x437F0000

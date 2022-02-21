@@ -86,7 +86,7 @@ lbl_80335FA0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400BF0
 lbl_80400BF0:
     .asciz "DBExceptionDestination\n"
@@ -94,7 +94,7 @@ lbl_80400BF0:
 
 
 .section .sbss
-
+    .balign 8
 .global __DBInterface
 __DBInterface:
 	.skip 0x4

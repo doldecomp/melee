@@ -93,7 +93,7 @@ lbl_803361F4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400C08
 lbl_80400C08:
     .asciz "DSPInit(): Build Date: %s %s\n"
@@ -105,7 +105,7 @@ lbl_80400C08:
 
 
 .section .sbss
-
+    .balign 8
 .global __DSP_init_flag
 __DSP_init_flag:
-	.skip 0x8
+	.skip 0x4

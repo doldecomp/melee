@@ -107,7 +107,7 @@ func_800316B4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BCD90
 lbl_803BCD90:
     .asciz "cmsnap.c"
@@ -120,7 +120,7 @@ lbl_803BCD9C:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80453060
 lbl_80453060:
 	.skip 0x20

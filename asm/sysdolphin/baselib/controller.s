@@ -1570,7 +1570,7 @@ lbl_8037805C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B9570
 lbl_803B9570:
     .4byte 0x80000000
@@ -1580,7 +1580,7 @@ lbl_803B9570:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406D68
 lbl_80406D68:
     .4byte NULL
@@ -1618,7 +1618,7 @@ lbl_80406DAC:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global HSD_PadLibData
 HSD_PadLibData:
 	.skip 0x34
@@ -1634,7 +1634,7 @@ HSD_PadRumbleData:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE5B0
 lbl_804DE5B0:
 	.4byte 0x00000000

@@ -222,7 +222,7 @@ func_803909D8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804084F0
 lbl_804084F0:
     .asciz "gobjgxlink.c"
@@ -235,4 +235,3 @@ lbl_80408500:
 lbl_8040852C:
     .asciz "gobj->gx_link != HSD_GOBJ_GXLINK_NONE"
     .balign 4
-    .4byte NULL

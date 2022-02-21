@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_801422E8
-func_801422E8:
+.global ftLuigi_OnDeath
+ftLuigi_OnDeath:
 /* 801422E8 0013EEC8  7C 08 02 A6 */	mflr r0
 /* 801422EC 0013EECC  38 80 00 00 */	li r4, 0
 /* 801422F0 0013EED0  90 01 00 04 */	stw r0, 4(r1)
@@ -242,6 +242,21 @@ func_801425C8:
 /* 80142604 0013F1E4  7C 08 03 A6 */	mtlr r0
 /* 80142608 0013F1E8  4E 80 00 20 */	blr 
 
+/*
+https://decomp.me/scratch/ZDYE2
+void func_8014260C(s32 arg0, s32* arg1, s32* arg2)
+{
+    if (arg0 != 0xA) {
+        if (arg0 < 0xA && arg0 >= 9) {
+            *arg2 = 0xE;
+            *arg1 = 0xE;
+        }
+    } else {
+        *arg2 = 0xF;
+        *arg1 = 0xF;
+    }
+}
+*/
 .global func_8014260C
 func_8014260C:
 /* 8014260C 0013F1EC  2C 03 00 0A */	cmpwi r3, 0xa
@@ -3156,7 +3171,7 @@ lbl_80144DE8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9C98
 lbl_804D9C98:
 	.4byte 0x40400000

@@ -2625,7 +2625,7 @@ lbl_8032EA70:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804008D8
 lbl_804008D8:
     .asciz "HUDSON/USB2EXI/INITCODE/TARGET"
@@ -2637,14 +2637,14 @@ lbl_804008F8:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A50E0
 lbl_804A50E0:
 	.skip 0x220
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B70
 lbl_804D5B70:
     .4byte 0x00000001
@@ -2652,7 +2652,7 @@ lbl_804D5B70:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D70B0
 lbl_804D70B0:
 	.skip 0x4
@@ -2673,4 +2673,4 @@ lbl_804D70C4:
 	.skip 0x4
 .global lbl_804D70C8
 lbl_804D70C8:
-	.skip 0x8
+	.skip 0x4

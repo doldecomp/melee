@@ -1,5 +1,7 @@
 .include "macros.inc"
+
 .section .text, "ax"
+
 .global tanf
 tanf:
 /* 803261BC 00322D9C  7C 08 02 A6 */	mflr r0
@@ -280,6 +282,7 @@ __sinit_trigf_c:
 /* 803265A4 00323184  4E 80 00 20 */	blr 
 
 .section .rodata, "a"
+    .balign 8
 tmp_float:
 	.float 0.25
 	.float 0.023239374
@@ -287,6 +290,7 @@ tmp_float:
 	.float 1.867365E-11
 
 .section .data, "wa"
+    .balign 8
 .global lbl_80400770
 lbl_80400770:
     .4byte 0x7FFFFFFF
@@ -300,6 +304,7 @@ __four_over_pi_m1:
     .4byte NULL
 
 .section .sdata2, "a"
+    .balign 8
 lbl_804DE198:
 	.float 0.63661975
 lbl_804DE19C:

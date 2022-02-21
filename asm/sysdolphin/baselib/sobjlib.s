@@ -1307,7 +1307,7 @@ func_803A55DC:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B9658
 lbl_803B9658:
 	.float 0
@@ -1321,7 +1321,7 @@ lbl_803B9664:
 
 
 .section .data
-
+    .balign 8
 .global lbl_8040C3A0
 lbl_8040C3A0:
 	.4byte func_803A4740
@@ -1384,14 +1384,14 @@ jtbl_8040C3DC:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804D10E0
 lbl_804D10E0:
 	.skip 0x30
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6388
 lbl_804D6388:
     .asciz "sobj"
@@ -1399,14 +1399,14 @@ lbl_804D6388:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7960
 lbl_804D7960:
 	.skip 0x8
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DEA70
 lbl_804DEA70:
 	.4byte 0x00000000

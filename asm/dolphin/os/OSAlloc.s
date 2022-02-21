@@ -325,7 +325,7 @@ lbl_803444B8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804017D8
 lbl_804017D8:
     .asciz "OSCheckHeap: Failed HeapArray in %d"

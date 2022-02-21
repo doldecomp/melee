@@ -1182,7 +1182,7 @@ lbl_8038FA88:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804083B8
 lbl_804083B8:
     .asciz "devcom.c"
@@ -1201,11 +1201,10 @@ lbl_804083B8:
     .balign 4
     .asciz "size != 0"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804C62A0
 lbl_804C62A0:
 	.skip 0x80
@@ -1218,7 +1217,7 @@ lbl_804C6330:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6050
 lbl_804D6050:
 	.long 4
@@ -1230,11 +1229,10 @@ lbl_804D6054:
 lbl_804D6058:
     .asciz "dc"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D77F0
 lbl_804D77F0:
 	.skip 0x4

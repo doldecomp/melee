@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8014FC68
-func_8014FC68:
+.global ftMasterhand_OnDeath
+ftMasterhand_OnDeath:
 /* 8014FC68 0014C848  4E 80 00 20 */	blr 
 
 .global ftMasterhand_OnLoad
@@ -7139,7 +7139,7 @@ func_80155E14:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3EB0
 lbl_804D3EB0:
     .asciz "jobj.h"
@@ -7151,7 +7151,7 @@ lbl_804D3EB8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9E80
 lbl_804D9E80:
 	.4byte 0x00000000

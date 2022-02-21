@@ -762,7 +762,7 @@ Hu_IsStub:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B60
 lbl_804D5B60:
     .4byte 0x80000000
@@ -770,7 +770,7 @@ lbl_804D5B60:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7088
 lbl_804D7088:
 	.skip 0x4

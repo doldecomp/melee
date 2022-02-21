@@ -1156,7 +1156,7 @@ lbl_8001E2BC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BACC8
 lbl_803BACC8:
     .4byte 0x02000100
@@ -1205,13 +1205,11 @@ lbl_803BAD90:
 lbl_803BAD9C:
     .asciz "MemSnapIconData"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3828
 lbl_804D3828:
     .asciz "%u"
     .balign 4
-    .4byte NULL

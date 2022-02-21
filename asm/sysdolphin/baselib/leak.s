@@ -255,7 +255,7 @@ lbl_80388148:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407B58
 lbl_80407B58:
     .4byte NULL
@@ -391,7 +391,7 @@ lbl_80407B58:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6000
 lbl_804D6000:
     .asciz " "

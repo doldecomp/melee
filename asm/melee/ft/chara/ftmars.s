@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80136258
-func_80136258:
+.global ftMars_OnDeath
+ftMars_OnDeath:
 /* 80136258 00132E38  7C 08 02 A6 */	mflr r0
 /* 8013625C 00132E3C  38 80 00 00 */	li r4, 0
 /* 80136260 00132E40  90 01 00 04 */	stw r0, 4(r1)
@@ -3583,7 +3583,7 @@ lbl_801392B4:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9B08
 lbl_804D9B08:
 	.4byte 0x40400000

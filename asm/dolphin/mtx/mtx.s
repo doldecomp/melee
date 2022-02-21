@@ -639,7 +639,7 @@ lbl_804D5C00:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE310
 lbl_804DE310:
 	.4byte 0x3F800000

@@ -1272,7 +1272,7 @@ lbl_80376970:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406CE0
 lbl_80406CE0:
     .asciz "idx != -1"
@@ -1292,7 +1292,7 @@ lbl_80406D3C:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804C0980
 lbl_804C0980:
 	.skip 0x1400
@@ -1302,7 +1302,7 @@ lbl_804C1D80:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5E88
 lbl_804D5E88:
     .asciz "video.c"
@@ -1310,7 +1310,7 @@ lbl_804D5E88:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D76D8
 lbl_804D76D8:
 	.skip 0x4
@@ -1320,7 +1320,7 @@ lbl_804D76DC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE5A0
 lbl_804DE5A0:
 	.4byte 0x3F800000

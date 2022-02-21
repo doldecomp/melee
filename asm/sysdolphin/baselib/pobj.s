@@ -3629,7 +3629,7 @@ func_8036EB88:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406398
 lbl_80406398:
     .4byte func_8036EB88
@@ -3787,16 +3787,14 @@ lbl_804066D0:
 
 
 .section .bss, "wa"
-
-.skip 0x4
-
+    .balign 8
 .global lbl_804C0908
 lbl_804C0908:
 	.skip 0x10
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5D68
 lbl_804D5D68:
     .asciz "pobj.c"
@@ -3825,11 +3823,10 @@ lbl_804D5D8C:
 lbl_804D5D94:
     .asciz "jp->mtx"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7660
 lbl_804D7660:
 	.skip 0x4
@@ -3850,11 +3847,11 @@ lbl_804D7674:
 	.skip 0x4
 .global lbl_804D7678
 lbl_804D7678:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE4F8
 lbl_804DE4F8:
 	.4byte 0x00000000

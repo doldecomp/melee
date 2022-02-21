@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8014A250
-func_8014A250:
+.global ftGameWatch_OnDeath
+ftGameWatch_OnDeath:
 /* 8014A250 00146E30  7C 08 02 A6 */	mflr r0
 /* 8014A254 00146E34  38 80 00 00 */	li r4, 0
 /* 8014A258 00146E38  90 01 00 04 */	stw r0, 4(r1)
@@ -5436,7 +5436,7 @@ func_8014EB8C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9DC0
 lbl_804D9DC0:
 	.4byte 0x00000000

@@ -2808,7 +2808,7 @@ lbl_80387DD0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407AA0
 lbl_80407AA0:
     .asciz "texpdag.c"
@@ -2851,7 +2851,7 @@ lbl_80407B18:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5FF0
 lbl_804D5FF0:
     .asciz "l < num"
@@ -2865,7 +2865,7 @@ lbl_804D5FFC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE7E8
 lbl_804DE7E8:
 	.4byte 0x00000000

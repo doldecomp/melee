@@ -1782,7 +1782,7 @@ lbl_8034C3C8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402420
 lbl_80402420:
     .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head != NULL && RunQueue[prio].tail != NULL in %d\n"
@@ -1838,14 +1838,14 @@ lbl_80402420:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A7FB8
 lbl_804A7FB8:
 	.skip 0x9E8
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5C28
 lbl_804D5C28:
     .4byte 0x00000000
@@ -1853,7 +1853,7 @@ lbl_804D5C28:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D73D8
 lbl_804D73D8:
 	.skip 0x4

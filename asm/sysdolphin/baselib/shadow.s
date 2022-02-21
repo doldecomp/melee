@@ -1036,8 +1036,7 @@ lbl_803801B0:
 
 
 .section .data
-
-    .4byte NULL
+    .balign 8
 .global lbl_80407310
 lbl_80407310:
     .asciz "shadow.c"
@@ -1130,14 +1129,14 @@ lbl_80407448:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global shadow_alloc_data
 shadow_alloc_data:
 	.skip 0x30
 
 
 .section .sdata
-    .4byte NULL
+    .balign 8
 .global lbl_804D5F78
 lbl_804D5F78:
     .asciz "shadow"
@@ -1150,11 +1149,10 @@ lbl_804D5F80:
 lbl_804D5F84:
     .asciz "rect"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE768
 lbl_804DE768:
 	.4byte 0x3F000000

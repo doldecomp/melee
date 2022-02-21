@@ -168,7 +168,7 @@ lbl_8037E3CC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407188
 lbl_80407188:
     .4byte NULL
@@ -248,7 +248,7 @@ lbl_80407218:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5F38
 lbl_804D5F38:
     .asciz "perf.c"
@@ -260,7 +260,7 @@ lbl_804D5F40:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D76F8
 lbl_804D76F8:
 	.skip 0x4
@@ -270,7 +270,7 @@ lbl_804D76FC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE718
 lbl_804DE718:
 	.4byte 0x43300000

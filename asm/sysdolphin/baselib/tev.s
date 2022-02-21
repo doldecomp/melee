@@ -807,7 +807,7 @@ lbl_80362D24:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80405B98
 lbl_80405B98:
     .4byte NULL
@@ -989,7 +989,7 @@ lbl_80405D68:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5CD0
 lbl_804D5CD0:
     .asciz "tev.c"
@@ -998,11 +998,10 @@ lbl_804D5CD0:
 lbl_804D5CD8:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D75F8
 lbl_804D75F8:
 	.skip 0x4
@@ -1021,7 +1020,7 @@ lbl_804D760C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE420
 lbl_804DE420:
 	.4byte 0x406FE000

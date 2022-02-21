@@ -3601,7 +3601,7 @@ func_8036A8BC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406220
 lbl_80406220:
     .4byte func_8036A8BC
@@ -3683,7 +3683,7 @@ lbl_8040631C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5D40
 lbl_804D5D40:
     .asciz "cobj.c"
@@ -3696,11 +3696,10 @@ lbl_804D5D48:
 lbl_804D5D50:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7658
 lbl_804D7658:
 	.skip 0x4
@@ -3710,7 +3709,7 @@ lbl_804D765C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE468
 lbl_804DE468:
 	.4byte 0x3FE00000

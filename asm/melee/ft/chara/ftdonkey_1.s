@@ -1199,15 +1199,14 @@ lbl_800E08B8:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3D78
 lbl_804D3D78:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9140
 lbl_804D9140:
 	.4byte 0x00000000

@@ -5763,9 +5763,8 @@ lbl_802439E8:
 /* 80243A34 00240614  7C 08 03 A6 */	mtlr r0
 /* 80243A38 00240618  4E 80 00 20 */	blr 
 
-
 .section .data
-
+    .balign 8
 .global lbl_803EE728
 lbl_803EE728:
     .4byte 0x40800000
@@ -6011,7 +6010,7 @@ lbl_803EE774:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0750
 lbl_804A0750:
 	.skip 0x1C
@@ -6033,10 +6032,19 @@ lbl_804A0814:
 .global lbl_804A0824
 lbl_804A0824:
 	.skip 0x10
+.global lbl_804A0834
+lbl_804A0834:
+	.skip 0x10
+.global lbl_804A0844
+lbl_804A0844:
+	.skip 0x10
+.global lbl_804A0854
+lbl_804A0854:
+	.skip 0x14
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4FA0
 lbl_804D4FA0:
     .4byte 0x000000FF
@@ -6054,14 +6062,14 @@ lbl_804D4FB0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C10
 lbl_804D6C10:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBF70
 lbl_804DBF70:
 	.4byte 0x403E7A92

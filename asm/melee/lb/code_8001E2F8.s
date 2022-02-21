@@ -12261,7 +12261,7 @@ func_80028B90:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BADB0
 lbl_803BADB0:
     .asciz "lbmthp.c"
@@ -14310,11 +14310,10 @@ lbl_803BCA24:
     .4byte 0x2037312A
     .4byte 0x31303234
     .4byte NULL
-    .4byte NULL
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7300
 lbl_803B7300:
     .4byte 0x3F800000
@@ -14366,7 +14365,7 @@ lbl_803B7300:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804333E0
 lbl_804333E0:
 	.skip 0x1D8
@@ -14413,7 +14412,7 @@ lbl_80433B44:
 
 
 .section .sdata 
-
+    .balign 8
 .global lbl_804D3830
 lbl_804D3830:
     .asciz "0"
@@ -14586,11 +14585,10 @@ lbl_804D3928:
 lbl_804D3930:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D63D8
 lbl_804D63D8:
 	.skip 0x4
@@ -14684,7 +14682,7 @@ lbl_804D6454:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7CC8
 lbl_804D7CC8:
 	.4byte 0x3C888889

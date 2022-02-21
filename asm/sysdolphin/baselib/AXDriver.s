@@ -3511,7 +3511,7 @@ lbl_8038EA40:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B95F8
 lbl_803B95F8:
     .4byte 0x000006FD
@@ -3531,7 +3531,7 @@ lbl_803B9618:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80408140
 lbl_80408140:
     .asciz "axdriver.c"
@@ -3651,11 +3651,10 @@ lbl_80408348:
     .balign 4
     .asciz "type == 0 || param != NULL"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804C45A0
 lbl_804C45A0:
 	.skip 0x1380
@@ -3668,7 +3667,7 @@ lbl_804C5A20:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6038
 lbl_804D6038:
     .4byte 0xFFFFFFFF
@@ -3683,11 +3682,10 @@ lbl_804D6040:
 lbl_804D6044:
     .asciz "vID > 0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7788
 lbl_804D7788:
 	.skip 0x4
@@ -3769,7 +3767,7 @@ lbl_804D77EC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE840
 lbl_804DE840:
 	.4byte 0x477FFF00

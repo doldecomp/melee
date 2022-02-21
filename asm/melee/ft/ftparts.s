@@ -3142,7 +3142,7 @@ lbl_80075FFC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C08F8
 lbl_803C08F8:
     .4byte func_80073700
@@ -3270,7 +3270,7 @@ lbl_803C0BD0:
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80459028
 lbl_80459028:
 	.skip 0x2C
@@ -3292,7 +3292,7 @@ lbl_80459240:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3A30
 lbl_804D3A30:
     .asciz "jobj.h"
@@ -3321,11 +3321,10 @@ lbl_804D3A58:
 lbl_804D3A5C:
     .asciz "rotate"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D82C8
 lbl_804D82C8:
 	.4byte 0x3F800000

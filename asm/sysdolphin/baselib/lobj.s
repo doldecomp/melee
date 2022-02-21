@@ -2624,7 +2624,7 @@ func_80367688:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B94A0
 lbl_803B94A0:
 	.float 0
@@ -2638,7 +2638,7 @@ lbl_803B94AC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804060C0
 lbl_804060C0:
     .4byte func_80367688
@@ -2710,20 +2710,17 @@ lbl_804061D4:
     .balign 4
     .asciz "hsd_lobj"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
-.skip 0x4
-
+    .balign 8
 .global active_lights
 active_lights:
 	.skip 0x28
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5D18
 lbl_804D5D18:
     .asciz "lobj.c"
@@ -2754,8 +2751,7 @@ lbl_804D5D3C:
 
 
 .section .sbss
-
-    .skip 0x4
+    .balign 8
 .global lbl_804D7638
 lbl_804D7638:
 	.skip 0x4
@@ -2776,11 +2772,11 @@ lightmask_attnfunc:
 	.skip 0x4
 .global lightmask_alpha
 lightmask_alpha:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE440
 lbl_804DE440:
 	.4byte 0x3FE00000

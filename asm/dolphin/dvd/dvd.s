@@ -2619,7 +2619,7 @@ lbl_8033A12C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400E80
 lbl_80400E80:
     .asciz "app booted via JTAG\n"
@@ -2692,7 +2692,7 @@ jtbl_80400F60:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A7560
 lbl_804A7560:
 	.skip 0x80
@@ -2702,7 +2702,7 @@ lbl_804A75E0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B90
 lbl_804D5B90:
     .4byte 0x00000001
@@ -2710,7 +2710,7 @@ lbl_804D5B90:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7290
 lbl_804D7290:
 	.skip 0x8
