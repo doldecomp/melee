@@ -6,15 +6,6 @@ typedef struct _PairStruct
     u8 padding[0xB8];
 } PairStruct;
 
-typedef struct _UnkFighterStruct
-{
-    u32 data_filler_0[(0x5f0) / 4];
-    u32 x5F0;                   // 0x5f0
-    u32 data_filler_1[(0x810 - 0x5f4) / 4];
-} UnkFighterStruct;
-
-extern UnkFighterStruct* lbl_804D6554;
-
 void ftSandbag_OnDeath(void) {
     return;
 }
