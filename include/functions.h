@@ -2048,7 +2048,7 @@ void func_8009A804(s32);
 // ? func_8009EC70(?);
 // ? func_8009EDA4(?);
 // ? func_8009EE30(?);
-struct _HSD_GObj* func_8009EF68(struct _HSD_GObj*);
+s32 func_8009EF68(struct _HSD_GObj*);
 // ? func_8009EFA4(?);
 // ? func_8009F0F0(?);
 // ? func_8009F184(?);

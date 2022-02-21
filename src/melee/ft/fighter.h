@@ -9,7 +9,7 @@
 // Points to data in PiCo.dat
 typedef struct _ftCommonData {
   u8 data_filler_1[0x480];
-  u32 x480;
+  f32 x480;
   u8 data_filler_2[0x498-0x484];
   u32 x498_ledgeCooldownTime;
   u8 data_filler_3[0x5F0-0x49C];
