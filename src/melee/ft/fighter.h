@@ -6,17 +6,41 @@
 
 #include "sysdolphin/baselib/gobj.h"
 
-typedef struct { float x, y;    } Vec2;
-typedef Vec Vec3;
+// Points to data in PiCo.dat
+typedef struct _ftCommonData {
+    u8 data_filler_1[0x480];
+    f32 x480;
+    u8 data_filler_2[0x498-0x484];
+    u32 x498_ledgeCooldownTime;
+    u8 data_filler_3[0x5F0-0x49C];
+    u32 x5F0;
+    u8 filler_x5F4[0x768-0x5F4];
+    /* 0x768 */ f32 x768;
+    /* 0x76C */ f32 x76C;
+    /* 0x770 */ f32 x770;
+    /* 0x774 */ s32 x774;
+    // lots of more data following, exact size to be determined
+} ftCommonData;
+
+typedef struct _FtCollisionData
+{
+    u8 data_filler_0[0x28];
+    u32 x28;
+} FtCollisionData;
 
 typedef struct _ftData
 {
-	s32 filler_x0;
-	/* 0x04 */ s32* ext_attr;
-	s32 filler_x4[16];
-	/* 0x48 */ void* x48_items;
-	s32 filler_x48[4];
+    /* 0x00 */ s32 filler_x0;
+    /* 0x04 */ s32* ext_attr;
+    s32 filler_x4[16];
+    /* 0x48 */ void* x48_items;
+    FtCollisionData* x4C_collisionData;
+    s32 filler_x50[2];
+    void* x58;
 } ftData;
+
+typedef struct _Vec2 { float x, y; } Vec2;
+typedef Vec Vec3;
 
 typedef struct _UnkFlagStruct {
     struct {
@@ -33,41 +57,27 @@ typedef struct _UnkFlagStruct {
 
 typedef struct _ThrowFlags
 {
-	union {
-		struct {
-			u8 b0 : 1;
-			u8 b1 : 1;
-			u8 b2 : 1;
-			u8 b3 : 1;
-			u8 b4 : 1;
-			u8 b5 : 1;
-			u8 b6 : 1;
-			u8 b7 : 1;
-		};
-		u32 flags;
-	};
+  union {
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    };
+    u32 flags;
+  };
 } ThrowFlags;
 
 typedef struct _FighterBone
 {
-	/* 0x0 */ u32* x0_joint;
-	/* 0x4 */ u32* x4_joint2; // used for interpolation
-	u32 data_filler[2];
+  /* 0x0 */ u32* x0_joint;
+  /* 0x4 */ u32* x4_joint2; // used for interpolation
+  u32 data_filler[2];
 } FighterBone;
-
-typedef struct _CollData
-{
-	u8 filler_x0[0xB4];
-	/* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
-	/* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
-	u8 filler_xBC[0x134 - 0xBC - 8];
-	/* 0x134 */ int x134_envFlags;
-	u8 filler_x134[0x160 - 0x134 - 4];
-	/* 0x160 */ int x160_rightwall_index;
-	u8 filler_x160[0x174 - 0x160 - 4];
-	/* 0x174 */ int x174_leftwall_index;
-	u8 filler_x174[0x1A0 - 0x174 - 4];
-} CollData;
 
 typedef struct _CameraBox
 {
@@ -83,6 +93,23 @@ typedef struct _CameraBox
         u8 b7 : 1;
   } xC_flag;
 } CameraBox;
+
+typedef struct _CollData
+{
+    u8 filler_x0[0x40];
+    u32 x40;
+    u32 x44;
+    u8 filler_x48[0xB4-0x48];
+    /* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
+    /* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
+    u8 filler_xBC[0x134 - 0xBC - 8];
+    u32 x134_envFlags;
+    u8 filler_x134[0x160 - 0x134 - 4];
+    /* 0x160 */ int x160_rightwall_index;
+    u8 filler_x160[0x174 - 0x160 - 4];
+    /* 0x174 */ int x174_leftwall_index;
+    u8 filler_x174[0x1A0 - 0x174 - 4];
+} CollData;
 
 typedef struct _Fighter {
     u8 filler_x0[0xC - 0x0];
@@ -192,15 +219,5 @@ typedef struct _Fighter {
     /* 0x2354 */ float x2354_stateVar6;
     /* 0x2358 */ float x2358_stateVar7;
 } Fighter;
-
-typedef struct // ftCommonData
-{
-	u8 filler_x0[0x768-0x0];
-	/* 0x768 */ float x768;
-	/* 0x76C */ float x76C;
-	/* 0x770 */ float x770;
-	/* 0x774 */ s32 x774;
-	// lots of more data following, exact size to be determined
-} ftCommonData;
 
 #endif
