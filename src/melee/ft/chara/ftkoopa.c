@@ -424,13 +424,13 @@ void func_8013359C(HSD_GObj* gobj) {
 }
 
 void func_80133654(HSD_GObj* gobj) {
-    if (func_8006F238() == 0) {
+    if (func_8006F238(gobj) == 0) {
         func_8008A2BC(gobj);
     }
 }
 
 void func_80133690(HSD_GObj* gobj) {
-    if (func_8006F238() == 0) {
+    if (func_8006F238(gobj) == 0) {
         func_800CC730(gobj);
     }
 }
