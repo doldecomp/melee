@@ -207,7 +207,7 @@ typedef struct _Fighter {
     s32 filler_x104;
     /* 0x108 */ int* x108_costume_archive;
     /* 0x10C */ ftData* x10C_ftData;
-    // TODO: Ask Psi how many of those are confirmed
+    // TODO: Ask Psi how many of those are confirmed, only a fraction of them is used right now
     struct attr
     {
         /* 0x110 */ f32 x110_walk_initial_velocity;
