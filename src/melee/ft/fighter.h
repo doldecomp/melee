@@ -588,7 +588,7 @@ void func_80068854();
 void func_80068914();
 void func_80068E64();
 void func_80068E98();
-void func_800693AC(void*, s32, s32, s32, f32, f32, f32);
+void func_800693AC(HSD_GObj*, s32, s32, s32, f32, f32, f32);
 void func_8006A1BC();
 void func_8006A360();
 void func_8006ABA0();

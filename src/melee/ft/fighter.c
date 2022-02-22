@@ -313,6 +313,7 @@ void* HSD_JObjAnimAll(); // asm/sysdolphin/baselib/jobj.s
 // external vars from asm/melee/ft/code_8008521C.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)();
+// TODO: use something like NUM_FIGHTERS instead of hardcoding 33. The code (loops!) must also be changed.
 extern ft_callback ft_OnLoad[33];  // One load  callback for every character.
 extern ft_callback ft_OnDeath[33]; // One death callback for every character.
 extern fn_ptr_t lbl_803C10D0[33];
@@ -2603,7 +2604,7 @@ lbl_80069380:
 }
 
 
-asm void func_800693AC(void*, s32, s32, s32, f32, f32, f32)
+asm void func_800693AC(HSD_GObj*, s32, s32, s32, f32, f32, f32)
 {
 	nofralloc 
 /* 800693AC 00065F8C  7C 08 02 A6 */	mflr r0
