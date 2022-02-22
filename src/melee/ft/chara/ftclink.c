@@ -34,7 +34,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[3], attrs->xC);
     func_8026B3F8(items[4], attrs->x10);
     func_8026B3F8(items[5], ITEM_CLINK_MILK);
-    func_800753D4(ft, *lbl_804D6540[ft->x4_fighterID], items[6]);
+    func_800753D4(ft, *lbl_804D6540[ft->x4_fighterKind], items[6]);
 }
 
 void func_80148DC0(HSD_GObj* gobj, s32 arg1)

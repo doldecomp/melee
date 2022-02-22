@@ -6,42 +6,79 @@
 
 #include "sysdolphin/baselib/gobj.h"
 
-typedef enum
+typedef enum FighterKind
 {
-    FighterID_Mario,
-    FighterID_Fox,
-    FighterID_CFalcon,
-    FighterID_Donkey,
-    FighterID_Kirby,
-    FighterID_Koopa,
-    FighterID_Link,
-    FighterID_Seak,
-    FighterID_Ness,
-    FighterID_Peach,
-    FighterID_Popo,
-    FighterID_Nana,
-    FighterID_Pikachu,
-    FighterID_Samus,
-    FighterID_Yoshi,
-    FighterID_Purin,
-    FighterID_Mewtwo,
-    FighterID_Luigi,
-    FighterID_Mars,
-    FighterID_Zelda,
-    FighterID_CLink,
-    FighterID_DrMario,
-    FighterID_Falco,
-    FighterID_Pichu,
-    FighterID_GameWatch,
-    FighterID_Ganon,
-    FighterID_Roy,
-    FighterID_Masterhand,
-    FighterID_Crazyhand,
-    FighterID_ZakoBoy,
-    FighterID_ZakoGirl,
-    FighterID_GKoopa,
-    FighterID_Sandbag,
-} FighterID;
+    FTKIND_MARIO,
+    FTKIND_FOX,
+    FTKIND_FALCON,
+    FTKIND_DK,
+    FTKIND_KIRBY,
+    FTKIND_BOWSER,
+    FTKIND_LINK,
+    FTKIND_SHEIK,
+    FTKIND_NESS,
+    FTKIND_PEACH,
+    FTKIND_POPO,
+    FTKIND_NANA,
+    FTKIND_PIKACHU,
+    FTKIND_SAMUS,
+    FTKIND_YOSHI,
+    FTKIND_JIGGLYPUFF,
+    FTKIND_MEWTWO,
+    FTKIND_LUIGI,
+    FTKIND_MARTH,
+    FTKIND_ZELDA,
+    FTKIND_YOUNGLINK,
+    FTKIND_DRMARIO,
+    FTKIND_FALCO,
+    FTKIND_PICHU,
+    FTKIND_GAW,
+    FTKIND_GANONDORF,
+    FTKIND_ROY,
+    FTKIND_MASTERHAND,
+    FTKIND_CRAZYHAND,
+    FTKIND_BOY,
+    FTKIND_GIRL,
+    FTKIND_GIGABOWSER,
+    FTKIND_SANDBAG,
+} FighterKind;
+
+typedef enum CharacterKind
+{
+    CKIND_FALCON,
+    CKIND_DK,
+    CKIND_FOX,
+    CKIND_GAW,
+    CKIND_KIRBY,
+    CKIND_BOWSER,
+    CKIND_LINK,
+    CKIND_LUIGI,
+    CKIND_MARIO,
+    CKIND_MARTH,
+    CKIND_MEWTWO,
+    CKIND_NESS,
+    CKIND_PEACH,
+    CKIND_PIKACHU,
+    CKIND_ICECLIMBERS,
+    CKIND_JIGGLYPUFF,
+    CKIND_SAMUS,
+    CKIND_YOSHI,
+    CKIND_ZELDA,
+    CKIND_SHEIK,
+    CKIND_FALCO,
+    CKIND_YOUNGLINK,
+    CKIND_DRMARIO,
+    CKIND_ROY,
+    CKIND_PICHU,
+    CKIND_GANONDORF,
+    CKIND_MASTERHAND,
+    CKIND_BOY,
+    CKIND_GIRL,
+    CKIND_GIGABOWSER,
+    CKIND_CRAZYHAND,
+    CKIND_SANDBAG,
+    CKIND_POPO,
+} CharacterKind;
 
 // Points to data in PiCo.dat
 typedef struct _ftCommonData {
@@ -169,7 +206,7 @@ typedef struct _ftHit
 
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
-    /* 0x4 */ FighterID x4_fighterID;
+    /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
     /* 0xC */ u8 xC_playerID;
     u8 xD;
