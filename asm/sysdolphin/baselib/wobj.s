@@ -2,88 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8037D34C
-func_8037D34C:
-/* 8037D34C 00379F2C  7C 08 02 A6 */	mflr r0
-/* 8037D350 00379F30  90 01 00 04 */	stw r0, 4(r1)
-/* 8037D354 00379F34  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8037D358 00379F38  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8037D35C 00379F3C  3B E4 00 00 */	addi r31, r4, 0
-/* 8037D360 00379F40  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8037D364 00379F44  7C 7E 1B 79 */	or. r30, r3, r3
-/* 8037D368 00379F48  41 82 00 44 */	beq lbl_8037D3AC
-/* 8037D36C 00379F4C  28 1F 00 00 */	cmplwi r31, 0
-/* 8037D370 00379F50  40 82 00 08 */	bne lbl_8037D378
-/* 8037D374 00379F54  48 00 00 38 */	b lbl_8037D3AC
-lbl_8037D378:
-/* 8037D378 00379F58  38 7E 00 00 */	addi r3, r30, 0
-/* 8037D37C 00379F5C  38 9F 00 04 */	addi r4, r31, 4
-/* 8037D380 00379F60  48 00 00 DD */	bl HSD_WObjSetPosition
-/* 8037D384 00379F64  80 7E 00 1C */	lwz r3, 0x1c(r30)
-/* 8037D388 00379F68  28 03 00 00 */	cmplwi r3, 0
-/* 8037D38C 00379F6C  41 82 00 08 */	beq lbl_8037D394
-/* 8037D390 00379F70  4B FF F0 19 */	bl HSD_RObjRemoveAll
-lbl_8037D394:
-/* 8037D394 00379F74  80 7F 00 10 */	lwz r3, 0x10(r31)
-/* 8037D398 00379F78  4B FF EE 55 */	bl HSD_RObjLoadDesc
-/* 8037D39C 00379F7C  90 7E 00 1C */	stw r3, 0x1c(r30)
-/* 8037D3A0 00379F80  80 7E 00 1C */	lwz r3, 0x1c(r30)
-/* 8037D3A4 00379F84  80 9F 00 10 */	lwz r4, 0x10(r31)
-/* 8037D3A8 00379F88  4B FF ED 25 */	bl HSD_RObjResolveRefsAll
-lbl_8037D3AC:
-/* 8037D3AC 00379F8C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8037D3B0 00379F90  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8037D3B4 00379F94  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8037D3B8 00379F98  38 21 00 18 */	addi r1, r1, 0x18
-/* 8037D3BC 00379F9C  7C 08 03 A6 */	mtlr r0
-/* 8037D3C0 00379FA0  4E 80 00 20 */	blr 
-
-.global func_8037D3C4
-func_8037D3C4:
-/* 8037D3C4 00379FA4  7C 08 02 A6 */	mflr r0
-/* 8037D3C8 00379FA8  90 01 00 04 */	stw r0, 4(r1)
-/* 8037D3CC 00379FAC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8037D3D0 00379FB0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8037D3D4 00379FB4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8037D3D8 00379FB8  7C 7E 1B 79 */	or. r30, r3, r3
-/* 8037D3DC 00379FBC  41 82 00 64 */	beq lbl_8037D440
-/* 8037D3E0 00379FC0  80 7E 00 00 */	lwz r3, 0(r30)
-/* 8037D3E4 00379FC4  28 03 00 00 */	cmplwi r3, 0
-/* 8037D3E8 00379FC8  41 82 00 10 */	beq lbl_8037D3F8
-/* 8037D3EC 00379FCC  48 00 54 29 */	bl hsdSearchClassInfo
-/* 8037D3F0 00379FD0  28 03 00 00 */	cmplwi r3, 0
-/* 8037D3F4 00379FD4  40 82 00 10 */	bne lbl_8037D404
-lbl_8037D3F8:
-/* 8037D3F8 00379FD8  48 00 04 11 */	bl func_8037D808
-/* 8037D3FC 00379FDC  7C 7F 1B 78 */	mr r31, r3
-/* 8037D400 00379FE0  48 00 00 20 */	b lbl_8037D420
-lbl_8037D404:
-/* 8037D404 00379FE4  48 00 4F 41 */	bl hsdNew
-/* 8037D408 00379FE8  7C 7F 1B 79 */	or. r31, r3, r3
-/* 8037D40C 00379FEC  40 82 00 14 */	bne lbl_8037D420
-/* 8037D410 00379FF0  38 6D A8 58 */	addi r3, r13, lbl_804D5EF8@sda21
-/* 8037D414 00379FF4  38 80 00 FC */	li r4, 0xfc
-/* 8037D418 00379FF8  38 AD A8 64 */	addi r5, r13, lbl_804D5F04@sda21
-/* 8037D41C 00379FFC  48 00 AE 05 */	bl __assert
-lbl_8037D420:
-/* 8037D420 0037A000  80 BF 00 00 */	lwz r5, 0(r31)
-/* 8037D424 0037A004  38 7F 00 00 */	addi r3, r31, 0
-/* 8037D428 0037A008  38 9E 00 00 */	addi r4, r30, 0
-/* 8037D42C 0037A00C  81 85 00 3C */	lwz r12, 0x3c(r5)
-/* 8037D430 0037A010  7D 88 03 A6 */	mtlr r12
-/* 8037D434 0037A014  4E 80 00 21 */	blrl 
-/* 8037D438 0037A018  7F E3 FB 78 */	mr r3, r31
-/* 8037D43C 0037A01C  48 00 00 08 */	b lbl_8037D444
-lbl_8037D440:
-/* 8037D440 0037A020  38 60 00 00 */	li r3, 0
-lbl_8037D444:
-/* 8037D444 0037A024  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8037D448 0037A028  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8037D44C 0037A02C  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8037D450 0037A030  38 21 00 18 */	addi r1, r1, 0x18
-/* 8037D454 0037A034  7C 08 03 A6 */	mtlr r0
-/* 8037D458 0037A038  4E 80 00 20 */	blr 
-
 .global HSD_WObjSetPosition
 HSD_WObjSetPosition:
 /* 8037D45C 0037A03C  28 03 00 00 */	cmplwi r3, 0
@@ -360,13 +278,13 @@ lbl_8037D7EC:
 /* 8037D800 0037A3E0  7C 08 03 A6 */	mtlr r0
 /* 8037D804 0037A3E4  4E 80 00 20 */	blr 
 
-.global func_8037D808
-func_8037D808:
+.global HSD_WObjAlloc
+HSD_WObjAlloc:
 /* 8037D808 0037A3E8  7C 08 02 A6 */	mflr r0
 /* 8037D80C 0037A3EC  90 01 00 04 */	stw r0, 4(r1)
 /* 8037D810 0037A3F0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8037D814 0037A3F4  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8037D818 0037A3F8  80 6D C0 50 */	lwz r3, lbl_804D76F0@sda21(r13)
+/* 8037D818 0037A3F8  80 6D C0 50 */	lwz r3, default_class@sda21(r13)
 /* 8037D81C 0037A3FC  28 03 00 00 */	cmplwi r3, 0
 /* 8037D820 0037A400  41 82 00 08 */	beq lbl_8037D828
 /* 8037D824 0037A404  48 00 00 0C */	b lbl_8037D830
@@ -414,11 +332,11 @@ lbl_8037D8B8:
 /* 8037D8B8 0037A498  7C 08 02 A6 */	mflr r0
 /* 8037D8BC 0037A49C  90 01 00 04 */	stw r0, 4(r1)
 /* 8037D8C0 0037A4A0  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8037D8C4 0037A4A4  80 0D C0 50 */	lwz r0, lbl_804D76F0@sda21(r13)
+/* 8037D8C4 0037A4A4  80 0D C0 50 */	lwz r0, default_class@sda21(r13)
 /* 8037D8C8 0037A4A8  7C 03 00 40 */	cmplw r3, r0
 /* 8037D8CC 0037A4AC  40 82 00 0C */	bne lbl_8037D8D8
 /* 8037D8D0 0037A4B0  38 00 00 00 */	li r0, 0
-/* 8037D8D4 0037A4B4  90 0D C0 50 */	stw r0, lbl_804D76F0@sda21(r13)
+/* 8037D8D4 0037A4B4  90 0D C0 50 */	stw r0, default_class@sda21(r13)
 lbl_8037D8D8:
 /* 8037D8D8 0037A4B8  3C 80 80 40 */	lis r4, hsdWObj@ha
 /* 8037D8DC 0037A4BC  38 84 6F D0 */	addi r4, r4, hsdWObj@l
@@ -464,8 +382,6 @@ WObjInfoInit:
 
 
 .section .data
-    .asciz "hsdIsDescendantOf(info, &hsdWObj)"
-    .balign 4
     .asciz "sysdolphin_base_library"
     .balign 4
     .asciz "had_wobj"
@@ -490,10 +406,3 @@ lbl_804D5F0C:
 lbl_804D5F14:
     .asciz "jobj"
     .balign 4
-
-
-.section .sbss
-    .balign 8
-.global lbl_804D76F0
-lbl_804D76F0:
-	.skip 0x8

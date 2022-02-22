@@ -6,6 +6,8 @@ void WObjInfoInit(void);
 
 HSD_WObjInfo hsdWObj = { WObjInfoInit };
 
+static HSD_WObjInfo* default_class = NULL;
+
 void HSD_WObjRemoveAnim(HSD_WObj* wobj)
 {
     if (wobj != NULL) {
@@ -101,4 +103,47 @@ void HSD_WObjInterpretAnim(HSD_WObj* wobj)
     wobj->robj = HSD_RObjLoadDesc(desc->robjdesc);
     HSD_RObjResolveRefsAll(wobj->robj, desc->robjdesc);
     return 0;
+}
+
+void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc) 
+{
+    if (wobj == NULL || desc == NULL) {
+        return;
+    }
+
+    HSD_WObjSetPosition(wobj, &desc->pos);
+    if (wobj->robj != NULL) {
+        HSD_RObjRemoveAll(wobj->robj);
+    }
+    wobj->robj = HSD_RObjLoadDesc(desc->robjdesc);
+    HSD_RObjResolveRefsAll(wobj->robj, desc->robjdesc);
+}
+
+void HSD_WObjSetDefaultClass(HSD_WObjInfo* info)
+{
+    if (info) {
+        if (!hsdIsDescendantOf(info, &hsdWObj)) {
+            __assert("wobj.c", 221, "hsdIsDescendantOf(info, &hsdWObj)"); // The line number here is totally made up, this function is removed in practice but the string isn't
+        }
+    }
+    default_class = info;
+}
+
+HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc)
+{
+    if (desc != NULL) {
+        HSD_WObj* wobj;
+        HSD_ClassInfo* info;
+        if (desc->class_name == NULL || !(info = hsdSearchClassInfo(desc->class_name))) {
+            wobj = HSD_WObjAlloc();
+        } else {
+            wobj = hsdNew(info);
+            if (wobj == NULL) {
+                __assert("wobj.c", 252, "wobj");
+            }
+        }
+        HSD_WOBJ_METHOD(wobj)->load(wobj, desc);
+        return wobj;
+    }
+    return NULL;
 }
