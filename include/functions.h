@@ -8690,7 +8690,7 @@ void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 // ? HSD_WObjRemoveAnim(?);
 // ? func_8037D094(?);
 // ? HSD_WObjAddAnim(?);
-// ? func_8037D29C(?);
+// ? HSD_WObjInterpretAnim(?);
 // ? func_8037D34C(?);
 // ? func_8037D3C4(?);
 // void HSD_WObjSetPosition(struct _HSD_WObj*, Vec*);

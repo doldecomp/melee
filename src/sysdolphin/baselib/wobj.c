@@ -83,3 +83,22 @@ void HSD_WObjAddAnim(HSD_WObj* wobj, HSD_WObjAnim* anim)
         }
     }
 }
+
+void HSD_WObjInterpretAnim(HSD_WObj* wobj) 
+{
+    if (wobj != NULL) {
+        HSD_AObjInterpretAnim(wobj->aobj, wobj, &WObjUpdateFunc);
+        HSD_RObjAnimAll(wobj->robj);
+    }
+}
+
+/*static*/ int WObjLoad(HSD_WObj* wobj, HSD_WObjDesc* desc) 
+{
+    HSD_WObjSetPosition(wobj, &desc->pos);
+    if (wobj->robj != NULL) {
+        HSD_RObjRemoveAll(wobj->robj);
+    }
+    wobj->robj = HSD_RObjLoadDesc(desc->robjdesc);
+    HSD_RObjResolveRefsAll(wobj->robj, desc->robjdesc);
+    return 0;
+}
