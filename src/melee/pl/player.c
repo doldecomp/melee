@@ -129,7 +129,6 @@ extern void func_80038F10(s32);
 extern void func_8003715C();
 extern void func_80037590();
 extern void func_80067A84();
-extern void func_80016C64(char*, s32**, char*, s32, ...);
 extern void func_800BEB60(s32, s32, s32);
 extern s32 func_800865F0(HSD_GObj*);
 extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
