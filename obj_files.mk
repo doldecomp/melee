@@ -345,7 +345,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.s.o 			\
                                                     \
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/dobj.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.c.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.s.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.s.o		\
