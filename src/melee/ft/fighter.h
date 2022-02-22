@@ -8,39 +8,39 @@
 
 typedef enum
 {
-	FighterID_Mario,
-	FighterID_Fox,
-	FighterID_CFalcon,
-	FighterID_Donkey,
-	FighterID_Kirby,
-	FighterID_Koopa,
-	FighterID_Link,
-	FighterID_Seak,
-	FighterID_Ness,
-	FighterID_Peach,
-	FighterID_Popo,
-	FighterID_Nana,
-	FighterID_Pikachu,
-	FighterID_Samus,
-	FighterID_Yoshi,
-	FighterID_Purin,
-	FighterID_Mewtwo,
-	FighterID_Luigi,
-	FighterID_Mars,
-	FighterID_Zelda,
-	FighterID_CLink,
-	FighterID_DrMario,
-	FighterID_Falco,
-	FighterID_Pichu,
-	FighterID_GameWatch,
-	FighterID_Ganon,
-	FighterID_Roy,
-	FighterID_Masterhand,
-	FighterID_Crazyhand,
-	FighterID_ZakoBoy,
-	FighterID_ZakoGirl,
-	FighterID_GKoopa,
-	FighterID_Sandbag,
+    FighterID_Mario,
+    FighterID_Fox,
+    FighterID_CFalcon,
+    FighterID_Donkey,
+    FighterID_Kirby,
+    FighterID_Koopa,
+    FighterID_Link,
+    FighterID_Seak,
+    FighterID_Ness,
+    FighterID_Peach,
+    FighterID_Popo,
+    FighterID_Nana,
+    FighterID_Pikachu,
+    FighterID_Samus,
+    FighterID_Yoshi,
+    FighterID_Purin,
+    FighterID_Mewtwo,
+    FighterID_Luigi,
+    FighterID_Mars,
+    FighterID_Zelda,
+    FighterID_CLink,
+    FighterID_DrMario,
+    FighterID_Falco,
+    FighterID_Pichu,
+    FighterID_GameWatch,
+    FighterID_Ganon,
+    FighterID_Roy,
+    FighterID_Masterhand,
+    FighterID_Crazyhand,
+    FighterID_ZakoBoy,
+    FighterID_ZakoGirl,
+    FighterID_GKoopa,
+    FighterID_Sandbag,
 } FighterID;
 
 // Points to data in PiCo.dat
@@ -143,34 +143,34 @@ typedef struct _CameraBox
 
 typedef struct _CollData
 {
-	u8 filler_x0[0x40];
-	/* 0x40 */ u32 x40;
-	/* 0x44 */ u32 x44;
-	u8 filler_x48[0xB4-0x48];
-	/* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
-	/* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
-	u8 filler_xBC[0x134 - 0xBC - 8];
-	/* 0x134 */ s32 x134_envFlags;
-	u8 filler_x138[0x14C - 0x138];
-	/* 0x14C */ s32 x14C_groundIndex;
-	s32 filler_x150;
-        /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
-	/* 0x160 */ int x160_rightwall_index;
-	u8 filler_x160[0x174 - 0x160 - 4];
-	/* 0x174 */ int x174_leftwall_index;
-	u8 filler_x174[0x1A0 - 0x174 - 4];
+    u8 filler_x0[0x40];
+    /* 0x40 */ u32 x40;
+    /* 0x44 */ u32 x44;
+    u8 filler_x48[0xB4-0x48];
+    /* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
+    /* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
+    u8 filler_xBC[0x134 - 0xBC - 8];
+    /* 0x134 */ s32 x134_envFlags;
+    u8 filler_x138[0x14C - 0x138];
+    /* 0x14C */ s32 x14C_groundIndex;
+    s32 filler_x150;
+    /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
+    /* 0x160 */ int x160_rightwall_index;
+    u8 filler_x160[0x174 - 0x160 - 4];
+    /* 0x174 */ int x174_leftwall_index;
+    u8 filler_x174[0x1A0 - 0x174 - 4];
 } CollData;
 
 typedef struct _HitVictim
 {
-	void *data; // userdata of the object that was hit
-	int timer;  // items use this to wait until hitting this gobj again
+    void *data; // userdata of the object that was hit
+    int timer;  // items use this to wait until hitting this gobj again
 } HitVictim;
 
 typedef struct _ftHit
 {
-	u8 filler_x0[0x134];
-	int x134;                     // 0x134, flags of some sort
+    u8 filler_x0[0x134];
+    int x134;
 } ftHit;
 
 typedef struct _Fighter {
