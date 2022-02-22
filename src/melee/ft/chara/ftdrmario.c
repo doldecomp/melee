@@ -117,8 +117,8 @@ void func_801497CC(HSD_GObj* gobj)
     if (gobj != NULL) {
         ft = gobj->user_data;
         if (ft != NULL) {
-            ft->x21DC = 0;
-            ft->x21E4 = 0;
+            ft->x21DC_callback_OnTakeDamage = 0;
+            ft->x21E4_callback_OnDeath2 = 0;
         }
     }
 }
@@ -158,8 +158,8 @@ void func_801498A0(HSD_GObj* gobj)
     if (gobj != NULL) {
         ft = gobj->user_data;
         if (ft != NULL) {
-            ft->x21DC = 0;
-            ft->x21E4 = 0;
+            ft->x21DC_callback_OnTakeDamage = 0;
+            ft->x21E4_callback_OnDeath2 = 0;
         }
     }
 }

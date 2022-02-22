@@ -6,16 +6,98 @@
 
 #include "sysdolphin/baselib/gobj.h"
 
+typedef enum FighterKind
+{
+    FTKIND_MARIO,
+    FTKIND_FOX,
+    FTKIND_FALCON,
+    FTKIND_DK,
+    FTKIND_KIRBY,
+    FTKIND_BOWSER,
+    FTKIND_LINK,
+    FTKIND_SHEIK,
+    FTKIND_NESS,
+    FTKIND_PEACH,
+    FTKIND_POPO,
+    FTKIND_NANA,
+    FTKIND_PIKACHU,
+    FTKIND_SAMUS,
+    FTKIND_YOSHI,
+    FTKIND_JIGGLYPUFF,
+    FTKIND_MEWTWO,
+    FTKIND_LUIGI,
+    FTKIND_MARTH,
+    FTKIND_ZELDA,
+    FTKIND_YOUNGLINK,
+    FTKIND_DRMARIO,
+    FTKIND_FALCO,
+    FTKIND_PICHU,
+    FTKIND_GAW,
+    FTKIND_GANONDORF,
+    FTKIND_ROY,
+    FTKIND_MASTERHAND,
+    FTKIND_CRAZYHAND,
+    FTKIND_BOY,
+    FTKIND_GIRL,
+    FTKIND_GIGABOWSER,
+    FTKIND_SANDBAG,
+} FighterKind;
+
+typedef enum CharacterKind
+{
+    CKIND_FALCON,
+    CKIND_DK,
+    CKIND_FOX,
+    CKIND_GAW,
+    CKIND_KIRBY,
+    CKIND_BOWSER,
+    CKIND_LINK,
+    CKIND_LUIGI,
+    CKIND_MARIO,
+    CKIND_MARTH,
+    CKIND_MEWTWO,
+    CKIND_NESS,
+    CKIND_PEACH,
+    CKIND_PIKACHU,
+    CKIND_ICECLIMBERS,
+    CKIND_JIGGLYPUFF,
+    CKIND_SAMUS,
+    CKIND_YOSHI,
+    CKIND_ZELDA,
+    CKIND_SHEIK,
+    CKIND_FALCO,
+    CKIND_YOUNGLINK,
+    CKIND_DRMARIO,
+    CKIND_ROY,
+    CKIND_PICHU,
+    CKIND_GANONDORF,
+    CKIND_MASTERHAND,
+    CKIND_BOY,
+    CKIND_GIRL,
+    CKIND_GIGABOWSER,
+    CKIND_CRAZYHAND,
+    CKIND_SANDBAG,
+    CKIND_POPO,
+} CharacterKind;
+
 // Points to data in PiCo.dat
 typedef struct _ftCommonData {
-    u8 data_filler_0[0x294];
-    f32 x294;
-    u8 data_filler_1[0x480-0x298];
-    f32 x480;
-    u8 data_filler_2[0x498-0x484];
-    u32 x498_ledgeCooldownTime;
-    u8 data_filler_3[0x5F0-0x49C];
-    u32 x5F0;
+    u8 filler_x0[0x98];
+    /* 0x98 */ f32 x98_shieldHealthInit;
+    u8 filler_x9C[0x200-0x9C];
+    /* 0x200 */ f32 x200;
+    /* 0x204 */ f32 x204_knockbackFrameDecay;
+    u8 filler_x208[0x294-0x208];
+    /* 0x294 */ f32 x294;
+    u8 filler_x298[0x3E8-0x298];
+    /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
+    /* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
+    u8 filler_x3F0[0x480-0x3F0];
+    /* 0x480 */ f32 x480;
+    u8 filler_x484[0x498-0x484];
+    /* 0x498 */ u32 x498_ledgeCooldownTime;
+    u8 filler_x49C[0x5F0-0x49C];
+    /* 0x5F0 */ u32 x5F0;
     u8 filler_x5F4[0x768-0x5F4];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
@@ -32,7 +114,7 @@ typedef struct _FtCollisionData
 
 typedef struct _ftData
 {
-    /* 0x00 */ s32 filler_x0;
+    s32 filler_x0;
     /* 0x04 */ s32* ext_attr;
     s32 filler_x4[16];
     /* 0x48 */ void* x48_items;
@@ -99,120 +181,416 @@ typedef struct _CameraBox
 typedef struct _CollData
 {
     u8 filler_x0[0x40];
-    u32 x40;
-    u32 x44;
+    /* 0x40 */ u32 x40;
+    /* 0x44 */ u32 x44;
     u8 filler_x48[0xB4-0x48];
     /* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
     /* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
     u8 filler_xBC[0x134 - 0xBC - 8];
-    u32 x134_envFlags;
-    u8 filler_x134[0x160 - 0x134 - 4];
+    /* 0x134 */ s32 x134_envFlags;
+    u8 filler_x138[0x14C - 0x138];
+    /* 0x14C */ s32 x14C_groundIndex;
+    s32 filler_x150;
+    /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
     /* 0x160 */ int x160_rightwall_index;
     u8 filler_x160[0x174 - 0x160 - 4];
     /* 0x174 */ int x174_leftwall_index;
     u8 filler_x174[0x1A0 - 0x174 - 4];
 } CollData;
 
+typedef struct _ftHit
+{
+    u8 filler_x0[0x134];
+    int x134;
+} ftHit;
+
 typedef struct _Fighter {
-    u8 filler_x0[0x4 - 0x0];
-    /* 0x4 */ s32 x4_index;
-    u8 filler_x8[0xC - 0x8];
-    u8 xC;
+    /* 0x0 */ HSD_GObj *x0_fighter;
+    /* 0x4 */ FighterKind x4_fighterKind;
+    /* 0x8 */ s32 x8_spawnNum;
+    /* 0xC */ u8 xC_playerID;
     u8 xD;
     u8 xE;
     u8 xF;
     u32 x10;
     u8 data_filler_x10[0x2C - 0x14];
-    float x2C_facing_direction;
-    u8 filler_x2C[0xB0 - 0x30];
+    /* 0x2C */ f32 x2C_facing_direction;
+    /* 0x30 */ f32 x30_facingDirectionRepeated;
+    /* 0x34 */ Vec3 x34_scale;
+    u8 filler_x40[0x74 - 0x40];
+    /* 0x74 */ Vec3 x74_animVel;
+    /* 0x80 */ Vec3 x80_selfVel;
+    /* 0x8C */ Vec3 x8C_knockbackVel;
+    /* 0x98 */ Vec3 x98_AtkShieldKnockback;
+    /* 0xA4 */ Vec3 xA4_unkVel;
     /* 0xB0 */ Vec3 xB0_pos;
-    u8 filler_xB0[0xC8 - 0xB0 - 12];
+    /* 0xBC */ Vec3 xBC_prevPos;
     /* 0xC8 */ Vec3 xC8_pos_delta;
-    u8 filler_xC8[0xE0 - 0xC8 - 12];
-    u32 xE0_airState;
-    /* 0xE4 */ u32 xE4;
-    /* 0xE8 */ u32 xE8;
-    /* 0xEC */ f32 xEC;
-    u8 filler_xF0[0x108 - 0xF0];
+    /* 0xD4 */ Vec3 xD4_unkVel;
+    /* 0xE0 */ s32 xE0_airState;
+    /* 0xE4 */ f32 xE4_groundAccel1;
+    /* 0xE8 */ f32 xE8_groundAccel2;
+    /* 0xEC */ f32 xEC_groundVel;
+    /* 0xF0 */ f32 xF0_knockbackGroundVel;
+    /* 0xF4 */ f32 xF4_groundAttackerShieldKnockbackVel;
+    /* 0xF8 */ Vec2 xF8_playerNudgeVel;
+    /* 0x100 */ f32 x100;
+    s32 filler_x104;
     /* 0x108 */ int* x108_costume_archive;
     /* 0x10C */ ftData* x10C_ftData;
-    u8 filler_x10C[0x258 - 0x110];
-    /* 0x258 */ f32 x258;
-    u8 filler_x258[0x2D4 - 0x25C];
+    // TODO: Ask Psi how many of those are confirmed, only a fraction of them is used right now
+    struct attr
+    {
+        /* 0x110 */ f32 x110_WalkInitialVelocity;
+        /* 0x114 */ f32 x114_WalkAcceleration;
+        /* 0x118 */ f32 x118_WalkMaximumVelocity;
+        /* 0x11C */ f32 x11C_SlowWalkMax;
+        /* 0x120 */ f32 x120_MidWalkPoint;
+        /* 0x124 */ f32 x124_FastWalkMin;
+        /* 0x128 */ f32 x128_GroundFriction; // used
+        /* 0x12C */ f32 x12C_DashInitialVelocity;
+        /* 0x130 */ f32 x130_DashrunAccelerationA;
+        /* 0x134 */ f32 x134_DashrunAccelerationB;
+        /* 0x138 */ f32 x138_DashrunTerminalVelocity;
+        /* 0x13C */ f32 x13C_RunAnimationScaling;
+        /* 0x140 */ f32 x140_MaxRunbrakeFrames;
+        /* 0x144 */ f32 x144_GroundedMaxHorizontalVelocity;
+        /* 0x148 */ f32 x148_JumpStartupTime;
+        /* 0x14C */ f32 x14C_JumpHInitialVelocity;
+        /* 0x150 */ f32 x150_JumpVInitialVelocity;
+        /* 0x154 */ f32 x154_GroundToAirJumpMomentumMultiplier;
+        /* 0x158 */ f32 x158_JumpHMaxVelocity;
+        /* 0x15C */ f32 x15C_HopVInitialVelocity;
+        /* 0x160 */ f32 x160_AirJumpVMultiplier;
+        /* 0x164 */ f32 x164_AirJumpHMultiplier;
+        /* 0x168 */ int x168_MaxJumps;
+        /* 0x16C */ f32 x16C_Gravity;
+        /* 0x170 */ f32 x170_TerminalVelocity;
+        /* 0x174 */ f32 x174_AerialDriftStickMult;
+        /* 0x178 */ f32 x178_AerialDriftBase;
+        /* 0x17C */ f32 x17C_AerialDriftMax;
+        /* 0x180 */ f32 x180_AerialFriction;
+        /* 0x184 */ f32 x184_FastfallVelocity;
+        /* 0x188 */ f32 x188_HorizontalAirMobilityConstant;
+        /* 0x18C */ int x18C_Jab_2InputWindow;
+        /* 0x190 */ int x190_Jab_3InputWindow;
+        /* 0x194 */ int x194_FramesToChangeDirectionOnStandingTurn;
+        /* 0x198 */ f32 x198_Weight;
+        /* 0x19C */ f32 x19C_ModelScaling;
+        /* 0x1A0 */ f32 x1A0_InitialShieldSize;
+        /* 0x1A4 */ f32 x1A4_ShieldBreakInitialVelocity;
+        /* 0x1A8 */ int x1A8_RapidJabWindow;
+        /* 0x1AC */ int x1AC;
+        /* 0x1B0 */ int x1B0;
+        /* 0x1B4 */ int x1B4;
+        /* 0x1B8 */ f32 x1B8_LedgeJumpHorizontalVelocity;
+        /* 0x1BC */ f32 x1BC_LedgeJumpVerticalVelocity;
+        /* 0x1C0 */ f32 x1C0_ItemThrowVelocityMultiplier;
+        /* 0x1C4 */ int x1C4;
+        /* 0x1C8 */ int x1C8;
+        /* 0x1CC */ int x1CC;
+        /* 0x1D0 */ int x1D0;
+        /* 0x1D4 */ int x1D4;
+        /* 0x1D8 */ int x1D8;
+        /* 0x1DC */ int x1DC;
+        /* 0x1E0 */ int x1E0;
+        /* 0x1E4 */ int x1E4;
+        /* 0x1E8 */ int x1E8;
+        /* 0x1EC */ int x1EC;
+        /* 0x1F0 */ f32 x1F0_KirbyBStarDamage;
+        /* 0x1F4 */ f32 x1F4_NormalLandingLag;
+        /* 0x1F8 */ f32 x1F8_NAirLandingLag;
+        /* 0x1FC */ f32 x1FC_FAirLandingLag;
+        /* 0x200 */ f32 x200_BAirLandingLag;
+        /* 0x204 */ f32 x204_UAirLandingLag;
+        /* 0x208 */ f32 x208_DAirLandingLag;
+        /* 0x20C */ f32 x20C_NametagHeight;
+        /* 0x210 */ int x210;
+        /* 0x214 */ f32 x214_WallJumpHorizontalVelocity;
+        /* 0x218 */ f32 x218_WallJumpVerticalVelocity;
+        /* 0x21C */ int x21C;
+        /* 0x220 */ f32 x220_TrophyScale;
+        /* 0x224 */ int x224;
+        /* 0x228 */ int x228;
+        /* 0x22C */ int x22C;
+        /* 0x230 */ int x230;
+        /* 0x234 */ int x234;
+        /* 0x238 */ int x238;
+        /* 0x23C */ int x23C;
+        /* 0x240 */ int x240;
+        /* 0x244 */ int x244;
+        /* 0x248 */ int x248;
+        /* 0x24C */ int x24C;
+        /* 0x250 */ int x250;
+        /* 0x254 */ int x254;
+        /* 0x258 */ f32 x258; // used
+        /* 0x25C */ f32 x25C_BubbleRatio;
+        /* 0x260 */ int x260;
+        /* 0x264 */ int x264;
+        /* 0x268 */ int x268;
+        /* 0x26C */ int x26C;
+        /* 0x270 */ f32 x270_RespawnPlatformScale;
+        /* 0x274 */ int x274;
+        /* 0x278 */ int x278;
+        /* 0x27C */ int x27C_CameraZoomTargetBone;
+        /* 0x280 */ int x280;
+        /* 0x284 */ int x284;
+        /* 0x288 */ int x288;
+        /* 0x28C */ int x28C;
+        /* 0x290 */ int x290_WeightDependentThrowSpeedFlags;
+    } x110_attr;
+    u8 filler_x294[0x2D4 - 0x294];
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
-    u8 filler_x2D8[0x5E8 - 0x2DC];
+    u8 filler_x2D8[0x594 - 0x2DC];
+    /* 0x594 */ u8 x594_animCurrFlags1;
+    u8 filler_x595[0x5E8 - 0x595];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F8 - 0x5EC];
-    s8 x5F8;
+    /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
-    u8 filler_x60C[0x618 - 0x610];
+    u8 filler_x610[0x618 - 0x610];
     /* 0x618 */ s8 x618_flag;
     /* 0x619 */ s8 x619_flag;
-    u8 filler_x619[0x620 - 0x61A];
+    u8 filler_x61A[0x61D - 0x61A];
+    /* 0x61D */ s8 x61D;
+    u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
     f32 x624;
     u8 filler_x624[0x670 - 0x628];
     /* 0x670 */ u8 x670_timer_lstick_tilt_x;
     u8 filler_x670[0x68C - 0x671];
-    /* 0x68C */ Vec x68C;
-    u8 filler_x68C[0x6F0 - 0x698];
+    /* 0x68C */ Vec3 x68C;
+    u8 filler_x698[0x6A4-0x698];
+    /* 0x6A4 */ Vec3 x6A4_transNOffset;
+    u8 filler_x6B0[0x6BC-0x6B0];
+    /* 0x6BC */ f32 x6BC_inputStickangle;
+    /* 0x6C0 */ f32 x6C0;
+    /* 0x6C4 */ f32 x6C4;
+    /* 0x6C8 */ f32 x6C8;
+    u8 filler_x6CC[0x6D8-0x6CC];
+    /* 0x6D8 */ f32 x6D8;
+    /* 0x6DC */ f32 x6DC;
+    /* 0x6E0 */ f32 x6E0;
+    u8 filler_x6E4[0x6F0 - 0x6E4];
     /* 0x6F0 */ CollData x6F0_collData;
     /* 0x890 */ CameraBox* x890;
     /* 0x894 */ f32 x894;
-    u8 filler_x894[0x8AC - 0x898];
+    /* 0x898 */ f32 x898;
+    /* 0x89C */ f32 x89C;
+    /* 0x8A0 */ f32 x8A0;
+    s32 filler_x8A4[2];
     /* 0x8AC */ s32 x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
     /* 0x914 */ f32 x914;
-    u8 filler_x914[0x18B0 - 0x918];
+    u8 filler_x918[0x1064 - 0x918];
+    /* 0x1064 */ ftHit x1064_thrownHitbox;
+    u8 filler_x1064[0x1828 - 0x1064 - sizeof(ftHit)];
+    /* 0x1828 */ s32 x1828;
+    s32 filler_x182C;
+    /* 0x1830 */ f32 x1830_percent;
+    /* 0x1834 */ f32 x1834;
+    /* 0x1838 */ f32 x1838_percentTemp;
+    /* 0x183C */ s32 x183C;
+    /* 0x1840 */ s32 x1840;
+    u8 filler_x1844[0x1850 - 0x1844];
+    /* 0x1850 */ f32 x1850_forceApplied;
+    u8 filler_x1854[0x189C - 0x1854];
+    /* 0x189C */ f32 x189C;
+    /* 0x18A0 */ f32 x18A0;
+    /* 0x18A4 */ f32 x18A4_knockbackMagnitude;
+    /* 0x18A8 */ f32 x18A8;
+    /* 0x18A8 */ f32 x18AC_timeSinceHit;
     /* 0x18B0 */ f32 x18B0;
-    u8 filler_x18B0[0x1969 - 0x18B4];
+    /* 0x18B4 */ f32 x18B4_armor;
+    /* 0x18B8 */ f32 x18B8;
+    /* 0x18BC */ f32 x18BC;
+    /* 0x18C0 */ s32 x18C0;
+    /* 0x18C4 */ s32 x18C4;
+    /* 0x18C8 */ s32 x18C8;
+    /* 0x18CC */ s32 x18CC;
+    /* 0x18D0 */ s32 x18D0;
+    u8 filler_x18D4[0x18F0 - 0x18D4];
+    /* 0x18F0 */ s32 x18F0;
+    /* 0x18F4 */ s32 x18F4;
+    /* 0x18F8 */ u8 x18F8;
+    u8 filler_x18F9;
+    /* 0x18FA */ u16 x18FA;
+    /* 0x18FC */ u8 x18FC;
+    /* 0x18FD */ u8 x18FD;
+    u8 filler_x18FE[0x1908 - 0x18FE];
+    /* 0x1908 */ s32 x1908;
+    /* 0x190C */ s32 x190C;
+    /* 0x1910 */ s32 x1910;
+    /* 0x1914 */ s32 x1914;
+    /* 0x1918 */ s32 x1918;
+    /* 0x191C */ f32 x191C;
+    s32 filler_x1920;
+    /* 0x1924 */ s32 x1924;
+    /* 0x1928 */ f32 x1928;
+    u8 filler_x192C[0x1948 - 0x192C];
+    /* 0x1948 */ s32 x1948;
+    /* 0x194C */ s32 x194C;
+    /* 0x1948 */ s32 x1950;
+    /* 0x1954 */ f32 x1954;
+    /* 0x1958 */ f32 x1958;
+    /* 0x195C */ f32 x195C_hitlagFrames;
+    /* 0x1960 */ f32 x1960_vibrateMult;
+    /* 0x1964 */ f32 x1964;
+    /* 0x1968 */ u8 x1968_jumpsUsed;
     /* 0x1969 */ u8 x1969_walljumpUsed;
     /* 0x196C */ int x196C;
     /* 0x1970 */ int x1970;
     /* 0x1974 */ void* x1974_heldItem;
-    u8 filler_x1974[0x19A4 - 0x1978];
+    /* 0x1978 */ HSD_GObj* x1978;
+    /* 0x197C */ s32 x197C;
+    /* 0x1980 */ HSD_GObj* x1980;
+    /* 0x1984 */ HSD_GObj* x1984_heldItemSpec;
+    /* 0x1988 */ s32 x1988;
+    /* 0x198C */ s32 x198C;
+    /* 0x1990 */ s32 x1990;
+    /* 0x1994 */ s32 x1994;
+    /* 0x1998 */ f32 x1998_shieldHealth;
+    /* 0x199C */ f32 x199C_shieldLightshieldAmt;
+    /* 0x19A0 */ s32 x19A0_shieldDamageTaken;
     /* 0x19A4 */ void* x19A4;
     /* 0x19A8 */ void* x19A8;
     /* 0x19AC */ f32 x19AC;
-    u8 filler_x19B0[0x1A58 - 0x19B0];
-    /* 0x1A58 */ HSD_GObj* x1A58;
-    u8 filler_x1A58[0x2064 - 0x1A5C];
-    u32 x2064_ledgeCooldown;
-    u8 filler_x2064[0x210C - 0x2068];
+    s32 filler_x19B0;
+    /* 0x19B4 */ f32 x19B4_shieldUnk;
+    /* 0x19B8 */ f32 x19B8_shieldUnk;
+    /* 0x19BC */ s32 x19BC_shieldDamageTaken3;
+    u8 filler_x19C0[0x1A2C - 0x19C0];
+    /* 0x1A2C */ f32 x1A2C_reflectHitDirection;
+    s32 filler_x1A30[3];
+    /* 0x1A3C */ s32 x1A3C;
+    /* 0x1A40 */ f32 x1A40;
+    /* 0x1A44 */ s32 x1A44;
+    /* 0x1A48 */ s32 x1A48;
+    u8 filler_x1A4C[0x1A52 - 0x1A4C];
+    /* 0x1A52 */ s8 x1A52;
+    /* 0x1A53 */ s8 x1A53;
+    s32 filler_x1A54;
+    /* 0x1A58 */ HSD_GObj* x1A58; // grabAttacker?
+    /* 0x1A5C */ HSD_GObj* x1A5C; // grabVictim?
+    /* 0x1A60 */ s32 x1A60;
+    /* 0x1A64 */ s32 x1A64;
+    u8 filler_x1A68[0x2008-0x1A68];
+    /* 0x2008 */ s32 x2008;
+    /* 0x200C */ s32 x200C;
+    /* 0x2010 */ s32 x2010;
+    u8 filler_x2014[0x2028 - 0x2014];
+    /* 0x2028 */ s32 x2028;
+    /* 0x202C */ s32 x202C;
+    s32 filler_x2030;
+    /* 0x2034 */ s32 x2034;
+    /* 0x2038 */ s32 x2038;
+    u8 filler_x203C[0x2064 - 0x203C];
+    /* 0x2064 */ s32 x2064_ledgeCooldown;
+    u8 filler_x2068[0x208C - 0x2068];
+    /* 0x208C */ s32 x208C;
+    /* 0x2090 */ s16 x2090;
+    /* 0x2092 */ s16 x2092;
+    /* 0x2094 */ s32 x2094;
+    /* 0x2098 */ s16 x2098;
+    s16 filler_x209A;
+    /* 0x209C */ s16 x209C;
+    /* 0x20A0 */ s32 x20A0;
+    s32 filler_x20A4[2];
+    /* 0x20AC */ s32 x20AC;
+    u8 filler_x20B0[0x2100 - 0x20B0];
+    /* 0x2100 */ s8 x2100;
+    /* 0x2101 */ u8 x2101_bits_0to6 : 7;
+    /* 0x2101 */ u8 x2101_bits_8 : 1;
+    u8 filler_x2102[0x2108 - 0x2102];
+    /* 0x2108 */ s32 x2108;
     /* 0x210C */ u8 x210C_walljumpInputTimer;
     u8 filler_x210C[3];
     /* 0x2110 */ f32 x2110_walljumpWallSide;
-    u8 filler_x2110[0x213C - 0x2114];
-    /* 0x213C */ u32 x213C;
-    u8 filler_x2114[0x21DC - 0x2140];
-    /* 0x21DC */ u32 x21DC;
-    /* 0x21E0 */ u32 x21E0;
-    /* 0x21E4 */ u32 x21E4;
-    u8 filler_x2138[0x2200 - 0x21E8];
+    u8 filler_x2114[0x2135 - 0x2114];
+    /* 0x2135 */ s8 x2135;
+    s16 filler_x2136;
+    /* 0x2138 */ f32 x2138_smashSinceHitbox;
+    /* 0x213C */ s32 x213C;
+    /* 0x2140 */ f32 x2140;
+    /* 0x2144 */ s32 x2144;
+    /* 0x2148 */ s32 x2148;
+    /* 0x214C */ s32 x214C;
+    /* 0x2150 */ s32 x2150;
+    /* 0x2154 */ s32 x2154;
+    /* 0x2158 */ s32 x2158;
+    /* 0x215C */ s32 x215C;
+    /* 0x2160 */ s32 x2160;
+    /* 0x2164 */ s32 x2164;
+    /* 0x2168 */ s32 x2168;
+    s32 filler_x216C;
+    /* 0x2170 */ f32 x2170;
+    u8 filler_x2174[0x2180 - 0x2174];
+    /* 0x2180 */ s32 x2180;
+    u8 filler_x2184[0x2190 - 0x2184];
+    // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
+    void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
+    void (*x2194_callback_x2194)(HSD_GObj *fighter); // used
+    void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj *fighter); // used
+    void (*x219C_callback_IASA)(HSD_GObj *fighter); // used
+    void (*x21A0_callback_Anim)(HSD_GObj *fighter);
+    void (*x21A4_callback_Phys)(HSD_GObj *fighter); // xused
+    void (*x21A8_callback_Coll)(HSD_GObj *fighter);
+    void (*x21AC_callback_Cam)(HSD_GObj *fighter);
+    void (*x21B0_callback_Accessory1)(HSD_GObj *fighter);
+    void (*x21B4_callback_Accessory2)(HSD_GObj *fighter); // used
+    void (*x21B8_callback_Accessory3)(HSD_GObj *fighter); // used
+    void (*x21BC_callback_Accessory4)(HSD_GObj *fighter);
+    void (*x21C0_callback_OnGiveDamage)(HSD_GObj *fighter);
+    void (*x21C4_callback_OnShieldHit)(HSD_GObj *fighter);
+    void (*x21C8_callback_OnReflectHit)(HSD_GObj *fighter);
+    void (*x21CC_callback_x21cc)(HSD_GObj *fighter);
+    void (*x21D0_callback_EveryHitlag)(HSD_GObj *fighter); // xused
+    void (*x21D4_callback_EnterHitlag)(HSD_GObj *fighter);
+    void (*x21D8_callback_ExitHitlag)(HSD_GObj *fighter);
+    void (*x21DC_callback_OnTakeDamage)(HSD_GObj *fighter);
+    void (*x21E0_callback_OnDeath)(HSD_GObj *fighter); // used
+    void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
+    void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
+    u8 filler_x21EC[0x2200 - 0x21EC];
     /* 0x2200 */ u32 x2200_ftcmd_var0;
     /* 0x2204 */ u32 x2200_ftcmd_var1;
     /* 0x2208 */ u32 x2200_ftcmd_var2;
     /* 0x220C */ u32 x2200_ftcmd_var3;
     /* 0x2210 */ ThrowFlags x2210_ThrowFlags;
-    /* 0x2214 */ u32 x2214;
-    u8 filler_x2218[0x221B - 0x2218];
+    /* 0x2214 */ f32 x2214;
+    /* 0x2218 */ UnkFlagStruct x2218_flag;
+    /* 0x2219 */ UnkFlagStruct x2219_flag;
+    /* 0x221A */ UnkFlagStruct x221A_flag;
     /* 0x221B */ UnkFlagStruct x221B_flag;
-    /* 0x221C */ u8 x221C;
-    UnkFlagStruct x221D_flag;
-    u8 filler_x221E;
-    UnkFlagStruct x221F_flag;
-    u8 filler_x2220;
-    u8 filler_x2221;
+    /* 0x221C */
+    union
+    {
+        struct
+        {
+            UnkFlagStruct x221C_flag;
+            UnkFlagStruct x221D_flag;
+        };
+        struct
+        {
+            u16 x221C_u16_x : 7;
+            u16 x221C_u16_y : 3;
+            u16 x221C_u16_z : 6;
+        };
+    };
+    /* 0x221E */ UnkFlagStruct x221E_flag;
+    /* 0x221F */ UnkFlagStruct x221F_flag;
+    /* 0x2220 */ UnkFlagStruct x2220_flag;
+    /* 0x2221 */ UnkFlagStruct x2221_flag;
     /* 0x2222 */ UnkFlagStruct x2222_flag;
-    u8 filler_x2223;
+    /* 0x2224 */ UnkFlagStruct x2223_flag;
     /* 0x2224 */ UnkFlagStruct x2224_flag;
-    u8 filler_x2225;
+    /* 0x2224 */ UnkFlagStruct x2225_flag;
     /* 0x2226 */ UnkFlagStruct x2226_flag;
-    u8 filler_x2227;
+    /* 0x2227 */ UnkFlagStruct x2227_flag;
     /* 0x2228 */ UnkFlagStruct x2228_flag;
-    u8 filler_x2229;
+    /* 0x2229 */ UnkFlagStruct x2229_flag;
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
     /* 0x222C */ u32 x222C;
@@ -233,5 +611,46 @@ typedef struct _Fighter {
     /* 0x2354 */ float x2354_stateVar6;
     /* 0x2358 */ float x2358_stateVar7;
 } Fighter;
+
+// functions from fighter.s
+void func_800679B0();
+void func_80067A84();
+void func_80067ABC();
+void func_80067BB4(HSD_GObj* pPlayerEntity);
+void func_80067C98(Fighter*);
+void func_80068354();
+void func_800686E4();
+void func_8006876C();
+void func_80068854();
+void func_80068914();
+void func_80068E64();
+void func_80068E98();
+void func_800693AC(HSD_GObj*, s32, s32, s32, f32, f32, f32);
+void func_8006A1BC();
+void func_8006A360();
+void func_8006ABA0();
+void func_8006ABEC();
+void func_8006AD10();
+void func_8006B82C();
+void func_8006C0F0(HSD_GObj* fighterObj);
+void func_8006C27C();
+void func_8006C5F4(HSD_GObj* pPlayerEntityStruct);
+void func_8006C624();
+void func_8006C80C();
+void func_8006CA5C();
+void func_8006CB94();
+void func_8006CC30();
+void func_8006CC7C();
+void func_8006CDA4();
+void func_8006CF5C();
+void func_8006CFBC();
+void func_8006CFE0();
+void func_8006D044();
+void func_8006D10C();
+void func_8006D1EC();
+void func_8006D9AC();
+void func_8006D9EC();
+void func_8006DA4C();
+void func_8006DABC();
 
 #endif

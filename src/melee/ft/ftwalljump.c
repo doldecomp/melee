@@ -69,7 +69,7 @@ BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct/*r3*/)
 				// not sure what this computes, I guess it checks if we are close to the wall and move towards it with sufficent speed
                 deltaX_f1 = pCharData_r31->xC8_pos_delta.x - wallPos_sp24.x;
                 deltaX_f1 = (deltaX_f1 < 0.0f) ? -deltaX_f1 : deltaX_f1;
-                if (deltaX_f1 > pCharData_r31->x258)
+                if (deltaX_f1 > pCharData_r31->x110_attr.x258)
                 {
 					// walljump input phase one completed, now start the walljump input timer
 					// and check for the control stick movement away from the wall in the next phase

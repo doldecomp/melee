@@ -15,12 +15,12 @@ BOOL func_80081298(HSD_GObj* gobj) {
         && (((fighter->x2228_flag.bits.b2 & 1) == 0))) {
         other_gobj = func_80082E3C(gobj);
         if (other_gobj == NULL) {
-            func_80040048(fighter->xC, fighter->x221F_flag.bits.b4);
+            func_80040048(fighter->xC_playerID, fighter->x221F_flag.bits.b4);
             func_80081370(gobj);
             return TRUE;
         }
         other_fighter = other_gobj->user_data;
-        func_8003FFDC(other_fighter->xC, other_fighter->x221F_flag.bits.b4, fighter->xC, fighter->x221F_flag.bits.b4, other_fighter->x2340_stateVar1);
+        func_8003FFDC(other_fighter->xC_playerID, other_fighter->x221F_flag.bits.b4, fighter->xC_playerID, fighter->x221F_flag.bits.b4, other_fighter->x2340_stateVar1);
         fighter->x213C = other_fighter->x2340_stateVar1;
         return FALSE;
     }

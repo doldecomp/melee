@@ -34,7 +34,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[3], attrs->xC);
     func_8026B3F8(items[4], attrs->x10);
     func_8026B3F8(items[5], ITEM_CLINK_MILK);
-    func_800753D4(ft, *lbl_804D6540[ft->x4_index], items[6]);
+    func_800753D4(ft, *lbl_804D6540[ft->x4_fighterKind], items[6]);
 }
 
 void func_80148DC0(HSD_GObj* gobj, s32 arg1)
@@ -136,13 +136,13 @@ void func_80149114(HSD_GObj* gobj)
     Fighter* ft = gobj->user_data;
     CLinkAttributes* temp_r4 = (void*) ft->x10C_ftData->ext_attr;
     f32 ftmp = func_80092ED8(ft->x19A4, temp_r4, temp_r4->xD8);
-    ft->xEC = ftmp * lbl_804D6554->x294;
+    ft->xEC_groundVel = ftmp * lbl_804D6554->x294;
     if (ft->x19AC < 0.0f) {
-        ftmp = ft->xEC;
+        ftmp = ft->xEC_groundVel;
     } else {
-        ftmp = -ft->xEC;
+        ftmp = -ft->xEC_groundVel;
     }
-    ft->xEC = ftmp;
+    ft->xEC_groundVel = ftmp;
     func_80088148(ft, 0x111DA, 0x7F, 0x40);
 }
 
