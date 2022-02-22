@@ -88,6 +88,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftmewtwo.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftclink.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftclink.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario_2.o 	\

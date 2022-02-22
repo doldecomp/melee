@@ -2086,7 +2086,7 @@ extern const s32 lbl_803D3984[];
 // extern ? lbl_804D6534;
 // extern ? lbl_804D6538;
 // extern ? lbl_804D653C;
-// extern ? lbl_804D6540;
+extern s32** lbl_804D6540;
 // extern ? lbl_804D6544;
 // extern ? lbl_804D6548;
 // extern ? lbl_804D654C;

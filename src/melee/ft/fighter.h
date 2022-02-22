@@ -8,7 +8,9 @@
 
 // Points to data in PiCo.dat
 typedef struct _ftCommonData {
-    u8 data_filler_1[0x480];
+    u8 data_filler_0[0x294];
+    f32 x294;
+    u8 data_filler_1[0x480-0x298];
     f32 x480;
     u8 data_filler_2[0x498-0x484];
     u32 x498_ledgeCooldownTime;
@@ -112,7 +114,9 @@ typedef struct _CollData
 } CollData;
 
 typedef struct _Fighter {
-    u8 filler_x0[0xC - 0x0];
+    u8 filler_x0[0x4 - 0x0];
+    /* 0x4 */ s32 x4_index;
+    u8 filler_x8[0xC - 0x8];
     u8 xC;
     u8 xD;
     u8 xE;
@@ -126,7 +130,10 @@ typedef struct _Fighter {
     /* 0xC8 */ Vec3 xC8_pos_delta;
     u8 filler_xC8[0xE0 - 0xC8 - 12];
     u32 xE0_airState;
-    u8 filler_xE0[0x108 - 0xE4];
+    /* 0xE4 */ u32 xE4;
+    /* 0xE8 */ u32 xE8;
+    /* 0xEC */ f32 xEC;
+    u8 filler_xF0[0x108 - 0xF0];
     /* 0x108 */ int* x108_costume_archive;
     /* 0x10C */ ftData* x10C_ftData;
     u8 filler_x10C[0x258 - 0x110];
@@ -136,7 +143,9 @@ typedef struct _Fighter {
     /* 0x2D8 */ void* x2D8_specialAttributes2;
     u8 filler_x2D8[0x5E8 - 0x2DC];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
-    u8 filler_x5E8[0x60C - 0x5EC];
+    u8 filler_x5EC[0x5F8 - 0x5EC];
+    s8 x5F8;
+    u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
     u8 filler_x60C[0x618 - 0x610];
     /* 0x618 */ s8 x618_flag;
@@ -163,7 +172,11 @@ typedef struct _Fighter {
     /* 0x196C */ int x196C;
     /* 0x1970 */ int x1970;
     /* 0x1974 */ void* x1974_heldItem;
-    u8 filler_x1974[0x1A58 - 0x1978];
+    u8 filler_x1974[0x19A4 - 0x1978];
+    /* 0x19A4 */ void* x19A4;
+    /* 0x19A8 */ void* x19A8;
+    /* 0x19AC */ f32 x19AC;
+    u8 filler_x19B0[0x1A58 - 0x19B0];
     /* 0x1A58 */ HSD_GObj* x1A58;
     u8 filler_x1A58[0x2064 - 0x1A5C];
     u32 x2064_ledgeCooldown;
@@ -178,13 +191,14 @@ typedef struct _Fighter {
     /* 0x21E0 */ u32 x21E0;
     /* 0x21E4 */ u32 x21E4;
     u8 filler_x2138[0x2200 - 0x21E8];
-	  /* 0x2200 */ u32 x2200_ftcmd_var0;
+    /* 0x2200 */ u32 x2200_ftcmd_var0;
     /* 0x2204 */ u32 x2200_ftcmd_var1;
     /* 0x2208 */ u32 x2200_ftcmd_var2;
     /* 0x220C */ u32 x2200_ftcmd_var3;
     /* 0x2210 */ ThrowFlags x2210_ThrowFlags;
     /* 0x2214 */ u32 x2214;
-    /* 0x2218 */ u32 x2218;
+    u8 filler_x2218[0x221B - 0x2218];
+    /* 0x221B */ UnkFlagStruct x221B_flag;
     /* 0x221C */ u8 x221C;
     UnkFlagStruct x221D_flag;
     u8 filler_x221E;
