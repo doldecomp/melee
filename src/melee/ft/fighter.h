@@ -161,12 +161,6 @@ typedef struct _CollData
     u8 filler_x174[0x1A0 - 0x174 - 4];
 } CollData;
 
-typedef struct _HitVictim
-{
-    void *data; // userdata of the object that was hit
-    int timer;  // items use this to wait until hitting this gobj again
-} HitVictim;
-
 typedef struct _ftHit
 {
     u8 filler_x0[0x134];
