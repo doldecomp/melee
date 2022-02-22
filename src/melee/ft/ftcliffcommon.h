@@ -11,7 +11,7 @@
 
 BOOL func_80081298(HSD_GObj* gobj);
 void func_80081370(HSD_GObj* gobj);
-void func_80081504(s32 arg0);
+void func_80081504(HSD_GObj* gobj);
 void func_80081540();
 void func_80081544(HSD_GObj* gobj);
 void func_80081644(HSD_GObj* gobj);
