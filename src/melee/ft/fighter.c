@@ -1344,10 +1344,10 @@ asm void func_80067C98()
 typedef struct
 {
     u8 filler_0[0x14];
-    s32 x14_flags; // _HSD_GObj* prev_gx
+    s32 x14_flags;
     u8 filler_18[0x2C-0x18];
-    Vec3 x2C_pos; // userdata
-    Vec3 x38_pos; // HSD_OBJ object
+    Vec3 x2C_pos;
+    Vec3 x38_pos;
 } S;
 
 void func_80068354(HSD_GObj* fighterObj/*r30*/) {
@@ -6137,6 +6137,7 @@ lbl_8006C0D4:
 #endif
 
 
+// Match from snuffysasa: https://decomp.me/scratch/A6W1m
 asm void func_8006C0F0(HSD_GObj* fighterObj)
 {
 	nofralloc 
