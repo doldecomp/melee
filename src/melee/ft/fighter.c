@@ -5200,7 +5200,7 @@ lbl_8006B80C:
 
 
 #if 0
-// https://decomp.me/scratch/WtgBX old version, full match, uses extra parameter that may not exist
+// https://decomp.me/scratch/k3D7O old version, full match, uses extra parameter that may not exist
 // https://decomp.me/scratch/XNVy4 new version that uses the same context as in fighter.h. Has stackalloc issues, I don't know why.
 // 8006B82C
 void /*fighter_procUpdate*/func_8006B82C(HSD_GObj* pPlayerEntityStruct)
