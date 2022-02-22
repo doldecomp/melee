@@ -147,3 +147,14 @@ HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc)
     }
     return NULL;
 }
+
+void HSD_WObjSetPosition(HSD_WObj* wobj, Vec* pos)
+{
+    if (wobj == NULL || pos == NULL) {
+        return;
+    }
+
+    wobj->pos = *pos;
+    wobj->flags |= 0x2;
+    wobj->flags &= 0xFFFFFFFE;
+}

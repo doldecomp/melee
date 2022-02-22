@@ -48,7 +48,6 @@ int WObjLoad(HSD_WObj* wobj, HSD_WObjDesc* desc);
 
 void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc);
 HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc);
-
 void HSD_WObjSetPosition(HSD_WObj*, Vec*);
 void HSD_WObjSetPositionX(HSD_WObj*, f32);
 void HSD_WObjSetPositionY(HSD_WObj*, f32);
