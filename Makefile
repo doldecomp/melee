@@ -94,9 +94,9 @@ ifeq ($(GENERATE_MAP),1)
 endif
 CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES)
 
-$(EPILOGUE_DIR)/src/melee/pl/player.o: CC_EPI := $(CC)
-$(EPILOGUE_DIR)/src/melee/lb/lbtime.o: CC_EPI := $(CC)
-$(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.o: CC_EPI := $(CC)
+$(EPILOGUE_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
+$(EPILOGUE_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
+$(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.c.o: CC_EPI := $(CC)
 
 
 HOSTCFLAGS := -Wall -O3 -s
@@ -155,21 +155,21 @@ $(ELF): $(O_FILES) $(LDSCRIPT)
 	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files
 endif
 
-$(BUILD_DIR)/%.o: %.s
+$(BUILD_DIR)/%.s.o: %.s
 	@echo Assembling $<
 	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.o: %.c
+$(BUILD_DIR)/%.c.o: %.c
 	@echo "Compiling " $<
 	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) -MT $@ $< >/dev/null
 	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
 
 ifeq ($(EPILOGUE_PROCESS),1)
-$(EPILOGUE_DIR)/%.o: %.s
+$(EPILOGUE_DIR)/%.s.o: %.s
 	@echo Assembling $<
 	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
 
-$(EPILOGUE_DIR)/%.o: %.c $(BUILD_DIR)/%.o
+$(EPILOGUE_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.o
 	@echo Frank is fixing $<
 	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
 	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
@@ -177,8 +177,8 @@ $(EPILOGUE_DIR)/%.o: %.c $(BUILD_DIR)/%.o
 	
 endif
 
-$(BUILD_DIR)/src/melee/lb/lbvector.o: CFLAGS += -inline auto -fp_contract on
-$(EPILOGUE_DIR)/src/melee/lb/lbvector.o: CFLAGS += -inline auto -fp_contract on
+$(BUILD_DIR)/src/melee/lb/lbvector.c.o: CFLAGS += -inline auto -fp_contract on
+$(EPILOGUE_DIR)/src/melee/lb/lbvector.c.o: CFLAGS += -inline auto -fp_contract on
 
 -include $(DEP_FILES)
 

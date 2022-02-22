@@ -156,6 +156,9 @@ if __name__ == "__main__":
                 #print(f"Line {i}: {symbols[i]}")
                 continue
             assert(section_type != None), f"Symbol found outside of a section!!!\n{symbols[i]}"
+            words = symbols[i].split()
+            if len(words) == 0: continue
+            if words[-1].endswith('.s.o'): continue
             match_obj = re.search(REGEX_TO_USE, symbols[i])
             # Should be a symbol in ASM (so we discard it)
             if (match_obj == None):
