@@ -382,29 +382,30 @@ extern u32 lbl_804D64F8;// = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
 // the following seems to be an array, initialized in reverse in func_80067ABC
-//void* lbl_804D64FC;// = 0;
-//void* lbl_804D6500;// = 0;
-//void* lbl_804D6504;// = 0;
-//void* lbl_804D6508;// = 0;
-//void* lbl_804D650C;// = 0;
-//void* lbl_804D6510;// = 0;
-//void* lbl_804D6514;// = 0;
-//void* lbl_804D6518;// = 0;
-//void* lbl_804D651C;// = 0;
-//void* lbl_804D6520;// = 0;
-//void* lbl_804D6524;// = 0;
-//void* lbl_804D6528;// = 0;
-//void* lbl_804D652C;// = 0;
-//void* lbl_804D6530;// = 0;
-//void* lbl_804D6534;// = 0;
-//void* lbl_804D6538;// = 0;
-//void* lbl_804D653C;// = 0;
-//void* lbl_804D6540;// = 0;
-//void* lbl_804D6544;// = 0;
-//void* lbl_804D6548;// = 0;
-//void* lbl_804D654C;// = 0;
-//void* lbl_804D6550;// = 0;
-//ftCommonData* lbl_804D6554;// = 0; // p_ftCommonData
+// outcommented because they are in variables.h too. uncomment this when moving data from fighter.s here.
+//extern void* lbl_804D64FC;// = 0;
+//extern void* lbl_804D6500;// = 0;
+//extern void* lbl_804D6504;// = 0;
+//extern void* lbl_804D6508;// = 0;
+//extern void* lbl_804D650C;// = 0;
+//extern void* lbl_804D6510;// = 0;
+//extern void* lbl_804D6514;// = 0;
+//extern void* lbl_804D6518;// = 0;
+//extern void* lbl_804D651C;// = 0;
+//extern void* lbl_804D6520;// = 0;
+//extern void* lbl_804D6524;// = 0;
+//extern void* lbl_804D6528;// = 0;
+//extern void* lbl_804D652C;// = 0;
+//extern void* lbl_804D6530;// = 0;
+//extern void* lbl_804D6534;// = 0;
+//extern void* lbl_804D6538;// = 0;
+//extern void* lbl_804D653C;// = 0;
+//extern s32** lbl_804D6540;// = 0;
+//extern void* lbl_804D6544;// = 0;
+//extern void* lbl_804D6548;// = 0;
+//extern void* lbl_804D654C;// = 0;
+//extern void* lbl_804D6550;// = 0;
+//extern ftCommonData* lbl_804D6554;// = 0; // p_ftCommonData
 #define p_ftCommonData lbl_804D6554 
  
 // .section .sdata2
@@ -601,12 +602,12 @@ lbl_80067C80:
 
 #ifdef FIGHTER_DONE
 // https://decomp.me/scratch/HXrlP
-// No Match
-// one addi r3,r27,0 should be a mr r3,r27, and it should be in a different place
+// No Match, one mr instruction is shifted.
 void func_80067C98(Fighter* r27)
 {
 	Vec3 spC_player_coord;
 	f32 x,y,z;
+	Fighter* tmp;
 
 	r27->x8_spawnNum = func_80068E40();
 	Player_800326CC(r27->xC_playerID, &spC_player_coord); //PlayerBlock_LoadPlayerCoords_StoreToR4
@@ -860,7 +861,11 @@ void func_80067C98(Fighter* r27)
 	r27->x202C = 0;
 
 	// sets some fighter flags and values to 0, see https://decomp.me/scratch/VBrFf
-	func_800C88A0(r27=r27+0); // TODO: make the compiler use mr r3,r27 instead of addi r3,r27,0 to pass the argument
+	// using r27=tmp makes the compiler use the correct mr r3,r27 instead of addi r3,r27,0.
+	// The mr is still in the wrong place.
+	tmp=r27;
+	func_800C88A0(r27=tmp);
+
 
 	//@598
 	r27->x2227_flag.bits.b3 = 0;
