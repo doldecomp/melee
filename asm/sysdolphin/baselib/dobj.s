@@ -22,4 +22,3 @@ lbl_80405548:
 lbl_80405560:
     .asciz "hsd_dobj"
     .balign 4
-    .4byte NULL

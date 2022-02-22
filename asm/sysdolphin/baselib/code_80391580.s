@@ -20179,11 +20179,10 @@ jtbl_8040C2D8:
 	.4byte lbl_8039F348
 	.4byte lbl_8039F348
 	.4byte lbl_8039F46C
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804CE3F8
 lbl_804CE3F8:
 	.skip 0x330
@@ -20232,7 +20231,7 @@ lbl_804D0F90:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6070
 lbl_804D6070:
     .asciz "A@"
@@ -20683,10 +20682,10 @@ lbl_804D636C:
 lbl_804D6374:
     .asciz "jobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
+    .balign 8
 .global lbl_804D7850
 lbl_804D7850:
 	.skip 0x8
@@ -20819,7 +20818,7 @@ lbl_804D7900:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE890
 lbl_804DE890:
 	.4byte 0x3FECCCCC

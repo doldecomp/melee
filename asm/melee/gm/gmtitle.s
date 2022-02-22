@@ -1073,7 +1073,7 @@ lbl_801A2210:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7D50
 lbl_803B7D50:
 	.asciz "GmTtAll.dat"
@@ -1174,14 +1174,14 @@ lbl_803DA4FC:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80479B28
 lbl_80479B28:
 	.skip 0xA0
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4230
 lbl_804D4230:
     .asciz "jobj.h"
@@ -1194,11 +1194,10 @@ lbl_804D4238:
 lbl_804D4240:
     .asciz "%s"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6708
 lbl_804D6708:
 	.skip 0x4
@@ -1220,7 +1219,7 @@ lbl_804D671C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DA998
 lbl_804DA998:
 	.4byte 0x43020000

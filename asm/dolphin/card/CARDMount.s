@@ -759,7 +759,7 @@ lbl_80403180:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5C60
 lbl_804D5C60:
     .4byte 0xFFFF0000

@@ -4439,7 +4439,7 @@ lbl_80148C48:
 /* 80148C60 00145840  4E 80 00 20 */	blr 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B75D0
 lbl_803B75D0:
     .4byte 0x00000000
@@ -4453,7 +4453,7 @@ lbl_803B75DC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9D00
 lbl_804D9D00:
 	.4byte 0x43300000

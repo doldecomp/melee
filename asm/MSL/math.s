@@ -106,6 +106,7 @@ lbl_8032670C:
 
 
 .section .rodata, "a"
+    .balign 8
 .global lbl_803B8F50
 lbl_803B8F50:
     .4byte 0x00000000
@@ -392,6 +393,7 @@ __sincos_poly:
     .4byte 0x3F490FDB
 
 .section .sdata2, "a"
+    .balign 8
 .global lbl_804DE1B0
 lbl_804DE1B0:
 	.4byte 0xBF000030

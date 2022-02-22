@@ -4810,7 +4810,7 @@ lbl_80229590:
 
 
 .section .rodata
-    .4byte NULL
+    .balign 8
 .global lbl_803B84D8
 lbl_803B84D8:
     .4byte 0x00000000
@@ -5325,11 +5325,10 @@ lbl_803EAE08:
 lbl_803EAE58:
     .asciz "objalloc.h"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8049FA00
 lbl_8049FA00:
 	.skip 0x50
@@ -5357,7 +5356,7 @@ lbl_804A0480:
 
 
 .section .sdata
-    .4byte NULL
+    .balign 8
 .global lbl_804D4A08
 lbl_804D4A08:
 	.long 1
@@ -5525,7 +5524,7 @@ lbl_804D4B28:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6B20
 lbl_804D6B20:
 	.skip 0x4
@@ -5612,11 +5611,11 @@ lbl_804D6B9C:
 	.skip 0x4
 .global lbl_804D6BA0
 lbl_804D6BA0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-    .4byte NULL
+    .balign 8
 .global lbl_804DBCF0
 lbl_804DBCF0:
 	.4byte 0x8040FFFF

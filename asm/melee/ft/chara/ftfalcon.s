@@ -3275,7 +3275,7 @@ lbl_800E550C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D91F8
 lbl_804D91F8:
 	.4byte 0x40000000

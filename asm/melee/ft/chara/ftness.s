@@ -7582,7 +7582,7 @@ func_8011B4E4:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7598
 lbl_803B7598:
     .4byte 0x00000000
@@ -7598,11 +7598,10 @@ lbl_803B75B0:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
-    .4byte 0x00000000
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D96B0
 lbl_804D96B0:
 	.4byte 0x40400000

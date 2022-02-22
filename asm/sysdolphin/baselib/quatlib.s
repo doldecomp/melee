@@ -724,17 +724,16 @@ lbl_8037F180:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B95E8
 lbl_803B95E8:
 	.long 1
     .long 2
     .long 0
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE720
 lbl_804DE720:
 	.4byte 0x00000000

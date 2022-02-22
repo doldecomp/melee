@@ -4059,7 +4059,7 @@ lbl_800EE514:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7520
 lbl_803B7520:
 	.float 0
@@ -4071,11 +4071,10 @@ lbl_803B7520:
     .float 0
     .float 0
     .float 0
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D92D8
 lbl_804D92D8:
 	.4byte 0x3F800000

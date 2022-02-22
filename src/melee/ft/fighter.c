@@ -50,10 +50,8 @@ inline s32 __fpclassifyd(double x)
 // Move to functions.h when we figured out all the prototypes
 
 s32 func_800567C0(s32 groundID, Vec3* pos, Vec3* out_delta);
-void func_80088148(Fighter*, s32, s32, s32); // SFX_PlayCharacterSFX
 s32 func_80322258(f32 x); // PositionXBetweenLedgesMinDelta
 void func_8007AF28(HSD_GObj* fighterObj); // Hurtbox_SetAllNotUpdated
-extern void* func_8007E2F4(); // ftcommon.s, prototype also defined in ftkoopa.c
 void func_8000B1CC();
 void func_8000D148();
 void func_8000ED54();
@@ -352,18 +350,18 @@ extern const Vec3 lbl_803B7494; // = (0,0,0)
 
 // .section .data
 
-char lbl_803C0530[] = "PlCo.dat";
-char lbl_803C053C[] = "ftLoadCommonData";
-char lbl_803C0550[] = "translate";
-char lbl_803C055C[] = "fighter sub color num over!\n";
-char lbl_803C057C[] = "fighter.c";
-char lbl_803C0588[] = "ellegal flag fp->no_normal_motion\n";
-char lbl_803C05AC[];
+extern char lbl_803C0530[];// = "PlCo.dat";
+extern char lbl_803C053C[];// = "ftLoadCommonData";
+extern char lbl_803C0550[];// = "translate";
+extern char lbl_803C055C[];// = "fighter sub color num over!\n";
+extern char lbl_803C057C[];// = "fighter.c";
+extern char lbl_803C0588[];// = "ellegal flag fp->no_normal_motion\n";
+extern char lbl_803C05AC[];
     //.asciz "fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n"
     //.balign 4
     //.asciz "fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n"
     //.balign 4
-char lbl_803C0610[];// = "ellegal flag fp->no_reaction_always\n";
+extern char lbl_803C0610[];// = "ellegal flag fp->no_reaction_always\n";
 
 // .section .bss, "wa"
 
@@ -379,33 +377,33 @@ extern const char* lbl_804D3A10;// = "0";
 // .section .sbss
 
 // TODO: verify that this is really a spawn number counter, then rename this var globally
-u32 lbl_804D64F8 = 0;
+extern u32 lbl_804D64F8;// = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
 // the following seems to be an array, initialized in reverse in func_80067ABC
-void* lbl_804D64FC = 0;
-void* lbl_804D6500 = 0;
-void* lbl_804D6504 = 0;
-void* lbl_804D6508 = 0;
-void* lbl_804D650C = 0;
-void* lbl_804D6510 = 0;
-void* lbl_804D6514 = 0;
-void* lbl_804D6518 = 0;
-void* lbl_804D651C = 0;
-void* lbl_804D6520 = 0;
-void* lbl_804D6524 = 0;
-void* lbl_804D6528 = 0;
-void* lbl_804D652C = 0;
-void* lbl_804D6530 = 0;
-void* lbl_804D6534 = 0;
-void* lbl_804D6538 = 0;
-void* lbl_804D653C = 0;
-void* lbl_804D6540 = 0;
-void* lbl_804D6544 = 0;
-void* lbl_804D6548 = 0;
-void* lbl_804D654C = 0;
-void* lbl_804D6550 = 0;
-ftCommonData* lbl_804D6554 = 0; // p_ftCommonData
+extern void* lbl_804D64FC;// = 0;
+extern void* lbl_804D6500;// = 0;
+extern void* lbl_804D6504;// = 0;
+extern void* lbl_804D6508;// = 0;
+extern void* lbl_804D650C;// = 0;
+extern void* lbl_804D6510;// = 0;
+extern void* lbl_804D6514;// = 0;
+extern void* lbl_804D6518;// = 0;
+extern void* lbl_804D651C;// = 0;
+extern void* lbl_804D6520;// = 0;
+extern void* lbl_804D6524;// = 0;
+extern void* lbl_804D6528;// = 0;
+extern void* lbl_804D652C;// = 0;
+extern void* lbl_804D6530;// = 0;
+extern void* lbl_804D6534;// = 0;
+extern void* lbl_804D6538;// = 0;
+extern void* lbl_804D653C;// = 0;
+extern void* lbl_804D6540;// = 0;
+extern void* lbl_804D6544;// = 0;
+extern void* lbl_804D6548;// = 0;
+extern void* lbl_804D654C;// = 0;
+extern void* lbl_804D6550;// = 0;
+extern ftCommonData* lbl_804D6554;// = 0; // p_ftCommonData
 #define p_ftCommonData lbl_804D6554 
  
 // .section .sdata2

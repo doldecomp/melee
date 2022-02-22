@@ -6336,7 +6336,7 @@ func_800EACD8:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3D80
 lbl_804D3D80:
     .4byte 0x0001AE17
@@ -6349,11 +6349,10 @@ lbl_804D3D88:
 lbl_804D3D90:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9240
 lbl_804D9240:
 	.4byte 0x40400000

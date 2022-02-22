@@ -910,18 +910,17 @@ lbl_803F9780:
 lbl_803F9798:
     .asciz "translate"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A1340
 lbl_804A1340:
 	.skip 0x38
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D57C8
 lbl_804D57C8:
     .asciz "jobj.h"
@@ -933,7 +932,7 @@ lbl_804D57D0:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DDAB0
 lbl_804DDAB0:
 	.4byte 0x43300000

@@ -1,12 +1,7 @@
 .include "macros.inc"
 
-.section .text  # 0x80005940 - 0x803B7240
-
-
-
 .section .sdata
-
-    .4byte NULL
+    .balign 8
 .global lbl_804D5B58
 lbl_804D5B58:
     .4byte 0x80808080

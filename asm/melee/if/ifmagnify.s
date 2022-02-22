@@ -1388,18 +1388,17 @@ lbl_803F984C:
 lbl_803F988C:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A1DE0
 lbl_804A1DE0:
 	.skip 0xF0
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D57E8
 lbl_804D57E8:
     .asciz "lupe"
@@ -1415,7 +1414,7 @@ lbl_804D57F8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DDB08
 lbl_804DDB08:
 	.4byte 0x00000000

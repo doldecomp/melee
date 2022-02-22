@@ -105,7 +105,7 @@ lbl_80400C08:
 
 
 .section .sbss
-
+    .balign 8
 .global __DSP_init_flag
 __DSP_init_flag:
-	.skip 0x8
+	.skip 0x4

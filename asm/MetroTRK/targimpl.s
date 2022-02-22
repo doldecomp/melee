@@ -1611,7 +1611,7 @@ TRKTargetSetInputPendingPtr:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B93C0
 lbl_803B93C0:
     .4byte 0x00000000

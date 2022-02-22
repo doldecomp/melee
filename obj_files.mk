@@ -28,6 +28,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/lbarchive.o			\
 	$(BUILD_DIR)/asm/melee/lb/lbdvd.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_80019230.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_80019880.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.o				\
 	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8.o		\
 	                                                \
@@ -57,7 +58,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/code_8007C630.o 		\
 	$(BUILD_DIR)/asm/melee/ft/ftcommon.o 			\
 	$(BUILD_DIR)/asm/melee/ft/ftdrawcommon.o 		\
-	$(BUILD_DIR)/asm/melee/ft/ftcliffcommon.o 		\
+	$(BUILD_DIR)/src/melee/ft/ftcliffcommon.o 		\
 	$(BUILD_DIR)/src/melee/ft/ftwalljump.o 			\
 	$(BUILD_DIR)/asm/melee/ft/code_80081938.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_80081B38.o 		\
@@ -90,7 +91,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftclink.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftdrmario.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario_2.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftfalco.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftpichu.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.o 	\
@@ -370,7 +371,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/video.o				\
 	$(BUILD_DIR)/src/sysdolphin/baselib/controller.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/controller.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/rumble.o			\
+	$(BUILD_DIR)/src/sysdolphin/baselib/rumble.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/spline.o	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/mtx.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/util.o		\

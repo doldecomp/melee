@@ -1177,11 +1177,10 @@ jtbl_80401110:
 	.4byte lbl_8033C95C
 	.4byte lbl_8033C910
 	.4byte lbl_8033C918
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5BB0
 lbl_804D5BB0:
     .4byte 0x00040102

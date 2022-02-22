@@ -6849,7 +6849,7 @@ lbl_8014222C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3E80
 lbl_804D3E80:
     .asciz "jobj.h"
@@ -6878,7 +6878,7 @@ lbl_804D3EA8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D9C08
 lbl_804D9C08:
 	.4byte 0x40400000

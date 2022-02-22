@@ -443,7 +443,7 @@ __GXWriteFifoIntReset:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D72F0
 lbl_804D72F0:
 	.skip 0x4
@@ -476,4 +476,4 @@ lbl_804D7314:
 	.skip 0x4
 .global lbl_804D7318
 lbl_804D7318:
-	.skip 0x8
+	.skip 0x4

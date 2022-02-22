@@ -6,9 +6,6 @@
 
 #include "sysdolphin/baselib/gobj.h"
 
-typedef struct { float x, y;    } Vec2;
-typedef Vec Vec3;
-
 typedef enum
 {
 	FighterID_Mario,
@@ -46,14 +43,49 @@ typedef enum
 	FighterID_Sandbag,
 } FighterID;
 
+// Points to data in PiCo.dat
+typedef struct _ftCommonData {
+	u8 filler_x0[0x98];
+	/* 0x98 */ f32 x98_shieldHealthInit;
+	u8 filler_x9C[0x200-0x9C];
+	/* 0x200 */ f32 x200;
+	/* 0x204 */ f32 x204_knockbackFrameDecay;
+	u8 filler_x208[0x3E8-0x208];
+	/* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
+	/* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
+	u8 filler_x3F0[0x480-0x3F0];
+	/* 0x480 */ f32 x480;
+	u8 filler_x484[0x498-0x484];
+	/* 0x498 */ u32 x498_ledgeCooldownTime;
+	u8 filler_x49C[0x5F0-0x49C];
+	/* 0x5F0 */ u32 x5F0;
+	u8 filler_x5F4[0x768-0x5F4];
+	/* 0x768 */ f32 x768;
+	/* 0x76C */ f32 x76C;
+	/* 0x770 */ f32 x770;
+	/* 0x774 */ s32 x774;
+	// lots of more data following, exact size to be determined
+} ftCommonData;
+
+typedef struct _FtCollisionData
+{
+    u8 data_filler_0[0x28];
+    u32 x28;
+} FtCollisionData;
+
 typedef struct _ftData
 {
-	s32 filler_x0;
-	/* 0x04 */ s32* ext_attr;
-	s32 filler_x4[16];
-	/* 0x48 */ void* x48_items;
-	s32 filler_x48[4];
+    s32 filler_x0;
+    /* 0x04 */ s32* ext_attr;
+    s32 filler_x4[16];
+    /* 0x48 */ void* x48_items;
+    FtCollisionData* x4C_collisionData;
+    s32 filler_x50[2];
+    void* x58;
 } ftData;
+
+typedef struct _Vec2 { float x, y; } Vec2;
+typedef Vec Vec3;
 
 typedef struct _UnkFlagStruct {
     struct {
@@ -70,39 +102,57 @@ typedef struct _UnkFlagStruct {
 
 typedef struct _ThrowFlags
 {
-	union {
-		struct {
-			u8 b0 : 1;
-			u8 b1 : 1;
-			u8 b2 : 1;
-			u8 b3 : 1;
-			u8 b4 : 1;
-			u8 b5 : 1;
-			u8 b6 : 1;
-			u8 b7 : 1;
-		};
-		u32 flags;
-	};
+  union {
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    };
+    u32 flags;
+  };
 } ThrowFlags;
 
 typedef struct _FighterBone
 {
-	/* 0x0 */ u32* x0_joint;
-	/* 0x4 */ u32* x4_joint2; // used for interpolation
-	u32 data_filler[2];
+  /* 0x0 */ u32* x0_joint;
+  /* 0x4 */ u32* x4_joint2; // used for interpolation
+  u32 data_filler[2];
 } FighterBone;
+
+typedef struct _CameraBox
+{
+  u32 data_filler[3];
+  struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+  } xC_flag;
+} CameraBox;
 
 typedef struct _CollData
 {
-	u8 filler_x0[0xB4];
+	u8 filler_x0[0x40];
+	/* 0x40 */ u32 x40;
+	/* 0x44 */ u32 x44;
+	u8 filler_x48[0xB4-0x48];
 	/* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
 	/* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
 	u8 filler_xBC[0x134 - 0xBC - 8];
-	/* 0x134 */ int x134_envFlags;
+	/* 0x134 */ s32 x134_envFlags;
 	u8 filler_x138[0x14C - 0x138];
 	/* 0x14C */ s32 x14C_groundIndex;
 	s32 filler_x150;
-    /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
+        /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
 	/* 0x160 */ int x160_rightwall_index;
 	u8 filler_x160[0x174 - 0x160 - 4];
 	/* 0x174 */ int x174_leftwall_index;
@@ -126,7 +176,11 @@ typedef struct _Fighter {
 	/* 0x4 */ FighterID x4_fighterID;
 	/* 0x8 */ s32 x8_spawnNum;
 	/* 0xC */ u8 xC_playerID;
-	u8 filler_xD[0x2C - 0xD];
+	u8 xD;
+	u8 xE;
+	u8 xF;
+	u32 x10;
+	u8 data_filler_x10[0x2C - 0x14];
 	/* 0x2C */ f32 x2C_facing_direction;
 	/* 0x30 */ f32 x30_facingDirectionRepeated;
 	/* 0x34 */ Vec3 x34_scale;
@@ -152,106 +206,106 @@ typedef struct _Fighter {
 	/* 0x108 */ int* x108_costume_archive;
 	/* 0x10C */ ftData* x10C_ftData;
 	// TODO: Ask Psi how many of those are confirmed
-    struct attr
-    {
-        /* 0x110 */ f32 x110_walk_initial_velocity;
-        /* 0x114 */ f32 x114_walk_acceleration;
-        /* 0x118 */ f32 x118_walk_maximum_velocity;
-        /* 0x11C */ f32 x11C_slow_walk_max;
-        /* 0x120 */ f32 x120_mid_walk_point;
-        /* 0x124 */ f32 x124_fast_walk_min;
-        /* 0x128 */ f32 x128_ground_friction; // used
-        /* 0x12C */ f32 x12C_dash_initial_velocity;
-        /* 0x130 */ f32 x130_dashrun_acceleration_a;
-        /* 0x134 */ f32 x134_dashrun_acceleration_b;
-        /* 0x138 */ f32 x138_dashrun_terminal_velocity;
-        /* 0x13C */ f32 x13C_run_animation_scaling;
-        /* 0x140 */ f32 x140_max_runbrake_frames;
-        /* 0x144 */ f32 x144_grounded_max_horizontal_velocity;
-        /* 0x148 */ f32 x148_jump_startup_time;
-        /* 0x14C */ f32 x14C_jump_h_initial_velocity;
-        /* 0x150 */ f32 x150_jump_v_initial_velocity;
-        /* 0x154 */ f32 x154_ground_to_air_jump_momentum_multiplier;
-        /* 0x158 */ f32 x158_jump_h_max_velocity;
-        /* 0x15C */ f32 x15C_hop_v_initial_velocity;
-        /* 0x160 */ f32 x160_air_jump_v_multiplier;
-        /* 0x164 */ f32 x164_air_jump_h_multiplier;
-        /* 0x168 */ int x168_max_jumps;
-        /* 0x16C */ f32 x16C_gravity;
-        /* 0x170 */ f32 x170_terminal_velocity;
-        /* 0x174 */ f32 x174_aerialDriftStickMult;
-        /* 0x178 */ f32 x178_aerialDriftBase;
-        /* 0x17C */ f32 x17C_aerialDriftMax;
-        /* 0x180 */ f32 x180_aerialFriction;
-        /* 0x184 */ f32 x184_fastfall_velocity;
-        /* 0x188 */ f32 x188_horizontal_air_mobility_constant;
-        /* 0x18C */ int x18C_jab_2_input_window;
-        /* 0x190 */ int x190_jab_3_input_window;
-        /* 0x194 */ int x194_frames_to_change_direction_on_standing_turn;
-        /* 0x198 */ f32 x198_weight;
-        /* 0x19C */ f32 x19C_model_scaling;
-        /* 0x1A0 */ f32 x1A0_initial_shield_size;
-        /* 0x1A4 */ f32 x1A4_shield_break_initial_velocity;
-        /* 0x1A8 */ int x1A8_rapid_jab_window;
-        /* 0x1AC */ int x1AC_unknown1AC;
-        /* 0x1B0 */ int x1B0_unknown1B0;
-        /* 0x1B4 */ int x1B4_unknown1B4;
-        /* 0x1B8 */ f32 x1B8_ledge_jump_horizontal_velocity;
-        /* 0x1BC */ f32 x1BC_ledge_jump_vertical_velocity;
-        /* 0x1C0 */ f32 x1C0_item_throw_velocity_multiplier;
-        /* 0x1C4 */ int x1C4_unknown1C4;
-        /* 0x1C8 */ int x1C8_unknown1C8;
-        /* 0x1CC */ int x1CC_unknown1CC;
-        /* 0x1D0 */ int x1D0_unknown1D0;
-        /* 0x1D4 */ int x1D4_unknown1D4;
-        /* 0x1D8 */ int x1D8_unknown1D8;
-        /* 0x1DC */ int x1DC_unknown1DC;
-        /* 0x1E0 */ int x1E0_unknown1E0;
-        /* 0x1E4 */ int x1E4_unknown1E4;
-        /* 0x1E8 */ int x1E8_unknown1E8;
-        /* 0x1EC */ int x1EC_unknown1EC;
-        /* 0x1F0 */ f32 x1F0_kirby_b_star_damage;
-        /* 0x1F4 */ f32 x1F4_normal_landing_lag;
-        /* 0x1F8 */ f32 x1F8_n_air_landing_lag;
-        /* 0x1FC */ f32 x1FC_f_air_landing_lag;
-        /* 0x200 */ f32 x200_b_air_landing_lag;
-        /* 0x204 */ f32 x204_u_air_landing_lag;
-        /* 0x208 */ f32 x208_d_air_landing_lag;
-        /* 0x20C */ f32 x20C_nametag_height;
-        /* 0x210 */ int x210_unknown210;
-        /* 0x214 */ f32 x214_wall_jump_horizontal_velocity;
-        /* 0x218 */ f32 x218_wall_jump_vertical_velocity;
-        /* 0x21C */ int x21C_unknown21C;
-        /* 0x220 */ f32 x220_trophy_scale;
-        /* 0x224 */ int x224_unknown224;
-        /* 0x228 */ int x228_unknown228;
-        /* 0x22C */ int x22C_unknown22C;
-        /* 0x230 */ int x230_unknown230;
-        /* 0x234 */ int x234_unknown234;
-        /* 0x238 */ int x238_unknown238;
-        /* 0x23C */ int x23C_unknown23C;
-        /* 0x240 */ int x240_unknown240;
-        /* 0x244 */ int x244_unknown244;
-        /* 0x248 */ int x248_unknown248;
-        /* 0x24C */ int x24C_unknown24C;
-        /* 0x250 */ int x250_unknown250;
-        /* 0x254 */ int x254_unknown254;
-        /* 0x258 */ f32 x258; // used
-        /* 0x25C */ f32 x25C_bubble_ratio;
-        /* 0x260 */ int x260_unknown260;
-        /* 0x264 */ int x264_unknown264;
-        /* 0x268 */ int x268_unknown268;
-        /* 0x26C */ int x26C_unknown26C;
-        /* 0x270 */ f32 x270_respawn_platform_scale;
-        /* 0x274 */ int x274_unknown274;
-        /* 0x278 */ int x278_unknown278;
-        /* 0x27C */ int x27C_camera_zoom_target_bone;
-        /* 0x280 */ int x280_unknown280;
-        /* 0x284 */ int x284_unknown284;
-        /* 0x288 */ int x288_unknown288;
-        /* 0x28C */ int x28C_special_jump_action___1;
-        /* 0x290 */ int x290_weight_dependent_throw_speed_flags;
-    } x110_attr;
+	struct attr
+	{
+		/* 0x110 */ f32 x110_walk_initial_velocity;
+		/* 0x114 */ f32 x114_walk_acceleration;
+		/* 0x118 */ f32 x118_walk_maximum_velocity;
+		/* 0x11C */ f32 x11C_slow_walk_max;
+		/* 0x120 */ f32 x120_mid_walk_point;
+		/* 0x124 */ f32 x124_fast_walk_min;
+		/* 0x128 */ f32 x128_ground_friction; // used
+		/* 0x12C */ f32 x12C_dash_initial_velocity;
+		/* 0x130 */ f32 x130_dashrun_acceleration_a;
+		/* 0x134 */ f32 x134_dashrun_acceleration_b;
+		/* 0x138 */ f32 x138_dashrun_terminal_velocity;
+		/* 0x13C */ f32 x13C_run_animation_scaling;
+		/* 0x140 */ f32 x140_max_runbrake_frames;
+		/* 0x144 */ f32 x144_grounded_max_horizontal_velocity;
+		/* 0x148 */ f32 x148_jump_startup_time;
+		/* 0x14C */ f32 x14C_jump_h_initial_velocity;
+		/* 0x150 */ f32 x150_jump_v_initial_velocity;
+		/* 0x154 */ f32 x154_ground_to_air_jump_momentum_multiplier;
+		/* 0x158 */ f32 x158_jump_h_max_velocity;
+		/* 0x15C */ f32 x15C_hop_v_initial_velocity;
+		/* 0x160 */ f32 x160_air_jump_v_multiplier;
+		/* 0x164 */ f32 x164_air_jump_h_multiplier;
+		/* 0x168 */ int x168_max_jumps;
+		/* 0x16C */ f32 x16C_gravity;
+		/* 0x170 */ f32 x170_terminal_velocity;
+		/* 0x174 */ f32 x174_aerialDriftStickMult;
+		/* 0x178 */ f32 x178_aerialDriftBase;
+		/* 0x17C */ f32 x17C_aerialDriftMax;
+		/* 0x180 */ f32 x180_aerialFriction;
+		/* 0x184 */ f32 x184_fastfall_velocity;
+		/* 0x188 */ f32 x188_horizontal_air_mobility_constant;
+		/* 0x18C */ int x18C_jab_2_input_window;
+		/* 0x190 */ int x190_jab_3_input_window;
+		/* 0x194 */ int x194_frames_to_change_direction_on_standing_turn;
+		/* 0x198 */ f32 x198_weight;
+		/* 0x19C */ f32 x19C_model_scaling;
+		/* 0x1A0 */ f32 x1A0_initial_shield_size;
+		/* 0x1A4 */ f32 x1A4_shield_break_initial_velocity;
+		/* 0x1A8 */ int x1A8_rapid_jab_window;
+		/* 0x1AC */ int x1AC_unknown1AC;
+		/* 0x1B0 */ int x1B0_unknown1B0;
+		/* 0x1B4 */ int x1B4_unknown1B4;
+		/* 0x1B8 */ f32 x1B8_ledge_jump_horizontal_velocity;
+		/* 0x1BC */ f32 x1BC_ledge_jump_vertical_velocity;
+		/* 0x1C0 */ f32 x1C0_item_throw_velocity_multiplier;
+		/* 0x1C4 */ int x1C4_unknown1C4;
+		/* 0x1C8 */ int x1C8_unknown1C8;
+		/* 0x1CC */ int x1CC_unknown1CC;
+		/* 0x1D0 */ int x1D0_unknown1D0;
+		/* 0x1D4 */ int x1D4_unknown1D4;
+		/* 0x1D8 */ int x1D8_unknown1D8;
+		/* 0x1DC */ int x1DC_unknown1DC;
+		/* 0x1E0 */ int x1E0_unknown1E0;
+		/* 0x1E4 */ int x1E4_unknown1E4;
+		/* 0x1E8 */ int x1E8_unknown1E8;
+		/* 0x1EC */ int x1EC_unknown1EC;
+		/* 0x1F0 */ f32 x1F0_kirby_b_star_damage;
+		/* 0x1F4 */ f32 x1F4_normal_landing_lag;
+		/* 0x1F8 */ f32 x1F8_n_air_landing_lag;
+		/* 0x1FC */ f32 x1FC_f_air_landing_lag;
+		/* 0x200 */ f32 x200_b_air_landing_lag;
+		/* 0x204 */ f32 x204_u_air_landing_lag;
+		/* 0x208 */ f32 x208_d_air_landing_lag;
+		/* 0x20C */ f32 x20C_nametag_height;
+		/* 0x210 */ int x210_unknown210;
+		/* 0x214 */ f32 x214_wall_jump_horizontal_velocity;
+		/* 0x218 */ f32 x218_wall_jump_vertical_velocity;
+		/* 0x21C */ int x21C_unknown21C;
+		/* 0x220 */ f32 x220_trophy_scale;
+		/* 0x224 */ int x224_unknown224;
+		/* 0x228 */ int x228_unknown228;
+		/* 0x22C */ int x22C_unknown22C;
+		/* 0x230 */ int x230_unknown230;
+		/* 0x234 */ int x234_unknown234;
+		/* 0x238 */ int x238_unknown238;
+		/* 0x23C */ int x23C_unknown23C;
+		/* 0x240 */ int x240_unknown240;
+		/* 0x244 */ int x244_unknown244;
+		/* 0x248 */ int x248_unknown248;
+		/* 0x24C */ int x24C_unknown24C;
+		/* 0x250 */ int x250_unknown250;
+		/* 0x254 */ int x254_unknown254;
+		/* 0x258 */ f32 x258; // used
+		/* 0x25C */ f32 x25C_bubble_ratio;
+		/* 0x260 */ int x260_unknown260;
+		/* 0x264 */ int x264_unknown264;
+		/* 0x268 */ int x268_unknown268;
+		/* 0x26C */ int x26C_unknown26C;
+		/* 0x270 */ f32 x270_respawn_platform_scale;
+		/* 0x274 */ int x274_unknown274;
+		/* 0x278 */ int x278_unknown278;
+		/* 0x27C */ int x27C_camera_zoom_target_bone;
+		/* 0x280 */ int x280_unknown280;
+		/* 0x284 */ int x284_unknown284;
+		/* 0x288 */ int x288_unknown288;
+		/* 0x28C */ int x28C_special_jump_action___1;
+		/* 0x290 */ int x290_weight_dependent_throw_speed_flags;
+	} x110_attr;
 	u8 filler_x294[0x2D4 - 0x294];
 	/* 0x2D4 */ void* x2D4_specialAttributes;
 	/* 0x2D8 */ void* x2D8_specialAttributes2;
@@ -268,10 +322,11 @@ typedef struct _Fighter {
 	/* 0x61D */ s8 x61D;
 	u8 filler_x61E[0x620 - 0x61E];
 	/* 0x620 */ f32 x620_lstick_x;
-	u8 filler_x620[0x670 - 0x624];
+	f32 x624;
+	u8 filler_x624[0x670 - 0x628];
 	/* 0x670 */ u8 x670_timer_lstick_tilt_x;
 	u8 filler_x670[0x68C - 0x671];
-	/* 0x68C */ Vec3 x68C_transNPos;
+	/* 0x68C */ Vec3 x68C;
 	u8 filler_x698[0x6A4-0x698];
 	/* 0x6A4 */ Vec3 x6A4_transNOffset;
 	u8 filler_x6B0[0x6BC-0x6B0];
@@ -285,7 +340,7 @@ typedef struct _Fighter {
 	/* 0x6E0 */ f32 x6E0;
 	u8 filler_x6E4[0x6F0 - 0x6E4];
 	/* 0x6F0 */ CollData x6F0_collData;
-	u8 filler_x6F0[0x894 - 0x6F0 - sizeof(CollData)];
+	/* 0x890 */ CameraBox* x890;
 	/* 0x894 */ f32 x894;
 	/* 0x898 */ f32 x898;
 	/* 0x89C */ f32 x89C;
@@ -350,7 +405,7 @@ typedef struct _Fighter {
 	/* 0x1964 */ f32 x1964;
 	/* 0x1968 */ u8 x1968_jumpsUsed;
 	/* 0x1969 */ u8 x1969_walljumpUsed;
-	/* 0x196C */ f32 x196C_hitlagMult;
+	/* 0x196C */ int x196C;
 	/* 0x1970 */ int x1970;
 	/* 0x1974 */ void* x1974_heldItem;
 	/* 0x1978 */ HSD_GObj* x1978;
@@ -478,22 +533,8 @@ typedef struct _Fighter {
 	{
 		struct
 		{
-			u8 x221C_0 : 1;
-			u8 x221C_1 : 1;
-			u8 x221C_2 : 1;
-			u8 x221C_3 : 1;
-			u8 x221C_4 : 1;
-			u8 x221C_5 : 1;
-			u8 x221C_6_hitstun : 1; // used
-			u8 x221C_7 : 1;
-			u8 x221D_0 : 1;
-			u8 x221D_1 : 1;
-			u8 x221D_2 : 1;
-			u8 x221D_3 : 1; // input enable
-			u8 x221D_4 : 1;
-			u8 x221D_5 : 1; // nudge disable
-			u8 x221D_6 : 1; // ground ignore
-			u8 x221D_7 : 1;
+			UnkFlagStruct x221C_flag;
+			UnkFlagStruct x221D_flag;
 		};
 		struct
 		{
@@ -535,25 +576,7 @@ typedef struct _Fighter {
 	/* 0x2358 */ float x2358_stateVar7;
 } Fighter;
 
-typedef struct // ftCommonData
-{
-	u8 filler_x0[0x98];
-	/* 0x98 */ f32 x98_shieldHealthInit;
-	u8 filler_x9C[0x200-0x9C];
-	/* 0x200 */ f32 x200;
-	/* 0x204 */ f32 x204_knockbackFrameDecay;
-	u8 filler_x208[0x3E8-0x208];
-	/* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
-	/* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
-	u8 filler_x3F0[0x768-0x3F0];
-	/* 0x768 */ float x768;
-	/* 0x76C */ float x76C;
-	/* 0x770 */ float x770;
-	/* 0x774 */ s32 x774;
-	// lots of more data following, exact size to be determined
-} ftCommonData;
-
-
+// functions from fighter.s
 void func_800679B0();
 void func_80067A84();
 void func_80067ABC();

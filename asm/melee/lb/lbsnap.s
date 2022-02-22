@@ -1208,9 +1208,8 @@ lbl_803BAD9C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3828
 lbl_804D3828:
     .asciz "%u"
     .balign 4
-    .4byte NULL

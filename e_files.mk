@@ -8,7 +8,10 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/lb/lbfile.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbarchive.o\
 	$(EPILOGUE_DIR)/src/melee/ft/fighter.o\
+	$(EPILOGUE_DIR)/src/melee/ft/ftcliffcommon.o 		\
 	$(EPILOGUE_DIR)/src/melee/ft/ftwalljump.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftdrmario.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftdrmario_2.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftemblem.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftfalco.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftfox.o\
@@ -34,6 +37,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/archive.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/displayfunc.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/controller.o\
+	$(EPILOGUE_DIR)/src/sysdolphin/baselib/rumble.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/shadow.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/class.o\

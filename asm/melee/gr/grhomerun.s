@@ -3050,7 +3050,7 @@ lbl_803E8294:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4998
 lbl_804D4998:
     .4byte 0x0000000A
@@ -3087,11 +3087,10 @@ lbl_804D49CC:
 lbl_804D49D0:
     .asciz "%d"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AD8
 lbl_804D6AD8:
 	.skip 0x4
@@ -3106,11 +3105,11 @@ lbl_804D6AE4:
 	.skip 0x4
 .global lbl_804D6AE8
 lbl_804D6AE8:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBC18
 lbl_804DBC18:
 	.4byte 0x40400000

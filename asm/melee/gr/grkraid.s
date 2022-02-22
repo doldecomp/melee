@@ -1286,10 +1286,9 @@ lbl_801FF15C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8278
 lbl_803B8278:
-    .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
@@ -1375,11 +1374,10 @@ lbl_803E4D70:
 lbl_803E4D8C:
     .asciz "Kraid Hand Pos = %f\n"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4770
 lbl_804D4770:
     .asciz "jobj.h"
@@ -1391,7 +1389,7 @@ lbl_804D4778:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A08
 lbl_804D6A08:
 	.skip 0x4
@@ -1401,7 +1399,7 @@ lbl_804D6A0C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB620
 lbl_804DB620:
 	.4byte 0x00000000

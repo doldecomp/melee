@@ -1338,7 +1338,7 @@ lbl_80219528:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8440
 lbl_803B8440:
     .4byte 0x00000000
@@ -1521,7 +1521,7 @@ lbl_803E7CCC:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4930
 lbl_804D4930:
     .asciz "0"
@@ -1544,14 +1544,14 @@ lbl_804D4948:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AB8
 lbl_804D6AB8:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBAF0
 lbl_804DBAF0:
 	.4byte 0x3F000000

@@ -2955,7 +2955,7 @@ jtbl_803C08DC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D82A0
 lbl_804D82A0:
 	.4byte 0x3B7FFBCE

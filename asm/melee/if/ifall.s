@@ -537,18 +537,17 @@ lbl_802F3AC0:
 lbl_803F94D0:
     .asciz "ScInfDmg_scene_data"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0FD8
 lbl_804A0FD8:
 	.skip 0xA0
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5780
 lbl_804D5780:
     .asciz "IfAll"
@@ -556,7 +555,7 @@ lbl_804D5780:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6D58
 lbl_804D6D58:
 	.skip 0x4
@@ -566,7 +565,7 @@ lbl_804D6D5C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DDA30
 lbl_804DDA30:
 	.4byte 0x3F266666
