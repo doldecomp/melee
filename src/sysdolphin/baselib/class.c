@@ -51,82 +51,90 @@ void OSReport_PrintSpaces(s32 count) {
     }
 }
 
-// https://decomp.me/scratch/w72tp
+// https://decomp.me/scratch/7Z4cL
+
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 {
-    HSD_MemoryEntry** new_list;
-    HSD_MemoryEntry** old_list;
-    HSD_MemoryEntry* entry;
-    s32 i;
-    BOOL found;
-
     if (idx < 0) {
         __assert(__FILE__, 171, "idx >= 0");
     }
 
     if (idx >= nb_memory_list) {
         if (nb_memory_list == 0) { //In this case, it's uninitialized and allocs the array
-            s32 new_nb;
-            for (new_nb = 32; idx >= new_nb; new_nb *= 2) {
+            s32 new_nb = 32;
+
+            while(idx >= new_nb) {
+                 new_nb *= 2;
             }
-            memory_list = (HSD_MemoryEntry**)HSD_MemAlloc(new_nb * 4);
+            new_nb *= 4;
+            memory_list = HSD_MemAlloc(new_nb);
             if (memory_list == NULL) {
                 return NULL;
             }
-            memset(memory_list, 0, new_nb*4);
+            memset(memory_list, 0, new_nb);
             nb_memory_list = new_nb;
         } else { //Resizes the array
-            s32 new_nb, old_nb;
+            HSD_MemoryEntry** old_list;
+            HSD_MemoryEntry** new_list;
+            s32 old_nb, new_nb;
 
             new_nb = nb_memory_list * 2;
-            while (idx >= new_nb){
+            while (idx >= new_nb) {
                 new_nb *= 2;
             }
             
-            new_list = (HSD_MemoryEntry**)HSD_MemAlloc(4 * new_nb);
-            if (new_list == NULL)
+            new_list = HSD_MemAlloc(4 * new_nb);
+            if (new_list == NULL) {
                 return NULL;
+            }
             
             memcpy(new_list, memory_list, 4 * nb_memory_list);
             memset(&new_list[nb_memory_list], 0, 4 * (new_nb - nb_memory_list)); //You start *after* existing ptrs and make sure memory is zero'd
 
-            old_nb = nb_memory_list;
             old_list = memory_list;
+            old_nb = nb_memory_list;
             memory_list = new_list;
             nb_memory_list = new_nb;
-            old_nb = (old_nb * 4) & ~0x1F;
             
-            hsdFreeMemPiece(old_list, old_nb);
-            memory_list[(((new_nb + 31) >> 5) & 0x7FFFFFF) - 1]->nb_alloc += 1;
+            hsdFreeMemPiece(old_list[old_nb], old_nb);
+            memory_list[(((new_nb + 31) >> 3) & 0x1FFFFFFC) - 1]->nb_alloc += 1;
         }
     }
 
-    if (memory_list[idx] == NULL) {
-        entry = (HSD_MemoryEntry*)HSD_MemAlloc(sizeof(HSD_MemoryEntry));
-        if (entry == NULL) {
-            return NULL;
-        }
-        memset(entry, 0, sizeof(HSD_MemoryEntry));
-        entry->total_bits = (idx + 1) * 32;
-        memory_list[idx] = entry;
-            
-        found = FALSE;
-        for (i = idx - 1; i >= 0; --i) {
-            if (memory_list[i] != NULL) {
-                found = TRUE;
-                entry->next = memory_list[i]->next;
-                memory_list[i]->next = entry;
-                break;
+    {
+        s32 i;
+        u32 size;
+        BOOL found;
+        HSD_MemoryEntry* entry;
+
+        size = idx * 4;
+        if (memory_list[idx] == NULL) {
+            entry = HSD_MemAlloc(sizeof(HSD_MemoryEntry));
+            if (entry == NULL) {
+                return NULL;
             }
-        }
-        if (found == FALSE) {
-            for (i = idx + 1; i < nb_memory_list; i++) {
+            memset(entry, 0, sizeof(HSD_MemoryEntry));
+            entry->total_bits = (idx + 1) * 32;
+            memory_list[idx] = entry;
+            
+            found = FALSE;
+            for (i = idx - 1; i >= 0; --i) {
                 if (memory_list[i] != NULL) {
-                    entry->next = memory_list[i];
+                    found = TRUE;
+                    entry->next = memory_list[i]->next;
+                    memory_list[i]->next = entry;
                     break;
                 }
             }
+            if (found == FALSE) {
+                for (i = idx + 1; i < nb_memory_list; i++) {
+                    if (memory_list[i] != NULL) {
+                        entry->next = memory_list[i];
+                        break;
+                    }
+                }
+            }
         }
+        return memory_list[idx];
     }
-    return memory_list[idx];
 }
