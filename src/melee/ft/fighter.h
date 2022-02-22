@@ -140,7 +140,7 @@ typedef struct _Fighter {
 	/* 0xBC */ Vec3 xBC_prevPos;
 	/* 0xC8 */ Vec3 xC8_pos_delta;
 	/* 0xD4 */ Vec3 xD4_unkVel;
-	/* 0xE0 */ u32 xE0_airState;
+	/* 0xE0 */ s32 xE0_airState;
 	/* 0xE4 */ f32 xE4_groundAccel1;
 	/* 0xE8 */ f32 xE8_groundAccel2;
 	/* 0xEC */ f32 xEC_groundVel;

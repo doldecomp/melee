@@ -46,16 +46,14 @@ inline s32 __fpclassifyd(double x)
 
 // ==== external functions ====
 // ============================
-// TODO: put this in functions.h, same for ftkoopa.c
-extern void* func_8007E2F4(); // ftcommon.s
+// TODO: check which of these can be #included instead.
+// Move to functions.h when we figured out all the prototypes
 
 s32 func_800567C0(s32 groundID, Vec3* pos, Vec3* out_delta);
-
 void func_80088148(Fighter*, s32, s32, s32); // SFX_PlayCharacterSFX
 s32 func_80322258(f32 x); // PositionXBetweenLedgesMinDelta
 void func_8007AF28(HSD_GObj* fighterObj); // Hurtbox_SetAllNotUpdated
-
-// TODO: check which of these can be #included instead. Move to functions.h when we figure out the prototypes
+extern void* func_8007E2F4(); // ftcommon.s, prototype also defined in ftkoopa.c
 void func_8000B1CC();
 void func_8000D148();
 void func_8000ED54();
@@ -279,7 +277,6 @@ void func_8037A250();
 void func_8038FD54();
 void func_803901F0();
 void func_80390A70();
-
 void func_80067688(void*);
 void func_80076064(Fighter*);
 void func_8007AFF8(HSD_GObj*);
@@ -304,7 +301,6 @@ void func_800C8438(HSD_GObj*);
 void func_800C89A0(HSD_GObj*);
 void func_800C8FC4(HSD_GObj*);
 void func_800D105C(HSD_GObj*);
-
 void HSD_JObjSetMtxDirtySub(void*); // sysdolphin/baselib/jobj.s
 void HSD_JObjRemoveAll(HSD_JObj*); // sysdolphin/baselib/jobj.s
 void PSVECAdd(Vec3* a, Vec3* b, Vec3* result); // asm/dolphin/mtx/vec.s
@@ -315,35 +311,36 @@ void* HSD_JObjAnimAll(); // asm/sysdolphin/baselib/jobj.s
 
 // ==== external variables ====
 // ============================
+
+// external vars from asm/melee/ft/code_8008521C.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
-extern ft_callback ft_OnLoad[33];  // One load  callback for every character. asm/melee/ft/code_8008521C.s:106254
-extern ft_callback ft_OnDeath[33]; // One death callback for every character. asm/melee/ft/code_8008521C.s:106291
-
 typedef void (*fn_ptr_t)();
-extern fn_ptr_t lbl_803C10D0[33]; // ft/code_8008521C.s
+extern ft_callback ft_OnLoad[33];  // One load  callback for every character.
+extern ft_callback ft_OnDeath[33]; // One death callback for every character.
+extern fn_ptr_t lbl_803C10D0[33];
 
-extern void* ft_OnAbsorb; // asm/melee/ft/code_8008521C.s
+extern void* ft_OnAbsorb;
+extern s32 lbl_803C0EC0;
+extern s32 lbl_803C125C;
+extern s32 lbl_803C12E0;
+extern s32 lbl_803C1DB4;
+extern s32 lbl_803C26FC;
+extern s32 lbl_803C2800;
+extern s32 lbl_804598B8;
 
-extern s32 lbl_803C0EC0; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C125C; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C12E0; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C1DB4; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C26FC; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_803C2800; // asm/melee/ft/code_8008521C.s
-extern s32 lbl_804598B8; // asm/melee/ft/code_8008521C.s
-
-extern HSD_ObjAllocData lbl_804590AC; // ft/ftparts.s
+extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
 
 #include "sysdolphin/baselib/controller.h"
-extern HSD_RumbleData HSD_PadRumbleData[4];
+extern HSD_RumbleData HSD_PadRumbleData[4]; // from sysdolphin/baselib/controller.s
 
 typedef struct StageInfo { u8 filler[0x748]; };
-extern StageInfo* stage_info;
+extern StageInfo* stage_info; // from asm/melee/text_2.s
 
+// TODO: rename this var globally
 extern s32 lbl_804D4A08; // asm/melee/db/code_80225374.s
 #define g_debugLevel lbl_804D4A08
-extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
+extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
 // ==== fighter.c variables ====
 // =============================
@@ -378,13 +375,12 @@ extern HSD_ObjAllocData lbl_80458FFC;
 extern const char* lbl_804D3A00;// = "jobj.h";
 extern const char* lbl_804D3A08;// = "jobj";
 extern const char* lbl_804D3A10;// = "0";
-    //.asciz "0"
-    //.balign 4
-    //.4byte NULL
 
 // .section .sbss
 
-u32 lbl_804D64F8 = 0; // spawn number
+// TODO: verify that this is really a spawn number counter, then rename this var globally
+u32 lbl_804D64F8 = 0;
+#define g_spawnNumCounter lbl_804D64F8
 
 // the following seems to be an array, initialized in reverse in func_80067ABC
 void* lbl_804D64FC = 0;
@@ -447,7 +443,7 @@ void func_800679B0()
 	HSD_ObjAllocInit(&lbl_80458FD0+3, /*size*/0x1f0, /*align*/4);
 	HSD_ObjAllocInit(&lbl_80458FD0+4, /*size*/0x80 , /*align*/4);
 
-	lbl_804D64F8 = 1;
+	g_spawnNumCounter = 1;
 
 	for (i = 0; i < 33; i++)
 	{
@@ -1344,7 +1340,7 @@ asm void func_80067C98()
 #endif
 
 #ifdef FIGHTER_DONE
-// https://decomp.me/scratch/NBWRY
+// https://decomp.me/scratch/nid7o
 // Matches
 typedef struct
 {
@@ -2226,9 +2222,9 @@ lbl_80068B08:
 // increments the spawn number, returns the spawn number value before incrementing
 u32 func_80068E40()
 {
-	u32 spawnNum = lbl_804D64F8++;
-    if (lbl_804D64F8 == 0)
-        lbl_804D64F8 = 1;
+	u32 spawnNum = g_spawnNumCounter++;
+    if (g_spawnNumCounter == 0)
+        g_spawnNumCounter = 1;
 	return spawnNum;
 }
 #pragma pop
@@ -5204,6 +5200,8 @@ lbl_8006B80C:
 
 
 #if 0
+// https://decomp.me/scratch/WtgBX old version, full match, uses extra parameter that may not exist
+// https://decomp.me/scratch/XNVy4 new version that uses the same context as in fighter.h. Has stackalloc issues, I don't know why.
 // 8006B82C
 void /*fighter_procUpdate*/func_8006B82C(HSD_GObj* pPlayerEntityStruct)
 {
