@@ -78,11 +78,11 @@ void func_80081370(HSD_GObj* gobj) {
     func_80088148(fighter, 4, 0x7F, 0x40);
 }
 
-void func_80081504(s32 arg0)
+void func_80081504(HSD_GObj* gobj)
 {
-    if (func_8006F238() == 0)
+    if (func_8006F238(gobj) == 0)
     {
-        func_8009A804(arg0);
+        func_8009A804(gobj);
     }
 }
 

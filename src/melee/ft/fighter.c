@@ -381,29 +381,29 @@ extern u32 lbl_804D64F8;// = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
 // the following seems to be an array, initialized in reverse in func_80067ABC
-extern void* lbl_804D64FC;// = 0;
-extern void* lbl_804D6500;// = 0;
-extern void* lbl_804D6504;// = 0;
-extern void* lbl_804D6508;// = 0;
-extern void* lbl_804D650C;// = 0;
-extern void* lbl_804D6510;// = 0;
-extern void* lbl_804D6514;// = 0;
-extern void* lbl_804D6518;// = 0;
-extern void* lbl_804D651C;// = 0;
-extern void* lbl_804D6520;// = 0;
-extern void* lbl_804D6524;// = 0;
-extern void* lbl_804D6528;// = 0;
-extern void* lbl_804D652C;// = 0;
-extern void* lbl_804D6530;// = 0;
-extern void* lbl_804D6534;// = 0;
-extern void* lbl_804D6538;// = 0;
-extern void* lbl_804D653C;// = 0;
-extern void* lbl_804D6540;// = 0;
-extern void* lbl_804D6544;// = 0;
-extern void* lbl_804D6548;// = 0;
-extern void* lbl_804D654C;// = 0;
-extern void* lbl_804D6550;// = 0;
-extern ftCommonData* lbl_804D6554;// = 0; // p_ftCommonData
+//void* lbl_804D64FC;// = 0;
+//void* lbl_804D6500;// = 0;
+//void* lbl_804D6504;// = 0;
+//void* lbl_804D6508;// = 0;
+//void* lbl_804D650C;// = 0;
+//void* lbl_804D6510;// = 0;
+//void* lbl_804D6514;// = 0;
+//void* lbl_804D6518;// = 0;
+//void* lbl_804D651C;// = 0;
+//void* lbl_804D6520;// = 0;
+//void* lbl_804D6524;// = 0;
+//void* lbl_804D6528;// = 0;
+//void* lbl_804D652C;// = 0;
+//void* lbl_804D6530;// = 0;
+//void* lbl_804D6534;// = 0;
+//void* lbl_804D6538;// = 0;
+//void* lbl_804D653C;// = 0;
+//void* lbl_804D6540;// = 0;
+//void* lbl_804D6544;// = 0;
+//void* lbl_804D6548;// = 0;
+//void* lbl_804D654C;// = 0;
+//void* lbl_804D6550;// = 0;
+//ftCommonData* lbl_804D6554;// = 0; // p_ftCommonData
 #define p_ftCommonData lbl_804D6554 
  
 // .section .sdata2
@@ -807,9 +807,9 @@ void func_80067C98(Fighter* r27)
 	r27->x221C_1 = 0;
 
 	r27->x19A0_shieldDamageTaken = 0;
-	r27->x19A4_shieldDamageTaken2 = 0;
+	r27->x19A4 = 0;
 	r27->x199C_shieldLightshieldAmt = 0.0f;//lbl_804D8254
-	r27->x19A8_shieldDamageSource = 0;
+	r27->x19A8 = 0;
 	r27->x19B4_shieldUnk = 0.0f;//lbl_804D8254
 	r27->x19B8_shieldUnk = 0.0f;//lbl_804D8254
 	r27->x19BC_shieldDamageTaken3 = 6;

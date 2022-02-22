@@ -50,7 +50,9 @@ typedef struct _ftCommonData {
     u8 filler_x9C[0x200-0x9C];
     /* 0x200 */ f32 x200;
     /* 0x204 */ f32 x204_knockbackFrameDecay;
-    u8 filler_x208[0x3E8-0x208];
+    u8 filler_x208[0x294-0x208];
+    /* 0x294 */ f32 x294;
+    u8 filler_x298[0x3E8-0x298];
     /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
     /* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
     u8 filler_x3F0[0x480-0x3F0];
@@ -313,8 +315,10 @@ typedef struct _Fighter {
     /* 0x594 */ u8 x594_animCurrFlags1;
     u8 filler_x595[0x5E8 - 0x595];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
-    u8 filler_x5EC[0x60C - 0x5EC];
-    s32 x60C;
+    u8 filler_x5EC[0x5F8 - 0x5EC];
+    /* 0x5F8 */ s8 x5F8;
+    u8 filler_x5FC[0x60C - 0x5F9];
+    /* 0x60C */ void* x60C;
     u8 filler_x610[0x618 - 0x610];
     /* 0x618 */ s8 x618_flag;
     /* 0x619 */ s8 x619_flag;
@@ -419,9 +423,10 @@ typedef struct _Fighter {
     /* 0x1998 */ f32 x1998_shieldHealth;
     /* 0x199C */ f32 x199C_shieldLightshieldAmt;
     /* 0x19A0 */ s32 x19A0_shieldDamageTaken;
-    /* 0x19A4 */ s32 x19A4_shieldDamageTaken2;
-    /* 0x19A8 */ HSD_GObj* x19A8_shieldDamageSource;
-    s32 filler_x19AC[2];
+    /* 0x19A4 */ void* x19A4;
+    /* 0x19A8 */ void* x19A8;
+    /* 0x19AC */ f32 x19AC;
+    s32 filler_x19B0;
     /* 0x19B4 */ f32 x19B4_shieldUnk;
     /* 0x19B8 */ f32 x19B8_shieldUnk;
     /* 0x19BC */ s32 x19BC_shieldDamageTaken3;
