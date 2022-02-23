@@ -129,4 +129,30 @@ typedef struct _HSD_JObjInfo {
 
 extern HSD_JObjInfo hsdJObj;
 
+void HSD_JObjSetupMatrixSub(HSD_JObj*);
+
+#pragma push
+#pragma always_inline on
+inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
+{
+    BOOL result;
+
+    if (jobj == NULL) {
+        __assert("jobj.h", 564, "jobj");
+    }
+    result = FALSE;
+    if ((jobj->flags & 0x800000) == 0 && (jobj->flags & 0x40) != 0) {
+        result = TRUE;
+    }
+    return result;
+}
+
+inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
+{
+    if (jobj != NULL && HSD_JObjMtxIsDirty(jobj)) {
+        HSD_JObjSetupMatrixSub(jobj);
+    }
+}
+#pragma pop
+
 #endif

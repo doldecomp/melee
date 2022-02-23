@@ -380,7 +380,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/robj.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/id.c.o        \
 	$(BUILD_DIR)/src/sysdolphin/baselib/wobj.c.o      \
-	$(BUILD_DIR)/asm/sysdolphin/baselib/wobj.s.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fog.s.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/perf.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/list.c.o		\

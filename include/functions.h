@@ -7832,7 +7832,7 @@ void PSMTXConcat(); // asm/dolphin/mtx/mtx.s
 // ? C_MTXLightFrustum(?);
 // ? C_MTXLightPerspective(?);
 // ? C_MTXLightOrtho(?);
-// ? PSMTXMUltiVec(?);
+void PSMTXMUltiVec(Mtx, Vec*, Vec*);
 // ? PSMTXMultVecSR(?);
 // ? C_MTXFrustum(?);
 // ? C_MTXPerspective(?);
@@ -8550,7 +8550,7 @@ void HSD_JObjRemoveAll(struct _HSD_JObj*); // sysdolphin/baselib/jobj.s
 // ? HSD_JObjGetCurrent(?);
 // ? func_8037231C(?);
 // ? func_80372B08(?);
-void* HSD_JObjSetupMatrixSub(); // asm/sysdolphin/baselib/jobj.s
+// void HSD_JObjSetupMatrixSub(struct _HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(void*); // sysdolphin/baselib/jobj.s
 // ? func_80373404(?);
 // ? HSD_ZListInitAllocData(?);
@@ -8697,7 +8697,7 @@ void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 // void HSD_WObjSetPositionX(struct _HSD_WObj*, f32);
 // void HSD_WObjSetPositionY(struct _HSD_WObj*, f32);
 // void HSD_WObjSetPositionZ(struct _HSD_WObj*, f32); 
-// ? func_8037D720(?);
+// ? HSD_WObjGetPosition(?);
 // ? HSD_WObjAlloc(?);
 // ? HSD_FogSet(?);
 // ? func_8037DC38(?);

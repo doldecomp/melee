@@ -39,6 +39,8 @@ typedef struct _HSD_ObjInfo {
     struct _HSD_ClassInfo parent;
 } HSD_ObjInfo;
 
+extern HSD_ClassInfo hsdObj;
+
 void ObjInfoInit(void);
 
 #endif
