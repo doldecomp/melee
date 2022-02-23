@@ -130,6 +130,7 @@ typedef struct _HSD_JObjInfo {
 extern HSD_JObjInfo hsdJObj;
 
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
+void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 
 #pragma push
 #pragma always_inline on
@@ -151,6 +152,29 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 {
     if (jobj != NULL && HSD_JObjMtxIsDirty(jobj)) {
         HSD_JObjSetupMatrixSub(jobj);
+    }
+}
+
+inline void HSD_JObjSetMtxDirty(HSD_JObj* jobj) 
+{
+    if (jobj != NULL && HSD_JObjMtxIsDirty(jobj) == FALSE) {
+        HSD_JObjSetMtxDirtySub(jobj);
+    }
+}
+
+inline HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* vec)
+{
+    if (jobj == NULL) {
+        __assert("jobj.h", 916, "jobj");
+    }
+    if (vec == NULL) {
+        __assert("jobj.h", 917, "translate");
+    }
+
+    jobj->translate = *vec;
+
+    if ((jobj->flags & 0x2000000) == 0) {
+        HSD_JObjSetMtxDirty(jobj);
     }
 }
 #pragma pop

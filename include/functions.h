@@ -8504,7 +8504,7 @@ struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
 // ? func_8036E4C4(?);
 // ? HSD_JObjCheckDepend(?);
 // ? HSD_JObjMtxIsDirty(?);
-// ? HSD_JObjSetMtxDirty(?);
+// ? JObjResetRST(?);
 // ? func_8036EFAC(?);
 // ? func_8036F0F0(?);
 // ? HSD_JObjMakeMatrix(?);
