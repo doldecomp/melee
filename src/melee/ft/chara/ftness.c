@@ -1,7 +1,5 @@
 #include "ftness.h"
 
-extern f32 lbl_804D96B0;
-
 void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* ft = gobj->user_data;
@@ -165,7 +163,7 @@ void func_80114B2C(HSD_GObj* gobj)
 
 void func_80114B6C(HSD_GObj* gobj)
 {
-    func_800704F0(gobj, 1, lbl_804D96B0);
-    func_800704F0(gobj, 0, lbl_804D96B0);
+    func_800704F0(gobj, 1, 3.0f);
+    func_800704F0(gobj, 0, 3.0f);
 }
 #pragma pop
