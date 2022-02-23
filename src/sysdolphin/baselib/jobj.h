@@ -80,25 +80,25 @@
 typedef u32 HSD_TrspMask;
 
 typedef struct _HSD_JObj {
-    HSD_Obj object;
-    struct _HSD_JObj* next;
-    struct _HSD_JObj* parent;
-    struct _HSD_JObj* child;
-    u32 flags;
-    union {
+    /* 0x00 - 0x04 */ HSD_Obj object;
+    /* 0x08 */ struct _HSD_JObj* next;
+    /* 0x0C */ struct _HSD_JObj* parent;
+    /* 0x10 */ struct _HSD_JObj* child;
+    /* 0x14 */ u32 flags;
+    /* 0x18 */ union {
         HSD_SList* ptcl;
         struct _HSD_DObj* dobj;
         struct _HSD_Spline* spline;
     } u;
-    Quaternion rotate;
-    Vec scale;
-    Vec translate;
-    Mtx mtx;
-    Vec* scl;
-    MtxPtr envelopemtx;
-    struct _HSD_AObj* aobj;
-    struct _HSD_RObj* robj;
-    u32 id;
+    /* 0x1C */ Quaternion rotate;
+    /* 0x2C */ Vec scale;
+    /* 0x38 */ Vec translate;
+    /* 0x44 */ Mtx mtx;
+    /* 0x74 */ Vec* scl;
+    /* 0x78 */ MtxPtr envelopemtx;
+    /* 0x7C */ struct _HSD_AObj* aobj;
+    /* 0x80 */ struct _HSD_RObj* robj;
+    /* 0x84 */  u32 id;
 } HSD_JObj;
 
 typedef struct _HSD_Joint {
