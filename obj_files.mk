@@ -367,6 +367,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fobj.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/pobj.c.o      \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/pobj.s.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/jobj.c.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/jobj.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/displayfunc.c.o       \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/displayfunc.s.o		\

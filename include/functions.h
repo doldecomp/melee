@@ -8502,7 +8502,7 @@ struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
 // ? func_8036E12C(?);
 // ? func_8036E268(?);
 // ? func_8036E4C4(?);
-// ? HSD_JObjCheckDependAll(?);
+// ? HSD_JObjCheckDepend(?);
 // ? JObjResetRST(?);
 // ? HSD_JObjResetRST(?);
 // ? func_8036EFAC(?);

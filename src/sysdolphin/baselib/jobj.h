@@ -129,7 +129,7 @@ typedef struct _HSD_JObjInfo {
 
 extern HSD_JObjInfo hsdJObj;
 
-void HSD_JObjCheckDependAll(HSD_JObj* jobj);
+void HSD_JObjCheckDepend(HSD_JObj* jobj);
 void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);

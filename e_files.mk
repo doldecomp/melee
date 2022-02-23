@@ -31,6 +31,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/tobj.c.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/aobj.c.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/fobj.c.o\
+	$(EPILOGUE_DIR)/src/sysdolphin/baselib/jobj.c.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/robj.c.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/wobj.c.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/texp.c.o\
