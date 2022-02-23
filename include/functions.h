@@ -8551,7 +8551,7 @@ void HSD_JObjRemoveAll(struct _HSD_JObj*); // sysdolphin/baselib/jobj.s
 // ? func_8037231C(?);
 // ? func_80372B08(?);
 // void HSD_JObjSetupMatrixSub(struct _HSD_JObj*);
-void HSD_JObjSetMtxDirtySub(void*); // sysdolphin/baselib/jobj.s
+// void HSD_JObjSetMtxDirtySub(struct _HSD_JObj*); // sysdolphin/baselib/jobj.s
 // ? func_80373404(?);
 // ? HSD_ZListInitAllocData(?);
 // ? HSD_StateInitDirect(?);
