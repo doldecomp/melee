@@ -98,4 +98,8 @@ void HSD_RObjReqAnimAllByFlags(HSD_RObj* robj, f32 startframe, u32 flags);
 void HSD_RObjReqAnimAll(HSD_RObj* robj, f32 startframe);
 void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim);
 
+void HSD_RObjRemoveAll(HSD_RObj*);
+void HSD_RObjResolveRefsAll(HSD_RObj*, HSD_RObjDesc*);
+HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc*);
+
 #endif

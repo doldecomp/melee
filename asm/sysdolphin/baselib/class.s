@@ -574,8 +574,8 @@ lbl_80382518:
 /* 80382530 0037F110  7C 08 03 A6 */	mtlr r0
 /* 80382534 0037F114  4E 80 00 20 */	blr 
 
-.global func_80382538
-func_80382538:
+.global hsdIsDescendantOf
+hsdIsDescendantOf:
 /* 80382538 0037F118  7C 08 02 A6 */	mflr r0
 /* 8038253C 0037F11C  28 03 00 00 */	cmplwi r3, 0
 /* 80382540 0037F120  90 01 00 04 */	stw r0, 4(r1)
