@@ -144,7 +144,7 @@ inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
         __assert("jobj.h", 564, "jobj");
     }
     result = FALSE;
-    if ((jobj->flags & 0x800000) == 0 && (jobj->flags & 0x40) != 0) {
+    if ((jobj->flags & USER_DEF_MTX) == 0 && (jobj->flags & MTX_DIRTY) != 0) {
         result = TRUE;
     }
     return result;
@@ -175,7 +175,7 @@ inline HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* vec)
 
     jobj->translate = *vec;
 
-    if ((jobj->flags & 0x2000000) == 0) {
+    if ((jobj->flags & MTX_INDEP_SRT) == 0) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
