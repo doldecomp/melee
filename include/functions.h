@@ -74,7 +74,7 @@ void* HSD_JObjGetMtxPtr(); // asm/melee/lb/lbcollision.s
 // ? func_8000B074(?);
 // ? func_8000B09C(?);
 // ? func_8000B134(?);
-void func_8000B1CC();
+void func_8000B1CC(void*, void*, Vec*);
 // ? func_8000B4FC(?);
 // ? func_8000B5DC(?);
 // ? func_8000B6A4(?);
