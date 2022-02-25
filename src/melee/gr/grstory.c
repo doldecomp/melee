@@ -72,3 +72,16 @@ void lbl_801E31C0(HSD_GObj* gobj)
     map->x11_flags.b012 = 2;
     func_801C8858(func_801C3FA4(gobj, 1), 0x20000000);
 }
+
+s32 lbl_801E3224(void)
+{
+    return 0;
+}
+
+void lbl_801E322C(void)
+{
+}
+
+void lbl_801E3230(void)
+{
+}
