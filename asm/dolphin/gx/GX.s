@@ -1016,8 +1016,8 @@ func_8033DE4C:
 /* 8033DE7C 0033AA5C  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033DE80 0033AA60  4E 80 00 20 */	blr 
 
-.global func_8033DE84
-func_8033DE84:
+.global GXInitLightAttn
+GXInitLightAttn:
 /* 8033DE84 0033AA64  D0 23 00 10 */	stfs f1, 0x10(r3)
 /* 8033DE88 0033AA68  D0 43 00 14 */	stfs f2, 0x14(r3)
 /* 8033DE8C 0033AA6C  D0 63 00 18 */	stfs f3, 0x18(r3)
@@ -1223,8 +1223,8 @@ func_8033E100:
 /* 8033E114 0033ACF4  D0 03 00 3C */	stfs f0, 0x3c(r3)
 /* 8033E118 0033ACF8  4E 80 00 20 */	blr 
 
-.global func_8033E11C
-func_8033E11C:
+.global GXInitLightColor
+GXInitLightColor:
 /* 8033E11C 0033ACFC  88 04 00 01 */	lbz r0, 1(r4)
 /* 8033E120 0033AD00  88 A4 00 00 */	lbz r5, 0(r4)
 /* 8033E124 0033AD04  88 C4 00 02 */	lbz r6, 2(r4)
@@ -1236,8 +1236,8 @@ func_8033E11C:
 /* 8033E13C 0033AD1C  90 03 00 0C */	stw r0, 0xc(r3)
 /* 8033E140 0033AD20  4E 80 00 20 */	blr 
 
-.global func_8033E144
-func_8033E144:
+.global GXLoadLightObjImm
+GXLoadLightObjImm:
 /* 8033E144 0033AD24  2C 04 00 10 */	cmpwi r4, 0x10
 /* 8033E148 0033AD28  41 82 00 7C */	beq lbl_8033E1C4
 /* 8033E14C 0033AD2C  40 80 00 34 */	bge lbl_8033E180
