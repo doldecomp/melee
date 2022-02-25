@@ -63,3 +63,12 @@ HSD_GObj* func_801E30D8(s32 arg0)
 
     return gobj;
 }
+
+void lbl_801E31C0(HSD_GObj* gobj)
+{
+    Map* map = gobj->user_data;
+    int unused[2];
+    func_801C8138(gobj, map->map_id, 0);
+    map->x11_flags.b012 = 2;
+    func_801C8858(func_801C3FA4(gobj, 1), 0x20000000);
+}
