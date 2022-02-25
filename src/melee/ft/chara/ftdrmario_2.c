@@ -2,8 +2,7 @@
 
 void func_80149954(HSD_GObj* gobj)
 {
-    int unused1[3];
-    f32 sp18;
+    Vec3 sp18;
     Fighter* ft;
     u32 tmp;
     int unused2[3];

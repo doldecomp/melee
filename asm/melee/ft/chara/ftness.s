@@ -7601,10 +7601,6 @@ lbl_803B75B0:
 
 
 .section .sdata2
-    .balign 8
-.global lbl_804D96B0
-lbl_804D96B0:
-	.4byte 0x40400000
 .global lbl_804D96B4
 lbl_804D96B4:
 	.4byte 0x00000000
