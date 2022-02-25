@@ -34,3 +34,32 @@ s32 lbl_801E30D0(void)
 {
     return 0;
 }
+
+HSD_GObj* func_801E30D8(s32 arg0)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &lbl_803E26F0.callbacks[arg0];
+
+    gobj = func_801C14D0(arg0);
+    if (gobj != NULL) {
+        Map* map = gobj->user_data;
+        map->x8 = 0;
+        map->xC = 0;
+        GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            map->x1C_callback = callbacks->callback3;
+        }
+        // 0x80
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        // 0x94
+        if (callbacks->callback2 != NULL) {
+            func_8038FD54(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport(lbl_803E26F0.str1, lbl_803E26F0.str2, 0xDC, arg0);
+    }
+
+    return gobj;
+}

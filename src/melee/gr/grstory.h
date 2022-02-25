@@ -3,4 +3,8 @@
 
 #include "stage.h"
 
+#include <sysdolphin/baselib/gobj.h>
+
+HSD_GObj* func_801E30D8(s32);
+
 #endif

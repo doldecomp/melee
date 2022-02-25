@@ -4584,7 +4584,7 @@ void func_801A45E8();
 // ? func_801C11AC(?);
 // ? func_801C126C(?);
 // ? func_801C13D0(?);
-void func_801C14D0();
+struct _HSD_GObj* func_801C14D0(s32);
 // ? func_801C1A20(?);
 // ? func_801C1D6C(?);
 // ? func_801C1D84(?);
