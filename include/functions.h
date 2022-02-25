@@ -4661,7 +4661,7 @@ void func_801C42AC();
 // ? func_801C466C(?);
 // ? func_801C498C(?);
 // ? func_801C49B4(?);
-// ? func_801C49F8(?);
+void* func_801C49F8(void); // get stage's "yakumono" ("about"?) param
 // ? func_801C4A08(?);
 // ? func_801C4B50(?);
 // ? func_801C4D70(?);
