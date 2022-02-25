@@ -7,6 +7,7 @@
 
 #include "sysdolphin/baselib/object.h"
 #include "sysdolphin/baselib/fobj.h"
+#include "sysdolphin/baselib/wobj.h"
 
 #define HSD_A_L_LITC_R 9
 #define HSD_A_L_LITC_G 10
@@ -151,6 +152,16 @@ s32 HSD_LObjGetLightMaskSpecular(void);
 s32 HSD_LObjGetNbActive(void);
 HSD_LObj* HSD_LObjGetActiveByID(GXLightID id);
 HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx);
+
+void LObjUpdateFunc(void* obj, u32 type, FObjData* val);
+
+void HSD_LObjAnim(HSD_LObj* lobj);
+void HSD_LObjAnimAll(HSD_LObj *lobj);
+
+HSD_WObj* HSD_LObjGetPositionWObj(HSD_LObj* lobj);
+HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj);
+void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe);
+void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
 
 s32 HSD_LightID2Index(GXLightID);
 

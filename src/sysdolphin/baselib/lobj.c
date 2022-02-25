@@ -75,3 +75,118 @@ HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx)
         return NULL;
     }
 }
+
+/*static*/ void LObjUpdateFunc(void* obj, u32 type, FObjData* val)
+{
+    HSD_LObj* lobj = obj;
+
+    if (lobj == NULL)
+        return;
+
+    switch (type) {
+    case HSD_A_L_VIS:
+        if (val->fv < 0.5) {
+            lobj->flags &= ~LOBJ_HIDDEN;
+        } else {
+            lobj->flags |= LOBJ_HIDDEN;
+        }
+        break;
+    case HSD_A_L_A0:
+    case HSD_A_L_CUTOFF:
+        if (lobj->flags & LOBJ_RAW_PARAM) {
+            lobj->u.attn.a0 = val->fv;
+        } else {
+            lobj->u.spot.cutoff = val->fv;
+        }
+        break;
+    case HSD_A_L_A1:
+    case HSD_A_L_REFDIST:
+        if (lobj->flags & LOBJ_RAW_PARAM) {
+            lobj->u.attn.a1 = val->fv;
+        } else {
+            lobj->u.spot.ref_dist = val->fv;
+        }
+        break;
+    case HSD_A_L_A2:
+    case HSD_A_L_REFBRIGHT:
+        if (lobj->flags & LOBJ_RAW_PARAM) {
+            lobj->u.attn.a2 = val->fv;
+        } else {
+            lobj->u.spot.ref_br = val->fv;
+        }
+        break;
+    case HSD_A_L_K0:
+        if (lobj->flags & LOBJ_RAW_PARAM) {
+            lobj->u.attn.k0 = val->fv;
+        }
+        break;
+    case HSD_A_L_K1:
+        if (lobj->flags & LOBJ_RAW_PARAM) {
+            lobj->u.attn.k1 = val->fv;
+        }
+        break;
+    case HSD_A_L_K2:
+        if (lobj->flags & LOBJ_RAW_PARAM) {
+            lobj->u.attn.k2 = val->fv;
+        }
+        break;
+    case HSD_A_L_LITC_R:
+        lobj->color.r = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_L_LITC_G:
+        lobj->color.g = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_L_LITC_B:
+        lobj->color.b = (u8)(255.0 * val->fv);
+        break;
+    case HSD_A_L_LITC_A:
+        lobj->color.a = (u8)(255.0 * val->fv);
+        break;
+    }
+}
+
+void HSD_LObjAnim(HSD_LObj* lobj)
+{
+    if (lobj != NULL) {
+        HSD_AObjInterpretAnim(lobj->aobj, lobj, &LObjUpdateFunc);
+        HSD_WObjInterpretAnim(HSD_LObjGetPositionWObj(lobj));
+        HSD_WObjInterpretAnim(HSD_LObjGetInterestWObj(lobj));
+    }
+}
+
+void HSD_LObjAnimAll(HSD_LObj *lobj)
+{
+    HSD_LObj *lp;
+
+    if (lobj == NULL) {
+        return;
+    }
+
+    for (lp = lobj; lp; lp = lp->next) {
+        HSD_LObjAnim(lp);
+    }
+}
+
+void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe)
+{
+    if (lobj == NULL) {
+        return;
+    }
+
+    HSD_AObjReqAnim(lobj->aobj, startframe);
+    HSD_WObjReqAnim(HSD_LObjGetPositionWObj(lobj), startframe);
+    HSD_WObjReqAnim(HSD_LObjGetInterestWObj(lobj), startframe);
+}
+
+void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe)
+{
+    HSD_LObj* lp;
+
+    if (lobj == NULL) {
+        return;
+    }
+
+    for (lp = lobj; lp; lp = lp->next) {
+        HSD_LObjReqAnim(lp, startframe);
+    }
+}
