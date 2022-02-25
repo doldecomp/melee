@@ -394,3 +394,5 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     MTXScale(m, scale.x, scale.y, scale.z);
     MTXConcat(m, tobj->mtx, tobj->mtx);
 }
+
+// SetupTexMtx https://decomp.me/scratch/iZ3Ye
