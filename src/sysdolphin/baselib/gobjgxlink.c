@@ -49,3 +49,20 @@ void GObj_SetupGXLink(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u8 gx_l
     }
     GObj_GXReorder(gobj, i);
 }
+
+void GObj_SetupGXLinkMax(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u32 priority)
+{
+    HSD_GObj* i;
+    u8 max_link = lbl_804CE380.gx_link_max;
+
+    gobj->render_cb = render_cb;
+    gobj->gx_link = max_link + 1;
+    gobj->render_priority = priority;
+
+    i = lbl_804D7820[gobj->gx_link];
+    while (i != NULL && i->render_priority > gobj->render_priority) 
+    {
+        i = i->prev_gx;
+    }
+    GObj_GXReorder(gobj, i);
+}
