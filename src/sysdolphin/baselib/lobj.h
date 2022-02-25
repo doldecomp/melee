@@ -84,36 +84,36 @@ typedef struct _HSD_LightAttn {
 } HSD_LightAttn;
 
 typedef struct _HSD_LObj {
-    HSD_Obj parent; //0x00
-    u16 flags; //0x08
-    u16 priority; //0x0A
-    struct _HSD_LObj* next; //0x0C
-    GXColor color; //0x10
-    GXColor hw_color; //0x14
-    struct _HSD_WObj* position; //0x18
-    struct _HSD_WObj* interest; //0x1C
-    union {
+    /* 0x00 - 0x04 */ HSD_Obj parent;
+    /* 0x08 */ u16 flags;
+    /* 0x0A */ u16 priority;
+    /* 0x0C */ struct _HSD_LObj* next;
+    /* 0x10 */ GXColor color;
+    /* 0x14 */ GXColor hw_color;
+    /* 0x18 */ struct _HSD_WObj* position;
+    /* 0x1C */ struct _HSD_WObj* interest;
+    /* 0x20 - 0x34 */ union {
         HSD_LightPoint point;
         HSD_LightSpot spot;
         HSD_LightAttn attn;
     } u;
-    f32 shininess;
-    Vec lvec;
-    struct _HSD_AObj* aobj;
-    u32 id; //GXLightID
-    GXLightObj lightobj; //0x50
-    u32 spec_id; //0x90 GXLightID
-    GXLightObj spec_lightobj; //0x94
+    /* 0x38 */ f32 shininess;
+    /* 0x3C - 0x44 */ Vec lvec;
+    /* 0x48 */ struct _HSD_AObj* aobj;
+    /* 0x4C */ GXLightID id;
+    /* 0x50 */ GXLightObj lightobj;
+    /* 0x90 */ GXLightID spec_id;
+    /* 0x94 */ GXLightObj spec_lightobj;
 } HSD_LObj;
 
 typedef struct _HSD_LightDesc {
-    char* class_name; //0x00
-    struct _HSD_LightDesc* next; //0x04
-    u16 flags; //0x08
-    u16 attnflags; //0x0A
-    GXColor color; //0x0C
-    struct _HSD_WObjDesc* position; //0x10
-    struct _HSD_WObjDesc* interest; //0x14
+    /* 0x00 */ char* class_name;
+    /* 0x04 */ struct _HSD_LightDesc* next;
+    /* 0x08 */ u16 flags;
+    /* 0x0A */ u16 attnflags;
+    /* 0x0C */ GXColor color;
+    /* 0x10 */ struct _HSD_WObjDesc* position;
+    /* 0x14 */ struct _HSD_WObjDesc* interest;
     union {
         void* p;
         f32* shininess;
@@ -132,15 +132,14 @@ typedef struct _HSD_LightAnim {
 
 typedef struct _HSD_LObjInfo {
     HSD_ObjInfo parent;
-    void (*release)(HSD_Class* o);
-    void (*amnesia)(HSD_ClassInfo* info);
     int (*load)(HSD_LObj* lobj, HSD_LightDesc* ldesc);
-    void (*update)(void* obj, u32 type, FObjData* val);
 } HSD_LObjInfo;
 
 #define HSD_LOBJ(o) ((HSD_LObj*)(o))
 #define HSD_LOBJ_INFO(i) ((HSD_LObjInfo*)(i))
 #define HSD_LOBJ_METHOD(o) HSD_LOBJ_INFO(HSD_OBJECT_METHOD(o))
+
+extern HSD_LObjInfo hsdLobj;
 
 u32 HSD_LObjGetFlags(HSD_LObj* lobj);
 void HSD_LObjSetFlags(HSD_LObj* lobj, u32 flags);
@@ -151,6 +150,7 @@ s32 HSD_LObjGetLightMaskAlpha(void);
 s32 HSD_LObjGetLightMaskSpecular(void);
 s32 HSD_LObjGetNbActive(void);
 HSD_LObj* HSD_LObjGetActiveByID(GXLightID id);
+HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx);
 
 s32 HSD_LightID2Index(GXLightID);
 

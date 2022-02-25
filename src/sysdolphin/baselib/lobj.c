@@ -1,5 +1,9 @@
 #include "sysdolphin/baselib/lobj.h"
 
+void LObjInfoInit(void);
+
+HSD_LObjInfo hsdLObj = { LObjInfoInit };
+
 extern s32 lightmask_diffuse;
 extern s32 lightmask_attnfunc;
 extern s32 lightmask_alpha;
@@ -57,6 +61,15 @@ HSD_LObj* HSD_LObjGetActiveByID(GXLightID id)
 {
     s32 idx = HSD_LightID2Index(id);
     if (0 <= idx && idx < MAX_GXLIGHT) {
+        return active_lights[idx];
+    } else {
+        return NULL;
+    }
+}
+
+HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx)
+{
+    if (0 <= idx && idx < MAX_GXLIGHT - 1) {
         return active_lights[idx];
     } else {
         return NULL;

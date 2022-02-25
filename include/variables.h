@@ -1415,7 +1415,7 @@ extern const s32 lbl_803D3984[];
 // extern ? lbl_8040603C;
 // extern ? jtbl_80406058;
 // extern ? jtbl_8040608C;
-// extern ? lbl_804060C0;
+// extern ? hsdLObj;
 // extern ? jtbl_80406100;
 // extern ? lbl_80406138;
 // extern ? lbl_80406144;
