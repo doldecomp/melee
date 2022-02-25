@@ -8902,7 +8902,7 @@ void func_803901F0();
 // ? GObj_GXReorder(?);
 // void GObj_SetupGXLink();
 // ? GObj_SetupGXLinkMax(?);
-// ? func_803907C8(?);
+// ? GObj_SetupGXLinkMaxSorted(?);
 // ? func_8039084C(?);
 // ? func_80390908(?);
 // ? func_803909D8(?);

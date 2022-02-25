@@ -66,3 +66,34 @@ void GObj_SetupGXLinkMax(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u32 
     }
     GObj_GXReorder(gobj, i);
 }
+
+inline HSD_GObj* GObj_GXFindPrioPosition(HSD_GObj* gobj) {
+    HSD_GObj* i;
+
+    i = lbl_804D7824[gobj->gx_link];
+    while (i != NULL && i->render_priority < gobj->render_priority) 
+    {
+        i = i->next_gx;
+    }
+
+    return i;
+}
+
+void GObj_SetupGXLinkMaxSorted(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u32 priority)
+{
+    HSD_GObj* i;
+    u8 max_link = lbl_804CE380.gx_link_max;
+
+    gobj->render_cb = render_cb;
+    gobj->gx_link = max_link + 1;
+    gobj->render_priority = priority;
+
+    i = GObj_GXFindPrioPosition(gobj);
+
+    if (i != NULL) {
+        i = i->prev_gx;
+    } else {
+        i = lbl_804D7820[gobj->gx_link];
+    }
+    GObj_GXReorder(gobj, i);
+}
