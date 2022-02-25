@@ -13,7 +13,7 @@ extern s32 lightmask_specular;
 
 extern s32 nb_active_lights;
 
-extern HSD_LObj* active_lights[MAX_GXLIGHT];
+HSD_LObj* active_lights[MAX_GXLIGHT];
 
 u32 HSD_LObjGetFlags(HSD_LObj* lobj)
 {

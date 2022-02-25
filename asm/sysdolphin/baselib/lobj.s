@@ -237,12 +237,12 @@ func_80365AC4:
 /* 80365B68 00362748  4B FD CF 41 */	bl PSMTXMUltiVec
 /* 80365B6C 0036274C  48 00 00 B0 */	b lbl_80365C1C
 lbl_80365B70:
-/* 80365B70 00362750  3C 60 80 3C */	lis r3, lbl_803B94A0@ha
-/* 80365B74 00362754  38 C3 94 A0 */	addi r6, r3, lbl_803B94A0@l
+/* 80365B70 00362750  3C 60 80 3C */	lis r3, position@ha
+/* 80365B74 00362754  38 C3 94 A0 */	addi r6, r3, position@l
 /* 80365B78 00362758  80 A6 00 00 */	lwz r5, 0(r6)
-/* 80365B7C 0036275C  3C 60 80 3C */	lis r3, lbl_803B94AC@ha
+/* 80365B7C 0036275C  3C 60 80 3C */	lis r3, interest@ha
 /* 80365B80 00362760  80 06 00 04 */	lwz r0, 4(r6)
-/* 80365B84 00362764  38 83 94 AC */	addi r4, r3, lbl_803B94AC@l
+/* 80365B84 00362764  38 83 94 AC */	addi r4, r3, interest@l
 /* 80365B88 00362768  28 1E 00 00 */	cmplwi r30, 0
 /* 80365B8C 0036276C  90 A1 00 14 */	stw r5, 0x14(r1)
 /* 80365B90 00362770  90 01 00 18 */	stw r0, 0x18(r1)
@@ -393,12 +393,12 @@ func_80365D6C:
 /* 80365DA4 00362984  38 7E 00 00 */	addi r3, r30, 0
 /* 80365DA8 00362988  38 A4 00 00 */	addi r5, r4, 0
 /* 80365DAC 0036298C  4B FD CC FD */	bl PSMTXMUltiVec
-/* 80365DB0 00362990  3C 60 80 3C */	lis r3, lbl_803B94A0@ha
-/* 80365DB4 00362994  38 C3 94 A0 */	addi r6, r3, lbl_803B94A0@l
+/* 80365DB0 00362990  3C 60 80 3C */	lis r3, position@ha
+/* 80365DB4 00362994  38 C3 94 A0 */	addi r6, r3, position@l
 /* 80365DB8 00362998  80 A6 00 00 */	lwz r5, 0(r6)
-/* 80365DBC 0036299C  3C 60 80 3C */	lis r3, lbl_803B94AC@ha
+/* 80365DBC 0036299C  3C 60 80 3C */	lis r3, interest@ha
 /* 80365DC0 003629A0  80 06 00 04 */	lwz r0, 4(r6)
-/* 80365DC4 003629A4  38 83 94 AC */	addi r4, r3, lbl_803B94AC@l
+/* 80365DC4 003629A4  38 83 94 AC */	addi r4, r3, interest@l
 /* 80365DC8 003629A8  28 1D 00 00 */	cmplwi r29, 0
 /* 80365DCC 003629AC  90 A1 00 10 */	stw r5, 0x10(r1)
 /* 80365DD0 003629B0  90 01 00 14 */	stw r0, 0x14(r1)
@@ -2305,13 +2305,13 @@ LObjInfoInit:
 
 .section .rodata
     .balign 8
-.global lbl_803B94A0
-lbl_803B94A0:
+.global position
+position:
 	.float 0
     .float 0
     .float 0
-.global lbl_803B94AC
-lbl_803B94AC:
+.global interest
+interest:
 	.float 0
     .float 0
     .float 0
@@ -2355,13 +2355,6 @@ lbl_804061D4:
     .balign 4
     .asciz "hsd_lobj"
     .balign 4
-
-
-.section .bss, "wa"
-    .balign 8
-.global active_lights
-active_lights:
-	.skip 0x28
 
 
 .section .sdata
