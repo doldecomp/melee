@@ -150,5 +150,8 @@ s32 HSD_LObjGetLightMaskAttnFunc(void);
 s32 HSD_LObjGetLightMaskAlpha(void);
 s32 HSD_LObjGetLightMaskSpecular(void);
 s32 HSD_LObjGetNbActive(void);
+HSD_LObj* HSD_LObjGetActiveByID(GXLightID id);
+
+s32 HSD_LightID2Index(GXLightID);
 
 #endif

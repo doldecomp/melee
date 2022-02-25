@@ -7,6 +7,8 @@ extern s32 lightmask_specular;
 
 extern s32 nb_active_lights;
 
+extern HSD_LObj* active_lights[MAX_GXLIGHT];
+
 u32 HSD_LObjGetFlags(HSD_LObj* lobj)
 {
     return (lobj) ? lobj->flags : 0;
@@ -49,4 +51,14 @@ s32 HSD_LObjGetLightMaskSpecular(void)
 s32 HSD_LObjGetNbActive(void)
 {
     return nb_active_lights;
+}
+
+HSD_LObj* HSD_LObjGetActiveByID(GXLightID id)
+{
+    s32 idx = HSD_LightID2Index(id);
+    if (0 <= idx && idx < MAX_GXLIGHT) {
+        return active_lights[idx];
+    } else {
+        return NULL;
+    }
 }

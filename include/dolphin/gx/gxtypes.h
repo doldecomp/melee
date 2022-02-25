@@ -80,6 +80,20 @@ typedef struct _GXRenderModeObj {
 	u8  vfilter[7];
 } GXRenderModeObj;
 
+typedef enum _GXLightID
+{
+    GX_LIGHT0     = 0x001,
+    GX_LIGHT1     = 0x002,
+    GX_LIGHT2     = 0x004,
+    GX_LIGHT3     = 0x008,
+    GX_LIGHT4     = 0x010,
+    GX_LIGHT5     = 0x020,
+    GX_LIGHT6     = 0x040,
+    GX_LIGHT7     = 0x080,
+    GX_MAX_LIGHT  = 0x100,
+    GX_LIGHT_NULL = 0x000
+} GXLightID;
+
 typedef struct _GXLightObj
 {
     u32 dummy[16];

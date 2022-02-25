@@ -2,30 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240 
 
-.global HSD_LObjGetActiveByID
-HSD_LObjGetActiveByID:
-/* 8036540C 00361FEC  7C 08 02 A6 */	mflr r0
-/* 80365410 00361FF0  90 01 00 04 */	stw r0, 4(r1)
-/* 80365414 00361FF4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80365418 00361FF8  48 00 16 61 */	bl HSD_LightID2Index
-/* 8036541C 00361FFC  2C 03 00 00 */	cmpwi r3, 0
-/* 80365420 00362000  41 80 00 24 */	blt lbl_80365444
-/* 80365424 00362004  2C 03 00 09 */	cmpwi r3, 9
-/* 80365428 00362008  40 80 00 1C */	bge lbl_80365444
-/* 8036542C 0036200C  3C 80 80 4C */	lis r4, active_lights@ha
-/* 80365430 00362010  54 63 10 3A */	slwi r3, r3, 2
-/* 80365434 00362014  38 04 08 B0 */	addi r0, r4, active_lights@l
-/* 80365438 00362018  7C 60 1A 14 */	add r3, r0, r3
-/* 8036543C 0036201C  80 63 00 00 */	lwz r3, 0(r3)
-/* 80365440 00362020  48 00 00 08 */	b lbl_80365448
-lbl_80365444:
-/* 80365444 00362024  38 60 00 00 */	li r3, 0
-lbl_80365448:
-/* 80365448 00362028  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8036544C 0036202C  38 21 00 08 */	addi r1, r1, 8
-/* 80365450 00362030  7C 08 03 A6 */	mtlr r0
-/* 80365454 00362034  4E 80 00 20 */	blr 
-
 .global HSD_LObjGetActiveByIndex
 HSD_LObjGetActiveByIndex:
 /* 80365458 00362038  2C 03 00 00 */	cmpwi r3, 0
