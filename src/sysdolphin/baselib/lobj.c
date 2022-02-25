@@ -1,5 +1,7 @@
 #include "sysdolphin/baselib/lobj.h"
 
+#include <dolphin/mtx.h>
+
 void LObjInfoInit(void);
 
 HSD_LObjInfo hsdLObj = { LObjInfoInit };
@@ -189,4 +191,18 @@ void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe)
     for (lp = lobj; lp; lp = lp->next) {
         HSD_LObjReqAnim(lp, startframe);
     }
+}
+
+void HSD_LObjGetLightVector(HSD_LObj *lobj, VecPtr dir)
+{
+    Vec position = {0.0F, 0.0F, 0.0F};
+    Vec interest = {0.0F, 0.0F, 0.0F};
+
+    if (lobj == NULL)
+        return;
+
+    HSD_LObjGetPosition(lobj, &position);
+    HSD_LObjGetInterest(lobj, &interest);
+    PSVECSubtract(&interest, &position, dir);
+    PSVECNormalize(dir, dir);
 }
