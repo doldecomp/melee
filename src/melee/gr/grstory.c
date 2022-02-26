@@ -125,14 +125,22 @@ void lbl_801E336C()
 {
 }
 
+typedef struct {
+    u8 x0_fill[0x14];
+    s32 x14;
+    u8 x18_fill[0xC4 - 0x18];
+    s16 xC4;
+    s32 xC8;
+} UnkUserData;
+
 void lbl_801E3370(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    UnkUserData* data = gobj->user_data;
     int unused[2];
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
-    map->xC4 = 0;
-    map->xC8 = func_801C3FA4(gobj, 1);
+    func_801C2ED0(gobj->hsd_obj, data->x14);
+    func_801C8138(gobj, data->x14, 0);
+    data->xC4 = 0;
+    data->xC8 = func_801C3FA4(gobj, 1);
 }
 
 s32 lbl_801E33D8(void)
