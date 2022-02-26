@@ -1,5 +1,7 @@
 #include "grstory.h"
 
+#include <sysdolphin/baselib/random.h>
+
 extern StageInfo stage_info;
 
 struct {
@@ -87,4 +89,22 @@ void lbl_801E322C(void)
 
 void lbl_801E3230(void)
 {
+}
+
+inline s32 randi(s32 max)
+{
+    return max ? HSD_Randi(max) : 0;
+}
+
+/* Initialize shyguys */
+void lbl_801E3234(HSD_GObj* gobj)
+{
+    Map* map = gobj->user_data;
+    func_801C2ED0(gobj->hsd_obj, map->map_id);
+    func_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
+    func_801C7FF8(gobj, 5, 7, 1, 0.0f, 1.0f);
+
+    map->xC8 = lbl_804D69B8->unk0 + randi(lbl_804D69B8->unk4);
+    map->xC8 = 120;
+    map->x10_flags.b5 = 1;
 }

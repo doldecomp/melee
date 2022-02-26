@@ -4736,7 +4736,7 @@ void func_801C5DB0();
 // ? func_801C7B24(?);
 // ? func_801C7BA0(?);
 // ? func_801C7C1C(?);
-// ? func_801C7FF8(?);
+void func_801C7FF8(struct _HSD_GObj*, s32, s32, s32, f32, f32);
 // ? func_801C8098(?);
 void func_801C8138();
 // ? func_801C8318(?);
