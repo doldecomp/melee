@@ -2,7 +2,10 @@
 
 extern StageInfo stage_info;
 
-void* lbl_804D69B8;
+struct {
+    f32 unk0;
+    f32 unk4;
+}* lbl_804D69B8;
 
 void func_801E302C(void)
 {

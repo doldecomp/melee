@@ -111,28 +111,9 @@ typedef struct _Map {
     int map_id; // 0x14
     int x18;    // 0x18
     void* x1C_callback;
-    int x20;        // 0x20
-    int x24;        // 0x24
-    int x28;        // 0x28
-    int x2C;        // 0x2c
-    int x30;        // 0x30
-    int x34;        // 0x34
-    int x38;        // 0x38
-    int x3C;        // 0x3c
-    float selfVelX; // 0x40
-    float selfVelY; // 0x44
-    float selfVelZ; // 0x48
-    float posX;     // 0x4c
-    float posY;     // 0x50
-    float posZ;     // 0x54
-    int x58;        // 0x58
-    int x5c;        // 0x5c
-    int x60;        // 0x60
-    int x64;        // 0x64
-    int x68;        // 0x68
-    int x6c;        // 0x6c
-    int x70;        // 0x70
-    u8 xB8_pad[0x218 - 0x74];
+    u8 x20_pad[0xC8 - 0x20];
+    s32 xC8;
+    u8 xCC_pad[0x218 - 0xCC];
 } Map;
 
 f32 Stage_GetCamBoundsLeftOffset();
