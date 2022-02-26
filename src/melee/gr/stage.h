@@ -6,6 +6,7 @@
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
+typedef Vec Vec3;
 
 // This struct is based in part on the datasheet
 // however the info there is likely incorrect as this doesn't quite match grGroundParam
@@ -112,7 +113,8 @@ typedef struct _Map {
     int x18;    // 0x18
     void* x1C_callback;
     u8 x20_pad[0xC4 - 0x20];
-    s16 xC4;
+    s8 xC4;
+    s8 xC5;
     s16 xC6;
     s32 xC8;
     u8 xCC_pad[0x218 - 0xCC];
