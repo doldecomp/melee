@@ -1,4 +1,5 @@
 #include <dolphin/types.h>
+#include <dolphin/gx/gxtypes.h>
 #include <dolphin/mtx/mtxtypes.h>
 
 /* .init section */
