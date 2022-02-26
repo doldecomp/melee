@@ -78,8 +78,8 @@ typedef struct {
 } StageCallbacks;
 
 extern struct {
-    StageCallbacks callbacks[7];
-    int pad;
+    StageCallbacks callbacks[4];
+    int pad2[16];
     char str1[4]; // TODO expand to actual size
     u8 x94_pad[0xb4 - 0x90 - 4];
     char str2[4]; // TODO expand to actual size
