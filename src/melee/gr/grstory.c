@@ -132,7 +132,7 @@ typedef struct {
     s32 x14;
     u8 x18_fill[0xC4 - 0x18];
     s16 xC4;
-    s32 xC8;
+    void* xC8;
 } UnkUserData;
 
 void lbl_801E3370(HSD_GObj* gobj)
@@ -232,5 +232,19 @@ void func_801E3418(HSD_GObj* gobj)
             // Jitter the vertical position of the each subsequent shy guy
             pos.y = 3.0f * frand_amp1() + lbl_804D69B8->vars[spawn_pattern];
         }
+    }
+}
+
+void func_801E366C(HSD_GObj* gobj)
+{
+    UnkUserData* data = gobj->user_data;
+
+    if (data->xC4-- >= 0) {
+        return;
+    }
+
+    if (data->xC8 != NULL) {
+        func_801C97DC(0x2C, 0, data->xC8);
+        data->xC4 = HSD_Randi(20) + 10;
     }
 }

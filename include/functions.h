@@ -4648,7 +4648,7 @@ void func_801C3BB4();
 // ? func_801C3DB4(?);
 // ? func_801C3E18(?);
 // ? func_801C3F20(?);
-// ? func_801C3FA4(?);
+void* func_801C3FA4(struct _HSD_GObj*, s32);
 // ? func_801C4100(?);
 void func_801C4210();
 void func_801C42AC();
