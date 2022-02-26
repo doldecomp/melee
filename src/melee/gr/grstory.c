@@ -248,3 +248,20 @@ void func_801E366C(HSD_GObj* gobj)
         data->xC4 = HSD_Randi(20) + 10;
     }
 }
+
+s32 lbl_801E36D0(void)
+{
+    return 0;
+}
+
+BOOL lbl_801E36D8(Vec3* a, u32 unused, u8* joint)
+{
+    Vec3 b;
+    func_8000B1CC(joint, NULL, &b);
+
+    if (a->y + 1.0f > b.y) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
