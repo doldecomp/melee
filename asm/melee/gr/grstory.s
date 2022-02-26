@@ -31,9 +31,8 @@ lbl_803E26F0:
     .4byte 0xC0000000
 .global lbl_803E2740
 lbl_803E2740:
-    .4byte 0x2F477253
-    .4byte 0x742E6461
-    .4byte 0x74000000
+    .asciz "/GrSt.dat"
+    .balign 4
 .global lbl_803E274C
 lbl_803E274C:
     .4byte 0x0000000A
@@ -49,18 +48,10 @@ lbl_803E274C:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727374
-    .4byte 0x6F72792E
-    .4byte 0x63000000
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .ascii "grstory.c"
+    .balign 4
     .4byte 0xC3920000
     .4byte 0x42D20000
     .4byte 0xC3920000
