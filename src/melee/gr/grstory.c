@@ -108,3 +108,44 @@ void lbl_801E3234(HSD_GObj* gobj)
     map->xC8 = 120;
     map->x10_flags.b5 = 1;
 }
+
+s32 lbl_801E332C(void)
+{
+    return 0;
+}
+
+void lbl_801E3334(HSD_GObj* gobj)
+{
+    func_801E3418(gobj);
+    func_801C2FE0(gobj);
+    func_800115F4();
+}
+
+void lbl_801E336C()
+{
+}
+
+void lbl_801E3370(HSD_GObj* gobj)
+{
+    Map* map = gobj->user_data;
+    int unused[2];
+    func_801C2ED0(gobj->hsd_obj, map->map_id);
+    func_801C8138(gobj, map->map_id, 0);
+    map->xC4 = 0;
+    map->xC8 = func_801C3FA4(gobj, 1);
+}
+
+s32 lbl_801E33D8(void)
+{
+    return 0;
+}
+
+void lbl_801E33E0(HSD_GObj* gobj)
+{
+    func_801C2FE0(gobj);
+    func_801E366C(gobj);
+}
+
+void lbl_801E3414(void)
+{
+}
