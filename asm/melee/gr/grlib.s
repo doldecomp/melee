@@ -56,3 +56,13 @@ lbl_801C9AE0:
 /* 801C9B18 001C66F8  7C 08 03 A6 */	mtlr r0
 /* 801C9B1C 001C66FC  4E 80 00 20 */	blr 
 
+
+.section .sdata
+    .balign 8
+.global lbl_804D4570
+lbl_804D4570:
+    .asciz "grlib.c"
+    .balign 4
+.global lbl_804D4578
+lbl_804D4578:
+    .asciz "0"

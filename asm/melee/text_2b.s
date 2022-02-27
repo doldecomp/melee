@@ -1509,3 +1509,20 @@ lbl_801CAF9C:
 /* 801CAFB0 001C7B90  38 21 00 18 */	addi r1, r1, 0x18
 /* 801CAFB4 001C7B94  7C 08 03 A6 */	mtlr r0
 /* 801CAFB8 001C7B98  4E 80 00 20 */	blr 
+
+
+.section .sdata
+    .balign 4
+.global lbl_804D457C
+lbl_804D457C:
+    .asciz "jobj.h"
+    .balign 4
+.global lbl_804D4584
+lbl_804D4584:
+    .asciz "jobj"
+    .balign 4
+    .4byte NULL
+.global lbl_804D4590
+lbl_804D4590:
+    .asciz "pointp"
+    .balign 4

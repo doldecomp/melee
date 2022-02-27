@@ -51376,27 +51376,6 @@ lbl_804D4568:
 .global lbl_804D456C
 lbl_804D456C:
     .4byte func_801C9470
-.global lbl_804D4570
-lbl_804D4570:
-    .asciz "grlib.c"
-    .balign 4
-.global lbl_804D4578
-lbl_804D4578:
-    .asciz "0"
-    .balign 4
-.global lbl_804D457C
-lbl_804D457C:
-    .asciz "jobj.h"
-    .balign 4
-.global lbl_804D4584
-lbl_804D4584:
-    .asciz "jobj"
-    .balign 4
-    .4byte NULL
-.global lbl_804D4590
-lbl_804D4590:
-    .asciz "pointp"
-    .balign 4
 
 
 .section .sbss
