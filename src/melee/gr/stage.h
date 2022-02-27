@@ -6,6 +6,7 @@
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
+typedef Vec Vec3;
 
 // This struct is based in part on the datasheet
 // however the info there is likely incorrect as this doesn't quite match grGroundParam
@@ -54,9 +55,70 @@ typedef struct _StageInfo {
 
     u32 internal_stage_id; // 0x88
 
-    s8 unk8C;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } unk8C;
+
     u8 data[0x6EB];
 } StageInfo;
+
+typedef struct {
+    void (*callback0)(struct _HSD_GObj*);
+    void (*callback1)();
+    void (*callback2)();
+    void (*callback3)();
+    void (*callback4)();
+} StageCallbacks;
+
+extern struct {
+    StageCallbacks callbacks[4];
+    int pad2[16];
+    char str1[4]; // TODO expand to actual size
+    u8 x94_pad[0xb4 - 0x90 - 4];
+    char str2[4]; // TODO expand to actual size
+} lbl_803E26F0;
+
+typedef struct _Map {
+    int x0;                 // 0x0
+    struct _HSD_GObj* gobj; // 0x4
+    int x8;                 // 0x8
+    int xC;                 // 0xC
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } x10_flags;
+    struct {
+        u8 b012 : 3;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } x11_flags;
+
+    int map_id; // 0x14
+    int x18;    // 0x18
+    void* x1C_callback;
+    u8 x20_pad[0xC4 - 0x20];
+    s8 xC4;
+    s8 xC5;
+    s16 xC6;
+    s32 xC8;
+    u8 xCC_pad[0x218 - 0xCC];
+} Map;
 
 f32 Stage_GetCamBoundsLeftOffset();
 f32 Stage_GetCamBoundsRightOffset();

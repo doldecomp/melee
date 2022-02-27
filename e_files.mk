@@ -25,6 +25,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftsandbag.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakoboy.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakogirl.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grstory.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/stage.c.o\
 	$(EPILOGUE_DIR)/src/melee/pl/player.c.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/tobj.c.o\

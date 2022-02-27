@@ -282,7 +282,7 @@ s32 Stage_80225074(s32 arg0)
     s32 spC;
 
     if (func_8016B238() != 0) {
-        if (((stage_info.unk8C >> 7) & 0x1) || (arg0 == 2)) {
+        if (stage_info.unk8C.b0 || arg0 == 2) {
             r31 = 0x12;
         } else {
             r31 = 0x11;
