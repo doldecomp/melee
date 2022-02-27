@@ -112,6 +112,10 @@ TEXT_O_FILES := 						            \
 															\
 	$(BUILD_DIR)/asm/melee/text_2.s.o 		 	            \
 															\
+	$(BUILD_DIR)/asm/melee/gr/grlib.s.o 		 	            \
+															\
+	$(BUILD_DIR)/asm/melee/text_2b.s.o 		 	            \
+															\
 	$(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grizumi.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grcastle.s.o 		            \
