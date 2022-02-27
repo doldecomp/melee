@@ -138,7 +138,7 @@ f32 Stage_GetBlastZoneTopOffset();
 f32 Stage_GetBlastZoneBottomOffset();
 f32 Stage_CalcUnkCamY();
 f32 Stage_CalcUnkCamYBounds();
-f32 Stage_UnkSetVec3TCam_Offset(Vec* vec3, f32 arg8);
+void Stage_UnkSetVec3TCam_Offset(Vec* vec3);
 f32 Stage_GetPauseCamZPosMin();
 f32 Stage_GetPauseCamZPosInit();
 f32 Stage_GetPauseCamZPosMax();
