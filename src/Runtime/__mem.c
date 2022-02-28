@@ -7,7 +7,7 @@ void* memset(void* dst, int val, unsigned long /*size_t*/ n)
 	return(dst);
 }
 
-void __fill_mem(void * dst, int val, unsigned long n)
+void __fill_mem(void* dst, int val, unsigned long n)
 {
 	unsigned long			v = (unsigned char) val;
 	unsigned long			i;
@@ -65,4 +65,28 @@ void __fill_mem(void * dst, int val, unsigned long n)
 		} while (--n);
 	
 	return;
+}
+
+void* memcpy(void* dst, const void* src, unsigned long /* size_t */ n)
+{
+    const unsigned char *s;
+    unsigned char *d;
+
+    if ((unsigned long)src >= (unsigned long)dst)
+    {
+        s = (const unsigned char *)src - 1;
+        d = (unsigned char *)dst - 1;
+        n++;
+        while (--n != 0)
+            *++d = *++s;
+    }
+    else
+    {
+        s = (const unsigned char *)src + n;
+        d = (unsigned char *)dst + n;
+        n++;
+        while (--n != 0)
+            *--d = *--s;
+    }
+    return dst;
 }
