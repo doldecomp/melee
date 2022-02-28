@@ -2,7 +2,8 @@
 
 INIT_O_FILES := 						            \
 	$(BUILD_DIR)/src/Runtime/__mem.c.o	            \
-	$(BUILD_DIR)/asm/init.s.o				            \
+	$(BUILD_DIR)/src/MetroTRK/mem_TRK.c.o	        \
+	$(BUILD_DIR)/asm/init.s.o				        \
     $(BUILD_DIR)/src/dolphin/os/init/__start.c.o
 
 EXTAB_O_FILES :=                                    \
@@ -280,7 +281,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/dolphin/db/db.c.o                \
 	$(BUILD_DIR)/src/dolphin/dsp/dsp.c.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp.s.o              \
-	$(BUILD_DIR)/asm/dolphin/dsp/dsp_debug.s.o        \
+	$(BUILD_DIR)/src/dolphin/dsp/dsp_debug.c.o        \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_task.s.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdlow.s.o           \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdfs.s.o            \
