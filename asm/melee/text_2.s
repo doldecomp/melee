@@ -50179,20 +50179,11 @@ lbl_803E06C8:
     .4byte lbl_804D451C
     .4byte lbl_804D450C
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x0A000000
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x6C6F626A
-    .4byte 0x0A000000
+    .balign 4
+    .asciz "%s:%d: couldn t get gobj\n"
+    .balign 4
+    .asciz "%s:%d: couldn t get lobj\n"
+    .balign 4
     .4byte 0x00000001
     .4byte 0x00000001
     .4byte NULL
@@ -50360,14 +50351,8 @@ jtbl_803E099C:
 	.4byte lbl_801C7024
 	.4byte lbl_801C7038
 	.4byte lbl_801C704C
-    .4byte 0x756E6578
-    .4byte 0x70656374
-    .4byte 0x65642061
-    .4byte 0x7267756D
-    .4byte 0x656E7420
-    .4byte 0x666F726D
-    .4byte 0x61742E0A
-    .4byte NULL
+    .asciz "unexpected argument format.\n"
+    .balign 4
 .global jtbl_803E09EC
 jtbl_803E09EC:
 	.4byte lbl_801C7640
@@ -50440,39 +50425,16 @@ lbl_803E0A20:
     .4byte 0x00000001
     .4byte NULL
     .4byte 0xFFFF0000
-    .4byte 0x73797364
-    .4byte 0x6F6C7068
-    .4byte 0x696E5F62
-    .4byte 0x6173655F
-    .4byte 0x6C696272
-    .4byte 0x61727900
-    .4byte 0x67726D61
-    .4byte 0x74657269
-    .4byte 0x616C2E63
-    .4byte NULL
-    .4byte 0x6D6F626A
-    .4byte 0x2D3E7465
-    .4byte 0x76646573
-    .4byte 0x63000000
-    .4byte 0x63616E27
-    .4byte 0x74206669
-    .4byte 0x6E642066
-    .4byte 0x72656520
-    .4byte 0x636F6C6F
-    .4byte 0x72207265
-    .4byte 0x67697374
-    .4byte 0x6572210A
-    .4byte NULL
-    .4byte 0x63616E27
-    .4byte 0x74206669
-    .4byte 0x6E642066
-    .4byte 0x72656520
-    .4byte 0x616C7068
-    .4byte 0x61207265
-    .4byte 0x67697374
-    .4byte 0x6572210A
-    .4byte NULL
-    .4byte NULL
+    .balign 4
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "grmaterial.c"
+    .balign 4
+    .asciz "mobj->tevdesc"
+    .balign 4
+    .asciz "can't find free color register!\n"
+    .balign 4
+    .asciz "can't find free alpha register!\n"
 
 
 .section .bss, "wa"
