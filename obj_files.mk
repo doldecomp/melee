@@ -111,7 +111,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.s.o 		 			\
 															\
 	$(BUILD_DIR)/asm/melee/text_2.s.o 		 	            \
-															\
+	                                                  \
+	$(BUILD_DIR)/asm/melee/gr/grlib.s.o               \
+	$(BUILD_DIR)/asm/melee/gr/grdynamicattr.s.o       \
+	$(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o     \
 	$(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grizumi.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grcastle.s.o 		            \
