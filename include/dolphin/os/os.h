@@ -3,6 +3,7 @@
 
 #include <dolphin/os/OSAlloc.h>
 #include <dolphin/os/OSArena.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSTime.h>
 
 void OSReport(char *, ...);

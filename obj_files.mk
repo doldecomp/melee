@@ -277,7 +277,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/thp/THPDec.s.o           \
 	$(BUILD_DIR)/asm/dolphin/jpeg/jpegdec.s.o         \
 	$(BUILD_DIR)/src/dolphin/base/PPCArch.c.o	        \
-	$(BUILD_DIR)/asm/dolphin/db/db.s.o                \
+	$(BUILD_DIR)/src/dolphin/db/db.c.o                \
 	$(BUILD_DIR)/src/dolphin/dsp/dsp.c.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp.s.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_debug.s.o        \
