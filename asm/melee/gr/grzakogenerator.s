@@ -899,8 +899,8 @@ lbl_804D4590:
 .section .sdata2
     .balign 8
 lbl_804DADA8:
-    .4byte 0x00000000
+    .float 0
 lbl_804DADAC:
-    .4byte 0x38D1B717
+    .float 0.0001
 lbl_804DADB0:
-    .4byte 0x3F000000
+    .float 0.5
