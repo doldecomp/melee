@@ -2,7 +2,8 @@
 
 INIT_O_FILES := 						            \
 	$(BUILD_DIR)/src/Runtime/__mem.c.o	            \
-	$(BUILD_DIR)/asm/init.s.o				            \
+	$(BUILD_DIR)/src/MetroTRK/mem_TRK.c.o	        \
+	$(BUILD_DIR)/asm/init.s.o				        \
     $(BUILD_DIR)/src/dolphin/os/init/__start.c.o
 
 EXTAB_O_FILES :=                                    \
@@ -277,17 +278,17 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/thp/THPDec.s.o           \
 	$(BUILD_DIR)/asm/dolphin/jpeg/jpegdec.s.o         \
 	$(BUILD_DIR)/src/dolphin/base/PPCArch.c.o	        \
-	$(BUILD_DIR)/asm/dolphin/db/db.s.o                \
+	$(BUILD_DIR)/src/dolphin/db/db.c.o                \
 	$(BUILD_DIR)/src/dolphin/dsp/dsp.c.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp.s.o              \
-	$(BUILD_DIR)/asm/dolphin/dsp/dsp_debug.s.o        \
+	$(BUILD_DIR)/src/dolphin/dsp/dsp_debug.c.o        \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_task.s.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdlow.s.o           \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdfs.s.o            \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvd.s.o              \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdqueue.s.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvderror.s.o         \
-	$(BUILD_DIR)/asm/dolphin/dvd/fstload.s.o          \
+	$(BUILD_DIR)/src/dolphin/dvd/fstload.c.o          \
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.s.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o            \
