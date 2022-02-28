@@ -773,8 +773,6 @@ lbl_804D457C:
 .global lbl_804D4584
 lbl_804D4584:
     .asciz "jobj"
-    .balign 4
-    .4byte NULL
 
 
 .section .sdata2

@@ -1,0 +1,97 @@
+.include "macros.inc"
+
+.section .text
+
+.global func_801CA0B4
+func_801CA0B4:
+/* 801CA0B4 001C6C94  38 00 00 00 */	li r0, 0
+/* 801CA0B8 001C6C98  3C 60 80 4A */	lis r3, lbl_8049EFA0@ha
+/* 801CA0BC 001C6C9C  90 0D B2 C0 */	stw r0, lbl_804D6960@sda21(r13)
+/* 801CA0C0 001C6CA0  38 63 EF A0 */	addi r3, r3, lbl_8049EFA0@l
+/* 801CA0C4 001C6CA4  90 0D B2 C4 */	stw r0, lbl_804D6964@sda21(r13)
+/* 801CA0C8 001C6CA8  38 83 00 24 */	addi r4, r3, 0x24
+/* 801CA0CC 001C6CAC  38 A3 00 48 */	addi r5, r3, 0x48
+/* 801CA0D0 001C6CB0  90 03 00 00 */	stw r0, 0(r3)
+/* 801CA0D4 001C6CB4  38 C3 00 6C */	addi r6, r3, 0x6c
+/* 801CA0D8 001C6CB8  90 6D B2 C4 */	stw r3, lbl_804D6964@sda21(r13)
+/* 801CA0DC 001C6CBC  90 63 00 24 */	stw r3, 0x24(r3)
+/* 801CA0E0 001C6CC0  90 8D B2 C4 */	stw r4, lbl_804D6964@sda21(r13)
+/* 801CA0E4 001C6CC4  90 83 00 48 */	stw r4, 0x48(r3)
+/* 801CA0E8 001C6CC8  90 AD B2 C4 */	stw r5, lbl_804D6964@sda21(r13)
+/* 801CA0EC 001C6CCC  90 A3 00 6C */	stw r5, 0x6c(r3)
+/* 801CA0F0 001C6CD0  90 CD B2 C4 */	stw r6, lbl_804D6964@sda21(r13)
+/* 801CA0F4 001C6CD4  4E 80 00 20 */	blr 
+
+.global func_801CA0F8
+func_801CA0F8:
+/* 801CA0F8 001C6CD8  7C 08 02 A6 */	mflr r0
+/* 801CA0FC 001C6CDC  90 01 00 04 */	stw r0, 4(r1)
+/* 801CA100 001C6CE0  94 21 FF C0 */	stwu r1, -0x40(r1)
+/* 801CA104 001C6CE4  DB E1 00 38 */	stfd f31, 0x38(r1)
+/* 801CA108 001C6CE8  FF E0 08 90 */	fmr f31, f1
+/* 801CA10C 001C6CEC  93 E1 00 34 */	stw r31, 0x34(r1)
+/* 801CA110 001C6CF0  3B E6 00 00 */	addi r31, r6, 0
+/* 801CA114 001C6CF4  93 C1 00 30 */	stw r30, 0x30(r1)
+/* 801CA118 001C6CF8  7C BE 2B 78 */	mr r30, r5
+/* 801CA11C 001C6CFC  2C 1E FF FF */	cmpwi r30, -1
+/* 801CA120 001C6D00  93 A1 00 2C */	stw r29, 0x2c(r1)
+/* 801CA124 001C6D04  3B A4 00 00 */	addi r29, r4, 0
+/* 801CA128 001C6D08  93 81 00 28 */	stw r28, 0x28(r1)
+/* 801CA12C 001C6D0C  3B 83 00 00 */	addi r28, r3, 0
+/* 801CA130 001C6D10  40 82 00 1C */	bne lbl_801CA14C
+/* 801CA134 001C6D14  3C 60 80 3E */	lis r3, lbl_803E0B80@ha
+/* 801CA138 001C6D18  3C 80 80 3E */	lis r4, lbl_803E0B90@ha
+/* 801CA13C 001C6D1C  38 A4 0B 90 */	addi r5, r4, lbl_803E0B90@l
+/* 801CA140 001C6D20  38 63 0B 80 */	addi r3, r3, lbl_803E0B80@l
+/* 801CA144 001C6D24  38 80 00 37 */	li r4, 0x37
+/* 801CA148 001C6D28  48 1B E0 D9 */	bl __assert
+lbl_801CA14C:
+/* 801CA14C 001C6D2C  80 6D B2 C4 */	lwz r3, lbl_804D6964@sda21(r13)
+/* 801CA150 001C6D30  28 03 00 00 */	cmplwi r3, 0
+/* 801CA154 001C6D34  41 82 00 44 */	beq lbl_801CA198
+/* 801CA158 001C6D38  80 83 00 00 */	lwz r4, 0(r3)
+/* 801CA15C 001C6D3C  80 0D B2 C0 */	lwz r0, lbl_804D6960@sda21(r13)
+/* 801CA160 001C6D40  90 8D B2 C4 */	stw r4, lbl_804D6964@sda21(r13)
+/* 801CA164 001C6D44  90 03 00 00 */	stw r0, 0(r3)
+/* 801CA168 001C6D48  90 6D B2 C0 */	stw r3, lbl_804D6960@sda21(r13)
+/* 801CA16C 001C6D4C  93 83 00 04 */	stw r28, 4(r3)
+/* 801CA170 001C6D50  80 9D 00 00 */	lwz r4, 0(r29)
+/* 801CA174 001C6D54  80 1D 00 04 */	lwz r0, 4(r29)
+/* 801CA178 001C6D58  90 83 00 08 */	stw r4, 8(r3)
+/* 801CA17C 001C6D5C  90 03 00 0C */	stw r0, 0xc(r3)
+/* 801CA180 001C6D60  80 1D 00 08 */	lwz r0, 8(r29)
+/* 801CA184 001C6D64  90 03 00 10 */	stw r0, 0x10(r3)
+/* 801CA188 001C6D68  93 C3 00 14 */	stw r30, 0x14(r3)
+/* 801CA18C 001C6D6C  D3 E3 00 18 */	stfs f31, 0x18(r3)
+/* 801CA190 001C6D70  93 E3 00 1C */	stw r31, 0x1c(r3)
+/* 801CA194 001C6D74  48 00 00 08 */	b lbl_801CA19C
+lbl_801CA198:
+/* 801CA198 001C6D78  38 60 00 00 */	li r3, 0
+lbl_801CA19C:
+/* 801CA19C 001C6D7C  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 801CA1A0 001C6D80  CB E1 00 38 */	lfd f31, 0x38(r1)
+/* 801CA1A4 001C6D84  83 E1 00 34 */	lwz r31, 0x34(r1)
+/* 801CA1A8 001C6D88  83 C1 00 30 */	lwz r30, 0x30(r1)
+/* 801CA1AC 001C6D8C  83 A1 00 2C */	lwz r29, 0x2c(r1)
+/* 801CA1B0 001C6D90  83 81 00 28 */	lwz r28, 0x28(r1)
+/* 801CA1B4 001C6D94  38 21 00 40 */	addi r1, r1, 0x40
+/* 801CA1B8 001C6D98  7C 08 03 A6 */	mtlr r0
+/* 801CA1BC 001C6D9C  4E 80 00 20 */	blr 
+
+
+.section .bss
+    .balign 8
+.global lbl_8049EFA0
+lbl_8049EFA0:
+    .skip 0x90
+
+
+.section .data
+    .balign 8
+.global lbl_803E0B80
+lbl_803E0B80:
+    .asciz "grdynamicattr.c"
+    .balign 4
+.global lbl_803E0B90
+lbl_803E0B90:
+    .asciz "floor_id!=GC_Id_None"
