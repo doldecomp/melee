@@ -2,6 +2,13 @@
 
 .section .text
 
+.global func_801C96E8
+func_801C96E8:
+/* 801C96E8 001C62C8  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 801C96EC 001C62CC  88 63 00 10 */	lbz r3, 0x10(r3)
+/* 801C96F0 001C62D0  54 63 EF FE */	rlwinm r3, r3, 0x1d, 0x1f, 0x1f
+/* 801C96F4 001C62D4  4E 80 00 20 */	blr
+
 .global func_801C96F8
 func_801C96F8:
 /* 801C96F8 001C62D8  7C 08 02 A6 */	mflr r0
