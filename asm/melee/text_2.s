@@ -50473,22 +50473,6 @@ lbl_803E0A20:
     .4byte 0x6572210A
     .4byte NULL
     .4byte NULL
-.global lbl_803E0B80
-lbl_803E0B80:
-    .asciz "grdynamicattr.c"
-    .balign 4
-.global lbl_803E0B90
-lbl_803E0B90:
-    .asciz "floor_id!=GC_Id_None"
-    .balign 4
-.global lbl_803E0BA8
-lbl_803E0BA8:
-    .asciz "grzakogenerator.c"
-    .balign 4
-.global lbl_803E0BBC
-lbl_803E0BBC:
-    .asciz "%s:%d: couldn t get gobj!\n"
-    .balign 4
 
 
 .section .bss, "wa"
@@ -50676,15 +50660,6 @@ lbl_8049EE10:
 .global lbl_8049EE40
 lbl_8049EE40:
 	.skip 0x118
-.global lbl_8049EF58
-lbl_8049EF58:
-	.skip 0x48
-.global lbl_8049EFA0
-lbl_8049EFA0:
-	.skip 0x90
-.global lbl_8049F030
-lbl_8049F030:
-	.skip 0x10
 
 
 .section .sdata

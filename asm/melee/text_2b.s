@@ -1091,6 +1091,35 @@ lbl_801CAF9C:
 /* 801CAFB8 001C7B98  4E 80 00 20 */	blr 
 
 
+.section .bss
+    .balign 8
+.global lbl_8049EFA0
+lbl_8049EFA0:
+	.skip 0x90
+.global lbl_8049F030
+lbl_8049F030:
+	.skip 0x10
+
+
+.section .data
+    .balign 8
+.global lbl_803E0B80
+lbl_803E0B80:
+    .asciz "grdynamicattr.c"
+    .balign 4
+.global lbl_803E0B90
+lbl_803E0B90:
+    .asciz "floor_id!=GC_Id_None"
+    .balign 4
+.global lbl_803E0BA8
+lbl_803E0BA8:
+    .asciz "grzakogenerator.c"
+    .balign 4
+.global lbl_803E0BBC
+lbl_803E0BBC:
+    .asciz "%s:%d: couldn t get gobj!\n"
+
+
 .section .sdata
     .balign 8
 .global lbl_804D4590

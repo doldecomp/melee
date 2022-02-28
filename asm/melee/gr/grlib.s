@@ -750,6 +750,12 @@ lbl_801CA090:
 /* 801CA0B0 001C6C90  4E 80 00 20 */	blr 
 
 
+.section .bss
+.global lbl_8049EF58
+lbl_8049EF58:
+	.skip 0x48
+
+
 .section .sdata
     .balign 8
 .global lbl_804D4570
