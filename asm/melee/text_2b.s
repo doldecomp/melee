@@ -1132,4 +1132,3 @@ lbl_804DADAC:
 .global lbl_804DADB0
 lbl_804DADB0:
 	.4byte 0x3F000000
-	.4byte 0x00000000

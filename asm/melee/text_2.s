@@ -52103,4 +52103,3 @@ lbl_804DAD78:
 .global lbl_804DAD80
 lbl_804DAD80:
 	.4byte 0x43300000
-	.4byte 0x00000000
