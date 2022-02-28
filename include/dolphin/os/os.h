@@ -5,6 +5,9 @@
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSTime.h>
 
+void OSReport(char *, ...);
+void OSPanic(char *file, int line, char *msg, ...);
+
 #define OSRoundUp32B(x)   (((u32)(x) + 32 - 1) & ~(32 - 1))
 #define OSRoundDown32B(x) (((u32)(x)) & ~(32 - 1))
 

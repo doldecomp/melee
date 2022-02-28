@@ -287,7 +287,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvd.s.o              \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdqueue.s.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvderror.s.o         \
-	$(BUILD_DIR)/asm/dolphin/dvd/fstload.s.o          \
+	$(BUILD_DIR)/src/dolphin/dvd/fstload.c.o          \
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.s.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o            \
