@@ -5,10 +5,10 @@
 
 typedef struct
 {
-    u32     bPresent;
-    u32     exceptionMask;
-    void    (*ExceptionDestination) (void);
-    void    *exceptionReturn;
+    u32 bPresent;
+    u32 exceptionMask;
+    void (*ExceptionDestination)(void);
+    void* exceptionReturn;
 } DBInterface;
 
 void DBInit(void);
