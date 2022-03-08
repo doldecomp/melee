@@ -164,13 +164,19 @@ inline void HSD_JObjSetMtxDirty(HSD_JObj* jobj)
     }
 }
 
+inline HSD_JObjCheckObj(HSD_JObj* jobj)
+{
+
+    if (jobj == NULL) {
+        __assert("jobj.h", 0x394, "jobj");
+    }
+}
+
 inline HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* vec)
 {
-    if (jobj == NULL) {
-        __assert("jobj.h", 916, "jobj");
-    }
+
     if (vec == NULL) {
-        __assert("jobj.h", 917, "translate");
+        __assert("jobj.h", 0x395, "translate");
     }
 
     jobj->translate = *vec;
@@ -179,6 +185,44 @@ inline HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* vec)
         HSD_JObjSetMtxDirty(jobj);
     }
 }
+
+inline HSD_JObjSetScale(HSD_JObj* jobj, Vec* vec)
+{
+    if (jobj == NULL) {
+        __assert("jobj.h", 760, "scale");
+    }
+
+    jobj->scale = *vec;
+
+    if ((jobj->flags & 0x2000000) == 0) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec *scale)
+{
+    if (jobj == 0U) {
+            __assert("jobj.h"/*lbl_804D3A00*/, 0x337, "jobj"/*lbl_804D3A08*/);
+    }
+    *scale = jobj->scale;
+}
+
+inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion *quat)
+{
+    if (jobj == 0U) {
+        __assert("jobj.h"/*lbl_804D3A00*/, 0x2BB, "jobj"/*lbl_804D3A08*/);
+    }
+    *quat = jobj->rotate;
+}
+
+inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec *translate)
+{
+    if (jobj == 0U) {
+        __assert("jobj.h"/*lbl_804D3A00*/, 0x3D3, "jobj"/*lbl_804D3A08*/);
+    }
+    *translate = jobj->translate;
+}
+
 #pragma pop
 
 #endif

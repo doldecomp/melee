@@ -100,8 +100,8 @@ void func_80081544(HSD_GObj* gobj) {
         } else {
             func_80053DA4(fighter->x2340_stateVar1, sp10);
         }
-        fighter->xB0_pos.x = (f32) ((fighter->x68C.z * fighter->x2C_facing_direction) + sp10[0]);
-        fighter->xB0_pos.y = (f32) (sp10[1] + fighter->x68C.y);
+        fighter->xB0_pos.x = (f32) ((fighter->x68C_transNPos.z * fighter->x2C_facing_direction) + sp10[0]);
+        fighter->xB0_pos.y = (f32) (sp10[1] + fighter->x68C_transNPos.y);
         return;
     }
     func_800CC730(gobj);

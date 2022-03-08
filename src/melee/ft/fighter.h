@@ -87,7 +87,9 @@ typedef struct _ftCommonData {
     u8 filler_x9C[0x200-0x9C];
     /* 0x200 */ f32 x200;
     /* 0x204 */ f32 x204_knockbackFrameDecay;
-    u8 filler_x208[0x294-0x208];
+    u8 filler_x208[0x260-0x208];
+    /* 0x260 */ f32 x260;
+    u8 filler_x264[0x294-0x264];
     /* 0x294 */ f32 x294;
     u8 filler_x298[0x3E8-0x298];
     /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
@@ -203,6 +205,7 @@ typedef struct _ftHit
     u8 filler_x0[0x134];
     int x134;
 } ftHit;
+
 
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
@@ -354,14 +357,14 @@ typedef struct _Fighter {
     /* 0x618 */ s8 x618_flag;
     /* 0x619 */ s8 x619_flag;
     u8 filler_x61A[0x61D - 0x61A];
-    /* 0x61D */ s8 x61D;
+    /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
     f32 x624;
     u8 filler_x624[0x670 - 0x628];
     /* 0x670 */ u8 x670_timer_lstick_tilt_x;
     u8 filler_x670[0x68C - 0x671];
-    /* 0x68C */ Vec3 x68C;
+    /* 0x68C */ Vec3 x68C_transNPos;
     u8 filler_x698[0x6A4-0x698];
     /* 0x6A4 */ Vec3 x6A4_transNOffset;
     u8 filler_x6B0[0x6BC-0x6B0];
@@ -401,7 +404,7 @@ typedef struct _Fighter {
     /* 0x18A0 */ f32 x18A0;
     /* 0x18A4 */ f32 x18A4_knockbackMagnitude;
     /* 0x18A8 */ f32 x18A8;
-    /* 0x18A8 */ f32 x18AC_timeSinceHit;
+    /* 0x18A8 */ s32 x18AC_timeSinceHit;
     /* 0x18B0 */ f32 x18B0;
     /* 0x18B4 */ f32 x18B4_armor;
     /* 0x18B8 */ f32 x18B8;
@@ -440,7 +443,7 @@ typedef struct _Fighter {
     /* 0x1964 */ f32 x1964;
     /* 0x1968 */ u8 x1968_jumpsUsed;
     /* 0x1969 */ u8 x1969_walljumpUsed;
-    /* 0x196C */ int x196C;
+    /* 0x196C */ s32 x196C_hitlag_mult;
     /* 0x1970 */ int x1970;
     /* 0x1974 */ void* x1974_heldItem;
     /* 0x1978 */ HSD_GObj* x1978;
