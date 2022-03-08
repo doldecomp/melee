@@ -117,12 +117,11 @@ f32 Stage_CalcUnkCamYBounds()
     return 0.5F * (cam_offset + y_pos_product);
 }
 
-f32 Stage_UnkSetVec3TCam_Offset(Vec* vec3, f32 arg8)
+void Stage_UnkSetVec3TCam_Offset(Vec* vec3)
 {
     vec3->x = stage_info.cam_info.cam_x_offset;
     vec3->y = stage_info.cam_info.cam_y_offset;
     vec3->z = 0.0F;
-    return arg8;
 }
 
 f32 Stage_GetPauseCamZPosMin()
@@ -282,7 +281,7 @@ s32 Stage_80225074(s32 arg0)
     s32 spC;
 
     if (func_8016B238() != 0) {
-        if (((stage_info.unk8C >> 7) & 0x1) || (arg0 == 2)) {
+        if (stage_info.unk8C.b0 || arg0 == 2) {
             r31 = 0x12;
         } else {
             r31 = 0x11;

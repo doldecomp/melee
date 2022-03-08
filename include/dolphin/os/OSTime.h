@@ -3,6 +3,9 @@
 
 #include <dolphin/types.h>
 
+typedef s64 OSTime;
+typedef u32 OSTick;
+
 typedef struct OSCalendarTime
 {
     int sec;    // seconds after the minute [0, 61]

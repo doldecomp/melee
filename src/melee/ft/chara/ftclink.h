@@ -26,6 +26,25 @@ typedef struct _CLinkAttributes {
 void func_80148F38(HSD_GObj*, s32);
 void func_80149018(HSD_GObj*, s32);
 
+inline void checkFighter2244(HSD_GObj* gobj)
+{
+    Fighter* ft;
+
+    if (gobj == NULL) {
+        return;
+    }
+
+    ft = gobj->user_data;
+    if (ft != NULL && ft->x2244 != 0) {
+        func_802C8C34(ft->x2244);
+        ft->x2244 = 0;
+    }
+
+    if (gobj == NULL) {
+        gobj == NULL;
+    }
+}
+
 #define ITEM_CLINK_MILK 0x7B
 
 #endif

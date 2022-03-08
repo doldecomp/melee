@@ -2,7 +2,8 @@
 
 INIT_O_FILES := 						            \
 	$(BUILD_DIR)/src/Runtime/__mem.c.o	            \
-	$(BUILD_DIR)/asm/init.s.o				            \
+	$(BUILD_DIR)/src/MetroTRK/mem_TRK.c.o	        \
+	$(BUILD_DIR)/asm/init.s.o				        \
     $(BUILD_DIR)/src/dolphin/os/init/__start.c.o
 
 EXTAB_O_FILES :=                                    \
@@ -89,7 +90,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftmewtwo.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftclink.c.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftclink.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftclink_2.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario_2.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftfalco.c.o 		\
@@ -111,7 +112,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.s.o 		 			\
 															\
 	$(BUILD_DIR)/asm/melee/text_2.s.o 		 	            \
-															\
+	                                                  \
+	$(BUILD_DIR)/asm/melee/gr/grlib.s.o               \
+	$(BUILD_DIR)/asm/melee/gr/grdynamicattr.s.o       \
+	$(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o     \
 	$(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grizumi.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grcastle.s.o 		            \
@@ -119,6 +123,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grkongo.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grzebes.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grcorneria.s.o 	 	            \
+	$(BUILD_DIR)/src/melee/gr/grstory.c.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grstory.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/gronett.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grbigblue.s.o 	 	            \
@@ -273,17 +278,17 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/thp/THPDec.s.o           \
 	$(BUILD_DIR)/asm/dolphin/jpeg/jpegdec.s.o         \
 	$(BUILD_DIR)/src/dolphin/base/PPCArch.c.o	        \
-	$(BUILD_DIR)/asm/dolphin/db/db.s.o                \
+	$(BUILD_DIR)/src/dolphin/db/db.c.o                \
 	$(BUILD_DIR)/src/dolphin/dsp/dsp.c.o              \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp.s.o              \
-	$(BUILD_DIR)/asm/dolphin/dsp/dsp_debug.s.o        \
+	$(BUILD_DIR)/src/dolphin/dsp/dsp_debug.c.o        \
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_task.s.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdlow.s.o           \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdfs.s.o            \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvd.s.o              \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdqueue.s.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvderror.s.o         \
-	$(BUILD_DIR)/asm/dolphin/dvd/fstload.s.o          \
+	$(BUILD_DIR)/src/dolphin/dvd/fstload.c.o          \
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.s.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o            \
@@ -345,7 +350,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.s.o 			\
                                                     \
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/dobj.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.c.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.s.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.s.o		\
@@ -381,7 +385,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/robj.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/id.c.o        \
 	$(BUILD_DIR)/src/sysdolphin/baselib/wobj.c.o      \
-	$(BUILD_DIR)/asm/sysdolphin/baselib/wobj.s.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fog.s.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/perf.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/list.c.o		\

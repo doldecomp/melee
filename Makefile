@@ -97,6 +97,7 @@ CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum i
 $(EPILOGUE_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
 $(EPILOGUE_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
 $(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.c.o: CC_EPI := $(CC)
+$(EPILOGUE_DIR)/src/sysdolphin/baselib/wobj.c.o: CC_EPI := $(CC)
 
 
 HOSTCFLAGS := -Wall -O3 -s

@@ -185,24 +185,8 @@ BOOL func_8014920C(HSD_GObj* gobj)
 
 void func_80149268(HSD_GObj* gobj)
 {
-    Fighter* ft;
     int unused[2];
-
-    if (gobj == NULL) {
-        return;
-    }
-
-    ft = gobj->user_data;
-    if (ft != NULL) {
-        if (ft->x2244 != 0) {
-            func_802C8C34(ft->x2244);
-            ft->x2244 = 0;
-        }
-    }
-
-    if (gobj == NULL) {
-        return;
-    }
+    checkFighter2244(gobj);
 }
 
 void func_801492C4(HSD_GObj* gobj)
