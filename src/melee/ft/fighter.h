@@ -4,6 +4,7 @@
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
+#include "melee/pl/player.h"
 #include "sysdolphin/baselib/gobj.h"
 
 typedef enum FighterKind
