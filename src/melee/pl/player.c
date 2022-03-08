@@ -1032,7 +1032,7 @@ void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2) {
     player->transformed[arg2] = temp_r5;
 }
 
-s16 Player_GetDamage(s32 slot) {   
+s32 Player_GetDamage(s32 slot) {   
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
