@@ -87,9 +87,11 @@ typedef struct _ftCommonData {
     u8 filler_x9C[0x200-0x9C];
     /* 0x200 */ f32 x200;
     /* 0x204 */ f32 x204_knockbackFrameDecay;
-    u8 filler_x208[0x294-0x208];
+    u8 filler_x208[0x21C-0x208];
+    /* 0x21C */ f32 x21C;
+    u8 filler_x298[0x294-0x220];
     /* 0x294 */ f32 x294;
-    u8 filler_x298[0x3E8-0x298];
+    u8 filler_x220[0x3E8-0x298];
     /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
     /* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
     u8 filler_x3F0[0x480-0x3F0];
@@ -115,7 +117,7 @@ typedef struct _FtCollisionData
 typedef struct _ftData
 {
     s32 filler_x0;
-    /* 0x04 */ s32* ext_attr;
+    /* 0x04 */ void* ext_attr;
     s32 filler_x4[16];
     /* 0x48 */ void* x48_items;
     FtCollisionData* x4C_collisionData;
@@ -162,6 +164,11 @@ typedef struct _FighterBone
   /* 0x4 */ u8* x4_joint2; // used for interpolation
   u32 data_filler[2];
 } FighterBone;
+
+typedef struct _Hitbox {
+    s32 x0;
+    u8 filler[0x134];
+} Hitbox;
 
 typedef struct _CameraBox
 {
@@ -357,8 +364,13 @@ typedef struct _Fighter {
     /* 0x61D */ s8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
-    f32 x624;
-    u8 filler_x624[0x670 - 0x628];
+    /* 0x624 */ f32 x624_lstick_y;
+    u8 filler_x624[0x65C - 0x628];
+    /* 0x65C */ u32 x65C;
+    /* 0x660 */ u32 x660;
+    /* 0x664 */ u32 x664;
+    /* 0x668 */ u32 x668;
+    /* 0x66C */ u32 x66C;
     /* 0x670 */ u8 x670_timer_lstick_tilt_x;
     u8 filler_x670[0x68C - 0x671];
     /* 0x68C */ Vec3 x68C;
@@ -383,8 +395,8 @@ typedef struct _Fighter {
     s32 filler_x8A4[2];
     /* 0x8AC */ s32 x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
-    /* 0x914 */ f32 x914;
-    u8 filler_x918[0x1064 - 0x918];
+    /* 0x914 */ Hitbox x914[4];
+    u8 filler_xDF4[0x1064 - 0xDF4];
     /* 0x1064 */ ftHit x1064_thrownHitbox;
     u8 filler_x1064[0x1828 - 0x1064 - sizeof(ftHit)];
     /* 0x1828 */ s32 x1828;
@@ -553,7 +565,8 @@ typedef struct _Fighter {
     void (*x21E0_callback_OnDeath)(HSD_GObj *fighter); // used
     void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
     void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
-    u8 filler_x21EC[0x2200 - 0x21EC];
+    void (*x21EC_callback)(HSD_GObj *fighter); // used
+    u8 filler_x21F0[0x2200 - 0x21F0];
     /* 0x2200 */ u32 x2200_ftcmd_var0;
     /* 0x2204 */ u32 x2200_ftcmd_var1;
     /* 0x2208 */ u32 x2200_ftcmd_var2;

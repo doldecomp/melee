@@ -104,12 +104,12 @@ void func_8014FC24(void) {
     return;
 }
 
-void func_8014FC28(void)
+void func_8014FC28(HSD_GObj* gobj)
 {
-    func_80084F3C();
+    func_80084F3C(gobj);
 }
 
-void func_8014FC48(void)
+void func_8014FC48(HSD_GObj* gobj)
 {
-    func_80083F88();
+    func_80083F88(gobj);
 }

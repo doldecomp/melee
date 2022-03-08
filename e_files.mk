@@ -20,6 +20,11 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftgigakoopa.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftkoopa.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmario.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmars/ftmars1.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmars/ftmars2_neutralb.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmars/ftmars3_sideb.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmars/ftmars4_upb.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmars/ftmars5_downb.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftness.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpeach.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpichu.c.o\
