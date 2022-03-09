@@ -4,8 +4,16 @@
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
-#include "melee/pl/player.h"
-#include "sysdolphin/baselib/gobj.h"
+#include <functions.h>
+#include <melee/pl/player.h>
+#include <melee/gr/stage.h>
+#include <math.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
+
 
 typedef enum FighterKind
 {
@@ -444,7 +452,7 @@ typedef struct _Fighter {
     /* 0x1964 */ f32 x1964;
     /* 0x1968 */ u8 x1968_jumpsUsed;
     /* 0x1969 */ u8 x1969_walljumpUsed;
-    /* 0x196C */ s32 x196C_hitlag_mult;
+    /* 0x196C */ f32 x196C_hitlag_mult;
     /* 0x1970 */ int x1970;
     /* 0x1974 */ void* x1974_heldItem;
     /* 0x1978 */ HSD_GObj* x1978;
