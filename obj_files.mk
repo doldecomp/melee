@@ -132,9 +132,12 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.s.o 		 			\
 															\
 	$(BUILD_DIR)/asm/melee/text_2.s.o 		 	            \
-	$(BUILD_DIR)/asm/melee/gr/ground.s.o              \
-	$(BUILD_DIR)/asm/melee/text_2b.s.o                \
 	                                                  \
+	$(BUILD_DIR)/asm/melee/gr/ground.s.o              \
+	$(BUILD_DIR)/asm/melee/gr/grdisplay.s.o           \
+	$(BUILD_DIR)/asm/melee/gr/grdatfiles.s.o          \
+	$(BUILD_DIR)/asm/melee/gr/granime.s.o             \
+	$(BUILD_DIR)/asm/melee/gr/grmaterial.s.o          \
 	$(BUILD_DIR)/asm/melee/gr/grlib.s.o               \
 	$(BUILD_DIR)/asm/melee/gr/grdynamicattr.s.o       \
 	$(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o     \
