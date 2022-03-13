@@ -22,6 +22,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/lb/lbvector.c.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.s.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.s.o 		\
+	$(BUILD_DIR)/asm/melee/lb/lbarq.s.o 		\
+	$(BUILD_DIR)/asm/melee/lb/lbmemory.s.o 		\
 	$(BUILD_DIR)/asm/melee/lb/lbheap.s.o 				\
 	$(BUILD_DIR)/src/melee/lb/lbfile.c.o 				\
 	$(BUILD_DIR)/asm/melee/lb/lbfile.s.o 				\
