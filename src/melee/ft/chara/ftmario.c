@@ -271,3 +271,12 @@ void func_800E0E54(HSD_GObj* gobj) {
 void func_800E0E84() {
     func_80084F3C();
 }
+
+void func_800E0EA4(HSD_GObj* gobj){
+    int res;
+
+    res = func_80082708(gobj);
+    if (res == 0) {
+        func_800E1178(gobj);
+    }
+}
