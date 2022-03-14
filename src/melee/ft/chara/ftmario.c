@@ -2,7 +2,9 @@
 #include <sysdolphin/baselib/random.h>
 
 extern void func_800E1368(void);
+extern void func_8008A4D4(HSD_GObj*);
 extern void func_800E0EE0(HSD_GObj*);
+extern void func_80084F3C(void);
 extern const f32 lbl_804D9198;
 extern const f32 lbl_804D919C;
 extern s32 lbl_803C5A20[];
@@ -161,6 +163,39 @@ s32 func_800E0CE0(s32 arg0) {
     return lbl_803C5A20[offset - 0xe];
 }
 
+/*
+// Progress - Close-ish but not matching. Can't get compiler to use CTR
+void func_800E0D1C(HSD_GObj* gobj) {
+    //int i;
+    //s32 temp_r3;
+    Fighter* ft = gobj->user_data;
+    
+    u32 arr[9];
+    
+    s32 phi_ctr;
+    u32* r4_ptr;
+    int r3, r5; 
+
+    int i;
+    r5 = 0;
+    r4_ptr = arr+1;
+    r3 = 0;
+    i = 9 - r5;
+    
+    //For loop I had (that was not unrolling - note if using decrementing instead of incrementing, the loop unrolls):
+    for(i = 0; i != 9 - r5; i++) {
+        if(((r5 != (int)ft->x222C) && (r5 != (int)ft->x2230))) {
+            *r4_ptr++ = r5;
+            r3 += 1;
+        }
+        r5 += 1;
+        
+    }
+
+    r5 = (int)arr[HSD_Randi(r3)+1];
+    ft->x2230 = ft->x222C;
+    ft->x222C = r5;
+}*/
 asm void func_800E0D1C(HSD_GObj* gobj)
 {
     nofralloc
@@ -223,4 +258,16 @@ void func_800E0E18(HSD_GObj* gobj){
     if (res == 0) {
         func_8008A2BC(gobj);
     }
+}
+
+void func_800E0E54(HSD_GObj* gobj) {
+    Fighter* ft;
+    ft = gobj->user_data;
+    if(ft->x2200_ftcmd_var0 != 0) {
+        func_8008A4D4(gobj);
+    }
+}
+
+void func_800E0E84() {
+    func_80084F3C();
 }
