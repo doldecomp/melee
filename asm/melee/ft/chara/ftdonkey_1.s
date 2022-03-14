@@ -1198,6 +1198,17 @@ lbl_800E08B8:
 /* 800E08C8 000DD4A8  4E 80 00 20 */	blr 
 
 
+.section .data
+    .balign 8
+.global lbl_803C70F0
+lbl_803C70F0:
+    .asciz "couldn't get walk frame\n"
+    .balign 4
+.global lbl_803C710C
+lbl_803C710C:
+    .asciz "ftwalkcommon.c"
+
+
 .section .sdata
     .balign 8
 .global lbl_804D3D78
