@@ -447,7 +447,7 @@ void func_801336CC(HSD_GObj* gobj) {
     ft = ft_temp = gobj->user_data;
     koopaAttr = (ftKoopaAttributes *) ft->x2D4_specialAttributes;
     if (((u32) ft->x2200_ftcmd_var0 != 0) && ((s32) ft->x2344_stateVar2 != 0)) {
-        func_8007ABD0((s32)ft + 0x914, koopaAttr->x2C, gobj);
+        func_8007ABD0(&ft->x914[0], koopaAttr->x2C, gobj);
         ft->x2200_ftcmd_var0 = 0;
     }
     if (func_8006F238(gobj) == 0) {

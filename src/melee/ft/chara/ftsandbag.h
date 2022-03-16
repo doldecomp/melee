@@ -22,7 +22,7 @@ void func_8014FBA4(HSD_GObj* gobj);
 void func_8014FC20(void);
 void func_8014FC24(void);
 
-void func_8014FC28(void);
-void func_8014FC48(void);
+void func_8014FC28(HSD_GObj* gobj);
+void func_8014FC48(HSD_GObj* gobj);
 
 #endif
