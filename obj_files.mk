@@ -83,11 +83,11 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftkoopa.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkoopa.s.o 		\
-	$(BUILD_DIR)/src/melee/ft/chara/ftmars/ftmars1.c.o      \
-	$(BUILD_DIR)/src/melee/ft/chara/ftmars/ftmars2_neutralb.c.o      \
-	$(BUILD_DIR)/src/melee/ft/chara/ftmars/ftmars3_sideb.c.o      \
-	$(BUILD_DIR)/src/melee/ft/chara/ftmars/ftmars4_upb.c.o      \
-	$(BUILD_DIR)/src/melee/ft/chara/ftmars/ftmars5_downb.c.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMars.c.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialN.c.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialS.c.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialHi.c.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialLw.c.o      \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o 		\
