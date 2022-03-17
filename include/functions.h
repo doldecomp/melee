@@ -8524,7 +8524,7 @@ struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
 void* HSD_JObjAnimAll(); // asm/sysdolphin/baselib/jobj.s
 // ? func_803709DC(?);
 // ? HSD_JObjSetDefaultClass(?);
-struct _HSD_JObj* HSD_JObjLoadJoint(struct _HSD_Joint);
+struct _HSD_JObj* HSD_JObjLoadJoint(struct _HSD_Joint*);
 // ? HSD_JObjResolveRefs(?);
 // ? HSD_JObjResolveRefsAll(?);
 void HSD_JObjUnref(struct _HSD_JObj* jobj);

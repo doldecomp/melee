@@ -23,7 +23,7 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 3, -1);
     func_80074A4C(gobj, 4, 0);
 
-    switch (ft->x619_flag)
+    switch (ft->costume_id)
     {
         case 1:
             func_80074A4C(gobj, 1, -1);

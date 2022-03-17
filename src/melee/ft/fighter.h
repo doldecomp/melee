@@ -13,6 +13,7 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
+#include "sysdolphin/baselib/controller.h"
 
 
 typedef enum FighterKind
@@ -88,6 +89,18 @@ typedef enum CharacterKind
     CKIND_SANDBAG,
     CKIND_POPO,
 } CharacterKind;
+
+
+typedef struct {
+    HSD_Joint* joint;
+    u8 padding[20];
+} UnkFighterJointStruct;
+
+struct Pair_Pointer_and_Flag {
+    UnkFighterJointStruct* unk_fighter_struct;
+    s32 flag;
+};
+
 
 // Points to data in PiCo.dat
 typedef struct _ftCommonData {
@@ -248,7 +261,7 @@ typedef struct _Fighter {
     /* 0xF8 */ Vec2 xF8_playerNudgeVel;
     /* 0x100 */ f32 x100;
     s32 filler_x104;
-    /* 0x108 */ int* x108_costume_archive;
+    /* 0x108 */ void* x108_costume_archive;
     /* 0x10C */ ftData* x10C_ftData;
     // TODO: Ask Psi how many of those are confirmed, only a fraction of them is used right now
     struct attr
@@ -364,7 +377,7 @@ typedef struct _Fighter {
     /* 0x60C */ void* x60C;
     u8 filler_x610[0x618 - 0x610];
     /* 0x618 */ s8 x618_flag;
-    /* 0x619 */ s8 x619_flag;
+    /* 0x619 */ u8 costume_id;
     u8 filler_x61A[0x61D - 0x61A];
     /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];

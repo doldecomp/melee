@@ -1,11 +1,6 @@
 #include "fighter.h"
 
 
-#define FIGHTER_DONE 1
-
-// uncomment to compile the C functions instead of the inline asm functions
-// #define FIGHTER_DONE
-
 // ==== external variables ====
 // ============================
 
@@ -18,7 +13,8 @@ extern ft_callback ft_OnDeath[33]; // One death callback for every character.
 extern fn_ptr_t lbl_803C10D0[33];
 
 extern void* ft_OnAbsorb;
-extern s32 lbl_803C0EC0;
+extern struct Pair_Pointer_and_Flag lbl_803C0EC0[33];
+
 extern s32 lbl_803C125C;
 extern s32 lbl_803C12E0;
 extern s32 lbl_803C1DB4;
@@ -28,7 +24,6 @@ extern s32 lbl_804598B8;
 
 extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
 
-#include "sysdolphin/baselib/controller.h"
 extern HSD_RumbleData HSD_PadRumbleData[4]; // from sysdolphin/baselib/controller.s
 
 typedef struct StageInfo { u8 filler[0x748]; };
@@ -215,309 +210,314 @@ void func_80067BB4(HSD_GObj* pPlayerEntity)
     HSD_JObjSetScale(jobj, &scale_sp14);
 }
 
-// https://decomp.me/scratch/HXrlP
-// No Match, one mr instruction is shifted.
-void func_80067C98(Fighter* r27) {
+// Fake Match:  https://decomp.me/scratch/Pegi9
+// https://decomp.me/scratch/dEh27  -- No Match, one mr instruction is shifted.
+void func_80067C98(register Fighter* ft) {
 	Vec3 spC_player_coord;
 	f32 x,y,z;
-	Fighter* tmp;
+	register Fighter* tmp;
 
-	r27->x8_spawnNum = func_80068E40();
-	Player_800326CC(r27->xC_playerID, &spC_player_coord); //PlayerBlock_LoadPlayerCoords_StoreToR4
-	r27->x2C_facing_direction = Player_GetFacingDirection(r27->xC_playerID); // PlayerBlock_LoadFacingDirection
+	ft->x8_spawnNum = func_80068E40();
+	Player_800326CC(ft->xC_playerID, &spC_player_coord); //PlayerBlock_LoadPlayerCoords_StoreToR4
+	ft->x2C_facing_direction = Player_GetFacingDirection(ft->xC_playerID); // PlayerBlock_LoadFacingDirection
 
-	spC_player_coord.x = r27->x2C_facing_direction * func_800804EC(r27) + spC_player_coord.x;
+	spC_player_coord.x = ft->x2C_facing_direction * func_800804EC(ft) + spC_player_coord.x;
 	x = spC_player_coord.x;
-	r27->xB0_pos.x = x;
-	r27->xBC_prevPos.x = x;
+	ft->xB0_pos.x = x;
+	ft->xBC_prevPos.x = x;
 
 	y = spC_player_coord.y;
-	r27->xB0_pos.y = y;
-	r27->xBC_prevPos.y = y;
+	ft->xB0_pos.y = y;
+	ft->xBC_prevPos.y = y;
 
 	z = spC_player_coord.z;
-	r27->xB0_pos.z = z;
-	r27->xBC_prevPos.z = z;
+	ft->xB0_pos.z = z;
+	ft->xBC_prevPos.z = z;
 
-	r27->x30_facingDirectionRepeated = r27->x2C_facing_direction;
-	r27->x34_scale.y = r27->x34_scale.x;
+	ft->x30_facingDirectionRepeated = ft->x2C_facing_direction;
+	ft->x34_scale.y = ft->x34_scale.x;
 
-	r27->x2220_flag.bits.b5 = 0;
-	r27->x2220_flag.bits.b6 = 0;
+	ft->x2220_flag.bits.b5 = 0;
+	ft->x2220_flag.bits.b6 = 0;
 
-	r27->x200C = 0;
-	r27->x2010 = 0;
-	r27->x2008 = 0;
+	ft->x200C = 0;
+	ft->x2010 = 0;
+	ft->x2008 = 0;
 
-	r27->x2219_flag.bits.b1 = 0;
-	r27->x2219_flag.bits.b2 = 0;
-	r27->x2219_flag.bits.b3 = 0;
-	r27->x2219_flag.bits.b4 = 0;
-	r27->x221A_flag.bits.b5 = 0;
-	r27->x221A_flag.bits.b6 = 0;
-	r27->x221D_flag.bits.b2 = 0;
-	r27->x221E_flag.bits.b7 = 0;
-	r27->x2220_flag.bits.b7 = 0;
-	r27->x2221_flag.bits.b4 = 0;
-	r27->x2221_flag.bits.b5 = 0;
-	r27->x2221_flag.bits.b6 = 1;
-	r27->x2221_flag.bits.b7 = 0;
+	ft->x2219_flag.bits.b1 = 0;
+	ft->x2219_flag.bits.b2 = 0;
+	ft->x2219_flag.bits.b3 = 0;
+	ft->x2219_flag.bits.b4 = 0;
+	ft->x221A_flag.bits.b5 = 0;
+	ft->x221A_flag.bits.b6 = 0;
+	ft->x221D_flag.bits.b2 = 0;
+	ft->x221E_flag.bits.b7 = 0;
+	ft->x2220_flag.bits.b7 = 0;
+	ft->x2221_flag.bits.b4 = 0;
+	ft->x2221_flag.bits.b5 = 0;
+	ft->x2221_flag.bits.b6 = 1;
+	ft->x2221_flag.bits.b7 = 0;
 
-	r27->x61D = 255;
+	ft->x61D = 255;
 
-	r27->xC8_pos_delta.z /*xD0*/ = 0.0f;//lbl_804D8254
-	r27->xC8_pos_delta.y /*xCC*/ = 0.0f;//lbl_804D8254
-	r27->xC8_pos_delta.x = 0.0f;//lbl_804D8254
-	r27->x894 = 0.0f;//lbl_804D8254
-	r27->x898 = 0.0f;//lbl_804D8254
+	ft->xC8_pos_delta.z /*xD0*/ = 0.0f;//lbl_804D8254
+	ft->xC8_pos_delta.y /*xCC*/ = 0.0f;//lbl_804D8254
+	ft->xC8_pos_delta.x = 0.0f;//lbl_804D8254
+	ft->x894 = 0.0f;//lbl_804D8254
+	ft->x898 = 0.0f;//lbl_804D8254
 
-	r27->x89C = 1.0f;//lbl_804D8250
-	r27->x8A0 = 1.0f;//lbl_804D8250
-	r27->x1850_forceApplied = 0.0f;//lbl_804D8254
-	r27->x18A4_knockbackMagnitude = 0.0f;//lbl_804D8254
-	r27->x18A8 = 0.0f;//lbl_804D8254
-	r27->x18AC_timeSinceHit = -1;
-	r27->x18B0 = 0.0f;//lbl_804D8254
-	r27->x18B4_armor = 0.0f;//lbl_804D8254
-	r27->x1828 = 0;
+	ft->x89C = 1.0f;//lbl_804D8250
+	ft->x8A0 = 1.0f;//lbl_804D8250
+	ft->x1850_forceApplied = 0.0f;//lbl_804D8254
+	ft->x18A4_knockbackMagnitude = 0.0f;//lbl_804D8254
+	ft->x18A8 = 0.0f;//lbl_804D8254
+	ft->x18AC_timeSinceHit = -1;
+	ft->x18B0 = 0.0f;//lbl_804D8254
+	ft->x18B4_armor = 0.0f;//lbl_804D8254
+	ft->x1828 = 0;
 
-	r27->x221C_flag.bits.b6 = 0;
+	ft->x221C_flag.bits.b6 = 0;
 
-	r27->x18A0 = 0.0f;//lbl_804D8254
-	r27->x1968_jumpsUsed = 0;
-	r27->x1969_walljumpUsed = 0;
-	r27->x196C_hitlag_mult = 0.0f;//lbl_804D8254
-	r27->x2064_ledgeCooldown = 0;
+	ft->x18A0 = 0.0f;//lbl_804D8254
+	ft->x1968_jumpsUsed = 0;
+	ft->x1969_walljumpUsed = 0;
+	ft->x196C_hitlag_mult = 0.0f;//lbl_804D8254
+	ft->x2064_ledgeCooldown = 0;
 
 	//@1b4
-	r27->x1830_percent = Player_GetDamage(r27->xC_playerID);
+	ft->x1830_percent = Player_GetDamage(ft->xC_playerID);
 
-	r27->x1838_percentTemp = 0.0f;//lbl_804D8254
+	ft->x1838_percentTemp = 0.0f;//lbl_804D8254
 
-	r27->x183C = 0;
-	r27->x18C0 = 0;
+	ft->x183C = 0;
+	ft->x18C0 = 0;
 
-	r27->x18C4 = 6;
-	r27->x18C8 = -1;
-	r27->x18F0 = 0;
-	r27->x18CC = 0;
-	r27->x18D0 = -10;
+	ft->x18C4 = 6;
+	ft->x18C8 = -1;
+	ft->x18F0 = 0;
+	ft->x18CC = 0;
+	ft->x18D0 = -10;
 
-	r27->x221F_flag.bits.b5 = 0;
-	r27->x2221_flag.bits.b1 = 0;
+	ft->x221F_flag.bits.b5 = 0;
+	ft->x2221_flag.bits.b1 = 0;
 
-	r27->x18F4 = 0;
-	r27->x18F8 = 1;
-	r27->x18FA = 0;
-	r27->x18FD = 0;
-	r27->x18FC = 0;
-	r27->x1834 = 0.0f;//lbl_804D8254
+	ft->x18F4 = 0;
+	ft->x18F8 = 1;
+	ft->x18FA = 0;
+	ft->x18FD = 0;
+	ft->x18FC = 0;
+	ft->x1834 = 0.0f;//lbl_804D8254
 
-	r27->x2222_flag.bits.b2 = 0;
+	ft->x2222_flag.bits.b2 = 0;
 
-	r27->x1840 = 0;
+	ft->x1840 = 0;
 
-	r27->x2219_flag.bits.b5 = 0; // freeze bit?
-	r27->x2219_flag.bits.b6 = 0;
-	r27->x2219_flag.bits.b7 = 0;
-	r27->x221A_flag.bits.b0 = 0;
-	r27->x221A_flag.bits.b1 = 0;
+	ft->x2219_flag.bits.b5 = 0; // freeze bit?
+	ft->x2219_flag.bits.b6 = 0;
+	ft->x2219_flag.bits.b7 = 0;
+	ft->x221A_flag.bits.b0 = 0;
+	ft->x221A_flag.bits.b1 = 0;
 
-	r27->x1954 = 0.0f;//lbl_804D8254
-	r27->x1958 = 0.0f;//lbl_804D8254
+	ft->x1954 = 0.0f;//lbl_804D8254
+	ft->x1958 = 0.0f;//lbl_804D8254
 
-	r27->x221A_flag.bits.b2 = 0;
+	ft->x221A_flag.bits.b2 = 0;
 
-	r27->x195C_hitlagFrames = 0.0f;//lbl_804D8254
+	ft->x195C_hitlagFrames = 0.0f;//lbl_804D8254
 
-	r27->x221A_flag.bits.b3 = 0;
-	r27->x1960_vibrateMult = 1.0f;//lbl_804D8250
-	r27->x1964 = 0.0f;//lbl_804D8254
-	r27->x189C = 0.0f;//lbl_804D8254
+	ft->x221A_flag.bits.b3 = 0;
+	ft->x1960_vibrateMult = 1.0f;//lbl_804D8250
+	ft->x1964 = 0.0f;//lbl_804D8254
+	ft->x189C = 0.0f;//lbl_804D8254
 
-	r27->x2220_flag.bits.b3 = 0;
-	r27->x2220_flag.bits.b4 = 0;
+	ft->x2220_flag.bits.b3 = 0;
+	ft->x2220_flag.bits.b4 = 0;
 
-	r27->x1914 = 0;
-	r27->x1918 = 0;
-	r27->x191C = 0.0f;//lbl_804D8254
-	r27->x1924 = 0;
-	r27->x1928 = 0.0f;//lbl_804D8254
+	ft->x1914 = 0;
+	ft->x1918 = 0;
+	ft->x191C = 0.0f;//lbl_804D8254
+	ft->x1924 = 0;
+	ft->x1928 = 0.0f;//lbl_804D8254
 
-	r27->x2223_flag.bits.b5 = 0;
+	ft->x2223_flag.bits.b5 = 0;
 
-	r27->x1950 = 0;
-	r27->x1948 = 0;
+	ft->x1950 = 0;
+	ft->x1948 = 0;
 
-	r27->x2223_flag.bits.b4 = 0;
+	ft->x2223_flag.bits.b4 = 0;
 
-	r27->xF8_playerNudgeVel.y/*FC*/ = 0.0f;//lbl_804D8254
-	r27->xF8_playerNudgeVel.x/*F8*/ = 0.0f;//lbl_804D8254
-	r27->x100 = -1.0f;//lbl_804D8258;
+	ft->xF8_playerNudgeVel.y/*FC*/ = 0.0f;//lbl_804D8254
+	ft->xF8_playerNudgeVel.x/*F8*/ = 0.0f;//lbl_804D8254
+	ft->x100 = -1.0f;//lbl_804D8258;
 
-	r27->x2222_flag.bits.b7 = 0;
-	r27->x2223_flag.bits.b0 = 0;
-	r27->x221A_flag.bits.b4 = 0;
-	r27->x2219_flag.bits.b0 = 0;
+	ft->x2222_flag.bits.b7 = 0;
+	ft->x2223_flag.bits.b0 = 0;
+	ft->x221A_flag.bits.b4 = 0;
+	ft->x2219_flag.bits.b0 = 0;
 
-	r27->x20A0 = 0;
-	r27->x2210_ThrowFlags.flags = 0;
-	r27->x2214 = 0.0f;//lbl_804D8254
-	r27->x1974_heldItem = 0;
-	r27->x1978 = 0;
+	ft->x20A0 = 0;
+	ft->x2210_ThrowFlags.flags = 0;
+	ft->x2214 = 0.0f;//lbl_804D8254
+	ft->x1974_heldItem = 0;
+	ft->x1978 = 0;
 
-	r27->x221E_flag.bits.b3 = 1;
+	ft->x221E_flag.bits.b3 = 1;
 
-	r27->x1984_heldItemSpec = 0;
-	r27->x1988 = 0;
-	r27->x198C = 0;
+	ft->x1984_heldItemSpec = 0;
+	ft->x1988 = 0;
+	ft->x198C = 0;
 
-	r27->x2221_flag.bits.b0 = 0;
+	ft->x2221_flag.bits.b0 = 0;
 
-	r27->x1990 = 0;
-	r27->x1994 = 0;
+	ft->x1990 = 0;
+	ft->x1994 = 0;
 
-	r27->x221D_flag.bits.b6 = 0;
-	r27->x221B_flag.bits.b5 = 0;
+	ft->x221D_flag.bits.b6 = 0;
+	ft->x221B_flag.bits.b5 = 0;
 
-	r27->x1A58 = 0;
-	r27->x1A5C = 0;
+	ft->x1A58 = 0;
+	ft->x1A5C = 0;
 
-	r27->x221B_flag.bits.b6 = 0;
+	ft->x221B_flag.bits.b6 = 0;
 
-	r27->x1A60 = 0;
-	r27->x1A64 = 0;
+	ft->x1A60 = 0;
+	ft->x1A64 = 0;
 
-	r27->x221B_flag.bits.b7 = 0;
-	r27->x221C_flag.bits.b0 = 0;
+	ft->x221B_flag.bits.b7 = 0;
+	ft->x221C_flag.bits.b0 = 0;
 
-	r27->x1064_thrownHitbox.x134 /*x1198*/ = 0;
-	r27->x221C_u16_y = 0;
-	r27->x20AC = 0;
-	r27->x221C_flag.bits.b5 = 0;
+	ft->x1064_thrownHitbox.x134 /*x1198*/ = 0;
+	ft->x221C_u16_y = 0;
+	ft->x20AC = 0;
+	ft->x221C_flag.bits.b5 = 0;
 
-	r27->x214C = -1;
-	r27->x2148 = -1;
-	r27->x2144 = -1;
-	r27->x2160 = -1;
-	r27->x215C = -1;
-	r27->x2158 = -1;
-	r27->x2154 = -1;
-	r27->x2150 = -1;
-	r27->x2168 = 0;
-	r27->x2164 = 0;
-	r27->x208C = 0;
-	r27->x2090 = 0;
-	r27->x2098 = 0;
-	r27->x2092 = 0;
-	r27->x2094 = 0;
-	r27->x1998_shieldHealth = p_ftCommonData->x260;
+	ft->x214C = -1;
+	ft->x2148 = -1;
+	ft->x2144 = -1;
+	ft->x2160 = -1;
+	ft->x215C = -1;
+	ft->x2158 = -1;
+	ft->x2154 = -1;
+	ft->x2150 = -1;
+	ft->x2168 = 0;
+	ft->x2164 = 0;
+	ft->x208C = 0;
+	ft->x2090 = 0;
+	ft->x2098 = 0;
+	ft->x2092 = 0;
+	ft->x2094 = 0;
+	ft->x1998_shieldHealth = p_ftCommonData->x260;
 
-	r27->x221A_flag.bits.b7 = 0;
-    r27->x221B_flag.bits.b0 = 0;
-	r27->x221B_flag.bits.b1 = 0;
-	r27->x221B_flag.bits.b3= 0;
-	r27->x221B_flag.bits.b4 = 0;
-	r27->x221C_flag.bits.b3 = 0;
-	r27->x221C_flag.bits.b1 = 0;
-	r27->x221C_flag.bits.b2 = 0;
+	ft->x221A_flag.bits.b7 = 0;
+    ft->x221B_flag.bits.b0 = 0;
+	ft->x221B_flag.bits.b1 = 0;
+	ft->x221B_flag.bits.b3= 0;
+	ft->x221B_flag.bits.b4 = 0;
+	ft->x221C_flag.bits.b3 = 0;
+	ft->x221C_flag.bits.b1 = 0;
+	ft->x221C_flag.bits.b2 = 0;
 
-	r27->x19A0_shieldDamageTaken = 0;
-	r27->x19A4 = 0;
-	r27->x199C_shieldLightshieldAmt = 0.0f;//lbl_804D8254
-	r27->x19A8 = 0;
-	r27->x19B4_shieldUnk = 0.0f;//lbl_804D8254
-	r27->x19B8_shieldUnk = 0.0f;//lbl_804D8254
-	r27->x19BC_shieldDamageTaken3 = 6;
+	ft->x19A0_shieldDamageTaken = 0;
+	ft->x19A4 = 0;
+	ft->x199C_shieldLightshieldAmt = 0.0f;//lbl_804D8254
+	ft->x19A8 = 0;
+	ft->x19B4_shieldUnk = 0.0f;//lbl_804D8254
+	ft->x19B8_shieldUnk = 0.0f;//lbl_804D8254
+	ft->x19BC_shieldDamageTaken3 = 6;
 
-	r27->x221F_flag.bits.b6 = 0;
-	r27->x2218_flag.bits.b3 = 0;
-	r27->x2218_flag.bits.b4 = 0;
-	r27->x1A3C = 0;
-	r27->x1A2C_reflectHitDirection = 0.0f;//lbl_804D8254
-	r27->x2218_flag.bits.b6 = 0; // addi r3, r27, 0
-	r27->x2218_flag.bits.b7 = 0;
+	ft->x221F_flag.bits.b6 = 0;
+	ft->x2218_flag.bits.b3 = 0;
+	ft->x2218_flag.bits.b4 = 0;
+	ft->x1A3C = 0;
+	ft->x1A2C_reflectHitDirection = 0.0f;//lbl_804D8254
+	ft->x2218_flag.bits.b6 = 0; // addi r3, ft, 0
+	ft->x2218_flag.bits.b7 = 0;
 
-	r27->x1A40 = 0.0f;//lbl_804D8254
-	// -> mr r3, r27
-	r27->x1A44 = 0;
-	r27->x1A48 = 0;
+	asm {
+		mr tmp, ft
+	}
 
-	r27->x68C_transNPos.z/*x694*/ = 0.0f;//lbl_804D8254
-	r27->x68C_transNPos.y/*x690*/ = 0.0f;//lbl_804D8254
-	r27->x68C_transNPos.x/*x68C*/ = 0.0f;//lbl_804D8254
-	r27->x6A4_transNOffset.z/*x6AC*/ = 0.0f;//lbl_804D8254
-	r27->x6A4_transNOffset.y/*x6A8*/ = 0.0f;//lbl_804D8254
-	r27->x6A4_transNOffset.x/*x6A4*/ = 0.0f;//lbl_804D8254
-	r27->x6BC_inputStickangle = 0.0f;//lbl_804D8254
+	ft->x1A40 = 0.0f;//lbl_804D8254
+	// -> mr r3, ft
+
+
+	ft->x1A44 = 0;
+	ft->x1A48 = 0;
+
+	ft->x68C_transNPos.z/*x694*/ = 0.0f;//lbl_804D8254
+	ft->x68C_transNPos.y/*x690*/ = 0.0f;//lbl_804D8254
+	ft->x68C_transNPos.x/*x68C*/ = 0.0f;//lbl_804D8254
+	ft->x6A4_transNOffset.z/*x6AC*/ = 0.0f;//lbl_804D8254
+	ft->x6A4_transNOffset.y/*x6A8*/ = 0.0f;//lbl_804D8254
+	ft->x6A4_transNOffset.x/*x6A4*/ = 0.0f;//lbl_804D8254
+	ft->x6BC_inputStickangle = 0.0f;//lbl_804D8254
 	// TODO: following three elements probably a vector because of the reverse order init that happens a lot with vectors
-	r27->x6C8 = 0.0f;//lbl_804D8254
-	r27->x6C4 = 0.0f;//lbl_804D8254
-	r27->x6C0 = 0.0f;//lbl_804D8254
+	ft->x6C8 = 0.0f;//lbl_804D8254
+	ft->x6C4 = 0.0f;//lbl_804D8254
+	ft->x6C0 = 0.0f;//lbl_804D8254
 	// TODO: another vector probably
-	r27->x6E0 = 0.0f;//lbl_804D8254
-	r27->x6DC = 0.0f;//lbl_804D8254
-	r27->x6D8 = 0.0f;//lbl_804D8254
+	ft->x6E0 = 0.0f;//lbl_804D8254
+	ft->x6DC = 0.0f;//lbl_804D8254
+	ft->x6D8 = 0.0f;//lbl_804D8254
 
-	r27->x209C = (s16) 0;
-	r27->x2224_flag.bits.b1 = 0;
-	r27->x21E4_callback_OnDeath2 = 0;
-	r27->x2100 = -1;
-	r27->x2101_bits_0to6 = 0;
-	r27->x21B4_callback_Accessory2 = 0;
-	r27->x21B8_callback_Accessory3 = 0;
-	r27->x21E0_callback_OnDeath = 0;
-	r27->x21E8_callback_OnDeath3 = 0;
-	r27->x221E_flag.bits.b4 = 1;
-	r27->x197C = 0;
-	r27->x2223_flag.bits.b7 = 0;
-	r27->x2028 = 0;
-	r27->x202C = 0;
+	ft->x209C = (s16) 0;
+	ft->x2224_flag.bits.b1 = 0;
+	ft->x21E4_callback_OnDeath2 = 0;
+	ft->x2100 = -1;
+	ft->x2101_bits_0to6 = 0;
+	ft->x21B4_callback_Accessory2 = 0;
+	ft->x21B8_callback_Accessory3 = 0;
+	ft->x21E0_callback_OnDeath = 0;
+	ft->x21E8_callback_OnDeath3 = 0;
+	ft->x221E_flag.bits.b4 = 1;
+	ft->x197C = 0;
+	ft->x2223_flag.bits.b7 = 0;
+	ft->x2028 = 0;
+	ft->x202C = 0;
 
 	// sets some fighter flags and values to 0, see https://decomp.me/scratch/VBrFf
-	// using r27=tmp makes the compiler use the correct mr r3,r27 instead of addi r3,r27,0.
+	// using ft=tmp makes the compiler use the correct mr r3,ft instead of addi r3,ft,0.
 	// The mr is still in the wrong place.
-	tmp=r27;
-	func_800C88A0(r27=tmp);
+	func_800C88A0(tmp);
 
 
 	//@598
-	r27->x2227_flag.bits.b3 = 0;
-	r27->x2034 = 0;
-	r27->x2038 = 0;
-	r27->x1980 = 0;
+	ft->x2227_flag.bits.b3 = 0;
+	ft->x2034 = 0;
+	ft->x2038 = 0;
+	ft->x1980 = 0;
 
 	//@5b4 TODO: write the assembly pattern that this generates down somewhere
-	r27->x2224_flag.bits.b2 = r27->x2224_flag.bits.b3 = 0;
+	ft->x2224_flag.bits.b2 = ft->x2224_flag.bits.b3 = 0;
 
 	//@5d0
-	r27->x2224_flag.bits.b4 = 0;
-	r27->x2108 = 0;
-	r27->x2224_flag.bits.b5 = 0;
-	r27->x1A53 = (s8) 0;
-	r27->x1A52 = (s8) 0;
-	r27->x210C_walljumpInputTimer = 254;
-	r27->x1910 = 0;
-	r27->x2225_flag.bits.b0 = 0;
-	r27->x2225_flag.bits.b2 = 1;
-	r27->x2225_flag.bits.b4 = 0;
-	func_800DEEA8(r27->x0_fighter);
-	r27->x18BC = 0.0f;//lbl_804D8254
-	r27->x18B8 = 0.0f;//lbl_804D8254
-	r27->x2226_flag.bits.b2 = 0;
-	r27->x2170 = 0.0f;//lbl_804D8254
-	r27->x2225_flag.bits.b6 = r27->x2225_flag.bits.b5;
-	r27->x1908 = -1;
-	r27->x190C = 0;
-	r27->x2227_flag.bits.b4 = 0;
-	r27->x2138_smashSinceHitbox = -1.0f;//lbl_804D8258;
-	r27->x213C = -1;
-	r27->x2227_flag.bits.b5 = 0;
-	r27->x2228_flag.bits.b1 = 0;
-	r27->x2140 = 0.0f;//lbl_804D8254
-	r27->x2227_flag.bits.b6 = 0;
-	r27->x2180 = 6;
-	r27->x2229_flag.bits.b4 = 1;
+	ft->x2224_flag.bits.b4 = 0;
+	ft->x2108 = 0;
+	ft->x2224_flag.bits.b5 = 0;
+	ft->x1A53 = (s8) 0;
+	ft->x1A52 = (s8) 0;
+	ft->x210C_walljumpInputTimer = 254;
+	ft->x1910 = 0;
+	ft->x2225_flag.bits.b0 = 0;
+	ft->x2225_flag.bits.b2 = 1;
+	ft->x2225_flag.bits.b4 = 0;
+	func_800DEEA8(tmp->x0_fighter);
+	ft->x18BC = 0.0f;//lbl_804D8254
+	ft->x18B8 = 0.0f;//lbl_804D8254
+	ft->x2226_flag.bits.b2 = 0;
+	ft->x2170 = 0.0f;//lbl_804D8254
+	ft->x2225_flag.bits.b6 = ft->x2225_flag.bits.b5;
+	ft->x1908 = -1;
+	ft->x190C = 0;
+	ft->x2227_flag.bits.b4 = 0;
+	ft->x2138_smashSinceHitbox = -1.0f;//lbl_804D8258;
+	ft->x213C = -1;
+	ft->x2227_flag.bits.b5 = 0;
+	ft->x2228_flag.bits.b1 = 0;
+	ft->x2140 = 0.0f;//lbl_804D8254
+	ft->x2227_flag.bits.b6 = 0;
+	ft->x2180 = 6;
+	ft->x2229_flag.bits.b4 = 1;
 }
 
 
@@ -612,43 +612,23 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
     func_8007C630(fighterObj);
 }
 
-asm void func_800686E4()
-{
-	nofralloc 
-/* 800686E4 000652C4  7C 08 02 A6 */	mflr r0
-/* 800686E8 000652C8  90 01 00 04 */	stw r0, 4(r1)
-/* 800686EC 000652CC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800686F0 000652D0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800686F4 000652D4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 800686F8 000652D8  7C 7E 1B 78 */	mr r30, r3
-/* 800686FC 000652DC  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 80068700 000652E0  3C 60 80 3C */	lis r3, lbl_803C0EC0@ha
-/* 80068704 000652E4  38 63 0E C0 */	addi r3, r3, lbl_803C0EC0@l
-/* 80068708 000652E8  80 9F 00 04 */	lwz r4, 4(r31)
-/* 8006870C 000652EC  88 1F 06 19 */	lbz r0, 0x619(r31)
-/* 80068710 000652F0  54 84 18 38 */	slwi r4, r4, 3
-/* 80068714 000652F4  7C 63 22 14 */	add r3, r3, r4
-/* 80068718 000652F8  1C 00 00 18 */	mulli r0, r0, 0x18
-/* 8006871C 000652FC  80 63 00 00 */	lwz r3, 0(r3)
-/* 80068720 00065300  7C 03 00 2E */	lwzx r0, r3, r0
-/* 80068724 00065304  90 1F 01 08 */	stw r0, 0x108(r31)
-/* 80068728 00065308  48 00 BA 21 */	bl func_80074148
-/* 8006872C 0006530C  80 7F 01 08 */	lwz r3, 0x108(r31)
-/* 80068730 00065310  48 30 87 15 */	bl HSD_JObjLoadJoint
-/* 80068734 00065314  7C 7F 1B 78 */	mr r31, r3
-/* 80068738 00065318  48 00 BA 39 */	bl func_80074170
-/* 8006873C 0006531C  7F E3 FB 78 */	mr r3, r31
-/* 80068740 00065320  48 00 B0 19 */	bl func_80073758
-/* 80068744 00065324  88 8D C1 A9 */	lbz r4, lbl_804D7849(r13)
-/* 80068748 00065328  38 7E 00 00 */	addi r3, r30, 0
-/* 8006874C 0006532C  38 BF 00 00 */	addi r5, r31, 0
-/* 80068750 00065330  48 32 83 21 */	bl func_80390A70
-/* 80068754 00065334  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80068758 00065338  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8006875C 0006533C  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80068760 00065340  38 21 00 18 */	addi r1, r1, 0x18
-/* 80068764 00065344  7C 08 03 A6 */	mtlr r0
-/* 80068768 00065348  4E 80 00 20 */	blr  
+void func_800686E4(HSD_GObj* fighterObj) {
+    HSD_JObj* jobj;
+
+    UnkFighterJointStruct* temp_r3;
+    Fighter* fighter_r31;
+    fighter_r31  = fighterObj->user_data;
+
+
+    temp_r3 = lbl_803C0EC0[fighter_r31->x4_fighterKind].unk_fighter_struct;
+
+    fighter_r31->x108_costume_archive = temp_r3[fighter_r31->costume_id].joint;
+
+    func_80074148();
+    jobj = HSD_JObjLoadJoint(fighter_r31->x108_costume_archive);
+    func_80074170();
+    func_80073758(jobj);
+    func_80390A70(fighterObj, lbl_804D7849, jobj);
 }
 
 
