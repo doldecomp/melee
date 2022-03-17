@@ -71,19 +71,11 @@ typedef struct _StageInfo {
 
 typedef struct {
     void (*callback0)(struct _HSD_GObj*);
-    void (*callback1)();
+    s32 (*callback1)();
     void (*callback2)();
     void (*callback3)();
-    void (*callback4)();
+    u32 flags;
 } StageCallbacks;
-
-extern struct {
-    StageCallbacks callbacks[4];
-    int pad2[16];
-    char str1[4]; // TODO expand to actual size
-    u8 x94_pad[0xb4 - 0x90 - 4];
-    char str2[4]; // TODO expand to actual size
-} lbl_803E26F0;
 
 typedef struct _Map {
     int x0;                 // 0x0
