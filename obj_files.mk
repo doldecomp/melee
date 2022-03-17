@@ -128,7 +128,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grzebes.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grcorneria.s.o 	 	            \
 	$(BUILD_DIR)/src/melee/gr/grstory.c.o 		 			\
-	$(BUILD_DIR)/asm/melee/gr/grstory.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/gronett.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grbigblue.s.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grmutecity.s.o 	 	            \
