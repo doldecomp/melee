@@ -77,6 +77,21 @@ typedef struct {
     u32 flags;
 } StageCallbacks;
 
+typedef struct _StageData {
+    u32 flags1;
+    StageCallbacks* callbacks;
+    const char* data1;
+    void (*callback0)();
+    void (*callback1)();
+    void (*callback2)();
+    void (*callback3)();
+    s32 (*callback4)();
+    s32 (*callback5)();
+    s32 (*callback6)();
+    u32 flags2;
+    u32 unused[2];
+} StageData;
+
 typedef struct _Map {
     int x0;                 // 0x0
     struct _HSD_GObj* gobj; // 0x4

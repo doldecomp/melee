@@ -36,20 +36,7 @@ static struct {
     f32 vars[7];
 }* lbl_804D69B8;
 
-struct {
-    u32 flags1;
-    void* data0;
-    const char* data1;
-    void (*callback0)();
-    void (*callback1)();
-    void (*callback2)();
-    void (*callback3)();
-    s32 (*callback4)();
-    s32 (*callback5)();
-    s32 (*callback6)();
-    u32 flags2;
-    u32 unused[2];
-} lbl_803E274C = {
+StageData lbl_803E274C = {
     0x0000000A,
     lbl_803E26F0,
     "/GrSt.dat",
