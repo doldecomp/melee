@@ -161,7 +161,7 @@ void func_8000EE8C();
 // ? func_80011710(?);
 // ? func_800117F4(?);
 void func_800119DC(Vec*, s32, f32, f32, f32);
-// ? func_80011A50(?);
+void func_80011A50(Vec*, s32, f32, f32, f32, f32, f32, f32, f32);
 // ? func_80011ABC(?);
 // ? func_80011AC4(?);
 // ? func_80011B74(?);
