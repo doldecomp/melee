@@ -1,7 +1,7 @@
 #ifndef _ftlib_h_
 #define _ftlib_h_
 
-#include "fighter.h"
+#include <melee/ft/fighter.h>
 
 #include <sysdolphin/baselib/gobj.h>
 
