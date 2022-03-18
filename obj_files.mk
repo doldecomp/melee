@@ -138,7 +138,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grinishie2.s.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grkraid.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grrcruise.s.o 	 	            \
-	$(BUILD_DIR)/asm/melee/gr/grshrine.s.o 		            \
+	$(BUILD_DIR)/src/melee/gr/grshrine.c.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/gryorster.s.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grgarden.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grvenom.s.o 		 			\
