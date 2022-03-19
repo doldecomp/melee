@@ -122,7 +122,9 @@ typedef struct _Map {
     u8 x20_pad[0xC4 - 0x20];
     s32 xC4;
     s32 xC8;
-    u8 xCC_pad[0x218 - 0xCC];
+    s32 xCC;
+    s32 xD0;
+    u8 xD4_pad[0x218 - 0xD4];
 } Map;
 
 f32 Stage_GetCamBoundsLeftOffset();
