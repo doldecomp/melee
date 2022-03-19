@@ -207,6 +207,14 @@ inline f32 frand_amp1()
     return 2.0f * (HSD_Randf() - 0.5f);
 }
 
+typedef struct {
+    u8 x0_fill[0xC4];
+    s8 xC4;
+    s8 xC5;
+    s16 xC6;
+    s32 xC8;
+} UnkUserData2;
+
 // Shy guy spawn timer tick callback
 void func_801E3418(HSD_GObj* gobj)
 {
@@ -217,7 +225,7 @@ void func_801E3418(HSD_GObj* gobj)
 
     u32 unused[2];
 
-    Map* map = gobj->user_data;
+    UnkUserData2* map = gobj->user_data;
 
     // Don't trigger if any shy guys are still onscreen
     if (func_8026B3C0(ITEM_SHYGUY) != 0) {
