@@ -120,11 +120,11 @@ typedef struct _Map {
     int x18;    // 0x18
     void* x1C_callback;
     u8 x20_pad[0xC4 - 0x20];
-    s8 xC4;
-    s8 xC5;
-    s16 xC6;
+    s32 xC4;
     s32 xC8;
-    u8 xCC_pad[0x218 - 0xCC];
+    s32 xCC;
+    s32 xD0;
+    u8 xD4_pad[0x218 - 0xD4];
 } Map;
 
 f32 Stage_GetCamBoundsLeftOffset();

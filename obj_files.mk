@@ -158,7 +158,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grflatzone.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grpushon.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grfigureget.s.o 				\
-	$(BUILD_DIR)/asm/melee/gr/grbattle.s.o 		            \
+	$(BUILD_DIR)/src/melee/gr/grbattle.c.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grlast.s.o 			            \
 	$(BUILD_DIR)/asm/melee/gr/grhomerun.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grheal.s.o 			            \
