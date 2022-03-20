@@ -43847,53 +43847,28 @@ lbl_803F9B30:
     .4byte 0x00000043
     .4byte 0x00000044
     .4byte 0x00000045
-    .4byte 0x5363496E
-    .4byte 0x66507269
-    .4byte 0x7A655F73
-    .4byte 0x63656E65
-    .4byte 0x5F646174
-    .4byte 0x61000000
-    .4byte 0x53645072
-    .4byte 0x697A652E
-    .4byte 0x75736400
-    .4byte 0x5349535F
-    .4byte 0x5072697A
-    .4byte 0x65446174
-    .4byte 0x61000000
-    .4byte 0x53645072
-    .4byte 0x697A652E
-    .4byte 0x64617400
-    .4byte 0x2532642E
-    .4byte 0x2532642E
-    .4byte 0x25303464
-    .4byte 0x20202530
-    .4byte 0x32643A25
-    .4byte 0x3032643A
-    .4byte 0x25303264
-    .4byte NULL
-    .4byte 0x25303464
-    .4byte 0x2E253264
-    .4byte 0x2E253264
-    .4byte 0x20202530
-    .4byte 0x32643A25
-    .4byte 0x3032643A
-    .4byte 0x25303264
-    .4byte NULL
-    .4byte NULL
+    .asciz "ScInfPrize_scene_data"
+    .balign 4
+    .asciz "SdPrize.usd"
+    .balign 4
+    .asciz "SIS_PrizeData"
+    .balign 4
+    .asciz "SdPrize.dat"
+    .balign 4
+    .asciz "%2d.%2d.%04d  %02d:%02d:%02d"
+    .balign 4
+    .asciz "%04d.%2d.%2d  %02d:%02d:%02d"
+    .balign 8
 .global lbl_803F9E08
 lbl_803F9E08:
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x4966436F
-    .4byte 0x4765742E
-    .4byte 0x64617400
-    .4byte 0x5363496E
-    .4byte 0x66436774
-    .4byte 0x5F736365
-    .4byte 0x6E655F64
-    .4byte 0x61746100
+    .asciz "IfCoGet.dat"
+    .balign 4
+    .asciz "ScInfCgt_scene_data"
+    .balign 4
 .global lbl_803F9E38
 lbl_803F9E38:
     .4byte NULL
@@ -43954,20 +43929,10 @@ lbl_803F9ED4:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x52656D6F
-    .4byte 0x76652054
-    .4byte 0x61726765
-    .4byte 0x74202578
-    .4byte 0x20286E20
-    .4byte 0x25782920
-    .4byte 0x49642025
-    .4byte 0x640A0000
-    .4byte 0x52656D6F
-    .4byte 0x76652041
-    .4byte 0x6C6C204F
-    .4byte 0x7665720A
-    .4byte NULL
-    .4byte NULL
+    .asciz "Remove Target %x (n %x) Id %d\n"
+    .balign 4
+    .asciz "Remove All Over\n"
+    .balign 8
 .global lbl_803F9F28
 lbl_803F9F28:
     .asciz "Sound Test Menu"
@@ -44098,15 +44063,10 @@ lbl_803F9FA4:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x536D5374
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x736D536F
-    .4byte 0x756E6454
-    .4byte 0x6573744C
-    .4byte 0x6F616444
-    .4byte 0x61746100
-    .4byte NULL
+    .asciz "SmSt.dat"
+    .balign 4
+    .asciz "smSoundTestLoadData"
+    .balign 8
 .global lbl_803FA128
 lbl_803FA128:
     .4byte NULL
@@ -44486,33 +44446,24 @@ lbl_803FA3E0:
     .4byte lbl_804D5870
 .global lbl_803FA3F4
 lbl_803FA3F4:
-    .4byte 0x476D4C61
-    .4byte 0x6E675479
-    .4byte 0x70654A50
-    .4byte NULL
+    .asciz "GmLangTypeJP"
+    .balign 4
 .global lbl_803FA404
 lbl_803FA404:
-    .4byte 0x476D4C61
-    .4byte 0x6E675479
-    .4byte 0x70655553
-    .4byte NULL
+    .asciz "GmLangTypeUS"
+    .balign 4
 .global lbl_803FA414
 lbl_803FA414:
-    .4byte 0x4E6F2D44
-    .4byte 0x65627567
-    .4byte 0x2D526F6D
-    .4byte NULL
+    .asciz "No-Debug-Rom"
+    .balign 4
 .global lbl_803FA424
 lbl_803FA424:
-    .4byte 0x44656275
-    .4byte 0x672D4465
-    .4byte 0x76656C6F
-    .4byte 0x70000000
+    .asciz "Debug-Develop"
+    .balign 4
 .global lbl_803FA434
 lbl_803FA434:
-    .4byte 0x44656275
-    .4byte 0x672D526F
-    .4byte 0x6D000000
+    .asciz "Debug-Rom"
+    .balign 4
 .global lbl_803FA440
 lbl_803FA440:
     .4byte lbl_804D5890
@@ -48269,23 +48220,16 @@ lbl_803FD864:
     .4byte NULL
 .global lbl_803FDAC4
 lbl_803FDAC4:
-    .4byte 0x3C205361
-    .4byte 0x6B6F6461
-    .4byte 0x20546573
-    .4byte 0x74203E00
+    .asciz "< Sakoda Test >"
+    .balign 4
 .global lbl_803FDAD4
 lbl_803FDAD4:
-    .4byte 0x4576656E
-    .4byte 0x74205374
-    .4byte 0x61676520
-    .4byte 0x3A000000
+    .asciz "Event Stage :"
+    .balign 4
 .global lbl_803FDAE4
 lbl_803FDAE4:
-    .4byte 0x46697843
-    .4byte 0x616D6572
-    .4byte 0x61205374
-    .4byte 0x61727420
-    .4byte 0x3E000000
+    .asciz "FixCamera Start >"
+    .balign 4
 .global lbl_803FDAF8
 lbl_803FDAF8:
     .4byte NULL
@@ -48674,52 +48618,26 @@ jtbl_803FE2E0:
 	.4byte lbl_80306364
 	.4byte lbl_80306368
 	.4byte lbl_80306368
-    .4byte 0x54794D6E
-    .4byte 0x56696577
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x54794D6E
-    .4byte 0x56696577
-    .4byte 0x2E757364
-    .4byte NULL
-    .4byte 0x54794461
-    .4byte 0x7461692E
-    .4byte 0x64617400
-    .4byte 0x54794461
-    .4byte 0x7461692E
-    .4byte 0x75736400
-    .4byte 0x54794D6E
-    .4byte 0x496E666F
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x54794D6E
-    .4byte 0x496E666F
-    .4byte 0x2E757364
-    .4byte NULL
-    .4byte 0x54794D6E
-    .4byte 0x42672E64
-    .4byte 0x61740000
-    .4byte 0x2A2A2A20
-    .4byte 0x43616E20
-    .4byte 0x6E6F7420
-    .4byte 0x4C6F6164
-    .4byte 0x204C6967
-    .4byte 0x6874204C
-    .4byte 0x6162656C
-    .4byte 0x28257329
-    .4byte 0x0A000000
-    .4byte 0x53634D65
-    .4byte 0x6E466967
-    .4byte 0x7572655F
-    .4byte 0x616D6261
-    .4byte 0x6E696D5F
-    .4byte 0x6C696768
-    .4byte 0x74000000
-    .4byte 0x53634D65
-    .4byte 0x6E466967
-    .4byte 0x7572655F
-    .4byte 0x616D6266
-    .4byte 0x6F670000
+    .asciz "TyMnView.dat"
+    .balign 4
+    .asciz "TyMnView.usd"
+    .balign 4
+    .asciz "TyDatai.dat"
+    .balign 4
+    .asciz "TyDatai.usd"
+    .balign 4
+    .asciz "TyMnInfo.dat"
+    .balign 4
+    .asciz "TyMnInfo.usd"
+    .balign 4
+    .asciz "TyMnBg.dat"
+    .balign 4
+    .asciz "*** Can not Load Light Label(%s)\n"
+    .balign 4
+    .asciz "ScMenFigure_ambanim_light"
+    .balign 4
+    .asciz "ScMenFigure_ambfog"
+    .balign 4
 .global lbl_803FE3B8
 lbl_803FE3B8:
     .asciz "*** BG data aren't being loaded!\n"
@@ -48733,24 +48651,10 @@ lbl_803FE3DC:
     .4byte 0x00120015
     .4byte 0x00130011
     .4byte 0x00170000
-    .4byte 0x2A2A2A20
-    .4byte 0x43616E20
-    .4byte 0x6E6F7420
-    .4byte 0x4C6F6164
-    .4byte 0x2050616E
-    .4byte 0x656C204C
-    .4byte 0x6162656C
-    .4byte 0x28257329
-    .4byte 0x0A000000
-    .4byte 0x2A2A2A20
-    .4byte 0x43616E20
-    .4byte 0x6E6F7420
-    .4byte 0x4C6F6164
-    .4byte 0x20426163
-    .4byte 0x6B204C61
-    .4byte 0x62656C28
-    .4byte 0x2573290A
-    .4byte NULL
+    .asciz "*** Can not Load Panel Label(%s)\n"
+    .balign 4
+    .asciz "*** Can not Load Back Label(%s)\n"
+    .balign 4
 .global lbl_803FE454
 lbl_803FE454:
     .asciz "**** Not Found Toy Model!(%d)\n"
@@ -48845,61 +48749,28 @@ lbl_803FE678:
     .4byte 0x47000000
     .4byte 0x42200000
     .4byte 0x3F9BD194
-    .4byte 0x2A2A2A20
-    .4byte 0x4572726F
-    .4byte 0x72203A20
-    .4byte 0x4469646E
-    .4byte 0x27742041
-    .4byte 0x6464204C
-    .4byte 0x69677468
-    .4byte 0x21286361
-    .4byte 0x6C6C206F
-    .4byte 0x746F6775
-    .4byte 0x726F290A
-    .4byte NULL
-    .4byte 0x7479496E
-    .4byte 0x69744D6F
-    .4byte 0x64656C54
-    .4byte 0x626C0000
-    .4byte 0x7479496E
-    .4byte 0x69744D6F
-    .4byte 0x64656C44
-    .4byte 0x54626C00
-    .4byte 0x74794D6F
-    .4byte 0x64656C53
-    .4byte 0x6F727454
-    .4byte 0x626C0000
-    .4byte 0x74794578
-    .4byte 0x70446966
-    .4byte 0x66657265
-    .4byte 0x6E745462
-    .4byte 0x6C000000
-    .4byte 0x74794E6F
-    .4byte 0x47657455
-    .4byte 0x7354626C
-    .4byte NULL
-    .4byte 0x74794469
-    .4byte 0x73706C61
-    .4byte 0x794D6F64
-    .4byte 0x656C5462
-    .4byte 0x6C000000
-    .4byte 0x74794469
-    .4byte 0x73706C61
-    .4byte 0x794D6F64
-    .4byte 0x656C5573
-    .4byte 0x54626C00
-    .4byte 0x54794461
-    .4byte 0x7461662E
-    .4byte 0x64617400
-    .4byte 0x74794D6F
-    .4byte 0x64656C46
-    .4byte 0x696C6554
-    .4byte 0x626C0000
-    .4byte 0x74794D6F
-    .4byte 0x64656C46
-    .4byte 0x696C6555
-    .4byte 0x7354626C
-    .4byte NULL
+    .asciz "*** Error : Didn't Add Ligth!(call otoguro)\n"
+    .balign 4
+    .asciz "tyInitModelTbl"
+    .balign 4
+    .asciz "tyInitModelDTbl"
+    .balign 4
+    .asciz "tyModelSortTbl"
+    .balign 4
+    .asciz "tyExpDifferentTbl"
+    .balign 4
+    .asciz "tyNoGetUsTbl"
+    .balign 4
+    .asciz "tyDisplayModelTbl"
+    .balign 4
+    .asciz "tyDisplayModelUsTbl"
+    .balign 4
+    .asciz "TyDataf.dat"
+    .balign 4
+    .asciz "tyModelFileTbl"
+    .balign 4
+    .asciz "tyModelFileUsTbl"
+    .balign 4
 .global lbl_803FE7A0
 lbl_803FE7A0:
     .asciz "Rea_%c %3d/%3d"
@@ -48999,15 +48870,10 @@ jtbl_803FEAF0:
 	.4byte lbl_80315C2C
 	.4byte lbl_80315A04
 	.4byte lbl_80315AA0
-    .4byte 0x2A2A2A20
-    .4byte 0x4E6F7420
-    .4byte 0x47657420
-    .4byte 0x46696775
-    .4byte 0x7265210A
-    .4byte NULL
-    .4byte 0x74796669
-    .4byte 0x6775706F
-    .4byte 0x6E2E6300
+    .asciz "*** Not Get Figure!\n"
+    .balign 4
+    .asciz "tyfigupon.c"
+    .balign 4
 .global jtbl_803FEB3C
 jtbl_803FEB3C:
 	.4byte lbl_80316404
@@ -49030,210 +48896,54 @@ lbl_803FEB60:
     .4byte 0x000D000A
     .4byte 0x000B000C
     .4byte 0x000E0000
-    .4byte 0x2A2A2A20
-    .4byte 0x42472064
-    .4byte 0x61746120
-    .4byte 0x6172656E
-    .4byte 0x27742062
-    .4byte 0x65696E67
-    .4byte 0x206C6F61
-    .4byte 0x64656421
-    .4byte 0x0A000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x50616E65
-    .4byte 0x6C5F7A73
-    .4byte 0x6D617368
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x42675F54
-    .4byte 0x6F705F61
-    .4byte 0x6E696D6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x42675F54
-    .4byte 0x6F705F6D
-    .4byte 0x6174616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x42675F54
-    .4byte 0x6F705F73
-    .4byte 0x68617065
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4E6D5F54
-    .4byte 0x6F705F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4E6D5F54
-    .4byte 0x6F705F61
-    .4byte 0x6E696D6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4E6D5F54
-    .4byte 0x6F705F6D
-    .4byte 0x6174616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4E6D5F54
-    .4byte 0x6F705F73
-    .4byte 0x68617065
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4265745F
-    .4byte 0x546F705F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4265745F
-    .4byte 0x546F705F
-    .4byte 0x616E696D
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4265745F
-    .4byte 0x546F705F
-    .4byte 0x6D617461
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4265745F
-    .4byte 0x546F705F
-    .4byte 0x73686170
-    .4byte 0x65616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x50616E65
-    .4byte 0x6C5F7A61
-    .4byte 0x72726F77
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4C657665
-    .4byte 0x725F546F
-    .4byte 0x705F6A6F
-    .4byte 0x696E7400
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4C657665
-    .4byte 0x725F546F
-    .4byte 0x705F616E
-    .4byte 0x696D6A6F
-    .4byte 0x696E7400
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4C657665
-    .4byte 0x725F546F
-    .4byte 0x705F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4C657665
-    .4byte 0x725F546F
-    .4byte 0x705F7368
-    .4byte 0x61706561
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x5061725F
-    .4byte 0x546F705F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x5061725F
-    .4byte 0x546F705F
-    .4byte 0x616E696D
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x5061725F
-    .4byte 0x546F705F
-    .4byte 0x6D617461
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x5061725F
-    .4byte 0x546F705F
-    .4byte 0x73686170
-    .4byte 0x65616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x2A2A2A20
-    .4byte 0x43616E20
-    .4byte 0x6E6F7420
-    .4byte 0x4C6F6164
-    .4byte 0x2050616E
-    .4byte 0x656C204C
-    .4byte 0x6162656C
-    .4byte 0x28257329
-    .4byte 0x0A000000
-    .4byte 0x53634D65
-    .4byte 0x6E466967
-    .4byte 0x7572655F
-    .4byte 0x7363656E
-    .4byte 0x655F6C69
-    .4byte 0x67687473
-    .4byte NULL
+    .asciz "*** BG data aren't being loaded!\n"
+    .balign 4
+    .asciz "ToyFigurePonPanel_zsmash_matanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonBg_Top_animjoint"
+    .balign 4
+    .asciz "ToyFigurePonBg_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonBg_Top_shapeanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonNm_Top_joint"
+    .balign 4
+    .asciz "ToyFigurePonNm_Top_animjoint"
+    .balign 4
+    .asciz "ToyFigurePonNm_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonNm_Top_shapeanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonBet_Top_joint"
+    .balign 4
+    .asciz "ToyFigurePonBet_Top_animjoint"
+    .balign 4
+    .asciz "ToyFigurePonBet_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonBet_Top_shapeanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonPanel_zarrow_matanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonLever_Top_joint"
+    .balign 4
+    .asciz "ToyFigurePonLever_Top_animjoint"
+    .balign 4
+    .asciz "ToyFigurePonLever_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonLever_Top_shapeanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonPar_Top_joint"
+    .balign 4
+    .asciz "ToyFigurePonPar_Top_animjoint"
+    .balign 4
+    .asciz "ToyFigurePonPar_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonPar_Top_shapeanim_joint"
+    .balign 4
+    .asciz "*** Can not Load Panel Label(%s)\n"
+    .balign 4
+    .asciz "ScMenFigure_scene_lights"
+    .balign 4
 .global lbl_803FEED4
 lbl_803FEED4:
     .4byte NULL
@@ -49262,53 +48972,22 @@ lbl_803FEEE8:
     .4byte 0x47000000
     .4byte 0x42200000
     .4byte 0x3F9BD194
-    .4byte 0x5364546F
-    .4byte 0x792E6461
-    .4byte 0x74000000
-    .4byte 0x5349535F
-    .4byte 0x546F7944
-    .4byte 0x61746100
-    .4byte 0x5364546F
-    .4byte 0x792E7573
-    .4byte 0x64000000
-    .4byte 0x5349535F
-    .4byte 0x546F7944
-    .4byte 0x6174615F
-    .4byte 0x45000000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4E676574
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4E676574
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4E676574
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x546F7946
-    .4byte 0x69677572
-    .4byte 0x65506F6E
-    .4byte 0x4E676574
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
+    .asciz "SdToy.dat"
+    .balign 4
+    .asciz "SIS_ToyData"
+    .balign 4
+    .asciz "SdToy.usd"
+    .balign 4
+    .asciz "SIS_ToyData_E"
+    .balign 4
+    .asciz "ToyFigurePonNget_Top_joint"
+    .balign 4
+    .asciz "ToyFigurePonNget_Top_animjoint"
+    .balign 4
+    .asciz "ToyFigurePonNget_Top_matanim_joint"
+    .balign 4
+    .asciz "ToyFigurePonNget_Top_shapeanim_joint"
+    .balign 4
 .global lbl_803FEFF0
 lbl_803FEFF0:
     .asciz "ToyDspPanel_Top_joint"
@@ -49371,14 +49050,8 @@ lbl_803FF130:
     .4byte 0x47000000
     .4byte 0x41F00000
     .4byte 0x3F9BD194
-    .4byte 0x53634D65
-    .4byte 0x6E446973
-    .4byte 0x706C6179
-    .4byte 0x5F63616D
-    .4byte 0x5F696E74
-    .4byte 0x315F6361
-    .4byte 0x6D657261
-    .4byte NULL
+    .asciz "ScMenDisplay_cam_int1_camera"
+    .balign 4
 .global lbl_803FF19C
 lbl_803FF19C:
     .asciz "X  %3.2f\nZ  %3.2f"
@@ -50147,61 +49820,31 @@ lbl_80400200:
     .4byte 0xC17C404F
     .4byte 0x42860000
     .4byte NULL
-    .4byte 0x56693131
-    .4byte 0x30312E64
-    .4byte 0x61740000
-    .4byte 0x76697375
-    .4byte 0x616C3131
-    .4byte 0x30315363
-    .4byte 0x656E6500
-    .4byte 0x76697375
-    .4byte 0x616C3131
-    .4byte 0x30314361
-    .4byte 0x6D325363
-    .4byte 0x656E6500
-    .4byte NULL
+    .asciz "Vi1101.dat"
+    .balign 4
+    .asciz "visual1101Scene"
+    .balign 4
+    .asciz "visual1101Cam2Scene"
+    .balign 8
 .global lbl_80400258
 lbl_80400258:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
-    .4byte 0x56693132
-    .4byte 0x30317631
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x76697375
-    .4byte 0x616C3132
-    .4byte 0x30317631
-    .4byte 0x5363656E
-    .4byte 0x65000000
-    .4byte 0x54794B6F
-    .4byte 0x6F70612E
-    .4byte 0x64617400
-    .4byte 0x546F794B
-    .4byte 0x6F6F7061
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x476D5267
-    .4byte 0x53746E64
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x7374616E
-    .4byte 0x64536365
-    .4byte 0x6E650000
-    .4byte NULL
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .asciz "Vi1201v1.dat"
+    .balign 4
+    .asciz "visual1201v1Scene"
+    .balign 4
+    .asciz "TyKoopa.dat"
+    .balign 4
+    .asciz "ToyKoopaModel_TopN_joint"
+    .balign 4
+    .asciz "GmRgStnd.dat"
+    .balign 4
+    .asciz "standScene"
+    .balign 8
 .global lbl_804002F8
 lbl_804002F8:
     .4byte NULL
@@ -50212,42 +49855,20 @@ lbl_80400304:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
-    .4byte 0x56693132
-    .4byte 0x30317632
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x76697375
-    .4byte 0x616C3132
-    .4byte 0x30317632
-    .4byte 0x5363656E
-    .4byte 0x65000000
-    .4byte 0x54794B6F
-    .4byte 0x6F70612E
-    .4byte 0x64617400
-    .4byte 0x546F794B
-    .4byte 0x6F6F7061
-    .4byte 0x4D6F6465
-    .4byte 0x6C5F546F
-    .4byte 0x704E5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x476D5267
-    .4byte 0x53746E64
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x7374616E
-    .4byte 0x64536365
-    .4byte 0x6E650000
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .asciz "Vi1201v2.dat"
+    .balign 4
+    .asciz "visual1201v2Scene"
+    .balign 4
+    .asciz "TyKoopa.dat"
+    .balign 4
+    .asciz "ToyKoopaModel_TopN_joint"
+    .balign 4
+    .asciz "GmRgStnd.dat"
+    .balign 4
+    .asciz "standScene"
+    .balign 8
 .global lbl_804003A0
 lbl_804003A0:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -50393,22 +50014,24 @@ lbl_804D585C:
     .4byte 0xFFFFFFFF
 .global lbl_804D5860
 lbl_804D5860:
-    .4byte 0x4E4F4E45
-    .4byte 0x00000000
+    .asciz "NONE"
+    .balign 4
 .global lbl_804D5868
 lbl_804D5868:
-    .4byte 0x41435449
-    .4byte 0x56454400
+    .asciz "ACTIVED"
+    .balign 4
 .global lbl_804D5870
 lbl_804D5870:
-    .4byte 0x4155544F
-    .4byte 0x00000000
+    .asciz "AUTO"
+    .balign 4
 .global lbl_804D5878
 lbl_804D5878:
-    .4byte 0x4F464600
+    .asciz "OFF"
+    .balign 4
 .global lbl_804D587C
 lbl_804D587C:
-    .4byte 0x4F4E0000
+    .asciz "ON"
+    .balign 4
 .global lbl_804D5880
 lbl_804D5880:
     .4byte lbl_804D5878
@@ -50419,55 +50042,56 @@ lbl_804D5888:
     .4byte lbl_803FA404
 .global lbl_804D5890
 lbl_804D5890:
-    .4byte 0x4D617374
-    .4byte 0x65720000
+    .asciz "Master"
+    .balign 4
 .global lbl_804D5898
 lbl_804D5898:
-    .4byte 0x44657665
-    .4byte 0x6C6F7000
+    .asciz "Develop"
+    .balign 4
 .global lbl_804D58A0
 lbl_804D58A0:
-    .4byte 0x41646472
-    .4byte 0x34203A00
+    .asciz "Addr4 :"
+    .balign 4
 .global lbl_804D58A8
 lbl_804D58A8:
-    .4byte 0x75333220
-    .4byte 0x20203A00
+    .asciz "u32   :"
+    .balign 4
 .global lbl_804D58B0
 lbl_804D58B0:
-    .4byte 0x41646472
-    .4byte 0x32203A00
+    .asciz "Addr2 :"
+    .balign 4
 .global lbl_804D58B8
 lbl_804D58B8:
-    .4byte 0x75313620
-    .4byte 0x20203A00
+    .asciz "u16   :"
+    .balign 4
 .global lbl_804D58C0
 lbl_804D58C0:
-    .4byte 0x41646472
-    .4byte 0x20203A00
+    .asciz "Addr  :"
+    .balign 4
 .global lbl_804D58C8
 lbl_804D58C8:
-    .4byte 0x75382020
-    .4byte 0x20203A00
+    .asciz "u8    :"
+    .balign 4
 .global lbl_804D58D0
 lbl_804D58D0:
-    .4byte 0x4E6F7468
-    .4byte 0x696E6700
+    .asciz "Nothing"
+    .balign 4
 .global lbl_804D58D8
 lbl_804D58D8:
-    .4byte 0x56657279
-    .4byte 0x6C6F7700
+    .asciz "Verylow"
+    .balign 4
 .global lbl_804D58E0
 lbl_804D58E0:
-    .4byte 0x4C6F7700
+    .asciz "Low"
+    .balign 4
 .global lbl_804D58E4
 lbl_804D58E4:
-    .4byte 0x4D696464
-    .4byte 0x6C650000
+    .asciz "Middle"
+    .balign 4
 .global lbl_804D58EC
 lbl_804D58EC:
-    .4byte 0x48696768
-    .4byte 0x00000000
+    .asciz "High"
+    .balign 4
 .global lbl_804D58F4
 lbl_804D58F4:
     .asciz "Rule"
@@ -50544,68 +50168,68 @@ lbl_804D5978:
     .balign 4
 .global lbl_804D5980
 lbl_804D5980:
-    .4byte 0x3C536176
-    .4byte 0x653E0A00
+    .asciz "<Save>\n"
+    .balign 4
 .global lbl_804D5988
 lbl_804D5988:
-    .4byte 0x3C4C6F61
-    .4byte 0x643E0A00
+    .asciz "<Load>\n"
+    .balign 4
 .global lbl_804D5990
 lbl_804D5990:
     .4byte lbl_803FD274
     .4byte 0x00000000
 .global lbl_804D5998
 lbl_804D5998:
-    .4byte 0x496E6974
-    .4byte 0x00000000
+    .asciz "Init"
+    .balign 4
 .global lbl_804D59A0
 lbl_804D59A0:
-    .4byte 0x466F726D
-    .4byte 0x61740000
+    .asciz "Format"
+    .balign 4
 .global lbl_804D59A8
 lbl_804D59A8:
-    .4byte 0x43726561
-    .4byte 0x74650000
+    .asciz "Create"
+    .balign 4
 .global lbl_804D59B0
 lbl_804D59B0:
-    .4byte 0x53617665
-    .4byte 0x00000000
+    .asciz "Save"
+    .balign 4
 .global lbl_804D59B8
 lbl_804D59B8:
-    .4byte 0x4C6F6164
-    .4byte 0x00000000
+    .asciz "Load"
+    .balign 4
 .global lbl_804D59C0
 lbl_804D59C0:
-    .4byte 0x44656C65
-    .4byte 0x74650000
+    .asciz "Delete"
+    .balign 4
 .global lbl_804D59C8
 lbl_804D59C8:
-    .4byte 0x4E6F726D
-    .4byte 0x616C0000
+    .asciz "Normal"
+    .balign 4
 .global lbl_804D59D0
 lbl_804D59D0:
-    .4byte 0x5465616D
-    .4byte 0x00000000
+    .asciz "Team"
+    .balign 4
 .global lbl_804D59D8
 lbl_804D59D8:
-    .4byte 0x4769616E
-    .4byte 0x74000000
+    .asciz "Giant"
+    .balign 4
 .global lbl_804D59E0
 lbl_804D59E0:
-    .4byte 0x426F6E75
-    .4byte 0x73000000
+    .asciz "Bonus"
+    .balign 4
 .global lbl_804D59E8
 lbl_804D59E8:
-    .4byte 0x436F7270
-    .4byte 0x73000000
+    .asciz "Corps"
+    .balign 4
 .global lbl_804D59F0
 lbl_804D59F0:
-    .4byte 0x54617267
-    .4byte 0x65740000
+    .asciz "Target"
+    .balign 4
 .global lbl_804D59F8
 lbl_804D59F8:
-    .4byte 0x54455354
-    .4byte 0x203E0000
+    .asciz "TEST >"
+    .balign 4
 .global lbl_804D5A00
 lbl_804D5A00:
     .asciz "0"
