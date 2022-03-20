@@ -4565,9 +4565,8 @@ lbl_803E0FF4:
     .4byte NULL
 .global lbl_803E1198
 lbl_803E1198:
-    .4byte 0x2F477243
-    .4byte 0x732E6461
-    .4byte 0x74000000
+    .asciz "/GrCs.dat"
+    .balign 4
 .global lbl_803E11A4
 lbl_803E11A4:
     .4byte 0x00000002
@@ -4583,34 +4582,15 @@ lbl_803E11A4:
     .4byte 0x00000001
     .4byte lbl_803E0FE8
     .4byte 0x00000002
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726361
-    .4byte 0x73746C65
-    .4byte 0x2E630000
-    .4byte 0x64796E61
-    .4byte 0x6D696373
-    .4byte 0x64617461
-    .4byte 0x5F666C61
-    .4byte 0x67330000
-    .4byte 0x64796E61
-    .4byte 0x6D696373
-    .4byte 0x64617461
-    .4byte 0x5F666C61
-    .4byte 0x67340000
-    .4byte 0x64796E61
-    .4byte 0x6D696373
-    .4byte 0x64617461
-    .4byte 0x5F666C61
-    .4byte 0x67360000
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grcastle.c"
+    .balign 4
+    .asciz "dynamicsdata_flag3"
+    .balign 4
+    .asciz "dynamicsdata_flag4"
+    .balign 4
+    .asciz "dynamicsdata_flag6"
 
 
 .section .sdata

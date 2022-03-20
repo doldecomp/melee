@@ -44984,54 +44984,28 @@ lbl_803DB2EC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
-    .4byte 0x476D5265
-    .4byte 0x67456E64
-    .4byte NULL
-    .4byte 0x63757431
-    .4byte 0x43616E69
-    .4byte 0x6D536365
-    .4byte 0x6E650000
-    .4byte 0x63757432
-    .4byte 0x43616E69
-    .4byte 0x6D536365
-    .4byte 0x6E650000
-    .4byte 0x63757433
-    .4byte 0x43616E69
-    .4byte 0x6D536365
-    .4byte 0x6E650000
-    .4byte 0x63757433
-    .4byte 0x42675363
-    .4byte 0x656E6500
-    .4byte 0x476D5267
-    .4byte 0x53746E64
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x7374616E
-    .4byte 0x64536365
-    .4byte 0x6E650000
-    .4byte 0x54794D63
-    .4byte 0x436D4473
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x54794D63
-    .4byte 0x52314473
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x54794D63
-    .4byte 0x52324473
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte NULL
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .asciz "GmRegEnd"
+    .balign 4
+    .asciz "cut1CanimScene"
+    .balign 4
+    .asciz "cut2CanimScene"
+    .balign 4
+    .asciz "cut3CanimScene"
+    .balign 4
+    .asciz "cut3BgScene"
+    .balign 4
+    .asciz "GmRgStnd.dat"
+    .balign 4
+    .asciz "standScene"
+    .balign 4
+    .asciz "TyMcCmDs.dat"
+    .balign 4
+    .asciz "TyMcR1Ds.dat"
+    .balign 4
+    .asciz "TyMcR2Ds.dat"
+    .balign 8
 .global lbl_803DB430
 lbl_803DB430:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -45501,12 +45475,10 @@ lbl_803DBF78:
     .4byte NULL
     .4byte 0xC0400000
     .4byte NULL
-    .4byte 0x5C636666
-    .4byte 0x66663030
-    .4byte 0x25326400
-    .4byte 0x5C636666
-    .4byte 0x66663030
-    .4byte 0x25336400
+    .asciz "\\cffff00%2d"
+    .balign 4
+    .asciz "\\cffff00%3d"
+    .balign 4
 .global lbl_803DBFB4
 lbl_803DBFB4:
     .4byte 0x000004E2
@@ -46633,46 +46605,14 @@ lbl_803DD0DC:
     .4byte 0x461C4000
     .4byte 0x42A00000
     .4byte 0x3F9BBBBF
-    .4byte 0x676D7374
-    .4byte 0x61666672
-    .4byte 0x6F6C6C2E
-    .4byte 0x63000000
-    .4byte 0x676F626A
-    .4byte 0x203D3D20
-    .4byte 0x4853445F
-    .4byte 0x474F626A
-    .4byte 0x47584C69
-    .4byte 0x6E6B4865
-    .4byte 0x61645B47
-    .4byte 0x6D5F474F
-    .4byte 0x626A5F47
-    .4byte 0x584C696E
-    .4byte 0x6B5F506C
-    .4byte 0x79437572
-    .4byte 0x736F725D
-    .4byte NULL
-    .4byte 0x73746166
-    .4byte 0x66496E66
-    .4byte 0x6F5B7374
-    .4byte 0x61666649
-    .4byte 0x6E666F53
-    .4byte 0x6F727442
-    .4byte 0x75665B69
-    .4byte 0x5D2E696E
-    .4byte 0x6465785D
-    .4byte 0x2E77696E
-    .4byte 0x5B305D00
-    .4byte 0x73746166
-    .4byte 0x66496E66
-    .4byte 0x6F5B7374
-    .4byte 0x61666649
-    .4byte 0x6E666F53
-    .4byte 0x6F727442
-    .4byte 0x75665B69
-    .4byte 0x5D2E696E
-    .4byte 0x6465785D
-    .4byte 0x2E77696E
-    .4byte 0x5B315D00
+    .asciz "gmstaffroll.c"
+    .balign 4
+    .asciz "gobj == HSD_GObjGXLinkHead[Gm_GObj_GXLink_PlyCursor]"
+    .balign 4
+    .asciz "staffInfo[staffInfoSortBuf[i].index].win[0]"
+    .balign 4
+    .asciz "staffInfo[staffInfoSortBuf[i].index].win[1]"
+    .balign 4
     .4byte 0x00000010
     .4byte 0x00000063
     .4byte 0x00000062
@@ -46692,49 +46632,22 @@ lbl_803DD0DC:
     .4byte 0x41580000
     .4byte 0xC0900000
     .4byte NULL
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
     .4byte 0x25642082
     .4byte 0x67826882
     .4byte 0x73000000
-    .4byte 0x53645374
-    .4byte 0x526F6C6C
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x5349535F
-    .4byte 0x5374526F
-    .4byte 0x6C6C4461
-    .4byte 0x74610000
-    .4byte 0x476D5374
-    .4byte 0x526F6C6C
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x53634761
-    .4byte 0x6D526567
-    .4byte 0x53746166
-    .4byte 0x66726F6C
-    .4byte 0x6C5F7363
-    .4byte 0x656E655F
-    .4byte 0x64617461
-    .4byte NULL
-    .4byte 0x53634761
-    .4byte 0x6D526567
-    .4byte 0x53746166
-    .4byte 0x66726F6C
-    .4byte 0x6C4E616D
-    .4byte 0x65735F73
-    .4byte 0x63656E65
-    .4byte 0x5F6D6F64
-    .4byte 0x656C7365
-    .4byte 0x74000000
+    .balign 4
+    .asciz "SdStRoll.dat"
+    .balign 4
+    .asciz "SIS_StRollData"
+    .balign 4
+    .asciz "GmStRoll.dat"
+    .balign 4
+    .asciz "ScGamRegStaffroll_scene_data"
+    .balign 4
+    .asciz "ScGamRegStaffrollNames_scene_modelset"
+    .balign 4
 .global lbl_803DD2C0
 lbl_803DD2C0:
     .4byte 0x00000001
@@ -46872,29 +46785,16 @@ lbl_803DD4D0:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x4E744D73
-    .4byte 0x6757696E
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x53634E74
-    .4byte 0x63436F6D
-    .4byte 0x6D6F6E5F
-    .4byte 0x7363656E
-    .4byte 0x655F6461
-    .4byte 0x74610000
-    .4byte 0x53644D73
-    .4byte 0x67426F78
-    .4byte 0x2E757364
-    .4byte NULL
-    .4byte 0x5349535F
-    .4byte 0x4D657373
-    .4byte 0x61676544
-    .4byte 0x61746100
-    .4byte 0x53644D73
-    .4byte 0x67426F78
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte NULL
+    .asciz "NtMsgWin.dat"
+    .balign 4
+    .asciz "ScNtcCommon_scene_data"
+    .balign 4
+    .asciz "SdMsgBox.usd"
+    .balign 4
+    .asciz "SIS_MessageData"
+    .balign 4
+    .asciz "SdMsgBox.dat"
+    .balign 8
 .global lbl_803DD550
 lbl_803DD550:
     .4byte 0x00000001
@@ -49820,43 +49720,12 @@ jtbl_803E0140:
 	.4byte lbl_801C269C
 	.4byte lbl_801C26D4
 	.4byte lbl_801C25B4
-    .4byte 0x25733A25
-    .4byte 0x643A206E
-    .4byte 0x6F742066
-    .4byte 0x6F756E64
-    .4byte 0x20737461
-    .4byte 0x67652070
-    .4byte 0x6172616D
-    .4byte 0x20696E20
-    .4byte 0x44415428
-    .4byte 0x67726B69
-    .4byte 0x6E643D25
-    .4byte 0x64207374
-    .4byte 0x6B696E64
-    .4byte 0x3D25642C
-    .4byte 0x6E756D3D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x20202020
-    .4byte 0x20202020
-    .4byte 0x20202020
-    .4byte 0x20636865
-    .4byte 0x636B2053
-    .4byte 0x74616765
-    .4byte 0x50617261
-    .4byte 0x6D2E6373
-    .4byte 0x76206F72
-    .4byte 0x20537461
-    .4byte 0x67654974
-    .4byte 0x656D2E63
-    .4byte 0x73762C20
-    .4byte 0x73746461
-    .4byte 0x74612E63
-    .4byte 0x0A000000
-    .4byte 0x20737461
-    .4byte 0x67656964
-    .4byte 0x3D25640A
-    .4byte NULL
+    .asciz "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n"
+    .balign 4
+    .asciz "             check StageParam.csv or StageItem.csv, stdata.c\n"
+    .balign 4
+    .asciz " stageid=%d\n"
+    .balign 4
 .global lbl_803E01F8
 lbl_803E01F8:
     .asciz "%s:%d: not found stage param in DAT\n"
@@ -50055,15 +49924,8 @@ lbl_803E0220:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A4572
-    .4byte 0x726F7220
-    .4byte 0x28726F6F
-    .4byte 0x743D2530
-    .4byte 0x3878206A
-    .4byte 0x6F696E74
-    .4byte 0x3D253038
-    .4byte 0x78290A00
+    .asciz "%s:%d:Error (root=%08x joint=%08x)\n"
+    .balign 4
 .global lbl_803E054C
 lbl_803E054C:
     .asciz "use dummy CamRange ...!\n"

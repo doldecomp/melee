@@ -25968,26 +25968,12 @@ lbl_803F1384:
     .4byte 0xFFFFFFFF
     .4byte 0xFFFFFFFF
     .4byte NULL
-    .4byte 0x6974656D
-    .4byte 0x20686974
-    .4byte 0x206E756D
-    .4byte 0x206F7665
-    .4byte 0x72210A00
-    .4byte 0x6974656D
-    .4byte 0x2063616E
-    .4byte 0x27742069
-    .4byte 0x6E697420
-    .4byte 0x68697421
-    .4byte 0x0A000000
-    .4byte 0x6974656D
-    .4byte 0x2064796E
-    .4byte 0x616D6963
-    .4byte 0x73206869
-    .4byte 0x74206E75
-    .4byte 0x6D206F76
-    .4byte 0x6572210A
-    .4byte NULL
-    .4byte NULL
+    .asciz "item hit num over!\n"
+    .balign 4
+    .asciz "item can't init hit!\n"
+    .balign 4
+    .asciz "item dynamics hit num over!\n"
+    .balign 8
 .global lbl_803F1418
 lbl_803F1418:
     .4byte func_8026EECC
@@ -26772,35 +26758,14 @@ lbl_803F1F90:
     .4byte 0x00000001
     .4byte NULL
     .4byte 0xFFFF0000
-    .4byte 0x73797364
-    .4byte 0x6F6C7068
-    .4byte 0x696E5F62
-    .4byte 0x6173655F
-    .4byte 0x6C696272
-    .4byte 0x61727900
-    .4byte 0x63616E27
-    .4byte 0x74206669
-    .4byte 0x6E642066
-    .4byte 0x72656520
-    .4byte 0x636F6C6F
-    .4byte 0x72207265
-    .4byte 0x67697374
-    .4byte 0x6572210A
-    .4byte NULL
-    .4byte 0x69746D61
-    .4byte 0x74657269
-    .4byte 0x616C2E63
-    .4byte NULL
-    .4byte 0x63616E27
-    .4byte 0x74206669
-    .4byte 0x6E642066
-    .4byte 0x72656520
-    .4byte 0x636F6C6F
-    .4byte 0x72207261
-    .4byte 0x74696F20
-    .4byte 0x72656769
-    .4byte 0x73746572
-    .4byte 0x210A0000
+    .asciz "sysdolphin_base_library"
+    .balign 4
+    .asciz "can't find free color register!\n"
+    .balign 4
+    .asciz "itmaterial.c"
+    .balign 4
+    .asciz "can't find free color ratio register!\n"
+    .balign 4
 .global jtbl_803F20E0
 jtbl_803F20E0:
     .4byte lbl_80278850
@@ -31758,16 +31723,8 @@ lbl_803F6CA8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
 .global lbl_803F6E28
 lbl_803F6E28:
     .4byte 0xBED9999A

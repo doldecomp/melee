@@ -3207,16 +3207,10 @@ lbl_803C0998:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x66696768
-    .4byte 0x7465725F
-    .4byte 0x636C6173
-    .4byte 0x735F6C69
-    .4byte 0x62726172
-    .4byte 0x79000000
-    .4byte 0x66745F69
-    .4byte 0x6E74705F
-    .4byte 0x6A6F626A
-    .4byte NULL
+    .asciz "fighter_class_library"
+    .balign 4
+    .asciz "ft_intp_jobj"
+    .balign 4
 .global lbl_803C0A08
 lbl_803C0A08:
     .asciz "ftparts.c"
