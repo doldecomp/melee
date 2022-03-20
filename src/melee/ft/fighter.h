@@ -182,8 +182,8 @@ typedef struct _ThrowFlags
 
 typedef struct _FighterBone
 {
-  /* 0x0 */ u8* x0_joint;
-  /* 0x4 */ u8* x4_joint2; // used for interpolation
+  /* 0x0 */ HSD_JObj* x0_jobj;
+  /* 0x4 */ HSD_JObj* x4_jobj2; // used for interpolation
   u32 data_filler[2];
 } FighterBone;
 
@@ -497,14 +497,17 @@ typedef struct _Fighter {
     /* 0x1A52 */ s8 x1A52;
     /* 0x1A53 */ s8 x1A53;
     s32 filler_x1A54;
-    /* 0x1A58 */ HSD_GObj* x1A58; // grabAttacker?
-    /* 0x1A5C */ HSD_GObj* x1A5C; // grabVictim?
-    /* 0x1A60 */ s32 x1A60;
-    /* 0x1A64 */ s32 x1A64;
-    u8 filler_x1A68[0x2008-0x1A68];
-    /* 0x2008 */ s32 x2008;
-    /* 0x200C */ s32 x200C;
-    /* 0x2010 */ s32 x2010;
+                 HSD_GObj* x1A58;
+                 HSD_GObj* x1A5C;
+                 s32 x1A60;
+                 s32 x1A64;
+                 s32 x1A68;
+                 f32 x1A6C;
+                 Vec x1A70;
+    u8 filler_x1A6C[0x2008-0x1A78];
+                 s32 x2008;
+                 s32 x200C;
+                 s32 x2010;
     u8 filler_x2014[0x2028 - 0x2014];
     /* 0x2028 */ s32 x2028;
     /* 0x202C */ s32 x202C;

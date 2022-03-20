@@ -612,6 +612,7 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
     func_8007C630(fighterObj);
 }
 
+///https://decomp.me/scratch/ozjB3
 void func_800686E4(HSD_GObj* fighterObj) {
     HSD_JObj* jobj;
 
@@ -632,68 +633,22 @@ void func_800686E4(HSD_GObj* fighterObj) {
 }
 
 
-asm void func_8006876C()
-{
-	nofralloc 
-/* 8006876C 0006534C  7C 08 02 A6 */	mflr r0
-/* 80068770 00065350  38 80 00 02 */	li r4, 2
-/* 80068774 00065354  90 01 00 04 */	stw r0, 4(r1)
-/* 80068778 00065358  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 8006877C 0006535C  93 E1 00 2C */	stw r31, 0x2c(r1)
-/* 80068780 00065360  93 C1 00 28 */	stw r30, 0x28(r1)
-/* 80068784 00065364  3B C3 00 00 */	addi r30, r3, 0
-/* 80068788 00065368  48 00 C8 85 */	bl func_8007500C
-/* 8006878C 0006536C  80 9E 05 E8 */	lwz r4, 0x5e8(r30)
-/* 80068790 00065370  54 60 20 36 */	slwi r0, r3, 4
-/* 80068794 00065374  7F E4 00 2E */	lwzx r31, r4, r0
-/* 80068798 00065378  28 1F 00 00 */	cmplwi r31, 0
-/* 8006879C 0006537C  40 82 00 14 */	bne lbl_800687B0
-/* 800687A0 00065380  38 6D 83 60 */	addi r3, r13, lbl_804D3A00
-/* 800687A4 00065384  38 80 03 D3 */	li r4, 0x3d3
-/* 800687A8 00065388  38 AD 83 68 */	addi r5, r13, lbl_804D3A08
-/* 800687AC 0006538C  48 31 FA 75 */	bl __assert
-lbl_800687B0:
-/* 800687B0 00065390  80 9F 00 38 */	lwz r4, 0x38(r31)
-/* 800687B4 00065394  7F E3 FB 78 */	mr r3, r31
-/* 800687B8 00065398  80 1F 00 3C */	lwz r0, 0x3c(r31)
-/* 800687BC 0006539C  38 A1 00 18 */	addi r5, r1, 0x18
-/* 800687C0 000653A0  C0 02 88 88 */	lfs f0, lbl_804D8268(r2)
-/* 800687C4 000653A4  90 81 00 18 */	stw r4, 0x18(r1)
-/* 800687C8 000653A8  38 80 00 00 */	li r4, 0
-/* 800687CC 000653AC  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 800687D0 000653B0  80 1F 00 40 */	lwz r0, 0x40(r31)
-/* 800687D4 000653B4  90 01 00 20 */	stw r0, 0x20(r1)
-/* 800687D8 000653B8  C0 21 00 1C */	lfs f1, 0x1c(r1)
-/* 800687DC 000653BC  EC 01 00 24 */	fdivs f0, f1, f0
-/* 800687E0 000653C0  D0 1E 1A 6C */	stfs f0, 0x1a6c(r30)
-/* 800687E4 000653C4  4B FA 29 E9 */	bl func_8000B1CC
-/* 800687E8 000653C8  38 7E 00 00 */	addi r3, r30, 0
-/* 800687EC 000653CC  38 80 00 01 */	li r4, 1
-/* 800687F0 000653D0  48 00 C8 1D */	bl func_8007500C
-/* 800687F4 000653D4  80 9E 05 E8 */	lwz r4, 0x5e8(r30)
-/* 800687F8 000653D8  54 60 20 36 */	slwi r0, r3, 4
-/* 800687FC 000653DC  38 A1 00 0C */	addi r5, r1, 0xc
-/* 80068800 000653E0  7C 64 00 2E */	lwzx r3, r4, r0
-/* 80068804 000653E4  38 80 00 00 */	li r4, 0
-/* 80068808 000653E8  4B FA 29 C5 */	bl func_8000B1CC
-/* 8006880C 000653EC  C0 21 00 0C */	lfs f1, 0xc(r1)
-/* 80068810 000653F0  C0 01 00 18 */	lfs f0, 0x18(r1)
-/* 80068814 000653F4  EC 01 00 28 */	fsubs f0, f1, f0
-/* 80068818 000653F8  D0 1E 1A 70 */	stfs f0, 0x1a70(r30)
-/* 8006881C 000653FC  C0 21 00 10 */	lfs f1, 0x10(r1)
-/* 80068820 00065400  C0 01 00 1C */	lfs f0, 0x1c(r1)
-/* 80068824 00065404  EC 01 00 28 */	fsubs f0, f1, f0
-/* 80068828 00065408  D0 1E 1A 74 */	stfs f0, 0x1a74(r30)
-/* 8006882C 0006540C  C0 21 00 14 */	lfs f1, 0x14(r1)
-/* 80068830 00065410  C0 01 00 20 */	lfs f0, 0x20(r1)
-/* 80068834 00065414  EC 01 00 28 */	fsubs f0, f1, f0
-/* 80068838 00065418  D0 1E 1A 78 */	stfs f0, 0x1a78(r30)
-/* 8006883C 0006541C  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 80068840 00065420  83 E1 00 2C */	lwz r31, 0x2c(r1)
-/* 80068844 00065424  83 C1 00 28 */	lwz r30, 0x28(r1)
-/* 80068848 00065428  38 21 00 30 */	addi r1, r1, 0x30
-/* 8006884C 0006542C  7C 08 03 A6 */	mtlr r0
-/* 80068850 00065430  4E 80 00 20 */	blr  
+///https://decomp.me/scratch/80QFX
+void func_8006876C(Fighter* fighter) {
+
+    Vec vec;
+    Vec vec2;
+    HSD_JObj* temp_r31 = fighter->x5E8_fighterBones[func_8007500C(fighter, 2)].x0_jobj;
+
+    HSD_JObjGetTranslation(temp_r31, &vec);
+
+    fighter->x1A6C = (vec.y / 8.55f);
+
+    func_8000B1CC(temp_r31, 0, &vec);
+    func_8000B1CC(fighter->x5E8_fighterBones[func_8007500C(fighter, 1)].x0_jobj, 0, &vec2);
+    fighter->x1A70.x = vec2.x - vec.x;
+    fighter->x1A70.y = vec2.y - vec.y;
+    fighter->x1A70.z = vec2.z - vec.z;
 }
 
 
