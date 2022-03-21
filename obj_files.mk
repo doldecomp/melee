@@ -135,7 +135,7 @@ TEXT_O_FILES := 						            \
 	                                                  \
 	$(BUILD_DIR)/asm/melee/gr/ground.s.o              \
 	$(BUILD_DIR)/asm/melee/gr/grdisplay.s.o           \
-	$(BUILD_DIR)/asm/melee/gr/grdatfiles.s.o          \
+	$(BUILD_DIR)/src/melee/gr/grdatfiles.c.o          \
 	$(BUILD_DIR)/asm/melee/gr/granime.s.o             \
 	$(BUILD_DIR)/asm/melee/gr/grmaterial.s.o          \
 	$(BUILD_DIR)/asm/melee/gr/grlib.s.o               \

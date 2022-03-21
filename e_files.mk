@@ -34,6 +34,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakogirl.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/ftlib.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/grbattle.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grdatfiles.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/grshrine.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/grstory.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/stage.c.o\

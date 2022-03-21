@@ -65,8 +65,25 @@ typedef struct _StageInfo {
         u8 b6 : 1;
         u8 b7 : 1;
     } unk8C;
-
-    u8 data[0x6EB];
+    u8 x8D_pad[3];
+    u8 x90_pad[0xA0 - 0x90];
+    u8 xA0[4];
+    u8 xA4_pad[0x178 - 0xA4];
+    void* x178;
+    void* x17C;
+    u8 x180_pad[0x6A4 - 0x180];
+    void* x6A4;
+    void* x6A8;
+    void* x6AC;
+    void* x6B0;
+    void* x6B4;
+    void* x6B8;
+    void* x6BC;
+    void* x6C0;
+    void* x6C4;
+    void* x6C8;
+    void* x6CC;
+    u8 data[0x6EB - 0x6D0];
 } StageInfo;
 
 typedef struct {
