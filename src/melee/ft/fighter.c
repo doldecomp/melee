@@ -211,7 +211,9 @@ void func_80067BB4(HSD_GObj* pPlayerEntity)
 }
 
 // Fake Match:  https://decomp.me/scratch/Pegi9
-// https://decomp.me/scratch/dEh27  -- No Match, one mr instruction is shifted.
+// Fake Match:  https://decomp.me/scratch/dEh27
+// https://decomp.me/scratch/LR7YU -- No Match, one mr instruction is shifted.
+
 void func_80067C98(register Fighter* ft) {
 	Vec3 spC_player_coord;
 	f32 x,y,z;
@@ -223,16 +225,16 @@ void func_80067C98(register Fighter* ft) {
 
 	spC_player_coord.x = ft->x2C_facing_direction * func_800804EC(ft) + spC_player_coord.x;
 	x = spC_player_coord.x;
-	ft->xB0_pos.x = x;
-	ft->xBC_prevPos.x = x;
+	ft->phys.xB0_pos.x = x;
+	ft->phys.xBC_prevPos.x = x;
 
 	y = spC_player_coord.y;
-	ft->xB0_pos.y = y;
-	ft->xBC_prevPos.y = y;
+	ft->phys.xB0_pos.y = y;
+	ft->phys.xBC_prevPos.y = y;
 
 	z = spC_player_coord.z;
-	ft->xB0_pos.z = z;
-	ft->xBC_prevPos.z = z;
+	ft->phys.xB0_pos.z = z;
+	ft->phys.xBC_prevPos.z = z;
 
 	ft->x30_facingDirectionRepeated = ft->x2C_facing_direction;
 	ft->x34_scale.y = ft->x34_scale.x;
@@ -260,57 +262,57 @@ void func_80067C98(register Fighter* ft) {
 
 	ft->x61D = 255;
 
-	ft->xC8_pos_delta.z /*xD0*/ = 0.0f;//lbl_804D8254
-	ft->xC8_pos_delta.y /*xCC*/ = 0.0f;//lbl_804D8254
-	ft->xC8_pos_delta.x = 0.0f;//lbl_804D8254
+	ft->phys.pos_delta.z /*xD0*/ = 0.0f;//lbl_804D8254
+	ft->phys.pos_delta.y /*xCC*/ = 0.0f;//lbl_804D8254
+	ft->phys.pos_delta.x = 0.0f;//lbl_804D8254
 	ft->x894 = 0.0f;//lbl_804D8254
 	ft->x898 = 0.0f;//lbl_804D8254
 
 	ft->x89C = 1.0f;//lbl_804D8250
 	ft->x8A0 = 1.0f;//lbl_804D8250
-	ft->x1850_forceApplied = 0.0f;//lbl_804D8254
-	ft->x18A4_knockbackMagnitude = 0.0f;//lbl_804D8254
-	ft->x18A8 = 0.0f;//lbl_804D8254
-	ft->x18AC_timeSinceHit = -1;
-	ft->x18B0 = 0.0f;//lbl_804D8254
-	ft->x18B4_armor = 0.0f;//lbl_804D8254
+	ft->dmg.x1850_forceApplied = 0.0f;//lbl_804D8254
+	ft->dmg.x18A4_knockbackMagnitude = 0.0f;//lbl_804D8254
+	ft->dmg.x18A8 = 0.0f;//lbl_804D8254
+	ft->dmg.time_since_hit = -1;
+	ft->dmg.x18B0 = 0.0f;//lbl_804D8254
+	ft->dmg.x18B4_armor = 0.0f;//lbl_804D8254
 	ft->x1828 = 0;
 
 	ft->x221C_flag.bits.b6 = 0;
 
-	ft->x18A0 = 0.0f;//lbl_804D8254
+	ft->dmg.x18a0 = 0.0f;//lbl_804D8254
 	ft->x1968_jumpsUsed = 0;
 	ft->x1969_walljumpUsed = 0;
 	ft->x196C_hitlag_mult = 0.0f;//lbl_804D8254
 	ft->x2064_ledgeCooldown = 0;
 
 	//@1b4
-	ft->x1830_percent = Player_GetDamage(ft->xC_playerID);
+	ft->dmg.percent = Player_GetDamage(ft->xC_playerID);
 
-	ft->x1838_percentTemp = 0.0f;//lbl_804D8254
+	ft->dmg.x1838_percentTemp = 0.0f;//lbl_804D8254
 
-	ft->x183C = 0;
-	ft->x18C0 = 0;
+	ft->dmg.applied = 0;
+	ft->dmg.x18C0 = 0;
 
-	ft->x18C4 = 6;
-	ft->x18C8 = -1;
-	ft->x18F0 = 0;
-	ft->x18CC = 0;
-	ft->x18D0 = -10;
+	ft->dmg.source_ply = 6;
+	ft->dmg.x18C8 = -1;
+	ft->dmg.x18F0 = 0;
+	ft->dmg.x18CC = 0;
+	ft->dmg.x18D0 = -10;
 
 	ft->x221F_flag.bits.b5 = 0;
 	ft->x2221_flag.bits.b1 = 0;
 
-	ft->x18F4 = 0;
-	ft->x18F8 = 1;
-	ft->x18FA = 0;
-	ft->x18FD = 0;
-	ft->x18FC = 0;
-	ft->x1834 = 0.0f;//lbl_804D8254
+	ft->dmg.x18F4 = 0;
+	ft->dmg.x18F8 = 1;
+	ft->dmg.model_shift_frames = 0;
+	ft->dmg.x18FD = 0;
+	ft->dmg.x18FC = 0;
+	ft->dmg.x1834 = 0.0f;//lbl_804D8254
 
 	ft->x2222_flag.bits.b2 = 0;
 
-	ft->x1840 = 0;
+	ft->dmg.x1840 = 0;
 
 	ft->x2219_flag.bits.b5 = 0; // freeze bit?
 	ft->x2219_flag.bits.b6 = 0;
@@ -318,37 +320,37 @@ void func_80067C98(register Fighter* ft) {
 	ft->x221A_flag.bits.b0 = 0;
 	ft->x221A_flag.bits.b1 = 0;
 
-	ft->x1954 = 0.0f;//lbl_804D8254
-	ft->x1958 = 0.0f;//lbl_804D8254
+	ft->dmg.x1954 = 0.0f;//lbl_804D8254
+	ft->dmg.x1958 = 0.0f;//lbl_804D8254
 
 	ft->x221A_flag.bits.b2 = 0;
 
-	ft->x195C_hitlagFrames = 0.0f;//lbl_804D8254
+	ft->dmg.hitlag_frames = 0.0f;//lbl_804D8254
 
 	ft->x221A_flag.bits.b3 = 0;
 	ft->x1960_vibrateMult = 1.0f;//lbl_804D8250
 	ft->x1964 = 0.0f;//lbl_804D8254
-	ft->x189C = 0.0f;//lbl_804D8254
+	ft->dmg.x189C = 0.0f;//lbl_804D8254
 
 	ft->x2220_flag.bits.b3 = 0;
 	ft->x2220_flag.bits.b4 = 0;
 
-	ft->x1914 = 0;
-	ft->x1918 = 0;
-	ft->x191C = 0.0f;//lbl_804D8254
-	ft->x1924 = 0;
-	ft->x1928 = 0.0f;//lbl_804D8254
+	ft->dmg.x1914 = 0;
+	ft->dmg.x1918 = 0;
+	ft->dmg.x191C = 0.0f;//lbl_804D8254
+	ft->dmg.x1924 = 0;
+	ft->dmg.x1928 = 0.0f;//lbl_804D8254
 
 	ft->x2223_flag.bits.b5 = 0;
 
-	ft->x1950 = 0;
-	ft->x1948 = 0;
+	ft->dmg.x1950 = 0;
+	ft->dmg.x1948 = 0;
 
 	ft->x2223_flag.bits.b4 = 0;
 
-	ft->xF8_playerNudgeVel.y/*FC*/ = 0.0f;//lbl_804D8254
-	ft->xF8_playerNudgeVel.x/*F8*/ = 0.0f;//lbl_804D8254
-	ft->x100 = -1.0f;//lbl_804D8258;
+	ft->phys.xF8_playerNudgeVel.y/*FC*/ = 0.0f;//lbl_804D8254
+	ft->phys.xF8_playerNudgeVel.x/*F8*/ = 0.0f;//lbl_804D8254
+	ft->phys.x100 = -1.0f;//lbl_804D8258;
 
 	ft->x2222_flag.bits.b7 = 0;
 	ft->x2223_flag.bits.b0 = 0;
@@ -460,15 +462,15 @@ void func_80067C98(register Fighter* ft) {
 	ft->x6DC = 0.0f;//lbl_804D8254
 	ft->x6D8 = 0.0f;//lbl_804D8254
 
-	ft->x209C = (s16) 0;
+	ft->x209C = 0;
 	ft->x2224_flag.bits.b1 = 0;
-	ft->x21E4_callback_OnDeath2 = 0;
+	ft->cb.x21E4_callback_OnDeath2 = 0;
 	ft->x2100 = -1;
 	ft->x2101_bits_0to6 = 0;
-	ft->x21B4_callback_Accessory2 = 0;
-	ft->x21B8_callback_Accessory3 = 0;
-	ft->x21E0_callback_OnDeath = 0;
-	ft->x21E8_callback_OnDeath3 = 0;
+	ft->cb.x21B4_callback_Accessory2 = 0;
+	ft->cb.x21B8_callback_Accessory3 = 0;
+	ft->cb.x21E0_callback_OnDeath = 0;
+	ft->cb.x21E8_callback_OnDeath3 = 0;
 	ft->x221E_flag.bits.b4 = 1;
 	ft->x197C = 0;
 	ft->x2223_flag.bits.b7 = 0;
@@ -497,18 +499,18 @@ void func_80067C98(register Fighter* ft) {
 	ft->x1A53 = (s8) 0;
 	ft->x1A52 = (s8) 0;
 	ft->x210C_walljumpInputTimer = 254;
-	ft->x1910 = 0;
+	ft->dmg.x1910 = 0;
 	ft->x2225_flag.bits.b0 = 0;
 	ft->x2225_flag.bits.b2 = 1;
 	ft->x2225_flag.bits.b4 = 0;
 	func_800DEEA8(tmp->x0_fighter);
-	ft->x18BC = 0.0f;//lbl_804D8254
-	ft->x18B8 = 0.0f;//lbl_804D8254
+	ft->dmg.x18BC = 0.0f;//lbl_804D8254
+	ft->dmg.x18B8 = 0.0f;//lbl_804D8254
 	ft->x2226_flag.bits.b2 = 0;
 	ft->x2170 = 0.0f;//lbl_804D8254
 	ft->x2225_flag.bits.b6 = ft->x2225_flag.bits.b5;
-	ft->x1908 = -1;
-	ft->x190C = 0;
+	ft->dmg.x1908 = -1;
+	ft->dmg.x190C = 0;
 	ft->x2227_flag.bits.b4 = 0;
 	ft->x2138_smashSinceHitbox = -1.0f;//lbl_804D8258;
 	ft->x213C = -1;
@@ -545,7 +547,7 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
 
     //@2c
     HSD_JObjCheckObj(jobj);
-    HSD_JObjSetTranslate(temp_r28, &fighter_r31->xB0_pos);
+    HSD_JObjSetTranslate(temp_r28, &fighter_r31->phys.xB0_pos);
 
     //@d0
     func_800D105C(fighterObj);
@@ -571,7 +573,7 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
     //@164
     jobj = temp_r28 = fighterObj->hsd_obj;
     HSD_JObjCheckObj(jobj);
-    HSD_JObjSetTranslate(temp_r28, &fighter_r31->xB0_pos);
+    HSD_JObjSetTranslate(temp_r28, &fighter_r31->phys.xB0_pos);
 
     //@208
     func_8006C0F0(fighterObj);
@@ -651,59 +653,65 @@ void func_8006876C(Fighter* fighter) {
     fighter->x1A70.z = vec2.z - vec.z;
 }
 
+///https://decomp.me/scratch/a0kYg
+void func_80068854(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
 
-asm void func_80068854()
-{
-	nofralloc 
-/* 80068854 00065434  80 A3 00 2C */	lwz r5, 0x2c(r3)
-/* 80068858 00065438  38 80 00 00 */	li r4, 0
-/* 8006885C 0006543C  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 80068860 00065440  38 60 00 FE */	li r3, 0xfe
-/* 80068864 00065444  38 00 00 FF */	li r0, 0xff
-/* 80068868 00065448  D0 05 06 2C */	stfs f0, 0x62c(r5)
-/* 8006886C 0006544C  D0 05 06 28 */	stfs f0, 0x628(r5)
-/* 80068870 00065450  D0 05 06 24 */	stfs f0, 0x624(r5)
-/* 80068874 00065454  D0 05 06 20 */	stfs f0, 0x620(r5)
-/* 80068878 00065458  D0 05 06 44 */	stfs f0, 0x644(r5)
-/* 8006887C 0006545C  D0 05 06 40 */	stfs f0, 0x640(r5)
-/* 80068880 00065460  D0 05 06 3C */	stfs f0, 0x63c(r5)
-/* 80068884 00065464  D0 05 06 38 */	stfs f0, 0x638(r5)
-/* 80068888 00065468  D0 05 06 54 */	stfs f0, 0x654(r5)
-/* 8006888C 0006546C  D0 05 06 50 */	stfs f0, 0x650(r5)
-/* 80068890 00065470  90 85 06 60 */	stw r4, 0x660(r5)
-/* 80068894 00065474  90 85 06 6C */	stw r4, 0x66c(r5)
-/* 80068898 00065478  90 85 06 68 */	stw r4, 0x668(r5)
-/* 8006889C 0006547C  90 85 06 5C */	stw r4, 0x65c(r5)
-/* 800688A0 00065480  98 65 06 72 */	stb r3, 0x672(r5)
-/* 800688A4 00065484  98 65 06 71 */	stb r3, 0x671(r5)
-/* 800688A8 00065488  98 65 06 70 */	stb r3, 0x670(r5)
-/* 800688AC 0006548C  98 65 06 75 */	stb r3, 0x675(r5)
-/* 800688B0 00065490  98 65 06 74 */	stb r3, 0x674(r5)
-/* 800688B4 00065494  98 65 06 73 */	stb r3, 0x673(r5)
-/* 800688B8 00065498  98 65 06 78 */	stb r3, 0x678(r5)
-/* 800688BC 0006549C  98 65 06 77 */	stb r3, 0x677(r5)
-/* 800688C0 000654A0  98 65 06 76 */	stb r3, 0x676(r5)
-/* 800688C4 000654A4  98 65 06 7B */	stb r3, 0x67b(r5)
-/* 800688C8 000654A8  98 65 06 7A */	stb r3, 0x67a(r5)
-/* 800688CC 000654AC  98 65 06 79 */	stb r3, 0x679(r5)
-/* 800688D0 000654B0  98 05 06 8B */	stb r0, 0x68b(r5)
-/* 800688D4 000654B4  98 05 06 8A */	stb r0, 0x68a(r5)
-/* 800688D8 000654B8  98 05 06 89 */	stb r0, 0x689(r5)
-/* 800688DC 000654BC  98 05 06 88 */	stb r0, 0x688(r5)
-/* 800688E0 000654C0  98 05 06 87 */	stb r0, 0x687(r5)
-/* 800688E4 000654C4  98 05 06 86 */	stb r0, 0x686(r5)
-/* 800688E8 000654C8  98 05 06 85 */	stb r0, 0x685(r5)
-/* 800688EC 000654CC  98 05 06 84 */	stb r0, 0x684(r5)
-/* 800688F0 000654D0  98 05 06 83 */	stb r0, 0x683(r5)
-/* 800688F4 000654D4  98 05 06 80 */	stb r0, 0x680(r5)
-/* 800688F8 000654D8  98 05 06 7F */	stb r0, 0x67f(r5)
-/* 800688FC 000654DC  98 05 06 82 */	stb r0, 0x682(r5)
-/* 80068900 000654E0  98 05 06 81 */	stb r0, 0x681(r5)
-/* 80068904 000654E4  98 05 06 7E */	stb r0, 0x67e(r5)
-/* 80068908 000654E8  98 05 06 7D */	stb r0, 0x67d(r5)
-/* 8006890C 000654EC  98 05 06 7C */	stb r0, 0x67c(r5)
-/* 80068910 000654F0  4E 80 00 20 */	blr  
+    fighter->x62C = 0.0f;
+    fighter->x628 = 0.0f;
+    fighter->x624 = 0.0f;
+    fighter->x620_lstick_x = 0.0f;
+
+    fighter->x644 = 0.0f;
+    fighter->x640 = 0.0f;
+    fighter->x63C = 0.0f;
+    fighter->x638 = 0.0f;
+
+    fighter->x654 = 0.0f;
+    fighter->x650 = 0.0f;
+
+    fighter->x660 = 0;
+    fighter->x66C = 0;
+    fighter->x668 = 0;
+    fighter->x65C = 0;
+
+    fighter->x672_timer_lstick_tilt_z = 0xFE;
+    fighter->x671_timer_lstick_tilt_y = 0xFE;
+    fighter->x670_timer_lstick_tilt_x = 0xFE;
+
+    fighter->x675_z = 0xFE;
+    fighter->x674_y = 0xFE;
+    fighter->x673_x = 0xFE;
+
+    fighter->x678_z = 0xFE;
+    fighter->x677_y = 0xFE;
+    fighter->x676_x = 0xFE;
+
+    fighter->x67B_z = 0xFE;
+    fighter->x67A_y = 0xFE;
+    fighter->x679_x = 0xFE;
+
+    fighter->x68B = 0xFF;
+    fighter->x68A = 0xFF;
+    fighter->x689 = 0xFF;
+    fighter->x688 = 0xFF;
+    fighter->x687 = 0xFF;
+    fighter->x686 = 0xFF;
+    fighter->x685 = 0xFF;
+    fighter->x684 = 0xFF;
+    fighter->x683 = 0xFF;
+
+    fighter->x680 = 0xFF;
+    fighter->x67F = 0xFF;
+
+    fighter->x682 = 0xFF;
+    fighter->x681 = 0xFF;
+
+    fighter->x67E = 0xFF;
+    fighter->x67D = 0xFF;
+    fighter->x67C = 0xFF;
 }
+
 
 
 asm void func_80068914()
@@ -1056,19 +1064,6 @@ u32 func_80068E40()
 	return spawnNum;
 }
 #pragma pop
-//asm u32 func_80068E40()
-//{
-//	nofralloc
-///* 80068E40 00065A20  80 6D AE 58 */	lwz r3, lbl_804D64F8(r13)
-///* 80068E44 00065A24  38 03 00 01 */	addi r0, r3, 1
-///* 80068E48 00065A28  90 0D AE 58 */	stw r0, lbl_804D64F8(r13)
-///* 80068E4C 00065A2C  80 0D AE 58 */	lwz r0, lbl_804D64F8(r13)
-///* 80068E50 00065A30  28 00 00 00 */	cmplwi r0, 0
-///* 80068E54 00065A34  4C 82 00 20 */	bnelr
-///* 80068E58 00065A38  38 00 00 01 */	li r0, 1
-///* 80068E5C 00065A3C  90 0D AE 58 */	stw r0, lbl_804D64F8(r13)
-///* 80068E60 00065A40  4E 80 00 20 */	blr
-//}
 
 
 asm void func_80068E64()
@@ -1317,8 +1312,8 @@ lbl_80069194:
 /* 800691F4 00065DD4  38 7F 00 00 */	addi r3, r31, 0
 /* 800691F8 00065DD8  38 A0 00 03 */	li r5, 3
 /* 800691FC 00065DDC  48 32 6B 59 */	bl func_8038FD54
-/* 80069200 00065DE0  3C 60 80 07 */	lis r3, func_8006B82C@ha
-/* 80069204 00065DE4  38 83 B8 2C */	addi r4, r3, func_8006B82C@l
+/* 80069200 00065DE0  3C 60 80 07 */	lis r3, Fighter_procUpdate@ha
+/* 80069204 00065DE4  38 83 B8 2C */	addi r4, r3, Fighter_procUpdate@l
 /* 80069208 00065DE8  38 7F 00 00 */	addi r3, r31, 0
 /* 8006920C 00065DEC  38 A0 00 04 */	li r5, 4
 /* 80069210 00065DF0  48 32 6B 45 */	bl func_8038FD54
@@ -4027,1056 +4022,357 @@ lbl_8006B80C:
 }
 
 
-#if 0
-// https://decomp.me/scratch/k3D7O old version, full match, uses extra parameter that may not exist
-// https://decomp.me/scratch/XNVy4 new version that uses the same context as in fighter.h. Has stackalloc issues, I don't know why.
-// 8006B82C
-void /*fighter_procUpdate*/func_8006B82C(HSD_GObj* pPlayerEntityStruct)
-{
-	//@1c
-	Fighter* pCharData = (Fighter*) pPlayerEntityStruct->user_data;
-	u32 dummy; // not used, only here to match the target's stack allocation layout
-	Vec3 windOffset;
-	//@20
-	if (pCharData->x221F_flag.bits.b3) // sleep?
+//// https://decomp.me/scratch/AKdbI
+void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy) {
+    //@1c
+    Fighter* pCharData = pPlayerEntityStruct->user_data;
+    //float atkShieldKB_len; // 0x1c
+    //float kb_vel_len; // 0x20
+    Vec3 windOffset; // 0x4c
+    //@20
+    if (pCharData->x221F_flag.bits.b3) // if pCharData->byte_at_0x221F & 0b10000
 		return;
+    
+    //@30
+    if (!pCharData->x2219_flag.bits.b5)
+    {
+        Vec3* p_kb_vel;
+        Vec3* pAtkShieldKB;
+        float kb_vel_x, atkShieldKB_X;
+        Vec3 selfVel; // 0x40
 
-	//@30
-	if (!pCharData->x2219_flag.bits.b5) // freeze?
-	{
-		Vec2* p_kb_vel;
-		Vec2* pAtkShieldKB;
-		float kb_vel_x, atkShieldKB_X;
-		Vec3 selfVel;
-
-		//@3c
-		if (pCharData->x2064_ledgeCooldown != 0)
+        //@3c
+        if (pCharData->x2064_ledgeCooldown != 0)
 			pCharData->x2064_ledgeCooldown -= 1;
-		if (pCharData->x2108 != 0)
+        if (pCharData->x2108 != 0)
 			pCharData->x2108 -= 1;
+        
+        //@64
+        func_800C0A98(pPlayerEntityStruct);
 
-		//@64
-		// checks and sets some fighter properties, easy to decompile
-		func_800C0A98(pPlayerEntityStruct);
-
-		//@6c
-		if (pCharData->x21A4_callback_Phys)
-			pCharData->x21A4_callback_Phys(pPlayerEntityStruct);
-		//@84
-		p_kb_vel = (Vec2*)&pCharData->x8C_knockbackVel;
+        //@6c
+		if (pCharData->cb.x21A4_callback_Phys != 0)
+			pCharData->cb.x21A4_callback_Phys(pPlayerEntityStruct); // AS_Physics_Func callback @0x21A4
+        //@84
+        p_kb_vel = &pCharData->phys.x8c_kb_vel;
 		if ((kb_vel_x = p_kb_vel->x) != 0 || p_kb_vel->y != 0)
-		{//float f;
-			//@a4
-			if (pCharData->xE0_airState == 1) // # 0=grounded, 1=airborne.
-			{
-				//@b0
+        {
+            //@a4
+			if (pCharData->phys.xE0_airborne == 1) // # 0=grounded, 1=airborne.
+            {
+                //@b0
 				float kb_vel_x = p_kb_vel->x;
 				float kb_vel_y = p_kb_vel->y;
 				// I was not able to trigger this case in normal gameplay yet. spreadsheet comment: facing angle? hi-pitch, lo-pitch, noCliffCatch
-				if (pCharData->x2228_flag.bits.b2)
-				{
-					// I have a pseudocode decompilatioon of these functions
-					// func_8007CD6C = reduceMagnitude
-					// func_8007CDA4 = getVec0x2D4_X_assertPlayerIndex
-					// func_8007CDF8 = getVec0x2D4_Y_assertPlayerIndex
-					p_kb_vel->x = func_8007CD6C(p_kb_vel->x, func_8007CDA4(pCharData));
+				if (pCharData->x2228_flag.bits.b2) // equivalent to x2228 & 0b0010_0000
+                {
+                	p_kb_vel->x = func_8007CD6C(p_kb_vel->x, func_8007CDA4(pCharData));
 					p_kb_vel->y = func_8007CD6C(p_kb_vel->y, func_8007CDF8(pCharData));
-				}
-				else //@f8
-				{
-
-					float kb_angle = func_80022C30(kb_vel_y, kb_vel_x); // atan2
-					//@104
+                }
+                else //@f8
+                {
+                    
+                    float kb_angle = func_80022C30(kb_vel_y, kb_vel_x);
+                    //@104
 					float kb_vel_len = sqrtf(kb_vel_x * kb_vel_x + kb_vel_y * kb_vel_y);
-
+					
 					//@168 decrement knockback velocity magnitude
-					if (kb_vel_len < p_ftCommonData->x204_knockbackFrameDecay) // kb_frameDecay offset is 0x204, value always 0.051?
-					{
+                    if (kb_vel_len < p_ftCommonData->x204_knockbackFrameDecay) // kb_frameDecay offset is 0x204, value always 0.051?
+                    {
 						p_kb_vel->y = 0; // 0.0f@toc-0x778C
-						p_kb_vel->x = 0;
-					}
+                        p_kb_vel->x = 0;
+                    }
 					else
-					{
-						// What we want to achieve is this:
-						// 	*p_kb_vel *= (kb_vel_len - kb_frameDecay)/kb_vel_len
-						// But this is implemented very inefficiently like this:
-						// (Also this doesn't work properly for 180° angles)
+                    {
+                        // What we want to achieve is this:
+                        // 	*p_kb_vel *= (kb_vel_len - kb_frameDecay)/kb_vel_len
+                        // But this is implemented very inefficiently like this:
+                        // (Also this doesn't work properly for 180° angles)
 						p_kb_vel->x -= p_ftCommonData->x204_knockbackFrameDecay * cosf(kb_angle);//@188
-						p_kb_vel->y -= p_ftCommonData->x204_knockbackFrameDecay * sinf(kb_angle);//@1a8
-					}
-				}
-				//@1c0
-				pCharData->xF0_knockbackGroundVel = 0; // 0.0f@toc-0x778C
-			}
+                        p_kb_vel->y -= p_ftCommonData->x204_knockbackFrameDecay * sinf(kb_angle);//@1a8
+                    }
+                }
+                //@1c0
+				pCharData->phys.xF0_ground_kb_vel = 0; // 0.0f@toc-0x778C
+            }
 			else
-			{
-				// @1cc
-				//float effectiveFriction;
-				Vec3* pNormal = &pCharData->x6F0_collData.x154_groundNormal;
-				struct attr* pAttr;
-				// This is probably triggered when transitioning from the air to the ground, for example with ASDI down after getting hit.
-				if (pCharData->xF0_knockbackGroundVel == 0)
-					pCharData->xF0_knockbackGroundVel = kb_vel_x;
-				//@1e4
-				pAttr = &pCharData->x110_attr;
-				// func_8007CCA0 = reduceGroundKnockbackVel
-				func_8007CCA0(pCharData,
-						/*effective friction - ground multiplier is usually 1. last factor was 1 when I looked*/
-						// func_80084A40 = Stage_GetGroundFrictionMultiplier
-						func_80084A40(pCharData) * pAttr->x128_ground_friction * p_ftCommonData->x200);
+            {
+                // @1cc
+                //float effectiveFriction;
+                Vec3* pNormal = &pCharData->x6F0_collData.x154_groundNormal; // ground_normal offset inside pCharData is 0x844, surface normal points out of the surface. 
+                struct attr* pAttr;
+                // This is probably triggered when transitioning from the air to the ground, for example with ASDI down after getting hit.
+				if (pCharData->phys.xF0_ground_kb_vel == 0)
+					pCharData->phys.xF0_ground_kb_vel = kb_vel_x;
+                //@1e4
+                pAttr = &pCharData->x110_attr; // attr has offset 0x110
+                func_8007CCA0(pCharData,
+                    /*effective friction - ground multiplier is usually 1. last factor was 1 when I looked*/
+                    func_80084A40(pCharData) * pAttr->x128_GroundFriction * p_ftCommonData->x200);
 				// @210 set knockback velocity to ground_kb_vel * surfaceTangent
-				p_kb_vel->x =  pNormal->y * pCharData->xF0_knockbackGroundVel;
-				// @220
-				p_kb_vel->y = -pNormal->x * pCharData->xF0_knockbackGroundVel;
-			}
-		}
-		//@230 Now handle the attacker's shield knockback in a similar way
-		pAtkShieldKB = (Vec2*)&pCharData->x98_AtkShieldKnockback; // TODO: Use a Vec3* instead of Vec2*
-		if ((atkShieldKB_X = pAtkShieldKB->x) != 0 || pAtkShieldKB->y != 0)
-		{
-			//@250
-			if (pCharData->xE0_airState == 1)
-			{
-				//@25c
-				float kb_x = pAtkShieldKB->x;
-				float kb_y = pAtkShieldKB->y;
-				float atkShieldKBAngle = func_80022C30(kb_y, kb_x); // atan2
-				//@270
-				float atkShieldKB_len = sqrtf(kb_x*kb_x + kb_y*kb_y);
-				//@2d4
-				if (atkShieldKB_len < p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
-				{
-					//@2e4
-					// BUG IN THE MELEE CODE THAT CAUSES THE INVISIBLE CEILING GLITCH
-					// The next line should be 'pAtkShieldKB->y = 0', but instead it is:
-					p_kb_vel->y = 0;
-					pAtkShieldKB->x = 0;
-				}
-				else
-				{
-					//@2f4
-					// again, the better implementation would be:
-					// *pAtkShieldKB *= (atkShieldKB_len - p_ftCommonData->x3E8_shieldKnockbackFrameDecay)/atkShieldKB_len
-					//float atkShieldKBAngle = atan2_80022C30(pAtkShieldKB->y, pAtkShieldKB->x);
-					pAtkShieldKB->x -= p_ftCommonData->x3E8_shieldKnockbackFrameDecay * cosf(atkShieldKBAngle);
-					pAtkShieldKB->y -= p_ftCommonData->x3E8_shieldKnockbackFrameDecay * sinf(atkShieldKBAngle);
-				}
-				pCharData->xF4_groundAttackerShieldKnockbackVel = 0; // 0 = TOC.float@-0x778C
-			}
-			else
-			{
-				//@338
-				float effectiveFriction;
-				Vec3* pNormal = &pCharData->x6F0_collData.x154_groundNormal; // ground_normal offset inside pCharData is 0x844, surface normal points out of the surface. 
-				struct attr* pAttr;
-				//@344
-				if (pCharData->xF4_groundAttackerShieldKnockbackVel == 0)
-					pCharData->xF4_groundAttackerShieldKnockbackVel = atkShieldKB_X;
-				//@350
-				pAttr = &pCharData->x110_attr;
-				//@374
-				// func_8007CE4C = reduceGroundShieldKnockbackVel
-				func_8007CE4C(pCharData,
-						/* effectiveFriction - the last constant variable differs from the one for the knockback friction above*/
-						// func_80084A40 = Stage_GetGroundFrictionMultiplier
-						func_80084A40(pCharData) * pAttr->x128_ground_friction * p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
-				//@378
-				pAtkShieldKB->x =  pNormal->y * pCharData->xF4_groundAttackerShieldKnockbackVel;
-				pAtkShieldKB->y = -pNormal->x * pCharData->xF4_groundAttackerShieldKnockbackVel;
-			}
-		}
+                p_kb_vel->x =  pNormal->y * pCharData->phys.xF0_ground_kb_vel;
+                // @220
+                p_kb_vel->y = -pNormal->x * pCharData->phys.xF0_ground_kb_vel;
+            }
+        }
+        //@230 Now handle the attacker's shield knockback in a similar way
+        pAtkShieldKB = &pCharData->phys.x98_atk_shield_kb;
+        if ((atkShieldKB_X = pAtkShieldKB->x) != 0 || pAtkShieldKB->y != 0)
+        {
+            //@250
+            if (pCharData->phys.xE0_airborne == 1)
+            {
+                //@25c
+                float kb_x = pAtkShieldKB->x;
+                float kb_y = pAtkShieldKB->y;
+                float atkShieldKBAngle = func_80022C30(kb_y, kb_x);
+                //@270
+                float atkShieldKB_len = sqrtf(kb_x*kb_x + kb_y*kb_y);
+                //@2d4
+                if (atkShieldKB_len < p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
+                {
+                    //@2e4
+                    // BUG IN THE MELEE CODE THAT CAUSES THE INVISIBLE CEILING GLITCH
+                    // The next line should be 'pAtkShieldKB->y = 0', but instead it is:
+                    p_kb_vel->y = 0;
+                    pAtkShieldKB->x = 0;
+                }
+                else
+                {
+                    //@2f4
+                    // again, the better implementation would be:
+                    // *pAtkShieldKB *= (atkShieldKB_len - p_stc_ftcommon->x3e8_shield_kb_frameDecay)/atkShieldKB_len
+                    //float atkShieldKBAngle = atan2_80022C30(pAtkShieldKB->y, pAtkShieldKB->x);
+                    pAtkShieldKB->x -= p_ftCommonData->x3E8_shieldKnockbackFrameDecay * cosf(atkShieldKBAngle);
+                    pAtkShieldKB->y -= p_ftCommonData->x3E8_shieldKnockbackFrameDecay * sinf(atkShieldKBAngle);
+                }
+                pCharData->phys.xF4_ground_attacker_shield_kb_vel = 0; // 0 = TOC.float@-0x778C
+            }
+            else
+            {
+                //@338
+                float effectiveFriction;
+                Vec3* pNormal = &pCharData->x6F0_collData.x154_groundNormal; // ground_normal offset inside pCharData is 0x844, surface normal points out of the surface. 
+                struct attr* pAttr;
+                //@344
+                if (pCharData->phys.xF4_ground_attacker_shield_kb_vel == 0)
+                    pCharData->phys.xF4_ground_attacker_shield_kb_vel = atkShieldKB_X;
+                //@350
+                pAttr = &pCharData->x110_attr; // attr has offset 0x110
+                //@374
+                func_8007CE4C(pCharData,
+                    /* effectiveFriction - the last constant variable differs from the one for the knockback friction above*/
+                    func_80084A40(pCharData) * pAttr->x128_GroundFriction * p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
+                //@378
+                pAtkShieldKB->x =  pNormal->y * pCharData->phys.xF4_ground_attacker_shield_kb_vel;
+                pAtkShieldKB->y = -pNormal->x * pCharData->phys.xF4_ground_attacker_shield_kb_vel;
+            }
+        }
 
-		//@39c update ground velocity
-		pCharData->xEC_groundVel += pCharData->xE4_groundAccel1 + pCharData->xE8_groundAccel2;
-		//@3c0
-		pCharData->xE8_groundAccel2 = 0;
-		pCharData->xE4_groundAccel1 = 0;
+        //@39c update ground velocity
+		pCharData->phys.xEC_ground_vel += pCharData->phys.xE4_ground_accel_1 + pCharData->phys.xE8_ground_accel_2;
+        //@3c0
+		pCharData->phys.xE8_ground_accel_2 = 0;
+        pCharData->phys.xE4_ground_accel_1 = 0;
 
-		//@3cc self_vel += anim_vel
-		PSVECAdd(&pCharData->x80_selfVel, &pCharData->x74_animVel, &pCharData->x80_selfVel);
-		//@3d0
-		pCharData->x74_animVel.z = 0;
-		pCharData->x74_animVel.y = 0;
-		pCharData->x74_animVel.x = 0;
-
+        //@3cc self_vel += anim_vel
+		PSVECAdd(&pCharData->phys.x80_self_vel, &pCharData->phys.x74_anim_vel, &pCharData->phys.x80_self_vel);
+        //@3d0
+		pCharData->phys.x74_anim_vel.z = 0;
+        pCharData->phys.x74_anim_vel.y = 0;
+        pCharData->phys.x74_anim_vel.x = 0;
+		
 		//@3e0 copy selfVel into a stack storage variable
-		selfVel = pCharData->x80_selfVel;
-
-		// I was not able to trigger the following condition in game
-		//@3f8
-		if (pCharData->x1948 != 0)
-		{
-			//@404
-			// The compiler casts an u32 integer 'val' to a double type using
-			// double v = *(double*)&(0x43300000_00000000 | val ^ 0x80000000) - *(double*)&43300000_80000000
-			// which is all that happens in the length assembly generated by this
-			float C = 1.0f - (float)pCharData->x194C / (float)pCharData->x1948;
-			selfVel.x = C * (pCharData->x80_selfVel.x - pCharData->xA4_unkVel.x) + pCharData->xA4_unkVel.x;
-			//@458
-			selfVel.y = C * (pCharData->x80_selfVel.y - pCharData->xA4_unkVel.y) + pCharData->xA4_unkVel.y;
-			//@46c
-			pCharData->x194C--;
-			if (pCharData->x194C == 0)
-				pCharData->x1948 = 0;
-		}
+		selfVel = pCharData->phys.x80_self_vel;
+		
+		// TODO: these double_lower_32bit variables are probably integer counters that get decremented each frame,
+        // but I was not able to trigger the following condition.
+		//@3f8 The double value construction then is only used as an interpolation tool between selfVel and some UnkVel2.
+		if (pCharData->dmg.x1948 != 0)
+        {
+            //@404
+            // The compiler casts an u32 integer 'val' to a double type using
+            // double v = *(double*)&(0x43300000_00000000 | val ^ 0x80000000) - *(double*)&43300000_80000000
+            // which is all that happens in the lengthy assembly generated by this
+			float C = 1.0f - (float)pCharData->dmg.x194C / (float)pCharData->dmg.x1948;
+			
+            selfVel.x = C * (pCharData->phys.x80_self_vel.x - pCharData->phys.xA4_unk_vel.x) + pCharData->phys.xA4_unk_vel.x;
+            //@458
+            selfVel.y = C * (pCharData->phys.x80_self_vel.y - pCharData->phys.xA4_unk_vel.y) + pCharData->phys.xA4_unk_vel.y;
+            //@46c
+            pCharData->dmg.x194C--;
+			if (pCharData->dmg.x194C == 0)
+				pCharData->dmg.x1948 = 0;
+        }
 		//@48c add some horizontal+depth offset to the position? Why is there no vertical component?
-		pCharData->xB0_pos.x += pCharData->xF8_playerNudgeVel.x;
-		pCharData->xB0_pos.z += pCharData->xF8_playerNudgeVel.y;
-		//@4ac
-		if (pCharData->x2222_flag.bits.b6 && !pCharData->x2222_flag.bits.b7)
-		{
-			s32 bit;
-			//@4c0
-			// pCharData->xD4_unk_vel += selfVel
-			PSVECAdd(&pCharData->xD4_unkVel, &selfVel, &pCharData->xD4_unkVel);
+		pCharData->phys.xB0_pos.x += pCharData->phys.xF8_playerNudgeVel.x;
+		pCharData->phys.xB0_pos.z += pCharData->phys.xF8_playerNudgeVel.y;
+        //@4ac
+        if (pCharData->x2222_flag.bits.b6 && !pCharData->x2222_flag.bits.b7)
+        {
+            s32 bit;
+            //@4c0
+            // pCharData->phys.xD4_unk_vel += selfVel
+			PSVECAdd(&pCharData->phys.xD4_unk_vel, &selfVel, &pCharData->phys.xD4_unk_vel);
 			//@4d0
-			pCharData->xD4_unkVel.x += p_kb_vel->x;
-			pCharData->xD4_unkVel.y += p_kb_vel->y;
-			//@4f0
-			if (pCharData->x2210_ThrowFlags.b2)
-			{
-				pCharData->x2210_ThrowFlags.b2 = 0; // throw bit?
-				bit = 1;
-			}
-			else
-				bit = 0;
+            pCharData->phys.xD4_unk_vel.x += p_kb_vel->x;
+            pCharData->phys.xD4_unk_vel.y += p_kb_vel->y;
+            //@4f0
+            if (pCharData->x2210_ThrowFlags.b2)
+            {
+			    pCharData->x2210_ThrowFlags.b2 = 0;
+                bit = 1;
+            }
+            else
+                bit = 0;
 			//@514
-			if (bit || (func_80070FD0(pCharData) != 0) || (pCharData->x594_animCurrFlags1 & 1))
-			{
-				//@538
-				// pCharData->xB0_pos += pCharData->xD4_unkVel
-				PSVECAdd(&pCharData->xB0_pos, &pCharData->xD4_unkVel, &pCharData->xB0_pos);
+			if (bit || func_80070FD0(pCharData) != 0 || pCharData->x594_animCurrFlags1 & 1)
+            {
+                //@538
+                // pCharData->phys.xB0_position += pCharData->phys.xD4_unk_vel
+				PSVECAdd(&pCharData->phys.xB0_pos, &pCharData->phys.xD4_unk_vel, &pCharData->phys.xB0_pos);
 				// TODO: we set this velocity to 0 after applying it -> Is this SDI or ASDI?
-				pCharData->xD4_unkVel.z = 0;
-				pCharData->xD4_unkVel.y = 0;
-				pCharData->xD4_unkVel.x = 0;
-			}
-			//@558 pCharData->xB0_pos += *pAtkShieldKB
-			PSVECAdd(&pCharData->xB0_pos, (Vec3*)pAtkShieldKB, &pCharData->xB0_pos);
-		}
+                pCharData->phys.xD4_unk_vel.z = 0;
+                pCharData->phys.xD4_unk_vel.y = 0;
+                pCharData->phys.xD4_unk_vel.x = 0;
+            }
+			//@558 pCharData->phys.xB0_position += *pAtkShieldKB
+            PSVECAdd(&pCharData->phys.xB0_pos, (Vec3*)pAtkShieldKB, &pCharData->phys.xB0_pos);
+        }
 		else
-		{
-			//pCharData@r31.position@0xB0.xyz += selfVel + pAtkShieldKB
-			PSVECAdd(&pCharData->xB0_pos, &selfVel, &pCharData->xB0_pos);
-			pCharData->xB0_pos.x += p_kb_vel->x;
-			pCharData->xB0_pos.y += p_kb_vel->y;
-			PSVECAdd(&pCharData->xB0_pos, (Vec3*)pAtkShieldKB, &pCharData->xB0_pos);
-		}
+        {
+            //pCharData@r31.position@0xB0.xyz += selfVel + pAtkShieldKB
+			PSVECAdd(&pCharData->phys.xB0_pos, &selfVel, &pCharData->phys.xB0_pos);
+			pCharData->phys.xB0_pos.x += p_kb_vel->x;
+            pCharData->phys.xB0_pos.y += p_kb_vel->y;
+            PSVECAdd(&pCharData->phys.xB0_pos, (Vec3*)pAtkShieldKB, &pCharData->phys.xB0_pos);
+        }
 		//@5ac accumulate wind hazards into the windOffset vector
-		func_8007B924(pPlayerEntityStruct, /*result vec3*/&windOffset); // Stage_CheckForWindHazards
-	}
-	else
-	{
-		//@5bc
-		windOffset.z = 0;
-		windOffset.y = 0;
-		windOffset.x = 0;
-	}
-	//@5cc
-	func_80076528(pPlayerEntityStruct); // DataOffset_ComboCount_TopNAttackerModify
+		func_8007B924(pPlayerEntityStruct, /*result vec3*/&windOffset);
+    }
+    else
+    {
+        //@5bc
+        windOffset.z = 0;
+        windOffset.y = 0;
+        windOffset.x = 0;
+    }
+    //@5cc
+    func_80076528(pPlayerEntityStruct);
 
-	//@5d4
-	if (pCharData->x21D0_callback_EveryHitlag != 0)
-		pCharData->x21D0_callback_EveryHitlag(pPlayerEntityStruct);
-
-	//@5ec
-	if (pCharData->xE0_airState == 0)
-	{
-		//@5f8
-		Vec3 difference;
+    //@5d4
+	if (pCharData->cb.x21D0_callback_EveryHitlag != 0)
+		pCharData->cb.x21D0_callback_EveryHitlag(pPlayerEntityStruct); // void (*EveryHitlag_x21D0)(GOBJ *fighter)
+    
+    //@5ec
+	if (pCharData->phys.xE0_airborne == 0)
+    {
+        //@5f8
+        s32 dummy2;
+		Vec3 difference; // 0x24
 		// I think this function always returns r3=1, but it contains two __assert functions. But I guess these just stop or reset the game.
 		// result is written to where r5 points to, which is 'difference' in this case
-		// func_800567C0 = Collision_GetPositionDifference
-		if (func_800567C0(pCharData->x6F0_collData.x14C_groundIndex/*groundID field not documented*/, /*Vec3*/&pCharData->xB0_pos, &difference))
+		if (func_800567C0(pCharData->x6F0_collData.x14C_groundIndex/*groundID field not documented*/, /*Vec3*/&pCharData->phys.xB0_pos, &difference))
 			//@610 pCharData->position += difference
-			PSVECAdd(&pCharData->xB0_pos, &difference, &pCharData->xB0_pos);
-	}
-
+			PSVECAdd(&pCharData->phys.xB0_pos, &difference, &pCharData->phys.xB0_pos);
+    }
+	
 	//@620
-	pCharData->xB0_pos.x += windOffset.x;
-	pCharData->xB0_pos.y += windOffset.y;
-	pCharData->xB0_pos.z += windOffset.z;
+	pCharData->phys.xB0_pos.x += windOffset.x;
+    pCharData->phys.xB0_pos.y += windOffset.y;
+    pCharData->phys.xB0_pos.z += windOffset.z;
 
-	//@654 TODO: do the bitflag tests here tell us if the player is dead?
-	func_800D3158(pPlayerEntityStruct); // Player_CheckForDeath
-	//@658
+    //@654 TODO: do the bitflag tests here tell us if the player is dead?
+	func_800D3158(pPlayerEntityStruct);
+    //@658
 	if (pCharData->x2225_flag.bits.b0)
-	{
+    {
 		//@664 if position.y crossed (0.25*stage.blastBottom+0.75*stage.cameraBottom) + stage.crowdReactStart from below...
-		if (pCharData->xBC_prevPos.y <= Stage_CalcUnkCamYBounds() && // crowd gasp height?
-				pCharData->xB0_pos.y >  Stage_CalcUnkCamYBounds())
+		if (pCharData->phys.xBC_prevPos.y <= Stage_CalcUnkCamYBounds() &&
+		    pCharData->phys.xB0_pos.y >  Stage_CalcUnkCamYBounds())
 			pCharData->x2225_flag.bits.b0 = 0;
-	}
+
+    }
 	else
-	{
-		//@69c
-		if ((pCharData->x222A_flag.bits.b1 == 0) && (pCharData->x2228_flag.bits.b5 == 0))
-		{
+    {
+        //@69c
+		if ((pCharData->x222A_flag.bits.b1 == 0) && (/*!x2228_6*/((pCharData->x2228_flag.bits.b5) & 1) == 0))
+        {
 			//@6b4 if position.y crossed 0.5*(stage.blastBottom+stage.cameraBottom) + stage.crowdReactStart from above...
-			if (pCharData->xBC_prevPos.y >= Stage_CalcUnkCamY() &&
-					pCharData->xB0_pos.y <  Stage_CalcUnkCamY())
+			if (pCharData->phys.xBC_prevPos.y >= Stage_CalcUnkCamY() &&
+			    pCharData->phys.xB0_pos.y <  Stage_CalcUnkCamY())
+            {
 				//@6e8 plays this sound you always hear when you get close to the bottom blast zone
-				func_80088148(pCharData, 96, 127, 64); // SFX_PlayCharacterSFX
-			//@6ec
-			pCharData->x2225_flag.bits.b0 = 1;
-		}
-	}
+				func_80088148(pCharData, 96, 127, 64);
+                //@6ec
+				pCharData->x2225_flag.bits.b0 = 1;
+            }
+        }
+    }
 	//@6fc
-	if (pCharData->x18A4_knockbackMagnitude  && // 0.0f@toc-0x778C
-			pCharData->x221C_6_hitstun == 0 &&
-			!func_80322258(pCharData->xB0_pos.x)) // PositionXBetweenLedgesMinDelta, short function, have pseudocode
-		// not sure when we reach this point, but often around the end of knockback, sometimes completely unrelated
-	{
-		// @728
-		pCharData->x18A4_knockbackMagnitude = 0.0f; // 0.0f@toc-0x778C
-	}
-	//@730
-	func_8007AF28(pPlayerEntityStruct); // Hurtbox_SetAllNotUpdated
+	if (pCharData->dmg.x18A4_knockbackMagnitude  && // 0.0f@toc-0x778C
+        pCharData->x221C_flag.bits.b6 == 0 &&
+		!func_80322258(pCharData->phys.xB0_pos.x))
+        // not sure when we reach this point, but often around the end of knockback, sometimes completely unrelated
+    {
+        // @728
+		pCharData->dmg.x18A4_knockbackMagnitude = 0.0f; // 0.0f@toc-0x778C
+    }
+    //@730
+	func_8007AF28(pPlayerEntityStruct);
 	//@738 The following classify_float calls are inlined by the compiler. The classify_float function does not appear to be in the melee DOL, maybe it was optimized away by the linker.
 	if (g_debugLevel >= 3 && // This value is zero and I think it always will be. Probably some debug level indicator, because only a NaN test follows next.
-			(fpclassify(pCharData->xB0_pos.x)==FP_NAN || // @744
-			 fpclassify(pCharData->xB0_pos.y)==FP_NAN || // @7ac
-			 fpclassify(pCharData->xB0_pos.z)==FP_NAN)) // @814
+        (fpclassify(pCharData->phys.xB0_pos.x)==FP_NAN || // @744
+         fpclassify(pCharData->phys.xB0_pos.y)==FP_NAN || // @7ac
+         fpclassify(pCharData->phys.xB0_pos.z)==FP_NAN)) // @814
 	{
 		//@87c CR.bits[6] = 1;  // this instruction is generated by the compiler because OSReport is a variadic function. bit[0] = leftmost bit
-		OSReport("fighter procUpdate pos error.  pos.x=%f    pos.y=%f\n"/*r3 = 0x803C0000 + 1452*/, pCharData->xB0_pos.x, pCharData->xB0_pos.y);
+		OSReport("fighter procUpdate pos error.  pos.x=%f    pos.y=%f\n"/*r3 = 0x803C0000 + 1452*/, pCharData->phys.xB0_pos.x, pCharData->phys.xB0_pos.y);
 		//@894 TODO: use __FILE__ __LINE__ macros instead?
-		__assert("fighter.c" /*filename pointer = 0x803C0000 + 1404*/, /*line*/2517, /*output*/"0"/*r5 = r13 - 31888*/);
-	}
-	//@8a8 stack unwind
+        __assert("fighter.c" /*filename pointer = 0x803C0000 + 1404*/, /*line*/2517, /*output*/"0"/*r5 = r13 - 31888*/);
+    }
+    //@8a8 stack unwind
 }
-#else
-asm void func_8006B82C()
-{
-	nofralloc 
-/* 8006B82C 0006840C  7C 08 02 A6 */	mflr r0
-/* 8006B830 00068410  90 01 00 04 */	stw r0, 4(r1)
-/* 8006B834 00068414  94 21 FF 70 */	stwu r1, -0x90(r1)
-/* 8006B838 00068418  DB E1 00 88 */	stfd f31, 0x88(r1)
-/* 8006B83C 0006841C  DB C1 00 80 */	stfd f30, 0x80(r1)
-/* 8006B840 00068420  BF 41 00 68 */	stmw r26, 0x68(r1)
-/* 8006B844 00068424  7C 7C 1B 78 */	mr r28, r3
-/* 8006B848 00068428  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8006B84C 0006842C  88 03 22 1F */	lbz r0, 0x221f(r3)
-/* 8006B850 00068430  3B E3 00 00 */	addi r31, r3, 0
-/* 8006B854 00068434  54 00 E7 FF */	rlwinm. r0, r0, 0x1c, 0x1f, 0x1f
-/* 8006B858 00068438  40 82 08 7C */	bne lbl_8006C0D4
-/* 8006B85C 0006843C  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 8006B860 00068440  54 00 F7 FF */	rlwinm. r0, r0, 0x1e, 0x1f, 0x1f
-/* 8006B864 00068444  40 82 05 84 */	bne lbl_8006BDE8
-/* 8006B868 00068448  80 7F 20 64 */	lwz r3, 0x2064(r31)
-/* 8006B86C 0006844C  2C 03 00 00 */	cmpwi r3, 0
-/* 8006B870 00068450  41 82 00 0C */	beq lbl_8006B87C
-/* 8006B874 00068454  38 03 FF FF */	addi r0, r3, -1
-/* 8006B878 00068458  90 1F 20 64 */	stw r0, 0x2064(r31)
-lbl_8006B87C:
-/* 8006B87C 0006845C  80 7F 21 08 */	lwz r3, 0x2108(r31)
-/* 8006B880 00068460  2C 03 00 00 */	cmpwi r3, 0
-/* 8006B884 00068464  41 82 00 0C */	beq lbl_8006B890
-/* 8006B888 00068468  38 03 FF FF */	addi r0, r3, -1
-/* 8006B88C 0006846C  90 1F 21 08 */	stw r0, 0x2108(r31)
-lbl_8006B890:
-/* 8006B890 00068470  7F 83 E3 78 */	mr r3, r28
-/* 8006B894 00068474  48 05 52 05 */	bl func_800C0A98
-/* 8006B898 00068478  81 9F 21 A4 */	lwz r12, 0x21a4(r31)
-/* 8006B89C 0006847C  28 0C 00 00 */	cmplwi r12, 0
-/* 8006B8A0 00068480  41 82 00 10 */	beq lbl_8006B8B0
-/* 8006B8A4 00068484  7D 88 03 A6 */	mtlr r12
-/* 8006B8A8 00068488  38 7C 00 00 */	addi r3, r28, 0
-/* 8006B8AC 0006848C  4E 80 00 21 */	blrl 
-lbl_8006B8B0:
-/* 8006B8B0 00068490  C0 22 88 74 */	lfs f1, lbl_804D8254(r2)
-/* 8006B8B4 00068494  3B DF 00 8C */	addi r30, r31, 0x8c
-/* 8006B8B8 00068498  C0 5F 00 8C */	lfs f2, 0x8c(r31)
-/* 8006B8BC 0006849C  FC 01 10 00 */	fcmpu cr0, f1, f2
-/* 8006B8C0 000684A0  40 82 00 10 */	bne lbl_8006B8D0
-/* 8006B8C4 000684A4  C0 1E 00 04 */	lfs f0, 4(r30)
-/* 8006B8C8 000684A8  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8006B8CC 000684AC  41 82 01 90 */	beq lbl_8006BA5C
-lbl_8006B8D0:
-/* 8006B8D0 000684B0  80 1F 00 E0 */	lwz r0, 0xe0(r31)
-/* 8006B8D4 000684B4  2C 00 00 01 */	cmpwi r0, 1
-/* 8006B8D8 000684B8  40 82 01 20 */	bne lbl_8006B9F8
-/* 8006B8DC 000684BC  88 1F 22 28 */	lbz r0, 0x2228(r31)
-/* 8006B8E0 000684C0  C3 FE 00 00 */	lfs f31, 0(r30)
-/* 8006B8E4 000684C4  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
-/* 8006B8E8 000684C8  C3 DE 00 04 */	lfs f30, 4(r30)
-/* 8006B8EC 000684CC  41 82 00 38 */	beq lbl_8006B924
-/* 8006B8F0 000684D0  7F E3 FB 78 */	mr r3, r31
-/* 8006B8F4 000684D4  48 01 14 B1 */	bl func_8007CDA4
-/* 8006B8F8 000684D8  FC 40 08 90 */	fmr f2, f1
-/* 8006B8FC 000684DC  C0 3E 00 00 */	lfs f1, 0(r30)
-/* 8006B900 000684E0  48 01 14 6D */	bl func_8007CD6C
-/* 8006B904 000684E4  D0 3E 00 00 */	stfs f1, 0(r30)
-/* 8006B908 000684E8  7F E3 FB 78 */	mr r3, r31
-/* 8006B90C 000684EC  48 01 14 ED */	bl func_8007CDF8
-/* 8006B910 000684F0  FC 40 08 90 */	fmr f2, f1
-/* 8006B914 000684F4  C0 3E 00 04 */	lfs f1, 4(r30)
-/* 8006B918 000684F8  48 01 14 55 */	bl func_8007CD6C
-/* 8006B91C 000684FC  D0 3E 00 04 */	stfs f1, 4(r30)
-/* 8006B920 00068500  48 00 00 CC */	b lbl_8006B9EC
-lbl_8006B924:
-/* 8006B924 00068504  FC 20 F0 90 */	fmr f1, f30
-/* 8006B928 00068508  FC 40 F8 90 */	fmr f2, f31
-/* 8006B92C 0006850C  4B FB 73 05 */	bl func_80022C30
-/* 8006B930 00068510  EC 5E 07 B2 */	fmuls f2, f30, f30
-/* 8006B934 00068514  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006B938 00068518  EC 9F 17 FA */	fmadds f4, f31, f31, f2
-/* 8006B93C 0006851C  FF E0 08 90 */	fmr f31, f1
-/* 8006B940 00068520  FC 04 00 40 */	fcmpo cr0, f4, f0
-/* 8006B944 00068524  40 81 00 50 */	ble lbl_8006B994
-/* 8006B948 00068528  FC 20 20 34 */	frsqrte f1, f4
-/* 8006B94C 0006852C  C8 62 88 A0 */	lfd f3, lbl_804D8280(r2)
-/* 8006B950 00068530  C8 42 88 A8 */	lfd f2, lbl_804D8288(r2)
-/* 8006B954 00068534  FC 01 00 72 */	fmul f0, f1, f1
-/* 8006B958 00068538  FC 23 00 72 */	fmul f1, f3, f1
-/* 8006B95C 0006853C  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 8006B960 00068540  FC 21 00 32 */	fmul f1, f1, f0
-/* 8006B964 00068544  FC 01 00 72 */	fmul f0, f1, f1
-/* 8006B968 00068548  FC 23 00 72 */	fmul f1, f3, f1
-/* 8006B96C 0006854C  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 8006B970 00068550  FC 21 00 32 */	fmul f1, f1, f0
-/* 8006B974 00068554  FC 01 00 72 */	fmul f0, f1, f1
-/* 8006B978 00068558  FC 23 00 72 */	fmul f1, f3, f1
-/* 8006B97C 0006855C  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 8006B980 00068560  FC 01 00 32 */	fmul f0, f1, f0
-/* 8006B984 00068564  FC 04 00 32 */	fmul f0, f4, f0
-/* 8006B988 00068568  FC 00 00 18 */	frsp f0, f0
-/* 8006B98C 0006856C  D0 01 00 20 */	stfs f0, 0x20(r1)
-/* 8006B990 00068570  C0 81 00 20 */	lfs f4, 0x20(r1)
-lbl_8006B994:
-/* 8006B994 00068574  80 6D AE B4 */	lwz r3, lbl_804D6554(r13)
-/* 8006B998 00068578  C0 03 02 04 */	lfs f0, 0x204(r3)
-/* 8006B99C 0006857C  FC 04 00 40 */	fcmpo cr0, f4, f0
-/* 8006B9A0 00068580  40 80 00 14 */	bge lbl_8006B9B4
-/* 8006B9A4 00068584  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006B9A8 00068588  D0 1E 00 04 */	stfs f0, 4(r30)
-/* 8006B9AC 0006858C  D0 1E 00 00 */	stfs f0, 0(r30)
-/* 8006B9B0 00068590  48 00 00 3C */	b lbl_8006B9EC
-lbl_8006B9B4:
-/* 8006B9B4 00068594  FC 20 F8 90 */	fmr f1, f31
-/* 8006B9B8 00068598  48 2B A8 89 */	bl cosf
-/* 8006B9BC 0006859C  80 6D AE B4 */	lwz r3, lbl_804D6554(r13)
-/* 8006B9C0 000685A0  C0 1E 00 00 */	lfs f0, 0(r30)
-/* 8006B9C4 000685A4  C0 43 02 04 */	lfs f2, 0x204(r3)
-/* 8006B9C8 000685A8  EC 02 00 7C */	fnmsubs f0, f2, f1, f0
-/* 8006B9CC 000685AC  FC 20 F8 90 */	fmr f1, f31
-/* 8006B9D0 000685B0  D0 1E 00 00 */	stfs f0, 0(r30)
-/* 8006B9D4 000685B4  48 2B AA 01 */	bl sinf
-/* 8006B9D8 000685B8  80 6D AE B4 */	lwz r3, lbl_804D6554(r13)
-/* 8006B9DC 000685BC  C0 1E 00 04 */	lfs f0, 4(r30)
-/* 8006B9E0 000685C0  C0 43 02 04 */	lfs f2, 0x204(r3)
-/* 8006B9E4 000685C4  EC 02 00 7C */	fnmsubs f0, f2, f1, f0
-/* 8006B9E8 000685C8  D0 1E 00 04 */	stfs f0, 4(r30)
-lbl_8006B9EC:
-/* 8006B9EC 000685CC  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006B9F0 000685D0  D0 1F 00 F0 */	stfs f0, 0xf0(r31)
-/* 8006B9F4 000685D4  48 00 00 68 */	b lbl_8006BA5C
-lbl_8006B9F8:
-/* 8006B9F8 000685D8  C0 22 88 74 */	lfs f1, lbl_804D8254(r2)
-/* 8006B9FC 000685DC  3B BF 08 44 */	addi r29, r31, 0x844
-/* 8006BA00 000685E0  C0 1F 00 F0 */	lfs f0, 0xf0(r31)
-/* 8006BA04 000685E4  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8006BA08 000685E8  40 82 00 08 */	bne lbl_8006BA10
-/* 8006BA0C 000685EC  D0 5F 00 F0 */	stfs f2, 0xf0(r31)
-lbl_8006BA10:
-/* 8006BA10 000685F0  3B 7F 01 10 */	addi r27, r31, 0x110
-/* 8006BA14 000685F4  38 7F 00 00 */	addi r3, r31, 0
-/* 8006BA18 000685F8  48 01 90 29 */	bl func_80084A40
-/* 8006BA1C 000685FC  C0 1B 00 18 */	lfs f0, 0x18(r27)
-/* 8006BA20 00068600  7F E3 FB 78 */	mr r3, r31
-/* 8006BA24 00068604  80 8D AE B4 */	lwz r4, lbl_804D6554(r13)
-/* 8006BA28 00068608  EC 20 00 72 */	fmuls f1, f0, f1
-/* 8006BA2C 0006860C  C0 04 02 00 */	lfs f0, 0x200(r4)
-/* 8006BA30 00068610  EC 20 00 72 */	fmuls f1, f0, f1
-/* 8006BA34 00068614  48 01 12 6D */	bl func_8007CCA0
-/* 8006BA38 00068618  C0 3D 00 04 */	lfs f1, 4(r29)
-/* 8006BA3C 0006861C  C0 1F 00 F0 */	lfs f0, 0xf0(r31)
-/* 8006BA40 00068620  EC 01 00 32 */	fmuls f0, f1, f0
-/* 8006BA44 00068624  D0 1E 00 00 */	stfs f0, 0(r30)
-/* 8006BA48 00068628  C0 3D 00 00 */	lfs f1, 0(r29)
-/* 8006BA4C 0006862C  C0 1F 00 F0 */	lfs f0, 0xf0(r31)
-/* 8006BA50 00068630  FC 20 08 50 */	fneg f1, f1
-/* 8006BA54 00068634  EC 01 00 32 */	fmuls f0, f1, f0
-/* 8006BA58 00068638  D0 1E 00 04 */	stfs f0, 4(r30)
-lbl_8006BA5C:
-/* 8006BA5C 0006863C  C0 22 88 74 */	lfs f1, lbl_804D8254(r2)
-/* 8006BA60 00068640  3B BF 00 98 */	addi r29, r31, 0x98
-/* 8006BA64 00068644  C0 5F 00 98 */	lfs f2, 0x98(r31)
-/* 8006BA68 00068648  FC 01 10 00 */	fcmpu cr0, f1, f2
-/* 8006BA6C 0006864C  40 82 00 10 */	bne lbl_8006BA7C
-/* 8006BA70 00068650  C0 1D 00 04 */	lfs f0, 4(r29)
-/* 8006BA74 00068654  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8006BA78 00068658  41 82 01 50 */	beq lbl_8006BBC8
-lbl_8006BA7C:
-/* 8006BA7C 0006865C  80 1F 00 E0 */	lwz r0, 0xe0(r31)
-/* 8006BA80 00068660  2C 00 00 01 */	cmpwi r0, 1
-/* 8006BA84 00068664  40 82 00 E0 */	bne lbl_8006BB64
-/* 8006BA88 00068668  C3 DD 00 00 */	lfs f30, 0(r29)
-/* 8006BA8C 0006866C  C3 FD 00 04 */	lfs f31, 4(r29)
-/* 8006BA90 00068670  FC 40 F0 90 */	fmr f2, f30
-/* 8006BA94 00068674  FC 20 F8 90 */	fmr f1, f31
-/* 8006BA98 00068678  4B FB 71 99 */	bl func_80022C30
-/* 8006BA9C 0006867C  EC 5F 07 F2 */	fmuls f2, f31, f31
-/* 8006BAA0 00068680  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BAA4 00068684  FF E0 08 90 */	fmr f31, f1
-/* 8006BAA8 00068688  EC 9E 17 BA */	fmadds f4, f30, f30, f2
-/* 8006BAAC 0006868C  FC 04 00 40 */	fcmpo cr0, f4, f0
-/* 8006BAB0 00068690  40 81 00 50 */	ble lbl_8006BB00
-/* 8006BAB4 00068694  FC 20 20 34 */	frsqrte f1, f4
-/* 8006BAB8 00068698  C8 62 88 A0 */	lfd f3, lbl_804D8280(r2)
-/* 8006BABC 0006869C  C8 42 88 A8 */	lfd f2, lbl_804D8288(r2)
-/* 8006BAC0 000686A0  FC 01 00 72 */	fmul f0, f1, f1
-/* 8006BAC4 000686A4  FC 23 00 72 */	fmul f1, f3, f1
-/* 8006BAC8 000686A8  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 8006BACC 000686AC  FC 21 00 32 */	fmul f1, f1, f0
-/* 8006BAD0 000686B0  FC 01 00 72 */	fmul f0, f1, f1
-/* 8006BAD4 000686B4  FC 23 00 72 */	fmul f1, f3, f1
-/* 8006BAD8 000686B8  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 8006BADC 000686BC  FC 21 00 32 */	fmul f1, f1, f0
-/* 8006BAE0 000686C0  FC 01 00 72 */	fmul f0, f1, f1
-/* 8006BAE4 000686C4  FC 23 00 72 */	fmul f1, f3, f1
-/* 8006BAE8 000686C8  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 8006BAEC 000686CC  FC 01 00 32 */	fmul f0, f1, f0
-/* 8006BAF0 000686D0  FC 04 00 32 */	fmul f0, f4, f0
-/* 8006BAF4 000686D4  FC 00 00 18 */	frsp f0, f0
-/* 8006BAF8 000686D8  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 8006BAFC 000686DC  C0 81 00 1C */	lfs f4, 0x1c(r1)
-lbl_8006BB00:
-/* 8006BB00 000686E0  80 6D AE B4 */	lwz r3, lbl_804D6554(r13)
-/* 8006BB04 000686E4  C0 03 03 E8 */	lfs f0, 0x3e8(r3)
-/* 8006BB08 000686E8  FC 04 00 40 */	fcmpo cr0, f4, f0
-/* 8006BB0C 000686EC  40 80 00 14 */	bge lbl_8006BB20
-/* 8006BB10 000686F0  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BB14 000686F4  D0 1E 00 04 */	stfs f0, 4(r30)
-/* 8006BB18 000686F8  D0 1D 00 00 */	stfs f0, 0(r29)
-/* 8006BB1C 000686FC  48 00 00 3C */	b lbl_8006BB58
-lbl_8006BB20:
-/* 8006BB20 00068700  FC 20 F8 90 */	fmr f1, f31
-/* 8006BB24 00068704  48 2B A7 1D */	bl cosf
-/* 8006BB28 00068708  80 6D AE B4 */	lwz r3, lbl_804D6554(r13)
-/* 8006BB2C 0006870C  C0 1D 00 00 */	lfs f0, 0(r29)
-/* 8006BB30 00068710  C0 43 03 E8 */	lfs f2, 0x3e8(r3)
-/* 8006BB34 00068714  EC 02 00 7C */	fnmsubs f0, f2, f1, f0
-/* 8006BB38 00068718  FC 20 F8 90 */	fmr f1, f31
-/* 8006BB3C 0006871C  D0 1D 00 00 */	stfs f0, 0(r29)
-/* 8006BB40 00068720  48 2B A8 95 */	bl sinf
-/* 8006BB44 00068724  80 6D AE B4 */	lwz r3, lbl_804D6554(r13)
-/* 8006BB48 00068728  C0 1D 00 04 */	lfs f0, 4(r29)
-/* 8006BB4C 0006872C  C0 43 03 E8 */	lfs f2, 0x3e8(r3)
-/* 8006BB50 00068730  EC 02 00 7C */	fnmsubs f0, f2, f1, f0
-/* 8006BB54 00068734  D0 1D 00 04 */	stfs f0, 4(r29)
-lbl_8006BB58:
-/* 8006BB58 00068738  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BB5C 0006873C  D0 1F 00 F4 */	stfs f0, 0xf4(r31)
-/* 8006BB60 00068740  48 00 00 68 */	b lbl_8006BBC8
-lbl_8006BB64:
-/* 8006BB64 00068744  C0 22 88 74 */	lfs f1, lbl_804D8254(r2)
-/* 8006BB68 00068748  3B 7F 08 44 */	addi r27, r31, 0x844
-/* 8006BB6C 0006874C  C0 1F 00 F4 */	lfs f0, 0xf4(r31)
-/* 8006BB70 00068750  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8006BB74 00068754  40 82 00 08 */	bne lbl_8006BB7C
-/* 8006BB78 00068758  D0 5F 00 F4 */	stfs f2, 0xf4(r31)
-lbl_8006BB7C:
-/* 8006BB7C 0006875C  3B 5F 01 10 */	addi r26, r31, 0x110
-/* 8006BB80 00068760  38 7F 00 00 */	addi r3, r31, 0
-/* 8006BB84 00068764  48 01 8E BD */	bl func_80084A40
-/* 8006BB88 00068768  C0 1A 00 18 */	lfs f0, 0x18(r26)
-/* 8006BB8C 0006876C  7F E3 FB 78 */	mr r3, r31
-/* 8006BB90 00068770  80 8D AE B4 */	lwz r4, lbl_804D6554(r13)
-/* 8006BB94 00068774  EC 20 00 72 */	fmuls f1, f0, f1
-/* 8006BB98 00068778  C0 04 03 EC */	lfs f0, 0x3ec(r4)
-/* 8006BB9C 0006877C  EC 20 00 72 */	fmuls f1, f0, f1
-/* 8006BBA0 00068780  48 01 12 AD */	bl func_8007CE4C
-/* 8006BBA4 00068784  C0 3B 00 04 */	lfs f1, 4(r27)
-/* 8006BBA8 00068788  C0 1F 00 F4 */	lfs f0, 0xf4(r31)
-/* 8006BBAC 0006878C  EC 01 00 32 */	fmuls f0, f1, f0
-/* 8006BBB0 00068790  D0 1D 00 00 */	stfs f0, 0(r29)
-/* 8006BBB4 00068794  C0 3B 00 00 */	lfs f1, 0(r27)
-/* 8006BBB8 00068798  C0 1F 00 F4 */	lfs f0, 0xf4(r31)
-/* 8006BBBC 0006879C  FC 20 08 50 */	fneg f1, f1
-/* 8006BBC0 000687A0  EC 01 00 32 */	fmuls f0, f1, f0
-/* 8006BBC4 000687A4  D0 1D 00 04 */	stfs f0, 4(r29)
-lbl_8006BBC8:
-/* 8006BBC8 000687A8  C0 3F 00 E4 */	lfs f1, 0xe4(r31)
-/* 8006BBCC 000687AC  38 7F 00 80 */	addi r3, r31, 0x80
-/* 8006BBD0 000687B0  C0 1F 00 E8 */	lfs f0, 0xe8(r31)
-/* 8006BBD4 000687B4  7C 65 1B 78 */	mr r5, r3
-/* 8006BBD8 000687B8  C0 5F 00 EC */	lfs f2, 0xec(r31)
-/* 8006BBDC 000687BC  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BBE0 000687C0  38 9F 00 74 */	addi r4, r31, 0x74
-/* 8006BBE4 000687C4  EC 02 00 2A */	fadds f0, f2, f0
-/* 8006BBE8 000687C8  D0 1F 00 EC */	stfs f0, 0xec(r31)
-/* 8006BBEC 000687CC  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BBF0 000687D0  D0 1F 00 E8 */	stfs f0, 0xe8(r31)
-/* 8006BBF4 000687D4  D0 1F 00 E4 */	stfs f0, 0xe4(r31)
-/* 8006BBF8 000687D8  48 2D 71 5D */	bl PSVECAdd
-/* 8006BBFC 000687DC  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BC00 000687E0  D0 1F 00 7C */	stfs f0, 0x7c(r31)
-/* 8006BC04 000687E4  D0 1F 00 78 */	stfs f0, 0x78(r31)
-/* 8006BC08 000687E8  D0 1F 00 74 */	stfs f0, 0x74(r31)
-/* 8006BC0C 000687EC  80 7F 00 80 */	lwz r3, 0x80(r31)
-/* 8006BC10 000687F0  80 1F 00 84 */	lwz r0, 0x84(r31)
-/* 8006BC14 000687F4  90 61 00 40 */	stw r3, 0x40(r1)
-/* 8006BC18 000687F8  90 01 00 44 */	stw r0, 0x44(r1)
-/* 8006BC1C 000687FC  80 1F 00 88 */	lwz r0, 0x88(r31)
-/* 8006BC20 00068800  90 01 00 48 */	stw r0, 0x48(r1)
-/* 8006BC24 00068804  80 1F 19 48 */	lwz r0, 0x1948(r31)
-/* 8006BC28 00068808  2C 00 00 00 */	cmpwi r0, 0
-/* 8006BC2C 0006880C  41 82 00 8C */	beq lbl_8006BCB8
-/* 8006BC30 00068810  80 7F 19 4C */	lwz r3, 0x194c(r31)
-/* 8006BC34 00068814  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 8006BC38 00068818  90 01 00 5C */	stw r0, 0x5c(r1)
-/* 8006BC3C 0006881C  3C 00 43 30 */	lis r0, 0x4330
-/* 8006BC40 00068820  6C 63 80 00 */	xoris r3, r3, 0x8000
-/* 8006BC44 00068824  90 61 00 64 */	stw r3, 0x64(r1)
-/* 8006BC48 00068828  C8 62 88 80 */	lfd f3, lbl_804D8260(r2)
-/* 8006BC4C 0006882C  90 01 00 60 */	stw r0, 0x60(r1)
-/* 8006BC50 00068830  C0 82 88 70 */	lfs f4, lbl_804D8250(r2)
-/* 8006BC54 00068834  90 01 00 58 */	stw r0, 0x58(r1)
-/* 8006BC58 00068838  C8 21 00 60 */	lfd f1, 0x60(r1)
-/* 8006BC5C 0006883C  C8 01 00 58 */	lfd f0, 0x58(r1)
-/* 8006BC60 00068840  EC 41 18 28 */	fsubs f2, f1, f3
-/* 8006BC64 00068844  C0 BF 00 A4 */	lfs f5, 0xa4(r31)
-/* 8006BC68 00068848  EC 20 18 28 */	fsubs f1, f0, f3
-/* 8006BC6C 0006884C  C0 1F 00 80 */	lfs f0, 0x80(r31)
-/* 8006BC70 00068850  EC 00 28 28 */	fsubs f0, f0, f5
-/* 8006BC74 00068854  EC 22 08 24 */	fdivs f1, f2, f1
-/* 8006BC78 00068858  EC 44 08 28 */	fsubs f2, f4, f1
-/* 8006BC7C 0006885C  EC 02 28 3A */	fmadds f0, f2, f0, f5
-/* 8006BC80 00068860  D0 01 00 40 */	stfs f0, 0x40(r1)
-/* 8006BC84 00068864  C0 3F 00 A8 */	lfs f1, 0xa8(r31)
-/* 8006BC88 00068868  C0 1F 00 84 */	lfs f0, 0x84(r31)
-/* 8006BC8C 0006886C  EC 00 08 28 */	fsubs f0, f0, f1
-/* 8006BC90 00068870  EC 02 08 3A */	fmadds f0, f2, f0, f1
-/* 8006BC94 00068874  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 8006BC98 00068878  80 7F 19 4C */	lwz r3, 0x194c(r31)
-/* 8006BC9C 0006887C  38 03 FF FF */	addi r0, r3, -1
-/* 8006BCA0 00068880  90 1F 19 4C */	stw r0, 0x194c(r31)
-/* 8006BCA4 00068884  80 1F 19 4C */	lwz r0, 0x194c(r31)
-/* 8006BCA8 00068888  2C 00 00 00 */	cmpwi r0, 0
-/* 8006BCAC 0006888C  40 82 00 0C */	bne lbl_8006BCB8
-/* 8006BCB0 00068890  38 00 00 00 */	li r0, 0
-/* 8006BCB4 00068894  90 1F 19 48 */	stw r0, 0x1948(r31)
-lbl_8006BCB8:
-/* 8006BCB8 00068898  C0 3F 00 B0 */	lfs f1, 0xb0(r31)
-/* 8006BCBC 0006889C  C0 1F 00 F8 */	lfs f0, 0xf8(r31)
-/* 8006BCC0 000688A0  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BCC4 000688A4  D0 1F 00 B0 */	stfs f0, 0xb0(r31)
-/* 8006BCC8 000688A8  C0 3F 00 B8 */	lfs f1, 0xb8(r31)
-/* 8006BCCC 000688AC  C0 1F 00 FC */	lfs f0, 0xfc(r31)
-/* 8006BCD0 000688B0  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BCD4 000688B4  D0 1F 00 B8 */	stfs f0, 0xb8(r31)
-/* 8006BCD8 000688B8  88 7F 22 22 */	lbz r3, 0x2222(r31)
-/* 8006BCDC 000688BC  54 60 FF FF */	rlwinm. r0, r3, 0x1f, 0x1f, 0x1f
-/* 8006BCE0 000688C0  41 82 00 B8 */	beq lbl_8006BD98
-/* 8006BCE4 000688C4  54 60 07 FF */	clrlwi. r0, r3, 0x1f
-/* 8006BCE8 000688C8  40 82 00 B0 */	bne lbl_8006BD98
-/* 8006BCEC 000688CC  38 7F 00 D4 */	addi r3, r31, 0xd4
-/* 8006BCF0 000688D0  38 A3 00 00 */	addi r5, r3, 0
-/* 8006BCF4 000688D4  38 81 00 40 */	addi r4, r1, 0x40
-/* 8006BCF8 000688D8  48 2D 70 5D */	bl PSVECAdd
-/* 8006BCFC 000688DC  C0 3F 00 D4 */	lfs f1, 0xd4(r31)
-/* 8006BD00 000688E0  C0 1E 00 00 */	lfs f0, 0(r30)
-/* 8006BD04 000688E4  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BD08 000688E8  D0 1F 00 D4 */	stfs f0, 0xd4(r31)
-/* 8006BD0C 000688EC  C0 3F 00 D8 */	lfs f1, 0xd8(r31)
-/* 8006BD10 000688F0  C0 1E 00 04 */	lfs f0, 4(r30)
-/* 8006BD14 000688F4  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BD18 000688F8  D0 1F 00 D8 */	stfs f0, 0xd8(r31)
-/* 8006BD1C 000688FC  88 7F 22 10 */	lbz r3, 0x2210(r31)
-/* 8006BD20 00068900  54 60 DF FF */	rlwinm. r0, r3, 0x1b, 0x1f, 0x1f
-/* 8006BD24 00068904  41 82 00 18 */	beq lbl_8006BD3C
-/* 8006BD28 00068908  38 00 00 00 */	li r0, 0
-/* 8006BD2C 0006890C  50 03 2E B4 */	rlwimi r3, r0, 5, 0x1a, 0x1a
-/* 8006BD30 00068910  98 7F 22 10 */	stb r3, 0x2210(r31)
-/* 8006BD34 00068914  38 00 00 01 */	li r0, 1
-/* 8006BD38 00068918  48 00 00 08 */	b lbl_8006BD40
-lbl_8006BD3C:
-/* 8006BD3C 0006891C  38 00 00 00 */	li r0, 0
-lbl_8006BD40:
-/* 8006BD40 00068920  2C 00 00 00 */	cmpwi r0, 0
-/* 8006BD44 00068924  40 82 00 20 */	bne lbl_8006BD64
-/* 8006BD48 00068928  7F E3 FB 78 */	mr r3, r31
-/* 8006BD4C 0006892C  48 00 52 85 */	bl func_80070FD0
-/* 8006BD50 00068930  2C 03 00 00 */	cmpwi r3, 0
-/* 8006BD54 00068934  40 82 00 10 */	bne lbl_8006BD64
-/* 8006BD58 00068938  88 1F 05 94 */	lbz r0, 0x594(r31)
-/* 8006BD5C 0006893C  54 00 07 FF */	clrlwi. r0, r0, 0x1f
-/* 8006BD60 00068940  41 82 00 24 */	beq lbl_8006BD84
-lbl_8006BD64:
-/* 8006BD64 00068944  38 7F 00 B0 */	addi r3, r31, 0xb0
-/* 8006BD68 00068948  38 A3 00 00 */	addi r5, r3, 0
-/* 8006BD6C 0006894C  38 9F 00 D4 */	addi r4, r31, 0xd4
-/* 8006BD70 00068950  48 2D 6F E5 */	bl PSVECAdd
-/* 8006BD74 00068954  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BD78 00068958  D0 1F 00 DC */	stfs f0, 0xdc(r31)
-/* 8006BD7C 0006895C  D0 1F 00 D8 */	stfs f0, 0xd8(r31)
-/* 8006BD80 00068960  D0 1F 00 D4 */	stfs f0, 0xd4(r31)
-lbl_8006BD84:
-/* 8006BD84 00068964  38 7F 00 B0 */	addi r3, r31, 0xb0
-/* 8006BD88 00068968  38 9D 00 00 */	addi r4, r29, 0
-/* 8006BD8C 0006896C  38 A3 00 00 */	addi r5, r3, 0
-/* 8006BD90 00068970  48 2D 6F C5 */	bl PSVECAdd
-/* 8006BD94 00068974  48 00 00 44 */	b lbl_8006BDD8
-lbl_8006BD98:
-/* 8006BD98 00068978  38 7F 00 B0 */	addi r3, r31, 0xb0
-/* 8006BD9C 0006897C  38 A3 00 00 */	addi r5, r3, 0
-/* 8006BDA0 00068980  38 81 00 40 */	addi r4, r1, 0x40
-/* 8006BDA4 00068984  48 2D 6F B1 */	bl PSVECAdd
-/* 8006BDA8 00068988  C0 3F 00 B0 */	lfs f1, 0xb0(r31)
-/* 8006BDAC 0006898C  38 7F 00 B0 */	addi r3, r31, 0xb0
-/* 8006BDB0 00068990  C0 1E 00 00 */	lfs f0, 0(r30)
-/* 8006BDB4 00068994  38 9D 00 00 */	addi r4, r29, 0
-/* 8006BDB8 00068998  38 A3 00 00 */	addi r5, r3, 0
-/* 8006BDBC 0006899C  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BDC0 000689A0  D0 1F 00 B0 */	stfs f0, 0xb0(r31)
-/* 8006BDC4 000689A4  C0 3F 00 B4 */	lfs f1, 0xb4(r31)
-/* 8006BDC8 000689A8  C0 1E 00 04 */	lfs f0, 4(r30)
-/* 8006BDCC 000689AC  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BDD0 000689B0  D0 1F 00 B4 */	stfs f0, 0xb4(r31)
-/* 8006BDD4 000689B4  48 2D 6F 81 */	bl PSVECAdd
-lbl_8006BDD8:
-/* 8006BDD8 000689B8  38 7C 00 00 */	addi r3, r28, 0
-/* 8006BDDC 000689BC  38 81 00 4C */	addi r4, r1, 0x4c
-/* 8006BDE0 000689C0  48 00 FB 45 */	bl func_8007B924
-/* 8006BDE4 000689C4  48 00 00 14 */	b lbl_8006BDF8
-lbl_8006BDE8:
-/* 8006BDE8 000689C8  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BDEC 000689CC  D0 01 00 54 */	stfs f0, 0x54(r1)
-/* 8006BDF0 000689D0  D0 01 00 50 */	stfs f0, 0x50(r1)
-/* 8006BDF4 000689D4  D0 01 00 4C */	stfs f0, 0x4c(r1)
-lbl_8006BDF8:
-/* 8006BDF8 000689D8  7F 83 E3 78 */	mr r3, r28
-/* 8006BDFC 000689DC  48 00 A7 2D */	bl func_80076528
-/* 8006BE00 000689E0  81 9F 21 D0 */	lwz r12, 0x21d0(r31)
-/* 8006BE04 000689E4  28 0C 00 00 */	cmplwi r12, 0
-/* 8006BE08 000689E8  41 82 00 10 */	beq lbl_8006BE18
-/* 8006BE0C 000689EC  7D 88 03 A6 */	mtlr r12
-/* 8006BE10 000689F0  38 7C 00 00 */	addi r3, r28, 0
-/* 8006BE14 000689F4  4E 80 00 21 */	blrl 
-lbl_8006BE18:
-/* 8006BE18 000689F8  80 1F 00 E0 */	lwz r0, 0xe0(r31)
-/* 8006BE1C 000689FC  2C 00 00 00 */	cmpwi r0, 0
-/* 8006BE20 00068A00  40 82 00 2C */	bne lbl_8006BE4C
-/* 8006BE24 00068A04  80 7F 08 3C */	lwz r3, 0x83c(r31)
-/* 8006BE28 00068A08  38 9F 00 B0 */	addi r4, r31, 0xb0
-/* 8006BE2C 00068A0C  38 A1 00 24 */	addi r5, r1, 0x24
-/* 8006BE30 00068A10  4B FE A9 91 */	bl func_800567C0
-/* 8006BE34 00068A14  2C 03 00 00 */	cmpwi r3, 0
-/* 8006BE38 00068A18  41 82 00 14 */	beq lbl_8006BE4C
-/* 8006BE3C 00068A1C  38 7F 00 B0 */	addi r3, r31, 0xb0
-/* 8006BE40 00068A20  38 A3 00 00 */	addi r5, r3, 0
-/* 8006BE44 00068A24  38 81 00 24 */	addi r4, r1, 0x24
-/* 8006BE48 00068A28  48 2D 6F 0D */	bl PSVECAdd
-lbl_8006BE4C:
-/* 8006BE4C 00068A2C  C0 3F 00 B0 */	lfs f1, 0xb0(r31)
-/* 8006BE50 00068A30  7F 83 E3 78 */	mr r3, r28
-/* 8006BE54 00068A34  C0 01 00 4C */	lfs f0, 0x4c(r1)
-/* 8006BE58 00068A38  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BE5C 00068A3C  D0 1F 00 B0 */	stfs f0, 0xb0(r31)
-/* 8006BE60 00068A40  C0 3F 00 B4 */	lfs f1, 0xb4(r31)
-/* 8006BE64 00068A44  C0 01 00 50 */	lfs f0, 0x50(r1)
-/* 8006BE68 00068A48  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BE6C 00068A4C  D0 1F 00 B4 */	stfs f0, 0xb4(r31)
-/* 8006BE70 00068A50  C0 3F 00 B8 */	lfs f1, 0xb8(r31)
-/* 8006BE74 00068A54  C0 01 00 54 */	lfs f0, 0x54(r1)
-/* 8006BE78 00068A58  EC 01 00 2A */	fadds f0, f1, f0
-/* 8006BE7C 00068A5C  D0 1F 00 B8 */	stfs f0, 0xb8(r31)
-/* 8006BE80 00068A60  48 06 72 D9 */	bl func_800D3158
-/* 8006BE84 00068A64  88 1F 22 25 */	lbz r0, 0x2225(r31)
-/* 8006BE88 00068A68  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
-/* 8006BE8C 00068A6C  41 82 00 3C */	beq lbl_8006BEC8
-/* 8006BE90 00068A70  48 1B 8D 35 */	bl Stage_CalcUnkCamYBounds
-/* 8006BE94 00068A74  C0 1F 00 C0 */	lfs f0, 0xc0(r31)
-/* 8006BE98 00068A78  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 8006BE9C 00068A7C  4C 40 13 82 */	cror 2, 0, 2
-/* 8006BEA0 00068A80  40 82 00 88 */	bne lbl_8006BF28
-/* 8006BEA4 00068A84  48 1B 8D 21 */	bl Stage_CalcUnkCamYBounds
-/* 8006BEA8 00068A88  C0 1F 00 B4 */	lfs f0, 0xb4(r31)
-/* 8006BEAC 00068A8C  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 8006BEB0 00068A90  40 81 00 78 */	ble lbl_8006BF28
-/* 8006BEB4 00068A94  88 1F 22 25 */	lbz r0, 0x2225(r31)
-/* 8006BEB8 00068A98  38 60 00 00 */	li r3, 0
-/* 8006BEBC 00068A9C  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
-/* 8006BEC0 00068AA0  98 1F 22 25 */	stb r0, 0x2225(r31)
-/* 8006BEC4 00068AA4  48 00 00 64 */	b lbl_8006BF28
-lbl_8006BEC8:
-/* 8006BEC8 00068AA8  88 1F 22 2A */	lbz r0, 0x222a(r31)
-/* 8006BECC 00068AAC  54 00 D7 FF */	rlwinm. r0, r0, 0x1a, 0x1f, 0x1f
-/* 8006BED0 00068AB0  40 82 00 58 */	bne lbl_8006BF28
-/* 8006BED4 00068AB4  88 1F 22 28 */	lbz r0, 0x2228(r31)
-/* 8006BED8 00068AB8  54 00 F7 FF */	rlwinm. r0, r0, 0x1e, 0x1f, 0x1f
-/* 8006BEDC 00068ABC  40 82 00 4C */	bne lbl_8006BF28
-/* 8006BEE0 00068AC0  48 1B 8C B9 */	bl Stage_CalcUnkCamY
-/* 8006BEE4 00068AC4  C0 1F 00 C0 */	lfs f0, 0xc0(r31)
-/* 8006BEE8 00068AC8  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 8006BEEC 00068ACC  4C 41 13 82 */	cror 2, 1, 2
-/* 8006BEF0 00068AD0  40 82 00 38 */	bne lbl_8006BF28
-/* 8006BEF4 00068AD4  48 1B 8C A5 */	bl Stage_CalcUnkCamY
-/* 8006BEF8 00068AD8  C0 1F 00 B4 */	lfs f0, 0xb4(r31)
-/* 8006BEFC 00068ADC  FC 00 08 40 */	fcmpo cr0, f0, f1
-/* 8006BF00 00068AE0  40 80 00 28 */	bge lbl_8006BF28
-/* 8006BF04 00068AE4  38 7F 00 00 */	addi r3, r31, 0
-/* 8006BF08 00068AE8  38 80 00 60 */	li r4, 0x60
-/* 8006BF0C 00068AEC  38 A0 00 7F */	li r5, 0x7f
-/* 8006BF10 00068AF0  38 C0 00 40 */	li r6, 0x40
-/* 8006BF14 00068AF4  48 01 C2 35 */	bl func_80088148
-/* 8006BF18 00068AF8  88 1F 22 25 */	lbz r0, 0x2225(r31)
-/* 8006BF1C 00068AFC  38 60 00 01 */	li r3, 1
-/* 8006BF20 00068B00  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
-/* 8006BF24 00068B04  98 1F 22 25 */	stb r0, 0x2225(r31)
-lbl_8006BF28:
-/* 8006BF28 00068B08  C0 3F 18 A4 */	lfs f1, 0x18a4(r31)
-/* 8006BF2C 00068B0C  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BF30 00068B10  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8006BF34 00068B14  41 82 00 28 */	beq lbl_8006BF5C
-/* 8006BF38 00068B18  88 1F 22 1C */	lbz r0, 0x221c(r31)
-/* 8006BF3C 00068B1C  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
-/* 8006BF40 00068B20  40 82 00 1C */	bne lbl_8006BF5C
-/* 8006BF44 00068B24  C0 3F 00 B0 */	lfs f1, 0xb0(r31)
-/* 8006BF48 00068B28  48 2B 63 11 */	bl func_80322258
-/* 8006BF4C 00068B2C  2C 03 00 00 */	cmpwi r3, 0
-/* 8006BF50 00068B30  40 82 00 0C */	bne lbl_8006BF5C
-/* 8006BF54 00068B34  C0 02 88 74 */	lfs f0, lbl_804D8254(r2)
-/* 8006BF58 00068B38  D0 1F 18 A4 */	stfs f0, 0x18a4(r31)
-lbl_8006BF5C:
-/* 8006BF5C 00068B3C  7F 83 E3 78 */	mr r3, r28
-/* 8006BF60 00068B40  48 00 EF C9 */	bl func_8007AF28
-/* 8006BF64 00068B44  80 0D 93 68 */	lwz r0, lbl_804D4A08(r13)
-/* 8006BF68 00068B48  2C 00 00 03 */	cmpwi r0, 3
-/* 8006BF6C 00068B4C  41 80 01 68 */	blt lbl_8006C0D4
-/* 8006BF70 00068B50  C0 1F 00 B0 */	lfs f0, 0xb0(r31)
-/* 8006BF74 00068B54  3C 00 7F 80 */	lis r0, 0x7f80
-/* 8006BF78 00068B58  D0 01 00 18 */	stfs f0, 0x18(r1)
-/* 8006BF7C 00068B5C  80 81 00 18 */	lwz r4, 0x18(r1)
-/* 8006BF80 00068B60  54 83 00 50 */	rlwinm r3, r4, 0, 1, 8
-/* 8006BF84 00068B64  7C 03 00 00 */	cmpw r3, r0
-/* 8006BF88 00068B68  41 82 00 14 */	beq lbl_8006BF9C
-/* 8006BF8C 00068B6C  40 80 00 40 */	bge lbl_8006BFCC
-/* 8006BF90 00068B70  2C 03 00 00 */	cmpwi r3, 0
-/* 8006BF94 00068B74  41 82 00 20 */	beq lbl_8006BFB4
-/* 8006BF98 00068B78  48 00 00 34 */	b lbl_8006BFCC
-lbl_8006BF9C:
-/* 8006BF9C 00068B7C  54 80 02 7F */	clrlwi. r0, r4, 9
-/* 8006BFA0 00068B80  41 82 00 0C */	beq lbl_8006BFAC
-/* 8006BFA4 00068B84  38 00 00 01 */	li r0, 1
-/* 8006BFA8 00068B88  48 00 00 28 */	b lbl_8006BFD0
-lbl_8006BFAC:
-/* 8006BFAC 00068B8C  38 00 00 02 */	li r0, 2
-/* 8006BFB0 00068B90  48 00 00 20 */	b lbl_8006BFD0
-lbl_8006BFB4:
-/* 8006BFB4 00068B94  54 80 02 7F */	clrlwi. r0, r4, 9
-/* 8006BFB8 00068B98  41 82 00 0C */	beq lbl_8006BFC4
-/* 8006BFBC 00068B9C  38 00 00 05 */	li r0, 5
-/* 8006BFC0 00068BA0  48 00 00 10 */	b lbl_8006BFD0
-lbl_8006BFC4:
-/* 8006BFC4 00068BA4  38 00 00 03 */	li r0, 3
-/* 8006BFC8 00068BA8  48 00 00 08 */	b lbl_8006BFD0
-lbl_8006BFCC:
-/* 8006BFCC 00068BAC  38 00 00 04 */	li r0, 4
-lbl_8006BFD0:
-/* 8006BFD0 00068BB0  2C 00 00 01 */	cmpwi r0, 1
-/* 8006BFD4 00068BB4  41 82 00 D4 */	beq lbl_8006C0A8
-/* 8006BFD8 00068BB8  C0 1F 00 B4 */	lfs f0, 0xb4(r31)
-/* 8006BFDC 00068BBC  3C 00 7F 80 */	lis r0, 0x7f80
-/* 8006BFE0 00068BC0  D0 01 00 14 */	stfs f0, 0x14(r1)
-/* 8006BFE4 00068BC4  80 81 00 14 */	lwz r4, 0x14(r1)
-/* 8006BFE8 00068BC8  54 83 00 50 */	rlwinm r3, r4, 0, 1, 8
-/* 8006BFEC 00068BCC  7C 03 00 00 */	cmpw r3, r0
-/* 8006BFF0 00068BD0  41 82 00 14 */	beq lbl_8006C004
-/* 8006BFF4 00068BD4  40 80 00 40 */	bge lbl_8006C034
-/* 8006BFF8 00068BD8  2C 03 00 00 */	cmpwi r3, 0
-/* 8006BFFC 00068BDC  41 82 00 20 */	beq lbl_8006C01C
-/* 8006C000 00068BE0  48 00 00 34 */	b lbl_8006C034
-lbl_8006C004:
-/* 8006C004 00068BE4  54 80 02 7F */	clrlwi. r0, r4, 9
-/* 8006C008 00068BE8  41 82 00 0C */	beq lbl_8006C014
-/* 8006C00C 00068BEC  38 00 00 01 */	li r0, 1
-/* 8006C010 00068BF0  48 00 00 28 */	b lbl_8006C038
-lbl_8006C014:
-/* 8006C014 00068BF4  38 00 00 02 */	li r0, 2
-/* 8006C018 00068BF8  48 00 00 20 */	b lbl_8006C038
-lbl_8006C01C:
-/* 8006C01C 00068BFC  54 80 02 7F */	clrlwi. r0, r4, 9
-/* 8006C020 00068C00  41 82 00 0C */	beq lbl_8006C02C
-/* 8006C024 00068C04  38 00 00 05 */	li r0, 5
-/* 8006C028 00068C08  48 00 00 10 */	b lbl_8006C038
-lbl_8006C02C:
-/* 8006C02C 00068C0C  38 00 00 03 */	li r0, 3
-/* 8006C030 00068C10  48 00 00 08 */	b lbl_8006C038
-lbl_8006C034:
-/* 8006C034 00068C14  38 00 00 04 */	li r0, 4
-lbl_8006C038:
-/* 8006C038 00068C18  2C 00 00 01 */	cmpwi r0, 1
-/* 8006C03C 00068C1C  41 82 00 6C */	beq lbl_8006C0A8
-/* 8006C040 00068C20  C0 1F 00 B8 */	lfs f0, 0xb8(r31)
-/* 8006C044 00068C24  3C 00 7F 80 */	lis r0, 0x7f80
-/* 8006C048 00068C28  D0 01 00 10 */	stfs f0, 0x10(r1)
-/* 8006C04C 00068C2C  80 81 00 10 */	lwz r4, 0x10(r1)
-/* 8006C050 00068C30  54 83 00 50 */	rlwinm r3, r4, 0, 1, 8
-/* 8006C054 00068C34  7C 03 00 00 */	cmpw r3, r0
-/* 8006C058 00068C38  41 82 00 14 */	beq lbl_8006C06C
-/* 8006C05C 00068C3C  40 80 00 40 */	bge lbl_8006C09C
-/* 8006C060 00068C40  2C 03 00 00 */	cmpwi r3, 0
-/* 8006C064 00068C44  41 82 00 20 */	beq lbl_8006C084
-/* 8006C068 00068C48  48 00 00 34 */	b lbl_8006C09C
-lbl_8006C06C:
-/* 8006C06C 00068C4C  54 80 02 7F */	clrlwi. r0, r4, 9
-/* 8006C070 00068C50  41 82 00 0C */	beq lbl_8006C07C
-/* 8006C074 00068C54  38 00 00 01 */	li r0, 1
-/* 8006C078 00068C58  48 00 00 28 */	b lbl_8006C0A0
-lbl_8006C07C:
-/* 8006C07C 00068C5C  38 00 00 02 */	li r0, 2
-/* 8006C080 00068C60  48 00 00 20 */	b lbl_8006C0A0
-lbl_8006C084:
-/* 8006C084 00068C64  54 80 02 7F */	clrlwi. r0, r4, 9
-/* 8006C088 00068C68  41 82 00 0C */	beq lbl_8006C094
-/* 8006C08C 00068C6C  38 00 00 05 */	li r0, 5
-/* 8006C090 00068C70  48 00 00 10 */	b lbl_8006C0A0
-lbl_8006C094:
-/* 8006C094 00068C74  38 00 00 03 */	li r0, 3
-/* 8006C098 00068C78  48 00 00 08 */	b lbl_8006C0A0
-lbl_8006C09C:
-/* 8006C09C 00068C7C  38 00 00 04 */	li r0, 4
-lbl_8006C0A0:
-/* 8006C0A0 00068C80  2C 00 00 01 */	cmpwi r0, 1
-/* 8006C0A4 00068C84  40 82 00 30 */	bne lbl_8006C0D4
-lbl_8006C0A8:
-/* 8006C0A8 00068C88  3C 60 80 3C */	lis r3, lbl_803C05AC@ha
-/* 8006C0AC 00068C8C  C0 3F 00 B0 */	lfs f1, 0xb0(r31)
-/* 8006C0B0 00068C90  C0 5F 00 B4 */	lfs f2, 0xb4(r31)
-/* 8006C0B4 00068C94  38 63 05 AC */	addi r3, r3, lbl_803C05AC@l
-/* 8006C0B8 00068C98  4C C6 32 42 */	crset 6
-/* 8006C0BC 00068C9C  48 2D 95 ED */	bl OSReport
-/* 8006C0C0 00068CA0  3C 60 80 3C */	lis r3, lbl_803C057C@ha
-/* 8006C0C4 00068CA4  38 63 05 7C */	addi r3, r3, lbl_803C057C@l
-/* 8006C0C8 00068CA8  38 80 09 D5 */	li r4, 0x9d5
-/* 8006C0CC 00068CAC  38 AD 83 70 */	addi r5, r13, lbl_804D3A10
-/* 8006C0D0 00068CB0  48 31 C1 51 */	bl __assert
-lbl_8006C0D4:
-/* 8006C0D4 00068CB4  BB 41 00 68 */	lmw r26, 0x68(r1)
-/* 8006C0D8 00068CB8  80 01 00 94 */	lwz r0, 0x94(r1)
-/* 8006C0DC 00068CBC  CB E1 00 88 */	lfd f31, 0x88(r1)
-/* 8006C0E0 00068CC0  CB C1 00 80 */	lfd f30, 0x80(r1)
-/* 8006C0E4 00068CC4  38 21 00 90 */	addi r1, r1, 0x90
-/* 8006C0E8 00068CC8  7C 08 03 A6 */	mtlr r0
-/* 8006C0EC 00068CCC  4E 80 00 20 */	blr  
-}
-#endif
-
 
 // Match from snuffysasa: https://decomp.me/scratch/6HYyw
-asm void func_8006C0F0(HSD_GObj* fighterObj)
+void func_8006C0F0(HSD_GObj* fighterObj) 
 {
-	nofralloc 
-/* 8006C0F0 00068CD0  7C 08 02 A6 */	mflr r0
-/* 8006C0F4 00068CD4  90 01 00 04 */	stw r0, 4(r1)
-/* 8006C0F8 00068CD8  94 21 FF 58 */	stwu r1, -0xa8(r1)
-/* 8006C0FC 00068CDC  93 E1 00 A4 */	stw r31, 0xa4(r1)
-/* 8006C100 00068CE0  93 C1 00 A0 */	stw r30, 0xa0(r1)
-/* 8006C104 00068CE4  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 8006C108 00068CE8  C0 22 88 70 */	lfs f1, lbl_804D8250(r2)
-/* 8006C10C 00068CEC  C0 04 00 3C */	lfs f0, 0x3c(r4)
-/* 8006C110 00068CF0  7C 9F 23 78 */	mr r31, r4
-/* 8006C114 00068CF4  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8006C118 00068CF8  41 82 01 4C */	beq lbl_8006C264
-/* 8006C11C 00068CFC  80 03 00 28 */	lwz r0, 0x28(r3)
-/* 8006C120 00068D00  28 00 00 00 */	cmplwi r0, 0
-/* 8006C124 00068D04  7C 1E 03 78 */	mr r30, r0
-/* 8006C128 00068D08  41 82 00 44 */	beq lbl_8006C16C
-/* 8006C12C 00068D0C  40 82 00 14 */	bne lbl_8006C140
-/* 8006C130 00068D10  38 6D 83 60 */	addi r3, r13, lbl_804D3A00
-/* 8006C134 00068D14  38 80 02 34 */	li r4, 0x234
-/* 8006C138 00068D18  38 AD 83 68 */	addi r5, r13, lbl_804D3A08
-/* 8006C13C 00068D1C  48 31 C0 E5 */	bl __assert
-lbl_8006C140:
-/* 8006C140 00068D20  80 9E 00 14 */	lwz r4, 0x14(r30)
-/* 8006C144 00068D24  38 60 00 00 */	li r3, 0
-/* 8006C148 00068D28  54 80 02 11 */	rlwinm. r0, r4, 0, 8, 8
-/* 8006C14C 00068D2C  40 82 00 10 */	bne lbl_8006C15C
-/* 8006C150 00068D30  54 80 06 73 */	rlwinm. r0, r4, 0, 0x19, 0x19
-/* 8006C154 00068D34  41 82 00 08 */	beq lbl_8006C15C
-/* 8006C158 00068D38  38 60 00 01 */	li r3, 1
-lbl_8006C15C:
-/* 8006C15C 00068D3C  2C 03 00 00 */	cmpwi r3, 0
-/* 8006C160 00068D40  41 82 00 0C */	beq lbl_8006C16C
-/* 8006C164 00068D44  7F C3 F3 78 */	mr r3, r30
-/* 8006C168 00068D48  48 30 6F 11 */	bl HSD_JObjSetupMatrixSub
-lbl_8006C16C:
-/* 8006C16C 00068D4C  28 1E 00 00 */	cmplwi r30, 0
-/* 8006C170 00068D50  40 82 00 14 */	bne lbl_8006C184
-/* 8006C174 00068D54  38 6D 83 60 */	addi r3, r13, lbl_804D3A00
-/* 8006C178 00068D58  38 80 04 78 */	li r4, 0x478
-/* 8006C17C 00068D5C  38 AD 83 68 */	addi r5, r13, lbl_804D3A08
-/* 8006C180 00068D60  48 31 C0 A1 */	bl __assert
-lbl_8006C184:
-/* 8006C184 00068D64  7F C3 F3 78 */	mr r3, r30
-/* 8006C188 00068D68  4B F9 BB E1 */	bl HSD_JObjGetMtxPtr
-/* 8006C18C 00068D6C  38 7E 00 44 */	addi r3, r30, 0x44
-/* 8006C190 00068D70  38 81 00 70 */	addi r4, r1, 0x70
-/* 8006C194 00068D74  48 30 D1 7D */	bl func_80379310
-/* 8006C198 00068D78  28 1E 00 00 */	cmplwi r30, 0
-/* 8006C19C 00068D7C  40 82 00 14 */	bne lbl_8006C1B0
-/* 8006C1A0 00068D80  38 6D 83 60 */	addi r3, r13, lbl_804D3A00
-/* 8006C1A4 00068D84  38 80 03 37 */	li r4, 0x337
-/* 8006C1A8 00068D88  38 AD 83 68 */	addi r5, r13, lbl_804D3A08
-/* 8006C1AC 00068D8C  48 31 C0 75 */	bl __assert
-lbl_8006C1B0:
-/* 8006C1B0 00068D90  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 8006C1B4 00068D94  7F E3 FB 78 */	mr r3, r31
-/* 8006C1B8 00068D98  80 1E 00 30 */	lwz r0, 0x30(r30)
-/* 8006C1BC 00068D9C  90 81 00 34 */	stw r4, 0x34(r1)
-/* 8006C1C0 00068DA0  90 01 00 38 */	stw r0, 0x38(r1)
-/* 8006C1C4 00068DA4  80 1E 00 34 */	lwz r0, 0x34(r30)
-/* 8006C1C8 00068DA8  90 01 00 3C */	stw r0, 0x3c(r1)
-/* 8006C1CC 00068DAC  48 01 34 C9 */	bl func_8007F694
-/* 8006C1D0 00068DB0  28 1E 00 00 */	cmplwi r30, 0
-/* 8006C1D4 00068DB4  D0 21 00 34 */	stfs f1, 0x34(r1)
-/* 8006C1D8 00068DB8  40 82 00 14 */	bne lbl_8006C1EC
-/* 8006C1DC 00068DBC  38 6D 83 60 */	addi r3, r13, lbl_804D3A00
-/* 8006C1E0 00068DC0  38 80 02 BB */	li r4, 0x2bb
-/* 8006C1E4 00068DC4  38 AD 83 68 */	addi r5, r13, lbl_804D3A08
-/* 8006C1E8 00068DC8  48 31 C0 39 */	bl __assert
-lbl_8006C1EC:
-/* 8006C1EC 00068DCC  80 7E 00 1C */	lwz r3, 0x1c(r30)
-/* 8006C1F0 00068DD0  28 1E 00 00 */	cmplwi r30, 0
-/* 8006C1F4 00068DD4  80 1E 00 20 */	lwz r0, 0x20(r30)
-/* 8006C1F8 00068DD8  90 61 00 18 */	stw r3, 0x18(r1)
-/* 8006C1FC 00068DDC  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 8006C200 00068DE0  80 7E 00 24 */	lwz r3, 0x24(r30)
-/* 8006C204 00068DE4  80 1E 00 28 */	lwz r0, 0x28(r30)
-/* 8006C208 00068DE8  90 61 00 20 */	stw r3, 0x20(r1)
-/* 8006C20C 00068DEC  90 01 00 24 */	stw r0, 0x24(r1)
-/* 8006C210 00068DF0  40 82 00 14 */	bne lbl_8006C224
-/* 8006C214 00068DF4  38 6D 83 60 */	addi r3, r13, lbl_804D3A00
-/* 8006C218 00068DF8  38 80 03 D3 */	li r4, 0x3d3
-/* 8006C21C 00068DFC  38 AD 83 68 */	addi r5, r13, lbl_804D3A08
-/* 8006C220 00068E00  48 31 C0 01 */	bl __assert
-lbl_8006C224:
-/* 8006C224 00068E04  80 DE 00 38 */	lwz r6, 0x38(r30)
-/* 8006C228 00068E08  38 61 00 40 */	addi r3, r1, 0x40
-/* 8006C22C 00068E0C  80 1E 00 3C */	lwz r0, 0x3c(r30)
-/* 8006C230 00068E10  38 81 00 34 */	addi r4, r1, 0x34
-/* 8006C234 00068E14  38 A1 00 18 */	addi r5, r1, 0x18
-/* 8006C238 00068E18  90 C1 00 28 */	stw r6, 0x28(r1)
-/* 8006C23C 00068E1C  38 C1 00 28 */	addi r6, r1, 0x28
-/* 8006C240 00068E20  38 E0 00 00 */	li r7, 0
-/* 8006C244 00068E24  90 01 00 2C */	stw r0, 0x2c(r1)
-/* 8006C248 00068E28  80 1E 00 40 */	lwz r0, 0x40(r30)
-/* 8006C24C 00068E2C  90 01 00 30 */	stw r0, 0x30(r1)
-/* 8006C250 00068E30  48 30 E0 01 */	bl func_8037A250
-/* 8006C254 00068E34  38 61 00 40 */	addi r3, r1, 0x40
-/* 8006C258 00068E38  38 81 00 70 */	addi r4, r1, 0x70
-/* 8006C25C 00068E3C  38 BF 00 44 */	addi r5, r31, 0x44
-/* 8006C260 00068E40  48 2D 5F A5 */	bl PSMTXConcat
-lbl_8006C264:
-/* 8006C264 00068E44  80 01 00 AC */	lwz r0, 0xac(r1)
-/* 8006C268 00068E48  83 E1 00 A4 */	lwz r31, 0xa4(r1)
-/* 8006C26C 00068E4C  83 C1 00 A0 */	lwz r30, 0xa0(r1)
-/* 8006C270 00068E50  38 21 00 A8 */	addi r1, r1, 0xa8
-/* 8006C274 00068E54  7C 08 03 A6 */	mtlr r0
-/* 8006C278 00068E58  4E 80 00 20 */	blr  
+
+    Mtx mtx1;
+    Mtx mtx2;
+    Vec scale;
+    Vec translation;
+    Quaternion rotation;
+
+    Vec unused;
+
+    HSD_JObj* jobj_userdata;
+    HSD_JObj* jobj;
+    
+    jobj_userdata = fighterObj->user_data;
+
+    if (jobj_userdata->translate.y != -1.0f) {
+
+        jobj = fighterObj->user_data;
+
+        HSD_JObjSetupMatrix(jobj);
+
+
+        HSD_JObjGetMtx(jobj, &mtx1);
+
+        HSD_JObjGetScale(jobj, &scale);
+        scale.x = func_8007F694((Fighter*)jobj_userdata);
+
+        HSD_JObjGetRotation(jobj, &rotation);
+
+        HSD_JObjGetTranslation(jobj, &translation);
+
+        func_8037A250(&mtx2, &scale, &rotation, &translation, 0);
+        PSMTXConcat(&mtx2, &mtx1, &jobj_userdata->mtx);
+
+    }
+
+        
 }
 
 

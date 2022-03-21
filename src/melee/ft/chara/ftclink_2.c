@@ -12,12 +12,12 @@ void func_80149354(HSD_GObj* gobj)
     ft = ft2 = gobj->user_data;
 
     if (ft->x2200_ftcmd_var1 == 1 && ft->x2244 == 0) {
-        temp_r3 = func_802C8B28(gobj, &ft->xB0_pos, func_8007500C(ft2, 0x1F),
+        temp_r3 = func_802C8B28(gobj, &ft->phys.xB0_pos, func_8007500C(ft2, 0x1F),
                                 ft->x2C_facing_direction);
         ft->x2244 = (u32) temp_r3;
         if (temp_r3 != NULL) {
-            ft->x21E4_callback_OnDeath2 = func_800EAF58;
-            ft->x21DC_callback_OnTakeDamage = func_800EAF58;
+            ft->cb.x21E4_callback_OnDeath2 = func_800EAF58;
+            ft->cb.x21DC_callback_OnTakeDamage = func_800EAF58;
         }
     } else if (ft2->x2200_ftcmd_var1 == 2) {
         func_80149268(gobj);

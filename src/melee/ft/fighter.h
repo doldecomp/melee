@@ -228,7 +228,6 @@ typedef struct _ftHit
     int x134;
 } ftHit;
 
-
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
     /* 0x4 */ FighterKind x4_fighterKind;
@@ -243,23 +242,26 @@ typedef struct _Fighter {
     /* 0x30 */ f32 x30_facingDirectionRepeated;
     /* 0x34 */ Vec3 x34_scale;
     u8 filler_x40[0x74 - 0x40];
-    /* 0x74 */ Vec3 x74_animVel;
-    /* 0x80 */ Vec3 x80_selfVel;
-    /* 0x8C */ Vec3 x8C_knockbackVel;
-    /* 0x98 */ Vec3 x98_AtkShieldKnockback;
-    /* 0xA4 */ Vec3 xA4_unkVel;
-    /* 0xB0 */ Vec3 xB0_pos;
-    /* 0xBC */ Vec3 xBC_prevPos;
-    /* 0xC8 */ Vec3 xC8_pos_delta;
-    /* 0xD4 */ Vec3 xD4_unkVel;
-    /* 0xE0 */ s32 xE0_airState;
-    /* 0xE4 */ f32 xE4_groundAccel1;
-    /* 0xE8 */ f32 xE8_groundAccel2;
-    /* 0xEC */ f32 xEC_groundVel;
-    /* 0xF0 */ f32 xF0_knockbackGroundVel;
-    /* 0xF4 */ f32 xF4_groundAttackerShieldKnockbackVel;
-    /* 0xF8 */ Vec2 xF8_playerNudgeVel;
-    /* 0x100 */ f32 x100;
+    struct phys                                                // 0x74
+    {                                                          //
+        Vec3 x74_anim_vel;                                         // 0x74
+        Vec3 x80_self_vel;                                         // 0x80
+        Vec3 x8c_kb_vel;                                           // 0x8C
+        Vec3 x98_atk_shield_kb;                                // 0x98
+        Vec3 xA4_unk_vel;                                      // 0xA4
+        Vec3 xB0_pos;                                          // 0xb0
+        Vec3 xBC_prevPos;                                     // 0xBC
+        Vec3 pos_delta;                                        // 0xC8
+        Vec3 xD4_unk_vel;                                        // 0xD4
+        int xE0_airborne;                                         // 0xE0
+        float xE4_ground_accel_1; // 0xE4
+        float xE8_ground_accel_2;   // 0xE8
+        float xEC_ground_vel;                                    // 0xEC
+        float xF0_ground_kb_vel;
+        float xF4_ground_attacker_shield_kb_vel;
+        Vec2 xF8_playerNudgeVel;
+        float x100;
+    } phys;   
     s32 filler_x104;
     /* 0x108 */ void* x108_costume_archive;
     /* 0x10C */ ftData* x10C_ftData;
@@ -382,10 +384,65 @@ typedef struct _Fighter {
     /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
-    f32 x624;
-    u8 filler_x624[0x670 - 0x628];
-    /* 0x670 */ u8 x670_timer_lstick_tilt_x;
-    u8 filler_x670[0x68C - 0x671];
+                f32 x624;
+                f32 x628;
+                f32 x62C;
+
+                f32 x630;
+                f32 x634;
+
+                f32 x638;
+                f32 x63C;
+                f32 x640;
+                f32 x644;
+                
+                f32 x648;
+                f32 x64C;
+                
+                f32 x650;
+                f32 x654;
+
+                f32 x658;
+
+                s32 x65C;
+                s32 x660;
+                s32 x664;
+                s32 x668;
+                s32 x66C;
+
+                u8 x670_timer_lstick_tilt_x;
+                u8 x671_timer_lstick_tilt_y;
+                u8 x672_timer_lstick_tilt_z;
+
+                u8 x673_x;
+                u8 x674_y;
+                u8 x675_z;
+
+                u8 x676_x;
+                u8 x677_y;
+                u8 x678_z;
+
+                u8 x679_x;
+                u8 x67A_y;
+                u8 x67B_z;
+
+                u8 x67C;
+                u8 x67D;
+                u8 x67E;
+                u8 x67F;
+                u8 x680;
+                u8 x681;
+                u8 x682;
+                u8 x683;
+                u8 x684;
+                u8 x685;
+                u8 x686;
+                u8 x687;
+                u8 x688;
+                u8 x689;
+                u8 x68A;
+                u8 x68B;
+
     /* 0x68C */ Vec3 x68C_transNPos;
     u8 filler_x698[0x6A4-0x698];
     /* 0x6A4 */ Vec3 x6A4_transNOffset;
@@ -413,54 +470,87 @@ typedef struct _Fighter {
     /* 0x1064 */ ftHit x1064_thrownHitbox;
     u8 filler_x1064[0x1828 - 0x1064 - sizeof(ftHit)];
     /* 0x1828 */ s32 x1828;
-    s32 filler_x182C;
-    /* 0x1830 */ f32 x1830_percent;
-    /* 0x1834 */ f32 x1834;
-    /* 0x1838 */ f32 x1838_percentTemp;
-    /* 0x183C */ s32 x183C;
-    /* 0x1840 */ s32 x1840;
-    u8 filler_x1844[0x1850 - 0x1844];
-    /* 0x1850 */ f32 x1850_forceApplied;
-    u8 filler_x1854[0x189C - 0x1854];
-    /* 0x189C */ f32 x189C;
-    /* 0x18A0 */ f32 x18A0;
-    /* 0x18A4 */ f32 x18A4_knockbackMagnitude;
-    /* 0x18A8 */ f32 x18A8;
-    /* 0x18A8 */ s32 x18AC_timeSinceHit;
-    /* 0x18B0 */ f32 x18B0;
-    /* 0x18B4 */ f32 x18B4_armor;
-    /* 0x18B8 */ f32 x18B8;
-    /* 0x18BC */ f32 x18BC;
-    /* 0x18C0 */ s32 x18C0;
-    /* 0x18C4 */ s32 x18C4;
-    /* 0x18C8 */ s32 x18C8;
-    /* 0x18CC */ s32 x18CC;
-    /* 0x18D0 */ s32 x18D0;
-    u8 filler_x18D4[0x18F0 - 0x18D4];
-    /* 0x18F0 */ s32 x18F0;
-    /* 0x18F4 */ s32 x18F4;
-    /* 0x18F8 */ u8 x18F8;
-    u8 filler_x18F9;
-    /* 0x18FA */ u16 x18FA;
-    /* 0x18FC */ u8 x18FC;
-    /* 0x18FD */ u8 x18FD;
-    u8 filler_x18FE[0x1908 - 0x18FE];
-    /* 0x1908 */ s32 x1908;
-    /* 0x190C */ s32 x190C;
-    /* 0x1910 */ s32 x1910;
-    /* 0x1914 */ s32 x1914;
-    /* 0x1918 */ s32 x1918;
-    /* 0x191C */ f32 x191C;
-    s32 filler_x1920;
-    /* 0x1924 */ s32 x1924;
-    /* 0x1928 */ f32 x1928;
-    u8 filler_x192C[0x1948 - 0x192C];
-    /* 0x1948 */ s32 x1948;
-    /* 0x194C */ s32 x194C;
-    /* 0x1948 */ s32 x1950;
-    /* 0x1954 */ f32 x1954;
-    /* 0x1958 */ f32 x1958;
-    /* 0x195C */ f32 x195C_hitlagFrames;
+        struct dmg                                                 // 0x182c
+    {                                                          //
+        int behavior;                                          // 0x182c
+        float percent;                                         // 0x1830
+        f32 x1834;                                             // 0x1834
+        float x1838_percentTemp;                                    // 0x1838
+        s32 applied;                                         // 0x183c
+        int x1840;                                             // 0x1840
+        float direction;                                       // 0x1844
+        int kb_angle;                                          // 0x1848
+        int damaged_hurtbox;                                   // 0x184c
+        f32 x1850_forceApplied;                                   // 0x1850
+        Vec3 collpos;                                          // 0x1854
+        int dealt;                                             // 0x1860
+        int x1864;                                             // 0x1864
+        HSD_GObj *source;                                          // 0x1868
+        int x186c;                                             // 0x186c
+        int x1870;                                             // 0x1870
+        int x1874;                                             // 0x1874
+        int x1878;                                             // 0x1878
+        int x187c;                                             // 0x187c
+        int x1880;                                             // 0x1880
+        int x1884;                                             // 0x1884
+        int x1888;                                             // 0x1888
+        int x188c;                                             // 0x188c
+        int x1890;                                             // 0x1890
+        int x1894;                                             // 0x1894
+        int x1898;                                             // 0x1898
+        float x189C;                                             // 0x189c
+        float x18a0;                                             // 0x18a0
+        float x18A4_knockbackMagnitude;                                          // 0x18a4  kb magnitude
+        f32 x18A8;                                             // 0x18a8
+        int time_since_hit;                                    // 0x18ac   in frames
+        float x18B0;                                             // 0x18b0
+        float x18B4_armor;                                           // 0x18b4
+        f32 x18B8;                                             // 0x18b8
+        f32 x18BC;                                             // 0x18bc
+        int x18C0;                                             // 0x18c0
+        int source_ply;                                        // 0x18c4   damage source ply number
+        int x18C8;                                             // 0x18c8
+        int x18CC;                                             // 0x18cc
+        int x18D0;                                             // 0x18d0
+        int x18d4;                                             // 0x18d4
+        int x18d8;                                             // 0x18d8
+        int x18dc;                                             // 0x18dc
+        int x18e0;                                             // 0x18e0
+        int x18e4;                                             // 0x18e4
+        int x18e8;                                             // 0x18e8
+        u16 instancehitby;                                     // 0x18ec. Last Move Instance This Player Was Hit by
+        int x18F0;                                             // 0x18f0
+        int x18F4;                                             // 0x18f4
+        u8 x18F8;                                              // 0x18f8
+        u8 x18f9;                                              // 0x18f9
+        u16 model_shift_frames;                                // 0x18fa
+        u8 x18FC;                                              // 0x18fc
+        u8 x18FD;                                              // 0x18fd
+        int x1900;                                             // 0x1900
+        int x1904;                                             // 0x1904
+        int x1908;                                             // 0x1908
+        int x190C;                                             // 0x190c
+        int x1910;                                             // 0x1910
+        int x1914;                                             // 0x1914
+        int x1918;                                             // 0x1918
+        f32 x191C;                                             // 0x191c
+        int x1920;                                             // 0x1920
+        int x1924;                                             // 0x1924
+        f32 x1928;                                             // 0x1928
+        int x192c;                                             // 0x192c
+        int x1930;                                             // 0x1930
+        int x1934;                                             // 0x1934
+        int x1938;                                             // 0x1938
+        int x193c;                                             // 0x193c
+        int x1940;                                             // 0x1940
+        int x1944;                                             // 0x1944
+        int x1948;                                             // 0x1948
+        int x194C;                                             // 0x194c
+        int x1950;                                             // 0x1950
+        f32 x1954;                                             // 0x1954
+        f32 x1958;                                             // 0x1958
+        float hitlag_frames;                                   // 0x195c
+    } dmg;    
     /* 0x1960 */ f32 x1960_vibrateMult;
     /* 0x1964 */ f32 x1964;
     /* 0x1968 */ u8 x1968_jumpsUsed;
@@ -504,7 +594,7 @@ typedef struct _Fighter {
                  s32 x1A68;
                  f32 x1A6C;
                  Vec x1A70;
-    u8 filler_x1A6C[0x2008-0x1A78];
+    u8 filler_x1A6C[0x2008-0x1A7C];
                  s32 x2008;
                  s32 x200C;
                  s32 x2010;
@@ -558,29 +648,32 @@ typedef struct _Fighter {
     /* 0x2180 */ s32 x2180;
     u8 filler_x2184[0x2190 - 0x2184];
     // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
-    void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
-    void (*x2194_callback_x2194)(HSD_GObj *fighter); // used
-    void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj *fighter); // used
-    void (*x219C_callback_IASA)(HSD_GObj *fighter); // used
-    void (*x21A0_callback_Anim)(HSD_GObj *fighter);
-    void (*x21A4_callback_Phys)(HSD_GObj *fighter); // xused
-    void (*x21A8_callback_Coll)(HSD_GObj *fighter);
-    void (*x21AC_callback_Cam)(HSD_GObj *fighter);
-    void (*x21B0_callback_Accessory1)(HSD_GObj *fighter);
-    void (*x21B4_callback_Accessory2)(HSD_GObj *fighter); // used
-    void (*x21B8_callback_Accessory3)(HSD_GObj *fighter); // used
-    void (*x21BC_callback_Accessory4)(HSD_GObj *fighter);
-    void (*x21C0_callback_OnGiveDamage)(HSD_GObj *fighter);
-    void (*x21C4_callback_OnShieldHit)(HSD_GObj *fighter);
-    void (*x21C8_callback_OnReflectHit)(HSD_GObj *fighter);
-    void (*x21CC_callback_x21cc)(HSD_GObj *fighter);
-    void (*x21D0_callback_EveryHitlag)(HSD_GObj *fighter); // xused
-    void (*x21D4_callback_EnterHitlag)(HSD_GObj *fighter);
-    void (*x21D8_callback_ExitHitlag)(HSD_GObj *fighter);
-    void (*x21DC_callback_OnTakeDamage)(HSD_GObj *fighter);
-    void (*x21E0_callback_OnDeath)(HSD_GObj *fighter); // used
-    void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
-    void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
+    struct cb {
+        void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
+        void (*x2194_callback_x2194)(HSD_GObj *fighter); // used
+        void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj *fighter); // used
+        void (*x219C_callback_IASA)(HSD_GObj *fighter); // used
+        void (*x21A0_callback_Anim)(HSD_GObj *fighter);
+        void (*x21A4_callback_Phys)(HSD_GObj *fighter); // xused
+        void (*x21A8_callback_Coll)(HSD_GObj *fighter);
+        void (*x21AC_callback_Cam)(HSD_GObj *fighter);
+        void (*x21B0_callback_Accessory1)(HSD_GObj *fighter);
+        void (*x21B4_callback_Accessory2)(HSD_GObj *fighter); // used
+        void (*x21B8_callback_Accessory3)(HSD_GObj *fighter); // used
+        void (*x21BC_callback_Accessory4)(HSD_GObj *fighter);
+        void (*x21C0_callback_OnGiveDamage)(HSD_GObj *fighter);
+        void (*x21C4_callback_OnShieldHit)(HSD_GObj *fighter);
+        void (*x21C8_callback_OnReflectHit)(HSD_GObj *fighter);
+        void (*x21CC_callback_x21cc)(HSD_GObj *fighter);
+        void (*x21D0_callback_EveryHitlag)(HSD_GObj *fighter); // xused
+        void (*x21D4_callback_EnterHitlag)(HSD_GObj *fighter);
+        void (*x21D8_callback_ExitHitlag)(HSD_GObj *fighter);
+        void (*x21DC_callback_OnTakeDamage)(HSD_GObj *fighter);
+        void (*x21E0_callback_OnDeath)(HSD_GObj *fighter); // used
+        void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
+        void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
+    } cb;
+
     u8 filler_x21EC[0x2200 - 0x21EC];
     /* 0x2200 */ u32 x2200_ftcmd_var0;
     /* 0x2204 */ u32 x2200_ftcmd_var1;
@@ -659,7 +752,7 @@ void func_8006A360();
 void func_8006ABA0();
 void func_8006ABEC();
 void func_8006AD10();
-void func_8006B82C();
+void Fighter_procUpdate();
 void func_8006C0F0(HSD_GObj* fighterObj);
 void func_8006C27C();
 void func_8006C5F4(HSD_GObj* pPlayerEntityStruct);

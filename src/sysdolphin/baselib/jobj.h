@@ -223,6 +223,14 @@ inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec *translate)
     *translate = jobj->translate;
 }
 
+inline void HSD_JObjGetMtx(HSD_JObj* jobj, Mtx *mtx) {
+    if (jobj == 0U) {
+        __assert("jobj.h"/*lbl_804D3A00*/, 1144, "jobj"/*lbl_804D3A08*/);
+    }
+    HSD_JObjGetMtxPtr(jobj);
+    func_80379310(&jobj->mtx, mtx);
+}
+
 #pragma pop
 
 #endif
