@@ -64,6 +64,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/code_80081B38.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_8008521C.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/ftdata.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/ftlib.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/ftlib.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_800877F8.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.s.o 	\
