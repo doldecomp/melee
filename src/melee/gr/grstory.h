@@ -26,6 +26,6 @@ void lbl_801E3414(void);
 void func_801E3418(HSD_GObj*);
 void func_801E366C(HSD_GObj*);
 static BOOL lbl_801E36D0(s32);
-s32 lbl_801E36D8(Vec3*, u32, u8*);
+s32 lbl_801E36D8(Vec3*, s32, struct _HSD_JObj*);
 
 #endif
