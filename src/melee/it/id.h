@@ -17,8 +17,10 @@ enum {
     0x09, // Maxim Tomato
     0x0A, // Starman (Super Star)
     0x0B, // Home-Run Bat
-    0x0C, // Beam Sword
-    0x0D, // Parasol
+    */
+    It_Kind_BeamSword = 0x0C,
+    It_Kind_Parasol = 0x0D,
+    /*
     0x0E, // Green Shell (G Shell)
     0x0F, // Red Shell (R Shell)
     0x10, // Ray Gun (L Gun)

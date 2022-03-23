@@ -133,6 +133,7 @@ void HSD_JObjCheckDependAll(HSD_JObj* jobj);
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);
 void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
+void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 
@@ -146,8 +147,13 @@ inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 
 inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 {
+    BOOL result;
     assert_line(564, jobj);
-    return !(jobj->flags & 0x800000) && (jobj->flags & 0x40);
+    result = FALSE;
+    if (!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) {
+        result = TRUE;
+    }
+    return result;
 }
 
 inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
