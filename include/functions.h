@@ -1386,7 +1386,7 @@ void func_8007C4BC();
 void func_8007C630(struct _HSD_GObj*);
 void func_8007C6DC();
 void func_8007C77C();
-void func_8007C930(struct _Fighter*, void* /* char specific attributes */, f32);
+void func_8007C930(struct _Fighter*, f32);
 // ? func_8007C98C(?);
 // ? func_8007CA80(?);
 // ? func_8007CADC(?);

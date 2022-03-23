@@ -76,7 +76,7 @@ void lbl_8013691C(HSD_GObj* gobj) {
     MarsAttributes* attr = ft->x2D4_specialAttributes;
     u32 unused, unused2; // gobble stack space
 
-    func_8007C930(ft, attr, attr->x10);
+    func_8007C930(ft, attr->x10);
     func_8007CB74(gobj);
 }
 
