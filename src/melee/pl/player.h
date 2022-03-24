@@ -185,7 +185,7 @@ void Player_SetFacingDirection(s32 slot, f32 direction);
 void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction);
 s8 Player_GetCostumeId(s32 slot);
 void Player_SetCostumeId(s32 slot, s8 costume_id);
-s8 Player_GetControllerIndex(s32 slot);
+u8 Player_GetControllerIndex(s32 slot);
 void Player_SetControllerIndex(s32 slot, s8 controller_index);
 s8 Player_GetTeam(s32 slot);
 void Player_SetTeam(s32 slot, s8 unk_color);

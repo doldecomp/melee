@@ -737,7 +737,7 @@ void Player_SetCostumeId(s32 slot, s8 costume_id) {
     player->costume_id = costume_id;
 }
 
-s8 Player_GetControllerIndex(s32 slot) {   
+u8 Player_GetControllerIndex(s32 slot) {   
     s8 controller_index;
     StaticPlayer* player;
     Player_CheckSlot(slot);
