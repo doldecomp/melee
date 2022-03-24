@@ -4545,17 +4545,8 @@ lbl_803C0DD0:
     .4byte 0x00000001
     .4byte 0xFFFFFFFF
     .4byte 0x00000002
-    .4byte 0x66744765
-    .4byte 0x74506172
-    .4byte 0x61736F6C
-    .4byte 0x53746174
-    .4byte 0x75732867
-    .4byte 0x6F626A29
-    .4byte 0x20213D20
-    .4byte 0x46745061
-    .4byte 0x7261736F
-    .4byte 0x6C5F4E6F
-    .4byte 0x6E650000
+    .asciz "ftGetParasolStatus(gobj) != FtParasol_None"
+    .balign 4
 .global jtbl_803C0E90
 jtbl_803C0E90:
     .4byte lbl_8007EA1C

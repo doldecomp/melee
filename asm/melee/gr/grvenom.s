@@ -4198,15 +4198,8 @@ lbl_803E54CC:
     .4byte 0x00000001
     .4byte lbl_803E5348
     .4byte 0x00000005
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E5524
 lbl_803E5524:
     .asciz "grvenom.c"
@@ -4264,22 +4257,10 @@ lbl_803E5524:
     .4byte 0x00000003
     .4byte 0x00000003
     .4byte 0x00000006
-    .4byte 0x61727769
-    .4byte 0x6E3A7573
-    .4byte 0x65722064
-    .4byte 0x61746120
-    .4byte 0x6572726F
-    .4byte 0x720A0000
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
+    .asciz "arwin:user data error\n"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
     .4byte 0xFFFFFFFF
     .4byte 0xFFFFFFFF
     .4byte 0x00000001
@@ -4302,9 +4283,8 @@ lbl_803E5680:
     .4byte 0x00000004
     .4byte 0x00000004
     .4byte 0x00000003
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
+    .asciz "translate"
+    .balign 4
     .4byte 0x00000001
     .4byte 0x00000001
     .4byte 0x00000001

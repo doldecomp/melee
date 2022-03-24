@@ -26,9 +26,8 @@ lbl_803E9030:
     .4byte NULL
 .global lbl_803E9080
 lbl_803E9080:
-    .4byte 0x2F477254
-    .4byte 0x4E732E64
-    .4byte 0x61740000
+    .asciz "/GrTNs.dat"
+    .balign 4
 .global lbl_803E908C
 lbl_803E908C:
     .4byte 0x00000036
@@ -44,15 +43,6 @@ lbl_803E908C:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x6772746E
-    .4byte 0x6573732E
-    .4byte 0x63000000
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grtness.c"

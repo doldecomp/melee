@@ -12066,9 +12066,8 @@ lbl_803E29E0:
     .4byte NULL
 .global lbl_803E2D14
 lbl_803E2D14:
-    .4byte 0x2F477242
-    .4byte 0x622E6461
-    .4byte 0x74000000
+    .asciz "/GrBb.dat"
+    .balign 4
 .global lbl_803E2D20
 lbl_803E2D20:
     .4byte 0x00000013
@@ -12084,15 +12083,8 @@ lbl_803E2D20:
     .4byte 0x00000001
     .4byte lbl_803E2938
     .4byte 0x0000001C
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E2D78
 lbl_803E2D78:
     .asciz "grbigblue.c"
@@ -12142,38 +12134,16 @@ lbl_803E2D78:
     .4byte 0x001B001C
     .4byte 0x001D001E
     .4byte 0x001F0020
-    .4byte 0x67702D3E
-    .4byte 0x752E6361
-    .4byte 0x726E756C
-    .4byte 0x6C2E636F
-    .4byte 0x6C6C5F6A
-    .4byte 0x6F626A00
-    .4byte 0x67702D3E
-    .4byte 0x752E6361
-    .4byte 0x726E756C
-    .4byte 0x6C2E7261
-    .4byte 0x6E6B0000
-    .4byte 0x6361725F
-    .4byte 0x676F626A
-    .4byte NULL
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
-    .4byte 0x2A2A2A20
-    .4byte 0x4E6F7420
-    .4byte 0x53657420
-    .4byte 0x506F7369
-    .4byte 0x74696F6E
-    .4byte 0x21284646
-    .4byte 0x6C796572
-    .4byte 0x290A0000
+    .asciz "gp->u.carnull.coll_jobj"
+    .balign 4
+    .asciz "gp->u.carnull.rank"
+    .balign 4
+    .asciz "car_gobj"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .asciz "*** Not Set Position!(FFlyer)\n"
+    .balign 4
 .global lbl_803E2EB8
 lbl_803E2EB8:
     .asciz "*** Not Set Position!(Tyukei)\n"
@@ -12238,12 +12208,10 @@ lbl_803E2EB8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x73746172
-    .4byte 0x745F6A6F
-    .4byte 0x626A0000
-    .4byte 0x656E645F
-    .4byte 0x6A6F626A
-    .4byte NULL
+    .asciz "start_jobj"
+    .balign 4
+    .asciz "end_jobj"
+    .balign 4
 .global jtbl_803E2FE0
 jtbl_803E2FE0:
 	.4byte lbl_801EB9AC
@@ -12262,12 +12230,10 @@ jtbl_803E2FE0:
     .4byte 0x0006DDD3
     .4byte 0x0006DDD4
     .4byte 0x0006DDD5
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
-    .4byte 0x6D61705F
-    .4byte 0x676F626A
-    .4byte NULL
+    .asciz "translate"
+    .balign 4
+    .asciz "map_gobj"
+    .balign 4
 .global jtbl_803E3038
 jtbl_803E3038:
 	.4byte lbl_801EEEE4
@@ -12294,14 +12260,7 @@ jtbl_803E3064:
 	.4byte lbl_801EF3A4
 	.4byte lbl_801EF3C4
 	.4byte lbl_801EEF64
-    .4byte 0x6361725F
-    .4byte 0x6E756D21
-    .4byte 0x3D47725F
-    .4byte 0x467A6572
-    .4byte 0x6F5F4361
-    .4byte 0x725F4D61
-    .4byte 0x78000000
-    .4byte NULL
+    .asciz "car_num!=Gr_Fzero_Car_Max"
 
 
 .section .sdata

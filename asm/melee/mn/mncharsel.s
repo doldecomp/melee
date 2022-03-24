@@ -12756,16 +12756,12 @@ lbl_803F0DFC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x25303264
-    .4byte 0x3A253032
-    .4byte 0x64000000
-    .4byte 0x25643A25
-    .4byte 0x3032643A
-    .4byte 0x25303264
-    .4byte NULL
-    .4byte 0x39393A35
-    .4byte 0x393A3539
-    .4byte NULL
+    .asciz "%02d:%02d"
+    .balign 4
+    .asciz "%d:%02d:%02d"
+    .balign 4
+    .asciz "99:59:59"
+    .balign 4
     .4byte 0x25642090
     .4byte 0x6C94B282
     .4byte 0xAB000000
@@ -12869,36 +12865,21 @@ lbl_803F10D4:
 	.4byte lbl_802648D0
 	.4byte lbl_802648D0
 	.4byte lbl_80264868
-    .4byte 0x4D6E536C
-    .4byte 0x4368722E
-    .4byte 0x64617400
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x4D6E536C
-    .4byte 0x4368722E
-    .4byte 0x75736400
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte 0x2E757364
-    .4byte NULL
-    .4byte 0x4D6E5365
-    .4byte 0x6C656374
-    .4byte 0x43687244
-    .4byte 0x61746154
-    .4byte 0x61626C65
-    .4byte NULL
-    .4byte 0x5364536C
-    .4byte 0x4368722E
-    .4byte 0x64617400
-    .4byte 0x5349535F
-    .4byte 0x53656C43
-    .4byte 0x68617244
-    .4byte 0x61746100
-    .4byte 0x5364536C
-    .4byte 0x4368722E
-    .4byte 0x75736400
+    .asciz "MnSlChr.dat"
+    .balign 4
+    .asciz "MnExtAll.dat"
+    .balign 4
+    .asciz "MnSlChr.usd"
+    .balign 4
+    .asciz "MnExtAll.usd"
+    .balign 4
+    .asciz "MnSelectChrDataTable"
+    .balign 4
+    .asciz "SdSlChr.dat"
+    .balign 4
+    .asciz "SIS_SelCharData"
+    .balign 4
+    .asciz "SdSlChr.usd"
 
 
 .section .bss, "wa"

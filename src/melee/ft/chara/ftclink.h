@@ -18,7 +18,7 @@ typedef struct _CLinkAttributes {
     s32 x58_pad[(0xBC - 0x58) / 4];
     s32 xBC;
     s32 xC0;
-    s32 xC4;
+    f32 xC4;
     s32 xC8_pad[(0xD8 - 0xC8) / 4];
     f32 xD8;
 } CLinkAttributes;

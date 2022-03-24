@@ -12835,9 +12835,7 @@ lbl_804D3948:
     .balign 4
 .global lbl_804D394C
 lbl_804D394C:
-    .4byte 0x6572726F
-    .4byte 0x720A0000
-    .4byte 0x00000000
+    .asciz "error\n"
 
 
 .section .sbss

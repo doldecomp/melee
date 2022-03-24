@@ -83,7 +83,12 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftkoopa.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkoopa.s.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftmars.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMars.c.o      \
+	$(BUILD_DIR)/asm/melee/ft/chara/ftmars.s.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialN.c.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialS.c.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialHi.c.o      \
+	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialLw.c.o      \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o 		\
@@ -91,17 +96,27 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftclink.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftclink_2.c.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftclink.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftdrmario_2.c.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftdrmario.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftfalco.c.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftfalco.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftpichu.c.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftganon.c.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftganon.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftemblem.c.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftemblem.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftzakoboy.c.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftzakoboy.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftzakogirl.c.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftzakogirl.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftgigakoopa.c.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftgigakoopa.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftsandbag.c.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftsandbag.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.s.o 		            \
@@ -124,7 +139,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grzebes.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grcorneria.s.o 	 	            \
 	$(BUILD_DIR)/src/melee/gr/grstory.c.o 		 			\
-	$(BUILD_DIR)/asm/melee/gr/grstory.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/gronett.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gr/grbigblue.s.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grmutecity.s.o 	 	            \
@@ -135,7 +149,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grinishie2.s.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grkraid.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grrcruise.s.o 	 	            \
-	$(BUILD_DIR)/asm/melee/gr/grshrine.s.o 		            \
+	$(BUILD_DIR)/src/melee/gr/grshrine.c.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/gryorster.s.o 	 	            \
 	$(BUILD_DIR)/asm/melee/gr/grgarden.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grvenom.s.o 		 			\
@@ -155,7 +169,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grflatzone.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grpushon.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grfigureget.s.o 				\
-	$(BUILD_DIR)/asm/melee/gr/grbattle.s.o 		            \
+	$(BUILD_DIR)/src/melee/gr/grbattle.c.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grlast.s.o 			            \
 	$(BUILD_DIR)/asm/melee/gr/grhomerun.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grheal.s.o 			            \

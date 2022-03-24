@@ -370,8 +370,6 @@ float lbvector_sqrtf_accurate(float x)
     return sqrtf_accurate(x);
 }
 
-#define assert_line(condition, line) ((condition) ? ((void) 0) : __assert(__FILE__, line, #condition))
-
 extern MtxPtr func_80369688(HSD_CObj *);
 
 
@@ -390,10 +388,10 @@ Vec *lbvector_WorldToScreen(HSD_CObj *cobj, const Point3d *pos3d, Point3d *scree
     MtxPtr mvMtx;  // modelview matrix
     float f1;
 
-    assert_line(pos3d, 676);
-    assert_line(pos3d->x>-50000.0F&&pos3d->x<50000.0F, 677);
-    assert_line(pos3d->y>-50000.0F&&pos3d->y<50000.0F, 678);
-    assert_line(pos3d->z>-50000.0F&&pos3d->z<50000.0F, 679);
+    assert_line(676, pos3d);
+    assert_line(677, pos3d->x>-50000.0F&&pos3d->x<50000.0F);
+    assert_line(678, pos3d->y>-50000.0F&&pos3d->y<50000.0F);
+    assert_line(679, pos3d->z>-50000.0F&&pos3d->z<50000.0F);
 
     point = *pos3d;
     switch (HSD_CObjGetProjectionType(cobj))

@@ -20,12 +20,19 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftgigakoopa.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftkoopa.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmario.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMars.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialN.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialS.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialHi.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialLw.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftness.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpeach.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpichu.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftsandbag.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakoboy.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakogirl.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grbattle.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grshrine.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/grstory.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/stage.c.o\
 	$(EPILOGUE_DIR)/src/melee/pl/player.c.o\

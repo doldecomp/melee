@@ -4903,15 +4903,8 @@ lbl_803E1334:
     .4byte 0x00000001
     .4byte lbl_803E1248
     .4byte 0x00000006
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E138C
 lbl_803E138C:
     .asciz "grpstadium.c"
@@ -5034,19 +5027,12 @@ lbl_803E1534:
     .4byte 0x82818294
     .4byte 0x82858284
     .4byte NULL
-    .4byte 0x436F6D70
-    .4byte 0x75746572
-    .4byte 0x20506C61
-    .4byte 0x79657220
-    .4byte 0x44656665
-    .4byte 0x61746564
-    .4byte NULL
-    .4byte 0x2163616E
-    .4byte 0x63656C66
-    .4byte 0x6C616700
-    .4byte 0x6D61705F
-    .4byte 0x676F626A
-    .4byte NULL
+    .asciz "Computer Player Defeated"
+    .balign 4
+    .asciz "!cancelflag"
+    .balign 4
+    .asciz "map_gobj"
+    .balign 4
 .global lbl_803E15F0
 lbl_803E15F0:
     .asciz "GrPs1.dat"
@@ -5125,8 +5111,8 @@ lbl_8049F040:
     .balign 8
 .global lbl_804D45E8
 lbl_804D45E8:
-    .4byte 0x2F477250
-    .4byte 0x73000000
+    .asciz "/GrPs"
+    .balign 4
 .global lbl_804D45F0
 lbl_804D45F0:
     .asciz "jobj.h"

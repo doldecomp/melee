@@ -138,16 +138,8 @@ void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 #pragma always_inline on
 inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 {
-    BOOL result;
-
-    if (jobj == NULL) {
-        __assert("jobj.h", 564, "jobj");
-    }
-    result = FALSE;
-    if ((jobj->flags & 0x800000) == 0 && (jobj->flags & 0x40) != 0) {
-        result = TRUE;
-    }
-    return result;
+    assert_line(564, jobj);
+    return !(jobj->flags & 0x800000) && (jobj->flags & 0x40);
 }
 
 inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
@@ -159,23 +151,17 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 
 inline void HSD_JObjSetMtxDirty(HSD_JObj* jobj) 
 {
-    if (jobj != NULL && HSD_JObjMtxIsDirty(jobj) == FALSE) {
+    if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {
         HSD_JObjSetMtxDirtySub(jobj);
     }
 }
 
-inline HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* vec)
+inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
 {
-    if (jobj == NULL) {
-        __assert("jobj.h", 916, "jobj");
-    }
-    if (vec == NULL) {
-        __assert("jobj.h", 917, "translate");
-    }
-
-    jobj->translate = *vec;
-
-    if ((jobj->flags & 0x2000000) == 0) {
+    assert_line(916, jobj);
+    assert_line(917, translate);
+    jobj->translate = *translate;
+    if (!(jobj->flags & 0x2000000)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
