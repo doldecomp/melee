@@ -62,7 +62,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/ftwalljump.c.o 			\
 	$(BUILD_DIR)/asm/melee/ft/code_80081938.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_80081B38.s.o 		\
-	$(BUILD_DIR)/asm/melee/ft/code_8008521C_pre.s.o 		\
+	$(BUILD_DIR)/asm/melee/ft/code_8008521C.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/ftdata.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/ftlib.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_800877F8.s.o 		\
