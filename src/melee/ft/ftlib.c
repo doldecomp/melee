@@ -727,9 +727,7 @@ void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
     Fighter* fp = gobj->user_data;
     u32 unused[2];
-    if (func_8026B300(item_gobj) != It_Kind_MetalB) {
-        __assert("ftlib.c", 1117, "itGetKind(item_gobj) == It_Kind_MetalB");
-    }
+    assert_line(1117, itGetKind(item_gobj) == It_Kind_MetalB);
     func_800C8348(gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
     func_800D105C(gobj);
     func_80081C88(gobj, fp->x34_scale.y);
