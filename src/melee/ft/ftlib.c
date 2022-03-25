@@ -1,6 +1,7 @@
 #include "ftlib.h"
 
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/it/id.h>
 #include <melee/pl/player.h>
 
 extern struct {
@@ -721,8 +722,6 @@ void func_80087140(HSD_GObj* gobj)
         func_8007D92C(gobj);
     }
 }
-
-const int It_Kind_MetalB = 0x20;
 
 void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {

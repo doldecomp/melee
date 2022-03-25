@@ -45,6 +45,4 @@ inline void checkFighter2244(HSD_GObj* gobj)
     }
 }
 
-#define ITEM_CLINK_MILK 0x7B
-
 #endif

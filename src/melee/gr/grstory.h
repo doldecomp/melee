@@ -28,6 +28,4 @@ void func_801E366C(HSD_GObj*);
 s32 lbl_801E36D0(void);
 s32 lbl_801E36D8(Vec3*, u32, u8*);
 
-#define ITEM_SHYGUY 0xD2
-
 #endif
