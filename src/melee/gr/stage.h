@@ -53,7 +53,7 @@ typedef struct _StageInfo {
 
     u32 x84; // 0x84
 
-    u32 internal_stage_id; // 0x88
+    s32 internal_stage_id; // 0x88
 
     struct {
         u8 b0 : 1;
