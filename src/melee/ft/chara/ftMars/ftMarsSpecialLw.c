@@ -310,7 +310,7 @@ void lbl_80139140(HSD_GObj* gobj) {
     }
     func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_joint, 0, &sp18);
     func_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
-    if ((s32) ft->xE0_airState == 0) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         thing = 0x172;
     } else {
         thing = 0x174;

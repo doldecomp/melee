@@ -1,5 +1,7 @@
 #include "ftmario.h"
 
+#include <melee/it/id.h>
+
 extern void func_800E1368(void);
 extern const f32 lbl_804D9190;
 extern const f32 lbl_804D9194;
@@ -44,7 +46,7 @@ void ftMario_OnLoad(HSD_GObj* gobj) {
 
     sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;    
 
-    func_8026B3F8(items[0], 0x30);
+    func_8026B3F8(items[0], It_Kind_MarioFireball);
     func_8026B3F8(items[2], sA->x14);
 }
 

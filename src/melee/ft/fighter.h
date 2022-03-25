@@ -100,7 +100,9 @@ typedef struct _ftCommonData {
     /* 0x498 */ u32 x498_ledgeCooldownTime;
     u8 filler_x49C[0x5F0-0x49C];
     /* 0x5F0 */ u32 x5F0;
-    u8 filler_x5F4[0x768-0x5F4];
+    u8 filler_x5F4[0x6D8-0x5F4];
+    /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
+    u8 filler_x6DC[0x768-0x6DC];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
@@ -112,11 +114,18 @@ typedef struct _FtCollisionData
 {
     u8 data_filler_0[0x28];
     u32 x28;
+    u8 data_filler_2C[0x34 - 0x2C];
+    s32 x34;
 } FtCollisionData;
 
 typedef struct _ftData
 {
-    s32 filler_x0;
+    struct {
+        u8 x0_fill[0xFC];
+        f32 xFC;
+        u8 x100_fill[0x16C - 0x100];
+        s32 x16C_idx;
+    }* x0;
     /* 0x04 */ void* ext_attr;
     s32 filler_x4[16];
     /* 0x48 */ void* x48_items;
@@ -183,6 +192,11 @@ typedef struct _CameraBox
         u8 b6 : 1;
         u8 b7 : 1;
   } xC_flag;
+  u8 xD_fill[0x10 - 0xD];
+  Vec3 x10; // might be Vec2?
+  Vec3 x1C;
+  u8 x10_fill[0x50 - 0x28];
+  f32 x50;
 } CameraBox;
 
 typedef struct _CollData
@@ -190,7 +204,10 @@ typedef struct _CollData
     u8 filler_x0[0x40];
     /* 0x40 */ u32 x40;
     /* 0x44 */ u32 x44;
-    u8 filler_x48[0xB4-0x48];
+    u8 filler_x48[0xA8-0x48];
+    /* 0xA8 */ f32 xA8;
+    /* 0xAC */ f32 xAC;
+    /* 0xB0 */ f32 xB0;
     /* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
     /* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
     u8 filler_xBC[0x134 - 0xBC - 8];
@@ -211,6 +228,16 @@ typedef struct _ftHit
     int x134;
 } ftHit;
 
+typedef struct _S32Pair {
+    s32 x, y;
+} S32Pair;
+
+// Ground/air state for Fighter.xE0_ground_or_air
+enum {
+    GA_Ground = 0,
+    GA_Air = 1,
+};
+
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
     /* 0x4 */ FighterKind x4_fighterKind;
@@ -219,7 +246,7 @@ typedef struct _Fighter {
     u8 xD;
     u8 xE;
     u8 xF;
-    u32 x10;
+    s32 x10;
     u8 data_filler_x10[0x2C - 0x14];
     /* 0x2C */ f32 x2C_facing_direction;
     /* 0x30 */ f32 x30_facingDirectionRepeated;
@@ -234,7 +261,7 @@ typedef struct _Fighter {
     /* 0xBC */ Vec3 xBC_prevPos;
     /* 0xC8 */ Vec3 xC8_pos_delta;
     /* 0xD4 */ Vec3 xD4_unkVel;
-    /* 0xE0 */ s32 xE0_airState;
+    /* 0xE0 */ s32 xE0_ground_or_air;
     /* 0xE4 */ f32 xE4_groundAccel1;
     /* 0xE8 */ f32 xE8_groundAccel2;
     /* 0xEC */ f32 xEC_groundVel;
@@ -360,7 +387,9 @@ typedef struct _Fighter {
     u8 filler_x610[0x618 - 0x610];
     /* 0x618 */ s8 x618_flag;
     /* 0x619 */ s8 x619_flag;
-    u8 filler_x61A[0x61D - 0x61A];
+    /* 0x61A */ u8 x61A;
+    /* 0x61B */ u8 x61B_team;
+    /* 0x61C */ s8 x61C;
     /* 0x61D */ s8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
@@ -454,9 +483,9 @@ typedef struct _Fighter {
     /* 0x1969 */ u8 x1969_walljumpUsed;
     /* 0x196C */ int x196C;
     /* 0x1970 */ int x1970;
-    /* 0x1974 */ void* x1974_heldItem;
+    /* 0x1974 */ HSD_GObj* x1974_heldItem;
     /* 0x1978 */ HSD_GObj* x1978;
-    /* 0x197C */ s32 x197C;
+    /* 0x197C */ HSD_GObj* x197C;
     /* 0x1980 */ HSD_GObj* x1980;
     /* 0x1984 */ HSD_GObj* x1984_heldItemSpec;
     /* 0x1988 */ s32 x1988;
@@ -506,7 +535,7 @@ typedef struct _Fighter {
     /* 0x2092 */ s16 x2092;
     /* 0x2094 */ s32 x2094;
     /* 0x2098 */ s16 x2098;
-    s16 filler_x209A;
+    /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
     /* 0x20A0 */ s32 x20A0;
     s32 filler_x20A4[2];
@@ -520,7 +549,8 @@ typedef struct _Fighter {
     /* 0x210C */ u8 x210C_walljumpInputTimer;
     u8 filler_x210C[3];
     /* 0x2110 */ f32 x2110_walljumpWallSide;
-    u8 filler_x2114[0x2135 - 0x2114];
+    /* 0x2114 */ s32 x2114;
+    u8 filler_x2118[0x2135 - 0x2118];
     /* 0x2135 */ s8 x2135;
     s16 filler_x2136;
     /* 0x2138 */ f32 x2138_smashSinceHitbox;
@@ -540,7 +570,8 @@ typedef struct _Fighter {
     /* 0x2170 */ f32 x2170;
     u8 filler_x2174[0x2180 - 0x2174];
     /* 0x2180 */ s32 x2180;
-    u8 filler_x2184[0x2190 - 0x2184];
+    /* 0x2184 */ s32 x2184;
+    /* 0x2188 */ S32Pair x2188;
     // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
     void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
     void (*x2194_callback_x2194)(HSD_GObj *fighter); // used

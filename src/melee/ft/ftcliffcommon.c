@@ -124,7 +124,7 @@ void func_80081644(HSD_GObj* gobj)
 {
     Fighter* fighter = gobj->user_data;
     func_800761C8();
-    if ((s32) fighter->xE0_airState == 1)
+    if (fighter->xE0_ground_or_air == GA_Air)
     {
         func_8005811C(&fighter->x6F0_collData, fighter->x2340_stateVar1);
         fighter->x890->xC_flag.b0 = 1;

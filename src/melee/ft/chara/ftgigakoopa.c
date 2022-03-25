@@ -1,5 +1,7 @@
 #include "ftgigakoopa.h"
 
+#include <melee/it/id.h>
+
 asm void ftGKoopa_OnDeath()
 {
     nofralloc
@@ -41,7 +43,7 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     void** items = ftdata->x48_items;
 
     func_80132A84(ft);
-    func_8026B3F8(items[0], 0x64);
+    func_8026B3F8(items[0], It_Kind_KoopaFlame);
 
     ft->x2226_flag.bits.b1 = 1;
     ft->x222A_flag.bits.b0 = 1;
