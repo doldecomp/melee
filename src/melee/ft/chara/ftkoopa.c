@@ -1,5 +1,7 @@
 #include "ftkoopa.h"
 
+#include <melee/it/id.h>
+
 extern void* func_800BC7E0(struct HSD_GObj*);
 extern void* func_800BC8D4(struct HSD_GObj*);
 extern void* func_800DE7C0();
@@ -57,7 +59,7 @@ void ftKoopa_OnLoad(HSD_GObj* gobj) {
 
     sA = (ftKoopaAttributes*)ft->x2D4_specialAttributes;    
 
-    func_8026B3F8(items[0], 100);
+    func_8026B3F8(items[0], It_Kind_KoopaFlame);
 
     ft->x2226_flag.bits.b1 = 1;
 }

@@ -4930,8 +4930,8 @@ lbl_8026B2F8:
 /* 8026B2F8 00267ED8  38 60 00 00 */	li r3, 0
 /* 8026B2FC 00267EDC  4E 80 00 20 */	blr 
 
-.global func_8026B300
-func_8026B300:
+.global itGetKind
+itGetKind:
 /* 8026B300 00267EE0  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 8026B304 00267EE4  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 8026B308 00267EE8  4E 80 00 20 */	blr 

@@ -1,5 +1,6 @@
 #include "grstory.h"
 
+#include <melee/it/id.h>
 #include <sysdolphin/baselib/random.h>
 
 extern StageInfo stage_info;
@@ -228,7 +229,7 @@ void func_801E3418(HSD_GObj* gobj)
     UnkUserData2* map = gobj->user_data;
 
     // Don't trigger if any shy guys are still onscreen
-    if (func_8026B3C0(ITEM_SHYGUY) != 0) {
+    if (func_8026B3C0(It_Kind_Heiho) != 0) {
         return;
     }
 
