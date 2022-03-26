@@ -456,7 +456,7 @@ void func_80086A4C(HSD_GObj* gobj, f32 val)
 BOOL func_80086A58(HSD_GObj* gobj, S32Pair* x)
 {
     Fighter* fp = gobj->user_data;
-    if (!fp->x2229_flag.bits.b3 && !fp->x2220_flag.bits.b7) {
+    if (!fp->x2229_b3 && !fp->x2220_flag.bits.b7) {
         *x = fp->x2188;
     }
     return FALSE;
@@ -471,7 +471,7 @@ BOOL func_80086A8C(HSD_GObj* gobj)
     }* temp_r3;
 
     Fighter* fp = gobj->user_data;
-    if (!fp->x2229_flag.bits.b3 && !fp->x2220_flag.bits.b7) {
+    if (!fp->x2229_b3 && !fp->x2220_flag.bits.b7) {
         temp_r3 = func_80030A50();
         if (temp_r3 != NULL) {
             void* temp_r30 = temp_r3->unk28;
@@ -605,7 +605,7 @@ BOOL func_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b2 || Player_GetMoreFlagsBit4(fp->xC_playerID) ||
-        fp->x2228_flag.bits.b2 || fp->x2229_flag.bits.b3 || fp->x2220_flag.bits.b7) {
+        fp->x2228_flag.bits.b2 || fp->x2229_b3 || fp->x2220_flag.bits.b7) {
         return FALSE;
     }
     return TRUE;
@@ -754,7 +754,7 @@ s32 func_800872A4(HSD_GObj* gobj)
 void* func_800872B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->filler_x20A4;
+    return &fp->x20A4;
 }
 
 BOOL func_800872BC(HSD_GObj* gobj)

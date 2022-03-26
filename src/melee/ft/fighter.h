@@ -91,15 +91,6 @@ typedef enum CharacterKind
 } CharacterKind;
 
 
-typedef struct {
-    HSD_Joint* joint;
-    u8 padding[20];
-} UnkFighterJointStruct;
-
-struct Pair_Pointer_and_Flag {
-    UnkFighterJointStruct* unk_fighter_struct;
-    u8 flag;
-};
 
 
 // Points to data in PiCo.dat
@@ -410,7 +401,13 @@ typedef struct _Fighter {
     /* 0x2D0 */ s32 x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
-    u8 filler_x2D8[0x594 - 0x2DC];
+                f32 x2DC;
+                f32 x2E0;
+                f32 x2E4;
+                f32 x2E8;
+
+                f32 x2EC;
+    u8 filler_x2D8[0x594 - 0x2F0];
     /* 0x594 */ s32 x594_animCurrFlags1;
     u8 filler_x595[0x5E8 - 0x598];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
@@ -658,7 +655,8 @@ typedef struct _Fighter {
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
     /* 0x20A0 */ s32 x20A0;
-    s32 filler_x20A4[2];
+    /* 0x20A4 */ s32 x20A4;
+    /* 0x20A8 */ s32 x20A8;
     /* 0x20AC */ s32 x20AC;
     u8 filler_x20B0[0x2100 - 0x20B0];
     /* 0x2100 */ s8 x2100;
@@ -777,7 +775,13 @@ typedef struct _Fighter {
                         u8 b7 : 1;
                     } bits;
                 } x2228_flag;
-    /* 0x2229 */ UnkFlagStruct x2229_flag;
+                
+    /* 0x2229 */ u8 x2229_b012 : 3;
+                 u8 x2229_b3 : 1;
+                 u8 x2229_b4 : 1;
+                 u8 no_normal_motion : 1;
+                 u8 x2229_b67 : 2;
+                 
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
     /* 0x222C */ u32 x222C;
@@ -799,6 +803,26 @@ typedef struct _Fighter {
     /* 0x2358 */ float x2358_stateVar7;
 } Fighter;
 
+///// 
+typedef struct {
+    HSD_Joint* joint;
+    u8 padding[20];
+} UnkFighterJointStruct;
+
+struct Pair_Pointer_and_Flag {
+    UnkFighterJointStruct* unk_fighter_struct;
+    u8 flag;
+};
+
+struct S_TEMP1 {
+    FighterKind fighterKind;
+    u8 playerID;
+    u8 unk5;
+    UnkFlagStruct unk6;
+};
+
+
+
 // functions from fighter.s
 void func_800679B0();
 void func_80067A84();
@@ -811,7 +835,7 @@ void func_8006876C();
 void func_80068854();
 void func_80068914();
 void func_80068E64();
-void func_80068E98();
+HSD_GObj* func_80068E98(struct S_TEMP1* input);
 void func_800693AC(HSD_GObj*, s32, s32, s32, f32, f32, f32);
 void func_8006A1BC();
 void func_8006A360();
