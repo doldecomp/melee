@@ -656,7 +656,7 @@ typedef struct _Fighter {
     /* 0x2092 */ s16 x2092;
     /* 0x2094 */ s32 x2094;
     /* 0x2098 */ s16 x2098;
-    /* 0x209A */ s16 x209A;
+    /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
     /* 0x20A0 */ s32 x20A0;
     s32 filler_x20A4[2];
