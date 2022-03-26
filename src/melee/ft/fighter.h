@@ -270,7 +270,7 @@ typedef struct _Fighter {
     u8 xD;
     u8 xE;
     u8 xF;
-    u32 x10;
+    s32 x10;
     s32 x14;
     s32 x18;
     s32* x1C;
@@ -423,7 +423,7 @@ typedef struct _Fighter {
     /* 0x618 */ s8 player_id;
     /* 0x619 */ u8 costume_id;
     /* 0x61A */ u8 controller_index;
-    /* 0x61B */ s8 team;
+    /* 0x61B */ u8 team;
     /* 0x61C */ u8 x61C;
     /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
