@@ -127,6 +127,6 @@ void func_80081644(HSD_GObj* gobj)
     if ((s32) fighter->phys.xE0_airborne == 1)
     {
         func_8005811C(&fighter->x6F0_collData, fighter->x2340_stateVar1);
-        fighter->x890->xC_flag.b0 = 1;
+        fighter->x890->xC_flag.bits.b0 = 1;
     }
 }

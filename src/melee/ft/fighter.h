@@ -98,7 +98,7 @@ typedef struct {
 
 struct Pair_Pointer_and_Flag {
     UnkFighterJointStruct* unk_fighter_struct;
-    s32 flag;
+    u8 flag;
 };
 
 
@@ -121,12 +121,15 @@ typedef struct _ftCommonData {
     u8 filler_x484[0x498-0x484];
     /* 0x498 */ u32 x498_ledgeCooldownTime;
     u8 filler_x49C[0x5F0-0x49C];
-    /* 0x5F0 */ u32 x5F0;
-    u8 filler_x5F4[0x768-0x5F4];
+    /* 0x5F0 */  u32 x5F0;
+    u8 filler_x5F4[0x6DC-0x5F4];
+    u32 filler_x6DC[0x23];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
     /* 0x774 */ s32 x774;
+                u8 x780_filler[0x7E4 - 0x778];
+    /* 0x7E4 */ f32 x7E4;
     // lots of more data following, exact size to be determined
 } ftCommonData;
 
@@ -140,7 +143,10 @@ typedef struct _ftData
 {
     s32 filler_x0;
     /* 0x04 */ s32* ext_attr;
-    s32 filler_x4[16];
+    s32 x8;
+    s32 xC;
+    s32 x10;
+    s32 filler_x14[13];
     /* 0x48 */ void* x48_items;
     FtCollisionData* x4C_collisionData;
     s32 filler_x50[2];
@@ -190,16 +196,7 @@ typedef struct _FighterBone
 typedef struct _CameraBox
 {
   u32 data_filler[3];
-  struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-  } xC_flag;
+  UnkFlagStruct xC_flag;
 } CameraBox;
 
 typedef struct _CollData
@@ -219,7 +216,8 @@ typedef struct _CollData
     /* 0x160 */ int x160_rightwall_index;
     u8 filler_x160[0x174 - 0x160 - 4];
     /* 0x174 */ int x174_leftwall_index;
-    u8 filler_x174[0x1A0 - 0x174 - 4];
+    u8 filler_x174[0x1A0 - 0x174 - 8];
+    s32 x1A0;
 } CollData;
 
 typedef struct _ftHit
@@ -237,11 +235,17 @@ typedef struct _Fighter {
     u8 xE;
     u8 xF;
     u32 x10;
-    u8 data_filler_x10[0x2C - 0x14];
+    s32 x14;
+    s32 x18;
+    s32* x1C;
+    s32 x20;
+    s32 x24;
+    s32 x28;
     /* 0x2C */ f32 x2C_facing_direction;
     /* 0x30 */ f32 x30_facingDirectionRepeated;
     /* 0x34 */ Vec3 x34_scale;
-    u8 filler_x40[0x74 - 0x40];
+    f32 x40;
+    u8 filler_x40[0x74 - 0x44];
     struct phys                                                // 0x74
     {                                                          //
         Vec3 x74_anim_vel;                                         // 0x74
@@ -366,21 +370,25 @@ typedef struct _Fighter {
         /* 0x28C */ int x28C;
         /* 0x290 */ int x290_WeightDependentThrowSpeedFlags;
     } x110_attr;
-    u8 filler_x294[0x2D4 - 0x294];
+    u8 filler_x294[0x2CC - 0x294];
+    /* 0x2CC */ s32 x2CC;
+    /* 0x2D0 */ s32 x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
     u8 filler_x2D8[0x594 - 0x2DC];
-    /* 0x594 */ u8 x594_animCurrFlags1;
-    u8 filler_x595[0x5E8 - 0x595];
+    /* 0x594 */ s32 x594_animCurrFlags1;
+    u8 filler_x595[0x5E8 - 0x598];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F8 - 0x5EC];
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
     u8 filler_x610[0x618 - 0x610];
-    /* 0x618 */ s8 x618_flag;
+    /* 0x618 */ s8 player_id;
     /* 0x619 */ u8 costume_id;
-    u8 filler_x61A[0x61D - 0x61A];
+    /* 0x61A */ u8 controller_index;
+    /* 0x61B */ s8 team;
+    /* 0x61C */ u8 x61C;
     /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
@@ -612,7 +620,7 @@ typedef struct _Fighter {
     /* 0x2092 */ s16 x2092;
     /* 0x2094 */ s32 x2094;
     /* 0x2098 */ s16 x2098;
-    s16 filler_x209A;
+    /* 0x209A */ s16 x209A;
     /* 0x209C */ s16 x209C;
     /* 0x20A0 */ s32 x20A0;
     s32 filler_x20A4[2];
@@ -646,12 +654,14 @@ typedef struct _Fighter {
     /* 0x2170 */ f32 x2170;
     u8 filler_x2174[0x2180 - 0x2174];
     /* 0x2180 */ s32 x2180;
-    u8 filler_x2184[0x2190 - 0x2184];
+    /* 0x2184 */ s32 x2184;
+
+    u8 filler_x2184[0x2190 - 0x2188];
     // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
     struct cb {
         void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
         void (*x2194_callback_x2194)(HSD_GObj *fighter); // used
-        void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj *fighter); // used
+        void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj*, HSD_GObj*); // used
         void (*x219C_callback_IASA)(HSD_GObj *fighter); // used
         void (*x21A0_callback_Anim)(HSD_GObj *fighter);
         void (*x21A4_callback_Phys)(HSD_GObj *fighter); // xused
@@ -673,8 +683,10 @@ typedef struct _Fighter {
         void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
         void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
     } cb;
-
-    u8 filler_x21EC[0x2200 - 0x21EC];
+    s32 x21EC;
+    u8 filler_x21EC[0x21FC - 0x21F0];
+    u8 x21FC;
+    u8 filler_x21FC[0x2200 - 0x21FD];
     /* 0x2200 */ u32 x2200_ftcmd_var0;
     /* 0x2204 */ u32 x2200_ftcmd_var1;
     /* 0x2208 */ u32 x2200_ftcmd_var2;
@@ -702,7 +714,16 @@ typedef struct _Fighter {
     };
     /* 0x221E */ UnkFlagStruct x221E_flag;
     /* 0x221F */ UnkFlagStruct x221F_flag;
-    /* 0x2220 */ UnkFlagStruct x2220_flag;
+                struct {
+                    struct {
+                        u8 b0 : 3;
+                        u8 b3 : 1;
+                        u8 b4 : 1;
+                        u8 b5 : 1;
+                        u8 b6 : 1;
+                        u8 b7 : 1;
+                    } bits;
+                } x2220_flag;
     /* 0x2221 */ UnkFlagStruct x2221_flag;
     /* 0x2222 */ UnkFlagStruct x2222_flag;
     /* 0x2224 */ UnkFlagStruct x2223_flag;
@@ -710,7 +731,17 @@ typedef struct _Fighter {
     /* 0x2224 */ UnkFlagStruct x2225_flag;
     /* 0x2226 */ UnkFlagStruct x2226_flag;
     /* 0x2227 */ UnkFlagStruct x2227_flag;
-    /* 0x2228 */ UnkFlagStruct x2228_flag;
+    /* 0x2228 */ struct {  ///UnkFlagStruct does not quite work
+                    struct {
+                        u8 b0 : 1;
+                        u8 b1 : 1;
+                        u8 b2 : 1;
+                        u8 b3 : 2;
+                        u8 b5 : 1;
+                        u8 b6 : 1;
+                        u8 b7 : 1;
+                    } bits;
+                } x2228_flag;
     /* 0x2229 */ UnkFlagStruct x2229_flag;
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
