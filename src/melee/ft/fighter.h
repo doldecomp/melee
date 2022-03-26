@@ -776,7 +776,9 @@ typedef struct _Fighter {
                     } bits;
                 } x2228_flag;
                 
-    /* 0x2229 */ u8 x2229_b012 : 3;
+    /* 0x2229 */ u8 x2229_b0 : 1;
+                 u8 x2229_b1 : 1;
+                 u8 x2229_b2 : 1;
                  u8 x2229_b3 : 1;
                  u8 x2229_b4 : 1;
                  u8 no_normal_motion : 1;
