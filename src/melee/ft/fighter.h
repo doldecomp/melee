@@ -225,7 +225,7 @@ typedef struct _CollData
     u8 filler_x0[0x40];
     /* 0x40 */ u32 x40;
     /* 0x44 */ u32 x44;
-    u8 filler_x48[0xB4-0x48];
+    u8 filler_x48[0xA8-0x48];
     /* 0xA8 */ f32 xA8;
     /* 0xAC */ f32 xAC;
     /* 0xB0 */ f32 xB0;
