@@ -282,26 +282,25 @@ typedef struct _Fighter {
     /* 0x34 */ Vec3 x34_scale;
     f32 x40;
     u8 filler_x40[0x74 - 0x44];
-    struct phys                                                // 0x74
-    {                                                          //
-        Vec3 x74_anim_vel;                                         // 0x74
-        Vec3 x80_self_vel;                                         // 0x80
-        Vec3 x8c_kb_vel;                                           // 0x8C
-        Vec3 x98_atk_shield_kb;                                // 0x98
-        Vec3 xA4_unk_vel;                                      // 0xA4
-        Vec3 xB0_pos;                                          // 0xb0
-        Vec3 xBC_prevPos;                                     // 0xBC
-        Vec3 pos_delta;                                        // 0xC8
-        Vec3 xD4_unk_vel;                                        // 0xD4
-        int xE0_airborne;                                         // 0xE0
-        float xE4_ground_accel_1; // 0xE4
-        float xE8_ground_accel_2;   // 0xE8
-        float xEC_ground_vel;                                    // 0xEC
-        float xF0_ground_kb_vel;
-        float xF4_ground_attacker_shield_kb_vel;
-        Vec2 xF8_playerNudgeVel;
-        float x100;
-    } phys;   
+
+    Vec3 x74_anim_vel;                                         // 0x74
+    Vec3 x80_self_vel;                                         // 0x80
+    Vec3 x8c_kb_vel;                                           // 0x8C
+    Vec3 x98_atk_shield_kb;                                // 0x98
+    Vec3 xA4_unk_vel;                                      // 0xA4
+    Vec3 xB0_pos;                                          // 0xb0
+    Vec3 xBC_prevPos;                                     // 0xBC
+    Vec3 pos_delta;                                        // 0xC8
+    Vec3 xD4_unk_vel;                                        // 0xD4
+    s32 ground_or_air;                                         // 0xE0
+    float xE4_ground_accel_1; // 0xE4
+    float xE8_ground_accel_2;   // 0xE8
+    float xEC_ground_vel;                                    // 0xEC
+    float xF0_ground_kb_vel;
+    float xF4_ground_attacker_shield_kb_vel;
+    Vec2 xF8_playerNudgeVel;
+    float x100;
+ 
     s32 filler_x104;
     /* 0x108 */ void* x108_costume_archive;
     /* 0x10C */ ftData* x10C_ftData;
