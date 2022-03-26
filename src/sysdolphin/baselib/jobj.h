@@ -164,16 +164,12 @@ inline void HSD_JObjSetMtxDirty(HSD_JObj* jobj)
     }
 }
 
-inline HSD_JObjCheckObj(HSD_JObj* jobj)
+inline HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* vec)
 {
 
     if (jobj == NULL) {
         __assert("jobj.h", 916, "jobj");
     }
-}
-
-inline HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* vec)
-{
 
     if (vec == NULL) {
         __assert("jobj.h", 917, "translate");

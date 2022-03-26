@@ -534,10 +534,10 @@ void func_80067C98(register Fighter* ft) {
 }
 
 
-// https://decomp.me/scratch/HxxcT
+//// https://decomp.me/scratch/vhZiK
 // Matches
 void func_80068354(HSD_GObj* fighterObj/*r30*/) {
-    void (*temp_r12)(HSD_GObj* gobj);
+ void (*temp_r12)(HSD_GObj* gobj);
     Vec3 vec_sp20;
     f32 temp_f1;
     HSD_JObj* jobj;
@@ -554,10 +554,11 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
 
     //@24
     func_80067C98(fighter_r31);
-    jobj  = temp_r28 = fighterObj->hsd_obj;
+    jobj = fighterObj->hsd_obj;
+    temp_r28 = jobj;
 
     //@2c
-    HSD_JObjCheckObj(jobj);
+    // HSD_JObjCheckObj(jobj);
     HSD_JObjSetTranslate(temp_r28, &fighter_r31->phys.xB0_pos);
 
     //@d0
@@ -582,14 +583,14 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
     //@15c
     func_80076064(fighter_r31);
     //@164
-    jobj = temp_r28 = fighterObj->hsd_obj;
-    HSD_JObjCheckObj(jobj);
-    HSD_JObjSetTranslate(temp_r28, &fighter_r31->phys.xB0_pos);
+    temp_r28 = jobj = fighterObj->hsd_obj;
+    // HSD_JObjCheckObj(jobj);
+    HSD_JObjSetTranslate(jobj, &fighter_r31->phys.xB0_pos);
 
     //@208
     func_8006C0F0(fighterObj);
     //@210
-        temp_r28 = fighterObj->hsd_obj;
+        jobj = fighterObj->hsd_obj;
 
     fighter_r29 = fighterObj->user_data;
     //@218
@@ -604,7 +605,8 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
     vec_sp20.y = temp_f1;
     vec_sp20.z = temp_f1;
     //@248
-    HSD_JObjSetScale(temp_r28, &vec_sp20);
+    HSD_JObjSetScale(jobj, &vec_sp20);
+
 
     //@2c8
     func_800BFFAC(fighter_r31);
@@ -624,6 +626,8 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
     func_8007C17C(fighterObj);
     func_8007C630(fighterObj);
 }
+
+
 
 ///https://decomp.me/scratch/ozjB3
 void func_800686E4(HSD_GObj* fighterObj) {
@@ -4230,13 +4234,10 @@ void func_8006C0F0(HSD_GObj* fighterObj)
 }
 
 ///https://decomp.me/scratch/m9K8F
+////latest with correct inlines: https://decomp.me/scratch/m9K8F
 void func_8006C27C(HSD_GObj* fighterObj, s32 unused) {
 
     Fighter* fighter_r4;
-    HSD_JObj* jobj;
-    HSD_JObj* temp;
-    HSD_JObj* jobj2;
-    HSD_JObj* temp2;
 
     fighter_r4 = fighterObj->user_data;
 
@@ -4251,9 +4252,8 @@ void func_8006C27C(HSD_GObj* fighterObj, s32 unused) {
         }
 
         fighter_r4->x2223_flag.bits.b5 = 0;
-        jobj = temp = fighterObj->hsd_obj;
-        HSD_JObjCheckObj(jobj);
-        HSD_JObjSetTranslate(temp, &fighter_r4->phys.xB0_pos);
+
+        HSD_JObjSetTranslate(fighterObj->hsd_obj, &fighter_r4->phys.xB0_pos);
 
         if (fighter_r4->cb.x21A8_callback_Coll != 0U) {
             fighter_r4->cb.x21A8_callback_Coll(fighterObj);
@@ -4276,9 +4276,7 @@ void func_8006C27C(HSD_GObj* fighterObj, s32 unused) {
             }
         }
 
-        jobj2 = temp2 = fighterObj->hsd_obj;
-        HSD_JObjCheckObj(jobj2);
-        HSD_JObjSetTranslate(temp2, &fighter_r4->phys.xB0_pos);
+        HSD_JObjSetTranslate(fighterObj->hsd_obj, &fighter_r4->phys.xB0_pos);
 
     }
 }
