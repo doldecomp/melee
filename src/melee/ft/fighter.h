@@ -109,11 +109,13 @@ typedef struct _ftCommonData {
     u8 filler_x9C[0x200-0x9C];
     /* 0x200 */ f32 x200;
     /* 0x204 */ f32 x204_knockbackFrameDecay;
-    u8 filler_x208[0x260-0x208];
+    u8 filler_x208[0x21C-0x208];
+    /* 0x21C */ f32 x21C;
+    u8 filler_x220[0x260-0x220];
     /* 0x260 */ f32 x260;
     u8 filler_x264[0x294-0x264];
     /* 0x294 */ f32 x294;
-    u8 filler_x298[0x3E8-0x298];
+    u8 filler_0x3E8[0x3E8-0x298];
     /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
     /* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
     u8 filler_x3F0[0x480-0x3F0];
@@ -122,8 +124,9 @@ typedef struct _ftCommonData {
     /* 0x498 */ u32 x498_ledgeCooldownTime;
     u8 filler_x49C[0x5F0-0x49C];
     /* 0x5F0 */  u32 x5F0;
-    u8 filler_x5F4[0x6DC-0x5F4];
-    u32 filler_x6DC[0x23];
+    u8 filler_x5F4[0x6D8-0x5F4];
+   /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
+    u8 filler_x6DC[0x768-0x6DC];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
@@ -137,12 +140,19 @@ typedef struct _FtCollisionData
 {
     u8 data_filler_0[0x28];
     u32 x28;
+    u8 data_filler_2C[0x34 - 0x2C];
+    s32 x34;
 } FtCollisionData;
 
 typedef struct _ftData
 {
-    s32 filler_x0;
-    /* 0x04 */ s32* ext_attr;
+    struct {
+        u8 x0_fill[0xFC];
+        f32 xFC;
+        u8 x100_fill[0x16C - 0x100];
+        s32 x16C_idx;
+    }* x0;
+    /* 0x04 */ void* ext_attr;
     s32 x8;
     s32 xC;
     s32 x10;
@@ -193,10 +203,21 @@ typedef struct _FighterBone
   u32 data_filler[2];
 } FighterBone;
 
+
+typedef struct _Hitbox {
+    s32 x0;
+    u8 filler[0x134];
+} Hitbox;
+
 typedef struct _CameraBox
 {
   u32 data_filler[3];
   UnkFlagStruct xC_flag;
+  u8 xD_fill[0x10 - 0xD];
+  Vec3 x10; // might be Vec2?
+  Vec3 x1C;
+  u8 x10_fill[0x50 - 0x28];
+  f32 x50;
 } CameraBox;
 
 typedef struct _CollData
@@ -205,6 +226,9 @@ typedef struct _CollData
     /* 0x40 */ u32 x40;
     /* 0x44 */ u32 x44;
     u8 filler_x48[0xB4-0x48];
+    /* 0xA8 */ f32 xA8;
+    /* 0xAC */ f32 xAC;
+    /* 0xB0 */ f32 xB0;
     /* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
     /* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
     u8 filler_xBC[0x134 - 0xBC - 8];
@@ -225,6 +249,18 @@ typedef struct _ftHit
     u8 filler_x0[0x134];
     int x134;
 } ftHit;
+
+typedef struct _S32Pair {
+    s32 x, y;
+} S32Pair;
+
+// Ground/air state for Fighter.xE0_ground_or_air
+enum {
+    GA_Ground = 0,
+    GA_Air = 1,
+};
+
+
 
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
@@ -392,8 +428,8 @@ typedef struct _Fighter {
     /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
-                f32 x624;
-                f32 x628;
+                f32 x624_lstick_y;
+                f32 x628_lstick_z;
                 f32 x62C;
 
                 f32 x630;
@@ -473,8 +509,8 @@ typedef struct _Fighter {
     s32 filler_x8A4[2];
     /* 0x8AC */ s32 x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
-    /* 0x914 */ f32 x914;
-    u8 filler_x918[0x1064 - 0x918];
+    /* 0x914 */ Hitbox x914[4];
+    u8 filler_xDF4[0x1064 - 0xDF4];
     /* 0x1064 */ ftHit x1064_thrownHitbox;
     u8 filler_x1064[0x1828 - 0x1064 - sizeof(ftHit)];
     /* 0x1828 */ s32 x1828;
@@ -567,7 +603,7 @@ typedef struct _Fighter {
     /* 0x1970 */ int x1970;
     /* 0x1974 */ void* x1974_heldItem;
     /* 0x1978 */ HSD_GObj* x1978;
-    /* 0x197C */ s32 x197C;
+    /* 0x197C */ HSD_GObj* x197C;
     /* 0x1980 */ HSD_GObj* x1980;
     /* 0x1984 */ HSD_GObj* x1984_heldItemSpec;
     /* 0x1988 */ s32 x1988;
@@ -634,7 +670,8 @@ typedef struct _Fighter {
     /* 0x210C */ u8 x210C_walljumpInputTimer;
     u8 filler_x210C[3];
     /* 0x2110 */ f32 x2110_walljumpWallSide;
-    u8 filler_x2114[0x2135 - 0x2114];
+    /* 0x2114 */ s32 x2114;
+    u8 filler_x2114[0x2135 - 0x2118];
     /* 0x2135 */ s8 x2135;
     s16 filler_x2136;
     /* 0x2138 */ f32 x2138_smashSinceHitbox;
@@ -655,8 +692,7 @@ typedef struct _Fighter {
     u8 filler_x2174[0x2180 - 0x2174];
     /* 0x2180 */ s32 x2180;
     /* 0x2184 */ s32 x2184;
-
-    u8 filler_x2184[0x2190 - 0x2188];
+    /* 0x2188 */ S32Pair x2188;
     // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
     struct cb {
         void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
@@ -682,8 +718,8 @@ typedef struct _Fighter {
         void (*x21E0_callback_OnDeath)(HSD_GObj *fighter); // used
         void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
         void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
+        void (*x21EC_callback)(HSD_GObj *fighter);
     } cb;
-    s32 x21EC;
     u8 filler_x21EC[0x21FC - 0x21F0];
     u8 x21FC;
     u8 filler_x21FC[0x2200 - 0x21FD];

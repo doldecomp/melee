@@ -88,7 +88,7 @@ void func_8014FBA4(HSD_GObj* gobj)
     f32 temp_f1;
 
     Fighter* fighter = gobj->user_data;
-    if ((s32) fighter->phys.xE0_airborne == 1) {
+    if ((s32) fighter->phys.xE0_airborne == GA_Air) {
         func_8007D7FC(fighter);
     }
 
@@ -104,12 +104,12 @@ void func_8014FC24(void) {
     return;
 }
 
-void func_8014FC28(void)
+void func_8014FC28(HSD_GObj* gobj)
 {
-    func_80084F3C();
+    func_80084F3C(gobj);
 }
 
-void func_8014FC48(void)
+void func_8014FC48(HSD_GObj* gobj)
 {
-    func_80083F88();
+    func_80083F88(gobj);
 }

@@ -673,8 +673,8 @@ void func_80068854(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
 
     fighter->x62C = 0.0f;
-    fighter->x628 = 0.0f;
-    fighter->x624 = 0.0f;
+    fighter->x628_lstick_z = 0.0f;
+    fighter->x624_lstick_y = 0.0f;
     fighter->x620_lstick_x = 0.0f;
 
     fighter->x644 = 0.0f;
@@ -800,8 +800,8 @@ void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
     temp_r6 = fighterObj->user_data;
 
     temp_r6->x62C = 0.0f;
-    temp_r6->x628 = 0.0f;
-    temp_r6->x624 = 0.0f;
+    temp_r6->x628_lstick_z = 0.0f;
+    temp_r6->x624_lstick_y = 0.0f;
     temp_r6->x620_lstick_x = 0.0f;
     temp_r6->x644 = 0.0f;
     temp_r6->x640 = 0.0f;
@@ -861,7 +861,7 @@ void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
     fighter_r31->x209A = 0;
     fighter_r31->x221E_flag.bits.b5 = 0;
     fighter_r31->x221F_flag.bits.b0 = 0;
-    fighter_r31->x21EC = 0;
+    fighter_r31->cb.x21EC_callback = 0;
 
     fighter_r31->x221D_flag.bits.b3 = 0;
     fighter_r31->x221D_flag.bits.b4 = 0;
@@ -2717,7 +2717,7 @@ lbl_8006A7B4:
 /* 8006A7F0 000673D0  80 7F 19 74 */	lwz r3, 0x1974(r31)
 /* 8006A7F4 000673D4  28 03 00 00 */	cmplwi r3, 0
 /* 8006A7F8 000673D8  41 82 00 2C */	beq lbl_8006A824
-/* 8006A7FC 000673DC  48 20 0B 05 */	bl func_8026B300
+/* 8006A7FC 000673DC  48 20 0B 05 */	bl itGetKind
 /* 8006A800 000673E0  2C 03 00 67 */	cmpwi r3, 0x67
 /* 8006A804 000673E4  40 82 00 20 */	bne lbl_8006A824
 /* 8006A808 000673E8  88 1F 22 21 */	lbz r0, 0x2221(r31)
@@ -2843,7 +2843,7 @@ lbl_8006A9C4:
 /* 8006A9C4 000675A4  80 7F 19 74 */	lwz r3, 0x1974(r31)
 /* 8006A9C8 000675A8  28 03 00 00 */	cmplwi r3, 0
 /* 8006A9CC 000675AC  41 82 00 1C */	beq lbl_8006A9E8
-/* 8006A9D0 000675B0  48 20 09 31 */	bl func_8026B300
+/* 8006A9D0 000675B0  48 20 09 31 */	bl itGetKind
 /* 8006A9D4 000675B4  2C 03 00 1C */	cmpwi r3, 0x1c
 /* 8006A9D8 000675B8  41 82 00 08 */	beq lbl_8006A9E0
 /* 8006A9DC 000675BC  48 00 00 0C */	b lbl_8006A9E8

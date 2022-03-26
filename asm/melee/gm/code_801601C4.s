@@ -80331,54 +80331,20 @@ lbl_803D8D08:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x476D4B75
-    .4byte 0x6D697465
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6531
-    .4byte 0x306D616E
-    .4byte NULL
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6531
-    .4byte 0x30306D61
-    .4byte 0x6E000000
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6531
-    .4byte 0x306D696E
-    .4byte NULL
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6536
-    .4byte 0x306D696E
-    .4byte NULL
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6545
-    .4byte 0x6E646C65
-    .4byte 0x73730000
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C654D
-    .4byte 0x65726369
-    .4byte 0x6C657373
-    .4byte 0x6C790000
-    .4byte NULL
+    .asciz "GmKumite.dat"
+    .balign 4
+    .asciz "gmKumiteSystemTable10man"
+    .balign 4
+    .asciz "gmKumiteSystemTable100man"
+    .balign 4
+    .asciz "gmKumiteSystemTable10min"
+    .balign 4
+    .asciz "gmKumiteSystemTable60min"
+    .balign 4
+    .asciz "gmKumiteSystemTableEndless"
+    .balign 4
+    .asciz "gmKumiteSystemTableMercilessly"
+    .balign 8
 .global lbl_803D9248
 lbl_803D9248:
     .4byte 0x3F19999A
@@ -80757,12 +80723,8 @@ lbl_803D9750:
     .4byte 0x00060000
     .4byte 0x00200000
     .4byte 0x00009000
-    .4byte 0x53634974
-    .4byte 0x724E6F72
-    .4byte 0x6D616C5F
-    .4byte 0x7363656E
-    .4byte 0x655F6461
-    .4byte 0x74610000
+    .asciz "ScItrNormal_scene_data"
+    .balign 4
 .global lbl_803D9828
 lbl_803D9828:
     .4byte 0x00120015
@@ -80807,24 +80769,14 @@ jtbl_803D98A4:
 	.4byte lbl_801897E4
 	.4byte lbl_8018996C
 	.4byte lbl_8018999C
-    .4byte 0x53634761
-    .4byte 0x6D547261
-    .4byte 0x696E696E
-    .4byte 0x675F7363
-    .4byte 0x656E655F
-    .4byte 0x6D6F6465
-    .4byte 0x6C730000
-    .4byte 0x53645472
-    .4byte 0x61696E2E
-    .4byte 0x75736400
-    .4byte 0x5349535F
-    .4byte 0x54726169
-    .4byte 0x6E696E67
-    .4byte 0x44617461
-    .4byte NULL
-    .4byte 0x53645472
-    .4byte 0x61696E2E
-    .4byte 0x64617400
+    .asciz "ScGamTraining_scene_models"
+    .balign 4
+    .asciz "SdTrain.usd"
+    .balign 4
+    .asciz "SIS_TrainingData"
+    .balign 4
+    .asciz "SdTrain.dat"
+    .balign 4
 .global lbl_803D9910
 lbl_803D9910:
     .4byte 0x04000032
@@ -81299,42 +81251,20 @@ jtbl_803DA024:
 	.4byte lbl_80190CB8
 	.4byte lbl_80190E04
 	.4byte lbl_80190D50
-    .4byte 0x53634761
-    .4byte 0x6D546F75
-    .4byte 0x725F7363
-    .4byte 0x656E655F
-    .4byte 0x64617461
-    .4byte NULL
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte NULL
-    .4byte 0x546D426F
-    .4byte 0x782E6461
-    .4byte 0x74000000
-    .4byte 0x746F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E745F62
-    .4byte 0x6F78325F
-    .4byte 0x61727261
-    .4byte 0x79000000
-    .4byte 0x746F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E745F62
-    .4byte 0x6F78335F
-    .4byte 0x61727261
-    .4byte 0x79000000
-    .4byte 0x746F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E745F62
-    .4byte 0x6F78345F
-    .4byte 0x61727261
-    .4byte 0x79000000
-    .4byte 0x5349535F
-    .4byte 0x546F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E744461
-    .4byte 0x74610000
-    .4byte NULL
+    .asciz "ScGamTour_scene_data"
+    .balign 4
+    .asciz "MnExtAll"
+    .balign 4
+    .asciz "TmBox.dat"
+    .balign 4
+    .asciz "tournament_box2_array"
+    .balign 4
+    .asciz "tournament_box3_array"
+    .balign 4
+    .asciz "tournament_box4_array"
+    .balign 4
+    .asciz "SIS_TournamentData"
+    .balign 8
 .global lbl_803DA0D0
 lbl_803DA0D0:
     .4byte 0x00010203
@@ -81501,17 +81431,10 @@ lbl_803DA2E0:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x53634761
-    .4byte 0x6D546F75
-    .4byte 0x725F7363
-    .4byte 0x656E655F
-    .4byte 0x64617461
-    .4byte NULL
-    .4byte 0x5349535F
-    .4byte 0x546F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E744461
-    .4byte 0x74610000
+    .asciz "ScGamTour_scene_data"
+    .balign 4
+    .asciz "SIS_TournamentData"
+    .balign 4
 .global lbl_803DA3D0
 lbl_803DA3D0:
     .asciz "ckind:%d\n"

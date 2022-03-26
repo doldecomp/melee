@@ -1,5 +1,7 @@
 #include "ftfalco.h"
 
+#include <melee/it/id.h>
+
 void ftFalco_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;

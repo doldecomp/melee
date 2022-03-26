@@ -71,19 +71,26 @@ typedef struct _StageInfo {
 
 typedef struct {
     void (*callback0)(struct _HSD_GObj*);
+    s32 (*callback1)();
+    void (*callback2)();
+    void (*callback3)();
+    u32 flags;
+} StageCallbacks;
+
+typedef struct _StageData {
+    u32 flags1;
+    StageCallbacks* callbacks;
+    const char* data1;
+    void (*callback0)();
     void (*callback1)();
     void (*callback2)();
     void (*callback3)();
-    void (*callback4)();
-} StageCallbacks;
-
-extern struct {
-    StageCallbacks callbacks[4];
-    int pad2[16];
-    char str1[4]; // TODO expand to actual size
-    u8 x94_pad[0xb4 - 0x90 - 4];
-    char str2[4]; // TODO expand to actual size
-} lbl_803E26F0;
+    s32 (*callback4)();
+    s32 (*callback5)();
+    s32 (*callback6)();
+    u32 flags2;
+    u32 unused[2];
+} StageData;
 
 typedef struct _Map {
     int x0;                 // 0x0
@@ -113,11 +120,11 @@ typedef struct _Map {
     int x18;    // 0x18
     void* x1C_callback;
     u8 x20_pad[0xC4 - 0x20];
-    s8 xC4;
-    s8 xC5;
-    s16 xC6;
+    s32 xC4;
     s32 xC8;
-    u8 xCC_pad[0x218 - 0xCC];
+    s32 xCC;
+    s32 xD0;
+    u8 xD4_pad[0x218 - 0xD4];
 } Map;
 
 f32 Stage_GetCamBoundsLeftOffset();

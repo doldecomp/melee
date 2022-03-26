@@ -1,5 +1,7 @@
 #include "ftclink.h"
 
+#include <melee/it/id.h>
+
 void ftCLink_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
@@ -33,7 +35,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[2], attrs->xBC);
     func_8026B3F8(items[3], attrs->xC);
     func_8026B3F8(items[4], attrs->x10);
-    func_8026B3F8(items[5], ITEM_CLINK_MILK);
+    func_8026B3F8(items[5], It_Kind_ClinkMilk);
     func_800753D4(ft, *lbl_804D6540[ft->x4_fighterKind], items[6]);
 }
 

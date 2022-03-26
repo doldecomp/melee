@@ -8,7 +8,7 @@ BOOL func_80081298(HSD_GObj* gobj) {
     s32 unused1, unused2;
 
     Fighter* fighter = gobj->user_data;
-    if (fighter->x624 <= -lbl_804D6554->x480) {
+    if (fighter->x624_lstick_y <= -lbl_804D6554->x480) {
         return FALSE;
     }
     if (((fighter->x6F0_collData.x134_envFlags & 0x03000000) != 0)
@@ -124,7 +124,7 @@ void func_80081644(HSD_GObj* gobj)
 {
     Fighter* fighter = gobj->user_data;
     func_800761C8();
-    if ((s32) fighter->phys.xE0_airborne == 1)
+    if ((s32) fighter->phys.xE0_airborne == GA_Air)
     {
         func_8005811C(&fighter->x6F0_collData, fighter->x2340_stateVar1);
         fighter->x890->xC_flag.bits.b0 = 1;
