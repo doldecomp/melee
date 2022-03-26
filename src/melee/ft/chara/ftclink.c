@@ -138,13 +138,13 @@ void func_80149114(HSD_GObj* gobj)
     Fighter* ft = gobj->user_data;
     CLinkAttributes* temp_r4 = (void*) ft->x10C_ftData->ext_attr;
     f32 ftmp = func_80092ED8(ft->x19A4, temp_r4, temp_r4->xD8);
-    ft->phys.xEC_ground_vel = ftmp * lbl_804D6554->x294;
+    ft->xEC_ground_vel = ftmp * lbl_804D6554->x294;
     if (ft->x19AC < 0.0f) {
-        ftmp = ft->phys.xEC_ground_vel;
+        ftmp = ft->xEC_ground_vel;
     } else {
-        ftmp = -ft->phys.xEC_ground_vel;
+        ftmp = -ft->xEC_ground_vel;
     }
-    ft->phys.xEC_ground_vel = ftmp;
+    ft->xEC_ground_vel = ftmp;
     func_80088148(ft, 0x111DA, 0x7F, 0x40);
 }
 

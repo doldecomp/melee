@@ -6,7 +6,7 @@ void func_801389CC(HSD_GObj* gobj) {
     Fighter* ft;
     u32 unused[2];
 
-    ((Fighter*)gobj->user_data)->phys.x80_self_vel.y = 0.0f;
+    ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0f;
     func_800693AC(gobj, 0x171, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
@@ -24,8 +24,8 @@ void func_80138A30(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     attr = ft->x2D4_specialAttributes;
-    ft->phys.x80_self_vel.x /= attr->x4C;
-    ft->phys.x80_self_vel.y = 0.0f;
+    ft->x80_self_vel.x /= attr->x4C;
+    ft->x80_self_vel.y = 0.0f;
     func_800693AC(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft2 = gobj->user_data;
@@ -310,7 +310,7 @@ void lbl_80139140(HSD_GObj* gobj) {
     }
     func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_jobj, 0, &sp18);
     func_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
-    if (ft->phys.xE0_airborne == GA_Ground) {
+    if (ft->ground_or_air == GA_Ground) {
         thing = 0x172;
     } else {
         thing = 0x174;

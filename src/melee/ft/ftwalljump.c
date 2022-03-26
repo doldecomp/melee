@@ -46,9 +46,9 @@ BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct/*r3*/)
                     ecb_sp18.x = pCollData_r6->xBC_ecbCurrCorrect_left.x;
                     ecb_sp18.y = pCollData_r6->xBC_ecbCurrCorrect_left.y;
                     ecb_sp18.z = 0.0f;
-                    ecb_sp18.x += pCharData_r31->phys.xB0_pos.x;
-                    ecb_sp18.y += pCharData_r31->phys.xB0_pos.y;
-                    ecb_sp18.z += pCharData_r31->phys.xB0_pos.z;
+                    ecb_sp18.x += pCharData_r31->xB0_pos.x;
+                    ecb_sp18.y += pCharData_r31->xB0_pos.y;
+                    ecb_sp18.z += pCharData_r31->xB0_pos.z;
 					// compute distance to the wall?
                     if (!func_800567C0(pCollData_r6->x174_leftwall_index, &ecb_sp18, &wallPos_sp24))
                         wallPos_sp24.x = 0.0f;
@@ -59,15 +59,15 @@ BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct/*r3*/)
                     ecb_sp18.x = pCollData_r6->xB4_ecbCurrCorrect_right.x;
                     ecb_sp18.y = pCollData_r6->xB4_ecbCurrCorrect_right.y;
                     ecb_sp18.z = 0.0f;
-                    ecb_sp18.x += pCharData_r31->phys.xB0_pos.x;
-                    ecb_sp18.y += pCharData_r31->phys.xB0_pos.y;
-                    ecb_sp18.z += pCharData_r31->phys.xB0_pos.z;
+                    ecb_sp18.x += pCharData_r31->xB0_pos.x;
+                    ecb_sp18.y += pCharData_r31->xB0_pos.y;
+                    ecb_sp18.z += pCharData_r31->xB0_pos.z;
 					// compute distance to the wall?
                     if (!func_800567C0(pCollData_r6->x160_rightwall_index, &ecb_sp18, &wallPos_sp24))
                         wallPos_sp24.x = 0.0f;
                 }
 				// not sure what this computes, I guess it checks if we are close to the wall and move towards it with sufficent speed
-                deltaX_f1 = pCharData_r31->phys.pos_delta.x - wallPos_sp24.x;
+                deltaX_f1 = pCharData_r31->pos_delta.x - wallPos_sp24.x;
                 deltaX_f1 = (deltaX_f1 < 0.0f) ? -deltaX_f1 : deltaX_f1;
                 if (deltaX_f1 > pCharData_r31->x110_attr.x258)
                 {

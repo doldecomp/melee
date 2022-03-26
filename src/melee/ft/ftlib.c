@@ -243,7 +243,7 @@ f32 func_800865C0(HSD_GObj* gobj)
 s32 func_800865CC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->phys.xE0_airborne;
+    return fp->ground_or_air;
 }
 
 void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
@@ -268,19 +268,19 @@ void* func_80086630(HSD_GObj* gobj, s32 i)
 void func_80086644(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = gobj->user_data;
-    *pos = fp->phys.xB0_pos;
+    *pos = fp->xB0_pos;
 }
 
 void func_80086664(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = gobj->user_data;
-    fp->phys.xB0_pos = *pos;
+    fp->xB0_pos = *pos;
 }
 
 void func_80086684(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = gobj->user_data;
-    *pos = fp->phys.xBC_prevPos;
+    *pos = fp->xBC_prevPos;
 }
 
 void ftData_SetScale(HSD_GObj* gobj, f32 val)
@@ -414,7 +414,7 @@ void func_80086990(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
     f32 tmp = 0.5f * (fp->x6F0_collData.xA8 + fp->x6F0_collData.xB0);
-    vector_add(v, &fp->phys.xB0_pos, 0.0f, tmp, 0.0f);
+    vector_add(v, &fp->xB0_pos, 0.0f, tmp, 0.0f);
 }
 
 f32 func_800869D4(HSD_GObj* gobj)
@@ -533,7 +533,7 @@ s32 func_80086BE0(HSD_GObj* gobj)
 void func_80086BEC(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
-    *v = fp->phys.pos_delta;
+    *v = fp->pos_delta;
 }
 
 s32 func_80086C0C(HSD_GObj* gobj)
@@ -731,7 +731,7 @@ void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
     func_800D105C(gobj);
     func_80081C88(gobj, fp->x34_scale.y);
     func_8007EBAC(fp, 0xC, 0);
-    func_80030E44(2, &fp->phys.xB0_pos);
+    func_80030E44(2, &fp->xB0_pos);
     func_80088148(fp, 0x121, 0x7F, 0x40);
 }
 
@@ -968,7 +968,7 @@ void func_8008777C(HSD_GObj* gobj)
     CollData* cd;
     u32 unused[2];
 
-    if (fp->phys.xE0_airborne != GA_Ground) {
+    if (fp->ground_or_air != GA_Ground) {
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
     }
     cd = &fp->x6F0_collData;
@@ -978,7 +978,7 @@ void func_8008777C(HSD_GObj* gobj)
 BOOL func_800877D4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->phys.xF8_playerNudgeVel.x != 0) {
+    if (fp->xF8_playerNudgeVel.x != 0) {
         return TRUE;
     } else {
         return FALSE;

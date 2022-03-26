@@ -12,7 +12,7 @@ void func_80149354(HSD_GObj* gobj)
     ft = ft2 = gobj->user_data;
 
     if (ft->x2200_ftcmd_var1 == 1 && ft->x2244 == 0) {
-        temp_r3 = func_802C8B28(gobj, &ft->phys.xB0_pos, func_8007500C(ft2, 0x1F),
+        temp_r3 = func_802C8B28(gobj, &ft->xB0_pos, func_8007500C(ft2, 0x1F),
                                 ft->x2C_facing_direction);
         ft->x2244 = (u32) temp_r3;
         if (temp_r3 != NULL) {

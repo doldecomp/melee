@@ -10,7 +10,7 @@ void func_80136744(HSD_GObj* gobj) {
 
     ft->cb.x21EC_callback = &lbl_80136730;
 
-    ft->phys.xEC_ground_vel /= attrs->xC;
+    ft->xEC_ground_vel /= attrs->xC;
     func_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
@@ -25,10 +25,10 @@ void func_801367B8(HSD_GObj* gobj) {
 
     ft->cb.x21EC_callback = &lbl_80136730;
 
-    ft->phys.x80_self_vel.x /= attrs->xC;
+    ft->x80_self_vel.x /= attrs->xC;
 
-    if (ft->phys.x80_self_vel.y <= 0.0f) {
-        ft->phys.x80_self_vel.y = 0.0f;
+    if (ft->x80_self_vel.y <= 0.0f) {
+        ft->x80_self_vel.y = 0.0f;
     }
 
     func_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
