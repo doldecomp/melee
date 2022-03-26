@@ -255,7 +255,7 @@ void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id);
 u8 Player_GetFlagsBit1(s32 slot);
 void Player_SetFlagsBit1(s32 slot);
 void Player_UnsetFlagsBit1(s32 slot);
-u8 Player_GetFlagsBit3(s32 slot);
+s32 Player_GetFlagsBit3(s32 slot);
 void Player_SetFlagsBit3(s32 slot, u8 bit3);
 u8 Player_GetFlagsBit4(s32 slot);
 u8 Player_GetFlagsBit5(s32 slot);
