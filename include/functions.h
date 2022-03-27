@@ -1,3 +1,6 @@
+#ifndef _functions_h_
+#define _functions_h_
+
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
@@ -9128,3 +9131,5 @@ void efLib_PauseAll(struct _HSD_GObj*);
 void efLib_ResumeAll(struct _HSD_GObj*);
 s32 func_80096CC8(struct _HSD_GObj*);
 void ef_Spawn(...);
+
+#endif
