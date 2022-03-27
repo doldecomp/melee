@@ -78,12 +78,12 @@ HSD_GObj* func_80086198(HSD_GObj* gobj)
         }
         // skip if same team
         if (func_8016B168() && fp != NULL &&
-            fp2->team == fp->team) {
+            fp2->x61B_team == fp->x61B_team) {
             continue;
         }
 
-        if (fp2->dmg.percent < min_percent) {
-            min_percent = fp2->dmg.percent;
+        if (fp2->dmg.x1830_percent < min_percent) {
+            min_percent = fp2->dmg.x1830_percent;
             result = cur;
         }
     }
@@ -120,7 +120,7 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
         cur_fp = cur->user_data;
         // skip if same team
         if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->team == fp->team) {
+            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team) {
             continue;
         }
         func_800866DC(cur, &cur_v);
@@ -161,7 +161,7 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
         }
         cur_fp = cur->user_data;
         if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->team == fp->team) {
+            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team) {
             continue;
         }
         func_800866DC(cur, &sp24);
@@ -213,7 +213,7 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
         }
         cur_fp = cur->user_data;
         if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->team == fp->team) {
+            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team) {
             continue;
         }
         func_800866DC(cur, &sp20);
@@ -243,7 +243,7 @@ f32 func_800865C0(HSD_GObj* gobj)
 s32 func_800865CC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->ground_or_air;
+    return fp->xE0_ground_or_air;
 }
 
 void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
@@ -533,7 +533,7 @@ s32 func_80086BE0(HSD_GObj* gobj)
 void func_80086BEC(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
-    *v = fp->pos_delta;
+    *v = fp->xC8_pos_delta;
 }
 
 s32 func_80086C0C(HSD_GObj* gobj)
@@ -549,7 +549,7 @@ inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
         return;
     }
     if (!fp->x221F_flag.bits.b3 && !fp->x2224_flag.bits.b2) {
-        func_80014574(fp->player_id, val, arg1, arg2);
+        func_80014574(fp->x618_player_id, val, arg1, arg2);
     }
 }
 
@@ -585,14 +585,14 @@ void func_80086E68(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4)) {
-        func_80378280(fp->player_id, 1);
+        func_80378280(fp->x618_player_id, 1);
     }
 }
 
 s32 func_80086EB4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->team;
+    return fp->x61B_team;
 }
 
 BOOL func_80086EC0(HSD_GObj* gobj)
@@ -691,8 +691,8 @@ BOOL func_80087074(HSD_GObj* gobj, Vec3* v)
 BOOL func_800870BC(HSD_GObj* gobj, void** val)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->controller_index) {
-        *val = lbl_804D6554->x6D8[fp->controller_index];
+    if (fp->x61A_controller_index) {
+        *val = lbl_804D6554->x6D8[fp->x61A_controller_index];
         return TRUE;
     }
     return FALSE;
@@ -701,13 +701,13 @@ BOOL func_800870BC(HSD_GObj* gobj, void** val)
 void func_800870F0(HSD_GObj* gobj, s32 x)
 {
     Fighter* fp = gobj->user_data;
-    fp->dmg.percent = x;
+    fp->dmg.x1830_percent = x;
 }
 
 s32 func_80087120(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 result = fp->dmg.percent;
+    s32 result = fp->dmg.x1830_percent;
     return result;
 }
 
@@ -766,7 +766,7 @@ BOOL func_800872BC(HSD_GObj* gobj)
 s32 func_80087300(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->dmg.source_ply;
+    return fp->dmg.x18c4_source_ply;
 }
 
 s32 func_8008730C(HSD_GObj* gobj)
@@ -968,7 +968,7 @@ void func_8008777C(HSD_GObj* gobj)
     CollData* cd;
     u32 unused[2];
 
-    if (fp->ground_or_air != GA_Ground) {
+    if (fp->xE0_ground_or_air != GA_Ground) {
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
     }
     cd = &fp->x6F0_collData;

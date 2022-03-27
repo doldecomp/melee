@@ -88,7 +88,7 @@ void func_8014FBA4(HSD_GObj* gobj)
     f32 temp_f1;
 
     Fighter* fighter = gobj->user_data;
-    if ((s32) fighter->ground_or_air == GA_Air) {
+    if ((s32) fighter->xE0_ground_or_air == GA_Air) {
         func_8007D7FC(fighter);
     }
 
