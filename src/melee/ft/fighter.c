@@ -530,7 +530,7 @@ void func_80067C98(register Fighter* ft) {
 //// https://decomp.me/scratch/vhZiK
 // Matches
 void func_80068354(HSD_GObj* fighterObj/*r30*/) {
- void (*temp_r12)(HSD_GObj* gobj);
+ 	void (*temp_r12)(HSD_GObj* gobj);
     Vec3 vec_sp20;
     f32 temp_f1;
     HSD_JObj* jobj;
@@ -4612,19 +4612,14 @@ lbl_8006CFA8:
 /* 8006CFB8 00069B98  4E 80 00 20 */	blr  
 }
 
+///https://decomp.me/scratch/UV4by
+void func_8006CFBC(HSD_GObj* fighterObj) {
+    Fighter* fighter_r4 = fighterObj->user_data;
 
-asm void func_8006CFBC()
-{
-	nofralloc 
-/* 8006CFBC 00069B9C  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 8006CFC0 00069BA0  88 04 22 19 */	lbz r0, 0x2219(r4)
-/* 8006CFC4 00069BA4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
-/* 8006CFC8 00069BA8  4D 82 00 20 */	beqlr 
-/* 8006CFCC 00069BAC  88 04 22 1A */	lbz r0, 0x221a(r4)
-/* 8006CFD0 00069BB0  38 60 00 01 */	li r3, 1
-/* 8006CFD4 00069BB4  50 60 36 72 */	rlwimi r0, r3, 6, 0x19, 0x19
-/* 8006CFD8 00069BB8  98 04 22 1A */	stb r0, 0x221a(r4)
-/* 8006CFDC 00069BBC  4E 80 00 20 */	blr  
+    if (fighter_r4->x2219_flag.bits.b7){
+        fighter_r4->x221A_flag.bits.b1 = 1;
+    }
+
 }
 
 

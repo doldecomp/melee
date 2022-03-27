@@ -1176,7 +1176,7 @@ void efAsync_Spawn(struct _HSD_GObj*, void*, u32, u32, u32, void*, ...);
 // ? func_800679B0(?);
 // ? func_80067A84(?);
 // ? func_80067ABC(?);
-// ? func_80067BB4(?);
+// void func_80067BB4(HSD_GObj* fighterObj);
 // ? func_80067C98(?);
 void func_80068354(struct _HSD_GObj*);
 // ? func_800686E4(?);
