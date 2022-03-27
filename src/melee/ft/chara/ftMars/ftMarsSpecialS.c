@@ -7,7 +7,7 @@ void func_8013741C(HSD_GObj* gobj) {
     s32 thing;
     s32 unused1, unused2, unused3, unused4;
 
-    ((Fighter*)gobj->user_data)->x80_selfVel.y = 0.0f;
+    ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0f;
     ft = gobj->user_data;
     ft->x2200_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
@@ -32,12 +32,12 @@ void func_801374A0(HSD_GObj* gobj) {
     s32 thing;
     s32 unused1, unused2;
 
-    ft->x80_selfVel.x = ft->x80_selfVel.x / attr->x14;
+    ft->x80_self_vel.x = ft->x80_self_vel.x / attr->x14;
     if ((s32)ft->x222C == 0) {
         ft->x222C = 1;
-        ft->x80_selfVel.y = attr->x1C;
+        ft->x80_self_vel.y = attr->x1C;
     } else {
-        ft->x80_selfVel.y = 0.0f;
+        ft->x80_self_vel.y = 0.0f;
     }
 
     ft2 = gobj->user_data;
@@ -268,7 +268,7 @@ void func_80137A9C(HSD_GObj* gobj) {
 
     ft->x2200_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
-    ft->x21EC_callback = &lbl_80137A68;
+    ft->cb.x21EC_callback = &lbl_80137A68;
 
     if (ft->x624_lstick_y > lbl_804D6554->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {
@@ -409,7 +409,7 @@ void func_80137E0C(HSD_GObj* gobj) {
 
     ft->x2200_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
-    ft->x21EC_callback = &lbl_80137A68;
+    ft->cb.x21EC_callback = &lbl_80137A68;
 
     if (ft->x624_lstick_y > lbl_804D6554->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {
@@ -549,7 +549,7 @@ void func_80138148(HSD_GObj* gobj) {
 
     ft->x2200_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
-    ft->x21EC_callback = &lbl_80137A68;
+    ft->cb.x21EC_callback = &lbl_80137A68;
 
     if (ft->x624_lstick_y > lbl_804D6554->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {

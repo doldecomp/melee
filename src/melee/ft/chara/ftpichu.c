@@ -22,7 +22,7 @@ void ftPichu_OnDeath(HSD_GObj* gobj)
     Fighter* ft = gobj->user_data;
 
     func_80074A4C(gobj, 0, 0);
-    temp_r0 = ft->x619_flag;
+    temp_r0 = ft->x619_costume_id;
 
     switch (temp_r0) {
         case 0:

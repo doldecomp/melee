@@ -82,8 +82,8 @@ HSD_GObj* func_80086198(HSD_GObj* gobj)
             continue;
         }
 
-        if (fp2->x1830_percent < min_percent) {
-            min_percent = fp2->x1830_percent;
+        if (fp2->dmg.x1830_percent < min_percent) {
+            min_percent = fp2->dmg.x1830_percent;
             result = cur;
         }
     }
@@ -256,13 +256,13 @@ void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 void* func_800865F0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_joint;
+    return fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj;
 }
 
 void* func_80086630(HSD_GObj* gobj, s32 i)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x5E8_fighterBones[i].x0_joint;
+    return fp->x5E8_fighterBones[i].x0_jobj;
 }
 
 void func_80086644(HSD_GObj* gobj, Vec3* pos)
@@ -374,10 +374,9 @@ void func_800868A4(void)
     }
 }
 
-BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
-{
+BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1) {
     Fighter* fp = gobj->user_data;
-    if (fp->x1974_heldItem != arg1 && fp->x197C != arg1 && fp->x1980 != arg1) {
+    if ((fp->x1974_heldItem != arg1) && (fp->x197C != arg1) && (fp->x1980 != arg1)) {
         return 1;
     }
     if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b5 ||
@@ -451,13 +450,13 @@ BOOL func_80086A18(HSD_GObj* gobj)
 void func_80086A4C(HSD_GObj* gobj, f32 val)
 {
     Fighter* fp = gobj->user_data;
-    fp->x1958 = val;
+    fp->dmg.x1958 = val;
 }
 
 BOOL func_80086A58(HSD_GObj* gobj, S32Pair* x)
 {
     Fighter* fp = gobj->user_data;
-    if (!fp->x2229_flag.bits.b3 && !fp->x2220_flag.bits.b7) {
+    if (!fp->x2229_b3 && !fp->x2220_flag.bits.b7) {
         *x = fp->x2188;
     }
     return FALSE;
@@ -472,7 +471,7 @@ BOOL func_80086A8C(HSD_GObj* gobj)
     }* temp_r3;
 
     Fighter* fp = gobj->user_data;
-    if (!fp->x2229_flag.bits.b3 && !fp->x2220_flag.bits.b7) {
+    if (!fp->x2229_b3 && !fp->x2220_flag.bits.b7) {
         temp_r3 = func_80030A50();
         if (temp_r3 != NULL) {
             void* temp_r30 = temp_r3->unk28;
@@ -550,7 +549,7 @@ inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
         return;
     }
     if (!fp->x221F_flag.bits.b3 && !fp->x2224_flag.bits.b2) {
-        func_80014574(fp->x618_flag, val, arg1, arg2);
+        func_80014574(fp->x618_player_id, val, arg1, arg2);
     }
 }
 
@@ -586,7 +585,7 @@ void func_80086E68(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4)) {
-        func_80378280(fp->x618_flag, 1);
+        func_80378280(fp->x618_player_id, 1);
     }
 }
 
@@ -606,7 +605,7 @@ BOOL func_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b2 || Player_GetMoreFlagsBit4(fp->xC_playerID) ||
-        fp->x2228_flag.bits.b2 || fp->x2229_flag.bits.b3 || fp->x2220_flag.bits.b7) {
+        fp->x2228_flag.bits.b2 || fp->x2229_b3 || fp->x2220_flag.bits.b7) {
         return FALSE;
     }
     return TRUE;
@@ -680,9 +679,9 @@ void func_80087050(s32 arg0)
 BOOL func_80087074(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x18B8 || fp->x18BC) {
-        v->x = fp->x18B8;
-        v->y = fp->x18BC;
+    if (fp->dmg.x18B8 || fp->dmg.x18BC) {
+        v->x = fp->dmg.x18B8;
+        v->y = fp->dmg.x18BC;
         v->z = 0.0f;
         return TRUE;
     }
@@ -692,8 +691,8 @@ BOOL func_80087074(HSD_GObj* gobj, Vec3* v)
 BOOL func_800870BC(HSD_GObj* gobj, void** val)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x61A) {
-        *val = lbl_804D6554->x6D8[fp->x61A];
+    if (fp->x61A_controller_index) {
+        *val = lbl_804D6554->x6D8[fp->x61A_controller_index];
         return TRUE;
     }
     return FALSE;
@@ -702,13 +701,13 @@ BOOL func_800870BC(HSD_GObj* gobj, void** val)
 void func_800870F0(HSD_GObj* gobj, s32 x)
 {
     Fighter* fp = gobj->user_data;
-    fp->x1830_percent = x;
+    fp->dmg.x1830_percent = x;
 }
 
 s32 func_80087120(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 result = fp->x1830_percent;
+    s32 result = fp->dmg.x1830_percent;
     return result;
 }
 
@@ -755,7 +754,7 @@ s32 func_800872A4(HSD_GObj* gobj)
 void* func_800872B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->filler_x20A4;
+    return &fp->x20A4;
 }
 
 BOOL func_800872BC(HSD_GObj* gobj)
@@ -767,7 +766,7 @@ BOOL func_800872BC(HSD_GObj* gobj)
 s32 func_80087300(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x18C4;
+    return fp->dmg.x18c4_source_ply;
 }
 
 s32 func_8008730C(HSD_GObj* gobj)
@@ -851,7 +850,7 @@ HSD_GObj* func_8008741C(u32 i)
 f32 func_80087454(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x18A4_knockbackMagnitude;
+    return fp->dmg.x18A4_knockbackMagnitude;
 }
 
 u32 func_80087460(HSD_GObj* gobj)
@@ -934,13 +933,13 @@ BOOL func_800876D4(HSD_GObj* gobj)
 s32 func_800876F4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x18CC;
+    return fp->dmg.x18CC;
 }
 
 s32 func_80087700(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x18D0;
+    return fp->dmg.x18D0;
 }
 
 void func_8008770C(HSD_GObj* gobj, void* dst)

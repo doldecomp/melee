@@ -26,8 +26,8 @@ void func_8013826C(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
-    ft->x80_selfVel.y = 0.0f;
-    ft->x80_selfVel.x *= attr->x3C;
+    ft->x80_self_vel.y = 0.0f;
+    ft->x80_self_vel.x *= attr->x3C;
     // ActionStateChange
     func_800693AC(gobj, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);
     // AS_AnimationFrameUpdate&More
@@ -145,13 +145,13 @@ void lbl_80138638(HSD_GObj* gobj) {
     if (ft->xE0_ground_or_air == GA_Air) {
         if (ft->x2200_ftcmd_var2 == 0) {
             func_80085154(gobj);
-            if (ft->x80_selfVel.x < 0.0f) {
+            if (ft->x80_self_vel.x < 0.0f) {
                 num = -1;
             } else {
                 num = 1;
             }
             if (ft->x2C_facing_direction != num) {
-                ft->x80_selfVel.x *= -1.0f;
+                ft->x80_self_vel.x *= -1.0f;
             }
             if (ft->x6A4_transNOffset.y < 0.0f) {
                 ft->x2200_ftcmd_var2 = 1;
@@ -179,16 +179,16 @@ void lbl_8013873C(HSD_GObj* gobj) {
     if (ft->x2200_ftcmd_var0 != 0) {
         if (ft->x2200_ftcmd_var2 == 0) {
             func_80085154(gobj);
-            ft->x80_selfVel.x *= attr->x40;
-            ft->x80_selfVel.y *= attr->x40;
-            ft->x80_selfVel.z *= attr->x40;
-            if (ft->x80_selfVel.x < 0.0f) {
+            ft->x80_self_vel.x *= attr->x40;
+            ft->x80_self_vel.y *= attr->x40;
+            ft->x80_self_vel.z *= attr->x40;
+            if (ft->x80_self_vel.x < 0.0f) {
                 num = -1;
             } else {
                 num = 1;
             }
             if (ft->x2C_facing_direction != num) {
-                ft->x80_selfVel.x *= -1.0f;
+                ft->x80_self_vel.x *= -1.0f;
             }
             if (ft->x6A4_transNOffset.y < 0.0f) {
                 ft->x2200_ftcmd_var2 = 1;
@@ -218,7 +218,7 @@ void lbl_80138884(HSD_GObj* gobj) {
 void lbl_801388B4(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (ft->xE0_ground_or_air == GA_Air) {
-        if (ft->x2200_ftcmd_var0 == 0 || ft->x80_selfVel.y >= 0.0f) {
+        if (ft->x2200_ftcmd_var0 == 0 || ft->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else if (ft->x2200_ftcmd_var1 == 0) {
             ft->x2200_ftcmd_var1 = 1;
@@ -236,7 +236,7 @@ void lbl_801388B4(HSD_GObj* gobj) {
 void lbl_80138940(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (ft->xE0_ground_or_air == GA_Air) {
-        if (ft->x2200_ftcmd_var0 == 0 || ft->x80_selfVel.y >= 0.0f) {
+        if (ft->x2200_ftcmd_var0 == 0 || ft->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else if (ft->x2200_ftcmd_var1 == 0) {
             ft->x2200_ftcmd_var1 = 1;

@@ -6,7 +6,7 @@ void func_801389CC(HSD_GObj* gobj) {
     Fighter* ft;
     u32 unused[2];
 
-    ((Fighter*)gobj->user_data)->x80_selfVel.y = 0.0f;
+    ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0f;
     func_800693AC(gobj, 0x171, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
@@ -24,8 +24,8 @@ void func_80138A30(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     attr = ft->x2D4_specialAttributes;
-    ft->x80_selfVel.x /= attr->x4C;
-    ft->x80_selfVel.y = 0.0f;
+    ft->x80_self_vel.x /= attr->x4C;
+    ft->x80_self_vel.y = 0.0f;
     func_800693AC(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft2 = gobj->user_data;
@@ -308,7 +308,7 @@ void lbl_80139140(HSD_GObj* gobj) {
     if (temp_r0 > 0) {
         ft->x2340_stateVar1 = (s32) (temp_r0 * attr->x5C);
     }
-    func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_joint, 0, &sp18);
+    func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_jobj, 0, &sp18);
     func_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
     if (ft->xE0_ground_or_air == GA_Ground) {
         thing = 0x172;
@@ -321,15 +321,15 @@ void lbl_80139140(HSD_GObj* gobj) {
     if (ft_2->x2219_flag.bits.b0 == 0) {
         switch (func_800872A4(gobj)) {
             case 0x12:
-                ef_Spawn(0x4F1, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_joint, &ft_2->x2C_facing_direction);
+                ef_Spawn(0x4F1, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->x2C_facing_direction);
                 break;
             case 0x1A:
-                ef_Spawn(0x510, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_joint, &ft_2->x2C_facing_direction);
+                ef_Spawn(0x510, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->x2C_facing_direction);
                 break;
         }
         ft_2->x2219_flag.bits.b0 = 1;
     }
-    ft_2->x21D4_callback_EnterHitlag = 0;
-    ft_2->x21D8_callback_ExitHitlag = 0;
-    ft_2->x21BC_callback_Accessory4 = 0;
+    ft_2->cb.x21D4_callback_EnterHitlag = 0;
+    ft_2->cb.x21D8_callback_ExitHitlag = 0;
+    ft_2->cb.x21BC_callback_Accessory4 = 0;
 }

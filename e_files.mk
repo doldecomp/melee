@@ -9,6 +9,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/lb/lbarchive.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/ftcliffcommon.c.o 		\
 	$(EPILOGUE_DIR)/src/melee/ft/ftwalljump.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/fighter.c.o\
  	$(EPILOGUE_DIR)/src/melee/ft/chara/ftclink.c.o\
  	$(EPILOGUE_DIR)/src/melee/ft/chara/ftclink_2.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftdrmario.c.o\

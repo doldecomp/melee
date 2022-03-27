@@ -23,7 +23,7 @@ void ftKoopa_OnDeath(HSD_GObj* gobj) {
 
     ftVars = (ftKoopaVars*)&ft->x222C;
     
-    ft->x18B0 = koopaAttr->x0;
+    ft->dmg.x18B0 = koopaAttr->x0;
     ftVars->x0 = koopaAttr->x10;
     ftVars->x4 = koopaAttr->x18;
 }

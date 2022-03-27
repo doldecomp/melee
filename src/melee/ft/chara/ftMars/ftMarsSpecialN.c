@@ -8,9 +8,9 @@ void func_80136744(HSD_GObj* gobj) {
     MarsAttributes* attrs = ft->x2D4_specialAttributes;
     u32 unused, unused2; // need to eat more stack
 
-    ft->x21EC_callback = &lbl_80136730;
+    ft->cb.x21EC_callback = &lbl_80136730;
 
-    ft->xEC_groundVel /= attrs->xC;
+    ft->xEC_ground_vel /= attrs->xC;
     func_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
@@ -23,12 +23,12 @@ void func_801367B8(HSD_GObj* gobj) {
     MarsAttributes* attrs = ft->x2D4_specialAttributes;
     u32 unused, unused2; // need to eat more stack
 
-    ft->x21EC_callback = &lbl_80136730;
+    ft->cb.x21EC_callback = &lbl_80136730;
 
-    ft->x80_selfVel.x /= attrs->xC;
+    ft->x80_self_vel.x /= attrs->xC;
 
-    if (ft->x80_selfVel.y <= 0.0f) {
-        ft->x80_selfVel.y = 0.0f;
+    if (ft->x80_self_vel.y <= 0.0f) {
+        ft->x80_self_vel.y = 0.0f;
     }
 
     func_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -135,7 +135,7 @@ void lbl_80136ADC(HSD_GObj* gobj) {
     s32 unused[7];
 
     if ((s32)ft->x2340_stateVar1 % 30 == 0) {
-        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_joint, 0, &sp28);
+        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_jobj, 0, &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 1.0471975803375244f);
     }
     ft->x2340_stateVar1++;
@@ -155,7 +155,7 @@ void lbl_80136BB4(HSD_GObj* gobj) {
     s32 unused[7];
 
     if ((s32)ft->x2340_stateVar1 % 30 == 0) {
-        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_joint, 0, &sp28);
+        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_jobj, 0, &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 1.0471975803375244f);
     }
     ft->x2340_stateVar1++;
@@ -269,7 +269,7 @@ void lbl_80136EE4(HSD_GObj *gobj) {
         s32 unused1, unused2, unused3, unused4, unused5;
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_joint, 0, &position);
+        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_jobj, 0, &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         func_800119DC(&position, 120, 0.9f, 0.02f, 1.0471975803375244f);
     }
@@ -316,7 +316,7 @@ void lbl_80137010(HSD_GObj *gobj) {
         s32 unused1, unused2, unused3, unused4, unused5;
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_joint, 0, &position);
+        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 4)].x0_jobj, 0, &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         func_800119DC(&position, 120, 0.9f, 0.02f, 1.0471975803375244f);
     }
@@ -383,8 +383,8 @@ void func_801371FC(HSD_GObj* gobj) {
     func_800693AC(gobj, thing, 0x0C4C508E, 0, ft->x894, 1.0f, 0.0f);
 
     if (ft->x2219_flag.bits.b0 == 1) {
-        ft->x21D4_callback_EnterHitlag = &efLib_PauseAll;
-        ft->x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        ft->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+        ft->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
     }
 }
 
@@ -407,8 +407,8 @@ void func_801372A8(HSD_GObj* gobj) {
     func_800693AC(gobj, thing, 0x0C4C508E, 0, ft->x894, 1.0f, 0.0f);
 
     if (ft->x2219_flag.bits.b0 == 1) {
-        ft->x21D4_callback_EnterHitlag = &efLib_PauseAll;
-        ft->x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        ft->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+        ft->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
     }
 }
 
@@ -426,7 +426,7 @@ void func_80137354(HSD_GObj* gobj) {
     }
 
     func_800693AC(gobj, thing, 0, 0, 1.0f, 1.0f, 0.0f);
-    ft->x21BC_callback_Accessory4 = &lbl_801365A8;
+    ft->cb.x21BC_callback_Accessory4 = &lbl_801365A8;
 }
 
 // 801373B8 00133F98
@@ -442,5 +442,5 @@ void func_801373B8(HSD_GObj* gobj) {
     }
 
     func_800693AC(gobj, thing, 0, 0, 1.0f, 1.0f, 0.0f);
-    ft->x21BC_callback_Accessory4 = &lbl_8013666C;
+    ft->cb.x21BC_callback_Accessory4 = &lbl_8013666C;
 }

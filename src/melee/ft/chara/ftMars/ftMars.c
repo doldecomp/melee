@@ -119,18 +119,18 @@ void lbl_801365A8(HSD_GObj* gobj) {
         result = func_800872A4(gobj);
         switch (result) {
             case 0x12:
-                ef_Spawn(0x4F2, gobj, ft->x5E8_fighterBones->x0_joint);
+                ef_Spawn(0x4F2, gobj, ft->x5E8_fighterBones->x0_jobj);
                 break;
             case 0x1A:
-                ef_Spawn(0x511, gobj, ft->x5E8_fighterBones->x0_joint);
+                ef_Spawn(0x511, gobj, ft->x5E8_fighterBones->x0_jobj);
                 break;
         }
         ft->x2219_flag.bits.b0 = 1;
     }
 
-    ft->x21D4_callback_EnterHitlag = efLib_PauseAll;
-    ft->x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    ft->x21BC_callback_Accessory4 = 0;
+    ft->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    ft->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    ft->cb.x21BC_callback_Accessory4 = 0;
     return;
 }
 
@@ -143,18 +143,18 @@ void lbl_8013666C(HSD_GObj* gobj) {
         result = func_800872A4(gobj);
         switch (result) {
             case 0x12:
-                ef_Spawn(0x4F3, gobj, ft->x5E8_fighterBones->x0_joint);
+                ef_Spawn(0x4F3, gobj, ft->x5E8_fighterBones->x0_jobj);
                 break;
             case 0x1A:
-                ef_Spawn(0x512, gobj, ft->x5E8_fighterBones->x0_joint);
+                ef_Spawn(0x512, gobj, ft->x5E8_fighterBones->x0_jobj);
                 break;
         }
         ft->x2219_flag.bits.b0 = 1;
     }
 
-    ft->x21D4_callback_EnterHitlag = efLib_PauseAll;
-    ft->x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    ft->x21BC_callback_Accessory4 = 0;
+    ft->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    ft->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    ft->cb.x21BC_callback_Accessory4 = 0;
     return;
 }
 

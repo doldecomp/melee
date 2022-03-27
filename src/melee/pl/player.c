@@ -1449,7 +1449,7 @@ void Player_UnsetFlagsBit1(s32 slot) {
     player->flags.b1 = zero;
 }
 
-u8 Player_GetFlagsBit3(s32 slot) {  
+s32 Player_GetFlagsBit3(s32 slot) {  
     StaticPlayer* player;
     u8 bit3;
     Player_CheckSlot(slot);

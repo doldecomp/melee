@@ -1634,8 +1634,8 @@ lbl_80069194:
 /* 800691F4 00065DD4  38 7F 00 00 */	addi r3, r31, 0
 /* 800691F8 00065DD8  38 A0 00 03 */	li r5, 3
 /* 800691FC 00065DDC  48 32 6B 59 */	bl func_8038FD54
-/* 80069200 00065DE0  3C 60 80 07 */	lis r3, func_8006B82C@ha
-/* 80069204 00065DE4  38 83 B8 2C */	addi r4, r3, func_8006B82C@l
+/* 80069200 00065DE0  3C 60 80 07 */	lis r3, Fighter_procUpdate@ha
+/* 80069204 00065DE4  38 83 B8 2C */	addi r4, r3, Fighter_procUpdate@l
 /* 80069208 00065DE8  38 7F 00 00 */	addi r3, r31, 0
 /* 8006920C 00065DEC  38 A0 00 04 */	li r5, 4
 /* 80069210 00065DF0  48 32 6B 45 */	bl func_8038FD54
@@ -4321,8 +4321,8 @@ lbl_8006B80C:
 /* 8006B824 00068404  7C 08 03 A6 */	mtlr r0
 /* 8006B828 00068408  4E 80 00 20 */	blr 
 
-.global func_8006B82C
-func_8006B82C:
+.global Fighter_procUpdate
+Fighter_procUpdate:
 /* 8006B82C 0006840C  7C 08 02 A6 */	mflr r0
 /* 8006B830 00068410  90 01 00 04 */	stw r0, 4(r1)
 /* 8006B834 00068414  94 21 FF 70 */	stwu r1, -0x90(r1)
