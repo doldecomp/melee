@@ -13,7 +13,7 @@ void func_8013741C(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->x2340_stateVar1 = 0;
 
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         thing = 0x15D;
     } else {
         thing = 0x166;
@@ -45,7 +45,7 @@ void func_801374A0(HSD_GObj* gobj) {
     ft2->x2200_ftcmd_var0 = 0;
     ft2->x2340_stateVar1 = 0;
 
-    if (ft2->ground_or_air == GA_Ground) {
+    if (ft2->xE0_ground_or_air == GA_Ground) {
         thing = 0x15D;
     } else {
         thing = 0x166;
@@ -61,7 +61,7 @@ void lbl_80137558(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 thing = func_8006F238(gobj);
     if (thing == 0) {
-        if (ft->ground_or_air == GA_Ground) {
+        if (ft->xE0_ground_or_air == GA_Ground) {
             func_8008A2BC(gobj);
         } else {
             func_800CC730(gobj);
@@ -91,7 +91,7 @@ void lbl_80137618(HSD_GObj* gobj) {
     MarsAttributes* attr = ft->x2D4_specialAttributes;
     s32 unused1, unused2, unused3, unused4;
 
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         // Physics_Friction
         func_80084F3C(gobj);
     } else {
@@ -108,7 +108,7 @@ void lbl_8013767C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 unused1, unused2;
 
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (func_800827A0(gobj) == 0) {
             func_801376E8(gobj);
@@ -150,7 +150,7 @@ void lbl_801377B0(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     // FrameTimerCheck
     if (func_8006F238(gobj) == 0) {
-        if (ft->ground_or_air == GA_Ground) {
+        if (ft->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
@@ -182,7 +182,7 @@ void lbl_80137870(HSD_GObj* gobj) {
     MarsAttributes* attr = ft->x2D4_specialAttributes;
     s32 unused1, unused2, unused3, unused4;
 
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         // Physics_Friction
         func_80084F3C(gobj);
     } else {
@@ -199,7 +199,7 @@ void lbl_801378D4(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 unused1, unused2;
 
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (func_800827A0(gobj) == 0) {
             func_80137940(gobj);
@@ -271,13 +271,13 @@ void func_80137A9C(HSD_GObj* gobj) {
     ft->cb.x21EC_callback = &lbl_80137A68;
 
     if (ft->x624_lstick_y > lbl_804D6554->x21C) {
-        if (ft->ground_or_air == GA_Ground) {
+        if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x15E;
         } else {
             thing = 0x167;
         }
     } else {
-        if (ft->ground_or_air == GA_Ground) {
+        if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x15F;
         } else {
             thing = 0x168;
@@ -292,7 +292,7 @@ void lbl_80137B34(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     // FrameTimerCheck
     if (func_8006F238(gobj) == 0) {
-        if (ft->ground_or_air == GA_Ground) {
+        if (ft->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
@@ -325,7 +325,7 @@ void lbl_80137BF4(HSD_GObj* gobj) {
     MarsAttributes* attr = ft->x2D4_specialAttributes;
     s32 unused1, unused2, unused3, unused4;
 
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         // somethingFriction
         func_80084FA8(gobj);
     } else {
@@ -340,7 +340,7 @@ void lbl_80137BF4(HSD_GObj* gobj) {
 void lbl_80137C50(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 unused1, unused2;
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (func_800827A0(gobj) == 0) {
             func_80137CBC(gobj);
@@ -412,20 +412,20 @@ void func_80137E0C(HSD_GObj* gobj) {
     ft->cb.x21EC_callback = &lbl_80137A68;
 
     if (ft->x624_lstick_y > lbl_804D6554->x21C) {
-        if (ft->ground_or_air == GA_Ground) {
+        if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x160;
         } else {
             thing = 0x169;
         }
     } else {
         if (ft->x624_lstick_y < -lbl_804D6554->x21C) {
-            if (ft->ground_or_air == GA_Ground) {
+            if (ft->xE0_ground_or_air == GA_Ground) {
                 thing = 0x162;
             } else {
                 thing = 0x16B;
             }
         } else {
-            if (ft->ground_or_air == GA_Ground) {
+            if (ft->xE0_ground_or_air == GA_Ground) {
                 thing = 0x161;
             } else {
                 thing = 0x16A;
@@ -441,7 +441,7 @@ void lbl_80137ECC(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     // FrameTimerCheck
     if (func_8006F238(gobj) == 0) {
-        if (ft->ground_or_air == GA_Ground) {
+        if (ft->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
@@ -462,7 +462,7 @@ void lbl_80137F30(HSD_GObj* gobj) {
     MarsAttributes* attr = ft->x2D4_specialAttributes;
     s32 unused[4];
 
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         // somethingFriction
         func_80084FA8(gobj);
     } else {
@@ -478,7 +478,7 @@ void lbl_80137F8C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 unused[2];
 
-    if (ft->ground_or_air == GA_Ground) {
+    if (ft->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (func_800827A0(gobj) == 0) {
             func_80137FF8(gobj);
@@ -552,20 +552,20 @@ void func_80138148(HSD_GObj* gobj) {
     ft->cb.x21EC_callback = &lbl_80137A68;
 
     if (ft->x624_lstick_y > lbl_804D6554->x21C) {
-        if (ft->ground_or_air == GA_Ground) {
+        if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x163;
         } else {
             thing = 0x16C;
         }
     } else {
         if (ft->x624_lstick_y < -lbl_804D6554->x21C) {
-            if (ft->ground_or_air == GA_Ground) {
+            if (ft->xE0_ground_or_air == GA_Ground) {
                 thing = 0x165;
             } else {
                 thing = 0x16E;
             }
         } else {
-            if (ft->ground_or_air == GA_Ground) {
+            if (ft->xE0_ground_or_air == GA_Ground) {
                 thing = 0x164;
             } else {
                 thing = 0x16D;

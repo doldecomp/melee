@@ -140,9 +140,9 @@ void lbl_80138638(HSD_GObj* gobj) {
     s32 num;
 
     // this is required, dunno why
-    ft->ground_or_air;
+    ft->xE0_ground_or_air;
 
-    if (ft->ground_or_air == GA_Air) {
+    if (ft->xE0_ground_or_air == GA_Air) {
         if (ft->x2200_ftcmd_var2 == 0) {
             func_80085154(gobj);
             if (ft->x80_self_vel.x < 0.0f) {
@@ -217,7 +217,7 @@ void lbl_80138884(HSD_GObj* gobj) {
 // https://decomp.me/scratch/3MMkJ
 void lbl_801388B4(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    if (ft->ground_or_air == GA_Air) {
+    if (ft->xE0_ground_or_air == GA_Air) {
         if (ft->x2200_ftcmd_var0 == 0 || ft->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else if (ft->x2200_ftcmd_var1 == 0) {
@@ -235,7 +235,7 @@ void lbl_801388B4(HSD_GObj* gobj) {
 // https://decomp.me/scratch/QEKrM
 void lbl_80138940(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    if (ft->ground_or_air == GA_Air) {
+    if (ft->xE0_ground_or_air == GA_Air) {
         if (ft->x2200_ftcmd_var0 == 0 || ft->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else if (ft->x2200_ftcmd_var1 == 0) {
