@@ -166,7 +166,7 @@ inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
     }
 }
 
-inline HSD_JObjSetScale(HSD_JObj* jobj, Vec* vec)
+inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec* vec)
 {
     if (jobj == NULL) {
         __assert("jobj.h", 760, "scale");
