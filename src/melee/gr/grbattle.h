@@ -39,7 +39,7 @@ static void lbl_8021A344(HSD_GObj*);
 static s32 lbl_8021A3B4();
 static void lbl_8021A3BC(HSD_GObj*);
 static void lbl_8021A60C();
-static s32 lbl_8021A610();
+static BOOL lbl_8021A610(s32);
 static s32 lbl_8021A618();
 
 #endif

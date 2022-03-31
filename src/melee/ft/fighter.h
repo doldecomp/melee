@@ -6,7 +6,6 @@
 
 #include <functions.h>
 #include <melee/pl/player.h>
-#include <melee/gr/stage.h>
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
@@ -15,6 +14,7 @@
 #include <sysdolphin/baselib/random.h>
 #include "sysdolphin/baselib/controller.h"
 
+typedef Vec Vec3;
 
 typedef enum FighterKind
 {

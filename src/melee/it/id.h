@@ -240,8 +240,8 @@ enum {
 
     // MONSTERS 2
     0xD0, // Old Goomba (Old-Kuri)
-    0xD1, // Target (Mato)
     */
+    It_Kind_Mato = 0xD1, // Target
     It_Kind_Heiho = 0xD2, // Yoshi's story Shy Guy
     /*
     0xD3, // Koopa(Green) (Nokonoko)

@@ -84,8 +84,8 @@ static HSD_GObj* func_80201D20(s32 arg0)
     if (gobj != NULL) {
         Map* map;
         map = gobj->user_data;
-        map->x8 = 0;
-        map->xC = 0;
+        map->x8_callback = NULL;
+        map->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
         if (callbacks->callback3 != NULL) {
             map->x1C_callback = callbacks->callback3;
@@ -172,9 +172,9 @@ static void lbl_80201F40()
 {
 }
 
-static s32 lbl_80201F44()
+static BOOL lbl_80201F44(s32)
 {
-    return 0;
+    return FALSE;
 }
 
 static s32 lbl_80201F4C(Vec3* a, u32 unused, u8* joint)
