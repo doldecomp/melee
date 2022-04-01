@@ -1,6 +1,7 @@
 # Files with unscheduled epilogues.
 
 EPILOGUE_UNSCHEDULED:=\
+	$(EPILOGUE_DIR)/src/melee/lb/code_8000B074.c.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lblanguage.c.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbcommand.c.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbvector.c.o\

@@ -130,12 +130,19 @@ typedef struct _HSD_JObjInfo {
 extern HSD_JObjInfo hsdJObj;
 
 void HSD_JObjCheckDependAll(HSD_JObj* jobj);
+u32 HSD_JObjGetFlags(HSD_JObj* jobj);
 void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 
 #pragma push
 #pragma always_inline on
+inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
+{
+    assert_line(405, jobj);
+    return jobj->robj;
+}
+
 inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 {
     assert_line(564, jobj);
@@ -191,6 +198,7 @@ inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
 inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec *translate)
 {
     assert_line(979, jobj);
+    assert_line(980, translate);
     *translate = jobj->translate;
 }
 
