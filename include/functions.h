@@ -8629,7 +8629,7 @@ void func_80378280(u8, int);
 // ? func_80378560(?);
 // ? func_803786F0(?);
 // ? func_80378828(?);
-// ? splGetHelmite(?);
+f32 splGetHelmite(f32, f32, f32, f32, f32, f32);
 // ? func_80378A94(?);
 // ? func_80378F38(?);
 void splArcLengthPoint(Vec*, struct _HSD_Spline*, f32);
