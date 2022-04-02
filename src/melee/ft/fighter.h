@@ -269,7 +269,7 @@ struct SpecialAttrs_Fox {
     char filler0[0x110];
 };
 
-struct SpecialAttrs_Falcon {
+struct SpecialAttrs_Captain {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     char filler0[0x10C];
@@ -292,7 +292,7 @@ struct SpecialAttrs_Link {
     char filler0[0x114];
 };
 
-struct SpecialAttrs_Shiek {
+struct SpecialAttrs_Seak {
     char filler0[0x114];
 };
 
@@ -341,7 +341,7 @@ struct SpecialAttrs_Yoshi {
     char filler0[0x114];
 };
 
-struct SpecialAttrs_Jigglypuff {
+struct SpecialAttrs_Purin {
     char filler0[0x114];
 };
 
@@ -946,12 +946,12 @@ typedef struct _Fighter {
     union { 
         struct SpecialAttrs_Mario mario;
         struct SpecialAttrs_Fox fox;
-        struct SpecialAttrs_Falcon falcon;
+        struct SpecialAttrs_Captain captain;
         struct SpecialAttrs_DK dk;
         struct SpecialAttrs_Kirby kirby;
         struct SpecialAttrs_Koopa koopa;
         struct SpecialAttrs_Link link;
-        struct SpecialAttrs_Shiek shiek;
+        struct SpecialAttrs_Seak seak;
         struct SpecialAttrs_Ness ness;
         struct SpecialAttrs_Peach peach;
         struct SpecialAttrs_Popo popo;
@@ -959,7 +959,7 @@ typedef struct _Fighter {
         struct SpecialAttrs_Pikachu pikachu;
         struct SpecialAttrs_Samus samus;
         struct SpecialAttrs_Yoshi yoshi;
-        struct SpecialAttrs_Jigglypuff jigglypuff;
+        struct SpecialAttrs_Purin purin;
         struct SpecialAttrs_Mewtwo mewtwo;
         struct SpecialAttrs_Luigi luigi;
         struct SpecialAttrs_Mars mars;

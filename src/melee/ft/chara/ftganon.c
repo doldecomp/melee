@@ -5,8 +5,8 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     Fighter* ft = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, -1);
-    ft->sa.falcon.x2230 = 0;
-    ft->sa.falcon.x222C = 0;
+    ft->sa.captain.x2230 = 0;
+    ft->sa.captain.x222C = 0;
 }
 
 void func_8014EC58(HSD_GObj* gobj, s32 arg1)
