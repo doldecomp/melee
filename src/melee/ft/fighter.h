@@ -389,9 +389,7 @@ typedef struct _Fighter {
         /* 0x274 */ s32 x274;
         /* 0x278 */ s32 x278;
         /* 0x27C */ s32 x27C_CameraZoomTargetBone;
-        /* 0x280 */ s32 x280;
-        /* 0x284 */ s32 x284;
-        /* 0x288 */ s32 x288;
+        /* 0x280 */ Vec3 x280;
         /* 0x28C */ s32 x28C;
         /* 0x290 */ s32 x290_WeightDependentThrowSpeedFlags;
     } x110_attr;

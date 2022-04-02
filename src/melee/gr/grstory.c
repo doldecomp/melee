@@ -303,7 +303,7 @@ static BOOL lbl_801E36D0(s32)
     return FALSE;
 }
 
-s32 lbl_801E36D8(Vec3* a, u32 unused, u8* joint)
+s32 lbl_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, NULL, &b);

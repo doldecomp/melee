@@ -145,7 +145,7 @@ typedef struct _StageData {
     void (*callback3)(void);
     s32 (*callback4)();
     BOOL (*callback5)(s32);
-    s32 (*callback6)();
+    s32 (*callback6)(Vec*, s32, struct _HSD_JObj*);
     u32 flags2;
     S16Vec* x2C;
     s32 x30; // size of x2C array

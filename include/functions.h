@@ -77,7 +77,7 @@ void* HSD_JObjGetMtxPtr(); // asm/melee/lb/lbcollision.s
 // ? func_8000B074(?);
 // ? func_8000B09C(?);
 // ? func_8000B134(?);
-void func_8000B1CC(void*, void*, Vec*);
+void func_8000B1CC(struct _HSD_JObj*, Vec*, Vec*);
 // ? func_8000B4FC(?);
 // ? func_8000B5DC(?);
 // ? func_8000B6A4(?);
@@ -8521,7 +8521,7 @@ struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
 // ? func_8036F934(?);
 // ? func_8036F9B8(?);
 // ? HSD_JObjAddAnim(?);
-// ? HSD_JObjAddAnimAll(?);
+void HSD_JObjAddAnimAll(struct _HSD_JObj*, struct _HSD_AnimJoint*, struct _HSD_MatAnimJoint*, struct _HSD_ShapeAnimJoint*);
 // ? HSD_JObjAnim(?);
 // ? func_803707F8(?);
 void* HSD_JObjAnimAll(); // asm/sysdolphin/baselib/jobj.s
@@ -8728,8 +8728,8 @@ void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 // ? func_8037EB28(?);
 // ? func_8037EC4C(?);
 // ? func_8037ECE0(?);
-// ? func_8037EE0C(?);
-// ? func_8037EF28(?);
+void func_8037EE0C(Vec*, Quaternion*);
+void func_8037EF28(Quaternion*, Quaternion*, Quaternion*, f32);
 // ? HSD_Free(?);
 // ? HSD_MemAlloc(?);
 // ? HSD_ShadowInitAllocData(?);

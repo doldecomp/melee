@@ -89,6 +89,7 @@ typedef struct _HSD_RObjAnimJoint {
 void HSD_RObjInitAllocData(void);
 HSD_ObjAllocData* HSD_RObjGetAllocData(void);
 HSD_ObjAllocData* HSD_RvalueObjGetAllocData(void);
+HSD_RObj* HSD_RObjAlloc(void);
 void HSD_RObjSetFlags(HSD_RObj* robj, u32 flags);
 HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype);
 void HSD_RObjAnimAll(HSD_RObj* robj);
