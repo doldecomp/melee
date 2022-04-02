@@ -18,7 +18,7 @@ static s32 lbl_803BA030[] = { 7, 4, 5, 6 };
 BOOL func_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
-    if (aobj != NULL && !(aobj->flags & 0x40000000)) {
+    if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM)) {
         return TRUE;
     }
     return FALSE;
@@ -27,10 +27,10 @@ BOOL func_8000B074(HSD_JObj* jobj)
 BOOL func_8000B09C(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
-        if (jobj->aobj != NULL && !(jobj->aobj->flags & 0x40000000)) {
+        if (jobj->aobj != NULL && !(jobj->aobj->flags & AOBJ_NO_ANIM)) {
             return TRUE;
         }
-        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & 0x1000)) {
+        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & INSTANCE)) {
             while (TRUE) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
@@ -54,10 +54,10 @@ BOOL func_8000B09C(HSD_JObj* jobj)
 BOOL func_8000B134(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
-        if (jobj->aobj != NULL && (jobj->aobj->flags & 0x4000000)) {
+        if (jobj->aobj != NULL && (jobj->aobj->flags & AOBJ_REWINDED)) {
             return TRUE;
         }
-        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & 0x1000)) {
+        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & INSTANCE)) {
             while (TRUE) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
@@ -133,7 +133,7 @@ void func_8000B4FC(HSD_JObj* jobj, HSD_Joint* joint)
     jobj->rotate.z = joint->rotation.z;
     jobj->scale = joint->scale;
     jobj->translate = joint->position;
-    HSD_JObjClearFlags(jobj, 0x20000);
+    HSD_JObjClearFlags(jobj, USE_QUATERNION);
     if (!(jobj->flags & 0x2000000)) {
         HSD_JObjSetMtxDirty(jobj);
     }
@@ -148,7 +148,7 @@ void func_8000B5DC(HSD_JObj* jobj, HSD_Joint* joint)
     jobj->rotate.y = joint->rotation.y;
     jobj->rotate.z = joint->rotation.z;
     jobj->translate = joint->position;
-    HSD_JObjClearFlags(jobj, 0x20000);
+    HSD_JObjClearFlags(jobj, USE_QUATERNION);
     if (!(jobj->flags & 0x2000000)) {
         HSD_JObjSetMtxDirty(jobj);
     }
@@ -187,8 +187,8 @@ void func_8000B804(HSD_JObj* jobj, HSD_Joint* joint)
     jobj->rotate.z = joint->rotation.z;
     jobj->scale = joint->scale;
     jobj->translate = joint->position;
-    HSD_JObjClearFlags(jobj, 0x20000);
-    HSD_JObjSetFlags(jobj, 0x40);
+    HSD_JObjClearFlags(jobj, USE_QUATERNION);
+    HSD_JObjSetFlags(jobj, MTX_DIRTY);
 
     func_8000B804(jobj->next, joint->next);
     func_8000B804(jobj->child, joint->child);
@@ -208,6 +208,7 @@ void func_8000BA0C(HSD_JObj* jobj, f32 arg8)
     func_8036F0F0(jobj, lbl_8000B9D8, &sp10);
 }
 
+// lbDObjSetRateAll
 void func_8000BA44(HSD_DObj* dobj, f32 val)
 {
     if (dobj == NULL) {
@@ -216,10 +217,8 @@ void func_8000BA44(HSD_DObj* dobj, f32 val)
     if (dobj->pobj != NULL) {
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
-            if ((cur->flags & 0x3000) == 0x1000) {
-                if (cur->u.x14_unk->aobj != NULL) {
-                    HSD_AObjSetRate(cur->u.x14_unk->aobj, val);
-                }
+            if (pobj_type(cur) == POBJ_SHAPEANIM && cur->u.x14_unk->aobj != NULL) {
+                HSD_AObjSetRate(cur->u.x14_unk->aobj, val);
             }
         }
     }
@@ -238,7 +237,8 @@ void func_8000BA44(HSD_DObj* dobj, f32 val)
     }
 }
 
-// exact copy of above, but with HSD_AObjReqAnim
+// lbDObjReqAnimAll
+// (exact copy of above, but with HSD_AObjReqAnim)
 void func_8000BB24(HSD_DObj* dobj, f32 val)
 {
     if (dobj == NULL) {
@@ -247,10 +247,8 @@ void func_8000BB24(HSD_DObj* dobj, f32 val)
     if (dobj->pobj != NULL) {
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
-            if ((cur->flags & 0x3000) == 0x1000) {
-                if (cur->u.x14_unk->aobj != NULL) {
-                    HSD_AObjReqAnim(cur->u.x14_unk->aobj, val);
-                }
+            if (pobj_type(cur) == POBJ_SHAPEANIM && cur->u.x14_unk->aobj != NULL) {
+                HSD_AObjReqAnim(cur->u.x14_unk->aobj, val);
             }
         }
     }
@@ -269,7 +267,7 @@ void func_8000BB24(HSD_DObj* dobj, f32 val)
     }
 }
 
-static HSD_JObj* func_8000BC04(HSD_JObj* jobj)
+static HSD_JObj* lbFindJObjWithAObj(HSD_JObj* jobj)
 {
     HSD_JObj* tmp;
     if (jobj == NULL) {
@@ -278,38 +276,41 @@ static HSD_JObj* func_8000BC04(HSD_JObj* jobj)
     if (jobj->aobj != NULL) {
         return jobj;
     }
-    tmp = func_8000BC04(jobj->child);
+    tmp = lbFindJObjWithAObj(jobj->child);
     if (tmp != NULL) {
         return tmp;
     }
-    tmp = func_8000BC04(jobj->next);
+    tmp = lbFindJObjWithAObj(jobj->next);
     if (tmp != NULL) {
         return tmp;
     }
     return NULL;
 }
 
+// lbGetJObjFramerate
 f32 func_8000BD28(HSD_JObj* jobj)
 {
-    jobj = func_8000BC04(jobj);
+    jobj = lbFindJObjWithAObj(jobj);
     if (jobj != NULL) {
         return jobj->aobj->framerate;
     }
     return 0;
 }
 
+// lbGetJObjCurrFrame
 f32 func_8000BDB4(HSD_JObj* jobj)
 {
-    jobj = func_8000BC04(jobj);
+    jobj = lbFindJObjWithAObj(jobj);
     if (jobj != NULL) {
         return jobj->aobj->curr_frame;
     }
     return 0;
 }
 
+// lbGetJObjEndFrame
 f32 func_8000BE40(HSD_JObj* jobj)
 {
-    jobj = func_8000BC04(jobj);
+    jobj = lbFindJObjWithAObj(jobj);
     if (jobj != NULL) {
         return jobj->aobj->end_frame;
     }
@@ -433,7 +434,7 @@ void func_8000C390(HSD_JObj* jobj)
     HSD_RObj* next;
     HSD_RObj* cur = HSD_JObjGetRObj(jobj);
     while (1) {
-        cur = HSD_RObjGetByType(cur, 0x10000000, 0);
+        cur = HSD_RObjGetByType(cur, REFTYPE_JOBJ, 0);
         if (cur == NULL) {
             break;
         }
@@ -682,12 +683,12 @@ void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
     dst->rotate = src->rotate;
     dst->scale = src->scale;
     dst->translate = src->translate;
-    if (HSD_JObjGetFlags(src) & 0x20000) {
-        HSD_JObjSetFlags(dst, 0x20000);
+    if (HSD_JObjGetFlags(src) & USE_QUATERNION) {
+        HSD_JObjSetFlags(dst, USE_QUATERNION);
     } else {
-        HSD_JObjClearFlags(dst, 0x20000);
+        HSD_JObjClearFlags(dst, USE_QUATERNION);
     }
-    HSD_JObjSetFlags(dst, 0x40);
+    HSD_JObjSetFlags(dst, MTX_DIRTY);
 }
 
 // https://decomp.me/scratch/63ON3
@@ -898,43 +899,44 @@ lbl_8000CB3C:
 }
 #pragma peephole on
 
-static s32 func_8000CB60(s32 i0, HSD_TevDesc* phi_r4,
-                         HSD_TExp* phi_r5, HSD_TExp* phi_r6)
+static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc,
+                                 HSD_TExp* texp1, HSD_TExp* texp2)
 {
-    s32 sp24[8];
+    BOOL register_used[8];
     int i;
 
     for (i = 0; i < 8; i++) {
-        sp24[i] = 0;
+        register_used[i] = FALSE;
     }
-    while (phi_r5 != NULL) {
-        if (phi_r5->cnst.reg < 8) {
-            sp24[phi_r5->cnst.reg] = 1;
+    while (texp1 != NULL) {
+        if (texp1->cnst.reg < 8) {
+            register_used[texp1->cnst.reg] = TRUE;
         }
-        phi_r5 = phi_r5->cnst.next;
+        texp1 = texp1->cnst.next;
     }
-    while (phi_r4 != NULL) {
-        s32 tmp = lbl_803B9FF0[phi_r4->u.tevconf.clr_out_reg];
-        sp24[tmp] = 1;
-        phi_r4 = phi_r4->next;
+    while (tevdesc != NULL) {
+        s32 idx = lbl_803B9FF0[tevdesc->u.tevconf.clr_out_reg];
+        register_used[idx] = TRUE;
+        tevdesc = tevdesc->next;
     }
-    while (phi_r6 != NULL) {
-        if (phi_r6->cnst.reg < 8) {
-            sp24[phi_r6->cnst.reg] = 1;
+    while (texp2 != NULL) {
+        if (texp2->cnst.reg < 8) {
+            register_used[texp2->cnst.reg] = TRUE;
         }
-        phi_r6 = phi_r6->cnst.next;
+        texp2 = texp2->cnst.next;
     }
     for (i = i0; i < 7; i++) {
-        if (sp24[i] == 0) {
+        if (!register_used[i]) {
             return i;
         }
     }
     return -1;
 }
 
+// lbGetFreeColorRegister
 s32 func_8000CC5C(s32 i0, HSD_MObj* mobj, HSD_TExp* texp)
 {
-    return func_8000CB60(i0, &mobj->tevdesc->desc, mobj->texp, texp);
+    return lbGetFreeColorRegImpl(i0, &mobj->tevdesc->desc, mobj->texp, texp);
 }
 
 s32 func_8000CC8C(s32 i)
@@ -947,30 +949,31 @@ s32 func_8000CCA4(s32 i)
     return lbl_803B9FE0[i];
 }
 
-static s32 func_8000CCBC(s32 i0, HSD_TevDesc* cur, HSD_TExp*, HSD_TExp*)
+static s32 lbGetFreeAlphaRegImpl(s32 i0, HSD_TevDesc* cur, HSD_TExp*, HSD_TExp*)
 {
-    s32 sp24[8];
+    BOOL register_used[8];
     int i;
 
     for (i = 0; i < 8; i++) {
-        sp24[i] = 0;
+        register_used[i] = FALSE;
     }
     while (cur != NULL) {
-        s32 tmp = lbl_803BA030[cur->u.tevconf.alpha_out_reg];
-        sp24[tmp] = 1;
+        s32 idx = lbl_803BA030[cur->u.tevconf.alpha_out_reg];
+        register_used[idx] = TRUE;
         cur = cur->next;
     }
     for (i = i0; i < 7; i++) {
-        if (sp24[i] == 0) {
+        if (!register_used[i]) {
             return i;
         }
     }
     return -1;
 }
 
+// lbGetFreeAlphaRegister
 s32 func_8000CD60(s32 i0, HSD_MObj* mobj, HSD_TExp* texp)
 {
-    return func_8000CCBC(i0, &mobj->tevdesc->desc, mobj->texp, texp);
+    return lbGetFreeAlphaRegImpl(i0, &mobj->tevdesc->desc, mobj->texp, texp);
 }
 
 s32 func_8000CD90(s32 i)
