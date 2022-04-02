@@ -21,7 +21,7 @@ void ftKoopa_OnDeath(HSD_GObj* gobj) {
     
     func_80074A4C(gobj, 0, 0);
 
-    ftVars = (ftKoopaVars*)&ft->x222C;
+    ftVars = (ftKoopaVars*)&ft->sa.koopa.x222C;
     
     ft->dmg.x18B0 = koopaAttr->x0;
     ftVars->x0 = koopaAttr->x10;

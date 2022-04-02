@@ -33,8 +33,8 @@ void func_801374A0(HSD_GObj* gobj) {
     s32 unused1, unused2;
 
     ft->x80_self_vel.x = ft->x80_self_vel.x / attr->x14;
-    if ((s32)ft->x222C == 0) {
-        ft->x222C = 1;
+    if ((s32)ft->sa.mars.x222C == 0) {
+        ft->sa.mars.x222C = 1;
         ft->x80_self_vel.y = attr->x1C;
     } else {
         ft->x80_self_vel.y = 0.0f;
@@ -137,7 +137,7 @@ void func_801376E8(HSD_GObj* gobj) {
 // https://decomp.me/scratch/fpZ5r
 void func_80137748(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    ft->x222C = 0;
+    ft->sa.mars.x222C = 0;
     // Air_SetAsGrounded2
     func_8007D7FC(ft);
     // ActionStateChange
@@ -238,7 +238,7 @@ void func_801379D0(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 thing;
 
-    ft->x222C = 0;
+    ft->sa.mars.x222C = 0;
     func_8007D7FC(ft);
     switch (ft->x10) {
         case 0x167:
@@ -383,7 +383,7 @@ void func_80137CBC(HSD_GObj* gobj) {
 void func_80137D60(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 thing;
-    ft->x222C = 0;
+    ft->sa.mars.x222C = 0;
     // // Air_SetAsGrounded2
     func_8007D7FC(ft);
     switch (ft->x10) {
@@ -521,7 +521,7 @@ void func_8013809C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 thing;
 
-    ft->x222C = 0;
+    ft->sa.mars.x222C = 0;
     // Air_SetAsGrounded2
     func_8007D7FC(ft);
     switch (ft->x10) {

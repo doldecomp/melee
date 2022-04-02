@@ -4,10 +4,10 @@ void ftDrMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = (Fighter*)gobj->user_data;
     func_80074A4C(gobj, 0, 0);
-    ft->x2234 = 0;
-    ft->x2238 = 0;
-    ft->x223C = 0;
-    ft->x2240 = 0;
+    ft->sa.mario.x2234 = 0;
+    ft->sa.mario.x2238 = 0;
+    ft->sa.mario.x223C = 0;
+    ft->sa.mario.x2240 = 0;
 }
 
 void ftDrMario_OnLoad(HSD_GObj* gobj)
@@ -108,9 +108,9 @@ void func_801497CC(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         ft = gobj->user_data;
-        if (ft != NULL && ft->x2240 != 0) {
-            func_802C0DBC(ft->x2240);
-            ft->x2240 = 0;
+        if (ft != NULL && ft->sa.mario.x2240 != 0) {
+            func_802C0DBC(ft->sa.mario.x2240);
+            ft->sa.mario.x2240 = 0;
         }
     }
 
@@ -139,7 +139,7 @@ BOOL func_80149844(HSD_GObj* gobj)
     if (tmp != 0x155 && tmp != 0x156) {
         return TRUE;
     }
-    if (ft->x2240 == 0) {
+    if (ft->sa.mario.x2240 == 0) {
         return TRUE;
     }
     return FALSE;
@@ -151,8 +151,8 @@ void func_801498A0(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         ft = gobj->user_data;
-        if (ft != NULL && ft->x2240 != 0) {
-            ft->x2240 = 0;
+        if (ft != NULL && ft->sa.mario.x2240 != 0) {
+            ft->sa.mario.x2240 = 0;
         }
     }
     if (gobj != NULL) {

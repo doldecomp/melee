@@ -4,14 +4,14 @@ BOOL func_800E5534(HSD_GObj* gobj)
 {
     Fighter* ft = (Fighter*)gobj->user_data;
     
-    return ft->x222C ? TRUE : FALSE;
+    return ft->sa.fox.x222C ? TRUE : FALSE;
 }
 
 void ftFox_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = (Fighter*)gobj->user_data;
     
-    ft->x222C = 0;
+    ft->sa.fox.x222C = 0;
     func_80074A4C(gobj, 0, 0);
 }
 

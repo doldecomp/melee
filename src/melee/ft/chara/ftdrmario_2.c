@@ -8,11 +8,11 @@ void func_80149954(HSD_GObj* gobj)
     int unused2[3];
 
     ft = gobj->user_data;
-    if (ft->x2200_ftcmd_var0 == 1 && ft->x2240 == 0U) {
+    if (ft->x2200_ftcmd_var0 == 1 && ft->sa.mario.x2240 == 0U) {
         func_8000B1CC(ft->x5E8_fighterBones->x0_jobj, 0, &sp18);
         tmp = func_800E0D1C(gobj);
         tmp = func_802C0850(gobj, &sp18, tmp, 0x31, ft->x2C_facing_direction);
-        ft->x2240 = tmp;
+        ft->sa.mario.x2240 = tmp;
         if (tmp != 0) {
             ft->cb.x21E4_callback_OnDeath2 = func_80149540;
             ft->cb.x21DC_callback_OnTakeDamage = func_80149540;
@@ -23,9 +23,9 @@ void func_80149954(HSD_GObj* gobj)
     if (func_8006F238(gobj) == 0) {
         if (gobj != NULL) {
             ft = gobj->user_data;
-            if (ft != NULL && ft->x2240 != 0) {
-                func_802C0DBC(ft->x2240);
-                ft->x2240 = 0;
+            if (ft != NULL && ft->sa.mario.x2240 != 0) {
+                func_802C0DBC(ft->sa.mario.x2240);
+                ft->sa.mario.x2240 = 0;
             }
         }
         if (gobj != NULL) {

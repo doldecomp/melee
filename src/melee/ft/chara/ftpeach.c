@@ -13,13 +13,13 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
     Fighter* ft;
 
     ft = gobj->user_data;
-    ft->x222C = 1;
-    ft->x2234 = -1;
-    ft->x2240 = 0;
-    ft->x223C = 0;
-    ft->x2238 = 0;
-    ft->x2244 = 0;
-    ft->x2248 = 0;
+    ft->sa.peach.x222C = 1;
+    ft->sa.peach.x2234 = -1;
+    ft->sa.peach.x2240 = 0;
+    ft->sa.peach.x223C = 0;
+    ft->sa.peach.x2238 = 0;
+    ft->sa.peach.x2244 = 0;
+    ft->sa.peach.x2248 = 0;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 2, 0);
     func_80074A4C(gobj, 3, -1);
