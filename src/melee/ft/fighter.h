@@ -402,7 +402,7 @@ struct SpecialAttrs_Girl {
     char filler0[0x114];
 };
 
-struct SpecialAttrs_Gigabowser {
+struct SpecialAttrs_GKoopa {
     char filler0[0x114];
 };
 
@@ -943,6 +943,8 @@ typedef struct _Fighter {
                  
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
+    // Some of these are clones of each other (they just use another struct)
+    // and some of them dont have specials so dont exist in the union. TODO: Clean-up
     union { 
         struct SpecialAttrs_Mario mario;
         struct SpecialAttrs_Fox fox;
@@ -975,7 +977,7 @@ typedef struct _Fighter {
         struct SpecialAttrs_Crazyhand crazyhand;
         struct SpecialAttrs_Boy boy;
         struct SpecialAttrs_Girl girl;
-        struct SpecialAttrs_Gigabowser gigabowser;
+        struct SpecialAttrs_GKoopa gkoopa;
         struct SpecialAttrs_Sandbag sandbag;
     } sa;
     /* 0x2340 */ u32 x2340_stateVar1;
