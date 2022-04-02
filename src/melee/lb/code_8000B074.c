@@ -898,23 +898,8 @@ lbl_8000CB3C:
 }
 #pragma peephole on
 
-struct unk1 {
-    struct unk1* next;
-    u8 x4_pad[0x38 - 0x4];
-    int x38;
-    u8 x3C_pad[0x5C - 0x3C];
-    s32 x5C;
-};
-
-struct unk2 {
-    u8 x0_pad[4];
-    struct unk2* next;
-    u8 x8_pad[0x14 - 0x8];
-    u8 val;
-};
-
-static s32 func_8000CB60(s32 i0, struct unk1* phi_r4,
-                         struct unk2* phi_r5, struct unk2* phi_r6)
+static s32 func_8000CB60(s32 i0, HSD_TevDesc* phi_r4,
+                         HSD_TExp* phi_r5, HSD_TExp* phi_r6)
 {
     s32 sp24[8];
     int i;
@@ -923,21 +908,21 @@ static s32 func_8000CB60(s32 i0, struct unk1* phi_r4,
         sp24[i] = 0;
     }
     while (phi_r5 != NULL) {
-        if (phi_r5->val < 8) {
-            sp24[phi_r5->val] = 1;
+        if (phi_r5->cnst.reg < 8) {
+            sp24[phi_r5->cnst.reg] = 1;
         }
-        phi_r5 = phi_r5->next;
+        phi_r5 = phi_r5->cnst.next;
     }
     while (phi_r4 != NULL) {
-        s32 tmp = lbl_803B9FF0[phi_r4->x38];
+        s32 tmp = lbl_803B9FF0[phi_r4->u.tevconf.clr_out_reg];
         sp24[tmp] = 1;
         phi_r4 = phi_r4->next;
     }
     while (phi_r6 != NULL) {
-        if (phi_r6->val < 8) {
-            sp24[phi_r6->val] = 1;
+        if (phi_r6->cnst.reg < 8) {
+            sp24[phi_r6->cnst.reg] = 1;
         }
-        phi_r6 = phi_r6->next;
+        phi_r6 = phi_r6->cnst.next;
     }
     for (i = i0; i < 7; i++) {
         if (sp24[i] == 0) {
@@ -947,15 +932,9 @@ static s32 func_8000CB60(s32 i0, struct unk1* phi_r4,
     return -1;
 }
 
-struct unk3 {
-    u8 x0_pad[0x18];
-    struct unk1* x18;
-    struct unk2* x1C;
-};
-
-s32 func_8000CC5C(s32 i0, struct unk3* arg1, struct unk2* arg2)
+s32 func_8000CC5C(s32 i0, HSD_MObj* mobj, HSD_TExp* texp)
 {
-    return func_8000CB60(i0, arg1->x18, arg1->x1C, arg2);
+    return func_8000CB60(i0, &mobj->tevdesc->desc, mobj->texp, texp);
 }
 
 s32 func_8000CC8C(s32 i)
@@ -968,8 +947,7 @@ s32 func_8000CCA4(s32 i)
     return lbl_803B9FE0[i];
 }
 
-static s32 func_8000CCBC(s32 i0, struct unk1* cur,
-                         void* unused1, void* unused2)
+static s32 func_8000CCBC(s32 i0, HSD_TevDesc* cur, HSD_TExp*, HSD_TExp*)
 {
     s32 sp24[8];
     int i;
@@ -978,7 +956,7 @@ static s32 func_8000CCBC(s32 i0, struct unk1* cur,
         sp24[i] = 0;
     }
     while (cur != NULL) {
-        s32 tmp = lbl_803BA030[cur->x5C];
+        s32 tmp = lbl_803BA030[cur->u.tevconf.alpha_out_reg];
         sp24[tmp] = 1;
         cur = cur->next;
     }
@@ -990,9 +968,9 @@ static s32 func_8000CCBC(s32 i0, struct unk1* cur,
     return -1;
 }
 
-s32 func_8000CD60(s32 i0, struct unk3* arg1, void* arg2)
+s32 func_8000CD60(s32 i0, HSD_MObj* mobj, HSD_TExp* texp)
 {
-    return func_8000CCBC(i0, arg1->x18, arg1->x1C, arg2);
+    return func_8000CCBC(i0, &mobj->tevdesc->desc, mobj->texp, texp);
 }
 
 s32 func_8000CD90(s32 i)

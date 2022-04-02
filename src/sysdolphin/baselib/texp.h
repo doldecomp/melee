@@ -45,6 +45,52 @@ typedef enum _HSD_TExpType {
     HSD_TE_TYPE_MAX = 8
 } HSD_TExpType;
 
+typedef struct _HSD_TevConf {
+    u32 clr_op;
+    u32 clr_a;
+    u32 clr_b;
+    u32 clr_c;
+    u32 clr_d;
+    u32 clr_scale;
+    u32 clr_bias;
+    u32 clr_clamp;
+    u32 clr_out_reg;
+    u32 alpha_op;
+    u32 alpha_a;
+    u32 alpha_b;
+    u32 alpha_c;
+    u32 alpha_d;
+    u32 alpha_scale;
+    u32 alpha_bias;
+    u32 alpha_clamp;
+    u32 alpha_out_reg;
+    u32 mode;
+    u32 ras_swap;
+    u32 tex_swap;
+    u32 kcsel;
+    u32 kasel;
+} HSD_TevConf;
+
+typedef struct _HSD_TevDesc {
+    struct _HSD_TevDesc* next;
+    u32 flags;
+    u32 stage;
+    u32 coord;
+    u32 map;
+    u32 color;
+    union {
+        HSD_TevConf tevconf;
+        struct {
+            u32 tevmode;
+        } tevop;
+    } u;
+} HSD_TevDesc;
+
+typedef struct _HSD_TExpTevDesc {
+    struct _HSD_TevDesc desc;
+    struct _HSD_TObj* tobj;
+} HSD_TExpTevDesc;
+
 typedef struct _HSD_TECommon {
     HSD_TExpType type;
     union _HSD_TExp* next;
