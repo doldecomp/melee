@@ -196,7 +196,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtkoopa.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtlink.s.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtluigi.s.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtmars.s.o 					\
 	$(BUILD_DIR)/src/melee/gr/grtmars.c.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtmewtwo.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtness.s.o 					\
