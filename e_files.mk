@@ -40,6 +40,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/gr/grshrine.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/grstory.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/grtmars.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grtness.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/stage.c.o\
 	$(EPILOGUE_DIR)/src/melee/pl/player.c.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/tobj.c.o\

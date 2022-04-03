@@ -198,7 +198,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtluigi.s.o 		            \
 	$(BUILD_DIR)/src/melee/gr/grtmars.c.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtmewtwo.s.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtness.s.o 					\
 	$(BUILD_DIR)/src/melee/gr/grtness.c.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtpeach.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtpichu.s.o 		            \
