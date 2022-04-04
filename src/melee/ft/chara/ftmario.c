@@ -7,9 +7,9 @@ extern void func_800E0EE0(HSD_GObj*);
 extern void func_80084F3C(void);
 extern unsigned char func_8007500C(struct _Fighter *, long);
 extern void func_8000B1CC(void *, void *, Vec*);
-extern void func_8029B6F8(void);
-extern void func_802C0510(void);
-extern void ef_Spawn(void);
+extern void func_8029B6F8(f32,HSD_GObj*,Vec*,u8);
+extern void func_802C0510(HSD_GObj*,Vec*,int,u8,f32);
+extern void ef_Spawn(...);
 extern const f32 lbl_804D9198;
 extern const f32 lbl_804D919C;
 extern s32 lbl_803C5A20[];
@@ -168,84 +168,34 @@ s32 func_800E0CE0(s32 arg0) {
     return lbl_803C5A20[offset - 0xe];
 }
 
-/*
-// Progress - Close-ish but not matching. Can't get compiler to use CTR
 void func_800E0D1C(HSD_GObj* gobj) {
-    //int i;
-    //s32 temp_r3;
+
     Fighter* ft = gobj->user_data;
     
     u32 arr[9];
     
-    s32 phi_ctr;
     u32* r4_ptr;
-    int r3, r5; 
+    int r3, r5, unused; 
 
-    int i;
-    r5 = 0;
+    r5 = r3 = 0;
     r4_ptr = arr+1;
-    r3 = 0;
-    i = 9 - r5;
-    
-    //For loop I had (that was not unrolling - note if using decrementing instead of incrementing, the loop unrolls):
-    for(i = 0; i != 9 - r5; i++) {
+
+    while(r5 < 9) {
         if(((r5 != (int)ft->x222C) && (r5 != (int)ft->x2230))) {
             *r4_ptr++ = r5;
             r3 += 1;
         }
         r5 += 1;
+
         
     }
 
-    r5 = (int)arr[HSD_Randi(r3)+1];
+    r3 = (int)arr[HSD_Randi(r3)+1];
     ft->x2230 = ft->x222C;
-    ft->x222C = r5;
-}*/
-asm void func_800E0D1C(HSD_GObj* gobj)
-{
-nofralloc
-/* 800E0D1C 000DD8FC  7C 08 02 A6 */	mflr r0
-/* 800E0D20 000DD900  38 A0 00 00 */	li r5, 0
-/* 800E0D24 000DD904  90 01 00 04 */	stw r0, 4(r1)
-/* 800E0D28 000DD908  20 05 00 09 */	subfic r0, r5, 9
-/* 800E0D2C 000DD90C  2C 05 00 09 */	cmpwi r5, 9
-/* 800E0D30 000DD910  7C 09 03 A6 */	mtctr r0
-/* 800E0D34 000DD914  94 21 FF C0 */	stwu r1, -0x40(r1)
-/* 800E0D38 000DD918  93 E1 00 3C */	stw r31, 0x3c(r1)
-/* 800E0D3C 000DD91C  38 81 00 14 */	addi r4, r1, 0x14
-/* 800E0D40 000DD920  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800E0D44 000DD924  38 60 00 00 */	li r3, 0
-/* 800E0D48 000DD928  40 80 00 30 */	bge lbl_800E0D78
-lbl_800E0D4C:
-/* 800E0D4C 000DD92C  80 1F 22 2C */	lwz r0, 0x222c(r31)
-/* 800E0D50 000DD930  7C 05 00 00 */	cmpw r5, r0
-/* 800E0D54 000DD934  41 82 00 1C */	beq lbl_800E0D70
-/* 800E0D58 000DD938  80 1F 22 30 */	lwz r0, 0x2230(r31)
-/* 800E0D5C 000DD93C  7C 05 00 00 */	cmpw r5, r0
-/* 800E0D60 000DD940  41 82 00 10 */	beq lbl_800E0D70
-/* 800E0D64 000DD944  90 A4 00 00 */	stw r5, 0(r4)
-/* 800E0D68 000DD948  38 84 00 04 */	addi r4, r4, 4
-/* 800E0D6C 000DD94C  38 63 00 01 */	addi r3, r3, 1
-lbl_800E0D70:
-/* 800E0D70 000DD950  38 A5 00 01 */	addi r5, r5, 1
-/* 800E0D74 000DD954  42 00 FF D8 */	bdnz lbl_800E0D4C
-lbl_800E0D78:
-/* 800E0D78 000DD958  48 29 F8 09 */	bl HSD_Randi
-/* 800E0D7C 000DD95C  54 64 10 3A */	slwi r4, r3, 2
-/* 800E0D80 000DD960  80 1F 22 2C */	lwz r0, 0x222c(r31)
-/* 800E0D84 000DD964  38 61 00 14 */	addi r3, r1, 0x14
-/* 800E0D88 000DD968  7C 63 20 2E */	lwzx r3, r3, r4
-/* 800E0D8C 000DD96C  90 1F 22 30 */	stw r0, 0x2230(r31)
-/* 800E0D90 000DD970  90 7F 22 2C */	stw r3, 0x222c(r31)
-/* 800E0D94 000DD974  80 01 00 44 */	lwz r0, 0x44(r1)
-/* 800E0D98 000DD978  83 E1 00 3C */	lwz r31, 0x3c(r1)
-/* 800E0D9C 000DD97C  38 21 00 40 */	addi r1, r1, 0x40
-/* 800E0DA0 000DD980  7C 08 03 A6 */	mtlr r0
-/* 800E0DA4 000DD984  4E 80 00 20 */	blr 
-}
+    ft->x222C = r3;
 
-#pragma push
-#pragma peephole on
+    return;
+}
 
 void func_800E0DA8(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
@@ -286,7 +236,7 @@ void func_800E0EA4(HSD_GObj* gobj) {
     }
 }
 
-#pragma pop
+//https://decomp.me/scratch/yJ6cV
 asm void func_800E0EE0(HSD_GObj* gobj) {
 nofralloc
 /* 800E0EE0 000DDAC0  7C 08 02 A6 */	mflr r0
