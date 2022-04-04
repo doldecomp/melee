@@ -182,27 +182,24 @@ s32 func_800E0CE0(s32 arg0) {
     return lbl_803C5A20[offset - 0xe];
 }
 
+//https://decomp.me/scratch/cdQ5o
 void func_800E0D1C(HSD_GObj* gobj) {
-
-    Fighter* ft = gobj->user_data;
     
-    u32 arr[9];
+    Fighter* ft;
+    int arr[8];
+    int r3,i,outpos;
+
+    u8 padding[8];
     
-    u32* r4_ptr;
-    int r3, r5, unused; 
-
-    r5 = r3 = 0;
-    r4_ptr = arr+1;
-
-    while(r5 < 9) {
-        if(((r5 != (int)ft->x222C) && (r5 != (int)ft->x2230))) {
-            *r4_ptr++ = r5;
-            r3 += 1;
+    ft = gobj->user_data;
+    for (i = outpos = 0; i < 9; i++) {
+        if (i != (int)ft->x222C && i != (int)ft->x2230) {
+            arr[outpos] = i;
+            outpos++;
         }
-        r5 += 1;
     }
 
-    r3 = (int)arr[HSD_Randi(r3)+1];
+    r3 = (int)arr[HSD_Randi(outpos)];
     ft->x2230 = ft->x222C;
     ft->x222C = r3;
 
