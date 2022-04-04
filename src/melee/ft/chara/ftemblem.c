@@ -6,7 +6,7 @@ void ftRoy_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
     func_80074A4C(gobj, 2, -1);
-    ft->x222C = 0;
+    ft->sa.mars.x222C = 0;
 }
 
 void func_8014EF60(HSD_GObj* gobj, s32 arg1)

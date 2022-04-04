@@ -10,12 +10,12 @@ extern s32 lbl_803C5A20[];
 void ftMario_OnDeath(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
-    ft->x222C = 9;
-    ft->x2230 = 9;
-    ft->x2234 = 0;
-    ft->x2238 = 0;
-    ft->x223C = 0;
-    ft->x2240 = 0;
+    ft->sa.mario.x222C = 9;
+    ft->sa.mario.x2230 = 9;
+    ft->sa.mario.x2234 = 0;
+    ft->sa.mario.x2238 = 0;
+    ft->sa.mario.x223C = 0;
+    ft->sa.mario.x2240 = 0;
 }
 
 void func_800E0920(Fighter* ft) {
