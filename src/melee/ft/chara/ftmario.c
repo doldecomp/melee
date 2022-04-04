@@ -183,10 +183,10 @@ s32 func_800E0CE0(s32 arg0) {
 }
 
 //https://decomp.me/scratch/cdQ5o
-void func_800E0D1C(HSD_GObj* gobj) {
+int func_800E0D1C(HSD_GObj* gobj) {
     
     Fighter* ft;
-    int arr[8];
+    int arr[9];
     int r3,i,outpos;
 
     u8 padding[8];
@@ -203,7 +203,7 @@ void func_800E0D1C(HSD_GObj* gobj) {
     ft->x2230 = ft->x222C;
     ft->x222C = r3;
 
-    return;
+    return r3;
 }
 
 void func_800E0DA8(HSD_GObj* gobj) {
