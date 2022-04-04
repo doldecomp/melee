@@ -6,12 +6,12 @@
 extern void func_800E1368(void);
 extern void func_8008A4D4(HSD_GObj*);
 extern void func_800E0EE0(HSD_GObj*);
-extern void func_80084F3C(void);
-extern unsigned char func_8007500C(struct _Fighter *, long);
-extern void func_8000B1CC(void *, void *, Vec*);
+extern void func_80084F3C(HSD_GObj*);
+extern long func_8007500C(struct _Fighter *, long);
+extern void func_8000B1CC(HSD_JObj*, Vec*, Vec*);
 extern void func_8029B6F8(f32,HSD_GObj*,Vec*,u8);
 extern void func_802C0510(HSD_GObj*,Vec*,int,u8,f32);
-extern void ef_Spawn(...);
+extern void ef_Spawn(long,...);
 extern const f32 lbl_804D9198;
 extern const f32 lbl_804D919C;
 extern s32 lbl_803C5A20[];
@@ -205,7 +205,7 @@ void func_800E0DA8(HSD_GObj* gobj) {
     ft->x2210_ThrowFlags.flags = 0;
     func_800693AC(gobj,0x157,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
     func_8006EBA4(gobj);
-    ft->x21BC_callback_Accessory4 = func_800E0EE0;
+    ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
 
 void func_800E0E18(HSD_GObj* gobj) {
@@ -225,8 +225,8 @@ void func_800E0E54(HSD_GObj* gobj) {
     }
 }
 
-void func_800E0E84() {
-    func_80084F3C();
+void func_800E0E84(HSD_GObj* gobj) {
+    func_80084F3C(gobj);
 }
 
 void func_800E0EA4(HSD_GObj* gobj) {
@@ -346,7 +346,7 @@ void func_800E1040(HSD_GObj* gobj) {
     ft->x2210_ThrowFlags.flags = 0;
     func_800693AC(gobj,0x158,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
     func_8006EBA4(gobj);
-    ft->x21BC_callback_Accessory4 = func_800E0EE0;
+    ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
 
 void func_800E10B0(HSD_GObj* gobj) {
