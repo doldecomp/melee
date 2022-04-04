@@ -1899,37 +1899,9 @@ lbl_803E0F20:
     .4byte 0x47000000
     .4byte 0x41F00000
     .4byte 0x3F9BD194
-    .4byte 0x47726449
-    .4byte 0x7A756D69
-    .4byte 0x5F63645F
-    .4byte 0x77745F47
-    .4byte 0x7264497A
-    .4byte 0x756D6944
-    .4byte 0x756D6D79
-    .4byte 0x315F315F
-    .4byte 0x696D6167
-    .4byte 0x655F6465
-    .4byte 0x73630000
-    .4byte 0x6E6F7420
-    .4byte 0x666F756E
-    .4byte 0x64206D69
-    .4byte 0x72726F72
-    .4byte 0x20696D61
-    .4byte 0x67652064
-    .4byte 0x65736321
-    .4byte 0x20284772
-    .4byte 0x64497A75
-    .4byte 0x6D695F63
-    .4byte 0x645F7774
-    .4byte 0x5F477264
-    .4byte 0x497A756D
-    .4byte 0x6944756D
-    .4byte 0x6D79315F
-    .4byte 0x315F696D
-    .4byte 0x6167655F
-    .4byte 0x64657363
-    .4byte 0x290A0000
-    .4byte NULL
+    .asciz "GrdIzumi_cd_wt_GrdIzumiDummy1_1_image_desc"
+    .balign 4
+    .asciz "not found mirror image desc! (GrdIzumi_cd_wt_GrdIzumiDummy1_1_image_desc)\n"
 
 
 .section .sdata

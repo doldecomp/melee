@@ -3099,9 +3099,8 @@ lbl_803E58F0:
     .4byte NULL
 .global lbl_803E597C
 lbl_803E597C:
-    .4byte 0x2F47724E
-    .4byte 0x53722E64
-    .4byte 0x61740000
+    .asciz "/GrNSr.dat"
+    .balign 4
 .global lbl_803E5988
 lbl_803E5988:
     .4byte 0x00000020
@@ -3117,15 +3116,8 @@ lbl_803E5988:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E59E0
 lbl_803E59E0:
     .asciz "grshrineroute.c"
@@ -3147,16 +3139,8 @@ jtbl_803E5A14:
 	.4byte lbl_80209620
 	.4byte lbl_802096AC
 	.4byte lbl_80209848
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
 .global lbl_803E5A58
 lbl_803E5A58:
     .4byte 0x80664DFF

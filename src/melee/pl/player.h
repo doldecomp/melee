@@ -30,7 +30,7 @@ typedef struct _StaticPlayer
 
     /*0x40*/ f32 facing_direction;
 
-    /*0x44*/ s8 costume_id;  // 00 = normal, 01 = red, 02 = blue, 03 = green (reflected in icon immediately)
+    /*0x44*/ u8 costume_id;  // 00 = normal, 01 = red, 02 = blue, 03 = green (reflected in icon immediately)
     /*0x45*/ s8 unk45;
     /*0x46*/ s8 controller_index;
     /*0x47*/ u8 team;  /// 00 = red, 01 = blue, 02 = green
@@ -183,9 +183,9 @@ void Player_80032FA4(s32 slot, s32 arg);
 f32 Player_GetFacingDirection(s32 slot);
 void Player_SetFacingDirection(s32 slot, f32 direction);
 void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction);
-s8 Player_GetCostumeId(s32 slot);
+u32 Player_GetCostumeId(s32 slot);
 void Player_SetCostumeId(s32 slot, s8 costume_id);
-s8 Player_GetControllerIndex(s32 slot);
+u8 Player_GetControllerIndex(s32 slot);
 void Player_SetControllerIndex(s32 slot, s8 controller_index);
 s8 Player_GetTeam(s32 slot);
 void Player_SetTeam(s32 slot, s8 unk_color);
@@ -229,7 +229,7 @@ void Player_SetMoreFlagsBit2(s32 slot, u8 bit2);
 u8 Player_GetMoreFlagsBit3(s32 slot);
 void Player_SetMoreFlagsBit3(s32 slot, u8 bit3);
 void Player_SetMoreFlagsBit4(s32 slot, u8 bit4);
-u8 Player_GetMoreFlagsBit4(s32 slot);
+s32 Player_GetMoreFlagsBit4(s32 slot);
 u8 Player_GetMoreFlagsBit5(s32 slot);
 void Player_SetMoreFlagsBit5(s32 slot, u8 bit5);
 u8 Player_GetMoreFlagsBit6(s32 slot);
@@ -255,7 +255,7 @@ void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id);
 u8 Player_GetFlagsBit1(s32 slot);
 void Player_SetFlagsBit1(s32 slot);
 void Player_UnsetFlagsBit1(s32 slot);
-u8 Player_GetFlagsBit3(s32 slot);
+s32 Player_GetFlagsBit3(s32 slot);
 void Player_SetFlagsBit3(s32 slot, u8 bit3);
 u8 Player_GetFlagsBit4(s32 slot);
 u8 Player_GetFlagsBit5(s32 slot);

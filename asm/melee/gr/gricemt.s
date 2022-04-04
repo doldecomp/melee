@@ -5113,9 +5113,8 @@ lbl_803E4718:
     .4byte NULL
 .global lbl_803E47F4
 lbl_803E47F4:
-    .4byte 0x2F477249
-    .4byte 0x6D2E6461
-    .4byte 0x74000000
+    .asciz "/GrIm.dat"
+    .balign 4
 .global lbl_803E4800
 lbl_803E4800:
     .4byte 0x00000016
@@ -5131,43 +5130,17 @@ lbl_803E4800:
     .4byte 0x00000001
     .4byte lbl_803E40B0
     .4byte 0x000000C3
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x626C6F63
-    .4byte 0x6B5F6E75
-    .4byte 0x6D3C3D42
-    .4byte 0x4C4F434B
-    .4byte 0x5F434F4C
-    .4byte 0x4C5F4A4F
-    .4byte 0x424A5F4D
-    .4byte 0x41580000
-    .4byte 0x636F6C6C
-    .4byte 0x5F6A6F62
-    .4byte 0x6A000000
-    .4byte 0x626C6F63
-    .4byte 0x6B5F6A6F
-    .4byte 0x626A0000
-    .4byte 0x75707065
-    .4byte 0x725F6978
-    .4byte 0x3C494345
-    .4byte 0x4D545F46
-    .4byte 0x49454C44
-    .4byte 0x5F4D4158
-    .4byte NULL
-    .4byte 0x756E6465
-    .4byte 0x725F6978
-    .4byte 0x3C494345
-    .4byte 0x4D545F46
-    .4byte 0x49454C44
-    .4byte 0x5F4D4158
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "block_num<=BLOCK_COLL_JOBJ_MAX"
+    .balign 4
+    .asciz "coll_jobj"
+    .balign 4
+    .asciz "block_jobj"
+    .balign 4
+    .asciz "upper_ix<ICEMT_FIELD_MAX"
+    .balign 4
+    .asciz "under_ix<ICEMT_FIELD_MAX"
 
 
 .section .sdata

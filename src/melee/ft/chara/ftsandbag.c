@@ -29,32 +29,32 @@ void ftSandbag_OnLoad(HSD_GObj* gobj)
 void func_8014FA30(Fighter* fighter)
 {
     FighterBone* bones = fighter->x5E8_fighterBones;
-    func_8000C1C0(bones[5].x0_joint, bones[12].x0_joint);
+    func_8000C1C0(bones[5].x0_jobj, bones[12].x0_jobj);
     bones = fighter->x5E8_fighterBones;
-    func_8000C1C0(bones[5].x4_joint2, bones[12].x4_joint2);
+    func_8000C1C0(bones[5].x4_jobj2, bones[12].x4_jobj2);
     bones = fighter->x5E8_fighterBones;
-    func_8000C1C0(bones[5].x0_joint, bones[17].x0_joint);
+    func_8000C1C0(bones[5].x0_jobj, bones[17].x0_jobj);
     bones = fighter->x5E8_fighterBones;
-    func_8000C1C0(bones[5].x4_joint2, bones[17].x4_joint2);
+    func_8000C1C0(bones[5].x4_jobj2, bones[17].x4_jobj2);
     bones = fighter->x5E8_fighterBones;
-    func_8000C228(bones[7].x0_joint, bones[37].x0_joint);
+    func_8000C228(bones[7].x0_jobj, bones[37].x0_jobj);
     bones = fighter->x5E8_fighterBones;
-    func_8000C228(bones[7].x4_joint2, bones[37].x4_joint2);
+    func_8000C228(bones[7].x4_jobj2, bones[37].x4_jobj2);
 
-    func_8000C420(fighter->x5E8_fighterBones[7].x0_joint, 1, -1.57079637f);
-    func_8000C420(fighter->x5E8_fighterBones[7].x0_joint, 2, -1.57079637f);
-    func_8000C420(fighter->x5E8_fighterBones[7].x4_joint2, 1, -1.57079637f);
-    func_8000C420(fighter->x5E8_fighterBones[7].x4_joint2, 2, -1.57079637f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x0_jobj, 1, -1.57079637f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x0_jobj, 2, -1.57079637f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x4_jobj2, 1, -1.57079637f);
+    func_8000C420(fighter->x5E8_fighterBones[7].x4_jobj2, 2, -1.57079637f);
 
     bones = fighter->x5E8_fighterBones;
-    func_8000C228(bones[6].x0_joint, bones[5].x0_joint);
+    func_8000C228(bones[6].x0_jobj, bones[5].x0_jobj);
     bones = fighter->x5E8_fighterBones;
-    func_8000C228(bones[6].x4_joint2, bones[5].x4_joint2);
+    func_8000C228(bones[6].x4_jobj2, bones[5].x4_jobj2);
 
-    func_8000C420(fighter->x5E8_fighterBones[6].x0_joint, 1, -1.50098311f);
-    func_8000C420(fighter->x5E8_fighterBones[6].x0_joint, 2, -1.50098311f);
-    func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 1, -1.50098311f);
-    func_8000C420(fighter->x5E8_fighterBones[6].x4_joint2, 2, -1.50098311f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x0_jobj, 1, -1.50098311f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x0_jobj, 2, -1.50098311f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x4_jobj2, 1, -1.50098311f);
+    func_8000C420(fighter->x5E8_fighterBones[6].x4_jobj2, 2, -1.50098311f);
 }
 
 u32 func_8014FB78(HSD_GObj* gobj)
@@ -88,7 +88,7 @@ void func_8014FBA4(HSD_GObj* gobj)
     f32 temp_f1;
 
     Fighter* fighter = gobj->user_data;
-    if ((s32) fighter->xE0_airState == 1) {
+    if ((s32) fighter->xE0_ground_or_air == GA_Air) {
         func_8007D7FC(fighter);
     }
 
@@ -104,12 +104,12 @@ void func_8014FC24(void) {
     return;
 }
 
-void func_8014FC28(void)
+void func_8014FC28(HSD_GObj* gobj)
 {
-    func_80084F3C();
+    func_80084F3C(gobj);
 }
 
-void func_8014FC48(void)
+void func_8014FC48(HSD_GObj* gobj)
 {
-    func_80083F88();
+    func_80083F88(gobj);
 }

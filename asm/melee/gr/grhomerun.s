@@ -2953,18 +2953,10 @@ lbl_803E821C:
     .4byte 0x00000001
     .4byte lbl_804D4998
     .4byte 0x00000001
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x6772686F
-    .4byte 0x6D657275
-    .4byte 0x6E2E6300
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grhomerun.c"
+    .balign 4
 .global lbl_803E8280
 lbl_803E8280:
     .4byte NULL
@@ -2993,60 +2985,23 @@ lbl_803E8294:
     .4byte 0x47000000
     .4byte 0x41F00000
     .4byte 0x3FAE8A72
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E7061
-    .4byte 0x72747300
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6261
-    .4byte 0x636B0000
-    .4byte 0x5349535F
-    .4byte 0x4772486F
-    .4byte 0x6D657275
-    .4byte 0x6E446174
-    .4byte 0x61000000
-    .4byte 0x494E4954
-    .4byte 0x5F414444
-    .4byte 0x5F504152
-    .4byte 0x54535F52
-    .4byte 0x414E4745
-    .4byte 0x2A323C47
-    .4byte 0x725F486F
-    .4byte 0x6D657275
-    .4byte 0x6E5F5061
-    .4byte 0x7274735F
-    .4byte 0x4D617800
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6261
-    .4byte 0x636B5B69
-    .4byte 0x5D000000
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6267
-    .4byte 0x5F676F62
-    .4byte 0x6A5B305D
-    .4byte NULL
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6267
-    .4byte 0x5F676F62
-    .4byte 0x6A5B315D
-    .4byte NULL
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6267
-    .4byte 0x5F676F62
-    .4byte 0x6A5B325D
-    .4byte NULL
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6267
-    .4byte 0x5F676F62
-    .4byte 0x6A5B335D
-    .4byte NULL
-    .4byte NULL
+    .asciz "gp->u.map.parts"
+    .balign 4
+    .asciz "gp->u.map.back"
+    .balign 4
+    .asciz "SIS_GrHomerunData"
+    .balign 4
+    .asciz "INIT_ADD_PARTS_RANGE*2<Gr_Homerun_Parts_Max"
+    .balign 4
+    .asciz "gp->u.map.back[i]"
+    .balign 4
+    .asciz "gp->u.map.bg_gobj[0]"
+    .balign 4
+    .asciz "gp->u.map.bg_gobj[1]"
+    .balign 4
+    .asciz "gp->u.map.bg_gobj[2]"
+    .balign 4
+    .asciz "gp->u.map.bg_gobj[3]"
 
 
 .section .sdata
@@ -3057,8 +3012,8 @@ lbl_804D4998:
     .4byte 0x00000000
 .global lbl_804D49A0
 lbl_804D49A0:
-    .4byte 0x2F477248
-    .4byte 0x72000000
+    .asciz "/GrHr"
+    .balign 4
 .global lbl_804D49A8
 lbl_804D49A8:
     .asciz "jobj.h"

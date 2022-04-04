@@ -5258,9 +5258,8 @@ lbl_803E1A30:
     .4byte NULL
 .global lbl_803E1B20
 lbl_803E1B20:
-    .4byte 0x2F47725A
-    .4byte 0x652E6461
-    .4byte 0x74000000
+    .asciz "/GrZe.dat"
+    .balign 4
 .global lbl_803E1B2C
 lbl_803E1B2C:
     .4byte 0x00000008
@@ -5276,15 +5275,8 @@ lbl_803E1B2C:
     .4byte 0x00000001
     .4byte lbl_803E1A10
     .4byte 0x00000005
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E1B84
 lbl_803E1B84:
     .asciz "grzebes.c"
@@ -5377,9 +5369,8 @@ lbl_803E1C80:
     .4byte 0x42600000
     .4byte 0x40900000
     .4byte 0x40C00000
-    .4byte 0x73696D61
-    .4byte 0x5F6A6F62
-    .4byte 0x6A000000
+    .asciz "sima_jobj"
+    .balign 4
 .global lbl_803E1CEC
 lbl_803E1CEC:
     .asciz "map_a_gobj"

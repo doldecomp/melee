@@ -1,5 +1,7 @@
 #include "ftclink.h"
 
+#include <melee/it/id.h>
+
 void ftCLink_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
@@ -33,7 +35,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[2], attrs->xBC);
     func_8026B3F8(items[3], attrs->xC);
     func_8026B3F8(items[4], attrs->x10);
-    func_8026B3F8(items[5], ITEM_CLINK_MILK);
+    func_8026B3F8(items[5], It_Kind_ClinkMilk);
     func_800753D4(ft, *lbl_804D6540[ft->x4_fighterKind], items[6]);
 }
 
@@ -136,13 +138,13 @@ void func_80149114(HSD_GObj* gobj)
     Fighter* ft = gobj->user_data;
     CLinkAttributes* temp_r4 = (void*) ft->x10C_ftData->ext_attr;
     f32 ftmp = func_80092ED8(ft->x19A4, temp_r4, temp_r4->xD8);
-    ft->xEC_groundVel = ftmp * lbl_804D6554->x294;
+    ft->xEC_ground_vel = ftmp * lbl_804D6554->x294;
     if (ft->x19AC < 0.0f) {
-        ftmp = ft->xEC_groundVel;
+        ftmp = ft->xEC_ground_vel;
     } else {
-        ftmp = -ft->xEC_groundVel;
+        ftmp = -ft->xEC_ground_vel;
     }
-    ft->xEC_groundVel = ftmp;
+    ft->xEC_ground_vel = ftmp;
     func_80088148(ft, 0x111DA, 0x7F, 0x40);
 }
 

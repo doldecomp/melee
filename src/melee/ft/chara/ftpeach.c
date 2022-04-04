@@ -1,5 +1,7 @@
 #include "ftpeach.h"
 
+#include <melee/it/id.h>
+
 typedef struct _PairStruct {
     f32 unk0;
     f32 unk4;
@@ -23,7 +25,7 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 3, -1);
     func_80074A4C(gobj, 4, 0);
 
-    switch (ft->x619_flag)
+    switch (ft->x619_costume_id)
     {
         case 1:
             func_80074A4C(gobj, 1, -1);
@@ -57,9 +59,9 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
         *attr = (u32)dest;
     }
     
-    func_8026B3F8(items[0], ITEM_PEACH_UNK);
-    func_8026B3F8(items[1], ITEM_PEACH_TURNIP);
-    func_8026B3F8(items[2], ITEM_PEACH_PARASOL);
-    func_8026B3F8(items[3], ITEM_PEACH_TOAD);
-    func_8026B3F8(items[4], ITEM_PEACH_TOAD_SPORE);
+    func_8026B3F8(items[0], It_Kind_PeachUnk);
+    func_8026B3F8(items[1], It_Kind_PeachTurnip);
+    func_8026B3F8(items[2], It_Kind_PeachParasol);
+    func_8026B3F8(items[3], It_Kind_PeachToad);
+    func_8026B3F8(items[4], It_Kind_PeachToadSpore);
 }

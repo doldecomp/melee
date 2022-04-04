@@ -1,5 +1,7 @@
 #include "ftkoopa.h"
 
+#include <melee/it/id.h>
+
 extern void* func_800BC7E0(struct HSD_GObj*);
 extern void* func_800BC8D4(struct HSD_GObj*);
 extern void* func_800DE7C0();
@@ -21,7 +23,7 @@ void ftKoopa_OnDeath(HSD_GObj* gobj) {
 
     ftVars = (ftKoopaVars*)&ft->x222C;
     
-    ft->x18B0 = koopaAttr->x0;
+    ft->dmg.x18B0 = koopaAttr->x0;
     ftVars->x0 = koopaAttr->x10;
     ftVars->x4 = koopaAttr->x18;
 }
@@ -57,7 +59,7 @@ void ftKoopa_OnLoad(HSD_GObj* gobj) {
 
     sA = (ftKoopaAttributes*)ft->x2D4_specialAttributes;    
 
-    func_8026B3F8(items[0], 100);
+    func_8026B3F8(items[0], It_Kind_KoopaFlame);
 
     ft->x2226_flag.bits.b1 = 1;
 }
@@ -447,7 +449,7 @@ void func_801336CC(HSD_GObj* gobj) {
     ft = ft_temp = gobj->user_data;
     koopaAttr = (ftKoopaAttributes *) ft->x2D4_specialAttributes;
     if (((u32) ft->x2200_ftcmd_var0 != 0) && ((s32) ft->x2344_stateVar2 != 0)) {
-        func_8007ABD0((s32)ft + 0x914, koopaAttr->x2C, gobj);
+        func_8007ABD0(&ft->x914[0], koopaAttr->x2C, gobj);
         ft->x2200_ftcmd_var0 = 0;
     }
     if (func_8006F238(gobj) == 0) {

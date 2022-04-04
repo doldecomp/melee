@@ -1,6 +1,7 @@
 # Files with unscheduled epilogues.
 
 EPILOGUE_UNSCHEDULED:=\
+	$(EPILOGUE_DIR)/src/melee/lb/code_8000B074.c.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lblanguage.c.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbcommand.c.o\
 	$(EPILOGUE_DIR)/src/melee/lb/lbvector.c.o\
@@ -9,6 +10,7 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/lb/lbarchive.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/ftcliffcommon.c.o 		\
 	$(EPILOGUE_DIR)/src/melee/ft/ftwalljump.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/fighter.c.o\
  	$(EPILOGUE_DIR)/src/melee/ft/chara/ftclink.c.o\
  	$(EPILOGUE_DIR)/src/melee/ft/chara/ftclink_2.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftdrmario.c.o\
@@ -20,13 +22,25 @@ EPILOGUE_UNSCHEDULED:=\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftgigakoopa.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftkoopa.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftmario.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMars.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialN.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialS.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialHi.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialLw.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftness.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpeach.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftpichu.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftsandbag.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakoboy.c.o\
 	$(EPILOGUE_DIR)/src/melee/ft/chara/ftzakogirl.c.o\
+	$(EPILOGUE_DIR)/src/melee/ft/ftlib.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grbattle.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grdatfiles.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/ground.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grshrine.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/grstory.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grtmars.c.o\
+	$(EPILOGUE_DIR)/src/melee/gr/grtness.c.o\
 	$(EPILOGUE_DIR)/src/melee/gr/stage.c.o\
 	$(EPILOGUE_DIR)/src/melee/pl/player.c.o\
 	$(EPILOGUE_DIR)/src/sysdolphin/baselib/tobj.c.o\

@@ -8,7 +8,7 @@ BOOL func_80081298(HSD_GObj* gobj) {
     s32 unused1, unused2;
 
     Fighter* fighter = gobj->user_data;
-    if (fighter->x624 <= -lbl_804D6554->x480) {
+    if (fighter->x624_lstick_y <= -lbl_804D6554->x480) {
         return FALSE;
     }
     if (((fighter->x6F0_collData.x134_envFlags & 0x03000000) != 0)
@@ -100,8 +100,8 @@ void func_80081544(HSD_GObj* gobj) {
         } else {
             func_80053DA4(fighter->x2340_stateVar1, sp10);
         }
-        fighter->xB0_pos.x = (f32) ((fighter->x68C.z * fighter->x2C_facing_direction) + sp10[0]);
-        fighter->xB0_pos.y = (f32) (sp10[1] + fighter->x68C.y);
+        fighter->xB0_pos.x = (f32) ((fighter->x68C_transNPos.z * fighter->x2C_facing_direction) + sp10[0]);
+        fighter->xB0_pos.y = (f32) (sp10[1] + fighter->x68C_transNPos.y);
         return;
     }
     func_800CC730(gobj);
@@ -124,9 +124,9 @@ void func_80081644(HSD_GObj* gobj)
 {
     Fighter* fighter = gobj->user_data;
     func_800761C8();
-    if ((s32) fighter->xE0_airState == 1)
+    if ((s32) fighter->xE0_ground_or_air == GA_Air)
     {
         func_8005811C(&fighter->x6F0_collData, fighter->x2340_stateVar1);
-        fighter->x890->xC_flag.b0 = 1;
+        fighter->x890->xC_flag.bits.b0 = 1;
     }
 }

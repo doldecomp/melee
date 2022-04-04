@@ -9,13 +9,13 @@ void func_80149954(HSD_GObj* gobj)
 
     ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 == 1 && ft->x2240 == 0U) {
-        func_8000B1CC(ft->x5E8_fighterBones->x0_joint, 0, &sp18);
+        func_8000B1CC(ft->x5E8_fighterBones->x0_jobj, 0, &sp18);
         tmp = func_800E0D1C(gobj);
         tmp = func_802C0850(gobj, &sp18, tmp, 0x31, ft->x2C_facing_direction);
         ft->x2240 = tmp;
         if (tmp != 0) {
-            ft->x21E4_callback_OnDeath2 = func_80149540;
-            ft->x21DC_callback_OnTakeDamage = func_80149540;
+            ft->cb.x21E4_callback_OnDeath2 = func_80149540;
+            ft->cb.x21DC_callback_OnTakeDamage = func_80149540;
         }
     } else if (ft->x2200_ftcmd_var0 == 2) {
         func_801497CC(gobj);
@@ -31,8 +31,8 @@ void func_80149954(HSD_GObj* gobj)
         if (gobj != NULL) {
             ft = gobj->user_data;
             if (ft != NULL) {
-                ft->x21DC_callback_OnTakeDamage = 0;
-                ft->x21E4_callback_OnDeath2 = 0;
+                ft->cb.x21DC_callback_OnTakeDamage = 0;
+                ft->cb.x21E4_callback_OnDeath2 = 0;
             }
         }
         func_8008A2BC(gobj);
