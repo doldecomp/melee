@@ -16,7 +16,7 @@ extern const f32 lbl_804D9198;
 extern const f32 lbl_804D919C;
 extern s32 lbl_803C5A20[];
 
-inline int copy_nonmatching(Fighter* ft_2, int* arr)
+inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
 {
     int i, outpos;
     for (i = outpos = 0; i < 9; i++) {
@@ -279,7 +279,7 @@ void func_800E0EE0(HSD_GObj* gobj) {
         } else {
             ft_2 = gobj->user_data;
 
-            outsize = copy_nonmatching(ft_2, arr);
+            outsize = _func_800E0EE0_arr_copy(ft_2, arr);
             tmp = tmp2 = arr[HSD_Randi(outsize)];
             ft_2->x2230 = ft_2->x222C;
             ft_2->x222C = tmp2;
