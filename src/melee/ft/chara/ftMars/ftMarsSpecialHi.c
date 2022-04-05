@@ -72,14 +72,14 @@ void lbl_801383A8(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     MarsAttributes* attr = ft->x2D4_specialAttributes;
 
-    f32 abs_lstick_x = abs(ft->x620_lstick_x);
+    f32 abs_lstick_x = abs(ft->input.x620_lstick_x);
 
     s32 phi_r0;
     s32 unused;
 
     if (ft->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 = attr->x38 * ((abs_lstick_x - attr->x34) / (1.0/*d*/ - attr->x34));
-        temp_f1 = (ft->x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
+        temp_f1 = (ft->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
         if (abs(temp_f1) > abs(ft->x6BC_inputStickangle)) {
             ft->x6BC_inputStickangle = temp_f1;
         }
@@ -91,7 +91,7 @@ void lbl_801383A8(HSD_GObj* gobj) {
         phi_r0 = 0;
     }
     if (phi_r0 != 0) {
-        if (abs(ft->x620_lstick_x) > attr->x30) {
+        if (abs(ft->input.x620_lstick_x) > attr->x30) {
             func_8007D9FC(ft);
             func_80075AF0(ft, 0, (f32) (HALF_PI * ft->x2C_facing_direction));
         }
@@ -104,14 +104,14 @@ void lbl_801384F0(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     MarsAttributes* attr = ft->x2D4_specialAttributes;
 
-    f32 abs_lstick_x = abs(ft->x620_lstick_x);
+    f32 abs_lstick_x = abs(ft->input.x620_lstick_x);
 
     s32 phi_r0;
     s32 unused[6];
 
     if (ft->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 = attr->x38 * ((abs_lstick_x - attr->x34) / (1.0/*d*/ - attr->x34));
-        temp_f1 = (ft->x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
+        temp_f1 = (ft->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
         if (abs(temp_f1) > abs(ft->x6BC_inputStickangle)) {
             ft->x6BC_inputStickangle = temp_f1;
         }
@@ -123,7 +123,7 @@ void lbl_801384F0(HSD_GObj* gobj) {
         phi_r0 = 0;
     }
     if (phi_r0 != 0) {
-        if (abs(ft->x620_lstick_x) > attr->x30) {
+        if (abs(ft->input.x620_lstick_x) > attr->x30) {
             func_8007D9FC(ft);
             func_80075AF0(ft, 0, (f32) (HALF_PI * ft->x2C_facing_direction));
         }

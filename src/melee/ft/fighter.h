@@ -605,6 +605,8 @@ typedef struct _Fighter {
     /* 0x61C */ u8 x61C;
     /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
+
+    struct {
     /* 0x620 */ f32 x620_lstick_x;
     /* 0x624 */ f32 x624_lstick_y;
                 f32 x628_lstick_z;
@@ -631,6 +633,7 @@ typedef struct _Fighter {
                 s32 x664;
                 s32 x668;
                 s32 x66C;
+    } input; // 0x620 to 0x670
 
                 u8 x670_timer_lstick_tilt_x;
                 u8 x671_timer_lstick_tilt_y;
