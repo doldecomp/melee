@@ -7,6 +7,8 @@ extern struct {
     HSD_GObj* unk20;
 }* lbl_804D782C;
 
+const Vec3 lbl_803B74A0 = { 0, 0, 0 };
+
 inline f32 fabsf(f32 x)
 {
     if (x < 0) {
@@ -775,7 +777,7 @@ void func_8007DB58(HSD_GObj* gobj)
 }
 
 extern struct {
-    s32 x0;
+    Vec2* x0;
     s32 x4;
 }* lbl_804D652C;
 
@@ -834,14 +836,12 @@ s32 func_8007DC08(Fighter* fp, f32 arg8)
     return phi_r31;
 }
 
-#define _SDA2_BASE_ 0x804DF9E0
-#define lbl_804D8330 0x804D8330
 extern void func_8007F8B4();
 extern void func_8004DC04();
 extern void func_8004DB78();
 extern void func_80086FD4();
 /* https://decomp.me/scratch/il3yA */
-asm void func_8007DD7C()
+asm void func_8007DD7C(HSD_GObj*, Vec3*)
 {
     nofralloc
 /* 8007DD7C 0007A95C  7C 08 02 A6 */	mflr r0
@@ -855,7 +855,7 @@ asm void func_8007DD7C()
 /* 8007DD9C 0007A97C  80 6D C1 8C */	lwz r3, lbl_804D782C
 /* 8007DDA0 0007A980  83 DA 00 2C */	lwz r30, 0x2c(r26)
 /* 8007DDA4 0007A984  83 A3 00 20 */	lwz r29, 0x20(r3)
-/* 8007DDA8 0007A988  C3 E2 89 50 */	lfs f31, lbl_804D8330-_SDA2_BASE_(r2)
+/* 8007DDA8 0007A988  C3 E2 89 50 */	lfs f31, 0.0f
 /* 8007DDAC 0007A98C  3B FE 02 C4 */	addi r31, r30, 0x2c4
 /* 8007DDB0 0007A990  48 00 02 00 */	b lbl_8007DFB0
 lbl_8007DDB4:
@@ -1095,8 +1095,6 @@ lbl_8007E0C4:
 /* 8007E0E0 0007ACC0  4E 80 00 20 */	blr 
 }
 #pragma peephole on
-void func_8007DD7C(HSD_GObj*, Vec3*);               /* extern */
-void func_8007DFD0(HSD_GObj*, Vec3*);               /* extern */
 
 void func_8007E0E4(HSD_GObj* gobj)
 {
@@ -1652,4 +1650,442 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     func_80322314();
     func_800BFD04(gobj);
     arg1(dst_gobj);
+}
+
+extern void (*ft_OnItemInvisible[])(HSD_GObj*);
+extern void (*ft_OnItemVisible[])(HSD_GObj*);
+extern void (*ft_OnKnockbackEnter[])(HSD_GObj*);
+extern void (*lbl_803C1D30[])(HSD_GObj*);
+
+void func_8007F578(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (fp->x1974_heldItem == NULL) {
+        return;
+    }
+    if (ft_OnItemInvisible[fp->x4_fighterKind] != NULL) {
+        ft_OnItemInvisible[fp->x4_fighterKind](gobj);
+    }
+}
+
+void func_8007F5CC(HSD_GObj* gobj, s32 arg1)
+{
+    Fighter* fp;
+    HSD_GObj* item;
+    u32 unused[2];
+
+    fp = gobj->user_data;
+    item = fp->x1974_heldItem;
+    if (item != NULL && fp->x221E_flag.bits.b3 != arg1) {
+        if (arg1 == 0) {
+            func_8007F578(gobj);
+        } else if (item != NULL) {
+            if (ft_OnItemVisible[fp->x4_fighterKind] != NULL) {
+                ft_OnItemVisible[fp->x4_fighterKind](gobj);
+            }
+        }
+    }
+    fp->x221E_flag.bits.b3 = arg1;
+}
+
+f32 func_8007F694(Fighter* fp)
+{
+    return fp->x34_scale.y * fp->x110_attr.x19C_ModelScaling;
+}
+
+void func_8007F6A4(Fighter* fp, HSD_JObj* jobj)
+{
+    Vec3 scale;
+    f32 val = 1.0f / fp->x10C_ftData->x0->x8C;
+    scale.z = val;
+    scale.y = val;
+    scale.x = val;
+    HSD_JObjSetScale(jobj, &scale);
+}
+
+void func_8007F76C(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    fp->xEC_ground_vel = fp->x2C_facing_direction * fabsf(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = fp->x2C_facing_direction * fabsf(fp->x80_self_vel.x);
+}
+
+void func_8007F7B4(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    fp->xEC_ground_vel = -fp->x2C_facing_direction * fabsf(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = -fp->x2C_facing_direction * fabsf(fp->x80_self_vel.x);
+}
+
+void* func_8007F804(Fighter* fp)
+{
+    if (fp->x34_scale.z != 1) {
+        return &fp->x44;
+    }
+    return NULL;
+}
+
+void func_8007F824(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (ft_OnKnockbackEnter[fp->x4_fighterKind] != NULL) {
+        ft_OnKnockbackEnter[fp->x4_fighterKind](gobj);
+    }
+}
+
+void func_8007F86C(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (lbl_803C1D30[fp->x4_fighterKind] != NULL) {
+        lbl_803C1D30[fp->x4_fighterKind](gobj);
+    }
+}
+
+void func_8007F8B4(Fighter* fp, Vec3* v)
+{
+    v->x = fp->xB0_pos.x + fp->xD4_unk_vel.x;
+    v->y = fp->xB0_pos.y + fp->xD4_unk_vel.y;
+    v->z = fp->xB0_pos.z + fp->xD4_unk_vel.z;
+}
+
+extern void (*lbl_803C1C28[])(HSD_GObj*);
+
+void func_8007F8E8(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (fp->x197C == NULL || fp->x1980 == NULL) {
+        if (lbl_803C1C28[fp->x4_fighterKind] != NULL) {
+            lbl_803C1C28[fp->x4_fighterKind](gobj);
+        }
+    }
+}
+
+extern void (*lbl_803C1BA4[])(HSD_GObj*);
+
+inline void _func_8007F948_inline(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (fp->x197C == NULL || fp->x1980 == NULL) {
+        if (lbl_803C1BA4[fp->x4_fighterKind] != NULL) {
+            lbl_803C1BA4[fp->x4_fighterKind](gobj);
+        }
+    }
+}
+
+void func_8007F948(HSD_GObj* gobj, HSD_GObj* arg1, s32 arg2)
+{
+    Fighter* fp = gobj->user_data;
+    fp->x197C = arg1;
+    fp->x2014 = arg2;
+    _func_8007F948_inline(gobj);
+}
+
+void func_8007F9B4(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    fp->x197C = NULL;
+    func_800D105C(gobj);
+    func_80081C88(gobj, fp->x34_scale.y);
+}
+
+void func_8007FA00(HSD_GObj* gobj)
+{
+    Fighter* fp;
+    Vec3* vec;
+    u32 unused[2];
+
+    fp = gobj->user_data;
+    vec = &fp->x110_attr.x224;
+    func_80294EB0(fp->x197C, &vec[1], vec);
+    func_80294E78(fp->x197C, fp->x34_scale.y * vec[2].x);
+}
+
+void func_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
+{
+    Vec3 vec;
+    Fighter* fp;
+    Fighter* fp2;
+    u32 unused[7];
+
+    fp = fp2 = gobj->user_data;
+    if (fp2->x197C != NULL) {
+        fp->x2014 = func_8026B54C(arg1);
+        func_80088148(fp, 0x117, 0x7F, 0x40);
+        func_8007EBAC(fp, 0x10, 0);
+        func_8026A8EC(arg1);
+        return;
+    }
+    vec = lbl_803B74A0;
+    func_8026BD0C(arg1);
+    func_8026ABD8(arg1, &vec, 0);
+    func_8026AB54(arg1, gobj, fp->x10C_ftData->x8->unk12);
+    func_8007F948(gobj, arg1, func_8026B54C(arg1));
+    func_800D105C(gobj);
+    func_80081C88(gobj, fp->x34_scale.y);
+    func_80088148(fp, 0x117, 0x7F, 0x40);
+    func_8007EBAC(fp, 0x10, 0);
+    func_8026BCF4(arg1);
+    func_8007FA00(gobj);
+}
+
+void func_8007FC7C(HSD_GObj* gobj, f32 arg8)
+{
+    HSD_GObj* item_gobj;
+    Fighter* fp;
+    s32 sp20;
+    u32 unused;
+
+    fp = gobj->user_data;
+    sp20 = arg8 * lbl_804D6554->x704;
+    if (fp->x1980 != NULL) {
+        fp->x2018 += sp20;
+        if (fp->x2018 > lbl_804D6554->x700) {
+            fp->x2018 = lbl_804D6554->x700;
+        }
+        sp20 = fp->x2024;
+        fp->x2024 = sp20 + arg8;
+        func_8007FDA0(gobj);
+    } else {
+        item_gobj = func_8029A748(gobj, &fp->xB0_pos, fp->x10C_ftData->x8->unk12,
+                                  fp->x2C_facing_direction);
+        if (item_gobj != NULL) {
+            func_8007FE84(gobj, item_gobj, sp20, arg8);
+            func_8007FDA0(gobj);
+        }
+    }
+    func_80088148(fp, 0x11F, 0x7F, 0x40);
+}
+
+inline f32 fminf(f32 a, f32 b)
+{
+    f32 result = a;
+    if (a > b) {
+        result = b;
+    }
+    return result;
+}
+
+void func_8007FDA0(HSD_GObj* gobj)
+{
+    Vec3 sp20;
+    Fighter* fp;
+    f32 temp_f1;
+    Vec3* temp_r30;
+    f32 phi_f31;
+    u32 unused[4];
+
+    fp = gobj->user_data;
+    temp_r30 = &fp->x110_attr.x240;
+    phi_f31 = fminf(lbl_804D6554->x710 * fp->x2024 + lbl_804D6554->x708, lbl_804D6554->x70C);
+    temp_f1 = 1.0f / phi_f31;
+    sp20 = *temp_r30;
+    sp20.x *= temp_f1;
+    sp20.y *= temp_f1;
+    sp20.z *= temp_f1;
+    func_8029A8F4(fp->x1980, &sp20, temp_f1);
+    func_8029A89C(fp->x1980, phi_f31 * temp_r30[1].x * fp->x34_scale.y);
+}
+
+void func_8007FE84(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2, f32 arg3)
+{
+    u32 unused[2];
+    Fighter* fp = gobj->user_data;
+    fp->x1980 = item_gobj;
+    fp->x2018 = arg2;
+    fp->x201C = lbl_804D6554->x6F8;
+    fp->x2024 = arg3;
+    fp->x2021 = 0;
+    fp->x2020 = 0;
+    func_8007EBAC(fp, 2, 0);
+    _func_8007F948_inline(gobj);
+}
+
+void func_8007FF74(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    fp->x1980 = NULL;
+    func_8007ECD4(fp, 2);
+    func_80040460(fp->xC_playerID, fp->x221F_flag.bits.b4);
+}
+
+BOOL func_8007FFD8(Fighter* fp, f32 arg8)
+{
+    s32 phi_r31;
+    s8 b0, b1;
+    phi_r31 = FALSE;
+    if ((fp->input.x668 & 0x80000F00) != 0) {
+        fp->x2018 -= arg8;
+        phi_r31 = TRUE;
+    }
+    b0 = fp->x2020;
+    b1 = fp->x2021;
+    if (fp->input.x620_lstick_x < -lbl_804D6554->x308) {
+        fp->x2020 = -1;
+    }
+    if (fp->input.x620_lstick_x > lbl_804D6554->x308) {
+        fp->x2020 = 1;
+    }
+    if (fp->input.x624_lstick_y < -lbl_804D6554->x308) {
+        fp->x2021 = -1;
+    }
+    if (fp->input.x624_lstick_y > lbl_804D6554->x308) {
+        fp->x2021 = 1;
+    }
+    if (b0 != fp->x2020 || b1 != fp->x2021) {
+        fp->x2018 = fp->x2018 - arg8;
+        phi_r31 = TRUE;
+    }
+    func_800402D0(fp->xC_playerID, fp->x221F_flag.bits.b4, phi_r31);
+    return phi_r31;
+}
+
+BOOL func_80080144(Fighter* fp)
+{
+    int kind = fp->x4_fighterKind;
+    if ((kind == FTKIND_POPO || kind == FTKIND_NANA) && fp->x619_costume_id >= 2) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// https://decomp.me/scratch/qWtoZ
+#define _SDA2_BASE_ 0x804DF9E0
+#define lbl_804D8340 0x804D8340
+asm void func_80080174()
+{
+    nofralloc
+/* 80080174 0007CD54  7C 08 02 A6 */	mflr r0
+/* 80080178 0007CD58  90 01 00 04 */	stw r0, 4(r1)
+/* 8008017C 0007CD5C  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 80080180 0007CD60  93 E1 00 2C */	stw r31, 0x2c(r1)
+/* 80080184 0007CD64  7C 7F 1B 78 */	mr r31, r3
+/* 80080188 0007CD68  80 63 19 7C */	lwz r3, 0x197c(r3)
+/* 8008018C 0007CD6C  28 03 00 00 */	cmplwi r3, 0
+/* 80080190 0007CD70  41 82 00 14 */	beq lbl_800801A4
+/* 80080194 0007CD74  C0 3F 00 38 */	lfs f1, 0x38(r31)
+/* 80080198 0007CD78  C0 1F 02 3C */	lfs f0, 0x23c(r31)
+/* 8008019C 0007CD7C  EC 21 00 32 */	fmuls f1, f1, f0
+/* 800801A0 0007CD80  48 21 4C D9 */	bl func_80294E78
+lbl_800801A4:
+/* 800801A4 0007CD84  80 7F 19 80 */	lwz r3, 0x1980(r31)
+/* 800801A8 0007CD88  28 03 00 00 */	cmplwi r3, 0
+/* 800801AC 0007CD8C  41 82 00 5C */	beq lbl_80080208
+/* 800801B0 0007CD90  80 9F 20 24 */	lwz r4, 0x2024(r31)
+/* 800801B4 0007CD94  3C 00 43 30 */	lis r0, 0x4330
+/* 800801B8 0007CD98  80 AD AE B4 */	lwz r5, lbl_804D6554
+/* 800801BC 0007CD9C  38 DF 02 40 */	addi r6, r31, 0x240
+/* 800801C0 0007CDA0  6C 84 80 00 */	xoris r4, r4, 0x8000
+/* 800801C4 0007CDA4  90 81 00 24 */	stw r4, 0x24(r1)
+/* 800801C8 0007CDA8  C8 42 89 60 */	lfd f2, lbl_804D8340-_SDA2_BASE_(r2)
+/* 800801CC 0007CDAC  90 01 00 20 */	stw r0, 0x20(r1)
+/* 800801D0 0007CDB0  C0 65 07 10 */	lfs f3, 0x710(r5)
+/* 800801D4 0007CDB4  C8 21 00 20 */	lfd f1, 0x20(r1)
+/* 800801D8 0007CDB8  C0 05 07 08 */	lfs f0, 0x708(r5)
+/* 800801DC 0007CDBC  EC 21 10 28 */	fsubs f1, f1, f2
+/* 800801E0 0007CDC0  C0 85 07 0C */	lfs f4, 0x70c(r5)
+/* 800801E4 0007CDC4  EC 43 00 7A */	fmadds f2, f3, f1, f0
+/* 800801E8 0007CDC8  FC 02 20 40 */	fcmpo cr0, f2, f4
+/* 800801EC 0007CDCC  40 81 00 08 */	ble lbl_800801F4
+/* 800801F0 0007CDD0  FC 40 20 90 */	fmr f2, f4
+lbl_800801F4:
+/* 800801F4 0007CDD4  C0 06 00 0C */	lfs f0, 0xc(r6)
+/* 800801F8 0007CDD8  C0 3F 00 38 */	lfs f1, 0x38(r31)
+/* 800801FC 0007CDDC  EC 02 00 32 */	fmuls f0, f2, f0
+/* 80080200 0007CDE0  EC 21 00 32 */	fmuls f1, f1, f0
+/* 80080204 0007CDE4  48 21 A6 99 */	bl func_8029A89C
+lbl_80080208:
+/* 80080208 0007CDE8  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 8008020C 0007CDEC  83 E1 00 2C */	lwz r31, 0x2c(r1)
+/* 80080210 0007CDF0  38 21 00 30 */	addi r1, r1, 0x30
+/* 80080214 0007CDF4  7C 08 03 A6 */	mtlr r0
+/* 80080218 0007CDF8  4E 80 00 20 */	blr 
+}
+#pragma peephole on
+
+void func_8008021C(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Vec2 shift;
+    Vec2* result;
+    u32 unused;
+
+    fp->dmg.x18BC = 0;
+    fp->dmg.x18B8 = 0;
+    if (func_80090690(fp, &shift)) {
+        fp->dmg.x18B8 += shift.x;
+        fp->dmg.x18BC += shift.y;
+    }
+    if (fp->x2224_flag.bits.b5) {
+        Vec2* temp_r3 = &lbl_804D652C->x0[fp->x1A52];
+        shift.x = temp_r3->x;
+        shift.y = temp_r3->y;
+        result = &shift;
+    } else {
+        result = NULL;
+    }
+    if (result != NULL) {
+        fp->dmg.x18B8 += shift.x;
+        fp->dmg.x18BC += shift.y;
+    }
+    if (func_800DEEE8(fp, &shift)) {
+        fp->dmg.x18B8 += shift.x;
+        fp->dmg.x18BC += shift.y;
+    }
+}
+
+void func_8008031C(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (fabsf(fp->input.x620_lstick_x) >= lbl_804D6554->x7B8 && fp->x679_x < lbl_804D6554->x7C0 ||
+        fabsf(fp->input.x624_lstick_y) >= lbl_804D6554->x7B8 && fp->x67A_y < lbl_804D6554->x7C0) {
+        Player_UpdateJoystickCountByIndex((s32) fp->xC_playerID, fp->x221F_flag.bits.b4);
+        fp->x67A_y = 0xFE;
+        fp->x679_x = 0xFE;
+    }
+    if (fabsf(fp->input.x650) >= lbl_804D6554->x7BC) {
+        if (fp->x67B_z < lbl_804D6554->x7C0) {
+            Player_UpdateJoystickCountByIndex((s32) fp->xC_playerID, fp->x221F_flag.bits.b4);
+            fp->x67B_z = 0xFE;
+        }
+    }
+}
+
+void func_80080460(Fighter* fp)
+{
+    fp->x2225_flag.bits.b6 = TRUE;
+}
+
+void func_80080474(Fighter* fp)
+{
+    fp->x2225_flag.bits.b6 = fp->x2225_flag.bits.b5;
+}
+
+void func_80080484(Fighter* fp)
+{
+    if (fp->x2138_smashSinceHitbox == -1) {
+        fp->x2138_smashSinceHitbox = 0;
+    }
+}
+
+void func_800804A0(Fighter* arg0, f32 arg8)
+{
+    f32 temp_f1;
+    f32 phi_f31 = arg8;
+    if ((temp_f1 = func_80084A40(arg0)) < 1) {
+        phi_f31 *= temp_f1;
+    }
+    arg0->xE8_ground_accel_2 = phi_f31;
+}
+
+f32 func_800804EC(Fighter* fp)
+{
+    return fp->x40 * fp->x34_scale.x;
+}
+
+void func_800804FC(Fighter* fp)
+{
+    if (fp->xE0_ground_or_air == GA_Ground) {
+        fp->dmg.x18c4_source_ply = 6;
+        fp->dmg.x18C8 = -1;
+    }
 }

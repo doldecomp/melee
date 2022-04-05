@@ -143,12 +143,24 @@ typedef struct _ftCommonData {
     /* 0x5F0 */  u32 x5F0;
     u8 filler_x5F4[0x6D8-0x5F4];
    /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
-    u8 filler_x6DC[0x768-0x6DC];
+    u8 filler_x6DC[0x6F8-0x6DC];
+    /* 0x6F8 */ s32 x6F8;
+    u8 filler_x6FC[0x700-0x6FC];
+    /* 0x700 */ s32 x700;
+    /* 0x704 */ f32 x704;
+    /* 0x708 */ f32 x708;
+    /* 0x70C */ f32 x70C;
+    /* 0x710 */ f32 x710;
+    u8 filler_x714[0x768-0x714];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
     /* 0x774 */ s32 x774;
-                u8 x780_filler[0x7E4 - 0x778];
+    u8 filler_x780[0x7B8 - 0x778];
+    /* 0x7B8 */ f32 x7B8;
+    /* 0x7BC */ f32 x7BC;
+    /* 0x7C0 */ f32 x7C0;
+    u8 filler_x7C4[0x7E4 - 0x7C4];
     /* 0x7E4 */ f32 x7E4;
     // lots of more data following, exact size to be determined
 } ftCommonData;
@@ -164,7 +176,9 @@ typedef struct _FtCollisionData
 typedef struct _ftData
 {
     struct {
-        u8 x0_fill[0xFC];
+        u8 x0_fill[0x8C];
+        f32 x8C;
+        u8 x90_fill[0xFC - 0x90];
         f32 xFC;
         u8 x100_fill[0x16C - 0x100];
         s32 x16C_idx;
@@ -450,7 +464,8 @@ typedef struct _Fighter {
     /* 0x30 */ f32 x30_facingDirectionRepeated;
     /* 0x34 */ Vec3 x34_scale;
     f32 x40;
-    u8 filler_x40[0x74 - 0x44];
+    void* x44;
+    u8 filler_x48[0x74 - 0x48];
 
     Vec3 x74_anim_vel;                                         // 0x74
     Vec3 x80_self_vel;                                         // 0x80
@@ -545,17 +560,11 @@ typedef struct _Fighter {
         /* 0x218 */ f32 x218_WallJumpVerticalVelocity;
         /* 0x21C */ s32 x21C;
         /* 0x220 */ f32 x220_TrophyScale;
-        /* 0x224 */ s32 x224;
-        /* 0x228 */ s32 x228;
-        /* 0x22C */ s32 x22C;
-        /* 0x230 */ s32 x230;
-        /* 0x234 */ s32 x234;
-        /* 0x238 */ s32 x238;
-        /* 0x23C */ s32 x23C;
-        /* 0x240 */ s32 x240;
-        /* 0x244 */ s32 x244;
-        /* 0x248 */ s32 x248;
-        /* 0x24C */ s32 x24C;
+        /* 0x224 */ Vec3 x224;
+        /* 0x230 */ Vec3 x230;
+        /* 0x23C */ f32 x23C;
+        /* 0x240 */ Vec3 x240;
+        /* 0x24C */ f32 x24C;
         /* 0x250 */ s32 x250;
         /* 0x254 */ s32 x254;
         /* 0x258 */ f32 x258; // used
@@ -823,7 +832,10 @@ typedef struct _Fighter {
                  s32 x2010;
                  s32 x2014;
                  s32 x2018;
-    u8 filler_x201C[0x2024 - 0x201C];
+                 s32 x201C;
+    /* 0x2020 */ s8 x2020;
+    /* 0x2021 */ s8 x2021;
+    /* 0x2022 */ s8 x2022;
     /* 0x2024 */ s32 x2024;
     /* 0x2028 */ s32 x2028;
     /* 0x202C */ s32 x202C;
