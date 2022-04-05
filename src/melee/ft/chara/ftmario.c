@@ -20,7 +20,7 @@ inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
 {
     int i, outpos;
     for (i = outpos = 0; i < 9; i++) {
-        if (i != (int)ft_2->x222C && i != (int)ft_2->x2230) {
+        if (i != (int)ft_2->sa.mario.x222C && i != (int)ft_2->sa.mario.x2230) {
             arr[outpos] = i;
             outpos++;
         }
@@ -193,15 +193,15 @@ int func_800E0D1C(HSD_GObj* gobj) {
     
     ft = gobj->user_data;
     for (i = outpos = 0; i < 9; i++) {
-        if (i != (int)ft->x222C && i != (int)ft->x2230) {
+        if (i != (int)ft->sa.mario.x222C && i != (int)ft->sa.mario.x2230) {
             arr[outpos] = i;
             outpos++;
         }
     }
 
     r3 = (int)arr[HSD_Randi(outpos)];
-    ft->x2230 = ft->x222C;
-    ft->x222C = r3;
+    ft->sa.mario.x2230 = ft->sa.mario.x222C;
+    ft->sa.mario.x222C = r3;
 
     return r3;
 }
@@ -281,8 +281,8 @@ void func_800E0EE0(HSD_GObj* gobj) {
 
             outsize = _func_800E0EE0_arr_copy(ft_2, arr);
             tmp = tmp2 = arr[HSD_Randi(outsize)];
-            ft_2->x2230 = ft_2->x222C;
-            ft_2->x222C = tmp2;
+            ft_2->sa.mario.x2230 = ft_2->sa.mario.x222C;
+            ft_2->sa.mario.x222C = tmp2;
             func_802C0510(gobj, &coords, tmp, 0x31, ft->x2C_facing_direction);
         }
     }
