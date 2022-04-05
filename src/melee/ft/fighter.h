@@ -288,39 +288,35 @@ struct SpecialAttrs_Mario {
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
     /* 0x2240 */ u32 x2240;
-    char filler0[0xFC];
 };
 
 struct SpecialAttrs_Fox {
     /* 0x222C */ u32 x222C;
-    char filler0[0x110];
 };
 
 struct SpecialAttrs_Captain {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
-    char filler0[0x10C];
 };
 
 struct SpecialAttrs_DK {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Kirby {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Koopa {
     /* 0x222C */ u32 x222C;
-    char filler0[0x110];
 };
 
 struct SpecialAttrs_Link {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Seak {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Ness {
@@ -333,7 +329,6 @@ struct SpecialAttrs_Ness {
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
     /* 0x224C */ u32 x224C;
-    char filler0[0xF0];
 };
 
 struct SpecialAttrs_Peach {
@@ -345,31 +340,30 @@ struct SpecialAttrs_Peach {
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
-    char filler0[0xF4];
 };
 
 struct SpecialAttrs_Popo {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Nana {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Pikachu {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Samus {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Yoshi {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Purin {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Mewtwo {
@@ -378,20 +372,18 @@ struct SpecialAttrs_Mewtwo {
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
-    char filler0[0x100];
 };
 
 struct SpecialAttrs_Luigi {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Mars {
     /* 0x222C */ u32 x222C;
-    char filler0[0x110];
 };
 
 struct SpecialAttrs_Zelda {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_CLink {
@@ -402,39 +394,38 @@ struct SpecialAttrs_CLink {
     /* 0x223C */ u32 x223C;
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
-    char filler0[0xF8];
 };
 
 struct SpecialAttrs_Pichu {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Gaw {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Masterhand {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Crazyhand {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Boy {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Girl {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_GKoopa {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Sandbag {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 typedef struct _Fighter {
@@ -1013,6 +1004,9 @@ typedef struct _Fighter {
         struct SpecialAttrs_GKoopa gkoopa;
         struct SpecialAttrs_Sandbag sandbag;
     } sa;
+    /* 0x232C */ s32 x232C;
+    /* 0x2330 */ Vec2 x2330;
+    /* 0x2338 */ Vec2 x2338;
     /* 0x2340 */ u32 x2340_stateVar1;
     /* 0x2344 */ u32 x2344_stateVar2;
     /* 0x2348 */ u32 x2348_stateVar3;
