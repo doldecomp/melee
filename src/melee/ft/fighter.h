@@ -170,7 +170,10 @@ typedef struct _ftData
         s32 x16C_idx;
     }* x0;
     /* 0x04 */ void* ext_attr;
-    s32 x8;
+    struct {
+        u8 x0_fill[0x10];
+        u8 unk10, unk11, unk12;
+    }* x8;
     s32 xC;
     s32 x10;
     s32 filler_x14[13];
@@ -813,11 +816,15 @@ typedef struct _Fighter {
                  f32 x1A6C;
                  Vec x1A70;
                  Vec x1A7C;
-    u8 filler_x1A6C[0x2008-0x1A88];
+    u8 filler_x1A6C[0x2004-0x1A88];
+                 s32 x2004;
                  s32 x2008;
                  s32 x200C;
                  s32 x2010;
-    u8 filler_x2014[0x2028 - 0x2014];
+                 s32 x2014;
+                 s32 x2018;
+    u8 filler_x201C[0x2024 - 0x201C];
+    /* 0x2024 */ s32 x2024;
     /* 0x2028 */ s32 x2028;
     /* 0x202C */ s32 x202C;
     s32 filler_x2030;
@@ -841,7 +848,8 @@ typedef struct _Fighter {
     /* 0x2100 */ s8 x2100;
     /* 0x2101 */ u8 x2101_bits_0to6 : 7;
     /* 0x2101 */ u8 x2101_bits_8 : 1;
-    u8 filler_x2102[0x2108 - 0x2102];
+    u8 filler_x2102[0x2104 - 0x2102];
+    /* 0x2104 */ s32 x2104;
     /* 0x2108 */ s32 x2108;
     /* 0x210C */ u8 x210C_walljumpInputTimer;
     u8 filler_x210C[3];

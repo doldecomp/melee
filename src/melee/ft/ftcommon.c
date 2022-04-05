@@ -1185,7 +1185,7 @@ void func_8007E2F4(Fighter* fp, s16 val)
     fp->x1A6A = val;
 }
 
-void func_8007E2FC(HSD_GObj* gobj)
+inline void _func_8007E2FC_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->xE4_ground_accel_1 = 0;
@@ -1208,6 +1208,11 @@ void func_8007E2FC(HSD_GObj* gobj)
     fp->xD4_unk_vel.z = 0;
     fp->xD4_unk_vel.y = 0;
     fp->xD4_unk_vel.x = 0;
+}
+
+void func_8007E2FC(HSD_GObj* gobj)
+{
+    _func_8007E2FC_inline(gobj);
 }
 
 void func_8007E358(HSD_GObj* gobj)
@@ -1512,4 +1517,139 @@ void func_8007EF5C(Fighter* fp, s32 arg1)
 void func_8007EFC0(Fighter* fp, u32 val)
 {
     fp->x209A = val;
+}
+
+void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
+{
+    Fighter* src;
+    HSD_GObj* dst_gobj;
+    Fighter* dst;
+    s32 tmp_bit;
+    u32 unused[4];
+
+    src = gobj->user_data;
+    dst_gobj = Player_GetEntityAtIndex(src->xC_playerID, 1);
+    dst = dst_gobj->user_data;
+    Player_SwapTransformedStates(src->xC_playerID,
+        src->x221F_flag.bits.b4, dst->x221F_flag.bits.b4);
+    tmp_bit = src->x221F_flag.bits.b4;
+    src->x221F_flag.bits.b4 = dst->x221F_flag.bits.b4;
+    dst->x221F_flag.bits.b4 = tmp_bit;
+    func_80067C98(dst);
+    _func_8007E2FC_inline(dst_gobj);
+    dst->xB0_pos = src->xB0_pos;
+    dst->xBC_prevPos = src->xBC_prevPos;
+    dst->xC8_pos_delta = src->xC8_pos_delta;
+    dst->x2C_facing_direction = src->x2C_facing_direction;
+    dst->dmg.x1830_percent = src->dmg.x1830_percent;
+    Player_SetHPByIndex(dst->xC_playerID,
+        dst->x221F_flag.bits.b4, dst->dmg.x1830_percent);
+    dst->dmg.x18F0 = src->dmg.x18F0;
+    dst->x80_self_vel = src->x80_self_vel;
+    dst->xE0_ground_or_air = src->xE0_ground_or_air;
+    dst->xEC_ground_vel = src->xEC_ground_vel;
+    dst->xF0_ground_kb_vel = src->xF0_ground_kb_vel;
+    dst->xF4_ground_attacker_shield_kb_vel = src->xF4_ground_attacker_shield_kb_vel;
+    dst->xF8_playerNudgeVel.x = src->xF8_playerNudgeVel.x;
+    dst->xF8_playerNudgeVel.y = src->xF8_playerNudgeVel.y;
+    dst->input = src->input;
+    dst->x670_timer_lstick_tilt_x = src->x670_timer_lstick_tilt_x;
+    dst->x671_timer_lstick_tilt_y = src->x671_timer_lstick_tilt_y;
+    dst->x672_timer_lstick_tilt_z = src->x672_timer_lstick_tilt_z;
+    dst->x673_x = src->x673_x;
+    dst->x674_y = src->x674_y;
+    dst->x675_z = src->x675_z;
+    dst->x679_x = src->x679_x;
+    dst->x67A_y = src->x67A_y;
+    dst->x67B_z = src->x67B_z;
+    dst->x685 = src->x685;
+    dst->x686 = src->x686;
+    dst->x687 = src->x687;
+    dst->x688 = src->x688;
+    dst->x689 = src->x689;
+    dst->x68A = src->x68A;
+    dst->x68B = src->x68B;
+    dst->x67C = src->x67C;
+    dst->x67D = src->x67D;
+    dst->x67E = src->x67E;
+    dst->x681 = src->x681;
+    dst->x682 = src->x682;
+    dst->x67F = src->x67F;
+    dst->x680 = src->x680;
+    dst->x683 = src->x683;
+    dst->x684 = src->x684;
+    dst->dmg.x18c4_source_ply = src->dmg.x18c4_source_ply;
+    dst->dmg.x18C8 = src->dmg.x18C8;
+    dst->x221F_flag.bits.b5 = src->x221F_flag.bits.b5;
+    dst->dmg.x18CC = src->dmg.x18CC;
+    dst->dmg.x18D0 = src->dmg.x18D0;
+    dst->dmg.x18d4 = src->dmg.x18d4;
+    dst->dmg.x18ec_instancehitby = src->dmg.x18ec_instancehitby;
+    dst->x21FC = src->x21FC;
+    dst->x2221_flag.bits.b7 = src->x2221_flag.bits.b7;
+    dst->x2221_flag.bits.b6 = src->x2221_flag.bits.b6;
+    dst->x2221_flag.bits.b4 = src->x2221_flag.bits.b4;
+    dst->x2221_flag.bits.b5 = src->x2221_flag.bits.b5;
+    dst->x2104 = src->x2104;
+    dst->dmg.x1910 = src->dmg.x1910;
+    dst->x1968_jumpsUsed = src->x1968_jumpsUsed;
+    dst->x1969_walljumpUsed = src->x1969_walljumpUsed;
+    dst->x1998_shieldHealth = src->x1998_shieldHealth;
+    dst->x232C = src->x232C;
+    dst->x2330 = src->x2330;
+    dst->x2338 = src->x2338;
+    dst->x2224_flag.bits.b2 = src->x2224_flag.bits.b2;
+    if (src->x221D_flag.bits.b6) {
+        func_8007B7FC(dst, src->x2004);
+        func_800C0358(src, dst, 0x6B);
+        func_800880D8(src);
+    } else {
+        func_800C0200(dst, 9);
+    }
+    if ((src->x198C = 2) && (src->x1990 != 0)) {
+        func_8007B760(dst_gobj, src->x1990);
+    }
+    dst->x2220_flag.bits.b5 = src->x2220_flag.bits.b5;
+    dst->x2220_flag.bits.b6 = src->x2220_flag.bits.b6;
+    dst->x2008 = src->x2008;
+    ftData_SetScale(dst_gobj, src->x34_scale.y);
+    if (src->x2223_flag.bits.b7) {
+        func_800C8348(dst_gobj, src->x2028, src->x202C);
+        func_800C8540(gobj);
+    }
+    if (src->x2226_flag.bits.b4) {
+        if (!src->x2226_flag.bits.b7) {
+            func_800C88D4(dst_gobj, src->filler_x2030, 0);
+        }
+        func_800C8A64(gobj);
+    }
+    dst->x221E_flag.bits.b4 = src->x221E_flag.bits.b4;
+    if (src->x197C != NULL) {
+        func_8026B9A8(src->x197C, dst_gobj, dst->x10C_ftData->x8->unk12);
+        func_802950D4(src->x197C, 0);
+        func_8007F948(dst_gobj, src->x197C, src->x2014);
+        func_8007FA00(gobj);
+    } else {
+        dst->x197C = NULL;
+    }
+    if (src->x1980 != NULL) {
+        func_8026B9A8(src->x1980, dst_gobj, dst->x10C_ftData->x8->unk12);
+        func_8007FE84(dst_gobj, src->x1980, src->x2018, src->x2024);
+        func_8007FDA0(gobj);
+    } else {
+        dst->x1980 = NULL;
+    }
+    func_800D105C(dst_gobj);
+    func_80076064(dst);
+    func_800849EC(src, dst);
+    func_80081C88(dst_gobj, src->x34_scale.y);
+    if (src->x1974_heldItem != NULL) {
+        dst->x1974_heldItem = src->x1974_heldItem;
+        dst->x221E_flag.bits.b3 = src->x221E_flag.bits.b3;
+        func_80094818(dst_gobj, 1);
+        func_8026B9A8(src->x1974_heldItem, dst_gobj, dst->x10C_ftData->x8->unk10);
+    }
+    func_80322314();
+    func_800BFD04(gobj);
+    arg1(dst_gobj);
 }
