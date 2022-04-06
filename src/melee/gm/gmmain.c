@@ -16,11 +16,11 @@ extern void lbl_803762C4();
 extern void func_801692E8(int, struct datetime* datetime);
 
 enum {
-    DbLKind_None = 0,
+    DbLKind_Master = 0,
     DbLKind_NoDebugRom = 1,
-    DbLKind_Unk2 = 2,
-    DbLKind_Unk3 = 3,
-    DbLKind_Unk4 = 4,
+    DbLKind_DebugDevelop = 2,
+    DbLKind_DebugRom = 3,
+    DbLKind_Develop = 4,
 };
 
 struct datetime {
@@ -62,19 +62,19 @@ static void func_8015FDA4(void)
             int level = lbl_804D4A08;
             switch (level) {
                 case DbLKind_NoDebugRom:
-                    level = DbLKind_Unk3;
+                    level = DbLKind_DebugRom;
                     break;
-                case DbLKind_Unk2:
-                    level = DbLKind_Unk4;
+                case DbLKind_DebugDevelop:
+                    level = DbLKind_Develop;
                     break;
-                case DbLKind_Unk3:
+                case DbLKind_DebugRom:
                     level = DbLKind_NoDebugRom;
                     break;
-                case DbLKind_Unk4:
-                    level = DbLKind_Unk2;
+                case DbLKind_Develop:
+                    level = DbLKind_DebugDevelop;
                     break;
                 default:
-                    level = DbLKind_Unk2;
+                    level = DbLKind_DebugDevelop;
                     break;
             }
             lbl_804D4A08 = level;
@@ -82,10 +82,10 @@ static void func_8015FDA4(void)
             int level = lbl_804D4A08;
             switch (level) {
                 case DbLKind_NoDebugRom:
-                    level = DbLKind_Unk3;
+                    level = DbLKind_DebugRom;
                     break;
-                case DbLKind_Unk2:
-                    level = DbLKind_Unk4;
+                case DbLKind_DebugDevelop:
+                    level = DbLKind_Develop;
                     break;
             }
             lbl_804D4A08 = level;
@@ -156,7 +156,7 @@ void main(void)
     func_8001F87C();
     func_803A6048(0xC000);
     func_8015FBA4();
-    if (lbl_804D4A08 != DbLKind_None && lbl_804D6B30 & 0x20 && func_803931A4(-1)) {
+    if (lbl_804D4A08 != DbLKind_Master && lbl_804D6B30 & 0x20 && func_803931A4(-1)) {
         func_80393A54(1);
         while (!func_80393A04()) {
             OSReport("please setup server for USB\n");
