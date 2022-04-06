@@ -18,7 +18,7 @@ typedef struct _ftMarioAttributes {
 void ftMario_OnDeath(HSD_GObj* gobj);
 void func_800E0920(Fighter* ft);
 void ftMario_OnLoad(HSD_GObj* gobj);
-void func_800E0A00(void);
+void func_800E0A00(HSD_GObj* gobj);
 void func_800E0A20(HSD_GObj* gobj, s32 arg1);
 void func_800E0B00(HSD_GObj* gobj);
 void func_800E0B48(HSD_GObj* gobj);
@@ -28,5 +28,20 @@ void func_800E0C24(HSD_GObj* gobj);
 void func_800E0C68(HSD_GObj* gobj);
 void func_800E0CAC(s32 arg1, u32* arg2, u32* arg3);
 s32 func_800E0CE0(s32 arg0);
+int func_800E0D1C(HSD_GObj*);
+void func_800E0DA8(HSD_GObj*);
+void func_800E0E18(HSD_GObj*);
+void func_800E0E54(HSD_GObj*);
+void func_800E0E84(HSD_GObj*);
+void func_800E0EA4(HSD_GObj*);
+void func_800E0EE0(HSD_GObj*);
+void func_800E1040(HSD_GObj*);
+void func_800E10B0(HSD_GObj*);
+void func_800E10EC(HSD_GObj*);
+void func_800E111C(void);
+void func_800E113C(HSD_GObj*);
+void func_800E1178(HSD_GObj*);
+void func_800E11E0(HSD_GObj*);
+void func_800E1248(HSD_GObj* gobj);
 
 #endif

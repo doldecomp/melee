@@ -3,14 +3,17 @@
 
 #include <melee/it/id.h>
 
-extern void func_800E1368(void);
+extern void func_800E1368(HSD_GObj*);
 extern void func_8008A4D4(HSD_GObj*);
 extern void func_800E0EE0(HSD_GObj*);
 extern void func_80084F3C(HSD_GObj*);
 extern long func_8007500C(struct _Fighter *, long);
 extern void func_8000B1CC(HSD_JObj*, Vec*, Vec*);
 extern void func_8029B6F8(f32,HSD_GObj*,Vec*,u8);
+extern HSD_GObj* func_802B2560(HSD_GObj*,f32,Vec3*,long,u32);
 extern void func_802C0510(HSD_GObj*,Vec*,int,u8,f32);
+extern void func_800E13C8(HSD_GObj*);
+extern void func_800E13F8(HSD_GObj*);
 extern void ef_Spawn(long,...);
 extern const f32 lbl_804D9198;
 extern const f32 lbl_804D919C;
@@ -71,9 +74,9 @@ void ftMario_OnLoad(HSD_GObj* gobj) {
     func_8026B3F8(items[2], sA->x14);
 }
 
-void func_800E0A00(void)
+void func_800E0A00(HSD_GObj* gobj)
 {
-    func_800E1368();
+    func_800E1368(gobj);
 }
 
 void func_800E0A20(HSD_GObj* gobj, s32 arg1) {
@@ -310,5 +313,59 @@ void func_800E10EC(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 != 0) {
         func_800CCAAC(gobj);
+    }
+}
+
+void func_800E111C(void) {
+    func_80084DB0();
+}
+
+void func_800E113C(HSD_GObj* gobj) {
+    int res;
+
+    res = func_80081D0C(gobj);
+    if (res != 0) {
+        func_800E11E0(gobj);
+    }
+}
+
+void func_800E1178(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+    func_8007D5D4(ft);
+    func_800693AC(gobj,0x158,0x5000,0,ft->x894,lbl_804D919C,lbl_804D9198);
+
+    ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
+}
+
+void func_800E11E0(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+    func_8007D7FC(ft);
+    func_800693AC(gobj,0x157,0x5000,0,ft->x894,lbl_804D919C,lbl_804D9198);
+
+    ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
+}
+
+void func_800E1248(HSD_GObj* gobj) {
+    Vec3 coords;
+    HSD_GObj* gobj2;
+    Fighter* ft = gobj->user_data;
+    ftMarioAttributes* sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    u8 padding[8];
+
+    if(ft->x2200_ftcmd_var2 == 0) {
+        ft->x2200_ftcmd_var2 = 1;
+        func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 0x31)].x0_jobj,NULL,&coords);
+
+        gobj2 = func_802B2560(gobj,ft->x2C_facing_direction,&coords,func_8007500C(ft, 0x31),sA->x14);
+        
+        ft->sa.mario.x223C = gobj2;
+        ft->x1984_heldItemSpec = ft->sa.mario.x223C;
+        if(ft->sa.mario.x223C != 0) {
+            ft->cb.x21E4_callback_OnDeath2 = func_800E0A00;
+            ft->cb.x21DC_callback_OnTakeDamage = func_800E0A00;
+        }
+        ft->cb.x21D4_callback_EnterHitlag = func_800E13C8;
+        ft->cb.x21D8_callback_ExitHitlag = func_800E13F8;
+        ft->cb.x21BC_callback_Accessory4 = NULL;
     }
 }

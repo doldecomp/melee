@@ -259,7 +259,7 @@ struct SpecialAttrs_Mario {
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
+    /* 0x223C */ HSD_GObj* x223C;
     /* 0x2240 */ u32 x2240;
     char filler0[0xFC];
 };
