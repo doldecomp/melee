@@ -126,7 +126,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.s.o 		            \
 															\
-	$(BUILD_DIR)/asm/melee/gm/gmmain.s.o 		 	            \
+	$(BUILD_DIR)/asm/melee/gm/gmmain_lib.s.o 		 	            \
+	$(BUILD_DIR)/src/melee/gm/gmmain.c.o 		 	            \
 	$(BUILD_DIR)/asm/melee/gm/code_801601C4.s.o 		 	    \
 	$(BUILD_DIR)/asm/melee/gm/gmtitle.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.s.o 		 			\
