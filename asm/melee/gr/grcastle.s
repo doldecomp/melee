@@ -3707,7 +3707,7 @@ func_801D06CC:
 /* 801D06F0 001CD2D0  2C 03 00 00 */	cmpwi r3, 0
 /* 801D06F4 001CD2D4  40 82 00 14 */	bne lbl_801D0708
 /* 801D06F8 001CD2D8  7F E3 FB 78 */	mr r3, r31
-/* 801D06FC 001CD2DC  48 09 AC 05 */	bl func_8026B300
+/* 801D06FC 001CD2DC  48 09 AC 05 */	bl itGetKind
 /* 801D0700 001CD2E0  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 801D0704 001CD2E4  41 82 00 28 */	beq lbl_801D072C
 lbl_801D0708:
@@ -3742,7 +3742,7 @@ func_801D0744:
 /* 801D0768 001CD348  2C 03 00 00 */	cmpwi r3, 0
 /* 801D076C 001CD34C  40 82 00 14 */	bne lbl_801D0780
 /* 801D0770 001CD350  7F E3 FB 78 */	mr r3, r31
-/* 801D0774 001CD354  48 09 AB 8D */	bl func_8026B300
+/* 801D0774 001CD354  48 09 AB 8D */	bl itGetKind
 /* 801D0778 001CD358  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 801D077C 001CD35C  41 82 00 28 */	beq lbl_801D07A4
 lbl_801D0780:
@@ -3777,7 +3777,7 @@ func_801D07BC:
 /* 801D07E0 001CD3C0  2C 03 00 00 */	cmpwi r3, 0
 /* 801D07E4 001CD3C4  40 82 00 14 */	bne lbl_801D07F8
 /* 801D07E8 001CD3C8  7F E3 FB 78 */	mr r3, r31
-/* 801D07EC 001CD3CC  48 09 AB 15 */	bl func_8026B300
+/* 801D07EC 001CD3CC  48 09 AB 15 */	bl itGetKind
 /* 801D07F0 001CD3D0  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 801D07F4 001CD3D4  41 82 00 28 */	beq lbl_801D081C
 lbl_801D07F8:
@@ -3812,7 +3812,7 @@ func_801D0834:
 /* 801D0858 001CD438  2C 03 00 00 */	cmpwi r3, 0
 /* 801D085C 001CD43C  40 82 00 14 */	bne lbl_801D0870
 /* 801D0860 001CD440  7F E3 FB 78 */	mr r3, r31
-/* 801D0864 001CD444  48 09 AA 9D */	bl func_8026B300
+/* 801D0864 001CD444  48 09 AA 9D */	bl itGetKind
 /* 801D0868 001CD448  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 801D086C 001CD44C  41 82 00 28 */	beq lbl_801D0894
 lbl_801D0870:
@@ -3847,7 +3847,7 @@ func_801D08AC:
 /* 801D08D0 001CD4B0  2C 03 00 00 */	cmpwi r3, 0
 /* 801D08D4 001CD4B4  40 82 00 14 */	bne lbl_801D08E8
 /* 801D08D8 001CD4B8  7F E3 FB 78 */	mr r3, r31
-/* 801D08DC 001CD4BC  48 09 AA 25 */	bl func_8026B300
+/* 801D08DC 001CD4BC  48 09 AA 25 */	bl itGetKind
 /* 801D08E0 001CD4C0  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 801D08E4 001CD4C4  41 82 00 28 */	beq lbl_801D090C
 lbl_801D08E8:
@@ -4372,7 +4372,7 @@ func_801D0FF0:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7E90
 lbl_803B7E90:
 	.float 1
@@ -4565,9 +4565,8 @@ lbl_803E0FF4:
     .4byte NULL
 .global lbl_803E1198
 lbl_803E1198:
-    .4byte 0x2F477243
-    .4byte 0x732E6461
-    .4byte 0x74000000
+    .asciz "/GrCs.dat"
+    .balign 4
 .global lbl_803E11A4
 lbl_803E11A4:
     .4byte 0x00000002
@@ -4583,38 +4582,19 @@ lbl_803E11A4:
     .4byte 0x00000001
     .4byte lbl_803E0FE8
     .4byte 0x00000002
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726361
-    .4byte 0x73746C65
-    .4byte 0x2E630000
-    .4byte 0x64796E61
-    .4byte 0x6D696373
-    .4byte 0x64617461
-    .4byte 0x5F666C61
-    .4byte 0x67330000
-    .4byte 0x64796E61
-    .4byte 0x6D696373
-    .4byte 0x64617461
-    .4byte 0x5F666C61
-    .4byte 0x67340000
-    .4byte 0x64796E61
-    .4byte 0x6D696373
-    .4byte 0x64617461
-    .4byte 0x5F666C61
-    .4byte 0x67360000
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grcastle.c"
+    .balign 4
+    .asciz "dynamicsdata_flag3"
+    .balign 4
+    .asciz "dynamicsdata_flag4"
+    .balign 4
+    .asciz "dynamicsdata_flag6"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D45D0
 lbl_804D45D0:
     .asciz "jobj.h"
@@ -4632,7 +4612,7 @@ lbl_804D45E4:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6970
 lbl_804D6970:
 	.skip 0x4
@@ -4642,7 +4622,7 @@ lbl_804D6974:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DAE18
 lbl_804DAE18:
 	.4byte 0x3F000000

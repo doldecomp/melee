@@ -350,7 +350,7 @@ __GXPEInit:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7320
 lbl_804D7320:
 	.skip 0x4

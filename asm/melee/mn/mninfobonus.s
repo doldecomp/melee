@@ -875,55 +875,31 @@ lbl_803EFCE8:
     .4byte 0x000000F4
     .4byte 0x000000F5
     .4byte 0x00000100
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E426F
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E426F
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E426F
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E426F
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte NULL
+    .asciz "MenMainConBo_Top_joint"
+    .balign 4
+    .asciz "MenMainConBo_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConBo_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConBo_Top_shapeanim_joint"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A09B0
 lbl_804A09B0:
 	.skip 0x60
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C80
 lbl_804D6C80:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC268
 lbl_804DC268:
 	.4byte 0xC1180000

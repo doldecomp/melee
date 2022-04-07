@@ -4810,7 +4810,7 @@ lbl_80229590:
 
 
 .section .rodata
-    .4byte NULL
+    .balign 8
 .global lbl_803B84D8
 lbl_803B84D8:
     .4byte 0x00000000
@@ -5193,42 +5193,10 @@ lbl_803EAB9C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x4974656D
-    .4byte 0x3D256420
-    .4byte 0x466F6F64
-    .4byte 0x733D2564
-    .4byte 0x2059616B
-    .4byte 0x753D2564
-    .4byte 0x2053705F
-    .4byte 0x4974656D
-    .4byte 0x3D256420
-    .4byte 0x506F6B65
-    .4byte 0x6D6F6E3D
-    .4byte 0x25642050
-    .4byte 0x6F6B6553
-    .4byte 0x686F743D
-    .4byte 0x25642043
-    .4byte 0x5A616B6F
-    .4byte 0x3D256420
-    .4byte 0x435A616B
-    .4byte 0x6F53686F
-    .4byte 0x743D2564
-    .4byte 0x205A616B
-    .4byte 0x6F3D2564
-    .4byte 0x205A616B
-    .4byte 0x6F53686F
-    .4byte 0x743D2564
-    .4byte 0x2053686F
-    .4byte 0x743D2564
-    .4byte 0x20457463
-    .4byte 0x3D25640A
-    .4byte NULL
-    .4byte 0x4974656D
-    .4byte 0x2D3E2025
-    .4byte 0x73202050
-    .4byte 0x6F6B656D
-    .4byte 0x6F6E2D3E
-    .4byte 0x20257300
+    .asciz "Item=%d Foods=%d Yaku=%d Sp_Item=%d Pokemon=%d PokeShot=%d CZako=%d CZakoShot=%d Zako=%d ZakoShot=%d Shot=%d Etc=%d\n"
+    .balign 4
+    .asciz "Item-> %s  Pokemon-> %s"
+    .balign 4
 .global lbl_803EACA0
 lbl_803EACA0:
     .asciz "Item Max Over.\n"
@@ -5260,36 +5228,18 @@ lbl_803EAD40:
     .4byte 0x00000002
     .4byte NULL
     .4byte 0x00000001
-    .4byte 0x46474D3A
-    .4byte 0x4F464620
-    .4byte 0x2042474D
-    .4byte 0x3A4F4646
-    .4byte NULL
-    .4byte 0x46474D3A
-    .4byte 0x4F464620
-    .4byte 0x2042474D
-    .4byte 0x3A4F4E20
-    .4byte NULL
-    .4byte 0x46474D3A
-    .4byte 0x4F4E2020
-    .4byte 0x2042474D
-    .4byte 0x3A4F4646
-    .4byte NULL
-    .4byte 0x46474D3A
-    .4byte 0x4F4E2020
-    .4byte 0x2042474D
-    .4byte 0x3A4F4E20
-    .4byte NULL
-    .4byte 0x50566F69
-    .4byte 0x63652020
-    .4byte 0x25336420
-    .4byte 0x20253364
-    .4byte 0x0A000000
-    .4byte 0x56566F69
-    .4byte 0x63652020
-    .4byte 0x25336420
-    .4byte 0x20253364
-    .4byte NULL
+    .asciz "FGM:OFF  BGM:OFF"
+    .balign 4
+    .asciz "FGM:OFF  BGM:ON "
+    .balign 4
+    .asciz "FGM:ON   BGM:OFF"
+    .balign 4
+    .asciz "FGM:ON   BGM:ON "
+    .balign 4
+    .asciz "PVoice  %3d  %3d\n"
+    .balign 4
+    .asciz "VVoice  %3d  %3d"
+    .balign 4
 .global lbl_803EADC8
 lbl_803EADC8:
     .asciz "cant find xfb!\n"
@@ -5305,31 +5255,22 @@ lbl_803EAE08:
     .4byte 0xFF0000FF
     .4byte lbl_8040FF80
     .4byte 0x000000FF
-    .4byte 0x31502025
-    .4byte 0x37642032
-    .4byte 0x50202537
-    .4byte 0x640A0000
-    .4byte 0x33502025
-    .4byte 0x37642034
-    .4byte 0x50202537
-    .4byte 0x640A0000
-    .4byte 0x25645020
-    .4byte 0x73637265
-    .4byte 0x656E2025
-    .4byte 0x64000000
-    .4byte 0x73637265
-    .4byte 0x656E206F
-    .4byte 0x76657221
-    .4byte 0x21000000
+    .asciz "1P %7d 2P %7d\n"
+    .balign 4
+    .asciz "3P %7d 4P %7d\n"
+    .balign 4
+    .asciz "%dP screen %d"
+    .balign 4
+    .asciz "screen over!!"
+    .balign 4
 .global lbl_803EAE58
 lbl_803EAE58:
     .asciz "objalloc.h"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8049FA00
 lbl_8049FA00:
 	.skip 0x50
@@ -5357,7 +5298,7 @@ lbl_804A0480:
 
 
 .section .sdata
-    .4byte NULL
+    .balign 8
 .global lbl_804D4A08
 lbl_804D4A08:
 	.long 1
@@ -5370,88 +5311,88 @@ lbl_804D4A14:
     .4byte 0x0A000000
 .global lbl_804D4A18
 lbl_804D4A18:
-    .4byte 0x52616E64
-    .4byte 0x6F6D0000
+    .asciz "Random"
+    .balign 4
 .global lbl_804D4A20
 lbl_804D4A20:
-    .4byte 0x4B616269
-    .4byte 0x676F6E00
+    .asciz "Kabigon"
+    .balign 4
 .global lbl_804D4A28
 lbl_804D4A28:
-    .4byte 0x4B616D65
-    .4byte 0x78000000
+    .asciz "Kamex"
+    .balign 4
 .global lbl_804D4A30
 lbl_804D4A30:
-    .4byte 0x46697265
-    .4byte 0x00000000
+    .asciz "Fire"
+    .balign 4
 .global lbl_804D4A38
 lbl_804D4A38:
-    .4byte 0x5468756E
-    .4byte 0x64657200
+    .asciz "Thunder"
+    .balign 4
 .global lbl_804D4A40
 lbl_804D4A40:
-    .4byte 0x46726565
-    .4byte 0x7A657200
+    .asciz "Freezer"
+    .balign 4
 .global lbl_804D4A48
 lbl_804D4A48:
-    .4byte 0x536F6E61
-    .4byte 0x6E730000
+    .asciz "Sonans"
+    .balign 4
 .global lbl_804D4A50
 lbl_804D4A50:
-    .4byte 0x48617373
-    .4byte 0x616D0000
+    .asciz "Hassam"
+    .balign 4
 .global lbl_804D4A58
 lbl_804D4A58:
-    .4byte 0x556E6B6E
-    .4byte 0x6F776E00
+    .asciz "Unknown"
+    .balign 4
 .global lbl_804D4A60
 lbl_804D4A60:
-    .4byte 0x456E7465
-    .4byte 0x69000000
+    .asciz "Entei"
+    .balign 4
 .global lbl_804D4A68
 lbl_804D4A68:
-    .4byte 0x5261696B
-    .4byte 0x6F750000
+    .asciz "Raikou"
+    .balign 4
 .global lbl_804D4A70
 lbl_804D4A70:
-    .4byte 0x5375696B
-    .4byte 0x756E0000
+    .asciz "Suikun"
+    .balign 4
 .global lbl_804D4A78
 lbl_804D4A78:
-    .4byte 0x4C756769
-    .4byte 0x61000000
+    .asciz "Lugia"
+    .balign 4
 .global lbl_804D4A80
 lbl_804D4A80:
-    .4byte 0x486F756F
-    .4byte 0x75000000
+    .asciz "Houou"
+    .balign 4
 .global lbl_804D4A88
 lbl_804D4A88:
-    .4byte 0x4D657461
-    .4byte 0x6D6F6E00
+    .asciz "Metamon"
+    .balign 4
 .global lbl_804D4A90
 lbl_804D4A90:
-    .4byte 0x50697070
-    .4byte 0x69000000
+    .asciz "Pippi"
+    .balign 4
 .global lbl_804D4A98
 lbl_804D4A98:
-    .4byte 0x546F6765
-    .4byte 0x70790000
+    .asciz "Togepy"
+    .balign 4
 .global lbl_804D4AA0
 lbl_804D4AA0:
-    .4byte 0x4D657700
+    .asciz "Mew"
+    .balign 4
 .global lbl_804D4AA4
 lbl_804D4AA4:
-    .4byte 0x43657265
-    .4byte 0x62690000
+    .asciz "Cerebi"
+    .balign 4
 .global lbl_804D4AAC
 lbl_804D4AAC:
-    .4byte 0x4C75636B
-    .4byte 0x79000000
+    .asciz "Lucky"
+    .balign 4
 .global lbl_804D4AB4
 lbl_804D4AB4:
-    .4byte 0x4D617269
-    .4byte 0x6C000000
-    .4byte 0x00000000
+    .asciz "Maril"
+    .balign 8
 .global lbl_804D4AC0
 lbl_804D4AC0:
 	.4byte 0x0A000000
@@ -5507,8 +5448,8 @@ lbl_804D4B04:
     .4byte NULL
 .global lbl_804D4B10
 lbl_804D4B10:
-    .4byte 0x25730A00
-    .4byte 0x00000000
+    .asciz "%s\n"
+    .balign 8
 .global lbl_804D4B18
 lbl_804D4B18:
     .asciz "%s"
@@ -5525,7 +5466,7 @@ lbl_804D4B28:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6B20
 lbl_804D6B20:
 	.skip 0x4
@@ -5612,11 +5553,11 @@ lbl_804D6B9C:
 	.skip 0x4
 .global lbl_804D6BA0
 lbl_804D6BA0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-    .4byte NULL
+    .balign 8
 .global lbl_804DBCF0
 lbl_804DBCF0:
 	.4byte 0x8040FFFF

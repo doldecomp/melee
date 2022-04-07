@@ -38,4 +38,7 @@ typedef unsigned long size_t;
 
 #define FLT_MAX 3.4028235E38
 
+#define assert_line(line, cond)                                                \
+    ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
+
 #endif

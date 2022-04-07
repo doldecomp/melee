@@ -5763,7 +5763,6 @@ lbl_802439E8:
 /* 80243A34 00240614  7C 08 03 A6 */	mtlr r0
 /* 80243A38 00240618  4E 80 00 20 */	blr 
 
-
 .section .data
     .balign 8
 .global lbl_803EE728
@@ -5802,216 +5801,67 @@ lbl_803EE774:
     .4byte NULL
     .4byte 0x41200000
     .4byte 0xBDCCCCCD
-    .4byte 0x43616E27
-    .4byte 0x74206765
-    .4byte 0x74207573
-    .4byte 0x65725F64
-    .4byte 0x6174612E
-    .4byte 0x0A000000
-    .4byte 0x6D6E6469
-    .4byte 0x61677261
-    .4byte 0x6D2E6300
-    .4byte 0x75736572
-    .4byte 0x5F646174
-    .4byte 0x61000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4231
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4231
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4231
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4231
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x7572736F
-    .4byte 0x7242315F
-    .4byte 0x546F705F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E46
-    .4byte 0x61636542
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E46
-    .4byte 0x61636542
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E46
-    .4byte 0x61636542
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E46
-    .4byte 0x61636542
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4E
-    .4byte 0x6D425F54
-    .4byte 0x6F705F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4E
-    .4byte 0x6D425F54
-    .4byte 0x6F705F61
-    .4byte 0x6E696D6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4E
-    .4byte 0x6D425F54
-    .4byte 0x6F705F6D
-    .4byte 0x6174616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4E
-    .4byte 0x6D425F54
-    .4byte 0x6F705F73
-    .4byte 0x68617065
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E53
-    .4byte 0x75624231
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E53
-    .4byte 0x75624231
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E53
-    .4byte 0x75624231
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E53
-    .4byte 0x75624231
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4232
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4232
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4232
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4232
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4233
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4233
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4233
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4233
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x7572736F
-    .4byte 0x7242335F
-    .4byte 0x546F705F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte NULL
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mndiagram.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .asciz "MenMainConB1_Top_joint"
+    .balign 4
+    .asciz "MenMainConB1_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConB1_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConB1_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainCursorB1_Top_joint"
+    .balign 4
+    .asciz "MenMainFaceB_Top_joint"
+    .balign 4
+    .asciz "MenMainFaceB_Top_animjoint"
+    .balign 4
+    .asciz "MenMainFaceB_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainFaceB_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainNmB_Top_joint"
+    .balign 4
+    .asciz "MenMainNmB_Top_animjoint"
+    .balign 4
+    .asciz "MenMainNmB_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainNmB_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainSubB1_Top_joint"
+    .balign 4
+    .asciz "MenMainSubB1_Top_animjoint"
+    .balign 4
+    .asciz "MenMainSubB1_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainSubB1_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainConB2_Top_joint"
+    .balign 4
+    .asciz "MenMainConB2_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConB2_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConB2_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainConB3_Top_joint"
+    .balign 4
+    .asciz "MenMainConB3_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConB3_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConB3_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainCursorB3_Top_joint"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0750
 lbl_804A0750:
 	.skip 0x1C
@@ -6033,10 +5883,19 @@ lbl_804A0814:
 .global lbl_804A0824
 lbl_804A0824:
 	.skip 0x10
+.global lbl_804A0834
+lbl_804A0834:
+	.skip 0x10
+.global lbl_804A0844
+lbl_804A0844:
+	.skip 0x10
+.global lbl_804A0854
+lbl_804A0854:
+	.skip 0x14
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4FA0
 lbl_804D4FA0:
     .4byte 0x000000FF
@@ -6054,14 +5913,14 @@ lbl_804D4FB0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C10
 lbl_804D6C10:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBF70
 lbl_804DBF70:
 	.4byte 0x403E7A92

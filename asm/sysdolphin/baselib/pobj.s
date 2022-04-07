@@ -462,7 +462,7 @@ func_8036BF70:
 /* 8036BF88 00368B68  3C 60 80 40 */	lis r3, lbl_80406398@ha
 /* 8036BF8C 00368B6C  38 83 63 98 */	addi r4, r3, lbl_80406398@l
 /* 8036BF90 00368B70  38 7F 00 00 */	addi r3, r31, 0
-/* 8036BF94 00368B74  48 01 65 A5 */	bl func_80382538
+/* 8036BF94 00368B74  48 01 65 A5 */	bl hsdIsDescendantOf
 /* 8036BF98 00368B78  2C 03 00 00 */	cmpwi r3, 0
 /* 8036BF9C 00368B7C  40 82 00 18 */	bne lbl_8036BFB4
 /* 8036BFA0 00368B80  3C 60 80 40 */	lis r3, lbl_80406448@ha
@@ -3787,16 +3787,14 @@ lbl_804066D0:
 
 
 .section .bss, "wa"
-
-.skip 0x4
-
+    .balign 8
 .global lbl_804C0908
 lbl_804C0908:
 	.skip 0x10
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5D68
 lbl_804D5D68:
     .asciz "pobj.c"
@@ -3825,11 +3823,10 @@ lbl_804D5D8C:
 lbl_804D5D94:
     .asciz "jp->mtx"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7660
 lbl_804D7660:
 	.skip 0x4
@@ -3850,11 +3847,11 @@ lbl_804D7674:
 	.skip 0x4
 .global lbl_804D7678
 lbl_804D7678:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE4F8
 lbl_804DE4F8:
 	.4byte 0x00000000

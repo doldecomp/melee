@@ -1130,10 +1130,9 @@ lbl_8000F9D4:
 /* 8000F9F0 0000C5D0  7C 08 03 A6 */	mtlr r0
 /* 8000F9F4 0000C5D4  4E 80 00 20 */	blr 
 
+
 .section .data
-
     .balign 8
-
 .global lbl_803BA0D8
 lbl_803BA0D8:
     .asciz "lbshadow.c"
@@ -1165,7 +1164,7 @@ lbl_803BA0FC:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3728
 lbl_804D3728:
     .asciz "shadow"
@@ -1182,7 +1181,7 @@ lbl_804D3738:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7B30
 lbl_804D7B30:
 	.4byte 0xC0400000

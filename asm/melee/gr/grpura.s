@@ -1874,9 +1874,8 @@ lbl_803E6800:
     .4byte 0x80000000
 .global lbl_803E6A30
 lbl_803E6A30:
-    .4byte 0x2F477250
-    .4byte 0x752E6461
-    .4byte 0x74000000
+    .asciz "/GrPu.dat"
+    .balign 4
 .global lbl_803E6A3C
 lbl_803E6A3C:
     .4byte 0x00000011
@@ -1892,18 +1891,10 @@ lbl_803E6A3C:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727075
-    .4byte 0x72612E63
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grpura.c"
+    .balign 4
 .global lbl_803E6AA0
 lbl_803E6AA0:
     .4byte 0x000000FF
@@ -1991,12 +1982,8 @@ lbl_803E6AA0:
     .4byte 0xFFFFFFFF
     .4byte 0x3F800000
     .4byte 0xFFFFFFFF
-    .4byte 0x47726449
-    .4byte 0x7A756D69
-    .4byte 0x53746172
-    .4byte 0x5F546F70
-    .4byte 0x4E5F6A6F
-    .4byte 0x696E7400
+    .asciz "GrdIzumiStar_TopN_joint"
+    .balign 4
 .global lbl_803E6C0C
 lbl_803E6C0C:
     .4byte 0x00140002
@@ -2657,7 +2644,7 @@ lbl_803E7620:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D48E8
 lbl_804D48E8:
     .asciz "jobj.h"
@@ -2674,18 +2661,17 @@ lbl_804D48F8:
 lbl_804D4900:
     .asciz "gp"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AA0
 lbl_804D6AA0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBA58
 lbl_804DBA58:
 	.4byte 0x3F4CCCCD

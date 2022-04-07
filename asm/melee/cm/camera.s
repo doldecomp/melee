@@ -8719,7 +8719,7 @@ func_80030688:
 /* 800306F0 0002D2D0  38 83 01 D0 */	addi r4, r3, lbl_800301D0@l
 /* 800306F4 0002D2D4  38 7E 00 00 */	addi r3, r30, 0
 /* 800306F8 0002D2D8  38 A0 00 02 */	li r5, 2
-/* 800306FC 0002D2DC  48 36 00 61 */	bl func_8039075C
+/* 800306FC 0002D2DC  48 36 00 61 */	bl GObj_SetupGXLinkMax
 /* 80030700 0002D2E0  3C 60 80 03 */	lis r3, lbl_8002F360@ha
 /* 80030704 0002D2E4  38 83 F3 60 */	addi r4, r3, lbl_8002F360@l
 /* 80030708 0002D2E8  38 7E 00 00 */	addi r3, r30, 0
@@ -9879,7 +9879,7 @@ lbl_8003157C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B73B8
 lbl_803B73B8:
 	.float 0
@@ -10062,7 +10062,7 @@ lbl_803BCCA0:
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80452C68
 lbl_80452C68:
 	.skip 0x39C
@@ -10073,16 +10073,15 @@ lbl_80453004:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3938
 lbl_804D3938:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6458
 lbl_804D6458:
 	.skip 0x4
@@ -10101,7 +10100,7 @@ lbl_804D6468:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7E00
 lbl_804D7E00:
 	.4byte 0xFF7FFFFF

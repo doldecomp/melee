@@ -3082,11 +3082,10 @@ lbl_80201C58:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8288
 lbl_803B8288:
     .4byte 0x3F800000
-    .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
 
@@ -3169,9 +3168,8 @@ lbl_803E4E34:
     .4byte NULL
 .global lbl_803E4EC0
 lbl_803E4EC0:
-    .4byte 0x2F477252
-    .4byte 0x632E6461
-    .4byte 0x74000000
+    .asciz "/GrRc.dat"
+    .balign 4
 .global lbl_803E4ECC
 lbl_803E4ECC:
     .4byte 0x00000003
@@ -3187,15 +3185,8 @@ lbl_803E4ECC:
     .4byte 0x00000004
     .4byte lbl_803E4DA8
     .4byte 0x00000017
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E4F24
 lbl_803E4F24:
     .asciz "grrcruise.c"
@@ -3275,23 +3266,13 @@ lbl_803E4FF0:
     .4byte 0x00000001
     .4byte 0x001D0017
     .4byte 0x00000001
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E7661
-    .4byte 0x6E697368
-    .4byte NULL
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E7661
-    .4byte 0x6E697368
-    .4byte 0x5B695D2E
-    .4byte 0x6A6F626A
-    .4byte NULL
-    .4byte NULL
+    .asciz "gp->u.map.vanish"
+    .balign 4
+    .asciz "gp->u.map.vanish[i].jobj"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4780
 lbl_804D4780:
     .asciz "jobj.h"
@@ -3307,14 +3288,14 @@ lbl_804D4790:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A10
 lbl_804D6A10:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB640
 lbl_804DB640:
 	.4byte 0x3ECCCCCD

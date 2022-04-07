@@ -3837,7 +3837,7 @@ lbl_803C06CC:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3A18
 lbl_804D3A18:
     .asciz "0"
@@ -3850,11 +3850,10 @@ lbl_804D3A1C:
 lbl_804D3A24:
     .asciz "jobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8298
 lbl_804D8298:
 	.4byte 0x3F800000

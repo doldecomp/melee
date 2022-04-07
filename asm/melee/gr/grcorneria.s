@@ -7150,7 +7150,7 @@ lbl_801E3018:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8090
 lbl_803B8090:
     .4byte 0x3F800000
@@ -7312,15 +7312,8 @@ lbl_803E1F08:
     .4byte 0x00000001
     .4byte lbl_803E1D38
     .4byte 0x00000008
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E1F60
 lbl_803E1F60:
     .asciz "grcorneria.c"
@@ -7442,16 +7435,8 @@ lbl_803E2000:
     .4byte 0x00000002
     .4byte 0x00000002
     .4byte 0x0000000A
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
     .4byte 0xFFFFFFFF
     .4byte 0xFFFFFFFF
     .4byte 0x00000001
@@ -7476,9 +7461,8 @@ lbl_803E2190:
     .4byte 0x00000001
     .4byte 0x00000002
     .4byte 0x00000005
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
+    .asciz "translate"
+    .balign 4
     .4byte 0x00000001
     .4byte 0x00000001
     .4byte 0x00000001
@@ -7810,11 +7794,11 @@ lbl_803E26DC:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4650
 lbl_804D4650:
-    .4byte 0x2F477243
-    .4byte 0x6E000000
+    .asciz "/GrCn"
+    .balign 4
 .global lbl_804D4658
 lbl_804D4658:
     .asciz "jobj.h"
@@ -7842,11 +7826,10 @@ lbl_804D4678:
 lbl_804D4680:
     .asciz "gp"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D69A0
 lbl_804D69A0:
 	.skip 0x4
@@ -7861,11 +7844,11 @@ lbl_804D69AC:
 	.skip 0x4
 .global lbl_804D69B0
 lbl_804D69B0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB168
 lbl_804DB168:
 	.4byte 0x43960000

@@ -524,7 +524,7 @@ lbl_8020B85C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B83A0
 lbl_803B83A0:
     .4byte 0x00000000
@@ -602,11 +602,10 @@ lbl_803E5E0C:
 lbl_803E5E64:
     .asciz "grzebesroute.c"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4840
 lbl_804D4840:
     .asciz "gobj"
@@ -615,18 +614,17 @@ lbl_804D4840:
 lbl_804D4848:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A60
 lbl_804D6A60:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB918
 lbl_804DB918:
 	.4byte 0xC2480000

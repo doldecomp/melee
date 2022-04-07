@@ -26979,7 +26979,7 @@ lbl_80176B00:
 /* 80176B14 001736F4  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 80176B18 001736F8  38 7D 00 00 */	addi r3, r29, 0
 /* 80176B1C 001736FC  38 A0 00 08 */	li r5, 8
-/* 80176B20 00173700  48 21 9C 3D */	bl func_8039075C
+/* 80176B20 00173700  48 21 9C 3D */	bl GObj_SetupGXLinkMax
 /* 80176B24 00173704  88 1F 00 00 */	lbz r0, 0(r31)
 /* 80176B28 00173708  54 00 F7 FF */	rlwinm. r0, r0, 0x1e, 0x1f, 0x1f
 /* 80176B2C 0017370C  41 82 00 18 */	beq lbl_80176B44
@@ -30910,7 +30910,7 @@ lbl_8017A2D4:
 /* 8017A2F4 00176ED4  7C 83 00 2E */	lwzx r4, r3, r0
 /* 8017A2F8 00176ED8  38 7E 00 00 */	addi r3, r30, 0
 /* 8017A2FC 00176EDC  38 A0 00 05 */	li r5, 5
-/* 8017A300 00176EE0  48 21 64 5D */	bl func_8039075C
+/* 8017A300 00176EE0  48 21 64 5D */	bl GObj_SetupGXLinkMax
 /* 8017A304 00176EE4  BB 41 00 60 */	lmw r26, 0x60(r1)
 /* 8017A308 00176EE8  80 01 00 7C */	lwz r0, 0x7c(r1)
 /* 8017A30C 00176EEC  38 21 00 78 */	addi r1, r1, 0x78
@@ -31145,7 +31145,7 @@ lbl_8017A620:
 /* 8017A648 00177228  7C 83 E8 2E */	lwzx r4, r3, r29
 /* 8017A64C 0017722C  38 7B 00 00 */	addi r3, r27, 0
 /* 8017A650 00177230  38 A0 00 00 */	li r5, 0
-/* 8017A654 00177234  48 21 61 09 */	bl func_8039075C
+/* 8017A654 00177234  48 21 61 09 */	bl GObj_SetupGXLinkMax
 /* 8017A658 00177238  2C 1C 00 00 */	cmpwi r28, 0
 /* 8017A65C 0017723C  40 82 00 0C */	bne lbl_8017A668
 /* 8017A660 00177240  7F 23 CB 78 */	mr r3, r25
@@ -38398,7 +38398,7 @@ lbl_801808C8:
 /* 8018094C 0017D52C  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 80180950 0017D530  38 78 00 00 */	addi r3, r24, 0
 /* 80180954 0017D534  38 A0 00 08 */	li r5, 8
-/* 80180958 0017D538  48 20 FE 05 */	bl func_8039075C
+/* 80180958 0017D538  48 20 FE 05 */	bl GObj_SetupGXLinkMax
 /* 8018095C 0017D53C  38 00 4C 00 */	li r0, 0x4c00
 /* 80180960 0017D540  90 18 00 24 */	stw r0, 0x24(r24)
 /* 80180964 0017D544  38 00 00 00 */	li r0, 0
@@ -44301,7 +44301,7 @@ func_80185A0C:
 /* 80185A64 00182644  38 83 56 4C */	addi r4, r3, lbl_8018564C@l
 /* 80185A68 00182648  38 7B 00 00 */	addi r3, r27, 0
 /* 80185A6C 0018264C  38 A0 00 0B */	li r5, 0xb
-/* 80185A70 00182650  48 20 AC ED */	bl func_8039075C
+/* 80185A70 00182650  48 20 AC ED */	bl GObj_SetupGXLinkMax
 /* 80185A74 00182654  38 60 00 0E */	li r3, 0xe
 /* 80185A78 00182658  38 80 00 0F */	li r4, 0xf
 /* 80185A7C 0018265C  38 A0 00 00 */	li r5, 0
@@ -44492,7 +44492,7 @@ lbl_80185CC4:
 /* 80185D28 00182908  38 83 52 FC */	addi r4, r3, lbl_801852FC@l
 /* 80185D2C 0018290C  38 7E 00 00 */	addi r3, r30, 0
 /* 80185D30 00182910  38 A0 00 00 */	li r5, 0
-/* 80185D34 00182914  48 20 AA 29 */	bl func_8039075C
+/* 80185D34 00182914  48 20 AA 29 */	bl GObj_SetupGXLinkMax
 /* 80185D38 00182918  38 00 00 61 */	li r0, 0x61
 /* 80185D3C 0018291C  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 80185D40 00182920  38 00 00 00 */	li r0, 0
@@ -45241,7 +45241,7 @@ lbl_801867A8:
 /* 801867F8 001833D8  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 801867FC 001833DC  38 7C 00 00 */	addi r3, r28, 0
 /* 80186800 001833E0  38 A0 00 08 */	li r5, 8
-/* 80186804 001833E4  48 20 9F 59 */	bl func_8039075C
+/* 80186804 001833E4  48 20 9F 59 */	bl GObj_SetupGXLinkMax
 /* 80186808 001833E8  38 00 08 01 */	li r0, 0x801
 /* 8018680C 001833EC  90 1C 00 24 */	stw r0, 0x24(r28)
 /* 80186810 001833F0  38 00 00 00 */	li r0, 0
@@ -45261,14 +45261,14 @@ lbl_801867A8:
 /* 80186848 00183428  38 83 56 9C */	addi r4, r3, lbl_8018569C@l
 /* 8018684C 0018342C  38 7C 00 00 */	addi r3, r28, 0
 /* 80186850 00183430  38 A0 00 08 */	li r5, 8
-/* 80186854 00183434  48 20 9F 09 */	bl func_8039075C
+/* 80186854 00183434  48 20 9F 09 */	bl GObj_SetupGXLinkMax
 /* 80186858 00183438  48 00 00 18 */	b lbl_80186870
 lbl_8018685C:
 /* 8018685C 0018343C  3C 60 80 18 */	lis r3, lbl_8018575C@ha
 /* 80186860 00183440  38 83 57 5C */	addi r4, r3, lbl_8018575C@l
 /* 80186864 00183444  38 7C 00 00 */	addi r3, r28, 0
 /* 80186868 00183448  38 A0 00 08 */	li r5, 8
-/* 8018686C 0018344C  48 20 9E F1 */	bl func_8039075C
+/* 8018686C 0018344C  48 20 9E F1 */	bl GObj_SetupGXLinkMax
 lbl_80186870:
 /* 80186870 00183450  4B FF FB 91 */	bl func_80186400
 /* 80186874 00183454  38 60 00 0E */	li r3, 0xe
@@ -45374,7 +45374,7 @@ lbl_801869B0:
 /* 80186A00 001835E0  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 80186A04 001835E4  38 7E 00 00 */	addi r3, r30, 0
 /* 80186A08 001835E8  38 A0 00 08 */	li r5, 8
-/* 80186A0C 001835EC  48 20 9D 51 */	bl func_8039075C
+/* 80186A0C 001835EC  48 20 9D 51 */	bl GObj_SetupGXLinkMax
 /* 80186A10 001835F0  38 00 08 01 */	li r0, 0x801
 /* 80186A14 001835F4  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 80186A18 001835F8  38 00 00 00 */	li r0, 0
@@ -45394,14 +45394,14 @@ lbl_801869B0:
 /* 80186A50 00183630  38 83 56 9C */	addi r4, r3, lbl_8018569C@l
 /* 80186A54 00183634  38 7D 00 00 */	addi r3, r29, 0
 /* 80186A58 00183638  38 A0 00 08 */	li r5, 8
-/* 80186A5C 0018363C  48 20 9D 01 */	bl func_8039075C
+/* 80186A5C 0018363C  48 20 9D 01 */	bl GObj_SetupGXLinkMax
 /* 80186A60 00183640  48 00 00 18 */	b lbl_80186A78
 lbl_80186A64:
 /* 80186A64 00183644  3C 60 80 18 */	lis r3, lbl_8018575C@ha
 /* 80186A68 00183648  38 83 57 5C */	addi r4, r3, lbl_8018575C@l
 /* 80186A6C 0018364C  38 7D 00 00 */	addi r3, r29, 0
 /* 80186A70 00183650  38 A0 00 08 */	li r5, 8
-/* 80186A74 00183654  48 20 9C E9 */	bl func_8039075C
+/* 80186A74 00183654  48 20 9C E9 */	bl GObj_SetupGXLinkMax
 lbl_80186A78:
 /* 80186A78 00183658  4B FF F9 89 */	bl func_80186400
 /* 80186A7C 0018365C  38 60 00 0E */	li r3, 0xe
@@ -45510,7 +45510,7 @@ lbl_80186BC4:
 /* 80186C14 001837F4  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 80186C18 001837F8  38 7E 00 00 */	addi r3, r30, 0
 /* 80186C1C 001837FC  38 A0 00 08 */	li r5, 8
-/* 80186C20 00183800  48 20 9B 3D */	bl func_8039075C
+/* 80186C20 00183800  48 20 9B 3D */	bl GObj_SetupGXLinkMax
 /* 80186C24 00183804  38 00 08 01 */	li r0, 0x801
 /* 80186C28 00183808  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 80186C2C 0018380C  38 00 00 00 */	li r0, 0
@@ -45530,14 +45530,14 @@ lbl_80186BC4:
 /* 80186C64 00183844  38 83 56 9C */	addi r4, r3, lbl_8018569C@l
 /* 80186C68 00183848  38 7D 00 00 */	addi r3, r29, 0
 /* 80186C6C 0018384C  38 A0 00 08 */	li r5, 8
-/* 80186C70 00183850  48 20 9A ED */	bl func_8039075C
+/* 80186C70 00183850  48 20 9A ED */	bl GObj_SetupGXLinkMax
 /* 80186C74 00183854  48 00 00 18 */	b lbl_80186C8C
 lbl_80186C78:
 /* 80186C78 00183858  3C 60 80 18 */	lis r3, lbl_8018575C@ha
 /* 80186C7C 0018385C  38 83 57 5C */	addi r4, r3, lbl_8018575C@l
 /* 80186C80 00183860  38 7D 00 00 */	addi r3, r29, 0
 /* 80186C84 00183864  38 A0 00 08 */	li r5, 8
-/* 80186C88 00183868  48 20 9A D5 */	bl func_8039075C
+/* 80186C88 00183868  48 20 9A D5 */	bl GObj_SetupGXLinkMax
 lbl_80186C8C:
 /* 80186C8C 0018386C  4B FF F7 75 */	bl func_80186400
 /* 80186C90 00183870  38 60 00 0E */	li r3, 0xe
@@ -46357,7 +46357,7 @@ func_801877A8:
 /* 80187838 00184418  38 83 74 94 */	addi r4, r3, lbl_80187494@l
 /* 8018783C 0018441C  38 7E 00 00 */	addi r3, r30, 0
 /* 80187840 00184420  38 A0 00 08 */	li r5, 8
-/* 80187844 00184424  48 20 8F 19 */	bl func_8039075C
+/* 80187844 00184424  48 20 8F 19 */	bl GObj_SetupGXLinkMax
 /* 80187848 00184428  38 00 08 01 */	li r0, 0x801
 /* 8018784C 0018442C  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 80187850 00184430  38 60 00 0B */	li r3, 0xb
@@ -46928,7 +46928,7 @@ func_80187F48:
 /* 801880C4 00184CA4  38 83 04 E0 */	addi r4, r3, func_800304E0@l
 /* 801880C8 00184CA8  38 7C 00 00 */	addi r3, r28, 0
 /* 801880CC 00184CAC  38 A0 00 08 */	li r5, 8
-/* 801880D0 00184CB0  48 20 86 8D */	bl func_8039075C
+/* 801880D0 00184CB0  48 20 86 8D */	bl GObj_SetupGXLinkMax
 /* 801880D4 00184CB4  3C 60 80 18 */	lis r3, lbl_80187910@ha
 /* 801880D8 00184CB8  38 83 79 10 */	addi r4, r3, lbl_80187910@l
 /* 801880DC 00184CBC  38 7C 00 00 */	addi r3, r28, 0
@@ -46959,7 +46959,7 @@ func_80187F48:
 /* 80188140 00184D20  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 80188144 00184D24  38 7B 00 00 */	addi r3, r27, 0
 /* 80188148 00184D28  38 A0 00 08 */	li r5, 8
-/* 8018814C 00184D2C  48 20 86 11 */	bl func_8039075C
+/* 8018814C 00184D2C  48 20 86 11 */	bl GObj_SetupGXLinkMax
 /* 80188150 00184D30  38 00 0C 00 */	li r0, 0xc00
 /* 80188154 00184D34  90 1B 00 24 */	stw r0, 0x24(r27)
 /* 80188158 00184D38  38 60 00 0B */	li r3, 0xb
@@ -54066,7 +54066,7 @@ lbl_8018E7C0:
 /* 8018E800 0018B3E0  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 8018E804 0018B3E4  38 7D 00 00 */	addi r3, r29, 0
 /* 8018E808 0018B3E8  38 A0 00 01 */	li r5, 1
-/* 8018E80C 0018B3EC  48 20 1F 51 */	bl func_8039075C
+/* 8018E80C 0018B3EC  48 20 1F 51 */	bl GObj_SetupGXLinkMax
 /* 8018E810 0018B3F0  38 00 00 10 */	li r0, 0x10
 /* 8018E814 0018B3F4  90 1D 00 24 */	stw r0, 0x24(r29)
 /* 8018E818 0018B3F8  38 00 00 00 */	li r0, 0
@@ -55923,7 +55923,7 @@ func_80190174:
 /* 801901BC 0018CD9C  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 801901C0 0018CDA0  38 7F 00 00 */	addi r3, r31, 0
 /* 801901C4 0018CDA4  38 A0 00 00 */	li r5, 0
-/* 801901C8 0018CDA8  48 20 05 95 */	bl func_8039075C
+/* 801901C8 0018CDA8  48 20 05 95 */	bl GObj_SetupGXLinkMax
 /* 801901CC 0018CDAC  38 00 00 07 */	li r0, 7
 /* 801901D0 0018CDB0  90 1F 00 24 */	stw r0, 0x24(r31)
 /* 801901D4 0018CDB4  38 00 00 00 */	li r0, 0
@@ -55959,7 +55959,7 @@ func_801901F8:
 /* 80190240 0018CE20  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 80190244 0018CE24  38 7F 00 00 */	addi r3, r31, 0
 /* 80190248 0018CE28  38 A0 00 02 */	li r5, 2
-/* 8019024C 0018CE2C  48 20 05 11 */	bl func_8039075C
+/* 8019024C 0018CE2C  48 20 05 11 */	bl GObj_SetupGXLinkMax
 /* 80190250 0018CE30  38 00 00 0A */	li r0, 0xa
 /* 80190254 0018CE34  90 1F 00 24 */	stw r0, 0x24(r31)
 /* 80190258 0018CE38  38 00 00 00 */	li r0, 0
@@ -73648,7 +73648,7 @@ lbl_8019FA4C:
 /* 8019FB30 0019C710  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 8019FB34 0019C714  38 7C 00 00 */	addi r3, r28, 0
 /* 8019FB38 0019C718  38 A0 00 00 */	li r5, 0
-/* 8019FB3C 0019C71C  48 1F 0C 21 */	bl func_8039075C
+/* 8019FB3C 0019C71C  48 1F 0C 21 */	bl GObj_SetupGXLinkMax
 /* 8019FB40 0019C720  38 00 08 01 */	li r0, 0x801
 /* 8019FB44 0019C724  90 1C 00 24 */	stw r0, 0x24(r28)
 /* 8019FB48 0019C728  3B 40 00 00 */	li r26, 0
@@ -74897,7 +74897,7 @@ lbl_801A0C6C:
 /* 801A0CE4 0019D8C4  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 801A0CE8 0019D8C8  38 7E 00 00 */	addi r3, r30, 0
 /* 801A0CEC 0019D8CC  38 A0 00 00 */	li r5, 0
-/* 801A0CF0 0019D8D0  48 1E FA 6D */	bl func_8039075C
+/* 801A0CF0 0019D8D0  48 1E FA 6D */	bl GObj_SetupGXLinkMax
 /* 801A0CF4 0019D8D4  38 00 08 01 */	li r0, 0x801
 /* 801A0CF8 0019D8D8  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 801A0CFC 0019D8DC  38 60 00 0B */	li r3, 0xb
@@ -75301,7 +75301,7 @@ lbl_801A1224:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B75F8
 lbl_803B75F8:
     .4byte 0x3F733333
@@ -80331,54 +80331,20 @@ lbl_803D8D08:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x476D4B75
-    .4byte 0x6D697465
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6531
-    .4byte 0x306D616E
-    .4byte NULL
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6531
-    .4byte 0x30306D61
-    .4byte 0x6E000000
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6531
-    .4byte 0x306D696E
-    .4byte NULL
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6536
-    .4byte 0x306D696E
-    .4byte NULL
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C6545
-    .4byte 0x6E646C65
-    .4byte 0x73730000
-    .4byte 0x676D4B75
-    .4byte 0x6D697465
-    .4byte 0x53797374
-    .4byte 0x656D5461
-    .4byte 0x626C654D
-    .4byte 0x65726369
-    .4byte 0x6C657373
-    .4byte 0x6C790000
-    .4byte NULL
+    .asciz "GmKumite.dat"
+    .balign 4
+    .asciz "gmKumiteSystemTable10man"
+    .balign 4
+    .asciz "gmKumiteSystemTable100man"
+    .balign 4
+    .asciz "gmKumiteSystemTable10min"
+    .balign 4
+    .asciz "gmKumiteSystemTable60min"
+    .balign 4
+    .asciz "gmKumiteSystemTableEndless"
+    .balign 4
+    .asciz "gmKumiteSystemTableMercilessly"
+    .balign 8
 .global lbl_803D9248
 lbl_803D9248:
     .4byte 0x3F19999A
@@ -80757,12 +80723,8 @@ lbl_803D9750:
     .4byte 0x00060000
     .4byte 0x00200000
     .4byte 0x00009000
-    .4byte 0x53634974
-    .4byte 0x724E6F72
-    .4byte 0x6D616C5F
-    .4byte 0x7363656E
-    .4byte 0x655F6461
-    .4byte 0x74610000
+    .asciz "ScItrNormal_scene_data"
+    .balign 4
 .global lbl_803D9828
 lbl_803D9828:
     .4byte 0x00120015
@@ -80807,24 +80769,14 @@ jtbl_803D98A4:
 	.4byte lbl_801897E4
 	.4byte lbl_8018996C
 	.4byte lbl_8018999C
-    .4byte 0x53634761
-    .4byte 0x6D547261
-    .4byte 0x696E696E
-    .4byte 0x675F7363
-    .4byte 0x656E655F
-    .4byte 0x6D6F6465
-    .4byte 0x6C730000
-    .4byte 0x53645472
-    .4byte 0x61696E2E
-    .4byte 0x75736400
-    .4byte 0x5349535F
-    .4byte 0x54726169
-    .4byte 0x6E696E67
-    .4byte 0x44617461
-    .4byte NULL
-    .4byte 0x53645472
-    .4byte 0x61696E2E
-    .4byte 0x64617400
+    .asciz "ScGamTraining_scene_models"
+    .balign 4
+    .asciz "SdTrain.usd"
+    .balign 4
+    .asciz "SIS_TrainingData"
+    .balign 4
+    .asciz "SdTrain.dat"
+    .balign 4
 .global lbl_803D9910
 lbl_803D9910:
     .4byte 0x04000032
@@ -81299,42 +81251,20 @@ jtbl_803DA024:
 	.4byte lbl_80190CB8
 	.4byte lbl_80190E04
 	.4byte lbl_80190D50
-    .4byte 0x53634761
-    .4byte 0x6D546F75
-    .4byte 0x725F7363
-    .4byte 0x656E655F
-    .4byte 0x64617461
-    .4byte NULL
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte NULL
-    .4byte 0x546D426F
-    .4byte 0x782E6461
-    .4byte 0x74000000
-    .4byte 0x746F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E745F62
-    .4byte 0x6F78325F
-    .4byte 0x61727261
-    .4byte 0x79000000
-    .4byte 0x746F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E745F62
-    .4byte 0x6F78335F
-    .4byte 0x61727261
-    .4byte 0x79000000
-    .4byte 0x746F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E745F62
-    .4byte 0x6F78345F
-    .4byte 0x61727261
-    .4byte 0x79000000
-    .4byte 0x5349535F
-    .4byte 0x546F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E744461
-    .4byte 0x74610000
-    .4byte NULL
+    .asciz "ScGamTour_scene_data"
+    .balign 4
+    .asciz "MnExtAll"
+    .balign 4
+    .asciz "TmBox.dat"
+    .balign 4
+    .asciz "tournament_box2_array"
+    .balign 4
+    .asciz "tournament_box3_array"
+    .balign 4
+    .asciz "tournament_box4_array"
+    .balign 4
+    .asciz "SIS_TournamentData"
+    .balign 8
 .global lbl_803DA0D0
 lbl_803DA0D0:
     .4byte 0x00010203
@@ -81501,17 +81431,10 @@ lbl_803DA2E0:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x53634761
-    .4byte 0x6D546F75
-    .4byte 0x725F7363
-    .4byte 0x656E655F
-    .4byte 0x64617461
-    .4byte NULL
-    .4byte 0x5349535F
-    .4byte 0x546F7572
-    .4byte 0x6E616D65
-    .4byte 0x6E744461
-    .4byte 0x74610000
+    .asciz "ScGamTour_scene_data"
+    .balign 4
+    .asciz "SIS_TournamentData"
+    .balign 4
 .global lbl_803DA3D0
 lbl_803DA3D0:
     .asciz "ckind:%d\n"
@@ -81557,7 +81480,7 @@ lbl_803DA4D8:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8046B378
 lbl_8046B378:
 	.skip 0x110
@@ -81687,7 +81610,7 @@ lbl_80479B10:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6598
 lbl_804D6598:
 	.skip 0x2
@@ -81907,7 +81830,7 @@ lbl_804D6704:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3EF8
 lbl_804D3EF8:
     .4byte 0x834E8362
@@ -82355,7 +82278,7 @@ lbl_804D4228:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DA230
 lbl_804DA230:
 	.4byte 0x43480000

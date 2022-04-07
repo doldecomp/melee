@@ -1436,7 +1436,7 @@ lbl_801D651C:
 /* 801D65B4 001D3194  D0 1E 00 DC */	stfs f0, 0xdc(r30)
 /* 801D65B8 001D3198  80 9E 00 C4 */	lwz r4, 0xc4(r30)
 /* 801D65BC 001D319C  C0 3E 00 CC */	lfs f1, 0xcc(r30)
-/* 801D65C0 001D31A0  48 1A 2D 09 */	bl func_803792C8
+/* 801D65C0 001D31A0  48 1A 2D 09 */	bl splArcLengthPoint
 /* 801D65C4 001D31A4  28 1F 00 00 */	cmplwi r31, 0
 /* 801D65C8 001D31A8  40 82 00 14 */	bne lbl_801D65DC
 /* 801D65CC 001D31AC  38 6D 8F 7C */	addi r3, r13, lbl_804D461C@sda21
@@ -1504,12 +1504,12 @@ lbl_801D6668:
 /* 801D66A4 001D3284  40 82 00 F4 */	bne lbl_801D6798
 /* 801D66A8 001D3288  80 9F 00 C4 */	lwz r4, 0xc4(r31)
 /* 801D66AC 001D328C  38 61 00 28 */	addi r3, r1, 0x28
-/* 801D66B0 001D3290  48 1A 2C 19 */	bl func_803792C8
+/* 801D66B0 001D3290  48 1A 2C 19 */	bl splArcLengthPoint
 /* 801D66B4 001D3294  C0 1F 00 CC */	lfs f0, 0xcc(r31)
 /* 801D66B8 001D3298  38 61 00 1C */	addi r3, r1, 0x1c
 /* 801D66BC 001D329C  80 9F 00 C4 */	lwz r4, 0xc4(r31)
 /* 801D66C0 001D32A0  EC 20 F8 2A */	fadds f1, f0, f31
-/* 801D66C4 001D32A4  48 1A 2C 05 */	bl func_803792C8
+/* 801D66C4 001D32A4  48 1A 2C 05 */	bl splArcLengthPoint
 /* 801D66C8 001D32A8  C0 61 00 28 */	lfs f3, 0x28(r1)
 /* 801D66CC 001D32AC  C0 41 00 1C */	lfs f2, 0x1c(r1)
 /* 801D66D0 001D32B0  C0 21 00 2C */	lfs f1, 0x2c(r1)
@@ -3380,7 +3380,7 @@ func_801D8078:
 /* 801D809C 001D4C7C  48 00 00 78 */	b lbl_801D8114
 lbl_801D80A0:
 /* 801D80A0 001D4C80  7F E3 FB 78 */	mr r3, r31
-/* 801D80A4 001D4C84  48 09 32 5D */	bl func_8026B300
+/* 801D80A4 001D4C84  48 09 32 5D */	bl itGetKind
 /* 801D80A8 001D4C88  2C 03 00 DA */	cmpwi r3, 0xda
 /* 801D80AC 001D4C8C  40 82 00 64 */	bne lbl_801D8110
 /* 801D80B0 001D4C90  38 7F 00 00 */	addi r3, r31, 0
@@ -3672,7 +3672,7 @@ lbl_801D848C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7FB0
 lbl_803B7FB0:
     .4byte 0x00000001
@@ -3910,7 +3910,7 @@ lbl_803E1A00:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4618
 lbl_804D4618:
     .asciz "0"
@@ -3923,11 +3923,10 @@ lbl_804D461C:
 lbl_804D4624:
     .asciz "jobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6980
 lbl_804D6980:
 	.skip 0x4
@@ -3937,7 +3936,7 @@ lbl_804D6984:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DAFA0
 lbl_804DAFA0:
 	.4byte 0x00000000

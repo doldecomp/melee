@@ -969,11 +969,10 @@ lbl_80081278:
 lbl_803C0EB0:
     .asciz "translate"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3A88
 lbl_804D3A88:
     .4byte 0xFFFFFF80
@@ -991,11 +990,10 @@ lbl_804D3A94:
 lbl_804D3A9C:
     .asciz "jobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8368
 lbl_804D8368:
 	.4byte 0x00000000

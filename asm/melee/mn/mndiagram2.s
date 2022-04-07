@@ -2555,31 +2555,15 @@ jtbl_803EEB78:
 	.4byte lbl_80244650
 	.4byte lbl_80244668
 	.4byte lbl_80244680
-    .4byte 0x43616E27
-    .4byte 0x74206765
-    .4byte 0x74207573
-    .4byte 0x65725F64
-    .4byte 0x6174612E
-    .4byte 0x0A000000
-    .4byte 0x6D6E6469
-    .4byte 0x61677261
-    .4byte 0x6D322E63
-    .4byte NULL
-    .4byte 0x75736572
-    .4byte 0x5F646174
-    .4byte 0x61000000
-    .4byte NULL
-
-
-.section .bss, "wa"
-
-.global lbl_804A0834
-lbl_804A0834:
-	.skip 0x10
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mndiagram2.c"
+    .balign 4
+    .asciz "user_data"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4FB8
 lbl_804D4FB8:
     .4byte 0x000000FF
@@ -2601,14 +2585,14 @@ lbl_804D4FD0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C18
 lbl_804D6C18:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBFC8
 lbl_804DBFC8:
 	.4byte 0x3D3851EC

@@ -3207,16 +3207,10 @@ lbl_803C0998:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x66696768
-    .4byte 0x7465725F
-    .4byte 0x636C6173
-    .4byte 0x735F6C69
-    .4byte 0x62726172
-    .4byte 0x79000000
-    .4byte 0x66745F69
-    .4byte 0x6E74705F
-    .4byte 0x6A6F626A
-    .4byte NULL
+    .asciz "fighter_class_library"
+    .balign 4
+    .asciz "ft_intp_jobj"
+    .balign 4
 .global lbl_803C0A08
 lbl_803C0A08:
     .asciz "ftparts.c"
@@ -3270,7 +3264,7 @@ lbl_803C0BD0:
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80459028
 lbl_80459028:
 	.skip 0x2C
@@ -3292,7 +3286,7 @@ lbl_80459240:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3A30
 lbl_804D3A30:
     .asciz "jobj.h"
@@ -3321,11 +3315,10 @@ lbl_804D3A58:
 lbl_804D3A5C:
     .asciz "rotate"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D82C8
 lbl_804D82C8:
 	.4byte 0x3F800000

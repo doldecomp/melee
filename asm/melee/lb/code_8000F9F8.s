@@ -4527,13 +4527,13 @@ func_800138EC:
 /* 80013AB4 00010694  38 83 36 14 */	addi r4, r3, lbl_80013614@l
 /* 80013AB8 00010698  38 7A 00 00 */	addi r3, r26, 0
 /* 80013ABC 0001069C  38 BE 00 00 */	addi r5, r30, 0
-/* 80013AC0 000106A0  48 37 CC 9D */	bl func_8039075C
+/* 80013AC0 000106A0  48 37 CC 9D */	bl GObj_SetupGXLinkMax
 /* 80013AC4 000106A4  48 00 00 14 */	b lbl_80013AD8
 lbl_80013AC8:
 /* 80013AC8 000106A8  38 7A 00 00 */	addi r3, r26, 0
 /* 80013ACC 000106AC  38 9D 00 00 */	addi r4, r29, 0
 /* 80013AD0 000106B0  38 BE 00 00 */	addi r5, r30, 0
-/* 80013AD4 000106B4  48 37 CC 89 */	bl func_8039075C
+/* 80013AD4 000106B4  48 37 CC 89 */	bl GObj_SetupGXLinkMax
 lbl_80013AD8:
 /* 80013AD8 000106B8  BB 21 00 54 */	lmw r25, 0x54(r1)
 /* 80013ADC 000106BC  80 01 00 C4 */	lwz r0, 0xc4(r1)
@@ -6782,7 +6782,7 @@ lbl_803BA344:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7280
 lbl_803B7280:
     .float 0
@@ -6810,7 +6810,7 @@ lbl_803B72B4:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804316C0
 lbl_804316C0:
 	.skip 0x1F0
@@ -6821,7 +6821,7 @@ lbl_804318B0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D63A0
 lbl_804D63A0:
 	.skip 0x4
@@ -6849,7 +6849,7 @@ lbl_804D63C0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3740
 lbl_804D3740:
     .asciz "jobj.h"
@@ -6903,11 +6903,10 @@ lbl_804D3790:
 lbl_804D3794:
     .asciz "p->size"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7BA0
 lbl_804D7BA0:
 	.4byte 0x3F800000

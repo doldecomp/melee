@@ -6790,11 +6790,10 @@ lbl_803C0CF0:
     .balign 4
     .asciz "fighter dynamics hit num over!\n"
     .balign 4
-    .4byte NULL
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80459278
 lbl_80459278:
 	.skip 0x320
@@ -6804,16 +6803,15 @@ lbl_80459598:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3A68
 lbl_804D3A68:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6558
 lbl_804D6558:
 	.skip 0x4
@@ -6822,11 +6820,11 @@ lbl_804D655C:
 	.skip 0x4
 .global lbl_804D6560
 lbl_804D6560:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D82E0
 lbl_804D82E0:
 	.4byte 0x00000000

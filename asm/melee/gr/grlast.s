@@ -2456,7 +2456,7 @@ lbl_8021C748:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8480
 lbl_803B8480:
     .4byte 0x3F800000
@@ -2472,7 +2472,6 @@ lbl_803B8498:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x3F800000
-    .4byte 0x00000000
 
 
 .section .data
@@ -2535,9 +2534,8 @@ lbl_803E7EBC:
     .4byte NULL
 .global lbl_803E7F84
 lbl_803E7F84:
-    .4byte 0x2F47724E
-    .4byte 0x4C612E64
-    .4byte 0x61740000
+    .asciz "/GrNLa.dat"
+    .balign 4
 .global lbl_803E7F90
 lbl_803E7F90:
     .4byte 0x00000025
@@ -2553,15 +2551,8 @@ lbl_803E7F90:
     .4byte 0x00000001
     .4byte lbl_804D4968
     .4byte 0x00000001
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E7FE8
 lbl_803E7FE8:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -2616,18 +2607,10 @@ jtbl_803E8080:
 	.4byte lbl_8021B8BC
 	.4byte lbl_8021B8C4
 	.4byte lbl_8021B8E8
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6C76
-    .4byte 0x5F676F62
-    .4byte 0x6A5B695D
-    .4byte NULL
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6C76
-    .4byte 0x5F676F62
-    .4byte 0x6A5B355D
-    .4byte NULL
+    .asciz "gp->u.map.lv_gobj[i]"
+    .balign 4
+    .asciz "gp->u.map.lv_gobj[5]"
+    .balign 4
 .global jtbl_803E80F8
 jtbl_803E80F8:
 	.4byte lbl_8021C3F8
@@ -2651,7 +2634,7 @@ jtbl_803E80F8:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4968
 lbl_804D4968:
     .4byte 0x00000003
@@ -2676,18 +2659,17 @@ lbl_804D4984:
 lbl_804D498C:
     .asciz "aobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AD0
 lbl_804D6AD0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBB70
 lbl_804DBB70:
 	.4byte 0x3F800000

@@ -1,9 +1,11 @@
 #include "ftfalco.h"
 
+#include <melee/it/id.h>
+
 void ftFalco_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
-    ft->x222C = 0;
+    ft->sa.fox.x222C = 0;
     func_80074A4C(gobj, 0, 0);
 }
 

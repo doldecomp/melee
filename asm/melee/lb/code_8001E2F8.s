@@ -2699,7 +2699,7 @@ func_800208EC:
 /* 80020950 0001D530  80 7F 00 00 */	lwz r3, 0(r31)
 /* 80020954 0001D534  38 84 10 D8 */	addi r4, r4, func_803910D8@l
 /* 80020958 0001D538  57 85 06 3E */	clrlwi r5, r28, 0x18
-/* 8002095C 0001D53C  48 36 FE 01 */	bl func_8039075C
+/* 8002095C 0001D53C  48 36 FE 01 */	bl GObj_SetupGXLinkMax
 /* 80020960 0001D540  80 BF 00 00 */	lwz r5, 0(r31)
 /* 80020964 0001D544  3C 00 00 01 */	lis r0, 1
 /* 80020968 0001D548  3B E0 00 00 */	li r31, 0
@@ -2765,7 +2765,7 @@ func_800209F4:
 /* 80020A4C 0001D62C  80 7E 00 00 */	lwz r3, 0(r30)
 /* 80020A50 0001D630  38 84 10 D8 */	addi r4, r4, func_803910D8@l
 /* 80020A54 0001D634  38 A0 00 0A */	li r5, 0xa
-/* 80020A58 0001D638  48 36 FD 05 */	bl func_8039075C
+/* 80020A58 0001D638  48 36 FD 05 */	bl GObj_SetupGXLinkMax
 /* 80020A5C 0001D63C  80 BE 00 00 */	lwz r5, 0(r30)
 /* 80020A60 0001D640  3C 00 00 01 */	lis r0, 1
 /* 80020A64 0001D644  3B C0 00 00 */	li r30, 0
@@ -12472,12 +12472,10 @@ lbl_803BB194:
     .4byte NULL
     .4byte lbl_803BB194
     .4byte NULL
-    .4byte 0x4C625266
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x6C625265
-    .4byte 0x66446174
-    .4byte 0x61000000
+    .asciz "LbRf.dat"
+    .balign 4
+    .asciz "lbRefData"
+    .balign 4
     .4byte func_80022650
     .4byte NULL
     .4byte NULL
@@ -12513,20 +12511,12 @@ lbl_803BB194:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x72656672
-    .4byte 0x6163745F
-    .4byte 0x636C6173
-    .4byte 0x735F6C69
-    .4byte 0x62726172
-    .4byte 0x79000000
-    .4byte 0x72656672
-    .4byte 0x6163745F
-    .4byte 0x646F626A
-    .4byte NULL
-    .4byte 0x72656672
-    .4byte 0x6163745F
-    .4byte 0x706F626A
-    .4byte NULL
+    .asciz "refract_class_library"
+    .balign 4
+    .asciz "refract_dobj"
+    .balign 4
+    .asciz "refract_pobj"
+    .balign 4
 .global lbl_803BB2DC
 lbl_803BB2DC:
     .asciz "lbRefSetUnuse error!\n"
@@ -12553,8 +12543,8 @@ lbl_803BB300:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x2F617564
-    .4byte 0x696F2F00
+    .asciz "/audio/"
+    .balign 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -12569,8 +12559,8 @@ lbl_803BB300:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x2F617564
-    .4byte 0x696F2F00
+    .asciz "/audio/"
+    .balign 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -13034,256 +13024,200 @@ lbl_803BB8D4:
     .4byte 0x00083D60
 .global lbl_803BBA94
 lbl_803BBA94:
-    .4byte 0x6D61696E
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "main.ssm"
+    .balign 4
 .global lbl_803BBAA0
 lbl_803BBAA0:
-    .4byte 0x706F6B65
-    .4byte 0x6D6F6E2E
-    .4byte 0x73736D00
+    .asciz "pokemon.ssm"
+    .balign 4
 .global lbl_803BBAAC
 lbl_803BBAAC:
-    .4byte 0x6E725F74
-    .4byte 0x69746C65
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "nr_title.ssm"
+    .balign 4
 .global lbl_803BBABC
 lbl_803BBABC:
-    .4byte 0x6E725F73
-    .4byte 0x656C6563
-    .4byte 0x742E7373
-    .4byte 0x6D000000
+    .asciz "nr_select.ssm"
+    .balign 4
 .global lbl_803BBACC
 lbl_803BBACC:
-    .4byte 0x6E725F31
-    .4byte 0x702E7373
-    .4byte 0x6D000000
+    .asciz "nr_1p.ssm"
+    .balign 4
 .global lbl_803BBAD8
 lbl_803BBAD8:
-    .4byte 0x6E725F76
-    .4byte 0x732E7373
-    .4byte 0x6D000000
+    .asciz "nr_vs.ssm"
+    .balign 4
 .global lbl_803BBAE4
 lbl_803BBAE4:
-    .4byte 0x63617074
-    .4byte 0x61696E2E
-    .4byte 0x73736D00
+    .asciz "captain.ssm"
+    .balign 4
 .global lbl_803BBAF0
 lbl_803BBAF0:
-    .4byte 0x636C696E
-    .4byte 0x6B2E7373
-    .4byte 0x6D000000
+    .asciz "clink.ssm"
+    .balign 4
 .global lbl_803BBAFC
 lbl_803BBAFC:
-    .4byte 0x64726D61
-    .4byte 0x72696F2E
-    .4byte 0x73736D00
+    .asciz "drmario.ssm"
+    .balign 4
 .global lbl_803BBB08
 lbl_803BBB08:
-    .4byte 0x66616C63
-    .4byte 0x6F2E7373
-    .4byte 0x6D000000
+    .asciz "falco.ssm"
+    .balign 4
 .global lbl_803BBB14
 lbl_803BBB14:
-    .4byte 0x676B6F6F
-    .4byte 0x70612E73
-    .4byte 0x736D0000
+    .asciz "gkoopa.ssm"
+    .balign 4
 .global lbl_803BBB20
 lbl_803BBB20:
-    .4byte 0x6B697262
-    .4byte 0x792E7373
-    .4byte 0x6D000000
+    .asciz "kirby.ssm"
+    .balign 4
 .global lbl_803BBB2C
 lbl_803BBB2C:
-    .4byte 0x6B6F6F70
-    .4byte 0x612E7373
-    .4byte 0x6D000000
+    .asciz "koopa.ssm"
+    .balign 4
 .global lbl_803BBB38
 lbl_803BBB38:
-    .4byte 0x6C696E6B
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "link.ssm"
+    .balign 4
 .global lbl_803BBB44
 lbl_803BBB44:
-    .4byte 0x6C756967
-    .4byte 0x692E7373
-    .4byte 0x6D000000
+    .asciz "luigi.ssm"
+    .balign 4
 .global lbl_803BBB50
 lbl_803BBB50:
-    .4byte 0x6D617269
-    .4byte 0x6F2E7373
-    .4byte 0x6D000000
+    .asciz "mario.ssm"
+    .balign 4
 .global lbl_803BBB5C
 lbl_803BBB5C:
-    .4byte 0x6D617273
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "mars.ssm"
+    .balign 4
 .global lbl_803BBB68
 lbl_803BBB68:
-    .4byte 0x6D657774
-    .4byte 0x776F2E73
-    .4byte 0x736D0000
+    .asciz "mewtwo.ssm"
+    .balign 4
 .global lbl_803BBB74
 lbl_803BBB74:
-    .4byte 0x6E657373
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "ness.ssm"
+    .balign 4
 .global lbl_803BBB80
 lbl_803BBB80:
-    .4byte 0x70656163
-    .4byte 0x682E7373
-    .4byte 0x6D000000
+    .asciz "peach.ssm"
+    .balign 4
 .global lbl_803BBB8C
 lbl_803BBB8C:
-    .4byte 0x70696368
-    .4byte 0x752E7373
-    .4byte 0x6D000000
+    .asciz "pichu.ssm"
+    .balign 4
 .global lbl_803BBB98
 lbl_803BBB98:
-    .4byte 0x70696B61
-    .4byte 0x6368752E
-    .4byte 0x73736D00
+    .asciz "pikachu.ssm"
+    .balign 4
 .global lbl_803BBBA4
 lbl_803BBBA4:
-    .4byte 0x70757269
-    .4byte 0x6E2E7373
-    .4byte 0x6D000000
+    .asciz "purin.ssm"
+    .balign 4
 .global lbl_803BBBB0
 lbl_803BBBB0:
-    .4byte 0x73616D75
-    .4byte 0x732E7373
-    .4byte 0x6D000000
+    .asciz "samus.ssm"
+    .balign 4
 .global lbl_803BBBBC
 lbl_803BBBBC:
-    .4byte 0x796F7368
-    .4byte 0x692E7373
-    .4byte 0x6D000000
+    .asciz "yoshi.ssm"
+    .balign 4
 .global lbl_803BBBC8
 lbl_803BBBC8:
-    .4byte 0x67616E6F
-    .4byte 0x6E2E7373
-    .4byte 0x6D000000
+    .asciz "ganon.ssm"
+    .balign 4
 .global lbl_803BBBD4
 lbl_803BBBD4:
-    .4byte 0x656D626C
-    .4byte 0x656D2E73
-    .4byte 0x736D0000
+    .asciz "emblem.ssm"
+    .balign 4
 .global lbl_803BBBE0
 lbl_803BBBE0:
-    .4byte 0x6D68616E
-    .4byte 0x64732E73
-    .4byte 0x736D0000
+    .asciz "mhands.ssm"
+    .balign 4
 .global lbl_803BBBEC
 lbl_803BBBEC:
-    .4byte 0x6B697262
-    .4byte 0x79746D2E
-    .4byte 0x73736D00
+    .asciz "kirbytm.ssm"
+    .balign 4
 .global lbl_803BBBF8
 lbl_803BBBF8:
-    .4byte 0x63617374
-    .4byte 0x6C652E73
-    .4byte 0x736D0000
+    .asciz "castle.ssm"
+    .balign 4
 .global lbl_803BBC04
 lbl_803BBC04:
-    .4byte 0x636F726E
-    .4byte 0x65726961
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "corneria.ssm"
+    .balign 4
 .global lbl_803BBC14
 lbl_803BBC14:
-    .4byte 0x67726561
-    .4byte 0x74626179
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "greatbay.ssm"
+    .balign 4
 .global lbl_803BBC24
 lbl_803BBC24:
-    .4byte 0x6B6F6E67
-    .4byte 0x6F2E7373
-    .4byte 0x6D000000
+    .asciz "kongo.ssm"
+    .balign 4
 .global lbl_803BBC30
 lbl_803BBC30:
-    .4byte 0x6D757465
-    .4byte 0x63697479
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "mutecity.ssm"
+    .balign 4
 .global lbl_803BBC40
 lbl_803BBC40:
-    .4byte 0x6F6E6574
-    .4byte 0x742E7373
-    .4byte 0x6D000000
+    .asciz "onett.ssm"
+    .balign 4
 .global lbl_803BBC4C
 lbl_803BBC4C:
-    .4byte 0x7A656265
-    .4byte 0x732E7373
-    .4byte 0x6D000000
+    .asciz "zebes.ssm"
+    .balign 4
 .global lbl_803BBC58
 lbl_803BBC58:
-    .4byte 0x67617264
-    .4byte 0x656E2E73
-    .4byte 0x736D0000
+    .asciz "garden.ssm"
+    .balign 4
 .global lbl_803BBC64
 lbl_803BBC64:
-    .4byte 0x6B6C6169
-    .4byte 0x642E7373
-    .4byte 0x6D000000
+    .asciz "klaid.ssm"
+    .balign 4
 .global lbl_803BBC70
 lbl_803BBC70:
-    .4byte 0x67726565
-    .4byte 0x6E732E73
-    .4byte 0x736D0000
+    .asciz "greens.ssm"
+    .balign 4
 .global lbl_803BBC7C
 lbl_803BBC7C:
-    .4byte 0x76656E6F
-    .4byte 0x6D2E7373
-    .4byte 0x6D000000
+    .asciz "venom.ssm"
+    .balign 4
 .global lbl_803BBC88
 lbl_803BBC88:
-    .4byte 0x62696762
-    .4byte 0x6C75652E
-    .4byte 0x73736D00
+    .asciz "bigblue.ssm"
+    .balign 4
 .global lbl_803BBC94
 lbl_803BBC94:
-    .4byte 0x666F7572
-    .4byte 0x73696465
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "fourside.ssm"
+    .balign 4
 .global lbl_803BBCA4
 lbl_803BBCA4:
-    .4byte 0x70757075
-    .4byte 0x70752E73
-    .4byte 0x736D0000
+    .asciz "pupupu.ssm"
+    .balign 4
 .global lbl_803BBCB0
 lbl_803BBCB0:
-    .4byte 0x70737461
-    .4byte 0x6469756D
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "pstadium.ssm"
+    .balign 4
 .global lbl_803BBCC0
 lbl_803BBCC0:
-    .4byte 0x31706164
-    .4byte 0x762E7373
-    .4byte 0x6D000000
+    .asciz "1padv.ssm"
+    .balign 4
 .global lbl_803BBCCC
 lbl_803BBCCC:
-    .4byte 0x656E6469
-    .4byte 0x6E672E73
-    .4byte 0x736D0000
+    .asciz "ending.ssm"
+    .balign 4
 .global lbl_803BBCD8
 lbl_803BBCD8:
-    .4byte 0x6E725F6E
-    .4byte 0x616D652E
-    .4byte 0x73736D00
+    .asciz "nr_name.ssm"
+    .balign 4
 .global lbl_803BBCE4
 lbl_803BBCE4:
-    .4byte 0x3170656E
-    .4byte 0x642E7373
-    .4byte 0x6D000000
+    .asciz "1pend.ssm"
+    .balign 4
 .global lbl_803BBCF0
 lbl_803BBCF0:
-    .4byte 0x6C617374
-    .4byte 0x2E73736D
-    .4byte NULL
+    .asciz "last.ssm"
+    .balign 4
     .4byte lbl_803BBA94
     .4byte lbl_803BBAA0
     .4byte lbl_803BBAAC
@@ -13342,209 +13276,156 @@ lbl_803BBCF0:
     .4byte NULL
 .global lbl_803BBDDC
 lbl_803BBDDC:
-    .4byte 0x31705F71
-    .4byte 0x6B2E6870
-    .4byte 0x73000000
+    .asciz "1p_qk.hps"
+    .balign 4
 .global lbl_803BBDE8
 lbl_803BBDE8:
-    .4byte 0x616B616E
-    .4byte 0x6569612E
-    .4byte 0x68707300
+    .asciz "akaneia.hps"
+    .balign 4
 .global lbl_803BBDF4
 lbl_803BBDF4:
-    .4byte 0x62616C6F
-    .4byte 0x6F6E2E68
-    .4byte 0x70730000
+    .asciz "baloon.hps"
+    .balign 4
 .global lbl_803BBE00
 lbl_803BBE00:
-    .4byte 0x62696762
-    .4byte 0x6C75652E
-    .4byte 0x68707300
+    .asciz "bigblue.hps"
+    .balign 4
 .global lbl_803BBE0C
 lbl_803BBE0C:
-    .4byte 0x63617374
-    .4byte 0x6C652E68
-    .4byte 0x70730000
+    .asciz "castle.hps"
+    .balign 4
 .global lbl_803BBE18
 lbl_803BBE18:
-    .4byte 0x636F6E74
-    .4byte 0x696E7565
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "continue.hps"
+    .balign 4
 .global lbl_803BBE28
 lbl_803BBE28:
-    .4byte 0x636F726E
-    .4byte 0x65726961
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "corneria.hps"
+    .balign 4
 .global lbl_803BBE38
 lbl_803BBE38:
-    .4byte 0x646F636D
-    .4byte 0x6172692E
-    .4byte 0x68707300
+    .asciz "docmari.hps"
+    .balign 4
 .global lbl_803BBE44
 lbl_803BBE44:
-    .4byte 0x656E6469
-    .4byte 0x6E672E68
-    .4byte 0x70730000
+    .asciz "ending.hps"
+    .balign 4
 .global lbl_803BBE50
 lbl_803BBE50:
-    .4byte 0x66616D69
-    .4byte 0x64656D6F
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "famidemo.hps"
+    .balign 4
 .global lbl_803BBE60
 lbl_803BBE60:
-    .4byte 0x66665F31
-    .4byte 0x7030312E
-    .4byte 0x68707300
+    .asciz "ff_1p01.hps"
+    .balign 4
 .global lbl_803BBE6C
 lbl_803BBE6C:
-    .4byte 0x66665F31
-    .4byte 0x7030322E
-    .4byte 0x68707300
+    .asciz "ff_1p02.hps"
+    .balign 4
 .global lbl_803BBE78
 lbl_803BBE78:
-    .4byte 0x66665F62
-    .4byte 0x61642E68
-    .4byte 0x70730000
+    .asciz "ff_bad.hps"
+    .balign 4
 .global lbl_803BBE84
 lbl_803BBE84:
-    .4byte 0x66665F64
-    .4byte 0x6B2E6870
-    .4byte 0x73000000
+    .asciz "ff_dk.hps"
+    .balign 4
 .global lbl_803BBE90
 lbl_803BBE90:
-    .4byte 0x66665F65
-    .4byte 0x6D622E68
-    .4byte 0x70730000
+    .asciz "ff_emb.hps"
+    .balign 4
 .global lbl_803BBE9C
 lbl_803BBE9C:
-    .4byte 0x66665F66
-    .4byte 0x6C61742E
-    .4byte 0x68707300
+    .asciz "ff_flat.hps"
+    .balign 4
 .global lbl_803BBEA8
 lbl_803BBEA8:
-    .4byte 0x66665F66
-    .4byte 0x6F782E68
-    .4byte 0x70730000
+    .asciz "ff_fox.hps"
+    .balign 4
 .global lbl_803BBEB4
 lbl_803BBEB4:
-    .4byte 0x66665F66
-    .4byte 0x7A65726F
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "ff_fzero.hps"
+    .balign 4
 .global lbl_803BBEC4
 lbl_803BBEC4:
-    .4byte 0x66665F67
-    .4byte 0x6F6F642E
-    .4byte 0x68707300
+    .asciz "ff_good.hps"
+    .balign 4
 .global lbl_803BBED0
 lbl_803BBED0:
-    .4byte 0x66665F69
-    .4byte 0x63652E68
-    .4byte 0x70730000
+    .asciz "ff_ice.hps"
+    .balign 4
 .global lbl_803BBEDC
 lbl_803BBEDC:
-    .4byte 0x66665F6B
-    .4byte 0x69726279
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "ff_kirby.hps"
+    .balign 4
 .global lbl_803BBEEC
 lbl_803BBEEC:
-    .4byte 0x66665F6C
-    .4byte 0x696E6B2E
-    .4byte 0x68707300
+    .asciz "ff_link.hps"
+    .balign 4
 .global lbl_803BBEF8
 lbl_803BBEF8:
-    .4byte 0x66665F6D
-    .4byte 0x6172696F
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "ff_mario.hps"
+    .balign 4
 .global lbl_803BBF08
 lbl_803BBF08:
-    .4byte 0x66665F6E
-    .4byte 0x65732E68
-    .4byte 0x70730000
+    .asciz "ff_nes.hps"
+    .balign 4
 .global lbl_803BBF14
 lbl_803BBF14:
-    .4byte 0x66665F70
-    .4byte 0x6F6B652E
-    .4byte 0x68707300
+    .asciz "ff_poke.hps"
+    .balign 4
 .global lbl_803BBF20
 lbl_803BBF20:
-    .4byte 0x66665F73
-    .4byte 0x616D7573
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "ff_samus.hps"
+    .balign 4
 .global lbl_803BBF30
 lbl_803BBF30:
-    .4byte 0x66665F73
-    .4byte 0x74657031
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "ff_step1.hps"
+    .balign 4
 .global lbl_803BBF40
 lbl_803BBF40:
-    .4byte 0x66665F73
-    .4byte 0x74657032
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "ff_step2.hps"
+    .balign 4
 .global lbl_803BBF50
 lbl_803BBF50:
-    .4byte 0x66665F73
-    .4byte 0x74657033
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "ff_step3.hps"
+    .balign 4
 .global lbl_803BBF60
 lbl_803BBF60:
-    .4byte 0x66665F79
-    .4byte 0x6F736869
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "ff_yoshi.hps"
+    .balign 4
 .global lbl_803BBF70
 lbl_803BBF70:
-    .4byte 0x666C6174
-    .4byte 0x7A6F6E65
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "flatzone.hps"
+    .balign 4
 .global lbl_803BBF80
 lbl_803BBF80:
-    .4byte 0x666F7572
-    .4byte 0x73696465
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "fourside.hps"
+    .balign 4
 .global lbl_803BBF90
 lbl_803BBF90:
-    .4byte 0x67616D65
-    .4byte 0x6F766572
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "gameover.hps"
+    .balign 4
 .global lbl_803BBFA0
 lbl_803BBFA0:
-    .4byte 0x67617264
-    .4byte 0x656E2E68
-    .4byte 0x70730000
+    .asciz "garden.hps"
+    .balign 4
 .global lbl_803BBFAC
 lbl_803BBFAC:
-    .4byte 0x67726561
-    .4byte 0x74626179
-    .4byte 0x2E687073
-    .4byte NULL
+    .asciz "greatbay.hps"
+    .balign 4
 .global lbl_803BBFBC
 lbl_803BBFBC:
-    .4byte 0x67726565
-    .4byte 0x6E732E68
-    .4byte 0x70730000
+    .asciz "greens.hps"
+    .balign 4
 .global lbl_803BBFC8
 lbl_803BBFC8:
-    .4byte 0x686F7774
-    .4byte 0x6F2E6870
-    .4byte 0x73000000
+    .asciz "howto.hps"
+    .balign 4
 .global lbl_803BBFD4
 lbl_803BBFD4:
-    .4byte 0x686F7774
-    .4byte 0x6F5F732E
-    .4byte 0x68707300
+    .asciz "howto_s.hps"
+    .balign 4
 .global lbl_803BBFE0
 lbl_803BBFE0:
     .asciz "hyaku.hps"
@@ -14260,60 +14141,24 @@ lbl_803BCA24:
     .4byte func_80025CBC
     .4byte func_80025E38
     .4byte func_80025E38
-    .4byte 0x2A2A2A2A
-    .4byte 0x2A2A2A2A
-    .4byte 0x20434155
-    .4byte 0x54494F4E
-    .4byte 0x202A2A2A
-    .4byte 0x2A2A2A2A
-    .4byte 0x2A0A4647
-    .4byte 0x4D206C6F
-    .4byte 0x61642073
-    .4byte 0x697A6520
-    .4byte 0x6973206F
-    .4byte 0x7665720A
-    .4byte NULL
-    .4byte 0x6C626175
-    .4byte 0x64696F5F
-    .4byte 0x61782E63
-    .4byte NULL
-    .4byte 0x2F617564
-    .4byte 0x696F2F75
-    .4byte 0x732F0000
-    .4byte 0x2F617564
-    .4byte 0x696F2F00
-    .4byte NULL
-    .4byte 0x736D6173
-    .4byte 0x68322E73
-    .4byte 0x656D0000
-    .4byte 0x4853445F
-    .4byte 0x41756469
-    .4byte 0x6F476574
-    .4byte 0x41757848
-    .4byte 0x65617053
-    .4byte 0x697A6528
-    .4byte 0x322C2026
-    .4byte 0x72766253
-    .4byte 0x74642920
-    .4byte 0x3C203533
-    .4byte 0x2A313032
-    .4byte 0x34000000
-    .4byte 0x4853445F
-    .4byte 0x41756469
-    .4byte 0x6F476574
-    .4byte 0x41757848
-    .4byte 0x65617053
-    .4byte 0x697A6528
-    .4byte 0x322C2026
-    .4byte 0x64656C61
-    .4byte 0x7929203C
-    .4byte 0x2037312A
-    .4byte 0x31303234
-    .4byte NULL
+    .ascii "******** CAUTION ********\n"
+    .asciz "FGM load size is over\n"
+    .balign 4
+    .asciz "lbaudio_ax.c"
+    .balign 4
+    .asciz "/audio/us/"
+    .balign 4
+    .asciz "/audio/"
+    .balign 8
+    .asciz "smash2.sem"
+    .balign 4
+    .asciz "HSD_AudioGetAuxHeapSize(2, &rvbStd) < 53*1024"
+    .balign 4
+    .asciz "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024"
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7300
 lbl_803B7300:
     .4byte 0x3F800000
@@ -14365,7 +14210,7 @@ lbl_803B7300:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804333E0
 lbl_804333E0:
 	.skip 0x1D8
@@ -14412,7 +14257,7 @@ lbl_80433B44:
 
 
 .section .sdata 
-
+    .balign 8
 .global lbl_804D3830
 lbl_804D3830:
     .asciz "0"
@@ -14555,28 +14400,28 @@ lbl_804D38F4:
     .4byte 0xFFFFFFFF
 .global lbl_804D38F8
 lbl_804D38F8:
-    .4byte 0x646B2E73
-    .4byte 0x736D0000
+    .asciz "dk.ssm"
+    .balign 4
 .global lbl_804D3900
 lbl_804D3900:
-    .4byte 0x666F782E
-    .4byte 0x73736D00
+    .asciz "fox.ssm"
+    .balign 4
 .global lbl_804D3908
 lbl_804D3908:
-    .4byte 0x6963652E
-    .4byte 0x73736D00
+    .asciz "ice.ssm"
+    .balign 4
 .global lbl_804D3910
 lbl_804D3910:
-    .4byte 0x7A732E73
-    .4byte 0x736D0000
+    .asciz "zs.ssm"
+    .balign 4
 .global lbl_804D3918
 lbl_804D3918:
-    .4byte 0x67772E73
-    .4byte 0x736D0000
+    .asciz "gw.ssm"
+    .balign 4
 .global lbl_804D3920
 lbl_804D3920:
-    .4byte 0x656E642E
-    .4byte 0x73736D00
+    .asciz "end.ssm"
+    .balign 4
 .global lbl_804D3928
 lbl_804D3928:
     .4byte 0x00000001
@@ -14585,11 +14430,10 @@ lbl_804D3928:
 lbl_804D3930:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D63D8
 lbl_804D63D8:
 	.skip 0x4
@@ -14683,7 +14527,7 @@ lbl_804D6454:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7CC8
 lbl_804D7CC8:
 	.4byte 0x3C888889

@@ -592,8 +592,8 @@ lbl_80379270:
 /* 803792C0 00375EA0  7C 08 03 A6 */	mtlr r0
 /* 803792C4 00375EA4  4E 80 00 20 */	blr 
 
-.global func_803792C8
-func_803792C8:
+.global splArcLengthPoint
+splArcLengthPoint:
 /* 803792C8 00375EA8  7C 08 02 A6 */	mflr r0
 /* 803792CC 00375EAC  90 01 00 04 */	stw r0, 4(r1)
 /* 803792D0 00375EB0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -615,7 +615,7 @@ func_803792C8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE620
 lbl_804DE620:
 	.4byte 0x40000000

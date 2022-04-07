@@ -61,6 +61,4 @@ void HSD_DObjResolveRefs(HSD_DObj* dobj, HSD_DObjDesc* desc);
 void HSD_DObjResolveRefsAll(HSD_DObj* dobj, HSD_DObjDesc* desc);
 void HSD_DObjDisp(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 
-void DObjInfoInit(void);
-
 #endif

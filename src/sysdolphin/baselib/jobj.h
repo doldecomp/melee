@@ -129,4 +129,86 @@ typedef struct _HSD_JObjInfo {
 
 extern HSD_JObjInfo hsdJObj;
 
+void HSD_JObjCheckDependAll(HSD_JObj* jobj);
+u32 HSD_JObjGetFlags(HSD_JObj* jobj);
+void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
+void HSD_JObjSetupMatrixSub(HSD_JObj*);
+void HSD_JObjSetMtxDirtySub(HSD_JObj*);
+
+#pragma push
+#pragma always_inline on
+inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
+{
+    assert_line(405, jobj);
+    return jobj->robj;
+}
+
+inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
+{
+    assert_line(564, jobj);
+    return !(jobj->flags & 0x800000) && (jobj->flags & 0x40);
+}
+
+inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
+{
+    if (jobj != NULL && HSD_JObjMtxIsDirty(jobj)) {
+        HSD_JObjSetupMatrixSub(jobj);
+    }
+}
+
+inline void HSD_JObjSetMtxDirty(HSD_JObj* jobj) 
+{
+    if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {
+        HSD_JObjSetMtxDirtySub(jobj);
+    }
+}
+
+inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion *quat)
+{
+    assert_line(699, jobj);
+    *quat = jobj->rotate;
+}
+
+inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec* scale)
+{
+    assert_line(760, jobj);
+    assert_line(761, scale);
+    jobj->scale = *scale;
+    if (!(jobj->flags & 0x2000000)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec *scale)
+{
+    assert_line(823, jobj);
+    *scale = jobj->scale;
+}
+
+inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
+{
+    assert_line(916, jobj);
+    assert_line(917, translate);
+    jobj->translate = *translate;
+    if (!(jobj->flags & 0x2000000)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec *translate)
+{
+    assert_line(979, jobj);
+    assert_line(980, translate);
+    *translate = jobj->translate;
+}
+
+inline void HSD_JObjGetMtx(HSD_JObj* jobj, Mtx *mtx)
+{
+    assert_line(1144, jobj);
+    HSD_JObjGetMtxPtr(jobj);
+    func_80379310(&jobj->mtx, mtx);
+}
+
+#pragma pop
+
 #endif

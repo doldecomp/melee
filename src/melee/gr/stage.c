@@ -13,13 +13,9 @@ struct StructNumberAndStage {
     s32 list_idx;
     struct StructStageIDWithUnks* unk_struct;
 };
-struct StructPairWithStageID {
-    s32 stage_id;
-    s32 list_idx;
-};
 
 struct StructNumberAndStage unk_struct_804D49E8 = { 2, NULL };
-struct StructPairWithStageID unk_struct_804D49F0 = { 12, 2 };
+StructPairWithStageID unk_struct_804D49F0 = { 12, 2 };
 extern struct StructStageIDWithUnks unk_arr_803E9960[];
 
 f32 Stage_GetCamBoundsLeftOffset()
@@ -117,12 +113,11 @@ f32 Stage_CalcUnkCamYBounds()
     return 0.5F * (cam_offset + y_pos_product);
 }
 
-f32 Stage_UnkSetVec3TCam_Offset(Vec* vec3, f32 arg8)
+void Stage_UnkSetVec3TCam_Offset(Vec* vec3)
 {
     vec3->x = stage_info.cam_info.cam_x_offset;
     vec3->y = stage_info.cam_info.cam_y_offset;
     vec3->z = 0.0F;
-    return arg8;
 }
 
 f32 Stage_GetPauseCamZPosMin()
@@ -280,9 +275,10 @@ s32 Stage_80225074(s32 arg0)
 
     s32 r31;
     s32 spC;
+    BOOL tmp;
 
     if (func_8016B238() != 0) {
-        if (((stage_info.unk8C >> 7) & 0x1) || (arg0 == 2)) {
+        if (stage_info.unk8C.b0 || arg0 == 2) {
             r31 = 0x12;
         } else {
             r31 = 0x11;
@@ -307,10 +303,10 @@ s32 Stage_80225074(s32 arg0)
         __assert(__FILE__, 526, "0");
     }
 
-    r31 = func_801C28AC(unk_struct_804D49E8.list_idx, r31, &spC);
+    tmp = func_801C28AC(unk_struct_804D49E8.list_idx, r31, &spC);
     func_80023F28(spC);
     func_801C5A84(spC);
-    func_801C5AA4(r31);
+    func_801C5AA4(tmp);
     return arg0;
 }
 
@@ -331,7 +327,7 @@ s32 Stage_802251B4(s32 idx, s32 arg1)
 
 void Stage_802251E8(s32 idx, s32* unused)
 {
-    struct StructPairWithStageID local_data;
+    StructPairWithStageID local_data;
 
     unk_struct_804D49E8.list_idx = idx;
     unk_struct_804D49E8.unk_struct = &unk_arr_803E9960[idx];
@@ -346,7 +342,7 @@ void Stage_802251E8(s32 idx, s32* unused)
 
 void Stage_8022524C()
 {
-    struct StructPairWithStageID local_data;
+    StructPairWithStageID local_data;
 
     local_data = unk_struct_804D49F0;
 
@@ -358,7 +354,7 @@ void Stage_8022524C()
 
 void Stage_80225298()
 {
-    struct StructPairWithStageID local_data;
+    StructPairWithStageID local_data;
 
     local_data = unk_struct_804D49F0;
 
@@ -370,7 +366,7 @@ void Stage_80225298()
 
 void Stage_802252E4(s32 idx, s32 unused)
 {
-    struct StructPairWithStageID local_data;
+    StructPairWithStageID local_data;
 
     local_data = unk_struct_804D49F0;
 
@@ -382,7 +378,7 @@ void Stage_802252E4(s32 idx, s32 unused)
 
 void Stage_8022532C(s32 idx, s32 arg1)
 {
-    struct StructPairWithStageID local_data;
+    StructPairWithStageID local_data;
 
     local_data = unk_struct_804D49F0;
 

@@ -1130,7 +1130,7 @@ func_8020836C:
 /* 802083B8 00204F98  48 00 00 20 */	b lbl_802083D8
 lbl_802083BC:
 /* 802083BC 00204F9C  7F E3 FB 78 */	mr r3, r31
-/* 802083C0 00204FA0  48 06 2F 41 */	bl func_8026B300
+/* 802083C0 00204FA0  48 06 2F 41 */	bl itGetKind
 /* 802083C4 00204FA4  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 802083C8 00204FA8  40 82 00 0C */	bne lbl_802083D4
 /* 802083CC 00204FAC  7F E3 FB 78 */	mr r3, r31
@@ -1161,7 +1161,7 @@ lbl_80208404:
 /* 80208424 00205004  48 00 00 20 */	b lbl_80208444
 lbl_80208428:
 /* 80208428 00205008  7F E3 FB 78 */	mr r3, r31
-/* 8020842C 0020500C  48 06 2E D5 */	bl func_8026B300
+/* 8020842C 0020500C  48 06 2E D5 */	bl itGetKind
 /* 80208430 00205010  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 80208434 00205014  40 82 00 0C */	bne lbl_80208440
 /* 80208438 00205018  7F E3 FB 78 */	mr r3, r31
@@ -1415,7 +1415,7 @@ lbl_8020879C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B82E8
 lbl_803B82E8:
     .4byte 0x00000000
@@ -1478,9 +1478,8 @@ lbl_803E57F0:
     .4byte 0xC0000000
 .global lbl_803E5840
 lbl_803E5840:
-    .4byte 0x2F47724E
-    .4byte 0x4B722E64
-    .4byte 0x61740000
+    .asciz "/GrNKr.dat"
+    .balign 4
 .global lbl_803E584C
 lbl_803E584C:
     .4byte 0x0000001F
@@ -1496,34 +1495,19 @@ lbl_803E584C:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726B69
-    .4byte 0x6E6F6B6F
-    .4byte 0x726F7574
-    .4byte 0x652E6300
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
-    .4byte 0x72656230
-    .4byte 0x5F6A6F62
-    .4byte 0x6A000000
-    .4byte 0x72656230
-    .4byte 0x5F6A6F62
-    .4byte 0x6A262665
-    .4byte 0x76655F6A
-    .4byte 0x6F626A00
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grkinokoroute.c"
+    .balign 4
+    .asciz "translate"
+    .balign 4
+    .asciz "reb0_jobj"
+    .balign 4
+    .asciz "reb0_jobj&&eve_jobj"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D47F8
 lbl_804D47F8:
     .asciz "jobj.h"
@@ -1535,14 +1519,14 @@ lbl_804D4800:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A50
 lbl_804D6A50:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB830
 lbl_804DB830:
 	.4byte 0x41A00000

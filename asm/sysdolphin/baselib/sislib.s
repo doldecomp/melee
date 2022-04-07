@@ -802,7 +802,7 @@ lbl_803A61D4:
 /* 803A6234 003A2E14  80 7B 00 04 */	lwz r3, 4(r27)
 /* 803A6238 003A2E18  38 84 10 D8 */	addi r4, r4, func_803910D8@l
 /* 803A623C 003A2E1C  38 B9 00 00 */	addi r5, r25, 0
-/* 803A6240 003A2E20  4B FE A5 1D */	bl func_8039075C
+/* 803A6240 003A2E20  4B FE A5 1D */	bl GObj_SetupGXLinkMax
 /* 803A6244 003A2E24  57 C5 06 3E */	clrlwi r5, r30, 0x18
 /* 803A6248 003A2E28  38 60 00 00 */	li r3, 0
 /* 803A624C 003A2E2C  38 80 00 01 */	li r4, 1
@@ -8207,7 +8207,7 @@ lbl_8040CD40:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804D1110
 lbl_804D1110:
 	.skip 0x14
@@ -8217,15 +8217,14 @@ lbl_804D1124:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6390
 lbl_804D6390:
 	.4byte NULL
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7968
 lbl_804D7968:
 	.skip 0x4
@@ -8247,7 +8246,7 @@ lbl_804D797C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DEAA8
 lbl_804DEAA8:
 	.4byte 0x00000000

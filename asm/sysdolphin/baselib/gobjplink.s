@@ -541,7 +541,7 @@ lbl_804084C4:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6068
 lbl_804D6068:
     .asciz "gobj"

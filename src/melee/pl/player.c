@@ -90,10 +90,7 @@ ftMapping ftMapping_list[33] = {   //////ftMapping_list
 
 ////.bss
 StaticPlayer player_slots[6]; 
-struct {  /// TODO what is with this thing?
-    struct _HSD_ObjAllocData hsd_ObjAllocData;
-    u32 align;
-} lbl_804587E0;
+HSD_ObjAllocData lbl_804587E0;
 
 extern s32 lbl_804D6470;
 
@@ -101,8 +98,6 @@ extern void ftData_SetScale();
 extern void func_SetEntityFacingDirection();
 extern void func_80087140();
 extern void func_80086664();
-extern void func_800D4F24();
-extern void func_80390228();
 extern s32 func_8008701C(HSD_GObj*);
 extern s32 func_800873CC();
 extern s32 func_8016C5C0(s32);
@@ -117,7 +112,6 @@ extern void func_802F6AF8(s32);
 extern void func_802F69C0(s32, s32);
 extern void func_802F6C04(s32);
 extern s32 func_8016B168();
-extern s32 func_8016AEDC();
 extern BOOL func_80086F4C(HSD_GObj*);
 extern double func_80086F80(HSD_GObj*);
 extern s32 func_800872A4(HSD_GObj*);
@@ -132,7 +126,6 @@ extern void func_80038F10(s32);
 extern void func_8003715C();
 extern void func_80037590();
 extern void func_80067A84();
-extern void func_80016C64(char*, s32**, char*, s32, ...);
 extern void func_800BEB60(s32, s32, s32);
 extern s32 func_800865F0(HSD_GObj*);
 extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
@@ -725,8 +718,8 @@ void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction) {
     }
 }
 
-s8 Player_GetCostumeId(s32 slot) {   
-    s8 costume_id;
+u32 Player_GetCostumeId(s32 slot) {   
+    u8 costume_id;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -741,7 +734,7 @@ void Player_SetCostumeId(s32 slot, s8 costume_id) {
     player->costume_id = costume_id;
 }
 
-s8 Player_GetControllerIndex(s32 slot) {   
+u8 Player_GetControllerIndex(s32 slot) {   
     s8 controller_index;
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1036,7 +1029,7 @@ void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2) {
     player->transformed[arg2] = temp_r5;
 }
 
-s16 Player_GetDamage(s32 slot) {   
+s32 Player_GetDamage(s32 slot) {   
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1141,7 +1134,7 @@ void Player_SetMoreFlagsBit4(s32 slot, u8 bit4) {
     player->more_flags.b4 = bit4;
 }
 
-u8 Player_GetMoreFlagsBit4(s32 slot) { 
+s32 Player_GetMoreFlagsBit4(s32 slot) {
     StaticPlayer* player;
     u8 bit4;
 
@@ -1454,7 +1447,7 @@ void Player_UnsetFlagsBit1(s32 slot) {
     player->flags.b1 = zero;
 }
 
-u8 Player_GetFlagsBit3(s32 slot) {  
+s32 Player_GetFlagsBit3(s32 slot) {  
     StaticPlayer* player;
     u8 bit3;
     Player_CheckSlot(slot);
@@ -1916,7 +1909,7 @@ void Player_InitAllPlayers() {
 }
 
 void Player_80036DA4() { 
-    HSD_ObjAllocInit(&lbl_804587E0.hsd_ObjAllocData, 8, 4);
+    HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
     func_80067A84();
 }
 

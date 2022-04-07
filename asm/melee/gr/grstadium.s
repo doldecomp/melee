@@ -2068,7 +2068,7 @@ func_801D2BEC:
 /* 801D2C54 001CF834  38 83 2E D0 */	addi r4, r3, lbl_801D2ED0@l
 /* 801D2C58 001CF838  38 7E 00 00 */	addi r3, r30, 0
 /* 801D2C5C 001CF83C  38 A0 00 01 */	li r5, 1
-/* 801D2C60 001CF840  48 1B DA FD */	bl func_8039075C
+/* 801D2C60 001CF840  48 1B DA FD */	bl GObj_SetupGXLinkMax
 /* 801D2C64 001CF844  38 00 00 02 */	li r0, 2
 /* 801D2C68 001CF848  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 801D2C6C 001CF84C  38 00 00 00 */	li r0, 0
@@ -2154,7 +2154,7 @@ func_801D2D78:
 /* 801D2DA0 001CF980  3B E3 00 00 */	addi r31, r3, 0
 /* 801D2DA4 001CF984  38 84 2F D0 */	addi r4, r4, lbl_801D2FD0@l
 /* 801D2DA8 001CF988  38 A0 00 03 */	li r5, 3
-/* 801D2DAC 001CF98C  48 1B D9 B1 */	bl func_8039075C
+/* 801D2DAC 001CF98C  48 1B D9 B1 */	bl GObj_SetupGXLinkMax
 /* 801D2DB0 001CF990  38 60 00 1C */	li r3, 0x1c
 /* 801D2DB4 001CF994  48 1A C4 31 */	bl HSD_MemAlloc
 /* 801D2DB8 001CF998  3B C3 00 00 */	addi r30, r3, 0
@@ -2200,7 +2200,7 @@ func_801D2E24:
 /* 801D2E4C 001CFA2C  3B E3 00 00 */	addi r31, r3, 0
 /* 801D2E50 001CFA30  38 84 30 84 */	addi r4, r4, lbl_801D3084@l
 /* 801D2E54 001CFA34  38 A0 00 03 */	li r5, 3
-/* 801D2E58 001CFA38  48 1B D9 05 */	bl func_8039075C
+/* 801D2E58 001CFA38  48 1B D9 05 */	bl GObj_SetupGXLinkMax
 /* 801D2E5C 001CFA3C  38 60 00 20 */	li r3, 0x20
 /* 801D2E60 001CFA40  48 1A C3 85 */	bl HSD_MemAlloc
 /* 801D2E64 001CFA44  3B C3 00 00 */	addi r30, r3, 0
@@ -4792,7 +4792,7 @@ func_801D511C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7F68
 lbl_803B7F68:
     .4byte 0x00000000
@@ -4903,15 +4903,8 @@ lbl_803E1334:
     .4byte 0x00000001
     .4byte lbl_803E1248
     .4byte 0x00000006
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E138C
 lbl_803E138C:
     .asciz "grpstadium.c"
@@ -5034,19 +5027,12 @@ lbl_803E1534:
     .4byte 0x82818294
     .4byte 0x82858284
     .4byte NULL
-    .4byte 0x436F6D70
-    .4byte 0x75746572
-    .4byte 0x20506C61
-    .4byte 0x79657220
-    .4byte 0x44656665
-    .4byte 0x61746564
-    .4byte NULL
-    .4byte 0x2163616E
-    .4byte 0x63656C66
-    .4byte 0x6C616700
-    .4byte 0x6D61705F
-    .4byte 0x676F626A
-    .4byte NULL
+    .asciz "Computer Player Defeated"
+    .balign 4
+    .asciz "!cancelflag"
+    .balign 4
+    .asciz "map_gobj"
+    .balign 4
 .global lbl_803E15F0
 lbl_803E15F0:
     .asciz "GrPs1.dat"
@@ -5112,22 +5098,21 @@ jtbl_803E16C0:
 	.4byte lbl_801D486C
 	.4byte lbl_801D4B1C
 	.4byte lbl_801D4EEC
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8049F040
 lbl_8049F040:
 	.skip 0x100
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D45E8
 lbl_804D45E8:
-    .4byte 0x2F477250
-    .4byte 0x73000000
+    .asciz "/GrPs"
+    .balign 4
 .global lbl_804D45F0
 lbl_804D45F0:
     .asciz "jobj.h"
@@ -5163,14 +5148,14 @@ lbl_804D4614:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6978
 lbl_804D6978:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DAEF8
 lbl_804DAEF8:
 	.4byte 0x00000000

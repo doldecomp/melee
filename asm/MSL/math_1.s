@@ -52,6 +52,7 @@ fabsf__Ff:
 /* 803261B8 00322D98  4E 80 00 20 */	blr 
 
 .section .sdata2, "a"
+    .balign 8
 .global lbl_804DE190
 lbl_804DE190:
 	.4byte 0x43500000

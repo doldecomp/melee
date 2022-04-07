@@ -1607,9 +1607,8 @@ lbl_803E3CFC:
     .4byte 0xC0000000
 .global lbl_803E3D88
 lbl_803E3D88:
-    .4byte 0x2F477246
-    .4byte 0x732E6461
-    .4byte 0x74000000
+    .asciz "/GrFs.dat"
+    .balign 4
 .global lbl_803E3D94
 lbl_803E3D94:
     .4byte 0x00000015
@@ -1625,19 +1624,10 @@ lbl_803E3D94:
     .4byte 0x00000001
     .4byte lbl_803E3CE8
     .4byte 0x00000003
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x6772666F
-    .4byte 0x75727369
-    .4byte 0x64652E63
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grfourside.c"
+    .balign 4
 .global lbl_803E3DFC
 lbl_803E3DFC:
     .asciz "pos = %f : tgrpos = %f\n"
@@ -1652,109 +1642,11 @@ jtbl_803E3E14:
 	.4byte lbl_801F35DC
 	.4byte lbl_801F3630
 	.4byte lbl_801F3680
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
-    .4byte NULL
-.global lbl_803E3E60
-lbl_803E3E60:
-    .4byte 0x00000002
-    .4byte 0x00310001
-    .4byte 0x00010002
-    .4byte 0x00020001
-    .4byte 0x00030004
-    .4byte 0x00010022
-    .4byte 0x00030001
-    .4byte 0x00260005
-    .4byte 0x000A0000
-.global lbl_803E3E84
-lbl_803E3E84:
-	.4byte lbl_801F4404
-	.4byte lbl_801F4430
-	.4byte lbl_801F4438
-	.4byte lbl_801F443C
-    .4byte NULL
-	.4byte lbl_801F4694
-	.4byte lbl_801F4994
-	.4byte lbl_801F499C
-	.4byte lbl_801F545C
-    .4byte NULL
-	.4byte lbl_801F454C
-	.4byte lbl_801F4650
-	.4byte lbl_801F4658
-	.4byte lbl_801F4690
-    .4byte 0xC0000000
-	.4byte lbl_801F4440
-	.4byte lbl_801F44A0
-	.4byte lbl_801F44A8
-	.4byte lbl_801F44AC
-    .4byte NULL
-	.4byte lbl_801F44B0
-	.4byte lbl_801F4510
-	.4byte lbl_801F4518
-	.4byte lbl_801F451C
-    .4byte NULL
-	.4byte lbl_801F598C
-	.4byte lbl_801F59F0
-	.4byte lbl_801F59F8
-	.4byte lbl_801F59FC
-    .4byte NULL
-	.4byte lbl_801F598C
-	.4byte lbl_801F59F0
-	.4byte lbl_801F59F8
-	.4byte lbl_801F59FC
-    .4byte NULL
-	.4byte lbl_801F598C
-	.4byte lbl_801F59F0
-	.4byte lbl_801F59F8
-	.4byte lbl_801F59FC
-    .4byte NULL
-	.4byte lbl_801F598C
-	.4byte lbl_801F59F0
-	.4byte lbl_801F59F8
-	.4byte lbl_801F59FC
-    .4byte NULL
-	.4byte lbl_801F5A00
-	.4byte lbl_801F5AF0
-	.4byte lbl_801F5AF8
-	.4byte lbl_801F5D48
-    .4byte NULL
-	.4byte lbl_801F5460
-	.4byte lbl_801F55F8
-	.4byte lbl_801F5600
-	.4byte lbl_801F5988
-    .4byte NULL
-.global lbl_803E3F60
-lbl_803E3F60:
-    .4byte 0x2F477247
-    .4byte 0x622E6461
-    .4byte 0x74000000
-.global lbl_803E3F6C
-lbl_803E3F6C:
-    .4byte 0x00000006
-    .4byte lbl_803E3E84
-    .4byte lbl_803E3F60
-	.4byte func_801F4240
-	.4byte func_801F423C
-	.4byte lbl_801F42D0
-	.4byte lbl_801F42D4
-	.4byte lbl_801F42F8
-	.4byte lbl_801F680C
-	.4byte lbl_801F6814
-    .4byte 0x00000001
-    .4byte lbl_803E3E60
-    .4byte 0x00000006
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D46E8
 lbl_804D46E8:
     .asciz "jobj.h"
@@ -1766,14 +1658,14 @@ lbl_804D46F0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D69D8
 lbl_804D69D8:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB4F8
 lbl_804DB4F8:
 	.4byte 0x00000000

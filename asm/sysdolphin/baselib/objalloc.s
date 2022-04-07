@@ -369,7 +369,7 @@ lbl_80406E58:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5EB0
 lbl_804D5EB0:
     .asciz "data"
@@ -377,7 +377,7 @@ lbl_804D5EB0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D76E0
 lbl_804D76E0:
 	.skip 0x8

@@ -1634,8 +1634,8 @@ lbl_80069194:
 /* 800691F4 00065DD4  38 7F 00 00 */	addi r3, r31, 0
 /* 800691F8 00065DD8  38 A0 00 03 */	li r5, 3
 /* 800691FC 00065DDC  48 32 6B 59 */	bl func_8038FD54
-/* 80069200 00065DE0  3C 60 80 07 */	lis r3, func_8006B82C@ha
-/* 80069204 00065DE4  38 83 B8 2C */	addi r4, r3, func_8006B82C@l
+/* 80069200 00065DE0  3C 60 80 07 */	lis r3, Fighter_procUpdate@ha
+/* 80069204 00065DE4  38 83 B8 2C */	addi r4, r3, Fighter_procUpdate@l
 /* 80069208 00065DE8  38 7F 00 00 */	addi r3, r31, 0
 /* 8006920C 00065DEC  38 A0 00 04 */	li r5, 4
 /* 80069210 00065DF0  48 32 6B 45 */	bl func_8038FD54
@@ -3171,7 +3171,7 @@ lbl_8006A7B4:
 /* 8006A7F0 000673D0  80 7F 19 74 */	lwz r3, 0x1974(r31)
 /* 8006A7F4 000673D4  28 03 00 00 */	cmplwi r3, 0
 /* 8006A7F8 000673D8  41 82 00 2C */	beq lbl_8006A824
-/* 8006A7FC 000673DC  48 20 0B 05 */	bl func_8026B300
+/* 8006A7FC 000673DC  48 20 0B 05 */	bl itGetKind
 /* 8006A800 000673E0  2C 03 00 67 */	cmpwi r3, 0x67
 /* 8006A804 000673E4  40 82 00 20 */	bne lbl_8006A824
 /* 8006A808 000673E8  88 1F 22 21 */	lbz r0, 0x2221(r31)
@@ -3297,7 +3297,7 @@ lbl_8006A9C4:
 /* 8006A9C4 000675A4  80 7F 19 74 */	lwz r3, 0x1974(r31)
 /* 8006A9C8 000675A8  28 03 00 00 */	cmplwi r3, 0
 /* 8006A9CC 000675AC  41 82 00 1C */	beq lbl_8006A9E8
-/* 8006A9D0 000675B0  48 20 09 31 */	bl func_8026B300
+/* 8006A9D0 000675B0  48 20 09 31 */	bl itGetKind
 /* 8006A9D4 000675B4  2C 03 00 1C */	cmpwi r3, 0x1c
 /* 8006A9D8 000675B8  41 82 00 08 */	beq lbl_8006A9E0
 /* 8006A9DC 000675BC  48 00 00 0C */	b lbl_8006A9E8
@@ -4321,8 +4321,8 @@ lbl_8006B80C:
 /* 8006B824 00068404  7C 08 03 A6 */	mtlr r0
 /* 8006B828 00068408  4E 80 00 20 */	blr 
 
-.global func_8006B82C
-func_8006B82C:
+.global Fighter_procUpdate
+Fighter_procUpdate:
 /* 8006B82C 0006840C  7C 08 02 A6 */	mflr r0
 /* 8006B830 00068410  90 01 00 04 */	stw r0, 4(r1)
 /* 8006B834 00068414  94 21 FF 70 */	stwu r1, -0x90(r1)
@@ -6861,7 +6861,7 @@ lbl_8006DB58:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7488
 lbl_803B7488:
 	.float 0
@@ -6914,7 +6914,7 @@ lbl_803C0610:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80458FD0
 lbl_80458FD0:
 	.skip 0x2C
@@ -6924,7 +6924,7 @@ lbl_80458FFC:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3A00
 lbl_804D3A00:
     .asciz "jobj.h"
@@ -6937,11 +6937,10 @@ lbl_804D3A08:
 lbl_804D3A10:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D64F8
 lbl_804D64F8:
 	.skip 0x4
@@ -7017,7 +7016,7 @@ lbl_804D6554:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8250
 lbl_804D8250:
 	.4byte 0x3F800000

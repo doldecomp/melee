@@ -92,7 +92,7 @@ func_800316B4:
 /* 800316E8 0002E2C8  3C 80 80 03 */	lis r4, lbl_80031640@ha
 /* 800316EC 0002E2CC  38 84 16 40 */	addi r4, r4, lbl_80031640@l
 /* 800316F0 0002E2D0  38 A0 00 04 */	li r5, 4
-/* 800316F4 0002E2D4  48 35 F0 69 */	bl func_8039075C
+/* 800316F4 0002E2D4  48 35 F0 69 */	bl GObj_SetupGXLinkMax
 /* 800316F8 0002E2D8  38 7F 00 00 */	addi r3, r31, 0
 /* 800316FC 0002E2DC  38 80 02 80 */	li r4, 0x280
 /* 80031700 0002E2E0  38 A0 01 E0 */	li r5, 0x1e0
@@ -120,7 +120,7 @@ lbl_803BCD9C:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80453060
 lbl_80453060:
 	.skip 0x20

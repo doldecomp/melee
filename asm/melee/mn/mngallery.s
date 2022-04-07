@@ -157,7 +157,7 @@ func_80258A08:
 /* 80258B80 00255760  38 83 89 6C */	addi r4, r3, lbl_8025896C@l
 /* 80258B84 00255764  38 7D 00 00 */	addi r3, r29, 0
 /* 80258B88 00255768  38 BE 00 00 */	addi r5, r30, 0
-/* 80258B8C 0025576C  48 13 7B D1 */	bl func_8039075C
+/* 80258B8C 0025576C  48 13 7B D1 */	bl GObj_SetupGXLinkMax
 /* 80258B90 00255770  80 01 00 94 */	lwz r0, 0x94(r1)
 /* 80258B94 00255774  CB E1 00 88 */	lfd f31, 0x88(r1)
 /* 80258B98 00255778  CB C1 00 80 */	lfd f30, 0x80(r1)
@@ -1180,7 +1180,7 @@ func_80259868:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8538
 lbl_803B8538:
     .4byte 0x00000000
@@ -1227,11 +1227,10 @@ lbl_803F0580:
     .balign 4
     .asciz "MenMainCursorGa_Top_shapeanim_joint"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0B90
 lbl_804A0B90:
 	.skip 0x10
@@ -1244,7 +1243,7 @@ lbl_804A0BB0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5090
 lbl_804D5090:
     .asciz "jobj.h"
@@ -1256,7 +1255,7 @@ lbl_804D5098:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C88
 lbl_804D6C88:
 	.skip 0x4
@@ -1266,7 +1265,7 @@ lbl_804D6C8C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC358
 lbl_804DC358:
 	.4byte 0x42C00000

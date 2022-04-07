@@ -1087,7 +1087,7 @@ func_802FC618:
 /* 802FC67C 002F925C  38 83 BB DC */	addi r4, r3, lbl_802FBBDC@l
 /* 802FC680 002F9260  38 7D 00 00 */	addi r3, r29, 0
 /* 802FC684 002F9264  38 A0 00 00 */	li r5, 0
-/* 802FC688 002F9268  48 09 40 D5 */	bl func_8039075C
+/* 802FC688 002F9268  48 09 40 D5 */	bl GObj_SetupGXLinkMax
 /* 802FC68C 002F926C  38 00 00 10 */	li r0, 0x10
 /* 802FC690 002F9270  90 1D 00 24 */	stw r0, 0x24(r29)
 /* 802FC694 002F9274  3B E0 00 00 */	li r31, 0
@@ -1388,18 +1388,17 @@ lbl_803F984C:
 lbl_803F988C:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A1DE0
 lbl_804A1DE0:
 	.skip 0xF0
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D57E8
 lbl_804D57E8:
     .asciz "lupe"
@@ -1415,7 +1414,7 @@ lbl_804D57F8:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DDB08
 lbl_804DDB08:
 	.4byte 0x00000000

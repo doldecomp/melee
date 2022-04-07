@@ -3231,7 +3231,7 @@ lbl_804D5CC0:
     .balign 4
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D75A8
 lbl_804D75A8:
 	.skip 0x4

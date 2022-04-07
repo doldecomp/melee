@@ -47,7 +47,7 @@ int __StringRead(void * isc, int ch, int Action) {
 }
 
 //func_80325878
-char* strchr(char *str, int chr) {
+char* strchr(const char *str, int chr) {
     const unsigned char *p = (unsigned char*) str - 1;
     unsigned long int c = ((unsigned long int)chr & 0xffu);
     unsigned long int ch;

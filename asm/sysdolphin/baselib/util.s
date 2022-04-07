@@ -159,6 +159,7 @@ lbl_8037A93C:
 
 
 .section .data
+
     .balign 8
 .global lbl_80406DF0
 lbl_80406DF0:
@@ -189,7 +190,7 @@ jtbl_80406E20:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5EA0
 lbl_804D5EA0:
     .asciz "util.c"
@@ -198,4 +199,3 @@ lbl_804D5EA0:
 lbl_804D5EA8:
     .asciz "0"
     .balign 4
-    .4byte NULL

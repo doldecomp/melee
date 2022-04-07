@@ -9426,7 +9426,7 @@ lbl_80264324:
 /* 80264360 00260F40  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 80264364 00260F44  38 71 00 00 */	addi r3, r17, 0
 /* 80264368 00260F48  38 A0 00 00 */	li r5, 0
-/* 8026436C 00260F4C  48 12 C3 F1 */	bl func_8039075C
+/* 8026436C 00260F4C  48 12 C3 F1 */	bl GObj_SetupGXLinkMax
 /* 80264370 00260F50  38 00 00 1F */	li r0, 0x1f
 /* 80264374 00260F54  90 11 00 24 */	stw r0, 0x24(r17)
 /* 80264378 00260F58  38 00 00 00 */	li r0, 0
@@ -12756,16 +12756,12 @@ lbl_803F0DFC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x25303264
-    .4byte 0x3A253032
-    .4byte 0x64000000
-    .4byte 0x25643A25
-    .4byte 0x3032643A
-    .4byte 0x25303264
-    .4byte NULL
-    .4byte 0x39393A35
-    .4byte 0x393A3539
-    .4byte NULL
+    .asciz "%02d:%02d"
+    .balign 4
+    .asciz "%d:%02d:%02d"
+    .balign 4
+    .asciz "99:59:59"
+    .balign 4
     .4byte 0x25642090
     .4byte 0x6C94B282
     .4byte 0xAB000000
@@ -12869,40 +12865,25 @@ lbl_803F10D4:
 	.4byte lbl_802648D0
 	.4byte lbl_802648D0
 	.4byte lbl_80264868
-    .4byte 0x4D6E536C
-    .4byte 0x4368722E
-    .4byte 0x64617400
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x4D6E536C
-    .4byte 0x4368722E
-    .4byte 0x75736400
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte 0x2E757364
-    .4byte NULL
-    .4byte 0x4D6E5365
-    .4byte 0x6C656374
-    .4byte 0x43687244
-    .4byte 0x61746154
-    .4byte 0x61626C65
-    .4byte NULL
-    .4byte 0x5364536C
-    .4byte 0x4368722E
-    .4byte 0x64617400
-    .4byte 0x5349535F
-    .4byte 0x53656C43
-    .4byte 0x68617244
-    .4byte 0x61746100
-    .4byte 0x5364536C
-    .4byte 0x4368722E
-    .4byte 0x75736400
+    .asciz "MnSlChr.dat"
+    .balign 4
+    .asciz "MnExtAll.dat"
+    .balign 4
+    .asciz "MnSlChr.usd"
+    .balign 4
+    .asciz "MnExtAll.usd"
+    .balign 4
+    .asciz "MnSelectChrDataTable"
+    .balign 4
+    .asciz "SdSlChr.dat"
+    .balign 4
+    .asciz "SIS_SelCharData"
+    .balign 4
+    .asciz "SdSlChr.usd"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0BC0
 lbl_804A0BC0:
 	.skip 0x10
@@ -12912,7 +12893,7 @@ lbl_804A0BD0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D50C8
 lbl_804D50C8:
     .4byte 0x01020408
@@ -12988,7 +12969,7 @@ lbl_804D5140:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6CB0
 lbl_804D6CB0:
 	.skip 0x4
@@ -13070,7 +13051,7 @@ lbl_804D6CF9:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC3E0
 lbl_804DC3E0:
 	.4byte 0x43480000

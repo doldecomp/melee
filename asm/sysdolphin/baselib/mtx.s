@@ -1406,7 +1406,7 @@ func_8037A750:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804C2310
 lbl_804C2310:
 	.skip 0x2C
@@ -1416,7 +1416,7 @@ lbl_804C233C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5E90
 lbl_804D5E90:
     .asciz "mtx.c"
@@ -1432,7 +1432,7 @@ lbl_804D5E9C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE658
 lbl_804DE658:
 	.4byte 0x2EDBE6FF

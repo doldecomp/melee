@@ -8191,7 +8191,7 @@ lbl_8039833C:
 /* 8039835C 00394F3C  38 83 82 E4 */	addi r4, r3, lbl_803982E4@l
 /* 80398360 00394F40  38 7F 00 00 */	addi r3, r31, 0
 /* 80398364 00394F44  38 BE 00 00 */	addi r5, r30, 0
-/* 80398368 00394F48  4B FF 83 F5 */	bl func_8039075C
+/* 80398368 00394F48  4B FF 83 F5 */	bl GObj_SetupGXLinkMax
 /* 8039836C 00394F4C  3C 60 80 39 */	lis r3, lbl_80392A3C@ha
 /* 80398370 00394F50  38 63 2A 3C */	addi r3, r3, lbl_80392A3C@l
 /* 80398374 00394F54  4B FF A1 B5 */	bl func_80392528
@@ -20179,11 +20179,10 @@ jtbl_8040C2D8:
 	.4byte lbl_8039F348
 	.4byte lbl_8039F348
 	.4byte lbl_8039F46C
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804CE3F8
 lbl_804CE3F8:
 	.skip 0x330
@@ -20232,7 +20231,7 @@ lbl_804D0F90:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6070
 lbl_804D6070:
     .asciz "A@"
@@ -20683,10 +20682,10 @@ lbl_804D636C:
 lbl_804D6374:
     .asciz "jobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
+    .balign 8
 .global lbl_804D7850
 lbl_804D7850:
 	.skip 0x8
@@ -20819,7 +20818,7 @@ lbl_804D7900:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE890
 lbl_804DE890:
 	.4byte 0x3FECCCCC

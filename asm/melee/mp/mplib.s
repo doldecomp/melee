@@ -13853,7 +13853,7 @@ lbl_80059388:
 /* 800593AC 00055F8C  4B FF F7 B1 */	bl func_80058B5C
 lbl_800593B0:
 /* 800593B0 00055F90  7F 83 E3 78 */	mr r3, r28
-/* 800593B4 00055F94  48 21 1F 4D */	bl func_8026B300
+/* 800593B4 00055F94  48 21 1F 4D */	bl itGetKind
 /* 800593B8 00055F98  2C 03 00 3E */	cmpwi r3, 0x3e
 /* 800593BC 00055F9C  40 82 00 14 */	bne lbl_800593D0
 /* 800593C0 00055FA0  80 7C 00 2C */	lwz r3, 0x2c(r28)
@@ -17648,7 +17648,7 @@ lbl_803BF760:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80458868
 lbl_80458868:
 	.skip 0x20
@@ -17659,7 +17659,7 @@ lbl_80458888:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3958
 lbl_804D3958:
     .asciz "mplib.c"
@@ -17688,11 +17688,10 @@ lbl_804D397C:
 lbl_804D3984:
     .4byte 0x00040005
     .4byte 0x00060007
-    .4byte 0x00000000
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D64B0
 lbl_804D64B0:
 	.skip 0x4
@@ -17738,7 +17737,7 @@ lbl_804D64E4:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8018
 lbl_804D8018:
 	.4byte 0x7F7FFFFF

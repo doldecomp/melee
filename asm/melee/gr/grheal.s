@@ -687,12 +687,11 @@ lbl_8021F838:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B84A8
 lbl_803B84A8:
     .4byte 0x00000000
     .4byte 0x42200000
-    .4byte 0x00000000
     .4byte 0x00000000
 
 
@@ -768,9 +767,8 @@ lbl_803E8454:
     .4byte NULL
 .global lbl_803E84B8
 lbl_803E84B8:
-    .4byte 0x2F477248
-    .4byte 0x652E6461
-    .4byte 0x74000000
+    .asciz "/GrHe.dat"
+    .balign 4
 .global lbl_803E84C4
 lbl_803E84C4:
     .4byte 0x00000042
@@ -786,15 +784,8 @@ lbl_803E84C4:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E851C
 lbl_803E851C:
     .asciz "grheal.c"
@@ -804,7 +795,7 @@ lbl_803E851C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D49D8
 lbl_804D49D8:
     .4byte 0x00070008
@@ -816,14 +807,14 @@ lbl_804D49E0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AF0
 lbl_804D6AF0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBC98
 lbl_804DBC98:
 	.4byte 0x40000000

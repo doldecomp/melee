@@ -922,7 +922,7 @@ lbl_8032C734:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B68
 lbl_804D5B68:
     .4byte 0xFFFFFFFF
@@ -930,7 +930,7 @@ lbl_804D5B68:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D70A0
 lbl_804D70A0:
 	.skip 0x4

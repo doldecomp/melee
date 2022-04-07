@@ -73,7 +73,7 @@ lbl_80041D44:
 /* 80041D6C 0003E94C  88 03 00 02 */	lbz r0, 2(r3)
 /* 80041D70 0003E950  28 00 00 09 */	cmplwi r0, 9
 /* 80041D74 0003E954  40 82 00 18 */	bne lbl_80041D8C
-/* 80041D78 0003E958  48 22 95 89 */	bl func_8026B300
+/* 80041D78 0003E958  48 22 95 89 */	bl itGetKind
 /* 80041D7C 0003E95C  38 83 00 00 */	addi r4, r3, 0
 /* 80041D80 0003E960  4C C6 31 82 */	crclr 6
 /* 80041D84 0003E964  38 7E 00 78 */	addi r3, r30, 0x78
@@ -1773,7 +1773,7 @@ lbl_800434D4:
 /* 80043504 000400E4  88 03 00 02 */	lbz r0, 2(r3)
 /* 80043508 000400E8  28 00 00 09 */	cmplwi r0, 9
 /* 8004350C 000400EC  40 82 00 18 */	bne lbl_80043524
-/* 80043510 000400F0  48 22 7D F1 */	bl func_8026B300
+/* 80043510 000400F0  48 22 7D F1 */	bl itGetKind
 /* 80043514 000400F4  38 83 00 00 */	addi r4, r3, 0
 /* 80043518 000400F8  4C C6 31 82 */	crclr 6
 /* 8004351C 000400FC  38 7F 00 78 */	addi r3, r31, 0x78
@@ -12821,28 +12821,25 @@ lbl_803BD3C8:
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80458810
 lbl_80458810:
 	.skip 0x58
 
 
 .section .sdata
-.balign 8
-
+    .balign 8
 .global lbl_804D3948
 lbl_804D3948:
     .asciz "0"
     .balign 4
 .global lbl_804D394C
 lbl_804D394C:
-    .4byte 0x6572726F
-    .4byte 0x720A0000
-    .4byte 0x00000000
+    .asciz "error\n"
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6488
 lbl_804D6488:
 	.skip 0x4
@@ -12876,7 +12873,7 @@ lbl_804D64AC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7F90
 lbl_804D7F90:
 	.4byte 0x472FC800
