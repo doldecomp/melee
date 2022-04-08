@@ -395,3 +395,22 @@ void func_800E13C8(HSD_GObj* gobj) {
         func_802B26C0(ft->sa.mario.x223C);
     }
 }
+
+void func_800E13F8(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+    if(ft->sa.mario.x223C != NULL) {
+        func_802B26E0(ft->sa.mario.x223C);
+    }
+}
+
+BOOL func_800E1428(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+
+    s32 var0 = ft->x10;
+
+    if ((var0  >= 0x159) && (var0  <= 0x15A)) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
