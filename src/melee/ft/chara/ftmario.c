@@ -38,7 +38,7 @@ void ftMario_OnDeath(HSD_GObj* gobj) {
     ft->sa.mario.x2230 = 9;
     ft->sa.mario.x2234 = 0;
     ft->sa.mario.x2238 = 0;
-    ft->sa.mario.x223C = 0;
+    ft->sa.mario.x223C = NULL;
     ft->sa.mario.x2240 = 0;
 }
 
@@ -345,6 +345,7 @@ void func_800E11E0(HSD_GObj* gobj) {
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
 
+//https://decomp.me/scratch/AmeqW
 void func_800E1248(HSD_GObj* gobj) {
     Vec3 coords;
     HSD_GObj* gobj2;
@@ -360,12 +361,37 @@ void func_800E1248(HSD_GObj* gobj) {
         
         ft->sa.mario.x223C = gobj2;
         ft->x1984_heldItemSpec = ft->sa.mario.x223C;
-        if(ft->sa.mario.x223C != 0) {
+        if(ft->sa.mario.x223C != NULL) {
             ft->cb.x21E4_callback_OnDeath2 = func_800E0A00;
             ft->cb.x21DC_callback_OnTakeDamage = func_800E0A00;
         }
         ft->cb.x21D4_callback_EnterHitlag = func_800E13C8;
         ft->cb.x21D8_callback_ExitHitlag = func_800E13F8;
         ft->cb.x21BC_callback_Accessory4 = NULL;
+    }
+}
+
+void func_800E132C(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+    func_800E13F8(gobj);
+    ft->sa.mario.x223C = NULL;
+    ft->cb.x21E4_callback_OnDeath2 = NULL;
+    ft->cb.x21DC_callback_OnTakeDamage = NULL;
+}
+
+void func_800E1368(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+    int unused, unused2;
+
+    if(ft->sa.mario.x223C != NULL){
+        func_802B2674(ft->sa.mario.x223C);
+        func_800E132C(gobj);
+    }
+}
+
+void func_800E13C8(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+    if(ft->sa.mario.x223C != NULL) {
+        func_802B26C0(ft->sa.mario.x223C);
     }
 }
