@@ -140,7 +140,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/gr/grdatfiles.c.o          \
 	$(BUILD_DIR)/asm/melee/gr/granime.s.o             \
 	$(BUILD_DIR)/asm/melee/gr/grmaterial.s.o          \
-	$(BUILD_DIR)/asm/melee/gr/grlib.s.o               \
+	$(BUILD_DIR)/src/melee/gr/grlib.c.o               \
 	$(BUILD_DIR)/asm/melee/gr/grdynamicattr.s.o       \
 	$(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o     \
 	$(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o 					\

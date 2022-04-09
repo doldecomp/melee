@@ -729,7 +729,7 @@ lbl_80364BF4:
     /* 80364C04 003617E4  4E 80 00 20 */	blr 
 }
 
-asm void HSD_ForeachAnim(void)
+asm void HSD_ForeachAnim(void*, ...)
 {
     nofralloc
     /* 80364C08 003617E8  7C 08 02 A6 */	mflr r0

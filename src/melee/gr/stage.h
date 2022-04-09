@@ -47,6 +47,11 @@ typedef struct _StageBlastZone {
     f32 bottom; // 0x80
 } StageBlastZone;
 
+typedef struct _StageAnim {
+    struct _HSD_Joint* joint;
+    struct _HSD_AnimJoint** anims;
+} StageAnim;
+
 typedef struct _StageInfo {
     StageCameraInfo cam_info; // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
@@ -100,7 +105,7 @@ typedef struct _StageInfo {
     void* x6C0;
     void* x6C4;
     void* x6C8;
-    void* x6CC;
+    StageAnim* x6CC;
     s16 x6D0;
     s16 x6D2;
     s16 x6D4;

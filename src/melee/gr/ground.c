@@ -3641,7 +3641,6 @@ static void lbl_801C4640(HSD_GObj* gobj)
 
 extern u8 lbl_804D784A;
 extern void func_80365678();
-extern void HSD_ForeachAnim();
 extern void func_803656F8();
 extern void func_80011AC4();
 static asm void func_801C466C(void)
