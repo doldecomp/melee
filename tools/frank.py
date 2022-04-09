@@ -7,6 +7,7 @@
 # Modified by EpochFlame
 
 import argparse
+import sys
 
 # Byte sequence that marks code size
 CODESIZE_MAGIC = b"\x00\x00\x00\x06\x00\x00\x00\x00\x00\x00\x00\x34"
@@ -33,14 +34,22 @@ args = parser.parse_args()
 # Read contents into bytearrays and close files
 vanilla_bytes = args.vanilla.read()
 args.vanilla.close()
-profile_bytes = args.profile.read()
-args.profile.close()
+
+# If the file contains no code, the codesize magic will not be found.
+# The vanilla object requires no modification.
+code_size_magic_idx = vanilla_bytes.find(CODESIZE_MAGIC)
+if code_size_magic_idx == -1:
+    with open(args.target, "wb") as f:
+        f.write(vanilla_bytes)
+    sys.exit(0)
 
 # Remove byte sequence
+profile_bytes = args.profile.read()
+args.profile.close()
 stripped_bytes = profile_bytes.replace(b"\x48\x00\x00\x01\x60\x00\x00\x00", b"")
 
 # Find end of code sections in vanilla and stripped bytes
-code_size_offset = (vanilla_bytes.find(CODESIZE_MAGIC) + 12)
+code_size_offset = code_size_magic_idx + len(CODESIZE_MAGIC)
 code_size_bytes = vanilla_bytes[code_size_offset:code_size_offset+4]
 code_size = int.from_bytes(code_size_bytes, byteorder='big')
 
