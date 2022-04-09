@@ -56,6 +56,10 @@ ifeq ($(WINDOWS),1)
   WINE :=
 else
   WINE ?= wine
+  # Disable wine debug output for cleanliness
+  export WINEDEBUG ?= -all
+  # Default devkitPPC path
+  DEVKITPPC ?= /opt/devkitpro/devkitPPC
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 CPP     := cpp -P
@@ -119,7 +123,7 @@ $(LDSCRIPT): ldscript.lcf
 	@echo Converting $< to $@
 	$(QUIET) $(ELF2DOL) $< $@
 ifeq ($(GENERATE_MAP),1)
-	$(QUIET) $(PYTHON) tools/calcprogress.py $@
+	$(QUIET) $(PYTHON) tools/calcprogress.py $(DOL) $(MAP)
 endif
 
 clean:
