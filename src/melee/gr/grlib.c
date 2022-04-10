@@ -289,12 +289,6 @@ void func_801C9E50(s16 val)
     stage_info.x708 = val;
 }
 
-enum InternalStageID {
-    RCRUISE = 0x3, // Rainbow Cruise
-    BIGBLUE = 0x13, // Big Blue
-    ICEMTN = 0x16, // Icicle Mountain
-};
-
 BOOL func_801C9E60(Vec* v)
 {
     s32 id = stage_info.internal_stage_id;

@@ -8,6 +8,36 @@
 
 typedef Vec Vec3;
 
+enum InternalStageID {
+    CASTLE = 0x02, // Princess Peach's Castle
+    RCRUISE = 0x03, // Rainbow Cruise
+    KONGO = 0x04, // Kongo Jungle
+    GARDEN = 0x05, // Jungle Japes
+    GREATBAY = 0x06, // Great Bay
+    SHRINE = 0x07, // Hyrule Temple
+    ZEBES = 0x08, // Brinstar
+    KRAID = 0x09, // Brinstar Depths
+    STORY = 0x0A, // Yoshi's Story
+    YORSTER = 0x0B, // Yoshi's Island
+    IZUMI = 0x0C, // Fountain of Dreams
+    GREENS = 0x0D, // Green Greens
+    CORNERIA = 0x0E, // Corneria
+    VENOM = 0x0F, // Venom
+    PSTADIUM = 0x10, // Pokemon Stadium
+    PURA = 0x11, // Poke Floats
+    MUTECITY = 0x12, // Mute City
+    BIGBLUE = 0x13, // Big Blue
+    ONETT = 0x14, // Onett
+    FOURSIDE = 0x15, // Fourside
+    ICEMTN = 0x16, // Icicle Mountain
+    INISHIE1 = 0x18, // Mushroom Kingdom
+    INISHIE2 = 0x19, // Mushroom Kingdom II
+    FLATZONE = 0x1B, // Flat Zone
+    OLDPUPUPU = 0x1C, // Dream Land
+    OLDYOSHI = 0x1D, // Yoshi's Island (64)
+    OLDKONGO = 0x1E, // Kongo Jungle (64)
+};
+
 // This struct is based in part on the datasheet
 // however the info there is likely incorrect as this doesn't quite match grGroundParam
 typedef struct _StageCameraInfo {
