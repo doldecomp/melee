@@ -26,11 +26,6 @@ static StageData lbl_803DFEA8 = {
     func_801BFFA8,
 };
 
-static const s32 lbl_803B7D80[] = {
-    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-    17, 18, 19, 20, 21, 24, 25, 28, 29, 30, 36, 37,
-};
-
 extern StageData
     lbl_803DFEA8, lbl_803E5764, lbl_803E11A4, lbl_803E4ECC, lbl_803E1800,
     lbl_803E52E0, lbl_803E3F6C, lbl_803E5130, lbl_803E1B2C, lbl_803E4D0C,
@@ -396,134 +391,76 @@ void func_801C0800(StructPairWithStageID* pair)
     stage_data->callback0();
 }
 
-static const f32 lbl_804DACD0 = -5.0f;
+static BOOL func_801C0A70(Point3d* pos)
+{
+    if (HSD_Randi(2) != 0) {
+        s32 enabled_stages[] = {
+            CASTLE,
+            RCRUISE,
+            KONGO,
+            GARDEN,
+            GREATBAY,
+            SHRINE,
+            ZEBES,
+            KRAID,
+            STORY,
+            YORSTER,
+            IZUMI,
+            GREENS,
+            CORNERIA,
+            VENOM,
+            PSTADIUM,
+            PURA,
+            MUTECITY,
+            BIGBLUE,
+            ONETT,
+            FOURSIDE,
+            // ICEMTN disabled
+            // id 0x17 unused/unknown?
+            INISHIE1,
+            INISHIE2,
+            // id 0x1A unused/unknown?
+            // FLATZONE disabled
+            OLDPUPUPU,
+            OLDYOSHI,
+            OLDKONGO,
+            // TODO: what stages are these?
+            36,
+            37,
+        };
+
+        s32 player_slot;
+        s32 nstages = sizeof(enabled_stages) / sizeof(enabled_stages[0]);
+        int unused[5];
+        u32 i;
+
+        s32 stage_id = stage_info.internal_stage_id;
+        for (i = 0; i < nstages; i++) {
+            if (stage_id == enabled_stages[i]) {
+                break;
+            }
+        }
+        if (i != nstages) {
+            player_slot = HSD_Randi(4);
+            if (Player_GetEntity(player_slot) != NULL) {
+                s32 xoff;
+                Player_800326CC(player_slot, pos);
+                pos->y = -5.0f + Stage_GetBlastZoneTopOffset();
+                xoff = HSD_Randi(0x64) - 0x32;
+                pos->x += xoff;
+                return TRUE;
+            }
+        }
+    }
+    if (Stage_80224FDC(pos) != 0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
 extern u32 lbl_803B7DEC[];
 extern void func_8026BE84();
-#define _SDA2_BASE_ 0x804DF9E0
-#define lbl_804DACC8 0x804DACC8
-static asm void func_801C0A70()
-{
-    nofralloc
-/* 801C0A70 001BD650  7C 08 02 A6 */	mflr r0
-/* 801C0A74 001BD654  90 01 00 04 */	stw r0, 4(r1)
-/* 801C0A78 001BD658  94 21 FF 60 */	stwu r1, -0xa0(r1)
-/* 801C0A7C 001BD65C  93 E1 00 9C */	stw r31, 0x9c(r1)
-/* 801C0A80 001BD660  3B E3 00 00 */	addi r31, r3, 0
-/* 801C0A84 001BD664  38 60 00 02 */	li r3, 2
-/* 801C0A88 001BD668  93 C1 00 98 */	stw r30, 0x98(r1)
-/* 801C0A8C 001BD66C  48 1B FA F5 */	bl HSD_Randi
-/* 801C0A90 001BD670  2C 03 00 00 */	cmpwi r3, 0
-/* 801C0A94 001BD674  41 82 01 64 */	beq lbl_801C0BF8
-/* 801C0A98 001BD678  3C 60 80 3B */	lis r3, lbl_803B7D80@ha
-/* 801C0A9C 001BD67C  38 00 00 0D */	li r0, 0xd
-/* 801C0AA0 001BD680  38 63 7D 80 */	addi r3, r3, lbl_803B7D80@l
-/* 801C0AA4 001BD684  7C 09 03 A6 */	mtctr r0
-/* 801C0AA8 001BD688  38 A1 00 1C */	addi r5, r1, 0x1c
-/* 801C0AAC 001BD68C  38 83 FF F8 */	addi r4, r3, -8
-lbl_801C0AB0:
-/* 801C0AB0 001BD690  84 64 00 08 */	lwzu r3, 8(r4)
-/* 801C0AB4 001BD694  80 04 00 04 */	lwz r0, 4(r4)
-/* 801C0AB8 001BD698  94 65 00 08 */	stwu r3, 8(r5)
-/* 801C0ABC 001BD69C  90 05 00 04 */	stw r0, 4(r5)
-/* 801C0AC0 001BD6A0  42 00 FF F0 */	bdnz lbl_801C0AB0
-/* 801C0AC4 001BD6A4  80 84 00 08 */	lwz r4, 8(r4)
-/* 801C0AC8 001BD6A8  3C 60 80 4A */	lis r3, stage_info@ha
-/* 801C0ACC 001BD6AC  38 00 00 03 */	li r0, 3
-/* 801C0AD0 001BD6B0  90 85 00 08 */	stw r4, 8(r5)
-/* 801C0AD4 001BD6B4  38 63 E6 C8 */	addi r3, r3, stage_info@l
-/* 801C0AD8 001BD6B8  7C 09 03 A6 */	mtctr r0
-/* 801C0ADC 001BD6BC  38 81 00 24 */	addi r4, r1, 0x24
-/* 801C0AE0 001BD6C0  80 A3 00 88 */	lwz r5, 0x88(r3)
-/* 801C0AE4 001BD6C4  38 60 00 00 */	li r3, 0
-lbl_801C0AE8:
-/* 801C0AE8 001BD6C8  80 04 00 00 */	lwz r0, 0(r4)
-/* 801C0AEC 001BD6CC  7C 05 00 00 */	cmpw r5, r0
-/* 801C0AF0 001BD6D0  41 82 00 90 */	beq lbl_801C0B80
-/* 801C0AF4 001BD6D4  84 04 00 04 */	lwzu r0, 4(r4)
-/* 801C0AF8 001BD6D8  38 63 00 01 */	addi r3, r3, 1
-/* 801C0AFC 001BD6DC  7C 05 00 00 */	cmpw r5, r0
-/* 801C0B00 001BD6E0  41 82 00 80 */	beq lbl_801C0B80
-/* 801C0B04 001BD6E4  84 04 00 04 */	lwzu r0, 4(r4)
-/* 801C0B08 001BD6E8  38 63 00 01 */	addi r3, r3, 1
-/* 801C0B0C 001BD6EC  7C 05 00 00 */	cmpw r5, r0
-/* 801C0B10 001BD6F0  41 82 00 70 */	beq lbl_801C0B80
-/* 801C0B14 001BD6F4  84 04 00 04 */	lwzu r0, 4(r4)
-/* 801C0B18 001BD6F8  38 63 00 01 */	addi r3, r3, 1
-/* 801C0B1C 001BD6FC  7C 05 00 00 */	cmpw r5, r0
-/* 801C0B20 001BD700  41 82 00 60 */	beq lbl_801C0B80
-/* 801C0B24 001BD704  84 04 00 04 */	lwzu r0, 4(r4)
-/* 801C0B28 001BD708  38 63 00 01 */	addi r3, r3, 1
-/* 801C0B2C 001BD70C  7C 05 00 00 */	cmpw r5, r0
-/* 801C0B30 001BD710  41 82 00 50 */	beq lbl_801C0B80
-/* 801C0B34 001BD714  84 04 00 04 */	lwzu r0, 4(r4)
-/* 801C0B38 001BD718  38 63 00 01 */	addi r3, r3, 1
-/* 801C0B3C 001BD71C  7C 05 00 00 */	cmpw r5, r0
-/* 801C0B40 001BD720  41 82 00 40 */	beq lbl_801C0B80
-/* 801C0B44 001BD724  84 04 00 04 */	lwzu r0, 4(r4)
-/* 801C0B48 001BD728  38 63 00 01 */	addi r3, r3, 1
-/* 801C0B4C 001BD72C  7C 05 00 00 */	cmpw r5, r0
-/* 801C0B50 001BD730  41 82 00 30 */	beq lbl_801C0B80
-/* 801C0B54 001BD734  84 04 00 04 */	lwzu r0, 4(r4)
-/* 801C0B58 001BD738  38 63 00 01 */	addi r3, r3, 1
-/* 801C0B5C 001BD73C  7C 05 00 00 */	cmpw r5, r0
-/* 801C0B60 001BD740  41 82 00 20 */	beq lbl_801C0B80
-/* 801C0B64 001BD744  84 04 00 04 */	lwzu r0, 4(r4)
-/* 801C0B68 001BD748  38 63 00 01 */	addi r3, r3, 1
-/* 801C0B6C 001BD74C  7C 05 00 00 */	cmpw r5, r0
-/* 801C0B70 001BD750  41 82 00 10 */	beq lbl_801C0B80
-/* 801C0B74 001BD754  38 84 00 04 */	addi r4, r4, 4
-/* 801C0B78 001BD758  38 63 00 01 */	addi r3, r3, 1
-/* 801C0B7C 001BD75C  42 00 FF 6C */	bdnz lbl_801C0AE8
-lbl_801C0B80:
-/* 801C0B80 001BD760  28 03 00 1B */	cmplwi r3, 0x1b
-/* 801C0B84 001BD764  41 82 00 74 */	beq lbl_801C0BF8
-/* 801C0B88 001BD768  38 60 00 04 */	li r3, 4
-/* 801C0B8C 001BD76C  48 1B F9 F5 */	bl HSD_Randi
-/* 801C0B90 001BD770  7C 7E 1B 78 */	mr r30, r3
-/* 801C0B94 001BD774  4B E7 35 7D */	bl Player_GetEntity
-/* 801C0B98 001BD778  28 03 00 00 */	cmplwi r3, 0
-/* 801C0B9C 001BD77C  41 82 00 5C */	beq lbl_801C0BF8
-/* 801C0BA0 001BD780  38 7E 00 00 */	addi r3, r30, 0
-/* 801C0BA4 001BD784  38 9F 00 00 */	addi r4, r31, 0
-/* 801C0BA8 001BD788  4B E7 1B 25 */	bl Player_800326CC
-/* 801C0BAC 001BD78C  48 06 3F BD */	bl Stage_GetBlastZoneTopOffset
-/* 801C0BB0 001BD790  C0 02 B2 F0 */	lfs f0, lbl_804DACD0
-/* 801C0BB4 001BD794  38 60 00 64 */	li r3, 0x64
-/* 801C0BB8 001BD798  EC 00 08 2A */	fadds f0, f0, f1
-/* 801C0BBC 001BD79C  D0 1F 00 04 */	stfs f0, 4(r31)
-/* 801C0BC0 001BD7A0  48 1B F9 C1 */	bl HSD_Randi
-/* 801C0BC4 001BD7A4  38 03 FF CE */	addi r0, r3, -50
-/* 801C0BC8 001BD7A8  C8 22 B2 E8 */	lfd f1, lbl_804DACC8-_SDA2_BASE_(r2)
-/* 801C0BCC 001BD7AC  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 801C0BD0 001BD7B0  C0 5F 00 00 */	lfs f2, 0(r31)
-/* 801C0BD4 001BD7B4  90 01 00 94 */	stw r0, 0x94(r1)
-/* 801C0BD8 001BD7B8  3C 00 43 30 */	lis r0, 0x4330
-/* 801C0BDC 001BD7BC  38 60 00 01 */	li r3, 1
-/* 801C0BE0 001BD7C0  90 01 00 90 */	stw r0, 0x90(r1)
-/* 801C0BE4 001BD7C4  C8 01 00 90 */	lfd f0, 0x90(r1)
-/* 801C0BE8 001BD7C8  EC 00 08 28 */	fsubs f0, f0, f1
-/* 801C0BEC 001BD7CC  EC 02 00 2A */	fadds f0, f2, f0
-/* 801C0BF0 001BD7D0  D0 1F 00 00 */	stfs f0, 0(r31)
-/* 801C0BF4 001BD7D4  48 00 00 20 */	b lbl_801C0C14
-lbl_801C0BF8:
-/* 801C0BF8 001BD7D8  7F E3 FB 78 */	mr r3, r31
-/* 801C0BFC 001BD7DC  48 06 43 E1 */	bl Stage_80224FDC
-/* 801C0C00 001BD7E0  2C 03 00 00 */	cmpwi r3, 0
-/* 801C0C04 001BD7E4  41 82 00 0C */	beq lbl_801C0C10
-/* 801C0C08 001BD7E8  38 60 00 01 */	li r3, 1
-/* 801C0C0C 001BD7EC  48 00 00 08 */	b lbl_801C0C14
-lbl_801C0C10:
-/* 801C0C10 001BD7F0  38 60 00 00 */	li r3, 0
-lbl_801C0C14:
-/* 801C0C14 001BD7F4  80 01 00 A4 */	lwz r0, 0xa4(r1)
-/* 801C0C18 001BD7F8  83 E1 00 9C */	lwz r31, 0x9c(r1)
-/* 801C0C1C 001BD7FC  83 C1 00 98 */	lwz r30, 0x98(r1)
-/* 801C0C20 001BD800  38 21 00 A0 */	addi r1, r1, 0xa0
-/* 801C0C24 001BD804  7C 08 03 A6 */	mtlr r0
-/* 801C0C28 001BD808  4E 80 00 20 */	blr 
-}
-#pragma peephole on
-
 static asm void lbl_801C0C2C()
 {
     nofralloc
