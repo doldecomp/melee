@@ -169,9 +169,8 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 ra
     }
 }
 
-void FObjUpdateAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void*, s32, FObjData))
+void FObjUpdateAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void*, s32, FObjData*))
 {
-    u8 temp_r3;
     f32 phi_f0;
     FObjData fobjdata;
 
@@ -220,5 +219,5 @@ void FObjUpdateAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void*, s32, FO
         default:
             break;
     }
-    obj_update(obj, fobj->obj_type, fobjdata);
+    obj_update(obj, fobj->obj_type, &fobjdata);
 }
