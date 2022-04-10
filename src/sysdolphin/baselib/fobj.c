@@ -98,7 +98,7 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 ra
     }
 }
 
-f32 parseFloat(u8** pos, u8 frac)
+/*static*/ f32 parseFloat(u8** pos, u8 frac)
 {
     union {
         f32 f;
@@ -139,7 +139,7 @@ f32 parseFloat(u8** pos, u8 frac)
     return numer / denom;
 }
 
-s32 func_8036ADDC(u8** pos)
+/*static*/ s32 parsePackInfo(u8** pos)
 {
     u8 val;
     s32 result;
@@ -159,7 +159,7 @@ s32 func_8036ADDC(u8** pos)
     return result;
 }
 
-void func_8036AE38(HSD_FObj* fobj)
+/*static*/ void FObjLaunchKeyData(HSD_FObj* fobj)
 {
     if ((fobj->flags & 0x40) != 0) {
         fobj->op_intrp = fobj->op;
@@ -169,33 +169,33 @@ void func_8036AE38(HSD_FObj* fobj)
     }
 }
 
-void func_8036AE70(HSD_FObj* fobj, void* arg1, void (*arg2)(void*, s32, f32*))
+void FObjUpdateAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void*, s32, FObjData))
 {
     u8 temp_r3;
     f32 phi_f0;
-    f32 sp14;
+    FObjData fobjdata;
 
-    if (arg2 == NULL) {
+    if (obj_update == NULL) {
         return;
     }
     switch (fobj->op_intrp) {
-        case 6:
+        case HSD_A_OP_KEY:
             if (fobj->flags & 0x80) {
-                sp14 = fobj->p0;
+                fobjdata.fv = fobj->p0;
                 fobj->flags &= 0xFFFFFF7F;
             } else {
                 return;
             }
             break;
-        case 1:
+        case HSD_A_OP_CON:
             if (fobj->time >= fobj->fterm) {
                 phi_f0 = fobj->p1;
             } else {
                 phi_f0 = fobj->p0;
             }
-            sp14 = phi_f0;
+            fobjdata.fv = phi_f0;
             break;
-        case 2:
+        case HSD_A_OP_LIN:
             if (fobj->flags & 0x20) {
                 fobj->flags = fobj->flags & 0xFFFFFFDF;
                 if (fobj->fterm != 0) {
@@ -205,20 +205,20 @@ void func_8036AE70(HSD_FObj* fobj, void* arg1, void (*arg2)(void*, s32, f32*))
                     fobj->p0 = fobj->p1;
                 }
             }
-            sp14 = fobj->d0 * fobj->time + fobj->p0;
+            fobjdata.fv = fobj->d0 * fobj->time + fobj->p0;
             break;
-        case 3:
-        case 4:
-        case 5:
+        case HSD_A_OP_SPL0:
+        case HSD_A_OP_SPL:
+        case HSD_A_OP_SLP:
             if (fobj->fterm != 0) {
-                sp14 = splGetHelmite(1.0 / fobj->fterm,
+                fobjdata.fv = splGetHelmite(1.0 / fobj->fterm,
                     fobj->time, fobj->p0, fobj->p1, fobj->d0, fobj->d1);
             } else {
-                sp14 = fobj->p1;
+                fobjdata.fv = fobj->p1;
             }
             break;
         default:
             break;
     }
-    arg2(arg1, fobj->obj_type, &sp14);
+    obj_update(obj, fobj->obj_type, fobjdata);
 }
