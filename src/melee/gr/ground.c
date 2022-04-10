@@ -881,8 +881,7 @@ HSD_JObj* func_801C13D0(s32 arg0, s32 depth)
     return result;
 }
 
-#define _SDA_BASE_ 0x804DB6A0
-#define lbl_804D44F8 0x804D44F8
+char lbl_804D44F8[8] = "archive";
 extern HSD_Joint lbl_803B7E0C;
 extern u8 lbl_804D784B[5];
 extern void lbl_801C5F60();
@@ -989,7 +988,7 @@ lbl_801C1568:
 /* 801C1630 001BE210  40 82 00 14 */	bne lbl_801C1644
 /* 801C1634 001BE214  38 7B 02 18 */	addi r3, r27, 0x218
 /* 801C1638 001BE218  38 80 05 4E */	li r4, 0x54e
-/* 801C163C 001BE21C  38 AD 8E 58 */	addi r5, r13, lbl_804D44F8-_SDA_BASE_
+/* 801C163C 001BE21C  38 AD 8E 58 */	addi r5, r13, lbl_804D44F8
 /* 801C1640 001BE220  48 1C 6B E1 */	bl __assert
 lbl_801C1644:
 /* 801C1644 001BE224  80 77 00 04 */	lwz r3, 4(r23)
@@ -1793,7 +1792,9 @@ void func_801C2374(HSD_LObj* lobj)
 s32 func_801C247C(s32 arg0, s32 arg1)
 {
     UnkArchiveStruct* archive = func_801C6330(arg0);
-    assert_line(0x7E1, archive);
+    if (archive == NULL) {
+        __assert(__FILE__, 0x7E1, lbl_804D44F8);
+    }
     if (archive->unk4 != NULL && arg1 < archive->unk4->unk14) {
         return archive->unk4->unk10[arg1];
     } else {
@@ -2869,7 +2870,7 @@ asm void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
 /* 801C3728 001C0308  40 82 00 14 */	bne lbl_801C373C
 /* 801C372C 001C030C  38 7D 02 18 */	addi r3, r29, 0x218
 /* 801C3730 001C0310  38 80 0B 78 */	li r4, 0xb78
-/* 801C3734 001C0314  38 AD 8E 58 */	addi r5, r13, lbl_804D44F8-_SDA_BASE_
+/* 801C3734 001C0314  38 AD 8E 58 */	addi r5, r13, lbl_804D44F8
 /* 801C3738 001C0318  48 1C 4A E9 */	bl __assert
 lbl_801C373C:
 /* 801C373C 001C031C  28 1F 00 00 */	cmplwi r31, 0
