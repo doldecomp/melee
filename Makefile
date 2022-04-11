@@ -6,6 +6,7 @@ ifneq ($(findstring MSYS,$(shell uname)),)
 endif
 
 GENERATE_MAP ?= 0
+NON_MATCHING ?= 0
 
 VERBOSE ?= 0
 
@@ -87,6 +88,9 @@ ifeq ($(GENERATE_MAP),1)
   LDFLAGS += -map $(MAP)
 endif
 CFLAGS  = -cwd source -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES)
+ifeq ($(NON_MATCHING),1)
+CFLAGS += -DNON_MATCHING
+endif
 
 $(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
 $(BUILD_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
@@ -107,7 +111,11 @@ HOSTCFLAGS := -Wall -O3 -s
 ### Default target ###
 
 default: $(DOL)
+ifeq ($(NON_MATCHING),1)
+	@echo "Skipping checksum for non-matching build."
+else
 	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1
+endif
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
 ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \
