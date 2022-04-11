@@ -6,6 +6,9 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        makeflags: ["GENERATE_MAP=1", "NON_MATCHING=1"]
     runs-on: ubuntu-latest
     container: devkitpro/devkitppc:latest
     env:
@@ -24,4 +27,4 @@ jobs:
           | bsdtar -xvf- -C tools --exclude Wii
         mv tools/GC tools/mwcc_compiler
     - name: make
-      run: GENERATE_MAP=1 make -j$(nproc)
+      run: make -j$(nproc) ${{ matrix.makeflags }}
