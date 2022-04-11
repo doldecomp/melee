@@ -58,3 +58,57 @@ HSD_Shadow* HSD_ShadowAlloc(void)
 
   return shadow;
 }
+
+inline BOOL dec_refcount(u16* ref_count)
+{
+    u16 current = *ref_count;
+    s32 cond = current == (u16) HSD_OBJ_NOREF;
+    if (cond != FALSE) {
+        return cond;
+    }
+    *ref_count = current - 1;
+    return current == 0;
+}
+
+void HSD_ShadowRemove(HSD_Shadow* shadow)
+{
+    HSD_CObj* cobj;
+    HSD_TObj* tobj;
+
+    if (shadow == NULL) {
+        return;
+    }
+    if ((cobj = shadow->camera) != NULL) {
+        u16* ref_count = &cobj->parent.ref_count;
+        if (dec_refcount(ref_count) && cobj != NULL) {
+            cobj->parent.parent.class_info->release(&cobj->parent.parent);
+            cobj->parent.parent.class_info->destroy(&cobj->parent.parent);
+        }
+    }
+    HSD_ShadowDeleteObject(shadow, 0);
+    if (shadow->active) {
+        func_80363DC4(shadow->texture);
+    }
+    if (shadow->texture->imagedesc->img_ptr != NULL) {
+        HSD_Free(shadow->texture->imagedesc->img_ptr);
+    }
+    tobj = shadow->texture;
+    HSD_ImageDescFree(tobj->imagedesc);
+    HSD_TObjFree(tobj);
+    HSD_ObjFree(&shadow_alloc_data, shadow);
+}
+
+extern char lbl_80407310[9];
+extern char lbl_804D5F78[7];
+
+void HSD_ShadowInit(HSD_Shadow* shadow)
+{
+    HSD_ImageDesc* imagedesc;
+
+    if (shadow == NULL) {
+        __assert(lbl_80407310, 0xF5, lbl_804D5F78);
+    }
+    imagedesc = shadow->texture->imagedesc;
+    GXSetTexCopySrc(0, 0, imagedesc->width, imagedesc->height);
+    GXSetTexCopyDst(imagedesc->width, imagedesc->height, 0x20, 0);
+}
