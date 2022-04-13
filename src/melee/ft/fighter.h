@@ -97,9 +97,11 @@ typedef enum CharacterKind
 typedef struct _ftCommonData {
     u8 filler_x0[0x98];
     /* 0x98 */ f32 x98_shieldHealthInit;
-    u8 filler_x9C[0x200-0x9C];
-    /* 0x200 */ f32 x200;
-    /* 0x204 */ f32 x204_knockbackFrameDecay;
+    u8 filler_x9C[0x134-0x9C];
+    /* 0x134 */  s32 x134;
+    u8 filler_x138[0x200-0x138];
+    /* 0x200 */  f32 x200;
+    /* 0x204 */  f32 x204_knockbackFrameDecay;
     u8 filler_x208[0x21C-0x208];
     /* 0x21C */ f32 x21C;
     u8 filler_x220[0x260-0x220];
@@ -834,6 +836,7 @@ typedef struct _Fighter {
                  u8 x2229_b5_no_normal_motion : 1;
                  u8 x2229_b6 : 1;
                  u8 x2229_b7 : 1;
+
                  
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
