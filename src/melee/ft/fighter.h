@@ -250,6 +250,54 @@ enum {
     GA_Air = 1,
 };
 
+typedef struct {
+    HSD_Joint* joint;
+    u8 padding[20];
+} UnkFighterJointStruct;
+
+struct Pair_Pointer_and_Flag {
+    UnkFighterJointStruct* unk_fighter_struct;
+    u8 flag;
+};
+
+
+struct S_TEMP1 {
+    FighterKind fighterKind;
+    u8 playerID;
+    u8 unk5;
+    UnkFlagStruct unk6;
+};
+
+struct S_TEMP2 {
+    s32 filler[12];
+    s32 unk30; 
+};
+
+struct S_TEMP3 {
+    s32 id; 
+
+    s32 x4;
+
+    u8 flags8;
+    UnkFlagStruct flags9;
+    UnkFlagStruct flagsA;
+    UnkFlagStruct flagsB;
+
+    void* cb_Anim;
+    void* cb_Input;
+    void* cb_Physics;
+    void* cb_Collision;
+    void* cb_Camera;
+};
+
+struct S_TEMP4 {
+    s32 x0;
+    s32 x4;
+    s32 x8;
+    s32 xC;
+    s32 x10_animCurrFlags;
+    s32 x14;
+};
 
 
 typedef struct _Fighter {
@@ -264,7 +312,7 @@ typedef struct _Fighter {
     s32 x14;
     s32 x18;
     s32* x1C;
-    s32 x20;
+    s32* x20;
     s32 x24;
     s32 x28;
     /* 0x2C */ f32 x2C_facing_direction;
@@ -406,6 +454,7 @@ typedef struct _Fighter {
                 f32 x2E8;
 
                 f32 x2EC;
+
     u8 filler_x2D8[0x594 - 0x2F0];
     /* 0x594 */ s32 x594_animCurrFlags1;
     u8 filler_x595[0x5E8 - 0x598];
@@ -507,11 +556,13 @@ typedef struct _Fighter {
     /* 0x914 */ Hitbox x914[4];
     u8 filler_xDF4[0x1064 - 0xDF4];
     /* 0x1064 */ ftHit x1064_thrownHitbox;
-    u8 filler_x1064[0x1828 - 0x1064 - sizeof(ftHit)];
+    u8 filler_x1064[0x1198 - 0x1064 - sizeof(ftHit)];
+    /* 0x1198 */ s32 x1198;
+    u8 filler_x1198[0x1828 - 0x119C];
     /* 0x1828 */ s32 x1828;
     struct dmg                                                 // 0x182c
     {                                                          //
-        s32 x182c_behavior;                                    // 0x182c
+        f32 x182c_behavior;                                    // 0x182c
         f32 x1830_percent;                                     // 0x1830
         f32 x1834;                                             // 0x1834
         f32 x1838_percentTemp;                                 // 0x1838
@@ -650,7 +701,7 @@ typedef struct _Fighter {
     /* 0x2090 */ s16 x2090;
     /* 0x2092 */ s16 x2092;
     /* 0x2094 */ s32 x2094;
-    /* 0x2098 */ s16 x2098;
+    /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
     /* 0x20A0 */ s32 x20A0;
@@ -804,26 +855,6 @@ typedef struct _Fighter {
     /* 0x2354 */ f32 x2354_stateVar6;
     /* 0x2358 */ f32 x2358_stateVar7;
 } Fighter;
-
-///// 
-typedef struct {
-    HSD_Joint* joint;
-    u8 padding[20];
-} UnkFighterJointStruct;
-
-struct Pair_Pointer_and_Flag {
-    UnkFighterJointStruct* unk_fighter_struct;
-    u8 flag;
-};
-
-struct S_TEMP1 {
-    FighterKind fighterKind;
-    u8 playerID;
-    u8 unk5;
-    UnkFlagStruct unk6;
-};
-
-
 
 // functions from fighter.s
 void func_800679B0();

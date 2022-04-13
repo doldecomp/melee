@@ -17,7 +17,7 @@ extern struct Pair_Pointer_and_Flag lbl_803C0EC0[33];
 
 extern ftData* lbl_804598B8[33];
 extern s32 lbl_803C2800[33];
-extern s32 lbl_803C12E0[33];
+extern s32* lbl_803C12E0[33];
 
 extern s32 lbl_803C125C;
 extern s32 lbl_803C1DB4;
@@ -721,7 +721,7 @@ void func_80068854(HSD_GObj* fighterObj) {
 }
 
 
-///https://decomp.me/scratch/0uyDC   ///NON_MATCHING  but very close, 1 or 2 register swaps
+///https://decomp.me/scratch/4m0tc  ///NON_MATCHING  but very close, 1 or 2 register swaps
 void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
     u32 temp_r3;
     u8* temp_r3_s2;
@@ -1061,7 +1061,7 @@ HSD_GObj* func_80068E98(struct S_TEMP1* input) {
     return temp_r31;
 }
 
-
+/// https://decomp.me/scratch/a3Vh7
 asm void func_800693AC(HSD_GObj*, s32, s32, s32, f32, f32, f32)
 {
 	nofralloc 
@@ -4287,14 +4287,6 @@ void func_8006C80C(HSD_GObj* fighterObj) {
     }
 
 }
-
-
-
-struct S_TEMP2 {
-    s32 filler[12];
-    s32 unk30; 
-};
-
 
 ///https://decomp.me/scratch/HIIOt
 void func_8006CA5C(HSD_GObj* fighterObj) {
