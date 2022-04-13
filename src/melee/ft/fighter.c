@@ -16,8 +16,8 @@ extern void* ft_OnAbsorb;
 extern struct Pair_Pointer_and_Flag lbl_803C0EC0[33];
 
 extern ftData* lbl_804598B8[33];
-extern s32 lbl_803C2800[33];
-extern s32* lbl_803C12E0[33];
+extern struct S_TEMP3 lbl_803C2800[33];
+extern struct S_TEMP3* lbl_803C12E0[33];
 
 extern s32 lbl_803C125C;
 extern s32 lbl_803C1DB4;
@@ -458,13 +458,13 @@ void func_80067C98(register Fighter* ft) {
 	ft->x6A4_transNOffset.x/*x6A4*/ = 0.0f;//lbl_804D8254
 	ft->x6BC_inputStickangle = 0.0f;//lbl_804D8254
 	// TODO: following three elements probably a vector because of the reverse order init that happens a lot with vectors
-	ft->x6C8 = 0.0f;//lbl_804D8254
-	ft->x6C4 = 0.0f;//lbl_804D8254
-	ft->x6C0 = 0.0f;//lbl_804D8254
+	ft->x6C0.z = 0.0f;//lbl_804D8254
+	ft->x6C0.y = 0.0f;//lbl_804D8254
+	ft->x6C0.x = 0.0f;//lbl_804D8254
 	// TODO: another vector probably
-	ft->x6E0 = 0.0f;//lbl_804D8254
-	ft->x6DC = 0.0f;//lbl_804D8254
-	ft->x6D8 = 0.0f;//lbl_804D8254
+	ft->x6D8.z = 0.0f;//lbl_804D8254
+	ft->x6D8.y = 0.0f;//lbl_804D8254
+	ft->x6D8.x = 0.0f;//lbl_804D8254
 
 	ft->x209C = 0;
 	ft->x2224_flag.bits.b1 = 0;
@@ -843,7 +843,7 @@ void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
     temp_r6->x67D = 0xFF;
     temp_r6->x67C = 0xFF;
 
-    fighter_r31->x594_animCurrFlags1 = 0;
+    fighter_r31->x594_s32 = 0;
 
     fighter_r31->x221E_flag.bits.b0 = 0;
     fighter_r31->x221E_flag.bits.b1 = 0;
@@ -3656,7 +3656,7 @@ lbl_8006B80C:
 }
 
 
-//// https://decomp.me/scratch/AKdbI
+//// https://decomp.me/scratch/kNXEu
 void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy) {
     //@1c
     Fighter* pCharData = pPlayerEntityStruct->user_data;
@@ -3860,7 +3860,7 @@ void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy) {
             else
                 bit = 0;
 			//@514
-			if (bit || func_80070FD0(pCharData) != 0 || pCharData->x594_animCurrFlags1 & 1)
+			if (bit || func_80070FD0(pCharData) != 0 || pCharData->x594_animCurrFlags1.bits.b1)
             {
                 //@538
                 // pCharData->xB0_position += pCharData->xD4_unk_vel

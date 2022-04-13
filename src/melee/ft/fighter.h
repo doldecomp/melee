@@ -151,8 +151,8 @@ typedef struct _ftData
     }* x0;
     /* 0x04 */ void* ext_attr;
     s32 x8;
-    s32 xC;
-    s32 x10;
+    struct S_TEMP4* xC;
+    u8* x10;
     s32 filler_x14[13];
     /* 0x48 */ void* x48_items;
     FtCollisionData* x4C_collisionData;
@@ -477,7 +477,7 @@ typedef struct _Fighter {
                     };
                     s32 x594_s32;
                 };
-    u8 filler_x595[0x5E8 - 0x598];
+    u8 filler_x598[0x5E8 - 0x598];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F8 - 0x5EC];
     /* 0x5F8 */ s8 x5F8;
