@@ -1948,8 +1948,27 @@ BOOL func_80080144(Fighter* fp)
 }
 
 // https://decomp.me/scratch/qWtoZ
+#ifdef NON_MATCHING
+void func_80080174(Fighter* fp)
+{
+    f32 phi_f2;
+    f32 phi_f3;
+    Vec3* v;
+    u32 unused[4];
+
+    if (fp->x197C != NULL) {
+        func_80294E78(fp->x197C, fp->x34_scale.y * fp->x110_attr.x23C);
+    }
+    if (fp->x1980 != NULL) {
+        v = &fp->x110_attr.x240;
+        if ((phi_f2 = lbl_804D6554->x710 * fp->x2024 + lbl_804D6554->x708) > lbl_804D6554->x70C)
+            phi_f2 = lbl_804D6554->x70C;
+        func_8029A89C(fp->x1980, phi_f2 * v[1].x * fp->x34_scale.y);
+    }
+}
+#else
 #define _SDA2_BASE_ 0x804DF9E0
-#define lbl_804D8340 0x804D8340
+#define lbl_804D8340 0x804D8340 // float conversion constant
 asm void func_80080174()
 {
     nofralloc
@@ -2000,6 +2019,7 @@ lbl_80080208:
 /* 80080218 0007CDF8  4E 80 00 20 */	blr 
 }
 #pragma peephole on
+#endif
 
 void func_8008021C(HSD_GObj* gobj)
 {
