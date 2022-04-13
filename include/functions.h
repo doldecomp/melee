@@ -1291,7 +1291,7 @@ s32 func_8007500C(struct _Fighter*, s32);
 void func_8007584C();
 void func_8007592C(struct _Fighter*, s32, f32);
 void func_80075AF0(struct _Fighter*, s32, f32);
-void func_80075CB4();
+void func_80075CB4(struct _Fighter*, s32, f32);
 // ? func_80075E78(?);
 // ? func_80075F48(?);
 // ? func_80076018(?);

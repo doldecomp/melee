@@ -115,8 +115,10 @@ typedef struct _ftCommonData {
     /* 0x480 */ f32 x480;
     u8 filler_x484[0x498-0x484];
     /* 0x498 */ u32 x498_ledgeCooldownTime;
-    u8 filler_x49C[0x5F0-0x49C];
-    /* 0x5F0 */  u32 x5F0;
+    u8 filler_x4CC[0x4CC-0x49C];
+    /* 0x4CC */ s32 x4CC;
+    u8 filler_x4D0[0x5F0-0x4D0];
+    /* 0x5F0 */ u32 x5F0;
     u8 filler_x5F4[0x6D8-0x5F4];
    /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
     u8 filler_x6DC[0x768-0x6DC];
@@ -124,8 +126,10 @@ typedef struct _ftCommonData {
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
     /* 0x774 */ s32 x774;
-                u8 x780_filler[0x7E4 - 0x778];
+    u8 x780_filler[0x7E4 - 0x778];
     /* 0x7E4 */ f32 x7E4;
+    u8 x7E8_filler[0x814 - 0x7E8];
+    /* 0x814 */ s32 x814;
     // lots of more data following, exact size to be determined
 } ftCommonData;
 
@@ -301,26 +305,25 @@ struct S_TEMP4 {
     s32 x14;
 };
 
-
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
     /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
     /* 0xC */ u8 xC_playerID;
-    u8 xD;
-    u8 xE;
-    u8 xF;
-    s32 x10;
-    s32 x14;
-    s32 x18;
-    s32* x1C;
-    s32* x20;
-    s32 x24;
-    s32 x28;
+    /* 0xD */ u8 xD;
+    /* 0xE */ u8 xE;
+    /* 0xF */ u8 xF;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ struct S_TEMP3* x1C;
+    /* 0x20 */ struct S_TEMP3* x20;
+    /* 0x24 */ struct S_TEMP4* x24;
+    /* 0x28 */ u8* x28;
     /* 0x2C */ f32 x2C_facing_direction;
     /* 0x30 */ f32 x30_facingDirectionRepeated;
     /* 0x34 */ Vec3 x34_scale;
-    f32 x40;
+    /* 0x40 */ f32 x40;
     u8 filler_x40[0x74 - 0x44];
 
     Vec3 x74_anim_vel;                                         // 0x74
@@ -339,9 +342,11 @@ typedef struct _Fighter {
     f32 xF0_ground_kb_vel;
     f32 xF4_ground_attacker_shield_kb_vel;
     Vec2 xF8_playerNudgeVel;
-    f32 x100;
- 
-    s32 filler_x104;
+    /* 0x100 */ f32 x100;
+    /* 0x104 */ s8 x104;
+    /* 0x105 */ s8 x105;
+    /* 0x106 */ s8 x106;
+    /* 0x107 */ s8 x107;
     /* 0x108 */ void* x108_costume_archive;
     /* 0x10C */ ftData* x10C_ftData;
     // TODO: Ask Psi how many of those are confirmed, only a fraction of them is used right now
@@ -450,15 +455,28 @@ typedef struct _Fighter {
     /* 0x2D0 */ s32 x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
-                f32 x2DC;
-                f32 x2E0;
-                f32 x2E4;
-                f32 x2E8;
-
-                f32 x2EC;
-
-    u8 filler_x2D8[0x594 - 0x2F0];
-    /* 0x594 */ s32 x594_animCurrFlags1;
+    /* 0x2DC */ f32 x2DC;
+    /* 0x2E0 */ f32 x2E0;
+    /* 0x2E4 */ f32 x2E4;
+    /* 0x2E8 */ f32 x2E8;
+    /* 0x2EC */ f32 x2EC;
+    u8 filler_x2F0[0x3E4 - 0x2F0];
+    /* 0x3E4 */ f32 x3E4;
+    /* 0x3E8 */ f32 x3E8;
+    /* 0x3EC */ s32 x3EC;
+    /* 0x3F0 */ s32 x3F0;
+    u8 filler_x3F4[0x590 - 0x3F4];
+    /* 0x590 */ s32 x590;
+    /* 0x594 */ union {
+                    struct {
+                        UnkFlagStruct x594_animCurrFlags1;
+                        struct {
+                            u8 x0: 7;
+                            u16 x7: 3;
+                        } x596_bits;
+                    };
+                    s32 x594_s32;
+                };
     u8 filler_x595[0x5E8 - 0x598];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F8 - 0x5EC];
@@ -474,85 +492,82 @@ typedef struct _Fighter {
     /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
-                f32 x624_lstick_y;
-                f32 x628_lstick_z;
-                f32 x62C;
+    /* 0x624 */ f32 x624_lstick_y;
+    /* 0x628 */ f32 x628_lstick_z;
+    /* 0x62C */ f32 x62C;
 
-                f32 x630;
-                f32 x634;
+    /* 0x630 */ f32 x630;
+    /* 0x634 */ f32 x634;
 
-                f32 x638;
-                f32 x63C;
-                f32 x640;
-                f32 x644;
+    /* 0x638 */ f32 x638;
+    /* 0x63C */ f32 x63C;
+    /* 0x640 */ f32 x640;
+    /* 0x644 */ f32 x644;
                 
-                f32 x648;
-                f32 x64C;
+    /* 0x648 */ f32 x648;
+    /* 0x64C */ f32 x64C;
                 
-                f32 x650;
-                f32 x654;
+    /* 0x650 */ f32 x650;
+    /* 0x654 */ f32 x654;
 
-                f32 x658;
+    /* 0x658 */ f32 x658;
 
-                s32 x65C;
-                s32 x660;
-                s32 x664;
-                s32 x668;
-                s32 x66C;
+    /* 0x65C */ s32 x65C;
+    /* 0x660 */ s32 x660;
+    /* 0x664 */ s32 x664;
+    /* 0x668 */ s32 x668;
+    /* 0x66C */ s32 x66C;
 
-                u8 x670_timer_lstick_tilt_x;
-                u8 x671_timer_lstick_tilt_y;
-                u8 x672_timer_lstick_tilt_z;
+    /* 0x670 */ u8 x670_timer_lstick_tilt_x;
+    /* 0x671 */ u8 x671_timer_lstick_tilt_y;
+    /* 0x672 */ u8 x672_timer_lstick_tilt_z;
 
-                u8 x673_x;
-                u8 x674_y;
-                u8 x675_z;
+    /* 0x673 */ u8 x673_x;
+    /* 0x674 */ u8 x674_y;
+    /* 0x674 */ u8 x675_z;
 
-                u8 x676_x;
-                u8 x677_y;
-                u8 x678_z;
+    /* 0x676 */ u8 x676_x;
+    /* 0x677 */ u8 x677_y;
+    /* 0x678 */ u8 x678_z;
 
-                u8 x679_x;
-                u8 x67A_y;
-                u8 x67B_z;
+    /* 0x679 */ u8 x679_x;
+    /* 0x67A */ u8 x67A_y;
+    /* 0x67B */ u8 x67B_z;
 
-                u8 x67C;
-                u8 x67D;
-                u8 x67E;
-                u8 x67F;
-                u8 x680;
-                u8 x681;
-                u8 x682;
-                u8 x683;
-                u8 x684;
-                u8 x685;
-                u8 x686;
-                u8 x687;
-                u8 x688;
-                u8 x689;
-                u8 x68A;
-                u8 x68B;
+    /* 0x67C */ u8 x67C;
+    /* 0x67D */ u8 x67D;
+    /* 0x67E */ u8 x67E;
+    /* 0x67F */ u8 x67F;
+    /* 0x680 */ u8 x680;
+    /* 0x681 */ u8 x681;
+    /* 0x682 */ u8 x682;
+    /* 0x683 */ u8 x683;
+    /* 0x684 */ u8 x684;
+    /* 0x685 */ u8 x685;
+    /* 0x686 */ u8 x686;
+    /* 0x687 */ u8 x687;
+    /* 0x688 */ u8 x688;
+    /* 0x689 */ u8 x689;
+    /* 0x68A */ u8 x68A;
+    /* 0x68B */ u8 x68B;
 
-    /* 0x68C */ Vec3 x68C_transNPos;
-    u8 filler_x698[0x6A4-0x698];
-    /* 0x6A4 */ Vec3 x6A4_transNOffset;
-    u8 filler_x6B0[0x6BC-0x6B0];
-    /* 0x6BC */ f32 x6BC_inputStickangle;
-    /* 0x6C0 */ f32 x6C0;
-    /* 0x6C4 */ f32 x6C4;
-    /* 0x6C8 */ f32 x6C8;
-    u8 filler_x6CC[0x6D8-0x6CC];
-    /* 0x6D8 */ f32 x6D8;
-    /* 0x6DC */ f32 x6DC;
-    /* 0x6E0 */ f32 x6E0;
-    u8 filler_x6E4[0x6F0 - 0x6E4];
+    /* 0x68C */ Vec x68C_transNPos;
+    /* 0x698 */  Vec x698;
+    /* 0x6A4 */  Vec3 x6A4_transNOffset;
+    /* 0x6B0 */  Vec3 x6B0;
+    /* 0x6BC */  f32 x6BC_inputStickangle;
+    /* 0x6C0 */  Vec x6C0;
+    /* 0x6CC */  Vec x6CC;
+    /* 0x6D8 */  Vec3 x6D8;
+    /* 0x6E4 */  Vec3 x6E4;
     /* 0x6F0 */ CollData x6F0_collData;
     /* 0x890 */ CameraBox* x890;
     /* 0x894 */ f32 x894;
     /* 0x898 */ f32 x898;
     /* 0x89C */ f32 x89C;
     /* 0x8A0 */ f32 x8A0;
-    s32 filler_x8A4[2];
+    /* 0x8A4 */ f32 x8A4;
+    /* 0x8A8 */ f32 x8A8;
     /* 0x8AC */ s32 x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
     /* 0x914 */ Hitbox x914[4];
@@ -678,18 +693,19 @@ typedef struct _Fighter {
     u8 filler_x1A4C[0x1A52 - 0x1A4C];
     /* 0x1A52 */ s8 x1A52;
     /* 0x1A53 */ s8 x1A53;
-    s32 filler_x1A54;
-                 HSD_GObj* x1A58;
-                 HSD_GObj* x1A5C;
-                 s32 x1A60;
-                 s32 x1A64;
-                 s32 x1A68;
-                 f32 x1A6C;
-                 Vec x1A70;
+    /* 0x1A54 */ s32 x1A54;
+    /* 0x1A58 */ HSD_GObj* x1A58;
+    /* 0x1A5C */ HSD_GObj* x1A5C;
+    /* 0x1A60 */ s32 x1A60;
+    /* 0x1A64 */ s32 x1A64;
+    /* 0x1A68 */ s16 x1A68;
+    /* 0x1A6A */ s16 x1A6A;
+    /* 0x1A6C */ f32 x1A6C;
+    /* 0x1A70 */ Vec x1A70;
     u8 filler_x1A6C[0x2008-0x1A7C];
-                 s32 x2008;
-                 s32 x200C;
-                 s32 x2010;
+    /* 0x2008 */ s32 x2008;
+    /* 0x200C */ s32 x200C;
+    /* 0x2010 */ s32 x2010;
     u8 filler_x2014[0x2028 - 0x2014];
     /* 0x2028 */ s32 x2028;
     /* 0x202C */ s32 x202C;
@@ -698,7 +714,17 @@ typedef struct _Fighter {
     /* 0x2038 */ s32 x2038;
     u8 filler_x203C[0x2064 - 0x203C];
     /* 0x2064 */ s32 x2064_ledgeCooldown;
-    u8 filler_x2068[0x208C - 0x2068];
+    u8 filler_x2068[0x2070 - 0x2068];
+    /* 0x2068 */ union {
+                    struct {
+                        UnkFlagStruct x2070;
+                        UnkFlagStruct x2071;
+                        UnkFlagStruct x2072;
+                        UnkFlagStruct x2073;
+                    };
+                    s32 x2070_int;
+                };
+    u8 filler_x2074[0x208C - 0x2074];
     /* 0x208C */ s32 x208C;
     /* 0x2090 */ s16 x2090;
     /* 0x2092 */ s16 x2092;
@@ -706,7 +732,7 @@ typedef struct _Fighter {
     /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
-    /* 0x20A0 */ s32 x20A0;
+    /* 0x20A0 */ HSD_JObj* x20A0;
     /* 0x20A4 */ s32 x20A4;
     /* 0x20A8 */ s32 x20A8;
     /* 0x20AC */ s32 x20AC;
@@ -768,9 +794,11 @@ typedef struct _Fighter {
         void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
         void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
         void (*x21EC_callback)(HSD_GObj *fighter);
+        void (*x21F0_callback)(HSD_GObj *fighter);
+        void (*x21F4_callback)(HSD_GObj *fighter);
+        void (*x21F8_callback)(HSD_GObj *fighter);
     } cb;
-    u8 filler_x21EC[0x21FC - 0x21F0];
-    u8 x21FC;
+    /* 0x21FC */ u8 x21FC;
     u8 filler_x21FC[0x2200 - 0x21FD];
     /* 0x2200 */ u32 x2200_ftcmd_var0;
     /* 0x2204 */ u32 x2200_ftcmd_var1;
