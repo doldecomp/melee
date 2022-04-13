@@ -1347,7 +1347,6 @@ s32 func_8028B08C(void*, s32);
 s32 func_802BDA40(void*, s32);
 
 static const int FtParasol_None = -1;
-#define ftGetParasolStatus func_8007E994
 
 void func_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
 {
@@ -1369,7 +1368,7 @@ void func_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     }
 }
 
-s32 func_8007E994(HSD_GObj* gobj)
+s32 ftGetParasolStatus(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x1974_heldItem != NULL &&

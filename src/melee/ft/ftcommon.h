@@ -70,7 +70,7 @@ void func_8007E79C(HSD_GObj*, s32);
 void func_8007E7E4(HSD_GObj*, s32);
 void func_8007E82C(HSD_GObj*);
 void func_8007E83C(HSD_GObj*, s32, f32 div);
-s32 func_8007E994(HSD_GObj*);
+s32 ftGetParasolStatus(HSD_GObj*);
 void func_8007EA90(Fighter*, s32);
 void func_8007EBAC(Fighter*, u32, u32);
 void func_8007EC30(u32, u32);

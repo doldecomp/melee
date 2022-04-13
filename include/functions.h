@@ -1453,7 +1453,7 @@ void func_8007E2FC(struct _HSD_GObj*);
 // ? func_8007E7E4(?);
 // ? func_8007E82C(?);
 // ? func_8007E83C(?);
-s32 func_8007E994();
+s32 ftGetParasolStatus(struct _HSD_GObj*);
 void func_8007EA90(struct _Fighter*, s32);
 void func_8007EBAC(struct _Fighter*, u32, u32);
 // ? func_8007EC30(?);
