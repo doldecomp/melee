@@ -900,7 +900,7 @@ void func_80068854(HSD_GObj* fighterObj);
 void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata);
 void func_80068E64(HSD_GObj* fighterObj);
 HSD_GObj* func_80068E98(struct S_TEMP1* input);
-void func_800693AC(HSD_GObj*, s32, s32, s32, f32, f32, f32);
+void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 arg1, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
 void func_8006A1BC();
 void func_8006A360();
 void func_8006ABA0();
