@@ -32,13 +32,13 @@ static s32 init_done;
 static s32 shown;
 
 static volatile OSHeapHandle current_heap = -1;
-GXRenderModeObj* rmode = &lbl_80401168;
+static GXRenderModeObj* rmode = &lbl_80401168;
 static int current_z_fmt = GX_ZC_MID;
-u32 iparam_fifo_size = HSD_DEFAULT_FIFO_SIZE;
-int iparam_xfb_max_num = HSD_DEFAULT_XFB_MAX_NUM;
-int iparam_heap_max_num = 4;
-u32 iparam_audio_heap_size = HSD_DEFAULT_AUDIO_SIZE;
-GXColor lbl_804D5E1C = { 0 };
+static u32 iparam_fifo_size = HSD_DEFAULT_FIFO_SIZE;
+static int iparam_xfb_max_num = HSD_DEFAULT_XFB_MAX_NUM;
+static int iparam_heap_max_num = 4;
+static u32 iparam_audio_heap_size = HSD_DEFAULT_AUDIO_SIZE;
+static GXColor lbl_804D5E1C = { 0 };
 
 void HSD_InitComponent(void)
 {
@@ -75,7 +75,7 @@ void HSD_GXSetFifoObj(GXFifoObj* fifo)
     DefaultFifoObj = fifo;
 }
 
-void HSD_DVDInit(void)
+static void HSD_DVDInit(void)
 {
 }
 
@@ -137,7 +137,7 @@ void* HSD_AllocateFIFO(u32 size)
     return fifo;
 }
 
-void HSD_GXInit(void)
+static void HSD_GXInit(void)
 {
     GXLightObj lightobj;
     int i;
@@ -156,7 +156,7 @@ void HSD_GXInit(void)
     func_80361FC4(-1);
 }
 
-void HSD_OSInit(void)
+static void HSD_OSInit(void)
 {
     u32 new_arena_lo;
     u32 new_arena_hi;
@@ -251,7 +251,7 @@ void func_803755A8(void)
         current_render_pass == 0;
 }
 
-void HSD_ObjInit(void)
+static void HSD_ObjInit(void)
 {
     HSD_ListInitAllocData();
     HSD_AObjInitAllocData();
