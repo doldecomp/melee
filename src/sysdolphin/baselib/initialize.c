@@ -31,7 +31,7 @@ static int current_pix_fmt;
 static s32 init_done;
 static s32 shown;
 
-static volatile OSHeapHandle lbl_804D5E00 = -1;
+static volatile OSHeapHandle current_heap = -1;
 GXRenderModeObj* rmode = &lbl_80401168;
 static int current_z_fmt = GX_ZC_MID;
 u32 iparam_fifo_size = HSD_DEFAULT_FIFO_SIZE;
@@ -174,8 +174,8 @@ void HSD_OSInit(void)
     new_arena_lo += iparam_audio_heap_size;
     hsd_heap_next_arena_lo = (void*) new_arena_lo;
     hsd_heap_next_arena_hi = (void*) new_arena_hi;
-    lbl_804D5E00 = OSCreateHeap((void*) new_arena_lo, (void*) new_arena_hi);
-    OSSetCurrentHeap(lbl_804D5E00);
+    current_heap = OSCreateHeap((void*) new_arena_lo, (void*) new_arena_hi);
+    OSSetCurrentHeap(current_heap);
     memReport.heap = new_arena_hi - new_arena_lo;
     HSD_ObjSetHeap(new_arena_hi - new_arena_lo, NULL);
     OSSetArenaLo((void*) new_arena_hi);
@@ -183,12 +183,12 @@ void HSD_OSInit(void)
 
 OSHeapHandle HSD_GetHeap(void)
 {
-    return lbl_804D5E00;
+    return current_heap;
 }
 
 void HSD_SetHeap(OSHeapHandle handle)
 {
-    lbl_804D5E00 = handle;
+    current_heap = handle;
 }
 
 void HSD_GetNextArena(void** lo, void** hi)
@@ -220,11 +220,11 @@ OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
     if (hi != NULL) {
         hsd_heap_next_arena_hi = hi;
     }
-    OSDestroyHeap(lbl_804D5E00);
-    lbl_804D5E00 = OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
-    OSSetCurrentHeap(lbl_804D5E00);
+    OSDestroyHeap(current_heap);
+    current_heap = OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
+    OSSetCurrentHeap(current_heap);
     HSD_ObjSetHeap((u32) hsd_heap_next_arena_hi - (u32) hsd_heap_next_arena_lo, NULL);
-    return lbl_804D5E00;
+    return current_heap;
 }
 
 HSD_RenderPass HSD_GetCurrentRenderPass(void)
