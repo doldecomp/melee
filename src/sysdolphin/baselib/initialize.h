@@ -4,18 +4,42 @@
 #include <global.h>
 
 #include <dolphin/types.h>
+#include <dolphin/os/OSAlloc.h>
+#include <sysdolphin/baselib/video.h>
 
-typedef struct _HSD_MemReport
-{
+typedef struct _HSD_MemReport {
     u32 total;
     u32 system;
     u32 xfb;
     u32 gxfifo;
     u32 heap;
+    u8 x14_pad[0x2C - 0x14];
 } HSD_MemReport;
 
+typedef enum _HSD_InitParam {
+    HSD_INIT_FIFO_SIZE,
+    HSD_INIT_XFB_MAX_NUM,
+    HSD_INIT_HEAP_MAX_NUM,
+    HSD_INIT_AUDIO_HEAP_SIZE,
+    HSD_INIT_RENDER_MODE_OBJ
+} HSD_InitParam;
+
 void HSD_InitComponent(void);
-void HSD_GXSetFifoObj(GXFifoObj* fifo);
+void HSD_GXSetFifoObj(GXFifoObj* fifo) ;
 void HSD_DVDInit(void);
+void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm);
+void* HSD_AllocateFIFO(u32 size);
+void HSD_GXInit(void);
+void HSD_OSInit(void);
+OSHeapHandle HSD_GetHeap(void);
+void HSD_SetHeap(OSHeapHandle handle);
+void HSD_GetNextArena(void** lo, void** hi);
+int func_80375428(void* lo, void* hi);
+HSD_RenderPass HSD_GetCurrentRenderPass(void);
+void func_80375538(HSD_RenderPass pass);
+void func_803755A8(void);
+void HSD_ObjInit(void);
+void func_803755F8(void); // HSD_ObjDumpStat
+BOOL HSD_SetInitParameter(HSD_InitParam param, ...);
 
 #endif
