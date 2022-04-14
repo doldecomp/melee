@@ -257,8 +257,8 @@ static void HSD_ObjInit(void)
     HSD_AObjInitAllocData();
     HSD_FObjInitAllocData();
     HSD_IDInitAllocData();
-    func_8037A714();
-    func_8037A750();
+    HSD_VecInitAllocData();
+    HSD_MtxInitAllocData();
     HSD_RObjInitAllocData();
     HSD_RenderInitAllocData();
     HSD_ShadowInitAllocData();
