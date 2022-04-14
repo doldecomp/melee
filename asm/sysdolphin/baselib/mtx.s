@@ -1368,8 +1368,8 @@ HSD_VecGetAllocData:
 /* 8037A70C 003772EC  38 63 23 10 */	addi r3, r3, lbl_804C2310@l
 /* 8037A710 003772F0  4E 80 00 20 */	blr 
 
-.global func_8037A714
-func_8037A714:
+.global HSD_VecInitAllocData
+HSD_VecInitAllocData:
 /* 8037A714 003772F4  7C 08 02 A6 */	mflr r0
 /* 8037A718 003772F8  3C 60 80 4C */	lis r3, lbl_804C2310@ha
 /* 8037A71C 003772FC  90 01 00 04 */	stw r0, 4(r1)
@@ -1389,8 +1389,8 @@ HSD_MtxGetAllocData:
 /* 8037A748 00377328  38 63 23 3C */	addi r3, r3, lbl_804C233C@l
 /* 8037A74C 0037732C  4E 80 00 20 */	blr 
 
-.global func_8037A750
-func_8037A750:
+.global HSD_MtxInitAllocData
+HSD_MtxInitAllocData:
 /* 8037A750 00377330  7C 08 02 A6 */	mflr r0
 /* 8037A754 00377334  3C 60 80 4C */	lis r3, lbl_804C233C@ha
 /* 8037A758 00377338  90 01 00 04 */	stw r0, 4(r1)

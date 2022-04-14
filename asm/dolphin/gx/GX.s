@@ -1016,8 +1016,8 @@ func_8033DE4C:
 /* 8033DE7C 0033AA5C  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033DE80 0033AA60  4E 80 00 20 */	blr 
 
-.global func_8033DE84
-func_8033DE84:
+.global GXInitLightAttn
+GXInitLightAttn:
 /* 8033DE84 0033AA64  D0 23 00 10 */	stfs f1, 0x10(r3)
 /* 8033DE88 0033AA68  D0 43 00 14 */	stfs f2, 0x14(r3)
 /* 8033DE8C 0033AA6C  D0 63 00 18 */	stfs f3, 0x18(r3)
@@ -1206,15 +1206,15 @@ lbl_8033E0E0:
 /* 8033E0E8 0033ACC8  D0 83 00 24 */	stfs f4, 0x24(r3)
 /* 8033E0EC 0033ACCC  4E 80 00 20 */	blr 
 
-.global func_8033E0F0
-func_8033E0F0:
+.global GXInitLightPos
+GXInitLightPos:
 /* 8033E0F0 0033ACD0  D0 23 00 28 */	stfs f1, 0x28(r3)
 /* 8033E0F4 0033ACD4  D0 43 00 2C */	stfs f2, 0x2c(r3)
 /* 8033E0F8 0033ACD8  D0 63 00 30 */	stfs f3, 0x30(r3)
 /* 8033E0FC 0033ACDC  4E 80 00 20 */	blr 
 
-.global func_8033E100
-func_8033E100:
+.global GXInitLightDir
+GXInitLightDir:
 /* 8033E100 0033ACE0  FC 80 08 50 */	fneg f4, f1
 /* 8033E104 0033ACE4  FC 20 10 50 */	fneg f1, f2
 /* 8033E108 0033ACE8  FC 00 18 50 */	fneg f0, f3
@@ -4504,8 +4504,8 @@ func_80340E38:
 /* 80340E70 0033DA50  B0 04 00 02 */	sth r0, 2(r4)
 /* 80340E74 0033DA54  4E 80 00 20 */	blr 
 
-.global func_80340E78
-func_80340E78:
+.global GXSetPixelFmt
+GXSetPixelFmt:
 /* 80340E78 0033DA58  80 ED A5 08 */	lwz r7, lbl_804D5BA8@sda21(r13)
 /* 80340E7C 0033DA5C  3C A0 80 40 */	lis r5, lbl_80401508@ha
 /* 80340E80 0033DA60  54 66 10 3A */	slwi r6, r3, 2
@@ -4639,8 +4639,8 @@ func_8034101C:
 /* 8034104C 0033DC2C  B0 04 00 02 */	sth r0, 2(r4)
 /* 80341050 0033DC30  4E 80 00 20 */	blr 
 
-.global func_80341054
-func_80341054:
+.global GXSetFieldMode
+GXSetFieldMode:
 /* 80341054 0033DC34  7C 08 02 A6 */	mflr r0
 /* 80341058 0033DC38  90 01 00 04 */	stw r0, 4(r1)
 /* 8034105C 0033DC3C  54 80 B0 92 */	rlwinm r0, r4, 0x16, 2, 9
