@@ -2102,7 +2102,6 @@ extern struct _ftCommonData* lbl_804D6554;
 // extern ? lbl_804D6578;
 // extern ? lbl_804D6580;
 // extern ? lbl_804D6588;
-// extern ? lbl_804D6590;
 // extern ? lbl_804D6594;
 // extern ? lbl_804D6598;
 // extern ? lbl_804D659A;

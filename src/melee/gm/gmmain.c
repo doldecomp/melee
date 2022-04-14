@@ -29,8 +29,8 @@ struct datetime {
     u8 month, day, hour, minute, second;
 };
 
-static u32 lbl_804D6590; // arena free size
-static s32 lbl_804D6594;
+static u32 arena_size;
+static BOOL lbl_804D6594;
 
 static u8 lbl_8046B108[0xF0];
 static HSD_PadRumbleListData lbl_8046B1F8[12];
@@ -129,7 +129,7 @@ void main(void)
     if (OSGetConsoleSimulatedMemSize() / (1024 * 1024) == 48) {
         OSAllocFromArenaHi(0x01800000, 4);
     }
-    lbl_804D6590 = OSGetArenaHi() - OSGetArenaLo();
+    arena_size = OSGetArenaHi() - OSGetArenaLo();
     HSD_SetInitParameter(HSD_INIT_XFB_MAX_NUM, 2);
     HSD_SetInitParameter(HSD_INIT_RENDER_MODE_OBJ, &lbl_80401168);
     HSD_SetInitParameter(HSD_INIT_FIFO_SIZE, 0x40000);
@@ -170,7 +170,7 @@ void main(void)
     OSReport("# Distribution %d\n", lbLang_GetLanguageSetting());
     OSReport("# Language %d\n", lbLang_GetSavedLanguage());
     OSReport("# DbLevel %d\n", lbl_804D4A08);
-    OSReport("# Arena Size %d MB\n", lbl_804D6590 / (1024 * 1024));
+    OSReport("# Arena Size %d MB\n", arena_size / (1024 * 1024));
     {
         u32 free_aram_start;
         u32 free_aram_end;
@@ -187,8 +187,8 @@ void main(void)
             dt.hour, dt.minute, dt.second);
     }
     OSReport("#\n\n");
-    lbl_804D6594 = 0;
-    if (lbl_804D6594 != 0) {
+    lbl_804D6594 = FALSE;
+    if (lbl_804D6594) {
         func_80225D2C();
     } else {
         func_80225D40();

@@ -23,21 +23,21 @@ extern GXRenderModeObj lbl_804C1D80;
 
 static void* FrameBuffer[HSD_VI_XFB_MAX];
 static HSD_MemReport memReport;
-static void* lbl_804D76B8;
-static void* lbl_804D76BC;
-static HSD_RenderPass lbl_804D76C0;
+static void* hsd_heap_next_arena_lo;
+static void* hsd_heap_next_arena_hi;
+static HSD_RenderPass current_render_pass;
 static GXFifoObj* DefaultFifoObj;
-static int lbl_804D76C8; // current_pix_fmt
+static int current_pix_fmt;
 static s32 init_done;
-static s32 lbl_804D76D0;
+static s32 shown;
 
 static volatile OSHeapHandle lbl_804D5E00 = -1;
 GXRenderModeObj* rmode = &lbl_80401168;
-static int lbl_804D5E08 = 2; // current_z_fmt
-u32 iparam_fifo_size = 0x40000;
-int lbl_804D5E10 = 2;
-int lbl_804D5E14 = 4;
-u32 lbl_804D5E18 = 0x80000;
+static int current_z_fmt = GX_ZC_MID;
+u32 iparam_fifo_size = HSD_DEFAULT_FIFO_SIZE;
+int iparam_xfb_max_num = HSD_DEFAULT_XFB_MAX_NUM;
+int iparam_heap_max_num = 4;
+u32 iparam_audio_heap_size = HSD_DEFAULT_AUDIO_SIZE;
 GXColor lbl_804D5E1C = { 0 };
 
 void HSD_InitComponent(void)
@@ -92,7 +92,7 @@ void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm)
     fb_size = ((rm->fbWidth + 0xF) & 0xFFF0) * rm->xfbHeight * 2;
     arena_lo = OSRoundUp32B(OSGetArenaLo());
     arena_hi = OSRoundDown32B(OSGetArenaHi());
-    FrameBuffer[5] = (void*) (fb_size * nbuffer);
+    memReport.xfb = fb_size * nbuffer;
     if (arena_lo == arena_hi) {
         for (i = 0; i < nbuffer; i++) {
             FrameBuffer[i] = OSAllocFromHeap(__OSCurrHeap, fb_size);
@@ -103,7 +103,7 @@ void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm)
             arena_lo = OSRoundUp32B(arena_lo + fb_size);
         }
         if (arena_lo > arena_hi) {
-            HSD_Panic(__FILE__, 0x109, "No memory space remains for XFB.\n");
+            HSD_Panic(__FILE__, 265, "No memory space remains for XFB.\n");
         }
         OSSetArenaLo((void*) arena_lo);
     }
@@ -124,13 +124,13 @@ void* HSD_AllocateFIFO(u32 size)
     if (arena_lo == 0 && arena_hi == 0) {
         fifo = OSAllocFromHeap(__OSCurrHeap, size);
         if (fifo == NULL) {
-            HSD_Panic("initialize.c", 0x127, "cannot allocate memory for gx fifo.\n");
+            HSD_Panic(__FILE__, 295, "cannot allocate memory for gx fifo.\n");
         }
     } else {
         fifo = (void*) arena_lo;
         arena_lo += size;
         if (arena_lo > (u32) OSGetArenaHi()) {
-            HSD_Panic("initialize.c", 0x12E, "no space remains for gx fifo.\n");
+            HSD_Panic(__FILE__, 302, "no space remains for gx fifo.\n");
         }
         OSSetArenaLo((void*) arena_lo);
     }
@@ -167,15 +167,15 @@ void HSD_OSInit(void)
     memReport.total = OSGetPhysicalMemSize();
     memReport.system = memReport.total - (u32) OSGetArenaHi() + (u32) OSGetArenaLo()
         - memReport.xfb - memReport.gxfifo;
-    arena_lo = (u32) OSInitAlloc((void*) arena_lo, (void*) arena_hi, lbl_804D5E14);
+    arena_lo = (u32) OSInitAlloc((void*) arena_lo, (void*) arena_hi, iparam_heap_max_num);
     OSSetArenaLo((void*) arena_lo);
 
     arena_lo = OSRoundUp32B(arena_lo);
     thing = OSRoundDown32B(arena_hi);
-    lbl_804D6018 = OSCreateHeap((void*) arena_lo, (void*) (arena_lo + lbl_804D5E18));
-    arena_lo += lbl_804D5E18;
-    lbl_804D76B8 = (void*) arena_lo;
-    lbl_804D76BC = (void*) thing;
+    lbl_804D6018 = OSCreateHeap((void*) arena_lo, (void*) (arena_lo + iparam_audio_heap_size));
+    arena_lo += iparam_audio_heap_size;
+    hsd_heap_next_arena_lo = (void*) arena_lo;
+    hsd_heap_next_arena_hi = (void*) thing;
     lbl_804D5E00 = OSCreateHeap((void*) arena_lo, (void*) thing);
     OSSetCurrentHeap(lbl_804D5E00);
     memReport.heap = thing - arena_lo;
@@ -195,11 +195,11 @@ void HSD_SetHeap(OSHeapHandle handle)
 
 void HSD_GetNextArena(void** lo, void** hi)
 {
-    *lo = lbl_804D76B8;
-    *hi = lbl_804D76BC;
+    *lo = hsd_heap_next_arena_lo;
+    *hi = hsd_heap_next_arena_hi;
 }
 
-int func_80375428(void* lo, void* hi)
+OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
 {
     int i;
     void (*cb_table[])() = {
@@ -214,44 +214,43 @@ int func_80375428(void* lo, void* hi)
     func_80382718("sysdolphin_base_library");
     HSD_ObjInit();
     for (i = 0; cb_table[i] != NULL; i++) {
-        cb_table[i](lbl_804D76B8, lbl_804D76BC);
+        cb_table[i](hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
     }
     if (lo != NULL) {
-        lbl_804D76B8 = lo;
+        hsd_heap_next_arena_lo = lo;
     }
     if (hi != NULL) {
-        lbl_804D76BC = hi;
+        hsd_heap_next_arena_hi = hi;
     }
     OSDestroyHeap(lbl_804D5E00);
-    lbl_804D5E00 = OSCreateHeap(lbl_804D76B8, lbl_804D76BC);
+    lbl_804D5E00 = OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
     OSSetCurrentHeap(lbl_804D5E00);
-    HSD_ObjSetHeap((u32) lbl_804D76BC - (u32) lbl_804D76B8, NULL);
+    HSD_ObjSetHeap((u32) hsd_heap_next_arena_hi - (u32) hsd_heap_next_arena_lo, NULL);
     return lbl_804D5E00;
 }
 
 HSD_RenderPass HSD_GetCurrentRenderPass(void)
 {
-    return lbl_804D76C0;
+    return current_render_pass;
 }
 
-void func_80375538(HSD_RenderPass pass)
+void HSD_StartRender(HSD_RenderPass pass)
 {
     GXRenderModeObj* rmode = &lbl_804C1D80;
-    lbl_804D76C0 = pass;
+    current_render_pass = pass;
     if (rmode->aa) {
-        GXSetPixelFmt(2, lbl_804D5E08);
+        GXSetPixelFmt(GX_PF_RGB565_Z16, current_z_fmt);
     } else {
-        GXSetPixelFmt(lbl_804D76C8, GX_ZC_LINEAR);
+        GXSetPixelFmt(current_pix_fmt, GX_ZC_LINEAR);
     }
     GXSetFieldMode(rmode->field_rendering, rmode->xfbHeight < rmode->viHeight);
 }
 
 void func_803755A8(void)
 {
-#ifndef NON_MATCHING
-    if (lbl_804D76C0 == 3)
-        lbl_804D76C0 == 0;
-#endif
+    // Does nothing, but need to force a comparison to make this match
+    if (current_render_pass == HSD_RP_OFFSCREEN)
+        current_render_pass == 0;
 }
 
 void HSD_ObjInit(void)
@@ -270,7 +269,7 @@ void HSD_ObjInit(void)
 
 static char unused[] = "pix_fmt != GX_PF_RGB565_Z16";
 
-void func_803755F8(void) // HSD_ObjDumpStat
+void HSD_ObjDumpStat(void)
 {
     HSD_ObjAllocInfo objs[] = {
         { HSD_AObjGetAllocData, "aobj", },
@@ -298,11 +297,12 @@ void func_803755F8(void) // HSD_ObjDumpStat
 BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
 {
     va_list ap;
-    BOOL result = FALSE;
+    BOOL ok = FALSE;
+
     if (init_done) {
-        if (!lbl_804D76D0) {
+        if (!shown) {
             OSReport("init parameter should be set before invoking HSD_Init().\n");
-            lbl_804D76D0 = TRUE;
+            shown = TRUE;
         }
         return FALSE;
     }
@@ -313,31 +313,31 @@ BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
         u32 fifo_size = va_arg(ap, u32);
         if (fifo_size > 0) {
             iparam_fifo_size = fifo_size;
-            result = TRUE;
+            ok = TRUE;
         }
     } break;
 
     case HSD_INIT_XFB_MAX_NUM: {
         u32 xfb_max_num = va_arg(ap, u32);
         if (xfb_max_num > 0) {
-            lbl_804D5E10 = xfb_max_num;
-            result = TRUE;
+            iparam_xfb_max_num = xfb_max_num;
+            ok = TRUE;
         }
     } break;
 
     case HSD_INIT_HEAP_MAX_NUM: {
         u32 heap_size = va_arg(ap, u32);
         if (heap_size > 0) {
-            lbl_804D5E14 = heap_size;
-            result = TRUE;
+            iparam_heap_max_num = heap_size;
+            ok = TRUE;
         }
     } break;
 
     case HSD_INIT_AUDIO_HEAP_SIZE: {
         u32 heap_size = va_arg(ap, u32);
         if (heap_size > 0) {
-            lbl_804D5E18 = heap_size;
-            result = TRUE;
+            iparam_audio_heap_size = heap_size;
+            ok = TRUE;
         }
     } break;
 
@@ -347,5 +347,5 @@ BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
     }
     va_end(ap);
 
-    return result;
+    return ok;
 }

@@ -39,21 +39,21 @@ typedef struct _HSD_ObjAllocInfo {
 inline u32 HSD_ObjAllocUsed(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
-    data ? (void) 0 : __assert(__FILE__, 0xCD, "data");
+    assert_line(205, data);
     return data->used;
 }
 
 inline u32 HSD_ObjAllocFree(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
-    data ? (void) 0 : __assert(__FILE__, 0xDD, "data");
+    assert_line(221, data);
     return data->free;
 }
 
 inline u32 HSD_ObjAllocPeak(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
-    data ? (void) 0 : __assert(__FILE__, 0xED, "data");
+    assert_line(237, data);
     return data->peak;
 }
 

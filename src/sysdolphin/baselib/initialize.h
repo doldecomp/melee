@@ -7,6 +7,10 @@
 #include <dolphin/os/OSAlloc.h>
 #include <sysdolphin/baselib/video.h>
 
+#define HSD_DEFAULT_FIFO_SIZE (256 * 1024)
+#define HSD_DEFAULT_XFB_MAX_NUM 2
+#define HSD_DEFAULT_AUDIO_SIZE (512 * 1024)
+
 typedef struct _HSD_MemReport {
     u32 total;
     u32 system;
@@ -34,12 +38,12 @@ void HSD_OSInit(void);
 OSHeapHandle HSD_GetHeap(void);
 void HSD_SetHeap(OSHeapHandle handle);
 void HSD_GetNextArena(void** lo, void** hi);
-int func_80375428(void* lo, void* hi);
+OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi);
 HSD_RenderPass HSD_GetCurrentRenderPass(void);
-void func_80375538(HSD_RenderPass pass);
+void HSD_StartRender(HSD_RenderPass pass);
 void func_803755A8(void);
 void HSD_ObjInit(void);
-void func_803755F8(void); // HSD_ObjDumpStat
+void HSD_ObjDumpStat(void);
 BOOL HSD_SetInitParameter(HSD_InitParam param, ...);
 
 #endif
