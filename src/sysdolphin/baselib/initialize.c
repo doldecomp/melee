@@ -158,29 +158,27 @@ void HSD_GXInit(void)
 
 void HSD_OSInit(void)
 {
-    u32 thing;
-    u32 arena_lo;
-    u32 arena_hi;
-
-    arena_lo = (u32) OSGetArenaLo();
-    arena_hi = (u32) OSGetArenaHi();
+    u32 new_arena_lo;
+    u32 new_arena_hi;
+    u32 old_arena_lo = (u32) OSGetArenaLo();
+    u32 old_arena_hi = (u32) OSGetArenaHi();
     memReport.total = OSGetPhysicalMemSize();
     memReport.system = memReport.total - (u32) OSGetArenaHi() + (u32) OSGetArenaLo()
         - memReport.xfb - memReport.gxfifo;
-    arena_lo = (u32) OSInitAlloc((void*) arena_lo, (void*) arena_hi, iparam_heap_max_num);
-    OSSetArenaLo((void*) arena_lo);
+    old_arena_lo = (u32) OSInitAlloc((void*) old_arena_lo, (void*) old_arena_hi, iparam_heap_max_num);
+    OSSetArenaLo((void*) old_arena_lo);
 
-    arena_lo = OSRoundUp32B(arena_lo);
-    thing = OSRoundDown32B(arena_hi);
-    lbl_804D6018 = OSCreateHeap((void*) arena_lo, (void*) (arena_lo + iparam_audio_heap_size));
-    arena_lo += iparam_audio_heap_size;
-    hsd_heap_next_arena_lo = (void*) arena_lo;
-    hsd_heap_next_arena_hi = (void*) thing;
-    lbl_804D5E00 = OSCreateHeap((void*) arena_lo, (void*) thing);
+    new_arena_lo = OSRoundUp32B(old_arena_lo);
+    new_arena_hi = OSRoundDown32B(old_arena_hi);
+    lbl_804D6018 = OSCreateHeap((void*) new_arena_lo, (void*) (new_arena_lo + iparam_audio_heap_size));
+    new_arena_lo += iparam_audio_heap_size;
+    hsd_heap_next_arena_lo = (void*) new_arena_lo;
+    hsd_heap_next_arena_hi = (void*) new_arena_hi;
+    lbl_804D5E00 = OSCreateHeap((void*) new_arena_lo, (void*) new_arena_hi);
     OSSetCurrentHeap(lbl_804D5E00);
-    memReport.heap = thing - arena_lo;
-    HSD_ObjSetHeap(thing - arena_lo, NULL);
-    OSSetArenaLo((void*) thing);
+    memReport.heap = new_arena_hi - new_arena_lo;
+    HSD_ObjSetHeap(new_arena_hi - new_arena_lo, NULL);
+    OSSetArenaLo((void*) new_arena_hi);
 }
 
 OSHeapHandle HSD_GetHeap(void)
