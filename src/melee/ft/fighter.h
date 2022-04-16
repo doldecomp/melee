@@ -125,8 +125,11 @@ typedef struct _ftCommonData {
     u8 filler_x4D0[0x5F0-0x4D0];
     /* 0x5F0 */ u32 x5F0;
     u8 filler_x5F4[0x6D8-0x5F4];
-   /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
-    struct RGBA filler_x6DC[(0x768-0x6DC) / 4];
+    /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
+    struct RGBA x6DC[4];
+    u8 filler_x6EC[0x6F8 - 0x6EC];
+    /* 0x6F8 */ f32 x6F8;
+    u8 filler_x768[0x768 - 0x6FC];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
@@ -707,11 +710,15 @@ typedef struct _Fighter {
     /* 0x1A6A */ s16 x1A6A;
     /* 0x1A6C */ f32 x1A6C;
     /* 0x1A70 */ Vec x1A70;
-    u8 filler_x1A6C[0x2008-0x1A7C];
+    u8 filler_x1A6C[0x2004-0x1A7C];
+    /* 0x2008 */ s32 x2004;
     /* 0x2008 */ s32 x2008;
     /* 0x200C */ s32 x200C;
     /* 0x2010 */ s32 x2010;
-    u8 filler_x2014[0x2028 - 0x2014];
+    /* 0x2014 */ s32 x2014;
+    /* 0x2018 */ s32 x2018;
+    /* 0x201C */ s32 x201C;
+    u8 filler_x2020[0x2028 - 0x2020];
     /* 0x2028 */ s32 x2028;
     /* 0x202C */ s32 x202C;
     s32 filler_x2030;
