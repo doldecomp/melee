@@ -218,10 +218,12 @@ void func_80067BB4(HSD_GObj* pPlayerEntity)
 // Fake Match:  https://decomp.me/scratch/dEh27
 // https://decomp.me/scratch/Xx6cI -- No Match, one mr instruction is shifted.
 
-void func_80067C98(register Fighter* ft) {
+////https://decomp.me/scratch/nnPbg   MATCH!!!!!
+
+void func_80067C98(Fighter* ft) {
 	Vec3 spC_player_coord;
 	f32 x,y,z;
-	register Fighter* tmp;
+	Fighter* tmp;
 
 	ft->x8_spawnNum = func_80068E40();
 	Player_800326CC(ft->xC_playerID, &spC_player_coord); //PlayerBlock_LoadPlayerCoords_StoreToR4
@@ -291,7 +293,7 @@ void func_80067C98(register Fighter* ft) {
 	ft->x2064_ledgeCooldown = 0;
 
 	//@1b4
-	ft->dmg.x1838_percentTemp = Player_GetDamage(ft->xC_playerID);
+	ft->dmg.x1830_percent = Player_GetDamage(ft->xC_playerID);
 
 	ft->dmg.x1838_percentTemp = 0.0f;//lbl_804D8254
 
@@ -397,14 +399,15 @@ void func_80067C98(register Fighter* ft) {
 	ft->x20AC = 0;
 	ft->x221C_flag.bits.b5 = 0;
 
+    ft->x2150 = 
+	ft->x2154 = 
+	ft->x2158 = 
+	ft->x215C = 
+	ft->x2160 = 
+	ft->x2144 = 
+	ft->x2148 =   
 	ft->x214C = -1;
-	ft->x2148 = -1;
-	ft->x2144 = -1;
-	ft->x2160 = -1;
-	ft->x215C = -1;
-	ft->x2158 = -1;
-	ft->x2154 = -1;
-	ft->x2150 = -1;
+    
 	ft->x2168 = 0;
 	ft->x2164 = 0;
 	ft->x208C = 0;
@@ -439,23 +442,21 @@ void func_80067C98(register Fighter* ft) {
 	ft->x2218_flag.bits.b6 = 0; // addi r3, ft, 0
 	ft->x2218_flag.bits.b7 = 0;
 
-	asm {
-		mr tmp, ft
-	}
+
+	tmp = ft;
 
 	ft->x1A40 = 0.0f;//lbl_804D8254
 	// -> mr r3, ft
 
-
 	ft->x1A44 = 0;
 	ft->x1A48 = 0;
 
-	ft->x68C_transNPos.z/*x694*/ = 0.0f;//lbl_804D8254
-	ft->x68C_transNPos.y/*x690*/ = 0.0f;//lbl_804D8254
-	ft->x68C_transNPos.x/*x68C*/ = 0.0f;//lbl_804D8254
-	ft->x6A4_transNOffset.z/*x6AC*/ = 0.0f;//lbl_804D8254
-	ft->x6A4_transNOffset.y/*x6A8*/ = 0.0f;//lbl_804D8254
-	ft->x6A4_transNOffset.x/*x6A4*/ = 0.0f;//lbl_804D8254
+	ft->x68C_transNPos.z= 0.0f;
+	ft->x68C_transNPos.y= 0.0f;
+	ft->x68C_transNPos.x= 0.0f;
+	ft->x6A4_transNOffset.z= 0.0f;
+	ft->x6A4_transNOffset.y= 0.0f;
+	ft->x6A4_transNOffset.x= 0.0f;
 	ft->x6BC_inputStickangle = 0.0f;//lbl_804D8254
 	// TODO: following three elements probably a vector because of the reverse order init that happens a lot with vectors
 	ft->x6C0.z = 0.0f;//lbl_804D8254
@@ -481,11 +482,7 @@ void func_80067C98(register Fighter* ft) {
 	ft->x2028 = 0;
 	ft->x202C = 0;
 
-	// sets some fighter flags and values to 0, see https://decomp.me/scratch/VBrFf
-	// using ft=tmp makes the compiler use the correct mr r3,ft instead of addi r3,ft,0.
-	// The mr is still in the wrong place.
 	func_800C88A0(tmp);
-
 
 	//@598
 	ft->x2227_flag.bits.b3 = 0;
