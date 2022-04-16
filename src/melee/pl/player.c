@@ -1107,9 +1107,9 @@ void Player_SetMoreFlagsBit2(s32 slot, u8 bit2) {
     player->more_flags.b2 = bit2;
 }
 
-u8 Player_GetMoreFlagsBit3(s32 slot) {   
+s32 Player_GetMoreFlagsBit3(s32 slot) {   
     StaticPlayer* player;
-    u8 bit3;
+    s32 bit3;
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];

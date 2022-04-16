@@ -20,7 +20,7 @@ extern struct S_TEMP3 lbl_803C2800[33];
 extern struct S_TEMP3* lbl_803C12E0[33];
 
 extern s32 lbl_803C125C;
-extern s32 lbl_803C1DB4;
+extern void (*lbl_803C1DB4[33])(HSD_GObj* obj);
 extern s8 lbl_803C26FC[33];
 
 extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
@@ -755,7 +755,7 @@ void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
 
     temp_r3 = fighter_r31->x61A_controller_index;
     if (temp_r3 != 0) {
-        temp_r3_s2 = &p_ftCommonData->x6D8[temp_r3 - 1];
+        temp_r3_s2 = &p_ftCommonData->x6DC[temp_r3 - 1];
         fighter_r31->filler_x610[0] = (temp_r3_s2->r * temp_r3_s2->a) / 0xff;
         fighter_r31->filler_x610[1] = (temp_r3_s2->g * temp_r3_s2->a) / 0xff;
         fighter_r31->filler_x610[2] = (temp_r3_s2->b * temp_r3_s2->a) / 0xff;
@@ -3623,7 +3623,7 @@ void func_8006CC30(f32 arg0, void* unk_ptr) {
 }
 
 
-asm void func_8006CC7C()
+asm void func_8006CC7C(f32, Fighter*)
 {
 	nofralloc 
 /* 8006CC7C 0006985C  7C 08 02 A6 */	mflr r0

@@ -226,7 +226,7 @@ s16 Player_GetOtherStamina(s32 slot);
 u32 Player_GetRemainingHP(s32 slot);
 u8 Player_GetMoreFlagsBit2(s32 slot);
 void Player_SetMoreFlagsBit2(s32 slot, u8 bit2);
-u8 Player_GetMoreFlagsBit3(s32 slot);
+s32 Player_GetMoreFlagsBit3(s32 slot);
 void Player_SetMoreFlagsBit3(s32 slot, u8 bit3);
 void Player_SetMoreFlagsBit4(s32 slot, u8 bit4);
 s32 Player_GetMoreFlagsBit4(s32 slot);
