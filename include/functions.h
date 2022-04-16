@@ -822,7 +822,7 @@ void func_8003E058();
 // ? func_8003EAAC(?);
 // ? func_8003EB30(?);
 // ? func_8003EC30(?);
-void func_8003EC9C();
+void func_8003EC9C(s32, s32, f32, f32);
 // ? func_8003ED0C(?);
 // ? func_8003EE2C(?);
 // ? func_8003F294(?);
@@ -1190,7 +1190,7 @@ void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighterObj, s32 arg1, 
 // ? func_8006ABEC(?);
 // ? func_8006C0F0(?);
 // ? func_8006CC30(?);
-// void func_8006CC7C(f32, struct _Fighter*);
+// void Fighter_TakeDamage_8006CC7C(f32, struct _Fighter*);
 // ? func_8006CDA4(?);
 // ? func_8006CF5C(?);
 // ? func_8006CFBC(?);

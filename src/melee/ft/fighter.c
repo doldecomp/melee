@@ -1687,7 +1687,7 @@ void func_8006A360(HSD_GObj* fighterObj, s32 unused) {
             fighter->x201C--;
 
             if (fighter->x201C == 0) {
-                func_8006CC7C(p_ftCommonData->x6F4, fighter);
+                Fighter_TakeDamage_8006CC7C(p_ftCommonData->x6F4, fighter);
                 fighter->x201C = p_ftCommonData->x6F8;
             }
 
@@ -1740,7 +1740,7 @@ void func_8006A360(HSD_GObj* fighterObj, s32 unused) {
                 }
 
                 if (fighter->dmg.x1910 >= p_ftCommonData->x7AC) {
-                    func_8006CC7C(p_ftCommonData->x7B4, fighter);
+                    Fighter_TakeDamage_8006CC7C(p_ftCommonData->x7B4, fighter);
                     fighter->dmg.x1910 = 0;
                 }
             }
@@ -3299,95 +3299,31 @@ void func_8006CB94(HSD_GObj* fighterObj) {
 
 ///https://decomp.me/scratch/UC5Tf
 void func_8006CC30(f32 arg0, void* unk_ptr) {
-    func_8006CC7C(arg0, unk_ptr);
+    Fighter_TakeDamage_8006CC7C(arg0, unk_ptr);
     func_8007EA90(unk_ptr, arg0);
 }
 
+void Fighter_TakeDamage_8006CC7C(f32 damage_amount, Fighter* fighter) {
 
-asm void func_8006CC7C(f32, Fighter*)
-{
-	nofralloc 
-/* 8006CC7C 0006985C  7C 08 02 A6 */	mflr r0
-/* 8006CC80 00069860  90 01 00 04 */	stw r0, 4(r1)
-/* 8006CC84 00069864  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 8006CC88 00069868  DB E1 00 28 */	stfd f31, 0x28(r1)
-/* 8006CC8C 0006986C  FF E0 08 90 */	fmr f31, f1
-/* 8006CC90 00069870  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8006CC94 00069874  7C 7F 1B 78 */	mr r31, r3
-/* 8006CC98 00069878  88 63 22 26 */	lbz r3, 0x2226(r3)
-/* 8006CC9C 0006987C  54 60 EF FF */	rlwinm. r0, r3, 0x1d, 0x1f, 0x1f
-/* 8006CCA0 00069880  41 82 00 0C */	beq lbl_8006CCAC
-/* 8006CCA4 00069884  54 60 E7 FF */	rlwinm. r0, r3, 0x1c, 0x1f, 0x1f
-/* 8006CCA8 00069888  41 82 00 E4 */	beq lbl_8006CD8C
-lbl_8006CCAC:
-/* 8006CCAC 0006988C  C0 1F 18 30 */	lfs f0, 0x1830(r31)
-/* 8006CCB0 00069890  EC 00 F8 2A */	fadds f0, f0, f31
-/* 8006CCB4 00069894  D0 1F 18 30 */	stfs f0, 0x1830(r31)
-/* 8006CCB8 00069898  80 1F 20 28 */	lwz r0, 0x2028(r31)
-/* 8006CCBC 0006989C  2C 00 00 00 */	cmpwi r0, 0
-/* 8006CCC0 000698A0  41 82 00 38 */	beq lbl_8006CCF8
-/* 8006CCC4 000698A4  80 7F 20 2C */	lwz r3, 0x202c(r31)
-/* 8006CCC8 000698A8  3C 00 43 30 */	lis r0, 0x4330
-/* 8006CCCC 000698AC  C8 22 88 80 */	lfd f1, lbl_804D8260(r2)
-/* 8006CCD0 000698B0  6C 63 80 00 */	xoris r3, r3, 0x8000
-/* 8006CCD4 000698B4  90 61 00 1C */	stw r3, 0x1c(r1)
-/* 8006CCD8 000698B8  90 01 00 18 */	stw r0, 0x18(r1)
-/* 8006CCDC 000698BC  C8 01 00 18 */	lfd f0, 0x18(r1)
-/* 8006CCE0 000698C0  EC 00 08 28 */	fsubs f0, f0, f1
-/* 8006CCE4 000698C4  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 8006CCE8 000698C8  FC 00 00 1E */	fctiwz f0, f0
-/* 8006CCEC 000698CC  D8 01 00 10 */	stfd f0, 0x10(r1)
-/* 8006CCF0 000698D0  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8006CCF4 000698D4  90 1F 20 2C */	stw r0, 0x202c(r31)
-lbl_8006CCF8:
-/* 8006CCF8 000698D8  80 1F 20 34 */	lwz r0, 0x2034(r31)
-/* 8006CCFC 000698DC  2C 00 00 00 */	cmpwi r0, 0
-/* 8006CD00 000698E0  41 82 00 38 */	beq lbl_8006CD38
-/* 8006CD04 000698E4  80 7F 20 38 */	lwz r3, 0x2038(r31)
-/* 8006CD08 000698E8  3C 00 43 30 */	lis r0, 0x4330
-/* 8006CD0C 000698EC  C8 22 88 80 */	lfd f1, lbl_804D8260(r2)
-/* 8006CD10 000698F0  6C 63 80 00 */	xoris r3, r3, 0x8000
-/* 8006CD14 000698F4  90 61 00 14 */	stw r3, 0x14(r1)
-/* 8006CD18 000698F8  90 01 00 10 */	stw r0, 0x10(r1)
-/* 8006CD1C 000698FC  C8 01 00 10 */	lfd f0, 0x10(r1)
-/* 8006CD20 00069900  EC 00 08 28 */	fsubs f0, f0, f1
-/* 8006CD24 00069904  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 8006CD28 00069908  FC 00 00 1E */	fctiwz f0, f0
-/* 8006CD2C 0006990C  D8 01 00 18 */	stfd f0, 0x18(r1)
-/* 8006CD30 00069910  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8006CD34 00069914  90 1F 20 38 */	stw r0, 0x2038(r31)
-lbl_8006CD38:
-/* 8006CD38 00069918  C0 3F 18 30 */	lfs f1, 0x1830(r31)
-/* 8006CD3C 0006991C  C0 02 88 B0 */	lfs f0, lbl_804D8290(r2)
-/* 8006CD40 00069920  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8006CD44 00069924  40 81 00 08 */	ble lbl_8006CD4C
-/* 8006CD48 00069928  D0 1F 18 30 */	stfs f0, 0x1830(r31)
-lbl_8006CD4C:
-/* 8006CD4C 0006992C  C0 1F 18 30 */	lfs f0, 0x1830(r31)
-/* 8006CD50 00069930  88 9F 22 1F */	lbz r4, 0x221f(r31)
-/* 8006CD54 00069934  FC 00 00 1E */	fctiwz f0, f0
-/* 8006CD58 00069938  88 7F 00 0C */	lbz r3, 0xc(r31)
-/* 8006CD5C 0006993C  54 84 EF FE */	rlwinm r4, r4, 0x1d, 0x1f, 0x1f
-/* 8006CD60 00069940  D8 01 00 10 */	stfd f0, 0x10(r1)
-/* 8006CD64 00069944  80 A1 00 14 */	lwz r5, 0x14(r1)
-/* 8006CD68 00069948  4B FC 76 B1 */	bl Player_SetHPByIndex
-/* 8006CD6C 0006994C  88 9F 22 1F */	lbz r4, 0x221f(r31)
-/* 8006CD70 00069950  FC 40 F8 90 */	fmr f2, f31
-/* 8006CD74 00069954  88 7F 00 0C */	lbz r3, 0xc(r31)
-/* 8006CD78 00069958  C0 3F 18 30 */	lfs f1, 0x1830(r31)
-/* 8006CD7C 0006995C  54 84 EF FE */	rlwinm r4, r4, 0x1d, 0x1f, 0x1f
-/* 8006CD80 00069960  4B FD 1F 1D */	bl func_8003EC9C
-/* 8006CD84 00069964  80 7F 00 00 */	lwz r3, 0(r31)
-/* 8006CD88 00069968  48 05 BE FD */	bl func_800C8C84
-lbl_8006CD8C:
-/* 8006CD8C 0006996C  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 8006CD90 00069970  CB E1 00 28 */	lfd f31, 0x28(r1)
-/* 8006CD94 00069974  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 8006CD98 00069978  38 21 00 30 */	addi r1, r1, 0x30
-/* 8006CD9C 0006997C  7C 08 03 A6 */	mtlr r0
-/* 8006CDA0 00069980  4E 80 00 20 */	blr  
+    if (!fighter->x2226_flag.bits.b4 || fighter->x2226_flag.bits.b3) {
+        fighter->dmg.x1830_percent += damage_amount;
+        if (fighter->x2028) {
+            fighter->x202C -= damage_amount;
+        }
+
+        if (fighter->x2034) {
+            fighter->x2038 -= damage_amount;
+        }
+
+        if (fighter->dmg.x1830_percent > 999.0f) {
+            fighter->dmg.x1830_percent = 999.0f;
+        }
+        Player_SetHPByIndex(fighter->xC_playerID, fighter->x221F_flag.bits.b4, fighter->dmg.x1830_percent);
+        func_8003EC9C(fighter->xC_playerID, fighter->x221F_flag.bits.b4, fighter->dmg.x1830_percent, damage_amount);
+        func_800C8C84(fighter->x0_fighter);
+        
+    }
 }
-
 
 asm void func_8006CDA4()
 {
@@ -3777,7 +3713,7 @@ lbl_8006D358:
 /* 8006D370 00069F50  D0 3E 18 9C */	stfs f1, 0x189c(r30)
 /* 8006D374 00069F54  C3 FE 18 38 */	lfs f31, 0x1838(r30)
 /* 8006D378 00069F58  FC 20 F8 90 */	fmr f1, f31
-/* 8006D37C 00069F5C  4B FF F9 01 */	bl func_8006CC7C
+/* 8006D37C 00069F5C  4B FF F9 01 */	bl Fighter_TakeDamage_8006CC7C
 /* 8006D380 00069F60  FC 00 F8 1E */	fctiwz f0, f31
 /* 8006D384 00069F64  7F C3 F3 78 */	mr r3, r30
 /* 8006D388 00069F68  D8 01 00 28 */	stfd f0, 0x28(r1)
@@ -4013,7 +3949,7 @@ lbl_8006D6A0:
 /* 8006D6B4 0006A294  41 82 00 34 */	beq lbl_8006D6E8
 /* 8006D6B8 0006A298  7F C3 F3 78 */	mr r3, r30
 /* 8006D6BC 0006A29C  FC 20 F0 90 */	fmr f1, f30
-/* 8006D6C0 0006A2A0  4B FF F5 BD */	bl func_8006CC7C
+/* 8006D6C0 0006A2A0  4B FF F5 BD */	bl Fighter_TakeDamage_8006CC7C
 /* 8006D6C4 0006A2A4  FC 00 F0 1E */	fctiwz f0, f30
 /* 8006D6C8 0006A2A8  7F C3 F3 78 */	mr r3, r30
 /* 8006D6CC 0006A2AC  D8 01 00 28 */	stfd f0, 0x28(r1)
