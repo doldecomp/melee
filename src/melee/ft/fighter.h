@@ -91,7 +91,12 @@ typedef enum CharacterKind
 } CharacterKind;
 
 
-
+struct RGBA {
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+};
 
 // Points to data in PiCo.dat
 typedef struct _ftCommonData {
@@ -121,7 +126,7 @@ typedef struct _ftCommonData {
     /* 0x5F0 */ u32 x5F0;
     u8 filler_x5F4[0x6D8-0x5F4];
    /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
-    u8 filler_x6DC[0x768-0x6DC];
+    struct RGBA filler_x6DC[(0x768-0x6DC) / 4];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;

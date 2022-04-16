@@ -2089,7 +2089,7 @@ void func_800A1A24();
 // ? func_800A1CC4(?);
 // ? func_800A1F3C(?);
 // ? func_800A1F98(?);
-void func_800A2040();
+s32 func_800A2040();
 // ? func_800A20A0(?);
 // ? func_800A2170(?);
 // ? func_800A21FC(?);

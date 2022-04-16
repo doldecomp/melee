@@ -216,7 +216,7 @@ void func_80067BB4(HSD_GObj* pPlayerEntity)
 
 // Fake Match:  https://decomp.me/scratch/Pegi9
 // Fake Match:  https://decomp.me/scratch/dEh27
-// https://decomp.me/scratch/gLTPC -- No Match, one mr instruction is shifted.
+// https://decomp.me/scratch/Xx6cI -- No Match, one mr instruction is shifted.
 
 void func_80067C98(register Fighter* ft) {
 	Vec3 spC_player_coord;
@@ -722,9 +722,11 @@ void func_80068854(HSD_GObj* fighterObj) {
 
 
 ///https://decomp.me/scratch/4m0tc  ///NON_MATCHING  but very close, 1 or 2 register swaps
+//// updated - https://decomp.me/scratch/Bihks
+//// matched!!! - https://decomp.me/scratch/1ubn4
 void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
     u32 temp_r3;
-    u8* temp_r3_s2;
+    struct RGBA* temp_r3_s2;
     ftData** temp_r4;
     Fighter* fighter_r31;
     Fighter* temp_r6;
@@ -756,11 +758,11 @@ void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
 
     temp_r3 = fighter_r31->x61A_controller_index;
     if (temp_r3 != 0) {
-        temp_r3_s2 = (u8*) &p_ftCommonData->filler_x6DC[temp_r3 - 1];
-        fighter_r31->filler_x610[0] = (temp_r3_s2[0] * temp_r3_s2[3]) / 0xff;
-        fighter_r31->filler_x610[1] = (temp_r3_s2[1] * temp_r3_s2[3]) / 0xff;
-        fighter_r31->filler_x610[2] = (temp_r3_s2[2] * temp_r3_s2[3]) / 0xff;
-        fighter_r31->filler_x610[3] = temp_r3_s2[3];
+        temp_r3_s2 = &p_ftCommonData->filler_x6DC[temp_r3 - 1];
+        fighter_r31->filler_x610[0] = (temp_r3_s2->r * temp_r3_s2->a) / 0xff;
+        fighter_r31->filler_x610[1] = (temp_r3_s2->g * temp_r3_s2->a) / 0xff;
+        fighter_r31->filler_x610[2] = (temp_r3_s2->b * temp_r3_s2->a) / 0xff;
+        fighter_r31->filler_x610[3] = temp_r3_s2->a;
     }
 
     phi_r3 = Player_GetCostumeId(fighter_r31->xC_playerID);
@@ -791,59 +793,62 @@ void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
 
 
     temp_r6 = fighterObj->user_data;
-
+    
+    temp_r6->x650 = 
+    temp_r6->x654 = 
+    temp_r6->x638 = 
+    temp_r6->x63C = 
+    temp_r6->x640 = 
+    temp_r6->x644 = 
+    temp_r6->x620_lstick_x = 
+    temp_r6->x624_lstick_y = 
+    temp_r6->x628_lstick_z = 
     temp_r6->x62C = 0.0f;
-    temp_r6->x628_lstick_z = 0.0f;
-    temp_r6->x624_lstick_y = 0.0f;
-    temp_r6->x620_lstick_x = 0.0f;
-    temp_r6->x644 = 0.0f;
-    temp_r6->x640 = 0.0f;
-    temp_r6->x63C = 0.0f;
-    temp_r6->x638 = 0.0f;
-    temp_r6->x654 = 0.0f;
-    temp_r6->x650 = 0.0f;
 
     temp_r6->x660 = 0;
     temp_r6->x66C = 0;
     temp_r6->x668 = 0;
     temp_r6->x65C = 0;
 
+    
+    temp_r6->x679_x = 
+    temp_r6->x67A_y = 
+    temp_r6->x67B_z = 
+
+    temp_r6->x676_x = 
+    temp_r6->x677_y = 
+    temp_r6->x678_z = 
+
+    temp_r6->x673_x = 
+    temp_r6->x674_y = 
+    temp_r6->x675_z = 
+
+    temp_r6->x670_timer_lstick_tilt_x = 
+    temp_r6->x671_timer_lstick_tilt_y = 
     temp_r6->x672_timer_lstick_tilt_z = 0xFE;
-    temp_r6->x671_timer_lstick_tilt_y = 0xFE;
-    temp_r6->x670_timer_lstick_tilt_x = 0xFE;
-
-    temp_r6->x675_z = 0xFE;
-    temp_r6->x674_y = 0xFE;
-    temp_r6->x673_x = 0xFE;
-
-    temp_r6->x678_z = 0xFE;
-    temp_r6->x677_y = 0xFE;
-    temp_r6->x676_x = 0xFE;
-
-    temp_r6->x67B_z = 0xFE;
-    temp_r6->x67A_y = 0xFE;
-    temp_r6->x679_x = 0xFE;
 
 
+    temp_r6->x67C = 
+    temp_r6->x67D = 
+    temp_r6->x67E = 
+    temp_r6->x681 = 
+    temp_r6->x682 = 
+    temp_r6->x67F = 
+    temp_r6->x680 = 
+    temp_r6->x683 = 
+    temp_r6->x684 = 
+    temp_r6->x685 = 
+    temp_r6->x686 = 
+    temp_r6->x687 = 
+    temp_r6->x688 = 
+    temp_r6->x689 = 
+    temp_r6->x68A = 
     temp_r6->x68B = 0xFF;
-    temp_r6->x68A = 0xFF;
-    fighter_r31->x21FC = 1;
-    temp_r6->x689 = 0xFF;
-    temp_r6->x688 = 0xFF;
-    temp_r6->x687 = 0xFF;
-    temp_r6->x686 = 0xFF;
-    temp_r6->x685 = 0xFF;
-    temp_r6->x684 = 0xFF;
-    temp_r6->x683 = 0xFF;
-    temp_r6->x680 = 0xFF;
-    temp_r6->x67F = 0xFF;
-    temp_r6->x682 = 0xFF;
-    temp_r6->x681 = 0xFF;
-    temp_r6->x67E = 0xFF;
-    temp_r6->x67D = 0xFF;
-    temp_r6->x67C = 0xFF;
+
 
     fighter_r31->x594_s32 = 0;
+    fighter_r31->x21FC = 1;
+
 
     fighter_r31->x221E_flag.bits.b0 = 0;
     fighter_r31->x221E_flag.bits.b1 = 0;
@@ -907,8 +912,6 @@ void func_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
 
 
     fighter_r31->x2229_b3 = 0;
-
-
 }
 
 
@@ -2220,29 +2223,12 @@ lbl_8006AB88:
 /* 8006AB9C 0006777C  4E 80 00 20 */	blr 
 }
 
-asm void func_8006ABA0()
-{
-	nofralloc
-/* 8006ABA0 00067780  7C 08 02 A6 */	mflr r0
-/* 8006ABA4 00067784  90 01 00 04 */	stw r0, 4(r1)
-/* 8006ABA8 00067788  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8006ABAC 0006778C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8006ABB0 00067790  7C 7F 1B 78 */	mr r31, r3
-/* 8006ABB4 00067794  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8006ABB8 00067798  88 03 22 1F */	lbz r0, 0x221f(r3)
-/* 8006ABBC 0006779C  54 00 E7 FF */	rlwinm. r0, r0, 0x1c, 0x1f, 0x1f
-/* 8006ABC0 000677A0  40 82 00 18 */	bne lbl_8006ABD8
-/* 8006ABC4 000677A4  48 03 74 7D */	bl func_800A2040
-/* 8006ABC8 000677A8  2C 03 00 00 */	cmpwi r3, 0
-/* 8006ABCC 000677AC  41 82 00 0C */	beq lbl_8006ABD8
-/* 8006ABD0 000677B0  7F E3 FB 78 */	mr r3, r31
-/* 8006ABD4 000677B4  48 04 8D 2D */	bl func_800B3900
-lbl_8006ABD8:
-/* 8006ABD8 000677B8  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8006ABDC 000677BC  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8006ABE0 000677C0  38 21 00 18 */	addi r1, r1, 0x18
-/* 8006ABE4 000677C4  7C 08 03 A6 */	mtlr r0
-/* 8006ABE8 000677C8  4E 80 00 20 */	blr  
+/// https://decomp.me/scratch/Y9c4V
+void func_8006ABA0(HSD_GObj* fighterObj) {
+    Fighter* fp = fighterObj->user_data;
+    if ((fp->x221F_flag.bits.b3 == 0) && (func_800A2040() != 0)) {
+        func_800B3900(fighterObj);
+    }
 }
 
 
