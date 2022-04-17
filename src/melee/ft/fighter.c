@@ -27,7 +27,7 @@ extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
 extern HSD_ObjAllocData lbl_80458FD0;
 extern HSD_ObjAllocData lbl_80458FFC;
 
-extern HSD_RumbleData HSD_PadRumbleData[4]; // from sysdolphin/baselib/controller.s
+extern HSD_PadStatus HSD_PadRumbleData[4];
 
 typedef struct StageInfo { u8 filler[0x748]; };
 extern StageInfo stage_info; // from asm/melee/text_2.s
@@ -1573,14 +1573,14 @@ void func_8006A1BC(HSD_GObj* fighterObj) {
 }
 
 //// https://decomp.me/scratch/6uj7U
-inline s32 checkItem_func_800C511C(struct _HSD_GObj* item, struct _HSD_GObj* fighterObj)
-{
-    if (itGetKind(item) != 0x1C) {
-        return 0;
-    } else {
-        func_800C511C(fighterObj);
-    }
-}
+// inline s32 checkItem_func_800C511C(struct _HSD_GObj* item, struct _HSD_GObj* fighterObj)
+// {
+//     if (itGetKind(item) != 0x1C) {
+//         return 0;
+//     } else {
+//         func_800C511C(fighterObj);
+//     }
+// }
 
 void func_8006A360(HSD_GObj* fighterObj, s32 unused) {
     
@@ -1769,7 +1769,11 @@ void func_8006A360(HSD_GObj* fighterObj, s32 unused) {
         }
 
         if (fighter->x1974_heldItem) {
-            (void)(checkItem_func_800C511C(fighter->x1974_heldItem, fighterObj));
+            if (itGetKind(fighter->x1974_heldItem) != 0x1C) {
+                (void)fighter;
+            } else {
+                func_800C511C(fighterObj);
+            }
         }
 
         if (fighter->dmg.x18fa_model_shift_frames) {

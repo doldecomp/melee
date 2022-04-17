@@ -511,7 +511,7 @@ typedef struct _Fighter {
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
     u8 filler_x610[0x618 - 0x610];
-    /* 0x618 */ s8 x618_player_id;
+    /* 0x618 */ u8 x618_player_id;
     /* 0x619 */ u8 x619_costume_id;
     /* 0x61A */ u8 x61A_controller_index;
     /* 0x61B */ u8 x61B_team;
