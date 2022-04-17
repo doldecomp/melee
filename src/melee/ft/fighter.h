@@ -100,7 +100,15 @@ struct RGBA {
 
 // Points to data in PiCo.dat
 typedef struct _ftCommonData {
-    u8 filler_x0[0x98];
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+
+    u8 filler_x1C[0x98 - 0x1C];
     /* 0x98 */ f32 x98_shieldHealthInit;
     u8 filler_x9C[0x134-0x9C];
     /* 0x134 */  s32 x134;
@@ -130,7 +138,8 @@ typedef struct _ftCommonData {
     u8 filler_x6EC[0x6F4 - 0x6EC];
     /* 0x6F4 */ s32 x6F4;
     /* 0x6F8 */ s32 x6F8;
-    u8 filler_x768[0x768 - 0x6FC];
+    /* 0x6FC */ s32 x6FC;
+    u8 filler_x768[0x768 - 0x700];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
