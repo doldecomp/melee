@@ -529,7 +529,7 @@ typedef struct _Fighter {
     u8 filler_x61E[0x620 - 0x61E];
     /* 0x620 */ f32 x620_lstick_x;
     /* 0x624 */ f32 x624_lstick_y;
-    /* 0x628 */ f32 x628_lstick_z;
+    /* 0x628 */ f32 x628;
     /* 0x62C */ f32 x62C;
 
     /* 0x630 */ f32 x630;
@@ -556,19 +556,19 @@ typedef struct _Fighter {
 
     /* 0x670 */ u8 x670_timer_lstick_tilt_x;
     /* 0x671 */ u8 x671_timer_lstick_tilt_y;
-    /* 0x672 */ u8 x672_timer_lstick_tilt_z;
+    /* 0x672 */ u8 x672;
 
     /* 0x673 */ u8 x673_x;
     /* 0x674 */ u8 x674_y;
-    /* 0x674 */ u8 x675_z;
+    /* 0x674 */ u8 x675;
 
     /* 0x676 */ u8 x676_x;
     /* 0x677 */ u8 x677_y;
-    /* 0x678 */ u8 x678_z;
+    /* 0x678 */ u8 x678;
 
     /* 0x679 */ u8 x679_x;
     /* 0x67A */ u8 x67A_y;
-    /* 0x67B */ u8 x67B_z;
+    /* 0x67B */ u8 x67B;
 
     /* 0x67C */ u8 x67C;
     /* 0x67D */ u8 x67D;
