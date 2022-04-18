@@ -112,7 +112,9 @@ typedef struct _ftCommonData {
     /* 0x98 */ f32 x98_shieldHealthInit;
     u8 filler_x9C[0x134-0x9C];
     /* 0x134 */  s32 x134;
-    u8 filler_x138[0x200-0x138];
+    u8 filler_x138[0x194-0x138];
+    /* 0x194 */  f32 x194;
+    u8 filler_x198[0x200-0x198];
     /* 0x200 */  f32 x200;
     /* 0x204 */  f32 x204_knockbackFrameDecay;
     u8 filler_x208[0x21C-0x208];
@@ -129,7 +131,9 @@ typedef struct _ftCommonData {
     u8 filler_x298[0x2DC-0x298];
     /* 0x2DC */ f32 x2DC;
     /* 0x2E0 */ f32 x2E0;
-    u8 filler_x2E4[0x3E8-0x2E4];
+    u8 filler_x2E4[0x3E0-0x2E4];
+    /* 0x3E0 */ f32 x3E0;
+    /* 0x3E4 */ f32 x3E4;
     /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
     /* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
     u8 filler_x3F0[0x480-0x3F0];
@@ -688,7 +692,7 @@ typedef struct _Fighter {
         s32 x1920;                                             // 0x1920
         s32 x1924;                                             // 0x1924
         f32 x1928;                                             // 0x1928
-        s32 x192c;                                             // 0x192c
+        f32 x192c;                                             // 0x192c
         s32 x1930;                                             // 0x1930
         s32 x1934;                                             // 0x1934
         s32 x1938;                                             // 0x1938
@@ -740,7 +744,7 @@ typedef struct _Fighter {
     /* 0x1A54 */ s32 x1A54;
     /* 0x1A58 */ HSD_GObj* x1A58;
     /* 0x1A5C */ HSD_GObj* x1A5C;
-    /* 0x1A60 */ s32 x1A60;
+    /* 0x1A60 */ u32 x1A60;
     /* 0x1A64 */ s32 x1A64;
     /* 0x1A68 */ s16 x1A68;
     /* 0x1A6A */ s16 x1A6A;
@@ -768,7 +772,7 @@ typedef struct _Fighter {
                         UnkFlagStruct x2070;
                         UnkFlagStruct x2071;
                         UnkFlagStruct x2072;
-                        UnkFlagStruct x2073;
+                        u8 x2073;
                     };
                     s32 x2070_int;
                 };
@@ -783,7 +787,7 @@ typedef struct _Fighter {
     /* 0x20A0 */ HSD_JObj* x20A0;
     /* 0x20A4 */ s32 x20A4;
     /* 0x20A8 */ s32 x20A8;
-    /* 0x20AC */ s32 x20AC;
+    /* 0x20AC */ u32 x20AC;
     u8 filler_x20B0[0x2100 - 0x20B0];
     /* 0x2100 */ s8 x2100;
     /* 0x2101 */ u8 x2101_bits_0to6 : 7;
@@ -965,7 +969,7 @@ void func_8006C80C(HSD_GObj* fighterObj);
 void func_8006CA5C(HSD_GObj* fighterObj);
 void func_8006CB94(HSD_GObj* fighterObj);
 void func_8006CC30(f32 arg0, void* unk_ptr);
-void Fighter_TakeDamage_8006CC7C(f32, Fighter*);
+void Fighter_TakeDamage_8006CC7C(Fighter*, f32);
 void func_8006CDA4();
 void func_8006CF5C(Fighter* fighter, s32 arg1);
 void func_8006CFBC(HSD_GObj* fighterObj);
