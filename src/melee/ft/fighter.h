@@ -119,9 +119,17 @@ typedef struct _ftCommonData {
     /* 0x21C */ f32 x21C;
     u8 filler_x220[0x260-0x220];
     /* 0x260 */ f32 x260;
-    u8 filler_x264[0x294-0x264];
+    u8 filler_x264[0x27C-0x264];
+    /* 0x27C */ f32 x27C;
+    /* 0x280 */ f32 x280;
+    /* 0x284 */ f32 x284;
+    /* 0x288 */ f32 x288;
+    u8 filler_x28C[0x294-0x28C];
     /* 0x294 */ f32 x294;
-    u8 filler_0x3E8[0x3E8-0x298];
+    u8 filler_x298[0x2DC-0x298];
+    /* 0x2DC */ f32 x2DC;
+    /* 0x2E0 */ f32 x2E0;
+    u8 filler_x2E4[0x3E8-0x2E4];
     /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
     /* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
     u8 filler_x3F0[0x480-0x3F0];
@@ -712,7 +720,7 @@ typedef struct _Fighter {
     /* 0x1998 */ f32 x1998_shieldHealth;
     /* 0x199C */ f32 x199C_shieldLightshieldAmt;
     /* 0x19A0 */ s32 x19A0_shieldDamageTaken;
-    /* 0x19A4 */ void* x19A4;
+    /* 0x19A4 */ s32 x19A4;
     /* 0x19A8 */ void* x19A8;
     /* 0x19AC */ f32 x19AC;
     s32 filler_x19B0;

@@ -3167,6 +3167,7 @@ lbl_8006D1D8:
 /* 8006D1E8 00069DC8  4E 80 00 20 */	blr 
 }
 
+///https://decomp.me/scratch/U3gL9
 asm void func_8006D1EC()
 {
 	nofralloc
