@@ -17,6 +17,8 @@ extern void func_800E13F8(HSD_GObj*);
 extern void ef_Spawn(long,...);
 extern const f32 lbl_804D9198;
 extern const f32 lbl_804D919C;
+extern const f32 lbl_804D91A0;
+extern const f32 lbl_804D91A4;
 extern s32 lbl_803C5A20[];
 
 inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
@@ -413,4 +415,23 @@ BOOL func_800E1428(HSD_GObj* gobj) {
     } else {
         return 1;
     }
+}
+
+void func_800E1450(HSD_GObj* gobj) {
+    f32 f1;
+    Fighter* ft;
+    u8 unused[16];
+    ft = gobj->user_data;
+    ft->x80_self_vel.y = f1 = lbl_804D91A0;
+
+    //(((Fighter*)(gobj->user_data))->x80_self_vel).y = lbl_804D91A0;
+    //func_800693AC(gobj, 0x159,0,0,lbl_804D91A0,lbl_804D91A4,lbl_804D91A0);
+    func_800693AC(gobj, 0x159,0,0,f1,lbl_804D91A4,f1);
+    func_8006EBA4(gobj);
+    ft = gobj->user_data;
+    ft->x2200_ftcmd_var2 = 0;
+    ft->x2200_ftcmd_var1 = 0;
+    ft->x2200_ftcmd_var0 = 0;
+    ft->x2340_stateVar1 = 0;
+    ft->cb.x21BC_callback_Accessory4 = func_800E1248;
 }
