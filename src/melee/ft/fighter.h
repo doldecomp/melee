@@ -136,7 +136,10 @@ typedef struct _ftCommonData {
     /* 0x3E4 */ f32 x3E4;
     /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
     /* 0x3EC */ f32 x3EC_shieldGroundFrictionMultiplier;
-    u8 filler_x3F0[0x480-0x3F0];
+    u8 filler_x3F0[0x418-0x3F0];
+    /* 0x418 */ s32 x418;
+    /* 0x41C */ s32 x41C;
+    u8 filler_x420[0x480-0x420];
     /* 0x480 */ f32 x480;
     u8 filler_x484[0x498-0x484];
     /* 0x498 */ u32 x498_ledgeCooldownTime;
@@ -513,7 +516,9 @@ typedef struct _Fighter {
     /* 0x3E8 */ f32 x3E8;
     /* 0x3EC */ s32 x3EC;
     /* 0x3F0 */ s32 x3F0;
-    u8 filler_x3F4[0x590 - 0x3F4];
+    u8 filler_x3F4[0x588 - 0x3F4];
+    /* 0x588 */ s32 x588;
+    /* 0x58C */ s32 x58C;
     /* 0x590 */ s32 x590;
     /* 0x594 */ union {
                     struct {
@@ -525,9 +530,14 @@ typedef struct _Fighter {
                     };
                     s32 x594_s32;
                 };
-    u8 filler_x598[0x5E8 - 0x598];
+    /* 0x598 */ s32 x598;
+    /* 0x59C */ s32 x59C;
+    /* 0x5A0 */ s32 x5A0;
+    u8 filler_x598[0x5E8 - 0x5A4];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
-    u8 filler_x5EC[0x5F8 - 0x5EC];
+    u8 filler_x5EC[0x5F0 - 0x5EC];
+    /* 0x5F0 */ s32 x5F0;
+    /* 0x5F4 */ s32 x5F4;
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
@@ -616,7 +626,7 @@ typedef struct _Fighter {
     /* 0x8A0 */ f32 x8A0;
     /* 0x8A4 */ f32 x8A4;
     /* 0x8A8 */ f32 x8A8;
-    /* 0x8AC */ s32 x8AC_animSkeleton;
+    /* 0x8AC */ HSD_JObj* x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
     /* 0x914 */ Hitbox x914[4];
     u8 filler_xDF4[0x1064 - 0xDF4];
@@ -764,7 +774,9 @@ typedef struct _Fighter {
     /* 0x2030 */ s32 x2030;
     /* 0x2034 */ s32 x2034;
     /* 0x2038 */ s32 x2038;
-    u8 filler_x203C[0x2064 - 0x203C];
+    /* 0x203C */ s32 x203C;
+    /* 0x2040 */ s32 x2040;
+    u8 filler_x203C[0x2064 - 0x2044];
     /* 0x2064 */ s32 x2064_ledgeCooldown;
     u8 filler_x2068[0x2070 - 0x2068];
     /* 0x2068 */ union {

@@ -1,6 +1,6 @@
 .include "macros.inc"
 
-.section .text  # 0x800679B0 - 0x8006DBF0
+.section .text  # 0x800679B0 - 0x8006DBF0 
 
 .section .rodata
     .balign 8
