@@ -24,7 +24,7 @@ extern void (*lbl_803C1DB4[33])(HSD_GObj* obj);
 extern s8 lbl_803C26FC[33];
 
 extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
-extern HSD_ObjAllocData lbl_80458FFC;
+
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
@@ -42,79 +42,80 @@ extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
 // .section .rodata
 
-extern const Vec3 lbl_803B7488; // = (0,0,0)
-extern const Vec3 lbl_803B7494; // = (0,0,0)
+const Vec3 lbl_803B7488 = { 0.0f, 0.0f, 0.0f };
+const Vec3 lbl_803B7494 = { 0.0f, 0.0f, 0.0f };
 
 // .section .data
 
-extern char lbl_803C0530[];// = "PlCo.dat";
-extern char lbl_803C053C[];// = "ftLoadCommonData";
-extern char lbl_803C0550[];// = "translate";
-extern char lbl_803C055C[];// = "fighter sub color num over!\n";
-extern char lbl_803C057C[];// = "fighter.c";
-extern char lbl_803C0588[];// = "ellegal flag fp->no_normal_motion\n";
-extern char lbl_803C05AC[];
-    //.asciz "fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n"
-    //.balign 4
-    //.asciz "fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n"
-    //.balign 4
-extern char lbl_803C0610[];// = "ellegal flag fp->no_reaction_always\n";
+// char lbl_803C0530[] = "PlCo.dat";
+// char lbl_803C053C[] = "ftLoadCommonData";
+// char lbl_803C0550[] = "translate";
+// char lbl_803C055C[] = "fighter sub color num over!\n";
+// char lbl_803C057C[] = "fighter.c";
+// char lbl_803C0588[] = "ellegal flag fp->no_normal_motion\n";
+// char lbl_803C05AC[] = 
+//     //.asciz "fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n"
+//     //.balign 4
+//     //.asciz "fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n"
+//     //.balign 4
+// char lbl_803C0610[] = "ellegal flag fp->no_reaction_always\n";
 
 // .section .bss, "wa"
 
-extern HSD_ObjAllocData lbl_80458FD0;
+HSD_ObjAllocData lbl_80458FD0;
+HSD_ObjAllocData lbl_80458FFC;
 
 // .section .sdata
 
-extern const char* lbl_804D3A00;// = "jobj.h";
-extern const char* lbl_804D3A08;// = "jobj";
-extern const char* lbl_804D3A10;// = "0";
+// extern const char* lbl_804D3A00;// = "jobj.h";
+// extern const char* lbl_804D3A08;// = "jobj";
+// extern const char* lbl_804D3A10;// = "0";
 
 // .section .sbss
 
 // TODO: verify that this is really a spawn number counter, then rename this var globally
-extern u32 lbl_804D64F8;// = 0;
+u32 lbl_804D64F8 = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
 // the following seems to be an array, initialized in reverse in func_80067ABC
 // outcommented because they are in variables.h too. uncomment this when moving data from fighter.s here.
-//extern void* lbl_804D64FC;// = 0;
-//extern void* lbl_804D6500;// = 0;
-//extern void* lbl_804D6504;// = 0;
-//extern void* lbl_804D6508;// = 0;
-//extern void* lbl_804D650C;// = 0;
-//extern void* lbl_804D6510;// = 0;
-//extern void* lbl_804D6514;// = 0;
-//extern void* lbl_804D6518;// = 0;
-//extern void* lbl_804D651C;// = 0;
-//extern void* lbl_804D6520;// = 0;
-//extern void* lbl_804D6524;// = 0;
-//extern void* lbl_804D6528;// = 0;
-//extern void* lbl_804D652C;// = 0;
-//extern void* lbl_804D6530;// = 0;
-//extern void* lbl_804D6534;// = 0;
-//extern void* lbl_804D6538;// = 0;
-//extern void* lbl_804D653C;// = 0;
-//extern s32** lbl_804D6540;// = 0;
-//extern void* lbl_804D6544;// = 0;
-//extern void* lbl_804D6548;// = 0;
-//extern void* lbl_804D654C;// = 0;
-//extern void* lbl_804D6550;// = 0;
-//extern ftCommonData* lbl_804D6554;// = 0; // p_ftCommonData
-#define p_ftCommonData lbl_804D6554 
+void* lbl_804D64FC = 0;
+void* lbl_804D6500 = 0;
+void* lbl_804D6504 = 0;
+void* lbl_804D6508 = 0;
+void* lbl_804D650C = 0;
+void* lbl_804D6510 = 0;
+void* lbl_804D6514 = 0;
+void* lbl_804D6518 = 0;
+void* lbl_804D651C = 0;
+void* lbl_804D6520 = 0;
+void* lbl_804D6524 = 0;
+void* lbl_804D6528 = 0;
+void* lbl_804D652C = 0;
+void* lbl_804D6530 = 0;
+void* lbl_804D6534 = 0;
+void* lbl_804D6538 = 0;
+void* lbl_804D653C = 0;
+s32** lbl_804D6540 = 0;
+void* lbl_804D6544 = 0;
+void* lbl_804D6548 = 0;
+void* lbl_804D654C = 0;
+void* lbl_804D6550 = 0;
+ftCommonData* p_ftCommonData;
+
  
 // .section .sdata2
  
-extern const f32 lbl_804D8250;// = 1.0f;
-extern const f32 lbl_804D8254;// = 0.0f;
-extern const f32 lbl_804D8258;// = -1.0f;
-extern const f32 lbl_804D8260;// used for int to float casting
-extern const f32 lbl_804D8268;// = 8.55f
-extern const f64 lbl_804D8270;// = 1.5707963267948966;
-extern const f64 lbl_804D8278;// probably also used for int to float casting
-extern const f64 lbl_804D8280;// = 0.5;
-extern const f64 lbl_804D8288;// = 3.0;
-extern const f32 lbl_804D8290;// = 999.0;
+// const f32 lbl_804D8250 = 1.0f;
+// const f32 lbl_804D8254 = 0.0f;
+// const f32 lbl_804D8258 = -1.0f;
+// extern const f32 lbl_804D8260;// used for int to float casting
+// const f32 lbl_804D8268 = 8.55f
+// extern const f64 lbl_804D8270;// = 1.5707963267948966;
+// extern const f64 lbl_804D8278;// probably also used for int to float casting
+// const f64 lbl_804D8280 = 0.5;
+// const f64 lbl_804D8288 = 3.0;
+// const f32 lbl_804D8290 = 999.0;
 
 
 // ==== fighter.c functions ====
@@ -158,13 +159,13 @@ void func_80067A84()
 void func_80067ABC()
 {
     void** pData;
-    func_80016C64(lbl_803C0530, &pData, lbl_803C053C, 0);
+    func_80016C64("PlCo.dat", &pData, "ftLoadCommonData", 0);
 
-	// copy 23 4-byte chunks from pData to lbl_804D6554 in reverse order, equivalent to this:
+	// copy 23 4-byte chunks from pData to p_ftCommonData in reverse order, equivalent to this:
 	// for(i=0; i<23; i++)
 	//   (&lbl_804D64FC)[23-1-i] = pData[i];
 	// loop unrolling doesn't work (only up to 8 elements)
-	lbl_804D6554 = pData[0]; // p_ftCommonData
+	p_ftCommonData = pData[0]; // p_ftCommonData
 	lbl_804D6550 = pData[1];
 	lbl_804D654C = pData[2];
 	lbl_804D6548 = pData[3];
@@ -2953,8 +2954,8 @@ void func_8006CFE0(HSD_GObj* fighterObj) {
 
     if (fighter_r31->x2219_flag.bits.b7) {
         if (fighter_r31->x221A_flag.bits.b2 == 0) {
-            if (fighter_r31->dmg.x1954 == lbl_804D8254){
-                func_8006D10C();
+            if (!fighter_r31->dmg.x1954){
+                func_8006D10C(fighterObj);
             }
         }
         fighter_r31->x2219_flag.bits.b7 = 0;

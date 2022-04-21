@@ -138,7 +138,7 @@ void func_80149114(HSD_GObj* gobj)
     Fighter* ft = gobj->user_data;
     CLinkAttributes* temp_r4 = (void*) ft->x10C_ftData->ext_attr;
     f32 ftmp = func_80092ED8(ft->x19A4, temp_r4, temp_r4->xD8);
-    ft->xEC_ground_vel = ftmp * lbl_804D6554->x294;
+    ft->xEC_ground_vel = ftmp * p_ftCommonData->x294;
     if (ft->x19AC < 0.0f) {
         ftmp = ft->xEC_ground_vel;
     } else {

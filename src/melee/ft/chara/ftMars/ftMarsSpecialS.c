@@ -270,7 +270,7 @@ void func_80137A9C(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
-    if (ft->x624_lstick_y > lbl_804D6554->x21C) {
+    if (ft->x624_lstick_y > p_ftCommonData->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x15E;
         } else {
@@ -411,14 +411,14 @@ void func_80137E0C(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
-    if (ft->x624_lstick_y > lbl_804D6554->x21C) {
+    if (ft->x624_lstick_y > p_ftCommonData->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x160;
         } else {
             thing = 0x169;
         }
     } else {
-        if (ft->x624_lstick_y < -lbl_804D6554->x21C) {
+        if (ft->x624_lstick_y < -p_ftCommonData->x21C) {
             if (ft->xE0_ground_or_air == GA_Ground) {
                 thing = 0x162;
             } else {
@@ -551,14 +551,14 @@ void func_80138148(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
-    if (ft->x624_lstick_y > lbl_804D6554->x21C) {
+    if (ft->x624_lstick_y > p_ftCommonData->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x163;
         } else {
             thing = 0x16C;
         }
     } else {
-        if (ft->x624_lstick_y < -lbl_804D6554->x21C) {
+        if (ft->x624_lstick_y < -p_ftCommonData->x21C) {
             if (ft->xE0_ground_or_air == GA_Ground) {
                 thing = 0x165;
             } else {

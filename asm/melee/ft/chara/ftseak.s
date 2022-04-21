@@ -347,7 +347,7 @@ lbl_80110518:
 /* 80110524 0010D104  C0 02 9C 2C */	lfs f0, lbl_804D960C@sda21(r2)
 /* 80110528 0010D108  EC 63 00 2A */	fadds f3, f3, f0
 lbl_8011052C:
-/* 8011052C 0010D10C  80 6D AE B4 */	lwz r3, lbl_804D6554@sda21(r13)
+/* 8011052C 0010D10C  80 6D AE B4 */	lwz r3, p_ftCommonData@sda21(r13)
 /* 80110530 0010D110  C0 22 9C 2C */	lfs f1, lbl_804D960C@sda21(r2)
 /* 80110534 0010D114  C0 03 04 4C */	lfs f0, 0x44c(r3)
 /* 80110538 0010D118  EC 03 10 3A */	fmadds f0, f3, f0, f2
@@ -398,7 +398,7 @@ lbl_801105D0:
 /* 801105E0 0010D1C0  FC 40 00 90 */	fmr f2, f0
 lbl_801105E4:
 /* 801105E4 0010D1C4  C0 3F 23 54 */	lfs f1, 0x2354(r31)
-/* 801105E8 0010D1C8  80 6D AE B4 */	lwz r3, lbl_804D6554@sda21(r13)
+/* 801105E8 0010D1C8  80 6D AE B4 */	lwz r3, p_ftCommonData@sda21(r13)
 /* 801105EC 0010D1CC  EC 02 08 28 */	fsubs f0, f2, f1
 /* 801105F0 0010D1D0  C0 43 04 4C */	lfs f2, 0x44c(r3)
 /* 801105F4 0010D1D4  EC 02 08 3A */	fmadds f0, f2, f0, f1
