@@ -987,7 +987,7 @@ void func_8006CF5C(Fighter* fighter, s32 arg1);
 void func_8006CFBC(HSD_GObj* fighterObj);
 void func_8006CFE0(HSD_GObj* fighterObj);
 void func_8006D044();
-void func_8006D10C();
+void func_8006D10C(HSD_GObj* fighterObj);
 void func_8006D1EC();
 void func_8006D9AC(HSD_GObj* fighterObj);
 void func_8006D9EC(HSD_GObj* fighterObj);
