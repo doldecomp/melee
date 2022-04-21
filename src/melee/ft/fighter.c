@@ -196,7 +196,7 @@ void func_80067ABC()
 void func_80067BB4(HSD_GObj* pPlayerEntity)
 {
     Vec scale_sp14;
-    s32 unused;
+    s32 unused[2];
 
     Fighter* pFighter = pPlayerEntity->user_data;
 
@@ -524,17 +524,18 @@ void func_80067C98(Fighter* ft) {
 }
 
 
-//// https://decomp.me/scratch/vhZiK
+//// https://decomp.me/scratch/k2dV0
 // Matches
 void func_80068354(HSD_GObj* fighterObj/*r30*/) {
- 	void (*temp_r12)(HSD_GObj* gobj);
+ 	// void (*temp_r12)(HSD_GObj* gobj);
     Vec3 vec_sp20;
     f32 temp_f1;
     HSD_JObj* jobj;
+    s32 unused_filler[5];
 
     Fighter* fighter_r29;
-    s32 unused[2];
     HSD_JObj* temp_r28;
+
     // s32 dummy[4];void* dummyx;
 
     //@20
@@ -616,8 +617,6 @@ void func_80068354(HSD_GObj* fighterObj/*r30*/) {
     func_8007C17C(fighterObj);
     func_8007C630(fighterObj);
 }
-
-
 
 ///https://decomp.me/scratch/ozjB3
 void func_800686E4(HSD_GObj* fighterObj) {

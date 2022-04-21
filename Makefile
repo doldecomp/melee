@@ -100,6 +100,7 @@ $(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.c.o: CC_EPI := $(CC)
 $(EPILOGUE_DIR)/src/sysdolphin/baselib/wobj.c.o: CC_EPI := $(CC)
 
 $(BUILD_DIR)/src/melee/ft/fighter.c.o: CFLAGS += -inline noauto 
+$(EPILOGUE_DIR)/src/melee/ft/fighter.c.o: CC_EPI := $(CC)
 
 
 HOSTCFLAGS := -Wall -O3 -s

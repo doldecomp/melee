@@ -3836,6 +3836,7 @@ lbl_803C06CC:
 
 
 .section .sdata
+    .balign 8
 .global lbl_804D3A18
 lbl_804D3A18:
     .asciz "0"
