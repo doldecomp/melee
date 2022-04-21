@@ -2886,13 +2886,8 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fighter, f32 damage_amount) {
 
 ///https://decomp.me/scratch/9QvFG   ///// Not quite matched
 void func_8006CDA4(Fighter* fighter, s32 arg1, s32 arg2, s32 arg3) {
-    // s32 unused[3];
-    s32 temp_r28;
     s32 temp_r5;
-
-    s32 meow;
     
-    s32 phi_r4;
     s32 phi_r31 = 0;
     Vec vec;
 
@@ -2901,20 +2896,8 @@ void func_8006CDA4(Fighter* fighter, s32 arg1, s32 arg2, s32 arg3) {
     }
 
     
-    temp_r28 = 1;
-    phi_r4 = temp_r28;
-    
-    if (!fighter->x2220_flag.bits.b3 && !fighter->x2220_flag.bits.b4) {
-        phi_r4 = 0;
-    }
-
-    if (phi_r4 == 0 && (!func_8008E984(fighter))) {
-        temp_r28 = 0;
-    }
-    
-    temp_r5 = !(!temp_r28 == 0);
+    temp_r5 = !((fighter->x2220_flag.bits.b3 || fighter->x2220_flag.bits.b4 || func_8008E984(fighter)));
     vec = lbl_803B7494;
-
 
 
     if ((fighter->x10) != 0x145 && ((fighter->x10 - 0x122) > 1U) &&  fighter->dmg.x1860_dealt != 0xAU  && !fighter->x2226_flag.bits.b2) {
