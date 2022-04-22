@@ -122,6 +122,7 @@ ftCommonData* p_ftCommonData;
 // ==== fighter.c functions ====
 // =============================
 
+
 void func_800679B0()
 { 
 	s32 i;
@@ -3331,39 +3332,42 @@ void func_8006DA4C(HSD_GObj* fighterObj) {
 }
 
 ///https://decomp.me/scratch/8gk4A   ///// Not quite matched
-void func_8006DABC(Fighter* fighter) {
 
-    // void (*func_array)(HSD_GObj* obj) = &lbl_803C125C;
-    // void (**func_array)(HSD_GObj* obj) = lbl_803C125C;
-    void (*selected_func)(HSD_GObj* obj); 
-    
-    HSD_ObjAllocData* objAllocData = &lbl_80458FD0;
+////// MOVED to ftanim.s
 
-    if (selected_func = lbl_803C125C[fighter->x4_fighterKind]) {
-        selected_func(fighter->x0_fighter);
-    }
+// void func_8006DABC(Fighter* fighter) {
+
+//     // void (*func_array)(HSD_GObj* obj) = &lbl_803C125C;
+//     // void (**func_array)(HSD_GObj* obj) = lbl_803C125C;
+//     void (*selected_func)(HSD_GObj* obj); 
     
-    func_8007B8E8(fighter->x0_fighter);
-    func_80067688(&fighter->x60C);
-    func_8026B7F8(fighter->x0_fighter);
-    func_800290D4(fighter->x890);
-    func_8009E0D4(fighter);
-    func_800765AC(fighter->x0_fighter);
-    func_80088C5C(fighter->x0_fighter);
-    func_8000EE8C(&fighter->x20A4);
-    if (fighter->x20A0) {
-        HSD_JObjRemoveAll(fighter->x20A0);
-    }
-    HSD_JObjRemoveAll(fighter->x8AC_animSkeleton);
-    HSD_JObjUnref((void*)fighter->x2184); //fighter->x2148
-    func_800859A8(fighter);
-    func_80366BD4(fighter->x588);
-    Player_80031FB0(fighter->xC_playerID, fighter->x221F_flag.bits.b4);
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], (void*)fighter->x59C);
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], (void*)fighter->x5A0);
-    HSD_ObjFree(&objAllocData[(0x58 / 40)], (void*)fighter->x5E8_fighterBones);
-    HSD_ObjFree(&objAllocData[(0x84 / 40)], (void*)fighter->x5F0);
-    HSD_ObjFree(&objAllocData[(0xB0 / 40)], (void*)fighter->x2040);
-    HSD_ObjFree(&objAllocData[(0x2C / 40)], (void*)fighter->x2D8_specialAttributes2);
-    HSD_ObjFree(&objAllocData[(0x2C / 40)], fighter);
-}
+//     HSD_ObjAllocData* objAllocData = &lbl_80458FD0;
+
+//     if (selected_func = lbl_803C125C[fighter->x4_fighterKind]) {
+//         selected_func(fighter->x0_fighter);
+//     }
+    
+//     func_8007B8E8(fighter->x0_fighter);
+//     func_80067688(&fighter->x60C);
+//     func_8026B7F8(fighter->x0_fighter);
+//     func_800290D4(fighter->x890);
+//     func_8009E0D4(fighter);
+//     func_800765AC(fighter->x0_fighter);
+//     func_80088C5C(fighter->x0_fighter);
+//     func_8000EE8C(&fighter->x20A4);
+//     if (fighter->x20A0) {
+//         HSD_JObjRemoveAll(fighter->x20A0);
+//     }
+//     HSD_JObjRemoveAll(fighter->x8AC_animSkeleton);
+//     HSD_JObjUnref((void*)fighter->x2184); //fighter->x2148
+//     func_800859A8(fighter);
+//     func_80366BD4(fighter->x588);
+//     Player_80031FB0(fighter->xC_playerID, fighter->x221F_flag.bits.b4);
+//     HSD_ObjFree(&objAllocData[(0xDC / 40)], (void*)fighter->x59C);
+//     HSD_ObjFree(&objAllocData[(0xDC / 40)], (void*)fighter->x5A0);
+//     HSD_ObjFree(&objAllocData[(0x58 / 40)], (void*)fighter->x5E8_fighterBones);
+//     HSD_ObjFree(&objAllocData[(0x84 / 40)], (void*)fighter->x5F0);
+//     HSD_ObjFree(&objAllocData[(0xB0 / 40)], (void*)fighter->x2040);
+//     HSD_ObjFree(&objAllocData[(0x2C / 40)], (void*)fighter->x2D8_specialAttributes2);
+//     HSD_ObjFree(&objAllocData[(0x2C / 40)], fighter);
+// }
