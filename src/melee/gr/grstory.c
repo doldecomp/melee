@@ -52,7 +52,7 @@ StageData lbl_803E274C = {
 };
 
 
-void func_801E302C(void)
+static void func_801E302C(s32)
 {
 }
 
@@ -91,8 +91,8 @@ HSD_GObj* func_801E30D8(s32 arg0)
     gobj = func_801C14D0(arg0);
     if (gobj != NULL) {
         Map* map = gobj->user_data;
-        map->x8 = 0;
-        map->xC = 0;
+        map->x8_callback = NULL;
+        map->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
         if (callbacks->callback3 != NULL) {
             map->x1C_callback = callbacks->callback3;
@@ -126,7 +126,7 @@ s32 lbl_801E3224(void)
     return 0;
 }
 
-void lbl_801E322C(void)
+void lbl_801E322C(HSD_GObj*)
 {
 }
 
@@ -173,7 +173,7 @@ typedef struct {
     s32 x14;
     u8 x18_fill[0xC4 - 0x18];
     s16 xC4;
-    void* xC8;
+    struct _HSD_JObj* xC8;
 } UnkUserData;
 
 void lbl_801E3370(HSD_GObj* gobj)
@@ -298,12 +298,12 @@ void func_801E366C(HSD_GObj* gobj)
     }
 }
 
-s32 lbl_801E36D0(void)
+static BOOL lbl_801E36D0(s32)
 {
-    return 0;
+    return FALSE;
 }
 
-s32 lbl_801E36D8(Vec3* a, u32 unused, u8* joint)
+s32 lbl_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, NULL, &b);

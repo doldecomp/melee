@@ -6,7 +6,7 @@ void ftMars_OnDeath(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
-    ft->x222C = 0;
+    ft->sa.mars.x222C = 0;
 }
 
 // 801362B0 00132E90

@@ -17,7 +17,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/lbcollision.s.o  	    \
 	$(BUILD_DIR)/src/melee/lb/lblanguage.c.o  	    \
 	$(BUILD_DIR)/src/melee/lb/lbtime.c.o  	        \
-	$(BUILD_DIR)/asm/melee/lb/code_8000B074.s.o  	    \
+	$(BUILD_DIR)/src/melee/lb/code_8000B074.c.o  	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000CE50.s.o  	    \
 	$(BUILD_DIR)/src/melee/lb/lbvector.c.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.s.o		 	\
@@ -125,14 +125,21 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.s.o 		            \
 															\
-	$(BUILD_DIR)/asm/melee/gm/gmmain.s.o 		 	            \
+	$(BUILD_DIR)/asm/melee/gm/gmmain_lib.s.o 		 	            \
+	$(BUILD_DIR)/src/melee/gm/gmmain.c.o 		 	            \
 	$(BUILD_DIR)/asm/melee/gm/code_801601C4.s.o 		 	    \
 	$(BUILD_DIR)/asm/melee/gm/gmtitle.s.o 		 			\
 	$(BUILD_DIR)/asm/melee/gm/gmcamera.s.o 		 			\
 															\
 	$(BUILD_DIR)/asm/melee/text_2.s.o 		 	            \
 	                                                  \
-	$(BUILD_DIR)/asm/melee/gr/grlib.s.o               \
+	$(BUILD_DIR)/src/melee/gr/ground.c.o              \
+	$(BUILD_DIR)/asm/melee/gr/ground.s.o              \
+	$(BUILD_DIR)/asm/melee/gr/grdisplay.s.o           \
+	$(BUILD_DIR)/src/melee/gr/grdatfiles.c.o          \
+	$(BUILD_DIR)/asm/melee/gr/granime.s.o             \
+	$(BUILD_DIR)/asm/melee/gr/grmaterial.s.o          \
+	$(BUILD_DIR)/src/melee/gr/grlib.c.o               \
 	$(BUILD_DIR)/asm/melee/gr/grdynamicattr.s.o       \
 	$(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o     \
 	$(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o 					\
@@ -189,10 +196,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/gr/grtkoopa.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtlink.s.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtluigi.s.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtmars.s.o 					\
 	$(BUILD_DIR)/src/melee/gr/grtmars.c.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtmewtwo.s.o 		            \
-	$(BUILD_DIR)/asm/melee/gr/grtness.s.o 					\
 	$(BUILD_DIR)/src/melee/gr/grtness.c.o 					\
 	$(BUILD_DIR)/asm/melee/gr/grtpeach.s.o 		            \
 	$(BUILD_DIR)/asm/melee/gr/grtpichu.s.o 		            \
@@ -389,7 +394,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/sysdolphin/baselib/displayfunc.c.o       \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/displayfunc.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/initialize.c.o 		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/initialize.s.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/video.s.o				\
 	$(BUILD_DIR)/src/sysdolphin/baselib/controller.c.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/controller.s.o		\

@@ -35,9 +35,9 @@ inline void checkFighter2244(HSD_GObj* gobj)
     }
 
     ft = gobj->user_data;
-    if (ft != NULL && ft->x2244 != 0) {
-        func_802C8C34(ft->x2244);
-        ft->x2244 = 0;
+    if (ft != NULL && ft->sa.clink.x2244 != 0) {
+        func_802C8C34(ft->sa.clink.x2244);
+        ft->sa.clink.x2244 = 0;
     }
 
     if (gobj == NULL) {

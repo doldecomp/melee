@@ -31,9 +31,6 @@ import math
 #                                             #
 ###############################################
 
-DOL_PATH = "baserom.dol"
-MAP_PATH = "build/ssbm.us.1.2/GALE01.map"
-
 MEM1_HI = 0x81700000 
 MEM1_LO = 0x80003100
 
@@ -78,7 +75,7 @@ SECTION_DATA = 1
 
 if __name__ == "__main__":
     # Sum up DOL section sizes
-    dol_handle = open(DOL_PATH, "rb")
+    dol_handle = open(sys.argv[1], "rb")
 
     # Seek to virtual addresses
     dol_handle.seek(0x48)
@@ -120,7 +117,7 @@ if __name__ == "__main__":
         dol_code_size += i
 
     # Open map file
-    mapfile = open(MAP_PATH, "r")
+    mapfile = open(sys.argv[2], "r")
     symbols = mapfile.readlines()
 
     decomp_code_size = 0

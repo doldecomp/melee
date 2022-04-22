@@ -15,6 +15,7 @@
 #include <sysdolphin/baselib/random.h>
 #include "sysdolphin/baselib/controller.h"
 
+typedef Vec Vec3;
 
 typedef enum FighterKind
 {
@@ -350,6 +351,164 @@ struct S_TEMP4 {
     s32 xC;
     s32 x10_animCurrFlags;
     s32 x14;
+// --------------------------------------------------------------------------------
+// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fighter
+// header includes or something.
+// --------------------------------------------------------------------------------
+struct SpecialAttrs_Mario {
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    char filler0[0xFC];
+};
+
+struct SpecialAttrs_Fox {
+    /* 0x222C */ u32 x222C;
+    char filler0[0x110];
+};
+
+struct SpecialAttrs_Captain {
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    char filler0[0x10C];
+};
+
+struct SpecialAttrs_DK {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Kirby {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Koopa {
+    /* 0x222C */ u32 x222C;
+    char filler0[0x110];
+};
+
+struct SpecialAttrs_Link {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Seak {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Ness {
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u32 x224C;
+    char filler0[0xF0];
+};
+
+struct SpecialAttrs_Peach {
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    char filler0[0xF4];
+};
+
+struct SpecialAttrs_Popo {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Nana {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Pikachu {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Samus {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Yoshi {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Purin {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Mewtwo {
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    char filler0[0x100];
+};
+
+struct SpecialAttrs_Luigi {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Mars {
+    /* 0x222C */ u32 x222C;
+    char filler0[0x110];
+};
+
+struct SpecialAttrs_Zelda {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_CLink {
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    char filler0[0xF8];
+};
+
+struct SpecialAttrs_Pichu {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Gaw {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Masterhand {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Crazyhand {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Boy {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Girl {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_GKoopa {
+    char filler0[0x114];
+};
+
+struct SpecialAttrs_Sandbag {
+    char filler0[0x114];
 };
 
 typedef struct _Fighter {
@@ -491,9 +650,7 @@ typedef struct _Fighter {
         /* 0x274 */ s32 x274;
         /* 0x278 */ s32 x278;
         /* 0x27C */ s32 x27C_CameraZoomTargetBone;
-        /* 0x280 */ s32 x280;
-        /* 0x284 */ s32 x284;
-        /* 0x288 */ s32 x288;
+        /* 0x280 */ Vec3 x280;
         /* 0x28C */ s32 x28C;
         /* 0x290 */ s32 x290_WeightDependentThrowSpeedFlags;
     } x110_attr;
@@ -930,16 +1087,43 @@ typedef struct _Fighter {
                  
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u32 x224C;
-    u8 filler_x224C[0x2340-0x2250];
+    // Some of these are clones of each other (they just use another struct)
+    // and some of them dont have specials so dont exist in the union. TODO: Clean-up
+    union { 
+        struct SpecialAttrs_Mario mario;
+        struct SpecialAttrs_Fox fox;
+        struct SpecialAttrs_Captain captain;
+        struct SpecialAttrs_DK dk;
+        struct SpecialAttrs_Kirby kirby;
+        struct SpecialAttrs_Koopa koopa;
+        struct SpecialAttrs_Link link;
+        struct SpecialAttrs_Seak seak;
+        struct SpecialAttrs_Ness ness;
+        struct SpecialAttrs_Peach peach;
+        struct SpecialAttrs_Popo popo;
+        struct SpecialAttrs_Nana nana;
+        struct SpecialAttrs_Pikachu pikachu;
+        struct SpecialAttrs_Samus samus;
+        struct SpecialAttrs_Yoshi yoshi;
+        struct SpecialAttrs_Purin purin;
+        struct SpecialAttrs_Mewtwo mewtwo;
+        struct SpecialAttrs_Luigi luigi;
+        struct SpecialAttrs_Mars mars;
+        struct SpecialAttrs_Zelda zelda;
+        struct SpecialAttrs_CLink clink;
+        // Mario SpecialAttrs struct is used for DrMario
+        // Fox SpecialAttrs struct is used for Falco
+        struct SpecialAttrs_Pichu pichu;
+        struct SpecialAttrs_Gaw gaw;
+        // Cpt Falcon SpecialAttrs struct is used for Ganondorf
+        // Mars (Marth) struct is used for Emblem (Roy)
+        struct SpecialAttrs_Masterhand masterhand;
+        struct SpecialAttrs_Crazyhand crazyhand;
+        struct SpecialAttrs_Boy boy;
+        struct SpecialAttrs_Girl girl;
+        struct SpecialAttrs_GKoopa gkoopa;
+        struct SpecialAttrs_Sandbag sandbag;
+    } sa;
     /* 0x2340 */ u32 x2340_stateVar1;
     /* 0x2344 */ u32 x2344_stateVar2;
     /* 0x2348 */ u32 x2348_stateVar3;
@@ -948,6 +1132,26 @@ typedef struct _Fighter {
     /* 0x2354 */ f32 x2354_stateVar6;
     /* 0x2358 */ f32 x2358_stateVar7;
 } Fighter;
+
+///// 
+typedef struct {
+    HSD_Joint* joint;
+    u8 padding[20];
+} UnkFighterJointStruct;
+
+struct Pair_Pointer_and_Flag {
+    UnkFighterJointStruct* unk_fighter_struct;
+    u8 flag;
+};
+
+struct S_TEMP1 {
+    FighterKind fighterKind;
+    u8 playerID;
+    u8 unk5;
+    UnkFlagStruct unk6;
+};
+
+
 
 // functions from fighter.s
 void func_800679B0();

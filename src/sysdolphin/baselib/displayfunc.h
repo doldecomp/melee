@@ -7,6 +7,7 @@
 
 #include "sysdolphin/baselib/jobj.h"
 
+void _HSD_DispForgetMemory();
 void HSD_ZListInitAllocData(void);
 
 #endif
