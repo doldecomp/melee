@@ -14,6 +14,8 @@ CODESIZE_MAGIC = b"\x00\x00\x00\x06\x00\x00\x00\x00\x00\x00\x00\x34"
 BLR_BYTE_SEQ = b"\x4E\x80\x00\x20"
 MTLR_BYTE_SEQ = b"\x7C\x08\x03\xA6"
 
+LWZ_BYTE = b"\x80"
+
 # Byte sequence array for branches to link register
 BLR_BYTE_SEQ_ARRAY = [BLR_BYTE_SEQ,
 b"\x4D\x80\x00\x20", b"\x4D\x80\x00\x21", b"\x4C\x81\x00\x20", b"\x4C\x81\x00\x21",
@@ -99,6 +101,26 @@ while idx < len(final_bytes):
     
     final_bytes = final_bytes[:mtlr_found_pos] + final_bytes[mtlr_found_pos+4:blr_found_pos] + final_bytes[mtlr_found_pos:mtlr_found_pos+4] + final_bytes[blr_found_pos:]
     idx = mtlr_found_pos + len(MTLR_BYTE_SEQ)
+
+
+
+##Snuffy - temp fix swapped lwz and mr at end of functions
+lwz_found_pos = final_bytes.find(LWZ_BYTE, 0)
+while lwz_found_pos != -1:
+
+    if lwz_found_pos % 4 == 0 and final_bytes[lwz_found_pos + 4] == 127:
+
+        if final_bytes[lwz_found_pos + 8] == 0x83 and final_bytes[lwz_found_pos - 4] != 0x83:
+            #print(bytearray(final_bytes[lwz_found_pos:lwz_found_pos+4]).hex(' '), " ", bytearray(final_bytes[lwz_found_pos+4:lwz_found_pos+8]).hex(' '), " ", hex(lwz_found_pos + 0x64560))
+            #print(hex(final_bytes[lwz_found_pos - 4]), " ", hex(final_bytes[lwz_found_pos + 8]))
+            #print("")
+            final_bytes = final_bytes[:lwz_found_pos] + final_bytes[lwz_found_pos+4:lwz_found_pos+8] + final_bytes[lwz_found_pos:lwz_found_pos+4] + final_bytes[lwz_found_pos+8:]
+            lwz_found_pos += 4
+
+    lwz_found_pos = final_bytes.find(LWZ_BYTE, lwz_found_pos+1)
+
+
+
 
 with open(args.target, "wb") as f:
     f.write(final_bytes)

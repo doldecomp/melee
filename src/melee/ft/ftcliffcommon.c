@@ -8,7 +8,7 @@ BOOL func_80081298(HSD_GObj* gobj) {
     s32 unused1, unused2;
 
     Fighter* fighter = gobj->user_data;
-    if (fighter->x624_lstick_y <= -lbl_804D6554->x480) {
+    if (fighter->x624_lstick_y <= -p_ftCommonData->x480) {
         return FALSE;
     }
     if (((fighter->x6F0_collData.x134_envFlags & 0x03000000) != 0)
@@ -51,10 +51,10 @@ void func_80081370(HSD_GObj* gobj) {
     }
     func_8007D780(fighter);
     func_8007D5D4(fighter);
-    func_800693AC(gobj, 0xFC, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0xFC, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     func_8007D5D4(fighter);
-    func_8007EFC0(fighter, lbl_804D6554->x5F0);
+    func_8007EFC0(fighter, p_ftCommonData->x5F0);
     func_8007E2FC(gobj);
     fighter->x221D_flag.bits.b7 = 1;
     if (fighter->x2C_facing_direction > 0.0f) {
@@ -116,7 +116,7 @@ void func_800815E4(HSD_GObj* gobj) {
     }
     if (func_8009EF68(gobj) != 0) {
         fighter = gobj->user_data;
-        fighter->x2064_ledgeCooldown = lbl_804D6554->x498_ledgeCooldownTime;
+        fighter->x2064_ledgeCooldown = p_ftCommonData->x498_ledgeCooldownTime;
     }
 }
 

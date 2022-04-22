@@ -692,7 +692,7 @@ BOOL func_800870BC(HSD_GObj* gobj, void** val)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x61A_controller_index) {
-        *val = lbl_804D6554->x6D8[fp->x61A_controller_index];
+        *val = p_ftCommonData->x6D8[fp->x61A_controller_index];
         return TRUE;
     }
     return FALSE;

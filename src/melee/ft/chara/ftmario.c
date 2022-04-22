@@ -210,7 +210,7 @@ void func_800E0DA8(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
-    func_800693AC(gobj,0x157,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x157,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
     func_8006EBA4(gobj);
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -292,7 +292,7 @@ void func_800E1040(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
-    func_800693AC(gobj,0x158,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x158,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
     func_8006EBA4(gobj);
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }

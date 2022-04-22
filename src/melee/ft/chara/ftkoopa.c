@@ -213,7 +213,7 @@ void func_80132EFC(HSD_GObj *gobj)
     ft->x2344_stateVar2 = 0;
     ft->x234C_stateVar4 = 0;
 
-    func_800693AC(gobj, 0x15B, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
 
     func_8006EBA4(gobj);
 
@@ -238,7 +238,7 @@ void func_80132F94(HSD_GObj *gobj)
     ft->x2344_stateVar2 = 0;
     ft->x234C_stateVar4 = 0;
 
-    func_800693AC(gobj, 0x161, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
 
     func_8006EBA4(gobj);
 
@@ -257,9 +257,9 @@ void func_8013302C(HSD_GObj *gobj)
     Fighter *ft = gobj->user_data;
 
     if((s32)ft->x2344_stateVar2 != 0) {
-        func_800693AC(gobj, 349, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 349, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
     } else {
-        func_800693AC(gobj, 348, 0x0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 348, 0x0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
     }
     ft->x2222_flag.bits.b2 = 1;
     func_8007E2F4(ft, 0x1FF);
@@ -274,9 +274,9 @@ void func_801330E4(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     if ((s32) ft->x2344_stateVar2 != 0) {
-        func_800693AC(gobj, 0x163, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 0x163, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
     } else {
-        func_800693AC(gobj, 0x162, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 0x162, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
     }
     ft->x2222_flag.bits.b2 = 1;
     func_8007E2F4(ft, 0x1FF);
@@ -292,7 +292,7 @@ void func_8013319C(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     func_8007D5D4(ft);
-    func_800693AC(gobj, 0x161, 0x0C4C5088, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0x0C4C5088, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
     ft = gobj->user_data;
     func_8007E2D0(ft, 8, func_801330E4, 0, func_800BC8D4);
     ft->x2340_stateVar1 = 0;
@@ -307,7 +307,7 @@ void func_8013322C(HSD_GObj* gobj) {
 
     ft2 = gobj->user_data;
     func_8007D7FC(ft2);
-    func_800693AC(gobj, 0x15B, 0x0C4C5088, 0, ft2->x894, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0x0C4C5088, 0, ft2->x894, lbl_804D9ADC, lbl_804D9AD8);
     ft1 = gobj->user_data;
     func_8007E2D0(ft1, 8, &func_8013302C, 0, &func_800BC7E0);
     ft1->x2340_stateVar1 = 0;
@@ -335,7 +335,7 @@ void func_80133324(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     func_8007D7FC(ft);
-    func_800693AC(gobj, 0x15C, 0x0C4C5088, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0x0C4C5088, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
     func_8007E2F4(ft, 0x1FF);
     func_8007E2FC(gobj);
 }
@@ -359,7 +359,7 @@ void func_801333F8(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     func_8007D7FC(ft);
-    func_800693AC(gobj, 0x15E, 0x044C1080, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x044C1080, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
     func_8007E2F4(ft, 0x1FF);
     func_8007E2FC(gobj);
     func_8006F0FC(gobj, lbl_804D9AD8);
@@ -394,7 +394,7 @@ void func_801334E4(HSD_GObj* gobj) {
     if ((s32) ft->x234C_stateVar4 != 0) {
         ft->x2C_facing_direction = -ft->x2C_facing_direction;
     }
-    func_800693AC(gobj, 0x15F, 0x0C4C5088, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0x0C4C5088, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
     
     if ((s32) ft->x234C_stateVar4 != 0) {
         ft->x2C_facing_direction = -ft->x2C_facing_direction;
@@ -414,7 +414,7 @@ void func_8013359C(HSD_GObj* gobj) {
     if ((s32) ft->x234C_stateVar4 != 0) {
         ft->x2C_facing_direction = -ft->x2C_facing_direction;
     }
-    func_800693AC(gobj, 0x160, 0x0C4C5088, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x160, 0x0C4C5088, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
     if ((s32) ft->x234C_stateVar4 != 0) {
         ft->x2C_facing_direction = -ft->x2C_facing_direction;
     }
@@ -457,9 +457,9 @@ void func_801336CC(HSD_GObj* gobj) {
             ft->x2344_stateVar2 = 1;
             ft_temp = gobj->user_data;
             if ((s32) ft_temp->x2344_stateVar2 != 0) {
-                func_800693AC(gobj, 0x15D, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+                Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
             } else {
-                func_800693AC(gobj, 0x15C, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+                Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
             }
             ft_temp->x2222_flag.bits.b2 = 1;
             func_8007E2F4(ft_temp, 0x1FF);
@@ -470,7 +470,7 @@ void func_801336CC(HSD_GObj* gobj) {
             return;
         }
         ft = gobj->user_data;
-        func_800693AC(gobj, 0x15E, 0x80080, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x80080, 0, ft->x894, lbl_804D9ADC, lbl_804D9AD8);
         func_8006F0FC(gobj, lbl_804D9AD8);
         ft->x2340_stateVar1 = 0;
         ft->x2200_ftcmd_var0 = 0;
