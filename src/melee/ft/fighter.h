@@ -188,7 +188,8 @@ typedef struct _FtCollisionData
 {
     u8 data_filler_0[0x28];
     u32 x28;
-    u8 data_filler_2C[0x34 - 0x2C];
+    u8 data_filler_2C[0x30 - 0x2C];
+    s32 x30;
     s32 x34;
 } FtCollisionData;
 
@@ -323,11 +324,6 @@ struct S_TEMP1 {
     u8 playerID;
     u8 unk5;
     UnkFlagStruct unk6;
-};
-
-struct S_TEMP2 {
-    s32 filler[12];
-    s32 unk30; 
 };
 
 struct S_TEMP3 {
@@ -974,7 +970,7 @@ void func_8006ABEC();
 void func_8006AD10();
 void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy);
 void func_8006C0F0(HSD_GObj* fighterObj);
-void func_8006C27C(HSD_GObj* fighterObj, s32 unused);
+void func_8006C27C(HSD_GObj* fighterObj, s32 unused, s32 unused2, s32 unused3);
 void func_8006C5F4(HSD_GObj* pPlayerEntityStruct);
 void func_8006C624();
 void func_8006C80C(HSD_GObj* fighterObj);

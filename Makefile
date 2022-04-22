@@ -87,6 +87,7 @@ SYSTEM_INCLUDE_DIRS := include include/dolphin include/dolphin/mtx src
 #INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
 INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE_DIRS))
 
+
 ASFLAGS := -mgekko -I include
 LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
@@ -99,7 +100,8 @@ $(EPILOGUE_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
 $(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.c.o: CC_EPI := $(CC)
 $(EPILOGUE_DIR)/src/sysdolphin/baselib/wobj.c.o: CC_EPI := $(CC)
 
-$(BUILD_DIR)/src/melee/ft/fighter.c.o: CFLAGS += -inline noauto 
+$(BUILD_DIR)/src/melee/ft/fighter.c.o: CFLAGS += -inline noauto
+$(EPILOGUE_DIR)/src/melee/ft/fighter.c.o: CFLAGS += -inline noauto
 $(EPILOGUE_DIR)/src/melee/ft/fighter.c.o: CC_EPI := $(CC)
 
 

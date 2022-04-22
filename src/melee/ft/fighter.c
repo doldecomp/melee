@@ -931,6 +931,9 @@ void func_80068E64(HSD_GObj* fighterObj) {
     }
 }
 
+
+
+
 ///https://decomp.me/scratch/BQ1u9
 HSD_GObj* func_80068E98(struct S_TEMP1* input) {
 
@@ -948,7 +951,6 @@ HSD_GObj* func_80068E98(struct S_TEMP1* input) {
     Fighter* fp;
     Fighter* temp_r4_3;
 
-    
 
     temp_r31 = func_803901F0(4, 8, 0);
     GObj_SetupGXLink(temp_r31, &func_80080E18, 5U, 0U);
@@ -1055,6 +1057,7 @@ HSD_GObj* func_80068E98(struct S_TEMP1* input) {
     func_800867E8(temp_r31);
     return temp_r31;
 }
+
 
 /// https://decomp.me/scratch/VyJpx
 inline f32 pickValue(f32 argA, u8* unk_byte_ptr)
@@ -2265,7 +2268,7 @@ void func_8006AD10(HSD_GObj* fighterObj) {
 }
 
 
-//// https://decomp.me/scratch/kNXEu
+//// https://decomp.me/scratch/oFu1o
 void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy) {
     //@1c
     Fighter* pCharData = pPlayerEntityStruct->user_data;
@@ -2469,7 +2472,7 @@ void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy) {
             else
                 bit = 0;
 			//@514
-			if (bit || func_80070FD0(pCharData) != 0 || pCharData->x594_animCurrFlags1.bits.b1)
+			if (bit || func_80070FD0(pCharData) != 0 || pCharData->x594_animCurrFlags1.bits.b7)
             {
                 //@538
                 // pCharData->xB0_position += pCharData->xD4_unk_vel
@@ -2594,7 +2597,7 @@ void func_8006C0F0(HSD_GObj* fighterObj)
     
     jobj_userdata = fighterObj->user_data;
 
-    if (jobj_userdata->translate.y != -1.0f) {
+    if (jobj_userdata->translate.y != 1.0f) {
 
         jobj = fighterObj->hsd_obj;
 
@@ -2620,7 +2623,7 @@ void func_8006C0F0(HSD_GObj* fighterObj)
 
 ///https://decomp.me/scratch/m9K8F
 ////latest with correct inlines: https://decomp.me/scratch/m9K8F
-void func_8006C27C(HSD_GObj* fighterObj, s32 unused) {
+void func_8006C27C(HSD_GObj* fighterObj, s32 unused, s32 unused2, s32 unused3) {
 
     Fighter* fighter_r4;
 
@@ -2666,7 +2669,6 @@ void func_8006C27C(HSD_GObj* fighterObj, s32 unused) {
     }
 }
 
-
 void func_8006C5F4(HSD_GObj* pPlayerEntityStruct/*r3*/)
 {
     Fighter* pFighter = (Fighter*) pPlayerEntityStruct->user_data;
@@ -2704,7 +2706,7 @@ void func_8006C624(HSD_GObj* fighterObj) {
 }
 
 
-////https://decomp.me/scratch/YXlQh
+////https://decomp.me/scratch/Ak3qm
 void func_8006C80C(HSD_GObj* fighterObj) {
 
     Vec spB0;
@@ -2732,10 +2734,10 @@ void func_8006C80C(HSD_GObj* fighterObj) {
 
 
     if (fighter_r31->x221F_flag.bits.b3 == 0) {
-        func_80067624(fighterObj, fighter_r31->x60C);
+        func_80067624(fighterObj, &fighter_r31->x60C);
         temp_ptr = jobj_userdata = fighterObj->user_data;
 
-        if (temp_ptr->translate.y != -1.0f) {
+        if (temp_ptr->translate.y != 1.0f) {
 
             temp_ptr2 = jobj = fighterObj->hsd_obj;
 
@@ -2785,7 +2787,7 @@ void func_8006C80C(HSD_GObj* fighterObj) {
 
 }
 
-///https://decomp.me/scratch/HIIOt
+//// https://decomp.me/scratch/DN71r
 void func_8006CA5C(HSD_GObj* fighterObj) {
 
     Fighter* fighter_r31 = fighterObj->user_data;
@@ -2796,7 +2798,7 @@ void func_8006CA5C(HSD_GObj* fighterObj) {
             func_80078A2C(fighterObj);
             if (fighter_r31->x1A58) {
                 if (fighter_r31->x2225_flag.bits.b1 == 0) {
-                    func_80088148(fighter_r31, ((struct S_TEMP2*)fighter_r31->x10C_ftData->ext_attr)->unk30, 0x7F, 0x40);
+                    func_80088148(fighter_r31, fighter_r31->x10C_ftData->x4C_collisionData->x30, 0x7F, 0x40);
                 }
                 func_80078754(fighterObj, fighter_r31->x1A58, 0);
                 fighter_r31->cb.x2190_callback_OnGrabFighter_Self(fighterObj);
@@ -2807,7 +2809,7 @@ void func_8006CA5C(HSD_GObj* fighterObj) {
 
             if (fighter_r31->x1A60) {
                 if (fighter_r31->x2225_flag.bits.b1 == 0) {
-                    func_80088148(fighter_r31, ((struct S_TEMP2*)fighter_r31->x10C_ftData->ext_attr)->unk30, 0x7F, 0x40);
+                    func_80088148(fighter_r31, fighter_r31->x10C_ftData->x4C_collisionData->x30, 0x7F, 0x40);
                 }
                 func_8027B4A4(fighterObj, fighter_r31->x1A60);
                 if (fighter_r31->cb.x2194_callback_x2194) {

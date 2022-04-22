@@ -1827,7 +1827,7 @@ void func_8008D930();
 // ? func_8008DCE0(?);
 // ? func_8008E498(?);
 // ? func_8008E5A4(?);
-void func_8008E908();
+void func_8008E908(struct _HSD_GObj*, f32);
 s32 func_8008E984(struct _Fighter*);
 void func_8008E9D0();
 void func_8008EB58();
