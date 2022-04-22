@@ -351,6 +351,8 @@ struct S_TEMP4 {
     s32 xC;
     s32 x10_animCurrFlags;
     s32 x14;
+};
+
 // --------------------------------------------------------------------------------
 // UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fighter
 // header includes or something.
@@ -1132,25 +1134,6 @@ typedef struct _Fighter {
     /* 0x2354 */ f32 x2354_stateVar6;
     /* 0x2358 */ f32 x2358_stateVar7;
 } Fighter;
-
-///// 
-typedef struct {
-    HSD_Joint* joint;
-    u8 padding[20];
-} UnkFighterJointStruct;
-
-struct Pair_Pointer_and_Flag {
-    UnkFighterJointStruct* unk_fighter_struct;
-    u8 flag;
-};
-
-struct S_TEMP1 {
-    FighterKind fighterKind;
-    u8 playerID;
-    u8 unk5;
-    UnkFlagStruct unk6;
-};
-
 
 
 // functions from fighter.s

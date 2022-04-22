@@ -50,15 +50,9 @@ func_800E1178:
 /* 800E11AC 000DDD8C  C0 62 97 B8 */	lfs f3, lbl_804D9198@sda21(r2)
 /* 800E11B0 000DDD90  38 A0 50 00 */	li r5, 0x5000
 /* 800E11B4 000DDD94  38 C0 00 00 */	li r6, 0
-<<<<<<< HEAD
 /* 800E11B8 000DDD98  4B F8 81 F5 */	bl Fighter_ActionStateChange_800693AC
-/* 800E11BC 000DDD9C  3C 60 80 0E */	lis r3, lbl_800E0EE0@ha
-/* 800E11C0 000DDDA0  38 03 0E E0 */	addi r0, r3, lbl_800E0EE0@l
-=======
-/* 800E11B8 000DDD98  4B F8 81 F5 */	bl func_800693AC
 /* 800E11BC 000DDD9C  3C 60 80 0E */	lis r3, func_800E0EE0@ha
 /* 800E11C0 000DDDA0  38 03 0E E0 */	addi r0, r3, func_800E0EE0@l
->>>>>>> origin/master
 /* 800E11C4 000DDDA4  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 800E11C8 000DDDA8  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 800E11CC 000DDDAC  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -85,15 +79,9 @@ func_800E11E0:
 /* 800E1214 000DDDF4  C0 62 97 B8 */	lfs f3, lbl_804D9198@sda21(r2)
 /* 800E1218 000DDDF8  38 A0 50 00 */	li r5, 0x5000
 /* 800E121C 000DDDFC  38 C0 00 00 */	li r6, 0
-<<<<<<< HEAD
 /* 800E1220 000DDE00  4B F8 81 8D */	bl Fighter_ActionStateChange_800693AC
-/* 800E1224 000DDE04  3C 60 80 0E */	lis r3, lbl_800E0EE0@ha
-/* 800E1228 000DDE08  38 03 0E E0 */	addi r0, r3, lbl_800E0EE0@l
-=======
-/* 800E1220 000DDE00  4B F8 81 8D */	bl func_800693AC
 /* 800E1224 000DDE04  3C 60 80 0E */	lis r3, func_800E0EE0@ha
 /* 800E1228 000DDE08  38 03 0E E0 */	addi r0, r3, func_800E0EE0@l
->>>>>>> origin/master
 /* 800E122C 000DDE0C  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 800E1230 000DDE10  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 800E1234 000DDE14  83 E1 00 14 */	lwz r31, 0x14(r1)

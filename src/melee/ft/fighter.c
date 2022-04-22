@@ -1022,8 +1022,8 @@ HSD_GObj* func_80068E98(struct S_TEMP1* input) {
     func_8038FD54(temp_r31, &func_8006A360, 1);
     func_8038FD54(temp_r31, &func_8006ABA0, 2);
     func_8038FD54(temp_r31, &func_8006AD10, 3);
-    func_8038FD54(temp_r31, &Fighter_procUpdate, 4);
-    func_8038FD54(temp_r31, &func_8006C27C, 6);
+    func_8038FD54(temp_r31, (void*) &Fighter_procUpdate, 4);
+    func_8038FD54(temp_r31, (void*) &func_8006C27C, 6);
     func_8038FD54(temp_r31, &func_8006C5F4, 7);
     func_8038FD54(temp_r31, &func_8006C624, 8);
     func_8038FD54(temp_r31, &func_8006C80C, 9);
@@ -1254,7 +1254,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 arg1, s32 arg2
 
     if (fp->xE0_ground_or_air == 0) {
         if (fp->x4_fighterKind == 9) {
-            fp->x222C = 1;
+            fp->sa.peach.x222C = 1;
         }
         fp->x2221_flag.bits.b5 = 0;
         fp->x2221_flag.bits.b7 = 1;
