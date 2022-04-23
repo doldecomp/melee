@@ -121,7 +121,7 @@ typedef struct _ftCommonData {
     u8 filler_x208[0x21C-0x208];
     /* 0x21C */ f32 x21C;
     u8 filler_x220[0x260-0x220];
-    /* 0x260 */ f32 x260;
+    /* 0x260 */ f32 x260_startShieldHealth;
     u8 filler_x264[0x27C-0x264];
     /* 0x27C */ f32 x27C;
     /* 0x280 */ f32 x280;
@@ -1137,12 +1137,12 @@ typedef struct _Fighter {
 
 
 // functions from fighter.s
-void func_800679B0();
-void func_80067A84();
-void func_80067ABC();
-void func_80067BB4(HSD_GObj* fighterObj);
-void func_80067C98(Fighter*);
-void func_80068354(HSD_GObj* fighterObj);
+void Fighter_800679B0();
+void Fighter_FirstInitialize_80067A84();
+void Fighter_LoadCommonData();
+void Fighter_UpdateModelScale(HSD_GObj* fighterObj);
+void Fighter_UnkInitReset_80067C98(Fighter*);
+void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighterObj);
 void func_800686E4(HSD_GObj* fighterObj);
 void func_8006876C(Fighter* fighter);
 void func_80068854(HSD_GObj* fighterObj);

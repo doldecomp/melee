@@ -288,7 +288,7 @@ void ftData_SetScale(HSD_GObj* gobj, f32 val)
     u32 unused[2];
     Fighter* fp = gobj->user_data;
     fp->x34_scale.y = val;
-    func_80067BB4(gobj);
+    Fighter_UpdateModelScale(gobj);
     func_80080174(fp);
 }
 
@@ -419,7 +419,7 @@ void func_80086990(HSD_GObj* gobj, Vec3* v)
 
 f32 func_800869D4(HSD_GObj* gobj)
 {
-    return func_8007F694(gobj->user_data);
+    return Fighter_GetModelScale(gobj->user_data);
 }
 
 f32 func_800869F8(HSD_GObj* gobj)
@@ -717,7 +717,7 @@ void func_80087140(HSD_GObj* gobj)
     if (!fp->x221F_flag.bits.b3) {
         func_800D4F24(gobj, 1);
         func_8007ED2C(fp);
-        func_80068354(gobj);
+        Fighter_UnkProcessDeath_80068354(gobj);
         func_8007D92C(gobj);
     }
 }

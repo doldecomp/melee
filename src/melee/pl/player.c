@@ -125,7 +125,7 @@ extern void func_8003891C(s32);
 extern void func_80038F10(s32);
 extern void func_8003715C();
 extern void func_80037590();
-extern void func_80067A84();
+extern void Fighter_FirstInitialize_80067A84();
 extern void func_800BEB60(s32, s32, s32);
 extern s32 func_800865F0(HSD_GObj*);
 extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
@@ -513,7 +513,7 @@ s8 Player_80032610(s32 slot, BOOL arg1) {  //// decomp.me/scratch/pHTx2
     return error_value;
 }
 
-void Player_800326CC(s32 slot, Vec* arg_vec) {
+void Player_LoadPlayerCoords(s32 slot, Vec* arg_vec) {
     StaticPlayer* player;
     Vec* player_vecs;
 
@@ -1910,7 +1910,7 @@ void Player_InitAllPlayers() {
 
 void Player_80036DA4() { 
     HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
-    func_80067A84();
+    Fighter_FirstInitialize_80067A84();
 }
 
 void Player_80036DD8() {   
