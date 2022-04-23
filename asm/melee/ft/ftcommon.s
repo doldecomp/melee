@@ -2984,7 +2984,7 @@ func_8007EFC8:
 /* 8007F02C 0007BC0C  88 1D 22 1F */	lbz r0, 0x221f(r29)
 /* 8007F030 0007BC10  50 A0 07 38 */	rlwimi r0, r5, 0, 0x1c, 0x1c
 /* 8007F034 0007BC14  98 1D 22 1F */	stb r0, 0x221f(r29)
-/* 8007F038 0007BC18  4B FE 8C 61 */	bl func_80067C98
+/* 8007F038 0007BC18  4B FE 8C 61 */	bl Fighter_UnkInitReset_80067C98
 /* 8007F03C 0007BC1C  80 7E 00 2C */	lwz r3, 0x2c(r30)
 /* 8007F040 0007BC20  C0 02 89 50 */	lfs f0, lbl_804D8330@sda21(r2)
 /* 8007F044 0007BC24  D0 03 00 E4 */	stfs f0, 0xe4(r3)
@@ -3413,8 +3413,8 @@ lbl_8007F670:
 /* 8007F68C 0007C26C  7C 08 03 A6 */	mtlr r0
 /* 8007F690 0007C270  4E 80 00 20 */	blr 
 
-.global func_8007F694
-func_8007F694:
+.global Fighter_GetModelScale
+Fighter_GetModelScale:
 /* 8007F694 0007C274  C0 23 00 38 */	lfs f1, 0x38(r3)
 /* 8007F698 0007C278  C0 03 01 9C */	lfs f0, 0x19c(r3)
 /* 8007F69C 0007C27C  EC 21 00 32 */	fmuls f1, f1, f0

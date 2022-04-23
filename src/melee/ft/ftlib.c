@@ -12,7 +12,7 @@ extern struct {
 extern struct {
     void* unk0;
     u8 unk4;
-} lbl_803C0EC0[];
+} CostumeListsForeachCharacter[];
 
 extern s8 lbl_803C26FC[];
 
@@ -288,7 +288,7 @@ void ftData_SetScale(HSD_GObj* gobj, f32 val)
     u32 unused[2];
     Fighter* fp = gobj->user_data;
     fp->x34_scale.y = val;
-    func_80067BB4(gobj);
+    Fighter_UpdateModelScale(gobj);
     func_80080174(fp);
 }
 
@@ -347,7 +347,7 @@ BOOL func_800867D8(HSD_GObj* gobj)
 void func_800867E8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_80068854(gobj);
+    Fighter_ResetInputData_80068854(gobj);
     fp->x221D_flag.bits.b4 = 1;
 }
 
@@ -419,7 +419,7 @@ void func_80086990(HSD_GObj* gobj, Vec3* v)
 
 f32 func_800869D4(HSD_GObj* gobj)
 {
-    return func_8007F694(gobj->user_data);
+    return Fighter_GetModelScale(gobj->user_data);
 }
 
 f32 func_800869F8(HSD_GObj* gobj)
@@ -717,7 +717,7 @@ void func_80087140(HSD_GObj* gobj)
     if (!fp->x221F_flag.bits.b3) {
         func_800D4F24(gobj, 1);
         func_8007ED2C(fp);
-        func_80068354(gobj);
+        Fighter_UnkProcessDeath_80068354(gobj);
         func_8007D92C(gobj);
     }
 }
@@ -895,7 +895,7 @@ void func_80087574(s8 arg)
     u8 i;
     func_8008572C(arg);
     func_8006737C(lbl_803C26FC[arg]);
-    for (i = 0; i < lbl_803C0EC0[arg].unk4; i++) {
+    for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++) {
         func_80085820(arg, i);
     }
     func_80085A14(arg);

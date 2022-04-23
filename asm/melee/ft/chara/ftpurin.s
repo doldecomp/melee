@@ -66,8 +66,8 @@ func_8013C360:
 /* 8013C3C0 00138FA0  83 A3 00 04 */	lwz r29, 4(r3)
 /* 8013C3C4 00138FA4  40 82 00 38 */	bne lbl_8013C3FC
 /* 8013C3C8 00138FA8  80 BE 00 04 */	lwz r5, 4(r30)
-/* 8013C3CC 00138FAC  3C 60 80 3C */	lis r3, lbl_803C0EC0@ha
-/* 8013C3D0 00138FB0  38 03 0E C0 */	addi r0, r3, lbl_803C0EC0@l
+/* 8013C3CC 00138FAC  3C 60 80 3C */	lis r3, CostumeListsForeachCharacter@ha
+/* 8013C3D0 00138FB0  38 03 0E C0 */	addi r0, r3, CostumeListsForeachCharacter@l
 /* 8013C3D4 00138FB4  54 A3 18 38 */	slwi r3, r5, 3
 /* 8013C3D8 00138FB8  7C 60 1A 14 */	add r3, r0, r3
 /* 8013C3DC 00138FBC  1C 06 00 18 */	mulli r0, r6, 0x18

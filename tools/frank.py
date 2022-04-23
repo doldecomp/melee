@@ -109,17 +109,11 @@ lwz_found_pos = final_bytes.find(LWZ_BYTE, 0)
 while lwz_found_pos != -1:
 
     if lwz_found_pos % 4 == 0 and final_bytes[lwz_found_pos + 4] == 127:
-
         if final_bytes[lwz_found_pos + 8] == 0x83 and final_bytes[lwz_found_pos - 4] != 0x83:
-            #print(bytearray(final_bytes[lwz_found_pos:lwz_found_pos+4]).hex(' '), " ", bytearray(final_bytes[lwz_found_pos+4:lwz_found_pos+8]).hex(' '), " ", hex(lwz_found_pos + 0x64560))
-            #print(hex(final_bytes[lwz_found_pos - 4]), " ", hex(final_bytes[lwz_found_pos + 8]))
-            #print("")
             final_bytes = final_bytes[:lwz_found_pos] + final_bytes[lwz_found_pos+4:lwz_found_pos+8] + final_bytes[lwz_found_pos:lwz_found_pos+4] + final_bytes[lwz_found_pos+8:]
             lwz_found_pos += 4
 
     lwz_found_pos = final_bytes.find(LWZ_BYTE, lwz_found_pos+1)
-
-
 
 
 with open(args.target, "wb") as f:

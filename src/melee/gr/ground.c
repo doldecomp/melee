@@ -444,7 +444,7 @@ static BOOL func_801C0A70(Point3d* pos)
             player_slot = HSD_Randi(4);
             if (Player_GetEntity(player_slot) != NULL) {
                 s32 xoff;
-                Player_800326CC(player_slot, pos);
+                Player_LoadPlayerCoords(player_slot, pos);
                 pos->y = -5.0f + Stage_GetBlastZoneTopOffset();
                 xoff = HSD_Randi(0x64) - 0x32;
                 pos->x += xoff;
