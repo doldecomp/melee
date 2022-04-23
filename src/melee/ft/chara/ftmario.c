@@ -221,10 +221,7 @@ void func_800E0DA8(HSD_GObj* gobj) {
 }
 
 void func_800E0E18(HSD_GObj* gobj) {
-    int res;
-
-    res = func_8006F238(gobj);
-    if (res == 0) {
+    if (func_8006F238(gobj) == 0) {
         func_8008A2BC(gobj);
     }
 }
@@ -242,10 +239,7 @@ void func_800E0E84(HSD_GObj* gobj) {
 }
 
 void func_800E0EA4(HSD_GObj* gobj) {
-    int res;
-
-    res = func_80082708(gobj);
-    if (res == 0) {
+    if (func_80082708(gobj) == 0) {
         func_800E1178(gobj);
     }
 }
@@ -303,10 +297,7 @@ void func_800E1040(HSD_GObj* gobj) {
 }
 
 void func_800E10B0(HSD_GObj* gobj) {
-    int res;
-
-    res = func_8006F238(gobj);
-    if (res == 0) {
+    if (func_8006F238(gobj) == 0) {
         func_800CC730(gobj);
     }
 }
@@ -323,10 +314,7 @@ void func_800E111C(void) {
 }
 
 void func_800E113C(HSD_GObj* gobj) {
-    int res;
-
-    res = func_80081D0C(gobj);
-    if (res != 0) {
+    if (func_80081D0C(gobj) != 0) {
         func_800E11E0(gobj);
     }
 }
@@ -424,8 +412,6 @@ void func_800E1450(HSD_GObj* gobj) {
     ft = gobj->user_data;
     ft->x80_self_vel.y = f1 = lbl_804D91A0;
 
-    //(((Fighter*)(gobj->user_data))->x80_self_vel).y = lbl_804D91A0;
-    //func_800693AC(gobj, 0x159,0,0,lbl_804D91A0,lbl_804D91A4,lbl_804D91A0);
     func_800693AC(gobj, 0x159,0,0,f1,lbl_804D91A4,f1);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
@@ -434,4 +420,42 @@ void func_800E1450(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->x2340_stateVar1 = 0;
     ft->cb.x21BC_callback_Accessory4 = func_800E1248;
+}
+
+void func_800E14C8(HSD_GObj* gobj) {
+    f32 f1;
+    Fighter* ft = gobj->user_data;
+    u8 unused[16];
+    
+    ft->x80_self_vel.x = (ft->x80_self_vel.x / ((Vec3*)(ft->x2D4_specialAttributes))->x);
+
+    f1 = lbl_804D91A0;
+    func_800693AC(gobj, 0x15A, 0, 0, f1, lbl_804D91A4, f1);
+    func_8006EBA4(gobj);
+    ft = gobj->user_data;
+    ft->x2200_ftcmd_var2 = 0;
+    ft->x2200_ftcmd_var1 = 0;
+    ft->x2200_ftcmd_var0 = 0;
+    ft->x2340_stateVar1 = 0;
+    ft->cb.x21BC_callback_Accessory4 = func_800E1248;
+}
+
+void func_800E1550(HSD_GObj* gobj) {
+    if (func_8006F238(gobj) == 0) {
+        func_8008A2BC(gobj);
+    }
+}
+
+void func_800E158C(HSD_GObj* gobj) {
+    if (func_8006F238(gobj) == 0) {
+        func_800CC730(gobj);
+    }
+}
+
+void func_800E15C8() {
+	return;
+}
+
+void func_800E15CC() {
+	return;
 }
