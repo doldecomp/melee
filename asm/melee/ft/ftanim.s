@@ -2933,7 +2933,7 @@ lbl_800702E8:
 .global func_80070308
 func_80070308:
 /* 80070308 0006CEE8  7C 08 02 A6 */	mflr r0
-/* 8007030C 0006CEEC  3C 80 80 3C */	lis r4, lbl_803C0EC0@ha
+/* 8007030C 0006CEEC  3C 80 80 3C */	lis r4, CostumeListsForeachCharacter@ha
 /* 80070310 0006CEF0  90 01 00 04 */	stw r0, 4(r1)
 /* 80070314 0006CEF4  3C C0 80 3C */	lis r6, lbl_803C0638@ha
 /* 80070318 0006CEF8  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -2942,7 +2942,7 @@ func_80070308:
 /* 80070324 0006CF04  38 C0 00 00 */	li r6, 0
 /* 80070328 0006CF08  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8007032C 0006CF0C  83 63 00 28 */	lwz r27, 0x28(r3)
-/* 80070330 0006CF10  38 64 0E C0 */	addi r3, r4, lbl_803C0EC0@l
+/* 80070330 0006CF10  38 64 0E C0 */	addi r3, r4, CostumeListsForeachCharacter@l
 /* 80070334 0006CF14  80 BF 00 04 */	lwz r5, 4(r31)
 /* 80070338 0006CF18  88 1F 06 19 */	lbz r0, 0x619(r31)
 /* 8007033C 0006CF1C  54 A4 18 38 */	slwi r4, r5, 3

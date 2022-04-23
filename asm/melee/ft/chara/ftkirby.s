@@ -8286,8 +8286,8 @@ func_800F5820:
 
 .global func_800F5874
 func_800F5874:
-/* 800F5874 000F2454  3C 80 80 46 */	lis r4, lbl_804598B8@ha
-/* 800F5878 000F2458  38 84 98 B8 */	addi r4, r4, lbl_804598B8@l
+/* 800F5874 000F2454  3C 80 80 46 */	lis r4, gFtDataList@ha
+/* 800F5878 000F2458  38 84 98 B8 */	addi r4, r4, gFtDataList@l
 /* 800F587C 000F245C  80 84 00 10 */	lwz r4, 0x10(r4)
 /* 800F5880 000F2460  80 84 00 04 */	lwz r4, 4(r4)
 /* 800F5884 000F2464  C0 04 00 9C */	lfs f0, 0x9c(r4)
@@ -8447,8 +8447,8 @@ func_800F5A60:
 
 .global func_800F5A70
 func_800F5A70:
-/* 800F5A70 000F2650  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 800F5A74 000F2654  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 800F5A70 000F2650  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 800F5A74 000F2654  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 800F5A78 000F2658  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 800F5A7C 000F265C  80 63 00 04 */	lwz r3, 4(r3)
 /* 800F5A80 000F2660  C0 23 00 44 */	lfs f1, 0x44(r3)
@@ -8463,8 +8463,8 @@ func_800F5A88:
 
 .global func_800F5A98
 func_800F5A98:
-/* 800F5A98 000F2678  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 800F5A9C 000F267C  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 800F5A98 000F2678  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 800F5A9C 000F267C  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 800F5AA0 000F2680  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 800F5AA4 000F2684  80 63 00 04 */	lwz r3, 4(r3)
 /* 800F5AA8 000F2688  C0 23 00 70 */	lfs f1, 0x70(r3)
@@ -8479,8 +8479,8 @@ func_800F5AB0:
 
 .global func_800F5AC0
 func_800F5AC0:
-/* 800F5AC0 000F26A0  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 800F5AC4 000F26A4  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 800F5AC0 000F26A0  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 800F5AC4 000F26A4  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 800F5AC8 000F26A8  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 800F5ACC 000F26AC  80 63 00 04 */	lwz r3, 4(r3)
 /* 800F5AD0 000F26B0  C0 23 00 64 */	lfs f1, 0x64(r3)
@@ -8488,8 +8488,8 @@ func_800F5AC0:
 
 .global func_800F5AD8
 func_800F5AD8:
-/* 800F5AD8 000F26B8  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 800F5ADC 000F26BC  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 800F5AD8 000F26B8  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 800F5ADC 000F26BC  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 800F5AE0 000F26C0  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 800F5AE4 000F26C4  80 63 00 04 */	lwz r3, 4(r3)
 /* 800F5AE8 000F26C8  C0 23 00 60 */	lfs f1, 0x60(r3)
@@ -30824,8 +30824,8 @@ func_801092CC:
 
 .global func_801092DC
 func_801092DC:
-/* 801092DC 00105EBC  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 801092E0 00105EC0  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 801092DC 00105EBC  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 801092E0 00105EC0  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 801092E4 00105EC4  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 801092E8 00105EC8  80 63 00 04 */	lwz r3, 4(r3)
 /* 801092EC 00105ECC  C0 23 03 C4 */	lfs f1, 0x3c4(r3)
@@ -30833,8 +30833,8 @@ func_801092DC:
 
 .global func_801092F4
 func_801092F4:
-/* 801092F4 00105ED4  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 801092F8 00105ED8  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 801092F4 00105ED4  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 801092F8 00105ED8  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 801092FC 00105EDC  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80109300 00105EE0  80 63 00 04 */	lwz r3, 4(r3)
 /* 80109304 00105EE4  C0 23 03 C8 */	lfs f1, 0x3c8(r3)
@@ -30842,8 +30842,8 @@ func_801092F4:
 
 .global func_8010930C
 func_8010930C:
-/* 8010930C 00105EEC  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 80109310 00105EF0  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 8010930C 00105EEC  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 80109310 00105EF0  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 80109314 00105EF4  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80109318 00105EF8  80 63 00 04 */	lwz r3, 4(r3)
 /* 8010931C 00105EFC  C0 23 03 CC */	lfs f1, 0x3cc(r3)
@@ -30851,8 +30851,8 @@ func_8010930C:
 
 .global func_80109324
 func_80109324:
-/* 80109324 00105F04  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 80109328 00105F08  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 80109324 00105F04  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 80109328 00105F08  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 8010932C 00105F0C  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80109330 00105F10  80 63 00 04 */	lwz r3, 4(r3)
 /* 80109334 00105F14  C0 23 03 D0 */	lfs f1, 0x3d0(r3)
@@ -30860,8 +30860,8 @@ func_80109324:
 
 .global func_8010933C
 func_8010933C:
-/* 8010933C 00105F1C  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 80109340 00105F20  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 8010933C 00105F1C  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 80109340 00105F20  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 80109344 00105F24  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80109348 00105F28  80 63 00 04 */	lwz r3, 4(r3)
 /* 8010934C 00105F2C  80 63 03 D4 */	lwz r3, 0x3d4(r3)
@@ -30869,8 +30869,8 @@ func_8010933C:
 
 .global func_80109354
 func_80109354:
-/* 80109354 00105F34  3C 80 80 46 */	lis r4, lbl_804598B8@ha
-/* 80109358 00105F38  38 84 98 B8 */	addi r4, r4, lbl_804598B8@l
+/* 80109354 00105F34  3C 80 80 46 */	lis r4, gFtDataList@ha
+/* 80109358 00105F38  38 84 98 B8 */	addi r4, r4, gFtDataList@l
 /* 8010935C 00105F3C  80 84 00 10 */	lwz r4, 0x10(r4)
 /* 80109360 00105F40  80 84 00 04 */	lwz r4, 4(r4)
 /* 80109364 00105F44  C0 04 03 D8 */	lfs f0, 0x3d8(r4)
@@ -30883,8 +30883,8 @@ func_80109354:
 
 .global func_80109380
 func_80109380:
-/* 80109380 00105F60  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 80109384 00105F64  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 80109380 00105F60  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 80109384 00105F64  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 80109388 00105F68  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 8010938C 00105F6C  80 63 00 04 */	lwz r3, 4(r3)
 /* 80109390 00105F70  C0 23 03 E0 */	lfs f1, 0x3e0(r3)
@@ -31875,9 +31875,9 @@ lbl_8010A1FC:
 /* 8010A234 00106E14  38 80 00 00 */	li r4, 0
 /* 8010A238 00106E18  4B F0 0F 95 */	bl func_8000B1CC
 /* 8010A23C 00106E1C  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 8010A240 00106E20  3C 60 80 46 */	lis r3, lbl_804598B8@ha
+/* 8010A240 00106E20  3C 60 80 46 */	lis r3, gFtDataList@ha
 /* 8010A244 00106E24  C0 02 9B 78 */	lfs f0, lbl_804D9558@sda21(r2)
-/* 8010A248 00106E28  38 A3 98 B8 */	addi r5, r3, lbl_804598B8@l
+/* 8010A248 00106E28  38 A3 98 B8 */	addi r5, r3, gFtDataList@l
 /* 8010A24C 00106E2C  C0 24 00 2C */	lfs f1, 0x2c(r4)
 /* 8010A250 00106E30  80 C4 02 D4 */	lwz r6, 0x2d4(r4)
 /* 8010A254 00106E34  38 00 00 9D */	li r0, 0x9d
@@ -32023,9 +32023,9 @@ lbl_8010A420:
 /* 8010A458 00107038  38 80 00 00 */	li r4, 0
 /* 8010A45C 0010703C  4B F0 0D 71 */	bl func_8000B1CC
 /* 8010A460 00107040  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 8010A464 00107044  3C 60 80 46 */	lis r3, lbl_804598B8@ha
+/* 8010A464 00107044  3C 60 80 46 */	lis r3, gFtDataList@ha
 /* 8010A468 00107048  C0 02 9B 78 */	lfs f0, lbl_804D9558@sda21(r2)
-/* 8010A46C 0010704C  38 A3 98 B8 */	addi r5, r3, lbl_804598B8@l
+/* 8010A46C 0010704C  38 A3 98 B8 */	addi r5, r3, gFtDataList@l
 /* 8010A470 00107050  C0 24 00 2C */	lfs f1, 0x2c(r4)
 /* 8010A474 00107054  80 C4 02 D4 */	lwz r6, 0x2d4(r4)
 /* 8010A478 00107058  38 00 00 9D */	li r0, 0x9d

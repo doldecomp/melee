@@ -12,7 +12,7 @@ extern struct {
 extern struct {
     void* unk0;
     u8 unk4;
-} lbl_803C0EC0[];
+} CostumeListsForeachCharacter[];
 
 extern s8 lbl_803C26FC[];
 
@@ -347,7 +347,7 @@ BOOL func_800867D8(HSD_GObj* gobj)
 void func_800867E8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_80068854(gobj);
+    Fighter_ResetInputData_80068854(gobj);
     fp->x221D_flag.bits.b4 = 1;
 }
 
@@ -895,7 +895,7 @@ void func_80087574(s8 arg)
     u8 i;
     func_8008572C(arg);
     func_8006737C(lbl_803C26FC[arg]);
-    for (i = 0; i < lbl_803C0EC0[arg].unk4; i++) {
+    for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++) {
         func_80085820(arg, i);
     }
     func_80085A14(arg);
