@@ -4394,7 +4394,7 @@ lbl_801C53CC:
 }
 #pragma peephole on
 
-void func_801C53EC(void* arg0)
+void func_801C53EC(u32 arg0)
 {
     func_800237A8(arg0, 0x7F, 0x40);
 }

@@ -132,7 +132,9 @@ typedef struct _ftCommonData {
     u8 filler_x298[0x2DC-0x298];
     /* 0x2DC */ f32 x2DC;
     /* 0x2E0 */ f32 x2E0;
-    u8 filler_x2E4[0x3E0-0x2E4];
+    u8 filler_x2E4[0x3A8-0x2E4];
+    /* 0x3A8 */ f32 x3A8;
+    u8 filler_x3AC[0x3E0-0x3AC];
     /* 0x3E0 */ f32 x3E0;
     /* 0x3E4 */ f32 x3E4;
     /* 0x3E8 */ f32 x3E8_shieldKnockbackFrameDecay;
@@ -207,7 +209,7 @@ typedef struct _ftData
     struct S_TEMP4* xC;
     u8* x10;
     s32 filler_x14[13];
-    /* 0x48 */ void* x48_items;
+    /* 0x48 */ void** x48_items;
     FtCollisionData* x4C_collisionData;
     s32 filler_x50[2];
     void* x58;
@@ -490,7 +492,16 @@ struct SpecialAttrs_Gaw {
 };
 
 struct SpecialAttrs_Masterhand {
-    char filler0[0x114];
+    /* 0x222C */ HSD_GObj* x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ f32 x2238;
+    /* 0x223C */ f32 x223C;
+    /* 0x2240 */ Vec3 x2240_pos;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ s32 x2250;
+    /* 0x2254 */ s32 x2254;
+    /* 0x2258 */ s32 x2258;
 };
 
 struct SpecialAttrs_Crazyhand {
@@ -903,7 +914,8 @@ typedef struct _Fighter {
     /* 0x1A40 */ f32 x1A40;
     /* 0x1A44 */ s32 x1A44;
     /* 0x1A48 */ s32 x1A48;
-    u8 filler_x1A4C[0x1A52 - 0x1A4C];
+    /* 0x1A4C */ f32 x1A4C;
+    u8 filler_x1A50[0x1A52 - 0x1A50];
     /* 0x1A52 */ s8 x1A52;
     /* 0x1A53 */ s8 x1A53;
     /* 0x1A54 */ s32 x1A54;
@@ -915,7 +927,9 @@ typedef struct _Fighter {
     /* 0x1A6A */ s16 x1A6A;
     /* 0x1A6C */ f32 x1A6C;
     /* 0x1A70 */ Vec x1A70;
-    u8 filler_x1A6C[0x2004-0x1A7C];
+    u8 filler_x1A7C[0x1A98-0x1A7C];
+    /* 0x1A98 */ u32 x1A98;
+    u8 filler_x1A9C[0x2004-0x1A9C];
     /* 0x2008 */ s32 x2004;
     /* 0x2008 */ s32 x2008;
     /* 0x200C */ s32 x200C;
@@ -1091,7 +1105,7 @@ typedef struct _Fighter {
     u8 filler_x222B;
     // Some of these are clones of each other (they just use another struct)
     // and some of them dont have specials so dont exist in the union. TODO: Clean-up
-    union { 
+    union {
         struct SpecialAttrs_Mario mario;
         struct SpecialAttrs_Fox fox;
         struct SpecialAttrs_Captain captain;
@@ -1126,13 +1140,43 @@ typedef struct _Fighter {
         struct SpecialAttrs_GKoopa gkoopa;
         struct SpecialAttrs_Sandbag sandbag;
     } sa;
+    union {
     /* 0x2340 */ u32 x2340_stateVar1;
+    /* 0x2340 */ f32 x2340_f32;
+    };
+    union {
     /* 0x2344 */ u32 x2344_stateVar2;
+    /* 0x2344 */ void (*x2344_callback)(HSD_GObj*);
+    /* 0x2344 */ f32 x2344_f32;
+    };
     /* 0x2348 */ u32 x2348_stateVar3;
+    union {
+    struct {
     /* 0x234C */ u32 x234C_stateVar4;
     /* 0x2350 */ u32 x2350_stateVar5;
     /* 0x2354 */ f32 x2354_stateVar6;
+    };
+    /* 0x234C */ Vec3 x234C_pos;
+    };
     /* 0x2358 */ f32 x2358_stateVar7;
+    /* 0x235C */ f32 x235C;
+    /* 0x2360 */ s32 x2360;
+    /* 0x2364 */ f32 x2364;
+    /* 0x2368 */ u32 x2368;
+    /* 0x236C */ u32 x236C;
+    /* 0x2370 */ u32 x2370;
+    /* 0x2374 */ u32 x2374;
+    /* 0x2378 */ u32 x2378;
+    /* 0x237C */ u32 x237C;
+    /* 0x2380 */ u32 x2380;
+    u8 filler_x2384[0x2390-0x2384];
+    /* 0x2390 */ f32 x2390;
+    /* 0x2394 */ s32 x2394;
+    /* 0x2394 */ Vec3 x2398;
+    /* 0x2394 */ Vec3 x23A4;
+    /* 0x23B0 */ s32 x23B0;
+    /* 0x23B4 */ s32 x23B4;
+    /* 0x23B8 */ s32 x23B8;
 } Fighter;
 
 
