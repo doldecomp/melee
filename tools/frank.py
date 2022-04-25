@@ -102,19 +102,40 @@ while idx < len(final_bytes):
     final_bytes = final_bytes[:mtlr_found_pos] + final_bytes[mtlr_found_pos+4:blr_found_pos] + final_bytes[mtlr_found_pos:mtlr_found_pos+4] + final_bytes[blr_found_pos:]
     idx = mtlr_found_pos + len(MTLR_BYTE_SEQ)
 
-
-
-##Snuffy - temp fix swapped lwz and mr at end of functions
-lwz_found_pos = final_bytes.find(LWZ_BYTE, 0)
-while lwz_found_pos != -1:
-
-    if lwz_found_pos % 4 == 0 and final_bytes[lwz_found_pos + 4] == 127:
-        if final_bytes[lwz_found_pos + 8] == 0x83 and final_bytes[lwz_found_pos - 4] != 0x83:
-            final_bytes = final_bytes[:lwz_found_pos] + final_bytes[lwz_found_pos+4:lwz_found_pos+8] + final_bytes[lwz_found_pos:lwz_found_pos+4] + final_bytes[lwz_found_pos+8:]
-            lwz_found_pos += 4
-
-    lwz_found_pos = final_bytes.find(LWZ_BYTE, lwz_found_pos+1)
-
+# Reorder lmw/lwz/lfd instructions, if needed (@Altafen)
+# Specifically, if this sequence shows up in the stripped profiler code: "LMW, LWZ, LFD*"
+# And this sequence shows up in the vanilla code: "LWZ, LFD*, LMW"
+# (LFD* = any number of LFDs, including zero)
+# If all bytes match between the two (except for the reordering), then use the vanilla ordering.
+# This could be written to anchor around the "BL, NOP" instructions in unstripped profiler code,
+# or to check for the presence of "ADDI, MTLR, BLR" soon after.
+# This also could be written to decode the operands of each instruction to make sure the reorder is harmless.
+# Neither of these safeguards are necessary at the moment.
+LWZ = 32
+LMW = 46
+LFD = 50
+idx = 0
+while idx+4 < len(final_bytes):
+    if final_bytes[idx] >> 2 == LMW and final_bytes[idx+4] >> 2 == LWZ and vanilla_bytes[idx] >> 2 == LWZ:
+        start_idx = idx
+        lmw_bytes = final_bytes[idx:idx+4]
+        lwz_bytes = final_bytes[idx+4:idx+8]
+        if vanilla_bytes[idx:idx+4] != lwz_bytes:
+            idx += 4
+            continue
+        lfd_bytes = b""
+        idx += 4
+        while vanilla_bytes[idx] >> 2 == LFD:
+            lfd_bytes += vanilla_bytes[idx:idx+4]
+            idx += 4
+        if vanilla_bytes[idx:idx+4] != lmw_bytes:
+            continue
+        if final_bytes[start_idx+8:start_idx+8+len(lfd_bytes)] != lfd_bytes:
+            continue
+        idx += 4
+        final_bytes = final_bytes[:start_idx] + lwz_bytes + lfd_bytes + lmw_bytes + final_bytes[idx:]
+        continue
+    idx += 4
 
 with open(args.target, "wb") as f:
     f.write(final_bytes)
