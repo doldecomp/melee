@@ -1047,8 +1047,8 @@ lbl_803C125C:
     .4byte NULL
     .balign 4
 
-.global FtStateTableByCharacter
-FtStateTableByCharacter:
+.global ActionStateTableByCharacter
+ActionStateTableByCharacter:
     .4byte lbl_803C7120
     .4byte lbl_803C7788
     .4byte lbl_803C72B8
@@ -2491,8 +2491,8 @@ lbl_803C2744:
     .balign 4
     .asciz "HSD_ArchiveParse error! %x\n"
     .balign 8
-.global FtStateList
-FtStateList:
+.global ActionStateList
+ActionStateList:
     # Entry 0
     # ID
     .4byte -1

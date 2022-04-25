@@ -1187,7 +1187,7 @@ void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj*);
 // ? Fighter_ResetInputData_80068854(?);
 // ? Fighter_UnkInitLoad_80068914(?);
 u32 Fighter_NewSpawn_80068E40();
-// ? func_80068E64(?);
+// ? Fighter_80068E64(?);
 // void func_80068E98();
 void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighterObj, s32 arg1, s32 arg2, struct _HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
 // ? func_8006ABEC(?);

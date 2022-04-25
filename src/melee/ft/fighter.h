@@ -152,7 +152,7 @@ typedef struct _ftCommonData {
     /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
     struct RGBA x6DC_colorsByPlayer[4];
     u8 filler_x6EC[0x6F4 - 0x6EC];
-    /* 0x6F4 */ s32 x6F4;
+    /* 0x6F4 */ s32 x6F4_unkDamage;
     /* 0x6F8 */ s32 x6F8;
     /* 0x6FC */ s32 x6FC;
     u8 filler_x768[0x768 - 0x700];
@@ -166,7 +166,7 @@ typedef struct _ftCommonData {
     /* 0x7A8 */ s32 x7A8;
     /* 0x7AC */ s32 x7AC;
     /* 0x7B0 */ s32 x7B0;
-    /* 0x7B4 */ s32 x7B4;
+    /* 0x7B4 */ s32 x7B4_unkDamage;
     /* 0x7B8 */ s32 x7B8;
     /* 0x7BC */ s32 x7BC;
     /* 0x7C0 */ s32 x7C0;
@@ -179,7 +179,7 @@ typedef struct _ftCommonData {
     /* 0x7DC */ s32 x7DC;
 
     /* 0x7E0 */ s32 x7E0;
-    /* 0x7E4 */ f32 x7E4;
+    /* 0x7E4 */ f32 x7E4_scaleZ;
     u8 x7E8_filler[0x814 - 0x7E8];
     /* 0x814 */ s32 x814;
     // lots of more data following, exact size to be determined
@@ -327,7 +327,7 @@ struct S_TEMP1 {
     UnkFlagStruct flags;
 };
 
-struct FtState {
+struct ActionState {
     s32 action_id; 
 
     s32 x4_flags;
@@ -521,11 +521,11 @@ typedef struct _Fighter {
     /* 0xD */ u8 xD;
     /* 0xE */ u8 xE;
     /* 0xF */ u8 xF;
-    /* 0x10 */ s32 x10;
+    /* 0x10 */ s32 x10_action_state_index;
     /* 0x14 */ s32 x14_action_id;
     /* 0x18 */ s32 x18;
-    /* 0x1C */ struct FtState* x1C_ftStateList;
-    /* 0x20 */ struct FtState* x20_ftStateList;
+    /* 0x1C */ struct ActionState* x1C_actionStateList;
+    /* 0x20 */ struct ActionState* x20_actionStateList;
     /* 0x24 */ struct S_TEMP4* x24;
     /* 0x28 */ u8* x28;
     /* 0x2C */ f32 x2C_facing_direction;
@@ -774,7 +774,7 @@ typedef struct _Fighter {
     /* 0x6D8 */  Vec3 x6D8;
     /* 0x6E4 */  Vec3 x6E4;
     /* 0x6F0 */ CollData x6F0_collData;
-    /* 0x890 */ CameraBox* x890;
+    /* 0x890 */ CameraBox* x890_cameraBox;
     /* 0x894 */ f32 x894;
     /* 0x898 */ f32 x898;
     /* 0x89C */ f32 x89C;
@@ -1147,11 +1147,12 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighterObj);
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fighter);
 void Fighter_ResetInputData_80068854(HSD_GObj* fighterObj);
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata);
-void func_80068E64(HSD_GObj* fighterObj);
+u32 Fighter_NewSpawn_80068E40();
+void Fighter_80068E64(HSD_GObj* fighterObj);
 HSD_GObj* func_80068E98(struct S_TEMP1* input);
-void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 arg1, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
-void func_8006A1BC();
-void func_8006A360();
+void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
+void Fighter_8006A1BC(HSD_GObj* fighterObj);
+void func_8006A360(HSD_GObj* fighterObj);
 void func_8006ABA0();
 void func_8006ABEC();
 void func_8006AD10();
