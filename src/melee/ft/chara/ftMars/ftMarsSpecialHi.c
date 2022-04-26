@@ -10,7 +10,7 @@ void func_80138208(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
     // ActionStateChange
-    func_800693AC(gobj, 0x16F, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
     // AS_AnimationFrameUpdate&More
     func_8006EBA4(gobj);
 }
@@ -29,7 +29,7 @@ void func_8013826C(HSD_GObj* gobj) {
     ft->x80_self_vel.y = 0.0f;
     ft->x80_self_vel.x *= attr->x3C;
     // ActionStateChange
-    func_800693AC(gobj, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
     // AS_AnimationFrameUpdate&More
     func_8006EBA4(gobj);
 }

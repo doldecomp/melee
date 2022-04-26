@@ -25,7 +25,7 @@ void func_801C3990(f32 bottom);
 void func_801C39A0(f32 left);
 void func_801C39B0(f32 right);
 static void lbl_801C1E2C(HSD_GObj*);
-static void func_801C0A70();
+static BOOL func_801C0A70(Vec3* pos);
 static void lbl_801C0C2C();
 static BOOL func_801C24F8(s32, u32, s32*);
 void func_801C5544(Map*, s32);

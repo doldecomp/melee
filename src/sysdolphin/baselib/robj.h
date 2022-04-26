@@ -86,6 +86,7 @@ typedef struct _HSD_RObjAnimJoint {
 } HSD_RObjAnimJoint;
 
 
+void _HSD_RObjForgetMemory(void);
 void HSD_RObjInitAllocData(void);
 HSD_ObjAllocData* HSD_RObjGetAllocData(void);
 HSD_ObjAllocData* HSD_RvalueObjGetAllocData(void);

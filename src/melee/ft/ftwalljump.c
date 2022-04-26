@@ -2,8 +2,8 @@
 #include <sysdolphin/baselib/gobj.h>
 #include "fighter.h"
 
-extern ftCommonData* lbl_804D6554; // defined in fighter.s
-#define p_ftcommon_r4 lbl_804D6554
+extern ftCommonData* p_ftCommonData; // defined in fighter.s
+#define p_ftcommon_r4 p_ftCommonData
 
 #define MAX_WALLJUMP_INPUT_FRAMES 254
 

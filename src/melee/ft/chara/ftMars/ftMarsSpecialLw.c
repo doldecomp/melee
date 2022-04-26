@@ -7,7 +7,7 @@ void func_801389CC(HSD_GObj* gobj) {
     u32 unused[2];
 
     ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0f;
-    func_800693AC(gobj, 0x171, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x171, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
     ft->x2200_ftcmd_var1 = 0;
@@ -26,7 +26,7 @@ void func_80138A30(HSD_GObj* gobj) {
     attr = ft->x2D4_specialAttributes;
     ft->x80_self_vel.x /= attr->x4C;
     ft->x80_self_vel.y = 0.0f;
-    func_800693AC(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x173, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft2 = gobj->user_data;
     ft2->x2200_ftcmd_var1 = 0;
@@ -135,7 +135,7 @@ void func_80138D38(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     func_8007D5D4(ft);
-    func_800693AC(gobj, 0x173, 0x0C4C508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x173, 0x0C4C508C, NULL, ft->x894, 1.0f, 0.0f);
     ft_2 = gobj->user_data;
     attr = ft_2->x2D4_specialAttributes;
     if (ft_2->x2200_ftcmd_var1 == 2) {
@@ -154,7 +154,7 @@ void func_80138DD0(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     func_8007D7FC(ft);
-    func_800693AC(gobj, 0x171, 0x0C4C508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x171, 0x0C4C508C, NULL, ft->x894, 1.0f, 0.0f);
     ft_2 = gobj->user_data;
     attr = ft_2->x2D4_specialAttributes;
     if (ft_2->x2200_ftcmd_var1 == 2) {
@@ -278,7 +278,7 @@ void lbl_80139044(HSD_GObj* gobj) {
 void func_80139080(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     func_8007D5D4(ft);
-    func_800693AC(gobj, 0x174, 0x0C4C508E, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x174, 0x0C4C508E, NULL, ft->x894, 1.0f, 0.0f);
 }
 
 // 801390E0 00135CC0
@@ -286,7 +286,7 @@ void func_80139080(HSD_GObj* gobj) {
 void func_801390E0(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     func_8007D7FC(ft);
-    func_800693AC(gobj, 0x172, 0x0C4C508E, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x172, 0x0C4C508E, NULL, ft->x894, 1.0f, 0.0f);
 }
 
 // 80139140 00135D20
@@ -315,7 +315,7 @@ void lbl_80139140(HSD_GObj* gobj) {
     } else {
         thing = 0x174;
     }
-    func_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0, NULL, 0.0f, 1.0f, 0.0f);
     ft_2 = gobj->user_data;
     ft_2->x2219_flag; // required for regalloc
     if (ft_2->x2219_flag.bits.b0 == 0) {

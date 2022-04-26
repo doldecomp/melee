@@ -45,11 +45,11 @@ lbl_80085250:
 
 .global func_800852B0
 func_800852B0:
-/* 800852B0 00081E90  3C 80 80 46 */	lis r4, lbl_804598B8@ha
-/* 800852B4 00081E94  3C 60 80 3C */	lis r3, lbl_803C0EC0@ha
-/* 800852B8 00081E98  39 03 0E C0 */	addi r8, r3, lbl_803C0EC0@l
+/* 800852B0 00081E90  3C 80 80 46 */	lis r4, gFtDataList@ha
+/* 800852B4 00081E94  3C 60 80 3C */	lis r3, CostumeListsForeachCharacter@ha
+/* 800852B8 00081E98  39 03 0E C0 */	addi r8, r3, CostumeListsForeachCharacter@l
 /* 800852BC 00081E9C  38 00 00 0B */	li r0, 0xb
-/* 800852C0 00081EA0  38 A4 98 B8 */	addi r5, r4, lbl_804598B8@l
+/* 800852C0 00081EA0  38 A4 98 B8 */	addi r5, r4, gFtDataList@l
 /* 800852C4 00081EA4  7C 09 03 A6 */	mtctr r0
 /* 800852C8 00081EA8  38 E5 00 00 */	addi r7, r5, 0
 /* 800852CC 00081EAC  39 28 01 08 */	addi r9, r8, 0x108
@@ -234,8 +234,8 @@ lbl_80085550:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804598B8
-lbl_804598B8:
+.global gFtDataList
+gFtDataList:
     .skip 0x84
 .global lbl_8045993C
 lbl_8045993C:
@@ -250,8 +250,8 @@ lbl_804599F0:
 
 .section .data
     .balign 8
-.global lbl_803C0EC0
-lbl_803C0EC0:
+.global CostumeListsForeachCharacter
+CostumeListsForeachCharacter:
     .4byte lbl_804599F0
     .4byte 0x05000000
     .4byte lbl_80459B28

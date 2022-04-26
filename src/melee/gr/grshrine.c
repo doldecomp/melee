@@ -2,8 +2,6 @@
 
 #define M_PI 3.14159265358979323846
 
-static const Vec3 lbl_803B8298 = { 0.5f, 0.0f, 0.0f };
-
 static void* lbl_804D6A18;
 
 static StageCallbacks lbl_803E50E8[3] = {
@@ -47,8 +45,6 @@ static void func_80201C60()
 static void func_80201C64()
 {
     u32 unused1[2];
-    Vec3 v;
-    u32 unused2;
 
     lbl_804D6A18 = func_801C49F8();
     func_80201D20(0);
@@ -56,9 +52,12 @@ static void func_80201C64()
     func_80201D20(2);
     func_801C39C0();
     func_801C3BB4();
-    v = lbl_803B8298;
-    func_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3,
-        -10000.0f, 10000.0f, 10000.0f, -10000.0f);
+    {
+        Vec3 v = { 0.5f, 0.0f, 0.0f };
+        u32 unused2;
+        func_80011A50(&v, -1, 0.5f, 0.0f, M_PI/3,
+            -10000.0f, 10000.0f, 10000.0f, -10000.0f);
+    }
 }
 
 static void lbl_80201CF0()

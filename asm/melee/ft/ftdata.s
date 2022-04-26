@@ -35,7 +35,7 @@ lbl_800855B8:
 .global func_800855C8
 func_800855C8:
 /* 800855C8 000821A8  7C 08 02 A6 */	mflr r0
-/* 800855CC 000821AC  3C A0 80 3C */	lis r5, lbl_803C0EC0@ha
+/* 800855CC 000821AC  3C A0 80 3C */	lis r5, CostumeListsForeachCharacter@ha
 /* 800855D0 000821B0  90 01 00 04 */	stw r0, 4(r1)
 /* 800855D4 000821B4  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 800855D8 000821B8  BF 01 00 18 */	stmw r24, 0x18(r1)
@@ -43,7 +43,7 @@ func_800855C8:
 /* 800855E0 000821C0  54 84 06 3E */	clrlwi r4, r4, 0x18
 /* 800855E4 000821C4  28 04 00 FF */	cmplwi r4, 0xff
 /* 800855E8 000821C8  3B E3 00 00 */	addi r31, r3, 0
-/* 800855EC 000821CC  3B A5 0E C0 */	addi r29, r5, lbl_803C0EC0@l
+/* 800855EC 000821CC  3B A5 0E C0 */	addi r29, r5, CostumeListsForeachCharacter@l
 /* 800855F0 000821D0  41 82 00 1C */	beq lbl_8008560C
 /* 800855F4 000821D4  57 E0 18 38 */	slwi r0, r31, 3
 /* 800855F8 000821D8  7C 7D 02 14 */	add r3, r29, r0
@@ -136,10 +136,10 @@ lbl_80085718:
 .global func_8008572C
 func_8008572C:
 /* 8008572C 0008230C  7C 08 02 A6 */	mflr r0
-/* 80085730 00082310  3C 80 80 46 */	lis r4, lbl_804598B8@ha
+/* 80085730 00082310  3C 80 80 46 */	lis r4, gFtDataList@ha
 /* 80085734 00082314  90 01 00 04 */	stw r0, 4(r1)
 /* 80085738 00082318  54 65 10 3A */	slwi r5, r3, 2
-/* 8008573C 0008231C  38 04 98 B8 */	addi r0, r4, lbl_804598B8@l
+/* 8008573C 0008231C  38 04 98 B8 */	addi r0, r4, gFtDataList@l
 /* 80085740 00082320  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80085744 00082324  7C A0 2A 14 */	add r5, r0, r5
 /* 80085748 00082328  80 05 00 00 */	lwz r0, 0(r5)
@@ -169,15 +169,15 @@ func_8008578C:
 /* 80085798 00082378  28 06 00 FF */	cmplwi r6, 0xff
 /* 8008579C 0008237C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 800857A0 00082380  41 82 00 1C */	beq lbl_800857BC
-/* 800857A4 00082384  3C A0 80 3C */	lis r5, lbl_803C0EC0@ha
-/* 800857A8 00082388  38 A5 0E C0 */	addi r5, r5, lbl_803C0EC0@l
+/* 800857A4 00082384  3C A0 80 3C */	lis r5, CostumeListsForeachCharacter@ha
+/* 800857A8 00082388  38 A5 0E C0 */	addi r5, r5, CostumeListsForeachCharacter@l
 /* 800857AC 0008238C  88 05 00 24 */	lbz r0, 0x24(r5)
 /* 800857B0 00082390  7C 06 00 40 */	cmplw r6, r0
 /* 800857B4 00082394  41 80 00 08 */	blt lbl_800857BC
 /* 800857B8 00082398  38 80 00 00 */	li r4, 0
 lbl_800857BC:
-/* 800857BC 0008239C  3C A0 80 3C */	lis r5, lbl_803C0EC0@ha
-/* 800857C0 000823A0  38 A5 0E C0 */	addi r5, r5, lbl_803C0EC0@l
+/* 800857BC 0008239C  3C A0 80 3C */	lis r5, CostumeListsForeachCharacter@ha
+/* 800857C0 000823A0  38 A5 0E C0 */	addi r5, r5, CostumeListsForeachCharacter@l
 /* 800857C4 000823A4  88 A5 00 24 */	lbz r5, 0x24(r5)
 /* 800857C8 000823A8  54 84 06 3E */	clrlwi r4, r4, 0x18
 /* 800857CC 000823AC  48 06 94 69 */	bl func_800EEC34
@@ -209,10 +209,10 @@ lbl_80085810:
 .global func_80085820
 func_80085820:
 /* 80085820 00082400  7C 08 02 A6 */	mflr r0
-/* 80085824 00082404  3C A0 80 3C */	lis r5, lbl_803C0EC0@ha
+/* 80085824 00082404  3C A0 80 3C */	lis r5, CostumeListsForeachCharacter@ha
 /* 80085828 00082408  90 01 00 04 */	stw r0, 4(r1)
 /* 8008582C 0008240C  54 66 18 38 */	slwi r6, r3, 3
-/* 80085830 00082410  38 05 0E C0 */	addi r0, r5, lbl_803C0EC0@l
+/* 80085830 00082410  38 05 0E C0 */	addi r0, r5, CostumeListsForeachCharacter@l
 /* 80085834 00082414  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80085838 00082418  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8008583C 0008241C  1F E4 00 18 */	mulli r31, r4, 0x18
@@ -263,10 +263,10 @@ lbl_800858CC:
 .global func_800858E4
 func_800858E4:
 /* 800858E4 000824C4  7C 08 02 A6 */	mflr r0
-/* 800858E8 000824C8  3C A0 80 3C */	lis r5, lbl_803C0EC0@ha
+/* 800858E8 000824C8  3C A0 80 3C */	lis r5, CostumeListsForeachCharacter@ha
 /* 800858EC 000824CC  90 01 00 04 */	stw r0, 4(r1)
 /* 800858F0 000824D0  54 66 18 38 */	slwi r6, r3, 3
-/* 800858F4 000824D4  38 05 0E C0 */	addi r0, r5, lbl_803C0EC0@l
+/* 800858F4 000824D4  38 05 0E C0 */	addi r0, r5, CostumeListsForeachCharacter@l
 /* 800858F8 000824D8  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 800858FC 000824DC  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80085900 000824E0  1F E4 00 18 */	mulli r31, r4, 0x18
@@ -350,16 +350,16 @@ lbl_800859E4:
 .global func_80085A14
 func_80085A14:
 /* 80085A14 000825F4  7C 08 02 A6 */	mflr r0
-/* 80085A18 000825F8  3C 80 80 3C */	lis r4, lbl_803C0EC0@ha
+/* 80085A18 000825F8  3C 80 80 3C */	lis r4, CostumeListsForeachCharacter@ha
 /* 80085A1C 000825FC  90 01 00 04 */	stw r0, 4(r1)
 /* 80085A20 00082600  54 60 18 38 */	slwi r0, r3, 3
 /* 80085A24 00082604  54 65 10 3A */	slwi r5, r3, 2
 /* 80085A28 00082608  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 80085A2C 0008260C  BF 41 00 20 */	stmw r26, 0x20(r1)
-/* 80085A30 00082610  3B E4 0E C0 */	addi r31, r4, lbl_803C0EC0@l
+/* 80085A30 00082610  3B E4 0E C0 */	addi r31, r4, CostumeListsForeachCharacter@l
 /* 80085A34 00082614  7F 9F 02 14 */	add r28, r31, r0
-/* 80085A38 00082618  3C 80 80 46 */	lis r4, lbl_804598B8@ha
-/* 80085A3C 0008261C  38 64 98 B8 */	addi r3, r4, lbl_804598B8@l
+/* 80085A38 00082618  3C 80 80 46 */	lis r4, gFtDataList@ha
+/* 80085A3C 0008261C  38 64 98 B8 */	addi r3, r4, gFtDataList@l
 /* 80085A40 00082620  7C 63 2A 14 */	add r3, r3, r5
 /* 80085A44 00082624  84 1C 01 08 */	lwzu r0, 0x108(r28)
 /* 80085A48 00082628  83 63 00 00 */	lwz r27, 0(r3)
@@ -459,11 +459,11 @@ func_80085B10:
 .global func_80085B98
 func_80085B98:
 /* 80085B98 00082778  7C 08 02 A6 */	mflr r0
-/* 80085B9C 0008277C  3C C0 80 3C */	lis r6, lbl_803C0EC0@ha
+/* 80085B9C 0008277C  3C C0 80 3C */	lis r6, CostumeListsForeachCharacter@ha
 /* 80085BA0 00082780  90 01 00 04 */	stw r0, 4(r1)
 /* 80085BA4 00082784  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80085BA8 00082788  BF 41 00 18 */	stmw r26, 0x18(r1)
-/* 80085BAC 0008278C  3B E6 0E C0 */	addi r31, r6, lbl_803C0EC0@l
+/* 80085BAC 0008278C  3B E6 0E C0 */	addi r31, r6, CostumeListsForeachCharacter@l
 /* 80085BB0 00082790  7C 7C 1B 78 */	mr r28, r3
 /* 80085BB4 00082794  3B 44 00 00 */	addi r26, r4, 0
 /* 80085BB8 00082798  3B A5 00 00 */	addi r29, r5, 0
@@ -552,9 +552,9 @@ func_80085CD8:
 /* 80085CE0 000828C0  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 80085CE4 000828C4  BF 61 00 5C */	stmw r27, 0x5c(r1)
 /* 80085CE8 000828C8  3B E5 00 00 */	addi r31, r5, 0
-/* 80085CEC 000828CC  3C A0 80 3C */	lis r5, lbl_803C0EC0@ha
+/* 80085CEC 000828CC  3C A0 80 3C */	lis r5, CostumeListsForeachCharacter@ha
 /* 80085CF0 000828D0  3B C3 00 00 */	addi r30, r3, 0
-/* 80085CF4 000828D4  3B 65 0E C0 */	addi r27, r5, lbl_803C0EC0@l
+/* 80085CF4 000828D4  3B 65 0E C0 */	addi r27, r5, CostumeListsForeachCharacter@l
 /* 80085CF8 000828D8  80 04 05 8C */	lwz r0, 0x58c(r4)
 /* 80085CFC 000828DC  7C 1F 00 40 */	cmplw r31, r0
 /* 80085D00 000828E0  40 80 01 3C */	bge lbl_80085E3C
@@ -658,8 +658,8 @@ func_80085E50:
 /* 80085E60 00082A40  3B 64 00 00 */	addi r27, r4, 0
 /* 80085E64 00082A44  7C 7F 1B 78 */	mr r31, r3
 /* 80085E68 00082A48  80 03 05 8C */	lwz r0, 0x58c(r3)
-/* 80085E6C 00082A4C  3C 60 80 3C */	lis r3, lbl_803C0EC0@ha
-/* 80085E70 00082A50  3B 83 0E C0 */	addi r28, r3, lbl_803C0EC0@l
+/* 80085E6C 00082A4C  3C 60 80 3C */	lis r3, CostumeListsForeachCharacter@ha
+/* 80085E70 00082A50  3B 83 0E C0 */	addi r28, r3, CostumeListsForeachCharacter@l
 /* 80085E74 00082A54  7C 1B 00 40 */	cmplw r27, r0
 /* 80085E78 00082A58  40 80 01 44 */	bge lbl_80085FBC
 /* 80085E7C 00082A5C  38 7F 00 00 */	addi r3, r31, 0
@@ -780,8 +780,8 @@ func_80085FD4:
 /* 80086018 00082BF8  80 03 00 14 */	lwz r0, 0x14(r3)
 /* 8008601C 00082BFC  28 00 00 00 */	cmplwi r0, 0
 /* 80086020 00082C00  40 82 00 1C */	bne lbl_8008603C
-/* 80086024 00082C04  3C 60 80 46 */	lis r3, lbl_804598B8@ha
-/* 80086028 00082C08  38 63 98 B8 */	addi r3, r3, lbl_804598B8@l
+/* 80086024 00082C04  3C 60 80 46 */	lis r3, gFtDataList@ha
+/* 80086028 00082C08  38 63 98 B8 */	addi r3, r3, gFtDataList@l
 /* 8008602C 00082C0C  80 63 00 28 */	lwz r3, 0x28(r3)
 /* 80086030 00082C10  80 03 00 0C */	lwz r0, 0xc(r3)
 /* 80086034 00082C14  7C 60 22 14 */	add r3, r0, r4
@@ -1047,8 +1047,8 @@ lbl_803C125C:
     .4byte NULL
     .balign 4
 
-.global lbl_803C12E0
-lbl_803C12E0:
+.global ActionStateTableByCharacter
+ActionStateTableByCharacter:
     .4byte lbl_803C7120
     .4byte lbl_803C7788
     .4byte lbl_803C72B8
@@ -2491,8 +2491,8 @@ lbl_803C2744:
     .balign 4
     .asciz "HSD_ArchiveParse error! %x\n"
     .balign 8
-.global lbl_803C2800
-lbl_803C2800:
+.global ActionStateList
+ActionStateList:
     # Entry 0
     # ID
     .4byte -1
