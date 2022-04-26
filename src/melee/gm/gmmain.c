@@ -4,7 +4,7 @@
 #include <sysdolphin/baselib/initialize.h>
 #include <functions.h>
 
-extern s32 lbl_804D4A08; // debug level
+extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;
 extern u16 lbl_804D6B30; // debug flags
 
@@ -60,7 +60,7 @@ static void func_8015FDA4(void)
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
         lbl_804D6B20 = TRUE;
         if (lbl_804D6B30 & 0x400) {
-            int level = lbl_804D4A08;
+            int level = g_debugLevel;
             switch (level) {
                 case DbLKind_NoDebugRom:
                     level = DbLKind_DebugRom;
@@ -78,9 +78,9 @@ static void func_8015FDA4(void)
                     level = DbLKind_DebugDevelop;
                     break;
             }
-            lbl_804D4A08 = level;
+            g_debugLevel = level;
         } else if (lbl_804D6B30 & 0x800) {
-            int level = lbl_804D4A08;
+            int level = g_debugLevel;
             switch (level) {
                 case DbLKind_NoDebugRom:
                     level = DbLKind_DebugRom;
@@ -89,14 +89,14 @@ static void func_8015FDA4(void)
                     level = DbLKind_Develop;
                     break;
             }
-            lbl_804D4A08 = level;
+            g_debugLevel = level;
             lbl_804D6B20 = FALSE;
         }
     } else {
-        if (lbl_804D4A08 != DbLKind_NoDebugRom) {
+        if (g_debugLevel != DbLKind_NoDebugRom) {
             __assert(__FILE__, 0xD2, "DbLevel == DbLKind_NoDebugRom");
         }
-        lbl_804D4A08 = 0;
+        g_debugLevel = 0;
     }
 }
 
@@ -156,7 +156,7 @@ void main(void)
     func_8001F87C();
     func_803A6048(0xC000);
     func_8015FBA4();
-    if (lbl_804D4A08 != DbLKind_Master && lbl_804D6B30 & 0x20 && func_803931A4(-1)) {
+    if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 && func_803931A4(-1)) {
         func_80393A54(1);
         while (!func_80393A04()) {
             OSReport("please setup server for USB\n");
@@ -169,7 +169,7 @@ void main(void)
     OSReport("#\n");
     OSReport("# Distribution %d\n", lbLang_GetLanguageSetting());
     OSReport("# Language %d\n", lbLang_GetSavedLanguage());
-    OSReport("# DbLevel %d\n", lbl_804D4A08);
+    OSReport("# DbLevel %d\n", g_debugLevel);
     OSReport("# Arena Size %d MB\n", arena_size / (1024 * 1024));
     {
         u32 free_aram_start;
