@@ -100,7 +100,6 @@ $(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o: CC_EPI := $(CC)
 $(BUILD_DIR)/src/sysdolphin/baselib/wobj.c.o: CC_EPI := $(CC)
 
 $(BUILD_DIR)/src/melee/ft/fighter.c.o: CFLAGS += -inline noauto
-$(BUILD_DIR)/src/melee/ft/fighter.c.o: CC_EPI := $(CC)
 
 HOSTCFLAGS := -Wall -O3 -s
 
@@ -169,13 +168,13 @@ $(PROFILE_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.dep
 	@echo "Compiling (profile)" $<
 	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
 
-$(BUILD_DIR)/src/melee/%.c.o: $(VANILLA_DIR)/src/melee/%.c.o $(PROFILE_DIR)/src/melee/%.c.o
+$(BUILD_DIR)/src/melee/%.c.o: $(VANILLA_DIR)/src/melee/%.c.o $(PROFILE_DIR)/src/melee/%.c.o $(FRANK)
 	@echo Frank is fixing $@
-	$(QUIET) $(PYTHON) $(FRANK) $^ $@
+	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
 
-$(BUILD_DIR)/src/sysdolphin/%.c.o: $(VANILLA_DIR)/src/sysdolphin/%.c.o $(PROFILE_DIR)/src/sysdolphin/%.c.o
+$(BUILD_DIR)/src/sysdolphin/%.c.o: $(VANILLA_DIR)/src/sysdolphin/%.c.o $(PROFILE_DIR)/src/sysdolphin/%.c.o $(FRANK)
 	@echo Frank is fixing $@
-	$(QUIET) $(PYTHON) $(FRANK) $^ $@
+	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
 endif
 
 -include $(DEP_FILES)
