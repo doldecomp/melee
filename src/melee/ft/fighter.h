@@ -103,7 +103,7 @@ struct RGBA {
 typedef struct _ftCommonData {
     f32 x0;
     f32 x4;
-    f32 x8;
+    f32 x8_someStickThreshold;
     f32 xC;
     f32 x10;
     f32 x14;
@@ -992,7 +992,7 @@ typedef struct _Fighter {
     // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
     struct cb {
         void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
-        void (*x2194_callback_x2194)(HSD_GObj *fighter); // used
+        void (*x2194_callback)(HSD_GObj *fighter); // used
         void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj*, HSD_GObj*); // used
         void (*x219C_callback_IASA)(HSD_GObj *fighter); // used
         void (*x21A0_callback_Anim)(HSD_GObj *fighter);
@@ -1006,7 +1006,7 @@ typedef struct _Fighter {
         void (*x21C0_callback_OnGiveDamage)(HSD_GObj *fighter);
         void (*x21C4_callback_OnShieldHit)(HSD_GObj *fighter);
         void (*x21C8_callback_OnReflectHit)(HSD_GObj *fighter);
-        void (*x21CC_callback_x21cc)(HSD_GObj *fighter);
+        void (*x21CC_callback)(HSD_GObj *fighter);
         void (*x21D0_callback_EveryHitlag)(HSD_GObj *fighter); // xused
         void (*x21D4_callback_EnterHitlag)(HSD_GObj *fighter);
         void (*x21D8_callback_ExitHitlag)(HSD_GObj *fighter);
@@ -1152,11 +1152,11 @@ void Fighter_80068E64(HSD_GObj* fighterObj);
 HSD_GObj* func_80068E98(struct S_TEMP1* input);
 void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
 void Fighter_8006A1BC(HSD_GObj* fighterObj);
-void func_8006A360(HSD_GObj* fighterObj);
-void func_8006ABA0();
-void func_8006ABEC();
-void func_8006AD10();
-void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy);
+void Fighter_8006A360(HSD_GObj* fighterObj);
+void Fighter_8006ABA0(HSD_GObj* fighterObj);
+void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighterObj);
+void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj);
+void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy);
 void func_8006C0F0(HSD_GObj* fighterObj);
 void func_8006C27C(HSD_GObj* fighterObj, s32 unused, s32 unused2, s32 unused3);
 void func_8006C5F4(HSD_GObj* pPlayerEntityStruct);

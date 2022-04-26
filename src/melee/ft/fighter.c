@@ -30,9 +30,7 @@ extern HSD_PadStatus HSD_PadRumbleData[4];
 
 extern StageInfo stage_info; // from asm/melee/text_2.s
 
-// TODO: rename this var globally
-extern s32 lbl_804D4A08; // asm/melee/db/code_80225374.s
-#define g_debugLevel lbl_804D4A08
+extern s32 g_debugLevel; // asm/melee/db/code_80225374.s
 
 extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
@@ -941,9 +939,9 @@ HSD_GObj* func_80068E98(struct S_TEMP1* input) {
 
     func_8000ED54(&fp->x20A4, fighterObj->hsd_obj);
     func_8038FD54(fighterObj, &Fighter_8006A1BC, 0);
-    func_8038FD54(fighterObj, &func_8006A360, 1);
-    func_8038FD54(fighterObj, &func_8006ABA0, 2);
-    func_8038FD54(fighterObj, &func_8006AD10, 3);
+    func_8038FD54(fighterObj, &Fighter_8006A360, 1);
+    func_8038FD54(fighterObj, &Fighter_8006ABA0, 2);
+    func_8038FD54(fighterObj, &Fighter_Spaghetti_8006AD10, 3);
     func_8038FD54(fighterObj, (void*) &Fighter_procUpdate, 4);
     func_8038FD54(fighterObj, (void*) &func_8006C27C, 6);
     func_8038FD54(fighterObj, &func_8006C5F4, 7);
@@ -1430,7 +1428,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     fighter->cb.x21C4_callback_OnShieldHit = 0;
     fighter->cb.x21C8_callback_OnReflectHit = 0;
     fighter->cb.x21D0_callback_EveryHitlag = 0;
-    fighter->cb.x21CC_callback_x21cc = 0;
+    fighter->cb.x21CC_callback = 0;
     fighter->cb.x21D8_callback_ExitHitlag = 0;
     fighter->cb.x21D4_callback_EnterHitlag = 0;
     fighter->cb.x21DC_callback_OnTakeDamage = 0;
@@ -1493,8 +1491,8 @@ void Fighter_8006A1BC(HSD_GObj* fighterObj) {
     }
 }
 
-//// https://decomp.me/scratch/6uj7U
-void func_8006A360(HSD_GObj* fighterObj) {
+
+void Fighter_8006A360(HSD_GObj* fighterObj) {
     
     Vec vec1;
     Fighter* fighter = fighterObj->user_data;
@@ -1621,7 +1619,7 @@ void func_8006A360(HSD_GObj* fighterObj) {
                     func_800C8A64(fighterObj);
                     return;
                 }
-                if (!fighter->x2226_flag.bits.b3 && fighter->x2030 == p_ftCommonData->x7D0 && func_800C8B2C(fighter, 0x7D, 0) != 0) {
+                if (!fighter->x2226_flag.bits.b3 && fighter->x2030 == p_ftCommonData->x7D0 && func_800C8B2C(fighter, 0x7D, 0)) {
                     fighter->x2226_flag.bits.b7 = 1;
                 }
             }
@@ -1701,8 +1699,8 @@ void func_8006A360(HSD_GObj* fighterObj) {
             lbl_803C1DB4[fighter->x4_fighterKind](fighterObj);
         }
 
-        if (fighter->cb.x21CC_callback_x21cc) {
-            fighter->cb.x21CC_callback_x21cc(fighterObj);
+        if (fighter->cb.x21CC_callback) {
+            fighter->cb.x21CC_callback(fighterObj);
         }
 
         if (!fighter->x2219_flag.bits.b5) {
@@ -1750,17 +1748,16 @@ void func_8006A360(HSD_GObj* fighterObj) {
 
 }
 
-/// https://decomp.me/scratch/Y9c4V
-void func_8006ABA0(HSD_GObj* fighterObj) {
+void Fighter_8006ABA0(HSD_GObj* fighterObj) {
     Fighter* fp = fighterObj->user_data;
-    if ((fp->x221F_flag.bits.b3 == 0) && (func_800A2040() != 0)) {
+    if (!fp->x221F_flag.bits.b3 && func_800A2040()) {
         func_800B3900(fighterObj);
     }
 }
 
 
 //https://decomp.me/scratch/A7CgG
-void func_8006ABEC(HSD_GObj* fighterObj) {
+void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighterObj) {
     
     Fighter* fighter = fighterObj->user_data;
 
@@ -1796,20 +1793,21 @@ void func_8006ABEC(HSD_GObj* fighterObj) {
     }
 }
 
-/// https://decomp.me/scratch/lKwFH
-void func_8006AD10(HSD_GObj* fighterObj) {
+
+void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
 
     s32 unused[10];
     Fighter* fighter = fighterObj->user_data;
 
+    s32 temp0;
+    s32 temp1;
+    s32 temp2; 
+
+    f32 tempf1;
+    f32 tempf0;
+
     if (!fighter->x221F_flag.bits.b3) {
         if (!fighter->x2224_flag.bits.b2) {
-            s32 temp0;
-            s32 temp1;
-            s32 temp2; 
-
-            f32 tempf1;
-            f32 tempf0;
             
             if (!fighter->x221D_flag.bits.b3) {
                 fighter->x628_lstick_x2 = fighter->x630;
@@ -1932,8 +1930,8 @@ void func_8006AD10(HSD_GObj* fighterObj) {
                 fighter->x676_x = 0xFE;
             }
 
-            if (fighter->x620_lstick_x >= p_ftCommonData->x8) {
-                if (fighter->x628_lstick_x2 >= p_ftCommonData->x8) {
+            if (fighter->x620_lstick_x >= p_ftCommonData->x8_someStickThreshold) {
+                if (fighter->x628_lstick_x2 >= p_ftCommonData->x8_someStickThreshold) {
                     fighter->x670_timer_lstick_tilt_x++;
                     if (fighter->x670_timer_lstick_tilt_x > 0xFE) {
                         fighter->x670_timer_lstick_tilt_x = 0xFE;
@@ -1952,8 +1950,8 @@ void func_8006AD10(HSD_GObj* fighterObj) {
                     fighter->x670_timer_lstick_tilt_x = 0;
                     fighter->x2228_flag.bits.b7 = 1;
                 }
-            } else if (fighter->x620_lstick_x <= -p_ftCommonData->x8) {
-                if (fighter->x628_lstick_x2 <= -p_ftCommonData->x8) {
+            } else if (fighter->x620_lstick_x <= -p_ftCommonData->x8_someStickThreshold) {
+                if (fighter->x628_lstick_x2 <= -p_ftCommonData->x8_someStickThreshold) {
                     fighter->x670_timer_lstick_tilt_x++;
                     if (fighter->x670_timer_lstick_tilt_x > 0xFE) {
                         fighter->x670_timer_lstick_tilt_x = 0xFE;
@@ -2029,11 +2027,8 @@ void func_8006AD10(HSD_GObj* fighterObj) {
                 fighter->x674 = 0xFE;
                 fighter->x671_timer_lstick_tilt_y = 0xFE;
             }
-        
     
-    
-    
-            if (func_8000D148(fighter->x628_lstick_x2, fighter->x62C_lstick_y2, fighter->x620_lstick_x, fighter->x624_lstick_y, 0.0f, 0.0f, p_ftCommonData->x8)) {
+            if (func_8000D148(fighter->x628_lstick_x2, fighter->x62C_lstick_y2, fighter->x620_lstick_x, fighter->x624_lstick_y, 0.0f, 0.0f, p_ftCommonData->x8_someStickThreshold)) {
                 fighter->x67A_y = 0;
                 fighter->x679_x = 0;
             }
@@ -2180,7 +2175,7 @@ void func_8006AD10(HSD_GObj* fighterObj) {
             }
             func_800DF0D0(fighterObj);
             func_8008031C(fighterObj);
-            func_8006ABEC(fighterObj);
+            Fighter_UnkIncrementCounters_8006ABEC(fighterObj);
     
             if (fighter->cb.x219C_callback_IASA) {
                 fighter->cb.x219C_callback_IASA(fighterObj);
@@ -2193,115 +2188,104 @@ void func_8006AD10(HSD_GObj* fighterObj) {
 
 
 //// https://decomp.me/scratch/oFu1o
-void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy) {
-    //@1c
-    Fighter* pCharData = pPlayerEntityStruct->user_data;
-    //float atkShieldKB_len; // 0x1c
-    //float kb_vel_len; // 0x20
-    Vec3 windOffset; // 0x4c
-    //@20
-    if (pCharData->x221F_flag.bits.b3) // if pCharData->byte_at_0x221F & 0b10000
-		return;
+void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
+
+    Fighter* fighter = fighterObj->user_data;
+    Vec3 windOffset; 
+
+    if (fighter->x221F_flag.bits.b3) return;
     
-    //@30
-    if (!pCharData->x2219_flag.bits.b5)
+    
+    if (!fighter->x2219_flag.bits.b5)
     {
         Vec3* p_kb_vel;
         Vec3* pAtkShieldKB;
         float kb_vel_x, atkShieldKB_X;
-        Vec3 selfVel; // 0x40
+        Vec3 selfVel; 
 
-        //@3c
-        if (pCharData->x2064_ledgeCooldown != 0)
-			pCharData->x2064_ledgeCooldown -= 1;
-        if (pCharData->x2108 != 0)
-			pCharData->x2108 -= 1;
         
-        //@64
-        func_800C0A98(pPlayerEntityStruct);
+        if (fighter->x2064_ledgeCooldown) fighter->x2064_ledgeCooldown -= 1;
 
-        //@6c
-		if (pCharData->cb.x21A4_callback_Phys != 0)
-			pCharData->cb.x21A4_callback_Phys(pPlayerEntityStruct); // AS_Physics_Func callback @0x21A4
-        //@84
-        p_kb_vel = &pCharData->x8c_kb_vel;
+        if (fighter->x2108) fighter->x2108 -= 1;
+        
+        func_800C0A98(fighterObj);
+
+		if (fighter->cb.x21A4_callback_Phys) {
+			fighter->cb.x21A4_callback_Phys(fighterObj);
+        }
+
+        p_kb_vel = &fighter->x8c_kb_vel;
 		if ((kb_vel_x = p_kb_vel->x) != 0 || p_kb_vel->y != 0)
         {
-            //@a4
-			if (pCharData->xE0_ground_or_air == 1) // # 0=grounded, 1=airborne.
+            
+			if (fighter->xE0_ground_or_air == GA_Air) 
             {
-                //@b0
+                
 				float kb_vel_x = p_kb_vel->x;
 				float kb_vel_y = p_kb_vel->y;
-				// I was not able to trigger this case in normal gameplay yet. spreadsheet comment: facing angle? hi-pitch, lo-pitch, noCliffCatch
-				if (pCharData->x2228_flag.bits.b2) // equivalent to x2228 & 0b0010_0000
+
+				if (fighter->x2228_flag.bits.b2) 
                 {
-                	p_kb_vel->x = func_8007CD6C(p_kb_vel->x, func_8007CDA4(pCharData));
-					p_kb_vel->y = func_8007CD6C(p_kb_vel->y, func_8007CDF8(pCharData));
+                	p_kb_vel->x = func_8007CD6C(p_kb_vel->x, func_8007CDA4(fighter));
+					p_kb_vel->y = func_8007CD6C(p_kb_vel->y, func_8007CDF8(fighter));
                 }
-                else //@f8
+                else 
                 {
                     
-                    float kb_angle = func_80022C30(kb_vel_y, kb_vel_x);
-                    //@104
+                    float kb_angle = func_someCalcAngle_80022C30(kb_vel_y, kb_vel_x);
 					float kb_vel_len = sqrtf(kb_vel_x * kb_vel_x + kb_vel_y * kb_vel_y);
 					
-					//@168 decrement knockback velocity magnitude
-                    if (kb_vel_len < p_ftCommonData->x204_knockbackFrameDecay) // kb_frameDecay offset is 0x204, value always 0.051?
+                    if (kb_vel_len < p_ftCommonData->x204_knockbackFrameDecay) 
                     {
-						p_kb_vel->y = 0; // 0.0f@toc-0x778C
+						p_kb_vel->y = 0; 
                         p_kb_vel->x = 0;
                     }
 					else
                     {
-                        // What we want to achieve is this:
-                        // 	*p_kb_vel *= (kb_vel_len - kb_frameDecay)/kb_vel_len
-                        // But this is implemented very inefficiently like this:
-                        // (Also this doesn't work properly for 180° angles)
-						p_kb_vel->x -= p_ftCommonData->x204_knockbackFrameDecay * cosf(kb_angle);//@188
-                        p_kb_vel->y -= p_ftCommonData->x204_knockbackFrameDecay * sinf(kb_angle);//@1a8
+
+						p_kb_vel->x -= p_ftCommonData->x204_knockbackFrameDecay * cosf(kb_angle);
+                        p_kb_vel->y -= p_ftCommonData->x204_knockbackFrameDecay * sinf(kb_angle);
                     }
                 }
-                //@1c0
-				pCharData->xF0_ground_kb_vel = 0; // 0.0f@toc-0x778C
+                
+				fighter->xF0_ground_kb_vel = 0; 
             }
 			else
             {
-                // @1cc
-                //float effectiveFriction;
-                Vec3* pNormal = &pCharData->x6F0_collData.x154_groundNormal; // ground_normal offset inside pCharData is 0x844, surface normal points out of the surface. 
+                
+                Vec3* pNormal = &fighter->x6F0_collData.x154_groundNormal;  
                 struct attr* pAttr;
-                // This is probably triggered when transitioning from the air to the ground, for example with ASDI down after getting hit.
-				if (pCharData->xF0_ground_kb_vel == 0)
-					pCharData->xF0_ground_kb_vel = kb_vel_x;
-                //@1e4
-                pAttr = &pCharData->x110_attr; // attr has offset 0x110
-                func_8007CCA0(pCharData,
+                
+				if (fighter->xF0_ground_kb_vel == 0)
+					fighter->xF0_ground_kb_vel = kb_vel_x;
+                
+                
+                pAttr = &fighter->x110_attr; 
+                func_8007CCA0(fighter,
                     /*effective friction - ground multiplier is usually 1. last factor was 1 when I looked*/
-                    func_80084A40(pCharData) * pAttr->x128_GroundFriction * p_ftCommonData->x200);
-				// @210 set knockback velocity to ground_kb_vel * surfaceTangent
-                p_kb_vel->x =  pNormal->y * pCharData->xF0_ground_kb_vel;
-                // @220
-                p_kb_vel->y = -pNormal->x * pCharData->xF0_ground_kb_vel;
+                    func_80084A40(fighter) * pAttr->x128_GroundFriction * p_ftCommonData->x200);
+
+				// set knockback velocity to ground_kb_vel * surfaceTangent
+                p_kb_vel->x =  pNormal->y * fighter->xF0_ground_kb_vel;
+                p_kb_vel->y = -pNormal->x * fighter->xF0_ground_kb_vel;
             }
         }
-        //@230 Now handle the attacker's shield knockback in a similar way
-        pAtkShieldKB = &pCharData->x98_atk_shield_kb;
+        //Now handle the attacker's shield knockback in a similar way
+        pAtkShieldKB = &fighter->x98_atk_shield_kb;
         if ((atkShieldKB_X = pAtkShieldKB->x) != 0 || pAtkShieldKB->y != 0)
         {
-            //@250
-            if (pCharData->xE0_ground_or_air == 1)
+            
+            if (fighter->xE0_ground_or_air == GA_Air)
             {
-                //@25c
+                
                 float kb_x = pAtkShieldKB->x;
                 float kb_y = pAtkShieldKB->y;
-                float atkShieldKBAngle = func_80022C30(kb_y, kb_x);
-                //@270
+                float atkShieldKBAngle = func_someCalcAngle_80022C30(kb_y, kb_x);
+                
                 float atkShieldKB_len = sqrtf(kb_x*kb_x + kb_y*kb_y);
-                //@2d4
+                
                 if (atkShieldKB_len < p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
                 {
-                    //@2e4
                     // BUG IN THE MELEE CODE THAT CAUSES THE INVISIBLE CEILING GLITCH
                     // The next line should be 'pAtkShieldKB->y = 0', but instead it is:
                     p_kb_vel->y = 0;
@@ -2309,199 +2293,197 @@ void Fighter_procUpdate(HSD_GObj* pPlayerEntityStruct, s32 dummy) {
                 }
                 else
                 {
-                    //@2f4
                     // again, the better implementation would be:
                     // *pAtkShieldKB *= (atkShieldKB_len - p_stc_ftcommon->x3e8_shield_kb_frameDecay)/atkShieldKB_len
                     //float atkShieldKBAngle = atan2_80022C30(pAtkShieldKB->y, pAtkShieldKB->x);
                     pAtkShieldKB->x -= p_ftCommonData->x3E8_shieldKnockbackFrameDecay * cosf(atkShieldKBAngle);
                     pAtkShieldKB->y -= p_ftCommonData->x3E8_shieldKnockbackFrameDecay * sinf(atkShieldKBAngle);
                 }
-                pCharData->xF4_ground_attacker_shield_kb_vel = 0; // 0 = TOC.float@-0x778C
+                fighter->xF4_ground_attacker_shield_kb_vel = 0;
             }
             else
             {
-                //@338
+                
                 float effectiveFriction;
-                Vec3* pNormal = &pCharData->x6F0_collData.x154_groundNormal; // ground_normal offset inside pCharData is 0x844, surface normal points out of the surface. 
+                Vec3* pNormal = &fighter->x6F0_collData.x154_groundNormal; // ground_normal offset inside fighter is 0x844, surface normal points out of the surface. 
                 struct attr* pAttr;
-                //@344
-                if (pCharData->xF4_ground_attacker_shield_kb_vel == 0)
-                    pCharData->xF4_ground_attacker_shield_kb_vel = atkShieldKB_X;
-                //@350
-                pAttr = &pCharData->x110_attr; // attr has offset 0x110
-                //@374
-                func_8007CE4C(pCharData,
+                
+                if (fighter->xF4_ground_attacker_shield_kb_vel == 0)
+                    fighter->xF4_ground_attacker_shield_kb_vel = atkShieldKB_X;
+                
+                pAttr = &fighter->x110_attr; 
+                
+                func_8007CE4C(fighter,
                     /* effectiveFriction - the last constant variable differs from the one for the knockback friction above*/
-                    func_80084A40(pCharData) * pAttr->x128_GroundFriction * p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
-                //@378
-                pAtkShieldKB->x =  pNormal->y * pCharData->xF4_ground_attacker_shield_kb_vel;
-                pAtkShieldKB->y = -pNormal->x * pCharData->xF4_ground_attacker_shield_kb_vel;
+                    func_80084A40(fighter) * pAttr->x128_GroundFriction * p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
+                
+                pAtkShieldKB->x =  pNormal->y * fighter->xF4_ground_attacker_shield_kb_vel;
+                pAtkShieldKB->y = -pNormal->x * fighter->xF4_ground_attacker_shield_kb_vel;
             }
         }
 
-        //@39c update ground velocity
-		pCharData->xEC_ground_vel += pCharData->xE4_ground_accel_1 + pCharData->xE8_ground_accel_2;
-        //@3c0
-		pCharData->xE8_ground_accel_2 = 0;
-        pCharData->xE4_ground_accel_1 = 0;
+        
+		fighter->xEC_ground_vel += fighter->xE4_ground_accel_1 + fighter->xE8_ground_accel_2;
+        
+		fighter->xE8_ground_accel_2 = 0;
+        fighter->xE4_ground_accel_1 = 0;
 
-        //@3cc self_vel += anim_vel
-		PSVECAdd(&pCharData->x80_self_vel, &pCharData->x74_anim_vel, &pCharData->x80_self_vel);
-        //@3d0
-		pCharData->x74_anim_vel.z = 0;
-        pCharData->x74_anim_vel.y = 0;
-        pCharData->x74_anim_vel.x = 0;
+        //self_vel += anim_vel
+		PSVECAdd(&fighter->x80_self_vel, &fighter->x74_anim_vel, &fighter->x80_self_vel);
+        
+		fighter->x74_anim_vel.z = 0;
+        fighter->x74_anim_vel.y = 0;
+        fighter->x74_anim_vel.x = 0;
 		
-		//@3e0 copy selfVel into a stack storage variable
-		selfVel = pCharData->x80_self_vel;
+		//copy selfVel into a stack storage variable
+		selfVel = fighter->x80_self_vel;
 		
 		// TODO: these double_lower_32bit variables are probably integer counters that get decremented each frame,
         // but I was not able to trigger the following condition.
-		//@3f8 The double value construction then is only used as an interpolation tool between selfVel and some UnkVel2.
-		if (pCharData->dmg.x1948 != 0)
+		// The double value construction then is only used as an interpolation tool between selfVel and some UnkVel2.
+		if (fighter->dmg.x1948 != 0)
         {
-            //@404
             // The compiler casts an u32 integer 'val' to a double type using
             // double v = *(double*)&(0x43300000_00000000 | val ^ 0x80000000) - *(double*)&43300000_80000000
             // which is all that happens in the lengthy assembly generated by this
-			float C = 1.0f - (float)pCharData->dmg.x194C / (float)pCharData->dmg.x1948;
+			float C = 1.0f - (float)fighter->dmg.x194C / (float)fighter->dmg.x1948;
 			
-            selfVel.x = C * (pCharData->x80_self_vel.x - pCharData->xA4_unk_vel.x) + pCharData->xA4_unk_vel.x;
-            //@458
-            selfVel.y = C * (pCharData->x80_self_vel.y - pCharData->xA4_unk_vel.y) + pCharData->xA4_unk_vel.y;
-            //@46c
-            pCharData->dmg.x194C--;
-			if (pCharData->dmg.x194C == 0)
-				pCharData->dmg.x1948 = 0;
+            selfVel.x = C * (fighter->x80_self_vel.x - fighter->xA4_unk_vel.x) + fighter->xA4_unk_vel.x;
+            selfVel.y = C * (fighter->x80_self_vel.y - fighter->xA4_unk_vel.y) + fighter->xA4_unk_vel.y;
+            
+            fighter->dmg.x194C--;
+			if (fighter->dmg.x194C == 0)
+				fighter->dmg.x1948 = 0;
         }
-		//@48c add some horizontal+depth offset to the position? Why is there no vertical component?
-		pCharData->xB0_pos.x += pCharData->xF8_playerNudgeVel.x;
-		pCharData->xB0_pos.z += pCharData->xF8_playerNudgeVel.y;
-        //@4ac
-        if (pCharData->x2222_flag.bits.b6 && !pCharData->x2222_flag.bits.b7)
+
+		// add some horizontal+depth offset to the position? Why is there no vertical component?
+		fighter->xB0_pos.x += fighter->xF8_playerNudgeVel.x;
+		fighter->xB0_pos.z += fighter->xF8_playerNudgeVel.y;
+        
+        if (fighter->x2222_flag.bits.b6 && !fighter->x2222_flag.bits.b7)
         {
             s32 bit;
-            //@4c0
-            // pCharData->xD4_unk_vel += selfVel
-			PSVECAdd(&pCharData->xD4_unk_vel, &selfVel, &pCharData->xD4_unk_vel);
-			//@4d0
-            pCharData->xD4_unk_vel.x += p_kb_vel->x;
-            pCharData->xD4_unk_vel.y += p_kb_vel->y;
-            //@4f0
-            if (pCharData->x2210_ThrowFlags.b2)
+            
+            // fighter->xD4_unk_vel += selfVel
+			PSVECAdd(&fighter->xD4_unk_vel, &selfVel, &fighter->xD4_unk_vel);
+			
+            fighter->xD4_unk_vel.x += p_kb_vel->x;
+            fighter->xD4_unk_vel.y += p_kb_vel->y;
+            
+            if (fighter->x2210_ThrowFlags.b2)
             {
-			    pCharData->x2210_ThrowFlags.b2 = 0;
+			    fighter->x2210_ThrowFlags.b2 = 0;
                 bit = 1;
             }
             else
                 bit = 0;
-			//@514
-			if (bit || func_80070FD0(pCharData) != 0 || pCharData->x594_animCurrFlags1.bits.b7)
+			
+
+			if (bit || func_80070FD0(fighter) || fighter->x594_animCurrFlags1.bits.b7)
             {
-                //@538
-                // pCharData->xB0_position += pCharData->xD4_unk_vel
-				PSVECAdd(&pCharData->xB0_pos, &pCharData->xD4_unk_vel, &pCharData->xB0_pos);
+                
+                // fighter->xB0_position += fighter->xD4_unk_vel
+				PSVECAdd(&fighter->xB0_pos, &fighter->xD4_unk_vel, &fighter->xB0_pos);
 				// TODO: we set this velocity to 0 after applying it -> Is this SDI or ASDI?
-                pCharData->xD4_unk_vel.z = 0;
-                pCharData->xD4_unk_vel.y = 0;
-                pCharData->xD4_unk_vel.x = 0;
+                fighter->xD4_unk_vel.z = 0;
+                fighter->xD4_unk_vel.y = 0;
+                fighter->xD4_unk_vel.x = 0;
             }
-			//@558 pCharData->xB0_position += *pAtkShieldKB
-            PSVECAdd(&pCharData->xB0_pos, (Vec3*)pAtkShieldKB, &pCharData->xB0_pos);
+			// fighter->xB0_position += *pAtkShieldKB
+            PSVECAdd(&fighter->xB0_pos, (Vec3*)pAtkShieldKB, &fighter->xB0_pos);
         }
 		else
         {
-            //pCharData@r31.position@0xB0.xyz += selfVel + pAtkShieldKB
-			PSVECAdd(&pCharData->xB0_pos, &selfVel, &pCharData->xB0_pos);
-			pCharData->xB0_pos.x += p_kb_vel->x;
-            pCharData->xB0_pos.y += p_kb_vel->y;
-            PSVECAdd(&pCharData->xB0_pos, (Vec3*)pAtkShieldKB, &pCharData->xB0_pos);
+            //fighter@r31.position@0xB0.xyz += selfVel + pAtkShieldKB
+			PSVECAdd(&fighter->xB0_pos, &selfVel, &fighter->xB0_pos);
+			fighter->xB0_pos.x += p_kb_vel->x;
+            fighter->xB0_pos.y += p_kb_vel->y;
+            PSVECAdd(&fighter->xB0_pos, (Vec3*)pAtkShieldKB, &fighter->xB0_pos);
         }
-		//@5ac accumulate wind hazards into the windOffset vector
-		func_8007B924(pPlayerEntityStruct, /*result vec3*/&windOffset);
+		//accumulate wind hazards into the windOffset vector
+		func_getWindOffsetVec_8007B924(fighterObj, /*result vec3*/&windOffset);
     }
     else
     {
-        //@5bc
+        
         windOffset.z = 0;
         windOffset.y = 0;
         windOffset.x = 0;
     }
-    //@5cc
-    func_80076528(pPlayerEntityStruct);
-
-    //@5d4
-	if (pCharData->cb.x21D0_callback_EveryHitlag != 0)
-		pCharData->cb.x21D0_callback_EveryHitlag(pPlayerEntityStruct); // void (*EveryHitlag_x21D0)(GOBJ *fighter)
     
-    //@5ec
-	if (pCharData->xE0_ground_or_air == 0)
+    func_80076528(fighterObj);
+
+    
+	if (fighter->cb.x21D0_callback_EveryHitlag) {
+        fighter->cb.x21D0_callback_EveryHitlag(fighterObj);
+    }
+		 
+    
+	if (fighter->xE0_ground_or_air == GA_Ground)
     {
-        //@5f8
+        
         s32 dummy2;
-		Vec3 difference; // 0x24
+		Vec3 difference; 
 		// I think this function always returns r3=1, but it contains two __assert functions. But I guess these just stop or reset the game.
 		// result is written to where r5 points to, which is 'difference' in this case
-		if (func_800567C0(pCharData->x6F0_collData.x14C_groundIndex/*groundID field not documented*/, /*Vec3*/&pCharData->xB0_pos, &difference))
-			//@610 pCharData->position += difference
-			PSVECAdd(&pCharData->xB0_pos, &difference, &pCharData->xB0_pos);
+		if (func_800567C0(fighter->x6F0_collData.x14C_groundIndex, &fighter->xB0_pos, &difference))
+			//fighter->position += difference
+			PSVECAdd(&fighter->xB0_pos, &difference, &fighter->xB0_pos);
     }
 	
-	//@620
-	pCharData->xB0_pos.x += windOffset.x;
-    pCharData->xB0_pos.y += windOffset.y;
-    pCharData->xB0_pos.z += windOffset.z;
+	
+	fighter->xB0_pos.x += windOffset.x;
+    fighter->xB0_pos.y += windOffset.y;
+    fighter->xB0_pos.z += windOffset.z;
 
-    //@654 TODO: do the bitflag tests here tell us if the player is dead?
-	func_800D3158(pPlayerEntityStruct);
-    //@658
-	if (pCharData->x2225_flag.bits.b0)
+    // TODO: do the bitflag tests here tell us if the player is dead?
+	func_800D3158(fighterObj);
+    
+	if (fighter->x2225_flag.bits.b0)
     {
-		//@664 if position.y crossed (0.25*stage.blastBottom+0.75*stage.cameraBottom) + stage.crowdReactStart from below...
-		if (pCharData->xBC_prevPos.y <= Stage_CalcUnkCamYBounds() &&
-		    pCharData->xB0_pos.y >  Stage_CalcUnkCamYBounds())
-			pCharData->x2225_flag.bits.b0 = 0;
-
+		// if position.y crossed (0.25*stage.blastBottom+0.75*stage.cameraBottom) + stage.crowdReactStart from below...
+		if (fighter->xBC_prevPos.y <= Stage_CalcUnkCamYBounds() &&
+		    fighter->xB0_pos.y >  Stage_CalcUnkCamYBounds()) {
+			    fighter->x2225_flag.bits.b0 = 0;
+            }
     }
 	else
     {
-        //@69c
-		if ((pCharData->x222A_flag.bits.b1 == 0) && (/*!x2228_6*/((pCharData->x2228_flag.bits.b5) & 1) == 0))
+        
+		if (!fighter->x222A_flag.bits.b1 && !fighter->x2228_flag.bits.b5)
         {
-			//@6b4 if position.y crossed 0.5*(stage.blastBottom+stage.cameraBottom) + stage.crowdReactStart from above...
-			if (pCharData->xBC_prevPos.y >= Stage_CalcUnkCamY() &&
-			    pCharData->xB0_pos.y <  Stage_CalcUnkCamY())
+			// if position.y crossed 0.5*(stage.blastBottom+stage.cameraBottom) + stage.crowdReactStart from above...
+			if (fighter->xBC_prevPos.y >= Stage_CalcUnkCamY() &&
+			    fighter->xB0_pos.y <  Stage_CalcUnkCamY())
             {
-				//@6e8 plays this sound you always hear when you get close to the bottom blast zone
-				func_80088148(pCharData, 96, 127, 64);
-                //@6ec
-				pCharData->x2225_flag.bits.b0 = 1;
+				// plays this sound you always hear when you get close to the bottom blast zone
+				func_80088148(fighter, 96, 127, 64);
+				fighter->x2225_flag.bits.b0 = 1;
             }
         }
     }
-	//@6fc
-	if (pCharData->dmg.x18A4_knockbackMagnitude  && // 0.0f@toc-0x778C
-        pCharData->x221C_flag.bits.b6 == 0 &&
-		!func_80322258(pCharData->xB0_pos.x))
-        // not sure when we reach this point, but often around the end of knockback, sometimes completely unrelated
+	
+	if (fighter->dmg.x18A4_knockbackMagnitude && 
+        !fighter->x221C_flag.bits.b6 &&
+		!func_80322258(fighter->xB0_pos.x))
+        
     {
-        // @728
-		pCharData->dmg.x18A4_knockbackMagnitude = 0.0f; // 0.0f@toc-0x778C
+        
+		fighter->dmg.x18A4_knockbackMagnitude = 0.0f; 
     }
-    //@730
-	func_8007AF28(pPlayerEntityStruct);
-	//@738 The following classify_float calls are inlined by the compiler. The classify_float function does not appear to be in the melee DOL, maybe it was optimized away by the linker.
-	if (g_debugLevel >= 3 && // This value is zero and I think it always will be. Probably some debug level indicator, because only a NaN test follows next.
-        (fpclassify(pCharData->xB0_pos.x)==FP_NAN || // @744
-         fpclassify(pCharData->xB0_pos.y)==FP_NAN || // @7ac
-         fpclassify(pCharData->xB0_pos.z)==FP_NAN)) // @814
+    
+
+	func_8007AF28(fighterObj);
+	
+	if (g_debugLevel >= 3 && 
+        (fpclassify(fighter->xB0_pos.x)==FP_NAN || 
+         fpclassify(fighter->xB0_pos.y)==FP_NAN || 
+         fpclassify(fighter->xB0_pos.z)==FP_NAN)) 
 	{
-		//@87c CR.bits[6] = 1;  // this instruction is generated by the compiler because OSReport is a variadic function. bit[0] = leftmost bit
-		OSReport("fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n", pCharData->xB0_pos.x, pCharData->xB0_pos.y);
-		//@894 TODO: use __FILE__ __LINE__ macros instead?
-        __assert(__FILE__ /*filename pointer = 0x803C0000 + 1404*/, /*line*/2517, /*output*/"0"/*r5 = r13 - 31888*/);
+		OSReport("fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n", fighter->xB0_pos.x, fighter->xB0_pos.y);
+        __assert(__FILE__ , /*line*/2517, "0");
     }
-    //@8a8 stack unwind
+    
 }
 
 // https://decomp.me/scratch/6HYyw
@@ -2736,8 +2718,8 @@ void func_8006CA5C(HSD_GObj* fighterObj) {
                     func_80088148(fighter_r31, fighter_r31->x10C_ftData->x4C_collisionData->x30, 0x7F, 0x40);
                 }
                 func_8027B4A4(fighterObj, fighter_r31->x1A60);
-                if (fighter_r31->cb.x2194_callback_x2194) {
-                    fighter_r31->cb.x2194_callback_x2194(fighterObj);
+                if (fighter_r31->cb.x2194_callback) {
+                    fighter_r31->cb.x2194_callback(fighterObj);
                 }
             }
         }
