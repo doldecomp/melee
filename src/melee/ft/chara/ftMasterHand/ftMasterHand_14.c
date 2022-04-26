@@ -2,7 +2,7 @@
 
 // 80152BC8 14F7A8
 void lbl_80152BC8(HSD_GObj* gobj) {
-
+    return;
 }
 
 
@@ -52,7 +52,7 @@ void lbl_80152CB4(HSD_GObj* arg0) {
 
 // 80152CD4 14F8B4
 void lbl_80152CD4(HSD_GObj *arg0) {
-
+    return;
 }
 
 
@@ -109,7 +109,7 @@ void lbl_80152E04(HSD_GObj* gobj) {
 
 // 80152E24 14FA04
 void lbl_80152E24(HSD_GObj* gobj) {
-
+    return;
 }
 
 

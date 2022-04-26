@@ -29,7 +29,7 @@ void lbl_801538EC(HSD_GObj* gobj) {
 
 // 8015390C 1504EC
 void lbl_8015390C(HSD_GObj* gobj) {
-
+    return;
 }
 
 

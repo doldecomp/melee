@@ -32,7 +32,7 @@ void lbl_801521B8(HSD_GObj* gobj) {
 // 801521D8 14EDB8
 // https://decomp.me/scratch/8JwVv
 void lbl_801521D8(void) {
-
+    return;
 }
 
 

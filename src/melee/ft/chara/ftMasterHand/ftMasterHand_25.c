@@ -46,6 +46,7 @@ void lbl_80154E14(HSD_GObj* gobj) {
 // 80154E74 151A54
 // https://decomp.me/scratch/0wwnm
 void lbl_80154E74(HSD_GObj* gobj) {
+    return;
 }
 
 

@@ -2,18 +2,21 @@
 
 // 80155C88 152868
 void func_80155C88(HSD_GObj* gobj) {
+    return;
 }
 
 
 
 // 80155C8C 15286C
 void func_80155C8C(HSD_GObj* gobj) {
+    return;
 }
 
 
 
 // 80155C90 152870
 void func_80155C90(HSD_GObj* gobj) {
+    return;
 }
 
 

@@ -2,6 +2,7 @@
 
 // 8014FC68 0014C848
 void ftMasterhand_OnDeath(HSD_GObj* gobj) {
+    return;
 }
 
 // 8014FC6C 0014C84C

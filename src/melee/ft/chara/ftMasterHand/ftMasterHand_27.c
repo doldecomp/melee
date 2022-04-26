@@ -46,6 +46,7 @@ void lbl_80155170(HSD_GObj* gobj) {
 
 // 80155190 151D70
 void lbl_80155190(HSD_GObj* gobj) {
+    return;
 }
 
 

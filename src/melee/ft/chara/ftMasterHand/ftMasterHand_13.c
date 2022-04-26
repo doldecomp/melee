@@ -2,7 +2,7 @@
 
 // 8015287C 14F45C
 void lbl_8015287C(HSD_GObj* gobj) {
-
+    return;
 }
 
 

@@ -150,7 +150,7 @@ void lbl_80151A88(HSD_GObj* gobj) {
 // 80151AC4 14E6A4
 // https://decomp.me/scratch/edLn0
 void lbl_80151AC4(void) {
-
+    return;
 }
 
 

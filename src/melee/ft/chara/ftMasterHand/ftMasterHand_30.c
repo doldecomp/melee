@@ -36,6 +36,7 @@ void lbl_801555C4(HSD_GObj* gobj) {
 
 // 801555E4 1521C4
 void lbl_801555E4(HSD_GObj* gobj) {
+    return;
 }
 
 
@@ -74,6 +75,7 @@ void lbl_801556A0(HSD_GObj* gobj) {
 
 // 801556C0 1522A0
 void lbl_801556C0(HSD_GObj* gobj) {
+    return;
 }
 
 
@@ -129,6 +131,7 @@ void lbl_801557F4(HSD_GObj* gobj) {
 
 // 80155814 1523F4
 void lbl_80155814(HSD_GObj* gobj) {
+    return;
 }
 
 
@@ -171,6 +174,7 @@ void lbl_801558E4(HSD_GObj* gobj) {
 
 // 80155904 1524E4
 void lbl_80155904(HSD_GObj* gobj) {
+    return;
 }
 
 

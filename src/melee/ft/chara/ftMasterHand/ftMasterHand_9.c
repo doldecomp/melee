@@ -32,7 +32,7 @@ void lbl_80151DA0(HSD_GObj* arg0) {
 // 80151DC0 14E9A0
 // https://decomp.me/scratch/xMzaA
 void lbl_80151DC0(void) {
-
+    return;
 }
 
 
@@ -78,7 +78,7 @@ void lbl_80151E90(HSD_GObj* gobj) {
 // 80151EB0 14EA90
 // https://decomp.me/scratch/cjk7N
 void lbl_80151EB0(void) {
-
+    return;
 }
 
 
@@ -177,7 +177,7 @@ void lbl_80152090(HSD_GObj* gobj) {
 // 801520D4 14ECB4
 // https://decomp.me/scratch/xDlzv
 void lbl_801520D4(void) {
-
+    return;
 }
 
 

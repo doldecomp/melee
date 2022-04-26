@@ -27,6 +27,7 @@ void func_8014FE10(HSD_GObj* gobj) {
 // 8014FE58 0014CA38
 // https://decomp.me/scratch/kfqG6
 void func_8014FE58(HSD_GObj* gobj) {
+    return;
 }
 
 #pragma dont_inline on
@@ -382,6 +383,7 @@ void lbl_80150870(HSD_GObj* gobj) {
 
 // 80150890 0014D470
 void lbl_80150890(HSD_GObj* gobj) {
+    return;
 }
 
 // 80150894 0014D474

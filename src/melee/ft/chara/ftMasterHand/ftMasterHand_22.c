@@ -34,6 +34,7 @@ void lbl_801542BC(HSD_GObj* gobj) {
 
 // 801542DC 150EBC
 void lbl_801542DC(HSD_GObj* gobj) {
+    return;
 }
 
 
@@ -148,6 +149,7 @@ void lbl_8015442C(HSD_GObj* gobj) {
 
 // 8015459C 15117C
 void lbl_8015459C(HSD_GObj* gobj) {
+    return;
 }
 
 
@@ -204,6 +206,7 @@ void lbl_801546B4(HSD_GObj* gobj) {
 
 // 801546D4 1512B4
 void lbl_801546D4(HSD_GObj* gobj) {
+    return;
 }
 
 
@@ -270,6 +273,7 @@ void lbl_801547D8(HSD_GObj* gobj) {
 
 // 80154838 151418
 void lbl_80154838(HSD_GObj* gobj) {
+    return;
 }
 
 
@@ -301,13 +305,8 @@ void func_8015483C(HSD_GObj* gobj) {
 // https://decomp.me/scratch/rGeOV
 void lbl_801548D8(HSD_GObj* gobj) {
     Fighter* r31_ft_userdata = gobj->user_data;
-    // f32 temp_f1;
 
-    // r31_ft_userdata->x2364 -= 1.0f;
-    if (
-        --r31_ft_userdata->x2364 <= 0.0f &&
-        r31_ft_userdata->x2200_ftcmd_var0
-    ) {
+    if (--r31_ft_userdata->x2364 <= 0.0f && r31_ft_userdata->x2200_ftcmd_var0) {
         func_80155D1C(r31_ft_userdata->x1A58);
         r31_ft_userdata->x2360 = 0;
         r31_ft_userdata->x2200_ftcmd_var0 = 0;

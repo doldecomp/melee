@@ -2,6 +2,7 @@
 
 // 801541C4 150DA4
 void lbl_801541C4(HSD_GObj* gobj) {
+    return;
 }
 
 

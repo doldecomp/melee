@@ -3,7 +3,7 @@
 // 8015236C 14EF4C
 // https://decomp.me/scratch/kPOjS
 void lbl_8015236C(void) {
-
+    return;
 }
 
 
@@ -54,7 +54,7 @@ void lbl_80152458(HSD_GObj* arg0) {
 
 // 80152478 14F058
 void lbl_80152478(HSD_GObj* gobj) {
-
+    return;
 }
 
 
@@ -114,7 +114,7 @@ void lbl_80152588(HSD_GObj* gobj) {
 
 // 801525DC 14F1BC
 void lbl_801525DC(HSD_GObj* gobj) {
-
+    return;
 }
 
 
