@@ -37,7 +37,7 @@ Vec *lbvector_Lerp(Vec *a, Vec *b, Vec *result, float f);
 Vec *func_8000DE38(Mtx m, Vec *v, float c);
 
 extern float func_80022DBC(float);
-extern float func_80022C30(float, float);
+extern float func_someCalcAngle_80022C30(float, float);
 
 Vec *lbvector_EulerAnglesFromONB(Vec *result_angles, Vec *a, Vec *b, Vec *c);
 Vec *lbvector_EulerAnglesFromPartialONB(Vec *result_angles, Vec *a, Vec *c);

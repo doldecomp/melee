@@ -402,7 +402,7 @@ s32 func_80021C48();
 // ? func_80022998(?);
 // ? func_80022BB8(?);
 // ? func_80022BD0(?);
-f32 func_80022C30(f32,f32); // atan2
+f32 func_someCalcAngle_80022C30(f32,f32); // atan2
 // ? func_80022D1C(?);
 // ? func_80022DBC(?);
 // ? func_80022DF8(?);
@@ -1193,7 +1193,7 @@ u32 Fighter_NewSpawn_80068E40();
 // ? Fighter_80068E64(?);
 // void func_80068E98();
 void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighterObj, s32 arg1, s32 arg2, struct _HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
-// ? func_8006ABEC(?);
+// ? Fighter_UnkIncrementCounters_8006ABEC(?);
 // ? func_8006C0F0(?);
 // ? func_8006CC30(?);
 // void Fighter_TakeDamage_8006CC7C(f32, struct _Fighter*);
@@ -1375,7 +1375,7 @@ void func_8007B760();
 // ? func_8007B8A8(?);
 void func_8007B8CC();
 void func_8007B8E8();
-void func_8007B924(struct _HSD_GObj*, Vec* out_wind);
+void func_getWindOffsetVec_8007B924(struct _HSD_GObj*, Vec* out_wind);
 void func_8007BA0C();
 void func_8007BAC0();
 f32 func_8007BBCC(struct _HSD_GObj*);

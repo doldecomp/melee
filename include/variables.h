@@ -3733,7 +3733,7 @@ extern struct _ftCommonData* p_ftCommonData;
 // extern ? lbl_804D49F4;
 // extern ? lbl_804D49F8;
 // extern ? lbl_804D4A00;
-// extern ? lbl_804D4A08;
+// extern ? g_debugLevel;
 // extern ? lbl_804D4A0C;
 // extern ? lbl_804D4A14;
 // extern ? lbl_804D4AC0;
