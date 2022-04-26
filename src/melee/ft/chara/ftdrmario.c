@@ -135,7 +135,7 @@ BOOL func_80149844(HSD_GObj* gobj)
     if (ft == NULL) {
         return TRUE;
     }
-    tmp = ft->x10;
+    tmp = ft->x10_action_state_index;
     if (tmp != 0x155 && tmp != 0x156) {
         return TRUE;
     }

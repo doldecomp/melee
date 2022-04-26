@@ -175,7 +175,7 @@ BOOL func_8014920C(HSD_GObj* gobj)
     if (ft == NULL) {
         return TRUE;
     }
-    temp_r0 = ft->x10;
+    temp_r0 = ft->x10_action_state_index;
     if (temp_r0 != 0x156 && temp_r0 != 0x157) {
         return TRUE;
     }

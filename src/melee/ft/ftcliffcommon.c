@@ -127,6 +127,6 @@ void func_80081644(HSD_GObj* gobj)
     if ((s32) fighter->xE0_ground_or_air == GA_Air)
     {
         func_8005811C(&fighter->x6F0_collData, fighter->x2340_stateVar1);
-        fighter->x890->xC_flag.bits.b0 = 1;
+        fighter->x890_cameraBox->xC_flag.bits.b0 = 1;
     }
 }
