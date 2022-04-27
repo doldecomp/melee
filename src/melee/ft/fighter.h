@@ -114,7 +114,7 @@ typedef struct _ftCommonData {
     u8 filler_x9C[0x134-0x9C];
     /* 0x134 */  s32 x134;
     u8 filler_x138[0x194-0x138];
-    /* 0x194 */  f32 x194;
+    /* 0x194 */  f32 x194_unkHitLagFrames;
     u8 filler_x198[0x200-0x198];
     /* 0x200 */  f32 x200;
     /* 0x204 */  f32 x204_knockbackFrameDecay;
@@ -124,7 +124,7 @@ typedef struct _ftCommonData {
     /* 0x260 */ f32 x260_startShieldHealth;
     u8 filler_x264[0x27C-0x264];
     /* 0x27C */ f32 x27C;
-    /* 0x280 */ f32 x280;
+    /* 0x280 */ f32 x280_unkShieldHealth;
     /* 0x284 */ f32 x284;
     /* 0x288 */ f32 x288;
     u8 filler_x28C[0x294-0x28C];
@@ -529,9 +529,6 @@ typedef struct _Fighter {
     /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
     /* 0xC */ u8 xC_playerID;
-    /* 0xD */ u8 xD;
-    /* 0xE */ u8 xE;
-    /* 0xF */ u8 xF;
     /* 0x10 */ s32 x10_action_state_index;
     /* 0x14 */ s32 x14_action_id;
     /* 0x18 */ s32 x18;
@@ -543,8 +540,7 @@ typedef struct _Fighter {
     /* 0x30 */ f32 x30_facingDirectionRepeated;
     /* 0x34 */ Vec3 x34_scale;
     /* 0x40 */ f32 x40;
-    u8 filler_x40[0x74 - 0x44];
-
+    /* 0x44 */ Mtx x44_mtx;
     Vec3 x74_anim_vel;                                         // 0x74
     Vec3 x80_self_vel;                                         // 0x80
     Vec3 x8c_kb_vel;                                           // 0x8C
@@ -829,7 +825,7 @@ typedef struct _Fighter {
         s32 x1890;                                             // 0x1890
         s32 x1894;                                             // 0x1894
         s32 x1898;                                             // 0x1898
-        f32 x189C;                                             // 0x189c
+        f32 x189C_unk_num_frames;                                             // 0x189c
         f32 x18a0;                                             // 0x18a0
         f32 x18A4_knockbackMagnitude;                          // 0x18a4  kb magnitude
         f32 x18A8;                                             // 0x18a8
@@ -919,7 +915,7 @@ typedef struct _Fighter {
     /* 0x1A52 */ s8 x1A52;
     /* 0x1A53 */ s8 x1A53;
     /* 0x1A54 */ s32 x1A54;
-    /* 0x1A58 */ HSD_GObj* x1A58;
+    /* 0x1A58 */ HSD_GObj* x1A58_interactedFighter;
     /* 0x1A5C */ HSD_GObj* x1A5C;
     /* 0x1A60 */ u32 x1A60;
     /* 0x1A64 */ s32 x1A64;
@@ -1180,7 +1176,7 @@ typedef struct _Fighter {
 } Fighter;
 
 
-// functions from fighter.s
+// functions in fighter.c
 void Fighter_800679B0();
 void Fighter_FirstInitialize_80067A84();
 void Fighter_LoadCommonData();
@@ -1193,7 +1189,7 @@ void Fighter_ResetInputData_80068854(HSD_GObj* fighterObj);
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata);
 u32 Fighter_NewSpawn_80068E40();
 void Fighter_80068E64(HSD_GObj* fighterObj);
-HSD_GObj* func_80068E98(struct S_TEMP1* input);
+HSD_GObj* Fighter_80068E98(struct S_TEMP1* input);
 void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
 void Fighter_8006A1BC(HSD_GObj* fighterObj);
 void Fighter_8006A360(HSD_GObj* fighterObj);
@@ -1201,25 +1197,25 @@ void Fighter_8006ABA0(HSD_GObj* fighterObj);
 void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighterObj);
 void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj);
 void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy);
-void func_8006C0F0(HSD_GObj* fighterObj);
-void func_8006C27C(HSD_GObj* fighterObj, s32 unused, s32 unused2, s32 unused3);
-void func_8006C5F4(HSD_GObj* pPlayerEntityStruct);
-void func_8006C624();
-void func_8006C80C(HSD_GObj* fighterObj);
-void func_8006CA5C(HSD_GObj* fighterObj);
-void func_8006CB94(HSD_GObj* fighterObj);
-void func_8006CC30(f32 arg0, void* unk_ptr);
+void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj);
+void Fighter_8006C27C(HSD_GObj* fighterObj, s32 unused, s32 unused2, s32 unused3);
+void Fighter_8006C5F4(HSD_GObj* fighterObj);
+void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighterObj);
+void Fighter_8006C80C(HSD_GObj* fighterObj);
+void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighterObj);
+void Fighter_8006CB94(HSD_GObj* fighterObj);
+void Fighter_UnkTakeDamage_8006CC30(Fighter* fighter, f32 damage_amount);
 void Fighter_TakeDamage_8006CC7C(Fighter*, f32);
-void func_8006CDA4();
-void func_8006CF5C(Fighter* fighter, s32 arg1);
-void func_8006CFBC(HSD_GObj* fighterObj);
-void func_8006CFE0(HSD_GObj* fighterObj);
-void func_8006D044();
-void func_8006D10C(HSD_GObj* fighterObj);
-void func_8006D1EC();
-void func_8006D9AC(HSD_GObj* fighterObj);
-void func_8006D9EC(HSD_GObj* fighterObj);
-void func_8006DA4C();
-void func_8006DABC();
+void Fighter_8006CDA4(Fighter* fighter, s32 arg1, s32 arg2, s32 arg3);
+void Fighter_8006CF5C(Fighter* fighter, s32 arg1);
+void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighterObj);
+void Fighter_8006CFE0(HSD_GObj* fighterObj);
+void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighterObj);
+void Fighter_8006D10C(HSD_GObj* fighterObj);
+void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj);
+void Fighter_8006D9AC(HSD_GObj* fighterObj);
+void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
+void Fighter_8006DA4C(HSD_GObj* fighterObj);
+void func_8006DABC(HSD_GObj* fighterObj); ///currently in ftanim.s
 
 #endif

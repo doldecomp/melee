@@ -38,7 +38,7 @@ inline void func_80151484_inline1(HSD_GObj* gobj) {
     func_800236B8(r29_ft_userdata->x236C);
     func_800236B8(r29_ft_userdata->x2370);
     if (r29_ft_userdata->x2360) {
-        func_80155D1C(r29_ft_userdata->x1A58);
+        func_80155D1C(r29_ft_userdata->x1A58_interactedFighter);
     }
     r29_ft_userdata->x80_self_vel.y = temp_r30->x14C;
     r29_ft_userdata->x80_self_vel.z = temp_r30->x154;

@@ -14,7 +14,7 @@ void func_80154A78(HSD_GObj* gobj) {
     ft->x2222_flag.bits.b2 = 1;
     func_8007E2F4(ft, 0x1FFU);
     func_8007E2FC(gobj);
-    func_80155B80(ft->x1A58);
+    func_80155B80(ft->x1A58_interactedFighter);
     ft->x234C_pos.x = attr->x118_pos.x;
     ft->x234C_pos.y = attr->x118_pos.y;
     ft->x234C_pos.z = 0.0f;
