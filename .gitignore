@@ -24,3 +24,5 @@ __pycache__
 *.exe
 *.dll
 *.bat
+
+.DS_Store
