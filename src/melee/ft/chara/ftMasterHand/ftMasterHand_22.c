@@ -307,7 +307,7 @@ void lbl_801548D8(HSD_GObj* gobj) {
     Fighter* r31_ft_userdata = gobj->user_data;
 
     if (--r31_ft_userdata->x2364 <= 0.0f && r31_ft_userdata->x2200_ftcmd_var0) {
-        func_80155D1C(r31_ft_userdata->x1A58);
+        func_80155D1C(r31_ft_userdata->x1A58_interactedFighter);
         r31_ft_userdata->x2360 = 0;
         r31_ft_userdata->x2200_ftcmd_var0 = 0;
     }

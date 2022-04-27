@@ -1191,18 +1191,18 @@ void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj*);
 // ? Fighter_UnkInitLoad_80068914(?);
 u32 Fighter_NewSpawn_80068E40();
 // ? Fighter_80068E64(?);
-// void func_80068E98();
+// void Fighter_80068E98();
 void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighterObj, s32 arg1, s32 arg2, struct _HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
 // ? Fighter_UnkIncrementCounters_8006ABEC(?);
 // ? func_8006C0F0(?);
-// ? func_8006CC30(?);
+// ? Fighter_UnkTakeDamage_8006CC30(?);
 // void Fighter_TakeDamage_8006CC7C(f32, struct _Fighter*);
-// ? func_8006CDA4(?);
-// ? func_8006CF5C(?);
-// ? func_8006CFBC(?);
-// ? func_8006CFE0(?);
-// ? func_8006D044(?);
-// ? func_8006D10C(?);
+// ? Fighter_8006CDA4(?);
+// ? Fighter_8006CF5C(?);
+// ? Fighter_UnkSetFlag_8006CFBC(?);
+// ? Fighter_8006CFE0(?);
+// ? Fighter_UnkRecursiveFunc_8006D044(?);
+// ? Fighter_8006D10C(?);
 // ? func_8006DBF4(?);
 // ? func_8006DCF4(?);
 // ? func_8006DE00(?);
@@ -7827,7 +7827,7 @@ void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSr
 // ? func_80342194(?);
 // ? PSMTXIdentity(?);
 // ? PSMTXCopy(?);
-void PSMTXConcat(); // asm/dolphin/mtx/mtx.s
+void PSMTXConcat(Mtx*, Mtx*, Mtx*); // asm/dolphin/mtx/mtx.s
 // ? PSMTXTranspose(?);
 // ? PSMTXInverse(?);
 // ? PSMTXRotRad(?);

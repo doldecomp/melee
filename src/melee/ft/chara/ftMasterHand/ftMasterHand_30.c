@@ -9,7 +9,7 @@ void lbl_8015550C(HSD_GObj* gobj) {
 
     if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (func_8006F238(gobj) == 0)) {
         ft = gobj->user_data;
-        func_8006CFBC(gobj);
+        Fighter_UnkSetFlag_8006CFBC(gobj);
         ft->x1A5C = 0;
         func_80151018(gobj);
     }
@@ -48,7 +48,7 @@ void lbl_801555E8(HSD_GObj* gobj) {
 
     if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (func_8006F238(gobj) == 0)) {
         ft = gobj->user_data;
-        func_8006CFBC(gobj);
+        Fighter_UnkSetFlag_8006CFBC(gobj);
         ft->x1A5C = 0;
         func_80155818(gobj);
     }
@@ -92,9 +92,9 @@ void lbl_801556C4(HSD_GObj* gobj) {
     ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 != 0) {
         ft->x2200_ftcmd_var0 = 0;
-        func_80155D6C(ft->x1A58, 0x14A);
-        if (ft->x1A58 != 0) {
-            gobj_2 = ft->x1A58;
+        func_80155D6C(ft->x1A58_interactedFighter, 0x14A);
+        if (ft->x1A58_interactedFighter != 0) {
+            gobj_2 = ft->x1A58_interactedFighter;
             ft_2 = gobj_2->user_data;
             func_8007E2F4(ft, 0);
             func_800DE2A8(gobj, gobj_2);
@@ -104,7 +104,7 @@ void lbl_801556C4(HSD_GObj* gobj) {
     }
     if ((func_8015C31C() != 0) || (func_8006F238(gobj) == 0)) {
         ft_3 = gobj->user_data;
-        func_8006CFBC(gobj);
+        Fighter_UnkSetFlag_8006CFBC(gobj);
         ft_3->x1A5C = 0;
         func_80151018(gobj);
     }
@@ -186,7 +186,7 @@ void lbl_80155908(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     if ((--ft->x2364 <= 0.0f) && (ft->x2200_ftcmd_var0 != 0)) {
-        func_80155D1C(ft->x1A58);
+        func_80155D1C(ft->x1A58_interactedFighter);
         ft->x2200_ftcmd_var0 = 0;
     }
     if (func_8006F238(gobj) == 0) {
