@@ -49,7 +49,7 @@ void func_80155D6C(HSD_GObj* gobj, s32 arg1) {
     s32 unused[6];
 
     ft = gobj->user_data;
-    ft->x2C_facing_direction = ((Fighter*)ft->x1A58->user_data)->x2C_facing_direction;
+    ft->x2C_facing_direction = ((Fighter*)ft->x1A58_interactedFighter->user_data)->x2C_facing_direction;
     ft->x2340_stateVar1 = 0;
     Fighter_ActionStateChange_800693AC(gobj, 0x14A, 0, 0, 0.0f, 1.0f, 0.0f);
     ft->x221E_flag.bits.b0 = 0;

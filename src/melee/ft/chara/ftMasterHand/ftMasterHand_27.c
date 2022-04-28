@@ -10,9 +10,9 @@ void lbl_80155074(HSD_GObj* gobj) {
     ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 != 0) {
         ft->x2200_ftcmd_var0 = 0;
-        func_80155D6C(ft->x1A58, 0x14A);
-        if (ft->x1A58 != 0) {
-            gobj_2 = ft->x1A58;
+        func_80155D6C(ft->x1A58_interactedFighter, 0x14A);
+        if (ft->x1A58_interactedFighter != 0) {
+            gobj_2 = ft->x1A58_interactedFighter;
             func_8007E2F4(ft, 0);
             func_800DE2A8(gobj, gobj_2);
             func_800DE7C0(gobj_2, 0, 0);

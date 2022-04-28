@@ -15,7 +15,7 @@ void lbl_80155388(HSD_GObj* gobj) {
     // inlined? possibly shared with lbl_8015521C
     if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (func_8006F238(gobj) == 0)) {
         ft_2 = gobj->user_data;
-        func_8006CFBC(gobj);
+        Fighter_UnkSetFlag_8006CFBC(gobj);
         ft_2->x1A5C = 0;
         func_80151018(gobj);
     }

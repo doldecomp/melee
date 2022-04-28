@@ -38,7 +38,7 @@ extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 // =============================
 
 const Vec3 lbl_803B7488 = { 0.0f, 0.0f, 0.0f };
-const Vec3 lbl_803B7494 = { 0.0f, 0.0f, 0.0f };
+const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
 HSD_ObjAllocData lbl_80458FD0;
 HSD_ObjAllocData lbl_80458FFC;
@@ -286,7 +286,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->x221A_flag.bits.b3 = 0;
 	fighter->x1960_vibrateMult = 1.0f;
 	fighter->x1964 = 0.0f;
-	fighter->dmg.x189C = 0.0f;
+	fighter->dmg.x189C_unk_num_frames = 0.0f;
 
 	fighter->x2220_flag.bits.b3 = 0;
 	fighter->x2220_flag.bits.b4 = 0;
@@ -333,7 +333,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->x221D_flag.bits.b6 = 0;
 	fighter->x221B_flag.bits.b5 = 0;
 
-	fighter->x1A58 = 0;
+	fighter->x1A58_interactedFighter = 0;
 	fighter->x1A5C = 0;
 
 	fighter->x221B_flag.bits.b6 = 0;
@@ -513,7 +513,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighterObj) {
 
     HSD_JObjSetTranslate(jobj, &fighter1->xB0_pos);
 
-    func_8006C0F0(fighterObj);
+    Fighter_UnkApplyTransformation_8006C0F0(fighterObj);
 
     jobj = fighterObj->hsd_obj;
 
@@ -857,7 +857,7 @@ void Fighter_80068E64(HSD_GObj* fighterObj) {
 
 
 
-HSD_GObj* func_80068E98(struct S_TEMP1* input) {
+HSD_GObj* Fighter_80068E98(struct S_TEMP1* input) {
 
     Vec translation2;
     Vec translation;
@@ -943,16 +943,16 @@ HSD_GObj* func_80068E98(struct S_TEMP1* input) {
     func_8038FD54(fighterObj, &Fighter_8006ABA0, 2);
     func_8038FD54(fighterObj, &Fighter_Spaghetti_8006AD10, 3);
     func_8038FD54(fighterObj, (void*) &Fighter_procUpdate, 4);
-    func_8038FD54(fighterObj, (void*) &func_8006C27C, 6);
-    func_8038FD54(fighterObj, &func_8006C5F4, 7);
-    func_8038FD54(fighterObj, &func_8006C624, 8);
-    func_8038FD54(fighterObj, &func_8006C80C, 9);
-    func_8038FD54(fighterObj, &func_8006CA5C, 0xC);
-    func_8038FD54(fighterObj, &func_8006CB94, 0xD);
-    func_8038FD54(fighterObj, &func_8006D1EC, 0xE);
-    func_8038FD54(fighterObj, &func_8006D9AC, 0x10);
-    func_8038FD54(fighterObj, &func_8006D9EC, 0x12);
-    func_8038FD54(fighterObj, &func_8006DA4C, 0x16);
+    func_8038FD54(fighterObj, (void*) &Fighter_8006C27C, 6);
+    func_8038FD54(fighterObj, &Fighter_8006C5F4, 7);
+    func_8038FD54(fighterObj, &Fighter_CallAcessoryCallbacks_8006C624, 8);
+    func_8038FD54(fighterObj, &Fighter_8006C80C, 9);
+    func_8038FD54(fighterObj, &Fighter_UnkProcessGrab_8006CA5C, 0xC);
+    func_8038FD54(fighterObj, &Fighter_8006CB94, 0xD);
+    func_8038FD54(fighterObj, &Fighter_UnkProcessShieldHit_8006D1EC, 0xE);
+    func_8038FD54(fighterObj, &Fighter_8006D9AC, 0x10);
+    func_8038FD54(fighterObj, &Fighter_UnkCallCameraCallback_8006D9EC, 0x12);
+    func_8038FD54(fighterObj, &Fighter_8006DA4C, 0x16);
     Fighter_UnkProcessDeath_80068354(fighterObj);
 
     if (fp->x4_fighterKind == 0x1B) {
@@ -1449,13 +1449,13 @@ void Fighter_8006A1BC(HSD_GObj* fighterObj) {
             if (fighter->dmg.x1954 <= 0.0f) {
                 fighter->dmg.x1954 = 0.0f;
                 if (!fighter->x221A_flag.bits.b2 && !fighter->x2219_flag.bits.b7) {
-                    func_8006D10C(fighterObj);
+                    Fighter_8006D10C(fighterObj);
                 }
             }
         }
 
         if (fighter->x221A_flag.bits.b1) {
-            func_8006CFE0(fighterObj);
+            Fighter_8006CFE0(fighterObj);
             fighter->x221A_flag.bits.b1 = 0;
         }
 
@@ -1469,7 +1469,7 @@ void Fighter_8006A1BC(HSD_GObj* fighterObj) {
                     fighter->x221A_flag.bits.b3 = 0;
                 }
                 if ((!fighter->dmg.x1954) && !fighter->x2219_flag.bits.b7) {
-                    func_8006D10C(fighterObj);
+                    Fighter_8006D10C(fighterObj);
                 }
                 fighter->x221A_flag.bits.b2 = 0;
             }
@@ -2486,8 +2486,7 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
     
 }
 
-// https://decomp.me/scratch/6HYyw
-void func_8006C0F0(HSD_GObj* fighterObj) 
+void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj) 
 {
 
     Mtx mtx1;
@@ -2498,12 +2497,12 @@ void func_8006C0F0(HSD_GObj* fighterObj)
 
     Vec unused;
 
-    HSD_JObj* jobj_userdata;
+    Fighter* fighter;
     HSD_JObj* jobj;
     
-    jobj_userdata = fighterObj->user_data;
+    fighter = fighterObj->user_data;
 
-    if (jobj_userdata->translate.y != 1.0f) {
+    if (fighter->x34_scale.z != 1.0f) {
 
         jobj = fighterObj->hsd_obj;
 
@@ -2513,79 +2512,71 @@ void func_8006C0F0(HSD_GObj* fighterObj)
         HSD_JObjGetMtx(jobj, &mtx1);
 
         HSD_JObjGetScale(jobj, &scale);
-        scale.x = Fighter_GetModelScale((Fighter*)jobj_userdata);
+        scale.x = Fighter_GetModelScale(fighter);
 
         HSD_JObjGetRotation(jobj, &rotation);
 
         HSD_JObjGetTranslation(jobj, &translation);
 
         func_8037A250(&mtx2, &scale, &rotation, &translation, 0);
-        PSMTXConcat(&mtx2, &mtx1, &jobj_userdata->mtx);
+        PSMTXConcat(&mtx2, &mtx1, &fighter->x44_mtx);
 
     }
 
      
 }
 
-///https://decomp.me/scratch/m9K8F
-////latest with correct inlines: https://decomp.me/scratch/m9K8F
-void func_8006C27C(HSD_GObj* fighterObj, s32 unused, s32 unused2, s32 unused3) {
 
-    Fighter* fighter_r4;
+void Fighter_8006C27C(HSD_GObj* fighterObj, s32 unused, s32 unused2, s32 unused3) {
 
-    fighter_r4 = fighterObj->user_data;
+    Fighter* fighter = fighterObj->user_data;
 
+    if (!fighter->x221F_flag.bits.b3) {
 
-    if (fighter_r4->x221F_flag.bits.b3 == 0U) {
-
-        if (fighter_r4->x6F0_collData.x1A0 != 0) {
-            fighter_r4->x6F0_collData.x1A0 = fighter_r4->x6F0_collData.x1A0 - 1;
-            if (fighter_r4->x6F0_collData.x1A0 == 0) {
-                func_8007D5BC(fighter_r4);
+        if (fighter->x6F0_collData.x1A0) {
+            fighter->x6F0_collData.x1A0 = fighter->x6F0_collData.x1A0 - 1;
+            if (!fighter->x6F0_collData.x1A0) {
+                func_8007D5BC(fighter);
             }
         }
 
-        fighter_r4->x2223_flag.bits.b5 = 0;
+        fighter->x2223_flag.bits.b5 = 0;
 
-        HSD_JObjSetTranslate(fighterObj->hsd_obj, &fighter_r4->xB0_pos);
+        HSD_JObjSetTranslate(fighterObj->hsd_obj, &fighter->xB0_pos);
 
-        if (fighter_r4->cb.x21A8_callback_Coll != 0U) {
-            fighter_r4->cb.x21A8_callback_Coll(fighterObj);
+        if (fighter->cb.x21A8_callback_Coll) {
+            fighter->cb.x21A8_callback_Coll(fighterObj);
             func_800F1D24(fighterObj);
         }
 
-        if (fighter_r4->xE0_ground_or_air == 0) {
-            func_80041280(fighter_r4->xC_playerID, fighter_r4->x221F_flag.bits.b4);
+        if (fighter->xE0_ground_or_air == GA_Ground) {
+            func_80041280(fighter->xC_playerID, fighter->x221F_flag.bits.b4);
         }
 
         if (g_debugLevel >= 3) {
-            if (fpclassify(fighter_r4->xB0_pos.x) == FP_NAN ||
-                fpclassify(fighter_r4->xB0_pos.y) == FP_NAN ||
-                fpclassify(fighter_r4->xB0_pos.z) == FP_NAN)
+            if (fpclassify(fighter->xB0_pos.x) == FP_NAN ||
+                fpclassify(fighter->xB0_pos.y) == FP_NAN ||
+                fpclassify(fighter->xB0_pos.z) == FP_NAN)
             {
-                /////"fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n"
-                ///// Todo wrong offset from data start
-                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", fighter_r4->xB0_pos.x, fighter_r4->xB0_pos.y);
-                __assert(__FILE__, 0xA1E, "0");
+                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", fighter->xB0_pos.x, fighter->xB0_pos.y);
+                __assert(__FILE__, 2590, "0");
             }
         }
 
-        HSD_JObjSetTranslate(fighterObj->hsd_obj, &fighter_r4->xB0_pos);
+        HSD_JObjSetTranslate(fighterObj->hsd_obj, &fighter->xB0_pos);
 
     }
 }
 
-void func_8006C5F4(HSD_GObj* pPlayerEntityStruct/*r3*/)
+void Fighter_8006C5F4(HSD_GObj* fighterObj)
 {
-    Fighter* pFighter = (Fighter*) pPlayerEntityStruct->user_data;
-	if (!pFighter->x221F_flag.bits.b3)
-		func_80089B08(pPlayerEntityStruct);
+    Fighter* fighter = fighterObj->user_data;
+	if (!fighter->x221F_flag.bits.b3)
+		func_80089B08(fighterObj);
 }
 
 
-
-/////https://decomp.me/scratch/6AwUk
-void func_8006C624(HSD_GObj* fighterObj) {
+void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighterObj) {
 
     s32 unused[2];
     Fighter* fighter_r31 = fighterObj->user_data;
@@ -2612,60 +2603,58 @@ void func_8006C624(HSD_GObj* fighterObj) {
 }
 
 
-////https://decomp.me/scratch/Ak3qm
-void func_8006C80C(HSD_GObj* fighterObj) {
+void Fighter_8006C80C(HSD_GObj* fighterObj) {
 
-    Vec spB0;
+    Vec cam_offset;
 
     Quaternion rotation;
     Vec translation;
     Vec scale;
 
-    Mtx mtx2;
-    Mtx mtx1;
+    Mtx fighter_mtx;
+    Mtx jobj_mtx;
 
     Vec unused;
     Vec unused2;
     s32 unused3;
 
     HSD_JObj* jobj;
-    HSD_JObj* jobj_userdata;
+    HSD_JObj* jobj_copy;
 
-    HSD_JObj* temp_ptr;
-    HSD_JObj* temp_ptr2;
+    Fighter* fighter;
+    Fighter* fighter_copy;
+    Fighter* fighter_copy2;
 
-    Fighter* fighter_r31;
-
-    fighter_r31 = fighterObj->user_data;
+    fighter = fighterObj->user_data;
 
 
-    if (fighter_r31->x221F_flag.bits.b3 == 0) {
-        func_80067624(fighterObj, &fighter_r31->x60C);
-        temp_ptr = jobj_userdata = fighterObj->user_data;
+    if (!fighter->x221F_flag.bits.b3) {
+        func_80067624(fighterObj, &fighter->x60C);
+        fighter_copy2 = fighter_copy = fighterObj->user_data;
 
-        if (temp_ptr->translate.y != 1.0f) {
+        if (fighter_copy2->x34_scale.z != 1.0f) {
 
-            temp_ptr2 = jobj = fighterObj->hsd_obj;
+            jobj_copy = jobj = fighterObj->hsd_obj;
 
-            HSD_JObjSetupMatrix(temp_ptr2);
+            HSD_JObjSetupMatrix(jobj_copy);
 
-            HSD_JObjGetMtx(jobj, &mtx1);
+            HSD_JObjGetMtx(jobj, &jobj_mtx);
 
             HSD_JObjGetScale(jobj, &scale);
-            scale.x = Fighter_GetModelScale((Fighter*)jobj_userdata);
+            scale.x = Fighter_GetModelScale(fighter_copy);
 
             HSD_JObjGetRotation(jobj, &rotation);
 
             HSD_JObjGetTranslation(jobj, &translation);
 
-            func_8037A250(&mtx2, &scale, &rotation, &translation, 0);
-            PSMTXConcat(&mtx2, &mtx1, &jobj_userdata->mtx);
+            func_8037A250(&fighter_mtx, &scale, &rotation, &translation, 0);
+            PSMTXConcat(&fighter_mtx, &jobj_mtx, &fighter_copy->x44_mtx);
 
         }
 
-        if (fighter_r31->x2219_flag.bits.b5 == 0) {
-            if (fighter_r31->cb.x21BC_callback_Accessory4 != 0U) {
-                fighter_r31->cb.x21BC_callback_Accessory4(fighterObj);
+        if (!fighter->x2219_flag.bits.b5) {
+            if (fighter->cb.x21BC_callback_Accessory4) {
+                fighter->cb.x21BC_callback_Accessory4(fighterObj);
             }
         }
 
@@ -2673,17 +2662,17 @@ void func_8006C80C(HSD_GObj* fighterObj) {
         func_8007C224(fighterObj);
         func_8007C6DC(fighterObj);
 
-        if (fighter_r31->x20A0 != 0U) {
-            HSD_JObjAnimAll(fighter_r31->x20A0);
+        if (fighter->x20A0) {
+            HSD_JObjAnimAll(fighter->x20A0);
         }
 
-        if (fighter_r31->xE0_ground_or_air == 1) {
-            if (fighter_r31->xB0_pos.y < Stage_GetCamBoundsBottomOffset()) {
-                s32 temp_ret = func_802FB6E8(fighter_r31->xC_playerID);
+        if (fighter->xE0_ground_or_air == GA_Air) {
+            if (fighter->xB0_pos.y < Stage_GetCamBoundsBottomOffset()) {
+                s32 temp_ret = func_802FB6E8(fighter->xC_playerID);
                 if (temp_ret == 3) {
-                    Stage_UnkSetVec3TCam_Offset(&spB0);
-                    if (fighter_r31->xB0_pos.y + spB0.y < fighter_r31->x2140) {
-                        fighter_r31->x2140 = fighter_r31->xB0_pos.y + spB0.y;
+                    Stage_UnkSetVec3TCam_Offset(&cam_offset);
+                    if (fighter->xB0_pos.y + cam_offset.y < fighter->x2140) {
+                        fighter->x2140 = fighter->xB0_pos.y + cam_offset.y;
                     }
                 }
             }
@@ -2693,33 +2682,33 @@ void func_8006C80C(HSD_GObj* fighterObj) {
 
 }
 
-//// https://decomp.me/scratch/DN71r
-void func_8006CA5C(HSD_GObj* fighterObj) {
 
-    Fighter* fighter_r31 = fighterObj->user_data;
+void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighterObj) {
 
-    if (fighter_r31->x221F_flag.bits.b3 == 0 && func_8016B1C4() == 0) {
+    Fighter* fighter = fighterObj->user_data;
+
+    if (!fighter->x221F_flag.bits.b3 && !func_8016B1C4()) {
         func_8007BA0C(fighterObj);
-        if (fighter_r31->x221E_flag.bits.b6) {
+        if (fighter->x221E_flag.bits.b6) {
             func_80078A2C(fighterObj);
-            if (fighter_r31->x1A58) {
-                if (fighter_r31->x2225_flag.bits.b1 == 0) {
-                    func_80088148(fighter_r31, fighter_r31->x10C_ftData->x4C_collisionData->x30, 0x7F, 0x40);
+            if (fighter->x1A58_interactedFighter) {
+                if (!fighter->x2225_flag.bits.b1) {
+                    func_80088148(fighter, fighter->x10C_ftData->x4C_collisionData->x30, 0x7F, 0x40);
                 }
-                func_80078754(fighterObj, fighter_r31->x1A58, 0);
-                fighter_r31->cb.x2190_callback_OnGrabFighter_Self(fighterObj);
-                fighter_r31->cb.x2198_callback_OnGrabFighter_Victim(fighter_r31->x1A58, fighterObj);
+                func_80078754(fighterObj, fighter->x1A58_interactedFighter, 0);
+                fighter->cb.x2190_callback_OnGrabFighter_Self(fighterObj);
+                fighter->cb.x2198_callback_OnGrabFighter_Victim(fighter->x1A58_interactedFighter, fighterObj);
                 return;
             }
             func_8007BC90(fighterObj);
 
-            if (fighter_r31->x1A60) {
-                if (fighter_r31->x2225_flag.bits.b1 == 0) {
-                    func_80088148(fighter_r31, fighter_r31->x10C_ftData->x4C_collisionData->x30, 0x7F, 0x40);
+            if (fighter->x1A60) {
+                if (!fighter->x2225_flag.bits.b1) {
+                    func_80088148(fighter, fighter->x10C_ftData->x4C_collisionData->x30, 0x7F, 0x40);
                 }
-                func_8027B4A4(fighterObj, fighter_r31->x1A60);
-                if (fighter_r31->cb.x2194_callback) {
-                    fighter_r31->cb.x2194_callback(fighterObj);
+                func_8027B4A4(fighterObj, fighter->x1A60);
+                if (fighter->cb.x2194_callback) {
+                    fighter->cb.x2194_callback(fighterObj);
                 }
             }
         }
@@ -2728,10 +2717,10 @@ void func_8006CA5C(HSD_GObj* fighterObj) {
 }
 
 
-void func_8006CB94(HSD_GObj* fighterObj) {
-    Fighter* fighter_r31 = fighterObj->user_data;
+void Fighter_8006CB94(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
 
-    if (fighter_r31->x221F_flag.bits.b3 == 0 && fighter_r31->x2219_flag.bits.b1 == 0) {
+    if (!fighter->x221F_flag.bits.b3 && !fighter->x2219_flag.bits.b1) {
         func_800765E0();
         func_80078C70(fighterObj);
         func_8007C77C(fighterObj);
@@ -2746,14 +2735,14 @@ void func_8006CB94(HSD_GObj* fighterObj) {
     }
 }
 
-///https://decomp.me/scratch/UC5Tf
-void func_8006CC30(f32 arg0, void* unk_ptr) {
-    Fighter_TakeDamage_8006CC7C(unk_ptr, arg0);
-    func_8007EA90(unk_ptr, arg0);
+
+void Fighter_UnkTakeDamage_8006CC30(Fighter* fighter, f32 arg0) {
+    Fighter_TakeDamage_8006CC7C(fighter, arg0);
+    func_8007EA90(fighter, arg0);
 }
 
 
-///https://decomp.me/scratch/KPwpm
+
 void Fighter_TakeDamage_8006CC7C(Fighter* fighter, f32 damage_amount) {
 
     if (!fighter->x2226_flag.bits.b4 || fighter->x2226_flag.bits.b3) {
@@ -2777,25 +2766,24 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fighter, f32 damage_amount) {
 }
 
 
-///https://decomp.me/scratch/9QvFG   ///// Not quite matched
-void func_8006CDA4(Fighter* fighter, s32 arg1, s32 arg2, s32 arg3) {
-    s32 temp_r5;
-    
-    s32 phi_r31 = 0;
+///https://decomp.me/scratch/9QvFG  
+void Fighter_8006CDA4(Fighter* fighter, s32 arg1, s32 arg2, s32 arg3) {
+    BOOL temp_bool;
+    BOOL hold_item_bool = 0;
     Vec vec;
 
     if (fighter->x1974_heldItem && !func_8026B2B4(fighter->x1974_heldItem)) {
-        phi_r31 = 1;
+        hold_item_bool = 1;
     }
 
     
-    temp_r5 = !((fighter->x2220_flag.bits.b3 || fighter->x2220_flag.bits.b4 || func_8008E984(fighter)));
-    vec = lbl_803B7494;
+    temp_bool = !((fighter->x2220_flag.bits.b3 || fighter->x2220_flag.bits.b4 || func_8008E984(fighter)));
+    vec = vec3_803B7494;
 
 
     if ((fighter->x10_action_state_index) != 0x145 && ((fighter->x10_action_state_index - 0x122) > 1U) &&  fighter->dmg.x1860_dealt != 0xAU  && !fighter->x2226_flag.bits.b2) {
         if (   ///// giant if condition
-                phi_r31 && temp_r5 && ((HSD_Randi(p_ftCommonData->x418) < arg1)
+                hold_item_bool && temp_bool && ((HSD_Randi(p_ftCommonData->x418) < arg1)
                 ||
                 ((((func_8026B30C(fighter->x1974_heldItem) == 3) && 
                 func_8026B594(fighter->x1974_heldItem))) && 
@@ -2818,10 +2806,9 @@ void func_8006CDA4(Fighter* fighter, s32 arg1, s32 arg2, s32 arg3) {
 
 }
 
-////https://decomp.me/scratch/rKHVB
-void func_8006CF5C(Fighter* fighter, s32 arg1) {
+void Fighter_8006CF5C(Fighter* fighter, s32 arg1) {
 
-   if (fighter->x2224_flag.bits.b2 == 0) {
+   if (!fighter->x2224_flag.bits.b2) {
        fighter->dmg.x18F0 += arg1;
        func_800BFFD0(fighter, 8, 0);
        func_8007EBAC(fighter, 2, 0);
@@ -2829,34 +2816,32 @@ void func_8006CF5C(Fighter* fighter, s32 arg1) {
 }
 
 
-///https://decomp.me/scratch/UV4by
-void func_8006CFBC(HSD_GObj* fighterObj) {
-    Fighter* fighter_r4 = fighterObj->user_data;
+void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
 
-    if (fighter_r4->x2219_flag.bits.b7){
-        fighter_r4->x221A_flag.bits.b1 = 1;
+    if (fighter->x2219_flag.bits.b7){
+        fighter->x221A_flag.bits.b1 = 1;
     }
 
 }
 
-////https://decomp.me/scratch/M9nCw
 
-void func_8006CFE0(HSD_GObj* fighterObj) {
-    Fighter* fighter_r31;
-    fighter_r31 = fighterObj->user_data;
 
-    if (fighter_r31->x2219_flag.bits.b7) {
-        if (fighter_r31->x221A_flag.bits.b2 == 0) {
-            if (!fighter_r31->dmg.x1954){
-                func_8006D10C(fighterObj);
+void Fighter_8006CFE0(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+
+    if (fighter->x2219_flag.bits.b7) {
+        if (!fighter->x221A_flag.bits.b2) {
+            if (!fighter->dmg.x1954){
+                Fighter_8006D10C(fighterObj);
             }
         }
-        fighter_r31->x2219_flag.bits.b7 = 0;
+        fighter->x2219_flag.bits.b7 = 0;
     }
 }
 
-///https://decomp.me/scratch/osZ8G
-void func_8006D044(HSD_GObj* fighterObj) {
+
+void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighterObj) {
     s32 unused[5];
     HSD_GObj* otherObj;
     Fighter* fighter = fighterObj->user_data;
@@ -2881,13 +2866,13 @@ void func_8006D044(HSD_GObj* fighterObj) {
         if (otherObj && !other_fighter->x2219_flag.bits.b7) {
             Fighter* other_fighter2 = otherObj->user_data;
             other_fighter2->x2219_flag.bits.b7 = 1;
-            func_8006D044(otherObj);
+            Fighter_UnkRecursiveFunc_8006D044(otherObj);
         }
     }
 }
 
-//// https://decomp.me/scratch/yD4Ne
-void func_8006D10C(HSD_GObj* fighterObj) {
+
+void Fighter_8006D10C(HSD_GObj* fighterObj) {
     s32 unused[2];
     HSD_GObj* otherObj;
     HSD_GObj* otherObj2;
@@ -2911,7 +2896,7 @@ void func_8006D10C(HSD_GObj* fighterObj) {
                 }
                 new_fighter->x2219_flag.bits.b5 = 0;
                 if (new_fighter->x1A5C && !new_fighter->x2219_flag.bits.b7) {
-                    func_8006CFE0(new_fighter->x1A5C);
+                    Fighter_8006CFE0(new_fighter->x1A5C);
                 }
                     
             }
@@ -2921,36 +2906,31 @@ void func_8006D10C(HSD_GObj* fighterObj) {
     }
 }
 
-///https://decomp.me/scratch/U3gL9
-void func_8006D1EC(HSD_GObj* fighterObj) {
 
-    f32 temp_f30;
+void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj) {
 
-    f32 temp_f1;
-    f32 temp_f2;
+    f32 forceAppliedOnHit;
+    f32 temp_float;
 
-    s32 unused[6];
+    s32 unused[5];
 
     
     Fighter* fighter = fighterObj->user_data;
-    Fighter* fighter_r25;
+    Fighter* same_fighter;
     HSD_GObj* temp_obj;
 
-    s32 phi_r29;
+    BOOL bool1;
 
-    s32 temp_r26;
-    s32 temp_r28 = fighter->x10_action_state_index;
-    s32 temp_r29;
+    s32 ground_or_air;
+    s32 action_state_index = fighter->x10_action_state_index;
+    BOOL damage_bool;
 
-    s32 phi_r27;
+    BOOL bool2;
 
-    s32 phi_r26;
-    s32 phi_r25;
+    BOOL bool3;
+    BOOL bool4;
     
-    phi_r25 =
-    phi_r26 =
-    phi_r27 =
-    phi_r29 = 0;
+    bool4 = bool3 = bool2 = bool1 = 0;
 
     if (!fighter->x221F_flag.bits.b3) {
 
@@ -2964,31 +2944,31 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
         }
 
         if (fighter->x221A_flag.bits.b7) {
-            temp_f2 = p_ftCommonData->x2DC;
-            fighter->x1998_shieldHealth -= (p_ftCommonData->x284 * ((fighter->x19A0_shieldDamageTaken) * (1.0f - ((fighter->x199C_shieldLightshieldAmt * (p_ftCommonData->x2E0 - temp_f2)) + temp_f2)))) + p_ftCommonData->x288;
+            temp_float = p_ftCommonData->x2DC;
+            fighter->x1998_shieldHealth -= (p_ftCommonData->x284 * ((fighter->x19A0_shieldDamageTaken) * (1.0f - ((fighter->x199C_shieldLightshieldAmt * (p_ftCommonData->x2E0 - temp_float)) + temp_float)))) + p_ftCommonData->x288;
             if (fighter->x1998_shieldHealth < 0.0f) {
-                phi_r26 = 1;
-                fighter->x1998_shieldHealth = p_ftCommonData->x280;
+                bool3 = 1;
+                fighter->x1998_shieldHealth = p_ftCommonData->x280_unkShieldHealth;
                 /// this function is called when shield is broken
                 func_8003E058(fighter->x19BC_shieldDamageTaken3, fighter->x221F_flag.bits.b6, fighter->xC_playerID, fighter->x221F_flag.bits.b4);
             }
         }
 
-        if (fighter->dmg.x189C > 0.0f) {
-            fighter->dmg.x189C--;
-            if (fighter->dmg.x189C <= 0.0f && !fighter->dmg.x1850_forceApplied) {
-                fighter->dmg.x189C = 0.0f;
+        if (fighter->dmg.x189C_unk_num_frames > 0.0f) {
+            fighter->dmg.x189C_unk_num_frames--;
+            if (fighter->dmg.x189C_unk_num_frames <= 0.0f && !fighter->dmg.x1850_forceApplied) {
+                fighter->dmg.x189C_unk_num_frames = 0.0f;
                 func_8007BE3C(fighterObj);
             }
         }
 
-        // temp_f30 = fighter->dmg.x1850_forceApplied;
-        if (temp_f30 = fighter->dmg.x1850_forceApplied) {
-            temp_r26 = fighter->xE0_ground_or_air;
-            fighter->dmg.x189C = 0.0f;
-            temp_f2 = fighter->dmg.x1838_percentTemp;
+
+        if (forceAppliedOnHit = fighter->dmg.x1850_forceApplied) {
+            ground_or_air = fighter->xE0_ground_or_air;
+            fighter->dmg.x189C_unk_num_frames = 0.0f;
+            temp_float = fighter->dmg.x1838_percentTemp;
             Fighter_TakeDamage_8006CC7C( fighter, fighter->dmg.x1838_percentTemp);
-            func_8007EA90(fighter, temp_f2);
+            func_8007EA90(fighter, temp_float);
             func_8008D930(fighter);
             func_800F5BA4(fighter);
 
@@ -3016,11 +2996,11 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
                         break;
                 }
 
-                temp_r29 = fighter->dmg.x183C_applied;
-                phi_r27 = 1;
-                func_80090594(fighter, fighter->dmg.x1860_dealt, temp_r29, temp_r28, temp_r26, fighter->x1960_vibrateMult);
+                damage_bool = fighter->dmg.x183C_applied;
+                bool2 = 1;
+                func_80090594(fighter, fighter->dmg.x1860_dealt, damage_bool, action_state_index, ground_or_air, fighter->x1960_vibrateMult);
                 func_8007ED50(fighter, fighter->dmg.x1838_percentTemp);
-                phi_r29 = temp_r29;
+                bool1 = damage_bool;
                 
             } else {
 
@@ -3038,10 +3018,10 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
                 func_8008E9D0(fighterObj);
             }
         } else if (fighter->dmg.x18a0) {
-            phi_r29 = fighter->dmg.x1840;
-            phi_r25 = 1;
+            bool1 = fighter->dmg.x1840;
+            bool4 = 1;
         } else if (fighter->x19A4) {
-            if (phi_r26) {
+            if (bool3) {
                 func_80098B20(fighterObj);
                 func_80088148(fighter, 0x82, 0x7F, 0x40);
             } else {
@@ -3049,18 +3029,18 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
                     fighter->cb.x21C4_callback_OnShieldHit(fighterObj);
                 }
             }
-            phi_r29 = fighter->x19A4;
+            bool1 = fighter->x19A4;
         } else if (fighter->dmg.x1918) {
-            if ((fighter->dmg.x191C) && (!fighter->x1A58) && (!fighter->x1A60)) {
+            if ((fighter->dmg.x191C) && (!fighter->x1A58_interactedFighter) && (!fighter->x1A60)) {
                 func_8007DB58(fighterObj);
                 func_80099D9C(fighterObj);
             }
-            phi_r29 = fighter->dmg.x1918;
+            bool1 = fighter->dmg.x1918;
         } else if (fighter->dmg.x1914) {
             if (fighter->cb.x21C0_callback_OnGiveDamage) {
                 fighter->cb.x21C0_callback_OnGiveDamage(fighterObj);
             }
-            phi_r29 = fighter->dmg.x1914;
+            bool1 = fighter->dmg.x1914;
             if (fighter->x2073 == 0x46U) {
                 func_8007EBAC(fighter, 0xE, 0);
             } else {
@@ -3068,7 +3048,7 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
             }
         } else {
             if (fighter->dmg.x1924) {
-                phi_r29 = fighter->dmg.x1924;
+                bool1 = fighter->dmg.x1924;
             } else if (fighter->x1A3C) {
                 func_80098C9C(fighterObj);
             } else if (fighter->x1A2C_reflectHitDirection) {
@@ -3086,13 +3066,13 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
             }
         }
 
-        if (!temp_f30) {
-            f32 newtemp;
-            newtemp = fighter->dmg.x1838_percentTemp;
-            temp_f30 = newtemp;
-            if (temp_f30) {
-                Fighter_TakeDamage_8006CC7C(fighter, newtemp);
-                func_8007EA90(fighter, temp_f30);
+        if (!forceAppliedOnHit) {
+            f32 damage_percent;
+            damage_percent = fighter->dmg.x1838_percentTemp;
+            forceAppliedOnHit = damage_percent;
+            if (forceAppliedOnHit) {
+                Fighter_TakeDamage_8006CC7C(fighter, damage_percent);
+                func_8007EA90(fighter, forceAppliedOnHit);
                 func_800F5C34(fighter);
                 func_800804FC(fighter);
             }
@@ -3100,33 +3080,31 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
         func_800C8D00(fighterObj);
 
         
-        if (phi_r29) {
-            fighter->dmg.x195c_hitlag_frames = func_8007DA74(phi_r29, temp_r28, fighter->x1960_vibrateMult);
+        if (bool1) {
+            fighter->dmg.x195c_hitlag_frames = func_8007DA74(bool1, action_state_index, fighter->x1960_vibrateMult);
             if (fighter->dmg.x195c_hitlag_frames < fighter->x1964) {
                 fighter->dmg.x195c_hitlag_frames = fighter->x1964;
             }
             if (fighter->dmg.x195c_hitlag_frames > 0.0f) {
-                if (fighter->dmg.x195c_hitlag_frames > p_ftCommonData->x194) {
-                    fighter->dmg.x195c_hitlag_frames = p_ftCommonData->x194;
+                if (fighter->dmg.x195c_hitlag_frames > p_ftCommonData->x194_unkHitLagFrames) {
+                    fighter->dmg.x195c_hitlag_frames = p_ftCommonData->x194_unkHitLagFrames;
                 }
                 fighter->x221A_flag.bits.b2 = 1;
-                if (phi_r27) {
+                if (bool2) {
                     fighter->x221A_flag.bits.b3 = 1;
                 }
-                if (phi_r25) {
-                    fighter->dmg.x189C = fighter->dmg.x195c_hitlag_frames;
+                if (bool4) {
+                    fighter->dmg.x189C_unk_num_frames = fighter->dmg.x195c_hitlag_frames;
                 }
                 if (!fighter->x2219_flag.bits.b5) {
-                    // HSD_GObj* temp_obj;
-                    fighter_r25 = fighterObj->user_data;
-                    if (fighter_r25->cb.x21D4_callback_EnterHitlag) {
-                        fighter_r25->cb.x21D4_callback_EnterHitlag(fighterObj);
+                    same_fighter = fighterObj->user_data;
+                    if (same_fighter->cb.x21D4_callback_EnterHitlag) {
+                        same_fighter->cb.x21D4_callback_EnterHitlag(fighterObj);
                     }
-                    fighter_r25->x2219_flag.bits.b5 = 1;
-                    // temp_obj = fighter_r25->x1A5C;
-                    if ((temp_obj = fighter_r25->x1A5C) && !fighter_r25->x2219_flag.bits.b7) {
+                    same_fighter->x2219_flag.bits.b5 = 1;
+                    if ((temp_obj = same_fighter->x1A5C) && !same_fighter->x2219_flag.bits.b7) {
                         ((Fighter*)temp_obj->user_data)->x2219_flag.bits.b7 = 1;
-                        func_8006D044(temp_obj);
+                        Fighter_UnkRecursiveFunc_8006D044(temp_obj);
                     }
                 }
             }
@@ -3136,16 +3114,16 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
 
         if (fighter->x221A_flag.bits.b0 || fighter->dmg.x1958) {
             if (!fighter->x2219_flag.bits.b5) {
-                // HSD_GObj* temp_obj;
-                fighter_r25 = fighterObj->user_data;
-                if (fighter_r25->cb.x21D4_callback_EnterHitlag) {
-                    fighter_r25->cb.x21D4_callback_EnterHitlag(fighterObj);
+                same_fighter = fighterObj->user_data;
+                if (same_fighter->cb.x21D4_callback_EnterHitlag) {
+                    same_fighter->cb.x21D4_callback_EnterHitlag(fighterObj);
                 }
-                fighter_r25->x2219_flag.bits.b5 = 1;
-                temp_obj = fighter_r25->x1A5C;
-                if ((temp_obj) && !fighter_r25->x2219_flag.bits.b7) {
-                    ((Fighter*)temp_obj->user_data)->x2219_flag.bits.b7 = 1;
-                    func_8006D044(temp_obj);
+                same_fighter->x2219_flag.bits.b5 = 1;
+                temp_obj = same_fighter->x1A5C;
+                if (temp_obj && !same_fighter->x2219_flag.bits.b7) {
+                    Fighter* another_fighter_ptr = temp_obj->user_data;
+                    another_fighter_ptr->x2219_flag.bits.b7 = 1;
+                    Fighter_UnkRecursiveFunc_8006D044(temp_obj);
                 }
             }
 
@@ -3162,8 +3140,8 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
 
 
         if (fighter->dmg.x1928) {
-            temp_f2 = (fighter->dmg.x1928 * p_ftCommonData->x3E0) + p_ftCommonData->x3E4;
-            fighter->xF4_ground_attacker_shield_kb_vel = (fighter->dmg.x192c < 0.0f) ? temp_f2 : -temp_f2;
+            temp_float = (fighter->dmg.x1928 * p_ftCommonData->x3E0) + p_ftCommonData->x3E4;
+            fighter->xF4_ground_attacker_shield_kb_vel = (fighter->dmg.x192c < 0.0f) ? temp_float : -temp_float;
             func_8007E2A4(fighterObj);
         }
 
@@ -3202,37 +3180,37 @@ void func_8006D1EC(HSD_GObj* fighterObj) {
 
 }
 
-///https://decomp.me/scratch/GmsSV
-void func_8006D9AC(HSD_GObj* fighterObj) {
-    Fighter* fighter_r4;
-    fighter_r4  = fighterObj->user_data;
 
-    if (fighter_r4->x221F_flag.bits.b3 || fighter_r4->x2219_flag.bits.b5) return;
+void Fighter_8006D9AC(HSD_GObj* fighterObj) {
+    Fighter* fighter;
+    fighter  = fighterObj->user_data;
+
+    if (fighter->x221F_flag.bits.b3 || fighter->x2219_flag.bits.b5) return;
 
     func_8009E0A8(fighterObj);
 }
 
-//https://decomp.me/scratch/PcHW6
-void func_8006D9EC(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
 
-    if (fp->x221F_flag.bits.b3 == 0) {
+void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+
+    if (!fighter->x221F_flag.bits.b3) {
         func_8008021C(fighterObj);
-        if (fp->cb.x21AC_callback_Cam) {
-            fp->cb.x21AC_callback_Cam(fighterObj);
+        if (fighter->cb.x21AC_callback_Cam) {
+            fighter->cb.x21AC_callback_Cam(fighterObj);
         }
     }
 
 }
 
-///https://decomp.me/scratch/4PdL1
-void func_8006DA4C(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
 
-    if (fp->x221F_flag.bits.b3 == 0) {
-        Player_80032828(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->xB0_pos);
-        Player_SetFacingDirectionConditional(fp->xC_playerID, fp->x221F_flag.bits.b4, fp->x2C_facing_direction);
-        func_8003FAA8(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->xB0_pos, &fp->xBC_prevPos);
+void Fighter_8006DA4C(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+
+    if (!fighter->x221F_flag.bits.b3) {
+        Player_80032828(fighter->xC_playerID, fighter->x221F_flag.bits.b4, &fighter->xB0_pos);
+        Player_SetFacingDirectionConditional(fighter->xC_playerID, fighter->x221F_flag.bits.b4, fighter->x2C_facing_direction);
+        func_8003FAA8(fighter->xC_playerID, fighter->x221F_flag.bits.b4, &fighter->xB0_pos, &fighter->xBC_prevPos);
     }
 }
 
