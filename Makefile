@@ -5,7 +5,7 @@ ifneq ($(findstring MSYS,$(shell uname)),)
   WINDOWS := 1
 endif
 
-GENERATE_MAP ?= 0
+GENERATE_MAP ?= 1
 NON_MATCHING ?= 0
 
 VERBOSE ?= 0
