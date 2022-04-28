@@ -70,6 +70,7 @@ CC_EPI   = $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
 endif
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
+LMVIZ	:= tools/linkmapviz
 HOSTCC  := cc
 SHA1SUM := sha1sum
 PYTHON  := python3
@@ -186,6 +187,11 @@ endif
 $(ELF2DOL): tools/elf2dol.c
 	@echo Building tool $@
 	$(QUIET) $(HOSTCC) $(HOSTCFLAGS) -o $@ $^
+
+
+$(LMVIZ): tools/linkmapviz.py
+	@echo Building tool $@
+	$(QUIET) $(PYTHON) $^
 
 ### Debug Print ###
 
