@@ -101,23 +101,36 @@ struct RGBA {
 
 // Points to data in PiCo.dat
 typedef struct _ftCommonData {
-    f32 x0;
-    f32 x4;
-    f32 x8_someStickThreshold;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-
-    u8 filler_x1C[0x98 - 0x1C];
+    /* 0x0 */ f32 x0;
+    /* 0x4 */ f32 x4;
+    /* 0x8 */ f32 x8_someStickThreshold;
+    /* 0xC */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ f32 x18;
+    u8 filler_x4[0x88 - 0x1C];
+    /* 0x88 */ f32 x88;
+    /* 0x8C */ s32 x8C;
+    u8 filler_x90[0x98 - 0x90];
     /* 0x98 */ f32 x98_shieldHealthInit;
-    u8 filler_x9C[0x134-0x9C];
-    /* 0x134 */  s32 x134;
-    u8 filler_x138[0x194-0x138];
-    /* 0x194 */  f32 x194_unkHitLagFrames;
-    u8 filler_x198[0x200-0x198];
-    /* 0x200 */  f32 x200;
-    /* 0x204 */  f32 x204_knockbackFrameDecay;
+    u8 filler_x9C[0xEC-0x9C];
+    /* 0xEC */ f32 xEC;
+    /* 0xF0 */ f32 xF0;
+    u8 filler_xF4[0x134-0xF4];
+    /* 0x134 */ s32 x134;
+    /* 0x138 */ f32 x138;
+    /* 0x13C */ f32 x13C;
+    u8 filler_x140[0x164-0x140];
+    /* 0x164 */ f32 x164;
+    u8 filler_x168[0x194-0x168];
+    /* 0x194 */ f32 x194_unkHitLagFrames;
+    /* 0x198 */ f32 x198;
+    /* 0x19C */ f32 x19C;
+    /* 0x1A0 */ f32 x1A0;
+    u8 filler_x1A4[0x1FC-0x1A4];
+    /* 0x1FC */ f32 x1FC;
+    /* 0x200 */ f32 x200;
+    /* 0x204 */ f32 x204_knockbackFrameDecay;
     u8 filler_x208[0x21C-0x208];
     /* 0x21C */ f32 x21C;
     u8 filler_x220[0x260-0x220];
@@ -132,7 +145,9 @@ typedef struct _ftCommonData {
     u8 filler_x298[0x2DC-0x298];
     /* 0x2DC */ f32 x2DC;
     /* 0x2E0 */ f32 x2E0;
-    u8 filler_x2E4[0x3A8-0x2E4];
+    u8 filler_x2E4[0x308-0x2E4];
+    /* 0x308 */ f32 x308;
+    u8 filler_x30C[0x3A8-0x30C];
     /* 0x3A8 */ f32 x3A8;
     u8 filler_x3AC[0x3E0-0x3AC];
     /* 0x3E0 */ f32 x3E0;
@@ -142,22 +157,34 @@ typedef struct _ftCommonData {
     u8 filler_x3F0[0x418-0x3F0];
     /* 0x418 */ s32 x418;
     /* 0x41C */ s32 x41C;
-    u8 filler_x420[0x480-0x420];
+    u8 filler_x420[0x454-0x420];
+    /* 0x454 */ f32 x454;
+    /* 0x458 */ f32 x458;
+    /* 0x45C */ f32 x45C;
+    /* 0x460 */ f32 x460;
+    u8 filler_x464[0x480-0x464];
     /* 0x480 */ f32 x480;
     u8 filler_x484[0x498-0x484];
     /* 0x498 */ u32 x498_ledgeCooldownTime;
-    u8 filler_x4CC[0x4CC-0x49C];
+    u8 filler_x49C[0x4CC-0x49C];
     /* 0x4CC */ s32 x4CC;
-    u8 filler_x4D0[0x5F0-0x4D0];
-    /* 0x5F0 */ u32 x5F0;
+    u8 filler_x4D0[0x5C0-0x4D0];
+    /* 0x5F0 */ f32 x5C0;
+    u8 filler_x5C4[0x5F0-0x5C4];
+    /* 0x5F0 */  u32 x5F0;
     u8 filler_x5F4[0x6D8-0x5F4];
-    /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
+   /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
     struct RGBA x6DC_colorsByPlayer[4];
     u8 filler_x6EC[0x6F4 - 0x6EC];
     /* 0x6F4 */ s32 x6F4_unkDamage;
     /* 0x6F8 */ s32 x6F8;
     /* 0x6FC */ s32 x6FC;
-    u8 filler_x768[0x768 - 0x700];
+    /* 0x700 */ s32 x700;
+    /* 0x704 */ f32 x704;
+    /* 0x708 */ f32 x708;
+    /* 0x70C */ f32 x70C;
+    /* 0x710 */ f32 x710;
+    u8 filler_x714[0x768-0x714];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
@@ -169,9 +196,9 @@ typedef struct _ftCommonData {
     /* 0x7AC */ s32 x7AC;
     /* 0x7B0 */ s32 x7B0;
     /* 0x7B4 */ s32 x7B4_unkDamage;
-    /* 0x7B8 */ s32 x7B8;
-    /* 0x7BC */ s32 x7BC;
-    /* 0x7C0 */ s32 x7C0;
+    /* 0x7B8 */ f32 x7B8;
+    /* 0x7BC */ f32 x7BC;
+    /* 0x7C0 */ f32 x7C0;
     /* 0x7C4 */ s32 x7C4;
     /* 0x7C8 */ s32 x7C8;
     /* 0x7CC */ s32 x7CC;
@@ -199,13 +226,18 @@ typedef struct _FtCollisionData
 typedef struct _ftData
 {
     struct {
-        u8 x0_fill[0xFC];
+        u8 x0_fill[0x8C];
+        f32 x8C;
+        u8 x90_fill[0xFC - 0x90];
         f32 xFC;
         u8 x100_fill[0x16C - 0x100];
         s32 x16C_idx;
     }* x0;
     /* 0x04 */ void* ext_attr;
-    s32 x8;
+    struct {
+        u8 x0_fill[0x10];
+        u8 unk10, unk11, unk12;
+    }* x8;
     struct S_TEMP4* xC;
     u8* x10;
     s32 filler_x14[13];
@@ -282,7 +314,8 @@ typedef struct _CollData
     /* 0xB0 */ f32 xB0;
     /* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
     /* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
-    u8 filler_xBC[0x134 - 0xBC - 8];
+    u8 filler_xBC[0x130 - 0xBC - 8];
+    /* 0x130 */ u32 x130;
     /* 0x134 */ s32 x134_envFlags;
     u8 filler_x138[0x14C - 0x138];
     /* 0x14C */ s32 x14C_groundIndex;
@@ -291,8 +324,8 @@ typedef struct _CollData
     /* 0x160 */ s32 x160_rightwall_index;
     u8 filler_x160[0x174 - 0x160 - 4];
     /* 0x174 */ s32 x174_leftwall_index;
-    u8 filler_x174[0x1A0 - 0x174 - 8];
-    s32 x1A0;
+    u8 filler_x174[0x19C - 0x174 - 4];
+    /* 0x19C */ s32 x19C;
 } CollData;
 
 typedef struct _ftHit
@@ -366,39 +399,35 @@ struct SpecialAttrs_Mario {
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
     /* 0x2240 */ u32 x2240;
-    char filler0[0xFC];
 };
 
 struct SpecialAttrs_Fox {
     /* 0x222C */ u32 x222C;
-    char filler0[0x110];
 };
 
 struct SpecialAttrs_Captain {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
-    char filler0[0x10C];
 };
 
 struct SpecialAttrs_DK {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Kirby {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Koopa {
     /* 0x222C */ u32 x222C;
-    char filler0[0x110];
 };
 
 struct SpecialAttrs_Link {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Seak {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Ness {
@@ -411,7 +440,6 @@ struct SpecialAttrs_Ness {
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
     /* 0x224C */ u32 x224C;
-    char filler0[0xF0];
 };
 
 struct SpecialAttrs_Peach {
@@ -423,31 +451,30 @@ struct SpecialAttrs_Peach {
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
-    char filler0[0xF4];
 };
 
 struct SpecialAttrs_Popo {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Nana {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Pikachu {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Samus {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Yoshi {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Purin {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Mewtwo {
@@ -456,20 +483,18 @@ struct SpecialAttrs_Mewtwo {
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
-    char filler0[0x100];
 };
 
 struct SpecialAttrs_Luigi {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Mars {
     /* 0x222C */ u32 x222C;
-    char filler0[0x110];
 };
 
 struct SpecialAttrs_Zelda {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_CLink {
@@ -480,15 +505,14 @@ struct SpecialAttrs_CLink {
     /* 0x223C */ u32 x223C;
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
-    char filler0[0xF8];
 };
 
 struct SpecialAttrs_Pichu {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Gaw {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Masterhand {
@@ -505,23 +529,23 @@ struct SpecialAttrs_Masterhand {
 };
 
 struct SpecialAttrs_Crazyhand {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Boy {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Girl {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_GKoopa {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 struct SpecialAttrs_Sandbag {
-    char filler0[0x114];
+    char filler0[0x100];
 };
 
 typedef struct _Fighter {
@@ -636,17 +660,11 @@ typedef struct _Fighter {
         /* 0x218 */ f32 x218_WallJumpVerticalVelocity;
         /* 0x21C */ s32 x21C;
         /* 0x220 */ f32 x220_TrophyScale;
-        /* 0x224 */ s32 x224;
-        /* 0x228 */ s32 x228;
-        /* 0x22C */ s32 x22C;
-        /* 0x230 */ s32 x230;
-        /* 0x234 */ s32 x234;
-        /* 0x238 */ s32 x238;
-        /* 0x23C */ s32 x23C;
-        /* 0x240 */ s32 x240;
-        /* 0x244 */ s32 x244;
-        /* 0x248 */ s32 x248;
-        /* 0x24C */ s32 x24C;
+        /* 0x224 */ Vec3 x224;
+        /* 0x230 */ Vec3 x230;
+        /* 0x23C */ f32 x23C;
+        /* 0x240 */ Vec3 x240;
+        /* 0x24C */ f32 x24C;
         /* 0x250 */ s32 x250;
         /* 0x254 */ s32 x254;
         /* 0x258 */ f32 x258; // used
@@ -711,32 +729,35 @@ typedef struct _Fighter {
     /* 0x61C */ u8 x61C;
     /* 0x61D */ u8 x61D;
     u8 filler_x61E[0x620 - 0x61E];
-    /* 0x620 */ f32 x620_lstick_x;
-    /* 0x624 */ f32 x624_lstick_y;
-    /* 0x628 */ f32 x628_lstick_x2;
-    /* 0x62C */ f32 x62C_lstick_y2;
 
-    /* 0x630 */ f32 x630;
-    /* 0x634 */ f32 x634;
+    struct {
+        /* 0x620 */ f32 x620_lstick_x;
+        /* 0x624 */ f32 x624_lstick_y;
+        /* 0x628 */ f32 x628_lstick_x2;
+        /* 0x62C */ f32 x62C_lstick_y2;
 
-    /* 0x638 */ f32 x638_lsubStick_x;
-    /* 0x63C */ f32 x63C_lsubStick_y;
-    /* 0x640 */ f32 x640_lsubStick_x2;
-    /* 0x644 */ f32 x644_lsubStick_y2;
-                
-    /* 0x648 */ f32 x648;
-    /* 0x64C */ f32 x64C;
-                
-    /* 0x650 */ f32 x650;
-    /* 0x654 */ f32 x654;
+        /* 0x630 */ f32 x630;
+        /* 0x634 */ f32 x634;
 
-    /* 0x658 */ f32 x658;
+        /* 0x638 */ f32 x638_lsubStick_x;
+        /* 0x63C */ f32 x63C_lsubStick_y;
+        /* 0x640 */ f32 x640_lsubStick_x2;
+        /* 0x644 */ f32 x644_lsubStick_y2;
+                    
+        /* 0x648 */ f32 x648;
+        /* 0x64C */ f32 x64C;
+                    
+        /* 0x650 */ f32 x650;
+        /* 0x654 */ f32 x654;
 
-    /* 0x65C */ s32 x65C;
-    /* 0x660 */ s32 x660;
-    /* 0x664 */ s32 x664;
-    /* 0x668 */ s32 x668;
-    /* 0x66C */ s32 x66C;
+        /* 0x658 */ f32 x658;
+
+        /* 0x65C */ s32 x65C;
+        /* 0x660 */ s32 x660;
+        /* 0x664 */ s32 x664;
+        /* 0x668 */ s32 x668;
+        /* 0x66C */ s32 x66C;
+    } input; // 0x620 to 0x670
 
     /* 0x670 */ u8 x670_timer_lstick_tilt_x;
     /* 0x671 */ u8 x671_timer_lstick_tilt_y;
@@ -884,7 +905,7 @@ typedef struct _Fighter {
     /* 0x1969 */ u8 x1969_walljumpUsed;
     /* 0x196C */ f32 x196C_hitlag_mult;
     /* 0x1970 */ s32 x1970;
-    /* 0x1974 */ void* x1974_heldItem;
+    /* 0x1974 */ HSD_GObj* x1974_heldItem;
     /* 0x1978 */ HSD_GObj* x1978;
     /* 0x197C */ HSD_GObj* x197C;
     /* 0x1980 */ HSD_GObj* x1980;
@@ -911,9 +932,10 @@ typedef struct _Fighter {
     /* 0x1A44 */ s32 x1A44;
     /* 0x1A48 */ s32 x1A48;
     /* 0x1A4C */ f32 x1A4C;
-    u8 filler_x1A50[0x1A52 - 0x1A50];
-    /* 0x1A52 */ s8 x1A52;
-    /* 0x1A53 */ s8 x1A53;
+    /* 0x1A50 */ s8 x1A50;
+    /* 0x1A51 */ s8 x1A51;
+    /* 0x1A52 */ u8 x1A52;
+    /* 0x1A53 */ u8 x1A53;
     /* 0x1A54 */ s32 x1A54;
     /* 0x1A58 */ HSD_GObj* x1A58_interactedFighter;
     /* 0x1A5C */ HSD_GObj* x1A5C;
@@ -923,7 +945,8 @@ typedef struct _Fighter {
     /* 0x1A6A */ s16 x1A6A;
     /* 0x1A6C */ f32 x1A6C;
     /* 0x1A70 */ Vec x1A70;
-    u8 filler_x1A7C[0x1A98-0x1A7C];
+    /* 0x1A7C */ Vec x1A7C;
+    u8 filler_x1A7C[0x1A98-0x1A88];
     /* 0x1A98 */ u32 x1A98;
     u8 filler_x1A9C[0x2004-0x1A9C];
     /* 0x2008 */ s32 x2004;
@@ -933,7 +956,10 @@ typedef struct _Fighter {
     /* 0x2014 */ s32 x2014;
     /* 0x2018 */ s32 x2018;
     /* 0x201C */ s32 x201C;
-    u8 filler_x2020[0x2028 - 0x2020];
+    /* 0x2020 */ s8 x2020;
+    /* 0x2021 */ s8 x2021;
+    /* 0x2022 */ s8 x2022;
+    /* 0x2024 */ s32 x2024;
     /* 0x2028 */ s32 x2028;
     /* 0x202C */ s32 x202C;
     /* 0x2030 */ s32 x2030;
@@ -961,7 +987,7 @@ typedef struct _Fighter {
     /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
-    /* 0x20A0 */ HSD_JObj* x20A0;
+    /* 0x20A0 */ struct _HSD_JObj* x20A0_accessory;
     /* 0x20A4 */ s32 x20A4;
     /* 0x20A8 */ s32 x20A8;
     /* 0x20AC */ u32 x20AC;
@@ -1135,7 +1161,11 @@ typedef struct _Fighter {
         struct SpecialAttrs_Girl girl;
         struct SpecialAttrs_GKoopa gkoopa;
         struct SpecialAttrs_Sandbag sandbag;
+
     } sa;
+    /* 0x232C */ s32 x232C;
+    /* 0x2330 */ Vec2 x2330;
+    /* 0x2338 */ Vec2 x2338;
     union {
     /* 0x2340 */ u32 x2340_stateVar1;
     /* 0x2340 */ f32 x2340_f32;

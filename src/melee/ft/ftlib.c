@@ -249,8 +249,8 @@ s32 func_800865CC(HSD_GObj* gobj)
 void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 {
     Fighter* fp = gobj->user_data;
-    *x = fp->x620_lstick_x;
-    *y = fp->x624_lstick_y;
+    *x = fp->input.x620_lstick_x;
+    *y = fp->input.x624_lstick_y;
 }
 
 void* func_800865F0(HSD_GObj* gobj)
