@@ -442,8 +442,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->x2224_flag.bits.b4 = 0;
 	fighter->x2108 = 0;
 	fighter->x2224_flag.bits.b5 = 0;
-	fighter->x1A53 = (s8) 0;
-	fighter->x1A52 = (s8) 0;
+	fighter->x1A53 = 0;
+	fighter->x1A52 = 0;
 	fighter->x210C_walljumpInputTimer = 254;
 	fighter->dmg.x1910 = 0;
 	fighter->x2225_flag.bits.b0 = 0;
@@ -1796,7 +1796,7 @@ void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighterObj) {
 
 void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
 
-    s32 unused[10];
+    s32 unused[18];
     Fighter* fighter = fighterObj->user_data;
 
     s32 temp0;

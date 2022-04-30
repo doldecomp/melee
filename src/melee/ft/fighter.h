@@ -196,9 +196,9 @@ typedef struct _ftCommonData {
     /* 0x7AC */ s32 x7AC;
     /* 0x7B0 */ s32 x7B0;
     /* 0x7B4 */ s32 x7B4_unkDamage;
-    /* 0x7B8 */ s32 x7B8;
-    /* 0x7BC */ s32 x7BC;
-    /* 0x7C0 */ s32 x7C0;
+    /* 0x7B8 */ f32 x7B8;
+    /* 0x7BC */ f32 x7BC;
+    /* 0x7C0 */ f32 x7C0;
     /* 0x7C4 */ s32 x7C4;
     /* 0x7C8 */ s32 x7C8;
     /* 0x7CC */ s32 x7CC;
@@ -934,8 +934,8 @@ typedef struct _Fighter {
     /* 0x1A4C */ f32 x1A4C;
     /* 0x1A50 */ s8 x1A50;
     /* 0x1A51 */ s8 x1A51;
-    /* 0x1A52 */ s8 x1A52;
-    /* 0x1A53 */ s8 x1A53;
+    /* 0x1A52 */ u8 x1A52;
+    /* 0x1A53 */ u8 x1A53;
     /* 0x1A54 */ s32 x1A54;
     /* 0x1A58 */ HSD_GObj* x1A58_interactedFighter;
     /* 0x1A5C */ HSD_GObj* x1A5C;

@@ -9,19 +9,10 @@ extern struct {
 
 const Vec3 lbl_803B74A0 = { 0, 0, 0 };
 
-inline f32 fabsf(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return x;
-    }
-}
-
 void func_8007C930(Fighter* fp, f32 result)
 {
-    f32 absvel = fabsf(fp->xEC_ground_vel);
-    if (fabsf(result) > absvel) {
+    f32 absvel = fabs_inline(fp->xEC_ground_vel);
+    if (fabs_inline(result) > absvel) {
         result = -fp->xEC_ground_vel;
     } else if (fp->xEC_ground_vel > 0) {
         result = -result;
@@ -41,8 +32,8 @@ void func_8007C98C(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
     phi_f3 = argA;
     result = arg8;
     if (!arg9) {
-        phi_f1 = fabsf(fp->xEC_ground_vel);
-        phi_f0 = fabsf(argA);
+        phi_f1 = fabs_inline(fp->xEC_ground_vel);
+        phi_f0 = fabs_inline(argA);
         if (phi_f0 > phi_f1) {
             phi_f3 = -fp->xEC_ground_vel;
         } else if (fp->xEC_ground_vel > 0) {
@@ -99,7 +90,7 @@ void func_8007CADC(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
     f32 phi_f2;
     f32 phi_f4;
 
-    if (fabsf(phi_f1) >= arg8) {
+    if (fabs_inline(phi_f1) >= arg8) {
         phi_f2 = phi_f1 * arg9;
         phi_f4 = phi_f1 * argA;
     } else {
@@ -301,8 +292,8 @@ void func_8007CE4C(Fighter* fp, f32 val)
 
 void func_8007CE94(Fighter* fp, f32 val)
 {
-    f32 phi_f2 = fabsf(fp->x80_self_vel.x);
-    if (fabsf(val) >= phi_f2) {
+    f32 phi_f2 = fabs_inline(fp->x80_self_vel.x);
+    if (fabs_inline(val) >= phi_f2) {
         val = -fp->x80_self_vel.x;
     } else if (fp->x80_self_vel.x > 0) {
         val = -val;
@@ -313,9 +304,9 @@ void func_8007CE94(Fighter* fp, f32 val)
 void func_8007CEF4(Fighter* fp)
 {
     f32 result = fp->x110_attr.x180_AerialFriction;
-    f32 lhs = fabsf(result);
-    f32 phi_f1 = fabsf(fp->x80_self_vel.x);
-    if (fabsf(result) >= phi_f1) {
+    f32 lhs = fabs_inline(result);
+    f32 phi_f1 = fabs_inline(fp->x80_self_vel.x);
+    if (fabs_inline(result) >= phi_f1) {
         result = -fp->x80_self_vel.x;
     } else if (fp->x80_self_vel.x > 0) {
         result = -fp->x110_attr.x180_AerialFriction;
@@ -332,11 +323,11 @@ BOOL func_8007CF58(Fighter* fp)
     struct attr* attr = &fp->x110_attr;
 
     temp_f3 = fp->x80_self_vel.x;
-    phi_f1 = fabsf(temp_f3);
-    if (fabsf(temp_f3) > attr->x17C_AerialDriftMax) {
+    phi_f1 = fabs_inline(temp_f3);
+    if (fabs_inline(temp_f3) > attr->x17C_AerialDriftMax) {
         phi_f2 = p_ftCommonData->x1FC;
-        phi_f1 = fabsf(temp_f3);
-        phi_f0 = fabsf(p_ftCommonData->x1FC);
+        phi_f1 = fabs_inline(temp_f3);
+        phi_f0 = fabs_inline(p_ftCommonData->x1FC);
         if (phi_f0 >= phi_f1) {
             phi_f2 = -temp_f3;
         } else if (temp_f3 > 0) {
@@ -346,8 +337,8 @@ BOOL func_8007CF58(Fighter* fp)
         return TRUE;
     } else {
         phi_f2 = fp->x110_attr.x180_AerialFriction;
-        phi_f1 = fabsf(temp_f3);
-        phi_f0 = fabsf(fp->x110_attr.x180_AerialFriction);
+        phi_f1 = fabs_inline(temp_f3);
+        phi_f0 = fabs_inline(fp->x110_attr.x180_AerialFriction);
         if (phi_f0 >= phi_f1) {
             phi_f2 = -temp_f3;
         } else if (temp_f3 > 0) {
@@ -370,11 +361,11 @@ BOOL func_8007D050(Fighter* fp, f32 val)
     f32 phi_f1_2;
 
     temp_f3 = fp->x80_self_vel.x;
-    phi_f0 = fabsf(temp_f3);
-    if (fabsf(temp_f3) > val) {
+    phi_f0 = fabs_inline(temp_f3);
+    if (fabs_inline(temp_f3) > val) {
         phi_f2 = p_ftCommonData->x1FC;
-        phi_f1 = fabsf(temp_f3);
-        phi_f0_2 = fabsf(p_ftCommonData->x1FC);
+        phi_f1 = fabs_inline(temp_f3);
+        phi_f0_2 = fabs_inline(p_ftCommonData->x1FC);
         if (phi_f0_2 >= phi_f1) {
             phi_f2 = -temp_f3;
         } else if (temp_f3 > 0) {
@@ -384,8 +375,8 @@ BOOL func_8007D050(Fighter* fp, f32 val)
         return 1;
     } else {
         phi_f2 = fp->x110_attr.x180_AerialFriction;
-        phi_f1_2 = fabsf(temp_f3);
-        phi_f0_3 = fabsf(fp->x110_attr.x180_AerialFriction);
+        phi_f1_2 = fabs_inline(temp_f3);
+        phi_f0_3 = fabs_inline(fp->x110_attr.x180_AerialFriction);
         if (phi_f0_3 >= phi_f1_2) {
             phi_f2 = -temp_f3;
         } else if (temp_f3 > 0) {
@@ -408,8 +399,8 @@ void func_8007D174(Fighter* fp, f32 arg8, f32 arg9, f32 argA, f32 argB)
 
     phi_f2 = argB;
     if (!argA) {
-        phi_f1 = fabsf(fp->x80_self_vel.x);
-        if (fabsf(argB) >= phi_f1) {
+        phi_f1 = fabs_inline(fp->x80_self_vel.x);
+        if (fabs_inline(argB) >= phi_f1) {
             phi_f2 = -fp->x80_self_vel.x;
         } else if (fp->x80_self_vel.x > 0) {
             phi_f2 = -argB;
@@ -492,7 +483,7 @@ void func_8007D344(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
     f32 argx, argy;
     f32 friction;
 
-    if (fabsf(fp->input.x620_lstick_x) >= arg8) {
+    if (fabs_inline(fp->input.x620_lstick_x) >= arg8) {
         argx = fp->input.x620_lstick_x * arg9;
         argy = fp->input.x620_lstick_x * argA;
     } else {
@@ -508,7 +499,7 @@ void func_8007D3A8(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
     f32 phi_f2;
     f32 phi_f4;
 
-    if (fabsf(fp->input.x620_lstick_x) >= arg8) {
+    if (fabs_inline(fp->input.x620_lstick_x) >= arg8) {
         phi_f2 = fp->input.x620_lstick_x * arg9;
         phi_f4 = fp->input.x620_lstick_x * argA;
     } else {
@@ -628,7 +619,7 @@ void func_8007D698(Fighter* fp)
 void func_8007D6A4(Fighter* fp)
 {
     f32 tmp;
-    if ((fp->x594_s32 >> 7U) & 1) {
+    if (fp->x594_animCurrFlags1.bits.b0) {
         fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
     }
     tmp = fp->x110_attr.x144_GroundedMaxHorizontalVelocity;
@@ -675,7 +666,7 @@ void func_8007D7FC(Fighter* fp)
             func_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
         }
     }
-    if ((fp->x594_s32 >> 7U) & 1) {
+    if (fp->x594_animCurrFlags1.bits.b0) {
         fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
     }
     fmp = fp->x110_attr.x144_GroundedMaxHorizontalVelocity;
@@ -709,12 +700,12 @@ void func_8007D92C(HSD_GObj* gobj)
 
 f32 func_8007D964(Fighter* fp)
 {
-    return func_someCalcAngle_80022C30(fp->input.x624_lstick_y, fabsf(fp->input.x620_lstick_x));
+    return func_someCalcAngle_80022C30(fp->input.x624_lstick_y, fabs_inline(fp->input.x620_lstick_x));
 }
 
 f32 func_8007D99C(Fighter* fp)
 {
-    return func_someCalcAngle_80022C30(fp->input.x63C_lsubStick_y, fabsf(fp->input.x638_lsubStick_x));
+    return func_someCalcAngle_80022C30(fp->input.x63C_lsubStick_y, fabs_inline(fp->input.x638_lsubStick_x));
 }
 
 f32 func_8007D9D4(Fighter* fp)
@@ -736,7 +727,7 @@ void func_8007D9FC(Fighter* fp)
 void func_8007DA24(Fighter* fp)
 {
     f32 phi_f0;
-    if (fabsf(fp->input.x620_lstick_x) > p_ftCommonData->x0) {
+    if (fabs_inline(fp->input.x620_lstick_x) > p_ftCommonData->x0) {
         if (fp->input.x620_lstick_x >= 0) {
             phi_f0 = +1;
         } else {
@@ -1705,15 +1696,15 @@ void func_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 void func_8007F76C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->xEC_ground_vel = fp->x2C_facing_direction * fabsf(fp->xEC_ground_vel);
-    fp->x80_self_vel.x = fp->x2C_facing_direction * fabsf(fp->x80_self_vel.x);
+    fp->xEC_ground_vel = fp->x2C_facing_direction * fabs_inline(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = fp->x2C_facing_direction * fabs_inline(fp->x80_self_vel.x);
 }
 
 void func_8007F7B4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->xEC_ground_vel = -fp->x2C_facing_direction * fabsf(fp->xEC_ground_vel);
-    fp->x80_self_vel.x = -fp->x2C_facing_direction * fabsf(fp->x80_self_vel.x);
+    fp->xEC_ground_vel = -fp->x2C_facing_direction * fabs_inline(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = -fp->x2C_facing_direction * fabs_inline(fp->x80_self_vel.x);
 }
 
 void* func_8007F804(Fighter* fp)
@@ -2055,13 +2046,13 @@ void func_8008021C(HSD_GObj* gobj)
 void func_8008031C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fabsf(fp->input.x620_lstick_x) >= p_ftCommonData->x7B8 && fp->x679_x < p_ftCommonData->x7C0 ||
-        fabsf(fp->input.x624_lstick_y) >= p_ftCommonData->x7B8 && fp->x67A_y < p_ftCommonData->x7C0) {
+    if (fabs_inline(fp->input.x620_lstick_x) >= p_ftCommonData->x7B8 && fp->x679_x < p_ftCommonData->x7C0 ||
+        fabs_inline(fp->input.x624_lstick_y) >= p_ftCommonData->x7B8 && fp->x67A_y < p_ftCommonData->x7C0) {
         Player_UpdateJoystickCountByIndex((s32) fp->xC_playerID, fp->x221F_flag.bits.b4);
         fp->x67A_y = 0xFE;
         fp->x679_x = 0xFE;
     }
-    if (fabsf(fp->input.x650) >= p_ftCommonData->x7BC) {
+    if (fabs_inline(fp->input.x650) >= p_ftCommonData->x7BC) {
         if (fp->x67B < p_ftCommonData->x7C0) {
             Player_UpdateJoystickCountByIndex((s32) fp->xC_playerID, fp->x221F_flag.bits.b4);
             fp->x67B = 0xFE;
