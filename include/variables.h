@@ -2081,7 +2081,7 @@ extern void* lbl_804D651C;
 extern void* lbl_804D6520;
 extern void* lbl_804D6524;
 extern void* lbl_804D6528;
-extern void* lbl_804D652C;
+// extern ? lbl_804D652C;
 extern void* lbl_804D6530;
 extern void* lbl_804D6534;
 extern void* lbl_804D6538;

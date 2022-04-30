@@ -8,7 +8,7 @@ BOOL func_80081298(HSD_GObj* gobj) {
     s32 unused1, unused2;
 
     Fighter* fighter = gobj->user_data;
-    if (fighter->x624_lstick_y <= -p_ftCommonData->x480) {
+    if (fighter->input.x624_lstick_y <= -p_ftCommonData->x480) {
         return FALSE;
     }
     if (((fighter->x6F0_collData.x134_envFlags & 0x03000000) != 0)
