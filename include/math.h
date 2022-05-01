@@ -53,7 +53,11 @@ inline s32 __fpclassifyd(double x)
 	                              : __fpclassifyd((double)(x)))
 
 inline f32 fabs_inline(f32 x) {
-	return (x < 0.0f) ? -x : x;
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
+    }
 }
 
 #endif

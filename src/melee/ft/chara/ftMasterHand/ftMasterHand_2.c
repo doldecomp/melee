@@ -38,7 +38,7 @@ void func_8014FE5C(HSD_GObj* gobj) {
     Fighter* fighter;
 
     fighter = gobj->user_data;
-    if ((fighter->x10 == 341) || (fighter->x10 == 342)) {
+    if ((fighter->x10_action_state_index == 341) || (fighter->x10_action_state_index == 342)) {
         fighter->xB0_pos = fighter->sa.masterhand.x2240_pos;
     } else {
         fighter->sa.masterhand.x2240_pos = fighter->xB0_pos;
@@ -57,7 +57,7 @@ void func_8014FF1C(HSD_GObj* gobj) {
     Fighter* fighter;
 
     fighter = gobj->user_data;
-    if ((fighter->x10 == 341) || (fighter->x10 == 342)) {
+    if ((fighter->x10_action_state_index == 341) || (fighter->x10_action_state_index == 342)) {
         fighter->xB0_pos = fighter->sa.masterhand.x2240_pos;
     } else {
         fighter->sa.masterhand.x2240_pos = fighter->xB0_pos;
@@ -78,7 +78,7 @@ void lbl_8014FFDC(HSD_GObj* gobj) {
 
     r31_ft_userdata = gobj->user_data;
     if (r31_ft_userdata->sa.masterhand.x2258 == 0x186) {
-        if ((r31_ft_userdata->x10 == 0x155) || (r31_ft_userdata->x10 == 0x156)) {
+        if ((r31_ft_userdata->x10_action_state_index == 0x155) || (r31_ft_userdata->x10_action_state_index == 0x156)) {
             r31_ft_userdata->xB0_pos = r31_ft_userdata->sa.masterhand.x2240_pos;
         } else {
             r31_ft_userdata->sa.masterhand.x2240_pos = r31_ft_userdata->xB0_pos;
@@ -91,7 +91,7 @@ void lbl_8014FFDC(HSD_GObj* gobj) {
         r31_ft_userdata->sa.masterhand.x2258 = 0x156;
         return;
     }
-    if ((r31_ft_userdata->x10 == 0x155) || (r31_ft_userdata->x10 == 0x156)) {
+    if ((r31_ft_userdata->x10_action_state_index == 0x155) || (r31_ft_userdata->x10_action_state_index == 0x156)) {
         r31_ft_userdata->xB0_pos = r31_ft_userdata->sa.masterhand.x2240_pos;
     } else {
         r31_ft_userdata->sa.masterhand.x2240_pos = r31_ft_userdata->xB0_pos;
@@ -115,11 +115,11 @@ void func_80150144(HSD_GObj* gobj) {
     fighter = gobj->user_data;
     r5_attributes = fighter->x10C_ftData->ext_attr;
     fighter->sa.masterhand.x2258 = 341;
-    fighter->x10 = 343;
+    fighter->x10_action_state_index = 343;
     fighter->xB0_pos.x = r5_attributes->x30_pos2.x;
     fighter->xB0_pos.y = r5_attributes->x30_pos2.y;
     userdata = gobj->user_data;
-    if ((userdata->x10 == 341) || (userdata->x10 == 342)) {
+    if ((userdata->x10_action_state_index == 341) || (userdata->x10_action_state_index == 342)) {
         userdata->xB0_pos = userdata->sa.masterhand.x2240_pos;
     } else {
         userdata->sa.masterhand.x2240_pos = userdata->xB0_pos;
@@ -189,7 +189,7 @@ struct MasterHandDataStuff lbl_803D40D0 = {
 
 inline void lbl_80150230_inline_1(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    if (ft->x10 == 0x155 || ft->x10 == 0x156) {
+    if (ft->x10_action_state_index == 0x155 || ft->x10_action_state_index == 0x156) {
         ft->xB0_pos = ft->sa.masterhand.x2240_pos;
     } else {
         ft->sa.masterhand.x2240_pos = ft->xB0_pos;
@@ -225,9 +225,9 @@ void lbl_80150230(HSD_GObj* gobj) {
     if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
         func_80150894(gobj);
         if (func_8006F238(gobj) == 0) {
-            if (ft->x10 == 0x155) {
+            if (ft->x10_action_state_index == 0x155) {
                 lbl_80150230_inline_1(gobj);
-            } else if (ft->x10 == 0x156) {
+            } else if (ft->x10_action_state_index == 0x156) {
                 lbl_80150230_inline_2(gobj);
             }
         }
@@ -357,9 +357,9 @@ void lbl_80150230(HSD_GObj* gobj) {
                 }
             }
         } else if (func_8006F238(gobj) == 0) {
-            if (ft->x10 == 0x155) {
+            if (ft->x10_action_state_index == 0x155) {
                 lbl_80150230_inline_1(gobj);
-            } else if (ft->x10 == 0x156) {
+            } else if (ft->x10_action_state_index == 0x156) {
                 lbl_80150230_inline_2(gobj);
             }
         }

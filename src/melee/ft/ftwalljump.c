@@ -80,8 +80,8 @@ BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct/*r3*/)
             if (
                     (f32)pCharData_r31->x210C_walljumpInputTimer < p_ftcommon_r4->x768 && // walljump timer within limits?
                     (
-                        (pCharData_r31->x2110_walljumpWallSide == -1.0f && pCharData_r31->x620_lstick_x >=  p_ftcommon_r4->x76C) || // left wall & control stick right?
-                        (pCharData_r31->x2110_walljumpWallSide ==  1.0f && pCharData_r31->x620_lstick_x <= -p_ftcommon_r4->x76C)    // right wal & control stick left?
+                        (pCharData_r31->x2110_walljumpWallSide == -1.0f && pCharData_r31->input.x620_lstick_x >=  p_ftcommon_r4->x76C) || // left wall & control stick right?
+                        (pCharData_r31->x2110_walljumpWallSide ==  1.0f && pCharData_r31->input.x620_lstick_x <= -p_ftcommon_r4->x76C)    // right wal & control stick left?
                     )
                     && (f32)pCharData_r31->x670_timer_lstick_tilt_x < p_ftcommon_r4->x770 // control stick didn't stay too long in the tilt area?
                 )

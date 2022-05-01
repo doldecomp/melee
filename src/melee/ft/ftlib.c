@@ -249,8 +249,8 @@ s32 func_800865CC(HSD_GObj* gobj)
 void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 {
     Fighter* fp = gobj->user_data;
-    *x = fp->x620_lstick_x;
-    *y = fp->x624_lstick_y;
+    *x = fp->input.x620_lstick_x;
+    *y = fp->input.x624_lstick_y;
 }
 
 void* func_800865F0(HSD_GObj* gobj)
@@ -972,7 +972,7 @@ void func_8008777C(HSD_GObj* gobj)
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
     }
     cd = &fp->x6F0_collData;
-    func_80022C30(-cd->x154_groundNormal.x, cd->x154_groundNormal.y);
+    func_someCalcAngle_80022C30(-cd->x154_groundNormal.x, cd->x154_groundNormal.y);
 }
 
 BOOL func_800877D4(HSD_GObj* gobj)

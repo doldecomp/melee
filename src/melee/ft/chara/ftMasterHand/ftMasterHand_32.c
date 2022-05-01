@@ -58,6 +58,6 @@ void func_80155C20(HSD_GObj* gobj) {
     func_8007DC08(ft, p_ftCommonData->x3A8);
     if (ft->x1A4C <= 0.0f) {
         func_80155C94(gobj);
-        func_8015483C(ft->x1A58);
+        func_8015483C(ft->x1A58_interactedFighter);
     }
 }
