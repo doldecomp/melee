@@ -82,7 +82,7 @@ lbl_803820BC:
 lbl_803820C0:
 /* 803820C0 0037ECA0  28 1C 00 00 */	cmplwi r28, 0
 /* 803820C4 0037ECA4  40 82 FF 54 */	bne lbl_80382018
-/* 803820C8 0037ECA8  80 0D C0 64 */	lwz r0, lbl_804D7704@sda21(r13)
+/* 803820C8 0037ECA8  80 0D C0 64 */	lwz r0, nb_memory_list@sda21(r13)
 /* 803820CC 0037ECAC  7C 7D 00 50 */	subf r3, r29, r0
 /* 803820D0 0037ECB0  37 A3 FF FE */	addic. r29, r3, -2
 /* 803820D4 0037ECB4  41 80 00 1C */	blt lbl_803820F0
@@ -93,7 +93,7 @@ lbl_803820C0:
 /* 803820E8 0037ECC8  38 60 00 00 */	li r3, 0
 /* 803820EC 0037ECCC  48 00 00 60 */	b lbl_8038214C
 lbl_803820F0:
-/* 803820F0 0037ECD0  80 0D C0 64 */	lwz r0, lbl_804D7704@sda21(r13)
+/* 803820F0 0037ECD0  80 0D C0 64 */	lwz r0, nb_memory_list@sda21(r13)
 /* 803820F4 0037ECD4  54 03 28 34 */	slwi r3, r0, 5
 /* 803820F8 0037ECD8  4B FF D0 ED */	bl HSD_MemAlloc
 /* 803820FC 0037ECDC  28 03 00 00 */	cmplwi r3, 0
@@ -219,8 +219,8 @@ lbl_80382294:
 /* 803822A4 0037EE84  7C 03 00 40 */	cmplw r3, r0
 /* 803822A8 0037EE88  90 A3 00 24 */	stw r5, 0x24(r3)
 /* 803822AC 0037EE8C  4C 82 00 20 */	bnelr 
-/* 803822B0 0037EE90  90 AD C0 64 */	stw r5, lbl_804D7704@sda21(r13)
-/* 803822B4 0037EE94  90 AD C0 60 */	stw r5, lbl_804D7700@sda21(r13)
+/* 803822B0 0037EE90  90 AD C0 64 */	stw r5, nb_memory_list@sda21(r13)
+/* 803822B4 0037EE94  90 AD C0 60 */	stw r5, memory_list@sda21(r13)
 /* 803822B8 0037EE98  90 AD C0 68 */	stw r5, lbl_804D7708@sda21(r13)
 /* 803822BC 0037EE9C  4E 80 00 20 */	blr 
 
@@ -823,11 +823,11 @@ lbl_804076C8:
 
 .section .sbss
     .balign 8
-.global lbl_804D7700
-lbl_804D7700:
+.global memory_list
+memory_list:
 	.skip 0x4
-.global lbl_804D7704
-lbl_804D7704:
+.global nb_memory_list
+nb_memory_list:
 	.skip 0x4
 .global lbl_804D7708
 lbl_804D7708:

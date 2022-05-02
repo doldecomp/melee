@@ -1,11 +1,19 @@
 #include "sysdolphin/baselib/class.h"
 
+#include <dolphin/os/os.h>
+#include "sysdolphin/baselib/memory.h"
+
 extern void func_803822C0();
 
 HSD_ClassInfo hsdClass = { func_803822C0 };
 
+extern char lbl_80407698[]; // "idx >= 0"
+
 extern char lbl_804D5FA8[8]; // "class.c\0";
 extern char lbl_804D5FB0[2];
+
+extern HSD_MemoryEntry** memory_list;
+extern s32 nb_memory_list;
 
 void ClassInfoInit(HSD_ClassInfo* info)
 {
@@ -51,27 +59,23 @@ void OSReport_PrintSpaces(s32 count) {
     }
 }
 
-// https://decomp.me/scratch/7Z4cL
-
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 {
     if (idx < 0) {
-        __assert(__FILE__, 171, "idx >= 0");
+        __assert(lbl_804D5FA8, 171, lbl_80407698);
     }
 
     if (idx >= nb_memory_list) {
         if (nb_memory_list == 0) { //In this case, it's uninitialized and allocs the array
-            s32 new_nb = 32;
+            s32 new_nb;
 
-            while(idx >= new_nb) {
-                 new_nb *= 2;
+            for (new_nb = 32; idx >= new_nb; new_nb *= 2) {
             }
-            new_nb *= 4;
-            memory_list = HSD_MemAlloc(new_nb);
+            memory_list = (HSD_MemoryEntry**)HSD_MemAlloc(new_nb * 4);
             if (memory_list == NULL) {
                 return NULL;
             }
-            memset(memory_list, 0, new_nb);
+            memset(memory_list, 0, new_nb*4);
             nb_memory_list = new_nb;
         } else { //Resizes the array
             HSD_MemoryEntry** old_list;
@@ -87,17 +91,17 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
             if (new_list == NULL) {
                 return NULL;
             }
-            
+
             memcpy(new_list, memory_list, 4 * nb_memory_list);
             memset(&new_list[nb_memory_list], 0, 4 * (new_nb - nb_memory_list)); //You start *after* existing ptrs and make sure memory is zero'd
-
+    
             old_list = memory_list;
-            old_nb = nb_memory_list;
+            old_nb = OSRoundDown32B(nb_memory_list * 4);
             memory_list = new_list;
             nb_memory_list = new_nb;
-            
-            hsdFreeMemPiece(old_list[old_nb], old_nb);
-            memory_list[(((new_nb + 31) >> 3) & 0x1FFFFFFC) - 1]->nb_alloc += 1;
+
+            hsdFreeMemPiece(old_list, old_nb);
+            memory_list[OSRoundUp32B(old_nb)/32 - 1]->nb_alloc += 1;
         }
     }
 
@@ -114,7 +118,7 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
                 return NULL;
             }
             memset(entry, 0, sizeof(HSD_MemoryEntry));
-            entry->total_bits = (idx + 1) * 32;
+            entry->size = (idx + 1) * 32;
             memory_list[idx] = entry;
             
             found = FALSE;
