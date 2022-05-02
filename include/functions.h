@@ -8764,7 +8764,7 @@ void func_8037EF28(Quaternion*, Quaternion*, Quaternion*, f32);
 // ? ClassInfoInit(?);
 void hsdInitClassInfo();
 // ? OSReport_PrintSpaces(?);
-// ? func_80381D58(?);
+// ? GetMemoryEntry(?);
 // ? hsdAllocMemPiece(?);
 // ? hsdFreeMemPiece(?);
 void* hsdNew();
