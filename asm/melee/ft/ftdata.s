@@ -1010,8 +1010,8 @@ ft_OnDeath:
     .4byte ftSandbag_OnDeath
 
     .balign 4
-.global lbl_803C125C
-lbl_803C125C:
+.global ft_OnUserDataRemove
+ft_OnUserDataRemove:
     .4byte NULL
     .4byte NULL
     .4byte NULL

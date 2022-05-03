@@ -1246,6 +1246,6 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj);
 void Fighter_8006D9AC(HSD_GObj* fighterObj);
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
 void Fighter_8006DA4C(HSD_GObj* fighterObj);
-void func_8006DABC(HSD_GObj* fighterObj); ///currently in ftanim.s
+void Fighter_Unload_8006DABC(Fighter* fighter);
 
 #endif
