@@ -166,7 +166,7 @@ void func_801C0378(void)
     }
 }
 
-void lbl_801C0478(void* ptr)
+void func_801C0478(void* ptr)
 {
     HSD_Free(ptr);
 }
@@ -277,31 +277,31 @@ s32* func_801C0640(void)
     return &x->xD8;
 }
 
-s32* lbl_801C0654(void)
+s32* func_801C0654(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xC4;
 }
 
-s32* lbl_801C0668(void)
+s32* func_801C0668(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xCC;
 }
 
-s32* lbl_801C067C(void)
+s32* func_801C067C(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xD4;
 }
 
-s32* lbl_801C0690(void)
+s32* func_801C0690(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xBC;
 }
 
-s32* lbl_801C06A4(void)
+s32* func_801C06A4(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xC8;
@@ -461,7 +461,7 @@ static BOOL func_801C0A70(Point3d* pos)
 
 extern u32 lbl_803B7DEC[];
 extern void func_8026BE84();
-static asm void lbl_801C0C2C()
+static asm void func_801C0C2C()
 {
     nofralloc
 /* 801C0C2C 001BD80C  7C 08 02 A6 */	mflr r0
@@ -723,7 +723,7 @@ void func_801C0FB8(StructPairWithStageID* pair)
     }
     stage_info.x6A4 = NULL;
 
-    func_8038FD54(func_803901F0(3, 5, 0), lbl_801C0C2C, 10);
+    func_8038FD54(func_803901F0(3, 5, 0), func_801C0C2C, 10);
 }
 
 void func_801C1074(StructPairWithStageID* pair, s32 arg1)
@@ -872,8 +872,8 @@ lbl_801C154C:
 /* 801C1560 001BE140  38 60 00 00 */	li r3, 0
 /* 801C1564 001BE144  48 00 04 A8 */	b lbl_801C1A0C
 lbl_801C1568:
-/* 801C1568 001BE148  3C 60 80 1C */	lis r3, lbl_801C0478@ha
-/* 801C156C 001BE14C  38 A3 04 78 */	addi r5, r3, lbl_801C0478@l
+/* 801C1568 001BE148  3C 60 80 1C */	lis r3, func_801C0478@ha
+/* 801C156C 001BE14C  38 A3 04 78 */	addi r5, r3, func_801C0478@l
 /* 801C1570 001BE150  38 7F 00 00 */	addi r3, r31, 0
 /* 801C1574 001BE154  38 80 00 03 */	li r4, 3
 /* 801C1578 001BE158  48 1C F5 F1 */	bl GObj_InitUserData
@@ -1173,13 +1173,13 @@ lbl_801C19C4:
 /* 801C19CC 001BE5AC  38 B7 00 00 */	addi r5, r23, 0
 /* 801C19D0 001BE5B0  48 1C F0 A1 */	bl func_80390A70
 lbl_801C19D4:
-/* 801C19D4 001BE5B4  3C 60 80 1C */	lis r3, lbl_801C1CD0@ha
-/* 801C19D8 001BE5B8  38 83 1C D0 */	addi r4, r3, lbl_801C1CD0@l
+/* 801C19D4 001BE5B4  3C 60 80 1C */	lis r3, func_801C1CD0@ha
+/* 801C19D8 001BE5B8  38 83 1C D0 */	addi r4, r3, func_801C1CD0@l
 /* 801C19DC 001BE5BC  38 7F 00 00 */	addi r3, r31, 0
 /* 801C19E0 001BE5C0  38 A0 00 01 */	li r5, 1
 /* 801C19E4 001BE5C4  48 1C E3 71 */	bl func_8038FD54
-/* 801C19E8 001BE5C8  3C 60 80 1C */	lis r3, lbl_801C1D38@ha
-/* 801C19EC 001BE5CC  38 83 1D 38 */	addi r4, r3, lbl_801C1D38@l
+/* 801C19E8 001BE5C8  3C 60 80 1C */	lis r3, func_801C1D38@ha
+/* 801C19EC 001BE5CC  38 83 1D 38 */	addi r4, r3, func_801C1D38@l
 /* 801C19F0 001BE5D0  38 7F 00 00 */	addi r3, r31, 0
 /* 801C19F4 001BE5D4  38 A0 00 04 */	li r5, 4
 /* 801C19F8 001BE5D8  48 1C E3 5D */	bl func_8038FD54
@@ -1226,7 +1226,7 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
         func_80390228(temp_r30);
         return NULL;
     }
-    GObj_InitUserData(temp_r30, 3, lbl_801C0478, gp);
+    GObj_InitUserData(temp_r30, 3, func_801C0478, gp);
     gp->map_id = arg1;
     gp->gobj = temp_r30;
     gp->x10_flags.b0 = 0;
@@ -1261,13 +1261,13 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
         return NULL;
     }
     func_80390A70(temp_r30, lbl_804D7849, temp_r3_4);
-    func_8038FD54(temp_r30, lbl_801C1CD0, 1);
-    func_8038FD54(temp_r30, lbl_801C1D38, 4);
+    func_8038FD54(temp_r30, func_801C1CD0, 1);
+    func_8038FD54(temp_r30, func_801C1D38, 4);
     return temp_r30;
 }
 
 extern s32 lbl_804D64AC;
-static void lbl_801C1CD0(HSD_GObj* gobj)
+static void func_801C1CD0(HSD_GObj* gobj)
 {
     u32 unused[2];
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -1280,7 +1280,7 @@ static void lbl_801C1CD0(HSD_GObj* gobj)
     }
 }
 
-static void lbl_801C1D38(HSD_GObj* gobj)
+static void func_801C1D38(HSD_GObj* gobj)
 {
     Map* gp = gobj->user_data;
     if (gp->xC_callback != NULL) {
@@ -1334,7 +1334,7 @@ s32 func_801C1E18(void)
     return stage_info.unk8C.b2;
 }
 
-static void lbl_801C1E2C(HSD_GObj* gobj)
+static void func_801C1E2C(HSD_GObj* gobj)
 {
     u32 flag;
     HSD_JObj* jobj;
@@ -1421,8 +1421,8 @@ lbl_801C1F34:
 /* 801C1F64 001BEB44  38 7E 00 00 */	addi r3, r30, 0
 /* 801C1F68 001BEB48  38 BD 00 00 */	addi r5, r29, 0
 /* 801C1F6C 001BEB4C  48 1C EB 05 */	bl func_80390A70
-/* 801C1F70 001BEB50  3C 60 80 1C */	lis r3, lbl_801C1E2C@ha
-/* 801C1F74 001BEB54  38 83 1E 2C */	addi r4, r3, lbl_801C1E2C@l
+/* 801C1F70 001BEB50  3C 60 80 1C */	lis r3, func_801C1E2C@ha
+/* 801C1F74 001BEB54  38 83 1E 2C */	addi r4, r3, func_801C1E2C@l
 /* 801C1F78 001BEB58  38 7E 00 00 */	addi r3, r30, 0
 /* 801C1F7C 001BEB5C  38 A0 00 00 */	li r5, 0
 /* 801C1F80 001BEB60  38 C0 00 00 */	li r6, 0

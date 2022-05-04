@@ -1358,13 +1358,13 @@ lbl_803F97E8:
 .global lbl_803F9828
 lbl_803F9828:
 	.4byte func_801C0604
-	.4byte lbl_801C0690
+	.4byte func_801C0690
 	.4byte func_801C0618
-	.4byte lbl_801C0654
-	.4byte lbl_801C06A4
-	.4byte lbl_801C0668
+	.4byte func_801C0654
+	.4byte func_801C06A4
+	.4byte func_801C0668
 	.4byte func_801C062C
-	.4byte lbl_801C067C
+	.4byte func_801C067C
 	.4byte func_801C0640
 .global lbl_803F984C
 lbl_803F984C:
