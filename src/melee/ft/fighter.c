@@ -830,7 +830,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata)
     fighter->x2224_flag.bits.b0 = 0;
 
     fighter->x2135 = -1;
-    fighter->x2184 = 0;
+    fighter->x2184 = NULL;
 
 
     fighter->x2229_b3 = 0;
@@ -3247,17 +3247,17 @@ void Fighter_Unload_8006DABC(Fighter* fighter) {
         HSD_JObjRemoveAll(fighter->x20A0_accessory);
     }
     HSD_JObjRemoveAll(fighter->x8AC_animSkeleton);
-    HSD_JObjUnref((void*)fighter->x2184);
+    HSD_JObjUnref(fighter->x2184);
     func_800859A8(fighter);
     func_80366BD4(fighter->x588);
     Player_80031FB0(fighter->xC_playerID, fighter->x221F_flag.bits.b4);
     
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], (void*)fighter->x59C);
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], (void*)fighter->x5A0);
-    HSD_ObjFree(&objAllocData[(0x58 / 40)], (void*)fighter->x5E8_fighterBones);
-    HSD_ObjFree(&objAllocData[(0x84 / 40)], (void*)fighter->x5F0);
-    HSD_ObjFree(&objAllocData[(0xB0 / 40)], (void*)fighter->x2040);
-    HSD_ObjFree(&objAllocData[(0x2C / 40)], (void*)fighter->x2D8_specialAttributes2);
+    HSD_ObjFree(&objAllocData[(0xDC / 40)], fighter->x59C);
+    HSD_ObjFree(&objAllocData[(0xDC / 40)], fighter->x5A0);
+    HSD_ObjFree(&objAllocData[(0x58 / 40)], fighter->x5E8_fighterBones);
+    HSD_ObjFree(&objAllocData[(0x84 / 40)], fighter->x5F0);
+    HSD_ObjFree(&objAllocData[(0xB0 / 40)], fighter->x2040);
+    HSD_ObjFree(&objAllocData[(0x2C / 40)], fighter->x2D8_specialAttributes2);
     HSD_ObjFree(objAllocData, fighter);
 
 }
