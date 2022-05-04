@@ -711,12 +711,12 @@ typedef struct _Fighter {
                     s32 x594_s32;
                 };
     /* 0x598 */ s32 x598;
-    /* 0x59C */ s32 x59C;
-    /* 0x5A0 */ s32 x5A0;
+    /* 0x59C */ void* x59C;
+    /* 0x5A0 */ void* x5A0;
     u8 filler_x598[0x5E8 - 0x5A4];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F0 - 0x5EC];
-    /* 0x5F0 */ s32 x5F0;
+    /* 0x5F0 */ void* x5F0;
     /* 0x5F4 */ s32 x5F4;
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
@@ -966,7 +966,7 @@ typedef struct _Fighter {
     /* 0x2034 */ s32 x2034;
     /* 0x2038 */ s32 x2038;
     /* 0x203C */ s32 x203C;
-    /* 0x2040 */ s32 x2040;
+    /* 0x2040 */ void* x2040;
     u8 filler_x203C[0x2064 - 0x2044];
     /* 0x2064 */ s32 x2064_ledgeCooldown;
     u8 filler_x2068[0x2070 - 0x2068];
@@ -1023,7 +1023,7 @@ typedef struct _Fighter {
     /* 0x2170 */ f32 x2170;
     u8 filler_x2174[0x2180 - 0x2174];
     /* 0x2180 */ s32 x2180;
-    /* 0x2184 */ s32 x2184;
+    /* 0x2184 */ HSD_JObj* x2184;
     /* 0x2188 */ S32Pair x2188;
     // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
     struct cb {
