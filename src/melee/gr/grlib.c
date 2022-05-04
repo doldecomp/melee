@@ -218,14 +218,14 @@ void func_801C9B8C(void* arg0)
     func_8001044C(arg0, 0, 0, 0, 0, 0, 0, 0.0f);
 }
 
-static void lbl_801C9BC8(HSD_GObj* gobj)
+static void func_801C9BC8(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObjAnimAll(jobj);
     func_8002A278(HSD_JObjGetTranslationX(jobj), HSD_JObjGetTranslationY(jobj));
 }
 
-static void lbl_801C9C40(HSD_GObj* gobj)
+static void func_801C9C40(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_AObj* aobj = jobj->aobj;
@@ -266,9 +266,9 @@ HSD_GObj* func_801C9CEC(s32 idx1)
 
     func_80390A70(gobj, lbl_804D7849, jobj);
     if (idx1 == 1) {
-        func_8038FD54(gobj, lbl_801C9BC8, 1);
+        func_8038FD54(gobj, func_801C9BC8, 1);
     } else {
-        func_8038FD54(gobj, lbl_801C9C40, 1);
+        func_8038FD54(gobj, func_801C9C40, 1);
     }
 
     HSD_JObjAddAnimAll(jobj, stage_info.x6CC->anims[idx0], NULL, NULL);

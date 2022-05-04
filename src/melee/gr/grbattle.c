@@ -16,52 +16,52 @@ static const int BATTLE_BG_MAX = 3;
 
 static StageCallbacks lbl_803E7DA0[7] = {
     {
-        lbl_80219E6C,
-        lbl_8021A10C,
-        lbl_8021A114,
-        lbl_8021A118,
+        func_80219E6C,
+        func_8021A10C,
+        func_8021A114,
+        func_8021A118,
         0,
     },
     {
-        lbl_8021A20C,
-        lbl_8021A264,
-        lbl_8021A26C,
-        lbl_8021A270,
+        func_8021A20C,
+        func_8021A264,
+        func_8021A26C,
+        func_8021A270,
         0,
     },
     {
-        lbl_8021A274,
-        lbl_8021A2CC,
-        lbl_8021A2D4,
-        lbl_8021A2D8,
+        func_8021A274,
+        func_8021A2CC,
+        func_8021A2D4,
+        func_8021A2D8,
         0,
     },
     {
-        lbl_8021A344,
-        lbl_8021A3B4,
-        lbl_8021A3BC,
-        lbl_8021A60C,
+        func_8021A344,
+        func_8021A3B4,
+        func_8021A3BC,
+        func_8021A60C,
         0,
     },
     {
-        lbl_8021A2DC,
-        lbl_8021A334,
-        lbl_8021A33C,
-        lbl_8021A340,
+        func_8021A2DC,
+        func_8021A334,
+        func_8021A33C,
+        func_8021A340,
         0,
     },
     {
-        lbl_8021A19C,
-        lbl_8021A1FC,
-        lbl_8021A204,
-        lbl_8021A208,
+        func_8021A19C,
+        func_8021A1FC,
+        func_8021A204,
+        func_8021A208,
         0,
     },
     {
-        lbl_8021A11C,
-        lbl_8021A16C,
-        lbl_8021A174,
-        lbl_8021A198,
+        func_8021A11C,
+        func_8021A16C,
+        func_8021A174,
+        func_8021A198,
         0xC0000000,
     },
 };
@@ -70,13 +70,13 @@ StageData lbl_803E7E38 = {
     0x00000024,
     lbl_803E7DA0,
     "/GrNBa.dat",
-    lbl_80219CA4,
+    func_80219CA4,
     func_80219C98,
-    lbl_80219D54,
-    lbl_80219D58,
-    lbl_80219D7C,
-    lbl_8021A610,
-    lbl_8021A618,
+    func_80219D54,
+    func_80219D58,
+    func_80219D7C,
+    func_8021A610,
+    func_8021A618,
     0x00000001,
 };
 
@@ -86,7 +86,7 @@ static void func_80219C98()
     lbl_804D6AC8 = 1;
 }
 
-static void lbl_80219CA4()
+static void func_80219CA4()
 {
     lbl_804D6ACC = func_801C49F8();
     stage_info.unk8C.b4 = 1;
@@ -107,16 +107,16 @@ static void lbl_80219CA4()
     lbl_804D6AC8 = 0;
 }
 
-static void lbl_80219D54()
+static void func_80219D54()
 {
 }
 
-static void lbl_80219D58()
+static void func_80219D58()
 {
     func_801CAE04(0);
 }
 
-static s32 lbl_80219D7C()
+static s32 func_80219D7C()
 {
     return 0;
 }
@@ -147,7 +147,7 @@ static HSD_GObj* func_80219D84(s32 arg0)
     return gobj;
 }
 
-static void lbl_80219E6C(HSD_GObj* gobj)
+static void func_80219E6C(HSD_GObj* gobj)
 {
     Vec3 v;
     Map* map = gobj->user_data;
@@ -171,20 +171,20 @@ static void lbl_80219E6C(HSD_GObj* gobj)
     HSD_JObjSetTranslate(func_801C2CF4(3), &v);
 }
 
-static s32 lbl_8021A10C()
+static s32 func_8021A10C()
 {
     return 0;
 }
 
-static void lbl_8021A114()
+static void func_8021A114()
 {
 }
 
-static void lbl_8021A118()
+static void func_8021A118()
 {
 }
 
-static void lbl_8021A11C(HSD_GObj* gobj)
+static void func_8021A11C(HSD_GObj* gobj)
 {
     u32 unused[2];
     Map* map = gobj->user_data;
@@ -192,22 +192,22 @@ static void lbl_8021A11C(HSD_GObj* gobj)
     func_801C8138(gobj, map->map_id, 0);
 }
 
-static s32 lbl_8021A16C()
+static s32 func_8021A16C()
 {
     return 0;
 }
 
-static void lbl_8021A174(HSD_GObj* gobj)
+static void func_8021A174(HSD_GObj* gobj)
 {
     func_801C2FE0(gobj);
     func_800115F4();
 }
 
-static void lbl_8021A198()
+static void func_8021A198()
 {
 }
 
-static void lbl_8021A19C(HSD_GObj* gobj)
+static void func_8021A19C(HSD_GObj* gobj)
 {
     u32 unused[2];
     Map* map = gobj->user_data;
@@ -216,20 +216,20 @@ static void lbl_8021A19C(HSD_GObj* gobj)
     map->x11_flags.b012 = 2;
 }
 
-static s32 lbl_8021A1FC()
+static s32 func_8021A1FC()
 {
     return 0;
 }
 
-static void lbl_8021A204()
+static void func_8021A204()
 {
 }
 
-static void lbl_8021A208()
+static void func_8021A208()
 {
 }
 
-static void lbl_8021A20C(HSD_GObj* gobj)
+static void func_8021A20C(HSD_GObj* gobj)
 {
     u32 unused[2];
     Map* map = gobj->user_data;
@@ -239,20 +239,20 @@ static void lbl_8021A20C(HSD_GObj* gobj)
     map->x11_flags.b012 = 2;
 }
 
-static s32 lbl_8021A264()
+static s32 func_8021A264()
 {
     return 0;
 }
 
-static void lbl_8021A26C()
+static void func_8021A26C()
 {
 }
 
-static void lbl_8021A270()
+static void func_8021A270()
 {
 }
 
-static void lbl_8021A274(HSD_GObj* gobj)
+static void func_8021A274(HSD_GObj* gobj)
 {
     u32 unused[2];
     Map* map = gobj->user_data;
@@ -262,20 +262,20 @@ static void lbl_8021A274(HSD_GObj* gobj)
     map->x11_flags.b012 = 2;
 }
 
-static s32 lbl_8021A2CC()
+static s32 func_8021A2CC()
 {
     return 0;
 }
 
-static void lbl_8021A2D4()
+static void func_8021A2D4()
 {
 }
 
-static void lbl_8021A2D8()
+static void func_8021A2D8()
 {
 }
 
-static void lbl_8021A2DC(HSD_GObj* gobj)
+static void func_8021A2DC(HSD_GObj* gobj)
 {
     u32 unused[2];
     Map* map = gobj->user_data;
@@ -286,20 +286,20 @@ static void lbl_8021A2DC(HSD_GObj* gobj)
     map->x11_flags.b012 = 2;
 }
 
-static s32 lbl_8021A334()
+static s32 func_8021A334()
 {
     return 0;
 }
 
-static void lbl_8021A33C()
+static void func_8021A33C()
 {
 }
 
-static void lbl_8021A340()
+static void func_8021A340()
 {
 }
 
-static void lbl_8021A344(HSD_GObj* gobj)
+static void func_8021A344(HSD_GObj* gobj)
 {
     u32 unused[6];
     Map* map = gobj->user_data;
@@ -311,12 +311,12 @@ static void lbl_8021A344(HSD_GObj* gobj)
     HSD_JObjSetFlagsAll(jobj, 0x10);
 }
 
-static s32 lbl_8021A3B4()
+static s32 func_8021A3B4()
 {
     return 0;
 }
 
-static void lbl_8021A3BC(HSD_GObj* gobj)
+static void func_8021A3BC(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -377,16 +377,16 @@ static void lbl_8021A3BC(HSD_GObj* gobj)
     }
 }
 
-static void lbl_8021A60C()
+static void func_8021A60C()
 {
 }
 
-static BOOL lbl_8021A610(s32)
+static BOOL func_8021A610(s32)
 {
     return FALSE;
 }
 
-static s32 lbl_8021A618()
+static s32 func_8021A618()
 {
     return 1;
 }
