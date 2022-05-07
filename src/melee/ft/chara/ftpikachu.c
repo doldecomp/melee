@@ -42,6 +42,38 @@ void ftPikachu_OnDeath(HSD_GObj* arg0, s32 arg1, s32 arg2) {
     func_80074A4C(arg0, 1, 0);
 }
 
+void func_801244B8(HSD_GObj* fighterObj, s32 arg1) {
+    s32 temp_r3;
+    s32 unused;
+    Fighter *fighter;
+
+    fighter = fighterObj->user_data;
+    if (func_8026B2B4(fighter->x1974_heldItem) == 0) {
+        temp_r3 = func_8026B320(fighter->x1974_heldItem);
+
+        switch (temp_r3) {
+ 
+            case 1:
+                func_80070FB4(fighterObj, 0, 1);
+                break;
+            case 2:
+                func_80070FB4(fighterObj, 0, 0);
+                break;
+            case 3:
+                func_80070FB4(fighterObj, 0, 2);
+                break;
+            case 4:
+                func_80070FB4(fighterObj, 0, 3);
+                break;
+                
+        }
+        
+        if (arg1 != 0) {
+            func_80070C48(fighterObj, 0);
+        }
+    }
+}
+
 
 /////  Match from samer
 // void func_8012764C(HSD_GObj* arg0) {
