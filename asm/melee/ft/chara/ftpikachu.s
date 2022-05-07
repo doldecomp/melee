@@ -2,23 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_801243AC
-func_801243AC:
-/* 801243AC 00120F8C  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 801243B0 00120F90  38 00 00 1F */	li r0, 0x1f
-/* 801243B4 00120F94  80 E3 02 D8 */	lwz r7, 0x2d8(r3)
-/* 801243B8 00120F98  7C 09 03 A6 */	mtctr r0
-/* 801243BC 00120F9C  80 84 00 04 */	lwz r4, 4(r4)
-/* 801243C0 00120FA0  38 C7 FF F8 */	addi r6, r7, -8
-/* 801243C4 00120FA4  38 A4 FF F8 */	addi r5, r4, -8
-lbl_801243C8:
-/* 801243C8 00120FA8  84 85 00 08 */	lwzu r4, 8(r5)
-/* 801243CC 00120FAC  80 05 00 04 */	lwz r0, 4(r5)
-/* 801243D0 00120FB0  94 86 00 08 */	stwu r4, 8(r6)
-/* 801243D4 00120FB4  90 06 00 04 */	stw r0, 4(r6)
-/* 801243D8 00120FB8  42 00 FF F0 */	bdnz lbl_801243C8
-/* 801243DC 00120FBC  90 E3 02 D4 */	stw r7, 0x2d4(r3)
-/* 801243E0 00120FC0  4E 80 00 20 */	blr 
 
 .global ftPikachu_OnLoad
 ftPikachu_OnLoad:
