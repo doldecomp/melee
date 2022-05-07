@@ -11,8 +11,9 @@ extern void lbl_802F74D0(void);
 // unknown signature
 extern void lbl_802F73C4(void);
 
+// just add extern to fix one function
 // oops, probably garbage
-Thing_803F9628 lbl_803F9628 = {
+extern Thing_803F9628 lbl_803F9628;/* = {
     {{
          NULL,
          NULL,
@@ -117,7 +118,7 @@ Thing_803F9628 lbl_803F9628 = {
         0x6F64656C,
         0x73000000,
 
-    }};
+    }};*/
 
 // START OF FILE
 
@@ -2351,13 +2352,12 @@ void func_802F6898() {
     }
 }
 
-// https://decomp.me/scratch/mbZj9 
-// slight mismatch in global, 99.55%
-// show all digits
+// Show All Percentage Digits
 void func_802F68F0(void) {
     s32 i;
+    HudIndex* v = &lbl_804A10C8;
     for (i = 0; i < 6; i++) {
-        lbl_804A10C8.players[i].flags.hide_all_digits = 0;;
+        v->players[i].flags.hide_all_digits = 0;
     }
 }
 
