@@ -8,8 +8,6 @@ void func_801243AC(Fighter* fighter) {
 }
 
 
-
-
 void ftPikachu_OnLoad(HSD_GObj* fighterObj) {
   void **item_list;
   ftData *fighter_data;
@@ -37,6 +35,11 @@ void ftPikachu_OnLoad(HSD_GObj* fighterObj) {
   func_8026B3F8(item_list[1], pika_attr->x14);
   func_8026B3F8(item_list[2], pika_attr->x18);
 
+}
+
+void ftPikachu_OnDeath(HSD_GObj* arg0, s32 arg1, s32 arg2) {
+    func_80074A4C(arg0, 0, 0);
+    func_80074A4C(arg0, 1, 0);
 }
 
 
