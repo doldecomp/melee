@@ -198,7 +198,7 @@ extern void func_8016B8D4(s32, s32);
 extern void func_802F7C30(s32);
 extern void func_802F7AF8(s32);
 extern void func_802F7D08(s32);
-
+extern void func_802F7BB4(s32);
 
 // functions defined in this file
 
@@ -218,8 +218,8 @@ asm void /*?*/ func_802F6788(void /*?*/);
 asm void /*?*/ func_802F6804(void /*?*/);
 void func_802F6898(void);
 void func_802F68F0(void);
-asm void /*?*/ func_802F6948(void /*?*/);
-asm void /*?*/ func_802F69C0(void /*?*/);
+void func_802F6948(s32);
+void func_802F69C0(s32, s32);
 void func_802F6AF8(s32);
 void func_802F6C04(s32);
 void func_802F6D10(s32);
