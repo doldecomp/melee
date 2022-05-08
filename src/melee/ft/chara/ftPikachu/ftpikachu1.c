@@ -1,8 +1,8 @@
 #include "ftpikachu.h"
 
 void func_801243AC(Fighter* fighter) {
-    ftPikachuAttributes* pika_attr = (ftPikachuAttributes*) fighter->x2D8_specialAttributes2;
-    ftPikachuAttributes* ext_attr = (ftPikachuAttributes*) fighter->x10C_ftData->ext_attr;
+    ftPikachuAttributes* pika_attr = fighter->x2D8_specialAttributes2;
+    ftPikachuAttributes* ext_attr = fighter->x10C_ftData->ext_attr;
     *pika_attr = *ext_attr;
     fighter->x2D4_specialAttributes = pika_attr;
 }

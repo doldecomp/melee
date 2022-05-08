@@ -13,7 +13,13 @@ typedef struct _ftPikachuAttributes {
     f32 x10;
     u32 x14;
     u32 x18;
-    u32 x1C_padding[48];
+    f32 x1C;
+    f32 x20;
+    f32 x24;
+    f32 x28;
+    f32 x2C;
+    f32 x30;
+    u32 x1C_padding[42];
     u32 xDC;
     f32 xE0;
     f32 xE4;
@@ -22,3 +28,12 @@ typedef struct _ftPikachuAttributes {
     f32 xF0;
     f32 xF4;
 } ftPikachuAttributes;
+
+
+/// TODO put the rest of function headers here
+///pika1
+
+///pika2
+void func_80124DC8(HSD_GObj* fighterObj);
+
+//pika3

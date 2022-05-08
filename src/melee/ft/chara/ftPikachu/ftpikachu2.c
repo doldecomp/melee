@@ -1,12 +1,8 @@
 #include "ftpikachu.h"
 
-
-extern f32 lbl_804D9900;
-extern f32 lbl_804D9904;
-
 void func_80124830(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x155, 0, 0, lbl_804D9900, lbl_804D9904, lbl_804D9900);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     fighter->x220C_ftcmd_var3 = 0;
     fighter->x2208_ftcmd_var2 = 0;
     fighter->x2204_ftcmd_var1 = 0;
@@ -16,7 +12,7 @@ void func_80124830(HSD_GObj* fighterObj) {
 
 void func_8012489C(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x156, 0, 0, lbl_804D9900, lbl_804D9904, lbl_804D9900);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
     fighter->x220C_ftcmd_var3 = 0;
     fighter->x2208_ftcmd_var2 = 0;
     fighter->x2204_ftcmd_var1 = 0;
@@ -38,7 +34,7 @@ void func_80124908(HSD_GObj* fighterObj) {
             fighter->x2204_ftcmd_var1 = 1;
             sp14.x = (fighter->x34_scale.y * (pika_attr->x0 * fighter->x2C_facing_direction)) + fighter->xB0_pos.x;
             sp14.y = (pika_attr->x4 * fighter->x34_scale.y) + fighter->xB0_pos.y;
-            sp14.z = lbl_804D9900;
+            sp14.z = 0.0f;
             func_802B338C(fighterObj, &sp14, fighter->x2C_facing_direction, pika_attr->x14);
             switch (func_800872A4(fighterObj)) {
                 case 12:
@@ -69,7 +65,7 @@ void func_80124A20(HSD_GObj* fighterObj) {
             fighter->x2204_ftcmd_var1 = 1;
             sp14.x = (fighter->x34_scale.y * (pika_attr->x8 * fighter->x2C_facing_direction)) + fighter->xB0_pos.x;
             sp14.y = (pika_attr->xC * fighter->x34_scale.y) + fighter->xB0_pos.y;
-            sp14.z = lbl_804D9900;
+            sp14.z = 0.0f;
             func_802B338C(fighterObj, &sp14, fighter->x2C_facing_direction, pika_attr->x14);
             switch (func_800872A4(fighterObj)) {
                 case 12:
@@ -83,11 +79,11 @@ void func_80124A20(HSD_GObj* fighterObj) {
     }
     
     if (func_8006F238(fighterObj) == 0) {
-        if (lbl_804D9900 == pika_attr->x10) {
+        if (0.0f == pika_attr->x10) {
             func_800CC730(fighterObj);
             return;
         }
-        func_80096900(fighterObj, 1, 0, 1, lbl_804D9904, pika_attr->x10);
+        func_80096900(fighterObj, 1, 0, 1, 1.0f, pika_attr->x10);
     }  
 }
 
@@ -108,24 +104,71 @@ void func_80124BB4(HSD_GObj* fighterObj) {
     if (!func_80082708(fighterObj)) {
         fighter = fighterObj->user_data;
         func_8007D5D4(fighter);
-        Fighter_ActionStateChange_800693AC(fighterObj, 0x156, 0xc4c5082, 0, fighter->x894, lbl_804D9904, lbl_804D9900);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x156, 0xc4c5082, 0, fighter->x894, 1.0f, 0.0f);
     }
 }
 
 
-/// matches when data is moved over
-// void func_80124C20(HSD_GObj* fighterObj) {
-//     Fighter* fighter;
-//     if (func_80081D0C(fighterObj) == 1) {
-//         fighter = fighterObj->user_data;
-//         func_8007D7FC(fighter);
-//         fighter->x80_self_vel.y = 0.0f/*lbl_804D9900*/;
-//         Fighter_ActionStateChange_800693AC(fighterObj, 0x155, 0xc4c5082, 0, fighter->x894, 1.0f/*lbl_804D9904*/, 0.0f/*lbl_804D9900*/);
-//     }
-// }
+void func_80124C20(HSD_GObj* fighterObj) {
+    Fighter* fighter;
+    if (func_80081D0C(fighterObj) == 1) {
+        fighter = fighterObj->user_data;
+        func_8007D7FC(fighter);
+        fighter->x80_self_vel.y = 0.0f;
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x155, 0xc4c5082, 0, fighter->x894, 1.0f, 0.0f);
+    }
+}
 
-/////  Match from samer
-// void func_8012764C(HSD_GObj* fighterObj) {
-//     Fighter* fighter = fighterObj->user_data;
-//     fighter->x2344_stateVar2 = 3;
-// }
+void func_80124C90(HSD_GObj* fighterObj) {
+    Fighter *fighter = fighterObj->user_data;
+    
+    HSD_GObj *tempObj;
+    HSD_GObj *tempObj2;
+    
+    if (!fighter->x2219_flag.bits.b0)
+    {
+        s32 index = func_8007500C(fighter, 4);
+        tempObj = fighterObj;
+        ef_Spawn(0x4BE, tempObj2 = tempObj, fighter->x5E8_fighterBones[index].x0_jobj);
+        fighter->x2219_flag.bits.b0 = 1;
+    }
+    fighter->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+    fighter->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    fighter->cb.x21BC_callback_Accessory4 = 0;
+}
+
+void func_80124D2C(HSD_GObj* fighterObj) {
+    Fighter *fighter = fighterObj->user_data;
+    
+    HSD_GObj *tempObj;
+    HSD_GObj *tempObj2;
+    
+    if (!fighter->x2219_flag.bits.b0)
+    {
+        s32 index = func_8007500C(fighter, 4);
+        tempObj = fighterObj;
+        ef_Spawn(0x4BF, tempObj2 = tempObj, fighter->x5E8_fighterBones[index].x0_jobj);
+        fighter->x2219_flag.bits.b0 = 1;
+    }
+    fighter->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+    fighter->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    fighter->cb.x21BC_callback_Accessory4 = 0;
+}
+
+void func_80124DC8(HSD_GObj* fighterObj) {
+    u8 fighter_x673_byte;
+    Fighter *fighter = fighterObj->user_data;
+    ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
+    f32 pika_attr_1C;
+    
+    fighter->x2200_ftcmd_var0 = 0;
+    fighter_x673_byte = fighter->x673;
+
+    pika_attr_1C = pika_attr->x1C;
+    if (fighter_x673_byte < pika_attr_1C) {
+        fighter->x2340_stateVar1 = pika_attr->x20;
+        fighter->x2072.bits.b4 = 1;
+    } else {
+        fighter->x2340_stateVar1 = 0;
+    }    
+}
