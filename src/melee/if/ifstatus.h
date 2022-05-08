@@ -7,6 +7,7 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/tobj.h>
+#include "melee/pl/player.h"
 
 typedef struct _HudFlags {
   u8 explode_animation: 1;
@@ -34,6 +35,8 @@ typedef struct _HudValue {
     // TODO: list if this 0 indexed, or what
     // 0x08
     u8 player_slot;
+    // 0x09
+    u8 unk9;
     // damage as int
     // 0x0A
     u16 damage_percent;
@@ -135,10 +138,66 @@ typedef struct _Coordinate3D {
   f32 z;
 } Coordinate3D;
 
+typedef struct _Placeholder_8016AE38_flags {
+  u8 unk80: 1;
+  u8 unk40: 1;
+  u8 unk20: 1;
+  u8 unk10: 1;
+  u8 unk8: 1;
+  u8 unk4: 1;
+  u8 unk2: 1;
+  u8 unk1: 1;
+} Placeholder_8016AE38_flags;
+
+typedef struct _Placeholder_8016AE38_flags_2 {
+  u8 top3: 3;
+  u8 bot5: 5;
+} Placeholder_8016AE38_flags_2;
+
+// When we figure out what that function is, replace this type with an actual type
+typedef struct _Placeholder_8016AE38_ret_val {
+    u32 unk0;
+    u32 unk4;
+    u32 unk8;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE;
+    u8 unkF;
+    u32 padding[0x931 - 3];
+    Placeholder_8016AE38_flags_2 unk24C8;
+    u8 unk24C9;
+    Placeholder_8016AE38_flags unk24CA;
+} Placeholder_8016AE38_ret_val;
+
+
+typedef struct _Placeholder_8016AE50_flags {
+  u8 unk80: 1;
+  u8 unk40: 1;
+  u8 unk20: 1;
+  u8 unk10: 1;
+  u8 unk8: 1;
+  u8 unk4: 1;
+  u8 unk2: 1;
+  u8 unk1: 1;
+} Placeholder_8016AE50_flags;
+
+// When we figure out what that function is, replace this type with an actual type
+typedef struct _Placeholder_8016AE50_ret_val {
+    u8 unk0;
+    u8 unk1;
+    Placeholder_8016AE50_flags flags;
+} Placeholder_8016AE50_ret_val;
+
 // external functions we need
 // takes HSD obj* ?
 //extern void func_80391CAC(void*);
 extern void func_802FB6AC(s32);
+extern Placeholder_8016AE38_ret_val* func_8016AE38();
+extern Placeholder_8016AE50_ret_val* func_8016AE50();
+extern void func_8016B8D4(s32, s32);
+extern void func_802F7C30(s32);
+extern void func_802F7AF8(s32);
+extern void func_802F7D08(s32);
 
 
 // functions defined in this file
@@ -150,7 +209,7 @@ asm void /*?*/ func_802F4B84(void /*?*/);
 asm void /*?*/ func_802F4EDC(void /*?*/);
 asm void /*?*/ func_802F5B48(void /*?*/);
 asm void /*?*/ func_802F5EC0(void /*?*/);
-asm void /*?*/ func_802F6194(void /*?*/);
+HSD_GObj* func_802F6194(HSD_GObj*, s32);
 asm void /*?*/ func_802F61FC(void /*?*/);
 asm void func_802F6508(s32);
 void func_802F665C(s8);
@@ -158,14 +217,12 @@ asm void /*?*/ func_802F66A4(void /*?*/);
 asm void /*?*/ func_802F6788(void /*?*/);
 asm void /*?*/ func_802F6804(void /*?*/);
 void func_802F6898(void);
-// https://decomp.me/scratch/mbZj9 
-// slight mismatch in global, 99.55%
 void func_802F68F0(void);
 asm void /*?*/ func_802F6948(void /*?*/);
 asm void /*?*/ func_802F69C0(void /*?*/);
-asm void /*?*/ func_802F6AF8(void /*?*/);
-asm void /*?*/ func_802F6C04(void /*?*/);
-asm void /*?*/ func_802F6D10(void /*?*/);
+void func_802F6AF8(s32);
+void func_802F6C04(s32);
+void func_802F6D10(s32);
 void func_802F6E1C(void);
 void func_802F6E3C(s32);
 asm void /*?*/ func_802F6EA4(void /*?*/);
