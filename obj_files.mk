@@ -82,7 +82,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftpeach.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpeach.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/fticeclimber.s.o 	\
-	$(BUILD_DIR)/src/melee/ft/chara/ftpikachu.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu2.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o 		\
