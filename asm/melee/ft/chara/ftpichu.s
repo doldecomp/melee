@@ -9,16 +9,16 @@ lbl_803D1EA8:
     .4byte 0x12000000
     .4byte func_80124908
     .4byte func_80124B6C
-    .4byte lbl_80124B74
-    .4byte lbl_80124BB4
+    .4byte func_80124B74
+    .4byte func_80124BB4
     .4byte func_800761C8
     .4byte 0x00000128
     .4byte 0x00340511
     .4byte 0x12000000
     .4byte func_80124A20
-    .4byte lbl_80124B70
-    .4byte lbl_80124B94
-    .4byte lbl_80124C20
+    .4byte func_80124B70
+    .4byte func_80124B94
+    .4byte func_80124C20
     .4byte func_800761C8
     .4byte 0x00000129
     .4byte 0x00340212
