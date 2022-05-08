@@ -47,7 +47,7 @@ void lbl_801552F8(HSD_GObj* gobj) {
     HSD_GObj* gobj_2;
 
     ft = gobj->user_data;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     gobj_2 = func_8015C3E8(0x1CU);
     if (func_8015C31C() == 0) {
         func_8015A3F4(gobj_2);

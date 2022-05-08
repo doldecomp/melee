@@ -10,7 +10,7 @@ void func_801389CC(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x171, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2340_stateVar1 = 0;
 }
 
@@ -29,7 +29,7 @@ void func_80138A30(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x173, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft2 = gobj->user_data;
-    ft2->x2200_ftcmd_var1 = 0;
+    ft2->x2204_ftcmd_var1 = 0;
     ft2->x2340_stateVar1 = 0;
 }
 
@@ -42,13 +42,13 @@ void lbl_80138AA8(HSD_GObj* gobj) {
 
     attr = ft->x2D4_specialAttributes;
 
-    if (ft->x2200_ftcmd_var1 == 1) {
-        ft->x2200_ftcmd_var1 = 2;
+    if (ft->x2204_ftcmd_var1 == 1) {
+        ft->x2204_ftcmd_var1 = 2;
         func_8007B1B8(gobj, &attr->x64, &lbl_80139140);
         ft->x221B_flag.bits.b1 = 1;
         ft->x19B4_shieldUnk = attr->x60;
         ft->x19B8_shieldUnk = attr->x60;
-    } else if (ft->x2200_ftcmd_var1 == 0) {
+    } else if (ft->x2204_ftcmd_var1 == 0) {
         ft->x221B_flag.bits.b0 = 0;
     }
     if (func_8006F238(gobj) == 0) {
@@ -65,13 +65,13 @@ void lbl_80138B64(HSD_GObj* gobj) {
 
     attr = ft->x2D4_specialAttributes;
 
-    if (ft->x2200_ftcmd_var1 == 1) {
-        ft->x2200_ftcmd_var1 = 2;
+    if (ft->x2204_ftcmd_var1 == 1) {
+        ft->x2204_ftcmd_var1 = 2;
         func_8007B1B8(gobj, &attr->x64, &lbl_80139140);
         ft->x221B_flag.bits.b1 = 1;
         ft->x19B4_shieldUnk = attr->x60;
         ft->x19B8_shieldUnk = attr->x60;
-    } else if (ft->x2200_ftcmd_var1 == 0) {
+    } else if (ft->x2204_ftcmd_var1 == 0) {
         ft->x221B_flag.bits.b0 = 0;
     }
     if (func_8006F238(gobj) == 0) {
@@ -138,7 +138,7 @@ void func_80138D38(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x173, 0x0C4C508C, NULL, ft->x894, 1.0f, 0.0f);
     ft_2 = gobj->user_data;
     attr = ft_2->x2D4_specialAttributes;
-    if (ft_2->x2200_ftcmd_var1 == 2) {
+    if (ft_2->x2204_ftcmd_var1 == 2) {
         func_8007B1B8(gobj, &attr->x64, &lbl_80139140);
         ft_2->x221B_flag.bits.b1 = 1;
     }
@@ -157,7 +157,7 @@ void func_80138DD0(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x171, 0x0C4C508C, NULL, ft->x894, 1.0f, 0.0f);
     ft_2 = gobj->user_data;
     attr = ft_2->x2D4_specialAttributes;
-    if (ft_2->x2200_ftcmd_var1 == 2) {
+    if (ft_2->x2204_ftcmd_var1 == 2) {
         func_8007B1B8(gobj, &attr->x64, &lbl_80139140);
         ft_2->x221B_flag.bits.b1 = 1;
     }

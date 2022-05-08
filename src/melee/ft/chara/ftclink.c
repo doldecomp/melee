@@ -216,7 +216,7 @@ u32 func_801492F4(HSD_GObj* gobj)
     if (gobj != NULL) {
         ft = gobj->user_data;
         if (ft != NULL) {
-            return ft->x2200_ftcmd_var1;
+            return ft->x2204_ftcmd_var1;
         }
     }
     return 0;
@@ -226,5 +226,5 @@ void func_80149318(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
     func_800DEAE8(gobj, 0x156, 0x157);
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
 }

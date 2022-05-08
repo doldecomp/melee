@@ -9,7 +9,7 @@ void func_8013741C(HSD_GObj* gobj) {
 
     ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0f;
     ft = gobj->user_data;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2340_stateVar1 = 0;
 
@@ -41,7 +41,7 @@ void func_801374A0(HSD_GObj* gobj) {
     }
 
     ft2 = gobj->user_data;
-    ft2->x2200_ftcmd_var1 = 0;
+    ft2->x2204_ftcmd_var1 = 0;
     ft2->x2200_ftcmd_var0 = 0;
     ft2->x2340_stateVar1 = 0;
 
@@ -74,12 +74,12 @@ void lbl_80137558(HSD_GObj* gobj) {
 void lbl_801375B8(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 != 0) {
-        if (ft->x2200_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
+        if (ft->x2204_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
             func_80137A9C(gobj);
         }
     } else {
         if ((ft->input.x668 & 0x300) != 0) {
-            ft->x2200_ftcmd_var1 = 1;
+            ft->x2204_ftcmd_var1 = 1;
         }
     }
 }
@@ -165,12 +165,12 @@ void lbl_801377B0(HSD_GObj* gobj) {
 void lbl_80137810(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 != 0) {
-        if (ft->x2200_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
+        if (ft->x2204_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
             func_80137E0C(gobj);
         }
     } else {
         if ((ft->input.x668 & 0x300) != 0) {
-            ft->x2200_ftcmd_var1 = 1;
+            ft->x2204_ftcmd_var1 = 1;
         }
     }
 }
@@ -266,7 +266,7 @@ void func_80137A9C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 thing;
 
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
@@ -308,12 +308,12 @@ void lbl_80137B94(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
     if (ft->x2200_ftcmd_var0 != 0) {
-        if (ft->x2200_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
+        if (ft->x2204_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
             func_80138148(gobj);
         }
     } else {
         if ((ft->input.x668 & 0x300) != 0) {
-            ft->x2200_ftcmd_var1 = 1;
+            ft->x2204_ftcmd_var1 = 1;
         }
     }
 }
@@ -407,7 +407,7 @@ void func_80137E0C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 thing;
 
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
@@ -547,7 +547,7 @@ void func_80138148(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     s32 thing;
 
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
