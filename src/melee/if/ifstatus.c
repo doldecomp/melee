@@ -2255,85 +2255,39 @@ lbl_802F6770:
 /* 802F6784 002F3364  4E 80 00 20 */	blr
 }
 
-asm void /*?*/ func_802F6788(void /*?*/)
-{
-/* 802F6788 002F3368  7C 08 02 A6 */	mflr r0
-/* 802F678C 002F336C  90 01 00 04 */	stw r0, 4(r1)
-/* 802F6790 002F3370  54 60 06 3E */	clrlwi r0, r3, 0x18
-/* 802F6794 002F3374  1C 80 00 64 */	mulli r4, r0, 0x64
-/* 802F6798 002F3378  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 802F679C 002F337C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 802F67A0 002F3380  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 802F67A4 002F3384  3B C3 00 00 */	addi r30, r3, 0
-/* 802F67A8 002F3388  3C 60 80 4A */	lis r3, lbl_804A10C8@ha
-/* 802F67AC 002F338C  38 03 10 C8 */	addi r0, r3, lbl_804A10C8@l
-/* 802F67B0 002F3390  7F E0 22 14 */	add r31, r0, r4
-/* 802F67B4 002F3394  80 7F 00 00 */	lwz r3, 0(r31)
-/* 802F67B8 002F3398  28 03 00 00 */	cmplwi r3, 0
-/* 802F67BC 002F339C  41 82 00 10 */	beq lbl_802F67CC
-/* 802F67C0 002F33A0  48 09 9A 69 */	bl func_80390228
-/* 802F67C4 002F33A4  38 00 00 00 */	li r0, 0
-/* 802F67C8 002F33A8  90 1F 00 00 */	stw r0, 0(r31)
-lbl_802F67CC:
-/* 802F67CC 002F33AC  80 7F 00 04 */	lwz r3, 4(r31)
-/* 802F67D0 002F33B0  28 03 00 00 */	cmplwi r3, 0
-/* 802F67D4 002F33B4  41 82 00 10 */	beq lbl_802F67E4
-/* 802F67D8 002F33B8  48 09 9A 51 */	bl func_80390228
-/* 802F67DC 002F33BC  38 00 00 00 */	li r0, 0
-/* 802F67E0 002F33C0  90 1F 00 04 */	stw r0, 4(r31)
-lbl_802F67E4:
-/* 802F67E4 002F33C4  57 C3 06 3E */	clrlwi r3, r30, 0x18
-/* 802F67E8 002F33C8  48 00 4E 69 */	bl func_802FB650
-/* 802F67EC 002F33CC  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 802F67F0 002F33D0  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 802F67F4 002F33D4  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 802F67F8 002F33D8  38 21 00 18 */	addi r1, r1, 0x18
-/* 802F67FC 002F33DC  7C 08 03 A6 */	mtlr r0
-/* 802F6800 002F33E0  4E 80 00 20 */	blr 
+void func_802F6788(s32 player_idx) {
+    HudValue* player_hud;
+    s8 p_idx = (u8)player_idx;
+    player_hud = &lbl_804A10C8.players[p_idx & 0xFF];
+    if (player_hud->HUD_parent_entity != NULL) {
+        func_80390228(player_hud->HUD_parent_entity);
+        player_hud->HUD_parent_entity = NULL;
+    }
+    if (player_hud->next != NULL) {
+        func_80390228(player_hud->next);
+        player_hud->next = NULL;
+    }
+    func_802FB650(player_idx & 0xFF);
 }
 
-asm void /*?*/ func_802F6804(void /*?*/)
-{
-/* 802F6804 002F33E4  7C 08 02 A6 */	mflr r0
-/* 802F6808 002F33E8  3C 60 80 4A */	lis r3, lbl_804A10C8@ha
-/* 802F680C 002F33EC  90 01 00 04 */	stw r0, 4(r1)
-/* 802F6810 002F33F0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 802F6814 002F33F4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 802F6818 002F33F8  3B E0 00 00 */	li r31, 0
-/* 802F681C 002F33FC  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 802F6820 002F3400  3B C3 10 C8 */	addi r30, r3, lbl_804A10C8@l
-/* 802F6824 002F3404  93 A1 00 0C */	stw r29, 0xc(r1)
-/* 802F6828 002F3408  93 81 00 08 */	stw r28, 8(r1)
-/* 802F682C 002F340C  3B 80 00 00 */	li r28, 0
-lbl_802F6830:
-/* 802F6830 002F3410  57 80 06 3E */	clrlwi r0, r28, 0x18
-/* 802F6834 002F3414  1C 00 00 64 */	mulli r0, r0, 0x64
-/* 802F6838 002F3418  7F BE 02 14 */	add r29, r30, r0
-/* 802F683C 002F341C  80 7D 00 00 */	lwz r3, 0(r29)
-/* 802F6840 002F3420  28 03 00 00 */	cmplwi r3, 0
-/* 802F6844 002F3424  41 82 00 0C */	beq lbl_802F6850
-/* 802F6848 002F3428  48 09 99 E1 */	bl func_80390228
-/* 802F684C 002F342C  93 FD 00 00 */	stw r31, 0(r29)
-lbl_802F6850:
-/* 802F6850 002F3430  80 7D 00 04 */	lwz r3, 4(r29)
-/* 802F6854 002F3434  28 03 00 00 */	cmplwi r3, 0
-/* 802F6858 002F3438  41 82 00 0C */	beq lbl_802F6864
-/* 802F685C 002F343C  48 09 99 CD */	bl func_80390228
-/* 802F6860 002F3440  93 FD 00 04 */	stw r31, 4(r29)
-lbl_802F6864:
-/* 802F6864 002F3444  57 83 06 3E */	clrlwi r3, r28, 0x18
-/* 802F6868 002F3448  48 00 4D E9 */	bl func_802FB650
-/* 802F686C 002F344C  3B 9C 00 01 */	addi r28, r28, 1
-/* 802F6870 002F3450  2C 1C 00 06 */	cmpwi r28, 6
-/* 802F6874 002F3454  41 80 FF BC */	blt lbl_802F6830
-/* 802F6878 002F3458  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 802F687C 002F345C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 802F6880 002F3460  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 802F6884 002F3464  83 A1 00 0C */	lwz r29, 0xc(r1)
-/* 802F6888 002F3468  83 81 00 08 */	lwz r28, 8(r1)
-/* 802F688C 002F346C  38 21 00 18 */	addi r1, r1, 0x18
-/* 802F6890 002F3470  7C 08 03 A6 */	mtlr r0
-/* 802F6894 002F3474  4E 80 00 20 */	blr 
+void func_802F6804(void) {
+    s32 i;
+    HudValue* v;
+
+    i = 0;
+    do {
+        v = &lbl_804A10C8.players[i & 0xFF];
+        if (v->HUD_parent_entity != NULL) {
+            func_80390228(v->HUD_parent_entity);
+            v->HUD_parent_entity = NULL;
+        }
+        if (v->next != NULL) {
+            func_80390228(v->next);
+            v->next = NULL;
+        }
+        func_802FB650((s8)i & 0xFF);
+        i++;
+    } while (i < 6);
 }
 
 // Hide Percentage Digits
