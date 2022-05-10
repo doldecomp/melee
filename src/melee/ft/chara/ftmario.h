@@ -10,7 +10,11 @@
 #include "melee/ft/fighter.h"
 
 typedef struct _ftMarioAttributes {
-    /* 0x00 */u8 x0_padding[0x14 - 0x0];
+    /* 0x00 */u8 x0_padding[0x04 - 0x0];
+	/* 0x04 */f32 x04;
+	/* 0x08 */f32 x08;
+	/* 0x0C */f32 x0C;
+	/* 0x10 */f32 x10;
 	/* 0x14 */u32 x14;
     /* 0x18 */u8 x14_padding[0x84 - 0x18];
 } ftMarioAttributes;

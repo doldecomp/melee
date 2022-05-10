@@ -23,6 +23,7 @@ extern const f32 lbl_804D91A8;
 extern const f32 lbl_804D91AC;
 extern const f32 lbl_804D91B0;
 extern const f32 lbl_804D91B4;
+extern const f32 lbl_804D91B8;
 extern s32 lbl_803C5A20[];
 
 inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
@@ -492,6 +493,53 @@ void func_800E15D0(HSD_GObj* gobj) {
         func_8007B23C(gobj, sa_tmp + 0x18, 0);
     }
     else if ((x2204_tmp == 0U) && ((s32) ft_2->x2340_stateVar1 == 1)) {
+        ft_2->x2340_stateVar1 = 0;
+        ft_2->x2218_flag.bits.b3 = 0;
+    }
+    func_8007AEF8(gobj);
+}
+void func_800E16E0(HSD_GObj* gobj) {
+    u32 *sa_tmp;
+    u32 x2204_tmp;
+    u32 ftcmd_var0_tmp;
+    
+    Fighter *ft, *ft_2;
+    ftMarioAttributes* sa;
+    
+    u8 unused0[4];
+    Vec3 coords;
+    u8 unused1[28];
+    
+    ft = gobj->user_data;
+
+    ftcmd_var0_tmp = ft->x2200_ftcmd_var0;
+    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+
+    if (ftcmd_var0_tmp >= 1U) {
+        if(ftcmd_var0_tmp == 1U) {
+            ft->x2200_ftcmd_var0 = 2U;
+            if((s32)ft->sa.mario.x2238 == 0) {
+                ft->sa.mario.x2238 = 1;
+                ft->x80_self_vel.y = sa->x08;
+            } else {
+                ft->x80_self_vel.y = lbl_804D91A0;
+            }
+            func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 0x4)].x0_jobj,NULL,&coords);
+            coords.x += lbl_804D91A8 * ft->x2C_facing_direction;
+            func_800119DC(&coords, 0x78, lbl_804D91A8, lbl_804D91B8, lbl_804D91B4);
+        }
+        func_8007D494(ft, sa->x0C, sa->x10);
+    } else {
+        func_8007D4B8(ft);
+    }
+    func_8007CE94(ft, sa->x04);
+    ft_2 = gobj->user_data;
+    x2204_tmp = ft_2->x2200_ftcmd_var1;
+    sa_tmp = ((u32*)ft_2->x2D4_specialAttributes);
+    if((x2204_tmp == 1U) && ((s32)ft_2->x2340_stateVar1 == 0)) {
+        ft_2->x2340_stateVar1 = 1;
+        func_8007B23C(gobj, sa_tmp + 0x18, 0);
+    } else if ((x2204_tmp == 0U) && ((s32)ft_2->x2340_stateVar1 == 1)) {
         ft_2->x2340_stateVar1 = 0;
         ft_2->x2218_flag.bits.b3 = 0;
     }
