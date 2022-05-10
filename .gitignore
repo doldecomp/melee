@@ -17,6 +17,10 @@ build/
 build.bat
 clean.bat
 
+# Other
+src/m2ctx.py
+ctx.c
+
 # Epilogue hack folder
 epilogue/
 

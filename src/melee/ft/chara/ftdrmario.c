@@ -171,7 +171,7 @@ u32 func_801498EC(HSD_GObj* gobj)
     if (gobj != NULL) {
         ft = gobj->user_data;
         if (ft != NULL) {
-            return ft->x2200_ftcmd_var1;
+            return ft->x2204_ftcmd_var1;
         }
     }
 
@@ -184,5 +184,5 @@ void func_80149910(HSD_GObj* gobj)
 
     func_800DEAE8(gobj, 0x155, 0x156);
     ft->x2200_ftcmd_var0 = 1;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
 }
