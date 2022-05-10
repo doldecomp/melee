@@ -348,8 +348,8 @@ void func_800E1248(HSD_GObj* gobj) {
     ftMarioAttributes* sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     u8 padding[8];
 
-    if(ft->x2200_ftcmd_var2 == 0) {
-        ft->x2200_ftcmd_var2 = 1;
+    if(ft->x2208_ftcmd_var2 == 0) {
+        ft->x2208_ftcmd_var2 = 1;
         func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 0x31)].x0_jobj,NULL,&coords);
 
         gobj2 = func_802B2560(gobj,ft->x2C_facing_direction,&coords,func_8007500C(ft, 0x31),sA->x14);
@@ -420,8 +420,8 @@ void func_800E1450(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x159,0,0,f1,lbl_804D91A4,f1);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
-    ft->x2200_ftcmd_var2 = 0;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2208_ftcmd_var2 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2340_stateVar1 = 0;
     ft->cb.x21BC_callback_Accessory4 = func_800E1248;
@@ -438,8 +438,8 @@ void func_800E14C8(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0, 0, f1, lbl_804D91A4, f1);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
-    ft->x2200_ftcmd_var2 = 0;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2208_ftcmd_var2 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2340_stateVar1 = 0;
     ft->cb.x21BC_callback_Accessory4 = func_800E1248;
@@ -486,7 +486,7 @@ void func_800E15D0(HSD_GObj* gobj) {
 
     func_80084F3C(gobj);
     ft_2 = gobj->user_data;
-    x2204_tmp = ft_2->x2200_ftcmd_var1;
+    x2204_tmp = ft_2->x2204_ftcmd_var1;
     sa_tmp = ((u32*)ft_2->x2D4_specialAttributes);
     if ((x2204_tmp == 1U) && ((s32) ft_2->x2340_stateVar1 == 0)) {
         ft_2->x2340_stateVar1= 1;
@@ -535,7 +535,7 @@ void func_800E16E0(HSD_GObj* gobj) {
     }
     func_8007CE94(ft, sa->x04);
     ft_2 = gobj->user_data;
-    x2204_tmp = ft_2->x2200_ftcmd_var1;
+    x2204_tmp = ft_2->x2204_ftcmd_var1;
     sa_tmp = ((u32*)ft_2->x2D4_specialAttributes);
     if((x2204_tmp == 1U) && ((s32)ft_2->x2340_stateVar1 == 0)) {
         ft_2->x2340_stateVar1 = 1;
