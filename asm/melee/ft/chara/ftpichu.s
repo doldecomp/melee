@@ -23,15 +23,15 @@ lbl_803D1EA8:
     .4byte 0x00000129
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte lbl_80124F64
-    .4byte lbl_80124FDC
-    .4byte lbl_80124FE4
-    .4byte lbl_80125084
+    .4byte func_80124F64
+    .4byte func_80124FDC
+    .4byte func_80124FE4
+    .4byte func_80125084
     .4byte func_800761C8
     .4byte 0x0000012A
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte lbl_801251BC
+    .4byte func_801251BC
     .4byte lbl_801252FC
     .4byte lbl_8012535C
     .4byte lbl_8012539C
@@ -63,15 +63,15 @@ lbl_803D1EA8:
     .4byte 0x0000012E
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte lbl_80124FA0
-    .4byte lbl_80124FE0
-    .4byte lbl_80125024
-    .4byte lbl_801250C0
+    .4byte func_80124FA0
+    .4byte func_80124FE0
+    .4byte func_80125024
+    .4byte func_801250C0
     .4byte func_800761C8
     .4byte 0x0000012F
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte lbl_8012525C
+    .4byte func_8012525C
     .4byte lbl_8012532C
     .4byte lbl_8012537C
     .4byte lbl_801253D8

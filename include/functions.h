@@ -3188,7 +3188,7 @@ void func_80124704(struct _HSD_GObj*);
 // ? func_801258A0(?);
 // ? func_80125A54(?);
 // ? func_80125CD0(?);
-// ? func_80125D28(?);
+// ? func_80125D28_file_end(?);
 // ? func_80126084(?);
 // ? func_801260E4(?);
 // ? func_8012642C(?);
