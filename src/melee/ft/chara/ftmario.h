@@ -46,6 +46,22 @@ void func_800E111C(void);
 void func_800E113C(HSD_GObj*);
 void func_800E1178(HSD_GObj*);
 void func_800E11E0(HSD_GObj*);
-void func_800E1248(HSD_GObj* gobj);
+void func_800E1248(HSD_GObj*);
+void func_800E132C(HSD_GObj*);
+void func_800E1368(HSD_GObj*);
+void func_800E13C8(HSD_GObj*);
+void func_800E13F8(HSD_GObj*);
+void func_800E13F8(HSD_GObj*);
+BOOL func_800E1428(HSD_GObj*);
+void func_800E1450(HSD_GObj*);
+void func_800E14C8(HSD_GObj*);
+void func_800E1550(HSD_GObj*);
+void func_800E158C(HSD_GObj*);
+void func_800E15C8(void);
+void func_800E15CC(void);
+void func_800E15D0(HSD_GObj*);
+void func_800E16E0(HSD_GObj*);
+void func_800E1840(HSD_GObj*);
+void func_800E187C(HSD_GObj*);
 
 #endif

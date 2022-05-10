@@ -457,11 +457,11 @@ void func_800E158C(HSD_GObj* gobj) {
     }
 }
 
-void func_800E15C8() {
+void func_800E15C8(void) {
 	return;
 }
 
-void func_800E15CC() {
+void func_800E15CC(void) {
 	return;
 }
 
@@ -498,6 +498,7 @@ void func_800E15D0(HSD_GObj* gobj) {
     }
     func_8007AEF8(gobj);
 }
+
 void func_800E16E0(HSD_GObj* gobj) {
     u32 *sa_tmp;
     u32 x2204_tmp;
@@ -544,4 +545,16 @@ void func_800E16E0(HSD_GObj* gobj) {
         ft_2->x2218_flag.bits.b3 = 0;
     }
     func_8007AEF8(gobj);
+}
+
+void func_800E1840(HSD_GObj* gobj) {
+    if (func_800827A0(gobj) == 0) {
+        func_800E18B8(gobj);
+    }
+}
+
+void func_800E187C(HSD_GObj* gobj) {
+    if (func_80081D0C(gobj) != 0) {
+        func_800E198C(gobj);
+    }
 }
