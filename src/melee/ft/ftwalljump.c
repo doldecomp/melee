@@ -2,8 +2,8 @@
 #include <sysdolphin/baselib/gobj.h>
 #include "fighter.h"
 
-extern ftCommonData* lbl_804D6554; // defined in fighter.s
-#define p_ftcommon_r4 lbl_804D6554
+extern ftCommonData* p_ftCommonData; // defined in fighter.s
+#define p_ftcommon_r4 p_ftCommonData
 
 #define MAX_WALLJUMP_INPUT_FRAMES 254
 
@@ -80,8 +80,8 @@ BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct/*r3*/)
             if (
                     (f32)pCharData_r31->x210C_walljumpInputTimer < p_ftcommon_r4->x768 && // walljump timer within limits?
                     (
-                        (pCharData_r31->x2110_walljumpWallSide == -1.0f && pCharData_r31->x620_lstick_x >=  p_ftcommon_r4->x76C) || // left wall & control stick right?
-                        (pCharData_r31->x2110_walljumpWallSide ==  1.0f && pCharData_r31->x620_lstick_x <= -p_ftcommon_r4->x76C)    // right wal & control stick left?
+                        (pCharData_r31->x2110_walljumpWallSide == -1.0f && pCharData_r31->input.x620_lstick_x >=  p_ftcommon_r4->x76C) || // left wall & control stick right?
+                        (pCharData_r31->x2110_walljumpWallSide ==  1.0f && pCharData_r31->input.x620_lstick_x <= -p_ftcommon_r4->x76C)    // right wal & control stick left?
                     )
                     && (f32)pCharData_r31->x670_timer_lstick_tilt_x < p_ftcommon_r4->x770 // control stick didn't stay too long in the tilt area?
                 )

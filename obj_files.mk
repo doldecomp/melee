@@ -49,7 +49,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ef/efasync.s.o				\
 													\
 	$(BUILD_DIR)/src/melee/ft/fighter.c.o 			\
-	$(BUILD_DIR)/asm/melee/ft/fighter.s.o 			\
 	$(BUILD_DIR)/asm/melee/ft/ftanim.s.o 				\
 	$(BUILD_DIR)/asm/melee/ft/ftaction.s.o 			\
 	$(BUILD_DIR)/asm/melee/ft/ftparts.s.o 			\
@@ -57,7 +56,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/ftcoll.s.o 				\
 	$(BUILD_DIR)/asm/melee/ft/code_8007C114.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_8007C630.s.o 		\
-	$(BUILD_DIR)/asm/melee/ft/ftcommon.s.o 			\
+	$(BUILD_DIR)/src/melee/ft/ftcommon.c.o 			\
 	$(BUILD_DIR)/asm/melee/ft/ftdrawcommon.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/ftcliffcommon.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/ftwalljump.c.o 			\
@@ -122,7 +121,41 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgigakoopa.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftsandbag.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftsandbag.s.o 	\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.s.o 	\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.s.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_1.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_2.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_3.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_4.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_5.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_6.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_7.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_8.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_9.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_10.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_11.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_12.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_13.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_14.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_15.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_16.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_17.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_18.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_19.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_20.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_21.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_22.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_23.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_24.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_25.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_26.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_27.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_28.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_29.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_30.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_31.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_32.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_33.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_34.c.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.s.o 		            \
 															\
@@ -140,7 +173,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/gr/grdatfiles.c.o          \
 	$(BUILD_DIR)/asm/melee/gr/granime.s.o             \
 	$(BUILD_DIR)/asm/melee/gr/grmaterial.s.o          \
-	$(BUILD_DIR)/asm/melee/gr/grlib.s.o               \
+	$(BUILD_DIR)/src/melee/gr/grlib.c.o               \
 	$(BUILD_DIR)/asm/melee/gr/grdynamicattr.s.o       \
 	$(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o     \
 	$(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o 					\
@@ -395,7 +428,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/sysdolphin/baselib/displayfunc.c.o       \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/displayfunc.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/initialize.c.o 		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/initialize.s.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/video.s.o				\
 	$(BUILD_DIR)/src/sysdolphin/baselib/controller.c.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/controller.s.o		\

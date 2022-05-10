@@ -220,7 +220,7 @@ void func_800E0DA8(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
-    func_800693AC(gobj,0x157,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x157,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
     func_8006EBA4(gobj);
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -296,7 +296,7 @@ void func_800E1040(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
-    func_800693AC(gobj,0x158,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x158,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
     func_8006EBA4(gobj);
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -327,7 +327,7 @@ void func_800E113C(HSD_GObj* gobj) {
 void func_800E1178(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     func_8007D5D4(ft);
-    func_800693AC(gobj,0x158,0x5000,0,ft->x894,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x158,0x5000,0,ft->x894,lbl_804D919C,lbl_804D9198);
 
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -335,7 +335,7 @@ void func_800E1178(HSD_GObj* gobj) {
 void func_800E11E0(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     func_8007D7FC(ft);
-    func_800693AC(gobj,0x157,0x5000,0,ft->x894,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x157,0x5000,0,ft->x894,lbl_804D919C,lbl_804D9198);
 
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -401,7 +401,7 @@ void func_800E13F8(HSD_GObj* gobj) {
 BOOL func_800E1428(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
-    s32 var0 = ft->x10;
+    s32 var0 = ft->x10_action_state_index;
 
     if ((var0  >= 0x159) && (var0  <= 0x15A)) {
         return 0;
@@ -417,7 +417,7 @@ void func_800E1450(HSD_GObj* gobj) {
     ft = gobj->user_data;
     ft->x80_self_vel.y = f1 = lbl_804D91A0;
 
-    func_800693AC(gobj, 0x159,0,0,f1,lbl_804D91A4,f1);
+    Fighter_ActionStateChange_800693AC(gobj, 0x159,0,0,f1,lbl_804D91A4,f1);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
     ft->x2200_ftcmd_var2 = 0;
@@ -435,7 +435,7 @@ void func_800E14C8(HSD_GObj* gobj) {
     ft->x80_self_vel.x = (ft->x80_self_vel.x / ((Vec3*)(ft->x2D4_specialAttributes))->x);
 
     f1 = lbl_804D91A0;
-    func_800693AC(gobj, 0x15A, 0, 0, f1, lbl_804D91A4, f1);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0, 0, f1, lbl_804D91A4, f1);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
     ft->x2200_ftcmd_var2 = 0;

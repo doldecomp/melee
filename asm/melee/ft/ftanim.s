@@ -254,7 +254,7 @@ func_8006DF0C:
 /* 8006DF58 0006AB38  48 00 70 B5 */	bl func_8007500C
 /* 8006DF5C 0006AB3C  80 DD 05 E8 */	lwz r6, 0x5e8(r29)
 /* 8006DF60 0006AB40  54 60 20 36 */	slwi r0, r3, 4
-/* 8006DF64 0006AB44  80 8D AE B4 */	lwz r4, lbl_804D6554@sda21(r13)
+/* 8006DF64 0006AB44  80 8D AE B4 */	lwz r4, p_ftCommonData@sda21(r13)
 /* 8006DF68 0006AB48  38 A1 00 10 */	addi r5, r1, 0x10
 /* 8006DF6C 0006AB4C  7C 66 00 2E */	lwzx r3, r6, r0
 /* 8006DF70 0006AB50  38 84 08 08 */	addi r4, r4, 0x808
@@ -376,7 +376,7 @@ lbl_8006E0F8:
 /* 8006E114 0006ACF4  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 8006E118 0006ACF8  40 82 00 34 */	bne lbl_8006E14C
 /* 8006E11C 0006ACFC  7F 63 DB 78 */	mr r3, r27
-/* 8006E120 0006AD00  48 01 15 75 */	bl func_8007F694
+/* 8006E120 0006AD00  48 01 15 75 */	bl Fighter_GetModelScale
 /* 8006E124 0006AD04  C0 1B 06 8C */	lfs f0, 0x68c(r27)
 /* 8006E128 0006AD08  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8006E12C 0006AD0C  D0 1B 06 8C */	stfs f0, 0x68c(r27)
@@ -489,7 +489,7 @@ lbl_8006E29C:
 /* 8006E2B8 0006AE98  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 8006E2BC 0006AE9C  40 82 00 34 */	bne lbl_8006E2F0
 /* 8006E2C0 0006AEA0  7F 63 DB 78 */	mr r3, r27
-/* 8006E2C4 0006AEA4  48 01 13 D1 */	bl func_8007F694
+/* 8006E2C4 0006AEA4  48 01 13 D1 */	bl Fighter_GetModelScale
 /* 8006E2C8 0006AEA8  C0 1B 06 C0 */	lfs f0, 0x6c0(r27)
 /* 8006E2CC 0006AEAC  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8006E2D0 0006AEB0  D0 1B 06 C0 */	stfs f0, 0x6c0(r27)
@@ -752,7 +752,7 @@ lbl_8006E618:
 /* 8006E640 0006B220  88 04 00 10 */	lbz r0, 0x10(r4)
 /* 8006E644 0006B224  54 00 20 36 */	slwi r0, r0, 4
 /* 8006E648 0006B228  7F 85 00 2E */	lwzx r28, r5, r0
-/* 8006E64C 0006B22C  48 01 10 49 */	bl func_8007F694
+/* 8006E64C 0006B22C  48 01 10 49 */	bl Fighter_GetModelScale
 /* 8006E650 0006B230  28 1C 00 00 */	cmplwi r28, 0
 /* 8006E654 0006B234  40 82 00 14 */	bne lbl_8006E668
 /* 8006E658 0006B238  38 6D 83 7C */	addi r3, r13, lbl_804D3A1C@sda21
@@ -776,7 +776,7 @@ lbl_8006E668:
 /* 8006E69C 0006B27C  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 8006E6A0 0006B280  40 82 00 3C */	bne lbl_8006E6DC
 /* 8006E6A4 0006B284  7F 63 DB 78 */	mr r3, r27
-/* 8006E6A8 0006B288  48 01 0F ED */	bl func_8007F694
+/* 8006E6A8 0006B288  48 01 0F ED */	bl Fighter_GetModelScale
 /* 8006E6AC 0006B28C  C0 42 88 B8 */	lfs f2, lbl_804D8298@sda21(r2)
 /* 8006E6B0 0006B290  C0 01 00 38 */	lfs f0, 0x38(r1)
 /* 8006E6B4 0006B294  EC 22 08 24 */	fdivs f1, f2, f1
@@ -2850,7 +2850,7 @@ lbl_800702E8:
 .global func_80070308
 func_80070308:
 /* 80070308 0006CEE8  7C 08 02 A6 */	mflr r0
-/* 8007030C 0006CEEC  3C 80 80 3C */	lis r4, lbl_803C0EC0@ha
+/* 8007030C 0006CEEC  3C 80 80 3C */	lis r4, CostumeListsForeachCharacter@ha
 /* 80070310 0006CEF0  90 01 00 04 */	stw r0, 4(r1)
 /* 80070314 0006CEF4  3C C0 80 3C */	lis r6, lbl_803C0638@ha
 /* 80070318 0006CEF8  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -2859,7 +2859,7 @@ func_80070308:
 /* 80070324 0006CF04  38 C0 00 00 */	li r6, 0
 /* 80070328 0006CF08  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8007032C 0006CF0C  83 63 00 28 */	lwz r27, 0x28(r3)
-/* 80070330 0006CF10  38 64 0E C0 */	addi r3, r4, lbl_803C0EC0@l
+/* 80070330 0006CF10  38 64 0E C0 */	addi r3, r4, CostumeListsForeachCharacter@l
 /* 80070334 0006CF14  80 BF 00 04 */	lwz r5, 4(r31)
 /* 80070338 0006CF18  88 1F 06 19 */	lbz r0, 0x619(r31)
 /* 8007033C 0006CF1C  54 A4 18 38 */	slwi r4, r5, 3
@@ -3808,7 +3808,6 @@ lbl_80071014:
 
 
 .section .data
-    .balign 8
 .global lbl_803C0638
 lbl_803C0638:
     .asciz "fighter joint depth num over!\n"

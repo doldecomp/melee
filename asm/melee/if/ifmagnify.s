@@ -212,7 +212,7 @@ lbl_802FB938:
 /* 802FB9B4 002F8594  D0 01 00 34 */	stfs f0, 0x34(r1)
 /* 802FB9B8 002F8598  C0 21 00 34 */	lfs f1, 0x34(r1)
 /* 802FB9BC 002F859C  C0 41 00 30 */	lfs f2, 0x30(r1)
-/* 802FB9C0 002F85A0  4B D2 72 71 */	bl func_80022C30
+/* 802FB9C0 002F85A0  4B D2 72 71 */	bl func_someCalcAngle_80022C30
 /* 802FB9C4 002F85A4  83 5F 00 04 */	lwz r26, 4(r31)
 /* 802FB9C8 002F85A8  FF E0 08 90 */	fmr f31, f1
 /* 802FB9CC 002F85AC  28 1A 00 00 */	cmplwi r26, 0
@@ -1358,13 +1358,13 @@ lbl_803F97E8:
 .global lbl_803F9828
 lbl_803F9828:
 	.4byte func_801C0604
-	.4byte lbl_801C0690
+	.4byte func_801C0690
 	.4byte func_801C0618
-	.4byte lbl_801C0654
-	.4byte lbl_801C06A4
-	.4byte lbl_801C0668
+	.4byte func_801C0654
+	.4byte func_801C06A4
+	.4byte func_801C0668
 	.4byte func_801C062C
-	.4byte lbl_801C067C
+	.4byte func_801C067C
 	.4byte func_801C0640
 .global lbl_803F984C
 lbl_803F984C:

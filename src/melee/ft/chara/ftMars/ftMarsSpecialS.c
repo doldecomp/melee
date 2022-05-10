@@ -19,7 +19,7 @@ void func_8013741C(HSD_GObj* gobj) {
         thing = 0x166;
     }
 
-    func_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -51,7 +51,7 @@ void func_801374A0(HSD_GObj* gobj) {
         thing = 0x166;
     }
 
-    func_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -74,11 +74,11 @@ void lbl_80137558(HSD_GObj* gobj) {
 void lbl_801375B8(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 != 0) {
-        if (ft->x2200_ftcmd_var1 == 0 && (ft->x668 & 0x300) != 0) {
+        if (ft->x2200_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
             func_80137A9C(gobj);
         }
     } else {
-        if ((ft->x668 & 0x300) != 0) {
+        if ((ft->input.x668 & 0x300) != 0) {
             ft->x2200_ftcmd_var1 = 1;
         }
     }
@@ -129,7 +129,7 @@ void func_801376E8(HSD_GObj* gobj) {
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(ft);
     // ActionStateChange
-    func_800693AC(gobj, 0x166, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x166, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
 }
 
 // 80137748 00134328
@@ -141,7 +141,7 @@ void func_80137748(HSD_GObj* gobj) {
     // Air_SetAsGrounded2
     func_8007D7FC(ft);
     // ActionStateChange
-    func_800693AC(gobj, 0x15D, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
 }
 
 // 801377B0 00134390
@@ -165,11 +165,11 @@ void lbl_801377B0(HSD_GObj* gobj) {
 void lbl_80137810(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 != 0) {
-        if (ft->x2200_ftcmd_var1 == 0 && (ft->x668 & 0x300) != 0) {
+        if (ft->x2200_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
             func_80137E0C(gobj);
         }
     } else {
-        if ((ft->x668 & 0x300) != 0) {
+        if ((ft->input.x668 & 0x300) != 0) {
             ft->x2200_ftcmd_var1 = 1;
         }
     }
@@ -218,7 +218,7 @@ void func_80137940(HSD_GObj* gobj) {
     s32 thing;
 
     func_8007D5D4(ft);
-    switch (ft->x10) {
+    switch (ft->x10_action_state_index) {
         case 0x15E:
             thing = 0x167;
             break;
@@ -228,7 +228,7 @@ void func_80137940(HSD_GObj* gobj) {
         // default:
         // thing uninitialized
     }
-    func_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
 }
 
 // 801379D0 001345B0
@@ -240,7 +240,7 @@ void func_801379D0(HSD_GObj* gobj) {
 
     ft->sa.mars.x222C = 0;
     func_8007D7FC(ft);
-    switch (ft->x10) {
+    switch (ft->x10_action_state_index) {
         case 0x167:
             thing = 0x15E;
             break;
@@ -250,7 +250,7 @@ void func_801379D0(HSD_GObj* gobj) {
         // default:
         // thing uninitialized
     }
-    func_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
 }
 
 // 80137A68 00134648
@@ -270,7 +270,7 @@ void func_80137A9C(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
-    if (ft->x624_lstick_y > lbl_804D6554->x21C) {
+    if (ft->input.x624_lstick_y > p_ftCommonData->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x15E;
         } else {
@@ -283,7 +283,7 @@ void func_80137A9C(HSD_GObj* gobj) {
             thing = 0x168;
         }
     }
-    func_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
 }
 
 // 80137B34 00134714
@@ -308,11 +308,11 @@ void lbl_80137B94(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
     if (ft->x2200_ftcmd_var0 != 0) {
-        if (ft->x2200_ftcmd_var1 == 0 && (ft->x668 & 0x300) != 0) {
+        if (ft->x2200_ftcmd_var1 == 0 && (ft->input.x668 & 0x300) != 0) {
             func_80138148(gobj);
         }
     } else {
-        if ((ft->x668 & 0x300) != 0) {
+        if ((ft->input.x668 & 0x300) != 0) {
             ft->x2200_ftcmd_var1 = 1;
         }
     }
@@ -361,7 +361,7 @@ void func_80137CBC(HSD_GObj* gobj) {
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(ft);
-    switch (ft->x10) {
+    switch (ft->x10_action_state_index) {
         case 0x160:
             thing = 0x169;
             break;
@@ -375,7 +375,7 @@ void func_80137CBC(HSD_GObj* gobj) {
         // thing uninitialized
     }
     // ActionStateChange
-    func_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
 }
 
 // 80137D60 00134940
@@ -386,7 +386,7 @@ void func_80137D60(HSD_GObj* gobj) {
     ft->sa.mars.x222C = 0;
     // // Air_SetAsGrounded2
     func_8007D7FC(ft);
-    switch (ft->x10) {
+    switch (ft->x10_action_state_index) {
         case 0x169:
             thing = 0x160;
             break;
@@ -398,7 +398,7 @@ void func_80137D60(HSD_GObj* gobj) {
             break;
     }
     // ActionStateChange
-    func_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
 }
 
 // 80137E0C 001349EC
@@ -411,14 +411,14 @@ void func_80137E0C(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
-    if (ft->x624_lstick_y > lbl_804D6554->x21C) {
+    if (ft->input.x624_lstick_y > p_ftCommonData->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x160;
         } else {
             thing = 0x169;
         }
     } else {
-        if (ft->x624_lstick_y < -lbl_804D6554->x21C) {
+        if (ft->input.x624_lstick_y < -p_ftCommonData->x21C) {
             if (ft->xE0_ground_or_air == GA_Ground) {
                 thing = 0x162;
             } else {
@@ -432,7 +432,7 @@ void func_80137E0C(HSD_GObj* gobj) {
             }
         }
     }
-    func_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
 }
 
 // 80137ECC 00134AAC
@@ -498,7 +498,7 @@ void func_80137FF8(HSD_GObj* gobj) {
     s32 thing;
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(ft);
-    switch (ft->x10) {
+    switch (ft->x10_action_state_index) {
         case 0x163:
             thing = 0x16C;
             break;
@@ -512,7 +512,7 @@ void func_80137FF8(HSD_GObj* gobj) {
         // thing uninitialized
     }
     // ActionStateChange
-    func_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
 }
 
 // 8013809C 00134C7C
@@ -524,7 +524,7 @@ void func_8013809C(HSD_GObj* gobj) {
     ft->sa.mars.x222C = 0;
     // Air_SetAsGrounded2
     func_8007D7FC(ft);
-    switch (ft->x10) {
+    switch (ft->x10_action_state_index) {
         case 0x16C:
             thing = 0x163;
             break;
@@ -538,7 +538,7 @@ void func_8013809C(HSD_GObj* gobj) {
         // thing uninitialized
     }
     // ActionStateChange
-    func_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, ft->x894, 1.0f, 0.0f);
 }
 
 // 80138148 00134D28
@@ -551,14 +551,14 @@ void func_80138148(HSD_GObj* gobj) {
     ft->x2200_ftcmd_var0 = 0;
     ft->cb.x21EC_callback = &lbl_80137A68;
 
-    if (ft->x624_lstick_y > lbl_804D6554->x21C) {
+    if (ft->input.x624_lstick_y > p_ftCommonData->x21C) {
         if (ft->xE0_ground_or_air == GA_Ground) {
             thing = 0x163;
         } else {
             thing = 0x16C;
         }
     } else {
-        if (ft->x624_lstick_y < -lbl_804D6554->x21C) {
+        if (ft->input.x624_lstick_y < -p_ftCommonData->x21C) {
             if (ft->xE0_ground_or_air == GA_Ground) {
                 thing = 0x165;
             } else {
@@ -572,5 +572,5 @@ void func_80138148(HSD_GObj* gobj) {
             }
         }
     }
-    func_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
 }

@@ -52,5 +52,12 @@ inline s32 __fpclassifyd(double x)
 	((sizeof(x) == sizeof(float)) ? __fpclassifyf((float)(x)) \
 	                              : __fpclassifyd((double)(x)))
 
+inline f32 fabs_inline(f32 x) {
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
+    }
+}
 
 #endif

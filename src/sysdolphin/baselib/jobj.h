@@ -131,7 +131,9 @@ extern HSD_JObjInfo hsdJObj;
 
 void HSD_JObjCheckDependAll(HSD_JObj* jobj);
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);
+void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
+void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 
@@ -145,8 +147,13 @@ inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 
 inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 {
+    BOOL result;
     assert_line(564, jobj);
-    return !(jobj->flags & 0x800000) && (jobj->flags & 0x40);
+    result = FALSE;
+    if (!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) {
+        result = TRUE;
+    }
+    return result;
 }
 
 inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
@@ -200,6 +207,18 @@ inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec *translate)
     assert_line(979, jobj);
     assert_line(980, translate);
     *translate = jobj->translate;
+}
+
+inline f32 HSD_JObjGetTranslationX(HSD_JObj* jobj)
+{
+    assert_line(993, jobj);
+    return jobj->translate.x;
+}
+
+inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
+{
+    assert_line(1006, jobj);
+    return jobj->translate.y;
 }
 
 inline void HSD_JObjGetMtx(HSD_JObj* jobj, Mtx *mtx)
