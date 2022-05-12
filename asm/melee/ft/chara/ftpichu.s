@@ -32,33 +32,33 @@ lbl_803D1EA8:
     .4byte 0x00340212
     .4byte 0x13000000
     .4byte func_801251BC
-    .4byte lbl_801252FC
-    .4byte lbl_8012535C
-    .4byte lbl_8012539C
+    .4byte func_801252FC
+    .4byte func_8012535C
+    .4byte func_8012539C
     .4byte func_800761C8
     .4byte 0x0000012C
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte lbl_8012590C
-    .4byte lbl_8012594C
-    .4byte lbl_80125954
-    .4byte lbl_801259D4
+    .4byte func_8012590C
+    .4byte func_8012594C
+    .4byte func_80125954
+    .4byte func_801259D4
     .4byte func_800761C8
     .4byte 0x0000012D
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte lbl_80125B34
-    .4byte lbl_80125BAC
-    .4byte lbl_80125BB4
-    .4byte lbl_80125C44
+    .4byte func_80125B34
+    .4byte func_80125BAC
+    .4byte func_80125BB4
+    .4byte func_80125C44
     .4byte func_800761C8
     .4byte 0x0000012B
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte lbl_8012557C
-    .4byte lbl_801256B4
-    .4byte lbl_801256BC
-    .4byte lbl_801256FC
+    .4byte func_8012557C
+    .4byte func_801256B4
+    .4byte func_801256BC
+    .4byte func_801256FC
     .4byte func_800761C8
     .4byte 0x0000012E
     .4byte 0x00340612
@@ -72,33 +72,33 @@ lbl_803D1EA8:
     .4byte 0x00340612
     .4byte 0x13000000
     .4byte func_8012525C
-    .4byte lbl_8012532C
-    .4byte lbl_8012537C
-    .4byte lbl_801253D8
+    .4byte func_8012532C
+    .4byte func_8012537C
+    .4byte func_801253D8
     .4byte func_800761C8
     .4byte 0x0000012C
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte lbl_80125910
-    .4byte lbl_80125950
-    .4byte lbl_80125958
-    .4byte lbl_801259D8
+    .4byte func_80125910
+    .4byte func_80125950
+    .4byte func_80125958
+    .4byte func_801259D8
     .4byte func_800761C8
     .4byte 0x00000131
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte lbl_80125B70
-    .4byte lbl_80125BB0
-    .4byte lbl_80125BF4
-    .4byte lbl_80125C80
+    .4byte func_80125B70
+    .4byte func_80125BB0
+    .4byte func_80125BF4
+    .4byte func_80125C80
     .4byte func_800761C8
     .4byte 0x00000130
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte lbl_8012561C
-    .4byte lbl_801256B8
-    .4byte lbl_801256DC
-    .4byte lbl_80125738
+    .4byte func_8012561C
+    .4byte func_801256B8
+    .4byte func_801256DC
+    .4byte func_80125738
     .4byte func_800761C8
     .4byte 0x00000132
     .4byte 0x00340113
