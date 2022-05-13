@@ -1177,14 +1177,18 @@ typedef struct _Fighter {
     };
     /* 0x2348 */ u32 x2348_stateVar3;
     union {
-    struct {
-    /* 0x234C */ u32 x234C_stateVar4;
-    /* 0x2350 */ u32 x2350_stateVar5;
-    /* 0x2354 */ f32 x2354_stateVar6;
+        struct {
+            /* 0x234C */ u32 x234C_stateVar4;
+            /* 0x2350 */ u32 x2350_stateVar5;
+            /* 0x2354 */ f32 x2354_stateVar6;
+        };
+        /* 0x234C */ Vec3 x234C_pos;
     };
-    /* 0x234C */ Vec3 x234C_pos;
+    union {
+        /* 0x2358 */ f32 x2358_stateVar7;
+        /* 0x2358 */ u32 x2358_stateVar7_u32;
+
     };
-    /* 0x2358 */ f32 x2358_stateVar7;
     /* 0x235C */ f32 x235C;
     /* 0x2360 */ s32 x2360;
     /* 0x2364 */ f32 x2364;
