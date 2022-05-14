@@ -77,8 +77,14 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o 		\
-	$(BUILD_DIR)/src/melee/ft/chara/ftness.c.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftness.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_1.c.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_2.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_3.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_4.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_5.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_6.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_7.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_8.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftpeach.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpeach.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/fticeclimber.s.o 	\
