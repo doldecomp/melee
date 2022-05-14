@@ -30,7 +30,9 @@ typedef struct _ftPikachuAttributes {
     f32 x54;
     f32 x58;
     s32 x5C;
-    u32 x1C_padding[31];
+    f32 x60;
+    f32 x64;
+    u32 x1C_padding[29];
     u32 xDC;
     f32 xE0;
     f32 xE4;
@@ -64,3 +66,6 @@ void func_801258A0(HSD_GObj* fighterObj);
 void func_80125A54(HSD_GObj* fighterObj);
 void func_80125CD0(HSD_GObj* fighterObj);
 void func_80125D28_file_end(HSD_GObj* fighterObj);
+
+///pika4
+void func_80126084(HSD_GObj* fighterObj);
