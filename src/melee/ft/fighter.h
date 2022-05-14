@@ -1172,6 +1172,7 @@ typedef struct _Fighter {
     };
     union {
     /* 0x2344 */ u32 x2344_stateVar2;
+    /* 0x2344 */ s32 x2344_stateVar2_s32;
     /* 0x2344 */ void (*x2344_callback)(HSD_GObj*);
     /* 0x2344 */ f32 x2344_f32;
     };

@@ -122,8 +122,8 @@ void func_80126144(HSD_GObj* fighterObj) {
 
     Fighter* fighter = fighterObj->user_data;
     
-    fighter->x2344_stateVar2--;
-    if (fighter->x2344_stateVar2 <= 0) { 
+    fighter->x2344_stateVar2_s32--;
+    if (fighter->x2344_stateVar2_s32 <= 0) { 
         func_801274AC(fighterObj);
         fighter = fighterObj->user_data;
         if (fighter->x4_fighterKind != FTKIND_PICHU) {
@@ -157,8 +157,8 @@ void func_801262B4(HSD_GObj* fighterObj) {
 
     Fighter* fighter = fighterObj->user_data;
     
-    fighter->x2344_stateVar2--;
-    if (fighter->x2344_stateVar2 <= 0) { 
+    fighter->x2344_stateVar2_s32--;
+    if (fighter->x2344_stateVar2_s32 <= 0) { 
         func_80127534_file_end(fighterObj);
         fighter = fighterObj->user_data;
         if (fighter->x4_fighterKind != FTKIND_PICHU) {
