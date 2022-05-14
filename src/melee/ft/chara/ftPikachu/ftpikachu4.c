@@ -1,5 +1,6 @@
 #include "ftpikachu.h"
 
+#define HALF_PI 1.5707963705062866
 
 ///////DELETE THIS SECTION WHEN FILE FINISHED//////////
 extern f32 lbl_804D9928; //0.0f
@@ -76,12 +77,12 @@ void func_80125F58(HSD_GObj* fighterObj) {
 void func_80125F78(HSD_GObj* fighterObj) {
     s32 unused[2]; 
     Fighter* fighter = fighterObj->user_data;
-    ftPikachuAttributes* pika_att = fighter->x2D4_specialAttributes;
+    ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
     struct attr* attr = &fighter->x110_attr;
     if (fighter->x2340_stateVar1 != 0) {
         fighter->x2340_stateVar1++;
     } else {
-        func_8007D494(fighter, pika_att->x64, attr->x170_TerminalVelocity);
+        func_8007D494(fighter, pika_attr->x64, attr->x170_TerminalVelocity);
     }
     func_8007CF58(fighter);
 }
@@ -188,3 +189,43 @@ void func_801262B4(HSD_GObj* fighterObj) {
 void func_80126424() {}
 
 void func_80126428() {}
+
+void func_8012642C(HSD_GObj* fighterObj) {
+    Vec scale;
+    Vec3 velocity_vec;
+    s32 unused;
+
+    HSD_JObj* jobj;
+    Fighter* fighter = fighterObj->user_data;
+    ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
+    
+    f32 half_pi = HALF_PI;
+    f32 tempf = (fighter->x2C_facing_direction * func_someCalcAngle_80022C30(fighter->x80_self_vel.x, fighter->x80_self_vel.y)) 
+        + (pika_attr->x78 - half_pi);
+    
+    func_8007592C(fighter, func_8007500C(fighter, 2), tempf);
+    scale.x = pika_attr->x7C_scale.x;
+    scale.y = pika_attr->x7C_scale.y;
+    scale.z = pika_attr->x7C_scale.z;
+    jobj = fighter->x5E8_fighterBones[func_8007500C(fighter, 2)].x0_jobj;
+    HSD_JObjSetScale(jobj, &scale); 
+    
+    velocity_vec = fighter->x80_self_vel;
+    func_8007E2FC(fighterObj);
+    fighter->x80_self_vel = velocity_vec;
+ 
+    
+    fighter->x6D8.x = 
+    fighter->x6D8.y = 
+    fighter->x6D8.z = 
+    fighter->x6C0.x = 
+    fighter->x6C0.y = 
+    fighter->x6C0.z = 
+    fighter->x6BC_inputStickangle = 
+    fighter->x6A4_transNOffset.x = 
+    fighter->x6A4_transNOffset.y = 
+    fighter->x6A4_transNOffset.z =  
+    fighter->x68C_transNPos.x = 
+    fighter->x68C_transNPos.y = 
+    fighter->x68C_transNPos.z = 0.0f;
+}

@@ -32,7 +32,13 @@ typedef struct _ftPikachuAttributes {
     s32 x5C;
     f32 x60;
     f32 x64;
-    u32 x1C_padding[29];
+    f32 x68;
+    f32 x6C;
+    f32 x70;
+    f32 x74;
+    f32 x78;
+    Vec x7C_scale;
+    u32 x1C_padding[21];
     u32 xDC;
     f32 xE0;
     f32 xE4;

@@ -113,7 +113,7 @@ lbl_803D1EA8:
     .4byte 0x14000000
     .4byte func_80126144
     .4byte func_80126424
-    .4byte lbl_801265D4
+    .4byte func_801265D4
     .4byte lbl_80126614
     .4byte func_800761C8
     .4byte 0x00000134
