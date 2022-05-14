@@ -108,3 +108,83 @@ void func_80126084(HSD_GObj* fighterObj) {
     func_8007D60C(fighter);
     Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0xC4C5084, 0, fighter->x894, 1.0f, 0.0f);
 }
+
+void func_801260E4(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D7FC(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x161, 0xC4C5084, 0, fighter->x894, 1.0f, 0.0f);
+}
+
+void func_80126144(HSD_GObj* fighterObj) {
+    Vec vec;
+    Vec vec2;
+    s32 unused[5];
+
+    Fighter* fighter = fighterObj->user_data;
+    
+    fighter->x2344_stateVar2--;
+    if (fighter->x2344_stateVar2 <= 0) { 
+        func_801274AC(fighterObj);
+        fighter = fighterObj->user_data;
+        if (fighter->x4_fighterKind != FTKIND_PICHU) {
+            func_8000B1CC(fighter->x5E8_fighterBones[func_8007500C(fighter, 2)].x0_jobj, 0, &vec);
+            ef_Spawn(0x3F4, fighterObj, &vec);
+            fighter->x2219_flag.bits.b0 = 1;
+            fighter->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+            fighter->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        }
+    } else {
+        fighter = fighterObj->user_data;
+        if (fighter->x4_fighterKind != FTKIND_PICHU) { 
+            f32 tempf;
+            func_8000B1CC(fighter->x5E8_fighterBones[func_8007500C(fighter, 2)].x0_jobj, 0, &vec2);
+            tempf = HSD_Randf();
+            vec2.x += (6.0f * tempf) - 3.0f; 
+            tempf = HSD_Randf();
+            vec2.y += (6.0f * tempf) - 3.0f;
+            ef_Spawn(0x3F4, fighterObj, &vec2);  
+            fighter->x2219_flag.bits.b0 = 1;
+            fighter->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+            fighter->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        }
+    }
+}
+
+void func_801262B4(HSD_GObj* fighterObj) {
+    Vec vec;
+    Vec vec2;
+    s32 unused[5];
+
+    Fighter* fighter = fighterObj->user_data;
+    
+    fighter->x2344_stateVar2--;
+    if (fighter->x2344_stateVar2 <= 0) { 
+        func_80127534_file_end(fighterObj);
+        fighter = fighterObj->user_data;
+        if (fighter->x4_fighterKind != FTKIND_PICHU) {
+            func_8000B1CC(fighter->x5E8_fighterBones[func_8007500C(fighter, 2)].x0_jobj, 0, &vec);
+            ef_Spawn(0x3F4, fighterObj, &vec);
+            fighter->x2219_flag.bits.b0 = 1;
+            fighter->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+            fighter->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        }
+    } else {
+        fighter = fighterObj->user_data;
+        if (fighter->x4_fighterKind != FTKIND_PICHU) { 
+            f32 tempf;
+            func_8000B1CC(fighter->x5E8_fighterBones[func_8007500C(fighter, 2)].x0_jobj, 0, &vec2);
+            tempf = HSD_Randf();
+            vec2.x += (6.0f * tempf) - 3.0f; 
+            tempf = HSD_Randf();
+            vec2.y += (6.0f * tempf) - 3.0f;
+            ef_Spawn(0x3F4, fighterObj, &vec2);  
+            fighter->x2219_flag.bits.b0 = 1;
+            fighter->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+            fighter->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        }
+    }
+}
+
+void func_80126424() {}
+
+void func_80126428() {}

@@ -43,7 +43,7 @@ typedef struct _ftPikachuAttributes {
 } ftPikachuAttributes;
 
 
-/// TODO put the rest of function headers here
+/// TODO put the rest of function headers here and rename all of the functions
 ///pika1
 
 ///pika2
@@ -69,3 +69,4 @@ void func_80125D28_file_end(HSD_GObj* fighterObj);
 
 ///pika4
 void func_80126084(HSD_GObj* fighterObj);
+void func_801260E4(HSD_GObj* fighterObj);
