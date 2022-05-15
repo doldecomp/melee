@@ -1,6 +1,8 @@
 #include "ftness.h"
 
-s32 func_80114CC0(HSD_GObj* fighter_gobj) 
+// 0x80114CC0
+// https://decomp.me/scratch/E8Nsh //
+s32 func_80114CC0(HSD_GObj* fighter_gobj) // Check if Ness is in F-Smash + has Baseball Bat item //
 {
 
     Fighter* fighter_data = fighter_gobj->user_data;
@@ -22,19 +24,23 @@ s32 func_80114CC0(HSD_GObj* fighter_gobj)
 
 void func_802AD6B8(HSD_GObj*);
 
-void func_80114CF4(HSD_GObj* fighter_gobj) {
+// 0x80114CF4 //
+// https://decomp.me/scratch/mpl3X //
+void func_80114CF4(HSD_GObj* fighter_gobj) // Remove Baseball Bat //
+{
 
     Fighter* fighter_data = fighter_gobj->user_data;
-    HSD_GObj* item_gobj = fighter_data->sa.ness.x2248;
 
-    if (item_gobj != 0)
+    if (fighter_data->sa.ness.x2248 != 0)
     {
-        func_802AD6B8(item_gobj);
+        func_802AD6B8(fighter_data->sa.ness.x2248);
         fighter_data->sa.ness.x2248 = 0;
     }
 
 };
 
+// 0x80114D34
+// https://decomp.me/scratch/6ulYB //
 void func_80114D34(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter_data = fighter_gobj->user_data;
@@ -48,6 +54,8 @@ void func_80114D34(HSD_GObj* fighter_gobj)
 void func_8007B23C(HSD_GObj*, void*, void*); // Create Reflect Bubble //
 void lbl_80114BF4(HSD_GObj*); //OnReflect Callback //
 
+// 0x80114D50
+// https://decomp.me/scratch/M8dFk //
 void lbl_80114D50(HSD_GObj* fighter_gobj) //Ness's F-Smash Animation Callback//
 {
     Fighter* fighter_data1 = fighter_gobj->user_data;
@@ -82,6 +90,8 @@ void lbl_80114D50(HSD_GObj* fighter_gobj) //Ness's F-Smash Animation Callback//
 }
 void func_8008A4D4(HSD_GObj*); // Interrupt_Wait //
 
+// 0x80114E04
+// https://decomp.me/scratch/HTgCI //
 void lbl_80114E04(HSD_GObj* fighter_gobj) // Ness's F-Smash IASA Callback //
 {
     Fighter* fighter_data = fighter_gobj->user_data;
@@ -96,20 +106,45 @@ void lbl_80114E04(HSD_GObj* fighter_gobj) // Ness's F-Smash IASA Callback //
         }
         func_8008A4D4(fighter_gobj);
     }
-}
+};
 
 void func_8007AEF8(HSD_GObj*); // Enable Reflect Bubble Update //
 
+
+// 0x80114E64 //
+// https://decomp.me/scratch/wQc4r //
 void lbl_80114E64(HSD_GObj* fighter_gobj) // Ness's F-Smash Physics Callback //
 
 {
     func_80084FA8(fighter_gobj);
     func_8007AEF8(fighter_gobj);
-}
+};
 
 void func_80084104(HSD_GObj*); // CollisionCheck_StopLedge //
 
+
+// 0x80114E98 //
+// https://decomp.me/scratch/nJ4hj //
 void lbl_80114E98(HSD_GObj* fighter_gobj) // Ness's F-Smash Collision Callback //
 {
     func_80084104(fighter_gobj);
+};
+
+
+void func_8007B8A8(void*, void*); // Update Hitbox Positions //
+
+// 0x80114EB8 //
+// https://decomp.me/scratch/ppemH //
+void lbl_80114EB8(HSD_GObj* fighter_gobj)  // Ness D-Smash Hitbox Position Update //
+{
+    Fighter* fighter_data = fighter_gobj->user_data;
+    Hitbox* hitbox_data = fighter_data->x914;
+
+    if (hitbox_data->x0 != 0)
+    {
+        if (fighter_data->sa.ness.x2230 != 0.0f || fighter_data->sa.ness.x2234 != 0.0f)
+        {
+            func_8007B8A8(&fighter_data->x914, &fighter_data->sa.ness.x2230);
+        }
+    }
 }

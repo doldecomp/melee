@@ -432,8 +432,8 @@ struct SpecialAttrs_Seak {
 
 struct SpecialAttrs_Ness {
     /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
+    /* 0x2230 */ f32 x2230; // This is a float for the Yo-Yo //
+    /* 0x2234 */ f32 x2234; // Also a Yo-Yo float //
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
     /* 0x2240 */ u32 x2240;

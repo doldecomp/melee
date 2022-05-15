@@ -38,6 +38,7 @@ void lbl_80114D50(HSD_GObj* gobj);
 void lbl_80114E04(HSD_GObj* gobj);
 void lbl_80114E64(HSD_GObj* gobj);
 void lbl_80114E98(HSD_GObj* gobj);
+void lbl_80114EB8(HSD_GObj* gobj);
 void func_8011B0F8(HSD_GObj* gobj);
 
 typedef struct NessAttr
