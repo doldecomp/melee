@@ -1,15 +1,10 @@
 #include "ftness.h"
 
-
-
 void lbl_80114BF4(HSD_GObj* arg0) {
     func_80088148(arg0->user_data, 0xE0U, 0x7FU, 0x40U);
 };
 
 void* func_802AD478(HSD_GObj*, void*, s32, f32);        /* extern */
-extern void func_801148F8();
-extern f32 lbl_804D96B8;
-extern f32 lbl_804D96BC;
 
 void func_80114C24(HSD_GObj* gobj) {
     Fighter* ft;
