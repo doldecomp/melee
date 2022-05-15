@@ -51,7 +51,7 @@ void func_8011493C(HSD_GObj* gobj)
 
 f32 func_8011495C(Fighter* ft)
 {
-    return ((ftNessAttributes*)ft->x2D4_specialAttributes)->unk94;
+    return ((ftNessAttributes*)ft->x2D4_specialAttributes)->x94_PSI_MAGNET_HEALING_MULTIPLIER;
 }
 
 void func_80114968(HSD_GObj* gobj, s32 arg1)

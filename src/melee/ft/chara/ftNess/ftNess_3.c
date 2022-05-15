@@ -60,7 +60,7 @@ void lbl_80114D50(HSD_GObj* fighter_gobj) //Ness's F-Smash Animation Callback//
 {
     Fighter* fighter_data1 = fighter_gobj->user_data;
     Fighter* fighter_data2;
-    NessAttr* ness_attr;
+    ftNessAttributes* ness_attr;
     u32* ReflectDesc;
     u32 item_gobj;
 
@@ -69,7 +69,7 @@ void lbl_80114D50(HSD_GObj* fighter_gobj) //Ness's F-Smash Animation Callback//
         if (fighter_data1->x2200_ftcmd_var0 != 0)
         {
             ness_attr = fighter_data1->x2D4_specialAttributes;
-            func_8007B23C(fighter_gobj, &ness_attr->REFLECTION_BUBBLE_BONE_ID, lbl_80114BF4); // Creates reflect bubble //
+            func_8007B23C(fighter_gobj, &ness_attr->xB8_REFLECTION_BUBBLE_BONE_ID, lbl_80114BF4); // Creates reflect bubble //
         }
     }
     else if (fighter_data1->x2200_ftcmd_var0 == 0)
@@ -132,9 +132,11 @@ void lbl_80114E98(HSD_GObj* fighter_gobj) // Ness's F-Smash Collision Callback /
 
 
 void func_8007B8A8(void*, void*); // Update Hitbox Positions //
+extern f32 lbl_804D96C0;
 
 // 0x80114EB8 //
 // https://decomp.me/scratch/ppemH //
+
 void lbl_80114EB8(HSD_GObj* fighter_gobj)  // Ness D-Smash Hitbox Position Update //
 {
     Fighter* fighter_data = fighter_gobj->user_data;
@@ -147,4 +149,57 @@ void lbl_80114EB8(HSD_GObj* fighter_gobj)  // Ness D-Smash Hitbox Position Updat
             func_8007B8A8(&fighter_data->x914, &fighter_data->sa.ness.x2230);
         }
     }
-}
+};
+
+void func_80008440(void*);
+void func_80008434(void*);
+
+// 0x80114F0C
+// https://decomp.me/scratch/YUdBB //
+
+void func_80114F0C(HSD_GObj* fighter_gobj) // Ness D-Smash Hitbox Refresh Timer //
+{
+    Fighter* fighter_data = fighter_gobj->user_data;
+    Hitbox* hitbox_data;
+
+    if (fighter_data->x2200_ftcmd_var0 == 0)
+    {
+        if (fighter_data->x2344_s32 > 0)
+        {
+            fighter_data->x2344_s32 = fighter_data->x2344_s32 - 1;
+            if (fighter_data->x2344_s32 == 0)
+            {
+                func_80008440(&fighter_data->x914->x0);
+                func_80008434(&fighter_data->x914->x0);
+            }
+        }
+    }
+};
+
+
+// 0x80114F70 //
+// https://decomp.me/scratch/ylt9e //
+void func_80114F70(HSD_GObj* fighter_gobj, f32 unk_float) // Apply modified damage to D-Smash Yo-Yo hitbox after charge //
+{
+    Fighter* fighter_data = fighter_gobj->user_data;
+    ftNessAttributes* ness_attr = fighter_data->x2D4_specialAttributes;
+    f32 charge_duration;
+    f32 damage_mul;
+    f32 new_damage1;
+    f32 new_damage2;
+
+    if (unk_float != 0.0f)
+    {
+        if (fighter_data->x914->x0 == 1)
+        {
+            charge_duration = unk_float / ness_attr->xAC_SMASH_CHARGE_DURATION;
+            damage_mul = ness_attr->xB0_SMASH_CHARGE_DAMAGE_MULTIPLIER * 0.0039059999398887157f - 1.0f; // likely 1/256, try this if it absolutely doesn't match //
+            new_damage1 = damage_mul * charge_duration + 1.0f;
+            new_damage2 = fighter_data->x914->xC * new_damage1;
+
+            func_8007ABD0(&fighter_data->x914[0], new_damage2, fighter_gobj);
+        }
+    }
+};
+
+

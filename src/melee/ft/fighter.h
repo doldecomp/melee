@@ -289,7 +289,10 @@ typedef struct _FighterBone
 
 typedef struct _Hitbox {
     s32 x0;
-    u8 filler[0x134];
+    s32 x4;
+    s32 x8;
+    f32 xC;
+    u8 filler[0x128]; // slightly more detail, f32 needed for 'manual' mods to hitbox damage //
 } Hitbox;
 
 typedef struct _CameraBox
@@ -814,8 +817,6 @@ typedef struct _Fighter {
     /* 0x914 */ Hitbox x914[4];
     u8 filler_xDF4[0x1064 - 0xDF4];
     /* 0x1064 */ ftHit x1064_thrownHitbox;
-    u8 filler_x1064[0x1198 - 0x1064 - sizeof(ftHit)];
-    /* 0x1198 */ s32 x1198;
     u8 filler_x1198[0x1828 - 0x119C];
     /* 0x1828 */ s32 x1828;
     struct dmg                                                 // 0x182c
@@ -1172,6 +1173,7 @@ typedef struct _Fighter {
     };
     union {
     /* 0x2344 */ u32 x2344_stateVar2;
+    /* 0x2344 */ s32 x2344_s32;
     /* 0x2344 */ void (*x2344_callback)(HSD_GObj*);
     /* 0x2344 */ f32 x2344_f32;
     };
