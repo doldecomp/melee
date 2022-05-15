@@ -814,8 +814,6 @@ typedef struct _Fighter {
     /* 0x914 */ Hitbox x914[4];
     u8 filler_xDF4[0x1064 - 0xDF4];
     /* 0x1064 */ ftHit x1064_thrownHitbox;
-    u8 filler_x1064[0x1198 - 0x1064 - sizeof(ftHit)];
-    /* 0x1198 */ s32 x1198;
     u8 filler_x1198[0x1828 - 0x119C];
     /* 0x1828 */ s32 x1828;
     struct dmg                                                 // 0x182c
