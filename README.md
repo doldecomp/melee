@@ -1,12 +1,12 @@
-# Super Smash Bros Melee [![Discord Badge]][Discord]
+# Super Smash Bros Melee [![Badge Discord]][Discord]
 
 *A* ***WIP*** *decompilation of the* ***US*** *version.*
 
-[Contribution Guidelines](https://github.com/doldecomp/melee/blob/master/CONTRIBUTING.md)
+[Contribution Guidelines]
 
 ---
 
-## ⚠ Important
+[![Badge Important]](#)
 
 **The DOL this repository builds can be shifted!**
 
@@ -56,15 +56,21 @@
 
 Pull Requests are welcome.
 
-[Contribution Guidelines](https://github.com/doldecomp/melee/blob/master/CONTRIBUTING.md)
+[Contribution Guidelines]
 
 
 <!----------------------------------------------------------------------------->
 
 [DevKitPro]: https://devkitpro.org/wiki/Getting_Started
+[Discord]: https://discord.gg/hKx3FJJgrV
 [Python3]: https://www.python.org/
 [GCC]: https://gcc.gnu.org/
 [GC]: https://cdn.discordapp.com/attachments/727918646525165659/917185027656286218/GC_WII_COMPILERS.zip
 
-[Discord Badge]: https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white
-[Discord]: https://discord.gg/hKx3FJJgrV
+[Contribution Guidelines]: CONTRIBUTING.md
+
+
+<!---------------------------------{ Badges }---------------------------------->
+
+[Badge Important]: https://img.shields.io/badge/Important-yellow?style=for-the-badge
+[Badge Discord]: https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white
