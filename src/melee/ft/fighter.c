@@ -1020,7 +1020,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     }
 
     if ((arg2 & 0x100) == 0) {
-        fighter->x1198 = 0;
+        fighter->x1064_thrownHitbox.x134 = 0;
     }
 
     if ((arg2 & 4) == 0) {
