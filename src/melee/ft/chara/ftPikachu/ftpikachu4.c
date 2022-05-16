@@ -229,3 +229,58 @@ void func_8012642C(HSD_GObj* fighterObj) {
     fighter->x68C_transNPos.y = 
     fighter->x68C_transNPos.z = 0.0f;
 }
+
+void func_801265D4(HSD_GObj* fighterObj) {
+    func_8007CB74(fighterObj);
+}
+
+void func_801265F4(HSD_GObj* fighterObj) {
+    func_8012642C(fighterObj);
+}
+
+void func_80126614(HSD_GObj* fighterObj) {
+    Vec scale;
+    s32 unused[7];
+
+    Fighter *fighter2;
+
+    HSD_JObj *jobj;
+
+    Fighter* fighter = fighterObj->user_data;
+    CollData* collData = &fighter->x6F0_collData;
+
+    ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
+
+    if (!func_80082888(fighterObj, &pika_attr->xE0_array_start)) {
+        if ((collData->x134_envFlags & 0x3F) || (collData->x134_envFlags & 0xFC0)) {
+            func_8007D60C(fighter);
+            func_80127534_file_end(fighterObj);
+            return;
+        }
+        func_80126A2C(fighterObj);
+        return;
+    }
+
+    {  /// could be an inline?
+        CollData* collData;
+        fighter2 = fighterObj->user_data;
+        collData = &fighter2->x6F0_collData;
+        pika_attr = fighter2->x2D4_specialAttributes;
+        if (collData->x134_envFlags & 0x18000){
+            f32 angle = func_someCalcAngle_80022C30(collData->x154_groundNormal.x, collData->x154_groundNormal.y);
+            f32 angle2 = (fighter2->x2C_facing_direction * angle) + pika_attr->x68;
+            func_8007592C(fighter2, func_8007500C(fighter2, 2), angle2);
+        }
+        scale.x = pika_attr->x6C_scale.x;
+        scale.y = pika_attr->x6C_scale.y;
+        scale.z = pika_attr->x6C_scale.z;
+        jobj = fighter2->x5E8_fighterBones[func_8007500C(fighter2, 2)].x0_jobj;
+        HSD_JObjSetScale(jobj, &scale);
+    }
+
+    if ((collData->x134_envFlags & 0x3F) || (collData->x134_envFlags & 0xFC0)) {
+        func_801274AC(fighterObj);
+    }
+
+
+}
