@@ -30,7 +30,7 @@ void func_80125DE8(HSD_GObj* fighterObj) {
     fighter->x2200_ftcmd_var0 = 0;
     fighter->x2340_stateVar1 = pika_attr->x5C;
     fighter->x2348_stateVar3 = 0;
-    fighter->x2358_stateVar7_u32 = 0;
+    fighter->x2358_stateVar7_s32 = 0;
     fighter->xEC_ground_vel = 0.0f;
     fighter->x80_self_vel.y = 0.0f;
     fighter->x80_self_vel.x = 0.0f;
@@ -46,7 +46,7 @@ void func_80125E60(HSD_GObj* fighterObj) {
     fighter->x2200_ftcmd_var0 = 0;
     fighter->x2340_stateVar1 = pika_attr->x5C;
     fighter->x2348_stateVar3 = 0;
-    fighter->x2358_stateVar7_u32 = 0;
+    fighter->x2358_stateVar7_s32 = 0;
     fighter->xEC_ground_vel = 0.0f;
     fighter->x80_self_vel.y = 0.0f;
     fighter->x80_self_vel.x = 0.0f;
@@ -283,4 +283,62 @@ void func_80126614(HSD_GObj* fighterObj) {
     }
 
 
+}
+
+void func_801267C8(HSD_GObj* fighterObj) {
+    s32 unused[5];
+    BOOL bool0;
+    Fighter* fighter = fighterObj->user_data;
+    ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
+    CollData* collData = &fighter->x6F0_collData;
+
+    fighter->x2358_stateVar7_s32++;
+    if (func_800822A4(fighterObj, fighter->x2C_facing_direction < 0.0f ? -1 : 1)) {
+        Fighter* fighter2 = fighterObj->user_data;
+        ftPikachuAttributes*pika_attr2 = fighter2->x2D4_specialAttributes;
+        if (fighter2->x2358_stateVar7_s32 >= pika_attr2->x88) {
+            bool0 = 1;
+        } else if (func_8009A134(fighterObj)) {
+            bool0 = 0;
+        } else {
+            bool0 = 1;
+        }
+
+
+        if (bool0) {
+            f32 tempf = lbvector_AngleXY(&collData->x154_groundNormal, &fighter->x80_self_vel);
+            if (tempf > (0.017453292f * (90.0f + pika_attr->xA0))) {
+                func_8007D7FC(fighter);
+                func_801274AC(fighterObj);
+                return; 
+            }
+            func_80126AA4(fighterObj);
+            return;
+        }
+    }
+
+    if (!func_80081298(fighterObj)) {
+
+        if (collData->x134_envFlags & 0x6000) {
+            f32 angle = lbvector_AngleXY(&collData->x190, &fighter->x80_self_vel);
+            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
+                func_80127534_file_end(fighterObj);
+            }
+        }
+
+        if (collData->x134_envFlags & 0x3F) {
+            f32 angle = lbvector_AngleXY(&collData->x168_vec, &fighter->x80_self_vel);
+            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
+                func_80127534_file_end(fighterObj);
+            }
+        }
+
+        if (collData->x134_envFlags & 0xFC0) {
+            f32 angle = lbvector_AngleXY(&collData->x17C_vec, &fighter->x80_self_vel);
+            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
+                func_80127534_file_end(fighterObj);
+            }
+        }
+        
+    }
 }

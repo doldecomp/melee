@@ -322,9 +322,13 @@ typedef struct _CollData
     s32 filler_x150;
     /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
     /* 0x160 */ s32 x160_rightwall_index;
-    u8 filler_x160[0x174 - 0x160 - 4];
+    /* 0x164 */ s32 x164;
+    /* 0x168 */ Vec x168_vec;
     /* 0x174 */ s32 x174_leftwall_index;
-    u8 filler_x174[0x19C - 0x174 - 4];
+    /* 0x178 */ s32 x178;
+    /* 0x17C */ Vec x17C_vec;
+    u32 filler_x188[2];
+    /* 0x190 */ Vec x190;
     /* 0x19C */ s32 x19C;
 } CollData;
 
@@ -1187,7 +1191,7 @@ typedef struct _Fighter {
     };
     union {
         /* 0x2358 */ f32 x2358_stateVar7;
-        /* 0x2358 */ u32 x2358_stateVar7_u32;
+        /* 0x2358 */ s32 x2358_stateVar7_s32;
 
     };
     /* 0x235C */ f32 x235C;

@@ -3,7 +3,7 @@
 #include "sysdolphin/baselib/gobj.h"
 
 #include "melee/ft/ftcommon.h"
-
+#include "melee/lb/lbvector.h"
 
 typedef struct _ftPikachuAttributes {
     f32 x0;
@@ -36,8 +36,34 @@ typedef struct _ftPikachuAttributes {
     Vec x6C_scale;
     f32 x78;
     Vec x7C_scale;
-    u32 x1C_padding[21];
+    f32 x88;
+    f32 x8C;
+
+    f32 x90;
+    f32 x94;
+    f32 x98;
+    f32 x9C;
+
+    s32 xA0;
+    s32 xA4;
+    s32 xA8;
+    s32 xAC;
+
+    s32 xB0;
+    s32 xB4;
+    s32 xB8;
+    s32 xBC;
+
+    s32 xC0;
+    s32 xC4;
+    s32 xC8;
+    s32 xCC;
+
+    s32 xD0;
+    s32 xD4;
+    s32 xD8;
     u32 xDC;
+
     f32 xE0_array_start;  /// TODO xE0 appears to be array of 6 floats, or two vecs
     f32 xE4;
     f32 xE8;
