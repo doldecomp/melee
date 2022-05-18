@@ -163,9 +163,9 @@ void func_801262B4(HSD_GObj* fighterObj) {
             f32 tempf;
             func_8000B1CC(fighter->x5E8_fighterBones[func_8007500C(fighter, 2)].x0_jobj, 0, &vec2);
             tempf = HSD_Randf();
-            vec2.x += (6.0f * tempf) - 3.0f; 
+            vec2.x += (10.0f * tempf) - 5.0f; 
             tempf = HSD_Randf();
-            vec2.y += (6.0f * tempf) - 3.0f;
+            vec2.y += (10.0f * tempf) - 5.0f;
             ef_Spawn(0x3F4, fighterObj, &vec2);  
             fighter->x2219_flag.bits.b0 = 1;
             fighter->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
