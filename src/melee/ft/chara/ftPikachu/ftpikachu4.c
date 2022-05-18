@@ -68,7 +68,7 @@ void func_80125F78(HSD_GObj* fighterObj) {
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
     struct attr* attr = &fighter->x110_attr;
     if (fighter->x2340_stateVar1 != 0) {
-        fighter->x2340_stateVar1++;
+        fighter->x2340_stateVar1--;
     } else {
         func_8007D494(fighter, pika_attr->x64, attr->x170_TerminalVelocity);
     }
@@ -275,6 +275,18 @@ void func_80126614(HSD_GObj* fighterObj) {
 
 }
 
+BOOL get_bool0(HSD_GObj* fighterObj) {
+    Fighter* fighter2 = fighterObj->user_data;
+    ftPikachuAttributes*pika_attr2 = fighter2->x2D4_specialAttributes;
+    if (fighter2->x2358_stateVar7_s32 >= pika_attr2->x88) {
+        return 1;
+    } else if (func_8009A134(fighterObj)) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
 void func_801267C8(HSD_GObj* fighterObj) {
     s32 unused[5];
     BOOL bool0;
@@ -284,15 +296,7 @@ void func_801267C8(HSD_GObj* fighterObj) {
 
     fighter->x2358_stateVar7_s32++;
     if (func_800822A4(fighterObj, fighter->x2C_facing_direction < 0.0f ? -1 : 1)) {
-        Fighter* fighter2 = fighterObj->user_data;
-        ftPikachuAttributes*pika_attr2 = fighter2->x2D4_specialAttributes;
-        if (fighter2->x2358_stateVar7_s32 >= pika_attr2->x88) {
-            bool0 = 1;
-        } else if (func_8009A134(fighterObj)) {
-            bool0 = 0;
-        } else {
-            bool0 = 1;
-        }
+        bool0 = get_bool0(fighterObj);
 
 
         if (bool0) {
