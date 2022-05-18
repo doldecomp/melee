@@ -1275,10 +1275,6 @@ lbl_803CE2A0:
     .4byte lbl_803CE1C4
     .4byte lbl_803CE1E0
 
-
-.section .sdata
-    .balign 8
-
 .section .sdata2
     .balign 8
 
