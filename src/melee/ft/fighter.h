@@ -1180,7 +1180,10 @@ typedef struct _Fighter {
     /* 0x2344 */ void (*x2344_callback)(HSD_GObj*);
     /* 0x2344 */ f32 x2344_f32;
     };
-    /* 0x2348 */ u32 x2348_stateVar3;
+    union {
+        /* 0x2348 */ u32 x2348_stateVar3;
+        /* 0x2348 */ s32 x2348_stateVar3_s32;
+    };
     union {
         struct {
             /* 0x234C */ u32 x234C_stateVar4;
@@ -1195,7 +1198,10 @@ typedef struct _Fighter {
 
     };
     /* 0x235C */ f32 x235C;
-    /* 0x2360 */ s32 x2360;
+    union {
+        /* 0x2360 */ s32 x2360;
+        /* 0x2360 */ f32 x2360_f32;
+    };
     /* 0x2364 */ f32 x2364;
     /* 0x2368 */ u32 x2368;
     /* 0x236C */ u32 x236C;

@@ -3,6 +3,7 @@
 #include "sysdolphin/baselib/gobj.h"
 
 #include "melee/ft/ftcommon.h"
+#include "melee/ft/ftcliffcommon.h"
 #include "melee/lb/lbvector.h"
 
 typedef struct _ftPikachuAttributes {
@@ -30,7 +31,7 @@ typedef struct _ftPikachuAttributes {
     f32 x54;
     f32 x58;
     s32 x5C;
-    f32 x60;
+    s32 x60;
     f32 x64;
     f32 x68;
     Vec x6C_scale;
@@ -45,11 +46,11 @@ typedef struct _ftPikachuAttributes {
     f32 x9C;
 
     s32 xA0;
-    s32 xA4;
+    f32 xA4;
     s32 xA8;
-    s32 xAC;
+    f32 xAC;
 
-    s32 xB0;
+    f32 xB0;
     s32 xB4;
     s32 xB8;
     s32 xBC;
@@ -100,3 +101,10 @@ void func_80125D28_file_end(HSD_GObj* fighterObj);
 ///pika4
 void func_80126084(HSD_GObj* fighterObj);
 void func_801260E4(HSD_GObj* fighterObj);
+void func_80126A2C(HSD_GObj* fighterObj);
+void func_80126AA4(HSD_GObj* fighterObj);
+void func_80126C0C(HSD_GObj* fighterObj);
+void func_80126E1C(HSD_GObj* fighterObj);
+void func_8012744C(HSD_GObj* fighterObj);
+void func_801274AC(HSD_GObj* fighterObj);
+void func_80127534_file_end(HSD_GObj* fighterObj);
