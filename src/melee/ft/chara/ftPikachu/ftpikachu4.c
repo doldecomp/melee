@@ -222,9 +222,11 @@ void func_801265D4(HSD_GObj* fighterObj) {
     func_8007CB74(fighterObj);
 }
 
+#pragma dont_inline on
 void func_801265F4(HSD_GObj* fighterObj) {
     func_8012642C(fighterObj);
 }
+#pragma dont_inline off
 
 void func_80126614(HSD_GObj* fighterObj) {
     Vec scale;
@@ -331,6 +333,7 @@ void func_801267C8(HSD_GObj* fighterObj) {
     }
 }
 
+#pragma dont_inline on
 void func_80126A2C(HSD_GObj* fighterObj) {
     s32 unused[2];
     Fighter* fighter = fighterObj->user_data;
@@ -339,6 +342,7 @@ void func_80126A2C(HSD_GObj* fighterObj) {
     fighter->x2223_flag.bits.b4 = 1;
     func_8012642C(fighterObj);
 }
+#pragma dont_inline off
 
 void func_80126AA4(HSD_GObj* fighterObj) {
     Vec scale;
