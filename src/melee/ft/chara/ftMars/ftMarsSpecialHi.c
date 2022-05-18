@@ -208,7 +208,7 @@ void lbl_8013873C(HSD_GObj* gobj) {
 void lbl_80138884(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     MarsAttributes* attr = ft->x2D4_specialAttributes;
-    func_800D5CB0(gobj, 0, attr, attr->x2C);
+    func_800D5CB0(gobj, 0, attr->x2C);
 }
 
 

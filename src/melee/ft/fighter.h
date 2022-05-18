@@ -322,9 +322,13 @@ typedef struct _CollData
     s32 filler_x150;
     /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
     /* 0x160 */ s32 x160_rightwall_index;
-    u8 filler_x160[0x174 - 0x160 - 4];
+    /* 0x164 */ s32 x164;
+    /* 0x168 */ Vec x168_vec;
     /* 0x174 */ s32 x174_leftwall_index;
-    u8 filler_x174[0x19C - 0x174 - 4];
+    /* 0x178 */ s32 x178;
+    /* 0x17C */ Vec x17C_vec;
+    u32 filler_x188[2];
+    /* 0x190 */ Vec x190;
     /* 0x19C */ s32 x19C;
 } CollData;
 
@@ -1170,21 +1174,32 @@ typedef struct _Fighter {
     };
     union {
     /* 0x2344 */ u32 x2344_stateVar2;
+    /* 0x2344 */ s32 x2344_stateVar2_s32;
     /* 0x2344 */ void (*x2344_callback)(HSD_GObj*);
     /* 0x2344 */ f32 x2344_f32;
     };
-    /* 0x2348 */ u32 x2348_stateVar3;
     union {
-    struct {
-    /* 0x234C */ u32 x234C_stateVar4;
-    /* 0x2350 */ u32 x2350_stateVar5;
-    /* 0x2354 */ f32 x2354_stateVar6;
+        /* 0x2348 */ u32 x2348_stateVar3;
+        /* 0x2348 */ s32 x2348_stateVar3_s32;
     };
-    /* 0x234C */ Vec3 x234C_pos;
+    union {
+        struct {
+            /* 0x234C */ u32 x234C_stateVar4;
+            /* 0x2350 */ u32 x2350_stateVar5;
+            /* 0x2354 */ f32 x2354_stateVar6;
+        };
+        /* 0x234C */ Vec3 x234C_pos;
     };
-    /* 0x2358 */ f32 x2358_stateVar7;
+    union {
+        /* 0x2358 */ f32 x2358_stateVar7;
+        /* 0x2358 */ s32 x2358_stateVar7_s32;
+
+    };
     /* 0x235C */ f32 x235C;
-    /* 0x2360 */ s32 x2360;
+    union {
+        /* 0x2360 */ s32 x2360;
+        /* 0x2360 */ f32 x2360_f32;
+    };
     /* 0x2364 */ f32 x2364;
     /* 0x2368 */ u32 x2368;
     /* 0x236C */ u32 x236C;

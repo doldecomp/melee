@@ -117,7 +117,7 @@ void func_80124704(HSD_GObj* fighterObj) {
     *pika_attr = *other_attr;
 
     if (1.0f != fighter->x34_scale.y) {
-        pika_attr->xE0 *= fighter->x34_scale.y;
+        pika_attr->xE0_array_start *= fighter->x34_scale.y;
         pika_attr->xE4 *= fighter->x34_scale.y;
         pika_attr->xE8 *= fighter->x34_scale.y;
         pika_attr->xEC *= fighter->x34_scale.y;
