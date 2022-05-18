@@ -458,7 +458,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->dmg.x1908 = -1;
 	fighter->dmg.x190C = 0;
 	fighter->x2227_flag.bits.b4 = 0;
-	fighter->x2138_smashSinceHitbox = -1.0f;
+	fighter->x2114_SmashAttr.x2138_smashSinceHitbox = -1.0f;
 	fighter->x213C = -1;
 	fighter->x2227_flag.bits.b5 = 0;
 	fighter->x2228_flag.bits.b1 = 0;
@@ -496,7 +496,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighterObj) {
     func_80081938(fighterObj);
 
 
-    if (fighter1->x2135 == -1)
+    if (fighter1->x2114_SmashAttr.x2135 == -1)
     {
         if (func_80082A68(fighterObj) && !fighter1->x2229_b6)
             func_8007D6A4(fighter1);
@@ -829,7 +829,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata)
     fighter->x2227_flag.bits.b0 = 0;
     fighter->x2224_flag.bits.b0 = 0;
 
-    fighter->x2135 = -1;
+    fighter->x2114_SmashAttr.x2135 = -1;
     fighter->x2184 = NULL;
 
 
@@ -1020,7 +1020,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     }
 
     if ((arg2 & 0x100) == 0) {
-        fighter->x1198 = 0;
+        fighter->x1064_thrownHitbox.x134 = 0;
     }
 
     if ((arg2 & 4) == 0) {
@@ -1138,7 +1138,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
 
     func_800DEEA8(fighterObj);
 
-    fighter->x2138_smashSinceHitbox = -1.0f;
+    fighter->x2114_SmashAttr.x2138_smashSinceHitbox = -1.0f;
     fighter->x2224_flag.bits.b4 = 0;
 
     if ((arg2 & 0x40000) == 0) {
@@ -1720,8 +1720,8 @@ void Fighter_8006A360(HSD_GObj* fighterObj) {
                 }
             }
 
-            if (fighter->x2138_smashSinceHitbox != -1.0f) {
-                fighter->x2138_smashSinceHitbox++;
+            if (fighter->x2114_SmashAttr.x2138_smashSinceHitbox != -1.0f) {
+                fighter->x2114_SmashAttr.x2138_smashSinceHitbox++;
             }
 
             if (fighter->dmg.x18ac_time_since_hit != -1) {

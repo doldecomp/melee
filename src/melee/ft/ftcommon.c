@@ -2072,8 +2072,8 @@ void func_80080474(Fighter* fp)
 
 void func_80080484(Fighter* fp)
 {
-    if (fp->x2138_smashSinceHitbox == -1) {
-        fp->x2138_smashSinceHitbox = 0;
+    if (fp->x2114_SmashAttr.x2138_smashSinceHitbox == -1) {
+        fp->x2114_SmashAttr.x2138_smashSinceHitbox = 0;
     }
 }
 

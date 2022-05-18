@@ -308,28 +308,55 @@ typedef struct _CameraBox
 
 typedef struct _CollData
 {
-    u8 filler_x0[0x40];
-    /* 0x40 */ u32 x40;
-    /* 0x44 */ u32 x44;
-    u8 filler_x48[0xA8-0x48];
-    /* 0xA8 */ f32 xA8;
-    /* 0xAC */ f32 xAC;
-    /* 0xB0 */ f32 xB0;
-    /* 0xB4 */ Vec2 xB4_ecbCurrCorrect_right;
-    /* 0xBC */ Vec2 xBC_ecbCurrCorrect_left;
+    u8 filler_x0[0x4];
+    Vec3 x4_vec;
+    u8 padding_x10[0x1C - 0x10];
+    Vec3 x1C_vec;
+    u8 padding_x28[0x34 - 0x28];
+    u8 x34_flags_0 : 1;
+    u8 x34_flags_1 : 4;
+    u8 x34_flags_2 : 3;
+    u8 padding_x35[0x40 - 0x35];
+    u32 x40;
+    u32 x44;
+    u8 filler_x48[0xA8 - 0x48];
+    f32 xA8;
+    f32 xAC;
+    f32 xB0;
+    Vec2 xB4_ecbCurrCorrect_right;
+    Vec2 xBC_ecbCurrCorrect_left;
     u8 filler_xBC[0x130 - 0xBC - 8];
-    /* 0x130 */ u32 x130;
-    /* 0x134 */ s32 x134_envFlags;
+    u32 x130;
+    s32 x134_envFlags;
     u8 filler_x138[0x14C - 0x138];
-    /* 0x14C */ s32 x14C_groundIndex;
+    s32 x14C_groundIndex;
     s32 filler_x150;
-    /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
-    /* 0x160 */ s32 x160_rightwall_index;
+    Vec3 x154_groundNormal; // Points out of the ground surface //
+    s32 x160_rightwall_index;
     u8 filler_x160[0x174 - 0x160 - 4];
-    /* 0x174 */ s32 x174_leftwall_index;
+    s32 x174_leftwall_index;
     u8 filler_x174[0x19C - 0x174 - 4];
-    /* 0x19C */ s32 x19C;
+    s32 x19C;
 } CollData;
+
+typedef struct _SmashAttr {
+    s32 x2114_state;                        // 0x2114 0 = none, 1 = pre-charge, 2 = charging, 3 = release
+    f32 x2118_frames;                       // 0x2118 number of frames fighter has charged for
+    f32 x211C_holdFrame;                    // 0x211c frame that charge begins/ends
+    f32 x2120_damageMul;                    // 0x2120 damage multiplier
+    f32 x2124_frameSpeedMul;                // 0x2124 speed multiplier?
+    s32 x2128;                              // 0x2128
+    s8 x212C;                               // x212C
+    s8 x212D;                               // x212D
+    s8 x212E;                               // 0x212E
+    s8 x212F;                               // 0x212F
+    s32 x2130_sfxBool;                      // 0x2130 bool for smash sfx?
+    s8 x2134_vibrateFrame;                  // 0x2134
+    s8 x2135;                               // 0x2135
+    s8 x2136;                               // 0x2136
+    s8 x2137;                               // 0x2137
+    f32 x2138_smashSinceHitbox;                  // 0x2138
+} SmashAttr;
 
 typedef struct _ftHit
 {
@@ -434,11 +461,9 @@ struct SpecialAttrs_Seak {
 };
 
 struct SpecialAttrs_Ness {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ f32 x2230; // This is a float for the Yo-Yo //
-    /* 0x2234 */ f32 x2234; // Also a Yo-Yo float //
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
+    /* 0x222C */ void* x222C;
+    /* 0x2230 */ Vec3 x2230;
+    /* 0x223C */ f32 x223C;
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ void* x2248;
@@ -1003,11 +1028,7 @@ typedef struct _Fighter {
     /* 0x210C */ u8 x210C_walljumpInputTimer;
     u8 filler_x210C[3];
     /* 0x2110 */ f32 x2110_walljumpWallSide;
-    /* 0x2114 */ s32 x2114;
-    u8 filler_x2114[0x2135 - 0x2118];
-    /* 0x2135 */ s8 x2135;
-    s16 filler_x2136;
-    /* 0x2138 */ f32 x2138_smashSinceHitbox;
+    /* 0x2114 */ SmashAttr x2114_SmashAttr;
     /* 0x213C */ s32 x213C;
     /* 0x2140 */ f32 x2140;
     /* 0x2144 */ s32 x2144;

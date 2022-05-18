@@ -9,6 +9,10 @@
 
 #include "melee/ft/fighter.h"
 
+#include "melee/it/item.h"
+
+
+
 void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1);
 void ftNess_OnLoad(HSD_GObj* gobj);
 void func_801148F8(HSD_GObj* gobj);
@@ -31,6 +35,13 @@ void lbl_80114E98(HSD_GObj* gobj);
 void lbl_80114EB8(HSD_GObj* gobj);
 void func_80114F0C(HSD_GObj* gobj);
 void func_80114F70(HSD_GObj* gobj, f32 unk_float);
+s32 func_80114FF8(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float_unk);
+void func_80115114(HSD_GObj* gobj, Point3d* arg1);
+void func_801151EC(HSD_GObj* gobj);
+void func_801152D0(HSD_GObj* gobj, f32 arg8);
+s32 func_80115404(HSD_GObj* gobj);
+void func_80115534(HSD_GObj* gobj);
+void func_8011556C(HSD_GObj* gobj);
 void func_8011B0F8(HSD_GObj* gobj);
 
 typedef struct ftNessAttributes
@@ -98,5 +109,14 @@ typedef struct ftNessAttributes
 	f32 xD4_REFLECTED_PROJECTILE_SPEED_MULTIPLIER;
 	u32 xD8_REFLECTOR_BEHAVIOR;
 }ftNessAttributes;
+
+typedef struct itYoyoAttributes
+{
+	u8 padding_x0[0x24];
+	f32 x24_YOYO_RELEASE_VEL_X;
+	u8 padding_x2C[0x2C - 0x24];
+	f32 x30_YOYO_RELEASE_VEL_Y;
+	u8 padding_x30[0x5C - 0x30];
+}itYoyoAttributes;
 
 #endif
