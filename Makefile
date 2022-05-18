@@ -9,6 +9,7 @@ GENERATE_MAP ?= 0
 NON_MATCHING ?= 0
 
 VERBOSE ?= 0
+MAX_ERRORS ?= 0     # 0 = no maximum
 
 ifeq ($(VERBOSE),0)
   QUIET := @
@@ -88,7 +89,7 @@ LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
   LDFLAGS += -map $(MAP)
 endif
-CFLAGS  = -cwd source -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES)
+CFLAGS  = -cwd source -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES) -maxerrors $(MAX_ERRORS)
 ifeq ($(NON_MATCHING),1)
 CFLAGS += -DNON_MATCHING
 endif
