@@ -974,10 +974,19 @@ typedef struct _Fighter {
     u8 filler_x203C[0x2064 - 0x2044];
     /* 0x2064 */ s32 x2064_ledgeCooldown;
     u8 filler_x2068[0x2070 - 0x2068];
-    /* 0x2068 */ union {
+    /* 0x2070 */ union {
                     struct {
                         UnkFlagStruct x2070;
-                        UnkFlagStruct x2071;
+                        union {
+                            UnkFlagStruct x2071;
+                            struct {
+                                u8 b0_3: 4;
+                                u8 b4: 1;
+                                u8 b5: 1;
+                                u8 b6: 1;
+                                u8 b7: 1;
+                            } x2071_alt;
+                        };
                         UnkFlagStruct x2072;
                         u8 x2073;
                     };
