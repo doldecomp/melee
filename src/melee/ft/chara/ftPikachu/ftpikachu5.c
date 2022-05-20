@@ -121,7 +121,112 @@ void func_801277AC(HSD_GObj* fighterObj) {
             vec3.x = 0.0f;
             vec3.y = pika_attr->xC0;
             fighter->x2340_stateVar1 = func_802B1DF8(fighterObj, &vec1, &vec3, pika_attr->xD4, pika_attr->xD8, pika_attr->xDC);
-    
         }
+    }
+}
+
+void func_801278BC(HSD_GObj* fighterObj) {
+
+    Fighter* fighter = fighterObj->user_data;
+    fighter->x2200_ftcmd_var0 = 0;
+    *((u32*)(&fighter->x2210_ThrowFlags)) = 0;
+    fighter->x2344_stateVar2 = 1;
+    fighter->x2340_stateVar1 = 0;
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
+    func_8006EBA4(fighterObj);
+}
+
+void func_80127924(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    fighter->x2200_ftcmd_var0 = 0;
+    *((u32*)(&fighter->x2210_ThrowFlags)) = 0;
+    fighter->x2344_stateVar2 = 1;
+    fighter->x2340_stateVar1 = 0;
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
+    func_8006EBA4(fighterObj);
+}
+
+void func_8012798C(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D7FC(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x167, 0xC4C5086, 0, fighter->x894, 1.0f, 0.0f);
+}
+
+void func_801279EC(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D5D4(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x16B, 0xC4C5086, 0, fighter->x894, 1.0f, 0.0f);
+    func_8007D468(fighter);
+}
+
+void func_80127A54(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D7FC(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x168, 0xC4C588E, 0, fighter->x894, 1.0f, 0.0f);
+    fighter->cb.x21DC_callback_OnTakeDamage = &func_8012779C;
+    fighter->cb.x21BC_callback_Accessory4 = &func_801277AC;
+}
+
+void func_80127ACC(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D5D4(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x16C, 0xC4C588E, 0, fighter->x894, 1.0f, 0.0f);
+    fighter->cb.x21DC_callback_OnTakeDamage = &func_8012779C;
+    fighter->cb.x21BC_callback_Accessory4 = &func_801277AC;
+    func_8007D468(fighter);
+}
+
+void func_80127B4C(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D7FC(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x169, 0xC4C508E, 0, fighter->x894, 1.0f, 0.0f);
+}
+
+void func_80127BAC(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D5D4(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x16D, 0xC4C508E, 0, fighter->x894, 1.0f, 0.0f);
+    func_8007D468(fighter);
+}
+
+void func_80127C14(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D7FC(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x16A, 0xC4C5086, 0, fighter->x894, 1.0f, 0.0f);
+}
+
+void func_80127C74(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_8007D5D4(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x16E, 0xC4C5086, 0, fighter->x894, 1.0f, 0.0f);
+}
+
+void func_80127CDC(HSD_GObj* fighterObj) {
+    s32 unused[4];
+
+    if (!func_8006F238(fighterObj)) {
+        Fighter *fighter_copy;
+        Fighter *fighter = fighterObj->user_data;
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x168, 0x800, 0, 0.0f, 1.0f, 0.0f);
+        fighter_copy = fighterObj->user_data;
+        *((u32*)(&fighter_copy->x2210_ThrowFlags)) = 0;
+        fighter_copy->cb.x21DC_callback_OnTakeDamage = &func_8012779C;
+        fighter->cb.x21BC_callback_Accessory4 = &func_801277AC;
+
+    }
+}
+
+void func_80127D60(HSD_GObj* fighterObj) {
+    s32 unused[4];
+
+    if (!func_8006F238(fighterObj)) {
+        Fighter *fighter_copy;
+        Fighter *fighter = fighterObj->user_data;
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x16C, 0x800, 0, 0.0f, 1.0f, 0.0f);
+        fighter_copy = fighterObj->user_data;
+        *((u32*)(&fighter_copy->x2210_ThrowFlags)) = 0;
+        fighter_copy->cb.x21DC_callback_OnTakeDamage = &func_8012779C;
+        fighter->cb.x21BC_callback_Accessory4 = &func_801277AC;
+
     }
 }
