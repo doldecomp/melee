@@ -1128,3 +1128,41 @@ void lbl_80116420(HSD_GObj* fighter_gobj)   // Ness's Up Smash Post-Charge Colli
         fighter_data2->sa.ness.x222C = 0U;
     }
 }
+
+itYoyoAttributes* GetYoyoAttr(HSD_GObj* item_gobj) // Inline, may not be necessary //
+{
+    Item* item_data = item_gobj->user_data;
+    itYoyoAttributes* yoyo_attr = item_data->xC4_data->x4_ext_attr;
+    return yoyo_attr;
+}
+
+// 0x80116494 //
+// https://decomp.me/scratch/kR50M //
+void func_80116494(HSD_GObj* fighter_gobj)  // Ness's Up Smash Post-Charge Action State handler //
+
+{
+    Vec3 sp34;
+    Fighter* fighter_data2;
+    Fighter* fighter_data;
+    itYoyoAttributes* yoyo_attr;
+    HSD_GObj* yoyo_GObj;
+
+    fighter_data = fighter_gobj->user_data;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x158, 0x40000, 0, 13.0f, 1.0f, 0.0f);
+    func_8006EBA4(fighter_gobj);
+    fighter_data2 = GetFighterData(fighter_gobj);
+    fighter_data2 = GetFighterData(fighter_gobj);
+    fighter_data2->x2340_stateVar1 = 0xE;
+    if ((yoyo_GObj = fighter_data2->sa.ness.x222C) != 0U) {
+        yoyo_attr = GetYoyoAttr(yoyo_GObj);
+        sp34 = lbl_803B75A4;
+        func_802C0010(yoyo_GObj, &sp34);
+        fighter_data2->sa.ness.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
+    }
+
+    func_80088510(fighter_data2, 0x334AA, 0x7F, 0x40);
+    func_80114F70(fighter_data2->x2114_SmashAttr.x2118_frames, fighter_gobj);
+    fighter_data->x2222_flag.bits.b2 = 1;
+    fighter_data->cb.x21C0_callback_OnGiveDamage = lbl_80115C74;
+    fighter_data->cb.x21BC_callback_Accessory4 = lbl_80114EB8;
+}

@@ -80,7 +80,6 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_1.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_2.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_3.c.o\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_3.s.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_4.s.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_5.s.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_6.s.o\
