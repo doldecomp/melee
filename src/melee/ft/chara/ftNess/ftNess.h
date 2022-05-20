@@ -11,63 +11,6 @@
 
 #include "melee/it/item.h"
 
-// Ness functions // 
-
-void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1);
-void ftNess_OnLoad(HSD_GObj* gobj);
-void func_801148F8(HSD_GObj* gobj);
-void func_8011493C(HSD_GObj* gobj);
-f32 func_8011495C(Fighter* ft);
-void func_80114968(HSD_GObj* gobj, s32 arg1);
-void func_80114A48(HSD_GObj* gobj);
-void func_80114A90(HSD_GObj* gobj);
-void func_80114AD8(HSD_GObj* gobj, s32 arg1);
-void func_80114B2C(HSD_GObj* gobj);
-void func_80114B6C(HSD_GObj* gobj);
-void func_80114BF4(HSD_GObj* gobj);
-s32 func_80114CC0(HSD_GObj* gobj);
-void func_80114CF4(HSD_GObj* gobj);
-void func_80114D34(HSD_GObj* gobj);
-void lbl_80114D50(HSD_GObj* gobj);
-void lbl_80114E04(HSD_GObj* gobj);
-void lbl_80114E64(HSD_GObj* gobj);
-void lbl_80114E98(HSD_GObj* gobj);
-void lbl_80114EB8(HSD_GObj* gobj);
-void func_80114F0C(HSD_GObj* gobj);
-void func_80114F70(f32 unk_float, HSD_GObj* gobj);
-s32 func_80114FF8(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float_unk);
-void func_80115114(HSD_GObj* gobj, Point3d* arg1);
-void func_801151EC(HSD_GObj* gobj);
-void func_801152D0(HSD_GObj* gobj, f32 arg8);
-s32 func_80115404(HSD_GObj* gobj);
-void func_80115534(HSD_GObj* gobj);
-void func_8011556C(HSD_GObj* gobj);
-void func_80115680(HSD_GObj* gobj);
-s32 func_80115784(HSD_GObj* gobj);
-void func_8011599C(HSD_GObj* gobj);
-void func_80115A08(HSD_GObj* gobj);
-void func_80115AC4(HSD_GObj* gobj);
-void func_80115AF8(HSD_GObj* gobj);
-void lbl_80115B50(HSD_GObj* gobj);
-void func_80115B80(HSD_GObj* gobj);
-void func_80115BB0(HSD_GObj* gobj);
-void lbl_80115C74(HSD_GObj* gobj);
-void lbl_80115C9C(HSD_GObj* gobj);
-void lbl_80115E74(HSD_GObj* gobj);
-void lbl_80115EB8(HSD_GObj* gobj);
-void lbl_80115F14(HSD_GObj* gobj);
-void lbl_80115F88(HSD_GObj* gobj);
-void lbl_801160B4(HSD_GObj* gobj);
-void lbl_801160E4(HSD_GObj* gobj);
-void lbl_80116104(HSD_GObj* gobj);
-void func_80116178(HSD_GObj* gobj);
-void lbl_8011620C(HSD_GObj* gobj);
-void lbl_801162B0(HSD_GObj* gobj);
-void lbl_801162E0(HSD_GObj* gobj);
-void lbl_80116420(HSD_GObj* gobj);
-void func_80116494(HSD_GObj* gobj);
-void func_8011B0F8(HSD_GObj* gobj);
-
 typedef struct ftNessAttributes
 {
 	//Neutral B
@@ -133,5 +76,67 @@ typedef struct ftNessAttributes
 	f32 xD4_REFLECTED_PROJECTILE_SPEED_MULTIPLIER;
 	u32 xD8_REFLECTOR_BEHAVIOR;
 }ftNessAttributes;
+
+// Ness functions // 
+
+void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1);
+void ftNess_OnLoad(HSD_GObj* gobj);
+void func_801148F8(HSD_GObj* gobj);
+void func_8011493C(HSD_GObj* gobj);
+f32 func_8011495C(Fighter* ft);
+void func_80114968(HSD_GObj* gobj, s32 arg1);
+void func_80114A48(HSD_GObj* gobj);
+void func_80114A90(HSD_GObj* gobj);
+void func_80114AD8(HSD_GObj* gobj, s32 arg1);
+void func_80114B2C(HSD_GObj* gobj);
+void func_80114B6C(HSD_GObj* gobj);
+void func_80114BF4(HSD_GObj* gobj);
+s32 func_80114CC0(HSD_GObj* gobj);
+void func_80114CF4(HSD_GObj* gobj);
+void func_80114D34(HSD_GObj* gobj);
+void lbl_80114D50(HSD_GObj* gobj);
+void lbl_80114E04(HSD_GObj* gobj);
+void lbl_80114E64(HSD_GObj* gobj);
+void lbl_80114E98(HSD_GObj* gobj);
+void lbl_80114EB8(HSD_GObj* gobj);
+void func_80114F0C(HSD_GObj* gobj);
+void func_80114F70(f32 unk_float, HSD_GObj* gobj);
+s32 func_80114FF8(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float_unk);
+void func_80115114(HSD_GObj* gobj, Point3d* arg1);
+void func_801151EC(HSD_GObj* gobj);
+void func_801152D0(HSD_GObj* gobj, f32 arg8);
+s32 func_80115404(HSD_GObj* gobj);
+void func_80115534(HSD_GObj* gobj);
+void func_8011556C(HSD_GObj* gobj);
+void func_80115680(HSD_GObj* gobj);
+s32 func_80115784(HSD_GObj* gobj);
+void func_8011599C(HSD_GObj* gobj);
+void func_80115A08(HSD_GObj* gobj);
+void func_80115AC4(HSD_GObj* gobj);
+void func_80115AF8(HSD_GObj* gobj);
+void lbl_80115B50(HSD_GObj* gobj);
+void func_80115B80(HSD_GObj* gobj);
+void func_80115BB0(HSD_GObj* gobj);
+void lbl_80115C74(HSD_GObj* gobj);
+Fighter* GetFighterData(HSD_GObj* gobj);
+void lbl_80115C9C(HSD_GObj* gobj);
+void lbl_80115E74(HSD_GObj* gobj);
+void lbl_80115EB8(HSD_GObj* gobj);
+HSD_GObj* GetFighterData_x222C(HSD_GObj* gobj);
+void lbl_80115F14(HSD_GObj* gobj);
+ftNessAttributes* GetNessAttr(Fighter* ft);
+HSD_GObj* GetYoyoGObj(Fighter* ft);
+void lbl_80115F88(HSD_GObj* gobj);
+void lbl_801160B4(HSD_GObj* gobj);
+void lbl_801160E4(HSD_GObj* gobj);
+void lbl_80116104(HSD_GObj* gobj);
+void func_80116178(HSD_GObj* gobj);
+void lbl_8011620C(HSD_GObj* gobj);
+void lbl_801162B0(HSD_GObj* gobj);
+void lbl_801162E0(HSD_GObj* gobj);
+void lbl_80116420(HSD_GObj* gobj);
+itYoyoAttributes* GetYoyoAttr(HSD_GObj* gobj); // Inline, may not be necessary //
+void func_80116494(HSD_GObj* gobj);
+void func_8011B0F8(HSD_GObj* gobj);
 
 #endif

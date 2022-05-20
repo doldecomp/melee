@@ -272,8 +272,8 @@ s32 func_80114FF8(HSD_GObj* fighter_gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float
 
 // 0x80115114 //
 // https://decomp.me/scratch/TMsSU //
-void func_80115114(HSD_GObj* fighter_gobj, Point3d* arg1) {
-
+void func_80115114(HSD_GObj* fighter_gobj, Point3d* arg1) 
+{
     Point3d sp20;
     Point3d sp14;
     Fighter* temp_r31;
@@ -765,8 +765,6 @@ void lbl_80115C74(HSD_GObj* fighter_gobj) // Initiates rehit timer for Yo-Yo hit
     ness_attr = fighter_data->x2D4_specialAttributes;
     fighter_data->x2344_stateVar2 = (s32)ness_attr->xB4_SMASH_CHARGE_REHIT_RATE;
 }
-
-void func_80116178(HSD_GObj* fighter_gobj); // Up Smash Charge - Action State Handler //
 
 Fighter* GetFighterData(HSD_GObj* fighter_gobj)    // 0x80115C9C literally won't match under any circumstances unless this inline is used to get Fighter*. //
 {
