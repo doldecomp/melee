@@ -331,12 +331,16 @@ typedef struct _CollData
     u8 filler_x138[0x14C - 0x138];
     s32 x14C_groundIndex;
     s32 filler_x150;
-    Vec3 x154_groundNormal; // Points out of the ground surface //
-    s32 x160_rightwall_index;
-    u8 filler_x160[0x174 - 0x160 - 4];
-    s32 x174_leftwall_index;
-    u8 filler_x174[0x19C - 0x174 - 4];
-    s32 x19C;
+    /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
+    /* 0x160 */ s32 x160_rightwall_index;
+    /* 0x164 */ s32 x164;
+    /* 0x168 */ Vec x168_vec;
+    /* 0x174 */ s32 x174_leftwall_index;
+    /* 0x178 */ s32 x178;
+    /* 0x17C */ Vec x17C_vec;
+    u32 filler_x188[2];
+    /* 0x190 */ Vec x190;
+    /* 0x19C */ s32 x19C;
 } CollData;
 
 typedef struct _SmashAttr {
