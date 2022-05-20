@@ -230,3 +230,50 @@ void func_80127D60(HSD_GObj* fighterObj) {
 
     }
 }
+
+///needs cleanup
+void func_80127DE4(HSD_GObj* fighterObj) {
+    s32 unused[4];
+    Fighter* temp_r31;
+    Fighter* temp_r3;
+
+    temp_r3 = fighterObj->user_data;
+    if ((temp_r3->x2344_stateVar2_s32 == 3) || temp_r3->x2200_ftcmd_var0) {
+        temp_r3->cb.x21DC_callback_OnTakeDamage= 0;
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x16A, 0, 0, 0.0f, 1.0f, 0.0f);
+        return;
+    }
+    if (func_8012765C(fighterObj)) {
+        temp_r31 = fighterObj->user_data;
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x169, 0, 0, 0.0f, 1.0f, 0.0f);
+        temp_r31->x2200_ftcmd_var0 = 0;
+        temp_r31->cb.x21DC_callback_OnTakeDamage = 0;
+        temp_r3 = fighterObj->user_data;
+        efAsync_Spawn(fighterObj, &temp_r3->x60C, 0, 0x4C0, temp_r31->x5E8_fighterBones[0].x0_jobj);
+    }
+}
+
+///needs cleanup
+void func_80127EC0(HSD_GObj* fighterObj) {
+    s32 unused[8];
+    Fighter* temp_r31;
+    Fighter* temp_r3;
+
+    temp_r3 = fighterObj->user_data;
+    if ((temp_r3->x2344_stateVar2_s32 == 3) || temp_r3->x2200_ftcmd_var0) {
+        temp_r3->cb.x21DC_callback_OnTakeDamage= 0;
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);
+        return;
+    }
+    if (func_8012765C(fighterObj)) {
+        ftPikachuAttributes* pika_attr;
+        temp_r31 = fighterObj->user_data;
+        pika_attr = temp_r31->x2D4_specialAttributes;
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x169, 0, 0, 0.0f, 1.0f, 0.0f);
+        temp_r31->x2200_ftcmd_var0 = 0;
+        temp_r31->cb.x21DC_callback_OnTakeDamage = 0;
+        temp_r31->x80_self_vel.y = (f32) pika_attr->xB4;
+        temp_r3 = fighterObj->user_data;
+        efAsync_Spawn(fighterObj, &temp_r3->x60C, 0, 0x4C0, temp_r31->x5E8_fighterBones[0].x0_jobj);
+    }
+} 

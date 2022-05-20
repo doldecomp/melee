@@ -1177,7 +1177,7 @@ void func_8006737C(s8);
 // ? func_8006744C(?);
 void func_80067624();
 void func_80067688(void*);
-void efAsync_Spawn(struct _HSD_GObj*, void*, u32, u32, u32, void*, ...);
+void efAsync_Spawn(struct _HSD_GObj*, void*, u32, u32, void*, ...);
 // ? func_80067980(?);
 // ? Fighter_800679B0(?);
 // ? Fighter_FirstInitialize_80067A84(?);
