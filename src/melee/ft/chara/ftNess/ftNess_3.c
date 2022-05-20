@@ -165,10 +165,10 @@ void func_80114F0C(HSD_GObj* fighter_gobj) // Ness D-Smash Hitbox Refresh Timer 
 
     if (fighter_data->x2200_ftcmd_var0 == 0)
     {
-        if (fighter_data->x2344_s32 > 0)
+        if (fighter_data->x2344_stateVar2_s32 > 0)
         {
-            fighter_data->x2344_s32 = fighter_data->x2344_s32 - 1;
-            if (fighter_data->x2344_s32 == 0)
+            fighter_data->x2344_stateVar2_s32 = fighter_data->x2344_stateVar2_s32 - 1;
+            if (fighter_data->x2344_stateVar2_s32 == 0)
             {
                 func_80008440(&fighter_data->x914->x0);
                 func_80008434(&fighter_data->x914->x0);
