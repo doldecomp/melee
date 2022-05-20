@@ -11,7 +11,7 @@
 
 #include "melee/it/item.h"
 
-
+// Ness functions // 
 
 void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1);
 void ftNess_OnLoad(HSD_GObj* gobj);
@@ -34,7 +34,7 @@ void lbl_80114E64(HSD_GObj* gobj);
 void lbl_80114E98(HSD_GObj* gobj);
 void lbl_80114EB8(HSD_GObj* gobj);
 void func_80114F0C(HSD_GObj* gobj);
-void func_80114F70(HSD_GObj* gobj, f32 unk_float);
+void func_80114F70(f32 unk_float, HSD_GObj* gobj);
 s32 func_80114FF8(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float_unk);
 void func_80115114(HSD_GObj* gobj, Point3d* arg1);
 void func_801151EC(HSD_GObj* gobj);
@@ -42,6 +42,30 @@ void func_801152D0(HSD_GObj* gobj, f32 arg8);
 s32 func_80115404(HSD_GObj* gobj);
 void func_80115534(HSD_GObj* gobj);
 void func_8011556C(HSD_GObj* gobj);
+void func_80115680(HSD_GObj* gobj);
+s32 func_80115784(HSD_GObj* gobj);
+void func_8011599C(HSD_GObj* gobj);
+void func_80115A08(HSD_GObj* gobj);
+void func_80115AC4(HSD_GObj* gobj);
+void func_80115AF8(HSD_GObj* gobj);
+void lbl_80115B50(HSD_GObj* gobj);
+void func_80115B80(HSD_GObj* gobj);
+void func_80115BB0(HSD_GObj* gobj);
+void lbl_80115C74(HSD_GObj* gobj);
+void lbl_80115C9C(HSD_GObj* gobj);
+void lbl_80115E74(HSD_GObj* gobj);
+void lbl_80115EB8(HSD_GObj* gobj);
+void lbl_80115F14(HSD_GObj* gobj);
+void lbl_80115F88(HSD_GObj* gobj);
+void lbl_801160B4(HSD_GObj* gobj);
+void lbl_801160E4(HSD_GObj* gobj);
+void lbl_80116104(HSD_GObj* gobj);
+void func_80116178(HSD_GObj* gobj);
+void lbl_8011620C(HSD_GObj* gobj);
+void lbl_801162B0(HSD_GObj* gobj);
+void lbl_801162E0(HSD_GObj* gobj);
+void lbl_80116420(HSD_GObj* gobj);
+void func_80116494(HSD_GObj* gobj);
 void func_8011B0F8(HSD_GObj* gobj);
 
 typedef struct ftNessAttributes
@@ -95,9 +119,9 @@ typedef struct ftNessAttributes
 	f32 xA4_PSI_MAGNET_ABSORPTION_BUBBLE_OFFSET_Z;
 	f32 xA8_PSI_MAGNET_ABSORPTION_BUBBLE_SIZE;
 	//Yo-yo
-	f32 xAC_SMASH_CHARGE_DURATION;
-	f32 xB0_SMASH_CHARGE_DAMAGE_MULTIPLIER;
-	f32 xB4_SMASH_CHARGE_REHIT_RATE;
+	f32 xAC_SMASH_CHARGE_DURATION;	// Amount of frames Yo-Yo can be charged //
+	f32 xB0_SMASH_CHARGE_DAMAGE_MULTIPLIER;	// Charged Yo-Yo damage multiplier; 350 by default, identical to the Smash Charge standard //
+	f32 xB4_SMASH_CHARGE_REHIT_RATE; // Amount of frames needed for the Yo-Yo to hit again after colliding with a hurtbox //
 	//Baseball Bat
 	u32 xB8_REFLECTION_BUBBLE_BONE_ID;
 	u32 xBC_MAXIMUM_DAMAGE_REFLECTABLE;
@@ -109,14 +133,5 @@ typedef struct ftNessAttributes
 	f32 xD4_REFLECTED_PROJECTILE_SPEED_MULTIPLIER;
 	u32 xD8_REFLECTOR_BEHAVIOR;
 }ftNessAttributes;
-
-typedef struct itYoyoAttributes
-{
-	u8 padding_x0[0x24];
-	f32 x24_YOYO_RELEASE_VEL_X;
-	u8 padding_x2C[0x2C - 0x24];
-	f32 x30_YOYO_RELEASE_VEL_Y;
-	u8 padding_x30[0x5C - 0x30];
-}itYoyoAttributes;
 
 #endif
