@@ -285,3 +285,85 @@ void func_80128000(HSD_GObj* fighterObj) {
         Fighter_ActionStateChange_800693AC(fighterObj, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);
     }
 }
+
+void func_80128050(HSD_GObj* fighterObj) {
+    if (!func_8006F238(fighterObj)) {
+        func_8008A2BC(fighterObj);
+    }
+}
+
+void func_8012808C(HSD_GObj* fighterObj) {
+    if (!func_8006F238(fighterObj)) {
+        func_800CC730(fighterObj);
+    }
+}
+
+void func_801280C8(HSD_GObj* fighterObj) {
+    func_80084F3C(fighterObj);
+}
+
+void func_801280E8(HSD_GObj* fighterObj) {
+    func_80084EEC(fighterObj);
+}
+
+void func_80128108(HSD_GObj* fighterObj) {
+    func_80084F3C(fighterObj);
+}
+
+void func_80128128(HSD_GObj* fighterObj) {
+    func_80084EEC(fighterObj);
+}
+
+void func_80128148(HSD_GObj* fighterObj) {
+    func_80084F3C(fighterObj);
+}
+
+void func_80128168(HSD_GObj* fighterObj) {
+    s32 unused;
+    Fighter* fighter = fighterObj->user_data;
+    ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
+    f32 pika_B8 = pika_attr->xB8;
+    f32 terminal_velocity = fighter->x110_attr.x170_TerminalVelocity;
+    func_8007D494(fighter, pika_B8, terminal_velocity);
+    func_8007CF58(fighter);
+}
+
+void func_801281AC(HSD_GObj* fighterObj) {
+    func_80084F3C(fighterObj);
+}
+
+void func_801281CC(HSD_GObj* fighterObj) {
+    func_80084EEC(fighterObj);
+}
+
+void func_801281EC(HSD_GObj* fighterObj) {
+    func_8008403C(fighterObj, &func_801279EC);
+}
+
+void func_80128214(HSD_GObj* fighterObj) {
+    func_80082C74(fighterObj, &func_8012798C);
+}
+
+void func_8012823C(HSD_GObj* fighterObj) {
+    func_8008403C(fighterObj, &func_80127ACC);
+}
+
+void func_80128264(HSD_GObj* fighterObj) {
+    func_80082C74(fighterObj, &func_80127A54);
+}
+
+void func_8012828C(HSD_GObj* fighterObj) {
+    func_8008403C(fighterObj, &func_80127BAC);
+}
+
+void func_801282B4(HSD_GObj* fighterObj) {
+    func_80082C74(fighterObj, &func_80127B4C);
+}
+
+void func_801282DC(HSD_GObj* fighterObj) {
+    func_8008403C(fighterObj, &func_80127C74);
+}
+
+void func_80128304(HSD_GObj* fighterObj) {
+    func_80082C74(fighterObj, &func_80127C14);
+}

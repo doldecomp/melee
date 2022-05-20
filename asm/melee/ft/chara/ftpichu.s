@@ -202,7 +202,7 @@ lbl_803D1EA8:
     .4byte func_80128000
     .4byte NULL
     .4byte func_80128168
-    .4byte lbl_801282B4
+    .4byte func_801282B4
     .4byte func_800761C8
     .4byte 0x0000013F
     .4byte 0x00340414

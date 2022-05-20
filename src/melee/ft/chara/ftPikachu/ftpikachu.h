@@ -52,7 +52,7 @@ typedef struct _ftPikachuAttributes {
 
     f32 xB0;
     f32 xB4;
-    s32 xB8;
+    f32 xB8;
     f32 xBC;
 
     f32 xC0;
