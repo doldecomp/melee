@@ -976,18 +976,20 @@ typedef struct _Fighter {
     u8 filler_x2068[0x2070 - 0x2068];
     /* 0x2070 */ union {
                     struct {
-                        UnkFlagStruct x2070;
-                        union {
-                            UnkFlagStruct x2071;
-                            struct {
-                                u8 b0_3: 4;
-                                u8 b4: 1;
-                                u8 b5: 1;
-                                u8 b6: 1;
-                                u8 b7: 1;
-                            } x2071_alt;
-                        };
-                        UnkFlagStruct x2072;
+                        s8 x2070;
+
+                        u8 x2071_b0_3: 4;
+                        u8 x2071_b4: 1;
+                        u8 x2071_b5: 1;
+                        u8 x2071_b6: 1;
+                        u8 x2071_b7: 1;
+                        
+                        u8 x2072_b0_3: 4;
+                        u8 x2072_b4: 1;
+                        u8 x2072_b5: 1;
+                        u8 x2072_b6: 1;
+                        u8 x2072_b7: 1;
+
                         u8 x2073;
                     };
                     s32 x2070_int;

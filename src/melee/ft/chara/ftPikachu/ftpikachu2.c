@@ -167,7 +167,7 @@ void func_80124DC8(HSD_GObj* fighterObj) {
     pika_attr_1C = pika_attr->x1C;
     if (fighter_x673_byte < pika_attr_1C) {
         fighter->x2340_stateVar1 = pika_attr->x20;
-        fighter->x2072.bits.b4 = 1;
+        fighter->x2072_b4 = 1;
     } else {
         fighter->x2340_stateVar1 = 0;
     }    

@@ -3,7 +3,7 @@
 s32 func_801275CC(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
 
-    s32 value = fighter->x2071_alt.b0_3;
+    s32 value = fighter->x2071_b0_3;
 
     switch (value) {
         case 1: 
