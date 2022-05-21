@@ -1467,7 +1467,7 @@ ft_OnItemPickup:
     .4byte func_8011B740
     .4byte func_8011ED38
     .4byte func_8011ED38
-    .4byte func_801244B8
+    .4byte ftPikachu_UnkHeldItemAction_801244B8
     .4byte func_80128464
     .4byte func_8012BACC
     .4byte func_8013C6EC
@@ -1503,7 +1503,7 @@ ft_OnItemInvisible:
     .4byte func_8011B820
     .4byte func_8011EE18
     .4byte func_8011EE18
-    .4byte func_80124598
+    .4byte ftPikachu_80124598
     .4byte func_80128544
     .4byte func_8012BBAC
     .4byte func_8013C798
@@ -1611,7 +1611,7 @@ ft_OnItemCatch:
     .4byte func_8011B740
     .4byte func_8011ED38
     .4byte func_8011ED38
-    .4byte func_801244B8
+    .4byte ftPikachu_UnkHeldItemAction_801244B8
     .4byte func_80128464
     .4byte func_8012BACC
     .4byte func_8013C6EC

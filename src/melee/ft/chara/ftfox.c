@@ -76,10 +76,24 @@ void func_800E5718(HSD_GObj* gobj, s32 arg1)
     }
 }
 
-void func_800E576C(Fighter* ft) 
+void ftFox_OnLoadForFalco(Fighter* ft) 
 {
-    ftFoxAttributes* sA2 = (ftFoxAttributes*)ft->x2D8_specialAttributes2;
-    ftFoxAttributes* ext_attr = (ftFoxAttributes*)ft->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
-    ft->x2D4_specialAttributes = sA2;
+    PUSH_ATTRS(ft, ftFoxAttributes);
+}
+
+void ftFox_OnLoad(HSD_GObj* gobj) {
+
+    Fighter* ft = gobj->user_data;
+    void** item_list = ft->x10C_ftData->x48_items;
+
+    ft->x2224_flag.bits.b7 = 1;
+
+    PUSH_ATTRS(ft, ftFoxAttributes);
+    
+    {
+        ftFoxAttributes *fox_attr = ft->x2D4_specialAttributes;
+        func_8026B3F8(item_list[0], fox_attr->x1C);
+        func_8026B3F8(item_list[1], fox_attr->x20);
+        func_8026B3F8(item_list[2], 0x38U);
+    }
 }

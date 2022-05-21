@@ -73,7 +73,7 @@ void ftFalco_OnLoad(HSD_GObj* gobj)
     int unused;
 
     ft->x2224_flag.bits.b7 = 1;
-    func_800E576C(ft);
+    ftFox_OnLoadForFalco(ft);
 
     sa2 = ft->x2D4_specialAttributes;
     func_8026B3F8(items[0], sa2[7]);

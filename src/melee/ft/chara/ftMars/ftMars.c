@@ -81,9 +81,7 @@ void func_80136474(Fighter* ft) {
 // https://decomp.me/scratch/9UJHY
 void ftMars_OnLoad(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    MarsAttributes* sA2 = ft->x2D8_specialAttributes2;
-    *(MarsAttributes*)ft->x2D8_specialAttributes2 = *(MarsAttributes*)ft->x10C_ftData->ext_attr;
-    ft->x2D4_specialAttributes = sA2;
+    PUSH_ATTRS(ft, MarsAttributes);
 }
 
 // 801364E8 001330C8

@@ -9,7 +9,7 @@ void ftPichu_OnLoad(HSD_GObj* gobj)
     ftData* ftdata = ft->x10C_ftData;
     void** items = ftdata->x48_items;
     ft->x2224_flag.bits.b7 = 1;
-    func_801243AC(ft);
+    ftPikachu_OnLoadForPichu(ft);
     attrs = ft->x2D4_specialAttributes;
     func_8026B3F8(items[0], attrs->xDC);
     func_8026B3F8(items[1], attrs->x14);

@@ -2739,14 +2739,14 @@ void func_800DF0D0();
 // ? func_800E1428(?);
 // ? func_800E18B8(?);
 // ? func_800E198C(?);
-void func_800E2AAC(struct _Fighter*); // UnclePunch map file: FighterOnLoad_Ganondorf
+void ftCFalcon_OnLoadForGanon(struct _Fighter*); // UnclePunch map file: FighterOnLoad_Ganondorf
 void func_800E2B40(struct _HSD_GObj*);
 // ? func_800E3278(?);
 // ? func_800E3EAC(?);
 // ? func_800E4D7C(?);
 // ? func_800E526C(?);
 // ? func_800E5534(?);
-// ? func_800E576C(?);
+// ? ftFox_OnLoadForFalco(?);
 void func_800E5858(struct _HSD_GObj*);
 // ? func_800E5970(?);
 // ? func_800E59BC(?);
@@ -3174,7 +3174,7 @@ void func_80117E60(struct _HSD_GObj*);
 // ? func_80123B10(?);
 // ? func_80123B3C(?);
 // ? func_80123BF0(?);
-// ? func_801243AC(?);
+// ? Pika_CopyAttributes_801243AC(?);
 void func_80124704(struct _HSD_GObj*);
 // ? func_801250FC(?);
 // ? func_8012515C(?);

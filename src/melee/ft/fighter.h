@@ -1297,4 +1297,13 @@ void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
 void Fighter_8006DA4C(HSD_GObj* fighterObj);
 void Fighter_Unload_8006DABC(Fighter* fighter);
 
+#define PUSH_ATTRS(ft, attributeName)                                           \
+    do {                                                                    \
+        void* backup = (ft)->x2D8_specialAttributes2;                      \
+        attributeName *src = (attributeName*)(ft)->x10C_ftData->ext_attr;  \
+        void* *attr = &(ft)->x2D4_specialAttributes;                       \
+        *(attributeName *)(ft)->x2D8_specialAttributes2 = *src;            \
+        *attr = backup;                                                      \
+    } while(0)
+
 #endif

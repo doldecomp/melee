@@ -1,57 +1,40 @@
 #include "ftpikachu.h"
 
-void func_801243AC(Fighter* fighter) {
-    ftPikachuAttributes* pika_attr = fighter->x2D8_specialAttributes2;
-    ftPikachuAttributes* ext_attr = fighter->x10C_ftData->ext_attr;
-    *pika_attr = *ext_attr;
-    fighter->x2D4_specialAttributes = pika_attr;
+void ftPikachu_OnLoadForPichu(Fighter* fighter) {
+    PUSH_ATTRS(fighter, ftPikachuAttributes);
 }
 
 
 void ftPikachu_OnLoad(HSD_GObj* fighterObj) {
-  void **item_list;
-  ftData *fighter_data;
-  ftPikachuAttributes *ext_attr;
-  ftPikachuAttributes *pika_attr_;
+    Fighter* fighter = fighterObj->user_data;
+    void** item_list = fighter->x10C_ftData->x48_items;
 
-  s32 unused[2];
+    PUSH_ATTRS(fighter, ftPikachuAttributes);
 
-  ftPikachuAttributes *pika_attr;
-
-  Fighter *fighter = fighterObj->user_data;
-    
-  fighter_data = fighter->x10C_ftData;
-  pika_attr_ = fighter->x2D8_specialAttributes2;
-    
-  item_list = fighter_data->x48_items;
-  ext_attr = fighter_data->ext_attr;
-
-  *pika_attr_ = *ext_attr;
-
-  fighter->x2D4_specialAttributes = pika_attr_;
-  pika_attr = fighter->x2D4_specialAttributes;
-    
-  func_8026B3F8(item_list[0], pika_attr->xDC);
-  func_8026B3F8(item_list[1], pika_attr->x14);
-  func_8026B3F8(item_list[2], pika_attr->x18);
+    {
+        ftPikachuAttributes *pika_attr = fighter->x2D4_specialAttributes;
+        func_8026B3F8(item_list[0], pika_attr->xDC);
+        func_8026B3F8(item_list[1], pika_attr->x14);
+        func_8026B3F8(item_list[2], pika_attr->x18);
+    }
 
 }
 
-void ftPikachu_OnDeath(HSD_GObj* arg0, s32 arg1, s32 arg2) {
-    func_80074A4C(arg0, 0, 0);
-    func_80074A4C(arg0, 1, 0);
+void ftPikachu_OnDeath(HSD_GObj* fighterObj) {
+    s32 unused[2];
+    func_80074A4C(fighterObj, 0, 0);
+    func_80074A4C(fighterObj, 1, 0);
 }
 
-void func_801244B8(HSD_GObj* fighterObj, s32 arg1) {
-    s32 temp_r3;
+void ftPikachu_UnkHeldItemAction_801244B8(HSD_GObj* fighterObj, s32 arg1) {
     s32 unused;
     Fighter *fighter;
 
     fighter = fighterObj->user_data;
-    if (func_8026B2B4(fighter->x1974_heldItem) == 0) {
-        temp_r3 = func_8026B320(fighter->x1974_heldItem);
+    if (!func_8026B2B4(fighter->x1974_heldItem)) {
+        s32 result = func_8026B320(fighter->x1974_heldItem);
 
-        switch (temp_r3) {
+        switch (result) {
  
             case 1:
                 func_80070FB4(fighterObj, 0, 1);
@@ -74,7 +57,7 @@ void func_801244B8(HSD_GObj* fighterObj, s32 arg1) {
     }
 }
 
-void func_80124598(HSD_GObj *fighterObj, s32 arg1) {
+void ftPikachu_80124598(HSD_GObj *fighterObj, s32 arg1) {
     Fighter* fighter = fighterObj->user_data;
     if (func_8026B2B4(fighter->x1974_heldItem) == 0) {
         func_80070CC4(fighterObj, 0);

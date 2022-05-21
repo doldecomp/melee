@@ -78,16 +78,10 @@ void func_800E2A58(HSD_GObj* fighter_gobj, s32 unk1)
     }
 }
 
-// func_800E2AAC
+// ftCFalcon_OnLoadForGanon
 // https://decomp.me/scratch/9AwRw
-void func_800E2AAC(Fighter* arg0) {
-    CaptainAttr* sA2;
-    CaptainAttr* ext_attr;
-
-    sA2 = arg0->x2D8_specialAttributes2;
-    ext_attr = arg0->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
-    arg0->x2D4_specialAttributes = sA2;
+void ftCFalcon_OnLoadForGanon(Fighter* fighter) {
+    PUSH_ATTRS(fighter, CaptainAttr);
 }
 
 // func_800E2AEC
@@ -95,17 +89,13 @@ void func_800E2AAC(Fighter* arg0) {
 // https://decomp.me/scratch/aZ4Wn
 void ftCFalcon_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fighter_data;
+    Fighter* fighter;
     CaptainAttr *sA2;
 
-    fighter_data = (Fighter*)fighter_gobj->user_data;
-    fighter_data->x2224_flag.bits.b7 = 1;
+    fighter = (Fighter*)fighter_gobj->user_data;
+    fighter->x2224_flag.bits.b7 = 1;
 
-    sA2 = (CaptainAttr*)fighter_data->x2D8_specialAttributes2;
-
-    *(CaptainAttr*)fighter_data->x2D8_specialAttributes2 = *(CaptainAttr*)fighter_data->x10C_ftData->ext_attr;
-
-    fighter_data->x2D4_specialAttributes = sA2;
+    PUSH_ATTRS(fighter, CaptainAttr);
 }
 
 // func_800E2B40
