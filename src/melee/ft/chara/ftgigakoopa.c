@@ -42,7 +42,7 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     ftData* ftdata = ft->x10C_ftData;
     void** items = ftdata->x48_items;
 
-    func_80132A84(ft);
+    ftKoopa_OnLoadForGKoopa(ft);
     func_8026B3F8(items[0], It_Kind_KoopaFlame);
 
     ft->x2226_flag.bits.b1 = 1;

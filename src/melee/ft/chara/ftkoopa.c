@@ -33,16 +33,12 @@ void func_80132A64(HSD_GObj* gobj) {
     return;
 }
 
-void func_80132A84(Fighter* ft) {
-    ftKoopaAttributes* sA2 = (ftKoopaAttributes*)ft->x2D8_specialAttributes2;
-    ftKoopaAttributes* ext_attr = (ftKoopaAttributes*)ft->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
-    ft->x2D4_specialAttributes = sA2;
+void ftKoopa_OnLoadForGKoopa(Fighter* ft) {
+    PUSH_ATTRS(ft, ftKoopaAttributes);
 }
 
 void ftKoopa_OnLoad(HSD_GObj* gobj) {
     ftData* ftDataInfo; 
-    ftKoopaAttributes *sA2, *sA, *ext_attr;
     void** items;
     Fighter* ft;
     
@@ -50,14 +46,7 @@ void ftKoopa_OnLoad(HSD_GObj* gobj) {
     ftDataInfo = ft->x10C_ftData;
     items = ftDataInfo->x48_items;
    
-    sA2 = (ftKoopaAttributes*)ft->x2D8_specialAttributes2;
-    ext_attr = (ftKoopaAttributes*)ft->x10C_ftData->ext_attr;
-
-    *sA2 = *ext_attr;
-
-    (ftKoopaAttributes*)ft->x2D4_specialAttributes = sA2;
-
-    sA = (ftKoopaAttributes*)ft->x2D4_specialAttributes;    
+    PUSH_ATTRS(ft, ftKoopaAttributes);  
 
     func_8026B3F8(items[0], It_Kind_KoopaFlame);
 

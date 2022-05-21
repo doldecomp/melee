@@ -283,7 +283,8 @@ typedef struct _FighterBone
 {
   /* 0x0 */ HSD_JObj* x0_jobj;
   /* 0x4 */ HSD_JObj* x4_jobj2; // used for interpolation
-  u32 data_filler[2];
+  /* 0x5 */ UnkFlagStruct flags;
+  /* 0x6 */ u8 filler_x6[7];
 } FighterBone;
 
 
