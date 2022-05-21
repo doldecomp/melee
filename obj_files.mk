@@ -70,7 +70,11 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftmario.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmario.s.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftfalcon.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_1.c.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_1.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_2.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_3.s.o\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_4.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftfox.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftlink.s.o 		\
@@ -91,6 +95,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu1.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu2.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu3.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu4.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu5.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o 		\

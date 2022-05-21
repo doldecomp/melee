@@ -1255,10 +1255,10 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     fighter->x2225_flag.bits.b3 = new_action_state->x9_flags.bits.b0;
 
     if (fighter->x2226_flag.bits.b4 != 0U) {
-        if (fighter->x2071.bits.b5 != 0U) {
+        if (fighter->x2071_b5 != 0U) {
             func_800C8B2C(fighter, 0x7E, 0);
         }
-        if (fighter->x2071.bits.b6 != 0U) {
+        if (fighter->x2071_b6 != 0U) {
             func_800C8B2C(fighter, 0x7F, 0);
         }
     }

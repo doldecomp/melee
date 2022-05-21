@@ -1000,11 +1000,22 @@ typedef struct _Fighter {
     u8 filler_x203C[0x2064 - 0x2044];
     /* 0x2064 */ s32 x2064_ledgeCooldown;
     u8 filler_x2068[0x2070 - 0x2068];
-    /* 0x2068 */ union {
+    /* 0x2070 */ union {
                     struct {
-                        UnkFlagStruct x2070;
-                        UnkFlagStruct x2071;
-                        UnkFlagStruct x2072;
+                        s8 x2070;
+
+                        u8 x2071_b0_3: 4;
+                        u8 x2071_b4: 1;
+                        u8 x2071_b5: 1;
+                        u8 x2071_b6: 1;
+                        u8 x2071_b7: 1;
+                        
+                        u8 x2072_b0_3: 4;
+                        u8 x2072_b4: 1;
+                        u8 x2072_b5: 1;
+                        u8 x2072_b6: 1;
+                        u8 x2072_b7: 1;
+
                         u8 x2073;
                     };
                     s32 x2070_int;
@@ -1194,6 +1205,7 @@ typedef struct _Fighter {
     /* 0x2338 */ Vec2 x2338;
     union {
     /* 0x2340 */ s32 x2340_stateVar1;
+    /* 0x2340 */ u32 x2340_stateVar1_u32;
     /* 0x2340 */ f32 x2340_f32;
     };
     union {
@@ -1202,18 +1214,28 @@ typedef struct _Fighter {
     /* 0x2344 */ void (*x2344_callback)(HSD_GObj*);
     /* 0x2344 */ f32 x2344_f32;
     };
-    /* 0x2348 */ u32 x2348_stateVar3;
     union {
-    struct {
-    /* 0x234C */ u32 x234C_stateVar4;
-    /* 0x2350 */ u32 x2350_stateVar5;
-    /* 0x2354 */ f32 x2354_stateVar6;
+        /* 0x2348 */ u32 x2348_stateVar3;
+        /* 0x2348 */ s32 x2348_stateVar3_s32;
     };
-    /* 0x234C */ Vec3 x234C_pos;
+    union {
+        struct {
+            /* 0x234C */ u32 x234C_stateVar4;
+            /* 0x2350 */ u32 x2350_stateVar5;
+            /* 0x2354 */ f32 x2354_stateVar6;
+        };
+        /* 0x234C */ Vec3 x234C_pos;
     };
-    /* 0x2358 */ f32 x2358_stateVar7;
+    union {
+        /* 0x2358 */ f32 x2358_stateVar7;
+        /* 0x2358 */ s32 x2358_stateVar7_s32;
+
+    };
     /* 0x235C */ f32 x235C;
-    /* 0x2360 */ s32 x2360;
+    union {
+        /* 0x2360 */ s32 x2360;
+        /* 0x2360 */ f32 x2360_f32;
+    };
     /* 0x2364 */ f32 x2364;
     /* 0x2368 */ u32 x2368;
     /* 0x236C */ u32 x236C;
