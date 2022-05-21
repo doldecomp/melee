@@ -1,4 +1,4 @@
-#include "ftness.h"
+#include "ftNess.h"
 
 #include "melee/lb/lbvector.h"
 
