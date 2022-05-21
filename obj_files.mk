@@ -77,6 +77,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_4.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftfox.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftlink.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftlink.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o 	\
