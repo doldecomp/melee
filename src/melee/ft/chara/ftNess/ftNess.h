@@ -154,6 +154,9 @@ void lbl_801169BC(HSD_GObj* gobj);
 void lbl_801169EC(HSD_GObj* gobj);
 void lbl_80116A9C(HSD_GObj* gobj);
 void func_80116AE8(HSD_GObj* gobj);
+void lbl_80116B70(HSD_GObj* gobj);
+void func_80116C94(HSD_GObj* gobj);
+void func_80116D04(HSD_GObj* gobj);
 void func_8011B0F8(HSD_GObj* gobj);
 
 #endif
