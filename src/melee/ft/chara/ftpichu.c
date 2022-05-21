@@ -101,7 +101,7 @@ void func_8014A154(HSD_GObj* gobj, s32 arg1)
 
 void func_8014A1A8(HSD_GObj* gobj)
 {
-    func_80124704(gobj);
+    ftPikachu_ScaleYAttributesArray_80124704(gobj);
 }
 
 void func_8014A1C8(HSD_GObj* gobj)

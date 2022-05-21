@@ -3175,7 +3175,7 @@ void func_80117E60(struct _HSD_GObj*);
 // ? func_80123B3C(?);
 // ? func_80123BF0(?);
 // ? Pika_CopyAttributes_801243AC(?);
-void func_80124704(struct _HSD_GObj*);
+void ftPikachu_ScaleYAttributesArray_80124704(struct _HSD_GObj*);
 // ? func_801250FC(?);
 // ? func_8012515C(?);
 // ? func_80125414(?);
