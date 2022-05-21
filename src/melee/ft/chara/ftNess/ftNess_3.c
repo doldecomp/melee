@@ -1,7 +1,5 @@
 #include "ftNess.h"
 
-#include "melee/lb/lbvector.h"
-
 // 0x80114CC0
 // https://decomp.me/scratch/E8Nsh //
 s32 func_80114CC0(HSD_GObj* fighter_gobj) // Check if Ness is in F-Smash + has Baseball Bat item //

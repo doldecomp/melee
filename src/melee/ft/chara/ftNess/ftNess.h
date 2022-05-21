@@ -7,6 +7,8 @@
 
 #include "sysdolphin/baselib/gobj.h"
 
+#include "melee/lb/lbvector.h"
+
 #include "melee/ft/fighter.h"
 
 #include "melee/it/item.h"
@@ -137,6 +139,21 @@ void lbl_801162E0(HSD_GObj* gobj);
 void lbl_80116420(HSD_GObj* gobj);
 itYoyoAttributes* GetYoyoAttr(HSD_GObj* gobj); // Inline, may not be necessary //
 void func_80116494(HSD_GObj* gobj);
+void func_8011659C(HSD_GObj* gobj);
+void lbl_80116638(HSD_GObj* gobj);
+void lbl_801166D4(HSD_GObj* gobj);
+void lbl_80116718(HSD_GObj* gobj);
+void lbl_8011674C(HSD_GObj* gobj);
+void lbl_80116798(HSD_GObj* gobj);
+void lbl_80116828(HSD_GObj* gobj);
+void lbl_80116858(HSD_GObj* gobj);
+void lbl_80116878(HSD_GObj* gobj);
+void func_801168C4(HSD_GObj* gobj);
+void lbl_80116958(HSD_GObj* gobj);
+void lbl_801169BC(HSD_GObj* gobj);
+void lbl_801169EC(HSD_GObj* gobj);
+void lbl_80116A9C(HSD_GObj* gobj);
+void func_80116AE8(HSD_GObj* gobj);
 void func_8011B0F8(HSD_GObj* gobj);
 
 #endif
