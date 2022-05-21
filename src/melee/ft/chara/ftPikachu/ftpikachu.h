@@ -80,6 +80,7 @@ void ftPikachu_OnLoadForPichu(Fighter* fighter);
 void ftPikachu_OnLoad(HSD_GObj* fighterObj);
 void ftPikachu_OnDeath(HSD_GObj* fighterObj);
 void ftPikachu_UnkHeldItemAction_801244B8(HSD_GObj* fighterObj, s32 arg1);
+void ftPikachu_80124598(HSD_GObj *fighterObj);
 
 ///pika2
 void func_80124DC8(HSD_GObj* fighterObj);

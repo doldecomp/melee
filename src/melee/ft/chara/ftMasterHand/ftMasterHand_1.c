@@ -8,18 +8,20 @@ void ftMasterhand_OnDeath(HSD_GObj* gobj) {
 // 8014FC6C 0014C84C
 // https://decomp.me/scratch/Tbp9G
 void ftMasterhand_OnLoad(HSD_GObj* gobj) {
-    MasterHandAttributes* attr;
-    MasterHandAttributes* ftData_attr;
-    Fighter* ft;
-    void** items;
-    s32 unused[2];
 
+    ftData* ftdata;
+    MasterHandAttributes* ftData_attr;
+    void** items;
+    Fighter* ft;
+
+    
     ft = gobj->user_data;
-    attr = ft->x2D8_specialAttributes2;
-    ftData_attr = ft->x10C_ftData->ext_attr;
-    items = ft->x10C_ftData->x48_items;
-    *attr = *ftData_attr;
-    ft->x2D4_specialAttributes = attr;
+    ftdata = ft->x10C_ftData;
+    ftData_attr = ftdata->ext_attr;
+    items = ftdata->x48_items;
+
+    PUSH_ATTRS(ft, MasterHandAttributes);
+    
     func_8015BDB4(gobj);
     func_8026B3F8(items[0], 0x7D);
     func_8026B3F8(items[1], 0x7E);
@@ -49,3 +51,4 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj) {
     ft->x1A98 = 1;
     func_8015BD24(ft->x1A98, &ft->sa.masterhand.x223C, ft->sa.masterhand.x2238, ftData_attr->x18, ftData_attr->x20, ftData_attr->x1C);
 }
+

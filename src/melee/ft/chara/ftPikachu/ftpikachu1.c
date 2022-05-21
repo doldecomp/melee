@@ -57,7 +57,7 @@ void ftPikachu_UnkHeldItemAction_801244B8(HSD_GObj* fighterObj, s32 arg1) {
     }
 }
 
-void ftPikachu_80124598(HSD_GObj *fighterObj, s32 arg1) {
+void ftPikachu_80124598(HSD_GObj *fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     if (func_8026B2B4(fighter->x1974_heldItem) == 0) {
         func_80070CC4(fighterObj, 0);
