@@ -1,4 +1,4 @@
-#include "ftness.h"
+#include "ftNess.h"
 
 void lbl_80114BF4(HSD_GObj* arg0) {
     func_80088148(arg0->user_data, 0xE0U, 0x7FU, 0x40U);
