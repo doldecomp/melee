@@ -468,7 +468,7 @@ struct SpecialAttrs_Ness {
     /* 0x222C */ void* x222C;
     /* 0x2230 */ Vec3 x2230;
     /* 0x223C */ f32 x223C;
-    /* 0x2240 */ u32 x2240;
+    /* 0x2240 */ void* x2240;
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ void* x2248;
     /* 0x224C */ u32 x224C;
