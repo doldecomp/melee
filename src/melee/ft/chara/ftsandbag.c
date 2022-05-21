@@ -10,7 +10,7 @@ void ftSandbag_OnDeath(void) {
 }
 
 void ftSandbag_OnLoad(HSD_GObj* gobj) {
-    Fighter* fighter/*r3*/ = gobj->user_data;
+    Fighter* fighter = gobj->user_data;
 
 
     PUSH_ATTRS(fighter, ftSandbagAttributes);

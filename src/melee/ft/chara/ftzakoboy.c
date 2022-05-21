@@ -1,5 +1,6 @@
 #include "ftzakoboy.h"
 
+
 void ftZakoBoy_OnDeath(HSD_GObj* gobj)
 {
     func_80074A4C(gobj, 0, 0);
@@ -61,12 +62,11 @@ void func_8014F388(HSD_GObj* gobj, s32 arg1)
 
 void ftZakoBoy_OnLoad(HSD_GObj* gobj)
 {
-    s32* sa2;
-
     Fighter* ft = gobj->user_data;
-    sa2 = ft->x2D8_specialAttributes2;
-    *sa2 = *(u32*)ft->x10C_ftData->ext_attr;
-    ft->x2D4_specialAttributes = sa2;
+
+    PUSH_ATTRS(ft, ftZakoboyAttributes);
+
+
 }
 
 void func_8014F3FC(HSD_GObj* gobj)

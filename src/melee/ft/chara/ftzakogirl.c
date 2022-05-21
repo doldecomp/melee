@@ -7,12 +7,8 @@ void ftZakoGirl_OnDeath(HSD_GObj* gobj)
 
 void ftZakoGirl_OnLoad(HSD_GObj* gobj)
 {
-    s32* sa2;
-
     Fighter* ft = gobj->user_data;
-    sa2 = ft->x2D8_specialAttributes2;
-    *sa2 = *(s32*)ft->x10C_ftData->ext_attr;
-    ft->x2D4_specialAttributes = sa2;
+    PUSH_ATTRS(ft, s32);
 }
 
 void func_8014F460(HSD_GObj* gobj, s32 arg1)
