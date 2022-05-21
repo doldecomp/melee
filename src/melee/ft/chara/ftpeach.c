@@ -2,12 +2,6 @@
 
 #include <melee/it/id.h>
 
-typedef struct _PairStruct {
-    f32 unk0;
-    f32 unk4;
-    u8 padding[0xB8];
-} PairStruct;
-
 void ftPeach_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft;
@@ -44,13 +38,13 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
-    PairStruct* extAtrrs = (PairStruct*)ft->x10C_ftData->ext_attr;
+    ftPeachAttributes* extAtrrs = ft->x10C_ftData->ext_attr;
     void** items = ft->x10C_ftData->x48_items;
 
     extAtrrs->unk0 = func_8001E8F8(func_80085E50(ft, 18));
     extAtrrs->unk4 = func_8001E8F8(func_80085E50(ft, 19));
 
-    PUSH_ATTRS(ft, PairStruct);
+    PUSH_ATTRS(ft, ftPeachAttributes);
     
     func_8026B3F8(items[0], It_Kind_PeachUnk);
     func_8026B3F8(items[1], It_Kind_PeachTurnip);
