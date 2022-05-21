@@ -923,7 +923,7 @@ void func_800876B4(HSD_GObj* gobj)
 BOOL func_800876D4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x2114 == 2) {
+    if (fp->x2114_SmashAttr.x2114_state == 2) {
         return TRUE;
     } else {
         return FALSE;

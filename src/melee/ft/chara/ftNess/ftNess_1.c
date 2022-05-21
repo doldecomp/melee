@@ -51,7 +51,7 @@ void func_8011493C(HSD_GObj* gobj)
 
 f32 func_8011495C(Fighter* ft)
 {
-    return ((ftNessAttributes*)ft->x2D4_specialAttributes)->unk94;
+    return ((ftNessAttributes*)ft->x2D4_specialAttributes)->x94_PSI_MAGNET_HEALING_MULTIPLIER;
 }
 
 void func_80114968(HSD_GObj* gobj, s32 arg1)
@@ -123,4 +123,10 @@ void func_80114B6C(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
+}
+
+void func_80114BB0(HSD_GObj* fighter_gobj) // Make DObjs visible? //
+{
+    func_800704F0(fighter_gobj, 1, 0.0f);
+    func_800704F0(fighter_gobj, 0, 0.0f);
 }
