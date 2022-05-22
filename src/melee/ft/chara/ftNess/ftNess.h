@@ -7,6 +7,8 @@
 
 #include "sysdolphin/baselib/gobj.h"
 
+#include "melee/lb/lbvector.h"
+
 #include "melee/ft/fighter.h"
 
 #include "melee/it/item.h"
@@ -137,6 +139,61 @@ void lbl_801162E0(HSD_GObj* gobj);
 void lbl_80116420(HSD_GObj* gobj);
 itYoyoAttributes* GetYoyoAttr(HSD_GObj* gobj); // Inline, may not be necessary //
 void func_80116494(HSD_GObj* gobj);
+void func_8011659C(HSD_GObj* gobj);
+void lbl_80116638(HSD_GObj* gobj);
+void lbl_801166D4(HSD_GObj* gobj);
+void lbl_80116718(HSD_GObj* gobj);
+void lbl_8011674C(HSD_GObj* gobj);
+void lbl_80116798(HSD_GObj* gobj);
+void lbl_80116828(HSD_GObj* gobj);
+void lbl_80116858(HSD_GObj* gobj);
+void lbl_80116878(HSD_GObj* gobj);
+void func_801168C4(HSD_GObj* gobj);
+void lbl_80116958(HSD_GObj* gobj);
+void lbl_801169BC(HSD_GObj* gobj);
+void lbl_801169EC(HSD_GObj* gobj);
+void lbl_80116A9C(HSD_GObj* gobj);
+void func_80116AE8(HSD_GObj* gobj);
+void lbl_80116B70(HSD_GObj* gobj);
+void func_80116C94(HSD_GObj* gobj);
+void func_80116D04(HSD_GObj* gobj);
+void lbl_80116D74(HSD_GObj* gobj);
+void lbl_80116DB0(HSD_GObj* gobj);
+void lbl_80116DEC(HSD_GObj* gobj);
+void lbl_80116E0C(HSD_GObj* gobj);
+void lbl_80116E2C(HSD_GObj* gobj);
+void lbl_80116E68(HSD_GObj* gobj);
+s32 func_80116EBC(HSD_GObj* gobj);
+void func_80116F00(HSD_GObj* gobj);
+void func_80116F38(HSD_GObj* gobj);
+void func_80116F94(HSD_GObj* gobj);
+void func_80117034(HSD_GObj* gobj);
+void lbl_801170DC(HSD_GObj* gobj);
+void lbl_801171BC(HSD_GObj* gobj);
+void SetPKFlashAttr(HSD_GObj* gobj);
+void lbl_801172F0(HSD_GObj* gobj);
+void lbl_80117378(HSD_GObj* gobj);
+void lbl_80117458(HSD_GObj* gobj);
+void lbl_8011758C(HSD_GObj* gobj);
+void lbl_80117648(HSD_GObj* gobj);
+void lbl_8011764C(HSD_GObj* gobj);
+void lbl_801176C8(HSD_GObj* gobj);
+void lbl_801176CC(HSD_GObj* gobj);
+void lbl_801176D0(HSD_GObj* gobj);
+void lbl_8011774C(HSD_GObj* gobj);
+void GravityDelay(HSD_GObj* gobj);
+void lbl_80117750(HSD_GObj* gobj);
+void lbl_80117788(HSD_GObj* gobj);
+void lbl_801177A8(HSD_GObj* gobj);
+void lbl_801177C8(HSD_GObj* gobj);
+void lbl_80117828(HSD_GObj* gobj);
+void lbl_80117888(HSD_GObj* gobj);
+void lbl_801178E8(HSD_GObj* gobj);
+void lbl_80117954(HSD_GObj* gobj);
+void lbl_801179C0(HSD_GObj* gobj);
+void lbl_80117A2C(HSD_GObj* gobj);
+void lbl_80117A98(HSD_GObj* gobj);
+void lbl_80117B04(HSD_GObj* gobj);
 void func_8011B0F8(HSD_GObj* gobj);
 
 #endif
