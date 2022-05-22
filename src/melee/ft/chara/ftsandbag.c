@@ -1,24 +1,19 @@
 #include "ftsandbag.h"
 
-typedef struct _PairStruct
+typedef struct _ftSandbagAttributes
 {
     u32 x0_pair[2];
-    u8 padding[0xB8];
-} PairStruct;
+} ftSandbagAttributes;
 
 void ftSandbag_OnDeath(void) {
     return;
 }
 
-void ftSandbag_OnLoad(HSD_GObj* gobj)
-{
-    Fighter* fighter/*r3*/ = gobj->user_data;
-    ftData* fighterDataInfo/*r5*/ = fighter->x10C_ftData;
-    PairStruct* special_attr_2/*r7*/ = fighter->x2D8_specialAttributes2;
+void ftSandbag_OnLoad(HSD_GObj* gobj) {
+    Fighter* fighter = gobj->user_data;
 
-    __memcpy(special_attr_2->x0_pair, ((PairStruct *) fighterDataInfo->ext_attr)->x0_pair, 8);
 
-    fighter->x2D4_specialAttributes = special_attr_2;
+    PUSH_ATTRS(fighter, ftSandbagAttributes);
 
     fighter->x2228_flag.bits.b2 = 1;
     fighter->x2226_flag.bits.b0 = 1;
@@ -62,9 +57,9 @@ u32 func_8014FB78(HSD_GObj* gobj)
     Fighter* fighter = gobj->user_data;
     ftData* fighter_data = fighter->x10C_ftData;
 
-    PairStruct *special_attr = (PairStruct *)fighter->x2D4_specialAttributes;
+    ftSandbagAttributes *special_attr = (ftSandbagAttributes *)fighter->x2D4_specialAttributes;
 
-    PairStruct* ext_attr = (PairStruct *)fighter_data->ext_attr;
+    ftSandbagAttributes* ext_attr = (ftSandbagAttributes *)fighter_data->ext_attr;
 
     s32 ext_attr_first = ext_attr->x0_pair[0];
     s32 ext_attr_second = ext_attr->x0_pair[1];

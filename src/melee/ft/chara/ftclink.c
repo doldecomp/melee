@@ -28,7 +28,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
 
     ft->x2224_flag.bits.b7 = 1;
     attrs->x54 = func_8001E8F8(func_80085E50(ft, 0x48));
-    func_800EAE04(ft);
+    ftLink_OnLoadForCLink(ft);
     attrs = ft->x2D4_specialAttributes;
     func_8026B3F8(items[0], attrs->x48);
     func_8026B3F8(items[1], attrs->x2C);

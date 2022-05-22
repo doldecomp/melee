@@ -12,28 +12,22 @@ void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1)
 }
 
 void ftNess_OnLoad(HSD_GObj* gobj) {
-    ftNessAttributes *sA2, *sA, *ext_attr;
-
     Fighter* ft = gobj->user_data;
-    ftData* ftdata = ft->x10C_ftData;
-    void** items = ftdata->x48_items;
-    sA2 = (ftNessAttributes*)ft->x2D8_specialAttributes2;
-    ext_attr = (ftNessAttributes*)ft->x10C_ftData->ext_attr;
+    void** item_list = ft->x10C_ftData->x48_items;
 
-    *sA2 = *ext_attr;
+    PUSH_ATTRS(ft, ftNessAttributes);
 
-    (ftNessAttributes*)ft->x2D4_specialAttributes = sA2;
-    func_8026B3F8(items[0], 0x42);
-    func_8026B3F8(items[1], 0x43);
-    func_8026B3F8(items[2], 0x44);
-    func_8026B3F8(items[8], 0x4E);
-    func_8026B3F8(items[3], 0x45);
-    func_8026B3F8(items[4], 0x46);
-    func_8026B3F8(items[5], 0x47);
-    func_8026B3F8(items[6], 0x48);
-    func_8026B3F8(items[7], 0x49);
-    func_8026B3F8(items[9], 0x65);
-    func_8026B3F8(items[10], 0x66);
+    func_8026B3F8(item_list[0], 0x42);
+    func_8026B3F8(item_list[1], 0x43);
+    func_8026B3F8(item_list[2], 0x44);
+    func_8026B3F8(item_list[8], 0x4E);
+    func_8026B3F8(item_list[3], 0x45);
+    func_8026B3F8(item_list[4], 0x46);
+    func_8026B3F8(item_list[5], 0x47);
+    func_8026B3F8(item_list[6], 0x48);
+    func_8026B3F8(item_list[7], 0x49);
+    func_8026B3F8(item_list[9], 0x65);
+    func_8026B3F8(item_list[10], 0x66);
 }
 
 void func_801148F8(HSD_GObj* gobj)

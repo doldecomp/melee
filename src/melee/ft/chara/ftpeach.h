@@ -9,6 +9,12 @@
 
 #include "melee/ft/fighter.h"
 
+typedef struct _ftPeachAttributes {
+    f32 unk0;
+    f32 unk4;
+    u8 padding[0xB8];
+} ftPeachAttributes;
+
 void ftPeach_OnDeath(HSD_GObj* gobj);
 
 #endif

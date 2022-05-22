@@ -20,7 +20,7 @@ typedef struct _ftMarioAttributes {
 } ftMarioAttributes;
 
 void ftMario_OnDeath(HSD_GObj* gobj);
-void func_800E0920(Fighter* ft);
+void ftMario_OnLoadForDrMario(Fighter* ft);
 void ftMario_OnLoad(HSD_GObj* gobj);
 void func_800E0A00(HSD_GObj* gobj);
 void func_800E0A20(HSD_GObj* gobj, s32 arg1);

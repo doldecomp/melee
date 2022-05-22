@@ -165,8 +165,8 @@ lbl_800E2A94:
 /* 800E2AA4 000DF684  7C 08 03 A6 */	mtlr r0
 /* 800E2AA8 000DF688  4E 80 00 20 */	blr 
 
-.global func_800E2AAC
-func_800E2AAC:
+.global ftCFalcon_OnLoadForGanon
+ftCFalcon_OnLoadForGanon:
 /* 800E2AAC 000DF68C  80 83 01 0C */	lwz r4, 0x10c(r3)
 /* 800E2AB0 000DF690  38 00 00 11 */	li r0, 0x11
 /* 800E2AB4 000DF694  80 E3 02 D8 */	lwz r7, 0x2d8(r3)

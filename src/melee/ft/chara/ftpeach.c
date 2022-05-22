@@ -2,12 +2,6 @@
 
 #include <melee/it/id.h>
 
-typedef struct _PairStruct {
-    f32 unk0;
-    f32 unk4;
-    u8 padding[0xB8];
-} PairStruct;
-
 void ftPeach_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft;
@@ -43,21 +37,14 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
 
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* player = gobj->user_data;
-    ftData* ftDataInfo = player->x10C_ftData;
-    PairStruct* extAtrrs = (PairStruct*)ftDataInfo->ext_attr;
-    void** items = ftDataInfo->x48_items;
+    Fighter* ft = gobj->user_data;
+    ftPeachAttributes* extAtrrs = ft->x10C_ftData->ext_attr;
+    void** items = ft->x10C_ftData->x48_items;
 
-    extAtrrs->unk0 = func_8001E8F8(func_80085E50(player, 18));
-    extAtrrs->unk4 = func_8001E8F8(func_80085E50(player, 19));
+    extAtrrs->unk0 = func_8001E8F8(func_80085E50(ft, 18));
+    extAtrrs->unk4 = func_8001E8F8(func_80085E50(ft, 19));
 
-    {
-        PairStruct *dest = (PairStruct *)player->x2D8_specialAttributes2;
-        PairStruct *src = (PairStruct *)player->x10C_ftData->ext_attr;
-        u32 *attr = (u32 *)&player->x2D4_specialAttributes;
-        *dest = *src;
-        *attr = (u32)dest;
-    }
+    PUSH_ATTRS(ft, ftPeachAttributes);
     
     func_8026B3F8(items[0], It_Kind_PeachUnk);
     func_8026B3F8(items[1], It_Kind_PeachTurnip);

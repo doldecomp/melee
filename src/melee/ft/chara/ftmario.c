@@ -49,17 +49,14 @@ void ftMario_OnDeath(HSD_GObj* gobj) {
     ft->sa.mario.x2240 = 0;
 }
 
-void func_800E0920(Fighter* ft) {
-    ftMarioAttributes* sA2 = (ftMarioAttributes*)ft->x2D8_specialAttributes2;
-    ftMarioAttributes* ext_attr = (ftMarioAttributes*)ft->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
-    ft->x2D4_specialAttributes = sA2;
+void ftMario_OnLoadForDrMario(Fighter* ft) {
+    PUSH_ATTRS(ft, ftMarioAttributes);
 }
 
 void ftMario_OnLoad(HSD_GObj* gobj) {
     ftData* ftDataInfo;
     void** items;
-    ftMarioAttributes *sA, *sA2, *ext_attr;
+    ftMarioAttributes *sA;
     Fighter* ft;
     
     ft = (Fighter*)gobj->user_data;
@@ -68,16 +65,11 @@ void ftMario_OnLoad(HSD_GObj* gobj) {
 
     ft->x2224_flag.bits.b7 = 1;
    
-    sA2 = (ftMarioAttributes*)ft->x2D8_specialAttributes2;
-    ext_attr = (ftMarioAttributes*)ft->x10C_ftData->ext_attr;
-
-    *sA2 = *ext_attr;
-
-    (ftMarioAttributes*)ft->x2D4_specialAttributes = sA2;
+    PUSH_ATTRS(ft, ftMarioAttributes);
 
     sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;    
 
-    func_8026B3F8(items[0], It_Kind_MarioFireball);
+    func_8026B3F8(items[0], 0x30);
     func_8026B3F8(items[2], sA->x14);
 }
 

@@ -14,7 +14,15 @@ typedef struct _ftFoxAttributes {
     f32 x4;
     f32 x8;
     f32 xC;
-    u8 data_filler_10[0xD1 - 0x10];
+
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    s32 x1C;
+
+    s32 x20;
+
+    u8 data_filler_10[0xD1 - 0x24];
 } ftFoxAttributes;
 
 BOOL func_800E5534(HSD_GObj* gobj);

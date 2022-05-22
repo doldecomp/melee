@@ -65,7 +65,7 @@ void func_8014F0D0(HSD_GObj* gobj, s32 arg1)
 
 void ftRoy_OnLoad(HSD_GObj* gobj)
 {
-    func_80136474(gobj->user_data);
+    ftMars_OnLoadForRoy(gobj->user_data);
 }
 
 void func_8014F148(HSD_GObj* gobj)

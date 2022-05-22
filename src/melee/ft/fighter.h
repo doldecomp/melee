@@ -283,7 +283,8 @@ typedef struct _FighterBone
 {
   /* 0x0 */ HSD_JObj* x0_jobj;
   /* 0x4 */ HSD_JObj* x4_jobj2; // used for interpolation
-  u32 data_filler[2];
+  /* 0x5 */ UnkFlagStruct flags;
+  /* 0x6 */ u8 filler_x6[7];
 } FighterBone;
 
 
@@ -457,7 +458,14 @@ struct SpecialAttrs_Koopa {
 };
 
 struct SpecialAttrs_Link {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
 };
 
 struct SpecialAttrs_Seak {
@@ -1296,5 +1304,14 @@ void Fighter_8006D9AC(HSD_GObj* fighterObj);
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
 void Fighter_8006DA4C(HSD_GObj* fighterObj);
 void Fighter_Unload_8006DABC(Fighter* fighter);
+
+#define PUSH_ATTRS(ft, attributeName)                                           \
+    do {                                                                    \
+        void* backup = (ft)->x2D8_specialAttributes2;                      \
+        attributeName *src = (attributeName*)(ft)->x10C_ftData->ext_attr;  \
+        void* *attr = &(ft)->x2D4_specialAttributes;                       \
+        *(attributeName *)(ft)->x2D8_specialAttributes2 = *src;            \
+        *attr = backup;                                                      \
+    } while(0)
 
 #endif

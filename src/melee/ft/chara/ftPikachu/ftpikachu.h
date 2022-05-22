@@ -76,6 +76,18 @@ typedef struct _ftPikachuAttributes {
 
 /// TODO put the rest of function headers here and rename all of the functions
 ///pika1
+void ftPikachu_OnLoadForPichu(Fighter* fighter);
+void ftPikachu_OnLoad(HSD_GObj* fighterObj);
+void ftPikachu_OnDeath(HSD_GObj* fighterObj);
+void ftPikachu_UnkHeldItemAction_801244B8(HSD_GObj* fighterObj, s32 arg1);
+void ftPikachu_80124598(HSD_GObj *fighterObj);
+void ftPikachu_UnkHeldItem_801245E0(HSD_GObj *fighterObj);
+void ftPikachu_80124628(HSD_GObj* fighterObj, s32 arg1);
+void ftPikachu_8012467C(HSD_GObj* fighterObj);
+void ftPikachu_801246C0(HSD_GObj* fighterObj);
+void ftPikachu_ScaleYAttributesArray_80124704(HSD_GObj* fighterObj);
+void ftPikachu_801247A8(HSD_GObj* fighterObj);
+void ftPikachu_801247EC(HSD_GObj* fighterObj);
 
 ///pika2
 void func_80124DC8(HSD_GObj* fighterObj);
