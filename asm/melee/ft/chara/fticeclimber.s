@@ -137,8 +137,8 @@ lbl_8011EEE4:
 /* 8011EEF4 0011BAD4  7C 08 03 A6 */	mtlr r0
 /* 8011EEF8 0011BAD8  4E 80 00 20 */	blr 
 
-.global func_8011EEFC
-func_8011EEFC:
+.global ftIcelimber_OnLoadForNana
+ftIcelimber_OnLoadForNana:
 /* 8011EEFC 0011BADC  80 83 01 0C */	lwz r4, 0x10c(r3)
 /* 8011EF00 0011BAE0  38 00 00 2B */	li r0, 0x2b
 /* 8011EF04 0011BAE4  80 E3 02 D8 */	lwz r7, 0x2d8(r3)

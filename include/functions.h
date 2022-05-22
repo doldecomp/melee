@@ -3130,7 +3130,7 @@ void func_80117E60(struct _HSD_GObj*);
 // ? func_8011EB58(?);
 // ? func_8011EBC0(?);
 // ? func_8011EC30(?);
-// ? func_8011EEFC(?);
+// ? ftIcelimber_OnLoadForNana(?);
 // ? func_8011F16C(?);
 // ? func_8011F190(?);
 // ? func_8011F68C(?);
