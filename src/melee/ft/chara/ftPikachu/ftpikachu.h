@@ -1,9 +1,5 @@
-#include <dolphin/types.h>
-
-#include "sysdolphin/baselib/gobj.h"
 
 #include "melee/ft/ftcommon.h"
-#include "melee/ft/ftcliffcommon.h"
 #include "melee/lb/lbvector.h"
 
 typedef struct _ftPikachuAttributes {

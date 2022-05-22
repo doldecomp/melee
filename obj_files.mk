@@ -80,6 +80,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftlink.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftlink.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey2.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_1.c.o 		\
@@ -99,6 +100,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu4.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu5.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.s.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftsamus.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftkoopa.c.o 		\
@@ -124,6 +126,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalco.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftpichu.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftgamewatch.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftganon.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftganon.s.o 		\
@@ -172,6 +175,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_32.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_33.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_34.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftcrazyhand.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.s.o 		            \
 															\
