@@ -117,6 +117,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialLw.c.o      \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftluigi.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftmewtwo.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o 		\
