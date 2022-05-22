@@ -126,6 +126,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfalco.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftpichu.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftgamewatch.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftganon.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftganon.s.o 		\

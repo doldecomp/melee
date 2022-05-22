@@ -565,7 +565,23 @@ struct SpecialAttrs_Pichu {
 };
 
 struct SpecialAttrs_Gaw {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ u32 x2250;
+    /* 0x2254 */ u32 x2254;
+    /* 0x2258 */ u32 x2258;
+    /* 0x225C */ u32 x225C;
+    /* 0x2260 */ u32 x2260;
+    /* 0x2264 */ u32 x2264;
+    /* 0x2268 */ u32 x2268;
+    /* 0x226C */ u32 x226C;
 };
 
 struct SpecialAttrs_Masterhand {
@@ -775,7 +791,9 @@ typedef struct _Fighter {
     /* 0x598 */ s32 x598;
     /* 0x59C */ void* x59C;
     /* 0x5A0 */ void* x5A0;
-    u8 filler_x598[0x5E8 - 0x5A4];
+    u8 filler_x598[0x5C8 - 0x5A4];
+    /* 0x5A0 */ void* x5C8;
+    u8 filler_x5CC[0x5E8 - 0x5CC];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F0 - 0x5EC];
     /* 0x5F0 */ void* x5F0;
@@ -783,7 +801,13 @@ typedef struct _Fighter {
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
-    /* 0x610 */ struct RGBA x610_color_rgba[2];
+    union {
+        /* 0x610 */ struct RGBA x610_color_rgba[2];
+        struct {
+            /* 0x610 */ s32 x610;
+            /* 0x614 */ s32 x614;
+        };
+    };
     /* 0x618 */ u8 x618_player_id;
     /* 0x619 */ u8 x619_costume_id;
     /* 0x61A */ u8 x61A_controller_index;
@@ -1216,6 +1240,7 @@ typedef struct _Fighter {
         struct SpecialAttrs_Mars mars;
         struct SpecialAttrs_Zelda zelda;
         struct SpecialAttrs_CLink clink;
+
         // Mario SpecialAttrs struct is used for DrMario
         // Fox SpecialAttrs struct is used for Falco
         struct SpecialAttrs_Pichu pichu;
