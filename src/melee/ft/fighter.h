@@ -451,7 +451,18 @@ struct SpecialAttrs_DK {
 };
 
 struct SpecialAttrs_Kirby {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ UnkFlagStruct x2234;
+    /* 0x2235 */ u8 filler_x2235[3];
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u8 filler1[0x228C - 0x224C];
+    /* 0x228C */ u32 x228C;
+    /* 0x2290 */ u32 x2290;
 };
 
 struct SpecialAttrs_Koopa {
@@ -771,7 +782,7 @@ typedef struct _Fighter {
     } x110_attr;
     u8 filler_x294[0x2CC - 0x294];
     /* 0x2CC */ void* x2CC;
-    /* 0x2D0 */ s32 x2D0;
+    /* 0x2D0 */ void* x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
     /* 0x2DC */ f32 x2DC;
