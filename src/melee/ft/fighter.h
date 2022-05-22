@@ -446,7 +446,8 @@ struct SpecialAttrs_Captain {
 };
 
 struct SpecialAttrs_DK {
-    char filler0[0x100];
+    /* 0x222C */ s32 x222C;
+    /* 0x2230 */ s32 x2230;
 };
 
 struct SpecialAttrs_Kirby {
@@ -743,7 +744,7 @@ typedef struct _Fighter {
         /* 0x290 */ s32 x290_WeightDependentThrowSpeedFlags;
     } x110_attr;
     u8 filler_x294[0x2CC - 0x294];
-    /* 0x2CC */ s32 x2CC;
+    /* 0x2CC */ void* x2CC;
     /* 0x2D0 */ s32 x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
