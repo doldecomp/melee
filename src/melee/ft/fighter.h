@@ -511,7 +511,7 @@ struct SpecialAttrs_Samus {
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
-    
+
     /* 0x2240 */ u8 x2240;
     /* 0x2241 */ u8 x2241;
     /* 0x2242 */ u8 x2242;
@@ -581,7 +581,16 @@ struct SpecialAttrs_Masterhand {
 };
 
 struct SpecialAttrs_Crazyhand {
-    char filler0[0x100];
+    /* 0x222C */ HSD_GObj* x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ f32 x2238;
+    /* 0x223C */ f32 x223C;
+    /* 0x2240 */ Vec3 x2240_pos;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ s32 x2250;
+    /* 0x2254 */ s32 x2254;
+    /* 0x2258 */ s32 x2258;
 };
 
 struct SpecialAttrs_Boy {

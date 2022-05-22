@@ -173,6 +173,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_32.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_33.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_34.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftcrazyhand.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o 	\
 	$(BUILD_DIR)/asm/melee/ft/ftbosslib.s.o 		            \
 															\

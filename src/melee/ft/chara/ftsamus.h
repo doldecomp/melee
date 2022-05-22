@@ -1,6 +1,3 @@
-#ifndef _ftfox_h_
-#define _ftfox_h_
-
 #include "melee/ft/ftcommon.h"
 #include "melee/lb/lbvector.h"
 
@@ -20,4 +17,3 @@ typedef struct _ftSamusAttributes {
     u8 data_filler_10[0xD1 - 0x24];
 } ftSamusAttributes;
 
-#endif
