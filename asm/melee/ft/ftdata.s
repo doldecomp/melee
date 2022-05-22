@@ -948,7 +948,7 @@ ft_OnLoad:
     .4byte ftSeak_OnLoad
     .4byte ftNess_OnLoad
     .4byte ftPeach_OnLoad
-    .4byte ftPopo_OnLoad
+    .4byte ftIcelimber_OnLoad
     .4byte ftNana_OnLoad
     .4byte ftPikachu_OnLoad
     .4byte ftSamus_OnLoad
@@ -985,7 +985,7 @@ ft_OnDeath:
     .4byte ftSeak_OnDeath
     .4byte ftNess_OnDeath
     .4byte ftPeach_OnDeath
-    .4byte ftPopo_OnDeath
+    .4byte ftIcelimber_OnDeath
     .4byte ftNana_OnDeath
     .4byte ftPikachu_OnDeath
     .4byte ftSamus_OnDeath

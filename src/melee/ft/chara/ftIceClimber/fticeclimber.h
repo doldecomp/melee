@@ -14,7 +14,8 @@ typedef struct _ftIceClimberAttributes {
     s32 x24;
     s32 x28;
     s32 x2C;
-    u8 data_filler_10[0xC4 - 0x30];
+    u8 data_filler_1[0xC4 - 0x30];
     f32 xC4;
     f32 xC8;
+    u8 data_filler_2[0x90];
 } ftIceClimberAttributes;
