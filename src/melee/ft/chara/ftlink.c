@@ -85,7 +85,7 @@ void func_800EB060(HSD_GObj* fighterObj) {
 
 void func_800EB1FC(HSD_GObj* fighterObj, BOOL arg1);
 
-void func_800EB0A8(HSD_GObj* fighterObj, int arg1) {
+void func_800EB0A8(HSD_GObj* fighterObj, BOOL arg1) {
     Fighter* link = getFighter(fighterObj);
     if (func_8026B2B4(link->x1974_heldItem) == 1) {
         func_80074A4C(fighterObj, 1, 0);
@@ -111,7 +111,7 @@ void func_800EB11C(HSD_GObj* fighterObj, BOOL arg1) {
             func_80070FB4(fighterObj, 1, 3);
             break;
         }
-        if (arg1 != FALSE) {
+        if (arg1) {
             func_80070C48(fighterObj, 1);
         }
     }
