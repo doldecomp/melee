@@ -1,5 +1,9 @@
 #include "ftlink.h"
 
+extern float lbl_804D92D8; // 1.0f
+extern float lbl_804D92DC; // 3.0f
+extern float lbl_804D92E0; // 0.0f
+
 s32 func_800EAD64(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     if (fighter->sa.link.x2234) {
@@ -44,6 +48,10 @@ void ftLink_OnLoad(HSD_GObj* fighterObj) {
  
 }
 
+void func_800EAF38() {
+    func_800EC06C();
+}
+
 void func_800EAF58(HSD_GObj* fighterObj) {
     func_800EC06C();
     func_800D94D8(fighterObj);
@@ -53,7 +61,7 @@ void func_800EAF58(HSD_GObj* fighterObj) {
 }
 
 void func_800EAFA4(HSD_GObj* fighterObj, int arg1) {
-    Fighter* link = fighterObj->user_data;
+    Fighter* link = getFighter(fighterObj);
     if (func_8026B2B4(link->x1974_heldItem) == 1) {
         func_80074A4C(fighterObj, 1, 1);
     }
@@ -78,7 +86,7 @@ void func_800EB060(HSD_GObj* fighterObj) {
 void func_800EB1FC(HSD_GObj* fighterObj, BOOL arg1);
 
 void func_800EB0A8(HSD_GObj* fighterObj, int arg1) {
-    Fighter* link = fighterObj->user_data;
+    Fighter* link = getFighter(fighterObj);
     if (func_8026B2B4(link->x1974_heldItem) == 1) {
         func_80074A4C(fighterObj, 1, 0);
     }
@@ -87,7 +95,7 @@ void func_800EB0A8(HSD_GObj* fighterObj, int arg1) {
 }
 
 void func_800EB11C(HSD_GObj* fighterObj, BOOL arg1) {
-    Fighter* link = fighterObj->user_data;
+    Fighter* link = getFighter(fighterObj);
     if (!func_8026B2B4(link->x1974_heldItem)) {
         switch (func_8026B320(link->x1974_heldItem)){
         case 1:
@@ -110,7 +118,7 @@ void func_800EB11C(HSD_GObj* fighterObj, BOOL arg1) {
 }
 
 void func_800EB1FC(HSD_GObj* fighterObj, BOOL arg1) {
-    Fighter* link = fighterObj->user_data;
+    Fighter* link = getFighter(fighterObj);
     func_80070FB4(fighterObj, 1, -1);
     if (arg1) {
         func_80070CC4(fighterObj, 1);
@@ -122,17 +130,17 @@ void func_800EB250(HSD_GObj* fighterObj) {
     ftLinkAttributes* link_attr = link->x2D4_specialAttributes;
     ftLinkAttributes* other_attr = link->x10C_ftData->ext_attr;
     *link_attr = *other_attr;
-    if (link->x34_scale.y != 1.0f) {
+    if (lbl_804D92D8 != link->x34_scale.y) {
         link_attr->x28 *= link->x34_scale.y;
     }
 }
 
 void func_800EB2AC(HSD_GObj* fighterObj) {
-    func_800704F0(fighterObj, 1, 3.0f);
-    func_800704F0(fighterObj, 0, 3.0f);
+    func_800704F0(fighterObj, 1, lbl_804D92DC);
+    func_800704F0(fighterObj, 0, lbl_804D92DC);
 }
 
 void func_800EB2F0(HSD_GObj* fighterObj) {
-    func_800704F0(fighterObj, 1, 0);
-    func_800704F0(fighterObj, 0, 0);
+    func_800704F0(fighterObj, 1, lbl_804D92E0);
+    func_800704F0(fighterObj, 0, lbl_804D92E0);
 }
