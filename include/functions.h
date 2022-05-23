@@ -33,7 +33,7 @@ typedef struct _Fighter Fighter;
 // ? func_80007AFC(?);
 // ? func_80007B78(?);
 // ? func_80007BCC(?);
-void* HSD_JObjGetMtxPtr(); // asm/melee/lb/lbcollision.s
+void* HSD_JObjUnkMtxPtr(); // asm/melee/lb/lbcollision.s
 // ? func_80007DD8(?);
 // ? func_80007ECC(?);
 // ? func_8000805C(?);

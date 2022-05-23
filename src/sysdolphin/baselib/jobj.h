@@ -221,11 +221,17 @@ inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
     return jobj->translate.y;
 }
 
-inline void HSD_JObjGetMtx(HSD_JObj* jobj, Mtx *mtx)
+inline void HSD_JObjUnkMtx_assert(HSD_JObj* jobj)
 {
     assert_line(1144, jobj);
-    HSD_JObjGetMtxPtr(jobj);
-    func_80379310(&jobj->mtx, mtx);
+    HSD_JObjUnkMtxPtr(jobj);
+}
+
+inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx *mtx)
+{
+    assert_line(1170, jobj);
+    assert_line(1171, mtx);
+    PSMTXCopy(mtx, &jobj->mtx);
 }
 
 #pragma pop

@@ -14,6 +14,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 #include "sysdolphin/baselib/controller.h"
+#include <sysdolphin/baselib/archive.h>
 
 typedef Vec Vec3;
 
@@ -382,7 +383,7 @@ enum {
 typedef struct {
     HSD_Joint* joint;
     u8 padding[0x10];
-    s32 x14;
+    HSD_Archive* x14_archive;
 } UnkCostumeStruct;
 
 struct UnkCostumeList {
