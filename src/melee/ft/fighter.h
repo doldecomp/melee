@@ -1309,7 +1309,6 @@ typedef struct _Fighter {
     /* 0x23B8 */ s32 x23B8;
 } Fighter;
 
-
 // functions in fighter.c
 void Fighter_800679B0();
 void Fighter_FirstInitialize_80067A84();
