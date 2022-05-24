@@ -507,7 +507,7 @@ CameraBox* func_80086B74(HSD_GObj* gobj)
 f32 func_80086B80(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x890_cameraBox->x50;
+    return fp->x890_cameraBox->x48.z;
 }
 
 void func_80086B90(HSD_GObj* gobj, Vec3* v)
