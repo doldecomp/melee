@@ -1,5 +1,11 @@
 #include "ftdonkey.h"
 
+void ftDonkey_OnDeath(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    fighter->sa.dk.x222C = 0;
+    func_80074A4C(fighterObj, 0, 0);
+}
+
 void func_8010D774(HSD_GObj* fighterObj) {
     func_8010FAF0(fighterObj);
     func_80110074(fighterObj);

@@ -665,7 +665,8 @@ struct SpecialAttrs_Girl {
 };
 
 struct SpecialAttrs_GKoopa {
-    char filler0[0x100];
+    /* 0x222C */ f32 x222C;
+    /* 0x2230 */ f32 x2230;
 };
 
 struct SpecialAttrs_Sandbag {
