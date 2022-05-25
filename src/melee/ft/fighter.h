@@ -223,6 +223,8 @@ typedef struct _FtCollisionData
     s32 x34;
 } FtCollisionData;
 
+struct UnkFloat6_Camera;
+
 typedef struct _ftData
 {
     struct {
@@ -240,7 +242,9 @@ typedef struct _ftData
     }* x8;
     struct S_TEMP4* xC;
     u8* x10;
-    s32 filler_x14[13];
+    s32 filler_x14[10];
+    struct UnkFloat6_Camera *x3C;
+    s32 filler_x40[2];
     /* 0x48 */ void** x48_items;
     FtCollisionData* x4C_collisionData;
     s32 filler_x50[2];
@@ -298,13 +302,17 @@ typedef struct _Hitbox {
 
 typedef struct _CameraBox
 {
-  u32 data_filler[3];
+  u32 data_filler[2];
+  s32 x8;
   UnkFlagStruct xC_flag;
   u8 xD_fill[0x10 - 0xD];
   Vec3 x10; // might be Vec2?
   Vec3 x1C;
-  u8 x10_fill[0x50 - 0x28];
-  f32 x50;
+  f32 x28;
+  Vec2 x2C;
+  Vec3 x34;
+  Vec2 x40;
+  Vec3 x48;
 } CameraBox;
 
 typedef struct _CollData
