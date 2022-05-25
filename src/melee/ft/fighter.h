@@ -12,6 +12,7 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/random.h>
 #include "sysdolphin/baselib/controller.h"
 #include <sysdolphin/baselib/archive.h>
@@ -546,7 +547,10 @@ struct SpecialAttrs_Samus {
 };
 
 struct SpecialAttrs_Yoshi {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
 };
 
 struct SpecialAttrs_Purin {
@@ -823,12 +827,15 @@ typedef struct _Fighter {
     /* 0x598 */ s32 x598;
     /* 0x59C */ void* x59C;
     /* 0x5A0 */ void* x5A0;
-    u8 filler_x598[0x5C8 - 0x5A4];
+    u8 filler_x5A4[0x5B8 - 0x5A4];
+    /* 0x5B8 */ s32 x5B8;
+    /* 0x5BC */ s32 x5BC;
+    u8 filler_x598[0x5C8 - 0x5C0];
     /* 0x5A0 */ void* x5C8;
     u8 filler_x5CC[0x5E8 - 0x5CC];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F0 - 0x5EC];
-    /* 0x5F0 */ void* x5F0;
+    /* 0x5F0 */ HSD_DObj** x5F0;
     /* 0x5F4 */ s32 x5F4;
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];

@@ -106,6 +106,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftsamus.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftyoshi.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftkoopa.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkoopa.s.o 		\
