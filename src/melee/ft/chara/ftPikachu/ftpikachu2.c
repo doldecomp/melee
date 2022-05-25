@@ -87,9 +87,9 @@ void ftPikachu_80124A20(HSD_GObj* fighterObj) {
     }  
 }
 
-void ftPikachu_80124B6C() {}
+void ftPikachu_Stub_80124B6C() {}
 
-void ftPikachu_80124B70() {}
+void ftPikachu_Stub_80124B70() {}
 
 void ftPikachu_80124B74(HSD_GObj* fighterObj) {
     func_80084F3C(fighterObj);
@@ -119,7 +119,7 @@ void ftPikachu_ActionChange_80124C20(HSD_GObj* fighterObj) {
     }
 }
 
-void ftPikachu_Spawn_80124C90(HSD_GObj* fighterObj) {
+void ftPikachu_EfSpawn_80124C90(HSD_GObj* fighterObj) {
     Fighter *fighter = fighterObj->user_data;
     
     HSD_GObj *tempObj;
@@ -137,7 +137,7 @@ void ftPikachu_Spawn_80124C90(HSD_GObj* fighterObj) {
     fighter->cb.x21BC_callback_Accessory4 = 0;
 }
 
-void ftPikachu_Spawn_80124D2C(HSD_GObj* fighterObj) {
+void ftPikachu_EfSpawn_80124D2C(HSD_GObj* fighterObj) {
     Fighter *fighter = fighterObj->user_data;
     
     HSD_GObj *tempObj;
