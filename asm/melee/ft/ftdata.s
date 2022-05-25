@@ -1172,7 +1172,7 @@ ft_SpecialHiAir:
     .4byte func_8011D7F0
     .4byte func_8012122C
     .4byte NULL
-    .4byte func_80125E60
+    .4byte ftPikachu_ActionChangeZeroVel_80125E60
     .4byte func_8012A738
     .4byte func_8012E33C
     .4byte func_8013CA98
@@ -1183,7 +1183,7 @@ ft_SpecialHiAir:
     .4byte func_800EBB80
     .4byte func_800E1AB0
     .4byte func_800E72C4
-    .4byte func_80125E60
+    .4byte ftPikachu_ActionChangeZeroVel_80125E60
     .4byte func_8014E158
     .4byte func_800E4CF4
     .4byte func_8013826C
@@ -1394,7 +1394,7 @@ ft_SpecialHi:
     .4byte func_8011D72C
     .4byte func_801211B4
     .4byte NULL
-    .4byte func_80125DE8
+    .4byte ftPikachu_ActionChangeZeroVel_80125DE8
     .4byte func_8012A674
     .4byte func_8012E2C4
     .4byte func_8013C9C8
@@ -1405,7 +1405,7 @@ ft_SpecialHi:
     .4byte func_800EBB1C
     .4byte func_800E1A54
     .4byte func_800E7238
-    .4byte func_80125DE8
+    .4byte ftPikachu_ActionChangeZeroVel_80125DE8
     .4byte func_8014E0AC
     .4byte func_800E4A78
     .4byte func_80138208
