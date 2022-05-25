@@ -1,6 +1,6 @@
 #include "ftpikachu.h"
 
-void func_80124830(HSD_GObj* fighterObj) {
+void ftPikachu_ActionChange_80124830(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     Fighter_ActionStateChange_800693AC(fighterObj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     fighter->x220C_ftcmd_var3 = 0;
@@ -10,7 +10,7 @@ void func_80124830(HSD_GObj* fighterObj) {
     func_8006EBA4(fighterObj);
 }
 
-void func_8012489C(HSD_GObj* fighterObj) {
+void ftPikachu_ActionChange_8012489C(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     Fighter_ActionStateChange_800693AC(fighterObj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
     fighter->x220C_ftcmd_var3 = 0;
@@ -20,7 +20,7 @@ void func_8012489C(HSD_GObj* fighterObj) {
     func_8006EBA4(fighterObj);
 }
 
-void func_80124908(HSD_GObj* fighterObj) {
+void ftPikachu_80124908(HSD_GObj* fighterObj) {
 
     Vec sp14;
     s32 stack_buffer[2];
@@ -52,7 +52,7 @@ void func_80124908(HSD_GObj* fighterObj) {
     }    
 }
 
-void func_80124A20(HSD_GObj* fighterObj) {
+void ftPikachu_80124A20(HSD_GObj* fighterObj) {
     Vec sp14;
     s32 stack_buffer[2];
     Fighter* fighter = fighterObj->user_data;
@@ -78,7 +78,7 @@ void func_80124A20(HSD_GObj* fighterObj) {
         }
     }
     
-    if (func_8006F238(fighterObj) == 0) {
+    if (!func_8006F238(fighterObj)) {
         if (0.0f == pika_attr->x10) {
             func_800CC730(fighterObj);
             return;
@@ -87,19 +87,19 @@ void func_80124A20(HSD_GObj* fighterObj) {
     }  
 }
 
-void func_80124B6C() {}
+void ftPikachu_80124B6C() {}
 
-void func_80124B70() {}
+void ftPikachu_80124B70() {}
 
-void func_80124B74(HSD_GObj* arg0) {
-    func_80084F3C(arg0);
+void ftPikachu_80124B74(HSD_GObj* fighterObj) {
+    func_80084F3C(fighterObj);
 }
 
-void func_80124B94(HSD_GObj* arg0) {
-    func_80084DB0(arg0);
+void ftPikachu_80124B94(HSD_GObj* fighterObj) {
+    func_80084DB0(fighterObj);
 }
 
-void func_80124BB4(HSD_GObj* fighterObj) {
+void ftPikachu_ActionChange_80124BB4(HSD_GObj* fighterObj) {
     Fighter* fighter;
     if (!func_80082708(fighterObj)) {
         fighter = fighterObj->user_data;
@@ -109,7 +109,7 @@ void func_80124BB4(HSD_GObj* fighterObj) {
 }
 
 
-void func_80124C20(HSD_GObj* fighterObj) {
+void ftPikachu_ActionChange_80124C20(HSD_GObj* fighterObj) {
     Fighter* fighter;
     if (func_80081D0C(fighterObj) == 1) {
         fighter = fighterObj->user_data;
@@ -119,7 +119,7 @@ void func_80124C20(HSD_GObj* fighterObj) {
     }
 }
 
-void func_80124C90(HSD_GObj* fighterObj) {
+void ftPikachu_Spawn_80124C90(HSD_GObj* fighterObj) {
     Fighter *fighter = fighterObj->user_data;
     
     HSD_GObj *tempObj;
@@ -137,7 +137,7 @@ void func_80124C90(HSD_GObj* fighterObj) {
     fighter->cb.x21BC_callback_Accessory4 = 0;
 }
 
-void func_80124D2C(HSD_GObj* fighterObj) {
+void ftPikachu_Spawn_80124D2C(HSD_GObj* fighterObj) {
     Fighter *fighter = fighterObj->user_data;
     
     HSD_GObj *tempObj;
@@ -155,7 +155,7 @@ void func_80124D2C(HSD_GObj* fighterObj) {
     fighter->cb.x21BC_callback_Accessory4 = 0;
 }
 
-void func_80124DC8(HSD_GObj* fighterObj) {
+void ftPikachu_80124DC8(HSD_GObj* fighterObj) {
     u8 fighter_x673_byte;
     Fighter *fighter = fighterObj->user_data;
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;

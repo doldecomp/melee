@@ -86,9 +86,19 @@ void ftPikachu_801247A8(HSD_GObj* fighterObj);
 void ftPikachu_801247EC(HSD_GObj* fighterObj);
 
 ///pika2
-void func_80124DC8(HSD_GObj* fighterObj);
-void func_80124C90(HSD_GObj* fighterObj);
-void func_80124D2C(HSD_GObj* fighterObj);
+void ftPikachu_ActionChange_80124830(HSD_GObj* fighterObj);
+void ftPikachu_ActionChange_8012489C(HSD_GObj* fighterObj);
+void ftPikachu_80124908(HSD_GObj* fighterObj);
+void ftPikachu_80124A20(HSD_GObj* fighterObj);
+void ftPikachu_80124B6C();
+void ftPikachu_80124B70();
+void ftPikachu_80124B74(HSD_GObj* fighterObj);
+void ftPikachu_80124B94(HSD_GObj* fighterObj);
+void ftPikachu_ActionChange_80124BB4(HSD_GObj* fighterObj);
+void ftPikachu_ActionChange_80124C20(HSD_GObj* fighterObj);
+void ftPikachu_Spawn_80124C90(HSD_GObj* fighterObj);
+void ftPikachu_Spawn_80124D2C(HSD_GObj* fighterObj);
+void ftPikachu_80124DC8(HSD_GObj* fighterObj);
 
 
 //pika3

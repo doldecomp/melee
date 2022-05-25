@@ -5,7 +5,7 @@ void func_80124E38(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
 
-    fighter->cb.x21EC_callback = func_80124DC8;
+    fighter->cb.x21EC_callback = ftPikachu_80124DC8;
 
     fighter->xEC_ground_vel /= pika_attr->x30;
     Fighter_ActionStateChange_800693AC(fighterObj, 0x157, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -17,7 +17,7 @@ void func_80124EAC(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
 
-    fighter->cb.x21EC_callback = func_80124DC8;
+    fighter->cb.x21EC_callback = ftPikachu_80124DC8;
 
     fighter->x80_self_vel.x /= pika_attr->x30;
     fighter->x80_self_vel.y = 0.0f;
@@ -101,7 +101,7 @@ void func_801251BC(HSD_GObj* fighterObj) {
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
     if (!func_8006F238(fighterObj)) {
         func_8007DB24(fighterObj);
-        fighter->cb.x21BC_callback_Accessory4 = &func_80124C90;
+        fighter->cb.x21BC_callback_Accessory4 = &ftPikachu_Spawn_80124C90;
     }
     fighter->x2340_stateVar1++;
     if (fighter->x2340_stateVar1 > pika_attr->x24) {
@@ -117,7 +117,7 @@ void func_8012525C(HSD_GObj* fighterObj) {
 
     if (!func_8006F238(fighterObj)) {
         func_8007DB24(fighterObj);
-        fighter->cb.x21BC_callback_Accessory4 = &func_80124C90;
+        fighter->cb.x21BC_callback_Accessory4 = &ftPikachu_Spawn_80124C90;
     }
 
     fighter->x2340_stateVar1++;
@@ -179,7 +179,7 @@ void func_801254D4(HSD_GObj* fighterObj) {
     Fighter* fighter;
     Fighter_ActionStateChange_800693AC(fighterObj, 0x158, 0x200, 0, 0.0f, 1.0f, 0.0f);
     fighter = fighterObj->user_data;
-    fighter->cb.x21BC_callback_Accessory4 = &func_80124C90;
+    fighter->cb.x21BC_callback_Accessory4 = &ftPikachu_Spawn_80124C90;
 }
 
 void func_80125528(HSD_GObj* fighterObj) {
@@ -187,7 +187,7 @@ void func_80125528(HSD_GObj* fighterObj) {
     Fighter* fighter;
     Fighter_ActionStateChange_800693AC(fighterObj, 0x15D, 0x200, 0, 0.0f, 1.0f, 0.0f);
     fighter = fighterObj->user_data;
-    fighter->cb.x21BC_callback_Accessory4 = &func_80124C90;
+    fighter->cb.x21BC_callback_Accessory4 = &ftPikachu_Spawn_80124C90;
 }
 
 void func_8012557C(HSD_GObj* fighterObj) {
@@ -264,7 +264,7 @@ void func_80125834(HSD_GObj* fighterObj) {
     fighter = fighterObj->user_data;
     fighter->x2200_ftcmd_var0 = 0;
     func_8007DB24(fighterObj);
-    fighter->cb.x21BC_callback_Accessory4 = &func_80124D2C;
+    fighter->cb.x21BC_callback_Accessory4 = &ftPikachu_Spawn_80124D2C;
 }
 
 void func_801258A0(HSD_GObj* fighterObj) {
@@ -274,7 +274,7 @@ void func_801258A0(HSD_GObj* fighterObj) {
     fighter = fighterObj->user_data;
     fighter->x2200_ftcmd_var0 = 0;
     func_8007DB24(fighterObj);
-    fighter->cb.x21BC_callback_Accessory4 = &func_80124D2C;
+    fighter->cb.x21BC_callback_Accessory4 = &ftPikachu_Spawn_80124D2C;
 }
 
 void func_8012590C() {}
