@@ -3908,6 +3908,8 @@ lbl_803CE6B8:
     .4byte 0x0003F7AF
     .4byte 0x0003F7B2
     .4byte NULL
+
+#### this data below here belongs in yoshi
 .global lbl_803CE6D0
 lbl_803CE6D0:
     .4byte 0x00000025
