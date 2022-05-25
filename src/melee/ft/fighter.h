@@ -484,7 +484,9 @@ struct SpecialAttrs_Link {
 };
 
 struct SpecialAttrs_Seak {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
 };
 
 struct SpecialAttrs_Ness {
