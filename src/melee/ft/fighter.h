@@ -585,7 +585,7 @@ struct SpecialAttrs_Mars {
 };
 
 struct SpecialAttrs_Zelda {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
 };
 
 struct SpecialAttrs_CLink {
