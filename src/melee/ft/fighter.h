@@ -1317,6 +1317,9 @@ typedef struct _Fighter {
     /* 0x23B8 */ s32 x23B8;
 } Fighter;
 
+inline Fighter* getFighter(HSD_GObj* fighterObj) {
+    return fighterObj->user_data;
+}
 
 // functions in fighter.c
 void Fighter_800679B0();
