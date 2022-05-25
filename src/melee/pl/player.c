@@ -1421,7 +1421,7 @@ void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id) {
 }
 
 
-u8 Player_GetFlagsBit1(s32 slot) {  
+s32 Player_GetFlagsBit1(s32 slot) {  
     StaticPlayer* player;
     u8 bit1;
     Player_CheckSlot(slot);
@@ -1547,7 +1547,7 @@ void Player_SetMoreFlagsBit1(s32 slot, u8 bit1) {
     player->more_flags.b1 = bit1;
 }
 
-u8 Player_GetUnk4D(s32 slot) {   
+s32 Player_GetUnk4D(s32 slot) {   
     StaticPlayer* player;
     u8 unk4D;
     Player_CheckSlot(slot);

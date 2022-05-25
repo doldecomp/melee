@@ -2509,7 +2509,8 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj)
         HSD_JObjSetupMatrix(jobj);
 
 
-        HSD_JObjGetMtx(jobj, &mtx1);
+        HSD_JObjUnkMtx_assert(jobj);
+        func_80379310(&jobj->mtx, mtx1);
 
         HSD_JObjGetScale(jobj, &scale);
         scale.x = Fighter_GetModelScale(fighter);
@@ -2638,7 +2639,8 @@ void Fighter_8006C80C(HSD_GObj* fighterObj) {
 
             HSD_JObjSetupMatrix(jobj_copy);
 
-            HSD_JObjGetMtx(jobj, &jobj_mtx);
+            HSD_JObjUnkMtx_assert(jobj);
+            func_80379310(&jobj->mtx, jobj_mtx);
 
             HSD_JObjGetScale(jobj, &scale);
             scale.x = Fighter_GetModelScale(fighter_copy);

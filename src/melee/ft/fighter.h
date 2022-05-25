@@ -12,8 +12,10 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/random.h>
 #include "sysdolphin/baselib/controller.h"
+#include <sysdolphin/baselib/archive.h>
 
 typedef Vec Vec3;
 
@@ -389,7 +391,8 @@ enum {
 
 typedef struct {
     HSD_Joint* joint;
-    u8 padding[20];
+    u8 padding[0x10];
+    HSD_Archive* x14_archive;
 } UnkCostumeStruct;
 
 struct UnkCostumeList {
@@ -459,7 +462,18 @@ struct SpecialAttrs_DK {
 };
 
 struct SpecialAttrs_Kirby {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ UnkFlagStruct x2234;
+    /* 0x2235 */ u8 filler_x2235[3];
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u8 filler1[0x228C - 0x224C];
+    /* 0x228C */ u32 x228C;
+    /* 0x2290 */ u32 x2290;
 };
 
 struct SpecialAttrs_Koopa {
@@ -478,7 +492,9 @@ struct SpecialAttrs_Link {
 };
 
 struct SpecialAttrs_Seak {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
 };
 
 struct SpecialAttrs_Ness {
@@ -507,7 +523,17 @@ struct SpecialAttrs_Popo {
 };
 
 struct SpecialAttrs_Nana {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ UnkFlagStruct x2230;
+    /* 0x2231 */ u8 filler_x2231[3];
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ f32 x2250;
 };
 
 struct SpecialAttrs_Pikachu {
@@ -531,11 +557,21 @@ struct SpecialAttrs_Samus {
 };
 
 struct SpecialAttrs_Yoshi {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
 };
 
 struct SpecialAttrs_Purin {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ HSD_JObj* x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ void* x2244;
+    /* 0x2248 */ u32 x2248;
 };
 
 struct SpecialAttrs_Mewtwo {
@@ -547,7 +583,9 @@ struct SpecialAttrs_Mewtwo {
 };
 
 struct SpecialAttrs_Luigi {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
 };
 
 struct SpecialAttrs_Mars {
@@ -555,7 +593,7 @@ struct SpecialAttrs_Mars {
 };
 
 struct SpecialAttrs_Zelda {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
 };
 
 struct SpecialAttrs_CLink {
@@ -769,7 +807,7 @@ typedef struct _Fighter {
     } x110_attr;
     u8 filler_x294[0x2CC - 0x294];
     /* 0x2CC */ void* x2CC;
-    /* 0x2D0 */ s32 x2D0;
+    /* 0x2D0 */ void* x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
     /* 0x2DC */ f32 x2DC;
@@ -799,12 +837,15 @@ typedef struct _Fighter {
     /* 0x598 */ s32 x598;
     /* 0x59C */ void* x59C;
     /* 0x5A0 */ void* x5A0;
-    u8 filler_x598[0x5C8 - 0x5A4];
+    u8 filler_x5A4[0x5B8 - 0x5A4];
+    /* 0x5B8 */ s32 x5B8;
+    /* 0x5BC */ s32 x5BC;
+    u8 filler_x598[0x5C8 - 0x5C0];
     /* 0x5A0 */ void* x5C8;
     u8 filler_x5CC[0x5E8 - 0x5CC];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F0 - 0x5EC];
-    /* 0x5F0 */ void* x5F0;
+    /* 0x5F0 */ HSD_DObj** x5F0;
     /* 0x5F4 */ s32 x5F4;
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
