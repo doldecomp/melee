@@ -7,18 +7,18 @@ lbl_803D1EA8:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte func_80124908
-    .4byte func_80124B6C
-    .4byte func_80124B74
-    .4byte func_80124BB4
+    .4byte ftPikachu_80124908
+    .4byte ftPikachu_80124B6C
+    .4byte ftPikachu_80124B74
+    .4byte ftPikachu_ActionChange_80124BB4
     .4byte func_800761C8
     .4byte 0x00000128
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte func_80124A20
-    .4byte func_80124B70
-    .4byte func_80124B94
-    .4byte func_80124C20
+    .4byte ftPikachu_80124A20
+    .4byte ftPikachu_80124B70
+    .4byte ftPikachu_80124B94
+    .4byte ftPikachu_ActionChange_80124C20
     .4byte func_800761C8
     .4byte 0x00000129
     .4byte 0x00340212
