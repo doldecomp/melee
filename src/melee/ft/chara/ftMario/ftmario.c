@@ -24,6 +24,8 @@ extern const f32 lbl_804D91AC;
 extern const f32 lbl_804D91B0;
 extern const f32 lbl_804D91B4;
 extern const f32 lbl_804D91B8;
+extern const f32 lbl_804D91C0;
+extern const f32 lbl_804D91C4;
 extern s32 lbl_803C5A20[];
 
 inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
@@ -50,7 +52,7 @@ void ftMario_OnDeath(HSD_GObj* gobj) {
 }
 
 void ftMario_OnLoadForDrMario(Fighter* ft) {
-    PUSH_ATTRS(ft, ftMarioAttributes);
+	PUSH_ATTRS(ft, ftMarioAttributes);
 }
 
 void ftMario_OnLoad(HSD_GObj* gobj) {
@@ -65,11 +67,11 @@ void ftMario_OnLoad(HSD_GObj* gobj) {
 
     ft->x2224_flag.bits.b7 = 1;
    
-    PUSH_ATTRS(ft, ftMarioAttributes);
+	PUSH_ATTRS(ft, ftMarioAttributes);
 
     sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;    
 
-    func_8026B3F8(items[0], 0x30);
+    func_8026B3F8(items[0], It_Kind_MarioFireball);
     func_8026B3F8(items[2], sA->x14);
 }
 
@@ -212,7 +214,7 @@ void func_800E0DA8(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj,0x157,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x157,0,NULL,lbl_804D9198,lbl_804D919C,lbl_804D9198);
     func_8006EBA4(gobj);
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -288,7 +290,7 @@ void func_800E1040(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj,0x158,0,0,lbl_804D9198,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x158,0,NULL,lbl_804D9198,lbl_804D919C,lbl_804D9198);
     func_8006EBA4(gobj);
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -319,7 +321,7 @@ void func_800E113C(HSD_GObj* gobj) {
 void func_800E1178(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     func_8007D5D4(ft);
-    Fighter_ActionStateChange_800693AC(gobj,0x158,0x5000,0,ft->x894,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x158,0x5000,NULL,ft->x894,lbl_804D919C,lbl_804D9198);
 
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -327,7 +329,7 @@ void func_800E1178(HSD_GObj* gobj) {
 void func_800E11E0(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     func_8007D7FC(ft);
-    Fighter_ActionStateChange_800693AC(gobj,0x157,0x5000,0,ft->x894,lbl_804D919C,lbl_804D9198);
+    Fighter_ActionStateChange_800693AC(gobj,0x157,0x5000,NULL,ft->x894,lbl_804D919C,lbl_804D9198);
 
     ft->cb.x21BC_callback_Accessory4 = func_800E0EE0;
 }
@@ -409,7 +411,7 @@ void func_800E1450(HSD_GObj* gobj) {
     ft = gobj->user_data;
     ft->x80_self_vel.y = f1 = lbl_804D91A0;
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x159,0,0,f1,lbl_804D91A4,f1);
+    Fighter_ActionStateChange_800693AC(gobj, 0x159,0,NULL,f1,lbl_804D91A4,f1);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
     ft->x2208_ftcmd_var2 = 0;
@@ -427,7 +429,7 @@ void func_800E14C8(HSD_GObj* gobj) {
     ft->x80_self_vel.x = (ft->x80_self_vel.x / ((Vec3*)(ft->x2D4_specialAttributes))->x);
 
     f1 = lbl_804D91A0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0, 0, f1, lbl_804D91A4, f1);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0, NULL, f1, lbl_804D91A4, f1);
     func_8006EBA4(gobj);
     ft = gobj->user_data;
     ft->x2208_ftcmd_var2 = 0;
@@ -548,5 +550,100 @@ void func_800E1840(HSD_GObj* gobj) {
 void func_800E187C(HSD_GObj* gobj) {
     if (func_80081D0C(gobj) != 0) {
         func_800E198C(gobj);
+    }
+}
+
+void func_800E18B8(HSD_GObj* gobj) {
+    Fighter* ft, *ft_2;
+    u8 unused[8];
+
+    ft = gobj->user_data;
+    func_8007D5D4(ft);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C508C, NULL, ft->x894, lbl_804D91A4, lbl_804D91A0);
+    if ((s32) ft->x2200_ftcmd_var0 == 1U) {
+        ft->x2200_ftcmd_var0 = 2U;
+    }
+    ft_2 = gobj->user_data;
+    if ((s32) ft_2->x2340_stateVar1 != 0) {
+        ft_2->x2218_flag.bits.b3 = 1;
+    }
+    if (ft_2->sa.mario.x223C != NULL) {
+        ft_2->cb.x21E4_callback_OnDeath2 = func_800E0A00;
+        ft_2->cb.x21DC_callback_OnTakeDamage = func_800E0A00;
+    }
+    ft_2->cb.x21D4_callback_EnterHitlag = func_800E13C8;
+    ft_2->cb.x21D8_callback_ExitHitlag = func_800E13F8;
+    ft_2->cb.x21BC_callback_Accessory4 = func_800E1248;
+}
+
+void func_800E198C(HSD_GObj* gobj) {
+    Fighter* ft, *ft_2;
+    u8 unused[8];
+
+    ft = gobj->user_data;
+    ft->sa.mario.x2238 = 0;
+    func_8007D7FC(ft);
+    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C508C, NULL, ft->x894, lbl_804D91A4, lbl_804D91A0);
+    ft_2 = gobj->user_data;
+
+    if ((s32) ft_2->x2340_stateVar1 != 0) {
+        ft_2->x2218_flag.bits.b3 = 1;
+    }
+    if (ft_2->sa.mario.x223C != NULL) {
+        ft_2->cb.x21E4_callback_OnDeath2 = func_800E0A00;
+        ft_2->cb.x21DC_callback_OnTakeDamage = func_800E0A00;
+    }
+    ft_2->cb.x21D4_callback_EnterHitlag = func_800E13C8;
+    ft_2->cb.x21D8_callback_ExitHitlag = func_800E13F8;
+    ft_2->cb.x21BC_callback_Accessory4 = func_800E1248;
+}
+
+void func_800E1A54(HSD_GObj* gobj) {
+    Fighter* ft;
+
+    ft = gobj->user_data;
+    ft->x2200_ftcmd_var0 = 0;
+    ft->x2210_ThrowFlags.flags = 0;
+	Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, NULL, lbl_804D91C0, lbl_804D91C4, lbl_804D91C0);
+    func_8006EBA4(gobj);
+}
+
+void func_800E1AB0(HSD_GObj* gobj) {
+    f32 temp_f1;
+    Fighter* ft;
+    ftMarioAttributes *sA;
+    u8 unused[8];
+
+    ft = gobj->user_data;
+    sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    ft->x2200_ftcmd_var0 = 0;
+    ft->x2210_ThrowFlags.flags = 0;
+    ft->x80_self_vel.y = temp_f1 = lbl_804D91C0;
+    ft->x80_self_vel.x = (f32) (ft->x80_self_vel.x * sA->x2C);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0, NULL, temp_f1, lbl_804D91C4, temp_f1);
+    func_8006EBA4(gobj);
+}
+
+void func_800E1B24(HSD_GObj* gobj) {
+    Fighter* ft;
+    ftMarioAttributes *sA;
+    u8 unused[8];
+
+    ft = gobj->user_data;
+    sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    if (func_8006F238(gobj) == 0) {
+            func_80096900(gobj, 0, 1, 0, sA->x18, sA->x1C);
+    }
+}
+
+void func_800E1B84(HSD_GObj* gobj) {
+    Fighter* ft;
+    ftMarioAttributes *sA;
+    u8 unused[16];
+
+    ft = gobj->user_data;
+    sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    if (func_8006F238(gobj) == 0) {
+            func_80096900(gobj, 0, 1, 0, sA->x18, sA->x1C);
     }
 }

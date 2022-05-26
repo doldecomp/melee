@@ -16,21 +16,25 @@ typedef struct _ftMarioAttributes {
 	/* 0x0C */f32 x0C;
 	/* 0x10 */f32 x10;
 	/* 0x14 */u32 x14;
-    /* 0x18 */u8 x14_padding[0x84 - 0x18];
+    /* 0x18 */f32 x18;
+    /* 0x1C */f32 x1C;
+    /* 0x20 */u8 x14_padding[0x2C - 0x20];
+    /* 0x2C */f32 x2C;
+    /* 0x30 */ u8 x30_padding[0x84 - 0x30];
 } ftMarioAttributes;
 
-void ftMario_OnDeath(HSD_GObj* gobj);
-void ftMario_OnLoadForDrMario(Fighter* ft);
-void ftMario_OnLoad(HSD_GObj* gobj);
-void func_800E0A00(HSD_GObj* gobj);
-void func_800E0A20(HSD_GObj* gobj, s32 arg1);
-void func_800E0B00(HSD_GObj* gobj);
-void func_800E0B48(HSD_GObj* gobj);
-void func_800E0B90(HSD_GObj* gobj, s32 arg1);
-void func_800E0BE4(HSD_GObj* gobj);
-void func_800E0C24(HSD_GObj* gobj);
-void func_800E0C68(HSD_GObj* gobj);
-void func_800E0CAC(s32 arg1, u32* arg2, u32* arg3);
+void ftMario_OnDeath(HSD_GObj*);
+void ftMario_OnLoadForDrMario(Fighter*);
+void ftMario_OnLoad(HSD_GObj*);
+void func_800E0A00(HSD_GObj*);
+void func_800E0A20(HSD_GObj*, s32);
+void func_800E0B00(HSD_GObj*);
+void func_800E0B48(HSD_GObj*);
+void func_800E0B90(HSD_GObj*, s32);
+void func_800E0BE4(HSD_GObj*);
+void func_800E0C24(HSD_GObj*);
+void func_800E0C68(HSD_GObj*);
+void func_800E0CAC(s32, u32*, u32*);
 s32 func_800E0CE0(s32 arg0);
 int func_800E0D1C(HSD_GObj*);
 void func_800E0DA8(HSD_GObj*);
@@ -63,5 +67,7 @@ void func_800E15D0(HSD_GObj*);
 void func_800E16E0(HSD_GObj*);
 void func_800E1840(HSD_GObj*);
 void func_800E187C(HSD_GObj*);
+void func_800E18B8(HSD_GObj*);
+void func_800E198C(HSD_GObj*);
 
 #endif
