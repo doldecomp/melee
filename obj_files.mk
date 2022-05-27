@@ -91,11 +91,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_4.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_5.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_6.c.o\
-<<<<<<< HEAD
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_7.c.o\
-=======
-	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_7.s.o\
->>>>>>> 8f016570cd026de57bb09d17e654301ee8ba8ec4
 	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_8.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftpeach.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpeach.s.o 		\
