@@ -314,7 +314,7 @@ void func_801267C8(HSD_GObj* fighterObj) {
     if (!func_80081298(fighterObj)) {
 
         if (collData->x134_envFlags & 0x6000) {
-            f32 angle = lbvector_AngleXY(&collData->x190, &fighter->x80_self_vel);
+            f32 angle = lbvector_AngleXY(&collData->x190_vec, &fighter->x80_self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 func_80127534_file_end(fighterObj);
             }
