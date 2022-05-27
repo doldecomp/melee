@@ -26,6 +26,9 @@ extern const f32 lbl_804D91B4;
 extern const f32 lbl_804D91B8;
 extern const f32 lbl_804D91C0;
 extern const f32 lbl_804D91C4;
+extern const f64 lbl_804D91C8;
+extern const f32 lbl_804D91D0;
+extern const f64 lbl_804D91D8;
 extern s32 lbl_803C5A20[];
 
 inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
@@ -646,4 +649,102 @@ void func_800E1B84(HSD_GObj* gobj) {
     if (func_8006F238(gobj) == 0) {
             func_80096900(gobj, 0, 1, 0, sA->x18, sA->x1C);
     }
+}
+
+//https://decomp.me/scratch/9AoMu
+inline void func_800E1BE4_and_800E1D2C(HSD_GObj* gobj) {
+    Fighter* ft;
+    ftMarioAttributes* sa;
+
+    f32  inputStickangle, lstick_x;
+    f32 tmp_expr;
+    f32 tmp;
+
+    s32 throwflag_flag;
+    ft = gobj->user_data;
+    
+    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+
+    lstick_x = abs(ft->input.x620_lstick_x);
+
+    if ((s32) ft->x2200_ftcmd_var0 == 0U) {
+        if(lstick_x > sa->x24) {
+            tmp_expr = (f32) ((f64) sa->x28 * 
+                ((f64) (lstick_x - sa->x24) / (1.0d - (f64) sa->x24)));
+
+            tmp = (ft->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * tmp_expr) : (DEGREES_TO_RADIANS * tmp_expr);
+            inputStickangle = ft->x6BC_inputStickangle;
+
+            if (abs(tmp) > abs(inputStickangle)) {
+                ft->x6BC_inputStickangle = tmp;
+            }
+        }
+    }
+
+    if (ft->x2210_ThrowFlags.b3 != 0) {
+        ft->x2210_ThrowFlags.b3 = 0;
+        throwflag_flag= 1;
+    } else {
+        throwflag_flag = 0;
+    }
+    if (throwflag_flag != 0) {
+        if (abs(ft->input.x620_lstick_x) > sa->x20) {
+            func_8007D9FC(ft);
+            func_80075AF0(ft, 0, (f32) (HALF_PI * (f64) ft->x2C_facing_direction));
+        }
+    }
+}
+
+void func_800E1BE4(HSD_GObj* gobj) {
+    func_800E1BE4_and_800E1D2C(gobj);
+}
+
+void func_800E1D2C(HSD_GObj* gobj) {
+    u8 padding[16];
+    func_800E1BE4_and_800E1D2C(gobj);
+}
+
+//https://decomp.me/scratch/8axfI
+void func_800E1E74(HSD_GObj* gobj) {
+    Fighter* ft = gobj->user_data;
+    if (ft->xE0_ground_or_air == 1) {
+        func_80085154(gobj);
+    } else {
+        func_80084FA8(gobj);
+    }
+}
+
+//https://decomp.me/scratch/1jYsR
+void func_800E1EAC(HSD_GObj* gobj) {
+    Fighter* ft;
+    ftMarioAttributes* sa;
+    struct attr* attr_ptr;
+    u8 padding[8];
+    
+    ft = gobj->user_data;
+    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    attr_ptr = &(ft->x110_attr);
+    
+    if ((u32) ft->x2200_ftcmd_var0 != 0U) {
+        func_80085154(gobj);
+        ft->x80_self_vel.x = (f32) (ft->x80_self_vel.x * sa->x34);
+        ft->x80_self_vel.y = (f32) (ft->x80_self_vel.y * sa->x34);
+        ft->x80_self_vel.z = (f32) (ft->x80_self_vel.z * sa->x34);
+        return;
+    }
+    //func_8007D494(ft, sa->x30, (ft + 0x110)->unk60);
+    func_8007D494(ft, sa->x30, attr_ptr->x170_TerminalVelocity);
+    func_8007CF58(ft);
+}
+
+//https://decomp.me/scratch/5eIAp
+void func_800E1F40(HSD_GObj* gobj) {
+    Fighter* ft;
+    ftMarioAttributes* sa;
+
+    ft = gobj->user_data;
+    
+
+    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    func_800D5CB0(gobj, 0, sa->x1C);
 }
