@@ -86,13 +86,14 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_1.c.o 		\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_data.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_2.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_3.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_4.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_5.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_6.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_7.c.o\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_8.s.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_8.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftpeach.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpeach.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/fticeclimber1.c.o 	\
