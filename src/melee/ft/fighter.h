@@ -12,8 +12,10 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/random.h>
 #include "sysdolphin/baselib/controller.h"
+#include <sysdolphin/baselib/archive.h>
 
 typedef Vec Vec3;
 
@@ -223,6 +225,8 @@ typedef struct _FtCollisionData
     s32 x34;
 } FtCollisionData;
 
+struct UnkFloat6_Camera;
+
 typedef struct _ftData
 {
     struct {
@@ -240,7 +244,9 @@ typedef struct _ftData
     }* x8;
     struct S_TEMP4* xC;
     u8* x10;
-    s32 filler_x14[13];
+    s32 filler_x14[10];
+    struct UnkFloat6_Camera *x3C;
+    s32 filler_x40[2];
     /* 0x48 */ void** x48_items;
     FtCollisionData* x4C_collisionData;
     s32 filler_x50[2];
@@ -376,7 +382,8 @@ typedef struct _FighterBone
 {
   /* 0x0 */ HSD_JObj* x0_jobj;
   /* 0x4 */ HSD_JObj* x4_jobj2; // used for interpolation
-  u32 data_filler[2];
+  /* 0x5 */ UnkFlagStruct flags;
+  /* 0x6 */ u8 filler_x6[7];
 } FighterBone;
 
 
@@ -390,13 +397,17 @@ typedef struct _Hitbox {
 
 typedef struct _CameraBox
 {
-  u32 data_filler[3];
+  u32 data_filler[2];
+  s32 x8;
   UnkFlagStruct xC_flag;
   u8 xD_fill[0x10 - 0xD];
   Vec3 x10; // might be Vec2?
   Vec3 x1C;
-  u8 x10_fill[0x50 - 0x28];
-  f32 x50;
+  f32 x28;
+  Vec2 x2C;
+  Vec3 x34;
+  Vec2 x40;
+  Vec3 x48;
 } CameraBox;
 
 typedef struct _CollData
@@ -495,7 +506,8 @@ enum {
 
 typedef struct {
     HSD_Joint* joint;
-    u8 padding[20];
+    u8 padding[0x10];
+    HSD_Archive* x14_archive;
 } UnkCostumeStruct;
 
 struct UnkCostumeList {
@@ -560,11 +572,23 @@ struct SpecialAttrs_Captain {
 };
 
 struct SpecialAttrs_DK {
-    char filler0[0x100];
+    /* 0x222C */ s32 x222C;
+    /* 0x2230 */ s32 x2230;
 };
 
 struct SpecialAttrs_Kirby {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ UnkFlagStruct x2234;
+    /* 0x2235 */ u8 filler_x2235[3];
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u8 filler1[0x228C - 0x224C];
+    /* 0x228C */ u32 x228C;
+    /* 0x2290 */ u32 x2290;
 };
 
 struct SpecialAttrs_Koopa {
@@ -572,11 +596,20 @@ struct SpecialAttrs_Koopa {
 };
 
 struct SpecialAttrs_Link {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
 };
 
 struct SpecialAttrs_Seak {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
 };
 
 struct SpecialAttrs_Ness {
@@ -605,7 +638,17 @@ struct SpecialAttrs_Popo {
 };
 
 struct SpecialAttrs_Nana {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ UnkFlagStruct x2230;
+    /* 0x2231 */ u8 filler_x2231[3];
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ f32 x2250;
 };
 
 struct SpecialAttrs_Pikachu {
@@ -613,15 +656,37 @@ struct SpecialAttrs_Pikachu {
 };
 
 struct SpecialAttrs_Samus {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+
+    /* 0x2240 */ u8 x2240;
+    /* 0x2241 */ u8 x2241;
+    /* 0x2242 */ u8 x2242;
+    /* 0x2243 */ u8 x2243;
+
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
 };
 
 struct SpecialAttrs_Yoshi {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
 };
 
 struct SpecialAttrs_Purin {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ HSD_JObj* x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ void* x2244;
+    /* 0x2248 */ u32 x2248;
 };
 
 struct SpecialAttrs_Mewtwo {
@@ -633,7 +698,9 @@ struct SpecialAttrs_Mewtwo {
 };
 
 struct SpecialAttrs_Luigi {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
 };
 
 struct SpecialAttrs_Mars {
@@ -641,7 +708,7 @@ struct SpecialAttrs_Mars {
 };
 
 struct SpecialAttrs_Zelda {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
 };
 
 struct SpecialAttrs_CLink {
@@ -659,7 +726,23 @@ struct SpecialAttrs_Pichu {
 };
 
 struct SpecialAttrs_Gaw {
-    char filler0[0x100];
+    /* 0x222C */ u32 x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ u32 x2238;
+    /* 0x223C */ u32 x223C;
+    /* 0x2240 */ u32 x2240;
+    /* 0x2244 */ u32 x2244;
+    /* 0x2248 */ u32 x2248;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ u32 x2250;
+    /* 0x2254 */ u32 x2254;
+    /* 0x2258 */ u32 x2258;
+    /* 0x225C */ u32 x225C;
+    /* 0x2260 */ u32 x2260;
+    /* 0x2264 */ u32 x2264;
+    /* 0x2268 */ u32 x2268;
+    /* 0x226C */ u32 x226C;
 };
 
 struct SpecialAttrs_Masterhand {
@@ -676,7 +759,16 @@ struct SpecialAttrs_Masterhand {
 };
 
 struct SpecialAttrs_Crazyhand {
-    char filler0[0x100];
+    /* 0x222C */ HSD_GObj* x222C;
+    /* 0x2230 */ u32 x2230;
+    /* 0x2234 */ u32 x2234;
+    /* 0x2238 */ f32 x2238;
+    /* 0x223C */ f32 x223C;
+    /* 0x2240 */ Vec3 x2240_pos;
+    /* 0x224C */ u32 x224C;
+    /* 0x2250 */ s32 x2250;
+    /* 0x2254 */ s32 x2254;
+    /* 0x2258 */ s32 x2258;
 };
 
 struct SpecialAttrs_Boy {
@@ -688,7 +780,8 @@ struct SpecialAttrs_Girl {
 };
 
 struct SpecialAttrs_GKoopa {
-    char filler0[0x100];
+    /* 0x222C */ f32 x222C;
+    /* 0x2230 */ f32 x2230;
 };
 
 struct SpecialAttrs_Sandbag {
@@ -738,8 +831,8 @@ typedef struct _Fighter {
     // TODO: Ask Psi how many of those are confirmed, only a fraction of them is used right now
     attr x110_attr;
     u8 filler_x294[0x2CC - 0x294];
-    /* 0x2CC */ s32 x2CC;
-    /* 0x2D0 */ s32 x2D0;
+    /* 0x2CC */ void* x2CC;
+    /* 0x2D0 */ void* x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
     /* 0x2D8 */ void* x2D8_specialAttributes2;
     /* 0x2DC */ f32 x2DC;
@@ -769,15 +862,26 @@ typedef struct _Fighter {
     /* 0x598 */ s32 x598;
     /* 0x59C */ void* x59C;
     /* 0x5A0 */ void* x5A0;
-    u8 filler_x598[0x5E8 - 0x5A4];
+    u8 filler_x5A4[0x5B8 - 0x5A4];
+    /* 0x5B8 */ s32 x5B8;
+    /* 0x5BC */ s32 x5BC;
+    u8 filler_x598[0x5C8 - 0x5C0];
+    /* 0x5A0 */ void* x5C8;
+    u8 filler_x5CC[0x5E8 - 0x5CC];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F0 - 0x5EC];
-    /* 0x5F0 */ void* x5F0;
+    /* 0x5F0 */ HSD_DObj** x5F0;
     /* 0x5F4 */ s32 x5F4;
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
-    /* 0x610 */ struct RGBA x610_color_rgba[2];
+    union {
+        /* 0x610 */ struct RGBA x610_color_rgba[2];
+        struct {
+            /* 0x610 */ s32 x610;
+            /* 0x614 */ s32 x614;
+        };
+    };
     /* 0x618 */ u8 x618_player_id;
     /* 0x619 */ u8 x619_costume_id;
     /* 0x61A */ u8 x61A_controller_index;
@@ -1215,6 +1319,7 @@ typedef struct _Fighter {
         struct SpecialAttrs_Mars mars;
         struct SpecialAttrs_Zelda zelda;
         struct SpecialAttrs_CLink clink;
+
         // Mario SpecialAttrs struct is used for DrMario
         // Fox SpecialAttrs struct is used for Falco
         struct SpecialAttrs_Pichu pichu;
@@ -1338,6 +1443,10 @@ typedef struct _Fighter {
     /* 0x23B8 */ s32 x23B8;
 } Fighter;
 
+inline Fighter* getFighter(HSD_GObj* fighterObj) {
+    return fighterObj->user_data;
+}
+
 // functions in fighter.c
 void Fighter_800679B0();
 void Fighter_FirstInitialize_80067A84();
@@ -1379,5 +1488,14 @@ void Fighter_8006D9AC(HSD_GObj* fighterObj);
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
 void Fighter_8006DA4C(HSD_GObj* fighterObj);
 void Fighter_Unload_8006DABC(Fighter* fighter);
+
+#define PUSH_ATTRS(ft, attributeName)                                           \
+    do {                                                                    \
+        void* backup = (ft)->x2D8_specialAttributes2;                      \
+        attributeName *src = (attributeName*)(ft)->x10C_ftData->ext_attr;  \
+        void* *attr = &(ft)->x2D4_specialAttributes;                       \
+        *(attributeName *)(ft)->x2D8_specialAttributes2 = *src;            \
+        *attr = backup;                                                      \
+    } while(0)
 
 #endif

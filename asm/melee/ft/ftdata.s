@@ -948,7 +948,7 @@ ft_OnLoad:
     .4byte ftSeak_OnLoad
     .4byte ftNess_OnLoad
     .4byte ftPeach_OnLoad
-    .4byte ftPopo_OnLoad
+    .4byte ftIcelimber_OnLoad
     .4byte ftNana_OnLoad
     .4byte ftPikachu_OnLoad
     .4byte ftSamus_OnLoad
@@ -985,7 +985,7 @@ ft_OnDeath:
     .4byte ftSeak_OnDeath
     .4byte ftNess_OnDeath
     .4byte ftPeach_OnDeath
-    .4byte ftPopo_OnDeath
+    .4byte ftIcelimber_OnDeath
     .4byte ftNana_OnDeath
     .4byte ftPikachu_OnDeath
     .4byte ftSamus_OnDeath
@@ -1135,7 +1135,7 @@ ft_SpecialS:
     .4byte func_8011C34C
     .4byte func_8011F99C
     .4byte NULL
-    .4byte func_80124E38
+    .4byte ftPikachu_ActionChange_80124E38
     .4byte func_8012A1D8
     .4byte func_8012F4B4
     .4byte func_8013D234
@@ -1146,7 +1146,7 @@ ft_SpecialS:
     .4byte func_800EC354
     .4byte func_800E1450
     .4byte func_800E9EE8
-    .4byte func_80124E38
+    .4byte ftPikachu_ActionChange_80124E38
     .4byte func_8014C7A0
     .4byte func_800E32B0
     .4byte func_8013741C
@@ -1172,7 +1172,7 @@ ft_SpecialHiAir:
     .4byte func_8011D7F0
     .4byte func_8012122C
     .4byte NULL
-    .4byte func_80125E60
+    .4byte ftPikachu_ActionChangeZeroVel_80125E60
     .4byte func_8012A738
     .4byte func_8012E33C
     .4byte func_8013CA98
@@ -1183,7 +1183,7 @@ ft_SpecialHiAir:
     .4byte func_800EBB80
     .4byte func_800E1AB0
     .4byte func_800E72C4
-    .4byte func_80125E60
+    .4byte ftPikachu_ActionChangeZeroVel_80125E60
     .4byte func_8014E158
     .4byte func_800E4CF4
     .4byte func_8013826C
@@ -1209,7 +1209,7 @@ ft_SpecialLwAir:
     .4byte func_8011D1C4
     .4byte func_80122988
     .4byte func_80122988
-    .4byte func_80127924
+    .4byte ftPikachu_ActionChange_80127924
     .4byte func_8012B09C
     .4byte func_8012E78C
     .4byte func_8013CF2C
@@ -1220,7 +1220,7 @@ ft_SpecialLwAir:
     .4byte func_800EB6DC
     .4byte func_800E2194
     .4byte func_800E85EC
-    .4byte func_80127924
+    .4byte ftPikachu_ActionChange_80127924
     .4byte func_8014CF78
     .4byte func_800E40D8
     .4byte func_80138A30
@@ -1246,7 +1246,7 @@ ft_SpecialSAir:
     .4byte func_8011C3C4
     .4byte func_8011FB08
     .4byte NULL
-    .4byte func_80124EAC
+    .4byte ftPikachu_ActionChange_80124EAC
     .4byte func_8012A2AC
     .4byte func_8012F588
     .4byte func_8013D2A0
@@ -1257,7 +1257,7 @@ ft_SpecialSAir:
     .4byte func_800EC404
     .4byte func_800E14C8
     .4byte func_800E9F6C
-    .4byte func_80124EAC
+    .4byte ftPikachu_ActionChange_80124EAC
     .4byte func_8014C828
     .4byte func_800E33E0
     .4byte func_801374A0
@@ -1283,7 +1283,7 @@ ft_SpecialNAir:
     .4byte func_8011E45C
     .4byte func_8011F26C
     .4byte func_8011F26C
-    .4byte func_8012489C
+    .4byte ftPikachu_ActionChange_8012489C
     .4byte func_801295F0
     .4byte func_8012CE64
     .4byte func_8013DF60
@@ -1294,7 +1294,7 @@ ft_SpecialNAir:
     .4byte func_800ECF78
     .4byte func_800E1040
     .4byte func_800E61A8
-    .4byte func_8012489C
+    .4byte ftPikachu_ActionChange_8012489C
     .4byte func_8014E6C0
     .4byte func_800E2C00
     .4byte func_801367B8
@@ -1320,7 +1320,7 @@ ft_SpecialN:
     .4byte func_8011E3D0
     .4byte func_8011F1F8
     .4byte func_8011F1F8
-    .4byte func_80124830
+    .4byte ftPikachu_ActionChange_80124830
     .4byte func_8012954C
     .4byte func_8012CDE8
     .4byte func_8013DEA8
@@ -1331,7 +1331,7 @@ ft_SpecialN:
     .4byte func_800ECDAC
     .4byte func_800E0DA8
     .4byte func_800E608C
-    .4byte func_80124830
+    .4byte ftPikachu_ActionChange_80124830
     .4byte func_8014E644
     .4byte func_800E2B80
     .4byte func_80136744
@@ -1357,7 +1357,7 @@ ft_SpecialLw:
     .4byte func_8011D11C
     .4byte func_80122904
     .4byte func_80122904
-    .4byte func_801278BC
+    .4byte ftPikachu_ActionChange_801278BC
     .4byte func_8012AF5C
     .4byte func_8012E6F8
     .4byte func_8013CE8C
@@ -1368,7 +1368,7 @@ ft_SpecialLw:
     .4byte func_800EB65C
     .4byte func_800E207C
     .4byte func_800E8560
-    .4byte func_801278BC
+    .4byte ftPikachu_ActionChange_801278BC
     .4byte func_8014CEF0
     .4byte func_800E4040
     .4byte func_801389CC
@@ -1394,7 +1394,7 @@ ft_SpecialHi:
     .4byte func_8011D72C
     .4byte func_801211B4
     .4byte NULL
-    .4byte func_80125DE8
+    .4byte ftPikachu_ActionChangeZeroVel_80125DE8
     .4byte func_8012A674
     .4byte func_8012E2C4
     .4byte func_8013C9C8
@@ -1405,7 +1405,7 @@ ft_SpecialHi:
     .4byte func_800EBB1C
     .4byte func_800E1A54
     .4byte func_800E7238
-    .4byte func_80125DE8
+    .4byte ftPikachu_ActionChangeZeroVel_80125DE8
     .4byte func_8014E0AC
     .4byte func_800E4A78
     .4byte func_80138208
@@ -1467,7 +1467,7 @@ ft_OnItemPickup:
     .4byte func_8011B740
     .4byte func_8011ED38
     .4byte func_8011ED38
-    .4byte func_801244B8
+    .4byte ftPikachu_UnkHeldItemAction_801244B8
     .4byte func_80128464
     .4byte func_8012BACC
     .4byte func_8013C6EC
@@ -1503,7 +1503,7 @@ ft_OnItemInvisible:
     .4byte func_8011B820
     .4byte func_8011EE18
     .4byte func_8011EE18
-    .4byte func_80124598
+    .4byte ftPikachu_80124598
     .4byte func_80128544
     .4byte func_8012BBAC
     .4byte func_8013C798
@@ -1539,7 +1539,7 @@ ft_OnItemVisible:
     .4byte func_8011B868
     .4byte func_8011EE60
     .4byte func_8011EE60
-    .4byte func_801245E0
+    .4byte ftPikachu_UnkHeldItem_801245E0
     .4byte func_8012858C
     .4byte func_8012BBF4
     .4byte func_8013C7E8
@@ -1575,7 +1575,7 @@ ft_OnItemRelease:
     .4byte func_8011B8B0
     .4byte func_8011EEA8
     .4byte func_8011EEA8
-    .4byte func_80124628
+    .4byte ftPikachu_80124628
     .4byte func_801285D4
     .4byte func_8012BC3C
     .4byte func_8013C838
@@ -1611,7 +1611,7 @@ ft_OnItemCatch:
     .4byte func_8011B740
     .4byte func_8011ED38
     .4byte func_8011ED38
-    .4byte func_801244B8
+    .4byte ftPikachu_UnkHeldItemAction_801244B8
     .4byte func_80128464
     .4byte func_8012BACC
     .4byte func_8013C6EC
@@ -1647,7 +1647,7 @@ lbl_803C1B20:
     .4byte func_8011B8B0
     .4byte func_8011EEA8
     .4byte func_8011EEA8
-    .4byte func_80124628
+    .4byte ftPikachu_80124628
     .4byte func_801285D4
     .4byte func_8012BC3C
     .4byte func_8013C838
@@ -1683,7 +1683,7 @@ lbl_803C1BA4:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8012467C
+    .4byte ftPikachu_8012467C
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1719,7 +1719,7 @@ lbl_803C1C28:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_801246C0
+    .4byte ftPikachu_801246C0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1755,7 +1755,7 @@ ft_OnKnockbackEnter:
     .4byte func_8011B998
     .4byte func_8011F0E4
     .4byte func_8011F0E4
-    .4byte func_801247A8
+    .4byte ftPikachu_801247A8
     .4byte NULL
     .4byte func_8012BCC8
     .4byte func_8013C8C4
@@ -1791,7 +1791,7 @@ lbl_803C1D30:
     .4byte func_8011B9DC
     .4byte func_8011F128
     .4byte func_8011F128
-    .4byte func_801247EC
+    .4byte ftPikachu_801247EC
     .4byte NULL
     .4byte func_8012BD34
     .4byte func_8013C908
@@ -1899,7 +1899,7 @@ lbl_803C1EBC:
     .4byte func_8011B904
     .4byte func_8011F0A4
     .4byte func_80122FCC
-    .4byte func_80124704
+    .4byte ftPikachu_ScaleYAttributesArray_80124704
     .4byte func_80128684
     .4byte func_8012BC90
     .4byte func_8013C88C

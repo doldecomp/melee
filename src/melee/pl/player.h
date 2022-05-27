@@ -252,7 +252,7 @@ BOOL Player_8003544C(s32 slot, BOOL condition);
 void Player_SetFlagsBit0(s32 slot, s32 bit0);
 s8 Player_GetNametagSlotID(s32 slot);
 void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id);
-u8 Player_GetFlagsBit1(s32 slot);
+s32 Player_GetFlagsBit1(s32 slot);
 void Player_SetFlagsBit1(s32 slot);
 void Player_UnsetFlagsBit1(s32 slot);
 s32 Player_GetFlagsBit3(s32 slot);
@@ -267,7 +267,7 @@ void Player_SetFlagsBit7(s32 slot, u8 bit7);
 u8 Player_GetMoreFlagsBit0(s32 slot);
 u8 Player_GetMoreFlagsBit1(s32 slot);
 void Player_SetMoreFlagsBit1(s32 slot, u8 bit1);
-u8 Player_GetUnk4D(s32 slot);
+s32 Player_GetUnk4D(s32 slot);
 void Player_SetUnk4D(s32 slot, s8 unk4D);
 u8 Player_GetFlagsAEBit1(s32 slot);
 u8 Player_SetFlagsAEBit1(s32 slot, u8 bit1); ///actually returns void

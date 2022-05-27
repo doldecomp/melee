@@ -70,20 +70,15 @@ void func_80136420(HSD_GObj* gobj, s32 arg1) {
 
 // 80136474 00133054
 // https://decomp.me/scratch/2TlGi
-void func_80136474(Fighter* ft) {
-    MarsAttributes* sA2 = ft->x2D8_specialAttributes2;
-    MarsAttributes* ext_attr = ft->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
-    ft->x2D4_specialAttributes = sA2;
+void ftMars_OnLoadForRoy(Fighter* ft) {
+    PUSH_ATTRS(ft, MarsAttributes);
 }
 
 // 801364AC 0013308C
 // https://decomp.me/scratch/9UJHY
 void ftMars_OnLoad(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    MarsAttributes* sA2 = ft->x2D8_specialAttributes2;
-    *(MarsAttributes*)ft->x2D8_specialAttributes2 = *(MarsAttributes*)ft->x10C_ftData->ext_attr;
-    ft->x2D4_specialAttributes = sA2;
+    PUSH_ATTRS(ft, MarsAttributes);
 }
 
 // 801364E8 001330C8

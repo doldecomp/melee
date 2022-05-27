@@ -41,7 +41,7 @@ void func_801362B0(HSD_GObj* gobj, s32 arg1);
 void func_80136390(HSD_GObj* gobj);
 void func_801363D8(HSD_GObj* gobj);
 void func_80136420(HSD_GObj* gobj, s32 arg1);
-void func_80136474(Fighter* ft);
+void ftMars_OnLoadForRoy(Fighter* ft);
 void ftMars_OnLoad(HSD_GObj* gobj);
 void func_801364E8(HSD_GObj* gobj);
 void func_80136520(HSD_GObj* gobj);
