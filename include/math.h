@@ -19,7 +19,7 @@ volatile float y;
    y=(float)(x*guess);
    return y ;
  }
-  return x ;
+  return x;
 }
 
 #pragma cplusplus reset

@@ -9,6 +9,8 @@
 
 #include "melee/lb/lbvector.h"
 
+#include "math.h"
+
 #include "melee/ft/fighter.h"
 
 #include "melee/it/item.h"
@@ -53,7 +55,7 @@ typedef struct ftNessAttributes
 	f32 x78_PSI_MAGNET_UNK1;//Note: Reminiscent of Fox and Falco's Reflector turn duration attribute?
 	f32 x7C_PSI_MAGNET_UNK2;//Note: Reminiscent of Fox and Falco's Reflector Unk1 attribute?
 	f32 x80_PSI_MAGNET_UNK3;
-	f32 x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
+	s32 x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
 	f32 x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
 	f32 x8C_PSI_MAGNET_FALL_ACCELERATION;
 	f32 x90_PSI_MAGNET_UNK6;
@@ -194,6 +196,53 @@ void lbl_801179C0(HSD_GObj* gobj);
 void lbl_80117A2C(HSD_GObj* gobj);
 void lbl_80117A98(HSD_GObj* gobj);
 void lbl_80117B04(HSD_GObj* gobj);
+void func_80117B70(HSD_GObj* gobj);
+s32 func_80117BBC(HSD_GObj* gobj);
+s32 func_800177D9C(HSD_GObj* gobj);
+void func_80117DD4(HSD_GObj* gobj);
+void func_80117E60(HSD_GObj* gobj);
+void func_80117F00(HSD_GObj* gobj, HSD_GObj* gobj2);
+void func_80117F24(HSD_GObj* gobj, CollData* coll_data);
+void func_80118120(HSD_GObj* gobj);
+void func_80118250(HSD_GObj* gobj);
+void func_80118384(HSD_GObj* gobj);
+void func_80118570(HSD_GObj* gobj);
+void lbl_801186B0(HSD_GObj* gobj);
+void lbl_801187A4(HSD_GObj* gobj);
+void lbl_80118900(HSD_GObj* gobj);
+void lbl_8011893C(HSD_GObj* gobj);
+void lbl_80118A10(HSD_GObj* gobj);
+void lbl_80118B04(HSD_GObj* gobj);
+void lbl_80118D60(HSD_GObj* gobj);
+void lbl_80118DF8(HSD_GObj* gobj);
+void lbl_80118EF0(HSD_GObj* gobj);
+void lbl_80118F80(HSD_GObj* gobj);
+void lbl_80118F84(HSD_GObj* gobj);
+void lbl_80118F88(HSD_GObj* gobj);
+void lbl_80118F8C(HSD_GObj* gobj);
+void lbl_80118F90(HSD_GObj* gobj);
+void lbl_80118F94(HSD_GObj* gobj);
+void lbl_80118F98(HSD_GObj* gobj);
+void lbl_80118F9C(HSD_GObj* gobj);
+void lbl_80118FA0(HSD_GObj* gobj);
+void lbl_80118FA4(HSD_GObj* gobj);
+void lbl_80118FDC(HSD_GObj* gobj);
+void lbl_80118FFC(HSD_GObj* gobj);
+void lbl_8011901C(HSD_GObj* gobj);
+void lbl_80119134(HSD_GObj* gobj);
+void lbl_80119194(HSD_GObj* gobj);
+void lbl_801191F4(HSD_GObj* gobj);
+void lbl_80119254(HSD_GObj* gobj);
+void lbl_80119410(HSD_GObj* gobj);
+void lbl_80119460(HSD_GObj* gobj);
+void lbl_801194CC(HSD_GObj* gobj);
+void lbl_80119538(HSD_GObj* gobj);
+void lbl_801195A4(HSD_GObj* gobj);
+void lbl_80119798(HSD_GObj* gobj);
+void lbl_80119804(HSD_GObj* gobj);
+void lbl_80119870(HSD_GObj* gobj);
+void lbl_801198DC(HSD_GObj* gobj);
+void lbl_80119D58(HSD_GObj* gobj);
 void func_8011B0F8(HSD_GObj* gobj);
 
 #endif
