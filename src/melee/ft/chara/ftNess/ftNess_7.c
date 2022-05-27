@@ -186,7 +186,7 @@ s32 func_80117BBC(HSD_GObj* fighter_gobj)
         {
             fighter_data->x2340_stateVar1 = 2;
             func_802AB3F0(fighter_data->sa.ness.x2244, &fighter_data->x2350_stateVar5, 0);
-            func_802AB3F0(fighter_data->sa.ness.x2244, &fighter_data->x235C, 1);
+            func_802AB3F0(fighter_data->sa.ness.x2244, &fighter_data->x235C_s32, 1);
             ret = 1;
         }
         break;
