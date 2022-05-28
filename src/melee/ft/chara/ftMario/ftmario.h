@@ -24,7 +24,13 @@ typedef struct _ftMarioAttributes {
     /* 0x2C */f32 x2C;
     /* 0x30 */f32 x30;
     /* 0x34 */f32 x34;
-    /* 0x30 */ u8 x30_padding[0x84 - 0x38];
+    /* 0x38 */f32 x38;
+    /* 0x3C */u8 x3C_padding[0x40 - 0x3C];
+    /* 0x40 */f32 x40;
+    /* 0x44 */u8 x44_padding[0x50 - 0x44];
+    /* 0x50 */s32 x50;
+    /* 0x54 */f32 x54;
+    /* 0x58 */u8 x58_padding[0x84 - 0x58];
 } ftMarioAttributes;
 
 void ftMario_OnDeath(HSD_GObj*);
