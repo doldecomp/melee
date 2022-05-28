@@ -33,6 +33,7 @@ extern const f32 lbl_804D91D0;
 extern const f64 lbl_804D91D8;
 extern const f32 lbl_804D91E0;
 extern const f32 lbl_804D91E4;
+extern const f32 lbl_804D91E8;
 extern s32 lbl_803C5A20[];
 
 inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
@@ -1028,3 +1029,158 @@ void func_800E207C(HSD_GObj* gobj) {
     ft_2->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     ft_2->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
+
+//https://decomp.me/scratch/nQT5V
+void func_800E2194(HSD_GObj* gobj) {
+    f32 temp_f1;
+    f32 sub_val;
+
+    Fighter* ft;
+    Fighter* ft_2;
+    Fighter* ft_3;
+    Fighter* ft_4;
+    Fighter* ft_5;
+    ftMarioAttributes* sa;
+    ftMarioAttributes* sa_2;
+    void* hsd_obj_ptr;
+    u8 padding[40];
+    
+    ft_2 = ft = gobj->user_data;
+    sa = (ftMarioAttributes*)ft_2->x2D4_specialAttributes;
+    ft->x2208_ftcmd_var2 = 0;
+    temp_f1 = lbl_804D91E0;
+    Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0, NULL, temp_f1, lbl_804D91E4, temp_f1);
+    func_8006EBA4(gobj);
+    if ((s32) ft_2->sa.mario.x2234 != 0) {
+        sub_val = lbl_804D91E0;
+    } else {
+        sub_val = sa->x54;
+    }
+    ft_2->x80_self_vel.y = (f32) (sa->x38 - sub_val);
+    func_8007D440(ft_2, sa->x40);
+    ft_3 = gobj->user_data;
+    sa_2 = (ftMarioAttributes*)ft_3->x2D4_specialAttributes;
+    ft_3->x2200_ftcmd_var0 = 0;
+    ft_3->x2204_ftcmd_var1 = 0;
+    ft_3->x2340_f32 = (f32) lbl_804D91E0;
+    ft_3->x2344_stateVar2_s32 = (s32) (sa_2->x50 + 1);
+    ft_3->x234C_stateVar4 = 0;
+    ft_4 = gobj->user_data;
+    ft_4->cb.x21DC_callback_OnTakeDamage = &func_800E2050;
+    ft_4->cb.x21E4_callback_OnDeath2 = &func_800E2050;
+    ft_5 = gobj->user_data;
+    hsd_obj_ptr = gobj->hsd_obj;
+    ef_Spawn(0x47C, gobj, hsd_obj_ptr);
+    ft_5->x2219_flag.bits.b0 = 1;
+    ft_5->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+    ft_5->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    ft_2->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+    ft_2->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+}
+
+//https://decomp.me/scratch/FT3Fl
+void func_800E22BC(HSD_GObj* gobj) {
+    Fighter* ft;
+    u8 padding[8];
+
+    if (func_8006F238(gobj) == 0) {
+        ft = gobj->user_data;
+        ft->cb.x21DC_callback_OnTakeDamage = NULL;
+        ft->cb.x21E4_callback_OnDeath2 = NULL;
+        func_8008A2BC(gobj);
+    }
+}
+
+#ifdef NON_MATCHING
+//https://decomp.me/scratch/QF5fb
+//Mostly matching? Don't know how lbl_804D91F0 works
+void func_800E2308(HSD_GObj* gobj) {
+    s32 local_x5C;
+    ftMarioAttributes* sa;
+    Fighter* ft;
+    Fighter* ft_2;
+    u8 padding[8];
+
+    ft = gobj->user_data;
+    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    if ((u32) ft->x2204_ftcmd_var1 != 0U) {
+        ft->x2204_ftcmd_var1 = 0U;
+        ft->sa.mario.x2234 = 1;
+    }
+    if (func_8006F238(gobj) == 0) {
+        ft_2 = gobj->user_data;
+        ft_2->cb.x21DC_callback_OnTakeDamage = NULL;
+        ft_2->cb.x21E4_callback_OnDeath2 = NULL;
+        local_x5C = sa->x5C;
+        if (lbl_804D91E8 == (f64)local_x5C) {
+            func_800CC730(gobj);
+            return;
+        }
+        func_80096900(gobj, 1, 0, 1, lbl_804D91E4, (f32) local_x5C);
+    }
+}
+#else
+#define lbl_804D91E4_tmp 0x804D91E4
+#define lbl_804D91E8_tmp 0x804D91E8
+#define lbl_804D91F0 0x804D91F0
+asm void func_800E2308(HSD_GObj* gobj) {
+	nofralloc
+/* 800E2308 000DEEE8  7C 08 02 A6 */	mflr r0
+/* 800E230C 000DEEEC  90 01 00 04 */	stw r0, 4(r1)
+/* 800E2310 000DEEF0  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 800E2314 000DEEF4  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 800E2318 000DEEF8  93 C1 00 20 */	stw r30, 0x20(r1)
+/* 800E231C 000DEEFC  7C 7E 1B 78 */	mr r30, r3
+/* 800E2320 000DEF00  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 800E2324 000DEF04  80 03 22 04 */	lwz r0, 0x2204(r3)
+/* 800E2328 000DEF08  83 E3 02 D4 */	lwz r31, 0x2d4(r3)
+/* 800E232C 000DEF0C  28 00 00 00 */	cmplwi r0, 0
+/* 800E2330 000DEF10  41 82 00 14 */	beq lbl_800E2344
+/* 800E2334 000DEF14  38 00 00 00 */	li r0, 0
+/* 800E2338 000DEF18  90 03 22 04 */	stw r0, 0x2204(r3)
+/* 800E233C 000DEF1C  38 00 00 01 */	li r0, 1
+/* 800E2340 000DEF20  90 03 22 34 */	stw r0, 0x2234(r3)
+lbl_800E2344:
+/* 800E2344 000DEF24  7F C3 F3 78 */	mr r3, r30
+/* 800E2348 000DEF28  4B F8 CE F1 */	bl func_8006F238
+/* 800E234C 000DEF2C  2C 03 00 00 */	cmpwi r3, 0
+/* 800E2350 000DEF30  40 82 00 74 */	bne lbl_800E23C4
+/* 800E2354 000DEF34  80 9E 00 2C */	lwz r4, 0x2c(r30)
+/* 800E2358 000DEF38  38 60 00 00 */	li r3, 0
+/* 800E235C 000DEF3C  3C 00 43 30 */	lis r0, 0x4330
+/* 800E2360 000DEF40  90 64 21 DC */	stw r3, 0x21dc(r4)
+/* 800E2364 000DEF44  90 64 21 E4 */	stw r3, 0x21e4(r4)
+/* 800E2368 000DEF48  80 7F 00 5C */	lwz r3, 0x5c(r31)
+/* 800E236C 000DEF4C  C8 42 98 10 */	lfd f2, lbl_804D91F0-_SDA2_BASE_(r2)
+/* 800E2370 000DEF50  6C 63 80 00 */	xoris r3, r3, 0x8000
+/* 800E2374 000DEF54  C8 22 98 08 */	lfd f1, lbl_804D91E8_tmp-_SDA2_BASE_(r2)
+/* 800E2378 000DEF58  90 61 00 1C */	stw r3, 0x1c(r1)
+/* 800E237C 000DEF5C  90 01 00 18 */	stw r0, 0x18(r1)
+/* 800E2380 000DEF60  C8 01 00 18 */	lfd f0, 0x18(r1)
+/* 800E2384 000DEF64  FC 00 10 28 */	fsub f0, f0, f2
+/* 800E2388 000DEF68  FC 01 00 00 */	fcmpu cr0, f1, f0
+/* 800E238C 000DEF6C  40 82 00 10 */	bne lbl_800E239C
+/* 800E2390 000DEF70  7F C3 F3 78 */	mr r3, r30
+/* 800E2394 000DEF74  4B FE A3 9D */	bl func_800CC730
+/* 800E2398 000DEF78  48 00 00 2C */	b lbl_800E23C4
+lbl_800E239C:
+/* 800E239C 000DEF7C  90 61 00 1C */	stw r3, 0x1c(r1)
+/* 800E23A0 000DEF80  7F C3 F3 78 */	mr r3, r30
+/* 800E23A4 000DEF84  C0 22 98 04 */	lfs f1, lbl_804D91E4_tmp-_SDA2_BASE_(r2)
+/* 800E23A8 000DEF88  38 80 00 01 */	li r4, 1
+/* 800E23AC 000DEF8C  90 01 00 18 */	stw r0, 0x18(r1)
+/* 800E23B0 000DEF90  38 A0 00 00 */	li r5, 0
+/* 800E23B4 000DEF94  C8 01 00 18 */	lfd f0, 0x18(r1)
+/* 800E23B8 000DEF98  38 C0 00 01 */	li r6, 1
+/* 800E23BC 000DEF9C  EC 40 10 28 */	fsubs f2, f0, f2
+/* 800E23C0 000DEFA0  4B FB 45 41 */	bl func_80096900
+lbl_800E23C4:
+/* 800E23C4 000DEFA4  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 800E23C8 000DEFA8  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 800E23CC 000DEFAC  83 C1 00 20 */	lwz r30, 0x20(r1)
+/* 800E23D0 000DEFB0  38 21 00 28 */	addi r1, r1, 0x28
+/* 800E23D4 000DEFB4  7C 08 03 A6 */	mtlr r0
+/* 800E23D8 000DEFB8  4E 80 00 20 */	blr 
+}
+#pragma peephole on
+#endif
