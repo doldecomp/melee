@@ -324,7 +324,7 @@ TEXT_O_FILES := 						            \
 													\
 	$(BUILD_DIR)/asm/MSL/abort_exit.s.o               \
 	$(BUILD_DIR)/asm/MSL/ansi_fp.s.o                  \
-	$(BUILD_DIR)/asm/MSL/buffer_io.s.o                \
+	$(BUILD_DIR)/src/MSL/buffer_io.c.o                \
 	$(BUILD_DIR)/src/MSL/PPC_EABI/critical_regions.gamecube.c.o 	\
 	$(BUILD_DIR)/src/MSL/ctype.c.o                    \
 	$(BUILD_DIR)/asm/MSL/direct_io.s.o                \
