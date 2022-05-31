@@ -8,6 +8,7 @@
 #include "sysdolphin/baselib/gobj.h"
 
 #include "melee/ft/fighter.h"
+#include "melee/ft/ftcommon.h"
 
 typedef struct _ftMarioAttributes {
     /* 0x00 */u8 x0_padding[0x04 - 0x0];

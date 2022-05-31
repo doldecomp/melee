@@ -1093,30 +1093,24 @@ void func_800E22BC(HSD_GObj* gobj) {
 
 #ifdef NON_MATCHING
 //https://decomp.me/scratch/QF5fb
-//Mostly matching? Don't know how lbl_804D91F0 works
 void func_800E2308(HSD_GObj* gobj) {
-    s32 local_x5C;
-    ftMarioAttributes* sa;
-    Fighter* ft;
-    Fighter* ft_2;
-    u8 padding[8];
-
-    ft = gobj->user_data;
-    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    Fighter* ft = getFighter(gobj);
+    ftMarioAttributes* sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    
     if ((u32) ft->x2204_ftcmd_var1 != 0U) {
         ft->x2204_ftcmd_var1 = 0U;
         ft->sa.mario.x2234 = 1;
     }
     if (func_8006F238(gobj) == 0) {
-        ft_2 = gobj->user_data;
+        Fighter *ft_2 = getFighter(gobj);
+        
         ft_2->cb.x21DC_callback_OnTakeDamage = NULL;
         ft_2->cb.x21E4_callback_OnDeath2 = NULL;
-        local_x5C = sa->x5C;
-        if (lbl_804D91E8 == (f64)local_x5C) {
+        if (lbl_804D91E8 == (f64)sa->x5C) {
             func_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, 1, lbl_804D91E4, (f32) local_x5C);
+        func_80096900(gobj, 1, 0, 1, lbl_804D91E4, (f32) sa->x5C);
     }
 }
 #else
@@ -1182,5 +1176,143 @@ lbl_800E23C4:
 /* 800E23D4 000DEFB4  7C 08 03 A6 */	mtlr r0
 /* 800E23D8 000DEFB8  4E 80 00 20 */	blr 
 }
+#pragma peephole on
+#endif
+
+void func_800E23DC(void) {
+	return;
+}
+
+void func_800E23E0(void) {
+	return;
+}
+
+#ifdef NON_MATCHING
+//https://decomp.me/scratch/aJPK4
+inline ftMarioAttributes* GetMarioAttr(Fighter* ft)
+{
+    ftMarioAttributes* mario_attr = ft->x2D4_specialAttributes;
+    return mario_attr;
+}
+
+void func_800E23E4(HSD_GObj* gobj) {
+    f32 flt_var;
+    ftMarioAttributes* sa;
+    Fighter* ft;
+    Fighter* ft_tmp;
+    Fighter* ft_2;
+
+    s32 filler[2];
+
+    ft = getFighter(gobj);
+    sa = GetMarioAttr(ft);
+    
+    flt_var = sa->x3C;
+    if ((u32) ft->x2200_ftcmd_var0 != 0U) {
+        ft->x2340_f32 = (f32) (ft->x2340_f32 - sa->x4C);
+        flt_var += ft->x2340_f32;
+        if (flt_var < 0.0f) {
+            flt_var = 0.0f;
+        }
+    }
+    
+    ft_tmp = ft;
+    func_8007CADC(ft_tmp, 0.0f, sa->x44, flt_var);
+    func_8007CB74(gobj);
+    if (((u32) ft->x2208_ftcmd_var2 != 0U) && ((ft->input.x668 & 0x200) != 0)) {
+        flt_var = ft->x80_self_vel.y;
+        ft->x80_self_vel.y = (f32) (flt_var + sa->x54);
+        ft_2 = getFighter(gobj);
+        sa = GetMarioAttr(ft_2);
+        ft_2->x2208_ftcmd_var2 = 0;
+        func_8007D5D4(ft_2);
+        Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x0C4C508A, NULL, ft_2->x894, 1.0f, 0.0f);
+        ftComm_ClampFalllSpeed(ft_2, sa->x58);
+        func_8007D440(ft_2, sa->x40);
+        ft_2->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+        ft_2->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+    }
+}
+#else
+#define lbl_804D91E0_tmp 0x804D91E0
+asm void func_800E23E4(HSD_GObj* gobj) {
+	nofralloc
+/* 800E23E4 000DEFC4  7C 08 02 A6 */	mflr r0
+/* 800E23E8 000DEFC8  90 01 00 04 */	stw r0, 4(r1)
+/* 800E23EC 000DEFCC  94 21 FF C0 */	stwu r1, -0x40(r1)
+/* 800E23F0 000DEFD0  93 E1 00 3C */	stw r31, 0x3c(r1)
+/* 800E23F4 000DEFD4  93 C1 00 38 */	stw r30, 0x38(r1)
+/* 800E23F8 000DEFD8  93 A1 00 34 */	stw r29, 0x34(r1)
+/* 800E23FC 000DEFDC  7C 7D 1B 78 */	mr r29, r3
+/* 800E2400 000DEFE0  83 C3 00 2C */	lwz r30, 0x2c(r3)
+/* 800E2404 000DEFE4  80 1E 22 00 */	lwz r0, 0x2200(r30)
+/* 800E2408 000DEFE8  83 FE 02 D4 */	lwz r31, 0x2d4(r30)
+/* 800E240C 000DEFEC  28 00 00 00 */	cmplwi r0, 0
+/* 800E2410 000DEFF0  C0 7F 00 3C */	lfs f3, 0x3c(r31)
+/* 800E2414 000DEFF4  41 82 00 2C */	beq lbl_800E2440
+/* 800E2418 000DEFF8  C0 3E 23 40 */	lfs f1, 0x2340(r30)
+/* 800E241C 000DEFFC  C0 1F 00 4C */	lfs f0, 0x4c(r31)
+/* 800E2420 000DF000  EC 01 00 28 */	fsubs f0, f1, f0
+/* 800E2424 000DF004  D0 1E 23 40 */	stfs f0, 0x2340(r30)
+/* 800E2428 000DF008  C0 3E 23 40 */	lfs f1, 0x2340(r30)
+/* 800E242C 000DF00C  C0 02 98 00 */	lfs f0, lbl_804D91E0_tmp-_SDA2_BASE_(r2)
+/* 800E2430 000DF010  EC 63 08 2A */	fadds f3, f3, f1
+/* 800E2434 000DF014  FC 03 00 40 */	fcmpo cr0, f3, f0
+/* 800E2438 000DF018  40 80 00 08 */	bge lbl_800E2440
+/* 800E243C 000DF01C  FC 60 00 90 */	fmr f3, f0
+lbl_800E2440:
+/* 800E2440 000DF020  C0 22 98 00 */	lfs f1, lbl_804D91E0_tmp-_SDA2_BASE_(r2)
+/* 800E2444 000DF024  7F C3 F3 78 */	mr r3, r30
+/* 800E2448 000DF028  C0 5F 00 44 */	lfs f2, 0x44(r31)
+/* 800E244C 000DF02C  4B F9 A6 91 */	bl func_8007CADC
+/* 800E2450 000DF030  7F A3 EB 78 */	mr r3, r29
+/* 800E2454 000DF034  4B F9 A7 21 */	bl func_8007CB74
+/* 800E2458 000DF038  80 1E 22 08 */	lwz r0, 0x2208(r30)
+/* 800E245C 000DF03C  28 00 00 00 */	cmplwi r0, 0
+/* 800E2460 000DF040  41 82 00 8C */	beq lbl_800E24EC
+/* 800E2464 000DF044  80 1E 06 68 */	lwz r0, 0x668(r30)
+/* 800E2468 000DF048  54 00 05 AD */	rlwinm. r0, r0, 0, 0x16, 0x16
+/* 800E246C 000DF04C  41 82 00 80 */	beq lbl_800E24EC
+/* 800E2470 000DF050  C0 3E 00 84 */	lfs f1, 0x84(r30)
+/* 800E2474 000DF054  38 00 00 00 */	li r0, 0
+/* 800E2478 000DF058  C0 1F 00 54 */	lfs f0, 0x54(r31)
+/* 800E247C 000DF05C  EC 01 00 2A */	fadds f0, f1, f0
+/* 800E2480 000DF060  D0 1E 00 84 */	stfs f0, 0x84(r30)
+/* 800E2484 000DF064  83 DD 00 2C */	lwz r30, 0x2c(r29)
+/* 800E2488 000DF068  83 FE 02 D4 */	lwz r31, 0x2d4(r30)
+/* 800E248C 000DF06C  7F C3 F3 78 */	mr r3, r30
+/* 800E2490 000DF070  90 1E 22 08 */	stw r0, 0x2208(r30)
+/* 800E2494 000DF074  4B F9 B1 41 */	bl func_8007D5D4
+/* 800E2498 000DF078  3C 80 0C 4C */	lis r4, 0x0C4C508A@ha
+/* 800E249C 000DF07C  C0 3E 08 94 */	lfs f1, 0x894(r30)
+/* 800E24A0 000DF080  C0 42 98 04 */	lfs f2, lbl_804D91E4_tmp-_SDA2_BASE_(r2)
+/* 800E24A4 000DF084  7F A3 EB 78 */	mr r3, r29
+/* 800E24A8 000DF088  C0 62 98 00 */	lfs f3, lbl_804D91E0_tmp-_SDA2_BASE_(r2)
+/* 800E24AC 000DF08C  38 A4 50 8A */	addi r5, r4, 0x0C4C508A@l
+/* 800E24B0 000DF090  38 80 01 5E */	li r4, 0x15e
+/* 800E24B4 000DF094  38 C0 00 00 */	li r6, 0
+/* 800E24B8 000DF098  4B F8 6E F5 */	bl Fighter_ActionStateChange_800693AC
+/* 800E24BC 000DF09C  7F C3 F3 78 */	mr r3, r30
+/* 800E24C0 000DF0A0  C0 3F 00 58 */	lfs f1, 0x58(r31)
+/* 800E24C4 000DF0A4  4B F9 B0 31 */	bl ftComm_ClampFalllSpeed
+/* 800E24C8 000DF0A8  7F C3 F3 78 */	mr r3, r30
+/* 800E24CC 000DF0AC  C0 3F 00 40 */	lfs f1, 0x40(r31)
+/* 800E24D0 000DF0B0  4B F9 AF 71 */	bl func_8007D440
+/* 800E24D4 000DF0B4  3C 60 80 06 */	lis r3, efLib_PauseAll@ha
+/* 800E24D8 000DF0B8  38 03 BA 40 */	addi r0, r3, efLib_PauseAll@l
+/* 800E24DC 000DF0BC  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
+/* 800E24E0 000DF0C0  90 1E 21 D4 */	stw r0, 0x21d4(r30)
+/* 800E24E4 000DF0C4  38 03 BA C4 */	addi r0, r3, efLib_ResumeAll@l
+/* 800E24E8 000DF0C8  90 1E 21 D8 */	stw r0, 0x21d8(r30)
+lbl_800E24EC:
+/* 800E24EC 000DF0CC  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 800E24F0 000DF0D0  83 E1 00 3C */	lwz r31, 0x3c(r1)
+/* 800E24F4 000DF0D4  83 C1 00 38 */	lwz r30, 0x38(r1)
+/* 800E24F8 000DF0D8  83 A1 00 34 */	lwz r29, 0x34(r1)
+/* 800E24FC 000DF0DC  38 21 00 40 */	addi r1, r1, 0x40
+/* 800E2500 000DF0E0  7C 08 03 A6 */	mtlr r0
+/* 800E2504 000DF0E4  4E 80 00 20 */	blr 
+}
+
 #pragma peephole on
 #endif
