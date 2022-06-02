@@ -26,15 +26,28 @@ typedef struct _ftMarioAttributes {
     /* 0x30 */f32 x30;
     /* 0x34 */f32 x34;
     /* 0x38 */f32 x38;
-    /* 0x3C */u8 x3C_padding[0x40 - 0x3C];
+    /* 0x3C */f32 x3C;
     /* 0x40 */f32 x40;
-    /* 0x44 */u8 x44_padding[0x50 - 0x44];
+    /* 0x44 */u8 x44_padding[0x48 - 0x44];
+    /* 0x48 */f32 x48;
+    /* 0x4C */f32 x4C;
     /* 0x50 */s32 x50;
     /* 0x54 */f32 x54;
-    /* 0x58 */u8 x58_padding[0x5C - 0x58];
+    /* 0x58 */f32 x58;
     /* 0x5C */s32 x5C;
     /* 0x60 */u8 x60_padding[0x84 - 0x60];
 } ftMarioAttributes;
+
+typedef struct ftMarioUnkStruct
+{
+    u8 x0_str_arr[3];
+    u8 x3_balign;
+    u32 x4;
+    u32 x8;
+    u32 xC;
+    u32 x10;
+    u32 x14;
+} ftMarioUnkStruct;
 
 void ftMario_OnDeath(HSD_GObj*);
 void ftMario_OnLoadForDrMario(Fighter*);

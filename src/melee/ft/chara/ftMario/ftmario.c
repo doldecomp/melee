@@ -34,6 +34,7 @@ extern const f64 lbl_804D91D8;
 extern const f32 lbl_804D91E0;
 extern const f32 lbl_804D91E4;
 extern const f32 lbl_804D91E8;
+extern const ftMarioUnkStruct lbl_803C72A0;
 extern s32 lbl_803C5A20[];
 
 inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
@@ -46,6 +47,12 @@ inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
         }
     }
     return outpos;
+}
+
+inline ftMarioAttributes* GetMarioAttr(Fighter* ft)
+{
+    ftMarioAttributes* mario_attr = ft->x2D4_specialAttributes;
+    return mario_attr;
 }
 
 void ftMario_OnDeath(HSD_GObj* gobj) {
@@ -1189,12 +1196,6 @@ void func_800E23E0(void) {
 
 #ifdef NON_MATCHING
 //https://decomp.me/scratch/aJPK4
-inline ftMarioAttributes* GetMarioAttr(Fighter* ft)
-{
-    ftMarioAttributes* mario_attr = ft->x2D4_specialAttributes;
-    return mario_attr;
-}
-
 void func_800E23E4(HSD_GObj* gobj) {
     f32 flt_var;
     ftMarioAttributes* sa;
@@ -1232,6 +1233,34 @@ void func_800E23E4(HSD_GObj* gobj) {
         ft_2->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
         ft_2->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
     }
+}
+
+//https://decomp.me/scratch/sjB2k
+void func_800E2508(HSD_GObj* gobj) {
+    f32 flt_var;
+    ftMarioAttributes* sa;
+    ftMarioAttributes* sa_2;
+    Fighter* ft;
+    u8 padding[8];
+
+    ft = getFighter(gobj);
+    sa = ft->x2D4_specialAttributes;
+
+    if (((s32) ft->sa.mario.x2234 == 0) && ((u32) ft->x2208_ftcmd_var2 != 0U) && ((ft->input.x668 & 0x200) != 0)) {
+        func_8007D508(ft, sa->x54, sa->x58);
+    }
+    func_8007D4B8(ft);
+    flt_var = sa->x40;
+    sa_2 = ft->x2D4_specialAttributes;
+    if ((u32) ft->x2200_ftcmd_var0 != 0U) {
+        ft->x2340_f32 = (f32) (ft->x2340_f32 - sa_2->x4C);
+        flt_var += ft->x2340_f32;
+        if (flt_var < 0.0f) {
+            flt_var = 0.0f;
+        }
+    }
+    
+    func_8007D3A8(ft, 0.0f, sa->x48, flt_var); 
 }
 #else
 #define lbl_804D91E0_tmp 0x804D91E0
@@ -1314,5 +1343,112 @@ lbl_800E24EC:
 /* 800E2504 000DF0E4  4E 80 00 20 */	blr 
 }
 
+asm void func_800E2508(HSD_GObj* gobj) {
+	nofralloc
+/* 800E2508 000DF0E8  7C 08 02 A6 */	mflr r0
+/* 800E250C 000DF0EC  90 01 00 04 */	stw r0, 4(r1)
+/* 800E2510 000DF0F0  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800E2514 000DF0F4  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800E2518 000DF0F8  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800E251C 000DF0FC  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800E2520 000DF100  80 1F 22 34 */	lwz r0, 0x2234(r31)
+/* 800E2524 000DF104  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
+/* 800E2528 000DF108  2C 00 00 00 */	cmpwi r0, 0
+/* 800E252C 000DF10C  40 82 00 2C */	bne lbl_800E2558
+/* 800E2530 000DF110  80 1F 22 08 */	lwz r0, 0x2208(r31)
+/* 800E2534 000DF114  28 00 00 00 */	cmplwi r0, 0
+/* 800E2538 000DF118  41 82 00 20 */	beq lbl_800E2558
+/* 800E253C 000DF11C  80 1F 06 68 */	lwz r0, 0x668(r31)
+/* 800E2540 000DF120  54 00 05 AD */	rlwinm. r0, r0, 0, 0x16, 0x16
+/* 800E2544 000DF124  41 82 00 14 */	beq lbl_800E2558
+/* 800E2548 000DF128  C0 3E 00 54 */	lfs f1, 0x54(r30)
+/* 800E254C 000DF12C  7F E3 FB 78 */	mr r3, r31
+/* 800E2550 000DF130  C0 5E 00 58 */	lfs f2, 0x58(r30)
+/* 800E2554 000DF134  4B F9 AF B5 */	bl func_8007D508
+lbl_800E2558:
+/* 800E2558 000DF138  7F E3 FB 78 */	mr r3, r31
+/* 800E255C 000DF13C  4B F9 AF 5D */	bl func_8007D4B8
+/* 800E2560 000DF140  80 1F 22 00 */	lwz r0, 0x2200(r31)
+/* 800E2564 000DF144  C0 7E 00 40 */	lfs f3, 0x40(r30)
+/* 800E2568 000DF148  28 00 00 00 */	cmplwi r0, 0
+/* 800E256C 000DF14C  80 7F 02 D4 */	lwz r3, 0x2d4(r31)
+/* 800E2570 000DF150  41 82 00 2C */	beq lbl_800E259C
+/* 800E2574 000DF154  C0 3F 23 40 */	lfs f1, 0x2340(r31)
+/* 800E2578 000DF158  C0 03 00 4C */	lfs f0, 0x4c(r3)
+/* 800E257C 000DF15C  EC 01 00 28 */	fsubs f0, f1, f0
+/* 800E2580 000DF160  D0 1F 23 40 */	stfs f0, 0x2340(r31)
+/* 800E2584 000DF164  C0 3F 23 40 */	lfs f1, 0x2340(r31)
+/* 800E2588 000DF168  C0 02 98 00 */	lfs f0, lbl_804D91E0_tmp-_SDA2_BASE_(r2)
+/* 800E258C 000DF16C  EC 63 08 2A */	fadds f3, f3, f1
+/* 800E2590 000DF170  FC 03 00 40 */	fcmpo cr0, f3, f0
+/* 800E2594 000DF174  40 80 00 08 */	bge lbl_800E259C
+/* 800E2598 000DF178  FC 60 00 90 */	fmr f3, f0
+lbl_800E259C:
+/* 800E259C 000DF17C  C0 22 98 00 */	lfs f1, lbl_804D91E0_tmp-_SDA2_BASE_(r2)
+/* 800E25A0 000DF180  7F E3 FB 78 */	mr r3, r31
+/* 800E25A4 000DF184  C0 5E 00 48 */	lfs f2, 0x48(r30)
+/* 800E25A8 000DF188  4B F9 AE 01 */	bl func_8007D3A8
+/* 800E25AC 000DF18C  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800E25B0 000DF190  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800E25B4 000DF194  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800E25B8 000DF198  38 21 00 20 */	addi r1, r1, 0x20
+/* 800E25BC 000DF19C  7C 08 03 A6 */	mtlr r0
+/* 800E25C0 000DF1A0  4E 80 00 20 */	blr 
+}
 #pragma peephole on
 #endif
+
+//https://decomp.me/scratch/CsJXX
+void func_800E25C4(HSD_GObj* gobj) {
+    ftMarioAttributes* sa;
+    
+    Fighter* ft_2;
+    Fighter* ft_3;
+    Fighter* ft_4;
+    Fighter* ft;
+    Fighter* ft_tmp;
+
+    u8 unused[24];
+
+    ft = getFighter(gobj);
+
+    if (ft->xE0_ground_or_air == GA_Ground) {
+        if (func_80082888(gobj, &lbl_803C72A0) == 0) {
+            ft_2 = gobj->user_data;
+            sa = GetMarioAttr(ft_2);
+            ft_2->x2208_ftcmd_var2 = 0;
+            func_8007D5D4(ft_2);
+            Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x0C4C508A, NULL, ft_2->x894, lbl_804D91E4, lbl_804D91E0);
+            ftComm_ClampFalllSpeed(ft_2, sa->x58);
+            func_8007D440(ft_2, sa->x40);
+            ft_2->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+            ft_2->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+            ft->x234C_stateVar4 = 0;
+        } else {
+            ft->x234C_stateVar4 = 1;
+        }
+    } else {
+        if (func_800824A0(gobj, &lbl_803C72A0) == 0) {
+            ft_3 = gobj->user_data;
+            sa = GetMarioAttr(ft_3);
+            ft_3->x2208_ftcmd_var2 = 0;
+            func_8007D5D4(ft_3);
+            Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x0C4C508A, NULL, ft_3->x894, lbl_804D91E4, lbl_804D91E0);
+            ftComm_ClampFalllSpeed(ft_3, sa->x58);
+            func_8007D440(ft_3, sa->x40);
+            ft_3->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+            ft_3->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+            ft->x234C_stateVar4 = 0;
+        } else {
+            ft->x234C_stateVar4 = 1;
+        }
+    }
+
+    ft_tmp = ft_4 = getFighter(gobj);
+    if ((ft_tmp->x220C_ftcmd_var3 != 0U) && ((s32)(ft_tmp->x234C_stateVar4) != 0)) {
+        func_8007592C(ft_4, 0, ft_4->x2C_facing_direction * func_someCalcAngle_80022C30(ft_4->x6F0_collData.x154_groundNormal.x, ft_4->x6F0_collData.x154_groundNormal.y));
+    } else {
+        func_8007592C(ft_4, 0, lbl_804D91E0);
+    }
+    
+}
