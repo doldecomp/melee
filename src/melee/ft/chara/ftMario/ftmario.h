@@ -28,7 +28,7 @@ typedef struct _ftMarioAttributes {
     /* 0x38 */f32 x38;
     /* 0x3C */f32 x3C;
     /* 0x40 */f32 x40;
-    /* 0x44 */u8 x44_padding[0x48 - 0x44];
+    /* 0x44 */f32 x44;
     /* 0x48 */f32 x48;
     /* 0x4C */f32 x4C;
     /* 0x50 */s32 x50;
@@ -48,6 +48,12 @@ typedef struct ftMarioUnkStruct
     u32 x10;
     u32 x14;
 } ftMarioUnkStruct;
+
+inline ftMarioAttributes* GetMarioAttr(Fighter* ft)
+{
+    ftMarioAttributes* mario_attr = ft->x2D4_specialAttributes;
+    return mario_attr;
+}
 
 void ftMario_OnDeath(HSD_GObj*);
 void ftMario_OnLoadForDrMario(Fighter*);
