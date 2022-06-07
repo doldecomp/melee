@@ -31,40 +31,40 @@ void func_800E1A54(HSD_GObj* gobj) {
 void func_800E1AB0(HSD_GObj* gobj) {
     f32 temp_f1;
     Fighter* ft;
-    ftMarioAttributes *sA;
+    ftMarioAttributes *sa;
     u8 unused[8];
 
     ft = gobj->user_data;
-    sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
     ft->x80_self_vel.y = temp_f1 = 0.0f;
-    ft->x80_self_vel.x = (f32) (ft->x80_self_vel.x * sA->x2C);
+    ft->x80_self_vel.x = (f32) (ft->x80_self_vel.x * sa->x2C);
     Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0, NULL, temp_f1, 1.0f, temp_f1);
     func_8006EBA4(gobj);
 }
 
 void func_800E1B24(HSD_GObj* gobj) {
     Fighter* ft;
-    ftMarioAttributes *sA;
+    ftMarioAttributes *sa;
     u8 unused[8];
 
     ft = gobj->user_data;
-    sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     if (func_8006F238(gobj) == 0) {
-            func_80096900(gobj, 0, 1, 0, sA->x18, sA->x1C);
+        func_80096900(gobj, 0, 1, 0, sa->x18, sa->x1C);
     }
 }
 
 void func_800E1B84(HSD_GObj* gobj) {
     Fighter* ft;
-    ftMarioAttributes *sA;
+    ftMarioAttributes *sa;
     u8 unused[16];
 
     ft = gobj->user_data;
-    sA = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     if (func_8006F238(gobj) == 0) {
-            func_80096900(gobj, 0, 1, 0, sA->x18, sA->x1C);
+        func_80096900(gobj, 0, 1, 0, sa->x18, sa->x1C);
     }
 }
 

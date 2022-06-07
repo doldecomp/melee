@@ -144,16 +144,27 @@ void func_800E15CC(void) {
 	return;
 }
 
-//TODO: Inlining for func_800E15D0 and func_800E16E0
+void _ftMario_800E15D0_800E16E0_helper(HSD_GObj* gobj) {
+    Fighter* ft = getFighter(gobj);
+    u32* sa_tmp  = ((u32*)ft->x2D4_specialAttributes);
+    
+    if ((ft->x2204_ftcmd_var1 == 1U) && ((s32) ft->x2340_stateVar1 == 0)) {
+        ft->x2340_stateVar1= 1;
+        func_8007B23C(gobj, sa_tmp + 0x18, 0);
+    }
+    else if ((ft->x2204_ftcmd_var1 == 0U) && ((s32) ft->x2340_stateVar1 == 1)) {
+        ft->x2340_stateVar1 = 0;
+        ft->x2218_flag.bits.b3 = 0;
+    }
+    func_8007AEF8(gobj);
+}
+
 #define PI_3 (3.14159265359f / 3.0f)
 void func_800E15D0(HSD_GObj* gobj) {
-    u32* sa_tmp;
-    u32 x2204_tmp;
-
-    Fighter* ft, *ft_2;
+    Fighter* ft;
     u8 unused0[4];
     Vec3 coords;
-    u8 unused1[24];
+    u8 unused1[20];
 
     ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 == 1U) {
@@ -165,31 +176,18 @@ void func_800E15D0(HSD_GObj* gobj) {
     }
 
     func_80084F3C(gobj);
-    ft_2 = gobj->user_data;
-    x2204_tmp = ft_2->x2204_ftcmd_var1;
-    sa_tmp = ((u32*)ft_2->x2D4_specialAttributes);
-    if ((x2204_tmp == 1U) && ((s32) ft_2->x2340_stateVar1 == 0)) {
-        ft_2->x2340_stateVar1= 1;
-        func_8007B23C(gobj, sa_tmp + 0x18, 0);
-    }
-    else if ((x2204_tmp == 0U) && ((s32) ft_2->x2340_stateVar1 == 1)) {
-        ft_2->x2340_stateVar1 = 0;
-        ft_2->x2218_flag.bits.b3 = 0;
-    }
-    func_8007AEF8(gobj);
+    _ftMario_800E15D0_800E16E0_helper(gobj);
 }
 
 void func_800E16E0(HSD_GObj* gobj) {
-    u32 *sa_tmp;
-    u32 x2204_tmp;
     u32 ftcmd_var0_tmp;
 
-    Fighter *ft, *ft_2;
+    Fighter *ft;
     ftMarioAttributes* sa;
 
     u8 unused0[4];
     Vec3 coords;
-    u8 unused1[28];
+    u8 unused1[24];
 
     ft = gobj->user_data;
 
@@ -214,17 +212,7 @@ void func_800E16E0(HSD_GObj* gobj) {
         func_8007D4B8(ft);
     }
     func_8007CE94(ft, sa->x04);
-    ft_2 = gobj->user_data;
-    x2204_tmp = ft_2->x2204_ftcmd_var1;
-    sa_tmp = ((u32*)ft_2->x2D4_specialAttributes);
-    if((x2204_tmp == 1U) && ((s32)ft_2->x2340_stateVar1 == 0)) {
-        ft_2->x2340_stateVar1 = 1;
-        func_8007B23C(gobj, sa_tmp + 0x18, 0);
-    } else if ((x2204_tmp == 0U) && ((s32)ft_2->x2340_stateVar1 == 1)) {
-        ft_2->x2340_stateVar1 = 0;
-        ft_2->x2218_flag.bits.b3 = 0;
-    }
-    func_8007AEF8(gobj);
+    _ftMario_800E15D0_800E16E0_helper(gobj);
 }
 
 void func_800E1840(HSD_GObj* gobj) {
@@ -239,40 +227,37 @@ void func_800E187C(HSD_GObj* gobj) {
     }
 }
 
-void func_800E18B8(HSD_GObj* gobj) {
-    Fighter* ft, *ft_2;
-    u8 unused[8];
+void _ftMario_800E18B8_800E198C_helper(HSD_GObj* gobj) {
+    Fighter* ft = getFighter(gobj);
+    if ((s32) ft->x2340_stateVar1 != 0) {
+        ft->x2218_flag.bits.b3 = 1;
+    }
+    _ftMario_check_223C_and_set(ft);
+    ft->cb.x21BC_callback_Accessory4 = func_800E1248;
+}
 
-    ft = gobj->user_data;
+void func_800E18B8(HSD_GObj* gobj) {
+    Fighter* ft;
+    u8 unused[4];
+
+    ft = getFighter(gobj);
     func_8007D5D4(ft);
     Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C508C, NULL, ft->x894, 1.0f, 0.0f);
     if ((s32) ft->x2200_ftcmd_var0 == 1U) {
         ft->x2200_ftcmd_var0 = 2U;
     }
 
-    //TODO: Inline this w/ similar block in func_800E198C
-    ft_2 = gobj->user_data;
-    if ((s32) ft_2->x2340_stateVar1 != 0) {
-        ft_2->x2218_flag.bits.b3 = 1;
-    }
-    _ftMario_check_223C_and_set(ft_2);
-    ft_2->cb.x21BC_callback_Accessory4 = func_800E1248;
+    _ftMario_800E18B8_800E198C_helper(gobj);
 }
 
 void func_800E198C(HSD_GObj* gobj) {
-    Fighter* ft, *ft_2;
-    u8 unused[8];
+    Fighter* ft;
+    u8 unused[4];
 
     ft = gobj->user_data;
     ft->sa.mario.x2238 = 0;
     func_8007D7FC(ft);
     Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C508C, NULL, ft->x894, 1.0f, 0.0f);
 
-    //TODO: Inline this w/ similar block in func_800E18B8
-    ft_2 = gobj->user_data;
-    if ((s32) ft_2->x2340_stateVar1 != 0) {
-        ft_2->x2218_flag.bits.b3 = 1;
-    }
-    _ftMario_check_223C_and_set(ft_2);
-    ft_2->cb.x21BC_callback_Accessory4 = func_800E1248;
+    _ftMario_800E18B8_800E198C_helper(gobj);
 }
