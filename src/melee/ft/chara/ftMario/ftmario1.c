@@ -15,8 +15,6 @@ extern void func_802C0510(HSD_GObj*,Vec*,int,u8,f32);
 extern void func_800E13C8(HSD_GObj*);
 extern void func_800E13F8(HSD_GObj*);
 extern void ef_Spawn(long,...);
-//TODO: Replace these
-//Currently issues with float placement in sdata2 when replacing these with float literals
 extern const ftMarioUnkStruct lbl_803C72A0;
 extern s32 lbl_803C5A20[];
 

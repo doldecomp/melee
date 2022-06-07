@@ -15,8 +15,6 @@ extern void func_802C0510(HSD_GObj*,Vec*,int,u8,f32);
 extern void func_800E13C8(HSD_GObj*);
 extern void func_800E13F8(HSD_GObj*);
 extern void ef_Spawn(long,...);
-//TODO: Replace these
-//Currently issues with float placement in sdata2 when replacing these with float literals
 extern const ftMarioUnkStruct lbl_803C72A0;
 extern s32 lbl_803C5A20[];
 
@@ -229,7 +227,7 @@ void func_800E2508(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/ykJHP
-inline void _func_800E25C4_helper_0(HSD_GObj* gobj) {
+void _ftMario_func_800E25C4_helper_0(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ftMarioAttributes* sa = GetMarioAttr(ft);
     ft->x2208_ftcmd_var2 = 0;
@@ -241,7 +239,7 @@ inline void _func_800E25C4_helper_0(HSD_GObj* gobj) {
     ft->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-inline void _func_800E25C4_helper_1(HSD_GObj* gobj) {
+void _ftMario_func_800E25C4_helper_1(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ftMarioAttributes* sa = GetMarioAttr(ft);
 
@@ -257,21 +255,21 @@ void func_800E25C4(HSD_GObj* gobj) {
 
     if (ft->xE0_ground_or_air == GA_Ground) {
         if (func_80082888(gobj, &lbl_803C72A0) == 0) {
-            _func_800E25C4_helper_0(gobj);
+            _ftMario_func_800E25C4_helper_0(gobj);
             ft->x234C_stateVar4 = 0;
         } else {
             ft->x234C_stateVar4 = 1;
         }
     } else {
         if (func_800824A0(gobj, &lbl_803C72A0) == 0) {
-            _func_800E25C4_helper_0(gobj);
+            _ftMario_func_800E25C4_helper_0(gobj);
             ft->x234C_stateVar4 = 0;
         } else {
             ft->x234C_stateVar4 = 1;
         }
     }
 
-    _func_800E25C4_helper_1(gobj);
+    _ftMario_func_800E25C4_helper_1(gobj);
 }
 
 void func_800E2778(HSD_GObj* gobj) {

@@ -15,8 +15,6 @@ extern void func_802C0510(HSD_GObj*,Vec*,int,u8,f32);
 extern void func_800E13C8(HSD_GObj*);
 extern void func_800E13F8(HSD_GObj*);
 extern void ef_Spawn(long,...);
-//TODO: Replace these
-//Currently issues with float placement in sdata2 when replacing these with float literals
 extern const ftMarioUnkStruct lbl_803C72A0;
 extern s32 lbl_803C5A20[];
 
@@ -71,13 +69,11 @@ void func_800E1B84(HSD_GObj* gobj) {
 }
 
 #define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
-//#define HALF_PI (3.141592653589792d / 2.0)
 #define HALF_PI 1.5707963267948966d
 
 #define abs(x) (x < 0.0f ? -x : x)
 
 //https://decomp.me/scratch/9AoMu
-//TODO: This all matches, just keeping in NON_MATCHING for now until label issues are cleared up
 inline void func_800E1BE4_and_800E1D2C(HSD_GObj* gobj) {
     Fighter* ft;
     ftMarioAttributes* sa;
@@ -158,7 +154,6 @@ void func_800E1EAC(HSD_GObj* gobj) {
         ft->x80_self_vel.z = (f32) (ft->x80_self_vel.z * sa->x34);
         return;
     }
-    //func_8007D494(ft, sa->x30, (ft + 0x110)->unk60);
     func_8007D494(ft, sa->x30, attr_ptr->x170_TerminalVelocity);
     func_8007CF58(ft);
 }
