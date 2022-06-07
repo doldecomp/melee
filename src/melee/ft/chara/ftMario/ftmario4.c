@@ -88,14 +88,14 @@ inline void func_800E1BE4_and_800E1D2C(HSD_GObj* gobj) {
 
     s32 throwflag_flag;
     ft = gobj->user_data;
-    
+
     sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
 
     lstick_x = abs(ft->input.x620_lstick_x);
 
     if ((s32) ft->x2200_ftcmd_var0 == 0U) {
         if(lstick_x > sa->x24) {
-            tmp_expr = (f32) ((f64) sa->x28 * 
+            tmp_expr = (f32) ((f64) sa->x28 *
                 ((f64) (lstick_x - sa->x24) / (1.0d - (f64) sa->x24)));
 
             tmp = (ft->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * tmp_expr) : (DEGREES_TO_RADIANS * tmp_expr);
@@ -146,11 +146,11 @@ void func_800E1EAC(HSD_GObj* gobj) {
     ftMarioAttributes* sa;
     struct attr* attr_ptr;
     u8 padding[8];
-    
+
     ft = gobj->user_data;
     sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     attr_ptr = &(ft->x110_attr);
-    
+
     if ((u32) ft->x2200_ftcmd_var0 != 0U) {
         func_80085154(gobj);
         ft->x80_self_vel.x = (f32) (ft->x80_self_vel.x * sa->x34);
@@ -169,7 +169,6 @@ void func_800E1F40(HSD_GObj* gobj) {
     ftMarioAttributes* sa;
 
     ft = gobj->user_data;
-    
 
     sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     func_800D5CB0(gobj, 0, sa->x1C);

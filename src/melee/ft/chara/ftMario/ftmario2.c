@@ -20,16 +20,32 @@ extern void ef_Spawn(long,...);
 extern const ftMarioUnkStruct lbl_803C72A0;
 extern s32 lbl_803C5A20[];
 
-inline int _func_800E0EE0_arr_copy(Fighter* ft_2, int* arr)
-{
-    int i, outpos;
-    for (i = outpos = 0; i < 9; i++) {
-        if (i != (int)ft_2->sa.mario.x222C && i != (int)ft_2->sa.mario.x2230) {
-            arr[outpos] = i;
-            outpos++;
+inline int _func_800E0D1C_helper(Fighter* ft, int* arr, int outpos) {
+    int r3;
+    r3 = (int)arr[HSD_Randi(outpos)];
+    ft->sa.mario.x2230 = ft->sa.mario.x222C;
+    ft->sa.mario.x222C = r3;
+    return r3;
+}
+
+//https://decomp.me/scratch/od8nq
+int func_800E0D1C(HSD_GObj* gobj) {
+    Fighter* ft;
+    int arr[9];
+    int r3,i;
+
+    ft = gobj->user_data;
+
+    for (i = r3 = 0; i < 9; i++) {
+        if (i != (int)ft->sa.mario.x222C && i != (int)ft->sa.mario.x2230) {
+            arr[r3] = i;
+            r3++;
         }
     }
-    return outpos;
+
+    r3 = _func_800E0D1C_helper(ft, arr, r3);
+
+    return r3;
 }
 
 void func_800E0DA8(HSD_GObj* gobj) {
@@ -65,45 +81,34 @@ void func_800E0EA4(HSD_GObj* gobj) {
     }
 }
 
-//https://decomp.me/scratch/yJ6cV
+//https://decomp.me/scratch/Of8qP
 void func_800E0EE0(HSD_GObj* gobj) {
     Vec3 coords;
     Fighter* ft;
     Fighter* ft_2;
-    
-    
+
+
     s32 flag_res;
-    
-    int arr[11];
-    int outsize;
-    int tmp, tmp2;
-    u8 padding[8];
+
+    int rand_val_800E0D1C;
 
     ft = gobj->user_data;
-    
+
     if (ft->x2210_ThrowFlags.b0 != 0) {
         ft->x2210_ThrowFlags.b0 = 0;
         flag_res = 1;
-        
     } else {
         flag_res = 0;
-        
     }
-    
+
     if (flag_res != 0) {
         func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 0x17)].x0_jobj,NULL,&coords);
-
         if(ft->x4_fighterKind == 0) {
             func_8029B6F8(ft->x2C_facing_direction, gobj,&coords,0x30);
             ef_Spawn(0x47a,gobj,ft->x5E8_fighterBones[func_8007500C(ft, 0x17)].x0_jobj,&ft->x2C_facing_direction);
         } else {
-            ft_2 = gobj->user_data;
-
-            outsize = _func_800E0EE0_arr_copy(ft_2, arr);
-            tmp = tmp2 = arr[HSD_Randi(outsize)];
-            ft_2->sa.mario.x2230 = ft_2->sa.mario.x222C;
-            ft_2->sa.mario.x222C = tmp2;
-            func_802C0510(gobj, &coords, tmp, 0x31, ft->x2C_facing_direction);
+            rand_val_800E0D1C = func_800E0D1C(gobj);
+            func_802C0510(gobj, &coords, rand_val_800E0D1C, 0x31, ft->x2C_facing_direction);
         }
     }
 }
@@ -169,7 +174,7 @@ void func_800E1248(HSD_GObj* gobj) {
         func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 0x31)].x0_jobj,NULL,&coords);
 
         gobj2 = func_802B2560(gobj,ft->x2C_facing_direction,&coords,func_8007500C(ft, 0x31),sA->x14);
-        
+
         ft->sa.mario.x223C = gobj2;
         ft->x1984_heldItemSpec = ft->sa.mario.x223C;
         if(ft->sa.mario.x223C != NULL) {

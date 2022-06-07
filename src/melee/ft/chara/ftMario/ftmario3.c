@@ -41,7 +41,7 @@ void func_800E14C8(HSD_GObj* gobj) {
     f32 f1;
     Fighter* ft = gobj->user_data;
     u8 unused[16];
-    
+
     ft->x80_self_vel.x = (ft->x80_self_vel.x / ((Vec3*)(ft->x2D4_specialAttributes))->x);
 
     f1 = 0.0f;
@@ -77,10 +77,10 @@ void func_800E15CC(void) {
 
 
 #define PI_3 (3.14159265359f / 3.0f)
-void func_800E15D0(HSD_GObj* gobj) {    
+void func_800E15D0(HSD_GObj* gobj) {
     u32* sa_tmp;
     u32 x2204_tmp;
-    
+
     Fighter* ft, *ft_2;
     u8 unused0[4];
     Vec3 coords;
@@ -90,7 +90,7 @@ void func_800E15D0(HSD_GObj* gobj) {
     if (ft->x2200_ftcmd_var0 == 1U) {
         ft->x2200_ftcmd_var0 = 2U;
         func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 0x4)].x0_jobj,NULL,&coords);
-		
+
         coords.x += 3.0f * ft->x2C_facing_direction;
         //func_800119DC(&coords, 0x78, 0.9f, 0.02f, 1.0472f);
 		func_800119DC(&coords, 0x78, 0.9f, 0.02f, PI_3);
@@ -115,14 +115,14 @@ void func_800E16E0(HSD_GObj* gobj) {
     u32 *sa_tmp;
     u32 x2204_tmp;
     u32 ftcmd_var0_tmp;
-    
+
     Fighter *ft, *ft_2;
     ftMarioAttributes* sa;
-    
+
     u8 unused0[4];
     Vec3 coords;
     u8 unused1[28];
-    
+
     ft = gobj->user_data;
 
     ftcmd_var0_tmp = ft->x2200_ftcmd_var0;
@@ -214,5 +214,4 @@ void func_800E198C(HSD_GObj* gobj) {
     ft_2->cb.x21D4_callback_EnterHitlag = func_800E13C8;
     ft_2->cb.x21D8_callback_ExitHitlag = func_800E13F8;
     ft_2->cb.x21BC_callback_Accessory4 = func_800E1248;
-	
 }
