@@ -92,7 +92,6 @@ void func_800E15D0(HSD_GObj* gobj) {
         func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 0x4)].x0_jobj,NULL,&coords);
 
         coords.x += 3.0f * ft->x2C_facing_direction;
-        //func_800119DC(&coords, 0x78, 0.9f, 0.02f, 1.0472f);
 		func_800119DC(&coords, 0x78, 0.9f, 0.02f, PI_3);
     }
 
@@ -139,7 +138,7 @@ void func_800E16E0(HSD_GObj* gobj) {
             }
             func_8000B1CC(ft->x5E8_fighterBones[func_8007500C(ft, 0x4)].x0_jobj,NULL,&coords);
             coords.x += 3.0f * ft->x2C_facing_direction;
-            func_800119DC(&coords, 0x78, 3.0f, 0.1f, 1.0472f);
+            func_800119DC(&coords, 0x78, 3.0f, 0.1f, PI_3);
         }
         func_8007D494(ft, sa->x0C, sa->x10);
     } else {
