@@ -229,9 +229,7 @@ void func_800E2508(HSD_GObj* gobj) {
     func_8007D3A8(ft, 0.0f, sa->x48, flt_var);
 }
 
-
-
-void _ftMario_func_800E25C4_helper_1(HSD_GObj* gobj) {
+void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ftMarioAttributes* sa = GetMarioAttr(ft);
 
@@ -262,39 +260,34 @@ void func_800E25C4(HSD_GObj* gobj) {
         }
     }
 
-    _ftMario_func_800E25C4_helper_1(gobj);
+    _ftMario_800E25C4_800E2778_helper(gobj);
 }
 
-void func_800E2778(HSD_GObj* gobj) {
-    ftMarioAttributes* sa;
-    Fighter* ft_2;
-    Fighter* ft_3;
+void _ftMario_800E2778_helper(HSD_GObj* gobj) {
     Fighter* ft_tmp;
-    u8 padding[16];
+    Fighter* ft;
+    ftMarioAttributes* sa;
+    ft = getFighter(gobj);
+    sa = GetMarioAttr(ft);
+    ft->x2208_ftcmd_var2 = 0;
+    func_8007D7FC(ft);
+    ft->x80_self_vel.y = 0.0f;
+    ft->sa.mario.x2234 = 0;
+    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4C508A, NULL, ft->x894, 1.0f, 0.0f);
+    func_8007CC78(sa->x3C, ft_tmp = ft);
+    ft->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
+    ft->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+}
 
+//https://decomp.me/scratch/v3srn
+void func_800E2778(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (func_800824A0(gobj, &lbl_803C72A0) != 0) {
-        ft_2 = gobj->user_data;
-        sa = GetMarioAttr(ft_2);
-        ft_2->x2208_ftcmd_var2 = 0;
-        func_8007D7FC(ft_2);
-
-        ft_2->x80_self_vel.y = 0.0f;
-        ft_2->sa.mario.x2234 = 0;
-        Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4C508A, NULL, ft_2->x894, 1.0f, 0.0f);
-        ft_tmp = ft_2;
-        func_8007CC78(sa->x3C, ft_tmp);
-        ft_2->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
-        ft_2->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
+        _ftMario_800E2778_helper(gobj);
         ft->x234C_stateVar4 = 1;
     } else {
         ft->x234C_stateVar4 = 0;
     }
 
-    ft_tmp = ft_3 = getFighter(gobj);
-    if ((ft_tmp->x220C_ftcmd_var3 != 0U) && ((s32)(ft_tmp->x234C_stateVar4) != 0)) {
-        func_8007592C(ft_3, 0, ft_3->x2C_facing_direction * func_someCalcAngle_80022C30(ft_3->x6F0_collData.x154_groundNormal.x, ft_3->x6F0_collData.x154_groundNormal.y));
-    } else {
-        func_8007592C(ft_3, 0, 0.0f);
-    }
+    _ftMario_800E25C4_800E2778_helper(gobj);
 }
