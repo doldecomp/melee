@@ -3,23 +3,10 @@
 
 #include <melee/it/id.h>
 
-extern void func_800E1368(HSD_GObj*);
-extern void func_8008A4D4(HSD_GObj*);
-extern void func_800E0EE0(HSD_GObj*);
-extern void func_80084F3C(HSD_GObj*);
-extern long func_8007500C(struct _Fighter *, long);
-extern void func_8000B1CC(HSD_JObj*, Vec*, Vec*);
-extern void func_8029B6F8(f32,HSD_GObj*,Vec*,u8);
-extern HSD_GObj* func_802B2560(HSD_GObj*,f32,Vec3*,long,u32);
-extern void func_802C0510(HSD_GObj*,Vec*,int,u8,f32);
-extern void func_800E13C8(HSD_GObj*);
-extern void func_800E13F8(HSD_GObj*);
-extern void ef_Spawn(long,...);
 extern const ftMarioUnkStruct lbl_803C72A0;
-extern s32 lbl_803C5A20[];
 
 //https://decomp.me/scratch/8zo4V
-void func_800E2050(HSD_GObj* gobj) {
+void ftMario_func_800E2050(HSD_GObj* gobj) {
     Fighter* ft;
     ft = getFighter(gobj);
 
@@ -40,8 +27,8 @@ void _ftMario_call_efspawn_and_set_cb(HSD_GObj* gobj) {
 
 void _ftMario_set_cb_to_800E2050(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
-    ft->cb.x21DC_callback_OnTakeDamage = &func_800E2050;
-    ft->cb.x21E4_callback_OnDeath2 = &func_800E2050;
+    ft->cb.x21DC_callback_OnTakeDamage = &ftMario_func_800E2050;
+    ft->cb.x21E4_callback_OnDeath2 = &ftMario_func_800E2050;
 }
 
 void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj) {
@@ -65,7 +52,7 @@ void _ftMario_set_ftcmd_var2(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/4saR2
-void func_800E207C(HSD_GObj* gobj) {
+void ftMario_func_800E207C(HSD_GObj* gobj) {
 
     Fighter* ft;
 
@@ -88,7 +75,7 @@ void func_800E207C(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/nQT5V
-void func_800E2194(HSD_GObj* gobj) {
+void ftMario_func_800E2194(HSD_GObj* gobj) {
     f32 sub_val;
     Fighter* ft;
 
@@ -123,7 +110,7 @@ void _ftMario_set_null_cb(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/FT3Fl
-void func_800E22BC(HSD_GObj* gobj) {
+void ftMario_func_800E22BC(HSD_GObj* gobj) {
     Fighter* ft;
 
     if (func_8006F238(gobj) == 0) {
@@ -133,7 +120,7 @@ void func_800E22BC(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/QF5fb
-void func_800E2308(HSD_GObj* gobj) {
+void ftMario_func_800E2308(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ftMarioAttributes* sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
 
@@ -151,11 +138,11 @@ void func_800E2308(HSD_GObj* gobj) {
     }
 }
 
-void func_800E23DC(void) {
+void ftMario_func_800E23DC(void) {
 	return;
 }
 
-void func_800E23E0(void) {
+void ftMario_func_800E23E0(void) {
 	return;
 }
 
@@ -172,7 +159,7 @@ void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/aJPK4
-void func_800E23E4(HSD_GObj* gobj) {
+void ftMario_func_800E23E4(HSD_GObj* gobj) {
     f32 flt_var;
     ftMarioAttributes* sa;
     Fighter* ft;
@@ -203,7 +190,7 @@ void func_800E23E4(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/sjB2k
-void func_800E2508(HSD_GObj* gobj) {
+void ftMario_func_800E2508(HSD_GObj* gobj) {
     f32 flt_var;
     ftMarioAttributes* sa;
     ftMarioAttributes* sa_2;
@@ -241,7 +228,7 @@ void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/ykJHP
-void func_800E25C4(HSD_GObj* gobj) {
+void ftMario_func_800E25C4(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
 
     if (ft->xE0_ground_or_air == GA_Ground) {
@@ -280,7 +267,7 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/v3srn
-void func_800E2778(HSD_GObj* gobj) {
+void ftMario_func_800E2778(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (func_800824A0(gobj, &lbl_803C72A0) != 0) {
         _ftMario_800E2778_helper(gobj);

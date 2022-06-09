@@ -3,22 +3,7 @@
 
 #include <melee/it/id.h>
 
-extern void func_800E1368(HSD_GObj*);
-extern void func_8008A4D4(HSD_GObj*);
-extern void func_800E0EE0(HSD_GObj*);
-extern void func_80084F3C(HSD_GObj*);
-extern long func_8007500C(struct _Fighter *, long);
-extern void func_8000B1CC(HSD_JObj*, Vec*, Vec*);
-extern void func_8029B6F8(f32,HSD_GObj*,Vec*,u8);
-extern HSD_GObj* func_802B2560(HSD_GObj*,f32,Vec3*,long,u32);
-extern void func_802C0510(HSD_GObj*,Vec*,int,u8,f32);
-extern void func_800E13C8(HSD_GObj*);
-extern void func_800E13F8(HSD_GObj*);
-extern void ef_Spawn(long,...);
-extern const ftMarioUnkStruct lbl_803C72A0;
-extern s32 lbl_803C5A20[];
-
-void func_800E1A54(HSD_GObj* gobj) {
+void ftMario_func_800E1A54(HSD_GObj* gobj) {
     Fighter* ft;
 
     ft = getFighter(gobj);
@@ -28,7 +13,7 @@ void func_800E1A54(HSD_GObj* gobj) {
     func_8006EBA4(gobj);
 }
 
-void func_800E1AB0(HSD_GObj* gobj) {
+void ftMario_func_800E1AB0(HSD_GObj* gobj) {
     Fighter* ft;
     ftMarioAttributes *sa;
     u8 unused[4];
@@ -43,7 +28,7 @@ void func_800E1AB0(HSD_GObj* gobj) {
     func_8006EBA4(gobj);
 }
 
-void func_800E1B24(HSD_GObj* gobj) {
+void ftMario_func_800E1B24(HSD_GObj* gobj) {
     Fighter* ft;
     ftMarioAttributes *sa;
 
@@ -54,9 +39,9 @@ void func_800E1B24(HSD_GObj* gobj) {
     }
 }
 
-void func_800E1B84(HSD_GObj* gobj) {
+void ftMario_func_800E1B84(HSD_GObj* gobj) {
     u8 unused[8];
-    func_800E1B24(gobj);
+    ftMario_func_800E1B24(gobj);
 }
 
 #define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
@@ -108,17 +93,17 @@ inline void _ftMario_func_800E1BE4_and_800E1D2C(HSD_GObj* gobj) {
     }
 }
 
-void func_800E1BE4(HSD_GObj* gobj) {
+void ftMario_func_800E1BE4(HSD_GObj* gobj) {
     _ftMario_func_800E1BE4_and_800E1D2C(gobj);
 }
 
-void func_800E1D2C(HSD_GObj* gobj) {
+void ftMario_func_800E1D2C(HSD_GObj* gobj) {
     u8 padding[16];
     _ftMario_func_800E1BE4_and_800E1D2C(gobj);
 }
 
 //https://decomp.me/scratch/8axfI
-void func_800E1E74(HSD_GObj* gobj) {
+void ftMario_func_800E1E74(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     if (ft->xE0_ground_or_air == GA_Air) {
         func_80085154(gobj);
@@ -128,7 +113,7 @@ void func_800E1E74(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/1jYsR
-void func_800E1EAC(HSD_GObj* gobj) {
+void ftMario_func_800E1EAC(HSD_GObj* gobj) {
     Fighter* ft;
     ftMarioAttributes* sa;
     struct attr* attr_ptr;
@@ -149,7 +134,7 @@ void func_800E1EAC(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/5eIAp
-void func_800E1F40(HSD_GObj* gobj) {
+void ftMario_func_800E1F40(HSD_GObj* gobj) {
     Fighter* ft;
     ftMarioAttributes* sa;
 
@@ -160,7 +145,7 @@ void func_800E1F40(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/k2DCy
-void func_800E1F70(HSD_GObj* gobj) {
+void ftMario_func_800E1F70(HSD_GObj* gobj) {
     Fighter* ft;
 
     ft = getFighter(gobj);
@@ -168,13 +153,13 @@ void func_800E1F70(HSD_GObj* gobj) {
         if (ft->x2200_ftcmd_var0 == 0 || ft->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else {
-            func_800831CC(gobj, &func_80096CC8, &func_800E1F40);
+            func_800831CC(gobj, &func_80096CC8, &ftMario_func_800E1F40);
         }
     } else {
         func_80084104(gobj);
     }
 }
 
-void func_800E1FE0(HSD_GObj* gobj) {
-	func_800E1F70(gobj);
+void ftMario_func_800E1FE0(HSD_GObj* gobj) {
+	ftMario_func_800E1F70(gobj);
 }

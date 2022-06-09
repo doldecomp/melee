@@ -1123,7 +1123,7 @@ lbl_803C1364:
 
 .global ft_SpecialS
 ft_SpecialS:
-    .4byte func_800E1450
+    .4byte ftMario_func_800E1450
     .4byte func_800E9EE8
     .4byte func_800E32B0
     .4byte func_8010E1C4
@@ -1144,7 +1144,7 @@ ft_SpecialS:
     .4byte func_8013741C
     .4byte func_8013B638
     .4byte func_800EC354
-    .4byte func_800E1450
+    .4byte ftMario_func_800E1450
     .4byte func_800E9EE8
     .4byte ftPikachu_ActionChange_80124E38
     .4byte func_8014C7A0
@@ -1160,7 +1160,7 @@ ft_SpecialS:
 
 .global ft_SpecialHiAir
 ft_SpecialHiAir:
-    .4byte func_800E1AB0
+    .4byte ftMario_func_800E1AB0
     .4byte func_800E72C4
     .4byte func_800E4CF4
     .4byte func_8010FBFC
@@ -1181,7 +1181,7 @@ ft_SpecialHiAir:
     .4byte func_8013826C
     .4byte func_801398E8
     .4byte func_800EBB80
-    .4byte func_800E1AB0
+    .4byte ftMario_func_800E1AB0
     .4byte func_800E72C4
     .4byte ftPikachu_ActionChangeZeroVel_80125E60
     .4byte func_8014E158
@@ -1197,7 +1197,7 @@ ft_SpecialHiAir:
 
 .global ft_SpecialLwAir
 ft_SpecialLwAir:
-    .4byte func_800E2194
+    .4byte ftMario_func_800E2194
     .4byte func_800E85EC
     .4byte func_800E40D8
     .4byte NULL
@@ -1218,7 +1218,7 @@ ft_SpecialLwAir:
     .4byte func_80138A30
     .4byte func_8013AFA4
     .4byte func_800EB6DC
-    .4byte func_800E2194
+    .4byte ftMario_func_800E2194
     .4byte func_800E85EC
     .4byte ftPikachu_ActionChange_80127924
     .4byte func_8014CF78
@@ -1234,7 +1234,7 @@ ft_SpecialLwAir:
 
 .global ft_SpecialSAir
 ft_SpecialSAir:
-    .4byte func_800E14C8
+    .4byte ftMario_func_800E14C8
     .4byte func_800E9F6C
     .4byte func_800E33E0
     .4byte func_8010E234
@@ -1255,7 +1255,7 @@ ft_SpecialSAir:
     .4byte func_801374A0
     .4byte func_8013B6D8
     .4byte func_800EC404
-    .4byte func_800E14C8
+    .4byte ftMario_func_800E14C8
     .4byte func_800E9F6C
     .4byte ftPikachu_ActionChange_80124EAC
     .4byte func_8014C828
@@ -1271,7 +1271,7 @@ ft_SpecialSAir:
 
 .global ft_SpecialNAir
 ft_SpecialNAir:
-    .4byte func_800E1040
+    .4byte ftMario_func_800E1040
     .4byte func_800E61A8
     .4byte func_800E2C00
     .4byte func_8010E69C
@@ -1292,7 +1292,7 @@ ft_SpecialNAir:
     .4byte func_801367B8
     .4byte func_8013A9A4
     .4byte func_800ECF78
-    .4byte func_800E1040
+    .4byte ftMario_func_800E1040
     .4byte func_800E61A8
     .4byte ftPikachu_ActionChange_8012489C
     .4byte func_8014E6C0
@@ -1308,7 +1308,7 @@ ft_SpecialNAir:
 
 .global ft_SpecialN
 ft_SpecialN:
-    .4byte func_800E0DA8
+    .4byte ftMario_func_800E0DA8
     .4byte func_800E608C
     .4byte func_800E2B80
     .4byte func_8010E574
@@ -1329,7 +1329,7 @@ ft_SpecialN:
     .4byte func_80136744
     .4byte func_8013A928
     .4byte func_800ECDAC
-    .4byte func_800E0DA8
+    .4byte ftMario_func_800E0DA8
     .4byte func_800E608C
     .4byte ftPikachu_ActionChange_80124830
     .4byte func_8014E644
@@ -1345,7 +1345,7 @@ ft_SpecialN:
 
 .global ft_SpecialLw
 ft_SpecialLw:
-    .4byte func_800E207C
+    .4byte ftMario_func_800E207C
     .4byte func_800E8560
     .4byte func_800E4040
     .4byte func_8010DC80
@@ -1366,7 +1366,7 @@ ft_SpecialLw:
     .4byte func_801389CC
     .4byte func_8013AEE0
     .4byte func_800EB65C
-    .4byte func_800E207C
+    .4byte ftMario_func_800E207C
     .4byte func_800E8560
     .4byte ftPikachu_ActionChange_801278BC
     .4byte func_8014CEF0
@@ -1382,7 +1382,7 @@ ft_SpecialLw:
 
 .global ft_SpecialHi
 ft_SpecialHi:
-    .4byte func_800E1A54
+    .4byte ftMario_func_800E1A54
     .4byte func_800E7238
     .4byte func_800E4A78
     .4byte func_8010FB1C
@@ -1403,7 +1403,7 @@ ft_SpecialHi:
     .4byte func_80138208
     .4byte func_80139834
     .4byte func_800EBB1C
-    .4byte func_800E1A54
+    .4byte ftMario_func_800E1A54
     .4byte func_800E7238
     .4byte ftPikachu_ActionChangeZeroVel_80125DE8
     .4byte func_8014E0AC
@@ -1455,7 +1455,7 @@ ft_OnAbsorb:
 
 .global ft_OnItemPickup
 ft_OnItemPickup:
-    .4byte func_800E0A20
+    .4byte ftMario_func_800E0A20
     .4byte func_800E55A8
     .4byte func_800E28E8
     .4byte func_8010D7A8
@@ -1491,7 +1491,7 @@ ft_OnItemPickup:
 
 .global ft_OnItemInvisible
 ft_OnItemInvisible:
-    .4byte func_800E0B00
+    .4byte ftMario_func_800E0B00
     .4byte func_800E5688
     .4byte func_800E29C8
     .4byte func_8010D888
@@ -1527,7 +1527,7 @@ ft_OnItemInvisible:
 
 .global ft_OnItemVisible
 ft_OnItemVisible:
-    .4byte func_800E0B48
+    .4byte ftMario_func_800E0B48
     .4byte func_800E56D0
     .4byte func_800E2A10
     .4byte func_8010D8D0
@@ -1563,7 +1563,7 @@ ft_OnItemVisible:
 
 .global ft_OnItemRelease
 ft_OnItemRelease:
-    .4byte func_800E0B90
+    .4byte ftMario_func_800E0B90
     .4byte func_800E5718
     .4byte func_800E2A58
     .4byte func_8010D918
@@ -1599,7 +1599,7 @@ ft_OnItemRelease:
 
 .global ft_OnItemCatch
 ft_OnItemCatch:
-    .4byte func_800E0A20
+    .4byte ftMario_func_800E0A20
     .4byte func_800E55A8
     .4byte func_800E28E8
     .4byte func_8010D7A8
@@ -1635,7 +1635,7 @@ ft_OnItemCatch:
 
 .global lbl_803C1B20
 lbl_803C1B20:
-    .4byte func_800E0B90
+    .4byte ftMario_func_800E0B90
     .4byte func_800E5718
     .4byte func_800E2A58
     .4byte func_8010D918
@@ -1743,7 +1743,7 @@ lbl_803C1C28:
 
 .global ft_OnKnockbackEnter
 ft_OnKnockbackEnter:
-    .4byte func_800E0C24
+    .4byte ftMario_func_800E0C24
     .4byte func_800E5898
     .4byte NULL
     .4byte func_8010DAB4
@@ -1779,7 +1779,7 @@ ft_OnKnockbackEnter:
 
 .global lbl_803C1D30
 lbl_803C1D30:
-    .4byte func_800E0C68
+    .4byte ftMario_func_800E0C68
     .4byte func_800E5904
     .4byte NULL
     .4byte func_8010DAF8
@@ -1887,7 +1887,7 @@ lbl_803C1E38:
 
 .global lbl_803C1EBC
 lbl_803C1EBC:
-    .4byte func_800E0BE4
+    .4byte ftMario_func_800E0BE4
     .4byte func_800E5858
     .4byte func_800E2B40
     .4byte func_8010DA74
@@ -2321,7 +2321,7 @@ lbl_803C2468:
 
 .global lbl_803C24EC
 lbl_803C24EC:
-    .4byte func_800E0CE0
+    .4byte ftMario_func_800E0CE0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -2357,7 +2357,7 @@ lbl_803C24EC:
 
 .global lbl_803C2570
 lbl_803C2570:
-    .4byte func_800E0CAC
+    .4byte ftMario_func_800E0CAC
     .4byte NULL
     .4byte NULL
     .4byte NULL
