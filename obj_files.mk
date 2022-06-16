@@ -303,7 +303,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/mn/mngallery.s.o	                \
 	$(BUILD_DIR)/asm/melee/mn/mnstagesel.s.o               	\
 	$(BUILD_DIR)/asm/melee/mn/mncharsel.s.o               	\
-															\
+	$(BUILD_DIR)/src/melee/it/item.c.o 			\
 	$(BUILD_DIR)/asm/melee/it/code_80266F3C.s.o              	\
 	$(BUILD_DIR)/asm/melee/it/code_8027CF30.s.o              	\
 															\
@@ -324,7 +324,7 @@ TEXT_O_FILES := 						            \
 													\
 	$(BUILD_DIR)/asm/MSL/abort_exit.s.o               \
 	$(BUILD_DIR)/asm/MSL/ansi_fp.s.o                  \
-	$(BUILD_DIR)/asm/MSL/buffer_io.s.o                \
+	$(BUILD_DIR)/src/MSL/buffer_io.c.o                \
 	$(BUILD_DIR)/src/MSL/PPC_EABI/critical_regions.gamecube.c.o 	\
 	$(BUILD_DIR)/src/MSL/ctype.c.o                    \
 	$(BUILD_DIR)/asm/MSL/direct_io.s.o                \

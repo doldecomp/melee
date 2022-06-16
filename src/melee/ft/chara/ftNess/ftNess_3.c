@@ -431,7 +431,7 @@ void func_8011556C(HSD_GObj* fighter_gobj)  // Applies Smash Charge attributes t
     u32 temp_r5;
     f32 temp_f1;
     Item* temp_r7;
-    ItemData* itData;
+    Article* itData;
     itYoyoAttributes* yoyo_attr;
     SmashAttr* temp_r4_2;
     s32 Cmp;
@@ -442,8 +442,8 @@ void func_8011556C(HSD_GObj* fighter_gobj)  // Applies Smash Charge attributes t
     temp_r3 = temp_r0;
     if (temp_r0 != 0) {
         temp_r7 = temp_r3->user_data;
-        itData = temp_r7->xC4_data;
-        yoyo_attr = itData->x4_ext_attr;
+        itData = temp_r7->xC4_article_data;
+        yoyo_attr = itData->x4_specialAttributes;
         sp18 = lbl_803B7598;
         sp18.x = yoyo_attr->x24_YOYO_RELEASE_VEL_X;
         temp_f1 = sp18.x;
@@ -482,7 +482,7 @@ void func_80115680(HSD_GObj* fighter_gobj) // the extremely specific float here 
     HSD_GObj* temp_r0;
     Fighter* fighter_data;
     itYoyoAttributes* temp_r29;
-    ItemData* item_data;
+    Article* item_data;
     ftNessAttributes* temp_r3;
     Item* temp_r7;
     Fighter* temp_r30_2;
@@ -493,8 +493,8 @@ void func_80115680(HSD_GObj* fighter_gobj) // the extremely specific float here 
     temp_r0 = fighter_data->sa.ness.x222C;
     if (temp_r0 != 0U) {
         temp_r7 = temp_r0->user_data;
-        item_data = temp_r7->xC4_data;
-        temp_r29 = item_data->x4_ext_attr;
+        item_data = temp_r7->xC4_article_data;
+        temp_r29 = item_data->x4_specialAttributes;
         sp30 = lbl_803B75A4;
         func_802C0010(temp_r0, &sp30);
         fighter_data->sa.ness.x223C = temp_r29->x18_SPIN_TEXANIM_SPEED;
@@ -523,7 +523,7 @@ s32 func_80115784(HSD_GObj* fighter_gobj) { //Ness Yo-Yo Think //
     itYoyoAttributes* yoyo_attr;
     Fighter* fighter_data;
     s32 yoyoDespawnFrame;
-    ItemData* yoyo_article;
+    Article* yoyo_article;
     Item* yoyo_itemdata;
     s32 yoyoRotFrame;
     s32 yoyoNudgeFrame;
@@ -551,8 +551,8 @@ s32 func_80115784(HSD_GObj* fighter_gobj) { //Ness Yo-Yo Think //
     {
         yoyo_GObj = fighter_data->sa.ness.x222C;
         yoyo_itemdata = yoyo_GObj->user_data;
-        yoyo_article = yoyo_itemdata->xC4_data;
-        yoyo_attr = yoyo_article->x4_ext_attr;
+        yoyo_article = yoyo_itemdata->xC4_article_data;
+        yoyo_attr = yoyo_article->x4_specialAttributes;
         if ((u32)fighter_data->x2204_ftcmd_var1 == 1U) 
         {
             fighter_data->x2204_ftcmd_var1 = 0U;
@@ -620,7 +620,7 @@ void func_8011599C(HSD_GObj* fighter_gobj) // Calculates Yo-Yo texture rotation 
 {
     f32 texanim_unk;
     Item* item_data;
-    ItemData* item_article;
+    Article* item_article;
     itYoyoAttributes* yoyo_attr;
     HSD_GObj* yoyo_GObj;
     Fighter* fighter_data;
@@ -633,8 +633,8 @@ void func_8011599C(HSD_GObj* fighter_gobj) // Calculates Yo-Yo texture rotation 
     yoyo_GObj = fighter_data->sa.ness.x222C;
     if (yoyo_GObj != 0U) {
         item_data = yoyo_GObj->user_data;
-        item_article = item_data->xC4_data;
-        yoyo_attr = item_article->x4_ext_attr;
+        item_article = item_data->xC4_article_data;
+        yoyo_attr = item_article->x4_specialAttributes;
         texanim_unk = yoyo_attr->x20_UNK_TEXANIM_MOD;
         yoyo_float = ((texanim_unk - yoyo_attr->x1C_UNK_TEXANIM_SPEED));
         yoyo_float = yoyo_float * ((f32)fighter_data->x2340_stateVar1 / ness_attr->xAC_SMASH_CHARGE_DURATION);
@@ -932,7 +932,7 @@ void lbl_80115F88(HSD_GObj* fighter_gobj)   // Ness's Up Smash Charge Animation 
     if ((yoyo_GObj = GetYoyoGObj(temp_fighter = GetFighterData(fighter_gobj))) != 0U)
     {
         item_data = yoyo_GObj->user_data;
-        yoyo_attr = item_data->xC4_data->x4_ext_attr;
+        yoyo_attr = item_data->xC4_article_data->x4_specialAttributes;
         unk_float = (yoyo_attr->x20_UNK_TEXANIM_MOD - yoyo_attr->x1C_UNK_TEXANIM_SPEED);
         unk_float = unk_float * ((f32)temp_fighter->x2340_stateVar1 / temp_ness_attr->xAC_SMASH_CHARGE_DURATION);
         temp_fighter->sa.ness.x223C = yoyo_attr->x20_UNK_TEXANIM_MOD - unk_float;
@@ -1134,7 +1134,7 @@ void lbl_80116420(HSD_GObj* fighter_gobj)   // Ness's Up Smash Post-Charge Colli
 itYoyoAttributes* GetYoyoAttr(HSD_GObj* item_gobj) // Inline, may not be necessary //
 {
     Item* item_data = item_gobj->user_data;
-    itYoyoAttributes* yoyo_attr = item_data->xC4_data->x4_ext_attr;
+    itYoyoAttributes* yoyo_attr = item_data->xC4_article_data->x4_specialAttributes;
     return yoyo_attr;
 }
 
