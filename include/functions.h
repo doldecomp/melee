@@ -2729,7 +2729,7 @@ void func_800DF0D0();
 // ? func_800E0750(?);
 // ? func_800E07B0(?);
 // ? ftMario_OnLoadForDrMario(?);
-// ? func_800E0BE4(?);
+// ? ftMario_func_800E0BE4(?);
 // ? func_800E0D1C(?);
 // ? func_800E1178(?);
 // ? func_800E11E0(?);

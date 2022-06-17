@@ -86,7 +86,7 @@ void func_801496D0(HSD_GObj* gobj, s32 arg1)
 
 void func_80149724(HSD_GObj* gobj)
 {
-    func_800E0BE4(gobj);
+    ftMario_func_800E0BE4(gobj);
 }
 
 void func_80149744(HSD_GObj* gobj)
