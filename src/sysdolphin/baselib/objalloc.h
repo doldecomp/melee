@@ -79,7 +79,7 @@ typedef struct ItemCommonData
     f32 xD4;
     s32 xD8;
     s32 xDC;
-    u8 filler[0x148 - 0xDC];
+    u8 filler[0x148 - 0xE0];
     s32 x148;
     f32 x14C;
     f32 x150;

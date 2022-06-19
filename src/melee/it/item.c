@@ -588,7 +588,7 @@ void func_80267978(HSD_GObj* item_gobj) // Store Item Pointers //
 {
     s32 ItemID;
     s32 ItemID2;
-    s32 new_var;
+    unsigned int new_var;
     Item* item_data;
     item_data = item_gobj->user_data;
     ItemID = item_data->x10_item_kind;
@@ -2661,7 +2661,7 @@ void func_8026A8EC(HSD_GObj* item_gobj) // Destroy Item //
     item_data = item_gobj->user_data;
     if ((func_80272D1C(item_gobj) == 0) || (item_data == NULL))
     {
-        OSReport("===== Not Found Item_Struct!! =====");
+        OSReport("===== Not Found Item_Struct!! =====\n");
         __assert("item.c", 0x965U, "0");
     }
     func_802725D4(item_gobj);

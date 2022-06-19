@@ -228,7 +228,7 @@ struct ItemStateDesc
 
 typedef struct ItemStateArray
 {
-    struct ItemStateDesc* x0_itemStateDesc[];
+    struct ItemStateDesc x0_itemStateDesc[8];
 }ItemStateArray;
 
 typedef struct ItemModelDesc
@@ -434,7 +434,7 @@ typedef struct
         Vec2 xC78;                                       // 0xc74
         Vec2 xC80;                                       // 0xc7c
         s32 xC88;                                       // 0xc88
-        s32 xC8C;                                       // 0xc8c
+        s16 xC8C;                                       // 0xc8c
         HSD_GObj* xC90_absorbGObj;                      // 0xc90
         s32 xC94;                                       // 0xc94
         s32 xC98;                                       // 0xc98
@@ -518,7 +518,6 @@ typedef struct
         UnkFlagStruct xDA8_flag;
         u16 xDA8_word;
     };
-    UnkFlagStruct xDA9_flag;
     union {
         UnkFlagStruct xDAA_flag; // Develop mode stuff?
         u8 xDAA_byte;

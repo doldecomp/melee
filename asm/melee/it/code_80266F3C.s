@@ -21007,26 +21007,8 @@ lbl_803B85F0:
     .4byte 0x00000133
     .4byte 0x00000134
 
-
 .section .data
     .balign 8
-.global lbl_803F11B0
-lbl_803F11B0:
-    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
-    .balign 4
-.global lbl_803F11D8
-lbl_803F11D8:
-    .asciz "translate"
-    .balign 4
-.global lbl_803F1280
-lbl_803F1280:
-    .asciz "not found zako model data! check ground dat file!\n"
-    .balign 4
-.global lbl_803F12B4
-lbl_803F12B4:
-    .asciz "===== Not Found Item_Struct!! =====\n"
-    .balign 4
-    .4byte NULL
 .global jtbl_803F12E0
 jtbl_803F12E0:
 	.4byte lbl_8026C074
@@ -29452,23 +29434,6 @@ lbl_804A0F60:
 
 .section .sdata
     .balign 8
-.global lbl_804D5148
-lbl_804D5148:
-    .asciz "jobj.h"
-    .balign 4
-.global lbl_804D5150
-lbl_804D5150:
-    .asciz "jobj"
-    .balign 4
-.global lbl_804D5158
-lbl_804D5158:
-    .asciz "item.c"
-    .balign 4
-.global lbl_804D5160
-lbl_804D5160:
-    .asciz "0"
-    .balign 4
-    .4byte NULL
 .global lbl_804D5168
 lbl_804D5168:
     .4byte 0xFF408080
