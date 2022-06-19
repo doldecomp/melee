@@ -11,9 +11,9 @@
 
 #include "math.h"
 
-#include "melee/ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-#include "melee/it/item.h"
+#include <melee/it/item.h>
 
 typedef struct ftNessAttributes
 {

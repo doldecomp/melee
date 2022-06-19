@@ -215,7 +215,7 @@ void func_801C9B6C(void* arg0)
 
 void func_801C9B8C(void* arg0)
 {
-    func_8001044C(arg0, 0, 0, 0, 0, 0, 0, 0.0f);
+    func_8001044C(arg0, 0, 0, 0.0f, 0, 0, 0, 0);
 }
 
 static void func_801C9BC8(HSD_GObj* gobj)
