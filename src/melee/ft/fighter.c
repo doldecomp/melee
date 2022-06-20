@@ -148,28 +148,31 @@ void Fighter_LoadCommonData()
 	lbl_804D64FC = pData[22];
 } 
 
-void Fighter_UpdateModelScale(HSD_GObj* fighterObj)
-{
-    Vec scale;
-    s32 unused[2];
-
-    Fighter* fighter = fighterObj->user_data;
-
-    HSD_JObj* jobj = fighterObj->hsd_obj;
-    
-
-    f32 modelScale_f1 = Fighter_GetModelScale(fighter); 
-    if (fighter->x34_scale.z != 1.0f)
-        scale.x = fighter->x34_scale.z;
-    else
-        scale.x = modelScale_f1;
-    
-    scale.y = modelScale_f1;
-    scale.z = modelScale_f1;
-
-    HSD_JObjSetScale(jobj, &scale);
+inline HSD_JObj *getHSDJObj(HSD_GObj* hsd_gobj) {
+    HSD_JObj *hsd_jobj = hsd_gobj->hsd_obj;
+    return (void *)hsd_jobj;
 }
 
+inline void Fighter_InitScale(Fighter *ft, Vec *scale, f32 modelScale) {
+    if (ft->x34_scale.z != 1.0f)
+        scale->x = ft->x34_scale.z;
+    else
+        scale->x = modelScale;
+    
+    scale->y = modelScale;
+    scale->z = modelScale;
+}
+
+void Fighter_UpdateModelScale(HSD_GObj* fighterObj)
+{
+    Fighter* fighter = getFighter(fighterObj);
+    HSD_JObj* jobj = getHSDJObj(fighterObj);
+    f32 modelScale_f1 = Fighter_GetModelScale(fighter);
+    Vec scale;
+
+    Fighter_InitScale(fighter, &scale, modelScale_f1);
+    HSD_JObjSetScale(jobj, &scale);
+}
 
 void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	Vec3 player_coords;
@@ -469,110 +472,67 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 }
 
 void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighterObj) {
-    Vec3 vec;
-    f32 model_size;
-    HSD_JObj* jobj;
-    s32 unused_filler[5];
-
-    Fighter* fighter2;
-    HSD_JObj* other_jobj;
-
-    Fighter* fighter1 = fighterObj->user_data;
-
-    Fighter_UnkInitReset_80067C98(fighter1);
-    jobj = fighterObj->hsd_obj;
-    other_jobj = jobj;
-
-
-    HSD_JObjSetTranslate(other_jobj, &fighter1->xB0_pos);
+    Fighter* ft = getFighter(fighterObj);
+    
+    Fighter_UnkInitReset_80067C98(ft);
+    HSD_JObjSetTranslate(fighterObj->hsd_obj, &ft->xB0_pos);
 
     func_800D105C(fighterObj);
     func_800C09B4(fighterObj);
     func_8007E2FC(fighterObj);
-    func_80088A50(fighter1);
-    func_800890BC(fighter1);
-    func_800892D4(fighter1);
+    func_80088A50(ft);
+    func_800890BC(ft);
+    func_800892D4(ft);
     func_80081B38(fighterObj);
     func_80081938(fighterObj);
 
-
-    if (fighter1->x2114_SmashAttr.x2135 == -1)
+    if (ft->x2114_SmashAttr.x2135 == -1)
     {
-        if (func_80082A68(fighterObj) && !fighter1->x2229_b6)
-            func_8007D6A4(fighter1);
+        if (func_80082A68(fighterObj) && !ft->x2229_b6)
+            func_8007D6A4(ft);
         else
-            func_8007D5D4(fighter1);
+            func_8007D5D4(ft);
     }
     else
-        func_8007D5D4(fighter1);
-
-
-    func_80076064(fighter1);
-
-    other_jobj = jobj = fighterObj->hsd_obj;
-
-    HSD_JObjSetTranslate(jobj, &fighter1->xB0_pos);
-
-    Fighter_UnkApplyTransformation_8006C0F0(fighterObj);
-
-    jobj = fighterObj->hsd_obj;
-
-    fighter2 = fighterObj->user_data;
-
-    model_size = Fighter_GetModelScale(fighterObj->user_data);
-
-    if (fighter2->x34_scale.z != 1.0f)
-        vec.x = fighter2->x34_scale.z;
-    else
-        vec.x = model_size;
+        func_8007D5D4(ft);
+    func_80076064(ft);
     
-    vec.y = model_size;
-    vec.z = model_size;
+    HSD_JObjSetTranslate(fighterObj->hsd_obj, &ft->xB0_pos);
+    Fighter_UnkApplyTransformation_8006C0F0(fighterObj);
+    Fighter_UpdateModelScale(fighterObj);
 
-    HSD_JObjSetScale(jobj, &vec);
-
-
-    func_800BFFAC(fighter1);
-    func_800C0074(fighter1);
+    func_800BFFAC(ft);
+    func_800C0074(ft);
     func_800C8438(fighterObj);
     func_800C89A0(fighterObj);
     func_800C8FC4(fighterObj);
     func_8007AFF8(fighterObj);
     func_8007B0C0(fighterObj, 0);
 
+    if (ft_OnDeath[ft->x4_fighterKind])
+        ft_OnDeath[ft->x4_fighterKind](fighterObj);
 
-    if (ft_OnDeath[fighter1->x4_fighterKind])
-        ft_OnDeath[fighter1->x4_fighterKind](fighterObj);
+    func_800A101C(ft, Player_GetCpuType(ft->xC_playerID), Player_GetCpuLevel(ft->xC_playerID), 0);
 
-    func_800A101C(fighter1, Player_GetCpuType(fighter1->xC_playerID), Player_GetCpuLevel(fighter1->xC_playerID), 0);
-
-    func_80067688(&fighter1->x60C);
+    func_80067688(&ft->x60C);
     func_8007C17C(fighterObj);
     func_8007C630(fighterObj);
 }
 
-
 void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighterObj) {
-    HSD_JObj* jobj;
-
-    UnkCostumeStruct* costume_list;
-    Fighter* fighter = fighterObj->user_data;
-
-
-    costume_list = CostumeListsForeachCharacter[fighter->x4_fighterKind].costume_list;
-
-    fighter->x108_costume_joint = costume_list[fighter->x619_costume_id].joint;
-
+    Fighter* fighter = getFighter(fighterObj);
+    HSD_JObj *jobj;
+    
+    fighter->x108_costume_joint = CostumeListsForeachCharacter[fighter->x4_fighterKind].costume_list[fighter->x619_costume_id].joint;
     func_80074148();
     jobj = HSD_JObjLoadJoint(fighter->x108_costume_joint);
     func_80074170();
     func_80073758(jobj);
+    
     func_80390A70(fighterObj, lbl_804D7849, jobj);
 }
 
-
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fighter) {
-
     Vec vec;
     Vec vec2;
     HSD_JObj* jobj = fighter->x5E8_fighterBones[func_8007500C(fighter, 2)].x0_jobj;
@@ -590,7 +550,7 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fighter) {
 
 
 void Fighter_ResetInputData_80068854(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
+    Fighter* fighter = getFighter(fighterObj);
 
     fighter->input.x620_lstick_x = 
     fighter->input.x624_lstick_y = 
@@ -647,13 +607,64 @@ void Fighter_ResetInputData_80068854(HSD_GObj* fighterObj) {
     fighter->x67C = 0xFF;
 }
 
+static void Fighter_UnkInitLoad_80068914_Inner1(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
+    
+    fighter->input.x650 = 
+    fighter->input.x654 = 
+    fighter->input.x638_lsubStick_x = 
+    fighter->input.x63C_lsubStick_y = 
+    fighter->input.x640_lsubStick_x2 = 
+    fighter->input.x644_lsubStick_y2 = 
+    fighter->input.x620_lstick_x = 
+    fighter->input.x624_lstick_y = 
+    fighter->input.x628_lstick_x2 = 
+    fighter->input.x62C_lstick_y2 = 0.0f;
+
+    fighter->input.x660 = 0;
+    fighter->input.x66C = 0;
+    fighter->input.x668 = 0;
+    fighter->input.x65C = 0;
+    
+    fighter->x679_x = 
+    fighter->x67A_y = 
+    fighter->x67B = 
+
+    fighter->x676_x = 
+    fighter->x677_y = 
+    fighter->x678 = 
+
+    fighter->x673 = 
+    fighter->x674 = 
+    fighter->x675 = 
+
+    fighter->x670_timer_lstick_tilt_x = 
+    fighter->x671_timer_lstick_tilt_y = 
+    fighter->x672_input_timer_counter = 0xFE;
+
+    fighter->x67C = 
+    fighter->x67D = 
+    fighter->x67E = 
+    fighter->x681 = 
+    fighter->x682 = 
+    fighter->x67F = 
+    fighter->x680 = 
+    fighter->x683 = 
+    fighter->x684 = 
+    fighter->x685 = 
+    fighter->x686 = 
+    fighter->x687 = 
+    fighter->x688 = 
+    fighter->x689 = 
+    fighter->x68A = 
+    fighter->x68B = 0xFF;
+}
 
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata) {
+    Fighter* fighter = getFighter(fighterObj);
     u32 controller_index;
     struct RGBA* color;
     ftData** ftDataList;
-    Fighter* fighter = fighterObj->user_data;
-    Fighter* fighter_copy;
     s32 costume_id;
 
     fighter->x4_fighterKind = argdata->fighterKind;
@@ -713,64 +724,10 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata)
     fighter->input.x658 = 0.0f;
     fighter->input.x664 = 0;
 
-
-    fighter_copy = fighterObj->user_data;
-    
-    fighter_copy->input.x650 = 
-    fighter_copy->input.x654 = 
-    fighter_copy->input.x638_lsubStick_x = 
-    fighter_copy->input.x63C_lsubStick_y = 
-    fighter_copy->input.x640_lsubStick_x2 = 
-    fighter_copy->input.x644_lsubStick_y2 = 
-    fighter_copy->input.x620_lstick_x = 
-    fighter_copy->input.x624_lstick_y = 
-    fighter_copy->input.x628_lstick_x2 = 
-    fighter_copy->input.x62C_lstick_y2 = 0.0f;
-
-    fighter_copy->input.x660 = 0;
-    fighter_copy->input.x66C = 0;
-    fighter_copy->input.x668 = 0;
-    fighter_copy->input.x65C = 0;
-
-    
-    fighter_copy->x679_x = 
-    fighter_copy->x67A_y = 
-    fighter_copy->x67B = 
-
-    fighter_copy->x676_x = 
-    fighter_copy->x677_y = 
-    fighter_copy->x678 = 
-
-    fighter_copy->x673 = 
-    fighter_copy->x674 = 
-    fighter_copy->x675 = 
-
-    fighter_copy->x670_timer_lstick_tilt_x = 
-    fighter_copy->x671_timer_lstick_tilt_y = 
-    fighter_copy->x672_input_timer_counter = 0xFE;
-
-
-    fighter_copy->x67C = 
-    fighter_copy->x67D = 
-    fighter_copy->x67E = 
-    fighter_copy->x681 = 
-    fighter_copy->x682 = 
-    fighter_copy->x67F = 
-    fighter_copy->x680 = 
-    fighter_copy->x683 = 
-    fighter_copy->x684 = 
-    fighter_copy->x685 = 
-    fighter_copy->x686 = 
-    fighter_copy->x687 = 
-    fighter_copy->x688 = 
-    fighter_copy->x689 = 
-    fighter_copy->x68A = 
-    fighter_copy->x68B = 0xFF;
-
+    Fighter_UnkInitLoad_80068914_Inner1(fighterObj);
 
     fighter->x594_s32 = 0;
     fighter->x21FC = 1;
-
 
     fighter->x221E_flag.bits.b0 = 0;
     fighter->x221E_flag.bits.b1 = 0;
@@ -822,7 +779,6 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata)
     fighter->x2225_flag.bits.b3 = 0;
     fighter->x2228_flag.bits.b2 = 0;
 
-
     fighter->x2226_flag.bits.b0 = 0;
     fighter->x2226_flag.bits.b1 = 0;
 
@@ -831,7 +787,6 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata)
 
     fighter->x2114_SmashAttr.x2135 = -1;
     fighter->x2184 = NULL;
-
 
     fighter->x2229_b3 = 0;
 }
@@ -846,7 +801,7 @@ u32 Fighter_NewSpawn_80068E40()
 }
 
 void Fighter_80068E64(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
+    Fighter* fighter = getFighter(fighterObj);
 
     if (stage_info.internal_stage_id == 0x1B) {
         fighter->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
@@ -855,22 +810,32 @@ void Fighter_80068E64(HSD_GObj* fighterObj) {
     }
 }
 
+static void Fighter_80068E98_Inline1(HSD_GObj *fighterObj) {
+    Fighter *fp = (void*)getFighter(fighterObj); // bit of a fake void* cast, but a sacrifice well worth getting rid of an fp_temp and filler. TODO: Maybe we can still do better?
+    if (stage_info.internal_stage_id == 0x1B) {
+        fp->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
+    } else {
+        fp->x34_scale.z = 1.0f;
+    }
+}
 
+static void Fighter_80068E98_Inline2(HSD_GObj *fighterObj) {
+    Fighter *fp = getFighter(fighterObj); // you cant do (void*) here to make it consistent, Fighter_80068E98 wont match
+    if (fp->x2229_b5_no_normal_motion == 0) {
+        fp->x2EC = func_8001E8F8(func_80085E50(fp, 0x23));
+        if (fp->x2228_flag.bits.b2 == 0) {
+            fp->x2DC = func_8001E8F8(func_80085E50(fp, 7));
+            fp->x2E0 = func_8001E8F8(func_80085E50(fp, 8));
+            fp->x2E4 = func_8001E8F8(func_80085E50(fp, 9));
+            fp->x2E8 = func_8001E8F8(func_80085E50(fp, 0x25));
+        } 
+    }
+}
 
 HSD_GObj* Fighter_80068E98(struct S_TEMP1* input) {
-
-    Vec translation2;
-    Vec translation;
-    s32 unused[4];
-
     HSD_GObj* fighterObj;
-    HSD_JObj* jobj;
-    UnkCostumeStruct* costume_list;
-
     Fighter* fp;
-    Fighter* fp1;
-    Fighter* fp2;
-
+    HSD_JObj* jobj;
 
     fighterObj = func_803901F0(4, 8, 0);
     GObj_SetupGXLink(fighterObj, &func_80080E18, 5U, 0U);
@@ -881,63 +846,37 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input) {
     Fighter_UnkInitLoad_80068914(fighterObj, input);
     func_8006737C(lbl_803C26FC[fp->x4_fighterKind]);
     func_80085820(fp->x4_fighterKind, fp->x619_costume_id);
-    fp1 = fighterObj->user_data;
-    costume_list = CostumeListsForeachCharacter[fp1->x4_fighterKind].costume_list;
-    fp1->x108_costume_joint = costume_list[fp1->x619_costume_id].joint;
-    func_80074148();
-    jobj = HSD_JObjLoadJoint(fp1->x108_costume_joint);
-    func_80074170();
-    func_80073758(jobj);
-    func_80390A70(fighterObj, lbl_804D7849, jobj);
+    
+    Fighter_UnkUpdateCostumeJoint_800686E4(fighterObj); 
+    
     func_80085B10(fp);
     func_80074E58(fp);
     func_800743E0(fighterObj);
     func_80070308(fighterObj);
     func_800C884C(fighterObj);
-    fp2 = fighterObj->user_data;
-    if (stage_info.internal_stage_id == 0x1B) {
-        fp2->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
-    } else {
-        fp2->x34_scale.z = 1.0f;
-    }
+
+    Fighter_80068E98_Inline1(fighterObj);
+    
     func_800749CC(fighterObj);
     func_8007077C(fighterObj);
     func_8009CF84(fp);
     func_8006FE48(fighterObj);
-    jobj = fp->x5E8_fighterBones[func_8007500C(fp, 2)].x0_jobj;
 
-    HSD_JObjGetTranslation(jobj, &translation);
-
-    fp->x1A6C = (translation.y / 8.55f);
-    func_8000B1CC(jobj, 0, &translation);
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 1)].x0_jobj, 0, &translation2);
-    fp->x1A70.x = translation2.x - translation.x;
-    fp->x1A70.y = translation2.y - translation.y;
-    fp->x1A70.z = translation2.z - translation.z;
+    Fighter_UnkUpdateVecFromBones_8006876C(fp);
+    
     func_8009F578(fp);
 
     if (ft_OnLoad[fp->x4_fighterKind]) {
         ft_OnLoad[fp->x4_fighterKind](fighterObj);
     }
-    fp2 = fighterObj->user_data;
-    if (fp2->x2229_b5_no_normal_motion == 0) {
-        
-        fp2->x2EC = func_8001E8F8(func_80085E50(fp2, 0x23));
-        if (fp2->x2228_flag.bits.b2 == 0) {
-            
-            fp2->x2DC = func_8001E8F8(func_80085E50(fp2, 7));
-            
-            fp2->x2E0 = func_8001E8F8(func_80085E50(fp2, 8));
-            
-            fp2->x2E4 = func_8001E8F8(func_80085E50(fp2, 9));
-            
-            fp2->x2E8 = func_8001E8F8(func_80085E50(fp2, 0x25));
-        }
-    }
+
+    Fighter_80068E98_Inline2(fighterObj);
+
     func_8007B320(fighterObj);
     fp->x890_cameraBox = func_80029020();
 
-    func_8000ED54(&fp->x20A4, fighterObj->hsd_obj);
+    jobj = getHSDJObj(fighterObj);
+    func_8000ED54(&fp->x20A4, jobj);
     func_8038FD54(fighterObj, &Fighter_8006A1BC, 0);
     func_8038FD54(fighterObj, &Fighter_8006A360, 1);
     func_8038FD54(fighterObj, &Fighter_8006ABA0, 2);
@@ -2747,6 +2686,8 @@ void Fighter_UnkTakeDamage_8006CC30(Fighter* fighter, f32 arg0) {
 
 
 
+#pragma dont_inline on
+
 void Fighter_TakeDamage_8006CC7C(Fighter* fighter, f32 damage_amount) {
 
     if (!fighter->x2226_flag.bits.b4 || fighter->x2226_flag.bits.b3) {
@@ -2768,6 +2709,8 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fighter, f32 damage_amount) {
         
     }
 }
+
+#pragma dont_inline reset
 
 
 ///https://decomp.me/scratch/9QvFG  
@@ -2829,7 +2772,7 @@ void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighterObj) {
 
 }
 
-
+#pragma dont_inline on
 
 void Fighter_8006CFE0(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
@@ -2844,6 +2787,7 @@ void Fighter_8006CFE0(HSD_GObj* fighterObj) {
     }
 }
 
+#pragma dont_inline reset
 
 void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighterObj) {
     s32 unused[5];
