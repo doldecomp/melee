@@ -419,7 +419,8 @@ typedef struct _CollData
     u8 padding_x28[0x34 - 0x28];
     u8 x34_flags_0 : 1;
     u8 x34_flags_1 : 4;
-    u8 x34_flags_2 : 3;
+    u8 x34_flags_2 : 2;
+    u8 x34_flags_3 : 1;
     u8 padding_x35[0x40 - 0x35];
     u32 x40;
     u32 x44;

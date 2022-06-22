@@ -33,6 +33,11 @@ typedef struct _HSD_ObjAllocData {
     struct _HSD_ObjAllocData* next;
 } HSD_ObjAllocData;
 
+struct UnkR13ItemLoop {
+    u8 x0_filler[0x24];
+    HSD_GObj* x24_itemGObj;
+};
+
 typedef struct ItemCommonData
 {
     u32 x0;
@@ -87,6 +92,13 @@ typedef struct ItemCommonData
     f32 x158;
     f32 x15C;
 } ItemCommonData;
+
+extern s8 lbl_804D6D00;
+extern s32 lbl_804D6D08;
+extern s32 lbl_804D6D0C;
+extern s32 lbl_804D6D10;
+extern s32 lbl_804D6D14;
+extern ItemCommonData* lbl_804D6D28;
 
 typedef struct HSD_ObjAllocUnk2
 {
