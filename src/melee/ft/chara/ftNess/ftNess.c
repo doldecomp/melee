@@ -4,11 +4,11 @@ void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* ft = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
-    ft->sa.ness.x2240 = 0;
-    ft->sa.ness.x2244 = 0;
-    ft->sa.ness.x2248 = 0;
-    ft->sa.ness.x222C = 0;
-    ft->sa.ness.x224C = 0;
+    ft->sa.ness.x2240_flashGObj = NULL;
+    ft->sa.ness.x2244_pkThunderGObj = NULL;
+    ft->sa.ness.x2248_baseballBatGObj = NULL;
+    ft->sa.ness.x222C_yoyoGObj = 0;
+    ft->sa.ness.x224C_thunderGFX = FALSE;
 }
 
 void ftNess_OnLoad(HSD_GObj* gobj) {

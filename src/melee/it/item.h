@@ -222,7 +222,7 @@ typedef struct ItemModelDesc
     s32 xC_bit_field;
 } ItemModelDesc;
 
-typedef struct Article
+typedef struct _Article
 {
     ItemAttr* x0_common_attr;
     void* x4_specialAttributes;
@@ -286,7 +286,7 @@ typedef struct itHit
     s32 x138;
 } itHit;
 
-typedef struct
+typedef struct _Item
 {
     void* x0;
     HSD_GObj* x4_GObj;

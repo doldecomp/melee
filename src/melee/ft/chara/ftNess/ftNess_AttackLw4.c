@@ -10,7 +10,7 @@ void func_8011659C(HSD_GObj* fighter_gobj)  // Ness's Down Smash Action State ha
     fighter_data->x2218_flag.bits.b0 = 0;
     fighter_data->x2348_stateVar3 = 0;
     func_80115534(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     fighter_data->x2222_flag.bits.b2 = 1;
     fighter_data->cb.x21C0_callback_OnGiveDamage = lbl_80115C74;
@@ -27,14 +27,14 @@ void lbl_80116638(HSD_GObj* fighter_gobj) // Ness's Down Smash Animation callbac
     fighter_data = fighter_gobj->user_data;
     yoyoSmashFrameCurr = fighter_data->x2340_stateVar1;
     fighter_data->x2340_stateVar1 = (s32)(yoyoSmashFrameCurr + 1);
-    if (func_80115784(fighter_gobj) == 0) 
+    if (func_80115784(fighter_gobj) == FALSE) 
     {
         func_80114F0C(fighter_gobj);
-        if (((s32)fighter_data->x2340_stateVar1 == 0xD) && ((s32)fighter_data->x2348_stateVar3 == 0) && (func_80115404(fighter_gobj) != 0)) 
+        if (((s32)fighter_data->x2340_stateVar1 == 13) && ((s32)fighter_data->x2348_stateVar3 == 0) && (func_80115404(fighter_gobj) != FALSE)) 
         {
             func_801168C4(fighter_gobj);
         }
-        if (func_8006F238(fighter_gobj) == 0) 
+        if (func_8006F238(fighter_gobj) == FALSE) 
         {
             func_8008A2BC(fighter_gobj);
         }
@@ -50,7 +50,7 @@ void lbl_801166D4(HSD_GObj* fighter_gobj)   // Ness's Down Smash IASA callback /
     Fighter* fighter_data;
 
     fighter_data = fighter_gobj->user_data;
-    if ((fighter_data->input.x65C & 0x100) == 0)
+    if ((fighter_data->input.x65C & A_BUTTON_HELD) == FALSE)
     {
         fighter_data->x2348_stateVar3 = 1;
     }
@@ -109,7 +109,7 @@ void lbl_80116828(HSD_GObj* fighter_gobj)   // Ness's Down Smash Charge IASA cal
 {
     Fighter* fighter_data = fighter_gobj->user_data;
 
-    if ((fighter_data->input.x65C & 0x100) == 0)
+    if ((fighter_data->input.x65C & A_BUTTON_HELD) == FALSE)
     {
         func_80116AE8(fighter_gobj);
     }
@@ -143,7 +143,7 @@ void func_801168C4(HSD_GObj* fighter_gobj)  // Ness's Down Smash Charge Action S
     Fighter* fighter_data;
 
     fighter_data = fighter_gobj->user_data;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0x40000, 0, 12.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4_CHARGE, 0x40000, NULL, 12.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     ftAnim_SetAnimRate(fighter_gobj, 0.0f);
     func_8011556C(fighter_gobj);
@@ -163,10 +163,10 @@ void lbl_80116958(HSD_GObj* fighter_gobj)   // Ness's Down Smash Post-Charge Ani
     fighter_data = fighter_gobj->user_data;
     yoyoSmashFrameCurr = fighter_data->x2340_stateVar1;
     fighter_data->x2340_stateVar1 = (s32)(yoyoSmashFrameCurr + 1);
-    if (func_80115784(fighter_gobj) == 0) 
+    if (func_80115784(fighter_gobj) == FALSE) 
     {
         func_80114F0C(fighter_gobj);
-        if (func_8006F238(fighter_gobj) == 0) 
+        if (func_8006F238(fighter_gobj) == FALSE) 
         {
             func_8008A2BC(fighter_gobj);
         }
@@ -234,7 +234,7 @@ void func_80116AE8(HSD_GObj* fighter_gobj) // Ness's Down Smash Post-Charge Acti
     Fighter* fighter_data;
 
     fighter_data = fighter_gobj->user_data;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0x40000, 0, 13.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4_RELEASE, 0x40000, NULL, 13.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     func_80115680(fighter_gobj);
     fighter_data->x2222_flag.bits.b2 = 1;

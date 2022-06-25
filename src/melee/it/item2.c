@@ -29,9 +29,9 @@ f32 func_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk) // Apply Item Damag
 
         ret += itemSpeed * lbl_804D6D28->x80_float[5];
         ret += lbl_804D6D28->x80_float[6];
-        if (ret <= 0.5)
+        if (ret <= 1.0)
         {
-            return 1.0f;
+            return ret = 1.0f;
         }
     }
     return ret;
@@ -636,11 +636,14 @@ s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compiler v
 //    return unk_timer;
 // }
 
-f32 lbl_804DC688 = -1.0f;
+f32 SetFloatTemp(void) // Temoprary function to set float order //
+{
+    return -1.0f;
+}
 
 // 0x8026B960 //
 // https://decomp.me/scratch/jUEn8 //
-f32 func_8026B960(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch //
+f32 func_8026B960(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch - float constant is temporarily hardcoded //
 {
     __asm
     (
@@ -793,7 +796,7 @@ void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's ECB position
     Item* item_data = item_gobj->user_data;
     CollData* collData = &item_data->x378_itemColl;
 
-    temp_float2 = (0.5f * (collData->xA8 + collData->xB0));
+    temp_float2 = (0.5f * (collData->xE8 + collData->xF0));
     pos->x = collData->x1C_vec.x + temp_float;
     pos->y = collData->x1C_vec.y + temp_float2;
     pos->z = collData->x1C_vec.z + temp_float;

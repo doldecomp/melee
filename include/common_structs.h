@@ -3,6 +3,33 @@
 
 #include <dolphin/types.h>
 
+#define A_BUTTON_HELD 0x100 // Also covers Z-Button macro //
+#define B_BUTTON_HELD 0x200
+
+typedef struct _Vec2 { float x, y; } Vec2;
+
+typedef Vec Vec3;
+
+typedef struct _ReflectDesc
+{
+    u32 x0_bone_id;
+    s32 x4_max_damage;
+    Vec3 x8_offset;
+    f32 x14_size;
+    f32 x18_damage_mul;
+    f32 x1C_speed_mul;
+    u8 x20_behavior : 8; // Setting this to 0x1 causes the reflector to skip ownership change // 
+
+} ReflectDesc;
+
+typedef struct _AbsorbDesc
+{
+    u32 x0_bone_id;
+    Vec3 x4_offset;
+    f32 x10_size;
+
+} AbsorbDesc;
+
 typedef struct _UnkFlagStruct2 {
     struct {
         u8 b0 : 1;

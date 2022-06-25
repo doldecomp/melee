@@ -387,16 +387,16 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->x221F_flag.bits.b6 = 0;
 	fighter->x2218_flag.bits.b3 = 0;
 	fighter->x2218_flag.bits.b4 = 0;
-	fighter->x1A3C = 0;
-	fighter->x1A2C_reflectHitDirection = 0.0f;
+	fighter->ReflectAttr.x1A3C_damageOver = 0;
+	fighter->ReflectAttr.x1A2C_reflectHitDirection = 0.0f;
 	fighter->x2218_flag.bits.b6 = 0; 
 	fighter->x2218_flag.bits.b7 = 0;
 
 
-	fighter->x1A40 = 0.0f;
+	fighter->AbsorbAttr.x1A40_absorbHitDirection = 0.0f;
 
-	fighter->x1A44 = 0;
-	fighter->x1A48 = 0;
+	fighter->AbsorbAttr.x1A44_damageTaken = 0;
+	fighter->AbsorbAttr.x1A48_hitsTaken = 0;
 
 	fighter->x68C_transNPos.z = 0.0f;
 	fighter->x68C_transNPos.y = 0.0f;
@@ -3053,13 +3053,13 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj) {
         } else {
             if (fighter->dmg.x1924) {
                 bool1 = fighter->dmg.x1924;
-            } else if (fighter->x1A3C) {
+            } else if (fighter->ReflectAttr.x1A3C_damageOver) {
                 func_80098C9C(fighterObj);
-            } else if (fighter->x1A2C_reflectHitDirection) {
+            } else if (fighter->ReflectAttr.x1A2C_reflectHitDirection) {
                 if (fighter->cb.x21C8_callback_OnReflectHit) {
                     fighter->cb.x21C8_callback_OnReflectHit(fighterObj);
                 }
-            } else if (fighter->x1A40) {
+            } else if (fighter->AbsorbAttr.x1A40_absorbHitDirection) {
                 if (ft_OnAbsorb[fighter->x4_fighterKind]) {
                     ft_OnAbsorb[fighter->x4_fighterKind](fighterObj);
                 }
@@ -3166,11 +3166,11 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj) {
         fighter->x19A0_shieldDamageTaken = 0;
         fighter->x19A4 = 0;
         fighter->x19A8 = 0;
-        fighter->x1A3C = 0;
-        fighter->x1A2C_reflectHitDirection = 0.0f;
-        fighter->x1A40 = 0.0f;
-        fighter->x1A44 = 0;
-        fighter->x1A48 = 0;
+        fighter->ReflectAttr.x1A3C_damageOver = 0;
+        fighter->ReflectAttr.x1A2C_reflectHitDirection = 0.0f;
+        fighter->AbsorbAttr.x1A40_absorbHitDirection = 0.0f;
+        fighter->AbsorbAttr.x1A44_damageTaken = 0;
+        fighter->AbsorbAttr.x1A48_hitsTaken = 0;
         fighter->x1960_vibrateMult = 1.0f;
         fighter->x1964 = 0.0f;
         fighter->dmg.x1950 = 0;

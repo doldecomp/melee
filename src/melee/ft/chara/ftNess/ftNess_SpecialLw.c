@@ -352,7 +352,7 @@ void lbl_8011A524(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Hold Colli
     }
 }
 
-extern void func_8007B2C4(HSD_GObj*, void*);
+extern void func_8007B2C4(HSD_GObj*, AbsorbDesc*); // Create Absorb Bubble //
 
 // 0x8011A560 //
 // https://decomp.me/scratch/noqpv //
@@ -367,7 +367,7 @@ void func_8011A560(HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Hold
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A5D4 //
@@ -384,7 +384,7 @@ void func_8011A5D4(HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Hold
     func_8007D468(fighter_data);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A650 //
@@ -398,7 +398,7 @@ void func_8011A650(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Hold Ac
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x170, 2, 0, 0.0f, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A6A8 //
@@ -412,7 +412,7 @@ void func_8011A6A8(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Hold Acti
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 2, 0, 0.0f, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 extern f32 func_80075F48(Fighter*, s32);
@@ -601,14 +601,14 @@ s32 func_8011AB10(HSD_GObj* arg0) // Ness's PSI Magnet Absorb callback //
         Fighter_ActionStateChange_800693AC(arg0, 0x170, 2, 0, 0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
         attrs = temp_r3->x2D4_specialAttributes;
-        func_8007B2C4(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+        func_8007B2C4(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
     }
     else
     {
         Fighter_ActionStateChange_800693AC(arg0, 0x175, 2, 0, 0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
         attrs = temp_r3->x2D4_specialAttributes;
-        func_8007B2C4(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+        func_8007B2C4(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
     }
     return 1;
 }
@@ -675,14 +675,14 @@ void lbl_8011ABF8(HSD_GObj* arg0) // Ness's grounded PSI Magnet Absorb Animation
 
                 temp_e1 = arg0->user_data;
                 attr = temp_e1->x2D4_specialAttributes;
-                func_8007B2C4(arg0, &attr->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+                func_8007B2C4(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
             }
             else
             {
                 Fighter_ActionStateChange_800693AC(arg0, 0x175, 2, 0, 0.0f, 1.0f, 0.0f);
                 temp_e2 = arg0->user_data;
                 attr = temp_e2->x2D4_specialAttributes;
-                func_8007B2C4(arg0, &attr->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+                func_8007B2C4(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
             }
             phi_r0 = 1;
         }
@@ -821,7 +821,7 @@ void func_8011B008(HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Abso
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x176, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011B07C //
@@ -838,7 +838,7 @@ void func_8011B07C(HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Abso
     func_8007D468(fighter_data);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011B0F8 //
@@ -855,7 +855,7 @@ void func_8011B0F8(HSD_GObj* gobj) // Ness's PSI Magnet OnAbsorb hook //
 
     temp_r31 = gobj->user_data;
     temp_r30 = temp_r31->x2D4_specialAttributes;
-    temp_f31 = (f32)(s32)((f32)temp_r31->x1A44 * func_8011495C(temp_r31));
+    temp_f31 = (f32)(s32)((f32)temp_r31->AbsorbAttr.x1A44_damageTaken * func_8011495C(temp_r31));
     temp_r31->dmg.x1830_percent -= temp_f31;
     temp_f1 = temp_r31->dmg.x1830_percent;
 
@@ -866,7 +866,7 @@ void func_8011B0F8(HSD_GObj* gobj) // Ness's PSI Magnet OnAbsorb hook //
     }
     Player_SetHPByIndex((s32)temp_r31->xC_playerID, temp_r31->x221F_flag.bits.b4, (s32)temp_r31->dmg.x1830_percent);
     func_80040B8C(temp_r31->xC_playerID, temp_r31->x221F_flag.bits.b4, (s32)temp_f31);
-    temp_r31->x2C_facing_direction = (f32)temp_r31->x1A40;
+    temp_r31->x2C_facing_direction = (f32)temp_r31->AbsorbAttr.x1A40_absorbHitDirection;
     temp_r0 = temp_r31->x10_action_state_index;
 
     if (((temp_r0 != 0x171) && (temp_r0 != 0x176)) || !(temp_r31->x894 <= temp_r30->x7C_PSI_MAGNET_UNK2))
@@ -880,7 +880,7 @@ void func_8011B0F8(HSD_GObj* gobj) // Ness's PSI Magnet OnAbsorb hook //
             phi_r4 = 0x176;
         }
         Fighter_ActionStateChange_800693AC(gobj, phi_r4, 2, 0, 0.0f, 1.0f, 0.0f);
-        func_8007B2C4(gobj, &temp_r30->x98_PSI_MAGNET_ABSORPTION_BUBBLE_BONE_ID);
+        func_8007B2C4(gobj, &temp_r30->x98_PSI_MAGNET_ABSORPTION);
     }
 }
 
