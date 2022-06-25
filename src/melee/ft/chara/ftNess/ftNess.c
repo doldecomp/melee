@@ -11,7 +11,8 @@ void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1)
     ft->sa.ness.x224C_thunderGFX = FALSE;
 }
 
-void ftNess_OnLoad(HSD_GObj* gobj) {
+void ftNess_OnLoad(HSD_GObj* gobj) 
+{
     Fighter* ft = gobj->user_data;
     void** item_list = ft->x10C_ftData->x48_items;
 
@@ -45,7 +46,7 @@ void func_8011493C(HSD_GObj* gobj)
 
 f32 func_8011495C(Fighter* ft)
 {
-    return ((ftNessAttributes*)ft->x2D4_specialAttributes)->x94_PSI_MAGNET_HEALING_MULTIPLIER;
+    return ((ftNessAttributes*)ft->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
 }
 
 void func_80114968(HSD_GObj* gobj, s32 arg1)
@@ -57,7 +58,8 @@ void func_80114968(HSD_GObj* gobj, s32 arg1)
 
     if (result == 0) {
         switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
+        switch (switched_res) 
+        {
             case 1:
                 func_80070FB4(gobj, 1, 1);
                 break;
@@ -72,7 +74,8 @@ void func_80114968(HSD_GObj* gobj, s32 arg1)
                 break;
         }
 
-        if (arg1 != 0) {
+        if (arg1 != 0) 
+        {
             func_80070C48(gobj, 1);
         }
     }
@@ -82,7 +85,8 @@ void func_80114A48(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
 
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
+    if (func_8026B2B4(ft->x1974_heldItem) == 0) 
+    {
         func_80070CC4(gobj, 1);
     }
 }
@@ -91,7 +95,8 @@ void func_80114A90(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
 
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
+    if (func_8026B2B4(ft->x1974_heldItem) == 0) 
+    {
         func_80070C48(gobj, 1);
     }
 }

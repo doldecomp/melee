@@ -59,7 +59,7 @@ typedef enum ftNessAction
 
 typedef struct ftNessAttributes
 {
-	//Neutral B
+	// Neutral Special - PK Flash
 	s32 x0_PKFLASH_TIMER1_MINCHARGEFRAMES;
 	s32 x4_PKFLASH_TIMER2_LOOPFRAMES;
 	s32 x8_PKFLASH_FALLING_ACCEL_DELAY;
@@ -68,7 +68,7 @@ typedef struct ftNessAttributes
 	f32 x14_PKFLASH_FALL_ACCEL;
 	f32 x18_PKFLASH_UNK2;
 	f32 x1C_PKFLASH_LANDING_LAG; // If set to 0, Ness does not enter freefall after aerial PK Flash, but loses his double jump.
-	//Side B
+	// Side Special - PK Fire
 	f32 x20_PKFIRE_AERIAL_LAUNCH_TRAJECTORY;//Radians
 	f32 x24_PKFIRE_AERIAL_VELOCITY;
 	f32 x28_PKFIRE_GROUNDED_LAUNCH_TRAJECTORY;
@@ -76,38 +76,38 @@ typedef struct ftNessAttributes
 	f32 x30_PKFIRE_SPAWN_X;
 	f32 x34_PKFIRE_SPAWN_Y;
 	f32 x38_PKFIRE_LANDING_LAG;
-	//Up B - Control
+	// Up Special - PK Thunder
 	f32 x3C_PK_THUNDER_UNK1;
-	u32 x40_LOOP_VARIABLE;
-	u32 x44_FRAMES_TO_LOOP_AFTER_HIT;
-	u32 x48_FALLING_ACCELERATION_DELAY;
+	u32 x40_PK_THUNDER_LOOP1;
+	u32 x44_PK_THUNDER_LOOP2;
+	u32 x48_PK_THUNDER_FALLING_ACCEL_DELAY;
 	f32 x4C_PK_THUNDER_UNK2;
-	f32 x50_PK_THUNDER_FALLING_ACCELERATION;
-	//Up B - PK Thunder 2
+	f32 x50_PK_THUNDER_FALL_ACCEL;
+	// Up Special - PK Thunder 2
 	f32 x54_PK_THUNDER_2_MOMENTUM;
 	f32 x58_PK_THUNDER_2_UNK1;
 	f32 x5C_PK_THUNDER_2_DECELERATION_RATE;
 	f32 x60_PK_THUNDER_2_KNOCKDOWN_ANGLE; // Angle to determine whether to enter PK Thunder 2 or DownBound state (Ground Only)
 	f32 x64_PK_THUNDER_2_WALLHUG_ANGLE; // Surface angle to determine whether PK Thunder 2 wallhugs or bounces
-	f32 x68_PK_THUNDER_2_UNK3;
+	f32 x68_PK_THUNDER_2_UNK2;
 	f32 x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND;
 	f32 x70_PK_THUNDER_2_LANDING_LAG;
-	//DownB
-	f32 x74_COOLDOWN_AFTER_RELEASE;
+	// Down Special - PSI Magnet
+	f32 x74_PSI_MAGNET_RELEASE_LAG; // Automatic lag frames after initializing PSI Magnet if B is not being held. PSI Magnet is immediately released with no lag once these frames have passed.
 	f32 x78_PSI_MAGNET_UNK1; // Note: Reminiscent of Fox and Falco's Reflector turn duration attribute?
 	f32 x7C_PSI_MAGNET_UNK2; // Note: Reminiscent of Fox and Falco's Reflector Unk1 attribute?
 	f32 x80_PSI_MAGNET_UNK3;
 	s32 x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
 	f32 x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
-	f32 x8C_PSI_MAGNET_FALL_ACCELERATION;
+	f32 x8C_PSI_MAGNET_FALL_ACCEL;
 	f32 x90_PSI_MAGNET_UNK6;
-	f32 x94_PSI_MAGNET_HEALING_MULTIPLIER;
+	f32 x94_PSI_MAGNET_HEAL_MUL;
 	AbsorbDesc x98_PSI_MAGNET_ABSORPTION;
-	// Yo-yo
-	f32 xAC_SMASH_CHARGE_DURATION;	// Amount of frames Yo-Yo can be charged //
-	f32 xB0_SMASH_CHARGE_DAMAGE_MULTIPLIER;	// Charged Yo-Yo damage multiplier; 350 by default, identical to the Smash Charge standard //
-	f32 xB4_SMASH_CHARGE_REHIT_RATE; // Amount of frames needed for the Yo-Yo to hit again after colliding with a hurtbox //
-	// Baseball Bat
+	// Up/Down Smash - Yo-Yo
+	f32 xAC_YOYO_CHARGE_DURATION;	// Amount of frames Yo-Yo can be charged //
+	f32 xB0_YOYO_DAMAGE_MUL;	// Charged Yo-Yo damage multiplier; 350 by default, identical to the Smash Charge standard //
+	f32 xB4_YOYO_REHIT_RATE; // Amount of frames needed for the Yo-Yo to hit again after colliding with a hurtbox //
+	// Forward Smash - Baseball Bat
 	ReflectDesc xB8_BASEBALL_BAT;
 }ftNessAttributes;
 
@@ -136,14 +136,14 @@ void lbl_80114EB8(HSD_GObj* gobj);
 void func_80114F0C(HSD_GObj* gobj);
 void func_80114F70(f32 unk_float, HSD_GObj* gobj);
 s32 func_80114FF8(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float_unk);
-void func_80115114(HSD_GObj* gobj, Point3d* arg1);
+void func_80115114(HSD_GObj* gobj, Vec3* arg1);
 void func_801151EC(HSD_GObj* gobj);
 void func_801152D0(HSD_GObj* gobj, f32 arg8);
 s32 func_80115404(HSD_GObj* gobj);
 void func_80115534(HSD_GObj* gobj);
 void func_8011556C(HSD_GObj* gobj);
 void func_80115680(HSD_GObj* gobj);
-s32 func_80115784(HSD_GObj* gobj);
+BOOL func_80115784(HSD_GObj* gobj);
 void func_8011599C(HSD_GObj* gobj);
 void func_80115A08(HSD_GObj* gobj);
 void func_80115AC4(HSD_GObj* gobj);

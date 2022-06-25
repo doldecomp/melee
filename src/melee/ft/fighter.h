@@ -960,7 +960,7 @@ struct SpecialAttrs_Seak {
 
 struct SpecialAttrs_Ness {
     /* 0x222C */ HSD_GObj* x222C_yoyoGObj;
-    /* 0x2230 */ Vec3 x2230;
+    /* 0x2230 */ Vec3 x2230_yoyoHitboxPos;
     /* 0x223C */ f32 x223C;
     /* 0x2240 */ HSD_GObj* x2240_flashGObj;
     /* 0x2244 */ HSD_GObj* x2244_pkThunderGObj;

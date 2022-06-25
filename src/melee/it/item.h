@@ -30,6 +30,11 @@ struct ItemStateTable
     void* xC_callback_coll;
 };
 
+struct ItemStateContainer
+{
+    struct ItemStateTable stateTable[];
+};
+
 struct ItemLogicTable
 {
     struct ItemStateContainer* x0_itemStatePtr;
@@ -47,11 +52,6 @@ struct ItemLogicTable
     s32 (*x30_callback_OnShieldBounce)(HSD_GObj* item);
     s32 (*x34_callback_OnHitShield)(HSD_GObj* item);
     void (*x38_callback_OnUnknown)(HSD_GObj* item, HSD_GObj* fighter);
-};
-
-struct ItemStateContainer
-{
-    struct ItemStateTable stateTable[];
 };
 
 typedef struct _CameraBoxFlags

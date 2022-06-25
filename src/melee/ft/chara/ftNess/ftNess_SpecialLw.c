@@ -10,7 +10,7 @@ void func_80119E14(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Start A
 
     temp_fighter = fighter_gobj->user_data;
     ness_attr = temp_fighter->x2D4_specialAttributes;
-    temp_fighter->x2340_stateVar1 = (s32)ness_attr->x74_COOLDOWN_AFTER_RELEASE;
+    temp_fighter->x2340_stateVar1 = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
     temp_fighter->x2348_stateVar3 = 0;
     temp_fighter->x234C_stateVar4 = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fighter->x2350_stateVar5 = 0;
@@ -28,7 +28,7 @@ void func_80119E90(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Act
 
     temp_fighter = fighter_gobj->user_data;
     ness_attr = temp_fighter->x2D4_specialAttributes;
-    temp_fighter->x2340_stateVar1 = (s32)ness_attr->x74_COOLDOWN_AFTER_RELEASE;
+    temp_fighter->x2340_stateVar1 = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
     temp_fighter->x2348_stateVar3 = 0;
     temp_fighter->x234C_stateVar4 = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fighter->x2350_stateVar5 = 0;
@@ -150,7 +150,7 @@ void lbl_8011A108(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Phys
         goto block_end;
     }
 
-    func_8007D494(fighter_data, ness_attr->x8C_PSI_MAGNET_FALL_ACCELERATION, attr->x170_TerminalVelocity);
+    func_8007D494(fighter_data, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL, attr->x170_TerminalVelocity);
 block_end:
     func_8007CF58(fighter_data);
 }
@@ -326,7 +326,7 @@ void lbl_8011A474(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Hold Physi
         fighter_data->x234C_stateVar4 = magnetTimer - 1;
         goto block_end;
     }
-    func_8007D494(fighter_data, ness_attr->x8C_PSI_MAGNET_FALL_ACCELERATION, attr->x170_TerminalVelocity);
+    func_8007D494(fighter_data, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL, attr->x170_TerminalVelocity);
 block_end:
     func_8007CF58(fighter_data);
     func_8007AF10(fighter_gobj);
@@ -526,7 +526,7 @@ void lbl_8011A95C(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Turnaround
         fighter_data->x234C_stateVar4 = magnetTimer - 1;
         goto block_end;
     }
-    func_8007D494(fighter_data, ness_attr->x8C_PSI_MAGNET_FALL_ACCELERATION, attr->x170_TerminalVelocity);
+    func_8007D494(fighter_data, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL, attr->x170_TerminalVelocity);
 block_end:
     func_8007CF58(fighter_data);
     func_8007AF10(fighter_gobj);
@@ -782,7 +782,7 @@ void lbl_8011AF1C(HSD_GObj* arg0) // Ness's aerial PSI Magnet Absorb Physics cal
         temp_r31->x234C_stateVar4 = temp_r3 - 1;
         goto end_part;
     }
-    func_8007D494(temp_r31, attrs->x8C_PSI_MAGNET_FALL_ACCELERATION, attributes->x170_TerminalVelocity);
+    func_8007D494(temp_r31, attrs->x8C_PSI_MAGNET_FALL_ACCEL, attributes->x170_TerminalVelocity);
 end_part:
     func_8007CF58(temp_r31);
     func_8007AF10(arg0);
@@ -948,7 +948,7 @@ void lbl_8011B30C(HSD_GObj* arg0) // Ness's aerial PSI Magnet End Physics callba
         temp_r31->x234C_stateVar4 = temp_r3 - 1;
         goto end_part;
     }
-    func_8007D494(temp_r31, attrs->x8C_PSI_MAGNET_FALL_ACCELERATION, attributes->x170_TerminalVelocity);
+    func_8007D494(temp_r31, attrs->x8C_PSI_MAGNET_FALL_ACCEL, attributes->x170_TerminalVelocity);
 end_part:
     func_8007CF58(temp_r31);
 }
