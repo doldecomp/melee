@@ -801,21 +801,12 @@ u32 Fighter_NewSpawn_80068E40()
 }
 
 void Fighter_80068E64(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
+    Fighter* fighter = (void*)getFighter(fighterObj); // bit of a fake void* cast, but a sacrifice well worth getting rid of an fp_temp and filler. TODO: Maybe we can still do better?
 
     if (stage_info.internal_stage_id == 0x1B) {
         fighter->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
     } else {
         fighter->x34_scale.z = 1.0f;
-    }
-}
-
-static void Fighter_80068E98_Inline1(HSD_GObj *fighterObj) {
-    Fighter *fp = (void*)getFighter(fighterObj); // bit of a fake void* cast, but a sacrifice well worth getting rid of an fp_temp and filler. TODO: Maybe we can still do better?
-    if (stage_info.internal_stage_id == 0x1B) {
-        fp->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
-    } else {
-        fp->x34_scale.z = 1.0f;
     }
 }
 
@@ -855,7 +846,7 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input) {
     func_80070308(fighterObj);
     func_800C884C(fighterObj);
 
-    Fighter_80068E98_Inline1(fighterObj);
+    Fighter_80068E64(fighterObj);
     
     func_800749CC(fighterObj);
     func_8007077C(fighterObj);
@@ -1409,7 +1400,6 @@ void Fighter_8006A1BC(HSD_GObj* fighterObj) {
         if (fighter->dmg.x195c_hitlag_frames > 0.0f) {
             fighter->dmg.x195c_hitlag_frames -= 1.0f;
             if (fighter->dmg.x195c_hitlag_frames <= 0.0f) {
-                f32 temp;
                 fighter->dmg.x195c_hitlag_frames = 0.0f;
                 if (fighter->x221A_flag.bits.b3) {
                     func_80090718(fighter);
@@ -1438,12 +1428,9 @@ void Fighter_8006A1BC(HSD_GObj* fighterObj) {
     }
 }
 
-
 void Fighter_8006A360(HSD_GObj* fighterObj) {
-    
     Vec vec1;
     Fighter* fighter = fighterObj->user_data;
-    s32 unused;
 
     if (!fighter->x221F_flag.bits.b3) {
         fighter->xC8_pos_delta.x = fighter->xB0_pos.x - fighter->xBC_prevPos.x;
@@ -1628,7 +1615,9 @@ void Fighter_8006A360(HSD_GObj* fighterObj) {
 
         if (fighter->x1974_heldItem) {
             if (itGetKind(fighter->x1974_heldItem) != 0x1C) {
-                (void)fighter;
+                // im not sure of whatever is here, but a void ptr downcast to get rid of filler seems like a better tradeoff...
+                void *fighterVoid = fighter;
+                (void)fighterVoid;
             } else {
                 func_800C511C(fighterObj);
             }
@@ -1692,7 +1681,6 @@ void Fighter_8006A360(HSD_GObj* fighterObj) {
         func_8007E0E4(fighterObj);
         func_800C0408(fighterObj);
     }
-
 }
 
 void Fighter_8006ABA0(HSD_GObj* fighterObj) {
@@ -1740,15 +1728,39 @@ void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighterObj) {
     }
 }
 
+// the stick pairs seen in input structs might make more sense as an array of 2, or a struct of 2 floats.. if it still matches.
+#define SET_STICKS(stickXPtr, stickYPtr, x, y) \
+    do { \
+        f32 *stickX = (f32*)&stickXPtr; \
+        f32 *stickY = (f32*)&stickYPtr; \
+        *stickX = x; \
+        *stickY = y; \
+    } while(0)
+
+#define CLEAR_STICKS(stickXPtr) \
+    do { \
+        f32 *stick = (f32*)&stickXPtr; \
+        stick[0] = 0.0f; \
+        stick[1] = 0.0f; \
+    } while(0)
+
+static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fighter) {
+    s32 temp0_loc[2];
+
+    temp0_loc[0] = (fighter->input.x65C & (fighter->input.x660 ^ fighter->input.x65C));
+    temp0_loc[1] = (fighter->input.x660 & (fighter->input.x660 ^ fighter->input.x65C));
+
+    if (fighter->x2219_flag.bits.b5) {
+        fighter->input.x668 |= temp0_loc[0];
+        fighter->input.x66C |= temp0_loc[1];
+    } else {
+        fighter->input.x668 = temp0_loc[0];
+        fighter->input.x66C = temp0_loc[1];
+    }
+}
 
 void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
-
-    s32 unused[18];
     Fighter* fighter = fighterObj->user_data;
-
-    s32 temp0;
-    s32 temp1;
-    s32 temp2; 
 
     f32 tempf1;
     f32 tempf0;
@@ -1757,51 +1769,38 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
         if (!fighter->x2224_flag.bits.b2) {
             
             if (!fighter->x221D_flag.bits.b3) {
-                fighter->input.x628_lstick_x2 = fighter->input.x630;
-                fighter->input.x62C_lstick_y2 = fighter->input.x634;
-                fighter->input.x640_lsubStick_x2 = fighter->input.x648;
-                fighter->input.x644_lsubStick_y2 = fighter->input.x64C;
+                SET_STICKS(fighter->input.x628_lstick_x2, fighter->input.x62C_lstick_y2, fighter->input.x630, fighter->input.x634);
+                SET_STICKS(fighter->input.x640_lsubStick_x2, fighter->input.x644_lsubStick_y2, fighter->input.x648, fighter->input.x64C);
                 fighter->input.x654 = fighter->input.x658;
                 fighter->input.x660 = fighter->input.x664;
                 fighter->x221D_flag.bits.b3 = 1;
             } else {
-                fighter->input.x628_lstick_x2 = fighter->input.x620_lstick_x;
-                fighter->input.x62C_lstick_y2 = fighter->input.x624_lstick_y;
-                fighter->input.x640_lsubStick_x2 = fighter->input.x638_lsubStick_x;
-                fighter->input.x644_lsubStick_y2 = fighter->input.x63C_lsubStick_y;
+                SET_STICKS(fighter->input.x628_lstick_x2, fighter->input.x62C_lstick_y2, fighter->input.x620_lstick_x, fighter->input.x624_lstick_y);
+                SET_STICKS(fighter->input.x640_lsubStick_x2, fighter->input.x644_lsubStick_y2, fighter->input.x638_lsubStick_x, fighter->input.x63C_lsubStick_y);
                 fighter->input.x654 = fighter->input.x650;
                 fighter->input.x660 = fighter->input.x65C;
             }
 
             if (func_800A2040(fighter)) {
-
-                fighter->input.x620_lstick_x = func_800A17E4(fighter);
-                fighter->input.x624_lstick_y = func_800A1874(fighter);
+                SET_STICKS(fighter->input.x620_lstick_x, fighter->input.x624_lstick_y, func_800A17E4(fighter), func_800A1874(fighter));
                 if (g_debugLevel < 3  &&  func_8016B41C() == 0) {
-                    fighter->input.x638_lsubStick_x = func_800A1994(fighter);
-                    fighter->input.x63C_lsubStick_y = func_800A1A24(fighter);
+                    SET_STICKS(fighter->input.x638_lsubStick_x, fighter->input.x63C_lsubStick_y, func_800A1994(fighter), func_800A1A24(fighter));
                 }
                 else {
-                    fighter->input.x638_lsubStick_x = 0.0f;
-                    fighter->input.x63C_lsubStick_y = 0.0f;
+                    CLEAR_STICKS(fighter->input.x638_lsubStick_x);
                 }
 
                 tempf0 = func_800A1904(fighter);
                 tempf1 = func_800A1948(fighter);
 
-                fighter->input.x650 = (tempf0> tempf1) ? tempf0 : tempf1;
+                fighter->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
 
             } else {
-
-                fighter->input.x620_lstick_x = HSD_PadRumbleData[fighter->x618_player_id].nml_stickX;
-                fighter->input.x624_lstick_y = HSD_PadRumbleData[fighter->x618_player_id].nml_stickY;
-
+                SET_STICKS(fighter->input.x620_lstick_x, fighter->input.x624_lstick_y, HSD_PadRumbleData[fighter->x618_player_id].nml_stickX, HSD_PadRumbleData[fighter->x618_player_id].nml_stickY);
                 if (g_debugLevel < 3  &&  func_8016B41C() == 0) {
-                    fighter->input.x638_lsubStick_x = HSD_PadRumbleData[fighter->x618_player_id].nml_subStickX;
-                    fighter->input.x63C_lsubStick_y = HSD_PadRumbleData[fighter->x618_player_id].nml_subStickY;
+                    SET_STICKS(fighter->input.x638_lsubStick_x, fighter->input.x63C_lsubStick_y, HSD_PadRumbleData[fighter->x618_player_id].nml_subStickX, HSD_PadRumbleData[fighter->x618_player_id].nml_subStickY);
                 } else {
-                    fighter->input.x638_lsubStick_x = 0.0f;
-                    fighter->input.x63C_lsubStick_y = 0.0f;
+                    CLEAR_STICKS(fighter->input.x638_lsubStick_x);
                 }
 
                 tempf1 = HSD_PadRumbleData[fighter->x618_player_id].nml_analogR;
@@ -1859,18 +1858,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
                 }
             }
 
-            temp0 = fighter->input.x65C;
-            temp1 = fighter->input.x660 ^ temp0;
-            temp0 = temp0 & temp1;
-            temp2 = fighter->input.x660 & temp1;
-
-            if (fighter->x2219_flag.bits.b5) {
-                fighter->input.x668 |= temp0;
-                fighter->input.x66C |= temp2;
-            } else {
-                fighter->input.x668 = temp0;
-                fighter->input.x66C = temp2;
-            }
+            Fighter_Spaghetti_8006AD10_Inner1(fighter);
 
             fighter->x676_x++;
             if (fighter->x676_x > 0xFE) {
@@ -2058,7 +2046,6 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
         }
     
         if (fighter->x221D_flag.bits.b4 || fighter->x2224_flag.bits.b2 || func_801A45E8(2)) {
-            Fighter* same_fighter;
             fighter->input.x630 = fighter->input.x620_lstick_x;
             fighter->input.x634 = fighter->input.x624_lstick_y;
             fighter->input.x648 = fighter->input.x638_lsubStick_x;
@@ -2067,53 +2054,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
             fighter->input.x664 = fighter->input.x65C;
             fighter->x221D_flag.bits.b3 = 0;
     
-            same_fighter = fighterObj->user_data;
-    
-            same_fighter->input.x650 = 
-            same_fighter->input.x654 = 
-            same_fighter->input.x638_lsubStick_x = 
-            same_fighter->input.x63C_lsubStick_y = 
-            same_fighter->input.x640_lsubStick_x2 = 
-            same_fighter->input.x644_lsubStick_y2 = 
-            same_fighter->input.x620_lstick_x = 
-            same_fighter->input.x624_lstick_y = 
-            same_fighter->input.x628_lstick_x2 = 
-            same_fighter->input.x62C_lstick_y2 = 0.0f;
-    
-            same_fighter->input.x660 = 0;
-            same_fighter->input.x66C = 0;
-            same_fighter->input.x668 = 0;
-            same_fighter->input.x65C = 0;
-            
-            same_fighter->x679_x = 
-            same_fighter->x67A_y = 
-            same_fighter->x67B = 
-            same_fighter->x676_x = 
-            same_fighter->x677_y = 
-            same_fighter->x678 = 
-            same_fighter->x673 = 
-            same_fighter->x674 = 
-            same_fighter->x675 = 
-            same_fighter->x670_timer_lstick_tilt_x = 
-            same_fighter->x671_timer_lstick_tilt_y =         
-            same_fighter->x672_input_timer_counter = 0xFE;
-    
-            same_fighter->x67C = 
-            same_fighter->x67D = 
-            same_fighter->x67E = 
-            same_fighter->x681 = 
-            same_fighter->x682 = 
-            same_fighter->x67F = 
-            same_fighter->x680 = 
-            same_fighter->x683 = 
-            same_fighter->x684 = 
-            same_fighter->x685 = 
-            same_fighter->x686 = 
-            same_fighter->x687 = 
-            same_fighter->x688 = 
-            same_fighter->x689 = 
-            same_fighter->x68A = 
-            same_fighter->x68B = 0xFF;
+            Fighter_UnkInitLoad_80068914_Inner1(fighterObj);
         }
     
         if (!fighter->x2219_flag.bits.b5) {
