@@ -27,23 +27,23 @@ typedef struct _ftPikachuAttributes {
     f32 x54;
     f32 x58;
     s32 x5C;
-    s32 x60;
+    s32 x60; // up b zip duration
     f32 x64;
-    f32 x68;
+    f32 x68; // up b angle offset 1
     Vec x6C_scale;
-    f32 x78;
+    f32 x78; // up b angle offset 2
     Vec x7C_scale;
     f32 x88;
-    f32 x8C;
+    f32 x8C; // up b minimum stick magnitude
 
-    f32 x90;
-    f32 x94;
-    f32 x98;
+    f32 x90; // up b zip stick magnitude to velocity slope
+    f32 x94; // up b zip stick magnitude to velocity intercept
+    f32 x98; // second zip velocity decay
     f32 x9C;
 
     s32 xA0;
     f32 xA4;
-    s32 xA8;
+    s32 xA8; // minimum stick angle difference between two up b zips
     f32 xAC;
 
     f32 xB0;

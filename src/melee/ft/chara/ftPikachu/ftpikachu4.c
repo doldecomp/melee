@@ -1,8 +1,9 @@
 #include "ftpikachu.h"
 
 #define HALF_PI 1.5707963705062866f
+#define DEG_TO_RAD 0.017453292f
 
-
+// points velocity toward facing direction
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     fighter->xEC_ground_vel = fighter->x2C_facing_direction * fabs_inline(fighter->xEC_ground_vel);
@@ -301,7 +302,7 @@ void ftPikachu_801267C8(HSD_GObj* fighterObj) {
 
         if (bool0) {
             f32 tempf = lbvector_AngleXY(&collData->x154_groundNormal, &fighter->x80_self_vel);
-            if (tempf > (0.017453292f * (90.0f + pika_attr->xA0))) {
+            if (tempf > (DEG_TO_RAD * (90.0f + pika_attr->xA0))) {
                 func_8007D7FC(fighter);
                 ftPikachu_ActionChangeUpdateVel_801274AC(fighterObj);
                 return; 
@@ -315,21 +316,21 @@ void ftPikachu_801267C8(HSD_GObj* fighterObj) {
 
         if (collData->x134_envFlags & 0x6000) {
             f32 angle = lbvector_AngleXY(&collData->x190_vec, &fighter->x80_self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
+            if (angle > (DEG_TO_RAD * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(fighterObj);
             }
         }
 
         if (collData->x134_envFlags & 0x3F) {
             f32 angle = lbvector_AngleXY(&collData->x168_vec, &fighter->x80_self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
+            if (angle > (DEG_TO_RAD * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(fighterObj);
             }
         }
 
         if (collData->x134_envFlags & 0xFC0) {
             f32 angle = lbvector_AngleXY(&collData->x17C_vec, &fighter->x80_self_vel);
-            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
+            if (angle > (DEG_TO_RAD * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(fighterObj);
             }
         }
@@ -385,6 +386,7 @@ inline float get_max_and_fill_stack() {
     return 0.999f;
 }
 
+// grounded up b zip
 void ftPikachu_80126C0C(HSD_GObj* fighterObj) {
 
     
@@ -394,6 +396,7 @@ void ftPikachu_80126C0C(HSD_GObj* fighterObj) {
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;    
     f32 stick_mag = sqrtf((fighter->input.x620_lstick_x * fighter->input.x620_lstick_x) + (fighter->input.x624_lstick_y * fighter->input.x624_lstick_y));
 
+    // cap stick magnitude to 0.999f
     if (stick_mag > 0.999f) {
         stick_mag = get_max_and_fill_stack();;
     }
@@ -408,14 +411,28 @@ void ftPikachu_80126C0C(HSD_GObj* fighterObj) {
         if (!(lbvector_AngleXY(&collData->x154_groundNormal, &lstick_direction) < HALF_PI) && (!func_8009A134(fighterObj))) {
             Fighter* fighter2;
             func_8007D9FC(fighter);
+
+            
+            // store stick angle to compare during zip2 check
             fighter->x234C_pos.y = lstick_direction.x;
             fighter->x234C_pos.z = lstick_direction.y;
+
             fighter2 = fighterObj->user_data;
+
+            // set zip duration
             fighter2->x2344_stateVar2_s32 = ((ftPikachuAttributes*)fighter2->x2D4_specialAttributes)->x60;
+            
+            // lose double jump(s)
             fighter2->x1968_jumpsUsed = fighter2->x110_attr.x168_MaxJumps;
+
+            // set ground velocity to (zip slope * stick_mag) + zip intercept
+            // and then flip based on facing direction
             fighter->xEC_ground_vel = (pika_attr->x90 * stick_mag) + pika_attr->x94;
             fighter->xEC_ground_vel *= fighter->x2C_facing_direction;
+
+            // if second zip
             if (fighter->x2348_stateVar3_s32) {
+                // multiply ground velocity by second-zip decay
                 fighter->xEC_ground_vel *= pika_attr->x98;
                 Fighter_ActionStateChange_800693AC(fighterObj, 0x162, 2, 0, 12.0f, 1.0f, 0.0f);
                 func_8006EBA4(fighterObj);
@@ -432,6 +449,7 @@ void ftPikachu_80126C0C(HSD_GObj* fighterObj) {
     ftPikachu_80126E1C(fighterObj);
 }
 
+// aerial up b zip
 void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
 
 
@@ -446,6 +464,8 @@ void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
     f32 temp_stick_mag = sqrtf((fighter->input.x620_lstick_x * fighter->input.x620_lstick_x) + (fighter->input.x624_lstick_y * fighter->input.x624_lstick_y));
 
     final_stick_mag = temp_stick_mag;
+
+    // cap stick magnitude to 0.999f
     if (temp_stick_mag > 0.999f) {
         final_stick_mag = get_max_and_fill_stack();
     }
@@ -456,7 +476,10 @@ void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
             func_8007D9FC(fighter);
         }
 
+        // zip angle = atan2(stick_y, stick_x * facing)
         some_angle = func_someCalcAngle_80022C30(fighter->input.x624_lstick_y, fighter->input.x620_lstick_x * fighter->x2C_facing_direction);
+        
+        // store stick angle to compare during zip2 check
         fighter->x234C_pos.y = fighter->input.x620_lstick_x;
         fighter->x234C_pos.z = fighter->input.x624_lstick_y;
     } else {
@@ -470,15 +493,23 @@ void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
 
 
     fighter2 = fighterObj->user_data;
+
+    // set zip duration
     fighter2->x2344_stateVar2_s32 = ((ftPikachuAttributes*)fighter2->x2D4_specialAttributes)->x60;
+    
+    // lose double jump(s)
     fighter2->x1968_jumpsUsed = fighter2->x110_attr.x168_MaxJumps;
 
+    // compute velocity as (zip slope * stick_mag) + zip intercept
+    // x velocity is the same but flips based on facing direction
     temp_f2_2 = ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) * cosf(some_angle);
     fighter->x80_self_vel.x = fighter->x2C_facing_direction * temp_f2_2;
     fighter->x80_self_vel.y = ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) * sinf(some_angle);
 
 
+    // if second zip
     if (fighter->x2348_stateVar3_s32) {
+        // multiply velocity by second-zip decay
         fighter->x80_self_vel.x *= pika_attr->x98;
         fighter->x80_self_vel.y *= pika_attr->x98;
         Fighter_ActionStateChange_800693AC(fighterObj, 0x165, 2, 0, 12.0f, 1.0f, 0.0f);
@@ -488,6 +519,8 @@ void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
     func_8006EBA4(fighterObj);
     ftAnim_SetAnimRate(fighterObj, 0.0f); 
     fighter->x2223_flag.bits.b4 = 1;
+
+    // set velocity to move toward facing direction
     fighter->cb.x21F8_callback = &ftPikachu_UpdateVel_80125D80;
     
 }
@@ -498,6 +531,7 @@ inline s32 return_and_fill_stack() {
     return 0;
 }
 
+// seems to check whether to perform a second up b zip
 s32 ftPikachu_80127064(HSD_GObj* fighterObj) {
     
     Vec vec1;
@@ -524,7 +558,9 @@ s32 ftPikachu_80127064(HSD_GObj* fighterObj) {
         vec2.z = 0.0f;
         
         tempf = lbvector_AngleXY(&vec2, &vec1);
-        if (tempf > (0.017453292f * (pika_attr->xA8))) {
+
+        // compares current stick velocity with stored stick velocity from first zip, against minimum angle delta
+        if (tempf > (DEG_TO_RAD * (pika_attr->xA8))) {
             return 1;
         }
         return 0;
