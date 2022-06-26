@@ -2,6 +2,7 @@
 
 #define HALF_PI 1.5707963705062866f
 #define DEG_TO_RAD 0.017453292f
+#define MAX_STICK_MAG 0.999f
 
 // points velocity toward facing direction
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighterObj) {
@@ -382,8 +383,8 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighterObj) {
 
 inline float get_max_and_fill_stack() {
     float stack[9];
-    stack[0] = 0.999f;
-    return 0.999f;
+    stack[0] = MAX_STICK_MAG;
+    return MAX_STICK_MAG;
 }
 
 // grounded up b zip
@@ -396,8 +397,8 @@ void ftPikachu_80126C0C(HSD_GObj* fighterObj) {
     // distance formula
     f32 stick_mag = sqrtf((fighter->input.x620_lstick_x * fighter->input.x620_lstick_x) + (fighter->input.x624_lstick_y * fighter->input.x624_lstick_y));
 
-    // cap stick magnitude to 0.999f
-    if (stick_mag > 0.999f) {
+    // cap stick magnitude to MAX_STICK_MAG
+    if (stick_mag > MAX_STICK_MAG) {
         stick_mag = get_max_and_fill_stack();;
     }
 
@@ -466,8 +467,8 @@ void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
 
     final_stick_mag = temp_stick_mag;
 
-    // cap stick magnitude to 0.999f
-    if (temp_stick_mag > 0.999f) {
+    // cap stick magnitude to MAX_STICK_MAG
+    if (temp_stick_mag > MAX_STICK_MAG) {
         final_stick_mag = get_max_and_fill_stack();
     }
 
@@ -488,12 +489,12 @@ void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
         func_8007DA24(fighter);
 
         // use max stick_mag and 90°
-        final_stick_mag = 0.999f;
+        final_stick_mag = MAX_STICK_MAG;
         some_angle = HALF_PI;
 
         // store inputs as if x=0 and y=max
         fighter->x234C_pos.y = 0.0f;
-        fighter->x234C_pos.z = 0.999f;
+        fighter->x234C_pos.z = MAX_STICK_MAG;
     }
 
     fighter2 = fighterObj->user_data;
@@ -532,7 +533,7 @@ void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
 
 inline s32 return_and_fill_stack() {
     float stack[1];
-    stack[0] = 0.999f;
+    stack[0] = MAX_STICK_MAG;
     return 0;
 }
 
