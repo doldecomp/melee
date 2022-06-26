@@ -2074,27 +2074,34 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
     
 }
 
-
 //// https://decomp.me/scratch/oFu1o
-void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
+#define VEC_CLEAR(vec)                               \
+    do {                                             \
+        Vec* vecLocal = (void*)&vec;                 \
+        f32 c = 0;                                   \
+        vecLocal->x = vecLocal->y = vecLocal->z = c; \
+    } while(0)
 
+void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
     Fighter* fighter = fighterObj->user_data;
     Vec3 windOffset; 
 
-    if (fighter->x221F_flag.bits.b3) return;
-    
+    if (fighter->x221F_flag.bits.b3) {
+        return;
+    }
     
     if (!fighter->x2219_flag.bits.b5)
     {
         Vec3* p_kb_vel;
         Vec3* pAtkShieldKB;
-        float kb_vel_x, atkShieldKB_X;
-        Vec3 selfVel; 
+        Vec3 selfVel;
+        float kb_vel_x, kb_vel_y, atkShieldKB_X;
 
-        
-        if (fighter->x2064_ledgeCooldown) fighter->x2064_ledgeCooldown -= 1;
+        if (fighter->x2064_ledgeCooldown) 
+            fighter->x2064_ledgeCooldown -= 1;
 
-        if (fighter->x2108) fighter->x2108 -= 1;
+        if (fighter->x2108) 
+            fighter->x2108 -= 1;
         
         func_800C0A98(fighterObj);
 
@@ -2105,32 +2112,26 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
         p_kb_vel = &fighter->x8c_kb_vel;
 		if ((kb_vel_x = p_kb_vel->x) != 0 || p_kb_vel->y != 0)
         {
-            
 			if (fighter->xE0_ground_or_air == GA_Air) 
             {
-                
-				float kb_vel_x = p_kb_vel->x;
-				float kb_vel_y = p_kb_vel->y;
+				kb_vel_x = p_kb_vel->x;
+				kb_vel_y = p_kb_vel->y;
 
 				if (fighter->x2228_flag.bits.b2) 
                 {
-                	p_kb_vel->x = func_8007CD6C(p_kb_vel->x, func_8007CDA4(fighter));
-					p_kb_vel->y = func_8007CD6C(p_kb_vel->y, func_8007CDF8(fighter));
+                	p_kb_vel->x = func_8007CD6C(p_kb_vel->x, func_8007CDA4(fighter));;
+					p_kb_vel->y = func_8007CD6C(p_kb_vel->y, func_8007CDF8(fighter));;
                 }
                 else 
                 {
-                    
                     float kb_angle = func_someCalcAngle_80022C30(kb_vel_y, kb_vel_x);
-					float kb_vel_len = sqrtf(kb_vel_x * kb_vel_x + kb_vel_y * kb_vel_y);
 					
-                    if (kb_vel_len < p_ftCommonData->x204_knockbackFrameDecay) 
+                    if (sqrtf(kb_vel_x * kb_vel_x + kb_vel_y * kb_vel_y) < p_ftCommonData->x204_knockbackFrameDecay) 
                     {
-						p_kb_vel->y = 0; 
-                        p_kb_vel->x = 0;
+						p_kb_vel->x = p_kb_vel->y = 0; 
                     }
 					else
                     {
-
 						p_kb_vel->x -= p_ftCommonData->x204_knockbackFrameDecay * cosf(kb_angle);
                         p_kb_vel->y -= p_ftCommonData->x204_knockbackFrameDecay * sinf(kb_angle);
                     }
@@ -2140,14 +2141,12 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
             }
 			else
             {
-                
                 Vec3* pNormal = &fighter->x6F0_collData.x154_groundNormal;  
                 struct attr* pAttr;
-                
+
 				if (fighter->xF0_ground_kb_vel == 0)
 					fighter->xF0_ground_kb_vel = kb_vel_x;
-                
-                
+
                 pAttr = &fighter->x110_attr; 
                 func_8007CCA0(fighter,
                     /*effective friction - ground multiplier is usually 1. last factor was 1 when I looked*/
@@ -2162,22 +2161,17 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
         pAtkShieldKB = &fighter->x98_atk_shield_kb;
         if ((atkShieldKB_X = pAtkShieldKB->x) != 0 || pAtkShieldKB->y != 0)
         {
-            
             if (fighter->xE0_ground_or_air == GA_Air)
             {
-                
                 float kb_x = pAtkShieldKB->x;
                 float kb_y = pAtkShieldKB->y;
                 float atkShieldKBAngle = func_someCalcAngle_80022C30(kb_y, kb_x);
-                
-                float atkShieldKB_len = sqrtf(kb_x*kb_x + kb_y*kb_y);
-                
-                if (atkShieldKB_len < p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
+
+                if (sqrtf(kb_x*kb_x + kb_y*kb_y) < p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
                 {
                     // BUG IN THE MELEE CODE THAT CAUSES THE INVISIBLE CEILING GLITCH
                     // The next line should be 'pAtkShieldKB->y = 0', but instead it is:
-                    p_kb_vel->y = 0;
-                    pAtkShieldKB->x = 0;
+                    pAtkShieldKB->x = p_kb_vel->y = 0;
                 }
                 else
                 {
@@ -2191,15 +2185,13 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
             }
             else
             {
-                
-                float effectiveFriction;
                 Vec3* pNormal = &fighter->x6F0_collData.x154_groundNormal; // ground_normal offset inside fighter is 0x844, surface normal points out of the surface. 
                 struct attr* pAttr;
                 
                 if (fighter->xF4_ground_attacker_shield_kb_vel == 0)
                     fighter->xF4_ground_attacker_shield_kb_vel = atkShieldKB_X;
                 
-                pAttr = &fighter->x110_attr; 
+                pAttr = &fighter->x110_attr;
                 
                 func_8007CE4C(fighter,
                     /* effectiveFriction - the last constant variable differs from the one for the knockback friction above*/
@@ -2210,18 +2202,12 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
             }
         }
 
-        
 		fighter->xEC_ground_vel += fighter->xE4_ground_accel_1 + fighter->xE8_ground_accel_2;
-        
-		fighter->xE8_ground_accel_2 = 0;
-        fighter->xE4_ground_accel_1 = 0;
+        fighter->xE4_ground_accel_1 = fighter->xE8_ground_accel_2 = 0;
 
         //self_vel += anim_vel
 		PSVECAdd(&fighter->x80_self_vel, &fighter->x74_anim_vel, &fighter->x80_self_vel);
-        
-		fighter->x74_anim_vel.z = 0;
-        fighter->x74_anim_vel.y = 0;
-        fighter->x74_anim_vel.x = 0;
+        VEC_CLEAR(fighter->x74_anim_vel);
 		
 		//copy selfVel into a stack storage variable
 		selfVel = fighter->x80_self_vel;
@@ -2234,10 +2220,11 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
             // The compiler casts an u32 integer 'val' to a double type using
             // double v = *(double*)&(0x43300000_00000000 | val ^ 0x80000000) - *(double*)&43300000_80000000
             // which is all that happens in the lengthy assembly generated by this
-			float C = 1.0f - (float)fighter->dmg.x194C / (float)fighter->dmg.x1948;
+			float C1 = 1.0f;
+            float C2 = C1 - (float)fighter->dmg.x194C / (float)fighter->dmg.x1948;
 			
-            selfVel.x = C * (fighter->x80_self_vel.x - fighter->xA4_unk_vel.x) + fighter->xA4_unk_vel.x;
-            selfVel.y = C * (fighter->x80_self_vel.y - fighter->xA4_unk_vel.y) + fighter->xA4_unk_vel.y;
+            selfVel.x = C2 * (fighter->x80_self_vel.x - fighter->xA4_unk_vel.x) + fighter->xA4_unk_vel.x;
+            selfVel.y = C2 * (fighter->x80_self_vel.y - fighter->xA4_unk_vel.y) + fighter->xA4_unk_vel.y;
             
             fighter->dmg.x194C--;
 			if (fighter->dmg.x194C == 0)
@@ -2245,19 +2232,21 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
         }
 
 		// add some horizontal+depth offset to the position? Why is there no vertical component?
-		fighter->xB0_pos.x += fighter->xF8_playerNudgeVel.x;
-		fighter->xB0_pos.z += fighter->xF8_playerNudgeVel.y;
+        fighter->xB0_pos.x += fighter->xF8_playerNudgeVel.x;
+        fighter->xB0_pos.y += 0;
+        fighter->xB0_pos.z += fighter->xF8_playerNudgeVel.y;
         
         if (fighter->x2222_flag.bits.b6 && !fighter->x2222_flag.bits.b7)
         {
             s32 bit;
-            
+
             // fighter->xD4_unk_vel += selfVel
 			PSVECAdd(&fighter->xD4_unk_vel, &selfVel, &fighter->xD4_unk_vel);
 			
             fighter->xD4_unk_vel.x += p_kb_vel->x;
             fighter->xD4_unk_vel.y += p_kb_vel->y;
-            
+            fighter->xD4_unk_vel.z += 0.0f;
+
             if (fighter->x2210_ThrowFlags.b2)
             {
 			    fighter->x2210_ThrowFlags.b2 = 0;
@@ -2265,17 +2254,13 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
             }
             else
                 bit = 0;
-			
 
 			if (bit || func_80070FD0(fighter) || fighter->x594_animCurrFlags1.bits.b7)
             {
-                
                 // fighter->xB0_position += fighter->xD4_unk_vel
 				PSVECAdd(&fighter->xB0_pos, &fighter->xD4_unk_vel, &fighter->xB0_pos);
 				// TODO: we set this velocity to 0 after applying it -> Is this SDI or ASDI?
-                fighter->xD4_unk_vel.z = 0;
-                fighter->xD4_unk_vel.y = 0;
-                fighter->xD4_unk_vel.x = 0;
+                VEC_CLEAR(fighter->xD4_unk_vel);
             }
 			// fighter->xB0_position += *pAtkShieldKB
             PSVECAdd(&fighter->xB0_pos, (Vec3*)pAtkShieldKB, &fighter->xB0_pos);
@@ -2286,6 +2271,8 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
 			PSVECAdd(&fighter->xB0_pos, &selfVel, &fighter->xB0_pos);
 			fighter->xB0_pos.x += p_kb_vel->x;
             fighter->xB0_pos.y += p_kb_vel->y;
+            fighter->xB0_pos.z += 0;
+
             PSVECAdd(&fighter->xB0_pos, (Vec3*)pAtkShieldKB, &fighter->xB0_pos);
         }
 		//accumulate wind hazards into the windOffset vector
@@ -2293,24 +2280,17 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
     }
     else
     {
-        
-        windOffset.z = 0;
-        windOffset.y = 0;
-        windOffset.x = 0;
+        VEC_CLEAR(windOffset);
     }
     
     func_80076528(fighterObj);
-
     
 	if (fighter->cb.x21D0_callback_EveryHitlag) {
         fighter->cb.x21D0_callback_EveryHitlag(fighterObj);
     }
-		 
     
 	if (fighter->xE0_ground_or_air == GA_Ground)
     {
-        
-        s32 dummy2;
 		Vec3 difference; 
 		// I think this function always returns r3=1, but it contains two __assert functions. But I guess these just stop or reset the game.
 		// result is written to where r5 points to, which is 'difference' in this case
@@ -2318,9 +2298,8 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
 			//fighter->position += difference
 			PSVECAdd(&fighter->xB0_pos, &difference, &fighter->xB0_pos);
     }
-	
-	
-	fighter->xB0_pos.x += windOffset.x;
+
+    fighter->xB0_pos.x += windOffset.x;
     fighter->xB0_pos.y += windOffset.y;
     fighter->xB0_pos.z += windOffset.z;
 
@@ -2337,7 +2316,6 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
     }
 	else
     {
-        
 		if (!fighter->x222A_flag.bits.b1 && !fighter->x2228_flag.bits.b5)
         {
 			// if position.y crossed 0.5*(stage.blastBottom+stage.cameraBottom) + stage.crowdReactStart from above...
@@ -2354,12 +2332,9 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
 	if (fighter->dmg.x18A4_knockbackMagnitude && 
         !fighter->x221C_flag.bits.b6 &&
 		!func_80322258(fighter->xB0_pos.x))
-        
     {
-        
 		fighter->dmg.x18A4_knockbackMagnitude = 0.0f; 
     }
-    
 
 	func_8007AF28(fighterObj);
 	
@@ -2371,7 +2346,6 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
 		OSReport("fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n", fighter->xB0_pos.x, fighter->xB0_pos.y);
         __assert(__FILE__ , /*line*/2517, "0");
     }
-    
 }
 
 void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj) 
