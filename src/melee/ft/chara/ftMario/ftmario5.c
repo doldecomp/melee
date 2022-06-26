@@ -221,7 +221,7 @@ void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj) {
     ftMarioAttributes* sa = GetMarioAttr(ft);
 
     if ((ft->x220C_ftcmd_var3 != 0U) && ((s32)(ft->x234C_stateVar4) != 0)) {
-        func_8007592C(ft, 0, ft->x2C_facing_direction * func_someCalcAngle_80022C30(ft->x6F0_collData.x154_groundNormal.x, ft->x6F0_collData.x154_groundNormal.y));
+        func_8007592C(ft, 0, ft->x2C_facing_direction * func_fatan2_80022C30(ft->x6F0_collData.x154_groundNormal.x, ft->x6F0_collData.x154_groundNormal.y));
     } else {
         func_8007592C(ft, 0, 0.0f);
     }

@@ -292,7 +292,7 @@ void func_80115114(HSD_GObj* fighter_gobj, Point3d* arg1)
     func_8000B1CC(temp_r31->x5E8_fighterBones[0x2].x0_jobj, 0, &sp14);
     *arg1 = sp20;
     lbvector_Sub(arg1, &sp14);
-    lbvector_Rotate(arg1, 4, -func_someCalcAngle_80022C30(temp_r30->x154_groundNormal.x, temp_r30->x154_groundNormal.y));
+    lbvector_Rotate(arg1, 4, -func_fatan2_80022C30(temp_r30->x154_groundNormal.x, temp_r30->x154_groundNormal.y));
     lbvector_Add(arg1, &sp14);
 }
 
@@ -320,7 +320,7 @@ void func_801151EC(HSD_GObj* fighter_gobj) {
         func_8000B1CC(temp_r30->x5E8_fighterBones[0x2].x0_jobj, 0, &sp20);
         sp2C = sp14;
         lbvector_Sub(&sp2C, &sp20);
-        lbvector_Rotate(&sp2C, 4, -func_someCalcAngle_80022C30(temp_r31->x154_groundNormal.x, temp_r31->x154_groundNormal.y));
+        lbvector_Rotate(&sp2C, 4, -func_fatan2_80022C30(temp_r31->x154_groundNormal.x, temp_r31->x154_groundNormal.y));
         lbvector_Add(&sp2C, &sp20);
     }
     temp_r30->sa.ness.x2230 = sp2C;
@@ -350,7 +350,7 @@ void func_801152D0(HSD_GObj* fighter_gobj, f32 arg8) {
         func_8000B1CC(temp_r30->x5E8_fighterBones[0x2].x0_jobj, 0, &sp24);
         sp3C = sp18;
         lbvector_Sub(&sp3C, &sp24);
-        lbvector_Rotate(&sp3C, 4, -func_someCalcAngle_80022C30(temp_r31->x154_groundNormal.x, temp_r31->x154_groundNormal.y));
+        lbvector_Rotate(&sp3C, 4, -func_fatan2_80022C30(temp_r31->x154_groundNormal.x, temp_r31->x154_groundNormal.y));
         lbvector_Add(&sp3C, &sp24);
     }
     sp30 = temp_r30->sa.ness.x2230;

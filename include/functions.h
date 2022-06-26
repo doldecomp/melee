@@ -402,7 +402,7 @@ s32 func_80021C48();
 // ? func_80022998(?);
 // ? func_80022BB8(?);
 // ? func_80022BD0(?);
-f32 func_someCalcAngle_80022C30(f32,f32); // atan2
+f32 func_fatan2_80022C30(f32 y, f32 x);
 // ? func_80022D1C(?);
 // ? func_80022DBC(?);
 // ? func_80022DF8(?);

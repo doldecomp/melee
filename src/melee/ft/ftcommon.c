@@ -700,17 +700,17 @@ void func_8007D92C(HSD_GObj* gobj)
 
 f32 func_8007D964(Fighter* fp)
 {
-    return func_someCalcAngle_80022C30(fp->input.x624_lstick_y, fabs_inline(fp->input.x620_lstick_x));
+    return func_fatan2_80022C30(fp->input.x624_lstick_y, fabs_inline(fp->input.x620_lstick_x));
 }
 
 f32 func_8007D99C(Fighter* fp)
 {
-    return func_someCalcAngle_80022C30(fp->input.x63C_lsubStick_y, fabs_inline(fp->input.x638_lsubStick_x));
+    return func_fatan2_80022C30(fp->input.x63C_lsubStick_y, fabs_inline(fp->input.x638_lsubStick_x));
 }
 
 f32 func_8007D9D4(Fighter* fp)
 {
-    return func_someCalcAngle_80022C30(fp->input.x624_lstick_y, fp->input.x620_lstick_x);
+    return func_fatan2_80022C30(fp->input.x624_lstick_y, fp->input.x620_lstick_x);
 }
 
 void func_8007D9FC(Fighter* fp)
@@ -1239,7 +1239,7 @@ void func_8007E3EC(HSD_GObj* gobj)
 void func_8007E5AC(Fighter* fp)
 {
     Vec* ground_normal = &fp->x6F0_collData.x154_groundNormal;
-    f32 tmp = -func_someCalcAngle_80022C30(ground_normal->x, ground_normal->y);
+    f32 tmp = -func_fatan2_80022C30(ground_normal->x, ground_normal->y);
     assert_line(1146, fp->ground_or_air == GA_Ground);
     func_80075CB4(fp, 0, tmp);
 }

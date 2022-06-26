@@ -188,7 +188,7 @@ void ftPikachu_8012642C(HSD_GObj* fighterObj) {
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
     
     f32 half_pi = HALF_PI;
-    f32 tempf = (fighter->x2C_facing_direction * func_someCalcAngle_80022C30(fighter->x80_self_vel.x, fighter->x80_self_vel.y)) 
+    f32 tempf = (fighter->x2C_facing_direction * func_fatan2_80022C30(fighter->x80_self_vel.x, fighter->x80_self_vel.y)) 
         + (pika_attr->x78 - half_pi);
     
     func_8007592C(fighter, func_8007500C(fighter, 2), tempf);
@@ -257,7 +257,7 @@ void ftPikachu_80126614(HSD_GObj* fighterObj) {
         collData = &fighter2->x6F0_collData;
         pika_attr = fighter2->x2D4_specialAttributes;
         if (collData->x134_envFlags & 0x18000){
-            f32 angle = func_someCalcAngle_80022C30(collData->x154_groundNormal.x, collData->x154_groundNormal.y);
+            f32 angle = func_fatan2_80022C30(collData->x154_groundNormal.x, collData->x154_groundNormal.y);
             f32 angle2 = (fighter2->x2C_facing_direction * angle) + pika_attr->x68;
             func_8007592C(fighter2, func_8007500C(fighter2, 2), angle2);
         }
@@ -368,7 +368,7 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighterObj) {
     collData = &fighter->x6F0_collData;
     pika_attr = fighter->x2D4_specialAttributes;
     if (fighter->x6F0_collData.x134_envFlags & 0x18000) {
-        f32 angle = (fighter->x2C_facing_direction * func_someCalcAngle_80022C30(collData->x154_groundNormal.x, collData->x154_groundNormal.y)) + pika_attr->x68;
+        f32 angle = (fighter->x2C_facing_direction * func_fatan2_80022C30(collData->x154_groundNormal.x, collData->x154_groundNormal.y)) + pika_attr->x68;
         func_8007592C(fighter, func_8007500C(fighter, 2), angle);
     }
     
@@ -456,7 +456,7 @@ void ftPikachu_80126E1C(HSD_GObj* fighterObj) {
             func_8007D9FC(fighter);
         }
 
-        some_angle = func_someCalcAngle_80022C30(fighter->input.x624_lstick_y, fighter->input.x620_lstick_x * fighter->x2C_facing_direction);
+        some_angle = func_fatan2_80022C30(fighter->input.x624_lstick_y, fighter->input.x620_lstick_x * fighter->x2C_facing_direction);
         fighter->x234C_pos.y = fighter->input.x620_lstick_x;
         fighter->x234C_pos.z = fighter->input.x624_lstick_y;
     } else {
