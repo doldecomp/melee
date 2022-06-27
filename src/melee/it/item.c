@@ -43,6 +43,12 @@ extern HSD_ObjAllocUnk3 lbl_804A0E24;
 extern HSD_ObjAllocUnk4 lbl_804A0E30;
 extern HSD_ObjAllocUnk5 lbl_804A0E50;
 extern HSD_ObjAllocUnk6 lbl_804A0E60;
+extern s8 lbl_804D6D00;
+extern s32 lbl_804D6D08;
+extern s32 lbl_804D6D0C;
+extern s32 lbl_804D6D10;
+extern s32 lbl_804D6D14;
+extern ItemCommonData* lbl_804D6D28;
 
 void func_80266FCC(void) // Init item struct? //
 {
@@ -99,6 +105,20 @@ extern void func_800436D8(void*, s32);
 extern s32 func_8017E068();
 extern void func_80225D64(HSD_GObj*, HSD_GObj*);
 extern void func_80225DD8(HSD_GObj*, HSD_GObj*);
+extern void func_8026B390(HSD_GObj*);
+extern void func_80271508(HSD_GObj*, s32);
+extern void func_80272280(HSD_GObj*);
+extern void func_802725D4(HSD_GObj*);
+extern void func_80273500(HSD_GObj*, Vec3*);
+extern void func_80274658(HSD_GObj*, f32);
+extern void func_80274DAC(HSD_GObj*);
+extern void func_802753BC(HSD_GObj*, s16);
+extern void func_802753DC(HSD_GObj*);
+extern void func_80275E98(HSD_GObj*, SpawnItem*);
+extern void func_802762B0(Item*);
+extern void func_802762BC(Item*);
+extern void func_80279B64(Item*);
+extern void func_8027B0C4(HSD_GObj*, SpawnItem*);
 
 // 0x80267130 //
 // https://decomp.me/scratch/eaaVC //
@@ -2545,6 +2565,7 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Remove Item f
     Item* temp_item;
 
     temp_item = GetItemDirect(item_gobj);
+
     if (((s32)temp_item->x14_hold_kind == 8) && (itemID = temp_item->x10_item_kind, ((itemID == 0x3A) == 0)) && (itemID != 0x3B) && (itemID != 0x63) && (itemID != 0x67)) 
     {
         if (func_800867CC(fighter_gobj) == item_gobj)

@@ -22,7 +22,6 @@
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
 
-
 struct ItemStateTable
 {
     s32 x0_state_id;
@@ -771,7 +770,9 @@ void func_8026C334(HSD_GObj* item_gobj, Vec3* pos);                // Unknown it
 void func_8026C368(HSD_GObj* item_gobj);                           // Run bomb item explosion callbacks //
 void func_8026C3FC(void);                                          // Toggle bit 3 of 0xDC8 ON for all active item GObjs? //
 void func_8026C42C(void);                                          // Toggle bits in 0xDC8 for all active item GObjs? //
-s32 func_8026D324(s32);
+f32 func_8026B424(s32 damage);                                /* extern */
+u8 func_8026B7B0(HSD_GObj* item_gobj);                         // Get Team ID //
+void func_8026BDCC(HSD_GObj* item_gobj);                         /* extern */
 void func_8026C368(HSD_GObj* item_gobj);                         /* extern */
 s32 func_8026D604(HSD_GObj* item_gobj);
 void func_8026F9A0();
@@ -787,6 +788,9 @@ void func_8027163C(HSD_GObj* item_gobj);
 void func_80271A58(HSD_GObj* item_gobj);                         /* extern */
 void func_802721B8(HSD_GObj* item_gobj);                         /* extern */
 void func_80272280(HSD_GObj* item_gobj);
+void func_8027163C(HSD_GObj* item_gobj);
+void func_80271A58(HSD_GObj* item_gobj);                         /* extern */
+void func_802721B8(HSD_GObj* item_gobj);                         /* extern */
 void func_80272298(HSD_GObj* item_gobj);
 void func_802722B0(HSD_GObj* item_gobj);
 void func_80272304(HSD_GObj* item_gobj);
@@ -799,6 +803,8 @@ void func_80272A3C(HSD_JObj* item_jobj);
 s32 func_80272D1C(HSD_GObj* item_gobj);                        // Check if GObj entity class = 0x6 (item) //
 s32 func_80272D40(HSD_GObj* item_gobj);                        // Check GObj entity class //
 void func_80272F7C(HSD_JObj*, f32);
+void func_802728C8(HSD_GObj* item_gobj);
+s32 func_80272D1C(HSD_GObj* item_gobj);                        // Check if GObj entity class = 0x6 (item) //
 void func_80273168(HSD_GObj* item_gobj);
 void func_802731A4(HSD_GObj*);
 void func_802731E0(HSD_GObj*);
@@ -824,6 +830,14 @@ void func_80275158(HSD_GObj* item_gobj, f32 lifetime);         // Set item lifet
 void func_80275390(HSD_GObj*);
 void func_802753BC(HSD_GObj*, s16);
 void func_802753DC(HSD_GObj*);
+void func_802742F4(HSD_GObj*, s32, s32);
+void func_80274740(HSD_GObj* item_gobj);                         /* extern */
+void func_80274A64(HSD_GObj* item_gobj);                             /* extern */
+s32 func_80274C78(HSD_GObj* item_gobj);                /* extern */
+void func_8027737C(HSD_GObj* item_gobj, Vec3* pos);                  /* extern */
+void func_80274EF8(HSD_GObj* item_gobj);                       // Toggle flag in 0xDC8 off //
+void func_80275158(HSD_GObj* item_gobj, f32 lifetime);         // Set item lifetime //
+void func_80275390(HSD_GObj*);
 void func_80275474(HSD_GObj* item_gobj);                       // Toggle several flags in 0xDCD off //
 void func_802754D4(HSD_GObj*);
 void func_80275504(HSD_GObj* item_gobj);                       // Toggle several flags in 0xDCE off //
@@ -857,5 +871,9 @@ HSD_GObj* func_80292D48(Vec3*);
 HSD_GObj* func_80294DC0(Vec3*);
 void func_8029D968(HSD_GObj*);
 void func_802D09D0(HSD_GObj*);
+void func_802799E4(HSD_GObj* item_gobj);                       // Advance Item Script //
+void func_80279B88(Item* item_data, s32 arg1, s32 arg2);
+void func_80279BBC(Item* item_data);                             /* extern */
+void func_80279BE0(HSD_GObj* item_gobj);                         /* extern */
 
 #endif
