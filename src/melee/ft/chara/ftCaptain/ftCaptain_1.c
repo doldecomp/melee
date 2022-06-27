@@ -3,7 +3,7 @@
 // func_800E2888
 // OnRespawn/OnDeath (same function I've seen called differently)
 // https://decomp.me/scratch/XZ1Jx
-void ftCFalcon_OnDeath(HSD_GObj* fighter_gobj)
+void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter_data = (Fighter*)fighter_gobj->user_data;
     func_80074A4C(fighter_gobj,0,0);
@@ -78,16 +78,16 @@ void func_800E2A58(HSD_GObj* fighter_gobj, s32 unk1)
     }
 }
 
-// ftCFalcon_OnLoadForGanon
+// ftCaptain_OnLoadForGanon
 // https://decomp.me/scratch/9AwRw
-void ftCFalcon_OnLoadForGanon(Fighter* fighter) {
+void ftCaptain_OnLoadForGanon(Fighter* fighter) {
     PUSH_ATTRS(fighter, CaptainAttr);
 }
 
 // func_800E2AEC
 // OnLoad
 // https://decomp.me/scratch/aZ4Wn
-void ftCFalcon_OnLoad(HSD_GObj* fighter_gobj)
+void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter;
     CaptainAttr *sA2;

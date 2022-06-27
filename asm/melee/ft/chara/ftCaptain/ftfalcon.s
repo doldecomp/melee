@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftCFalcon_OnDeath
-ftCFalcon_OnDeath:
+.global ftCaptain_OnDeath
+ftCaptain_OnDeath:
 /* 800E2888 000DF468  7C 08 02 A6 */	mflr r0
 /* 800E288C 000DF46C  38 80 00 00 */	li r4, 0
 /* 800E2890 000DF470  90 01 00 04 */	stw r0, 4(r1)
@@ -165,8 +165,8 @@ lbl_800E2A94:
 /* 800E2AA4 000DF684  7C 08 03 A6 */	mtlr r0
 /* 800E2AA8 000DF688  4E 80 00 20 */	blr 
 
-.global ftCFalcon_OnLoadForGanon
-ftCFalcon_OnLoadForGanon:
+.global ftCaptain_OnLoadForGanon
+ftCaptain_OnLoadForGanon:
 /* 800E2AAC 000DF68C  80 83 01 0C */	lwz r4, 0x10c(r3)
 /* 800E2AB0 000DF690  38 00 00 11 */	li r0, 0x11
 /* 800E2AB4 000DF694  80 E3 02 D8 */	lwz r7, 0x2d8(r3)
@@ -185,8 +185,8 @@ lbl_800E2AC8:
 /* 800E2AE4 000DF6C4  90 E3 02 D4 */	stw r7, 0x2d4(r3)
 /* 800E2AE8 000DF6C8  4E 80 00 20 */	blr 
 
-.global ftCFalcon_OnLoad
-ftCFalcon_OnLoad:
+.global ftCaptain_OnLoad
+ftCaptain_OnLoad:
 /* 800E2AEC 000DF6CC  80 E3 00 2C */	lwz r7, 0x2c(r3)
 /* 800E2AF0 000DF6D0  38 00 00 11 */	li r0, 0x11
 /* 800E2AF4 000DF6D4  38 60 00 01 */	li r3, 1

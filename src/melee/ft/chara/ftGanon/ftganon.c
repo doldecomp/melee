@@ -65,7 +65,7 @@ void func_8014EDC8(HSD_GObj* gobj, s32 arg1)
 
 void ftGanon_OnLoad(HSD_GObj* gobj)
 {
-    ftCFalcon_OnLoadForGanon(gobj->user_data);
+    ftCaptain_OnLoadForGanon(gobj->user_data);
 }
 
 void func_8014EE40(HSD_GObj* gobj)

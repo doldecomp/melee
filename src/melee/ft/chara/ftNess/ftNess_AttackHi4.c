@@ -1016,7 +1016,6 @@ itYoyoAttributes* GetYoyoAttr(HSD_GObj* item_gobj) // Inline, may not be necessa
 // 0x80116494 //
 // https://decomp.me/scratch/kR50M //
 void ftNess_AttackHi4_Release_Action(HSD_GObj* fighter_gobj)  // Ness's Up Smash Post-Charge Action State handler //
-
 {
     Vec3 sp34;
     Fighter* fighter_data2;
@@ -1027,9 +1026,11 @@ void ftNess_AttackHi4_Release_Action(HSD_GObj* fighter_gobj)  // Ness's Up Smash
     fighter_data = fighter_gobj->user_data;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKHI4_RELEASE, 0x40000, NULL, 13.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
+
     fighter_data2 = getFighterPlus(fighter_gobj);
     fighter_data2 = getFighterPlus(fighter_gobj);
     fighter_data2->x2340_stateVar1 = 14;
+
     if ((yoyo_GObj = fighter_data2->sa.ness.x222C_yoyoGObj) != NULL) 
     {
         yoyo_attr = GetYoyoAttr(yoyo_GObj);
@@ -1039,8 +1040,11 @@ void ftNess_AttackHi4_Release_Action(HSD_GObj* fighter_gobj)  // Ness's Up Smash
     }
 
     func_80088510(fighter_data2, 0x334AA, 0x7F, 0x40);
+
     ftNess_YoyoApplyDamage(fighter_data2->x2114_SmashAttr.x2118_frames, fighter_gobj);
+
     fighter_data->x2222_flag.bits.b2 = 1;
+
     fighter_data->cb.x21C0_callback_OnGiveDamage = ftNess_YoyoStartTimedRehit;
     fighter_data->cb.x21BC_callback_Accessory4 = ftNess_YoyoUpdateHitPos;
 }

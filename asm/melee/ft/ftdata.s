@@ -940,7 +940,7 @@ lbl_803C10D0:
 ft_OnLoad:
     .4byte ftMario_OnLoad
     .4byte ftFox_OnLoad
-    .4byte ftCFalcon_OnLoad
+    .4byte ftCaptain_OnLoad
     .4byte ftDonkey_OnLoad
     .4byte ftKirby_OnLoad
     .4byte ftKoopa_OnLoad
@@ -977,7 +977,7 @@ ft_OnLoad:
 ft_OnDeath:
     .4byte ftMario_OnDeath
     .4byte ftFox_OnDeath
-    .4byte ftCFalcon_OnDeath
+    .4byte ftCaptain_OnDeath
     .4byte ftDonkey_OnDeath
     .4byte ftKirby_OnDeath
     .4byte ftKoopa_OnDeath
@@ -1168,7 +1168,7 @@ ft_SpecialHiAir:
     .4byte func_80135B04
     .4byte func_800EBB80
     .4byte func_8011312C
-    .4byte func_80118250
+    .4byte ftNess_SpecialAirHiStart_Action
     .4byte func_8011D7F0
     .4byte func_8012122C
     .4byte NULL
@@ -1205,7 +1205,7 @@ ft_SpecialLwAir:
     .4byte func_801346A4
     .4byte func_800EB6DC
     .4byte func_80114224
-    .4byte func_80119E90
+    .4byte ftNess_SpecialAirLwStart_Action
     .4byte func_8011D1C4
     .4byte func_80122988
     .4byte func_80122988
@@ -1353,7 +1353,7 @@ ft_SpecialLw:
     .4byte func_8013460C
     .4byte func_800EB65C
     .4byte func_80114160
-    .4byte func_80119E14
+    .4byte ftNess_SpecialLwStart_Action
     .4byte func_8011D11C
     .4byte func_80122904
     .4byte func_80122904
@@ -1390,7 +1390,7 @@ ft_SpecialHi:
     .4byte func_80135A2C
     .4byte func_800EBB1C
     .4byte func_801130D0
-    .4byte func_80118120
+    .4byte ftNess_SpecialHiStart_Action
     .4byte func_8011D72C
     .4byte func_801211B4
     .4byte NULL
@@ -1427,7 +1427,7 @@ ft_OnAbsorb:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8011493C
+    .4byte ftNess_OnAbsorb
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1463,7 +1463,7 @@ ft_OnItemPickup:
     .4byte func_80132B3C
     .4byte func_800EAFA4
     .4byte func_80110204
-    .4byte func_80114968
+    .4byte ftNess_OnCatchItem
     .4byte func_8011B740
     .4byte func_8011ED38
     .4byte func_8011ED38
@@ -1499,7 +1499,7 @@ ft_OnItemInvisible:
     .4byte func_80132C1C
     .4byte func_800EB018
     .4byte func_801102E4
-    .4byte func_80114A48
+    .4byte ftNess_StoreHeldItem
     .4byte func_8011B820
     .4byte func_8011EE18
     .4byte func_8011EE18
@@ -1535,7 +1535,7 @@ ft_OnItemVisible:
     .4byte func_80132C64
     .4byte func_800EB060
     .4byte func_8011032C
-    .4byte func_80114A90
+    .4byte ftNess_RestoreHeldItem
     .4byte func_8011B868
     .4byte func_8011EE60
     .4byte func_8011EE60
@@ -1571,7 +1571,7 @@ ft_OnItemRelease:
     .4byte func_80132CAC
     .4byte func_800EB0A8
     .4byte func_80110374
-    .4byte func_80114AD8
+    .4byte ftNess_OnDropItem
     .4byte func_8011B8B0
     .4byte func_8011EEA8
     .4byte func_8011EEA8
@@ -1607,7 +1607,7 @@ ft_OnItemCatch:
     .4byte func_80132B3C
     .4byte func_800EB11C
     .4byte func_80110204
-    .4byte func_80114968
+    .4byte ftNess_OnCatchItem
     .4byte func_8011B740
     .4byte func_8011ED38
     .4byte func_8011ED38
@@ -1643,7 +1643,7 @@ lbl_803C1B20:
     .4byte func_80132CAC
     .4byte func_800EB1FC
     .4byte func_80110374
-    .4byte func_80114AD8
+    .4byte ftNess_OnDropItem
     .4byte func_8011B8B0
     .4byte func_8011EEA8
     .4byte func_8011EEA8
@@ -1751,7 +1751,7 @@ ft_OnKnockbackEnter:
     .4byte func_80132D38
     .4byte func_800EB2AC
     .4byte func_80110408
-    .4byte func_80114B6C
+    .4byte ftNess_ToggleHurtMatAnims
     .4byte func_8011B998
     .4byte func_8011F0E4
     .4byte func_8011F0E4
@@ -1787,7 +1787,7 @@ lbl_803C1D30:
     .4byte func_80132D7C
     .4byte func_800EB2F0
     .4byte func_8011044C
-    .4byte func_80114BB0
+    .4byte ftNess_ToggleNormalMatAnims
     .4byte func_8011B9DC
     .4byte func_8011F128
     .4byte func_8011F128
@@ -1895,7 +1895,7 @@ lbl_803C1EBC:
     .4byte func_80132D00
     .4byte func_800EB250
     .4byte func_801103C8
-    .4byte func_80114B2C
+    .4byte ftNess_CopySpecialAttrs
     .4byte func_8011B904
     .4byte func_8011F0A4
     .4byte func_80122FCC

@@ -1,13 +1,13 @@
 #include "ftNess.h"
 
-void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1)
+void ftNess_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     ft->sa.ness.x2240_flashGObj = NULL;
     ft->sa.ness.x2244_pkThunderGObj = NULL;
     ft->sa.ness.x2248_baseballBatGObj = NULL;
-    ft->sa.ness.x222C_yoyoGObj = 0;
+    ft->sa.ness.x222C_yoyoGObj = NULL;
     ft->sa.ness.x224C_thunderGFX = FALSE;
 }
 
@@ -35,13 +35,13 @@ void ftNess_OnDamage(HSD_GObj* gobj)
 {
     ftNess_YoyoItemDespawn(gobj);
     ftNess_ItemPKFlushSetNULL(gobj);
-    func_80117E60(gobj);
+    ftNess_SpecialHiTakeDamage(gobj);
     ftNess_ItemNessBatRemove(gobj);
 }
 
-void func_8011493C(HSD_GObj* gobj)
+void ftNess_OnAbsorb(HSD_GObj* gobj)
 {
-    func_8011B0F8(gobj);
+    ftNess_AbsorbThink_DecideAction(gobj);
 }
 
 f32 ftNess_GetAbsorbHeal(Fighter* ft)
@@ -49,14 +49,15 @@ f32 ftNess_GetAbsorbHeal(Fighter* ft)
     return ((ftNessAttributes*)ft->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
 }
 
-void func_80114968(HSD_GObj* gobj, s32 arg1)
+void ftNess_OnCatchItem(HSD_GObj* gobj, s32 catchItemFlag)
 {
     s32 result, switched_res, unused;
 
     Fighter* ft = gobj->user_data;
     result = func_8026B2B4(ft->x1974_heldItem);
 
-    if (result == 0) {
+    if (result == 0) 
+    {
         switched_res = func_8026B320(ft->x1974_heldItem);
         switch (switched_res) 
         {
@@ -74,14 +75,14 @@ void func_80114968(HSD_GObj* gobj, s32 arg1)
                 break;
         }
 
-        if (arg1 != 0) 
+        if (catchItemFlag != 0) 
         {
             func_80070C48(gobj, 1);
         }
     }
 }
 
-void func_80114A48(HSD_GObj* gobj)
+void ftNess_StoreHeldItem(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
 
@@ -91,7 +92,7 @@ void func_80114A48(HSD_GObj* gobj)
     }
 }
 
-void func_80114A90(HSD_GObj* gobj)
+void ftNess_RestoreHeldItem(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
 
@@ -101,15 +102,16 @@ void func_80114A90(HSD_GObj* gobj)
     }
 }
 
-void func_80114AD8(HSD_GObj* gobj, s32 arg1)
+void ftNess_OnDropItem(HSD_GObj* gobj, s32 dropItemFlag)
 {
     func_80070FB4(gobj, 1, -1);
-    if (arg1 != 0) {
+    if (dropItemFlag != FALSE)
+    {
         func_80070CC4(gobj, 1);
     }
 }
 
-void func_80114B2C(HSD_GObj* gobj) 
+void ftNess_CopySpecialAttrs(HSD_GObj* gobj) 
 {
     Fighter* ft = gobj->user_data;
     
@@ -118,13 +120,13 @@ void func_80114B2C(HSD_GObj* gobj)
     *sA2 = *ext_attr;
 }
 
-void func_80114B6C(HSD_GObj* gobj)
+void ftNess_ToggleHurtMatAnims(HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //
 {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
 }
 
-void func_80114BB0(HSD_GObj* fighter_gobj) // Make DObjs visible? //
+void ftNess_ToggleNormalMatAnims(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures //
 {
     func_800704F0(fighter_gobj, 1, 0.0f);
     func_800704F0(fighter_gobj, 0, 0.0f);

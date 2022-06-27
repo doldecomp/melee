@@ -53,7 +53,7 @@ typedef enum ITKIND {
     It_Kind_L_Gun_Beam, // Ray Gun Beam
     It_Kind_Hammer_Head, // Hammer Head
     It_Kind_F_Flower_Flame, // Flower
-    It_Kind_Yoshi_E_Egg, // Yoshi's egg (Event)
+    It_Kind_EvYoshiEgg, // Yoshi's Egg (Event)
 
     // MONSTERS
 
@@ -104,7 +104,7 @@ typedef enum ITKIND {
     It_Kind_DrMario_Sheet, // Dr. Mario's cape
     It_Kind_Seak_Vanish, // Smoke (Sheik)
     It_Kind_Yoshi_EggThrow, // Yoshi's Egg (thrown)
-    It_Kind_Yoshi_EggLay, // Yoshi's Egg Lay??
+    It_Kind_Yoshi_EggLay, // Yoshi's Egg Lay???
     It_Kind_Yoshi_Star, // Yoshi's Star
     It_Kind_Pikachu_TJolt_Ground, // Pikachu's thunder (B)
     It_Kind_Pikachu_TJolt_Air, // Pikachu's thunder (B)
@@ -173,8 +173,8 @@ typedef enum ITKIND {
     It_Kind_Kirby_SeakNeedleHeld, // Kirby copy Sheik's Needle (ground) (B)
     It_Kind_Kirby_KoopaFlame, // Kirby copy Bowser's Flame (B)
     It_Kind_Kirby_GameWatchChef, // Kirby copy Mr. Game & Watch's Sausage (B)
-    It_Kind_Kirby_Unk, // (unique)
-    It_Kind_Kirby_YoshiEggLay, // Kirby's Yoshi Egg Lay?? (B)
+    It_Kind_Kirby_GameWatchChefPan, // Kirby copy Mr. Game & Watch's Chef Pan (B)
+    It_Kind_Kirby_YoshiEggLay, // Kirby's Yoshi Egg Lay??? (B)
     It_Kind_Unk4, // (unique)
     It_Kind_Coin, // Coin (?) 
 
@@ -233,17 +233,17 @@ typedef enum ITKIND {
 
     // MONSTERS 2
 
-    It_Kind_Old_Kuri, // Old Goomba (Old-Kuri)
+    It_Kind_Old_Kuri, // Old Goomba (old-Kuri)
     It_Kind_Mato, // Target (Mato)
-    It_Kind_Heiho, // Yoshi's Story Shy Guy
+    It_Kind_Heiho, // Yoshi's Story Shy Guy (Heiho)
     It_Kind_Nokonoko, // Koopa Troopa (Green) (Nokonoko)
     It_Kind_Patapata, // Koopa Troopa (Red) (Patapata)
-    It_Kind_Likelike, // Likelike
+    It_Kind_Likelike, // Like-Like (likelike)
     It_Kind_Old_Lead, // Old Redead (old-lead) [invalid]
     It_Kind_Old_Octa, // Old Octorok (old-octa) [invalid]
     It_Kind_Old_Otto, // Old Ottosea (old-otto)
     It_Kind_Whitebea, // Polar Bear (whitebea)
-    It_Kind_Klap, // Klap
+    It_Kind_Klap, // Klaptrap (klap)
     It_Kind_ZGShell, // Green Shell (zgshell)
     It_Kind_ZRShell, // Red Shell (green act) (zrshell)
 
