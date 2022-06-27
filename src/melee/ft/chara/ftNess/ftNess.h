@@ -126,7 +126,7 @@ void ftNess_OnDropItem(HSD_GObj* gobj, s32 dropItemFlag);
 void ftNess_CopySpecialAttrs(HSD_GObj* gobj);
 void ftNess_ToggleHurtMatAnims(HSD_GObj* gobj);
 
-// Forward Smash //
+// Forward Smash (AttackS4) //
 
 void ftNess_AttackS4_OnReflect(HSD_GObj* gobj);
 BOOL ftNess_CheckNessBatRemove(HSD_GObj* gobj);
