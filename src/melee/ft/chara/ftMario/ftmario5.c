@@ -1,7 +1,7 @@
 #include "ftmario.h"
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 extern const ftMarioUnkStruct lbl_803C72A0;
 
@@ -113,7 +113,7 @@ void _ftMario_set_null_cb(HSD_GObj* gobj) {
 void ftMario_func_800E22BC(HSD_GObj* gobj) {
     Fighter* ft;
 
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         _ftMario_set_null_cb(gobj);
         func_8008A2BC(gobj);
     }
@@ -128,7 +128,7 @@ void ftMario_func_800E2308(HSD_GObj* gobj) {
         ft->x2204_ftcmd_var1 = 0U;
         ft->sa.mario.x2234 = 1;
     }
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         _ftMario_set_null_cb(gobj);
         if (0.0d == (f64)sa->x5C) {
             func_800CC730(gobj);
@@ -151,7 +151,7 @@ void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj) {
     ftMarioAttributes* sa = GetMarioAttr(ft);
     ft->x2208_ftcmd_var2 = 0;
     func_8007D5D4(ft);
-    Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x0C4C508A, NULL, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x0C4C508A, NULL, ft->x894_currentAnimFrame, 1.0f, 0.0f);
     ftComm_ClampFalllSpeed(ft, sa->x58);
     func_8007D440(ft, sa->x40);
     ft->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -260,7 +260,7 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj) {
     func_8007D7FC(ft);
     ft->x80_self_vel.y = 0.0f;
     ft->sa.mario.x2234 = 0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4C508A, NULL, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4C508A, NULL, ft->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007CC78(sa->x3C, ft_tmp = ft);
     ft->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     ft->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;

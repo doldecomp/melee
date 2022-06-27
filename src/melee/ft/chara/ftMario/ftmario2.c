@@ -1,7 +1,7 @@
 #include "ftmario.h"
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 int _func_800E0D1C_helper(Fighter* ft, int* arr, int outpos) {
     int r3;
@@ -41,7 +41,7 @@ void ftMario_func_800E0DA8(HSD_GObj* gobj) {
 }
 
 void ftMario_func_800E0E18(HSD_GObj* gobj) {
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_8008A2BC(gobj);
     }
 }
@@ -106,7 +106,7 @@ void ftMario_func_800E1040(HSD_GObj* gobj) {
 }
 
 void ftMario_func_800E10B0(HSD_GObj* gobj) {
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_800CC730(gobj);
     }
 }
@@ -131,7 +131,7 @@ void ftMario_func_800E113C(HSD_GObj* gobj) {
 void ftMario_func_800E1178(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     func_8007D5D4(ft);
-    Fighter_ActionStateChange_800693AC(gobj,0x158,0x5000,NULL,ft->x894,1.0f,0.0f);
+    Fighter_ActionStateChange_800693AC(gobj,0x158,0x5000,NULL,ft->x894_currentAnimFrame,1.0f,0.0f);
 
     ft->cb.x21BC_callback_Accessory4 = ftMario_func_800E0EE0;
 }
@@ -139,7 +139,7 @@ void ftMario_func_800E1178(HSD_GObj* gobj) {
 void ftMario_func_800E11E0(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     func_8007D7FC(ft);
-    Fighter_ActionStateChange_800693AC(gobj,0x157,0x5000,NULL,ft->x894,1.0f,0.0f);
+    Fighter_ActionStateChange_800693AC(gobj,0x157,0x5000,NULL,ft->x894_currentAnimFrame,1.0f,0.0f);
 
     ft->cb.x21BC_callback_Accessory4 = ftMario_func_800E0EE0;
 }

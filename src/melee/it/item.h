@@ -16,6 +16,7 @@
 #include <sysdolphin/baselib/controller.h>
 #include <common_structs.h>
 
+#include <melee/it/itkind.h>
 #include <melee/it/itCommonItems.h>
 #include <melee/it/itPKFlash.h>
 #include <melee/it/itPKThunder.h>

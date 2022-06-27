@@ -5,7 +5,7 @@
 void lbl_8015521C(HSD_GObj* gobj) {
     Fighter* ft;
 
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (func_8006F238(gobj) == 0)) {
+    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
         ft = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft->x1A5C = 0;

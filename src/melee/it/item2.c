@@ -691,7 +691,7 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item*
             {
                 if (item_jobj2 == NULL)
                 {
-                    item_jobj = 0;
+                    item_jobj = NULL;
                 }
                 else item_jobj = item_jobj2->child;
                 func_8000B804(item_jobj, temp_joint->child);

@@ -1,6 +1,6 @@
 #include "ftfalco.h"
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 void ftFalco_OnDeath(HSD_GObj* gobj)
 {

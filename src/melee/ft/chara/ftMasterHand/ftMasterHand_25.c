@@ -5,7 +5,7 @@
 void lbl_80154D78(HSD_GObj* gobj) {
     Fighter* ft;
     s32 unused[2];
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft = gobj->user_data;
         if (ft->x2360 == 1) {
             func_80154A78(gobj);
@@ -88,7 +88,7 @@ void lbl_80154ED8(HSD_GObj* gobj) {
         }
         ft->x2360 = 0;
     }
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80151018(gobj);
     }
 }

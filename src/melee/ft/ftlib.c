@@ -1,7 +1,7 @@
 #include "ftlib.h"
 
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 #include <melee/pl/player.h>
 
 extern struct {
@@ -917,7 +917,7 @@ void func_80087610(u8 arg0)
 
 void func_800876B4(HSD_GObj* gobj)
 {
-    func_8006F238(gobj);
+    ftAnim_IsFramesRemaining(gobj);
 }
 
 BOOL func_800876D4(HSD_GObj* gobj)

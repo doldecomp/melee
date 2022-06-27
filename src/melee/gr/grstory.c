@@ -1,6 +1,6 @@
 #include "grstory.h"
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 
 extern StageInfo stage_info;

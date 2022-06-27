@@ -106,7 +106,7 @@ typedef struct HSD_ObjAllocUnk2
     u32 x144;
     u32 x148;
     u32 x14C;
-    UnkFlagStruct2 x150;
+    UnkFlagStruct x150;
     u32 x154;
     u32 x158;
     u32 x15C;

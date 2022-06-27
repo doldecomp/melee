@@ -1,6 +1,6 @@
 #include "ftcommon.h"
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 extern struct {
     u8 x0_pad[0x20];
@@ -1346,11 +1346,11 @@ void func_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     Fighter* fp = gobj->user_data;
     assert_line(0x4FC, ftGetParasolStatus(gobj) != FtParasol_None);
     if (div == 0) {
-        val = fp->x89C;
+        val = fp->x89C_frameSpeedMul;
     } else if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
-        val = fp->x89C * (func_8028B08C(fp->x1974_heldItem, parasol_table_2[arg1]) / div);
+        val = fp->x89C_frameSpeedMul * (func_8028B08C(fp->x1974_heldItem, parasol_table_2[arg1]) / div);
     } else {
-        val = fp->x89C * (func_802BDA40(fp->x1974_heldItem, parasol_table_4[arg1]) / div);
+        val = fp->x89C_frameSpeedMul * (func_802BDA40(fp->x1974_heldItem, parasol_table_4[arg1]) / div);
     }
     if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
         parasol_table_1[arg1](fp->x1974_heldItem, val);
@@ -1382,7 +1382,7 @@ s32 ftGetParasolStatus(HSD_GObj* gobj)
         }
     }
     if (fp->x1974_heldItem != NULL &&
-        itGetKind(fp->x1974_heldItem) == It_Kind_PeachParasol) {
+        itGetKind(fp->x1974_heldItem) == It_Kind_Peach_Parasol) {
         switch (func_8026B7A4(fp->x1974_heldItem)) {
             case 1:
                 return 4;
@@ -1487,7 +1487,7 @@ void func_8007EE0C(Fighter* fp, s32 arg1)
 void func_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
 {
     if (fp->x1974_heldItem != NULL && fp->x1974_heldItem->classifier == 6
-            && itGetKind(fp->x1974_heldItem) == It_Kind_BeamSword) {
+            && itGetKind(fp->x1974_heldItem) == It_Kind_Sword) {
         f32 multiplier = 1.0 / 256;
         f32 tmp = arg2 * multiplier;
         func_80284FC4(fp->x1974_heldItem, arg1, tmp);
@@ -1497,7 +1497,7 @@ void func_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
 void func_8007EF5C(Fighter* fp, s32 arg1)
 {
     if (fp->x1974_heldItem != NULL && fp->x1974_heldItem->classifier == 6
-            && itGetKind(fp->x1974_heldItem) == It_Kind_BeamSword) {
+            && itGetKind(fp->x1974_heldItem) == It_Kind_Sword) {
         func_80285024(fp->x1974_heldItem, arg1);
     }
 }

@@ -20,7 +20,7 @@ void func_80149954(HSD_GObj* gobj)
     } else if (ft->x2200_ftcmd_var0 == 2) {
         func_801497CC(gobj);
     }
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         if (gobj != NULL) {
             ft = gobj->user_data;
             if (ft != NULL && ft->sa.mario.x2240 != 0) {

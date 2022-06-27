@@ -596,19 +596,6 @@ typedef struct _ftData
     void* x58;
 } ftData;
 
-typedef struct _UnkFlagStruct {
-    struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } bits;
-} UnkFlagStruct;
-
 typedef struct _ThrowFlags
 {
   union {
@@ -750,48 +737,6 @@ typedef struct _CameraBox
   Vec2 x40;
   Vec3 x48;
 } CameraBox;
-
-typedef struct _CollData
-{
-    u8 filler_x0[0x4];
-    Vec3 x4_vec;
-    u8 padding_x10[0x1C - 0x10];
-    Vec3 x1C_vec;
-    u8 padding_x28[0x34 - 0x28];
-    u8 x34_flags_0 : 1;
-    u8 x34_flags_1 : 4;
-    u8 x34_flags_2 : 2;
-    u8 x34_flags_3 : 1;
-    u8 padding_x35[0x40 - 0x35];
-    u32 x40;
-    u32 x44;
-    u8 filler_x48[0xA8 - 0x48];
-    f32 xA8;
-    f32 xAC;
-    f32 xB0;
-    Vec2 xB4_ecbCurrCorrect_right;
-    Vec2 xBC_ecbCurrCorrect_left;
-    u8 filler_xBC[0xE8 - 0xBC - 8];
-    f32 xE8;
-    f32 xEC;
-    f32 xF0;
-    u8 filler_xF4[0x130 - 0xF4];
-    u32 x130;
-    s32 x134_envFlags;
-    u8 filler_x138[0x14C - 0x138];
-    s32 x14C_groundIndex;
-    s32 filler_x150;
-    /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
-    /* 0x160 */ s32 x160_rightwall_index;
-    /* 0x164 */ s32 x164;
-    /* 0x168 */ Vec x168_vec;
-    /* 0x174 */ s32 x174_leftwall_index;
-    /* 0x178 */ s32 x178;
-    /* 0x17C */ Vec x17C_vec;
-    u32 filler_x188[2];
-    /* 0x190 */ Vec x190_vec;
-    /* 0x19C */ s32 x19C;
-} CollData;
 
 typedef struct ftHurt
 {
@@ -1309,12 +1254,12 @@ typedef struct _Fighter {
     /* 0x6E4 */  Vec3 x6E4;
     /* 0x6F0 */ CollData x6F0_collData;
     /* 0x890 */ CameraBox* x890_cameraBox;
-    /* 0x894 */ f32 x894;
-    /* 0x898 */ f32 x898;
-    /* 0x89C */ f32 x89C;
-    /* 0x8A0 */ f32 x8A0;
-    /* 0x8A4 */ f32 x8A4;
-    /* 0x8A8 */ f32 x8A8;
+    /* 0x894 */ f32 x894_currentAnimFrame;
+    /* 0x898 */ f32 x898_unk;
+    /* 0x89C */ f32 x89C_frameSpeedMul;
+    /* 0x8A0 */ f32 x8A0_unk;
+    /* 0x8A4 */ f32 x8A4_animBlendFrames;
+    /* 0x8A8 */ f32 x8A8_unk;
     /* 0x8AC */ HSD_JObj* x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
     /* 0x914 */ Hitbox x914[4];
@@ -1845,7 +1790,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata)
 u32 Fighter_NewSpawn_80068E40();
 void Fighter_80068E64(HSD_GObj* fighterObj);
 HSD_GObj* Fighter_80068E98(struct S_TEMP1* input);
-void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
+void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 flags, HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
 void Fighter_8006A1BC(HSD_GObj* fighterObj);
 void Fighter_8006A360(HSD_GObj* fighterObj);
 void Fighter_8006ABA0(HSD_GObj* fighterObj);

@@ -24,7 +24,7 @@ void lbl_80152BCC(HSD_GObj* arg0) {
 // 80152C34 14F814
 // https://decomp.me/scratch/Whi0Q
 void lbl_80152C34(HSD_GObj* arg0) {
-    if (func_8006F238(arg0) == 0) {
+    if (ftAnim_IsFramesRemaining(arg0) == 0) {
         func_80152CD8(arg0);
     }
 }
@@ -73,7 +73,7 @@ void func_80152CD8(HSD_GObj* arg0) {
 void lbl_80152D44(HSD_GObj* arg0) {
     Fighter* temp_r31;
 
-    if (func_8006F238(arg0) == 0) {
+    if (ftAnim_IsFramesRemaining(arg0) == 0) {
         temp_r31 = arg0->user_data;
         func_80152F80(arg0);
         func_802F046C(temp_r31->x2374);

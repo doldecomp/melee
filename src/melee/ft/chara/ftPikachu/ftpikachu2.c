@@ -47,7 +47,7 @@ void ftPikachu_80124908(HSD_GObj* fighterObj) {
         }
     }
     
-    if (!func_8006F238(fighterObj)) {
+    if (!ftAnim_IsFramesRemaining(fighterObj)) {
         func_8008A2BC(fighterObj);
     }    
 }
@@ -78,7 +78,7 @@ void ftPikachu_80124A20(HSD_GObj* fighterObj) {
         }
     }
     
-    if (!func_8006F238(fighterObj)) {
+    if (!ftAnim_IsFramesRemaining(fighterObj)) {
         if (0.0f == pika_attr->x10) {
             func_800CC730(fighterObj);
             return;
@@ -104,7 +104,7 @@ void ftPikachu_ActionChange_80124BB4(HSD_GObj* fighterObj) {
     if (!func_80082708(fighterObj)) {
         fighter = fighterObj->user_data;
         func_8007D5D4(fighter);
-        Fighter_ActionStateChange_800693AC(fighterObj, 0x156, 0xc4c5082, 0, fighter->x894, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x156, 0xc4c5082, 0, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -115,7 +115,7 @@ void ftPikachu_ActionChange_80124C20(HSD_GObj* fighterObj) {
         fighter = fighterObj->user_data;
         func_8007D7FC(fighter);
         fighter->x80_self_vel.y = 0.0f;
-        Fighter_ActionStateChange_800693AC(fighterObj, 0x155, 0xc4c5082, 0, fighter->x894, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x155, 0xc4c5082, 0, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 

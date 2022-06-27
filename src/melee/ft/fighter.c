@@ -222,11 +222,11 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->xC8_pos_delta.z = 0.0f; 
 	fighter->xC8_pos_delta.y = 0.0f; 
 	fighter->xC8_pos_delta.x = 0.0f; 
-	fighter->x894 = 0.0f; 
-	fighter->x898 = 0.0f; 
+	fighter->x894_currentAnimFrame = 0.0f; 
+	fighter->x898_unk = 0.0f; 
 
-	fighter->x89C = 1.0f; 
-	fighter->x8A0 = 1.0f; 
+	fighter->x89C_frameSpeedMul = 1.0f; 
+	fighter->x8A0_unk = 1.0f; 
 	fighter->dmg.x1850_forceApplied = 0.0f; 
 	fighter->dmg.x18A4_knockbackMagnitude = 0.0f; 
 	fighter->dmg.x18A8 = 0.0f; 
@@ -985,7 +985,7 @@ inline f32 pickValue(f32 argA, u8* unk_byte_ptr)
 {
     return (argA == -1.0f) ? 0.0f :  (argA) ? argA : *unk_byte_ptr;
 }
-void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA) {
+void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 flags, HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend) {
     volatile s32 volatile_integer;
     Vec translation;
     Quaternion quat;
@@ -1010,7 +1010,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     HSD_JObjSetTranslate(jobj, &fighter->xB0_pos);
     func_80067624(fighterObj, &fighter->x60C);
 
-    if ((arg2 & 8) == 0) {
+    if ((flags & 8) == 0) {
         if (fighter->x2219_flag.bits.b3 != 0) {
             func_8007AFF8(fighterObj);
         }
@@ -1019,11 +1019,11 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         }
     }
 
-    if ((arg2 & 0x100) == 0) {
+    if ((flags & 0x100) == 0) {
         fighter->x1064_thrownHitbox.x134 = 0;
     }
 
-    if ((arg2 & 4) == 0) {
+    if ((flags & 4) == 0) {
         if (fighter->x1988 != 0) {
             func_8007B62C(fighterObj, 0);
         }
@@ -1036,15 +1036,15 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         func_8007B4E0(fighterObj);
     }
 
-    if (((arg2 & 0x10) == 0) && (fighter->x221D_flag.bits.b2 != 0U)) {
+    if (((flags & 0x10) == 0) && (fighter->x221D_flag.bits.b2 != 0U)) {
         func_80074A8C(fighterObj);
     }
 
-    if (((arg2 & 0x80) == 0) && ((fighter->x221E_flag.bits.b7) != 0)) {
+    if (((flags & 0x80) == 0) && ((fighter->x221E_flag.bits.b7) != 0)) {
         func_80070654(fighterObj);
     }
 
-    if ((arg2 & 0x400) == 0) {
+    if ((flags & 0x400) == 0) {
         fighter->x2221_flag.bits.b4 = 0;
         if ((ftGetParasolStatus(fighterObj) != -1) && (ftGetParasolStatus(fighterObj) != 6)) {
             func_8007E83C(fighterObj, 6, 0.0f);
@@ -1057,12 +1057,12 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     func_8007ECD4(fighter, 8);
     func_8007ECD4(fighter, 0x24);
 
-    if ((arg2 & 0x800) == 0) {
+    if ((flags & 0x800) == 0) {
         func_8007ECD4(fighter, 1);
         func_8007ECD4(fighter, 0x19);
     }
 
-    if (((arg2 & 0x10000) == 0) && (fighter->x2221_flag.bits.b1 != 0U)) {
+    if (((flags & 0x10000) == 0) && (fighter->x2221_flag.bits.b1 != 0U)) {
         func_8007B6EC(fighterObj);
         func_8007B760(fighterObj, p_ftCommonData->x134);
         fighter->x2221_flag.bits.b1 = 0;
@@ -1074,19 +1074,19 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         fighter->x2220_flag.bits.b4 = 0;
     }
 
-    if ((arg2 & 0x80000) == 0) {
+    if ((flags & 0x80000) == 0) {
         fighter->x2222_flag.bits.b2 = 0;
     }
 
-    if ((arg2 & 0x800000) == 0) {
+    if ((flags & 0x800000) == 0) {
         fighter->x2223_flag.bits.b4 = 0;
     }
 
-    if ((arg2 & 0x8000000) == 0) {
+    if ((flags & 0x8000000) == 0) {
         fighter->x2227_flag.bits.b2 = 0;
     }
 
-    if (((arg2 & 0x10000000) == 0) && (fighter->x221C_flag.bits.b6 != 0U)) {
+    if (((flags & 0x10000000) == 0) && (fighter->x221C_flag.bits.b6 != 0U)) {
         fighter->x221C_flag.bits.b6 = 0;
         fighter->x2098 = p_ftCommonData->x4CC;
     }
@@ -1141,33 +1141,33 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     fighter->x2114_SmashAttr.x2138_smashSinceHitbox = -1.0f;
     fighter->x2224_flag.bits.b4 = 0;
 
-    if ((arg2 & 0x40000) == 0) {
+    if ((flags & 0x40000) == 0) {
         fighter->x221E_flag.bits.b3 = 1;
     } else if (fighter->x221E_flag.bits.b3 == 0U) {
         func_8007F578(fighterObj);
     }
 
-    if ((arg2 & 0x400000) == 0) {
+    if ((flags & 0x400000) == 0) {
         fighter->x221E_flag.bits.b4 = 1;
     }
 
-    if ((arg2 & 0x4000000) == 0) {
+    if ((flags & 0x4000000) == 0) {
         fighter->x2225_flag.bits.b2 = 1;
     }
 
-    if ((arg2 & 1) == 0) {
+    if ((flags & 1) == 0) {
         fighter->x221A_flag.bits.b4 = 0;
     }
 
-    if ((arg2 & 0x1000) == 0) {
+    if ((flags & 0x1000) == 0) {
         func_800C0134(fighter);
     }
 
-    if (((arg2 & 2) == 0) && (fighter->x2219_flag.bits.b0 != 0U)) {
+    if (((flags & 2) == 0) && (fighter->x2219_flag.bits.b0 != 0U)) {
         func_8007DB24(fighterObj);
     }
 
-    if (((arg2 & 0x2000) == 0) && ((u32) fighter->x20A0_accessory != 0U)) {
+    if (((flags & 0x2000) == 0) && ((u32) fighter->x20A0_accessory != 0U)) {
         HSD_JObjRemoveAll(fighter->x20A0_accessory);
         fighter->x20A0_accessory = 0U;
     }
@@ -1199,28 +1199,28 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         fighter->x196C_hitlag_mult = 0.0f;
     }
 
-    if ((arg2 & 0x200) == 0) {
+    if ((flags & 0x200) == 0) {
         func_80088884(fighter);
         func_800888E0(fighter);
         func_800887CC(fighter);
     }
 
-    if ((arg2 & 0x20000) == 0) {
+    if ((flags & 0x20000) == 0) {
         fighter->x2100 = -1;
     }
-    if ((arg2 & 0x8000) == 0) {
+    if ((flags & 0x8000) == 0) {
         fighter->x209A = 0;
     }
 
     fighter->x2222_flag.bits.b7 = 0;
 
-    if ((arg2 & 0x100000) != 0) {
+    if ((flags & 0x100000) != 0) {
         fighter->x100 = 0.0f;
     } else {
         fighter->x100 = -1.0f;
     }
 
-    if ((arg2 & 0x1000000) == 0) {
+    if ((flags & 0x1000000) == 0) {
         fighter->x221C_u16_y = 0;
     }
 
@@ -1238,7 +1238,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     
 
     if (fighter->xE0_ground_or_air == GA_Ground) {
-        if ((arg2 & 0x40) == 0) {
+        if ((flags & 0x40) == 0) {
             if (new_action_state->x9_flags.bits.b1 != 0  && fighter->dmg.x18C8 == -1) {
                 if (p_ftCommonData->x814 > 0) {
                     fighter->dmg.x18C8 = p_ftCommonData->x814;
@@ -1269,16 +1269,16 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     }
     
 
-    if ((arg2 & 0x2000000) == 0) {
+    if ((flags & 0x2000000) == 0) {
         func_80037C60(fighterObj, volatile_integer);
     }
 
     fighter->x14_action_id = new_action_state->action_id;
-    fighter->x89C = arg9;
-    fighter->x8A0 = arg9;
+    fighter->x89C_frameSpeedMul = animSpeed;
+    fighter->x8A0_unk = animSpeed;
 
-    fighter->x894 = (arg8 - fighter->x89C);
-    fighter->x898 = 0.0f;
+    fighter->x894_currentAnimFrame = (animStart - fighter->x89C_frameSpeedMul);
+    fighter->x898_unk = 0.0f;
 
     if ((fighter->x594_animCurrFlags1.bits.b0) || (fighter->x594_animCurrFlags1.bits.b5)) {
         animflags_bool = TRUE;
@@ -1288,11 +1288,11 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
 
     if (fighter->x14_action_id != -1) {
         bone_index = fighter->x596_bits.x7;
-        if ((arg2 & 0x200000) != 0) {
+        if ((flags & 0x200000) != 0) {
             fighter->x2223_flag.bits.b0 = 1;
             fighter->x104 = 0x14;
-            fighter->x89C = 0.0f;
-            arg9 = 0.0f;
+            fighter->x89C_frameSpeedMul = 0.0f;
+            animSpeed = 0.0f;
         }
 
         if (otherObj != 0U) {
@@ -1305,7 +1305,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         }
         fighter->x594_s32 = unk_struct_x18->x10_animCurrFlags;
         func_8009E7B4(fighter, unk_byte_ptr);
-        if ((arg2 & 0x20000000) == 0) {
+        if ((flags & 0x20000000) == 0) {
 
             if (otherObj != 0U) {
                 func_80085CD8(fighter, otherObj->user_data, fighter->x14_action_id);
@@ -1317,9 +1317,9 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
             fighter->x3F0 = 0;
 
             
-            if (arg8) {
+            if (animStart) {
                 if (fighter->x590 != 0U) {
-                    func_8006EBE8(fighterObj, arg8 - arg9, arg9, pickValue(argA, unk_byte_ptr));
+                    func_8006EBE8(fighterObj, animStart - animSpeed, animSpeed, pickValue(animBlend, unk_byte_ptr));
                 }
                 func_8006E9B4(fighterObj);
                 if (fighter->x594_animCurrFlags1.bits.b0 != 0U) {
@@ -1341,10 +1341,10 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
                     fighter->x6D8.x = 0.0f;
                     fighter->x6CC = fighter->x6C0;
                 }
-                fighter->x3E4 = -arg8;
+                fighter->x3E4 = -animStart;
             } else {
                 if (fighter->x590 != 0U) {
-                    func_8006EBE8(fighterObj, arg8, arg9, pickValue(argA, unk_byte_ptr));
+                    func_8006EBE8(fighterObj, animStart, animSpeed, pickValue(animBlend, unk_byte_ptr));
                 }
                 fighter->x3E4 = 0.0f;
             }
@@ -1359,7 +1359,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
             }
 
             if (fighter->x594_animCurrFlags1.bits.b0 != 0U) {
-                if (!arg8) {
+                if (!animStart) {
                     fighter->x6B0.z = 0.0f;
                     fighter->x6B0.y = 0.0f;
                     fighter->x6B0.x = 0.0f;
@@ -1367,7 +1367,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
                     fighter->x6A4_transNOffset.y = 0.0f;
                     fighter->x6A4_transNOffset.x = 0.0f;
                     fighter->x698 = fighter->x68C_transNPos;
-                } else if (((arg2 & 0x20) == 0) && (fighter->xE0_ground_or_air == GA_Ground)) {
+                } else if (((flags & 0x20) == 0) && (fighter->xE0_ground_or_air == GA_Ground)) {
                     f32 temp_vel = fighter->x6A4_transNOffset.z * fighter->x2C_facing_direction;
                     fighter->x80_self_vel.x = temp_vel;
                     fighter->xEC_ground_vel = temp_vel;
@@ -1375,7 +1375,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
             }
 
             if (fighter->x594_animCurrFlags1.bits.b5 != 0U) {
-                if (!arg8) {
+                if (!animStart) {
                     fighter->x6E4.z = 0.0f;
                     fighter->x6E4.y = 0.0f;
                     fighter->x6E4.x = 0.0f;
@@ -1383,15 +1383,15 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
                     fighter->x6D8.y = 0.0f;
                     fighter->x6D8.x = 0.0f;
                     fighter->x6CC = fighter->x6C0;
-                } else if (((arg2 & 0x20) == 0) && (fighter->xE0_ground_or_air == GA_Ground)) {
+                } else if (((flags & 0x20) == 0) && (fighter->xE0_ground_or_air == GA_Ground)) {
                     f32 temp_vel = fighter->x6D8.z * fighter->x2C_facing_direction;
                     fighter->x80_self_vel.x = temp_vel;
                     fighter->xEC_ground_vel = temp_vel;
                 }
             }
-            if ((arg2 & 0x4000) != 0) {
+            if ((flags & 0x4000) != 0) {
                 func_8007349C(fighterObj);
-            } else if (arg8) {
+            } else if (animStart) {
                 func_80073354(fighterObj);
             } else {
                 func_800C0408(fighterObj);
@@ -1406,8 +1406,8 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         func_80070758(other_jobj);
         func_80070758(fighter->x8AC_animSkeleton);
         fighter->x3EC = 0;
-        fighter->x8A4 = 0.0f;
-        fighter->x8A8 = 0.0f;
+        fighter->x8A4_animBlendFrames = 0.0f;
+        fighter->x8A8_unk = 0.0f;
     }
 
     if (animflags_bool) {
@@ -1711,11 +1711,11 @@ void Fighter_8006A360(HSD_GObj* fighterObj) {
                 if (fighter->x104 == 0x14U) {
                     func_8006F0FC(fighterObj, 0.0f);
                 } else {
-                    fighter->x89C += fighter->x8A0;
+                    fighter->x89C_frameSpeedMul += fighter->x8A0_unk;
                 }
                 fighter->x104--;
                 if (fighter->x104 == 0) {
-                    func_8006F0FC(fighterObj, fighter->x89C);
+                    func_8006F0FC(fighterObj, fighter->x89C_frameSpeedMul);
                     fighter->x104 = 0x14U;
                 }
             }

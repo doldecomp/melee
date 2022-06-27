@@ -1131,7 +1131,7 @@ ft_SpecialS:
     .4byte func_80132EFC
     .4byte func_800EC354
     .4byte func_80111038
-    .4byte func_80116C94
+    .4byte ftNess_SpecialS_Action
     .4byte func_8011C34C
     .4byte func_8011F99C
     .4byte NULL
@@ -1242,7 +1242,7 @@ ft_SpecialSAir:
     .4byte func_80132F94
     .4byte func_800EC404
     .4byte func_8011108C
-    .4byte func_80116D04
+    .4byte ftNess_SpecialAirS_Action
     .4byte func_8011C3C4
     .4byte func_8011FB08
     .4byte NULL
@@ -1279,7 +1279,7 @@ ft_SpecialNAir:
     .4byte func_80134ED0
     .4byte func_800ECF78
     .4byte func_80112198
-    .4byte func_80117034
+    .4byte ftNess_SpecialAirN_Action
     .4byte func_8011E45C
     .4byte func_8011F26C
     .4byte func_8011F26C
@@ -1316,7 +1316,7 @@ ft_SpecialN:
     .4byte func_80134E58
     .4byte func_800ECDAC
     .4byte func_801120E8
-    .4byte func_80116F94
+    .4byte ftNess_SpecialN_Action
     .4byte func_8011E3D0
     .4byte func_8011F1F8
     .4byte func_8011F1F8

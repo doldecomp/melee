@@ -9,138 +9,138 @@ lbl_803CC650:
     .4byte 0x0000003E
     .4byte 0x00241A09
     .4byte 0x0A000000
-    .4byte lbl_80114D50
-    .4byte lbl_80114E04
-    .4byte lbl_80114E64
-    .4byte lbl_80114E98
+    .4byte ftNess_AttackS4_Anim
+    .4byte ftNess_AttackS4_IASA
+    .4byte ftNess_AttackS4_Phys
+    .4byte ftNess_AttackS4_Coll
     .4byte func_800761C8
     .4byte 0x00000042
     .4byte 0x00240A0A
     .4byte 0x0B800000
-    .4byte lbl_80115C9C
-    .4byte lbl_80115E74
-    .4byte lbl_80115EB8
-    .4byte lbl_80115F14
+    .4byte ftNess_AttackHi4_Anim
+    .4byte ftNess_AttackHi4_IASA
+    .4byte ftNess_AttackHi4_Phys
+    .4byte ftNess_AttackHi4_Coll
     .4byte func_800761C8
     .4byte 0x00000127
     .4byte 0x0024080A
     .4byte 0x0B000000
-    .4byte lbl_80115F88
-    .4byte lbl_801160B4
-    .4byte lbl_801160E4
-    .4byte lbl_80116104
+    .4byte ftNess_AttackHi4_Charge_Anim
+    .4byte ftNess_AttackHi4_Charge_IASA
+    .4byte ftNess_AttackHi4_Charge_Phys
+    .4byte ftNess_AttackHi4_Charge_Coll
     .4byte func_800761C8
     .4byte 0x00000128
     .4byte 0x0024080A
     .4byte 0x0B000000
-    .4byte lbl_8011620C
-    .4byte lbl_801162B0
-    .4byte lbl_801162E0
-    .4byte lbl_80116420
+    .4byte ftNess_AttackHi4_Release_Anim
+    .4byte ftNess_AttackHi4_Release_IASA
+    .4byte ftNess_AttackHi4_Release_Phys
+    .4byte ftNess_AttackHi4_Release_Coll
     .4byte func_800761C8
     .4byte 0x00000043
     .4byte 0x00240A0B
     .4byte 0x0C800000
-    .4byte lbl_80116638
-    .4byte lbl_801166D4
-    .4byte lbl_80116718
-    .4byte lbl_8011674C
+    .4byte ftNess_AttackLw4_Anim
+    .4byte ftNess_AttackLw4_IASA
+    .4byte ftNess_AttackLw4_Phys
+    .4byte ftNess_AttackLw4_Coll
     .4byte func_800761C8
     .4byte 0x00000129
     .4byte 0x0024080B
     .4byte 0x0C000000
-    .4byte lbl_80116798
-    .4byte lbl_80116828
-    .4byte lbl_80116858
-    .4byte lbl_80116878
+    .4byte ftNess_AttackLw4_Charge_Anim
+    .4byte ftNess_AttackLw4_Charge_IASA
+    .4byte ftNess_AttackLw4_Charge_Phys
+    .4byte ftNess_AttackLw4_Charge_Coll
     .4byte func_800761C8
     .4byte 0x0000012A
     .4byte 0x0024080B
     .4byte 0x0C000000
-    .4byte lbl_80116958
-    .4byte lbl_801169BC
-    .4byte lbl_801169EC
-    .4byte lbl_80116A9C
+    .4byte ftNess_AttackLw4_Release_Anim
+    .4byte ftNess_AttackLw4_Release_IASA
+    .4byte ftNess_AttackLw4_Release_Phys
+    .4byte ftNess_AttackLw4_Release_Coll
     .4byte func_800761C8
     .4byte 0x0000012B
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte lbl_801170DC
-    .4byte lbl_80117648
-    .4byte lbl_80117750
-    .4byte lbl_801178E8
+    .4byte ftNess_SpecialNStart_Anim
+    .4byte ftNess_SpecialNStart_IASA
+    .4byte ftNess_SpecialNStart_Phys
+    .4byte ftNess_SpecialNStart_Coll
     .4byte func_800761C8
     .4byte 0x0000012C
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte lbl_801171BC
-    .4byte lbl_8011764C
-    .4byte lbl_80117788
-    .4byte lbl_80117954
+    .4byte ftNess_SpecialNHold_Anim
+    .4byte ftNess_SpecialNHold_IASA
+    .4byte ftNess_SpecialNHold_Phys
+    .4byte ftNess_SpecialNHold_Coll
     .4byte func_800761C8
     .4byte 0x0000012D
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte lbl_801171BC
-    .4byte lbl_8011764C
-    .4byte lbl_80117788
-    .4byte lbl_80117954
+    .4byte ftNess_SpecialNHold_Anim
+    .4byte ftNess_SpecialNHold_IASA
+    .4byte ftNess_SpecialNHold_Phys
+    .4byte ftNess_SpecialNHold_Coll
     .4byte func_800761C8
     .4byte 0x0000012E
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte lbl_801172F0
-    .4byte lbl_801176C8
-    .4byte lbl_801177A8
-    .4byte lbl_801179C0
+    .4byte ftNess_SpecialNEnd_Anim
+    .4byte ftNess_SpecialNEnd_IASA
+    .4byte ftNess_SpecialNEnd_Phys
+    .4byte ftNess_SpecialNEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000012F
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte lbl_80117378
-    .4byte lbl_801176CC
-    .4byte lbl_801177C8
-    .4byte lbl_80117A2C
+    .4byte ftNess_SpecialAirNStart_Anim
+    .4byte ftNess_SpecialAirNStart_IASA
+    .4byte ftNess_SpecialAirNStart_Phys
+    .4byte ftNess_SpecialAirNStart_Coll
     .4byte func_800761C8
     .4byte 0x00000130
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte lbl_80117458
-    .4byte lbl_801176D0
-    .4byte lbl_80117828
-    .4byte lbl_80117A98
+    .4byte ftNess_SpecialAirNHold_Anim
+    .4byte ftNess_SpecialAirNHold_IASA
+    .4byte ftNess_SpecialAirNHold_Phys
+    .4byte ftNess_SpecialAirNHold_Coll
     .4byte func_800761C8
     .4byte 0x00000131
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte lbl_80117458
-    .4byte lbl_801176D0
-    .4byte lbl_80117828
-    .4byte lbl_80117A98
+    .4byte ftNess_SpecialAirNHold_Anim
+    .4byte ftNess_SpecialAirNHold_IASA
+    .4byte ftNess_SpecialAirNHold_Phys
+    .4byte ftNess_SpecialAirNHold_Coll
     .4byte func_800761C8
     .4byte 0x00000132
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte lbl_8011758C
-    .4byte lbl_8011774C
-    .4byte lbl_80117888
-    .4byte lbl_80117B04
+    .4byte ftNess_SpecialAirNEnd_Anim
+    .4byte ftNess_SpecialAirNEnd_IASA
+    .4byte ftNess_SpecialAirNEnd_Phys
+    .4byte ftNess_SpecialAirNEnd_Coll
     .4byte func_800761C8
     .4byte 0x00000133
     .4byte 0x00340112
     .4byte 0x13000000
-    .4byte lbl_80116D74
+    .4byte ftNess_SpecialS_Anim
     .4byte NULL
-    .4byte lbl_80116DEC
-    .4byte lbl_80116E2C
+    .4byte ftNess_SpecialS_Phys
+    .4byte ftNess_SpecialS_Coll
     .4byte func_800761C8
     .4byte 0x00000134
     .4byte 0x00340512
     .4byte 0x13000000
-    .4byte lbl_80116DB0
+    .4byte ftNess_SpecialAirS_Anim
     .4byte NULL
-    .4byte lbl_80116E0C
-    .4byte lbl_80116E68
+    .4byte ftNess_SpecialAirS_Phys
+    .4byte ftNess_SpecialAirS_Coll
     .4byte func_800761C8
     .4byte 0x00000135
     .4byte 0x00340113

@@ -93,7 +93,7 @@ void lbl_801515B8(HSD_GObj* gobj) {
     }
 
     // x2348_stateVar3 does that make sense if its u32?
-    if ((s32)r31_ft_userdata->x2348_stateVar3 > 0 && !func_8006F238(gobj)) {
+    if ((s32)r31_ft_userdata->x2348_stateVar3 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
@@ -135,7 +135,7 @@ void lbl_801516B4(HSD_GObj* gobj) {
         }
         r31_ft_userdata->x2200_ftcmd_var0 = 0U;
     }
-    if (((s32) r31_ft_userdata->x2348_stateVar3 > 0) && !func_8006F238(gobj)) {
+    if (((s32) r31_ft_userdata->x2348_stateVar3 > 0) && !ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0.0f;
         Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, temp_f1, 1.0f, temp_f1);
         func_8006EBA4(gobj);

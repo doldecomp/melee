@@ -38,7 +38,7 @@ void func_801367B8(HSD_GObj* gobj) {
 // 80136844 00133424
 // https://decomp.me/scratch/Go6FC
 void lbl_80136844(HSD_GObj* gobj) {
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80136E74(gobj);
         if (((Fighter*)gobj->user_data)->x4_fighterKind == FTKIND_MARTH) {
             func_800BFFD0(gobj->user_data, 0x63, 0);
@@ -51,7 +51,7 @@ void lbl_80136844(HSD_GObj* gobj) {
 // 801368AC 0013348C
 // https://decomp.me/scratch/XBFKN
 void lbl_801368AC(HSD_GObj* gobj) {
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80136EAC(gobj);
         if (((Fighter*)gobj->user_data)->x4_fighterKind == FTKIND_MARTH) {
             func_800BFFD0(gobj->user_data, 0x63, 0);
@@ -113,7 +113,7 @@ void func_80136A1C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
     func_8007D5D4(ft);
-    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C5084, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C5084, 0, ft->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136A7C 0013365C
@@ -122,7 +122,7 @@ void func_80136A7C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
     func_8007D7FC(ft);
-    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x0C4C5084, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x0C4C5084, 0, ft->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136ADC 001336BC
@@ -220,7 +220,7 @@ void func_80136DB4(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
     func_8007D5D4(gobj->user_data);
-    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C5A86, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C5A86, 0, ft->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136E14 001339F4
@@ -229,7 +229,7 @@ void func_80136E14(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
     func_8007D7FC(ft);
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x0C4C5A86, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x0C4C5A86, 0, ft->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136E74 00133A54
@@ -264,7 +264,7 @@ void lbl_80136EE4(HSD_GObj *gobj) {
             hb += 0x138;
         }
     }
-    if (ft->x894 == 9.0f) {
+    if (ft->x894_currentAnimFrame == 9.0f) {
         Vec3 position;
         s32 unused1, unused2, unused3, unused4, unused5;
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
@@ -274,7 +274,7 @@ void lbl_80136EE4(HSD_GObj *gobj) {
         func_800119DC(&position, 120, 0.9f, 0.02f, 1.0471975803375244f);
     }
     // FrameTimerCheck
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         // AS_014_Wait_PlayerCheck
         func_8008A2BC(gobj);
     }
@@ -311,7 +311,7 @@ void lbl_80137010(HSD_GObj *gobj) {
             hb += 0x138;
         }
     }
-    if (ft->x894 == 9.0f) {
+    if (ft->x894_currentAnimFrame == 9.0f) {
         Vec3 position;
         s32 unused1, unused2, unused3, unused4, unused5;
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
@@ -321,7 +321,7 @@ void lbl_80137010(HSD_GObj *gobj) {
         func_800119DC(&position, 120, 0.9f, 0.02f, 1.0471975803375244f);
     }
     // FrameTimerCheck
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         // AS_029_Fall
         func_800CC730(gobj);
     }
@@ -380,7 +380,7 @@ void func_801371FC(HSD_GObj* gobj) {
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(ft);
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0, ft->x894_currentAnimFrame, 1.0f, 0.0f);
 
     if (ft->x2219_flag.bits.b0 == 1) {
         ft->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -404,7 +404,7 @@ void func_801372A8(HSD_GObj* gobj) {
     // Air_SetAsGrounded2
     func_8007D7FC(ft);
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0, ft->x894_currentAnimFrame, 1.0f, 0.0f);
 
     if (ft->x2219_flag.bits.b0 == 1) {
         ft->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;

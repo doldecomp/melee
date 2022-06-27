@@ -1602,8 +1602,8 @@ lbl_8006F218:
 /* 8006F230 0006BE10  7C 08 03 A6 */	mtlr r0
 /* 8006F234 0006BE14  4E 80 00 20 */	blr 
 
-.global func_8006F238
-func_8006F238:
+.global ftAnim_IsFramesRemaining
+ftAnim_IsFramesRemaining:
 /* 8006F238 0006BE18  7C 08 02 A6 */	mflr r0
 /* 8006F23C 0006BE1C  90 01 00 04 */	stw r0, 4(r1)
 /* 8006F240 0006BE20  94 21 FF E0 */	stwu r1, -0x20(r1)

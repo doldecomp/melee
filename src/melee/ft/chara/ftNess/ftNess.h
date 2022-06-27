@@ -83,7 +83,7 @@ typedef struct ftNessAttributes
 	u32 x48_PK_THUNDER_FALLING_ACCEL_DELAY;
 	f32 x4C_PK_THUNDER_UNK2;
 	f32 x50_PK_THUNDER_FALL_ACCEL;
-	// Up Special - PK Thunder 2
+	// Up Special - PK Thunder 2 (Self-Hit)
 	f32 x54_PK_THUNDER_2_MOMENTUM;
 	f32 x58_PK_THUNDER_2_UNK1;
 	f32 x5C_PK_THUNDER_2_DECELERATION_RATE;
@@ -109,126 +109,148 @@ typedef struct ftNessAttributes
 	f32 xB4_YOYO_REHIT_RATE; // Amount of frames needed for the Yo-Yo to hit again after colliding with a hurtbox //
 	// Forward Smash - Baseball Bat
 	ReflectDesc xB8_BASEBALL_BAT;
+
 }ftNessAttributes;
 
 // Ness functions // 
 
 void ftNess_OnDeath(HSD_GObj* gobj, s32 arg1);
 void ftNess_OnLoad(HSD_GObj* gobj);
-void func_801148F8(HSD_GObj* gobj);
+void ftNess_OnDamage(HSD_GObj* gobj);
 void func_8011493C(HSD_GObj* gobj);
-f32 func_8011495C(Fighter* ft);
+f32 ftNess_GetAbsorbHeal(Fighter* ft);
 void func_80114968(HSD_GObj* gobj, s32 arg1);
 void func_80114A48(HSD_GObj* gobj);
 void func_80114A90(HSD_GObj* gobj);
 void func_80114AD8(HSD_GObj* gobj, s32 arg1);
 void func_80114B2C(HSD_GObj* gobj);
 void func_80114B6C(HSD_GObj* gobj);
-void func_80114BF4(HSD_GObj* gobj);
-BOOL func_80114CC0(HSD_GObj* gobj);
-void func_80114CF4(HSD_GObj* gobj);
-void func_80114D34(HSD_GObj* gobj);
-void lbl_80114D50(HSD_GObj* gobj);
-void lbl_80114E04(HSD_GObj* gobj);
-void lbl_80114E64(HSD_GObj* gobj);
-void lbl_80114E98(HSD_GObj* gobj);
-void lbl_80114EB8(HSD_GObj* gobj);
-void func_80114F0C(HSD_GObj* gobj);
-void func_80114F70(f32 unk_float, HSD_GObj* gobj);
-s32 func_80114FF8(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float_unk);
-void func_80115114(HSD_GObj* gobj, Vec3* arg1);
-void func_801151EC(HSD_GObj* gobj);
-void func_801152D0(HSD_GObj* gobj, f32 arg8);
-s32 func_80115404(HSD_GObj* gobj);
-void func_80115534(HSD_GObj* gobj);
-void func_8011556C(HSD_GObj* gobj);
-void func_80115680(HSD_GObj* gobj);
-BOOL func_80115784(HSD_GObj* gobj);
-void func_8011599C(HSD_GObj* gobj);
-void func_80115A08(HSD_GObj* gobj);
-void func_80115AC4(HSD_GObj* gobj);
-void func_80115AF8(HSD_GObj* gobj);
-void lbl_80115B50(HSD_GObj* gobj);
-void func_80115B80(HSD_GObj* gobj);
-void func_80115BB0(HSD_GObj* gobj);
-void lbl_80115C74(HSD_GObj* gobj);
-Fighter* GetFighterData(HSD_GObj* gobj);
-void lbl_80115C9C(HSD_GObj* gobj);
-void lbl_80115E74(HSD_GObj* gobj);
-void lbl_80115EB8(HSD_GObj* gobj);
-HSD_GObj* GetFighterData_x222C(HSD_GObj* gobj);
-void lbl_80115F14(HSD_GObj* gobj);
-ftNessAttributes* GetNessAttr(Fighter* ft);
-HSD_GObj* GetYoyoGObj(Fighter* ft);
-void lbl_80115F88(HSD_GObj* gobj);
-void lbl_801160B4(HSD_GObj* gobj);
-void lbl_801160E4(HSD_GObj* gobj);
-void lbl_80116104(HSD_GObj* gobj);
-void func_80116178(HSD_GObj* gobj);
-void lbl_8011620C(HSD_GObj* gobj);
-void lbl_801162B0(HSD_GObj* gobj);
-void lbl_801162E0(HSD_GObj* gobj);
-void lbl_80116420(HSD_GObj* gobj);
-itYoyoAttributes* GetYoyoAttr(HSD_GObj* gobj); // Inline, may not be necessary //
-void func_80116494(HSD_GObj* gobj);
-void func_8011659C(HSD_GObj* gobj);
-void lbl_80116638(HSD_GObj* gobj);
-void lbl_801166D4(HSD_GObj* gobj);
-void lbl_80116718(HSD_GObj* gobj);
-void lbl_8011674C(HSD_GObj* gobj);
-void lbl_80116798(HSD_GObj* gobj);
-void lbl_80116828(HSD_GObj* gobj);
-void lbl_80116858(HSD_GObj* gobj);
-void lbl_80116878(HSD_GObj* gobj);
-void func_801168C4(HSD_GObj* gobj);
-void lbl_80116958(HSD_GObj* gobj);
-void lbl_801169BC(HSD_GObj* gobj);
-void lbl_801169EC(HSD_GObj* gobj);
-void lbl_80116A9C(HSD_GObj* gobj);
-void func_80116AE8(HSD_GObj* gobj);
-void lbl_80116B70(HSD_GObj* gobj);
-void func_80116C94(HSD_GObj* gobj);
-void func_80116D04(HSD_GObj* gobj);
-void lbl_80116D74(HSD_GObj* gobj);
-void lbl_80116DB0(HSD_GObj* gobj);
-void lbl_80116DEC(HSD_GObj* gobj);
-void lbl_80116E0C(HSD_GObj* gobj);
-void lbl_80116E2C(HSD_GObj* gobj);
-void lbl_80116E68(HSD_GObj* gobj);
-BOOL func_80116EBC(HSD_GObj* gobj);
-void func_80116F00(HSD_GObj* gobj);
-void func_80116F38(HSD_GObj* gobj);
-void func_80116F94(HSD_GObj* gobj);
-void func_80117034(HSD_GObj* gobj);
-void lbl_801170DC(HSD_GObj* gobj);
-void lbl_801171BC(HSD_GObj* gobj);
-void SetPKFlashAttr(HSD_GObj* gobj);
-void lbl_801172F0(HSD_GObj* gobj);
-void lbl_80117378(HSD_GObj* gobj);
-void lbl_80117458(HSD_GObj* gobj);
-void lbl_8011758C(HSD_GObj* gobj);
-void lbl_80117648(HSD_GObj* gobj);
-void lbl_8011764C(HSD_GObj* gobj);
-void lbl_801176C8(HSD_GObj* gobj);
-void lbl_801176CC(HSD_GObj* gobj);
-void lbl_801176D0(HSD_GObj* gobj);
-void lbl_8011774C(HSD_GObj* gobj);
-void GravityDelay(HSD_GObj* gobj);
-void lbl_80117750(HSD_GObj* gobj);
-void lbl_80117788(HSD_GObj* gobj);
-void lbl_801177A8(HSD_GObj* gobj);
-void lbl_801177C8(HSD_GObj* gobj);
-void lbl_80117828(HSD_GObj* gobj);
-void lbl_80117888(HSD_GObj* gobj);
-void lbl_801178E8(HSD_GObj* gobj);
-void lbl_80117954(HSD_GObj* gobj);
-void lbl_801179C0(HSD_GObj* gobj);
-void lbl_80117A2C(HSD_GObj* gobj);
-void lbl_80117A98(HSD_GObj* gobj);
-void lbl_80117B04(HSD_GObj* gobj);
+
+// Forward Smash //
+
+void ftNess_AttackS4_OnReflect(HSD_GObj* gobj);
+BOOL ftNess_CheckNessBatRemove(HSD_GObj* gobj);
+void ftNess_ItemNessBatRemove(HSD_GObj* gobj);
+void ftNess_ItemNessBatSetNULL(HSD_GObj* gobj);
+
+void ftNess_AttackS4_Anim(HSD_GObj* gobj);
+void ftNess_AttackS4_IASA(HSD_GObj* gobj);
+void ftNess_AttackS4_Phys(HSD_GObj* gobj);
+void ftNess_AttackS4_Coll(HSD_GObj* gobj);
+
+// Yo-Yo item setup & math //
+
+void ftNess_YoyoUpdateHitPos(HSD_GObj* gobj);
+void ftNess_YoyoCheckTimedRehit(HSD_GObj* gobj);
+void ftNess_YoyoApplyDamage(f32 unk_float, HSD_GObj* gobj); // Used by Down Smash //
+s32 ftNess_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float_unk);
+void ftNess_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* arg1);
+void ftNess_YoyoSetHitPos(HSD_GObj* gobj);
+void ftNess_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 arg8);
+BOOL ftNess_YoyoCheckNoObstruct(HSD_GObj* gobj);
+void ftNess_YoyoSetVarAll(HSD_GObj* gobj);
+void ftNess_YoyoApplySmash(HSD_GObj* gobj);
+void ftNess_YoyoSetChargeDamage(HSD_GObj* gobj); // Used by Up Smash //
+BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* gobj);
+void ftNess_YoyoSetUnkRate(HSD_GObj* gobj);
+void ftNess_YoyoCreateItem(HSD_GObj* gobj);
+void ftNess_YoyoItemSetFlag(HSD_GObj* gobj);
+void ftNess_YoyoItemDespawn(HSD_GObj* gobj);
+void ftNess_YoyoItemSetUnk(HSD_GObj* gobj);
+void ftNess_YoyoItemSetUnk2(HSD_GObj* gobj);
+
+// Up Smash Action State hook //
+
+void ftNess_AttackHi4_Action(HSD_GObj* gobj);
+
+// Start rehit timer if target is hit //
+
+void ftNess_YoyoStartTimedRehit(HSD_GObj* gobj);
+
+// Up Smash callbacks (AttackHi4) //
+
+void ftNess_AttackHi4_Anim(HSD_GObj* gobj);
+void ftNess_AttackHi4_IASA(HSD_GObj* gobj);
+void ftNess_AttackHi4_Phys(HSD_GObj* gobj);
+void ftNess_AttackHi4_Coll(HSD_GObj* gobj);
+void ftNess_AttackHi4_Charge_Anim(HSD_GObj* gobj);
+void ftNess_AttackHi4_Charge_IASA(HSD_GObj* gobj);
+void ftNess_AttackHi4_Charge_Phys(HSD_GObj* gobj);
+void ftNess_AttackHi4_Charge_Coll(HSD_GObj* gobj);
+void ftNess_AttackHi4_Charge_Action(HSD_GObj* gobj);
+void ftNess_AttackHi4_Release_Anim(HSD_GObj* gobj);
+void ftNess_AttackHi4_Release_IASA(HSD_GObj* gobj);
+void ftNess_AttackHi4_Release_Phys(HSD_GObj* gobj);
+void ftNess_AttackHi4_Release_Coll(HSD_GObj* gobj);
+void ftNess_AttackHi4_Release_Action(HSD_GObj* gobj);
+
+// Down Smash callbacks (AttackLw4) //
+
+void ftNess_AttackLw4_Action(HSD_GObj* gobj);
+void ftNess_AttackLw4_Anim(HSD_GObj* gobj);
+void ftNess_AttackLw4_IASA(HSD_GObj* gobj);
+void ftNess_AttackLw4_Phys(HSD_GObj* gobj);
+void ftNess_AttackLw4_Coll(HSD_GObj* gobj);
+void ftNess_AttackLw4_Charge_Anim(HSD_GObj* gobj);
+void ftNess_AttackLw4_Charge_IASA(HSD_GObj* gobj);
+void ftNess_AttackLw4_Charge_Phys(HSD_GObj* gobj);
+void ftNess_AttackLw4_Charge_Coll(HSD_GObj* gobj);
+void ftNess_AttackLw4_Charge_Action(HSD_GObj* gobj);
+void ftNess_AttackLw4_Release_Anim(HSD_GObj* gobj);
+void ftNess_AttackLw4_Release_IASA(HSD_GObj* gobj);
+void ftNess_AttackLw4_Release_Phys(HSD_GObj* gobj);
+void ftNess_AttackLw4_Release_Coll(HSD_GObj* gobj);
+void ftNess_AttackLw4_Release_Action(HSD_GObj* gobj);
+
+// PK Fire callbacks (SpecialS) //
+
+void ftNess_ItemPKFireSpawn(HSD_GObj* gobj);
+void ftNess_SpecialS_Action(HSD_GObj* gobj);
+void ftNess_SpecialAirS_Action(HSD_GObj* gobj);
+void ftNess_SpecialS_Anim(HSD_GObj* gobj);
+void ftNess_SpecialAirS_Anim(HSD_GObj* gobj);
+void ftNess_SpecialS_Phys(HSD_GObj* gobj);
+void ftNess_SpecialAirS_Phys(HSD_GObj* gobj);
+void ftNess_SpecialS_Coll(HSD_GObj* gobj);
+void ftNess_SpecialAirS_Coll(HSD_GObj* gobj);
+
+// PK Flash callbacks (SpecialN) //
+
+BOOL ftNess_CheckSpecialNHold(HSD_GObj* gobj);
+void ftNess_SpecialNSetNULL(HSD_GObj* gobj);
+void ftNess_ItemPKFlushSetNULL(HSD_GObj* gobj);
+void ftNess_SpecialN_Action(HSD_GObj* gobj);
+void ftNess_SpecialAirN_Action(HSD_GObj* gobj);
+void ftNess_SpecialNStart_Anim(HSD_GObj* gobj);
+void ftNess_SpecialNHold_Anim(HSD_GObj* gobj);
+void ftNess_SpecialNEnd_Anim(HSD_GObj* gobj);
+void ftNess_SpecialAirNStart_Anim(HSD_GObj* gobj);
+void ftNess_SpecialAirNHold_Anim(HSD_GObj* gobj);
+void ftNess_SpecialAirNEnd_Anim(HSD_GObj* gobj);
+void ftNess_SpecialNStart_IASA(HSD_GObj* gobj);
+void ftNess_SpecialNHold_IASA(HSD_GObj* gobj);
+void ftNess_SpecialNEnd_IASA(HSD_GObj* gobj);
+void ftNess_SpecialAirNStart_IASA(HSD_GObj* gobj);
+void ftNess_SpecialAirNHold_IASA(HSD_GObj* gobj);
+void ftNess_SpecialAirNEnd_IASA(HSD_GObj* gobj);
+void ftNess_SpecialNStart_Phys(HSD_GObj* gobj);
+void ftNess_SpecialNHold_Phys(HSD_GObj* gobj);
+void ftNess_SpecialNEnd_Phys(HSD_GObj* gobj);
+void ftNess_SpecialAirNStart_Phys(HSD_GObj* gobj);
+void ftNess_SpecialAirNHold_Phys(HSD_GObj* gobj);
+void ftNess_SpecialAirNEnd_Phys(HSD_GObj* gobj);
+void ftNess_SpecialNStart_Coll(HSD_GObj* gobj);
+void ftNess_SpecialNHold_Coll(HSD_GObj* gobj);
+void ftNess_SpecialNEnd_Coll(HSD_GObj* gobj);
+void ftNess_SpecialAirNStart_Coll(HSD_GObj* gobj);
+void ftNess_SpecialAirNHold_Coll(HSD_GObj* gobj);
+void ftNess_SpecialAirNEnd_Coll(HSD_GObj* gobj);
+
+// PK Thunder callbacks (SpecialHi) //
+
 void func_80117B70(HSD_GObj* gobj);
-s32 func_80117BBC(HSD_GObj* gobj);
-s32 func_800177D9C(HSD_GObj* gobj);
+BOOL func_80117BBC(HSD_GObj* gobj);
+BOOL func_80117D9C(HSD_GObj* gobj);
 void func_80117DD4(HSD_GObj* gobj);
 void func_80117E60(HSD_GObj* gobj);
 void func_80117F00(HSD_GObj* gobj, HSD_GObj* gobj2);
@@ -304,7 +326,7 @@ void lbl_8011A9D0(HSD_GObj* gobj);
 void lbl_8011AA0C(HSD_GObj* gobj);
 void func_8011AA48(HSD_GObj* gobj);
 void func_8011AAA8(HSD_GObj* gobj);
-s32 func_8011AB10(HSD_GObj* gobj);
+BOOL func_8011AB10(HSD_GObj* gobj);
 void lbl_8011ABF8(HSD_GObj* gobj);
 void lbl_8011ADC8(HSD_GObj* gobj);
 void lbl_8011AEE0(HSD_GObj* gobj);

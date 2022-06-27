@@ -14,7 +14,7 @@ void func_80119E14(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Start A
     temp_fighter->x2348_stateVar3 = 0;
     temp_fighter->x234C_stateVar4 = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fighter->x2350_stateVar5 = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16F, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_START, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 }
 
@@ -34,7 +34,7 @@ void func_80119E90(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Act
     temp_fighter->x2350_stateVar5 = 0;
     temp_fighter->x80_self_vel.y = 0.0f;
     temp_fighter->x80_self_vel.x /= ness_attr->x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x174, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_START, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 }
 
@@ -48,12 +48,12 @@ void lbl_80119F20(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Start An
 
     fighter_data2 = fighter_gobj->user_data;
 
-    if ((fighter_data2->input.x65C & 0x200) == 0)
+    if ((fighter_data2->input.x65C & B_BUTTON_HELD) == FALSE)
     {
         fighter_data2->x2348_stateVar3 = 1;
     }
 
-    if (func_8006F238(fighter_gobj) == 0)
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
         fighter_data = fighter_gobj->user_data;
 
@@ -66,7 +66,7 @@ void lbl_80119F20(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Start An
         fighter_data->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fighter_data->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         fighter_data2->x2350_stateVar5 = 0;
-        if ((s32)fighter_data2->xE0_ground_or_air == 0)
+        if ((s32)fighter_data2->xE0_ground_or_air == GROUND)
         {
             func_8011A650(fighter_gobj);
             return;
@@ -85,12 +85,12 @@ void lbl_8011A000(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Anim
 
     fighter_data2 = fighter_data = fighter_gobj->user_data;
 
-    if ((fighter_data2->input.x65C & 0x200) == 0)
+    if ((fighter_data2->input.x65C & B_BUTTON_HELD) == FALSE)
     {
         fighter_data2->x2348_stateVar3 = 1;
     }
 
-    if (func_8006F238(fighter_gobj) == 0)
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
         fighter_data = fighter_gobj->user_data;
 
@@ -102,7 +102,7 @@ void lbl_8011A000(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Anim
         fighter_data->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fighter_data->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         fighter_data2->x2350_stateVar5 = 0;
-        if ((s32)fighter_data2->xE0_ground_or_air == 0)
+        if ((s32)fighter_data2->xE0_ground_or_air == GROUND)
         {
             func_8011A650(fighter_gobj);
             return;
@@ -159,7 +159,7 @@ block_end:
 // https://decomp.me/scratch/S8g3b //
 void lbl_8011A168(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Start Collision callback //
 {
-    if (func_80082708(fighter_gobj) == 0)
+    if (func_80082708(fighter_gobj) == FALSE)
     {
         func_8011A1E0(fighter_gobj);
     }
@@ -169,7 +169,7 @@ void lbl_8011A168(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Start Co
 // https://decomp.me/scratch/eNYIn //
 void lbl_8011A1A4(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Collision callback //
 {
-    if (func_80081D0C(fighter_gobj) != 0)
+    if (func_80081D0C(fighter_gobj) != FALSE)
     {
         func_8011A240(fighter_gobj);
     }
@@ -183,7 +183,7 @@ void func_8011A1E0(HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Star
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x174, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_START, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 extern void func_8007D468(Fighter*);
@@ -196,7 +196,7 @@ void func_8011A240(HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Star
 
     fighter_data = fighter_gobj->user_data;
     func_8007D7FC(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16F, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_START, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fighter_data);
 }
 
@@ -212,7 +212,7 @@ void lbl_8011A2A8(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Hold Ani
     Fighter* fighter_data;
 
     fighter_data = fighter_gobj->user_data;
-    if ((fighter_data->input.x65C & 0x200) == 0)
+    if ((fighter_data->input.x65C & B_BUTTON_HELD) == FALSE)
     {
         fighter_data->x2348_stateVar3 = 1;
     }
@@ -223,7 +223,7 @@ void lbl_8011A2A8(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Hold Ani
     }
     if (((s32)fighter_data->x2340_stateVar1 <= 0) && ((s32)fighter_data->x2348_stateVar3 != 0))
     {
-        if ((s32)fighter_data->xE0_ground_or_air == 0)
+        if ((s32)fighter_data->xE0_ground_or_air == GROUND)
         {
             func_8011B4AC(fighter_gobj);
         }
@@ -253,7 +253,7 @@ void lbl_8011A370(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Hold Anima
     Fighter* fighter_data;
 
     fighter_data = fighter_gobj->user_data;
-    if ((fighter_data->input.x65C & 0x200) == 0)
+    if ((fighter_data->input.x65C & B_BUTTON_HELD) == FALSE)
     {
         fighter_data->x2348_stateVar3 = 1;
     }
@@ -264,7 +264,7 @@ void lbl_8011A370(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Hold Anima
     }
     if (((s32)fighter_data->x2340_stateVar1 <= 0) && ((s32)fighter_data->x2348_stateVar3 != 0))
     {
-        if ((s32)fighter_data->xE0_ground_or_air == 0)
+        if ((s32)fighter_data->xE0_ground_or_air == GROUND)
         {
             func_8011B4AC(fighter_gobj);
         }
@@ -336,7 +336,7 @@ block_end:
 // https://decomp.me/scratch/SNaVN //
 void lbl_8011A4E8(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Hold Collision callback //
 {
-    if (func_80082708(fighter_gobj) == 0)
+    if (func_80082708(fighter_gobj) == FALSE)
     {
         func_8011A560(fighter_gobj);
     }
@@ -346,13 +346,13 @@ void lbl_8011A4E8(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Hold Col
 // https://decomp.me/scratch/dS3Sn //
 void lbl_8011A524(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Hold Collision callback
 {
-    if (func_80081D0C(fighter_gobj) != 0)
+    if (func_80081D0C(fighter_gobj) != FALSE)
     {
         func_8011A5D4(fighter_gobj);
     }
 }
 
-extern void func_8007B2C4(HSD_GObj*, AbsorbDesc*); // Create Absorb Bubble //
+extern void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*); // Create Absorb Bubble //
 
 // 0x8011A560 //
 // https://decomp.me/scratch/noqpv //
@@ -364,10 +364,10 @@ void func_8011A560(HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Hold
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HOLD, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A5D4 //
@@ -380,11 +380,11 @@ void func_8011A5D4(HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Hold
 
     fighter_data = fighter_gobj->user_data;
     func_8007D7FC(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x170, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HOLD, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fighter_data);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A650 //
@@ -395,10 +395,10 @@ void func_8011A650(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Hold Ac
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x170, 2, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A6A8 //
@@ -409,10 +409,10 @@ void func_8011A6A8(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Hold Acti
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 2, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 extern f32 func_80075F48(Fighter*, s32);
@@ -444,7 +444,7 @@ void lbl_8011A700(HSD_GObj* arg0) // Ness's grounded PSI Magnet Turnaround Anima
     Fighter* temp_r30;
     Fighter* temp_r29 = temp_r30 = arg0->user_data;
 
-    if ((temp_r29->input.x65C & 0x200) == 0)
+    if ((temp_r29->input.x65C & B_BUTTON_HELD) == FALSE)
     {
         temp_r29->x2348_stateVar3 = 1;
     }
@@ -470,7 +470,7 @@ void lbl_8011A810(HSD_GObj* arg0)
     Fighter* temp_r30;
     Fighter* temp_r29 = temp_r30 = arg0->user_data;
 
-    if ((temp_r29->input.x65C & 0x200) == 0)
+    if ((temp_r29->input.x65C & B_BUTTON_HELD) == FALSE)
     {
         temp_r29->x2348_stateVar3 = 1;
     }
@@ -536,7 +536,7 @@ block_end:
 // https://decomp.me/scratch/E3jqW //
 void lbl_8011A9D0(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Turnaround Collision callback - unused //
 {
-    if (func_80082708(fighter_gobj) == 0)
+    if (func_80082708(fighter_gobj) == FALSE)
     {
         func_8011AA48(fighter_gobj);
     }
@@ -546,7 +546,7 @@ void lbl_8011A9D0(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Turnarou
 // https://decomp.me/scratch/qkeXm //
 void lbl_8011AA0C(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Turnaround Collision callback - unused //
 {
-    if (func_80081D0C(fighter_gobj) != 0) 
+    if (func_80081D0C(fighter_gobj) != FALSE) 
     {
         func_8011AAA8(fighter_gobj);
     }
@@ -560,7 +560,7 @@ void func_8011AA48(HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Turn
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x178, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_TURN, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 0x8011AAA8 //
@@ -571,13 +571,13 @@ void func_8011AAA8(HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Turn
 
     fighter_data = fighter_gobj->user_data;
     func_8007D7FC(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x173, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_TURN, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fighter_data);
 }
 
 // 0x8011AB10 //
 // https://decomp.me/scratch/HzpAw //
-s32 func_8011AB10(HSD_GObj* arg0) // Ness's PSI Magnet Absorb callback //
+BOOL func_8011AB10(HSD_GObj* arg0) // Ness's PSI Magnet Absorb callback //
 {
     s32 unused[10];
     Fighter* temp_r3;
@@ -586,7 +586,7 @@ s32 func_8011AB10(HSD_GObj* arg0) // Ness's PSI Magnet Absorb callback //
     temp_r3 = arg0->user_data;
     if (((s32)temp_r3->x2340_stateVar1 <= 0) && ((s32)temp_r3->x2348_stateVar3 != 0)) 
     {
-        if ((s32)temp_r3->xE0_ground_or_air == 0)
+        if ((s32)temp_r3->xE0_ground_or_air == GROUND)
         {
             func_8011B4AC(arg0);
         }
@@ -594,23 +594,23 @@ s32 func_8011AB10(HSD_GObj* arg0) // Ness's PSI Magnet Absorb callback //
         {
             func_8011B4E4(arg0);
         }
-        return 0;
+        return FALSE;
     }
-    if ((s32)temp_r3->xE0_ground_or_air == 0)
+    if ((s32)temp_r3->xE0_ground_or_air == GROUND)
     {
-        Fighter_ActionStateChange_800693AC(arg0, 0x170, 2, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
         attrs = temp_r3->x2D4_specialAttributes;
-        func_8007B2C4(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
+        ftColl_CreateAbsorbHit(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
     }
     else
     {
-        Fighter_ActionStateChange_800693AC(arg0, 0x175, 2, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALAIRLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
         attrs = temp_r3->x2D4_specialAttributes;
-        func_8007B2C4(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
+        ftColl_CreateAbsorbHit(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
     }
-    return 1;
+    return TRUE;
 }
 
 inline void MagnetStateVarCalc(HSD_GObj* fighter_gobj)
@@ -643,7 +643,7 @@ void lbl_8011ABF8(HSD_GObj* arg0) // Ness's grounded PSI Magnet Absorb Animation
     Fighter* temp_r31;
 
     temp_r4 = arg0->user_data;
-    if ((temp_r4->input.x65C & 0x200) == 0)
+    if ((temp_r4->input.x65C & B_BUTTON_HELD) == FALSE)
     {
         temp_r4->x2348_stateVar3 = 1;
     }
@@ -652,12 +652,12 @@ void lbl_8011ABF8(HSD_GObj* arg0) // Ness's grounded PSI Magnet Absorb Animation
     {
         temp_r4->x2340_stateVar1 = (s32)(temp_r4->x2340_stateVar1 - 1);
     }
-    if (func_8006F238(arg0) == 0)
+    if (ftAnim_IsFramesRemaining(arg0) == 0)
     {
         temp_r3_2 = arg0->user_data;
         if (((s32)temp_r3_2->x2340_stateVar1 <= 0) && ((s32)temp_r3_2->x2348_stateVar3 != 0))
         {
-            if ((s32)temp_r3_2->xE0_ground_or_air == 0)
+            if ((s32)temp_r3_2->xE0_ground_or_air == GROUND)
             {
                 func_8011B4AC(arg0);
             }
@@ -669,20 +669,20 @@ void lbl_8011ABF8(HSD_GObj* arg0) // Ness's grounded PSI Magnet Absorb Animation
         }
         else
         {
-            if ((s32)temp_r3_2->xE0_ground_or_air == 0)
+            if ((s32)temp_r3_2->xE0_ground_or_air == GROUND)
             {
-                Fighter_ActionStateChange_800693AC(arg0, 0x170, 2, 0, 0.0f, 1.0f, 0.0f);
+                Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
 
                 temp_e1 = arg0->user_data;
                 attr = temp_e1->x2D4_specialAttributes;
-                func_8007B2C4(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
+                ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
             }
             else
             {
-                Fighter_ActionStateChange_800693AC(arg0, 0x175, 2, 0, 0.0f, 1.0f, 0.0f);
+                Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALAIRLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
                 temp_e2 = arg0->user_data;
                 attr = temp_e2->x2D4_specialAttributes;
-                func_8007B2C4(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
+                ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
             }
             phi_r0 = 1;
         }
@@ -713,7 +713,7 @@ void lbl_8011ADC8(HSD_GObj* arg0) // Ness's aerial PSI Magnet Absorb Animation c
     Fighter* temp_r4;
 
     temp_r4 = arg0->user_data;
-    if ((temp_r4->input.x65C & 0x200) == 0)
+    if ((temp_r4->input.x65C & B_BUTTON_HELD) == FALSE)
     {
         temp_r4->x2348_stateVar3 = 1;
     }
@@ -722,7 +722,7 @@ void lbl_8011ADC8(HSD_GObj* arg0) // Ness's aerial PSI Magnet Absorb Animation c
     {
         temp_r4->x2340_stateVar1 = (s32)(temp_r4->x2340_stateVar1 - 1);
     }
-    if ((func_8006F238(arg0) == 0) && (func_8011AB10(arg0) != 0))
+    if ((ftAnim_IsFramesRemaining(arg0) == FALSE) && (func_8011AB10(arg0) != FALSE))
     {
         func_8007DB24(arg0);
         temp_r31 = arg0->user_data;
@@ -778,7 +778,8 @@ void lbl_8011AF1C(HSD_GObj* arg0) // Ness's aerial PSI Magnet Absorb Physics cal
     attributes = &temp_r31->x110_attr;
 
     temp_r3 = temp_r31->x234C_stateVar4;
-    if (temp_r3 != 0) {
+    if (temp_r3 != 0) 
+    {
         temp_r31->x234C_stateVar4 = temp_r3 - 1;
         goto end_part;
     }
@@ -792,7 +793,7 @@ end_part:
 // https://decomp.me/scratch/XSIRp //
 void lbl_8011AF90(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Absorb Collision callback //
 {
-    if (func_80082708(fighter_gobj) == 0)
+    if (func_80082708(fighter_gobj) == FALSE)
     {
         func_8011B008(fighter_gobj);
     }
@@ -802,7 +803,7 @@ void lbl_8011AF90(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Absorb C
 // https://decomp.me/scratch/Lq3zN //
 void lbl_8011AFCC(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Absorb Collision callback //
 {
-    if (func_80081D0C(fighter_gobj) != 0)
+    if (func_80081D0C(fighter_gobj) != FALSE)
     {
         func_8011B07C(fighter_gobj);
     }
@@ -818,10 +819,10 @@ void func_8011B008(HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Abso
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x176, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HIT, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011B07C //
@@ -834,11 +835,11 @@ void func_8011B07C(HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Abso
 
     fighter_data = fighter_gobj->user_data;
     func_8007D7FC(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x171, 0x0C4C5082, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HIT, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fighter_data);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    func_8007B2C4(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011B0F8 //
@@ -855,7 +856,7 @@ void func_8011B0F8(HSD_GObj* gobj) // Ness's PSI Magnet OnAbsorb hook //
 
     temp_r31 = gobj->user_data;
     temp_r30 = temp_r31->x2D4_specialAttributes;
-    temp_f31 = (f32)(s32)((f32)temp_r31->AbsorbAttr.x1A44_damageTaken * func_8011495C(temp_r31));
+    temp_f31 = (f32)(s32)((f32)temp_r31->AbsorbAttr.x1A44_damageTaken * ftNess_GetAbsorbHeal(temp_r31));
     temp_r31->dmg.x1830_percent -= temp_f31;
     temp_f1 = temp_r31->dmg.x1830_percent;
 
@@ -869,18 +870,18 @@ void func_8011B0F8(HSD_GObj* gobj) // Ness's PSI Magnet OnAbsorb hook //
     temp_r31->x2C_facing_direction = (f32)temp_r31->AbsorbAttr.x1A40_absorbHitDirection;
     temp_r0 = temp_r31->x10_action_state_index;
 
-    if (((temp_r0 != 0x171) && (temp_r0 != 0x176)) || !(temp_r31->x894 <= temp_r30->x7C_PSI_MAGNET_UNK2))
+    if (((temp_r0 != AS_NESS_SPECIALLW_HIT) && (temp_r0 != AS_NESS_SPECIALAIRLW_HIT)) || !(temp_r31->x894_currentAnimFrame <= temp_r30->x7C_PSI_MAGNET_UNK2))
     {
-        if ((s32)temp_r31->xE0_ground_or_air == 0)
+        if ((s32)temp_r31->xE0_ground_or_air == GROUND)
         {
-            phi_r4 = 0x171;
+            phi_r4 = AS_NESS_SPECIALLW_HIT;
         }
         else
         {
-            phi_r4 = 0x176;
+            phi_r4 = AS_NESS_SPECIALAIRLW_HIT;
         }
-        Fighter_ActionStateChange_800693AC(gobj, phi_r4, 2, 0, 0.0f, 1.0f, 0.0f);
-        func_8007B2C4(gobj, &temp_r30->x98_PSI_MAGNET_ABSORPTION);
+        Fighter_ActionStateChange_800693AC(gobj, phi_r4, 2, NULL, 0.0f, 1.0f, 0.0f);
+        ftColl_CreateAbsorbHit(gobj, &temp_r30->x98_PSI_MAGNET_ABSORPTION);
     }
 }
 
@@ -890,7 +891,7 @@ void lbl_8011B25C(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet End Anim
 {
     s32 unused[2];
 
-    if (func_8006F238(fighter_gobj) == 0)
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
         func_8007DB24(fighter_gobj);
         func_8007D92C(fighter_gobj);
@@ -902,7 +903,7 @@ void lbl_8011B25C(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet End Anim
 void lbl_8011B2A0(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet End Animation callback //
 {
     s32 unused[2];
-    if (func_8006F238(fighter_gobj) == 0)
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
         func_8007DB24(fighter_gobj);
         func_8007D92C(fighter_gobj);
@@ -981,7 +982,7 @@ void func_8011B3E4(HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet End 
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x177, 0x0C4C5080, 0, fighter_data->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_END, 0x0C4C5080, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 0x8011B444 //
@@ -992,7 +993,7 @@ void func_8011B444(HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet End 
 
     temp_r31 = fighter_gobj->user_data;
     func_8007D7FC(temp_r31);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x172, 0x0C4C5080, 0, temp_r31->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_END, 0x0C4C5080, NULL, temp_r31->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(temp_r31);
 }
 
@@ -1000,13 +1001,13 @@ void func_8011B444(HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet End 
 // https://decomp.me/scratch/6wpwg //
 void func_8011B4AC(HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet End Action State handler //
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_END, 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
 // 0x8011B4E4 //
 // https://decomp.me/scratch/sbrLt //
 void func_8011B4E4(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet End Action State handler //
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_END, 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
