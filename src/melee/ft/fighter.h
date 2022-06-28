@@ -22,12 +22,12 @@ typedef enum FighterKind
 {
     FTKIND_MARIO,
     FTKIND_FOX,
-    FTKIND_FALCON,
-    FTKIND_DK,
+    FTKIND_CAPTAIN,
+    FTKIND_DONKEY,
     FTKIND_KIRBY,
-    FTKIND_BOWSER,
+    FTKIND_KOOPA,
     FTKIND_LINK,
-    FTKIND_SHEIK,
+    FTKIND_SEAK,
     FTKIND_NESS,
     FTKIND_PEACH,
     FTKIND_POPO,
@@ -35,62 +35,101 @@ typedef enum FighterKind
     FTKIND_PIKACHU,
     FTKIND_SAMUS,
     FTKIND_YOSHI,
-    FTKIND_JIGGLYPUFF,
+    FTKIND_PURIN,
     FTKIND_MEWTWO,
     FTKIND_LUIGI,
-    FTKIND_MARTH,
+    FTKIND_MARS,
     FTKIND_ZELDA,
-    FTKIND_YOUNGLINK,
+    FTKIND_CLINK,
     FTKIND_DRMARIO,
     FTKIND_FALCO,
     FTKIND_PICHU,
-    FTKIND_GAW,
-    FTKIND_GANONDORF,
-    FTKIND_ROY,
-    FTKIND_MASTERHAND,
-    FTKIND_CRAZYHAND,
+    FTKIND_GAMEWATCH,
+    FTKIND_GANON,
+    FTKIND_EMBLEM,
+    FTKIND_MASTERH,
+    FTKIND_CREZYH,
     FTKIND_BOY,
     FTKIND_GIRL,
-    FTKIND_GIGABOWSER,
+    FTKIND_GKOOPS,
     FTKIND_SANDBAG,
+    FTKIND_NONE
+
 } FighterKind;
 
 typedef enum CharacterKind
 {
-    CKIND_FALCON,
-    CKIND_DK,
-    CKIND_FOX,
-    CKIND_GAW,
-    CKIND_KIRBY,
-    CKIND_BOWSER,
-    CKIND_LINK,
-    CKIND_LUIGI,
-    CKIND_MARIO,
-    CKIND_MARTH,
-    CKIND_MEWTWO,
-    CKIND_NESS,
-    CKIND_PEACH,
-    CKIND_PIKACHU,
-    CKIND_ICECLIMBERS,
-    CKIND_JIGGLYPUFF,
-    CKIND_SAMUS,
-    CKIND_YOSHI,
-    CKIND_ZELDA,
-    CKIND_SHEIK,
-    CKIND_FALCO,
-    CKIND_YOUNGLINK,
-    CKIND_DRMARIO,
-    CKIND_ROY,
-    CKIND_PICHU,
-    CKIND_GANONDORF,
-    CKIND_MASTERHAND,
-    CKIND_BOY,
-    CKIND_GIRL,
-    CKIND_GIGABOWSER,
-    CKIND_CRAZYHAND,
-    CKIND_SANDBAG,
-    CKIND_POPO,
+    CKIND_CAPTAIN, // Captain Falcon (Captain) //
+    CKIND_DONKEY, // Donkey Kong (Donkey) //
+    CKIND_FOX, // Fox //
+    CKIND_GAMEWATCH, // Mr. Game & Watch (GameWatch) //
+    CKIND_KIRBY, // Kirby //
+    CKIND_KOOPA, // Bowser (Koopa) //
+    CKIND_LINK, // Link //
+    CKIND_LUIGI, // Luigi // 
+    CKIND_MARIO, // Mario //
+    CKIND_MARS, // Marth (Mars) //
+    CKIND_MEWTWO, // Mewtwo //
+    CKIND_NESS, // Ness// 
+    CKIND_PEACH, // Peach //
+    CKIND_PIKACHU, // Pikachu //
+    CKIND_POPONANA, // Ice Climbers (Popo & Nana) //
+    CKIND_PURIN, // Jigglypuff (Purin) //
+    CKIND_SAMUS, // Samus //
+    CKIND_YOSHI, // Yoshi //
+    CKIND_ZELDA, // Zelda (ZE->SE) //
+    CKIND_SEAK, // Sheik (SE->ZE) //
+    CKIND_FALCO, // Falco //
+    CKIND_CLINK, // Young Link (CLink) //
+    CKIND_DRMARIO, // Dr. Mario //
+    CKIND_EMBLEM, // Roy (Emblem) //
+    CKIND_PICHU, // Pichu //
+    CKIND_GANON, // Ganondorf (Ganon) //
+    CKIND_MASTERH, // Master Hand (MasterH) //
+    CKIND_BOY, // Male Wireframe (Boy) //
+    CKIND_GIRL, // Female Wireframe (Girl) //
+    CKIND_GKOOPS, // Giga Bowser (GKoops) //
+    CKIND_CREZYH, // Crazy Hand (CrezyH) //
+    CHKIND_SANDBAG, // Sandbag //
+    CHKIND_POPO, // Popo //
+    CHKIND_NONE // None //
+
 } CharacterKind;
+
+// Action State Change flags
+
+#define FASTFALL_PRESERVE 0x1
+#define GFX_PRESERVE 0x2
+#define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
+#define HAMMER_UNK_PRESERVE 0x8
+#define MODELCHANGE_IGNORE 0x10
+#define UNK_0x20 0x20
+#define UNK_0x40 0x40
+#define MATANIM_HURT_IGNORE 0x80 // Ignore switching to character's "hurt" textures //
+#define HIT_REFRESH 0x100 // e.g. Allows hitting one opponent multiple times with the same hitbox //
+#define SFX_PRESERVE 0x200
+#define PARASOL_IGNORE 0x400 // ??? //
+#define RUMBLE_IGNORE 0x800 // Ignore rumble update? //
+#define UNK_0x1000 0x1000
+#define HALO_PRESERVE 0x2000 // Keep respawn platform? //
+#define COMMAND_RUN_ALL 0x4000 // Run all Subaction Events up to the current animation frame //
+#define UNK_0x8000 0x8000
+#define FTPART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
+#define UNK_0x20000 0x20000
+#define ITEM_VISIBILITY_IGNORE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
+#define SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x1 of 0x2222? //
+#define UNK_0x100000 0x100000
+#define UNK_0x200000 0x200000
+#define UNK_0x400000 0x400000
+#define METALB_TEXTURE_IGNORE 0x800000
+#define UNK_0x1000000 0x1000000
+#define UNK_0x2000000 0x2000000
+#define UNK_0x4000000 0x4000000
+#define PRESERVE_UNK_0x2227 0x8000000
+#define HITSTUN_BOOL_PRESERVE 0x10000000
+#define ANIM_PRESERVE 0x20000000 // Keeps current fighter animation, e.g. Link/Young Link Up-B ground -> air transition. //
+#define UNK_0x40000000 0x40000000
+#define UNK_0x80000000 0x80000000
 
 typedef enum ftCommonAction
 {
@@ -444,7 +483,7 @@ struct RGBA {
     u8 a;
 };
 
-// Points to data in PiCo.dat
+// Points to data in PlCo.dat
 typedef struct _ftCommonData {
     /* 0x0 */ f32 x0;
     /* 0x4 */ f32 x4;

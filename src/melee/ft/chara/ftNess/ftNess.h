@@ -5,11 +5,11 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
-#include "melee/lb/lbvector.h"
+#include <melee/lb/lbvector.h>
 
-#include "math.h"
+#include <math.h>
 
 #include <melee/ft/fighter.h>
 
@@ -57,6 +57,24 @@ typedef enum ftNessAction
 
 } ftNessAction;
 
+// Flags used by Ness in Action State Change //
+
+// SpecialN/SpecialAirN (PK Flash) //
+#define NESS_SPECIALN_COLL_FLAG MATANIM_HURT_IGNORE | UNK_0x1000 | COMMAND_RUN_ALL | ITEM_VISIBILITY_IGNORE | SKIP_UNK_0x2222 | UNK_0x400000 | UNK_0x4000000 | PRESERVE_UNK_0x2227
+
+// SpecialHi/SpecialAirHi (PK Thunder) //
+#define NESS_SPECIALHI_COLL_FLAG MATANIM_HURT_IGNORE | UNK_0x1000 | COMMAND_RUN_ALL | ITEM_VISIBILITY_IGNORE | SKIP_UNK_0x2222 | UNK_0x400000 | UNK_0x4000000 | PRESERVE_UNK_0x2227
+
+// SpecialHi Jibaku (PK Thunder 2 Self-Hit) //
+#define NESS_JIBAKU_COLL_FLAG GFX_PRESERVE | HAMMER_UNK_PRESERVE | MATANIM_HURT_IGNORE | UNK_0x1000 | COMMAND_RUN_ALL | ITEM_VISIBILITY_IGNORE | SKIP_UNK_0x2222 | UNK_0x400000 | UNK_0x4000000 | PRESERVE_UNK_0x2227
+
+// SpecialLw (PSI Magnet) //
+#define NESS_SPECIALLW_COLL_FLAG GFX_PRESERVE | MATANIM_HURT_IGNORE | UNK_0x1000 | COMMAND_RUN_ALL | ITEM_VISIBILITY_IGNORE | SKIP_UNK_0x2222 | UNK_0x400000 | UNK_0x4000000 | PRESERVE_UNK_0x2227
+
+#define NESS_SPECIALLW_END_FLAG MATANIM_HURT_IGNORE | UNK_0x1000 | COMMAND_RUN_ALL | ITEM_VISIBILITY_IGNORE | SKIP_UNK_0x2222 | UNK_0x400000 | UNK_0x4000000 | PRESERVE_UNK_0x2227
+
+// Special Attributes //
+
 typedef struct ftNessAttributes
 {
 	// Neutral Special - PK Flash
@@ -69,9 +87,9 @@ typedef struct ftNessAttributes
 	f32 x18_PKFLASH_UNK2;
 	f32 x1C_PKFLASH_LANDING_LAG; // If set to 0, Ness does not enter freefall after aerial PK Flash, but loses his double jump.
 	// Side Special - PK Fire
-	f32 x20_PKFIRE_AERIAL_LAUNCH_TRAJECTORY;//Radians
+	f32 x20_PKFIRE_AERIAL_LAUNCH_TRAJECTORY; // Radians
 	f32 x24_PKFIRE_AERIAL_VELOCITY;
-	f32 x28_PKFIRE_GROUNDED_LAUNCH_TRAJECTORY;
+	f32 x28_PKFIRE_GROUNDED_LAUNCH_TRAJECTORY; // Radians
 	f32 x2C_PKFIRE_GROUNDED_VELOCITY;
 	f32 x30_PKFIRE_SPAWN_X;
 	f32 x34_PKFIRE_SPAWN_Y;
@@ -90,17 +108,17 @@ typedef struct ftNessAttributes
 	f32 x60_PK_THUNDER_2_KNOCKDOWN_ANGLE; // Angle to determine whether to enter PK Thunder 2 or DownBound state (Ground Only)
 	f32 x64_PK_THUNDER_2_WALLHUG_ANGLE; // Surface angle to determine whether PK Thunder 2 wallhugs or bounces
 	f32 x68_PK_THUNDER_2_UNK2;
-	f32 x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND;
-	f32 x70_PK_THUNDER_2_LANDING_LAG;
+	f32 x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND; // Amount of animation blend frames Ness goes through when entering FallSpecial through his SpecialHi Action States
+	f32 x70_PK_THUNDER_2_LANDING_LAG; // If set to 0, Ness does not enter freefall after aerial PK Thunder, but loses his double jump.
 	// Down Special - PSI Magnet
 	f32 x74_PSI_MAGNET_RELEASE_LAG; // Auto lag frames after initializing PSI Magnet if B is not being held. PSI Magnet is immediately released with no lag once these frames have passed.
-	f32 x78_PSI_MAGNET_UNK1; // Note: Reminiscent of Fox and Falco's Reflector turn duration attribute?
-	f32 x7C_PSI_MAGNET_UNK2; // Note: Reminiscent of Fox and Falco's Reflector Unk1 attribute?
-	f32 x80_PSI_MAGNET_UNK3;
+	f32 x78_PSI_MAGNET_UNK1; // Note: Reminiscent of Fox and Falco's Reflector turn duration attribute? Unused.
+	f32 x7C_PSI_MAGNET_UNK2; // Note: Reminiscent of Fox and Falco's Reflector Unk1 attribute? Unused.
+	f32 x80_PSI_MAGNET_UNK3; // Unused.
 	s32 x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
 	f32 x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
 	f32 x8C_PSI_MAGNET_FALL_ACCEL;
-	f32 x90_PSI_MAGNET_UNK4;
+	f32 x90_PSI_MAGNET_UNK4; // Unused.
 	f32 x94_PSI_MAGNET_HEAL_MUL; // Multiplies projectile damage by this value and heals result // 
 	AbsorbDesc x98_PSI_MAGNET_ABSORPTION;
 	// Up/Down Smash - Yo-Yo

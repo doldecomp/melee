@@ -174,7 +174,7 @@ void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Fla
         fighter_data2 = getFighterPlus(fighter_gobj);
         if (fighter_data2->sa.ness.x2240_flashGObj == NULL) 
         {
-            func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, 0, &sp28);
+            func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL, &sp28);
             sp28.z = 0.0f;
             sp28.y += 3.0f * fighter_data2->x34_scale.y;
             flash_GObj = func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush, fighter_data2->x2C_facing_direction);
@@ -288,7 +288,7 @@ void ftNess_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
         fighter_data2 = getFighterPlus(fighter_gobj);
         if (fighter_data2->sa.ness.x2240_flashGObj == NULL)
         {
-            func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, 0, &sp28);
+            func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL, &sp28);
             sp28.z = 0.0f;
             sp28.y += 3.0f * fighter_data2->x34_scale.y;
             flash_GObj = func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush, fighter_data2->x2C_facing_direction);
@@ -583,7 +583,7 @@ void ftNess_SpecialNStart_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Fla
     if (func_80082708(fighter_gobj) == FALSE) 
     {
         func_8007D5D4(fighter_data);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_START, 0x0C4C5080, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_START, NESS_SPECIALN_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -596,7 +596,7 @@ void ftNess_SpecialNHold_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flas
     if (func_80082708(fighter_gobj) == FALSE)
     {
         func_8007D5D4(fighter_data);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_HOLD, 0x0C4C5080, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_HOLD, NESS_SPECIALN_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -609,7 +609,7 @@ void ftNess_SpecialNEnd_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash
     if (func_80082708(fighter_gobj) == FALSE)
     {
         func_8007D5D4(fighter_data);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_END, 0x0C4C5080, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_END, NESS_SPECIALN_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -622,7 +622,7 @@ void ftNess_SpecialAirNStart_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
     if (func_80081D0C(fighter_gobj) != FALSE)
     {
         func_8007D7FC(fighter_data);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_START, 0x0C4C5080, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_START, NESS_SPECIALN_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -635,7 +635,7 @@ void ftNess_SpecialAirNHold_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Fla
     if (func_80081D0C(fighter_gobj) != FALSE)
     {
         func_8007D7FC(fighter_data);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_HOLD, 0x0C4C5080, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_HOLD, NESS_SPECIALN_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -648,6 +648,6 @@ void ftNess_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Flas
     if (func_80081D0C(fighter_gobj) != FALSE)
     {
         func_8007D7FC(fighter_data);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_END, 0x0C4C5080, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_END, NESS_SPECIALN_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }

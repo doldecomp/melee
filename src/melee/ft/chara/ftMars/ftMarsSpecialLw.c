@@ -176,7 +176,7 @@ void lbl_80138E68(HSD_GObj* gobj) {
 
     ft->x2340_stateVar1; // required for some reason
 
-    if (sv1 > 0 && func_800872A4(gobj) == FTKIND_ROY) {
+    if (sv1 > 0 && func_800872A4(gobj) == FTKIND_EMBLEM) {
         // register swap:
         // for (ndx = 0; ndx < 4; ndx++) {
         //     if (ft->x914[ndx].x0 == 1) {
@@ -213,7 +213,7 @@ void lbl_80138F14(HSD_GObj* gobj) {
 
     ft->x2340_stateVar1; // required for some reason
 
-    if (sv1 > 0 && func_800872A4(gobj) == FTKIND_ROY) {
+    if (sv1 > 0 && func_800872A4(gobj) == FTKIND_EMBLEM) {
         // register swap:
         // for (ndx = 0; ndx < 4; ndx++) {
         //     if (ft->x914[ndx].x0 == 1) {

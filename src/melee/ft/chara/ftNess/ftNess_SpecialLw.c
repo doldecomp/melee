@@ -183,7 +183,7 @@ void ftNess_SpecialLwStart_GroundToAir(HSD_GObj* fighter_gobj) // Ness's ground-
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_START, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_START, NESS_SPECIALLW_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 extern void func_8007D468(Fighter*);
@@ -196,7 +196,7 @@ void ftNess_SpecialAirLwStart_AirToGround(HSD_GObj* fighter_gobj) // Ness's air-
 
     fighter_data = fighter_gobj->user_data;
     func_8007D7FC(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_START, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_START, NESS_SPECIALLW_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fighter_data);
 }
 
@@ -364,7 +364,7 @@ void ftNess_SpecialLwHold_GroundToAir(HSD_GObj* fighter_gobj) // Ness's ground->
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HOLD, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HOLD, NESS_SPECIALLW_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
     ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -380,7 +380,7 @@ void ftNess_SpecialAirLwHold_AirToGround(HSD_GObj* fighter_gobj) // Ness's air->
 
     fighter_data = fighter_gobj->user_data;
     func_8007D7FC(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HOLD, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HOLD, NESS_SPECIALLW_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fighter_data);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
@@ -395,7 +395,7 @@ void ftNess_SpecialLwHold_Action(HSD_GObj* fighter_gobj) // Ness's grounded PSI 
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HOLD, GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
     ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -409,7 +409,7 @@ void ftNess_SpecialAirLwHold_Action(HSD_GObj* fighter_gobj) // Ness's aerial PSI
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HOLD, GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
     ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -560,7 +560,7 @@ void ftNess_SpecialLwTurn_GroundToAir(HSD_GObj* fighter_gobj) // Ness's ground->
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_TURN, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_TURN, NESS_SPECIALLW_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 0x8011AAA8 //
@@ -571,7 +571,7 @@ void ftNess_SpecialAirLwTurn_AirToGround(HSD_GObj* fighter_gobj) // Ness's air->
 
     fighter_data = fighter_gobj->user_data;
     func_8007D7FC(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_TURN, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_TURN, NESS_SPECIALLW_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fighter_data);
 }
 
@@ -598,14 +598,14 @@ BOOL ftNess_SpecialLwHold_GroundOrAir(HSD_GObj* arg0) // Decide grounded or aeri
     }
     if ((s32)temp_r3->xE0_ground_or_air == GROUND)
     {
-        Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD, GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
         attrs = temp_r3->x2D4_specialAttributes;
         ftColl_CreateAbsorbHit(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
     }
     else
     {
-        Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALAIRLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALAIRLW_HOLD, GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
         attrs = temp_r3->x2D4_specialAttributes;
         ftColl_CreateAbsorbHit(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
@@ -671,7 +671,7 @@ void ftNess_SpecialLwHit_Anim(HSD_GObj* arg0) // Ness's grounded PSI Magnet Abso
         {
             if ((s32)temp_r3_2->xE0_ground_or_air == GROUND)
             {
-                Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
+                Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD, GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
 
                 temp_e1 = arg0->user_data;
                 attr = temp_e1->x2D4_specialAttributes;
@@ -679,7 +679,7 @@ void ftNess_SpecialLwHit_Anim(HSD_GObj* arg0) // Ness's grounded PSI Magnet Abso
             }
             else
             {
-                Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALAIRLW_HOLD, 2, NULL, 0.0f, 1.0f, 0.0f);
+                Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALAIRLW_HOLD, GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
                 temp_e2 = arg0->user_data;
                 attr = temp_e2->x2D4_specialAttributes;
                 ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
@@ -819,7 +819,7 @@ void ftNess_SpecialLwHit_GroundToAir(HSD_GObj* fighter_gobj) // Ness's ground->a
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HIT, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HIT, NESS_SPECIALLW_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
     ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -835,7 +835,7 @@ void ftNess_SpecialAirLwHit_AirToGround(HSD_GObj* fighter_gobj) // Ness's air->g
 
     fighter_data = fighter_gobj->user_data;
     func_8007D7FC(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HIT, 0x0C4C5082, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HIT, NESS_SPECIALLW_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fighter_data);
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
@@ -982,7 +982,7 @@ void ftNess_SpecialLwEnd_GroundToAir(HSD_GObj* fighter_gobj) // Ness's ground->a
 
     fighter_data = fighter_gobj->user_data;
     func_8007D5D4(fighter_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_END, 0x0C4C5080, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_END, NESS_SPECIALLW_END_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 0x8011B444 //
@@ -993,7 +993,7 @@ void ftNess_SpecialAirLwEnd_AirToGround(HSD_GObj* fighter_gobj) // Ness's air->g
 
     temp_r31 = fighter_gobj->user_data;
     func_8007D7FC(temp_r31);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_END, 0x0C4C5080, NULL, temp_r31->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_END, NESS_SPECIALLW_END_FLAG, NULL, temp_r31->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(temp_r31);
 }
 

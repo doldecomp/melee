@@ -40,7 +40,7 @@ void func_801367B8(HSD_GObj* gobj) {
 void lbl_80136844(HSD_GObj* gobj) {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80136E74(gobj);
-        if (((Fighter*)gobj->user_data)->x4_fighterKind == FTKIND_MARTH) {
+        if (((Fighter*)gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
             func_800BFFD0(gobj->user_data, 0x63, 0);
         } else {
             func_800BFFD0(gobj->user_data, 0x64, 0);
@@ -53,7 +53,7 @@ void lbl_80136844(HSD_GObj* gobj) {
 void lbl_801368AC(HSD_GObj* gobj) {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80136EAC(gobj);
-        if (((Fighter*)gobj->user_data)->x4_fighterKind == FTKIND_MARTH) {
+        if (((Fighter*)gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
             func_800BFFD0(gobj->user_data, 0x63, 0);
         } else {
             func_800BFFD0(gobj->user_data, 0x64, 0);
