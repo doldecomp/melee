@@ -5662,7 +5662,7 @@ void func_8026ABD8(struct _HSD_GObj*, Vec*, f32);
 // ? func_8026B1A4(?);
 // ? func_8026B1D4(?);
 // ? func_8026B294(?);
-s32 func_8026B2B4(struct _HSD_GObj*);
+BOOL func_8026B2B4(struct _HSD_GObj*);
 // ? func_8026B2D8(?);
 s32 itGetKind(struct _HSD_GObj*); // itGetKind
 s32 func_8026B30C(struct _HSD_GObj*);

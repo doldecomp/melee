@@ -33,8 +33,9 @@ typedef struct _HSD_ObjAllocData {
     struct _HSD_ObjAllocData* next;
 } HSD_ObjAllocData;
 
-struct UnkR13ItemLoop {
-    u8 x0_filler[0x24];
+struct r13_EntityPointers {
+    u8 x0_filler[0x20];
+    HSD_GObj* x20_fighterGObj;
     HSD_GObj* x24_itemGObj;
 };
 

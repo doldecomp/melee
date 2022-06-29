@@ -22,6 +22,27 @@
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
 
+// Item State Change Flags //
+
+// Apparently there's no 0x1 flag //
+#define ITEM_ANIM_UPDATE 0x2 // Updates item model with target Item State's AnimJoint, MatAnimJoint and extra HSD archive node if available //
+#define ITEM_DROP_UPDATE 0x4 // Copies 0xC44 to 0xC40 if toggled ON //
+#define ITEM_MODEL_UPDATE 0x8 // Runs some JObj function //
+#define ITEM_HIT_PRESERVE 0x10 // Keep current hitboxes //
+#define ITEM_SFX_PRESERVE 0x20 // Keep current SFX //
+#define ITEM_COLANIM_PRESERVE 0x40 // Keep current Color Overlay //
+#define ITEM_UNK_UPDATE 0x80 // ??? //
+#define ITEM_CMD_UPDATE 0x100 // Run item's Subaction Events up to its current animation frame //
+
+// Item Unk Kinds //
+
+// These are used in 0x8026C258 to determine whether Samus' Homing Missile should lock on its target.
+#define ITEM_UNK_MATO 4 // Item type: Target (Mato)
+#define ITEM_UNK_LOCKON 5
+#define ITEM_UNK_ENEMY 6 // Item type: Stage Enemy (Goomba, Koopa Troopa, etc.)
+
+
+
 struct ItemStateTable
 {
     s32 x0_state_id;
@@ -136,7 +157,7 @@ typedef struct {
 typedef struct ItemAttr
 {
     u8 x0_is_heavy : 1;          // 0x0, bit 0x80, is heavy item (crate)
-    u8 x0_78 : 4;             // unk
+    u8 x0_78 : 4;                // unk, might be lock-on behavior? (Samus Missile)
     u8 x0_hold_kind : 3;         // defines hand hold behavior
     u8 x1_1 : 2;     // 0x1 0xB0
     u8 x1_3 : 1;     // 0x1 0x20
@@ -487,7 +508,7 @@ typedef struct _Item
     s32 xD7C_destroySFX; // SFX that plays when this item is destroyed
     s32 xD80;
     s32 xD84;
-    s32 xD88_attackKind; // ???
+    s32 xD88_attackID; // ???
     s16 xD8C_attackInstance;
     s16 xD8E;
     s32 xD90;
@@ -693,8 +714,8 @@ void func_8026B0B4(HSD_GObj* item_gobj);                           // Stop All I
 s32 func_8026B1A4(HSD_GObj* item_gobj);                            // Check if item is grabbable //
 f32 func_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk);      // Apply Item Damage -  may not be itHit* ??? //
 void func_8026B294(HSD_GObj* item_gobj, Vec3* pos);                // Copy Item position vector //
-s32 func_8026B2B4(HSD_GObj* item_gobj);                            // Check if item is heavy //
-s32 func_8026B2D8(HSD_GObj* item_gobj);                            // Check if item is heavy again? //
+BOOL func_8026B2B4(HSD_GObj* item_gobj);                            // Check if item is heavy //
+BOOL func_8026B2D8(HSD_GObj* item_gobj);                            // Check if item is heavy again? //
 s32 itGetKind(HSD_GObj* item_gobj);                                // Get Item ID //
 s32 func_8026B30C(HSD_GObj* item_gobj);                            // Return flag from Item Attributes //
 s32 func_8026B320(HSD_GObj* item_gobj);                            // Return item hold kind //
@@ -745,7 +766,7 @@ void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos);                // Adjust ite
 void func_8026BC14(HSD_GObj* item_gobj);                           // Check if item owner is a fighter + decrement hitlag //
 s32 func_8026BC68(HSD_GObj* item_gobj);                            // Return bit 0 of 0xDD0 //
 HSD_GObj* func_8026BC78(HSD_GObj* item_gobj);                      // Get item owner //
-s32 func_8026BC84(HSD_GObj* item_gobj);                            // Get item attack kind //
+BOOL func_8026BC84(HSD_GObj* item_gobj);                            // Get item attack kind //
 void func_8026BC90(HSD_GObj* item_gobj, Vec3* pos);                // Unknown item ECB / position update //
 void func_8026BCF4(HSD_GObj* item_gobj);                           // Toggle bit 2 of 0xDCD OFF //
 void func_8026BD0C(HSD_GObj* item_gobj);                           // Toggle bit 2 of 0xDCD ON //
@@ -774,6 +795,7 @@ f32 func_8026B424(s32 damage);                                /* extern */
 u8 func_8026B7B0(HSD_GObj* item_gobj);                         // Get Team ID //
 void func_8026BDCC(HSD_GObj* item_gobj);                         /* extern */
 void func_8026C368(HSD_GObj* item_gobj);                         /* extern */
+void func_8026D324(s32);
 s32 func_8026D604(HSD_GObj* item_gobj);
 void func_8026F9A0();
 void func_802701BC(HSD_GObj* item_gobj);

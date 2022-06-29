@@ -98,38 +98,38 @@ typedef enum CharacterKind
 
 // Action State Change flags
 
-#define FASTFALL_PRESERVE 0x1
-#define GFX_PRESERVE 0x2
+#define FIGHTER_FASTFALL_PRESERVE 0x1
+#define FIGHTER_GFX_PRESERVE 0x2
 #define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
-#define HAMMER_UNK_PRESERVE 0x8
-#define MODELCHANGE_IGNORE 0x10
-#define UNK_0x20 0x20
-#define UNK_0x40 0x40
-#define MATANIM_HURT_IGNORE 0x80 // Ignore switching to character's "hurt" textures //
-#define HIT_REFRESH 0x100 // e.g. Allows hitting one opponent multiple times with the same hitbox //
-#define SFX_PRESERVE 0x200
-#define PARASOL_IGNORE 0x400 // ??? //
-#define RUMBLE_IGNORE 0x800 // Ignore rumble update? //
-#define UNK_0x1000 0x1000
-#define HALO_PRESERVE 0x2000 // Keep respawn platform? //
-#define COMMAND_RUN_ALL 0x4000 // Run all Subaction Events up to the current animation frame //
-#define UNK_0x8000 0x8000
-#define FTPART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
-#define UNK_0x20000 0x20000
-#define ITEM_VISIBILITY_IGNORE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
-#define SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x1 of 0x2222? //
-#define UNK_0x100000 0x100000
-#define UNK_0x200000 0x200000
-#define UNK_0x400000 0x400000
-#define METALB_TEXTURE_IGNORE 0x800000
-#define UNK_0x1000000 0x1000000
-#define UNK_0x2000000 0x2000000
-#define UNK_0x4000000 0x4000000
-#define PRESERVE_UNK_0x2227 0x8000000
-#define HITSTUN_BOOL_PRESERVE 0x10000000
-#define ANIM_PRESERVE 0x20000000 // Keeps current fighter animation, e.g. Link/Young Link Up-B ground -> air transition. //
-#define UNK_0x40000000 0x40000000
-#define UNK_0x80000000 0x80000000
+#define FIGHTER_UNK_HAMMER 0x8
+#define FIGHTER_NOCHANGEMODEL 0x10 // Ignore model state change (?) 
+#define FIGHTER_UNK_0x20 0x20
+#define FIGHTER_UNK_0x40 0x40
+#define FIGHTER_MATANIM_NOUPDATE 0x80 // Ignore switching to character's "hurt" textures (?) //
+#define FIGHTER_HIT_REFRESH 0x100 // e.g. Allows hitting one opponent multiple times with the same hitbox //
+#define FIGHTER_SFX_PRESERVE 0x200
+#define FIGHTER_PARASOL_UNK 0x400 // ??? //
+#define FIGHTER_RUMBLE_UNK 0x800 // Ignore rumble update? //
+#define FIGHTER_UNK_0x1000 0x1000
+#define FIGHTER_HALO_PRESERVE 0x2000 // Keep respawn platform? //
+#define FIGHTER_CMD_UPDATE 0x4000 // Run all Subaction Events up to the current animation frame //
+#define FIGHTER_UNK_0x8000 0x8000
+#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
+#define FIGHTER_UNK_0x20000 0x20000
+#define FIGHTER_ITEMVIS_NOUPDATE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
+#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x1 of 0x2222? //
+#define FIGHTER_UNK_0x100000 0x100000
+#define FIGHTER_UNK_0x200000 0x200000
+#define FIGHTER_UNK_0x400000 0x400000
+#define FIGHTER_METALB_NOUPDATE 0x800000
+#define FIGHTER_UNK_0x1000000 0x1000000
+#define FIGHTER_UNK_0x2000000 0x2000000
+#define FIGHTER_UNK_0x4000000 0x4000000
+#define FIGHTER_UNK_0x2227 0x8000000
+#define FIGHTER_HITSTUN_BOOL_PRESERVE 0x10000000
+#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fighter animation, e.g. Link/Young Link Up-B ground -> air transition. //
+#define FIGHTER_UNK_0x40000000 0x40000000
+#define FIGHTER_UNK_0x80000000 0x80000000
 
 typedef enum ftCommonAction
 {
@@ -500,7 +500,10 @@ typedef struct _ftCommonData {
     u8 filler_x9C[0xEC-0x9C];
     /* 0xEC */ f32 xEC;
     /* 0xF0 */ f32 xF0;
-    u8 filler_xF4[0x134-0xF4];
+    u8 filler_xF4[0x128-0xF4];
+    /* 0x128 */ f32 x128;
+    /* 0x12C */ f32 x12C;
+    /* 0x130 */ f32 x130;
     /* 0x134 */ s32 x134;
     /* 0x138 */ f32 x138;
     /* 0x13C */ f32 x13C;
@@ -550,9 +553,14 @@ typedef struct _ftCommonData {
     /* 0x480 */ f32 x480;
     u8 filler_x484[0x498-0x484];
     /* 0x498 */ u32 x498_ledgeCooldownTime;
-    u8 filler_x49C[0x4CC-0x49C];
-    /* 0x4CC */ s32 x4CC;
-    u8 filler_x4D0[0x5C0-0x4D0];
+    u8 filler_x49C[0x4C4-0x49C];
+    s32 x4C4;
+    s32 x4C8;
+    s32 x4CC;
+    f32 x4D0;
+    f32 x4D4;
+    u32 x4D8;
+    u8 filler_x4D0[0x5C0-0x4DC];
     /* 0x5F0 */ f32 x5C0;
     u8 filler_x5C4[0x5F0-0x5C4];
     /* 0x5F0 */  u32 x5F0;
@@ -568,7 +576,8 @@ typedef struct _ftCommonData {
     /* 0x708 */ f32 x708;
     /* 0x70C */ f32 x70C;
     /* 0x710 */ f32 x710;
-    u8 filler_x714[0x768-0x714];
+    /* 0x714 */ f32 x714;
+    u8 filler_x718[0x768-0x718];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
@@ -590,7 +599,6 @@ typedef struct _ftCommonData {
     /* 0x7D4 */ s32 x7D4;
     /* 0x7D8 */ s32 x7D8;
     /* 0x7DC */ s32 x7DC;
-
     /* 0x7E0 */ s32 x7E0;
     /* 0x7E4 */ f32 x7E4_scaleZ;
     u8 x7E8_filler[0x814 - 0x7E8];
@@ -1488,7 +1496,8 @@ typedef struct _Fighter {
     /* 0x2040 */ void* x2040;
     u8 filler_x203C[0x2064 - 0x2044];
     /* 0x2064 */ s32 x2064_ledgeCooldown;
-    u8 filler_x2068[0x2070 - 0x2068];
+    /* 0x2068 */s32 x2068_attackID;
+    u8 filler_x206C[0x2070 - 0x206C];
     /* 0x2070 */ union {
                     struct {
                         s8 x2070;
@@ -1511,9 +1520,9 @@ typedef struct _Fighter {
                 };
     u8 filler_x2074[0x208C - 0x2074];
     /* 0x208C */ s32 x208C;
-    /* 0x2090 */ s16 x2090;
-    /* 0x2092 */ s16 x2092;
-    /* 0x2094 */ s32 x2094;
+    /* 0x2090 */ u16 x2090;
+    /* 0x2092 */ u16 x2092;
+    /* 0x2094 */ HSD_GObj* x2094; // GObj pointer of combo victim? //
     /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;

@@ -1,6 +1,8 @@
 #include "item.h"
 #include <common_structs.h>
 
+#define FLOAT32_MAX 3.4028234663852886e+38f
+
 static inline float _sqrtfItem(float x)
 {
     f64 _half = 0.5;
@@ -49,26 +51,26 @@ void func_8026B294(HSD_GObj* item_gobj, Vec3* pos) // Copy Item position vector 
 
 // 0x8026B2B4 //
 // https://decomp.me/scratch/jaDrt //
-s32 func_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy //
+BOOL func_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy //
 {
     Item* temp_item = item_gobj->user_data;
     if (temp_item->xCC_item_attr->x0_is_heavy != 0)
     {
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 // 0x8026B2D8 //
 // https://decomp.me/scratch/cGHw4 //
-s32 func_8026B2D8(HSD_GObj* item_gobj) // Check if item is heavy again? //
+BOOL func_8026B2D8(HSD_GObj* item_gobj) // Check if item is heavy again? //
 {
     Item* temp_item = item_gobj->user_data;
     if (temp_item->xCC_item_attr->x0_is_heavy == 1)
     {
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 // 0x8026B300 //
@@ -151,7 +153,7 @@ void func_8026B3A8(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word O
     temp_item->xDC8_word.flags.x15 = 0;
 }
 
-extern struct UnkR13ItemLoop* lbl_804D782C;
+extern struct r13_EntityPointers* lbl_804D782C;
 
 // 0x8026B3C0 //
 // https://decomp.me/scratch/umbPP //
@@ -181,7 +183,7 @@ extern struct r13_ItemTable* lbl_804D6D38;
 // https://decomp.me/scratch/lHHnR //
 void func_8026B3F8(Article* article, s32 itemID) // Store Item article pointer to table //
 {
-    lbl_804D6D38->x0_article[itemID - 0x2C] = article;
+    lbl_804D6D38->x0_article[itemID - It_Kind_Leadead] = article; // This feels very wrong //
 }
 
 extern UnkItemArticles3 lbl_804A0F60[];
@@ -190,7 +192,7 @@ extern UnkItemArticles3 lbl_804A0F60[];
 // https://decomp.me/scratch/QbeU5 //
 void func_8026B40C(Article* article, s32 itemID) // Store Stage Item article pointer to table //
 {
-    *lbl_804A0F60[itemID - 0xD0].unkptr = article;
+    *lbl_804A0F60[itemID - It_Kind_Old_Kuri].unkptr = article;
 }
 
 // 0x8026B424 //
@@ -213,15 +215,15 @@ s32 func_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items //
     itemID = temp_item->x10_item_kind;
     switch (itemID)
     {
-    case 0x8:
+    case It_Kind_Heart:
         return temp_item->xDD4_itemVar.HeartContainer.xDD4_heal;
-    case 0x9:
+    case It_Kind_Tomato:
         return temp_item->xDD4_itemVar.MaximTomato.xDD4_heal;
-    case 0x12:
+    case It_Kind_Foods:
         return temp_item->xDD4_itemVar.Food.xDD8_heal;
-    case 0xCD:
+    case Pokemon_Lucky_Egg:
         return temp_item->xDD4_itemVar.Egg.xE34_heal;
-    case 0xE2:
+    case It_Kind_WhispyHealApple:
         return temp_item->xDD4_itemVar.WhispyApple.xDD4_heal;
     default:
         return 0;
@@ -239,12 +241,12 @@ BOOL func_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item //
     itemID = temp_item->x10_item_kind;
     switch (itemID)
     {
-    case 0x8:           // Heart Container //
-    case 0x9:           // Maxim Tomato //
-    case 0x12:          // Food //
-    case 0x9F:          // Coin ??? //
-    case 0xCD:          // Healing Egg //
-    case 0xE2:          // Healing Whispy Apple //
+    case It_Kind_Heart:                     // Heart Container //
+    case It_Kind_Tomato:                    // Maxim Tomato //
+    case It_Kind_Foods:                     // Food //
+    case It_Kind_Coin:                      // Coin ??? //
+    case Pokemon_Lucky_Egg:                 // Chansey's Healing Egg //
+    case It_Kind_WhispyHealApple:           // Healing Whispy Apple //
         return TRUE;
     default:
         return FALSE;
@@ -297,18 +299,18 @@ BOOL func_8026B594(HSD_GObj* item_gobj) // Check if item can fire projectiles //
     itemID = item_data->x10_item_kind;
     switch (itemID)
     {
-        case 16:
-        case 21:
-        case 22:
-        case 23:
-        case 25:
+        case It_Kind_L_Gun:
+        case It_Kind_S_Scope:
+        case It_Kind_StarRod:
+        case It_Kind_LipStick:
+        case It_Kind_F_Flower:
             if ((s32)item_data->xD4C <= 0)
             {
                 return TRUE;
             }
 
         default:
-        case 24:
+        case It_Kind_Harisen: // Why though //
             return FALSE;
     }
 }
@@ -372,10 +374,10 @@ BOOL func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item? //
 
     item_data = item_gobj->user_data;
     itemID = item_data->x10_item_kind;
-    if (((itemID >= 0x2B) && (itemID < 0x2F)) || ((itemID_2 = item_data->x10_item_kind, ((itemID_2 < 0xD0) == 0)) && (itemID_2 < 0xEA)))
+    if (((itemID >= It_Kind_Kuriboh) && (itemID < It_Kind_Octarock_Stone)) || ((itemID_2 = item_data->x10_item_kind, ((itemID_2 < It_Kind_Old_Kuri) == FALSE)) && (itemID_2 < It_Kind_Arwing_Laser)))
     {
         itemID_3 = item_data->x10_item_kind;
-        if ((itemID_3 != 0xEC) && (itemID_3 != 0xE1))
+        if ((itemID_3 != It_Kind_Kyasarin_Egg) && (itemID_3 != It_Kind_WhispyApple))
         {
             return TRUE;
         }
@@ -529,7 +531,7 @@ BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj) // Remove all
 
     if (temp_item->x518_ownerGObj == referenced_gobj)
     {
-        temp_item->x518_ownerGObj = 0U;
+        temp_item->x518_ownerGObj = NULL;
         ret = 1;
     }
     if (temp_item->itdmg.xC64_reflectGObj == referenced_gobj)
@@ -570,17 +572,17 @@ BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj) // Remove all
    // ret = -1;
    // switch (itemID)
    // {
-   // case 0x11:
-   // case 0x12:
-   // case 0x13:
-   // case 0x14:
-   // case 0x17:
-   // case 0x18:
+   // case It_Kind_Freeze:
+   // case It_Kind_Foods:
+   // case It_Kind_MSBomb:
+   // case It_Kind_Flipper:
+   // case It_Kind_LipStick:
+   // case It_Kind_Harisen:
    //     break;
-   // case 0x15:
-   // case 0x16:
-   // case 0x10:
-   // case 0x19:
+   // case It_Kind_S_Scope:
+   // case It_Kind_StarRod:
+   // case It_Kind_L_Gun:
+   // case It_Kind_F_Flower:
    //     ret = item_data->xD4C;
    // }
    // return ret;
@@ -621,13 +623,13 @@ s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compiler v
 //    itemID = item_data->x10_item_kind;
 //    switch (itemID)
 //    {
-//    case 0x6:
+//    case It_Kind_BombHei:
 //        if ((s32)item_data->x24_item_state_index != 0xB)
 //        {
 //            unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
 //        }
 //        break;
-//   case 0x3A:
+//   case It_Kind_Link_Bomb:
 //        if ((s32)item_data->x24_item_state_index != 5)
 //        {
 //           unk_timer = item_data->xD44_lifeTimer;
@@ -812,7 +814,7 @@ void func_8026BC14(HSD_GObj* item_gobj) // Check if item owner is a fighter + de
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    if ((item_data->x518_ownerGObj != NULL) && (func_80086960(item_data->x518_ownerGObj) != 0))
+    if ((item_data->x518_ownerGObj != NULL) && (func_80086960(item_data->x518_ownerGObj) != FALSE))
     {
         func_80086A4C(item_data->x518_ownerGObj, item_data->itdmg.xCBC_hitlagFrames - 1.0f);
     }
@@ -836,10 +838,10 @@ HSD_GObj* func_8026BC78(HSD_GObj* item_gobj) // Get item owner //
 
 // 0x8026BC84 //
 // https://decomp.me/scratch/s3W5l //
-s32 func_8026BC84(HSD_GObj* item_gobj) // Get item attack kind //
+BOOL func_8026BC84(HSD_GObj* item_gobj) // Get item attack kind //
 {
     Item* item_data = item_gobj->user_data;
-    return item_data->xD88_attackKind;
+    return item_data->xD88_attackID;
 }
 
 extern void func_80086644(HSD_GObj*, Vec3*);
@@ -1012,10 +1014,10 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch //
             itemID = item_data->x10_item_kind;
             switch (itemID)
             {
-            case 8:
+            case It_Kind_Heart:
                 func_80283BD4(bobOmbGObj);
                 break;
-            case 9:
+            case It_Kind_Tomato: // Not sure why it's looking for healing items here... //
                 func_8028428C(bobOmbGObj);
                 break;
             }
@@ -1030,12 +1032,12 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch //
             itemID2 = item_data->x10_item_kind;
             switch (itemID2)
             {
-            case 8:
+            case It_Kind_Heart:
                 func_80283BD4(bobOmbGObj);
                 break;
 
-            case 9:
-                func_8028428C(bobOmbGObj);
+            case It_Kind_Tomato: // ...or here //
+                func_8028428C(bobOmbGObj); 
                 break;
             }
         }
@@ -1198,9 +1200,9 @@ void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Get item owne
 
 // 0x8026C258 //
 // https://decomp.me/scratch/D9ivt //
-HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir) // Find the closest item to the given position? //
+HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir) // Find the closest item to the given position? Used by Samus's Homing Missile to lock onto certain items //
 {
-    f32 minMagnitude = 3.4028234663852886e+38f;
+    f32 minMagnitude = FLOAT32_MAX;
     f32 magnitude;
     f32 xDist;
     f32 yDist;
@@ -1215,8 +1217,8 @@ HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir) // Find the closest item to
     while (item_gobj != NULL)
     {
         item_data = item_gobj->user_data;
-        holdKind = item_data->x14_hold_kind;
-        if (((int)holdKind == 4) || (int)(holdKind == 5) || (short)(holdKind == 6) || (int)(holdKind == 7))
+        holdKind = item_data->x14_hold_kind; // Might not actually be (exclusively) hold kind in the end??? //
+        if (((int)holdKind == ITEM_UNK_MATO) || (int)(holdKind == 5) || (short)(holdKind == ITEM_UNK_ENEMY) || (int)(holdKind == 7)) // Decide lock-on type for Samus Missile?
         {
             if (item_data->xD00_grabGObj == NULL)
             {
@@ -1270,20 +1272,20 @@ void func_8026C368(HSD_GObj* item_gobj) // Run bomb item explosion callbacks //
         itemID = item_data->x10_item_kind;
         switch (itemID)
         {
-        case 0x6:
+        case It_Kind_BombHei: // Bob-Omb //
             func_8027D730(item_gobj);
             return;
-
-        case 0x13:
+            
+        case It_Kind_MSBomb: // Motion-Sensor Bomb //
             func_8028FE90(item_gobj);
             return;
 
-        case 0x3A:
-        case 0x3B:
+        case It_Kind_Link_Bomb:
+        case It_Kind_CLink_Bomb:
             func_8029D968(item_gobj);
             return;
 
-        case 0xB1:
+        case Pokemon_Marumine: // Electrode //
             func_802D09D0(item_gobj);
             return;
 
