@@ -100,8 +100,6 @@ $(BUILD_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
 $(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o: CC_EPI := $(CC)
 $(BUILD_DIR)/src/sysdolphin/baselib/wobj.c.o: CC_EPI := $(CC)
 
-$(BUILD_DIR)/src/melee/ft/fighter.c.o: CFLAGS += -inline auto,level=8
-
 HOSTCFLAGS := -Wall -O3 -s
 
 #-------------------------------------------------------------------------------
