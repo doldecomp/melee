@@ -163,6 +163,28 @@ inline void Fighter_InitScale(Fighter *ft, Vec *scale, f32 modelScale) {
     scale->z = modelScale;
 }
 
+// WORKAROUND
+// bleeeehhhh. HSD_JObjSetScale does not have a correct inline depth due to
+// inline auto preferring 3 levels of depth. TODO: Determine if the Setup MTX
+// inline is fake, and correct the inline to adjust if so.
+inline void HSD_JObjSetScale_Hack(HSD_JObj* jobj, Vec* scale)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 760, "jobj")) ;
+    ((scale) ? ((void) 0) : __assert("jobj.h", 761, "scale")) ;
+    jobj->scale = *scale;
+    if (!(jobj->flags & 0x2000000)) {
+#if 0
+        // this is what it should call
+        HSD_JObjSetMtxDirty(jobj);
+#else
+        // this is the code manually inlined...
+        if (jobj != ((void*)0) && !HSD_JObjMtxIsDirty(jobj)) {
+            HSD_JObjSetMtxDirtySub(jobj);
+        }
+#endif
+    }
+}
+
 void Fighter_UpdateModelScale(HSD_GObj* fighterObj)
 {
     Fighter* fighter = getFighter(fighterObj);
@@ -171,7 +193,7 @@ void Fighter_UpdateModelScale(HSD_GObj* fighterObj)
     Vec scale;
 
     Fighter_InitScale(fighter, &scale, modelScale_f1);
-    HSD_JObjSetScale(jobj, &scale);
+    HSD_JObjSetScale_Hack(jobj, &scale);
 }
 
 void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
@@ -2663,37 +2685,38 @@ void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighterObj) {
     }
 }
 
-void Fighter_8006D10C(HSD_GObj* fighterObj) {
-    s32 unused[2];
-    HSD_GObj* otherObj;
-    HSD_GObj* otherObj2;
+static void Fighter_8006D10C_Inline2(Fighter* new_fighter) {
+    HSD_GObj* gobj = new_fighter->x1A5C;
+    if (gobj && !new_fighter->x2219_flag.bits.b7) {
+        Fighter_8006CFE0(gobj);
+    }
+}
 
-    Fighter* fighter = fighterObj->user_data;
+static void Fighter_8006D10C_Inline1(HSD_GObj* otherObj) {
+    Fighter* new_fighter = otherObj->user_data;
+    if (new_fighter->x2219_flag.bits.b7) {
+        if (!new_fighter->x221A_flag.bits.b2 && !new_fighter->dmg.x1954) {
+            if (new_fighter->cb.x21D8_callback_ExitHitlag) {
+                new_fighter->cb.x21D8_callback_ExitHitlag(otherObj);
+            }
+            new_fighter->x2219_flag.bits.b5 = 0;
+            Fighter_8006D10C_Inline2(new_fighter);        
+        }
+        new_fighter->x2219_flag.bits.b7 = 0;
+    }
+}
+
+void Fighter_8006D10C(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
 
     if (fighter->cb.x21D8_callback_ExitHitlag) {
         fighter->cb.x21D8_callback_ExitHitlag(fighterObj);
     }
 
     fighter->x2219_flag.bits.b5 = 0;
-    otherObj2 = otherObj = fighter->x1A5C;
 
-    if (otherObj2 && !fighter->x2219_flag.bits.b7) {
-        Fighter* new_fighter = otherObj->user_data;
-        if (new_fighter->x2219_flag.bits.b7) {
-
-            if (!new_fighter->x221A_flag.bits.b2 && !new_fighter->dmg.x1954) {
-                if (new_fighter->cb.x21D8_callback_ExitHitlag) {
-                    new_fighter->cb.x21D8_callback_ExitHitlag(otherObj);
-                }
-                new_fighter->x2219_flag.bits.b5 = 0;
-                if (new_fighter->x1A5C && !new_fighter->x2219_flag.bits.b7) {
-                    Fighter_8006CFE0(new_fighter->x1A5C);
-                }
-                    
-            }
-            
-            new_fighter->x2219_flag.bits.b7 = 0;
-        }
+    if (fighter->x1A5C && !fighter->x2219_flag.bits.b7) {
+        Fighter_8006D10C_Inline1(fighter->x1A5C);
     }
 }
 
