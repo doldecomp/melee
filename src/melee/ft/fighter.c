@@ -78,6 +78,42 @@ ftCommonData* p_ftCommonData;
 // ==== fighter.c functions ====
 // =============================
 
+// TEMP HACKS TO DEAL WITH --------------------
+inline HSD_JObj* HSD_JObjGetMtx(HSD_JObj* jobj, Mtx *mtx)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 1144, "jobj")) ;
+    HSD_JObjUnkMtxPtr(jobj);
+    func_80379310(&jobj->mtx, mtx);
+    return jobj;
+}
+
+inline HSD_JObj *getHSDJObj(HSD_GObj* hsd_gobj) {
+    HSD_JObj *hsd_jobj = hsd_gobj->hsd_obj;
+    return (void *)hsd_jobj;
+}
+
+// WORKAROUND
+// bleeeehhhh. HSD_JObjSetScale does not have a correct inline depth due to
+// inline auto preferring 3 levels of depth. TODO: Determine if the Setup MTX
+// inline is fake, and correct the inline to adjust if so.
+inline void HSD_JObjSetScale_Hack(HSD_JObj* jobj, Vec* scale)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 760, "jobj")) ;
+    ((scale) ? ((void) 0) : __assert("jobj.h", 761, "scale")) ;
+    jobj->scale = *scale;
+    if (!(jobj->flags & 0x2000000)) {
+#if 0
+        // this is what it should call
+        HSD_JObjSetMtxDirty(jobj);
+#else
+        // this is the code manually inlined...
+        if (jobj != ((void*)0) && !HSD_JObjMtxIsDirty(jobj)) {
+            HSD_JObjSetMtxDirtySub(jobj);
+        }
+#endif
+    }
+}
+// ---------------------------------------------
 
 void Fighter_800679B0()
 { 
@@ -148,11 +184,6 @@ void Fighter_LoadCommonData()
 	lbl_804D64FC = pData[22];
 } 
 
-inline HSD_JObj *getHSDJObj(HSD_GObj* hsd_gobj) {
-    HSD_JObj *hsd_jobj = hsd_gobj->hsd_obj;
-    return (void *)hsd_jobj;
-}
-
 inline void Fighter_InitScale(Fighter *ft, Vec *scale, f32 modelScale) {
     if (ft->x34_scale.z != 1.0f)
         scale->x = ft->x34_scale.z;
@@ -161,28 +192,6 @@ inline void Fighter_InitScale(Fighter *ft, Vec *scale, f32 modelScale) {
     
     scale->y = modelScale;
     scale->z = modelScale;
-}
-
-// WORKAROUND
-// bleeeehhhh. HSD_JObjSetScale does not have a correct inline depth due to
-// inline auto preferring 3 levels of depth. TODO: Determine if the Setup MTX
-// inline is fake, and correct the inline to adjust if so.
-inline void HSD_JObjSetScale_Hack(HSD_JObj* jobj, Vec* scale)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 760, "jobj")) ;
-    ((scale) ? ((void) 0) : __assert("jobj.h", 761, "scale")) ;
-    jobj->scale = *scale;
-    if (!(jobj->flags & 0x2000000)) {
-#if 0
-        // this is what it should call
-        HSD_JObjSetMtxDirty(jobj);
-#else
-        // this is the code manually inlined...
-        if (jobj != ((void*)0) && !HSD_JObjMtxIsDirty(jobj)) {
-            HSD_JObjSetMtxDirtySub(jobj);
-        }
-#endif
-    }
 }
 
 void Fighter_UpdateModelScale(HSD_GObj* fighterObj)
@@ -2354,14 +2363,6 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
 		OSReport("fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n", fighter->xB0_pos.x, fighter->xB0_pos.y);
         __assert(__FILE__ , /*line*/2517, "0");
     }
-}
-
-inline HSD_JObj* HSD_JObjGetMtx(HSD_JObj* jobj, Mtx *mtx)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 1144, "jobj")) ;
-    HSD_JObjUnkMtxPtr(jobj);
-    func_80379310(&jobj->mtx, mtx);
-    return jobj;
 }
 
 void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj) 
