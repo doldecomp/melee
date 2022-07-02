@@ -79,14 +79,6 @@ ftCommonData* p_ftCommonData;
 // =============================
 
 // TEMP HACKS TO DEAL WITH --------------------
-inline HSD_JObj* HSD_JObjGetMtx(HSD_JObj* jobj, Mtx *mtx)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 1144, "jobj")) ;
-    HSD_JObjUnkMtxPtr(jobj);
-    func_80379310(&jobj->mtx, mtx);
-    return jobj;
-}
-
 inline HSD_JObj *getHSDJObj(HSD_GObj* hsd_gobj) {
     HSD_JObj *hsd_jobj = hsd_gobj->hsd_obj;
     return (void *)hsd_jobj;
@@ -2365,6 +2357,12 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
     }
 }
 
+inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj, Mtx *mtx)
+{
+    func_80379310(&jobj->mtx, mtx);
+    return jobj;
+}
+
 void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj) 
 {
     Fighter* fighter = fighterObj->user_data;
@@ -2378,7 +2376,8 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj)
         Quaternion rotation;
 
         HSD_JObjSetupMatrix(jobj);
-        HSD_JObjGetScale(HSD_JObjGetMtx(jobj, &mtx1), &scale);
+        HSD_JObjGetMtx(jobj);
+        HSD_JObjGetScale(Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, &mtx1), &scale);
 
         scale.x = Fighter_GetModelScale(fighter);
 
