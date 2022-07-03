@@ -72,7 +72,7 @@ void func_8013C4F0(HSD_GObj* fighterObj, s32 arg1, s32 arg2) {
         Mtx *mtx;
         HSD_JObj *jobj;
         HSD_JObj* bone_jobj = fighter->x5E8_fighterBones[6].x0_jobj;
-        HSD_JObjUnkMtx_assert(fighter->x5E8_fighterBones[6].x0_jobj);
+        HSD_JObjGetMtx(fighter->x5E8_fighterBones[6].x0_jobj);
         mtx = (0, &bone_jobj->mtx);
         jobj = fighter->sa.purin.x223C;
         HSD_JObjCopyMtx(fighter->sa.purin.x223C, mtx);
