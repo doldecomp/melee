@@ -1508,30 +1508,4 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
         *attr = backup;                                                      \
     } while(0)
 
-
-#define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                             \
-    void FTNAME##_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {                 \
-        Fighter *fighter = getFighter(fighterObj);                                \
-        if (!func_8026B2B4(fighter->x1974_heldItem)) {                            \
-            switch (func_8026B320(fighter->x1974_heldItem)) {                     \
-                case 1:                                                           \
-                    func_80070FB4(fighterObj, param1, 1);                         \
-                    break;                                                        \
-                case 2:                                                           \
-                    func_80070FB4(fighterObj, param1, 0);                         \
-                    break;                                                        \
-                case 3:                                                           \
-                    func_80070FB4(fighterObj, param1, 2);                         \
-                    break;                                                        \
-                case 4:                                                           \
-                    func_80070FB4(fighterObj, param1, 3);                         \
-                    break;                                                        \
-            }                                                                     \
-            if (bool) {                                                           \
-                func_80070C48(fighterObj, param2);                                \
-            }                                                                     \
-        }                                                                         \
-    }                                                                             \
-
-
 #endif

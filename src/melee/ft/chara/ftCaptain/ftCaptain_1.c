@@ -20,7 +20,35 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj) {
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx
-MACRO_ft_OnItemPickup(ftCFalcon, 1, 1);
+void ftCFalcon_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
+{
+    s32 result, switched_res, unused;
+
+    Fighter* ft = gobj->user_data;
+    result = func_8026B2B4(ft->x1974_heldItem);
+
+    if (result == 0) {
+        switched_res = func_8026B320(ft->x1974_heldItem);
+        switch (switched_res) {
+            case 1:
+                func_80070FB4(gobj, 1, 1);
+                break;
+            case 2:
+                func_80070FB4(gobj, 1, 0);
+                break;
+            case 3:
+                func_80070FB4(gobj, 1, 2);
+                break;
+            case 4:
+                func_80070FB4(gobj, 1, 3);
+                break;
+        }
+
+        if (arg1 != 0) {
+            func_80070C48(gobj, 1);
+        }
+    }
+}
 
 // func_800E29C8
 // OnMakeItemInvisible
