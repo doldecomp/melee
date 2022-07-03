@@ -48,7 +48,7 @@ void ftPichu_OnDeath(HSD_GObj* gobj)
     }
 }
 
-void func_80149FE4(HSD_GObj* gobj, s32 arg1)
+void ftPichu_OnItemPickup(HSD_GObj* gobj, s32 arg1)
 {
     s32 result, switched_result, unused;
     Fighter* ft = gobj->user_data;

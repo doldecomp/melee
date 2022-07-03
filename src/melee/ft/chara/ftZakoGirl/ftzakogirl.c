@@ -11,7 +11,7 @@ void ftZakoGirl_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(ft, s32);
 }
 
-void func_8014F460(HSD_GObj* gobj, s32 arg1)
+void ftZakoGirl_OnItemPickup(HSD_GObj* gobj, s32 arg1)
 {
     s32 result, switched_res, unused;
 

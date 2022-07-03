@@ -34,7 +34,7 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     ft->x222A_flag.bits.b0 = 1;
 }
 
-void func_8014F720(HSD_GObj* gobj, s32 arg1)
+void ftGKoopa_OnItemPickup(HSD_GObj* gobj, s32 arg1)
 {
     s32 switched_res, result, unused;
 

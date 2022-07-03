@@ -13,8 +13,8 @@ func_801393AC:
 /* 801393C4 00135FA4  7C 08 03 A6 */	mtlr r0
 /* 801393C8 00135FA8  4E 80 00 20 */	blr 
 
-.global func_801393CC
-func_801393CC:
+.global ftZelda_OnItemPickup
+ftZelda_OnItemPickup:
 /* 801393CC 00135FAC  7C 08 02 A6 */	mflr r0
 /* 801393D0 00135FB0  90 01 00 04 */	stw r0, 4(r1)
 /* 801393D4 00135FB4  94 21 FF D8 */	stwu r1, -0x28(r1)

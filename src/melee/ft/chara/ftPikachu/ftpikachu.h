@@ -75,7 +75,7 @@ typedef struct _ftPikachuAttributes {
 void ftPikachu_OnLoadForPichu(Fighter* fighter);
 void ftPikachu_OnLoad(HSD_GObj* fighterObj);
 void ftPikachu_OnDeath(HSD_GObj* fighterObj);
-void ftPikachu_UnkHeldItemAction_801244B8(HSD_GObj* fighterObj, s32 arg1);
+void ftPikachu_OnItemPickup(HSD_GObj* fighterObj, BOOL arg1);
 void ftPikachu_80124598(HSD_GObj *fighterObj);
 void ftPikachu_UnkHeldItem_801245E0(HSD_GObj *fighterObj);
 void ftPikachu_80124628(HSD_GObj* fighterObj, s32 arg1);

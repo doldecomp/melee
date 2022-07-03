@@ -60,7 +60,7 @@ void func_800EAF58(HSD_GObj* fighterObj) {
     func_80149268(fighterObj);
 }
 
-void func_800EAFA4(HSD_GObj* fighterObj, int arg1) {
+void ftLink_OnItemPickup(HSD_GObj* fighterObj, int arg1) {
     Fighter* link = getFighter(fighterObj);
     if (func_8026B2B4(link->x1974_heldItem) == 1) {
         func_80074A4C(fighterObj, 1, 1);

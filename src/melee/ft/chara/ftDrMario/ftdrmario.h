@@ -21,7 +21,7 @@ typedef struct _ftDrMarioAttributes {
 void ftDrMario_OnDeath(HSD_GObj*);
 void ftDrMario_OnLoad(HSD_GObj*);
 void func_80149540(HSD_GObj*);
-void func_80149560(HSD_GObj*, s32);
+void ftDrMario_OnItemPickup(HSD_GObj*, s32);
 void func_80149640(HSD_GObj*);
 void func_80149688(HSD_GObj*);
 void func_801496D0(HSD_GObj*, s32);

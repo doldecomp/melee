@@ -12,7 +12,7 @@ void ftMars_OnDeath(HSD_GObj* gobj) {
 // 801362B0 00132E90
 // ftMars_OnItemPickup
 // https://decomp.me/scratch/cdTAI
-void func_801362B0(HSD_GObj* gobj, s32 arg1) {
+void ftMars_OnItemPickup(HSD_GObj* gobj, s32 arg1) {
     Fighter* ft = gobj->user_data;
     s32 unused, unused2; // need to gobble some stack
 

@@ -20,7 +20,7 @@ void func_800E5588(HSD_GObj* gobj)
     func_800E5EBC(gobj);
 }
 
-void func_800E55A8(HSD_GObj* gobj, s32 arg1)
+void ftFox_OnItemPickup(HSD_GObj* gobj, s32 arg1)
 {
     s32 switched_res, result, unused;
 

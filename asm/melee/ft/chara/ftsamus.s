@@ -20,8 +20,8 @@ func_80128428:
 /* 8012845C 0012503C  7C 08 03 A6 */	mtlr r0
 /* 80128460 00125040  4E 80 00 20 */	blr 
 
-.global func_80128464
-func_80128464:
+.global ftSamus_OnItemPickup
+ftSamus_OnItemPickup:
 /* 80128464 00125044  7C 08 02 A6 */	mflr r0
 /* 80128468 00125048  90 01 00 04 */	stw r0, 4(r1)
 /* 8012846C 0012504C  94 21 FF D8 */	stwu r1, -0x28(r1)

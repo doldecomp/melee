@@ -26,33 +26,7 @@ void ftPikachu_OnDeath(HSD_GObj* fighterObj) {
     func_80074A4C(fighterObj, 1, 0);
 }
 
-void ftPikachu_UnkHeldItemAction_801244B8(HSD_GObj* fighterObj, s32 arg1) {
-    s32 unused;
-    Fighter *fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-
-        switch (func_8026B320(fighter->x1974_heldItem)) {
- 
-            case 1:
-                func_80070FB4(fighterObj, 0, 1);
-                break;
-            case 2:
-                func_80070FB4(fighterObj, 0, 0);
-                break;
-            case 3:
-                func_80070FB4(fighterObj, 0, 2);
-                break;
-            case 4:
-                func_80070FB4(fighterObj, 0, 3);
-                break;
-                
-        }
-        
-        if (arg1) {
-            func_80070C48(fighterObj, 0);
-        }
-    }
-}
+MACRO_OnItemPickup(ftPikachu, 0);
 
 void ftPikachu_80124598(HSD_GObj *fighterObj) {
     Fighter* fighter = fighterObj->user_data;

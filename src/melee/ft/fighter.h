@@ -577,7 +577,7 @@ struct SpecialAttrs_DK {
 };
 
 struct SpecialAttrs_Kirby {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ s32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ UnkFlagStruct x2234;
     /* 0x2235 */ u8 filler_x2235[3];
@@ -589,6 +589,16 @@ struct SpecialAttrs_Kirby {
     /* 0x224C */ u8 filler1[0x228C - 0x224C];
     /* 0x228C */ u32 x228C;
     /* 0x2290 */ u32 x2290;
+    /* 0x2294 */ u8 filler2[0x22C8 - 0x2294];
+    /* 0x22C8 */ s32 x22C8;
+    /* 0x22CC */ s32 x22CC;
+    /* 0x22D0 */ s32 x22D0;
+    /* 0x22D4 */ s32 x22D4;
+    /* 0x22D8 */ s32 x22D8;
+    /* 0x22DC */ s32 x22DC;
+    /* 0x22E0 */ s32 x22E0;
+    /* 0x22E4 */ s32 x22E4;
+    /* 0x22E8 */ s32 x22E8;
 };
 
 struct SpecialAttrs_Koopa {
@@ -1497,5 +1507,31 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
         *(attributeName *)(ft)->x2D8_specialAttributes2 = *src;            \
         *attr = backup;                                                      \
     } while(0)
+
+
+#define MACRO_OnItemPickup(FTNAME, param)                                         \
+    void FTNAME##_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {                    \
+        Fighter *fighter = getFighter(fighterObj);                                \
+        if (!func_8026B2B4(fighter->x1974_heldItem)) {                            \
+            switch (func_8026B320(fighter->x1974_heldItem)) {                     \
+                case 1:                                                           \
+                    func_80070FB4(fighterObj, param, 1);                          \
+                    break;                                                        \
+                case 2:                                                           \
+                    func_80070FB4(fighterObj, param, 0);                          \
+                    break;                                                        \
+                case 3:                                                           \
+                    func_80070FB4(fighterObj, param, 2);                          \
+                    break;                                                        \
+                case 4:                                                           \
+                    func_80070FB4(fighterObj, param, 3);                          \
+                    break;                                                        \
+            }                                                                     \
+            if (bool) {                                                           \
+                func_80070C48(fighterObj, param);                                 \
+            }                                                                     \
+        }                                                                         \
+    }                                                                             \
+
 
 #endif

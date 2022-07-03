@@ -9,7 +9,7 @@ void ftFalco_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 }
 
-void func_80149B00(HSD_GObj* gobj, s32 arg1)
+void ftFalco_OnItemPickup(HSD_GObj* gobj, s32 arg1)
 {
     s32 result, switched_result, unused;
 

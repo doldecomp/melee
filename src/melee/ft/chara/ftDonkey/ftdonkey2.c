@@ -11,29 +11,7 @@ void func_8010D774(HSD_GObj* fighterObj) {
     func_80110074(fighterObj);
 }
 
-void func_8010D7A8(HSD_GObj* fighterObj, s32 arg1) {
-    s32 unused[2];
-    Fighter* fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-        switch (func_8026B320(fighter->x1974_heldItem)) { 
-        case 1:
-            func_80070FB4(fighterObj, 1, 1);
-            break;
-        case 2:
-            func_80070FB4(fighterObj, 1, 0);
-            break;
-        case 3:
-            func_80070FB4(fighterObj, 1, 2);
-            break;
-        case 4:
-            func_80070FB4(fighterObj, 1, 3);
-            break;
-        }
-        if (arg1 != 0) {
-            func_80070C48(fighterObj, 1);
-        }
-    }
-}
+MACRO_OnItemPickup(ftDonkey, 1);
 
 void func_8010D888(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

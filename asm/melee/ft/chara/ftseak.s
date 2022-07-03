@@ -36,8 +36,8 @@ lbl_801101F4:
 /* 801101FC 0010CDDC  7C 08 03 A6 */	mtlr r0
 /* 80110200 0010CDE0  4E 80 00 20 */	blr 
 
-.global func_80110204
-func_80110204:
+.global ftSeak_OnItemPickup
+ftSeak_OnItemPickup:
 /* 80110204 0010CDE4  7C 08 02 A6 */	mflr r0
 /* 80110208 0010CDE8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011020C 0010CDEC  94 21 FF D8 */	stwu r1, -0x28(r1)

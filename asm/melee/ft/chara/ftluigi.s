@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80142388
-func_80142388:
+.global ftLuigi_OnItemPickup
+ftLuigi_OnItemPickup:
 /* 80142388 0013EF68  7C 08 02 A6 */	mflr r0
 /* 8014238C 0013EF6C  90 01 00 04 */	stw r0, 4(r1)
 /* 80142390 0013EF70  94 21 FF D8 */	stwu r1, -0x28(r1)

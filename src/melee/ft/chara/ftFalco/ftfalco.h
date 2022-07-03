@@ -5,7 +5,7 @@
 #include <melee/ft/fighter.h>
 
 void ftFalco_OnDeath(HSD_GObj*);
-void func_80149B00(HSD_GObj*, s32);
+void ftFalco_OnItemPickup(HSD_GObj*, s32);
 void func_80149BE0(HSD_GObj*);
 void func_80149C28(HSD_GObj*);
 void func_80149C70(HSD_GObj*, s32);

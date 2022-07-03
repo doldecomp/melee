@@ -19,8 +19,8 @@ lbl_8011B704:
 /* 8011B738 00118318  7C 08 03 A6 */	mtlr r0
 /* 8011B73C 0011831C  4E 80 00 20 */	blr 
 
-.global func_8011B740
-func_8011B740:
+.global ftPeach_OnItemPickup
+ftPeach_OnItemPickup:
 /* 8011B740 00118320  7C 08 02 A6 */	mflr r0
 /* 8011B744 00118324  90 01 00 04 */	stw r0, 4(r1)
 /* 8011B748 00118328  94 21 FF D8 */	stwu r1, -0x28(r1)

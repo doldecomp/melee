@@ -57,7 +57,7 @@ void func_80132B38(void) {
     return;
 }
 
-void func_80132B3C(HSD_GObj* gobj, s32 arg1) {
+void ftKoopa_OnItemPickup(HSD_GObj* gobj, s32 arg1) {
     s32 switched_res, result, unused;
 
     Fighter* ft = gobj->user_data;

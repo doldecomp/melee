@@ -68,8 +68,8 @@ lbl_8014A5A4:
 /* 8014A5B0 00147190  7C 08 03 A6 */	mtlr r0
 /* 8014A5B4 00147194  4E 80 00 20 */	blr 
 
-.global func_8014A5B8
-func_8014A5B8:
+.global ftGameWatch_OnItemPickup
+ftGameWatch_OnItemPickup:
 /* 8014A5B8 00147198  7C 08 02 A6 */	mflr r0
 /* 8014A5BC 0014719C  90 01 00 04 */	stw r0, 4(r1)
 /* 8014A5C0 001471A0  94 21 FF D8 */	stwu r1, -0x28(r1)

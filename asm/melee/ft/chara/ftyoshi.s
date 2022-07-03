@@ -23,8 +23,8 @@ func_8012BAC0:
 /* 8012BAC4 001286A4  C0 23 01 20 */	lfs f1, 0x120(r3)
 /* 8012BAC8 001286A8  4E 80 00 20 */	blr 
 
-.global func_8012BACC
-func_8012BACC:
+.global ftYoshi_OnItemPickup
+ftYoshi_OnItemPickup:
 /* 8012BACC 001286AC  7C 08 02 A6 */	mflr r0
 /* 8012BAD0 001286B0  90 01 00 04 */	stw r0, 4(r1)
 /* 8012BAD4 001286B4  94 21 FF D8 */	stwu r1, -0x28(r1)

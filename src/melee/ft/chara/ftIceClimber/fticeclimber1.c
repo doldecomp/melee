@@ -4,7 +4,7 @@
 extern f32 lbl_804D9830;
 
 
-void func_8011ED38(HSD_GObj* fighterObj, s32 arg1) {
+void ftIcelimber_OnItemPickup(HSD_GObj* fighterObj, s32 arg1) {
     s32 unused;
     Fighter *fighter = fighterObj->user_data;
     if (!func_8026B2B4(fighter->x1974_heldItem)) {

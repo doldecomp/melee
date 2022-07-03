@@ -14,7 +14,7 @@ typedef struct _ftPichuAttributes {
 
 void ftPichu_OnLoad(HSD_GObj*);
 void ftPichu_OnDeath(HSD_GObj*);
-void func_80149FE4(HSD_GObj*, s32);
+void ftPichu_OnItemPickup(HSD_GObj*, s32);
 void func_8014A0C4(HSD_GObj*);
 void func_8014A10C(HSD_GObj*);
 void func_8014A154(HSD_GObj*, s32);

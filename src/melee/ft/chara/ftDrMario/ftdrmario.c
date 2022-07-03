@@ -30,7 +30,7 @@ void func_80149540(HSD_GObj* gobj)
     func_801497CC(gobj);
 }
 
-void func_80149560(HSD_GObj* gobj, s32 arg1)
+void ftDrMario_OnItemPickup(HSD_GObj* gobj, s32 arg1)
 {
     s32 result, switched_res, unused;
 

@@ -9,7 +9,7 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     ft->sa.captain.x222C = 0;
 }
 
-void func_8014EC58(HSD_GObj* gobj, s32 arg1)
+void ftGanon_OnItemPickup(HSD_GObj* gobj, s32 arg1)
 {
     s32 result, switched_res, unused;
 
