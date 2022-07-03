@@ -16,3 +16,9 @@ void ftZelda_OnLoad(HSD_GObj* fighterObj) {
     func_8026B3F8(item_list[0], 0x6CU);
     func_8026B3F8(item_list[1], 0x6DU);
 }
+
+void ftZelda_801393AC(HSD_GObj* fighterObj) {
+    func_8013B5EC(fighterObj);
+}
+
+MACRO_ft_OnItemPickup(ftZelda, 1, 1);

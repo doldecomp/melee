@@ -37,7 +37,7 @@ typedef struct _MarsAttributes {
 } MarsAttributes;
 
 void ftMars_OnDeath(HSD_GObj* gobj);
-void ftMars_OnItemPickup(HSD_GObj* gobj, s32 arg1);
+void ftMars_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
 void func_80136390(HSD_GObj* gobj);
 void func_801363D8(HSD_GObj* gobj);
 void func_80136420(HSD_GObj* gobj, s32 arg1);

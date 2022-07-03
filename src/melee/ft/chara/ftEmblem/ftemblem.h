@@ -5,7 +5,7 @@
 #include <melee/ft/fighter.h>
 
 void ftRoy_OnDeath(HSD_GObj*);
-void ftRoy_OnItemPickup(HSD_GObj*, s32);
+void ftRoy_OnItemPickup(HSD_GObj*, BOOL);
 void func_8014F040(HSD_GObj*);
 void func_8014F088(HSD_GObj*);
 void func_8014F0D0(HSD_GObj*, s32);

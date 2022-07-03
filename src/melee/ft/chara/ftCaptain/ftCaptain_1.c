@@ -20,28 +20,7 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj) {
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx
-MACRO_OnItemPickup(ftCFalcon, 1);
-// void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, s32 unk_var)
-// {
-//     Fighter* fighter_data = fighter_gobj->user_data;
-//     s32 unused, unused2;//Only figured this out looking at Marth's
-
-//     if (func_8026B2B4(fighter_data->x1974_heldItem) == 0)
-//     {
-//         switch(func_8026B320(fighter_data->x1974_heldItem))
-//         {
-//             case 1: func_80070FB4(fighter_gobj, 1, 1); break;
-//             case 2: func_80070FB4(fighter_gobj, 1, 0); break;
-//             case 3: func_80070FB4(fighter_gobj, 1, 2); break;
-//             case 4: func_80070FB4(fighter_gobj, 1, 3); break;
-//         }
-
-//         if(unk_var != 0)
-//         {
-//             func_80070C48(fighter_gobj, 1);
-//         }
-//     }
-// }
+MACRO_ft_OnItemPickup(ftCFalcon, 1, 1);
 
 // func_800E29C8
 // OnMakeItemInvisible

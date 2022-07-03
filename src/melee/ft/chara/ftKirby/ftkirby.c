@@ -114,6 +114,7 @@ void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
     fighter->cb.x21E0_callback_OnDeath = 0;
 }
 
+//// Matching, but needs more data moved over for DOL match
 // void func_800EE818(HSD_GObj* fighterObj) {
 //     s32 unused[2];
 //     Fighter* fighter = getFighter(fighterObj);
@@ -142,3 +143,4 @@ void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
 //             break;
 //     }
 // }
+

@@ -43,7 +43,7 @@ void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg) {
         } else {
             if (attr_r26->xC != HSD_AObjGetEndFrame(aobj_r24)) {
                 OSReport("yoshi matanim frame not same\n");
-                __assert("ftyoshi.c", 0x61, "0");
+                __assert(__FILE__, 0x61, "0");
             }
         }
 
@@ -142,3 +142,15 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     fighter->x2226_flag.bits.b1 = 1;
   
 }
+
+void ftYoshi_8012BA8C(HSD_GObj* fighterObj) {
+    func_8012E270(fighterObj);
+    func_8012DF18(fighterObj);
+}
+
+f32 ftYoshi_8012BAC0(Fighter* fighter) {
+    ftYoshiAttributes *attr = fighter->x2D4_specialAttributes;
+    return attr->x120;
+}
+
+MACRO_ft_OnItemPickup(ftYoshi, 1, 1);

@@ -65,3 +65,32 @@ void ftGameWatch_OnLoad(HSD_GObj* fighterObj) {
 
 }
 
+void ftGameWatch_8014A4CC(HSD_GObj* fighterObj) {
+    func_8014BF7C(fighterObj);
+    func_8014ACB0(fighterObj);
+    func_8014A938(fighterObj);
+    func_8014B12C(fighterObj);
+    func_8014B320(fighterObj);
+    func_8014B514(fighterObj);
+    func_8014C5CC(fighterObj);
+    func_8014CCD8(fighterObj);
+    func_8014DFFC(fighterObj);
+}
+
+void ftGameWatch_8014A538(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
+    if (fighter->xE0_ground_or_air == GA_Air) {
+        func_8014BF7C(fighterObj);
+        func_8014ACB0(fighterObj);
+        func_8014A938(fighterObj);
+        func_8014B12C(fighterObj);
+        func_8014B320(fighterObj);
+        func_8014B514(fighterObj);
+        func_8014C5CC(fighterObj);
+        func_8014CCD8(fighterObj);
+        func_8014DFFC(fighterObj);
+    }
+}
+
+MACRO_ft_OnItemPickup(ftGameWatch, 1, 1);
+

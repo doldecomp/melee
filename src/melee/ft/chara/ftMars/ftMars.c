@@ -11,32 +11,7 @@ void ftMars_OnDeath(HSD_GObj* gobj) {
 
 // 801362B0 00132E90
 // ftMars_OnItemPickup
-// https://decomp.me/scratch/cdTAI
-void ftMars_OnItemPickup(HSD_GObj* gobj, s32 arg1) {
-    Fighter* ft = gobj->user_data;
-    s32 unused, unused2; // need to gobble some stack
-
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        switch (func_8026B320(ft->x1974_heldItem)) {
-            case 1:
-                func_80070FB4(gobj, 0, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 0, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 0, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 0, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
-}
+MACRO_ft_OnItemPickup(ftMars, 0, 1);
 
 // 80136390 00132F70
 // ftMars_OnItemInvisible

@@ -1459,9 +1459,9 @@ ft_OnItemPickup:
     .4byte ftFox_OnItemPickup
     .4byte ftCFalcon_OnItemPickup
     .4byte ftDonkey_OnItemPickup
-    .4byte ftKirby_OnItemPickup
+    .4byte ftKirby_OnItemPickup  /*macro doesn't work*/
     .4byte ftKoopa_OnItemPickup
-    .4byte ftLink_OnItemPickup
+    .4byte ftLink_OnItemPickup  /*macro doesn't work*/
     .4byte ftSeak_OnItemPickup
     .4byte ftNess_OnItemPickup
     .4byte ftPeach_OnItemPickup
@@ -1470,12 +1470,12 @@ ft_OnItemPickup:
     .4byte ftPikachu_OnItemPickup
     .4byte ftSamus_OnItemPickup
     .4byte ftYoshi_OnItemPickup
-    .4byte ftPurin_OnItemPickup
-    .4byte ftMewtwo_OnItemPickup
+    .4byte ftPurin_OnItemPickup  /*macro doesn't work*/
+    .4byte ftMewtwo_OnItemPickup  /*macro doesn't work - is a stub function*/
     .4byte ftLuigi_OnItemPickup
     .4byte ftMars_OnItemPickup
     .4byte ftZelda_OnItemPickup
-    .4byte ftCLink_OnItemPickup
+    .4byte ftCLink_OnItemPickup  /*macro doesn't work*/
     .4byte ftDrMario_OnItemPickup
     .4byte ftFalco_OnItemPickup
     .4byte ftPichu_OnItemPickup
@@ -1858,7 +1858,7 @@ lbl_803C1E38:
     .4byte func_800EE818
     .4byte NULL
     .4byte NULL
-    .4byte func_801101CC
+    .4byte ftSeak_801101CC
     .4byte NULL
     .4byte NULL
     .4byte NULL

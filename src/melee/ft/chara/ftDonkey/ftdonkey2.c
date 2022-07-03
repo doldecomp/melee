@@ -11,7 +11,7 @@ void func_8010D774(HSD_GObj* fighterObj) {
     func_80110074(fighterObj);
 }
 
-MACRO_OnItemPickup(ftDonkey, 1);
+MACRO_ft_OnItemPickup(ftDonkey, 1, 1);
 
 void func_8010D888(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

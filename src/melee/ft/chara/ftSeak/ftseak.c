@@ -22,3 +22,17 @@ void ftSeak_OnLoad(HSD_GObj* fighterObj) {
     func_8026B3F8(item_list[2], 0x55U);
     func_8026B3F8(item_list[3], 0x61U);
 }
+
+void ftSeak_80110198(HSD_GObj* fighterObj) {
+    func_80111FBC(fighterObj);
+    func_80110E88(fighterObj);
+}
+
+void ftSeak_801101CC(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    if (fighter->sa.seak.x222C == 6) {
+        func_800BFFD0(fighter, 0x56, 0);
+    }
+}
+
+MACRO_ft_OnItemPickup(ftSeak, 1, 1);

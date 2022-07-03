@@ -52,3 +52,11 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[3], It_Kind_PeachToad);
     func_8026B3F8(items[4], It_Kind_PeachToadSpore);
 }
+
+void ftPeach_8011B704(HSD_GObj* fighterObj) {
+    func_8011D598(fighterObj);
+    func_8011E2E8(fighterObj);
+    func_8011CFA0(fighterObj);
+}
+
+MACRO_ft_OnItemPickup(ftPeach, 1, 1);

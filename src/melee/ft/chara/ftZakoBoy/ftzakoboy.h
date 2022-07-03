@@ -10,7 +10,7 @@ typedef struct _ftZakoboyAttributes
 } ftZakoboyAttributes;
 
 void ftZakoBoy_OnDeath(HSD_GObj*);
-void ftZakoBoy_OnItemPickup(HSD_GObj*, s32);
+void ftZakoBoy_OnItemPickup(HSD_GObj*, BOOL);
 void func_8014F2F8(HSD_GObj*);
 void func_8014F340(HSD_GObj*);
 void func_8014F388(HSD_GObj*, s32);

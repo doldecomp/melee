@@ -25,3 +25,11 @@ void ftSamus_OnLoad(HSD_GObj* fighterObj) {
     func_8026B3F8(item_list[2], 0x5FU);
     func_8026B3F8(item_list[3], 0x60U);
 }
+
+void ftSamus_80128428(HSD_GObj* fighterObj) {
+    func_80129258(fighterObj);
+    func_8012A640(fighterObj);
+    func_800D9C98(fighterObj);
+}
+
+MACRO_ft_OnItemPickup(ftSamus, 0, 0);

@@ -48,35 +48,7 @@ f32 func_8011495C(Fighter* ft)
     return ((ftNessAttributes*)ft->x2D4_specialAttributes)->x94_PSI_MAGNET_HEALING_MULTIPLIER;
 }
 
-void ftNess_OnItemPickup(HSD_GObj* gobj, s32 arg1)
-{
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
-}
+MACRO_ft_OnItemPickup(ftNess, 1, 1);
 
 void func_80114A48(HSD_GObj* gobj)
 {
