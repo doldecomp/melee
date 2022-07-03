@@ -200,7 +200,6 @@ void Fighter_UpdateModelScale(HSD_GObj* fighterObj)
 void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	Vec3 player_coords;
 	f32 x,y,z;
-	Fighter* tmp_fighter;
 
 	fighter->x8_spawnNum = Fighter_NewSpawn_80068E40();
 	Player_LoadPlayerCoords(fighter->xC_playerID, &player_coords);
@@ -455,8 +454,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->x2028 = 0;
 	fighter->x202C = 0;
 
-	tmp_fighter = fighter;
-	func_800C88A0(tmp_fighter);
+	func_800C88A0(fighter);
 
 	fighter->x2227_flag.bits.b3 = 0;
 	fighter->x2034 = 0;
