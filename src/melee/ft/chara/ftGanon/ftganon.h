@@ -5,7 +5,7 @@
 #include <melee/ft/fighter.h>
 
 void ftGanon_OnDeath(HSD_GObj*);
-void func_8014EC58(HSD_GObj*, s32);
+void ftGanon_OnItemPickup(HSD_GObj*, BOOL);
 void func_8014ED38(HSD_GObj*);
 void func_8014ED80(HSD_GObj*);
 void func_8014EDC8(HSD_GObj*, s32);

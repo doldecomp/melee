@@ -65,3 +65,60 @@ void ftGameWatch_OnLoad(HSD_GObj* fighterObj) {
 
 }
 
+void ftGameWatch_8014A4CC(HSD_GObj* fighterObj) {
+    func_8014BF7C(fighterObj);
+    func_8014ACB0(fighterObj);
+    func_8014A938(fighterObj);
+    func_8014B12C(fighterObj);
+    func_8014B320(fighterObj);
+    func_8014B514(fighterObj);
+    func_8014C5CC(fighterObj);
+    func_8014CCD8(fighterObj);
+    func_8014DFFC(fighterObj);
+}
+
+void ftGameWatch_8014A538(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
+    if (fighter->xE0_ground_or_air == GA_Air) {
+        func_8014BF7C(fighterObj);
+        func_8014ACB0(fighterObj);
+        func_8014A938(fighterObj);
+        func_8014B12C(fighterObj);
+        func_8014B320(fighterObj);
+        func_8014B514(fighterObj);
+        func_8014C5CC(fighterObj);
+        func_8014CCD8(fighterObj);
+        func_8014DFFC(fighterObj);
+    }
+}
+
+void ftGameWatch_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
+{
+    s32 result, switched_res, unused;
+
+    Fighter* ft = gobj->user_data;
+    result = func_8026B2B4(ft->x1974_heldItem);
+
+    if (result == 0) {
+        switched_res = func_8026B320(ft->x1974_heldItem);
+        switch (switched_res) {
+            case 1:
+                func_80070FB4(gobj, 1, 1);
+                break;
+            case 2:
+                func_80070FB4(gobj, 1, 0);
+                break;
+            case 3:
+                func_80070FB4(gobj, 1, 2);
+                break;
+            case 4:
+                func_80070FB4(gobj, 1, 3);
+                break;
+        }
+
+        if (arg1 != 0) {
+            func_80070C48(gobj, 1);
+        }
+    }
+}
+

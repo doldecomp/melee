@@ -1455,38 +1455,38 @@ ft_OnAbsorb:
 
 .global ft_OnItemPickup
 ft_OnItemPickup:
-    .4byte ftMario_func_800E0A20
-    .4byte func_800E55A8
-    .4byte func_800E28E8
-    .4byte func_8010D7A8
-    .4byte func_800EE914
-    .4byte func_80132B3C
-    .4byte func_800EAFA4
-    .4byte func_80110204
-    .4byte func_80114968
-    .4byte func_8011B740
-    .4byte func_8011ED38
-    .4byte func_8011ED38
-    .4byte ftPikachu_UnkHeldItemAction_801244B8
-    .4byte func_80128464
-    .4byte func_8012BACC
-    .4byte func_8013C6EC
-    .4byte func_80144EE0
-    .4byte func_80142388
-    .4byte func_801362B0
-    .4byte func_801393CC
-    .4byte func_80148DC0
-    .4byte func_80149560
-    .4byte func_80149B00
-    .4byte func_80149FE4
-    .4byte func_8014A5B8
-    .4byte func_8014EC58
-    .4byte func_8014EF60
+    .4byte ftMario_OnItemPickup
+    .4byte ftFox_OnItemPickup
+    .4byte ftCFalcon_OnItemPickup
+    .4byte ftDonkey_OnItemPickup
+    .4byte ftKirby_OnItemPickup  /*macro doesn't work*/
+    .4byte ftKoopa_OnItemPickup
+    .4byte ftLink_OnItemPickup  /*macro doesn't work*/
+    .4byte ftSeak_OnItemPickup
+    .4byte ftNess_OnItemPickup
+    .4byte ftPeach_OnItemPickup
+    .4byte ftIcelimber_OnItemPickup
+    .4byte ftIcelimber_OnItemPickup
+    .4byte ftPikachu_OnItemPickup
+    .4byte ftSamus_OnItemPickup
+    .4byte ftYoshi_OnItemPickup
+    .4byte ftPurin_OnItemPickup  /*macro doesn't work*/
+    .4byte ftMewtwo_OnItemPickup  /*macro doesn't work - is a stub function*/
+    .4byte ftLuigi_OnItemPickup
+    .4byte ftMars_OnItemPickup
+    .4byte ftZelda_OnItemPickup
+    .4byte ftCLink_OnItemPickup  /*macro doesn't work*/
+    .4byte ftDrMario_OnItemPickup
+    .4byte ftFalco_OnItemPickup
+    .4byte ftPichu_OnItemPickup
+    .4byte ftGameWatch_OnItemPickup
+    .4byte ftGanon_OnItemPickup
+    .4byte ftRoy_OnItemPickup
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F218
-    .4byte func_8014F460
-    .4byte func_8014F720
+    .4byte ftZakoBoy_OnItemPickup
+    .4byte ftZakoGirl_OnItemPickup
+    .4byte ftGKoopa_OnItemPickup
     .4byte NULL
 
 .global ft_OnItemInvisible
@@ -1599,38 +1599,38 @@ ft_OnItemRelease:
 
 .global ft_OnItemCatch
 ft_OnItemCatch:
-    .4byte ftMario_func_800E0A20
-    .4byte func_800E55A8
-    .4byte func_800E28E8
-    .4byte func_8010D7A8
-    .4byte func_800EE914
-    .4byte func_80132B3C
+    .4byte ftMario_OnItemPickup
+    .4byte ftFox_OnItemPickup
+    .4byte ftCFalcon_OnItemPickup
+    .4byte ftDonkey_OnItemPickup
+    .4byte ftKirby_OnItemPickup
+    .4byte ftKoopa_OnItemPickup
     .4byte func_800EB11C
-    .4byte func_80110204
-    .4byte func_80114968
-    .4byte func_8011B740
-    .4byte func_8011ED38
-    .4byte func_8011ED38
-    .4byte ftPikachu_UnkHeldItemAction_801244B8
-    .4byte func_80128464
-    .4byte func_8012BACC
-    .4byte func_8013C6EC
-    .4byte func_80144EE0
-    .4byte func_80142388
-    .4byte func_801362B0
-    .4byte func_801393CC
+    .4byte ftSeak_OnItemPickup
+    .4byte ftNess_OnItemPickup
+    .4byte ftPeach_OnItemPickup
+    .4byte ftIcelimber_OnItemPickup
+    .4byte ftIcelimber_OnItemPickup
+    .4byte ftPikachu_OnItemPickup
+    .4byte ftSamus_OnItemPickup
+    .4byte ftYoshi_OnItemPickup
+    .4byte ftPurin_OnItemPickup
+    .4byte ftMewtwo_OnItemPickup
+    .4byte ftLuigi_OnItemPickup
+    .4byte ftMars_OnItemPickup
+    .4byte ftZelda_OnItemPickup
     .4byte func_80148F38
-    .4byte func_80149560
-    .4byte func_80149B00
-    .4byte func_80149FE4
-    .4byte func_8014A5B8
-    .4byte func_8014EC58
-    .4byte func_8014EF60
+    .4byte ftDrMario_OnItemPickup
+    .4byte ftFalco_OnItemPickup
+    .4byte ftPichu_OnItemPickup
+    .4byte ftGameWatch_OnItemPickup
+    .4byte ftGanon_OnItemPickup
+    .4byte ftRoy_OnItemPickup
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F218
-    .4byte func_8014F460
-    .4byte func_8014F720
+    .4byte ftZakoBoy_OnItemPickup
+    .4byte ftZakoGirl_OnItemPickup
+    .4byte ftGKoopa_OnItemPickup
     .4byte NULL
 
 .global lbl_803C1B20
@@ -1858,7 +1858,7 @@ lbl_803C1E38:
     .4byte func_800EE818
     .4byte NULL
     .4byte NULL
-    .4byte func_801101CC
+    .4byte ftSeak_801101CC
     .4byte NULL
     .4byte NULL
     .4byte NULL

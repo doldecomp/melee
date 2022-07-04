@@ -7,7 +7,7 @@
 void ftGKoopa_OnDeath(HSD_GObj*);
 void func_8014F698(HSD_GObj*);
 void ftGKoopa_OnLoad(HSD_GObj*);
-void func_8014F720(HSD_GObj*, s32);
+void ftGKoopa_OnItemPickup(HSD_GObj*, BOOL);
 void func_8014F800(HSD_GObj*);
 void func_8014F848(HSD_GObj*);
 void func_8014F890(HSD_GObj*, s32);

@@ -43,7 +43,7 @@ void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg) {
         } else {
             if (attr_r26->xC != HSD_AObjGetEndFrame(aobj_r24)) {
                 OSReport("yoshi matanim frame not same\n");
-                __assert("ftyoshi.c", 0x61, "0");
+                __assert(__FILE__, 0x61, "0");
             }
         }
 
@@ -141,4 +141,44 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     func_8026B3F8(item_list[2], 0x57U);
     fighter->x2226_flag.bits.b1 = 1;
   
+}
+
+void ftYoshi_8012BA8C(HSD_GObj* fighterObj) {
+    func_8012E270(fighterObj);
+    func_8012DF18(fighterObj);
+}
+
+f32 ftYoshi_8012BAC0(Fighter* fighter) {
+    ftYoshiAttributes *attr = fighter->x2D4_specialAttributes;
+    return attr->x120;
+}
+
+void ftYoshi_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
+{
+    s32 result, switched_res, unused;
+
+    Fighter* ft = gobj->user_data;
+    result = func_8026B2B4(ft->x1974_heldItem);
+
+    if (result == 0) {
+        switched_res = func_8026B320(ft->x1974_heldItem);
+        switch (switched_res) {
+            case 1:
+                func_80070FB4(gobj, 1, 1);
+                break;
+            case 2:
+                func_80070FB4(gobj, 1, 0);
+                break;
+            case 3:
+                func_80070FB4(gobj, 1, 2);
+                break;
+            case 4:
+                func_80070FB4(gobj, 1, 3);
+                break;
+        }
+
+        if (arg1 != 0) {
+            func_80070C48(gobj, 1);
+        }
+    }
 }

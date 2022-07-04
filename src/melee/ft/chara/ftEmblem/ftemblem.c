@@ -9,7 +9,7 @@ void ftRoy_OnDeath(HSD_GObj* gobj)
     ft->sa.mars.x222C = 0;
 }
 
-void func_8014EF60(HSD_GObj* gobj, s32 arg1)
+void ftRoy_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
 {
     s32 result, switched_res, unused;
 

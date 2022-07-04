@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8013C6EC
-func_8013C6EC:
+.global ftPurin_OnItemPickup
+ftPurin_OnItemPickup:
 /* 8013C6EC 001392CC  7C 08 02 A6 */	mflr r0
 /* 8013C6F0 001392D0  90 01 00 04 */	stw r0, 4(r1)
 /* 8013C6F4 001392D4  94 21 FF D8 */	stwu r1, -0x28(r1)

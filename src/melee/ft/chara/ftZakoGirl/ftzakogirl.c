@@ -11,12 +11,13 @@ void ftZakoGirl_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(ft, s32);
 }
 
-void func_8014F460(HSD_GObj* gobj, s32 arg1)
+void ftZakoGirl_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
 {
     s32 result, switched_res, unused;
 
     Fighter* ft = gobj->user_data;
     result = func_8026B2B4(ft->x1974_heldItem);
+
     if (result == 0) {
         switched_res = func_8026B320(ft->x1974_heldItem);
         switch (switched_res) {

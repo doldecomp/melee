@@ -20,24 +20,32 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj) {
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx
-void func_800E28E8(HSD_GObj* fighter_gobj, s32 unk_var)
+void ftCFalcon_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
 {
-    Fighter* fighter_data = fighter_gobj->user_data;
-    s32 unused, unused2;//Only figured this out looking at Marth's
+    s32 result, switched_res, unused;
 
-    if (func_8026B2B4(fighter_data->x1974_heldItem) == 0)
-    {
-        switch(func_8026B320(fighter_data->x1974_heldItem))
-        {
-            case 1: func_80070FB4(fighter_gobj, 1, 1); break;
-            case 2: func_80070FB4(fighter_gobj, 1, 0); break;
-            case 3: func_80070FB4(fighter_gobj, 1, 2); break;
-            case 4: func_80070FB4(fighter_gobj, 1, 3); break;
+    Fighter* ft = gobj->user_data;
+    result = func_8026B2B4(ft->x1974_heldItem);
+
+    if (result == 0) {
+        switched_res = func_8026B320(ft->x1974_heldItem);
+        switch (switched_res) {
+            case 1:
+                func_80070FB4(gobj, 1, 1);
+                break;
+            case 2:
+                func_80070FB4(gobj, 1, 0);
+                break;
+            case 3:
+                func_80070FB4(gobj, 1, 2);
+                break;
+            case 4:
+                func_80070FB4(gobj, 1, 3);
+                break;
         }
 
-        if(unk_var != 0)
-        {
-            func_80070C48(fighter_gobj, 1);
+        if (arg1 != 0) {
+            func_80070C48(gobj, 1);
         }
     }
 }
