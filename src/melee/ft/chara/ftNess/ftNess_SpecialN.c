@@ -87,7 +87,7 @@ f32 return_void3(void)
 
 // 0x80116F94 //
 // https://decomp.me/scratch/xOc8Y //
-void ftNess_SpecialN_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK Flash Start Action State handler //
+void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK Flash Start Action State handler //
 {
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
@@ -118,7 +118,7 @@ void ftNess_SpecialN_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK Flash
 
 // 0x80117034 //
 // https://decomp.me/scratch/ZjUdo
-void ftNess_SpecialAirN_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK Flash Start Action State handler //
+void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK Flash Start Action State handler //
 {
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
