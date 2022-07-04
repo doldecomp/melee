@@ -247,11 +247,11 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->xC8_pos_delta.z = 0.0f; 
 	fighter->xC8_pos_delta.y = 0.0f; 
 	fighter->xC8_pos_delta.x = 0.0f; 
-	fighter->x894 = 0.0f; 
-	fighter->x898 = 0.0f; 
+	fighter->x894_currentAnimFrame = 0.0f; 
+	fighter->x898_unk = 0.0f; 
 
-	fighter->x89C = 1.0f; 
-	fighter->x8A0 = 1.0f; 
+	fighter->x89C_frameSpeedMul = 1.0f; 
+	fighter->x8A0_unk = 1.0f; 
 	fighter->dmg.x1850_forceApplied = 0.0f; 
 	fighter->dmg.x18A4_knockbackMagnitude = 0.0f; 
 	fighter->dmg.x18A8 = 0.0f; 
@@ -412,16 +412,16 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 	fighter->x221F_flag.bits.b6 = 0;
 	fighter->x2218_flag.bits.b3 = 0;
 	fighter->x2218_flag.bits.b4 = 0;
-	fighter->x1A3C = 0;
-	fighter->x1A2C_reflectHitDirection = 0.0f;
+	fighter->ReflectAttr.x1A3C_damageOver = 0;
+	fighter->ReflectAttr.x1A2C_reflectHitDirection = 0.0f;
 	fighter->x2218_flag.bits.b6 = 0; 
 	fighter->x2218_flag.bits.b7 = 0;
 
 
-	fighter->x1A40 = 0.0f;
+	fighter->AbsorbAttr.x1A40_absorbHitDirection = 0.0f;
 
-	fighter->x1A44 = 0;
-	fighter->x1A48 = 0;
+	fighter->AbsorbAttr.x1A44_damageTaken = 0;
+	fighter->AbsorbAttr.x1A48_hitsTaken = 0;
 
 	fighter->x68C_transNPos.z = 0.0f;
 	fighter->x68C_transNPos.y = 0.0f;
@@ -1223,11 +1223,11 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         }
 
         fighter->x14_action_id = new_action_state->action_id;
-        fighter->x89C = arg9;
-        fighter->x8A0 = arg9;
+        fighter->x89C_frameSpeedMul = arg9;
+        fighter->x8A0_unk = arg9;
     
-        fighter->x894 = (arg8 - fighter->x89C);
-        fighter->x898 = 0.0f;
+        fighter->x894_currentAnimFrame = (arg8 - fighter->x89C_frameSpeedMul);
+        fighter->x898_unk = 0.0f;
     
         
         
@@ -1246,7 +1246,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
             if ((arg2 & 0x200000) != 0) {
                 fighter->x2223_flag.bits.b0 = 1;
                 fighter->x104 = 0x14;
-                fighter->x89C = 0.0f;
+                fighter->x89C_frameSpeedMul = 0.0f;
                 arg9 = 0.0f;
             }
     
@@ -1352,8 +1352,8 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
             func_80070758(jobj);
             func_80070758(fighter->x8AC_animSkeleton);
             fighter->x3EC = 0;
-            fighter->x8A4 = 0;
-            fighter->x8A8 = 0;
+            fighter->x8A4_animBlendFrames = 0;
+            fighter->x8A8_unk = 0;
         }
     
         if (animflags_bool) {
@@ -1654,11 +1654,11 @@ void Fighter_8006A360(HSD_GObj* fighterObj) {
                 if (fighter->x104 == 0x14U) {
                     func_8006F0FC(fighterObj, 0.0f);
                 } else {
-                    fighter->x89C += fighter->x8A0;
+                    fighter->x89C_frameSpeedMul += fighter->x8A0_unk;
                 }
                 fighter->x104--;
                 if (fighter->x104 == 0) {
-                    func_8006F0FC(fighterObj, fighter->x89C);
+                    func_8006F0FC(fighterObj, fighter->x89C_frameSpeedMul);
                     fighter->x104 = 0x14U;
                 }
             }
@@ -2829,13 +2829,13 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj) {
         } else {
             if (fighter->dmg.x1924) {
                 bool1 = fighter->dmg.x1924;
-            } else if (fighter->x1A3C) {
+            } else if (fighter->ReflectAttr.x1A3C_damageOver) {
                 func_80098C9C(fighterObj);
-            } else if (fighter->x1A2C_reflectHitDirection) {
+            } else if (fighter->ReflectAttr.x1A2C_reflectHitDirection) {
                 if (fighter->cb.x21C8_callback_OnReflectHit) {
                     fighter->cb.x21C8_callback_OnReflectHit(fighterObj);
                 }
-            } else if (fighter->x1A40) {
+            } else if (fighter->AbsorbAttr.x1A40_absorbHitDirection) {
                 if (ft_OnAbsorb[fighter->x4_fighterKind]) {
                     ft_OnAbsorb[fighter->x4_fighterKind](fighterObj);
                 }
@@ -2917,11 +2917,11 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj) {
         fighter->x19A0_shieldDamageTaken = 0;
         fighter->x19A4 = 0;
         fighter->x19A8 = 0;
-        fighter->x1A3C = 0;
-        fighter->x1A2C_reflectHitDirection = 0.0f;
-        fighter->x1A40 = 0.0f;
-        fighter->x1A44 = 0;
-        fighter->x1A48 = 0;
+        fighter->ReflectAttr.x1A3C_damageOver = 0;
+        fighter->ReflectAttr.x1A2C_reflectHitDirection = 0.0f;
+        fighter->AbsorbAttr.x1A40_absorbHitDirection = 0.0f;
+        fighter->AbsorbAttr.x1A44_damageTaken = 0;
+        fighter->AbsorbAttr.x1A48_hitsTaken = 0;
         fighter->x1960_vibrateMult = 1.0f;
         fighter->x1964 = 0.0f;
         fighter->dmg.x1950 = 0;

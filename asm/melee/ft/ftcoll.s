@@ -5646,8 +5646,8 @@ func_8007B1B8:
 /* 8007B234 00077E14  90 07 19 DC */	stw r0, 0x19dc(r7)
 /* 8007B238 00077E18  4E 80 00 20 */	blr 
 
-.global func_8007B23C
-func_8007B23C:
+.global ftColl_CreateReflectHit
+ftColl_CreateReflectHit:
 /* 8007B23C 00077E1C  80 E3 00 2C */	lwz r7, 0x2c(r3)
 /* 8007B240 00077E20  38 C0 00 01 */	li r6, 1
 /* 8007B244 00077E24  38 60 00 00 */	li r3, 0
@@ -5683,8 +5683,8 @@ func_8007B23C:
 /* 8007B2BC 00077E9C  90 07 1A 00 */	stw r0, 0x1a00(r7)
 /* 8007B2C0 00077EA0  4E 80 00 20 */	blr 
 
-.global func_8007B2C4
-func_8007B2C4:
+.global ftColl_CreateAbsorbHit
+ftColl_CreateAbsorbHit:
 /* 8007B2C4 00077EA4  80 C3 00 2C */	lwz r6, 0x2c(r3)
 /* 8007B2C8 00077EA8  38 A0 00 01 */	li r5, 1
 /* 8007B2CC 00077EAC  38 60 00 00 */	li r3, 0

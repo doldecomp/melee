@@ -1,7 +1,7 @@
 #include "melee/ft/chara/ftKoopa/ftkoopa.h"
 #include "ftgigakoopa.h"
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 void ftGKoopa_OnDeath(HSD_GObj* fighterObj) {
     s32 unused[2];
@@ -28,7 +28,7 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     void** items = ftdata->x48_items;
 
     ftKoopa_OnLoadForGKoopa(ft);
-    func_8026B3F8(items[0], It_Kind_KoopaFlame);
+    func_8026B3F8(items[0], It_Kind_Koopa_Flame);
 
     ft->x2226_flag.bits.b1 = 1;
     ft->x222A_flag.bits.b0 = 1;

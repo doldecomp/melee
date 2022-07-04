@@ -1,6 +1,6 @@
 #include "ftpeach.h"
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 void ftPeach_OnDeath(HSD_GObj* gobj)
 {
@@ -46,11 +46,11 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(ft, ftPeachAttributes);
     
-    func_8026B3F8(items[0], It_Kind_PeachUnk);
-    func_8026B3F8(items[1], It_Kind_PeachTurnip);
-    func_8026B3F8(items[2], It_Kind_PeachParasol);
-    func_8026B3F8(items[3], It_Kind_PeachToad);
-    func_8026B3F8(items[4], It_Kind_PeachToadSpore);
+    func_8026B3F8(items[0], It_Kind_Peach_Explode);
+    func_8026B3F8(items[1], It_Kind_Peach_Turnip);
+    func_8026B3F8(items[2], It_Kind_Peach_Parasol);
+    func_8026B3F8(items[3], It_Kind_Peach_Toad);
+    func_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
 }
 
 void ftPeach_8011B704(HSD_GObj* fighterObj) {

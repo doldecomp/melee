@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80116494
-func_80116494:
+.global ftNess_AttackHi4_Release_Action
+ftNess_AttackHi4_Release_Action:
 /* 80116494 00113074  7C 08 02 A6 */	mflr r0
 /* 80116498 00113078  38 80 01 58 */	li r4, 0x158
 /* 8011649C 0011307C  90 01 00 04 */	stw r0, 4(r1)
@@ -53,16 +53,16 @@ lbl_80116530:
 /* 80116544 00113124  4B F7 1F CD */	bl func_80088510
 /* 80116548 00113128  C0 3D 21 18 */	lfs f1, 0x2118(r29)
 /* 8011654C 0011312C  7F 83 E3 78 */	mr r3, r28
-/* 80116550 00113130  4B FF EA 21 */	bl func_80114F70
+/* 80116550 00113130  4B FF EA 21 */	bl ftNess_YoyoApplyDamage
 /* 80116554 00113134  88 1F 22 22 */	lbz r0, 0x2222(r31)
 /* 80116558 00113138  38 60 00 01 */	li r3, 1
 /* 8011655C 0011313C  50 60 2E B4 */	rlwimi r0, r3, 5, 0x1a, 0x1a
-/* 80116560 00113140  3C 60 80 11 */	lis r3, lbl_80115C74@ha
+/* 80116560 00113140  3C 60 80 11 */	lis r3, ftNess_YoyoStartTimedRehit@ha
 /* 80116564 00113144  98 1F 22 22 */	stb r0, 0x2222(r31)
-/* 80116568 00113148  38 03 5C 74 */	addi r0, r3, lbl_80115C74@l
-/* 8011656C 0011314C  3C 60 80 11 */	lis r3, lbl_80114EB8@ha
+/* 80116568 00113148  38 03 5C 74 */	addi r0, r3, ftNess_YoyoStartTimedRehit@l
+/* 8011656C 0011314C  3C 60 80 11 */	lis r3, ftNess_YoyoUpdateHitPos@ha
 /* 80116570 00113150  90 1F 21 C0 */	stw r0, 0x21c0(r31)
-/* 80116574 00113154  38 03 4E B8 */	addi r0, r3, lbl_80114EB8@l
+/* 80116574 00113154  38 03 4E B8 */	addi r0, r3, ftNess_YoyoUpdateHitPos@l
 /* 80116578 00113158  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 8011657C 0011315C  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 80116580 00113160  83 E1 00 4C */	lwz r31, 0x4c(r1)

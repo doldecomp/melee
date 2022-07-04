@@ -2,7 +2,7 @@
 
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
 

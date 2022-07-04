@@ -43,13 +43,13 @@ void ftPikachu_ActionChangeZeroVel_80125E60(HSD_GObj* fighterObj) {
 }
 
 void ftPikachu_80125ED8(HSD_GObj* fighterObj) {
-    if (!func_8006F238(fighterObj)) {
+    if (!ftAnim_IsFramesRemaining(fighterObj)) {
         ftPikachu_80126C0C(fighterObj);
     }
 }
 
 void ftPikachu_80125F14(HSD_GObj* fighterObj) {
-    if (!func_8006F238(fighterObj)) {
+    if (!ftAnim_IsFramesRemaining(fighterObj)) {
         ftPikachu_80126E1C(fighterObj);
     }
 }
@@ -85,7 +85,7 @@ void ftPikachu_80126014(HSD_GObj* fighterObj) {
     s32 unused;
     Fighter* fighter = fighterObj->user_data;
 
-    if (func_800822A4(fighterObj, fighter->x2C_facing_direction < 0.0f ? -1 : 1)) {
+    if (EnvColl_CheckGroundAndLedge(fighterObj, fighter->x2C_facing_direction < 0.0f ? -1 : 1)) {
         ftPikachu_ActionChange_801260E4(fighterObj);
     } else  {
         if (func_80081298(fighterObj) == 0) { return; };
@@ -95,13 +95,13 @@ void ftPikachu_80126014(HSD_GObj* fighterObj) {
 void ftPikachu_ActionChange_80126084(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     func_8007D60C(fighter);
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0xC4C5084, 0, fighter->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0xC4C5084, 0, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 void ftPikachu_ActionChange_801260E4(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     func_8007D7FC(fighter);
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x161, 0xC4C5084, 0, fighter->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x161, 0xC4C5084, 0, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 void ftPikachu_80126144(HSD_GObj* fighterObj) {
@@ -295,7 +295,7 @@ void ftPikachu_801267C8(HSD_GObj* fighterObj) {
     CollData* collData = &fighter->x6F0_collData;
 
     fighter->x2358_stateVar7_s32++;
-    if (func_800822A4(fighterObj, fighter->x2C_facing_direction < 0.0f ? -1 : 1)) {
+    if (EnvColl_CheckGroundAndLedge(fighterObj, fighter->x2C_facing_direction < 0.0f ? -1 : 1)) {
         bool0 = ftPikachu_GetBool(fighterObj);
 
 
@@ -342,7 +342,7 @@ void ftPikachu_ActionChange_80126A2C(HSD_GObj* fighterObj) {
     s32 unused[2];
     Fighter* fighter = fighterObj->user_data;
     func_8007D60C(fighter);
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x165, 0xC4C508A, 0, fighter->x894, 0.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x165, 0xC4C508A, 0, fighter->x894_currentAnimFrame, 0.0f, 0.0f);
     fighter->x2223_flag.bits.b4 = 1;
     ftPikachu_8012642C(fighterObj);
 }
@@ -362,7 +362,7 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighterObj) {
 
     fighter2 = fighterObj->user_data;
     func_8007D7FC(fighter2);
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x162, 0xC4C508A, 0, fighter2->x894, 0.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x162, 0xC4C508A, 0, fighter2->x894_currentAnimFrame, 0.0f, 0.0f);
     
     fighter = fighterObj->user_data;
     collData = &fighter->x6F0_collData;
@@ -544,7 +544,7 @@ void ftPikachu_80127198(HSD_GObj* fighterObj) {
         fighter->x2200_ftcmd_var0 = 2;
         return;
     }
-    if (!func_8006F238(fighterObj)) {
+    if (!ftAnim_IsFramesRemaining(fighterObj)) {
         func_8008A2BC(fighterObj);
     }
 }
@@ -563,7 +563,7 @@ void ftPikachu_80127228(HSD_GObj* fighterObj) {
         fighter->x2200_ftcmd_var0 = 2;
         return;
     }
-    if (!func_8006F238(fighterObj)) {
+    if (!ftAnim_IsFramesRemaining(fighterObj)) {
         func_80096900(fighterObj, 1, 0, 1, pika_attr->xAC, pika_attr->xB0);
     }
 }
@@ -615,7 +615,7 @@ void ftPikachu_801273D4(HSD_GObj* fighterObj) {
 void ftPikachu_ActionChange_8012744C(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     func_8007D60C(fighter);
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x166, 0xC4C508A, 0, fighter->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x166, 0xC4C508A, 0, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 void ftPikachu_ActionChangeUpdateVel_801274AC(HSD_GObj* fighterObj) {

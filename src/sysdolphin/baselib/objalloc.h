@@ -33,6 +33,12 @@ typedef struct _HSD_ObjAllocData {
     struct _HSD_ObjAllocData* next;
 } HSD_ObjAllocData;
 
+struct r13_EntityPointers {
+    u8 x0_filler[0x20];
+    HSD_GObj* x20_fighterGObj;
+    HSD_GObj* x24_itemGObj;
+};
+
 typedef struct ItemCommonData
 {
     u32 x0;
@@ -88,13 +94,20 @@ typedef struct ItemCommonData
     f32 x15C;
 } ItemCommonData;
 
+extern s8 lbl_804D6D00;
+extern s32 lbl_804D6D08;
+extern s32 lbl_804D6D0C;
+extern s32 lbl_804D6D10;
+extern s32 lbl_804D6D14;
+extern ItemCommonData* lbl_804D6D28;
+
 typedef struct HSD_ObjAllocUnk2
 {
     u8 x0_filler[0x144];
     u32 x144;
     u32 x148;
     u32 x14C;
-    UnkFlagStruct2 x150;
+    UnkFlagStruct x150;
     u32 x154;
     u32 x158;
     u32 x15C;

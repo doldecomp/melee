@@ -3,7 +3,7 @@
 // 80151D20 14E900
 // https://decomp.me/scratch/wVowU
 void lbl_80151D20(HSD_GObj* arg0) {
-    if (func_8006F238(arg0) == 0) {
+    if (ftAnim_IsFramesRemaining(arg0) == 0) {
         func_80151018(arg0);
     }
 }
@@ -49,7 +49,7 @@ void lbl_80151DC4(HSD_GObj* arg0) {
 // 80151E10 14E9F0
 // https://decomp.me/scratch/acoIs
 void lbl_80151E10(HSD_GObj* arg0) {
-    if (func_8006F238(arg0) == 0) {
+    if (ftAnim_IsFramesRemaining(arg0) == 0) {
         func_80151EB4(arg0);
     }
 }
@@ -137,7 +137,7 @@ void lbl_80151F00(HSD_GObj* gobj) {
     if (r31_ft_userdata->xB0_pos.x < sp28.x) {
         func_801520D8(gobj);
     }
-    if (!func_8006F238(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }

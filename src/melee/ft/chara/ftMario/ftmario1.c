@@ -1,7 +1,7 @@
 #include "ftmario.h"
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 extern s32 lbl_803C5A20[];
 
@@ -34,7 +34,7 @@ void ftMario_OnLoad(HSD_GObj* gobj) {
 
     sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
 
-    func_8026B3F8(items[0], It_Kind_MarioFireball);
+    func_8026B3F8(items[0], It_Kind_Mario_Fire);
     func_8026B3F8(items[2], sa->x14);
 }
 

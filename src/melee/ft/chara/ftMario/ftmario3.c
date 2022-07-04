@@ -1,7 +1,7 @@
 #include "ftmario.h"
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 extern HSD_GObj* func_802B2560(HSD_GObj*,f32,Vec3*,long,u32);
 
@@ -112,13 +112,13 @@ void ftMario_func_800E14C8(HSD_GObj* gobj) {
 }
 
 void ftMario_func_800E1550(HSD_GObj* gobj) {
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_8008A2BC(gobj);
     }
 }
 
 void ftMario_func_800E158C(HSD_GObj* gobj) {
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_800CC730(gobj);
     }
 }
@@ -137,7 +137,7 @@ void _ftMario_800E15D0_800E16E0_helper(HSD_GObj* gobj) {
     
     if ((ft->x2204_ftcmd_var1 == 1U) && ((s32) ft->x2340_stateVar1 == 0)) {
         ft->x2340_stateVar1= 1;
-        func_8007B23C(gobj, sa_tmp + 0x18, 0);
+        ftColl_CreateReflectHit(gobj, sa_tmp + 0x18, 0);
     }
     else if ((ft->x2204_ftcmd_var1 == 0U) && ((s32) ft->x2340_stateVar1 == 1)) {
         ft->x2340_stateVar1 = 0;
@@ -229,7 +229,7 @@ void ftMario_func_800E18B8(HSD_GObj* gobj) {
 
     ft = getFighter(gobj);
     func_8007D5D4(ft);
-    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C508C, NULL, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C508C, NULL, ft->x894_currentAnimFrame, 1.0f, 0.0f);
     if ((s32) ft->x2200_ftcmd_var0 == 1U) {
         ft->x2200_ftcmd_var0 = 2U;
     }
@@ -244,7 +244,7 @@ void ftMario_func_800E198C(HSD_GObj* gobj) {
     ft = gobj->user_data;
     ft->sa.mario.x2238 = 0;
     func_8007D7FC(ft);
-    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C508C, NULL, ft->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C508C, NULL, ft->x894_currentAnimFrame, 1.0f, 0.0f);
 
     _ftMario_800E18B8_800E198C_helper(gobj);
 }

@@ -1,7 +1,7 @@
 #include "ftlib.h"
 
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 #include <melee/pl/player.h>
 
 extern struct {
@@ -917,7 +917,7 @@ void func_80087610(u8 arg0)
 
 void func_800876B4(HSD_GObj* gobj)
 {
-    func_8006F238(gobj);
+    ftAnim_IsFramesRemaining(gobj);
 }
 
 BOOL func_800876D4(HSD_GObj* gobj)
@@ -945,7 +945,7 @@ s32 func_80087700(HSD_GObj* gobj)
 void func_8008770C(HSD_GObj* gobj, void* dst)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x4_fighterKind == FTKIND_GAW) {
+    if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
         func_8014A7F4(gobj, dst);
     } else {
         func_800EEB00(gobj, dst);
@@ -955,7 +955,7 @@ void func_8008770C(HSD_GObj* gobj, void* dst)
 void func_80087744(HSD_GObj* gobj, void* dst)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x4_fighterKind == FTKIND_GAW) {
+    if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
         func_8014A814(gobj, dst);
     } else {
         func_800EEB1C(gobj, dst);

@@ -42,7 +42,7 @@ void lbl_801382E8(HSD_GObj* gobj) {
     s32 unused[2];
 
     // FrameTimerCheck
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         // AS_035_FallSpecial
         func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
@@ -56,7 +56,7 @@ void lbl_80138348(HSD_GObj* gobj) {
     s32 unused[4];
 
     // FrameTimerCheck
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         // AS_035_FallSpecial
         func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }

@@ -1,7 +1,7 @@
 #include "ftmario.h"
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 void ftMario_func_800E1A54(HSD_GObj* gobj) {
     Fighter* ft;
@@ -34,7 +34,7 @@ void ftMario_func_800E1B24(HSD_GObj* gobj) {
 
     ft = getFighter(gobj);
     sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80096900(gobj, 0, 1, 0, sa->x18, sa->x1C);
     }
 }

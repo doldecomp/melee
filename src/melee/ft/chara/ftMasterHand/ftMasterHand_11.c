@@ -22,7 +22,7 @@ void lbl_801523BC(HSD_GObj* gobj) {
     Fighter* r31_ft_userdata;
     MasterHandAttributes* r30_attributes;
 
-    if (func_8006F238(gobj)) {
+    if (ftAnim_IsFramesRemaining(gobj)) {
         return;
     }
     r31_ft_userdata = gobj->user_data;
@@ -77,7 +77,7 @@ void lbl_801524C8(HSD_GObj* gobj) {
     if (!--temp_r4->x2348_stateVar3) {
         func_801525E0(gobj);
     }
-    if (!func_8006F238(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }

@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global lbl_801198DC
-lbl_801198DC:
+.global ftNess_SpecialAirHi_Coll
+ftNess_SpecialAirHi_Coll:
 /* 801198DC 001164BC  7C 08 02 A6 */	mflr r0
 /* 801198E0 001164C0  90 01 00 04 */	stw r0, 4(r1)
 /* 801198E4 001164C4  94 21 FF 18 */	stwu r1, -0xe8(r1)
@@ -29,7 +29,7 @@ lbl_80119930:
 /* 80119930 00116510  38 80 FF FF */	li r4, -1
 lbl_80119934:
 /* 80119934 00116514  7F C3 F3 78 */	mr r3, r30
-/* 80119938 00116518  4B F6 89 6D */	bl func_800822A4
+/* 80119938 00116518  4B F6 89 6D */	bl EnvColl_CheckGroundAndLedge
 /* 8011993C 0011651C  2C 03 00 00 */	cmpwi r3, 0
 /* 80119940 00116520  41 82 00 B4 */	beq lbl_801199F4
 /* 80119944 00116524  38 7F 08 44 */	addi r3, r31, 0x844
@@ -133,7 +133,7 @@ lbl_80119AB0:
 lbl_80119AB4:
 /* 80119AB4 00116694  D0 1D 00 2C */	stfs f0, 0x2c(r29)
 /* 80119AB8 00116698  7F C3 F3 78 */	mr r3, r30
-/* 80119ABC 0011669C  4B FF E0 B5 */	bl func_80117B70
+/* 80119ABC 0011669C  4B FF E0 B5 */	bl ftNess_SpecialHiStopGFX
 /* 80119AC0 001166A0  C0 22 9D 54 */	lfs f1, lbl_804D9734/*0.0f*/@sda21(r2)
 /* 80119AC4 001166A4  7F C3 F3 78 */	mr r3, r30
 /* 80119AC8 001166A8  C0 42 9D 80 */	lfs f2, lbl_804D9760/*1.0f*/@sda21(r2)
@@ -201,7 +201,7 @@ lbl_80119BB4:
 lbl_80119BB8:
 /* 80119BB8 00116798  D0 1D 00 2C */	stfs f0, 0x2c(r29)
 /* 80119BBC 0011679C  7F C3 F3 78 */	mr r3, r30
-/* 80119BC0 001167A0  4B FF DF B1 */	bl func_80117B70
+/* 80119BC0 001167A0  4B FF DF B1 */	bl ftNess_SpecialHiStopGFX
 /* 80119BC4 001167A4  C0 22 9D 54 */	lfs f1, lbl_804D9734/*0.0f*/@sda21(r2)
 /* 80119BC8 001167A8  7F C3 F3 78 */	mr r3, r30
 /* 80119BCC 001167AC  C0 42 9D 80 */	lfs f2, lbl_804D9760/*1.0f*/@sda21(r2)
@@ -227,7 +227,7 @@ lbl_80119BB8:
 lbl_80119C1C:
 /* 80119C1C 001167FC  38 7E 00 00 */	addi r3, r30, 0
 /* 80119C20 00116800  38 9F 06 F0 */	addi r4, r31, 0x6f0
-/* 80119C24 00116804  4B FF E3 01 */	bl func_80117F24
+/* 80119C24 00116804  4B FF E3 01 */	bl ftNess_SpecialAirHi_CollisionModVel
 /* 80119C28 00116808  48 00 01 14 */	b lbl_80119D3C
 lbl_80119C2C:
 /* 80119C2C 0011680C  54 60 05 33 */	rlwinm. r0, r3, 0, 0x14, 0x19
@@ -274,7 +274,7 @@ lbl_80119CC8:
 lbl_80119CCC:
 /* 80119CCC 001168AC  D0 1D 00 2C */	stfs f0, 0x2c(r29)
 /* 80119CD0 001168B0  7F C3 F3 78 */	mr r3, r30
-/* 80119CD4 001168B4  4B FF DE 9D */	bl func_80117B70
+/* 80119CD4 001168B4  4B FF DE 9D */	bl ftNess_SpecialHiStopGFX
 /* 80119CD8 001168B8  C0 22 9D 54 */	lfs f1, lbl_804D9734/*0.0f*/@sda21(r2)
 /* 80119CDC 001168BC  7F C3 F3 78 */	mr r3, r30
 /* 80119CE0 001168C0  C0 42 9D 80 */	lfs f2, lbl_804D9760/*1.0f*/@sda21(r2)
@@ -300,7 +300,7 @@ lbl_80119CCC:
 lbl_80119D30:
 /* 80119D30 00116910  38 7E 00 00 */	addi r3, r30, 0
 /* 80119D34 00116914  38 9F 06 F0 */	addi r4, r31, 0x6f0
-/* 80119D38 00116918  4B FF E1 ED */	bl func_80117F24
+/* 80119D38 00116918  4B FF E1 ED */	bl ftNess_SpecialAirHi_CollisionModVel
 lbl_80119D3C:
 /* 80119D3C 0011691C  80 01 00 EC */	lwz r0, 0xec(r1)
 /* 80119D40 00116920  83 E1 00 E4 */	lwz r31, 0xe4(r1)
@@ -309,8 +309,8 @@ lbl_80119D3C:
 /* 80119D4C 0011692C  38 21 00 E8 */	addi r1, r1, 0xe8
 /* 80119D50 00116930  7C 08 03 A6 */	mtlr r0
 /* 80119D54 00116934  4E 80 00 20 */	blr 
-.global lbl_80119D58
-lbl_80119D58:
+.global ftNess_SpecialAirHiRebound_Coll
+ftNess_SpecialAirHiRebound_Coll:
 /* 80119D58 00116938  7C 08 02 A6 */	mflr r0
 /* 80119D5C 0011693C  38 80 00 00 */	li r4, 0
 /* 80119D60 00116940  90 01 00 04 */	stw r0, 4(r1)
@@ -320,7 +320,7 @@ lbl_80119D58:
 /* 80119D70 00116950  93 A1 00 1C */	stw r29, 0x1c(r1)
 /* 80119D74 00116954  7C 7D 1B 78 */	mr r29, r3
 /* 80119D78 00116958  83 C3 00 2C */	lwz r30, 0x2c(r3)
-/* 80119D7C 0011695C  4B F6 85 29 */	bl func_800822A4
+/* 80119D7C 0011695C  4B F6 85 29 */	bl EnvColl_CheckGroundAndLedge
 /* 80119D80 00116960  2C 03 00 01 */	cmpwi r3, 1
 /* 80119D84 00116964  40 82 00 5C */	bne lbl_80119DE0
 /* 80119D88 00116968  C0 02 9D 54 */	lfs f0, lbl_804D9734/*0.0f*/@sda21(r2)

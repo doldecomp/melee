@@ -43,7 +43,7 @@ void lbl_80151828(HSD_GObj* arg0) {
 // 80151874 14E454
 // https://decomp.me/scratch/AmIC0
 void lbl_80151874(HSD_GObj* arg0) {
-    if (!func_8006F238(arg0)) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         func_80151918(arg0);
     }
 }
@@ -104,7 +104,7 @@ void lbl_8015198C(HSD_GObj* gobj) {
     Vec3 sp14;
     u32 unk[2];
 
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         temp_r31 = gobj->user_data;
         func_80054158(0, &sp14);
         if (temp_r31->xB0_pos.x < sp14.x) {

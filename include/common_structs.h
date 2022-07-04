@@ -3,7 +3,27 @@
 
 #include <dolphin/types.h>
 
-typedef struct _UnkFlagStruct2 {
+// Most of these should be moved to independent headers once they are created //
+
+// HSD_PAD //
+
+#define A_BUTTON_HELD 0x100 // Also covers Z-Button macro in-game //
+#define B_BUTTON_HELD 0x200
+
+// COLLISION FLAGS //
+
+#define COLL_AIR 0x8000 // From Ness's Yo-Yo collision check //
+
+// STATE FLAGS //
+
+#define GROUND 0
+#define AIR 1 // Used by fighters and items //
+
+typedef struct _Vec2 { float x, y; } Vec2;
+
+typedef Vec Vec3;
+
+typedef struct _UnkFlagStruct {
     struct {
         u8 b0 : 1;
         u8 b1 : 1;
@@ -14,7 +34,70 @@ typedef struct _UnkFlagStruct2 {
         u8 b6 : 1;
         u8 b7 : 1;
     } bits;
-}UnkFlagStruct2;
+} UnkFlagStruct;
+
+typedef struct _ReflectDesc
+{
+    u32 x0_bone_id;
+    s32 x4_max_damage;
+    Vec3 x8_offset;
+    f32 x14_size;
+    f32 x18_damage_mul;
+    f32 x1C_speed_mul;
+    u8 x20_behavior : 8; // Setting this to 0x1 causes the reflector to skip ownership change // 
+
+} ReflectDesc;
+
+typedef struct _AbsorbDesc
+{
+    u32 x0_bone_id;
+    Vec3 x4_offset;
+    f32 x10_size;
+
+} AbsorbDesc;
+
+typedef struct _CollData
+{
+    u8 filler_x0[0x4];
+    Vec3 x4_vec;
+    u8 padding_x10[0x1C - 0x10];
+    Vec3 x1C_vec;
+    u8 padding_x28[0x34 - 0x28];
+    u8 x34_flags_0 : 1;
+    u8 x34_flags_1 : 4;
+    u8 x34_flags_2 : 2;
+    u8 x34_flags_3 : 1;
+    u8 padding_x35[0x40 - 0x35];
+    u32 x40;
+    u32 x44;
+    u8 filler_x48[0xA8 - 0x48];
+    f32 xA8;
+    f32 xAC;
+    f32 xB0;
+    Vec2 xB4_ecbCurrCorrect_right;
+    Vec2 xBC_ecbCurrCorrect_left;
+    u8 filler_xBC[0xE8 - 0xBC - 8];
+    f32 xE8;
+    f32 xEC;
+    f32 xF0;
+    u8 filler_xF4[0x130 - 0xF4];
+    u32 x130;
+    s32 x134_envFlags;
+    u8 filler_x138[0x14C - 0x138];
+    s32 x14C_groundIndex;
+    s32 filler_x150;
+    Vec3 x154_groundNormal; // points out of the ground surface
+    s32 x160_rightwall_index;
+    s32 x164;
+    Vec x168_vec;
+    s32 x174_leftwall_index;
+    s32 x178;
+    Vec x17C_vec;
+    u32 filler_x188[2];
+    Vec x190_vec;
+    s32 x19C;
+
+} CollData;
 
 typedef struct ColorOverlay
 {
