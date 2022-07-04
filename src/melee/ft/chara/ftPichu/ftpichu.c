@@ -48,14 +48,16 @@ void ftPichu_OnDeath(HSD_GObj* gobj)
     }
 }
 
-void func_80149FE4(HSD_GObj* gobj, s32 arg1)
+void ftPichu_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
 {
-    s32 result, switched_result, unused;
+    s32 result, switched_res, unused;
+
     Fighter* ft = gobj->user_data;
     result = func_8026B2B4(ft->x1974_heldItem);
+
     if (result == 0) {
-        switched_result = func_8026B320(ft->x1974_heldItem);
-        switch (switched_result) {
+        switched_res = func_8026B320(ft->x1974_heldItem);
+        switch (switched_res) {
             case 1:
                 func_80070FB4(gobj, 0, 1);
                 break;
@@ -69,6 +71,7 @@ void func_80149FE4(HSD_GObj* gobj, s32 arg1)
                 func_80070FB4(gobj, 0, 3);
                 break;
         }
+
         if (arg1 != 0) {
             func_80070C48(gobj, 0);
         }

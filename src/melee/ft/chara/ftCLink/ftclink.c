@@ -39,7 +39,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
     func_800753D4(ft, *lbl_804D6540[ft->x4_fighterKind], items[6]);
 }
 
-void func_80148DC0(HSD_GObj* gobj, s32 arg1)
+void ftCLink_OnItemPickup(HSD_GObj* gobj, s32 arg1)
 {
     int unused;
     Fighter* ft = gobj->user_data;

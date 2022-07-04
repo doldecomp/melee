@@ -92,3 +92,55 @@ void ftKirby_OnLoad(HSD_GObj* fighterObj) {
     
 
 }
+
+void ftKirby_800EE74C(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    func_800F5524(fighterObj);
+    func_800F22D4(fighterObj);
+    func_800F5318(fighterObj);
+    func_800F9090(fighterObj);
+    func_800F19AC(fighterObj);
+    func_800F5D04(fighterObj, 0);
+    fighter->cb.x21E8_callback_OnDeath3 = 0;
+}
+
+void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
+    Fighter* fighter= fighterObj->user_data;
+    func_800F5524(fighterObj);
+    func_800F22D4(fighterObj);
+    func_800F5318(fighterObj);
+    func_800F9090(fighterObj);
+    func_800F1A8C(fighterObj);
+    fighter->cb.x21E0_callback_OnDeath = 0;
+}
+
+//// Matching, but needs more data moved over for DOL match
+// void func_800EE818(HSD_GObj* fighterObj) {
+//     s32 unused[2];
+//     Fighter* fighter = getFighter(fighterObj);
+//     ftKirbyAttributes* attr = fighter->x2D4_specialAttributes;
+//     switch (fighter->sa.kirby.x2238) {
+//         case 3:
+//             if (fighter->sa.kirby.x22E8 == attr->x190) {
+//                 func_800BFFD0(fighter, 0x3A, 0);
+//             }
+//             break;
+//         case 13:
+//             if (fighter->sa.kirby.x22D4 == attr->x168) {
+//                 func_800BFFD0(fighter, 0x36, 0);
+//             }
+//             break;
+//         case 16:
+//             if (fighter->sa.kirby.x22C8 == attr->x384) {
+//                 func_800BFFD0(fighter, 0x5D, 0);
+//                 return;
+//             }
+//             break;
+//         case 7:
+//             if (fighter->sa.kirby.x22E0 == 6) {
+//                 func_800BFFD0(fighter, 0x57, 0);
+//             }
+//             break;
+//     }
+// }
+

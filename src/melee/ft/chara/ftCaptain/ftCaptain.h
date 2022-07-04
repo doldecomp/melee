@@ -51,7 +51,7 @@ typedef struct _CaptainAttr
 
 void func_800E2AEC(HSD_GObj* fighter_gobj);
 void func_800E2888(HSD_GObj* fighter_gobj);
-void func_800E28E8(HSD_GObj* fighter_gobj, s32 unk_var);
+void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL unk_var);
 void func_800E29C8(HSD_GObj* fighter_gobj) ;
 void func_800E2A10(HSD_GObj* fighter_gobj);
 void func_800E2A58(HSD_GObj* fighter_gobj, s32 unk1);

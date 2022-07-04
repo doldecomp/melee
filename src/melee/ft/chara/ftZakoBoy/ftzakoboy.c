@@ -6,7 +6,7 @@ void ftZakoBoy_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 }
 
-void func_8014F218(HSD_GObj* gobj, s32 arg1)
+void ftZakoBoy_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
 {
     s32 result, switched_res, unused;
 
@@ -35,7 +35,6 @@ void func_8014F218(HSD_GObj* gobj, s32 arg1)
         }
     }
 }
-
 void func_8014F2F8(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;

@@ -20,9 +20,9 @@ void func_800E5588(HSD_GObj* gobj)
     func_800E5EBC(gobj);
 }
 
-void func_800E55A8(HSD_GObj* gobj, s32 arg1)
+void ftFox_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
 {
-    s32 switched_res, result, unused;
+    s32 result, switched_res, unused;
 
     Fighter* ft = gobj->user_data;
     result = func_8026B2B4(ft->x1974_heldItem);
@@ -30,18 +30,18 @@ void func_800E55A8(HSD_GObj* gobj, s32 arg1)
     if (result == 0) {
         switched_res = func_8026B320(ft->x1974_heldItem);
         switch (switched_res) {
-        case 1:
-            func_80070FB4(gobj, 1, 1);
-            break;
-        case 2:
-            func_80070FB4(gobj, 1, 0);
-            break;
-        case 3:
-            func_80070FB4(gobj, 1, 2);
-            break;
-        case 4:
-            func_80070FB4(gobj, 1, 3);
-            break;
+            case 1:
+                func_80070FB4(gobj, 1, 1);
+                break;
+            case 2:
+                func_80070FB4(gobj, 1, 0);
+                break;
+            case 3:
+                func_80070FB4(gobj, 1, 2);
+                break;
+            case 4:
+                func_80070FB4(gobj, 1, 3);
+                break;
         }
 
         if (arg1 != 0) {

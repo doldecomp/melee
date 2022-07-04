@@ -221,7 +221,7 @@ inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
     return jobj->translate.y;
 }
 
-inline void HSD_JObjUnkMtx_assert(HSD_JObj* jobj)
+inline void HSD_JObjGetMtx(HSD_JObj* jobj)
 {
     assert_line(1144, jobj);
     HSD_JObjUnkMtxPtr(jobj);

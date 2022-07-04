@@ -4,7 +4,6 @@
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mobj.h>
 
-
 typedef struct _ftYoshiAttributes {
     f32 x0;
     f32 x4;
@@ -18,9 +17,10 @@ typedef struct _ftYoshiAttributes {
     s32 x24;
     s32 x28;
     s32 x2C;
-    u8 data_filler[0x108];
+    u8 data_filler1[0xEF];
+    f32 x120;
+    u8 data_filler2[0x14];
 } ftYoshiAttributes;
-
 
 struct S_UNK_YOSHI2 {
     s32 x0;

@@ -915,7 +915,7 @@ struct SpecialAttrs_DK {
 };
 
 struct SpecialAttrs_Kirby {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ s32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ UnkFlagStruct x2234;
     /* 0x2235 */ u8 filler_x2235[3];
@@ -927,6 +927,16 @@ struct SpecialAttrs_Kirby {
     /* 0x224C */ u8 filler1[0x228C - 0x224C];
     /* 0x228C */ u32 x228C;
     /* 0x2290 */ u32 x2290;
+    /* 0x2294 */ u8 filler2[0x22C8 - 0x2294];
+    /* 0x22C8 */ s32 x22C8;
+    /* 0x22CC */ s32 x22CC;
+    /* 0x22D0 */ s32 x22D0;
+    /* 0x22D4 */ s32 x22D4;
+    /* 0x22D8 */ s32 x22D8;
+    /* 0x22DC */ s32 x22DC;
+    /* 0x22E0 */ s32 x22E0;
+    /* 0x22E4 */ s32 x22E4;
+    /* 0x22E8 */ s32 x22E8;
 };
 
 struct SpecialAttrs_Koopa {
@@ -945,7 +955,7 @@ struct SpecialAttrs_Link {
 };
 
 struct SpecialAttrs_Seak {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ s32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
 };

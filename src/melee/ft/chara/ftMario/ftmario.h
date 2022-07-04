@@ -60,7 +60,7 @@ void ftMario_OnDeath(HSD_GObj*);
 void ftMario_OnLoadForDrMario(Fighter*);
 void ftMario_OnLoad(HSD_GObj*);
 void ftMario_func_800E0A00(HSD_GObj*);
-void ftMario_func_800E0A20(HSD_GObj*, s32);
+void ftMario_OnItemPickup(HSD_GObj*, BOOL);
 void ftMario_func_800E0B00(HSD_GObj*);
 void ftMario_func_800E0B48(HSD_GObj*);
 void ftMario_func_800E0B90(HSD_GObj*, s32);

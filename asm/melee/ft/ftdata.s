@@ -1131,7 +1131,7 @@ ft_SpecialS:
     .4byte func_80132EFC
     .4byte func_800EC354
     .4byte func_80111038
-    .4byte ftNess_SpecialS_Action
+    .4byte func_80116C94
     .4byte func_8011C34C
     .4byte func_8011F99C
     .4byte NULL
@@ -1168,7 +1168,7 @@ ft_SpecialHiAir:
     .4byte func_80135B04
     .4byte func_800EBB80
     .4byte func_8011312C
-    .4byte ftNess_SpecialAirHiStart_Action
+    .4byte func_80118250
     .4byte func_8011D7F0
     .4byte func_8012122C
     .4byte NULL
@@ -1205,7 +1205,7 @@ ft_SpecialLwAir:
     .4byte func_801346A4
     .4byte func_800EB6DC
     .4byte func_80114224
-    .4byte ftNess_SpecialAirLwStart_Action
+    .4byte func_80119E90
     .4byte func_8011D1C4
     .4byte func_80122988
     .4byte func_80122988
@@ -1242,7 +1242,7 @@ ft_SpecialSAir:
     .4byte func_80132F94
     .4byte func_800EC404
     .4byte func_8011108C
-    .4byte ftNess_SpecialAirS_Action
+    .4byte func_80116D04
     .4byte func_8011C3C4
     .4byte func_8011FB08
     .4byte NULL
@@ -1279,7 +1279,7 @@ ft_SpecialNAir:
     .4byte func_80134ED0
     .4byte func_800ECF78
     .4byte func_80112198
-    .4byte ftNess_SpecialAirN_Action
+    .4byte func_80117034
     .4byte func_8011E45C
     .4byte func_8011F26C
     .4byte func_8011F26C
@@ -1316,7 +1316,7 @@ ft_SpecialN:
     .4byte func_80134E58
     .4byte func_800ECDAC
     .4byte func_801120E8
-    .4byte ftNess_SpecialN_Action
+    .4byte func_80116F94
     .4byte func_8011E3D0
     .4byte func_8011F1F8
     .4byte func_8011F1F8
@@ -1353,7 +1353,7 @@ ft_SpecialLw:
     .4byte func_8013460C
     .4byte func_800EB65C
     .4byte func_80114160
-    .4byte ftNess_SpecialLwStart_Action
+    .4byte func_80119E14
     .4byte func_8011D11C
     .4byte func_80122904
     .4byte func_80122904
@@ -1390,7 +1390,7 @@ ft_SpecialHi:
     .4byte func_80135A2C
     .4byte func_800EBB1C
     .4byte func_801130D0
-    .4byte ftNess_SpecialHiStart_Action
+    .4byte func_80118120
     .4byte func_8011D72C
     .4byte func_801211B4
     .4byte NULL
@@ -1427,7 +1427,7 @@ ft_OnAbsorb:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte ftNess_OnAbsorb
+    .4byte func_8011493C
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1455,38 +1455,38 @@ ft_OnAbsorb:
 
 .global ft_OnItemPickup
 ft_OnItemPickup:
-    .4byte ftMario_func_800E0A20
-    .4byte func_800E55A8
-    .4byte func_800E28E8
-    .4byte func_8010D7A8
-    .4byte func_800EE914
-    .4byte func_80132B3C
-    .4byte func_800EAFA4
-    .4byte func_80110204
-    .4byte ftNess_OnCatchItem
-    .4byte func_8011B740
-    .4byte func_8011ED38
-    .4byte func_8011ED38
-    .4byte ftPikachu_UnkHeldItemAction_801244B8
-    .4byte func_80128464
-    .4byte func_8012BACC
-    .4byte func_8013C6EC
-    .4byte func_80144EE0
-    .4byte func_80142388
-    .4byte func_801362B0
-    .4byte func_801393CC
-    .4byte func_80148DC0
-    .4byte func_80149560
-    .4byte func_80149B00
-    .4byte func_80149FE4
-    .4byte func_8014A5B8
-    .4byte func_8014EC58
-    .4byte func_8014EF60
+    .4byte ftMario_OnItemPickup
+    .4byte ftFox_OnItemPickup
+    .4byte ftCFalcon_OnItemPickup
+    .4byte ftDonkey_OnItemPickup
+    .4byte ftKirby_OnItemPickup  /*macro doesn't work*/
+    .4byte ftKoopa_OnItemPickup
+    .4byte ftLink_OnItemPickup  /*macro doesn't work*/
+    .4byte ftSeak_OnItemPickup
+    .4byte ftNess_OnItemPickup
+    .4byte ftPeach_OnItemPickup
+    .4byte ftIcelimber_OnItemPickup
+    .4byte ftIcelimber_OnItemPickup
+    .4byte ftPikachu_OnItemPickup
+    .4byte ftSamus_OnItemPickup
+    .4byte ftYoshi_OnItemPickup
+    .4byte ftPurin_OnItemPickup  /*macro doesn't work*/
+    .4byte ftMewtwo_OnItemPickup  /*macro doesn't work - is a stub function*/
+    .4byte ftLuigi_OnItemPickup
+    .4byte ftMars_OnItemPickup
+    .4byte ftZelda_OnItemPickup
+    .4byte ftCLink_OnItemPickup  /*macro doesn't work*/
+    .4byte ftDrMario_OnItemPickup
+    .4byte ftFalco_OnItemPickup
+    .4byte ftPichu_OnItemPickup
+    .4byte ftGameWatch_OnItemPickup
+    .4byte ftGanon_OnItemPickup
+    .4byte ftRoy_OnItemPickup
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F218
-    .4byte func_8014F460
-    .4byte func_8014F720
+    .4byte ftZakoBoy_OnItemPickup
+    .4byte ftZakoGirl_OnItemPickup
+    .4byte ftGKoopa_OnItemPickup
     .4byte NULL
 
 .global ft_OnItemInvisible
@@ -1499,7 +1499,7 @@ ft_OnItemInvisible:
     .4byte func_80132C1C
     .4byte func_800EB018
     .4byte func_801102E4
-    .4byte ftNess_StoreHeldItem
+    .4byte func_80114A48
     .4byte func_8011B820
     .4byte func_8011EE18
     .4byte func_8011EE18
@@ -1535,7 +1535,7 @@ ft_OnItemVisible:
     .4byte func_80132C64
     .4byte func_800EB060
     .4byte func_8011032C
-    .4byte ftNess_RestoreHeldItem
+    .4byte func_80114A90
     .4byte func_8011B868
     .4byte func_8011EE60
     .4byte func_8011EE60
@@ -1571,7 +1571,7 @@ ft_OnItemRelease:
     .4byte func_80132CAC
     .4byte func_800EB0A8
     .4byte func_80110374
-    .4byte ftNess_OnDropItem
+    .4byte func_80114AD8
     .4byte func_8011B8B0
     .4byte func_8011EEA8
     .4byte func_8011EEA8
@@ -1599,38 +1599,38 @@ ft_OnItemRelease:
 
 .global ft_OnItemCatch
 ft_OnItemCatch:
-    .4byte ftMario_func_800E0A20
-    .4byte func_800E55A8
-    .4byte func_800E28E8
-    .4byte func_8010D7A8
-    .4byte func_800EE914
-    .4byte func_80132B3C
+    .4byte ftMario_OnItemPickup
+    .4byte ftFox_OnItemPickup
+    .4byte ftCFalcon_OnItemPickup
+    .4byte ftDonkey_OnItemPickup
+    .4byte ftKirby_OnItemPickup
+    .4byte ftKoopa_OnItemPickup
     .4byte func_800EB11C
-    .4byte func_80110204
-    .4byte ftNess_OnCatchItem
-    .4byte func_8011B740
-    .4byte func_8011ED38
-    .4byte func_8011ED38
-    .4byte ftPikachu_UnkHeldItemAction_801244B8
-    .4byte func_80128464
-    .4byte func_8012BACC
-    .4byte func_8013C6EC
-    .4byte func_80144EE0
-    .4byte func_80142388
-    .4byte func_801362B0
-    .4byte func_801393CC
+    .4byte ftSeak_OnItemPickup
+    .4byte ftNess_OnItemPickup
+    .4byte ftPeach_OnItemPickup
+    .4byte ftIcelimber_OnItemPickup
+    .4byte ftIcelimber_OnItemPickup
+    .4byte ftPikachu_OnItemPickup
+    .4byte ftSamus_OnItemPickup
+    .4byte ftYoshi_OnItemPickup
+    .4byte ftPurin_OnItemPickup
+    .4byte ftMewtwo_OnItemPickup
+    .4byte ftLuigi_OnItemPickup
+    .4byte ftMars_OnItemPickup
+    .4byte ftZelda_OnItemPickup
     .4byte func_80148F38
-    .4byte func_80149560
-    .4byte func_80149B00
-    .4byte func_80149FE4
-    .4byte func_8014A5B8
-    .4byte func_8014EC58
-    .4byte func_8014EF60
+    .4byte ftDrMario_OnItemPickup
+    .4byte ftFalco_OnItemPickup
+    .4byte ftPichu_OnItemPickup
+    .4byte ftGameWatch_OnItemPickup
+    .4byte ftGanon_OnItemPickup
+    .4byte ftRoy_OnItemPickup
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F218
-    .4byte func_8014F460
-    .4byte func_8014F720
+    .4byte ftZakoBoy_OnItemPickup
+    .4byte ftZakoGirl_OnItemPickup
+    .4byte ftGKoopa_OnItemPickup
     .4byte NULL
 
 .global lbl_803C1B20
@@ -1643,7 +1643,7 @@ lbl_803C1B20:
     .4byte func_80132CAC
     .4byte func_800EB1FC
     .4byte func_80110374
-    .4byte ftNess_OnDropItem
+    .4byte func_80114AD8
     .4byte func_8011B8B0
     .4byte func_8011EEA8
     .4byte func_8011EEA8
@@ -1751,7 +1751,7 @@ ft_OnKnockbackEnter:
     .4byte func_80132D38
     .4byte func_800EB2AC
     .4byte func_80110408
-    .4byte ftNess_ToggleHurtMatAnims
+    .4byte func_80114B6C
     .4byte func_8011B998
     .4byte func_8011F0E4
     .4byte func_8011F0E4
@@ -1787,7 +1787,7 @@ lbl_803C1D30:
     .4byte func_80132D7C
     .4byte func_800EB2F0
     .4byte func_8011044C
-    .4byte ftNess_ToggleNormalMatAnims
+    .4byte func_80114BB0
     .4byte func_8011B9DC
     .4byte func_8011F128
     .4byte func_8011F128
@@ -1858,7 +1858,7 @@ lbl_803C1E38:
     .4byte func_800EE818
     .4byte NULL
     .4byte NULL
-    .4byte func_801101CC
+    .4byte ftSeak_801101CC
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1895,7 +1895,7 @@ lbl_803C1EBC:
     .4byte func_80132D00
     .4byte func_800EB250
     .4byte func_801103C8
-    .4byte ftNess_CopySpecialAttrs
+    .4byte func_80114B2C
     .4byte func_8011B904
     .4byte func_8011F0A4
     .4byte func_80122FCC
