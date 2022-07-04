@@ -35,3 +35,12 @@ jobs:
       run: make -j$(nproc)
     - name: Build Melee
       run: make -j$(nproc) ${{ matrix.makeflags }} WINE=./tools/WiBo/wibo
+    - name: Upload map
+      if: matrix.makeflags == 'GENERATE_MAP=1'
+      uses: actions/upload-artifact@v2
+      with:
+        name: GALE01.map
+        path: build/ssbm.us.1.2/GALE01.map
+    - name: Calc progress
+      if: matrix.makeflags == 'GENERATE_MAP=1'
+      run: python3 tools/calcprogress.py build/ssbm.us.1.2/main.dol build/ssbm.us.1.2/GALE01.map >> $GITHUB_STEP_SUMMARY
