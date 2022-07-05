@@ -7,21 +7,21 @@ void ftIceClimber_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void func_8011EE18(HSD_GObj* fighterObj) {
+void ftIceClimber_OnItemInvisible(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     if (!func_8026B2B4(fighter->x1974_heldItem)) {
         func_80070CC4(fighterObj, 1);
     }
 }
 
-void func_8011EE60(HSD_GObj *fighterObj) {
+void ftIceClimber_OnItemVisible(HSD_GObj *fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     if (!func_8026B2B4(fighter->x1974_heldItem)) {
         func_80070C48(fighterObj, 1);
     }
 }
 
-void func_8011EEA8(HSD_GObj* fighterObj, s32 arg1) {
+void ftIceClimber_OnItemRelease(HSD_GObj* fighterObj, s32 arg1) {
     func_80070FB4(fighterObj, 1, -1);
     if (arg1) {
         func_80070CC4(fighterObj, 1);

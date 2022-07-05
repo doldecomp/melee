@@ -29,8 +29,8 @@ BOOL func_800E5534(HSD_GObj* gobj);
 void ftFox_OnDeath(HSD_GObj* gobj);
 void func_800E5588(HSD_GObj* gobj);
 void ftFox_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
-void func_800E5688(HSD_GObj* gobj);
-void func_800E56D0(HSD_GObj* gobj);
-void func_800E5718(HSD_GObj* gobj, s32 arg1);
+void ftFox_OnItemInvisible(HSD_GObj* gobj);
+void ftFox_OnItemVisible(HSD_GObj* gobj);
+void ftFox_OnItemRelease(HSD_GObj* gobj, s32 arg1);
 
 #endif

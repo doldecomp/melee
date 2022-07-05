@@ -15,7 +15,7 @@ void ftZakoGirl_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 0, 0);
 }
 
-void func_8014F540(HSD_GObj* gobj)
+void ftZakoGirl_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
     if (func_8026B2B4(ft->x1974_heldItem) == 0) {
@@ -23,7 +23,7 @@ void func_8014F540(HSD_GObj* gobj)
     }
 }
 
-void func_8014F588(HSD_GObj* gobj)
+void ftZakoGirl_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
     if (func_8026B2B4(ft->x1974_heldItem) == 0) {
@@ -31,7 +31,7 @@ void func_8014F588(HSD_GObj* gobj)
     }
 }
 
-void func_8014F5D0(HSD_GObj* gobj, s32 arg1)
+void ftZakoGirl_OnItemRelease(HSD_GObj* gobj, s32 arg1)
 {
     func_80070FB4(gobj, 0, -1);
     if (arg1 != 0) {

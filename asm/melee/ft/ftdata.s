@@ -1491,110 +1491,110 @@ ft_OnItemCatch:
 
 .global ft_OnItemInvisible
 ft_OnItemInvisible:
-    .4byte ftMario_func_800E0B00
-    .4byte func_800E5688
-    .4byte func_800E29C8
-    .4byte func_8010D888
-    .4byte func_800EE9DC
-    .4byte func_80132C1C
-    .4byte func_800EB018
-    .4byte func_801102E4
-    .4byte func_80114A48
-    .4byte func_8011B820
-    .4byte func_8011EE18
-    .4byte func_8011EE18
-    .4byte ftPikachu_80124598
-    .4byte func_80128544
-    .4byte func_8012BBAC
-    .4byte func_8013C798
-    .4byte func_80144F50
-    .4byte func_80142468
-    .4byte func_80136390
-    .4byte func_801394AC
-    .4byte func_80148E34
-    .4byte func_80149640
-    .4byte func_80149BE0
-    .4byte func_8014A0C4
-    .4byte func_8014A698
-    .4byte func_8014ED38
-    .4byte func_8014F040
+    .4byte ftMario_OnItemInvisible
+    .4byte ftFox_OnItemInvisible
+    .4byte ftCFalcon_OnItemInvisible
+    .4byte ftDonkey_OnItemInvisible
+    .4byte ftKirby_OnItemInvisible
+    .4byte ftKoopa_OnItemInvisible
+    .4byte ftLink_OnItemInvisible
+    .4byte ftSeak_OnItemInvisible
+    .4byte ftNess_OnItemInvisible
+    .4byte ftPeach_OnItemInvisible
+    .4byte ftIceClimber_OnItemInvisible
+    .4byte ftIceClimber_OnItemInvisible
+    .4byte ftPikachu_OnItemInvisible
+    .4byte ftSamus_OnItemInvisible
+    .4byte ftYoshi_OnItemInvisible
+    .4byte ftPurin_OnItemInvisible
+    .4byte ftMewTwo_OnItemInvisible
+    .4byte ftLuigi_OnItemInvisible
+    .4byte ftMars_OnItemInvisible
+    .4byte ftZelda_OnItemInvisible
+    .4byte ftCLink_OnItemInvisible
+    .4byte ftDrMario_OnItemInvisible
+    .4byte ftFalco_OnItemInvisible
+    .4byte ftPichu_OnItemInvisible
+    .4byte ftGameWatch_OnItemInvisible
+    .4byte ftGanon_OnItemInvisible
+    .4byte ftRoy_OnItemInvisible
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F2F8
-    .4byte func_8014F540
-    .4byte func_8014F800
+    .4byte ftZakoBoy_OnItemInvisible
+    .4byte ftZakoGirl_OnItemInvisible
+    .4byte ftGKoopa_OnItemInvisible
     .4byte NULL
 
 .global ft_OnItemVisible
 ft_OnItemVisible:
-    .4byte ftMario_func_800E0B48
-    .4byte func_800E56D0
-    .4byte func_800E2A10
-    .4byte func_8010D8D0
-    .4byte func_800EEA24
-    .4byte func_80132C64
-    .4byte func_800EB060
-    .4byte func_8011032C
-    .4byte func_80114A90
-    .4byte func_8011B868
-    .4byte func_8011EE60
-    .4byte func_8011EE60
-    .4byte ftPikachu_UnkHeldItem_801245E0
-    .4byte func_8012858C
-    .4byte func_8012BBF4
-    .4byte func_8013C7E8
-    .4byte func_80144F54
-    .4byte func_801424B0
-    .4byte func_801363D8
-    .4byte func_801394F4
-    .4byte func_80148E7C
-    .4byte func_80149688
-    .4byte func_80149C28
-    .4byte func_8014A10C
-    .4byte func_8014A6E0
-    .4byte func_8014ED80
-    .4byte func_8014F088
+    .4byte ftMario_OnItemVisible
+    .4byte ftFox_OnItemVisible
+    .4byte ftCFalcon_OnItemVisible
+    .4byte ftDonkey_OnItemVisible
+    .4byte ftKirby_OnItemVisible
+    .4byte ftKoopa_OnItemVisible
+    .4byte ftLink_OnItemVisible
+    .4byte ftSeak_OnItemVisible
+    .4byte ftNess_OnItemVisible
+    .4byte ftPeach_OnItemVisible
+    .4byte ftIceClimber_OnItemVisible
+    .4byte ftIceClimber_OnItemVisible
+    .4byte ftPikachu_OnItemVisible
+    .4byte ftSamus_OnItemVisible
+    .4byte ftYoshi_OnItemVisible
+    .4byte ftPurin_OnItemVisible
+    .4byte ftMewTwo_OnItemVisible
+    .4byte ftLuigi_OnItemVisible
+    .4byte ftMars_OnItemVisible
+    .4byte ftZelda_OnItemVisible
+    .4byte ftCLink_OnItemVisible
+    .4byte ftDrMario_OnItemVisible
+    .4byte ftFalco_OnItemVisible
+    .4byte ftPichu_OnItemVisible
+    .4byte ftGameWatch_OnItemVisible
+    .4byte ftGanon_OnItemVisible
+    .4byte ftRoy_OnItemVisible
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F340
-    .4byte func_8014F588
-    .4byte func_8014F848
+    .4byte ftZakoBoy_OnItemVisible
+    .4byte ftZakoGirl_OnItemVisible
+    .4byte ftGKoopa_OnItemVisible
     .4byte NULL
 
 .global ft_OnItemRelease
 ft_OnItemRelease:
-    .4byte ftMario_func_800E0B90
-    .4byte func_800E5718
-    .4byte func_800E2A58
-    .4byte func_8010D918
-    .4byte func_800EEA6C
-    .4byte func_80132CAC
-    .4byte func_800EB0A8
-    .4byte func_80110374
-    .4byte func_80114AD8
-    .4byte func_8011B8B0
-    .4byte func_8011EEA8
-    .4byte func_8011EEA8
-    .4byte ftPikachu_80124628
-    .4byte func_801285D4
-    .4byte func_8012BC3C
-    .4byte func_8013C838
-    .4byte func_80144F4C
-    .4byte func_801424F8
-    .4byte func_80136420
-    .4byte func_8013953C
-    .4byte func_80148EC4
-    .4byte func_801496D0
-    .4byte func_80149C70
-    .4byte func_8014A154
-    .4byte func_8014A728
-    .4byte func_8014EDC8
-    .4byte func_8014F0D0
+    .4byte ftMario_OnItemRelease
+    .4byte ftFox_OnItemRelease
+    .4byte ftCFalcon_OnItemRelease
+    .4byte ftDonkey_OnItemRelease
+    .4byte ftKirby_OnItemRelease
+    .4byte ftKoopa_OnItemRelease
+    .4byte ftLink_OnItemRelease
+    .4byte ftSeak_OnItemRelease
+    .4byte ftNess_OnItemRelease
+    .4byte ftPeach_OnItemRelease
+    .4byte ftIceClimber_OnItemRelease
+    .4byte ftIceClimber_OnItemRelease
+    .4byte ftPikachu_OnItemRelease
+    .4byte ftSamus_OnItemRelease
+    .4byte ftYoshi_OnItemRelease
+    .4byte ftPurin_OnItemRelease
+    .4byte ftMewTwo_OnItemRelease
+    .4byte ftLuigi_OnItemRelease
+    .4byte ftMars_OnItemRelease
+    .4byte ftZelda_OnItemRelease
+    .4byte ftCLink_OnItemRelease
+    .4byte ftDrMario_OnItemRelease
+    .4byte ftFalco_OnItemRelease
+    .4byte ftPichu_OnItemRelease
+    .4byte ftGameWatch_OnItemRelease
+    .4byte ftGanon_OnItemRelease
+    .4byte ftRoy_OnItemRelease
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F388
-    .4byte func_8014F5D0
-    .4byte func_8014F890
+    .4byte ftZakoBoy_OnItemRelease
+    .4byte ftZakoGirl_OnItemRelease
+    .4byte ftGKoopa_OnItemRelease
     .4byte NULL
 
 .global ft_OnItemPickup
@@ -1633,40 +1633,40 @@ ft_OnItemPickup:
     .4byte ftGKoopa_OnItemPickup
     .4byte NULL
 
-.global lbl_803C1B20
-lbl_803C1B20:
-    .4byte ftMario_func_800E0B90
-    .4byte func_800E5718
-    .4byte func_800E2A58
-    .4byte func_8010D918
-    .4byte func_800EEA6C
-    .4byte func_80132CAC
-    .4byte func_800EB1FC
-    .4byte func_80110374
-    .4byte func_80114AD8
-    .4byte func_8011B8B0
-    .4byte func_8011EEA8
-    .4byte func_8011EEA8
-    .4byte ftPikachu_80124628
-    .4byte func_801285D4
-    .4byte func_8012BC3C
-    .4byte func_8013C838
-    .4byte func_80144F4C
-    .4byte func_801424F8
-    .4byte func_80136420
-    .4byte func_8013953C
-    .4byte func_80149018
-    .4byte func_801496D0
-    .4byte func_80149C70
-    .4byte func_8014A154
-    .4byte func_8014A728
-    .4byte func_8014EDC8
-    .4byte func_8014F0D0
+.global ft_OnItemThrow
+ft_OnItemThrow:
+    .4byte ftMario_OnItemRelease
+    .4byte ftFox_OnItemRelease
+    .4byte ftCFalcon_OnItemRelease
+    .4byte ftDonkey_OnItemRelease
+    .4byte ftKirby_OnItemRelease
+    .4byte ftKoopa_OnItemRelease
+    .4byte ftLink_OnItemThrow
+    .4byte ftSeak_OnItemRelease
+    .4byte ftNess_OnItemRelease
+    .4byte ftPeach_OnItemRelease
+    .4byte ftIceClimber_OnItemRelease
+    .4byte ftIceClimber_OnItemRelease
+    .4byte ftPikachu_OnItemRelease
+    .4byte ftSamus_OnItemRelease
+    .4byte ftYoshi_OnItemRelease
+    .4byte ftPurin_OnItemRelease
+    .4byte ftMewTwo_OnItemRelease
+    .4byte ftLuigi_OnItemRelease
+    .4byte ftMars_OnItemRelease
+    .4byte ftZelda_OnItemRelease
+    .4byte ftCLink_OnItemThrow
+    .4byte ftDrMario_OnItemRelease
+    .4byte ftFalco_OnItemRelease
+    .4byte ftPichu_OnItemRelease
+    .4byte ftGameWatch_OnItemRelease
+    .4byte ftGanon_OnItemRelease
+    .4byte ftRoy_OnItemRelease
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F388
-    .4byte func_8014F5D0
-    .4byte func_8014F890
+    .4byte ftZakoBoy_OnItemRelease
+    .4byte ftZakoGirl_OnItemRelease
+    .4byte ftGKoopa_OnItemRelease
     .4byte NULL
 
 .global lbl_803C1BA4

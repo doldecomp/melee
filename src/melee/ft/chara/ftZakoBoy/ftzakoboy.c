@@ -10,7 +10,7 @@ void ftZakoBoy_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 0, 0);
 }
 
-void func_8014F2F8(HSD_GObj* gobj)
+void ftZakoBoy_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
     if (func_8026B2B4(ft->x1974_heldItem) == 0) {
@@ -18,7 +18,7 @@ void func_8014F2F8(HSD_GObj* gobj)
     }
 }
 
-void func_8014F340(HSD_GObj* gobj)
+void ftZakoBoy_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
     if (func_8026B2B4(ft->x1974_heldItem) == 0) {
@@ -26,7 +26,7 @@ void func_8014F340(HSD_GObj* gobj)
     }
 }
 
-void func_8014F388(HSD_GObj* gobj, s32 arg1)
+void ftZakoBoy_OnItemRelease(HSD_GObj* gobj, s32 arg1)
 {
     func_80070FB4(gobj, 0, -1);
     if (arg1 != 0) {

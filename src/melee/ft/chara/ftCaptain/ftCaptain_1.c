@@ -24,22 +24,22 @@ void ftCFalcon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-// func_800E29C8
+// ftCFalcon_OnItemInvisible
 // OnMakeItemInvisible
 // https://decomp.me/scratch/maRvM
-void func_800E29C8(HSD_GObj* fighter_gobj)
+void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
-    Fighter* fighter_data = (Fighter*)fighter_gobj->user_data;
+    Fighter* fighter_data = fighter_gobj->user_data;
     if(func_8026B2B4(fighter_data->x1974_heldItem) == 0)
     {
         func_80070CC4(fighter_gobj, 1);
     }
 }
 
-// func_800E2A10
+// ftCFalcon_OnItemVisible
 // OnMakeInvisible
 // https://decomp.me/scratch/95tCp
-void func_800E2A10(HSD_GObj* fighter_gobj)
+void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj)
 {
     Fighter* ft = (Fighter*)fighter_gobj->user_data;
     if(func_8026B2B4(ft->x1974_heldItem) == 0)
@@ -48,10 +48,10 @@ void func_800E2A10(HSD_GObj* fighter_gobj)
     }
 }
 
-// func_800E2A58
+// ftCFalcon_OnItemRelease
 // Used for both OnItemRelease and OnUnknownItemRelated
 // https://decomp.me/scratch/PCT5B
-void func_800E2A58(HSD_GObj* fighter_gobj, s32 unk1)
+void ftCFalcon_OnItemRelease(HSD_GObj* fighter_gobj, s32 unk1)
 {
     func_80070FB4(fighter_gobj, 1, -1);//Fighter_SetHoldKind
     if(unk1 != 0)

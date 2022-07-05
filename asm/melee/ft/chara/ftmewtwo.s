@@ -31,16 +31,16 @@ lbl_80144F18:
 /* 80144F44 00141B24  7C 08 03 A6 */	mtlr r0
 /* 80144F48 00141B28  4E 80 00 20 */	blr 
 
-.global func_80144F4C
-func_80144F4C:
+.global ftMewTwo_OnItemRelease
+ftMewTwo_OnItemRelease:
 /* 80144F4C 00141B2C  4E 80 00 20 */	blr 
 
-.global func_80144F50
-func_80144F50:
+.global ftMewTwo_OnItemInvisible
+ftMewTwo_OnItemInvisible:
 /* 80144F50 00141B30  4E 80 00 20 */	blr 
 
-.global func_80144F54
-func_80144F54:
+.global ftMewTwo_OnItemVisible
+ftMewTwo_OnItemVisible:
 /* 80144F54 00141B34  4E 80 00 20 */	blr 
 
 .global func_80144F58

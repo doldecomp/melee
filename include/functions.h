@@ -2805,7 +2805,7 @@ void func_800E5EBC(struct _HSD_GObj*);
 // ? func_800EACD8(?);
 // ? func_800EAD64(?);
 // ? ftLink_OnLoadForCLink(?);
-void ftLink_OnItemPickup(HSD_GObj*, int);
+// void ftLink_OnItemPickup(HSD_GObj*, int);
 // ? func_800EB1FC(?);
 // ? func_800EB250(?);
 // ? func_800EB3BC(?);

@@ -18,7 +18,7 @@ void ftMars_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
 // 80136390 00132F70
 // ftMars_OnItemInvisible
 // https://decomp.me/scratch/BksNr
-void func_80136390(HSD_GObj* gobj) {
+void ftMars_OnItemInvisible(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (func_8026B2B4(ft->x1974_heldItem) == 0) {
         func_80070CC4(gobj, 0);
@@ -28,7 +28,7 @@ void func_80136390(HSD_GObj* gobj) {
 // 801363D8 00132FB8
 // ftMars_OnItemVisible
 // https://decomp.me/scratch/9zuEy
-void func_801363D8(HSD_GObj* gobj) {
+void ftMars_OnItemVisible(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (func_8026B2B4(ft->x1974_heldItem) == 0) {
         func_80070C48(gobj, 0);
@@ -38,7 +38,7 @@ void func_801363D8(HSD_GObj* gobj) {
 // 80136420 00133000
 // ftMars_OnItemRelease
 // https://decomp.me/scratch/Ws8ow
-void func_80136420(HSD_GObj* gobj, s32 arg1) {
+void ftMars_OnItemRelease(HSD_GObj* gobj, s32 arg1) {
     func_80070FB4(gobj, 0, -1);
     if (arg1 != 0) {
         func_80070CC4(gobj, 1);

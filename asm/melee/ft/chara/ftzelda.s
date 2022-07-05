@@ -3,8 +3,8 @@
 .section .text  # 0x80005940 - 0x803B7240
 
 
-.global func_801394AC
-func_801394AC:
+.global ftZelda_OnItemInvisible
+ftZelda_OnItemInvisible:
 /* 801394AC 0013608C  7C 08 02 A6 */	mflr r0
 /* 801394B0 00136090  90 01 00 04 */	stw r0, 4(r1)
 /* 801394B4 00136094  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -25,8 +25,8 @@ lbl_801394E0:
 /* 801394EC 001360CC  7C 08 03 A6 */	mtlr r0
 /* 801394F0 001360D0  4E 80 00 20 */	blr 
 
-.global func_801394F4
-func_801394F4:
+.global ftZelda_OnItemVisible
+ftZelda_OnItemVisible:
 /* 801394F4 001360D4  7C 08 02 A6 */	mflr r0
 /* 801394F8 001360D8  90 01 00 04 */	stw r0, 4(r1)
 /* 801394FC 001360DC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -47,8 +47,8 @@ lbl_80139528:
 /* 80139534 00136114  7C 08 03 A6 */	mtlr r0
 /* 80139538 00136118  4E 80 00 20 */	blr 
 
-.global func_8013953C
-func_8013953C:
+.global ftZelda_OnItemRelease
+ftZelda_OnItemRelease:
 /* 8013953C 0013611C  7C 08 02 A6 */	mflr r0
 /* 80139540 00136120  38 A0 FF FF */	li r5, -1
 /* 80139544 00136124  90 01 00 04 */	stw r0, 4(r1)

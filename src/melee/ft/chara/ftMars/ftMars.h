@@ -38,9 +38,9 @@ typedef struct _MarsAttributes {
 
 void ftMars_OnDeath(HSD_GObj* gobj);
 void ftMars_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
-void func_80136390(HSD_GObj* gobj);
-void func_801363D8(HSD_GObj* gobj);
-void func_80136420(HSD_GObj* gobj, s32 arg1);
+void ftMars_OnItemInvisible(HSD_GObj* gobj);
+void ftMars_OnItemVisible(HSD_GObj* gobj);
+void ftMars_OnItemRelease(HSD_GObj* gobj, s32 arg1);
 void ftMars_OnLoadForRoy(Fighter* ft);
 void ftMars_OnLoad(HSD_GObj* gobj);
 void func_801364E8(HSD_GObj* gobj);

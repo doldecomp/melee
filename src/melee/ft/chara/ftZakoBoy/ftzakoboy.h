@@ -11,9 +11,9 @@ typedef struct _ftZakoboyAttributes
 
 void ftZakoBoy_OnDeath(HSD_GObj*);
 void ftZakoBoy_OnItemPickup(HSD_GObj*, BOOL);
-void func_8014F2F8(HSD_GObj*);
-void func_8014F340(HSD_GObj*);
-void func_8014F388(HSD_GObj*, s32);
+void ftZakoBoy_OnItemInvisible(HSD_GObj*);
+void ftZakoBoy_OnItemVisible(HSD_GObj*);
+void ftZakoBoy_OnItemRelease(HSD_GObj*, s32);
 void ftZakoBoy_OnLoad(HSD_GObj*);
 void func_8014F3FC(HSD_GObj*);
 

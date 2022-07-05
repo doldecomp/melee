@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_801102E4
-func_801102E4:
+.global ftSeak_OnItemInvisible
+ftSeak_OnItemInvisible:
 /* 801102E4 0010CEC4  7C 08 02 A6 */	mflr r0
 /* 801102E8 0010CEC8  90 01 00 04 */	stw r0, 4(r1)
 /* 801102EC 0010CECC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -24,8 +24,8 @@ lbl_80110318:
 /* 80110324 0010CF04  7C 08 03 A6 */	mtlr r0
 /* 80110328 0010CF08  4E 80 00 20 */	blr 
 
-.global func_8011032C
-func_8011032C:
+.global ftSeak_OnItemVisible
+ftSeak_OnItemVisible:
 /* 8011032C 0010CF0C  7C 08 02 A6 */	mflr r0
 /* 80110330 0010CF10  90 01 00 04 */	stw r0, 4(r1)
 /* 80110334 0010CF14  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -46,8 +46,8 @@ lbl_80110360:
 /* 8011036C 0010CF4C  7C 08 03 A6 */	mtlr r0
 /* 80110370 0010CF50  4E 80 00 20 */	blr 
 
-.global func_80110374
-func_80110374:
+.global ftSeak_OnItemRelease
+ftSeak_OnItemRelease:
 /* 80110374 0010CF54  7C 08 02 A6 */	mflr r0
 /* 80110378 0010CF58  38 A0 FF FF */	li r5, -1
 /* 8011037C 0010CF5C  90 01 00 04 */	stw r0, 4(r1)

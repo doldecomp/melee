@@ -38,7 +38,7 @@ void ftGKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void func_8014F800(HSD_GObj* gobj)
+void ftGKoopa_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
     if (func_8026B2B4(ft->x1974_heldItem) == 0) {
@@ -46,7 +46,7 @@ void func_8014F800(HSD_GObj* gobj)
     }
 }
 
-void func_8014F848(HSD_GObj* gobj)
+void ftGKoopa_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter* ft = gobj->user_data;
     if (func_8026B2B4(ft->x1974_heldItem) == 0) {
@@ -54,7 +54,7 @@ void func_8014F848(HSD_GObj* gobj)
     }
 }
 
-void func_8014F890(HSD_GObj* gobj, s32 arg1)
+void ftGKoopa_OnItemRelease(HSD_GObj* gobj, s32 arg1)
 {
     func_80070FB4(gobj, 1, -1);
     if (arg1 != 0) {

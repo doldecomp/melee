@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80142468
-func_80142468:
+.global ftLuigi_OnItemInvisible
+ftLuigi_OnItemInvisible:
 /* 80142468 0013F048  7C 08 02 A6 */	mflr r0
 /* 8014246C 0013F04C  90 01 00 04 */	stw r0, 4(r1)
 /* 80142470 0013F050  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -24,8 +24,8 @@ lbl_8014249C:
 /* 801424A8 0013F088  7C 08 03 A6 */	mtlr r0
 /* 801424AC 0013F08C  4E 80 00 20 */	blr 
 
-.global func_801424B0
-func_801424B0:
+.global ftLuigi_OnItemVisible
+ftLuigi_OnItemVisible:
 /* 801424B0 0013F090  7C 08 02 A6 */	mflr r0
 /* 801424B4 0013F094  90 01 00 04 */	stw r0, 4(r1)
 /* 801424B8 0013F098  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -46,8 +46,8 @@ lbl_801424E4:
 /* 801424F0 0013F0D0  7C 08 03 A6 */	mtlr r0
 /* 801424F4 0013F0D4  4E 80 00 20 */	blr 
 
-.global func_801424F8
-func_801424F8:
+.global ftLuigi_OnItemRelease
+ftLuigi_OnItemRelease:
 /* 801424F8 0013F0D8  7C 08 02 A6 */	mflr r0
 /* 801424FC 0013F0DC  38 A0 FF FF */	li r5, -1
 /* 80142500 0013F0E0  90 01 00 04 */	stw r0, 4(r1)

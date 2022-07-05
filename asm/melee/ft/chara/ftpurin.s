@@ -53,8 +53,8 @@ lbl_8013C77C:
 /* 8013C790 00139370  7C 08 03 A6 */	mtlr r0
 /* 8013C794 00139374  4E 80 00 20 */	blr 
 
-.global func_8013C798
-func_8013C798:
+.global ftPurin_OnItemInvisible
+ftPurin_OnItemInvisible:
 /* 8013C798 00139378  7C 08 02 A6 */	mflr r0
 /* 8013C79C 0013937C  90 01 00 04 */	stw r0, 4(r1)
 /* 8013C7A0 00139380  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -77,8 +77,8 @@ lbl_8013C7D4:
 /* 8013C7E0 001393C0  7C 08 03 A6 */	mtlr r0
 /* 8013C7E4 001393C4  4E 80 00 20 */	blr 
 
-.global func_8013C7E8
-func_8013C7E8:
+.global ftPurin_OnItemVisible
+ftPurin_OnItemVisible:
 /* 8013C7E8 001393C8  7C 08 02 A6 */	mflr r0
 /* 8013C7EC 001393CC  90 01 00 04 */	stw r0, 4(r1)
 /* 8013C7F0 001393D0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -101,8 +101,8 @@ lbl_8013C824:
 /* 8013C830 00139410  7C 08 03 A6 */	mtlr r0
 /* 8013C834 00139414  4E 80 00 20 */	blr 
 
-.global func_8013C838
-func_8013C838:
+.global ftPurin_OnItemRelease
+ftPurin_OnItemRelease:
 /* 8013C838 00139418  7C 08 02 A6 */	mflr r0
 /* 8013C83C 0013941C  38 A0 FF FF */	li r5, -1
 /* 8013C840 00139420  90 01 00 04 */	stw r0, 4(r1)

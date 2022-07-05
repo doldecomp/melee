@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80128544
-func_80128544:
+.global ftSamus_OnItemInvisible
+ftSamus_OnItemInvisible:
 /* 80128544 00125124  7C 08 02 A6 */	mflr r0
 /* 80128548 00125128  90 01 00 04 */	stw r0, 4(r1)
 /* 8012854C 0012512C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -24,8 +24,8 @@ lbl_80128578:
 /* 80128584 00125164  7C 08 03 A6 */	mtlr r0
 /* 80128588 00125168  4E 80 00 20 */	blr 
 
-.global func_8012858C
-func_8012858C:
+.global ftSamus_OnItemVisible
+ftSamus_OnItemVisible:
 /* 8012858C 0012516C  7C 08 02 A6 */	mflr r0
 /* 80128590 00125170  90 01 00 04 */	stw r0, 4(r1)
 /* 80128594 00125174  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -46,8 +46,8 @@ lbl_801285C0:
 /* 801285CC 001251AC  7C 08 03 A6 */	mtlr r0
 /* 801285D0 001251B0  4E 80 00 20 */	blr 
 
-.global func_801285D4
-func_801285D4:
+.global ftSamus_OnItemRelease
+ftSamus_OnItemRelease:
 /* 801285D4 001251B4  7C 08 02 A6 */	mflr r0
 /* 801285D8 001251B8  38 A0 FF FF */	li r5, -1
 /* 801285DC 001251BC  90 01 00 04 */	stw r0, 4(r1)

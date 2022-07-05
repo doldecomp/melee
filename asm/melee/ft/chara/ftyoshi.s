@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8012BBAC
-func_8012BBAC:
+.global ftYoshi_OnItemInvisible
+ftYoshi_OnItemInvisible:
 /* 8012BBAC 0012878C  7C 08 02 A6 */	mflr r0
 /* 8012BBB0 00128790  90 01 00 04 */	stw r0, 4(r1)
 /* 8012BBB4 00128794  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -24,8 +24,8 @@ lbl_8012BBE0:
 /* 8012BBEC 001287CC  7C 08 03 A6 */	mtlr r0
 /* 8012BBF0 001287D0  4E 80 00 20 */	blr 
 
-.global func_8012BBF4
-func_8012BBF4:
+.global ftYoshi_OnItemVisible
+ftYoshi_OnItemVisible:
 /* 8012BBF4 001287D4  7C 08 02 A6 */	mflr r0
 /* 8012BBF8 001287D8  90 01 00 04 */	stw r0, 4(r1)
 /* 8012BBFC 001287DC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -46,8 +46,8 @@ lbl_8012BC28:
 /* 8012BC34 00128814  7C 08 03 A6 */	mtlr r0
 /* 8012BC38 00128818  4E 80 00 20 */	blr 
 
-.global func_8012BC3C
-func_8012BC3C:
+.global ftYoshi_OnItemRelease
+ftYoshi_OnItemRelease:
 /* 8012BC3C 0012881C  7C 08 02 A6 */	mflr r0
 /* 8012BC40 00128820  38 A0 FF FF */	li r5, -1
 /* 8012BC44 00128824  90 01 00 04 */	stw r0, 4(r1)

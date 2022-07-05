@@ -24,7 +24,7 @@ void ftFox_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void func_800E5688(HSD_GObj* gobj) 
+void ftFox_OnItemInvisible(HSD_GObj* gobj) 
 {
     Fighter* ft = gobj->user_data;
 
@@ -33,7 +33,7 @@ void func_800E5688(HSD_GObj* gobj)
     }
 }
 
-void func_800E56D0(HSD_GObj* gobj) 
+void ftFox_OnItemVisible(HSD_GObj* gobj) 
 {
     Fighter* ft = gobj->user_data;
 
@@ -42,7 +42,7 @@ void func_800E56D0(HSD_GObj* gobj)
     }
 }
 
-void func_800E5718(HSD_GObj* gobj, s32 arg1) 
+void ftFox_OnItemRelease(HSD_GObj* gobj, s32 arg1) 
 {
     func_80070FB4(gobj, 1, -1);
     if (arg1 != 0) {
