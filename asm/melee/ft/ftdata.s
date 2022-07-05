@@ -1561,15 +1561,15 @@ ft_OnItemVisible:
     .4byte ftGKoopa_OnItemVisible
     .4byte NULL
 
-.global ft_OnItemRelease
-ft_OnItemRelease:
+.global ft_OnItemThrow
+ft_OnItemThrow:
     .4byte ftMario_OnItemRelease
     .4byte ftFox_OnItemRelease
     .4byte ftCFalcon_OnItemRelease
     .4byte ftDonkey_OnItemRelease
     .4byte ftKirby_OnItemRelease
     .4byte ftKoopa_OnItemRelease
-    .4byte ftLink_OnItemRelease
+    .4byte ftLink_OnItemThrow
     .4byte ftSeak_OnItemRelease
     .4byte ftNess_OnItemRelease
     .4byte ftPeach_OnItemRelease
@@ -1583,7 +1583,7 @@ ft_OnItemRelease:
     .4byte ftLuigi_OnItemRelease
     .4byte ftMars_OnItemRelease
     .4byte ftZelda_OnItemRelease
-    .4byte ftCLink_OnItemRelease
+    .4byte ftCLink_OnItemThrow
     .4byte ftDrMario_OnItemRelease
     .4byte ftFalco_OnItemRelease
     .4byte ftPichu_OnItemRelease
@@ -1633,15 +1633,15 @@ ft_OnItemPickup:
     .4byte ftGKoopa_OnItemPickup
     .4byte NULL
 
-.global ft_OnItemThrow
-ft_OnItemThrow:
+.global ft_OnItemRelease
+ft_OnItemRelease:
     .4byte ftMario_OnItemRelease
     .4byte ftFox_OnItemRelease
     .4byte ftCFalcon_OnItemRelease
     .4byte ftDonkey_OnItemRelease
     .4byte ftKirby_OnItemRelease
     .4byte ftKoopa_OnItemRelease
-    .4byte ftLink_OnItemThrow
+    .4byte ftLink_OnItemRelease
     .4byte ftSeak_OnItemRelease
     .4byte ftNess_OnItemRelease
     .4byte ftPeach_OnItemRelease
@@ -1655,7 +1655,7 @@ ft_OnItemThrow:
     .4byte ftLuigi_OnItemRelease
     .4byte ftMars_OnItemRelease
     .4byte ftZelda_OnItemRelease
-    .4byte ftCLink_OnItemThrow
+    .4byte ftCLink_OnItemRelease
     .4byte ftDrMario_OnItemRelease
     .4byte ftFalco_OnItemRelease
     .4byte ftPichu_OnItemRelease

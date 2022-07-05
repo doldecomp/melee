@@ -83,15 +83,13 @@ void ftLink_OnItemVisible(HSD_GObj* fighterObj) {
     }
 }
 
-void ftLink_OnItemThrow(HSD_GObj* fighterObj, BOOL arg1);
-
-void ftLink_OnItemRelease(HSD_GObj* fighterObj, BOOL arg1) {
+void ftLink_OnItemThrow(HSD_GObj* fighterObj, BOOL arg1) {
     Fighter* link = getFighter(fighterObj);
     if (func_8026B2B4(link->x1974_heldItem) == 1) {
         func_80074A4C(fighterObj, 1, 0);
     }
     func_80074A4C(fighterObj, 2, 0);
-    ftLink_OnItemThrow(fighterObj, arg1);
+    ftLink_OnItemRelease(fighterObj, arg1);
 }
  
 
@@ -99,7 +97,7 @@ void ftLink_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftLink_OnItemThrow(HSD_GObj* fighterObj, BOOL arg1) {
+void ftLink_OnItemRelease(HSD_GObj* fighterObj, BOOL arg1) {
     Fighter* link = getFighter(fighterObj);
     func_80070FB4(fighterObj, 1, -1);
     if (arg1) {
