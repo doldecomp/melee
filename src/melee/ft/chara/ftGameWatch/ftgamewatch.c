@@ -92,5 +92,7 @@ void ftGameWatch_8014A538(HSD_GObj* fighterObj) {
     }
 }
 
-MACRO_ft_OnItemPickup(ftGameWatch, 1, 1);
+void ftGameWatch_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 

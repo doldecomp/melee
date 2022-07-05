@@ -60,13 +60,13 @@ void func_800EAF58(HSD_GObj* fighterObj) {
     func_80149268(fighterObj);
 }
 
-void ftLink_OnItemPickup(HSD_GObj* fighterObj, int arg1) {
+void ftLink_OnItemCatch(HSD_GObj* fighterObj, int arg1) {
     Fighter* link = getFighter(fighterObj);
     if (func_8026B2B4(link->x1974_heldItem) == 1) {
         func_80074A4C(fighterObj, 1, 1);
     }
     func_80074A4C(fighterObj, 2, 1);
-    func_800EB11C(fighterObj, arg1);
+    ftLink_OnItemPickup(fighterObj, arg1);
 }
 
 void func_800EB018(HSD_GObj* fighterObj) {
@@ -93,28 +93,10 @@ void func_800EB0A8(HSD_GObj* fighterObj, BOOL arg1) {
     func_80074A4C(fighterObj, 2, 0);
     func_800EB1FC(fighterObj, arg1);
 }
+ 
 
-void func_800EB11C(HSD_GObj* fighterObj, BOOL arg1) {
-    Fighter* link = getFighter(fighterObj);
-    if (!func_8026B2B4(link->x1974_heldItem)) {
-        switch (func_8026B320(link->x1974_heldItem)){
-        case 1:
-            func_80070FB4(fighterObj, 1, 1);
-            break;
-        case 2:
-            func_80070FB4(fighterObj, 1, 0);
-            break;
-        case 3:
-            func_80070FB4(fighterObj, 1, 2);
-            break;
-        case 4:
-            func_80070FB4(fighterObj, 1, 3);
-            break;
-        }
-        if (arg1) {
-            func_80070C48(fighterObj, 1);
-        }
-    }
+void ftLink_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
 void func_800EB1FC(HSD_GObj* fighterObj, BOOL arg1) {

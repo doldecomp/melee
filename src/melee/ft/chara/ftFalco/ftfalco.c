@@ -9,7 +9,9 @@ void ftFalco_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 }
 
-MACRO_ft_OnItemPickup(ftFalco, 1, 1);
+void ftFalco_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 void func_80149BE0(HSD_GObj* gobj)
 {

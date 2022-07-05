@@ -57,7 +57,9 @@ void func_80132B38(void) {
     return;
 }
 
-MACRO_ft_OnItemPickup(ftKoopa, 1, 1);
+void ftKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 void func_80132C1C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;

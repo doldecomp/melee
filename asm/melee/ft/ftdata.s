@@ -948,13 +948,13 @@ ft_OnLoad:
     .4byte ftSeak_OnLoad
     .4byte ftNess_OnLoad
     .4byte ftPeach_OnLoad
-    .4byte ftIcelimber_OnLoad
+    .4byte ftIceClimber_OnLoad
     .4byte ftNana_OnLoad
     .4byte ftPikachu_OnLoad
     .4byte ftSamus_OnLoad
     .4byte ftYoshi_OnLoad
     .4byte ftPurin_OnLoad
-    .4byte ftMewtwo_OnLoad
+    .4byte ftMewTwo_OnLoad
     .4byte ftLuigi_OnLoad
     .4byte ftMars_OnLoad
     .4byte ftZelda_OnLoad
@@ -985,13 +985,13 @@ ft_OnDeath:
     .4byte ftSeak_OnDeath
     .4byte ftNess_OnDeath
     .4byte ftPeach_OnDeath
-    .4byte ftIcelimber_OnDeath
+    .4byte ftIceClimber_OnDeath
     .4byte ftNana_OnDeath
     .4byte ftPikachu_OnDeath
     .4byte ftSamus_OnDeath
     .4byte ftYoshi_OnDeath
     .4byte ftPurin_OnDeath
-    .4byte ftMewtwo_OnDeath
+    .4byte ftMewTwo_OnDeath
     .4byte ftLuigi_OnDeath
     .4byte ftMars_OnDeath
     .4byte ftZelda_OnDeath
@@ -1453,29 +1453,29 @@ ft_OnAbsorb:
     .4byte NULL
     .4byte NULL
 
-.global ft_OnItemPickup
-ft_OnItemPickup:
+.global ft_OnItemCatch
+ft_OnItemCatch:
     .4byte ftMario_OnItemPickup
     .4byte ftFox_OnItemPickup
     .4byte ftCFalcon_OnItemPickup
     .4byte ftDonkey_OnItemPickup
     .4byte ftKirby_OnItemPickup  /*macro doesn't work*/
     .4byte ftKoopa_OnItemPickup
-    .4byte ftLink_OnItemPickup  /*macro doesn't work*/
+    .4byte ftLink_OnItemCatch 
     .4byte ftSeak_OnItemPickup
     .4byte ftNess_OnItemPickup
     .4byte ftPeach_OnItemPickup
-    .4byte ftIcelimber_OnItemPickup
-    .4byte ftIcelimber_OnItemPickup
+    .4byte ftIceClimber_OnItemPickup
+    .4byte ftIceClimber_OnItemPickup
     .4byte ftPikachu_OnItemPickup
     .4byte ftSamus_OnItemPickup
     .4byte ftYoshi_OnItemPickup
     .4byte ftPurin_OnItemPickup  /*macro doesn't work*/
-    .4byte ftMewtwo_OnItemPickup  /*macro doesn't work - is a stub function*/
+    .4byte ftMewTwo_OnItemPickup  /*macro doesn't work - is a stub function*/
     .4byte ftLuigi_OnItemPickup
     .4byte ftMars_OnItemPickup
     .4byte ftZelda_OnItemPickup
-    .4byte ftCLink_OnItemPickup  /*macro doesn't work*/
+    .4byte ftCLink_OnItemCatch 
     .4byte ftDrMario_OnItemPickup
     .4byte ftFalco_OnItemPickup
     .4byte ftPichu_OnItemPickup
@@ -1597,29 +1597,29 @@ ft_OnItemRelease:
     .4byte func_8014F890
     .4byte NULL
 
-.global ft_OnItemCatch
-ft_OnItemCatch:
+.global ft_OnItemPickup
+ft_OnItemPickup:
     .4byte ftMario_OnItemPickup
     .4byte ftFox_OnItemPickup
     .4byte ftCFalcon_OnItemPickup
     .4byte ftDonkey_OnItemPickup
     .4byte ftKirby_OnItemPickup
     .4byte ftKoopa_OnItemPickup
-    .4byte func_800EB11C
+    .4byte ftLink_OnItemPickup
     .4byte ftSeak_OnItemPickup
     .4byte ftNess_OnItemPickup
     .4byte ftPeach_OnItemPickup
-    .4byte ftIcelimber_OnItemPickup
-    .4byte ftIcelimber_OnItemPickup
+    .4byte ftIceClimber_OnItemPickup
+    .4byte ftIceClimber_OnItemPickup
     .4byte ftPikachu_OnItemPickup
     .4byte ftSamus_OnItemPickup
     .4byte ftYoshi_OnItemPickup
     .4byte ftPurin_OnItemPickup
-    .4byte ftMewtwo_OnItemPickup
+    .4byte ftMewTwo_OnItemPickup
     .4byte ftLuigi_OnItemPickup
     .4byte ftMars_OnItemPickup
     .4byte ftZelda_OnItemPickup
-    .4byte func_80148F38
+    .4byte ftCLink_OnItemPickup
     .4byte ftDrMario_OnItemPickup
     .4byte ftFalco_OnItemPickup
     .4byte ftPichu_OnItemPickup

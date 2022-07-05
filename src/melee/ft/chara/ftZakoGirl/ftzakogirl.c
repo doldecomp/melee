@@ -11,7 +11,9 @@ void ftZakoGirl_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(ft, s32);
 }
 
-MACRO_ft_OnItemPickup(ftZakoGirl, 0, 0);
+void ftZakoGirl_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 0, 0);
+}
 
 void func_8014F540(HSD_GObj* gobj)
 {

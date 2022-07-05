@@ -2,9 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftMewtwo_OnItemPickup
-ftMewtwo_OnItemPickup:
-/* 80144EE0 00141AC0  4E 80 00 20 */	blr 
 lbl_80144EE4:
 /* 80144EE4 00141AC4  7C 08 02 A6 */	mflr r0
 /* 80144EE8 00141AC8  90 01 00 04 */	stw r0, 4(r1)

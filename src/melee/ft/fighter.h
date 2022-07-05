@@ -1499,6 +1499,9 @@ void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
 void Fighter_8006DA4C(HSD_GObj* fighterObj);
 void Fighter_Unload_8006DABC(Fighter* fighter);
 
+
+///// Shared Fighter Code
+
 #define PUSH_ATTRS(ft, attributeName)                                           \
     do {                                                                    \
         void* backup = (ft)->x2D8_specialAttributes2;                      \
@@ -1509,6 +1512,7 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
     } while(0)
 
 
+// Works but unused decided to go with inline instead 
 #define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                             \
     void FTNAME##_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {                 \
         Fighter *fighter = getFighter(fighterObj);                                \
@@ -1533,5 +1537,28 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
         }                                                                         \
     }                                                                             \
 
+/// used for all fighters except Kirby and Purin
+inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL bool1, BOOL bool2, BOOL bool3) {
+    Fighter *fighter = getFighter(fighterObj);            
+    if (!func_8026B2B4(fighter->x1974_heldItem)) {        
+        switch (func_8026B320(fighter->x1974_heldItem)) { 
+            case 1:                                       
+                func_80070FB4(fighterObj, bool2, 1);     
+                break;                                    
+            case 2:                                       
+                func_80070FB4(fighterObj, bool2, 0);     
+                break;                                    
+            case 3:                                       
+                func_80070FB4(fighterObj, bool2, 2);     
+                break;                                    
+            case 4:                                       
+                func_80070FB4(fighterObj, bool2, 3);     
+                break;                                    
+        }                                                 
+        if (bool1) {                                       
+            func_80070C48(fighterObj, bool3);            
+        }                                                 
+    }                                                     
+}   
 
 #endif

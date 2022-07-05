@@ -32,4 +32,6 @@ void ftSamus_80128428(HSD_GObj* fighterObj) {
     func_800D9C98(fighterObj);
 }
 
-MACRO_ft_OnItemPickup(ftSamus, 0, 0);
+void ftSamus_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 0, 0);
+}

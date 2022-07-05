@@ -48,7 +48,9 @@ f32 func_8011495C(Fighter* ft)
     return ((ftNessAttributes*)ft->x2D4_specialAttributes)->x94_PSI_MAGNET_HEALING_MULTIPLIER;
 }
 
-MACRO_ft_OnItemPickup(ftNess, 1, 1);
+void ftNess_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 void func_80114A48(HSD_GObj* gobj)
 {

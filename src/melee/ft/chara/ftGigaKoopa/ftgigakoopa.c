@@ -34,7 +34,9 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     ft->x222A_flag.bits.b0 = 1;
 }
 
-MACRO_ft_OnItemPickup(ftGKoopa, 1, 1);
+void ftGKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 void func_8014F800(HSD_GObj* gobj)
 {

@@ -1263,7 +1263,7 @@ void func_8007E690(Fighter* fp, HSD_AnimJoint* arg1)
 
 extern void (*ft_OnItemRelease[])(HSD_GObj*, s32);
 extern void (*lbl_803C1B20[])(HSD_GObj*, s32); // OnItemDrop?
-extern void (*ft_OnItemCatch[])(HSD_GObj*, s32);
+extern void (*ft_OnItemPickup[])(HSD_GObj*, s32);
 
 void func_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
 {
@@ -1293,8 +1293,8 @@ void func_8007E79C(HSD_GObj* gobj, s32 arg1)
 void func_8007E7E4(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnItemCatch[fp->x4_fighterKind] != NULL) {
-        ft_OnItemCatch[fp->x4_fighterKind](gobj, arg1);
+    if (ft_OnItemPickup[fp->x4_fighterKind] != NULL) {
+        ft_OnItemPickup[fp->x4_fighterKind](gobj, arg1);
     }
 }
 

@@ -3,7 +3,9 @@
 /// TODO remove float externs when file is finished and float data is removed from asm
 extern f32 lbl_804D9830;
 
-MACRO_ft_OnItemPickup(ftIcelimber, 1, 1);
+void ftIceClimber_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 void func_8011EE18(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
@@ -26,11 +28,11 @@ void func_8011EEA8(HSD_GObj* fighterObj, s32 arg1) {
     }
 }
 
-void ftIcelimber_OnLoadForNana(Fighter* fighter) {
+void ftIceClimber_OnLoadForNana(Fighter* fighter) {
     PUSH_ATTRS(fighter, ftIceClimberAttributes);
 }
 
-void ftIcelimber_OnLoad(HSD_GObj* fighterObj) {
+void ftIceClimber_OnLoad(HSD_GObj* fighterObj) {
 
     s32 unused;
     Fighter* fighter = fighterObj->user_data;
@@ -49,7 +51,7 @@ void ftIcelimber_OnLoad(HSD_GObj* fighterObj) {
 
 }
 
-void ftIcelimber_OnDeath(HSD_GObj* fighterObj) {
+void ftIceClimber_OnDeath(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     ftIceClimberAttributes* attr = fighter->x2D4_specialAttributes;
     func_80074A4C(fighterObj, 0U, 0);

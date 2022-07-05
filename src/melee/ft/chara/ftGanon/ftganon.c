@@ -9,7 +9,9 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     ft->sa.captain.x222C = 0;
 }
 
-MACRO_ft_OnItemPickup(ftGanon, 1, 1);
+void ftGanon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 void func_8014ED38(HSD_GObj* gobj)
 {

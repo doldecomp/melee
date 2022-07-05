@@ -26,7 +26,9 @@ void ftPikachu_OnDeath(HSD_GObj* fighterObj) {
     func_80074A4C(fighterObj, 1, 0);
 }
 
-MACRO_ft_OnItemPickup(ftPikachu, 0, 0);
+void ftPikachu_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 0, 0);
+}
 
 void ftPikachu_80124598(HSD_GObj *fighterObj) {
     Fighter* fighter = fighterObj->user_data;

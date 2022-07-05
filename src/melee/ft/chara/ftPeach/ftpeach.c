@@ -59,4 +59,6 @@ void ftPeach_8011B704(HSD_GObj* fighterObj) {
     func_8011CFA0(fighterObj);
 }
 
-MACRO_ft_OnItemPickup(ftPeach, 1, 1);
+void ftPeach_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}

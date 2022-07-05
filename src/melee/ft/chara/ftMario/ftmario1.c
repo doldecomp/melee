@@ -43,7 +43,9 @@ void ftMario_func_800E0A00(HSD_GObj* gobj)
     ftMario_func_800E1368(gobj);
 }
 
-MACRO_ft_OnItemPickup(ftMario, 1, 1);
+void ftMario_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 void ftMario_func_800E0B00(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);

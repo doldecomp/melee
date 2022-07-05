@@ -11,7 +11,9 @@ void ftMars_OnDeath(HSD_GObj* gobj) {
 
 // 801362B0 00132E90
 // ftMars_OnItemPickup
-MACRO_ft_OnItemPickup(ftMars, 0, 1);
+void ftMars_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 0, 1);
+}
 
 // 80136390 00132F70
 // ftMars_OnItemInvisible

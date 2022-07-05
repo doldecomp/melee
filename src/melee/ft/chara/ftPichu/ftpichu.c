@@ -48,7 +48,9 @@ void ftPichu_OnDeath(HSD_GObj* gobj)
     }
 }
 
-MACRO_ft_OnItemPickup(ftPichu, 0, 0);
+void ftPichu_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 0, 0);
+}
 
 void func_8014A0C4(HSD_GObj* gobj)
 {

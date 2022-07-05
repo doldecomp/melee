@@ -15,4 +15,6 @@ void ftLuigi_OnLoad(HSD_GObj* fighterObj) {
     func_8026B3F8(item_list[0], 0x69U);
 }
 
-MACRO_ft_OnItemPickup(ftLuigi, 1, 1);
+void ftLuigi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}

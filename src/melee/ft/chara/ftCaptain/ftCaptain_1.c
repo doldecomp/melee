@@ -20,7 +20,9 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj) {
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx
-MACRO_ft_OnItemPickup(ftCFalcon, 1, 1);
+void ftCFalcon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 // func_800E29C8
 // OnMakeItemInvisible

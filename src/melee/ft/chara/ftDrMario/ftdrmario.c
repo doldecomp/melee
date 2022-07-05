@@ -30,7 +30,9 @@ void func_80149540(HSD_GObj* gobj)
     func_801497CC(gobj);
 }
 
-MACRO_ft_OnItemPickup(ftDrMario, 1, 1);
+void ftDrMario_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
 void func_80149640(HSD_GObj* gobj)
 {

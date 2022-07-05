@@ -21,4 +21,6 @@ void ftZelda_801393AC(HSD_GObj* fighterObj) {
     func_8013B5EC(fighterObj);
 }
 
-MACRO_ft_OnItemPickup(ftZelda, 1, 1);
+void ftZelda_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}

@@ -6,7 +6,9 @@ void ftZakoBoy_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 }
 
-MACRO_ft_OnItemPickup(ftZakoBoy, 0, 0);
+void ftZakoBoy_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 0, 0);
+}
 
 void func_8014F2F8(HSD_GObj* gobj)
 {

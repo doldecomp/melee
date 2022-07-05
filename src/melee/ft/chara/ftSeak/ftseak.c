@@ -35,4 +35,6 @@ void ftSeak_801101CC(HSD_GObj* fighterObj) {
     }
 }
 
-MACRO_ft_OnItemPickup(ftSeak, 1, 1);
+void ftSeak_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}

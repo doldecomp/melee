@@ -153,4 +153,6 @@ f32 ftYoshi_8012BAC0(Fighter* fighter) {
     return attr->x120;
 }
 
-MACRO_ft_OnItemPickup(ftYoshi, 1, 1);
+void ftYoshi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
