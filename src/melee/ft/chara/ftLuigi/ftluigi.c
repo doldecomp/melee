@@ -18,3 +18,7 @@ void ftLuigi_OnLoad(HSD_GObj* fighterObj) {
 void ftLuigi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
+
+void ftLuigi_OnItemInvisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
+}

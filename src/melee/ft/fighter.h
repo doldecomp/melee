@@ -1559,6 +1559,14 @@ inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL bool1, BOOL bool2, B
             func_80070C48(fighterObj, bool3);            
         }                                                 
     }                                                     
-}   
+}
+
+inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
+{
+    Fighter* ft = getFighter(gobj);
+    if (!func_8026B2B4(ft->x1974_heldItem)) {
+        func_80070CC4(gobj, bool);
+    }
+}
 
 #endif

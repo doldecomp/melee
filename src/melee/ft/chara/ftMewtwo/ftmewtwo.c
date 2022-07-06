@@ -25,3 +25,19 @@ void ftMewTwo_OnLoad(HSD_GObj* fighterObj) {
 }
 
 void ftMewTwo_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {}
+
+void ftMewTwo_80144EE4(HSD_GObj* fighterObj) {
+    func_801461A8(fighterObj);
+    func_80146E30(fighterObj);
+}
+
+void ftMewTwo_80144F18(HSD_GObj* fighterObj) {
+    func_801461A8(fighterObj);
+    func_80146ED0(fighterObj);
+}
+
+void ftMewTwo_OnItemRelease(HSD_GObj* fighterObj, BOOL bool) {}
+
+void ftMewTwo_OnItemInvisible(HSD_GObj* fighterObj) {}
+
+void ftMewTwo_OnItemVisible(HSD_GObj* fighterObj) {}

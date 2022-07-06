@@ -16,10 +16,7 @@ void ftDonkey_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
 }
 
 void ftDonkey_OnItemInvisible(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-        func_80070CC4(fighterObj, 1);
-    }
+    Fighter_OnItemInvisible(fighterObj, 1);
 }
 
 void ftDonkey_OnItemVisible(HSD_GObj* fighterObj) {

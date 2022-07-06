@@ -2,28 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftGameWatch_OnItemInvisible
-ftGameWatch_OnItemInvisible:
-/* 8014A698 00147278  7C 08 02 A6 */	mflr r0
-/* 8014A69C 0014727C  90 01 00 04 */	stw r0, 4(r1)
-/* 8014A6A0 00147280  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8014A6A4 00147284  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8014A6A8 00147288  7C 7F 1B 78 */	mr r31, r3
-/* 8014A6AC 0014728C  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8014A6B0 00147290  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 8014A6B4 00147294  48 12 0C 01 */	bl func_8026B2B4
-/* 8014A6B8 00147298  2C 03 00 00 */	cmpwi r3, 0
-/* 8014A6BC 0014729C  40 82 00 10 */	bne lbl_8014A6CC
-/* 8014A6C0 001472A0  38 7F 00 00 */	addi r3, r31, 0
-/* 8014A6C4 001472A4  38 80 00 01 */	li r4, 1
-/* 8014A6C8 001472A8  4B F2 65 FD */	bl func_80070CC4
-lbl_8014A6CC:
-/* 8014A6CC 001472AC  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8014A6D0 001472B0  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8014A6D4 001472B4  38 21 00 18 */	addi r1, r1, 0x18
-/* 8014A6D8 001472B8  7C 08 03 A6 */	mtlr r0
-/* 8014A6DC 001472BC  4E 80 00 20 */	blr 
-
 .global ftGameWatch_OnItemVisible
 ftGameWatch_OnItemVisible:
 /* 8014A6E0 001472C0  7C 08 02 A6 */	mflr r0

@@ -62,3 +62,7 @@ void ftPeach_8011B704(HSD_GObj* fighterObj) {
 void ftPeach_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
+
+void ftPeach_OnItemInvisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
+}

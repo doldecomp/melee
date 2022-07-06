@@ -144,3 +144,8 @@ void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
 //     }
 // }
 
+///void ftKirby_OnItemPickup(HSD_GObj* fighterObj, BOOL bool)
+
+// void ftKirby_OnItemInvisible(HSD_GObj* fighterObj) {
+//     Fighter_OnItemInvisible(fighterObj, 1);
+// }

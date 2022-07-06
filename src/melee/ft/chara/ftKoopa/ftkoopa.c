@@ -62,11 +62,7 @@ void ftKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
 }
 
 void ftKoopa_OnItemInvisible(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
 void ftKoopa_OnItemVisible(HSD_GObj* gobj) {

@@ -31,10 +31,7 @@ void ftPikachu_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
 }
 
 void ftPikachu_OnItemInvisible(HSD_GObj *fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-        func_80070CC4(fighterObj, 0);
-    }
+    Fighter_OnItemInvisible(fighterObj, 0);
 }
 
 void ftPikachu_OnItemVisible(HSD_GObj *fighterObj) {

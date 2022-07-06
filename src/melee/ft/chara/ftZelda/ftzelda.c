@@ -24,3 +24,7 @@ void ftZelda_801393AC(HSD_GObj* fighterObj) {
 void ftZelda_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
+
+void ftZelda_OnItemInvisible(HSD_GObj *fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
+}

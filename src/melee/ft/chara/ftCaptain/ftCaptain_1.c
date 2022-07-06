@@ -29,11 +29,7 @@ void ftCFalcon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
 // https://decomp.me/scratch/maRvM
 void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
-    Fighter* fighter_data = fighter_gobj->user_data;
-    if(func_8026B2B4(fighter_data->x1974_heldItem) == 0)
-    {
-        func_80070CC4(fighter_gobj, 1);
-    }
+    Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
 // ftCFalcon_OnItemVisible

@@ -2,29 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-
-.global ftZelda_OnItemInvisible
-ftZelda_OnItemInvisible:
-/* 801394AC 0013608C  7C 08 02 A6 */	mflr r0
-/* 801394B0 00136090  90 01 00 04 */	stw r0, 4(r1)
-/* 801394B4 00136094  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 801394B8 00136098  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 801394BC 0013609C  7C 7F 1B 78 */	mr r31, r3
-/* 801394C0 001360A0  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 801394C4 001360A4  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 801394C8 001360A8  48 13 1D ED */	bl func_8026B2B4
-/* 801394CC 001360AC  2C 03 00 00 */	cmpwi r3, 0
-/* 801394D0 001360B0  40 82 00 10 */	bne lbl_801394E0
-/* 801394D4 001360B4  38 7F 00 00 */	addi r3, r31, 0
-/* 801394D8 001360B8  38 80 00 01 */	li r4, 1
-/* 801394DC 001360BC  4B F3 77 E9 */	bl func_80070CC4
-lbl_801394E0:
-/* 801394E0 001360C0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 801394E4 001360C4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 801394E8 001360C8  38 21 00 18 */	addi r1, r1, 0x18
-/* 801394EC 001360CC  7C 08 03 A6 */	mtlr r0
-/* 801394F0 001360D0  4E 80 00 20 */	blr 
-
 .global ftZelda_OnItemVisible
 ftZelda_OnItemVisible:
 /* 801394F4 001360D4  7C 08 02 A6 */	mflr r0

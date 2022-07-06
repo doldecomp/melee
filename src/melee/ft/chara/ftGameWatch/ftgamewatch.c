@@ -96,3 +96,7 @@ void ftGameWatch_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
+void ftGameWatch_OnItemInvisible(HSD_GObj* gobj) {
+    Fighter_OnItemInvisible(gobj, 1);
+}
+

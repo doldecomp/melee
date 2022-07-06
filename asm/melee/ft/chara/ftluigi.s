@@ -2,28 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftLuigi_OnItemInvisible
-ftLuigi_OnItemInvisible:
-/* 80142468 0013F048  7C 08 02 A6 */	mflr r0
-/* 8014246C 0013F04C  90 01 00 04 */	stw r0, 4(r1)
-/* 80142470 0013F050  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80142474 0013F054  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80142478 0013F058  7C 7F 1B 78 */	mr r31, r3
-/* 8014247C 0013F05C  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 80142480 0013F060  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 80142484 0013F064  48 12 8E 31 */	bl func_8026B2B4
-/* 80142488 0013F068  2C 03 00 00 */	cmpwi r3, 0
-/* 8014248C 0013F06C  40 82 00 10 */	bne lbl_8014249C
-/* 80142490 0013F070  38 7F 00 00 */	addi r3, r31, 0
-/* 80142494 0013F074  38 80 00 01 */	li r4, 1
-/* 80142498 0013F078  4B F2 E8 2D */	bl func_80070CC4
-lbl_8014249C:
-/* 8014249C 0013F07C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 801424A0 0013F080  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 801424A4 0013F084  38 21 00 18 */	addi r1, r1, 0x18
-/* 801424A8 0013F088  7C 08 03 A6 */	mtlr r0
-/* 801424AC 0013F08C  4E 80 00 20 */	blr 
-
 .global ftLuigi_OnItemVisible
 ftLuigi_OnItemVisible:
 /* 801424B0 0013F090  7C 08 02 A6 */	mflr r0
