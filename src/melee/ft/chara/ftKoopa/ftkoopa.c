@@ -61,17 +61,17 @@ void ftKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftKoopa_OnItemInvisible(HSD_GObj* gobj) {
-    Fighter_OnItemInvisible(gobj, 1);
+void ftKoopa_StoreHeldItem(HSD_GObj* gobj) {
+    Fighter_StoreHeldItem(gobj, 1);
 }
 
-void ftKoopa_OnItemVisible(HSD_GObj* gobj) {
-    Fighter_OnItemVisible(gobj, 1);
+void ftKoopa_RestoreHeldItem(HSD_GObj* gobj) {
+    Fighter_RestoreHeldItem(gobj, 1);
 }
 
-void ftKoopa_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+void ftKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 void func_80132D00(HSD_GObj* gobj) {

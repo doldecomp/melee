@@ -15,18 +15,18 @@ void ftZakoGirl_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 0, 0);
 }
 
-void ftZakoGirl_OnItemInvisible(HSD_GObj* gobj)
+void ftZakoGirl_StoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 0);
+    Fighter_StoreHeldItem(gobj, 0);
 }
 
-void ftZakoGirl_OnItemVisible(HSD_GObj* gobj)
+void ftZakoGirl_RestoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 0);
+    Fighter_RestoreHeldItem(gobj, 0);
 }
 
-void ftZakoGirl_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemRelease(fighterObj, bool1, 0, 0);
+void ftZakoGirl_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }
 
 void func_8014F624(HSD_GObj* gobj)

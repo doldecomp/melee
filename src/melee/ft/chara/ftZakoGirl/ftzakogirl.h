@@ -7,9 +7,9 @@
 void ftZakoGirl_OnDeath(HSD_GObj*);
 void ftZakoGirl_OnLoad(HSD_GObj*);
 void ftZakoGirl_OnItemPickup(HSD_GObj*, BOOL);
-void ftZakoGirl_OnItemInvisible(HSD_GObj*);
-void ftZakoGirl_OnItemVisible(HSD_GObj*);
-void ftZakoGirl_OnItemRelease(HSD_GObj*, BOOL);
+void ftZakoGirl_StoreHeldItem(HSD_GObj*);
+void ftZakoGirl_RestoreHeldItem(HSD_GObj*);
+void ftZakoGirl_OnItemDrop(HSD_GObj*, BOOL);
 void func_8014F624(HSD_GObj*);
 
 #endif

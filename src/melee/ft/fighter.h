@@ -1915,7 +1915,7 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
     }                                                                             \
 
 /// used for all fighters except Kirby and Purin
-inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL bool1, BOOL bool2, BOOL bool3) {
+inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag, BOOL bool2, BOOL bool3) {
     Fighter *fighter = getFighter(fighterObj);            
     if (!func_8026B2B4(fighter->x1974_heldItem)) {        
         switch (func_8026B320(fighter->x1974_heldItem)) { 
@@ -1932,13 +1932,13 @@ inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL bool1, BOOL bool2, B
                 func_80070FB4(fighterObj, bool2, 3);     
                 break;                                    
         }                                                 
-        if (bool1) {                                       
+        if (catchItemFlag) {                                       
             func_80070C48(fighterObj, bool3);            
         }                                                 
     }                                                     
 }
 
-inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
+inline void Fighter_StoreHeldItem(HSD_GObj* gobj, BOOL bool)
 {
     Fighter* ft = getFighter(gobj);
     if (!func_8026B2B4(ft->x1974_heldItem)) {
@@ -1946,7 +1946,7 @@ inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
+inline void Fighter_RestoreHeldItem(HSD_GObj* gobj, BOOL bool)
 {
     Fighter* ft = getFighter(gobj);
     if (!func_8026B2B4(ft->x1974_heldItem)) {
@@ -1954,10 +1954,10 @@ inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-inline void Fighter_OnItemRelease(HSD_GObj* gobj, BOOL bool1, BOOL bool2, BOOL bool3)
+inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BOOL bool3)
 {
     func_80070FB4(gobj, bool2, -1);
-    if (bool1) {
+    if (dropItemFlag) {
         func_80070CC4(gobj, bool3);
     }
 }

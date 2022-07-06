@@ -52,18 +52,18 @@ void ftPichu_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 0, 0);
 }
 
-void ftPichu_OnItemInvisible(HSD_GObj* gobj)
+void ftPichu_StoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 0);
+    Fighter_StoreHeldItem(gobj, 0);
 }
 
-void ftPichu_OnItemVisible(HSD_GObj* gobj)
+void ftPichu_RestoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 0);
+    Fighter_RestoreHeldItem(gobj, 0);
 }
 
-void ftPichu_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemRelease(fighterObj, bool1, 0, 0);
+void ftPichu_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }
 
 void func_8014A1A8(HSD_GObj* gobj)

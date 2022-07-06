@@ -13,19 +13,19 @@ void ftRoy_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 0, 1);
 }
 
-void ftRoy_OnItemInvisible(HSD_GObj* gobj)
+void ftRoy_StoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 0);
+    Fighter_StoreHeldItem(gobj, 0);
 }
 
-void ftRoy_OnItemVisible(HSD_GObj* gobj)
+void ftRoy_RestoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 0);
+    Fighter_RestoreHeldItem(gobj, 0);
 }
 
-void ftRoy_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+void ftRoy_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemRelease(gobj, bool1, 0, 1);
+    Fighter_OnItemDrop(gobj, bool1, 0, 1);
 }
 
 void ftRoy_OnLoad(HSD_GObj* gobj)

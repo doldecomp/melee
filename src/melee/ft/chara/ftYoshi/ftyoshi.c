@@ -157,14 +157,14 @@ void ftYoshi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftYoshi_OnItemInvisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemInvisible(fighterObj, 1);
+void ftYoshi_StoreHeldItem(HSD_GObj *fighterObj) {
+    Fighter_StoreHeldItem(fighterObj, 1);
 }
 
-void ftYoshi_OnItemVisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemVisible(fighterObj, 1);
+void ftYoshi_RestoreHeldItem(HSD_GObj *fighterObj) {
+    Fighter_RestoreHeldItem(fighterObj, 1);
 }
 
-void ftYoshi_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemRelease(fighterObj, bool1, 1, 1);
+void ftYoshi_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
 }

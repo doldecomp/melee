@@ -13,19 +13,19 @@ void ftGanon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftGanon_OnItemInvisible(HSD_GObj* gobj)
+void ftGanon_StoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_StoreHeldItem(gobj, 1);
 }
 
-void ftGanon_OnItemVisible(HSD_GObj* gobj)
+void ftGanon_RestoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_RestoreHeldItem(gobj, 1);
 }
 
-void ftGanon_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+void ftGanon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 void ftGanon_OnLoad(HSD_GObj* gobj)

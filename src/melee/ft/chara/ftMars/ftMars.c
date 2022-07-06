@@ -16,24 +16,24 @@ void ftMars_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
 }
 
 // 80136390 00132F70
-// ftMars_OnItemInvisible
+// ftMars_StoreHeldItem
 // https://decomp.me/scratch/BksNr
-void ftMars_OnItemInvisible(HSD_GObj* gobj) {
-    Fighter_OnItemInvisible(gobj, 0);
+void ftMars_StoreHeldItem(HSD_GObj* gobj) {
+    Fighter_StoreHeldItem(gobj, 0);
 }
 
 // 801363D8 00132FB8
-// ftMars_OnItemVisible
+// ftMars_RestoreHeldItem
 // https://decomp.me/scratch/9zuEy
-void ftMars_OnItemVisible(HSD_GObj* gobj) {
-    Fighter_OnItemVisible(gobj, 0);
+void ftMars_RestoreHeldItem(HSD_GObj* gobj) {
+    Fighter_RestoreHeldItem(gobj, 0);
 }
 
 // 80136420 00133000
-// ftMars_OnItemRelease
+// ftMars_OnItemDrop
 // https://decomp.me/scratch/Ws8ow
-void ftMars_OnItemRelease(HSD_GObj* gobj, BOOL bool1) {
-    Fighter_OnItemRelease(gobj, bool1, 0, 1);
+void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL bool1) {
+    Fighter_OnItemDrop(gobj, bool1, 0, 1);
 }
 
 // 80136474 00133054

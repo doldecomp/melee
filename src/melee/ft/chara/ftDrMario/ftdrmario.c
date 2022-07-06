@@ -34,19 +34,19 @@ void ftDrMario_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftDrMario_OnItemInvisible(HSD_GObj* gobj)
+void ftDrMario_StoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_StoreHeldItem(gobj, 1);
 }
 
-void ftDrMario_OnItemVisible(HSD_GObj* gobj)
+void ftDrMario_RestoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_RestoreHeldItem(gobj, 1);
 }
 
-void ftDrMario_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+void ftDrMario_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 void func_80149724(HSD_GObj* gobj)

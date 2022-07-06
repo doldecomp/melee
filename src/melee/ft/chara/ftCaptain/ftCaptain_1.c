@@ -24,28 +24,28 @@ void ftCFalcon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-// ftCFalcon_OnItemInvisible
+// ftCFalcon_StoreHeldItem
 // OnMakeItemInvisible
 // https://decomp.me/scratch/maRvM
-void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftCFalcon_StoreHeldItem(HSD_GObj* fighter_gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_StoreHeldItem(fighter_gobj, 1);
 }
 
-// ftCFalcon_OnItemVisible
+// ftCFalcon_RestoreHeldItem
 // OnMakeInvisible
 // https://decomp.me/scratch/95tCp
-void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftCFalcon_RestoreHeldItem(HSD_GObj* fighter_gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_RestoreHeldItem(fighter_gobj, 1);
 }
 
-// ftCFalcon_OnItemRelease
+// ftCFalcon_OnItemDrop
 // Used for both OnItemRelease and OnUnknownItemRelated
 // https://decomp.me/scratch/PCT5B
-void ftCFalcon_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+void ftCFalcon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 // ftCaptain_OnLoadForGanon

@@ -13,19 +13,19 @@ void ftFalco_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftFalco_OnItemInvisible(HSD_GObj* gobj)
+void ftFalco_StoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_StoreHeldItem(gobj, 1);
 }
 
-void ftFalco_OnItemVisible(HSD_GObj* gobj)
+void ftFalco_RestoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_RestoreHeldItem(gobj, 1);
 }
 
-void ftFalco_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+void ftFalco_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 void ftFalco_OnLoad(HSD_GObj* gobj)

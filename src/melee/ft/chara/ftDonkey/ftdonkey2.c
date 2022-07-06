@@ -15,17 +15,17 @@ void ftDonkey_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftDonkey_OnItemInvisible(HSD_GObj* fighterObj) {
-    Fighter_OnItemInvisible(fighterObj, 1);
+void ftDonkey_StoreHeldItem(HSD_GObj* fighterObj) {
+    Fighter_StoreHeldItem(fighterObj, 1);
 }
 
-void ftDonkey_OnItemVisible(HSD_GObj* fighterObj) {
-    Fighter_OnItemVisible(fighterObj, 1);
+void ftDonkey_RestoreHeldItem(HSD_GObj* fighterObj) {
+    Fighter_RestoreHeldItem(fighterObj, 1);
 }
 
-void ftDonkey_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+void ftDonkey_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 void func_8010D96C(HSD_GObj* fighterObj) {

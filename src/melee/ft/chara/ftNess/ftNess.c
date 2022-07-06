@@ -53,18 +53,18 @@ void ftNess_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag) {
     Fighter_OnItemPickup(fighterObj, catchItemFlag, 1, 1);
 }
 
-void ftNess_OnItemInvisible(HSD_GObj* gobj)
+void ftNess_StoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_StoreHeldItem(gobj, 1);
 }
 
-void ftNess_OnItemVisible(HSD_GObj* gobj)
+void ftNess_RestoreHeldItem(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_RestoreHeldItem(gobj, 1);
 }
 
-void ftNess_OnItemRelease(HSD_GObj* gobj, BOOL dropItemFlag) {
-    Fighter_OnItemRelease(gobj, dropItemFlag, 1, 1);
+void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag) {
+    Fighter_OnItemDrop(gobj, dropItemFlag, 1, 1);
 }
 
 void ftNess_CopySpecialAttrs(HSD_GObj* gobj) 

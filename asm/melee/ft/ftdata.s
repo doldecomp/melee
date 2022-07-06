@@ -1453,15 +1453,15 @@ ft_OnAbsorb:
     .4byte NULL
     .4byte NULL
 
-.global ft_OnItemCatch
-ft_OnItemCatch:
+.global ft_OnItemPickupExt
+ft_OnItemPickupExt:
     .4byte ftMario_OnItemPickup
     .4byte ftFox_OnItemPickup
     .4byte ftCFalcon_OnItemPickup
     .4byte ftDonkey_OnItemPickup
     .4byte ftKirby_OnItemPickup 
     .4byte ftKoopa_OnItemPickup
-    .4byte ftLink_OnItemCatch 
+    .4byte ftLink_OnItemPickupExt 
     .4byte ftSeak_OnItemPickup
     .4byte ftNess_OnItemPickup
     .4byte ftPeach_OnItemPickup
@@ -1475,7 +1475,7 @@ ft_OnItemCatch:
     .4byte ftLuigi_OnItemPickup
     .4byte ftMars_OnItemPickup
     .4byte ftZelda_OnItemPickup
-    .4byte ftCLink_OnItemCatch 
+    .4byte ftCLink_OnItemPickupExt 
     .4byte ftDrMario_OnItemPickup
     .4byte ftFalco_OnItemPickup
     .4byte ftPichu_OnItemPickup
@@ -1489,112 +1489,112 @@ ft_OnItemCatch:
     .4byte ftGKoopa_OnItemPickup
     .4byte NULL
 
-.global ft_OnItemInvisible
-ft_OnItemInvisible:
-    .4byte ftMario_OnItemInvisible
-    .4byte ftFox_OnItemInvisible
-    .4byte ftCFalcon_OnItemInvisible
-    .4byte ftDonkey_OnItemInvisible
-    .4byte ftKirby_OnItemInvisible
-    .4byte ftKoopa_OnItemInvisible
-    .4byte ftLink_OnItemInvisible
-    .4byte ftSeak_OnItemInvisible
-    .4byte ftNess_OnItemInvisible
-    .4byte ftPeach_OnItemInvisible
-    .4byte ftIceClimber_OnItemInvisible
-    .4byte ftIceClimber_OnItemInvisible
-    .4byte ftPikachu_OnItemInvisible
-    .4byte ftSamus_OnItemInvisible
-    .4byte ftYoshi_OnItemInvisible
-    .4byte ftPurin_OnItemInvisible
-    .4byte ftMewTwo_OnItemInvisible
-    .4byte ftLuigi_OnItemInvisible
-    .4byte ftMars_OnItemInvisible
-    .4byte ftZelda_OnItemInvisible
-    .4byte ftCLink_OnItemInvisible
-    .4byte ftDrMario_OnItemInvisible
-    .4byte ftFalco_OnItemInvisible
-    .4byte ftPichu_OnItemInvisible
-    .4byte ftGameWatch_OnItemInvisible
-    .4byte ftGanon_OnItemInvisible
-    .4byte ftRoy_OnItemInvisible
+.global ft_StoreHeldItem
+ft_StoreHeldItem:
+    .4byte ftMario_StoreHeldItem
+    .4byte ftFox_StoreHeldItem
+    .4byte ftCFalcon_StoreHeldItem
+    .4byte ftDonkey_StoreHeldItem
+    .4byte ftKirby_StoreHeldItem
+    .4byte ftKoopa_StoreHeldItem
+    .4byte ftLink_StoreHeldItem
+    .4byte ftSeak_StoreHeldItem
+    .4byte ftNess_StoreHeldItem
+    .4byte ftPeach_StoreHeldItem
+    .4byte ftIceClimber_StoreHeldItem
+    .4byte ftIceClimber_StoreHeldItem
+    .4byte ftPikachu_StoreHeldItem
+    .4byte ftSamus_StoreHeldItem
+    .4byte ftYoshi_StoreHeldItem
+    .4byte ftPurin_StoreHeldItem
+    .4byte ftMewTwo_StoreHeldItem
+    .4byte ftLuigi_StoreHeldItem
+    .4byte ftMars_StoreHeldItem
+    .4byte ftZelda_StoreHeldItem
+    .4byte ftCLink_StoreHeldItem
+    .4byte ftDrMario_StoreHeldItem
+    .4byte ftFalco_StoreHeldItem
+    .4byte ftPichu_StoreHeldItem
+    .4byte ftGameWatch_StoreHeldItem
+    .4byte ftGanon_StoreHeldItem
+    .4byte ftRoy_StoreHeldItem
     .4byte NULL
     .4byte NULL
-    .4byte ftZakoBoy_OnItemInvisible
-    .4byte ftZakoGirl_OnItemInvisible
-    .4byte ftGKoopa_OnItemInvisible
-    .4byte NULL
-
-.global ft_OnItemVisible
-ft_OnItemVisible:
-    .4byte ftMario_OnItemVisible
-    .4byte ftFox_OnItemVisible
-    .4byte ftCFalcon_OnItemVisible
-    .4byte ftDonkey_OnItemVisible
-    .4byte ftKirby_OnItemVisible
-    .4byte ftKoopa_OnItemVisible
-    .4byte ftLink_OnItemVisible
-    .4byte ftSeak_OnItemVisible
-    .4byte ftNess_OnItemVisible
-    .4byte ftPeach_OnItemVisible
-    .4byte ftIceClimber_OnItemVisible
-    .4byte ftIceClimber_OnItemVisible
-    .4byte ftPikachu_OnItemVisible
-    .4byte ftSamus_OnItemVisible
-    .4byte ftYoshi_OnItemVisible
-    .4byte ftPurin_OnItemVisible
-    .4byte ftMewTwo_OnItemVisible
-    .4byte ftLuigi_OnItemVisible
-    .4byte ftMars_OnItemVisible
-    .4byte ftZelda_OnItemVisible
-    .4byte ftCLink_OnItemVisible
-    .4byte ftDrMario_OnItemVisible
-    .4byte ftFalco_OnItemVisible
-    .4byte ftPichu_OnItemVisible
-    .4byte ftGameWatch_OnItemVisible
-    .4byte ftGanon_OnItemVisible
-    .4byte ftRoy_OnItemVisible
-    .4byte NULL
-    .4byte NULL
-    .4byte ftZakoBoy_OnItemVisible
-    .4byte ftZakoGirl_OnItemVisible
-    .4byte ftGKoopa_OnItemVisible
+    .4byte ftZakoBoy_StoreHeldItem
+    .4byte ftZakoGirl_StoreHeldItem
+    .4byte ftGKoopa_StoreHeldItem
     .4byte NULL
 
-.global ft_OnItemThrow
-ft_OnItemThrow:
-    .4byte ftMario_OnItemRelease
-    .4byte ftFox_OnItemRelease
-    .4byte ftCFalcon_OnItemRelease
-    .4byte ftDonkey_OnItemRelease
-    .4byte ftKirby_OnItemRelease
-    .4byte ftKoopa_OnItemRelease
-    .4byte ftLink_OnItemThrow
-    .4byte ftSeak_OnItemRelease
-    .4byte ftNess_OnItemRelease
-    .4byte ftPeach_OnItemRelease
-    .4byte ftIceClimber_OnItemRelease
-    .4byte ftIceClimber_OnItemRelease
-    .4byte ftPikachu_OnItemRelease
-    .4byte ftSamus_OnItemRelease
-    .4byte ftYoshi_OnItemRelease
-    .4byte ftPurin_OnItemRelease
-    .4byte ftMewTwo_OnItemRelease
-    .4byte ftLuigi_OnItemRelease
-    .4byte ftMars_OnItemRelease
-    .4byte ftZelda_OnItemRelease
-    .4byte ftCLink_OnItemThrow
-    .4byte ftDrMario_OnItemRelease
-    .4byte ftFalco_OnItemRelease
-    .4byte ftPichu_OnItemRelease
-    .4byte ftGameWatch_OnItemRelease
-    .4byte ftGanon_OnItemRelease
-    .4byte ftRoy_OnItemRelease
+.global ft_RestoreHeldItem
+ft_RestoreHeldItem:
+    .4byte ftMario_RestoreHeldItem
+    .4byte ftFox_RestoreHeldItem
+    .4byte ftCFalcon_RestoreHeldItem
+    .4byte ftDonkey_RestoreHeldItem
+    .4byte ftKirby_RestoreHeldItem
+    .4byte ftKoopa_RestoreHeldItem
+    .4byte ftLink_RestoreHeldItem
+    .4byte ftSeak_RestoreHeldItem
+    .4byte ftNess_RestoreHeldItem
+    .4byte ftPeach_RestoreHeldItem
+    .4byte ftIceClimber_RestoreHeldItem
+    .4byte ftIceClimber_RestoreHeldItem
+    .4byte ftPikachu_RestoreHeldItem
+    .4byte ftSamus_RestoreHeldItem
+    .4byte ftYoshi_RestoreHeldItem
+    .4byte ftPurin_RestoreHeldItem
+    .4byte ftMewTwo_RestoreHeldItem
+    .4byte ftLuigi_RestoreHeldItem
+    .4byte ftMars_RestoreHeldItem
+    .4byte ftZelda_RestoreHeldItem
+    .4byte ftCLink_RestoreHeldItem
+    .4byte ftDrMario_RestoreHeldItem
+    .4byte ftFalco_RestoreHeldItem
+    .4byte ftPichu_RestoreHeldItem
+    .4byte ftGameWatch_RestoreHeldItem
+    .4byte ftGanon_RestoreHeldItem
+    .4byte ftRoy_RestoreHeldItem
     .4byte NULL
     .4byte NULL
-    .4byte ftZakoBoy_OnItemRelease
-    .4byte ftZakoGirl_OnItemRelease
-    .4byte ftGKoopa_OnItemRelease
+    .4byte ftZakoBoy_RestoreHeldItem
+    .4byte ftZakoGirl_RestoreHeldItem
+    .4byte ftGKoopa_RestoreHeldItem
+    .4byte NULL
+
+.global ft_OnItemDropExt
+ft_OnItemDropExt:
+    .4byte ftMario_OnItemDrop
+    .4byte ftFox_OnItemDrop
+    .4byte ftCFalcon_OnItemDrop
+    .4byte ftDonkey_OnItemDrop
+    .4byte ftKirby_OnItemDrop
+    .4byte ftKoopa_OnItemDrop
+    .4byte ftLink_OnItemDropExt
+    .4byte ftSeak_OnItemDrop
+    .4byte ftNess_OnItemDrop
+    .4byte ftPeach_OnItemDrop
+    .4byte ftIceClimber_OnItemDrop
+    .4byte ftIceClimber_OnItemDrop
+    .4byte ftPikachu_OnItemDrop
+    .4byte ftSamus_OnItemDrop
+    .4byte ftYoshi_OnItemDrop
+    .4byte ftPurin_OnItemDrop
+    .4byte ftMewTwo_OnItemDrop
+    .4byte ftLuigi_OnItemDrop
+    .4byte ftMars_OnItemDrop
+    .4byte ftZelda_OnItemDrop
+    .4byte ftCLink_OnItemDropExt
+    .4byte ftDrMario_OnItemDrop
+    .4byte ftFalco_OnItemDrop
+    .4byte ftPichu_OnItemDrop
+    .4byte ftGameWatch_OnItemDrop
+    .4byte ftGanon_OnItemDrop
+    .4byte ftRoy_OnItemDrop
+    .4byte NULL
+    .4byte NULL
+    .4byte ftZakoBoy_OnItemDrop
+    .4byte ftZakoGirl_OnItemDrop
+    .4byte ftGKoopa_OnItemDrop
     .4byte NULL
 
 .global ft_OnItemPickup
@@ -1633,40 +1633,40 @@ ft_OnItemPickup:
     .4byte ftGKoopa_OnItemPickup
     .4byte NULL
 
-.global ft_OnItemRelease
-ft_OnItemRelease:
-    .4byte ftMario_OnItemRelease
-    .4byte ftFox_OnItemRelease
-    .4byte ftCFalcon_OnItemRelease
-    .4byte ftDonkey_OnItemRelease
-    .4byte ftKirby_OnItemRelease
-    .4byte ftKoopa_OnItemRelease
-    .4byte ftLink_OnItemRelease
-    .4byte ftSeak_OnItemRelease
-    .4byte ftNess_OnItemRelease
-    .4byte ftPeach_OnItemRelease
-    .4byte ftIceClimber_OnItemRelease
-    .4byte ftIceClimber_OnItemRelease
-    .4byte ftPikachu_OnItemRelease
-    .4byte ftSamus_OnItemRelease
-    .4byte ftYoshi_OnItemRelease
-    .4byte ftPurin_OnItemRelease
-    .4byte ftMewTwo_OnItemRelease
-    .4byte ftLuigi_OnItemRelease
-    .4byte ftMars_OnItemRelease
-    .4byte ftZelda_OnItemRelease
-    .4byte ftCLink_OnItemRelease
-    .4byte ftDrMario_OnItemRelease
-    .4byte ftFalco_OnItemRelease
-    .4byte ftPichu_OnItemRelease
-    .4byte ftGameWatch_OnItemRelease
-    .4byte ftGanon_OnItemRelease
-    .4byte ftRoy_OnItemRelease
+.global ft_OnItemDrop
+ft_OnItemDrop:
+    .4byte ftMario_OnItemDrop
+    .4byte ftFox_OnItemDrop
+    .4byte ftCFalcon_OnItemDrop
+    .4byte ftDonkey_OnItemDrop
+    .4byte ftKirby_OnItemDrop
+    .4byte ftKoopa_OnItemDrop
+    .4byte ftLink_OnItemDrop
+    .4byte ftSeak_OnItemDrop
+    .4byte ftNess_OnItemDrop
+    .4byte ftPeach_OnItemDrop
+    .4byte ftIceClimber_OnItemDrop
+    .4byte ftIceClimber_OnItemDrop
+    .4byte ftPikachu_OnItemDrop
+    .4byte ftSamus_OnItemDrop
+    .4byte ftYoshi_OnItemDrop
+    .4byte ftPurin_OnItemDrop
+    .4byte ftMewTwo_OnItemDrop
+    .4byte ftLuigi_OnItemDrop
+    .4byte ftMars_OnItemDrop
+    .4byte ftZelda_OnItemDrop
+    .4byte ftCLink_OnItemDrop
+    .4byte ftDrMario_OnItemDrop
+    .4byte ftFalco_OnItemDrop
+    .4byte ftPichu_OnItemDrop
+    .4byte ftGameWatch_OnItemDrop
+    .4byte ftGanon_OnItemDrop
+    .4byte ftRoy_OnItemDrop
     .4byte NULL
     .4byte NULL
-    .4byte ftZakoBoy_OnItemRelease
-    .4byte ftZakoGirl_OnItemRelease
-    .4byte ftGKoopa_OnItemRelease
+    .4byte ftZakoBoy_OnItemDrop
+    .4byte ftZakoGirl_OnItemDrop
+    .4byte ftGKoopa_OnItemDrop
     .4byte NULL
 
 .global lbl_803C1BA4

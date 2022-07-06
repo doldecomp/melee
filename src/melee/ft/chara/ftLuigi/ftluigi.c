@@ -19,14 +19,14 @@ void ftLuigi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftLuigi_OnItemInvisible(HSD_GObj* fighterObj) {
-    Fighter_OnItemInvisible(fighterObj, 1);
+void ftLuigi_StoreHeldItem(HSD_GObj* fighterObj) {
+    Fighter_StoreHeldItem(fighterObj, 1);
 }
 
-void ftLuigi_OnItemVisible(HSD_GObj* fighterObj) {
-    Fighter_OnItemVisible(fighterObj, 1);
+void ftLuigi_RestoreHeldItem(HSD_GObj* fighterObj) {
+    Fighter_RestoreHeldItem(fighterObj, 1);
 }
 
-void ftLuigi_OnItemRelease(HSD_GObj* gobj, BOOL bool1) {
-    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+void ftLuigi_OnItemDrop(HSD_GObj* gobj, BOOL bool1) {
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }

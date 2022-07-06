@@ -39,14 +39,14 @@ void ftSeak_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftSeak_OnItemInvisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemInvisible(fighterObj, 1);
+void ftSeak_StoreHeldItem(HSD_GObj *fighterObj) {
+    Fighter_StoreHeldItem(fighterObj, 1);
 }
 
-void ftSeak_OnItemVisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemVisible(fighterObj, 1);
+void ftSeak_RestoreHeldItem(HSD_GObj *fighterObj) {
+    Fighter_RestoreHeldItem(fighterObj, 1);
 }
 
-void ftSeak_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemRelease(fighterObj, bool1, 1, 1);
+void ftSeak_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
 }

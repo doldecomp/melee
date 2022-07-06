@@ -36,14 +36,14 @@ void ftSamus_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 0, 0);
 }
 
-void ftSamus_OnItemInvisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemInvisible(fighterObj, 0);
+void ftSamus_StoreHeldItem(HSD_GObj *fighterObj) {
+    Fighter_StoreHeldItem(fighterObj, 0);
 }
 
-void ftSamus_OnItemVisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemVisible(fighterObj, 0);
+void ftSamus_RestoreHeldItem(HSD_GObj *fighterObj) {
+    Fighter_RestoreHeldItem(fighterObj, 0);
 }
 
-void ftSamus_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemRelease(fighterObj, bool1, 0, 0);
+void ftSamus_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }

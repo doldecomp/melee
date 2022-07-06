@@ -29,8 +29,8 @@ BOOL func_800E5534(HSD_GObj* gobj);
 void ftFox_OnDeath(HSD_GObj* gobj);
 void func_800E5588(HSD_GObj* gobj);
 void ftFox_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
-void ftFox_OnItemInvisible(HSD_GObj* gobj);
-void ftFox_OnItemVisible(HSD_GObj* gobj);
-void ftFox_OnItemRelease(HSD_GObj* gobj, BOOL arg1);
+void ftFox_StoreHeldItem(HSD_GObj* gobj);
+void ftFox_RestoreHeldItem(HSD_GObj* gobj);
+void ftFox_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
 
 #endif
