@@ -42,3 +42,7 @@ void ftSeak_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
 void ftSeak_OnItemInvisible(HSD_GObj *fighterObj) {
     Fighter_OnItemInvisible(fighterObj, 1);
 }
+
+void ftSeak_OnItemVisible(HSD_GObj *fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 1);
+}

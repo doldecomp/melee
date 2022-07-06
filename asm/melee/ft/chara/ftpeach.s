@@ -2,28 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftPeach_OnItemVisible
-ftPeach_OnItemVisible:
-/* 8011B868 00118448  7C 08 02 A6 */	mflr r0
-/* 8011B86C 0011844C  90 01 00 04 */	stw r0, 4(r1)
-/* 8011B870 00118450  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8011B874 00118454  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8011B878 00118458  7C 7F 1B 78 */	mr r31, r3
-/* 8011B87C 0011845C  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8011B880 00118460  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 8011B884 00118464  48 14 FA 31 */	bl func_8026B2B4
-/* 8011B888 00118468  2C 03 00 00 */	cmpwi r3, 0
-/* 8011B88C 0011846C  40 82 00 10 */	bne lbl_8011B89C
-/* 8011B890 00118470  38 7F 00 00 */	addi r3, r31, 0
-/* 8011B894 00118474  38 80 00 01 */	li r4, 1
-/* 8011B898 00118478  4B F5 53 B1 */	bl func_80070C48
-lbl_8011B89C:
-/* 8011B89C 0011847C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8011B8A0 00118480  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8011B8A4 00118484  38 21 00 18 */	addi r1, r1, 0x18
-/* 8011B8A8 00118488  7C 08 03 A6 */	mtlr r0
-/* 8011B8AC 0011848C  4E 80 00 20 */	blr 
-
 .global ftPeach_OnItemRelease
 ftPeach_OnItemRelease:
 /* 8011B8B0 00118490  7C 08 02 A6 */	mflr r0

@@ -26,10 +26,7 @@ void ftMars_OnItemInvisible(HSD_GObj* gobj) {
 // ftMars_OnItemVisible
 // https://decomp.me/scratch/9zuEy
 void ftMars_OnItemVisible(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070C48(gobj, 0);
-    }
+    Fighter_OnItemVisible(gobj, 0);
 }
 
 // 80136420 00133000

@@ -2,28 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftYoshi_OnItemVisible
-ftYoshi_OnItemVisible:
-/* 8012BBF4 001287D4  7C 08 02 A6 */	mflr r0
-/* 8012BBF8 001287D8  90 01 00 04 */	stw r0, 4(r1)
-/* 8012BBFC 001287DC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8012BC00 001287E0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8012BC04 001287E4  7C 7F 1B 78 */	mr r31, r3
-/* 8012BC08 001287E8  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012BC0C 001287EC  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 8012BC10 001287F0  48 13 F6 A5 */	bl func_8026B2B4
-/* 8012BC14 001287F4  2C 03 00 00 */	cmpwi r3, 0
-/* 8012BC18 001287F8  40 82 00 10 */	bne lbl_8012BC28
-/* 8012BC1C 001287FC  38 7F 00 00 */	addi r3, r31, 0
-/* 8012BC20 00128800  38 80 00 01 */	li r4, 1
-/* 8012BC24 00128804  4B F4 50 25 */	bl func_80070C48
-lbl_8012BC28:
-/* 8012BC28 00128808  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8012BC2C 0012880C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8012BC30 00128810  38 21 00 18 */	addi r1, r1, 0x18
-/* 8012BC34 00128814  7C 08 03 A6 */	mtlr r0
-/* 8012BC38 00128818  4E 80 00 20 */	blr 
-
 .global ftYoshi_OnItemRelease
 ftYoshi_OnItemRelease:
 /* 8012BC3C 0012881C  7C 08 02 A6 */	mflr r0

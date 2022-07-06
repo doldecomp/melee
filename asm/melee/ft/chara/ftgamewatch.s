@@ -2,28 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftGameWatch_OnItemVisible
-ftGameWatch_OnItemVisible:
-/* 8014A6E0 001472C0  7C 08 02 A6 */	mflr r0
-/* 8014A6E4 001472C4  90 01 00 04 */	stw r0, 4(r1)
-/* 8014A6E8 001472C8  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8014A6EC 001472CC  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8014A6F0 001472D0  7C 7F 1B 78 */	mr r31, r3
-/* 8014A6F4 001472D4  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8014A6F8 001472D8  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 8014A6FC 001472DC  48 12 0B B9 */	bl func_8026B2B4
-/* 8014A700 001472E0  2C 03 00 00 */	cmpwi r3, 0
-/* 8014A704 001472E4  40 82 00 10 */	bne lbl_8014A714
-/* 8014A708 001472E8  38 7F 00 00 */	addi r3, r31, 0
-/* 8014A70C 001472EC  38 80 00 01 */	li r4, 1
-/* 8014A710 001472F0  4B F2 65 39 */	bl func_80070C48
-lbl_8014A714:
-/* 8014A714 001472F4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8014A718 001472F8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8014A71C 001472FC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8014A720 00147300  7C 08 03 A6 */	mtlr r0
-/* 8014A724 00147304  4E 80 00 20 */	blr 
-
 .global ftGameWatch_OnItemRelease
 ftGameWatch_OnItemRelease:
 /* 8014A728 00147308  7C 08 02 A6 */	mflr r0

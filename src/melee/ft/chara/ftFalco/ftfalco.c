@@ -20,11 +20,7 @@ void ftFalco_OnItemInvisible(HSD_GObj* gobj)
 
 void ftFalco_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070C48(gobj, 1);
-    }
+    Fighter_OnItemVisible(gobj, 1);
 }
 
 void ftFalco_OnItemRelease(HSD_GObj* gobj, s32 arg1)

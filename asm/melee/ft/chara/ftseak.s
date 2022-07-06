@@ -2,28 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftSeak_OnItemVisible
-ftSeak_OnItemVisible:
-/* 8011032C 0010CF0C  7C 08 02 A6 */	mflr r0
-/* 80110330 0010CF10  90 01 00 04 */	stw r0, 4(r1)
-/* 80110334 0010CF14  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80110338 0010CF18  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8011033C 0010CF1C  7C 7F 1B 78 */	mr r31, r3
-/* 80110340 0010CF20  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 80110344 0010CF24  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 80110348 0010CF28  48 15 AF 6D */	bl func_8026B2B4
-/* 8011034C 0010CF2C  2C 03 00 00 */	cmpwi r3, 0
-/* 80110350 0010CF30  40 82 00 10 */	bne lbl_80110360
-/* 80110354 0010CF34  38 7F 00 00 */	addi r3, r31, 0
-/* 80110358 0010CF38  38 80 00 01 */	li r4, 1
-/* 8011035C 0010CF3C  4B F6 08 ED */	bl func_80070C48
-lbl_80110360:
-/* 80110360 0010CF40  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80110364 0010CF44  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80110368 0010CF48  38 21 00 18 */	addi r1, r1, 0x18
-/* 8011036C 0010CF4C  7C 08 03 A6 */	mtlr r0
-/* 80110370 0010CF50  4E 80 00 20 */	blr 
-
 .global ftSeak_OnItemRelease
 ftSeak_OnItemRelease:
 /* 80110374 0010CF54  7C 08 02 A6 */	mflr r0

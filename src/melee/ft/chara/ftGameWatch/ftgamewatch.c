@@ -100,3 +100,7 @@ void ftGameWatch_OnItemInvisible(HSD_GObj* gobj) {
     Fighter_OnItemInvisible(gobj, 1);
 }
 
+void ftGameWatch_OnItemVisible(HSD_GObj* gobj) {
+    Fighter_OnItemVisible(gobj, 1);
+}
+

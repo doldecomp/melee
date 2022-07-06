@@ -12,10 +12,7 @@ void ftIceClimber_OnItemInvisible(HSD_GObj* fighterObj) {
 }
 
 void ftIceClimber_OnItemVisible(HSD_GObj *fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-        func_80070C48(fighterObj, 1);
-    }
+    Fighter_OnItemVisible(fighterObj, 1);
 }
 
 void ftIceClimber_OnItemRelease(HSD_GObj* fighterObj, s32 arg1) {

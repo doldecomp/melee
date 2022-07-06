@@ -149,3 +149,7 @@ void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
 // void ftKirby_OnItemInvisible(HSD_GObj* fighterObj) {
 //     Fighter_OnItemInvisible(fighterObj, 1);
 // }
+
+// void ftKirby_OnItemVisible(HSD_GObj* fighterObj) {
+//     Fighter_OnItemVisible(fighterObj, 1);
+// }

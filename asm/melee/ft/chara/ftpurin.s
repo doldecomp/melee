@@ -2,30 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftPurin_OnItemVisible
-ftPurin_OnItemVisible:
-/* 8013C7E8 001393C8  7C 08 02 A6 */	mflr r0
-/* 8013C7EC 001393CC  90 01 00 04 */	stw r0, 4(r1)
-/* 8013C7F0 001393D0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8013C7F4 001393D4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8013C7F8 001393D8  7C 7F 1B 78 */	mr r31, r3
-/* 8013C7FC 001393DC  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8013C800 001393E0  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 8013C804 001393E4  28 03 00 00 */	cmplwi r3, 0
-/* 8013C808 001393E8  41 82 00 1C */	beq lbl_8013C824
-/* 8013C80C 001393EC  48 12 EA A9 */	bl func_8026B2B4
-/* 8013C810 001393F0  2C 03 00 00 */	cmpwi r3, 0
-/* 8013C814 001393F4  40 82 00 10 */	bne lbl_8013C824
-/* 8013C818 001393F8  38 7F 00 00 */	addi r3, r31, 0
-/* 8013C81C 001393FC  38 80 00 00 */	li r4, 0
-/* 8013C820 00139400  4B F3 44 29 */	bl func_80070C48
-lbl_8013C824:
-/* 8013C824 00139404  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8013C828 00139408  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8013C82C 0013940C  38 21 00 18 */	addi r1, r1, 0x18
-/* 8013C830 00139410  7C 08 03 A6 */	mtlr r0
-/* 8013C834 00139414  4E 80 00 20 */	blr 
-
 .global ftPurin_OnItemRelease
 ftPurin_OnItemRelease:
 /* 8013C838 00139418  7C 08 02 A6 */	mflr r0

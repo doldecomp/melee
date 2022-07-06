@@ -2,28 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftLuigi_OnItemVisible
-ftLuigi_OnItemVisible:
-/* 801424B0 0013F090  7C 08 02 A6 */	mflr r0
-/* 801424B4 0013F094  90 01 00 04 */	stw r0, 4(r1)
-/* 801424B8 0013F098  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 801424BC 0013F09C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 801424C0 0013F0A0  7C 7F 1B 78 */	mr r31, r3
-/* 801424C4 0013F0A4  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 801424C8 0013F0A8  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 801424CC 0013F0AC  48 12 8D E9 */	bl func_8026B2B4
-/* 801424D0 0013F0B0  2C 03 00 00 */	cmpwi r3, 0
-/* 801424D4 0013F0B4  40 82 00 10 */	bne lbl_801424E4
-/* 801424D8 0013F0B8  38 7F 00 00 */	addi r3, r31, 0
-/* 801424DC 0013F0BC  38 80 00 01 */	li r4, 1
-/* 801424E0 0013F0C0  4B F2 E7 69 */	bl func_80070C48
-lbl_801424E4:
-/* 801424E4 0013F0C4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 801424E8 0013F0C8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 801424EC 0013F0CC  38 21 00 18 */	addi r1, r1, 0x18
-/* 801424F0 0013F0D0  7C 08 03 A6 */	mtlr r0
-/* 801424F4 0013F0D4  4E 80 00 20 */	blr 
-
 .global ftLuigi_OnItemRelease
 ftLuigi_OnItemRelease:
 /* 801424F8 0013F0D8  7C 08 02 A6 */	mflr r0

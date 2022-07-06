@@ -37,11 +37,7 @@ void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/95tCp
 void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj)
 {
-    Fighter* ft = (Fighter*)fighter_gobj->user_data;
-    if(func_8026B2B4(ft->x1974_heldItem) == 0)
-    {
-        func_80070C48(fighter_gobj, 1);
-    }
+    Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
 // ftCFalcon_OnItemRelease

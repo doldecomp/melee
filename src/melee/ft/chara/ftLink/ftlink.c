@@ -74,10 +74,7 @@ void ftLink_OnItemInvisible(HSD_GObj* fighterObj) {
 }
 
 void ftLink_OnItemVisible(HSD_GObj* fighterObj) {
-    Fighter* link = fighterObj->user_data;
-    if (!func_8026B2B4(link->x1974_heldItem)) {
-        func_80070C48(fighterObj, 1);
-    }
+    Fighter_OnItemVisible(fighterObj, 1);
 }
 
 void ftLink_OnItemThrow(HSD_GObj* fighterObj, BOOL arg1) {

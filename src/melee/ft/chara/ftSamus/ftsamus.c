@@ -39,3 +39,7 @@ void ftSamus_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
 void ftSamus_OnItemInvisible(HSD_GObj *fighterObj) {
     Fighter_OnItemInvisible(fighterObj, 0);
 }
+
+void ftSamus_OnItemVisible(HSD_GObj *fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 0);
+}
