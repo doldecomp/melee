@@ -9,58 +9,23 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     ft->sa.captain.x222C = 0;
 }
 
-void ftGanon_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
-{
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
+void ftGanon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void func_8014ED38(HSD_GObj* gobj)
+void ftGanon_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void func_8014ED80(HSD_GObj* gobj)
+void ftGanon_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070C48(gobj, 1);
-    }
+    Fighter_OnItemVisible(gobj, 1);
 }
 
-void func_8014EDC8(HSD_GObj* gobj, s32 arg1)
+void ftGanon_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
 {
-    func_80070FB4(gobj, 1, -1);
-    if (arg1 != 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
 }
 
 void ftGanon_OnLoad(HSD_GObj* gobj)

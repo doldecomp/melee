@@ -8,7 +8,7 @@ void ftNana_OnLoad(HSD_GObj* fighterObj) {
     s32 unused[4];
     Fighter* fighter = fighterObj->user_data;
     fighter->x2222_flag.bits.b4 = 1;
-    ftIcelimber_OnLoadForNana(fighter);
+    ftIceClimber_OnLoadForNana(fighter);
 
     {
         ftIceClimberAttributes* attr = fighter->x2D4_specialAttributes;

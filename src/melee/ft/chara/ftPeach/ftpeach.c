@@ -59,32 +59,18 @@ void ftPeach_8011B704(HSD_GObj* fighterObj) {
     func_8011CFA0(fighterObj);
 }
 
-void ftPeach_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
-{
-    s32 result, switched_res, unused;
+void ftPeach_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
+void ftPeach_OnItemInvisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
+}
 
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
+void ftPeach_OnItemVisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 1);
+}
 
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
+void ftPeach_OnItemRelease(HSD_GObj* gobj, BOOL bool1) {
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
 }

@@ -110,3 +110,46 @@ void ftPurin_OnLoad(HSD_GObj* fighterObj) {
     fighter->x2D0 = fighter->x2D4_specialAttributes;
     func_8013C360(fighterObj);
 }
+
+void ftPurin_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter *fighter = getFighter(fighterObj);            
+    if (!func_8026B2B4(fighter->x1974_heldItem)) {        
+        switch (func_8026B320(fighter->x1974_heldItem)) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                func_80070FB4(fighterObj, 0, 0);
+                break;
+            case 4:
+                func_80070FB4(fighterObj, 0, 1);
+                break;
+        }   
+        if (bool) {                                       
+           func_80070C48(fighterObj, 0);            
+        }  
+    }   
+}
+
+void ftPurin_OnItemInvisible(HSD_GObj *fighterObj) {
+    Fighter* ft = getFighter(fighterObj);
+    if (ft->x1974_heldItem) {
+        if (!func_8026B2B4(ft->x1974_heldItem)) {
+            func_80070CC4(fighterObj, 0);
+        }
+    }
+}
+
+void ftPurin_OnItemVisible(HSD_GObj *fighterObj) {
+    Fighter* ft = getFighter(fighterObj);
+    if (ft->x1974_heldItem) {
+        if (!func_8026B2B4(ft->x1974_heldItem)) {
+            func_80070C48(fighterObj, 0);
+        }
+    }
+}
+
+void ftPurin_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemRelease(fighterObj, bool1, 0, 0);
+}

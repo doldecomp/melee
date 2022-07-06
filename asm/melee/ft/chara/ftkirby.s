@@ -132,8 +132,8 @@ lbl_800EE9C0:
 /* 800EE9D4 000EB5B4  7C 08 03 A6 */	mtlr r0
 /* 800EE9D8 000EB5B8  4E 80 00 20 */	blr 
 
-.global func_800EE9DC
-func_800EE9DC:
+.global ftKirby_OnItemInvisible
+ftKirby_OnItemInvisible:
 /* 800EE9DC 000EB5BC  7C 08 02 A6 */	mflr r0
 /* 800EE9E0 000EB5C0  90 01 00 04 */	stw r0, 4(r1)
 /* 800EE9E4 000EB5C4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -154,8 +154,8 @@ lbl_800EEA10:
 /* 800EEA1C 000EB5FC  7C 08 03 A6 */	mtlr r0
 /* 800EEA20 000EB600  4E 80 00 20 */	blr 
 
-.global func_800EEA24
-func_800EEA24:
+.global ftKirby_OnItemVisible
+ftKirby_OnItemVisible:
 /* 800EEA24 000EB604  7C 08 02 A6 */	mflr r0
 /* 800EEA28 000EB608  90 01 00 04 */	stw r0, 4(r1)
 /* 800EEA2C 000EB60C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -176,8 +176,8 @@ lbl_800EEA58:
 /* 800EEA64 000EB644  7C 08 03 A6 */	mtlr r0
 /* 800EEA68 000EB648  4E 80 00 20 */	blr 
 
-.global func_800EEA6C
-func_800EEA6C:
+.global ftKirby_OnItemRelease
+ftKirby_OnItemRelease:
 /* 800EEA6C 000EB64C  7C 08 02 A6 */	mflr r0
 /* 800EEA70 000EB650  38 A0 FF FF */	li r5, -1
 /* 800EEA74 000EB654  90 01 00 04 */	stw r0, 4(r1)

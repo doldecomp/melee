@@ -12,9 +12,9 @@ void ftMewtwo_OnDeath(HSD_GObj* gobj) {
 
 void ftMewtwo_OnLoad(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    ftMewtwoAttributes* attr = fighter->x10C_ftData->ext_attr;
+    ftMewTwoAttributes* attr = fighter->x10C_ftData->ext_attr;
     void** item_list = fighter->x10C_ftData->x48_items;
-    PUSH_ATTRS(fighter, ftMewtwoAttributes);
+    PUSH_ATTRS(fighter, ftMewTwoAttributes);
 
     {
         fighter->x5E8_fighterBones[1].flags.bits.b4 = 1;
@@ -23,3 +23,21 @@ void ftMewtwo_OnLoad(HSD_GObj* fighterObj) {
     func_8026B3F8(item_list[0], 0x6E);
     func_8026B3F8(item_list[1], 0x70);
 }
+
+void ftMewTwo_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {}
+
+void ftMewTwo_80144EE4(HSD_GObj* fighterObj) {
+    func_801461A8(fighterObj);
+    func_80146E30(fighterObj);
+}
+
+void ftMewTwo_80144F18(HSD_GObj* fighterObj) {
+    func_801461A8(fighterObj);
+    func_80146ED0(fighterObj);
+}
+
+void ftMewTwo_OnItemRelease(HSD_GObj* fighterObj, BOOL bool) {}
+
+void ftMewTwo_OnItemInvisible(HSD_GObj* fighterObj) {}
+
+void ftMewTwo_OnItemVisible(HSD_GObj* fighterObj) {}

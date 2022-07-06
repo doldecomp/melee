@@ -11,55 +11,21 @@ void func_8010D774(HSD_GObj* fighterObj) {
     func_80110074(fighterObj);
 }
 
-void ftDonkey_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
+void ftDonkey_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
+
+void ftDonkey_OnItemInvisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
+}
+
+void ftDonkey_OnItemVisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 1);
+}
+
+void ftDonkey_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
 {
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
-}
-
-void func_8010D888(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-        func_80070CC4(fighterObj, 1);
-    }
-}
-
-void func_8010D8D0(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-        func_80070C48(fighterObj, 1);
-    }
-}
-
-void func_8010D918(HSD_GObj* fighterObj, s32 arg1) {
-    func_80070FB4(fighterObj, 1, -1);
-    if (arg1) {
-        func_80070CC4(fighterObj, 1);
-    }
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
 }
 
 void func_8010D96C(HSD_GObj* fighterObj) {
