@@ -24,7 +24,7 @@ void func_80149540(HSD_GObj*);
 void ftDrMario_OnItemPickup(HSD_GObj*, BOOL);
 void ftDrMario_OnItemInvisible(HSD_GObj*);
 void ftDrMario_OnItemVisible(HSD_GObj*);
-void ftDrMario_OnItemRelease(HSD_GObj*, s32);
+void ftDrMario_OnItemRelease(HSD_GObj*, BOOL);
 void func_80149724(HSD_GObj*);
 void func_80149744(HSD_GObj*);
 void func_80149788(HSD_GObj*);

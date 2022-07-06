@@ -63,7 +63,7 @@ void ftMario_func_800E0A00(HSD_GObj*);
 void ftMario_OnItemPickup(HSD_GObj*, BOOL);
 void ftMario_OnItemInvisible(HSD_GObj*);
 void ftMario_OnItemVisible(HSD_GObj*);
-void ftMario_OnItemRelease(HSD_GObj*, s32);
+void ftMario_OnItemRelease(HSD_GObj*, BOOL);
 void ftMario_func_800E0BE4(HSD_GObj*);
 void ftMario_func_800E0C24(HSD_GObj*);
 void ftMario_func_800E0C68(HSD_GObj*);

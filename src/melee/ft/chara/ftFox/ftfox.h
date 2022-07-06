@@ -31,6 +31,6 @@ void func_800E5588(HSD_GObj* gobj);
 void ftFox_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
 void ftFox_OnItemInvisible(HSD_GObj* gobj);
 void ftFox_OnItemVisible(HSD_GObj* gobj);
-void ftFox_OnItemRelease(HSD_GObj* gobj, s32 arg1);
+void ftFox_OnItemRelease(HSD_GObj* gobj, BOOL arg1);
 
 #endif

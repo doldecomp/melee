@@ -43,13 +43,9 @@ void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj)
 // ftCFalcon_OnItemRelease
 // Used for both OnItemRelease and OnUnknownItemRelated
 // https://decomp.me/scratch/PCT5B
-void ftCFalcon_OnItemRelease(HSD_GObj* fighter_gobj, s32 unk1)
+void ftCFalcon_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
 {
-    func_80070FB4(fighter_gobj, 1, -1);//Fighter_SetHoldKind
-    if(unk1 != 0)
-    {
-        func_80070CC4(fighter_gobj, 1);//Fighter_ApplyHandAnim
-    }
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
 }
 
 // ftCFalcon_OnLoadForGanon

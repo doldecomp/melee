@@ -23,12 +23,9 @@ void ftRoy_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 0);
 }
 
-void ftRoy_OnItemRelease(HSD_GObj* gobj, s32 arg1)
+void ftRoy_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
 {
-    func_80070FB4(gobj, 0, -1);
-    if (arg1 != 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter_OnItemRelease(gobj, bool1, 0, 1);
 }
 
 void ftRoy_OnLoad(HSD_GObj* gobj)

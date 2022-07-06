@@ -70,3 +70,7 @@ void ftPeach_OnItemInvisible(HSD_GObj* fighterObj) {
 void ftPeach_OnItemVisible(HSD_GObj* fighterObj) {
     Fighter_OnItemVisible(fighterObj, 1);
 }
+
+void ftPeach_OnItemRelease(HSD_GObj* gobj, BOOL bool1) {
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+}

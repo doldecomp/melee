@@ -75,13 +75,10 @@ void ftCLink_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftCLink_OnItemRelease(HSD_GObj* gobj, s32 arg1)
+void ftCLink_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
 {
-    int unused;
-    func_80070FB4(gobj, 1, -1);
-    if (arg1 != 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter* link = getFighter(gobj);
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
 }
 
 void func_8014906C(HSD_GObj* gobj)

@@ -9,7 +9,7 @@ void ftZakoGirl_OnLoad(HSD_GObj*);
 void ftZakoGirl_OnItemPickup(HSD_GObj*, BOOL);
 void ftZakoGirl_OnItemInvisible(HSD_GObj*);
 void ftZakoGirl_OnItemVisible(HSD_GObj*);
-void ftZakoGirl_OnItemRelease(HSD_GObj*, s32);
+void ftZakoGirl_OnItemRelease(HSD_GObj*, BOOL);
 void func_8014F624(HSD_GObj*);
 
 #endif

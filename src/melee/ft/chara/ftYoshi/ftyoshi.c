@@ -164,3 +164,7 @@ void ftYoshi_OnItemInvisible(HSD_GObj *fighterObj) {
 void ftYoshi_OnItemVisible(HSD_GObj *fighterObj) {
     Fighter_OnItemVisible(fighterObj, 1);
 }
+
+void ftYoshi_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemRelease(fighterObj, bool1, 1, 1);
+}

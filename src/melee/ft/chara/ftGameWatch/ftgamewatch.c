@@ -104,3 +104,7 @@ void ftGameWatch_OnItemVisible(HSD_GObj* gobj) {
     Fighter_OnItemVisible(gobj, 1);
 }
 
+void ftGameWatch_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+{
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+}

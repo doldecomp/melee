@@ -24,7 +24,7 @@ typedef struct _CLinkAttributes {
 } CLinkAttributes;
 
 void ftCLink_OnItemPickup(HSD_GObj*, BOOL);
-void ftCLink_OnItemRelease(HSD_GObj*, s32);
+void ftCLink_OnItemRelease(HSD_GObj*, BOOL);
 
 inline void checkFighter2244(HSD_GObj* gobj)
 {

@@ -149,3 +149,7 @@ void ftPurin_OnItemVisible(HSD_GObj *fighterObj) {
         }
     }
 }
+
+void ftPurin_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemRelease(fighterObj, bool1, 0, 0);
+}

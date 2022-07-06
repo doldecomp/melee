@@ -26,3 +26,7 @@ void ftLuigi_OnItemInvisible(HSD_GObj* fighterObj) {
 void ftLuigi_OnItemVisible(HSD_GObj* fighterObj) {
     Fighter_OnItemVisible(fighterObj, 1);
 }
+
+void ftLuigi_OnItemRelease(HSD_GObj* gobj, BOOL bool1) {
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
+}

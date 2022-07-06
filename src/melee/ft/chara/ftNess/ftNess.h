@@ -91,7 +91,7 @@ f32 func_8011495C(Fighter* ft);
 void ftNess_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
 void ftNess_OnItemInvisible(HSD_GObj* gobj);
 void ftNess_OnItemVisible(HSD_GObj* gobj);
-void ftNess_OnItemRelease(HSD_GObj* gobj, s32 arg1);
+void ftNess_OnItemRelease(HSD_GObj* gobj, BOOL arg1);
 void func_80114B2C(HSD_GObj* gobj);
 void func_80114B6C(HSD_GObj* gobj);
 void func_80114BF4(HSD_GObj* gobj);

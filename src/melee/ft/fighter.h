@@ -1577,4 +1577,12 @@ inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
+inline void Fighter_OnItemRelease(HSD_GObj* gobj, BOOL bool1, BOOL bool2, BOOL bool3)
+{
+    func_80070FB4(gobj, bool2, -1);
+    if (bool1) {
+        func_80070CC4(gobj, bool3);
+    }
+}
+
 #endif

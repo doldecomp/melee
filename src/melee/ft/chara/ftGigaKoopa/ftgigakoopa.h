@@ -10,7 +10,7 @@ void ftGKoopa_OnLoad(HSD_GObj*);
 void ftGKoopa_OnItemPickup(HSD_GObj*, BOOL);
 void ftGKoopa_OnItemInvisible(HSD_GObj*);
 void ftGKoopa_OnItemVisible(HSD_GObj*);
-void ftGKoopa_OnItemRelease(HSD_GObj*, s32);
+void ftGKoopa_OnItemRelease(HSD_GObj*, BOOL);
 void func_8014F8E4(HSD_GObj*);
 void func_8014F904(HSD_GObj*);
 void func_8014F948(HSD_GObj*);

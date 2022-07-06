@@ -38,11 +38,8 @@ void ftPikachu_OnItemVisible(HSD_GObj *fighterObj) {
     Fighter_OnItemVisible(fighterObj, 0);
 }
 
-void ftPikachu_OnItemRelease(HSD_GObj* fighterObj, s32 arg1) {
-    func_80070FB4(fighterObj, 0, -1);
-    if (arg1) {
-        func_80070CC4(fighterObj, 0);
-    }
+void ftPikachu_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemRelease(fighterObj, bool1, 0, 0);
 }
 
 void ftPikachu_8012467C(HSD_GObj* fighterObj) {

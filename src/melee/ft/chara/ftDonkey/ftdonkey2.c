@@ -23,11 +23,9 @@ void ftDonkey_OnItemVisible(HSD_GObj* fighterObj) {
     Fighter_OnItemVisible(fighterObj, 1);
 }
 
-void ftDonkey_OnItemRelease(HSD_GObj* fighterObj, s32 arg1) {
-    func_80070FB4(fighterObj, 1, -1);
-    if (arg1) {
-        func_80070CC4(fighterObj, 1);
-    }
+void ftDonkey_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
+{
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
 }
 
 void func_8010D96C(HSD_GObj* fighterObj) {

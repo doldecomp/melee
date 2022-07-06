@@ -25,12 +25,8 @@ void ftZakoGirl_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 0);
 }
 
-void ftZakoGirl_OnItemRelease(HSD_GObj* gobj, s32 arg1)
-{
-    func_80070FB4(gobj, 0, -1);
-    if (arg1 != 0) {
-        func_80070CC4(gobj, 0);
-    }
+void ftZakoGirl_OnItemRelease(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemRelease(fighterObj, bool1, 0, 0);
 }
 
 void func_8014F624(HSD_GObj* gobj)

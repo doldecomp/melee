@@ -78,7 +78,7 @@ void ftPikachu_OnDeath(HSD_GObj* fighterObj);
 void ftPikachu_OnItemPickup(HSD_GObj* fighterObj, BOOL arg1);
 void ftPikachu_OnItemInvisible(HSD_GObj *fighterObj);
 void ftPikachu_OnItemVisible(HSD_GObj *fighterObj);
-void ftPikachu_OnItemRelease(HSD_GObj* fighterObj, s32 arg1);
+void ftPikachu_OnItemRelease(HSD_GObj* fighterObj, BOOL arg1);
 void ftPikachu_8012467C(HSD_GObj* fighterObj);
 void ftPikachu_801246C0(HSD_GObj* fighterObj);
 void ftPikachu_ScaleYAttributesArray_80124704(HSD_GObj* fighterObj);

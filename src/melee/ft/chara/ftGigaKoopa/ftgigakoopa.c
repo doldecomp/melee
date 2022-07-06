@@ -47,12 +47,9 @@ void ftGKoopa_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftGKoopa_OnItemRelease(HSD_GObj* gobj, s32 arg1)
+void ftGKoopa_OnItemRelease(HSD_GObj* gobj, BOOL bool1)
 {
-    func_80070FB4(gobj, 1, -1);
-    if (arg1 != 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter_OnItemRelease(gobj, bool1, 1, 1);
 }
 
 void func_8014F8E4(HSD_GObj* gobj)

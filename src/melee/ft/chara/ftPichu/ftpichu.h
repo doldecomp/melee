@@ -17,7 +17,7 @@ void ftPichu_OnDeath(HSD_GObj*);
 void ftPichu_OnItemPickup(HSD_GObj*, BOOL);
 void ftPichu_OnItemInvisible(HSD_GObj*);
 void ftPichu_OnItemVisible(HSD_GObj*);
-void ftPichu_OnItemRelease(HSD_GObj*, s32);
+void ftPichu_OnItemRelease(HSD_GObj*, BOOL);
 void func_8014A1A8(HSD_GObj*);
 void func_8014A1C8(HSD_GObj*);
 void func_8014A20C(HSD_GObj*);
