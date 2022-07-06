@@ -32,9 +32,11 @@ jobs:
         mv tools/GC tools/mwcc_compiler
     - name: Build WiBo
       working-directory: tools/WiBo
-      run: make -j$(nproc)
+      run: |
+        cmake -B build
+        cmake --build build
     - name: Build Melee
-      run: make -j$(nproc) ${{ matrix.makeflags }} WINE=./tools/WiBo/wibo
+      run: make -j$(nproc) ${{ matrix.makeflags }} WINE=./tools/WiBo/build/wibo
     - name: Upload map
       if: matrix.makeflags == 'GENERATE_MAP=1'
       uses: actions/upload-artifact@v2
