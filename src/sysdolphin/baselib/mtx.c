@@ -8,7 +8,7 @@ extern const f32 lbl_804DE660; // 0.0f
 
 
 // Calculates the determinant of the top 3x3 section of a 3x4 matrix
-inline f32 CalcDeterminantMatrix3x4(Mtx m)
+inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
 {
     f32 det;
     f32 m12 = m[1][2];
@@ -35,7 +35,7 @@ void func_80379310(Mtx src, Mtx dest)
     f32 det;
     f32 temp;
 
-    det = CalcDeterminantMatrix3x4(src);
+    det = HSD_CalcDeterminantMatrix3x4(src);
 
     temp = det;
     // why???
@@ -90,7 +90,7 @@ void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest)
     f32 temp12;
     f32 new_var; // TODO: try to get rid of this
 
-    det = CalcDeterminantMatrix3x4(inv);
+    det = HSD_CalcDeterminantMatrix3x4(inv);
     detTemp = det;
     FABSF(detTemp);
     
@@ -155,7 +155,7 @@ void func_80379A20(Mtx src, Mtx dest)
 
     m = (Mtx*)src;
     
-    det = CalcDeterminantMatrix3x4(src);
+    det = HSD_CalcDeterminantMatrix3x4(src);
     temp = det;
     FABSF(temp);
     
