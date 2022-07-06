@@ -82,13 +82,13 @@ void func_80132D00(HSD_GObj* gobj) {
     *sA2 = *ext_attr;
 }
 
-void func_80132D38(HSD_GObj *gobj) {
+void ftKoopa_OnKnockbackEnter(HSD_GObj *gobj) {
     func_800704F0(gobj, 1, lbl_804D9AC8);
     func_800704F0(gobj, 0, lbl_804D9AC8);
     return;
 }
 
-void func_80132D7C(HSD_GObj *gobj) {
+void ftKoopa_OnKnockbackExit(HSD_GObj *gobj) {
     func_800704F0(gobj, 1, lbl_804D9ACC);
     func_800704F0(gobj, 0, lbl_804D9ACC);
     return;

@@ -23,8 +23,8 @@ lbl_801103E8:
 /* 80110400 0010CFE0  90 05 00 08 */	stw r0, 8(r5)
 /* 80110404 0010CFE4  4E 80 00 20 */	blr 
 
-.global func_80110408
-func_80110408:
+.global ftSeak_OnKnockbackEnter
+ftSeak_OnKnockbackEnter:
 /* 80110408 0010CFE8  7C 08 02 A6 */	mflr r0
 /* 8011040C 0010CFEC  38 80 00 01 */	li r4, 1
 /* 80110410 0010CFF0  90 01 00 04 */	stw r0, 4(r1)
@@ -43,8 +43,8 @@ func_80110408:
 /* 80110444 0010D024  7C 08 03 A6 */	mtlr r0
 /* 80110448 0010D028  4E 80 00 20 */	blr 
 
-.global func_8011044C
-func_8011044C:
+.global ftSeak_OnKnockbackExit
+ftSeak_OnKnockbackExit:
 /* 8011044C 0010D02C  7C 08 02 A6 */	mflr r0
 /* 80110450 0010D030  38 80 00 01 */	li r4, 1
 /* 80110454 0010D034  90 01 00 04 */	stw r0, 4(r1)
@@ -3251,8 +3251,8 @@ lbl_80113098:
 /* 801130C8 0010FCA8  7C 08 03 A6 */	mtlr r0
 /* 801130CC 0010FCAC  4E 80 00 20 */	blr 
 
-.global func_801130D0
-func_801130D0:
+.global ftSeak_SpecialHi_StartAction
+ftSeak_SpecialHi_StartAction:
 /* 801130D0 0010FCB0  7C 08 02 A6 */	mflr r0
 /* 801130D4 0010FCB4  38 80 01 63 */	li r4, 0x163
 /* 801130D8 0010FCB8  90 01 00 04 */	stw r0, 4(r1)
@@ -4913,8 +4913,8 @@ lbl_80114788:
 
 .section .data
     .balign 8
-.global lbl_803CC060
-lbl_803CC060:
+.global as_table_seak
+as_table_seak:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000

@@ -106,12 +106,12 @@ void func_800EB250(HSD_GObj* fighterObj) {
     }
 }
 
-void func_800EB2AC(HSD_GObj* fighterObj) {
+void ftLink_OnKnockbackEnter(HSD_GObj* fighterObj) {
     func_800704F0(fighterObj, 1, lbl_804D92DC);
     func_800704F0(fighterObj, 0, lbl_804D92DC);
 }
 
-void func_800EB2F0(HSD_GObj* fighterObj) {
+void ftLink_OnKnockbackExit(HSD_GObj* fighterObj) {
     func_800704F0(fighterObj, 1, lbl_804D92E0);
     func_800704F0(fighterObj, 0, lbl_804D92E0);
 }

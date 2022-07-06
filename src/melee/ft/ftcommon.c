@@ -1645,7 +1645,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
 extern void (*ft_StoreHeldItem[])(HSD_GObj*);
 extern void (*ft_RestoreHeldItem[])(HSD_GObj*);
 extern void (*ft_OnKnockbackEnter[])(HSD_GObj*);
-extern void (*lbl_803C1D30[])(HSD_GObj*);
+extern void (*ft_OnKnockbackExit[])(HSD_GObj*);
 
 void func_8007F578(HSD_GObj* gobj)
 {
@@ -1726,8 +1726,8 @@ void func_8007F824(HSD_GObj* gobj)
 void func_8007F86C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (lbl_803C1D30[fp->x4_fighterKind] != NULL) {
-        lbl_803C1D30[fp->x4_fighterKind](gobj);
+    if (ft_OnKnockbackExit[fp->x4_fighterKind] != NULL) {
+        ft_OnKnockbackExit[fp->x4_fighterKind](gobj);
     }
 }
 

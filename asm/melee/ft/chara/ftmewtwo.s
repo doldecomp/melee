@@ -58,8 +58,8 @@ lbl_80144FD4:
 /* 80145010 00141BF0  D0 06 00 84 */	stfs f0, 0x84(r6)
 /* 80145014 00141BF4  4E 80 00 20 */	blr 
 
-.global func_80145018
-func_80145018:
+.global ftMewtwo_OnKnockbackEnter
+ftMewtwo_OnKnockbackEnter:
 /* 80145018 00141BF8  7C 08 02 A6 */	mflr r0
 /* 8014501C 00141BFC  38 80 00 02 */	li r4, 2
 /* 80145020 00141C00  90 01 00 04 */	stw r0, 4(r1)
@@ -78,8 +78,8 @@ func_80145018:
 /* 80145054 00141C34  7C 08 03 A6 */	mtlr r0
 /* 80145058 00141C38  4E 80 00 20 */	blr 
 
-.global func_8014505C
-func_8014505C:
+.global ftMewtwo_OnKnockbackExit
+ftMewtwo_OnKnockbackExit:
 /* 8014505C 00141C3C  7C 08 02 A6 */	mflr r0
 /* 80145060 00141C40  38 80 00 02 */	li r4, 2
 /* 80145064 00141C44  90 01 00 04 */	stw r0, 4(r1)
@@ -184,8 +184,8 @@ lbl_801451A8:
 /* 801451D4 00141DB4  7C 08 03 A6 */	mtlr r0
 /* 801451D8 00141DB8  4E 80 00 20 */	blr 
 
-.global func_801451DC
-func_801451DC:
+.global ftMewtwo_SpecialHi_StartAction
+ftMewtwo_SpecialHi_StartAction:
 /* 801451DC 00141DBC  7C 08 02 A6 */	mflr r0
 /* 801451E0 00141DC0  38 80 01 61 */	li r4, 0x161
 /* 801451E4 00141DC4  90 01 00 04 */	stw r0, 4(r1)
@@ -4355,8 +4355,8 @@ lbl_80148C48:
 
 .section .data
     .balign 8
-.global lbl_803D0B00
-lbl_803D0B00:
+.global as_table_mewtwo
+as_table_mewtwo:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000

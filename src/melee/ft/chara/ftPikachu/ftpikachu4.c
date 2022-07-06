@@ -10,7 +10,7 @@ void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighterObj) {
     fighter->x234C_pos.y = fighter->x2C_facing_direction * fabs_inline(fighter->x234C_pos.y);
 }
 
-void ftPikachu_ActionChangeZeroVel_80125DE8(HSD_GObj* fighterObj) {
+void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     s32 unused[2]; 
     ftPikachuAttributes* pika_attr;
     Fighter* fighter = fighterObj->user_data;

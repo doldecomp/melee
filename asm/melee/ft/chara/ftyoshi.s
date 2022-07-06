@@ -20,8 +20,8 @@ lbl_8012BCB0:
 /* 8012BCC0 001288A0  42 00 FF F0 */	bdnz lbl_8012BCB0
 /* 8012BCC4 001288A4  4E 80 00 20 */	blr 
 
-.global func_8012BCC8
-func_8012BCC8:
+.global ftYoshi_OnKnockbackEnter
+ftYoshi_OnKnockbackEnter:
 /* 8012BCC8 001288A8  7C 08 02 A6 */	mflr r0
 /* 8012BCCC 001288AC  38 80 00 01 */	li r4, 1
 /* 8012BCD0 001288B0  90 01 00 04 */	stw r0, 4(r1)
@@ -50,8 +50,8 @@ func_8012BCC8:
 /* 8012BD2C 0012890C  7C 08 03 A6 */	mtlr r0
 /* 8012BD30 00128910  4E 80 00 20 */	blr 
 
-.global func_8012BD34
-func_8012BD34:
+.global ftYoshi_OnKnockbackExit
+ftYoshi_OnKnockbackExit:
 /* 8012BD34 00128914  7C 08 02 A6 */	mflr r0
 /* 8012BD38 00128918  38 80 00 01 */	li r4, 1
 /* 8012BD3C 0012891C  90 01 00 04 */	stw r0, 4(r1)
@@ -2726,8 +2726,8 @@ lbl_8012E2A0:
 /* 8012E2BC 0012AE9C  7C 08 03 A6 */	mtlr r0
 /* 8012E2C0 0012AEA0  4E 80 00 20 */	blr 
 
-.global func_8012E2C4
-func_8012E2C4:
+.global ftYoshi_SpecialHi_StartAction
+ftYoshi_SpecialHi_StartAction:
 /* 8012E2C4 0012AEA4  7C 08 02 A6 */	mflr r0
 /* 8012E2C8 0012AEA8  38 80 01 6C */	li r4, 0x16c
 /* 8012E2CC 0012AEAC  90 01 00 04 */	stw r0, 4(r1)

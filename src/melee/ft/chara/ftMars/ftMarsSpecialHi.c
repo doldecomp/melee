@@ -2,7 +2,7 @@
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
-void func_80138208(HSD_GObj* gobj) {
+void ftMars_SpecialHi_StartAction(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
     ft->x2208_ftcmd_var2 = 0;

@@ -23,8 +23,8 @@ lbl_800E5878:
 /* 800E5890 000E2470  90 05 00 08 */	stw r0, 8(r5)
 /* 800E5894 000E2474  4E 80 00 20 */	blr 
 
-.global func_800E5898
-func_800E5898:
+.global ftFox_OnKnockbackEnter
+ftFox_OnKnockbackEnter:
 /* 800E5898 000E2478  7C 08 02 A6 */	mflr r0
 /* 800E589C 000E247C  38 80 00 01 */	li r4, 1
 /* 800E58A0 000E2480  90 01 00 04 */	stw r0, 4(r1)
@@ -53,8 +53,8 @@ func_800E5898:
 /* 800E58FC 000E24DC  7C 08 03 A6 */	mtlr r0
 /* 800E5900 000E24E0  4E 80 00 20 */	blr 
 
-.global func_800E5904
-func_800E5904:
+.global ftFox_OnKnockbackExit
+ftFox_OnKnockbackExit:
 /* 800E5904 000E24E4  7C 08 02 A6 */	mflr r0
 /* 800E5908 000E24E8  38 80 00 01 */	li r4, 1
 /* 800E590C 000E24EC  90 01 00 04 */	stw r0, 4(r1)
@@ -1890,8 +1890,8 @@ lbl_800E7200:
 /* 800E7230 000E3E10  7C 08 03 A6 */	mtlr r0
 /* 800E7234 000E3E14  4E 80 00 20 */	blr 
 
-.global func_800E7238
-func_800E7238:
+.global ftFox_SpecialHi_StartAction
+ftFox_SpecialHi_StartAction:
 /* 800E7238 000E3E18  7C 08 02 A6 */	mflr r0
 /* 800E723C 000E3E1C  38 80 01 61 */	li r4, 0x161
 /* 800E7240 000E3E20  90 01 00 04 */	stw r0, 4(r1)
@@ -6291,8 +6291,8 @@ func_800EACD8:
 
 .section .data
     .balign 8
-.global lbl_803C7788
-lbl_803C7788:
+.global as_table_fox
+as_table_fox:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000

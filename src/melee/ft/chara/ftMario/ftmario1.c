@@ -74,12 +74,12 @@ void ftMario_func_800E0BE4(HSD_GObj* gobj) {
     *sa = *ext_attr;
 }
 
-void ftMario_func_800E0C24(HSD_GObj* gobj) {
+void ftMario_OnKnockbackEnter(HSD_GObj* gobj) {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
 }
 
-void ftMario_func_800E0C68(HSD_GObj* gobj) {
+void ftMario_OnKnockbackExit(HSD_GObj* gobj) {
     func_800704F0(gobj, 1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);
 }

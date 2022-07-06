@@ -11,7 +11,7 @@ void ftRoy_RestoreHeldItem(HSD_GObj*);
 void ftRoy_OnItemDrop(HSD_GObj*, BOOL);
 void ftRoy_OnLoad(HSD_GObj*);
 void func_8014F148(HSD_GObj*);
-void func_8014F168(HSD_GObj*);
-void func_8014F1AC(HSD_GObj*);
+void ftRoy_OnKnockbackEnter(HSD_GObj*);
+void ftRoy_OnKnockbackExit(HSD_GObj*);
 
 #endif

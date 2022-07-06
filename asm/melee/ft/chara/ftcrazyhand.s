@@ -6851,8 +6851,8 @@ lbl_8015BCE8:
 
 .section .data
     .balign 8
-.global lbl_803D41F8
-lbl_803D41F8:
+.global as_table_crazyhand
+as_table_crazyhand:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01000000

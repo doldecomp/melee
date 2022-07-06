@@ -59,8 +59,8 @@ func_8014A814:
 /* 8014A820 00147400  90 04 00 00 */	stw r0, 0(r4)
 /* 8014A824 00147404  4E 80 00 20 */	blr 
 
-.global func_8014A828
-func_8014A828:
+.global ftGameWatch_OnAbsorb
+ftGameWatch_OnAbsorb:
 /* 8014A828 00147408  7C 08 02 A6 */	mflr r0
 /* 8014A82C 0014740C  90 01 00 04 */	stw r0, 4(r1)
 /* 8014A830 00147410  94 21 FF F8 */	stwu r1, -8(r1)
@@ -4254,8 +4254,8 @@ lbl_8014E09C:
 /* 8014E0A4 0014AC84  7C 08 03 A6 */	mtlr r0
 /* 8014E0A8 0014AC88  4E 80 00 20 */	blr 
 
-.global func_8014E0AC
-func_8014E0AC:
+.global ftGameWatch_SpecialHi_StartAction
+ftGameWatch_SpecialHi_StartAction:
 /* 8014E0AC 0014AC8C  7C 08 02 A6 */	mflr r0
 /* 8014E0B0 0014AC90  90 01 00 04 */	stw r0, 4(r1)
 /* 8014E0B4 0014AC94  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -5070,8 +5070,8 @@ func_8014EB8C:
 
 .section .data
     .balign 8
-.global lbl_803D23E8
-lbl_803D23E8:
+.global as_table_gamewatch
+as_table_gamewatch:
     .4byte 0x0000002E
     .4byte 0x002C0201
     .4byte 0x02800000

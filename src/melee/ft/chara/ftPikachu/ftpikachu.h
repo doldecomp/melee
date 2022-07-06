@@ -82,8 +82,8 @@ void ftPikachu_OnItemDrop(HSD_GObj* fighterObj, BOOL arg1);
 void ftPikachu_8012467C(HSD_GObj* fighterObj);
 void ftPikachu_801246C0(HSD_GObj* fighterObj);
 void ftPikachu_ScaleYAttributesArray_80124704(HSD_GObj* fighterObj);
-void ftPikachu_801247A8(HSD_GObj* fighterObj);
-void ftPikachu_801247EC(HSD_GObj* fighterObj);
+void ftPikachu_OnKnockbackEnter(HSD_GObj* fighterObj);
+void ftPikachu_OnKnockbackExit(HSD_GObj* fighterObj);
 
 ///pika2
 void ftPikachu_ActionChange_80124830(HSD_GObj* fighterObj);
@@ -161,7 +161,7 @@ void ftPikachu_ActionChange_80125D28(HSD_GObj* fighterObj);
 
 ///pika4
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighterObj);
-void ftPikachu_ActionChangeZeroVel_80125DE8(HSD_GObj* fighterObj);
+void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighterObj);
 void ftPikachu_ActionChangeZeroVel_80125E60(HSD_GObj* fighterObj);
 void ftPikachu_80125ED8(HSD_GObj* fighterObj);
 void ftPikachu_80125F14(HSD_GObj* fighterObj);

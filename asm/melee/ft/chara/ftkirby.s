@@ -241,8 +241,8 @@ func_800EEB1C:
 /* 800EEB30 000EB710  90 04 00 00 */	stw r0, 0(r4)
 /* 800EEB34 000EB714  4E 80 00 20 */	blr 
 
-.global func_800EEB38
-func_800EEB38:
+.global ftKirby_OnKnockbackEnter
+ftKirby_OnKnockbackEnter:
 /* 800EEB38 000EB718  7C 08 02 A6 */	mflr r0
 /* 800EEB3C 000EB71C  38 80 00 01 */	li r4, 1
 /* 800EEB40 000EB720  90 01 00 04 */	stw r0, 4(r1)
@@ -261,8 +261,8 @@ func_800EEB38:
 /* 800EEB74 000EB754  7C 08 03 A6 */	mtlr r0
 /* 800EEB78 000EB758  4E 80 00 20 */	blr 
 
-.global func_800EEB7C
-func_800EEB7C:
+.global ftKirby_OnKnockbackExit
+ftKirby_OnKnockbackExit:
 /* 800EEB7C 000EB75C  7C 08 02 A6 */	mflr r0
 /* 800EEB80 000EB760  38 80 00 01 */	li r4, 1
 /* 800EEB84 000EB764  90 01 00 04 */	stw r0, 4(r1)
@@ -4326,8 +4326,8 @@ func_800F22D4:
 /* 800F22F8 000EEED8  7C 08 03 A6 */	mtlr r0
 /* 800F22FC 000EEEDC  4E 80 00 20 */	blr 
 
-.global func_800F2300
-func_800F2300:
+.global ftKirby_SpecialHi_StartAction
+ftKirby_SpecialHi_StartAction:
 /* 800F2300 000EEEE0  7C 08 02 A6 */	mflr r0
 /* 800F2304 000EEEE4  38 80 01 81 */	li r4, 0x181
 /* 800F2308 000EEEE8  90 01 00 04 */	stw r0, 4(r1)

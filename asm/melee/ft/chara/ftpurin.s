@@ -20,8 +20,8 @@ lbl_8013C8AC:
 /* 8013C8BC 0013949C  42 00 FF F0 */	bdnz lbl_8013C8AC
 /* 8013C8C0 001394A0  4E 80 00 20 */	blr 
 
-.global func_8013C8C4
-func_8013C8C4:
+.global ftPurin_OnKnockbackEnter
+ftPurin_OnKnockbackEnter:
 /* 8013C8C4 001394A4  7C 08 02 A6 */	mflr r0
 /* 8013C8C8 001394A8  38 80 00 01 */	li r4, 1
 /* 8013C8CC 001394AC  90 01 00 04 */	stw r0, 4(r1)
@@ -40,8 +40,8 @@ func_8013C8C4:
 /* 8013C900 001394E0  7C 08 03 A6 */	mtlr r0
 /* 8013C904 001394E4  4E 80 00 20 */	blr 
 
-.global func_8013C908
-func_8013C908:
+.global ftPurin_OnKnockbackExit
+ftPurin_OnKnockbackExit:
 /* 8013C908 001394E8  7C 08 02 A6 */	mflr r0
 /* 8013C90C 001394EC  38 80 00 01 */	li r4, 1
 /* 8013C910 001394F0  90 01 00 04 */	stw r0, 4(r1)
@@ -93,8 +93,8 @@ lbl_8013C994:
 /* 8013C9C0 001395A0  7C 08 03 A6 */	mtlr r0
 /* 8013C9C4 001395A4  4E 80 00 20 */	blr 
 
-.global func_8013C9C8
-func_8013C9C8:
+.global ftPurin_SpecialHi_StartAction
+ftPurin_SpecialHi_StartAction:
 /* 8013C9C8 001395A8  7C 08 02 A6 */	mflr r0
 /* 8013C9CC 001395AC  90 01 00 04 */	stw r0, 4(r1)
 /* 8013C9D0 001395B0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -6443,8 +6443,8 @@ lbl_8014222C:
 
 .section .data
     .balign 8
-.global lbl_803CFEF0
-lbl_803CFEF0:
+.global as_table_purin
+as_table_purin:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01000000

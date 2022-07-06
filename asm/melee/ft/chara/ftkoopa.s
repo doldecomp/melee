@@ -2448,8 +2448,8 @@ lbl_80135A14:
 /* 80135A24 00132604  7C 08 03 A6 */	mtlr r0
 /* 80135A28 00132608  4E 80 00 20 */	blr 
 
-.global func_80135A2C
-func_80135A2C:
+.global ftKoopa_SpecialHi_StartAction
+ftKoopa_SpecialHi_StartAction:
 /* 80135A2C 0013260C  7C 08 02 A6 */	mflr r0
 /* 80135A30 00132610  38 80 01 67 */	li r4, 0x167
 /* 80135A34 00132614  90 01 00 04 */	stw r0, 4(r1)
@@ -3022,8 +3022,8 @@ lbl_8013623C:
 
 .section .data
     .balign 8
-.global lbl_803CEDC0
-lbl_803CEDC0:
+.global as_table_koopa
+as_table_koopa:
     .4byte 0x00000127
     .4byte 0x00340011
     .4byte 0x12000000

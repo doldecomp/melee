@@ -61,14 +61,14 @@ void func_801364E8(HSD_GObj* gobj) {
 // 80136520 00133100
 // ftMars_OnKnockbackEnter
 // https://decomp.me/scratch/rgfFA
-void func_80136520(HSD_GObj* gobj) {
+void ftMars_OnKnockbackEnter(HSD_GObj* gobj) {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
 }
 
 // 80136564 00133144
 // https://decomp.me/scratch/Jqd2A
-void func_80136564(HSD_GObj* gobj) {
+void ftMars_OnKnockbackExit(HSD_GObj* gobj) {
     func_800704F0(gobj, 1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);
 }

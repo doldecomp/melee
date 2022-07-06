@@ -574,8 +574,8 @@ lbl_800EBAE4:
 /* 800EBB14 000E86F4  7C 08 03 A6 */	mtlr r0
 /* 800EBB18 000E86F8  4E 80 00 20 */	blr 
 
-.global func_800EBB1C
-func_800EBB1C:
+.global ftLink_SpecialHi_StartAction
+ftLink_SpecialHi_StartAction:
 /* 800EBB1C 000E86FC  7C 08 02 A6 */	mflr r0
 /* 800EBB20 000E8700  38 80 01 64 */	li r4, 0x164
 /* 800EBB24 000E8704  90 01 00 04 */	stw r0, 4(r1)
@@ -3631,8 +3631,8 @@ lbl_800EE514:
 
 .section .data
     .balign 8
-.global lbl_803C7E18
-lbl_803C7E18:
+.global as_table_link
+as_table_link:
     .4byte 0x00000127
     .4byte 0x00240009
     .4byte 0x0A000000

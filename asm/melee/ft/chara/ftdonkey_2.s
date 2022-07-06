@@ -22,8 +22,8 @@ lbl_8010DA94:
 /* 8010DAAC 0010A68C  90 05 00 08 */	stw r0, 8(r5)
 /* 8010DAB0 0010A690  4E 80 00 20 */	blr 
 
-.global func_8010DAB4
-func_8010DAB4:
+.global ftDonkey_OnKnockbackEnter
+ftDonkey_OnKnockbackEnter:
 /* 8010DAB4 0010A694  7C 08 02 A6 */	mflr r0
 /* 8010DAB8 0010A698  38 80 00 01 */	li r4, 1
 /* 8010DABC 0010A69C  90 01 00 04 */	stw r0, 4(r1)
@@ -42,8 +42,8 @@ func_8010DAB4:
 /* 8010DAF0 0010A6D0  7C 08 03 A6 */	mtlr r0
 /* 8010DAF4 0010A6D4  4E 80 00 20 */	blr 
 
-.global func_8010DAF8
-func_8010DAF8:
+.global ftDonkey_OnKnockbackExit
+ftDonkey_OnKnockbackExit:
 /* 8010DAF8 0010A6D8  7C 08 02 A6 */	mflr r0
 /* 8010DAFC 0010A6DC  38 80 00 01 */	li r4, 1
 /* 8010DB00 0010A6E0  90 01 00 04 */	stw r0, 4(r1)
@@ -2376,8 +2376,8 @@ func_8010FAF0:
 /* 8010FB14 0010C6F4  7C 08 03 A6 */	mtlr r0
 /* 8010FB18 0010C6F8  4E 80 00 20 */	blr 
 
-.global func_8010FB1C
-func_8010FB1C:
+.global ftDonkey_SpecialHi_StartAction
+ftDonkey_SpecialHi_StartAction:
 /* 8010FB1C 0010C6FC  7C 08 02 A6 */	mflr r0
 /* 8010FB20 0010C700  38 80 01 7D */	li r4, 0x17d
 /* 8010FB24 0010C704  90 01 00 04 */	stw r0, 4(r1)
@@ -2763,8 +2763,8 @@ func_80110074:
 
 .section .data
     .balign 8
-.global lbl_803CB838
-lbl_803CB838:
+.global as_table_donkey
+as_table_donkey:
     .4byte 0x00000127
     .4byte 0x00480000
     .4byte 0x35400000

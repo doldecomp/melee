@@ -76,13 +76,13 @@ void ftNess_CopySpecialAttrs(HSD_GObj* gobj)
     *sA2 = *ext_attr;
 }
 
-void ftNess_ToggleHurtMatAnims(HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //
+void ftNess_OnKnockbackEnter(HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //
 {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
 }
 
-void ftNess_ToggleNormalMatAnims(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures //
+void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures //
 {
     func_800704F0(fighter_gobj, 1, 0.0f);
     func_800704F0(fighter_gobj, 0, 0.0f);

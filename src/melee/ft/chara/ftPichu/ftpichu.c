@@ -71,13 +71,13 @@ void func_8014A1A8(HSD_GObj* gobj)
     ftPikachu_ScaleYAttributesArray_80124704(gobj);
 }
 
-void func_8014A1C8(HSD_GObj* gobj)
+void ftPichu_OnKnockbackEnter(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
 }
 
-void func_8014A20C(HSD_GObj* gobj)
+void ftPichu_OnKnockbackExit(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);

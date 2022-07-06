@@ -48,8 +48,8 @@ lbl_8011B984:
 /* 8011B990 00118570  7C 08 03 A6 */	mtlr r0
 /* 8011B994 00118574  4E 80 00 20 */	blr 
 
-.global func_8011B998
-func_8011B998:
+.global ftPeach_OnKnockbackEnter
+ftPeach_OnKnockbackEnter:
 /* 8011B998 00118578  7C 08 02 A6 */	mflr r0
 /* 8011B99C 0011857C  38 80 00 01 */	li r4, 1
 /* 8011B9A0 00118580  90 01 00 04 */	stw r0, 4(r1)
@@ -68,8 +68,8 @@ func_8011B998:
 /* 8011B9D4 001185B4  7C 08 03 A6 */	mtlr r0
 /* 8011B9D8 001185B8  4E 80 00 20 */	blr 
 
-.global func_8011B9DC
-func_8011B9DC:
+.global ftPeach_OnKnockbackExit
+ftPeach_OnKnockbackExit:
 /* 8011B9DC 001185BC  7C 08 02 A6 */	mflr r0
 /* 8011B9E0 001185C0  38 80 00 01 */	li r4, 1
 /* 8011B9E4 001185C4  90 01 00 04 */	stw r0, 4(r1)
@@ -2227,8 +2227,8 @@ lbl_8011D71C:
 /* 8011D724 0011A304  7C 08 03 A6 */	mtlr r0
 /* 8011D728 0011A308  4E 80 00 20 */	blr 
 
-.global func_8011D72C
-func_8011D72C:
+.global ftPeach_SpecialHi_StartAction
+ftPeach_SpecialHi_StartAction:
 /* 8011D72C 0011A30C  7C 08 02 A6 */	mflr r0
 /* 8011D730 0011A310  38 80 01 69 */	li r4, 0x169
 /* 8011D734 0011A314  90 01 00 04 */	stw r0, 4(r1)
@@ -3846,8 +3846,8 @@ lbl_8011ED08:
 
 .section .data
     .balign 8
-.global lbl_803CCCB8
-lbl_803CCCB8:
+.global as_table_peach
+as_table_peach:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01000000

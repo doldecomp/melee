@@ -11,7 +11,7 @@ void ftFalco_RestoreHeldItem(HSD_GObj*);
 void ftFalco_OnItemDrop(HSD_GObj*, BOOL);
 void ftFalco_OnLoad(HSD_GObj*);
 void func_80149D3C(HSD_GObj*);
-void func_80149D5C(HSD_GObj*);
-void func_80149DC8(HSD_GObj*);
+void ftFalco_OnKnockbackEnter(HSD_GObj*);
+void ftFalco_OnKnockbackExit(HSD_GObj*);
 
 #endif

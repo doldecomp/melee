@@ -12,8 +12,8 @@ void ftGKoopa_StoreHeldItem(HSD_GObj*);
 void ftGKoopa_RestoreHeldItem(HSD_GObj*);
 void ftGKoopa_OnItemDrop(HSD_GObj*, BOOL);
 void func_8014F8E4(HSD_GObj*);
-void func_8014F904(HSD_GObj*);
-void func_8014F948(HSD_GObj*);
+void ftGKoopa_OnKnockbackEnter(HSD_GObj*);
+void ftGKoopa_OnKnockbackExit(HSD_GObj*);
 void func_8014F98C(s32, s32*, s32*);
 s32 func_8014F9A4(s32);
 

@@ -2343,8 +2343,8 @@ func_8012A640:
 /* 8012A66C 0012724C  7C 08 03 A6 */	mtlr r0
 /* 8012A670 00127250  4E 80 00 20 */	blr 
 
-.global func_8012A674
-func_8012A674:
+.global ftSamus_SpecialHi_StartAction
+ftSamus_SpecialHi_StartAction:
 /* 8012A674 00127254  7C 08 02 A6 */	mflr r0
 /* 8012A678 00127258  38 80 01 61 */	li r4, 0x161
 /* 8012A67C 0012725C  90 01 00 04 */	stw r0, 4(r1)
@@ -3509,8 +3509,8 @@ func_8012B668:
 
 .section .data
     .balign 8
-.global lbl_803CE2D0
-lbl_803CE2D0:
+.global as_table_samus
+as_table_samus:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01000000
@@ -3757,8 +3757,8 @@ lbl_803CE6B8:
     .4byte NULL
 
 #### this data below here belongs in yoshi
-.global lbl_803CE6D0
-lbl_803CE6D0:
+.global as_table_yoshi
+as_table_yoshi:
     .4byte 0x00000025
     .4byte 0x00100000
     .4byte 0x01000000

@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D29F8
-lbl_803D29F8:
+.global as_table_ganon
+as_table_ganon:
     .4byte 0xFFFFFFFF
     .4byte NULL
     .4byte 0x01000000

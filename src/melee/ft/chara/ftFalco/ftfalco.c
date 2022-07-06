@@ -50,7 +50,7 @@ void func_80149D3C(HSD_GObj* gobj)
     func_800E5858(gobj);
 }
 
-void func_80149D5C(HSD_GObj* gobj)
+void ftFalco_OnKnockbackEnter(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
@@ -58,7 +58,7 @@ void func_80149D5C(HSD_GObj* gobj)
     ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
 }
 
-void func_80149DC8(HSD_GObj* gobj)
+void ftFalco_OnKnockbackExit(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);

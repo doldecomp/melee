@@ -65,8 +65,8 @@ void ftMario_StoreHeldItem(HSD_GObj*);
 void ftMario_RestoreHeldItem(HSD_GObj*);
 void ftMario_OnItemDrop(HSD_GObj*, BOOL);
 void ftMario_func_800E0BE4(HSD_GObj*);
-void ftMario_func_800E0C24(HSD_GObj*);
-void ftMario_func_800E0C68(HSD_GObj*);
+void ftMario_OnKnockbackEnter(HSD_GObj*);
+void ftMario_OnKnockbackExit(HSD_GObj*);
 void ftMario_func_800E0CAC(s32, u32*, u32*);
 s32 ftMario_func_800E0CE0(s32 arg0);
 
@@ -108,7 +108,7 @@ void ftMario_func_800E18B8(HSD_GObj*);
 void ftMario_func_800E198C(HSD_GObj*);
 
 //ftmario4
-void ftMario_func_800E1A54(HSD_GObj*);
+void ftMario_SpecialHi_StartAction(HSD_GObj*);
 void ftMario_func_800E1AB0(HSD_GObj*);
 void ftMario_func_800E1B24(HSD_GObj*);
 void ftMario_func_800E1B84(HSD_GObj*);

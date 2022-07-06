@@ -3,7 +3,7 @@
 
 #include <melee/it/itkind.h>
 
-void ftMario_func_800E1A54(HSD_GObj* gobj) {
+void ftMario_SpecialHi_StartAction(HSD_GObj* gobj) {
     Fighter* ft;
 
     ft = getFighter(gobj);

@@ -20,8 +20,8 @@ lbl_8014256C:
 /* 8014257C 0013F15C  42 00 FF F0 */	bdnz lbl_8014256C
 /* 80142580 0013F160  4E 80 00 20 */	blr 
 
-.global func_80142584
-func_80142584:
+.global ftLuigi_OnKnockbackEnter
+ftLuigi_OnKnockbackEnter:
 /* 80142584 0013F164  7C 08 02 A6 */	mflr r0
 /* 80142588 0013F168  38 80 00 01 */	li r4, 1
 /* 8014258C 0013F16C  90 01 00 04 */	stw r0, 4(r1)
@@ -40,8 +40,8 @@ func_80142584:
 /* 801425C0 0013F1A0  7C 08 03 A6 */	mtlr r0
 /* 801425C4 0013F1A4  4E 80 00 20 */	blr 
 
-.global func_801425C8
-func_801425C8:
+.global ftLuigi_OnKnockbackExit
+ftLuigi_OnKnockbackExit:
 /* 801425C8 0013F1A8  7C 08 02 A6 */	mflr r0
 /* 801425CC 0013F1AC  38 80 00 01 */	li r4, 1
 /* 801425D0 0013F1B0  90 01 00 04 */	stw r0, 4(r1)
@@ -1974,8 +1974,8 @@ func_80143F70:
 /* 80143FC0 00140BA0  7C 08 03 A6 */	mtlr r0
 /* 80143FC4 00140BA4  4E 80 00 20 */	blr 
 
-.global func_80143FC8
-func_80143FC8:
+.global ftLuigi_SpecialHi_StartAction
+ftLuigi_SpecialHi_StartAction:
 /* 80143FC8 00140BA8  7C 08 02 A6 */	mflr r0
 /* 80143FCC 00140BAC  38 80 01 63 */	li r4, 0x163
 /* 80143FD0 00140BB0  90 01 00 04 */	stw r0, 4(r1)
@@ -2990,8 +2990,8 @@ lbl_80144DE8:
 
 .section .data
     .balign 8
-.global lbl_803D0628
-lbl_803D0628:
+.global as_table_luigi
+as_table_luigi:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000

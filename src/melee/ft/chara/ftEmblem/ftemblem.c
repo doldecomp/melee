@@ -38,13 +38,13 @@ void func_8014F148(HSD_GObj* gobj)
     func_801364E8(gobj);
 }
 
-void func_8014F168(HSD_GObj* gobj)
+void ftRoy_OnKnockbackEnter(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
 }
 
-void func_8014F1AC(HSD_GObj* gobj)
+void ftRoy_OnKnockbackExit(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);

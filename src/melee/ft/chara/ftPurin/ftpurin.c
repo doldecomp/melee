@@ -17,7 +17,7 @@ void ftPurin_OnDeath(HSD_GObj* fighterObj) {
     func_80074A4C(fighterObj, 0, 0);
 }
 
-void func_8013C340(HSD_GObj* fighterObj) {
+void ftPurin_OnUserDataRemove(HSD_GObj* fighterObj) {
     func_8013C494(fighterObj);
 }
 

@@ -142,8 +142,8 @@ void ftNess_StoreHeldItem(HSD_GObj* gobj);
 void ftNess_RestoreHeldItem(HSD_GObj* gobj);
 void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag);
 void ftNess_CopySpecialAttrs(HSD_GObj* gobj);
-void ftNess_ToggleHurtMatAnims(HSD_GObj* gobj);
-void ftNess_ToggleNormalMatAnims(HSD_GObj* gobj);
+void ftNess_OnKnockbackEnter(HSD_GObj* gobj);
+void ftNess_OnKnockbackExit(HSD_GObj* gobj);
 
 // Forward Smash (AttackS4) //
 
@@ -274,7 +274,7 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* gobj);
 void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj);
 void ftNess_ItemPKThunderCheckOwn(HSD_GObj* gobj, HSD_GObj* gobj2);
 void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* gobj, CollData* coll_data);
-void ftNess_SpecialHiStart_Action(HSD_GObj* gobj);
+void ftNess_SpecialHi_StartAction(HSD_GObj* gobj);
 void ftNess_SpecialAirHiStart_Action(HSD_GObj* gobj);
 void ftNess_SpecialHi_Action(HSD_GObj* gobj);
 void ftNess_SpecialAirHi_Action(HSD_GObj* gobj);

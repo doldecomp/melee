@@ -42,8 +42,8 @@ lbl_8011F0C4:
 /* 8011F0DC 0011BCBC  90 05 00 08 */	stw r0, 8(r5)
 /* 8011F0E0 0011BCC0  4E 80 00 20 */	blr 
 
-.global func_8011F0E4
-func_8011F0E4:
+.global ftIceClimber_OnKnockbackEnter
+ftIceClimber_OnKnockbackEnter:
 /* 8011F0E4 0011BCC4  7C 08 02 A6 */	mflr r0
 /* 8011F0E8 0011BCC8  38 80 00 01 */	li r4, 1
 /* 8011F0EC 0011BCCC  90 01 00 04 */	stw r0, 4(r1)
@@ -62,8 +62,8 @@ func_8011F0E4:
 /* 8011F120 0011BD00  7C 08 03 A6 */	mtlr r0
 /* 8011F124 0011BD04  4E 80 00 20 */	blr 
 
-.global func_8011F128
-func_8011F128:
+.global ftIceClimber_OnKnockbackExit
+ftIceClimber_OnKnockbackExit:
 /* 8011F128 0011BD08  7C 08 02 A6 */	mflr r0
 /* 8011F12C 0011BD0C  38 80 00 01 */	li r4, 1
 /* 8011F130 0011BD10  90 01 00 04 */	stw r0, 4(r1)
@@ -2391,8 +2391,8 @@ lbl_801211A0:
 /* 801211AC 0011DD8C  7C 08 03 A6 */	mtlr r0
 /* 801211B0 0011DD90  4E 80 00 20 */	blr 
 
-.global func_801211B4
-func_801211B4:
+.global ftIceClimber_SpecialHi_StartAction
+ftIceClimber_SpecialHi_StartAction:
 /* 801211B4 0011DD94  7C 08 02 A6 */	mflr r0
 /* 801211B8 0011DD98  90 01 00 04 */	stw r0, 4(r1)
 /* 801211BC 0011DD9C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -4515,8 +4515,8 @@ lbl_80122EC0:
 
 .section .data
     .balign 8
-.global lbl_803CD2D0
-lbl_803CD2D0:
+.global as_table_iceclimber
+as_table_iceclimber:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12800000
@@ -4834,8 +4834,8 @@ lbl_803CD820:
     .4byte 0x40C00000
     .4byte 0x40C00000
     .4byte 0x40C00000
-.global lbl_803CD838
-lbl_803CD838:
+.global as_table_nana
+as_table_nana:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12800000

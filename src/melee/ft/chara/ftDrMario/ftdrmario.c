@@ -54,13 +54,13 @@ void func_80149724(HSD_GObj* gobj)
     ftMario_func_800E0BE4(gobj);
 }
 
-void func_80149744(HSD_GObj* gobj)
+void ftDrMario_OnKnockbackEnter(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
 }
 
-void func_80149788(HSD_GObj* gobj)
+void ftdrMario_OnKnockbackExit(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);

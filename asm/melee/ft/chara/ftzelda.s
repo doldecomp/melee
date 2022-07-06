@@ -48,8 +48,8 @@ lbl_80139610:
 /* 8013961C 001361FC  7C 08 03 A6 */	mtlr r0
 /* 80139620 00136200  4E 80 00 20 */	blr 
 
-.global func_80139624
-func_80139624:
+.global ftZelda_OnKnockbackEnter
+ftZelda_OnKnockbackEnter:
 /* 80139624 00136204  7C 08 02 A6 */	mflr r0
 /* 80139628 00136208  38 80 00 01 */	li r4, 1
 /* 8013962C 0013620C  90 01 00 04 */	stw r0, 4(r1)
@@ -68,8 +68,8 @@ func_80139624:
 /* 80139660 00136240  7C 08 03 A6 */	mtlr r0
 /* 80139664 00136244  4E 80 00 20 */	blr 
 
-.global func_80139668
-func_80139668:
+.global ftZelda_OnKnockbackExit
+ftZelda_OnKnockbackExit:
 /* 80139668 00136248  7C 08 02 A6 */	mflr r0
 /* 8013966C 0013624C  38 80 00 01 */	li r4, 1
 /* 80139670 00136250  90 01 00 04 */	stw r0, 4(r1)
@@ -195,8 +195,8 @@ lbl_801397FC:
 /* 8013982C 0013640C  7C 08 03 A6 */	mtlr r0
 /* 80139830 00136410  4E 80 00 20 */	blr 
 
-.global func_80139834
-func_80139834:
+.global ftZelda_SpecialHi_StartAction
+ftZelda_SpecialHi_StartAction:
 /* 80139834 00136414  7C 08 02 A6 */	mflr r0
 /* 80139838 00136418  38 80 01 5D */	li r4, 0x15d
 /* 8013983C 0013641C  90 01 00 04 */	stw r0, 4(r1)
@@ -3283,8 +3283,8 @@ lbl_8013C2E0:
 
 .section .data
     .balign 8
-.global lbl_803CFA58
-lbl_803CFA58:
+.global as_table_zelda
+as_table_zelda:
     .4byte 0x00000127
     .4byte 0x00341011
     .4byte 0x12000000

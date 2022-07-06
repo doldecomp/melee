@@ -1027,7 +1027,7 @@ ft_OnUserDataRemove:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8013C340
+    .4byte ftPurin_OnUserDataRemove
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1049,39 +1049,39 @@ ft_OnUserDataRemove:
 
 .global ActionStateTableByCharacter
 ActionStateTableByCharacter:
-    .4byte lbl_803C7120
-    .4byte lbl_803C7788
-    .4byte lbl_803C72B8
-    .4byte lbl_803CB838
+    .4byte as_table_mario
+    .4byte as_table_fox
+    .4byte as_table_cfalcon
+    .4byte as_table_donkey
     .4byte as_table_kirby
-    .4byte lbl_803CEDC0
-    .4byte lbl_803C7E18
-    .4byte lbl_803CC060
-    .4byte lbl_803CC650
-    .4byte lbl_803CCCB8
-    .4byte lbl_803CD2D0
-    .4byte lbl_803CD838
-    .4byte lbl_803CDD78
-    .4byte lbl_803CE2D0
-    .4byte lbl_803CE6D0
-    .4byte lbl_803CFEF0
-    .4byte lbl_803D0B00
-    .4byte lbl_803D0628
-    .4byte lbl_803CF420
-    .4byte lbl_803CFA58
-    .4byte lbl_803D0FA0
-    .4byte lbl_803D1498
-    .4byte lbl_803D1848
-    .4byte lbl_803D1EA8
-    .4byte lbl_803D23E8
-    .4byte lbl_803D29F8
-    .4byte lbl_803D2E80
-    .4byte lbl_803D3A30
-    .4byte lbl_803D41F8
+    .4byte as_table_koopa
+    .4byte as_table_link
+    .4byte as_table_seak
+    .4byte as_table_ness
+    .4byte as_table_peach
+    .4byte as_table_iceclimber
+    .4byte as_table_nana
+    .4byte as_table_pikachu
+    .4byte as_table_samus
+    .4byte as_table_yoshi
+    .4byte as_table_purin
+    .4byte as_table_mewtwo
+    .4byte as_table_luigi
+    .4byte as_table_mars
+    .4byte as_table_zelda
+    .4byte as_table_clink
+    .4byte as_table_drmario
+    .4byte as_table_falco
+    .4byte as_table_pichu
+    .4byte as_table_gamewatch
+    .4byte as_table_ganon
+    .4byte as_table_roy
+    .4byte as_table_masterhand
+    .4byte as_table_crazyhand
 	.4byte NULL
 	.4byte NULL
-    .4byte lbl_803D35E8
-    .4byte lbl_803D3998
+    .4byte as_table_gkoopa
+    .4byte as_table_sandbag
     .balign 4
 
 .global lbl_803C1364
@@ -1382,38 +1382,38 @@ ft_SpecialLw:
 
 .global ft_SpecialHi
 ft_SpecialHi:
-    .4byte ftMario_func_800E1A54
-    .4byte func_800E7238
-    .4byte func_800E4A78
-    .4byte func_8010FB1C
-    .4byte func_800F2300
-    .4byte func_80135A2C
-    .4byte func_800EBB1C
-    .4byte func_801130D0
-    .4byte ftNess_SpecialHiStart_Action
-    .4byte func_8011D72C
-    .4byte func_801211B4
+    .4byte ftMario_SpecialHi_StartAction
+    .4byte ftFox_SpecialHi_StartAction
+    .4byte ftFalcon_SpecialHi_StartAction
+    .4byte ftDonkey_SpecialHi_StartAction
+    .4byte ftKirby_SpecialHi_StartAction
+    .4byte ftKoopa_SpecialHi_StartAction
+    .4byte ftLink_SpecialHi_StartAction
+    .4byte ftSeak_SpecialHi_StartAction
+    .4byte ftNess_SpecialHi_StartAction
+    .4byte ftPeach_SpecialHi_StartAction
+    .4byte ftIceClimber_SpecialHi_StartAction
     .4byte NULL
-    .4byte ftPikachu_ActionChangeZeroVel_80125DE8
-    .4byte func_8012A674
-    .4byte func_8012E2C4
-    .4byte func_8013C9C8
-    .4byte func_801451DC
-    .4byte func_80143FC8
-    .4byte func_80138208
-    .4byte func_80139834
-    .4byte func_800EBB1C
-    .4byte ftMario_func_800E1A54
-    .4byte func_800E7238
-    .4byte ftPikachu_ActionChangeZeroVel_80125DE8
-    .4byte func_8014E0AC
-    .4byte func_800E4A78
-    .4byte func_80138208
-    .4byte NULL
-    .4byte NULL
+    .4byte ftPikachu_SpecialHi_StartAction
+    .4byte ftSamus_SpecialHi_StartAction
+    .4byte ftYoshi_SpecialHi_StartAction
+    .4byte ftPurin_SpecialHi_StartAction
+    .4byte ftMewtwo_SpecialHi_StartAction
+    .4byte ftLuigi_SpecialHi_StartAction
+    .4byte ftMars_SpecialHi_StartAction
+    .4byte ftZelda_SpecialHi_StartAction
+    .4byte ftLink_SpecialHi_StartAction
+    .4byte ftMario_SpecialHi_StartAction
+    .4byte ftFox_SpecialHi_StartAction
+    .4byte ftPikachu_SpecialHi_StartAction
+    .4byte ftGameWatch_SpecialHi_StartAction
+    .4byte ftFalcon_SpecialHi_StartAction
+    .4byte ftMars_SpecialHi_StartAction
     .4byte NULL
     .4byte NULL
-    .4byte func_80135A2C
+    .4byte NULL
+    .4byte NULL
+    .4byte ftKoopa_SpecialHi_StartAction
     .4byte NULL
     .balign 4
 
@@ -1443,7 +1443,7 @@ ft_OnAbsorb:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8014A828
+    .4byte ftGameWatch_OnAbsorb
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1743,75 +1743,75 @@ lbl_803C1C28:
 
 .global ft_OnKnockbackEnter
 ft_OnKnockbackEnter:
-    .4byte ftMario_func_800E0C24
-    .4byte func_800E5898
+    .4byte ftMario_OnKnockbackEnter
+    .4byte ftFox_OnKnockbackEnter
     .4byte NULL
-    .4byte func_8010DAB4
-    .4byte func_800EEB38
-    .4byte func_80132D38
-    .4byte func_800EB2AC
-    .4byte func_80110408
-    .4byte ftNess_ToggleHurtMatAnims
-    .4byte func_8011B998
-    .4byte func_8011F0E4
-    .4byte func_8011F0E4
-    .4byte ftPikachu_801247A8
+    .4byte ftDonkey_OnKnockbackEnter
+    .4byte ftKirby_OnKnockbackEnter
+    .4byte ftKoopa_OnKnockbackEnter
+    .4byte ftLink_OnKnockbackEnter
+    .4byte ftSeak_OnKnockbackEnter
+    .4byte ftNess_OnKnockbackEnter
+    .4byte ftPeach_OnKnockbackEnter
+    .4byte ftIceClimber_OnKnockbackEnter
+    .4byte ftIceClimber_OnKnockbackEnter
+    .4byte ftPikachu_OnKnockbackEnter
     .4byte NULL
-    .4byte func_8012BCC8
-    .4byte func_8013C8C4
-    .4byte func_80145018
-    .4byte func_80142584
-    .4byte func_80136520
-    .4byte func_80139624
-    .4byte func_8014908C
-    .4byte func_80149744
-    .4byte func_80149D5C
-    .4byte func_8014A1C8
+    .4byte ftYoshi_OnKnockbackEnter
+    .4byte ftPurin_OnKnockbackEnter
+    .4byte ftMewtwo_OnKnockbackEnter
+    .4byte ftLuigi_OnKnockbackEnter
+    .4byte ftMars_OnKnockbackEnter
+    .4byte ftZelda_OnKnockbackEnter
+    .4byte ftCLink_OnKnockbackEnter
+    .4byte ftDrMario_OnKnockbackEnter
+    .4byte ftFalco_OnKnockbackEnter
+    .4byte ftPichu_OnKnockbackEnter
     .4byte NULL
-    .4byte func_8014EE60
-    .4byte func_8014F168
-    .4byte NULL
-    .4byte NULL
+    .4byte ftGanon_OnKnockbackEnter
+    .4byte ftRoy_OnKnockbackEnter
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F904
+    .4byte NULL
+    .4byte NULL
+    .4byte ftGKoopa_OnKnockbackEnter
     .4byte ftSandbag_OnKnockbackEnter
 
-.global lbl_803C1D30
-lbl_803C1D30:
-    .4byte ftMario_func_800E0C68
-    .4byte func_800E5904
+.global ft_OnKnockbackExit
+ft_OnKnockbackExit:
+    .4byte ftMario_OnKnockbackExit
+    .4byte ftFox_OnKnockbackExit
     .4byte NULL
-    .4byte func_8010DAF8
-    .4byte func_800EEB7C
-    .4byte func_80132D7C
-    .4byte func_800EB2F0
-    .4byte func_8011044C
-    .4byte ftNess_ToggleNormalMatAnims
-    .4byte func_8011B9DC
-    .4byte func_8011F128
-    .4byte func_8011F128
-    .4byte ftPikachu_801247EC
+    .4byte ftDonkey_OnKnockbackExit
+    .4byte ftKirby_OnKnockbackExit
+    .4byte ftKoopa_OnKnockbackExit
+    .4byte ftLink_OnKnockbackExit
+    .4byte ftSeak_OnKnockbackExit
+    .4byte ftNess_OnKnockbackExit
+    .4byte ftPeach_OnKnockbackExit
+    .4byte ftIceClimber_OnKnockbackExit
+    .4byte ftIceClimber_OnKnockbackExit
+    .4byte ftPikachu_OnKnockbackExit
     .4byte NULL
-    .4byte func_8012BD34
-    .4byte func_8013C908
-    .4byte func_8014505C
-    .4byte func_801425C8
-    .4byte func_80136564
-    .4byte func_80139668
-    .4byte func_801490D0
-    .4byte func_80149788
-    .4byte func_80149DC8
-    .4byte func_8014A20C
+    .4byte ftYoshi_OnKnockbackExit
+    .4byte ftPurin_OnKnockbackExit
+    .4byte ftMewtwo_OnKnockbackExit
+    .4byte ftLuigi_OnKnockbackExit
+    .4byte ftMars_OnKnockbackExit
+    .4byte ftZelda_OnKnockbackExit
+    .4byte ftCLink_OnKnockbackExit
+    .4byte ftdrMario_OnKnockbackExit
+    .4byte ftFalco_OnKnockbackExit
+    .4byte ftPichu_OnKnockbackExit
     .4byte NULL
-    .4byte func_8014EEAC
-    .4byte func_8014F1AC
-    .4byte NULL
-    .4byte NULL
+    .4byte ftGanon_OnKnockbackExit
+    .4byte ftRoy_OnKnockbackExit
     .4byte NULL
     .4byte NULL
-    .4byte func_8014F948
-    .4byte func_8014FBA0
+    .4byte NULL
+    .4byte NULL
+    .4byte ftGKoopa_OnKnockbackExit
+    .4byte ftSandbag_OnKnockbackExit
 
 .global lbl_803C1DB4
 lbl_803C1DB4:
