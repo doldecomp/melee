@@ -38,6 +38,6 @@ void ftMewTwo_80144F18(HSD_GObj* fighterObj) {
 
 void ftMewTwo_OnItemDrop(HSD_GObj* fighterObj, BOOL bool) {}
 
-void ftMewTwo_StoreHeldItem(HSD_GObj* fighterObj) {}
+void ftMewTwo_OnItemInvisible(HSD_GObj* fighterObj) {}
 
-void ftMewTwo_RestoreHeldItem(HSD_GObj* fighterObj) {}
+void ftMewTwo_OnItemVisible(HSD_GObj* fighterObj) {}

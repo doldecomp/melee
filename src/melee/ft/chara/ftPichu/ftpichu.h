@@ -15,8 +15,8 @@ typedef struct _ftPichuAttributes {
 void ftPichu_OnLoad(HSD_GObj*);
 void ftPichu_OnDeath(HSD_GObj*);
 void ftPichu_OnItemPickup(HSD_GObj*, BOOL);
-void ftPichu_StoreHeldItem(HSD_GObj*);
-void ftPichu_RestoreHeldItem(HSD_GObj*);
+void ftPichu_OnItemInvisible(HSD_GObj*);
+void ftPichu_OnItemVisible(HSD_GObj*);
 void ftPichu_OnItemDrop(HSD_GObj*, BOOL);
 void func_8014A1A8(HSD_GObj*);
 void ftPichu_OnKnockbackEnter(HSD_GObj*);

@@ -50,14 +50,14 @@ void ftCLink_OnItemPickupExt(HSD_GObj* gobj, s32 arg1)
     ftCLink_OnItemPickup(gobj, arg1);
 }
 
-void ftCLink_StoreHeldItem(HSD_GObj* gobj)
+void ftCLink_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_StoreHeldItem(gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftCLink_RestoreHeldItem(HSD_GObj* gobj)
+void ftCLink_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_RestoreHeldItem(gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
 void ftCLink_OnItemDropExt(HSD_GObj* gobj, s32 arg1)

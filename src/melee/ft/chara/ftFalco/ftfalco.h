@@ -6,8 +6,8 @@
 
 void ftFalco_OnDeath(HSD_GObj*);
 void ftFalco_OnItemPickup(HSD_GObj*, BOOL);
-void ftFalco_StoreHeldItem(HSD_GObj*);
-void ftFalco_RestoreHeldItem(HSD_GObj*);
+void ftFalco_OnItemInvisible(HSD_GObj*);
+void ftFalco_OnItemVisible(HSD_GObj*);
 void ftFalco_OnItemDrop(HSD_GObj*, BOOL);
 void ftFalco_OnLoad(HSD_GObj*);
 void func_80149D3C(HSD_GObj*);

@@ -96,12 +96,12 @@ void ftGameWatch_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftGameWatch_StoreHeldItem(HSD_GObj* gobj) {
-    Fighter_StoreHeldItem(gobj, 1);
+void ftGameWatch_OnItemInvisible(HSD_GObj* gobj) {
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftGameWatch_RestoreHeldItem(HSD_GObj* gobj) {
-    Fighter_RestoreHeldItem(gobj, 1);
+void ftGameWatch_OnItemVisible(HSD_GObj* gobj) {
+    Fighter_OnItemVisible(gobj, 1);
 }
 
 void ftGameWatch_OnItemDrop(HSD_GObj* gobj, BOOL bool1)

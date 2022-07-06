@@ -6,8 +6,8 @@
 
 void ftRoy_OnDeath(HSD_GObj*);
 void ftRoy_OnItemPickup(HSD_GObj*, BOOL);
-void ftRoy_StoreHeldItem(HSD_GObj*);
-void ftRoy_RestoreHeldItem(HSD_GObj*);
+void ftRoy_OnItemInvisible(HSD_GObj*);
+void ftRoy_OnItemVisible(HSD_GObj*);
 void ftRoy_OnItemDrop(HSD_GObj*, BOOL);
 void ftRoy_OnLoad(HSD_GObj*);
 void func_8014F148(HSD_GObj*);

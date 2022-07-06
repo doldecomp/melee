@@ -68,12 +68,12 @@ void ftLink_OnItemPickupExt(HSD_GObj* fighterObj, int arg1) {
     ftLink_OnItemPickup(fighterObj, arg1);
 }
 
-void ftLink_StoreHeldItem(HSD_GObj* fighterObj) {
-    Fighter_StoreHeldItem(fighterObj, 1);
+void ftLink_OnItemInvisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
 }
 
-void ftLink_RestoreHeldItem(HSD_GObj* fighterObj) {
-    Fighter_RestoreHeldItem(fighterObj, 1);
+void ftLink_OnItemVisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 1);
 }
 
 void ftLink_OnItemDropExt(HSD_GObj* fighterObj, BOOL arg1) {

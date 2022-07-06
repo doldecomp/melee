@@ -24,20 +24,20 @@ void ftCFalcon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-// ftCFalcon_StoreHeldItem
+// ftCFalcon_OnItemInvisible
 // OnMakeItemInvisible
 // https://decomp.me/scratch/maRvM
-void ftCFalcon_StoreHeldItem(HSD_GObj* fighter_gobj)
+void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
-    Fighter_StoreHeldItem(fighter_gobj, 1);
+    Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
-// ftCFalcon_RestoreHeldItem
+// ftCFalcon_OnItemVisible
 // OnMakeInvisible
 // https://decomp.me/scratch/95tCp
-void ftCFalcon_RestoreHeldItem(HSD_GObj* fighter_gobj)
+void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj)
 {
-    Fighter_RestoreHeldItem(fighter_gobj, 1);
+    Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
 // ftCFalcon_OnItemDrop

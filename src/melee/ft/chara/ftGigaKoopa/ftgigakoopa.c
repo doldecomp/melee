@@ -38,13 +38,13 @@ void ftGKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftGKoopa_StoreHeldItem(HSD_GObj* gobj) {
-    Fighter_StoreHeldItem(gobj, 1);
+void ftGKoopa_OnItemInvisible(HSD_GObj* gobj) {
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftGKoopa_RestoreHeldItem(HSD_GObj* gobj)
+void ftGKoopa_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_RestoreHeldItem(gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
 void ftGKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)

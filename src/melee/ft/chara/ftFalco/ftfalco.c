@@ -13,14 +13,14 @@ void ftFalco_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void ftFalco_StoreHeldItem(HSD_GObj* gobj)
+void ftFalco_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_StoreHeldItem(gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftFalco_RestoreHeldItem(HSD_GObj* gobj)
+void ftFalco_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_RestoreHeldItem(gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
 void ftFalco_OnItemDrop(HSD_GObj* gobj, BOOL bool1)

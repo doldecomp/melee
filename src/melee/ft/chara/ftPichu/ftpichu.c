@@ -52,14 +52,14 @@ void ftPichu_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 0, 0);
 }
 
-void ftPichu_StoreHeldItem(HSD_GObj* gobj)
+void ftPichu_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_StoreHeldItem(gobj, 0);
+    Fighter_OnItemInvisible(gobj, 0);
 }
 
-void ftPichu_RestoreHeldItem(HSD_GObj* gobj)
+void ftPichu_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_RestoreHeldItem(gobj, 0);
+    Fighter_OnItemVisible(gobj, 0);
 }
 
 void ftPichu_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {

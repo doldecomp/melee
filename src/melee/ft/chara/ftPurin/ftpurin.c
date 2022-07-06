@@ -132,7 +132,7 @@ void ftPurin_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     }   
 }
 
-void ftPurin_StoreHeldItem(HSD_GObj *fighterObj) {
+void ftPurin_OnItemInvisible(HSD_GObj *fighterObj) {
     Fighter* ft = getFighter(fighterObj);
     if (ft->x1974_heldItem) {
         if (!func_8026B2B4(ft->x1974_heldItem)) {
@@ -141,7 +141,7 @@ void ftPurin_StoreHeldItem(HSD_GObj *fighterObj) {
     }
 }
 
-void ftPurin_RestoreHeldItem(HSD_GObj *fighterObj) {
+void ftPurin_OnItemVisible(HSD_GObj *fighterObj) {
     Fighter* ft = getFighter(fighterObj);
     if (ft->x1974_heldItem) {
         if (!func_8026B2B4(ft->x1974_heldItem)) {

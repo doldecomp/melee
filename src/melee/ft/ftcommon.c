@@ -1642,8 +1642,8 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     arg1(dst_gobj);
 }
 
-extern void (*ft_StoreHeldItem[])(HSD_GObj*);
-extern void (*ft_RestoreHeldItem[])(HSD_GObj*);
+extern void (*ft_OnItemInvisible[])(HSD_GObj*);
+extern void (*ft_OnItemVisible[])(HSD_GObj*);
 extern void (*ft_OnKnockbackEnter[])(HSD_GObj*);
 extern void (*ft_OnKnockbackExit[])(HSD_GObj*);
 
@@ -1653,8 +1653,8 @@ void func_8007F578(HSD_GObj* gobj)
     if (fp->x1974_heldItem == NULL) {
         return;
     }
-    if (ft_StoreHeldItem[fp->x4_fighterKind] != NULL) {
-        ft_StoreHeldItem[fp->x4_fighterKind](gobj);
+    if (ft_OnItemInvisible[fp->x4_fighterKind] != NULL) {
+        ft_OnItemInvisible[fp->x4_fighterKind](gobj);
     }
 }
 
@@ -1670,8 +1670,8 @@ void func_8007F5CC(HSD_GObj* gobj, s32 arg1)
         if (arg1 == 0) {
             func_8007F578(gobj);
         } else if (item != NULL) {
-            if (ft_RestoreHeldItem[fp->x4_fighterKind] != NULL) {
-                ft_RestoreHeldItem[fp->x4_fighterKind](gobj);
+            if (ft_OnItemVisible[fp->x4_fighterKind] != NULL) {
+                ft_OnItemVisible[fp->x4_fighterKind](gobj);
             }
         }
     }
