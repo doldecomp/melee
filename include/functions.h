@@ -7827,17 +7827,17 @@ void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSr
 // ? func_80341878(?);
 // ? func_803418FC(?);
 // ? func_80342194(?);
-// ? PSMTXIdentity(?);
-// ? PSMTXCopy(?);
-void PSMTXConcat(Mtx*, Mtx*, Mtx*); // asm/dolphin/mtx/mtx.s
-// ? PSMTXTranspose(?);
-// ? PSMTXInverse(?);
-// ? PSMTXRotRad(?);
-// ? PSMTXRotTrig(?);
-// ? PSMTXRotAxisRad(?);
-// ? PSMTXTrans(?);
-// ? PSMTXScale(?);
-// ? PSMTXQuat(?);
+void PSMTXIdentity(Mtx m); // asm/dolphin/mtx/mtx.s
+void PSMTXCopy(Mtx src, Mtx dst); // asm/dolphin/mtx/mtx.s
+void PSMTXConcat(Mtx, Mtx, Mtx); // asm/dolphin/mtx/mtx.s
+void PSMTXTranspose(Mtx src, Mtx xPose); // asm/dolphin/mtx/mtx.s
+u32 PSMTXInverse(const Mtx src, Mtx inv); // asm/dolphin/mtx/mtx.s
+void PSMTXRotRad(Mtx m, u8 axis, f32 rad); // asm/dolphin/mtx/mtx.s
+void PSMTXRotTrig(Mtx m, u8 axis, f32 sin, f32 cos); // asm/dolphin/mtx/mtx.s
+void PSMTXRotAxisRad(Mtx m, const Vec* axis, f32 rad); // asm/dolphin/mtx/mtx.s
+void PSMTXTrans(Mtx m, f32 x_trans, f32 y_trans, f32 z_trans); // asm/dolphin/mtx/mtx.s
+void PSMTXScale(Mtx m, f32 x_scale, f32 y_scale, f32 z_scale); // asm/dolphin/mtx/mtx.s
+void PSMTXQuat(Mtx m, const Quaternion* q); // asm/dolphin/mtx/mtx.s
 // ? C_MTXLookAt(?);
 // ? C_MTXLightFrustum(?);
 // ? C_MTXLightPerspective(?);
@@ -7848,12 +7848,12 @@ void PSMTXMUltiVec(Mtx, Vec*, Vec*);
 // ? C_MTXPerspective(?);
 // ? C_MTXOrtho(?);
 void PSVECAdd(Vec* a, Vec* b, Vec* result); // asm/dolphin/mtx/vec.s
-// ? PSVECSubtract(?);
-// ? PSVECScale(?);
-// ? PSVECNormalize(?);
-// ? PSVECMag(?);
-// ? PSVECDotProduct(?);
-// ? PSVECCrossProduct(?);
+void PSVECSubtract(Vec* a, Vec* b, Vec* result); // asm/dolphin/mtx/vec.s
+void PSVECScale(Vec* src, Vec* dst, f32 scale); // asm/dolphin/mtx/vec.s
+void PSVECNormalize(Vec* src, Vec* unit); // asm/dolphin/mtx/vec.s
+f32 PSVECMag(Vec* v); // asm/dolphin/mtx/vec.s
+f32 PSVECDotProduct(Vec* a, Vec* b); // asm/dolphin/mtx/vec.s
+void PSVECCrossProduct(Vec* a, Vec* b, Vec* result); // asm/dolphin/mtx/vec.s
 // ? OSGetConsoleType(?);
 // ? ClearArena(?);
 // ? OSInit(?);

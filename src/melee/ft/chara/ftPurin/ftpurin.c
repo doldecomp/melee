@@ -75,7 +75,7 @@ void func_8013C4F0(HSD_GObj* fighterObj, s32 arg1, s32 arg2) {
         HSD_JObjGetMtx(fighter->x5E8_fighterBones[6].x0_jobj);
         mtx = (0, &bone_jobj->mtx);
         jobj = fighter->sa.purin.x223C;
-        HSD_JObjCopyMtx(fighter->sa.purin.x223C, mtx);
+        HSD_JObjCopyMtx(fighter->sa.purin.x223C, *mtx);
         jobj->flags |= 0x03800000;
         HSD_JObjSetMtxDirty(jobj);
           
