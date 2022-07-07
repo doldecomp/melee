@@ -2424,8 +2424,8 @@ lbl_8014C774:
 /* 8014C798 00149378  7C 08 03 A6 */	mtlr r0
 /* 8014C79C 0014937C  4E 80 00 20 */	blr 
 
-.global func_8014C7A0
-func_8014C7A0:
+.global ftGameWatch_SpecialS_StartAction
+ftGameWatch_SpecialS_StartAction:
 /* 8014C7A0 00149380  7C 08 02 A6 */	mflr r0
 /* 8014C7A4 00149384  90 01 00 04 */	stw r0, 4(r1)
 /* 8014C7A8 00149388  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2461,8 +2461,8 @@ func_8014C7A0:
 /* 8014C820 00149400  7C 08 03 A6 */	mtlr r0
 /* 8014C824 00149404  4E 80 00 20 */	blr 
 
-.global func_8014C828
-func_8014C828:
+.global ftGameWatch_SpecialSAir_StartAction
+ftGameWatch_SpecialSAir_StartAction:
 /* 8014C828 00149408  7C 08 02 A6 */	mflr r0
 /* 8014C82C 0014940C  90 01 00 04 */	stw r0, 4(r1)
 /* 8014C830 00149410  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2960,8 +2960,8 @@ lbl_8014CED8:
 /* 8014CEE8 00149AC8  7C 08 03 A6 */	mtlr r0
 /* 8014CEEC 00149ACC  4E 80 00 20 */	blr 
 
-.global func_8014CEF0
-func_8014CEF0:
+.global ftGameWatch_SpecialLw_StartAction
+ftGameWatch_SpecialLw_StartAction:
 /* 8014CEF0 00149AD0  7C 08 02 A6 */	mflr r0
 /* 8014CEF4 00149AD4  90 01 00 04 */	stw r0, 4(r1)
 /* 8014CEF8 00149AD8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2999,8 +2999,8 @@ lbl_8014CF64:
 /* 8014CF70 00149B50  7C 08 03 A6 */	mtlr r0
 /* 8014CF74 00149B54  4E 80 00 20 */	blr 
 
-.global func_8014CF78
-func_8014CF78:
+.global ftGameWatch_SpecialLwAir_StartAction
+ftGameWatch_SpecialLwAir_StartAction:
 /* 8014CF78 00149B58  7C 08 02 A6 */	mflr r0
 /* 8014CF7C 00149B5C  90 01 00 04 */	stw r0, 4(r1)
 /* 8014CF80 00149B60  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -4300,8 +4300,8 @@ ftGameWatch_SpecialHi_StartAction:
 /* 8014E150 0014AD30  7C 08 03 A6 */	mtlr r0
 /* 8014E154 0014AD34  4E 80 00 20 */	blr 
 
-.global func_8014E158
-func_8014E158:
+.global ftGameWatch_SpecialHiAir_StartAction
+ftGameWatch_SpecialHiAir_StartAction:
 /* 8014E158 0014AD38  7C 08 02 A6 */	mflr r0
 /* 8014E15C 0014AD3C  90 01 00 04 */	stw r0, 4(r1)
 /* 8014E160 0014AD40  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -4657,8 +4657,8 @@ lbl_8014E624:
 /* 8014E63C 0014B21C  7C 08 03 A6 */	mtlr r0
 /* 8014E640 0014B220  4E 80 00 20 */	blr 
 
-.global func_8014E644
-func_8014E644:
+.global ftGameWatch_SpecialN_StartAction
+ftGameWatch_SpecialN_StartAction:
 /* 8014E644 0014B224  7C 08 02 A6 */	mflr r0
 /* 8014E648 0014B228  38 80 01 61 */	li r4, 0x161
 /* 8014E64C 0014B22C  90 01 00 04 */	stw r0, 4(r1)
@@ -4691,8 +4691,8 @@ func_8014E644:
 /* 8014E6B8 0014B298  7C 08 03 A6 */	mtlr r0
 /* 8014E6BC 0014B29C  4E 80 00 20 */	blr 
 
-.global func_8014E6C0
-func_8014E6C0:
+.global ftGameWatch_SpecialNAir_StartAction
+ftGameWatch_SpecialNAir_StartAction:
 /* 8014E6C0 0014B2A0  7C 08 02 A6 */	mflr r0
 /* 8014E6C4 0014B2A4  38 80 01 62 */	li r4, 0x162
 /* 8014E6C8 0014B2A8  90 01 00 04 */	stw r0, 4(r1)

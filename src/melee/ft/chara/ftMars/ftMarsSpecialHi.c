@@ -17,7 +17,7 @@ void ftMars_SpecialHi_StartAction(HSD_GObj* gobj) {
 
 // 8013826C 00134E4C
 // https://decomp.me/scratch/PuVdx
-void func_8013826C(HSD_GObj* gobj) {
+void ftMars_SpecialHiAir_StartAction(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     MarsAttributes* attr = ft->x2D4_specialAttributes;
     s32 unused[2];

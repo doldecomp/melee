@@ -152,8 +152,8 @@ lbl_8013CA84:
 /* 8013CA90 00139670  7C 08 03 A6 */	mtlr r0
 /* 8013CA94 00139674  4E 80 00 20 */	blr 
 
-.global func_8013CA98
-func_8013CA98:
+.global ftPurin_SpecialHiAir_StartAction
+ftPurin_SpecialHiAir_StartAction:
 /* 8013CA98 00139678  7C 08 02 A6 */	mflr r0
 /* 8013CA9C 0013967C  90 01 00 04 */	stw r0, 4(r1)
 /* 8013CAA0 00139680  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -446,8 +446,8 @@ lbl_8013CE7C:
 /* 8013CE84 00139A64  90 03 21 BC */	stw r0, 0x21bc(r3)
 /* 8013CE88 00139A68  4E 80 00 20 */	blr 
 
-.global func_8013CE8C
-func_8013CE8C:
+.global ftPurin_SpecialLw_StartAction
+ftPurin_SpecialLw_StartAction:
 /* 8013CE8C 00139A6C  7C 08 02 A6 */	mflr r0
 /* 8013CE90 00139A70  90 01 00 04 */	stw r0, 4(r1)
 /* 8013CE94 00139A74  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -491,8 +491,8 @@ lbl_8013CEF8:
 /* 8013CF24 00139B04  7C 08 03 A6 */	mtlr r0
 /* 8013CF28 00139B08  4E 80 00 20 */	blr 
 
-.global func_8013CF2C
-func_8013CF2C:
+.global ftPurin_SpecialLwAir_StartAction
+ftPurin_SpecialLwAir_StartAction:
 /* 8013CF2C 00139B0C  7C 08 02 A6 */	mflr r0
 /* 8013CF30 00139B10  90 01 00 04 */	stw r0, 4(r1)
 /* 8013CF34 00139B14  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -720,8 +720,8 @@ lbl_8013D21C:
 /* 8013D22C 00139E0C  7C 08 03 A6 */	mtlr r0
 /* 8013D230 00139E10  4E 80 00 20 */	blr 
 
-.global func_8013D234
-func_8013D234:
+.global ftPurin_SpecialS_StartAction
+ftPurin_SpecialS_StartAction:
 /* 8013D234 00139E14  7C 08 02 A6 */	mflr r0
 /* 8013D238 00139E18  38 80 01 6B */	li r4, 0x16b
 /* 8013D23C 00139E1C  90 01 00 04 */	stw r0, 4(r1)
@@ -750,8 +750,8 @@ func_8013D234:
 /* 8013D298 00139E78  7C 08 03 A6 */	mtlr r0
 /* 8013D29C 00139E7C  4E 80 00 20 */	blr 
 
-.global func_8013D2A0
-func_8013D2A0:
+.global ftPurin_SpecialSAir_StartAction
+ftPurin_SpecialSAir_StartAction:
 /* 8013D2A0 00139E80  7C 08 02 A6 */	mflr r0
 /* 8013D2A4 00139E84  38 80 01 6C */	li r4, 0x16c
 /* 8013D2A8 00139E88  90 01 00 04 */	stw r0, 4(r1)
@@ -1625,8 +1625,8 @@ lbl_8013DE8C:
 /* 8013DEA0 0013AA80  7C 08 03 A6 */	mtlr r0
 /* 8013DEA4 0013AA84  4E 80 00 20 */	blr 
 
-.global func_8013DEA8
-func_8013DEA8:
+.global ftPurin_SpecialN_StartAction
+ftPurin_SpecialN_StartAction:
 /* 8013DEA8 0013AA88  7C 08 02 A6 */	mflr r0
 /* 8013DEAC 0013AA8C  90 01 00 04 */	stw r0, 4(r1)
 /* 8013DEB0 0013AA90  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1676,8 +1676,8 @@ lbl_8013DEF0:
 /* 8013DF58 0013AB38  7C 08 03 A6 */	mtlr r0
 /* 8013DF5C 0013AB3C  4E 80 00 20 */	blr 
 
-.global func_8013DF60
-func_8013DF60:
+.global ftPurin_SpecialNAir_StartAction
+ftPurin_SpecialNAir_StartAction:
 /* 8013DF60 0013AB40  7C 08 02 A6 */	mflr r0
 /* 8013DF64 0013AB44  90 01 00 04 */	stw r0, 4(r1)
 /* 8013DF68 0013AB48  94 21 FF D0 */	stwu r1, -0x30(r1)

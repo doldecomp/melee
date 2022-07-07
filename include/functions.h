@@ -3162,7 +3162,7 @@ void ftNess_SpecialHiTakeDamage(struct _HSD_GObj*);
 // ? func_801227AC(?);
 // ? func_8012280C(?);
 // ? func_80122898(?);
-// ? func_80122904(?);
+// ? ftIceClimber_SpecialLw_StartAction(?);
 // ? func_8012300C(?);
 // ? func_8012309C(?);
 // ? func_801230D0(?);

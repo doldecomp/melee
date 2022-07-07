@@ -91,7 +91,7 @@ void _ftMario_call_FASC_and_set_vars(HSD_GObj* gobj, s32 new_action_state_index)
     ft->cb.x21BC_callback_Accessory4 = ftMario_func_800E1248;
 }
 
-void ftMario_func_800E1450(HSD_GObj* gobj) {
+void ftMario_SpecialS_StartAction(HSD_GObj* gobj) {
     Fighter* ft;
     u8 unused[8];
     ft = getFighter(gobj);
@@ -101,7 +101,7 @@ void ftMario_func_800E1450(HSD_GObj* gobj) {
 }
 
 
-void ftMario_func_800E14C8(HSD_GObj* gobj) {
+void ftMario_SpecialSAir_StartAction(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ftMarioAttributes* sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     u8 unused[8];

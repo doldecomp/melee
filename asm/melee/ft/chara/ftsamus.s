@@ -1095,8 +1095,8 @@ lbl_8012952C:
 /* 80129544 00126124  7C 08 03 A6 */	mtlr r0
 /* 80129548 00126128  4E 80 00 20 */	blr 
 
-.global func_8012954C
-func_8012954C:
+.global ftSamus_SpecialN_StartAction
+ftSamus_SpecialN_StartAction:
 /* 8012954C 0012612C  7C 08 02 A6 */	mflr r0
 /* 80129550 00126130  38 80 01 57 */	li r4, 0x157
 /* 80129554 00126134  90 01 00 04 */	stw r0, 4(r1)
@@ -1139,8 +1139,8 @@ func_8012954C:
 /* 801295E8 001261C8  7C 08 03 A6 */	mtlr r0
 /* 801295EC 001261CC  4E 80 00 20 */	blr 
 
-.global func_801295F0
-func_801295F0:
+.global ftSamus_SpecialNAir_StartAction
+ftSamus_SpecialNAir_StartAction:
 /* 801295F0 001261D0  7C 08 02 A6 */	mflr r0
 /* 801295F4 001261D4  38 80 01 5B */	li r4, 0x15b
 /* 801295F8 001261D8  90 01 00 04 */	stw r0, 4(r1)
@@ -1995,8 +1995,8 @@ lbl_8012A1AC:
 /* 8012A1D0 00126DB0  7C 08 03 A6 */	mtlr r0
 /* 8012A1D4 00126DB4  4E 80 00 20 */	blr 
 
-.global func_8012A1D8
-func_8012A1D8:
+.global ftSamus_SpecialS_StartAction
+ftSamus_SpecialS_StartAction:
 /* 8012A1D8 00126DB8  7C 08 02 A6 */	mflr r0
 /* 8012A1DC 00126DBC  90 01 00 04 */	stw r0, 4(r1)
 /* 8012A1E0 00126DC0  3C 00 43 30 */	lis r0, 0x4330
@@ -2053,8 +2053,8 @@ lbl_8012A280:
 /* 8012A2A4 00126E84  7C 08 03 A6 */	mtlr r0
 /* 8012A2A8 00126E88  4E 80 00 20 */	blr 
 
-.global func_8012A2AC
-func_8012A2AC:
+.global ftSamus_SpecialSAir_StartAction
+ftSamus_SpecialSAir_StartAction:
 /* 8012A2AC 00126E8C  7C 08 02 A6 */	mflr r0
 /* 8012A2B0 00126E90  90 01 00 04 */	stw r0, 4(r1)
 /* 8012A2B4 00126E94  3C 00 43 30 */	lis r0, 0x4330
@@ -2395,8 +2395,8 @@ ftSamus_SpecialHi_StartAction:
 /* 8012A730 00127310  7C 08 03 A6 */	mtlr r0
 /* 8012A734 00127314  4E 80 00 20 */	blr 
 
-.global func_8012A738
-func_8012A738:
+.global ftSamus_SpecialHiAir_StartAction
+ftSamus_SpecialHiAir_StartAction:
 /* 8012A738 00127318  7C 08 02 A6 */	mflr r0
 /* 8012A73C 0012731C  38 80 01 62 */	li r4, 0x162
 /* 8012A740 00127320  90 01 00 04 */	stw r0, 4(r1)
@@ -2974,8 +2974,8 @@ func_8012AF38:
 /* 8012AF54 00127B34  7C 08 03 A6 */	mtlr r0
 /* 8012AF58 00127B38  4E 80 00 20 */	blr 
 
-.global func_8012AF5C
-func_8012AF5C:
+.global ftSamus_SpecialLw_StartAction
+ftSamus_SpecialLw_StartAction:
 /* 8012AF5C 00127B3C  7C 08 02 A6 */	mflr r0
 /* 8012AF60 00127B40  90 01 00 04 */	stw r0, 4(r1)
 /* 8012AF64 00127B44  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -3061,8 +3061,8 @@ lbl_8012B084:
 /* 8012B094 00127C74  7C 08 03 A6 */	mtlr r0
 /* 8012B098 00127C78  4E 80 00 20 */	blr 
 
-.global func_8012B09C
-func_8012B09C:
+.global ftSamus_SpecialLwAir_StartAction
+ftSamus_SpecialLwAir_StartAction:
 /* 8012B09C 00127C7C  7C 08 02 A6 */	mflr r0
 /* 8012B0A0 00127C80  38 80 01 64 */	li r4, 0x164
 /* 8012B0A4 00127C84  90 01 00 04 */	stw r0, 4(r1)

@@ -72,13 +72,13 @@ s32 ftMario_func_800E0CE0(s32 arg0);
 
 //ftmario2
 int ftMario_func_800E0D1C(HSD_GObj*);
-void ftMario_func_800E0DA8(HSD_GObj*);
+void ftMario_SpecialN_StartAction(HSD_GObj*);
 void ftMario_func_800E0E18(HSD_GObj*);
 void ftMario_func_800E0E54(HSD_GObj*);
 void ftMario_func_800E0E84(HSD_GObj*);
 void ftMario_func_800E0EA4(HSD_GObj*);
 void ftMario_func_800E0EE0(HSD_GObj*);
-void ftMario_func_800E1040(HSD_GObj*);
+void ftMario_SpecialNAir_StartAction(HSD_GObj*);
 void ftMario_func_800E10B0(HSD_GObj*);
 void ftMario_func_800E10EC(HSD_GObj*);
 void ftMario_func_800E111C(void);
@@ -94,8 +94,8 @@ void ftMario_func_800E13C8(HSD_GObj*);
 void ftMario_func_800E13F8(HSD_GObj*);
 void ftMario_func_800E13F8(HSD_GObj*);
 BOOL ftMario_func_800E1428(HSD_GObj*);
-void ftMario_func_800E1450(HSD_GObj*);
-void ftMario_func_800E14C8(HSD_GObj*);
+void ftMario_SpecialS_StartAction(HSD_GObj*);
+void ftMario_SpecialSAir_StartAction(HSD_GObj*);
 void ftMario_func_800E1550(HSD_GObj*);
 void ftMario_func_800E158C(HSD_GObj*);
 void ftMario_func_800E15C8(void);
@@ -109,7 +109,7 @@ void ftMario_func_800E198C(HSD_GObj*);
 
 //ftmario4
 void ftMario_SpecialHi_StartAction(HSD_GObj*);
-void ftMario_func_800E1AB0(HSD_GObj*);
+void ftMario_SpecialHiAir_StartAction(HSD_GObj*);
 void ftMario_func_800E1B24(HSD_GObj*);
 void ftMario_func_800E1B84(HSD_GObj*);
 void ftMario_func_800E1BE4(HSD_GObj*);
@@ -122,8 +122,8 @@ void ftMario_func_800E1FE0(HSD_GObj*);
 
 //ftmario5
 void ftMario_func_800E2050(HSD_GObj*);
-void ftMario_func_800E207C(HSD_GObj*);
-void ftMario_func_800E2194(HSD_GObj*);
+void ftMario_SpecialLw_StartAction(HSD_GObj*);
+void ftMario_SpecialLwAir_StartAction(HSD_GObj*);
 void ftMario_func_800E22BC(HSD_GObj*);
 void ftMario_func_800E2308(HSD_GObj*);
 void ftMario_func_800E23DC(void);

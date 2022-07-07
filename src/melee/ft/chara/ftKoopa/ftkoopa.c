@@ -156,7 +156,7 @@ void func_80132E30(HSD_GObj *gobj) {
     }
 }
 
-void func_80132EFC(HSD_GObj *gobj)
+void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj)
 {
     Fighter *ft = gobj->user_data;
 
@@ -181,7 +181,7 @@ void func_80132EFC(HSD_GObj *gobj)
     return;
 }
 
-void func_80132F94(HSD_GObj *gobj)
+void ftKoopa_SpecialSAir_StartAction(HSD_GObj *gobj)
 {
     Fighter *ft = gobj->user_data;
 

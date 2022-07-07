@@ -13,7 +13,7 @@ void ftMario_SpecialHi_StartAction(HSD_GObj* gobj) {
     func_8006EBA4(gobj);
 }
 
-void ftMario_func_800E1AB0(HSD_GObj* gobj) {
+void ftMario_SpecialHiAir_StartAction(HSD_GObj* gobj) {
     Fighter* ft;
     ftMarioAttributes *sa;
     u8 unused[4];

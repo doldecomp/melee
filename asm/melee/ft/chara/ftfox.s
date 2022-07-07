@@ -616,8 +616,8 @@ lbl_800E606C:
 /* 800E6084 000E2C64  7C 08 03 A6 */	mtlr r0
 /* 800E6088 000E2C68  4E 80 00 20 */	blr 
 
-.global func_800E608C
-func_800E608C:
+.global ftFox_SpecialN_StartAction
+ftFox_SpecialN_StartAction:
 /* 800E608C 000E2C6C  7C 08 02 A6 */	mflr r0
 /* 800E6090 000E2C70  90 01 00 04 */	stw r0, 4(r1)
 /* 800E6094 000E2C74  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -692,8 +692,8 @@ lbl_800E6188:
 /* 800E61A0 000E2D80  7C 08 03 A6 */	mtlr r0
 /* 800E61A4 000E2D84  4E 80 00 20 */	blr 
 
-.global func_800E61A8
-func_800E61A8:
+.global ftFox_SpecialNAir_StartAction
+ftFox_SpecialNAir_StartAction:
 /* 800E61A8 000E2D88  7C 08 02 A6 */	mflr r0
 /* 800E61AC 000E2D8C  38 80 01 58 */	li r4, 0x158
 /* 800E61B0 000E2D90  90 01 00 04 */	stw r0, 4(r1)
@@ -1928,8 +1928,8 @@ ftFox_SpecialHi_StartAction:
 /* 800E72BC 000E3E9C  7C 08 03 A6 */	mtlr r0
 /* 800E72C0 000E3EA0  4E 80 00 20 */	blr 
 
-.global func_800E72C4
-func_800E72C4:
+.global ftFox_SpecialHiAir_StartAction
+ftFox_SpecialHiAir_StartAction:
 /* 800E72C4 000E3EA4  7C 08 02 A6 */	mflr r0
 /* 800E72C8 000E3EA8  38 80 01 62 */	li r4, 0x162
 /* 800E72CC 000E3EAC  90 01 00 04 */	stw r0, 4(r1)
@@ -3300,8 +3300,8 @@ lbl_800E852C:
 /* 800E8558 000E5138  7C 08 03 A6 */	mtlr r0
 /* 800E855C 000E513C  4E 80 00 20 */	blr 
 
-.global func_800E8560
-func_800E8560:
+.global ftFox_SpecialLw_StartAction
+ftFox_SpecialLw_StartAction:
 /* 800E8560 000E5140  7C 08 02 A6 */	mflr r0
 /* 800E8564 000E5144  38 80 01 68 */	li r4, 0x168
 /* 800E8568 000E5148  90 01 00 04 */	stw r0, 4(r1)
@@ -3338,8 +3338,8 @@ func_800E8560:
 /* 800E85E4 000E51C4  7C 08 03 A6 */	mtlr r0
 /* 800E85E8 000E51C8  4E 80 00 20 */	blr 
 
-.global func_800E85EC
-func_800E85EC:
+.global ftFox_SpecialLwAir_StartAction
+ftFox_SpecialLwAir_StartAction:
 /* 800E85EC 000E51CC  7C 08 02 A6 */	mflr r0
 /* 800E85F0 000E51D0  38 80 01 6D */	li r4, 0x16d
 /* 800E85F4 000E51D4  90 01 00 04 */	stw r0, 4(r1)
@@ -5222,8 +5222,8 @@ func_800E9ED4:
 /* 800E9EE0 000E6AC0  C0 23 23 74 */	lfs f1, 0x2374(r3)
 /* 800E9EE4 000E6AC4  4E 80 00 20 */	blr 
 
-.global func_800E9EE8
-func_800E9EE8:
+.global ftFox_SpecialS_StartAction
+ftFox_SpecialS_StartAction:
 /* 800E9EE8 000E6AC8  7C 08 02 A6 */	mflr r0
 /* 800E9EEC 000E6ACC  38 E0 00 00 */	li r7, 0
 /* 800E9EF0 000E6AD0  90 01 00 04 */	stw r0, 4(r1)
@@ -5258,8 +5258,8 @@ func_800E9EE8:
 /* 800E9F64 000E6B44  7C 08 03 A6 */	mtlr r0
 /* 800E9F68 000E6B48  4E 80 00 20 */	blr 
 
-.global func_800E9F6C
-func_800E9F6C:
+.global ftFox_SpecialSAir_StartAction
+ftFox_SpecialSAir_StartAction:
 /* 800E9F6C 000E6B4C  7C 08 02 A6 */	mflr r0
 /* 800E9F70 000E6B50  38 E0 00 00 */	li r7, 0
 /* 800E9F74 000E6B54  90 01 00 04 */	stw r0, 4(r1)

@@ -224,7 +224,7 @@ void ftNess_AttackLw4_Release_Action(HSD_GObj* gobj);
 // PK Fire callbacks (SpecialS) //
 
 void ftNess_ItemPKFireSpawn(HSD_GObj* gobj);
-void ftNess_SpecialS_Action(HSD_GObj* gobj);
+void ftNess_SpecialS_StartAction(HSD_GObj* gobj);
 void ftNess_SpecialAirS_Action(HSD_GObj* gobj);
 void ftNess_SpecialS_Anim(HSD_GObj* gobj);
 void ftNess_SpecialAirS_Anim(HSD_GObj* gobj);

@@ -31,7 +31,7 @@ int ftMario_func_800E0D1C(HSD_GObj* gobj) {
     return r3;
 }
 
-void ftMario_func_800E0DA8(HSD_GObj* gobj) {
+void ftMario_SpecialN_StartAction(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
@@ -96,7 +96,7 @@ void ftMario_func_800E0EE0(HSD_GObj* gobj) {
     }
 }
 
-void ftMario_func_800E1040(HSD_GObj* gobj) {
+void ftMario_SpecialNAir_StartAction(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;

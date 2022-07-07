@@ -113,8 +113,8 @@ lbl_80142664:
 /* 80142674 0013F254  80 63 FF C8 */	lwz r3, -0x38(r3)
 /* 80142678 0013F258  4E 80 00 20 */	blr 
 
-.global func_8014267C
-func_8014267C:
+.global ftLuigi_SpecialN_StartAction
+ftLuigi_SpecialN_StartAction:
 /* 8014267C 0013F25C  7C 08 02 A6 */	mflr r0
 /* 80142680 0013F260  38 80 01 55 */	li r4, 0x155
 /* 80142684 0013F264  90 01 00 04 */	stw r0, 4(r1)
@@ -144,8 +144,8 @@ func_8014267C:
 /* 801426E4 0013F2C4  7C 08 03 A6 */	mtlr r0
 /* 801426E8 0013F2C8  4E 80 00 20 */	blr 
 
-.global func_801426EC
-func_801426EC:
+.global ftLuigi_SpecialNAir_StartAction
+ftLuigi_SpecialNAir_StartAction:
 /* 801426EC 0013F2CC  7C 08 02 A6 */	mflr r0
 /* 801426F0 0013F2D0  38 80 01 56 */	li r4, 0x156
 /* 801426F4 0013F2D4  90 01 00 04 */	stw r0, 4(r1)
@@ -446,8 +446,8 @@ lbl_80142B00:
 /* 80142B0C 0013F6EC  7C 08 03 A6 */	mtlr r0
 /* 80142B10 0013F6F0  4E 80 00 20 */	blr 
 
-.global func_80142B14
-func_80142B14:
+.global ftLuigi_SpecialS_StartAction
+ftLuigi_SpecialS_StartAction:
 /* 80142B14 0013F6F4  7C 08 02 A6 */	mflr r0
 /* 80142B18 0013F6F8  38 80 01 57 */	li r4, 0x157
 /* 80142B1C 0013F6FC  90 01 00 04 */	stw r0, 4(r1)
@@ -478,8 +478,8 @@ func_80142B14:
 /* 80142B80 0013F760  7C 08 03 A6 */	mtlr r0
 /* 80142B84 0013F764  4E 80 00 20 */	blr 
 
-.global func_80142B88
-func_80142B88:
+.global ftLuigi_SpecialSAir_StartAction
+ftLuigi_SpecialSAir_StartAction:
 /* 80142B88 0013F768  7C 08 02 A6 */	mflr r0
 /* 80142B8C 0013F76C  38 80 01 5D */	li r4, 0x15d
 /* 80142B90 0013F770  90 01 00 04 */	stw r0, 4(r1)
@@ -2000,8 +2000,8 @@ ftLuigi_SpecialHi_StartAction:
 /* 8014401C 00140BFC  7C 08 03 A6 */	mtlr r0
 /* 80144020 00140C00  4E 80 00 20 */	blr 
 
-.global func_80144024
-func_80144024:
+.global ftLuigi_SpecialHiAir_StartAction
+ftLuigi_SpecialHiAir_StartAction:
 /* 80144024 00140C04  7C 08 02 A6 */	mflr r0
 /* 80144028 00140C08  38 80 01 64 */	li r4, 0x164
 /* 8014402C 00140C0C  90 01 00 04 */	stw r0, 4(r1)
@@ -2430,8 +2430,8 @@ lbl_801445C4:
 /* 801445E8 001411C8  7C 08 03 A6 */	mtlr r0
 /* 801445EC 001411CC  4E 80 00 20 */	blr 
 
-.global func_801445F0
-func_801445F0:
+.global ftLuigi_SpecialLw_StartAction
+ftLuigi_SpecialLw_StartAction:
 /* 801445F0 001411D0  7C 08 02 A6 */	mflr r0
 /* 801445F4 001411D4  38 80 01 66 */	li r4, 0x166
 /* 801445F8 001411D8  90 01 00 04 */	stw r0, 4(r1)
@@ -2503,8 +2503,8 @@ func_801445F0:
 /* 80144700 001412E0  7C 08 03 A6 */	mtlr r0
 /* 80144704 001412E4  4E 80 00 20 */	blr 
 
-.global func_80144708
-func_80144708:
+.global ftLuigi_SpecialLwAir_StartAction
+ftLuigi_SpecialLwAir_StartAction:
 /* 80144708 001412E8  7C 08 02 A6 */	mflr r0
 /* 8014470C 001412EC  38 80 01 66 */	li r4, 0x166
 /* 80144710 001412F0  90 01 00 04 */	stw r0, 4(r1)
