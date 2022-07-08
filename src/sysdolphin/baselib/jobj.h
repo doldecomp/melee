@@ -227,11 +227,11 @@ inline void HSD_JObjGetMtx(HSD_JObj* jobj)
     HSD_JObjUnkMtxPtr(jobj);
 }
 
-inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx *mtx)
+inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
 {
     assert_line(1170, jobj);
     assert_line(1171, mtx);
-    PSMTXCopy(mtx, &jobj->mtx);
+    PSMTXCopy(mtx, jobj->mtx); 
 }
 
 #pragma pop
