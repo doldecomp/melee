@@ -8917,7 +8917,7 @@ void func_80390228(struct _HSD_GObj*);
 // ? func_80390908(?);
 // ? func_803909D8(?);
 // ? func_80390A3C(?);
-void func_80390A70();
+void func_80390A70(struct _HSD_GObj*, u8, void*);
 // ? func_80390ADC(?);
 // ? func_80390B0C(?);
 // ? GObj_InitUserData(?);

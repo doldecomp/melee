@@ -34,7 +34,7 @@ typedef struct _HSD_ObjAllocData {
 } HSD_ObjAllocData;
 
 struct r13_EntityPointers {
-    u8 x0_filler[0x20];
+    HSD_GObj* x0[8];
     HSD_GObj* x20_fighterGObj;
     HSD_GObj* x24_itemGObj;
 };
