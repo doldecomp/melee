@@ -1,21 +1,17 @@
 #include "sysdolphin/baselib/mtx.h"
 
 
-#define epsilon 0.0000000001f //use the standard lib instead of this
-#define PI 3.14159265
+#define EPSILON 0.0000000001f
+#define M_PI 3.14159265358979323846
+#define FLOAT_MIN  1.1754943E-38f
 
-const f32 FLOAT_MIN = 1.1754943E-38; //also in the standard lib
-extern const f64 lbl_804DE698;
+HSD_ObjAllocData lbl_804C2310;
+HSD_ObjAllocData lbl_804C233C;
 
-
-inline f32 fabsf_inline(f32 v)
-{
-    *(u32*)&v &= ~0x80000000;
-    return v;
-}
 
 //Calculates the determinant of the top 3x3 section of a 3x4 matrix
-inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m){
+inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
+{
     return m[0][0]*m[1][1]*m[2][2] + m[0][1]*m[1][2]*m[2][0] + m[0][2]*m[1][0]*m[2][1] 
     - m[2][0]*m[1][1]*m[0][2]  - m[1][0]*m[0][1]*m[2][2] - m[0][0]*m[2][1]*m[1][2];
 }
@@ -24,11 +20,9 @@ void func_80379310(Mtx src, Mtx dest)
 {
     Mtx tempMatrix;
     Mtx* m;
-    f32 det;
+    f32 det = HSD_CalcDeterminantMatrix3x4(src);
 
-    det = HSD_CalcDeterminantMatrix3x4(src);
-
-    if (fabsf_inline(det) < epsilon) {
+    if (fabsf_bitwise(det) < EPSILON) {
         PSMTXIdentity(dest);
         return;
     }
@@ -78,7 +72,7 @@ void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest)
 
     det = HSD_CalcDeterminantMatrix3x4(inv);
     
-    if (fabsf_inline(det) < epsilon) {
+    if (fabsf_bitwise(det) < EPSILON) {
         if (src != dest) {
             PSMTXCopy(src, dest);
         }
@@ -134,13 +128,11 @@ void func_80379A20(Mtx src, Mtx dest)
 {
     Mtx* m;
     Mtx tempMatrix;
-    f32 det;
+    f32 det = HSD_CalcDeterminantMatrix3x4(src);
 
     m = (Mtx*)src;
     
-    det = HSD_CalcDeterminantMatrix3x4(src);
-    
-    if (fabsf_inline(det) < epsilon) {
+    if (fabsf_bitwise(det) < EPSILON) {
         if (*m != dest) {
             PSMTXCopy(*m, dest);
         }
@@ -168,12 +160,13 @@ void func_80379A20(Mtx src, Mtx dest)
     }
 }
 
-inline f32 calcVal(f32 val1, f32 val2) {
-    if (fabsf_inline(val1) <= FLOAT_MIN) {
+inline f32 calcVal(f32 val1, f32 val2)
+{
+    if (fabsf_bitwise(val1) <= FLOAT_MIN) {
         if (val2 >= 0) {
-            return PI/2;
+            return M_PI/2;
         } else {
-            return -PI/2;
+            return -M_PI/2;
         }
     } else {
         return func_someCalcAngle_80022C30(val2, val1);
@@ -200,9 +193,9 @@ void func_80379C24(Mtx m, Vec* vec)
                 testVal_1 /= length0;
                 
                 if (testVal_1 >= 1.0f) {
-                    val_01 = PI/2;
+                    val_01 = M_PI/2;
                 } else if (testVal_1 <= -1) {
-                    val_01 = -PI/2;
+                    val_01 = -M_PI/2;
                 } else {
                     val_01 = func_80022DBC(testVal_1);
                 }
@@ -231,13 +224,15 @@ void func_80379C24(Mtx m, Vec* vec)
 }
 
 // These parameters may not be right
-void func_80379F6C(Mtx mat, Vec* vec) {
+void func_80379F6C(Mtx mat, Vec* vec)
+{
     vec->x = mat[0][3];
     vec->y = mat[1][3];
     vec->z = mat[2][3];
 }
 
-void func_80379F88(Mtx arg0, Vec* arg1) {
+void func_80379F88(Mtx arg0, Vec* arg1)
+{
     f64 scale;
     f64 filler;
     Vec vec1;
@@ -273,15 +268,16 @@ void func_80379F88(Mtx arg0, Vec* arg1) {
     PSVECNormalize(&vec3, &vec3);
     PSVECCrossProduct(&vec2, &vec3, &vec4);
     
-    if (PSVECDotProduct(&vec1, &vec4) < 0.0d) {
-        scale = -1.0d; // lbl_804DE690
+    if (PSVECDotProduct(&vec1, &vec4) < 0.0) {
+        scale = -1.0;
         arg1->x *= scale;
         arg1->y *= scale;
         arg1->z *= scale;
     }
 }
 
-void func_8037A120(Mtx arg0, Vec* arg1) {
+void func_8037A120(Mtx arg0, Vec* arg1)
+{
     f32 sinX;
     f32 cosX;
     f32 sinY;
@@ -314,11 +310,13 @@ void func_8037A120(Mtx arg0, Vec* arg1) {
     arg0[2][3] = 0;
 }
 
-void func_8037A230(Mtx arg0, Quaternion* arg1) {
+void func_8037A230(Mtx arg0, Quaternion* arg1)
+{
     PSMTXQuat(arg0, arg1);
 }
 
-void func_8037A250(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4) {
+void func_8037A250(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4)
+{
     f32 vec1x_2;
     f32 vec1y_2;
     f32 vec1z_2;
@@ -341,9 +339,9 @@ void func_8037A250(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4) {
     vec1z_2 = vec1z_1 = vec1z = vec1->z;
     
     if (vec4 != NULL) {   
-        f32 temp1 = 1.0d / vec4->x;
-        f32 temp2 = 1.0d / vec4->y;
-        f32 temp3 = 1.0d / vec4->z;
+        f32 temp1 = 1.0/vec4->x;
+        f32 temp2 = 1.0/vec4->y;
+        f32 temp3 = 1.0/vec4->z;
         
         vec1y_2 *= vec4->y * temp1;
         vec1z_2 *= vec4->z * temp1;
@@ -382,7 +380,7 @@ void func_8037A43C(Mtx arg0, Vec* arg1, Quaternion* arg2, Vec* arg3, Vec* arg4) 
     PSMTXConcat(temp, arg0, arg0);
     
     if (arg4 != NULL) {
-        PSMTXScale(temp, 1.0d/arg4->x, 1.0d/arg4->y, 1.0d/arg4->z);
+        PSMTXScale(temp, 1.0/arg4->x, 1.0/arg4->y, 1.0/arg4->z);
         PSMTXConcat(temp, arg0, arg0);
     }
     
@@ -390,82 +388,31 @@ void func_8037A43C(Mtx arg0, Vec* arg1, Quaternion* arg2, Vec* arg3, Vec* arg4) 
     PSMTXConcat(temp, arg0, arg0);
 }
 
-#ifdef NON_MATCHING
+// might be a fakematch?
 void func_8037A54C(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
 {
-    arg2[0][0] = (arg3 * arg0[0][0]) + arg1[0][0];
-    arg2[0][1] = (arg3 * arg0[0][1]) + arg1[0][1];
-    arg2[0][2] = (arg3 * arg0[0][2]) + arg1[0][2];
-    arg2[0][3] = (arg3 * arg0[0][3]) + arg1[0][3];
-    arg2[1][0] = (arg3 * arg0[1][0]) + arg1[1][0];
-    arg2[1][1] = (arg3 * arg0[1][1]) + arg1[1][1];
-    arg2[1][2] = (arg3 * arg0[1][2]) + arg1[1][2];
-    arg2[1][3] = (arg3 * arg0[1][3]) + arg1[1][3];
-    arg2[2][0] = (arg3 * arg0[2][0]) + arg1[2][0];
-    arg2[2][1] = (arg3 * arg0[2][1]) + arg1[2][1];
-    arg2[2][2] = (arg3 * arg0[2][2]) + arg1[2][2];
-    arg2[2][3] = (arg3 * arg0[2][3]) + arg1[2][3];
+    f32 *arr0 = (f32*)&arg0[0][0];
+    f32 *arr1 = (f32*)&arg1[0][0];
+    f32 *arr2 = (f32*)&arg2[0][0];
+
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
 }
-#else
-asm void func_8037A54C(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
+
+void* func_8037A610(void)
 {
-    nofralloc
-    /* 8037A54C 0037712C  C0 43 00 00 */	lfs f2, 0(r3)
-    /* 8037A550 00377130  C0 04 00 00 */	lfs f0, 0(r4)
-    /* 8037A554 00377134  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A558 00377138  D0 05 00 00 */	stfs f0, 0(r5)
-    /* 8037A55C 0037713C  C4 43 00 04 */	lfsu f2, 4(r3)
-    /* 8037A560 00377140  C4 04 00 04 */	lfsu f0, 4(r4)
-    /* 8037A564 00377144  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A568 00377148  D0 05 00 04 */	stfs f0, 4(r5)
-    /* 8037A56C 0037714C  C0 43 00 04 */	lfs f2, 4(r3)
-    /* 8037A570 00377150  C0 04 00 04 */	lfs f0, 4(r4)
-    /* 8037A574 00377154  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A578 00377158  D0 05 00 08 */	stfs f0, 8(r5)
-    /* 8037A57C 0037715C  C0 43 00 08 */	lfs f2, 8(r3)
-    /* 8037A580 00377160  C0 04 00 08 */	lfs f0, 8(r4)
-    /* 8037A584 00377164  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A588 00377168  D0 05 00 0C */	stfs f0, 0xc(r5)
-    /* 8037A58C 0037716C  C0 43 00 0C */	lfs f2, 0xc(r3)
-    /* 8037A590 00377170  C0 04 00 0C */	lfs f0, 0xc(r4)
-    /* 8037A594 00377174  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A598 00377178  D0 05 00 10 */	stfs f0, 0x10(r5)
-    /* 8037A59C 0037717C  C0 43 00 10 */	lfs f2, 0x10(r3)
-    /* 8037A5A0 00377180  C0 04 00 10 */	lfs f0, 0x10(r4)
-    /* 8037A5A4 00377184  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A5A8 00377188  D0 05 00 14 */	stfs f0, 0x14(r5)
-    /* 8037A5AC 0037718C  C0 43 00 14 */	lfs f2, 0x14(r3)
-    /* 8037A5B0 00377190  C0 04 00 14 */	lfs f0, 0x14(r4)
-    /* 8037A5B4 00377194  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A5B8 00377198  D0 05 00 18 */	stfs f0, 0x18(r5)
-    /* 8037A5BC 0037719C  C0 43 00 18 */	lfs f2, 0x18(r3)
-    /* 8037A5C0 003771A0  C0 04 00 18 */	lfs f0, 0x18(r4)
-    /* 8037A5C4 003771A4  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A5C8 003771A8  D0 05 00 1C */	stfs f0, 0x1c(r5)
-    /* 8037A5CC 003771AC  C0 43 00 1C */	lfs f2, 0x1c(r3)
-    /* 8037A5D0 003771B0  C0 04 00 1C */	lfs f0, 0x1c(r4)
-    /* 8037A5D4 003771B4  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A5D8 003771B8  D0 05 00 20 */	stfs f0, 0x20(r5)
-    /* 8037A5DC 003771BC  C0 43 00 20 */	lfs f2, 0x20(r3)
-    /* 8037A5E0 003771C0  C0 04 00 20 */	lfs f0, 0x20(r4)
-    /* 8037A5E4 003771C4  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A5E8 003771C8  D0 05 00 24 */	stfs f0, 0x24(r5)
-    /* 8037A5EC 003771CC  C0 43 00 24 */	lfs f2, 0x24(r3)
-    /* 8037A5F0 003771D0  C0 04 00 24 */	lfs f0, 0x24(r4)
-    /* 8037A5F4 003771D4  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A5F8 003771D8  D0 05 00 28 */	stfs f0, 0x28(r5)
-    /* 8037A5FC 003771DC  C0 43 00 28 */	lfs f2, 0x28(r3)
-    /* 8037A600 003771E0  C0 04 00 28 */	lfs f0, 0x28(r4)
-    /* 8037A604 003771E4  EC 01 00 BA */	fmadds f0, f1, f2, f0
-    /* 8037A608 003771E8  D0 05 00 2C */	stfs f0, 0x2c(r5)
-    /* 8037A60C 003771EC  4E 80 00 20 */	blr 
-}
-#pragma peephole on
-#endif
-
-HSD_ObjAllocData lbl_804C2310;
-
-void* func_8037A610(void) {
     void* vec = HSD_ObjAlloc(&lbl_804C2310);
     
     if (vec == NULL) {
@@ -475,15 +422,15 @@ void* func_8037A610(void) {
     return vec;
 }
 
-void func_8037A65C(void* arg0) {
+void func_8037A65C(void* arg0)
+{
     if (arg0 != NULL) {
         HSD_ObjFree(&lbl_804C2310, arg0);
     }
 }
 
-HSD_ObjAllocData lbl_804C233C;
-
-void* func_8037A68C(void) {
+void* func_8037A68C(void)
+{
     void* mtx;
 
     mtx = HSD_ObjAlloc(&lbl_804C233C);
@@ -493,24 +440,29 @@ void* func_8037A68C(void) {
     return mtx;
 }
 
-void func_8037A6D8(void* arg0) {
+void func_8037A6D8(void* arg0)
+{
     if (arg0 != NULL) {
         HSD_ObjFree(&lbl_804C233C, arg0);
     }
 }
 
-HSD_ObjAllocData* HSD_VecGetAllocData(void) {
+HSD_ObjAllocData* HSD_VecGetAllocData(void)
+{
     return &lbl_804C2310;
 }
 
-void HSD_VecInitAllocData(void) {
+void HSD_VecInitAllocData(void)
+{
     HSD_ObjAllocInit(&lbl_804C2310, 0xC, 4);
 }
 
-HSD_ObjAllocData* HSD_MtxGetAllocData(void) {
+HSD_ObjAllocData* HSD_MtxGetAllocData(void)
+{
     return &lbl_804C233C;
 }
 
-void HSD_MtxInitAllocData(void) {
+void HSD_MtxInitAllocData(void)
+{
     HSD_ObjAllocInit(&lbl_804C233C, 0x30, 4);
 }
