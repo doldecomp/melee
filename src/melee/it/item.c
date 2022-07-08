@@ -1124,7 +1124,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
         temp_r4 -= It_Kind_Kuriboh;
         GObj_SetupGXLink(temp_r3, lbl_803F2F28[temp_r4].x0_renderFunc, 6U, 0U);
     }
-    else if (temp_r4 < It_Kind_Old_Kuri) // Check if item is a Pok�mon //
+    else if (temp_r4 < It_Kind_Old_Kuri) // Check if item is a Pokémon //
     {
         temp_r4 -= Pokemon_Tosakinto;
         GObj_SetupGXLink(temp_r3, lbl_803F2310[temp_r4].x0_renderFunc, 6U, 0U);
