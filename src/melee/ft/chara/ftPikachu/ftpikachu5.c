@@ -125,7 +125,7 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* fighterObj) {
     }
 }
 
-void ftPikachu_ActionChange_801278BC(HSD_GObj* fighterObj) {
+void ftPikachu_SpecialLw_StartAction(HSD_GObj* fighterObj) {
 
     Fighter* fighter = fighterObj->user_data;
     fighter->x2200_ftcmd_var0 = 0;
@@ -136,7 +136,7 @@ void ftPikachu_ActionChange_801278BC(HSD_GObj* fighterObj) {
     func_8006EBA4(fighterObj);
 }
 
-void ftPikachu_ActionChange_80127924(HSD_GObj* fighterObj) {
+void ftPikachu_SpecialLwAir_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     fighter->x2200_ftcmd_var0 = 0;
     *((u32*)(&fighter->x2210_ThrowFlags)) = 0;

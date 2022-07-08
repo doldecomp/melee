@@ -4,8 +4,8 @@
 
 .section .data
     .balign 8
-.global lbl_803CC650
-lbl_803CC650:
+.global as_table_ness
+as_table_ness:
     .4byte 0x0000003E
     .4byte 0x00241A09
     .4byte 0x0A000000

@@ -42,8 +42,8 @@ lbl_8011F0C4:
 /* 8011F0DC 0011BCBC  90 05 00 08 */	stw r0, 8(r5)
 /* 8011F0E0 0011BCC0  4E 80 00 20 */	blr 
 
-.global func_8011F0E4
-func_8011F0E4:
+.global ftIceClimber_OnKnockbackEnter
+ftIceClimber_OnKnockbackEnter:
 /* 8011F0E4 0011BCC4  7C 08 02 A6 */	mflr r0
 /* 8011F0E8 0011BCC8  38 80 00 01 */	li r4, 1
 /* 8011F0EC 0011BCCC  90 01 00 04 */	stw r0, 4(r1)
@@ -62,8 +62,8 @@ func_8011F0E4:
 /* 8011F120 0011BD00  7C 08 03 A6 */	mtlr r0
 /* 8011F124 0011BD04  4E 80 00 20 */	blr 
 
-.global func_8011F128
-func_8011F128:
+.global ftIceClimber_OnKnockbackExit
+ftIceClimber_OnKnockbackExit:
 /* 8011F128 0011BD08  7C 08 02 A6 */	mflr r0
 /* 8011F12C 0011BD0C  38 80 00 01 */	li r4, 1
 /* 8011F130 0011BD10  90 01 00 04 */	stw r0, 4(r1)
@@ -124,8 +124,8 @@ lbl_8011F1E0:
 /* 8011F1F0 0011BDD0  7C 08 03 A6 */	mtlr r0
 /* 8011F1F4 0011BDD4  4E 80 00 20 */	blr 
 
-.global func_8011F1F8
-func_8011F1F8:
+.global ftIceClimber_SpecialN_StartAction
+ftIceClimber_SpecialN_StartAction:
 /* 8011F1F8 0011BDD8  7C 08 02 A6 */	mflr r0
 /* 8011F1FC 0011BDDC  38 80 01 55 */	li r4, 0x155
 /* 8011F200 0011BDE0  90 01 00 04 */	stw r0, 4(r1)
@@ -156,8 +156,8 @@ func_8011F1F8:
 /* 8011F264 0011BE44  7C 08 03 A6 */	mtlr r0
 /* 8011F268 0011BE48  4E 80 00 20 */	blr 
 
-.global func_8011F26C
-func_8011F26C:
+.global ftIceClimber_SpecialNAir_StartAction
+ftIceClimber_SpecialNAir_StartAction:
 /* 8011F26C 0011BE4C  7C 08 02 A6 */	mflr r0
 /* 8011F270 0011BE50  90 01 00 04 */	stw r0, 4(r1)
 /* 8011F274 0011BE54  38 00 00 00 */	li r0, 0
@@ -685,8 +685,8 @@ lbl_8011F994:
 /* 8011F994 0011C574  38 60 00 01 */	li r3, 1
 /* 8011F998 0011C578  4E 80 00 20 */	blr 
 
-.global func_8011F99C
-func_8011F99C:
+.global ftIceClimber_SpecialS_StartAction
+ftIceClimber_SpecialS_StartAction:
 /* 8011F99C 0011C57C  7C 08 02 A6 */	mflr r0
 /* 8011F9A0 0011C580  38 80 00 01 */	li r4, 1
 /* 8011F9A4 0011C584  90 01 00 04 */	stw r0, 4(r1)
@@ -781,8 +781,8 @@ lbl_8011FA6C:
 /* 8011FB00 0011C6E0  7C 08 03 A6 */	mtlr r0
 /* 8011FB04 0011C6E4  4E 80 00 20 */	blr 
 
-.global func_8011FB08
-func_8011FB08:
+.global ftIceClimber_SpecialSAir_StartAction
+ftIceClimber_SpecialSAir_StartAction:
 /* 8011FB08 0011C6E8  7C 08 02 A6 */	mflr r0
 /* 8011FB0C 0011C6EC  38 80 00 01 */	li r4, 1
 /* 8011FB10 0011C6F0  90 01 00 04 */	stw r0, 4(r1)
@@ -2391,8 +2391,8 @@ lbl_801211A0:
 /* 801211AC 0011DD8C  7C 08 03 A6 */	mtlr r0
 /* 801211B0 0011DD90  4E 80 00 20 */	blr 
 
-.global func_801211B4
-func_801211B4:
+.global ftIceClimber_SpecialHi_StartAction
+ftIceClimber_SpecialHi_StartAction:
 /* 801211B4 0011DD94  7C 08 02 A6 */	mflr r0
 /* 801211B8 0011DD98  90 01 00 04 */	stw r0, 4(r1)
 /* 801211BC 0011DD9C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2424,8 +2424,8 @@ func_801211B4:
 /* 80121224 0011DE04  7C 08 03 A6 */	mtlr r0
 /* 80121228 0011DE08  4E 80 00 20 */	blr 
 
-.global func_8012122C
-func_8012122C:
+.global ftIceClimber_SpecialHiAir_StartAction
+ftIceClimber_SpecialHiAir_StartAction:
 /* 8012122C 0011DE0C  7C 08 02 A6 */	mflr r0
 /* 80121230 0011DE10  90 01 00 04 */	stw r0, 4(r1)
 /* 80121234 0011DE14  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -4099,8 +4099,8 @@ lbl_801228F0:
 /* 801228FC 0011F4DC  7C 08 03 A6 */	mtlr r0
 /* 80122900 0011F4E0  4E 80 00 20 */	blr 
 
-.global func_80122904
-func_80122904:
+.global ftIceClimber_SpecialLw_StartAction
+ftIceClimber_SpecialLw_StartAction:
 /* 80122904 0011F4E4  7C 08 02 A6 */	mflr r0
 /* 80122908 0011F4E8  38 E0 00 00 */	li r7, 0
 /* 8012290C 0011F4EC  90 01 00 04 */	stw r0, 4(r1)
@@ -4135,8 +4135,8 @@ func_80122904:
 /* 80122980 0011F560  7C 08 03 A6 */	mtlr r0
 /* 80122984 0011F564  4E 80 00 20 */	blr 
 
-.global func_80122988
-func_80122988:
+.global ftIceClimber_SpecialLwAir_StartAction
+ftIceClimber_SpecialLwAir_StartAction:
 /* 80122988 0011F568  7C 08 02 A6 */	mflr r0
 /* 8012298C 0011F56C  38 E0 00 00 */	li r7, 0
 /* 80122990 0011F570  90 01 00 04 */	stw r0, 4(r1)
@@ -4515,8 +4515,8 @@ lbl_80122EC0:
 
 .section .data
     .balign 8
-.global lbl_803CD2D0
-lbl_803CD2D0:
+.global as_table_iceclimber
+as_table_iceclimber:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12800000
@@ -4834,8 +4834,8 @@ lbl_803CD820:
     .4byte 0x40C00000
     .4byte 0x40C00000
     .4byte 0x40C00000
-.global lbl_803CD838
-lbl_803CD838:
+.global as_table_nana
+as_table_nana:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12800000

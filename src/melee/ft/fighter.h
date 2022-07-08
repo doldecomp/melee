@@ -1876,6 +1876,9 @@ void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
 void Fighter_8006DA4C(HSD_GObj* fighterObj);
 void Fighter_Unload_8006DABC(Fighter* fighter);
 
+
+///// Shared Fighter Code
+
 #define PUSH_ATTRS(ft, attributeName)                                           \
     do {                                                                    \
         void* backup = (ft)->x2D8_specialAttributes2;                      \
@@ -1884,5 +1887,79 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
         *(attributeName *)(ft)->x2D8_specialAttributes2 = *src;            \
         *attr = backup;                                                      \
     } while(0)
+
+
+// Works but unused decided to go with inline instead 
+#define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                             \
+    void FTNAME##_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {                 \
+        Fighter *fighter = getFighter(fighterObj);                                \
+        if (!func_8026B2B4(fighter->x1974_heldItem)) {                            \
+            switch (func_8026B320(fighter->x1974_heldItem)) {                     \
+                case 1:                                                           \
+                    func_80070FB4(fighterObj, param1, 1);                         \
+                    break;                                                        \
+                case 2:                                                           \
+                    func_80070FB4(fighterObj, param1, 0);                         \
+                    break;                                                        \
+                case 3:                                                           \
+                    func_80070FB4(fighterObj, param1, 2);                         \
+                    break;                                                        \
+                case 4:                                                           \
+                    func_80070FB4(fighterObj, param1, 3);                         \
+                    break;                                                        \
+            }                                                                     \
+            if (bool) {                                                           \
+                func_80070C48(fighterObj, param2);                                \
+            }                                                                     \
+        }                                                                         \
+    }                                                                             \
+
+/// used for all fighters except Kirby and Purin
+inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag, BOOL bool2, BOOL bool3) {
+    Fighter *fighter = getFighter(fighterObj);            
+    if (!func_8026B2B4(fighter->x1974_heldItem)) {        
+        switch (func_8026B320(fighter->x1974_heldItem)) { 
+            case 1:                                       
+                func_80070FB4(fighterObj, bool2, 1);     
+                break;                                    
+            case 2:                                       
+                func_80070FB4(fighterObj, bool2, 0);     
+                break;                                    
+            case 3:                                       
+                func_80070FB4(fighterObj, bool2, 2);     
+                break;                                    
+            case 4:                                       
+                func_80070FB4(fighterObj, bool2, 3);     
+                break;                                    
+        }                                                 
+        if (catchItemFlag) {                                       
+            func_80070C48(fighterObj, bool3);            
+        }                                                 
+    }                                                     
+}
+
+inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
+{
+    Fighter* ft = getFighter(gobj);
+    if (!func_8026B2B4(ft->x1974_heldItem)) {
+        func_80070CC4(gobj, bool);
+    }
+}
+
+inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
+{
+    Fighter* ft = getFighter(gobj);
+    if (!func_8026B2B4(ft->x1974_heldItem)) {
+        func_80070C48(gobj, bool);
+    }
+}
+
+inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BOOL bool3)
+{
+    func_80070FB4(gobj, bool2, -1);
+    if (dropItemFlag) {
+        func_80070CC4(gobj, bool3);
+    }
+}
 
 #endif

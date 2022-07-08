@@ -4,8 +4,8 @@
 
 .section .data
     .balign 8
-.global lbl_803C7120
-lbl_803C7120:
+.global as_table_mario
+as_table_mario:
     .4byte 0xFFFFFFFF
     .4byte NULL
     .4byte 0x01000000

@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D0FA0
-lbl_803D0FA0:
+.global as_table_clink
+as_table_clink:
     .4byte 0x00000127
     .4byte 0x00240009
     .4byte 0x0A000000

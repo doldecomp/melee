@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803CF420
-lbl_803CF420:
+.global as_table_mars
+as_table_mars:
     .4byte 0x00000127
     .4byte 0x00340211
     .4byte 0x12000000

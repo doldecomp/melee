@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D1EA8
-lbl_803D1EA8:
+.global as_table_pichu
+as_table_pichu:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000

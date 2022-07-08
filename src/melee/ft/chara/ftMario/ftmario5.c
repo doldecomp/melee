@@ -52,7 +52,7 @@ void _ftMario_set_ftcmd_var2(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/4saR2
-void ftMario_func_800E207C(HSD_GObj* gobj) {
+void ftMario_SpecialLw_StartAction(HSD_GObj* gobj) {
 
     Fighter* ft;
 
@@ -75,7 +75,7 @@ void ftMario_func_800E207C(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/nQT5V
-void ftMario_func_800E2194(HSD_GObj* gobj) {
+void ftMario_SpecialLwAir_StartAction(HSD_GObj* gobj) {
     f32 sub_val;
     Fighter* ft;
 

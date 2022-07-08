@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D1848
-lbl_803D1848:
+.global as_table_falco
+as_table_falco:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000

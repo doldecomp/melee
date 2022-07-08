@@ -224,8 +224,8 @@ func_800EB618:
 /* 800EB654 000E8234  7C 08 03 A6 */	mtlr r0
 /* 800EB658 000E8238  4E 80 00 20 */	blr 
 
-.global func_800EB65C
-func_800EB65C:
+.global ftLink_SpecialLw_StartAction
+ftLink_SpecialLw_StartAction:
 /* 800EB65C 000E823C  7C 08 02 A6 */	mflr r0
 /* 800EB660 000E8240  38 80 00 6C */	li r4, 0x6c
 /* 800EB664 000E8244  90 01 00 04 */	stw r0, 4(r1)
@@ -260,8 +260,8 @@ lbl_800EB6C4:
 /* 800EB6D4 000E82B4  7C 08 03 A6 */	mtlr r0
 /* 800EB6D8 000E82B8  4E 80 00 20 */	blr 
 
-.global func_800EB6DC
-func_800EB6DC:
+.global ftLink_SpecialLwAir_StartAction
+ftLink_SpecialLwAir_StartAction:
 /* 800EB6DC 000E82BC  7C 08 02 A6 */	mflr r0
 /* 800EB6E0 000E82C0  38 80 00 70 */	li r4, 0x70
 /* 800EB6E4 000E82C4  90 01 00 04 */	stw r0, 4(r1)
@@ -574,8 +574,8 @@ lbl_800EBAE4:
 /* 800EBB14 000E86F4  7C 08 03 A6 */	mtlr r0
 /* 800EBB18 000E86F8  4E 80 00 20 */	blr 
 
-.global func_800EBB1C
-func_800EBB1C:
+.global ftLink_SpecialHi_StartAction
+ftLink_SpecialHi_StartAction:
 /* 800EBB1C 000E86FC  7C 08 02 A6 */	mflr r0
 /* 800EBB20 000E8700  38 80 01 64 */	li r4, 0x164
 /* 800EBB24 000E8704  90 01 00 04 */	stw r0, 4(r1)
@@ -602,8 +602,8 @@ func_800EBB1C:
 /* 800EBB78 000E8758  7C 08 03 A6 */	mtlr r0
 /* 800EBB7C 000E875C  4E 80 00 20 */	blr 
 
-.global func_800EBB80
-func_800EBB80:
+.global ftLink_SpecialHiAir_StartAction
+ftLink_SpecialHiAir_StartAction:
 /* 800EBB80 000E8760  7C 08 02 A6 */	mflr r0
 /* 800EBB84 000E8764  38 80 01 65 */	li r4, 0x165
 /* 800EBB88 000E8768  90 01 00 04 */	stw r0, 4(r1)
@@ -1191,8 +1191,8 @@ lbl_800EC338:
 /* 800EC34C 000E8F2C  7C 08 03 A6 */	mtlr r0
 /* 800EC350 000E8F30  4E 80 00 20 */	blr 
 
-.global func_800EC354
-func_800EC354:
+.global ftLink_SpecialS_StartAction
+ftLink_SpecialS_StartAction:
 /* 800EC354 000E8F34  7C 08 02 A6 */	mflr r0
 /* 800EC358 000E8F38  38 80 00 00 */	li r4, 0
 /* 800EC35C 000E8F3C  90 01 00 04 */	stw r0, 4(r1)
@@ -1240,8 +1240,8 @@ lbl_800EC3D8:
 /* 800EC3FC 000E8FDC  7C 08 03 A6 */	mtlr r0
 /* 800EC400 000E8FE0  4E 80 00 20 */	blr 
 
-.global func_800EC404
-func_800EC404:
+.global ftLink_SpecialSAir_StartAction
+ftLink_SpecialSAir_StartAction:
 /* 800EC404 000E8FE4  7C 08 02 A6 */	mflr r0
 /* 800EC408 000E8FE8  38 80 00 00 */	li r4, 0
 /* 800EC40C 000E8FEC  90 01 00 04 */	stw r0, 4(r1)
@@ -1985,8 +1985,8 @@ lbl_800ECD94:
 /* 800ECDA4 000E9984  7C 08 03 A6 */	mtlr r0
 /* 800ECDA8 000E9988  4E 80 00 20 */	blr 
 
-.global func_800ECDAC
-func_800ECDAC:
+.global ftLink_SpecialN_StartAction
+ftLink_SpecialN_StartAction:
 /* 800ECDAC 000E998C  7C 08 02 A6 */	mflr r0
 /* 800ECDB0 000E9990  90 01 00 04 */	stw r0, 4(r1)
 /* 800ECDB4 000E9994  94 21 FF 98 */	stwu r1, -0x68(r1)
@@ -2109,8 +2109,8 @@ lbl_800ECF64:
 /* 800ECF70 000E9B50  7C 08 03 A6 */	mtlr r0
 /* 800ECF74 000E9B54  4E 80 00 20 */	blr 
 
-.global func_800ECF78
-func_800ECF78:
+.global ftLink_SpecialNAir_StartAction
+ftLink_SpecialNAir_StartAction:
 /* 800ECF78 000E9B58  7C 08 02 A6 */	mflr r0
 /* 800ECF7C 000E9B5C  38 80 01 5B */	li r4, 0x15b
 /* 800ECF80 000E9B60  90 01 00 04 */	stw r0, 4(r1)
@@ -3631,8 +3631,8 @@ lbl_800EE514:
 
 .section .data
     .balign 8
-.global lbl_803C7E18
-lbl_803C7E18:
+.global as_table_link
+as_table_link:
     .4byte 0x00000127
     .4byte 0x00240009
     .4byte 0x0A000000

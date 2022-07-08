@@ -15,11 +15,11 @@ typedef struct _ftPichuAttributes {
 void ftPichu_OnLoad(HSD_GObj*);
 void ftPichu_OnDeath(HSD_GObj*);
 void ftPichu_OnItemPickup(HSD_GObj*, BOOL);
-void func_8014A0C4(HSD_GObj*);
-void func_8014A10C(HSD_GObj*);
-void func_8014A154(HSD_GObj*, s32);
+void ftPichu_OnItemInvisible(HSD_GObj*);
+void ftPichu_OnItemVisible(HSD_GObj*);
+void ftPichu_OnItemDrop(HSD_GObj*, BOOL);
 void func_8014A1A8(HSD_GObj*);
-void func_8014A1C8(HSD_GObj*);
-void func_8014A20C(HSD_GObj*);
+void ftPichu_OnKnockbackEnter(HSD_GObj*);
+void ftPichu_OnKnockbackExit(HSD_GObj*);
 
 #endif
