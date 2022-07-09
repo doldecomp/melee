@@ -726,7 +726,7 @@ void ftNess_AttackHi4_IASA(HSD_GObj* fighter_gobj)   // Ness's Up Smash IASA cal
 {
     Fighter* fighter_data = getFighter(fighter_gobj);
 
-    if ((fighter_data->input.x65C & A_BUTTON_HELD) == FALSE)
+    if ((fighter_data->input.x65C & HSD_BUTTON_A) == FALSE)
 
     {
         fighter_data->x2348_stateVar3 = TRUE; // Toggle flag to disallow Yo-Yo charge until next Up Smash instance //
@@ -840,7 +840,7 @@ void ftNess_AttackHi4_Charge_Anim(HSD_GObj* fighter_gobj)   // Ness's Up Smash C
 void ftNess_AttackHi4_Charge_IASA(HSD_GObj* fighter_gobj)   // Ness's Up Smash Charge IASA callback //
 {
     Fighter* fighter_data = getFighter(fighter_gobj);
-    if ((fighter_data->input.x65C & A_BUTTON_HELD) == FALSE) 
+    if ((fighter_data->input.x65C & HSD_BUTTON_A) == FALSE) 
     {
         ftNess_AttackHi4_Release_Action(fighter_gobj);
     }
