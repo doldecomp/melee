@@ -1147,7 +1147,7 @@ ft_SpecialS:
     .4byte ftMario_func_800E1450
     .4byte func_800E9EE8
     .4byte ftPikachu_ActionChange_80124E38
-    .4byte func_8014C7A0
+    .4byte ftGameWatch_SpecialS_Action
     .4byte func_800E32B0
     .4byte func_8013741C
     .4byte NULL
@@ -1184,7 +1184,7 @@ ft_SpecialHiAir:
     .4byte ftMario_func_800E1AB0
     .4byte func_800E72C4
     .4byte ftPikachu_ActionChangeZeroVel_80125E60
-    .4byte func_8014E158
+    .4byte ftGameWatch_SpecialAirHi_Action
     .4byte func_800E4CF4
     .4byte func_8013826C
     .4byte NULL
@@ -1221,7 +1221,7 @@ ft_SpecialLwAir:
     .4byte ftMario_func_800E2194
     .4byte func_800E85EC
     .4byte ftPikachu_ActionChange_80127924
-    .4byte func_8014CF78
+    .4byte ftGameWatch_SpecialAirLw_Action
     .4byte func_800E40D8
     .4byte func_80138A30
     .4byte NULL
@@ -1258,7 +1258,7 @@ ft_SpecialSAir:
     .4byte ftMario_func_800E14C8
     .4byte func_800E9F6C
     .4byte ftPikachu_ActionChange_80124EAC
-    .4byte func_8014C828
+    .4byte ftGameWatch_SpecialAirS_Action
     .4byte func_800E33E0
     .4byte func_801374A0
     .4byte NULL
@@ -1369,7 +1369,7 @@ ft_SpecialLw:
     .4byte ftMario_func_800E207C
     .4byte func_800E8560
     .4byte ftPikachu_ActionChange_801278BC
-    .4byte func_8014CEF0
+    .4byte ftGameWatch_SpecialLw_Action
     .4byte func_800E4040
     .4byte func_801389CC
     .4byte NULL
@@ -1406,7 +1406,7 @@ ft_SpecialHi:
     .4byte ftMario_func_800E1A54
     .4byte func_800E7238
     .4byte ftPikachu_ActionChangeZeroVel_80125DE8
-    .4byte func_8014E0AC
+    .4byte ftGameWatch_SpecialHi_Action
     .4byte func_800E4A78
     .4byte func_80138208
     .4byte NULL
@@ -1443,7 +1443,7 @@ ft_OnAbsorb:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8014A828
+    .4byte ftGameWatch_OnAbsorb
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1911,7 +1911,7 @@ lbl_803C1EBC:
     .4byte func_80149724
     .4byte func_80149D3C
     .4byte func_8014A1A8
-    .4byte func_8014A7B4
+    .4byte ftGameWatch_CopySpecialAttrs
     .4byte func_8014EE40
     .4byte func_8014F148
     .4byte func_8014FDD0

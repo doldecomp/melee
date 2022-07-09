@@ -141,6 +141,14 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftPichu/ftpichu.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpichu.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftgamewatch.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_AttackS4.c.o \
+	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_AttackLw3.c.o \
+	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_AttackAir.c.o \
+	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_Attack11.c.o \
+	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_Attack100.c.o \
+	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialS.c.o \
+	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialLw.c.o \
+	$(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialHi.c.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftGanon/ftganon.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftganon.s.o 		\

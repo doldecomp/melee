@@ -45,7 +45,7 @@ void ftNess_AttackLw4_IASA(HSD_GObj* fighter_gobj)   // Ness's Down Smash IASA c
 {
     Fighter* fighter_data = getFighter(fighter_gobj);
 
-    if ((fighter_data->input.x65C & A_BUTTON_HELD) == FALSE)
+    if ((fighter_data->input.x65C & HSD_BUTTON_A) == FALSE)
     {
         fighter_data->x2348_stateVar3 = 1;
     }
@@ -102,7 +102,7 @@ void ftNess_AttackLw4_Charge_IASA(HSD_GObj* fighter_gobj)   // Ness's Down Smash
 {
     Fighter* fighter_data = getFighter(fighter_gobj);
 
-    if ((fighter_data->input.x65C & A_BUTTON_HELD) == FALSE)
+    if ((fighter_data->input.x65C & HSD_BUTTON_A) == FALSE)
     {
         ftNess_AttackLw4_Release_Action(fighter_gobj);
     }

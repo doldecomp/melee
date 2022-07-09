@@ -634,7 +634,14 @@ typedef struct SpawnItem
     UnkFlagStruct x46_flag;
     UnkFlagStruct x47_flag;
     s32 x48_ground_or_air;          // 0x0 = stationary, 0x1 = air (?)
+
 } SpawnItem;
+
+typedef struct ItemModStruct
+{
+    s32 x0_unk;
+
+}ItemModStruct;
 
 inline Item* GetItemData(HSD_GObj* item_gobj)
 {

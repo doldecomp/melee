@@ -131,7 +131,7 @@ typedef enum ITKIND {
     It_Kind_Peach_ToadSpore, // Peach Toad's spore effect
     It_Kind_Mewtwo_ShadowBall, // Mewtwo's Shadowball
     It_Kind_IceClimber_GumStrings, // Ice Climbers Belay (Up B) 
-    It_Kind_GameWatch_Pesticide, // Pesticide
+    It_Kind_GameWatch_Greenhouse, // Mr. Game & Watch's Insecticide Spray
     It_Kind_GameWatch_Manhole, // Mr. Game & Watch's Manhole
     It_Kind_GameWatch_Fire, // Mr. Game & Watch's Fire (?)
     It_Kind_GameWatch_Parachute, // Mr. Game & Watch's Parachute

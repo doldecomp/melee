@@ -7,8 +7,8 @@
 
 // HSD_PAD //
 
-#define A_BUTTON_HELD 0x100 // Also covers Z-Button macro in-game //
-#define B_BUTTON_HELD 0x200
+#define HSD_BUTTON_A 0x100 // Also covers Z-Button macro in-game //
+#define HSD_BUTTON_B 0x200
 
 // COLLISION FLAGS //
 
