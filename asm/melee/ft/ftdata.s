@@ -1911,7 +1911,7 @@ lbl_803C1EBC:
     .4byte func_80149724
     .4byte func_80149D3C
     .4byte func_8014A1A8
-    .4byte func_8014A7B4
+    .4byte ftGameWatch_CopySpecialAttrs
     .4byte func_8014EE40
     .4byte func_8014F148
     .4byte func_8014FDD0

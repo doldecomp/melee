@@ -693,7 +693,7 @@ typedef struct attr
     /* 0x180 */ f32 x180_AerialFriction;
     /* 0x184 */ f32 x184_FastfallVelocity;
     /* 0x188 */ f32 x188_HorizontalAirMobilityConstant;
-    /* 0x18C */ s32 x18C_Jab_2InputWindow;
+    /* 0x18C */ f32 x18C_Jab_2InputWindow;
     /* 0x190 */ s32 x190_Jab_3InputWindow;
     /* 0x194 */ s32 x194_FramesToChangeDirectionOnStandingTurn;
     /* 0x198 */ f32 x198_Weight;
@@ -1073,24 +1073,24 @@ struct SpecialAttrs_Pichu {
     char filler0[0x100];
 };
 
-struct SpecialAttrs_Gaw {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
+struct SpecialAttrs_GameWatch {
+    /* 0x222C */ s32 x222C_judgeVar1;
+    /* 0x2230 */ s32 x2230_judgeVar2;
     /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
+    /* 0x2238 */ s32 x2238_panicCharge;
+    /* 0x223C */ s32 x223C_panicDamage;
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ u32 x2250;
-    /* 0x2254 */ u32 x2254;
-    /* 0x2258 */ u32 x2258;
-    /* 0x225C */ u32 x225C;
-    /* 0x2260 */ u32 x2260;
-    /* 0x2264 */ u32 x2264;
-    /* 0x2268 */ u32 x2268;
-    /* 0x226C */ u32 x226C;
+    /* 0x2248 */ HSD_GObj* x2248_manholeGObj;
+    /* 0x224C */ HSD_GObj* x224C_greenhouseGObj;
+    /* 0x2250 */ HSD_GObj* x2250_manholeGObj2;
+    /* 0x2254 */ HSD_GObj* x2254_fireGObj;
+    /* 0x2258 */ HSD_GObj* x2258_parachuteGObj;
+    /* 0x225C */ HSD_GObj* x225C_turtleGObj;
+    /* 0x2260 */ HSD_GObj* x2260_sparkyGObj;
+    /* 0x2264 */ HSD_GObj* x2264_judgementGObj;
+    /* 0x2268 */ HSD_GObj* x2268_panicGObj;
+    /* 0x226C */ HSD_GObj* x226C_rescueGObj;
 };
 
 struct SpecialAttrs_Masterhand {
@@ -1135,6 +1135,24 @@ struct SpecialAttrs_GKoopa {
 struct SpecialAttrs_Sandbag {
     char filler0[0x100];
 };
+
+// State Var unions //
+typedef struct ftGameWatchVars
+{
+    union
+    {
+        struct
+        {
+            s32 x2340;
+        } Attack11;
+
+        struct
+        {
+            s32 x2340; // 0x2340
+            s32 turnFrames; // 0x2344
+        } SpecialLw;
+    };
+} ftGameWatchVars;
 
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
@@ -1698,7 +1716,7 @@ typedef struct _Fighter {
         // Mario SpecialAttrs struct is used for DrMario
         // Fox SpecialAttrs struct is used for Falco
         struct SpecialAttrs_Pichu pichu;
-        struct SpecialAttrs_Gaw gaw;
+        struct SpecialAttrs_GameWatch gaw;
         // Cpt Falcon SpecialAttrs struct is used for Ganondorf
         // Mars (Marth) struct is used for Emblem (Roy)
         struct SpecialAttrs_Masterhand masterhand;
@@ -1818,7 +1836,8 @@ typedef struct _Fighter {
     /* 0x23B8 */ s32 x23B8;
 } Fighter;
 
-inline Fighter* getFighter(HSD_GObj* fighterObj) {
+inline Fighter* getFighter(HSD_GObj* fighterObj) 
+{
     return fighterObj->user_data;
 }
 
@@ -1832,6 +1851,15 @@ inline void* getFtSpecialAttrs(Fighter* fighter_data)
 {
     void* fighter_attr = fighter_data->x2D4_specialAttributes;
     return fighter_attr;
+}
+
+inline f32 stickGetDir(f32 x1, f32 x2)
+{
+    if (x1 < x2)
+    {
+        return -x1;
+    }
+    else return x1;
 }
 
 // functions in fighter.c
