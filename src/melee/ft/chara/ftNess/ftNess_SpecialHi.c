@@ -403,7 +403,7 @@ void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* fighter_gobj, CollData* coll_
 
 // 0x80118120 //
 // https://decomp.me/scratch/ARLRd //
-void ftNess_SpecialHiStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK Thunder Start Action State handler //
+void ftNess_SpecialHi_StartAction(HSD_GObj* fighter_gobj)  // Ness's grounded PK Thunder Start Action State handler //
 {
     f32 temp_f0;
     f32 temp_f1;

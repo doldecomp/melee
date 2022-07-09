@@ -32,32 +32,18 @@ void ftSamus_80128428(HSD_GObj* fighterObj) {
     func_800D9C98(fighterObj);
 }
 
-void ftSamus_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
-{
-    s32 result, switched_res, unused;
+void ftSamus_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 0, 0);
+}
 
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
+void ftSamus_OnItemInvisible(HSD_GObj *fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 0);
+}
 
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 0, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 0, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 0, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 0, 3);
-                break;
-        }
+void ftSamus_OnItemVisible(HSD_GObj *fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 0);
+}
 
-        if (arg1 != 0) {
-            func_80070C48(gobj, 0);
-        }
-    }
+void ftSamus_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }

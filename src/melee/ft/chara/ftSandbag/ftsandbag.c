@@ -74,7 +74,7 @@ void ftSandbag_OnKnockbackEnter(void) {
     return;
 }
 
-void func_8014FBA0(void) {
+void ftSandbag_OnKnockbackExit(void) {
     return;
 }
 

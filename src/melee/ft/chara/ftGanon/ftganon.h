@@ -6,12 +6,12 @@
 
 void ftGanon_OnDeath(HSD_GObj*);
 void ftGanon_OnItemPickup(HSD_GObj*, BOOL);
-void func_8014ED38(HSD_GObj*);
-void func_8014ED80(HSD_GObj*);
-void func_8014EDC8(HSD_GObj*, s32);
+void ftGanon_OnItemInvisible(HSD_GObj*);
+void ftGanon_OnItemVisible(HSD_GObj*);
+void ftGanon_OnItemDrop(HSD_GObj*, BOOL);
 void ftGanon_OnLoad(HSD_GObj*);
 void func_8014EE40(HSD_GObj*);
-void func_8014EE60(HSD_GObj*);
-void func_8014EEAC(HSD_GObj*);
+void ftGanon_OnKnockbackEnter(HSD_GObj*);
+void ftGanon_OnKnockbackExit(HSD_GObj*);
 
 #endif

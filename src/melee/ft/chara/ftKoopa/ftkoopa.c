@@ -57,57 +57,21 @@ void func_80132B38(void) {
     return;
 }
 
-void ftKoopa_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
+void ftKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
+
+void ftKoopa_OnItemInvisible(HSD_GObj* gobj) {
+    Fighter_OnItemInvisible(gobj, 1);
+}
+
+void ftKoopa_OnItemVisible(HSD_GObj* gobj) {
+    Fighter_OnItemVisible(gobj, 1);
+}
+
+void ftKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
-}
-
-void func_80132C1C(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070CC4(gobj, 1);
-    }
-}
-
-void func_80132C64(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070C48(gobj, 1);
-    }
-}
-
-void func_80132CAC(HSD_GObj* gobj, s32 arg1) {
-    func_80070FB4(gobj, 1, -1);
-    if (arg1 != 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 void func_80132D00(HSD_GObj* gobj) {
@@ -118,13 +82,13 @@ void func_80132D00(HSD_GObj* gobj) {
     *sA2 = *ext_attr;
 }
 
-void func_80132D38(HSD_GObj *gobj) {
+void ftKoopa_OnKnockbackEnter(HSD_GObj *gobj) {
     func_800704F0(gobj, 1, lbl_804D9AC8);
     func_800704F0(gobj, 0, lbl_804D9AC8);
     return;
 }
 
-void func_80132D7C(HSD_GObj *gobj) {
+void ftKoopa_OnKnockbackExit(HSD_GObj *gobj) {
     func_800704F0(gobj, 1, lbl_804D9ACC);
     func_800704F0(gobj, 0, lbl_804D9ACC);
     return;
@@ -192,7 +156,7 @@ void func_80132E30(HSD_GObj *gobj) {
     }
 }
 
-void func_80132EFC(HSD_GObj *gobj)
+void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj)
 {
     Fighter *ft = gobj->user_data;
 
@@ -217,7 +181,7 @@ void func_80132EFC(HSD_GObj *gobj)
     return;
 }
 
-void func_80132F94(HSD_GObj *gobj)
+void ftKoopa_SpecialSAir_StartAction(HSD_GObj *gobj)
 {
     Fighter *ft = gobj->user_data;
 

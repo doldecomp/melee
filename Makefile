@@ -56,15 +56,18 @@ MWCC_LD_VERSION := 1.1
 # Programs
 ifeq ($(WINDOWS),1)
   WINE :=
+  CPP     := $(DEVKITPPC)/bin/powerpc-eabi-cpp.exe -P
+  SHA1SUM := sha1sum
 else
   WINE ?= wine
   # Disable wine debug output for cleanliness
   export WINEDEBUG ?= -all
   # Default devkitPPC path
   DEVKITPPC ?= /opt/devkitpro/devkitPPC
+  CPP     := $(DEVKITPPC)/bin/powerpc-eabi-cpp -P
+  SHA1SUM := shasum
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
-CPP     := cpp -P
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
 ifeq ($(EPILOGUE_PROCESS),1)
 CC_EPI   = $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
@@ -72,7 +75,6 @@ endif
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 HOSTCC  := cc
-SHA1SUM := sha1sum
 PYTHON  := python3
 
 FRANK := tools/frank.py

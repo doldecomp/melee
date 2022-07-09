@@ -18,8 +18,8 @@ func_800E3278:
 /* 800E32A8 000DFE88  7C 08 03 A6 */	mtlr r0
 /* 800E32AC 000DFE8C  4E 80 00 20 */	blr 
 
-.global func_800E32B0
-func_800E32B0:
+.global ftCfalcon_SpecialS_StartAction
+ftCfalcon_SpecialS_StartAction:
 /* 800E32B0 000DFE90  7C 08 02 A6 */	mflr r0
 /* 800E32B4 000DFE94  90 01 00 04 */	stw r0, 4(r1)
 /* 800E32B8 000DFE98  38 00 00 00 */	li r0, 0
@@ -101,8 +101,8 @@ lbl_800E3388:
 /* 800E33D8 000DFFB8  7C 08 03 A6 */	mtlr r0
 /* 800E33DC 000DFFBC  4E 80 00 20 */	blr 
 
-.global func_800E33E0
-func_800E33E0:
+.global ftFalcon_SpecialSAir_StartAction
+ftFalcon_SpecialSAir_StartAction:
 /* 800E33E0 000DFFC0  7C 08 02 A6 */	mflr r0
 /* 800E33E4 000DFFC4  38 80 01 5F */	li r4, 0x15f
 /* 800E33E8 000DFFC8  90 01 00 04 */	stw r0, 4(r1)

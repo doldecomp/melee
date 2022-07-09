@@ -2,76 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-
-.global func_801394AC
-func_801394AC:
-/* 801394AC 0013608C  7C 08 02 A6 */	mflr r0
-/* 801394B0 00136090  90 01 00 04 */	stw r0, 4(r1)
-/* 801394B4 00136094  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 801394B8 00136098  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 801394BC 0013609C  7C 7F 1B 78 */	mr r31, r3
-/* 801394C0 001360A0  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 801394C4 001360A4  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 801394C8 001360A8  48 13 1D ED */	bl func_8026B2B4
-/* 801394CC 001360AC  2C 03 00 00 */	cmpwi r3, 0
-/* 801394D0 001360B0  40 82 00 10 */	bne lbl_801394E0
-/* 801394D4 001360B4  38 7F 00 00 */	addi r3, r31, 0
-/* 801394D8 001360B8  38 80 00 01 */	li r4, 1
-/* 801394DC 001360BC  4B F3 77 E9 */	bl func_80070CC4
-lbl_801394E0:
-/* 801394E0 001360C0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 801394E4 001360C4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 801394E8 001360C8  38 21 00 18 */	addi r1, r1, 0x18
-/* 801394EC 001360CC  7C 08 03 A6 */	mtlr r0
-/* 801394F0 001360D0  4E 80 00 20 */	blr 
-
-.global func_801394F4
-func_801394F4:
-/* 801394F4 001360D4  7C 08 02 A6 */	mflr r0
-/* 801394F8 001360D8  90 01 00 04 */	stw r0, 4(r1)
-/* 801394FC 001360DC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80139500 001360E0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80139504 001360E4  7C 7F 1B 78 */	mr r31, r3
-/* 80139508 001360E8  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8013950C 001360EC  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 80139510 001360F0  48 13 1D A5 */	bl func_8026B2B4
-/* 80139514 001360F4  2C 03 00 00 */	cmpwi r3, 0
-/* 80139518 001360F8  40 82 00 10 */	bne lbl_80139528
-/* 8013951C 001360FC  38 7F 00 00 */	addi r3, r31, 0
-/* 80139520 00136100  38 80 00 01 */	li r4, 1
-/* 80139524 00136104  4B F3 77 25 */	bl func_80070C48
-lbl_80139528:
-/* 80139528 00136108  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8013952C 0013610C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80139530 00136110  38 21 00 18 */	addi r1, r1, 0x18
-/* 80139534 00136114  7C 08 03 A6 */	mtlr r0
-/* 80139538 00136118  4E 80 00 20 */	blr 
-
-.global func_8013953C
-func_8013953C:
-/* 8013953C 0013611C  7C 08 02 A6 */	mflr r0
-/* 80139540 00136120  38 A0 FF FF */	li r5, -1
-/* 80139544 00136124  90 01 00 04 */	stw r0, 4(r1)
-/* 80139548 00136128  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8013954C 0013612C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80139550 00136130  3B E4 00 00 */	addi r31, r4, 0
-/* 80139554 00136134  38 80 00 01 */	li r4, 1
-/* 80139558 00136138  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8013955C 0013613C  3B C3 00 00 */	addi r30, r3, 0
-/* 80139560 00136140  4B F3 7A 55 */	bl func_80070FB4
-/* 80139564 00136144  2C 1F 00 00 */	cmpwi r31, 0
-/* 80139568 00136148  41 82 00 10 */	beq lbl_80139578
-/* 8013956C 0013614C  38 7E 00 00 */	addi r3, r30, 0
-/* 80139570 00136150  38 80 00 01 */	li r4, 1
-/* 80139574 00136154  4B F3 77 51 */	bl func_80070CC4
-lbl_80139578:
-/* 80139578 00136158  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8013957C 0013615C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80139580 00136160  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80139584 00136164  38 21 00 18 */	addi r1, r1, 0x18
-/* 80139588 00136168  7C 08 03 A6 */	mtlr r0
-/* 8013958C 0013616C  4E 80 00 20 */	blr 
-
 .global func_80139590
 func_80139590:
 /* 80139590 00136170  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -118,8 +48,8 @@ lbl_80139610:
 /* 8013961C 001361FC  7C 08 03 A6 */	mtlr r0
 /* 80139620 00136200  4E 80 00 20 */	blr 
 
-.global func_80139624
-func_80139624:
+.global ftZelda_OnKnockbackEnter
+ftZelda_OnKnockbackEnter:
 /* 80139624 00136204  7C 08 02 A6 */	mflr r0
 /* 80139628 00136208  38 80 00 01 */	li r4, 1
 /* 8013962C 0013620C  90 01 00 04 */	stw r0, 4(r1)
@@ -138,8 +68,8 @@ func_80139624:
 /* 80139660 00136240  7C 08 03 A6 */	mtlr r0
 /* 80139664 00136244  4E 80 00 20 */	blr 
 
-.global func_80139668
-func_80139668:
+.global ftZelda_OnKnockbackExit
+ftZelda_OnKnockbackExit:
 /* 80139668 00136248  7C 08 02 A6 */	mflr r0
 /* 8013966C 0013624C  38 80 00 01 */	li r4, 1
 /* 80139670 00136250  90 01 00 04 */	stw r0, 4(r1)
@@ -265,8 +195,8 @@ lbl_801397FC:
 /* 8013982C 0013640C  7C 08 03 A6 */	mtlr r0
 /* 80139830 00136410  4E 80 00 20 */	blr 
 
-.global func_80139834
-func_80139834:
+.global ftZelda_SpecialHi_StartAction
+ftZelda_SpecialHi_StartAction:
 /* 80139834 00136414  7C 08 02 A6 */	mflr r0
 /* 80139838 00136418  38 80 01 5D */	li r4, 0x15d
 /* 8013983C 0013641C  90 01 00 04 */	stw r0, 4(r1)
@@ -313,8 +243,8 @@ func_80139834:
 /* 801398E0 001364C0  7C 08 03 A6 */	mtlr r0
 /* 801398E4 001364C4  4E 80 00 20 */	blr 
 
-.global func_801398E8
-func_801398E8:
+.global ftZelda_SpecialHiAir_StartAction
+ftZelda_SpecialHiAir_StartAction:
 /* 801398E8 001364C8  7C 08 02 A6 */	mflr r0
 /* 801398EC 001364CC  38 80 01 60 */	li r4, 0x160
 /* 801398F0 001364D0  90 01 00 04 */	stw r0, 4(r1)
@@ -1477,8 +1407,8 @@ lbl_8013A8F4:
 /* 8013A920 00137500  7C 08 03 A6 */	mtlr r0
 /* 8013A924 00137504  4E 80 00 20 */	blr 
 
-.global func_8013A928
-func_8013A928:
+.global ftZelda_SpecialN_StartAction
+ftZelda_SpecialN_StartAction:
 /* 8013A928 00137508  7C 08 02 A6 */	mflr r0
 /* 8013A92C 0013750C  38 80 01 55 */	li r4, 0x155
 /* 8013A930 00137510  90 01 00 04 */	stw r0, 4(r1)
@@ -1511,8 +1441,8 @@ func_8013A928:
 /* 8013A99C 0013757C  7C 08 03 A6 */	mtlr r0
 /* 8013A9A0 00137580  4E 80 00 20 */	blr 
 
-.global func_8013A9A4
-func_8013A9A4:
+.global ftZelda_SpecialNAir_StartAction
+ftZelda_SpecialNAir_StartAction:
 /* 8013A9A4 00137584  7C 08 02 A6 */	mflr r0
 /* 8013A9A8 00137588  38 80 01 56 */	li r4, 0x156
 /* 8013A9AC 0013758C  90 01 00 04 */	stw r0, 4(r1)
@@ -1889,8 +1819,8 @@ lbl_8013AEAC:
 /* 8013AED8 00137AB8  7C 08 03 A6 */	mtlr r0
 /* 8013AEDC 00137ABC  4E 80 00 20 */	blr 
 
-.global func_8013AEE0
-func_8013AEE0:
+.global ftZelda_SpecialLw_StartAction
+ftZelda_SpecialLw_StartAction:
 /* 8013AEE0 00137AC0  7C 08 02 A6 */	mflr r0
 /* 8013AEE4 00137AC4  38 80 01 63 */	li r4, 0x163
 /* 8013AEE8 00137AC8  90 01 00 04 */	stw r0, 4(r1)
@@ -1941,8 +1871,8 @@ func_8013AEE0:
 /* 8013AF9C 00137B7C  7C 08 03 A6 */	mtlr r0
 /* 8013AFA0 00137B80  4E 80 00 20 */	blr 
 
-.global func_8013AFA4
-func_8013AFA4:
+.global ftZelda_SpecialLwAir_StartAction
+ftZelda_SpecialLwAir_StartAction:
 /* 8013AFA4 00137B84  7C 08 02 A6 */	mflr r0
 /* 8013AFA8 00137B88  38 80 01 65 */	li r4, 0x165
 /* 8013AFAC 00137B8C  90 01 00 04 */	stw r0, 4(r1)
@@ -2440,8 +2370,8 @@ lbl_8013B618:
 /* 8013B630 00138210  7C 08 03 A6 */	mtlr r0
 /* 8013B634 00138214  4E 80 00 20 */	blr 
 
-.global func_8013B638
-func_8013B638:
+.global ftZelda_SpecialS_StartAction
+ftZelda_SpecialS_StartAction:
 /* 8013B638 00138218  7C 08 02 A6 */	mflr r0
 /* 8013B63C 0013821C  38 80 01 57 */	li r4, 0x157
 /* 8013B640 00138220  90 01 00 04 */	stw r0, 4(r1)
@@ -2483,8 +2413,8 @@ func_8013B638:
 /* 8013B6D0 001382B0  7C 08 03 A6 */	mtlr r0
 /* 8013B6D4 001382B4  4E 80 00 20 */	blr 
 
-.global func_8013B6D8
-func_8013B6D8:
+.global ftZelda_SpecialSAir_StartAction
+ftZelda_SpecialSAir_StartAction:
 /* 8013B6D8 001382B8  7C 08 02 A6 */	mflr r0
 /* 8013B6DC 001382BC  38 80 01 5A */	li r4, 0x15a
 /* 8013B6E0 001382C0  90 01 00 04 */	stw r0, 4(r1)
@@ -3353,8 +3283,8 @@ lbl_8013C2E0:
 
 .section .data
     .balign 8
-.global lbl_803CFA58
-lbl_803CFA58:
+.global as_table_zelda
+as_table_zelda:
     .4byte 0x00000127
     .4byte 0x00341011
     .4byte 0x12000000

@@ -2,75 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80128544
-func_80128544:
-/* 80128544 00125124  7C 08 02 A6 */	mflr r0
-/* 80128548 00125128  90 01 00 04 */	stw r0, 4(r1)
-/* 8012854C 0012512C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80128550 00125130  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80128554 00125134  7C 7F 1B 78 */	mr r31, r3
-/* 80128558 00125138  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012855C 0012513C  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 80128560 00125140  48 14 2D 55 */	bl func_8026B2B4
-/* 80128564 00125144  2C 03 00 00 */	cmpwi r3, 0
-/* 80128568 00125148  40 82 00 10 */	bne lbl_80128578
-/* 8012856C 0012514C  38 7F 00 00 */	addi r3, r31, 0
-/* 80128570 00125150  38 80 00 00 */	li r4, 0
-/* 80128574 00125154  4B F4 87 51 */	bl func_80070CC4
-lbl_80128578:
-/* 80128578 00125158  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8012857C 0012515C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80128580 00125160  38 21 00 18 */	addi r1, r1, 0x18
-/* 80128584 00125164  7C 08 03 A6 */	mtlr r0
-/* 80128588 00125168  4E 80 00 20 */	blr 
-
-.global func_8012858C
-func_8012858C:
-/* 8012858C 0012516C  7C 08 02 A6 */	mflr r0
-/* 80128590 00125170  90 01 00 04 */	stw r0, 4(r1)
-/* 80128594 00125174  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80128598 00125178  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8012859C 0012517C  7C 7F 1B 78 */	mr r31, r3
-/* 801285A0 00125180  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 801285A4 00125184  80 63 19 74 */	lwz r3, 0x1974(r3)
-/* 801285A8 00125188  48 14 2D 0D */	bl func_8026B2B4
-/* 801285AC 0012518C  2C 03 00 00 */	cmpwi r3, 0
-/* 801285B0 00125190  40 82 00 10 */	bne lbl_801285C0
-/* 801285B4 00125194  38 7F 00 00 */	addi r3, r31, 0
-/* 801285B8 00125198  38 80 00 00 */	li r4, 0
-/* 801285BC 0012519C  4B F4 86 8D */	bl func_80070C48
-lbl_801285C0:
-/* 801285C0 001251A0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 801285C4 001251A4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 801285C8 001251A8  38 21 00 18 */	addi r1, r1, 0x18
-/* 801285CC 001251AC  7C 08 03 A6 */	mtlr r0
-/* 801285D0 001251B0  4E 80 00 20 */	blr 
-
-.global func_801285D4
-func_801285D4:
-/* 801285D4 001251B4  7C 08 02 A6 */	mflr r0
-/* 801285D8 001251B8  38 A0 FF FF */	li r5, -1
-/* 801285DC 001251BC  90 01 00 04 */	stw r0, 4(r1)
-/* 801285E0 001251C0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 801285E4 001251C4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 801285E8 001251C8  3B E4 00 00 */	addi r31, r4, 0
-/* 801285EC 001251CC  38 80 00 00 */	li r4, 0
-/* 801285F0 001251D0  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 801285F4 001251D4  3B C3 00 00 */	addi r30, r3, 0
-/* 801285F8 001251D8  4B F4 89 BD */	bl func_80070FB4
-/* 801285FC 001251DC  2C 1F 00 00 */	cmpwi r31, 0
-/* 80128600 001251E0  41 82 00 10 */	beq lbl_80128610
-/* 80128604 001251E4  38 7E 00 00 */	addi r3, r30, 0
-/* 80128608 001251E8  38 80 00 00 */	li r4, 0
-/* 8012860C 001251EC  4B F4 86 B9 */	bl func_80070CC4
-lbl_80128610:
-/* 80128610 001251F0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80128614 001251F4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80128618 001251F8  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8012861C 001251FC  38 21 00 18 */	addi r1, r1, 0x18
-/* 80128620 00125200  7C 08 03 A6 */	mtlr r0
-/* 80128624 00125204  4E 80 00 20 */	blr 
-
 .global func_80128628
 func_80128628:
 /* 80128628 00125208  7C 08 02 A6 */	mflr r0
@@ -1164,8 +1095,8 @@ lbl_8012952C:
 /* 80129544 00126124  7C 08 03 A6 */	mtlr r0
 /* 80129548 00126128  4E 80 00 20 */	blr 
 
-.global func_8012954C
-func_8012954C:
+.global ftSamus_SpecialN_StartAction
+ftSamus_SpecialN_StartAction:
 /* 8012954C 0012612C  7C 08 02 A6 */	mflr r0
 /* 80129550 00126130  38 80 01 57 */	li r4, 0x157
 /* 80129554 00126134  90 01 00 04 */	stw r0, 4(r1)
@@ -1208,8 +1139,8 @@ func_8012954C:
 /* 801295E8 001261C8  7C 08 03 A6 */	mtlr r0
 /* 801295EC 001261CC  4E 80 00 20 */	blr 
 
-.global func_801295F0
-func_801295F0:
+.global ftSamus_SpecialNAir_StartAction
+ftSamus_SpecialNAir_StartAction:
 /* 801295F0 001261D0  7C 08 02 A6 */	mflr r0
 /* 801295F4 001261D4  38 80 01 5B */	li r4, 0x15b
 /* 801295F8 001261D8  90 01 00 04 */	stw r0, 4(r1)
@@ -2064,8 +1995,8 @@ lbl_8012A1AC:
 /* 8012A1D0 00126DB0  7C 08 03 A6 */	mtlr r0
 /* 8012A1D4 00126DB4  4E 80 00 20 */	blr 
 
-.global func_8012A1D8
-func_8012A1D8:
+.global ftSamus_SpecialS_StartAction
+ftSamus_SpecialS_StartAction:
 /* 8012A1D8 00126DB8  7C 08 02 A6 */	mflr r0
 /* 8012A1DC 00126DBC  90 01 00 04 */	stw r0, 4(r1)
 /* 8012A1E0 00126DC0  3C 00 43 30 */	lis r0, 0x4330
@@ -2122,8 +2053,8 @@ lbl_8012A280:
 /* 8012A2A4 00126E84  7C 08 03 A6 */	mtlr r0
 /* 8012A2A8 00126E88  4E 80 00 20 */	blr 
 
-.global func_8012A2AC
-func_8012A2AC:
+.global ftSamus_SpecialSAir_StartAction
+ftSamus_SpecialSAir_StartAction:
 /* 8012A2AC 00126E8C  7C 08 02 A6 */	mflr r0
 /* 8012A2B0 00126E90  90 01 00 04 */	stw r0, 4(r1)
 /* 8012A2B4 00126E94  3C 00 43 30 */	lis r0, 0x4330
@@ -2412,8 +2343,8 @@ func_8012A640:
 /* 8012A66C 0012724C  7C 08 03 A6 */	mtlr r0
 /* 8012A670 00127250  4E 80 00 20 */	blr 
 
-.global func_8012A674
-func_8012A674:
+.global ftSamus_SpecialHi_StartAction
+ftSamus_SpecialHi_StartAction:
 /* 8012A674 00127254  7C 08 02 A6 */	mflr r0
 /* 8012A678 00127258  38 80 01 61 */	li r4, 0x161
 /* 8012A67C 0012725C  90 01 00 04 */	stw r0, 4(r1)
@@ -2464,8 +2395,8 @@ func_8012A674:
 /* 8012A730 00127310  7C 08 03 A6 */	mtlr r0
 /* 8012A734 00127314  4E 80 00 20 */	blr 
 
-.global func_8012A738
-func_8012A738:
+.global ftSamus_SpecialHiAir_StartAction
+ftSamus_SpecialHiAir_StartAction:
 /* 8012A738 00127318  7C 08 02 A6 */	mflr r0
 /* 8012A73C 0012731C  38 80 01 62 */	li r4, 0x162
 /* 8012A740 00127320  90 01 00 04 */	stw r0, 4(r1)
@@ -3043,8 +2974,8 @@ func_8012AF38:
 /* 8012AF54 00127B34  7C 08 03 A6 */	mtlr r0
 /* 8012AF58 00127B38  4E 80 00 20 */	blr 
 
-.global func_8012AF5C
-func_8012AF5C:
+.global ftSamus_SpecialLw_StartAction
+ftSamus_SpecialLw_StartAction:
 /* 8012AF5C 00127B3C  7C 08 02 A6 */	mflr r0
 /* 8012AF60 00127B40  90 01 00 04 */	stw r0, 4(r1)
 /* 8012AF64 00127B44  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -3130,8 +3061,8 @@ lbl_8012B084:
 /* 8012B094 00127C74  7C 08 03 A6 */	mtlr r0
 /* 8012B098 00127C78  4E 80 00 20 */	blr 
 
-.global func_8012B09C
-func_8012B09C:
+.global ftSamus_SpecialLwAir_StartAction
+ftSamus_SpecialLwAir_StartAction:
 /* 8012B09C 00127C7C  7C 08 02 A6 */	mflr r0
 /* 8012B0A0 00127C80  38 80 01 64 */	li r4, 0x164
 /* 8012B0A4 00127C84  90 01 00 04 */	stw r0, 4(r1)
@@ -3578,8 +3509,8 @@ func_8012B668:
 
 .section .data
     .balign 8
-.global lbl_803CE2D0
-lbl_803CE2D0:
+.global as_table_samus
+as_table_samus:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01000000
@@ -3826,8 +3757,8 @@ lbl_803CE6B8:
     .4byte NULL
 
 #### this data below here belongs in yoshi
-.global lbl_803CE6D0
-lbl_803CE6D0:
+.global as_table_yoshi
+as_table_yoshi:
     .4byte 0x00000025
     .4byte 0x00100000
     .4byte 0x01000000

@@ -95,8 +95,8 @@ lbl_8014E624:
 /* 8014E63C 0014B21C  7C 08 03 A6 */	mtlr r0
 /* 8014E640 0014B220  4E 80 00 20 */	blr 
 
-.global func_8014E644
-func_8014E644:
+.global ftGameWatch_SpecialN_StartAction
+ftGameWatch_SpecialN_StartAction:
 /* 8014E644 0014B224  7C 08 02 A6 */	mflr r0
 /* 8014E648 0014B228  38 80 01 61 */	li r4, 0x161
 /* 8014E64C 0014B22C  90 01 00 04 */	stw r0, 4(r1)
@@ -129,8 +129,8 @@ func_8014E644:
 /* 8014E6B8 0014B298  7C 08 03 A6 */	mtlr r0
 /* 8014E6BC 0014B29C  4E 80 00 20 */	blr 
 
-.global func_8014E6C0
-func_8014E6C0:
+.global ftGameWatch_SpecialNAir_StartAction
+ftGameWatch_SpecialNAir_StartAction:
 /* 8014E6C0 0014B2A0  7C 08 02 A6 */	mflr r0
 /* 8014E6C4 0014B2A4  38 80 01 62 */	li r4, 0x162
 /* 8014E6C8 0014B2A8  90 01 00 04 */	stw r0, 4(r1)
@@ -508,8 +508,8 @@ func_8014EB8C:
 
 .section .data
     .balign 8
-.global lbl_803D23E8
-lbl_803D23E8:
+.global as_table_gamewatch
+as_table_gamewatch:
     .4byte 0x0000002E
     .4byte 0x002C0201
     .4byte 0x02800000

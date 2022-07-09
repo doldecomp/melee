@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D2E80
-lbl_803D2E80:
+.global as_table_roy
+as_table_roy:
     .4byte 0x00000127
     .4byte 0x00340211
     .4byte 0x12000000

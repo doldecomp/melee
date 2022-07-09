@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D1498
-lbl_803D1498:
+.global as_table_drmario
+as_table_drmario:
     .4byte 0x000000EF
     .4byte 0x00000071
     .4byte 0x01000000

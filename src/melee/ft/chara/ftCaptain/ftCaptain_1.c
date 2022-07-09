@@ -20,70 +20,32 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj) {
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx
-void ftCFalcon_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
-{
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
+void ftCFalcon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-// func_800E29C8
+// ftCFalcon_OnItemInvisible
 // OnMakeItemInvisible
 // https://decomp.me/scratch/maRvM
-void func_800E29C8(HSD_GObj* fighter_gobj)
+void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
-    Fighter* fighter_data = (Fighter*)fighter_gobj->user_data;
-    if(func_8026B2B4(fighter_data->x1974_heldItem) == 0)
-    {
-        func_80070CC4(fighter_gobj, 1);
-    }
+    Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
-// func_800E2A10
+// ftCFalcon_OnItemVisible
 // OnMakeInvisible
 // https://decomp.me/scratch/95tCp
-void func_800E2A10(HSD_GObj* fighter_gobj)
+void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj)
 {
-    Fighter* ft = (Fighter*)fighter_gobj->user_data;
-    if(func_8026B2B4(ft->x1974_heldItem) == 0)
-    {
-        func_80070C48(fighter_gobj, 1);
-    }
+    Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-// func_800E2A58
+// ftCFalcon_OnItemDrop
 // Used for both OnItemRelease and OnUnknownItemRelated
 // https://decomp.me/scratch/PCT5B
-void func_800E2A58(HSD_GObj* fighter_gobj, s32 unk1)
+void ftCFalcon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    func_80070FB4(fighter_gobj, 1, -1);//Fighter_SetHoldKind
-    if(unk1 != 0)
-    {
-        func_80070CC4(fighter_gobj, 1);//Fighter_ApplyHandAnim
-    }
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 // ftCaptain_OnLoadForGanon

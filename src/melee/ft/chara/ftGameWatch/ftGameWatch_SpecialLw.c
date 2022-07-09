@@ -144,7 +144,7 @@ inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
 
 // 0x8014CEF0
 // https://decomp.me/scratch/P6t9i // Mr. Game & Watch's Oil Panic Start Action State handler
-void ftGameWatch_SpecialLw_Action(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -161,7 +161,7 @@ void ftGameWatch_SpecialLw_Action(HSD_GObj* fighter_gobj)
 
 // 0x8014CF78
 // https://decomp.me/scratch/NxM32
-void ftGameWatch_SpecialAirLw_Action(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialLwAir_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;

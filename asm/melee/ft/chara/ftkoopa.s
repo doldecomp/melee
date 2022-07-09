@@ -996,8 +996,8 @@ lbl_801345D8:
 /* 80134604 001311E4  7C 08 03 A6 */	mtlr r0
 /* 80134608 001311E8  4E 80 00 20 */	blr 
 
-.global func_8013460C
-func_8013460C:
+.global ftKoopa_SpecialLw_StartAction
+ftKoopa_SpecialLw_StartAction:
 /* 8013460C 001311EC  7C 08 02 A6 */	mflr r0
 /* 80134610 001311F0  90 01 00 04 */	stw r0, 4(r1)
 /* 80134614 001311F4  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1037,8 +1037,8 @@ func_8013460C:
 /* 8013469C 0013127C  7C 08 03 A6 */	mtlr r0
 /* 801346A0 00131280  4E 80 00 20 */	blr 
 
-.global func_801346A4
-func_801346A4:
+.global ftKoopa_SpecialLwAir_StartAction
+ftKoopa_SpecialLwAir_StartAction:
 /* 801346A4 00131284  7C 08 02 A6 */	mflr r0
 /* 801346A8 00131288  38 80 01 6A */	li r4, 0x16a
 /* 801346AC 0013128C  90 01 00 04 */	stw r0, 4(r1)
@@ -1600,8 +1600,8 @@ lbl_80134E50:
 /* 80134E50 00131A30  38 21 00 20 */	addi r1, r1, 0x20
 /* 80134E54 00131A34  4E 80 00 20 */	blr 
 
-.global func_80134E58
-func_80134E58:
+.global ftKoopa_SpecialN_StartAction
+ftKoopa_SpecialN_StartAction:
 /* 80134E58 00131A38  7C 08 02 A6 */	mflr r0
 /* 80134E5C 00131A3C  38 80 01 55 */	li r4, 0x155
 /* 80134E60 00131A40  90 01 00 04 */	stw r0, 4(r1)
@@ -1633,8 +1633,8 @@ func_80134E58:
 /* 80134EC8 00131AA8  7C 08 03 A6 */	mtlr r0
 /* 80134ECC 00131AAC  4E 80 00 20 */	blr 
 
-.global func_80134ED0
-func_80134ED0:
+.global ftKoopa_SpecialNAir_StartAction
+ftKoopa_SpecialNAir_StartAction:
 /* 80134ED0 00131AB0  7C 08 02 A6 */	mflr r0
 /* 80134ED4 00131AB4  38 80 01 58 */	li r4, 0x158
 /* 80134ED8 00131AB8  90 01 00 04 */	stw r0, 4(r1)
@@ -2448,8 +2448,8 @@ lbl_80135A14:
 /* 80135A24 00132604  7C 08 03 A6 */	mtlr r0
 /* 80135A28 00132608  4E 80 00 20 */	blr 
 
-.global func_80135A2C
-func_80135A2C:
+.global ftKoopa_SpecialHi_StartAction
+ftKoopa_SpecialHi_StartAction:
 /* 80135A2C 0013260C  7C 08 02 A6 */	mflr r0
 /* 80135A30 00132610  38 80 01 67 */	li r4, 0x167
 /* 80135A34 00132614  90 01 00 04 */	stw r0, 4(r1)
@@ -2505,8 +2505,8 @@ func_80135A2C:
 /* 80135AFC 001326DC  7C 08 03 A6 */	mtlr r0
 /* 80135B00 001326E0  4E 80 00 20 */	blr 
 
-.global func_80135B04
-func_80135B04:
+.global ftKoopa_SpecialHiAir_StartAction
+ftKoopa_SpecialHiAir_StartAction:
 /* 80135B04 001326E4  7C 08 02 A6 */	mflr r0
 /* 80135B08 001326E8  38 80 01 68 */	li r4, 0x168
 /* 80135B0C 001326EC  90 01 00 04 */	stw r0, 4(r1)
@@ -3022,8 +3022,8 @@ lbl_8013623C:
 
 .section .data
     .balign 8
-.global lbl_803CEDC0
-lbl_803CEDC0:
+.global as_table_koopa
+as_table_koopa:
     .4byte 0x00000127
     .4byte 0x00340011
     .4byte 0x12000000

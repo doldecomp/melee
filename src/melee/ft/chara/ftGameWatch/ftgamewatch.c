@@ -97,54 +97,17 @@ void ftGameWatch_8014A538(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftGameWatch_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
-{
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) 
-    {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) 
-        {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
-
-        if (arg1 != 0) 
-        {
-            func_80070C48(gobj, 1);
-        }
-    }
+void ftGameWatch_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-// 0x8014A698
-// https://decomp.me/scratch/2padD // Make held item invisible (temporarily overrides picked up item's hand held animation, mainly for fighter-exclusive held items)
-void func_8014A698(HSD_GObj* fighter_gobj)
-{
-    Fighter* fp = getFighter(fighter_gobj);
-
-    if (func_8026B2B4(fp->x1974_heldItem) == 0)
-    {
-        func_80070CC4(fighter_gobj, 1);
-    }
+void ftGameWatch_OnItemInvisible(HSD_GObj* gobj) {
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
 // 0x8014A6E0
 // https://decomp.me/scratch/ibIxi // Make held item visible (restores picked up item's hand held animation)
-void func_8014A6E0(HSD_GObj* fighter_gobj)
+void ftGameWatch_OnItemVisible(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -156,7 +119,7 @@ void func_8014A6E0(HSD_GObj* fighter_gobj)
 
 // 0x8014A728
 // https://decomp.me/scratch/LR8f5 // OnDropItem callback
-void func_8014A728(HSD_GObj* fighter_gobj, s32 dropItemFlag)
+void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, s32 dropItemFlag)
 {
     func_80070FB4(fighter_gobj, 1, -1);
     if (dropItemFlag != 0)

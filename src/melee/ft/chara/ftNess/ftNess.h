@@ -137,13 +137,13 @@ void ftNess_OnLoad(HSD_GObj* gobj);
 void ftNess_OnDamage(HSD_GObj* gobj);
 void ftNess_OnAbsorb(HSD_GObj* gobj);
 f32 ftNess_GetAbsorbHeal(Fighter* ft);
-void ftNess_OnItemPickup(HSD_GObj* gobj, s32 catchItemFlag);
-void ftNess_StoreHeldItem(HSD_GObj* gobj);
-void ftNess_RestoreHeldItem(HSD_GObj* gobj);
-void ftNess_OnDropItem(HSD_GObj* gobj, s32 dropItemFlag);
+void ftNess_OnItemPickup(HSD_GObj* gobj, BOOL catchItemFlag);
+void ftNess_OnItemInvisible(HSD_GObj* gobj);
+void ftNess_OnItemVisible(HSD_GObj* gobj);
+void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag);
 void ftNess_CopySpecialAttrs(HSD_GObj* gobj);
-void ftNess_ToggleHurtMatAnims(HSD_GObj* gobj);
-void ftNess_ToggleNormalMatAnims(HSD_GObj* gobj);
+void ftNess_OnKnockbackEnter(HSD_GObj* gobj);
+void ftNess_OnKnockbackExit(HSD_GObj* gobj);
 
 // Forward Smash (AttackS4) //
 
@@ -224,7 +224,7 @@ void ftNess_AttackLw4_Release_Action(HSD_GObj* gobj);
 // PK Fire callbacks (SpecialS) //
 
 void ftNess_ItemPKFireSpawn(HSD_GObj* gobj);
-void ftNess_SpecialS_Action(HSD_GObj* gobj);
+void ftNess_SpecialS_StartAction(HSD_GObj* gobj);
 void ftNess_SpecialAirS_Action(HSD_GObj* gobj);
 void ftNess_SpecialS_Anim(HSD_GObj* gobj);
 void ftNess_SpecialAirS_Anim(HSD_GObj* gobj);
@@ -274,7 +274,7 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* gobj);
 void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj);
 void ftNess_ItemPKThunderCheckOwn(HSD_GObj* gobj, HSD_GObj* gobj2);
 void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* gobj, CollData* coll_data);
-void ftNess_SpecialHiStart_Action(HSD_GObj* gobj);
+void ftNess_SpecialHi_StartAction(HSD_GObj* gobj);
 void ftNess_SpecialAirHiStart_Action(HSD_GObj* gobj);
 void ftNess_SpecialHi_Action(HSD_GObj* gobj);
 void ftNess_SpecialAirHi_Action(HSD_GObj* gobj);

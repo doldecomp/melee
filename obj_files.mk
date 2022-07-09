@@ -475,8 +475,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/controller.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/rumble.c.o			\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/spline.s.o	\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/mtx.s.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/util.s.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/mtx.c.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/util.c.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/objalloc.c.o  	\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/objalloc.s.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/robj.c.o		\
@@ -509,7 +509,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjplink.s.o			\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjgxlink.c.o		\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjgxlink.s.o		\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjobject.s.o		\
+	$(BUILD_DIR)/src/sysdolphin/baselib/gobjobject.c.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjuserdata.c.o		\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobj.c.o	    \
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobj.s.o	    \

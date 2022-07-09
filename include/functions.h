@@ -2807,7 +2807,7 @@ void func_800E5EBC(struct _HSD_GObj*);
 // ? func_800EACD8(?);
 // ? func_800EAD64(?);
 // ? ftLink_OnLoadForCLink(?);
-void func_800EB11C(HSD_GObj*, int);
+// void ftLink_OnItemPickup(HSD_GObj*, int);
 // ? func_800EB1FC(?);
 // ? func_800EB250(?);
 // ? func_800EB3BC(?);
@@ -3132,7 +3132,7 @@ void ftNess_SpecialHiTakeDamage(struct _HSD_GObj*);
 // ? func_8011EB58(?);
 // ? func_8011EBC0(?);
 // ? func_8011EC30(?);
-// ? ftIcelimber_OnLoadForNana(?);
+// ? ftIceClimber_OnLoadForNana(?);
 // ? func_8011F16C(?);
 // ? func_8011F190(?);
 // ? func_8011F68C(?);
@@ -3162,7 +3162,7 @@ void ftNess_SpecialHiTakeDamage(struct _HSD_GObj*);
 // ? func_801227AC(?);
 // ? func_8012280C(?);
 // ? func_80122898(?);
-// ? func_80122904(?);
+// ? ftIceClimber_SpecialLw_StartAction(?);
 // ? func_8012300C(?);
 // ? func_8012309C(?);
 // ? func_801230D0(?);
@@ -3385,7 +3385,7 @@ void func_801364E8(struct _HSD_GObj*);
 // ? func_80146FA8(?);
 // ? func_801471C8(?);
 // ? func_80148B78(?);
-// ? func_80148F38(?);
+// ? ftCLink_OnItemPickup(?);
 // ? func_80149018(?);
 // ? func_8014919C(?);
 // ? func_8014920C(?);
@@ -7827,17 +7827,17 @@ void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSr
 // ? func_80341878(?);
 // ? func_803418FC(?);
 // ? func_80342194(?);
-// ? PSMTXIdentity(?);
-// ? PSMTXCopy(?);
-void PSMTXConcat(Mtx*, Mtx*, Mtx*); // asm/dolphin/mtx/mtx.s
-// ? PSMTXTranspose(?);
-// ? PSMTXInverse(?);
-// ? PSMTXRotRad(?);
-// ? PSMTXRotTrig(?);
-// ? PSMTXRotAxisRad(?);
-// ? PSMTXTrans(?);
-// ? PSMTXScale(?);
-// ? PSMTXQuat(?);
+void PSMTXIdentity(Mtx m); // asm/dolphin/mtx/mtx.s
+void PSMTXCopy(Mtx src, Mtx dst); // asm/dolphin/mtx/mtx.s
+void PSMTXConcat(Mtx, Mtx, Mtx); // asm/dolphin/mtx/mtx.s
+void PSMTXTranspose(Mtx src, Mtx xPose); // asm/dolphin/mtx/mtx.s
+u32 PSMTXInverse(const Mtx src, Mtx inv); // asm/dolphin/mtx/mtx.s
+void PSMTXRotRad(Mtx m, u8 axis, f32 rad); // asm/dolphin/mtx/mtx.s
+void PSMTXRotTrig(Mtx m, u8 axis, f32 sin, f32 cos); // asm/dolphin/mtx/mtx.s
+void PSMTXRotAxisRad(Mtx m, const Vec* axis, f32 rad); // asm/dolphin/mtx/mtx.s
+void PSMTXTrans(Mtx m, f32 x_trans, f32 y_trans, f32 z_trans); // asm/dolphin/mtx/mtx.s
+void PSMTXScale(Mtx m, f32 x_scale, f32 y_scale, f32 z_scale); // asm/dolphin/mtx/mtx.s
+void PSMTXQuat(Mtx m, const Quaternion* q); // asm/dolphin/mtx/mtx.s
 // ? C_MTXLookAt(?);
 // ? C_MTXLightFrustum(?);
 // ? C_MTXLightPerspective(?);
@@ -7848,12 +7848,12 @@ void PSMTXMUltiVec(Mtx, Vec*, Vec*);
 // ? C_MTXPerspective(?);
 // ? C_MTXOrtho(?);
 void PSVECAdd(Vec* a, Vec* b, Vec* result); // asm/dolphin/mtx/vec.s
-// ? PSVECSubtract(?);
-// ? PSVECScale(?);
-// ? PSVECNormalize(?);
-// ? PSVECMag(?);
-// ? PSVECDotProduct(?);
-// ? PSVECCrossProduct(?);
+void PSVECSubtract(Vec* a, Vec* b, Vec* result); // asm/dolphin/mtx/vec.s
+void PSVECScale(Vec* src, Vec* dst, f32 scale); // asm/dolphin/mtx/vec.s
+void PSVECNormalize(Vec* src, Vec* unit); // asm/dolphin/mtx/vec.s
+f32 PSVECMag(Vec* v); // asm/dolphin/mtx/vec.s
+f32 PSVECDotProduct(Vec* a, Vec* b); // asm/dolphin/mtx/vec.s
+void PSVECCrossProduct(Vec* a, Vec* b, Vec* result); // asm/dolphin/mtx/vec.s
 // ? OSGetConsoleType(?);
 // ? ClearArena(?);
 // ? OSInit(?);
@@ -8917,7 +8917,7 @@ void func_80390228(struct _HSD_GObj*);
 // ? func_80390908(?);
 // ? func_803909D8(?);
 // ? func_80390A3C(?);
-void func_80390A70();
+void func_80390A70(struct _HSD_GObj*, u8, void*);
 // ? func_80390ADC(?);
 // ? func_80390B0C(?);
 // ? GObj_InitUserData(?);

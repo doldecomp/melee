@@ -2,7 +2,7 @@
 
 // 801389CC 001355AC
 // https://decomp.me/scratch/r3Of5
-void func_801389CC(HSD_GObj* gobj) {
+void ftMars_SpecialLw_StartAction(HSD_GObj* gobj) {
     Fighter* ft;
     u32 unused[2];
 
@@ -16,7 +16,7 @@ void func_801389CC(HSD_GObj* gobj) {
 
 // 80138A30 00135610
 // https://decomp.me/scratch/dhCgH
-void func_80138A30(HSD_GObj* gobj) {
+void ftMars_SpecialLwAir_StartAction(HSD_GObj* gobj) {
     Fighter* ft;
     Fighter* ft2;
     MarsAttributes* attr;

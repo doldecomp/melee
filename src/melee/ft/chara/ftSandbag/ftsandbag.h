@@ -15,7 +15,7 @@ void func_8014FA30(Fighter* fighter);
 u32 func_8014FB78(HSD_GObj* gobj);
 
 void ftSandbag_OnKnockbackEnter(void);
-void func_8014FBA0(void);
+void ftSandbag_OnKnockbackExit(void);
 
 void func_8014FBA4(HSD_GObj* gobj);
 

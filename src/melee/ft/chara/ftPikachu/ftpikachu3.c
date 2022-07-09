@@ -1,6 +1,6 @@
 #include "ftpikachu.h"
 
-void ftPikachu_ActionChange_80124E38(HSD_GObj* fighterObj) {
+void ftPikachu_SpecialS_StartAction(HSD_GObj* fighterObj) {
     s32 unused[2];
     Fighter* fighter = fighterObj->user_data;
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
@@ -12,7 +12,7 @@ void ftPikachu_ActionChange_80124E38(HSD_GObj* fighterObj) {
     func_8006EBA4(fighterObj);
 }
 
-void ftPikachu_ActionChange_80124EAC(HSD_GObj* fighterObj) {
+void ftPikachu_SpecialSAir_StartAction(HSD_GObj* fighterObj) {
     s32 unused[2];
     Fighter* fighter = fighterObj->user_data;
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;

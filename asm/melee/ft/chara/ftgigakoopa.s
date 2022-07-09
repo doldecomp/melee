@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D35E8
-lbl_803D35E8:
+.global as_table_gkoopa
+as_table_gkoopa:
     .4byte 0x00000127
     .4byte 0x00340011
     .4byte 0x12000000

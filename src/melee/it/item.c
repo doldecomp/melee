@@ -815,7 +815,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
 }
 
 extern HSD_JObj* HSD_JObjAlloc();                              /* extern */
-extern void PSMTXIdentity(Mtx*);                               /* extern */
+extern void PSMTXIdentity(Mtx);                               /* extern */
 extern u8 lbl_804D7849;
 
 // 0x802680CC //
@@ -835,7 +835,7 @@ void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj //
         return;
     }
     jobj = HSD_JObjAlloc();
-    PSMTXIdentity(&jobj->mtx);
+    PSMTXIdentity(jobj->mtx);
     jobj->scl = 0;
     func_80390A70(item_gobj, lbl_804D7849, jobj);
 }
@@ -1124,7 +1124,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
         temp_r4 -= It_Kind_Kuriboh;
         GObj_SetupGXLink(temp_r3, lbl_803F2F28[temp_r4].x0_renderFunc, 6U, 0U);
     }
-    else if (temp_r4 < It_Kind_Old_Kuri) // Check if item is a Pokémon //
+    else if (temp_r4 < It_Kind_Old_Kuri) // Check if item is a PokÃ©mon //
     {
         temp_r4 -= Pokemon_Tosakinto;
         GObj_SetupGXLink(temp_r3, lbl_803F2310[temp_r4].x0_renderFunc, 6U, 0U);
@@ -1152,7 +1152,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
     else
     {
         temp_r29 = HSD_JObjAlloc();
-        PSMTXIdentity(&temp_r29->mtx);
+        PSMTXIdentity(temp_r29->mtx);
         temp_r29->scl = 0;
         func_80390A70(temp_r3, lbl_804D7849, temp_r29);
     }

@@ -2,7 +2,7 @@
 
 // 8013741C 00133FFC
 // https://decomp.me/scratch/DLE90
-void func_8013741C(HSD_GObj* gobj) {
+void ftMars_SpecialS_StartAction(HSD_GObj* gobj) {
     Fighter* ft;
     s32 thing;
     s32 unused1, unused2, unused3, unused4;
@@ -25,7 +25,7 @@ void func_8013741C(HSD_GObj* gobj) {
 
 // 801374A0 00134080
 // https://decomp.me/scratch/vI96P
-void func_801374A0(HSD_GObj* gobj) {
+void ftMars_SpecialSAir_StartAction(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     Fighter* ft2;
     MarsAttributes* attr = ft->x2D4_specialAttributes;
