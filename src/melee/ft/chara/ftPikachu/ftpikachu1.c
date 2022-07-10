@@ -63,12 +63,10 @@ void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighterObj) {
 }
 
 void ftPikachu_OnKnockbackEnter(HSD_GObj* fighterObj) {
-    func_800704F0(fighterObj, 1, 3.0f);
-    func_800704F0(fighterObj, 0, 3.0f);
+    Fighter_OnKnockbackEnter(fighterObj, 1);
 }
 
 
 void ftPikachu_OnKnockbackExit(HSD_GObj* fighterObj) {
-    func_800704F0(fighterObj, 1, 0.0f);
-    func_800704F0(fighterObj, 0, 0.0f);
+    Fighter_OnKnockbackExit(fighterObj, 1);
 }

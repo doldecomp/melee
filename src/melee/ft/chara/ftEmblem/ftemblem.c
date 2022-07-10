@@ -40,12 +40,10 @@ void ftRoy_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftRoy_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    func_800704F0(gobj, 1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 void ftRoy_OnKnockbackExit(HSD_GObj* gobj)
 {
-    func_800704F0(gobj, 1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+    Fighter_OnKnockbackExit(gobj, 1);
 }

@@ -2,78 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftLuigi_OnKnockbackEnter
-ftLuigi_OnKnockbackEnter:
-/* 80142584 0013F164  7C 08 02 A6 */	mflr r0
-/* 80142588 0013F168  38 80 00 01 */	li r4, 1
-/* 8014258C 0013F16C  90 01 00 04 */	stw r0, 4(r1)
-/* 80142590 0013F170  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80142594 0013F174  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80142598 0013F178  7C 7F 1B 78 */	mr r31, r3
-/* 8014259C 0013F17C  C0 22 A2 B8 */	lfs f1, lbl_804D9C98@sda21(r2)
-/* 801425A0 0013F180  4B F2 DF 51 */	bl func_800704F0
-/* 801425A4 0013F184  C0 22 A2 B8 */	lfs f1, lbl_804D9C98@sda21(r2)
-/* 801425A8 0013F188  38 7F 00 00 */	addi r3, r31, 0
-/* 801425AC 0013F18C  38 80 00 00 */	li r4, 0
-/* 801425B0 0013F190  4B F2 DF 41 */	bl func_800704F0
-/* 801425B4 0013F194  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 801425B8 0013F198  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 801425BC 0013F19C  38 21 00 18 */	addi r1, r1, 0x18
-/* 801425C0 0013F1A0  7C 08 03 A6 */	mtlr r0
-/* 801425C4 0013F1A4  4E 80 00 20 */	blr 
-
-.global ftLuigi_OnKnockbackExit
-ftLuigi_OnKnockbackExit:
-/* 801425C8 0013F1A8  7C 08 02 A6 */	mflr r0
-/* 801425CC 0013F1AC  38 80 00 01 */	li r4, 1
-/* 801425D0 0013F1B0  90 01 00 04 */	stw r0, 4(r1)
-/* 801425D4 0013F1B4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 801425D8 0013F1B8  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 801425DC 0013F1BC  7C 7F 1B 78 */	mr r31, r3
-/* 801425E0 0013F1C0  C0 22 A2 BC */	lfs f1, lbl_804D9C9C@sda21(r2)
-/* 801425E4 0013F1C4  4B F2 DF 0D */	bl func_800704F0
-/* 801425E8 0013F1C8  C0 22 A2 BC */	lfs f1, lbl_804D9C9C@sda21(r2)
-/* 801425EC 0013F1CC  38 7F 00 00 */	addi r3, r31, 0
-/* 801425F0 0013F1D0  38 80 00 00 */	li r4, 0
-/* 801425F4 0013F1D4  4B F2 DE FD */	bl func_800704F0
-/* 801425F8 0013F1D8  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 801425FC 0013F1DC  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80142600 0013F1E0  38 21 00 18 */	addi r1, r1, 0x18
-/* 80142604 0013F1E4  7C 08 03 A6 */	mtlr r0
-/* 80142608 0013F1E8  4E 80 00 20 */	blr 
-
-/*
-https://decomp.me/scratch/ZDYE2
-void func_8014260C(s32 arg0, s32* arg1, s32* arg2)
-{
-    if (arg0 != 0xA) {
-        if (arg0 < 0xA && arg0 >= 9) {
-            *arg2 = 0xE;
-            *arg1 = 0xE;
-        }
-    } else {
-        *arg2 = 0xF;
-        *arg1 = 0xF;
-    }
-}
-*/
-.global func_8014260C
-func_8014260C:
-/* 8014260C 0013F1EC  2C 03 00 0A */	cmpwi r3, 0xa
-/* 80142610 0013F1F0  41 82 00 20 */	beq lbl_80142630
-/* 80142614 0013F1F4  4C 80 00 20 */	bgelr 
-/* 80142618 0013F1F8  2C 03 00 09 */	cmpwi r3, 9
-/* 8014261C 0013F1FC  4D 80 00 20 */	bltlr 
-/* 80142620 0013F200  38 00 00 0E */	li r0, 0xe
-/* 80142624 0013F204  90 05 00 00 */	stw r0, 0(r5)
-/* 80142628 0013F208  90 04 00 00 */	stw r0, 0(r4)
-/* 8014262C 0013F20C  4E 80 00 20 */	blr 
-lbl_80142630:
-/* 80142630 0013F210  38 00 00 0F */	li r0, 0xf
-/* 80142634 0013F214  90 05 00 00 */	stw r0, 0(r5)
-/* 80142638 0013F218  90 04 00 00 */	stw r0, 0(r4)
-/* 8014263C 0013F21C  4E 80 00 20 */	blr 
-
 .global func_80142640
 func_80142640:
 /* 80142640 0013F220  2C 03 00 0A */	cmpwi r3, 0xa
@@ -3257,12 +3185,6 @@ lbl_803D0AE8:
 
 .section .sdata2
     .balign 8
-.global lbl_804D9C98
-lbl_804D9C98:
-	.4byte 0x40400000
-.global lbl_804D9C9C
-lbl_804D9C9C:
-	.4byte 0x00000000
 .global lbl_804D9CA0
 lbl_804D9CA0:
 	.4byte 0x00000000

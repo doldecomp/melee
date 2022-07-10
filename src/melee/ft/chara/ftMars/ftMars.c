@@ -59,15 +59,13 @@ void ftMars_LoadSpecialAttrs(HSD_GObj* gobj) {
 // ftMars_OnKnockbackEnter
 // https://decomp.me/scratch/rgfFA
 void ftMars_OnKnockbackEnter(HSD_GObj* gobj) {
-    func_800704F0(gobj, 1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 // 80136564 00133144
 // https://decomp.me/scratch/Jqd2A
 void ftMars_OnKnockbackExit(HSD_GObj* gobj) {
-    func_800704F0(gobj, 1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 // 801365A8 00133188

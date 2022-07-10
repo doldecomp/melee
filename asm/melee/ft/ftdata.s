@@ -1283,7 +1283,7 @@ ft_SpecialAirN:
     .4byte ftPeach_SpecialAirN_StartAction
     .4byte ftIceClimber_SpecialAirN_StartAction
     .4byte ftIceClimber_SpecialAirN_StartAction
-    .4byte ftPikachu_ActionChange_8012489C
+    .4byte ftPikachu_SpecialAirN_StartAction
     .4byte ftSamus_SpecialAirN_StartAction
     .4byte ftYoshi_SpecialAirN_StartAction
     .4byte ftPurin_SpecialAirN_StartAction
@@ -1294,7 +1294,7 @@ ft_SpecialAirN:
     .4byte ftLink_SpecialAirN_StartAction
     .4byte ftMario_SpecialAirN_StartAction
     .4byte ftFox_SpecialAirN_StartAction
-    .4byte ftPikachu_ActionChange_8012489C
+    .4byte ftPikachu_SpecialAirN_StartAction
     .4byte ftGameWatch_SpecialAirN_StartAction
     .4byte ftCFalcon_SpecialAirN_StartAction
     .4byte ftMars_SpecialAirN_StartAction
@@ -1759,7 +1759,7 @@ ft_OnKnockbackEnter:
     .4byte NULL
     .4byte ftYoshi_OnKnockbackEnter
     .4byte ftPurin_OnKnockbackEnter
-    .4byte ftMewtwo_OnKnockbackEnter
+    .4byte ftMewTwo_OnKnockbackEnter
     .4byte ftLuigi_OnKnockbackEnter
     .4byte ftMars_OnKnockbackEnter
     .4byte ftZelda_OnKnockbackEnter
@@ -1795,7 +1795,7 @@ ft_OnKnockbackExit:
     .4byte NULL
     .4byte ftYoshi_OnKnockbackExit
     .4byte ftPurin_OnKnockbackExit
-    .4byte ftMewtwo_OnKnockbackExit
+    .4byte ftMewTwo_OnKnockbackExit
     .4byte ftLuigi_OnKnockbackExit
     .4byte ftMars_OnKnockbackExit
     .4byte ftZelda_OnKnockbackExit
@@ -2375,7 +2375,7 @@ lbl_803C2570:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8014260C
+    .4byte ftLuigi_8014260C
     .4byte NULL
     .4byte NULL
     .4byte NULL

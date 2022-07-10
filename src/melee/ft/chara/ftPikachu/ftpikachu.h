@@ -82,7 +82,7 @@ void ftPikachu_OnKnockbackExit(HSD_GObj* fighterObj);
 
 ///pika2
 void ftPikachu_SpecialN_StartAction(HSD_GObj* fighterObj);
-void ftPikachu_ActionChange_8012489C(HSD_GObj* fighterObj);
+void ftPikachu_SpecialAirN_StartAction(HSD_GObj* fighterObj);
 void ftPikachu_80124908(HSD_GObj* fighterObj);
 void ftPikachu_80124A20(HSD_GObj* fighterObj);
 void ftPikachu_Stub_80124B6C();

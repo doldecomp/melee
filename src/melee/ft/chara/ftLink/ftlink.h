@@ -21,7 +21,7 @@ typedef struct _ftLinkAttributes {
     u8 x58_filler[0xBC - 0x58];
     s32 xBC;
     u8 xC0_filler[0xD8 - 0xC0];
-    s32 xD8;
+    f32 xD8;
 } ftLinkAttributes;
 
 void ftLink_OnItemDrop(HSD_GObj* fighterObj, BOOL arg1);

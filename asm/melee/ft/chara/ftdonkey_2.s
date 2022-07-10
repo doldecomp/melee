@@ -2,45 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftDonkey_OnKnockbackEnter
-ftDonkey_OnKnockbackEnter:
-/* 8010DAB4 0010A694  7C 08 02 A6 */	mflr r0
-/* 8010DAB8 0010A698  38 80 00 01 */	li r4, 1
-/* 8010DABC 0010A69C  90 01 00 04 */	stw r0, 4(r1)
-/* 8010DAC0 0010A6A0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8010DAC4 0010A6A4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8010DAC8 0010A6A8  7C 7F 1B 78 */	mr r31, r3
-/* 8010DACC 0010A6AC  C0 22 9B D0 */	lfs f1, lbl_804D95B0@sda21(r2)
-/* 8010DAD0 0010A6B0  4B F6 2A 21 */	bl func_800704F0
-/* 8010DAD4 0010A6B4  C0 22 9B D0 */	lfs f1, lbl_804D95B0@sda21(r2)
-/* 8010DAD8 0010A6B8  38 7F 00 00 */	addi r3, r31, 0
-/* 8010DADC 0010A6BC  38 80 00 00 */	li r4, 0
-/* 8010DAE0 0010A6C0  4B F6 2A 11 */	bl func_800704F0
-/* 8010DAE4 0010A6C4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8010DAE8 0010A6C8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8010DAEC 0010A6CC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8010DAF0 0010A6D0  7C 08 03 A6 */	mtlr r0
-/* 8010DAF4 0010A6D4  4E 80 00 20 */	blr 
 
-.global ftDonkey_OnKnockbackExit
-ftDonkey_OnKnockbackExit:
-/* 8010DAF8 0010A6D8  7C 08 02 A6 */	mflr r0
-/* 8010DAFC 0010A6DC  38 80 00 01 */	li r4, 1
-/* 8010DB00 0010A6E0  90 01 00 04 */	stw r0, 4(r1)
-/* 8010DB04 0010A6E4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8010DB08 0010A6E8  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8010DB0C 0010A6EC  7C 7F 1B 78 */	mr r31, r3
-/* 8010DB10 0010A6F0  C0 22 9B D4 */	lfs f1, lbl_804D95B4@sda21(r2)
-/* 8010DB14 0010A6F4  4B F6 29 DD */	bl func_800704F0
-/* 8010DB18 0010A6F8  C0 22 9B D4 */	lfs f1, lbl_804D95B4@sda21(r2)
-/* 8010DB1C 0010A6FC  38 7F 00 00 */	addi r3, r31, 0
-/* 8010DB20 0010A700  38 80 00 00 */	li r4, 0
-/* 8010DB24 0010A704  4B F6 29 CD */	bl func_800704F0
-/* 8010DB28 0010A708  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8010DB2C 0010A70C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8010DB30 0010A710  38 21 00 18 */	addi r1, r1, 0x18
-/* 8010DB34 0010A714  7C 08 03 A6 */	mtlr r0
-/* 8010DB38 0010A718  4E 80 00 20 */	blr 
 lbl_8010DB3C:
 /* 8010DB3C 0010A71C  7C 08 02 A6 */	mflr r0
 /* 8010DB40 0010A720  90 01 00 04 */	stw r0, 4(r1)
@@ -3228,13 +3190,6 @@ lbl_803CC020:
 
 
 .section .sdata2
-    .balign 8
-.global lbl_804D95B0
-lbl_804D95B0:
-	.4byte 0x40400000
-.global lbl_804D95B4
-lbl_804D95B4:
-	.4byte 0x00000000
 .global lbl_804D95B8
 lbl_804D95B8:
 	.4byte 0x3FC00000

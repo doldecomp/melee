@@ -27,10 +27,32 @@ void ftLuigi_OnItemVisible(HSD_GObj* fighterObj) {
     Fighter_OnItemVisible(fighterObj, 1);
 }
 
-void ftLuigi_OnItemDrop(HSD_GObj* gobj, BOOL bool1) {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+void ftLuigi_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
 }
 
-void ftLuigi_LoadSpecialAttrs(HSD_GObj* gobj) {
-    COPY_ATTRS(gobj, ftLuigiAttributes);
+void ftLuigi_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftLuigiAttributes);
+}
+
+
+void ftLuigi_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftLuigi_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+}
+
+void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2)
+{
+    if (arg0 != 0xA) {
+        if (arg0 < 0xA && arg0 >= 9) {
+            *arg2 = 0xE;
+            *arg1 = 0xE;
+        }
+    } else {
+        *arg2 = 0xF;
+        *arg1 = 0xF;
+    }
 }

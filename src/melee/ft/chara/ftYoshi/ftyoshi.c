@@ -1,10 +1,6 @@
 #include "ftyoshi.h"
 
 
-/// TODO remove these
-extern f32 lbl_804D9A18;
-extern f32 lbl_804D9A1C;
-
 ///https://decomp.me/scratch/ufrFK
 void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg) {
 
@@ -20,7 +16,7 @@ void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg) {
     attr_r26 = fighter->x10C_ftData->ext_attr;
     index = (unk_struct1 = unk_struct_arg)->unk_struct->xC_start_index;
     ptr2EndIndex = (s32 *) (&unk_struct1->unk_struct->x8_end_index);
-    zero_float = lbl_804D9A18;
+    zero_float = 0.0f;
     
     for (i = 0; i < *ptr2EndIndex; i++) {
 
@@ -36,7 +32,7 @@ void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg) {
         }
 
         aobj_r24 = mobj_r3->aobj;
-        HSD_AObjSetRate(aobj_r24, lbl_804D9A18);
+        HSD_AObjSetRate(aobj_r24, 0.0f);
 
         if (zero_float == attr_r26->xC) {
             attr_r26->xC = HSD_AObjGetEndFrame(aobj_r24);
@@ -89,7 +85,7 @@ void func_8012B8A4(HSD_GObj* fighterObj) {
     s32 unused[4];
     Fighter* fighter = fighterObj->user_data;
     ftYoshiAttributes *attr = fighter->x2D4_specialAttributes;
-    f32 tempf = attr->xC * (lbl_804D9A1C - (fighter->x1998_shieldHealth / p_ftCommonData->x260_startShieldHealth));
+    f32 tempf = attr->xC * (1.0f - (fighter->x1998_shieldHealth / p_ftCommonData->x260_startShieldHealth));
     func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5B8, tempf);
     func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5BC, tempf);
 }
@@ -98,8 +94,8 @@ void func_8012B8A4(HSD_GObj* fighterObj) {
 void func_8012B918(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
 
-    func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5B8, lbl_804D9A18);
-    func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5BC, lbl_804D9A18);
+    func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5B8, 0.0f);
+    func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5BC, 0.0f);
 }
 
 void ftYoshi_OnDeath(HSD_GObj* fighterObj) {
@@ -132,7 +128,7 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
         __assert("ftyoshi.c", 0x71U, "0");
     }
 
-    other_attr->xC = lbl_804D9A18;
+    other_attr->xC = 0.0f;
     func_8012B6E8(fighter, temp_r27);
     func_8012B6E8(fighter, temp_r28);
     PUSH_ATTRS(fighter, ftYoshiAttributes);
@@ -171,4 +167,16 @@ void ftYoshi_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
 
 void ftYoshi_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftYoshiAttributes);
+}
+
+void ftYoshi_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+    ftAnim_ApplyPartAnim(fighterObj, 3, 3, 0.0f);
+    ftAnim_ApplyPartAnim(fighterObj, 4, 3, 0.0f); 
+}
+
+void ftYoshi_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+    ftAnim_ApplyPartAnim(fighterObj, 3, 2, 0.0f);
+    ftAnim_ApplyPartAnim(fighterObj, 4, 2, 0.0f); 
 }

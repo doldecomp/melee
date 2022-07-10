@@ -1,7 +1,5 @@
 #include "fticeclimber.h"
 
-/// TODO remove float externs when file is finished and float data is removed from asm
-extern f32 lbl_804D9830;
 
 void ftIceClimber_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
     Fighter_OnItemPickup(fighterObj, bool, 1, 1);
@@ -53,7 +51,7 @@ void ftIceClimber_OnDeath(HSD_GObj* fighterObj) {
     fighter->sa.nana.x2230.bits.b0 = 0;
     fighter->sa.nana.x2238 = 0;
     fighter->sa.nana.x224C = 0;
-    fighter->sa.nana.x2250 = lbl_804D9830;
+    fighter->sa.nana.x2250 = 0.0f;
 }
 
 void ftIceClimber_8011F060(HSD_GObj* fighterObj) {
@@ -65,4 +63,12 @@ void ftIceClimber_8011F060(HSD_GObj* fighterObj) {
 
 void ftIceClimber_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftIceClimberAttributes);
+}
+
+void ftIceClimber_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftIceClimber_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
 }
