@@ -946,7 +946,7 @@ void func_8008770C(HSD_GObj* gobj, void* dst)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
-        func_8014A7F4(gobj, dst);
+        ftGameWatch_8014A7F4(gobj, dst);
     } else {
         func_800EEB00(gobj, dst);
     }
@@ -956,7 +956,7 @@ void func_80087744(HSD_GObj* gobj, void* dst)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
-        func_8014A814(gobj, dst);
+        ftGameWatch_8014A814(gobj, dst);
     } else {
         func_800EEB1C(gobj, dst);
     }

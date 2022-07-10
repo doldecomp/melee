@@ -81,9 +81,9 @@ void ftCLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_8014906C(HSD_GObj* gobj)
+void ftCLink_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    func_800EB250(gobj);
+    ftLink_LoadSpecialAttrs(gobj);
 }
 
 void ftCLink_OnKnockbackEnter(HSD_GObj* gobj)

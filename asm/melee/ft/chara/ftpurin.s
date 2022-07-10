@@ -2,24 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8013C88C
-func_8013C88C:
-/* 8013C88C 0013946C  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8013C890 00139470  38 00 00 20 */	li r0, 0x20
-/* 8013C894 00139474  7C 09 03 A6 */	mtctr r0
-/* 8013C898 00139478  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 8013C89C 0013947C  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8013C8A0 00139480  80 84 00 04 */	lwz r4, 4(r4)
-/* 8013C8A4 00139484  38 A3 FF F8 */	addi r5, r3, -8
-/* 8013C8A8 00139488  38 84 FF F8 */	addi r4, r4, -8
-lbl_8013C8AC:
-/* 8013C8AC 0013948C  84 64 00 08 */	lwzu r3, 8(r4)
-/* 8013C8B0 00139490  80 04 00 04 */	lwz r0, 4(r4)
-/* 8013C8B4 00139494  94 65 00 08 */	stwu r3, 8(r5)
-/* 8013C8B8 00139498  90 05 00 04 */	stw r0, 4(r5)
-/* 8013C8BC 0013949C  42 00 FF F0 */	bdnz lbl_8013C8AC
-/* 8013C8C0 001394A0  4E 80 00 20 */	blr 
-
 .global ftPurin_OnKnockbackEnter
 ftPurin_OnKnockbackEnter:
 /* 8013C8C4 001394A4  7C 08 02 A6 */	mflr r0
@@ -152,8 +134,8 @@ lbl_8013CA84:
 /* 8013CA90 00139670  7C 08 03 A6 */	mtlr r0
 /* 8013CA94 00139674  4E 80 00 20 */	blr 
 
-.global ftPurin_SpecialHiAir_StartAction
-ftPurin_SpecialHiAir_StartAction:
+.global ftPurin_SpecialAirHi_StartAction
+ftPurin_SpecialAirHi_StartAction:
 /* 8013CA98 00139678  7C 08 02 A6 */	mflr r0
 /* 8013CA9C 0013967C  90 01 00 04 */	stw r0, 4(r1)
 /* 8013CAA0 00139680  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -491,8 +473,8 @@ lbl_8013CEF8:
 /* 8013CF24 00139B04  7C 08 03 A6 */	mtlr r0
 /* 8013CF28 00139B08  4E 80 00 20 */	blr 
 
-.global ftPurin_SpecialLwAir_StartAction
-ftPurin_SpecialLwAir_StartAction:
+.global ftPurin_SpecialAirLw_StartAction
+ftPurin_SpecialAirLw_StartAction:
 /* 8013CF2C 00139B0C  7C 08 02 A6 */	mflr r0
 /* 8013CF30 00139B10  90 01 00 04 */	stw r0, 4(r1)
 /* 8013CF34 00139B14  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -750,8 +732,8 @@ ftPurin_SpecialS_StartAction:
 /* 8013D298 00139E78  7C 08 03 A6 */	mtlr r0
 /* 8013D29C 00139E7C  4E 80 00 20 */	blr 
 
-.global ftPurin_SpecialSAir_StartAction
-ftPurin_SpecialSAir_StartAction:
+.global ftPurin_SpecialAirS_StartAction
+ftPurin_SpecialAirS_StartAction:
 /* 8013D2A0 00139E80  7C 08 02 A6 */	mflr r0
 /* 8013D2A4 00139E84  38 80 01 6C */	li r4, 0x16c
 /* 8013D2A8 00139E88  90 01 00 04 */	stw r0, 4(r1)
@@ -1676,8 +1658,8 @@ lbl_8013DEF0:
 /* 8013DF58 0013AB38  7C 08 03 A6 */	mtlr r0
 /* 8013DF5C 0013AB3C  4E 80 00 20 */	blr 
 
-.global ftPurin_SpecialNAir_StartAction
-ftPurin_SpecialNAir_StartAction:
+.global ftPurin_SpecialAirN_StartAction
+ftPurin_SpecialAirN_StartAction:
 /* 8013DF60 0013AB40  7C 08 02 A6 */	mflr r0
 /* 8013DF64 0013AB44  90 01 00 04 */	stw r0, 4(r1)
 /* 8013DF68 0013AB48  94 21 FF D0 */	stwu r1, -0x30(r1)

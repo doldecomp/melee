@@ -33,8 +33,7 @@ void ftZakoBoy_OnLoad(HSD_GObj* gobj)
 
 }
 
-void func_8014F3FC(HSD_GObj* gobj)
+void ftZakoBoy_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    *(u32*) ft->x2D4_specialAttributes = *(u32*)ft->x10C_ftData->ext_attr;
+    COPY_ATTRS(gobj, ftZakoboyAttributes);
 }

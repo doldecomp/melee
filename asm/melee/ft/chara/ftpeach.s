@@ -2,23 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8011B904
-func_8011B904:
-/* 8011B904 001184E4  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8011B908 001184E8  38 00 00 18 */	li r0, 0x18
-/* 8011B90C 001184EC  7C 09 03 A6 */	mtctr r0
-/* 8011B910 001184F0  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 8011B914 001184F4  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8011B918 001184F8  80 84 00 04 */	lwz r4, 4(r4)
-/* 8011B91C 001184FC  38 A3 FF F8 */	addi r5, r3, -8
-/* 8011B920 00118500  38 84 FF F8 */	addi r4, r4, -8
-lbl_8011B924:
-/* 8011B924 00118504  84 64 00 08 */	lwzu r3, 8(r4)
-/* 8011B928 00118508  80 04 00 04 */	lwz r0, 4(r4)
-/* 8011B92C 0011850C  94 65 00 08 */	stwu r3, 8(r5)
-/* 8011B930 00118510  90 05 00 04 */	stw r0, 4(r5)
-/* 8011B934 00118514  42 00 FF F0 */	bdnz lbl_8011B924
-/* 8011B938 00118518  4E 80 00 20 */	blr 
 
 .global func_8011B93C
 func_8011B93C:
@@ -805,8 +788,8 @@ ftPeach_SpecialS_StartAction:
 /* 8011C3BC 00118F9C  7C 08 03 A6 */	mtlr r0
 /* 8011C3C0 00118FA0  4E 80 00 20 */	blr 
 
-.global ftPeach_SpecialSAir_StartAction
-ftPeach_SpecialSAir_StartAction:
+.global ftPeach_SpecialAirS_StartAction
+ftPeach_SpecialAirS_StartAction:
 /* 8011C3C4 00118FA4  7C 08 02 A6 */	mflr r0
 /* 8011C3C8 00118FA8  38 80 01 65 */	li r4, 0x165
 /* 8011C3CC 00118FAC  90 01 00 04 */	stw r0, 4(r1)
@@ -1836,8 +1819,8 @@ lbl_8011D1AC:
 /* 8011D1BC 00119D9C  7C 08 03 A6 */	mtlr r0
 /* 8011D1C0 00119DA0  4E 80 00 20 */	blr 
 
-.global ftPeach_SpecialLwAir_StartAction
-ftPeach_SpecialLwAir_StartAction:
+.global ftPeach_SpecialAirLw_StartAction
+ftPeach_SpecialAirLw_StartAction:
 /* 8011D1C4 00119DA4  7C 08 02 A6 */	mflr r0
 /* 8011D1C8 00119DA8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D1CC 00119DAC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2282,8 +2265,8 @@ lbl_8011D7DC:
 /* 8011D7E8 0011A3C8  7C 08 03 A6 */	mtlr r0
 /* 8011D7EC 0011A3CC  4E 80 00 20 */	blr 
 
-.global ftPeach_SpecialHiAir_StartAction
-ftPeach_SpecialHiAir_StartAction:
+.global ftPeach_SpecialAirHi_StartAction
+ftPeach_SpecialAirHi_StartAction:
 /* 8011D7F0 0011A3D0  7C 08 02 A6 */	mflr r0
 /* 8011D7F4 0011A3D4  38 80 01 6B */	li r4, 0x16b
 /* 8011D7F8 0011A3D8  90 01 00 04 */	stw r0, 4(r1)
@@ -3197,8 +3180,8 @@ ftPeach_SpecialN_StartAction:
 /* 8011E454 0011B034  7C 08 03 A6 */	mtlr r0
 /* 8011E458 0011B038  4E 80 00 20 */	blr 
 
-.global ftPeach_SpecialNAir_StartAction
-ftPeach_SpecialNAir_StartAction:
+.global ftPeach_SpecialAirN_StartAction
+ftPeach_SpecialAirN_StartAction:
 /* 8011E45C 0011B03C  7C 08 02 A6 */	mflr r0
 /* 8011E460 0011B040  38 80 01 6F */	li r4, 0x16f
 /* 8011E464 0011B044  90 01 00 04 */	stw r0, 4(r1)

@@ -29,8 +29,7 @@ void ftZakoGirl_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
     Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }
 
-void func_8014F624(HSD_GObj* gobj)
+void ftZakoGirl_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    *(u32*) ft->x2D4_specialAttributes = *(u32*)ft->x10C_ftData->ext_attr;
+    COPY_ATTRS(gobj, s32);
 }

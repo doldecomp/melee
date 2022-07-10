@@ -31,3 +31,11 @@ void ftNana_OnDeath(HSD_GObj* fighterObj) {
     fighter->sa.nana.x224C = 0;
     fighter->sa.nana.x2250 = lbl_804D9898;
 }
+
+void ftNana_80122FAC(HSD_GObj* fighterObj) {
+    func_801238E4(fighterObj);
+}
+
+void ftNana_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftIceClimberAttributes);
+}

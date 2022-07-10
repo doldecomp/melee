@@ -74,12 +74,8 @@ void ftKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_80132D00(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    
-    ftKoopaAttributes* sA2 = (ftKoopaAttributes*)ft->x2D4_specialAttributes;
-    ftKoopaAttributes* ext_attr = (ftKoopaAttributes*)ft->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
+void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftKoopaAttributes);
 }
 
 void ftKoopa_OnKnockbackEnter(HSD_GObj *gobj) {
@@ -181,7 +177,7 @@ void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj)
     return;
 }
 
-void ftKoopa_SpecialSAir_StartAction(HSD_GObj *gobj)
+void ftKoopa_SpecialAirS_StartAction(HSD_GObj *gobj)
 {
     Fighter *ft = gobj->user_data;
 

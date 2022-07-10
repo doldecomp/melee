@@ -6,7 +6,7 @@
 #include "sysdolphin/baselib/gobj.h"
 #include "melee/ft/fighter.h"
 
-typedef struct _CaptainAttr
+typedef struct _ftCFalconAttributes
 {
     f32 DOWNWARD_NEUTRALB_RANGE;
     f32 UPWARD_NEUTRALB_RANGE;
@@ -47,7 +47,7 @@ typedef struct _CaptainAttr
     f32 DOWNB_LANDING_LAG_MULTIPLIER;
     f32 DOWNB_GROUND_TRACTION;
     f32 DOWNB_AIR_LANDING_TRACTION;
-}CaptainAttr;
+} ftCFalconAttributes;
 
 void func_800E2AEC(HSD_GObj* fighter_gobj);
 void func_800E2888(HSD_GObj* fighter_gobj);
@@ -55,6 +55,6 @@ void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL unk_var);
 void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj) ;
 void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj);
 void ftCFalcon_OnItemDrop(HSD_GObj* fighter_gobj, BOOL unk1);
-void func_800E2B40(HSD_GObj* fighter_gobj);
+void ftCFalcon_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 
 #endif

@@ -109,32 +109,23 @@ void ftGameWatch_OnItemInvisible(HSD_GObj* gobj) {
 // https://decomp.me/scratch/ibIxi // Make held item visible (restores picked up item's hand held animation)
 void ftGameWatch_OnItemVisible(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
-
-    if (func_8026B2B4(fp->x1974_heldItem) == 0)
-    {
-        func_80070C48(fighter_gobj, 1);
-    }
+    Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
 // 0x8014A728
 // https://decomp.me/scratch/LR8f5 // OnDropItem callback
 void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, s32 dropItemFlag)
 {
-    func_80070FB4(fighter_gobj, 1, -1);
-    if (dropItemFlag != 0)
-    {
-        func_80070CC4(fighter_gobj, 1);
-    }
+    Fighter_OnItemDrop(fighter_gobj, dropItemFlag, 1, 1);
 }
 
 // 0x8014A77C
 // https://decomp.me/scratch/SX2FV // Set Oil Panic Color Overlay
-void func_8014A77C(HSD_GObj* fighter_gobj) 
+void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj) 
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((s32)fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
+    if (fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
     {
         func_800BFFD0(fp, 5, 0);
     }
@@ -142,19 +133,13 @@ void func_8014A77C(HSD_GObj* fighter_gobj)
 
 // 0x8014A7B4
 // https://decomp.me/scratch/RJvAe // Copy Special Attributes from DAT file struct to Fighter* 
-void ftGameWatch_CopySpecialAttrs(HSD_GObj* fighter_gobj)
-{
-    Fighter* fp = getFighter(fighter_gobj);
-
-    ftGameWatchAttributes* ftDataAttrs = (ftGameWatchAttributes*)fp->x10C_ftData->ext_attr;
-    ftGameWatchAttributes* copySpecialAttrs = (ftGameWatchAttributes*)fp->x2D4_specialAttributes;
-
-    *copySpecialAttrs = *ftDataAttrs;
+void ftGameWatch_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftGameWatchAttributes);
 }
 
 // 0x8014A7F4 
 // https://decomp.me/scratch/PFWrJ // Apply color to Mr. Game & Watch's items?
-void func_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
+void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);
@@ -164,7 +149,7 @@ void func_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 
 // 0x8014A814 
 // https://decomp.me/scratch/BRo1r // Apply alt color to Mr. Game & Watch's items? 
-void func_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
+void ftGameWatch_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);

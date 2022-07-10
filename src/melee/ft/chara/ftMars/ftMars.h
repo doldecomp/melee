@@ -43,7 +43,7 @@ void ftMars_OnItemVisible(HSD_GObj* gobj);
 void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
 void ftMars_OnLoadForRoy(Fighter* ft);
 void ftMars_OnLoad(HSD_GObj* gobj);
-void func_801364E8(HSD_GObj* gobj);
+void ftMars_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftMars_OnKnockbackEnter(HSD_GObj* gobj);
 void ftMars_OnKnockbackExit(HSD_GObj* gobj);
 void lbl_801365A8(HSD_GObj* gobj);
@@ -51,7 +51,7 @@ void lbl_8013666C(HSD_GObj* gobj);
 void lbl_80136730(HSD_GObj* gobj);
 
 void ftMars_SpecialN_StartAction(HSD_GObj* gobj);
-void ftMars_SpecialNAir_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj);
 void lbl_80136844(HSD_GObj* gobj);
 void lbl_801368AC(HSD_GObj* gobj);
 void lbl_80136914(HSD_GObj* gobj);
@@ -88,7 +88,7 @@ void func_80137354(HSD_GObj* gobj);
 void func_801373B8(HSD_GObj* gobj);
 
 void ftMars_SpecialS_StartAction(HSD_GObj* gobj);
-void ftMars_SpecialSAir_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj);
 void lbl_80137558(HSD_GObj* gobj);
 void lbl_801375B8(HSD_GObj* gobj);
 void lbl_80137618(HSD_GObj* gobj);
@@ -119,7 +119,7 @@ void func_8013809C(HSD_GObj* gobj);
 void func_80138148(HSD_GObj* gobj);
 
 void ftMars_SpecialHi_StartAction(HSD_GObj* gobj);
-void ftMars_SpecialHiAir_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj);
 void lbl_801382E8(HSD_GObj* gobj);
 void lbl_80138348(HSD_GObj* gobj);
 void lbl_801383A8(HSD_GObj* gobj);
@@ -131,7 +131,7 @@ void lbl_801388B4(HSD_GObj* gobj);
 void lbl_80138940(HSD_GObj* gobj);
 
 void ftMars_SpecialLw_StartAction(HSD_GObj* gobj);
-void ftMars_SpecialLwAir_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj);
 void lbl_80138AA8(HSD_GObj* gobj);
 void lbl_80138B64(HSD_GObj* gobj);
 void lbl_80138C20(HSD_GObj* gobj);

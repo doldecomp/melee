@@ -2,16 +2,8 @@
 
 // 8014FDD0 0014C9B0
 // https://decomp.me/scratch/HWef2
-void func_8014FDD0(HSD_GObj* gobj) {
-    s32 temp_ctr;
-    Fighter* fighter;
-    MasterHandAttributes* ext_attributes;
-    MasterHandAttributes* specialAttributes;
-
-    fighter = gobj->user_data;
-    ext_attributes = fighter->x10C_ftData->ext_attr;
-    specialAttributes = fighter->x2D4_specialAttributes;
-    *specialAttributes = *ext_attributes;
+void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, MasterHandAttributes);
 }
 
 // 8014FE10 0014C9F0

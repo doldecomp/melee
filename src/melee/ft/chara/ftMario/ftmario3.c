@@ -101,7 +101,7 @@ void ftMario_SpecialS_StartAction(HSD_GObj* gobj) {
 }
 
 
-void ftMario_SpecialSAir_StartAction(HSD_GObj* gobj) {
+void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ftMarioAttributes* sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     u8 unused[8];

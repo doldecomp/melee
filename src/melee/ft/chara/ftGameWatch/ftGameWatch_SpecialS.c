@@ -167,7 +167,7 @@ void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
 // 0x8014C828
 // https://decomp.me/scratch/IzXqX
-void ftGameWatch_SpecialSAir_StartAction(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;

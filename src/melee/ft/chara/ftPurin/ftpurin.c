@@ -153,3 +153,7 @@ void ftPurin_OnItemVisible(HSD_GObj *fighterObj) {
 void ftPurin_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
     Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }
+
+void ftPurin_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftPurinAttributes);
+}

@@ -37,8 +37,8 @@ ftCFalcon_SpecialN_StartAction:
 /* 800E2BF8 000DF7D8  7C 08 03 A6 */	mtlr r0
 /* 800E2BFC 000DF7DC  4E 80 00 20 */	blr 
 
-.global ftCFalcon_SpecialNAir_StartAction
-ftCFalcon_SpecialNAir_StartAction:
+.global ftCFalcon_SpecialAirN_StartAction
+ftCFalcon_SpecialAirN_StartAction:
 /* 800E2C00 000DF7E0  7C 08 02 A6 */	mflr r0
 /* 800E2C04 000DF7E4  38 80 01 5C */	li r4, 0x15c
 /* 800E2C08 000DF7E8  90 01 00 04 */	stw r0, 4(r1)

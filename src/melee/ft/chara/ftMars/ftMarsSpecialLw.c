@@ -16,7 +16,7 @@ void ftMars_SpecialLw_StartAction(HSD_GObj* gobj) {
 
 // 80138A30 00135610
 // https://decomp.me/scratch/dhCgH
-void ftMars_SpecialLwAir_StartAction(HSD_GObj* gobj) {
+void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj) {
     Fighter* ft;
     Fighter* ft2;
     MarsAttributes* attr;
