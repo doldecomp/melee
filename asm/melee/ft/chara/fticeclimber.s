@@ -156,8 +156,8 @@ ftIceClimber_SpecialN_StartAction:
 /* 8011F264 0011BE44  7C 08 03 A6 */	mtlr r0
 /* 8011F268 0011BE48  4E 80 00 20 */	blr 
 
-.global ftIceClimber_SpecialNAir_StartAction
-ftIceClimber_SpecialNAir_StartAction:
+.global ftIceClimber_SpecialAirN_StartAction
+ftIceClimber_SpecialAirN_StartAction:
 /* 8011F26C 0011BE4C  7C 08 02 A6 */	mflr r0
 /* 8011F270 0011BE50  90 01 00 04 */	stw r0, 4(r1)
 /* 8011F274 0011BE54  38 00 00 00 */	li r0, 0
@@ -781,8 +781,8 @@ lbl_8011FA6C:
 /* 8011FB00 0011C6E0  7C 08 03 A6 */	mtlr r0
 /* 8011FB04 0011C6E4  4E 80 00 20 */	blr 
 
-.global ftIceClimber_SpecialSAir_StartAction
-ftIceClimber_SpecialSAir_StartAction:
+.global ftIceClimber_SpecialAirS_StartAction
+ftIceClimber_SpecialAirS_StartAction:
 /* 8011FB08 0011C6E8  7C 08 02 A6 */	mflr r0
 /* 8011FB0C 0011C6EC  38 80 00 01 */	li r4, 1
 /* 8011FB10 0011C6F0  90 01 00 04 */	stw r0, 4(r1)
@@ -2424,8 +2424,8 @@ ftIceClimber_SpecialHi_StartAction:
 /* 80121224 0011DE04  7C 08 03 A6 */	mtlr r0
 /* 80121228 0011DE08  4E 80 00 20 */	blr 
 
-.global ftIceClimber_SpecialHiAir_StartAction
-ftIceClimber_SpecialHiAir_StartAction:
+.global ftIceClimber_SpecialAirHi_StartAction
+ftIceClimber_SpecialAirHi_StartAction:
 /* 8012122C 0011DE0C  7C 08 02 A6 */	mflr r0
 /* 80121230 0011DE10  90 01 00 04 */	stw r0, 4(r1)
 /* 80121234 0011DE14  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -4135,8 +4135,8 @@ ftIceClimber_SpecialLw_StartAction:
 /* 80122980 0011F560  7C 08 03 A6 */	mtlr r0
 /* 80122984 0011F564  4E 80 00 20 */	blr 
 
-.global ftIceClimber_SpecialLwAir_StartAction
-ftIceClimber_SpecialLwAir_StartAction:
+.global ftIceClimber_SpecialAirLw_StartAction
+ftIceClimber_SpecialAirLw_StartAction:
 /* 80122988 0011F568  7C 08 02 A6 */	mflr r0
 /* 8012298C 0011F56C  38 E0 00 00 */	li r7, 0
 /* 80122990 0011F570  90 01 00 04 */	stw r0, 4(r1)

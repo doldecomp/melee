@@ -1298,8 +1298,8 @@ ftYoshi_SpecialN_StartAction:
 /* 8012CE5C 00129A3C  7C 08 03 A6 */	mtlr r0
 /* 8012CE60 00129A40  4E 80 00 20 */	blr 
 
-.global ftYoshi_SpecialNAir_StartAction
-ftYoshi_SpecialNAir_StartAction:
+.global ftYoshi_SpecialAirN_StartAction
+ftYoshi_SpecialAirN_StartAction:
 /* 8012CE64 00129A44  7C 08 02 A6 */	mflr r0
 /* 8012CE68 00129A48  38 A0 00 00 */	li r5, 0
 /* 8012CE6C 00129A4C  90 01 00 04 */	stw r0, 4(r1)
@@ -2759,8 +2759,8 @@ ftYoshi_SpecialHi_StartAction:
 /* 8012E334 0012AF14  7C 08 03 A6 */	mtlr r0
 /* 8012E338 0012AF18  4E 80 00 20 */	blr 
 
-.global ftYoshi_SpecialHiAir_StartAction
-ftYoshi_SpecialHiAir_StartAction:
+.global ftYoshi_SpecialAirHi_StartAction
+ftYoshi_SpecialAirHi_StartAction:
 /* 8012E33C 0012AF1C  7C 08 02 A6 */	mflr r0
 /* 8012E340 0012AF20  38 80 01 6D */	li r4, 0x16d
 /* 8012E344 0012AF24  90 01 00 04 */	stw r0, 4(r1)
@@ -3064,8 +3064,8 @@ ftYoshi_SpecialLw_StartAction:
 /* 8012E784 0012B364  7C 08 03 A6 */	mtlr r0
 /* 8012E788 0012B368  4E 80 00 20 */	blr 
 
-.global ftYoshi_SpecialLwAir_StartAction
-ftYoshi_SpecialLwAir_StartAction:
+.global ftYoshi_SpecialAirLw_StartAction
+ftYoshi_SpecialAirLw_StartAction:
 /* 8012E78C 0012B36C  7C 08 02 A6 */	mflr r0
 /* 8012E790 0012B370  38 80 01 70 */	li r4, 0x170
 /* 8012E794 0012B374  90 01 00 04 */	stw r0, 4(r1)
@@ -4065,8 +4065,8 @@ lbl_8012F4F4:
 /* 8012F580 0012C160  7C 08 03 A6 */	mtlr r0
 /* 8012F584 0012C164  4E 80 00 20 */	blr 
 
-.global ftYoshi_SpecialSAir_StartAction
-ftYoshi_SpecialSAir_StartAction:
+.global ftYoshi_SpecialAirS_StartAction
+ftYoshi_SpecialAirS_StartAction:
 /* 8012F588 0012C168  7C 08 02 A6 */	mflr r0
 /* 8012F58C 0012C16C  90 01 00 04 */	stw r0, 4(r1)
 /* 8012F590 0012C170  94 21 FF D0 */	stwu r1, -0x30(r1)

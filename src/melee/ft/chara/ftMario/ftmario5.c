@@ -75,7 +75,7 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/nQT5V
-void ftMario_SpecialLwAir_StartAction(HSD_GObj* gobj) {
+void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj) {
     f32 sub_val;
     Fighter* ft;
 

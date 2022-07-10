@@ -181,7 +181,7 @@ void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj)
     return;
 }
 
-void ftKoopa_SpecialSAir_StartAction(HSD_GObj *gobj)
+void ftKoopa_SpecialAirS_StartAction(HSD_GObj *gobj)
 {
     Fighter *ft = gobj->user_data;
 

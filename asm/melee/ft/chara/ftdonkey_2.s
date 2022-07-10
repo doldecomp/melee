@@ -581,8 +581,8 @@ ftDonkey_SpecialS_StartAction:
 /* 8010E22C 0010AE0C  7C 08 03 A6 */	mtlr r0
 /* 8010E230 0010AE10  4E 80 00 20 */	blr 
 
-.global ftDonkey_SpecialSAir_StartAction
-ftDonkey_SpecialSAir_StartAction:
+.global ftDonkey_SpecialAirS_StartAction
+ftDonkey_SpecialAirS_StartAction:
 /* 8010E234 0010AE14  7C 08 02 A6 */	mflr r0
 /* 8010E238 0010AE18  38 80 01 7C */	li r4, 0x17c
 /* 8010E23C 0010AE1C  90 01 00 04 */	stw r0, 4(r1)
@@ -901,8 +901,8 @@ lbl_8010E60C:
 /* 8010E694 0010B274  7C 08 03 A6 */	mtlr r0
 /* 8010E698 0010B278  4E 80 00 20 */	blr 
 
-.global ftDonkey_SpecialNAir_StartAction
-ftDonkey_SpecialNAir_StartAction:
+.global ftDonkey_SpecialAirN_StartAction
+ftDonkey_SpecialAirN_StartAction:
 /* 8010E69C 0010B27C  7C 08 02 A6 */	mflr r0
 /* 8010E6A0 0010B280  90 01 00 04 */	stw r0, 4(r1)
 /* 8010E6A4 0010B284  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2435,8 +2435,8 @@ ftDonkey_SpecialHi_StartAction:
 /* 8010FBF4 0010C7D4  7C 08 03 A6 */	mtlr r0
 /* 8010FBF8 0010C7D8  4E 80 00 20 */	blr 
 
-.global ftDonkey_SpecialHiAir_StartAction
-ftDonkey_SpecialHiAir_StartAction:
+.global ftDonkey_SpecialAirHi_StartAction
+ftDonkey_SpecialAirHi_StartAction:
 /* 8010FBFC 0010C7DC  7C 08 02 A6 */	mflr r0
 /* 8010FC00 0010C7E0  38 80 01 7E */	li r4, 0x17e
 /* 8010FC04 0010C7E4  90 01 00 04 */	stw r0, 4(r1)

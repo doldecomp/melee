@@ -692,8 +692,8 @@ lbl_800E6188:
 /* 800E61A0 000E2D80  7C 08 03 A6 */	mtlr r0
 /* 800E61A4 000E2D84  4E 80 00 20 */	blr 
 
-.global ftFox_SpecialNAir_StartAction
-ftFox_SpecialNAir_StartAction:
+.global ftFox_SpecialAirN_StartAction
+ftFox_SpecialAirN_StartAction:
 /* 800E61A8 000E2D88  7C 08 02 A6 */	mflr r0
 /* 800E61AC 000E2D8C  38 80 01 58 */	li r4, 0x158
 /* 800E61B0 000E2D90  90 01 00 04 */	stw r0, 4(r1)
@@ -1928,8 +1928,8 @@ ftFox_SpecialHi_StartAction:
 /* 800E72BC 000E3E9C  7C 08 03 A6 */	mtlr r0
 /* 800E72C0 000E3EA0  4E 80 00 20 */	blr 
 
-.global ftFox_SpecialHiAir_StartAction
-ftFox_SpecialHiAir_StartAction:
+.global ftFox_SpecialAirHi_StartAction
+ftFox_SpecialAirHi_StartAction:
 /* 800E72C4 000E3EA4  7C 08 02 A6 */	mflr r0
 /* 800E72C8 000E3EA8  38 80 01 62 */	li r4, 0x162
 /* 800E72CC 000E3EAC  90 01 00 04 */	stw r0, 4(r1)
@@ -3338,8 +3338,8 @@ ftFox_SpecialLw_StartAction:
 /* 800E85E4 000E51C4  7C 08 03 A6 */	mtlr r0
 /* 800E85E8 000E51C8  4E 80 00 20 */	blr 
 
-.global ftFox_SpecialLwAir_StartAction
-ftFox_SpecialLwAir_StartAction:
+.global ftFox_SpecialAirLw_StartAction
+ftFox_SpecialAirLw_StartAction:
 /* 800E85EC 000E51CC  7C 08 02 A6 */	mflr r0
 /* 800E85F0 000E51D0  38 80 01 6D */	li r4, 0x16d
 /* 800E85F4 000E51D4  90 01 00 04 */	stw r0, 4(r1)
@@ -5258,8 +5258,8 @@ ftFox_SpecialS_StartAction:
 /* 800E9F64 000E6B44  7C 08 03 A6 */	mtlr r0
 /* 800E9F68 000E6B48  4E 80 00 20 */	blr 
 
-.global ftFox_SpecialSAir_StartAction
-ftFox_SpecialSAir_StartAction:
+.global ftFox_SpecialAirS_StartAction
+ftFox_SpecialAirS_StartAction:
 /* 800E9F6C 000E6B4C  7C 08 02 A6 */	mflr r0
 /* 800E9F70 000E6B50  38 E0 00 00 */	li r7, 0
 /* 800E9F74 000E6B54  90 01 00 04 */	stw r0, 4(r1)

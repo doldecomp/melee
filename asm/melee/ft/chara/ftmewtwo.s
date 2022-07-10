@@ -218,8 +218,8 @@ ftMewtwo_SpecialHi_StartAction:
 /* 80145250 00141E30  7C 08 03 A6 */	mtlr r0
 /* 80145254 00141E34  4E 80 00 20 */	blr 
 
-.global ftMewtwo_SpecialHiAir_StartAction
-ftMewtwo_SpecialHiAir_StartAction:
+.global ftMewtwo_SpecialAirHi_StartAction
+ftMewtwo_SpecialAirHi_StartAction:
 /* 80145258 00141E38  7C 08 02 A6 */	mflr r0
 /* 8014525C 00141E3C  38 80 01 64 */	li r4, 0x164
 /* 80145260 00141E40  90 01 00 04 */	stw r0, 4(r1)
@@ -1375,8 +1375,8 @@ ftMewtwo_SpecialLw_StartAction:
 /* 8014625C 00142E3C  7C 08 03 A6 */	mtlr r0
 /* 80146260 00142E40  4E 80 00 20 */	blr 
 
-.global ftMewtwo_SpecialLwAir_StartAction
-ftMewtwo_SpecialLwAir_StartAction:
+.global ftMewtwo_SpecialAirLw_StartAction
+ftMewtwo_SpecialAirLw_StartAction:
 /* 80146264 00142E44  7C 08 02 A6 */	mflr r0
 /* 80146268 00142E48  38 80 01 68 */	li r4, 0x168
 /* 8014626C 00142E4C  90 01 00 04 */	stw r0, 4(r1)
@@ -1737,8 +1737,8 @@ lbl_80146758:
 /* 80146774 00143354  7C 08 03 A6 */	mtlr r0
 /* 80146778 00143358  4E 80 00 20 */	blr 
 
-.global ftMewtwo_SpecialSAir_StartAction
-ftMewtwo_SpecialSAir_StartAction:
+.global ftMewtwo_SpecialAirS_StartAction
+ftMewtwo_SpecialAirS_StartAction:
 /* 8014677C 0014335C  7C 08 02 A6 */	mflr r0
 /* 80146780 00143360  90 01 00 04 */	stw r0, 4(r1)
 /* 80146784 00143364  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2639,8 +2639,8 @@ lbl_801473C0:
 /* 801473EC 00143FCC  7C 08 03 A6 */	mtlr r0
 /* 801473F0 00143FD0  4E 80 00 20 */	blr 
 
-.global ftMewtwo_SpecialNAir_StartAction
-ftMewtwo_SpecialNAir_StartAction:
+.global ftMewtwo_SpecialAirN_StartAction
+ftMewtwo_SpecialAirN_StartAction:
 /* 801473F4 00143FD4  7C 08 02 A6 */	mflr r0
 /* 801473F8 00143FD8  38 80 01 5A */	li r4, 0x15a
 /* 801473FC 00143FDC  90 01 00 04 */	stw r0, 4(r1)

@@ -129,8 +129,8 @@ ftGameWatch_SpecialN_StartAction:
 /* 8014E6B8 0014B298  7C 08 03 A6 */	mtlr r0
 /* 8014E6BC 0014B29C  4E 80 00 20 */	blr 
 
-.global ftGameWatch_SpecialNAir_StartAction
-ftGameWatch_SpecialNAir_StartAction:
+.global ftGameWatch_SpecialAirN_StartAction
+ftGameWatch_SpecialAirN_StartAction:
 /* 8014E6C0 0014B2A0  7C 08 02 A6 */	mflr r0
 /* 8014E6C4 0014B2A4  38 80 01 62 */	li r4, 0x162
 /* 8014E6C8 0014B2A8  90 01 00 04 */	stw r0, 4(r1)

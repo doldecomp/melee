@@ -243,8 +243,8 @@ ftZelda_SpecialHi_StartAction:
 /* 801398E0 001364C0  7C 08 03 A6 */	mtlr r0
 /* 801398E4 001364C4  4E 80 00 20 */	blr 
 
-.global ftZelda_SpecialHiAir_StartAction
-ftZelda_SpecialHiAir_StartAction:
+.global ftZelda_SpecialAirHi_StartAction
+ftZelda_SpecialAirHi_StartAction:
 /* 801398E8 001364C8  7C 08 02 A6 */	mflr r0
 /* 801398EC 001364CC  38 80 01 60 */	li r4, 0x160
 /* 801398F0 001364D0  90 01 00 04 */	stw r0, 4(r1)
@@ -1441,8 +1441,8 @@ ftZelda_SpecialN_StartAction:
 /* 8013A99C 0013757C  7C 08 03 A6 */	mtlr r0
 /* 8013A9A0 00137580  4E 80 00 20 */	blr 
 
-.global ftZelda_SpecialNAir_StartAction
-ftZelda_SpecialNAir_StartAction:
+.global ftZelda_SpecialAirN_StartAction
+ftZelda_SpecialAirN_StartAction:
 /* 8013A9A4 00137584  7C 08 02 A6 */	mflr r0
 /* 8013A9A8 00137588  38 80 01 56 */	li r4, 0x156
 /* 8013A9AC 0013758C  90 01 00 04 */	stw r0, 4(r1)
@@ -1871,8 +1871,8 @@ ftZelda_SpecialLw_StartAction:
 /* 8013AF9C 00137B7C  7C 08 03 A6 */	mtlr r0
 /* 8013AFA0 00137B80  4E 80 00 20 */	blr 
 
-.global ftZelda_SpecialLwAir_StartAction
-ftZelda_SpecialLwAir_StartAction:
+.global ftZelda_SpecialAirLw_StartAction
+ftZelda_SpecialAirLw_StartAction:
 /* 8013AFA4 00137B84  7C 08 02 A6 */	mflr r0
 /* 8013AFA8 00137B88  38 80 01 65 */	li r4, 0x165
 /* 8013AFAC 00137B8C  90 01 00 04 */	stw r0, 4(r1)
@@ -2413,8 +2413,8 @@ ftZelda_SpecialS_StartAction:
 /* 8013B6D0 001382B0  7C 08 03 A6 */	mtlr r0
 /* 8013B6D4 001382B4  4E 80 00 20 */	blr 
 
-.global ftZelda_SpecialSAir_StartAction
-ftZelda_SpecialSAir_StartAction:
+.global ftZelda_SpecialAirS_StartAction
+ftZelda_SpecialAirS_StartAction:
 /* 8013B6D8 001382B8  7C 08 02 A6 */	mflr r0
 /* 8013B6DC 001382BC  38 80 01 5A */	li r4, 0x15a
 /* 8013B6E0 001382C0  90 01 00 04 */	stw r0, 4(r1)

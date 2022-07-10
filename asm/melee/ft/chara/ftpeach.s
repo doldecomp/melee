@@ -805,8 +805,8 @@ ftPeach_SpecialS_StartAction:
 /* 8011C3BC 00118F9C  7C 08 03 A6 */	mtlr r0
 /* 8011C3C0 00118FA0  4E 80 00 20 */	blr 
 
-.global ftPeach_SpecialSAir_StartAction
-ftPeach_SpecialSAir_StartAction:
+.global ftPeach_SpecialAirS_StartAction
+ftPeach_SpecialAirS_StartAction:
 /* 8011C3C4 00118FA4  7C 08 02 A6 */	mflr r0
 /* 8011C3C8 00118FA8  38 80 01 65 */	li r4, 0x165
 /* 8011C3CC 00118FAC  90 01 00 04 */	stw r0, 4(r1)
@@ -1836,8 +1836,8 @@ lbl_8011D1AC:
 /* 8011D1BC 00119D9C  7C 08 03 A6 */	mtlr r0
 /* 8011D1C0 00119DA0  4E 80 00 20 */	blr 
 
-.global ftPeach_SpecialLwAir_StartAction
-ftPeach_SpecialLwAir_StartAction:
+.global ftPeach_SpecialAirLw_StartAction
+ftPeach_SpecialAirLw_StartAction:
 /* 8011D1C4 00119DA4  7C 08 02 A6 */	mflr r0
 /* 8011D1C8 00119DA8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D1CC 00119DAC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2282,8 +2282,8 @@ lbl_8011D7DC:
 /* 8011D7E8 0011A3C8  7C 08 03 A6 */	mtlr r0
 /* 8011D7EC 0011A3CC  4E 80 00 20 */	blr 
 
-.global ftPeach_SpecialHiAir_StartAction
-ftPeach_SpecialHiAir_StartAction:
+.global ftPeach_SpecialAirHi_StartAction
+ftPeach_SpecialAirHi_StartAction:
 /* 8011D7F0 0011A3D0  7C 08 02 A6 */	mflr r0
 /* 8011D7F4 0011A3D4  38 80 01 6B */	li r4, 0x16b
 /* 8011D7F8 0011A3D8  90 01 00 04 */	stw r0, 4(r1)
@@ -3197,8 +3197,8 @@ ftPeach_SpecialN_StartAction:
 /* 8011E454 0011B034  7C 08 03 A6 */	mtlr r0
 /* 8011E458 0011B038  4E 80 00 20 */	blr 
 
-.global ftPeach_SpecialNAir_StartAction
-ftPeach_SpecialNAir_StartAction:
+.global ftPeach_SpecialAirN_StartAction
+ftPeach_SpecialAirN_StartAction:
 /* 8011E45C 0011B03C  7C 08 02 A6 */	mflr r0
 /* 8011E460 0011B040  38 80 01 6F */	li r4, 0x16f
 /* 8011E464 0011B044  90 01 00 04 */	stw r0, 4(r1)

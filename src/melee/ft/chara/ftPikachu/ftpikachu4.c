@@ -28,7 +28,7 @@ void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     func_8006EBA4(fighterObj);
 }
 
-void ftPikachu_SpecialHiAir_StartAction(HSD_GObj* fighterObj) {
+void ftPikachu_SpecialAirHi_StartAction(HSD_GObj* fighterObj) {
     s32 unused[2]; 
     ftPikachuAttributes* pika_attr;
     Fighter* fighter = fighterObj->user_data;

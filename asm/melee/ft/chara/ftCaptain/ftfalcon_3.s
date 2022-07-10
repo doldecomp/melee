@@ -216,8 +216,8 @@ ftCFalcon_SpecialLw_StartAction:
 /* 800E40D0 000E0CB0  7C 08 03 A6 */	mtlr r0
 /* 800E40D4 000E0CB4  4E 80 00 20 */	blr 
 
-.global ftCFalcon_SpecialLwAir_StartAction
-ftCFalcon_SpecialLwAir_StartAction:
+.global ftCFalcon_SpecialAirLw_StartAction
+ftCFalcon_SpecialAirLw_StartAction:
 /* 800E40D8 000E0CB8  7C 08 02 A6 */	mflr r0
 /* 800E40DC 000E0CBC  38 80 01 67 */	li r4, 0x167
 /* 800E40E0 000E0CC0  90 01 00 04 */	stw r0, 4(r1)

@@ -260,8 +260,8 @@ lbl_800EB6C4:
 /* 800EB6D4 000E82B4  7C 08 03 A6 */	mtlr r0
 /* 800EB6D8 000E82B8  4E 80 00 20 */	blr 
 
-.global ftLink_SpecialLwAir_StartAction
-ftLink_SpecialLwAir_StartAction:
+.global ftLink_SpecialAirLw_StartAction
+ftLink_SpecialAirLw_StartAction:
 /* 800EB6DC 000E82BC  7C 08 02 A6 */	mflr r0
 /* 800EB6E0 000E82C0  38 80 00 70 */	li r4, 0x70
 /* 800EB6E4 000E82C4  90 01 00 04 */	stw r0, 4(r1)
@@ -602,8 +602,8 @@ ftLink_SpecialHi_StartAction:
 /* 800EBB78 000E8758  7C 08 03 A6 */	mtlr r0
 /* 800EBB7C 000E875C  4E 80 00 20 */	blr 
 
-.global ftLink_SpecialHiAir_StartAction
-ftLink_SpecialHiAir_StartAction:
+.global ftLink_SpecialAirHi_StartAction
+ftLink_SpecialAirHi_StartAction:
 /* 800EBB80 000E8760  7C 08 02 A6 */	mflr r0
 /* 800EBB84 000E8764  38 80 01 65 */	li r4, 0x165
 /* 800EBB88 000E8768  90 01 00 04 */	stw r0, 4(r1)
@@ -1240,8 +1240,8 @@ lbl_800EC3D8:
 /* 800EC3FC 000E8FDC  7C 08 03 A6 */	mtlr r0
 /* 800EC400 000E8FE0  4E 80 00 20 */	blr 
 
-.global ftLink_SpecialSAir_StartAction
-ftLink_SpecialSAir_StartAction:
+.global ftLink_SpecialAirS_StartAction
+ftLink_SpecialAirS_StartAction:
 /* 800EC404 000E8FE4  7C 08 02 A6 */	mflr r0
 /* 800EC408 000E8FE8  38 80 00 00 */	li r4, 0
 /* 800EC40C 000E8FEC  90 01 00 04 */	stw r0, 4(r1)
@@ -2109,8 +2109,8 @@ lbl_800ECF64:
 /* 800ECF70 000E9B50  7C 08 03 A6 */	mtlr r0
 /* 800ECF74 000E9B54  4E 80 00 20 */	blr 
 
-.global ftLink_SpecialNAir_StartAction
-ftLink_SpecialNAir_StartAction:
+.global ftLink_SpecialAirN_StartAction
+ftLink_SpecialAirN_StartAction:
 /* 800ECF78 000E9B58  7C 08 02 A6 */	mflr r0
 /* 800ECF7C 000E9B5C  38 80 01 5B */	li r4, 0x15b
 /* 800ECF80 000E9B60  90 01 00 04 */	stw r0, 4(r1)
