@@ -2004,4 +2004,14 @@ inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BO
     }
 }
 
+inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1) {
+    func_800704F0(gobj, arg1, 3.0f);
+    func_800704F0(gobj, 0, 3.0f);
+}
+
+inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1) {
+    func_800704F0(gobj, arg1, 0.0f);
+    func_800704F0(gobj, 0, 0.0f);
+}
+
 #endif

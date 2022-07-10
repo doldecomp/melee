@@ -52,10 +52,18 @@ void ftMewTwo_80144F58(HSD_GObj* fighterObj) {
     }
 }
 
-void ftMewTwo_LoadSpecialAttrs(HSD_GObj* gobj) {
-    COPY_ATTRS(gobj, ftMewTwoAttributes);
+void ftMewTwo_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftMewTwoAttributes);
     if (ft->x34_scale.y != 1.0f) {
         sA2->x80 *= ft->x34_scale.y;
         sA2->x84 *= ft->x34_scale.y;
     }
+}
+
+void ftMewTwo_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 2);
+}
+
+void ftMewTwo_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 2);
 }

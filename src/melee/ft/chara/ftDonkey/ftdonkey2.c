@@ -54,3 +54,11 @@ void ftDonkey_OnLoad(HSD_GObj* fighterObj) {
 void ftDonkey_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftDonkeyAttributes);
 }
+
+void ftDonkey_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftDonkey_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+}

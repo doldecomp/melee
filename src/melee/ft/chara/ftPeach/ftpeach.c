@@ -71,10 +71,28 @@ void ftPeach_OnItemVisible(HSD_GObj* fighterObj) {
     Fighter_OnItemVisible(fighterObj, 1);
 }
 
-void ftPeach_OnItemDrop(HSD_GObj* gobj, BOOL bool1) {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+void ftPeach_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
 }
 
-void ftPeach_LoadSpecialAttrs(HSD_GObj* gobj) {
-    COPY_ATTRS(gobj, ftPeachAttributes);
+void ftPeach_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftPeachAttributes);
+}
+
+void ftPeach_8011B93C(HSD_GObj* fighterObj) {
+    s32 unused[2];
+    s32 result = func_80074A74(fighterObj, 2);
+    if (result == -1) {
+        func_80074A4C(fighterObj, 2, 0);
+    } else {
+        func_80074A4C(fighterObj, 2, -1);
+    }
+}
+
+void ftPeach_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftPeach_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
 }

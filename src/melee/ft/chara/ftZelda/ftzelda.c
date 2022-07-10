@@ -40,3 +40,21 @@ void ftZelda_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
 void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj) {
     COPY_ATTRS(gobj, ftZeldaAttributes);
 }
+
+void ftZelda_801395C8(HSD_GObj* fighterObj) {
+    s32 unused[2];
+    s32 result = func_80074A74(fighterObj, 1);
+    if (result == -1) {
+        func_80074A4C(fighterObj, 1, 0);
+    } else {
+        func_80074A4C(fighterObj, 1, -1);
+    }
+}
+
+void ftZelda_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftZelda_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+}

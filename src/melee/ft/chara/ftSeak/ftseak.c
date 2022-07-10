@@ -51,6 +51,14 @@ void ftSeak_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
     Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
 }
 
-void ftSeak_LoadSpecialAttrs(HSD_GObj* gobj) {
-    COPY_ATTRS(gobj, ftSeakAttributes);
+void ftSeak_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftSeakAttributes);
 } 
+
+void ftSeak_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftSeak_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+}

@@ -157,3 +157,11 @@ void ftPurin_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
 void ftPurin_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftPurinAttributes);
 }
+
+void ftPurin_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftPurin_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+}

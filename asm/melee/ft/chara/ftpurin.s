@@ -2,45 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftPurin_OnKnockbackEnter
-ftPurin_OnKnockbackEnter:
-/* 8013C8C4 001394A4  7C 08 02 A6 */	mflr r0
-/* 8013C8C8 001394A8  38 80 00 01 */	li r4, 1
-/* 8013C8CC 001394AC  90 01 00 04 */	stw r0, 4(r1)
-/* 8013C8D0 001394B0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8013C8D4 001394B4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8013C8D8 001394B8  7C 7F 1B 78 */	mr r31, r3
-/* 8013C8DC 001394BC  C0 22 A2 28 */	lfs f1, lbl_804D9C08@sda21(r2)
-/* 8013C8E0 001394C0  4B F3 3C 11 */	bl func_800704F0
-/* 8013C8E4 001394C4  C0 22 A2 28 */	lfs f1, lbl_804D9C08@sda21(r2)
-/* 8013C8E8 001394C8  38 7F 00 00 */	addi r3, r31, 0
-/* 8013C8EC 001394CC  38 80 00 00 */	li r4, 0
-/* 8013C8F0 001394D0  4B F3 3C 01 */	bl func_800704F0
-/* 8013C8F4 001394D4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8013C8F8 001394D8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8013C8FC 001394DC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8013C900 001394E0  7C 08 03 A6 */	mtlr r0
-/* 8013C904 001394E4  4E 80 00 20 */	blr 
 
-.global ftPurin_OnKnockbackExit
-ftPurin_OnKnockbackExit:
-/* 8013C908 001394E8  7C 08 02 A6 */	mflr r0
-/* 8013C90C 001394EC  38 80 00 01 */	li r4, 1
-/* 8013C910 001394F0  90 01 00 04 */	stw r0, 4(r1)
-/* 8013C914 001394F4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8013C918 001394F8  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8013C91C 001394FC  7C 7F 1B 78 */	mr r31, r3
-/* 8013C920 00139500  C0 22 A2 2C */	lfs f1, lbl_804D9C0C@sda21(r2)
-/* 8013C924 00139504  4B F3 3B CD */	bl func_800704F0
-/* 8013C928 00139508  C0 22 A2 2C */	lfs f1, lbl_804D9C0C@sda21(r2)
-/* 8013C92C 0013950C  38 7F 00 00 */	addi r3, r31, 0
-/* 8013C930 00139510  38 80 00 00 */	li r4, 0
-/* 8013C934 00139514  4B F3 3B BD */	bl func_800704F0
-/* 8013C938 00139518  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8013C93C 0013951C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8013C940 00139520  38 21 00 18 */	addi r1, r1, 0x18
-/* 8013C944 00139524  7C 08 03 A6 */	mtlr r0
-/* 8013C948 00139528  4E 80 00 20 */	blr 
 lbl_8013C94C:
 /* 8013C94C 0013952C  7C 08 02 A6 */	mflr r0
 /* 8013C950 00139530  90 01 00 04 */	stw r0, 4(r1)
@@ -6860,12 +6822,7 @@ lbl_804D3EA8:
 
 .section .sdata2
     .balign 8
-.global lbl_804D9C08
-lbl_804D9C08:
-	.4byte 0x40400000
-.global lbl_804D9C0C
-lbl_804D9C0C:
-	.4byte 0x00000000
+
 .global lbl_804D9C10
 lbl_804D9C10:
 	.4byte 0xBF800000

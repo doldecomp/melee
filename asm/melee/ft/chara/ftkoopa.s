@@ -3406,13 +3406,6 @@ lbl_803CF2A0:
 
 
 .section .sdata2
-    .balign 8
-.global lbl_804D9AC8
-lbl_804D9AC8:
-	.4byte 0x40400000
-.global lbl_804D9ACC
-lbl_804D9ACC:
-	.4byte 0x00000000
 .global lbl_804D9AD0
 lbl_804D9AD0:
 	.4byte 0x43300000
