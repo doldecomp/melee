@@ -125,7 +125,7 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     if (!temp)
     {
         OSReport("yoshi parts_model NULL!!\n");
-        __assert("ftyoshi.c", 0x71U, "0");
+        __assert(__FILE__, 0x71U, "0");
     }
 
     other_attr->xC = 0.0f;
