@@ -74,12 +74,10 @@ void ftNess_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftNess_OnKnockbackEnter(HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //
 {
-    func_800704F0(gobj, 1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures //
 {
-    func_800704F0(fighter_gobj, 1, 0.0f);
-    func_800704F0(fighter_gobj, 0, 0.0f);
+    Fighter_OnKnockbackExit(fighter_gobj, 1);
 }

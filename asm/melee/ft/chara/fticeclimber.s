@@ -2,46 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global ftIceClimber_OnKnockbackEnter
-ftIceClimber_OnKnockbackEnter:
-/* 8011F0E4 0011BCC4  7C 08 02 A6 */	mflr r0
-/* 8011F0E8 0011BCC8  38 80 00 01 */	li r4, 1
-/* 8011F0EC 0011BCCC  90 01 00 04 */	stw r0, 4(r1)
-/* 8011F0F0 0011BCD0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8011F0F4 0011BCD4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8011F0F8 0011BCD8  7C 7F 1B 78 */	mr r31, r3
-/* 8011F0FC 0011BCDC  C0 22 9E 54 */	lfs f1, lbl_804D9834@sda21(r2)
-/* 8011F100 0011BCE0  4B F5 13 F1 */	bl func_800704F0
-/* 8011F104 0011BCE4  C0 22 9E 54 */	lfs f1, lbl_804D9834@sda21(r2)
-/* 8011F108 0011BCE8  38 7F 00 00 */	addi r3, r31, 0
-/* 8011F10C 0011BCEC  38 80 00 00 */	li r4, 0
-/* 8011F110 0011BCF0  4B F5 13 E1 */	bl func_800704F0
-/* 8011F114 0011BCF4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8011F118 0011BCF8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8011F11C 0011BCFC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8011F120 0011BD00  7C 08 03 A6 */	mtlr r0
-/* 8011F124 0011BD04  4E 80 00 20 */	blr 
-
-.global ftIceClimber_OnKnockbackExit
-ftIceClimber_OnKnockbackExit:
-/* 8011F128 0011BD08  7C 08 02 A6 */	mflr r0
-/* 8011F12C 0011BD0C  38 80 00 01 */	li r4, 1
-/* 8011F130 0011BD10  90 01 00 04 */	stw r0, 4(r1)
-/* 8011F134 0011BD14  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8011F138 0011BD18  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8011F13C 0011BD1C  7C 7F 1B 78 */	mr r31, r3
-/* 8011F140 0011BD20  C0 22 9E 50 */	lfs f1, lbl_804D9830@sda21(r2)
-/* 8011F144 0011BD24  4B F5 13 AD */	bl func_800704F0
-/* 8011F148 0011BD28  C0 22 9E 50 */	lfs f1, lbl_804D9830@sda21(r2)
-/* 8011F14C 0011BD2C  38 7F 00 00 */	addi r3, r31, 0
-/* 8011F150 0011BD30  38 80 00 00 */	li r4, 0
-/* 8011F154 0011BD34  4B F5 13 9D */	bl func_800704F0
-/* 8011F158 0011BD38  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8011F15C 0011BD3C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8011F160 0011BD40  38 21 00 18 */	addi r1, r1, 0x18
-/* 8011F164 0011BD44  7C 08 03 A6 */	mtlr r0
-/* 8011F168 0011BD48  4E 80 00 20 */	blr 
-
 .global func_8011F16C
 func_8011F16C:
 /* 8011F16C 0011BD4C  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -5125,12 +5085,6 @@ lbl_804D3E18:
 
 .section .sdata2
     .balign 8
-.global lbl_804D9830
-lbl_804D9830:
-	.4byte 0x00000000
-.global lbl_804D9834
-lbl_804D9834:
-	.4byte 0x40400000
 .global lbl_804D9838
 lbl_804D9838:
 	.4byte 0x00000000
