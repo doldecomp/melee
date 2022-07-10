@@ -2,26 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8010DA74
-func_8010DA74:
-/* 8010DA74 0010A654  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8010DA78 0010A658  38 00 00 0E */	li r0, 0xe
-/* 8010DA7C 0010A65C  7C 09 03 A6 */	mtctr r0
-/* 8010DA80 0010A660  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 8010DA84 0010A664  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8010DA88 0010A668  80 84 00 04 */	lwz r4, 4(r4)
-/* 8010DA8C 0010A66C  38 A3 FF F8 */	addi r5, r3, -8
-/* 8010DA90 0010A670  38 84 FF F8 */	addi r4, r4, -8
-lbl_8010DA94:
-/* 8010DA94 0010A674  84 64 00 08 */	lwzu r3, 8(r4)
-/* 8010DA98 0010A678  80 04 00 04 */	lwz r0, 4(r4)
-/* 8010DA9C 0010A67C  94 65 00 08 */	stwu r3, 8(r5)
-/* 8010DAA0 0010A680  90 05 00 04 */	stw r0, 4(r5)
-/* 8010DAA4 0010A684  42 00 FF F0 */	bdnz lbl_8010DA94
-/* 8010DAA8 0010A688  80 04 00 08 */	lwz r0, 8(r4)
-/* 8010DAAC 0010A68C  90 05 00 08 */	stw r0, 8(r5)
-/* 8010DAB0 0010A690  4E 80 00 20 */	blr 
-
 .global ftDonkey_OnKnockbackEnter
 ftDonkey_OnKnockbackEnter:
 /* 8010DAB4 0010A694  7C 08 02 A6 */	mflr r0
@@ -581,8 +561,8 @@ ftDonkey_SpecialS_StartAction:
 /* 8010E22C 0010AE0C  7C 08 03 A6 */	mtlr r0
 /* 8010E230 0010AE10  4E 80 00 20 */	blr 
 
-.global ftDonkey_SpecialSAir_StartAction
-ftDonkey_SpecialSAir_StartAction:
+.global ftDonkey_SpecialAirS_StartAction
+ftDonkey_SpecialAirS_StartAction:
 /* 8010E234 0010AE14  7C 08 02 A6 */	mflr r0
 /* 8010E238 0010AE18  38 80 01 7C */	li r4, 0x17c
 /* 8010E23C 0010AE1C  90 01 00 04 */	stw r0, 4(r1)
@@ -901,8 +881,8 @@ lbl_8010E60C:
 /* 8010E694 0010B274  7C 08 03 A6 */	mtlr r0
 /* 8010E698 0010B278  4E 80 00 20 */	blr 
 
-.global ftDonkey_SpecialNAir_StartAction
-ftDonkey_SpecialNAir_StartAction:
+.global ftDonkey_SpecialAirN_StartAction
+ftDonkey_SpecialAirN_StartAction:
 /* 8010E69C 0010B27C  7C 08 02 A6 */	mflr r0
 /* 8010E6A0 0010B280  90 01 00 04 */	stw r0, 4(r1)
 /* 8010E6A4 0010B284  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2435,8 +2415,8 @@ ftDonkey_SpecialHi_StartAction:
 /* 8010FBF4 0010C7D4  7C 08 03 A6 */	mtlr r0
 /* 8010FBF8 0010C7D8  4E 80 00 20 */	blr 
 
-.global ftDonkey_SpecialHiAir_StartAction
-ftDonkey_SpecialHiAir_StartAction:
+.global ftDonkey_SpecialAirHi_StartAction
+ftDonkey_SpecialAirHi_StartAction:
 /* 8010FBFC 0010C7DC  7C 08 02 A6 */	mflr r0
 /* 8010FC00 0010C7E0  38 80 01 7E */	li r4, 0x17e
 /* 8010FC04 0010C7E4  90 01 00 04 */	stw r0, 4(r1)

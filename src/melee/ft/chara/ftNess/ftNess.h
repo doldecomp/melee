@@ -141,7 +141,7 @@ void ftNess_OnItemPickup(HSD_GObj* gobj, BOOL catchItemFlag);
 void ftNess_OnItemInvisible(HSD_GObj* gobj);
 void ftNess_OnItemVisible(HSD_GObj* gobj);
 void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag);
-void ftNess_CopySpecialAttrs(HSD_GObj* gobj);
+void ftNess_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftNess_OnKnockbackEnter(HSD_GObj* gobj);
 void ftNess_OnKnockbackExit(HSD_GObj* gobj);
 

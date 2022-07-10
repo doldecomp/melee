@@ -18,7 +18,7 @@ void ftMars_SpecialN_StartAction(HSD_GObj* gobj) {
 // 801367B8 00133398
 // ftMars_SpecialNAir
 // https://decomp.me/scratch/4vPWj
-void ftMars_SpecialNAir_StartAction(HSD_GObj* gobj) {
+void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     MarsAttributes* attrs = ft->x2D4_specialAttributes;
     u32 unused, unused2; // need to eat more stack

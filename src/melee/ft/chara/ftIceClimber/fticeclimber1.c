@@ -55,3 +55,14 @@ void ftIceClimber_OnDeath(HSD_GObj* fighterObj) {
     fighter->sa.nana.x224C = 0;
     fighter->sa.nana.x2250 = lbl_804D9830;
 }
+
+void ftIceClimber_8011F060(HSD_GObj* fighterObj) {
+    func_8011F190(fighterObj);
+    func_80122898(fighterObj);
+    func_80121164(fighterObj);
+    func_8011F68C(fighterObj);
+}
+
+void ftIceClimber_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftIceClimberAttributes);
+}

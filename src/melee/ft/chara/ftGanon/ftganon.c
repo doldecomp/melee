@@ -33,9 +33,9 @@ void ftGanon_OnLoad(HSD_GObj* gobj)
     ftCaptain_OnLoadForGanon(gobj->user_data);
 }
 
-void func_8014EE40(HSD_GObj* gobj)
+void ftGanon_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    func_800E2B40(gobj);
+    ftCFalcon_LoadSpecialAttrs(gobj);
 }
 
 void ftGanon_OnKnockbackEnter(HSD_GObj* gobj)

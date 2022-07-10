@@ -52,9 +52,9 @@ void ftGKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_8014F8E4(HSD_GObj* gobj)
+void ftGKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    func_80132D00(gobj);
+    ftKoopa_LoadSpecialAttrs(gobj);
 }
 
 void ftGKoopa_OnKnockbackEnter(HSD_GObj* gobj)

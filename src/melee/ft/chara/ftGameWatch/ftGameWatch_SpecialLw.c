@@ -161,7 +161,7 @@ void ftGameWatch_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 
 // 0x8014CF78
 // https://decomp.me/scratch/NxM32
-void ftGameWatch_SpecialLwAir_StartAction(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;

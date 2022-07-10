@@ -28,7 +28,7 @@ void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     func_8006EBA4(fighterObj);
 }
 
-void ftPikachu_SpecialHiAir_StartAction(HSD_GObj* fighterObj) {
+void ftPikachu_SpecialAirHi_StartAction(HSD_GObj* fighterObj) {
     s32 unused[2]; 
     ftPikachuAttributes* pika_attr;
     Fighter* fighter = fighterObj->user_data;
@@ -243,7 +243,7 @@ void ftPikachu_80126614(HSD_GObj* fighterObj) {
 
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
 
-    if (!func_80082888(fighterObj, &pika_attr->xE0_array_start)) {
+    if (!func_80082888(fighterObj, &pika_attr->height_attributes)) {
         if ((collData->x134_envFlags & 0x3F) || (collData->x134_envFlags & 0xFC0)) {
             func_8007D60C(fighter);
             ftPikachu_ActionChangeUpdateVel_80127534(fighterObj);
@@ -644,7 +644,7 @@ void ftPikachu_8012738C(HSD_GObj* fighterObj) {
     s32 unused[2];
     Fighter* fighter = fighterObj->user_data;
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
-    if (!func_80082888(fighterObj, &pika_attr->xE0_array_start)) {
+    if (!func_80082888(fighterObj, &pika_attr->height_attributes)) {
         ftPikachu_ActionChange_8012744C(fighterObj);
     }
 }
@@ -653,7 +653,7 @@ void ftPikachu_801273D4(HSD_GObj* fighterObj) {
     s32 unused[2];
     Fighter* fighter = fighterObj->user_data;
     ftPikachuAttributes* pika_attr = fighter->x2D4_specialAttributes;
-    if (func_8008239C(fighterObj, fighter->x2C_facing_direction, &pika_attr->xE0_array_start)) {
+    if (func_8008239C(fighterObj, fighter->x2C_facing_direction, pika_attr->height_attributes)) {
         func_800D5CB0(fighterObj, 0, pika_attr->xB0);
         return;
     }

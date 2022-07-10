@@ -60,3 +60,7 @@ void ftFox_OnLoad(HSD_GObj* gobj) {
         func_8026B3F8(item_list[2], 0x38U);
     }
 }
+
+void ftFox_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftFoxAttributes);
+}

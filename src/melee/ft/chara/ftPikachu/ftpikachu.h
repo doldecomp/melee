@@ -61,12 +61,7 @@ typedef struct _ftPikachuAttributes {
     s32 xD8;
     u32 xDC;
 
-    f32 xE0_array_start;  /// TODO xE0 appears to be array of 6 floats, or two vecs
-    f32 xE4;
-    f32 xE8;
-    f32 xEC;
-    f32 xF0;
-    f32 xF4;
+    f32 height_attributes[6];
 } ftPikachuAttributes;
 
 
@@ -81,7 +76,7 @@ void ftPikachu_OnItemVisible(HSD_GObj *fighterObj);
 void ftPikachu_OnItemDrop(HSD_GObj* fighterObj, BOOL arg1);
 void ftPikachu_8012467C(HSD_GObj* fighterObj);
 void ftPikachu_801246C0(HSD_GObj* fighterObj);
-void ftPikachu_ScaleYAttributesArray_80124704(HSD_GObj* fighterObj);
+void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighterObj);
 void ftPikachu_OnKnockbackEnter(HSD_GObj* fighterObj);
 void ftPikachu_OnKnockbackExit(HSD_GObj* fighterObj);
 
@@ -103,7 +98,7 @@ void ftPikachu_80124DC8(HSD_GObj* fighterObj);
 
 //pika3
 void ftPikachu_SpecialS_StartAction(HSD_GObj* fighterObj);
-void ftPikachu_SpecialSAir_StartAction(HSD_GObj* fighterObj);
+void ftPikachu_SpecialAirS_StartAction(HSD_GObj* fighterObj);
 void ftPikachu_ZeroVelocity_80124F24(HSD_GObj* fighterObj);
 void ftPikachu_80124F64(HSD_GObj* fighterObj);
 void ftPikachu_80124FA0(HSD_GObj* fighterObj);
@@ -162,7 +157,7 @@ void ftPikachu_ActionChange_80125D28(HSD_GObj* fighterObj);
 ///pika4
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighterObj);
 void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighterObj);
-void ftPikachu_SpecialHiAir_StartAction(HSD_GObj* fighterObj);
+void ftPikachu_SpecialAirHi_StartAction(HSD_GObj* fighterObj);
 void ftPikachu_80125ED8(HSD_GObj* fighterObj);
 void ftPikachu_80125F14(HSD_GObj* fighterObj);
 void ftPikachu_Stub_80125F50();
@@ -207,7 +202,7 @@ s32 ftPikachu_8012765C(HSD_GObj* fighterObj);
 void ftPikachu_SetState_8012779C(HSD_GObj* fighterObj);
 void ftPikachu_EfSpawn_801277AC(HSD_GObj* fighterObj);
 void ftPikachu_SpecialLw_StartAction(HSD_GObj* fighterObj);
-void ftPikachu_SpecialLwAir_StartAction(HSD_GObj* fighterObj);
+void ftPikachu_SpecialAirLw_StartAction(HSD_GObj* fighterObj);
 void ftPikachu_ActionChange_8012798C(HSD_GObj* fighterObj);
 void ftPikachu_ActionChange_801279EC(HSD_GObj* fighterObj);
 void ftPikachu_ActionChange_80127A54(HSD_GObj* fighterObj);

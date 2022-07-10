@@ -158,3 +158,8 @@ void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
 // {
 //     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 // }
+
+
+// void ftKirby_LoadSpecialAttrs(HSD_GObj* gobj) {
+//     COPY_ATTRS(gobj, ftKirbyAttributes);
+// }

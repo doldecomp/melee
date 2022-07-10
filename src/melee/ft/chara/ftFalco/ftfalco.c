@@ -45,9 +45,9 @@ void ftFalco_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[3], 0x39);
 }
 
-void func_80149D3C(HSD_GObj* gobj)
+void ftFalco_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    func_800E5858(gobj);
+    ftFox_LoadSpecialAttrs(gobj);
 }
 
 void ftFalco_OnKnockbackEnter(HSD_GObj* gobj)

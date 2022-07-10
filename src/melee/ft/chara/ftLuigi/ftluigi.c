@@ -30,3 +30,7 @@ void ftLuigi_OnItemVisible(HSD_GObj* fighterObj) {
 void ftLuigi_OnItemDrop(HSD_GObj* gobj, BOOL bool1) {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
+
+void ftLuigi_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftLuigiAttributes);
+}

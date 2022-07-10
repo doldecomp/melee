@@ -10,7 +10,7 @@
 #include "melee/ft/fighter.h"
 
 typedef struct _ftMewTwoAttributes {
-    s32 x0;
+    f32 x0;
     s32 x4;
     s32 x8;
     s32 xC;
@@ -24,9 +24,12 @@ typedef struct _ftMewTwoAttributes {
     f32 x54;
     u8 x58_filler[0x70 - 0x58];
     s32 x70;
-    s32 xBC;
-    u8 xC0_filler[0xD0 - 0xC0];
-} ftMewTwoAttributes;
+    s32 x74;
+    s32 x78;
+    s32 x7C;
+    f32 x80;
+    f32 x84;
+} ftMewTwoAttributes; 
 
 void ftMewtwo_OnDeath(HSD_GObj* gobj);
 
