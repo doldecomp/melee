@@ -12,7 +12,7 @@
 void ftSandbag_OnDeath(void);
 void ftSandbag_OnLoad(HSD_GObj* gobj);
 void func_8014FA30(Fighter* fighter);
-u32 func_8014FB78(HSD_GObj* gobj);
+void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj);
 
 void ftSandbag_OnKnockbackEnter(void);
 void ftSandbag_OnKnockbackExit(void);

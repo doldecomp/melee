@@ -3963,10 +3963,6 @@ lbl_803B7520:
 
 
 .section .sdata2
-    .balign 8
-.global lbl_804D92D8
-lbl_804D92D8:
-	.4byte 0x3F800000
 .global lbl_804D92DC
 lbl_804D92DC:
 	.4byte 0x40400000

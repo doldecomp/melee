@@ -47,3 +47,23 @@ void ftSamus_OnItemVisible(HSD_GObj *fighterObj) {
 void ftSamus_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
     Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }
+
+void ftSamus_80128628(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
+    ftSamusAttributes* attr = fighter->x2D4_specialAttributes;
+    f32 attr_value_x18 = attr->x18;
+    if (fighter->sa.samus.x2230 == attr_value_x18) {
+        func_800BFFD0(fighter, 0x35, 0);
+    }
+}
+
+void ftSamus_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftSamusAttributes);
+    if (ft->x34_scale.y != 1.0f) {                                        
+        sA2->x8 *= ft->x34_scale.y;                                       
+        sA2->x78 *= ft->x34_scale.y;    
+        sA2->x54 *= ft->x34_scale.y;                                                                              
+        sA2->x58 *= ft->x34_scale.y;    
+        SCALE_HEIGHT_ATTRS(6);                                                                   
+    }  
+}

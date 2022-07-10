@@ -66,9 +66,9 @@ void ftPichu_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
     Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }
 
-void func_8014A1A8(HSD_GObj* gobj)
+void ftPichu_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    ftPikachu_ScaleYAttributesArray_80124704(gobj);
+    ftPikachu_LoadSpecialAttrs(gobj);
 }
 
 void ftPichu_OnKnockbackEnter(HSD_GObj* gobj)

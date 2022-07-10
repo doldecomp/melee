@@ -2,27 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-
-.global func_801103C8
-func_801103C8:
-/* 801103C8 0010CFA8  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 801103CC 0010CFAC  38 00 00 0E */	li r0, 0xe
-/* 801103D0 0010CFB0  7C 09 03 A6 */	mtctr r0
-/* 801103D4 0010CFB4  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 801103D8 0010CFB8  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 801103DC 0010CFBC  80 84 00 04 */	lwz r4, 4(r4)
-/* 801103E0 0010CFC0  38 A3 FF F8 */	addi r5, r3, -8
-/* 801103E4 0010CFC4  38 84 FF F8 */	addi r4, r4, -8
-lbl_801103E8:
-/* 801103E8 0010CFC8  84 64 00 08 */	lwzu r3, 8(r4)
-/* 801103EC 0010CFCC  80 04 00 04 */	lwz r0, 4(r4)
-/* 801103F0 0010CFD0  94 65 00 08 */	stwu r3, 8(r5)
-/* 801103F4 0010CFD4  90 05 00 04 */	stw r0, 4(r5)
-/* 801103F8 0010CFD8  42 00 FF F0 */	bdnz lbl_801103E8
-/* 801103FC 0010CFDC  80 04 00 08 */	lwz r0, 8(r4)
-/* 80110400 0010CFE0  90 05 00 08 */	stw r0, 8(r5)
-/* 80110404 0010CFE4  4E 80 00 20 */	blr 
-
 .global ftSeak_OnKnockbackEnter
 ftSeak_OnKnockbackEnter:
 /* 80110408 0010CFE8  7C 08 02 A6 */	mflr r0

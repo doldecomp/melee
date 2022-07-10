@@ -67,13 +67,9 @@ void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag) {
     Fighter_OnItemDrop(gobj, dropItemFlag, 1, 1);
 }
 
-void ftNess_CopySpecialAttrs(HSD_GObj* gobj) 
+void ftNess_LoadSpecialAttrs(HSD_GObj* gobj) 
 {
-    Fighter* ft = gobj->user_data;
-    
-    ftNessAttributes* sA2 = (ftNessAttributes*)ft->x2D4_specialAttributes;
-    ftNessAttributes* ext_attr = (ftNessAttributes*)ft->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
+    COPY_ATTRS(gobj, ftNessAttributes);
 }
 
 void ftNess_OnKnockbackEnter(HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //

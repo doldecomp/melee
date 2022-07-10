@@ -88,7 +88,7 @@ void ftMasterhand_OnDeath(HSD_GObj* gobj);
 void ftMasterhand_OnLoad(HSD_GObj* gobj);
 
 // ftMasterHand_2
-void func_8014FDD0(HSD_GObj* gobj);
+void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj);
 void func_8014FE10(HSD_GObj* gobj);
 void func_8014FE58(HSD_GObj* gobj);
 void func_8014FE5C(HSD_GObj* gobj);

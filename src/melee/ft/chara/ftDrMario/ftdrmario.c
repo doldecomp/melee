@@ -49,9 +49,9 @@ void ftDrMario_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_80149724(HSD_GObj* gobj)
+void ftDrMario_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    ftMario_func_800E0BE4(gobj);
+    ftMario_LoadSpecialAttrs(gobj);
 }
 
 void ftDrMario_OnKnockbackEnter(HSD_GObj* gobj)
@@ -60,7 +60,7 @@ void ftDrMario_OnKnockbackEnter(HSD_GObj* gobj)
     func_800704F0(gobj, 0, 3.0f);
 }
 
-void ftdrMario_OnKnockbackExit(HSD_GObj* gobj)
+void ftDrMario_OnKnockbackExit(HSD_GObj* gobj)
 {
     func_800704F0(gobj, 1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);

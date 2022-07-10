@@ -50,3 +50,7 @@ void ftDonkey_OnLoad(HSD_GObj* fighterObj) {
     fighter->x2222_flag.bits.b0 = 1;
     fighter->x2CC = fighter->x2D4_specialAttributes;
 }
+
+void ftDonkey_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftDonkeyAttributes);
+}

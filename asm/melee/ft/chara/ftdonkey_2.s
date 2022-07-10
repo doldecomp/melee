@@ -2,26 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8010DA74
-func_8010DA74:
-/* 8010DA74 0010A654  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8010DA78 0010A658  38 00 00 0E */	li r0, 0xe
-/* 8010DA7C 0010A65C  7C 09 03 A6 */	mtctr r0
-/* 8010DA80 0010A660  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 8010DA84 0010A664  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8010DA88 0010A668  80 84 00 04 */	lwz r4, 4(r4)
-/* 8010DA8C 0010A66C  38 A3 FF F8 */	addi r5, r3, -8
-/* 8010DA90 0010A670  38 84 FF F8 */	addi r4, r4, -8
-lbl_8010DA94:
-/* 8010DA94 0010A674  84 64 00 08 */	lwzu r3, 8(r4)
-/* 8010DA98 0010A678  80 04 00 04 */	lwz r0, 4(r4)
-/* 8010DA9C 0010A67C  94 65 00 08 */	stwu r3, 8(r5)
-/* 8010DAA0 0010A680  90 05 00 04 */	stw r0, 4(r5)
-/* 8010DAA4 0010A684  42 00 FF F0 */	bdnz lbl_8010DA94
-/* 8010DAA8 0010A688  80 04 00 08 */	lwz r0, 8(r4)
-/* 8010DAAC 0010A68C  90 05 00 08 */	stw r0, 8(r5)
-/* 8010DAB0 0010A690  4E 80 00 20 */	blr 
-
 .global ftDonkey_OnKnockbackEnter
 ftDonkey_OnKnockbackEnter:
 /* 8010DAB4 0010A694  7C 08 02 A6 */	mflr r0

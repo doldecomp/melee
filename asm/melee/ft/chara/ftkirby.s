@@ -201,8 +201,8 @@ lbl_800EEAA8:
 /* 800EEAB8 000EB698  7C 08 03 A6 */	mtlr r0
 /* 800EEABC 000EB69C  4E 80 00 20 */	blr 
 
-.global func_800EEAC0
-func_800EEAC0:
+.global ftKirby_LoadSpecialAttrs
+ftKirby_LoadSpecialAttrs:
 /* 800EEAC0 000EB6A0  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800EEAC4 000EB6A4  38 00 00 84 */	li r0, 0x84
 /* 800EEAC8 000EB6A8  7C 09 03 A6 */	mtctr r0

@@ -61,12 +61,7 @@ typedef struct _ftPikachuAttributes {
     s32 xD8;
     u32 xDC;
 
-    f32 xE0_array_start;  /// TODO xE0 appears to be array of 6 floats, or two vecs
-    f32 xE4;
-    f32 xE8;
-    f32 xEC;
-    f32 xF0;
-    f32 xF4;
+    f32 height_attributes[6];
 } ftPikachuAttributes;
 
 
@@ -81,7 +76,7 @@ void ftPikachu_OnItemVisible(HSD_GObj *fighterObj);
 void ftPikachu_OnItemDrop(HSD_GObj* fighterObj, BOOL arg1);
 void ftPikachu_8012467C(HSD_GObj* fighterObj);
 void ftPikachu_801246C0(HSD_GObj* fighterObj);
-void ftPikachu_ScaleYAttributesArray_80124704(HSD_GObj* fighterObj);
+void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighterObj);
 void ftPikachu_OnKnockbackEnter(HSD_GObj* fighterObj);
 void ftPikachu_OnKnockbackExit(HSD_GObj* fighterObj);
 

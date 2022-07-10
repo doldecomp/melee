@@ -133,10 +133,10 @@ void ftGameWatch_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
 void func_8014A698(HSD_GObj* fighter_gobj);
 void func_8014A6E0(HSD_GObj* fighter_gobj);
 void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, s32 dropItemFlag);
-void func_8014A77C(HSD_GObj* fighter_gobj);
+void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj);
 void ftGameWatch_CopySpecialAttrs(HSD_GObj* fighter_gobj);
-void func_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod);
-void func_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod);
+void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod);
+void ftGameWatch_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod);
 void ftGameWatch_OnAbsorb(HSD_GObj* fighter_gobj);
 
 // Item-related callbacks //

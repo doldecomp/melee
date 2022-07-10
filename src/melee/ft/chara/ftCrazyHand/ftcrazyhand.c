@@ -48,3 +48,8 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighterObj) {
     ft->x1A98 = 1;
     func_8015BD24(ft->x1A98, &ft->sa.masterhand.x223C, ft->sa.crazyhand.x2238, ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
 }
+
+
+void ftCrazyHand_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftCrazyHandAttributes);
+}

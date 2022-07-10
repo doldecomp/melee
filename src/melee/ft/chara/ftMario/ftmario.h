@@ -64,7 +64,7 @@ void ftMario_OnItemPickup(HSD_GObj*, BOOL);
 void ftMario_OnItemInvisible(HSD_GObj*);
 void ftMario_OnItemVisible(HSD_GObj*);
 void ftMario_OnItemDrop(HSD_GObj*, BOOL);
-void ftMario_func_800E0BE4(HSD_GObj*);
+void ftMario_LoadSpecialAttrs(HSD_GObj*);
 void ftMario_OnKnockbackEnter(HSD_GObj*);
 void ftMario_OnKnockbackExit(HSD_GObj*);
 void ftMario_func_800E0CAC(s32, u32*, u32*);

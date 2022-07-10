@@ -168,3 +168,7 @@ void ftYoshi_OnItemVisible(HSD_GObj *fighterObj) {
 void ftYoshi_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
     Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
 }
+
+void ftYoshi_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftYoshiAttributes);
+}

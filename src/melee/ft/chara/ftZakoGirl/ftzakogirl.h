@@ -10,6 +10,6 @@ void ftZakoGirl_OnItemPickup(HSD_GObj*, BOOL);
 void ftZakoGirl_OnItemInvisible(HSD_GObj*);
 void ftZakoGirl_OnItemVisible(HSD_GObj*);
 void ftZakoGirl_OnItemDrop(HSD_GObj*, BOOL);
-void func_8014F624(HSD_GObj*);
+void ftZakoGirl_LoadSpecialAttrs(HSD_GObj*);
 
 #endif

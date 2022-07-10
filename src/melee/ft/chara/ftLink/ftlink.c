@@ -96,13 +96,10 @@ void ftLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_800EB250(HSD_GObj* fighterObj) {
-    Fighter* link = fighterObj->user_data;
-    ftLinkAttributes* link_attr = link->x2D4_specialAttributes;
-    ftLinkAttributes* other_attr = link->x10C_ftData->ext_attr;
-    *link_attr = *other_attr;
-    if (lbl_804D92D8 != link->x34_scale.y) {
-        link_attr->x28 *= link->x34_scale.y;
+void ftLink_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftLinkAttributes);
+    if (ft->x34_scale.y != 1.0f) {
+        sA2->x28 *= ft->x34_scale.y;
     }
 }
 

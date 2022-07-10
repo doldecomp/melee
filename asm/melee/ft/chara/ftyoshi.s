@@ -2,24 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8012BC90
-func_8012BC90:
-/* 8012BC90 00128870  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012BC94 00128874  38 00 00 27 */	li r0, 0x27
-/* 8012BC98 00128878  7C 09 03 A6 */	mtctr r0
-/* 8012BC9C 0012887C  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 8012BCA0 00128880  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8012BCA4 00128884  80 84 00 04 */	lwz r4, 4(r4)
-/* 8012BCA8 00128888  38 A3 FF F8 */	addi r5, r3, -8
-/* 8012BCAC 0012888C  38 84 FF F8 */	addi r4, r4, -8
-lbl_8012BCB0:
-/* 8012BCB0 00128890  84 64 00 08 */	lwzu r3, 8(r4)
-/* 8012BCB4 00128894  80 04 00 04 */	lwz r0, 4(r4)
-/* 8012BCB8 00128898  94 65 00 08 */	stwu r3, 8(r5)
-/* 8012BCBC 0012889C  90 05 00 04 */	stw r0, 4(r5)
-/* 8012BCC0 001288A0  42 00 FF F0 */	bdnz lbl_8012BCB0
-/* 8012BCC4 001288A4  4E 80 00 20 */	blr 
-
 .global ftYoshi_OnKnockbackEnter
 ftYoshi_OnKnockbackEnter:
 /* 8012BCC8 001288A8  7C 08 02 A6 */	mflr r0

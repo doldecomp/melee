@@ -1005,7 +1005,7 @@ struct SpecialAttrs_Pikachu {
 
 struct SpecialAttrs_Samus {
     /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
+    /* 0x2230 */ s32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
@@ -1040,7 +1040,7 @@ struct SpecialAttrs_Purin {
 struct SpecialAttrs_Mewtwo {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
+    /* 0x2234 */ s32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
 };
@@ -1915,6 +1915,20 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
         *(attributeName *)(ft)->x2D8_specialAttributes2 = *src;            \
         *attr = backup;                                                      \
     } while(0)
+
+#define COPY_ATTRS(gobj, attributeName)                                          \
+    Fighter* ft = gobj->user_data;                                               \
+    attributeName* sA2 = (attributeName*)ft->x2D4_specialAttributes;             \
+    attributeName* ext_attr = (attributeName*)ft->x10C_ftData->ext_attr;         \
+    *sA2 = *ext_attr;                                                            \
+
+#define SCALE_HEIGHT_ATTRS(num_attrs)                     \
+    {                                                     \
+        int i;                                            \
+        for (i = 0; i < num_attrs; i++) {                 \
+            sA2->height_attributes[i] *= ft->x34_scale.y; \
+        }                                                 \
+    }  \
 
 
 // Works but unused decided to go with inline instead 

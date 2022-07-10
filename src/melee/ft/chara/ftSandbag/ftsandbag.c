@@ -52,22 +52,9 @@ void func_8014FA30(Fighter* fighter)
     func_8000C420(fighter->x5E8_fighterBones[6].x4_jobj2, 2, -1.50098311f);
 }
 
-u32 func_8014FB78(HSD_GObj* gobj)
+void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    Fighter* fighter = gobj->user_data;
-    ftData* fighter_data = fighter->x10C_ftData;
-
-    ftSandbagAttributes *special_attr = (ftSandbagAttributes *)fighter->x2D4_specialAttributes;
-
-    ftSandbagAttributes* ext_attr = (ftSandbagAttributes *)fighter_data->ext_attr;
-
-    s32 ext_attr_first = ext_attr->x0_pair[0];
-    s32 ext_attr_second = ext_attr->x0_pair[1];
-
-    special_attr->x0_pair[0] = ext_attr_first;
-    special_attr->x0_pair[1] = ext_attr_second;
-
-    return ext_attr_first;
+    COPY_ATTRS(gobj, ftSandbagAttributes);
 }
 
 void ftSandbag_OnKnockbackEnter(void) {

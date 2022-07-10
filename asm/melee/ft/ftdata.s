@@ -1800,7 +1800,7 @@ ft_OnKnockbackExit:
     .4byte ftMars_OnKnockbackExit
     .4byte ftZelda_OnKnockbackExit
     .4byte ftCLink_OnKnockbackExit
-    .4byte ftdrMario_OnKnockbackExit
+    .4byte ftDrMario_OnKnockbackExit
     .4byte ftFalco_OnKnockbackExit
     .4byte ftPichu_OnKnockbackExit
     .4byte NULL
@@ -1864,18 +1864,18 @@ lbl_803C1E38:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_80128628
+    .4byte ftSamus_80128628
     .4byte NULL
     .4byte NULL
-    .4byte func_80144F58
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
+    .4byte ftMewTwo_80144F58
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8014A77C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte ftGameWatch_8014A77C
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1885,42 +1885,43 @@ lbl_803C1E38:
     .4byte NULL
     .4byte NULL
 
-.global lbl_803C1EBC  /* Something to do with updatign Attributes */
-lbl_803C1EBC:
-    .4byte ftMario_func_800E0BE4
-    .4byte func_800E5858
-    .4byte func_800E2B40
-    .4byte func_8010DA74
-    .4byte func_800EEAC0
-    .4byte func_80132D00
-    .4byte func_800EB250
-    .4byte func_801103C8
-    .4byte ftNess_CopySpecialAttrs
-    .4byte func_8011B904
-    .4byte func_8011F0A4
-    .4byte func_80122FCC
-    .4byte ftPikachu_ScaleYAttributesArray_80124704
-    .4byte func_80128684
-    .4byte func_8012BC90
-    .4byte func_8013C88C
-    .4byte func_80144FB4
-    .4byte func_8014254C
-    .4byte func_801364E8
-    .4byte func_80139590
-    .4byte func_8014906C
-    .4byte func_80149724
-    .4byte func_80149D3C
-    .4byte func_8014A1A8
-    .4byte ftGameWatch_CopySpecialAttrs
-    .4byte func_8014EE40
-    .4byte func_8014F148
-    .4byte func_8014FDD0
-    .4byte func_80155F8C
-    .4byte func_8014F3FC
-    .4byte func_8014F624
-    .4byte func_8014F8E4
-    .4byte func_8014FB78
+.global ft_LoadSpecialAttrs
+ft_LoadSpecialAttrs:
+    .4byte ftMario_LoadSpecialAttrs
+    .4byte ftFox_LoadSpecialAttrs
+    .4byte ftCFalcon_LoadSpecialAttrs
+    .4byte ftDonkey_LoadSpecialAttrs
+    .4byte ftKirby_LoadSpecialAttrs
+    .4byte ftKoopa_LoadSpecialAttrs
+    .4byte ftLink_LoadSpecialAttrs
+    .4byte ftSeak_LoadSpecialAttrs
+    .4byte ftNess_LoadSpecialAttrs
+    .4byte ftPeach_LoadSpecialAttrs
+    .4byte ftIceClimber_LoadSpecialAttrs
+    .4byte ftNana_LoadSpecialAttrs
+    .4byte ftPikachu_LoadSpecialAttrs
+    .4byte ftSamus_LoadSpecialAttrs
+    .4byte ftYoshi_LoadSpecialAttrs
+    .4byte ftPurin_LoadSpecialAttrs
+    .4byte ftMewTwo_LoadSpecialAttrs
+    .4byte ftLuigi_LoadSpecialAttrs
+    .4byte ftMars_LoadSpecialAttrs
+    .4byte ftZelda_LoadSpecialAttrs
+    .4byte ftCLink_LoadSpecialAttrs
+    .4byte ftDrMario_LoadSpecialAttrs
+    .4byte ftFalco_LoadSpecialAttrs
+    .4byte ftPichu_LoadSpecialAttrs
+    .4byte ftGameWatch_LoadSpecialAttrs
+    .4byte ftGanon_LoadSpecialAttrs
+    .4byte ftRoy_LoadSpecialAttrs
+    .4byte ftMasterHand_LoadSpecialAttrs
+    .4byte ftCrazyHand_LoadSpecialAttrs
+    .4byte ftZakoBoy_LoadSpecialAttrs
+    .4byte ftZakoGirl_LoadSpecialAttrs
+    .4byte ftGKoopa_LoadSpecialAttrs
+    .4byte ftSandbag_LoadSpecialAttrs
     .balign 8
+
 
 # Standard Character .dat File Names
 

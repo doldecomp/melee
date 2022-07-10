@@ -43,7 +43,7 @@ void ftMars_OnItemVisible(HSD_GObj* gobj);
 void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
 void ftMars_OnLoadForRoy(Fighter* ft);
 void ftMars_OnLoad(HSD_GObj* gobj);
-void func_801364E8(HSD_GObj* gobj);
+void ftMars_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftMars_OnKnockbackEnter(HSD_GObj* gobj);
 void ftMars_OnKnockbackExit(HSD_GObj* gobj);
 void lbl_801365A8(HSD_GObj* gobj);
