@@ -12,7 +12,7 @@ typedef struct _MasterHandAttributes {
     s32 x8;
     s32 xC;
     s32 x10;
-    f32 x14;
+    s32 x14;
     s32 x18;
     s32 x1C;
     s32 x20;
@@ -80,7 +80,13 @@ typedef struct _MasterHandAttributes {
     f32 x154;
     f32 x158;
     f32 x15C;
-    u8 data_filler_160[0x17C - 0x160];
+    s32 x160;
+    s32 x164;
+    s32 x168;
+    s32 x16C;
+    s32 x170;
+    s32 x174;
+    f32 x178;
 } MasterHandAttributes;
 
 // ftMasterHand_1
