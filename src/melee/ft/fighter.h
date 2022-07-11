@@ -1747,6 +1747,7 @@ typedef struct _Fighter {
     union {
         /* 0x2348 */ u32 x2348_stateVar3;
         /* 0x2348 */ s32 x2348_stateVar3_s32;
+        /* 0x2348 */ f32 x2348_stateVar3_f32;
     };
     union {
         struct {
