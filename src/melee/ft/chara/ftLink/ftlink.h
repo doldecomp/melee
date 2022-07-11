@@ -1,3 +1,5 @@
+#pragma once
+
 #include <dolphin/types.h>
 
 #include "sysdolphin/baselib/gobj.h"
