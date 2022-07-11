@@ -1,3 +1,5 @@
+#pragma once
+
 // extern ? lbl_80005918;
 // extern ? lbl_803B7240;
 // extern ? lbl_803B7260;
