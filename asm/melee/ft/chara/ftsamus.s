@@ -2104,6 +2104,7 @@ as_table_yoshi:
     .balign 8
 
 .section .sdata2
+    .balign 8
 
 .global lbl_804D99E0
 lbl_804D99E0:

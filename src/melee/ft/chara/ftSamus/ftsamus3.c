@@ -1,5 +1,11 @@
 #include "ftsamus.h"
 
+void ftSamus_801293BC_inner(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighterPlus(fighterObj);
+    ftSamusAttributes* samus_attr = fighter->x2D4_specialAttributes;
+    s32 x2230 = fighter->sa.samus.x2230;
+    fighter->x80_self_vel.x = (fighter->x2C_facing_direction * (samus_attr->x1C * x2230));
+}
 
 void ftSamus_801291F0(HSD_GObj* fighterObj){
     if (fighterObj) {
@@ -46,13 +52,6 @@ s32 ftSamus_801292E4(HSD_GObj* fighterObj) {
         }
     }
     return 0;
-}
-
-void inline ftSamus_801293BC_inner(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighterPlus(fighterObj);
-    ftSamusAttributes* samus_attr = fighter->x2D4_specialAttributes;
-    s32 x2230 = fighter->sa.samus.x2230;
-    fighter->x80_self_vel.x = (fighter->x2C_facing_direction * (samus_attr->x1C * x2230));
 }
 
 void ftSamus_801293BC(HSD_GObj* fighterObj) {
