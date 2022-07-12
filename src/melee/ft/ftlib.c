@@ -388,9 +388,9 @@ BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1) {
     }
 }
 
-BOOL func_80086960(u16* arg)
+BOOL func_80086960(HSD_GObj* arg)
 {
-    if (arg != NULL && *arg == 4) {
+    if (arg != NULL && arg->classifier == 4) {
         return TRUE;
     } else {
         return FALSE;
@@ -413,7 +413,7 @@ inline void vector_add(Vec* dst, Vec* src, f32 x, f32 y, f32 z)
 void func_80086990(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
-    f32 tmp = 0.5f * (fp->x6F0_collData.xA8 + fp->x6F0_collData.xB0);
+    f32 tmp = 0.5f * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y + fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
     vector_add(v, &fp->xB0_pos, 0.0f, tmp, 0.0f);
 }
 
@@ -972,7 +972,7 @@ void func_8008777C(HSD_GObj* gobj)
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
     }
     cd = &fp->x6F0_collData;
-    func_someCalcAngle_80022C30(-cd->x154_groundNormal.x, cd->x154_groundNormal.y);
+    func_someCalcAngle_80022C30(-cd->x14C_ground.normal.x, cd->x14C_ground.normal.y);
 }
 
 BOOL func_800877D4(HSD_GObj* gobj)

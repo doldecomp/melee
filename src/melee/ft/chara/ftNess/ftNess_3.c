@@ -249,7 +249,7 @@ s32 func_80114FF8(HSD_GObj* fighter_gobj, Vec3* ECBUnk, Vec3* ECBUnk2, f32 float
     push_ecb(&sp34, ECBUnk);
     push_ecb(&sp34, ECBUnk2);
 
-    sp34.x34_flags_1 = 5;
+    sp34.x34_flags.bits.b1234 = 5;
 
     func_8004730C(&sp34, &sp1C); // EnvironmentCollisionCheck_NessYoYo
 
@@ -292,7 +292,7 @@ void func_80115114(HSD_GObj* fighter_gobj, Point3d* arg1)
     func_8000B1CC(temp_r31->x5E8_fighterBones[0x2].x0_jobj, 0, &sp14);
     *arg1 = sp20;
     lbvector_Sub(arg1, &sp14);
-    lbvector_Rotate(arg1, 4, -func_someCalcAngle_80022C30(temp_r30->x154_groundNormal.x, temp_r30->x154_groundNormal.y));
+    lbvector_Rotate(arg1, 4, -func_someCalcAngle_80022C30(temp_r30->x14C_ground.normal.x, temp_r30->x14C_ground.normal.y));
     lbvector_Add(arg1, &sp14);
 }
 
@@ -320,7 +320,7 @@ void func_801151EC(HSD_GObj* fighter_gobj) {
         func_8000B1CC(temp_r30->x5E8_fighterBones[0x2].x0_jobj, 0, &sp20);
         sp2C = sp14;
         lbvector_Sub(&sp2C, &sp20);
-        lbvector_Rotate(&sp2C, 4, -func_someCalcAngle_80022C30(temp_r31->x154_groundNormal.x, temp_r31->x154_groundNormal.y));
+        lbvector_Rotate(&sp2C, 4, -func_someCalcAngle_80022C30(temp_r31->x14C_ground.normal.x, temp_r31->x14C_ground.normal.y));
         lbvector_Add(&sp2C, &sp20);
     }
     temp_r30->sa.ness.x2230 = sp2C;
@@ -350,7 +350,7 @@ void func_801152D0(HSD_GObj* fighter_gobj, f32 arg8) {
         func_8000B1CC(temp_r30->x5E8_fighterBones[0x2].x0_jobj, 0, &sp24);
         sp3C = sp18;
         lbvector_Sub(&sp3C, &sp24);
-        lbvector_Rotate(&sp3C, 4, -func_someCalcAngle_80022C30(temp_r31->x154_groundNormal.x, temp_r31->x154_groundNormal.y));
+        lbvector_Rotate(&sp3C, 4, -func_someCalcAngle_80022C30(temp_r31->x14C_ground.normal.x, temp_r31->x14C_ground.normal.y));
         lbvector_Add(&sp3C, &sp24);
     }
     sp30 = temp_r30->sa.ness.x2230;
@@ -370,11 +370,12 @@ s32 func_80115404(HSD_GObj* fighter_gobj) {
     f32 temp_r0;
     Fighter* temp_r31;
 
+    // inline of func_80086990
     temp_r31 = fighter_gobj->user_data;
     temp_f3 = 0.0f;
     temp_f1 = 0.5f;
     sp20.x = temp_f3;
-    sp20.y = temp_f1 * (temp_r31->x6F0_collData.xA8 + temp_r31->x6F0_collData.xB0);
+    sp20.y = temp_f1 * (temp_r31->x6F0_collData.xA4_ecbCurrCorrect.top.y + temp_r31->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
     sp20.z = temp_f3;
     sp20.x += temp_r31->xB0_pos.x;
     sp20.y += temp_r31->xB0_pos.y;
@@ -809,9 +810,10 @@ void lbl_80115C9C(HSD_GObj* fighter_gobj) // Ness's Up Smash Animation Callback 
         }
         if (((s32)fighter_data2->x2340_stateVar1 == 0xD) && ((s32)fighter_data2->x2348_stateVar3 == 0)) 
         {
+            // inline of func_80086990
             fighter_data2 = GetFighterData(fighter_gobj);
             sp18.x = 0.0f;
-            sp18.y = 0.5f * (fighter_data2->x6F0_collData.xA8 + fighter_data2->x6F0_collData.xB0);
+            sp18.y = 0.5f * (fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.top.y + fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
             sp18.z = 0.0f;
             sp18.x += fighter_data2->xB0_pos.x;
             sp18.y += fighter_data2->xB0_pos.y;

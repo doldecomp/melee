@@ -39,6 +39,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/pl/player.c.o 		 	    \
 	$(BUILD_DIR)/asm/melee/pl/code_8003715C.s.o 		\
 													\
+	$(BUILD_DIR)/src/melee/mp/mpcoll.c.o 				\
 	$(BUILD_DIR)/asm/melee/mp/mpcoll.s.o 				\
 	$(BUILD_DIR)/asm/melee/mp/mplib.s.o 				\
 	$(BUILD_DIR)/asm/melee/mp/mpisland.s.o 			\

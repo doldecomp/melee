@@ -410,40 +410,88 @@ typedef struct _CameraBox
   Vec3 x48;
 } CameraBox;
 
+typedef struct _ftECB
+{
+    Vec2 top;
+    Vec2 bottom;
+    Vec2 left;
+    Vec2 right;
+} ftECB;
+
+typedef struct _ECBFlagStruct {
+    union { 
+        struct {
+        u8 b0 : 1;
+        u8 b1234 : 4;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } bits;
+    u8 raw;
+    };
+} ECBFlagStruct;
+
+typedef struct SurfaceData {
+    s32 index;
+    u8 info;
+    u8 unk;
+    u8 type;
+    u8 mat;
+    Vec3 normal;
+} SurfaceData;
+
 typedef struct _CollData
 {
-    u8 filler_x0[0x4];
+    HSD_GObj* x0_gobj;
     Vec3 x4_vec;
-    u8 padding_x10[0x1C - 0x10];
+    Vec3 x10_vec;
     Vec3 x1C_vec;
-    u8 padding_x28[0x34 - 0x28];
-    u8 x34_flags_0 : 1;
-    u8 x34_flags_1 : 4;
-    u8 x34_flags_2 : 3;
-    u8 padding_x35[0x40 - 0x35];
-    u32 x40;
+    Vec3 x28_vec;
+    ECBFlagStruct x34_flags;
+    ECBFlagStruct x35_flags;
+    s16 x36;
+    s32 x38;
+    s32 x3C;
+    s32 x40;
     u32 x44;
-    u8 filler_x48[0xA8 - 0x48];
-    f32 xA8;
-    f32 xAC;
-    f32 xB0;
-    Vec2 xB4_ecbCurrCorrect_right;
-    Vec2 xBC_ecbCurrCorrect_left;
-    u8 filler_xBC[0x130 - 0xBC - 8];
-    u32 x130;
+    u32 x48;
+    u32 x4C;
+    f32 x50;
+    f32 x54;
+    f32 x58;
+    f32 x5C;
+    s32 x60;
+    ftECB x64_ecb;
+    ftECB x84_ecb;
+    ftECB xA4_ecbCurrCorrect;
+    ftECB xC4_ecb;
+    ftECB xE4_ecb;
+    s32 x104;
+    union {
+        struct {
+            HSD_JObj* x108_joint;
+            HSD_JObj* x10C_joint[6];
+        };
+        struct {
+            f32 x108_f32;
+            f32 x10C_f32;
+            f32 x110_f32;
+            f32 x114_f32;
+            f32 x118_f32;
+            f32 x11C_f32;
+            f32 x120_f32;
+        };
+    };
+    f32 x124;
+    f32 x128;
+    f32 x12C;
+    u32 x130_flags;
     s32 x134_envFlags;
     u8 filler_x138[0x14C - 0x138];
-    s32 x14C_groundIndex;
-    s32 filler_x150;
-    /* 0x154 */ Vec3 x154_groundNormal; // points out of the ground surface
-    /* 0x160 */ s32 x160_rightwall_index;
-    /* 0x164 */ s32 x164;
-    /* 0x168 */ Vec x168_vec;
-    /* 0x174 */ s32 x174_leftwall_index;
-    /* 0x178 */ s32 x178;
-    /* 0x17C */ Vec x17C_vec;
-    u32 filler_x188[2];
-    /* 0x190 */ Vec x190_vec;
+    SurfaceData x14C_ground;
+    SurfaceData x160_rightwall;
+    SurfaceData x174_leftwall;
+    SurfaceData x188_ceiling;
     /* 0x19C */ s32 x19C;
 } CollData;
 

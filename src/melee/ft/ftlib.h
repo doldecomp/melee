@@ -33,7 +33,7 @@ void func_80086824(void);
 void func_8008688C(HSD_GObj*);
 void func_800868A4(void);
 BOOL func_800868D4(HSD_GObj*, HSD_GObj*);
-BOOL func_80086960(u16*);
+BOOL func_80086960(HSD_GObj*);
 CollData* func_80086984(HSD_GObj*);
 void func_80086990(HSD_GObj*, Vec3*);
 f32 func_800869D4(HSD_GObj*);

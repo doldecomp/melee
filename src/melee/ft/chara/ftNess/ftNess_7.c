@@ -335,7 +335,7 @@ void func_80117F24(HSD_GObj* fighter_gobj, CollData* coll_data) // Calculates so
     }
     if ((coll_data->x134_envFlags & 0x3F) != 0)
     {
-        phi_f1 = func_someCalcAngle_80022C30(coll_data->x168_vec.y, coll_data->x168_vec.x);
+        phi_f1 = func_someCalcAngle_80022C30(coll_data->x160_rightwall.normal.y, coll_data->x160_rightwall.normal.x);
         while (phi_f1 < 0.0f)
         {
             phi_f1 += (f64)6.283185307179586;
@@ -367,7 +367,7 @@ void func_80117F24(HSD_GObj* fighter_gobj, CollData* coll_data) // Calculates so
     }
     if ((coll_data->x134_envFlags & 0xFC0) != 0)
     {
-        phi_f1 = func_someCalcAngle_80022C30(coll_data->x17C_vec.y, coll_data->x17C_vec.x);
+        phi_f1 = func_someCalcAngle_80022C30(coll_data->x174_leftwall.normal.y, coll_data->x174_leftwall.normal.x);
         phi_f3 = (f64)3.141592653589793 + phi_f1;
 
         while (phi_f3 < 0.0f)
@@ -539,7 +539,7 @@ void func_80118384(HSD_GObj* fighter_gobj)  // Ness's grounded PK Thunder 2 Acti
 
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    if ((fighter_data->x6F0_collData.filler_x150 & 0x100) == 0)
+    if ((fighter_data->x6F0_collData.x14C_ground.info & 0x100) == 0)
     {
         temp_f3 = 5.0f;
         sp40.x = fighter_data->xB0_pos.x - fighter_data->x2350_stateVar5_f32;
@@ -547,7 +547,7 @@ void func_80118384(HSD_GObj* fighter_gobj)  // Ness's grounded PK Thunder 2 Acti
         temp_f1 = (temp_f3 * temp_f2) + fighter_data->xB0_pos.y;
         sp40.y = temp_f1 - fighter_data->x2354_stateVar6;
         sp40.z = 0.0f;
-        temp_f1_2 = lbvector_Angle(&fighter_data->x6F0_collData.x154_groundNormal, &sp40);
+        temp_f1_2 = lbvector_Angle(&fighter_data->x6F0_collData.x14C_ground.normal, &sp40);
 
         if (!(temp_f1_2 < 1.5707963705062866f))
         {
@@ -1509,8 +1509,8 @@ void lbl_801195A4(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder 2 Collis
         func_80097D40(fighter_gobj);
         return;
     }
-    temp_f1_2 = fighter_data->x6F0_collData.x154_groundNormal.y;
-    if (fighter_data->x6F0_collData.x154_groundNormal.y > 0.0f)
+    temp_f1_2 = fighter_data->x6F0_collData.x14C_ground.normal.y;
+    if (fighter_data->x6F0_collData.x14C_ground.normal.y > 0.0f)
     {
         if (1.0f == fighter_data->x2C_facing_direction)
         {
@@ -1520,7 +1520,7 @@ void lbl_801195A4(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder 2 Collis
         {
             phi_f31 = 1.5707963267948966;
         }
-        fighter_data->x2368_f32 = (f32)(phi_f31 + func_someCalcAngle_80022C30(fighter_data->x6F0_collData.x154_groundNormal.y, fighter_data->x6F0_collData.x154_groundNormal.x));
+        fighter_data->x2368_f32 = (f32)(phi_f31 + func_someCalcAngle_80022C30(fighter_data->x6F0_collData.x14C_ground.normal.y, fighter_data->x6F0_collData.x14C_ground.normal.x));
         return;
     }
     if (1.0f == fighter_data->x2C_facing_direction)
@@ -1531,7 +1531,7 @@ void lbl_801195A4(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder 2 Collis
     {
         phi_f31_2 = -1.5707963267948966;
     }
-    fighter_data->x2368_f32 = (f32)(phi_f31_2 + func_someCalcAngle_80022C30(fighter_data->x6F0_collData.x154_groundNormal.y, fighter_data->x6F0_collData.x154_groundNormal.x));
+    fighter_data->x2368_f32 = (f32)(phi_f31_2 + func_someCalcAngle_80022C30(fighter_data->x6F0_collData.x14C_ground.normal.y, fighter_data->x6F0_collData.x14C_ground.normal.x));
 }
 
 // 0x80119798 //
@@ -1631,7 +1631,7 @@ void lbl_801198DC(HSD_GObj* fighter_gobj)
     }
     if (func_800822A4(fighter_gobj, ledgeGrabDir) != 0)
     {
-        if (lbvector_Angle(&fighter_r31->x6F0_collData.x154_groundNormal, &fighter_r31->x80_self_vel) > (0.01745329238474369f * (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
+        if (lbvector_Angle(&fighter_r31->x6F0_collData.x14C_ground.normal, &fighter_r31->x80_self_vel) > (0.01745329238474369f * (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
         {
             fighter_r31->x80_self_vel.z = 0.0f;
             fighter_r31->x80_self_vel.y = 0.0f;
@@ -1679,10 +1679,10 @@ void lbl_801198DC(HSD_GObj* fighter_gobj)
     ecbFlag = fighter_r31->x6F0_collData.x134_envFlags;
     if ((ecbFlag & 0x6000) != 0)
     {
-        if (lbvector_Angle(&fighter_r31->x6F0_collData.x190_vec, &fighter_r31->x80_self_vel) > (0.01745329238474369f * (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
+        if (lbvector_Angle(&fighter_r31->x6F0_collData.x188_ceiling.normal, &fighter_r31->x80_self_vel) > (0.01745329238474369f * (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
         {
             fighter_data3 = fighter_gobj->user_data;
-            lbvector_Mirror(&fighter_data3->x80_self_vel, &fighter_r31->x6F0_collData.x190_vec);
+            lbvector_Mirror(&fighter_data3->x80_self_vel, &fighter_r31->x6F0_collData.x188_ceiling.normal);
             (new_var = fighter_data3)->x80_self_vel.x *= 0.5f;
             new_var->x80_self_vel.y *= 0.5f;
             temp_f1_2 = new_var->x80_self_vel.x;
@@ -1705,7 +1705,7 @@ void lbl_801198DC(HSD_GObj* fighter_gobj)
             func_80117B70(fighter_gobj);
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16E, 2, 0, 0.0f, 1.0f, 0.0f);
             func_8006EBA4(fighter_gobj);
-            spC4.x = func_someCalcAngle_80022C30(-fighter_r31->x6F0_collData.x190_vec.x, fighter_r31->x6F0_collData.x190_vec.y);
+            spC4.x = func_someCalcAngle_80022C30(-fighter_r31->x6F0_collData.x188_ceiling.normal.x, fighter_r31->x6F0_collData.x188_ceiling.normal.y);
             ef_Spawn(0x406, fighter_gobj, &new_var->xB0_pos, &spC4);
         }
 
@@ -1714,10 +1714,10 @@ void lbl_801198DC(HSD_GObj* fighter_gobj)
     {
         if ((ecbFlag & 0x3F) != 0)
         {
-            if (lbvector_Angle(&fighter_r31->x6F0_collData.x168_vec, &fighter_r31->x80_self_vel) > (0.01745329238474369f * (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
+            if (lbvector_Angle(&fighter_r31->x6F0_collData.x160_rightwall.normal, &fighter_r31->x80_self_vel) > (0.01745329238474369f * (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
             {
                 fighter_data4 = fighter_gobj->user_data;
-                lbvector_Mirror(&fighter_data4->x80_self_vel, &fighter_r31->x6F0_collData.x168_vec);
+                lbvector_Mirror(&fighter_data4->x80_self_vel, &fighter_r31->x6F0_collData.x160_rightwall.normal);
                 (new_var = fighter_data4)->x80_self_vel.x *= 0.5f;
                 new_var->x80_self_vel.y *= 0.5f;
                 temp_f1_5 = new_var->x80_self_vel.x;
@@ -1740,7 +1740,7 @@ void lbl_801198DC(HSD_GObj* fighter_gobj)
                 func_80117B70(fighter_gobj);
                 Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16E, 2, 0, 0.0f, 1.0f, 0.0f);
                 func_8006EBA4(fighter_gobj);
-                spB8.x = func_someCalcAngle_80022C30(-fighter_r31->x6F0_collData.x168_vec.x, fighter_r31->x6F0_collData.x168_vec.y);
+                spB8.x = func_someCalcAngle_80022C30(-fighter_r31->x6F0_collData.x160_rightwall.normal.x, fighter_r31->x6F0_collData.x160_rightwall.normal.y);
                 ef_Spawn(0x406, fighter_gobj, &fighter_data4->xB0_pos, &spB8);
                 return;
             }
@@ -1749,10 +1749,10 @@ void lbl_801198DC(HSD_GObj* fighter_gobj)
         }
         if ((ecbFlag & 0xFC0) != 0)
         {
-            if (lbvector_Angle(&fighter_r31->x6F0_collData.x17C_vec, &fighter_r31->x80_self_vel) > (0.01745329238474369f * (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
+            if (lbvector_Angle(&fighter_r31->x6F0_collData.x174_leftwall.normal, &fighter_r31->x80_self_vel) > (0.01745329238474369f * (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
             {
                 fighter_data5 = fighter_gobj->user_data;
-                lbvector_Mirror(&fighter_data5->x80_self_vel, &fighter_r31->x6F0_collData.x17C_vec);
+                lbvector_Mirror(&fighter_data5->x80_self_vel, &fighter_r31->x6F0_collData.x174_leftwall.normal);
                 (new_var = fighter_data5)->x80_self_vel.x *= 0.5f;
                 new_var->x80_self_vel.y *= 0.5f;
                 temp_f1_8 = new_var->x80_self_vel.x;
@@ -1775,7 +1775,7 @@ void lbl_801198DC(HSD_GObj* fighter_gobj)
                 func_80117B70(fighter_gobj);
                 Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16E, 2, 0, 0.0f, 1.0f, 0.0f);
                 func_8006EBA4(fighter_gobj);
-                spAC.x = func_someCalcAngle_80022C30(-fighter_r31->x6F0_collData.x17C_vec.x, fighter_r31->x6F0_collData.x17C_vec.y);
+                spAC.x = func_someCalcAngle_80022C30(-fighter_r31->x6F0_collData.x174_leftwall.normal.x, fighter_r31->x6F0_collData.x174_leftwall.normal.y);
                 ef_Spawn(0x406, fighter_gobj, &fighter_data5->xB0_pos, &spAC);
                 return;
             }
