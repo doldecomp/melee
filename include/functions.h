@@ -9136,6 +9136,7 @@ void func_80390A70(struct _HSD_GObj*, u8, void*);
 // ? func_803B6BE4(?);
 void efLib_PauseAll(struct _HSD_GObj*);
 void efLib_ResumeAll(struct _HSD_GObj*);
+BOOL EnvColl_CheckGroundAndLedge(HSD_GObj*, s32);
 s32 func_80096CC8(struct _HSD_GObj*);
 void ef_Spawn(s32, ...);
 f32 HSD_Randf(void);
