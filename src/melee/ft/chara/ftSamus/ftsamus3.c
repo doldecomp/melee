@@ -335,4 +335,42 @@ void ftSamus_80129FE8(HSD_GObj* fighterObj) {
 }
 
 
+s32 ftSamus_8012A068(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    return fighter->sa.samus.x2238;
+}
 
+void ftSamus_8012A074(HSD_GObj* fighterObj) {
+    BOOL bool1;
+    Fighter* fighter = getFighterPlus(fighterObj);
+    ftSamusAttributes* samus_attr = fighter->x2D4_specialAttributes;
+    if (fighter->x2210_ThrowFlags.b0) {
+        fighter->x2210_ThrowFlags.b0 = 0;
+        bool1 = 1;
+    } else {
+        bool1 = 0;
+    }
+    if (bool1) {
+        Vec position;
+        fighter->sa.samus.x2238++;
+        func_8000B1CC(fighter->x5E8_fighterBones[56].x0_jobj, NULL, &position);
+        position.x = (samus_attr->x34 * fighter->x2C_facing_direction) + position.x;
+        if ((fighter->x10_action_state_index == 0x15D) || (fighter->x10_action_state_index == 0x15F)) {
+            func_802B62D0(fighterObj, &position, 0, fighter->x2C_facing_direction);
+        } else {
+            func_802B62D0(fighterObj, &position, 1, fighter->x2C_facing_direction);
+        }
+        ftSamus_8012A168(fighterObj, &position);
+        fighter->cb.x21BC_callback_Accessory4 = 0;
+    }
+}
+
+void ftSamus_8012A168(HSD_GObj* fighterObj, Vec* spawnlocation) {
+    Fighter* fighter = getFighter(fighterObj);
+    if (!fighter->x2219_flag.bits.b0) {
+        ef_Spawn(0x483, fighterObj, spawnlocation);
+        fighter->x2219_flag.bits.b0 = 1;
+    }
+    fighter->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fighter->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+}

@@ -28,7 +28,7 @@ void ftSamus_OnLoad(HSD_GObj* fighterObj) {
 
 void ftSamus_80128428(HSD_GObj* fighterObj) {
     ftSamus_80129258(fighterObj);
-    func_8012A640(fighterObj);
+    ftSamus_8012A640(fighterObj);
     func_800D9C98(fighterObj);
 }
 
