@@ -27,8 +27,8 @@ void ftSamus_OnLoad(HSD_GObj* fighterObj) {
 }
 
 void ftSamus_80128428(HSD_GObj* fighterObj) {
-    func_80129258(fighterObj);
-    func_8012A640(fighterObj);
+    ftSamus_80129258(fighterObj);
+    ftSamus_8012A640(fighterObj);
     func_800D9C98(fighterObj);
 }
 
@@ -51,8 +51,8 @@ void ftSamus_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
 void ftSamus_80128628(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighter(fighterObj);
     ftSamusAttributes* attr = fighter->x2D4_specialAttributes;
-    f32 attr_value_x18 = attr->x18;
-    if (fighter->sa.samus.x2230 == attr_value_x18) {
+    s32 samus_x2230 = fighter->sa.samus.x2230;
+    if (samus_x2230 == attr->x18) {
         func_800BFFD0(fighter, 0x35, 0);
     }
 }

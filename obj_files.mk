@@ -112,6 +112,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus1.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus2.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus3.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus4.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus5.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o 		\
@@ -200,7 +203,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_34.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftcrazyhand.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o 	\
-	$(BUILD_DIR)/asm/melee/ft/ftbosslib.s.o 		            \
+	$(BUILD_DIR)/src/melee/ft/ftbosslib.c.o 		            \
 															\
 	$(BUILD_DIR)/asm/melee/gm/gmmain_lib.s.o 		 	            \
 	$(BUILD_DIR)/src/melee/gm/gmmain.c.o 		 	            \

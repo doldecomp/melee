@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dolphin/types.h"
 
 #define PAD3_BUTTON_ADDR 0x800030E4

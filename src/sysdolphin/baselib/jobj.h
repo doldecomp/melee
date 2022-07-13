@@ -170,6 +170,15 @@ inline void HSD_JObjSetMtxDirty(HSD_JObj* jobj)
     }
 }
 
+inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
+{
+    assert_line(618, jobj);
+    jobj->rotate = *quat;
+    if ((jobj->flags & 0x02000000) == 0) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion *quat)
 {
     assert_line(699, jobj);

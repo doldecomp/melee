@@ -1394,7 +1394,6 @@ s32 ftGetParasolStatus(HSD_GObj* gobj)
     return FtParasol_None;
 }
 
-#define M_PI 3.141592653589793
 
 void func_8007EA90(Fighter* fp, s32 arg1)
 {
