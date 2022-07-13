@@ -1,6 +1,8 @@
 #ifndef __MATH_H__
 #define __MATH_H__
 
+#define M_PI 3.14159265358979323846
+
 #pragma cplusplus on
 
 extern inline float sqrtf(float x)

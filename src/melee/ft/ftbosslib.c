@@ -134,7 +134,6 @@ void func_8015C010(HSD_GObj* arg0, f32 arg1) {
     }
 }
 
-#define M_PI 3.141592653589793
 void func_8015C09C(HSD_GObj* arg0, f32 arg1) {
     HSD_JObj* jobj = arg0->hsd_obj;
     Fighter* ft = arg0->user_data;
