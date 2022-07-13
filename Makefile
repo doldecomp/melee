@@ -57,7 +57,6 @@ MWCC_LD_VERSION := 1.1
 ifeq ($(WINDOWS),1)
   WINE :=
   CPP     := $(DEVKITPPC)/bin/powerpc-eabi-cpp.exe -P
-  SHA1SUM := sha1sum
 else
   WINE ?= wine
   # Disable wine debug output for cleanliness
@@ -65,7 +64,11 @@ else
   # Default devkitPPC path
   DEVKITPPC ?= /opt/devkitpro/devkitPPC
   CPP     := $(DEVKITPPC)/bin/powerpc-eabi-cpp -P
+endif
+ifeq ($(shell uname),Darwin)
   SHA1SUM := shasum
+else
+  SHA1SUM := sha1sum
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
