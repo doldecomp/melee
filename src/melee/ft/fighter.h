@@ -18,6 +18,8 @@
 #include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
 
+BOOL func_80081298(HSD_GObj* gobj);
+
 typedef enum FighterKind
 {
     FTKIND_MARIO,

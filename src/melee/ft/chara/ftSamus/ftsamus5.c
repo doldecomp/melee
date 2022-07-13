@@ -1,6 +1,5 @@
 #include "ftsamus.h"
 
-
 void ftSamus_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighterPlus(fighterObj);
     Fighter_ActionStateChange_800693AC(fighterObj, 0x161, 0, NULL, 0.0f, 1.0f, 0.0f);
@@ -154,4 +153,64 @@ void ftSamus_8012ABB4(HSD_GObj* fighterObj) {
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fighter);
     func_80084DB0(fighterObj);
     func_8007D344(fighter, 0.0f, samus_attr->x3C, samus_attr->x40);
+}
+
+void ftSamus_8012AC00(HSD_GObj* fighterObj) {
+    Fighter *fighter = getFighter(fighterObj);
+    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fighter);
+    
+    if (fighter->xE0_ground_or_air == GA_Air) {
+        s32 direction;
+
+        if (fighter->x80_self_vel.y >= 0.0f) {
+            func_80081D0C(fighterObj);
+            return;
+        }
+        if (fighter->x2C_facing_direction == 1.0f) {
+            direction = 1;
+        } else {
+            direction = -1;
+        }
+        if (EnvColl_CheckGroundAndLedge(fighterObj, direction)) {
+            ftSamus_DestroyAllUnsetx2444(fighterObj);
+            func_800D5CB0(fighterObj, 0, samus_attr->x50);
+            return;
+        }
+        if (func_80081298(fighterObj)) {
+            ftSamus_DestroyAllUnsetx2444(fighterObj);
+            func_80081370(fighterObj);
+        }
+    } else {
+        func_80084104(fighterObj);
+    }
+}
+
+void ftSamus_8012ACF8(HSD_GObj* fighterObj) {
+    Fighter *fighter = getFighter(fighterObj);
+    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fighter);
+    
+    if (fighter->xE0_ground_or_air == GA_Air) {
+        s32 direction;
+
+        if (fighter->x80_self_vel.y >= 0.0f) {
+            func_80081D0C(fighterObj);
+            return;
+        }
+        if (fighter->x2C_facing_direction == 1.0f) {
+            direction = 1;
+        } else {
+            direction = -1;
+        }
+        if (EnvColl_CheckGroundAndLedge(fighterObj, direction)) {
+            ftSamus_DestroyAllUnsetx2444(fighterObj);
+            func_800D5CB0(fighterObj, 0, samus_attr->x50);
+            return;
+        }
+        if (func_80081298(fighterObj)) {
+            ftSamus_DestroyAllUnsetx2444(fighterObj);
+            func_80081370(fighterObj);
+        }
+    } else {
+        func_80084104(fighterObj);
+    }
 }
