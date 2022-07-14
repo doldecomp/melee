@@ -539,7 +539,7 @@ void func_80118384(HSD_GObj* fighter_gobj)  // Ness's grounded PK Thunder 2 Acti
 
     fighter_data = fighter_gobj->user_data;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    if ((fighter_data->x6F0_collData.x14C_ground.info & 0x100) == 0)
+    if ((fighter_data->x6F0_collData.x14C_ground.unk & 0x100) == 0)
     {
         temp_f3 = 5.0f;
         sp40.x = fighter_data->xB0_pos.x - fighter_data->x2350_stateVar5_f32;

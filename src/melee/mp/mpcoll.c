@@ -108,7 +108,7 @@ void func_80041EE4(CollData* cd) {
     cd->x40 = -1;
     cd->x44 = -1;
     cd->x14C_ground.index = -1;
-    cd->x14C_ground.info = 0;
+    cd->x14C_ground.unk = 0;
     cd->x14C_ground.normal.x = 0.0f;
     cd->x14C_ground.normal.y = 1.0f;
     cd->x14C_ground.normal.z = 0.0f;
@@ -137,7 +137,7 @@ void func_80041EE4(CollData* cd) {
     func_8000C160(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
     func_8000C160(&cd->xC4_ecb, sizeof(ftECB));
     func_8000C160(&cd->xE4_ecb, sizeof(ftECB));
-    func_8000C160(&cd->x104, sizeof(cd->x104));
+    func_8000C160(&cd->x104, 0x2C);
     func_8000C160(&cd->x84_ecb, sizeof(ftECB));
     func_8000C160(&cd->x64_ecb, sizeof(ftECB));
 }
@@ -376,6 +376,29 @@ void func_800424DC(CollData* cd, u32 flags) {
 }
 
 // 8004293C https://decomp.me/scratch/H4EUT
+inline void update_min_max_2(f32* min, f32* max, f32 val)
+{
+    if (*max < val) {
+        *max = val;
+    } else if (*min > val) {
+        *min = val;
+    }
+}
+
+inline void clamp_above_2(f32* value, f32 min)
+{
+    if (*value < min) {
+        *value = min;
+    }
+}
+
+inline void clamp_below_2(f32* value, f32 max)
+{
+    if (*value > max) {
+        *value = max;
+    }
+}
+
 void func_8004293C(CollData* cd) {
     f32 angle;
     f32 sin;
@@ -445,29 +468,29 @@ void func_8004293C(CollData* cd) {
         
         rot_top_x = -orig_top_y * sin;
         rot_top_y = orig_top_y * cos;
-        update_min_max(&left_x, &right_x, rot_top_x);
-        update_min_max(&bottom_y, &top_y, rot_top_y);
+        update_min_max_2(&left_x, &right_x, rot_top_x);
+        update_min_max_2(&bottom_y, &top_y, rot_top_y);
         
         rot_bot_x = -orig_bottom_y * sin;
         rot_bot_y = orig_bottom_y * cos;
-        update_min_max(&left_x, &right_x, rot_bot_x);
-        update_min_max(&bottom_y, &top_y, rot_bot_y);
+        update_min_max_2(&left_x, &right_x, rot_bot_x);
+        update_min_max_2(&bottom_y, &top_y, rot_bot_y);
 
         rot_right_x = (orig_right_x * cos) - (midpoint_x * sin);
         rot_right_y = (orig_right_x * sin) + (midpoint_x * cos);
-        update_min_max(&left_x, &right_x, rot_right_x);
-        update_min_max(&bottom_y, &top_y, rot_right_y);
+        update_min_max_2(&left_x, &right_x, rot_right_x);
+        update_min_max_2(&bottom_y, &top_y, rot_right_y);
 
         rot_left_x = (orig_left_x * cos) - (midpoint_x * sin);
         rot_left_y = (orig_left_x * sin) + (midpoint_x * cos);
-        update_min_max(&left_x, &right_x, rot_left_x);
-        update_min_max(&bottom_y, &top_y, rot_left_y);
+        update_min_max_2(&left_x, &right_x, rot_left_x);
+        update_min_max_2(&bottom_y, &top_y, rot_left_y);
     }
     
-    clamp_above(&top_y, 0.0f);
-    clamp_below(&bottom_y, -0.0f);
-    clamp_above(&right_x, 0.0f);
-    clamp_below(&left_x, -0.0f);
+    clamp_above_2(&top_y, 0.0f);
+    clamp_below_2(&bottom_y, -0.0f);
+    clamp_above_2(&right_x, 0.0f);
+    clamp_below_2(&left_x, -0.0f);
     
     if ((top_y - bottom_y) < 3.0f) {
         top_y = 1.5f;
@@ -552,16 +575,16 @@ void func_80042DB0(CollData* ecb, f32 time) {
     }
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.top, &ecb->x84_ecb.top);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom, &ecb->x84_ecb.bottom);
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right, &ecb->x84_ecb.right);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.left, &ecb->x84_ecb.left);
+    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right, &ecb->x84_ecb.right);
     if (fpclassify(ecb->xA4_ecbCurrCorrect.top.x) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.top.y) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.bottom.x) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.bottom.y) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.right.x) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.left.x) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.left.y) == FP_NAN
+        fpclassify(ecb->xA4_ecbCurrCorrect.left.y) == FP_NAN ||
+        fpclassify(ecb->xA4_ecbCurrCorrect.right.x) == FP_NAN ||
+        fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN
     ) {
         OSReport("error\n");
         __assert("mpcoll.c", 1193, "0");

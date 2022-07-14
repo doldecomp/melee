@@ -48,7 +48,7 @@ CameraBox* func_80086B74(HSD_GObj*);
 f32 func_80086B80(HSD_GObj*);
 void func_80086B90(HSD_GObj*, Vec3* v);
 void func_80086BB4(HSD_GObj*);
-s32 func_80086BE0(HSD_GObj*);
+u8 func_80086BE0(HSD_GObj*);
 void func_80086BEC(HSD_GObj*, Vec3*);
 s32 func_80086C0C(HSD_GObj*);
 void func_80086C18(HSD_GObj*, s32, s32);

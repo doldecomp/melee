@@ -524,7 +524,7 @@ void func_80086BB4(HSD_GObj* gobj)
     func_80031154(&cam->x10);
 }
 
-s32 func_80086BE0(HSD_GObj* gobj)
+u8 func_80086BE0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     return fp->xC_playerID;

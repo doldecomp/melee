@@ -414,8 +414,8 @@ typedef struct _ftECB
 {
     Vec2 top;
     Vec2 bottom;
-    Vec2 left;
     Vec2 right;
+    Vec2 left;
 } ftECB;
 
 typedef struct _ECBFlagStruct {
@@ -433,10 +433,7 @@ typedef struct _ECBFlagStruct {
 
 typedef struct SurfaceData {
     s32 index;
-    u8 info;
-    u8 unk;
-    u8 type;
-    u8 mat;
+    s32 unk;
     Vec3 normal;
 } SurfaceData;
 
@@ -466,7 +463,7 @@ typedef struct _CollData
     ftECB xA4_ecbCurrCorrect;
     ftECB xC4_ecb;
     ftECB xE4_ecb;
-    s32 x104;
+    s32 x104; // TODO: this is the start of a substruct with size 0x2C
     union {
         struct {
             HSD_JObj* x108_joint;
