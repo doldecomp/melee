@@ -90,6 +90,10 @@ void func_80041DD0(CollData* cd, u8 flags) {
     func_800588D0(left, bottom, right, top);
 }
 
+// dummy float order hack
+const f32 lbl_804D7F9C = -FLT_MAX;
+const f32 lbl_804D7FA0 = FLT_MAX;
+
 // 80041EE4 https://decomp.me/scratch/j2TXK
 // CollDataInit
 void func_80041EE4(CollData* cd) {
@@ -693,3 +697,12 @@ void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) {
 // 8004CBF4
 // 8004CC00
 // 8004D024
+
+const f32 lbl_804D7FD8 = 6.0f;
+const f64 lbl_804D7FE0 = 6.283185307179586; // 2 * PI
+const f64 lbl_804D7FE8 = -6.283185307179586; // -2 * PI
+const f64 lbl_804D7FF0 = 4503601774854144.0; // magic signed conversion constant
+const f32 lbl_804D7FF8 = 5.0f;
+const f64 lbl_804D8000 = -0.75;
+const f64 lbl_804D8008 = 0.75;
+const f32 lbl_804D8010 = -3.0f;
