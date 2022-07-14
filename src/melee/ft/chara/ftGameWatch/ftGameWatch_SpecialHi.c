@@ -243,7 +243,6 @@ void ftGameWatch_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     ftGameWatch_SpecialAirHi_Coll(fighter_gobj);
 }
 
-extern BOOL EnvColl_CheckGroundAndLedge(HSD_GObj*, s32);
 extern BOOL func_80081298(HSD_GObj*);
 extern void func_80081370(HSD_GObj*);
 

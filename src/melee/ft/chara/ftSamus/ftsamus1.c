@@ -61,7 +61,7 @@ void ftSamus_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftSamusAttributes);
     if (ft->x34_scale.y != 1.0f) {                                        
         sA2->x8 *= ft->x34_scale.y;                                       
-        sA2->x78 *= ft->x34_scale.y;    
+        sA2->x74_vec.y *= ft->x34_scale.y;    
         sA2->x54 *= ft->x34_scale.y;                                                                              
         sA2->x58 *= ft->x34_scale.y;    
         SCALE_HEIGHT_ATTRS(6);                                                                   

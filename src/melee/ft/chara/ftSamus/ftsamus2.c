@@ -96,11 +96,11 @@ void ftSamus_80128B1C(HSD_GObj *fighterObj, f32 angle, f32 arg9, f32 argA)
 void ftSamus_80128C04(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     if (( fighter->x2200_ftcmd_var0) && (!fighter->x2340_stateVar1)) {
-        func_8012AEBC(fighterObj);
+        ftSamus_8012AEBC(fighterObj);
         fighter->x2340_stateVar1 = 1;
     }
     if ((!fighter->x2200_ftcmd_var0) && (fighter->x2340_stateVar1)) {
-        func_8012AF38(fighterObj);
+        ftSamus_8012AF38(fighterObj);
         fighter->x2340_stateVar1 = 0;
     }
     if (!ftAnim_IsFramesRemaining(fighterObj)) {
@@ -111,11 +111,11 @@ void ftSamus_80128C04(HSD_GObj* fighterObj) {
 void ftSamus_80128CA0(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     if (( fighter->x2200_ftcmd_var0) && (!fighter->x2340_stateVar1)) {
-        func_8012AEBC(fighterObj);
+        ftSamus_8012AEBC(fighterObj);
         fighter->x2340_stateVar1 = 1;
     }
     if ((!fighter->x2200_ftcmd_var0) && (fighter->x2340_stateVar1)) {
-        func_8012AF38(fighterObj);
+        ftSamus_8012AF38(fighterObj);
         fighter->x2340_stateVar1 = 0;
     }
     if (!ftAnim_IsFramesRemaining(fighterObj)) {
