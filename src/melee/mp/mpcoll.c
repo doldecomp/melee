@@ -672,6 +672,37 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2) {
 }
 
 // 80043558
+void func_80043558(CollData* arg0, s32 arg1) {
+    s32 sp1C;
+    void (*sp18)(s32, s32, CollData*, s32, s32, f32);
+    s32 sp14;
+    void (*sp10)(s32, s32, CollData*, s32, s32, f32);
+    s32 temp_r3;
+    s32 temp_r3_2;
+    s32 temp_r3_3;
+
+    temp_r3 = func_80054C6C(arg1);
+    if (temp_r3 == 1) {
+        temp_r3_2 = func_80056B6C(arg1);
+        if (temp_r3_2 != -1) {
+            sp1C = 0;
+            func_800580FC(temp_r3_2, &sp18, &sp1C);
+            if (sp18 != NULL) {
+                (*sp18)(sp1C, temp_r3_2, arg0, arg0->x50, 2, 0.0f);
+            }
+        }
+    } else if (temp_r3 == 2) {
+        temp_r3_3 = func_80056B6C(arg1);
+        if (temp_r3_3 != -1) {
+            sp14 = 0;
+            func_800581BC(temp_r3_3, &sp10, &sp14);
+            if (sp10 != NULL) {
+                (*sp10)(sp14, temp_r3_3, arg0, arg0->x50, 0, 0.0f);
+            }
+        }
+    }
+}
+
 // 80043670
 // 80043680
 // 800436D8
