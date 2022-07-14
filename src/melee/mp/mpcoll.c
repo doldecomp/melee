@@ -617,7 +617,60 @@ void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) {
     }
 }
 
-// 80043324 https://decomp.me/scratch/NKVUX !
+const char * dummy_string_data = "i<MPCOLL_WALLID_MAX";
+
+// 80043324
+void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) { // see func_80043268
+    s32 dummy = 0;
+    void (*callback)(s32, s32, CollData*, s32, s32, f32);
+    s32 thing;
+    s32 temp_r29;
+
+    temp_r29 = func_80056B6C(arg1);
+    if (temp_r29 != -1) {
+        thing = 0;
+        func_800581BC(temp_r29, &callback, &thing);
+        if (callback != 0) {
+            (*callback)(thing, temp_r29, arg0, arg0->x50, 0, arg8);
+        }
+    }
+}
+void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2) {
+    // inhibit inlining
+    func_80043268(arg0, arg0->x14C_ground.index, arg2, arg0->x4_vec.y - arg0->x1C_vec.y);
+}
+void func_80043324(CollData* arg0, s32 arg1, s32 arg2) {
+    s32 temp_r3;
+    s32 temp_r3_2;
+
+    if (arg0->x14C_ground.index != -1) {
+        temp_r3 = func_801CA284(&arg0->x4_vec, arg0->x14C_ground.index);
+        if (temp_r3 != 0) {
+            arg0->x14C_ground.unk = (arg0->x14C_ground.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
+        }
+    }
+    if ((arg1 != 0) || (arg0->x134_envFlags & 0x800000) || (arg0->x134_envFlags & 0x100000) || (arg0->x134_envFlags & 0x200000)) {
+        func_80043324_inline(arg0, arg1, arg2);
+    }
+    if (arg0->x134_envFlags & 0x6000) {
+        func_80043324_inline2(arg0, arg0->x188_ceiling.index, arg2, arg0->x4_vec.y - arg0->x1C_vec.y);
+    }
+    if (g_debugLevel >= 3) {
+        if (!(arg0->x4_vec.x < 45000.0f) || !(arg0->x4_vec.x > -45000.0f) || !(arg0->x4_vec.y < 45000.0f) || !(arg0->x4_vec.y > -45000.0f)) {
+            if (func_80086960(arg0->x0_gobj)) {
+                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) ply=%d ms=%d\n", "mpcoll.c", 1350, arg0->x1C_vec.x, arg0->x1C_vec.y, arg0->x4_vec.x, arg0->x4_vec.y, func_80086BE0(arg0->x0_gobj), func_800874BC(arg0->x0_gobj));
+            } else {
+                s32 gobjid = arg0->x0_gobj->classifier;
+                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) gobjid=%d\n", "mpcoll.c", 1358, arg0->x1C_vec.x, arg0->x1C_vec.y, arg0->x4_vec.x, arg0->x4_vec.y, gobjid);
+                if (arg0->x0_gobj->p_link == 9) {
+                    OSReport("itkind=%d\n", itGetKind(arg0->x0_gobj));
+                }
+            }
+            __assert("mpcoll.c", 1374, "0");
+        }
+    }
+}
+
 // 80043558
 // 80043670
 // 80043680
