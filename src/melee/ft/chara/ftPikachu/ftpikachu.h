@@ -66,7 +66,6 @@ typedef struct _ftPikachuAttributes {
 } ftPikachuAttributes;
 
 
-/// TODO put the rest of function headers here and rename all of the functions
 ///pika1
 void ftPikachu_OnLoadForPichu(Fighter* fighter);
 void ftPikachu_OnLoad(HSD_GObj* fighterObj);

@@ -354,7 +354,7 @@ void ftSamus_8012A074(HSD_GObj* fighterObj) {
         Vec position;
         fighter->sa.samus.x2238++;
         func_8000B1CC(fighter->x5E8_fighterBones[56].x0_jobj, NULL, &position);
-        position.x = (samus_attr->x34 * fighter->x2C_facing_direction) + position.x;
+        position.x += (samus_attr->x34 * fighter->x2C_facing_direction);
         if ((fighter->x10_action_state_index == 0x15D) || (fighter->x10_action_state_index == 0x15F)) {
             func_802B62D0(fighterObj, &position, 0, fighter->x2C_facing_direction);
         } else {
