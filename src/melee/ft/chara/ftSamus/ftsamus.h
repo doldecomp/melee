@@ -28,12 +28,18 @@ typedef struct _ftSamusAttributes {
     f32 x50;
     f32 x54;
     f32 x58;
-    u8 data_filler_2[0x78 - 0x5C];
-    f32 x78;
-    f32 data_filler_3[2];
+    f32 x5C;
+    f32 x60;
+    f32 x64;
+    f32 x68;
+    f32 x6C;
+    f32 x70;
+    Vec x74_vec;
+    f32 x80;
     f32 height_attributes[6];
     u8 data_filler_4[0xD4 - 0x9C];
 } ftSamusAttributes;
+
 /// maybe Samus grapple?
 struct UNK_SAMUS_S1 {
     HSD_Joint* x0_joint;
@@ -42,13 +48,22 @@ struct UNK_SAMUS_S1 {
     HSD_MatAnimJoint* xC_matanim_joint;
 };
 
+struct UNK_SAMUS_S2 {
+    S32Vec intvec;
+    Vec vec1;
+    Vec vec2;
+    f32 single_float;
+};
+
 void ftSamus_80128428(HSD_GObj* fighterObj);
 void ftSamus_80129048(HSD_GObj* fighterObj);
 void ftSamus_801290A4(HSD_GObj* fighterObj);
 void ftSamus_801291F0(HSD_GObj* fighterObj);
 void ftSamus_8012A168(HSD_GObj* fighterObj, Vec* spawnlocation);
 void ftSamus_8012A074(HSD_GObj* fighterObj);
-
+void ftSamus_8012B570(HSD_GObj* fighterObj);
+void ftSamus_8012B5F0(HSD_GObj* fighterObj);
+void ftSamus_8012B668(HSD_GObj* fighterObj);
 
 inline void ftSamus_updateDamageDeathCBs(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighterPlus(fighterObj);

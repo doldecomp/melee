@@ -1581,7 +1581,6 @@ void ftNess_SpecialAirHiEnd_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Thu
     }
 }
 
-extern BOOL EnvColl_CheckGroundAndLedge(HSD_GObj*, s32); // 0x800822A4 //
 extern BOOL func_80081298(HSD_GObj*);
 extern void func_80081370(HSD_GObj*);
 
