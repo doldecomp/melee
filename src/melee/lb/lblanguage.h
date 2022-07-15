@@ -5,9 +5,6 @@
 
 #include <dolphin/types.h>
 
-extern u8 *lbl_804D3EE0;
-extern u8 *func_8015CC58();
-
 u8 lbLang_GetLanguageSetting(void);
 int lbLang_SetLanguageSetting(int language);
 int lbLang_IsSettingJP(void);

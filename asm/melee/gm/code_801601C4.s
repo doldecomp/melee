@@ -77489,7 +77489,7 @@ lbl_803D6300:
     .4byte 0x003DFFFF
 	.4byte lbl_80304510
     .4byte 0x00410010
-	.4byte lbl_8015CF94
+	.4byte func_8015CF94
     .4byte 0x00420000
     .4byte NULL
 .global lbl_803D6450
