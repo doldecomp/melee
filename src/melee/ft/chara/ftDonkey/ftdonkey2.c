@@ -62,3 +62,49 @@ void ftDonkey_OnKnockbackEnter(HSD_GObj* fighterObj) {
 void ftDonkey_OnKnockbackExit(HSD_GObj* fighterObj) {
     Fighter_OnKnockbackExit(fighterObj, 1);
 }
+
+void ftDonkey_8010DB3C(HSD_GObj* fighterObj) { 
+    s32 unused[2]; /// can't remove with get inlines
+    BOOL bool1;
+    Fighter* fighter = fighterObj->user_data;
+    ftDonkeyAttributes* donkey_attr = fighter->x2D4_specialAttributes;
+    CollData* colldata = &fighter->x6F0_collData; 
+
+    if (fighter->x2210_ThrowFlags.b3) {
+        fighter->x2210_ThrowFlags.b3 = 0;
+        bool1 = 1;
+    } else {
+        bool1 = 0;
+    }
+    
+    if ((bool1) && ((colldata->x134_envFlags & 0x18000))) {
+        Vec vec_list[4];
+
+        s32 i;
+        for (i = 0; i < 4; i++) {
+
+            f32 temp_f5 = (donkey_attr->x68 * i) - (donkey_attr->x68 * 1.5f);
+            f32 temp_f3 = donkey_attr->x6C * fighter->x2C_facing_direction;
+            f32 temp_f6 = temp_f5 + temp_f3;
+
+            if (!func_80056C54(
+                    colldata->x14C_groundIndex, 
+                    &fighter->xB0_pos, 
+                    0, 
+                    &vec_list[i], 
+                    0, 
+                    0, 
+                    temp_f6,
+                    donkey_attr->x70, 
+                    donkey_attr->x68 * 1.5f, 
+                    donkey_attr->x68
+                )) {
+
+                vec_list[i] = fighter->xB0_pos;
+            }
+
+            vec_list[i].y += 2.0f; 
+            func_8007B8A8(&fighter->x914[i], &vec_list[i]);
+        }
+    }
+}
