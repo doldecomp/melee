@@ -88,6 +88,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftkirby.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey2.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey3.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o 		\
