@@ -1760,7 +1760,10 @@ typedef struct _Fighter {
                 /* 0x2350 */ f32 x2350_stateVar5_f32;
 
             };
-            /* 0x2354 */ f32 x2354_stateVar6;
+            union {
+                /* 0x2350 */ u32 x2354_stateVar6;
+                /* 0x2350 */ f32 x2354_stateVar6_f32;
+            };
         };
         /* 0x234C */ Vec3 x234C_pos;
     };
@@ -2018,6 +2021,11 @@ inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1) {
 inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1) {
     func_800704F0(gobj, arg1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);
+}
+
+inline void Fighter_UnsetCmdVar0(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
+    fighter->x2200_ftcmd_var0 = 0;
 }
 
 #endif
