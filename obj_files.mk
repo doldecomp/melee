@@ -357,7 +357,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/MSL/rand.c.o                     \
 	$(BUILD_DIR)/src/MSL/string.c.o                   \
 	$(BUILD_DIR)/asm/MSL/strtoul.s.o                  \
-	$(BUILD_DIR)/asm/MSL/console_io.s.o               \
+	$(BUILD_DIR)/src/MSL/console_io.c.o               \
 	$(BUILD_DIR)/src/MSL/wchar_io.c.o                 \
 	$(BUILD_DIR)/asm/MSL/math_1.s.o                   \
 	$(BUILD_DIR)/src/MSL/trigf.c.o                    \
