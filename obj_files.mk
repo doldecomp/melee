@@ -344,6 +344,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/Runtime/runtime.s.o              	\
 	$(BUILD_DIR)/src/Runtime/__init_cpp_exceptions.c.o	\
 													\
+	$(BUILD_DIR)/src/MSL/abort_exit.c.o               \
 	$(BUILD_DIR)/asm/MSL/abort_exit.s.o               \
 	$(BUILD_DIR)/asm/MSL/ansi_fp.s.o                  \
 	$(BUILD_DIR)/src/MSL/buffer_io.c.o                \
