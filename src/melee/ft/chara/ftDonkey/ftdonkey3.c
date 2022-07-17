@@ -102,3 +102,42 @@ void ftDonkey_8010DFF8(HSD_GObj* fighterObj) {
     Fighter_ActionStateChange_800693AC(fighterObj, 0x181, 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
+void ftDonkey_8010E030(HSD_GObj* fighterObj) {
+    if (!ftAnim_IsFramesRemaining(fighterObj)) {
+        func_800CC730(fighterObj);
+    }
+}
+
+void ftDonkey_8010E06C(HSD_GObj* fighterObj) {}
+
+void ftDonkey_8010E070(HSD_GObj* fighterObj) {
+    func_80084DB0(fighterObj);
+} 
+
+void ftDonkey_8010E090(HSD_GObj* fighterObj) {
+    if (func_80081D0C(fighterObj)) {
+        func_8008A2BC(fighterObj);
+    }
+}
+
+void ftDonkey_8010E0CC(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
+    if (!fighter->x2219_flag.bits.b0) {
+        ef_Spawn(0x4C6, fighterObj, fighter->x5E8_fighterBones[1].x0_jobj);
+        fighter->x2219_flag.bits.b0 = 1;
+    }
+    fighter->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fighter->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fighter->cb.x21BC_callback_Accessory4 = 0;
+}
+
+void ftDonkey_8010E148(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
+    if (!fighter->x2219_flag.bits.b0) {
+        ef_Spawn(0x4C7, fighterObj, fighter->x5E8_fighterBones[1].x0_jobj);
+        fighter->x2219_flag.bits.b0 = 1;
+    }
+    fighter->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fighter->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fighter->cb.x21BC_callback_Accessory4 = 0;
+}

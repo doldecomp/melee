@@ -549,7 +549,7 @@ void ftNess_SpecialHi_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK Thun
         sp40.x = fighter_data->xB0_pos.x - fighter_data->x2350_stateVar5_f32;
         temp_f2 = fighter_data->x34_scale.y;
         temp_f1 = (temp_f3 * temp_f2) + fighter_data->xB0_pos.y;
-        sp40.y = temp_f1 - fighter_data->x2354_stateVar6;
+        sp40.y = temp_f1 - fighter_data->x2354_stateVar6_f32;
         sp40.z = 0.0f;
         temp_f1_2 = lbvector_Angle(&fighter_data->x6F0_collData.x154_groundNormal, &sp40);
 
@@ -632,7 +632,7 @@ inline void NessFloatMath_PKThunder2(HSD_GObj* fighter_gobj)    // Required for 
     fighter_data = getFighter(fighter_gobj);
     temp_f2 = fighter_data->xB0_pos.x - fighter_data->x2350_stateVar5_f32;
     ness_attr = getFtSpecialAttrs(fighter_data);
-    temp_f1 = ((5.0f * fighter_data->x34_scale.y) + fighter_data->xB0_pos.y) - fighter_data->x2354_stateVar6;
+    temp_f1 = ((5.0f * fighter_data->x34_scale.y) + fighter_data->xB0_pos.y) - fighter_data->x2354_stateVar6_f32;
     if (temp_f2 >= 0.0f)
     {
         phi_f0 = 1.0f;

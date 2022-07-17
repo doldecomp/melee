@@ -6,7 +6,7 @@ void ftDonkey_OnDeath(HSD_GObj* fighterObj) {
     func_80074A4C(fighterObj, 0, 0);
 }
 
-void func_8010D774(HSD_GObj* fighterObj) {
+void ftDonkey_8010D774(HSD_GObj* fighterObj) {
     func_8010FAF0(fighterObj);
     func_80110074(fighterObj);
 }
@@ -40,7 +40,7 @@ void func_8010D96C(HSD_GObj* fighterObj) {
 void ftDonkey_OnLoad(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     ftData* ftdata = fighter->x10C_ftData;
-    ftDonkeyAttributes* ftData_attr =  ftdata->ext_attr;
+    ftDonkeyAttributes* ftData_attr = ftdata->ext_attr;
     
     ftData_attr->x8 = func_8001E8F8(func_80085E50(fighter, 0x128U));
     ftData_attr->xC = func_8001E8F8(func_80085E50(fighter, 0x129U));
