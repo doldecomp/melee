@@ -344,6 +344,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/Runtime/runtime.s.o              	\
 	$(BUILD_DIR)/src/Runtime/__init_cpp_exceptions.c.o	\
 													\
+	$(BUILD_DIR)/src/MSL/abort_exit.c.o               \
 	$(BUILD_DIR)/asm/MSL/abort_exit.s.o               \
 	$(BUILD_DIR)/asm/MSL/ansi_fp.s.o                  \
 	$(BUILD_DIR)/src/MSL/buffer_io.c.o                \
@@ -356,9 +357,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/MSL/rand.c.o                     \
 	$(BUILD_DIR)/src/MSL/string.c.o                   \
 	$(BUILD_DIR)/asm/MSL/strtoul.s.o                  \
-	$(BUILD_DIR)/asm/MSL/console_io.s.o               \
+	$(BUILD_DIR)/src/MSL/console_io.c.o               \
 	$(BUILD_DIR)/src/MSL/wchar_io.c.o                 \
 	$(BUILD_DIR)/asm/MSL/math_1.s.o                   \
+	$(BUILD_DIR)/src/MSL/trigf.c.o                    \
 	$(BUILD_DIR)/asm/MSL/trigf.s.o                    \
 	$(BUILD_DIR)/asm/MSL/math.s.o                     \
                                                     \
