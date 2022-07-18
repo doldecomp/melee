@@ -19,7 +19,7 @@ BOOL ftDonkey_800E0750(HSD_GObj* fighterObj) {
 void ftDonkey_800E07B0(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     ftDonkeyAttributes* donkey_attr = fighter->x2CC;
-    func_8008DCE0(fighterObj, &donkey_attr->x0_arr[9], lbl_804D9188);
+    func_8008DCE0(fighterObj, donkey_attr->x0 + 9, lbl_804D9188);
 }
  
 void ftDonkey_800E07E4(HSD_GObj* fighterObj) {
