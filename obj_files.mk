@@ -70,6 +70,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/ftlib.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_800877F8.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.s.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey1.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario1.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario2.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario3.c.o 		\

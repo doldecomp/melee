@@ -4,7 +4,7 @@
 #include "melee/lb/lbvector.h"
 
 typedef struct _ftDonkeyAttributes {
-    f32 x0;
+    s8* x0_arr;
     f32 x4;
     f32 x8;
     f32 xC;

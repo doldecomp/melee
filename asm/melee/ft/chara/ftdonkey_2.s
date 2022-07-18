@@ -81,10 +81,10 @@ as_table_donkey:
     .4byte 0x00000130
     .4byte 0x004A0000
     .4byte 0x35000000
-    .4byte func_800E07E4
+    .4byte ftDonkey_800E07E4
     .4byte NULL
-    .4byte func_800E0848
-    .4byte func_800E0868
+    .4byte ftDonkey_800E0848
+    .4byte ftDonkey_800E0868
     .4byte func_800761C8
     .4byte 0x00000131
     .4byte 0x00A80035
