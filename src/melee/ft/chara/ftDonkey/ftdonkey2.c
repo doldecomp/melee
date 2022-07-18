@@ -7,7 +7,7 @@ void ftDonkey_OnDeath(HSD_GObj* fighterObj) {
 }
 
 void ftDonkey_8010D774(HSD_GObj* fighterObj) {
-    func_8010FAF0(fighterObj);
+    ftDonkey_DestroyAllEffectsPlus(fighterObj);
     func_80110074(fighterObj);
 }
 

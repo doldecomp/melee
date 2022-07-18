@@ -91,6 +91,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey3.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey4.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey5.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey6.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o 		\
