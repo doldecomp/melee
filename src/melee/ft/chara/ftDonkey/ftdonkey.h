@@ -38,3 +38,5 @@ void ftDonkey_8010E0CC(HSD_GObj* fighterObj);
 void ftDonkey_8010E148(HSD_GObj* fighterObj);
 void ftDonkey_8010E464(HSD_GObj* fighterObj);
 void ftDonkey_8010E4EC(HSD_GObj* fighterObj);
+
+void ftDonkey_DestroyAllEffects(HSD_GObj* fighterObj);

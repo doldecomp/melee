@@ -1,15 +1,18 @@
 #include "ftdonkey.h"
 
-/// TODO remove these externs
-extern void ftDonkey_8010FAD0(HSD_GObj* fighterObj);  /// exists later on in ftdonkey, not yet matched
-
 void ftDonkey_SetCallbacks(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     fighter->cb.x21DC_callback_OnTakeDamage = &ftDonkey_8010D774;
     fighter->cb.x21E4_callback_OnDeath2 = &ftDonkey_8010D774;
-    fighter->cb.x21F0_callback = &ftDonkey_8010FAD0;
+    fighter->cb.x21F0_callback = &ftDonkey_DestroyAllEffects;
     fighter->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fighter->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+}
+
+void ftDonkey_UpdateGroundVel(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fighter); 
+    fighter->xEC_ground_vel = fighter->x2C_facing_direction * (donkey_attr->x34 * fighter->x234C_stateVar4_s32);
 }
 
 void ftDonkey_SpecialN_StartAction(HSD_GObj* fighterObj) {
@@ -101,12 +104,6 @@ void ftDonkey_8010E8E0(HSD_GObj* fighterObj) {
         ftDonkey_NullCallbacks(fighterObj);
         func_8008A2BC(fighterObj);
     }
-}
-
-void ftDonkey_UpdateGroundVel(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fighter); 
-    fighter->xEC_ground_vel = fighter->x2C_facing_direction * (donkey_attr->x34 * fighter->x234C_stateVar4_s32);
 }
 
 void ftDonkey_8010E930(HSD_GObj* fighterObj) {
@@ -404,4 +401,73 @@ void ftDonkey_8010F5B0(HSD_GObj* fighterObj) {
         Fighter_ActionStateChange_800693AC(fighterObj, 0x178, 0x0C4C5080, NULL, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks(fighterObj);
     }
+}
+
+void ftDonkey_8010F654(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighterPlus(fighterObj);
+    if (func_800827A0(fighterObj) == 0) {
+        func_8007D5D4(fighter);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x179, 0x0C4D508E, NULL, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
+        ftDonkey_SetCallbacks(fighterObj);
+    }
+}
+
+void ftDonkey_8010F6F8(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighterPlus(fighterObj);
+    if (func_800827A0(fighterObj) == 0) {
+        func_8007D5D4(fighter);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x17A, 0x0C4D508E, NULL, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
+        ftDonkey_SetCallbacks(fighterObj);
+    }
+}
+
+void ftDonkey_8010F79C(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighterPlus(fighterObj);
+    if (func_80081D0C(fighterObj) == 1) {
+        func_8007D7FC(fighter);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x171, 0x0C4C5080, NULL, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
+        ftDonkey_SetCallbacks(fighterObj);
+    }
+}
+
+void ftDonkey_8010F840(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighterPlus(fighterObj);
+    if (func_80081D0C(fighterObj) == 1) {
+        func_8007D7FC(fighter);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x172, 0x0C4C5080, NULL, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
+        ftDonkey_SetCallbacks(fighterObj);
+    }
+}
+
+
+void ftDonkey_8010F8E4(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighterPlus(fighterObj);
+    if (func_80081D0C(fighterObj) == 1) {
+        func_8007D7FC(fighter);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x173, 0x0C4C5080, NULL, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
+        ftDonkey_SetCallbacks(fighterObj);
+    }
+}
+
+
+void ftDonkey_8010F988(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighterPlus(fighterObj);
+    if (func_80081D0C(fighterObj)) {
+        func_8007D7FC(fighter);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x174, 0x0C4D508E, NULL, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
+        ftDonkey_SetCallbacks(fighterObj);
+    }
+}
+
+void ftDonkey_8010FA2C(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighterPlus(fighterObj);
+    if (func_80081D0C(fighterObj)) {
+        func_8007D7FC(fighter);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x175, 0x0C4D508E, NULL, fighter->x894_currentAnimFrame, 1.0f, 0.0f);
+        ftDonkey_SetCallbacks(fighterObj);
+    }
+}
+
+void ftDonkey_DestroyAllEffects(HSD_GObj* fighterObj) {
+    efLib_DestroyAll(fighterObj);
 }
