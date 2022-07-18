@@ -36,7 +36,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8.s.o		\
 	                                                \
 	$(BUILD_DIR)/asm/melee/cm/camera.s.o 				\
-	$(BUILD_DIR)/asm/melee/cm/cmsnap.s.o 				\
+	$(BUILD_DIR)/src/melee/cm/cmsnap.c.o 				\
 													\
 	$(BUILD_DIR)/src/melee/pl/player.c.o 		 	    \
 	$(BUILD_DIR)/asm/melee/pl/code_8003715C.s.o 		\
