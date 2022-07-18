@@ -3315,7 +3315,7 @@ void ftMars_LoadSpecialAttrs(struct _HSD_GObj*);
 // ? func_80139080(?);
 // ? func_801390E0(?);
 // ? ftZelda_801395C8(?);
-// ? func_801396E0(?);
+// ? ftZelda_801396E0(?);
 // ? func_80139B44(?);
 // ? func_80139BB0(?);
 // ? func_80139F6C(?);
