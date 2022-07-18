@@ -3003,7 +3003,7 @@ void func_800F5C34();
 // ? ftDonkey_8010E464(?);
 // ? ftDonkey_8010E4EC(?);
 // ? ftDonkey_DestroyAllEffectsPlus(?);
-// ? func_80110074(?);
+// ? ftDonkey_DestroyAllEffects_SpecialHi(?);
 // ? func_80110490(?);
 // ? func_80110610(?);
 // ? func_80110788(?);

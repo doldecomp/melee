@@ -8,7 +8,7 @@ void ftDonkey_OnDeath(HSD_GObj* fighterObj) {
 
 void ftDonkey_8010D774(HSD_GObj* fighterObj) {
     ftDonkey_DestroyAllEffectsPlus(fighterObj);
-    func_80110074(fighterObj);
+    ftDonkey_DestroyAllEffects_SpecialHi(fighterObj);
 }
 
 void ftDonkey_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {

@@ -26,7 +26,10 @@ typedef struct _ftDonkeyAttributes {
     f32 x4C;
     f32 x50;
     f32 x54;
-    u8 data_filler_10[0x68 - 0x58];
+    f32 x58;
+    f32 x5C;
+    f32 x60;
+    f32 x64;
     f32 x68;
     f32 x6C;
     f32 x70;
