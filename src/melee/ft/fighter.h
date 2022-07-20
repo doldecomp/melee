@@ -484,7 +484,11 @@ typedef struct _CollData
     f32 x12C;
     u32 x130_flags;
     s32 x134_envFlags;
-    u8 filler_x138[0x14C - 0x138];
+    s32 filler138;
+    s32 filler13C;
+    s32 x140;
+    s32 filler144;
+    s32 filler148;
     SurfaceData x14C_ground;
     SurfaceData x160_rightwall;
     SurfaceData x174_leftwall;
