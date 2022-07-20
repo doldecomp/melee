@@ -114,6 +114,9 @@ extern f32 lbl_804D9BA0;
 extern f32 lbl_804D9BA4;
 extern f32 lbl_804D9BA8;
 
+extern f32 lbl_804D9BB8;
+extern f32 lbl_804D9BBC;
+
 // 80139834 - 801398E8 (0xB4 bytes)
 // https://decomp.me/scratch/Ie9jz
 // https://decomp.me/scratch/52XE3
@@ -324,5 +327,100 @@ void ftZelda_80139CC0(HSD_GObj* fighterObj) {
     }    
 }
 
-// 80139D60 -  ( bytes)
+// 80139D60 - 80139F6C (0x20C bytes)
 // https://decomp.me/scratch/OJ62l
+void ftZelda_80139D60(HSD_GObj* fighterObj) {
+    s32 ledgeGrabDir;
+    s32 var_r0;
+    s32 unused[2];
+    f32 angle1, angle2, angle3;
+    Fighter* fighter; // r31
+    ftZeldaAttributes* attributes; // r30
+    Fighter* fighter2;
+    ftZeldaAttributes* attributes2;
+    CollData* collData; // r29
+
+    // Get the character, collision data, and character attributes
+    fighter = fighterObj->user_data;
+    collData = &fighter->x6F0_collData;
+    attributes = fighter->x2D4_specialAttributes;
+    fighter->x234C_stateVar4 = (s32) (fighter->x234C_stateVar4 + 1);
+
+    // Determine facing direction
+    if (fighter->x2C_facing_direction < lbl_804D9BA4) {
+        ledgeGrabDir = -1;
+    }
+    else {
+        ledgeGrabDir = 1;
+    }
+    
+    if (EnvColl_CheckGroundAndLedge(fighterObj, ledgeGrabDir) != 0) {
+        fighter2 = getFighter(fighterObj);
+        attributes2 = fighter2->x2D4_specialAttributes;
+        if ((f32) (fighter2->x234C_stateVar4 ^ 0x80000000) >= attributes2->x4C) {
+            var_r0 = 1;
+        } else if (func_8009A134(fighterObj) != 0) {
+            var_r0 = 0;
+        } else {
+            var_r0 = 1;
+        }
+        if (var_r0 != 0) {
+            ftZelda_80139FE8(fighterObj);
+            return;
+        }
+    }
+    if (func_80081298(fighterObj) == 0) {
+        if ((collData->x134_envFlags & 0x6000) != 0) {
+            f32 angle1 = lbvector_AngleXY(&collData->x190_vec, &fighter->x80_self_vel);
+            if (angle1 > (lbl_804D9BB8 * (lbl_804D9BBC + attributes->x60))) {
+                ftZelda_8013A764(fighterObj);
+            }
+        }
+        if ((collData->x134_envFlags & 0x3F) != 0) {
+            f32 angle2 = lbvector_AngleXY(&collData->x168_vec, &fighter->x80_self_vel);
+            if (angle2 > (lbl_804D9BB8 * (lbl_804D9BBC + attributes->x60))) {
+                ftZelda_8013A764(fighterObj);
+            }
+        }
+        if ((collData->x134_envFlags & 0xFC0) != 0) {
+            f32 angle3 = lbvector_AngleXY(&collData->x17C_vec, &fighter->x80_self_vel);
+            if (angle3 > (lbl_804D9BB8 * (lbl_804D9BBC + attributes->x60))) {
+                ftZelda_8013A764(fighterObj);
+            }
+        }
+    }
+}
+
+// 80139F6C - 80139FE8 (0x7C bytes)
+// https://decomp.me/scratch/HtMY4
+void ftZelda_80139F6C(HSD_GObj* fighterObj) {
+    Fighter* fighter;
+    f32 temp_f2;
+    s32 unused;
+
+    fighter = getFighter(fighterObj);
+    func_8007D60C(fighter);
+    
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x161, 0x0C4C508E, NULL, fighter->x894_currentAnimFrame, 0.0f, 0.0f);
+    
+    fighter->x2223_flag.bits.b4 = 1;
+    fighter->x221E_flag.bits.b0 = 1;
+}
+
+// 80139FE8 - 8013A058 (0x70 bytes)
+// https://decomp.me/scratch/Jcxch
+void ftZelda_80139FE8(HSD_GObj* fighterObj) {
+    Fighter* fighter;
+    f32 temp_f2;
+
+    fighter = fighterObj->user_data;
+    func_8007D7FC(fighter);
+
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x15E, 0x0C4C508E, NULL, fighter->x894_currentAnimFrame, 0.0f, 0.0f);
+    
+    fighter->x221E_flag.bits.b0 = 1;
+}
+
+
+// 8013A058 - 
+// https://decomp.me/scratch/Y9w1M

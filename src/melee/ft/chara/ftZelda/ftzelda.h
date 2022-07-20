@@ -22,15 +22,13 @@ typedef struct _ftZeldaAttributes {
     f32 x3C; // Type confirmed
     f32 x40; // Type confirmed
     f32 x44; // Type confirmed
-    f32 x48;
+    s32 x48; // Type confirmed
     f32 x4C; // Type confirmed
-
-    f32 x50;
+    f32 x50; // Type confirmed
     f32 x54;
     f32 x58;
     f32 x5C;
-
-    f32 x60; // Type confirmed
+    s32 x60; // Type confirmed
     f32 x64;
     f32 x68;
     f32 x6C;
