@@ -201,8 +201,8 @@ lbl_800EEAA8:
 /* 800EEAB8 000EB698  7C 08 03 A6 */	mtlr r0
 /* 800EEABC 000EB69C  4E 80 00 20 */	blr 
 
-.global func_800EEAC0
-func_800EEAC0:
+.global ftKirby_LoadSpecialAttrs
+ftKirby_LoadSpecialAttrs:
 /* 800EEAC0 000EB6A0  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800EEAC4 000EB6A4  38 00 00 84 */	li r0, 0x84
 /* 800EEAC8 000EB6A8  7C 09 03 A6 */	mtctr r0
@@ -3333,8 +3333,8 @@ lbl_800F1670:
 /* 800F1678 000EE258  7C 08 03 A6 */	mtlr r0
 /* 800F167C 000EE25C  4E 80 00 20 */	blr 
 
-.global ftKirby_SpecialNAir_StartAction
-ftKirby_SpecialNAir_StartAction:
+.global ftKirby_SpecialAirN_StartAction
+ftKirby_SpecialAirN_StartAction:
 /* 800F1680 000EE260  7C 08 02 A6 */	mflr r0
 /* 800F1684 000EE264  3C 80 80 3D */	lis r4, lbl_803C9E54@ha
 /* 800F1688 000EE268  90 01 00 04 */	stw r0, 4(r1)
@@ -4375,8 +4375,8 @@ ftKirby_SpecialHi_StartAction:
 /* 800F23B0 000EEF90  7C 08 03 A6 */	mtlr r0
 /* 800F23B4 000EEF94  4E 80 00 20 */	blr 
 
-.global ftKirby_SpecialHiAir_StartAction
-ftKirby_SpecialHiAir_StartAction:
+.global ftKirby_SpecialAirHi_StartAction
+ftKirby_SpecialAirHi_StartAction:
 /* 800F23B8 000EEF98  7C 08 02 A6 */	mflr r0
 /* 800F23BC 000EEF9C  38 80 01 85 */	li r4, 0x185
 /* 800F23C0 000EEFA0  90 01 00 04 */	stw r0, 4(r1)
@@ -6260,8 +6260,8 @@ ftKirby_SpecialLw_StartAction:
 /* 800F3E60 000F0A40  7C 08 03 A6 */	mtlr r0
 /* 800F3E64 000F0A44  4E 80 00 20 */	blr 
 
-.global ftKirby_SpecialLwAir_StartAction
-ftKirby_SpecialLwAir_StartAction:
+.global ftKirby_SpecialAirLw_StartAction
+ftKirby_SpecialAirLw_StartAction:
 /* 800F3E68 000F0A48  7C 08 02 A6 */	mflr r0
 /* 800F3E6C 000F0A4C  90 01 00 04 */	stw r0, 4(r1)
 /* 800F3E70 000F0A50  38 00 FF FF */	li r0, -1
@@ -7858,8 +7858,8 @@ ftKirby_SpecialS_StartAction:
 /* 800F55C8 000F21A8  7C 08 03 A6 */	mtlr r0
 /* 800F55CC 000F21AC  4E 80 00 20 */	blr 
 
-.global ftKirby_SpecialSAir_StartAction
-ftKirby_SpecialSAir_StartAction:
+.global ftKirby_SpecialAirS_StartAction
+ftKirby_SpecialAirS_StartAction:
 /* 800F55D0 000F21B0  7C 08 02 A6 */	mflr r0
 /* 800F55D4 000F21B4  90 01 00 04 */	stw r0, 4(r1)
 /* 800F55D8 000F21B8  38 00 00 00 */	li r0, 0

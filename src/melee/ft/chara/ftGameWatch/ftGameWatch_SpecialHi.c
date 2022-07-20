@@ -136,7 +136,7 @@ void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E158 - Mr. Game & Watch's aerial Fire Rescue Action State handler
-void ftGameWatch_SpecialHiAir_StartAction(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     HSD_GObj* rescueGObj;
@@ -191,7 +191,7 @@ void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E2B0
-// https://decomp.me/scratch/2aEQN
+// https://decomp.me/scratch/2aEQN // Mr. Game & Watch's aerial Fire Rescue IASA callback
 void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

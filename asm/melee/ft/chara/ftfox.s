@@ -2,87 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-
-.global func_800E5858
-func_800E5858:
-/* 800E5858 000E2438  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 800E585C 000E243C  38 00 00 1A */	li r0, 0x1a
-/* 800E5860 000E2440  7C 09 03 A6 */	mtctr r0
-/* 800E5864 000E2444  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 800E5868 000E2448  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 800E586C 000E244C  80 84 00 04 */	lwz r4, 4(r4)
-/* 800E5870 000E2450  38 A3 FF F8 */	addi r5, r3, -8
-/* 800E5874 000E2454  38 84 FF F8 */	addi r4, r4, -8
-lbl_800E5878:
-/* 800E5878 000E2458  84 64 00 08 */	lwzu r3, 8(r4)
-/* 800E587C 000E245C  80 04 00 04 */	lwz r0, 4(r4)
-/* 800E5880 000E2460  94 65 00 08 */	stwu r3, 8(r5)
-/* 800E5884 000E2464  90 05 00 04 */	stw r0, 4(r5)
-/* 800E5888 000E2468  42 00 FF F0 */	bdnz lbl_800E5878
-/* 800E588C 000E246C  80 04 00 08 */	lwz r0, 8(r4)
-/* 800E5890 000E2470  90 05 00 08 */	stw r0, 8(r5)
-/* 800E5894 000E2474  4E 80 00 20 */	blr 
-
-.global ftFox_OnKnockbackEnter
-ftFox_OnKnockbackEnter:
-/* 800E5898 000E2478  7C 08 02 A6 */	mflr r0
-/* 800E589C 000E247C  38 80 00 01 */	li r4, 1
-/* 800E58A0 000E2480  90 01 00 04 */	stw r0, 4(r1)
-/* 800E58A4 000E2484  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E58A8 000E2488  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E58AC 000E248C  7C 7F 1B 78 */	mr r31, r3
-/* 800E58B0 000E2490  C0 22 98 60 */	lfs f1, lbl_804D9240@sda21(r2)
-/* 800E58B4 000E2494  4B F8 AC 3D */	bl func_800704F0
-/* 800E58B8 000E2498  C0 22 98 60 */	lfs f1, lbl_804D9240@sda21(r2)
-/* 800E58BC 000E249C  38 7F 00 00 */	addi r3, r31, 0
-/* 800E58C0 000E24A0  38 80 00 00 */	li r4, 0
-/* 800E58C4 000E24A4  4B F8 AC 2D */	bl func_800704F0
-/* 800E58C8 000E24A8  C0 22 98 64 */	lfs f1, lbl_804D9244@sda21(r2)
-/* 800E58CC 000E24AC  38 7F 00 00 */	addi r3, r31, 0
-/* 800E58D0 000E24B0  38 80 00 03 */	li r4, 3
-/* 800E58D4 000E24B4  38 A0 00 03 */	li r5, 3
-/* 800E58D8 000E24B8  4B F8 B2 B1 */	bl ftAnim_ApplyPartAnim
-/* 800E58DC 000E24BC  C0 22 98 64 */	lfs f1, lbl_804D9244@sda21(r2)
-/* 800E58E0 000E24C0  38 7F 00 00 */	addi r3, r31, 0
-/* 800E58E4 000E24C4  38 80 00 04 */	li r4, 4
-/* 800E58E8 000E24C8  38 A0 00 03 */	li r5, 3
-/* 800E58EC 000E24CC  4B F8 B2 9D */	bl ftAnim_ApplyPartAnim
-/* 800E58F0 000E24D0  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E58F4 000E24D4  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E58F8 000E24D8  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E58FC 000E24DC  7C 08 03 A6 */	mtlr r0
-/* 800E5900 000E24E0  4E 80 00 20 */	blr 
-
-.global ftFox_OnKnockbackExit
-ftFox_OnKnockbackExit:
-/* 800E5904 000E24E4  7C 08 02 A6 */	mflr r0
-/* 800E5908 000E24E8  38 80 00 01 */	li r4, 1
-/* 800E590C 000E24EC  90 01 00 04 */	stw r0, 4(r1)
-/* 800E5910 000E24F0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800E5914 000E24F4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800E5918 000E24F8  7C 7F 1B 78 */	mr r31, r3
-/* 800E591C 000E24FC  C0 22 98 64 */	lfs f1, lbl_804D9244@sda21(r2)
-/* 800E5920 000E2500  4B F8 AB D1 */	bl func_800704F0
-/* 800E5924 000E2504  C0 22 98 64 */	lfs f1, lbl_804D9244@sda21(r2)
-/* 800E5928 000E2508  38 7F 00 00 */	addi r3, r31, 0
-/* 800E592C 000E250C  38 80 00 00 */	li r4, 0
-/* 800E5930 000E2510  4B F8 AB C1 */	bl func_800704F0
-/* 800E5934 000E2514  C0 22 98 64 */	lfs f1, lbl_804D9244@sda21(r2)
-/* 800E5938 000E2518  38 7F 00 00 */	addi r3, r31, 0
-/* 800E593C 000E251C  38 80 00 03 */	li r4, 3
-/* 800E5940 000E2520  38 A0 00 02 */	li r5, 2
-/* 800E5944 000E2524  4B F8 B2 45 */	bl ftAnim_ApplyPartAnim
-/* 800E5948 000E2528  C0 22 98 64 */	lfs f1, lbl_804D9244@sda21(r2)
-/* 800E594C 000E252C  38 7F 00 00 */	addi r3, r31, 0
-/* 800E5950 000E2530  38 80 00 04 */	li r4, 4
-/* 800E5954 000E2534  38 A0 00 02 */	li r5, 2
-/* 800E5958 000E2538  4B F8 B2 31 */	bl ftAnim_ApplyPartAnim
-/* 800E595C 000E253C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800E5960 000E2540  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800E5964 000E2544  38 21 00 18 */	addi r1, r1, 0x18
-/* 800E5968 000E2548  7C 08 03 A6 */	mtlr r0
-/* 800E596C 000E254C  4E 80 00 20 */	blr 
-
 .global func_800E5970
 func_800E5970:
 /* 800E5970 000E2550  7C 08 02 A6 */	mflr r0
@@ -692,8 +611,8 @@ lbl_800E6188:
 /* 800E61A0 000E2D80  7C 08 03 A6 */	mtlr r0
 /* 800E61A4 000E2D84  4E 80 00 20 */	blr 
 
-.global ftFox_SpecialNAir_StartAction
-ftFox_SpecialNAir_StartAction:
+.global ftFox_SpecialAirN_StartAction
+ftFox_SpecialAirN_StartAction:
 /* 800E61A8 000E2D88  7C 08 02 A6 */	mflr r0
 /* 800E61AC 000E2D8C  38 80 01 58 */	li r4, 0x158
 /* 800E61B0 000E2D90  90 01 00 04 */	stw r0, 4(r1)
@@ -1928,8 +1847,8 @@ ftFox_SpecialHi_StartAction:
 /* 800E72BC 000E3E9C  7C 08 03 A6 */	mtlr r0
 /* 800E72C0 000E3EA0  4E 80 00 20 */	blr 
 
-.global ftFox_SpecialHiAir_StartAction
-ftFox_SpecialHiAir_StartAction:
+.global ftFox_SpecialAirHi_StartAction
+ftFox_SpecialAirHi_StartAction:
 /* 800E72C4 000E3EA4  7C 08 02 A6 */	mflr r0
 /* 800E72C8 000E3EA8  38 80 01 62 */	li r4, 0x162
 /* 800E72CC 000E3EAC  90 01 00 04 */	stw r0, 4(r1)
@@ -3338,8 +3257,8 @@ ftFox_SpecialLw_StartAction:
 /* 800E85E4 000E51C4  7C 08 03 A6 */	mtlr r0
 /* 800E85E8 000E51C8  4E 80 00 20 */	blr 
 
-.global ftFox_SpecialLwAir_StartAction
-ftFox_SpecialLwAir_StartAction:
+.global ftFox_SpecialAirLw_StartAction
+ftFox_SpecialAirLw_StartAction:
 /* 800E85EC 000E51CC  7C 08 02 A6 */	mflr r0
 /* 800E85F0 000E51D0  38 80 01 6D */	li r4, 0x16d
 /* 800E85F4 000E51D4  90 01 00 04 */	stw r0, 4(r1)
@@ -5258,8 +5177,8 @@ ftFox_SpecialS_StartAction:
 /* 800E9F64 000E6B44  7C 08 03 A6 */	mtlr r0
 /* 800E9F68 000E6B48  4E 80 00 20 */	blr 
 
-.global ftFox_SpecialSAir_StartAction
-ftFox_SpecialSAir_StartAction:
+.global ftFox_SpecialAirS_StartAction
+ftFox_SpecialAirS_StartAction:
 /* 800E9F6C 000E6B4C  7C 08 02 A6 */	mflr r0
 /* 800E9F70 000E6B50  38 E0 00 00 */	li r7, 0
 /* 800E9F74 000E6B54  90 01 00 04 */	stw r0, 4(r1)
@@ -6704,13 +6623,6 @@ lbl_804D3D90:
 
 
 .section .sdata2
-    .balign 8
-.global lbl_804D9240
-lbl_804D9240:
-	.4byte 0x40400000
-.global lbl_804D9244
-lbl_804D9244:
-	.4byte 0x00000000
 .global lbl_804D9248
 lbl_804D9248:
 	.4byte 0x00000000

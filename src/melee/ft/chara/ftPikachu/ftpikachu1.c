@@ -55,34 +55,18 @@ void ftPikachu_801246C0(HSD_GObj* fighterObj) {
 }
 
 
-void ftPikachu_ScaleYAttributesArray_80124704(HSD_GObj* fighterObj) {
-
-    Fighter* fighter = fighterObj->user_data;
-    ftData *fighter_data = fighter->x10C_ftData;
-    
-    ftPikachuAttributes *pika_attr = fighter->x2D4_specialAttributes;
-    ftPikachuAttributes *other_attr = fighter_data->ext_attr;
-
-    *pika_attr = *other_attr;
-
-    if (1.0f != fighter->x34_scale.y) {
-        pika_attr->xE0_array_start *= fighter->x34_scale.y;
-        pika_attr->xE4 *= fighter->x34_scale.y;
-        pika_attr->xE8 *= fighter->x34_scale.y;
-        pika_attr->xEC *= fighter->x34_scale.y;
-        pika_attr->xF0 *= fighter->x34_scale.y;
-        pika_attr->xF4 *= fighter->x34_scale.y;
+void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftPikachuAttributes);
+    if (ft->x34_scale.y != 1.0f) {
+        SCALE_HEIGHT_ATTRS(6); 
     }
-    
 }
 
 void ftPikachu_OnKnockbackEnter(HSD_GObj* fighterObj) {
-    func_800704F0(fighterObj, 1, 3.0f);
-    func_800704F0(fighterObj, 0, 3.0f);
+    Fighter_OnKnockbackEnter(fighterObj, 1);
 }
 
 
 void ftPikachu_OnKnockbackExit(HSD_GObj* fighterObj) {
-    func_800704F0(fighterObj, 1, 0.0f);
-    func_800704F0(fighterObj, 0, 0.0f);
+    Fighter_OnKnockbackExit(fighterObj, 1);
 }

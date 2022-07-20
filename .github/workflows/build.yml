@@ -11,20 +11,41 @@ jobs:
         makeflags: ["GENERATE_MAP=1", "NON_MATCHING=1"]
     runs-on: ubuntu-latest
     container: devkitpro/devkitppc:latest
-    env:
-      WINEPREFIX: ${{github.workspace}}/.wine
     steps:
     - name: Install devkitPro
       run: |
         sudo dpkg --add-architecture i386
         sudo apt-get update
-        sudo apt-get -y install build-essential wine32
+        sudo apt-get -y install build-essential gcc-multilib g++-multilib libc6:i386
         sudo chown $(whoami) "$GITHUB_WORKSPACE"
-    - uses: actions/checkout@v3
+    - name: Checkout Melee repo
+      uses: actions/checkout@v3
+    - name: Checkout WiBo repo
+      uses: actions/checkout@v3
+      with:
+        repository: decompals/WiBo
+        path: tools/WiBo
     - name: Download compilers
       run: |
         curl -L https://cdn.discordapp.com/attachments/727918646525165659/917185027656286218/GC_WII_COMPILERS.zip \
           | bsdtar -xvf- -C tools --exclude Wii
         mv tools/GC tools/mwcc_compiler
-    - name: make
-      run: make -j$(nproc) ${{ matrix.makeflags }}
+        sha1sum -c tools/mwld_prepatch.sha1
+        python3 tools/mwld_patch.py
+        sha1sum -c tools/mwld_postpatch.sha1
+    - name: Build WiBo
+      working-directory: tools/WiBo
+      run: |
+        cmake -B build
+        cmake --build build
+    - name: Build Melee
+      run: make -j$(nproc) ${{ matrix.makeflags }} WINE=./tools/WiBo/build/wibo
+    - name: Upload map
+      if: matrix.makeflags == 'GENERATE_MAP=1'
+      uses: actions/upload-artifact@v2
+      with:
+        name: GALE01.map
+        path: build/ssbm.us.1.2/GALE01.map
+    - name: Calc progress
+      if: matrix.makeflags == 'GENERATE_MAP=1'
+      run: python3 tools/calcprogress.py build/ssbm.us.1.2/main.dol build/ssbm.us.1.2/GALE01.map >> $GITHUB_STEP_SUMMARY

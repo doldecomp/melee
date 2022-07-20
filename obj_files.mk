@@ -22,6 +22,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/lb/lbvector.c.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.s.o		 	\
 	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.s.o 		\
+	$(BUILD_DIR)/asm/melee/lb/lbarq.s.o 		\
+	$(BUILD_DIR)/asm/melee/lb/lbmemory.s.o 		\
 	$(BUILD_DIR)/asm/melee/lb/lbheap.s.o 				\
 	$(BUILD_DIR)/src/melee/lb/lbfile.c.o 				\
 	$(BUILD_DIR)/asm/melee/lb/lbfile.s.o 				\
@@ -86,6 +88,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftkirby.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey2.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey3.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey4.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey5.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey6.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o 		\
@@ -110,7 +116,12 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu4.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu5.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.s.o 	\
-	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus1.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus2.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus3.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus4.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus5.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus6.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o 		\
@@ -127,6 +138,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftpurin.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftluigi.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialN.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialS.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialHi.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialLw.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftmewtwo.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o 		\
@@ -199,8 +214,8 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_34.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftcrazyhand.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o 	\
-	$(BUILD_DIR)/asm/melee/ft/ftbosslib.s.o 		            \
-															\
+	$(BUILD_DIR)/src/melee/ft/ftbosslib.c.o 		            \
+	$(BUILD_DIR)/src/melee/gm/gmmain_lib.c.o 		 	            \
 	$(BUILD_DIR)/asm/melee/gm/gmmain_lib.s.o 		 	            \
 	$(BUILD_DIR)/src/melee/gm/gmmain.c.o 		 	            \
 	$(BUILD_DIR)/asm/melee/gm/code_801601C4.s.o 		 	    \
@@ -334,6 +349,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/Runtime/runtime.s.o              	\
 	$(BUILD_DIR)/src/Runtime/__init_cpp_exceptions.c.o	\
 													\
+	$(BUILD_DIR)/src/MSL/abort_exit.c.o               \
 	$(BUILD_DIR)/asm/MSL/abort_exit.s.o               \
 	$(BUILD_DIR)/asm/MSL/ansi_fp.s.o                  \
 	$(BUILD_DIR)/src/MSL/buffer_io.c.o                \
@@ -346,9 +362,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/MSL/rand.c.o                     \
 	$(BUILD_DIR)/src/MSL/string.c.o                   \
 	$(BUILD_DIR)/asm/MSL/strtoul.s.o                  \
-	$(BUILD_DIR)/asm/MSL/console_io.s.o               \
+	$(BUILD_DIR)/src/MSL/console_io.c.o               \
 	$(BUILD_DIR)/src/MSL/wchar_io.c.o                 \
 	$(BUILD_DIR)/asm/MSL/math_1.s.o                   \
+	$(BUILD_DIR)/src/MSL/trigf.c.o                    \
 	$(BUILD_DIR)/asm/MSL/trigf.s.o                    \
 	$(BUILD_DIR)/asm/MSL/math.s.o                     \
                                                     \

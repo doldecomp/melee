@@ -60,3 +60,23 @@ void ftFox_OnLoad(HSD_GObj* gobj) {
         func_8026B3F8(item_list[2], 0x38U);
     }
 }
+
+void ftFox_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftFoxAttributes);
+}
+
+extern f32 lbl_804D9244;  ///0.0f
+
+void ftFox_OnKnockbackEnter(HSD_GObj* gobj) {
+    Fighter_OnKnockbackEnter(gobj, 1);
+    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
+}
+
+void ftFox_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+    ftAnim_ApplyPartAnim(fighterObj, 3, 2, 0.0f);
+    ftAnim_ApplyPartAnim(fighterObj, 4, 2, 0.0f); 
+}
+
+//// End of File

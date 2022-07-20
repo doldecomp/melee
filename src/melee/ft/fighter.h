@@ -18,6 +18,8 @@
 #include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
 
+BOOL func_80081298(HSD_GObj* gobj);
+
 typedef enum FighterKind
 {
     FTKIND_MARIO,
@@ -1005,7 +1007,7 @@ struct SpecialAttrs_Pikachu {
 
 struct SpecialAttrs_Samus {
     /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
+    /* 0x2230 */ s32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
@@ -1040,13 +1042,13 @@ struct SpecialAttrs_Purin {
 struct SpecialAttrs_Mewtwo {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
+    /* 0x2234 */ s32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
 };
 
 struct SpecialAttrs_Luigi {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ BOOL x222C_cycloneCharge;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
 };
@@ -1237,7 +1239,10 @@ typedef struct _Fighter {
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F0 - 0x5EC];
     /* 0x5F0 */ HSD_DObj** x5F0;
-    /* 0x5F4 */ s32 x5F4;
+    /* 0x5F4 */ s8 x5F4;
+    /* 0x5F5 */ s8 x5F5;
+    /* 0x5F6 */ s8 x5F6;
+    /* 0x5F7 */ s8 x5F7;
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
@@ -1744,17 +1749,25 @@ typedef struct _Fighter {
     union {
         /* 0x2348 */ u32 x2348_stateVar3;
         /* 0x2348 */ s32 x2348_stateVar3_s32;
+        /* 0x2348 */ f32 x2348_stateVar3_f32;
     };
     union {
         struct {
-            /* 0x234C */ u32 x234C_stateVar4;
+            union {
+                /* 0x234C */ u32 x234C_stateVar4;
+                /* 0x234C */ s32 x234C_stateVar4_s32;
+                /* 0x234C */ f32 x234C_stateVar4_f32;
+            };
             union {
                 /* 0x2350 */ u32 x2350_stateVar5;
                 /* 0x2350 */ s32 x2350_stateVar5_s32;
                 /* 0x2350 */ f32 x2350_stateVar5_f32;
-
             };
-            /* 0x2354 */ f32 x2354_stateVar6;
+            union {
+                /* 0x2350 */ u32 x2354_stateVar6;
+                /* 0x2350 */ s32 x2354_stateVar6_s32;
+                /* 0x2350 */ f32 x2354_stateVar6_f32;
+            };
         };
         /* 0x234C */ Vec3 x234C_pos;
     };
@@ -1916,6 +1929,20 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
         *attr = backup;                                                      \
     } while(0)
 
+#define COPY_ATTRS(gobj, attributeName)                                          \
+    Fighter* ft = gobj->user_data;                                               \
+    attributeName* sA2 = (attributeName*)ft->x2D4_specialAttributes;             \
+    attributeName* ext_attr = (attributeName*)ft->x10C_ftData->ext_attr;         \
+    *sA2 = *ext_attr;                                                            \
+
+#define SCALE_HEIGHT_ATTRS(num_attrs)                     \
+    {                                                     \
+        int i;                                            \
+        for (i = 0; i < num_attrs; i++) {                 \
+            sA2->height_attributes[i] *= ft->x34_scale.y; \
+        }                                                 \
+    }  \
+
 
 // Works but unused decided to go with inline instead 
 #define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                             \
@@ -1988,6 +2015,21 @@ inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BO
     if (dropItemFlag) {
         func_80070CC4(gobj, bool3);
     }
+}
+
+inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1) {
+    func_800704F0(gobj, arg1, 3.0f);
+    func_800704F0(gobj, 0, 3.0f);
+}
+
+inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1) {
+    func_800704F0(gobj, arg1, 0.0f);
+    func_800704F0(gobj, 0, 0.0f);
+}
+
+inline void Fighter_UnsetCmdVar0(HSD_GObj* fighterObj) {
+    Fighter* fighter = getFighter(fighterObj);
+    fighter->x2200_ftcmd_var0 = 0;
 }
 
 #endif

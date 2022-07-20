@@ -133,7 +133,7 @@ HSD_GObj* func_8007CC1C(HSD_GObj* gobj)
     return gobj;
 }
 
-void func_8007CC78(f32 max, Fighter* fp)
+void func_8007CC78(Fighter* fp, f32 max)
 {
     if (fp->xEC_ground_vel < -max) {
         fp->xEC_ground_vel = -max;
@@ -1394,7 +1394,6 @@ s32 ftGetParasolStatus(HSD_GObj* gobj)
     return FtParasol_None;
 }
 
-#define M_PI 3.141592653589793
 
 void func_8007EA90(Fighter* fp, s32 arg1)
 {

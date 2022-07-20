@@ -75,7 +75,7 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj) {
 }
 
 //https://decomp.me/scratch/nQT5V
-void ftMario_SpecialLwAir_StartAction(HSD_GObj* gobj) {
+void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj) {
     f32 sub_val;
     Fighter* ft;
 
@@ -261,7 +261,7 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj) {
     ft->x80_self_vel.y = 0.0f;
     ft->sa.mario.x2234 = 0;
     Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4C508A, NULL, ft->x894_currentAnimFrame, 1.0f, 0.0f);
-    func_8007CC78(sa->x3C, ft_tmp = ft);
+    func_8007CC78(ft_tmp = ft, sa->x3C);
     ft->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     ft->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }

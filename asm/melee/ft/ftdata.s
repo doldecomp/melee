@@ -1158,151 +1158,151 @@ ft_SpecialS:
     .4byte NULL
     .balign 4
 
-.global ft_SpecialHiAir
-ft_SpecialHiAir:
-    .4byte ftMario_SpecialHiAir_StartAction
-    .4byte ftFox_SpecialHiAir_StartAction
-    .4byte ftCFalcon_SpecialHiAir_StartAction
-    .4byte ftDonkey_SpecialHiAir_StartAction
-    .4byte ftKirby_SpecialHiAir_StartAction
-    .4byte ftKoopa_SpecialHiAir_StartAction
-    .4byte ftLink_SpecialHiAir_StartAction
-    .4byte ftSeak_SpecialHiAir_StartAction
+.global ft_SpecialAirHi
+ft_SpecialAirHi:
+    .4byte ftMario_SpecialAirHi_StartAction
+    .4byte ftFox_SpecialAirHi_StartAction
+    .4byte ftCFalcon_SpecialAirHi_StartAction
+    .4byte ftDonkey_SpecialAirHi_StartAction
+    .4byte ftKirby_SpecialAirHi_StartAction
+    .4byte ftKoopa_SpecialAirHi_StartAction
+    .4byte ftLink_SpecialAirHi_StartAction
+    .4byte ftSeak_SpecialAirHi_StartAction
     .4byte ftNess_SpecialAirHiStart_Action
-    .4byte ftPeach_SpecialHiAir_StartAction
-    .4byte ftIceClimber_SpecialHiAir_StartAction
+    .4byte ftPeach_SpecialAirHi_StartAction
+    .4byte ftIceClimber_SpecialAirHi_StartAction
     .4byte NULL
-    .4byte ftPikachu_SpecialHiAir_StartAction
-    .4byte ftSamus_SpecialHiAir_StartAction
-    .4byte ftYoshi_SpecialHiAir_StartAction
-    .4byte ftPurin_SpecialHiAir_StartAction
-    .4byte ftMewtwo_SpecialHiAir_StartAction
-    .4byte ftLuigi_SpecialHiAir_StartAction
-    .4byte ftMars_SpecialHiAir_StartAction
-    .4byte ftZelda_SpecialHiAir_StartAction
-    .4byte ftLink_SpecialHiAir_StartAction
-    .4byte ftMario_SpecialHiAir_StartAction
-    .4byte ftFox_SpecialHiAir_StartAction
-    .4byte ftPikachu_SpecialHiAir_StartAction
-    .4byte ftGameWatch_SpecialHiAir_StartAction
-    .4byte ftCFalcon_SpecialHiAir_StartAction
-    .4byte ftMars_SpecialHiAir_StartAction
-    .4byte NULL
-    .4byte NULL
+    .4byte ftPikachu_SpecialAirHi_StartAction
+    .4byte ftSamus_SpecialAirHi_StartAction
+    .4byte ftYoshi_SpecialAirHi_StartAction
+    .4byte ftPurin_SpecialAirHi_StartAction
+    .4byte ftMewtwo_SpecialAirHi_StartAction
+    .4byte ftLuigi_SpecialAirHi_StartAction
+    .4byte ftMars_SpecialAirHi_StartAction
+    .4byte ftZelda_SpecialAirHi_StartAction
+    .4byte ftLink_SpecialAirHi_StartAction
+    .4byte ftMario_SpecialAirHi_StartAction
+    .4byte ftFox_SpecialAirHi_StartAction
+    .4byte ftPikachu_SpecialAirHi_StartAction
+    .4byte ftGameWatch_SpecialAirHi_StartAction
+    .4byte ftCFalcon_SpecialAirHi_StartAction
+    .4byte ftMars_SpecialAirHi_StartAction
     .4byte NULL
     .4byte NULL
-    .4byte ftKoopa_SpecialHiAir_StartAction
+    .4byte NULL
+    .4byte NULL
+    .4byte ftKoopa_SpecialAirHi_StartAction
     .4byte NULL
     .balign 4
 
-.global ft_SpecialLwAir
-ft_SpecialLwAir:
-    .4byte ftMario_SpecialLwAir_StartAction
-    .4byte ftFox_SpecialLwAir_StartAction
-    .4byte ftCFalcon_SpecialLwAir_StartAction
+.global ft_SpecialAirLw
+ft_SpecialAirLw:
+    .4byte ftMario_SpecialAirLw_StartAction
+    .4byte ftFox_SpecialAirLw_StartAction
+    .4byte ftCFalcon_SpecialAirLw_StartAction
     .4byte NULL
-    .4byte ftKirby_SpecialLwAir_StartAction
-    .4byte ftKoopa_SpecialLwAir_StartAction
-    .4byte ftLink_SpecialLwAir_StartAction
-    .4byte ftSeak_SpecialLwAir_StartAction
+    .4byte ftKirby_SpecialAirLw_StartAction
+    .4byte ftKoopa_SpecialAirLw_StartAction
+    .4byte ftLink_SpecialAirLw_StartAction
+    .4byte ftSeak_SpecialAirLw_StartAction
     .4byte ftNess_SpecialAirLwStart_Action
-    .4byte ftPeach_SpecialLwAir_StartAction
-    .4byte ftIceClimber_SpecialLwAir_StartAction
-    .4byte ftIceClimber_SpecialLwAir_StartAction
-    .4byte ftPikachu_SpecialLwAir_StartAction
-    .4byte ftSamus_SpecialLwAir_StartAction
-    .4byte ftYoshi_SpecialLwAir_StartAction
-    .4byte ftPurin_SpecialLwAir_StartAction
-    .4byte ftMewtwo_SpecialLwAir_StartAction
-    .4byte ftLuigi_SpecialLwAir_StartAction
-    .4byte ftMars_SpecialLwAir_StartAction
-    .4byte ftZelda_SpecialLwAir_StartAction
-    .4byte ftLink_SpecialLwAir_StartAction
-    .4byte ftMario_SpecialLwAir_StartAction
-    .4byte ftFox_SpecialLwAir_StartAction
-    .4byte ftPikachu_SpecialLwAir_StartAction
-    .4byte ftGameWatch_SpecialLwAir_StartAction
-    .4byte ftCFalcon_SpecialLwAir_StartAction
-    .4byte ftMars_SpecialLwAir_StartAction
+    .4byte ftPeach_SpecialAirLw_StartAction
+    .4byte ftIceClimber_SpecialAirLw_StartAction
+    .4byte ftIceClimber_SpecialAirLw_StartAction
+    .4byte ftPikachu_SpecialAirLw_StartAction
+    .4byte ftSamus_SpecialAirLw_StartAction
+    .4byte ftYoshi_SpecialAirLw_StartAction
+    .4byte ftPurin_SpecialAirLw_StartAction
+    .4byte ftMewtwo_SpecialAirLw_StartAction
+    .4byte ftLuigi_SpecialAirLw_StartAction
+    .4byte ftMars_SpecialAirLw_StartAction
+    .4byte ftZelda_SpecialAirLw_StartAction
+    .4byte ftLink_SpecialAirLw_StartAction
+    .4byte ftMario_SpecialAirLw_StartAction
+    .4byte ftFox_SpecialAirLw_StartAction
+    .4byte ftPikachu_SpecialAirLw_StartAction
+    .4byte ftGameWatch_SpecialAirLw_StartAction
+    .4byte ftCFalcon_SpecialAirLw_StartAction
+    .4byte ftMars_SpecialAirLw_StartAction
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte ftKoopa_SpecialLwAir_StartAction
+    .4byte ftKoopa_SpecialAirLw_StartAction
     .4byte NULL
     .balign 4
 
-.global ft_SpecialSAir
-ft_SpecialSAir:
-    .4byte ftMario_SpecialSAir_StartAction
-    .4byte ftFox_SpecialSAir_StartAction
-    .4byte ftFalcon_SpecialSAir_StartAction
-    .4byte ftDonkey_SpecialSAir_StartAction
-    .4byte ftKirby_SpecialSAir_StartAction
-    .4byte ftKoopa_SpecialSAir_StartAction
-    .4byte ftLink_SpecialSAir_StartAction
-    .4byte ftSeak_SpecialSAir_StartAction
+.global ft_SpecialAirS
+ft_SpecialAirS:
+    .4byte ftMario_SpecialAirS_StartAction
+    .4byte ftFox_SpecialAirS_StartAction
+    .4byte ftFalcon_SpecialAirS_StartAction
+    .4byte ftDonkey_SpecialAirS_StartAction
+    .4byte ftKirby_SpecialAirS_StartAction
+    .4byte ftKoopa_SpecialAirS_StartAction
+    .4byte ftLink_SpecialAirS_StartAction
+    .4byte ftSeak_SpecialAirS_StartAction
     .4byte ftNess_SpecialAirS_Action
-    .4byte ftPeach_SpecialSAir_StartAction
-    .4byte ftIceClimber_SpecialSAir_StartAction
+    .4byte ftPeach_SpecialAirS_StartAction
+    .4byte ftIceClimber_SpecialAirS_StartAction
     .4byte NULL
-    .4byte ftPikachu_SpecialSAir_StartAction
-    .4byte ftSamus_SpecialSAir_StartAction
-    .4byte ftYoshi_SpecialSAir_StartAction
-    .4byte ftPurin_SpecialSAir_StartAction
-    .4byte ftMewtwo_SpecialSAir_StartAction
-    .4byte ftLuigi_SpecialSAir_StartAction
-    .4byte ftMars_SpecialSAir_StartAction
-    .4byte ftZelda_SpecialSAir_StartAction
-    .4byte ftLink_SpecialSAir_StartAction
-    .4byte ftMario_SpecialSAir_StartAction
-    .4byte ftFox_SpecialSAir_StartAction
-    .4byte ftPikachu_SpecialSAir_StartAction
-    .4byte ftGameWatch_SpecialSAir_StartAction
-    .4byte ftFalcon_SpecialSAir_StartAction
-    .4byte ftMars_SpecialSAir_StartAction
-    .4byte NULL
-    .4byte NULL
+    .4byte ftPikachu_SpecialAirS_StartAction
+    .4byte ftSamus_SpecialAirS_StartAction
+    .4byte ftYoshi_SpecialAirS_StartAction
+    .4byte ftPurin_SpecialAirS_StartAction
+    .4byte ftMewtwo_SpecialAirS_StartAction
+    .4byte ftLuigi_SpecialAirS_StartAction
+    .4byte ftMars_SpecialAirS_StartAction
+    .4byte ftZelda_SpecialAirS_StartAction
+    .4byte ftLink_SpecialAirS_StartAction
+    .4byte ftMario_SpecialAirS_StartAction
+    .4byte ftFox_SpecialAirS_StartAction
+    .4byte ftPikachu_SpecialAirS_StartAction
+    .4byte ftGameWatch_SpecialAirS_StartAction
+    .4byte ftFalcon_SpecialAirS_StartAction
+    .4byte ftMars_SpecialAirS_StartAction
     .4byte NULL
     .4byte NULL
-    .4byte ftKoopa_SpecialSAir_StartAction
+    .4byte NULL
+    .4byte NULL
+    .4byte ftKoopa_SpecialAirS_StartAction
     .4byte NULL
     .balign 4
 
-.global ft_SpecialNAir
-ft_SpecialNAir:
-    .4byte ftMario_SpecialNAir_StartAction
-    .4byte ftFox_SpecialNAir_StartAction
-    .4byte ftCFalcon_SpecialNAir_StartAction
-    .4byte ftDonkey_SpecialNAir_StartAction
-    .4byte ftKirby_SpecialNAir_StartAction
-    .4byte ftKoopa_SpecialNAir_StartAction
-    .4byte ftLink_SpecialNAir_StartAction
-    .4byte ftSeak_SpecialNAir_StartAction
+.global ft_SpecialAirN
+ft_SpecialAirN:
+    .4byte ftMario_SpecialAirN_StartAction
+    .4byte ftFox_SpecialAirN_StartAction
+    .4byte ftCFalcon_SpecialAirN_StartAction
+    .4byte ftDonkey_SpecialAirN_StartAction
+    .4byte ftKirby_SpecialAirN_StartAction
+    .4byte ftKoopa_SpecialAirN_StartAction
+    .4byte ftLink_SpecialAirN_StartAction
+    .4byte ftSeak_SpecialAirN_StartAction
     .4byte ftNess_SpecialAirNStart_Action
-    .4byte ftPeach_SpecialNAir_StartAction
-    .4byte ftIceClimber_SpecialNAir_StartAction
-    .4byte ftIceClimber_SpecialNAir_StartAction
-    .4byte ftPikachu_ActionChange_8012489C
-    .4byte ftSamus_SpecialNAir_StartAction
-    .4byte ftYoshi_SpecialNAir_StartAction
-    .4byte ftPurin_SpecialNAir_StartAction
-    .4byte ftMewtwo_SpecialNAir_StartAction
-    .4byte ftLuigi_SpecialNAir_StartAction
-    .4byte ftMars_SpecialNAir_StartAction
-    .4byte ftZelda_SpecialNAir_StartAction
-    .4byte ftLink_SpecialNAir_StartAction
-    .4byte ftMario_SpecialNAir_StartAction
-    .4byte ftFox_SpecialNAir_StartAction
-    .4byte ftPikachu_ActionChange_8012489C
-    .4byte ftGameWatch_SpecialNAir_StartAction
-    .4byte ftCFalcon_SpecialNAir_StartAction
-    .4byte ftMars_SpecialNAir_StartAction
+    .4byte ftPeach_SpecialAirN_StartAction
+    .4byte ftIceClimber_SpecialAirN_StartAction
+    .4byte ftIceClimber_SpecialAirN_StartAction
+    .4byte ftPikachu_SpecialAirN_StartAction
+    .4byte ftSamus_SpecialAirN_StartAction
+    .4byte ftYoshi_SpecialAirN_StartAction
+    .4byte ftPurin_SpecialAirN_StartAction
+    .4byte ftMewtwo_SpecialAirN_StartAction
+    .4byte ftLuigi_SpecialAirN_StartAction
+    .4byte ftMars_SpecialAirN_StartAction
+    .4byte ftZelda_SpecialAirN_StartAction
+    .4byte ftLink_SpecialAirN_StartAction
+    .4byte ftMario_SpecialAirN_StartAction
+    .4byte ftFox_SpecialAirN_StartAction
+    .4byte ftPikachu_SpecialAirN_StartAction
+    .4byte ftGameWatch_SpecialAirN_StartAction
+    .4byte ftCFalcon_SpecialAirN_StartAction
+    .4byte ftMars_SpecialAirN_StartAction
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte ftKoopa_SpecialNAir_StartAction
+    .4byte ftKoopa_SpecialAirN_StartAction
     .4byte NULL
     .balign 4
 
@@ -1759,7 +1759,7 @@ ft_OnKnockbackEnter:
     .4byte NULL
     .4byte ftYoshi_OnKnockbackEnter
     .4byte ftPurin_OnKnockbackEnter
-    .4byte ftMewtwo_OnKnockbackEnter
+    .4byte ftMewTwo_OnKnockbackEnter
     .4byte ftLuigi_OnKnockbackEnter
     .4byte ftMars_OnKnockbackEnter
     .4byte ftZelda_OnKnockbackEnter
@@ -1795,12 +1795,12 @@ ft_OnKnockbackExit:
     .4byte NULL
     .4byte ftYoshi_OnKnockbackExit
     .4byte ftPurin_OnKnockbackExit
-    .4byte ftMewtwo_OnKnockbackExit
+    .4byte ftMewTwo_OnKnockbackExit
     .4byte ftLuigi_OnKnockbackExit
     .4byte ftMars_OnKnockbackExit
     .4byte ftZelda_OnKnockbackExit
     .4byte ftCLink_OnKnockbackExit
-    .4byte ftdrMario_OnKnockbackExit
+    .4byte ftDrMario_OnKnockbackExit
     .4byte ftFalco_OnKnockbackExit
     .4byte ftPichu_OnKnockbackExit
     .4byte NULL
@@ -1864,18 +1864,18 @@ lbl_803C1E38:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_80128628
+    .4byte ftSamus_80128628
     .4byte NULL
     .4byte NULL
-    .4byte func_80144F58
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
+    .4byte ftMewTwo_80144F58
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8014A77C
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte ftGameWatch_8014A77C
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1885,42 +1885,43 @@ lbl_803C1E38:
     .4byte NULL
     .4byte NULL
 
-.global lbl_803C1EBC  /* Something to do with updatign Attributes */
-lbl_803C1EBC:
-    .4byte ftMario_func_800E0BE4
-    .4byte func_800E5858
-    .4byte func_800E2B40
-    .4byte func_8010DA74
-    .4byte func_800EEAC0
-    .4byte func_80132D00
-    .4byte func_800EB250
-    .4byte func_801103C8
-    .4byte ftNess_CopySpecialAttrs
-    .4byte func_8011B904
-    .4byte func_8011F0A4
-    .4byte func_80122FCC
-    .4byte ftPikachu_ScaleYAttributesArray_80124704
-    .4byte func_80128684
-    .4byte func_8012BC90
-    .4byte func_8013C88C
-    .4byte func_80144FB4
-    .4byte func_8014254C
-    .4byte func_801364E8
-    .4byte func_80139590
-    .4byte func_8014906C
-    .4byte func_80149724
-    .4byte func_80149D3C
-    .4byte func_8014A1A8
-    .4byte ftGameWatch_CopySpecialAttrs
-    .4byte func_8014EE40
-    .4byte func_8014F148
-    .4byte func_8014FDD0
-    .4byte func_80155F8C
-    .4byte func_8014F3FC
-    .4byte func_8014F624
-    .4byte func_8014F8E4
-    .4byte func_8014FB78
+.global ft_LoadSpecialAttrs
+ft_LoadSpecialAttrs:
+    .4byte ftMario_LoadSpecialAttrs
+    .4byte ftFox_LoadSpecialAttrs
+    .4byte ftCFalcon_LoadSpecialAttrs
+    .4byte ftDonkey_LoadSpecialAttrs
+    .4byte ftKirby_LoadSpecialAttrs
+    .4byte ftKoopa_LoadSpecialAttrs
+    .4byte ftLink_LoadSpecialAttrs
+    .4byte ftSeak_LoadSpecialAttrs
+    .4byte ftNess_LoadSpecialAttrs
+    .4byte ftPeach_LoadSpecialAttrs
+    .4byte ftIceClimber_LoadSpecialAttrs
+    .4byte ftNana_LoadSpecialAttrs
+    .4byte ftPikachu_LoadSpecialAttrs
+    .4byte ftSamus_LoadSpecialAttrs
+    .4byte ftYoshi_LoadSpecialAttrs
+    .4byte ftPurin_LoadSpecialAttrs
+    .4byte ftMewTwo_LoadSpecialAttrs
+    .4byte ftLuigi_LoadSpecialAttrs
+    .4byte ftMars_LoadSpecialAttrs
+    .4byte ftZelda_LoadSpecialAttrs
+    .4byte ftCLink_LoadSpecialAttrs
+    .4byte ftDrMario_LoadSpecialAttrs
+    .4byte ftFalco_LoadSpecialAttrs
+    .4byte ftPichu_LoadSpecialAttrs
+    .4byte ftGameWatch_LoadSpecialAttrs
+    .4byte ftGanon_LoadSpecialAttrs
+    .4byte ftRoy_LoadSpecialAttrs
+    .4byte ftMasterHand_LoadSpecialAttrs
+    .4byte ftCrazyHand_LoadSpecialAttrs
+    .4byte ftZakoBoy_LoadSpecialAttrs
+    .4byte ftZakoGirl_LoadSpecialAttrs
+    .4byte ftGKoopa_LoadSpecialAttrs
+    .4byte ftSandbag_LoadSpecialAttrs
     .balign 8
+
 
 # Standard Character .dat File Names
 
@@ -2374,7 +2375,7 @@ lbl_803C2570:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte func_8014260C
+    .4byte ftLuigi_8014260C
     .4byte NULL
     .4byte NULL
     .4byte NULL

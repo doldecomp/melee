@@ -52,21 +52,19 @@ void ftGKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_8014F8E4(HSD_GObj* gobj)
+void ftGKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    func_80132D00(gobj);
+    ftKoopa_LoadSpecialAttrs(gobj);
 }
 
 void ftGKoopa_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    func_800704F0(gobj, 1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 void ftGKoopa_OnKnockbackExit(HSD_GObj* gobj)
 {
-    func_800704F0(gobj, 1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 void func_8014F98C(s32 arg0, s32* arg1, s32* arg2)

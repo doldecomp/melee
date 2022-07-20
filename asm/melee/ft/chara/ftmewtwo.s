@@ -2,101 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80144F58
-func_80144F58:
-/* 80144F58 00141B38  7C 08 02 A6 */	mflr r0
-/* 80144F5C 00141B3C  90 01 00 04 */	stw r0, 4(r1)
-/* 80144F60 00141B40  3C 00 43 30 */	lis r0, 0x4330
-/* 80144F64 00141B44  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 80144F68 00141B48  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 80144F6C 00141B4C  C8 42 A3 20 */	lfd f2, lbl_804D9D00@sda21(r2)
-/* 80144F70 00141B50  80 A3 22 34 */	lwz r5, 0x2234(r3)
-/* 80144F74 00141B54  80 83 02 D4 */	lwz r4, 0x2d4(r3)
-/* 80144F78 00141B58  6C A5 80 00 */	xoris r5, r5, 0x8000
-/* 80144F7C 00141B5C  90 A1 00 1C */	stw r5, 0x1c(r1)
-/* 80144F80 00141B60  C0 04 00 00 */	lfs f0, 0(r4)
-/* 80144F84 00141B64  90 01 00 18 */	stw r0, 0x18(r1)
-/* 80144F88 00141B68  C8 21 00 18 */	lfd f1, 0x18(r1)
-/* 80144F8C 00141B6C  EC 21 10 28 */	fsubs f1, f1, f2
-/* 80144F90 00141B70  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 80144F94 00141B74  40 82 00 10 */	bne lbl_80144FA4
-/* 80144F98 00141B78  38 80 00 5C */	li r4, 0x5c
-/* 80144F9C 00141B7C  38 A0 00 00 */	li r5, 0
-/* 80144FA0 00141B80  4B F7 B0 31 */	bl func_800BFFD0
-lbl_80144FA4:
-/* 80144FA4 00141B84  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 80144FA8 00141B88  38 21 00 20 */	addi r1, r1, 0x20
-/* 80144FAC 00141B8C  7C 08 03 A6 */	mtlr r0
-/* 80144FB0 00141B90  4E 80 00 20 */	blr 
-
-.global func_80144FB4
-func_80144FB4:
-/* 80144FB4 00141B94  80 E3 00 2C */	lwz r7, 0x2c(r3)
-/* 80144FB8 00141B98  38 00 00 11 */	li r0, 0x11
-/* 80144FBC 00141B9C  7C 09 03 A6 */	mtctr r0
-/* 80144FC0 00141BA0  80 67 01 0C */	lwz r3, 0x10c(r7)
-/* 80144FC4 00141BA4  80 C7 02 D4 */	lwz r6, 0x2d4(r7)
-/* 80144FC8 00141BA8  80 63 00 04 */	lwz r3, 4(r3)
-/* 80144FCC 00141BAC  38 A6 FF F8 */	addi r5, r6, -8
-/* 80144FD0 00141BB0  38 83 FF F8 */	addi r4, r3, -8
-lbl_80144FD4:
-/* 80144FD4 00141BB4  84 64 00 08 */	lwzu r3, 8(r4)
-/* 80144FD8 00141BB8  80 04 00 04 */	lwz r0, 4(r4)
-/* 80144FDC 00141BBC  94 65 00 08 */	stwu r3, 8(r5)
-/* 80144FE0 00141BC0  90 05 00 04 */	stw r0, 4(r5)
-/* 80144FE4 00141BC4  42 00 FF F0 */	bdnz lbl_80144FD4
-/* 80144FE8 00141BC8  C0 02 A3 28 */	lfs f0, lbl_804D9D08@sda21(r2)
-/* 80144FEC 00141BCC  C0 27 00 38 */	lfs f1, 0x38(r7)
-/* 80144FF0 00141BD0  FC 00 08 00 */	fcmpu cr0, f0, f1
-/* 80144FF4 00141BD4  4D 82 00 20 */	beqlr 
-/* 80144FF8 00141BD8  C0 06 00 80 */	lfs f0, 0x80(r6)
-/* 80144FFC 00141BDC  EC 00 00 72 */	fmuls f0, f0, f1
-/* 80145000 00141BE0  D0 06 00 80 */	stfs f0, 0x80(r6)
-/* 80145004 00141BE4  C0 26 00 84 */	lfs f1, 0x84(r6)
-/* 80145008 00141BE8  C0 07 00 38 */	lfs f0, 0x38(r7)
-/* 8014500C 00141BEC  EC 01 00 32 */	fmuls f0, f1, f0
-/* 80145010 00141BF0  D0 06 00 84 */	stfs f0, 0x84(r6)
-/* 80145014 00141BF4  4E 80 00 20 */	blr 
-
-.global ftMewtwo_OnKnockbackEnter
-ftMewtwo_OnKnockbackEnter:
-/* 80145018 00141BF8  7C 08 02 A6 */	mflr r0
-/* 8014501C 00141BFC  38 80 00 02 */	li r4, 2
-/* 80145020 00141C00  90 01 00 04 */	stw r0, 4(r1)
-/* 80145024 00141C04  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80145028 00141C08  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8014502C 00141C0C  7C 7F 1B 78 */	mr r31, r3
-/* 80145030 00141C10  C0 22 A3 2C */	lfs f1, lbl_804D9D0C@sda21(r2)
-/* 80145034 00141C14  4B F2 B4 BD */	bl func_800704F0
-/* 80145038 00141C18  C0 22 A3 2C */	lfs f1, lbl_804D9D0C@sda21(r2)
-/* 8014503C 00141C1C  38 7F 00 00 */	addi r3, r31, 0
-/* 80145040 00141C20  38 80 00 00 */	li r4, 0
-/* 80145044 00141C24  4B F2 B4 AD */	bl func_800704F0
-/* 80145048 00141C28  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8014504C 00141C2C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80145050 00141C30  38 21 00 18 */	addi r1, r1, 0x18
-/* 80145054 00141C34  7C 08 03 A6 */	mtlr r0
-/* 80145058 00141C38  4E 80 00 20 */	blr 
-
-.global ftMewtwo_OnKnockbackExit
-ftMewtwo_OnKnockbackExit:
-/* 8014505C 00141C3C  7C 08 02 A6 */	mflr r0
-/* 80145060 00141C40  38 80 00 02 */	li r4, 2
-/* 80145064 00141C44  90 01 00 04 */	stw r0, 4(r1)
-/* 80145068 00141C48  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8014506C 00141C4C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80145070 00141C50  7C 7F 1B 78 */	mr r31, r3
-/* 80145074 00141C54  C0 22 A3 30 */	lfs f1, lbl_804D9D10@sda21(r2)
-/* 80145078 00141C58  4B F2 B4 79 */	bl func_800704F0
-/* 8014507C 00141C5C  C0 22 A3 30 */	lfs f1, lbl_804D9D10@sda21(r2)
-/* 80145080 00141C60  38 7F 00 00 */	addi r3, r31, 0
-/* 80145084 00141C64  38 80 00 00 */	li r4, 0
-/* 80145088 00141C68  4B F2 B4 69 */	bl func_800704F0
-/* 8014508C 00141C6C  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80145090 00141C70  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80145094 00141C74  38 21 00 18 */	addi r1, r1, 0x18
-/* 80145098 00141C78  7C 08 03 A6 */	mtlr r0
-/* 8014509C 00141C7C  4E 80 00 20 */	blr 
 lbl_801450A0:
 /* 801450A0 00141C80  7C 08 02 A6 */	mflr r0
 /* 801450A4 00141C84  90 01 00 04 */	stw r0, 4(r1)
@@ -218,8 +123,8 @@ ftMewtwo_SpecialHi_StartAction:
 /* 80145250 00141E30  7C 08 03 A6 */	mtlr r0
 /* 80145254 00141E34  4E 80 00 20 */	blr 
 
-.global ftMewtwo_SpecialHiAir_StartAction
-ftMewtwo_SpecialHiAir_StartAction:
+.global ftMewtwo_SpecialAirHi_StartAction
+ftMewtwo_SpecialAirHi_StartAction:
 /* 80145258 00141E38  7C 08 02 A6 */	mflr r0
 /* 8014525C 00141E3C  38 80 01 64 */	li r4, 0x164
 /* 80145260 00141E40  90 01 00 04 */	stw r0, 4(r1)
@@ -1375,8 +1280,8 @@ ftMewtwo_SpecialLw_StartAction:
 /* 8014625C 00142E3C  7C 08 03 A6 */	mtlr r0
 /* 80146260 00142E40  4E 80 00 20 */	blr 
 
-.global ftMewtwo_SpecialLwAir_StartAction
-ftMewtwo_SpecialLwAir_StartAction:
+.global ftMewtwo_SpecialAirLw_StartAction
+ftMewtwo_SpecialAirLw_StartAction:
 /* 80146264 00142E44  7C 08 02 A6 */	mflr r0
 /* 80146268 00142E48  38 80 01 68 */	li r4, 0x168
 /* 8014626C 00142E4C  90 01 00 04 */	stw r0, 4(r1)
@@ -1737,8 +1642,8 @@ lbl_80146758:
 /* 80146774 00143354  7C 08 03 A6 */	mtlr r0
 /* 80146778 00143358  4E 80 00 20 */	blr 
 
-.global ftMewtwo_SpecialSAir_StartAction
-ftMewtwo_SpecialSAir_StartAction:
+.global ftMewtwo_SpecialAirS_StartAction
+ftMewtwo_SpecialAirS_StartAction:
 /* 8014677C 0014335C  7C 08 02 A6 */	mflr r0
 /* 80146780 00143360  90 01 00 04 */	stw r0, 4(r1)
 /* 80146784 00143364  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2639,8 +2544,8 @@ lbl_801473C0:
 /* 801473EC 00143FCC  7C 08 03 A6 */	mtlr r0
 /* 801473F0 00143FD0  4E 80 00 20 */	blr 
 
-.global ftMewtwo_SpecialNAir_StartAction
-ftMewtwo_SpecialNAir_StartAction:
+.global ftMewtwo_SpecialAirN_StartAction
+ftMewtwo_SpecialAirN_StartAction:
 /* 801473F4 00143FD4  7C 08 02 A6 */	mflr r0
 /* 801473F8 00143FD8  38 80 01 5A */	li r4, 0x15a
 /* 801473FC 00143FDC  90 01 00 04 */	stw r0, 4(r1)
@@ -4638,20 +4543,6 @@ lbl_803B75DC:
 
 .section .sdata2
     .balign 8
-.global lbl_804D9D00
-lbl_804D9D00:
-	.4byte 0x43300000
-	.4byte 0x80000000
-.global lbl_804D9D08
-lbl_804D9D08:
-	.4byte 0x3F800000
-.global lbl_804D9D0C
-lbl_804D9D0C:
-	.4byte 0x40400000
-.global lbl_804D9D10
-lbl_804D9D10:
-	.4byte 0x00000000
-	.4byte 0x00000000
 .global lbl_804D9D18
 lbl_804D9D18:
 	.4byte 0x00000000

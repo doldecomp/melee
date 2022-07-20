@@ -10,7 +10,7 @@ void ftPikachu_SpecialN_StartAction(HSD_GObj* fighterObj) {
     func_8006EBA4(fighterObj);
 }
 
-void ftPikachu_ActionChange_8012489C(HSD_GObj* fighterObj) {
+void ftPikachu_SpecialAirN_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     Fighter_ActionStateChange_800693AC(fighterObj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
     fighter->x220C_ftcmd_var3 = 0;

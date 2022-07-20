@@ -2,86 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8011F060
-func_8011F060:
-/* 8011F060 0011BC40  7C 08 02 A6 */	mflr r0
-/* 8011F064 0011BC44  90 01 00 04 */	stw r0, 4(r1)
-/* 8011F068 0011BC48  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8011F06C 0011BC4C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8011F070 0011BC50  7C 7F 1B 78 */	mr r31, r3
-/* 8011F074 0011BC54  48 00 01 1D */	bl func_8011F190
-/* 8011F078 0011BC58  7F E3 FB 78 */	mr r3, r31
-/* 8011F07C 0011BC5C  48 00 38 1D */	bl func_80122898
-/* 8011F080 0011BC60  7F E3 FB 78 */	mr r3, r31
-/* 8011F084 0011BC64  48 00 20 E1 */	bl func_80121164
-/* 8011F088 0011BC68  7F E3 FB 78 */	mr r3, r31
-/* 8011F08C 0011BC6C  48 00 06 01 */	bl func_8011F68C
-/* 8011F090 0011BC70  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8011F094 0011BC74  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8011F098 0011BC78  38 21 00 18 */	addi r1, r1, 0x18
-/* 8011F09C 0011BC7C  7C 08 03 A6 */	mtlr r0
-/* 8011F0A0 0011BC80  4E 80 00 20 */	blr 
-
-.global func_8011F0A4
-func_8011F0A4:
-/* 8011F0A4 0011BC84  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8011F0A8 0011BC88  38 00 00 2B */	li r0, 0x2b
-/* 8011F0AC 0011BC8C  7C 09 03 A6 */	mtctr r0
-/* 8011F0B0 0011BC90  80 83 01 0C */	lwz r4, 0x10c(r3)
-/* 8011F0B4 0011BC94  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8011F0B8 0011BC98  80 84 00 04 */	lwz r4, 4(r4)
-/* 8011F0BC 0011BC9C  38 A3 FF F8 */	addi r5, r3, -8
-/* 8011F0C0 0011BCA0  38 84 FF F8 */	addi r4, r4, -8
-lbl_8011F0C4:
-/* 8011F0C4 0011BCA4  84 64 00 08 */	lwzu r3, 8(r4)
-/* 8011F0C8 0011BCA8  80 04 00 04 */	lwz r0, 4(r4)
-/* 8011F0CC 0011BCAC  94 65 00 08 */	stwu r3, 8(r5)
-/* 8011F0D0 0011BCB0  90 05 00 04 */	stw r0, 4(r5)
-/* 8011F0D4 0011BCB4  42 00 FF F0 */	bdnz lbl_8011F0C4
-/* 8011F0D8 0011BCB8  80 04 00 08 */	lwz r0, 8(r4)
-/* 8011F0DC 0011BCBC  90 05 00 08 */	stw r0, 8(r5)
-/* 8011F0E0 0011BCC0  4E 80 00 20 */	blr 
-
-.global ftIceClimber_OnKnockbackEnter
-ftIceClimber_OnKnockbackEnter:
-/* 8011F0E4 0011BCC4  7C 08 02 A6 */	mflr r0
-/* 8011F0E8 0011BCC8  38 80 00 01 */	li r4, 1
-/* 8011F0EC 0011BCCC  90 01 00 04 */	stw r0, 4(r1)
-/* 8011F0F0 0011BCD0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8011F0F4 0011BCD4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8011F0F8 0011BCD8  7C 7F 1B 78 */	mr r31, r3
-/* 8011F0FC 0011BCDC  C0 22 9E 54 */	lfs f1, lbl_804D9834@sda21(r2)
-/* 8011F100 0011BCE0  4B F5 13 F1 */	bl func_800704F0
-/* 8011F104 0011BCE4  C0 22 9E 54 */	lfs f1, lbl_804D9834@sda21(r2)
-/* 8011F108 0011BCE8  38 7F 00 00 */	addi r3, r31, 0
-/* 8011F10C 0011BCEC  38 80 00 00 */	li r4, 0
-/* 8011F110 0011BCF0  4B F5 13 E1 */	bl func_800704F0
-/* 8011F114 0011BCF4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8011F118 0011BCF8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8011F11C 0011BCFC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8011F120 0011BD00  7C 08 03 A6 */	mtlr r0
-/* 8011F124 0011BD04  4E 80 00 20 */	blr 
-
-.global ftIceClimber_OnKnockbackExit
-ftIceClimber_OnKnockbackExit:
-/* 8011F128 0011BD08  7C 08 02 A6 */	mflr r0
-/* 8011F12C 0011BD0C  38 80 00 01 */	li r4, 1
-/* 8011F130 0011BD10  90 01 00 04 */	stw r0, 4(r1)
-/* 8011F134 0011BD14  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8011F138 0011BD18  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8011F13C 0011BD1C  7C 7F 1B 78 */	mr r31, r3
-/* 8011F140 0011BD20  C0 22 9E 50 */	lfs f1, lbl_804D9830@sda21(r2)
-/* 8011F144 0011BD24  4B F5 13 AD */	bl func_800704F0
-/* 8011F148 0011BD28  C0 22 9E 50 */	lfs f1, lbl_804D9830@sda21(r2)
-/* 8011F14C 0011BD2C  38 7F 00 00 */	addi r3, r31, 0
-/* 8011F150 0011BD30  38 80 00 00 */	li r4, 0
-/* 8011F154 0011BD34  4B F5 13 9D */	bl func_800704F0
-/* 8011F158 0011BD38  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8011F15C 0011BD3C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8011F160 0011BD40  38 21 00 18 */	addi r1, r1, 0x18
-/* 8011F164 0011BD44  7C 08 03 A6 */	mtlr r0
-/* 8011F168 0011BD48  4E 80 00 20 */	blr 
-
 .global func_8011F16C
 func_8011F16C:
 /* 8011F16C 0011BD4C  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -156,8 +76,8 @@ ftIceClimber_SpecialN_StartAction:
 /* 8011F264 0011BE44  7C 08 03 A6 */	mtlr r0
 /* 8011F268 0011BE48  4E 80 00 20 */	blr 
 
-.global ftIceClimber_SpecialNAir_StartAction
-ftIceClimber_SpecialNAir_StartAction:
+.global ftIceClimber_SpecialAirN_StartAction
+ftIceClimber_SpecialAirN_StartAction:
 /* 8011F26C 0011BE4C  7C 08 02 A6 */	mflr r0
 /* 8011F270 0011BE50  90 01 00 04 */	stw r0, 4(r1)
 /* 8011F274 0011BE54  38 00 00 00 */	li r0, 0
@@ -394,8 +314,8 @@ lbl_8011F500:
 /* 8011F5AC 0011C18C  80 1F 22 2C */	lwz r0, 0x222c(r31)
 /* 8011F5B0 0011C190  28 00 00 00 */	cmplwi r0, 0
 /* 8011F5B4 0011C194  41 82 00 14 */	beq lbl_8011F5C8
-/* 8011F5B8 0011C198  3C 60 80 12 */	lis r3, func_8011F060@ha
-/* 8011F5BC 0011C19C  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 8011F5B8 0011C198  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
+/* 8011F5BC 0011C19C  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 8011F5C0 0011C1A0  90 1F 21 E4 */	stw r0, 0x21e4(r31)
 /* 8011F5C4 0011C1A4  90 1F 21 DC */	stw r0, 0x21dc(r31)
 lbl_8011F5C8:
@@ -742,11 +662,11 @@ lbl_8011FA3C:
 /* 8011FA68 0011C648  90 7C 1A 5C */	stw r3, 0x1a5c(r28)
 lbl_8011FA6C:
 /* 8011FA6C 0011C64C  C0 02 9E 68 */	lfs f0, lbl_804D9848@sda21(r2)
-/* 8011FA70 0011C650  3C A0 80 12 */	lis r5, func_8011F060@ha
+/* 8011FA70 0011C650  3C A0 80 12 */	lis r5, ftIceClimber_8011F060@ha
 /* 8011FA74 0011C654  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 8011FA78 0011C658  D0 1C 00 84 */	stfs f0, 0x84(r28)
 /* 8011FA7C 0011C65C  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
-/* 8011FA80 0011C660  3B A5 F0 60 */	addi r29, r5, func_8011F060@l
+/* 8011FA80 0011C660  3B A5 F0 60 */	addi r29, r5, ftIceClimber_8011F060@l
 /* 8011FA84 0011C664  C0 3E 00 28 */	lfs f1, 0x28(r30)
 /* 8011FA88 0011C668  3B C4 BA 40 */	addi r30, r4, efLib_PauseAll@l
 /* 8011FA8C 0011C66C  C0 1C 00 2C */	lfs f0, 0x2c(r28)
@@ -781,8 +701,8 @@ lbl_8011FA6C:
 /* 8011FB00 0011C6E0  7C 08 03 A6 */	mtlr r0
 /* 8011FB04 0011C6E4  4E 80 00 20 */	blr 
 
-.global ftIceClimber_SpecialSAir_StartAction
-ftIceClimber_SpecialSAir_StartAction:
+.global ftIceClimber_SpecialAirS_StartAction
+ftIceClimber_SpecialAirS_StartAction:
 /* 8011FB08 0011C6E8  7C 08 02 A6 */	mflr r0
 /* 8011FB0C 0011C6EC  38 80 00 01 */	li r4, 1
 /* 8011FB10 0011C6F0  90 01 00 04 */	stw r0, 4(r1)
@@ -842,12 +762,12 @@ lbl_8011FBB0:
 /* 8011FBE4 0011C7C4  D0 1C 00 84 */	stfs f0, 0x84(r28)
 lbl_8011FBE8:
 /* 8011FBE8 0011C7C8  C0 3E 00 2C */	lfs f1, 0x2c(r30)
-/* 8011FBEC 0011C7CC  3C A0 80 12 */	lis r5, func_8011F060@ha
+/* 8011FBEC 0011C7CC  3C A0 80 12 */	lis r5, ftIceClimber_8011F060@ha
 /* 8011FBF0 0011C7D0  C0 1C 00 2C */	lfs f0, 0x2c(r28)
 /* 8011FBF4 0011C7D4  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 8011FBF8 0011C7D8  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
 /* 8011FBFC 0011C7DC  EC 01 00 32 */	fmuls f0, f1, f0
-/* 8011FC00 0011C7E0  3B A5 F0 60 */	addi r29, r5, func_8011F060@l
+/* 8011FC00 0011C7E0  3B A5 F0 60 */	addi r29, r5, ftIceClimber_8011F060@l
 /* 8011FC04 0011C7E4  3B C4 BA 40 */	addi r30, r4, efLib_PauseAll@l
 /* 8011FC08 0011C7E8  3B E3 BA C4 */	addi r31, r3, efLib_ResumeAll@l
 /* 8011FC0C 0011C7EC  D0 1C 00 80 */	stfs f0, 0x80(r28)
@@ -1259,9 +1179,9 @@ lbl_80120164:
 /* 801201B0 0011CD90  C0 42 9E 6C */	lfs f2, lbl_804D984C@sda21(r2)
 /* 801201B4 0011CD94  C0 62 9E 68 */	lfs f3, lbl_804D9848@sda21(r2)
 /* 801201B8 0011CD98  4B F4 91 F5 */	bl Fighter_ActionStateChange_800693AC
-/* 801201BC 0011CD9C  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 801201BC 0011CD9C  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 801201C0 0011CDA0  80 BD 00 2C */	lwz r5, 0x2c(r29)
-/* 801201C4 0011CDA4  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 801201C4 0011CDA4  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 801201C8 0011CDA8  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 801201CC 0011CDAC  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 801201D0 0011CDB0  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -1375,9 +1295,9 @@ lbl_80120314:
 /* 80120360 0011CF40  C0 42 9E 6C */	lfs f2, lbl_804D984C@sda21(r2)
 /* 80120364 0011CF44  C0 62 9E 68 */	lfs f3, lbl_804D9848@sda21(r2)
 /* 80120368 0011CF48  4B F4 90 45 */	bl Fighter_ActionStateChange_800693AC
-/* 8012036C 0011CF4C  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 8012036C 0011CF4C  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80120370 0011CF50  80 BD 00 2C */	lwz r5, 0x2c(r29)
-/* 80120374 0011CF54  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80120374 0011CF54  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120378 0011CF58  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 8012037C 0011CF5C  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 80120380 0011CF60  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -1659,9 +1579,9 @@ lbl_80120720:
 /* 80120758 0011D338  C0 42 9E 6C */	lfs f2, lbl_804D984C@sda21(r2)
 /* 8012075C 0011D33C  C0 62 9E 68 */	lfs f3, lbl_804D9848@sda21(r2)
 /* 80120760 0011D340  4B F4 8C 4D */	bl Fighter_ActionStateChange_800693AC
-/* 80120764 0011D344  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80120764 0011D344  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80120768 0011D348  80 BF 00 2C */	lwz r5, 0x2c(r31)
-/* 8012076C 0011D34C  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 8012076C 0011D34C  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120770 0011D350  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 80120774 0011D354  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 80120778 0011D358  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -1704,9 +1624,9 @@ lbl_801207F0:
 lbl_80120800:
 /* 80120800 0011D3E0  7F E3 FB 78 */	mr r3, r31
 /* 80120804 0011D3E4  4B FF EF 1D */	bl func_8011F720
-/* 80120808 0011D3E8  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80120808 0011D3E8  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 8012080C 0011D3EC  80 BF 00 2C */	lwz r5, 0x2c(r31)
-/* 80120810 0011D3F0  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80120810 0011D3F0  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120814 0011D3F4  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 80120818 0011D3F8  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 8012081C 0011D3FC  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -1797,9 +1717,9 @@ lbl_80120914:
 /* 8012094C 0011D52C  C0 42 9E 6C */	lfs f2, lbl_804D984C@sda21(r2)
 /* 80120950 0011D530  C0 62 9E 68 */	lfs f3, lbl_804D9848@sda21(r2)
 /* 80120954 0011D534  4B F4 8A 59 */	bl Fighter_ActionStateChange_800693AC
-/* 80120958 0011D538  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80120958 0011D538  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 8012095C 0011D53C  80 BF 00 2C */	lwz r5, 0x2c(r31)
-/* 80120960 0011D540  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80120960 0011D540  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120964 0011D544  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 80120968 0011D548  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 8012096C 0011D54C  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -1842,9 +1762,9 @@ lbl_801209E4:
 lbl_801209F4:
 /* 801209F4 0011D5D4  7F E3 FB 78 */	mr r3, r31
 /* 801209F8 0011D5D8  4B FF ED 29 */	bl func_8011F720
-/* 801209FC 0011D5DC  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 801209FC 0011D5DC  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80120A00 0011D5E0  80 BF 00 2C */	lwz r5, 0x2c(r31)
-/* 80120A04 0011D5E4  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80120A04 0011D5E4  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120A08 0011D5E8  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 80120A0C 0011D5EC  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 80120A10 0011D5F0  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -1940,9 +1860,9 @@ lbl_80120B20:
 /* 80120B50 0011D730  38 80 01 57 */	li r4, 0x157
 /* 80120B54 0011D734  38 C0 00 00 */	li r6, 0
 /* 80120B58 0011D738  4B F4 88 55 */	bl Fighter_ActionStateChange_800693AC
-/* 80120B5C 0011D73C  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80120B5C 0011D73C  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80120B60 0011D740  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80120B64 0011D744  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80120B64 0011D744  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120B68 0011D748  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 80120B6C 0011D74C  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 80120B70 0011D750  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -1988,9 +1908,9 @@ lbl_80120BF4:
 lbl_80120C04:
 /* 80120C04 0011D7E4  7F C3 F3 78 */	mr r3, r30
 /* 80120C08 0011D7E8  4B FF EB 19 */	bl func_8011F720
-/* 80120C0C 0011D7EC  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80120C0C 0011D7EC  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80120C10 0011D7F0  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80120C14 0011D7F4  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80120C14 0011D7F4  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120C18 0011D7F8  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 80120C1C 0011D7FC  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 80120C20 0011D800  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -2086,9 +2006,9 @@ lbl_80120D30:
 /* 80120D60 0011D940  38 80 01 58 */	li r4, 0x158
 /* 80120D64 0011D944  38 C0 00 00 */	li r6, 0
 /* 80120D68 0011D948  4B F4 86 45 */	bl Fighter_ActionStateChange_800693AC
-/* 80120D6C 0011D94C  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80120D6C 0011D94C  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80120D70 0011D950  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80120D74 0011D954  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80120D74 0011D954  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120D78 0011D958  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 80120D7C 0011D95C  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 80120D80 0011D960  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -2134,9 +2054,9 @@ lbl_80120E04:
 lbl_80120E14:
 /* 80120E14 0011D9F4  7F C3 F3 78 */	mr r3, r30
 /* 80120E18 0011D9F8  4B FF E9 09 */	bl func_8011F720
-/* 80120E1C 0011D9FC  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80120E1C 0011D9FC  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80120E20 0011DA00  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80120E24 0011DA04  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80120E24 0011DA04  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80120E28 0011DA08  90 05 21 DC */	stw r0, 0x21dc(r5)
 /* 80120E2C 0011DA0C  3C 80 80 06 */	lis r4, efLib_PauseAll@ha
 /* 80120E30 0011DA10  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
@@ -2346,8 +2266,8 @@ func_801210C8:
 /* 80121118 0011DCF8  80 1F 22 38 */	lwz r0, 0x2238(r31)
 /* 8012111C 0011DCFC  28 00 00 00 */	cmplwi r0, 0
 /* 80121120 0011DD00  41 82 00 14 */	beq lbl_80121134
-/* 80121124 0011DD04  3C 60 80 12 */	lis r3, func_8011F060@ha
-/* 80121128 0011DD08  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80121124 0011DD04  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
+/* 80121128 0011DD08  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 8012112C 0011DD0C  90 1F 21 E8 */	stw r0, 0x21e8(r31)
 /* 80121130 0011DD10  90 1F 21 DC */	stw r0, 0x21dc(r31)
 lbl_80121134:
@@ -2424,8 +2344,8 @@ ftIceClimber_SpecialHi_StartAction:
 /* 80121224 0011DE04  7C 08 03 A6 */	mtlr r0
 /* 80121228 0011DE08  4E 80 00 20 */	blr 
 
-.global ftIceClimber_SpecialHiAir_StartAction
-ftIceClimber_SpecialHiAir_StartAction:
+.global ftIceClimber_SpecialAirHi_StartAction
+ftIceClimber_SpecialAirHi_StartAction:
 /* 8012122C 0011DE0C  7C 08 02 A6 */	mflr r0
 /* 80121230 0011DE10  90 01 00 04 */	stw r0, 4(r1)
 /* 80121234 0011DE14  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -4135,8 +4055,8 @@ ftIceClimber_SpecialLw_StartAction:
 /* 80122980 0011F560  7C 08 03 A6 */	mtlr r0
 /* 80122984 0011F564  4E 80 00 20 */	blr 
 
-.global ftIceClimber_SpecialLwAir_StartAction
-ftIceClimber_SpecialLwAir_StartAction:
+.global ftIceClimber_SpecialAirLw_StartAction
+ftIceClimber_SpecialAirLw_StartAction:
 /* 80122988 0011F568  7C 08 02 A6 */	mflr r0
 /* 8012298C 0011F56C  38 E0 00 00 */	li r7, 0
 /* 80122990 0011F570  90 01 00 04 */	stw r0, 4(r1)
@@ -4287,9 +4207,9 @@ lbl_80122B54:
 /* 80122B90 0011F770  38 80 01 65 */	li r4, 0x165
 /* 80122B94 0011F774  38 C0 00 00 */	li r6, 0
 /* 80122B98 0011F778  4B F4 68 15 */	bl Fighter_ActionStateChange_800693AC
-/* 80122B9C 0011F77C  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80122B9C 0011F77C  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80122BA0 0011F780  80 9F 00 2C */	lwz r4, 0x2c(r31)
-/* 80122BA4 0011F784  38 03 F0 60 */	addi r0, r3, func_8011F060@l
+/* 80122BA4 0011F784  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
 /* 80122BA8 0011F788  90 04 21 E4 */	stw r0, 0x21e4(r4)
 /* 80122BAC 0011F78C  90 04 21 DC */	stw r0, 0x21dc(r4)
 /* 80122BB0 0011F790  83 FF 00 2C */	lwz r31, 0x2c(r31)
@@ -4347,9 +4267,9 @@ lbl_80122C18:
 /* 80122C70 0011F850  38 80 01 66 */	li r4, 0x166
 /* 80122C74 0011F854  38 C0 00 00 */	li r6, 0
 /* 80122C78 0011F858  4B F4 67 35 */	bl Fighter_ActionStateChange_800693AC
-/* 80122C7C 0011F85C  3C 60 80 12 */	lis r3, func_8011F060@ha
+/* 80122C7C 0011F85C  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
 /* 80122C80 0011F860  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80122C84 0011F864  38 83 F0 60 */	addi r4, r3, func_8011F060@l
+/* 80122C84 0011F864  38 83 F0 60 */	addi r4, r3, ftIceClimber_8011F060@l
 /* 80122C88 0011F868  90 85 21 E4 */	stw r4, 0x21e4(r5)
 /* 80122C8C 0011F86C  3C 60 80 12 */	lis r3, lbl_80122D2C@ha
 /* 80122C90 0011F870  38 03 2D 2C */	addi r0, r3, lbl_80122D2C@l
@@ -4459,8 +4379,8 @@ lbl_80122DF0:
 /* 80122E0C 0011F9EC  38 A0 00 01 */	li r5, 1
 /* 80122E10 0011F9F0  50 A0 3E 30 */	rlwimi r0, r5, 7, 0x18, 0x18
 /* 80122E14 0011F9F4  98 1F 23 44 */	stb r0, 0x2344(r31)
-/* 80122E18 0011F9F8  3C 60 80 12 */	lis r3, func_8011F060@ha
-/* 80122E1C 0011F9FC  38 63 F0 60 */	addi r3, r3, func_8011F060@l
+/* 80122E18 0011F9F8  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
+/* 80122E1C 0011F9FC  38 63 F0 60 */	addi r3, r3, ftIceClimber_8011F060@l
 /* 80122E20 0011FA00  88 9F 22 30 */	lbz r4, 0x2230(r31)
 /* 80122E24 0011FA04  50 A4 3E 30 */	rlwimi r4, r5, 7, 0x18, 0x18
 /* 80122E28 0011FA08  38 00 00 00 */	li r0, 0
@@ -5165,12 +5085,6 @@ lbl_804D3E18:
 
 .section .sdata2
     .balign 8
-.global lbl_804D9830
-lbl_804D9830:
-	.4byte 0x00000000
-.global lbl_804D9834
-lbl_804D9834:
-	.4byte 0x40400000
 .global lbl_804D9838
 lbl_804D9838:
 	.4byte 0x00000000

@@ -66,19 +66,17 @@ void ftPichu_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
     Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
 }
 
-void func_8014A1A8(HSD_GObj* gobj)
+void ftPichu_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    ftPikachu_ScaleYAttributesArray_80124704(gobj);
+    ftPikachu_LoadSpecialAttrs(gobj);
 }
 
 void ftPichu_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    func_800704F0(gobj, 1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 void ftPichu_OnKnockbackExit(HSD_GObj* gobj)
 {
-    func_800704F0(gobj, 1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+    Fighter_OnKnockbackExit(gobj, 1);
 }

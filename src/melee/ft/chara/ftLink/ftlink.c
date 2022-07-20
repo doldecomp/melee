@@ -1,8 +1,6 @@
 #include "ftlink.h"
 
-extern float lbl_804D92D8; // 1.0f
-extern float lbl_804D92DC; // 3.0f
-extern float lbl_804D92E0; // 0.0f
+// extern float lbl_804D92E0; // 0.0f
 
 s32 func_800EAD64(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
@@ -96,22 +94,34 @@ void ftLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_800EB250(HSD_GObj* fighterObj) {
-    Fighter* link = fighterObj->user_data;
-    ftLinkAttributes* link_attr = link->x2D4_specialAttributes;
-    ftLinkAttributes* other_attr = link->x10C_ftData->ext_attr;
-    *link_attr = *other_attr;
-    if (lbl_804D92D8 != link->x34_scale.y) {
-        link_attr->x28 *= link->x34_scale.y;
+void ftLink_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftLinkAttributes);
+    if (ft->x34_scale.y != 1.0f) {
+        sA2->x28 *= ft->x34_scale.y;
     }
 }
 
 void ftLink_OnKnockbackEnter(HSD_GObj* fighterObj) {
-    func_800704F0(fighterObj, 1, lbl_804D92DC);
-    func_800704F0(fighterObj, 0, lbl_804D92DC);
+    Fighter_OnKnockbackEnter(fighterObj, 1);
 }
 
 void ftLink_OnKnockbackExit(HSD_GObj* fighterObj) {
-    func_800704F0(fighterObj, 1, lbl_804D92E0);
-    func_800704F0(fighterObj, 0, lbl_804D92E0);
+    Fighter_OnKnockbackExit(fighterObj, 1);
+}
+
+void ftLink_800EB334(HSD_GObj* fighterObj) {
+    f32 new_ground_vel;
+
+    Fighter* fighter = fighterObj->user_data;
+    ftLinkAttributes* link_attr = fighter->x10C_ftData->ext_attr;
+
+    f32 resultf = func_80092ED8(fighter->x19A4, link_attr, link_attr->xD8);
+    fighter->xEC_ground_vel = resultf * p_ftCommonData->x294;
+    if (fighter->x19AC < 0.0f) {
+        new_ground_vel = fighter->xEC_ground_vel;
+    } else {
+        new_ground_vel = -fighter->xEC_ground_vel;
+    }
+    fighter->xEC_ground_vel = new_ground_vel;
+    func_80088148(fighter, 0x2716AU, 0x7FU, 0x40U);
 }

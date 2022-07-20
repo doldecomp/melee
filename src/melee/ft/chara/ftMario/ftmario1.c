@@ -60,28 +60,16 @@ void ftMario_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftMario_func_800E0BE4(HSD_GObj* gobj) {
-    Fighter* ft;
-    ftData* ftDataInfo;
-    ftMarioAttributes *sa, *ext_attr;
-
-    ft = getFighter(gobj);
-    ftDataInfo = ft->x10C_ftData;
-
-    ext_attr = (ftMarioAttributes*)ft->x10C_ftData->ext_attr;
-    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
-
-    *sa = *ext_attr;
+void ftMario_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftMarioAttributes);
 }
 
 void ftMario_OnKnockbackEnter(HSD_GObj* gobj) {
-    func_800704F0(gobj, 1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 void ftMario_OnKnockbackExit(HSD_GObj* gobj) {
-    func_800704F0(gobj, 1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 void ftMario_func_800E0CAC(s32 arg0, u32* arg1, u32* arg2) {

@@ -1358,7 +1358,8 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
     
         if (animflags_bool) {
             if (!fighter->x594_animCurrFlags1.bits.b0 && !fighter->x594_animCurrFlags1.bits.b0) {
-                func_8007CC78(fighter->x110_attr.x138_DashrunTerminalVelocity, fighter);
+                !fighter;
+                func_8007CC78(fighter, fighter->x110_attr.x138_DashrunTerminalVelocity);
             }
         }
     

@@ -7,8 +7,6 @@ extern void func_800BC8D4(HSD_GObj*, HSD_GObj*);
 extern void func_800DE7C0(HSD_GObj*, s32, s32);
 extern void func_800DE2A8(HSD_GObj*, HSD_GObj*);
 
-extern const f32 lbl_804D9AC8; //3.0
-extern const f32 lbl_804D9ACC; //0.0
 extern const f32 lbl_804D9ADC; //1.0
 extern const f32 lbl_804D9AD8; //0.0
 
@@ -74,24 +72,16 @@ void ftKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_80132D00(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    
-    ftKoopaAttributes* sA2 = (ftKoopaAttributes*)ft->x2D4_specialAttributes;
-    ftKoopaAttributes* ext_attr = (ftKoopaAttributes*)ft->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
+void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftKoopaAttributes);
 }
 
 void ftKoopa_OnKnockbackEnter(HSD_GObj *gobj) {
-    func_800704F0(gobj, 1, lbl_804D9AC8);
-    func_800704F0(gobj, 0, lbl_804D9AC8);
-    return;
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 void ftKoopa_OnKnockbackExit(HSD_GObj *gobj) {
-    func_800704F0(gobj, 1, lbl_804D9ACC);
-    func_800704F0(gobj, 0, lbl_804D9ACC);
-    return;
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 f32 func_80132DC0(HSD_GObj *gobj) {
@@ -181,7 +171,7 @@ void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj)
     return;
 }
 
-void ftKoopa_SpecialSAir_StartAction(HSD_GObj *gobj)
+void ftKoopa_SpecialAirS_StartAction(HSD_GObj *gobj)
 {
     Fighter *ft = gobj->user_data;
 

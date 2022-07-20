@@ -101,8 +101,8 @@ lbl_800E3388:
 /* 800E33D8 000DFFB8  7C 08 03 A6 */	mtlr r0
 /* 800E33DC 000DFFBC  4E 80 00 20 */	blr 
 
-.global ftFalcon_SpecialSAir_StartAction
-ftFalcon_SpecialSAir_StartAction:
+.global ftFalcon_SpecialAirS_StartAction
+ftFalcon_SpecialAirS_StartAction:
 /* 800E33E0 000DFFC0  7C 08 02 A6 */	mflr r0
 /* 800E33E4 000DFFC4  38 80 01 5F */	li r4, 0x15f
 /* 800E33E8 000DFFC8  90 01 00 04 */	stw r0, 4(r1)

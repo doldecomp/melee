@@ -96,7 +96,7 @@ void ftMario_func_800E0EE0(HSD_GObj* gobj) {
     }
 }
 
-void ftMario_SpecialNAir_StartAction(HSD_GObj* gobj) {
+void ftMario_SpecialAirN_StartAction(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
