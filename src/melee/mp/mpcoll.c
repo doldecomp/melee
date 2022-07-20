@@ -3,13 +3,13 @@
 #include "melee/lb/code_8000B074.h"
 #include "melee/lb/lbvector.h"
 
-// TODO: mplib.h
-void func_800509B8();
-void func_80052700();
-void func_8004F008();
-void func_80054584();
-void func_8004DD90();
-void func_8004E398();
+// TODO: proper signatures, mplib.h
+s32 func_800509B8();
+s32 func_80052700();
+s32 func_8004F008();
+s32 func_80054584();
+s32 func_8004DD90();
+s32 func_8004E398();
 
 extern s32 lbl_804D64A0;
 extern s32 lbl_804D64A4;
@@ -1117,6 +1117,31 @@ lbl_80043AC4:
 #endif
 
 // 80043ADC
+#ifdef NON_MATCHING
+void func_80043ADC(CollData* arg0) {
+    f32 sp14;
+    f32 sp10;
+    f32 spC;
+    f32 temp_f1;
+    f32 temp_f3;
+    f32 var_f31;
+
+    var_f31 = arg0->xA4_ecbCurrCorrect.left.x;
+    temp_f3 = arg0->x4_vec.x + var_f31;
+    if (var_f31 < 0.0f) {
+        var_f31 = -var_f31;
+    }
+    if (func_800509B8(&arg0->x140, 0, 0, 0, arg0->x48, arg0->x4C, -((arg0->x188_ceiling.normal.y * var_f31) - temp_f3), (arg0->x188_ceiling.normal.x * var_f31) + (arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.left.y)) != 0) {
+        sp10 = arg0->x140 + var_f31;
+        temp_f1 = arg0->x4_vec.y;
+        sp14 = temp_f1 + arg0->xA4_ecbCurrCorrect.top.y;
+        if (func_8004E090(arg0->x188_ceiling.index, &sp10, &spC, &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal, temp_f1) != -1) {
+            arg0->x4_vec.y += spC;
+            arg0->x4_vec.x = sp10;
+        }
+    }
+}
+#else
 asm void func_80043ADC() {
     nofralloc
 /* 80043ADC 000406BC  7C 08 02 A6 */	mflr r0
@@ -1179,8 +1204,22 @@ lbl_80043BA4:
 /* 80043BB8 00040798  4E 80 00 20 */	blr 
 }
 #pragma peephole on
+#endif
 
 // 80043BBC
+#ifdef NON_MATCHING
+s32 func_80043BBC(CollData* arg0, s32* arg1) {
+    s32 sp10;
+    s32 temp_r31;
+
+    temp_r31 = func_80052700(arg0->x14C_ground.index);
+    if ((func_800501CC(NULL, (s32) &sp10, 0, 0, arg0->x48, arg0->x4C, arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.bottom.x, arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y) != 0) && (sp10 != temp_r31)) {
+        *arg1 = sp10;
+        return 1;
+    }
+    return 0;
+}
+#else
 asm void func_80043BBC() {
     nofralloc
 /* 80043BBC 0004079C  7C 08 02 A6 */	mflr r0
@@ -1231,8 +1270,68 @@ lbl_80043C50:
 /* 80043C68 00040848  4E 80 00 20 */	blr 
 }
 #pragma peephole on
+#endif
 
 // 80043C6C
+#ifdef NON_MATCHING
+void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2) {
+    f32 sp30;
+    f32 sp24;
+    f32 sp20;
+    s32 sp1C;
+    s32 sp8;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f1_3;
+    f32 temp_f2;
+    f32 temp_f4;
+    f32 var_f31;
+
+    temp_f1 = arg0->xA4_ecbCurrCorrect.right.x;
+    if (temp_f1 < 0.0f) {
+        var_f31 = -temp_f1;
+    } else {
+        var_f31 = temp_f1;
+    }
+    sp20 = arg0->x4_vec.x + temp_f1;
+    temp_f1_2 = arg0->x4_vec.y;
+    sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
+    if (func_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
+        if (func_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C, -((arg0->x14C_ground.normal.y * var_f31) - sp20), (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0) {
+            sp20 = arg0->x140 - var_f31;
+            if (arg2 != 0) {
+                sp24 = arg0->x4_vec.y;
+            } else {
+                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+            }
+            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30, &arg0->x14C_ground.unk, &arg0->x14C_ground.normal) != -1) {
+                arg0->x4_vec.y += sp30;
+                arg0->x4_vec.x = sp20;
+            }
+        }
+    } else {
+        func_80054584(arg1, &sp20);
+        temp_f4 = 2.0f;
+        temp_f2 = sp24;
+        temp_f1_3 = sp20 - temp_f4;
+        sp20 = -((temp_f4 * var_f31) - temp_f1_3);
+        sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y - arg0->xA4_ecbCurrCorrect.bottom.y)) - temp_f2);
+        sp8 = 0;
+        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0) {
+            sp20 = arg0->x140;
+            if (arg2 != 0) {
+                sp24 = arg0->x4_vec.y;
+            } else {
+                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+            }
+            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30, &arg0->x14C_ground.unk, &arg0->x14C_ground.normal) != -1) {
+                arg0->x4_vec.y += sp30;
+                arg0->x4_vec.x = sp20;
+            }
+        }
+    }
+}
+#else
 asm void func_80043C6C() {
     nofralloc
 /* 80043C6C 0004084C  7C 08 02 A6 */	mflr r0
@@ -1382,6 +1481,7 @@ lbl_80043E70:
 /* 80043E8C 00040A6C  4E 80 00 20 */	blr 
 }
 #pragma peephole on
+#endif
 
 // 80043E90
 // 80043F40
