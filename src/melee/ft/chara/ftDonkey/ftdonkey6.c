@@ -21,7 +21,7 @@ void ftDonkey_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     fighter->x2208_ftcmd_var2 = 0;
     fighter->x2204_ftcmd_var1 = 0;
     fighter->x2200_ftcmd_var0 = 0;
-    func_8007CC78(donkey_attr->x54, fighter);
+    func_8007CC78(fighter, donkey_attr->x54);
     fighter->x80_self_vel.x = fighter->xEC_ground_vel;
     fighter->x80_self_vel.y = lbl_804D95E8;
     fighter->x1968_jumpsUsed = fighter->x110_attr.x168_MaxJumps;

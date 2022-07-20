@@ -138,6 +138,10 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftpurin.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftluigi.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialN.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialS.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialHi.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialLw.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftmewtwo.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o 		\

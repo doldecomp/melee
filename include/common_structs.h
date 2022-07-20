@@ -21,6 +21,16 @@
 
 typedef struct _Vec2 { float x, y; } Vec2;
 
+struct DemoMotionSymbols
+{
+    char x0[];
+};
+
+struct DemoMotionFiles
+{
+    struct DemoMotionSymbols* x0_demoMotionPtr[14];
+};
+
 typedef Vec Vec3;
 
 typedef struct _UnkFlagStruct {

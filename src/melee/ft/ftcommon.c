@@ -133,7 +133,7 @@ HSD_GObj* func_8007CC1C(HSD_GObj* gobj)
     return gobj;
 }
 
-void func_8007CC78(f32 max, Fighter* fp)
+void func_8007CC78(Fighter* fp, f32 max)
 {
     if (fp->xEC_ground_vel < -max) {
         fp->xEC_ground_vel = -max;

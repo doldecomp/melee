@@ -1048,7 +1048,7 @@ struct SpecialAttrs_Mewtwo {
 };
 
 struct SpecialAttrs_Luigi {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ BOOL x222C_cycloneCharge;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
 };
