@@ -422,5 +422,96 @@ void ftZelda_80139FE8(HSD_GObj* fighterObj) {
 }
 
 
-// 8013A058 - 
+// 8013A058 - 8013A244 ()
 // https://decomp.me/scratch/Y9w1M
+// void ftZelda_8013A244(HSD_GObj* arg0);                      /* extern */
+// s32 func_8009A134(HSD_GObj* arg0);                       /* extern */
+// extern f32 lbl_804D9BA4; // 0
+// extern f32 lbl_804D9BA8; // 1.0
+extern f64 lbl_804D9BC0; // 1.75
+extern f64 lbl_804D9BC8; // 2.125
+extern f32 lbl_804D9BD0; // 1.5707963705062866
+extern f32 lbl_804D9BD4; // 35.0
+void ftZelda_8013A058(HSD_GObj* fighterObj) {
+    f32 list[4];
+    f32 unused[5];
+    ftZeldaAttributes* attributes; // r31
+    Fighter* fighter; // r30
+    f32 temp_f0;
+    f32 temp_f1;
+    f32 temp_f1_5;
+    f32 temp_f2;
+    f32 var_f31;
+    f32 var_f4;
+    f32 temp_f5;
+    f32 temp_f6;
+    f64 temp_f1_2;
+    f64 temp_f1_3;
+    f64 temp_f1_4;
+    f64 temp_f2_2;
+    f64 temp_f3;
+    CollData* collData;
+    Fighter* fighter_2; // r30 (second use)
+    ftZeldaAttributes* attributes_2;
+    Vec3* someVar;
+
+    fighter = fighterObj->user_data;
+    attributes = fighter->x2D4_specialAttributes;
+    collData = &fighter->x6F0_collData;
+    temp_f2 = fighter->input.x620_lstick_x;
+    temp_f1 = fighter->input.x624_lstick_y;
+    temp_f2 = temp_f2 * temp_f2;
+    temp_f1 = temp_f1 * temp_f1;
+    temp_f5 = temp_f2 + temp_f1;
+    var_f4 = temp_f5;
+    
+    if (temp_f5 > lbl_804D9BA4) {
+        temp_f1_2 = __frsqrte(var_f4);
+        temp_f3 = lbl_804D9BC0; // 1.75
+        temp_f2_2 = lbl_804D9BC8;
+        temp_f1_3 = temp_f3 * temp_f1_2 * -(((f64) var_f4 * (temp_f1_2 * temp_f1_2)) - temp_f2_2);
+        temp_f1_4 = temp_f3 * temp_f1_3 * -(((f64) var_f4 * (temp_f1_3 * temp_f1_3)) - temp_f2_2);
+        temp_f0 = (f32) ((f64) var_f4 * (temp_f3 * temp_f1_4 * - (((f64) var_f4 * (temp_f1_4 * temp_f1_4)) - temp_f2_2)));
+        list[0] = temp_f0;
+        temp_f5 = list[0];
+    }
+    temp_f0 = lbl_804D9BA8;
+    var_f31 = temp_f5;
+    if (temp_f5 > temp_f0) {
+        var_f31 = temp_f0;
+    }
+    if (!(var_f31 < attributes->x50)) {
+        someVar = &collData->x154_groundNormal;
+        list[1] = fighter->input.x620_lstick_x;
+        list[2] = fighter->input.x624_lstick_y;
+        list[3] = lbl_804D9BA4;
+        if (!(lbvector_AngleXY(someVar, (Point3d* ) &list[1]) < lbl_804D9BD0)) {
+            if (func_8009A134(fighterObj) == 0) {
+                func_8007D9FC(fighter);
+                
+                temp_f5 = func_someCalcAngle_80022C30(fighter->input.x624_lstick_y, fighter->input.x620_lstick_x * fighter->x2C_facing_direction);
+                
+                fighter->x2344_f32 = list[1];
+                fighter->x2348_stateVar3_f32 = list[2];
+                temp_f6 = ((attributes->x54 * var_f31) + attributes->x58) * cosf(temp_f5);
+                fighter->xEC_ground_vel = fighter->x2C_facing_direction * temp_f6;
+                
+                Fighter_ActionStateChange_800693AC(fighterObj, 0x15E, 0, NULL, lbl_804D9BD4, lbl_804D9BA8, lbl_804D9BA4);
+                func_8006EBA4(fighterObj);
+                ftAnim_SetAnimRate(fighterObj, lbl_804D9BA4);
+                
+                fighter_2 = fighterObj->user_data;
+                attributes_2 = fighter_2->x2D4_specialAttributes;
+                fighter_2->x2340_stateVar1 = attributes_2->x48;
+                fighter_2->x1968_jumpsUsed = (u8) fighter_2->x110_attr.x168_MaxJumps;
+                fighter_2->x2223_flag.bits.b4 = 1;
+                
+                func_8007B62C(fighterObj, 2, attributes_2);
+                fighter_2->x221E_flag.bits.b0 = 1;
+                return;
+            }
+        }
+    }
+    func_8007D60C(fighter);
+    ftZelda_8013A244(fighterObj);
+}
