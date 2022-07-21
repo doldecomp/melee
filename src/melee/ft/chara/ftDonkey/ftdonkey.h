@@ -12,9 +12,9 @@ typedef struct _ftDonkeyAttributes {
     f32 x14;
     f32 x18;
     s32 x1C;
-    s32 x20;
-    s32 x24;
-    s32 x28;
+    f32 x20;
+    f32 x24;
+    f32 x28;
     s32 x2C;
     s32 x30;
     f32 x34;
@@ -34,6 +34,12 @@ typedef struct _ftDonkeyAttributes {
     f32 x6C;
     f32 x70;
 } ftDonkeyAttributes;
+
+
+void ftDonkey_800E017C(HSD_GObj* fighterObj);
+
+void ftDonkey_800E05E4(HSD_GObj* fighterObj);
+void ftDonkey_800E07B0(HSD_GObj* fighterObj);
 
 void ftDonkey_8010D774(HSD_GObj* fighterObj);
 

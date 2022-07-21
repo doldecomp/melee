@@ -1,7 +1,25 @@
 #include "ftdonkey.h"
 
-/// TODO remove these float externs once they are moved over
-extern f32 lbl_804D9188;
+
+void ftDonkey_800E0698(HSD_GObj* fighterObj) {
+    func_80084F3C(fighterObj);
+}
+
+void ftDonkey_800E06B8(HSD_GObj* fighterObj) {
+    func_800DFA70(fighterObj);
+}
+
+void ftDonkey_800E06D8(HSD_GObj* fighterObj) {
+    Vec vec;
+    Fighter* fighter = getFighter(fighterObj);
+    if (ftDonkey_800E0750(fighterObj)) {
+        ftDonkey_800E07B0(fighterObj);
+    } else {
+        vec.x = vec.y = vec.z = 0.0f;
+        func_8026ABD8(fighter->x1974_heldItem, &vec, 1.0f);
+        func_8008E908(fighterObj, 0.0f);  
+    }
+}
 
 BOOL ftDonkey_800E0750(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighter(fighterObj);
@@ -19,7 +37,7 @@ BOOL ftDonkey_800E0750(HSD_GObj* fighterObj) {
 void ftDonkey_800E07B0(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     ftDonkeyAttributes* donkey_attr = fighter->x2CC;
-    func_8008DCE0(fighterObj, donkey_attr->x0 + 9, lbl_804D9188);
+    func_8008DCE0(fighterObj, donkey_attr->x0 + 9, 0.0f);
 }
  
 void ftDonkey_800E07E4(HSD_GObj* fighterObj) {
@@ -27,7 +45,7 @@ void ftDonkey_800E07E4(HSD_GObj* fighterObj) {
     func_8008F744(fighterObj);
     if (!fighter->x221C_flag.bits.b6) {
         if (fighter->xE0_ground_or_air == GA_Air) {
-            func_800E0294(fighterObj);
+            ftDonkey_800E0294(fighterObj);
         } else {
             func_800DF980(fighterObj); 
         }
