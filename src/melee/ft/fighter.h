@@ -494,7 +494,13 @@ typedef struct _ftCommonData {
     /* 0x10 */ f32 x10;
     /* 0x14 */ f32 x14;
     /* 0x18 */ f32 x18;
-    u8 filler_x4[0x88 - 0x1C];
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ f32 x30;
+    u8 filler_x4[0x88 - 0x34];
     /* 0x88 */ f32 x88;
     /* 0x8C */ s32 x8C;
     u8 filler_x90[0x98 - 0x90];
@@ -546,7 +552,12 @@ typedef struct _ftCommonData {
     u8 filler_x3F0[0x418-0x3F0];
     /* 0x418 */ s32 x418;
     /* 0x41C */ s32 x41C;
-    u8 filler_x420[0x454-0x420];
+    u8 filler_x420[0x440-0x420];
+    /* 0x440 */ f32 x440;
+    /* 0x444 */ f32 x444;
+    /* 0x448 */ f32 x448;
+    /* 0x44C */ f32 x44C;
+    /* 0x450 */ f32 x450;
     /* 0x454 */ f32 x454;
     /* 0x458 */ f32 x458;
     /* 0x45C */ f32 x45C;
@@ -1863,6 +1874,12 @@ inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space 
 inline void* getFtSpecialAttrs(Fighter* fighter_data)
 {
     void* fighter_attr = fighter_data->x2D4_specialAttributes;
+    return fighter_attr;
+}
+
+inline void* getFtSpecialAttrs2CC(Fighter* fighter_data)
+{
+    void* fighter_attr = fighter_data->x2CC;
     return fighter_attr;
 }
 

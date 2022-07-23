@@ -69,7 +69,15 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/ftlib.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/ftlib.s.o 		\
 	$(BUILD_DIR)/asm/melee/ft/code_800877F8.s.o 		\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_1.s.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey1.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey2.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey3.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey4.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey5.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey6.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey7.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey8.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey9.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario1.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario2.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario3.c.o 		\
@@ -87,11 +95,11 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftlink.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftkirby.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftkirby.s.o 		\
-	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey2.c.o 	\
-	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey3.c.o 	\
-	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey4.c.o 	\
-	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey5.c.o 	\
-	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey6.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey10.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey11.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey12.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey13.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey14.c.o 	\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o 		\
