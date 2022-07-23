@@ -1,68 +1,20 @@
 #include "ftdonkey.h"
 
-
-void ftDonkey_800E0698(HSD_GObj* fighterObj) {
-    func_80084F3C(fighterObj);
-}
-
-void ftDonkey_800E06B8(HSD_GObj* fighterObj) {
-    func_800DFA70(fighterObj);
-}
-
-void ftDonkey_800E06D8(HSD_GObj* fighterObj) {
-    Vec vec;
-    Fighter* fighter = getFighter(fighterObj);
-    if (ftDonkey_800E0750(fighterObj)) {
-        ftDonkey_800E07B0(fighterObj);
-    } else {
-        vec.x = vec.y = vec.z = 0.0f;
-        func_8026ABD8(fighter->x1974_heldItem, &vec, 1.0f);
-        func_8008E908(fighterObj, 0.0f);  
-    }
-}
-
-BOOL ftDonkey_800E0750(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
-    
-    if (func_8008E984(fighter)) {
-        return 1;
-    }
-    func_8008D8D8(fighter->dmg.x1850_forceApplied);
-    if (func_8008D8E8() < 3) {
+s32 ftDonkey_800DF938(HSD_GObj* fighterObj) {
+    if (func_8008A1FC(fighterObj)) {
+        ftDonkey_800DF980(fighterObj);
         return 1;
     }
     return 0;
 }
 
-void ftDonkey_800E07B0(HSD_GObj* fighterObj) {
+void ftDonkey_800DF980(HSD_GObj* fighterObj) {
+    s32 unused[2]; /// getFighter inlines not working
     Fighter* fighter = fighterObj->user_data;
-    ftDonkeyAttributes* donkey_attr = fighter->x2CC;
-    func_8008DCE0(fighterObj, donkey_attr->x0 + 9, 0.0f);
-}
- 
-void ftDonkey_800E07E4(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    func_8008F744(fighterObj);
-    if (!fighter->x221C_flag.bits.b6) {
-        if (fighter->xE0_ground_or_air == GA_Air) {
-            ftDonkey_800E0294(fighterObj);
-        } else {
-            func_800DF980(fighterObj); 
-        }
-    }
-}
-
-void ftDonkey_800E0848(HSD_GObj* fighterObj) {
-    func_8008FB18(fighterObj);
-}
-
-void ftDonkey_800E0868(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
-    if (fighter->xE0_ground_or_air == GA_Ground) {
-        if (!func_80082708(fighterObj)) {
-            func_8007D5D4(fighter);
-        }
-    } else if (func_80081D0C(fighterObj)) {
+    ftDonkeyAttributes* donkey_attr;
+    if (fighter->xE0_ground_or_air == GA_Air) {
         func_8007D7FC(fighter);
     }
+    donkey_attr = getFtSpecialAttrs2CC(fighter);
+    Fighter_ActionStateChange_800693AC(fighterObj, donkey_attr->x0, 0, NULL, 0.0f, 1.0f, 0.0f);
 }

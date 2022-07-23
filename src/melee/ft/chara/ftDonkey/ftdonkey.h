@@ -11,7 +11,7 @@ typedef struct _ftDonkeyAttributes {
     f32 x10;
     f32 x14;
     f32 x18;
-    s32 x1C;
+    f32 x1C;
     f32 x20;
     f32 x24;
     f32 x28;
@@ -35,9 +35,22 @@ typedef struct _ftDonkeyAttributes {
     f32 x70;
 } ftDonkeyAttributes;
 
+void ftDonkey_800DF980(HSD_GObj* fighterObj);
 
+s32 ftDonkey_800DFA98(HSD_GObj* fighterObj);
+
+void ftDonkey_800DFAE4(HSD_GObj* fighterObj, f32);
+void ftDonkey_800DFB54(HSD_GObj* fighterObj);
+void ftDonkey_800DFCA4(HSD_GObj *fighterObj, s32 arg1, s32 arg2, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD, f32 argE, f32 argF);
+void ftDonkey_800DFDDC(HSD_GObj* fighterObj);
+void ftDonkey_800DFEC8(HSD_GObj* fighterObj, void (*arg_cb)(HSD_GObj*, f32));
+
+
+void ftDonkey_800DFDDC(HSD_GObj* fighterObj);
+
+void ftDonkey_800E0060(HSD_GObj* fighterObj);
 void ftDonkey_800E017C(HSD_GObj* fighterObj);
-
+void ftDonkey_800E0294(HSD_GObj* fighterObj);
 void ftDonkey_800E05E4(HSD_GObj* fighterObj);
 void ftDonkey_800E07B0(HSD_GObj* fighterObj);
 

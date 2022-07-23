@@ -10,33 +10,33 @@ as_table_donkey:
     .4byte 0x00480000
     .4byte 0x35400000
     .4byte NULL
-    .4byte func_800DF9F0
-    .4byte func_800DFA50
-    .4byte func_800DFA70
+    .4byte ftDonkey_800DF9F0
+    .4byte ftDonkey_800DFA50
+    .4byte ftDonkey_800DFA70
     .4byte func_800761C8
     .4byte 0x00000128
     .4byte 0x00484066
     .4byte 0x35000000
-    .4byte func_800DFB34
-    .4byte func_800DFB54
-    .4byte func_800DFBB8
-    .4byte func_800DFBD8
+    .4byte ftDonkey_800DFB34
+    .4byte ftDonkey_800DFB54
+    .4byte ftDonkey_800DFBB8
+    .4byte ftDonkey_800DFBD8
     .4byte func_800761C8
     .4byte 0x00000129
     .4byte 0x00484066
     .4byte 0x35000000
-    .4byte func_800DFB34
-    .4byte func_800DFB54
-    .4byte func_800DFBB8
-    .4byte func_800DFBD8
+    .4byte ftDonkey_800DFB34
+    .4byte ftDonkey_800DFB54
+    .4byte ftDonkey_800DFBB8
+    .4byte ftDonkey_800DFBD8
     .4byte func_800761C8
     .4byte 0x0000012A
     .4byte 0x00484066
     .4byte 0x35000000
-    .4byte func_800DFB34
-    .4byte func_800DFB54
-    .4byte func_800DFBB8
-    .4byte func_800DFBD8
+    .4byte ftDonkey_800DFB34
+    .4byte ftDonkey_800DFB54
+    .4byte ftDonkey_800DFBB8
+    .4byte ftDonkey_800DFBD8
     .4byte func_800761C8
     .4byte 0x0000012B
     .4byte 0x00482064

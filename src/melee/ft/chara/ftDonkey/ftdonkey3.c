@@ -1,143 +1,187 @@
 #include "ftdonkey.h"
 
-void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
-    fighter->x2340_stateVar1 = 0;
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x17F, 0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighterObj);
+void ftDonkey_800DFB34(HSD_GObj* fighterObj) {
+    ftDonkey_800DFDDC(fighterObj);
 }
 
-void ftDonkey_8010DCD8(HSD_GObj* fighterObj) {
-    s32 unused[2]; // needs either unused filler, or arg params
-    if (!ftAnim_IsFramesRemaining(fighterObj)) {
-        ftDonkey_8010DE88(fighterObj);
+void ftDonkey_800DFB54(HSD_GObj* fighterObj) {
+    if ((!func_80094EA4(fighterObj)) && (!ftDonkey_800E0378(fighterObj)) && (!ftDonkey_800DF938(fighterObj))) {
+        ftDonkey_800DFEC8(fighterObj, &ftDonkey_800DFAE4);
     }
 }
 
-void ftDonkey_8010DD14(HSD_GObj* fighterObj) {}
-
-void ftDonkey_8010DD18(HSD_GObj* fighterObj) {
-    func_80084F3C(fighterObj);
+void ftDonkey_800DFBB8(HSD_GObj* fighterObj) {
+    ftDonkey_800E0060(fighterObj);
 }
 
-void ftDonkey_8010DD38(HSD_GObj* fighterObj) {
-    if (!func_80082708(fighterObj)) {
-        func_800CC730(fighterObj);
-    }
+void ftDonkey_800DFBD8(HSD_GObj* fighterObj) {
+    ftDonkey_800DFA70(fighterObj);
 }
 
-void ftDonkey_8010DD74(HSD_GObj* fighterObj) {
+s32 ftDonkey_GetWalkType_800DFBF8(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    if (!ftAnim_IsFramesRemaining(fighterObj)) {
-        if (fighter->x2340_stateVar1) {
-            fighter->x2340_stateVar1 = 0;
-            ftDonkey_8010DE88(fighterObj);
-        } else {
-            ftDonkey_8010DFF8(fighterObj);
-        }
+    f32 ground_vel = fighter->xEC_ground_vel;
+    f32 walking_velocity = fabs_inline(ground_vel);
+    if (walking_velocity >= (fighter->x2360_f32 * (p_ftCommonData->x2C * fighter->x110_attr.x118_WalkMaximumVelocity))) {
+        return 2;
+    } else if (walking_velocity >= (fighter->x2360_f32 * (p_ftCommonData->x28 * fighter->x110_attr.x118_WalkMaximumVelocity))) {
+        return 1;
+    } else {
+        return 0;
     }
 }
 
-void ftDonkey_8010DDDC(HSD_GObj* fighterObj) {
+
+inline s32 ftDonkey_GetWalkType_800DFBF8_fake(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    if (fighter->input.x668 & 0x200) {
-        fighter->x2340_stateVar1 = 1;
+    f32 walking_velocity = fabs_inline(fighter->xEC_ground_vel);
+    f32 tempf = fighter->x2360_f32;
+    if (walking_velocity >= (tempf * (p_ftCommonData->x2C * fighter->x110_attr.x118_WalkMaximumVelocity))) {
+        return 2;
+    } else if (walking_velocity >= (tempf * (p_ftCommonData->x28 * fighter->x110_attr.x118_WalkMaximumVelocity))) {
+        return 1;
+    } else {
+        return 0;
     }
-}
+}  
 
-void ftDonkey_8010DDF8(HSD_GObj* fighterObj) {
-    func_80084F3C(fighterObj);
-}
 
-void ftDonkey_8010DE18(HSD_GObj* fighterObj) {
-    if (!func_80082708(fighterObj)) {
-        func_800CC730(fighterObj);
-    }
-}
-
-void ftDonkey_8010DE54(HSD_GObj* fighterObj) {
-    func_80089824(fighterObj);
-    func_800892A0(fighterObj);
-}
-
-void ftDonkey_8010DE88_inner(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighterPlus(fighterObj);
-    if (!fighter->x2219_flag.bits.b0) {
-        efAsync_Spawn(fighterObj, &fighter->x60C, 1, 0x4CC, fighter->x5E8_fighterBones[0].x0_jobj);
-        fighter->x2219_flag.bits.b0 = 1;
-    }
-    fighter->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fighter->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-}
-
-void ftDonkey_8010DE88(HSD_GObj* fighterObj) {
+s32 ftDonkey_800DFC70(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    fighter->cb.x21EC_callback = &ftDonkey_8010DE54;
-    fighter->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x180, 0, NULL, 0.0f, 1.0f, 0.0f);
-    ftDonkey_8010DE88_inner(fighterObj);
-    fighter->cb.x21BC_callback_Accessory4 = &ftDonkey_8010DB3C;
-}
-
-void ftDonkey_8010DF5C(HSD_GObj* fighterObj) {
-    s32 unused[2];
-    if (!ftAnim_IsFramesRemaining(fighterObj)) {
-        func_8008A2BC(fighterObj);
+    if ((fighter->input.x620_lstick_x * fighter->x2C_facing_direction) >= p_ftCommonData->x24) {
+        return 1;
     }
-}
-
-void ftDonkey_8010DF98(HSD_GObj* fighterObj) {}
-
-void ftDonkey_8010DF9C(HSD_GObj* fighterObj) {
-    func_80084F3C(fighterObj);
-}
-
-void ftDonkey_8010DFBC(HSD_GObj* fighterObj) {
-    if (!func_80082708(fighterObj)) {
-        func_800CC730(fighterObj);
-    }
-}
-
-void ftDonkey_8010DFF8(HSD_GObj* fighterObj) {
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x181, 0, NULL, 0.0f, 1.0f, 0.0f);
-}
-
-void ftDonkey_8010E030(HSD_GObj* fighterObj) {
-    if (!ftAnim_IsFramesRemaining(fighterObj)) {
-        func_800CC730(fighterObj);
-    }
-}
-
-void ftDonkey_8010E06C(HSD_GObj* fighterObj) {}
-
-void ftDonkey_8010E070(HSD_GObj* fighterObj) {
-    func_80084DB0(fighterObj);
+    return 0;
 } 
 
-void ftDonkey_8010E090(HSD_GObj* fighterObj) {
-    if (func_80081D0C(fighterObj)) {
-        func_8008A2BC(fighterObj);
+
+void ftDonkey_800DFCA4(HSD_GObj *fighterObj, s32 arg1, s32 arg2, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD, f32 argE, f32 argF)
+{
+    s32 unused[3];
+    s32 new_action_state;
+    s32 walking_state;
+    Fighter *fighter;
+    fighter = getFighterPlus(fighterObj);
+    fighter->x2360_f32 = argF;
+    walking_state = ftDonkey_GetWalkType_800DFBF8_fake(fighterObj);
+    new_action_state = arg1 + walking_state;
+    Fighter_ActionStateChange_800693AC(fighterObj, new_action_state, arg2, 0, arg8, 1.0f, 0.0f);
+    func_8006EBA4(fighterObj);
+    fighter->x2340_f32 = fighter->xEC_ground_vel;
+    fighter->x2344_stateVar2_s32 = arg1;
+    fighter->x2348_stateVar3_f32 = arg9;
+    fighter->x234C_stateVar4_f32 = argA;
+    fighter->x2350_stateVar5_f32 = argB;
+    fighter->x2354_stateVar6_f32 = argC;
+    fighter->x2358_stateVar7 = argD;
+    fighter->x235C_f32 = argE;
+}
+
+
+
+void ftDonkey_800DFDDC(HSD_GObj* fighterObj) {
+    f32 velocity_f2;
+    f32 anim_rate;
+    
+    Fighter* fighter = getFighter(fighterObj);
+    
+    if (func_80084A40(fighter) < 1.0f) {
+        velocity_f2 = fighter->x2340_f32;
+    } else {
+        velocity_f2 = fighter->xEC_ground_vel;
+    }
+    if ((velocity_f2 * fighter->x2C_facing_direction) <= 0.0f) {
+        anim_rate = 0.0f;
+    } else {
+
+        velocity_f2 = fabs_inline(velocity_f2);
+        switch (fighter->x10_action_state_index - fighter->x2344_stateVar2) {  
+            case 0:
+                anim_rate = velocity_f2 / fighter->x234C_pos.z;
+                break;
+            case 1:
+                anim_rate = velocity_f2 / fighter->x2358_stateVar7;
+                break;
+            case 2:
+                anim_rate = velocity_f2 / fighter->x235C;
+                break;
+        }
+    }
+    ftAnim_SetAnimRate(fighterObj, anim_rate);
+}
+
+
+
+void ftDonkey_800DFEC8(HSD_GObj* fighterObj, void (*arg_cb)(HSD_GObj*, f32)) {
+    s32 action_state_sum;
+    s32 action_state_base;
+    Fighter* fighter = getFighter(fighterObj);
+    s32 walk_action_type = ftDonkey_GetWalkType_800DFBF8_fake(fighterObj);
+
+
+    action_state_base = fighter->x2344_stateVar2_s32;
+    action_state_sum = action_state_base + walk_action_type;
+    if (action_state_sum != fighter->x10_action_state_index) { 
+        f32 float_result;
+        f32 var_f31;
+        f32 init_animFrame;
+        f32 adjusted_animFrame;
+        s32 final_animFrame;
+        s32 quotient;
+        
+        switch (action_state_sum - action_state_base) {                   
+            case 0:
+                var_f31 = fighter->x2348_stateVar3_f32;
+                break;
+            case 1:
+                var_f31 = fighter->x234C_stateVar4_f32;
+                break;
+            case 2:
+                var_f31 = fighter->x2350_stateVar5_f32;
+                break;
+            default:
+                OSReport("couldn't get walk frame\n");
+                __assert("ftwalkcommon.c", 0x47U, "0");
+                break;
+        }
+        float_result = func_8006F484(fighterObj);
+        init_animFrame = fighter->x894_currentAnimFrame;
+        quotient = init_animFrame / float_result;
+        adjusted_animFrame = fighter->x894_currentAnimFrame - (float_result * quotient);
+        final_animFrame = var_f31 * (adjusted_animFrame / float_result);
+        arg_cb(fighterObj, final_animFrame);
     }
 }
 
-void ftDonkey_8010E0CC(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
-    if (!fighter->x2219_flag.bits.b0) {
-        ef_Spawn(0x4C6, fighterObj, fighter->x5E8_fighterBones[1].x0_jobj);
-        fighter->x2219_flag.bits.b0 = 1;
+inline f32 getFtWalkAcceleration(Fighter* fighter, f32 multiplier) {
+    if (fighter->input.x620_lstick_x > 0.0f) { 
+        return multiplier * fighter->x110_attr.x114_WalkAcceleration;
+    } else {
+        return multiplier * -fighter->x110_attr.x114_WalkAcceleration;
     }
-    fighter->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fighter->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fighter->cb.x21BC_callback_Accessory4 = 0;
-}
-
-void ftDonkey_8010E148(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
-    if (!fighter->x2219_flag.bits.b0) {
-        ef_Spawn(0x4C7, fighterObj, fighter->x5E8_fighterBones[1].x0_jobj);
-        fighter->x2219_flag.bits.b0 = 1;
+} 
+ 
+void ftDonkey_800E0060(HSD_GObj* fighterObj) {
+    s32 unused[5];
+    Fighter* fighter;
+    f32 temp_f0;
+    f32 temp_f4;
+    f32 ftx2360_f5;
+    f32 velocity_f1; 
+    f32 unused_float;
+ 
+    fighter = fighterObj->user_data;
+    unused_float = ftx2360_f5 = fighter->x2360_f32;
+    velocity_f1 = fighter->input.x620_lstick_x * fighter->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;
+    velocity_f1 += getFtWalkAcceleration(fighter, ftx2360_f5); 
+    temp_f0 = (fighter->input.x620_lstick_x * fighter->x110_attr.x118_WalkMaximumVelocity) * ftx2360_f5;
+    if (temp_f0) {
+        temp_f4 = fighter->xEC_ground_vel / temp_f0;
+        if (temp_f4 > 0.0f && temp_f4 < 1.0f) {
+            velocity_f1 *= (1.0f - temp_f4) * p_ftCommonData->x30;
+        }
     }
-    fighter->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fighter->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fighter->cb.x21BC_callback_Accessory4 = 0;
+    fighter->x2340_f32 = temp_f0 * p_ftCommonData->x440;
+    func_8007C98C(fighter, velocity_f1, temp_f0, fighter->x110_attr.x128_GroundFriction);
+    func_8007CB74(fighterObj);
 }
