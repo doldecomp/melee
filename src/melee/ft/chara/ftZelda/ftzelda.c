@@ -1268,11 +1268,22 @@ void ftZelda_8013B4D8(HSD_GObj* fighterObj) {
     fighter->cb.x21BC_callback_Accessory4 = &lbl_8013AE30;
 }
 
-// 8013B540 -  ( bytes)
-// 
+// 8013B540 - 8013B574 (0x34 bytes)
+// https://decomp.me/scratch/L6UUI
+s32 ftZelda_8013B540(HSD_GObj* fighterObj) {
+    s32 actionStateIndex;
+    Fighter* fighter;
 
-//  -  ( bytes)
-// 
+    fighter = fighterObj->user_data;
+    actionStateIndex = fighter->x10_action_state_index;
+    if (((actionStateIndex == 0x158) || (actionStateIndex == 0x15B)) && (fighter->sa.zelda.x222C != 0U)) {
+        return 1;
+    }
+    return 0;
+}
+
+// 8013B574 -  ( bytes)
+// https://decomp.me/scratch/pTAiQ
 
 //  -  ( bytes)
 // 
