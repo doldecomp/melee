@@ -2864,9 +2864,11 @@ lbl_8013BDB8:
 /* 8013BDC4 001389A4  38 21 00 30 */	addi r1, r1, 0x30
 /* 8013BDC8 001389A8  7C 08 03 A6 */	mtlr r0
 /* 8013BDCC 001389AC  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BDD0
 ftZelda_8013BDD0:
 /* 8013BDD0 001389B0  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BDD4
 ftZelda_8013BDD4:
 /* 8013BDD4 001389B4  7C 08 02 A6 */	mflr r0
@@ -2903,12 +2905,14 @@ lbl_8013BE40:
 /* 8013BE44 00138A24  38 21 00 08 */	addi r1, r1, 8
 /* 8013BE48 00138A28  7C 08 03 A6 */	mtlr r0
 /* 8013BE4C 00138A2C  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BE50
 ftZelda_8013BE50:
 /* 8013BE50 00138A30  4E 80 00 20 */	blr 
 .global ftZelda_8013BE54
 ftZelda_8013BE54:
 /* 8013BE54 00138A34  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BE58
 ftZelda_8013BE58:
 /* 8013BE58 00138A38  7C 08 02 A6 */	mflr r0
@@ -2945,9 +2949,11 @@ lbl_8013BEC4:
 /* 8013BEC8 00138AA8  38 21 00 08 */	addi r1, r1, 8
 /* 8013BECC 00138AAC  7C 08 03 A6 */	mtlr r0
 /* 8013BED0 00138AB0  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BED4
 ftZelda_8013BED4:
 /* 8013BED4 00138AB4  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BED8
 ftZelda_8013BED8:
 /* 8013BED8 00138AB8  7C 08 02 A6 */	mflr r0
@@ -2965,6 +2971,7 @@ lbl_8013BEFC:
 /* 8013BF04 00138AE4  38 21 00 08 */	addi r1, r1, 8
 /* 8013BF08 00138AE8  7C 08 03 A6 */	mtlr r0
 /* 8013BF0C 00138AEC  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BF10
 ftZelda_8013BF10:
 /* 8013BF10 00138AF0  7C 08 02 A6 */	mflr r0
@@ -2985,6 +2992,7 @@ ftZelda_8013BF30:
 /* 8013BF44 00138B24  38 21 00 08 */	addi r1, r1, 8
 /* 8013BF48 00138B28  7C 08 03 A6 */	mtlr r0
 /* 8013BF4C 00138B2C  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BF50
 ftZelda_8013BF50:
 /* 8013BF50 00138B30  7C 08 02 A6 */	mflr r0
@@ -3013,6 +3021,7 @@ lbl_8013BF90:
 /* 8013BFA4 00138B84  38 21 00 20 */	addi r1, r1, 0x20
 /* 8013BFA8 00138B88  7C 08 03 A6 */	mtlr r0
 /* 8013BFAC 00138B8C  4E 80 00 20 */	blr 
+
 .global ftZelda_8013BFB0
 ftZelda_8013BFB0:
 /* 8013BFB0 00138B90  7C 08 02 A6 */	mflr r0
