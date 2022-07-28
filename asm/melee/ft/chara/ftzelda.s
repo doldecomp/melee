@@ -1683,10 +1683,11 @@ lbl_8013AD8C:
 /* 8013ADA4 00137984  38 21 00 28 */	addi r1, r1, 0x28
 /* 8013ADA8 00137988  7C 08 03 A6 */	mtlr r0
 /* 8013ADAC 0013798C  4E 80 00 20 */	blr 
+
 lbl_8013ADB0:
 /* 8013ADB0 00137990  4E 80 00 20 */	blr 
 
-lbl_8013ADB4:
+ftZelda_8013ADB4:
 /* 8013ADB4 00137994  7C 08 02 A6 */	mflr r0
 /* 8013ADB8 00137998  90 01 00 04 */	stw r0, 4(r1)
 /* 8013ADBC 0013799C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1812,8 +1813,8 @@ ftZelda_SpecialLw_StartAction:
 /* 8013AF78 00137B58  38 80 00 78 */	li r4, 0x78
 /* 8013AF7C 00137B5C  C0 62 A2 10 */	lfs f3, lbl_804D9BF0@sda21(r2)
 /* 8013AF80 00137B60  4B ED 6A 5D */	bl func_800119DC
-/* 8013AF84 00137B64  3C 60 80 14 */	lis r3, lbl_8013ADB4@ha
-/* 8013AF88 00137B68  38 03 AD B4 */	addi r0, r3, lbl_8013ADB4@l
+/* 8013AF84 00137B64  3C 60 80 14 */	lis r3, ftZelda_8013ADB4@ha
+/* 8013AF88 00137B68  38 03 AD B4 */	addi r0, r3, ftZelda_8013ADB4@l
 /* 8013AF8C 00137B6C  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 8013AF90 00137B70  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8013AF94 00137B74  83 E1 00 34 */	lwz r31, 0x34(r1)
@@ -1864,8 +1865,8 @@ ftZelda_SpecialAirLw_StartAction:
 /* 8013B03C 00137C1C  38 80 00 78 */	li r4, 0x78
 /* 8013B040 00137C20  C0 62 A2 10 */	lfs f3, lbl_804D9BF0@sda21(r2)
 /* 8013B044 00137C24  4B ED 69 99 */	bl func_800119DC
-/* 8013B048 00137C28  3C 60 80 14 */	lis r3, lbl_8013ADB4@ha
-/* 8013B04C 00137C2C  38 03 AD B4 */	addi r0, r3, lbl_8013ADB4@l
+/* 8013B048 00137C28  3C 60 80 14 */	lis r3, ftZelda_8013ADB4@ha
+/* 8013B04C 00137C2C  38 03 AD B4 */	addi r0, r3, ftZelda_8013ADB4@l
 /* 8013B050 00137C30  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 8013B054 00137C34  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8013B058 00137C38  83 E1 00 34 */	lwz r31, 0x34(r1)
@@ -2009,8 +2010,8 @@ ftZelda_8013B1CC:
 /* 8013B208 00137DE8  38 80 01 65 */	li r4, 0x165
 /* 8013B20C 00137DEC  38 C0 00 00 */	li r6, 0
 /* 8013B210 00137DF0  4B F2 E1 9D */	bl Fighter_ActionStateChange_800693AC
-/* 8013B214 00137DF4  3C 60 80 14 */	lis r3, lbl_8013ADB4@ha
-/* 8013B218 00137DF8  38 03 AD B4 */	addi r0, r3, lbl_8013ADB4@l
+/* 8013B214 00137DF4  3C 60 80 14 */	lis r3, ftZelda_8013ADB4@ha
+/* 8013B218 00137DF8  38 03 AD B4 */	addi r0, r3, ftZelda_8013ADB4@l
 /* 8013B21C 00137DFC  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 8013B220 00137E00  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013B224 00137E04  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -2039,8 +2040,8 @@ ftZelda_8013B238:
 /* 8013B274 00137E54  38 80 01 63 */	li r4, 0x163
 /* 8013B278 00137E58  38 C0 00 00 */	li r6, 0
 /* 8013B27C 00137E5C  4B F2 E1 31 */	bl Fighter_ActionStateChange_800693AC
-/* 8013B280 00137E60  3C 60 80 14 */	lis r3, lbl_8013ADB4@ha
-/* 8013B284 00137E64  38 03 AD B4 */	addi r0, r3, lbl_8013ADB4@l
+/* 8013B280 00137E60  3C 60 80 14 */	lis r3, ftZelda_8013ADB4@ha
+/* 8013B284 00137E64  38 03 AD B4 */	addi r0, r3, ftZelda_8013ADB4@l
 /* 8013B288 00137E68  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 8013B28C 00137E6C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013B290 00137E70  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -3533,75 +3534,78 @@ lbl_803CFEB0:
     .balign 8
 .global lbl_804D9B98
 lbl_804D9B98:
-	.4byte 0x3FC00000
+	.4byte 0x3FC00000 // 1.5
 .global lbl_804D9B9C
 lbl_804D9B9C:
-	.4byte 0x3CA3D70A
+	.4byte 0x3CA3D70A // 0.019999999552965164
 .global lbl_804D9BA0
 lbl_804D9BA0:
-	.4byte 0x3F860A92
+	.4byte 0x3F860A92 // 1.0471975803375244
 .global lbl_804D9BA4
 lbl_804D9BA4:
-	.4byte 0x00000000
+	.4byte 0x00000000 // 0
 .global lbl_804D9BA8
 lbl_804D9BA8:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+	.4byte 0x3F800000 // 1.0
+	.4byte 0x00000000 // Padding (EOF)
 .global lbl_804D9BB0
 lbl_804D9BB0:
-	.4byte 0x43300000
-	.4byte 0x80000000
+	.4byte 0x43300000 // double:
+	.4byte 0x80000000 // 4503601774854144.0
 .global lbl_804D9BB8
 lbl_804D9BB8:
-	.4byte 0x3C8EFA35
+	.4byte 0x3C8EFA35 // 0.01745329238474369
 .global lbl_804D9BBC
 lbl_804D9BBC:
-	.4byte 0x42B40000
+	.4byte 0x42B40000 // 90.0
 .global lbl_804D9BC0
 lbl_804D9BC0:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
+	.4byte 0x3FE00000 // double:
+	.4byte 0x00000000 // 0.5
 .global lbl_804D9BC8
 lbl_804D9BC8:
-	.4byte 0x40080000
-	.4byte 0x00000000
+	.4byte 0x40080000 // double:
+	.4byte 0x00000000 // 3.0
 .global lbl_804D9BD0
 lbl_804D9BD0:
-	.4byte 0x3FC90FDB
+	.4byte 0x3FC90FDB // 1.5707963705062866
 .global lbl_804D9BD4
 lbl_804D9BD4:
-	.4byte 0x420C0000
+	.4byte 0x420C0000 // 35.0
 .global lbl_804D9BD8
 lbl_804D9BD8:
-	.4byte 0x3A83126F
+	.4byte 0x3A83126F // 0.0010000000474974513
 .global lbl_804D9BDC
 lbl_804D9BDC:
-	.4byte 0x41200000
+	.4byte 0x41200000 // 10.0
+
 .global lbl_804D9BE0
 lbl_804D9BE0:
-	.4byte 0x00000000
+	.4byte 0x00000000 // 0
 .global lbl_804D9BE4
 lbl_804D9BE4:
-	.4byte 0x3F800000
+	.4byte 0x3F800000 // 1.0
 .global lbl_804D9BE8
 lbl_804D9BE8:
-	.4byte 0x3ECCCCCD
+	.4byte 0x3ECCCCCD // 0.4000000059604645
 .global lbl_804D9BEC
 lbl_804D9BEC:
-	.4byte 0x3B449BA6
+	.4byte 0x3B449BA6 // 0.003000000026077032
 .global lbl_804D9BF0
 lbl_804D9BF0:
-	.4byte 0x3F860A92
+	.4byte 0x3F860A92 // 1.0471975803375244
+
 .global lbl_804D9BF4
 lbl_804D9BF4:
-	.4byte 0x00000000
+	.4byte 0x00000000 // 0
 .global lbl_804D9BF8
 lbl_804D9BF8:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+	.4byte 0x3F800000 // 1.0
+	.4byte 0x00000000 // Padding (EOF)
+
 .global lbl_804D9C00
 lbl_804D9C00:
-	.4byte 0x00000000
+	.4byte 0x00000000 // 0
 .global lbl_804D9C04
 lbl_804D9C04:
-	.4byte 0x3F800000
+	.4byte 0x3F800000 // 1.0
