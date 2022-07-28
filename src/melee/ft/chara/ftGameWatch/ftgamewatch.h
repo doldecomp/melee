@@ -84,8 +84,8 @@ typedef struct _ftGameWatchAttributes {
     // MISC. ATTRIBUTES //
 
     f32 x0_GAMEWATCH_WIDTH; // Mr. Game & Watch's Z-Axis stretch; 0.01 by default
-    s32 x4_GAMEWATCH_UNK[4]; // Presumably RGBA values?
-    s32 x14_GAMEWATCH_UNK2;
+    s32 x4_GAMEWATCH_COLOR[4]; // Array of four RGBA values, one for each Mr. Game & Watch costume color
+    s32 x14_GAMEWATCH_OUTLINE; // Outline color of Mr. Game & Watch's model
 
     // NEUTRAL SPECIAL - CHEF //
 

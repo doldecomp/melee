@@ -7,50 +7,50 @@ as_table_falco:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte func_800E62A4
-    .4byte func_800E6AB4
-    .4byte func_800E6B5C
-    .4byte func_800E6C1C
+    .4byte ftFox_SpecialNStart_Anim
+    .4byte ftFox_SpecialNStart_IASA
+    .4byte ftFox_SpecialNStart_Phys
+    .4byte ftFox_SpecialNStart_Coll
     .4byte func_800761C8
     .4byte 0x00000128
     .4byte 0x003C0111
     .4byte 0x12000000
-    .4byte func_800E6368
-    .4byte func_800E6ADC
-    .4byte func_800E6B7C
-    .4byte func_800E6C3C
+    .4byte ftFox_SpecialNLoop_Anim
+    .4byte ftFox_SpecialNLoop_IASA
+    .4byte ftFox_SpecialNLoop_Phys
+    .4byte ftFox_SpecialNLoop_Coll
     .4byte func_800761C8
     .4byte 0x00000129
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte func_800E65BC
-    .4byte func_800E6B04
-    .4byte func_800E6B9C
-    .4byte func_800E6C5C
+    .4byte ftFox_SpecialNEnd_Anim
+    .4byte ftFox_SpecialNEnd_IASA
+    .4byte ftFox_SpecialNEnd_Phys
+    .4byte ftFox_SpecialNEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000012A
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte func_800E667C
-    .4byte func_800E6B08
-    .4byte func_800E6BBC
-    .4byte func_800E6C7C
+    .4byte ftFox_SpecialAirNStart_Anim
+    .4byte ftFox_SpecialAirNStart_IASA
+    .4byte ftFox_SpecialAirNStart_Phys
+    .4byte ftFox_SpecialAirNStart_Coll
     .4byte func_800761C8
     .4byte 0x0000012B
     .4byte 0x003C0511
     .4byte 0x12000000
-    .4byte func_800E6740
-    .4byte func_800E6B30
-    .4byte func_800E6BDC
-    .4byte func_800E6C9C
+    .4byte ftFox_SpecialAirNLoop_Anim
+    .4byte ftFox_SpecialAirNLoop_IASA
+    .4byte ftFox_SpecialAirNLoop_Phys
+    .4byte ftFox_SpecialAirNLoop_Coll
     .4byte func_800761C8
     .4byte 0x0000012C
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte func_800E69BC
-    .4byte func_800E6B58
-    .4byte func_800E6BFC
-    .4byte func_800E6CBC
+    .4byte ftFox_SpecialAirNEnd_Anim
+    .4byte ftFox_SpecialAirNEnd_IASA
+    .4byte ftFox_SpecialAirNEnd_Phys
+    .4byte ftFox_SpecialAirNEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000012D
     .4byte 0x00340212
@@ -239,50 +239,50 @@ as_table_falco:
     .4byte 0x00000141
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000142
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000143
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000144
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000145
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000146
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
 .global lbl_803D1CA8
 lbl_803D1CA8:

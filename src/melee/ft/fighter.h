@@ -914,7 +914,7 @@ struct SpecialAttrs_Mario {
 };
 
 struct SpecialAttrs_Fox {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ HSD_GObj* x222C_blasterGObj;
 };
 
 struct SpecialAttrs_Captain {
@@ -1875,6 +1875,16 @@ inline void* getFtSpecialAttrs(Fighter* fighter_data)
 {
     void* fighter_attr = fighter_data->x2D4_specialAttributes;
     return fighter_attr;
+}
+
+inline s32 ftGetKind(Fighter* fp)
+{
+    return fp->x4_fighterKind;
+}
+
+inline s32 ftGetAction(Fighter* fp)
+{
+    return fp->x10_action_state_index;
 }
 
 inline void* getFtSpecialAttrs2CC(Fighter* fighter_data)

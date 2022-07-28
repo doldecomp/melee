@@ -4,20 +4,20 @@ BOOL func_800E5534(HSD_GObj* gobj)
 {
     Fighter* ft = (Fighter*)gobj->user_data;
     
-    return ft->sa.fox.x222C ? TRUE : FALSE;
+    return ft->sa.fox.x222C_blasterGObj ? TRUE : FALSE;
 }
 
 void ftFox_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = (Fighter*)gobj->user_data;
     
-    ft->sa.fox.x222C = 0;
+    ft->sa.fox.x222C_blasterGObj = 0;
     func_80074A4C(gobj, 0, 0);
 }
 
 void func_800E5588(HSD_GObj* gobj)
 {
-    func_800E5EBC(gobj);
+    ftFox_RemoveBlaster(gobj);
 }
 
 void ftFox_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
@@ -55,9 +55,9 @@ void ftFox_OnLoad(HSD_GObj* gobj) {
     
     {
         ftFoxAttributes *fox_attr = ft->x2D4_specialAttributes;
-        func_8026B3F8(item_list[0], fox_attr->x1C);
-        func_8026B3F8(item_list[1], fox_attr->x20);
-        func_8026B3F8(item_list[2], 0x38U);
+        func_8026B3F8(item_list[0], fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
+        func_8026B3F8(item_list[1], fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
+        func_8026B3F8(item_list[2], It_Kind_Fox_Illusion);
     }
 }
 

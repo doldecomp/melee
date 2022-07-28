@@ -5,8 +5,14 @@
 
 // Most of these should be moved to independent headers once they are created //
 
+// SOUND EFFECTS //
+
+#define SFX_VOLUME_MAX 0x7FU
+#define SFX_PAN_MAX 0x40U
+
 // HSD_PAD //
 
+#define HSD_BUTTON_DPAD_DOWN 0x4
 #define HSD_BUTTON_A 0x100 // Also covers Z-Button macro in-game //
 #define HSD_BUTTON_B 0x200
 
