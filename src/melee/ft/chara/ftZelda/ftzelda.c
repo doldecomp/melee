@@ -1707,7 +1707,67 @@ void ftZelda_8013BF30(HSD_GObj* arg0) {
     func_80084F3C(arg0);
 }
 
-// 8013BF50 -  ( bytes)
+// 8013BF50 - 8013BFB0 (0x60 bytes)
+// https://decomp.me/scratch/suE14
+void ftZelda_8013BF50(HSD_GObj* fighterObj) {
+    Fighter* fighter;
+    s32 temp_r3;
+    ftZeldaAttributes* charAttr;
+    attr* fighterAttr;
+    f32 aerialFriction;
+    f32 unused[3];
+
+    fighter = fighterObj->user_data;
+    temp_r3 = fighter->x2348_stateVar3;
+    charAttr = fighter->x2D4_specialAttributes;
+    
+    if (temp_r3 != 0) {
+        fighter->x2348_stateVar3 = temp_r3 - 1;
+    } else {
+        fighterAttr = &fighter->x110_attr;
+        func_8007D494(fighter, charAttr->x2C, fighterAttr->x170_TerminalVelocity);
+    }
+    aerialFriction = fighter->x110_attr.x180_AerialFriction;
+    func_8007CE94(fighter, aerialFriction);
+}
+
+// 8013BFB0 -  ( bytes)
+// https://decomp.me/scratch/BxLXt
+void ftZelda_8013BFB0(HSD_GObj* fighterObj) {
+    Fighter* fighter;
+    s32 temp_r3;
+    ftZeldaAttributes* charAttr;
+    attr* fighterAttr;
+    f32 aerialFriction;
+    f32 unused[3];
+
+    fighter = fighterObj->user_data;
+    temp_r3 = fighter->x2348_stateVar3;
+    charAttr = fighter->x2D4_specialAttributes;
+    
+    if (temp_r3 != 0) {
+        fighter->x2348_stateVar3 = temp_r3 - 1;
+    } else {
+        fighterAttr = &fighter->x110_attr;
+        func_8007D494(fighter, charAttr->x2C, fighterAttr->x170_TerminalVelocity);
+    }
+    aerialFriction = fighter->x110_attr.x180_AerialFriction;
+    func_8007CE94(fighter, aerialFriction);
+}
+
+//  -  ( bytes)
+// 
+
+//  -  ( bytes)
+// 
+
+//  -  ( bytes)
+// 
+
+//  -  ( bytes)
+// 
+
+//  -  ( bytes)
 // 
 
 //  -  ( bytes)
