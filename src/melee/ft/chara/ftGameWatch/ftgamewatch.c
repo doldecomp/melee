@@ -49,8 +49,8 @@ void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj)
         
         ftGameWatchAttributes *attr = fighter->x2D4_specialAttributes;
         fighter->x34_scale.z = attr->x0_GAMEWATCH_WIDTH;
-        fighter->x614 = attr->x14_GAMEWATCH_UNK2;
-        func_800BFB4C(fighter_gobj, &attr->x4_GAMEWATCH_UNK[fighter->x619_costume_id]);
+        fighter->x614 = attr->x14_GAMEWATCH_OUTLINE;
+        func_800BFB4C(fighter_gobj, &attr->x4_GAMEWATCH_COLOR[fighter->x619_costume_id]);
         fighter->x5C8 = items[10];
         
         func_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);
@@ -144,7 +144,7 @@ void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
     Fighter* fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);
 
-    item_mod->x0_unk = gawAttrs->x4_GAMEWATCH_UNK[fp->x619_costume_id];
+    item_mod->x0_unk = gawAttrs->x4_GAMEWATCH_COLOR[fp->x619_costume_id];
 }
 
 // 0x8014A814 
@@ -154,7 +154,7 @@ void ftGameWatch_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
     Fighter* fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);
 
-    item_mod->x0_unk = gawAttrs->x14_GAMEWATCH_UNK2;
+    item_mod->x0_unk = gawAttrs->x14_GAMEWATCH_OUTLINE;
 }
 
 // 0x8014A828
