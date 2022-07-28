@@ -113,7 +113,3 @@ lbl_803C72A0:
     .4byte 0x40C00000
     .4byte 0x40C00000
     .4byte 0x40C00000
-
-
-#.section .sdata2
-#    .balign 8
