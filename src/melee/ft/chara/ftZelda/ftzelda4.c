@@ -60,7 +60,6 @@ void ftZelda_SpecialAirS_StartAction(HSD_GObj* fighterObj) {
 // 8013B780 - 8013B89C (0x11C bytes)
 // https://decomp.me/scratch/g2bK5
 // u32 func_802C3BAC(HSD_GObj*, Point3d*, f32, f32);   /* extern */
-// extern void ftZelda_801393AC();
 void ftZelda_8013B780(HSD_GObj* fighterObj) {
     Point3d sp24;
     f32 temp_f1;

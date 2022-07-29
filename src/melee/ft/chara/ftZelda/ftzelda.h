@@ -42,3 +42,5 @@ typedef struct _ftZeldaAttributes {
     f32 x8C;
     u8 data_filler_1[0x18];
 } ftZeldaAttributes;
+
+void ftZelda_801393AC(HSD_GObj* fighterObj);

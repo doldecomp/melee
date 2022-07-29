@@ -184,7 +184,7 @@ void ftZelda_801399B4(HSD_GObj* arg0) {
 
 // 801399F0 - 80139A2C (0x3C bytes)
 // https://decomp.me/scratch/3f62U
-void lbl_801399F0(HSD_GObj* arg0) {
+void ftZelda_801399F0(HSD_GObj* arg0) {
     if (ftAnim_IsFramesRemaining(arg0) == 0) {
         func_8013A244(arg0);
     }
@@ -485,6 +485,8 @@ void ftZelda_8013A058(HSD_GObj* fighterObj) {
                 
                 fighter->x2344_f32 = inputVector.x;
                 fighter->x2348_stateVar3_f32 = inputVector.y;
+
+                // Update ground velocity
                 temp_f6 = ((attributes->x54 * var_f31) + attributes->x58) * cosf(temp_f5);
                 fighter->xEC_ground_vel = fighter->x2C_facing_direction * temp_f6;
                 
