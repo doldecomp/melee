@@ -66,7 +66,6 @@ void ftSeak_OnKnockbackExit(HSD_GObj* fighterObj) {
 
 // 8011412C - 80114160
 // https://decomp.me/scratch/b1oIZ
-void ftZelda_8013B4D8(HSD_GObj*);                   /* extern */
 void lbl_8011412C(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     fighter->cb.x21BC_callback_Accessory4 = 0;

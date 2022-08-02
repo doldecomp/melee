@@ -134,6 +134,9 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialHi.c.o      \
 	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialLw.c.o      \
 	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda2.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda3.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda4.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftpurin.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftpurin.s.o 		\
