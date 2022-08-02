@@ -62,3 +62,13 @@ void ftSeak_OnKnockbackEnter(HSD_GObj* fighterObj) {
 void ftSeak_OnKnockbackExit(HSD_GObj* fighterObj) {
     Fighter_OnKnockbackExit(fighterObj, 1);
 }
+
+
+// 8011412C - 80114160
+// https://decomp.me/scratch/b1oIZ
+void ftZelda_8013B4D8(HSD_GObj*);                   /* extern */
+void lbl_8011412C(HSD_GObj* fighterObj) {
+    Fighter* fighter = fighterObj->user_data;
+    fighter->cb.x21BC_callback_Accessory4 = 0;
+    func_8007EFC8(fighterObj, &ftZelda_8013B4D8);
+}
