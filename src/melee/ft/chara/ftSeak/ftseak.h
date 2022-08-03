@@ -2,8 +2,7 @@
 
 #include "melee/ft/ftcommon.h"
 #include "melee/lb/lbvector.h"
-
-//#include "melee/ft/chara/ftzelda.h"
+#include "melee/ft/chara/ftZelda/ftzelda.h"
 
 typedef struct _ftSeakAttributes {
     f32 x0;
@@ -21,5 +20,4 @@ typedef struct _ftSeakAttributes {
     u8 data_filler_1[0x44];
 } ftSeakAttributes;
 
-void ftZelda_8013B4D8(HSD_GObj* fighterObj);
 void lbl_8011412C(HSD_GObj* fighterObj);
