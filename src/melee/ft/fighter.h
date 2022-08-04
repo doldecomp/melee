@@ -500,7 +500,7 @@ typedef struct _ftCommonData {
     /* 0x28 */ f32 x28;
     /* 0x2C */ f32 x2C;
     /* 0x30 */ f32 x30;
-    u8 filler_x4[0x88 - 0x34];
+    u8 filler_x34[0x88 - 0x34];
     /* 0x88 */ f32 x88;
     /* 0x8C */ s32 x8C;
     u8 filler_x90[0x98 - 0x90];
