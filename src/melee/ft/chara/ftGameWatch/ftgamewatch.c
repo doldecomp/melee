@@ -18,8 +18,8 @@ void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
     fighter->sa.gaw.x2230_judgeVar2 = 0;
     fighter->sa.gaw.x2234 = 0;
     fighter->sa.gaw.x223C_panicDamage = 0;
-    fighter->sa.gaw.x2240 = 1;
-    fighter->sa.gaw.x2244 = 3;
+    fighter->sa.gaw.x2240_chefVar1 = 1;
+    fighter->sa.gaw.x2244_chefVar2 = 3;
     fighter->sa.gaw.x2248_manholeGObj = NULL;
     fighter->sa.gaw.x224C_greenhouseGObj = NULL;
     fighter->sa.gaw.x2250_manholeGObj2 = NULL;

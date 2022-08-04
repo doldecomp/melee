@@ -103,58 +103,58 @@ as_table_falco:
     .4byte 0x00000133
     .4byte 0x00340213
     .4byte 0x14000000
-    .4byte func_800E7354
-    .4byte func_800E7414
-    .4byte func_800E741C
-    .4byte func_800E74A8
+    .4byte ftFox_SpecialHiHold_Anim
+    .4byte ftFox_SpecialHiHold_IASA
+    .4byte ftFox_SpecialHiHold_Phys
+    .4byte ftFox_SpecialHiHold_Coll
     .4byte func_800761C8
     .4byte 0x00000134
     .4byte 0x00340613
     .4byte 0x14000000
-    .4byte func_800E73B4
-    .4byte func_800E7418
-    .4byte func_800E743C
-    .4byte func_800E74E4
+    .4byte ftFox_SpecialHiHoldAir_Anim
+    .4byte ftFox_SpecialHiHoldAir_IASA
+    .4byte ftFox_SpecialHiHoldAir_Phys
+    .4byte ftFox_SpecialHiHoldAir_Coll
     .4byte func_800761C8
     .4byte 0x00000135
     .4byte 0x00340213
     .4byte 0x14000000
-    .4byte func_800E7634
-    .4byte func_800E76D4
-    .4byte func_800E76DC
-    .4byte func_800E7800
+    .4byte ftFox_SpecialHi_Anim
+    .4byte ftFox_SpecialHi_IASA
+    .4byte ftFox_SpecialHi_Phys
+    .4byte ftFox_SpecialHi_Coll
     .4byte func_800761C8
     .4byte 0x00000135
     .4byte 0x00340613
     .4byte 0x14000000
-    .4byte func_800E7684
-    .4byte func_800E76D8
-    .4byte func_800E7758
-    .4byte func_800E78B4
+    .4byte ftFox_SpecialAirHi_Anim
+    .4byte ftFox_SpecialAirHi_IASA
+    .4byte ftFox_SpecialAirHi_Phys
+    .4byte ftFox_SpecialAirHi_Coll
     .4byte func_800761C8
     .4byte 0x00000136
     .4byte 0x00340213
     .4byte 0x14000000
-    .4byte func_800E7E3C
-    .4byte func_800E7ED8
-    .4byte func_800E7EE0
-    .4byte func_800E7F40
+    .4byte ftFox_SpecialHiLanding_Anim
+    .4byte ftFox_SpecialHiLanding_IASA
+    .4byte ftFox_SpecialHiLanding_Phys
+    .4byte ftFox_SpecialHiLanding_Coll
     .4byte func_800761C8
     .4byte 0x00000137
     .4byte 0x00340613
     .4byte 0x14000000
-    .4byte func_800E7E78
-    .4byte func_800E7EDC
-    .4byte func_800E7F20
-    .4byte func_800E7FA0
+    .4byte ftFox_SpecialHiFall_Anim
+    .4byte ftFox_SpecialHiFall_IASA
+    .4byte ftFox_SpecialHiFall_Phys
+    .4byte ftFox_SpecialHiFall_Coll
     .4byte func_800761C8
     .4byte 0x00000138
     .4byte 0x00340613
     .4byte 0x14000000
-    .4byte func_800E8124
-    .4byte func_800E81FC
-    .4byte func_800E8200
-    .4byte func_800E824C
+    .4byte ftFox_SpecialHiBound_Anim
+    .4byte ftFox_SpecialHiBound_IASA
+    .4byte ftFox_SpecialHiBound_Phys
+    .4byte ftFox_SpecialHiBound_Coll
     .4byte func_800761C8
     .4byte 0x00000139
     .4byte 0x00341014

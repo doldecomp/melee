@@ -74,6 +74,11 @@ typedef enum ftGameWatchAction
 
 } ftGameWatchAction;
 
+typedef struct ftGameWatchChef
+{
+    s32 sausageCount[5];
+} ftGameWatchChef;
+
 typedef struct ftGameWatchJudge
 {
     s32 rollVar[9];
@@ -90,7 +95,7 @@ typedef struct _ftGameWatchAttributes {
     // NEUTRAL SPECIAL - CHEF //
 
     f32 x18_GAMEWATCH_CHEF_LOOPFRAME; // Allow rapid-firing sausages from this frame onward
-    s32 x1C_GAMEWATCH_CHEF_MAX; // Maximum amount of sausages created per Chef use
+    f32 x1C_GAMEWATCH_CHEF_MAX; // Maximum amount of sausages created per Chef use
 
     // SIDE SPECIAL - JUDGEMENT //
 
