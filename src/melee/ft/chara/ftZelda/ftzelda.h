@@ -56,7 +56,7 @@ void ftZelda_801395C8(HSD_GObj* fighterObj);
 void ftZelda_OnKnockbackEnter(HSD_GObj* fighterObj);
 void ftZelda_OnKnockbackExit(HSD_GObj* fighterObj);
 void ftZelda_801396AC(HSD_GObj* fighterObj);
-void func_801396E0(HSD_GObj* fighterObj);
+void ftZelda_801396E0(HSD_GObj* fighterObj);
 void ftZelda_8013979C(HSD_GObj* fighterObj);
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighterObj);
 void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighterObj);

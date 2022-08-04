@@ -345,6 +345,22 @@ void ftZelda_8013BE58(HSD_GObj* fighterObj) {
 
 void ftZelda_8013BED4(HSD_GObj* fighterObj) {}
 
+// 8013BED8 - 8013BF10 (0x38 bytes)
+// https://decomp.me/scratch/Sb7RS
+void ftZelda_8013BED8(HSD_GObj* fighterObj) {
+    s32 stateVar;
+    Fighter* fighter;
+
+    fighter = getFighter(fighterObj);
+    stateVar = fighter->x2348_stateVar3;
+    
+    if (stateVar) {
+        fighter->x2348_stateVar3 = (s32) (stateVar - 1);
+    }
+    
+    func_80084F3C(fighterObj);
+}
+
 // 8013BED8 - 8013BF30 (0x20 bytes)
 void ftZelda_8013BF10(HSD_GObj* arg0) {
     func_80084F3C(arg0);

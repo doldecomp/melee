@@ -108,7 +108,7 @@ void ftZelda_8013AACC(HSD_GObj* fighterObj) {
         ftColl_CreateReflectHit(fighterObj, attributes + 0x84, &ftZelda_8013ADB0);
     }
     if ((u32) fighter->x2200_ftcmd_var0 == 0U) {
-        fighter->x2218_flag.bits.b3 = 0; //(u8) (fighter->unk2218 & ~0x10);
+        fighter->x2218_flag.bits.b3 = 0;
     }
     if (ftAnim_IsFramesRemaining(fighterObj) == 0) {
         func_800CC730(fighterObj);
