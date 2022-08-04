@@ -100,7 +100,7 @@ void ftZelda_8013979C(HSD_GObj* fighterObj) {
     flag = fighter->x2219_flag.bits.b0;
     if (flag == 0) {
         ef_Spawn(0x505, fighterObj, &sp10);
-        fighter->x2219_flag.bits.b0 = 1L;
+        fighter->x2219_flag.bits.b0 = 1;
     }
     fighter->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fighter->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -108,7 +108,8 @@ void ftZelda_8013979C(HSD_GObj* fighterObj) {
 }
 
 // 80139834 - 801398E8 (0xB4 bytes)
-// https://decomp.me/scratch/52XE3
+// https://decomp.me/scratch/TOq04 (with inline)
+// https://decomp.me/scratch/52XE3 (as single function)
 void ftZelda_SpecialHi_StartAction_Inline(Fighter* fighter) {
     HSD_JObj* jObj;
     s32 boneIndex;
@@ -119,10 +120,9 @@ void ftZelda_SpecialHi_StartAction_Inline(Fighter* fighter) {
 
     boneIndex = func_8007500C(fighter, 4);
     jObj = fighter->x5E8_fighterBones[boneIndex].x0_jobj;
-    
+
     func_8000B1CC(jObj, NULL, &sp24);
     func_800119DC(&sp24, 0x78, 1.5, 0.019999999552965164, 1.0471975803375244);
-    
 }
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighterPlus(fighterObj);
@@ -136,7 +136,7 @@ void ftZelda_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     fighter = getFighterPlus(fighterObj);
     fighter->x2200_ftcmd_var0 = 0;
     fighter->x234C_stateVar4 = 0;
-	
+
     ftZelda_SpecialHi_StartAction_Inline(fighter);
 
     fighter->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
@@ -453,8 +453,8 @@ void ftZelda_8013A058(HSD_GObj* fighterObj) {
     // (Avoiding sqrtf to preserve stack alignment.)
     if (var_f4 > 0.0f) {
         f64 guess = __frsqrte(var_f4);
-        _half = .5;
-        _three = 3.0;
+        _half = .5F;
+        _three = 3.0F;
         guess = _half*guess*(_three - guess*guess*var_f4);
         guess = _half*guess*(_three - guess*guess*var_f4);
         guess = _half*guess*(_three - guess*guess*var_f4);
