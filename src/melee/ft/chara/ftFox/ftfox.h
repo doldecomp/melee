@@ -26,8 +26,21 @@ typedef enum ftFoxAction {
     AS_FOX_SPECIALAIRS_START,
     AS_FOX_SPECIALAIRS,
     AS_FOX_SPECIALAIRS_END,
+    AS_FOX_SPECIALHI_HOLD,
+    AS_FOX_SPECIALHI_HOLDAIR,
+    AS_FOX_SPECIALHI,
+    AS_FOX_SPECIALAIRHI,
+    AS_FOX_SPECIALHI_LANDING,
+    AS_FOX_SPECIALHI_FALL,
+    AS_FOX_SPECIALHI_BOUND,
 
 } ftFoxAction;
+
+// Flags used by Fox in Action State Change //
+
+// SpecialHi (Firefox/Firebird)
+
+#define FTFOX_SPECIALHI_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_UNK_0x1000 | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_UNK_0x400000 | FIGHTER_UNK_0x4000000 | FIGHTER_UNK_0x2227
 
 typedef struct _ftFoxAttributes {
 
@@ -66,17 +79,17 @@ typedef struct _ftFoxAttributes {
     f32 x60_FOX_FIREFOX_FALL_ACCEL;
     f32 x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN; // Minimum control stick range required for direction change
     f32 x68_FOX_FIREFOX_DURATION; // Amount of frames Firefox/Firebird travels
-    f32 x6C_FOX_FIREFOX_UNK1;
-    f32 x70_FOX_FIREFOX_AIR_MOMENTUM_END;
+    s32 x6C_FOX_FIREFOX_BOUNCE_VAR;
+    f32 x70_FOX_FIREFOX_DURATION_END;
     f32 x74_FOX_FIREFOX_SPEED;
     f32 x78_FOX_FIREFOX_REVERSE_ACCEL; // ???
     f32 x7C_FOX_FIREFOX_GROUND_MOMENTUM_END;
     f32 x80_FOX_FIREFOX_UNK2;
     f32 x84_FOX_FIREFOX_BOUND_VEL_X; // Horizontal velocity of SpecialHiBound action state
     f32 x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN; // Minimum control stick range required to change character's facing direction
-    f32 x8C_FOX_FIREFOX_UNK3;
+    f32 x8C_FOX_FIREFOX_FREEFALL_MOBILITY;
     f32 x90_FOX_FIREFOX_LANDING_LAG;
-    f32 x94_FOX_FIREFOX_BOUND_LANDING_LAG;
+    f32 x94_FOX_FIREFOX_BOUND_ANGLE;
     
     // DOWN SPECIAL - REFLECTOR //
 
@@ -111,7 +124,7 @@ void ftFox_AppealS_Phys(HSD_GObj* fighter_gobj);
 void ftFox_AppealS_Coll(HSD_GObj* fighter_gobj);
 void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj);
 
-// Neutral Special - Blaster (SpecialN)
+// Neutral Special - Blaster (SpecialN) //
 
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos);
 void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos);
@@ -152,5 +165,56 @@ void ftFox_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj);
 // Throws (ThrowB/ThrowHi/ThrowL) //
 
 void ftFox_Throw_Anim(HSD_GObj* fighter_gobj);
+
+// Up Special - Firefox (SpecialHi) //
+
+void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_RotateModel(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHoldAir_Anim(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHold_IASA(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHoldAir_IASA(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHold_Phys(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHold_Coll(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHold_GroundToAir(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiHoldAir_AirToGround(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_Anim(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirHi_Anim(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_IASA(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirHi_IASA(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_Phys(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirHi_Phys(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiFall_Anim(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiLanding_IASA(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiFall_IASA(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiLanding_Phys(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiFall_Phys(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiLanding_Coll(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiFall_Action(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiFall_AirToGround(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiLanding_GroundToAir(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiBound_IASA(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiBound_Phys(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHiBound_Action(HSD_GObj* fighter_gobj);
+
+// Down Special - Reflector (SpecialLw) //
+
+void lbl_800E83E0(HSD_GObj* fighter_gobj);
+void lbl_800E845C(HSD_GObj* fighter_gobj);
+void lbl_800E84D8(HSD_GObj* fighter_gobj);
 
 #endif

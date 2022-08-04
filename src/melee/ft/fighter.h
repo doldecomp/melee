@@ -133,6 +133,16 @@ typedef enum CharacterKind
 #define FIGHTER_UNK_0x40000000 0x40000000
 #define FIGHTER_UNK_0x80000000 0x80000000
 
+// LandingFallSpecial flags //
+
+#define IS_INTERRUPTIBLE 1
+
+// Ledge Grab Flags //
+
+#define CLIFFCATCH_BOTH 0
+#define CLIFFCATCH_RIGHT 1
+#define CLIFFCATCH_LEFT -1
+
 typedef enum ftCommonAction
 {
     ASID_DEADDOWN,
@@ -1092,8 +1102,8 @@ struct SpecialAttrs_GameWatch {
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ s32 x2238_panicCharge;
     /* 0x223C */ s32 x223C_panicDamage;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
+    /* 0x2240 */ s32 x2240_chefVar1;
+    /* 0x2244 */ s32 x2244_chefVar2;
     /* 0x2248 */ HSD_GObj* x2248_manholeGObj;
     /* 0x224C */ HSD_GObj* x224C_greenhouseGObj;
     /* 0x2250 */ HSD_GObj* x2250_manholeGObj2;
@@ -1891,6 +1901,16 @@ inline void* getFtSpecialAttrs2CC(Fighter* fighter_data)
 {
     void* fighter_attr = fighter_data->x2CC;
     return fighter_attr;
+}
+
+inline CollData* getFtColl(Fighter* fp)
+{
+    return &fp->x6F0_collData;
+}
+
+inline BOOL ftGetGroundAir(Fighter* fp)
+{
+    return fp->xE0_ground_or_air;
 }
 
 inline f32 stickGetDir(f32 x1, f32 x2)
