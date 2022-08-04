@@ -3101,7 +3101,6 @@ void ftNess_SpecialHiTakeDamage(struct _HSD_GObj*);
 // ? ftNess_SpecialLwEnd_Action(?);
 // ? ftNess_SpecialAirLwEnd_Action(?);
 // ? ftPeach_8011B93C(?);
-// ? func_8011BA20(?);
 // ? func_8011BA54(?);
 // ? func_8011BAD8(?);
 // ? func_8011BB6C(?);

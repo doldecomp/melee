@@ -15,3 +15,5 @@ typedef struct _ftPeachAttributes {
 } ftPeachAttributes;
 
 void ftPeach_OnDeath(HSD_GObj* gobj);
+
+s32 ftPeach_8011BA20(Fighter* fp);

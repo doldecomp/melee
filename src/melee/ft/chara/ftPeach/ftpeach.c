@@ -96,3 +96,12 @@ void ftPeach_OnKnockbackEnter(HSD_GObj* fighterObj) {
 void ftPeach_OnKnockbackExit(HSD_GObj* fighterObj) {
     Fighter_OnKnockbackExit(fighterObj, 1);
 }
+
+s32 ftPeach_8011BA20(Fighter* fp) {
+    s32 result = 1;
+
+    if (!(fp->input.x624_lstick_y >= *((f32*)p_ftCommonData+28)) && !(fp->input.x65C & 0xC00))
+        result = 0;
+
+    return result;
+}
