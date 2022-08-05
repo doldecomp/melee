@@ -34,7 +34,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/code_80019880.s.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.s.o				\
 	$(BUILD_DIR)/asm/melee/lb/lbgx.s.o		\
-	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_2.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/lbanim.s.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbmthp.s.o		\
 	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_4.s.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o		\
