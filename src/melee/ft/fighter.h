@@ -1180,6 +1180,13 @@ typedef struct ftGameWatchVars
     };
 } ftGameWatchVars;
 
+typedef struct ftFox_SpecialS_Struct
+{
+    s32 x0;
+    s32 x4;
+    s32 x8;
+} ftFox_SpecialS_Struct;
+
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
     /* 0x4 */ FighterKind x4_fighterKind;
@@ -1765,10 +1772,17 @@ typedef struct _Fighter {
     /* 0x2340 */ f32 x2340_f32;
     };
     union {
-    /* 0x2344 */ u32 x2344_stateVar2;
-    /* 0x2344 */ s32 x2344_stateVar2_s32;
-    /* 0x2344 */ void (*x2344_callback)(HSD_GObj*);
-    /* 0x2344 */ f32 x2344_f32;
+        u32 x2344_stateVar2;
+        s32 x2344_stateVar2_s32;
+        void (*x2344_callback)(HSD_GObj*);
+        f32 x2344_f32;
+        struct
+        {
+            union
+            {
+                Vec3 x2344_foxSpecialS[0];
+            };
+        };
     };
     union {
         /* 0x2348 */ u32 x2348_stateVar3;
@@ -1833,6 +1847,7 @@ typedef struct _Fighter {
     union {
     /* 0x2374 */ u32 x2374;
     /* 0x2374 */ f32 x2374_f32;
+    /* 0x2374 */ f32 x2374_foxArray[0];
     };
     union {
     /* 0x2378 */ u32 x2378;
@@ -1851,12 +1866,13 @@ typedef struct _Fighter {
     };
     union {
         /* 0x2384 */ u32 x2384_u32;
-        /* 0x2384 */ f32 x2384;
+        /* 0x2384 */ s32 x2384_s32;
         /* 0x2384 */ f32 x2384_f32;
+        /* 0x2384 */ HSD_GObj* x2384_GObj;
     };
     union {
         /* 0x2388 */ u32 x2388_u32;
-        /* 0x2388 */ f32 x2388;
+        /* 0x2388 */ s32 x2388_s32;
         /* 0x2388 */ f32 x2388_f32;
     };
     union {
@@ -1904,6 +1920,11 @@ inline void* getFtSpecialAttrs2CC(Fighter* fighter_data)
 {
     void* fighter_attr = fighter_data->x2CC;
     return fighter_attr;
+}
+
+inline attr* getFtAttrs(Fighter* fp)
+{
+    return &fp->x110_attr;
 }
 
 inline CollData* getFtColl(Fighter* fp)
