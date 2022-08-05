@@ -77,7 +77,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/ft/code_800877F8.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey1.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey2.c.o 	\
-	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey3.c.o 	\
+	$(BUILD_DIR)/src/melee/ft/ftwalkcommon.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey4.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey5.c.o 	\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey6.c.o 	\
