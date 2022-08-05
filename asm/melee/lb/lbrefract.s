@@ -2,6 +2,9 @@
 
 .section .text
 
+# https://decomp.me/scratch/CWwOc
+
+
 local_80021CE8:
 /* 80021CE8 0001E8C8  7C 08 02 A6 */	mflr r0
 /* 80021CEC 0001E8CC  3C A0 43 30 */	lis r5, 0x4330
@@ -337,6 +340,8 @@ lbl_80022184:
 /* 80022194 0001ED74  90 08 00 00 */	stw r0, 0(r8)
 /* 80022198 0001ED78  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/fE52x
+
 
 local_8002219C:
 /* 8002219C 0001ED7C  7C 08 02 A6 */	mflr r0
@@ -412,6 +417,8 @@ lbl_80022288:
 /* 80022298 0001EE78  38 21 00 30 */	addi r1, r1, 0x30
 /* 8002229C 0001EE7C  7C 08 03 A6 */	mtlr r0
 /* 800222A0 0001EE80  4E 80 00 20 */	blr 
+
+# https://decomp.me/scratch/hY7fQ
 
 .global func_800222A4
 func_800222A4:
@@ -536,6 +543,8 @@ lbl_80022458:
 /* 80022474 0001F054  7C 08 03 A6 */	mtlr r0
 /* 80022478 0001F058  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/aGGLH
+
 .global func_8002247C
 func_8002247C:
 /* 8002247C 0001F05C  7C 08 02 A6 */	mflr r0
@@ -600,6 +609,8 @@ lbl_80022548:
 /* 80022558 0001F138  7C 08 03 A6 */	mtlr r0
 /* 8002255C 0001F13C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/pOPkf
+
 .global func_80022560
 func_80022560:
 /* 80022560 0001F140  7C 08 02 A6 */	mflr r0
@@ -632,6 +643,8 @@ lbl_800225C0:
 /* 800225C8 0001F1A8  38 21 00 10 */	addi r1, r1, 0x10
 /* 800225CC 0001F1AC  7C 08 03 A6 */	mtlr r0
 /* 800225D0 0001F1B0  4E 80 00 20 */	blr 
+
+# https://decomp.me/scratch/ioqOn
 
 .global func_800225D4
 func_800225D4:
@@ -668,6 +681,8 @@ lbl_80022608:
 /* 80022648 0001F228  7C 08 03 A6 */	mtlr r0
 /* 8002264C 0001F22C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/BDJjp
+
 
 local_80022650:
 /* 80022650 0001F230  7C 08 02 A6 */	mflr r0
@@ -692,6 +707,8 @@ local_80022650:
 /* 8002269C 0001F27C  38 21 00 10 */	addi r1, r1, 0x10
 /* 800226A0 0001F280  7C 08 03 A6 */	mtlr r0
 /* 800226A4 0001F284  4E 80 00 20 */	blr 
+
+# https://decomp.me/scratch/GVvUT
 
 .global func_800226A8
 func_800226A8:
@@ -891,6 +908,8 @@ lbl_8002292C:
 /* 80022938 0001F518  7C 08 03 A6 */	mtlr r0
 /* 8002293C 0001F51C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/iVwXp
+
 
 local_80022940:
 /* 80022940 0001F520  7C 08 02 A6 */	mflr r0
@@ -915,6 +934,8 @@ local_80022940:
 /* 8002298C 0001F56C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80022990 0001F570  7C 08 03 A6 */	mtlr r0
 /* 80022994 0001F574  4E 80 00 20 */	blr 
+
+# https://decomp.me/scratch/n58XM
 
 .global func_80022998
 func_80022998:
@@ -1059,6 +1080,8 @@ lbl_80022B58:
 /* 80022BB0 0001F790  7C 08 03 A6 */	mtlr r0
 /* 80022BB4 0001F794  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/1k4lM
+
 .global func_80022BB8
 func_80022BB8:
 /* 80022BB8 0001F798  3C 60 80 43 */	lis r3, skip40_804336D0@ha
@@ -1067,6 +1090,8 @@ func_80022BB8:
 /* 80022BC4 0001F7A4  38 03 00 01 */	addi r0, r3, 1
 /* 80022BC8 0001F7A8  90 04 00 00 */	stw r0, 0(r4)
 /* 80022BCC 0001F7AC  4E 80 00 20 */	blr 
+
+# https://decomp.me/scratch/1OXja
 
 .global func_80022BD0
 func_80022BD0:
@@ -1097,9 +1122,9 @@ lbl_80022C20:
 /* 80022C2C 0001F80C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/hJRc9
-# f32 func_someCalcAngle_80022C30(f32 y, f32 x) // atan2f
-.global func_someCalcAngle_80022C30
-func_someCalcAngle_80022C30:
+# f32 atan2f(f32 y, f32 x)
+.global atan2f
+atan2f:
 /* 80022C30 0001F810  7C 08 02 A6 */	mflr r0
 /* 80022C34 0001F814  90 01 00 04 */	stw r0, 4(r1)
 /* 80022C38 0001F818  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1166,6 +1191,8 @@ lbl_80022D0C:
 /* 80022D10 0001F8F0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80022D14 0001F8F4  7C 08 03 A6 */	mtlr r0
 /* 80022D18 0001F8F8  4E 80 00 20 */	blr 
+
+# https://decomp.me/scratch/ouTFr
 
 .global func_80022D1C
 func_80022D1C:

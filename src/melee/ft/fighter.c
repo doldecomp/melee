@@ -2132,7 +2132,7 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
                 }
                 else 
                 {
-                    float kb_angle = func_someCalcAngle_80022C30(kb_vel_y, kb_vel_x);
+                    float kb_angle = atan2f(kb_vel_y, kb_vel_x);
 					
                     if (sqrtf(kb_vel_x * kb_vel_x + kb_vel_y * kb_vel_y) < p_ftCommonData->x204_knockbackFrameDecay) 
                     {
@@ -2173,7 +2173,7 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
             {
                 float kb_x = pAtkShieldKB->x;
                 float kb_y = pAtkShieldKB->y;
-                float atkShieldKBAngle = func_someCalcAngle_80022C30(kb_y, kb_x);
+                float atkShieldKBAngle = atan2f(kb_y, kb_x);
 
                 if (sqrtf(kb_x*kb_x + kb_y*kb_y) < p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
                 {

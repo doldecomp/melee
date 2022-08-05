@@ -972,7 +972,7 @@ void func_8008777C(HSD_GObj* gobj)
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
     }
     cd = &fp->x6F0_collData;
-    func_someCalcAngle_80022C30(-cd->x154_groundNormal.x, cd->x154_groundNormal.y);
+    atan2f(-cd->x154_groundNormal.x, cd->x154_groundNormal.y);
 }
 
 BOOL func_800877D4(HSD_GObj* gobj)

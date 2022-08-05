@@ -15,6 +15,7 @@
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/random.h>
 #include "sysdolphin/baselib/controller.h"
+#include "melee/lb/lbrefract.h"
 #include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
 

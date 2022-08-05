@@ -167,7 +167,7 @@ void ftNess_YoyoSetUnkPos(HSD_GObj* fighter_gobj, Vec3* pos)
     func_8000B1CC(fighter_data->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp14);
     *pos = sp20;
     lbvector_Sub(pos, &sp14);
-    lbvector_Rotate(pos, 4, -func_someCalcAngle_80022C30(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
+    lbvector_Rotate(pos, 4, -atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
     lbvector_Add(pos, &sp14);
 }
 
@@ -197,7 +197,7 @@ void ftNess_YoyoSetHitPos(HSD_GObj* fighter_gobj) // Set Yo-Yo hitbox position? 
         func_8000B1CC(fighter_data->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp20);
         sp2C = sp14;
         lbvector_Sub(&sp2C, &sp20);
-        lbvector_Rotate(&sp2C, 4, -func_someCalcAngle_80022C30(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
+        lbvector_Rotate(&sp2C, 4, -atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
         lbvector_Add(&sp2C, &sp20);
     }
     fighter_data->sa.ness.x2230_yoyoHitboxPos = sp2C;
@@ -230,7 +230,7 @@ void ftNess_YoyoSetHitPosUnk(HSD_GObj* fighter_gobj, f32 pos_unk)
         func_8000B1CC(fighter_data->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp24);
         sp3C = sp18;
         lbvector_Sub(&sp3C, &sp24);
-        lbvector_Rotate(&sp3C, 4, -func_someCalcAngle_80022C30(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
+        lbvector_Rotate(&sp3C, 4, -atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
         lbvector_Add(&sp3C, &sp24);
     }
     sp30 = fighter_data->sa.ness.x2230_yoyoHitboxPos;
