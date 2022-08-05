@@ -5,6 +5,8 @@
 #include <sysdolphin/baselib/objalloc.h>
 #include <math.h>
 
+#include "melee/lb/lbrefract.h"
+
 void func_80379310(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
 void func_80379A20(Mtx src, Mtx dest);
@@ -24,9 +26,6 @@ HSD_ObjAllocData* HSD_VecGetAllocData(void);
 void HSD_VecInitAllocData(void);
 HSD_ObjAllocData* HSD_MtxGetAllocData(void);
 void HSD_MtxInitAllocData(void);
-
-extern float func_80022DBC(float);
-extern float func_someCalcAngle_80022C30(float, float);
 
 inline f32 fabsf_bitwise(f32 v)
 {

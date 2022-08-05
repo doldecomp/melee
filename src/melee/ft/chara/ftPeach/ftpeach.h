@@ -1,5 +1,4 @@
-#ifndef _ftpeach_h_
-#define _ftpeach_h_
+#pragma once
 
 #include <global.h>
 
@@ -17,4 +16,4 @@ typedef struct _ftPeachAttributes {
 
 void ftPeach_OnDeath(HSD_GObj* gobj);
 
-#endif
+s32 ftPeach_8011BA20(Fighter* fp);
