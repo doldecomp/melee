@@ -256,7 +256,7 @@ inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     if (((u32)fp->x220C_ftcmd_var3 != 0U) && ((s32)fp->x234C_stateVar4 != FALSE))
     {
-        func_8007592C(fp, 0, fp->x2C_facing_direction * func_someCalcAngle_80022C30(fp->x6F0_collData.x154_groundNormal.x, fp->x6F0_collData.x154_groundNormal.y));
+        func_8007592C(fp, 0, fp->x2C_facing_direction * atan2f(fp->x6F0_collData.x154_groundNormal.x, fp->x6F0_collData.x154_groundNormal.y));
         return;
     }
     func_8007592C(fp, 0, 0.0f);

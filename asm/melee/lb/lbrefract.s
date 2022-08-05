@@ -1122,9 +1122,9 @@ lbl_80022C20:
 /* 80022C2C 0001F80C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/hJRc9
-# f32 func_someCalcAngle_80022C30(f32 y, f32 x) // atan2f
-.global func_someCalcAngle_80022C30
-func_someCalcAngle_80022C30:
+# f32 atan2f(f32 y, f32 x)
+.global atan2f
+atan2f:
 /* 80022C30 0001F810  7C 08 02 A6 */	mflr r0
 /* 80022C34 0001F814  90 01 00 04 */	stw r0, 4(r1)
 /* 80022C38 0001F818  94 21 FF F0 */	stwu r1, -0x10(r1)
