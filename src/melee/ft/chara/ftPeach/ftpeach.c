@@ -54,9 +54,9 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
 }
 
 void ftPeach_8011B704(HSD_GObj* fighterObj) {
-    func_8011D598(fighterObj);
-    func_8011E2E8(fighterObj);
-    func_8011CFA0(fighterObj);
+    ftPeach_8011D598(fighterObj);
+    ftPeach_8011E2E8(fighterObj);
+    ftPeach_8011CFA0(fighterObj);
 }
 
 void ftPeach_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
@@ -95,4 +95,13 @@ void ftPeach_OnKnockbackEnter(HSD_GObj* fighterObj) {
 
 void ftPeach_OnKnockbackExit(HSD_GObj* fighterObj) {
     Fighter_OnKnockbackExit(fighterObj, 1);
+}
+
+s32 ftPeach_8011BA20(Fighter* fp) {
+    s32 result = 1;
+
+    if (!(fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax) && !(fp->input.x65C & 0xC00))
+        result = 0;
+
+    return result;
 }
