@@ -97,8 +97,6 @@ Vec *lbvector_CrossprodNormalized(Vec *a, Vec *b, Vec *result)
     return result;
 }
 
-extern float func_80022D1C(float); // acos
-
 // 8000D620 - returns the angle between a and b
 float lbvector_Angle(Vec *a, Vec *b)
 {
@@ -310,10 +308,6 @@ Vec *func_8000DE38(Mtx m, Vec *v, float c)
 
     return v;
 }
-
-extern float func_80022DBC(float); // asin
-extern float func_someCalcAngle_80022C30(float, float); // atan2
-
 
 // 8000DF0C - computes euler angles phi_x,phi_y,phi_z that rotate the standard basis (e1,e2,e3) onto the orthonormal basis (b,c,a)
 // with 3 rotations about the x,y,z axes in that order.
