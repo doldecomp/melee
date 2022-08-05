@@ -33,7 +33,13 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/code_80019230.s.o		\
 	$(BUILD_DIR)/asm/melee/lb/code_80019880.s.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.s.o				\
-	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_1.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_2.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_3.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_4.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_5.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_6.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_7.s.o		\
 	                                                \
 	$(BUILD_DIR)/asm/melee/cm/camera.s.o 				\
 	$(BUILD_DIR)/src/melee/cm/cmsnap.c.o 				\
