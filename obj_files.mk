@@ -39,7 +39,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_4.s.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o		\
 	$(BUILD_DIR)/asm/melee/lb/lbrefract.s.o		\
-	$(BUILD_DIR)/asm/melee/lb/code_8001E2F8_7.s.o		\
+	$(BUILD_DIR)/asm/melee/lb/lbaudio_ax.s.o		\
 	                                                \
 	$(BUILD_DIR)/asm/melee/cm/camera.s.o 				\
 	$(BUILD_DIR)/src/melee/cm/cmsnap.c.o 				\
