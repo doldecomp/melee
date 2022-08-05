@@ -94,6 +94,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialN.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialHi.c.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialLw.c.o 		\
+	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialS.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftLink/ftlink.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftlink.s.o 		\

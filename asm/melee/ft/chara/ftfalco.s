@@ -55,50 +55,50 @@ as_table_falco:
     .4byte 0x0000012D
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte func_800EA004
-    .4byte func_800EA07C
-    .4byte func_800EA084
-    .4byte func_800EA128
+    .4byte ftFox_SpecialSStart_Anim
+    .4byte ftFox_SpecialSStart_IASA
+    .4byte ftFox_SpecialSStart_Phys
+    .4byte ftFox_SpecialSStart_Coll
     .4byte func_800761C8
     .4byte 0x0000012E
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte func_800EA294
-    .4byte func_800EA3F4
-    .4byte func_800EA47C
-    .4byte func_800EA5EC
+    .4byte ftFox_SpecialS_Anim
+    .4byte ftFox_SpecialS_IASA
+    .4byte ftFox_SpecialS_Phys
+    .4byte ftFox_SpecialS_Coll
     .4byte func_800761C8
     .4byte 0x0000012F
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte func_800EA908
-    .4byte func_800EA9A4
-    .4byte func_800EA9AC
-    .4byte func_800EAB90
+    .4byte ftFox_SpecialSEnd_Anim
+    .4byte ftFox_SpecialSEnd_IASA
+    .4byte ftFox_SpecialSEnd_Phys
+    .4byte ftFox_SpecialSEnd_Coll
     .4byte func_800761C8
     .4byte 0x00000130
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte func_800EA040
-    .4byte func_800EA080
-    .4byte func_800EA0BC
-    .4byte func_800EA164
+    .4byte ftFox_SpecialAirSStart_Anim
+    .4byte ftFox_SpecialAirSStart_IASA
+    .4byte ftFox_SpecialAirSStart_Phys
+    .4byte ftFox_SpecialAirSStart_Coll
     .4byte func_800761C8
     .4byte 0x00000131
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte func_800EA344
-    .4byte func_800EA438
-    .4byte func_800EA534
-    .4byte func_800EA628
+    .4byte ftFox_SpecialAirS_Anim
+    .4byte ftFox_SpecialAirS_IASA
+    .4byte ftFox_SpecialAirS_Phys
+    .4byte ftFox_SpecialAirS_Coll
     .4byte func_800761C8
     .4byte 0x00000132
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte func_800EA944
-    .4byte func_800EA9A8
-    .4byte func_800EAA8C
-    .4byte func_800EABCC
+    .4byte ftFox_SpecialAirSEnd_Anim
+    .4byte ftFox_SpecialAirSEnd_IASA
+    .4byte ftFox_SpecialAirSEnd_Phys
+    .4byte ftFox_SpecialAirSEnd_Coll
     .4byte func_800761C8
     .4byte 0x00000133
     .4byte 0x00340213
@@ -159,82 +159,82 @@ as_table_falco:
     .4byte 0x00000139
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E8694
-    .4byte func_800E87AC
-    .4byte func_800E8864
-    .4byte func_800E88E4
+    .4byte ftFox_SpecialLwStart_Anim
+    .4byte ftFox_SpecialLwStart_IASA
+    .4byte ftFox_SpecialLwStart_Phys
+    .4byte ftFox_SpecialLwStart_Coll
     .4byte func_800761C8
     .4byte 0x0000013A
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E8A24
-    .4byte func_800E8B14
-    .4byte func_800E8C34
-    .4byte func_800E8CDC
+    .4byte ftFox_SpecialLwLoop_Anim
+    .4byte ftFox_SpecialLwLoop_IASA
+    .4byte ftFox_SpecialLwLoop_Phys
+    .4byte ftFox_SpecialLwLoop_Coll
     .4byte func_800761C8
     .4byte 0x0000013B
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E965C
-    .4byte func_800E9844
-    .4byte func_800E984C
-    .4byte func_800E98F4
+    .4byte ftFox_SpecialLwHit_Anim
+    .4byte ftFox_SpecialLwHit_IASA
+    .4byte ftFox_SpecialLwHit_Phys
+    .4byte ftFox_SpecialLwHit_Coll
     .4byte func_800761C8
     .4byte 0x0000013C
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E9B40
-    .4byte func_800E9BC8
-    .4byte func_800E9BD0
-    .4byte func_800E9C50
+    .4byte ftFox_SpecialLwEnd_Anim
+    .4byte ftFox_SpecialLwEnd_IASA
+    .4byte ftFox_SpecialLwEnd_Phys
+    .4byte ftFox_SpecialLwEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000013A
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E8FDC
-    .4byte func_800E91FC
-    .4byte func_800E9204
-    .4byte func_800E92AC
+    .4byte ftFox_SpecialLwTurn_Anim
+    .4byte ftFox_SpecialLwTurn_IASA
+    .4byte ftFox_SpecialLwTurn_Phys
+    .4byte ftFox_SpecialLwTurn_Coll
     .4byte func_800761C8
     .4byte 0x0000013D
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E8720
-    .4byte func_800E87D0
-    .4byte func_800E8884
-    .4byte func_800E8920
+    .4byte ftFox_SpecialAirLwStart_Anim
+    .4byte ftFox_SpecialAirLwStart_IASA
+    .4byte ftFox_SpecialAirLwStart_Phys
+    .4byte ftFox_SpecialAirLwStart_Coll
     .4byte func_800761C8
     .4byte 0x0000013E
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E8A9C
-    .4byte func_800E8B64
-    .4byte func_800E8C68
-    .4byte func_800E8D18
+    .4byte ftFox_SpecialAirLwLoop_Anim
+    .4byte ftFox_SpecialAirLwLoop_IASA
+    .4byte ftFox_SpecialAirLwLoop_Phys
+    .4byte ftFox_SpecialAirLwLoop_Coll
     .4byte func_800761C8
     .4byte 0x0000013F
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E97B4
-    .4byte func_800E9848
-    .4byte func_800E9880
-    .4byte func_800E9930
+    .4byte ftFox_SpecialAirLwHit_Anim
+    .4byte ftFox_SpecialAirLwHit_IASA
+    .4byte ftFox_SpecialAirLwHit_Phys
+    .4byte ftFox_SpecialAirLwHit_Coll
     .4byte func_800761C8
     .4byte 0x00000140
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E9B84
-    .4byte func_800E9BCC
-    .4byte func_800E9BF0
-    .4byte func_800E9C8C
+    .4byte ftFox_SpecialAirLwEnd_Anim
+    .4byte ftFox_SpecialAirLwEnd_IASA
+    .4byte ftFox_SpecialAirLwEnd_Phys
+    .4byte ftFox_SpecialAirLwEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000013E
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E90EC
-    .4byte func_800E9200
-    .4byte func_800E9238
-    .4byte func_800E92E8
+    .4byte ftFox_SpecialAirLwTurn_Anim
+    .4byte ftFox_SpecialAirLwTurn_IASA
+    .4byte ftFox_SpecialAirLwTurn_Phys
+    .4byte ftFox_SpecialAirLwTurn_Coll
     .4byte func_800761C8
     .4byte 0x00000141
     .4byte 0x00000072
