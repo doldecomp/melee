@@ -49,7 +49,7 @@ BOOL ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj)
     return FALSE;
 }
 
-// 0x800E5DE4 - shoutouts to Olifré for figuring this one out!
+// 0x800E5DE4 - shoutouts to Olifrï¿½ for figuring this one out!
 // https://decomp.me/scratch/aatYF // Get ASID for Fox/Falco moves that require the Blaster item
 s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj)
 {
@@ -800,11 +800,11 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                     case ASID_THROWHI:
                     case ASID_THROWLW:
 
-                        func_8029C6CC(func_someCalcAngle_80022C30(sp50.y - sp44.y, sp50.x - sp44.x), foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp50, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
+                        func_8029C6CC(atan2f(sp50.y - sp44.y, sp50.x - sp44.x), foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp50, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
 
                     default:
-                        func_8029C6A4(func_someCalcAngle_80022C30(sp50.y - sp44.y, sp50.x - sp44.x), foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp50, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
+                        func_8029C6A4(atan2f(sp50.y - sp44.y, sp50.x - sp44.x), foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp50, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
                     }
                     func_802AE1D0(fp->sa.fox.x222C_blasterGObj);

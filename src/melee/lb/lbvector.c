@@ -318,20 +318,20 @@ Vec *lbvector_EulerAnglesFromONB(Vec *result_angles, Vec *a, Vec *b, Vec *c)
         if (b->z == -1.0f)
         {
             result_angles->y = 1.5707963705062866f; // pi/2
-            result_angles->x = func_someCalcAngle_80022C30(c->x, c->y); // atan2
+            result_angles->x = atan2f(c->x, c->y);
         }
         else
         {
             result_angles->y = -1.5707963705062866f; // -pi/2
-            result_angles->x = func_someCalcAngle_80022C30(-c->x, c->y); // atan2
+            result_angles->x = atan2f(-c->x, c->y);
         }
         result_angles->z = 0.0f;
     }
     else
     {
         result_angles->y = func_80022DBC(-b->z); // asin
-        result_angles->x = func_someCalcAngle_80022C30(c->z, a->z); // atan2
-        result_angles->z = func_someCalcAngle_80022C30(b->y, b->x); // atan2
+        result_angles->x = atan2f(c->z, a->z);
+        result_angles->z = atan2f(b->y, b->x);
     }
     return result_angles;
 }
