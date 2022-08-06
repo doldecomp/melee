@@ -454,7 +454,7 @@ lbl_8033C3B4:
 /* 8033C3C0 00338FA0  7C 08 03 A6 */	mtlr r0
 /* 8033C3C4 00338FA4  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/X6IIY // match
+# https://decomp.me/scratch/X6IIY // 0 (100%)
 .global GXClearVtxDesc
 GXClearVtxDesc:
 /* 8033C3C8 00338FA8  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
@@ -794,7 +794,7 @@ lbl_8033C858:
 /* 8033C890 00339470  90 83 00 98 */	stw r4, 0x98(r3)
 /* 8033C894 00339474  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/wVMVF // match
+# https://decomp.me/scratch/wVMVF // 0 (100%)
 .global GXInvalidateVtxCache
 GXInvalidateVtxCache:
 /* 8033C898 00339478  38 00 00 48 */	li r0, 0x48
@@ -802,6 +802,7 @@ GXInvalidateVtxCache:
 /* 8033C8A0 00339480  98 03 80 00 */	stb r0, 0xCC008000@l(r3)
 /* 8033C8A4 00339484  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/o8jpO // 3315 (81.58%)
 .global GXSetTexCoordGen2
 GXSetTexCoordGen2:
 /* 8033C8A8 00339488  7C 08 02 A6 */	mflr r0
@@ -1017,6 +1018,7 @@ lbl_8033CB60:
 /* 8033CB70 00339750  7C 08 03 A6 */	mtlr r0
 /* 8033CB74 00339754  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/tvWrG // 285 (84.17%)
 .global GXSetNumTexGens
 GXSetNumTexGens:
 /* 8033CB78 00339758  80 8D A5 08 */	lwz r4, lbl_804D5BA8@sda21(r13)

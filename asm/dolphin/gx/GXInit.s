@@ -49,6 +49,7 @@ lbl_8033A76C:
 lbl_8033A77C:
 /* 8033A77C 0033735C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/aG9QZ // 49600 (0%)
 .global GXInit
 GXInit:
 /* 8033A780 00337360  7C 08 02 A6 */	mflr r0

@@ -48,8 +48,17 @@ typedef struct
     s32 x10;
     s32 x14;
     s32 x18;
-    u8 x1C_pad[0x100 - 0x1C];
-    s32 x100_data[(0x418 - 0x100) / 4];
+    u8 x1C_pad[0x7C - 0x1C];
+    s32 x7C;
+    s32 x80;
+    s32 x84;
+    u8 x88_pad[0xB4 - 0x88];
+    s32 xB4;
+    s32 xB8;
+    u8 xBC[0x100 - 0xBC];
+    s32 x100_data[(0x1AC - 0x100) / 4];
+    u8 x1AC_pad[0x1B0 - 0x1AC];
+    s32 x1B0_data[(0x418 - 0x1B0) / 4];
     u8 x418_pad[0x41C - 0x418];
     s8 x41C;
     s8 x41D;
@@ -73,6 +82,22 @@ typedef struct
     s16 x6;
     s16 x8;
 } __GXFifoUnknown;
+
+extern volatile union
+{
+
+    char c;
+    short s;
+    unsigned short us;
+    int i;
+    void *p;
+    float f;
+
+} WGPIPE
+#ifndef M2C_CONTEXT
+    : 0xCC008000
+#endif
+    ;
 
 extern __GXFifoLinkDataContainer lbl_804D5BA8;
 extern __GXFifoLinkObj lbl_804A76C8;
