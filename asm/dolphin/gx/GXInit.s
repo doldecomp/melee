@@ -569,6 +569,7 @@ lbl_8033AE6C:
 /* 8033AF38 00337B18  7C 08 03 A6 */	mtlr r0
 /* 8033AF3C 00337B1C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/r2ALq // errors
 func_8033AF40:
 /* 8033AF40 00337B20  7C 08 02 A6 */	mflr r0
 /* 8033AF44 00337B24  90 01 00 04 */	stw r0, 4(r1)

@@ -454,6 +454,7 @@ lbl_8033C3B4:
 /* 8033C3C0 00338FA0  7C 08 03 A6 */	mtlr r0
 /* 8033C3C4 00338FA4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/X6IIY // match
 .global GXClearVtxDesc
 GXClearVtxDesc:
 /* 8033C3C8 00338FA8  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
@@ -793,6 +794,7 @@ lbl_8033C858:
 /* 8033C890 00339470  90 83 00 98 */	stw r4, 0x98(r3)
 /* 8033C894 00339474  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/wVMVF // match
 .global GXInvalidateVtxCache
 GXInvalidateVtxCache:
 /* 8033C898 00339478  38 00 00 48 */	li r0, 0x48
