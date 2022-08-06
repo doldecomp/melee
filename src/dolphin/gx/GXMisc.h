@@ -1,6 +1,9 @@
 #ifndef _GXMISC_H_
 #define _GXMISC_H_
 
-void GXPixModeSync();
+#include <dolphin/gx/GXFifo.h>
+#include <dolphin/os/OSContext.h>
 
-#endif
+void GXPixModeSync();
+void __GXPEInit(); 
+

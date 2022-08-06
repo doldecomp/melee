@@ -113,7 +113,7 @@ void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm)
     return FrameBuffer;
 }
 
-void* HSD_AllocateFIFO(u32 size)
+void* HSD_AllocateFifo(u32 size)
 {
     void* fifo;
     u32 arena_lo;
