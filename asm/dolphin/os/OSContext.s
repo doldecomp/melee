@@ -202,7 +202,7 @@ OSGetCurrentContext:
 /* 803450EC 00341CCC  80 63 00 D4 */	lwz r3, 0x800000D4@l(r3)
 /* 803450F0 00341CD0  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/iV0yr
+# https://decomp.me/scratch/bNK5a // 0 (100%)
 .global OSSaveContext
 OSSaveContext:
 /* 803450F4 00341CD4  BD A3 00 34 */	stmw r13, 0x34(r3)
