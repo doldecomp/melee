@@ -38,12 +38,20 @@ typedef struct ftFoxSpecialLw {
 
 } ftFoxSpecialLw;
 
+typedef struct ftFoxAppealS {
+
+    BOOL facingDir; // 0x2340 - Fox/Falco's facing direction as a boolean variable, used to load indexed ASIDs from the AppealS struct
+    s32 animCount; // 0x2344 - Incremented every time one of the three stages of the AppealS animation is completed
+
+} ftFoxAppealS;
+
 typedef union ftFoxStateVars {
 
     ftFoxSpecialN specialN;
     ftFoxSpecialS specialS;
     ftFoxSpecialHi specialHi;
     ftFoxSpecialLw specialLw;
+    ftFoxAppealS appealS;
 
 } ftFoxStateVars;
 
