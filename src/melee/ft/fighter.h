@@ -18,6 +18,7 @@
 #include "melee/lb/lbrefract.h"
 #include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
+#include <melee/ft/ftstatevars.h>
 
 BOOL func_80081298(HSD_GObj* gobj);
 
@@ -1767,6 +1768,9 @@ typedef struct _Fighter {
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
     union {
+        union {
+            ftFoxStateVars foxVars[0]; // 0x2340
+        };
     /* 0x2340 */ s32 x2340_stateVar1;
     /* 0x2340 */ u32 x2340_stateVar1_u32;
     /* 0x2340 */ f32 x2340_f32;

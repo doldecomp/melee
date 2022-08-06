@@ -305,16 +305,17 @@ inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
 
     fp = fighter_gobj->user_data;
 
-    fp->x2344_foxSpecialS[3] = fp->x2344_foxSpecialS[2];
-    fp->x2344_foxSpecialS[2] = fp->x2344_foxSpecialS[1];
-    fp->x2344_foxSpecialS[1] = fp->x2344_foxSpecialS[0];
+    fp->foxVars[0].specialS.ghostEffectPos[3] = fp->foxVars[0].specialS.ghostEffectPos[2];
+    fp->foxVars[0].specialS.ghostEffectPos[2] = fp->foxVars[0].specialS.ghostEffectPos[1];
+    fp->foxVars[0].specialS.ghostEffectPos[1] = fp->foxVars[0].specialS.ghostEffectPos[0];
+
     fp->x2344_foxSpecialS[0] = fp->xB0_pos;
 
-    fp->x2380_f32 = fp->x237C_f32;
-    fp->x237C_f32 = fp->x2378_f32;
-    fp->x2378_f32 = fp->x2374_f32;
+    fp->foxVars[0].specialS.blendFrames[3] = fp->foxVars[0].specialS.blendFrames[2];
+    fp->foxVars[0].specialS.blendFrames[2] = fp->foxVars[0].specialS.blendFrames[1];
+    fp->foxVars[0].specialS.blendFrames[1] = fp->foxVars[0].specialS.blendFrames[0];
 
-    fp->x2374_f32 = func_80075E78(fp, 0);
+    fp->foxVars[0].specialS.blendFrames[0] = func_80075E78(fp, 0);
 }
 
 // 0x800EA47C
@@ -396,16 +397,17 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     f32 var;
     Fighter* fp = getFighter(fighter_gobj);
 
-    fp->x2344_foxSpecialS[3] = fp->xB0_pos;
-    fp->x2344_foxSpecialS[2] = fp->xB0_pos;
-    fp->x2344_foxSpecialS[1] = fp->xB0_pos;
-    fp->x2344_foxSpecialS[0] = fp->xB0_pos;
+    fp->foxVars[0].specialS.ghostEffectPos[3] = fp->xB0_pos;
+    fp->foxVars[0].specialS.ghostEffectPos[2] = fp->xB0_pos;
+    fp->foxVars[0].specialS.ghostEffectPos[1] = fp->xB0_pos;
+    fp->foxVars[0].specialS.ghostEffectPos[0] = fp->xB0_pos;
 
     var = func_80075E78(fp, 0);
-    fp->x2380_f32 = var;
-    fp->x237C_f32 = var;
-    fp->x2378_f32 = var;
-    fp->x2374_f32 = var;
+
+    fp->foxVars[0].specialS.blendFrames[3] = var;
+    fp->foxVars[0].specialS.blendFrames[2] = var;
+    fp->foxVars[0].specialS.blendFrames[1] = var;
+    fp->foxVars[0].specialS.blendFrames[0] = var;
 
     fp->cb.x21BC_callback_Accessory4 = &ftFox_SpecialS_CreateGFX;
 }
