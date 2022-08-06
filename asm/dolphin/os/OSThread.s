@@ -1,4 +1,5 @@
 .include "macros.inc"
+.include "dolphin/os/OSThread.inc"
 
 .section .text  # 0x80342E94 - 0x803B7240 
 
@@ -89,6 +90,7 @@ OSInitThreadQueue:
 /* 8034AD34 00347914  90 03 00 00 */	stw r0, 0(r3)
 /* 8034AD38 00347918  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/EPwIs
 .global OSGetCurrentThread
 OSGetCurrentThread:
 /* 8034AD3C 0034791C  3C 60 80 00 */	lis r3, 0x800000E4@ha
@@ -1134,6 +1136,7 @@ lbl_8034BAE0:
 /* 8034BAF8 003486D8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034BAFC 003486DC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/oYS6V
 .global OSWakeupThread
 OSWakeupThread:
 /* 8034BB00 003486E0  7C 08 02 A6 */	mflr r0
@@ -1779,87 +1782,3 @@ lbl_8034C3C8:
 /* 8034C3E4 00348FC4  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034C3E8 00348FC8  7C 08 03 A6 */	mtlr r0
 /* 8034C3EC 00348FCC  4E 80 00 20 */	blr 
-
-
-.section .data
-    .balign 8
-.global lbl_80402420
-lbl_80402420:
-    .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head != NULL && RunQueue[prio].tail != NULL in %d\n"
-    .balign 4
-    .asciz "OSThread.c"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head == NULL && RunQueue[prio].tail == NULL in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(&RunQueue[prio]) in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed __OSActiveThreadQueue.head == NULL || __OSActiveThreadQueue.head->linkActive.prev == NULL in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed __OSActiveThreadQueue.tail == NULL || __OSActiveThreadQueue.tail->linkActive.next == NULL in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed thread->linkActive.next == NULL || thread == thread->linkActive.next->linkActive.prev in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed thread->linkActive.prev == NULL || thread == thread->linkActive.prev->linkActive.next in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed *(thread->stackEnd) == OS_THREAD_STACK_MAGIC in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed OS_PRIORITY_MIN <= thread->priority && thread->priority <= OS_PRIORITY_MAX+1 in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed 0 <= thread->suspend in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(&thread->queueJoin) in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed thread->queue == &RunQueue[thread->priority] in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed IsMember(&RunQueue[thread->priority], thread) in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed thread->priority == __OSGetEffectivePriority(thread) in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed !IsSuspended(thread->suspend) in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed thread->queue == NULL in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed thread->queue != NULL in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(thread->queue) in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed IsMember(thread->queue, thread) in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed thread->priority == 32 in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed !__OSCheckDeadLock(thread) in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed thread->queueMutex.head == NULL && thread->queueMutex.tail == NULL in %d\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed. unkown thread state (%d) of thread %p\n"
-    .balign 4
-    .asciz "OSCheckActiveThreads: Failed __OSCheckMutexes(thread) in %d\n"
-    .balign 4
-
-
-.section .bss, "wa"
-    .balign 8
-.global lbl_804A7FB8
-lbl_804A7FB8:
-	.skip 0x9E8
-
-
-.section .sdata
-    .balign 8
-.global lbl_804D5C28
-lbl_804D5C28:
-    .4byte 0x00000000
-    .4byte 0x00000000
-
-
-.section .sbss
-    .balign 8
-.global lbl_804D73D8
-lbl_804D73D8:
-	.skip 0x4
-.global lbl_804D73DC
-lbl_804D73DC:
-	.skip 0x4
-.global lbl_804D73E0
-lbl_804D73E0:
-	.skip 0x8
