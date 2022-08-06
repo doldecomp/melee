@@ -14,5 +14,6 @@
 void PPCHalt(void);
 s32 PPCMfhid2();
 void PPCMthid2(s32);
+void PPCMtwpar(u32, u32);
 
 #endif

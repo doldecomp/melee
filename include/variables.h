@@ -2694,7 +2694,6 @@ extern struct _ftCommonData* p_ftCommonData;
 // extern ? lbl_804D72E8;
 // extern ? lbl_804D72F0;
 // extern ? lbl_804D72F4;
-// extern ? lbl_804D72F8;
 // extern ? lbl_804D72FC;
 // extern ? lbl_804D7300;
 // extern ? lbl_804D7304;

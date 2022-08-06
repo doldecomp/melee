@@ -1,4 +1,5 @@
 .include "macros.inc"
+.include "dolphin/gx/GXMisc.inc"
 
 .section .text  # 0x80005940 - 0x803B7240
 
@@ -115,6 +116,7 @@ GXPixModeSync:
 /* 8033CD38 00339918  B0 04 00 02 */	sth r0, 2(r4)
 /* 8033CD3C 0033991C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/lrkWr // 330 (34%)
 .global GXPokeAlphaMode
 GXPokeAlphaMode:
 /* 8033CD40 00339920  80 AD BC 58 */	lwz r5, lbl_804D72F8@sda21(r13)
@@ -123,6 +125,7 @@ GXPokeAlphaMode:
 /* 8033CD4C 0033992C  B0 05 00 06 */	sth r0, 6(r5)
 /* 8033CD50 00339930  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/G7Zqa // match
 .global GXPokeAlphaRead
 GXPokeAlphaRead:
 /* 8033CD54 00339934  54 60 07 B8 */	rlwinm r0, r3, 0, 0x1e, 0x1c
@@ -131,6 +134,7 @@ GXPokeAlphaRead:
 /* 8033CD60 00339940  B0 03 00 08 */	sth r0, 8(r3)
 /* 8033CD64 00339944  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/rzht5 // match
 .global GXPokeAlphaUpdate
 GXPokeAlphaUpdate:
 /* 8033CD68 00339948  80 8D BC 58 */	lwz r4, lbl_804D72F8@sda21(r13)
@@ -141,6 +145,7 @@ GXPokeAlphaUpdate:
 /* 8033CD7C 0033995C  B0 04 00 00 */	sth r0, 0(r4)
 /* 8033CD80 00339960  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/uLvix // 3115 (8.38%)
 .global GXPokeBlendMode
 GXPokeBlendMode:
 /* 8033CD84 00339964  80 ED BC 58 */	lwz r7, lbl_804D72F8@sda21(r13)
@@ -179,6 +184,7 @@ lbl_8033CDA8:
 /* 8033CE04 003399E4  B0 0A 00 00 */	sth r0, 0(r10)
 /* 8033CE08 003399E8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/G33Fb // match
 .global GXPokeColorUpdate
 GXPokeColorUpdate:
 /* 8033CE0C 003399EC  80 8D BC 58 */	lwz r4, lbl_804D72F8@sda21(r13)
@@ -189,6 +195,7 @@ GXPokeColorUpdate:
 /* 8033CE20 00339A00  B0 04 00 00 */	sth r0, 0(r4)
 /* 8033CE24 00339A04  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/FHQSt // 220 (56%)
 .global GXPokeDstAlpha
 GXPokeDstAlpha:
 /* 8033CE28 00339A08  80 AD BC 58 */	lwz r5, lbl_804D72F8@sda21(r13)
@@ -197,6 +204,7 @@ GXPokeDstAlpha:
 /* 8033CE34 00339A14  B0 05 00 04 */	sth r0, 4(r5)
 /* 8033CE38 00339A18  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/adZRo // match
 .global GXPokeDither
 GXPokeDither:
 /* 8033CE3C 00339A1C  80 8D BC 58 */	lwz r4, lbl_804D72F8@sda21(r13)
@@ -348,19 +356,3 @@ __GXPEInit:
 /* 8033D044 00339C24  38 21 00 08 */	addi r1, r1, 8
 /* 8033D048 00339C28  7C 08 03 A6 */	mtlr r0
 /* 8033D04C 00339C2C  4E 80 00 20 */	blr 
-
-
-.section .sbss
-    .balign 8
-.global lbl_804D7320
-lbl_804D7320:
-	.skip 0x4
-.global lbl_804D7324
-lbl_804D7324:
-	.skip 0x4
-.global lbl_804D7328
-lbl_804D7328:
-	.skip 0x4
-.global lbl_804D732C
-lbl_804D732C:
-	.skip 0xC
