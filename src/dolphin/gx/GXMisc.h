@@ -7,3 +7,4 @@
 void GXPixModeSync();
 void __GXPEInit(); 
 
+#endif
