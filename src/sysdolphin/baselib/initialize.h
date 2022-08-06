@@ -32,7 +32,7 @@ void HSD_InitComponent(void);
 void HSD_GXSetFifoObj(GXFifoObj* fifo) ;
 static void HSD_DVDInit(void);
 void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm);
-void* HSD_AllocateFIFO(u32 size);
+void* HSD_AllocateFifo(u32 size);
 static void HSD_GXInit(void);
 static void HSD_OSInit(void);
 OSHeapHandle HSD_GetHeap(void);
