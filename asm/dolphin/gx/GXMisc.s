@@ -277,6 +277,7 @@ GXSetDrawDoneCallback:
 /* 8033CF44 00339B24  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033CF48 00339B28  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/PoUPM
 GXFinishInterruptHandler:
 /* 8033CF4C 00339B2C  7C 08 02 A6 */	mflr r0
 /* 8033CF50 00339B30  38 60 00 01 */	li r3, 1

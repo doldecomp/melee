@@ -136,7 +136,7 @@ void main(void)
     HSD_SetInitParameter(HSD_INIT_HEAP_MAX_NUM, 4);
     func_80228C4C();
     HSD_AllocateXFB(2, &lbl_80401168);
-    HSD_GXSetFifoObj(GXInit(HSD_AllocateFIFO(0x40000), 0x40000));
+    HSD_GXSetFifoObj(GXInit(HSD_AllocateFifo(0x40000), 0x40000));
     HSD_InitComponent();
     GXSetMisc(1, 8);
     *seed_ptr = OSGetTick();
