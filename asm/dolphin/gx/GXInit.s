@@ -2,7 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global __GXDefaultTexRegionCallback
 __GXDefaultTexRegionCallback:
 /* 8033A6E0 003372C0  7C 08 02 A6 */	mflr r0
 /* 8033A6E4 003372C4  90 01 00 04 */	stw r0, 4(r1)
@@ -570,7 +569,6 @@ lbl_8033AE6C:
 /* 8033AF38 00337B18  7C 08 03 A6 */	mtlr r0
 /* 8033AF3C 00337B1C  4E 80 00 20 */	blr 
 
-.global func_8033AF40
 func_8033AF40:
 /* 8033AF40 00337B20  7C 08 02 A6 */	mflr r0
 /* 8033AF44 00337B24  90 01 00 04 */	stw r0, 4(r1)

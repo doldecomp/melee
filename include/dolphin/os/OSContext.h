@@ -26,5 +26,6 @@ void OSDumpContext(OSContext *context);
 void OSLoadContext(OSContext *context);
 void OSClearContext(OSContext *context);
 void OSSetCurrentContext(OSContext *context);
+s32 OSSaveContext(OSContext* context);
 
 #endif

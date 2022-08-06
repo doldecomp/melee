@@ -1876,7 +1876,6 @@ extern const s32 lbl_803D3984[];
 // extern ? lbl_804A7EF8;
 // extern ? lbl_804A7F18;
 // extern ? lbl_804A7F58;
-// extern ? lbl_804A7FB8;
 // extern ? lbl_804A89A0;
 // extern ? lbl_804A89B0;
 // extern ? lbl_804A89F0;
