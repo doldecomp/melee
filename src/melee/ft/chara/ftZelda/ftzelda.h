@@ -43,7 +43,7 @@ typedef struct _ftZeldaAttributes {
     u8 data_filler_1[0x18];
 } ftZeldaAttributes;
 
-// ftzelda
+// ftzelda 1
 void ftZelda_OnDeath(HSD_GObj* fighterObj);
 void ftZelda_OnLoad(HSD_GObj* fighterObj);
 void ftZelda_801393AC(HSD_GObj* fighterObj);
@@ -55,6 +55,8 @@ void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftZelda_801395C8(HSD_GObj* fighterObj);
 void ftZelda_OnKnockbackEnter(HSD_GObj* fighterObj);
 void ftZelda_OnKnockbackExit(HSD_GObj* fighterObj);
+
+// ftzelda 2
 void ftZelda_801396AC(HSD_GObj* fighterObj);
 void ftZelda_801396E0(HSD_GObj* fighterObj);
 void ftZelda_8013979C(HSD_GObj* fighterObj);
@@ -94,7 +96,7 @@ void ftZelda_8013A648(HSD_GObj* fighterObj);
 void ftZelda_8013A6A8(HSD_GObj* fighterObj);
 void ftZelda_8013A764(HSD_GObj* fighterObj);
 
-// ftzelda 2
+// ftzelda 3
 void ftZelda_8013A830(HSD_GObj* fighterObj);
 void ftZelda_8013A8AC(HSD_GObj* fighterObj);
 void ftZelda_SpecialN_StartAction(HSD_GObj* fighterObj);
@@ -111,7 +113,7 @@ void ftZelda_8013AC88(HSD_GObj* fighterObj);
 void ftZelda_8013AD1C(HSD_GObj* fighterObj);
 void ftZelda_8013ADB0(HSD_GObj* fighterObj);
 
-// ftzelda 3
+// ftzelda 4
 void ftZelda_8013ADB4(HSD_GObj* fighterObj);
 void ftZelda_8013AE30(HSD_GObj* fighterObj);
 void ftZelda_8013AEAC(HSD_GObj* fighterObj);
@@ -143,7 +145,7 @@ s32 ftZelda_8013B574(HSD_GObj* fighterObj);
 void ftZelda_8013B5C4(HSD_GObj* fighterObj);
 void ftZelda_8013B5EC(HSD_GObj* fighterObj);
 
-// ftzelda 4
+// ftzelda 5
 void ftZelda_SpecialS_StartAction(HSD_GObj* fighterObj);
 void ftZelda_SpecialAirS_StartAction(HSD_GObj* fighterObj);
 void ftZelda_8013B780(HSD_GObj* fighterObj);

@@ -1,5 +1,8 @@
 #include "ftzelda.h"
 
+#define HALF_PI 1.5707963705062866f
+#define DEG_TO_RAD 0.017453292f
+
 // 801396AC - 801396E0 (0x34 bytes)
 // https://decomp.me/scratch/UHxFc
 void ftZelda_801396AC(HSD_GObj* fighterObj) {
@@ -49,9 +52,9 @@ void ftZelda_8013979C(HSD_GObj* fighterObj) {
 }
 
 // 80139834 - 801398E8 (0xB4 bytes)
-// https://decomp.me/scratch/TOq04 (with inline)
+// https://decomp.me/scratch/KUdnf (with inline)
 // https://decomp.me/scratch/52XE3 (as single function)
-void ftZelda_SpecialHi_StartAction_Inline(Fighter* fighter) {
+void ftZelda_SpecialHi_StartAction_Helper(Fighter* fighter) {
     HSD_JObj* jObj;
     s32 boneIndex;
     s32 unused[1];
@@ -78,7 +81,7 @@ void ftZelda_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     fighter->x2200_ftcmd_var0 = 0;
     fighter->x234C_stateVar4 = 0;
 
-    ftZelda_SpecialHi_StartAction_Inline(fighter);
+    ftZelda_SpecialHi_StartAction_Helper(fighter);
 
     fighter->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
@@ -264,6 +267,7 @@ void ftZelda_80139CC0(HSD_GObj* fighterObj) {
     }
 }
 
+
 // 80139D60 - 80139F6C (0x20C bytes)
 // https://decomp.me/scratch/LfvOU (with inline)
 // https://decomp.me/scratch/OJ62l (single function)
@@ -271,10 +275,10 @@ s32 ftZelda_80139D60_Inline(HSD_GObj* fighterObj) {
     s32 var_r0;
     Fighter* fighter2;
     ftZeldaAttributes* attributes2;
-    
+
     fighter2 = getFighter(fighterObj);
     attributes2 = fighter2->x2D4_specialAttributes;
-    
+
     if ((f32) (fighter2->x234C_stateVar4 ^ 0x80000000) >= attributes2->x4C) {
         var_r0 = 1;
     } else if (func_8009A134(fighterObj) != 0) {
@@ -318,19 +322,19 @@ void ftZelda_80139D60(HSD_GObj* fighterObj) {
     if (func_80081298(fighterObj) == 0) {
         if ((collData->x134_envFlags & 0x6000) != 0) {
             f32 angle1 = lbvector_AngleXY(&collData->x190_vec, &fighter->x80_self_vel);
-            if (angle1 > (0.01745329238474369f * (90.0f + attributes->x60))) {
+            if (angle1 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
         }
         if ((collData->x134_envFlags & 0x3F) != 0) {
             f32 angle2 = lbvector_AngleXY(&collData->x168_vec, &fighter->x80_self_vel);
-            if (angle2 > (0.01745329238474369f * (90.0f + attributes->x60))) {
+            if (angle2 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
         }
         if ((collData->x134_envFlags & 0xFC0) != 0) {
             f32 angle3 = lbvector_AngleXY(&collData->x17C_vec, &fighter->x80_self_vel);
-            if (angle3 > (0.01745329238474369f * (90.0f + attributes->x60))) {
+            if (angle3 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
         }
@@ -422,7 +426,7 @@ void ftZelda_8013A058(HSD_GObj* fighterObj) {
         inputVector.x = fighter->input.x620_lstick_x;
         inputVector.y = fighter->input.x624_lstick_y;
         inputVector.z = 0;
-        if (!(lbvector_AngleXY(groundVector, (Point3d* ) &inputVector.x) < 1.5707963705062866f)) {
+        if (!(lbvector_AngleXY(groundVector, (Point3d* ) &inputVector.x) < HALF_PI)) {
             if (func_8009A134(fighterObj) == 0) {
                 func_8007D9FC(fighter);
                 
@@ -513,7 +517,7 @@ void ftZelda_8013A244(HSD_GObj* fighterObj) {
         fighter->x2348_stateVar3_f32 = fighter->input.x624_lstick_y;
     } else {
         func_8007DA24(fighter);
-        var_f30 = 1.5707963705062866f;
+        var_f30 = HALF_PI;
         fighter->x2344_f32 = 0;
         var_f31 = fighter->x2348_stateVar3_f32 = 1.0;
     }
