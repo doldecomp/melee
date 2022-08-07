@@ -38,6 +38,9 @@ typedef struct
     s32 unk1C;
 } __GXFifoObj;
 
+// signature unknown
+typedef void (*GXTexRegionCallback)(void);
+
 typedef struct
 {
     s16 x0;
@@ -56,9 +59,11 @@ typedef struct
     s32 xB4;
     s32 xB8;
     u8 xBC[0x100 - 0xBC];
-    s32 x100_data[(0x1AC - 0x100) / 4];
+    s32 x100_data[(0x130 - 0x100) / 4];
+    s32 x130_data[(0x170 - 0x130) / 4];
+    s32 x170_data[(0x1AC - 0x170) / 4];
     u8 x1AC_pad[0x1B0 - 0x1AC];
-    s32 x1B0_data[(0x418 - 0x1B0) / 4];
+    GXTexRegionCallback x1B0_callbacks[(0x418 - 0x1B0) / 4];
     u8 x418_pad[0x41C - 0x418];
     s8 x41C;
     s8 x41D;

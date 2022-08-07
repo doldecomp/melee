@@ -3,6 +3,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# // https://decomp.me/scratch/2yDIe // 4000 (0%)
 __GXDefaultTexRegionCallback:
 /* 8033A6E0 003372C0  7C 08 02 A6 */	mflr r0
 /* 8033A6E4 003372C4  90 01 00 04 */	stw r0, 4(r1)
