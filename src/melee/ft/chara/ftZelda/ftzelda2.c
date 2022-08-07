@@ -271,7 +271,7 @@ void ftZelda_80139CC0(HSD_GObj* fighterObj) {
 // 80139D60 - 80139F6C (0x20C bytes)
 // https://decomp.me/scratch/LfvOU (with inline)
 // https://decomp.me/scratch/OJ62l (single function)
-s32 ftZelda_80139D60_Inline(HSD_GObj* fighterObj) {
+s32 ftZelda_80139D60_Helper(HSD_GObj* fighterObj) {
     s32 var_r0;
     Fighter* fighter2;
     ftZeldaAttributes* attributes2;
@@ -312,7 +312,7 @@ void ftZelda_80139D60(HSD_GObj* fighterObj) {
     }
     
     if (EnvColl_CheckGroundAndLedge(fighterObj, ledgeGrabDir) != 0) {
-        returnVar = ftZelda_80139D60_Inline(fighterObj);
+        returnVar = ftZelda_80139D60_Helper(fighterObj);
         if (returnVar != 0) {
             ftZelda_80139FE8(fighterObj);
             return;
