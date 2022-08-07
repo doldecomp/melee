@@ -1,13 +1,4 @@
-#ifndef _GXINIT_H_
-#define _GXINIT_H_
-
-#include <dolphin/base/PPCArch.h>
-#include <dolphin/gx/GXFifo.h>
-#include <dolphin/gx/GXMisc.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/vi/vi.h>
-
-#pragma region private
+#include <dolphin/gx/GXInit.h>
 
 #pragma region __GXInitObj
 // this is probably not right
@@ -25,17 +16,15 @@ typedef union
 } __GXInitObj;
 #pragma endregion
 
-void *__GXDefaultTexRegionCallback(GXTexRegionCallback); // signature unknown
-void local_8033D1B8();
-void lbl_8033A75C();
-void __GXInitGX();
+extern void *__GXDefaultTexRegionCallback(GXTexRegionCallback); // signature unknown
+extern GXFifoObj *GXInit(GXFifoObj *fifo, u32 size);
+extern void __GXInitGX();
 
-#pragma endregion
+void lbl_8033A75C();
 
 #pragma region data
+extern __GXFifoLinkDataContainer lbl_804D5BA8;
 extern __GXInitObj lbl_80401168;
 extern __GXInitObj lbl_8040121C;
 extern __GXInitObj lbl_80401258;
 #pragma endregion
-
-#endif

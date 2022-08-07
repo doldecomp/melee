@@ -424,10 +424,15 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvdqueue.s.o         \
 	$(BUILD_DIR)/asm/dolphin/dvd/dvderror.s.o         \
 	$(BUILD_DIR)/src/dolphin/dvd/fstload.c.o          \
+	$(BUILD_DIR)/src/dolphin/gx/GXInit.c.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o            \
+	$(BUILD_DIR)/src/dolphin/gx/GXFifo.c.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.s.o            \
+	$(BUILD_DIR)/src/dolphin/gx/GXAttr.c.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o            \
+	$(BUILD_DIR)/src/dolphin/gx/GXMisc.c.o            \
 	$(BUILD_DIR)/asm/dolphin/gx/GXMisc.s.o            \
+	$(BUILD_DIR)/src/dolphin/gx/GX.c.o                \
 	$(BUILD_DIR)/asm/dolphin/gx/GX.s.o                \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx.s.o              \
 	$(BUILD_DIR)/asm/dolphin/mtx/mtxvec.s.o           \

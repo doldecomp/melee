@@ -1,8 +1,7 @@
 #include <dolphin/types.h>
-#include <dolphin/gx/gxtypes.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/initialize.h>
-#include <functions.h>
+#include <dolphin/gx/GXInit.h>
 
 extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;

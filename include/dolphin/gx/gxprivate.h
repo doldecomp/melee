@@ -1,31 +1,11 @@
-#ifndef _GXFIFO_H_
-#define _GXFIFO_H_
+// todo: rework GX interdependencies
+// this file should not be necessary
 
-#include <dolphin/types.h>
+#ifndef _GXPRIVATE_h_
+#define _GXPRIVATE_h_
+
 #include <dolphin/gx/gxtypes.h>
-#include <dolphin/os/OSThread.h>
-#include <functions.h>
-
-typedef struct
-{
-    s16 x0;
-    s16 x2;
-    s16 x4;
-    s16 x6;
-    u8 x8_pad[0x38 - 0x8];
-} __GXGPFifo;
-
-void GXCPInterruptHandler();
-void GXSetCPUFifo(GXFifoObj *fifo);
-void GXInitFifoLimits(void *, s32, s32);
-void GXInitFifoBase(void *, void *, u32);
-void __GXFifoLink(s8);
-void GXSetGPFifo(__GXGPFifo *gp_fifo);
-void __GXFifoReadEnable();
-void __GXFifoReadDisable();
-void __GXFifoInit();
-
-// todo: private
+#include <dolphin/mtx/mtxtypes.h>
 
 // GXFifoObj private fields
 typedef struct
@@ -40,10 +20,9 @@ typedef struct
     s32 unk1C;
 } __GXFifoObj;
 
-// signature unknown
-typedef void (*GXTexRegionCallback)(void);
+typedef void (*GXTexRegionCallback)(void); // signature unknown
 
-typedef struct
+typedef struct ___GXFifoLinkObj
 {
     s16 x0;
     s16 x2;
@@ -85,12 +64,6 @@ typedef struct
 
 typedef struct
 {
-    __GXFifoLinkObj *fifo_link;
-    u32 x8;
-} __GXFifoLinkDataContainer;
-
-typedef struct
-{
     s16 x0;
     s16 x2;
     s16 x4;
@@ -113,7 +86,7 @@ extern volatile union
     u16 u16;
     u32 u32;
     s32 s32;
-    void* ptr;
+    void *ptr;
     f32 f32;
 
 } WGPIPE
@@ -122,17 +95,39 @@ extern volatile union
 #endif
     ;
 
+typedef struct ___GXFifoLinkDataContainer
+{
+    __GXFifoLinkObj *fifo_link;
+    u32 x8;
+} __GXFifoLinkDataContainer;
+
+typedef struct
+{
+    s16 x0;
+    s16 x2;
+    s16 x4;
+    s16 x6;
+    u8 x8_pad[0x38 - 0x8];
+} __GXGPFifo;
+
+#pragma region GXInit
 extern __GXFifoLinkDataContainer lbl_804D5BA8;
-extern __GXFifoLinkObj lbl_804A76C8;
-extern __GXGPFifo *lbl_804D72F4;
+#pragma endregion
 
-extern void *lbl_804D7300;
-extern void *lbl_804D7304;
-extern u32 lbl_804D7308;
-extern void *lbl_804D7310;
-extern __GXFifoUnknown *lbl_804D72F8;
-extern f32 lbl_804DE2F8;
-extern f32 lbl_804DE308;
-extern f32 lbl_804DE30C;
+#pragma region GXFifo
+#pragma endregion
 
+#pragma region GXAttr
+void __GXSetVAT();
+void __GXSetVCD();
+#pragma endregion
+
+#pragma region GXMisc
+#pragma endregion
+
+#pragma region GX
+void __GXSetDirtyState();
+void func_8033D3A0(s32);
+void func_8033D408(s16, s32, s16, s16);
+#pragma endregion
 #endif
