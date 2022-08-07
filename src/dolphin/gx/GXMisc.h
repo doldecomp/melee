@@ -5,11 +5,6 @@
 #include <dolphin/gx/GXFifo.h>
 #include <dolphin/os/OSContext.h>
 
-typedef struct _GXColor
-{
-    u8 r, g, b, a;
-} GXColor;
-
 void GXPixModeSync();
 void __GXPEInit();
 void GXPokeAlphaMode(GXColor, s8);

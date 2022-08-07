@@ -110,6 +110,7 @@ lbl_8033D18C:
 /* 8033D1B0 00339D90  7C 08 03 A6 */	mtlr r0
 /* 8033D1B4 00339D94  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/vLLix // 2270 (33.24%)
 local_8033D1B8:
 /* 8033D1B8 00339D98  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
 /* 8033D1BC 00339D9C  38 00 00 98 */	li r0, 0x98
@@ -1694,8 +1695,7 @@ lbl_8033E774:
 /* 8033E784 0033B364  38 21 00 38 */	addi r1, r1, 0x38
 /* 8033E788 0033B368  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/FgNqV
-# s32 func_8033E78C(u16, u16, u32, u8, u8)
+# https://decomp.me/scratch/FgNqV // 2963 (65.94%)
 .global func_8033E78C
 func_8033E78C:
 /* 8033E78C 0033B36C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -4937,6 +4937,7 @@ func_80341408:
 /* 80341434 0033E014  F0 A4 00 00 */	psq_st f5, 0(r4), 0, qr0
 /* 80341438 0033E018  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/OH9kG // 0 (100%)
 func_8034143C:
 /* 8034143C 0033E01C  E0 03 00 00 */	psq_l f0, 0(r3), 0, qr0
 /* 80341440 0033E020  C0 23 00 08 */	lfs f1, 8(r3)
@@ -4983,6 +4984,7 @@ func_80341494:
 /* 803414C8 0033E0A8  7C 08 03 A6 */	mtlr r0
 /* 803414CC 0033E0AC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/1k0kv // 175 (89.06%)
 .global func_803414D0
 func_803414D0:
 /* 803414D0 0033E0B0  7C 08 02 A6 */	mflr r0
@@ -5064,6 +5066,7 @@ lbl_803415C0:
 /* 803415C8 0033E1A8  7C 08 03 A6 */	mtlr r0
 /* 803415CC 0033E1AC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/fvHvR // 3692 (48%)
 .global func_803415D0
 func_803415D0:
 /* 803415D0 0033E1B0  7C 08 02 A6 */	mflr r0
@@ -5140,6 +5143,7 @@ lbl_80341688:
 /* 803416E4 0033E2C4  38 21 00 60 */	addi r1, r1, 0x60
 /* 803416E8 0033E2C8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/xCqrv // 60 0 (100%)
 .global func_803416EC
 func_803416EC:
 /* 803416EC 0033E2CC  7C 08 02 A6 */	mflr r0
@@ -5174,6 +5178,7 @@ func_80341710:
 /* 80341754 0033E334  D0 03 00 14 */	stfs f0, 0x14(r3)
 /* 80341758 0033E338  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/R15tQ // 1725 (60.80%)
 .global func_8034175C
 func_8034175C:
 /* 8034175C 0033E33C  80 ED A5 08 */	lwz r7, lbl_804D5BA8@sda21(r13)
@@ -5221,6 +5226,7 @@ func_8034175C:
 /* 80341804 0033E3E4  B0 04 00 02 */	sth r0, 2(r4)
 /* 80341808 0033E3E8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/LBViQ // 645 (62.06%)
 .global func_8034180C
 func_8034180C:
 /* 8034180C 0033E3EC  38 A3 01 56 */	addi r5, r3, 0x156
@@ -5241,6 +5247,7 @@ func_8034180C:
 /* 80341848 0033E428  B0 03 00 02 */	sth r0, 2(r3)
 /* 8034184C 0033E42C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/eFnwH // 0 (100%)
 .global func_80341850
 func_80341850:
 /* 80341850 0033E430  38 00 00 10 */	li r0, 0x10
@@ -5293,6 +5300,7 @@ lbl_803418EC:
 /* 803418F4 0033E4D4  B0 03 00 02 */	sth r0, 2(r3)
 /* 803418F8 0033E4D8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/fQ5AW // 3230 (94.13%)
 .global func_803418FC
 func_803418FC:
 /* 803418FC 0033E4DC  80 AD A5 08 */	lwz r5, lbl_804D5BA8@sda21(r13)

@@ -2,7 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-# // https://decomp.me/scratch/2yDIe // 4000 (0%)
+# // https://decomp.me/scratch/wdCL6 // 2039 (34.23%)
 __GXDefaultTexRegionCallback:
 /* 8033A6E0 003372C0  7C 08 02 A6 */	mflr r0
 /* 8033A6E4 003372C4  90 01 00 04 */	stw r0, 4(r1)
@@ -37,6 +37,8 @@ lbl_8033A74C:
 /* 8033A750 00337330  38 21 00 08 */	addi r1, r1, 8
 /* 8033A754 00337334  7C 08 03 A6 */	mtlr r0
 /* 8033A758 00337338  4E 80 00 20 */	blr 
+
+# https://decomp.me/scratch/vLLix // 3400 (0%)
 lbl_8033A75C:
 /* 8033A75C 0033733C  28 03 00 14 */	cmplwi r3, 0x14
 /* 8033A760 00337340  41 80 00 0C */	blt lbl_8033A76C
