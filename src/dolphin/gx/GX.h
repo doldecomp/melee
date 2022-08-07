@@ -3,6 +3,11 @@
 
 #include <dolphin/gx/GXFifo.h>
 
+#pragma region inline
+void __GXSetDirtyState();
+void func_8033D0DC(s32 arg0, s32 arg1, s16 arg2); // calls __GXSetDirtyState inlined
+#pragma endregion
+
 s32 func_80341878(s32);
 void GXSetCurrentMtx(s32);
 void func_8033FDA0(__GXFifoLinkObj *, s32, u8 *);
@@ -88,6 +93,9 @@ void func_803415D0(BOOL, f32, f32, f32, f32, f32, f32);
 void func_803416EC(f32, f32, f32, f32, f32, f32);
 void func_8034175C(s32, s32, s32, s32);
 void func_8034180C(s32, s32);
+void func_80341850(s32 arg0);
+void func_803418FC(u32 arg0, u32 arg1);
+void func_80342194();
 
 #pragma region private
 void func_803410D4(f32, f32);

@@ -7909,7 +7909,6 @@ void VIWaitForRetrace(void);
 // ? func_80350184(?);
 // ? func_803501EC(?);
 // ? func_80350294(?);
-// ? func_8035032C(?);
 // ? func_803503A8(?);
 // ? AIRegisterDMACallback(?);
 // ? AIInitDMA(?);

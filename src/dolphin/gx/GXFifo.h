@@ -131,5 +131,8 @@ extern void *lbl_804D7304;
 extern u32 lbl_804D7308;
 extern void *lbl_804D7310;
 extern __GXFifoUnknown *lbl_804D72F8;
+extern f32 lbl_804DE2F8;
+extern f32 lbl_804DE308;
+extern f32 lbl_804DE30C;
 
 #endif
