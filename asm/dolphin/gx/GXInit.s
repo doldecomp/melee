@@ -1,5 +1,4 @@
 .include "macros.inc"
-.include "dolphin/gx/GXInit.inc"
 
 .section .text  # 0x80005940 - 0x803B7240
 
@@ -1120,3 +1119,44 @@ lbl_8033B674:
 /* 8033B77C 0033835C  7C 08 03 A6 */	mtlr r0
 /* 8033B780 00338360  38 21 00 78 */	addi r1, r1, 0x78
 /* 8033B784 00338364  4E 80 00 20 */	blr 
+
+
+.section .bss, "wa"
+    .balign 8
+.global lbl_804A76C8
+lbl_804A76C8:
+	.skip 0x578
+
+
+.section .sdata
+    .balign 8
+.global lbl_804D5BA8
+lbl_804D5BA8:
+    .4byte lbl_804A76C8
+    .4byte 0x00000000
+
+
+.section .sdata2
+    .balign 8
+.global lbl_804DE200
+lbl_804DE200:
+	.4byte 0x404040FF
+.global lbl_804DE204
+lbl_804DE204:
+	.4byte 0x00000000
+.global lbl_804DE208
+lbl_804DE208:
+	.4byte 0xFFFFFFFF
+.global lbl_804DE20C
+lbl_804DE20C:
+	.4byte 0x3F800000
+.global lbl_804DE210
+lbl_804DE210:
+	.4byte 0x00000000
+.global lbl_804DE214
+lbl_804DE214:
+	.4byte 0x3DCCCCCD
+.global lbl_804DE218
+lbl_804DE218:
+	.4byte 0x43300000
+	.4byte 0x00000000
