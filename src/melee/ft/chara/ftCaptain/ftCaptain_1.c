@@ -51,7 +51,7 @@ void ftCFalcon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 // ftCaptain_OnLoadForGanon
 // https://decomp.me/scratch/9AwRw
 void ftCaptain_OnLoadForGanon(Fighter* fighter) {
-    PUSH_ATTRS(fighter, ftCFalconAttributes);
+    PUSH_ATTRS(fighter, ftCaptainAttributes);
 }
 
 // func_800E2AEC
@@ -60,12 +60,12 @@ void ftCaptain_OnLoadForGanon(Fighter* fighter) {
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter;
-    ftCFalconAttributes *sA2;
+    ftCaptainAttributes *sA2;
 
     fighter = (Fighter*)fighter_gobj->user_data;
     fighter->x2224_flag.bits.b7 = 1;
 
-    PUSH_ATTRS(fighter, ftCFalconAttributes);
+    PUSH_ATTRS(fighter, ftCaptainAttributes);
 }
 
 // ftCFalcon_LoadSpecialAttrs
@@ -73,5 +73,5 @@ void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/mKLYI
 void ftCFalcon_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftCFalconAttributes);
+    COPY_ATTRS(fighter_gobj, ftCaptainAttributes);
 }

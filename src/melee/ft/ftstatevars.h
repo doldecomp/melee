@@ -6,5 +6,6 @@
 #include <melee/ft/chara/ftFox/ftFox_StateVars.h>
 #include <melee/ft/chara/ftGameWatch/ftGameWatch_StateVars.h>
 #include <melee/ft/chara/ftNess/ftNess_StateVars.h>
+#include <melee/ft/chara/ftLuigi/ftLuigi_StateVars.h>
 
 #endif

@@ -270,7 +270,7 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj)
     }
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        fp->gameWatchVars[0].SpecialLw.isRelease = 1;
+        fp->gameWatchVars[0].SpecialLw.isRelease = TRUE;
     }
 }
 

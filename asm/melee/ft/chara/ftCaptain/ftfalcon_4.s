@@ -880,18 +880,18 @@ as_table_cfalcon:
     .4byte 0x0000012D
     .4byte 0x00340211
     .4byte 0x12000000
-    .4byte func_800E2C80
-    .4byte func_800E2E38
-    .4byte func_800E2F2C
-    .4byte func_800E3168
+    .4byte ftCaptain_SpecialN_Anim
+    .4byte ftCaptain_SpecialN_IASA
+    .4byte ftCaptain_SpecialN_Phys
+    .4byte ftCaptain_SpecialN_Coll
     .4byte func_800761C8
     .4byte 0x0000012E
     .4byte 0x00340611
     .4byte 0x12000000
-    .4byte func_800E2D5C
-    .4byte func_800E2E3C
-    .4byte func_800E3018
-    .4byte func_800E31F4
+    .4byte ftCaptain_SpecialAirN_Anim
+    .4byte ftCaptain_SpecialAirN_IASA
+    .4byte ftCaptain_SpecialAirN_Phys
+    .4byte ftCaptain_SpecialAirN_Coll
     .4byte func_800761C8
     .4byte 0x0000012F
     .4byte 0x00340212

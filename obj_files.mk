@@ -91,7 +91,7 @@ TEXT_O_FILES := 						            \
 	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario5.c.o 		\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmario.s.o 		\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_1.c.o\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_1.s.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialN.c.o \
 	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_2.s.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_3.s.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_4.s.o\

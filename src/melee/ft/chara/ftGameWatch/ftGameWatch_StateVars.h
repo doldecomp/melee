@@ -6,7 +6,7 @@
 
 typedef struct ftGameWatchAttack11 {
 
-	BOOL unk; // 0x2340 - Set to 0 but never used?
+	BOOL unk;		// 0x2340 - Set to 0 but never used?
 
 } ftGameWatchAttack11;
 

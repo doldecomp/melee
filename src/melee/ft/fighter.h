@@ -1750,6 +1750,9 @@ typedef struct _Fighter {
             ftNessStateVars nessVars[0]; // 0x2340
         };
         union {
+            ftLuigiStateVars luigiVars[0]; // 0x2340
+        };
+        union {
             ftGameWatchStateVars gameWatchVars[0]; // 0x2340
         };
     /* 0x2340 */ s32 x2340_stateVar1;

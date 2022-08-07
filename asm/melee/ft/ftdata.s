@@ -1273,7 +1273,7 @@ ft_SpecialAirS:
 ft_SpecialAirN:
     .4byte ftMario_SpecialAirN_StartAction
     .4byte ftFox_SpecialAirN_StartAction
-    .4byte ftCFalcon_SpecialAirN_StartAction
+    .4byte ftCaptain_SpecialAirN_StartAction
     .4byte ftDonkey_SpecialAirN_StartAction
     .4byte ftKirby_SpecialAirN_StartAction
     .4byte ftKoopa_SpecialAirN_StartAction
@@ -1296,7 +1296,7 @@ ft_SpecialAirN:
     .4byte ftFox_SpecialAirN_StartAction
     .4byte ftPikachu_SpecialAirN_StartAction
     .4byte ftGameWatch_SpecialAirN_StartAction
-    .4byte ftCFalcon_SpecialAirN_StartAction
+    .4byte ftCaptain_SpecialAirN_StartAction
     .4byte ftMars_SpecialAirN_StartAction
     .4byte NULL
     .4byte NULL
@@ -1310,7 +1310,7 @@ ft_SpecialAirN:
 ft_SpecialN:
     .4byte ftMario_SpecialN_StartAction
     .4byte ftFox_SpecialN_StartAction
-    .4byte ftCFalcon_SpecialN_StartAction
+    .4byte ftCaptain_SpecialN_StartAction
     .4byte ftDonkey_SpecialN_StartAction
     .4byte ftKirby_SpecialN_StartAction
     .4byte ftKoopa_SpecialN_StartAction
@@ -1333,7 +1333,7 @@ ft_SpecialN:
     .4byte ftFox_SpecialN_StartAction
     .4byte ftPikachu_SpecialN_StartAction
     .4byte ftGameWatch_SpecialN_StartAction
-    .4byte ftCFalcon_SpecialN_StartAction
+    .4byte ftCaptain_SpecialN_StartAction
     .4byte ftMars_SpecialN_StartAction
     .4byte NULL
     .4byte NULL
