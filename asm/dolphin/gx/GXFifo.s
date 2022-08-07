@@ -1,5 +1,4 @@
 .include "macros.inc"
-.include "dolphin/gx/GXFifo.inc"
 
 .section .text  # 0x80005940 - 0x803B7240
 
