@@ -38,18 +38,18 @@ u32 ftFox_SpecialS_GetCmdVar2(HSD_GObj* fighter_gobj)
 
 // 0x800E9EAC
 // https://decomp.me/scratch/IjtLj // Copy state variables into SpecialS struct
-void ftFox_SpecialS_CopyStructVars(HSD_GObj* fighter_gobj, s32 var, Vec3* specialS)
+void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index, Vec3* ghostPos)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    *specialS = fp->foxVars[0].specialS.ghostEffectPos[var];
+    *ghostPos = fp->foxVars[0].specialS.ghostEffectPos[index];
 }
 
 // 0x800E9ED4
 // https://decomp.me/scratch/bkSg9 // Return float from array @ 0x2374 for Fox & Falco's Illusion/Phantasm
-f32 ftFox_SpecialS_GetFloatVar(HSD_GObj* fighter_gobj, s32 var)
+f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* fighter_gobj, s32 index)
 {
-    return getFighter(fighter_gobj)->foxVars[0].specialS.blendFrames[var];
+    return getFighter(fighter_gobj)->foxVars[0].specialS.blendFrames[index];
 }
 
 // 0x800E9EE8

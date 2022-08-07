@@ -589,7 +589,7 @@ void Fighter_ResetInputData_80068854(HSD_GObj* fighterObj) {
     fighter->input.x660 = 0;
     fighter->input.x66C = 0;
     fighter->input.x668 = 0;
-    fighter->input.x65C = 0;
+    fighter->input.x65C_heldInputs = 0;
 
     fighter->x672_input_timer_counter = 0xFE;
     fighter->x671_timer_lstick_tilt_y = 0xFE;
@@ -645,7 +645,7 @@ static void Fighter_UnkInitLoad_80068914_Inner1(HSD_GObj* fighterObj) {
     fighter->input.x660 = 0;
     fighter->input.x66C = 0;
     fighter->input.x668 = 0;
-    fighter->input.x65C = 0;
+    fighter->input.x65C_heldInputs = 0;
     
     fighter->x679_x = 
     fighter->x67A_y = 
@@ -1755,8 +1755,8 @@ void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighterObj) {
 static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fighter) {
     s32 temp0_loc[2];
 
-    temp0_loc[0] = (fighter->input.x65C & (fighter->input.x660 ^ fighter->input.x65C));
-    temp0_loc[1] = (fighter->input.x660 & (fighter->input.x660 ^ fighter->input.x65C));
+    temp0_loc[0] = (fighter->input.x65C_heldInputs & (fighter->input.x660 ^ fighter->input.x65C_heldInputs));
+    temp0_loc[1] = (fighter->input.x660 & (fighter->input.x660 ^ fighter->input.x65C_heldInputs));
 
     if (fighter->x2219_flag.bits.b5) {
         fighter->input.x668 |= temp0_loc[0];
@@ -1786,7 +1786,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
                 SET_STICKS(fighter->input.x628_lstick_x2, fighter->input.x62C_lstick_y2, fighter->input.x620_lstick_x, fighter->input.x624_lstick_y);
                 SET_STICKS(fighter->input.x640_lsubStick_x2, fighter->input.x644_lsubStick_y2, fighter->input.x638_lsubStick_x, fighter->input.x63C_lsubStick_y);
                 fighter->input.x654 = fighter->input.x650;
-                fighter->input.x660 = fighter->input.x65C;
+                fighter->input.x660 = fighter->input.x65C_heldInputs;
             }
 
             if (func_800A2040(fighter)) {
@@ -1839,28 +1839,28 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
 
             
             if (func_800A2040(fighter)) {
-                fighter->input.x65C = func_800A198C(fighter);
+                fighter->input.x65C_heldInputs = func_800A198C(fighter);
             } else {
-                fighter->input.x65C = HSD_PadRumbleData[fighter->x618_player_id].button;
+                fighter->input.x65C_heldInputs = HSD_PadRumbleData[fighter->x618_player_id].button;
             }
 
             if (func_8016B0FC()) {
                 fighter->input.x650 = 0.0f;
                 if (func_800A2040(fighter)) {
-                    fighter->input.x65C = (fighter->input.x65C & 0xD00);
+                    fighter->input.x65C_heldInputs = (fighter->input.x65C_heldInputs & 0xD00);
                 } else {
-                    fighter->input.x65C = (fighter->input.x65C & 0x100);
+                    fighter->input.x65C_heldInputs = (fighter->input.x65C_heldInputs & 0x100);
                 }
             } else {
-                if ((fighter->input.x65C & 0x60)) {
-                    fighter->input.x65C = (s32) (fighter->input.x65C | 0x80000000);
+                if ((fighter->input.x65C_heldInputs & 0x60)) {
+                    fighter->input.x65C_heldInputs = (s32) (fighter->input.x65C_heldInputs | 0x80000000);
                     fighter->input.x650 = 1.0f;
                 } else if (fighter->input.x650) {
-                    fighter->input.x65C = (fighter->input.x65C | 0x80000000);
+                    fighter->input.x65C_heldInputs = (fighter->input.x65C_heldInputs | 0x80000000);
                 }
                 if (func_801A45E8(0) == 0) {
-                    if ((fighter->input.x65C & 0x10)) {
-                        fighter->input.x65C = (fighter->input.x65C | 0x80000000 | 0x100);
+                    if ((fighter->input.x65C_heldInputs & 0x10)) {
+                        fighter->input.x65C_heldInputs = (fighter->input.x65C_heldInputs | 0x80000000 | 0x100);
                         fighter->input.x650 = p_ftCommonData->x14;
                     }
                 }
@@ -2059,7 +2059,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj) {
             fighter->input.x648 = fighter->input.x638_lsubStick_x;
             fighter->input.x64C = fighter->input.x63C_lsubStick_y;
             fighter->input.x658 = fighter->input.x650;
-            fighter->input.x664 = fighter->input.x65C;
+            fighter->input.x664 = fighter->input.x65C_heldInputs;
             fighter->x221D_flag.bits.b3 = 0;
     
             Fighter_UnkInitLoad_80068914_Inner1(fighterObj);

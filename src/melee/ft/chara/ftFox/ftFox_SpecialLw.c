@@ -95,7 +95,7 @@ void ftFox_SpecialLwStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->foxVars[0].specialLw.isRelease = TRUE;
     }
@@ -119,7 +119,7 @@ void ftFox_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     f32 var;
 
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->foxVars[0].specialLw.isRelease = TRUE;
     }
@@ -247,7 +247,7 @@ void ftFox_SpecialLwLoop_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->foxVars[0].specialLw.isRelease = TRUE;
     }
@@ -272,7 +272,7 @@ void ftFox_SpecialAirLwLoop_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->foxVars[0].specialLw.isRelease = TRUE;
     }
@@ -489,7 +489,7 @@ void ftFox_SpecialLwTurn_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     s32 var[4];
 
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->foxVars[0].specialLw.isRelease = TRUE;
     }
@@ -511,7 +511,7 @@ void ftFox_SpecialAirLwTurn_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     s32 var[5];
 
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->foxVars[0].specialLw.isRelease = TRUE;
     }
@@ -700,7 +700,7 @@ void ftFox_SpecialLwHit_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     s32 var;
 
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->foxVars[0].specialLw.isRelease = TRUE;
     }
@@ -727,7 +727,7 @@ void ftFox_SpecialAirLwHit_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     s32 var[2];
 
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->foxVars[0].specialLw.isRelease = TRUE;
     }

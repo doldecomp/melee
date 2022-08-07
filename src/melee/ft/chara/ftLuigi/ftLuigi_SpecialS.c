@@ -224,7 +224,7 @@ void ftLuigi_SpecialAirSHold_Anim(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/spI7k // Luigi's grounded Green Missile Charge IASA callback
 void ftLuigi_SpecialSHold_IASA(HSD_GObj* fighter_gobj)
 {
-    if ((getFighter(fighter_gobj)->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((getFighter(fighter_gobj)->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         ftLuigi_SpecialSLaunch_Action(fighter_gobj);
     }
@@ -233,7 +233,7 @@ void ftLuigi_SpecialSHold_IASA(HSD_GObj* fighter_gobj)
 // 0x80143008 - Luigi's aerial Green Missile Charge IASA callback
 void ftLuigi_SpecialAirSHold_IASA(HSD_GObj* fighter_gobj)
 {
-    if ((getFighter(fighter_gobj)->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((getFighter(fighter_gobj)->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         ftLuigi_SpecialAirSLaunch_Action(fighter_gobj);
     }

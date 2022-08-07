@@ -127,7 +127,7 @@ void ftFox_OnItemInvisible(HSD_GObj* gobj);
 void ftFox_OnItemVisible(HSD_GObj* gobj);
 void ftFox_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
 
-// Special Taunt (AppealS)
+// Special Taunt (AppealS) //
 
 BOOL ftFox_AppealS_CheckIfUsed(Fighter* fp);
 BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj);
@@ -302,8 +302,8 @@ void ftFox_SpecialAirLwEnd_Action(HSD_GObj* fighter_gobj);
 void ftFox_SpecialS_CreateGFX(HSD_GObj* fighter_gobj);
 BOOL ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj);
 u32 ftFox_SpecialS_GetCmdVar2(HSD_GObj* fighter_gobj);
-void ftFox_SpecialS_CopyStructVars(HSD_GObj* fighter_gobj, s32 var, Vec3* specialS);
-f32 ftFox_SpecialS_GetFloatVar(HSD_GObj* fighter_gobj, s32 var);
+void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index, Vec3* ghostPos);
+f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* fighter_gobj, s32 index);
 void ftFox_SpecialS_StartAction(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
 void ftFox_SpecialSStart_Anim(HSD_GObj* fighter_gobj);

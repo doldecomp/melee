@@ -1315,7 +1315,7 @@ typedef struct _Fighter {
 
         /* 0x658 */ f32 x658;
 
-        /* 0x65C */ s32 x65C;
+        /* 0x65C */ u32 x65C_heldInputs;
         /* 0x660 */ s32 x660;
         /* 0x664 */ s32 x664;
         /* 0x668 */ s32 x668;
@@ -1770,6 +1770,9 @@ typedef struct _Fighter {
     union {
         union {
             ftFoxStateVars foxVars[0]; // 0x2340
+        };
+        union {
+            ftNessStateVars nessVars[0]; // 0x2340
         };
     /* 0x2340 */ s32 x2340_stateVar1;
     /* 0x2340 */ u32 x2340_stateVar1_u32;

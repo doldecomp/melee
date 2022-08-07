@@ -268,7 +268,7 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj)
             }
         }
     }
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->x2340_stateVar1 = 1;
     }
@@ -308,7 +308,7 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* fighter_gobj)
             }
         }
     }
-    if ((fp->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
         fp->x2340_stateVar1 = 1;
     }

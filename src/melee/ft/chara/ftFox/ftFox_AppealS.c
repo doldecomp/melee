@@ -39,7 +39,7 @@ BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     s32 ftKind = fp->x4_fighterKind;
 
-    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) && (func_801E2CE8() != FALSE) && ((fp->input.x65C & HSD_BUTTON_DPAD_DOWN) == FALSE) && ((u8)fp->x682 == TRUE))
+    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) && (func_801E2CE8() != FALSE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == FALSE) && ((u8)fp->x682 == TRUE))
     {
         if (ftFox_CheckAppealSCount() == 0)
         {

@@ -7,7 +7,7 @@ void ftNess_AttackLw4_Action(HSD_GObj* fighter_gobj)  // Ness's Down Smash Actio
     Fighter* fighter_data = getFighter(fighter_gobj);
 
     fighter_data->x2218_flag.bits.b0 = 0;
-    fighter_data->x2348_stateVar3 = 0;
+    fighter_data->nessVars[0].AttackLw4.isChargeDisable = FALSE;
     ftNess_YoyoSetVarAll(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
@@ -22,11 +22,11 @@ void ftNess_AttackLw4_Anim(HSD_GObj* fighter_gobj) // Ness's Down Smash Animatio
 {
     Fighter* fighter_data = getFighter(fighter_gobj);
 
-    fighter_data->x2340_stateVar1 += 1;
+    fighter_data->nessVars[0].AttackLw4.yoyoCurrentFrame++;
     if (ftNess_YoyoThink_IsRemove(fighter_gobj) == FALSE) 
     {
         ftNess_YoyoCheckTimedRehit(fighter_gobj);
-        if (((s32)fighter_data->x2340_stateVar1 == 13) && ((s32)fighter_data->x2348_stateVar3 == 0) && (ftNess_YoyoCheckNoObstruct(fighter_gobj) != FALSE)) 
+        if (((s32)fighter_data->nessVars[0].AttackLw4.yoyoCurrentFrame == 13) && ((s32)fighter_data->nessVars[0].AttackLw4.isChargeDisable == FALSE) && (ftNess_YoyoCheckNoObstruct(fighter_gobj) != FALSE)) 
         {
             ftNess_AttackLw4_Charge_Action(fighter_gobj);
         }
@@ -45,9 +45,9 @@ void ftNess_AttackLw4_IASA(HSD_GObj* fighter_gobj)   // Ness's Down Smash IASA c
 {
     Fighter* fighter_data = getFighter(fighter_gobj);
 
-    if ((fighter_data->input.x65C & HSD_BUTTON_A) == FALSE)
+    if ((fighter_data->input.x65C_heldInputs & HSD_BUTTON_A) == FALSE)
     {
-        fighter_data->x2348_stateVar3 = 1;
+        fighter_data->nessVars[0].AttackLw4.isChargeDisable = TRUE;
     }
     if (fighter_data->x2218_flag.bits.b0 != 0)
     {
@@ -70,7 +70,7 @@ void ftNess_AttackLw4_Coll(HSD_GObj* fighter_gobj)   // Ness's Down Smash Collis
     Fighter* fighter_data = getFighter(fighter_gobj);
 
     func_80084104(fighter_gobj);
-    if ((s32)fighter_data->xE0_ground_or_air == AIR) 
+    if ((s32)fighter_data->xE0_ground_or_air == GA_Air) 
     {
         ftNess_YoyoItemDespawn(fighter_gobj);
     }
@@ -85,12 +85,12 @@ void ftNess_AttackLw4_Charge_Anim(HSD_GObj* fighter_gobj)   // Ness's Down Smash
     ftNessAttributes* ness_attr;
 
     fighter_data = getFighter(fighter_gobj);
-    yoyoSmashFrameCurr = fighter_data->x2340_stateVar1;
+    yoyoSmashFrameCurr = fighter_data->nessVars[0].AttackLw4.yoyoCurrentFrame;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    fighter_data->x2340_stateVar1 = (s32)(yoyoSmashFrameCurr + 1);
+    fighter_data->nessVars[0].AttackLw4.yoyoCurrentFrame = (s32)(yoyoSmashFrameCurr + 1);
     ftNess_YoyoSetUnkRate(fighter_gobj);
     ftNess_YoyoCheckTimedRehit(fighter_gobj);
-    if ((f32)fighter_data->x2340_stateVar1 >= ness_attr->xAC_YOYO_CHARGE_DURATION)
+    if ((f32)fighter_data->nessVars[0].AttackLw4.yoyoCurrentFrame >= ness_attr->xAC_YOYO_CHARGE_DURATION)
     {
         ftNess_AttackLw4_Release_Action(fighter_gobj);
     }
@@ -102,7 +102,7 @@ void ftNess_AttackLw4_Charge_IASA(HSD_GObj* fighter_gobj)   // Ness's Down Smash
 {
     Fighter* fighter_data = getFighter(fighter_gobj);
 
-    if ((fighter_data->input.x65C & HSD_BUTTON_A) == FALSE)
+    if ((fighter_data->input.x65C_heldInputs & HSD_BUTTON_A) == FALSE)
     {
         ftNess_AttackLw4_Release_Action(fighter_gobj);
     }
@@ -122,7 +122,7 @@ void ftNess_AttackLw4_Charge_Coll(HSD_GObj* fighter_gobj)   // Ness's Down Smash
     Fighter* fighter_data = getFighter(fighter_gobj);
 
     func_80084104(fighter_gobj);
-    if ((s32)fighter_data->xE0_ground_or_air == AIR) 
+    if ((s32)fighter_data->xE0_ground_or_air == GA_Air) 
     {
         ftNess_YoyoItemDespawn(fighter_gobj);
     }
@@ -151,8 +151,8 @@ void ftNess_AttackLw4_Release_Anim(HSD_GObj* fighter_gobj)   // Ness's Down Smas
     Fighter* fighter_data;
 
     fighter_data = getFighter(fighter_gobj);
-    yoyoSmashFrameCurr = fighter_data->x2340_stateVar1;
-    fighter_data->x2340_stateVar1 = (s32)(yoyoSmashFrameCurr + 1);
+    yoyoSmashFrameCurr = fighter_data->nessVars[0].AttackLw4.yoyoCurrentFrame;
+    fighter_data->nessVars[0].AttackLw4.yoyoCurrentFrame = (s32)(yoyoSmashFrameCurr + 1);
     if (ftNess_YoyoThink_IsRemove(fighter_gobj) == FALSE) 
     {
         ftNess_YoyoCheckTimedRehit(fighter_gobj);
@@ -184,7 +184,7 @@ void ftNess_AttackLw4_Release_Phys(HSD_GObj* fighter_gobj)   // Ness's Down Smas
 
     fighter_data = getFighter(fighter_gobj);
     func_80084F3C(fighter_gobj);
-    yoyoSmashFrameCurr = fighter_data->x2340_stateVar1;
+    yoyoSmashFrameCurr = fighter_data->nessVars[0].AttackLw4.yoyoCurrentFrame;
     if (yoyoSmashFrameCurr < 0x13)
     {
         yoyoSmashUnk = 0.20000000298023224f * ((f32)yoyoSmashFrameCurr - 14.0f);
@@ -210,7 +210,7 @@ void ftNess_AttackLw4_Release_Coll(HSD_GObj* fighter_gobj)   // Ness's Down Smas
     Fighter* fighter_data = getFighter(fighter_gobj);
 
     func_80084104(fighter_gobj);
-    if ((s32)fighter_data->xE0_ground_or_air == AIR) 
+    if ((s32)fighter_data->xE0_ground_or_air == GA_Air) 
     {
         ftNess_YoyoItemDespawn(fighter_gobj);
     }

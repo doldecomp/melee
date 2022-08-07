@@ -201,12 +201,12 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
         {
         case FTKIND_FOX:
             foxSFX = &lbl_804D3D80;
-            func_80088148(fp, foxSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MAX);
+            func_80088148(fp, foxSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
             return;
 
         case FTKIND_FALCO:
             falcoSFX = &lbl_804D3D88;
-            func_80088148(fp, falcoSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MAX);
+            func_80088148(fp, falcoSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
             return;
         }
     }
@@ -392,12 +392,12 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
             {
             case FTKIND_FOX:
                 foxSFX = &lbl_804D3D80;
-                func_80088148(fp, foxSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MAX);
+                func_80088148(fp, foxSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
 
             case FTKIND_FALCO:
                 falcoSFX = &lbl_804D3D88;
-                func_80088148(fp, falcoSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MAX);
+                func_80088148(fp, falcoSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
             }
         }
@@ -540,12 +540,12 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 
             case FTKIND_FOX:
                 foxSFX = &lbl_804D3D80;
-                func_80088148(fp, foxSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MAX);
+                func_80088148(fp, foxSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
 
             case FTKIND_FALCO:
                 falcoSFX = &lbl_804D3D88;
-                func_80088148(fp, falcoSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MAX);
+                func_80088148(fp, falcoSFX->x0_SFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
             }
         }
@@ -816,10 +816,10 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                         switch (func_800872A4(fighter_gobj))
                         {
                         case FTKIND_FOX:
-                            func_80088148(fp, 0x1AE1DU, SFX_VOLUME_MAX, SFX_PAN_MAX);
+                            func_80088148(fp, 0x1AE1DU, SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
                         case FTKIND_FALCO:
-                            func_80088148(fp, 0x18709U, SFX_VOLUME_MAX, SFX_PAN_MAX);
+                            func_80088148(fp, 0x18709U, SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
                         }
                     default: break;
@@ -832,12 +832,12 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
 
                         case FTKIND_FOX:
                             foxSFX = &lbl_804D3D80;
-                            func_80088148(fp, foxSFX->x0_SFX[1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MAX);
+                            func_80088148(fp, foxSFX->x0_SFX[1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
 
                         case FTKIND_FALCO:
                             falcoSFX = &lbl_804D3D88;
-                            func_80088148(fp, falcoSFX->x0_SFX[1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MAX);
+                            func_80088148(fp, falcoSFX->x0_SFX[1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
                         }
                         break;
@@ -854,10 +854,10 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                 switch (func_800872A4(fighter_gobj))
                 {
                 case FTKIND_FOX:
-                    func_80088148(fp, 0x1AE14U, SFX_VOLUME_MAX, SFX_PAN_MAX);
+                    func_80088148(fp, 0x1AE14U, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
                 case FTKIND_FALCO:
-                    func_80088148(fp, 0x18700U, SFX_VOLUME_MAX, SFX_PAN_MAX);
+                    func_80088148(fp, 0x18700U, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
                 }
             }
