@@ -1163,31 +1163,6 @@ struct SpecialAttrs_Sandbag {
     char filler0[0x100];
 };
 
-// State Var unions //
-typedef struct ftGameWatchVars
-{
-    union
-    {
-        struct
-        {
-            s32 x2340;
-        } Attack11;
-
-        struct
-        {
-            s32 x2340; // 0x2340
-            s32 turnFrames; // 0x2344
-        } SpecialLw;
-    };
-} ftGameWatchVars;
-
-typedef struct ftFox_SpecialS_Struct
-{
-    s32 x0;
-    s32 x4;
-    s32 x8;
-} ftFox_SpecialS_Struct;
-
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
     /* 0x4 */ FighterKind x4_fighterKind;
@@ -1773,6 +1748,9 @@ typedef struct _Fighter {
         };
         union {
             ftNessStateVars nessVars[0]; // 0x2340
+        };
+        union {
+            ftGameWatchStateVars gameWatchVars[0]; // 0x2340
         };
     /* 0x2340 */ s32 x2340_stateVar1;
     /* 0x2340 */ u32 x2340_stateVar1_u32;
