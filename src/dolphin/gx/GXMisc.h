@@ -5,16 +5,18 @@
 #include <dolphin/gx/GXFifo.h>
 #include <dolphin/os/OSContext.h>
 
+typedef u32 color_t;
+
 void GXPixModeSync();
 void __GXPEInit();
-void GXPokeAlphaMode(GXColor, s8);
-void GXPokeAlphaRead(GXColor);
-void GXPokeAlphaUpdate(GXColor);
-void GXPokeColorUpdate(GXColor);
-void GXPokeDstAlpha(GXColor, GXColor);
-void GXPokeDither(GXColor);
-void GXPokeBlendMode(GXColor, GXColor, GXColor, GXColor);
-void GXPokeZMode(GXColor, GXColor, u32);
+void GXPokeAlphaMode(color_t, s8);
+void GXPokeAlphaRead(color_t);
+void GXPokeAlphaUpdate(color_t);
+void GXPokeColorUpdate(color_t);
+void GXPokeDstAlpha(color_t, color_t);
+void GXPokeDither(color_t);
+void GXPokeBlendMode(color_t, color_t, color_t, color_t);
+void GXPokeZMode(color_t, color_t, u32);
 void GXSetCurrentMtx(s32);
 
 #endif

@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/mHuNc // 3500 (0%)
 .global __GXSetDirtyState
 __GXSetDirtyState:
 /* 8033D050 00339C30  7C 08 02 A6 */	mflr r0
@@ -45,6 +46,7 @@ lbl_8033D0C0:
 /* 8033D0D4 00339CB4  7C 08 03 A6 */	mtlr r0
 /* 8033D0D8 00339CB8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/CwsOr // 5500 (0%)
 .global func_8033D0DC
 func_8033D0DC:
 /* 8033D0DC 00339CBC  7C 08 02 A6 */	mflr r0
@@ -5066,7 +5068,7 @@ lbl_803415C0:
 /* 803415C8 0033E1A8  7C 08 03 A6 */	mtlr r0
 /* 803415CC 0033E1AC  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/fvHvR // 3692 (48%)
+# https://decomp.me/scratch/RalqB // 342 (95.18%)
 .global func_803415D0
 func_803415D0:
 /* 803415D0 0033E1B0  7C 08 02 A6 */	mflr r0
@@ -5247,7 +5249,7 @@ func_8034180C:
 /* 80341848 0033E428  B0 03 00 02 */	sth r0, 2(r3)
 /* 8034184C 0033E42C  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/eFnwH // 0 (100%)
+# https://decomp.me/scratch/i3OSs // 0 (100%)
 .global func_80341850
 func_80341850:
 /* 80341850 0033E430  38 00 00 10 */	li r0, 0x10
@@ -5923,6 +5925,7 @@ lbl_80342184:
 /* 8034218C 0033ED6C  B0 03 00 02 */	sth r0, 2(r3)
 /* 80342190 0033ED70  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/YOR2u // 0 (100%)
 .global func_80342194
 func_80342194:
 /* 80342194 0033ED74  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)

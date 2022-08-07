@@ -38,7 +38,7 @@ lbl_8033A74C:
 /* 8033A754 00337334  7C 08 03 A6 */	mtlr r0
 /* 8033A758 00337338  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/vLLix // 3400 (0%)
+# https://decomp.me/scratch/vLLix // 2270 (33.24%)
 lbl_8033A75C:
 /* 8033A75C 0033733C  28 03 00 14 */	cmplwi r3, 0x14
 /* 8033A760 00337340  41 80 00 0C */	blt lbl_8033A76C
@@ -565,7 +565,7 @@ lbl_8033AE6C:
 /* 8033AF18 00337AF8  98 CB 80 00 */	stb r6, -0x8000(r11)
 /* 8033AF1C 00337AFC  90 0B 80 00 */	stw r0, -0x8000(r11)
 /* 8033AF20 00337B00  48 00 45 F9 */	bl func_8033F518
-/* 8033AF24 00337B04  48 00 00 1D */	bl func_8033AF40
+/* 8033AF24 00337B04  48 00 00 1D */	bl __GXInitGX
 /* 8033AF28 00337B08  38 7E 04 F4 */	addi r3, r30, 0x4f4
 /* 8033AF2C 00337B0C  BB 41 00 30 */	lmw r26, 0x30(r1)
 /* 8033AF30 00337B10  80 01 00 4C */	lwz r0, 0x4c(r1)
@@ -573,8 +573,9 @@ lbl_8033AE6C:
 /* 8033AF38 00337B18  7C 08 03 A6 */	mtlr r0
 /* 8033AF3C 00337B1C  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/r2ALq // errors
-func_8033AF40:
+# https://decomp.me/scratch/r2ALq // 7842 (85.20%)
+# https://github.com/nbouteme/WindWaker-decomp/blob/69adddcccdfd1c98589efd25a5b104e7d0723100/src/gx/GXInit.c#L318
+__GXInitGX:
 /* 8033AF40 00337B20  7C 08 02 A6 */	mflr r0
 /* 8033AF44 00337B24  90 01 00 04 */	stw r0, 4(r1)
 /* 8033AF48 00337B28  94 21 FF 88 */	stwu r1, -0x78(r1)
