@@ -281,6 +281,7 @@ func_8033D3A0:
 /* 8033D3DC 00339FBC  90 04 80 00 */	stw r0, -0x8000(r4)
 /* 8033D3E0 00339FC0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/NM2oq // 900 (0%)
 local_8033D3E4:
 /* 8033D3E4 00339FC4  38 00 00 61 */	li r0, 0x61
 /* 8033D3E8 00339FC8  80 8D A5 08 */	lwz r4, lbl_804D5BA8@sda21(r13)
@@ -344,6 +345,7 @@ func_8033D408:
 /* 8033D4C0 0033A0A0  90 03 00 00 */	stw r0, 0(r3)
 /* 8033D4C4 0033A0A4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/ZuNiA // 755 (84.27%)
 .global func_8033D4C8
 func_8033D4C8:
 /* 8033D4C8 0033A0A8  80 ED A5 08 */	lwz r7, lbl_804D5BA8@sda21(r13)

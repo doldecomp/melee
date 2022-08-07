@@ -709,6 +709,7 @@ lbl_8033C73C:
 /* 8033C768 00339348  98 04 04 EE */	stb r0, 0x4ee(r4)
 /* 8033C76C 0033934C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/rNCQt // 3900 (0%)
 .global __GXSetVAT
 __GXSetVAT:
 /* 8033C770 00339350  81 4D A5 08 */	lwz r10, lbl_804D5BA8@sda21(r13)
