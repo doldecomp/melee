@@ -10,7 +10,9 @@ typedef struct
 {
     s16 x0;
     s16 x2;
-    u8 x4_pad[0x38 - 0x04];
+    s16 x4;
+    s16 x6;
+    u8 x8_pad[0x38 - 0x8];
 } __GXGPFifo;
 
 void GXCPInterruptHandler();
@@ -45,7 +47,8 @@ typedef struct
 {
     s16 x0;
     s16 x2;
-    s32 x4;
+    u16 x4;
+    u16 x6;
     s32 x8;
     s32 xC;
     s32 x10;
@@ -58,7 +61,9 @@ typedef struct
     u8 x88_pad[0xB4 - 0x88];
     s32 xB4;
     s32 xB8;
-    u8 xBC[0x100 - 0xBC];
+    u8 xBC_pad[0xF8 - 0xBC];
+    s32 xF8;
+    s32 xFC;
     s32 x100_data[(0x130 - 0x100) / 4];
     s32 x130_data[(0x170 - 0x130) / 4];
     s32 x170_data[(0x1AC - 0x170) / 4];
@@ -67,7 +72,12 @@ typedef struct
     u8 x418_pad[0x41C - 0x418];
     s8 x41C;
     s8 x41D;
-    u8 x41E_pad[0x49C - 0x41E];
+    u8 x41E_pad[0x43C - 0x41E];
+    Vec x43C_vec;
+    Vec x448_vec;
+    u8 x454_pad[4];
+    f32 x458;
+    u8 x45C_pad[0x49C - 0x45C];
     u32 x49C_data[(0x4F0 - 0x49C) / 4];
     s32 x4F0;
     u8 x4F4_pad[0x578 - 0x4F4];
@@ -88,15 +98,23 @@ typedef struct
     s16 x8;
 } __GXFifoUnknown;
 
+extern volatile u8 WGPIPE_OP
+#ifndef M2C_CONTEXT
+    : 0xCC010000
+#endif
+    ;
+
 extern volatile union
 {
 
-    char c;
-    short s;
-    unsigned short us;
-    int i;
-    void *p;
-    float f;
+    s8 s8;
+    u8 u8;
+    s16 s16;
+    u16 u16;
+    u32 u32;
+    s32 s32;
+    void* ptr;
+    f32 f32;
 
 } WGPIPE
 #ifndef M2C_CONTEXT

@@ -7616,7 +7616,6 @@ void GXSetChanAmbColor(); // GXSetChanAmbColor(GXChannelID chan, GXColor amb_col
 void GXSetChanMatColor(); //GXSetChanMatColor(GXChannelID chan, GXColor mat_color);
 // ? func_8033E55C(?);
 void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src, GXLightID light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn );
-s32 func_8033E78C(u16, u16, s32, u8, u8);
 // ? func_8033E8E8(?);
 // ? func_8033E9B0(?);
 // ? func_8033EC24(?);
@@ -7671,19 +7670,14 @@ s32 func_8033E78C(u16, u16, s32, u8, u8);
 // ? func_80341148(?);
 // ? func_803412BC(?);
 // ? func_80341390(?);
-// ? func_8034143C(?);
 // ? func_80341470(?);
 // ? func_80341494(?);
 // ? func_803414D0(?);
 // ? GXSetCurrentMtx(?);
 // ? func_8034154C(?);
-// ? func_803415D0(?);
-// ? func_803416EC(?);
 // ? func_80341710(?);
 // ? func_8034175C(?);
 // ? func_8034180C(?);
-// ? func_80341850(?);
-// ? func_803418FC(?);
 // ? func_80342194(?);
 void PSMTXIdentity(Mtx m); // asm/dolphin/mtx/mtx.s
 void PSMTXCopy(Mtx src, Mtx dst); // asm/dolphin/mtx/mtx.s

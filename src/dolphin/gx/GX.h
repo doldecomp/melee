@@ -75,14 +75,26 @@ void func_80340FC8(s32, s32);
 
 void func_80340DC0(s8, s32, s32);
 
-void func_8034101C(s32 arg0, s8 arg1);
-void func_8034154C(void *arg0, u32 arg1, s8 arg2);
-void func_80341494(void *arg0, s32 arg1);
+void func_8034101C(s32, s8);
+void func_8034154C(void *, u32, s8);
+
+#pragma region inline
+void func_80341494(void *, s32);
+void func_803414D0(void *, s32);
+#pragma endregion
+
+s32 func_8033E78C(u16, u16, s32, u8, u8);
+void func_803415D0(BOOL, f32, f32, f32, f32, f32, f32);
+void func_803416EC(f32, f32, f32, f32, f32, f32);
+void func_8034175C(s32, s32, s32, s32);
+void func_8034180C(s32, s32);
 
 #pragma region private
-void func_803410D4();
+void func_803410D4(f32, f32);
 void func_80341408(void *, s8 *, s8 *);
 void func_80341470(void *, s8 *);
+void func_8034143C(void *, s8 *, s8 *);
+void local_8033D1B8();
 #pragma endregion
 
 #endif
