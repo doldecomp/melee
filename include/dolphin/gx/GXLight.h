@@ -56,30 +56,26 @@ typedef struct _GXLightObj
     f32 ka;        // at 0x1C
     f32 kb;        // at 0x20
     f32 kc;        // at 0x24
-    f32 posX;      // at 0x28
-    f32 posY;      // at 0x2C
-    f32 posZ;      // at 0x30
-    f32 dirX;      // at 0x34
-    f32 dirY;      // at 0x38
-    f32 dirZ;      // at 0x3C
+    Vec pos;       // at 0x28
+    Vec dir;       // at 0x34
 } GXLightObj;
 
-void GXInitLightAttn(GXLightObj *, f32, f32, f32, f32, f32, f32);
-void GXInitLightAttnA(GXLightObj *, f32, f32, f32);
-void GXInitLightAttnK(GXLightObj *, f32, f32, f32);
-void GXInitLightSpot(GXLightObj *, f32, GXSpotFn);
-void GXInitLightDistAttn(GXLightObj *, f32, f32, GXDistAttnFn);
-void GXInitLightPos(GXLightObj *, f32, f32, f32);
-void GXGetLightPos(const GXLightObj *, f32 *, f32 *, f32 *);
-void GXInitLightDir(GXLightObj *, f32, f32, f32);
-void GXGetLightDir(const GXLightObj *, f32 *, f32 *, f32 *);
-void GXInitSpecularDir(GXLightObj *, f32, f32, f32);
-void GXInitLightColor(GXLightObj *, GXColor);
-void GXLoadLightObjImm(GXLightObj *, u32);
+void GXInitLightAttn(GXLightObj *lobj, f32, f32, f32, f32, f32, f32);
+void GXInitLightAttnA(GXLightObj *lobj, f32, f32, f32);
+void GXInitLightAttnK(GXLightObj *lobj, f32, f32, f32);
+void GXInitLightSpot(GXLightObj *lobj, f32, GXSpotFn);
+void GXInitLightDistAttn(GXLightObj *lobj, f32, f32, GXDistAttnFn);
+void GXInitLightPos(GXLightObj *lobj, f32, f32, f32);
+void GXGetLightPos(const GXLightObj *lobj, f32 *, f32 *, f32 *);
+void GXInitLightDir(GXLightObj *lobj, f32, f32, f32);
+void GXGetLightDir(const GXLightObj *lobj, f32 *, f32 *, f32 *);
+void GXInitSpecularDir(GXLightObj *lobj, f32, f32, f32);
+void GXInitLightColor(GXLightObj *lobj, GXColor *color);
+void GXLoadLightObjImm(GXLightObj *lobj, u32);
 void GXLoadLightObjIndx(u32, u32);
-void GXSetChanAmbColor(GXChannelID, GXColor);
-void GXSetChanMatColor(GXChannelID, GXColor);
+void GXSetChanAmbColor(GXChannelID chan_id, GXColor *color);
+void GXSetChanMatColor(GXChannelID chan_id, GXColor *color);
 void GXSetNumChans(u8);
-void GXSetChanCtrl(GXChannelID, u8, GXColorSrc, GXColorSrc, GXLightID, GXDiffuseFn, GXAttnFn);
+void GXSetChanCtrl(GXChannelID chan_id, u8, GXColorSrc, GXColorSrc color_src, GXLightID light_id, GXDiffuseFn, GXAttnFn);
 
 #endif
