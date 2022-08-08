@@ -6,6 +6,7 @@
 
 #include <dolphin/gx/gxtypes.h>
 #include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/os/OSContext.h>
 
 // GXFifoObj private fields
 typedef struct
@@ -22,14 +23,14 @@ typedef struct
 
 typedef void (*GXTexRegionCallback)(void); // signature unknown
 
-typedef struct ___GXFifoLinkObj
+typedef struct
 {
     s16 x0;
     s16 x2;
     u16 x4;
     u16 x6;
-    s32 x8;
-    s32 xC;
+    OSContext *x8;
+    u32 xC;
     s32 x10;
     s32 x14;
     s32 x18;
@@ -95,15 +96,15 @@ extern volatile union
 #endif
     ;
 
-typedef struct ___GXFifoLinkDataContainer
+typedef struct
 {
     __GXFifoLinkObj *fifo_link;
-    u32 x8;
+    void *x8;
 } __GXFifoLinkDataContainer;
 
 typedef struct
 {
-    s16 x0;
+    u16 x0;
     s16 x2;
     s16 x4;
     s16 x6;
@@ -115,6 +116,13 @@ extern __GXFifoLinkDataContainer lbl_804D5BA8;
 #pragma endregion
 
 #pragma region GXFifo
+extern __GXGPFifo *lbl_804D72F4;
+extern __GXFifoUnknown *lbl_804D72F8;
+extern void *lbl_804D72FC;
+void GXInitFifoBase(void *, void *, u32);
+void GXSetCPUFifo(GXFifoObj *fifo);
+void GXSetGPFifo(__GXGPFifo *gp_fifo);
+void __GXFifoInit();
 #pragma endregion
 
 #pragma region GXAttr
@@ -129,5 +137,7 @@ void __GXSetVCD();
 void __GXSetDirtyState();
 void func_8033D3A0(s32);
 void func_8033D408(s16, s32, s16, s16);
+void func_8033F108(void *, s8, u32, s32, u32, s32, s32);
+void func_8033F228(s32 *, s32, s32);
 #pragma endregion
 #endif

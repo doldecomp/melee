@@ -503,10 +503,8 @@ lbl_80344DFC:
 /* 80344E28 00341A08  38 21 00 10 */	addi r1, r1, 0x10
 /* 80344E2C 00341A0C  4E 80 00 20 */	blr 
 
-
 .section .data
     .balign 8
-.global lbl_80401BF0
 lbl_80401BF0:
     .asciz ">>> L2 INVALIDATE : SHOULD NEVER HAPPEN\n"
     .balign 4
