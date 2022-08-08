@@ -424,7 +424,7 @@ void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
 
     func_8007D60C(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRHI, (FIGHTER_UNK_HAMMER | FTFOX_SPECIALHI_COLL_FLAG), NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRHI, (FIGHTER_HIT_NOUPDATE | FTFOX_SPECIALHI_COLL_FLAG), NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2223_flag.bits.b4 = 1;
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
 }
@@ -627,7 +627,7 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
 void ftFox_SpecialHiFall_Action(HSD_GObj* fighter_gobj)
 {
     func_8007D7FC(fighter_gobj->user_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_LANDING, (FIGHTER_UNK_0x1000 | FIGHTER_CMD_UPDATE), NULL, 13.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_LANDING, (FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE), NULL, 13.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 }
 

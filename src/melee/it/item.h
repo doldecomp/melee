@@ -302,7 +302,8 @@ typedef struct itHit
     Vec3 x58_posPrev;
     Vec3 x64_posColl;                         // 0x64   position of hurt collision
     f32 x70_coll_distance;                    // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
-    itHitVictim x74_victims[24];
+    itHitVictim x74_tipLog[12];
+    itHitVictim xD4_damageLog[12];
     s32 x134;
     s32 x138;
 } itHit;

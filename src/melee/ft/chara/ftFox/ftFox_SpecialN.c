@@ -317,7 +317,7 @@ void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
     }
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_LOOP, (FIGHTER_NOCHANGEMODEL | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_LOOP, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
         func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -341,7 +341,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
         if ((s32)temp_r28->foxVars[0].specialN.isBlasterLoop == TRUE)
         {
             temp_r28->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_LOOP, (FIGHTER_UNK_0x2000000 | FIGHTER_NOCHANGEMODEL | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_LOOP, (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
             temp_r28->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
             temp_r28->foxVars[0].specialN.isBlasterLoop = FALSE;
             func_802ADDD0(temp_r28->sa.fox.x222C_blasterGObj, 1);
@@ -349,7 +349,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
         else
         {
             HSD_GObj* temp;
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_END, (FIGHTER_NOCHANGEMODEL | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_END, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
             temp = temp_r28->sa.fox.x222C_blasterGObj;
             temp_r28->x2204_ftcmd_var1 = 1;
             func_802ADDD0(temp, 1);
@@ -457,7 +457,7 @@ void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
     }
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_LOOP, (FIGHTER_NOCHANGEMODEL | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_LOOP, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
         func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -481,7 +481,7 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
         if ((s32)fp->foxVars[0].specialN.isBlasterLoop == TRUE)
         {
             fp->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_LOOP, (FIGHTER_UNK_0x2000000 | FIGHTER_NOCHANGEMODEL | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_LOOP, (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(fighter_gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
             fp->foxVars[0].specialN.isBlasterLoop = FALSE;
@@ -491,7 +491,7 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
         {
             HSD_GObj* temp;
 
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_END, (FIGHTER_NOCHANGEMODEL | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_END, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(fighter_gobj);
 
             temp = fp->sa.fox.x222C_blasterGObj;
@@ -577,7 +577,7 @@ void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
             func_800CC730(fighter_gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 0, 1, 1.0f, foxAttrs->x18_FOX_BLASTER_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, 1.0f, foxAttrs->x18_FOX_BLASTER_LANDING_LAG);
     }
 }
 

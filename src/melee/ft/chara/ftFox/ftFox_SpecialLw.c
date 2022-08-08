@@ -954,7 +954,7 @@ void ftFox_SpecialLwEnd_GroundToAir(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_END, (FIGHTER_UNK_0x1000 | FIGHTER_CMD_UPDATE), NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_END, (FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE), NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 0x800E9D24
@@ -964,7 +964,7 @@ void ftFox_SpecialAirLwEnd_AirToGround(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_END, (FIGHTER_UNK_0x1000 | FIGHTER_CMD_UPDATE), NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_END, (FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE), NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fp);
 }
 
