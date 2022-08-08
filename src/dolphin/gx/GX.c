@@ -1,4 +1,5 @@
 #include <dolphin/gx/GX.h>
+#include <dolphin/gx/GXLight.h>
 
 #pragma region variables
 extern f32 lbl_804DE2F8;
@@ -13,9 +14,9 @@ extern void func_8033FCD4(s32);
 extern void local_8033D3E4();
 extern s32 func_80341878(s32);
 extern void GXSetCurrentMtx(s32);
-extern void func_8033FDA0(__GXFifoLinkObj *, s32, u8 *);
+extern void func_8033FDA0(GXData *, s32, u8 *);
 extern void GXSetFieldMode(s8, s32);
-extern void GXSetNumChans(s8);
+// extern void GXSetNumChans(s8);
 extern void GXSetPixelFmt(s32, s32);
 extern void func_8033D408(s16, s32, s16, s16);
 extern void func_8033D588(s32);
@@ -26,7 +27,7 @@ extern void func_8033D8A0(u8 *, s32);
 extern void func_8033D908(s8, u8 *, s8, u8 *);
 extern void func_8033DB30(s32);
 extern void func_8033DE4C();
-extern void func_8033F270(__GXFifoLinkObj *, s32, u8 *);
+extern void func_8033F270(GXData *, s32, u8 *);
 
 #pragma region inline
 extern GXTexRegionCallback func_8033F2B8(GXTexRegionCallback);

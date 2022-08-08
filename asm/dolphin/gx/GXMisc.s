@@ -1,5 +1,4 @@
 .include "macros.inc"
-.include "dolphin/gx/GXMisc.inc"
 
 .section .text  # 0x80005940 - 0x803B7240
 
@@ -357,3 +356,14 @@ __GXPEInit:
 /* 8033D044 00339C24  38 21 00 08 */	addi r1, r1, 8
 /* 8033D048 00339C28  7C 08 03 A6 */	mtlr r0
 /* 8033D04C 00339C2C  4E 80 00 20 */	blr 
+
+.section .sbss
+    .balign 8
+lbl_804D7320:
+	.skip 0x4
+lbl_804D7324:
+	.skip 0x4
+lbl_804D7328:
+	.skip 0x4
+lbl_804D732C:
+	.skip 0xC

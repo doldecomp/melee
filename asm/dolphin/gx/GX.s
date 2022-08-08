@@ -3,6 +3,7 @@
 .section .text  # 0x80005940 - 0x803B7240
 
 # https://decomp.me/scratch/mHuNc // 3500 (0%)
+# decl gxprivate.h
 .global __GXSetDirtyState
 __GXSetDirtyState:
 /* 8033D050 00339C30  7C 08 02 A6 */	mflr r0
@@ -47,6 +48,7 @@ lbl_8033D0C0:
 /* 8033D0D8 00339CB8  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/CwsOr // 5500 (0%)
+# decl GX.h
 .global func_8033D0DC
 func_8033D0DC:
 /* 8033D0DC 00339CBC  7C 08 02 A6 */	mflr r0
@@ -1344,6 +1346,8 @@ lbl_8033E1E8:
 /* 8033E284 0033AE64  B0 04 00 02 */	sth r0, 2(r4)
 /* 8033E288 0033AE68  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/C7rxf // 9000 (0%)
+# decl GXLight.h
 .global GXSetChanAmbColor
 GXSetChanAmbColor:
 /* 8033E28C 0033AE6C  2C 03 00 03 */	cmpwi r3, 3
@@ -5153,7 +5157,7 @@ lbl_80341688:
 /* 803416E4 0033E2C4  38 21 00 60 */	addi r1, r1, 0x60
 /* 803416E8 0033E2C8  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/xCqrv // 60 0 (100%)
+# https://decomp.me/scratch/xCqrv // 0 (100%)
 .global func_803416EC
 func_803416EC:
 /* 803416EC 0033E2CC  7C 08 02 A6 */	mflr r0
@@ -5944,6 +5948,8 @@ func_80342194:
 
 .section .data
     .balign 8
+
+# decl gxprivate.h
 .global lbl_80401168
 lbl_80401168:
     .4byte NULL
@@ -5996,6 +6002,8 @@ lbl_804011E0:
     .4byte 0x15161500
     .4byte NULL
 .global lbl_8040121C
+
+# decl gxprivate.h
 lbl_8040121C:
     .4byte 0x00000008
     .4byte 0x028001E0
@@ -6012,6 +6020,8 @@ lbl_8040121C:
     .4byte 0x06060808
     .4byte 0x0A0C0A08
     .4byte 0x08000000
+
+# decl gxprivate.h
 .global lbl_80401258
 lbl_80401258:
     .4byte 0x00000004
@@ -6030,6 +6040,7 @@ lbl_80401258:
     .4byte 0x0A0C0A08
     .4byte 0x08000000
     .4byte NULL
+
 .global jtbl_80401298
 jtbl_80401298:
 	.4byte lbl_8033DFF0
