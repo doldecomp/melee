@@ -100,7 +100,7 @@ void ftPeach_OnKnockbackExit(HSD_GObj* fighterObj) {
 s32 ftPeach_8011BA20(Fighter* fp) {
     s32 result = 1;
 
-    if (!(fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax) && !(fp->input.x65C & 0xC00))
+    if (!(fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax) && !(fp->input.x65C_heldInputs & 0xC00))
         result = 0;
 
     return result;

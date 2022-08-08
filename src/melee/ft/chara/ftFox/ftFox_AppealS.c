@@ -39,7 +39,7 @@ BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     s32 ftKind = fp->x4_fighterKind;
 
-    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) && (func_801E2CE8() != FALSE) && ((fp->input.x65C & HSD_BUTTON_DPAD_DOWN) == FALSE) && ((u8)fp->x682 == TRUE))
+    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) && (func_801E2CE8() != FALSE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == FALSE) && ((u8)fp->x682 == TRUE))
     {
         if (ftFox_CheckAppealSCount() == 0)
         {
@@ -92,14 +92,14 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     s32 var2;
     Fighter* fp = fighter_gobj->user_data;
 
-    fp->x2344_stateVar2 = 0;
+    fp->foxVars[0].appealS.animCount = 0;
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->x2C_facing_direction);
 
-    fp->x2340_stateVar1 = facingDir;
+    fp->foxVars[0].appealS.facingDir = facingDir;
     fp->x2210_ThrowFlags.flags = 0;
 
-    var1 = fp->x2340_stateVar1;
-    var2 = fp->x2344_stateVar2;
+    var1 = fp->foxVars[0].appealS.facingDir;
+    var2 = fp->foxVars[0].appealS.animCount;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, lbl_803C7DD0.facingDir[var1].ASID[var2], 0, NULL, 0.0f, 1.0f, 0.0f);
 }
@@ -149,13 +149,13 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
     }
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
-        fp->x2344_stateVar2 += 1;
-        if ((s32)fp->x2344_stateVar2_s32 >= 3)
+        fp->foxVars[0].appealS.animCount++;
+        if ((s32)fp->foxVars[0].appealS.animCount >= 3)
         {
             func_8008A324(fighter_gobj);
             return;
         }
-        Fighter_ActionStateChange_800693AC(fighter_gobj, lbl_803C7DD0.facingDir[fp->x2340_stateVar1].ASID[fp->x2344_stateVar2], 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, lbl_803C7DD0.facingDir[fp->foxVars[0].appealS.facingDir].ASID[fp->foxVars[0].appealS.animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
     }
 }
 
