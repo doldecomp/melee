@@ -1,24 +1,37 @@
 #pragma once
 
 #include "melee/ft/ftcommon.h"
+#include "melee/ft/ftwalkcommon.h"
 #include "melee/lb/lbvector.h"
 
 typedef struct _ftDonkeyAttributes {
-    s32 x0;
-    f32 x4;
+    s32 action_state;
+    s32 x4_action_state;
+    
+
+    //// used by ftdonkey_walk.c (maybe Cargo Hold) ////
     f32 x8;
     f32 xC;
     f32 x10;
     f32 x14;
     f32 x18;
     f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
-    s32 x2C;
-    s32 x30;
-    f32 x34;
-    f32 x38;
+    /////////////////////////////////////////////////
+
+    struct {
+        f32 x20_TURN_SPEED;
+        f32 x24_JUMP_STARTUP_LAG;
+        f32 x28_LANDING_LAG;
+    } cargo_hold;
+
+    //// Giant Punch
+    struct {
+        s32 x2C_REMAINING_ARM_SWINGS;
+        s32 x30_DAMAGE_PER_SWING;
+        f32 x34_PUNCH_HORIZONTAL_VEL;
+        f32 x38_LANDING_LAG;
+    } SpecialN;
+
     f32 x3C;
     f32 x40;
     f32 x44;
@@ -41,14 +54,7 @@ s32 ftDonkey_800DFA98(HSD_GObj* fighterObj);
 
 void ftDonkey_800DFAE4(HSD_GObj* fighterObj, f32);
 void ftDonkey_800DFB54(HSD_GObj* fighterObj);
-void ftWalkCommon_800DFCA4(HSD_GObj *fighterObj, s32 arg1, s32 arg2, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD, f32 argE, f32 argF);
-void ftWalkCommon_800DFDDC(HSD_GObj* fighterObj);
-void ftWalkCommon_800DFEC8(HSD_GObj* fighterObj, void (*arg_cb)(HSD_GObj*, f32));
 
-
-void ftWalkCommon_800DFDDC(HSD_GObj* fighterObj);
-
-void ftWalkCommon_800E0060(HSD_GObj* fighterObj);
 void ftDonkey_800E017C(HSD_GObj* fighterObj);
 void ftDonkey_800E0294(HSD_GObj* fighterObj);
 void ftDonkey_800E05E4(HSD_GObj* fighterObj);

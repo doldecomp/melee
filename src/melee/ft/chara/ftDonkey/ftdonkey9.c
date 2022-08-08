@@ -1,6 +1,5 @@
 #include "ftdonkey.h"
 
-
 void ftDonkey_800E0698(HSD_GObj* fighterObj) {
     func_80084F3C(fighterObj);
 }
@@ -27,8 +26,7 @@ BOOL ftDonkey_800E0750(HSD_GObj* fighterObj) {
     if (func_8008E984(fighter)) {
         return 1;
     }
-    func_8008D8D8(fighter->dmg.x1850_forceApplied);
-    if (func_8008D8E8() < 3) {
+    if (func_8008D8E8(scaleBy154_8008D8D8(fighter->dmg.x1850_forceApplied)) < 3) {
         return 1;
     }
     return 0;
@@ -37,7 +35,7 @@ BOOL ftDonkey_800E0750(HSD_GObj* fighterObj) {
 void ftDonkey_800E07B0(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     ftDonkeyAttributes* donkey_attr = fighter->x2CC;
-    func_8008DCE0(fighterObj, donkey_attr->x0 + 9, 0.0f);
+    func_8008DCE0(fighterObj, donkey_attr->action_state + 9, 0.0f);
 }
  
 void ftDonkey_800E07E4(HSD_GObj* fighterObj) {

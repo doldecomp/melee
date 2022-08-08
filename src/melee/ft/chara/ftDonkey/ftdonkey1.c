@@ -16,7 +16,7 @@ void ftDonkey_800DF980(HSD_GObj* fighterObj) {
         func_8007D7FC(fighter);
     }
     donkey_attr = getFtSpecialAttrs2CC(fighter);
-    Fighter_ActionStateChange_800693AC(fighterObj, donkey_attr->x0, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, donkey_attr->action_state, 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
 void ftDonkey_800DF9F0(HSD_GObj* fighterObj) {
@@ -29,7 +29,6 @@ void ftDonkey_800DF9F0(HSD_GObj* fighterObj) {
 void ftDonkey_800DFA50(HSD_GObj* fighterObj) {
     func_80084F3C(fighterObj);
 }
-
 
 void ftDonkey_800DFA70(HSD_GObj* fighterObj) {
     func_8008403C(fighterObj, &ftDonkey_800E0294);
