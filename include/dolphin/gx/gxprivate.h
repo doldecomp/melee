@@ -41,7 +41,8 @@ typedef struct _GXData
     s32 x7C;
     s32 x80;
     s32 x84;
-    u8 x88_pad[0xA8 - 0x88];
+    u8 x88_data[0x10];
+    u8 x98_data[0x10];
     GXColor ambColors[2]; // 0xA8
     GXColor matColors[2]; // 0xB0
     s32 xB4;
@@ -165,5 +166,8 @@ void func_8033D3A0(s32);
 void func_8033D408(s16, s32, s16, s16);
 void func_8033F108(void *, s8, u32, s32, u32, s32, s32);
 void func_8033F228(s32 *, s32, s32);
+s32 func_80341878(s32);
+void func_803418FC(u32, u32);
+
 #pragma endregion
 #endif

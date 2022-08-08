@@ -5275,7 +5275,8 @@ func_80341850:
 /* 80341870 0033E450  B0 04 00 02 */	sth r0, 2(r4)
 /* 80341874 0033E454  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/syIeb // 1820 (44.85%)
+# https://decomp.me/scratch/lS9KQ // 0 (100%)
+# decl gxprivate.h
 .global func_80341878
 func_80341878:
 /* 80341878 0033E458  2C 03 00 05 */	cmpwi r3, 5
@@ -5314,7 +5315,8 @@ lbl_803418EC:
 /* 803418F4 0033E4D4  B0 03 00 02 */	sth r0, 2(r3)
 /* 803418F8 0033E4D8  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/fQ5AW // 3230 (94.13%)
+# https://decomp.me/scratch/gAvJm // 3230 (94.13%)
+# decl gxprivate.h
 .global func_803418FC
 func_803418FC:
 /* 803418FC 0033E4DC  80 AD A5 08 */	lwz r5, __GXDatas@sda21(r13)

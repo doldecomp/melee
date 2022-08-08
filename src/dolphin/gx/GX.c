@@ -12,7 +12,6 @@ extern f32 lbl_804DE30C;
 extern void func_8033F3AC();
 extern void func_8033FCD4(s32);
 extern void local_8033D3E4();
-extern s32 func_80341878(s32);
 extern void GXSetCurrentMtx(s32);
 extern void func_8033FDA0(GXData *, s32, u8 *);
 extern void GXSetFieldMode(s8, s32);
