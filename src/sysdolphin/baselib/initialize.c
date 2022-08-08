@@ -162,11 +162,11 @@ static void HSD_GXInit(void)
     {
         GXColor color = lbl_804D5E1C;
         GXColor *arg = &color;
-        func_8033E11C(&lightobj, arg);
+        GXInitLightColor(&lightobj, arg);
     }
     for (i = 0; i < 8; i++)
     {
-        func_8033E144(&lightobj, func_80366B64(i));
+        GXLoadLightObjImm(&lightobj, func_80366B64(i));
     }
     func_80361FC4(-1);
 }
