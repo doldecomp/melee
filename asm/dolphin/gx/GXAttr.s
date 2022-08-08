@@ -1041,10 +1041,8 @@ GXSetNumTexGens:
 /* 8033CBB8 00339798  90 03 04 F0 */	stw r0, 0x4f0(r3)
 /* 8033CBBC 0033979C  4E 80 00 20 */	blr 
 
-
 .section .data
     .balign 8
-.global jtbl_80401048
 jtbl_80401048:
 	.4byte lbl_8033BF20
 	.4byte lbl_8033BF38
@@ -1072,7 +1070,6 @@ jtbl_80401048:
 	.4byte lbl_8033C204
 	.4byte lbl_8033C204
 	.4byte lbl_8033C094
-.global jtbl_804010B0
 jtbl_804010B0:
 	.4byte lbl_8033C450
 	.4byte lbl_8033C48C
@@ -1091,7 +1088,6 @@ jtbl_804010B0:
 	.4byte lbl_8033C73C
 	.4byte lbl_8033C73C
 	.4byte lbl_8033C48C
-.global jtbl_804010F4
 jtbl_804010F4:
 	.4byte lbl_8033CA6C
 	.4byte lbl_8033CA8C
@@ -1100,7 +1096,6 @@ jtbl_804010F4:
 	.4byte lbl_8033CAEC
 	.4byte lbl_8033CB04
 	.4byte lbl_8033CB24
-.global jtbl_80401110
 jtbl_80401110:
 	.4byte lbl_8033C8E0
 	.4byte lbl_8033C8EC
@@ -1127,13 +1122,10 @@ jtbl_80401110:
 
 .section .sdata
     .balign 8
-.global lbl_804D5BB0
 lbl_804D5BB0:
     .4byte 0x00040102
-.global lbl_804D5BB4
 lbl_804D5BB4:
     .4byte 0x00080102
-.global lbl_804D5BB8
 lbl_804D5BB8:
     .4byte 0x000C0102
     .4byte 0x00000000

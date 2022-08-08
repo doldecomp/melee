@@ -23,7 +23,8 @@ typedef struct
 
 typedef void (*GXTexRegionCallback)(void); // signature unknown
 
-typedef struct
+// https://github.com/kiwi515/open_rvl/blob/366b440e58f030aa0aacc9316d2717289d58fe16/include/GX/GXInit.h#L9-L41
+typedef struct _GXData
 {
     s16 x0;
     s16 x2;
@@ -38,7 +39,9 @@ typedef struct
     s32 x7C;
     s32 x80;
     s32 x84;
-    u8 x88_pad[0xB4 - 0x88];
+    u8 x88_pad[0xA8 - 0x88];
+    GXColor ambColors[2]; // xA8
+    GXColor matColors[2]; // xB0
     s32 xB4;
     s32 xB8;
     u8 xBC_pad[0xF8 - 0xBC];
@@ -60,8 +63,9 @@ typedef struct
     u8 x45C_pad[0x49C - 0x45C];
     u32 x49C_data[(0x4F0 - 0x49C) / 4];
     s32 x4F0;
-    u8 x4F4_pad[0x578 - 0x4F4];
-} __GXFifoLinkObj;
+    u8 x4F4_pad[0x570 - 0x4F4];
+    u32 dirtyFlags; // x574
+} GXData;
 
 typedef struct
 {
@@ -71,6 +75,20 @@ typedef struct
     s16 x6;
     s16 x8;
 } __GXFifoUnknown;
+
+typedef enum _GXChannelID
+{
+    GX_CHAN_RGB_0,
+    GX_CHAN_RGB_1,
+    GX_CHAN_ALPHA_0,
+    GX_CHAN_ALPHA_1,
+    GX_CHAN_RGBA_0,
+    GX_CHAN_RGBA_1,
+    GX_CHANNEL_ID_6,
+    GX_CHANNEL_ID_7,
+    GX_CHANNEL_ID_8,
+    GX_CHANNEL_ID_INVALID = 0xFF
+} GXChannelID;
 
 extern volatile u8 WGPIPE_OP
 #ifndef M2C_CONTEXT
@@ -98,7 +116,7 @@ extern volatile union
 
 typedef struct
 {
-    __GXFifoLinkObj *fifo_link;
+    GXData *fifo_link;
     void *x8;
 } __GXFifoLinkDataContainer;
 
@@ -134,6 +152,10 @@ void __GXSetVCD();
 #pragma endregion
 
 #pragma region GX
+extern GXRenderModeObj lbl_80401168;
+extern GXRenderModeObj lbl_8040121C;
+extern GXRenderModeObj lbl_80401258;
+
 void __GXSetDirtyState();
 void func_8033D3A0(s32);
 void func_8033D408(s16, s32, s16, s16);

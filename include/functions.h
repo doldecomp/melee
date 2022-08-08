@@ -7610,7 +7610,6 @@ void GXInitLightDir(struct _GXLightObj*, f32 x, f32 y, f32 z);
 void GXSetChanAmbColor(); // GXSetChanAmbColor(GXChannelID chan, GXColor amb_color);
 void GXSetChanMatColor(); //GXSetChanMatColor(GXChannelID chan, GXColor mat_color);
 // ? func_8033E55C(?);
-void GXSetChanCtrl(); //GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src, GXLightID light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn );
 // ? func_8033E8E8(?);
 // ? func_8033E9B0(?);
 // ? func_8033EC24(?);

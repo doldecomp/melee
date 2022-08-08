@@ -357,18 +357,13 @@ __GXPEInit:
 /* 8033D048 00339C28  7C 08 03 A6 */	mtlr r0
 /* 8033D04C 00339C2C  4E 80 00 20 */	blr 
 
-
 .section .sbss
     .balign 8
-.global lbl_804D7320
 lbl_804D7320:
 	.skip 0x4
-.global lbl_804D7324
 lbl_804D7324:
 	.skip 0x4
-.global lbl_804D7328
 lbl_804D7328:
 	.skip 0x4
-.global lbl_804D732C
 lbl_804D732C:
 	.skip 0xC

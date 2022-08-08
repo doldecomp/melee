@@ -68,14 +68,14 @@ GXInit:
 /* 8033A79C 0033737C  3C 80 CC 00 */	lis r4, 0xCC003000@ha
 /* 8033A7A0 00337380  3B E0 00 00 */	li r31, 0
 /* 8033A7A4 00337384  9B E3 04 EC */	stb r31, 0x4ec(r3)
-/* 8033A7A8 00337388  3C E0 80 4A */	lis r7, lbl_804A76C8@ha
+/* 8033A7A8 00337388  3C E0 80 4A */	lis r7, __GXData@ha
 /* 8033A7AC 0033738C  38 00 00 01 */	li r0, 1
 /* 8033A7B0 00337390  80 CD A5 08 */	lwz r6, lbl_804D5BA8@sda21(r13)
 /* 8033A7B4 00337394  38 A4 30 00 */	addi r5, r4, 0xCC003000@l
 /* 8033A7B8 00337398  38 64 10 00 */	addi r3, r4, 0x1000
 /* 8033A7BC 0033739C  98 06 04 ED */	stb r0, 0x4ed(r6)
 /* 8033A7C0 003373A0  38 04 40 00 */	addi r0, r4, 0x4000
-/* 8033A7C4 003373A4  3B C7 76 C8 */	addi r30, r7, lbl_804A76C8@l
+/* 8033A7C4 003373A4  3B C7 76 C8 */	addi r30, r7, __GXData@l
 /* 8033A7C8 003373A8  80 CD A5 08 */	lwz r6, lbl_804D5BA8@sda21(r13)
 /* 8033A7CC 003373AC  93 E6 04 DC */	stw r31, 0x4dc(r6)
 /* 8033A7D0 003373B0  80 CD A5 08 */	lwz r6, lbl_804D5BA8@sda21(r13)
@@ -1129,7 +1129,7 @@ lbl_8033B674:
     .balign 8
 
 # decl GXInit.c
-lbl_804A76C8:
+__GXData:
 	.skip 0x578
 
 
@@ -1139,7 +1139,7 @@ lbl_804A76C8:
 
 # decl gxprivate.h
 lbl_804D5BA8:
-    .4byte lbl_804A76C8
+    .4byte __GXData
     .4byte 0x00000000
 
 
