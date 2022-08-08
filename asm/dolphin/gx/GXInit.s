@@ -54,7 +54,7 @@ lbl_8033A76C:
 lbl_8033A77C:
 /* 8033A77C 0033735C  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/oHvrC // 49600 (0%)
+# https://decomp.me/scratch/gAywS // 49600 (0%)
 # decl GXInit.h
 .global GXInit
 GXInit:
@@ -1140,23 +1140,39 @@ __GXData:
 # decl gxprivate.h
 __GXDatas:
     .4byte __GXData
-    .4byte 0x00000000
+    .4byte NULL
 
 
 .section .sdata2
     .balign 8
+
+# decl GXInit.c
 lbl_804DE200:
 	.4byte 0x404040FF
+
+# decl GXInit.c
 lbl_804DE204:
 	.4byte 0x00000000
+
+# decl GXInit.c
 lbl_804DE208:
 	.4byte 0xFFFFFFFF
+
+# decl GXInit.c
 lbl_804DE20C:
 	.4byte 0x3F800000
+
+# decl GXInit.c
 lbl_804DE210:
 	.4byte 0x00000000
+
+# decl GXInit.c
 lbl_804DE214:
 	.4byte 0x3DCCCCCD
+
+# decl GXInit.c
 lbl_804DE218:
 	.4byte 0x43300000
-	.4byte 0x00000000
+
+# decl ignored
+	.skip 0x4
