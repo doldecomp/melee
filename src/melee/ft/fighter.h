@@ -107,7 +107,7 @@ typedef enum CharacterKind
 #define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
 #define FIGHTER_HIT_NOUPDATE 0x8 // Keep hitboxes
 #define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?) 
-#define FIGHTER_UNK_0x20 0x20
+#define FIGHTER_ANIMVEL_NOUPDATE 0x20
 #define FIGHTER_UNK_0x40 0x40
 #define FIGHTER_MATANIM_NOUPDATE 0x80 // Ignore switching to character's "hurt" textures (?) //
 #define FIGHTER_THROW_EXCEPTION_NOUPDATE 0x100 // Resets thrower GObj pointer to NULL if false? //
@@ -131,7 +131,7 @@ typedef enum CharacterKind
 #define FIGHTER_MODELFLAG_NOUPDATE 0x4000000
 #define FIGHTER_UNK_0x2227 0x8000000
 #define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
-#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fighter animation, e.g. Link/Young Link Up-B ground -> air transition. //
+#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fighter animation?
 #define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
 #define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
 

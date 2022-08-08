@@ -1144,7 +1144,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         fighter->x196C_hitlag_mult = 0.0f;
     }
 
-    if ((arg2 & 0x200) == 0) {
+    if ((arg2 & FIGHTER_SFX_PRESERVE) == 0) {
         func_80088884(fighter);
         func_800888E0(fighter);
         func_800887CC(fighter);
@@ -1313,7 +1313,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
                         fighter->x6B0.x = fighter->x6B0.y = fighter->x6B0.z = c;
                         fighter->x6A4_transNOffset.x = fighter->x6A4_transNOffset.y = fighter->x6A4_transNOffset.z = c;
                         fighter->x698 = fighter->x68C_transNPos;
-                    } else if (((arg2 & 0x20) == 0) && (fighter->xE0_ground_or_air == GA_Ground)) {
+                    } else if (((arg2 & FIGHTER_ANIMVEL_NOUPDATE) == 0) && (fighter->xE0_ground_or_air == GA_Ground)) {
                         f32 temp_vel = fighter->x6A4_transNOffset.z * fighter->x2C_facing_direction;
                         fighter->x80_self_vel.x = temp_vel;
                         fighter->xEC_ground_vel = temp_vel;
@@ -1326,7 +1326,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
                         fighter->x6E4.x = fighter->x6E4.y = fighter->x6E4.z = c;
                         fighter->x6D8.x = fighter->x6D8.y = fighter->x6D8.z = c;
                         fighter->x6CC = fighter->x6C0;
-                    } else if (((arg2 & 0x20) == 0) && (fighter->xE0_ground_or_air == GA_Ground)) {
+                    } else if (((arg2 & FIGHTER_ANIMVEL_NOUPDATE) == 0) && (fighter->xE0_ground_or_air == GA_Ground)) {
                         f32 temp_vel = fighter->x6D8.z * fighter->x2C_facing_direction;
                         fighter->x80_self_vel.x = temp_vel;
                         fighter->xEC_ground_vel = temp_vel;
