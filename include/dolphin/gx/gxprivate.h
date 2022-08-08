@@ -33,15 +33,17 @@ typedef struct _GXData
     OSContext *x8;
     u32 xC;
     s32 x10;
-    s32 x14;
-    s32 x18;
-    u8 x1C_pad[0x7C - 0x1C];
+    u32 x14;
+    u32 x18;
+    s32 x1C_data[(0x3C - 0x1C) / 4];
+    s32 x3C_data[(0x5C - 0x3C) / 4];
+    s32 x5C_data[(0x7C - 0x5C) / 4];
     s32 x7C;
     s32 x80;
     s32 x84;
     u8 x88_pad[0xA8 - 0x88];
-    GXColor ambColors[2]; // xA8
-    GXColor matColors[2]; // xB0
+    GXColor ambColors[2]; // 0xA8
+    GXColor matColors[2]; // 0xB0
     s32 xB4;
     s32 xB8;
     u8 xBC_pad[0xF8 - 0xBC];
@@ -52,7 +54,7 @@ typedef struct _GXData
     s32 x170_data[(0x1AC - 0x170) / 4];
     u8 x1AC_pad[0x1B0 - 0x1AC];
     GXTexRegionCallback x1B0_callbacks[(0x418 - 0x1B0) / 4];
-    u8 x418_pad[0x41C - 0x418];
+    u8 x418[2];
     s8 x41C;
     s8 x41D;
     u8 x41E_pad[0x43C - 0x41E];
@@ -61,7 +63,9 @@ typedef struct _GXData
     u8 x454_pad[4];
     f32 x458;
     u8 x45C_pad[0x49C - 0x45C];
-    u32 x49C_data[(0x4F0 - 0x49C) / 4];
+    u32 x49C_data[(0x4E8 - 0x49C) / 4];
+    u8 x4EC_pad[2];
+    u8 x4EE;
     s32 x4F0;
     u8 x4F4_pad[0x570 - 0x4F4];
     u32 dirtyFlags; // x574
@@ -116,12 +120,6 @@ extern volatile union
 
 typedef struct
 {
-    GXData *fifo_link;
-    void *x8;
-} __GXFifoLinkDataContainer;
-
-typedef struct
-{
     u16 x0;
     s16 x2;
     s16 x4;
@@ -129,8 +127,14 @@ typedef struct
     u8 x8_pad[0x38 - 0x8];
 } __GXGPFifo;
 
+typedef struct
+{
+    GXData *main;
+    GXData *null;
+} GXDatas;
+
 #pragma region GXInit
-extern __GXFifoLinkDataContainer lbl_804D5BA8;
+extern GXDatas __GXDatas;
 #pragma endregion
 
 #pragma region GXFifo
@@ -144,8 +148,8 @@ void __GXFifoInit();
 #pragma endregion
 
 #pragma region GXAttr
-void __GXSetVAT();
 void __GXSetVCD();
+void __GXSetVAT();
 #pragma endregion
 
 #pragma region GXMisc
