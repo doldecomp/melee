@@ -371,7 +371,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fighter) {
 
 	fighter->x1064_thrownHitbox.x134 = 0;
 	fighter->x221C_u16_y = 0;
-	fighter->x20AC = 0;
+	fighter->x20AC = NULL;
 	fighter->x221C_flag.bits.b5 = 0;
 
     fighter->x2150 = 
@@ -2910,7 +2910,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj) {
         fighter->dmg.x1914 = 0;
         fighter->dmg.x1918 = 0;
         fighter->dmg.x191C = 0.0f;
-        fighter->x20AC = 0;
+        fighter->x20AC = NULL;
         fighter->x221C_flag.bits.b5 = 0;
         
         fighter->dmg.x1924 = 0;

@@ -2699,7 +2699,7 @@ void func_800DF0D0();
 // ? func_800E198C(?);
 void ftCaptain_OnLoadForGanon(struct _Fighter*); // UnclePunch map file: FighterOnLoad_Ganondorf
 void ftCFalcon_LoadSpecialAttrs(struct _HSD_GObj*);
-// ? func_800E3278(?);
+// ? ftCaptain_SpecialS_RemoveGFX(?);
 // ? func_800E3EAC(?);
 // ? func_800E4D7C(?);
 // ? func_800E526C(?);

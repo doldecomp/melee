@@ -7,6 +7,12 @@
 
 #define HSD_GOBJ_OBJ_NONE 0xFF
 
+#define HSD_GOBJ_CLASS_FIGHTER 0x4
+
+#define HSD_GOBJ_CLASS_ITEM 0x6
+
+#define HSD_GOBJ_CLASS_EFFECT 0x8
+
 typedef struct _HSD_GObj {
     u16 classifier;
     u8 p_link;

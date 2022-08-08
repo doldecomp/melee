@@ -7,14 +7,14 @@ void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter_data = (Fighter*)fighter_gobj->user_data;
     func_80074A4C(fighter_gobj,0,0);
-    fighter_data->sa.captain.x2230 = 0;
-    fighter_data->sa.captain.x222C = 0;
+    fighter_data->sa.captain.x2230_isSpecialSGFX = 0;
+    fighter_data->sa.captain.x222C_isSpecialSStartGFX = 0;
 }
 
 // lbl_800E28C8
 // https://decomp.me/scratch/IoniN
 void lbl_800E28C8(HSD_GObj* fighter_gobj) {
-    func_800E3278(fighter_gobj);
+    ftCaptain_SpecialS_RemoveGFX(fighter_gobj);
 }
 
 // func_800e28e8

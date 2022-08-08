@@ -932,8 +932,8 @@ struct SpecialAttrs_Fox {
 };
 
 struct SpecialAttrs_Captain {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
+    /* 0x222C */ BOOL x222C_isSpecialSStartGFX;
+    /* 0x2230 */ BOOL x2230_isSpecialSGFX;
 };
 
 struct SpecialAttrs_DK {
@@ -1569,7 +1569,7 @@ typedef struct _Fighter {
     /* 0x20A0 */ struct _HSD_JObj* x20A0_accessory;
     /* 0x20A4 */ s32 x20A4;
     /* 0x20A8 */ s32 x20A8;
-    /* 0x20AC */ u32 x20AC;
+    /* 0x20AC */ HSD_GObj* x20AC;
     u8 filler_x20B0[0x2100 - 0x20B0];
     /* 0x2100 */ s8 x2100;
     /* 0x2101 */ u8 x2101_bits_0to6 : 7;
@@ -1744,6 +1744,9 @@ typedef struct _Fighter {
     /* 0x2338 */ Vec2 x2338;
     union {
         union {
+            ftCaptainStateVars captainVars[0]; // 0x2340
+        };
+        union {
             ftFoxStateVars foxVars[0]; // 0x2340
         };
         union {
@@ -1892,6 +1895,11 @@ inline void* getFtSpecialAttrs(Fighter* fighter_data)
 {
     void* fighter_attr = fighter_data->x2D4_specialAttributes;
     return fighter_attr;
+}
+
+inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
+{
+    return fp->x2D4_specialAttributes;
 }
 
 inline s32 ftGetKind(Fighter* fp)

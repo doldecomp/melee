@@ -30,7 +30,11 @@ typedef enum ftCaptainAction {
 
 // Flags used by Captain Falcon and Ganondorf in ActionStateChange //
 
+// SpecialN/SpecialAirN (Falcon / Warlock Punch)
 #define FTCAPTAIN_SPECIALN_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_RUMBLE_UNK | FIGHTER_CMD_UPDATE | FIGHTER_UNK_0x1000 | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_UNK_0x400000 | FIGHTER_UNK_0x4000000 | FIGHTER_UNK_0x2227
+
+// SpecialS/SpecialAirS (Raptor Boost / Gerudo Dragon)
+#define FTCAPTAIN_SPECIALS_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_UNK_0x1000 | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_UNK_0x400000 | FIGHTER_UNK_0x4000000 | FIGHTER_UNK_0x2227
 
 typedef struct _ftCaptainAttributes
 {
@@ -38,19 +42,19 @@ typedef struct _ftCaptainAttributes
     f32 x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS;   // Minimum control stick range required for upward angle (Positive Y)
     f32 x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF;          // Maximum angle change from control stick input
     f32 xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X;          // Momentum gained from aerial Falcon/Warlock Punch
-    f32 x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL; // Additional momentum from angled Falcon/Warlock Punch
+    f32 x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL;       // Additional momentum from angled Falcon/Warlock Punch
 
-    f32 SIDEB_SUCCESS_GRAVITY;
-    f32 SIDEB_WHIFF_GRAVITY;
-    f32 SIDEB_WHIFF_GRAVITY_UNK;
-    f32 SIDEB_UNK1;
-    f32 SIDEB_UNK2;
-    f32 SIDEB_UNK3;
-    f32 SIDEB_UNK4;
-    f32 SIDEB_UNK5;
-    f32 SIDEB_UNK6;
-    f32 SIDEB_WHIFF_FREEFALL_TOGGLE;
-    f32 SIDEB_SUCCESS_FREEFALL_TOGGLE;
+    f32 x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
+    f32 x18_CAPTAIN_RAPTORBOOST_GRAVITY;
+    f32 x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY;
+    f32 x20_CAPTAIN_RAPTORBOOST_UNK1;
+    f32 x24_CAPTAIN_RAPTORBOOST_UNK2;
+    f32 x28_CAPTAIN_RAPTORBOOST_UNK3;
+    f32 x2C_CAPTAIN_RAPTORBOOST_UNK4;
+    f32 x30_CAPTAIN_RAPTORBOOST_UNK5;
+    f32 x34_CAPTAIN_RAPTORBOOST_UNK6; // All of these Unk variables are unused
+    f32 x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG;
+    f32 x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG;
 
     f32 UPB_AIR_FRICTION_MULTIPLIER;
     f32 UPB_HORIZONTAL_MOMENTUM;
@@ -80,6 +84,7 @@ typedef struct _ftCaptainAttributes
 
 void func_800E2AEC(HSD_GObj* fighter_gobj);
 void func_800E2888(HSD_GObj* fighter_gobj);
+void lbl_800E28C8(HSD_GObj* fighter_gobj);
 void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL unk_var);
 void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj) ;
 void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj);
@@ -98,5 +103,28 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj);
+
+// Side Special - Raptor Boost / Gerudo Dragon (SpecialS) //
+
+void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialSStart_IASA(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialS_IASA(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirSStart_IASA(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirS_IASA(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialSStart_Phys(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialS_Phys(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj);
+void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
 
 #endif
