@@ -1,10 +1,9 @@
 .include "macros.inc"
+.include "melee/lb/lbrefract.inc"
 
 .section .text
 
 # https://decomp.me/scratch/CWwOc
-
-
 local_80021CE8:
 /* 80021CE8 0001E8C8  7C 08 02 A6 */	mflr r0
 /* 80021CEC 0001E8CC  3C A0 43 30 */	lis r5, 0x4330
@@ -164,7 +163,9 @@ lbl_80021ED4:
 /* 80021F28 0001EB08  38 21 00 C0 */	addi r1, r1, 0xc0
 /* 80021F2C 0001EB0C  7C 08 03 A6 */	mtlr r0
 /* 80021F30 0001EB10  4E 80 00 20 */	blr 
-lbl_80021F34:
+
+# https://decomp.me/scratch/VElQJ
+callback_80021F34:
 /* 80021F34 0001EB14  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80021F38 0001EB18  54 A6 F0 BE */	srwi r6, r5, 2
 /* 80021F3C 0001EB1C  80 E3 00 00 */	lwz r7, 0(r3)
@@ -179,8 +180,10 @@ lbl_80021F34:
 /* 80021F60 0001EB40  7D 23 01 AE */	stbx r9, r3, r0
 /* 80021F64 0001EB44  7C 63 02 14 */	add r3, r3, r0
 /* 80021F68 0001EB48  99 03 00 01 */	stb r8, 1(r3)
-/* 80021F6C 0001EB4C  4E 80 00 20 */	blr 
-lbl_80021F70:
+/* 80021F6C 0001EB4C  4E 80 00 20 */	blr
+
+# https://decomp.me/scratch/xCKEK
+callback_80021F70:
 /* 80021F70 0001EB50  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80021F74 0001EB54  54 A9 F0 BE */	srwi r9, r5, 2
 /* 80021F78 0001EB58  81 43 00 00 */	lwz r10, 0(r3)
@@ -198,7 +201,9 @@ lbl_80021F70:
 /* 80021FA8 0001EB88  54 00 08 3C */	slwi r0, r0, 1
 /* 80021FAC 0001EB8C  7C 69 03 2E */	sthx r3, r9, r0
 /* 80021FB0 0001EB90  4E 80 00 20 */	blr 
-lbl_80021FB4:
+
+# https://decomp.me/scratch/sveP4
+callback_80021FB4:
 /* 80021FB4 0001EB94  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80021FB8 0001EB98  54 AA F0 BE */	srwi r10, r5, 2
 /* 80021FBC 0001EB9C  81 63 00 00 */	lwz r11, 0(r3)
@@ -216,7 +221,9 @@ lbl_80021FB4:
 /* 80021FEC 0001EBCC  98 E3 00 20 */	stb r7, 0x20(r3)
 /* 80021FF0 0001EBD0  99 03 00 21 */	stb r8, 0x21(r3)
 /* 80021FF4 0001EBD4  4E 80 00 20 */	blr 
-lbl_80021FF8:
+
+# https://decomp.me/scratch/kcNXw
+callback_80021FF8:
 /* 80021FF8 0001EBD8  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80021FFC 0001EBDC  54 AA F0 BE */	srwi r10, r5, 2
 /* 80022000 0001EBE0  81 63 00 00 */	lwz r11, 0(r3)
@@ -249,7 +256,9 @@ lbl_80022058:
 /* 80022060 0001EC40  7C 0A 20 AE */	lbzx r0, r10, r4
 /* 80022064 0001EC44  90 09 00 00 */	stw r0, 0(r9)
 /* 80022068 0001EC48  4E 80 00 20 */	blr 
-lbl_8002206C:
+
+# https://decomp.me/scratch/ZzShG
+callback_8002206C:
 /* 8002206C 0001EC4C  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80022070 0001EC50  54 AA F0 BE */	srwi r10, r5, 2
 /* 80022074 0001EC54  81 63 00 00 */	lwz r11, 0(r3)
@@ -303,8 +312,10 @@ lbl_80022114:
 /* 80022114 0001ECF4  38 00 00 00 */	li r0, 0
 lbl_80022118:
 /* 80022118 0001ECF8  90 08 00 00 */	stw r0, 0(r8)
-/* 8002211C 0001ECFC  4E 80 00 20 */	blr 
-lbl_80022120:
+/* 8002211C 0001ECFC  4E 80 00 20 */	blr
+
+# https://decomp.me/scratch/K9xQ4
+callback_80022120:
 /* 80022120 0001ED00  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80022124 0001ED04  54 AA F0 BE */	srwi r10, r5, 2
 /* 80022128 0001ED08  81 63 00 00 */	lwz r11, 0(r3)
@@ -340,9 +351,7 @@ lbl_80022184:
 /* 80022194 0001ED74  90 08 00 00 */	stw r0, 0(r8)
 /* 80022198 0001ED78  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/fE52x
-
-
+# https://decomp.me/scratch/MxVsy
 local_8002219C:
 /* 8002219C 0001ED7C  7C 08 02 A6 */	mflr r0
 /* 800221A0 0001ED80  90 01 00 04 */	stw r0, 4(r1)
@@ -375,31 +384,31 @@ lbl_80022204:
 /* 80022208 0001EDE8  40 80 00 74 */	bge lbl_8002227C
 /* 8002220C 0001EDEC  48 00 00 4C */	b lbl_80022258
 lbl_80022210:
-/* 80022210 0001EDF0  3C 60 80 02 */	lis r3, lbl_80021F34@ha
-/* 80022214 0001EDF4  38 03 1F 34 */	addi r0, r3, lbl_80021F34@l
-/* 80022218 0001EDF8  3C 60 80 02 */	lis r3, lbl_80021FF8@ha
+/* 80022210 0001EDF0  3C 60 80 02 */	lis r3, callback_80021F34@ha
+/* 80022214 0001EDF4  38 03 1F 34 */	addi r0, r3, callback_80021F34@l
+/* 80022218 0001EDF8  3C 60 80 02 */	lis r3, callback_80021FF8@ha
 /* 8002221C 0001EDFC  90 1D 00 18 */	stw r0, 0x18(r29)
-/* 80022220 0001EE00  38 03 1F F8 */	addi r0, r3, lbl_80021FF8@l
+/* 80022220 0001EE00  38 03 1F F8 */	addi r0, r3, callback_80021FF8@l
 /* 80022224 0001EE04  90 1D 00 1C */	stw r0, 0x1c(r29)
 /* 80022228 0001EE08  57 E0 18 34 */	rlwinm r0, r31, 3, 0, 0x1a
 /* 8002222C 0001EE0C  90 1D 00 10 */	stw r0, 0x10(r29)
 /* 80022230 0001EE10  48 00 00 54 */	b lbl_80022284
 lbl_80022234:
-/* 80022234 0001EE14  3C 60 80 02 */	lis r3, lbl_80021F70@ha
-/* 80022238 0001EE18  38 03 1F 70 */	addi r0, r3, lbl_80021F70@l
-/* 8002223C 0001EE1C  3C 60 80 02 */	lis r3, lbl_8002206C@ha
+/* 80022234 0001EE14  3C 60 80 02 */	lis r3, callback_80021F70@ha
+/* 80022238 0001EE18  38 03 1F 70 */	addi r0, r3, callback_80021F70@l
+/* 8002223C 0001EE1C  3C 60 80 02 */	lis r3, callback_8002206C@ha
 /* 80022240 0001EE20  90 1D 00 18 */	stw r0, 0x18(r29)
-/* 80022244 0001EE24  38 03 20 6C */	addi r0, r3, lbl_8002206C@l
+/* 80022244 0001EE24  38 03 20 6C */	addi r0, r3, callback_8002206C@l
 /* 80022248 0001EE28  90 1D 00 1C */	stw r0, 0x1c(r29)
 /* 8002224C 0001EE2C  57 E0 18 34 */	rlwinm r0, r31, 3, 0, 0x1a
 /* 80022250 0001EE30  90 1D 00 10 */	stw r0, 0x10(r29)
 /* 80022254 0001EE34  48 00 00 30 */	b lbl_80022284
 lbl_80022258:
-/* 80022258 0001EE38  3C 60 80 02 */	lis r3, lbl_80021FB4@ha
-/* 8002225C 0001EE3C  38 03 1F B4 */	addi r0, r3, lbl_80021FB4@l
-/* 80022260 0001EE40  3C 60 80 02 */	lis r3, lbl_80022120@ha
+/* 80022258 0001EE38  3C 60 80 02 */	lis r3, callback_80021FB4@ha
+/* 8002225C 0001EE3C  38 03 1F B4 */	addi r0, r3, callback_80021FB4@l
+/* 80022260 0001EE40  3C 60 80 02 */	lis r3, callback_80022120@ha
 /* 80022264 0001EE44  90 1D 00 18 */	stw r0, 0x18(r29)
-/* 80022268 0001EE48  38 03 21 20 */	addi r0, r3, lbl_80022120@l
+/* 80022268 0001EE48  38 03 21 20 */	addi r0, r3, callback_80022120@l
 /* 8002226C 0001EE4C  90 1D 00 1C */	stw r0, 0x1c(r29)
 /* 80022270 0001EE50  57 E0 20 32 */	rlwinm r0, r31, 4, 0, 0x19
 /* 80022274 0001EE54  90 1D 00 10 */	stw r0, 0x10(r29)
@@ -418,8 +427,7 @@ lbl_80022288:
 /* 8002229C 0001EE7C  7C 08 03 A6 */	mtlr r0
 /* 800222A0 0001EE80  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/hY7fQ
-
+# https://decomp.me/scratch/2RGzd
 .global func_800222A4
 func_800222A4:
 /* 800222A4 0001EE84  7C 08 02 A6 */	mflr r0
@@ -609,8 +617,7 @@ lbl_80022548:
 /* 80022558 0001F138  7C 08 03 A6 */	mtlr r0
 /* 8002255C 0001F13C  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/pOPkf
-
+# https://decomp.me/scratch/ZtsBi
 .global func_80022560
 func_80022560:
 /* 80022560 0001F140  7C 08 02 A6 */	mflr r0
@@ -1439,306 +1446,3 @@ lbl_80023044:
 lbl_80023054:
 /* 80023054 0001FC34  38 21 00 10 */	addi r1, r1, 0x10
 /* 80023058 0001FC38  4E 80 00 20 */	blr 
-
-
-.section .data
-    .balign 8
-
-struct_803BB0B0:
-    .asciz "?"
-    .balign 4
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x3F000000
-    .4byte NULL
-    .4byte 0xBF000000
-    .4byte NULL
-    .4byte 0x3F000000
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x3F800000
-
-struct_803BB0E0:
-    .4byte 0xBF000000
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte 0xBF000000
-    .4byte NULL
-
-struct_803BB0F8:
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x00000004
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-
-struct_803BB110:
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte 0x01010000
-    .4byte NULL
-
-struct_803BB120:
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x3F800000
-    .4byte 0x3F800000
-    .4byte 0x3F800000
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x01010000
-    .4byte 0x00000083
-    .4byte 0x3F800000
-    .4byte 0x00000001
-    .4byte struct_803BB0F8
-    .4byte NULL
-    .4byte struct_803BB110
-    .4byte NULL
-
-struct_803BB17C:
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x00000003
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-
-struct_803BB194:
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte 0x01010000
-    .4byte NULL
-    .4byte NULL
-    .4byte struct_803BB120
-    .4byte 0x00000001
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x3F800000
-    .4byte 0x3F800000
-    .4byte 0x3F800000
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x01010000
-    .4byte 0x00000081
-    .4byte 0x3F800000
-    .4byte 0x00000001
-    .4byte struct_803BB17C
-    .4byte NULL
-    .4byte struct_803BB194
-    .4byte NULL
-    .asciz "LbRf.dat"
-    .balign 4
-    .asciz "lbRefData"
-    .balign 4
-    .4byte local_80022650
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte local_80022940
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .asciz "refract_class_library"
-    .balign 4
-    .asciz "refract_dobj"
-    .balign 4
-    .asciz "refract_pobj"
-    .balign 4
-
-str_lbRefSetUnuse_error:
-    .asciz "lbRefSetUnuse error!\n"
-    .balign 4
-
-str_lbrefract_c:
-    .asciz "lbrefract.c"
-    .balign 4
-
-
-.section .rodata
-    .balign 8
-
-atanf_lookup:
-    .4byte 0x3F800000
-    .4byte 0xBEAAAAAA
-    .4byte 0x3E4CCC81
-    .4byte 0xBE123E7D
-    .4byte 0x3DE21F95
-    .4byte 0xBDAD417C
-    .4byte 0x3D41186D
-    .4byte 0x40DA826B
-    .4byte 0x404F5958
-    .4byte 0x40000000
-    .4byte 0x3FB925AB
-    .4byte 0x3F95F61A
-    .4byte 0x3F851081
-    .4byte 0x36EF692F
-    .4byte 0x355C1DF9
-    .4byte 0x00000000
-    .4byte 0x35291D45
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x3EC90EAA
-    .4byte 0x3F16CBE4
-    .4byte 0x3F490FDA
-    .4byte 0x3F7B53C5
-    .4byte 0x3F96CBE2
-    .4byte 0x3FAFEDD9
-    .4byte 0x00000000
-    .4byte 0x37185D99
-    .4byte 0x32C59189
-    .4byte 0x33874A9E
-    .4byte 0x353CFA83
-    .4byte 0x348637BD
-    .4byte 0x35541063
-    .4byte 0x401A8277
-    .4byte 0x3FBF90C7
-    .4byte 0x3F800000
-    .4byte 0x3F2B0DC1
-    .4byte 0x3ED413CD
-    .4byte 0x3E4BAFAF
-    .4byte 0x3516DC59
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-
-
-.section .bss, "wa"
-    .balign 8
-
-skip40_804336D0:
-	.skip 0x40
-
-
-.section .sdata 
-    .balign 8
-
-str_0_804D3868:
-    .asciz "0"
-    .balign 4
-    .4byte NULL
-
-
-.section .sbss
-    .balign 8
-
-skip8_804D63E8:
-	.skip 0x8
-
-
-.section .sdata2
-    .balign 8
-
-lbl_804D7D70:
-	.4byte 0x40000000
-
-lbl_804D7D74:
-	.4byte 0xBF800000
-
-lbl_804D7D78:
-	.4byte 0x00000000
-	.4byte 0x00000000
-
-lbl_804D7D80:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
-
-lbl_804D7D88:
-	.4byte 0x40080000
-	.4byte 0x00000000
-
-lbl_804D7D90:
-	.4byte 0x3F800000
-
-lbl_804D7D94:
-	.4byte 0x43000000
-
-lbl_804D7D98:
-	.4byte 0x42FE0000
-	.4byte 0x00000000
-
-lbl_804D7DA0:
-	.4byte 0x43300000
-	.4byte 0x00000000
-
-lbl_804D7DA8:
-	.4byte 0x3F000000
-
-lbl_804D7DAC:
-	.4byte 0xBF000000
-
-lbl_804D7DB0:
-	.4byte 0x80000000
-
-lbl_804D7DB4:
-	.4byte 0xBFC90FDB
-
-lbl_804D7DB8:
-	.4byte 0x40490FDB
-
-lbl_804D7DBC:
-	.4byte 0x00000000
-
-lbl_804D7DC0:
-	.4byte 0x3FC90FDB
-
-lbl_804D7DC4:
-	.4byte 0x3F800000
-
-lbl_804D7DC8:
-	.4byte 0x3F000000
-
-lbl_804D7DCC:
-	.4byte 0x40400000
-
-lbl_804D7DD0:
-	.4byte 0x401A827A
-
-lbl_804D7DD4:
-	.4byte 0x3ED413CD
