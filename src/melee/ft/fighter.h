@@ -128,7 +128,7 @@ typedef enum CharacterKind
 #define FIGHTER_METALB_NOUPDATE 0x800000
 #define FIGHTER_UNK_0x1000000 0x1000000
 #define FIGHTER_ATTACKCOUNT_NOUPDATE 0x2000000
-#define FIGHTER_MODELFLAG_NOUPDATE 0x4000000
+#define FIGHTER_MODEL_FLAG_NOUPDATE 0x4000000
 #define FIGHTER_UNK_0x2227 0x8000000
 #define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
 #define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fighter animation?
@@ -1744,6 +1744,9 @@ typedef struct _Fighter {
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
     union {
+        union {
+            ftCommonStateVars commonVars[0];
+        };
         union {
             ftCaptainStateVars captainVars[0]; // 0x2340
         };

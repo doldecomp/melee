@@ -1095,7 +1095,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_sta
         fighter->x221E_flag.bits.b4 = 1;
     }
 
-    if ((arg2 & FIGHTER_MODELFLAG_NOUPDATE) == 0) {
+    if ((arg2 & FIGHTER_MODEL_FLAG_NOUPDATE) == 0) {
         fighter->x2225_flag.bits.b2 = 1;
     }
 
