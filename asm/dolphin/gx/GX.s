@@ -2392,6 +2392,8 @@ func_8033F06C:
 /* 8033F100 0033BCE0  38 21 00 20 */	addi r1, r1, 0x20
 /* 8033F104 0033BCE4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/GFUrl // 7200 (0%)
+# decl gxprivate.h
 .global func_8033F108
 func_8033F108:
 /* 8033F108 0033BCE8  2C 06 00 01 */	cmpwi r6, 1
@@ -2478,6 +2480,8 @@ lbl_8033F1D4:
 /* 8033F220 0033BE00  98 03 00 0D */	stb r0, 0xd(r3)
 /* 8033F224 0033BE04  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/5Ta0r // 0 (100%)
+# decl gxprivate.h
 .global func_8033F228
 func_8033F228:
 /* 8033F228 0033BE08  38 00 00 00 */	li r0, 0
@@ -2592,6 +2596,8 @@ func_8033F2E0:
 /* 8033F3A4 0033BF84  B0 65 00 02 */	sth r3, 2(r5)
 /* 8033F3A8 0033BF88  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/QG7Ms // 9100 (0%)
+# decl GX.c
 func_8033F3AC:
 /* 8033F3AC 0033BF8C  7C 08 02 A6 */	mflr r0
 /* 8033F3B0 0033BF90  90 01 00 04 */	stw r0, 4(r1)
@@ -6433,17 +6439,22 @@ lbl_804DE2F0:
 .global lbl_804DE2F4
 lbl_804DE2F4:
 	.4byte 0x3F800000
-.global lbl_804DE2F8
+
+# decl GX.c
 lbl_804DE2F8:
 	.4byte 0x3F000000
 	.4byte 0x00000000
-.global lbl_804DE300
+
+# decl GX.c
 lbl_804DE300:
 	.4byte 0x43300000
 	.4byte 0x00000000
+
+# decl GX.c
 .global lbl_804DE308
 lbl_804DE308:
 	.4byte 0x43AB0000
-.global lbl_804DE30C
+
+# decl GX.c
 lbl_804DE30C:
 	.4byte 0x4B7FFFFF

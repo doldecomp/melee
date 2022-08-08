@@ -1,6 +1,12 @@
 #include <dolphin/gx/GXInit.h>
+#include <dolphin/base/PPCArch.h>
+#include <dolphin/gx/gxprivate.h>
+#include <dolphin/gx/GXFifo.h>
+#include <dolphin/gx/GXMisc.h>
+#include <dolphin/gx/GXAttr.h>
+#include <dolphin/vi/vi.h>
 
-#pragma region __GXInitObj
+#pragma region types
 // this is probably not right
 // see https://decomp.me/scratch/r2ALq
 #define GX_INIT_OBJSIZE 0x3C
@@ -16,15 +22,14 @@ typedef union
 } __GXInitObj;
 #pragma endregion
 
-extern void *__GXDefaultTexRegionCallback(GXTexRegionCallback); // signature unknown
-extern GXFifoObj *GXInit(GXFifoObj *fifo, u32 size);
-extern void __GXInitGX();
-
-void lbl_8033A75C();
-
 #pragma region data
-extern __GXFifoLinkDataContainer lbl_804D5BA8;
 extern __GXInitObj lbl_80401168;
 extern __GXInitObj lbl_8040121C;
 extern __GXInitObj lbl_80401258;
+extern __GXFifoLinkObj lbl_804A76C8;
 #pragma endregion
+
+extern void *__GXDefaultTexRegionCallback(GXTexRegionCallback); // signature unknown
+extern GXFifoObj *GXInit(GXFifoObj *fifo, u32 size);
+extern void __GXInitGX();
+extern void lbl_8033A75C();

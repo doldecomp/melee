@@ -2,6 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/F6EUw // 813 (89.71%)
+# decl GXFifo.c
 GXCPInterruptHandler:
 /* 8033B788 00338368  7C 08 02 A6 */	mflr r0
 /* 8033B78C 0033836C  90 01 00 04 */	stw r0, 4(r1)
@@ -86,6 +88,8 @@ lbl_8033B8B0:
 /* 8033B8BC 0033849C  7C 08 03 A6 */	mtlr r0
 /* 8033B8C0 003384A0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/DSit3 // 2700 (0%)
+# decl gxprivate.h
 .global GXInitFifoBase
 GXInitFifoBase:
 /* 8033B8C4 003384A4  7C 08 02 A6 */	mflr r0
@@ -116,6 +120,8 @@ GXInitFifoBase:
 /* 8033B928 00338508  38 21 00 20 */	addi r1, r1, 0x20
 /* 8033B92C 0033850C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/1a1Bv // 2800 (0%)
+# decl GXFifo.c
 GXInitFifoPtrs:
 /* 8033B930 00338510  7C 08 02 A6 */	mflr r0
 /* 8033B934 00338514  90 01 00 04 */	stw r0, 4(r1)
@@ -147,11 +153,15 @@ lbl_8033B980:
 /* 8033B998 00338578  38 21 00 28 */	addi r1, r1, 0x28
 /* 8033B99C 0033857C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/Yb9o0 // 300 (0%)
+# decl GXFifo.c
 GXInitFifoLimits:
 /* 8033B9A0 00338580  90 83 00 0C */	stw r4, 0xc(r3)
 /* 8033B9A4 00338584  90 A3 00 10 */	stw r5, 0x10(r3)
 /* 8033B9A8 00338588  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/NxAWt // 120 (98.24%)
+# decl gxprivate.h
 .global GXSetCPUFifo
 GXSetCPUFifo:
 /* 8033B9AC 0033858C  7C 08 02 A6 */	mflr r0
@@ -226,6 +236,8 @@ lbl_8033BA98:
 /* 8033BAB4 00338694  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033BAB8 00338698  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/dvPQL // 9400 (0%)
+# decl gxprivate.h
 .global GXSetGPFifo
 GXSetGPFifo:
 /* 8033BABC 0033869C  7C 08 02 A6 */	mflr r0
@@ -325,6 +337,8 @@ lbl_8033BC04:
 /* 8033BC2C 0033880C  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033BC30 00338810  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/BIDoG // 0 (100%)
+# decl gxprivate.h
 .global __GXFifoInit
 __GXFifoInit:
 /* 8033BC34 00338814  7C 08 02 A6 */	mflr r0
@@ -347,6 +361,8 @@ __GXFifoInit:
 /* 8033BC78 00338858  7C 08 03 A6 */	mtlr r0
 /* 8033BC7C 0033885C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/ifETw // 100 (90%)
+# decl GXFifo.c
 __GXFifoReadEnable:
 /* 8033BC80 00338860  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
 /* 8033BC84 00338864  84 03 00 08 */	lwzu r0, 8(r3)
@@ -359,6 +375,8 @@ __GXFifoReadEnable:
 /* 8033BCA0 00338880  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BCA4 00338884  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/bL9CQ // 100 (88.89%)
+# decl GXFifo.c
 __GXFifoReadDisable:
 /* 8033BCA8 00338888  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
 /* 8033BCAC 0033888C  84 03 00 08 */	lwzu r0, 8(r3)
@@ -370,7 +388,8 @@ __GXFifoReadDisable:
 /* 8033BCC4 003388A4  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BCC8 003388A8  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/cTeYY
+# https://decomp.me/scratch/cTeYY // 300 (82.35%)
+# decl GXFifo.c
 __GXFifoLink:
 /* 8033BCCC 003388AC  54 60 06 3F */	clrlwi. r0, r3, 0x18
 /* 8033BCD0 003388B0  41 82 00 0C */	beq lbl_8033BCDC
@@ -392,6 +411,8 @@ lbl_8033BCE0:
 /* 8033BD08 003388E8  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BD0C 003388EC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/mJZcx // 635 (66.58%)
+# decl GXFifo.c
 __GXWriteFifoIntEnable:
 /* 8033BD10 003388F0  80 AD A5 08 */	lwz r5, lbl_804D5BA8@sda21(r13)
 /* 8033BD14 003388F4  54 63 15 BA */	rlwinm r3, r3, 2, 0x16, 0x1d
@@ -413,6 +434,8 @@ __GXWriteFifoIntEnable:
 /* 8033BD54 00338934  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BD58 00338938  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/7EFEP // 610 (67.89%)
+# decl GXFifo.c
 __GXWriteFifoIntReset:
 /* 8033BD5C 0033893C  80 AD A5 08 */	lwz r5, lbl_804D5BA8@sda21(r13)
 /* 8033BD60 00338940  54 63 06 3E */	clrlwi r3, r3, 0x18
@@ -439,26 +462,44 @@ __GXWriteFifoIntReset:
 .global lbl_804D72F0
 lbl_804D72F0:
 	.skip 0x4
+
+# decl gxprivate.h
 .global lbl_804D72F4
 lbl_804D72F4:
 	.skip 0x4
+
+# decl gxprivate.h
 .global lbl_804D72F8
 lbl_804D72F8:
 	.skip 0x4
+
+# decl gxprivate.h
 .global lbl_804D72FC
 lbl_804D72FC:
 	.skip 0x4
+
+# decl GXFifo.c
 lbl_804D7300:
 	.skip 0x4
+
+# decl GXFifo.c
 lbl_804D7304:
 	.skip 0x4
+
+# decl GXFifo.c
 lbl_804D7308:
 	.skip 0x4
 lbl_804D730C:
 	.skip 0x4
+
+# decl GXFifo.c
 lbl_804D7310:
 	.skip 0x4
+
+# decl GXFifo.c
 lbl_804D7314:
 	.skip 0x4
+
+# decl GXFifo.c
 lbl_804D7318:
 	.skip 0x4

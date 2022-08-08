@@ -3,6 +3,7 @@
 .section .text  # 0x80005940 - 0x803B7240
 
 # // https://decomp.me/scratch/wdCL6 // 2039 (34.23%)
+# decl GXInit.c
 __GXDefaultTexRegionCallback:
 /* 8033A6E0 003372C0  7C 08 02 A6 */	mflr r0
 /* 8033A6E4 003372C4  90 01 00 04 */	stw r0, 4(r1)
@@ -39,6 +40,7 @@ lbl_8033A74C:
 /* 8033A758 00337338  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/vLLix // 2270 (33.24%)
+# decl GXInit.c
 lbl_8033A75C:
 /* 8033A75C 0033733C  28 03 00 14 */	cmplwi r3, 0x14
 /* 8033A760 00337340  41 80 00 0C */	blt lbl_8033A76C
@@ -52,7 +54,8 @@ lbl_8033A76C:
 lbl_8033A77C:
 /* 8033A77C 0033735C  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/aG9QZ // 49600 (0%)
+# https://decomp.me/scratch/oHvrC // 49600 (0%)
+# decl GXInit.h
 .global GXInit
 GXInit:
 /* 8033A780 00337360  7C 08 02 A6 */	mflr r0
@@ -574,7 +577,7 @@ lbl_8033AE6C:
 /* 8033AF3C 00337B1C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/r2ALq // 7842 (85.20%)
-# https://github.com/nbouteme/WindWaker-decomp/blob/69adddcccdfd1c98589efd25a5b104e7d0723100/src/gx/GXInit.c#L318
+# decl GXInit.c
 __GXInitGX:
 /* 8033AF40 00337B20  7C 08 02 A6 */	mflr r0
 /* 8033AF44 00337B24  90 01 00 04 */	stw r0, 4(r1)
@@ -1124,6 +1127,8 @@ lbl_8033B674:
 
 .section .bss, "wa"
     .balign 8
+
+# decl GXInit.c
 lbl_804A76C8:
 	.skip 0x578
 
@@ -1131,6 +1136,8 @@ lbl_804A76C8:
 .section .sdata
     .balign 8
 .global lbl_804D5BA8
+
+# decl gxprivate.h
 lbl_804D5BA8:
     .4byte lbl_804A76C8
     .4byte 0x00000000

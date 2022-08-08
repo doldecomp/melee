@@ -1,4 +1,4 @@
-#include "__ppc_eabi_init.h"
+#include <dolphin/os/init/__ppc_eabi_init.h>
 
 typedef void (*voidfunc) (void);
 
