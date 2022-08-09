@@ -27,6 +27,7 @@ lbl_803447FC:
 /* 80344804 003413E4  42 00 FF F8 */	bdnz lbl_803447FC
 /* 80344808 003413E8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/y3hWw
 .global DCFlushRange
 DCFlushRange:
 /* 8034480C 003413EC  28 04 00 00 */	cmplwi r4, 0
