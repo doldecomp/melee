@@ -920,11 +920,11 @@ struct S_TEMP4 {
 // header includes or something.
 // --------------------------------------------------------------------------------
 struct SpecialAttrs_Mario {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ HSD_GObj* x223C;
+    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo //
+    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo //
+    /* 0x2234 */ BOOL x2234_tornadoCharge;
+    /* 0x2238 */ BOOL x2238_isCapeBoost;
+    /* 0x223C */ HSD_GObj* x223C_capeGObj;
     /* 0x2240 */ u32 x2240;
 };
 
@@ -1745,7 +1745,10 @@ typedef struct _Fighter {
     /* 0x2338 */ Vec2 x2338;
     union {
         union {
-            ftCommonStateVars commonVars[0];
+            ftCommonStateVars commonVars[0]; // 0x2340
+        };
+        union {
+            ftMarioStateVars marioVars[0]; // 0x2340
         };
         union {
             ftCaptainStateVars captainVars[0]; // 0x2340
