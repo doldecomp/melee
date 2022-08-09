@@ -18,6 +18,7 @@
 #include "melee/lb/lbrefract.h"
 #include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
+#include <melee/ft/ftstatevars.h>
 
 BOOL func_80081298(HSD_GObj* gobj);
 
@@ -104,35 +105,36 @@ typedef enum CharacterKind
 #define FIGHTER_FASTFALL_PRESERVE 0x1
 #define FIGHTER_GFX_PRESERVE 0x2
 #define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
-#define FIGHTER_UNK_HAMMER 0x8
-#define FIGHTER_NOCHANGEMODEL 0x10 // Ignore model state change (?) 
-#define FIGHTER_UNK_0x20 0x20
+#define FIGHTER_HIT_NOUPDATE 0x8 // Keep hitboxes
+#define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?) 
+#define FIGHTER_ANIMVEL_NOUPDATE 0x20
 #define FIGHTER_UNK_0x40 0x40
 #define FIGHTER_MATANIM_NOUPDATE 0x80 // Ignore switching to character's "hurt" textures (?) //
-#define FIGHTER_HIT_REFRESH 0x100 // e.g. Allows hitting one opponent multiple times with the same hitbox //
+#define FIGHTER_THROW_EXCEPTION_NOUPDATE 0x100 // Resets thrower GObj pointer to NULL if false? //
 #define FIGHTER_SFX_PRESERVE 0x200
-#define FIGHTER_PARASOL_UNK 0x400 // ??? //
-#define FIGHTER_RUMBLE_UNK 0x800 // Ignore rumble update? //
-#define FIGHTER_UNK_0x1000 0x1000
-#define FIGHTER_HALO_PRESERVE 0x2000 // Keep respawn platform? //
+#define FIGHTER_PARASOL_NOUPDATE 0x400 // Ignore Parasol state change //
+#define FIGHTER_RUMBLE_NOUPDATE 0x800 // Ignore rumble update? //
+#define FIGHTER_COLANIM_NOUPDATE 0x1000
+#define FIGHTER_ACCESSORY_PRESERVE 0x2000 // Keep respawn platform? //
 #define FIGHTER_CMD_UPDATE 0x4000 // Run all Subaction Events up to the current animation frame //
-#define FIGHTER_UNK_0x8000 0x8000
+#define FIGHTER_NAMETAGVIS_NOUPDATE 0x8000
 #define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
-#define FIGHTER_UNK_0x20000 0x20000
+#define FIGHTER_SWORDTRAIL_PRESERVE 0x20000
 #define FIGHTER_ITEMVIS_NOUPDATE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
-#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x1 of 0x2222? //
-#define FIGHTER_UNK_0x100000 0x100000
-#define FIGHTER_UNK_0x200000 0x200000
-#define FIGHTER_UNK_0x400000 0x400000
+#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x20 of 0x2222? //
+#define FIGHTER_PHYS_UNKUPDATE 0x100000
+#define FIGHTER_FREEZESTATE 0x200000 // Sets anim rate to 0x and some other stuff
+#define FIGHTER_MODELPART_VIS_NOUPDATE 0x400000
 #define FIGHTER_METALB_NOUPDATE 0x800000
 #define FIGHTER_UNK_0x1000000 0x1000000
-#define FIGHTER_UNK_0x2000000 0x2000000
-#define FIGHTER_UNK_0x4000000 0x4000000
+#define FIGHTER_ATTACKCOUNT_NOUPDATE 0x2000000
+#define FIGHTER_MODEL_FLAG_NOUPDATE 0x4000000
 #define FIGHTER_UNK_0x2227 0x8000000
-#define FIGHTER_HITSTUN_BOOL_PRESERVE 0x10000000
-#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fighter animation, e.g. Link/Young Link Up-B ground -> air transition. //
-#define FIGHTER_UNK_0x40000000 0x40000000
-#define FIGHTER_UNK_0x80000000 0x80000000
+#define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
+#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fighter animation?
+#define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
+#define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
+
 
 // LandingFallSpecial flags //
 
@@ -931,8 +933,8 @@ struct SpecialAttrs_Fox {
 };
 
 struct SpecialAttrs_Captain {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
+    /* 0x222C */ BOOL x222C_isSpecialSStartGFX;
+    /* 0x2230 */ BOOL x2230_isSpecialSGFX;
 };
 
 struct SpecialAttrs_DK {
@@ -1162,31 +1164,6 @@ struct SpecialAttrs_Sandbag {
     char filler0[0x100];
 };
 
-// State Var unions //
-typedef struct ftGameWatchVars
-{
-    union
-    {
-        struct
-        {
-            s32 x2340;
-        } Attack11;
-
-        struct
-        {
-            s32 x2340; // 0x2340
-            s32 turnFrames; // 0x2344
-        } SpecialLw;
-    };
-} ftGameWatchVars;
-
-typedef struct ftFox_SpecialS_Struct
-{
-    s32 x0;
-    s32 x4;
-    s32 x8;
-} ftFox_SpecialS_Struct;
-
 typedef struct _Fighter {
     /* 0x0 */ HSD_GObj *x0_fighter;
     /* 0x4 */ FighterKind x4_fighterKind;
@@ -1314,7 +1291,7 @@ typedef struct _Fighter {
 
         /* 0x658 */ f32 x658;
 
-        /* 0x65C */ s32 x65C;
+        /* 0x65C */ u32 x65C_heldInputs;
         /* 0x660 */ s32 x660;
         /* 0x664 */ s32 x664;
         /* 0x668 */ s32 x668;
@@ -1593,7 +1570,7 @@ typedef struct _Fighter {
     /* 0x20A0 */ struct _HSD_JObj* x20A0_accessory;
     /* 0x20A4 */ s32 x20A4;
     /* 0x20A8 */ s32 x20A8;
-    /* 0x20AC */ u32 x20AC;
+    /* 0x20AC */ HSD_GObj* x20AC;
     u8 filler_x20B0[0x2100 - 0x20B0];
     /* 0x2100 */ s8 x2100;
     /* 0x2101 */ u8 x2101_bits_0to6 : 7;
@@ -1767,6 +1744,24 @@ typedef struct _Fighter {
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
     union {
+        union {
+            ftCommonStateVars commonVars[0];
+        };
+        union {
+            ftCaptainStateVars captainVars[0]; // 0x2340
+        };
+        union {
+            ftFoxStateVars foxVars[0]; // 0x2340
+        };
+        union {
+            ftNessStateVars nessVars[0]; // 0x2340
+        };
+        union {
+            ftLuigiStateVars luigiVars[0]; // 0x2340
+        };
+        union {
+            ftGameWatchStateVars gameWatchVars[0]; // 0x2340
+        };
     /* 0x2340 */ s32 x2340_stateVar1;
     /* 0x2340 */ u32 x2340_stateVar1_u32;
     /* 0x2340 */ f32 x2340_f32;
@@ -1904,6 +1899,11 @@ inline void* getFtSpecialAttrs(Fighter* fighter_data)
 {
     void* fighter_attr = fighter_data->x2D4_specialAttributes;
     return fighter_attr;
+}
+
+inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
+{
+    return fp->x2D4_specialAttributes;
 }
 
 inline s32 ftGetKind(Fighter* fp)

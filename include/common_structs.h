@@ -8,7 +8,7 @@
 // SOUND EFFECTS //
 
 #define SFX_VOLUME_MAX 0x7FU
-#define SFX_PAN_MAX 0x40U
+#define SFX_PAN_MID 0x40U
 
 // HSD_PAD //
 
