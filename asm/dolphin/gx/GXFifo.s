@@ -459,6 +459,8 @@ __GXWriteFifoIntReset:
 
 .section .sbss
     .balign 8
+
+# decl gxprivate.h
 .global lbl_804D72F0
 lbl_804D72F0:
 	.skip 0x4

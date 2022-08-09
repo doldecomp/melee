@@ -1132,16 +1132,14 @@ lbl_8033B674:
 __GXContext:
 	.skip 0x578
 
-
 .section .sdata
     .balign 8
-.global __GXContexts
 
 # decl gxprivate.h
+.global __GXContexts
 __GXContexts:
     .4byte __GXContext
     .4byte NULL
-
 
 .section .sdata2
     .balign 8
@@ -1173,6 +1171,4 @@ lbl_804DE214:
 # decl GXInit.c
 lbl_804DE218:
 	.4byte 0x43300000
-
-# decl ignored
-	.skip 0x4
+	.4byte 0x00000000

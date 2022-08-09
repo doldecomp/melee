@@ -5191,6 +5191,7 @@ func_803416EC:
 /* 80341708 0033E2E8  7C 08 03 A6 */	mtlr r0
 /* 8034170C 0033E2EC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/cJr19
 .global func_80341710
 func_80341710:
 /* 80341710 0033E2F0  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
@@ -5990,6 +5991,8 @@ lbl_80401168:
     .4byte 0x06060808
     .4byte 0x0A0C0A08
     .4byte 0x08000000
+
+# decl GX.c
 .global lbl_804011A4
 lbl_804011A4:
     .4byte NULL
@@ -6007,6 +6010,8 @@ lbl_804011A4:
     .4byte 0x06060000
     .4byte 0x15161500
     .4byte NULL
+
+# decl GX.c
 .global lbl_804011E0
 lbl_804011E0:
     .4byte 0x00000002
@@ -6024,9 +6029,9 @@ lbl_804011E0:
     .4byte 0x06060000
     .4byte 0x15161500
     .4byte NULL
-.global lbl_8040121C
 
 # decl gxprivate.h
+.global lbl_8040121C
 lbl_8040121C:
     .4byte 0x00000008
     .4byte 0x028001E0
@@ -6064,7 +6069,7 @@ lbl_80401258:
     .4byte 0x08000000
     .4byte NULL
 
-.global jtbl_80401298
+# decl ignored
 jtbl_80401298:
 	.4byte lbl_8033DFF0
 	.4byte lbl_8033DF10
@@ -6074,7 +6079,8 @@ jtbl_80401298:
 	.4byte lbl_8033DF88
 	.4byte lbl_8033DFB8
     .4byte NULL
-.global jtbl_804012B8
+
+# decl ignored
 jtbl_804012B8:
 	.4byte lbl_8033E7B4
 	.4byte lbl_8033E7C0
@@ -6137,7 +6143,8 @@ jtbl_804012B8:
 	.4byte lbl_8033E7C0
 	.4byte lbl_8033E7D8
 	.4byte lbl_8033E7CC
-.global jtbl_804013AC
+
+# decl ignored
 jtbl_804013AC:
 	.4byte lbl_8033E908
 	.4byte lbl_8033E914
@@ -6200,7 +6207,8 @@ jtbl_804013AC:
 	.4byte lbl_8033E914
 	.4byte lbl_8033E92C
 	.4byte lbl_8033E920
-.global jtbl_804014A0
+
+# decl ignored
 jtbl_804014A0:
 	.4byte lbl_8033EB58
 	.4byte lbl_8033EB6C
@@ -6218,6 +6226,8 @@ jtbl_804014A0:
 	.4byte lbl_8033EBBC
 	.4byte lbl_8033EBA8
     .4byte NULL
+
+# decl GX.c
 .global lbl_804014E0
 lbl_804014E0:
     .4byte NULL
@@ -6230,6 +6240,8 @@ lbl_804014E0:
     .4byte 0x00000005
     .4byte 0x00000006
     .4byte NULL
+
+# decl GX.c
 .global lbl_80401508
 lbl_80401508:
     .4byte NULL
@@ -6240,7 +6252,8 @@ lbl_80401508:
     .4byte 0x00000004
     .4byte 0x00000004
     .4byte 0x00000005
-.global jtbl_80401528
+
+# decl ignored
 jtbl_80401528:
 	.4byte lbl_80341E70
 	.4byte lbl_80341E8C
@@ -6265,7 +6278,8 @@ jtbl_80401528:
 	.4byte lbl_8034215C
 	.4byte lbl_8034216C
 	.4byte lbl_80342184
-.global jtbl_80401584
+
+# decl ignored
 jtbl_80401584:
 	.4byte lbl_80341A40
 	.4byte lbl_80341A60
@@ -6307,35 +6321,43 @@ jtbl_80401584:
 
 .section .sdata
     .balign 8
-.global lbl_804D5BC0
+
+# decl GX.c
 lbl_804D5BC0:
     .4byte 0x80818283
     .4byte 0xA0A1A2A3
-.global lbl_804D5BC8
+
+# decl GX.c
 lbl_804D5BC8:
     .4byte 0x84858687
     .4byte 0xA4A5A6A7
-.global lbl_804D5BD0
+
+# decl GX.c
 lbl_804D5BD0:
     .4byte 0x88898A8B
     .4byte 0xA8A9AAAB
-.global lbl_804D5BD8
+
+# decl GX.c
 lbl_804D5BD8:
     .4byte 0x8C8D8E8F
     .4byte 0xACADAEAF
-.global lbl_804D5BE0
+
+# decl GX.c
 lbl_804D5BE0:
     .4byte 0x90919293
     .4byte 0xB0B1B2B3
-.global lbl_804D5BE8
+
+# decl GX.c
 lbl_804D5BE8:
     .4byte 0x94959697
     .4byte 0xB4B5B6B7
-.global lbl_804D5BF0
+
+# decl GX.c
 lbl_804D5BF0:
     .4byte 0x98999A9B
     .4byte 0xB8B9BABB
-.global lbl_804D5BF8
+
+# decl GX.c
 lbl_804D5BF8:
     .4byte 0x00040105
     .4byte 0x02060000
@@ -6343,153 +6365,186 @@ lbl_804D5BF8:
 
 .section .sdata2
     .balign 8
-.global lbl_804DE220
+
+# decl GX.c
 lbl_804DE220:
 	.4byte 0x43800000
 	.4byte 0x00000000
-.global lbl_804DE228
+
+# decl GX.c
 lbl_804DE228:
 	.4byte 0x43300000
 	.4byte 0x00000000
-.global lbl_804DE230
+
+# decl GX.c
 lbl_804DE230:
 	.4byte 0x00000000
-.global lbl_804DE234
+
+# decl GX.c
 lbl_804DE234:
 	.4byte 0x42B40000
-.global lbl_804DE238
+
+# decl GX.c
 lbl_804DE238:
 	.4byte 0x40490FDB
-.global lbl_804DE23C
+
+# decl GX.c
 lbl_804DE23C:
 	.4byte 0x43340000
-.global lbl_804DE240
+
+# decl GX.c
 lbl_804DE240:
 	.4byte 0xC47A0000
-.global lbl_804DE244
+
+# decl GX.c
 lbl_804DE244:
 	.4byte 0x447A0000
-.global lbl_804DE248
+
+# decl GX.c
 lbl_804DE248:
 	.4byte 0x3F800000
-.global lbl_804DE24C
+
+# decl GX.c
 lbl_804DE24C:
 	.4byte 0x40000000
-.global lbl_804DE250
+
+# decl GX.c
 lbl_804DE250:
 	.4byte 0xBF800000
-.global lbl_804DE254
+
+# decl GX.c
 lbl_804DE254:
 	.4byte 0xC0800000
-.global lbl_804DE258
+
+# decl GX.c
 lbl_804DE258:
 	.4byte 0x40800000
-.global lbl_804DE25C
+
+# decl GX.c
 lbl_804DE25C:
 	.4byte 0xC0000000
-.global lbl_804DE260
+
+# decl GX.c
 lbl_804DE260:
 	.4byte 0x3F000000
 	.4byte 0x00000000
-.global lbl_804DE268
+
+# decl GX.c
 lbl_804DE268:
 	.4byte 0x41800000
 	.4byte 0x00000000
-.global lbl_804DE270
+
+# decl GX.c
 lbl_804DE270:
 	.4byte 0x43300000
 	.4byte 0x00000000
-.global lbl_804DE278
+
+# decl GX.c
 lbl_804DE278:
 	.4byte 0xC0800000
-.global lbl_804DE27C
+
+# decl GX.c
 lbl_804DE27C:
 	.4byte 0x40800000
-.global lbl_804DE280
+
+# decl GX.c
 lbl_804DE280:
 	.4byte 0x407F5C29
-.global lbl_804DE284
+
+# decl GX.c
 lbl_804DE284:
 	.4byte 0x42000000
-.global lbl_804DE288
+
+# decl GX.c
 lbl_804DE288:
 	.4byte 0x00000000
-.global lbl_804DE28C
+
+# decl GX.c
 lbl_804DE28C:
 	.4byte 0x41200000
-.global lbl_804DE290
+
+# decl GX.c
 lbl_804DE290:
 	.4byte 0x44800000
 	.4byte 0x00000000
-.global lbl_804DE298
+
+# decl GX.c
 lbl_804DE298:
 	.4byte 0x00000000
-.global lbl_804DE29C
+
+# decl GX.c
 lbl_804DE29C:
 	.4byte 0x3F000000
-.global lbl_804DE2A0
+
+# decl GX.c
 lbl_804DE2A0:
 	.4byte 0x3FF00000
 	.4byte 0x00000000
-.global lbl_804DE2A8
+
+# decl GX.c
 lbl_804DE2A8:
 	.4byte 0x40000000
 	.4byte 0x00000000
-.global lbl_804DE2B0
+
+# decl GX.c
 lbl_804DE2B0:
 	.4byte 0x3FE00000
 	.4byte 0x00000000
-.global lbl_804DE2B8
+
+# decl GX.c
 lbl_804DE2B8:
 	.4byte 0x4B00001E
 	.4byte 0x00000000
-.global lbl_804DE2C0
+
+# decl GX.c
 lbl_804DE2C0:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.global lbl_804DE2C8
+
+# decl GX.c
 lbl_804DE2C8:
 	.4byte 0x00000000
 	.4byte 0x00000000
-.global lbl_804DE2D0
+
+# decl GX.c
 lbl_804DE2D0:
 	.4byte 0x3F800000
 	.4byte 0x00000000
-.global lbl_804DE2D8
+
+# decl GX.c
 lbl_804DE2D8:
 	.4byte 0x40080000
 	.4byte 0x00000000
-.global lbl_804DE2E0
+
+# decl GX.c
 lbl_804DE2E0:
 	.4byte 0x43800000
 	.4byte 0x00000000
-.global lbl_804DE2E8
+
+# decl GX.c
 lbl_804DE2E8:
 	.4byte 0x43300000
 	.4byte 0x00000000
-.global lbl_804DE2F0
+
+# decl GX.c
 lbl_804DE2F0:
 	.4byte 0x00000000
-.global lbl_804DE2F4
+
+# decl GX.c
 lbl_804DE2F4:
 	.4byte 0x3F800000
 
 # decl GX.c
 lbl_804DE2F8:
 	.4byte 0x3F000000
-
-# decl ignored
 	.4byte 0x00000000
 
 # decl GX.c
 lbl_804DE300:
 	.4byte 0x43300000
-
-# decl ignored
 	.4byte 0x00000000
 
 # decl GX.c
-.global lbl_804DE308
 lbl_804DE308:
 	.4byte 0x43AB0000
 
