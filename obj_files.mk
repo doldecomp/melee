@@ -17,11 +17,11 @@ TEXT_O_FILES :=\
 	$(BUILD_DIR)/asm/melee/lb/lbcollision.s.o\
 	$(BUILD_DIR)/src/melee/lb/lblanguage.c.o\
 	$(BUILD_DIR)/src/melee/lb/lbtime.c.o\
-	$(BUILD_DIR)/src/melee/lb/code_8000B074.c.o\
-	$(BUILD_DIR)/asm/melee/lb/code_8000CE50.s.o\
+	$(BUILD_DIR)/src/melee/lb/lbunknown_001.c.o\
+	$(BUILD_DIR)/asm/melee/lb/lbunknown_002.s.o\
 	$(BUILD_DIR)/src/melee/lb/lbvector.c.o\
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.s.o\
-	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbunknown_003.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbarq.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbmemory.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbheap.s.o\
@@ -30,10 +30,11 @@ TEXT_O_FILES :=\
 	$(BUILD_DIR)/src/melee/lb/lbarchive.c.o\
 	$(BUILD_DIR)/asm/melee/lb/lbarchive.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbdvd.s.o\
-	$(BUILD_DIR)/asm/melee/lb/code_80019230.s.o\
-	$(BUILD_DIR)/asm/melee/lb/code_80019880.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbunknown_004.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbunknown_005.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbgx.s.o\
+	$(BUILD_DIR)/src/melee/lb/lbanim.c.o\
 	$(BUILD_DIR)/asm/melee/lb/lbanim.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbmthp.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbjpeg.s.o\

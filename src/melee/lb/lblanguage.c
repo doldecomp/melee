@@ -1,4 +1,4 @@
-#include "lblanguage.h"
+#include <melee/lb/lblanguage.h>
 #include "melee/gm/gmmain_lib.h"
 
 u8 lbLang_GetLanguageSetting(void) {
