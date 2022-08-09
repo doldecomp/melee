@@ -1302,7 +1302,7 @@ void func_8007925C();
 // ? func_8007A06C(?);
 void func_8007AB48();
 void func_8007AB80();
-void func_8007ABD0(struct _Hitbox*, u32, struct _HSD_GObj*);
+void func_8007ABD0(struct _Hitbox*, u32 damageAmount, struct _HSD_GObj*);
 // ? func_8007AC68(?);
 // ? func_8007AC9C(?);
 // ? func_8007AD18(?);

@@ -7,7 +7,6 @@
 typedef struct _ftDonkeyAttributes {
     s32 action_state;
     s32 x4_action_state;
-    
 
     //// used by ftdonkey_walk.c (maybe Cargo Hold) ////
     f32 x8;
@@ -26,26 +25,39 @@ typedef struct _ftDonkeyAttributes {
 
     //// Giant Punch
     struct {
-        s32 x2C_REMAINING_ARM_SWINGS;
+        s32 x2C_MAX_ARM_SWINGS;
         s32 x30_DAMAGE_PER_SWING;
         f32 x34_PUNCH_HORIZONTAL_VEL;
         f32 x38_LANDING_LAG;
     } SpecialN;
 
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
-    f32 x50;
-    f32 x54;
-    f32 x58;
-    f32 x5C;
-    f32 x60;
-    f32 x64;
-    f32 x68;
-    f32 x6C;
-    f32 x70;
+    //// Headbutt
+    struct {
+        f32 x3C_MIN_STICK_X_MOMENTUM;
+        f32 x40_MOMENTUM_TRANSITION_MODIFIER;
+        f32 x44_AERIAL_GRAVITY;
+    } SpecialS;
+
+    f32 x48_UNKNOWN;
+
+    //// Spinning Kong
+    struct {
+        f32 x4C_AERIAL_VERTICAL_VELOCITY;
+        f32 x50_AERIAL_GRAVITY;
+        f32 x54_GROUNDED_HORIZONTAL_VELOCITY;
+        f32 x58_AERIAL_HORIZONTAL_VELOCITY;
+        f32 x5C_GROUNDED_MOBILITY;
+        f32 x60_AERIAL_MOBILITY;
+        f32 x64_LANDING_LAG;
+    } SpecialHi;
+
+    /// Hand Slap
+    struct {
+        f32 x68;
+        f32 x6C;
+        f32 x70;
+    } SpecialLw;
+
 } ftDonkeyAttributes;
 
 void ftDonkey_800DF980(HSD_GObj* fighterObj);
