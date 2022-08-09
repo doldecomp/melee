@@ -11,13 +11,13 @@
 // GXFifoObj private fields
 typedef struct
 {
-    void *unk0;  // base
-    void *unk4;  // end
+    unk_t unk0;  // base
+    unk_t unk4;  // end
     u32 unk8;    // size
     u32 unkC;    // hiWaterMark
     u32 unk10;   // loWaterMark
-    void *unk14; // readPtr
-    void *unk18; // writePtr
+    unk_t unk14; // readPtr
+    unk_t unk18; // writePtr
     s32 unk1C;
 } __GXFifoObj;
 
@@ -112,7 +112,7 @@ extern volatile union
     u16 u16;
     u32 u32;
     s32 s32;
-    void *ptr;
+    unk_t ptr;
     f32 f32;
 
 } WGPIPE
@@ -141,10 +141,11 @@ extern GXContexts __GXContexts;
 #pragma endregion
 
 #pragma region GXFifo
+extern unk_t lbl_804D72F0;
 extern __GXGPFifo *lbl_804D72F4;
 extern __GXFifoUnknown *lbl_804D72F8;
-extern void *lbl_804D72FC;
-void GXInitFifoBase(void *, void *, u32);
+extern unk_t lbl_804D72FC;
+void GXInitFifoBase(unk_t, unk_t, u32);
 void GXSetCPUFifo(GXFifoObj *fifo);
 void GXSetGPFifo(__GXGPFifo *gp_fifo);
 void __GXFifoInit();
@@ -164,7 +165,7 @@ extern GXRenderModeObj lbl_80401168, lbl_8040121C, lbl_80401258;
 void __GXSetDirtyState();
 void func_8033D3A0(s32);
 void func_8033D408(s16, s32, s16, s16);
-void func_8033F108(void *, s8, u32, s32, u32, s32, s32);
+void func_8033F108(unk_t, s8, u32, s32, u32, s32, s32);
 void func_8033F228(s32 *, s32, s32);
 void func_8033F518(s32);
 void func_8033FDA0(GXContext *, s32, u8 *);

@@ -1155,6 +1155,4 @@ lbl_804D5BB4:
 # decl GXAttr.c
 lbl_804D5BB8:
     .4byte 0x000C0102
-
-# decl ignored
-    .skip 0x4
+    .4byte 0x00000000

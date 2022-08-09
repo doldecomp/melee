@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/N6RF9
 .global GXSetMisc
 GXSetMisc:
 /* 8033CBC0 003397A0  2C 03 00 01 */	cmpwi r3, 1
@@ -37,6 +38,7 @@ lbl_8033CC20:
 /* 8033CC30 00339810  98 03 04 ED */	stb r0, 0x4ed(r3)
 /* 8033CC34 00339814  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/rSXT0
 .global GXSetDrawDone
 GXSetDrawDone:
 /* 8033CC38 00339818  7C 08 02 A6 */	mflr r0
@@ -79,6 +81,7 @@ lbl_8033CC80:
 /* 8033CCC8 003398A8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033CCCC 003398AC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/B4djd
 .global GXWaitDrawDone
 GXWaitDrawDone:
 /* 8033CCD0 003398B0  7C 08 02 A6 */	mflr r0
@@ -103,6 +106,7 @@ lbl_8033CCF4:
 /* 8033CD14 003398F4  7C 08 03 A6 */	mtlr r0
 /* 8033CD18 003398F8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/cEfhC
 .global GXPixModeSync
 GXPixModeSync:
 /* 8033CD1C 003398FC  38 00 00 61 */	li r0, 0x61
@@ -359,11 +363,19 @@ __GXPEInit:
 
 .section .sbss
     .balign 8
+
+# decl GXMisc.c
 lbl_804D7320:
 	.skip 0x4
+
+# decl GXMisc.c
 lbl_804D7324:
 	.skip 0x4
+
+# decl GXMisc.c
 lbl_804D7328:
 	.skip 0x4
+
+# decl GXMisc.c
 lbl_804D732C:
 	.skip 0xC
