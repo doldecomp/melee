@@ -4,6 +4,7 @@
 #include <global.h>
 
 #include <dolphin/types.h>
+#include <dolphin/gx/GXLight.h>
 
 #include "sysdolphin/baselib/object.h"
 #include "sysdolphin/baselib/fobj.h"

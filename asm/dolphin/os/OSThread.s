@@ -1,5 +1,4 @@
 .include "macros.inc"
-.include "dolphin/os/OSThread.inc"
 
 .section .text  # 0x80342E94 - 0x803B7240 
 
@@ -766,6 +765,8 @@ lbl_8034B600:
 /* 8034B614 003481F4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034B618 003481F8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/UARTk // 7996 (50.64%)
+# decl OSThread.h
 .global OSResumeThread
 OSResumeThread:
 /* 8034B61C 003481FC  7C 08 02 A6 */	mflr r0
@@ -957,6 +958,8 @@ lbl_8034B87C:
 /* 8034B89C 0034847C  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034B8A0 00348480  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/p2ZdW // 9200 (0%)
+# decl OSThread.h
 .global OSSuspendThread
 OSSuspendThread:
 /* 8034B8A4 00348484  7C 08 02 A6 */	mflr r0
@@ -1782,3 +1785,86 @@ lbl_8034C3C8:
 /* 8034C3E4 00348FC4  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034C3E8 00348FC8  7C 08 03 A6 */	mtlr r0
 /* 8034C3EC 00348FCC  4E 80 00 20 */	blr 
+
+.section .data
+    .balign 8
+.global lbl_80402420
+lbl_80402420:
+    .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head != NULL && RunQueue[prio].tail != NULL in %d\n"
+    .balign 4
+    .asciz "OSThread.c"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed RunQueue[prio].head == NULL && RunQueue[prio].tail == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(&RunQueue[prio]) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed __OSActiveThreadQueue.head == NULL || __OSActiveThreadQueue.head->linkActive.prev == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed __OSActiveThreadQueue.tail == NULL || __OSActiveThreadQueue.tail->linkActive.next == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->linkActive.next == NULL || thread == thread->linkActive.next->linkActive.prev in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->linkActive.prev == NULL || thread == thread->linkActive.prev->linkActive.next in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed *(thread->stackEnd) == OS_THREAD_STACK_MAGIC in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed OS_PRIORITY_MIN <= thread->priority && thread->priority <= OS_PRIORITY_MAX+1 in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed 0 <= thread->suspend in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(&thread->queueJoin) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->queue == &RunQueue[thread->priority] in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed IsMember(&RunQueue[thread->priority], thread) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->priority == __OSGetEffectivePriority(thread) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed !IsSuspended(thread->suspend) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->queue == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->queue != NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed CheckThreadQueue(thread->queue) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed IsMember(thread->queue, thread) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->priority == 32 in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed !__OSCheckDeadLock(thread) in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed thread->queueMutex.head == NULL && thread->queueMutex.tail == NULL in %d\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed. unkown thread state (%d) of thread %p\n"
+    .balign 4
+    .asciz "OSCheckActiveThreads: Failed __OSCheckMutexes(thread) in %d\n"
+    .balign 4
+
+
+.section .bss, "wa"
+    .balign 8
+.global lbl_804A7FB8
+lbl_804A7FB8:
+	.skip 0x9E8
+
+
+.section .sdata
+    .balign 8
+.global lbl_804D5C28
+lbl_804D5C28:
+    .4byte 0x00000000
+    .4byte 0x00000000
+
+
+.section .sbss
+    .balign 8
+.global lbl_804D73D8
+lbl_804D73D8:
+	.skip 0x4
+.global lbl_804D73DC
+lbl_804D73DC:
+	.skip 0x4
+.global lbl_804D73E0
+lbl_804D73E0:
+	.skip 0x8

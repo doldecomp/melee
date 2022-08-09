@@ -1,5 +1,4 @@
 .include "macros.inc"
-.include "dolphin/os/OSContext.inc"
 
 .section .text  # 0x80344E30 - 0x803456A4
 
@@ -202,7 +201,7 @@ OSGetCurrentContext:
 /* 803450EC 00341CCC  80 63 00 D4 */	lwz r3, 0x800000D4@l(r3)
 /* 803450F0 00341CD0  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/iV0yr
+# https://decomp.me/scratch/bNK5a // 0 (100%)
 .global OSSaveContext
 OSSaveContext:
 /* 803450F4 00341CD4  BD A3 00 34 */	stmw r13, 0x34(r3)
@@ -617,3 +616,36 @@ __OSContextInit:
 /* 8034569C 0034227C  38 21 00 08 */	addi r1, r1, 8
 /* 803456A0 00342280  7C 08 03 A6 */	mtlr r0
 /* 803456A4 00342284  4E 80 00 20 */	blr 
+
+.section .data
+    .balign 8
+.global lbl_80401E20
+lbl_80401E20:
+    .asciz "------------------------- Context 0x%08x -------------------------\n"
+    .balign 4
+    .asciz "r%-2d  = 0x%08x (%14d)  r%-2d  = 0x%08x (%14d)\n"
+    .balign 4
+    .asciz "LR   = 0x%08x                   CR   = 0x%08x\n"
+    .balign 4
+    .asciz "SRR0 = 0x%08x                   SRR1 = 0x%08x\n"
+    .balign 4
+    .asciz "\nGQRs----------\n"
+    .balign 4
+    .asciz "gqr%d = 0x%08x \t gqr%d = 0x%08x\n"
+    .balign 4
+    .asciz "\n\nFPRs----------\n"
+    .balign 4
+    .asciz "fr%d \t= %d \t fr%d \t= %d\n"
+    .balign 4
+    .asciz "\n\nPSFs----------\n"
+    .balign 4
+    .asciz "ps%d \t= 0x%x \t ps%d \t= 0x%x\n"
+    .balign 4
+    .asciz "\nAddress:      Back Chain    LR Save\n"
+    .balign 4
+    .asciz "0x%08x:   0x%08x    0x%08x\n"
+    .balign 4
+.global lbl_80401FD4
+lbl_80401FD4:
+    .asciz "FPU-unavailable handler installed\n"
+    .balign 4
