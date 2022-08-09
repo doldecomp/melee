@@ -52,7 +52,7 @@ void ftZelda_8013979C(HSD_GObj* fighterObj) {
 }
 
 // 80139834 - 801398E8 (0xB4 bytes)
-// https://decomp.me/scratch/KUdnf (with inline)
+// https://decomp.me/scratch/KUdnf (with helper)
 // https://decomp.me/scratch/52XE3 (as single function)
 void ftZelda_SpecialHi_StartAction_Helper(Fighter* fighter) {
     HSD_JObj* jObj;
@@ -71,10 +71,10 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fighter) {
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighterPlus(fighterObj);
 
-    fighter->xEC_ground_vel = 0.0;
-    fighter->x80_self_vel.y = 0.0;
-    fighter->x80_self_vel.x = 0.0;
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x15D, 0, NULL, 0.0, 1.0, 0.0);
+    fighter->xEC_ground_vel = 0.0f;
+    fighter->x80_self_vel.y = 0.0f;
+    fighter->x80_self_vel.x = 0.0f;
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x15D, 0, NULL, 0.0f, 1.0, 0.0f);
     func_8006EBA4(fighterObj);
     
     fighter = getFighterPlus(fighterObj);
@@ -269,17 +269,17 @@ void ftZelda_80139CC0(HSD_GObj* fighterObj) {
 
 
 // 80139D60 - 80139F6C (0x20C bytes)
-// https://decomp.me/scratch/LfvOU (with inline)
+// https://decomp.me/scratch/LfvOU (with helper)
 // https://decomp.me/scratch/OJ62l (single function)
-s32 ftZelda_80139D60_Helper(HSD_GObj* fighterObj) {
-    s32 var_r0;
+BOOL ftZelda_80139D60_Helper(HSD_GObj* fighterObj) {
+    BOOL var_r0;
     Fighter* fighter2;
     ftZeldaAttributes* attributes2;
 
     fighter2 = getFighter(fighterObj);
     attributes2 = fighter2->x2D4_specialAttributes;
 
-    if ((f32) (fighter2->x234C_stateVar4 ^ 0x80000000) >= attributes2->x4C) {
+    if (fighter2->x234C_stateVar4_s32 >= attributes2->x4C) {
         var_r0 = 1;
     } else if (func_8009A134(fighterObj) != 0) {
         var_r0 = 0;
@@ -291,7 +291,7 @@ s32 ftZelda_80139D60_Helper(HSD_GObj* fighterObj) {
 }
 void ftZelda_80139D60(HSD_GObj* fighterObj) {
     s32 ledgeGrabDir;
-    s32 returnVar;
+    BOOL returnVar;
     f32 angle1, angle2, angle3;
     Fighter* fighter; // r31
     ftZeldaAttributes* attributes; // r30
@@ -301,10 +301,10 @@ void ftZelda_80139D60(HSD_GObj* fighterObj) {
     fighter = fighterObj->user_data;
     collData = &fighter->x6F0_collData;
     attributes = fighter->x2D4_specialAttributes;
-    fighter->x234C_stateVar4 = (s32) (fighter->x234C_stateVar4 + 1);
+    fighter->x234C_stateVar4_s32++;
 
     // Determine facing direction
-    if (fighter->x2C_facing_direction < 0.0) {
+    if (fighter->x2C_facing_direction < 0.0f) {
         ledgeGrabDir = -1;
     }
     else {
@@ -584,7 +584,7 @@ void ftZelda_8013A50C(HSD_GObj* fighterObj) {
 
     fighter = fighterObj->user_data;
     attributes = fighter->x2D4_specialAttributes;
-    if ((u32) fighter->x2200_ftcmd_var0 != 0U) {
+    if ((u32) fighter->x2200_ftcmd_var0 != 0) {
         func_8007D4B8(fighter);
         func_8007D440(fighter, attributes->x5C * fighter->x110_attr.x17C_AerialDriftMax);
         return;

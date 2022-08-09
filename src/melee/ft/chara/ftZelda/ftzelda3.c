@@ -125,19 +125,19 @@ void ftZelda_8013AB68(HSD_GObj* arg0) {
 }
 
 // 8013AB9C - 8013AC10 (0x74 bytes)
-// https://decomp.me/scratch/RUgWL
+// https://decomp.me/scratch/juoPH
 void ftZelda_8013AB9C(HSD_GObj* fighterObj) {
     Fighter* fighter;
-    ftZeldaAttributes* charAttr;
     s32 stateVar1;
-    f32 arg2, arg3;
     attr* fighterAttr;
+    ftZeldaAttributes* charAttr;
+    f32 arg2, arg3;
     s32 unused[2];
 
     fighter = fighterObj->user_data;
-    charAttr = fighter->x2D4_specialAttributes;
     stateVar1 = fighter->x2340_stateVar1;
     fighterAttr = &fighter->x110_attr;
+    charAttr = fighter->x2D4_specialAttributes;
     
     if (stateVar1 != 0) {
         fighter->x2340_stateVar1 = stateVar1 - 1;

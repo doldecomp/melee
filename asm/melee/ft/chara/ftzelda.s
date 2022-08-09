@@ -3544,7 +3544,7 @@ lbl_804D9BA0:
 	.4byte 0x3F860A92 # 1.0471975803375244
 .global lbl_804D9BA4
 lbl_804D9BA4:
-	.4byte 0x00000000 # 0
+	.4byte 0x00000000 # 0.0
 .global lbl_804D9BA8
 lbl_804D9BA8:
 	.4byte 0x3F800000 # 1.0
@@ -3582,7 +3582,7 @@ lbl_804D9BDC:
 
 .global lbl_804D9BE0
 lbl_804D9BE0:
-	.4byte 0x00000000 # 0
+	.4byte 0x00000000 # 0.0
 .global lbl_804D9BE4
 lbl_804D9BE4:
 	.4byte 0x3F800000 # 1.0
@@ -3598,7 +3598,7 @@ lbl_804D9BF0:
 
 .global lbl_804D9BF4
 lbl_804D9BF4:
-	.4byte 0x00000000 # 0
+	.4byte 0x00000000 # 0.0
 .global lbl_804D9BF8
 lbl_804D9BF8:
 	.4byte 0x3F800000 # 1.0
@@ -3606,7 +3606,7 @@ lbl_804D9BF8:
 
 .global lbl_804D9C00
 lbl_804D9C00:
-	.4byte 0x00000000 # 0
+	.4byte 0x00000000 # 0.0
 .global lbl_804D9C04
 lbl_804D9C04:
 	.4byte 0x3F800000 # 1.0

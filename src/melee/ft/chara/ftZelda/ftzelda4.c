@@ -40,21 +40,15 @@ void ftZelda_8013AEAC(HSD_GObj* fighterObj) {
     func_8007EFC8(fighterObj, func_80114758);
 }
 
-// 8013AEE0 - 8013AFA4 (0xC4 bytes)
-// https://decomp.me/scratch/Lw6fO
-void ftZelda_SpecialLw_StartAction(HSD_GObj* fighterObj) {
+// Helper function for both ftZelda_SpecialLw_StartAction / ftZelda_SpecialAirLw_StartAction
+void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* fighterObj) {
     Point3d sp20;
-    f32 temp_f1;
     Fighter* fighter; // r31
     ftZeldaAttributes* attributes; // r3
-    f32 unused[5];
-
-    temp_f1 = 0;
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0, NULL, temp_f1, 1.0, temp_f1);
-    func_8006EBA4(fighterObj);
     
-    fighter = fighterObj->user_data;
-    attributes = fighter->x2D4_specialAttributes;
+    fighter = getFighterPlus(fighterObj);
+    attributes = getFtSpecialAttrs(fighter);
+    
     fighter->x2200_ftcmd_var0 = 0;
     fighter->x80_self_vel.x = (f32) (fighter->x80_self_vel.x / attributes->x70);
     fighter->x80_self_vel.y = (f32) (fighter->x80_self_vel.y / attributes->x74);
@@ -66,28 +60,26 @@ void ftZelda_SpecialLw_StartAction(HSD_GObj* fighterObj) {
     fighter->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
 }
 
-// 8013AFA4 - 8013B068 (0xC4 bytes)
-// https://decomp.me/scratch/8W7ZF
-void ftZelda_SpecialAirLw_StartAction(HSD_GObj* fighterObj) {
-    Point3d sp20;
-    f32 temp_f1;
-    Fighter* fighter; // r31
-    ftZeldaAttributes* attributes; // r3
-    f32 unused[5];
-
-    temp_f1 = 0;
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x165, 0, NULL, temp_f1, 1.0, temp_f1);
-    func_8006EBA4(fighterObj);
-    fighter = fighterObj->user_data;
-    attributes = fighter->x2D4_specialAttributes;
-    fighter->x2200_ftcmd_var0 = 0;
-    fighter->x80_self_vel.x = (f32) (fighter->x80_self_vel.x / attributes->x70);
-    fighter->x80_self_vel.y = (f32) (fighter->x80_self_vel.y / attributes->x74);
-    fighter->xEC_ground_vel = (f32) (fighter->xEC_ground_vel / attributes->x70);
+// 8013AEE0 - 8013AFA4 (0xC4 bytes)
+// https://decomp.me/scratch/jZJgg (with helper)
+// https://decomp.me/scratch/Lw6fO (single function)
+void ftZelda_SpecialLw_StartAction(HSD_GObj* fighterObj) {
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0, NULL, 0.0f, 1.0, 0.0f);
     
-    func_8000B1CC(fighter->x5E8_fighterBones[0].x0_jobj, NULL, &sp20);
-    func_800119DC(&sp20, 0x78, 0.4000000059604645, 0.003000000026077032, 1.0471975803375244);
-    fighter->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
+    func_8006EBA4(fighterObj);
+    
+    ftZelda_SpecialLw_StartAction_Helper(fighterObj);
+}
+
+// 8013AFA4 - 8013B068 (0xC4 bytes)
+// Same as above function with helper function, just with a different action state ID
+// https://decomp.me/scratch/8W7ZF (single function)
+void ftZelda_SpecialAirLw_StartAction(HSD_GObj* fighterObj) {
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x165, 0, NULL, 0.0f, 1.0, 0.0f);
+    
+    func_8006EBA4(fighterObj);
+    
+    ftZelda_SpecialLw_StartAction_Helper(fighterObj);
 }
 
 // 8013B068 - 8013B0A8 (0x40 bytes)
