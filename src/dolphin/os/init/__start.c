@@ -1,4 +1,4 @@
-#include "__start.h"
+#include <dolphin/os/init/__start.h>
 
 #pragma section code_type ".init"
 

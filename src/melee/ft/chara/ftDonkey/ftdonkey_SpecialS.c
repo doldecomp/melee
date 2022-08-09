@@ -11,7 +11,7 @@ void ftDonkey_SpecialS_StartAction(HSD_GObj* fighterObj) {
 void ftDonkey_SpecialAirS_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighter(fighterObj);
     ftDonkeyAttributes* donkey_attr = fighter->x2D4_specialAttributes;
-    fighter->x80_self_vel.x /= donkey_attr->x3C;
+    fighter->x80_self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
     fighter->x80_self_vel.y = 0.0f;
     Fighter_ActionStateChange_800693AC(fighterObj, 0x17C, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighterObj);
@@ -45,9 +45,9 @@ void ftDonkey_8010E35C(HSD_GObj* fighterObj)
     attr *ft_attr = &fighter->x110_attr;
     ftDonkeyAttributes *donkey_attr = getFtSpecialAttrs(fighter);
     if (fighter->x2200_ftcmd_var0) {
-        func_8007D494(fighter, donkey_attr->x44, ft_attr->x170_TerminalVelocity);
+        func_8007D494(fighter, donkey_attr->SpecialS.x44_AERIAL_GRAVITY, ft_attr->x170_TerminalVelocity);
     }
-    func_8007CE94(fighter, donkey_attr->x40);
+    func_8007CE94(fighter, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
     if (fighter->x2200_ftcmd_var0 != 0){
         /// unused or removed code here
     }

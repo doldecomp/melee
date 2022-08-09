@@ -29,7 +29,7 @@ typedef struct _Vec2 { float x, y; } Vec2;
 
 struct DemoMotionSymbols
 {
-    char x0[];
+    char* x0;
 };
 
 struct DemoMotionFiles

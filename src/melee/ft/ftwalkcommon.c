@@ -1,24 +1,6 @@
-#include "ftdonkey.h"
+#include "fighter.h"
 
-void ftDonkey_800DFB34(HSD_GObj* fighterObj) {
-    ftDonkey_800DFDDC(fighterObj);
-}
-
-void ftDonkey_800DFB54(HSD_GObj* fighterObj) {
-    if ((!func_80094EA4(fighterObj)) && (!ftDonkey_800E0378(fighterObj)) && (!ftDonkey_800DF938(fighterObj))) {
-        ftDonkey_800DFEC8(fighterObj, &ftDonkey_800DFAE4);
-    }
-}
-
-void ftDonkey_800DFBB8(HSD_GObj* fighterObj) {
-    ftDonkey_800E0060(fighterObj);
-}
-
-void ftDonkey_800DFBD8(HSD_GObj* fighterObj) {
-    ftDonkey_800DFA70(fighterObj);
-}
-
-s32 ftDonkey_GetWalkType_800DFBF8(HSD_GObj* fighterObj) {
+s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     f32 ground_vel = fighter->xEC_ground_vel;
     f32 walking_velocity = fabs_inline(ground_vel);
@@ -31,8 +13,7 @@ s32 ftDonkey_GetWalkType_800DFBF8(HSD_GObj* fighterObj) {
     }
 }
 
-
-inline s32 ftDonkey_GetWalkType_800DFBF8_fake(HSD_GObj* fighterObj) {
+inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     f32 walking_velocity = fabs_inline(fighter->xEC_ground_vel);
     f32 tempf = fighter->x2360_f32;
@@ -45,8 +26,7 @@ inline s32 ftDonkey_GetWalkType_800DFBF8_fake(HSD_GObj* fighterObj) {
     }
 }  
 
-
-s32 ftDonkey_800DFC70(HSD_GObj* fighterObj) {
+s32 ftWalkCommon_800DFC70(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     if ((fighter->input.x620_lstick_x * fighter->x2C_facing_direction) >= p_ftCommonData->x24) {
         return 1;
@@ -54,8 +34,7 @@ s32 ftDonkey_800DFC70(HSD_GObj* fighterObj) {
     return 0;
 } 
 
-
-void ftDonkey_800DFCA4(HSD_GObj *fighterObj, s32 arg1, s32 arg2, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD, f32 argE, f32 argF)
+void ftWalkCommon_800DFCA4(HSD_GObj *fighterObj, s32 arg1, s32 arg2, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD, f32 argE, f32 argF)
 {
     s32 unused[3];
     s32 new_action_state;
@@ -63,7 +42,7 @@ void ftDonkey_800DFCA4(HSD_GObj *fighterObj, s32 arg1, s32 arg2, f32 arg8, f32 a
     Fighter *fighter;
     fighter = getFighterPlus(fighterObj);
     fighter->x2360_f32 = argF;
-    walking_state = ftDonkey_GetWalkType_800DFBF8_fake(fighterObj);
+    walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(fighterObj);
     new_action_state = arg1 + walking_state;
     Fighter_ActionStateChange_800693AC(fighterObj, new_action_state, arg2, 0, arg8, 1.0f, 0.0f);
     func_8006EBA4(fighterObj);
@@ -77,9 +56,7 @@ void ftDonkey_800DFCA4(HSD_GObj *fighterObj, s32 arg1, s32 arg2, f32 arg8, f32 a
     fighter->x235C_f32 = argE;
 }
 
-
-
-void ftDonkey_800DFDDC(HSD_GObj* fighterObj) {
+void ftWalkCommon_800DFDDC(HSD_GObj* fighterObj) {
     f32 velocity_f2;
     f32 anim_rate;
     
@@ -110,13 +87,11 @@ void ftDonkey_800DFDDC(HSD_GObj* fighterObj) {
     ftAnim_SetAnimRate(fighterObj, anim_rate);
 }
 
-
-
-void ftDonkey_800DFEC8(HSD_GObj* fighterObj, void (*arg_cb)(HSD_GObj*, f32)) {
+void ftWalkCommon_800DFEC8(HSD_GObj* fighterObj, void (*arg_cb)(HSD_GObj*, f32)) {
     s32 action_state_sum;
     s32 action_state_base;
     Fighter* fighter = getFighter(fighterObj);
-    s32 walk_action_type = ftDonkey_GetWalkType_800DFBF8_fake(fighterObj);
+    s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(fighterObj);
 
 
     action_state_base = fighter->x2344_stateVar2_s32;
@@ -161,7 +136,7 @@ inline f32 getFtWalkAcceleration(Fighter* fighter, f32 multiplier) {
     }
 } 
  
-void ftDonkey_800E0060(HSD_GObj* fighterObj) {
+void ftWalkCommon_800E0060(HSD_GObj* fighterObj) {
     s32 unused[5];
     Fighter* fighter;
     f32 temp_f0;

@@ -26,7 +26,7 @@ void ftDonkey_800E0274(HSD_GObj* fighterObj) {
 void ftDonkey_800E0294(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighterPlus(fighterObj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fighter);
-    Fighter_ActionStateChange_800693AC(fighterObj, donkey_attr->x0 + 6, 1, NULL, 0.0f, 1.0, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, donkey_attr->action_state + 6, 1, NULL, 0.0f, 1.0, 0.0f);
     ftAnim_SetAnimRate(fighterObj, 0.0f);
     if (fighter->xE0_ground_or_air == GA_Ground) {
         func_8007D5D4(fighter);

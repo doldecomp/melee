@@ -8,9 +8,8 @@ s32 ftDonkey_800E0134(HSD_GObj* fighterObj) {
     return 0;
 }
 
-
 void ftDonkey_800E017C(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighterPlus(fighterObj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fighter);
-    func_800C9840(fighterObj, donkey_attr->x0 + 4, 0, 0.0f, donkey_attr->x20, 0.0f);
+    func_800C9840(fighterObj, donkey_attr->action_state + 4, 0, 0.0f, donkey_attr->cargo_hold.x20_TURN_SPEED, 0.0f);
 }
