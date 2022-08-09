@@ -81,14 +81,14 @@ typedef struct _ftLuigiAttributes {
     
     // UP SPECIAL - SUPER JUMP PUNCH //
 
-    f32 x50_LUIGI_SUPERJUMP_FREEFALL_MAX; // Multiplies Luigi's max horionztal aerial mobility
+    f32 x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY; // Multiplies Luigi's max horionztal aerial mobility
     f32 x54_LUIGI_SUPERJUMP_LANDING_LAG;
     f32 x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE; // Minimum stick range required for turnaround
     f32 x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE; // Minimum stick range required for horionztal momentum?
-    f32 x60_LUIGI_SUPERJUMP_AIR_MOBILITY;
+    f32 x60_LUIGI_SUPERJUMP_ANGLE_DIFF;
     f32 x64_LUIGI_SUPERJUMP_VEL_X; 
     f32 x68_LUIGI_SUPERJUMP_GRAVITY_START;
-    f32 x6C_LUIGI_SUPERJUMP_VEL_MUL;
+    f32 x6C_LUIGI_SUPERJUMP_VEL_Y;
     
     // DOWN SPECIAL - LUIGI CYCLONE //
 

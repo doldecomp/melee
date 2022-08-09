@@ -3,6 +3,7 @@
 #ifndef _FTSTATEVARS_H_
 #define _FTSTATEVARS_H_
 
+#include <melee/ft/chara/ftMario/ftMario_StateVars.h>
 #include <melee/ft/chara/ftCaptain/ftCaptain_StateVars.h>
 #include <melee/ft/chara/ftFox/ftFox_StateVars.h>
 #include <melee/ft/chara/ftGameWatch/ftGameWatch_StateVars.h>

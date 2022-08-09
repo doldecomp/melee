@@ -496,9 +496,9 @@ void ftNess_SpecialAirHiStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial P
     temp_fighter->cb.x21E4_callback_OnDeath2 = NULL;
     temp_fighter->cb.x21DC_callback_OnTakeDamage = NULL;
     func_8007592C(temp_fighter, 0, 0.0f);
-    fighter_data->nessVars[0].SpecialHi.thunderColl = TRUE;
+    fighter_data->nessVars[0].SpecialHi.thunderColl = 1;
     fighter_data->nessVars[0].SpecialHi.gravityDelay = (s32)ness_attr->x48_PK_THUNDER_GRAVITY_DELAY;
-    fighter_data->nessVars[0].SpecialHi.jibakuGFX = 0;
+    fighter_data->nessVars[0].SpecialHi.jibakuGFX = FALSE;
     fighter_data->nessVars[0].SpecialHi.collPos1.x = 0.0f;
     fighter_data->nessVars[0].SpecialHi.collPos1.x = 0.0f;
     fighter_data->nessVars[0].SpecialHi.collPos1.x = 0.0f;
