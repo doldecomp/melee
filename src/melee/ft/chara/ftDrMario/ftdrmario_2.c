@@ -10,7 +10,7 @@ void func_80149954(HSD_GObj* gobj)
     ft = gobj->user_data;
     if (ft->x2200_ftcmd_var0 == 1 && ft->sa.mario.x2240 == 0U) {
         func_8000B1CC(ft->x5E8_fighterBones->x0_jobj, 0, &sp18);
-        tmp = ftMario_func_800E0D1C(gobj);
+        tmp = ftMario_SpecialN_VitaminRandom(gobj);
         tmp = func_802C0850(gobj, &sp18, tmp, 0x31, ft->x2C_facing_direction);
         ft->sa.mario.x2240 = tmp;
         if (tmp != 0) {
