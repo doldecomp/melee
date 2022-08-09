@@ -164,7 +164,7 @@ void ftMario_SpecialHi_Coll(HSD_GObj*);
 void ftMario_SpecialAirHi_Coll(HSD_GObj*);
 
 //ftmario5
-void ftMario_func_800E2050(HSD_GObj*);
+void ftMario_SpecialLw_UpdateRot(HSD_GObj*);
 void ftMario_SpecialLw_StartAction(HSD_GObj*);
 void ftMario_SpecialAirLw_StartAction(HSD_GObj*);
 void ftMario_SpecialLw_Anim(HSD_GObj*);

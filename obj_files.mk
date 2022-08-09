@@ -85,10 +85,10 @@ TEXT_O_FILES :=\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey8.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey9.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario.c.o\
-	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario_SpecialN.c.o\
-	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario_SpecialS.c.o\
-	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario_SpecialHi.c.o\
-	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario_SpecialLw.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialN.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialS.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialHi.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialLw.c.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmario.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialN.c.o\
