@@ -3,7 +3,7 @@
 .section .text  # 0x80005940 - 0x803B7240
 
 # https://decomp.me/scratch/mHuNc // 3500 (0%)
-# decl gxprivate.h
+# decl __gx.h
 .global __GXSetDirtyState
 __GXSetDirtyState:
 /* 8033D050 00339C30  7C 08 02 A6 */	mflr r0
@@ -2409,7 +2409,7 @@ func_8033F06C:
 /* 8033F104 0033BCE4  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/GFUrl // 7200 (0%)
-# decl gxprivate.h
+# decl __gx.h
 .global func_8033F108
 func_8033F108:
 /* 8033F108 0033BCE8  2C 06 00 01 */	cmpwi r6, 1
@@ -2497,7 +2497,7 @@ lbl_8033F1D4:
 /* 8033F224 0033BE04  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/5Ta0r // 0 (100%)
-# decl gxprivate.h
+# decl __gx.h
 .global func_8033F228
 func_8033F228:
 /* 8033F228 0033BE08  38 00 00 00 */	li r0, 0
@@ -2724,7 +2724,7 @@ lbl_8033F504:
 /* 8033F514 0033C0F4  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/QfxT4 // 3865 (73.16%)
-# decl gxprivate.h
+# decl __gx.h
 .global func_8033F518
 func_8033F518:
 /* 8033F518 0033C0F8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -5298,7 +5298,7 @@ func_80341850:
 /* 80341874 0033E454  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/lS9KQ // 0 (100%)
-# decl gxprivate.h
+# decl __gx.h
 .global func_80341878
 func_80341878:
 /* 80341878 0033E458  2C 03 00 05 */	cmpwi r3, 5
@@ -5338,7 +5338,7 @@ lbl_803418EC:
 /* 803418F8 0033E4D8  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/gAvJm // 3230 (94.13%)
-# decl gxprivate.h
+# decl __gx.h
 .global func_803418FC
 func_803418FC:
 /* 803418FC 0033E4DC  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
@@ -5973,7 +5973,7 @@ func_80342194:
 .section .data
     .balign 8
 
-# decl gxprivate.h
+# decl __gx.h
 .global lbl_80401168
 lbl_80401168:
     .4byte NULL
@@ -6030,7 +6030,7 @@ lbl_804011E0:
     .4byte 0x15161500
     .4byte NULL
 
-# decl gxprivate.h
+# decl __gx.h
 .global lbl_8040121C
 lbl_8040121C:
     .4byte 0x00000008
@@ -6049,7 +6049,7 @@ lbl_8040121C:
     .4byte 0x0A0C0A08
     .4byte 0x08000000
 
-# decl gxprivate.h
+# decl __gx.h
 .global lbl_80401258
 lbl_80401258:
     .4byte 0x00000004

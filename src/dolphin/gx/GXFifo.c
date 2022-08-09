@@ -1,4 +1,4 @@
-#include <dolphin/gx/gxprivate.h>
+#include <dolphin/gx/__gx.h>
 #include <dolphin/os/OSThread.h>
 
 /* 004D3EF8 */ extern s32 lbl_804D7318;

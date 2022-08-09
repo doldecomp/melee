@@ -1,4 +1,4 @@
-#include <dolphin/gx/gxprivate.h>
+#include <dolphin/gx/__gx.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>

@@ -1,8 +1,8 @@
 // todo: rework GX interdependencies
 // this file should not be necessary
 
-#ifndef _GXPRIVATE_h_
-#define _GXPRIVATE_h_
+#ifndef DOLPHIN_GX___GX_H
+#define DOLPHIN_GX___GX_H
 
 #include <dolphin/gx/gxtypes.h>
 #include <dolphin/mtx/mtxtypes.h>

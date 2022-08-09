@@ -1,6 +1,6 @@
 #include <dolphin/gx/GXInit.h>
 #include <dolphin/base/PPCArch.h>
-#include <dolphin/gx/gxprivate.h>
+#include <dolphin/gx/__gx.h>
 #include <dolphin/gx/GXFifo.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/GXAttr.h>

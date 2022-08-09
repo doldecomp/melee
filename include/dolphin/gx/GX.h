@@ -1,7 +1,7 @@
 #ifndef _GX_H_
 #define _GX_H_
 
-#include <dolphin/gx/gxprivate.h>
+#include <dolphin/gx/__gx.h>
 #include <dolphin/gx/GXInit.h>
 #include <dolphin/gx/GXFifo.h>
 

@@ -1,4 +1,4 @@
-#include "gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
 extern struct r13_EntityPointers* lbl_804D782C;
 
