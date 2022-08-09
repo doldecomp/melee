@@ -41,7 +41,7 @@ void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj) {
     COPY_ATTRS(gobj, ftZeldaAttributes);
 }
 
-void ftZelda_801395C8(HSD_GObj* fighterObj) {
+void ftZelda_801395C8(HSD_GObj* fighterObj) { // Zelda_RemoveDress
     s32 unused[2];
     s32 result = func_80074A74(fighterObj, 1);
     if (result == -1) {
