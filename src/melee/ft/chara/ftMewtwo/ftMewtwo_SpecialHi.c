@@ -272,7 +272,7 @@ void ftMewtwo_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 
 #define DEG_TO_RAD 0.01745329238474369f
 
-inline BOOL ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* fighter_gobj)
+BOOL ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
@@ -333,7 +333,7 @@ void ftMewtwo_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
     f32 var2;
 
     func_8007D60C(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRHI, (FIGHTER_HITSTATUS_COLANIM_PRESERVE | FTMEWTWO_SPECIALHI_COLL_FLAG), NULL, fp->x894_currentAnimFrame, 1.0f, 1.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRHI, (FIGHTER_HITSTATUS_COLANIM_PRESERVE | FTMEWTWO_SPECIALHI_COLL_FLAG), NULL, fp->x894_currentAnimFrame, 0.0f, 0.0f);
     fp->x2223_flag.bits.b4 = 1;
     fp->x221E_flag.bits.b0 = 1;
 }
@@ -345,7 +345,7 @@ void ftMewtwo_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALHI, (FIGHTER_HITSTATUS_COLANIM_PRESERVE | FTMEWTWO_SPECIALHI_COLL_FLAG), NULL, fp->x894_currentAnimFrame, 1.0f, 1.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALHI, (FIGHTER_HITSTATUS_COLANIM_PRESERVE | FTMEWTWO_SPECIALHI_COLL_FLAG), NULL, fp->x894_currentAnimFrame, 0.0f, 0.0f);
     fp->x221E_flag.bits.b0 = 1;
 }
 
@@ -393,9 +393,9 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* fighter_gobj)
 
     sqrt_stick = sqrtf(stick_x + stick_y);
 
-    if (sqrt_stick > 0.0f)
+    if (sqrt_stick > 1.0f)
     {
-        sqrt_stick = 0.0f;
+        sqrt_stick = 1.0f;
     }
 
     if (!(sqrt_stick < mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN))
@@ -452,9 +452,9 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 
     sqrt_stick = sqrtf(stick_x + stick_y);
 
-    if (sqrt_stick > 0.0f)
+    if (sqrt_stick > 1.0f)
     {
-        sqrt_stick = 0.0f;
+        sqrt_stick = 1.0f;
     }
 
     if ((sqrt_stick > mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN))
