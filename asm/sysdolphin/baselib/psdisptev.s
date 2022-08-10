@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/F75mE // 0 (100%)
 .global func_803A3920
 func_803A3920:
 /* 803A3920 003A0500  7C 08 02 A6 */	mflr r0
@@ -81,12 +82,14 @@ func_803A3920:
 /* 803A3A48 003A0628  7C 08 03 A6 */	mtlr r0
 /* 803A3A4C 003A062C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/nBWOl // 0 (100%)
 .global func_803A3A50
 func_803A3A50:
 /* 803A3A50 003A0630  38 00 FF FF */	li r0, -1
 /* 803A3A54 003A0634  90 0D C2 B0 */	stw r0, lbl_804D7950@sda21(r13)
 /* 803A3A58 003A0638  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/RAhGZ
 .global func_803A3A5C
 func_803A3A5C:
 /* 803A3A5C 003A063C  7C 08 02 A6 */	mflr r0

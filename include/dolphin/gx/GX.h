@@ -36,6 +36,7 @@ void func_8033E9B0(unk_t, u32, u16, u16, s32, s32, s32, s8);
 void func_8033EC24(unk_t, s32, u16, u16, s32, s32, s32, s8);
 u16 func_8033EE10(unk_t, f32);
 u16 func_8033EE00(unk_t);
-/* 0033BC04 */ extern void func_8033F024(unk_t, u32, s32, u16);
+void func_8033F024(unk_t, u32, s32, u16);
+void func_8033FDC4(s32, s32);
 
 #endif
