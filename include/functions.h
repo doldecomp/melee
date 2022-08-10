@@ -8817,7 +8817,7 @@ void func_80390A70(struct _HSD_GObj *, u8, void *);
 // ? func_803A6754(?);
 // ? func_803A67EC(?);
 // ? func_803A6B98(?);
-// ? func_803A6FEC(?);
+// ? lbl_803A6FEC(?);
 // ? func_803A70A0(?);
 // ? func_803A746C(?);
 // ? func_803A74F0(?);
