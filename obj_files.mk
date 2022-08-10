@@ -191,7 +191,11 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialLw.c.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda1.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda2.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda3.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda4.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda5.c.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftzelda.s.o\
 
 TEXT_O_FILES +=\
