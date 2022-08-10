@@ -191,7 +191,7 @@ void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E2B0
-// https://decomp.me/scratch/2aEQN
+// https://decomp.me/scratch/2aEQN // Mr. Game & Watch's aerial Fire Rescue IASA callback
 void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -243,6 +243,7 @@ void ftGameWatch_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     ftGameWatch_SpecialAirHi_Coll(fighter_gobj);
 }
 
+extern BOOL EnvColl_CheckGroundAndLedge(HSD_GObj*, s32);
 extern BOOL func_80081298(HSD_GObj*);
 extern void func_80081370(HSD_GObj*);
 

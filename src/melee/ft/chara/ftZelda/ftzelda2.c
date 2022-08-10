@@ -444,7 +444,7 @@ void ftZelda_8013A058(HSD_GObj* fighterObj) {
             if (func_8009A134(fighterObj) == 0) {
                 func_8007D9FC(fighter);
                 
-                temp_f5 = func_someCalcAngle_80022C30(fighter->input.x624_lstick_y, fighter->input.x620_lstick_x * fighter->x2C_facing_direction);
+                temp_f5 = atan2f(fighter->input.x624_lstick_y, fighter->input.x620_lstick_x * fighter->x2C_facing_direction);
                 
                 fighter->x2344_f32 = inputVector.x;
                 fighter->x2348_stateVar3_f32 = inputVector.y;
@@ -528,7 +528,7 @@ void ftZelda_8013A244(HSD_GObj* fighterObj) {
         if (temp_f1 > 0.0010000000474974513f) {
             func_8007D9FC(fighter);
         }
-        var_f30 = func_someCalcAngle_80022C30(fighter->input.x624_lstick_y, fighter->input.x620_lstick_x * fighter->x2C_facing_direction);
+        var_f30 = atan2f(fighter->input.x624_lstick_y, fighter->input.x620_lstick_x * fighter->x2C_facing_direction);
         fighter->x2344_f32 = fighter->input.x620_lstick_x;
         fighter->x2348_stateVar3_f32 = fighter->input.x624_lstick_y;
     } else {

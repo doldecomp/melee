@@ -4,6 +4,7 @@
 #include <global.h>
 
 #include <dolphin/types.h>
+#include <dolphin/gx/gxtypes.h>
 #include <dolphin/os/OSAlloc.h>
 #include <sysdolphin/baselib/video.h>
 
@@ -32,7 +33,7 @@ void HSD_InitComponent(void);
 void HSD_GXSetFifoObj(GXFifoObj* fifo) ;
 static void HSD_DVDInit(void);
 void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm);
-void* HSD_AllocateFIFO(u32 size);
+GXFifoObj* HSD_AllocateFifo(u32 size);
 static void HSD_GXInit(void);
 static void HSD_OSInit(void);
 OSHeapHandle HSD_GetHeap(void);

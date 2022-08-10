@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/N6RF9
 .global GXSetMisc
 GXSetMisc:
 /* 8033CBC0 003397A0  2C 03 00 01 */	cmpwi r3, 1
@@ -11,17 +12,17 @@ GXSetMisc:
 /* 8033CBD0 003397B0  4C 80 00 20 */	bgelr 
 /* 8033CBD4 003397B4  48 00 00 4C */	b lbl_8033CC20
 lbl_8033CBD8:
-/* 8033CBD8 003397B8  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
+/* 8033CBD8 003397B8  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
 /* 8033CBDC 003397BC  38 00 00 01 */	li r0, 1
 /* 8033CBE0 003397C0  B0 83 00 04 */	sth r4, 4(r3)
-/* 8033CBE4 003397C4  80 8D A5 08 */	lwz r4, lbl_804D5BA8@sda21(r13)
+/* 8033CBE4 003397C4  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
 /* 8033CBE8 003397C8  A0 64 00 04 */	lhz r3, 4(r4)
 /* 8033CBEC 003397CC  7C 63 00 34 */	cntlzw r3, r3
 /* 8033CBF0 003397D0  54 63 DC 3E */	rlwinm r3, r3, 0x1b, 0x10, 0x1f
 /* 8033CBF4 003397D4  B0 64 00 00 */	sth r3, 0(r4)
-/* 8033CBF8 003397D8  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
+/* 8033CBF8 003397D8  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
 /* 8033CBFC 003397DC  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033CC00 003397E0  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
+/* 8033CC00 003397E0  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
 /* 8033CC04 003397E4  A0 03 00 04 */	lhz r0, 4(r3)
 /* 8033CC08 003397E8  28 00 00 00 */	cmplwi r0, 0
 /* 8033CC0C 003397EC  4D 82 00 20 */	beqlr 
@@ -31,12 +32,13 @@ lbl_8033CBD8:
 /* 8033CC1C 003397FC  4E 80 00 20 */	blr 
 lbl_8033CC20:
 /* 8033CC20 00339800  7C 84 00 D0 */	neg r4, r4
-/* 8033CC24 00339804  80 6D A5 08 */	lwz r3, lbl_804D5BA8@sda21(r13)
+/* 8033CC24 00339804  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
 /* 8033CC28 00339808  30 04 FF FF */	addic r0, r4, -1
 /* 8033CC2C 0033980C  7C 00 21 10 */	subfe r0, r0, r4
 /* 8033CC30 00339810  98 03 04 ED */	stb r0, 0x4ed(r3)
 /* 8033CC34 00339814  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/rSXT0
 .global GXSetDrawDone
 GXSetDrawDone:
 /* 8033CC38 00339818  7C 08 02 A6 */	mflr r0
@@ -46,7 +48,7 @@ GXSetDrawDone:
 /* 8033CC48 00339828  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8033CC4C 0033982C  48 00 A7 19 */	bl OSDisableInterrupts
 /* 8033CC50 00339830  38 00 00 61 */	li r0, 0x61
-/* 8033CC54 00339834  80 8D A5 08 */	lwz r4, lbl_804D5BA8@sda21(r13)
+/* 8033CC54 00339834  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
 /* 8033CC58 00339838  3C C0 CC 01 */	lis r6, 0xCC008000@ha
 /* 8033CC5C 0033983C  3C A0 45 00 */	lis r5, 0x45000002@ha
 /* 8033CC60 00339840  98 06 80 00 */	stb r0, 0xCC008000@l(r6)
@@ -79,6 +81,7 @@ lbl_8033CC80:
 /* 8033CCC8 003398A8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033CCCC 003398AC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/B4djd
 .global GXWaitDrawDone
 GXWaitDrawDone:
 /* 8033CCD0 003398B0  7C 08 02 A6 */	mflr r0
@@ -103,10 +106,11 @@ lbl_8033CCF4:
 /* 8033CD14 003398F4  7C 08 03 A6 */	mtlr r0
 /* 8033CD18 003398F8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/cEfhC
 .global GXPixModeSync
 GXPixModeSync:
 /* 8033CD1C 003398FC  38 00 00 61 */	li r0, 0x61
-/* 8033CD20 00339900  80 8D A5 08 */	lwz r4, lbl_804D5BA8@sda21(r13)
+/* 8033CD20 00339900  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
 /* 8033CD24 00339904  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 8033CD28 00339908  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
 /* 8033CD2C 0033990C  38 00 00 00 */	li r0, 0
@@ -115,6 +119,7 @@ GXPixModeSync:
 /* 8033CD38 00339918  B0 04 00 02 */	sth r0, 2(r4)
 /* 8033CD3C 0033991C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/lrkWr // 330 (34%)
 .global GXPokeAlphaMode
 GXPokeAlphaMode:
 /* 8033CD40 00339920  80 AD BC 58 */	lwz r5, lbl_804D72F8@sda21(r13)
@@ -123,6 +128,7 @@ GXPokeAlphaMode:
 /* 8033CD4C 0033992C  B0 05 00 06 */	sth r0, 6(r5)
 /* 8033CD50 00339930  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/G7Zqa // 0 (100%)
 .global GXPokeAlphaRead
 GXPokeAlphaRead:
 /* 8033CD54 00339934  54 60 07 B8 */	rlwinm r0, r3, 0, 0x1e, 0x1c
@@ -131,6 +137,7 @@ GXPokeAlphaRead:
 /* 8033CD60 00339940  B0 03 00 08 */	sth r0, 8(r3)
 /* 8033CD64 00339944  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/rzht5 // 0 (100%)
 .global GXPokeAlphaUpdate
 GXPokeAlphaUpdate:
 /* 8033CD68 00339948  80 8D BC 58 */	lwz r4, lbl_804D72F8@sda21(r13)
@@ -141,6 +148,7 @@ GXPokeAlphaUpdate:
 /* 8033CD7C 0033995C  B0 04 00 00 */	sth r0, 0(r4)
 /* 8033CD80 00339960  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/uLvix // 3115 (8.38%)
 .global GXPokeBlendMode
 GXPokeBlendMode:
 /* 8033CD84 00339964  80 ED BC 58 */	lwz r7, lbl_804D72F8@sda21(r13)
@@ -179,6 +187,7 @@ lbl_8033CDA8:
 /* 8033CE04 003399E4  B0 0A 00 00 */	sth r0, 0(r10)
 /* 8033CE08 003399E8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/G33Fb // 0 (100%)
 .global GXPokeColorUpdate
 GXPokeColorUpdate:
 /* 8033CE0C 003399EC  80 8D BC 58 */	lwz r4, lbl_804D72F8@sda21(r13)
@@ -189,6 +198,7 @@ GXPokeColorUpdate:
 /* 8033CE20 00339A00  B0 04 00 00 */	sth r0, 0(r4)
 /* 8033CE24 00339A04  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/FHQSt // 220 (56%)
 .global GXPokeDstAlpha
 GXPokeDstAlpha:
 /* 8033CE28 00339A08  80 AD BC 58 */	lwz r5, lbl_804D72F8@sda21(r13)
@@ -197,6 +207,7 @@ GXPokeDstAlpha:
 /* 8033CE34 00339A14  B0 05 00 04 */	sth r0, 4(r5)
 /* 8033CE38 00339A18  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/adZRo // 0 (100%)
 .global GXPokeDither
 GXPokeDither:
 /* 8033CE3C 00339A1C  80 8D BC 58 */	lwz r4, lbl_804D72F8@sda21(r13)
@@ -207,6 +218,7 @@ GXPokeDither:
 /* 8033CE50 00339A30  B0 04 00 00 */	sth r0, 0(r4)
 /* 8033CE54 00339A34  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/wi2b0 // 200 (80%)
 .global GXPokeZMode
 GXPokeZMode:
 /* 8033CE58 00339A38  54 60 06 3E */	clrlwi r0, r3, 0x18
@@ -277,6 +289,7 @@ GXSetDrawDoneCallback:
 /* 8033CF44 00339B24  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033CF48 00339B28  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/PoUPM
 GXFinishInterruptHandler:
 /* 8033CF4C 00339B2C  7C 08 02 A6 */	mflr r0
 /* 8033CF50 00339B30  38 60 00 01 */	li r3, 1
@@ -348,18 +361,21 @@ __GXPEInit:
 /* 8033D048 00339C28  7C 08 03 A6 */	mtlr r0
 /* 8033D04C 00339C2C  4E 80 00 20 */	blr 
 
-
 .section .sbss
     .balign 8
-.global lbl_804D7320
+
+# decl GXMisc.c
 lbl_804D7320:
 	.skip 0x4
-.global lbl_804D7324
+
+# decl GXMisc.c
 lbl_804D7324:
 	.skip 0x4
-.global lbl_804D7328
+
+# decl GXMisc.c
 lbl_804D7328:
 	.skip 0x4
-.global lbl_804D732C
+
+# decl GXMisc.c
 lbl_804D732C:
 	.skip 0xC

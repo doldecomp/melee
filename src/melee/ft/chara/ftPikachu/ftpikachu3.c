@@ -130,14 +130,14 @@ void ftPikachu_8012525C(HSD_GObj* fighterObj) {
 
 void ftPikachu_801252FC(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    if (!(fighter->input.x65C & 0x200)) {
+    if (!(fighter->input.x65C_heldInputs & 0x200)) {
         ftPikachu_ActionChange_80125834(fighterObj);
     }
 }
 
 void ftPikachu_8012532C(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    if (!(fighter->input.x65C & 0x200)) {
+    if (!(fighter->input.x65C_heldInputs & 0x200)) {
         ftPikachu_ActionChange_801258A0(fighterObj);
     }
 }

@@ -27,6 +27,7 @@ lbl_803447FC:
 /* 80344804 003413E4  42 00 FF F8 */	bdnz lbl_803447FC
 /* 80344808 003413E8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/y3hWw
 .global DCFlushRange
 DCFlushRange:
 /* 8034480C 003413EC  28 04 00 00 */	cmplwi r4, 0
@@ -503,10 +504,8 @@ lbl_80344DFC:
 /* 80344E28 00341A08  38 21 00 10 */	addi r1, r1, 0x10
 /* 80344E2C 00341A0C  4E 80 00 20 */	blr 
 
-
 .section .data
     .balign 8
-.global lbl_80401BF0
 lbl_80401BF0:
     .asciz ">>> L2 INVALIDATE : SHOULD NEVER HAPPEN\n"
     .balign 4
