@@ -15,7 +15,9 @@
 #		split_suggester.py [fileToSpli.s] [mapFilePath.map]
 #
 # If a map file is provided, function names from it will be
-# included in the generated function headers.
+# included in the generated function headers. If your data,
+# text, and sdata sections are not in the same file, you may
+# create a new file with them all included and input that.
 
 import os
 import sys
