@@ -8,4 +8,5 @@ s32 CARDOpen(s32, s32, void *);
 s32 CARDWrite(void*, u8*, u32, s32); 
 s32 CARDRead(void*, u8*, u32, s32);  
 s32 CARDFastOpen(s32, s32, void*);  
+
 #endif
