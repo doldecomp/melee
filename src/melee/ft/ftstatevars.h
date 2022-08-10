@@ -19,7 +19,7 @@ typedef struct ftCliffCommonVars {
 
 typedef union ftCommonStateVars {
 
-	ftCliffCommonVars CliffCommon;
+	ftCliffCommonVars cliffCommon;
 
 } ftCommonStateVars;
 
