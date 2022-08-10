@@ -1,4 +1,4 @@
-#include "code_8000B074.h"
+#include <melee/lb/lbunknown_001.h>
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
