@@ -127,7 +127,7 @@ typedef enum ITKIND {
     It_Kind_IceClimber_Blizzard, // Blizzard
     It_Kind_Zelda_DinFire, // Din's Fire (charging state)
     It_Kind_Zelda_DinFire_Explode, // Din's Fire (explosion)
-    It_Kind_Unk3, //
+    It_Kind_Mewtwo_Disable, // Mewtwo's Disable Projectile
     It_Kind_Peach_ToadSpore, // Peach Toad's spore effect
     It_Kind_Mewtwo_ShadowBall, // Mewtwo's Shadowball
     It_Kind_IceClimber_GumStrings, // Ice Climbers Belay (Up B) 
