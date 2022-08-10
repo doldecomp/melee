@@ -7,282 +7,282 @@ as_table_falco:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte func_800E62A4
-    .4byte func_800E6AB4
-    .4byte func_800E6B5C
-    .4byte func_800E6C1C
+    .4byte ftFox_SpecialNStart_Anim
+    .4byte ftFox_SpecialNStart_IASA
+    .4byte ftFox_SpecialNStart_Phys
+    .4byte ftFox_SpecialNStart_Coll
     .4byte func_800761C8
     .4byte 0x00000128
     .4byte 0x003C0111
     .4byte 0x12000000
-    .4byte func_800E6368
-    .4byte func_800E6ADC
-    .4byte func_800E6B7C
-    .4byte func_800E6C3C
+    .4byte ftFox_SpecialNLoop_Anim
+    .4byte ftFox_SpecialNLoop_IASA
+    .4byte ftFox_SpecialNLoop_Phys
+    .4byte ftFox_SpecialNLoop_Coll
     .4byte func_800761C8
     .4byte 0x00000129
     .4byte 0x00340111
     .4byte 0x12000000
-    .4byte func_800E65BC
-    .4byte func_800E6B04
-    .4byte func_800E6B9C
-    .4byte func_800E6C5C
+    .4byte ftFox_SpecialNEnd_Anim
+    .4byte ftFox_SpecialNEnd_IASA
+    .4byte ftFox_SpecialNEnd_Phys
+    .4byte ftFox_SpecialNEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000012A
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte func_800E667C
-    .4byte func_800E6B08
-    .4byte func_800E6BBC
-    .4byte func_800E6C7C
+    .4byte ftFox_SpecialAirNStart_Anim
+    .4byte ftFox_SpecialAirNStart_IASA
+    .4byte ftFox_SpecialAirNStart_Phys
+    .4byte ftFox_SpecialAirNStart_Coll
     .4byte func_800761C8
     .4byte 0x0000012B
     .4byte 0x003C0511
     .4byte 0x12000000
-    .4byte func_800E6740
-    .4byte func_800E6B30
-    .4byte func_800E6BDC
-    .4byte func_800E6C9C
+    .4byte ftFox_SpecialAirNLoop_Anim
+    .4byte ftFox_SpecialAirNLoop_IASA
+    .4byte ftFox_SpecialAirNLoop_Phys
+    .4byte ftFox_SpecialAirNLoop_Coll
     .4byte func_800761C8
     .4byte 0x0000012C
     .4byte 0x00340511
     .4byte 0x12000000
-    .4byte func_800E69BC
-    .4byte func_800E6B58
-    .4byte func_800E6BFC
-    .4byte func_800E6CBC
+    .4byte ftFox_SpecialAirNEnd_Anim
+    .4byte ftFox_SpecialAirNEnd_IASA
+    .4byte ftFox_SpecialAirNEnd_Phys
+    .4byte ftFox_SpecialAirNEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000012D
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte func_800EA004
-    .4byte func_800EA07C
-    .4byte func_800EA084
-    .4byte func_800EA128
+    .4byte ftFox_SpecialSStart_Anim
+    .4byte ftFox_SpecialSStart_IASA
+    .4byte ftFox_SpecialSStart_Phys
+    .4byte ftFox_SpecialSStart_Coll
     .4byte func_800761C8
     .4byte 0x0000012E
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte func_800EA294
-    .4byte func_800EA3F4
-    .4byte func_800EA47C
-    .4byte func_800EA5EC
+    .4byte ftFox_SpecialS_Anim
+    .4byte ftFox_SpecialS_IASA
+    .4byte ftFox_SpecialS_Phys
+    .4byte ftFox_SpecialS_Coll
     .4byte func_800761C8
     .4byte 0x0000012F
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte func_800EA908
-    .4byte func_800EA9A4
-    .4byte func_800EA9AC
-    .4byte func_800EAB90
+    .4byte ftFox_SpecialSEnd_Anim
+    .4byte ftFox_SpecialSEnd_IASA
+    .4byte ftFox_SpecialSEnd_Phys
+    .4byte ftFox_SpecialSEnd_Coll
     .4byte func_800761C8
     .4byte 0x00000130
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte func_800EA040
-    .4byte func_800EA080
-    .4byte func_800EA0BC
-    .4byte func_800EA164
+    .4byte ftFox_SpecialAirSStart_Anim
+    .4byte ftFox_SpecialAirSStart_IASA
+    .4byte ftFox_SpecialAirSStart_Phys
+    .4byte ftFox_SpecialAirSStart_Coll
     .4byte func_800761C8
     .4byte 0x00000131
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte func_800EA344
-    .4byte func_800EA438
-    .4byte func_800EA534
-    .4byte func_800EA628
+    .4byte ftFox_SpecialAirS_Anim
+    .4byte ftFox_SpecialAirS_IASA
+    .4byte ftFox_SpecialAirS_Phys
+    .4byte ftFox_SpecialAirS_Coll
     .4byte func_800761C8
     .4byte 0x00000132
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte func_800EA944
-    .4byte func_800EA9A8
-    .4byte func_800EAA8C
-    .4byte func_800EABCC
+    .4byte ftFox_SpecialAirSEnd_Anim
+    .4byte ftFox_SpecialAirSEnd_IASA
+    .4byte ftFox_SpecialAirSEnd_Phys
+    .4byte ftFox_SpecialAirSEnd_Coll
     .4byte func_800761C8
     .4byte 0x00000133
     .4byte 0x00340213
     .4byte 0x14000000
-    .4byte func_800E7354
-    .4byte func_800E7414
-    .4byte func_800E741C
-    .4byte func_800E74A8
+    .4byte ftFox_SpecialHiHold_Anim
+    .4byte ftFox_SpecialHiHold_IASA
+    .4byte ftFox_SpecialHiHold_Phys
+    .4byte ftFox_SpecialHiHold_Coll
     .4byte func_800761C8
     .4byte 0x00000134
     .4byte 0x00340613
     .4byte 0x14000000
-    .4byte func_800E73B4
-    .4byte func_800E7418
-    .4byte func_800E743C
-    .4byte func_800E74E4
+    .4byte ftFox_SpecialHiHoldAir_Anim
+    .4byte ftFox_SpecialHiHoldAir_IASA
+    .4byte ftFox_SpecialHiHoldAir_Phys
+    .4byte ftFox_SpecialHiHoldAir_Coll
     .4byte func_800761C8
     .4byte 0x00000135
     .4byte 0x00340213
     .4byte 0x14000000
-    .4byte func_800E7634
-    .4byte func_800E76D4
-    .4byte func_800E76DC
-    .4byte func_800E7800
+    .4byte ftFox_SpecialHi_Anim
+    .4byte ftFox_SpecialHi_IASA
+    .4byte ftFox_SpecialHi_Phys
+    .4byte ftFox_SpecialHi_Coll
     .4byte func_800761C8
     .4byte 0x00000135
     .4byte 0x00340613
     .4byte 0x14000000
-    .4byte func_800E7684
-    .4byte func_800E76D8
-    .4byte func_800E7758
-    .4byte func_800E78B4
+    .4byte ftFox_SpecialAirHi_Anim
+    .4byte ftFox_SpecialAirHi_IASA
+    .4byte ftFox_SpecialAirHi_Phys
+    .4byte ftFox_SpecialAirHi_Coll
     .4byte func_800761C8
     .4byte 0x00000136
     .4byte 0x00340213
     .4byte 0x14000000
-    .4byte func_800E7E3C
-    .4byte func_800E7ED8
-    .4byte func_800E7EE0
-    .4byte func_800E7F40
+    .4byte ftFox_SpecialHiLanding_Anim
+    .4byte ftFox_SpecialHiLanding_IASA
+    .4byte ftFox_SpecialHiLanding_Phys
+    .4byte ftFox_SpecialHiLanding_Coll
     .4byte func_800761C8
     .4byte 0x00000137
     .4byte 0x00340613
     .4byte 0x14000000
-    .4byte func_800E7E78
-    .4byte func_800E7EDC
-    .4byte func_800E7F20
-    .4byte func_800E7FA0
+    .4byte ftFox_SpecialHiFall_Anim
+    .4byte ftFox_SpecialHiFall_IASA
+    .4byte ftFox_SpecialHiFall_Phys
+    .4byte ftFox_SpecialHiFall_Coll
     .4byte func_800761C8
     .4byte 0x00000138
     .4byte 0x00340613
     .4byte 0x14000000
-    .4byte func_800E8124
-    .4byte func_800E81FC
-    .4byte func_800E8200
-    .4byte func_800E824C
+    .4byte ftFox_SpecialHiBound_Anim
+    .4byte ftFox_SpecialHiBound_IASA
+    .4byte ftFox_SpecialHiBound_Phys
+    .4byte ftFox_SpecialHiBound_Coll
     .4byte func_800761C8
     .4byte 0x00000139
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E8694
-    .4byte func_800E87AC
-    .4byte func_800E8864
-    .4byte func_800E88E4
+    .4byte ftFox_SpecialLwStart_Anim
+    .4byte ftFox_SpecialLwStart_IASA
+    .4byte ftFox_SpecialLwStart_Phys
+    .4byte ftFox_SpecialLwStart_Coll
     .4byte func_800761C8
     .4byte 0x0000013A
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E8A24
-    .4byte func_800E8B14
-    .4byte func_800E8C34
-    .4byte func_800E8CDC
+    .4byte ftFox_SpecialLwLoop_Anim
+    .4byte ftFox_SpecialLwLoop_IASA
+    .4byte ftFox_SpecialLwLoop_Phys
+    .4byte ftFox_SpecialLwLoop_Coll
     .4byte func_800761C8
     .4byte 0x0000013B
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E965C
-    .4byte func_800E9844
-    .4byte func_800E984C
-    .4byte func_800E98F4
+    .4byte ftFox_SpecialLwHit_Anim
+    .4byte ftFox_SpecialLwHit_IASA
+    .4byte ftFox_SpecialLwHit_Phys
+    .4byte ftFox_SpecialLwHit_Coll
     .4byte func_800761C8
     .4byte 0x0000013C
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E9B40
-    .4byte func_800E9BC8
-    .4byte func_800E9BD0
-    .4byte func_800E9C50
+    .4byte ftFox_SpecialLwEnd_Anim
+    .4byte ftFox_SpecialLwEnd_IASA
+    .4byte ftFox_SpecialLwEnd_Phys
+    .4byte ftFox_SpecialLwEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000013A
     .4byte 0x00341014
     .4byte 0x15000000
-    .4byte func_800E8FDC
-    .4byte func_800E91FC
-    .4byte func_800E9204
-    .4byte func_800E92AC
+    .4byte ftFox_SpecialLwTurn_Anim
+    .4byte ftFox_SpecialLwTurn_IASA
+    .4byte ftFox_SpecialLwTurn_Phys
+    .4byte ftFox_SpecialLwTurn_Coll
     .4byte func_800761C8
     .4byte 0x0000013D
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E8720
-    .4byte func_800E87D0
-    .4byte func_800E8884
-    .4byte func_800E8920
+    .4byte ftFox_SpecialAirLwStart_Anim
+    .4byte ftFox_SpecialAirLwStart_IASA
+    .4byte ftFox_SpecialAirLwStart_Phys
+    .4byte ftFox_SpecialAirLwStart_Coll
     .4byte func_800761C8
     .4byte 0x0000013E
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E8A9C
-    .4byte func_800E8B64
-    .4byte func_800E8C68
-    .4byte func_800E8D18
+    .4byte ftFox_SpecialAirLwLoop_Anim
+    .4byte ftFox_SpecialAirLwLoop_IASA
+    .4byte ftFox_SpecialAirLwLoop_Phys
+    .4byte ftFox_SpecialAirLwLoop_Coll
     .4byte func_800761C8
     .4byte 0x0000013F
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E97B4
-    .4byte func_800E9848
-    .4byte func_800E9880
-    .4byte func_800E9930
+    .4byte ftFox_SpecialAirLwHit_Anim
+    .4byte ftFox_SpecialAirLwHit_IASA
+    .4byte ftFox_SpecialAirLwHit_Phys
+    .4byte ftFox_SpecialAirLwHit_Coll
     .4byte func_800761C8
     .4byte 0x00000140
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E9B84
-    .4byte func_800E9BCC
-    .4byte func_800E9BF0
-    .4byte func_800E9C8C
+    .4byte ftFox_SpecialAirLwEnd_Anim
+    .4byte ftFox_SpecialAirLwEnd_IASA
+    .4byte ftFox_SpecialAirLwEnd_Phys
+    .4byte ftFox_SpecialAirLwEnd_Coll
     .4byte func_800761C8
     .4byte 0x0000013E
     .4byte 0x00341414
     .4byte 0x15000000
-    .4byte func_800E90EC
-    .4byte func_800E9200
-    .4byte func_800E9238
-    .4byte func_800E92E8
+    .4byte ftFox_SpecialAirLwTurn_Anim
+    .4byte ftFox_SpecialAirLwTurn_IASA
+    .4byte ftFox_SpecialAirLwTurn_Phys
+    .4byte ftFox_SpecialAirLwTurn_Coll
     .4byte func_800761C8
     .4byte 0x00000141
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000142
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000143
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000144
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000145
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
     .4byte 0x00000146
     .4byte 0x00000072
     .4byte 0x01000000
-    .4byte func_800E5B18
-    .4byte func_800E5C38
-    .4byte func_800E5C3C
-    .4byte func_800E5C5C
+    .4byte ftFox_AppealS_Anim
+    .4byte ftFox_AppealS_IASA
+    .4byte ftFox_AppealS_Phys
+    .4byte ftFox_AppealS_Coll
     .4byte func_800761C8
 .global lbl_803D1CA8
 lbl_803D1CA8:

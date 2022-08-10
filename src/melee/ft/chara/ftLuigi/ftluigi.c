@@ -12,7 +12,7 @@ void ftLuigi_OnLoad(HSD_GObj* fighterObj) {
 
     PUSH_ATTRS(fighter, ftLuigiAttributes);
     
-    func_8026B3F8(item_list[0], 0x69U);
+    func_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
 
 void ftLuigi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
@@ -55,4 +55,24 @@ void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2)
         *arg2 = 0xF;
         *arg1 = 0xF;
     }
+}
+
+extern struct DemoMotionFiles lbl_803D0AAC;
+
+// 0x80142640 
+// https://decomp.me/scratch/vH9VM // Get symbol pointers for Luigi cutscenes
+void* func_80142640(s32 demoMotionArg)
+{
+    s32 demoFile;
+
+    switch (demoMotionArg)
+    {
+    case 0x9:
+        demoFile = 14;
+        break;
+    case 0xA:
+        demoFile = 15;
+        break;
+    }
+    return lbl_803D0AAC.x0_demoMotionPtr[demoFile - 14];
 }

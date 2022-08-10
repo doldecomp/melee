@@ -5,8 +5,14 @@
 
 // Most of these should be moved to independent headers once they are created //
 
+// SOUND EFFECTS //
+
+#define SFX_VOLUME_MAX 0x7FU
+#define SFX_PAN_MID 0x40U
+
 // HSD_PAD //
 
+#define HSD_BUTTON_DPAD_DOWN 0x4
 #define HSD_BUTTON_A 0x100 // Also covers Z-Button macro in-game //
 #define HSD_BUTTON_B 0x200
 
@@ -20,6 +26,16 @@
 #define AIR 1 // Used by fighters and items //
 
 typedef struct _Vec2 { float x, y; } Vec2;
+
+struct DemoMotionSymbols
+{
+    char* x0;
+};
+
+struct DemoMotionFiles
+{
+    struct DemoMotionSymbols* x0_demoMotionPtr[14];
+};
 
 typedef Vec Vec3;
 

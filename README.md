@@ -60,7 +60,7 @@
 
 1. Download  <kbd>**[GC_WII_COMPILERS.zip][GC]**</kbd>
 
-2. Extract it's content to  `/tools/mwcc_compiler/` .
+2. Extract its contents to  `/tools/mwcc_compiler/` .
 
 3. Run the **Make** command:
 

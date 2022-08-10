@@ -170,7 +170,7 @@ void lbl_80136BB4(HSD_GObj* gobj) {
 // https://decomp.me/scratch/zR8Hv
 void lbl_80136C8C(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    if ((ft->input.x65C & 0x200) == 0) {
+    if ((ft->input.x65C_heldInputs & 0x200) == 0) {
         ft->x2200_ftcmd_var0 = 0;
         func_80137354(gobj);
     }
@@ -180,7 +180,7 @@ void lbl_80136C8C(HSD_GObj* gobj) {
 // https://decomp.me/scratch/ykJFN
 void lbl_80136CC4(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    if ((ft->input.x65C & 0x200) == 0) {
+    if ((ft->input.x65C_heldInputs & 0x200) == 0) {
         ft->x2200_ftcmd_var0 = 0;
         func_801373B8(gobj);
     }

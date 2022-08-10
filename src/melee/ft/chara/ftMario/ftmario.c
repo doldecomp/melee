@@ -8,11 +8,11 @@ extern s32 lbl_803C5A20[];
 void ftMario_OnDeath(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     func_80074A4C(gobj, 0, 0);
-    ft->sa.mario.x222C = 9;
-    ft->sa.mario.x2230 = 9;
-    ft->sa.mario.x2234 = 0;
-    ft->sa.mario.x2238 = 0;
-    ft->sa.mario.x223C = NULL;
+    ft->sa.mario.x222C_vitaminCurr = 9;
+    ft->sa.mario.x2230_vitaminPrev = 9;
+    ft->sa.mario.x2234_tornadoCharge = FALSE;
+    ft->sa.mario.x2238_isCapeBoost = FALSE;
+    ft->sa.mario.x223C_capeGObj = NULL;
     ft->sa.mario.x2240 = 0;
 }
 
@@ -35,12 +35,13 @@ void ftMario_OnLoad(HSD_GObj* gobj) {
     sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
 
     func_8026B3F8(items[0], It_Kind_Mario_Fire);
-    func_8026B3F8(items[2], sa->x14);
+    func_8026B3F8(items[2], sa->x14_MARIO_CAPE_IT_KIND);
 }
 
-void ftMario_func_800E0A00(HSD_GObj* gobj)
+// 0x800E0A00
+void ftMario_OnTakeDamage(HSD_GObj* gobj)
 {
-    ftMario_func_800E1368(gobj);
+    ftMario_SpecialS_RemoveCape(gobj);
 }
 
 void ftMario_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {

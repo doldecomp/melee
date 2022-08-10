@@ -159,16 +159,16 @@ void func_80379A20(Mtx src, Mtx dest)
     }
 }
 
-inline f32 calcVal(f32 val1, f32 val2)
+inline f32 calcVal(f32 x, f32 y)
 {
-    if (fabsf_bitwise(val1) <= FLOAT_MIN) {
-        if (val2 >= 0) {
+    if (fabsf_bitwise(x) <= FLOAT_MIN) {
+        if (y >= 0) {
             return M_PI/2;
         } else {
             return -M_PI/2;
         }
     } else {
-        return func_someCalcAngle_80022C30(val2, val1);
+        return atan2f(y, x);
     }
 }
 

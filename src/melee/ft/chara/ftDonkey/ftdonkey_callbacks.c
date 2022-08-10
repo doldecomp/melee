@@ -8,7 +8,7 @@ void ftDonkey_OnDeath(HSD_GObj* fighterObj) {
 
 void ftDonkey_8010D774(HSD_GObj* fighterObj) {
     ftDonkey_DestroyAllEffectsPlus(fighterObj);
-    func_80110074(fighterObj);
+    ftDonkey_DestroyAllEffects_SpecialHi(fighterObj);
 }
 
 void ftDonkey_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
@@ -31,7 +31,7 @@ void ftDonkey_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 void func_8010D96C(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
     ftDonkeyAttributes* attr = fighter->x2D4_specialAttributes;
-    if (fighter->sa.dk.x222C == attr->x2C) {
+    if (fighter->sa.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         func_800BFFD0(fighter, 0x39, 0);
     }
 }
@@ -83,8 +83,8 @@ void ftDonkey_8010DB3C(HSD_GObj* fighterObj) {
         s32 i;
         for (i = 0; i < 4; i++) {
 
-            f32 temp_f5 = (donkey_attr->x68 * i) - (donkey_attr->x68 * 1.5f);
-            f32 temp_f3 = donkey_attr->x6C * fighter->x2C_facing_direction;
+            f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) - (donkey_attr->SpecialLw.x68 * 1.5f);
+            f32 temp_f3 = donkey_attr->SpecialLw.x6C * fighter->x2C_facing_direction;
             f32 temp_f6 = temp_f5 + temp_f3;
 
             if (!func_80056C54(
@@ -95,9 +95,9 @@ void ftDonkey_8010DB3C(HSD_GObj* fighterObj) {
                     0, 
                     0, 
                     temp_f6,
-                    donkey_attr->x70, 
-                    donkey_attr->x68 * 1.5f, 
-                    donkey_attr->x68
+                    donkey_attr->SpecialLw.x70, 
+                    donkey_attr->SpecialLw.x68 * 1.5f, 
+                    donkey_attr->SpecialLw.x68
                 )) {
 
                 vec_list[i] = fighter->xB0_pos;

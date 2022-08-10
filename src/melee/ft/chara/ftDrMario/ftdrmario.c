@@ -4,9 +4,9 @@ void ftDrMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* ft = (Fighter*)gobj->user_data;
     func_80074A4C(gobj, 0, 0);
-    ft->sa.mario.x2234 = 0;
-    ft->sa.mario.x2238 = 0;
-    ft->sa.mario.x223C = 0;
+    ft->sa.mario.x2234_tornadoCharge = 0;
+    ft->sa.mario.x2238_isCapeBoost = FALSE;
+    ft->sa.mario.x223C_capeGObj = NULL;
     ft->sa.mario.x2240 = 0;
 }
 

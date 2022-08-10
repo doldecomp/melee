@@ -331,7 +331,7 @@ void ftZelda_8013BDD4(HSD_GObj* fighterObj) {
         var_r0 = 0;
     }
     
-    if ((var_r0 == 1) && !(fighter->input.x65C & 0x200)) {
+    if ((var_r0 == 1) && !(fighter->input.x65C_heldInputs & 0x200)) {
         temp_f1 = 0;
         Fighter_ActionStateChange_800693AC(fighterObj, 0x159, 0, NULL, temp_f1, 1.0, temp_f1);
     }
@@ -357,7 +357,7 @@ void ftZelda_8013BE58(HSD_GObj* fighterObj) {
         var_r0 = 0;
     }
 
-    if ((var_r0 == 1) && !(fighter->input.x65C & 0x200)) {
+    if ((var_r0 == 1) && !(fighter->input.x65C_heldInputs & 0x200)) {
         temp_f1 = 0;
         Fighter_ActionStateChange_800693AC(fighterObj, 0x15C, 0, NULL, temp_f1, 1.0, temp_f1);
     }

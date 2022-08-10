@@ -8,7 +8,7 @@ void func_8007CA80(Fighter*, f32, f32);
 void func_8007CADC(Fighter*, f32, f32, f32);
 void func_8007CB74(HSD_GObj*);
 HSD_GObj* func_8007CC1C(HSD_GObj*);
-void func_8007CC78(f32, Fighter*);
+void func_8007CC78(Fighter*, f32);
 void func_8007CCA0(Fighter*, f32);
 void func_8007CCE8(Fighter*);
 f32 func_8007CD6C(f32, f32 decrement);

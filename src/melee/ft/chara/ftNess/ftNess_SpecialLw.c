@@ -10,9 +10,9 @@ void ftNess_SpecialLwStart_Action(HSD_GObj* fighter_gobj) // Ness's grounded PSI
 
     temp_fighter = fighter_gobj->user_data;
     ness_attr = temp_fighter->x2D4_specialAttributes;
-    temp_fighter->x2340_stateVar1 = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
-    temp_fighter->x2348_stateVar3 = 0;
-    temp_fighter->x234C_stateVar4 = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
+    temp_fighter->nessVars[0].SpecialLw.releaseLag = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
+    temp_fighter->nessVars[0].SpecialLw.isRelease = 0;
+    temp_fighter->nessVars[0].SpecialLw.gravityDelay = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fighter->x2350_stateVar5 = 0;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_START, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
@@ -28,9 +28,9 @@ void ftNess_SpecialAirLwStart_Action(HSD_GObj* fighter_gobj) // Ness's aerial PS
 
     temp_fighter = fighter_gobj->user_data;
     ness_attr = temp_fighter->x2D4_specialAttributes;
-    temp_fighter->x2340_stateVar1 = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
-    temp_fighter->x2348_stateVar3 = 0;
-    temp_fighter->x234C_stateVar4 = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
+    temp_fighter->nessVars[0].SpecialLw.releaseLag = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
+    temp_fighter->nessVars[0].SpecialLw.isRelease = 0;
+    temp_fighter->nessVars[0].SpecialLw.gravityDelay = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fighter->x2350_stateVar5 = 0;
     temp_fighter->x80_self_vel.y = 0.0f;
     temp_fighter->x80_self_vel.x /= ness_attr->x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
@@ -48,9 +48,9 @@ void ftNess_SpecialLwStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PSI M
 
     fighter_data2 = fighter_gobj->user_data;
 
-    if ((fighter_data2->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fighter_data2->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        fighter_data2->x2348_stateVar3 = 1;
+        fighter_data2->nessVars[0].SpecialLw.isRelease = 1;
     }
 
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
@@ -85,9 +85,9 @@ void ftNess_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PSI 
 
     fighter_data2 = fighter_data = fighter_gobj->user_data;
 
-    if ((fighter_data2->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fighter_data2->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        fighter_data2->x2348_stateVar3 = 1;
+        fighter_data2->nessVars[0].SpecialLw.isRelease = 1;
     }
 
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
@@ -143,10 +143,10 @@ void ftNess_SpecialAirLwStart_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PSI 
     fighter_data = fighter_gobj->user_data;
     attr = &fighter_data->x110_attr;
     ness_attr = fighter_data->x2D4_specialAttributes;
-    gravityDelay = fighter_data->x234C_stateVar4;
+    gravityDelay = fighter_data->nessVars[0].SpecialLw.gravityDelay;
     if (gravityDelay != 0)
     {
-        fighter_data->x234C_stateVar4 = gravityDelay - 1;
+        fighter_data->nessVars[0].SpecialLw.gravityDelay = gravityDelay - 1;
         goto block_end;
     }
 
@@ -212,16 +212,16 @@ void ftNess_SpecialLwHold_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PSI Ma
     Fighter* fighter_data;
 
     fighter_data = fighter_gobj->user_data;
-    if ((fighter_data->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fighter_data->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        fighter_data->x2348_stateVar3 = 1;
+        fighter_data->nessVars[0].SpecialLw.isRelease = 1;
     }
 
-    if (fighter_data->x2340_stateVar1 > 0)
+    if (fighter_data->nessVars[0].SpecialLw.releaseLag > 0)
     {
-        fighter_data->x2340_stateVar1 = (s32)(fighter_data->x2340_stateVar1 - 1);
+        fighter_data->nessVars[0].SpecialLw.releaseLag--;
     }
-    if (((s32)fighter_data->x2340_stateVar1 <= 0) && ((s32)fighter_data->x2348_stateVar3 != 0))
+    if (((s32)fighter_data->nessVars[0].SpecialLw.releaseLag <= 0) && ((s32)fighter_data->nessVars[0].SpecialLw.isRelease != 0))
     {
         if ((s32)fighter_data->xE0_ground_or_air == GROUND)
         {
@@ -234,7 +234,7 @@ void ftNess_SpecialLwHold_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PSI Ma
     }
     temp_r31 = fighter_gobj->user_data;
 
-    temp_r31->x2350_stateVar5 = (s32)(temp_r31->x2350_stateVar5 - 1);
+    temp_r31->x2350_stateVar5--;
 
     if ((s32)temp_r31->x2350_stateVar5 <= 0)
     {
@@ -253,16 +253,16 @@ void ftNess_SpecialAirLwHold_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PSI M
     Fighter* fighter_data;
 
     fighter_data = fighter_gobj->user_data;
-    if ((fighter_data->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((fighter_data->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        fighter_data->x2348_stateVar3 = 1;
+        fighter_data->nessVars[0].SpecialLw.isRelease = 1;
     }
 
-    if (fighter_data->x2340_stateVar1 > 0)
+    if (fighter_data->nessVars[0].SpecialLw.releaseLag > 0)
     {
-        fighter_data->x2340_stateVar1 = (s32)(fighter_data->x2340_stateVar1 - 1);
+        fighter_data->nessVars[0].SpecialLw.releaseLag = (s32)(fighter_data->nessVars[0].SpecialLw.releaseLag - 1);
     }
-    if (((s32)fighter_data->x2340_stateVar1 <= 0) && ((s32)fighter_data->x2348_stateVar3 != 0))
+    if (((s32)fighter_data->nessVars[0].SpecialLw.releaseLag <= 0) && ((s32)fighter_data->nessVars[0].SpecialLw.isRelease != 0))
     {
         if ((s32)fighter_data->xE0_ground_or_air == GROUND)
         {
@@ -320,10 +320,10 @@ void ftNess_SpecialAirLwHold_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PSI M
     ness_attr = fighter_data->x2D4_specialAttributes;
     attr = &fighter_data->x110_attr;
 
-    magnetTimer = fighter_data->x234C_stateVar4;
+    magnetTimer = fighter_data->nessVars[0].SpecialLw.gravityDelay;
     if (magnetTimer != 0)
     {
-        fighter_data->x234C_stateVar4 = magnetTimer - 1;
+        fighter_data->nessVars[0].SpecialLw.gravityDelay = magnetTimer - 1;
         goto block_end;
     }
     func_8007D494(fighter_data, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL, attr->x170_TerminalVelocity);
@@ -444,13 +444,13 @@ void ftNess_SpecialLwTurn_Anim(HSD_GObj* arg0) // Ness's grounded PSI Magnet Tur
     Fighter* temp_r30;
     Fighter* temp_r29 = temp_r30 = arg0->user_data;
 
-    if ((temp_r29->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((temp_r29->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        temp_r29->x2348_stateVar3 = 1;
+        temp_r29->nessVars[0].SpecialLw.isRelease = 1;
     }
-    if (temp_r29->x2340_stateVar1 > 0)
+    if (temp_r29->nessVars[0].SpecialLw.releaseLag > 0)
     {
-        temp_r29->x2340_stateVar1 = temp_r29->x2340_stateVar1 - 1;
+        temp_r29->nessVars[0].SpecialLw.releaseLag = temp_r29->nessVars[0].SpecialLw.releaseLag - 1;
     }
 
     GetAttrStuff(arg0);
@@ -470,14 +470,14 @@ void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
     Fighter* temp_r30;
     Fighter* temp_r29 = temp_r30 = arg0->user_data;
 
-    if ((temp_r29->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((temp_r29->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        temp_r29->x2348_stateVar3 = 1;
+        temp_r29->nessVars[0].SpecialLw.isRelease = 1;
     }
 
-    if (temp_r29->x2340_stateVar1 > 0)
+    if (temp_r29->nessVars[0].SpecialLw.releaseLag > 0)
     {
-        temp_r29->x2340_stateVar1 = temp_r29->x2340_stateVar1 - 1;
+        temp_r29->nessVars[0].SpecialLw.releaseLag = temp_r29->nessVars[0].SpecialLw.releaseLag - 1;
     }
 
     GetAttrStuff(arg0);
@@ -520,10 +520,10 @@ void ftNess_SpecialAirLwTurn_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PSI M
     ness_attr = fighter_data->x2D4_specialAttributes;
     attr = &fighter_data->x110_attr;
 
-    magnetTimer = fighter_data->x234C_stateVar4;
+    magnetTimer = fighter_data->nessVars[0].SpecialLw.gravityDelay;
     if (magnetTimer != 0)
     {
-        fighter_data->x234C_stateVar4 = magnetTimer - 1;
+        fighter_data->nessVars[0].SpecialLw.gravityDelay = magnetTimer - 1;
         goto block_end;
     }
     func_8007D494(fighter_data, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL, attr->x170_TerminalVelocity);
@@ -584,9 +584,9 @@ BOOL ftNess_SpecialLwHold_GroundOrAir(HSD_GObj* arg0) // Decide grounded or aeri
     ftNessAttributes* attrs;
 
     temp_r3 = arg0->user_data;
-    if (((s32)temp_r3->x2340_stateVar1 <= 0) && ((s32)temp_r3->x2348_stateVar3 != 0)) 
+    if (((s32)temp_r3->nessVars[0].SpecialLw.releaseLag <= 0) && ((s32)temp_r3->nessVars[0].SpecialLw.isRelease != FALSE)) 
     {
-        if ((s32)temp_r3->xE0_ground_or_air == GROUND)
+        if ((s32)temp_r3->xE0_ground_or_air == GA_Ground)
         {
             ftNess_SpecialLwEnd_Action(arg0);
         }
@@ -596,7 +596,7 @@ BOOL ftNess_SpecialLwHold_GroundOrAir(HSD_GObj* arg0) // Decide grounded or aeri
         }
         return FALSE;
     }
-    if ((s32)temp_r3->xE0_ground_or_air == GROUND)
+    if ((s32)temp_r3->xE0_ground_or_air == GA_Ground)
     {
         Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD, FIGHTER_GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
@@ -643,19 +643,19 @@ void ftNess_SpecialLwHit_Anim(HSD_GObj* arg0) // Ness's grounded PSI Magnet Abso
     Fighter* temp_r31;
 
     temp_r4 = arg0->user_data;
-    if ((temp_r4->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((temp_r4->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        temp_r4->x2348_stateVar3 = 1;
+        temp_r4->nessVars[0].SpecialLw.isRelease = 1;
     }
 
-    if (temp_r4->x2340_stateVar1 > 0)
+    if (temp_r4->nessVars[0].SpecialLw.releaseLag > 0)
     {
-        temp_r4->x2340_stateVar1 = (s32)(temp_r4->x2340_stateVar1 - 1);
+        temp_r4->nessVars[0].SpecialLw.releaseLag = (s32)(temp_r4->nessVars[0].SpecialLw.releaseLag - 1);
     }
     if (ftAnim_IsFramesRemaining(arg0) == FALSE)
     {
         temp_r3_2 = arg0->user_data;
-        if (((s32)temp_r3_2->x2340_stateVar1 <= 0) && ((s32)temp_r3_2->x2348_stateVar3 != 0))
+        if (((s32)temp_r3_2->nessVars[0].SpecialLw.releaseLag <= 0) && ((s32)temp_r3_2->nessVars[0].SpecialLw.isRelease != 0))
         {
             if ((s32)temp_r3_2->xE0_ground_or_air == GROUND)
             {
@@ -713,14 +713,14 @@ void ftNess_SpecialAirLwHit_Anim(HSD_GObj* arg0) // Ness's aerial PSI Magnet Abs
     Fighter* temp_r4;
 
     temp_r4 = arg0->user_data;
-    if ((temp_r4->input.x65C & HSD_BUTTON_B) == FALSE)
+    if ((temp_r4->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
     {
-        temp_r4->x2348_stateVar3 = 1;
+        temp_r4->nessVars[0].SpecialLw.isRelease = 1;
     }
 
-    if (temp_r4->x2340_stateVar1 > 0)
+    if (temp_r4->nessVars[0].SpecialLw.releaseLag > 0)
     {
-        temp_r4->x2340_stateVar1 = (s32)(temp_r4->x2340_stateVar1 - 1);
+        temp_r4->nessVars[0].SpecialLw.releaseLag = (s32)(temp_r4->nessVars[0].SpecialLw.releaseLag - 1);
     }
     if ((ftAnim_IsFramesRemaining(arg0) == FALSE) && (ftNess_SpecialLwHold_GroundOrAir(arg0) != FALSE))
     {
@@ -777,10 +777,10 @@ void ftNess_SpecialAirLwHit_Phys(HSD_GObj* arg0) // Ness's aerial PSI Magnet Abs
     attrs = temp_r31->x2D4_specialAttributes;
     attributes = &temp_r31->x110_attr;
 
-    temp_r3 = temp_r31->x234C_stateVar4;
+    temp_r3 = temp_r31->nessVars[0].SpecialLw.gravityDelay;
     if (temp_r3 != 0) 
     {
-        temp_r31->x234C_stateVar4 = temp_r3 - 1;
+        temp_r31->nessVars[0].SpecialLw.gravityDelay = temp_r3 - 1;
         goto end_part;
     }
     func_8007D494(temp_r31, attrs->x8C_PSI_MAGNET_FALL_ACCEL, attributes->x170_TerminalVelocity);
@@ -943,10 +943,10 @@ void ftNess_SpecialAirLwEnd_Phys(HSD_GObj* arg0) // Ness's aerial PSI Magnet End
     attrs = temp_r31->x2D4_specialAttributes;
     attributes = &temp_r31->x110_attr;
 
-    temp_r3 = temp_r31->x234C_stateVar4;
+    temp_r3 = temp_r31->nessVars[0].SpecialLw.gravityDelay;
     if (temp_r3 != 0)
     {
-        temp_r31->x234C_stateVar4 = temp_r3 - 1;
+        temp_r31->nessVars[0].SpecialLw.gravityDelay = temp_r3 - 1;
         goto end_part;
     }
     func_8007D494(temp_r31, attrs->x8C_PSI_MAGNET_FALL_ACCEL, attributes->x170_TerminalVelocity);
