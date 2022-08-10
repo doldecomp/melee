@@ -680,6 +680,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobj.s.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_002.s.o\
+	$(BUILD_DIR)/src/sysdolphin/baselib/psdisp.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.s.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/psdisptev.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.s.o\

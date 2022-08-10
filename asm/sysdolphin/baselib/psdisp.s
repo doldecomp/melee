@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/6fyLU // 0 (100%)
 .global func_8039F78C
 func_8039F78C:
 /* 8039F78C 0039C36C  7C 08 02 A6 */	mflr r0
@@ -81,6 +82,7 @@ lbl_8039F888:
 /* 8039F894 0039C474  7C 08 03 A6 */	mtlr r0
 /* 8039F898 0039C478  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/nLP0P
 .global func_8039F89C
 func_8039F89C:
 /* 8039F89C 0039C47C  7C 08 02 A6 */	mflr r0
@@ -187,6 +189,7 @@ lbl_8039F9F4:
 /* 8039FA20 0039C600  7C 08 03 A6 */	mtlr r0
 /* 8039FA24 0039C604  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/pTZzV
 .global func_8039FA28
 func_8039FA28:
 /* 8039FA28 0039C608  A0 E3 00 0E */	lhz r7, 0xe(r3)
@@ -276,6 +279,7 @@ lbl_8039FB68:
 /* 8039FB6C 0039C74C  90 05 00 00 */	stw r0, 0(r5)
 /* 8039FB70 0039C750  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/KZaFJ
 .global func_8039FB74
 func_8039FB74:
 /* 8039FB74 0039C754  A0 E3 00 5A */	lhz r7, 0x5a(r3)
@@ -345,6 +349,7 @@ lbl_8039FC54:
 /* 8039FC68 0039C848  98 05 00 03 */	stb r0, 3(r5)
 /* 8039FC6C 0039C84C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/bEJl0
 .global func_8039FC70
 func_8039FC70:
 /* 8039FC70 0039C850  7C 08 02 A6 */	mflr r0
@@ -672,6 +677,7 @@ lbl_803A0074:
 /* 803A0080 0039CC60  7C 08 03 A6 */	mtlr r0
 /* 803A0084 0039CC64  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/KnkRs
 .global func_803A0088
 func_803A0088:
 /* 803A0088 0039CC68  7C 08 02 A6 */	mflr r0
@@ -4599,7 +4605,6 @@ lbl_803B9628:
     .4byte 0x00000000
     .4byte 0x3F800000
     .4byte 0x00000000
-
 
 .section .data
     .balign 8
