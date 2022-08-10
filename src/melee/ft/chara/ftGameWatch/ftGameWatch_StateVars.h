@@ -19,8 +19,8 @@ typedef struct ftGameWatchSpecialLw {
 
 typedef union ftGameWatchVars {
 
-	ftGameWatchAttack11 Attack11;
-	ftGameWatchSpecialLw SpecialLw;
+	ftGameWatchAttack11 attack11;
+	ftGameWatchSpecialLw specialLw;
 
 } ftGameWatchStateVars;
 

@@ -140,11 +140,21 @@ typedef enum CharacterKind
 
 #define IS_INTERRUPTIBLE 1
 
-// Ledge Grab Flags //
+// Ledge Grab Macros //
 
 #define CLIFFCATCH_BOTH 0
-#define CLIFFCATCH_RIGHT 1
 #define CLIFFCATCH_LEFT -1
+#define CLIFFCATCH_RIGHT 1
+
+// Ternary macro for fcmpo-based facing direction check 
+
+#define CLIFFCATCH_O(fp) \
+(fp->x2C_facing_direction < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+
+// Ternary macro for fcmpu-based facing direction check
+
+#define CLIFFCATCH_U(fp) \
+(fp->x2C_facing_direction != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
 
 typedef enum ftCommonAction
 {
@@ -1068,7 +1078,7 @@ struct SpecialAttrs_Purin {
 struct SpecialAttrs_Mewtwo {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ s32 x2234;
+    /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
 };
@@ -1761,6 +1771,9 @@ typedef struct _Fighter {
         };
         union {
             ftLuigiStateVars luigiVars[0]; // 0x2340
+        };
+        union {
+            ftMewtwoStateVars mewtwoVars[0]; // 0x2340
         };
         union {
             ftGameWatchStateVars gameWatchVars[0]; // 0x2340
