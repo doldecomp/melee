@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/6K1oj // 405 (74.69%)
 .global func_803A4138
 func_803A4138:
 /* 803A4138 003A0D18  7C 08 02 A6 */	mflr r0
@@ -21,6 +22,7 @@ func_803A4138:
 /* 803A4170 003A0D50  7C 08 03 A6 */	mtlr r0
 /* 803A4174 003A0D54  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/BtnBu
 .global func_803A4178
 func_803A4178:
 /* 803A4178 003A0D58  7C 08 02 A6 */	mflr r0
@@ -83,6 +85,7 @@ lbl_803A423C:
 /* 803A4254 003A0E34  7C 08 03 A6 */	mtlr r0
 /* 803A4258 003A0E38  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/URyZz
 .global func_803A425C
 func_803A425C:
 /* 803A425C 003A0E3C  7C 08 02 A6 */	mflr r0
@@ -100,6 +103,7 @@ func_803A425C:
 /* 803A428C 003A0E6C  7C 08 03 A6 */	mtlr r0
 /* 803A4290 003A0E70  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/EE6e6
 .global func_803A4294
 func_803A4294:
 /* 803A4294 003A0E74  7C 08 02 A6 */	mflr r0
@@ -117,6 +121,7 @@ func_803A4294:
 /* 803A42C4 003A0EA4  7C 08 03 A6 */	mtlr r0
 /* 803A42C8 003A0EA8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/hvOIc
 .global func_803A42CC
 func_803A42CC:
 /* 803A42CC 003A0EAC  28 04 00 00 */	cmplwi r4, 0
@@ -137,6 +142,7 @@ lbl_803A42F0:
 /* 803A4300 003A0EE0  54 03 04 3E */	clrlwi r3, r0, 0x10
 /* 803A4304 003A0EE4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/6i2Pu
 .global func_803A4308
 func_803A4308:
 /* 803A4308 003A0EE8  28 04 00 00 */	cmplwi r4, 0
@@ -157,6 +163,7 @@ lbl_803A432C:
 /* 803A433C 003A0F1C  54 03 04 3E */	clrlwi r3, r0, 0x10
 /* 803A4340 003A0F20  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/flXbS
 .global func_803A4344
 func_803A4344:
 /* 803A4344 003A0F24  7C 08 02 A6 */	mflr r0
@@ -205,6 +212,7 @@ lbl_803A43CC:
 /* 803A43E0 003A0FC0  7C 08 03 A6 */	mtlr r0
 /* 803A43E4 003A0FC4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/80iZw
 .global func_803A43E8
 func_803A43E8:
 /* 803A43E8 003A0FC8  7C 08 02 A6 */	mflr r0

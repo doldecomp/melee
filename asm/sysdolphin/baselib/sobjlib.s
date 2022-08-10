@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/LAy0B
 .global func_803A44A4
 func_803A44A4:
 /* 803A44A4 003A1084  7C 08 02 A6 */	mflr r0

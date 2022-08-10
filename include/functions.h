@@ -8423,7 +8423,6 @@ void func_8037A250();
 // ? func_8037A968(?);
 void *func_8037ABC8(struct _HSD_ObjAllocData *data);
 void func_8037AD20(struct _HSD_ObjAllocData *data, struct _HSD_ObjAllocLink *obj);
-void HSD_ObjAllocInit(struct _HSD_ObjAllocData *data, u32 size, u32 align);
 // ? HSD_RObjInitAllocData(?);
 // ? func_8037AE90(?);
 // ? HSD_RObjGetByType(?);
