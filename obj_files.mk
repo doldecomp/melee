@@ -683,6 +683,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.s.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.s.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psappsrt.s.o\
+	$(BUILD_DIR)/src/sysdolphin/baselib/sobjlib.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.s.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/sislib.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sislib.s.o\

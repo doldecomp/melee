@@ -70,6 +70,7 @@ func_803624A8:
 /* 803624D0 0035F0B0  7C 08 03 A6 */	mtlr r0
 /* 803624D4 0035F0B4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/gtvg9
 .global HSD_StateInitTev
 HSD_StateInitTev:
 /* 803624D8 0035F0B8  38 00 00 00 */	li r0, 0

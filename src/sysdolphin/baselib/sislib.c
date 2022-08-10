@@ -19,7 +19,7 @@ typedef struct
 /* 004D2F70 */ extern s8 lbl_804D6390[4];
 /* 004CDD04 */ extern HSD_Archive *lbl_804D1124[5];
 /* 004CDCF0 */ extern HSD_Archive *lbl_804D1110[5];
-/* 004A3C80 */ unk_t func_804A70A0(unk_t, s32, u32, s32, s32, s32, s32, s32, f64, f64, f64, f64, f64, f64, f64, f64);
+/* 004A3C80 */ extern unk_t func_804A70A0(unk_t, s32, u32, s32, s32, s32, s32, s32, f64, f64, f64, f64, f64, f64, f64, f64);
 /* 004094A0 */ extern u32 lbl_8040C8C0[144];
 /* 00409260 */ extern u32 lbl_8040C680[144];
 /* 00409098 */ extern unk_t lbl_8040C4B8;
@@ -52,3 +52,4 @@ typedef struct
 /* 003A2CCC */ extern void lbl_803A60EC();
 /* 003A26AC */ extern unk_t func_803A5ACC(f32, f32, f32, f32, f32);
 /* 003A252C */ extern void func_803A594C(u8 *);
+/* 003A2378 */ extern s32 func_803A611C(s16 arg0, u32 arg1, s16 arg2, s8 arg3, s8 arg4, s8 arg5, s8 arg6, u32 arg7);

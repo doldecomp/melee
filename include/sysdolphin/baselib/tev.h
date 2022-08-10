@@ -11,5 +11,6 @@ HSD_ObjAllocData* HSD_TevRegGetAllocData(void);
 HSD_ObjAllocData* HSD_ChanGetAllocData(void);
 void HSD_SetupChannel(void* ch);
 void HSD_StateSetNumChans(s32 num);
+void HSD_StateInitTev(void);
 
 #endif

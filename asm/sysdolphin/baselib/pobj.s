@@ -663,6 +663,7 @@ lbl_8036C228:
 /* 8036C23C 00368E1C  7C 08 03 A6 */	mtlr r0
 /* 8036C240 00368E20  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/z3FDr
 .global HSD_ClearVtxDesc
 HSD_ClearVtxDesc:
 /* 8036C244 00368E24  7C 08 02 A6 */	mflr r0

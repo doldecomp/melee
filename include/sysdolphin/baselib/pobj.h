@@ -146,5 +146,6 @@ typedef struct _HSD_PObjInfo {
 u32 HSD_PObjGetFlags(HSD_PObj* pobj);
 void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags);
 void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags);
+void HSD_ClearVtxDesc();
 
 #endif
