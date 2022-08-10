@@ -11,103 +11,61 @@ void ftMars_OnDeath(HSD_GObj* gobj) {
 
 // 801362B0 00132E90
 // ftMars_OnItemPickup
-// https://decomp.me/scratch/cdTAI
-void func_801362B0(HSD_GObj* gobj, s32 arg1) {
-    Fighter* ft = gobj->user_data;
-    s32 unused, unused2; // need to gobble some stack
-
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        switch (func_8026B320(ft->x1974_heldItem)) {
-            case 1:
-                func_80070FB4(gobj, 0, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 0, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 0, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 0, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
+void ftMars_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 0, 1);
 }
 
 // 80136390 00132F70
 // ftMars_OnItemInvisible
 // https://decomp.me/scratch/BksNr
-void func_80136390(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070CC4(gobj, 0);
-    }
+void ftMars_OnItemInvisible(HSD_GObj* gobj) {
+    Fighter_OnItemInvisible(gobj, 0);
 }
 
 // 801363D8 00132FB8
 // ftMars_OnItemVisible
 // https://decomp.me/scratch/9zuEy
-void func_801363D8(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070C48(gobj, 0);
-    }
+void ftMars_OnItemVisible(HSD_GObj* gobj) {
+    Fighter_OnItemVisible(gobj, 0);
 }
 
 // 80136420 00133000
-// ftMars_OnItemRelease
+// ftMars_OnItemDrop
 // https://decomp.me/scratch/Ws8ow
-void func_80136420(HSD_GObj* gobj, s32 arg1) {
-    func_80070FB4(gobj, 0, -1);
-    if (arg1 != 0) {
-        func_80070CC4(gobj, 1);
-    }
+void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL bool1) {
+    Fighter_OnItemDrop(gobj, bool1, 0, 1);
 }
 
 // 80136474 00133054
 // https://decomp.me/scratch/2TlGi
-void func_80136474(Fighter* ft) {
-    MarsAttributes* sA2 = ft->x2D8_specialAttributes2;
-    MarsAttributes* ext_attr = ft->x10C_ftData->ext_attr;
-    *sA2 = *ext_attr;
-    ft->x2D4_specialAttributes = sA2;
+void ftMars_OnLoadForRoy(Fighter* ft) {
+    PUSH_ATTRS(ft, MarsAttributes);
 }
 
 // 801364AC 0013308C
 // https://decomp.me/scratch/9UJHY
 void ftMars_OnLoad(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
-    MarsAttributes* sA2 = ft->x2D8_specialAttributes2;
-    *(MarsAttributes*)ft->x2D8_specialAttributes2 = *(MarsAttributes*)ft->x10C_ftData->ext_attr;
-    ft->x2D4_specialAttributes = sA2;
+    PUSH_ATTRS(ft, MarsAttributes);
 }
 
 // 801364E8 001330C8
 // https://decomp.me/scratch/tfzFL
-void func_801364E8(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    MarsAttributes* a = ft->x10C_ftData->ext_attr;
-    MarsAttributes* b = ft->x2D4_specialAttributes;
-    *b = *a;
+void ftMars_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, MarsAttributes);
 }
 
 // 80136520 00133100
 // ftMars_OnKnockbackEnter
 // https://decomp.me/scratch/rgfFA
-void func_80136520(HSD_GObj* gobj) {
-    func_800704F0(gobj, 1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+void ftMars_OnKnockbackEnter(HSD_GObj* gobj) {
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
 // 80136564 00133144
 // https://decomp.me/scratch/Jqd2A
-void func_80136564(HSD_GObj* gobj) {
-    func_800704F0(gobj, 1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+void ftMars_OnKnockbackExit(HSD_GObj* gobj) {
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 // 801365A8 00133188

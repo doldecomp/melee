@@ -7,7 +7,7 @@ extern const f32 neg1;
 void lbl_8015550C(HSD_GObj* gobj) {
     Fighter* ft;
 
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (func_8006F238(gobj) == 0)) {
+    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
         ft = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft->x1A5C = 0;
@@ -46,7 +46,7 @@ void lbl_801555E4(HSD_GObj* gobj) {
 void lbl_801555E8(HSD_GObj* gobj) {
     Fighter* ft;
 
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (func_8006F238(gobj) == 0)) {
+    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
         ft = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft->x1A5C = 0;
@@ -102,7 +102,7 @@ void lbl_801556C4(HSD_GObj* gobj) {
             func_800DE7C0(gobj_2, 0, 0);
         }
     }
-    if ((func_8015C31C() != 0) || (func_8006F238(gobj) == 0)) {
+    if ((func_8015C31C() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
         ft_3 = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft_3->x1A5C = 0;
@@ -148,7 +148,7 @@ void func_80155818(HSD_GObj* gobj) {
 // 80155864 152444
 // https://decomp.me/scratch/ln57J
 void lbl_80155864(HSD_GObj* gobj) {
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80151018(gobj);
     }
 }
@@ -189,7 +189,7 @@ void lbl_80155908(HSD_GObj* gobj) {
         func_80155D1C(ft->x1A58_interactedFighter);
         ft->x2200_ftcmd_var0 = 0;
     }
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80151018(gobj);
     }
 }

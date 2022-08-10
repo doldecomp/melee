@@ -531,8 +531,8 @@ lbl_80082284:
 /* 8008229C 0007EE7C  7C 08 03 A6 */	mtlr r0
 /* 800822A0 0007EE80  4E 80 00 20 */	blr 
 
-.global func_800822A4
-func_800822A4:
+.global EnvColl_CheckGroundAndLedge
+EnvColl_CheckGroundAndLedge:
 /* 800822A4 0007EE84  7C 08 02 A6 */	mflr r0
 /* 800822A8 0007EE88  90 01 00 04 */	stw r0, 4(r1)
 /* 800822AC 0007EE8C  94 21 FF D8 */	stwu r1, -0x28(r1)

@@ -8,7 +8,7 @@ void func_80154A78(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     attr = ft->x10C_ftData->ext_attr;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     Fighter_ActionStateChange_800693AC(gobj, 0x17A, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ft->x2222_flag.bits.b2 = 1;
@@ -29,11 +29,11 @@ void lbl_80154B2C(HSD_GObj* gobj) {
     s32 unused[2];
 
     ft = gobj->user_data;
-    if (ft->x2200_ftcmd_var1 != 0) {
+    if (ft->x2204_ftcmd_var1 != 0) {
         func_8015C5F8(gobj);
-        ft->x2200_ftcmd_var1 = 0;
+        ft->x2204_ftcmd_var1 = 0;
     }
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         if (((Fighter*)gobj->user_data)->sa.masterhand.x2250 == 0x17B) {
             func_80154E78(gobj);
         } else {

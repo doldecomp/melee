@@ -2,11 +2,11 @@
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
-void func_80138208(HSD_GObj* gobj) {
+void ftMars_SpecialHi_StartAction(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
 
-    ft->x2200_ftcmd_var2 = 0;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2208_ftcmd_var2 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
     // ActionStateChange
@@ -17,13 +17,13 @@ void func_80138208(HSD_GObj* gobj) {
 
 // 8013826C 00134E4C
 // https://decomp.me/scratch/PuVdx
-void func_8013826C(HSD_GObj* gobj) {
+void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     MarsAttributes* attr = ft->x2D4_specialAttributes;
     s32 unused[2];
 
-    ft->x2200_ftcmd_var2 = 0;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2208_ftcmd_var2 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2210_ThrowFlags.flags = 0;
     ft->x80_self_vel.y = 0.0f;
@@ -42,7 +42,7 @@ void lbl_801382E8(HSD_GObj* gobj) {
     s32 unused[2];
 
     // FrameTimerCheck
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         // AS_035_FallSpecial
         func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
@@ -56,7 +56,7 @@ void lbl_80138348(HSD_GObj* gobj) {
     s32 unused[4];
 
     // FrameTimerCheck
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         // AS_035_FallSpecial
         func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
@@ -143,7 +143,7 @@ void lbl_80138638(HSD_GObj* gobj) {
     ft->xE0_ground_or_air;
 
     if (ft->xE0_ground_or_air == GA_Air) {
-        if (ft->x2200_ftcmd_var2 == 0) {
+        if (ft->x2208_ftcmd_var2 == 0) {
             func_80085154(gobj);
             if (ft->x80_self_vel.x < 0.0f) {
                 num = -1;
@@ -154,7 +154,7 @@ void lbl_80138638(HSD_GObj* gobj) {
                 ft->x80_self_vel.x *= -1.0f;
             }
             if (ft->x6A4_transNOffset.y < 0.0f) {
-                ft->x2200_ftcmd_var2 = 1;
+                ft->x2208_ftcmd_var2 = 1;
             }
         } else {
             attr = ft->x2D4_specialAttributes;
@@ -177,7 +177,7 @@ void lbl_8013873C(HSD_GObj* gobj) {
     s32 unused[10];
 
     if (ft->x2200_ftcmd_var0 != 0) {
-        if (ft->x2200_ftcmd_var2 == 0) {
+        if (ft->x2208_ftcmd_var2 == 0) {
             func_80085154(gobj);
             ft->x80_self_vel.x *= attr->x40;
             ft->x80_self_vel.y *= attr->x40;
@@ -191,7 +191,7 @@ void lbl_8013873C(HSD_GObj* gobj) {
                 ft->x80_self_vel.x *= -1.0f;
             }
             if (ft->x6A4_transNOffset.y < 0.0f) {
-                ft->x2200_ftcmd_var2 = 1;
+                ft->x2208_ftcmd_var2 = 1;
             }
         } else {
             func_8007D494(ft, attr->x44, attr->x48);
@@ -208,7 +208,7 @@ void lbl_8013873C(HSD_GObj* gobj) {
 void lbl_80138884(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     MarsAttributes* attr = ft->x2D4_specialAttributes;
-    func_800D5CB0(gobj, 0, attr, attr->x2C);
+    func_800D5CB0(gobj, 0, attr->x2C);
 }
 
 
@@ -220,8 +220,8 @@ void lbl_801388B4(HSD_GObj* gobj) {
     if (ft->xE0_ground_or_air == GA_Air) {
         if (ft->x2200_ftcmd_var0 == 0 || ft->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
-        } else if (ft->x2200_ftcmd_var1 == 0) {
-            ft->x2200_ftcmd_var1 = 1;
+        } else if (ft->x2204_ftcmd_var1 == 0) {
+            ft->x2204_ftcmd_var1 = 1;
             func_80083B68(gobj);
         } else {
             func_800831CC(gobj, &func_80096CC8, &lbl_80138884);
@@ -238,8 +238,8 @@ void lbl_80138940(HSD_GObj* gobj) {
     if (ft->xE0_ground_or_air == GA_Air) {
         if (ft->x2200_ftcmd_var0 == 0 || ft->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
-        } else if (ft->x2200_ftcmd_var1 == 0) {
-            ft->x2200_ftcmd_var1 = 1;
+        } else if (ft->x2204_ftcmd_var1 == 0) {
+            ft->x2204_ftcmd_var1 = 1;
             func_80083B68(gobj);
         } else {
             func_800831CC(gobj, &func_80096CC8, &lbl_80138884);

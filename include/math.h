@@ -1,6 +1,9 @@
 #ifndef __MATH_H__
 #define __MATH_H__
 
+#define M_PI 3.14159265358979323846
+#define M_PI_2 1.57079632679489655799
+
 #pragma cplusplus on
 
 extern inline float sqrtf(float x)
@@ -19,7 +22,7 @@ volatile float y;
    y=(float)(x*guess);
    return y ;
  }
-  return x ;
+  return x;
 }
 
 #pragma cplusplus reset

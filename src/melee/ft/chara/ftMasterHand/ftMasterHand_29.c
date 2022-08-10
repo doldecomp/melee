@@ -8,12 +8,12 @@ void lbl_80155388(HSD_GObj* gobj) {
     s32 unused[2];
 
     ft = gobj->user_data;
-    if (ft->x2200_ftcmd_var1 != 0) {
+    if (ft->x2204_ftcmd_var1 != 0) {
         func_8015C5F8(gobj);
-        ft->x2200_ftcmd_var1 = 0;
+        ft->x2204_ftcmd_var1 = 0;
     }
     // inlined? possibly shared with lbl_8015521C
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (func_8006F238(gobj) == 0)) {
+    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
         ft_2 = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft_2->x1A5C = 0;

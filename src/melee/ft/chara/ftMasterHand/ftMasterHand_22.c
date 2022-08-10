@@ -6,7 +6,7 @@ void lbl_80154230(HSD_GObj* gobj) {
     Fighter* r4_userdata;
     u32 unk[2];
 
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         r4_userdata = gobj->user_data;
         (r4_userdata->x2344_callback)(gobj);
     }
@@ -47,7 +47,7 @@ void func_801542E0(HSD_GObj* gobj) {
 
     r31_ft_userdata = gobj->user_data;
     r30_attributes = r31_ft_userdata->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, r31_ft_userdata->x894, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, r31_ft_userdata->x894_currentAnimFrame, 1.0f, 0.0f);
     ftAnim_SetAnimRate(gobj, r30_attributes->x110_pos.y);
     r31_ft_userdata->x2348_stateVar3 = (s32) r30_attributes->x110_pos.x;
 }
@@ -70,7 +70,7 @@ void lbl_80154360(HSD_GObj* gobj) {
         ftAnim_SetAnimRate(gobj, 1.0f);
         func_801545A0(gobj);
     }
-    if (!func_8006F238(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
@@ -175,7 +175,7 @@ void lbl_80154620(HSD_GObj* gobj) {
     Fighter* temp_r4;
     f32 temp_f0;
 
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         temp_r4 = gobj->user_data;
         temp_f0 = 0.0f;
         temp_r4->x80_self_vel.z = temp_f0;
@@ -233,7 +233,7 @@ void func_801546D8(HSD_GObj* gobj) {
 // 80154758 151338
 // https://decomp.me/scratch/D8LVZ
 void lbl_80154758(HSD_GObj* arg0) {
-    if (func_8006F238(arg0) == 0) {
+    if (ftAnim_IsFramesRemaining(arg0) == 0) {
         func_80151018(arg0);
     }
 }
@@ -311,7 +311,7 @@ void lbl_801548D8(HSD_GObj* gobj) {
         r31_ft_userdata->x2360 = 0;
         r31_ft_userdata->x2200_ftcmd_var0 = 0;
     }
-    if (!func_8006F238(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80151018(gobj);
     }
 }

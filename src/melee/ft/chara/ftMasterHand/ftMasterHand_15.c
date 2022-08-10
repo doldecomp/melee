@@ -3,7 +3,7 @@
 // 80153000 14FBE0
 // https://decomp.me/scratch/erd6U
 void lbl_80153000(HSD_GObj* arg0) {
-    if (func_8006F238(arg0) == 0) {
+    if (ftAnim_IsFramesRemaining(arg0) == 0) {
         func_80151018(arg0);
     }
 }
@@ -49,8 +49,8 @@ void func_801530A4(HSD_GObj* gobj) {
     rand = HSD_Randi(attr->xE8 - attr->xE4);
     ft->x2390 = attr->xE4 + rand;
     ft->x2200_ftcmd_var0 = 0;
-    ft->x2200_ftcmd_var1 = 0;
-    ft->x2200_ftcmd_var2 = 0;
+    ft->x2204_ftcmd_var1 = 0;
+    ft->x2208_ftcmd_var2 = 0;
 }
 
 
@@ -65,8 +65,8 @@ void lbl_80153160(HSD_GObj* gobj) {
     s32 unk[2];
 
     ft = gobj->user_data;
-    if (func_8006F238(gobj) == 0) {
-        ft->x2200_ftcmd_var2 = 1;
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft->x2208_ftcmd_var2 = 1;
         temp_f1 = ft->x2390 - 1.0f;
         ft->x2390 = temp_f1;
         if (temp_f1 < 0.0f) {
@@ -78,7 +78,7 @@ void lbl_80153160(HSD_GObj* gobj) {
             } else {
                 ft->x2394 = 1;
             }
-            ft->x2200_ftcmd_var2 = 0;
+            ft->x2208_ftcmd_var2 = 0;
         }
     }
 }
@@ -131,7 +131,7 @@ void lbl_80153254(HSD_GObj* gobj) {
 
     ft = gobj->user_data;
     func_80085134(gobj);
-    if (ft->x2200_ftcmd_var2 != 0) {
+    if (ft->x2208_ftcmd_var2 != 0) {
         attr = ft->x10C_ftData->ext_attr;
         func_8015C208(gobj, &sp28_pos);
         sp28_pos.x += attr->xDC;
@@ -201,7 +201,7 @@ void lbl_8015346C(HSD_GObj* gobj) {
     Fighter* ft4;
     s32 unk[2];
 
-    if (func_8006F238(gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft4 = gobj->user_data;
         if (--ft4->x2394 == 0) {
             ftAnim_SetAnimRate(gobj, 1.0f);
@@ -251,9 +251,9 @@ void lbl_801535B0(HSD_GObj* gobj) {
         func_8015364C(gobj, ft->x5E8_fighterBones[8].x0_jobj, attr->xF8, attr->xFC);
         ft->x2200_ftcmd_var0 = 0;
     }
-    if (ft->x2200_ftcmd_var1 != 0) {
+    if (ft->x2204_ftcmd_var1 != 0) {
         func_8015364C(gobj, ft->x5E8_fighterBones[13].x0_jobj, attr->x100, attr->x104);
-        ft->x2200_ftcmd_var1 = 0;
+        ft->x2204_ftcmd_var1 = 0;
     }
 }
 

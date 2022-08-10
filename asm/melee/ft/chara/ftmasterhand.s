@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D3A30
-lbl_803D3A30:
+.global as_table_masterhand
+as_table_masterhand:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01000000

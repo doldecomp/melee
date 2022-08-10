@@ -1,6 +1,6 @@
 #include "grstory.h"
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 
 extern StageInfo stage_info;
@@ -12,20 +12,20 @@ static StageCallbacks lbl_803E26F0[4] = {
         NULL,
         NULL,
     }, {
-        lbl_801E31C0,
-        lbl_801E3224,
-        lbl_801E322C,
-        lbl_801E3230,
+        func_801E31C0,
+        func_801E3224,
+        func_801E322C,
+        func_801E3230,
     }, {
-        lbl_801E3370,
-        lbl_801E33D8,
-        lbl_801E33E0,
-        lbl_801E3414,
+        func_801E3370,
+        func_801E33D8,
+        func_801E33E0,
+        func_801E3414,
     }, {
-        lbl_801E3234,
-        lbl_801E332C,
-        lbl_801E3334,
-        lbl_801E336C,
+        func_801E3234,
+        func_801E332C,
+        func_801E3334,
+        func_801E336C,
         0xC0000000,
     },
 };
@@ -43,11 +43,11 @@ StageData lbl_803E274C = {
     "/GrSt.dat",
     func_801E3030,
     func_801E302C,
-    lbl_801E30A8,
-    lbl_801E30AC,
-    lbl_801E30D0,
-    lbl_801E36D0,
-    lbl_801E36D8,
+    func_801E30A8,
+    func_801E30AC,
+    func_801E30D0,
+    func_801E36D0,
+    func_801E36D8,
     0x00000001,
 };
 
@@ -69,16 +69,16 @@ void func_801E3030(void)
     func_801C3BB4();
 }
 
-void lbl_801E30A8(void)
+void func_801E30A8(void)
 {
 }
 
-void lbl_801E30AC(void)
+void func_801E30AC(void)
 {
     func_801CAE04(0);
 }
 
-s32 lbl_801E30D0(void)
+s32 func_801E30D0(void)
 {
     return 0;
 }
@@ -112,7 +112,7 @@ HSD_GObj* func_801E30D8(s32 arg0)
     return gobj;
 }
 
-void lbl_801E31C0(HSD_GObj* gobj)
+void func_801E31C0(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
     int unused[2];
@@ -121,16 +121,16 @@ void lbl_801E31C0(HSD_GObj* gobj)
     func_801C8858(func_801C3FA4(gobj, 1), 0x20000000);
 }
 
-s32 lbl_801E3224(void)
+s32 func_801E3224(void)
 {
     return 0;
 }
 
-void lbl_801E322C(HSD_GObj*)
+void func_801E322C(HSD_GObj*)
 {
 }
 
-void lbl_801E3230(void)
+void func_801E3230(void)
 {
 }
 
@@ -140,7 +140,7 @@ inline s32 randi(s32 max)
 }
 
 /* Initialize shyguys */
-void lbl_801E3234(HSD_GObj* gobj)
+void func_801E3234(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
@@ -152,19 +152,19 @@ void lbl_801E3234(HSD_GObj* gobj)
     map->x10_flags.b5 = 1;
 }
 
-s32 lbl_801E332C(void)
+s32 func_801E332C(void)
 {
     return 0;
 }
 
-void lbl_801E3334(HSD_GObj* gobj)
+void func_801E3334(HSD_GObj* gobj)
 {
     func_801E3418(gobj);
     func_801C2FE0(gobj);
     func_800115F4();
 }
 
-void lbl_801E336C()
+void func_801E336C()
 {
 }
 
@@ -176,7 +176,7 @@ typedef struct {
     struct _HSD_JObj* xC8;
 } UnkUserData;
 
-void lbl_801E3370(HSD_GObj* gobj)
+void func_801E3370(HSD_GObj* gobj)
 {
     UnkUserData* data = gobj->user_data;
     int unused[2];
@@ -186,18 +186,18 @@ void lbl_801E3370(HSD_GObj* gobj)
     data->xC8 = func_801C3FA4(gobj, 1);
 }
 
-s32 lbl_801E33D8(void)
+s32 func_801E33D8(void)
 {
     return 0;
 }
 
-void lbl_801E33E0(HSD_GObj* gobj)
+void func_801E33E0(HSD_GObj* gobj)
 {
     func_801C2FE0(gobj);
     func_801E366C(gobj);
 }
 
-void lbl_801E3414(void)
+void func_801E3414(void)
 {
 }
 
@@ -298,12 +298,12 @@ void func_801E366C(HSD_GObj* gobj)
     }
 }
 
-static BOOL lbl_801E36D0(s32)
+static BOOL func_801E36D0(s32)
 {
     return FALSE;
 }
 
-s32 lbl_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
+s32 func_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, NULL, &b);

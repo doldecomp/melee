@@ -5,7 +5,7 @@
 void lbl_8015521C(HSD_GObj* gobj) {
     Fighter* ft;
 
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (func_8006F238(gobj) == 0)) {
+    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
         ft = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft->x1A5C = 0;
@@ -47,7 +47,7 @@ void lbl_801552F8(HSD_GObj* gobj) {
     HSD_GObj* gobj_2;
 
     ft = gobj->user_data;
-    ft->x2200_ftcmd_var1 = 0;
+    ft->x2204_ftcmd_var1 = 0;
     gobj_2 = func_8015C3E8(0x1CU);
     if (func_8015C31C() == 0) {
         func_8015A3F4(gobj_2);

@@ -9,7 +9,7 @@ void func_80150C8C(HSD_GObj* gobj) {
 
     r31_ft_userdata = gobj->user_data;
     if ((r31_ft_userdata->sa.masterhand.x2258 == 0x155) || (r31_ft_userdata->sa.masterhand.x2258 == 0x185)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, r31_ft_userdata->x894, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, r31_ft_userdata->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
@@ -26,7 +26,7 @@ void func_80150D28(HSD_GObj* gobj) {
 
     r31_ft_userdata = gobj->user_data;
     if ((r31_ft_userdata->sa.masterhand.x2258 == 0x156) || (r31_ft_userdata->sa.masterhand.x2258 == 0x186)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, r31_ft_userdata->x894, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, r31_ft_userdata->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
@@ -46,7 +46,7 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos) {
     r32_ft_userdata = gobj->user_data;
     if (r32_ft_userdata->sa.masterhand.x2258 == 0x156) {
         if ((r32_ft_userdata->sa.masterhand.x2258 == 0x156) || (r32_ft_userdata->sa.masterhand.x2258 == 0x186)) {
-            Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, r32_ft_userdata->x894, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, r32_ft_userdata->x894_currentAnimFrame, 1.0f, 0.0f);
         } else {
             temp_f1 = 0.0f;
             Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, temp_f1, 1.0f, temp_f1);
@@ -55,7 +55,7 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos) {
         r32_ft_userdata->sa.masterhand.x2258 = 0x186;
     } else {
         if ((r32_ft_userdata->sa.masterhand.x2258 == 0x155) || (r32_ft_userdata->sa.masterhand.x2258 == 0x185)) {
-            Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, r32_ft_userdata->x894, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, r32_ft_userdata->x894_currentAnimFrame, 1.0f, 0.0f);
         } else {
             Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, 0.0f, 1.0f, 0.0f);
             func_8006EBA4(gobj);
@@ -73,7 +73,7 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos) {
 void lbl_80150F00(HSD_GObj* gobj) {
     u32 unk[1];
 
-    if (!func_8006F238(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter = gobj->user_data;
         fighter->sa.masterhand.x2258 = 0x185;
         Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, 0.0f, 1.0f, 0.0f);
