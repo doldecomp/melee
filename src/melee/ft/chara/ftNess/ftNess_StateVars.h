@@ -52,11 +52,11 @@ typedef struct ftNessSpecialLw {
 
 typedef union ftNessStateVars
 {
-	ftNessYoyo AttackHi4;
-	ftNessYoyo AttackLw4;
-	ftNessSpecialN SpecialN;
-	ftNessSpecialHi SpecialHi;
-	ftNessSpecialLw SpecialLw;
+	ftNessYoyo attackHi4;
+	ftNessYoyo attackLw4;
+	ftNessSpecialN specialN;
+	ftNessSpecialHi specialHi;
+	ftNessSpecialLw specialLw;
 
 } ftNessStateVars;
 
