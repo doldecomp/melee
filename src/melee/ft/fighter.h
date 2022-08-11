@@ -1076,7 +1076,7 @@ struct SpecialAttrs_Purin {
 };
 
 struct SpecialAttrs_Mewtwo {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ HSD_GObj* x222C_disableGObj;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
     /* 0x2238 */ u32 x2238;

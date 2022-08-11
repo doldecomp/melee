@@ -168,6 +168,7 @@ TEXT_O_FILES :=\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftmewtwo.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c.o\
+	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialLw.c.o\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftclink.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftclink_2.c.o\
