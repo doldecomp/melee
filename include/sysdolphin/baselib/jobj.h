@@ -10,7 +10,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/pobj.h>
 /*#include "dobj.h"
-#include "mobj.h"
 #include "robj.h"*/
 
 #define HSD_A_J_ROTX 1
