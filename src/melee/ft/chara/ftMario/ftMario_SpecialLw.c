@@ -44,9 +44,9 @@ void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
     sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
     ft->x2200_ftcmd_var0 = 0;
     ft->x2204_ftcmd_var1 = 0;
-    ft->marioVars[0].SpecialLw.groundVelX = (f32) 0.0f;
-    ft->marioVars[0].SpecialLw.unk = (s32) (sa->x50_MARIO_TORNADO_UNK + 1);
-    ft->marioVars[0].SpecialLw.isUnkColl = 0;
+    ft->marioVars[0].specialLw.groundVelX = (f32) 0.0f;
+    ft->marioVars[0].specialLw.unk = (s32) (sa->x50_MARIO_TORNADO_UNK + 1);
+    ft->marioVars[0].specialLw.isUnkColl = 0;
     ftMario_SpecialLw_SetCall(gobj);
     ftMario_SpecialLw_SetGFX(gobj);
 }
@@ -187,8 +187,8 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj) {
 
     flt_var = sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
     if ((u32) ft->x2200_ftcmd_var0 != 0U) {
-        ft->marioVars[0].SpecialLw.groundVelX = (f32) (ft->marioVars[0].SpecialLw.groundVelX - sa->x4C_MARIO_TORNADO_FRICTION_END);
-        flt_var += ft->marioVars[0].SpecialLw.groundVelX;
+        ft->marioVars[0].specialLw.groundVelX = (f32) (ft->marioVars[0].specialLw.groundVelX - sa->x4C_MARIO_TORNADO_FRICTION_END);
+        flt_var += ft->marioVars[0].specialLw.groundVelX;
         if (flt_var < 0.0f) {
             flt_var = 0.0f;
         }
@@ -225,8 +225,8 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj) {
     flt_var = sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR;
     sa_2 = ft->x2D4_specialAttributes;
     if ((u32) ft->x2200_ftcmd_var0 != 0U) {
-        ft->marioVars[0].SpecialLw.groundVelX = (f32) (ft->marioVars[0].SpecialLw.groundVelX - sa_2->x4C_MARIO_TORNADO_FRICTION_END);
-        flt_var += ft->marioVars[0].SpecialLw.groundVelX;
+        ft->marioVars[0].specialLw.groundVelX = (f32) (ft->marioVars[0].specialLw.groundVelX - sa_2->x4C_MARIO_TORNADO_FRICTION_END);
+        flt_var += ft->marioVars[0].specialLw.groundVelX;
         if (flt_var < 0.0f) {
             flt_var = 0.0f;
         }
@@ -238,7 +238,7 @@ void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj) {
     Fighter* ft = getFighter(gobj);
     ftMarioAttributes* sa = GetMarioAttr(ft);
 
-    if ((ft->x220C_ftcmd_var3 != 0U) && ((s32)(ft->marioVars[0].SpecialLw.isUnkColl) != 0)) {
+    if ((ft->x220C_ftcmd_var3 != 0U) && ((s32)(ft->marioVars[0].specialLw.isUnkColl) != 0)) {
         func_8007592C(ft, 0, ft->x2C_facing_direction * atan2f(ft->x6F0_collData.x154_groundNormal.x, ft->x6F0_collData.x154_groundNormal.y));
     } else {
         func_8007592C(ft, 0, 0.0f);
@@ -253,16 +253,16 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj) {
     if (ft->xE0_ground_or_air == GA_Ground) {
         if (func_80082888(gobj, &lbl_803C72A0) == 0) {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
-            ft->marioVars[0].SpecialLw.isUnkColl = 0;
+            ft->marioVars[0].specialLw.isUnkColl = 0;
         } else {
-            ft->marioVars[0].SpecialLw.isUnkColl = 1;
+            ft->marioVars[0].specialLw.isUnkColl = 1;
         }
     } else {
         if (func_800824A0(gobj, &lbl_803C72A0) == 0) {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
-            ft->marioVars[0].SpecialLw.isUnkColl = 0;
+            ft->marioVars[0].specialLw.isUnkColl = 0;
         } else {
-            ft->marioVars[0].SpecialLw.isUnkColl = 1;
+            ft->marioVars[0].specialLw.isUnkColl = 1;
         }
     }
 
@@ -291,9 +291,9 @@ void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj) {
     Fighter* ft = gobj->user_data;
     if (func_800824A0(gobj, &lbl_803C72A0) != 0) {
         _ftMario_800E2778_helper(gobj);
-        ft->marioVars[0].SpecialLw.isUnkColl = 1;
+        ft->marioVars[0].specialLw.isUnkColl = 1;
     } else {
-        ft->marioVars[0].SpecialLw.isUnkColl = 0;
+        ft->marioVars[0].specialLw.isUnkColl = 0;
     }
 
     _ftMario_800E25C4_800E2778_helper(gobj);
