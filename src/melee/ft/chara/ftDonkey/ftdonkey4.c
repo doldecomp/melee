@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ftdonkey.h>
 
 s32 ftDonkey_800E0134(HSD_GObj* fighterObj) {
     if (func_800C97A8(fighterObj)) {

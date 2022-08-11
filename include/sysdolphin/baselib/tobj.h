@@ -3,10 +3,10 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/object.h"
+#include <sysdolphin/baselib/object.h>
 
-#include "sysdolphin/baselib/fobj.h"
-#include "sysdolphin/baselib/texp.h"
+#include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/texp.h>
 
 #define TOBJ_ANIM 0x10
 

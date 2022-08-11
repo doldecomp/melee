@@ -5,7 +5,7 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
 #define HSD_GOBJ_USER_DATA_NONE (u8)-1
 

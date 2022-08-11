@@ -5,7 +5,7 @@
 #include <sysdolphin/baselib/objalloc.h>
 #include <math.h>
 
-#include "melee/lb/lbrefract.h"
+#include <melee/lb/lbrefract.h>
 
 void func_80379310(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);

@@ -3,7 +3,7 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/objalloc.h"
+#include <sysdolphin/baselib/objalloc.h>
 
 #define HSD_GOBJ_OBJ_NONE 0xFF
 

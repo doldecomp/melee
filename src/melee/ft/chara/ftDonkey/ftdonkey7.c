@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ftdonkey.h>
 
 void ftDonkey_800E0440(HSD_GObj* fighterObj) {
     s32 result = func_80094EA4(fighterObj);

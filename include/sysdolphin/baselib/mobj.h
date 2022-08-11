@@ -5,10 +5,10 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/class.h"
-#include "sysdolphin/baselib/aobj.h"
-#include "sysdolphin/baselib/texp.h"
-#include "sysdolphin/baselib/tobj.h"
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/texp.h>
+#include <sysdolphin/baselib/tobj.h>
 
 #define MOBJ_ANIM 0x4
 #define TOBJ_ANIM 0x10

@@ -1,4 +1,4 @@
-#include "ftNess.h"
+#include <ftNess.h>
 
 void ftNess_OnDeath(HSD_GObj* gobj)
 {

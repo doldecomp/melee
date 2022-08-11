@@ -3,7 +3,7 @@
 
 #include <global.h>
 
-#include "sysdolphin/baselib/objalloc.h"
+#include <sysdolphin/baselib/objalloc.h>
 
 void HSD_RenderInitAllocData(void);
 HSD_ObjAllocData* HSD_RenderGetAllocData(void);

@@ -5,9 +5,9 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/class.h"
-#include "sysdolphin/baselib/fobj.h"
-#include "sysdolphin/baselib/mobj.h"
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/mobj.h>
 
 typedef struct _HSD_DObj {
     HSD_Class parent;

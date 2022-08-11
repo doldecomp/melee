@@ -6,8 +6,8 @@
 #include <dolphin/types.h>
 #include <dolphin/gx/GXLight.h>
 
-#include "sysdolphin/baselib/object.h"
-#include "sysdolphin/baselib/fobj.h"
+#include <sysdolphin/baselib/object.h>
+#include <sysdolphin/baselib/fobj.h>
 
 #define HSD_A_L_LITC_R 9
 #define HSD_A_L_LITC_G 10

@@ -1,4 +1,4 @@
-#include "ftNess.h"
+#include <ftNess.h>
 
 // 0x8011659C //
 // https://decomp.me/scratch/xVTx7 //

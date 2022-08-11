@@ -5,7 +5,7 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/objalloc.h"
+#include <sysdolphin/baselib/objalloc.h>
 
 typedef struct _IDEntry {
     struct _IDEntry* next;

@@ -1,4 +1,4 @@
-#include "ftNess.h"
+#include <ftNess.h>
 
 // 0x80114BF4 //
 void ftNess_AttackS4_OnReflect(HSD_GObj* fighter_gobj) // Ness's F-Smash OnReflect callback //

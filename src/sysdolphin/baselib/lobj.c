@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/lobj.h"
+#include <sysdolphin/baselib/lobj.h>
 
 extern s32 lightmask_diffuse;
 extern s32 lightmask_attnfunc;

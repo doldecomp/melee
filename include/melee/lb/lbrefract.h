@@ -2,12 +2,12 @@
 #define _lbrefract_h_
 
 #include <string.h>
-#include "sysdolphin/baselib/memory.h"
-#include "sysdolphin/baselib/cobj.h"
-#include "sysdolphin/baselib/pobj.h"
-#include "sysdolphin/baselib/tobj.h"
-#include "dolphin/gx/GXMisc.h"
-#include "dolphin/os/OSCache.h"
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/pobj.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <dolphin/gx/GXMisc.h>
+#include <dolphin/os/OSCache.h>
 
 void func_800222A4();
 void func_8002247C(HSD_CObj *);

@@ -1,4 +1,4 @@
-#include "ftmario.h"
+#include <ftmario.h>
 #include <sysdolphin/baselib/random.h>
 
 #include <melee/it/itkind.h>

@@ -3,10 +3,10 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/object.h"
+#include <sysdolphin/baselib/object.h>
 
-#include "sysdolphin/baselib/aobj.h"
-#include "sysdolphin/baselib/fobj.h"
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/fobj.h>
 
 #define HSD_A_S_W0 8
 #define HSD_DEFAULT_MAX_SHAPE_VERTICES 2000

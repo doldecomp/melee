@@ -5,9 +5,9 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/object.h"
-#include "sysdolphin/baselib/aobj.h"
-#include "sysdolphin/baselib/wobj.h"
+#include <sysdolphin/baselib/object.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/wobj.h>
 
 #define PROJ_PERSPECTIVE 1
 #define PROJ_FRUSTRUM 2
@@ -120,12 +120,15 @@ typedef struct _HSD_CameraAnim
     struct _HSD_WObjAnim *interest_anim;
 } HSD_CameraAnim;
 
+STRUCT_PLACEHOLDER(cobj, 1)
+CALLBACK_PLACEHOLDER(cobj, 1)
+
 void HSD_CObjEraseScreen(HSD_CObj *cobj, s32 enable_color, s32 enable_alpha, s32 enable_depth);
 void HSD_CObjRemoveAnim(HSD_CObj *cobj);
 HSD_WObj *HSD_CObjGetEyePositionWObj(HSD_CObj *cobj);
 HSD_WObj *HSD_CObjGetInterestWObj(HSD_CObj *cobj);
 void func_8036A194(HSD_CObj *cobj, f32, f32, f32, f32);
-unk_t func_8036A590(unk_t);
+unk_t func_8036A590(cobj_Unk1 *);
 HSD_CObj *HSD_CObjAlloc();
 void func_80368718(HSD_CObj *cobj, s32 *);
 void func_803687F0(HSD_CObj *cobj, s32 *);
@@ -135,7 +138,7 @@ void func_80369FC8(HSD_CObj *cobj, f32);
 void func_80369FF4(HSD_CObj *cobj, s16 *);
 void func_8036A058(HSD_CObj *cobj, s16 *);
 void func_8036A144(u32);
-BOOL func_80368458(HSD_Obj *, void *callback);
+BOOL func_80368458(HSD_Obj *, cobj_UnkCallback1);
 void func_80368608();
 void func_803695F0(unk_t);
 

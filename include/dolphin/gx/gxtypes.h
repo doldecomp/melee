@@ -1,7 +1,7 @@
 #ifndef _GXTYPES_h_
 #define _GXTYPES_h_
 
-#include "dolphin/types.h"
+#include <dolphin/types.h>
 
 #define GX_FIFO_OBJSIZE 128
 

@@ -1,4 +1,4 @@
-#include "ftfox.h"
+#include <ftfox.h>
 
 // 0x800E83E0
 // https://decomp.me/scratch/wfS8S // Create Reflector Loop GFX

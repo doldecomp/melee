@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80155C88 152868
 void func_80155C88(HSD_GObj* gobj) {

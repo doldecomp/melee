@@ -61,7 +61,6 @@ typedef struct OSThread
 } OSThread;
 
 typedef void (*OSSwitchThreadCallback)(OSThread *, OSThread *);
-typedef void *(*OSThreadFunc)(void *);
 
 OSThreadQueue OS_THREAD_QUEUE
 #ifndef M2C_CONTEXT
@@ -74,6 +73,12 @@ OSThread *OS_CURRENT_THREAD
 #endif
     ;
 
+STRUCT_PLACEHOLDER(OSThread, 1)
+STRUCT_PLACEHOLDER(OSThread, 2)
+STRUCT_PLACEHOLDER(OSThread, 3)
+STRUCT_PLACEHOLDER(OSThread, 4)
+
+typedef OSThread_Unk3 *(*OSThreadFunc)(OSThread_Unk4 *);
 OSSwitchThreadCallback OSSetSwitchThreadCallback(OSSwitchThreadCallback);
 void __OSThreadInit(void);
 void OSSetCurrentThread(OSThread *);
@@ -87,7 +92,7 @@ s32 __OSGetEffectivePriority(OSThread *);
 void __OSPromoteThread(OSThread *, s32);
 void __OSReschedule(void);
 void OSYieldThread(void);
-BOOL OSCreateThread(OSThread *, OSThreadFunc, void *, void *, u32, s32, u16);
+BOOL OSCreateThread(OSThread *, OSThreadFunc, OSThread_Unk1 *, OSThread_Unk2 *, u32, s32, u16);
 void OSExitThread(OSThread *);
 void OSCancelThread(OSThread *);
 BOOL OSJoinThread(OSThread *, void *);

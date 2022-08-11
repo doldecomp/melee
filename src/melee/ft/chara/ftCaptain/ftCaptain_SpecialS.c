@@ -1,4 +1,4 @@
-#include "ftCaptain.h"
+#include <ftCaptain.h>
 #include <melee/it/itkind.h>
 
 extern void efLib_DestroyAll(HSD_GObj*);

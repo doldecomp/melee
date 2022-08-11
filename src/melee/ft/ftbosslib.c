@@ -1,9 +1,9 @@
-#include "types.h"
-#include "fighter.h"
-#include "melee/lb/lbvector.h"
-#include "ftlib.h"
-#include "melee/ft/chara/ftMasterHand/ftMasterHand.h"
-#include "ftbosslib.h"
+#include <types.h>
+#include <fighter.h>
+#include <melee/lb/lbvector.h>
+#include <ftlib.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <ftbosslib.h>
 
 extern struct {
     u8 x0_pad[0x20];

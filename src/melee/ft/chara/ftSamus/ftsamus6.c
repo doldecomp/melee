@@ -1,4 +1,4 @@
-#include "ftsamus.h"
+#include <ftsamus.h>
 
 void ftSamus_8012ADF0(HSD_GObj* fighterObj) {
     Vec vec;

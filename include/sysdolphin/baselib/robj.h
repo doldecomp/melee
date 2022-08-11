@@ -3,11 +3,11 @@
 
 #include <global.h>
 
-#include "sysdolphin/baselib/objalloc.h"
+#include <sysdolphin/baselib/objalloc.h>
 
-#include "sysdolphin/baselib/aobj.h"
-#include "sysdolphin/baselib/fobj.h"
-#include "sysdolphin/baselib/jobj.h"
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 #define TYPE_MASK 0x70000000
 #define REFTYPE_JOBJ 0x10000000

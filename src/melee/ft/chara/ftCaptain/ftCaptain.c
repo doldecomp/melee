@@ -1,4 +1,4 @@
-#include "ftCaptain.h"
+#include <ftCaptain.h>
 
 // func_800E2888
 // OnRespawn/OnDeath (same function I've seen called differently)

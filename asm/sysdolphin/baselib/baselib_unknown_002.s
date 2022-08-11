@@ -875,6 +875,7 @@ lbl_8039212C:
 /* 8039218C 0038ED6C  7C 08 03 A6 */	mtlr r0
 /* 80392190 0038ED70  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/ON1MW
 .global func_80392194
 func_80392194:
 /* 80392194 0038ED74  54 80 07 FF */	clrlwi. r0, r4, 0x1f
@@ -6625,10 +6626,10 @@ lbl_80396ED0:
 /* 80396EDC 00393ABC  3B 43 02 18 */	addi r26, r3, 0x218
 lbl_80396EE0:
 /* 80396EE0 00393AC0  7F 63 DB 78 */	mr r3, r27
-/* 80396EE4 00393AC4  48 00 0F 29 */	bl func_80397E0C
+/* 80396EE4 00393AC4  48 00 0F 29 */	bl baselib_mfspr
 /* 80396EE8 00393AC8  3B A3 00 00 */	addi r29, r3, 0
 /* 80396EEC 00393ACC  38 7A 00 00 */	addi r3, r26, 0
-/* 80396EF0 00393AD0  48 00 0F 1D */	bl func_80397E0C
+/* 80396EF0 00393AD0  48 00 0F 1D */	bl baselib_mfspr
 /* 80396EF4 00393AD4  57 A0 07 BC */	rlwinm r0, r29, 0, 0x1e, 0x1e
 /* 80396EF8 00393AD8  2C 00 00 01 */	cmpwi r0, 1
 /* 80396EFC 00393ADC  3B C3 00 00 */	addi r30, r3, 0
@@ -6948,7 +6949,7 @@ lbl_803972B0:
 /* 803972B0 00393E90  3A 6D AC B0 */	addi r19, r13, lbl_804D6350@sda21
 lbl_803972B4:
 /* 803972B4 00393E94  80 74 00 00 */	lwz r3, 0(r20)
-/* 803972B8 00393E98  48 00 0B 55 */	bl func_80397E0C
+/* 803972B8 00393E98  48 00 0B 55 */	bl baselib_mfspr
 /* 803972BC 00393E9C  80 8D AC 84 */	lwz r4, lbl_804D6324@sda21(r13)
 /* 803972C0 00393EA0  39 03 00 00 */	addi r8, r3, 0
 /* 803972C4 00393EA4  80 B4 00 00 */	lwz r5, 0(r20)
@@ -7349,6 +7350,8 @@ lbl_803977F8:
 /* 80397808 003943E8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8039780C 003943EC  7C 08 03 A6 */	mtlr r0
 /* 80397810 003943F0  4E 80 00 20 */	blr 
+
+# https://decomp.me/scratch/EBVwp
 lbl_80397814:
 /* 80397814 003943F4  7C 08 02 A6 */	mflr r0
 /* 80397818 003943F8  3C A0 80 41 */	lis r5, lbl_8040AB00@ha
@@ -7754,6 +7757,7 @@ lbl_80397D6C:
 /* 80397D9C 0039497C  7C 08 03 A6 */	mtlr r0
 /* 80397DA0 00394980  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/UipgK
 .global func_80397DA4
 func_80397DA4:
 /* 80397DA4 00394984  7C 08 02 A6 */	mflr r0
@@ -7777,11 +7781,13 @@ func_80397DA4:
 /* 80397DEC 003949CC  7C 08 03 A6 */	mtlr r0
 /* 80397DF0 003949D0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/i6wxi // 0 (100%)
 .global Exception_StoreDebugLevel
 Exception_StoreDebugLevel:
 /* 80397DF4 003949D4  90 6D C2 28 */	stw r3, lbl_804D78C8@sda21(r13)
 /* 80397DF8 003949D8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/biJve // 0 (100%)
 .global func_80397DFC
 func_80397DFC:
 /* 80397DFC 003949DC  38 03 00 0F */	addi r0, r3, 0xf
@@ -7789,8 +7795,9 @@ func_80397DFC:
 /* 80397E04 003949E4  90 0D C2 2C */	stw r0, lbl_804D78CC@sda21(r13)
 /* 80397E08 003949E8  4E 80 00 20 */	blr 
 
-.global func_80397E0C
-func_80397E0C:
+# https://decomp.me/scratch/EXpLo // 1435 (95.37%)
+.global baselib_mfspr
+baselib_mfspr:
 /* 80397E0C 003949EC  7C 08 02 A6 */	mflr r0
 /* 80397E10 003949F0  38 83 00 00 */	addi r4, r3, 0
 /* 80397E14 003949F4  90 01 00 04 */	stw r0, 4(r1)
@@ -8194,6 +8201,7 @@ lbl_803982D4:
 /* 803982DC 00394EBC  7C 08 03 A6 */	mtlr r0
 /* 803982E0 00394EC0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/HTWAe // 0 (100%)
 lbl_803982E4:
 /* 803982E4 00394EC4  7C 08 02 A6 */	mflr r0
 /* 803982E8 00394EC8  90 01 00 04 */	stw r0, 4(r1)
@@ -8207,6 +8215,7 @@ lbl_803982E4:
 /* 80398308 00394EE8  7C 08 03 A6 */	mtlr r0
 /* 8039830C 00394EEC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/P4qLF // 453 (87.76%)
 .global func_80398310
 func_80398310:
 /* 80398310 00394EF0  7C 08 02 A6 */	mflr r0
@@ -8249,6 +8258,7 @@ lbl_8039838C:
 /* 8039839C 00394F7C  7C 08 03 A6 */	mtlr r0
 /* 803983A0 00394F80  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/rsQVY
 .global func_803983A4
 func_803983A4:
 /* 803983A4 00394F84  7C 08 02 A6 */	mflr r0
@@ -8342,6 +8352,7 @@ lbl_803984DC:
 /* 803984EC 003950CC  7C 08 03 A6 */	mtlr r0
 /* 803984F0 003950D0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/R7sZa
 .global func_803984F4
 func_803984F4:
 /* 803984F4 003950D4  7C 08 02 A6 */	mflr r0
@@ -8425,6 +8436,7 @@ lbl_80398600:
 /* 8039860C 003951EC  7C 08 03 A6 */	mtlr r0
 /* 80398610 003951F0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/t1XA8
 .global func_80398614
 func_80398614:
 /* 80398614 003951F4  A0 C3 00 00 */	lhz r6, 0(r3)
@@ -8692,6 +8704,7 @@ lbl_80398990:
 /* 80398998 00395578  4B FF FD 50 */	b lbl_803986E8
 /* 8039899C 0039557C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/0NHt6
 .global func_803989A0
 func_803989A0:
 /* 803989A0 00395580  7C 08 02 A6 */	mflr r0
@@ -8722,6 +8735,7 @@ lbl_803989F4:
 /* 80398A00 003955E0  7C 08 03 A6 */	mtlr r0
 /* 80398A04 003955E4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/0NHt6
 .global func_80398A08
 func_80398A08:
 /* 80398A08 003955E8  7C 08 02 A6 */	mflr r0
@@ -8858,6 +8872,7 @@ lbl_80398BF0:
 /* 80398BFC 003957DC  7C 08 03 A6 */	mtlr r0
 /* 80398C00 003957E0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/L8AbM
 .global func_80398C04
 func_80398C04:
 /* 80398C04 003957E4  7C 08 02 A6 */	mflr r0

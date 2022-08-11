@@ -1,14 +1,14 @@
 #ifndef _aobj_h_
 #define _aobj_h_
 
-#include "dolphin/types.h"
+#include <dolphin/types.h>
 
-#include "sysdolphin/baselib/id.h"
-#include "sysdolphin/baselib/object.h"
-#include "sysdolphin/baselib/objalloc.h"
+#include <sysdolphin/baselib/id.h>
+#include <sysdolphin/baselib/object.h>
+#include <sysdolphin/baselib/objalloc.h>
 
-#include "sysdolphin/baselib/fobj.h"
-#include "sysdolphin/baselib/list.h"
+#include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/list.h>
 
 #define AOBJ_REWINDED (1 << 26)
 #define AOBJ_FIRST_PLAY (1 << 27)

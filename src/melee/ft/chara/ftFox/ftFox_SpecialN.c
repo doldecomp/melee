@@ -1,4 +1,4 @@
-#include "ftfox.h"
+#include <ftfox.h>
 
 #define PI64 3.141592653589793
 

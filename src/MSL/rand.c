@@ -1,4 +1,4 @@
-#include "rand.h"
+#include <rand.h>
 
 static unsigned long int next = 1;
 

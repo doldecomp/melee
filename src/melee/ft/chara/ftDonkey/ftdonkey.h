@@ -1,8 +1,8 @@
 #pragma once
 
-#include "melee/ft/ftcommon.h"
-#include "melee/ft/ftwalkcommon.h"
-#include "melee/lb/lbvector.h"
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftwalkcommon.h>
+#include <melee/lb/lbvector.h>
 
 typedef struct _ftDonkeyAttributes {
     s32 action_state;
