@@ -1,27 +1,28 @@
 #include "ftmewtwo.h"
+#include <melee/it/itkind.h>
 
 void ftMewtwo_OnDeath(HSD_GObj* gobj) {
     Fighter* ft = (Fighter*)gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     ft->sa.mewtwo.x222C = 0;
     ft->sa.mewtwo.x2230 = 0;
-    ft->sa.mewtwo.x2234 = 0;
+    ft->sa.mewtwo.x2234_shadowBallCharge = 0;
     ft->sa.mewtwo.x2238 = 0;
     ft->sa.mewtwo.x223C = 0;
 }
 
 void ftMewtwo_OnLoad(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
-    ftMewTwoAttributes* attr = fighter->x10C_ftData->ext_attr;
+    ftMewtwoAttributes* attr = fighter->x10C_ftData->ext_attr;
     void** item_list = fighter->x10C_ftData->x48_items;
-    PUSH_ATTRS(fighter, ftMewTwoAttributes);
+    PUSH_ATTRS(fighter, ftMewtwoAttributes);
 
     {
         fighter->x5E8_fighterBones[1].flags.bits.b4 = 1;
         fighter->x2221_flag.bits.b2 = 1;
     }
-    func_8026B3F8(item_list[0], 0x6E);
-    func_8026B3F8(item_list[1], 0x70);
+    func_8026B3F8(item_list[0], It_Kind_Mewtwo_Disable);
+    func_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);
 }
 
 void ftMewTwo_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {}
@@ -45,18 +46,18 @@ void ftMewTwo_OnItemVisible(HSD_GObj* fighterObj) {}
 void ftMewTwo_80144F58(HSD_GObj* fighterObj) {
 
     Fighter* fighter = getFighter(fighterObj);
-    ftMewTwoAttributes* attr = fighter->x2D4_specialAttributes;
-    f32 attr_value = attr->x0;
-    if (fighter->sa.mewtwo.x2234 == attr_value) {
+    ftMewtwoAttributes* attr = fighter->x2D4_specialAttributes;
+    f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
+    if (fighter->sa.mewtwo.x2234_shadowBallCharge == attr_value) {
         func_800BFFD0(fighter, 0x5C, 0);
     }
 }
 
 void ftMewTwo_LoadSpecialAttrs(HSD_GObj* fighterObj) {
-    COPY_ATTRS(fighterObj, ftMewTwoAttributes);
+    COPY_ATTRS(fighterObj, ftMewtwoAttributes);
     if (ft->x34_scale.y != 1.0f) {
-        sA2->x80 *= ft->x34_scale.y;
-        sA2->x84 *= ft->x34_scale.y;
+        sA2->x80_MEWTWO_DISABLE_OFFSET_X *= ft->x34_scale.y;
+        sA2->x84_MEWTWO_DISABLE_OFFSET_Y *= ft->x34_scale.y;
     }
 }
 
