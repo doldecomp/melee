@@ -7,6 +7,8 @@
 #include "sysdolphin/baselib/list.h"
 
 #include "sysdolphin/baselib/aobj.h"
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/pobj.h>
 /*#include "dobj.h"
 #include "mobj.h"
 #include "robj.h"*/
@@ -136,6 +138,11 @@ void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
 void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
+void HSD_JObjUnref(HSD_JObj *jobj);
+void HSD_JObjRemoveAll(HSD_JObj *); // sysdolphin/baselib/jobj.s
+HSD_JObj *HSD_JObjLoadJoint(HSD_Joint *);
+void HSD_JObjAddAnimAll(HSD_JObj *, HSD_AnimJoint *, HSD_MatAnimJoint *, HSD_ShapeAnimJoint *);
+void HSD_JObjAnimAll(HSD_JObj *); // asm/sysdolphin/baselib/jobj.s
 
 #pragma push
 #pragma always_inline on

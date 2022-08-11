@@ -20,6 +20,13 @@ typedef struct
     u32 bitfields[8];
 } psdisp_UnknownType001;
 
+typedef struct
+{
+    unk_t pointers[4];
+    u8 message[36];
+    u8 filename[9];
+} psdisp_UnknownType002;
+
 /* 004D4528 */ extern s32 lbl_804D7948;
 /* 004D4524 */ extern unk_t lbl_804D7944;
 /* 004D4520 */ extern unk_t lbl_804D7940;
@@ -39,10 +46,12 @@ typedef struct
 /* 004D44E8 */ extern s32 lbl_804D7908;
 /* 004D2F64 */ extern u8 lbl_804D6384[2];
 /* 004D2F60 */ extern u8 lbl_804D6380[2];
+/* 00408F40 */ extern psdisp_UnknownType002 lbl_8040C360;
 /* 00408EE0 */ extern psdisp_UnknownType001 lbl_8040C300;
 /* 003B6208 */ extern f32 lbl_803B9628[12];
-/* 0039CC68 */ void func_803A0088(s32, u32);
+/* 0039CC68 */ void psDispParticles(s32, u32);
 /* 0039C850 */ unk_t func_8039FC70(s32, u8, unk_t *, unk_t *);
 /* 0039C754 */ void func_8039FB74(unk_t, unk_t, unk_t);
 /* 0039C608 */ void func_8039FA28(unk_t, unk_t, unk_t);
 /* 0039C47C */ void func_8039F89C(unk_t, f32 *, f32 *, f32 *);
+/* 0039C36C */ void func_8039F78C(s32);

@@ -4,6 +4,7 @@
 #include <global.h>
 
 #include <dolphin/types.h>
+#include <sysdolphin/baselib/debug.h>
 
 #include <common_structs.h>
 
