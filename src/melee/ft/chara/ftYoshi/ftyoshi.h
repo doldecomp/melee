@@ -1,7 +1,7 @@
 #pragma once
 
-#include "melee/ft/ftcommon.h"
-#include "melee/lb/lbvector.h"
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mobj.h>

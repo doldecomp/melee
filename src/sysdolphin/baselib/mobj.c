@@ -1,6 +1,5 @@
-#include "sysdolphin/baselib/mobj.h"
-
-#include "sysdolphin/baselib/memory.h"
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/memory.h>
 
 extern void MObjInfoInit(void);
 

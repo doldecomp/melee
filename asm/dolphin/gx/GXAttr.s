@@ -365,7 +365,7 @@ lbl_8033C24C:
 /* 8033C25C 00338E3C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/NAwYO // 4529 (49.68%)
-# decl gxprivate.h
+# decl __gx.h
 .global __GXSetVCD
 __GXSetVCD:
 /* 8033C260 00338E40  7C 08 02 A6 */	mflr r0
@@ -718,7 +718,7 @@ lbl_8033C73C:
 /* 8033C76C 0033934C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/C2Aa1 // 2370 (39.23%)
-# decl gxprivate.h
+# decl __gx.h
 .global __GXSetVAT
 __GXSetVAT:
 /* 8033C770 00339350  81 4D A5 08 */	lwz r10, __GXContexts@sda21(r13)

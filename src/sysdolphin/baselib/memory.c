@@ -1,4 +1,5 @@
-#include "memory.h"
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/debug.h>
 
 void HSD_Free(void* ptr)
 {

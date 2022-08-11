@@ -1,4 +1,4 @@
-#include "ftpurin.h"
+#include <ftpurin.h>
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[33];
 extern char* lbl_803D05B4[1000];  /// not correct length

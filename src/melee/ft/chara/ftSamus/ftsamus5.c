@@ -1,4 +1,4 @@
-#include "ftsamus.h"
+#include <ftsamus.h>
 
 void ftSamus_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighterPlus(fighterObj);

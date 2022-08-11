@@ -1,4 +1,4 @@
-#include "ftpikachu.h"
+#include <ftpikachu.h>
 
 s32 ftPikachu_CheckProperty_801275CC(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

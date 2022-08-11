@@ -1,4 +1,4 @@
-#include "ftgamewatch.h"
+#include <ftgamewatch.h>
 
 extern HSD_GObj* func_802C61F4(HSD_GObj*, Vec3*, s32, f32);
 

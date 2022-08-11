@@ -1,4 +1,5 @@
-#include "grlib.h"
+#include <grlib.h>
+#include <sysdolphin/baselib/psappsrt.h>
 
 extern StageInfo stage_info;
 extern u8 lbl_804D7849;
@@ -13,26 +14,10 @@ BOOL func_801C96E8(HSD_GObj* arg0)
     return map->x10_flags.b4;
 }
 
-typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT
-    u32 x0_fill[2];
-    S32Vec x8;
-    u8 x14_fill[0x10];
-    f32 x24;
-    f32 x28;
-    f32 x2C;
-    u8 x30_fill[0x72];
-    s8 xA2;
-} UnkGeneratorMember;
 
-typedef struct _UnkGeneratorStruct { // MexTK: Particle
-    u8 x0_fill[0x24];
-    f32 x24, x28, x2C;
-    u8 x30_fill[0x54 - 0x30];
-    UnkGeneratorMember* x54;
-} UnkGeneratorStruct;
 
 UnkGeneratorStruct* func_8039F05C(s8, s8, s32);
-UnkGeneratorMember* func_803A4294(UnkGeneratorStruct*, s32);
+UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
 UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec* arg2)
 {
@@ -44,7 +29,7 @@ UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec* arg2)
     if (temp_r3 != NULL) {
         phi_r30 = temp_r3->x54;
         if (phi_r30 == NULL) {
-            phi_r30 = func_803A4294(temp_r3, 1);
+            phi_r30 = psAddGeneratorAppSRT_begin(temp_r3, 1);
         } else {
             phi_r30->xA2 = 0;
         }

@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 8014FDD0 0014C9B0
 // https://decomp.me/scratch/HWef2
@@ -393,7 +393,7 @@ void lbl_80150890(HSD_GObj* gobj) {
 #define BUTTON_Y 0x800
 #define BUTTON_START 0x1000
 #define r6_button (HSD_PadMasterStatus[2].button)
-#include "sysdolphin/baselib/controller.h"
+#include <sysdolphin/baselib/controller.h>
 extern HSD_PadStatus HSD_PadMasterStatus[4];
 void func_80150894(HSD_GObj* gobj) {
     Fighter* r4_fighter = gobj->user_data;

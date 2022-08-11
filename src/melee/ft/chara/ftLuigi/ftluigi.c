@@ -1,4 +1,4 @@
-#include "ftluigi.h"
+#include <ftluigi.h>
 
 void ftLuigi_OnDeath(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

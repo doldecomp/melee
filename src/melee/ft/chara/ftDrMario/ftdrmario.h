@@ -5,9 +5,9 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
-#include "melee/ft/fighter.h"
+#include <melee/ft/fighter.h>
 
 typedef struct _ftDrMarioAttributes {
     u8 pad_x0[4];

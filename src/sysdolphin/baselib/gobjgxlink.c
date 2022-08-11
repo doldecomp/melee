@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/gobjgxlink.h"
+#include <sysdolphin/baselib/gobjgxlink.h>
 
 extern HSD_GObj** lbl_804D7820;
 extern HSD_GObj** lbl_804D7824;

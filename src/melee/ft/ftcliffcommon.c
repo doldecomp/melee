@@ -1,5 +1,5 @@
-#include "ftcliffcommon.h"
-#include "variables.h"
+#include <ftcliffcommon.h>
+#include <variables.h>
 #include <dolphin/types.h>
 
 BOOL func_80081298(HSD_GObj* gobj) {

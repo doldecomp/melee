@@ -1,4 +1,4 @@
-#include "ftpikachu.h"
+#include <ftpikachu.h>
 
 void ftPikachu_OnLoadForPichu(Fighter* fighter) {
     PUSH_ATTRS(fighter, ftPikachuAttributes);

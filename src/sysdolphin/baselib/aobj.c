@@ -1,11 +1,11 @@
 #include <stdarg.h>
 #include <string.h>
 
-#include "sysdolphin/baselib/aobj.h"
+#include <sysdolphin/baselib/aobj.h>
 
-#include "sysdolphin/baselib/jobj.h"
-#include "sysdolphin/baselib/robj.h"
-#include "sysdolphin/baselib/tobj.h"
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/robj.h>
+#include <sysdolphin/baselib/tobj.h>
 
 HSD_ObjAllocData aobj_alloc_data;
 

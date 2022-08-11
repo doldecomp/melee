@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ftdonkey.h>
 
 
 s32 ftDonkey_800DFA98(HSD_GObj* fighterObj) {

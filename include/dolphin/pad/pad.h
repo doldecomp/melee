@@ -16,5 +16,8 @@ typedef struct PADStatus
 } PADStatus;
 
 void PADControlMotor(int chan, u32 command);
+void SISetSamplingRate(u32 rate); 
+void func_80350100(BOOL);
+u32 func_8035017C();
 
 #endif

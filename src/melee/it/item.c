@@ -1,4 +1,4 @@
-#include "item.h"
+#include <item.h>
 #include <common_structs.h>
 
 extern s32 func_8016AE80();

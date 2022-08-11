@@ -1,4 +1,4 @@
-#include "ftgamewatch.h"
+#include <ftgamewatch.h>
 
 void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj) 
 {

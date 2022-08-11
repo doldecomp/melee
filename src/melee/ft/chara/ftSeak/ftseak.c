@@ -1,4 +1,4 @@
-#include "ftseak.h"
+#include <ftseak.h>
 
 void ftSeak_OnDeath(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

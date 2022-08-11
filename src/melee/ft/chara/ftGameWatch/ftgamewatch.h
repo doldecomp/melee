@@ -1,8 +1,8 @@
 #ifndef _ftgamewatch_h_
 #define _ftgamewatch_h_
 
-#include "melee/ft/ftcommon.h"
-#include "melee/lb/lbvector.h"
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>

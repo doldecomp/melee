@@ -1,4 +1,4 @@
-#include "ftpikachu.h"
+#include <ftpikachu.h>
 
 void ftPikachu_SpecialS_StartAction(HSD_GObj* fighterObj) {
     s32 unused[2];

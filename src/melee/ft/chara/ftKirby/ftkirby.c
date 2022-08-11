@@ -1,4 +1,4 @@
-#include "ftkirby.h"
+#include <ftkirby.h>
 
 //// TODO remove externs
 extern struct S_KIRBY1* lbl_803C9FC8[0x21];

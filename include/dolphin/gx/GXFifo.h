@@ -1,6 +1,6 @@
 #ifndef _GXFIFO_H_
 #define _GXFIFO_H_
 
-#include <dolphin/gx/gxprivate.h>
+#include <dolphin/gx/__gx.h>
 
 #endif

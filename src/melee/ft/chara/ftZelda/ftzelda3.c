@@ -1,4 +1,4 @@
-#include "ftzelda.h"
+#include <ftzelda.h>
 
 // 8013A830 - 8013A8AC (0x7C bytes)
 // https://decomp.me/scratch/6v90P

@@ -1,4 +1,4 @@
-#include "ftpichu.h"
+#include <ftpichu.h>
 
 void ftPichu_OnLoad(HSD_GObj* gobj)
 {

@@ -1,4 +1,4 @@
-#include "ftsamus.h"
+#include <ftsamus.h>
 
 void ftSamus_ClearThrowFlagsUnk(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

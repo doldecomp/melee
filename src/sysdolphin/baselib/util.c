@@ -1,4 +1,4 @@
-#include "util.h"
+#include <sysdolphin/baselib/util.h>
 
 float lbl_80406DF0[] = {
     1.0f,

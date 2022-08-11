@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dolphin/types.h"
+#include <dolphin/types.h>
 
 #define PAD3_BUTTON_ADDR 0x800030E4
 #define OS_RESET_RESTART 0

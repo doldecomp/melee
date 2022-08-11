@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <fighter.h>
 
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

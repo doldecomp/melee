@@ -1,4 +1,4 @@
-#include "ftyoshi.h"
+#include <ftyoshi.h>
 
 
 ///https://decomp.me/scratch/ufrFK

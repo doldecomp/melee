@@ -1,4 +1,4 @@
-#include "ftsandbag.h"
+#include <ftsandbag.h>
 
 typedef struct _ftSandbagAttributes
 {

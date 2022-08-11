@@ -1,11 +1,11 @@
 #ifndef _grtness_h_
 #define _grtness_h_
 
-#include "dolphin/types.h"
-#include "functions.h"
+#include <dolphin/types.h>
+#include <functions.h>
 
-#include "sysdolphin/baselib/gobj.h"
-#include "sysdolphin/baselib/gobjgxlink.h"
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 
 static void GrTNess_802225D0(s32);
 static void GrTNess_802225D4(void);

@@ -1,4 +1,4 @@
-#include "grstory.h"
+#include <grstory.h>
 
 #include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>

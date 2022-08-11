@@ -3,8 +3,8 @@
 
 #include <global.h>
 #include <dolphin/types.h>
-#include "sysdolphin/baselib/gobj.h"
-#include "melee/ft/fighter.h"
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 
 typedef struct _MasterHandAttributes {
     s32 x0;

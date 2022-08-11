@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ftdonkey.h>
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;
