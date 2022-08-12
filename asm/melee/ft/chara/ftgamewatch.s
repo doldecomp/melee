@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global lbl_8014E4F0
-lbl_8014E4F0:
+.global ftGameWatch_SpecialN_CreateSausage
+ftGameWatch_SpecialN_CreateSausage:
 /* 8014E4F0 0014B0D0  7C 08 02 A6 */	mflr r0
 /* 8014E4F4 0014B0D4  90 01 00 04 */	stw r0, 4(r1)
 /* 8014E4F8 0014B0D8  94 21 FF 98 */	stwu r1, -0x68(r1)
@@ -115,9 +115,9 @@ ftGameWatch_SpecialN_StartAction:
 /* 8014E680 0014B260  4B F2 05 25 */	bl func_8006EBA4
 /* 8014E684 0014B264  80 BF 00 2C */	lwz r5, 0x2c(r31)
 /* 8014E688 0014B268  38 80 00 00 */	li r4, 0
-/* 8014E68C 0014B26C  3C 60 80 15 */	lis r3, lbl_8014E4F0@ha
+/* 8014E68C 0014B26C  3C 60 80 15 */	lis r3, ftGameWatch_SpecialN_CreateSausage@ha
 /* 8014E690 0014B270  90 85 22 00 */	stw r4, 0x2200(r5)
-/* 8014E694 0014B274  38 03 E4 F0 */	addi r0, r3, lbl_8014E4F0@l
+/* 8014E694 0014B274  38 03 E4 F0 */	addi r0, r3, ftGameWatch_SpecialN_CreateSausage@l
 /* 8014E698 0014B278  90 85 22 04 */	stw r4, 0x2204(r5)
 /* 8014E69C 0014B27C  90 85 22 08 */	stw r4, 0x2208(r5)
 /* 8014E6A0 0014B280  90 85 23 40 */	stw r4, 0x2340(r5)
@@ -149,9 +149,9 @@ ftGameWatch_SpecialAirN_StartAction:
 /* 8014E6FC 0014B2DC  4B F2 04 A9 */	bl func_8006EBA4
 /* 8014E700 0014B2E0  80 BF 00 2C */	lwz r5, 0x2c(r31)
 /* 8014E704 0014B2E4  38 80 00 00 */	li r4, 0
-/* 8014E708 0014B2E8  3C 60 80 15 */	lis r3, lbl_8014E4F0@ha
+/* 8014E708 0014B2E8  3C 60 80 15 */	lis r3, ftGameWatch_SpecialN_CreateSausage@ha
 /* 8014E70C 0014B2EC  90 85 22 00 */	stw r4, 0x2200(r5)
-/* 8014E710 0014B2F0  38 03 E4 F0 */	addi r0, r3, lbl_8014E4F0@l
+/* 8014E710 0014B2F0  38 03 E4 F0 */	addi r0, r3, ftGameWatch_SpecialN_CreateSausage@l
 /* 8014E714 0014B2F4  90 85 22 04 */	stw r4, 0x2204(r5)
 /* 8014E718 0014B2F8  90 85 22 08 */	stw r4, 0x2208(r5)
 /* 8014E71C 0014B2FC  90 85 23 40 */	stw r4, 0x2340(r5)
@@ -401,9 +401,9 @@ func_8014EA3C:
 /* 8014EA78 0014B658  38 80 01 62 */	li r4, 0x162
 /* 8014EA7C 0014B65C  38 C0 00 00 */	li r6, 0
 /* 8014EA80 0014B660  4B F1 A9 2D */	bl Fighter_ActionStateChange_800693AC
-/* 8014EA84 0014B664  3C 80 80 15 */	lis r4, lbl_8014E4F0@ha
+/* 8014EA84 0014B664  3C 80 80 15 */	lis r4, ftGameWatch_SpecialN_CreateSausage@ha
 /* 8014EA88 0014B668  80 7E 00 2C */	lwz r3, 0x2c(r30)
-/* 8014EA8C 0014B66C  38 04 E4 F0 */	addi r0, r4, lbl_8014E4F0@l
+/* 8014EA8C 0014B66C  38 04 E4 F0 */	addi r0, r4, ftGameWatch_SpecialN_CreateSausage@l
 /* 8014EA90 0014B670  90 03 21 BC */	stw r0, 0x21bc(r3)
 /* 8014EA94 0014B674  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8014EA98 0014B678  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -432,9 +432,9 @@ func_8014EAAC:
 /* 8014EAE8 0014B6C8  38 80 01 61 */	li r4, 0x161
 /* 8014EAEC 0014B6CC  38 C0 00 00 */	li r6, 0
 /* 8014EAF0 0014B6D0  4B F1 A8 BD */	bl Fighter_ActionStateChange_800693AC
-/* 8014EAF4 0014B6D4  3C 80 80 15 */	lis r4, lbl_8014E4F0@ha
+/* 8014EAF4 0014B6D4  3C 80 80 15 */	lis r4, ftGameWatch_SpecialN_CreateSausage@ha
 /* 8014EAF8 0014B6D8  80 7E 00 2C */	lwz r3, 0x2c(r30)
-/* 8014EAFC 0014B6DC  38 04 E4 F0 */	addi r0, r4, lbl_8014E4F0@l
+/* 8014EAFC 0014B6DC  38 04 E4 F0 */	addi r0, r4, ftGameWatch_SpecialN_CreateSausage@l
 /* 8014EB00 0014B6E0  90 03 21 BC */	stw r0, 0x21bc(r3)
 /* 8014EB04 0014B6E4  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8014EB08 0014B6E8  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -462,9 +462,9 @@ func_8014EB1C:
 /* 8014EB54 0014B734  4B F2 00 51 */	bl func_8006EBA4
 /* 8014EB58 0014B738  80 BF 00 2C */	lwz r5, 0x2c(r31)
 /* 8014EB5C 0014B73C  38 80 00 00 */	li r4, 0
-/* 8014EB60 0014B740  3C 60 80 15 */	lis r3, lbl_8014E4F0@ha
+/* 8014EB60 0014B740  3C 60 80 15 */	lis r3, ftGameWatch_SpecialN_CreateSausage@ha
 /* 8014EB64 0014B744  90 85 22 04 */	stw r4, 0x2204(r5)
-/* 8014EB68 0014B748  38 03 E4 F0 */	addi r0, r3, lbl_8014E4F0@l
+/* 8014EB68 0014B748  38 03 E4 F0 */	addi r0, r3, ftGameWatch_SpecialN_CreateSausage@l
 /* 8014EB6C 0014B74C  90 85 22 08 */	stw r4, 0x2208(r5)
 /* 8014EB70 0014B750  90 85 23 40 */	stw r4, 0x2340(r5)
 /* 8014EB74 0014B754  90 05 21 BC */	stw r0, 0x21bc(r5)
@@ -493,9 +493,9 @@ func_8014EB8C:
 /* 8014EBC4 0014B7A4  4B F1 FF E1 */	bl func_8006EBA4
 /* 8014EBC8 0014B7A8  80 BF 00 2C */	lwz r5, 0x2c(r31)
 /* 8014EBCC 0014B7AC  38 80 00 00 */	li r4, 0
-/* 8014EBD0 0014B7B0  3C 60 80 15 */	lis r3, lbl_8014E4F0@ha
+/* 8014EBD0 0014B7B0  3C 60 80 15 */	lis r3, ftGameWatch_SpecialN_CreateSausage@ha
 /* 8014EBD4 0014B7B4  90 85 22 04 */	stw r4, 0x2204(r5)
-/* 8014EBD8 0014B7B8  38 03 E4 F0 */	addi r0, r3, lbl_8014E4F0@l
+/* 8014EBD8 0014B7B8  38 03 E4 F0 */	addi r0, r3, ftGameWatch_SpecialN_CreateSausage@l
 /* 8014EBDC 0014B7BC  90 85 22 08 */	stw r4, 0x2208(r5)
 /* 8014EBE0 0014B7C0  90 85 23 40 */	stw r4, 0x2340(r5)
 /* 8014EBE4 0014B7C4  90 05 21 BC */	stw r0, 0x21bc(r5)

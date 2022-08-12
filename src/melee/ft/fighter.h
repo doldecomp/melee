@@ -1080,7 +1080,7 @@ struct SpecialAttrs_Mewtwo {
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
     /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
+    /* 0x223C */ BOOL x223C_isConfusionBoost;
 };
 
 struct SpecialAttrs_Luigi {

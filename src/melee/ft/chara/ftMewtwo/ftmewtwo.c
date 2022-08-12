@@ -8,7 +8,7 @@ void ftMewtwo_OnDeath(HSD_GObj* gobj) {
     ft->sa.mewtwo.x2230 = 0;
     ft->sa.mewtwo.x2234_shadowBallCharge = 0;
     ft->sa.mewtwo.x2238 = 0;
-    ft->sa.mewtwo.x223C = 0;
+    ft->sa.mewtwo.x223C_isConfusionBoost = FALSE;
 }
 
 void ftMewtwo_OnLoad(HSD_GObj* fighterObj) {

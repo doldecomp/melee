@@ -559,39 +559,45 @@ BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj) // Remove all
     return ret;
 }
 
+#ifdef NON_MATCHING
+
+#pragma peephole off
+
 // 0x8026B924 //
 // https://decomp.me/scratch/2H33A //
-// s32 func_8026B924(HSD_GObj* item_gobj) // Return result of unk item check - requires -g compiler flag / Frank modifications to match //
-// {
-   // s32 itemID;
-   // s32 ret;
-   // Item* item_data;
+ s32 func_8026B924(HSD_GObj* item_gobj) // Return result of unk item check - requires -g compiler flag / Frank modifications to match //
+ {
+    s32 itemID;
+    s32 ret;
+    Item* item_data;
 
-   // item_data = item_gobj->user_data;
-   // itemID = item_data->x10_item_kind;
-   // ret = -1;
-   // switch (itemID)
-   // {
-   // case It_Kind_Freeze:
-   // case It_Kind_Foods:
-   // case It_Kind_MSBomb:
-   // case It_Kind_Flipper:
-   // case It_Kind_LipStick:
-   // case It_Kind_Harisen:
-   //     break;
-   // case It_Kind_S_Scope:
-   // case It_Kind_StarRod:
-   // case It_Kind_L_Gun:
-   // case It_Kind_F_Flower:
-   //     ret = item_data->xD4C;
-   // }
-   // return ret;
-//}
+    item_data = item_gobj->user_data;
+    itemID = item_data->x10_item_kind;
+    ret = -1;
+    switch (itemID)
+    {
+        case It_Kind_Freeze:
+        case It_Kind_Foods:
+        case It_Kind_MSBomb:
+        case It_Kind_Flipper:
+        case It_Kind_LipStick:
+        case It_Kind_Harisen:
+            break;
+        case It_Kind_S_Scope:
+        case It_Kind_StarRod:
+        case It_Kind_L_Gun:
+        case It_Kind_F_Flower:
+        ret = item_data->xD4C;
+    }
+    return ret;
+}
 
-s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch //
+#pragma peephole on
+
+#else
+
+asm s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch //
 {
-    __asm
-    (
         lwz r4, 0x2C(item_gobj); // Get Item Data //
         li r3, -1;               // Default return value //
         lwz r0, 0x10(r4);        // Get Item ID //
@@ -608,49 +614,53 @@ s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compiler v
         bnelr - ;
     lbl_getVar:
         lwz r3, 0xD4C(r4);
-    );
-}
+} 
+
+#endif
+
+extern f32 lbl_804DC688;
+
+#ifdef NON_MATCHING
+
+#pragma peephole off
 
 // 0x8026B960 //
 // https://decomp.me/scratch/6Dc0G //
-// f32 func_8026B960(HSD_GObj* item_gobj) // Return float result of item kind and state checks - requires -g compiler flag / Frank modifications to match //
-// {
-//    s32 itemID;
-//    f32 unk_timer = -1.0f;
-//    Item* item_data;
-
-//    item_data = item_gobj->user_data;
-//    itemID = item_data->x10_item_kind;
-//    switch (itemID)
-//    {
-//    case It_Kind_BombHei:
-//        if ((s32)item_data->x24_item_state_index != 0xB)
-//        {
-//            unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
-//        }
-//        break;
-//   case It_Kind_Link_Bomb:
-//        if ((s32)item_data->x24_item_state_index != 5)
-//        {
-//           unk_timer = item_data->xD44_lifeTimer;
-//        }
-//    }
-//    return unk_timer;
-// }
-
-f32 SetFloatTemp(void) // Temoprary function to set float order //
+f32 func_8026B960(HSD_GObj* item_gobj) // Return float result of item kind and state checks - requires -g compiler flag / Frank modifications to match //
 {
-    return -1.0f;
+    s32 itemID;
+    f32 unk_timer = lbl_804DC688;
+    Item* item_data;
+
+    item_data = item_gobj->user_data;
+    itemID = item_data->x10_item_kind;
+    switch (itemID)
+    {
+    case It_Kind_BombHei:
+        if ((s32)item_data->x24_item_state_index != 0xB)
+        {
+            unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
+        }
+        break;
+   case It_Kind_Link_Bomb:
+        if ((s32)item_data->x24_item_state_index != 5)
+        {
+           unk_timer = item_data->xD44_lifeTimer;
+        }
+    }
+    return unk_timer;
 }
+
+#pragma peephole on
+
+#else 
 
 // 0x8026B960 //
 // https://decomp.me/scratch/jUEn8 //
-f32 func_8026B960(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch - float constant is temporarily hardcoded //
+asm f32 func_8026B960(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch - float constant is temporarily hardcoded //
 {
-    __asm
-    (
         lwz r3, 0x2C(item_gobj);
-        lfs f1, -0x3358(r2);
+        lfs f1, lbl_804DC688;
         lwz r0, 0x10(r3);
         cmpwi r0, 0x3A;
         beq - lbl_compare;
@@ -667,8 +677,11 @@ f32 func_8026B960(register HSD_GObj* item_gobj) // Inlined ASM due to compiler v
         cmpwi r0, 0x5;
         beqlr - ;
         lfs f1, 0xD44(r3);
-    );
 }
+
+#endif
+
+#pragma peephole on
 
 extern void func_8000B804(HSD_JObj*, HSD_Joint*);
 extern void func_8000BA0C(HSD_JObj*, f32);
@@ -775,6 +788,8 @@ void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos) // Adjust item's position 
     func_80086990(fighter_gobj, pos);
 }
 
+extern f32 lbl_804DC68C;
+
 // 0x8026BB88 //
 // https://decomp.me/scratch/8uWqT //
 void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's position based on ECB? //
@@ -783,7 +798,7 @@ void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's position bas
     f32 temp_float;
     f32 temp_float2 = 0.0f;
 
-    temp_float = 0.5f * (item_data->x378_itemColl.xA8 + item_data->x378_itemColl.xB0);
+    temp_float = lbl_804DC68C * (item_data->x378_itemColl.xA8 + item_data->x378_itemColl.xB0);
     pos->x = item_data->x4C_pos.x + temp_float2;
     pos->y = item_data->x4C_pos.y + temp_float;
     pos->z = item_data->x4C_pos.z + temp_float2;
@@ -798,7 +813,7 @@ void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's ECB position
     Item* item_data = item_gobj->user_data;
     CollData* collData = &item_data->x378_itemColl;
 
-    temp_float2 = (0.5f * (collData->xE8 + collData->xF0));
+    temp_float2 = (lbl_804DC68C * (collData->xE8 + collData->xF0));
     pos->x = collData->x1C_vec.x + temp_float;
     pos->y = collData->x1C_vec.y + temp_float2;
     pos->z = collData->x1C_vec.z + temp_float;
@@ -972,6 +987,8 @@ void func_8026BE28(HSD_GObj* item_gobj) // Toggle several item flags, inverted /
     item_data = item_gobj->user_data;
     item_data->xDC8_word.flags.x1A = !1;
 }
+
+extern s32 func_8026D324(s32);
 
 // 0x8026BE84 //
 // https://decomp.me/scratch/NDeQY //
@@ -1197,6 +1214,8 @@ void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Get item owne
 }
 
 // Shoutouts to CelestialAmber for helping clean up this next one //
+
+extern f32 lbl_804DC690;
 
 // 0x8026C258 //
 // https://decomp.me/scratch/D9ivt //

@@ -35,7 +35,19 @@ typedef enum ftMewtwoAction {
 
 } ftMewtwoAction;
 
+// Flag values read during Confusion's reflect think function
+
+#define CONFUSION_REFLECT_NONE 0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is either 1 or 2 because 0 does nothing). 
+
+#define CONFUSION_REFLECT_ON 1 // Toggle reflect bubble on.
+
+#define CONFUSION_REFLECT_OFF 2 // Toggle reflect bubble off.
+
 // Flags used by Mewtwo in Action State Change //
+
+// SpecialS/SpecialAirS //
+
+#define FTMEWTWO_SPECIALS_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 // SpecialHi/SpecialAirHi //
 
@@ -151,5 +163,23 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialLw_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirLw_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* fighter_gobj);
+
+// Side Special - Confusion (SpecialS/SpecialAirS) //
+
+void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_OnReflect(HSD_GObj* fighter_gobj);
 
 #endif
