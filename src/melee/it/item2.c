@@ -592,9 +592,9 @@ BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj) // Remove all
     return ret;
 }
 
-#pragma peephole on
-
 #else
+
+#pragma peephole on
 
 asm s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch //
 {
@@ -618,7 +618,7 @@ asm s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compil
 
 #endif
 
-extern f32 lbl_804DC688;
+#pragma peephole on
 
 #ifdef NON_MATCHING
 
@@ -629,7 +629,7 @@ extern f32 lbl_804DC688;
 f32 func_8026B960(HSD_GObj* item_gobj) // Return float result of item kind and state checks - requires -g compiler flag / Frank modifications to match //
 {
     s32 itemID;
-    f32 unk_timer = lbl_804DC688;
+    f32 unk_timer = -1.0f;
     Item* item_data;
 
     item_data = item_gobj->user_data;
@@ -651,32 +651,39 @@ f32 func_8026B960(HSD_GObj* item_gobj) // Return float result of item kind and s
     return unk_timer;
 }
 
+#else
+
 #pragma peephole on
 
-#else 
-
 // 0x8026B960 //
-// https://decomp.me/scratch/jUEn8 //
-asm f32 func_8026B960(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch - float constant is temporarily hardcoded //
+// https://decomp.me/scratch/6Dc0G //
+f32 func_8026B960(register HSD_GObj* item_gobj)
 {
-        lwz r3, 0x2C(item_gobj);
-        lfs f1, lbl_804DC688;
-        lwz r0, 0x10(r3);
-        cmpwi r0, 0x3A;
-        beq - lbl_compare;
-        bgelr - ;
-        cmpwi r0, 0x6;
-        bnelr - ;
-        lwz r0, 0x24(r3);
-        cmpwi r0, 0xB;
-        beqlr - ;
-        lfs f1, 0xDEC(r3);
-        blr;
-    lbl_compare:
-        lwz r0, 0x24(r3);
-        cmpwi r0, 0x5;
-        beqlr - ;
-        lfs f1, 0xD44(r3);
+    register s32 itemID;
+    register Item* item_data;
+    register f32 unk_timer = -1.0f;
+
+    item_data = item_gobj->user_data;
+    itemID = item_data->x10_item_kind;
+    {
+        __asm(
+            cmpwi itemID, It_Kind_Link_Bomb;
+            beq - lbl_block;
+            bgelr - ;
+            cmpwi itemID, It_Kind_BombHei;
+            bnelr - ;
+            lwz itemID, 0x24(item_data);
+            cmpwi itemID, 0xB;
+            beqlr - ;
+        );
+        return unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
+    lbl_block:
+        if (item_data->x24_item_state_index != 0x5)
+        {
+            return unk_timer = item_data->xD44_lifeTimer;
+        }
+    }
+    return unk_timer;
 }
 
 #endif
@@ -788,8 +795,6 @@ void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos) // Adjust item's position 
     func_80086990(fighter_gobj, pos);
 }
 
-extern f32 lbl_804DC68C;
-
 // 0x8026BB88 //
 // https://decomp.me/scratch/8uWqT //
 void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's position based on ECB? //
@@ -798,7 +803,7 @@ void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's position bas
     f32 temp_float;
     f32 temp_float2 = 0.0f;
 
-    temp_float = lbl_804DC68C * (item_data->x378_itemColl.xA8 + item_data->x378_itemColl.xB0);
+    temp_float = 0.5f * (item_data->x378_itemColl.xA8 + item_data->x378_itemColl.xB0);
     pos->x = item_data->x4C_pos.x + temp_float2;
     pos->y = item_data->x4C_pos.y + temp_float;
     pos->z = item_data->x4C_pos.z + temp_float2;
@@ -813,7 +818,7 @@ void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's ECB position
     Item* item_data = item_gobj->user_data;
     CollData* collData = &item_data->x378_itemColl;
 
-    temp_float2 = (lbl_804DC68C * (collData->xE8 + collData->xF0));
+    temp_float2 = (0.5f * (collData->xE8 + collData->xF0));
     pos->x = collData->x1C_vec.x + temp_float;
     pos->y = collData->x1C_vec.y + temp_float2;
     pos->z = collData->x1C_vec.z + temp_float;
