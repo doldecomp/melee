@@ -68,7 +68,7 @@ inline void clamp_below(f32* value, f32 max) {
     }
 }
 
-void func_80041DD0(CollData* cd, u8 flags) {
+void func_80041DD0(CollData* cd, u32 flags) {
     f32 left, bottom, right, top;
 
     left = cd->xA4_ecbCurrCorrect.left.x + cd->x4_vec.x;
@@ -745,7 +745,10 @@ void func_800436D8(CollData* arg0, s32 arg1) {
 }
 
 // TODO: float order hack
-const f32 lbl_804D7FD8 = 6.0f;
+const f32 flt_804D7FD8 = 6.0f;
+static f32 six(void) {
+    return flt_804D7FD8;
+}
 
 // 800436E4
 #define M_TAU 6.283185307179586
@@ -770,62 +773,68 @@ void func_800436E4(CollData* arg0, f32 arg1) {
 
 
 // 80043754 https://decomp.me/scratch/JEEcj
-#define min(a,b) (((a)<(b))?(a):(b))
-#define max(a,b) (((a)>(b))?(a):(b))
-#define fabs_macro(f) (((f)<0)?-(f):(f))
+inline f32 max_inline(f32 a, f32 b) {
+    return (a > b) ? a : b;
+}
 s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
-    Vec3 sp2C;
-    f32 temp_f30;
-    f32 var_f0;
-    f32 var_f0_2;
-    f32 var_f3;
-    f32 var_f4;
-    f32 var_f5;
-    f32 var_f6;
-    s32 var_r30;
+    Vec3 vel;
+    f32 unused;
+    f32 dist_right_x;
+    f32 dist_right_y;
+    f32 x;
+    f32 y;
+    f32 dist_left_x;
+    f32 dist_top_y;
     s32 var_r31;
+    s32 var_r30;
     s32 ret;
 
-    lbvector_Diff(&arg1->x4_vec, &arg1->x1C_vec, &sp2C);
-    var_f3 = fabs_inline(sp2C.x);
-    var_f4 = fabs_inline(sp2C.y);
-    var_f5 = arg1->x84_ecb.left.x - arg1->xA4_ecbCurrCorrect.left.x;
-    var_f5 = fabs_inline(var_f5);
-    var_f0 = arg1->x84_ecb.right.x - arg1->xA4_ecbCurrCorrect.right.x;
-    var_f0 = fabs_inline(var_f0);
-    // var_f5 = min(var_f5, var_f0);
-    if (var_f5 < var_f0) {
-        var_f5 = var_f0;
-    }
-    var_f6 = fabs_inline(arg1->x84_ecb.top.y - arg1->xA4_ecbCurrCorrect.top.y);
-    var_f0_2 = fabs_inline(arg1->x84_ecb.right.y - arg1->xA4_ecbCurrCorrect.right.y);
-    // var_f6 = min(var_f6, var_f0_2);
-    if (var_f6 < var_f0_2) {
-        var_f6 = var_f0_2;
+    lbvector_Diff(&arg1->x4_vec, &arg1->x1C_vec, &vel);
+    x = fabs_inline(vel.x);
+    y = fabs_inline(vel.y);
+
+    dist_left_x = arg1->x84_ecb.left.x - arg1->xA4_ecbCurrCorrect.left.x;
+    // if (dist_left_x < 0) dist_left_x = -dist_left_x;
+    dist_left_x = fabs_inline(dist_left_x);
+
+    dist_right_x = arg1->x84_ecb.right.x - arg1->xA4_ecbCurrCorrect.right.x;
+    if (dist_right_x < 0) dist_right_x = -dist_right_x;
+
+    if (dist_left_x < dist_right_x) {
+        dist_left_x = dist_right_x;
     }
 
+    dist_top_y = arg1->x84_ecb.top.y - arg1->xA4_ecbCurrCorrect.top.y;
+    // if (dist_top_y < 0) dist_top_y = -dist_top_y;
+    dist_top_y = fabs_inline(dist_top_y);
 
-    var_f3 = max(var_f3, var_f5);
-    var_f4 = max(var_f4, var_f6);
-    var_f3 = max(var_f3, var_f4);
+    dist_right_y = arg1->x84_ecb.right.y - arg1->xA4_ecbCurrCorrect.right.y;
+    if (dist_right_y < 0) dist_right_y= -dist_right_y;
 
+    if (dist_top_y < dist_right_y) {
+        dist_top_y = dist_right_y;
+    }
 
-    if (var_f3 > 6.0f) {
-        var_r30 = (s32) (var_f3 / 6.0f) + 1;
-        sp2C.x /= var_r30;
-        sp2C.y /= var_r30;
-        sp2C.z /= var_r30;
+    x = max_inline(x, dist_left_x);
+    y = max_inline(y, dist_top_y);
+    x = max_inline(x, y);
+
+    if (x > flt_804D7FD8) { //6.0f float order hack
+        var_r30 = (s32) (x / flt_804D7FD8); //6.0f float order hack
+        var_r30 = var_r30 + 1;
+        vel.x /= var_r30;
+        vel.y /= var_r30;
+        vel.z /= var_r30;
     } else {
         var_r30 = 1;
     }
     var_r31 = 0;
     arg1->x4_vec = arg1->x1C_vec;
     arg1->x34_flags.bits.b5 = 0;
-    temp_f30 = 1.0f;
     while ((var_r31 < var_r30) && !arg1->x34_flags.bits.b5) {
-        func_80042DB0(arg1, temp_f30 / (var_r30 - var_r31));
+        func_80042DB0(arg1, 1.0f / (var_r30 - var_r31));
         arg1->x10_vec = arg1->x4_vec;
-        lbvector_Add(&arg1->x4_vec, &sp2C);
+        lbvector_Add(&arg1->x4_vec, &vel);
         func_80041DD0(arg1, arg2);
         ret = (*arg0)(arg1, arg2);
         func_80058AA0();
@@ -1354,7 +1363,7 @@ lbl_80043E70:
 // 8004CC00
 // 8004D024
 
-const f32 lbl_804D7FF8 = 5.0f;
-const f64 lbl_804D8000 = -0.75;
-const f64 lbl_804D8008 = 0.75;
-const f32 lbl_804D8010 = -3.0f;
+const f32 flt_804D7FF8 = 5.0f;
+const f64 flt_804D8000 = -0.75;
+const f64 flt_804D8008 = 0.75;
+const f32 flt_804D8010 = -3.0f;
