@@ -18,6 +18,7 @@
 #include <dolphin/os/OSReset.h>
 #include <dolphin/os/OSResetSW.h>
 #include <MSL.h>
+#include <dolphin/os/OSMemory.h>
 
 STRUCT_PLACEHOLDER(baselib, 1)
 STRUCT_PLACEHOLDER(baselib, 2)
@@ -101,6 +102,9 @@ typedef struct _baselib_Unk18
 /* 00408B50 */ extern cobj_Unk1 lbl_8040BF70;
 /* 00408AA4 */ extern baselib_Unk18 lbl_8040BEC4;
 /* 00408A4C */ extern char lbl_8040BE6C[0x10];
+/* 00408954 */ extern OSResetSW_Predicate lbl_8040BD74[6];
+/* 00408934 */ extern BOOL lbl_8040BD54(OSResetSW_Unk1 *);
+/* 0040881C */ extern OSResetSW_MulticastPredicate lbl_8040BC3C[7];
 /* 004076E0 */ extern baselib_UnkCallbackContainer1 lbl_8040AB00[12];
 /* 00405498 */ extern baselib_Unk16 lbl_804088B8;
 /* 00405478 */ extern baselib_UnkCallbackContainer1 lbl_80408898[4];
@@ -149,9 +153,15 @@ typedef struct _baselib_Unk18
 /* 00393F54 */ extern void lbl_80397374(char *, ...);
 /* 00393CF0 */ extern void lbl_80397110(char *, ...);
 /* 00393CEC */ extern void lbl_8039710C(char *, ...);
-/* 00393A20 */ extern void lbl_80396E40(s32 arg0);
-/* 00393858 */ extern BOOL func_80396C78(OSResetSW_Unk1 *arg0);
+/* 00393A20 */ extern void lbl_80396E40(s32 );
+/* 00393858 */ extern BOOL func_80396C78(OSResetSW_Unk1 *);
+/* 00393600 */ extern BOOL func_80396A20(OSResetSW_Predicate *);
+/* 00393464 */ extern BOOL func_80396884(OSResetSW_Predicate *);
+/* 00393448 */ extern BOOL func_80396868(OSResetSW_Predicate *);
 /* 00392130 */ extern s32 func_80395550(OSResetSW_Unk1 *);
+/* 00391B28 */ extern BOOL func_80394F48(OSResetSW_Unk1 *);
+/* 00391A6C */ extern void func_80394E8C(OSResetSW_MulticastPredicate);
+/* 003919D4 */ extern BOOL func_80394DF4(OSResetSW_Predicate *);
 /* 00391248 */ extern void func_80394668(s32, s32);
 /* 00391124 */ extern void func_80394544(s32, s32, s32, s32, s32, s32, s32, s32);
 /* 00391014 */ extern void func_80394434(char *, ...);
@@ -163,3 +173,98 @@ typedef struct _baselib_Unk18
 /* 0038F12C */ extern void func_8039254C();
 /* 0038F108 */ extern void func_80392528(baselib_Unk11 *);
 /* 0038ED74 */ extern void func_80392194(baselib_Unk14 *, s32, baselib_Unk15 *);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

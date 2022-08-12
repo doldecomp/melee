@@ -4,6 +4,8 @@
 #include <dolphin/types.h>
 #include <dolphin/gx/gxtypes.h>
 
+struct _OSResetSW_Unk1;
+typedef BOOL (*OSResetSW_Predicate)(struct _OSResetSW_Unk1 *);
 typedef struct _OSResetSW_Unk1
 {
     union
@@ -32,9 +34,10 @@ typedef struct _OSResetSW_Unk1
     BOOL xC4;
     u8 xCC_pad[0xD0 - 0xCC];
     BOOL xD0;
-    s32 *xD4;
+    OSResetSW_Predicate xD4;
 } OSResetSW_Unk1;
 
+typedef BOOL (*OSResetSW_MulticastPredicate)(OSResetSW_Predicate *);
 s32 OSGetResetSwitchState(OSResetSW_Unk1 *);
 
 #endif

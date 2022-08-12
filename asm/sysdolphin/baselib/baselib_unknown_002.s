@@ -6198,6 +6198,7 @@ lbl_80396A08:
 /* 80396A18 003935F8  7C 08 03 A6 */	mtlr r0
 /* 80396A1C 003935FC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/w7LpF
 .global func_80396A20
 func_80396A20:
 /* 80396A20 00393600  7C 08 02 A6 */	mflr r0
