@@ -15,6 +15,9 @@
 #include <dolphin/os/OSThread.h>
 #include <dolphin/pad/pad.h>
 #include <dolphin/vi/vi.h>
+#include <dolphin/os/OSReset.h>
+#include <dolphin/os/OSResetSW.h>
+#include <MSL.h>
 
 STRUCT_PLACEHOLDER(baselib, 1)
 STRUCT_PLACEHOLDER(baselib, 2)
@@ -33,32 +36,39 @@ typedef struct _baselib_Unk12
     u8 x0_pad[0x1000];
 } baselib_Unk12;
 
-typedef struct _baselib_Unk13
-{
-    u8 x0_pad[0xD8];
-} baselib_Unk13;
-
 STRUCT_PLACEHOLDER(baselib, 14)
 STRUCT_PLACEHOLDER(baselib, 15)
 
-typedef void (*baselib_UnkCallback1)(baselib_Unk14 *, s32, baselib_Unk15);
+// possibly OSSwitchThreadCallback
+typedef void (*baselib_UnkCallback1)(baselib_Unk14 *, s32, baselib_Unk15 *);
 
 typedef struct _baselib_UnkCallbackContainer1
 {
     u32 x0_flags;
     baselib_UnkCallback1 x4_callback;
-    u32 x8_flags;
-    baselib_UnkCallback1 xC_callback;
-    u32 x10_flags;
-    baselib_UnkCallback1 x14_callback;
-    u32 x18_flags;
-    baselib_UnkCallback1 x1C_callback;
 } baselib_UnkCallbackContainer1;
 
 typedef struct _baselib_Unk16
 {
     u32 x0_data[0x1C0];
 } baselib_Unk16;
+
+struct _baselib_Unk17;
+
+typedef void (*baselib_UnkCallback2)(struct _baselib_Unk17 *);
+
+typedef struct _baselib_Unk17
+{
+    struct _baselib_Unk17 *x0_ptr;
+    u8 x4_pad[0x4 - 0x0];
+    baselib_UnkCallback2 x8_callback;
+} baselib_Unk17;
+
+typedef struct _baselib_Unk18
+{
+    void (*callbacks[7])(char *, ...);
+    char x1C_asciz[48];
+} baselib_Unk18;
 
 /* 004D44E0 */ extern HSD_JObj *lbl_804D7900;
 /* 004D44DC */ extern HSD_JObj *lbl_804D78FC;
@@ -75,15 +85,25 @@ typedef struct _baselib_Unk16
 /* 004D44AC */ extern u32 lbl_804D78CC;
 /* 004D44A8 */ extern s32 lbl_804D78C8;
 /* 004D2F48 */ extern u16 lbl_804D6368[2];
+/* 004D2F14 */ extern char lbl_804D6334[0x6];
+/* 004D2F10 */ extern char *lbl_804D6330;
+/* 004D2F0C */ extern char *lbl_804D632C;
+/* 004D2F08 */ extern char *lbl_804D6328;
+/* 004D2F04 */ extern char *lbl_804D6324;
+/* 004D2F00 */ extern char *lbl_804D6320;
+/* 004D2EFC */ extern char *lbl_804D631C;
 /* 004CDB70 */ extern HSD_ObjAllocData lbl_804D0F90;
 /* 004CD4E8 */ extern u32 *lbl_804D0908[146];
 /* 004CD4C8 */ extern HSD_Obj *lbl_804D08E8[8];
-/* 004CD4C8 */ extern HSD_Obj *lbl_804D08E8[8];
 /* 004CC4C8 */ extern baselib_Unk12 lbl_804CF8E8;
+/* 004CC3F0 */ extern OSResetSW_Unk1 lbl_804CF810;
+/* 004CC3C8 */ extern char lbl_804CF7E8[0x28];
 /* 00408B50 */ extern cobj_Unk1 lbl_8040BF70;
-/* 004076E0 */ extern baselib_UnkCallbackContainer1 lbl_8040AB00;
+/* 00408AA4 */ extern baselib_Unk18 lbl_8040BEC4;
+/* 00408A4C */ extern char lbl_8040BE6C[0x10];
+/* 004076E0 */ extern baselib_UnkCallbackContainer1 lbl_8040AB00[12];
 /* 00405498 */ extern baselib_Unk16 lbl_804088B8;
-/* 00405478 */ extern baselib_UnkCallbackContainer1 lbl_80408898;
+/* 00405478 */ extern baselib_UnkCallbackContainer1 lbl_80408898[4];
 /* 0039C2AC */ extern UnkGeneratorStruct *func_8039F6CC(UnkGeneratorStruct *);
 /* 0039C23C */ extern unk_t lbl_8039F65C(s32);
 /* 0039BC3C */ extern UnkGeneratorStruct *func_8039F05C();
@@ -125,10 +145,18 @@ typedef struct _baselib_Unk16
 /* 003943F4 */ extern OSThread_Unk3 lbl_80397814(OSThread_Unk4 *);
 /* 003941B4 */ extern void func_803975D4();
 /* 00394100 */ extern void func_80397520();
+/* 00394100 */ extern void func_80397520(baselib_Unk17 *);
+/* 00393F54 */ extern void lbl_80397374(char *, ...);
+/* 00393CF0 */ extern void lbl_80397110(char *, ...);
+/* 00393CEC */ extern void lbl_8039710C(char *, ...);
+/* 00393A20 */ extern void lbl_80396E40(s32 arg0);
+/* 00393858 */ extern BOOL func_80396C78(OSResetSW_Unk1 *arg0);
+/* 00392130 */ extern s32 func_80395550(OSResetSW_Unk1 *);
 /* 00391248 */ extern void func_80394668(s32, s32);
 /* 00391124 */ extern void func_80394544(s32, s32, s32, s32, s32, s32, s32, s32);
+/* 00391014 */ extern void func_80394434(char *, ...);
 /* 00390EF4 */ extern void func_80394314();
-/* 0039090C */ extern void func_80393D2C(BOOL, baselib_Unk13 *, baselib_UnkCallbackContainer1 *);
+/* 0039090C */ extern void func_80393D2C(BOOL, OSResetSW_Unk1 *, baselib_UnkCallbackContainer1 *);
 /* 0038F61C */ extern baselib_Unk11 lbl_80392A3C;
 /* 0038F5E8 */ extern void func_80392A08(u32, BOOL, BOOL);
 /* 0038F514 */ extern void func_80392934();
