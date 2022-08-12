@@ -25,7 +25,7 @@ typedef struct ftMewtwoSpecialS {
 typedef union ftMewtwoStateVars {
 
 	ftMewtwoSpecialS SpecialS;
-	ftMewtwoSpecialHi specialHi;
+	ftMewtwoSpecialHi SpecialHi;
 
 } ftMewtwoStateVars;
 

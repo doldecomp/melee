@@ -20,8 +20,8 @@ BOOL func_80081298(HSD_GObj* gobj) {
             return TRUE;
         }
         other_fighter = other_gobj->user_data;
-        func_8003FFDC(other_fighter->xC_playerID, other_fighter->x221F_flag.bits.b4, fighter->xC_playerID, fighter->x221F_flag.bits.b4, other_fighter->commonVars[0].cliffCommon.ledgeID);
-        fighter->x213C = other_fighter->commonVars[0].cliffCommon.ledgeID;
+        func_8003FFDC(other_fighter->xC_playerID, other_fighter->x221F_flag.bits.b4, fighter->xC_playerID, fighter->x221F_flag.bits.b4, other_fighter->commonVars[0].CliffCommon.ledgeID);
+        fighter->x213C = other_fighter->commonVars[0].CliffCommon.ledgeID;
         return FALSE;
     }
     return FALSE;
@@ -58,9 +58,9 @@ void func_80081370(HSD_GObj* gobj) {
     func_8007E2FC(gobj);
     fighter->x221D_flag.bits.b7 = 1;
     if (fighter->x2C_facing_direction > 0.0f) {
-        fighter->commonVars[0].cliffCommon.ledgeID = fighter->x6F0_collData.x44;
+        fighter->commonVars[0].CliffCommon.ledgeID = fighter->x6F0_collData.x44;
     } else {
-        fighter->commonVars[0].cliffCommon.ledgeID = fighter->x6F0_collData.x40;
+        fighter->commonVars[0].CliffCommon.ledgeID = fighter->x6F0_collData.x40;
     }
     func_80081544(gobj);
     func_800881D8(fighter, fighter->x10C_ftData->x4C_collisionData->x28, 0x7F, 0x40);
@@ -68,11 +68,11 @@ void func_80081370(HSD_GObj* gobj) {
     func_8007EBAC(fighter, 0xC, 0);
 
     if (fighter->x2C_facing_direction > 0.0f) {
-        func_80053ECC(fighter->commonVars[0].cliffCommon.ledgeID, unkParam.x10);
+        func_80053ECC(fighter->commonVars[0].CliffCommon.ledgeID, unkParam.x10);
     }
     else
     {
-        func_80053DA4(fighter->commonVars[0].cliffCommon.ledgeID, unkParam.x10);
+        func_80053DA4(fighter->commonVars[0].CliffCommon.ledgeID, unkParam.x10);
     }
     efAsync_Spawn(gobj, (void*) ((u32) gobj->user_data + 0x60C), 2, 0x41C, 0, &unkParam.x10);
     func_80088148(fighter, 4, 0x7F, 0x40);
@@ -94,11 +94,11 @@ void func_80081544(HSD_GObj* gobj) {
     s32 dummy2[1];
 
     Fighter* fighter = gobj->user_data;
-    if (func_80054ED8(fighter->commonVars[0].cliffCommon.ledgeID) != 0) {
+    if (func_80054ED8(fighter->commonVars[0].CliffCommon.ledgeID) != 0) {
         if (fighter->x2C_facing_direction > 0.0f) {
-            func_80053ECC(fighter->commonVars[0].cliffCommon.ledgeID, sp10);
+            func_80053ECC(fighter->commonVars[0].CliffCommon.ledgeID, sp10);
         } else {
-            func_80053DA4(fighter->commonVars[0].cliffCommon.ledgeID, sp10);
+            func_80053DA4(fighter->commonVars[0].CliffCommon.ledgeID, sp10);
         }
         fighter->xB0_pos.x = (f32) ((fighter->x68C_transNPos.z * fighter->x2C_facing_direction) + sp10[0]);
         fighter->xB0_pos.y = (f32) (sp10[1] + fighter->x68C_transNPos.y);
@@ -126,7 +126,7 @@ void func_80081644(HSD_GObj* gobj)
     func_800761C8();
     if ((s32) fighter->xE0_ground_or_air == GA_Air)
     {
-        func_8005811C(&fighter->x6F0_collData, fighter->commonVars[0].cliffCommon.ledgeID);
+        func_8005811C(&fighter->x6F0_collData, fighter->commonVars[0].CliffCommon.ledgeID);
         fighter->x890_cameraBox->xC_flag.bits.b0 = 1;
     }
 }

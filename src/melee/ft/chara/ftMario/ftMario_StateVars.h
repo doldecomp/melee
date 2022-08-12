@@ -21,8 +21,8 @@ typedef struct ftMarioSpecialLw {
 
 typedef union ftMarioStateVars {
 
-	ftMarioSpecialS specialS;
-	ftMarioSpecialLw specialLw;
+	ftMarioSpecialS SpecialS;
+	ftMarioSpecialLw SpecialLw;
 
 } ftMarioStateVars;
 

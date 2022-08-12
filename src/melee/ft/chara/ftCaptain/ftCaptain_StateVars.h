@@ -12,7 +12,7 @@ typedef struct ftCaptainSpecialS {
 
 typedef union ftCaptainStateVars {
 
-	ftCaptainSpecialS specialS;
+	ftCaptainSpecialS SpecialS;
 
 } ftCaptainStateVars;
 
