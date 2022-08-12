@@ -1,4 +1,4 @@
-#include "ftpikachu.h"
+#include <ftpikachu.h>
 
 void ftPikachu_SpecialN_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

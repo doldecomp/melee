@@ -1,7 +1,7 @@
-#include "sysdolphin/baselib/dobj.h"
+#include <sysdolphin/baselib/dobj.h>
 
-#include "sysdolphin/baselib/aobj.h"
-#include "sysdolphin/baselib/pobj.h"
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/pobj.h>
 
 static void DObjInfoInit(void);
 HSD_DObjInfo hsdDObj = { DObjInfoInit };

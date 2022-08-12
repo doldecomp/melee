@@ -1,6 +1,6 @@
 #include <dolphin/gx/GXInit.h>
 #include <dolphin/base/PPCArch.h>
-#include <dolphin/gx/gxprivate.h>
+#include <dolphin/gx/__gx.h>
 #include <dolphin/gx/GXFifo.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/GXAttr.h>
@@ -16,6 +16,6 @@
 /* 004D2788 */ extern GXContexts __GXContexts;
 /* 004A42A8 */ extern const GXContext *__GXContext;
 /* 00337B20 */ extern void __GXInitGX();
-/* 0033733C */ extern GXFifoObj *GXInit(GXFifoObj *fifo, u32 size);
+/* 00337360 */ extern GXFifoObj *GXInit(GXFifoObj *fifo, u32 size);
 /* 0033733C */ extern void lbl_8033A75C();
 /* 003372C0 */ extern void *__GXDefaultTexRegionCallback(GXTexRegionCallback);

@@ -1,4 +1,4 @@
-#include "ftganon.h"
+#include <ftganon.h>
 
 void ftGanon_OnDeath(HSD_GObj* gobj)
 {

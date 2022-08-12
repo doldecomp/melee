@@ -5,10 +5,10 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
-#include "melee/ft/fighter.h"
-#include "melee/ft/ftcommon.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
 
 typedef enum ftMarioAction {
 

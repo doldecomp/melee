@@ -1,4 +1,4 @@
-#include "dolphin/amcstubs/AmcExi2Stubs.h"
+#include <dolphin/amcstubs/AmcExi2Stubs.h>
 
 void EXI2_Init() {
     return;

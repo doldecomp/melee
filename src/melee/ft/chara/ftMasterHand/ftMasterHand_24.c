@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80154C78 151858
 // https://decomp.me/scratch/j7foW

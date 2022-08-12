@@ -1,4 +1,4 @@
-#include "ftzakoboy.h"
+#include <ftzakoboy.h>
 
 
 void ftZakoBoy_OnDeath(HSD_GObj* gobj)

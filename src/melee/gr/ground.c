@@ -1,4 +1,4 @@
-#include "ground.h"
+#include <ground.h>
 
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
@@ -8,6 +8,7 @@
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>

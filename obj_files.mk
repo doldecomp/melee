@@ -17,11 +17,11 @@ TEXT_O_FILES :=\
 	$(BUILD_DIR)/asm/melee/lb/lbcollision.s.o\
 	$(BUILD_DIR)/src/melee/lb/lblanguage.c.o\
 	$(BUILD_DIR)/src/melee/lb/lbtime.c.o\
-	$(BUILD_DIR)/src/melee/lb/code_8000B074.c.o\
-	$(BUILD_DIR)/asm/melee/lb/code_8000CE50.s.o\
+	$(BUILD_DIR)/src/melee/lb/lbunknown_001.c.o\
+	$(BUILD_DIR)/asm/melee/lb/lbunknown_002.s.o\
 	$(BUILD_DIR)/src/melee/lb/lbvector.c.o\
 	$(BUILD_DIR)/asm/melee/lb/lbshadow.s.o\
-	$(BUILD_DIR)/asm/melee/lb/code_8000F9F8.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbunknown_003.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbarq.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbmemory.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbheap.s.o\
@@ -30,8 +30,8 @@ TEXT_O_FILES :=\
 	$(BUILD_DIR)/src/melee/lb/lbarchive.c.o\
 	$(BUILD_DIR)/asm/melee/lb/lbarchive.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbdvd.s.o\
-	$(BUILD_DIR)/asm/melee/lb/code_80019230.s.o\
-	$(BUILD_DIR)/asm/melee/lb/code_80019880.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbunknown_004.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbunknown_005.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbsnap.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbgx.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbanim.s.o\
@@ -618,74 +618,181 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tobj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/state.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/tev.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/tev.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/mobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/mobj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/aobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/aobj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/lobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/lobj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/cobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/cobj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/fobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fobj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/pobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/pobj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/jobj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/displayfunc.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/displayfunc.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/initialize.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/video.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/controller.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/controller.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/rumble.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/spline.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/mtx.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/util.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/objalloc.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/objalloc.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/robj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/robj.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/id.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/wobj.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fog.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/perf.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/list.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/object.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/quatlib.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/memory.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/shadow.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/shadow.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/archive.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/random.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/bytecode.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/class.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/class.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/hash.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/texp.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/texp.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/texpdag.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/leak.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/debug.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/synth.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/AXDriver.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/devcom.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjproc.s.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjplink.s.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjgxlink.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjgxlink.s.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjobject.c.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjuserdata.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobj.s.o\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/code_80391580.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_002.c.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_002.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/psdisp.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisp.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/psdisptev.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psdisptev.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/psappsrt.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/psappsrt.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/sobjlib.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/sislib.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sislib.s.o\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/code_803A949C.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_001.c.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_001.s.o\

@@ -1,4 +1,4 @@
-#include "ftgamewatch.h"
+#include <ftgamewatch.h>
 
 extern void func_800D6B00(HSD_GObj*, s32);
 

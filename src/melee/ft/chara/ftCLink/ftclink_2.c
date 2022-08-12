@@ -1,4 +1,4 @@
-#include "ftclink.h"
+#include <ftclink.h>
 
 extern void func_800EAF58(HSD_GObj*);
 

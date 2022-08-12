@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ftdonkey.h>
 
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighterObj) {
     Fighter* fighter = getFighter(fighterObj);

@@ -1,7 +1,7 @@
 #ifndef _grtlib_h_
 #define _grtlib_h_
 
-#include "stage.h"
+#include <stage.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

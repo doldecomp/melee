@@ -3,7 +3,7 @@
 #ifndef DOLPHIN_GX_GXLIGHT_H
 #define DOLPHIN_GX_GXLIGHT_H
 
-#include <dolphin/gx/gxprivate.h>
+#include <dolphin/gx/__gx.h>
 
 typedef enum _GXAttnFn
 {

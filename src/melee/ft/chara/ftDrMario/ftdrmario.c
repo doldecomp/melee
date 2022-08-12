@@ -1,4 +1,4 @@
-#include "ftdrmario.h"
+#include <ftdrmario.h>
 
 void ftDrMario_OnDeath(HSD_GObj* gobj)
 {

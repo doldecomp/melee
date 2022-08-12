@@ -89,7 +89,7 @@ lbl_8033B8B0:
 /* 8033B8C0 003384A0  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/DSit3 // 2700 (0%)
-# decl gxprivate.h
+# decl __gx.h
 .global GXInitFifoBase
 GXInitFifoBase:
 /* 8033B8C4 003384A4  7C 08 02 A6 */	mflr r0
@@ -161,7 +161,7 @@ GXInitFifoLimits:
 /* 8033B9A8 00338588  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/NxAWt // 120 (98.24%)
-# decl gxprivate.h
+# decl __gx.h
 .global GXSetCPUFifo
 GXSetCPUFifo:
 /* 8033B9AC 0033858C  7C 08 02 A6 */	mflr r0
@@ -237,7 +237,7 @@ lbl_8033BA98:
 /* 8033BAB8 00338698  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/dvPQL // 9400 (0%)
-# decl gxprivate.h
+# decl __gx.h
 .global GXSetGPFifo
 GXSetGPFifo:
 /* 8033BABC 0033869C  7C 08 02 A6 */	mflr r0
@@ -338,7 +338,7 @@ lbl_8033BC04:
 /* 8033BC30 00338810  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/BIDoG // 0 (100%)
-# decl gxprivate.h
+# decl __gx.h
 .global __GXFifoInit
 __GXFifoInit:
 /* 8033BC34 00338814  7C 08 02 A6 */	mflr r0
@@ -460,22 +460,22 @@ __GXWriteFifoIntReset:
 .section .sbss
     .balign 8
 
-# decl gxprivate.h
+# decl __gx.h
 .global lbl_804D72F0
 lbl_804D72F0:
 	.skip 0x4
 
-# decl gxprivate.h
+# decl __gx.h
 .global lbl_804D72F4
 lbl_804D72F4:
 	.skip 0x4
 
-# decl gxprivate.h
+# decl __gx.h
 .global lbl_804D72F8
 lbl_804D72F8:
 	.skip 0x4
 
-# decl gxprivate.h
+# decl __gx.h
 .global lbl_804D72FC
 lbl_804D72FC:
 	.skip 0x4

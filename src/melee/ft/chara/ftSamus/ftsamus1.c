@@ -1,4 +1,4 @@
-#include "ftsamus.h"
+#include <ftsamus.h>
 
 void ftSamus_OnDeath(HSD_GObj* fighterObj) {
     Fighter* fighter = fighterObj->user_data;

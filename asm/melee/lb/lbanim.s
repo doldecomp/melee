@@ -2,6 +2,7 @@
 
 .section .text
 
+# https://decomp.me/scratch/uF4oA
 local_8001E560:
 /* 8001E560 0001B140  7C 08 02 A6 */	mflr r0
 /* 8001E564 0001B144  90 01 00 04 */	stw r0, 4(r1)
@@ -52,6 +53,7 @@ lbl_8001E5E4:
 /* 8001E608 0001B1E8  4E 80 00 20 */	blr 
 
 
+# https://decomp.me/scratch/JF7uV
 local_8001E60C:
 /* 8001E60C 0001B1EC  7C 08 02 A6 */	mflr r0
 /* 8001E610 0001B1F0  90 01 00 04 */	stw r0, 4(r1)
@@ -110,6 +112,7 @@ lbl_8001E6B0:
 /* 8001E6D0 0001B2B0  7C 08 03 A6 */	mtlr r0
 /* 8001E6D4 0001B2B4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/FEOFs
 .global func_8001E6D8
 func_8001E6D8:
 /* 8001E6D8 0001B2B8  7C 08 02 A6 */	mflr r0
@@ -188,6 +191,7 @@ lbl_8001E7D4:
 /* 8001E7E0 0001B3C0  7C 08 03 A6 */	mtlr r0
 /* 8001E7E4 0001B3C4  4E 80 00 20 */	blr
 
+# https://decomp.me/scratch/1cBn6
 .global func_8001E7E8
 func_8001E7E8:
 /* 8001E7E8 0001B3C8  7C 08 02 A6 */	mflr r0

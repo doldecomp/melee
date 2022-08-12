@@ -1135,7 +1135,7 @@ __GXContext:
 .section .sdata
     .balign 8
 
-# decl gxprivate.h
+# decl __gx.h
 .global __GXContexts
 __GXContexts:
     .4byte __GXContext

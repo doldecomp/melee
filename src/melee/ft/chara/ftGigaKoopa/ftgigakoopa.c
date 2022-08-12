@@ -1,5 +1,5 @@
-#include "melee/ft/chara/ftKoopa/ftkoopa.h"
-#include "ftgigakoopa.h"
+#include <melee/ft/chara/ftKoopa/ftkoopa.h>
+#include <ftgigakoopa.h>
 
 #include <melee/it/itkind.h>
 

@@ -1,7 +1,7 @@
-#include "sysdolphin/baselib/class.h"
+#include <sysdolphin/baselib/class.h>
 
 #include <dolphin/os/os.h>
-#include "sysdolphin/baselib/memory.h"
+#include <sysdolphin/baselib/memory.h>
 
 extern void func_803822C0();
 

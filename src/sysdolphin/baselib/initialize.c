@@ -1,20 +1,20 @@
-#include "sysdolphin/baselib/initialize.h"
+#include <sysdolphin/baselib/initialize.h>
 
 #include <stdarg.h>
 
-#include "dolphin/os/os.h"
-#include "dolphin/os/OSArena.h"
-#include "dolphin/os/OSMemory.h"
-#include "sysdolphin/baselib/aobj.h"
-#include "sysdolphin/baselib/displayfunc.h"
-#include "sysdolphin/baselib/id.h"
-#include "sysdolphin/baselib/leak.h"
-#include "sysdolphin/baselib/mtx.h"
-#include "sysdolphin/baselib/objalloc.h"
-#include "sysdolphin/baselib/random.h"
-#include "sysdolphin/baselib/robj.h"
-#include "sysdolphin/baselib/shadow.h"
-#include "sysdolphin/baselib/tev.h"
+#include <dolphin/os/os.h>
+#include <dolphin/os/OSArena.h>
+#include <dolphin/os/OSMemory.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/id.h>
+#include <sysdolphin/baselib/leak.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/objalloc.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/robj.h>
+#include <sysdolphin/baselib/shadow.h>
+#include <sysdolphin/baselib/tev.h>
 #include <dolphin/gx/GXLight.h>
 
 extern OSHeapHandle __OSCurrHeap;

@@ -1,4 +1,4 @@
-#include "ftmewtwo.h"
+#include <ftmewtwo.h>
 #include <melee/it/itkind.h>
 
 void ftMewtwo_OnDeath(HSD_GObj* gobj) {

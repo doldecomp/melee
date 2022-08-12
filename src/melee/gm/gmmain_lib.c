@@ -1,5 +1,5 @@
-#include "gmmain_lib.h"
-#include "melee/lb/lbtime.h"
+#include <gmmain_lib.h>
+#include <melee/lb/lbtime.h>
 
 void* func_8015CC34(void) {
     return &lbl_804D3EE0->x1850;

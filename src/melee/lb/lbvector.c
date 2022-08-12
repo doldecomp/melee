@@ -1,4 +1,4 @@
-#include "lbvector.h"
+#include <melee/lb/lbvector.h>
 #include <math.h>
 
 #define PI 3.1415926535897931

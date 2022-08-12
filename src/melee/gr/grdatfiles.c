@@ -1,6 +1,7 @@
-#include "grdatfiles.h"
+#include <grdatfiles.h>
 
 #include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/debug.h>
 
 extern StageInfo stage_info;
 

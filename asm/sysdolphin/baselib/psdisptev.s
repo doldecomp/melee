@@ -2,8 +2,9 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_803A3920
-func_803A3920:
+# https://decomp.me/scratch/F75mE // 0 (100%)
+.global psSetupTevCommon
+psSetupTevCommon:
 /* 803A3920 003A0500  7C 08 02 A6 */	mflr r0
 /* 803A3924 003A0504  38 60 00 00 */	li r3, 0
 /* 803A3928 003A0508  90 01 00 04 */	stw r0, 4(r1)
@@ -81,14 +82,16 @@ func_803A3920:
 /* 803A3A48 003A0628  7C 08 03 A6 */	mtlr r0
 /* 803A3A4C 003A062C  4E 80 00 20 */	blr 
 
-.global func_803A3A50
-func_803A3A50:
+# https://decomp.me/scratch/nBWOl // 0 (100%)
+.global psSetupTevInvalidState
+psSetupTevInvalidState:
 /* 803A3A50 003A0630  38 00 FF FF */	li r0, -1
 /* 803A3A54 003A0634  90 0D C2 B0 */	stw r0, lbl_804D7950@sda21(r13)
 /* 803A3A58 003A0638  4E 80 00 20 */	blr 
 
-.global func_803A3A5C
-func_803A3A5C:
+# https://decomp.me/scratch/RAhGZ
+.global psSetupTev
+psSetupTev:
 /* 803A3A5C 003A063C  7C 08 02 A6 */	mflr r0
 /* 803A3A60 003A0640  3C 80 80 10 */	lis r4, 0x80100480@ha
 /* 803A3A64 003A0644  90 01 00 04 */	stw r0, 4(r1)

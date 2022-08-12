@@ -1,4 +1,4 @@
-#include "ftgamewatch.h"
+#include <ftgamewatch.h>
 
 void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter);
 extern void func_8028FAF4(HSD_GObj*, Vec3*);
