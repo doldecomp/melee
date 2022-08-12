@@ -7,7 +7,7 @@ void ftMewtwo_OnDeath(HSD_GObj* gobj) {
     ft->sa.mewtwo.x222C_disableGObj = NULL;
     ft->sa.mewtwo.x2230 = 0;
     ft->sa.mewtwo.x2234_shadowBallCharge = 0;
-    ft->sa.mewtwo.x2238 = 0;
+    ft->sa.mewtwo.x2238_shadowBallGObj = NULL;
     ft->sa.mewtwo.x223C_isConfusionBoost = FALSE;
 }
 
