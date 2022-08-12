@@ -1,5 +1,5 @@
 #include <dolphin/types.h>
-#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/controller.h> // hehe
 #include <sysdolphin/baselib/initialize.h>
 #include <dolphin/gx/GXInit.h>
 

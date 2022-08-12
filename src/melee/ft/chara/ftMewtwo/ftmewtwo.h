@@ -1,13 +1,12 @@
 #ifndef _ftMewTwo_h_
 #define _ftMewTwo_h_
 
-#include <global.h>
-
-#include <dolphin/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/it/item.h>
+#include <melee/it/itkind.h>
 
 typedef enum ftMewtwoAction {
 

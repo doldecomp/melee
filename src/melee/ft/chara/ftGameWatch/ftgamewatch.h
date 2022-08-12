@@ -16,7 +16,10 @@
 #define GAMEWATCH_PANIC_MID 2
 #define GAMEWATCH_PANIC_FULL 3
 
-// Mr. Game & Watch Action State Flags //
+// Mr. Game & Watch Action State Change Flags //
+
+// Chef (SpecialN/SpecialAirN) //
+#define FTGAMEWATCH_SPECIALN_COLL_FLAG FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MODEL_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 // Judgement (SpecialS/SpecialAirS) //
 #define FTGAMEWATCH_SPECIALS_COLL_FLAG FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MODEL_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
@@ -350,5 +353,22 @@ void ftGameWatch_SpecialLwShoot_GroundToAir(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirLwShoot_AirToGround(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* fighter_gobj);
+
+// Neutral Special - Chef (SpecialN/) //
+void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirN_Anim(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialN_IASA(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirN_IASA(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialN_Phys(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirN_Phys(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialN_Coll(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirN_Coll(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame);
+void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame);
 
 #endif
