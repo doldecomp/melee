@@ -1,12 +1,4 @@
-#include <ftmewtwo.h>
-
-#include <melee/ft/ftcommon.h>
-#include <melee/lb/lbvector.h>
-
-#include <melee/ft/fighter.h>
-#include <melee/it/item.h>
-#include <melee/it/itkind.h>
-#include <common_structs.h>
+#include "ftmewtwo.h"
 
 #define HALF_PI32 1.5707963705062866f
 

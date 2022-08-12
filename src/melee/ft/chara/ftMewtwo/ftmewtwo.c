@@ -4,11 +4,11 @@
 void ftMewtwo_OnDeath(HSD_GObj* gobj) {
     Fighter* ft = (Fighter*)gobj->user_data;
     func_80074A4C(gobj, 0, 0);
-    ft->sa.mewtwo.x222C = 0;
+    ft->sa.mewtwo.x222C_disableGObj = NULL;
     ft->sa.mewtwo.x2230 = 0;
     ft->sa.mewtwo.x2234_shadowBallCharge = 0;
-    ft->sa.mewtwo.x2238 = 0;
-    ft->sa.mewtwo.x223C = 0;
+    ft->sa.mewtwo.x2238_shadowBallGObj = NULL;
+    ft->sa.mewtwo.x223C_isConfusionBoost = FALSE;
 }
 
 void ftMewtwo_OnLoad(HSD_GObj* fighterObj) {
@@ -27,13 +27,13 @@ void ftMewtwo_OnLoad(HSD_GObj* fighterObj) {
 
 void ftMewTwo_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {}
 
-void ftMewTwo_80144EE4(HSD_GObj* fighterObj) {
-    func_801461A8(fighterObj);
+void ftMewtwo_OnDeath2(HSD_GObj* fighterObj) {
+    ftMewtwo_SpecialLw_RemoveDisable(fighterObj);
     func_80146E30(fighterObj);
 }
 
-void ftMewTwo_80144F18(HSD_GObj* fighterObj) {
-    func_801461A8(fighterObj);
+void ftMewtwo_OnTakeDamage(HSD_GObj* fighterObj) {
+    ftMewtwo_SpecialLw_RemoveDisable(fighterObj);
     func_80146ED0(fighterObj);
 }
 
