@@ -734,8 +734,8 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item*
 }
 
 // 0x8026B9A8 //
-// https://decomp.me/scratch/yyy9T //
-void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2) // Transfer item on character swap - used for Zelda <-> Sheik //
+// https://decomp.me/scratch/yyy9T // Transfer item on character transformation (Zelda <-> Sheik)
+void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2) 
 {
     Vec3 sp1C;
     Item* item_data; // r29 //
@@ -753,7 +753,39 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2) // Transfer item on 
     sp1C.x = 0.0f;
     func_8027429C(item_gobj, &sp1C);
     func_802742F4(item_gobj, arg1, arg2);
-    What(item_gobj, itemStateDesc, item_data, item_jobj2);
+    {
+        struct ItemStateDesc* temp_stateDesc;
+        HSD_JObj* item_jobj; // r30 //
+
+        item_jobj = NULL;
+        item_data->xD54_throwNum -= 1;
+        item_data->xDC8_word.flags.x14 = 0;
+        if ((s32)item_data->x28_item_anim_index != -1)
+        {
+            item_data->xD0_itemStateDesc = itemStateDesc;
+            if (item_data->xD0_itemStateDesc != NULL)
+            {
+                func_8036F6B4(item_jobj2);
+                if (item_data->xC8_joint != NULL)
+                {
+                    item_jobj = (item_jobj2 == NULL) ? NULL : item_jobj2->child;
+
+                    func_8000B804(item_jobj, item_data->xC8_joint->child);
+                }
+                temp_stateDesc = item_data->xD0_itemStateDesc;
+                HSD_JObjAddAnimAll(item_jobj2, temp_stateDesc->x0_anim_joint, temp_stateDesc->x4_matanim_joint, temp_stateDesc->x8_parameters);
+                func_8000BA0C(item_jobj2, item_data->x5D0_animFrameSpeed);
+                HSD_JObjReqAnimAll(item_jobj2, 0.0f);
+                func_80268E40(item_data, itemStateDesc);
+            }
+            HSD_JObjAnimAll(item_jobj2);
+            func_80279BE0(item_gobj);
+            func_802799E4(item_gobj);
+            return;
+        }
+        func_8036F6B4(item_jobj2);
+        item_data->x52C_item_script = NULL;
+    }
 }
 
 // 0x8026BAE8 //
@@ -857,8 +889,8 @@ HSD_GObj* func_8026BC78(HSD_GObj* item_gobj) // Get item owner //
 }
 
 // 0x8026BC84 //
-// https://decomp.me/scratch/s3W5l //
-BOOL func_8026BC84(HSD_GObj* item_gobj) // Get item attack kind //
+// https://decomp.me/scratch/s3W5l // Get item attack kind //
+BOOL func_8026BC84(HSD_GObj* item_gobj) 
 {
     Item* item_data = item_gobj->user_data;
     return item_data->xD88_attackID;
