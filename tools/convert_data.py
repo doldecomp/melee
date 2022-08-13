@@ -1,10 +1,13 @@
 import re
 import struct
+from math import ceil
 from pathlib import Path
 from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 
+root = Path(__file__).parent.parent
+
 options = {
-    'input_file': r"../../melee/asm/sysdolphin/baselib/baselib_unknown_002.s",
+    'input_file': root / "asm/sysdolphin/baselib/baselib_unknown_002.s"
 }
 
 default_options = {
@@ -15,12 +18,12 @@ default_options = {
     # 'null': force zero to 'NULL'
     # 'float': force zero to '0.0'
 
-    'find_asciz': True,  # Attempt to find zero-terminated ASCII strings
+    'find_ascii': True,  # Attempt to find zero-terminated ASCII strings
     'find_f32': True,  # Attempt to find 4-byte floating-point
     'find_s32': True,  # Attempt to find negative 4-byte values
     'find_u32': True,  # Attempt to find positive 4-byte values
 
-    'min_asciz_len': 5,  # Minimum length for a byte array to be considered a string
+    'min_ascii_len': 5,  # Minimum length for a byte array to be considered a string
     's32_min_value': -1000,  # Lowest acceptable value for s32
     'u32_max_value': 1000,  # Highest acceptable value for u32
     'f32_max_abs_value': 1000,  # Biggest acceptable  value for f32
@@ -131,12 +134,8 @@ def is_valid_char(b: int) -> bool:
     return is_printable(b) or b == line_feed or b == 0
 
 
-def try_get_asciz(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
+def try_get_ascii(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     length = 0
-    trailing_zeros = 0
-
-    def get_alignment(i):
-        return i % 4
 
     if buffer[0] == 0:
         return None, buffer
@@ -146,42 +145,33 @@ def try_get_asciz(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytea
             return None, buffer
 
         if b == 0:
-            trailing_zeros += 1
+            break
         else:
             length += 1
 
-        if trailing_zeros > 0 and b != 0:
-            break
-        if trailing_zeros > 0 and get_alignment(length + trailing_zeros) == 0:
-            break
-
     instruction = 'ascii'
 
-    if length <= 0 or ((min_len := options.get('min_asciz_len')) and length < min_len):
+    if length <= 0 or ((min_len := options.get('min_ascii_len')) and length < min_len):
         return None, buffer
 
-    decode = buffer[:length].decode("ascii").replace('\n', '\\n')
+    decode = buffer[:length].decode("ascii").replace('\\', '\\\\').replace('\n', '\\n')
 
-    if trailing_zeros == 1:
-        length += 1
+    end = ceil(length / 4) * 4
+    alignment = end - length
+    if alignment == 1:
+        alignment = 0
         instruction = 'asciz'
 
     result = [f'{instruction} "{decode}"']
-
-    alignment = get_alignment(length)
-
-    end = length - alignment
-
     if alignment != 0:
         result.append('balign 4')
-        end += 4
 
     return result, buffer[end:]
 
 
 def take_buffer(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     try_funcs = [
-        try_get_asciz if options.get('find_asciz') else None,
+        try_get_ascii if options.get('find_ascii') else None,
         try_get_zero if options.get('zero') else None,
         try_get_f32 if options.get('find_f32') else None,
         try_get_s32 if options.get('find_s32') else None,
