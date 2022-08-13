@@ -18434,23 +18434,23 @@ jtbl_8040A7A8:
 	.4byte lbl_80392DC0
 	.4byte lbl_80392DC8
 	.4byte lbl_80392DD0
-    .ascii "usb exit and initialize.\n"
+    .asciz "usb exit and initialize.\n"
     .balign 4
-    .ascii "MCCInit NG.\n"
-    .4byte NULL
+    .asciz "MCCInit NG.\n"
+    .balign 4
     .asciz "mcc ready.\n"
-    .ascii "Initialize FIO-Connection ... "
+    .asciz "Initialize FIO-Connection ... "
     .balign 4
-    .ascii "Initialize MCC-Connection ... "
+    .asciz "Initialize MCC-Connection ... "
     .balign 4
-    .ascii "Open ... "
+    .asciz "Open ... "
     .balign 4
-    .ascii "receive event 'REBOOT'. Query server ..."
-    .4byte NULL
-    .ascii "Query NG.\n"
+    .asciz "receive event 'REBOOT'. Query server ..."
     .balign 4
-    .ascii "Query OK. This event is dumped.\n"
-    .4byte NULL
+    .asciz "Query NG.\n"
+    .balign 4
+    .asciz "Query OK. This event is dumped.\n"
+    .balign 4
 
 .global lbl_8040A8E0
 lbl_8040A8E0:
@@ -18501,7 +18501,7 @@ lbl_8040A93C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .ascii "MCCError: %d\n"
+    .asciz "MCCError: %d\n"
     .balign 4
     .4byte NULL
 
@@ -18970,97 +18970,97 @@ lbl_8040ADC4:
     .4byte lbl_804D62A8
     .4byte lbl_8040ADC4
 	.4byte lbl_80397108
-    .ascii "- GPR -----------------------------------------------\n"
+    .asciz "- GPR -----------------------------------------------\n"
     .balign 4
-    .ascii "R%02d=%08X(%11d) R%02d=%08X(%11d)\n"
+    .asciz "R%02d=%08X(%11d) R%02d=%08X(%11d)\n"
     .balign 4
-    .ascii "- FPR -----------------------------------------------\n"
+    .asciz "- FPR -----------------------------------------------\n"
     .balign 4
-    .ascii "R%02d=%08X:%08X (%e)\n"
+    .asciz "R%02d=%08X:%08X (%e)\n"
     .balign 4
-    .ascii "- PSF -----------------------------------------------\n"
+    .asciz "- PSF -----------------------------------------------\n"
     .balign 4
-    .ascii "R%02d=%08X:%08X (%e, %e)\n"
+    .asciz "R%02d=%08X:%08X (%e, %e)\n"
     .balign 4
-    .ascii "- MISC ----------------------------------------------\n"
+    .asciz "- MISC ----------------------------------------------\n"
     .balign 4
-    .ascii "SRR0=%08X SRR1=%08X\n"
-    .4byte NULL
-    .ascii "CR  =%08X LR  =%08X\n"
-    .4byte NULL
-    .ascii "CTR =%08X XER =%08X\n"
-    .4byte NULL
+    .asciz "SRR0=%08X SRR1=%08X\n"
+    .balign 4
+    .asciz "CR  =%08X LR  =%08X\n"
+    .balign 4
+    .asciz "CTR =%08X XER =%08X\n"
+    .balign 4
     .asciz "FPSCR=%08X\n"
-    .ascii "GQR%d=%08X GQR%d=%08X\n"
+    .asciz "GQR%d=%08X GQR%d=%08X\n"
     .balign 4
-    .ascii "- STACK ---------------------------------------------\n"
+    .asciz "- STACK ---------------------------------------------\n"
     .balign 4
     .asciz " Address:  Back Chain  LR Save\n"
-    .ascii "%08X:   %08X   %08X\n"
-    .4byte NULL
-    .ascii "- UNHANDLED EXCEPTION -------------------------------\n"
+    .asciz "%08X:   %08X   %08X\n"
     .balign 4
-    .ascii "DSISR=%08X DAR=%08X\n"
-    .4byte NULL
-    .ascii "ERROR %d: "
+    .asciz "- UNHANDLED EXCEPTION -------------------------------\n"
+    .balign 4
+    .asciz "DSISR=%08X DAR=%08X\n"
+    .balign 4
+    .asciz "ERROR %d: "
     .balign 4
     .asciz "(SYSTEM RESET)\n"
-    .ascii "(MACHINE CHECK)\n"
-    .4byte NULL
-    .ascii "Instruction at %08X (read from SRR0) attempted\nto access invalid address %08X (read from DAR)\n"
+    .asciz "(MACHINE CHECK)\n"
     .balign 4
-    .ascii "Store operation.\n"
+    .asciz "Instruction at %08X (read from SRR0) attempted\nto access invalid address %08X (read from DAR)\n"
     .balign 4
-    .ascii "Load operation.\n"
-    .4byte NULL
-    .ascii "No appropriate page entry or DBAT exist.\n"
+    .asciz "Store operation.\n"
     .balign 4
-    .ascii "Memory access is not permitted by the page or DBAT.\n"
-    .4byte NULL
+    .asciz "Load operation.\n"
+    .balign 4
+    .asciz "No appropriate page entry or DBAT exist.\n"
+    .balign 4
+    .asciz "Memory access is not permitted by the page or DBAT.\n"
+    .balign 4
     .asciz "DABR match occurs.\n"
-    .ascii "Attempted to fetch instruction from invalid address\n%08X (read from SRR0)\n"
+    .asciz "Attempted to fetch instruction from invalid address\n%08X (read from SRR0)\n"
     .balign 4
-    .ascii "No appropriate page entry or IBAT exist.\n"
+    .asciz "No appropriate page entry or IBAT exist.\n"
     .balign 4
-    .ascii "Illegal address.\n"
+    .asciz "Illegal address.\n"
     .balign 4
-    .ascii "Memory access is not permitted by the page or IBAT.\n"
-    .4byte NULL
-    .ascii "(EXTERNAL INTERRUPT)\n"
+    .asciz "Memory access is not permitted by the page or IBAT.\n"
     .balign 4
-    .ascii "(ALIGNMNET)\n"
-    .4byte NULL
-    .ascii "Instruction at %08X (read from SRR0) attempted\nto access unaligned address %08X (read from DAR)\n"
-    .4byte NULL
-    .ascii "(PROGRAM)\n"
+    .asciz "(EXTERNAL INTERRUPT)\n"
     .balign 4
-    .ascii "IEEE floating point enabled program exception"
+    .asciz "(ALIGNMNET)\n"
+    .balign 4
+    .asciz "Instruction at %08X (read from SRR0) attempted\nto access unaligned address %08X (read from DAR)\n"
+    .balign 4
+    .asciz "(PROGRAM)\n"
+    .balign 4
+    .asciz "IEEE floating point enabled program exception"
     .balign 4
     .asciz "Illegal instruction"
-    .ascii "Privileged instruction"
+    .asciz "Privileged instruction"
     .balign 4
-    .ascii "Trap program exception"
+    .asciz "Trap program exception"
     .balign 4
-    .ascii "Unknown type of program exception"
+    .asciz "Unknown type of program exception"
     .balign 4
-    .ascii "%s %s %08X (read from SRR0)\n"
-    .4byte NULL
-    .ascii "(FLOATING POINT)\n"
+    .asciz "%s %s %08X (read from SRR0)\n"
     .balign 4
-    .ascii "(DECREMENTER)\n"
+    .asciz "(FLOATING POINT)\n"
     .balign 4
-    .ascii "(SYSTEM CALL)\n"
+    .asciz "(DECREMENTER)\n"
     .balign 4
-    .ascii "(TRACE)\n"
-    .4byte NULL
-    .ascii "(PERFORMANCE MONITOR)\n"
+    .asciz "(SYSTEM CALL)\n"
     .balign 4
-    .ascii "(BREAKPOINT)\n"
+    .asciz "(TRACE)\n"
+    .balign 4
+    .asciz "(PERFORMANCE MONITOR)\n"
+    .balign 4
+    .asciz "(BREAKPOINT)\n"
     .balign 4
     .asciz "(SYSTEM INTERRPUT)\n"
-    .ascii "(THERMAL INTERRPUT)\n"
-    .4byte NULL
-    .ascii "(UNKNOWN)\n"
+    .asciz "(THERMAL INTERRPUT)\n"
+    .balign 4
+    .asciz "(UNKNOWN)\n"
     .balign 4
 
 .global jtbl_8040B870
@@ -19117,47 +19117,47 @@ jtbl_8040B914:
 
 .global lbl_8040B938
 lbl_8040B938:
-    .ascii "MOVE CURSOR UP        (UP)"
+    .asciz "MOVE CURSOR UP        (UP)"
     .balign 4
 
 .global lbl_8040B954
 lbl_8040B954:
-    .ascii "MOVE CURSOR DOWN    (DOWN)"
+    .asciz "MOVE CURSOR DOWN    (DOWN)"
     .balign 4
 
 .global lbl_8040B970
 lbl_8040B970:
-    .ascii "MOVE CURSOR LEFT    (LEFT)"
+    .asciz "MOVE CURSOR LEFT    (LEFT)"
     .balign 4
 
 .global lbl_8040B98C
 lbl_8040B98C:
-    .ascii "MOVE CURSOR RIGHT  (RIGHT)"
+    .asciz "MOVE CURSOR RIGHT  (RIGHT)"
     .balign 4
 
 .global lbl_8040B9A8
 lbl_8040B9A8:
-    .ascii "MEM DUMP AT CURSOR     (A)"
+    .asciz "MEM DUMP AT CURSOR     (A)"
     .balign 4
 
 .global lbl_8040B9C4
 lbl_8040B9C4:
-    .ascii "MEM DUMP               (X)"
+    .asciz "MEM DUMP               (X)"
     .balign 4
 
 .global lbl_8040B9E0
 lbl_8040B9E0:
-    .ascii "DUMP CPU CONTEXT          "
+    .asciz "DUMP CPU CONTEXT          "
     .balign 4
 
 .global lbl_8040B9FC
 lbl_8040B9FC:
-    .ascii "SPR                       "
+    .asciz "SPR                       "
     .balign 4
 
 .global lbl_8040BA18
 lbl_8040BA18:
-    .ascii "QUIT                      "
+    .asciz "QUIT                      "
     .balign 4
 
 .global lbl_8040BA34
@@ -19184,17 +19184,17 @@ lbl_8040BA5C:
 
 .global lbl_8040BA74
 lbl_8040BA74:
-    .ascii "+- MEMORY DUMP ------------------------------+"
+    .asciz "+- MEMORY DUMP ------------------------------+"
     .balign 4
 
 .global lbl_8040BAA4
 lbl_8040BAA4:
-    .ascii "|%08X=%08X:%08X:%08X:%08X|"
+    .asciz "|%08X=%08X:%08X:%08X:%08X|"
     .balign 4
 
 .global lbl_8040BAC0
 lbl_8040BAC0:
-    .ascii "+--------------------------------------------+"
+    .asciz "+--------------------------------------------+"
     .balign 4
 
 .global lbl_8040BAF0
@@ -19265,12 +19265,12 @@ lbl_8040BBE8:
 
 .global lbl_8040BC00
 lbl_8040BC00:
-    .ascii "+--------------------------+"
-    .4byte NULL
+    .asciz "+--------------------------+"
+    .balign 4
 
 .global lbl_8040BC20
 lbl_8040BC20:
-    .ascii "| INPUT ADDRESS : 8%07X |"
+    .asciz "| INPUT ADDRESS : 8%07X |"
     .balign 4
 
 .global lbl_8040BC3C
@@ -19295,37 +19295,37 @@ jtbl_8040BC58:
 
 .global lbl_8040BC74
 lbl_8040BC74:
-    .ascii "DECREMENT NUM AT CURSOR   (UP)"
+    .asciz "DECREMENT NUM AT CURSOR   (UP)"
     .balign 4
 
 .global lbl_8040BC94
 lbl_8040BC94:
-    .ascii "INCREMENT NUM AT CURSOR (DOWN)"
+    .asciz "INCREMENT NUM AT CURSOR (DOWN)"
     .balign 4
 
 .global lbl_8040BCB4
 lbl_8040BCB4:
-    .ascii "MOVE CURSOR TO LEFT     (LEFT)"
+    .asciz "MOVE CURSOR TO LEFT     (LEFT)"
     .balign 4
 
 .global lbl_8040BCD4
 lbl_8040BCD4:
-    .ascii "MOVE CURSOR TO RIGHT   (RIGHT)"
+    .asciz "MOVE CURSOR TO RIGHT   (RIGHT)"
     .balign 4
 
 .global lbl_8040BCF4
 lbl_8040BCF4:
-    .ascii "MEMORY DUMP                (A)"
+    .asciz "MEMORY DUMP                (A)"
     .balign 4
 
 .global lbl_8040BD14
 lbl_8040BD14:
-    .ascii "CLEAR NUM AT CURSOR        (X)"
+    .asciz "CLEAR NUM AT CURSOR        (X)"
     .balign 4
 
 .global lbl_8040BD34
 lbl_8040BD34:
-    .ascii "CLOSE                      (B)"
+    .asciz "CLOSE                      (B)"
     .balign 4
 
 .global lbl_8040BD54
@@ -19350,12 +19350,12 @@ lbl_8040BD74:
 
 .global lbl_8040BD8C
 lbl_8040BD8C:
-    .ascii "+- DBAT ------------------------+"
+    .asciz "+- DBAT ------------------------+"
     .balign 4
 
 .global lbl_8040BDB0
 lbl_8040BDB0:
-    .ascii "+- IBAT ------------------------+"
+    .asciz "+- IBAT ------------------------+"
     .balign 4
 
 .global lbl_8040BDD4
@@ -19364,22 +19364,22 @@ lbl_8040BDD4:
 
 .global lbl_8040BDFC
 lbl_8040BDFC:
-    .ascii "|   BEPI %08X BRPN %08X |"
+    .asciz "|   BEPI %08X BRPN %08X |"
     .balign 4
 
 .global lbl_8040BE18
 lbl_8040BE18:
-    .ascii "+-------------------------------+"
+    .asciz "+-------------------------------+"
     .balign 4
 
 .global lbl_8040BE3C
 lbl_8040BE3C:
-    .ascii "+- SPR --------------+"
+    .asciz "+- SPR --------------+"
     .balign 4
 
 .global lbl_8040BE54
 lbl_8040BE54:
-    .ascii "| NO   NAME    VAL   |"
+    .asciz "| NO   NAME    VAL   |"
     .balign 4
 
 .global lbl_8040BE6C
@@ -19388,17 +19388,17 @@ lbl_8040BE6C:
 
 .global lbl_8040BE7C
 lbl_8040BE7C:
-    .ascii "+---- gekko only ----+"
+    .asciz "+---- gekko only ----+"
     .balign 4
 
 .global lbl_8040BE94
 lbl_8040BE94:
-    .ascii "|                    |"
+    .asciz "|                    |"
     .balign 4
 
 .global lbl_8040BEAC
 lbl_8040BEAC:
-    .ascii "+--------------------+"
+    .asciz "+--------------------+"
     .balign 4
 
 .global lbl_8040BEC4
@@ -19411,7 +19411,7 @@ lbl_8040BEC4:
     .4byte NULL
     .4byte NULL
     .asciz "debugconsole_main.c"
-    .ascii "debug thread finished."
+    .asciz "debug thread finished."
     .balign 4
     .4byte NULL
 
@@ -19806,42 +19806,42 @@ lbl_804D60BC:
 
 .global lbl_804D60C0
 lbl_804D60C0:
-    .ascii "DBAT0L"
+    .asciz "DBAT0L"
     .balign 4
 
 .global lbl_804D60C8
 lbl_804D60C8:
-    .ascii "DBAT0U"
+    .asciz "DBAT0U"
     .balign 4
 
 .global lbl_804D60D0
 lbl_804D60D0:
-    .ascii "DBAT1L"
+    .asciz "DBAT1L"
     .balign 4
 
 .global lbl_804D60D8
 lbl_804D60D8:
-    .ascii "DBAT1U"
+    .asciz "DBAT1U"
     .balign 4
 
 .global lbl_804D60E0
 lbl_804D60E0:
-    .ascii "DBAT2L"
+    .asciz "DBAT2L"
     .balign 4
 
 .global lbl_804D60E8
 lbl_804D60E8:
-    .ascii "DBAT2U"
+    .asciz "DBAT2U"
     .balign 4
 
 .global lbl_804D60F0
 lbl_804D60F0:
-    .ascii "DBAT3L"
+    .asciz "DBAT3L"
     .balign 4
 
 .global lbl_804D60F8
 lbl_804D60F8:
-    .ascii "DBAT3U"
+    .asciz "DBAT3U"
     .balign 4
 
 .global lbl_804D6100
@@ -19850,7 +19850,7 @@ lbl_804D6100:
 
 .global lbl_804D6104
 lbl_804D6104:
-    .ascii "DSISR"
+    .asciz "DSISR"
     .balign 4
 
 .global lbl_804D610C
@@ -19859,42 +19859,42 @@ lbl_804D610C:
 
 .global lbl_804D6110
 lbl_804D6110:
-    .ascii "IBAT0L"
+    .asciz "IBAT0L"
     .balign 4
 
 .global lbl_804D6118
 lbl_804D6118:
-    .ascii "IBAT0U"
+    .asciz "IBAT0U"
     .balign 4
 
 .global lbl_804D6120
 lbl_804D6120:
-    .ascii "IBAT1L"
+    .asciz "IBAT1L"
     .balign 4
 
 .global lbl_804D6128
 lbl_804D6128:
-    .ascii "IBAT1U"
+    .asciz "IBAT1U"
     .balign 4
 
 .global lbl_804D6130
 lbl_804D6130:
-    .ascii "IBAT2L"
+    .asciz "IBAT2L"
     .balign 4
 
 .global lbl_804D6138
 lbl_804D6138:
-    .ascii "IBAT2U"
+    .asciz "IBAT2U"
     .balign 4
 
 .global lbl_804D6140
 lbl_804D6140:
-    .ascii "IBAT3L"
+    .asciz "IBAT3L"
     .balign 4
 
 .global lbl_804D6148
 lbl_804D6148:
-    .ascii "IBAT3U"
+    .asciz "IBAT3U"
     .balign 4
 
 .global lbl_804D6150
@@ -19916,22 +19916,22 @@ lbl_804D615C:
 
 .global lbl_804D6164
 lbl_804D6164:
-    .ascii "SPRG0"
+    .asciz "SPRG0"
     .balign 4
 
 .global lbl_804D616C
 lbl_804D616C:
-    .ascii "SPRG1"
+    .asciz "SPRG1"
     .balign 4
 
 .global lbl_804D6174
 lbl_804D6174:
-    .ascii "SPRG2"
+    .asciz "SPRG2"
     .balign 4
 
 .global lbl_804D617C
 lbl_804D617C:
-    .ascii "SPRG3"
+    .asciz "SPRG3"
     .balign 4
 
 .global lbl_804D6184
@@ -19959,12 +19959,12 @@ lbl_804D61A0:
 
 .global lbl_804D61A4
 lbl_804D61A4:
-    .ascii "DMA_L"
+    .asciz "DMA_L"
     .balign 4
 
 .global lbl_804D61AC
 lbl_804D61AC:
-    .ascii "DMA_U"
+    .asciz "DMA_U"
     .balign 4
 
 .global lbl_804D61B4
@@ -20039,12 +20039,12 @@ lbl_804D621C:
 
 .global lbl_804D6224
 lbl_804D6224:
-    .ascii "MMCR0"
+    .asciz "MMCR0"
     .balign 4
 
 .global lbl_804D622C
 lbl_804D622C:
-    .ascii "MMCR1"
+    .asciz "MMCR1"
     .balign 4
 
 .global lbl_804D6234
@@ -20073,47 +20073,47 @@ lbl_804D6254:
 
 .global lbl_804D6258
 lbl_804D6258:
-    .ascii "THRM1"
+    .asciz "THRM1"
     .balign 4
 
 .global lbl_804D6260
 lbl_804D6260:
-    .ascii "THRM2"
+    .asciz "THRM2"
     .balign 4
 
 .global lbl_804D6268
 lbl_804D6268:
-    .ascii "THRM3"
+    .asciz "THRM3"
     .balign 4
 
 .global lbl_804D6270
 lbl_804D6270:
-    .ascii "UMMCR0"
+    .asciz "UMMCR0"
     .balign 4
 
 .global lbl_804D6278
 lbl_804D6278:
-    .ascii "UMMCR1"
+    .asciz "UMMCR1"
     .balign 4
 
 .global lbl_804D6280
 lbl_804D6280:
-    .ascii "UPMC1"
+    .asciz "UPMC1"
     .balign 4
 
 .global lbl_804D6288
 lbl_804D6288:
-    .ascii "UPMC2"
+    .asciz "UPMC2"
     .balign 4
 
 .global lbl_804D6290
 lbl_804D6290:
-    .ascii "UPMC3"
+    .asciz "UPMC3"
     .balign 4
 
 .global lbl_804D6298
 lbl_804D6298:
-    .ascii "UPMC4"
+    .asciz "UPMC4"
     .balign 4
 
 .global lbl_804D62A0
@@ -20128,12 +20128,12 @@ lbl_804D62A8:
 
 .global lbl_804D62B0
 lbl_804D62B0:
-    .ascii "(DSI)\n"
+    .asciz "(DSI)\n"
     .balign 4
 
 .global lbl_804D62B8
 lbl_804D62B8:
-    .ascii "(ISI)\n"
+    .asciz "(ISI)\n"
     .balign 4
 
 .global lbl_804D62C0

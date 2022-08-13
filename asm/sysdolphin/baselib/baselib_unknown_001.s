@@ -16018,8 +16018,8 @@ lbl_803B721C:
     .balign 8
 .global lbl_803B9670
 lbl_803B9670:
-    .ascii "HAL Laboratory, Inc."
-    .4byte NULL
+    .asciz "HAL Laboratory, Inc."
+    .balign 4
     .4byte 0x00010501
     .4byte 0x01010101
     .4byte 0x01000000
@@ -49739,7 +49739,11 @@ lbl_80430C40:
     .4byte 0x12162538
     .4byte 0x446D674D
     .4byte 0x18233740
-    .ascii "Qhq\\1@NWgyxeH\\_bpdgc"
+    .4byte 0x5168715C
+    .4byte 0x31404E57
+    .4byte 0x67797865
+    .4byte 0x485C5F62
+    .4byte 0x70646763
 .global lbl_80430C80
 lbl_80430C80:
     .4byte 0x1112182F
@@ -49747,7 +49751,17 @@ lbl_80430C80:
     .4byte 0x12151A42
     .4byte 0x63636363
     .4byte 0x181A3863
-    .ascii "cccc/Bcccccccccccccccccccccccccccccccccccccc"
+    .4byte 0x63636363
+    .4byte 0x2F426363
+    .4byte 0x63636363
+    .4byte 0x63636363
+    .4byte 0x63636363
+    .4byte 0x63636363
+    .4byte 0x63636363
+    .4byte 0x63636363
+    .4byte 0x63636363
+    .4byte 0x63636363
+    .4byte 0x63636363
     .4byte 0x000A0000
     .4byte 0x00010004
     .4byte 0x000B001A
@@ -50374,7 +50388,8 @@ lbl_80431638:
     .4byte 0x1E252C33
     .4byte 0x3A3B342D
     .4byte 0x261F272E
-    .ascii "5<=6/7>?"
+    .4byte 0x353C3D36
+    .4byte 0x2F373E3F
 
 .global lbl_80431678
 lbl_80431678:

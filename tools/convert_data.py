@@ -1,3 +1,4 @@
+import glob
 import re
 import struct
 from math import ceil
@@ -7,23 +8,22 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_file': root / "asm/sysdolphin/baselib/baselib_unknown_001.s"
+    'input_glob': root / "asm/sysdolphin/baselib/baselib_unknown_*.s"
 }
 
 default_options = {
-    'zero': 'null',  # How to treat zero-value dwords
-    # None: do not change zero-value dwords
-    # 'hex': force zero to '0x00000000'
-    # 'int': force zero to '0'
-    # 'null': force zero to 'NULL'
-    # 'float': force zero to '0.0'
+    'zero': None,  # How to treat zero-value dwords
+    # None: replace zero with 'NULL'
+    # 'hex': replace zero with '0x00000000'
+    # 'int': replace zero with '0'
+    # 'float': replace zero with '0.0'
 
-    'find_ascii': True,  # Attempt to find zero-terminated ASCII strings
+    'find_asciz': True,  # Attempt to find zero-terminated ASCII strings
     'find_f32': True,  # Attempt to find 4-byte floating-point
     'find_s32': True,  # Attempt to find negative 4-byte values
     'find_u32': True,  # Attempt to find positive 4-byte values
 
-    'min_ascii_len': 5,  # Minimum length for a byte array to be considered a string
+    'min_asciz_len': 5,  # Minimum length for a byte array to be considered a string
     's32_min_value': -1000,  # Lowest acceptable value for s32
     'u32_max_value': 1000,  # Highest acceptable value for u32
     'f32_max_abs_value': 1000,  # Biggest acceptable  value for f32
@@ -61,17 +61,17 @@ def try_get_zero(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytear
         if dword_int != 0:
             return None
 
-        zero_opt = options['zero']
+        zero_opt = options.get('zero')
         value: str
         instruction: str = '4byte'
-        if zero_opt == 'hex':
+        if zero_opt is None:
+            value = 'NULL'
+        elif zero_opt == 'hex':
             value = '0x00000000'
         elif zero_opt == 'int':
             instruction, value = 'int', '0'
         elif zero_opt == 'float':
             instruction, value = 'float', '0.0'
-        elif zero_opt == 'null':
-            value = 'NULL'
         else:
             raise ValueError(zero_opt)
         return f"{instruction} {value}"
@@ -134,35 +134,41 @@ def is_valid_char(b: int) -> bool:
     return is_printable(b) or b == line_feed or b == 0
 
 
-def try_get_ascii(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
+def try_get_asciz(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
+    skip = None, buffer
     length = 0
 
     if buffer[0] == 0:
-        return None, buffer
+        return skip
 
     for b in buffer:
         if not is_valid_char(b):
-            return None, buffer
+            return skip
 
         if b == 0:
             break
         else:
             length += 1
 
-    instruction = 'ascii'
+    display_len = length
 
-    if length <= 0 or ((min_len := options.get('min_ascii_len')) and length < min_len):
-        return None, buffer
+    if display_len <= 0:
+        return skip
 
-    decode = buffer[:length].decode("ascii").replace('\\', '\\\\').replace('\n', '\\n')
+    if (min_len := options.get('min_asciz_len')) and display_len < min_len:
+        return skip
 
+    length += 1  # zero terminator
     end = ceil(length / 4) * 4
     alignment = end - length
-    if alignment == 1:
-        alignment = 0
-        instruction = 'asciz'
 
-    result = [f'{instruction} "{decode}"']
+    end_slice = buffer[length: end]
+    if len(end_slice) != alignment or any(map(lambda zb: zb != 0, end_slice)):
+        return skip
+
+    decode = buffer[:display_len].decode("ascii").replace('\\', '\\\\').replace('\n', '\\n')
+
+    result = [f'asciz "{decode}"']
     if alignment != 0:
         result.append('balign 4')
 
@@ -171,8 +177,8 @@ def try_get_ascii(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytea
 
 def take_buffer(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
     try_funcs = [
-        try_get_ascii if options.get('find_ascii') else None,
-        try_get_zero if options.get('zero') else None,
+        try_get_asciz if options.get('find_asciz') else None,
+        try_get_zero,
         try_get_f32 if options.get('find_f32') else None,
         try_get_s32 if options.get('find_s32') else None,
         try_get_u32 if options.get('find_u32') else None,
@@ -199,20 +205,21 @@ def read_match(match: Match[str] | None):
     if not match:
         return None
 
-    result = match['hex']
-    if result:
-        return result
+    if hex_group := match['hex']:
+        return hex_group
 
     if match['null']:
-        if options.get('zero'):
-            return '0' * 8
+        return '0' * 8
 
     return None
 
 
 def main():
-    path = Path(options['input_file'])
+    for path in glob.glob(str(options['input_glob'])):
+        method_name(path)
 
+
+def method_name(path):
     with open(path, "r") as f:
         text = f.readlines()
         text.append('')
