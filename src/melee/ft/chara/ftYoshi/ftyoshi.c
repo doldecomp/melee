@@ -111,16 +111,16 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     ftYoshiAttributes *other_attr;
     struct S_UNK_YOSHI1* temp_r28;
     struct S_UNK_YOSHI1* temp;
-    ftData *fighter_data;
+    ftData *ft;
     struct S_UNK_YOSHI1* temp_r27;
     Fighter *fp;
     
     fp = fighterObj->user_data;
     temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
-    fighter_data = fp->x10C_ftData;
+    ft = fp->x10C_ftData;
     temp_r28 = (struct S_UNK_YOSHI1*)fp->x5BC;
-    item_list = fighter_data->x48_items;
-    other_attr = fighter_data->ext_attr;
+    item_list = ft->x48_items;
+    other_attr = ft->ext_attr;
     
     if (!temp)
     {

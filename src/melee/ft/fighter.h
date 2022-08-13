@@ -1907,13 +1907,13 @@ inline Fighter* getFighter(HSD_GObj* fighterObj)
 
 inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
 {
-    Fighter* fighter_data = fighter_gobj->user_data;
-    return fighter_data;
+    Fighter* fp = fighter_gobj->user_data;
+    return fp;
 }
 
-inline void* getFtSpecialAttrs(Fighter* fighter_data)
+inline void* getFtSpecialAttrs(Fighter* fp)
 {
-    void* fighter_attr = fighter_data->x2D4_specialAttributes;
+    void* fighter_attr = fp->x2D4_specialAttributes;
     return fighter_attr;
 }
 
@@ -1932,9 +1932,9 @@ inline s32 ftGetAction(Fighter* fp)
     return fp->x10_action_state_index;
 }
 
-inline void* getFtSpecialAttrs2CC(Fighter* fighter_data)
+inline void* getFtSpecialAttrs2CC(Fighter* fp)
 {
-    void* fighter_attr = fighter_data->x2CC;
+    void* fighter_attr = fp->x2CC;
     return fighter_attr;
 }
 
