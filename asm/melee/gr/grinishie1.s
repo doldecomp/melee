@@ -2257,7 +2257,7 @@ lbl_801FC7D8:
 /* 801FC7E0 001F93C0  7F C3 F3 78 */	mr r3, r30
 /* 801FC7E4 001F93C4  48 17 6B 05 */	bl HSD_JObjSetMtxDirtySub
 lbl_801FC7E8:
-/* 801FC7E8 001F93C8  48 02 83 99 */	bl get_blast_zone_bottom_offset
+/* 801FC7E8 001F93C8  48 02 83 99 */	bl Stage_GetBlastZoneBottomOffset
 /* 801FC7EC 001F93CC  C0 02 BC 24 */	lfs f0, lbl_804DB604@sda21(r2)
 /* 801FC7F0 001F93D0  38 A1 00 18 */	addi r5, r1, 0x18
 /* 801FC7F4 001F93D4  80 7F 01 00 */	lwz r3, 0x100(r31)
@@ -2540,7 +2540,7 @@ lbl_801FCBB8:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8268
 lbl_803B8268:
     .4byte 0x00000000
@@ -2550,7 +2550,7 @@ lbl_803B8268:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E48C8
 lbl_803E48C8:
     .4byte 0x000D0003
@@ -2660,7 +2660,7 @@ lbl_803E4A54:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4748
 lbl_804D4748:
     .asciz "jobj.h"
@@ -2673,18 +2673,17 @@ lbl_804D4750:
 lbl_804D4758:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D69F8
 lbl_804D69F8:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB5C0
 lbl_804DB5C0:
 	.4byte 0x3F800000

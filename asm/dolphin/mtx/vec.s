@@ -105,7 +105,7 @@ PSVECCrossProduct:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE340
 lbl_804DE340:
 	.4byte 0x3F000000

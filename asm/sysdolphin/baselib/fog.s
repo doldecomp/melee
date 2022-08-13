@@ -614,7 +614,7 @@ func_8037E178:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B95A8
 lbl_803B95A8:
     .4byte 0x00000000
@@ -636,7 +636,7 @@ lbl_803B95A8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407078
 lbl_80407078:
     .4byte func_8037E120
@@ -710,7 +710,7 @@ jtbl_80407110:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5F20
 lbl_804D5F20:
     .asciz "fog.c"
@@ -730,7 +730,7 @@ lbl_804D5F30:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE6F0
 lbl_804DE6F0:
 	.4byte 0x00000000

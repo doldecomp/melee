@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/LAy0B
 .global func_803A44A4
 func_803A44A4:
 /* 803A44A4 003A1084  7C 08 02 A6 */	mflr r0
@@ -17,6 +18,7 @@ func_803A44A4:
 /* 803A44CC 003A10AC  7C 08 03 A6 */	mtlr r0
 /* 803A44D0 003A10B0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/YScqE
 .global func_803A44D4
 func_803A44D4:
 /* 803A44D4 003A10B4  7C 08 02 A6 */	mflr r0
@@ -136,6 +138,7 @@ lbl_803A464C:
 /* 803A4664 003A1244  7C 08 03 A6 */	mtlr r0
 /* 803A4668 003A1248  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/jvzaI
 .global func_803A466C
 func_803A466C:
 /* 803A466C 003A124C  7C 08 02 A6 */	mflr r0
@@ -200,6 +203,7 @@ lbl_803A472C:
 /* 803A4738 003A1318  7C 08 03 A6 */	mtlr r0
 /* 803A473C 003A131C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/afkxp
 .global func_803A4740
 func_803A4740:
 /* 803A4740 003A1320  7C 08 02 A6 */	mflr r0
@@ -220,6 +224,7 @@ lbl_803A4760:
 /* 803A4774 003A1354  7C 08 03 A6 */	mtlr r0
 /* 803A4778 003A1358  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/I6wRr
 .global func_803A477C
 func_803A477C:
 /* 803A477C 003A135C  7C 08 02 A6 */	mflr r0
@@ -383,6 +388,7 @@ lbl_803A490C:
 /* 803A49D8 003A15B8  7C 08 03 A6 */	mtlr r0
 /* 803A49DC 003A15BC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/4iDwE
 .global func_803A49E0
 func_803A49E0:
 /* 803A49E0 003A15C0  7C 08 02 A6 */	mflr r0
@@ -425,6 +431,7 @@ lbl_803A4A50:
 /* 803A4A60 003A1640  7C 08 03 A6 */	mtlr r0
 /* 803A4A64 003A1644  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/ykUfq
 .global func_803A4A68
 func_803A4A68:
 /* 803A4A68 003A1648  7C 08 02 A6 */	mflr r0
@@ -1026,12 +1033,12 @@ lbl_803A5350:
 /* 803A5360 003A1F40  4B F9 B8 DD */	bl func_80340C3C
 lbl_803A5364:
 /* 803A5364 003A1F44  C0 3C 00 18 */	lfs f1, 0x18(r28)
-/* 803A5368 003A1F48  4B F8 10 6D */	bl func_803263D4
+/* 803A5368 003A1F48  4B F8 10 6D */	bl sinf
 /* 803A536C 003A1F4C  C0 02 F0 B4 */	lfs f0, lbl_804DEA94@sda21(r2)
 /* 803A5370 003A1F50  C0 5C 00 18 */	lfs f2, 0x18(r28)
 /* 803A5374 003A1F54  EF 80 00 72 */	fmuls f28, f0, f1
 /* 803A5378 003A1F58  FC 20 10 90 */	fmr f1, f2
-/* 803A537C 003A1F5C  4B F8 0E C5 */	bl func_80326240
+/* 803A537C 003A1F5C  4B F8 0E C5 */	bl cosf
 /* 803A5380 003A1F60  93 E1 00 7C */	stw r31, 0x7c(r1)
 /* 803A5384 003A1F64  3C 00 43 30 */	lis r0, 0x4330
 /* 803A5388 003A1F68  C8 82 F0 98 */	lfd f4, lbl_804DEA78@sda21(r2)
@@ -1126,6 +1133,7 @@ lbl_803A54B4:
 /* 803A54E4 003A20C4  7C 08 03 A6 */	mtlr r0
 /* 803A54E8 003A20C8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/rwP4G
 .global func_803A54EC
 func_803A54EC:
 /* 803A54EC 003A20CC  7C 08 02 A6 */	mflr r0
@@ -1191,6 +1199,7 @@ lbl_803A55AC:
 /* 803A55D4 003A21B4  7C 08 03 A6 */	mtlr r0
 /* 803A55D8 003A21B8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/LA73x
 .global func_803A55DC
 func_803A55DC:
 /* 803A55DC 003A21BC  7C 08 02 A6 */	mflr r0
@@ -1290,7 +1299,7 @@ func_803A55DC:
 /* 803A5754 003A2334  38 83 54 EC */	addi r4, r3, func_803A54EC@l
 /* 803A5758 003A2338  38 7D 00 00 */	addi r3, r29, 0
 /* 803A575C 003A233C  38 BE 00 00 */	addi r5, r30, 0
-/* 803A5760 003A2340  4B FE AF FD */	bl func_8039075C
+/* 803A5760 003A2340  4B FE AF FD */	bl GObj_SetupGXLinkMax
 /* 803A5764 003A2344  80 01 00 94 */	lwz r0, 0x94(r1)
 /* 803A5768 003A2348  CB E1 00 88 */	lfd f31, 0x88(r1)
 /* 803A576C 003A234C  CB C1 00 80 */	lfd f30, 0x80(r1)
@@ -1307,7 +1316,7 @@ func_803A55DC:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B9658
 lbl_803B9658:
 	.float 0
@@ -1321,7 +1330,7 @@ lbl_803B9664:
 
 
 .section .data
-
+    .balign 8
 .global lbl_8040C3A0
 lbl_8040C3A0:
 	.4byte func_803A4740
@@ -1384,14 +1393,14 @@ jtbl_8040C3DC:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804D10E0
 lbl_804D10E0:
 	.skip 0x30
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6388
 lbl_804D6388:
     .asciz "sobj"
@@ -1399,14 +1408,14 @@ lbl_804D6388:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7960
 lbl_804D7960:
 	.skip 0x8
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DEA70
 lbl_804DEA70:
 	.4byte 0x00000000

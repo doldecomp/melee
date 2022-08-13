@@ -235,7 +235,7 @@ lbl_80222E74:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E91B0
 lbl_803E91B0:
 	.4byte lbl_80222D24
@@ -260,9 +260,8 @@ lbl_803E91B0:
     .4byte NULL
 .global lbl_803E9200
 lbl_803E9200:
-    .4byte 0x2F477254
-    .4byte 0x50632E64
-    .4byte 0x61740000
+    .asciz "/GrTPc.dat"
+    .balign 4
 .global lbl_803E920C
 lbl_803E920C:
     .4byte 0x00000038
@@ -278,15 +277,6 @@ lbl_803E920C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727470
-    .4byte 0x69636875
-    .4byte 0x2E630000
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grtpichu.c"

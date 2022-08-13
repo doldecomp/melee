@@ -70,7 +70,7 @@ lbl_80016290:
 /* 800162A0 00012E80  41 82 00 14 */	beq lbl_800162B4
 /* 800162A4 00012E84  38 7D 00 00 */	addi r3, r29, 0
 /* 800162A8 00012E88  38 9A 00 00 */	addi r4, r26, 0
-/* 800162AC 00012E8C  48 30 F7 A5 */	bl func_80325A50
+/* 800162AC 00012E8C  48 30 F7 A5 */	bl strcpy
 /* 800162B0 00012E90  48 00 00 84 */	b lbl_80016334
 lbl_800162B4:
 /* 800162B4 00012E94  7C 60 07 74 */	extsb r0, r3
@@ -85,12 +85,12 @@ lbl_800162B4:
 /* 800162D8 00012EB8  41 82 00 14 */	beq lbl_800162EC
 /* 800162DC 00012EBC  7C 7D DA 14 */	add r3, r29, r27
 /* 800162E0 00012EC0  38 8D 81 10 */	addi r4, r13, lbl_804D37B0@sda21
-/* 800162E4 00012EC4  48 30 F7 6D */	bl func_80325A50
+/* 800162E4 00012EC4  48 30 F7 6D */	bl strcpy
 /* 800162E8 00012EC8  48 00 00 4C */	b lbl_80016334
 lbl_800162EC:
 /* 800162EC 00012ECC  7C 7D DA 14 */	add r3, r29, r27
 /* 800162F0 00012ED0  38 8D 81 14 */	addi r4, r13, lbl_804D37B4@sda21
-/* 800162F4 00012ED4  48 30 F7 5D */	bl func_80325A50
+/* 800162F4 00012ED4  48 30 F7 5D */	bl strcpy
 /* 800162F8 00012ED8  48 00 00 3C */	b lbl_80016334
 lbl_800162FC:
 /* 800162FC 00012EDC  38 1B 00 00 */	addi r0, r27, 0
@@ -102,12 +102,12 @@ lbl_800162FC:
 /* 80016314 00012EF4  41 82 00 14 */	beq lbl_80016328
 /* 80016318 00012EF8  7C 7D DA 14 */	add r3, r29, r27
 /* 8001631C 00012EFC  38 8D 81 10 */	addi r4, r13, lbl_804D37B0@sda21
-/* 80016320 00012F00  48 30 F7 31 */	bl func_80325A50
+/* 80016320 00012F00  48 30 F7 31 */	bl strcpy
 /* 80016324 00012F04  48 00 00 10 */	b lbl_80016334
 lbl_80016328:
 /* 80016328 00012F08  7C 7D DA 14 */	add r3, r29, r27
 /* 8001632C 00012F0C  38 8D 81 14 */	addi r4, r13, lbl_804D37B4@sda21
-/* 80016330 00012F10  48 30 F7 21 */	bl func_80325A50
+/* 80016330 00012F10  48 30 F7 21 */	bl strcpy
 lbl_80016334:
 /* 80016334 00012F14  7F A3 EB 78 */	mr r3, r29
 /* 80016338 00012F18  BB 41 00 10 */	lmw r26, 0x10(r1)
@@ -616,7 +616,7 @@ lbl_80016A40:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BA508
 lbl_803BA508:
     .asciz "lbfile.c"
@@ -644,14 +644,14 @@ lbl_803BA540:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80432058
 lbl_80432058:
 	.skip 0x20
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D37A8
 lbl_804D37A8:
     .asciz "NULL"
@@ -672,7 +672,7 @@ lbl_804D37B8:
 
 
 .section .sbss
-
+    .balign 8
 .global cancel
 cancel:
 	.skip 0x8

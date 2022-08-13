@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/pobj.h"
+#include <sysdolphin/baselib/pobj.h>
 
 u32 HSD_PObjGetFlags(HSD_PObj* pobj)
 {
@@ -8,7 +8,7 @@ u32 HSD_PObjGetFlags(HSD_PObj* pobj)
     return 0;
 }
 
-inline void HSD_PObjRemoveAnimByFlags(HSD_PObj *pobj, u32 flags)
+void HSD_PObjRemoveAnimByFlags(HSD_PObj *pobj, u32 flags)
 {
     if (pobj == NULL)
         return;

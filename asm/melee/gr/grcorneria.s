@@ -21,7 +21,7 @@ func_801DCCFC:
 /* 801DCD34 001D9914  90 03 00 38 */	stw r0, 0x38(r3)
 /* 801DCD38 001D9918  90 03 00 44 */	stw r0, 0x44(r3)
 /* 801DCD3C 001D991C  90 03 00 50 */	stw r0, 0x50(r3)
-/* 801DCD40 001D9920  48 04 84 55 */	bl func_80225194
+/* 801DCD40 001D9920  48 04 84 55 */	bl Stage_80225194
 /* 801DCD44 001D9924  2C 03 00 E9 */	cmpwi r3, 0xe9
 /* 801DCD48 001D9928  41 82 00 14 */	beq lbl_801DCD5C
 /* 801DCD4C 001D992C  40 80 00 1C */	bge lbl_801DCD68
@@ -99,7 +99,7 @@ func_801DCE1C:
 /* 801DCE34 001D9A14  93 C1 00 58 */	stw r30, 0x58(r1)
 /* 801DCE38 001D9A18  93 A1 00 54 */	stw r29, 0x54(r1)
 /* 801DCE3C 001D9A1C  93 81 00 50 */	stw r28, 0x50(r1)
-/* 801DCE40 001D9A20  48 04 83 55 */	bl func_80225194
+/* 801DCE40 001D9A20  48 04 83 55 */	bl Stage_80225194
 /* 801DCE44 001D9A24  2C 03 00 46 */	cmpwi r3, 0x46
 /* 801DCE48 001D9A28  41 82 04 48 */	beq lbl_801DD290
 /* 801DCE4C 001D9A2C  80 0D B3 10 */	lwz r0, lbl_804D69B0@sda21(r13)
@@ -2238,28 +2238,28 @@ func_801DEC08:
 /* 801DEC10 001DB7F0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 801DEC14 001DB7F4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 801DEC18 001DB7F8  7C 7F 1B 78 */	mr r31, r3
-/* 801DEC1C 001DB7FC  48 04 5F 1D */	bl get_blast_zone_right_offset
+/* 801DEC1C 001DB7FC  48 04 5F 1D */	bl Stage_GetBlastZoneRightOffset
 /* 801DEC20 001DB800  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801DEC24 001DB804  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DEC28 001DB808  40 81 00 0C */	ble lbl_801DEC34
 /* 801DEC2C 001DB80C  38 60 00 01 */	li r3, 1
 /* 801DEC30 001DB810  48 00 00 50 */	b lbl_801DEC80
 lbl_801DEC34:
-/* 801DEC34 001DB814  48 04 5F 1D */	bl get_blast_zone_left_offset
+/* 801DEC34 001DB814  48 04 5F 1D */	bl Stage_GetBlastZoneLeftOffset
 /* 801DEC38 001DB818  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801DEC3C 001DB81C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DEC40 001DB820  40 80 00 0C */	bge lbl_801DEC4C
 /* 801DEC44 001DB824  38 60 00 01 */	li r3, 1
 /* 801DEC48 001DB828  48 00 00 38 */	b lbl_801DEC80
 lbl_801DEC4C:
-/* 801DEC4C 001DB82C  48 04 5F 1D */	bl get_blast_zone_top_offset
+/* 801DEC4C 001DB82C  48 04 5F 1D */	bl Stage_GetBlastZoneTopOffset
 /* 801DEC50 001DB830  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 801DEC54 001DB834  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DEC58 001DB838  40 81 00 0C */	ble lbl_801DEC64
 /* 801DEC5C 001DB83C  38 60 00 01 */	li r3, 1
 /* 801DEC60 001DB840  48 00 00 20 */	b lbl_801DEC80
 lbl_801DEC64:
-/* 801DEC64 001DB844  48 04 5F 1D */	bl get_blast_zone_bottom_offset
+/* 801DEC64 001DB844  48 04 5F 1D */	bl Stage_GetBlastZoneBottomOffset
 /* 801DEC68 001DB848  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 801DEC6C 001DB84C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DEC70 001DB850  40 80 00 0C */	bge lbl_801DEC7C
@@ -2285,7 +2285,7 @@ func_801DEC94:
 /* 801DECAC 001DB88C  C0 23 00 08 */	lfs f1, 8(r3)
 /* 801DECB0 001DB890  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 801DECB4 001DB894  40 81 00 84 */	ble lbl_801DED38
-/* 801DECB8 001DB898  48 04 5E 81 */	bl get_blast_zone_right_offset
+/* 801DECB8 001DB898  48 04 5E 81 */	bl Stage_GetBlastZoneRightOffset
 /* 801DECBC 001DB89C  C0 42 B7 EC */	lfs f2, lbl_804DB1CC@sda21(r2)
 /* 801DECC0 001DB8A0  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801DECC4 001DB8A4  EC 21 10 28 */	fsubs f1, f1, f2
@@ -2294,7 +2294,7 @@ func_801DEC94:
 /* 801DECD0 001DB8B0  38 60 00 01 */	li r3, 1
 /* 801DECD4 001DB8B4  48 00 00 68 */	b lbl_801DED3C
 lbl_801DECD8:
-/* 801DECD8 001DB8B8  48 04 5E 79 */	bl get_blast_zone_left_offset
+/* 801DECD8 001DB8B8  48 04 5E 79 */	bl Stage_GetBlastZoneLeftOffset
 /* 801DECDC 001DB8BC  C0 42 B7 EC */	lfs f2, lbl_804DB1CC@sda21(r2)
 /* 801DECE0 001DB8C0  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 801DECE4 001DB8C4  EC 22 08 2A */	fadds f1, f2, f1
@@ -2303,7 +2303,7 @@ lbl_801DECD8:
 /* 801DECF0 001DB8D0  38 60 00 01 */	li r3, 1
 /* 801DECF4 001DB8D4  48 00 00 48 */	b lbl_801DED3C
 lbl_801DECF8:
-/* 801DECF8 001DB8D8  48 04 5E 71 */	bl get_blast_zone_top_offset
+/* 801DECF8 001DB8D8  48 04 5E 71 */	bl Stage_GetBlastZoneTopOffset
 /* 801DECFC 001DB8DC  C0 42 B7 EC */	lfs f2, lbl_804DB1CC@sda21(r2)
 /* 801DED00 001DB8E0  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 801DED04 001DB8E4  EC 21 10 28 */	fsubs f1, f1, f2
@@ -2312,7 +2312,7 @@ lbl_801DECF8:
 /* 801DED10 001DB8F0  38 60 00 01 */	li r3, 1
 /* 801DED14 001DB8F4  48 00 00 28 */	b lbl_801DED3C
 lbl_801DED18:
-/* 801DED18 001DB8F8  48 04 5E 69 */	bl get_blast_zone_bottom_offset
+/* 801DED18 001DB8F8  48 04 5E 69 */	bl Stage_GetBlastZoneBottomOffset
 /* 801DED1C 001DB8FC  C0 42 B7 EC */	lfs f2, lbl_804DB1CC@sda21(r2)
 /* 801DED20 001DB900  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 801DED24 001DB904  EC 22 08 2A */	fadds f1, f2, f1
@@ -2779,28 +2779,28 @@ lbl_801DF394:
 /* 801DF39C 001DBF7C  41 82 04 C0 */	beq lbl_801DF85C
 /* 801DF3A0 001DBF80  3B 60 00 00 */	li r27, 0
 /* 801DF3A4 001DBF84  93 7F 00 FC */	stw r27, 0xfc(r31)
-/* 801DF3A8 001DBF88  48 04 57 91 */	bl get_blast_zone_right_offset
+/* 801DF3A8 001DBF88  48 04 57 91 */	bl Stage_GetBlastZoneRightOffset
 /* 801DF3AC 001DBF8C  C0 01 00 7C */	lfs f0, 0x7c(r1)
 /* 801DF3B0 001DBF90  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DF3B4 001DBF94  40 81 00 0C */	ble lbl_801DF3C0
 /* 801DF3B8 001DBF98  3B 60 00 01 */	li r27, 1
 /* 801DF3BC 001DBF9C  48 00 00 48 */	b lbl_801DF404
 lbl_801DF3C0:
-/* 801DF3C0 001DBFA0  48 04 57 91 */	bl get_blast_zone_left_offset
+/* 801DF3C0 001DBFA0  48 04 57 91 */	bl Stage_GetBlastZoneLeftOffset
 /* 801DF3C4 001DBFA4  C0 01 00 7C */	lfs f0, 0x7c(r1)
 /* 801DF3C8 001DBFA8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DF3CC 001DBFAC  40 80 00 0C */	bge lbl_801DF3D8
 /* 801DF3D0 001DBFB0  3B 60 00 01 */	li r27, 1
 /* 801DF3D4 001DBFB4  48 00 00 30 */	b lbl_801DF404
 lbl_801DF3D8:
-/* 801DF3D8 001DBFB8  48 04 57 91 */	bl get_blast_zone_top_offset
+/* 801DF3D8 001DBFB8  48 04 57 91 */	bl Stage_GetBlastZoneTopOffset
 /* 801DF3DC 001DBFBC  C0 01 00 80 */	lfs f0, 0x80(r1)
 /* 801DF3E0 001DBFC0  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DF3E4 001DBFC4  40 81 00 0C */	ble lbl_801DF3F0
 /* 801DF3E8 001DBFC8  3B 60 00 01 */	li r27, 1
 /* 801DF3EC 001DBFCC  48 00 00 18 */	b lbl_801DF404
 lbl_801DF3F0:
-/* 801DF3F0 001DBFD0  48 04 57 91 */	bl get_blast_zone_bottom_offset
+/* 801DF3F0 001DBFD0  48 04 57 91 */	bl Stage_GetBlastZoneBottomOffset
 /* 801DF3F4 001DBFD4  C0 01 00 80 */	lfs f0, 0x80(r1)
 /* 801DF3F8 001DBFD8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801DF3FC 001DBFDC  40 80 00 08 */	bge lbl_801DF404
@@ -3028,7 +3028,7 @@ lbl_801DF704:
 /* 801DF704 001DC2E4  7C 19 D2 14 */	add r0, r25, r26
 /* 801DF708 001DC2E8  54 19 07 BE */	clrlwi r25, r0, 0x1e
 /* 801DF70C 001DC2EC  38 79 00 00 */	addi r3, r25, 0
-/* 801DF710 001DC2F0  4B E5 2D 0D */	bl func_8003241C
+/* 801DF710 001DC2F0  4B E5 2D 0D */	bl Player_GetPlayerSlotType
 /* 801DF714 001DC2F4  2C 03 00 03 */	cmpwi r3, 3
 /* 801DF718 001DC2F8  40 82 00 10 */	bne lbl_801DF728
 /* 801DF71C 001DC2FC  3B 5A 00 01 */	addi r26, r26, 1
@@ -3037,7 +3037,7 @@ lbl_801DF704:
 lbl_801DF728:
 /* 801DF728 001DC308  38 79 00 00 */	addi r3, r25, 0
 /* 801DF72C 001DC30C  38 81 00 7C */	addi r4, r1, 0x7c
-/* 801DF730 001DC310  4B E5 2F 9D */	bl func_800326CC
+/* 801DF730 001DC310  4B E5 2F 9D */	bl Player_LoadPlayerCoords
 /* 801DF734 001DC314  C0 21 00 80 */	lfs f1, 0x80(r1)
 /* 801DF738 001DC318  3C 60 00 05 */	lis r3, 0x00055734@ha
 /* 801DF73C 001DC31C  C0 02 B8 00 */	lfs f0, lbl_804DB1E0@sda21(r2)
@@ -7150,7 +7150,7 @@ lbl_801E3018:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8090
 lbl_803B8090:
     .4byte 0x3F800000
@@ -7174,7 +7174,7 @@ lbl_803B80B4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E1D38
 lbl_803E1D38:
     .4byte 0x00030003
@@ -7312,15 +7312,8 @@ lbl_803E1F08:
     .4byte 0x00000001
     .4byte lbl_803E1D38
     .4byte 0x00000008
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E1F60
 lbl_803E1F60:
     .asciz "grcorneria.c"
@@ -7442,16 +7435,8 @@ lbl_803E2000:
     .4byte 0x00000002
     .4byte 0x00000002
     .4byte 0x0000000A
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
     .4byte 0xFFFFFFFF
     .4byte 0xFFFFFFFF
     .4byte 0x00000001
@@ -7476,9 +7461,8 @@ lbl_803E2190:
     .4byte 0x00000001
     .4byte 0x00000002
     .4byte 0x00000005
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
+    .asciz "translate"
+    .balign 4
     .4byte 0x00000001
     .4byte 0x00000001
     .4byte 0x00000001
@@ -7810,11 +7794,11 @@ lbl_803E26DC:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4650
 lbl_804D4650:
-    .4byte 0x2F477243
-    .4byte 0x6E000000
+    .asciz "/GrCn"
+    .balign 4
 .global lbl_804D4658
 lbl_804D4658:
     .asciz "jobj.h"
@@ -7842,11 +7826,10 @@ lbl_804D4678:
 lbl_804D4680:
     .asciz "gp"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D69A0
 lbl_804D69A0:
 	.skip 0x4
@@ -7861,11 +7844,11 @@ lbl_804D69AC:
 	.skip 0x4
 .global lbl_804D69B0
 lbl_804D69B0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB168
 lbl_804DB168:
 	.4byte 0x43960000

@@ -13,7 +13,7 @@ DSPAddTask:
 /* 803360EC 00332CCC  48 01 12 79 */	bl OSDisableInterrupts
 /* 803360F0 00332CD0  3B E3 00 00 */	addi r31, r3, 0
 /* 803360F4 00332CD4  38 7E 00 00 */	addi r3, r30, 0
-/* 803360F8 00332CD8  48 00 08 B5 */	bl func_803369AC
+/* 803360F8 00332CD8  48 00 08 B5 */	bl __DSP_insert_task
 /* 803360FC 00332CDC  38 00 00 00 */	li r0, 0
 /* 80336100 00332CE0  90 1E 00 00 */	stw r0, 0(r30)
 /* 80336104 00332CE4  38 00 00 01 */	li r0, 1
@@ -24,7 +24,7 @@ DSPAddTask:
 /* 80336118 00332CF8  7C 1E 00 40 */	cmplw r30, r0
 /* 8033611C 00332CFC  40 82 00 0C */	bne lbl_80336128
 /* 80336120 00332D00  7F C3 F3 78 */	mr r3, r30
-/* 80336124 00332D04  48 00 06 FD */	bl func_80336820
+/* 80336124 00332D04  48 00 06 FD */	bl __DSP_boot_task
 lbl_80336128:
 /* 80336128 00332D08  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8033612C 00332D0C  7F C3 F3 78 */	mr r3, r30
@@ -93,7 +93,7 @@ lbl_803361F4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400C08
 lbl_80400C08:
     .asciz "DSPInit(): Build Date: %s %s\n"
@@ -105,7 +105,7 @@ lbl_80400C08:
 
 
 .section .sbss
-
+    .balign 8
 .global __DSP_init_flag
 __DSP_init_flag:
-	.skip 0x8
+	.skip 0x4

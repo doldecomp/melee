@@ -1849,6 +1849,7 @@ lbl_80350310:
 /* 80350324 0034CF04  38 21 00 10 */	addi r1, r1, 0x10
 /* 80350328 0034CF08  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/W2MjR // 120 (96.13%)
 .global func_8035032C
 func_8035032C:
 /* 8035032C 0034CF0C  7C 08 02 A6 */	mflr r0
@@ -1908,7 +1909,7 @@ func_803503A8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402D28
 lbl_80402D28:
     .4byte 0x060000F0
@@ -2094,7 +2095,7 @@ jtbl_80402E8C:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A89F0
 lbl_804A89F0:
 	.skip 0x78
@@ -2107,7 +2108,7 @@ lbl_804A8AE0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7420
 lbl_804D7420:
 	.skip 0x4

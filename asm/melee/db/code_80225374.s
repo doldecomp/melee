@@ -107,7 +107,7 @@ func_802254B8:
 /* 802254C0 002220A0  90 01 00 04 */	stw r0, 4(r1)
 /* 802254C4 002220A4  38 E3 FA 00 */	addi r7, r3, lbl_8049FA00@l
 /* 802254C8 002220A8  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 802254CC 002220AC  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 802254CC 002220AC  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 802254D0 002220B0  2C 00 00 03 */	cmpwi r0, 3
 /* 802254D4 002220B4  41 80 00 A8 */	blt lbl_8022557C
 /* 802254D8 002220B8  38 00 00 00 */	li r0, 0
@@ -301,7 +301,7 @@ func_80225754:
 /* 80225760 00222340  93 E1 00 24 */	stw r31, 0x24(r1)
 /* 80225764 00222344  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 80225768 00222348  93 A1 00 1C */	stw r29, 0x1c(r1)
-/* 8022576C 0022234C  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 8022576C 0022234C  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 80225770 00222350  2C 00 00 03 */	cmpwi r0, 3
 /* 80225774 00222354  41 80 02 70 */	blt lbl_802259E4
 /* 80225778 00222358  4B E6 09 71 */	bl func_800860E8
@@ -522,7 +522,7 @@ func_80225A54:
 /* 80225A5C 0022263C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80225A60 00222640  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80225A64 00222644  3B E3 00 00 */	addi r31, r3, 0
-/* 80225A68 00222648  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 80225A68 00222648  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 80225A6C 0022264C  2C 00 00 04 */	cmpwi r0, 4
 /* 80225A70 00222650  40 82 00 88 */	bne lbl_80225AF8
 /* 80225A74 00222654  7F E3 FB 78 */	mr r3, r31
@@ -1196,7 +1196,7 @@ lbl_8022633C:
 /* 8022633C 00222F1C  3B E1 00 30 */	addi r31, r1, 0x30
 /* 80226340 00222F20  38 7E 00 00 */	addi r3, r30, 0
 /* 80226344 00222F24  38 9F 00 00 */	addi r4, r31, 0
-/* 80226348 00222F28  4B E0 C3 85 */	bl func_800326CC
+/* 80226348 00222F28  4B E0 C3 85 */	bl Player_LoadPlayerCoords
 /* 8022634C 00222F2C  C0 41 00 34 */	lfs f2, 0x34(r1)
 /* 80226350 00222F30  7F E3 FB 78 */	mr r3, r31
 /* 80226354 00222F34  C0 22 C3 20 */	lfs f1, lbl_804DBD00@sda21(r2)
@@ -1858,11 +1858,11 @@ lbl_80226C68:
 /* 80226C70 00223850  54 60 07 BD */	rlwinm. r0, r3, 0, 0x1e, 0x1e
 /* 80226C74 00223854  41 82 00 48 */	beq lbl_80226CBC
 /* 80226C78 00223858  7F C3 F3 78 */	mr r3, r30
-/* 80226C7C 0022385C  4B E0 B7 A1 */	bl func_8003241C
+/* 80226C7C 0022385C  4B E0 B7 A1 */	bl Player_GetPlayerSlotType
 /* 80226C80 00223860  2C 03 00 03 */	cmpwi r3, 3
 /* 80226C84 00223864  41 82 00 38 */	beq lbl_80226CBC
 /* 80226C88 00223868  7F C3 F3 78 */	mr r3, r30
-/* 80226C8C 0022386C  4B E0 D4 85 */	bl func_80034110
+/* 80226C8C 0022386C  4B E0 D4 85 */	bl Player_GetEntity
 /* 80226C90 00223870  80 83 00 2C */	lwz r4, 0x2c(r3)
 /* 80226C94 00223874  88 04 21 FC */	lbz r0, 0x21fc(r4)
 /* 80226C98 00223878  54 05 07 BE */	clrlwi r5, r0, 0x1e
@@ -1920,11 +1920,11 @@ lbl_80226D38:
 /* 80226D50 00223930  54 60 07 FF */	clrlwi. r0, r3, 0x1f
 /* 80226D54 00223934  41 82 00 44 */	beq lbl_80226D98
 /* 80226D58 00223938  7F C3 F3 78 */	mr r3, r30
-/* 80226D5C 0022393C  4B E0 B6 C1 */	bl func_8003241C
+/* 80226D5C 0022393C  4B E0 B6 C1 */	bl Player_GetPlayerSlotType
 /* 80226D60 00223940  2C 03 00 03 */	cmpwi r3, 3
 /* 80226D64 00223944  41 82 00 34 */	beq lbl_80226D98
 /* 80226D68 00223948  7F C3 F3 78 */	mr r3, r30
-/* 80226D6C 0022394C  4B E0 D3 A5 */	bl func_80034110
+/* 80226D6C 0022394C  4B E0 D3 A5 */	bl Player_GetEntity
 /* 80226D70 00223950  3B E3 00 00 */	addi r31, r3, 0
 /* 80226D74 00223954  38 7E 00 00 */	addi r3, r30, 0
 /* 80226D78 00223958  4B FF E8 15 */	bl func_8022558C
@@ -1942,11 +1942,11 @@ lbl_80226D98:
 /* 80226DA0 00223980  54 60 07 BD */	rlwinm. r0, r3, 0, 0x1e, 0x1e
 /* 80226DA4 00223984  41 82 00 44 */	beq lbl_80226DE8
 /* 80226DA8 00223988  7F C3 F3 78 */	mr r3, r30
-/* 80226DAC 0022398C  4B E0 B6 71 */	bl func_8003241C
+/* 80226DAC 0022398C  4B E0 B6 71 */	bl Player_GetPlayerSlotType
 /* 80226DB0 00223990  2C 03 00 03 */	cmpwi r3, 3
 /* 80226DB4 00223994  41 82 00 34 */	beq lbl_80226DE8
 /* 80226DB8 00223998  7F C3 F3 78 */	mr r3, r30
-/* 80226DBC 0022399C  4B E0 D3 55 */	bl func_80034110
+/* 80226DBC 0022399C  4B E0 D3 55 */	bl Player_GetEntity
 /* 80226DC0 002239A0  3B E3 00 00 */	addi r31, r3, 0
 /* 80226DC4 002239A4  38 7E 00 00 */	addi r3, r30, 0
 /* 80226DC8 002239A8  4B FF E7 C5 */	bl func_8022558C
@@ -2265,7 +2265,7 @@ func_80227188:
 /* 80227214 00223DF4  C0 21 00 1C */	lfs f1, 0x1c(r1)
 /* 80227218 00223DF8  EC 23 08 28 */	fsubs f1, f3, f1
 /* 8022721C 00223DFC  FC 40 00 50 */	fneg f2, f0
-/* 80227220 00223E00  4B DF BA 11 */	bl func_80022C30
+/* 80227220 00223E00  4B DF BA 11 */	bl atan2f
 /* 80227224 00223E04  C0 02 C3 58 */	lfs f0, lbl_804DBD38@sda21(r2)
 /* 80227228 00223E08  80 6D B4 B8 */	lwz r3, lbl_804D6B58@sda21(r13)
 /* 8022722C 00223E0C  EF C0 00 72 */	fmuls f30, f0, f1
@@ -2987,7 +2987,7 @@ func_80227BA8:
 /* 80227BFC 002247DC  90 01 00 2C */	stw r0, 0x2c(r1)
 /* 80227C00 002247E0  80 1E 00 08 */	lwz r0, 8(r30)
 /* 80227C04 002247E4  90 01 00 30 */	stw r0, 0x30(r1)
-/* 80227C08 002247E8  4B DE 58 65 */	bl lbvector_add
+/* 80227C08 002247E8  4B DE 58 65 */	bl lbvector_Add
 /* 80227C0C 002247EC  80 A1 00 28 */	lwz r5, 0x28(r1)
 /* 80227C10 002247F0  7F 84 E3 78 */	mr r4, r28
 /* 80227C14 002247F4  80 01 00 2C */	lwz r0, 0x2c(r1)
@@ -3002,7 +3002,7 @@ func_80227BA8:
 /* 80227C38 00224818  90 01 00 20 */	stw r0, 0x20(r1)
 /* 80227C3C 0022481C  80 1D 00 08 */	lwz r0, 8(r29)
 /* 80227C40 00224820  90 01 00 24 */	stw r0, 0x24(r1)
-/* 80227C44 00224824  4B DE 58 29 */	bl lbvector_add
+/* 80227C44 00224824  4B DE 58 29 */	bl lbvector_Add
 /* 80227C48 00224828  80 61 00 1C */	lwz r3, 0x1c(r1)
 /* 80227C4C 0022482C  80 01 00 20 */	lwz r0, 0x20(r1)
 /* 80227C50 00224830  90 7F 00 2C */	stw r3, 0x2c(r31)
@@ -3115,7 +3115,7 @@ lbl_80227DB4:
 /* 80227DD0 002249B0  90 01 00 44 */	stw r0, 0x44(r1)
 /* 80227DD4 002249B4  80 1F 00 10 */	lwz r0, 0x10(r31)
 /* 80227DD8 002249B8  90 01 00 48 */	stw r0, 0x48(r1)
-/* 80227DDC 002249BC  4B DE 56 91 */	bl lbvector_add
+/* 80227DDC 002249BC  4B DE 56 91 */	bl lbvector_Add
 /* 80227DE0 002249C0  80 A1 00 40 */	lwz r5, 0x40(r1)
 /* 80227DE4 002249C4  7F C4 F3 78 */	mr r4, r30
 /* 80227DE8 002249C8  80 01 00 44 */	lwz r0, 0x44(r1)
@@ -3130,7 +3130,7 @@ lbl_80227DB4:
 /* 80227E0C 002249EC  90 01 00 38 */	stw r0, 0x38(r1)
 /* 80227E10 002249F0  80 1F 00 1C */	lwz r0, 0x1c(r31)
 /* 80227E14 002249F4  90 01 00 3C */	stw r0, 0x3c(r1)
-/* 80227E18 002249F8  4B DE 56 55 */	bl lbvector_add
+/* 80227E18 002249F8  4B DE 56 55 */	bl lbvector_Add
 /* 80227E1C 002249FC  80 61 00 34 */	lwz r3, 0x34(r1)
 /* 80227E20 00224A00  80 01 00 38 */	lwz r0, 0x38(r1)
 /* 80227E24 00224A04  90 7F 00 2C */	stw r3, 0x2c(r31)
@@ -3423,7 +3423,7 @@ lbl_8022823C:
 /* 80228258 00224E38  90 01 00 48 */	stw r0, 0x48(r1)
 /* 8022825C 00224E3C  80 1F 00 10 */	lwz r0, 0x10(r31)
 /* 80228260 00224E40  90 01 00 4C */	stw r0, 0x4c(r1)
-/* 80228264 00224E44  4B DE 52 09 */	bl lbvector_add
+/* 80228264 00224E44  4B DE 52 09 */	bl lbvector_Add
 /* 80228268 00224E48  80 A1 00 44 */	lwz r5, 0x44(r1)
 /* 8022826C 00224E4C  7F A4 EB 78 */	mr r4, r29
 /* 80228270 00224E50  80 01 00 48 */	lwz r0, 0x48(r1)
@@ -3438,7 +3438,7 @@ lbl_8022823C:
 /* 80228294 00224E74  90 01 00 3C */	stw r0, 0x3c(r1)
 /* 80228298 00224E78  80 1F 00 1C */	lwz r0, 0x1c(r31)
 /* 8022829C 00224E7C  90 01 00 40 */	stw r0, 0x40(r1)
-/* 802282A0 00224E80  4B DE 51 CD */	bl lbvector_add
+/* 802282A0 00224E80  4B DE 51 CD */	bl lbvector_Add
 /* 802282A4 00224E84  80 61 00 38 */	lwz r3, 0x38(r1)
 /* 802282A8 00224E88  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 802282AC 00224E8C  90 7F 00 2C */	stw r3, 0x2c(r31)
@@ -3988,7 +3988,7 @@ func_802289F8:
 /* 80228A18 002255F8  38 8D 94 64 */	addi r4, r13, lbl_804D4B04@sda21
 /* 80228A1C 002255FC  93 A1 00 1C */	stw r29, 0x1c(r1)
 /* 80228A20 00225600  3B A3 00 00 */	addi r29, r3, 0
-/* 80228A24 00225604  48 0F CE 85 */	bl func_803258A8
+/* 80228A24 00225604  48 0F CE 85 */	bl strncmp
 /* 80228A28 00225608  2C 03 00 00 */	cmpwi r3, 0
 /* 80228A2C 0022560C  40 82 00 18 */	bne lbl_80228A44
 /* 80228A30 00225610  38 9E 00 00 */	addi r4, r30, 0
@@ -4050,7 +4050,7 @@ lbl_80228AB4:
 /* 80228AF8 002256D8  48 16 BF 51 */	bl Exception_ReportStackTrace
 /* 80228AFC 002256DC  38 60 13 88 */	li r3, 0x1388
 /* 80228B00 002256E0  48 16 F2 FD */	bl func_80397DFC
-/* 80228B04 002256E4  80 6D 93 68 */	lwz r3, lbl_804D4A08@sda21(r13)
+/* 80228B04 002256E4  80 6D 93 68 */	lwz r3, g_debugLevel@sda21(r13)
 /* 80228B08 002256E8  48 16 F2 ED */	bl Exception_StoreDebugLevel
 /* 80228B0C 002256EC  7F E3 FB 78 */	mr r3, r31
 /* 80228B10 002256F0  48 16 F2 95 */	bl func_80397DA4
@@ -4122,7 +4122,7 @@ lbl_80228B68:
 /* 80228C10 002257F0  48 16 BF 09 */	bl Exception_ReportCodeline
 /* 80228C14 002257F4  38 60 13 88 */	li r3, 0x1388
 /* 80228C18 002257F8  48 16 F1 E5 */	bl func_80397DFC
-/* 80228C1C 002257FC  80 6D 93 68 */	lwz r3, lbl_804D4A08@sda21(r13)
+/* 80228C1C 002257FC  80 6D 93 68 */	lwz r3, g_debugLevel@sda21(r13)
 /* 80228C20 00225800  48 16 F1 D5 */	bl Exception_StoreDebugLevel
 /* 80228C24 00225804  7F A3 EB 78 */	mr r3, r29
 /* 80228C28 00225808  48 16 F1 7D */	bl func_80397DA4
@@ -4147,7 +4147,7 @@ func_80228C4C:
 /* 80228C68 00225848  40 82 00 74 */	bne lbl_80228CDC
 /* 80228C6C 0022584C  38 60 20 00 */	li r3, 0x2000
 /* 80228C70 00225850  38 80 00 04 */	li r4, 4
-/* 80228C74 00225854  48 11 B8 75 */	bl func_803444E8
+/* 80228C74 00225854  48 11 B8 75 */	bl OSAllocFromArenaLo
 /* 80228C78 00225858  38 80 20 00 */	li r4, 0x2000
 /* 80228C7C 0022585C  48 16 B1 25 */	bl func_80393DA0
 /* 80228C80 00225860  3C 60 80 23 */	lis r3, lbl_80228AB4@ha
@@ -4538,7 +4538,7 @@ lbl_802291D8:
 /* 802291DC 00225DBC  7C 00 F8 00 */	cmpw r0, r31
 /* 802291E0 00225DC0  40 82 00 2C */	bne lbl_8022920C
 /* 802291E4 00225DC4  7F E3 FB 78 */	mr r3, r31
-/* 802291E8 00225DC8  4B E0 AF 29 */	bl func_80034110
+/* 802291E8 00225DC8  4B E0 AF 29 */	bl Player_GetEntity
 /* 802291EC 00225DCC  28 03 00 00 */	cmplwi r3, 0
 /* 802291F0 00225DD0  41 82 00 0C */	beq lbl_802291FC
 /* 802291F4 00225DD4  7F E3 FB 78 */	mr r3, r31
@@ -4577,7 +4577,7 @@ func_80229240:
 /* 80229258 00225E38  93 C1 00 38 */	stw r30, 0x38(r1)
 /* 8022925C 00225E3C  3B C3 00 00 */	addi r30, r3, 0
 /* 80229260 00225E40  93 A1 00 34 */	stw r29, 0x34(r1)
-/* 80229264 00225E44  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 80229264 00225E44  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 80229268 00225E48  2C 00 00 04 */	cmpwi r0, 4
 /* 8022926C 00225E4C  40 82 03 24 */	bne lbl_80229590
 /* 80229270 00225E50  7F C3 F3 78 */	mr r3, r30
@@ -4810,7 +4810,7 @@ lbl_80229590:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B84D8
 lbl_803B84D8:
     .4byte 0x00000000
@@ -4820,7 +4820,7 @@ lbl_803B84D8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EA6C8
 lbl_803EA6C8:
     .asciz "DATE Feb 13 2002  TIME 22:06:27"
@@ -5193,42 +5193,10 @@ lbl_803EAB9C:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x4974656D
-    .4byte 0x3D256420
-    .4byte 0x466F6F64
-    .4byte 0x733D2564
-    .4byte 0x2059616B
-    .4byte 0x753D2564
-    .4byte 0x2053705F
-    .4byte 0x4974656D
-    .4byte 0x3D256420
-    .4byte 0x506F6B65
-    .4byte 0x6D6F6E3D
-    .4byte 0x25642050
-    .4byte 0x6F6B6553
-    .4byte 0x686F743D
-    .4byte 0x25642043
-    .4byte 0x5A616B6F
-    .4byte 0x3D256420
-    .4byte 0x435A616B
-    .4byte 0x6F53686F
-    .4byte 0x743D2564
-    .4byte 0x205A616B
-    .4byte 0x6F3D2564
-    .4byte 0x205A616B
-    .4byte 0x6F53686F
-    .4byte 0x743D2564
-    .4byte 0x2053686F
-    .4byte 0x743D2564
-    .4byte 0x20457463
-    .4byte 0x3D25640A
-    .4byte NULL
-    .4byte 0x4974656D
-    .4byte 0x2D3E2025
-    .4byte 0x73202050
-    .4byte 0x6F6B656D
-    .4byte 0x6F6E2D3E
-    .4byte 0x20257300
+    .asciz "Item=%d Foods=%d Yaku=%d Sp_Item=%d Pokemon=%d PokeShot=%d CZako=%d CZakoShot=%d Zako=%d ZakoShot=%d Shot=%d Etc=%d\n"
+    .balign 4
+    .asciz "Item-> %s  Pokemon-> %s"
+    .balign 4
 .global lbl_803EACA0
 lbl_803EACA0:
     .asciz "Item Max Over.\n"
@@ -5260,36 +5228,18 @@ lbl_803EAD40:
     .4byte 0x00000002
     .4byte NULL
     .4byte 0x00000001
-    .4byte 0x46474D3A
-    .4byte 0x4F464620
-    .4byte 0x2042474D
-    .4byte 0x3A4F4646
-    .4byte NULL
-    .4byte 0x46474D3A
-    .4byte 0x4F464620
-    .4byte 0x2042474D
-    .4byte 0x3A4F4E20
-    .4byte NULL
-    .4byte 0x46474D3A
-    .4byte 0x4F4E2020
-    .4byte 0x2042474D
-    .4byte 0x3A4F4646
-    .4byte NULL
-    .4byte 0x46474D3A
-    .4byte 0x4F4E2020
-    .4byte 0x2042474D
-    .4byte 0x3A4F4E20
-    .4byte NULL
-    .4byte 0x50566F69
-    .4byte 0x63652020
-    .4byte 0x25336420
-    .4byte 0x20253364
-    .4byte 0x0A000000
-    .4byte 0x56566F69
-    .4byte 0x63652020
-    .4byte 0x25336420
-    .4byte 0x20253364
-    .4byte NULL
+    .asciz "FGM:OFF  BGM:OFF"
+    .balign 4
+    .asciz "FGM:OFF  BGM:ON "
+    .balign 4
+    .asciz "FGM:ON   BGM:OFF"
+    .balign 4
+    .asciz "FGM:ON   BGM:ON "
+    .balign 4
+    .asciz "PVoice  %3d  %3d\n"
+    .balign 4
+    .asciz "VVoice  %3d  %3d"
+    .balign 4
 .global lbl_803EADC8
 lbl_803EADC8:
     .asciz "cant find xfb!\n"
@@ -5305,31 +5255,22 @@ lbl_803EAE08:
     .4byte 0xFF0000FF
     .4byte lbl_8040FF80
     .4byte 0x000000FF
-    .4byte 0x31502025
-    .4byte 0x37642032
-    .4byte 0x50202537
-    .4byte 0x640A0000
-    .4byte 0x33502025
-    .4byte 0x37642034
-    .4byte 0x50202537
-    .4byte 0x640A0000
-    .4byte 0x25645020
-    .4byte 0x73637265
-    .4byte 0x656E2025
-    .4byte 0x64000000
-    .4byte 0x73637265
-    .4byte 0x656E206F
-    .4byte 0x76657221
-    .4byte 0x21000000
+    .asciz "1P %7d 2P %7d\n"
+    .balign 4
+    .asciz "3P %7d 4P %7d\n"
+    .balign 4
+    .asciz "%dP screen %d"
+    .balign 4
+    .asciz "screen over!!"
+    .balign 4
 .global lbl_803EAE58
 lbl_803EAE58:
     .asciz "objalloc.h"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8049FA00
 lbl_8049FA00:
 	.skip 0x50
@@ -5357,9 +5298,9 @@ lbl_804A0480:
 
 
 .section .sdata
-
-.global lbl_804D4A08
-lbl_804D4A08:
+    .balign 8
+.global g_debugLevel
+g_debugLevel:
 	.long 1
 .global lbl_804D4A0C
 lbl_804D4A0C:
@@ -5370,88 +5311,88 @@ lbl_804D4A14:
     .4byte 0x0A000000
 .global lbl_804D4A18
 lbl_804D4A18:
-    .4byte 0x52616E64
-    .4byte 0x6F6D0000
+    .asciz "Random"
+    .balign 4
 .global lbl_804D4A20
 lbl_804D4A20:
-    .4byte 0x4B616269
-    .4byte 0x676F6E00
+    .asciz "Kabigon"
+    .balign 4
 .global lbl_804D4A28
 lbl_804D4A28:
-    .4byte 0x4B616D65
-    .4byte 0x78000000
+    .asciz "Kamex"
+    .balign 4
 .global lbl_804D4A30
 lbl_804D4A30:
-    .4byte 0x46697265
-    .4byte 0x00000000
+    .asciz "Fire"
+    .balign 4
 .global lbl_804D4A38
 lbl_804D4A38:
-    .4byte 0x5468756E
-    .4byte 0x64657200
+    .asciz "Thunder"
+    .balign 4
 .global lbl_804D4A40
 lbl_804D4A40:
-    .4byte 0x46726565
-    .4byte 0x7A657200
+    .asciz "Freezer"
+    .balign 4
 .global lbl_804D4A48
 lbl_804D4A48:
-    .4byte 0x536F6E61
-    .4byte 0x6E730000
+    .asciz "Sonans"
+    .balign 4
 .global lbl_804D4A50
 lbl_804D4A50:
-    .4byte 0x48617373
-    .4byte 0x616D0000
+    .asciz "Hassam"
+    .balign 4
 .global lbl_804D4A58
 lbl_804D4A58:
-    .4byte 0x556E6B6E
-    .4byte 0x6F776E00
+    .asciz "Unknown"
+    .balign 4
 .global lbl_804D4A60
 lbl_804D4A60:
-    .4byte 0x456E7465
-    .4byte 0x69000000
+    .asciz "Entei"
+    .balign 4
 .global lbl_804D4A68
 lbl_804D4A68:
-    .4byte 0x5261696B
-    .4byte 0x6F750000
+    .asciz "Raikou"
+    .balign 4
 .global lbl_804D4A70
 lbl_804D4A70:
-    .4byte 0x5375696B
-    .4byte 0x756E0000
+    .asciz "Suikun"
+    .balign 4
 .global lbl_804D4A78
 lbl_804D4A78:
-    .4byte 0x4C756769
-    .4byte 0x61000000
+    .asciz "Lugia"
+    .balign 4
 .global lbl_804D4A80
 lbl_804D4A80:
-    .4byte 0x486F756F
-    .4byte 0x75000000
+    .asciz "Houou"
+    .balign 4
 .global lbl_804D4A88
 lbl_804D4A88:
-    .4byte 0x4D657461
-    .4byte 0x6D6F6E00
+    .asciz "Metamon"
+    .balign 4
 .global lbl_804D4A90
 lbl_804D4A90:
-    .4byte 0x50697070
-    .4byte 0x69000000
+    .asciz "Pippi"
+    .balign 4
 .global lbl_804D4A98
 lbl_804D4A98:
-    .4byte 0x546F6765
-    .4byte 0x70790000
+    .asciz "Togepy"
+    .balign 4
 .global lbl_804D4AA0
 lbl_804D4AA0:
-    .4byte 0x4D657700
+    .asciz "Mew"
+    .balign 4
 .global lbl_804D4AA4
 lbl_804D4AA4:
-    .4byte 0x43657265
-    .4byte 0x62690000
+    .asciz "Cerebi"
+    .balign 4
 .global lbl_804D4AAC
 lbl_804D4AAC:
-    .4byte 0x4C75636B
-    .4byte 0x79000000
+    .asciz "Lucky"
+    .balign 4
 .global lbl_804D4AB4
 lbl_804D4AB4:
-    .4byte 0x4D617269
-    .4byte 0x6C000000
-    .4byte 0x00000000
+    .asciz "Maril"
+    .balign 8
 .global lbl_804D4AC0
 lbl_804D4AC0:
 	.4byte 0x0A000000
@@ -5507,8 +5448,8 @@ lbl_804D4B04:
     .4byte NULL
 .global lbl_804D4B10
 lbl_804D4B10:
-    .4byte 0x25730A00
-    .4byte 0x00000000
+    .asciz "%s\n"
+    .balign 8
 .global lbl_804D4B18
 lbl_804D4B18:
     .asciz "%s"
@@ -5525,7 +5466,7 @@ lbl_804D4B28:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6B20
 lbl_804D6B20:
 	.skip 0x4
@@ -5612,11 +5553,11 @@ lbl_804D6B9C:
 	.skip 0x4
 .global lbl_804D6BA0
 lbl_804D6BA0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBCF0
 lbl_804DBCF0:
 	.4byte 0x8040FFFF

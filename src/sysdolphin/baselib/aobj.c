@@ -1,8 +1,11 @@
+#include <stdarg.h>
 #include <string.h>
 
-#include "sysdolphin/baselib/aobj.h"
+#include <sysdolphin/baselib/aobj.h>
 
-#include "sysdolphin/baselib/jobj.h"
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/robj.h>
+#include <sysdolphin/baselib/tobj.h>
 
 HSD_ObjAllocData aobj_alloc_data;
 
@@ -276,59 +279,20 @@ void HSD_AObjRemove(HSD_AObj* aobj)
     }
     HSD_AObjFree(aobj);
 }
-#pragma pop
 
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/dPE2w
 HSD_AObj* HSD_AObjAlloc(void) 
 {
     HSD_AObj* aobj = (HSD_AObj*)HSD_ObjAlloc(&aobj_alloc_data);
     if (aobj == NULL)
     {
-        __assert(lbl_804D5D08, 489, "0");
+        __assert(lbl_804D5D08, 489, lbl_804D5D10);
     }
     memset(aobj, 0, sizeof(HSD_AObj));
     aobj->flags = AOBJ_NO_ANIM;
     aobj->framerate = 1.0f;
     return aobj;
 }
-#else
-asm HSD_AObj* HSD_AObjAlloc(void)
-{
-    nofralloc
-    /* 8036453C 0036111C  7C 08 02 A6 */	mflr r0
-    /* 80364540 00361120  3C 60 80 4C */	lis r3, aobj_alloc_data@ha
-    /* 80364544 00361124  90 01 00 04 */	stw r0, 4(r1)
-    /* 80364548 00361128  38 63 08 80 */	addi r3, r3, aobj_alloc_data@l
-    /* 8036454C 0036112C  94 21 FF F0 */	stwu r1, -0x10(r1)
-    /* 80364550 00361130  93 E1 00 0C */	stw r31, 0xc(r1)
-    /* 80364554 00361134  48 01 66 75 */	bl HSD_ObjAlloc
-    /* 80364558 00361138  7C 7F 1B 79 */	or. r31, r3, r3
-    /* 8036455C 0036113C  40 82 00 14 */	bne lbl_80364570
-    /* 80364560 00361140  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
-    /* 80364564 00361144  38 80 01 E9 */	li r4, 0x1e9
-    /* 80364568 00361148  38 AD A6 70 */	addi r5, r13, lbl_804D5D10
-    /* 8036456C 0036114C  48 02 3C B5 */	bl __assert
-lbl_80364570:
-    /* 80364570 00361150  38 7F 00 00 */	addi r3, r31, 0
-    /* 80364574 00361154  38 80 00 00 */	li r4, 0
-    /* 80364578 00361158  38 A0 00 1C */	li r5, 0x1c
-    /* 8036457C 0036115C  4B C9 EB 85 */	bl memset
-    /* 80364580 00361160  3C 00 40 00 */	lis r0, 0x4000
-    /* 80364584 00361164  90 1F 00 00 */	stw r0, 0(r31)
-    /* 80364588 00361168  7F E3 FB 78 */	mr r3, r31
-    /* 8036458C 0036116C  C0 02 EA 5C */	lfs f0, 1.0f
-    /* 80364590 00361170  D0 1F 00 10 */	stfs f0, 0x10(r31)
-    /* 80364594 00361174  80 01 00 14 */	lwz r0, 0x14(r1)
-    /* 80364598 00361178  83 E1 00 0C */	lwz r31, 0xc(r1)
-    /* 8036459C 0036117C  38 21 00 10 */	addi r1, r1, 0x10
-    /* 803645A0 00361180  7C 08 03 A6 */	mtlr r0
-    /* 803645A4 00361184  4E 80 00 20 */	blr 
-}
-#endif
 
-#pragma push
-#pragma peephole on
 void HSD_AObjFree(HSD_AObj* aobj)
 {
     if (!aobj)
@@ -378,80 +342,25 @@ void callbackForeachFunc(struct _HSD_AObj *aobj, void *obj, HSD_Type type, void 
             return;
     }
 }
-#pragma pop
 
-asm void TObjForeachAnim(void)
+void TObjForeachAnim(HSD_TObj* tobj, s32 flags, void* r5, s32 r6, void* r7)
 {
-    nofralloc
-    /* 803646F4 003612D4  7C 08 02 A6 */	mflr r0
-    /* 803646F8 003612D8  90 01 00 04 */	stw r0, 4(r1)
-    /* 803646FC 003612DC  94 21 FF C8 */	stwu r1, -0x38(r1)
-    /* 80364700 003612E0  BF 61 00 24 */	stmw r27, 0x24(r1)
-    /* 80364704 003612E4  3B 63 00 00 */	addi r27, r3, 0
-    /* 80364708 003612E8  3B 85 00 00 */	addi r28, r5, 0
-    /* 8036470C 003612EC  3B A6 00 00 */	addi r29, r6, 0
-    /* 80364710 003612F0  3B C7 00 00 */	addi r30, r7, 0
-    /* 80364714 003612F4  54 9F 05 6A */	rlwinm r31, r4, 0, 0x15, 0x15
-    /* 80364718 003612F8  48 00 00 34 */	b lbl_8036474C
-lbl_8036471C:
-    /* 8036471C 003612FC  2C 1F 00 00 */	cmpwi r31, 0
-    /* 80364720 00361300  41 82 00 28 */	beq lbl_80364748
-    /* 80364724 00361304  80 7B 00 64 */	lwz r3, 0x64(r27)
-    /* 80364728 00361308  28 03 00 00 */	cmplwi r3, 0
-    /* 8036472C 0036130C  41 82 00 1C */	beq lbl_80364748
-    /* 80364730 00361310  38 9B 00 00 */	addi r4, r27, 0
-    /* 80364734 00361314  38 DC 00 00 */	addi r6, r28, 0
-    /* 80364738 00361318  38 FD 00 00 */	addi r7, r29, 0
-    /* 8036473C 0036131C  39 1E 00 00 */	addi r8, r30, 0
-    /* 80364740 00361320  38 A0 00 0B */	li r5, 0xb
-    /* 80364744 00361324  4B FF FE 95 */	bl callbackForeachFunc
-lbl_80364748:
-    /* 80364748 00361328  83 7B 00 08 */	lwz r27, 8(r27)
-lbl_8036474C:
-    /* 8036474C 0036132C  28 1B 00 00 */	cmplwi r27, 0
-    /* 80364750 00361330  40 82 FF CC */	bne lbl_8036471C
-    /* 80364754 00361334  BB 61 00 24 */	lmw r27, 0x24(r1)
-    /* 80364758 00361338  80 01 00 3C */	lwz r0, 0x3c(r1)
-    /* 8036475C 0036133C  38 21 00 38 */	addi r1, r1, 0x38
-    /* 80364760 00361340  7C 08 03 A6 */	mtlr r0
-    /* 80364764 00361344  4E 80 00 20 */	blr 
+    while (tobj != NULL) {
+        if (flags & 0x400 && tobj->aobj != NULL) {
+            callbackForeachFunc(tobj->aobj, tobj, 0xB, r5, (s32) r6, r7);
+        }
+        tobj = tobj->next;
+    }
 }
 
-asm void RObjForeachAnim(void)
+void RObjForeachAnim(HSD_RObj* robj, s32 flags, void* r5, s32 r6, void* r7)
 {
-    nofralloc
-    /* 80364768 00361348  7C 08 02 A6 */	mflr r0
-    /* 8036476C 0036134C  90 01 00 04 */	stw r0, 4(r1)
-    /* 80364770 00361350  94 21 FF C8 */	stwu r1, -0x38(r1)
-    /* 80364774 00361354  BF 61 00 24 */	stmw r27, 0x24(r1)
-    /* 80364778 00361358  3B 63 00 00 */	addi r27, r3, 0
-    /* 8036477C 0036135C  3B 85 00 00 */	addi r28, r5, 0
-    /* 80364780 00361360  3B A6 00 00 */	addi r29, r6, 0
-    /* 80364784 00361364  3B C7 00 00 */	addi r30, r7, 0
-    /* 80364788 00361368  54 9F 05 AC */	rlwinm r31, r4, 0, 0x16, 0x16
-    /* 8036478C 0036136C  48 00 00 34 */	b lbl_803647C0
-lbl_80364790:
-    /* 80364790 00361370  2C 1F 00 00 */	cmpwi r31, 0
-    /* 80364794 00361374  41 82 00 28 */	beq lbl_803647BC
-    /* 80364798 00361378  80 7B 00 18 */	lwz r3, 0x18(r27)
-    /* 8036479C 0036137C  28 03 00 00 */	cmplwi r3, 0
-    /* 803647A0 00361380  41 82 00 1C */	beq lbl_803647BC
-    /* 803647A4 00361384  38 9B 00 00 */	addi r4, r27, 0
-    /* 803647A8 00361388  38 DC 00 00 */	addi r6, r28, 0
-    /* 803647AC 0036138C  38 FD 00 00 */	addi r7, r29, 0
-    /* 803647B0 00361390  39 1E 00 00 */	addi r8, r30, 0
-    /* 803647B4 00361394  38 A0 00 0A */	li r5, 0xa
-    /* 803647B8 00361398  4B FF FE 21 */	bl callbackForeachFunc
-lbl_803647BC:
-    /* 803647BC 0036139C  83 7B 00 00 */	lwz r27, 0(r27)
-lbl_803647C0:
-    /* 803647C0 003613A0  28 1B 00 00 */	cmplwi r27, 0
-    /* 803647C4 003613A4  40 82 FF CC */	bne lbl_80364790
-    /* 803647C8 003613A8  BB 61 00 24 */	lmw r27, 0x24(r1)
-    /* 803647CC 003613AC  80 01 00 3C */	lwz r0, 0x3c(r1)
-    /* 803647D0 003613B0  38 21 00 38 */	addi r1, r1, 0x38
-    /* 803647D4 003613B4  7C 08 03 A6 */	mtlr r0
-    /* 803647D8 003613B8  4E 80 00 20 */	blr 
+    while (robj != NULL) {
+        if (flags & 0x200 && robj->aobj != NULL) {
+            callbackForeachFunc(robj->aobj, robj, 0xA, r5, r6, r7);
+        }
+        robj = robj->next;
+    }
 }
 
 asm void func_803647DC(void)
@@ -768,7 +677,7 @@ lbl_80364BF4:
     /* 80364C04 003617E4  4E 80 00 20 */	blr 
 }
 
-asm void HSD_ForeachAnim(void)
+asm void HSD_ForeachAnim(void*, ...)
 {
     nofralloc
     /* 80364C08 003617E8  7C 08 02 A6 */	mflr r0

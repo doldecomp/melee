@@ -410,7 +410,7 @@ lbl_80380B40:
 /* 80380B40 0037D720  C0 17 00 04 */	lfs f0, 4(r23)
 /* 80380B44 0037D724  FC 3B 00 32 */	fmul f1, f27, f0
 /* 80380B48 0037D728  FC 20 08 18 */	frsp f1, f1
-/* 80380B4C 0037D72C  4B FA 58 89 */	bl func_803263D4
+/* 80380B4C 0037D72C  4B FA 58 89 */	bl sinf
 /* 80380B50 0037D730  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 80380B54 0037D734  80 01 00 30 */	lwz r0, 0x30(r1)
 /* 80380B58 0037D738  90 17 00 04 */	stw r0, 4(r23)
@@ -426,7 +426,7 @@ lbl_80380B78:
 /* 80380B78 0037D758  C0 17 00 04 */	lfs f0, 4(r23)
 /* 80380B7C 0037D75C  FC 3B 00 32 */	fmul f1, f27, f0
 /* 80380B80 0037D760  FC 20 08 18 */	frsp f1, f1
-/* 80380B84 0037D764  4B FA 56 BD */	bl func_80326240
+/* 80380B84 0037D764  4B FA 56 BD */	bl cosf
 /* 80380B88 0037D768  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 80380B8C 0037D76C  80 01 00 30 */	lwz r0, 0x30(r1)
 /* 80380B90 0037D770  90 17 00 04 */	stw r0, 4(r23)
@@ -1046,7 +1046,7 @@ lbl_80381404:
 /* 80381404 0037DFE4  D0 01 00 30 */	stfs f0, 0x30(r1)
 /* 80381408 0037DFE8  48 00 00 14 */	b lbl_8038141C
 lbl_8038140C:
-/* 8038140C 0037DFEC  4B CA 18 25 */	bl func_80022C30
+/* 8038140C 0037DFEC  4B CA 18 25 */	bl atan2f
 /* 80381410 0037DFF0  FC 1F 00 72 */	fmul f0, f31, f1
 /* 80381414 0037DFF4  FC 00 00 18 */	frsp f0, f0
 /* 80381418 0037DFF8  D0 01 00 30 */	stfs f0, 0x30(r1)
@@ -1616,7 +1616,7 @@ lbl_80381BB0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804074F0
 lbl_804074F0:
     .asciz "bytecode.c"
@@ -1636,7 +1636,7 @@ lbl_804074F0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5F98
 lbl_804D5F98:
     .4byte 0x00000000
@@ -1644,11 +1644,10 @@ lbl_804D5F98:
 lbl_804D5F9C:
     .asciz "stack"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE7A0
 lbl_804DE7A0:
 	.4byte 0x00000000

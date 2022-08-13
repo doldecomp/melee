@@ -342,7 +342,7 @@ lbl_80219988:
 /* 802199C8 002165A8  EC 01 00 32 */	fmuls f0, f1, f0
 /* 802199CC 002165AC  D0 01 00 1C */	stfs f0, 0x1c(r1)
 lbl_802199D0:
-/* 802199D0 002165B0  48 00 B0 B1 */	bl get_cam_bounds_top_offset
+/* 802199D0 002165B0  48 00 B0 B1 */	bl Stage_GetCamBoundsTopOffset
 /* 802199D4 002165B4  80 AD B4 20 */	lwz r5, lbl_804D6AC0@sda21(r13)
 /* 802199D8 002165B8  38 7E 00 00 */	addi r3, r30, 0
 /* 802199DC 002165BC  38 81 00 1C */	addi r4, r1, 0x1c
@@ -551,17 +551,16 @@ lbl_80219C90:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8470
 lbl_803B8470:
-    .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E7D00
 lbl_803E7D00:
 	.4byte lbl_802196B4
@@ -611,14 +610,14 @@ lbl_803E7D34:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AC0
 lbl_804D6AC0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBB40
 lbl_804DBB40:
 	.4byte 0x42820000

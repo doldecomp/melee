@@ -1008,22 +1008,22 @@ lbl_80060B68:
 /* 80060B74 0005D754  48 31 27 75 */	bl HSD_JObjSetMtxDirtySub
 lbl_80060B78:
 /* 80060B78 0005D758  FC 20 D8 90 */	fmr f1, f27
-/* 80060B7C 0005D75C  48 2C 58 59 */	bl func_803263D4
+/* 80060B7C 0005D75C  48 2C 58 59 */	bl sinf
 /* 80060B80 0005D760  FF E0 08 90 */	fmr f31, f1
 /* 80060B84 0005D764  FC 20 D0 90 */	fmr f1, f26
-/* 80060B88 0005D768  48 2C 56 B9 */	bl func_80326240
+/* 80060B88 0005D768  48 2C 56 B9 */	bl cosf
 /* 80060B8C 0005D76C  EC 1E 00 72 */	fmuls f0, f30, f1
 /* 80060B90 0005D770  FC 20 D0 90 */	fmr f1, f26
 /* 80060B94 0005D774  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 80060B98 0005D778  D0 1A 00 18 */	stfs f0, 0x18(r26)
-/* 80060B9C 0005D77C  48 2C 58 39 */	bl func_803263D4
+/* 80060B9C 0005D77C  48 2C 58 39 */	bl sinf
 /* 80060BA0 0005D780  EC 1E 00 72 */	fmuls f0, f30, f1
 /* 80060BA4 0005D784  FC 20 D8 90 */	fmr f1, f27
 /* 80060BA8 0005D788  D0 1A 00 1C */	stfs f0, 0x1c(r26)
-/* 80060BAC 0005D78C  48 2C 56 95 */	bl func_80326240
+/* 80060BAC 0005D78C  48 2C 56 95 */	bl cosf
 /* 80060BB0 0005D790  FF E0 08 90 */	fmr f31, f1
 /* 80060BB4 0005D794  FC 20 D0 90 */	fmr f1, f26
-/* 80060BB8 0005D798  48 2C 56 89 */	bl func_80326240
+/* 80060BB8 0005D798  48 2C 56 89 */	bl cosf
 /* 80060BBC 0005D79C  EC 1E 00 72 */	fmuls f0, f30, f1
 /* 80060BC0 0005D7A0  2C 18 00 00 */	cmpwi r24, 0
 /* 80060BC4 0005D7A4  EC 00 07 F2 */	fmuls f0, f0, f31
@@ -2414,7 +2414,7 @@ lbl_80061D40:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BF848
 lbl_803BF848:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -2513,14 +2513,14 @@ jtbl_803BF870:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80458FA0
 lbl_80458FA0:
 	.skip 0x30
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D39C8
 lbl_804D39C8:
     .asciz "jobj.h"
@@ -2532,7 +2532,7 @@ lbl_804D39D0:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D81A0
 lbl_804D81A0:
 	.4byte 0x00000000

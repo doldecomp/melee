@@ -631,7 +631,7 @@ __OSGetDIConfig:
 
 
 .section .data
-
+    .balign 8
 .global DriveInfo
 DriveInfo:
     .asciz "\nDolphin OS $Revision: 47 $.\n"

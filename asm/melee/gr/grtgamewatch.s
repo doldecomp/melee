@@ -235,7 +235,7 @@ lbl_802243EC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E96F8
 lbl_803E96F8:
 	.4byte lbl_8022429C
@@ -260,9 +260,8 @@ lbl_803E96F8:
     .4byte NULL
 .global lbl_803E9748
 lbl_803E9748:
-    .4byte 0x2F477254
-    .4byte 0x47772E64
-    .4byte 0x61740000
+    .asciz "/GrTGw.dat"
+    .balign 4
 .global lbl_803E9754
 lbl_803E9754:
     .4byte 0x0000003F
@@ -278,17 +277,6 @@ lbl_803E9754:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727467
-    .4byte 0x616D6577
-    .4byte 0x61746368
-    .4byte 0x2E630000
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grtgamewatch.c"

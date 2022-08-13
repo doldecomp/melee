@@ -262,7 +262,7 @@ TRK_board_display:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804008B8
 lbl_804008B8:
     .4byte NULL

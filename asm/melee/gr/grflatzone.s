@@ -47,7 +47,7 @@ lbl_80216E78:
 /* 80216F0C 00213AEC  4B E1 A2 D1 */	bl func_800311DC
 /* 80216F10 00213AF0  C0 22 C0 DC */	lfs f1, lbl_804DBABC@sda21(r2)
 /* 80216F14 00213AF4  4B E1 A2 B9 */	bl func_800311CC
-/* 80216F18 00213AF8  48 00 DC 69 */	bl get_blast_zone_bottom_offset
+/* 80216F18 00213AF8  48 00 DC 69 */	bl Stage_GetBlastZoneBottomOffset
 /* 80216F1C 00213AFC  C0 02 C0 E0 */	lfs f0, lbl_804DBAC0@sda21(r2)
 /* 80216F20 00213B00  EC 21 00 28 */	fsubs f1, f1, f0
 /* 80216F24 00213B04  4B FA CA 6D */	bl func_801C3990
@@ -1266,7 +1266,7 @@ lbl_80217F28:
 /* 80217F94 00214B74  EC 00 18 28 */	fsubs f0, f0, f3
 /* 80217F98 00214B78  EC 21 00 28 */	fsubs f1, f1, f0
 /* 80217F9C 00214B7C  D0 21 00 10 */	stfs f1, 0x10(r1)
-/* 80217FA0 00214B80  48 00 CB C9 */	bl get_blast_zone_top_offset
+/* 80217FA0 00214B80  48 00 CB C9 */	bl Stage_GetBlastZoneTopOffset
 /* 80217FA4 00214B84  C0 42 C0 F8 */	lfs f2, lbl_804DBAD8@sda21(r2)
 /* 80217FA8 00214B88  38 60 00 05 */	li r3, 5
 /* 80217FAC 00214B8C  C0 02 C1 08 */	lfs f0, lbl_804DBAE8@sda21(r2)
@@ -1502,17 +1502,16 @@ lbl_802182BC:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8430
 lbl_803B8430:
-    .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E7940
 lbl_803E7940:
 	.4byte lbl_80217030
@@ -1622,7 +1621,7 @@ lbl_803E7A68:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4920
 lbl_804D4920:
     .asciz "jobj.h"
@@ -1634,14 +1633,14 @@ lbl_804D4928:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AB0
 lbl_804D6AB0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBAB8
 lbl_804DBAB8:
 	.4byte 0x3F800000

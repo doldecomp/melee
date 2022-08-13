@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/random.h"
+#include <sysdolphin/baselib/random.h>
 
 u32 seed = 1;
 u32* seed_ptr = &seed;

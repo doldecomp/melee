@@ -215,7 +215,7 @@ lbl_802076DC:
 /* 802076F0 002042D0  90 1E 00 C8 */	stw r0, 0xc8(r30)
 /* 802076F4 002042D4  80 1D 00 40 */	lwz r0, 0x40(r29)
 /* 802076F8 002042D8  90 1E 00 CC */	stw r0, 0xcc(r30)
-/* 802076FC 002042DC  4B E0 5D C9 */	bl lbvector_sub
+/* 802076FC 002042DC  4B E0 5D C9 */	bl lbvector_Sub
 lbl_80207700:
 /* 80207700 002042E0  38 60 00 80 */	li r3, 0x80
 /* 80207704 002042E4  4B FB B5 F1 */	bl func_801C2CF4
@@ -245,7 +245,7 @@ lbl_80207748:
 /* 8020775C 0020433C  90 1E 00 D8 */	stw r0, 0xd8(r30)
 /* 80207760 00204340  80 1D 00 40 */	lwz r0, 0x40(r29)
 /* 80207764 00204344  90 1E 00 DC */	stw r0, 0xdc(r30)
-/* 80207768 00204348  4B E0 5D 5D */	bl lbvector_sub
+/* 80207768 00204348  4B E0 5D 5D */	bl lbvector_Sub
 lbl_8020776C:
 /* 8020776C 0020434C  38 60 00 81 */	li r3, 0x81
 /* 80207770 00204350  4B FB B5 85 */	bl func_801C2CF4
@@ -275,7 +275,7 @@ lbl_802077B4:
 /* 802077C8 002043A8  90 1E 00 E8 */	stw r0, 0xe8(r30)
 /* 802077CC 002043AC  80 1D 00 40 */	lwz r0, 0x40(r29)
 /* 802077D0 002043B0  90 1E 00 EC */	stw r0, 0xec(r30)
-/* 802077D4 002043B4  4B E0 5C F1 */	bl lbvector_sub
+/* 802077D4 002043B4  4B E0 5C F1 */	bl lbvector_Sub
 lbl_802077D8:
 /* 802077D8 002043B8  38 60 00 82 */	li r3, 0x82
 /* 802077DC 002043BC  4B FB B5 19 */	bl func_801C2CF4
@@ -305,7 +305,7 @@ lbl_80207820:
 /* 80207834 00204414  90 1E 00 F8 */	stw r0, 0xf8(r30)
 /* 80207838 00204418  80 1D 00 40 */	lwz r0, 0x40(r29)
 /* 8020783C 0020441C  90 1E 00 FC */	stw r0, 0xfc(r30)
-/* 80207840 00204420  4B E0 5C 85 */	bl lbvector_sub
+/* 80207840 00204420  4B E0 5C 85 */	bl lbvector_Sub
 /* 80207844 00204424  48 00 00 18 */	b lbl_8020785C
 lbl_80207848:
 /* 80207848 00204428  38 00 00 00 */	li r0, 0
@@ -317,26 +317,26 @@ lbl_8020785C:
 /* 8020785C 0020443C  4B FB C1 65 */	bl func_801C39C0
 /* 80207860 00204440  4B FB C3 55 */	bl func_801C3BB4
 /* 80207864 00204444  38 61 00 0C */	addi r3, r1, 0xc
-/* 80207868 00204448  48 01 D3 91 */	bl unk_set_vec3_to_cam_offset_80224BF8
-/* 8020786C 0020444C  48 01 D2 15 */	bl get_cam_bounds_top_offset
+/* 80207868 00204448  48 01 D3 91 */	bl Stage_UnkSetVec3TCam_Offset
+/* 8020786C 0020444C  48 01 D2 15 */	bl Stage_GetCamBoundsTopOffset
 /* 80207870 00204450  C0 41 00 10 */	lfs f2, 0x10(r1)
 /* 80207874 00204454  C0 02 BE 54 */	lfs f0, lbl_804DB834@sda21(r2)
 /* 80207878 00204458  EC 21 10 28 */	fsubs f1, f1, f2
 /* 8020787C 0020445C  EC 20 00 72 */	fmuls f1, f0, f1
 /* 80207880 00204460  4B FB C0 01 */	bl func_801C3880
-/* 80207884 00204464  48 01 D2 15 */	bl get_cam_bounds_bottom_offset
+/* 80207884 00204464  48 01 D2 15 */	bl Stage_GetCamBoundsBottomOffset
 /* 80207888 00204468  C0 41 00 10 */	lfs f2, 0x10(r1)
 /* 8020788C 0020446C  C0 02 BE 54 */	lfs f0, lbl_804DB834@sda21(r2)
 /* 80207890 00204470  EC 21 10 28 */	fsubs f1, f1, f2
 /* 80207894 00204474  EC 20 00 72 */	fmuls f1, f0, f1
 /* 80207898 00204478  4B FB BF F9 */	bl func_801C3890
-/* 8020789C 0020447C  48 01 D1 B9 */	bl get_cam_bounds_left_offset
+/* 8020789C 0020447C  48 01 D1 B9 */	bl Stage_GetCamBoundsLeftOffset
 /* 802078A0 00204480  C0 41 00 0C */	lfs f2, 0xc(r1)
 /* 802078A4 00204484  C0 02 BE 54 */	lfs f0, lbl_804DB834@sda21(r2)
 /* 802078A8 00204488  EC 21 10 28 */	fsubs f1, f1, f2
 /* 802078AC 0020448C  EC 20 00 72 */	fmuls f1, f0, f1
 /* 802078B0 00204490  4B FB BF F1 */	bl func_801C38A0
-/* 802078B4 00204494  48 01 D1 B5 */	bl get_cam_bounds_right_offset
+/* 802078B4 00204494  48 01 D1 B5 */	bl Stage_GetCamBoundsRightOffset
 /* 802078B8 00204498  C0 41 00 0C */	lfs f2, 0xc(r1)
 /* 802078BC 0020449C  C0 02 BE 54 */	lfs f0, lbl_804DB834@sda21(r2)
 /* 802078C0 002044A0  EC 21 10 28 */	fsubs f1, f1, f2
@@ -661,7 +661,7 @@ lbl_80207CF0:
 /* 80207D04 002048E4  2C 03 00 00 */	cmpwi r3, 0
 /* 80207D08 002048E8  41 82 00 18 */	beq lbl_80207D20
 /* 80207D0C 002048EC  38 61 00 54 */	addi r3, r1, 0x54
-/* 80207D10 002048F0  48 01 CE E9 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 80207D10 002048F0  48 01 CE E9 */	bl Stage_UnkSetVec3TCam_Offset
 /* 80207D14 002048F4  38 00 00 3C */	li r0, 0x3c
 /* 80207D18 002048F8  B0 1F 00 CC */	sth r0, 0xcc(r31)
 /* 80207D1C 002048FC  48 00 00 E4 */	b lbl_80207E00
@@ -671,7 +671,7 @@ lbl_80207D20:
 /* 80207D28 00204908  2C 03 00 00 */	cmpwi r3, 0
 /* 80207D2C 0020490C  41 82 00 18 */	beq lbl_80207D44
 /* 80207D30 00204910  38 61 00 54 */	addi r3, r1, 0x54
-/* 80207D34 00204914  48 01 CE C5 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 80207D34 00204914  48 01 CE C5 */	bl Stage_UnkSetVec3TCam_Offset
 /* 80207D38 00204918  38 00 00 00 */	li r0, 0
 /* 80207D3C 0020491C  B0 1F 00 CC */	sth r0, 0xcc(r31)
 /* 80207D40 00204920  48 00 00 C0 */	b lbl_80207E00
@@ -990,14 +990,14 @@ lbl_80208198:
 /* 802081B0 00204D90  4B FB B7 0D */	bl func_801C38BC
 lbl_802081B4:
 /* 802081B4 00204D94  38 61 00 48 */	addi r3, r1, 0x48
-/* 802081B8 00204D98  48 01 CA 41 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 802081B8 00204D98  48 01 CA 41 */	bl Stage_UnkSetVec3TCam_Offset
 /* 802081BC 00204D9C  A8 7F 00 CC */	lha r3, 0xcc(r31)
 /* 802081C0 00204DA0  7C 60 07 35 */	extsh. r0, r3
 /* 802081C4 00204DA4  40 82 00 E8 */	bne lbl_802082AC
 /* 802081C8 00204DA8  38 61 00 48 */	addi r3, r1, 0x48
 /* 802081CC 00204DAC  38 81 00 54 */	addi r4, r1, 0x54
 /* 802081D0 00204DB0  38 A1 00 14 */	addi r5, r1, 0x14
-/* 802081D4 00204DB4  4B E0 53 25 */	bl lbvector_diff
+/* 802081D4 00204DB4  4B E0 53 25 */	bl lbvector_Diff
 /* 802081D8 00204DB8  C0 21 00 14 */	lfs f1, 0x14(r1)
 /* 802081DC 00204DBC  C0 01 00 18 */	lfs f0, 0x18(r1)
 /* 802081E0 00204DC0  EC 41 00 72 */	fmuls f2, f1, f1
@@ -1033,7 +1033,7 @@ lbl_80208250:
 /* 80208254 00204E34  FC 04 00 40 */	fcmpo cr0, f4, f0
 /* 80208258 00204E38  40 81 00 CC */	ble lbl_80208324
 /* 8020825C 00204E3C  38 61 00 14 */	addi r3, r1, 0x14
-/* 80208260 00204E40  4B E0 50 8D */	bl lbvector_normalize
+/* 80208260 00204E40  4B E0 50 8D */	bl lbvector_Normalize
 /* 80208264 00204E44  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 80208268 00204E48  C0 22 BE 88 */	lfs f1, lbl_804DB868@sda21(r2)
 /* 8020826C 00204E4C  EC 00 00 72 */	fmuls f0, f0, f1
@@ -1064,7 +1064,7 @@ lbl_802082AC:
 /* 802082CC 00204EAC  C8 01 00 78 */	lfd f0, 0x78(r1)
 /* 802082D0 00204EB0  EC 00 08 28 */	fsubs f0, f0, f1
 /* 802082D4 00204EB4  EF E2 00 24 */	fdivs f31, f2, f0
-/* 802082D8 00204EB8  4B E0 51 ED */	bl lbvector_sub
+/* 802082D8 00204EB8  4B E0 51 ED */	bl lbvector_Sub
 /* 802082DC 00204EBC  C0 01 00 54 */	lfs f0, 0x54(r1)
 /* 802082E0 00204EC0  38 61 00 48 */	addi r3, r1, 0x48
 /* 802082E4 00204EC4  38 81 00 54 */	addi r4, r1, 0x54
@@ -1076,7 +1076,7 @@ lbl_802082AC:
 /* 802082FC 00204EDC  C0 01 00 5C */	lfs f0, 0x5c(r1)
 /* 80208300 00204EE0  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 80208304 00204EE4  D0 01 00 5C */	stfs f0, 0x5c(r1)
-/* 80208308 00204EE8  4B E0 51 65 */	bl lbvector_add
+/* 80208308 00204EE8  4B E0 51 65 */	bl lbvector_Add
 /* 8020830C 00204EEC  C0 21 00 48 */	lfs f1, 0x48(r1)
 /* 80208310 00204EF0  C0 41 00 4C */	lfs f2, 0x4c(r1)
 /* 80208314 00204EF4  4B FB B5 A9 */	bl func_801C38BC
@@ -1130,7 +1130,7 @@ func_8020836C:
 /* 802083B8 00204F98  48 00 00 20 */	b lbl_802083D8
 lbl_802083BC:
 /* 802083BC 00204F9C  7F E3 FB 78 */	mr r3, r31
-/* 802083C0 00204FA0  48 06 2F 41 */	bl func_8026B300
+/* 802083C0 00204FA0  48 06 2F 41 */	bl itGetKind
 /* 802083C4 00204FA4  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 802083C8 00204FA8  40 82 00 0C */	bne lbl_802083D4
 /* 802083CC 00204FAC  7F E3 FB 78 */	mr r3, r31
@@ -1161,7 +1161,7 @@ lbl_80208404:
 /* 80208424 00205004  48 00 00 20 */	b lbl_80208444
 lbl_80208428:
 /* 80208428 00205008  7F E3 FB 78 */	mr r3, r31
-/* 8020842C 0020500C  48 06 2E D5 */	bl func_8026B300
+/* 8020842C 0020500C  48 06 2E D5 */	bl itGetKind
 /* 80208430 00205010  2C 03 00 A0 */	cmpwi r3, 0xa0
 /* 80208434 00205014  40 82 00 0C */	bne lbl_80208440
 /* 80208438 00205018  7F E3 FB 78 */	mr r3, r31
@@ -1415,7 +1415,7 @@ lbl_8020879C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B82E8
 lbl_803B82E8:
     .4byte 0x00000000
@@ -1453,7 +1453,7 @@ lbl_803B82F4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E57F0
 lbl_803E57F0:
 	.4byte lbl_80207634
@@ -1478,9 +1478,8 @@ lbl_803E57F0:
     .4byte 0xC0000000
 .global lbl_803E5840
 lbl_803E5840:
-    .4byte 0x2F47724E
-    .4byte 0x4B722E64
-    .4byte 0x61740000
+    .asciz "/GrNKr.dat"
+    .balign 4
 .global lbl_803E584C
 lbl_803E584C:
     .4byte 0x0000001F
@@ -1496,34 +1495,19 @@ lbl_803E584C:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726B69
-    .4byte 0x6E6F6B6F
-    .4byte 0x726F7574
-    .4byte 0x652E6300
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
-    .4byte 0x72656230
-    .4byte 0x5F6A6F62
-    .4byte 0x6A000000
-    .4byte 0x72656230
-    .4byte 0x5F6A6F62
-    .4byte 0x6A262665
-    .4byte 0x76655F6A
-    .4byte 0x6F626A00
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grkinokoroute.c"
+    .balign 4
+    .asciz "translate"
+    .balign 4
+    .asciz "reb0_jobj"
+    .balign 4
+    .asciz "reb0_jobj&&eve_jobj"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D47F8
 lbl_804D47F8:
     .asciz "jobj.h"
@@ -1535,14 +1519,14 @@ lbl_804D4800:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A50
 lbl_804D6A50:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB830
 lbl_804DB830:
 	.4byte 0x41A00000

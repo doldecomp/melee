@@ -1354,7 +1354,7 @@ func_801CCD98:
 /* 801CCDE8 001C99C8  38 83 CE A0 */	addi r4, r3, lbl_801CCEA0@l
 /* 801CCDEC 001C99CC  38 7E 00 00 */	addi r3, r30, 0
 /* 801CCDF0 001C99D0  38 A0 00 02 */	li r5, 2
-/* 801CCDF4 001C99D4  48 1C 39 D5 */	bl func_803907C8
+/* 801CCDF4 001C99D4  48 1C 39 D5 */	bl GObj_SetupGXLinkMaxSorted
 /* 801CCDF8 001C99D8  38 60 00 34 */	li r3, 0x34
 /* 801CCDFC 001C99DC  48 1B 23 E9 */	bl HSD_MemAlloc
 /* 801CCE00 001C99E0  3B A3 00 00 */	addi r29, r3, 0
@@ -1747,7 +1747,7 @@ func_801CD2D4:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7E78
 lbl_803B7E78:
 	.float 0
@@ -1761,7 +1761,7 @@ lbl_803B7E84:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E0D60
 lbl_803E0D60:
     .4byte 0x00000003
@@ -1899,41 +1899,13 @@ lbl_803E0F20:
     .4byte 0x47000000
     .4byte 0x41F00000
     .4byte 0x3F9BD194
-    .4byte 0x47726449
-    .4byte 0x7A756D69
-    .4byte 0x5F63645F
-    .4byte 0x77745F47
-    .4byte 0x7264497A
-    .4byte 0x756D6944
-    .4byte 0x756D6D79
-    .4byte 0x315F315F
-    .4byte 0x696D6167
-    .4byte 0x655F6465
-    .4byte 0x73630000
-    .4byte 0x6E6F7420
-    .4byte 0x666F756E
-    .4byte 0x64206D69
-    .4byte 0x72726F72
-    .4byte 0x20696D61
-    .4byte 0x67652064
-    .4byte 0x65736321
-    .4byte 0x20284772
-    .4byte 0x64497A75
-    .4byte 0x6D695F63
-    .4byte 0x645F7774
-    .4byte 0x5F477264
-    .4byte 0x497A756D
-    .4byte 0x6944756D
-    .4byte 0x6D79315F
-    .4byte 0x315F696D
-    .4byte 0x6167655F
-    .4byte 0x64657363
-    .4byte 0x290A0000
-    .4byte NULL
+    .asciz "GrdIzumi_cd_wt_GrdIzumiDummy1_1_image_desc"
+    .balign 4
+    .asciz "not found mirror image desc! (GrdIzumi_cd_wt_GrdIzumiDummy1_1_image_desc)\n"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D45B8
 lbl_804D45B8:
     .asciz "jobj.h"
@@ -1946,18 +1918,17 @@ lbl_804D45C0:
 lbl_804D45C8:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6968
 lbl_804D6968:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DADD8
 lbl_804DADD8:
 	.4byte 0x00000000

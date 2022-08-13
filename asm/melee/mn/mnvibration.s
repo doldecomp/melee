@@ -2150,7 +2150,7 @@ func_80249174:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EECE0
 lbl_803EECE0:
     .4byte NULL
@@ -2171,124 +2171,41 @@ lbl_803EED04:
     .4byte 0xBECCCCCD
     .4byte 0x3F000000
     .4byte NULL
-    .4byte 0x43616E27
-    .4byte 0x74206765
-    .4byte 0x74207573
-    .4byte 0x65725F64
-    .4byte 0x6174612E
-    .4byte 0x0A000000
-    .4byte 0x6D6E7669
-    .4byte 0x62726174
-    .4byte 0x696F6E2E
-    .4byte 0x63000000
-    .4byte 0x75736572
-    .4byte 0x5F646174
-    .4byte 0x61000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E5669
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E5669
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E5669
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E5669
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x746C5669
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x746C5669
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x746C5669
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x746C5669
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4F
-    .4byte 0x6E6F6666
-    .4byte 0x56695F54
-    .4byte 0x6F705F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4F
-    .4byte 0x6E6F6666
-    .4byte 0x56695F54
-    .4byte 0x6F705F61
-    .4byte 0x6E696D6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4F
-    .4byte 0x6E6F6666
-    .4byte 0x56695F54
-    .4byte 0x6F705F6D
-    .4byte 0x6174616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4F
-    .4byte 0x6E6F6666
-    .4byte 0x56695F54
-    .4byte 0x6F705F73
-    .4byte 0x68617065
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x7572736F
-    .4byte 0x7256695F
-    .4byte 0x546F705F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte NULL
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mnvibration.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .asciz "MenMainConVi_Top_joint"
+    .balign 4
+    .asciz "MenMainConVi_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConVi_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConVi_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainCtlVi_Top_joint"
+    .balign 4
+    .asciz "MenMainCtlVi_Top_animjoint"
+    .balign 4
+    .asciz "MenMainCtlVi_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainCtlVi_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainOnoffVi_Top_joint"
+    .balign 4
+    .asciz "MenMainOnoffVi_Top_animjoint"
+    .balign 4
+    .asciz "MenMainOnoffVi_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainOnoffVi_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainCursorVi_Top_joint"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0868
 lbl_804A0868:
 	.skip 0x10
@@ -2304,7 +2221,7 @@ lbl_804A0898:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4FE8
 lbl_804D4FE8:
     .4byte 0x00160015
@@ -2320,18 +2237,17 @@ lbl_804D4FF4:
 lbl_804D4FFC:
     .asciz "jobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C28
 lbl_804D6C28:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC018
 lbl_804DC018:
 	.4byte 0x43300000

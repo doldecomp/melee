@@ -974,7 +974,7 @@ lbl_8032D45C:
 /* 8032D45C 0032A03C  3C 60 80 40 */	lis r3, lbl_804008D8@ha
 /* 8032D460 0032A040  38 83 08 D8 */	addi r4, r3, lbl_804008D8@l
 /* 8032D464 0032A044  38 7F 01 C0 */	addi r3, r31, 0x1c0
-/* 8032D468 0032A048  4B FF 85 E9 */	bl func_80325A50
+/* 8032D468 0032A048  4B FF 85 E9 */	bl strcpy
 /* 8032D46C 0032A04C  38 7F 01 C0 */	addi r3, r31, 0x1c0
 /* 8032D470 0032A050  38 80 00 20 */	li r4, 0x20
 /* 8032D474 0032A054  48 01 73 99 */	bl DCFlushRange
@@ -2625,7 +2625,7 @@ lbl_8032EA70:
 
 
 .section .data
-
+    .balign 8
 .global lbl_804008D8
 lbl_804008D8:
     .asciz "HUDSON/USB2EXI/INITCODE/TARGET"
@@ -2637,14 +2637,14 @@ lbl_804008F8:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A50E0
 lbl_804A50E0:
 	.skip 0x220
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B70
 lbl_804D5B70:
     .4byte 0x00000001
@@ -2652,7 +2652,7 @@ lbl_804D5B70:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D70B0
 lbl_804D70B0:
 	.skip 0x4
@@ -2673,4 +2673,4 @@ lbl_804D70C4:
 	.skip 0x4
 .global lbl_804D70C8
 lbl_804D70C8:
-	.skip 0x8
+	.skip 0x4

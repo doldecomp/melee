@@ -279,7 +279,7 @@ lbl_80345A3C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80401FF8
 lbl_80401FF8:
     .asciz " in \"%s\" on line %d.\n"
@@ -330,18 +330,17 @@ jtbl_804022D4:
 	.4byte lbl_80345A3C
 	.4byte lbl_80345A3C
 	.4byte lbl_803459F0
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global __OSErrorTable
 __OSErrorTable:
 	.skip 0x40
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5C18
 lbl_804D5C18:
     .4byte 0x0A000000

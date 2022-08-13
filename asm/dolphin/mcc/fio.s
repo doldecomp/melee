@@ -261,7 +261,7 @@ lbl_8032EDD4:
 /* 8032EDE8 0032B9C8  48 00 00 8C */	b lbl_8032EE74
 lbl_8032EDEC:
 /* 8032EDEC 0032B9CC  7F A3 EB 78 */	mr r3, r29
-/* 8032EDF0 0032B9D0  4B FF 6D 15 */	bl func_80325B04
+/* 8032EDF0 0032B9D0  4B FF 6D 15 */	bl strlen
 /* 8032EDF4 0032B9D4  38 83 00 05 */	addi r4, r3, 5
 /* 8032EDF8 0032B9D8  38 60 00 00 */	li r3, 0
 /* 8032EDFC 0032B9DC  38 A0 00 00 */	li r5, 0
@@ -269,7 +269,7 @@ lbl_8032EDEC:
 /* 8032EE04 0032B9E4  7C 7F 1B 78 */	mr r31, r3
 /* 8032EE08 0032B9E8  93 C3 00 00 */	stw r30, 0(r3)
 /* 8032EE0C 0032B9EC  7F A3 EB 78 */	mr r3, r29
-/* 8032EE10 0032B9F0  4B FF 6C F5 */	bl func_80325B04
+/* 8032EE10 0032B9F0  4B FF 6C F5 */	bl strlen
 /* 8032EE14 0032B9F4  38 A3 00 00 */	addi r5, r3, 0
 /* 8032EE18 0032B9F8  38 9D 00 00 */	addi r4, r29, 0
 /* 8032EE1C 0032B9FC  38 7F 00 04 */	addi r3, r31, 4
@@ -863,7 +863,7 @@ lbl_8032F614:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400918
 lbl_80400918:
     .asciz "Error:Time is over.\n"
@@ -902,18 +902,17 @@ lbl_80400918:
     .balign 4
     .asciz "fioPacketResultWrite.MCCStreamWrite.NG"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A5300
 lbl_804A5300:
 	.skip 0x2000
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B78
 lbl_804D5B78:
     .byte 0x01
@@ -927,7 +926,7 @@ lbl_804D5B7C:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D70D0
 lbl_804D70D0:
 	.skip 0x4
@@ -960,4 +959,4 @@ lbl_804D70F4:
 	.skip 0x4
 .global lbl_804D70F8
 lbl_804D70F8:
-	.skip 0x8
+	.skip 0x4

@@ -9,7 +9,7 @@ func_8024CE74:
 /* 8024CE7C 00249A5C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8024CE80 00249A60  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8024CE84 00249A64  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8024CE88 00249A68  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 8024CE88 00249A68  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 8024CE8C 00249A6C  2C 00 00 02 */	cmpwi r0, 2
 /* 8024CE90 00249A70  40 81 00 0C */	ble lbl_8024CE9C
 /* 8024CE94 00249A74  38 60 00 2A */	li r3, 0x2a
@@ -1852,7 +1852,7 @@ lbl_8024E8F8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EF740
 lbl_803EF740:
     .4byte NULL
@@ -1891,58 +1891,25 @@ lbl_803EF7A0:
     .4byte 0x3A817C81
     .4byte 0x7C20817C
     .4byte 0x817C0000
-    .4byte 0x43616E27
-    .4byte 0x74206765
-    .4byte 0x74207573
-    .4byte 0x65725F64
-    .4byte 0x6174612E
-    .4byte 0x0A000000
-    .4byte 0x6D6E6576
-    .4byte 0x656E742E
-    .4byte 0x63000000
-    .4byte 0x75736572
-    .4byte 0x5F646174
-    .4byte 0x61000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4576
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4576
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4576
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4576
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E4D
-    .4byte 0x61726B45
-    .4byte 0x765F546F
-    .4byte 0x705F6A6F
-    .4byte 0x696E7400
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mnevent.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .asciz "MenMainConEv_Top_joint"
+    .balign 4
+    .asciz "MenMainConEv_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConEv_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConEv_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainMarkEv_Top_joint"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A08F8
 lbl_804A08F8:
 	.skip 0x10
@@ -1952,7 +1919,7 @@ lbl_804A0908:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5028
 lbl_804D5028:
     .4byte 0xCABC9FFF
@@ -1977,7 +1944,7 @@ lbl_804D5044:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C60
 lbl_804D6C60:
 	.skip 0x4
@@ -1990,7 +1957,7 @@ lbl_804D6C65:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC150
 lbl_804DC150:
 	.4byte 0x41C80000

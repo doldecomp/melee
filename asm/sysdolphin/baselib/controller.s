@@ -639,7 +639,7 @@ lbl_80377308:
 /* 80377324 00373F04  C8 01 00 40 */	lfd f0, 0x40(r1)
 /* 80377328 00373F08  EC 21 10 28 */	fsubs f1, f1, f2
 /* 8037732C 00373F0C  EC 40 10 28 */	fsubs f2, f0, f2
-/* 80377330 00373F10  4B CA B9 01 */	bl func_80022C30
+/* 80377330 00373F10  4B CA B9 01 */	bl atan2f
 lbl_80377334:
 /* 80377334 00373F14  88 7A 00 15 */	lbz r3, 0x15(r26)
 /* 80377338 00373F18  3C 00 43 30 */	lis r0, 0x4330
@@ -1570,7 +1570,7 @@ lbl_8037805C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B9570
 lbl_803B9570:
     .4byte 0x80000000
@@ -1580,7 +1580,7 @@ lbl_803B9570:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406D68
 lbl_80406D68:
     .4byte NULL
@@ -1618,7 +1618,7 @@ lbl_80406DAC:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global HSD_PadLibData
 HSD_PadLibData:
 	.skip 0x34
@@ -1634,7 +1634,7 @@ HSD_PadRumbleData:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE5B0
 lbl_804DE5B0:
 	.4byte 0x00000000

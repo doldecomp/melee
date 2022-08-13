@@ -4011,7 +4011,7 @@ HSD_SynthInit:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407D90
 lbl_80407D90:
     .asciz "audio heap overflow.\n"
@@ -4135,7 +4135,7 @@ lbl_804080EC:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804C28E0
 lbl_804C28E0:
 	.skip 0x100
@@ -4160,7 +4160,7 @@ lbl_804C4540:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D6018
 lbl_804D6018:
     .4byte 0xFFFFFFFF
@@ -4183,7 +4183,7 @@ lbl_804D6030:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7710
 lbl_804D7710:
 	.skip 0x4
@@ -4274,7 +4274,7 @@ lbl_804D7784:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE7F0
 lbl_804DE7F0:
 	.4byte 0x00000000

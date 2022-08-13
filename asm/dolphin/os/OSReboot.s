@@ -82,7 +82,7 @@ lbl_803481F4:
 /* 80348208 00344DE8  38 A0 00 20 */	li r5, 0x20
 /* 8034820C 00344DEC  38 C0 24 40 */	li r6, 0x2440
 /* 80348210 00344DF0  38 E0 00 00 */	li r7, 0
-/* 80348214 00344DF4  4B FF 17 51 */	bl func_80339964
+/* 80348214 00344DF4  4B FF 17 51 */	bl DVDReadAbsAsyncForBS
 /* 80348218 00344DF8  3F E0 81 80 */	lis r31, 0x8180
 /* 8034821C 00344DFC  48 00 00 04 */	b lbl_80348220
 lbl_80348220:
@@ -122,7 +122,7 @@ lbl_80348278:
 /* 8034828C 00344E6C  38 C4 24 40 */	addi r6, r4, 0x2440
 /* 80348290 00344E70  3C 80 81 30 */	lis r4, 0x8130
 /* 80348294 00344E74  38 E0 00 00 */	li r7, 0
-/* 80348298 00344E78  4B FF 16 CD */	bl func_80339964
+/* 80348298 00344E78  4B FF 16 CD */	bl DVDReadAbsAsyncForBS
 /* 8034829C 00344E7C  3F E0 81 80 */	lis r31, 0x8180
 /* 803482A0 00344E80  48 00 00 04 */	b lbl_803482A4
 lbl_803482A4:
@@ -160,14 +160,14 @@ lbl_803482E0:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A7D40
 lbl_804A7D40:
 	.skip 0x20
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7390
 lbl_804D7390:
 	.skip 0x4

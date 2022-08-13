@@ -632,7 +632,7 @@ lbl_80350C54:
 
 
 .section .sbss
-
+    .balign 8
 .global __AIS_Callback
 __AIS_Callback:
 	.skip 0x4

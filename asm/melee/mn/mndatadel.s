@@ -1750,7 +1750,7 @@ func_80250170:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EF870
 lbl_803EF870:
     .4byte NULL
@@ -1785,116 +1785,39 @@ lbl_803EF8AC:
     .4byte 0xC0B00000
     .4byte 0xC0333333
     .4byte 0x41B80000
-    .4byte 0x43616E27
-    .4byte 0x74206765
-    .4byte 0x74207573
-    .4byte 0x65725F64
-    .4byte 0x6174612E
-    .4byte 0x0A000000
-    .4byte 0x6D6E6461
-    .4byte 0x74616465
-    .4byte 0x6C2E6300
-    .4byte 0x75736572
-    .4byte 0x5F646174
-    .4byte 0x61000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E446C
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E446C
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E446C
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E446C
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x7572736F
-    .4byte 0x72446C5F
-    .4byte 0x546F705F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x7572736F
-    .4byte 0x72446C5F
-    .4byte 0x546F705F
-    .4byte 0x616E696D
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x7572736F
-    .4byte 0x72446C5F
-    .4byte 0x546F705F
-    .4byte 0x6D617461
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x7572736F
-    .4byte 0x72446C5F
-    .4byte 0x546F705F
-    .4byte 0x73686170
-    .4byte 0x65616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x4D656E4D
-    .4byte 0x61696E57
-    .4byte 0x6172436D
-    .4byte 0x6E5F546F
-    .4byte 0x705F6A6F
-    .4byte 0x696E7400
-    .4byte 0x4D656E4D
-    .4byte 0x61696E57
-    .4byte 0x6172436D
-    .4byte 0x6E5F546F
-    .4byte 0x705F616E
-    .4byte 0x696D6A6F
-    .4byte 0x696E7400
-    .4byte 0x4D656E4D
-    .4byte 0x61696E57
-    .4byte 0x6172436D
-    .4byte 0x6E5F546F
-    .4byte 0x705F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x4D656E4D
-    .4byte 0x61696E57
-    .4byte 0x6172436D
-    .4byte 0x6E5F546F
-    .4byte 0x705F7368
-    .4byte 0x61706561
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte NULL
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mndatadel.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .asciz "MenMainConDl_Top_joint"
+    .balign 4
+    .asciz "MenMainConDl_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConDl_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConDl_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainCursorDl_Top_joint"
+    .balign 4
+    .asciz "MenMainCursorDl_Top_animjoint"
+    .balign 4
+    .asciz "MenMainCursorDl_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainCursorDl_Top_shapeanim_joint"
+    .balign 4
+    .asciz "MenMainWarCmn_Top_joint"
+    .balign 4
+    .asciz "MenMainWarCmn_Top_animjoint"
+    .balign 4
+    .asciz "MenMainWarCmn_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainWarCmn_Top_shapeanim_joint"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0918
 lbl_804A0918:
 	.skip 0x10
@@ -1907,7 +1830,7 @@ lbl_804A0938:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5048
 lbl_804D5048:
     .asciz "jobj.h"
@@ -1919,7 +1842,7 @@ lbl_804D5050:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C68
 lbl_804D6C68:
 	.skip 0x4
@@ -1929,7 +1852,7 @@ lbl_804D6C6C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC1A0
 lbl_804DC1A0:
 	.4byte 0x43300000

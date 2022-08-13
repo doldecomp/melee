@@ -266,7 +266,7 @@ HSD_TExpTev:
 /* 80383128 0037FD08  48 00 50 F9 */	bl __assert
 lbl_8038312C:
 /* 8038312C 0037FD0C  38 60 00 6C */	li r3, 0x6c
-/* 80383130 0037FD10  4B FF EE 79 */	bl func_80381FA8
+/* 80383130 0037FD10  4B FF EE 79 */	bl hsdAllocMemPiece
 /* 80383134 0037FD14  7C 7F 1B 79 */	or. r31, r3, r3
 /* 80383138 0037FD18  40 82 00 14 */	bne lbl_8038314C
 /* 8038313C 0037FD1C  38 6D A9 28 */	addi r3, r13, lbl_804D5FC8@sda21
@@ -354,7 +354,7 @@ lbl_8038324C:
 /* 80383260 0037FE40  48 00 00 5C */	b lbl_803832BC
 lbl_80383264:
 /* 80383264 0037FE44  38 60 00 18 */	li r3, 0x18
-/* 80383268 0037FE48  4B FF ED 41 */	bl func_80381FA8
+/* 80383268 0037FE48  4B FF ED 41 */	bl hsdAllocMemPiece
 /* 8038326C 0037FE4C  7C 7F 1B 79 */	or. r31, r3, r3
 /* 80383270 0037FE50  40 82 00 14 */	bne lbl_80383284
 /* 80383274 0037FE54  38 6D A9 28 */	addi r3, r13, lbl_804D5FC8@sda21
@@ -3094,7 +3094,7 @@ lbl_80385690:
 /* 803856C4 003822A4  48 00 00 4C */	b lbl_80385710
 lbl_803856C8:
 /* 803856C8 003822A8  38 60 00 78 */	li r3, 0x78
-/* 803856CC 003822AC  4B FF C8 DD */	bl func_80381FA8
+/* 803856CC 003822AC  4B FF C8 DD */	bl hsdAllocMemPiece
 /* 803856D0 003822B0  3B 23 00 00 */	addi r25, r3, 0
 /* 803856D4 003822B4  38 7C 00 00 */	addi r3, r28, 0
 /* 803856D8 003822B8  4B FD D0 91 */	bl func_80362768
@@ -3154,7 +3154,7 @@ lbl_8038577C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407738
 lbl_80407738:
     .asciz "texp_list"
@@ -3319,7 +3319,7 @@ lbl_80407A14:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5FC8
 lbl_804D5FC8:
     .asciz "texp.c"
@@ -3340,11 +3340,10 @@ lbl_804D5FDC:
 lbl_804D5FE4:
     .asciz "tevdesc"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE7D8
 lbl_804DE7D8:
 	.4byte 0x437F0000

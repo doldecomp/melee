@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/displayfunc.h"
+#include <sysdolphin/baselib/displayfunc.h>
 
 typedef struct _HSD_ZList {
   Mtx pmtx;

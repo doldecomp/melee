@@ -4975,12 +4975,12 @@ lbl_80260304:
 /* 802603A8 0025CF88  48 00 00 24 */	b lbl_802603CC
 lbl_802603AC:
 /* 802603AC 0025CF8C  EF 03 00 28 */	fsubs f24, f3, f0
-/* 802603B0 0025CF90  4B DC 28 81 */	bl func_80022C30
+/* 802603B0 0025CF90  4B DC 28 81 */	bl atan2f
 /* 802603B4 0025CF94  FF 20 08 90 */	fmr f25, f1
-/* 802603B8 0025CF98  48 0C 60 1D */	bl func_803263D4
+/* 802603B8 0025CF98  48 0C 60 1D */	bl sinf
 /* 802603BC 0025CF9C  EF 58 00 72 */	fmuls f26, f24, f1
 /* 802603C0 0025CFA0  FC 20 C8 90 */	fmr f1, f25
-/* 802603C4 0025CFA4  48 0C 5E 7D */	bl func_80326240
+/* 802603C4 0025CFA4  48 0C 5E 7D */	bl cosf
 /* 802603C8 0025CFA8  EF 18 00 72 */	fmuls f24, f24, f1
 lbl_802603CC:
 /* 802603CC 0025CFAC  56 60 05 AD */	rlwinm. r0, r19, 0, 0x16, 0x16
@@ -5051,12 +5051,12 @@ lbl_80260440:
 /* 802604C4 0025D0A4  48 00 00 24 */	b lbl_802604E8
 lbl_802604C8:
 /* 802604C8 0025D0A8  EF 03 00 28 */	fsubs f24, f3, f0
-/* 802604CC 0025D0AC  4B DC 27 65 */	bl func_80022C30
+/* 802604CC 0025D0AC  4B DC 27 65 */	bl atan2f
 /* 802604D0 0025D0B0  FF 20 08 90 */	fmr f25, f1
-/* 802604D4 0025D0B4  48 0C 5F 01 */	bl func_803263D4
+/* 802604D4 0025D0B4  48 0C 5F 01 */	bl sinf
 /* 802604D8 0025D0B8  EF 58 00 72 */	fmuls f26, f24, f1
 /* 802604DC 0025D0BC  FC 20 C8 90 */	fmr f1, f25
-/* 802604E0 0025D0C0  48 0C 5D 61 */	bl func_80326240
+/* 802604E0 0025D0C0  48 0C 5D 61 */	bl cosf
 /* 802604E4 0025D0C4  EF 18 00 72 */	fmuls f24, f24, f1
 lbl_802604E8:
 /* 802604E8 0025D0C8  88 9F 00 04 */	lbz r4, 4(r31)
@@ -7682,12 +7682,12 @@ lbl_80262ABC:
 /* 80262AC8 0025F6A8  FE C0 B0 18 */	frsp f22, f22
 lbl_80262ACC:
 /* 80262ACC 0025F6AC  FC 20 B0 90 */	fmr f1, f22
-/* 80262AD0 0025F6B0  48 0C 39 05 */	bl func_803263D4
+/* 80262AD0 0025F6B0  48 0C 39 05 */	bl sinf
 /* 80262AD4 0025F6B4  C0 1D 00 08 */	lfs f0, 8(r29)
 /* 80262AD8 0025F6B8  EC 1C 00 7C */	fnmsubs f0, f28, f1, f0
 /* 80262ADC 0025F6BC  FC 20 B0 90 */	fmr f1, f22
 /* 80262AE0 0025F6C0  D0 1D 00 08 */	stfs f0, 8(r29)
-/* 80262AE4 0025F6C4  48 0C 37 5D */	bl func_80326240
+/* 80262AE4 0025F6C4  48 0C 37 5D */	bl cosf
 /* 80262AE8 0025F6C8  C0 1D 00 0C */	lfs f0, 0xc(r29)
 /* 80262AEC 0025F6CC  EC 1C 00 7C */	fnmsubs f0, f28, f1, f0
 /* 80262AF0 0025F6D0  D0 1D 00 0C */	stfs f0, 0xc(r29)
@@ -7867,13 +7867,13 @@ lbl_80262D64:
 /* 80262D70 0025F950  FE C0 B0 18 */	frsp f22, f22
 lbl_80262D74:
 /* 80262D74 0025F954  FC 20 B0 90 */	fmr f1, f22
-/* 80262D78 0025F958  48 0C 36 5D */	bl func_803263D4
+/* 80262D78 0025F958  48 0C 36 5D */	bl sinf
 /* 80262D7C 0025F95C  C0 42 CA 30 */	lfs f2, lbl_804DC410@sda21(r2)
 /* 80262D80 0025F960  C0 1D 00 10 */	lfs f0, 0x10(r29)
 /* 80262D84 0025F964  EC 02 00 7A */	fmadds f0, f2, f1, f0
 /* 80262D88 0025F968  FC 20 B0 90 */	fmr f1, f22
 /* 80262D8C 0025F96C  D0 1D 00 10 */	stfs f0, 0x10(r29)
-/* 80262D90 0025F970  48 0C 34 B1 */	bl func_80326240
+/* 80262D90 0025F970  48 0C 34 B1 */	bl cosf
 /* 80262D94 0025F974  C0 42 CA 30 */	lfs f2, lbl_804DC410@sda21(r2)
 /* 80262D98 0025F978  C0 1D 00 14 */	lfs f0, 0x14(r29)
 /* 80262D9C 0025F97C  EC 02 00 7A */	fmadds f0, f2, f1, f0
@@ -9426,7 +9426,7 @@ lbl_80264324:
 /* 80264360 00260F40  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 80264364 00260F44  38 71 00 00 */	addi r3, r17, 0
 /* 80264368 00260F48  38 A0 00 00 */	li r5, 0
-/* 8026436C 00260F4C  48 12 C3 F1 */	bl func_8039075C
+/* 8026436C 00260F4C  48 12 C3 F1 */	bl GObj_SetupGXLinkMax
 /* 80264370 00260F50  38 00 00 1F */	li r0, 0x1f
 /* 80264374 00260F54  90 11 00 24 */	stw r0, 0x24(r17)
 /* 80264378 00260F58  38 00 00 00 */	li r0, 0
@@ -12414,7 +12414,7 @@ lbl_80266F28:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F0A48
 lbl_803F0A48:
     .4byte 0x826C8292
@@ -12756,16 +12756,12 @@ lbl_803F0DFC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x25303264
-    .4byte 0x3A253032
-    .4byte 0x64000000
-    .4byte 0x25643A25
-    .4byte 0x3032643A
-    .4byte 0x25303264
-    .4byte NULL
-    .4byte 0x39393A35
-    .4byte 0x393A3539
-    .4byte NULL
+    .asciz "%02d:%02d"
+    .balign 4
+    .asciz "%d:%02d:%02d"
+    .balign 4
+    .asciz "99:59:59"
+    .balign 4
     .4byte 0x25642090
     .4byte 0x6C94B282
     .4byte 0xAB000000
@@ -12869,40 +12865,25 @@ lbl_803F10D4:
 	.4byte lbl_802648D0
 	.4byte lbl_802648D0
 	.4byte lbl_80264868
-    .4byte 0x4D6E536C
-    .4byte 0x4368722E
-    .4byte 0x64617400
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x4D6E536C
-    .4byte 0x4368722E
-    .4byte 0x75736400
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte 0x2E757364
-    .4byte NULL
-    .4byte 0x4D6E5365
-    .4byte 0x6C656374
-    .4byte 0x43687244
-    .4byte 0x61746154
-    .4byte 0x61626C65
-    .4byte NULL
-    .4byte 0x5364536C
-    .4byte 0x4368722E
-    .4byte 0x64617400
-    .4byte 0x5349535F
-    .4byte 0x53656C43
-    .4byte 0x68617244
-    .4byte 0x61746100
-    .4byte 0x5364536C
-    .4byte 0x4368722E
-    .4byte 0x75736400
+    .asciz "MnSlChr.dat"
+    .balign 4
+    .asciz "MnExtAll.dat"
+    .balign 4
+    .asciz "MnSlChr.usd"
+    .balign 4
+    .asciz "MnExtAll.usd"
+    .balign 4
+    .asciz "MnSelectChrDataTable"
+    .balign 4
+    .asciz "SdSlChr.dat"
+    .balign 4
+    .asciz "SIS_SelCharData"
+    .balign 4
+    .asciz "SdSlChr.usd"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0BC0
 lbl_804A0BC0:
 	.skip 0x10
@@ -12912,7 +12893,7 @@ lbl_804A0BD0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D50C8
 lbl_804D50C8:
     .4byte 0x01020408
@@ -12988,7 +12969,7 @@ lbl_804D5140:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6CB0
 lbl_804D6CB0:
 	.skip 0x4
@@ -13070,7 +13051,7 @@ lbl_804D6CF9:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC3E0
 lbl_804DC3E0:
 	.4byte 0x43480000

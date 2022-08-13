@@ -39,7 +39,7 @@ lbl_80202B70:
 /* 80202BE4 001FF7C4  48 00 00 95 */	bl func_80202C78
 /* 80202BE8 001FF7C8  4B FC 0D D9 */	bl func_801C39C0
 /* 80202BEC 001FF7CC  4B FC 0F C9 */	bl func_801C3BB4
-/* 80202BF0 001FF7D0  48 02 25 A5 */	bl func_80225194
+/* 80202BF0 001FF7D0  48 02 25 A5 */	bl Stage_80225194
 /* 80202BF4 001FF7D4  2C 03 00 3E */	cmpwi r3, 0x3e
 /* 80202BF8 001FF7D8  41 82 00 1C */	beq lbl_80202C14
 /* 80202BFC 001FF7DC  4B F6 86 3D */	bl func_8016B238
@@ -818,7 +818,7 @@ func_80203624:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E5248
 lbl_803E5248:
 	.4byte lbl_80202D60
@@ -858,9 +858,8 @@ lbl_803E5248:
     .4byte NULL
 .global lbl_803E52D4
 lbl_803E52D4:
-    .4byte 0x2F477247
-    .4byte 0x642E6461
-    .4byte 0x74000000
+    .asciz "/GrGd.dat"
+    .balign 4
 .global lbl_803E52E0
 lbl_803E52E0:
     .4byte 0x00000005
@@ -876,23 +875,13 @@ lbl_803E52E0:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726761
-    .4byte 0x7264656E
-    .4byte 0x2E630000
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grgarden.c"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D47A8
 lbl_804D47A8:
     .asciz "jobj.h"
@@ -904,14 +893,14 @@ lbl_804D47B0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A28
 lbl_804D6A28:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB718
 lbl_804DB718:
 	.4byte 0x00000000

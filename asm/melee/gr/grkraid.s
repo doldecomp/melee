@@ -1286,17 +1286,16 @@ lbl_801FF15C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8278
 lbl_803B8278:
-    .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x00000000
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E4C78
 lbl_803E4C78:
     .4byte 0x00000003
@@ -1337,9 +1336,8 @@ lbl_803E4C9C:
     .4byte NULL
 .global lbl_803E4D00
 lbl_803E4D00:
-    .4byte 0x2F47724B
-    .4byte 0x722E6461
-    .4byte 0x74000000
+    .asciz "/GrKr.dat"
+    .balign 4
 .global lbl_803E4D0C
 lbl_803E4D0C:
     .4byte 0x00000009
@@ -1355,18 +1353,10 @@ lbl_803E4D0C:
     .4byte 0x00000001
     .4byte lbl_803E4C78
     .4byte 0x00000006
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726B72
-    .4byte 0x6169642E
-    .4byte 0x63000000
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grkraid.c"
+    .balign 4
 .global lbl_803E4D70
 lbl_803E4D70:
     .asciz "*** Req Effect Anime %d\n"
@@ -1375,11 +1365,10 @@ lbl_803E4D70:
 lbl_803E4D8C:
     .asciz "Kraid Hand Pos = %f\n"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4770
 lbl_804D4770:
     .asciz "jobj.h"
@@ -1391,7 +1380,7 @@ lbl_804D4778:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A08
 lbl_804D6A08:
 	.skip 0x4
@@ -1401,7 +1390,7 @@ lbl_804D6A0C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB620
 lbl_804DB620:
 	.4byte 0x00000000

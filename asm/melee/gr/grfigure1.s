@@ -218,7 +218,7 @@ lbl_8020E270:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E6278
 lbl_803E6278:
 	.4byte lbl_8020E168
@@ -238,9 +238,8 @@ lbl_803E6278:
     .4byte NULL
 .global lbl_803E62B4
 lbl_803E62B4:
-    .4byte 0x2F477245
-    .4byte 0x46312E64
-    .4byte 0x61740000
+    .asciz "/GrEF1.dat"
+    .balign 4
 .global lbl_803E62C0
 lbl_803E62C0:
     .4byte 0x00000044
@@ -256,23 +255,13 @@ lbl_803E62C0:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726669
-    .4byte 0x67757265
-    .4byte 0x312E6300
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grfigure1.c"
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A70
 lbl_804D6A70:
-	.skip 0x8
+	.skip 0x4

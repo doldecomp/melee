@@ -1172,7 +1172,7 @@ lbl_8025A9F0:
 /* 8025AA7C 0025765C  38 83 10 D8 */	addi r4, r3, func_803910D8@l
 /* 8025AA80 00257660  38 76 00 00 */	addi r3, r22, 0
 /* 8025AA84 00257664  38 A0 00 00 */	li r5, 0
-/* 8025AA88 00257668  48 13 5C D5 */	bl func_8039075C
+/* 8025AA88 00257668  48 13 5C D5 */	bl GObj_SetupGXLinkMax
 /* 8025AA8C 0025766C  38 00 00 11 */	li r0, 0x11
 /* 8025AA90 00257670  90 16 00 24 */	stw r0, 0x24(r22)
 /* 8025AA94 00257674  3C 60 80 23 */	lis r3, func_8022BA1C@ha
@@ -2365,17 +2365,16 @@ func_8025BC08:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8550
 lbl_803B8550:
     .4byte 0x00000000
     .4byte 0xC1500000
     .4byte 0x00000000
-    .4byte 0x00000000
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F06D0
 lbl_803F06D0:
     .4byte NULL
@@ -2588,22 +2587,15 @@ lbl_803F06D0:
     .4byte 0x402CCCCD
     .4byte 0x3F99999A
     .4byte 0x3F800000
-    .4byte 0x4D6E536C
-    .4byte 0x4D61702E
-    .4byte 0x75736400
-    .4byte 0x4D6E536C
-    .4byte 0x4D61702E
-    .4byte 0x64617400
-    .4byte 0x4D6E5365
-    .4byte 0x6C656374
-    .4byte 0x53746167
-    .4byte 0x65446174
-    .4byte 0x61546162
-    .4byte 0x6C650000
+    .asciz "MnSlMap.usd"
+    .balign 4
+    .asciz "MnSlMap.dat"
+    .balign 4
+    .asciz "MnSelectStageDataTable"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D50A0
 lbl_804D50A0:
     .4byte 0xFF000000
@@ -2623,11 +2615,10 @@ lbl_804D50B4:
 lbl_804D50BC:
     .asciz "lobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C90
 lbl_804D6C90:
 	.skip 0x4
@@ -2664,7 +2655,7 @@ lbl_804D6CAF:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC398
 lbl_804DC398:
 	.4byte 0x43300000

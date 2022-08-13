@@ -2114,7 +2114,7 @@ func_80072BF4:
 /* 80072C2C 0006F80C  90 01 00 18 */	stw r0, 0x18(r1)
 /* 80072C30 0006F810  C8 01 00 18 */	lfd f0, 0x18(r1)
 /* 80072C34 0006F814  EC 20 08 28 */	fsubs f1, f0, f1
-/* 80072C38 0006F818  4B FF A0 45 */	bl func_8006CC7C
+/* 80072C38 0006F818  4B FF A0 45 */	bl Fighter_TakeDamage_8006CC7C
 /* 80072C3C 0006F81C  80 7F 00 08 */	lwz r3, 8(r31)
 /* 80072C40 0006F820  38 03 00 04 */	addi r0, r3, 4
 /* 80072C44 0006F824  90 1F 00 08 */	stw r0, 8(r31)
@@ -2804,7 +2804,7 @@ lbl_80073594:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C06E8
 lbl_803C06E8:
     .4byte func_80071028
@@ -2955,7 +2955,7 @@ jtbl_803C08DC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D82A0
 lbl_804D82A0:
 	.4byte 0x3B7FFBCE

@@ -275,7 +275,7 @@ lbl_8035224C:
 
 
 .section .sbss
-
+    .balign 8
 .global __ARQRequestQueueHi
 __ARQRequestQueueHi:
 	.skip 0x4

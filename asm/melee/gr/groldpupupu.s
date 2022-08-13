@@ -1554,7 +1554,7 @@ lbl_80211CE8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E6688
 lbl_803E6688:
 	.4byte lbl_8021099C
@@ -1604,9 +1604,8 @@ lbl_803E6688:
     .4byte NULL
 .global lbl_803E673C
 lbl_803E673C:
-    .4byte 0x2F47724F
-    .4byte 0x702E6461
-    .4byte 0x74000000
+    .asciz "/GrOp.dat"
+    .balign 4
 .global lbl_803E6748
 lbl_803E6748:
     .4byte 0x0000001C
@@ -1622,19 +1621,10 @@ lbl_803E6748:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726F6C
-    .4byte 0x64707570
-    .4byte 0x7570752E
-    .4byte 0x63000000
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "groldpupupu.c"
+    .balign 4
     .4byte 0xFF010001
     .4byte 0x01010003
     .4byte 0x01010005
@@ -1658,7 +1648,7 @@ lbl_803E6748:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D48A0
 lbl_804D48A0:
     .4byte 0x00000004
@@ -1698,7 +1688,7 @@ lbl_804D48E0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A98
 lbl_804D6A98:
 	.skip 0x4
@@ -1708,7 +1698,7 @@ lbl_804D6A9C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBA20
 lbl_804DBA20:
 	.4byte 0xC1200000

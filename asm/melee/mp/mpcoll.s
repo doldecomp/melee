@@ -22,7 +22,7 @@ func_80041C8C:
 /* 80041CA8 0003E888  3B C5 D2 70 */	addi r30, r5, lbl_803BD270@l
 /* 80041CAC 0003E88C  93 A1 00 1C */	stw r29, 0x1c(r1)
 /* 80041CB0 0003E890  7C 7D 1B 78 */	mr r29, r3
-/* 80041CB4 0003E894  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 80041CB4 0003E894  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 80041CB8 0003E898  90 8D AE 00 */	stw r4, lbl_804D64A0@sda21(r13)
 /* 80041CBC 0003E89C  2C 00 00 03 */	cmpwi r0, 3
 /* 80041CC0 0003E8A0  90 8D AE 04 */	stw r4, lbl_804D64A4@sda21(r13)
@@ -73,7 +73,7 @@ lbl_80041D44:
 /* 80041D6C 0003E94C  88 03 00 02 */	lbz r0, 2(r3)
 /* 80041D70 0003E950  28 00 00 09 */	cmplwi r0, 9
 /* 80041D74 0003E954  40 82 00 18 */	bne lbl_80041D8C
-/* 80041D78 0003E958  48 22 95 89 */	bl func_8026B300
+/* 80041D78 0003E958  48 22 95 89 */	bl itGetKind
 /* 80041D7C 0003E95C  38 83 00 00 */	addi r4, r3, 0
 /* 80041D80 0003E960  4C C6 31 82 */	crclr 6
 /* 80041D84 0003E964  38 7E 00 78 */	addi r3, r30, 0x78
@@ -974,10 +974,10 @@ lbl_80042A1C:
 /* 80042A20 0003F600  FC 00 D0 00 */	fcmpu cr0, f0, f26
 /* 80042A24 0003F604  41 82 01 58 */	beq lbl_80042B7C
 /* 80042A28 0003F608  FC 20 D0 90 */	fmr f1, f26
-/* 80042A2C 0003F60C  48 2E 39 A9 */	bl func_803263D4
+/* 80042A2C 0003F60C  48 2E 39 A9 */	bl sinf
 /* 80042A30 0003F610  FF 60 08 90 */	fmr f27, f1
 /* 80042A34 0003F614  FC 20 D0 90 */	fmr f1, f26
-/* 80042A38 0003F618  48 2E 38 09 */	bl func_80326240
+/* 80042A38 0003F618  48 2E 38 09 */	bl cosf
 /* 80042A3C 0003F61C  FC 80 F8 90 */	fmr f4, f31
 /* 80042A40 0003F620  C0 62 85 B8 */	lfs f3, lbl_804D7F98@sda21(r2)
 /* 80042A44 0003F624  EC 5D E0 2A */	fadds f2, f29, f28
@@ -1720,7 +1720,7 @@ lbl_800433C8:
 /* 8004343C 0004001C  80 C1 00 2C */	lwz r6, 0x2c(r1)
 /* 80043440 00040020  4E 80 00 21 */	blrl 
 lbl_80043444:
-/* 80043444 00040024  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 80043444 00040024  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 80043448 00040028  2C 00 00 03 */	cmpwi r0, 3
 /* 8004344C 0004002C  41 80 00 E8 */	blt lbl_80043534
 /* 80043450 00040030  C0 5E 00 04 */	lfs f2, 4(r30)
@@ -1773,7 +1773,7 @@ lbl_800434D4:
 /* 80043504 000400E4  88 03 00 02 */	lbz r0, 2(r3)
 /* 80043508 000400E8  28 00 00 09 */	cmplwi r0, 9
 /* 8004350C 000400EC  40 82 00 18 */	bne lbl_80043524
-/* 80043510 000400F0  48 22 7D F1 */	bl func_8026B300
+/* 80043510 000400F0  48 22 7D F1 */	bl itGetKind
 /* 80043514 000400F4  38 83 00 00 */	addi r4, r3, 0
 /* 80043518 000400F8  4C C6 31 82 */	crclr 6
 /* 8004351C 000400FC  38 7F 00 78 */	addi r3, r31, 0x78
@@ -1957,7 +1957,7 @@ func_80043754:
 /* 80043778 00040358  38 7C 00 04 */	addi r3, r28, 4
 /* 8004377C 0004035C  38 9C 00 1C */	addi r4, r28, 0x1c
 /* 80043780 00040360  38 A1 00 2C */	addi r5, r1, 0x2c
-/* 80043784 00040364  4B FC 9D 75 */	bl lbvector_diff
+/* 80043784 00040364  4B FC 9D 75 */	bl lbvector_Diff
 /* 80043788 00040368  C0 61 00 2C */	lfs f3, 0x2c(r1)
 /* 8004378C 0004036C  C0 02 85 C4 */	lfs f0, lbl_804D7FA4@sda21(r2)
 /* 80043790 00040370  FC 03 00 40 */	fcmpo cr0, f3, f0
@@ -2107,7 +2107,7 @@ lbl_8004394C:
 /* 80043984 00040564  90 1C 00 14 */	stw r0, 0x14(r28)
 /* 80043988 00040568  80 1C 00 0C */	lwz r0, 0xc(r28)
 /* 8004398C 0004056C  90 1C 00 18 */	stw r0, 0x18(r28)
-/* 80043990 00040570  4B FC 9A DD */	bl lbvector_add
+/* 80043990 00040570  4B FC 9A DD */	bl lbvector_Add
 /* 80043994 00040574  38 7C 00 00 */	addi r3, r28, 0
 /* 80043998 00040578  38 9D 00 00 */	addi r4, r29, 0
 /* 8004399C 0004057C  4B FF E4 35 */	bl func_80041DD0
@@ -12783,7 +12783,7 @@ lbl_8004D14C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BD270
 lbl_803BD270:
     .asciz "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n"
@@ -12821,27 +12821,25 @@ lbl_803BD3C8:
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80458810
 lbl_80458810:
 	.skip 0x58
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3948
 lbl_804D3948:
     .asciz "0"
     .balign 4
 .global lbl_804D394C
 lbl_804D394C:
-    .4byte 0x6572726F
-    .4byte 0x720A0000
-    .4byte 0x00000000
+    .asciz "error\n"
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6488
 lbl_804D6488:
 	.skip 0x4
@@ -12875,7 +12873,7 @@ lbl_804D64AC:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7F90
 lbl_804D7F90:
 	.4byte 0x472FC800

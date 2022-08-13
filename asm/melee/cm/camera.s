@@ -407,17 +407,17 @@ func_80029124:
 /* 80029168 00025D48  FC 01 00 2A */	fadd f0, f1, f0
 /* 8002916C 00025D4C  FC 00 00 18 */	frsp f0, f0
 /* 80029170 00025D50  D0 01 00 14 */	stfs f0, 0x14(r1)
-/* 80029174 00025D54  48 1F B8 E1 */	bl get_cam_bounds_left_offset
+/* 80029174 00025D54  48 1F B8 E1 */	bl Stage_GetCamBoundsLeftOffset
 /* 80029178 00025D58  FF A0 08 90 */	fmr f29, f1
-/* 8002917C 00025D5C  48 1F B8 ED */	bl get_cam_bounds_right_offset
+/* 8002917C 00025D5C  48 1F B8 ED */	bl Stage_GetCamBoundsRightOffset
 /* 80029180 00025D60  FF C0 08 90 */	fmr f30, f1
-/* 80029184 00025D64  48 1F B8 FD */	bl get_cam_bounds_top_offset
+/* 80029184 00025D64  48 1F B8 FD */	bl Stage_GetCamBoundsTopOffset
 /* 80029188 00025D68  FF E0 08 90 */	fmr f31, f1
-/* 8002918C 00025D6C  48 1F B9 0D */	bl get_cam_bounds_bottom_offset
+/* 8002918C 00025D6C  48 1F B9 0D */	bl Stage_GetCamBoundsBottomOffset
 /* 80029190 00025D70  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 80029194 00025D74  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80029198 00025D78  40 81 00 0C */	ble lbl_800291A4
-/* 8002919C 00025D7C  48 1F B8 FD */	bl get_cam_bounds_bottom_offset
+/* 8002919C 00025D7C  48 1F B8 FD */	bl Stage_GetCamBoundsBottomOffset
 /* 800291A0 00025D80  48 00 00 08 */	b lbl_800291A8
 lbl_800291A4:
 /* 800291A4 00025D84  FC 20 00 90 */	fmr f1, f0
@@ -510,13 +510,13 @@ func_8002928C:
 /* 800292E0 00025EC0  38 60 00 00 */	li r3, 0
 /* 800292E4 00025EC4  48 00 00 DC */	b lbl_800293C0
 lbl_800292E8:
-/* 800292E8 00025EC8  48 1F B7 6D */	bl get_cam_bounds_left_offset
+/* 800292E8 00025EC8  48 1F B7 6D */	bl Stage_GetCamBoundsLeftOffset
 /* 800292EC 00025ECC  FF A0 08 90 */	fmr f29, f1
-/* 800292F0 00025ED0  48 1F B7 79 */	bl get_cam_bounds_right_offset
+/* 800292F0 00025ED0  48 1F B7 79 */	bl Stage_GetCamBoundsRightOffset
 /* 800292F4 00025ED4  FF C0 08 90 */	fmr f30, f1
-/* 800292F8 00025ED8  48 1F B7 89 */	bl get_cam_bounds_top_offset
+/* 800292F8 00025ED8  48 1F B7 89 */	bl Stage_GetCamBoundsTopOffset
 /* 800292FC 00025EDC  FF E0 08 90 */	fmr f31, f1
-/* 80029300 00025EE0  48 1F B7 99 */	bl get_cam_bounds_bottom_offset
+/* 80029300 00025EE0  48 1F B7 99 */	bl Stage_GetCamBoundsBottomOffset
 /* 80029304 00025EE4  C0 7F 00 10 */	lfs f3, 0x10(r31)
 /* 80029308 00025EE8  EC 5E E8 28 */	fsubs f2, f30, f29
 /* 8002930C 00025EEC  C0 02 84 48 */	lfs f0, lbl_804D7E28@sda21(r2)
@@ -749,7 +749,7 @@ lbl_800295E0:
 lbl_80029610:
 /* 80029610 000261F0  C3 42 84 24 */	lfs f26, lbl_804D7E04@sda21(r2)
 lbl_80029614:
-/* 80029614 000261F4  48 1F B5 05 */	bl get_cam_track_ratio
+/* 80029614 000261F4  48 1F B5 05 */	bl Stage_GetCamTrackRatio
 /* 80029618 000261F8  C3 C2 84 58 */	lfs f30, lbl_804D7E38@sda21(r2)
 /* 8002961C 000261FC  EF 7A 00 72 */	fmuls f27, f26, f1
 /* 80029620 00026200  C3 82 84 20 */	lfs f28, lbl_804D7E00@sda21(r2)
@@ -791,26 +791,26 @@ lbl_8002963C:
 /* 800296AC 0002628C  FC 00 00 18 */	frsp f0, f0
 /* 800296B0 00026290  D0 01 00 30 */	stfs f0, 0x30(r1)
 /* 800296B4 00026294  41 82 00 0C */	beq lbl_800296C0
-/* 800296B8 00026298  48 1F B3 9D */	bl get_cam_bounds_left_offset
+/* 800296B8 00026298  48 1F B3 9D */	bl Stage_GetCamBoundsLeftOffset
 /* 800296BC 0002629C  D0 21 00 50 */	stfs f1, 0x50(r1)
 lbl_800296C0:
 /* 800296C0 000262A0  57 60 07 39 */	rlwinm. r0, r27, 0, 0x1c, 0x1c
 /* 800296C4 000262A4  41 82 00 0C */	beq lbl_800296D0
-/* 800296C8 000262A8  48 1F B3 A1 */	bl get_cam_bounds_right_offset
+/* 800296C8 000262A8  48 1F B3 A1 */	bl Stage_GetCamBoundsRightOffset
 /* 800296CC 000262AC  D0 21 00 50 */	stfs f1, 0x50(r1)
 lbl_800296D0:
 /* 800296D0 000262B0  57 60 07 FF */	clrlwi. r0, r27, 0x1f
 /* 800296D4 000262B4  41 82 00 0C */	beq lbl_800296E0
-/* 800296D8 000262B8  48 1F B3 A9 */	bl get_cam_bounds_top_offset
+/* 800296D8 000262B8  48 1F B3 A9 */	bl Stage_GetCamBoundsTopOffset
 /* 800296DC 000262BC  D0 21 00 54 */	stfs f1, 0x54(r1)
 lbl_800296E0:
 /* 800296E0 000262C0  57 60 07 BD */	rlwinm. r0, r27, 0, 0x1e, 0x1e
 /* 800296E4 000262C4  41 82 00 24 */	beq lbl_80029708
-/* 800296E8 000262C8  48 1F B3 B1 */	bl get_cam_bounds_bottom_offset
+/* 800296E8 000262C8  48 1F B3 B1 */	bl Stage_GetCamBoundsBottomOffset
 /* 800296EC 000262CC  C0 01 00 30 */	lfs f0, 0x30(r1)
 /* 800296F0 000262D0  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 800296F4 000262D4  40 81 00 0C */	ble lbl_80029700
-/* 800296F8 000262D8  48 1F B3 A1 */	bl get_cam_bounds_bottom_offset
+/* 800296F8 000262D8  48 1F B3 A1 */	bl Stage_GetCamBoundsBottomOffset
 /* 800296FC 000262DC  48 00 00 08 */	b lbl_80029704
 lbl_80029700:
 /* 80029700 000262E0  FC 20 00 90 */	fmr f1, f0
@@ -835,26 +835,26 @@ lbl_80029708:
 /* 80029744 00026324  FC 00 00 18 */	frsp f0, f0
 /* 80029748 00026328  D0 01 00 28 */	stfs f0, 0x28(r1)
 /* 8002974C 0002632C  41 82 00 0C */	beq lbl_80029758
-/* 80029750 00026330  48 1F B3 05 */	bl get_cam_bounds_left_offset
+/* 80029750 00026330  48 1F B3 05 */	bl Stage_GetCamBoundsLeftOffset
 /* 80029754 00026334  D0 21 00 44 */	stfs f1, 0x44(r1)
 lbl_80029758:
 /* 80029758 00026338  57 60 07 39 */	rlwinm. r0, r27, 0, 0x1c, 0x1c
 /* 8002975C 0002633C  41 82 00 0C */	beq lbl_80029768
-/* 80029760 00026340  48 1F B3 09 */	bl get_cam_bounds_right_offset
+/* 80029760 00026340  48 1F B3 09 */	bl Stage_GetCamBoundsRightOffset
 /* 80029764 00026344  D0 21 00 44 */	stfs f1, 0x44(r1)
 lbl_80029768:
 /* 80029768 00026348  57 60 07 FF */	clrlwi. r0, r27, 0x1f
 /* 8002976C 0002634C  41 82 00 0C */	beq lbl_80029778
-/* 80029770 00026350  48 1F B3 11 */	bl get_cam_bounds_top_offset
+/* 80029770 00026350  48 1F B3 11 */	bl Stage_GetCamBoundsTopOffset
 /* 80029774 00026354  D0 21 00 48 */	stfs f1, 0x48(r1)
 lbl_80029778:
 /* 80029778 00026358  57 60 07 BD */	rlwinm. r0, r27, 0, 0x1e, 0x1e
 /* 8002977C 0002635C  41 82 00 24 */	beq lbl_800297A0
-/* 80029780 00026360  48 1F B3 19 */	bl get_cam_bounds_bottom_offset
+/* 80029780 00026360  48 1F B3 19 */	bl Stage_GetCamBoundsBottomOffset
 /* 80029784 00026364  C0 01 00 28 */	lfs f0, 0x28(r1)
 /* 80029788 00026368  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8002978C 0002636C  40 81 00 0C */	ble lbl_80029798
-/* 80029790 00026370  48 1F B3 09 */	bl get_cam_bounds_bottom_offset
+/* 80029790 00026370  48 1F B3 09 */	bl Stage_GetCamBoundsBottomOffset
 /* 80029794 00026374  48 00 00 08 */	b lbl_8002979C
 lbl_80029798:
 /* 80029798 00026378  FC 20 00 90 */	fmr f1, f0
@@ -888,26 +888,26 @@ lbl_800297BC:
 /* 800297F8 000263D8  FC 00 00 18 */	frsp f0, f0
 /* 800297FC 000263DC  D0 01 00 20 */	stfs f0, 0x20(r1)
 /* 80029800 000263E0  41 82 00 0C */	beq lbl_8002980C
-/* 80029804 000263E4  48 1F B2 51 */	bl get_cam_bounds_left_offset
+/* 80029804 000263E4  48 1F B2 51 */	bl Stage_GetCamBoundsLeftOffset
 /* 80029808 000263E8  D0 21 00 44 */	stfs f1, 0x44(r1)
 lbl_8002980C:
 /* 8002980C 000263EC  57 60 07 39 */	rlwinm. r0, r27, 0, 0x1c, 0x1c
 /* 80029810 000263F0  41 82 00 0C */	beq lbl_8002981C
-/* 80029814 000263F4  48 1F B2 55 */	bl get_cam_bounds_right_offset
+/* 80029814 000263F4  48 1F B2 55 */	bl Stage_GetCamBoundsRightOffset
 /* 80029818 000263F8  D0 21 00 44 */	stfs f1, 0x44(r1)
 lbl_8002981C:
 /* 8002981C 000263FC  57 60 07 FF */	clrlwi. r0, r27, 0x1f
 /* 80029820 00026400  41 82 00 0C */	beq lbl_8002982C
-/* 80029824 00026404  48 1F B2 5D */	bl get_cam_bounds_top_offset
+/* 80029824 00026404  48 1F B2 5D */	bl Stage_GetCamBoundsTopOffset
 /* 80029828 00026408  D0 21 00 48 */	stfs f1, 0x48(r1)
 lbl_8002982C:
 /* 8002982C 0002640C  57 60 07 BD */	rlwinm. r0, r27, 0, 0x1e, 0x1e
 /* 80029830 00026410  41 82 00 24 */	beq lbl_80029854
-/* 80029834 00026414  48 1F B2 65 */	bl get_cam_bounds_bottom_offset
+/* 80029834 00026414  48 1F B2 65 */	bl Stage_GetCamBoundsBottomOffset
 /* 80029838 00026418  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 8002983C 0002641C  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80029840 00026420  40 81 00 0C */	ble lbl_8002984C
-/* 80029844 00026424  48 1F B2 55 */	bl get_cam_bounds_bottom_offset
+/* 80029844 00026424  48 1F B2 55 */	bl Stage_GetCamBoundsBottomOffset
 /* 80029848 00026428  48 00 00 08 */	b lbl_80029850
 lbl_8002984C:
 /* 8002984C 0002642C  FC 20 00 90 */	fmr f1, f0
@@ -941,26 +941,26 @@ lbl_80029870:
 /* 800298AC 0002648C  FC 00 00 18 */	frsp f0, f0
 /* 800298B0 00026490  D0 01 00 18 */	stfs f0, 0x18(r1)
 /* 800298B4 00026494  41 82 00 0C */	beq lbl_800298C0
-/* 800298B8 00026498  48 1F B1 9D */	bl get_cam_bounds_left_offset
+/* 800298B8 00026498  48 1F B1 9D */	bl Stage_GetCamBoundsLeftOffset
 /* 800298BC 0002649C  D0 21 00 44 */	stfs f1, 0x44(r1)
 lbl_800298C0:
 /* 800298C0 000264A0  57 60 07 39 */	rlwinm. r0, r27, 0, 0x1c, 0x1c
 /* 800298C4 000264A4  41 82 00 0C */	beq lbl_800298D0
-/* 800298C8 000264A8  48 1F B1 A1 */	bl get_cam_bounds_right_offset
+/* 800298C8 000264A8  48 1F B1 A1 */	bl Stage_GetCamBoundsRightOffset
 /* 800298CC 000264AC  D0 21 00 44 */	stfs f1, 0x44(r1)
 lbl_800298D0:
 /* 800298D0 000264B0  57 60 07 FF */	clrlwi. r0, r27, 0x1f
 /* 800298D4 000264B4  41 82 00 0C */	beq lbl_800298E0
-/* 800298D8 000264B8  48 1F B1 A9 */	bl get_cam_bounds_top_offset
+/* 800298D8 000264B8  48 1F B1 A9 */	bl Stage_GetCamBoundsTopOffset
 /* 800298DC 000264BC  D0 21 00 48 */	stfs f1, 0x48(r1)
 lbl_800298E0:
 /* 800298E0 000264C0  57 60 07 BD */	rlwinm. r0, r27, 0, 0x1e, 0x1e
 /* 800298E4 000264C4  41 82 00 24 */	beq lbl_80029908
-/* 800298E8 000264C8  48 1F B1 B1 */	bl get_cam_bounds_bottom_offset
+/* 800298E8 000264C8  48 1F B1 B1 */	bl Stage_GetCamBoundsBottomOffset
 /* 800298EC 000264CC  C0 01 00 18 */	lfs f0, 0x18(r1)
 /* 800298F0 000264D0  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 800298F4 000264D4  40 81 00 0C */	ble lbl_80029900
-/* 800298F8 000264D8  48 1F B1 A1 */	bl get_cam_bounds_bottom_offset
+/* 800298F8 000264D8  48 1F B1 A1 */	bl Stage_GetCamBoundsBottomOffset
 /* 800298FC 000264DC  48 00 00 08 */	b lbl_80029904
 lbl_80029900:
 /* 80029900 000264E0  FC 20 00 90 */	fmr f1, f0
@@ -994,26 +994,26 @@ lbl_80029924:
 /* 80029960 00026540  FC 00 00 18 */	frsp f0, f0
 /* 80029964 00026544  D0 01 00 10 */	stfs f0, 0x10(r1)
 /* 80029968 00026548  41 82 00 0C */	beq lbl_80029974
-/* 8002996C 0002654C  48 1F B0 E9 */	bl get_cam_bounds_left_offset
+/* 8002996C 0002654C  48 1F B0 E9 */	bl Stage_GetCamBoundsLeftOffset
 /* 80029970 00026550  D0 21 00 44 */	stfs f1, 0x44(r1)
 lbl_80029974:
 /* 80029974 00026554  57 60 07 39 */	rlwinm. r0, r27, 0, 0x1c, 0x1c
 /* 80029978 00026558  41 82 00 0C */	beq lbl_80029984
-/* 8002997C 0002655C  48 1F B0 ED */	bl get_cam_bounds_right_offset
+/* 8002997C 0002655C  48 1F B0 ED */	bl Stage_GetCamBoundsRightOffset
 /* 80029980 00026560  D0 21 00 44 */	stfs f1, 0x44(r1)
 lbl_80029984:
 /* 80029984 00026564  57 60 07 FF */	clrlwi. r0, r27, 0x1f
 /* 80029988 00026568  41 82 00 0C */	beq lbl_80029994
-/* 8002998C 0002656C  48 1F B0 F5 */	bl get_cam_bounds_top_offset
+/* 8002998C 0002656C  48 1F B0 F5 */	bl Stage_GetCamBoundsTopOffset
 /* 80029990 00026570  D0 21 00 48 */	stfs f1, 0x48(r1)
 lbl_80029994:
 /* 80029994 00026574  57 60 07 BD */	rlwinm. r0, r27, 0, 0x1e, 0x1e
 /* 80029998 00026578  41 82 00 24 */	beq lbl_800299BC
-/* 8002999C 0002657C  48 1F B0 FD */	bl get_cam_bounds_bottom_offset
+/* 8002999C 0002657C  48 1F B0 FD */	bl Stage_GetCamBoundsBottomOffset
 /* 800299A0 00026580  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 800299A4 00026584  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 800299A8 00026588  40 81 00 0C */	ble lbl_800299B4
-/* 800299AC 0002658C  48 1F B0 ED */	bl get_cam_bounds_bottom_offset
+/* 800299AC 0002658C  48 1F B0 ED */	bl Stage_GetCamBoundsBottomOffset
 /* 800299B0 00026590  48 00 00 08 */	b lbl_800299B8
 lbl_800299B4:
 /* 800299B4 00026594  FC 20 00 90 */	fmr f1, f0
@@ -1037,7 +1037,7 @@ lbl_800299E4:
 /* 800299E4 000265C4  2C 1E 00 00 */	cmpwi r30, 0
 /* 800299E8 000265C8  40 82 00 28 */	bne lbl_80029A10
 /* 800299EC 000265CC  38 61 00 38 */	addi r3, r1, 0x38
-/* 800299F0 000265D0  48 1F B2 09 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 800299F0 000265D0  48 1F B2 09 */	bl Stage_UnkSetVec3TCam_Offset
 /* 800299F4 000265D4  C0 21 00 38 */	lfs f1, 0x38(r1)
 /* 800299F8 000265D8  C0 02 84 5C */	lfs f0, lbl_804D7E3C@sda21(r2)
 /* 800299FC 000265DC  C0 41 00 3C */	lfs f2, 0x3c(r1)
@@ -1207,16 +1207,16 @@ func_80029BC4:
 /* 80029C38 00026818  40 81 00 08 */	ble lbl_80029C40
 /* 80029C3C 0002681C  FF E0 00 90 */	fmr f31, f0
 lbl_80029C40:
-/* 80029C40 00026820  48 1F AE 99 */	bl get_cam_zoom_rate
+/* 80029C40 00026820  48 1F AE 99 */	bl Stage_GetCamZoomRate
 /* 80029C44 00026824  FC 1F 08 40 */	fcmpo cr0, f31, f1
 /* 80029C48 00026828  40 80 00 0C */	bge lbl_80029C54
-/* 80029C4C 0002682C  48 1F AE 8D */	bl get_cam_zoom_rate
+/* 80029C4C 0002682C  48 1F AE 8D */	bl Stage_GetCamZoomRate
 /* 80029C50 00026830  FF E0 08 90 */	fmr f31, f1
 lbl_80029C54:
-/* 80029C54 00026834  48 1F AE 75 */	bl get_cam_max_depth
+/* 80029C54 00026834  48 1F AE 75 */	bl Stage_GetCamMaxDepth
 /* 80029C58 00026838  FC 1F 08 40 */	fcmpo cr0, f31, f1
 /* 80029C5C 0002683C  40 81 00 0C */	ble lbl_80029C68
-/* 80029C60 00026840  48 1F AE 69 */	bl get_cam_max_depth
+/* 80029C60 00026840  48 1F AE 69 */	bl Stage_GetCamMaxDepth
 /* 80029C64 00026844  FF E0 08 90 */	fmr f31, f1
 lbl_80029C68:
 /* 80029C68 00026848  D3 FE 00 14 */	stfs f31, 0x14(r30)
@@ -1279,7 +1279,7 @@ func_80029CF8:
 /* 80029D30 00026910  93 A1 00 44 */	stw r29, 0x44(r1)
 /* 80029D34 00026914  3B A3 00 00 */	addi r29, r3, 0
 /* 80029D38 00026918  38 61 00 24 */	addi r3, r1, 0x24
-/* 80029D3C 0002691C  48 1F AE BD */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 80029D3C 0002691C  48 1F AE BD */	bl Stage_UnkSetVec3TCam_Offset
 /* 80029D40 00026920  C0 3D 00 08 */	lfs f1, 8(r29)
 /* 80029D44 00026924  C0 1D 00 00 */	lfs f0, 0(r29)
 /* 80029D48 00026928  C0 9D 00 0C */	lfs f4, 0xc(r29)
@@ -1321,7 +1321,7 @@ lbl_80029DB4:
 /* 80029DC4 000269A4  EC 00 18 28 */	fsubs f0, f0, f3
 /* 80029DC8 000269A8  EC 22 08 2A */	fadds f1, f2, f1
 /* 80029DCC 000269AC  EF A1 28 3A */	fmadds f29, f1, f0, f5
-/* 80029DD0 000269B0  48 1F AD 29 */	bl get_cam_info_x24
+/* 80029DD0 000269B0  48 1F AD 29 */	bl Stage_GetCamInfoX24
 /* 80029DD4 000269B4  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
 /* 80029DD8 000269B8  C0 42 84 80 */	lfs f2, lbl_804D7E60@sda21(r2)
 /* 80029DDC 000269BC  38 63 CC A0 */	addi r3, r3, lbl_803BCCA0@l
@@ -1345,7 +1345,7 @@ lbl_80029E08:
 /* 80029E20 00026A00  40 80 00 08 */	bge lbl_80029E28
 /* 80029E24 00026A04  FF A0 00 90 */	fmr f29, f0
 lbl_80029E28:
-/* 80029E28 00026A08  48 1F AC 89 */	bl get_cam_pan_angle_radians
+/* 80029E28 00026A08  48 1F AC 89 */	bl Stage_GetCamPanAngleRadians
 /* 80029E2C 00026A0C  C0 42 84 80 */	lfs f2, lbl_804D7E60@sda21(r2)
 /* 80029E30 00026A10  EF BD 08 2A */	fadds f29, f29, f1
 /* 80029E34 00026A14  C0 1E 00 30 */	lfs f0, 0x30(r30)
@@ -1386,8 +1386,8 @@ lbl_80029E9C:
 /* 80029EB8 00026A98  C0 3D 00 04 */	lfs f1, 4(r29)
 /* 80029EBC 00026A9C  EC 22 08 28 */	fsubs f1, f2, f1
 /* 80029EC0 00026AA0  EF A1 00 24 */	fdivs f29, f1, f0
-/* 80029EC4 00026AA4  48 1F AB D5 */	bl get_cam_bounds_bottom_offset
-/* 80029EC8 00026AA8  48 1F AB B9 */	bl get_cam_bounds_top_offset
+/* 80029EC4 00026AA4  48 1F AB D5 */	bl Stage_GetCamBoundsBottomOffset
+/* 80029EC8 00026AA8  48 1F AB B9 */	bl Stage_GetCamBoundsTopOffset
 /* 80029ECC 00026AAC  FC 20 F0 90 */	fmr f1, f30
 /* 80029ED0 00026AB0  48 2F C2 ED */	bl tanf
 /* 80029ED4 00026AB4  C0 1D 00 0C */	lfs f0, 0xc(r29)
@@ -1396,13 +1396,13 @@ lbl_80029E9C:
 /* 80029EE0 00026AC0  EC 1D 07 FC */	fnmsubs f0, f29, f31, f0
 /* 80029EE4 00026AC4  EC 1E 00 2A */	fadds f0, f30, f0
 /* 80029EE8 00026AC8  D0 1E 00 10 */	stfs f0, 0x10(r30)
-/* 80029EEC 00026ACC  48 1F AD 0D */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 80029EEC 00026ACC  48 1F AD 0D */	bl Stage_UnkSetVec3TCam_Offset
 /* 80029EF0 00026AD0  C0 3D 00 00 */	lfs f1, 0(r29)
 /* 80029EF4 00026AD4  C0 1D 00 08 */	lfs f0, 8(r29)
 /* 80029EF8 00026AD8  C0 42 84 50 */	lfs f2, lbl_804D7E30@sda21(r2)
 /* 80029EFC 00026ADC  EC 01 00 2A */	fadds f0, f1, f0
 /* 80029F00 00026AE0  EF E2 00 32 */	fmuls f31, f2, f0
-/* 80029F04 00026AE4  48 1F AB E5 */	bl get_cam_info_x20
+/* 80029F04 00026AE4  48 1F AB E5 */	bl Stage_GetCamInfoX20
 /* 80029F08 00026AE8  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 80029F0C 00026AEC  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
 /* 80029F10 00026AF0  38 63 CC A0 */	addi r3, r3, lbl_803BCCA0@l
@@ -1467,8 +1467,8 @@ lbl_80029FC4:
 /* 80029FEC 00026BCC  EC 22 00 28 */	fsubs f1, f2, f0
 /* 80029FF0 00026BD0  EC 1A 18 2A */	fadds f0, f26, f3
 /* 80029FF4 00026BD4  EF 81 00 24 */	fdivs f28, f1, f0
-/* 80029FF8 00026BD8  48 1F AA 5D */	bl get_cam_bounds_left_offset
-/* 80029FFC 00026BDC  48 1F AA 6D */	bl get_cam_bounds_right_offset
+/* 80029FF8 00026BD8  48 1F AA 5D */	bl Stage_GetCamBoundsLeftOffset
+/* 80029FFC 00026BDC  48 1F AA 6D */	bl Stage_GetCamBoundsRightOffset
 /* 8002A000 00026BE0  FC 20 F8 90 */	fmr f1, f31
 /* 8002A004 00026BE4  48 2F C1 B9 */	bl tanf
 /* 8002A008 00026BE8  EC 5C 00 72 */	fmuls f2, f28, f1
@@ -1487,16 +1487,16 @@ lbl_8002A038:
 /* 8002A038 00026C18  FF A0 E0 90 */	fmr f29, f28
 lbl_8002A03C:
 /* 8002A03C 00026C1C  FF 80 E8 90 */	fmr f28, f29
-/* 8002A040 00026C20  48 1F AA 99 */	bl get_cam_zoom_rate
+/* 8002A040 00026C20  48 1F AA 99 */	bl Stage_GetCamZoomRate
 /* 8002A044 00026C24  FC 1D 08 40 */	fcmpo cr0, f29, f1
 /* 8002A048 00026C28  40 80 00 0C */	bge lbl_8002A054
-/* 8002A04C 00026C2C  48 1F AA 8D */	bl get_cam_zoom_rate
+/* 8002A04C 00026C2C  48 1F AA 8D */	bl Stage_GetCamZoomRate
 /* 8002A050 00026C30  FF 80 08 90 */	fmr f28, f1
 lbl_8002A054:
-/* 8002A054 00026C34  48 1F AA 75 */	bl get_cam_max_depth
+/* 8002A054 00026C34  48 1F AA 75 */	bl Stage_GetCamMaxDepth
 /* 8002A058 00026C38  FC 1C 08 40 */	fcmpo cr0, f28, f1
 /* 8002A05C 00026C3C  40 81 00 0C */	ble lbl_8002A068
-/* 8002A060 00026C40  48 1F AA 69 */	bl get_cam_max_depth
+/* 8002A060 00026C40  48 1F AA 69 */	bl Stage_GetCamMaxDepth
 /* 8002A064 00026C44  FF 80 08 90 */	fmr f28, f1
 lbl_8002A068:
 /* 8002A068 00026C48  C0 1E 00 0C */	lfs f0, 0xc(r30)
@@ -1594,9 +1594,9 @@ lbl_8002A144:
 /* 8002A1C8 00026DA8  EC 03 00 32 */	fmuls f0, f3, f0
 /* 8002A1CC 00026DAC  EF 84 00 72 */	fmuls f28, f4, f1
 /* 8002A1D0 00026DB0  EF 65 00 24 */	fdivs f27, f5, f0
-/* 8002A1D4 00026DB4  48 1F A9 05 */	bl get_cam_zoom_rate
+/* 8002A1D4 00026DB4  48 1F A9 05 */	bl Stage_GetCamZoomRate
 /* 8002A1D8 00026DB8  FF A0 08 90 */	fmr f29, f1
-/* 8002A1DC 00026DBC  48 1F A8 ED */	bl get_cam_max_depth
+/* 8002A1DC 00026DBC  48 1F A8 ED */	bl Stage_GetCamMaxDepth
 /* 8002A1E0 00026DC0  EF A1 E8 28 */	fsubs f29, f1, f29
 /* 8002A1E4 00026DC4  C0 02 84 88 */	lfs f0, lbl_804D7E68@sda21(r2)
 /* 8002A1E8 00026DC8  FC 1D 00 40 */	fcmpo cr0, f29, f0
@@ -1604,7 +1604,7 @@ lbl_8002A144:
 /* 8002A1F0 00026DD0  C0 C2 84 50 */	lfs f6, lbl_804D7E30@sda21(r2)
 /* 8002A1F4 00026DD4  48 00 00 14 */	b lbl_8002A208
 lbl_8002A1F8:
-/* 8002A1F8 00026DD8  48 1F A8 E1 */	bl get_cam_zoom_rate
+/* 8002A1F8 00026DD8  48 1F A8 E1 */	bl Stage_GetCamZoomRate
 /* 8002A1FC 00026DDC  C0 1D 00 14 */	lfs f0, 0x14(r29)
 /* 8002A200 00026DE0  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8002A204 00026DE4  EC C0 E8 24 */	fdivs f6, f0, f29
@@ -2038,20 +2038,20 @@ func_8002A768:
 /* 8002A7CC 000273AC  80 06 00 08 */	lwz r0, 8(r6)
 /* 8002A7D0 000273B0  EF C2 00 32 */	fmuls f30, f2, f0
 /* 8002A7D4 000273B4  90 01 00 54 */	stw r0, 0x54(r1)
-/* 8002A7D8 000273B8  4B FE 2D 21 */	bl lbvector_diff
+/* 8002A7D8 000273B8  4B FE 2D 21 */	bl lbvector_Diff
 /* 8002A7DC 000273BC  38 61 00 58 */	addi r3, r1, 0x58
-/* 8002A7E0 000273C0  4B FE 2B 0D */	bl lbvector_normalize
+/* 8002A7E0 000273C0  4B FE 2B 0D */	bl lbvector_Normalize
 /* 8002A7E4 000273C4  C0 01 00 60 */	lfs f0, 0x60(r1)
 /* 8002A7E8 000273C8  C0 21 00 5C */	lfs f1, 0x5c(r1)
 /* 8002A7EC 000273CC  FC 40 00 50 */	fneg f2, f0
-/* 8002A7F0 000273D0  4B FF 84 41 */	bl func_80022C30
+/* 8002A7F0 000273D0  4B FF 84 41 */	bl atan2f
 /* 8002A7F4 000273D4  FC 40 08 90 */	fmr f2, f1
 /* 8002A7F8 000273D8  C0 21 00 58 */	lfs f1, 0x58(r1)
 /* 8002A7FC 000273DC  C0 01 00 60 */	lfs f0, 0x60(r1)
 /* 8002A800 000273E0  FC 20 08 50 */	fneg f1, f1
 /* 8002A804 000273E4  FF 80 10 90 */	fmr f28, f2
 /* 8002A808 000273E8  FC 40 00 50 */	fneg f2, f0
-/* 8002A80C 000273EC  4B FF 84 25 */	bl func_80022C30
+/* 8002A80C 000273EC  4B FF 84 25 */	bl atan2f
 /* 8002A810 000273F0  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 8002A814 000273F4  FC 00 08 90 */	fmr f0, f1
 /* 8002A818 000273F8  80 61 00 50 */	lwz r3, 0x50(r1)
@@ -2081,11 +2081,11 @@ func_8002A768:
 /* 8002A878 00027458  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8002A87C 0002745C  90 A1 00 44 */	stw r5, 0x44(r1)
 /* 8002A880 00027460  90 01 00 48 */	stw r0, 0x48(r1)
-/* 8002A884 00027464  4B FE 32 7D */	bl lbvector_rotate
+/* 8002A884 00027464  4B FE 32 7D */	bl lbvector_Rotate
 /* 8002A888 00027468  FC 20 F0 90 */	fmr f1, f30
 /* 8002A88C 0002746C  38 61 00 40 */	addi r3, r1, 0x40
 /* 8002A890 00027470  38 80 00 02 */	li r4, 2
-/* 8002A894 00027474  4B FE 32 6D */	bl lbvector_rotate
+/* 8002A894 00027474  4B FE 32 6D */	bl lbvector_Rotate
 /* 8002A898 00027478  3C 60 80 3C */	lis r3, lbl_803BCB64@ha
 /* 8002A89C 0002747C  C0 21 00 40 */	lfs f1, 0x40(r1)
 /* 8002A8A0 00027480  38 63 CB 64 */	addi r3, r3, lbl_803BCB64@l
@@ -2094,15 +2094,15 @@ func_8002A768:
 /* 8002A8AC 0002748C  38 61 00 40 */	addi r3, r1, 0x40
 /* 8002A8B0 00027490  EC 01 00 32 */	fmuls f0, f1, f0
 /* 8002A8B4 00027494  D0 01 00 40 */	stfs f0, 0x40(r1)
-/* 8002A8B8 00027498  4B FE 2A 35 */	bl lbvector_normalize
+/* 8002A8B8 00027498  4B FE 2A 35 */	bl lbvector_Normalize
 /* 8002A8BC 0002749C  FC 20 E0 90 */	fmr f1, f28
 /* 8002A8C0 000274A0  38 61 00 40 */	addi r3, r1, 0x40
 /* 8002A8C4 000274A4  38 80 00 01 */	li r4, 1
-/* 8002A8C8 000274A8  4B FE 32 39 */	bl lbvector_rotate
+/* 8002A8C8 000274A8  4B FE 32 39 */	bl lbvector_Rotate
 /* 8002A8CC 000274AC  FC 20 E8 90 */	fmr f1, f29
 /* 8002A8D0 000274B0  38 61 00 40 */	addi r3, r1, 0x40
 /* 8002A8D4 000274B4  38 80 00 02 */	li r4, 2
-/* 8002A8D8 000274B8  4B FE 32 29 */	bl lbvector_rotate
+/* 8002A8D8 000274B8  4B FE 32 29 */	bl lbvector_Rotate
 /* 8002A8DC 000274BC  C0 41 00 48 */	lfs f2, 0x48(r1)
 /* 8002A8E0 000274C0  C0 02 84 8C */	lfs f0, lbl_804D7E6C@sda21(r2)
 /* 8002A8E4 000274C4  FC 02 00 40 */	fcmpo cr0, f2, f0
@@ -2121,7 +2121,7 @@ func_8002A768:
 /* 8002A918 000274F8  C0 01 00 48 */	lfs f0, 0x48(r1)
 /* 8002A91C 000274FC  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002A920 00027500  D0 01 00 48 */	stfs f0, 0x48(r1)
-/* 8002A924 00027504  4B FE 2B 49 */	bl lbvector_add
+/* 8002A924 00027504  4B FE 2B 49 */	bl lbvector_Add
 /* 8002A928 00027508  48 00 00 08 */	b lbl_8002A930
 lbl_8002A92C:
 /* 8002A92C 0002750C  63 DE 00 01 */	ori r30, r30, 1
@@ -2129,26 +2129,26 @@ lbl_8002A930:
 /* 8002A930 00027510  FC 20 F0 90 */	fmr f1, f30
 /* 8002A934 00027514  38 61 00 34 */	addi r3, r1, 0x34
 /* 8002A938 00027518  38 80 00 01 */	li r4, 1
-/* 8002A93C 0002751C  4B FE 31 C5 */	bl lbvector_rotate
+/* 8002A93C 0002751C  4B FE 31 C5 */	bl lbvector_Rotate
 /* 8002A940 00027520  FF E0 F0 50 */	fneg f31, f30
 /* 8002A944 00027524  38 61 00 34 */	addi r3, r1, 0x34
 /* 8002A948 00027528  38 80 00 02 */	li r4, 2
 /* 8002A94C 0002752C  FC 20 F8 90 */	fmr f1, f31
-/* 8002A950 00027530  4B FE 31 B1 */	bl lbvector_rotate
+/* 8002A950 00027530  4B FE 31 B1 */	bl lbvector_Rotate
 /* 8002A954 00027534  C0 21 00 34 */	lfs f1, 0x34(r1)
 /* 8002A958 00027538  38 61 00 34 */	addi r3, r1, 0x34
 /* 8002A95C 0002753C  C0 1B 00 00 */	lfs f0, 0(r27)
 /* 8002A960 00027540  EC 01 00 32 */	fmuls f0, f1, f0
 /* 8002A964 00027544  D0 01 00 34 */	stfs f0, 0x34(r1)
-/* 8002A968 00027548  4B FE 29 85 */	bl lbvector_normalize
+/* 8002A968 00027548  4B FE 29 85 */	bl lbvector_Normalize
 /* 8002A96C 0002754C  FC 20 E0 90 */	fmr f1, f28
 /* 8002A970 00027550  38 61 00 34 */	addi r3, r1, 0x34
 /* 8002A974 00027554  38 80 00 01 */	li r4, 1
-/* 8002A978 00027558  4B FE 31 89 */	bl lbvector_rotate
+/* 8002A978 00027558  4B FE 31 89 */	bl lbvector_Rotate
 /* 8002A97C 0002755C  FC 20 E8 90 */	fmr f1, f29
 /* 8002A980 00027560  38 61 00 34 */	addi r3, r1, 0x34
 /* 8002A984 00027564  38 80 00 02 */	li r4, 2
-/* 8002A988 00027568  4B FE 31 79 */	bl lbvector_rotate
+/* 8002A988 00027568  4B FE 31 79 */	bl lbvector_Rotate
 /* 8002A98C 0002756C  C0 41 00 3C */	lfs f2, 0x3c(r1)
 /* 8002A990 00027570  C0 02 84 8C */	lfs f0, lbl_804D7E6C@sda21(r2)
 /* 8002A994 00027574  FC 02 00 40 */	fcmpo cr0, f2, f0
@@ -2167,7 +2167,7 @@ lbl_8002A930:
 /* 8002A9C8 000275A8  C0 01 00 3C */	lfs f0, 0x3c(r1)
 /* 8002A9CC 000275AC  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002A9D0 000275B0  D0 01 00 3C */	stfs f0, 0x3c(r1)
-/* 8002A9D4 000275B4  4B FE 2A 99 */	bl lbvector_add
+/* 8002A9D4 000275B4  4B FE 2A 99 */	bl lbvector_Add
 /* 8002A9D8 000275B8  48 00 00 08 */	b lbl_8002A9E0
 lbl_8002A9DC:
 /* 8002A9DC 000275BC  63 DE 00 02 */	ori r30, r30, 2
@@ -2175,25 +2175,25 @@ lbl_8002A9E0:
 /* 8002A9E0 000275C0  FC 20 F8 90 */	fmr f1, f31
 /* 8002A9E4 000275C4  38 61 00 28 */	addi r3, r1, 0x28
 /* 8002A9E8 000275C8  38 80 00 01 */	li r4, 1
-/* 8002A9EC 000275CC  4B FE 31 15 */	bl lbvector_rotate
+/* 8002A9EC 000275CC  4B FE 31 15 */	bl lbvector_Rotate
 /* 8002A9F0 000275D0  FC 20 F0 90 */	fmr f1, f30
 /* 8002A9F4 000275D4  38 61 00 28 */	addi r3, r1, 0x28
 /* 8002A9F8 000275D8  38 80 00 02 */	li r4, 2
-/* 8002A9FC 000275DC  4B FE 31 05 */	bl lbvector_rotate
+/* 8002A9FC 000275DC  4B FE 31 05 */	bl lbvector_Rotate
 /* 8002AA00 000275E0  C0 21 00 28 */	lfs f1, 0x28(r1)
 /* 8002AA04 000275E4  38 61 00 28 */	addi r3, r1, 0x28
 /* 8002AA08 000275E8  C0 1B 00 00 */	lfs f0, 0(r27)
 /* 8002AA0C 000275EC  EC 01 00 32 */	fmuls f0, f1, f0
 /* 8002AA10 000275F0  D0 01 00 28 */	stfs f0, 0x28(r1)
-/* 8002AA14 000275F4  4B FE 28 D9 */	bl lbvector_normalize
+/* 8002AA14 000275F4  4B FE 28 D9 */	bl lbvector_Normalize
 /* 8002AA18 000275F8  FC 20 E0 90 */	fmr f1, f28
 /* 8002AA1C 000275FC  38 61 00 28 */	addi r3, r1, 0x28
 /* 8002AA20 00027600  38 80 00 01 */	li r4, 1
-/* 8002AA24 00027604  4B FE 30 DD */	bl lbvector_rotate
+/* 8002AA24 00027604  4B FE 30 DD */	bl lbvector_Rotate
 /* 8002AA28 00027608  FC 20 E8 90 */	fmr f1, f29
 /* 8002AA2C 0002760C  38 61 00 28 */	addi r3, r1, 0x28
 /* 8002AA30 00027610  38 80 00 02 */	li r4, 2
-/* 8002AA34 00027614  4B FE 30 CD */	bl lbvector_rotate
+/* 8002AA34 00027614  4B FE 30 CD */	bl lbvector_Rotate
 /* 8002AA38 00027618  C0 41 00 30 */	lfs f2, 0x30(r1)
 /* 8002AA3C 0002761C  C0 02 84 8C */	lfs f0, lbl_804D7E6C@sda21(r2)
 /* 8002AA40 00027620  FC 02 00 40 */	fcmpo cr0, f2, f0
@@ -2212,7 +2212,7 @@ lbl_8002A9E0:
 /* 8002AA74 00027654  C0 01 00 30 */	lfs f0, 0x30(r1)
 /* 8002AA78 00027658  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002AA7C 0002765C  D0 01 00 30 */	stfs f0, 0x30(r1)
-/* 8002AA80 00027660  4B FE 29 ED */	bl lbvector_add
+/* 8002AA80 00027660  4B FE 29 ED */	bl lbvector_Add
 /* 8002AA84 00027664  48 00 00 08 */	b lbl_8002AA8C
 lbl_8002AA88:
 /* 8002AA88 00027668  63 DE 00 04 */	ori r30, r30, 4
@@ -2220,25 +2220,25 @@ lbl_8002AA8C:
 /* 8002AA8C 0002766C  FC 20 F8 90 */	fmr f1, f31
 /* 8002AA90 00027670  38 61 00 1C */	addi r3, r1, 0x1c
 /* 8002AA94 00027674  38 80 00 01 */	li r4, 1
-/* 8002AA98 00027678  4B FE 30 69 */	bl lbvector_rotate
+/* 8002AA98 00027678  4B FE 30 69 */	bl lbvector_Rotate
 /* 8002AA9C 0002767C  FC 20 F8 90 */	fmr f1, f31
 /* 8002AAA0 00027680  38 61 00 1C */	addi r3, r1, 0x1c
 /* 8002AAA4 00027684  38 80 00 02 */	li r4, 2
-/* 8002AAA8 00027688  4B FE 30 59 */	bl lbvector_rotate
+/* 8002AAA8 00027688  4B FE 30 59 */	bl lbvector_Rotate
 /* 8002AAAC 0002768C  C0 21 00 1C */	lfs f1, 0x1c(r1)
 /* 8002AAB0 00027690  38 61 00 1C */	addi r3, r1, 0x1c
 /* 8002AAB4 00027694  C0 1B 00 00 */	lfs f0, 0(r27)
 /* 8002AAB8 00027698  EC 01 00 32 */	fmuls f0, f1, f0
 /* 8002AABC 0002769C  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 8002AAC0 000276A0  4B FE 28 2D */	bl lbvector_normalize
+/* 8002AAC0 000276A0  4B FE 28 2D */	bl lbvector_Normalize
 /* 8002AAC4 000276A4  FC 20 E0 90 */	fmr f1, f28
 /* 8002AAC8 000276A8  38 61 00 1C */	addi r3, r1, 0x1c
 /* 8002AACC 000276AC  38 80 00 01 */	li r4, 1
-/* 8002AAD0 000276B0  4B FE 30 31 */	bl lbvector_rotate
+/* 8002AAD0 000276B0  4B FE 30 31 */	bl lbvector_Rotate
 /* 8002AAD4 000276B4  FC 20 E8 90 */	fmr f1, f29
 /* 8002AAD8 000276B8  38 61 00 1C */	addi r3, r1, 0x1c
 /* 8002AADC 000276BC  38 80 00 02 */	li r4, 2
-/* 8002AAE0 000276C0  4B FE 30 21 */	bl lbvector_rotate
+/* 8002AAE0 000276C0  4B FE 30 21 */	bl lbvector_Rotate
 /* 8002AAE4 000276C4  C0 41 00 24 */	lfs f2, 0x24(r1)
 /* 8002AAE8 000276C8  C0 02 84 8C */	lfs f0, lbl_804D7E6C@sda21(r2)
 /* 8002AAEC 000276CC  FC 02 00 40 */	fcmpo cr0, f2, f0
@@ -2257,7 +2257,7 @@ lbl_8002AA8C:
 /* 8002AB20 00027700  C0 01 00 24 */	lfs f0, 0x24(r1)
 /* 8002AB24 00027704  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002AB28 00027708  D0 01 00 24 */	stfs f0, 0x24(r1)
-/* 8002AB2C 0002770C  4B FE 29 41 */	bl lbvector_add
+/* 8002AB2C 0002770C  4B FE 29 41 */	bl lbvector_Add
 /* 8002AB30 00027710  48 00 00 08 */	b lbl_8002AB38
 lbl_8002AB34:
 /* 8002AB34 00027714  63 DE 00 08 */	ori r30, r30, 8
@@ -2270,11 +2270,11 @@ lbl_8002AB38:
 /* 8002AB4C 0002772C  41 82 01 8C */	beq lbl_8002ACD8
 /* 8002AB50 00027730  57 C0 07 FF */	clrlwi. r0, r30, 0x1f
 /* 8002AB54 00027734  40 82 00 60 */	bne lbl_8002ABB4
-/* 8002AB58 00027738  48 1F 9F F9 */	bl get_blast_zone_left_offset
+/* 8002AB58 00027738  48 1F 9F F9 */	bl Stage_GetBlastZoneLeftOffset
 /* 8002AB5C 0002773C  C0 01 00 40 */	lfs f0, 0x40(r1)
 /* 8002AB60 00027740  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AB64 00027744  40 80 00 20 */	bge lbl_8002AB84
-/* 8002AB68 00027748  48 1F 9F E9 */	bl get_blast_zone_left_offset
+/* 8002AB68 00027748  48 1F 9F E9 */	bl Stage_GetBlastZoneLeftOffset
 /* 8002AB6C 0002774C  C0 01 00 40 */	lfs f0, 0x40(r1)
 /* 8002AB70 00027750  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AB74 00027754  FC 00 F8 40 */	fcmpo cr0, f0, f31
@@ -2282,11 +2282,11 @@ lbl_8002AB38:
 /* 8002AB7C 0002775C  FF E0 00 90 */	fmr f31, f0
 /* 8002AB80 00027760  63 FF 00 04 */	ori r31, r31, 4
 lbl_8002AB84:
-/* 8002AB84 00027764  48 1F 9F E5 */	bl get_blast_zone_top_offset
+/* 8002AB84 00027764  48 1F 9F E5 */	bl Stage_GetBlastZoneTopOffset
 /* 8002AB88 00027768  C0 01 00 44 */	lfs f0, 0x44(r1)
 /* 8002AB8C 0002776C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AB90 00027770  40 81 00 24 */	ble lbl_8002ABB4
-/* 8002AB94 00027774  48 1F 9F D5 */	bl get_blast_zone_top_offset
+/* 8002AB94 00027774  48 1F 9F D5 */	bl Stage_GetBlastZoneTopOffset
 /* 8002AB98 00027778  C0 41 00 44 */	lfs f2, 0x44(r1)
 /* 8002AB9C 0002777C  C0 02 84 34 */	lfs f0, lbl_804D7E14@sda21(r2)
 /* 8002ABA0 00027780  EC 21 10 28 */	fsubs f1, f1, f2
@@ -2297,11 +2297,11 @@ lbl_8002AB84:
 lbl_8002ABB4:
 /* 8002ABB4 00027794  57 C0 07 BD */	rlwinm. r0, r30, 0, 0x1e, 0x1e
 /* 8002ABB8 00027798  40 82 00 5C */	bne lbl_8002AC14
-/* 8002ABBC 0002779C  48 1F 9F 7D */	bl get_blast_zone_right_offset
+/* 8002ABBC 0002779C  48 1F 9F 7D */	bl Stage_GetBlastZoneRightOffset
 /* 8002ABC0 000277A0  C0 01 00 34 */	lfs f0, 0x34(r1)
 /* 8002ABC4 000277A4  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002ABC8 000277A8  40 81 00 20 */	ble lbl_8002ABE8
-/* 8002ABCC 000277AC  48 1F 9F 6D */	bl get_blast_zone_right_offset
+/* 8002ABCC 000277AC  48 1F 9F 6D */	bl Stage_GetBlastZoneRightOffset
 /* 8002ABD0 000277B0  C0 01 00 34 */	lfs f0, 0x34(r1)
 /* 8002ABD4 000277B4  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002ABD8 000277B8  FC 00 E8 40 */	fcmpo cr0, f0, f29
@@ -2309,11 +2309,11 @@ lbl_8002ABB4:
 /* 8002ABE0 000277C0  FF A0 00 90 */	fmr f29, f0
 /* 8002ABE4 000277C4  63 FF 00 08 */	ori r31, r31, 8
 lbl_8002ABE8:
-/* 8002ABE8 000277C8  48 1F 9F 81 */	bl get_blast_zone_top_offset
+/* 8002ABE8 000277C8  48 1F 9F 81 */	bl Stage_GetBlastZoneTopOffset
 /* 8002ABEC 000277CC  C0 01 00 38 */	lfs f0, 0x38(r1)
 /* 8002ABF0 000277D0  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002ABF4 000277D4  40 81 00 20 */	ble lbl_8002AC14
-/* 8002ABF8 000277D8  48 1F 9F 71 */	bl get_blast_zone_top_offset
+/* 8002ABF8 000277D8  48 1F 9F 71 */	bl Stage_GetBlastZoneTopOffset
 /* 8002ABFC 000277DC  C0 01 00 38 */	lfs f0, 0x38(r1)
 /* 8002AC00 000277E0  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AC04 000277E4  FC 00 E0 40 */	fcmpo cr0, f0, f28
@@ -2323,11 +2323,11 @@ lbl_8002ABE8:
 lbl_8002AC14:
 /* 8002AC14 000277F4  57 C0 07 7B */	rlwinm. r0, r30, 0, 0x1d, 0x1d
 /* 8002AC18 000277F8  40 82 00 5C */	bne lbl_8002AC74
-/* 8002AC1C 000277FC  48 1F 9F 35 */	bl get_blast_zone_left_offset
+/* 8002AC1C 000277FC  48 1F 9F 35 */	bl Stage_GetBlastZoneLeftOffset
 /* 8002AC20 00027800  C0 01 00 28 */	lfs f0, 0x28(r1)
 /* 8002AC24 00027804  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AC28 00027808  40 80 00 20 */	bge lbl_8002AC48
-/* 8002AC2C 0002780C  48 1F 9F 25 */	bl get_blast_zone_left_offset
+/* 8002AC2C 0002780C  48 1F 9F 25 */	bl Stage_GetBlastZoneLeftOffset
 /* 8002AC30 00027810  C0 01 00 28 */	lfs f0, 0x28(r1)
 /* 8002AC34 00027814  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AC38 00027818  FC 00 F8 40 */	fcmpo cr0, f0, f31
@@ -2335,11 +2335,11 @@ lbl_8002AC14:
 /* 8002AC40 00027820  FF E0 00 90 */	fmr f31, f0
 /* 8002AC44 00027824  63 FF 00 04 */	ori r31, r31, 4
 lbl_8002AC48:
-/* 8002AC48 00027828  48 1F 9F 39 */	bl get_blast_zone_bottom_offset
+/* 8002AC48 00027828  48 1F 9F 39 */	bl Stage_GetBlastZoneBottomOffset
 /* 8002AC4C 0002782C  C0 01 00 2C */	lfs f0, 0x2c(r1)
 /* 8002AC50 00027830  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AC54 00027834  40 80 00 20 */	bge lbl_8002AC74
-/* 8002AC58 00027838  48 1F 9F 29 */	bl get_blast_zone_bottom_offset
+/* 8002AC58 00027838  48 1F 9F 29 */	bl Stage_GetBlastZoneBottomOffset
 /* 8002AC5C 0002783C  C0 01 00 2C */	lfs f0, 0x2c(r1)
 /* 8002AC60 00027840  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AC64 00027844  FC 00 F0 40 */	fcmpo cr0, f0, f30
@@ -2349,11 +2349,11 @@ lbl_8002AC48:
 lbl_8002AC74:
 /* 8002AC74 00027854  57 C0 07 39 */	rlwinm. r0, r30, 0, 0x1c, 0x1c
 /* 8002AC78 00027858  40 82 01 E4 */	bne lbl_8002AE5C
-/* 8002AC7C 0002785C  48 1F 9E BD */	bl get_blast_zone_right_offset
+/* 8002AC7C 0002785C  48 1F 9E BD */	bl Stage_GetBlastZoneRightOffset
 /* 8002AC80 00027860  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002AC84 00027864  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AC88 00027868  40 81 00 20 */	ble lbl_8002ACA8
-/* 8002AC8C 0002786C  48 1F 9E AD */	bl get_blast_zone_right_offset
+/* 8002AC8C 0002786C  48 1F 9E AD */	bl Stage_GetBlastZoneRightOffset
 /* 8002AC90 00027870  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002AC94 00027874  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AC98 00027878  FC 00 E8 40 */	fcmpo cr0, f0, f29
@@ -2361,11 +2361,11 @@ lbl_8002AC74:
 /* 8002ACA0 00027880  FF A0 00 90 */	fmr f29, f0
 /* 8002ACA4 00027884  63 FF 00 08 */	ori r31, r31, 8
 lbl_8002ACA8:
-/* 8002ACA8 00027888  48 1F 9E D9 */	bl get_blast_zone_bottom_offset
+/* 8002ACA8 00027888  48 1F 9E D9 */	bl Stage_GetBlastZoneBottomOffset
 /* 8002ACAC 0002788C  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 8002ACB0 00027890  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002ACB4 00027894  40 80 01 A8 */	bge lbl_8002AE5C
-/* 8002ACB8 00027898  48 1F 9E C9 */	bl get_blast_zone_bottom_offset
+/* 8002ACB8 00027898  48 1F 9E C9 */	bl Stage_GetBlastZoneBottomOffset
 /* 8002ACBC 0002789C  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 8002ACC0 000278A0  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002ACC4 000278A4  FC 00 F0 40 */	fcmpo cr0, f0, f30
@@ -2376,11 +2376,11 @@ lbl_8002ACA8:
 lbl_8002ACD8:
 /* 8002ACD8 000278B8  57 C0 07 FF */	clrlwi. r0, r30, 0x1f
 /* 8002ACDC 000278BC  40 82 00 60 */	bne lbl_8002AD3C
-/* 8002ACE0 000278C0  48 1F 9D 75 */	bl get_cam_bounds_left_offset
+/* 8002ACE0 000278C0  48 1F 9D 75 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002ACE4 000278C4  C0 01 00 40 */	lfs f0, 0x40(r1)
 /* 8002ACE8 000278C8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002ACEC 000278CC  40 80 00 20 */	bge lbl_8002AD0C
-/* 8002ACF0 000278D0  48 1F 9D 65 */	bl get_cam_bounds_left_offset
+/* 8002ACF0 000278D0  48 1F 9D 65 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002ACF4 000278D4  C0 01 00 40 */	lfs f0, 0x40(r1)
 /* 8002ACF8 000278D8  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002ACFC 000278DC  FC 00 F8 40 */	fcmpo cr0, f0, f31
@@ -2388,11 +2388,11 @@ lbl_8002ACD8:
 /* 8002AD04 000278E4  FF E0 00 90 */	fmr f31, f0
 /* 8002AD08 000278E8  63 FF 00 04 */	ori r31, r31, 4
 lbl_8002AD0C:
-/* 8002AD0C 000278EC  48 1F 9D 75 */	bl get_cam_bounds_top_offset
+/* 8002AD0C 000278EC  48 1F 9D 75 */	bl Stage_GetCamBoundsTopOffset
 /* 8002AD10 000278F0  C0 01 00 44 */	lfs f0, 0x44(r1)
 /* 8002AD14 000278F4  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AD18 000278F8  40 81 00 24 */	ble lbl_8002AD3C
-/* 8002AD1C 000278FC  48 1F 9D 65 */	bl get_cam_bounds_top_offset
+/* 8002AD1C 000278FC  48 1F 9D 65 */	bl Stage_GetCamBoundsTopOffset
 /* 8002AD20 00027900  C0 41 00 44 */	lfs f2, 0x44(r1)
 /* 8002AD24 00027904  C0 02 84 34 */	lfs f0, lbl_804D7E14@sda21(r2)
 /* 8002AD28 00027908  EC 21 10 28 */	fsubs f1, f1, f2
@@ -2403,11 +2403,11 @@ lbl_8002AD0C:
 lbl_8002AD3C:
 /* 8002AD3C 0002791C  57 C0 07 BD */	rlwinm. r0, r30, 0, 0x1e, 0x1e
 /* 8002AD40 00027920  40 82 00 5C */	bne lbl_8002AD9C
-/* 8002AD44 00027924  48 1F 9D 25 */	bl get_cam_bounds_right_offset
+/* 8002AD44 00027924  48 1F 9D 25 */	bl Stage_GetCamBoundsRightOffset
 /* 8002AD48 00027928  C0 01 00 34 */	lfs f0, 0x34(r1)
 /* 8002AD4C 0002792C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AD50 00027930  40 81 00 20 */	ble lbl_8002AD70
-/* 8002AD54 00027934  48 1F 9D 15 */	bl get_cam_bounds_right_offset
+/* 8002AD54 00027934  48 1F 9D 15 */	bl Stage_GetCamBoundsRightOffset
 /* 8002AD58 00027938  C0 01 00 34 */	lfs f0, 0x34(r1)
 /* 8002AD5C 0002793C  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AD60 00027940  FC 00 E8 40 */	fcmpo cr0, f0, f29
@@ -2415,11 +2415,11 @@ lbl_8002AD3C:
 /* 8002AD68 00027948  FF A0 00 90 */	fmr f29, f0
 /* 8002AD6C 0002794C  63 FF 00 08 */	ori r31, r31, 8
 lbl_8002AD70:
-/* 8002AD70 00027950  48 1F 9D 11 */	bl get_cam_bounds_top_offset
+/* 8002AD70 00027950  48 1F 9D 11 */	bl Stage_GetCamBoundsTopOffset
 /* 8002AD74 00027954  C0 01 00 38 */	lfs f0, 0x38(r1)
 /* 8002AD78 00027958  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AD7C 0002795C  40 81 00 20 */	ble lbl_8002AD9C
-/* 8002AD80 00027960  48 1F 9D 01 */	bl get_cam_bounds_top_offset
+/* 8002AD80 00027960  48 1F 9D 01 */	bl Stage_GetCamBoundsTopOffset
 /* 8002AD84 00027964  C0 01 00 38 */	lfs f0, 0x38(r1)
 /* 8002AD88 00027968  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AD8C 0002796C  FC 00 E0 40 */	fcmpo cr0, f0, f28
@@ -2429,11 +2429,11 @@ lbl_8002AD70:
 lbl_8002AD9C:
 /* 8002AD9C 0002797C  57 C0 07 7B */	rlwinm. r0, r30, 0, 0x1d, 0x1d
 /* 8002ADA0 00027980  40 82 00 5C */	bne lbl_8002ADFC
-/* 8002ADA4 00027984  48 1F 9C B1 */	bl get_cam_bounds_left_offset
+/* 8002ADA4 00027984  48 1F 9C B1 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002ADA8 00027988  C0 01 00 28 */	lfs f0, 0x28(r1)
 /* 8002ADAC 0002798C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002ADB0 00027990  40 80 00 20 */	bge lbl_8002ADD0
-/* 8002ADB4 00027994  48 1F 9C A1 */	bl get_cam_bounds_left_offset
+/* 8002ADB4 00027994  48 1F 9C A1 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002ADB8 00027998  C0 01 00 28 */	lfs f0, 0x28(r1)
 /* 8002ADBC 0002799C  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002ADC0 000279A0  FC 00 F8 40 */	fcmpo cr0, f0, f31
@@ -2441,11 +2441,11 @@ lbl_8002AD9C:
 /* 8002ADC8 000279A8  FF E0 00 90 */	fmr f31, f0
 /* 8002ADCC 000279AC  63 FF 00 04 */	ori r31, r31, 4
 lbl_8002ADD0:
-/* 8002ADD0 000279B0  48 1F 9C C9 */	bl get_cam_bounds_bottom_offset
+/* 8002ADD0 000279B0  48 1F 9C C9 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002ADD4 000279B4  C0 01 00 2C */	lfs f0, 0x2c(r1)
 /* 8002ADD8 000279B8  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002ADDC 000279BC  40 80 00 20 */	bge lbl_8002ADFC
-/* 8002ADE0 000279C0  48 1F 9C B9 */	bl get_cam_bounds_bottom_offset
+/* 8002ADE0 000279C0  48 1F 9C B9 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002ADE4 000279C4  C0 01 00 2C */	lfs f0, 0x2c(r1)
 /* 8002ADE8 000279C8  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002ADEC 000279CC  FC 00 F0 40 */	fcmpo cr0, f0, f30
@@ -2455,11 +2455,11 @@ lbl_8002ADD0:
 lbl_8002ADFC:
 /* 8002ADFC 000279DC  57 C0 07 39 */	rlwinm. r0, r30, 0, 0x1c, 0x1c
 /* 8002AE00 000279E0  40 82 00 5C */	bne lbl_8002AE5C
-/* 8002AE04 000279E4  48 1F 9C 65 */	bl get_cam_bounds_right_offset
+/* 8002AE04 000279E4  48 1F 9C 65 */	bl Stage_GetCamBoundsRightOffset
 /* 8002AE08 000279E8  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002AE0C 000279EC  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AE10 000279F0  40 81 00 20 */	ble lbl_8002AE30
-/* 8002AE14 000279F4  48 1F 9C 55 */	bl get_cam_bounds_right_offset
+/* 8002AE14 000279F4  48 1F 9C 55 */	bl Stage_GetCamBoundsRightOffset
 /* 8002AE18 000279F8  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002AE1C 000279FC  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AE20 00027A00  FC 00 E8 40 */	fcmpo cr0, f0, f29
@@ -2467,11 +2467,11 @@ lbl_8002ADFC:
 /* 8002AE28 00027A08  FF A0 00 90 */	fmr f29, f0
 /* 8002AE2C 00027A0C  63 FF 00 08 */	ori r31, r31, 8
 lbl_8002AE30:
-/* 8002AE30 00027A10  48 1F 9C 69 */	bl get_cam_bounds_bottom_offset
+/* 8002AE30 00027A10  48 1F 9C 69 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002AE34 00027A14  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 8002AE38 00027A18  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002AE3C 00027A1C  40 80 00 20 */	bge lbl_8002AE5C
-/* 8002AE40 00027A20  48 1F 9C 59 */	bl get_cam_bounds_bottom_offset
+/* 8002AE40 00027A20  48 1F 9C 59 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002AE44 00027A24  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 8002AE48 00027A28  EC 01 00 28 */	fsubs f0, f1, f0
 /* 8002AE4C 00027A2C  FC 00 F0 40 */	fcmpo cr0, f0, f30
@@ -2539,10 +2539,10 @@ lbl_8002AF04:
 /* 8002AF28 00027B08  C0 01 00 18 */	lfs f0, 0x18(r1)
 /* 8002AF2C 00027B0C  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002AF30 00027B10  D0 01 00 18 */	stfs f0, 0x18(r1)
-/* 8002AF34 00027B14  4B FE 25 39 */	bl lbvector_add
+/* 8002AF34 00027B14  4B FE 25 39 */	bl lbvector_Add
 /* 8002AF38 00027B18  38 7C 00 0C */	addi r3, r28, 0xc
 /* 8002AF3C 00027B1C  38 81 00 10 */	addi r4, r1, 0x10
-/* 8002AF40 00027B20  4B FE 25 2D */	bl lbvector_add
+/* 8002AF40 00027B20  4B FE 25 2D */	bl lbvector_Add
 lbl_8002AF44:
 /* 8002AF44 00027B24  BB 61 00 6C */	lmw r27, 0x6c(r1)
 /* 8002AF48 00027B28  80 01 00 A4 */	lwz r0, 0xa4(r1)
@@ -2677,7 +2677,7 @@ func_8002B0E0:
 /* 8002B10C 00027CEC  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8002B110 00027CF0  40 81 00 D4 */	ble lbl_8002B1E4
 /* 8002B114 00027CF4  38 60 00 00 */	li r3, 0
-/* 8002B118 00027CF8  48 00 83 45 */	bl func_8003345C
+/* 8002B118 00027CF8  48 00 83 45 */	bl Player_GetPlayerId
 /* 8002B11C 00027CFC  54 60 06 3E */	clrlwi r0, r3, 0x18
 /* 8002B120 00027D00  C0 02 84 34 */	lfs f0, lbl_804D7E14@sda21(r2)
 /* 8002B124 00027D04  1C 00 00 44 */	mulli r0, r0, 0x44
@@ -2759,7 +2759,7 @@ func_8002B1F8:
 /* 8002B230 00027E10  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 8002B234 00027E14  41 82 01 7C */	beq lbl_8002B3B0
 /* 8002B238 00027E18  38 60 00 00 */	li r3, 0
-/* 8002B23C 00027E1C  48 00 8E D5 */	bl func_80034110
+/* 8002B23C 00027E1C  48 00 8E D5 */	bl Player_GetEntity
 /* 8002B240 00027E20  7C 7E 1B 79 */	or. r30, r3, r3
 /* 8002B244 00027E24  41 82 00 48 */	beq lbl_8002B28C
 /* 8002B248 00027E28  7F C3 F3 78 */	mr r3, r30
@@ -2781,11 +2781,11 @@ func_8002B1F8:
 /* 8002B288 00027E68  41 82 00 54 */	beq lbl_8002B2DC
 lbl_8002B28C:
 /* 8002B28C 00027E6C  38 60 00 01 */	li r3, 1
-/* 8002B290 00027E70  48 00 70 A1 */	bl func_80032330
+/* 8002B290 00027E70  48 00 70 A1 */	bl Player_GetPlayerCharacter
 /* 8002B294 00027E74  2C 03 00 1F */	cmpwi r3, 0x1f
 /* 8002B298 00027E78  40 82 01 18 */	bne lbl_8002B3B0
 /* 8002B29C 00027E7C  38 60 00 01 */	li r3, 1
-/* 8002B2A0 00027E80  48 00 8E 71 */	bl func_80034110
+/* 8002B2A0 00027E80  48 00 8E 71 */	bl Player_GetEntity
 /* 8002B2A4 00027E84  28 03 00 00 */	cmplwi r3, 0
 /* 8002B2A8 00027E88  41 82 01 08 */	beq lbl_8002B3B0
 /* 8002B2AC 00027E8C  48 05 B8 C9 */	bl func_80086B74
@@ -2804,7 +2804,7 @@ lbl_8002B2DC:
 /* 8002B2DC 00027EBC  38 7C 00 0C */	addi r3, r28, 0xc
 /* 8002B2E0 00027EC0  38 9D 00 1C */	addi r4, r29, 0x1c
 /* 8002B2E4 00027EC4  38 A1 00 0C */	addi r5, r1, 0xc
-/* 8002B2E8 00027EC8  4B FE 22 11 */	bl lbvector_diff
+/* 8002B2E8 00027EC8  4B FE 22 11 */	bl lbvector_Diff
 /* 8002B2EC 00027ECC  C0 3F 00 00 */	lfs f1, 0(r31)
 /* 8002B2F0 00027ED0  38 61 00 0C */	addi r3, r1, 0xc
 /* 8002B2F4 00027ED4  C0 01 00 0C */	lfs f0, 0xc(r1)
@@ -2818,7 +2818,7 @@ lbl_8002B2DC:
 /* 8002B314 00027EF4  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 8002B318 00027EF8  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002B31C 00027EFC  D0 01 00 14 */	stfs f0, 0x14(r1)
-/* 8002B320 00027F00  4B FE 21 4D */	bl lbvector_add
+/* 8002B320 00027F00  4B FE 21 4D */	bl lbvector_Add
 /* 8002B324 00027F04  80 C1 00 0C */	lwz r6, 0xc(r1)
 /* 8002B328 00027F08  38 7C 00 24 */	addi r3, r28, 0x24
 /* 8002B32C 00027F0C  80 01 00 10 */	lwz r0, 0x10(r1)
@@ -2828,14 +2828,14 @@ lbl_8002B2DC:
 /* 8002B33C 00027F1C  90 1C 00 10 */	stw r0, 0x10(r28)
 /* 8002B340 00027F20  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8002B344 00027F24  90 1C 00 14 */	stw r0, 0x14(r28)
-/* 8002B348 00027F28  4B FE 21 B1 */	bl lbvector_diff
+/* 8002B348 00027F28  4B FE 21 B1 */	bl lbvector_Diff
 /* 8002B34C 00027F2C  3C 60 80 45 */	lis r3, lbl_80452C68@ha
 /* 8002B350 00027F30  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 8002B354 00027F34  38 63 2C 68 */	addi r3, r3, lbl_80452C68@l
 /* 8002B358 00027F38  C0 23 02 C0 */	lfs f1, 0x2c0(r3)
 /* 8002B35C 00027F3C  38 61 00 0C */	addi r3, r1, 0xc
 /* 8002B360 00027F40  EF E1 00 32 */	fmuls f31, f1, f0
-/* 8002B364 00027F44  4B FE 1F 89 */	bl lbvector_normalize
+/* 8002B364 00027F44  4B FE 1F 89 */	bl lbvector_Normalize
 /* 8002B368 00027F48  C0 01 00 0C */	lfs f0, 0xc(r1)
 /* 8002B36C 00027F4C  38 61 00 0C */	addi r3, r1, 0xc
 /* 8002B370 00027F50  38 9C 00 0C */	addi r4, r28, 0xc
@@ -2847,7 +2847,7 @@ lbl_8002B2DC:
 /* 8002B388 00027F68  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 8002B38C 00027F6C  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 8002B390 00027F70  D0 01 00 14 */	stfs f0, 0x14(r1)
-/* 8002B394 00027F74  4B FE 20 D9 */	bl lbvector_add
+/* 8002B394 00027F74  4B FE 20 D9 */	bl lbvector_Add
 /* 8002B398 00027F78  80 61 00 0C */	lwz r3, 0xc(r1)
 /* 8002B39C 00027F7C  80 01 00 10 */	lwz r0, 0x10(r1)
 /* 8002B3A0 00027F80  90 7C 00 24 */	stw r3, 0x24(r28)
@@ -2996,19 +2996,19 @@ lbl_8002B55C:
 lbl_8002B5AC:
 /* 8002B5AC 0002818C  7F C3 F3 78 */	mr r3, r30
 /* 8002B5B0 00028190  4B FF FC 49 */	bl func_8002B1F8
-/* 8002B5B4 00028194  48 1F 95 75 */	bl get_cam_track_smooth
+/* 8002B5B4 00028194  48 1F 95 75 */	bl Stage_GetCamTrackSmooth
 /* 8002B5B8 00028198  38 9E 00 00 */	addi r4, r30, 0
 /* 8002B5BC 0002819C  38 61 00 44 */	addi r3, r1, 0x44
 /* 8002B5C0 000281A0  4B FF E4 ED */	bl func_80029AAC
-/* 8002B5C4 000281A4  48 1F 95 65 */	bl get_cam_track_smooth
+/* 8002B5C4 000281A4  48 1F 95 65 */	bl Stage_GetCamTrackSmooth
 /* 8002B5C8 000281A8  38 9E 00 00 */	addi r4, r30, 0
 /* 8002B5CC 000281AC  38 61 00 44 */	addi r3, r1, 0x44
 /* 8002B5D0 000281B0  4B FF E6 B9 */	bl func_80029C88
-/* 8002B5D4 000281B4  48 1F 95 55 */	bl get_cam_track_smooth
+/* 8002B5D4 000281B4  48 1F 95 55 */	bl Stage_GetCamTrackSmooth
 /* 8002B5D8 000281B8  38 9B 00 00 */	addi r4, r27, 0
 /* 8002B5DC 000281BC  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8002B5E0 000281C0  4B FF E4 CD */	bl func_80029AAC
-/* 8002B5E4 000281C4  48 1F 95 45 */	bl get_cam_track_smooth
+/* 8002B5E4 000281C4  48 1F 95 45 */	bl Stage_GetCamTrackSmooth
 /* 8002B5E8 000281C8  38 9B 00 00 */	addi r4, r27, 0
 /* 8002B5EC 000281CC  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8002B5F0 000281D0  4B FF E6 99 */	bl func_80029C88
@@ -3026,9 +3026,9 @@ lbl_8002B5AC:
 /* 8002B620 00028200  D0 1F 02 B4 */	stfs f0, 0x2b4(r31)
 /* 8002B624 00028204  B0 1B 00 00 */	sth r0, 0(r27)
 lbl_8002B628:
-/* 8002B628 00028208  48 1F 94 2D */	bl get_cam_bounds_left_offset
+/* 8002B628 00028208  48 1F 94 2D */	bl Stage_GetCamBoundsLeftOffset
 /* 8002B62C 0002820C  FF E0 08 90 */	fmr f31, f1
-/* 8002B630 00028210  48 1F 94 39 */	bl get_cam_bounds_right_offset
+/* 8002B630 00028210  48 1F 94 39 */	bl Stage_GetCamBoundsRightOffset
 /* 8002B634 00028214  EC 21 F8 28 */	fsubs f1, f1, f31
 /* 8002B638 00028218  C0 1F 02 B4 */	lfs f0, 0x2b4(r31)
 /* 8002B63C 0002821C  3C 00 43 30 */	lis r0, 0x4330
@@ -3334,7 +3334,7 @@ lbl_8002BA5C:
 /* 8002BA68 00028648  48 00 00 28 */	b lbl_8002BA90
 lbl_8002BA6C:
 /* 8002BA6C 0002864C  7F C3 F3 78 */	mr r3, r30
-/* 8002BA70 00028650  48 00 86 A1 */	bl func_80034110
+/* 8002BA70 00028650  48 00 86 A1 */	bl Player_GetEntity
 /* 8002BA74 00028654  28 03 00 00 */	cmplwi r3, 0
 /* 8002BA78 00028658  41 82 00 0C */	beq lbl_8002BA84
 /* 8002BA7C 0002865C  7F C3 F3 78 */	mr r3, r30
@@ -3441,7 +3441,7 @@ lbl_8002BBE0:
 lbl_8002BBF0:
 /* 8002BBF0 000287D0  C3 E5 00 00 */	lfs f31, 0(r5)
 /* 8002BBF4 000287D4  38 61 00 18 */	addi r3, r1, 0x18
-/* 8002BBF8 000287D8  4B FE 16 F5 */	bl lbvector_normalize
+/* 8002BBF8 000287D8  4B FE 16 F5 */	bl lbvector_Normalize
 /* 8002BBFC 000287DC  C0 01 00 18 */	lfs f0, 0x18(r1)
 /* 8002BC00 000287E0  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 8002BC04 000287E4  D0 01 00 18 */	stfs f0, 0x18(r1)
@@ -3530,13 +3530,13 @@ lbl_8002BD34:
 /* 8002BD3C 0002891C  38 BE 00 00 */	addi r5, r30, 0
 /* 8002BD40 00028920  48 31 71 19 */	bl PSVECCrossProduct
 /* 8002BD44 00028924  7F C3 F3 78 */	mr r3, r30
-/* 8002BD48 00028928  4B FE 15 A5 */	bl lbvector_normalize
+/* 8002BD48 00028928  4B FE 15 A5 */	bl lbvector_Normalize
 /* 8002BD4C 0002892C  38 7C 00 00 */	addi r3, r28, 0
 /* 8002BD50 00028930  38 9E 00 00 */	addi r4, r30, 0
 /* 8002BD54 00028934  38 BD 00 00 */	addi r5, r29, 0
 /* 8002BD58 00028938  48 31 71 01 */	bl PSVECCrossProduct
 /* 8002BD5C 0002893C  7F A3 EB 78 */	mr r3, r29
-/* 8002BD60 00028940  4B FE 15 8D */	bl lbvector_normalize
+/* 8002BD60 00028940  4B FE 15 8D */	bl lbvector_Normalize
 /* 8002BD64 00028944  7F E3 FB 78 */	mr r3, r31
 /* 8002BD68 00028948  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8002BD6C 0002894C  83 E1 00 24 */	lwz r31, 0x24(r1)
@@ -3593,7 +3593,7 @@ func_8002BD88:
 /* 8002BE2C 00028A0C  C0 01 00 30 */	lfs f0, 0x30(r1)
 /* 8002BE30 00028A10  EC 00 00 F2 */	fmuls f0, f0, f3
 /* 8002BE34 00028A14  D0 01 00 30 */	stfs f0, 0x30(r1)
-/* 8002BE38 00028A18  4B FE 14 B5 */	bl lbvector_normalize
+/* 8002BE38 00028A18  4B FE 14 B5 */	bl lbvector_Normalize
 /* 8002BE3C 00028A1C  FF E0 08 90 */	fmr f31, f1
 /* 8002BE40 00028A20  C0 22 84 24 */	lfs f1, lbl_804D7E04@sda21(r2)
 /* 8002BE44 00028A24  FC 1F 08 40 */	fcmpo cr0, f31, f1
@@ -3633,13 +3633,13 @@ lbl_8002BEB0:
 /* 8002BEB8 00028A98  38 A1 00 1C */	addi r5, r1, 0x1c
 /* 8002BEBC 00028A9C  48 31 6F 9D */	bl PSVECCrossProduct
 /* 8002BEC0 00028AA0  38 61 00 1C */	addi r3, r1, 0x1c
-/* 8002BEC4 00028AA4  4B FE 14 29 */	bl lbvector_normalize
+/* 8002BEC4 00028AA4  4B FE 14 29 */	bl lbvector_Normalize
 /* 8002BEC8 00028AA8  38 61 00 28 */	addi r3, r1, 0x28
 /* 8002BECC 00028AAC  38 81 00 1C */	addi r4, r1, 0x1c
 /* 8002BED0 00028AB0  38 A1 00 34 */	addi r5, r1, 0x34
 /* 8002BED4 00028AB4  48 31 6F 85 */	bl PSVECCrossProduct
 /* 8002BED8 00028AB8  38 61 00 34 */	addi r3, r1, 0x34
-/* 8002BEDC 00028ABC  4B FE 14 11 */	bl lbvector_normalize
+/* 8002BEDC 00028ABC  4B FE 14 11 */	bl lbvector_Normalize
 /* 8002BEE0 00028AC0  80 61 00 34 */	lwz r3, 0x34(r1)
 /* 8002BEE4 00028AC4  80 01 00 38 */	lwz r0, 0x38(r1)
 /* 8002BEE8 00028AC8  90 7F 03 34 */	stw r3, 0x334(r31)
@@ -3666,7 +3666,7 @@ lbl_8002BEB0:
 /* 8002BF3C 00028B1C  C0 01 00 3C */	lfs f0, 0x3c(r1)
 /* 8002BF40 00028B20  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002BF44 00028B24  D0 01 00 3C */	stfs f0, 0x3c(r1)
-/* 8002BF48 00028B28  4B FE 15 25 */	bl lbvector_add
+/* 8002BF48 00028B28  4B FE 15 25 */	bl lbvector_Add
 lbl_8002BF4C:
 /* 8002BF4C 00028B2C  C0 02 84 34 */	lfs f0, lbl_804D7E14@sda21(r2)
 /* 8002BF50 00028B30  FC 00 E8 00 */	fcmpu cr0, f0, f29
@@ -3689,11 +3689,11 @@ lbl_8002BF4C:
 /* 8002BF94 00028B74  C0 01 00 24 */	lfs f0, 0x24(r1)
 /* 8002BF98 00028B78  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002BF9C 00028B7C  D0 01 00 24 */	stfs f0, 0x24(r1)
-/* 8002BFA0 00028B80  4B FE 14 CD */	bl lbvector_add
+/* 8002BFA0 00028B80  4B FE 14 CD */	bl lbvector_Add
 lbl_8002BFA4:
 /* 8002BFA4 00028B84  C3 BF 03 30 */	lfs f29, 0x330(r31)
 /* 8002BFA8 00028B88  38 61 00 10 */	addi r3, r1, 0x10
-/* 8002BFAC 00028B8C  4B FE 13 41 */	bl lbvector_normalize
+/* 8002BFAC 00028B8C  4B FE 13 41 */	bl lbvector_Normalize
 /* 8002BFB0 00028B90  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 8002BFB4 00028B94  EC 00 07 72 */	fmuls f0, f0, f29
 /* 8002BFB8 00028B98  D0 01 00 10 */	stfs f0, 0x10(r1)
@@ -3757,7 +3757,7 @@ func_8002C010:
 /* 8002C094 00028C74  C0 01 00 28 */	lfs f0, 0x28(r1)
 /* 8002C098 00028C78  EC 00 00 F2 */	fmuls f0, f0, f3
 /* 8002C09C 00028C7C  D0 01 00 28 */	stfs f0, 0x28(r1)
-/* 8002C0A0 00028C80  4B FE 12 4D */	bl lbvector_normalize
+/* 8002C0A0 00028C80  4B FE 12 4D */	bl lbvector_Normalize
 /* 8002C0A4 00028C84  FF C0 08 90 */	fmr f30, f1
 /* 8002C0A8 00028C88  C0 42 84 24 */	lfs f2, lbl_804D7E04@sda21(r2)
 /* 8002C0AC 00028C8C  FC 1E 10 40 */	fcmpo cr0, f30, f2
@@ -3793,7 +3793,7 @@ lbl_8002C0CC:
 /* 8002C120 00028D00  C0 01 00 34 */	lfs f0, 0x34(r1)
 /* 8002C124 00028D04  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002C128 00028D08  D0 01 00 34 */	stfs f0, 0x34(r1)
-/* 8002C12C 00028D0C  4B FE 13 41 */	bl lbvector_add
+/* 8002C12C 00028D0C  4B FE 13 41 */	bl lbvector_Add
 lbl_8002C130:
 /* 8002C130 00028D10  C0 02 84 34 */	lfs f0, lbl_804D7E14@sda21(r2)
 /* 8002C134 00028D14  FC 00 F8 00 */	fcmpu cr0, f0, f31
@@ -3816,7 +3816,7 @@ lbl_8002C130:
 /* 8002C178 00028D58  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002C17C 00028D5C  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002C180 00028D60  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 8002C184 00028D64  4B FE 12 E9 */	bl lbvector_add
+/* 8002C184 00028D64  4B FE 12 E9 */	bl lbvector_Add
 lbl_8002C188:
 /* 8002C188 00028D68  80 01 00 5C */	lwz r0, 0x5c(r1)
 /* 8002C18C 00028D6C  CB E1 00 50 */	lfd f31, 0x50(r1)
@@ -4189,7 +4189,7 @@ lbl_8002C670:
 /* 8002C688 00029268  90 01 00 38 */	stw r0, 0x38(r1)
 /* 8002C68C 0002926C  80 1F 03 1C */	lwz r0, 0x31c(r31)
 /* 8002C690 00029270  90 01 00 3C */	stw r0, 0x3c(r1)
-/* 8002C694 00029274  4B FE 0D D9 */	bl lbvector_add
+/* 8002C694 00029274  4B FE 0D D9 */	bl lbvector_Add
 /* 8002C698 00029278  C0 21 00 34 */	lfs f1, 0x34(r1)
 /* 8002C69C 0002927C  C0 1A 00 0C */	lfs f0, 0xc(r26)
 /* 8002C6A0 00029280  FC 01 00 40 */	fcmpo cr0, f1, f0
@@ -4228,7 +4228,7 @@ lbl_8002C700:
 lbl_8002C710:
 /* 8002C710 000292F0  38 61 00 34 */	addi r3, r1, 0x34
 /* 8002C714 000292F4  38 9E 00 00 */	addi r4, r30, 0
-/* 8002C718 000292F8  4B FE 0D AD */	bl lbvector_sub
+/* 8002C718 000292F8  4B FE 0D AD */	bl lbvector_Sub
 /* 8002C71C 000292FC  80 61 00 34 */	lwz r3, 0x34(r1)
 /* 8002C720 00029300  3B 9F 03 20 */	addi r28, r31, 0x320
 /* 8002C724 00029304  80 01 00 38 */	lwz r0, 0x38(r1)
@@ -4303,23 +4303,23 @@ lbl_8002C824:
 /* 8002C830 00029410  38 A1 00 28 */	addi r5, r1, 0x28
 /* 8002C834 00029414  48 31 66 25 */	bl PSVECCrossProduct
 /* 8002C838 00029418  38 61 00 28 */	addi r3, r1, 0x28
-/* 8002C83C 0002941C  4B FE 0A B1 */	bl lbvector_normalize
+/* 8002C83C 0002941C  4B FE 0A B1 */	bl lbvector_Normalize
 /* 8002C840 00029420  38 9C 00 00 */	addi r4, r28, 0
 /* 8002C844 00029424  38 61 00 28 */	addi r3, r1, 0x28
 /* 8002C848 00029428  38 A1 00 1C */	addi r5, r1, 0x1c
 /* 8002C84C 0002942C  48 31 66 0D */	bl PSVECCrossProduct
 /* 8002C850 00029430  38 61 00 1C */	addi r3, r1, 0x1c
-/* 8002C854 00029434  4B FE 0A 99 */	bl lbvector_normalize
+/* 8002C854 00029434  4B FE 0A 99 */	bl lbvector_Normalize
 /* 8002C858 00029438  C0 3B 00 00 */	lfs f1, 0(r27)
 /* 8002C85C 0002943C  FC 40 F8 90 */	fmr f2, f31
-/* 8002C860 00029440  4B FF 63 D1 */	bl func_80022C30
+/* 8002C860 00029440  4B FF 63 D1 */	bl atan2f
 /* 8002C864 00029444  C0 1A 00 1C */	lfs f0, 0x1c(r26)
 /* 8002C868 00029448  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8002C86C 0002944C  40 81 00 18 */	ble lbl_8002C884
 /* 8002C870 00029450  EC 20 08 28 */	fsubs f1, f0, f1
 /* 8002C874 00029454  38 7C 00 00 */	addi r3, r28, 0
 /* 8002C878 00029458  38 81 00 28 */	addi r4, r1, 0x28
-/* 8002C87C 0002945C  4B FE 10 79 */	bl func_8000D8F4
+/* 8002C87C 0002945C  4B FE 10 79 */	bl lbvector_RotateAboutUnitAxis
 /* 8002C880 00029460  48 00 00 24 */	b lbl_8002C8A4
 lbl_8002C884:
 /* 8002C884 00029464  C0 1A 00 18 */	lfs f0, 0x18(r26)
@@ -4329,18 +4329,18 @@ lbl_8002C884:
 /* 8002C894 00029474  EC 20 08 28 */	fsubs f1, f0, f1
 /* 8002C898 00029478  38 7C 00 00 */	addi r3, r28, 0
 /* 8002C89C 0002947C  38 81 00 28 */	addi r4, r1, 0x28
-/* 8002C8A0 00029480  4B FE 10 55 */	bl func_8000D8F4
+/* 8002C8A0 00029480  4B FE 10 55 */	bl lbvector_RotateAboutUnitAxis
 lbl_8002C8A4:
 /* 8002C8A4 00029484  C0 3C 00 00 */	lfs f1, 0(r28)
 /* 8002C8A8 00029488  C0 5E 00 00 */	lfs f2, 0(r30)
-/* 8002C8AC 0002948C  4B FF 63 85 */	bl func_80022C30
+/* 8002C8AC 0002948C  4B FF 63 85 */	bl atan2f
 /* 8002C8B0 00029490  C0 1A 00 20 */	lfs f0, 0x20(r26)
 /* 8002C8B4 00029494  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8002C8B8 00029498  40 81 00 18 */	ble lbl_8002C8D0
 /* 8002C8BC 0002949C  EC 20 08 28 */	fsubs f1, f0, f1
 /* 8002C8C0 000294A0  38 7C 00 00 */	addi r3, r28, 0
 /* 8002C8C4 000294A4  38 81 00 1C */	addi r4, r1, 0x1c
-/* 8002C8C8 000294A8  4B FE 10 2D */	bl func_8000D8F4
+/* 8002C8C8 000294A8  4B FE 10 2D */	bl lbvector_RotateAboutUnitAxis
 /* 8002C8CC 000294AC  48 00 00 24 */	b lbl_8002C8F0
 lbl_8002C8D0:
 /* 8002C8D0 000294B0  C0 1A 00 24 */	lfs f0, 0x24(r26)
@@ -4350,7 +4350,7 @@ lbl_8002C8D0:
 /* 8002C8E0 000294C0  EC 20 08 28 */	fsubs f1, f0, f1
 /* 8002C8E4 000294C4  38 7C 00 00 */	addi r3, r28, 0
 /* 8002C8E8 000294C8  38 81 00 1C */	addi r4, r1, 0x1c
-/* 8002C8EC 000294CC  4B FE 10 09 */	bl func_8000D8F4
+/* 8002C8EC 000294CC  4B FE 10 09 */	bl lbvector_RotateAboutUnitAxis
 lbl_8002C8F0:
 /* 8002C8F0 000294D0  BB 41 00 48 */	lmw r26, 0x48(r1)
 /* 8002C8F4 000294D4  80 01 00 6C */	lwz r0, 0x6c(r1)
@@ -4396,10 +4396,10 @@ lbl_8002C97C:
 /* 8002C97C 0002955C  2C 03 00 0A */	cmpwi r3, 0xa
 /* 8002C980 00029560  40 82 00 10 */	bne lbl_8002C990
 /* 8002C984 00029564  7F 63 DB 78 */	mr r3, r27
-/* 8002C988 00029568  48 1F 82 71 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 8002C988 00029568  48 1F 82 71 */	bl Stage_UnkSetVec3TCam_Offset
 /* 8002C98C 0002956C  48 00 00 3C */	b lbl_8002C9C8
 lbl_8002C990:
-/* 8002C990 00029570  48 00 77 81 */	bl func_80034110
+/* 8002C990 00029570  48 00 77 81 */	bl Player_GetEntity
 /* 8002C994 00029574  28 03 00 00 */	cmplwi r3, 0
 /* 8002C998 00029578  41 82 00 2C */	beq lbl_8002C9C4
 /* 8002C99C 0002957C  48 05 A1 D9 */	bl func_80086B74
@@ -4429,7 +4429,7 @@ lbl_8002C9C8:
 /* 8002C9F4 000295D4  90 1F 00 24 */	stw r0, 0x24(r31)
 /* 8002C9F8 000295D8  80 1B 00 08 */	lwz r0, 8(r27)
 /* 8002C9FC 000295DC  90 1F 00 28 */	stw r0, 0x28(r31)
-/* 8002CA00 000295E0  4B FE 0A 6D */	bl lbvector_add
+/* 8002CA00 000295E0  4B FE 0A 6D */	bl lbvector_Add
 /* 8002CA04 000295E4  80 BC 00 00 */	lwz r5, 0(r28)
 /* 8002CA08 000295E8  3B 7E 00 24 */	addi r27, r30, 0x24
 /* 8002CA0C 000295EC  80 1C 00 04 */	lwz r0, 4(r28)
@@ -4439,12 +4439,12 @@ lbl_8002C9C8:
 /* 8002CA1C 000295FC  90 1F 00 3C */	stw r0, 0x3c(r31)
 /* 8002CA20 00029600  80 1C 00 08 */	lwz r0, 8(r28)
 /* 8002CA24 00029604  90 1F 00 40 */	stw r0, 0x40(r31)
-/* 8002CA28 00029608  4B FE 0A 45 */	bl lbvector_add
+/* 8002CA28 00029608  4B FE 0A 45 */	bl lbvector_Add
 /* 8002CA2C 0002960C  3B 9E 00 18 */	addi r28, r30, 0x18
 /* 8002CA30 00029610  38 7B 00 00 */	addi r3, r27, 0
 /* 8002CA34 00029614  38 9C 00 00 */	addi r4, r28, 0
 /* 8002CA38 00029618  38 A1 00 1C */	addi r5, r1, 0x1c
-/* 8002CA3C 0002961C  4B FE 0A BD */	bl lbvector_diff
+/* 8002CA3C 0002961C  4B FE 0A BD */	bl lbvector_Diff
 /* 8002CA40 00029620  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
 /* 8002CA44 00029624  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002CA48 00029628  3B A3 CC A0 */	addi r29, r3, lbl_803BCCA0@l
@@ -4460,11 +4460,11 @@ lbl_8002C9C8:
 /* 8002CA70 00029650  C0 01 00 24 */	lfs f0, 0x24(r1)
 /* 8002CA74 00029654  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002CA78 00029658  D0 01 00 24 */	stfs f0, 0x24(r1)
-/* 8002CA7C 0002965C  4B FE 09 F1 */	bl lbvector_add
+/* 8002CA7C 0002965C  4B FE 09 F1 */	bl lbvector_Add
 /* 8002CA80 00029660  38 7A 00 00 */	addi r3, r26, 0
 /* 8002CA84 00029664  38 9E 00 00 */	addi r4, r30, 0
 /* 8002CA88 00029668  38 A1 00 10 */	addi r5, r1, 0x10
-/* 8002CA8C 0002966C  4B FE 0A 6D */	bl lbvector_diff
+/* 8002CA8C 0002966C  4B FE 0A 6D */	bl lbvector_Diff
 /* 8002CA90 00029670  C0 3B 00 00 */	lfs f1, 0(r27)
 /* 8002CA94 00029674  7F C3 F3 78 */	mr r3, r30
 /* 8002CA98 00029678  C0 01 00 10 */	lfs f0, 0x10(r1)
@@ -4477,7 +4477,7 @@ lbl_8002C9C8:
 /* 8002CAB4 00029694  C0 01 00 18 */	lfs f0, 0x18(r1)
 /* 8002CAB8 00029698  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002CABC 0002969C  D0 01 00 18 */	stfs f0, 0x18(r1)
-/* 8002CAC0 000296A0  4B FE 09 AD */	bl lbvector_add
+/* 8002CAC0 000296A0  4B FE 09 AD */	bl lbvector_Add
 /* 8002CAC4 000296A4  C0 1F 03 2C */	lfs f0, 0x32c(r31)
 /* 8002CAC8 000296A8  38 61 00 40 */	addi r3, r1, 0x40
 /* 8002CACC 000296AC  D0 1F 00 48 */	stfs f0, 0x48(r31)
@@ -4620,10 +4620,10 @@ lbl_8002CCB0:
 /* 8002CCB0 00029890  2C 03 00 0A */	cmpwi r3, 0xa
 /* 8002CCB4 00029894  40 82 00 10 */	bne lbl_8002CCC4
 /* 8002CCB8 00029898  7F 63 DB 78 */	mr r3, r27
-/* 8002CCBC 0002989C  48 1F 7F 3D */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 8002CCBC 0002989C  48 1F 7F 3D */	bl Stage_UnkSetVec3TCam_Offset
 /* 8002CCC0 000298A0  48 00 00 3C */	b lbl_8002CCFC
 lbl_8002CCC4:
-/* 8002CCC4 000298A4  48 00 74 4D */	bl func_80034110
+/* 8002CCC4 000298A4  48 00 74 4D */	bl Player_GetEntity
 /* 8002CCC8 000298A8  28 03 00 00 */	cmplwi r3, 0
 /* 8002CCCC 000298AC  41 82 00 2C */	beq lbl_8002CCF8
 /* 8002CCD0 000298B0  48 05 9E A5 */	bl func_80086B74
@@ -4643,7 +4643,7 @@ lbl_8002CCFC:
 /* 8002CD00 000298E0  41 82 FF 74 */	beq lbl_8002CC74
 /* 8002CD04 000298E4  88 7C 00 00 */	lbz r3, 0(r28)
 /* 8002CD08 000298E8  7C 63 07 74 */	extsb r3, r3
-/* 8002CD0C 000298EC  48 00 74 05 */	bl func_80034110
+/* 8002CD0C 000298EC  48 00 74 05 */	bl Player_GetEntity
 /* 8002CD10 000298F0  28 03 00 00 */	cmplwi r3, 0
 /* 8002CD14 000298F4  41 82 FF 60 */	beq lbl_8002CC74
 /* 8002CD18 000298F8  48 05 A3 05 */	bl func_8008701C
@@ -4651,7 +4651,7 @@ lbl_8002CCFC:
 /* 8002CD20 00029900  40 82 FF 54 */	bne lbl_8002CC74
 /* 8002CD24 00029904  8B BC 00 00 */	lbz r29, 0(r28)
 /* 8002CD28 00029908  7F BD 07 74 */	extsb r29, r29
-/* 8002CD2C 0002990C  48 1F 7F 01 */	bl get_pausecam_zpos_init
+/* 8002CD2C 0002990C  48 1F 7F 01 */	bl Stage_GetPauseCamZPosInit
 /* 8002CD30 00029910  C0 42 84 34 */	lfs f2, lbl_804D7E14@sda21(r2)
 /* 8002CD34 00029914  2C 1D 00 0A */	cmpwi r29, 0xa
 /* 8002CD38 00029918  D0 5F 03 1C */	stfs f2, 0x31c(r31)
@@ -4744,10 +4744,10 @@ lbl_8002CE64:
 /* 8002CE64 00029A44  2C 03 00 0A */	cmpwi r3, 0xa
 /* 8002CE68 00029A48  40 82 00 10 */	bne lbl_8002CE78
 /* 8002CE6C 00029A4C  7F 63 DB 78 */	mr r3, r27
-/* 8002CE70 00029A50  48 1F 7D 89 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 8002CE70 00029A50  48 1F 7D 89 */	bl Stage_UnkSetVec3TCam_Offset
 /* 8002CE74 00029A54  48 00 00 3C */	b lbl_8002CEB0
 lbl_8002CE78:
-/* 8002CE78 00029A58  48 00 72 99 */	bl func_80034110
+/* 8002CE78 00029A58  48 00 72 99 */	bl Player_GetEntity
 /* 8002CE7C 00029A5C  28 03 00 00 */	cmplwi r3, 0
 /* 8002CE80 00029A60  41 82 00 2C */	beq lbl_8002CEAC
 /* 8002CE84 00029A64  48 05 9C F1 */	bl func_80086B74
@@ -4767,7 +4767,7 @@ lbl_8002CEB0:
 /* 8002CEB4 00029A94  41 82 FF 74 */	beq lbl_8002CE28
 /* 8002CEB8 00029A98  88 7D 00 00 */	lbz r3, 0(r29)
 /* 8002CEBC 00029A9C  7C 63 07 74 */	extsb r3, r3
-/* 8002CEC0 00029AA0  48 00 72 51 */	bl func_80034110
+/* 8002CEC0 00029AA0  48 00 72 51 */	bl Player_GetEntity
 /* 8002CEC4 00029AA4  28 03 00 00 */	cmplwi r3, 0
 /* 8002CEC8 00029AA8  41 82 FF 60 */	beq lbl_8002CE28
 /* 8002CECC 00029AAC  48 05 A1 51 */	bl func_8008701C
@@ -4782,7 +4782,7 @@ lbl_8002CED8:
 /* 8002CEEC 00029ACC  41 82 01 8C */	beq lbl_8002D078
 /* 8002CEF0 00029AD0  2C 03 00 0B */	cmpwi r3, 0xb
 /* 8002CEF4 00029AD4  41 82 01 84 */	beq lbl_8002D078
-/* 8002CEF8 00029AD8  48 00 72 19 */	bl func_80034110
+/* 8002CEF8 00029AD8  48 00 72 19 */	bl Player_GetEntity
 /* 8002CEFC 00029ADC  28 03 00 00 */	cmplwi r3, 0
 /* 8002CF00 00029AE0  41 82 01 78 */	beq lbl_8002D078
 /* 8002CF04 00029AE4  48 05 9C 71 */	bl func_80086B74
@@ -4821,7 +4821,7 @@ lbl_8002CF54:
 /* 8002CF84 00029B64  90 1F 00 24 */	stw r0, 0x24(r31)
 /* 8002CF88 00029B68  80 1F 03 10 */	lwz r0, 0x310(r31)
 /* 8002CF8C 00029B6C  90 1F 00 28 */	stw r0, 0x28(r31)
-/* 8002CF90 00029B70  4B FE 04 DD */	bl lbvector_add
+/* 8002CF90 00029B70  4B FE 04 DD */	bl lbvector_Add
 /* 8002CF94 00029B74  80 BB 00 00 */	lwz r5, 0(r27)
 /* 8002CF98 00029B78  3B 9E 00 24 */	addi r28, r30, 0x24
 /* 8002CF9C 00029B7C  80 1B 00 04 */	lwz r0, 4(r27)
@@ -4831,12 +4831,12 @@ lbl_8002CF54:
 /* 8002CFAC 00029B8C  90 1F 00 3C */	stw r0, 0x3c(r31)
 /* 8002CFB0 00029B90  80 1B 00 08 */	lwz r0, 8(r27)
 /* 8002CFB4 00029B94  90 1F 00 40 */	stw r0, 0x40(r31)
-/* 8002CFB8 00029B98  4B FE 04 B5 */	bl lbvector_add
+/* 8002CFB8 00029B98  4B FE 04 B5 */	bl lbvector_Add
 /* 8002CFBC 00029B9C  3B 7E 00 18 */	addi r27, r30, 0x18
 /* 8002CFC0 00029BA0  38 7C 00 00 */	addi r3, r28, 0
 /* 8002CFC4 00029BA4  38 9B 00 00 */	addi r4, r27, 0
 /* 8002CFC8 00029BA8  38 A1 00 6C */	addi r5, r1, 0x6c
-/* 8002CFCC 00029BAC  4B FE 05 2D */	bl lbvector_diff
+/* 8002CFCC 00029BAC  4B FE 05 2D */	bl lbvector_Diff
 /* 8002CFD0 00029BB0  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
 /* 8002CFD4 00029BB4  C0 01 00 6C */	lfs f0, 0x6c(r1)
 /* 8002CFD8 00029BB8  3B A3 CC A0 */	addi r29, r3, lbl_803BCCA0@l
@@ -4852,11 +4852,11 @@ lbl_8002CF54:
 /* 8002D000 00029BE0  C0 01 00 74 */	lfs f0, 0x74(r1)
 /* 8002D004 00029BE4  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002D008 00029BE8  D0 01 00 74 */	stfs f0, 0x74(r1)
-/* 8002D00C 00029BEC  4B FE 04 61 */	bl lbvector_add
+/* 8002D00C 00029BEC  4B FE 04 61 */	bl lbvector_Add
 /* 8002D010 00029BF0  38 7A 00 00 */	addi r3, r26, 0
 /* 8002D014 00029BF4  38 9E 00 00 */	addi r4, r30, 0
 /* 8002D018 00029BF8  38 A1 00 60 */	addi r5, r1, 0x60
-/* 8002D01C 00029BFC  4B FE 04 DD */	bl lbvector_diff
+/* 8002D01C 00029BFC  4B FE 04 DD */	bl lbvector_Diff
 /* 8002D020 00029C00  C0 3C 00 00 */	lfs f1, 0(r28)
 /* 8002D024 00029C04  7F C3 F3 78 */	mr r3, r30
 /* 8002D028 00029C08  C0 01 00 60 */	lfs f0, 0x60(r1)
@@ -4869,7 +4869,7 @@ lbl_8002CF54:
 /* 8002D044 00029C24  C0 01 00 68 */	lfs f0, 0x68(r1)
 /* 8002D048 00029C28  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8002D04C 00029C2C  D0 01 00 68 */	stfs f0, 0x68(r1)
-/* 8002D050 00029C30  4B FE 04 1D */	bl lbvector_add
+/* 8002D050 00029C30  4B FE 04 1D */	bl lbvector_Add
 /* 8002D054 00029C34  C0 1D 00 6C */	lfs f0, 0x6c(r29)
 /* 8002D058 00029C38  D0 1F 00 48 */	stfs f0, 0x48(r31)
 /* 8002D05C 00029C3C  C0 3F 00 48 */	lfs f1, 0x48(r31)
@@ -5001,19 +5001,19 @@ lbl_8002D1E0:
 lbl_8002D230:
 /* 8002D230 00029E10  7F C3 F3 78 */	mr r3, r30
 /* 8002D234 00029E14  4B FF DF C5 */	bl func_8002B1F8
-/* 8002D238 00029E18  48 1F 78 F1 */	bl get_cam_track_smooth
+/* 8002D238 00029E18  48 1F 78 F1 */	bl Stage_GetCamTrackSmooth
 /* 8002D23C 00029E1C  38 9E 00 00 */	addi r4, r30, 0
 /* 8002D240 00029E20  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8002D244 00029E24  4B FF C8 69 */	bl func_80029AAC
-/* 8002D248 00029E28  48 1F 78 E1 */	bl get_cam_track_smooth
+/* 8002D248 00029E28  48 1F 78 E1 */	bl Stage_GetCamTrackSmooth
 /* 8002D24C 00029E2C  38 9E 00 00 */	addi r4, r30, 0
 /* 8002D250 00029E30  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8002D254 00029E34  4B FF CA 35 */	bl func_80029C88
-/* 8002D258 00029E38  48 1F 78 D1 */	bl get_cam_track_smooth
+/* 8002D258 00029E38  48 1F 78 D1 */	bl Stage_GetCamTrackSmooth
 /* 8002D25C 00029E3C  38 9C 00 00 */	addi r4, r28, 0
 /* 8002D260 00029E40  38 61 00 44 */	addi r3, r1, 0x44
 /* 8002D264 00029E44  4B FF C8 49 */	bl func_80029AAC
-/* 8002D268 00029E48  48 1F 78 C1 */	bl get_cam_track_smooth
+/* 8002D268 00029E48  48 1F 78 C1 */	bl Stage_GetCamTrackSmooth
 /* 8002D26C 00029E4C  38 9C 00 00 */	addi r4, r28, 0
 /* 8002D270 00029E50  38 61 00 44 */	addi r3, r1, 0x44
 /* 8002D274 00029E54  4B FF CA 15 */	bl func_80029C88
@@ -5031,9 +5031,9 @@ lbl_8002D230:
 /* 8002D2A4 00029E84  D0 1F 02 B4 */	stfs f0, 0x2b4(r31)
 /* 8002D2A8 00029E88  B0 1A 00 00 */	sth r0, 0(r26)
 lbl_8002D2AC:
-/* 8002D2AC 00029E8C  48 1F 77 A9 */	bl get_cam_bounds_left_offset
+/* 8002D2AC 00029E8C  48 1F 77 A9 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002D2B0 00029E90  FF E0 08 90 */	fmr f31, f1
-/* 8002D2B4 00029E94  48 1F 77 B5 */	bl get_cam_bounds_right_offset
+/* 8002D2B4 00029E94  48 1F 77 B5 */	bl Stage_GetCamBoundsRightOffset
 /* 8002D2B8 00029E98  EC 21 F8 28 */	fsubs f1, f1, f31
 /* 8002D2BC 00029E9C  C0 1F 02 B4 */	lfs f0, 0x2b4(r31)
 /* 8002D2C0 00029EA0  3C 00 43 30 */	lis r0, 0x4330
@@ -5073,7 +5073,7 @@ func_8002D318:
 /* 8002D338 00029F18  3B BF 02 C4 */	addi r29, r31, 0x2c4
 /* 8002D33C 00029F1C  88 7F 02 C4 */	lbz r3, 0x2c4(r31)
 /* 8002D340 00029F20  7C 63 07 74 */	extsb r3, r3
-/* 8002D344 00029F24  48 00 6D CD */	bl func_80034110
+/* 8002D344 00029F24  48 00 6D CD */	bl Player_GetEntity
 /* 8002D348 00029F28  7C 7A 1B 79 */	or. r26, r3, r3
 /* 8002D34C 00029F2C  41 82 02 68 */	beq lbl_8002D5B4
 /* 8002D350 00029F30  7F 43 D3 78 */	mr r3, r26
@@ -5105,7 +5105,7 @@ lbl_8002D3A8:
 /* 8002D3B4 00029F94  48 00 3A 45 */	bl func_80030DF8
 /* 8002D3B8 00029F98  88 7D 00 00 */	lbz r3, 0(r29)
 /* 8002D3BC 00029F9C  7C 63 07 74 */	extsb r3, r3
-/* 8002D3C0 00029FA0  48 00 6D 51 */	bl func_80034110
+/* 8002D3C0 00029FA0  48 00 6D 51 */	bl Player_GetEntity
 /* 8002D3C4 00029FA4  28 03 00 00 */	cmplwi r3, 0
 /* 8002D3C8 00029FA8  41 82 00 AC */	beq lbl_8002D474
 /* 8002D3CC 00029FAC  48 05 97 A9 */	bl func_80086B74
@@ -5117,7 +5117,7 @@ lbl_8002D3A8:
 /* 8002D3E4 00029FC4  3B C3 00 1C */	addi r30, r3, 0x1c
 /* 8002D3E8 00029FC8  C0 3F 02 CC */	lfs f1, 0x2cc(r31)
 /* 8002D3EC 00029FCC  EF E2 00 32 */	fmuls f31, f2, f0
-/* 8002D3F0 00029FD0  48 2F 8E 51 */	bl func_80326240
+/* 8002D3F0 00029FD0  48 2F 8E 51 */	bl cosf
 /* 8002D3F4 00029FD4  C0 1E 00 00 */	lfs f0, 0(r30)
 /* 8002D3F8 00029FD8  3B 5F 00 20 */	addi r26, r31, 0x20
 /* 8002D3FC 00029FDC  3B 7F 00 24 */	addi r27, r31, 0x24
@@ -5126,7 +5126,7 @@ lbl_8002D3A8:
 /* 8002D408 00029FE8  C0 1E 00 04 */	lfs f0, 4(r30)
 /* 8002D40C 00029FEC  D0 1F 00 24 */	stfs f0, 0x24(r31)
 /* 8002D410 00029FF0  C0 3C 00 00 */	lfs f1, 0(r28)
-/* 8002D414 00029FF4  48 2F 8F C1 */	bl func_803263D4
+/* 8002D414 00029FF4  48 2F 8F C1 */	bl sinf
 /* 8002D418 00029FF8  C0 1E 00 08 */	lfs f0, 8(r30)
 /* 8002D41C 00029FFC  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
 /* 8002D420 0002A000  38 63 CC A0 */	addi r3, r3, lbl_803BCCA0@l
@@ -5172,7 +5172,7 @@ lbl_8002D474:
 /* 8002D4BC 0002A09C  41 80 00 48 */	blt lbl_8002D504
 /* 8002D4C0 0002A0A0  2C 03 00 06 */	cmpwi r3, 6
 /* 8002D4C4 0002A0A4  40 80 00 40 */	bge lbl_8002D504
-/* 8002D4C8 0002A0A8  48 00 6C 49 */	bl func_80034110
+/* 8002D4C8 0002A0A8  48 00 6C 49 */	bl Player_GetEntity
 /* 8002D4CC 0002A0AC  28 03 00 00 */	cmplwi r3, 0
 /* 8002D4D0 0002A0B0  41 82 00 34 */	beq lbl_8002D504
 /* 8002D4D4 0002A0B4  48 05 96 A1 */	bl func_80086B74
@@ -5192,23 +5192,23 @@ lbl_8002D504:
 lbl_8002D508:
 /* 8002D508 0002A0E8  3B 5F 02 C8 */	addi r26, r31, 0x2c8
 /* 8002D50C 0002A0EC  C0 3F 02 C8 */	lfs f1, 0x2c8(r31)
-/* 8002D510 0002A0F0  48 2F 8D 31 */	bl func_80326240
+/* 8002D510 0002A0F0  48 2F 8D 31 */	bl cosf
 /* 8002D514 0002A0F4  EF FE 00 72 */	fmuls f31, f30, f1
 /* 8002D518 0002A0F8  3B 7F 02 CC */	addi r27, r31, 0x2cc
 /* 8002D51C 0002A0FC  C0 3F 02 CC */	lfs f1, 0x2cc(r31)
-/* 8002D520 0002A100  48 2F 8E B5 */	bl func_803263D4
+/* 8002D520 0002A100  48 2F 8E B5 */	bl sinf
 /* 8002D524 0002A104  C0 1F 00 20 */	lfs f0, 0x20(r31)
 /* 8002D528 0002A108  3B 9F 00 38 */	addi r28, r31, 0x38
 /* 8002D52C 0002A10C  EC 1F 00 7A */	fmadds f0, f31, f1, f0
 /* 8002D530 0002A110  D0 1F 00 38 */	stfs f0, 0x38(r31)
 /* 8002D534 0002A114  C0 3A 00 00 */	lfs f1, 0(r26)
-/* 8002D538 0002A118  48 2F 8E 9D */	bl func_803263D4
+/* 8002D538 0002A118  48 2F 8E 9D */	bl sinf
 /* 8002D53C 0002A11C  C0 1F 00 24 */	lfs f0, 0x24(r31)
 /* 8002D540 0002A120  3B 5F 00 3C */	addi r26, r31, 0x3c
 /* 8002D544 0002A124  EC 1E 00 7A */	fmadds f0, f30, f1, f0
 /* 8002D548 0002A128  D0 1F 00 3C */	stfs f0, 0x3c(r31)
 /* 8002D54C 0002A12C  C0 3B 00 00 */	lfs f1, 0(r27)
-/* 8002D550 0002A130  48 2F 8C F1 */	bl func_80326240
+/* 8002D550 0002A130  48 2F 8C F1 */	bl cosf
 /* 8002D554 0002A134  C0 1F 00 28 */	lfs f0, 0x28(r31)
 /* 8002D558 0002A138  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
 /* 8002D55C 0002A13C  38 63 CC A0 */	addi r3, r3, lbl_803BCCA0@l
@@ -5356,19 +5356,19 @@ lbl_8002D720:
 lbl_8002D770:
 /* 8002D770 0002A350  7F 43 D3 78 */	mr r3, r26
 /* 8002D774 0002A354  4B FF DA 85 */	bl func_8002B1F8
-/* 8002D778 0002A358  48 1F 73 B1 */	bl get_cam_track_smooth
+/* 8002D778 0002A358  48 1F 73 B1 */	bl Stage_GetCamTrackSmooth
 /* 8002D77C 0002A35C  38 9A 00 00 */	addi r4, r26, 0
 /* 8002D780 0002A360  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8002D784 0002A364  4B FF C3 29 */	bl func_80029AAC
-/* 8002D788 0002A368  48 1F 73 A1 */	bl get_cam_track_smooth
+/* 8002D788 0002A368  48 1F 73 A1 */	bl Stage_GetCamTrackSmooth
 /* 8002D78C 0002A36C  38 9A 00 00 */	addi r4, r26, 0
 /* 8002D790 0002A370  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8002D794 0002A374  4B FF C4 F5 */	bl func_80029C88
-/* 8002D798 0002A378  48 1F 73 91 */	bl get_cam_track_smooth
+/* 8002D798 0002A378  48 1F 73 91 */	bl Stage_GetCamTrackSmooth
 /* 8002D79C 0002A37C  38 9D 00 00 */	addi r4, r29, 0
 /* 8002D7A0 0002A380  38 61 00 44 */	addi r3, r1, 0x44
 /* 8002D7A4 0002A384  4B FF C3 09 */	bl func_80029AAC
-/* 8002D7A8 0002A388  48 1F 73 81 */	bl get_cam_track_smooth
+/* 8002D7A8 0002A388  48 1F 73 81 */	bl Stage_GetCamTrackSmooth
 /* 8002D7AC 0002A38C  38 9D 00 00 */	addi r4, r29, 0
 /* 8002D7B0 0002A390  38 61 00 44 */	addi r3, r1, 0x44
 /* 8002D7B4 0002A394  4B FF C4 D5 */	bl func_80029C88
@@ -5386,9 +5386,9 @@ lbl_8002D770:
 /* 8002D7E4 0002A3C4  D0 1F 02 B4 */	stfs f0, 0x2b4(r31)
 /* 8002D7E8 0002A3C8  B0 1A 00 00 */	sth r0, 0(r26)
 lbl_8002D7EC:
-/* 8002D7EC 0002A3CC  48 1F 72 69 */	bl get_cam_bounds_left_offset
+/* 8002D7EC 0002A3CC  48 1F 72 69 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002D7F0 0002A3D0  FF E0 08 90 */	fmr f31, f1
-/* 8002D7F4 0002A3D4  48 1F 72 75 */	bl get_cam_bounds_right_offset
+/* 8002D7F4 0002A3D4  48 1F 72 75 */	bl Stage_GetCamBoundsRightOffset
 /* 8002D7F8 0002A3D8  EC 21 F8 28 */	fsubs f1, f1, f31
 /* 8002D7FC 0002A3DC  C0 1F 02 B4 */	lfs f0, 0x2b4(r31)
 /* 8002D800 0002A3E0  3C 00 43 30 */	lis r0, 0x4330
@@ -5429,7 +5429,7 @@ func_8002D85C:
 /* 8002D87C 0002A45C  3B BF 02 C4 */	addi r29, r31, 0x2c4
 /* 8002D880 0002A460  88 7F 02 C4 */	lbz r3, 0x2c4(r31)
 /* 8002D884 0002A464  7C 63 07 74 */	extsb r3, r3
-/* 8002D888 0002A468  48 00 68 89 */	bl func_80034110
+/* 8002D888 0002A468  48 00 68 89 */	bl Player_GetEntity
 /* 8002D88C 0002A46C  28 03 00 00 */	cmplwi r3, 0
 /* 8002D890 0002A470  41 82 02 8C */	beq lbl_8002DB1C
 /* 8002D894 0002A474  48 05 92 E1 */	bl func_80086B74
@@ -5452,7 +5452,7 @@ lbl_8002D8C8:
 /* 8002D8D4 0002A4B4  48 00 35 25 */	bl func_80030DF8
 /* 8002D8D8 0002A4B8  88 7D 00 00 */	lbz r3, 0(r29)
 /* 8002D8DC 0002A4BC  7C 63 07 74 */	extsb r3, r3
-/* 8002D8E0 0002A4C0  48 00 68 31 */	bl func_80034110
+/* 8002D8E0 0002A4C0  48 00 68 31 */	bl Player_GetEntity
 /* 8002D8E4 0002A4C4  28 03 00 00 */	cmplwi r3, 0
 /* 8002D8E8 0002A4C8  41 82 00 7C */	beq lbl_8002D964
 /* 8002D8EC 0002A4CC  48 05 92 89 */	bl func_80086B74
@@ -5507,7 +5507,7 @@ lbl_8002D964:
 /* 8002D9AC 0002A58C  41 80 00 48 */	blt lbl_8002D9F4
 /* 8002D9B0 0002A590  2C 03 00 06 */	cmpwi r3, 6
 /* 8002D9B4 0002A594  40 80 00 40 */	bge lbl_8002D9F4
-/* 8002D9B8 0002A598  48 00 67 59 */	bl func_80034110
+/* 8002D9B8 0002A598  48 00 67 59 */	bl Player_GetEntity
 /* 8002D9BC 0002A59C  28 03 00 00 */	cmplwi r3, 0
 /* 8002D9C0 0002A5A0  41 82 00 34 */	beq lbl_8002D9F4
 /* 8002D9C4 0002A5A4  48 05 91 B1 */	bl func_80086B74
@@ -5525,59 +5525,59 @@ lbl_8002D964:
 lbl_8002D9F4:
 /* 8002D9F4 0002A5D4  C3 C2 84 7C */	lfs f30, lbl_804D7E5C@sda21(r2)
 lbl_8002D9F8:
-/* 8002D9F8 0002A5D8  48 1F 72 55 */	bl get_cam_angle_radians_up
+/* 8002D9F8 0002A5D8  48 1F 72 55 */	bl Stage_GetCamAngleRadiansUp
 /* 8002D9FC 0002A5DC  3B 9F 02 C8 */	addi r28, r31, 0x2c8
 /* 8002DA00 0002A5E0  C0 1F 02 C8 */	lfs f0, 0x2c8(r31)
 /* 8002DA04 0002A5E4  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002DA08 0002A5E8  40 81 00 10 */	ble lbl_8002DA18
-/* 8002DA0C 0002A5EC  48 1F 72 41 */	bl get_cam_angle_radians_up
+/* 8002DA0C 0002A5EC  48 1F 72 41 */	bl Stage_GetCamAngleRadiansUp
 /* 8002DA10 0002A5F0  D0 3C 00 00 */	stfs f1, 0(r28)
 /* 8002DA14 0002A5F4  48 00 00 24 */	b lbl_8002DA38
 lbl_8002DA18:
-/* 8002DA18 0002A5F8  48 1F 72 4D */	bl get_cam_angle_radians_down
+/* 8002DA18 0002A5F8  48 1F 72 4D */	bl Stage_GetCamAngleRadiansDown
 /* 8002DA1C 0002A5FC  FC 20 08 50 */	fneg f1, f1
 /* 8002DA20 0002A600  C0 1C 00 00 */	lfs f0, 0(r28)
 /* 8002DA24 0002A604  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002DA28 0002A608  40 80 00 10 */	bge lbl_8002DA38
-/* 8002DA2C 0002A60C  48 1F 72 39 */	bl get_cam_angle_radians_down
+/* 8002DA2C 0002A60C  48 1F 72 39 */	bl Stage_GetCamAngleRadiansDown
 /* 8002DA30 0002A610  FC 00 08 50 */	fneg f0, f1
 /* 8002DA34 0002A614  D0 1C 00 00 */	stfs f0, 0(r28)
 lbl_8002DA38:
-/* 8002DA38 0002A618  48 1F 72 45 */	bl get_cam_angle_radians_left
+/* 8002DA38 0002A618  48 1F 72 45 */	bl Stage_GetCamAngleRadiansLeft
 /* 8002DA3C 0002A61C  3B BF 02 CC */	addi r29, r31, 0x2cc
 /* 8002DA40 0002A620  C0 1F 02 CC */	lfs f0, 0x2cc(r31)
 /* 8002DA44 0002A624  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002DA48 0002A628  40 81 00 10 */	ble lbl_8002DA58
-/* 8002DA4C 0002A62C  48 1F 72 31 */	bl get_cam_angle_radians_left
+/* 8002DA4C 0002A62C  48 1F 72 31 */	bl Stage_GetCamAngleRadiansLeft
 /* 8002DA50 0002A630  D0 3D 00 00 */	stfs f1, 0(r29)
 /* 8002DA54 0002A634  48 00 00 24 */	b lbl_8002DA78
 lbl_8002DA58:
-/* 8002DA58 0002A638  48 1F 72 3D */	bl get_cam_angle_radians_right
+/* 8002DA58 0002A638  48 1F 72 3D */	bl Stage_GetCamAngleRadiansRight
 /* 8002DA5C 0002A63C  FC 20 08 50 */	fneg f1, f1
 /* 8002DA60 0002A640  C0 1D 00 00 */	lfs f0, 0(r29)
 /* 8002DA64 0002A644  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 8002DA68 0002A648  40 80 00 10 */	bge lbl_8002DA78
-/* 8002DA6C 0002A64C  48 1F 72 29 */	bl get_cam_angle_radians_right
+/* 8002DA6C 0002A64C  48 1F 72 29 */	bl Stage_GetCamAngleRadiansRight
 /* 8002DA70 0002A650  FC 00 08 50 */	fneg f0, f1
 /* 8002DA74 0002A654  D0 1D 00 00 */	stfs f0, 0(r29)
 lbl_8002DA78:
 /* 8002DA78 0002A658  C0 3C 00 00 */	lfs f1, 0(r28)
-/* 8002DA7C 0002A65C  48 2F 87 C5 */	bl func_80326240
+/* 8002DA7C 0002A65C  48 2F 87 C5 */	bl cosf
 /* 8002DA80 0002A660  EF FE 00 72 */	fmuls f31, f30, f1
 /* 8002DA84 0002A664  C0 3D 00 00 */	lfs f1, 0(r29)
-/* 8002DA88 0002A668  48 2F 89 4D */	bl func_803263D4
+/* 8002DA88 0002A668  48 2F 89 4D */	bl sinf
 /* 8002DA8C 0002A66C  C0 1F 00 20 */	lfs f0, 0x20(r31)
 /* 8002DA90 0002A670  3B DF 00 38 */	addi r30, r31, 0x38
 /* 8002DA94 0002A674  EC 1F 00 7A */	fmadds f0, f31, f1, f0
 /* 8002DA98 0002A678  D0 1F 00 38 */	stfs f0, 0x38(r31)
 /* 8002DA9C 0002A67C  C0 3C 00 00 */	lfs f1, 0(r28)
-/* 8002DAA0 0002A680  48 2F 89 35 */	bl func_803263D4
+/* 8002DAA0 0002A680  48 2F 89 35 */	bl sinf
 /* 8002DAA4 0002A684  C0 1F 00 24 */	lfs f0, 0x24(r31)
 /* 8002DAA8 0002A688  3B 9F 00 3C */	addi r28, r31, 0x3c
 /* 8002DAAC 0002A68C  EC 1E 00 7A */	fmadds f0, f30, f1, f0
 /* 8002DAB0 0002A690  D0 1F 00 3C */	stfs f0, 0x3c(r31)
 /* 8002DAB4 0002A694  C0 3D 00 00 */	lfs f1, 0(r29)
-/* 8002DAB8 0002A698  48 2F 87 89 */	bl func_80326240
+/* 8002DAB8 0002A698  48 2F 87 89 */	bl cosf
 /* 8002DABC 0002A69C  C0 1F 00 28 */	lfs f0, 0x28(r31)
 /* 8002DAC0 0002A6A0  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
 /* 8002DAC4 0002A6A4  38 63 CC A0 */	addi r3, r3, lbl_803BCCA0@l
@@ -5725,19 +5725,19 @@ lbl_8002DC88:
 lbl_8002DCD8:
 /* 8002DCD8 0002A8B8  7F 83 E3 78 */	mr r3, r28
 /* 8002DCDC 0002A8BC  4B FF D5 1D */	bl func_8002B1F8
-/* 8002DCE0 0002A8C0  48 1F 6E 49 */	bl get_cam_track_smooth
+/* 8002DCE0 0002A8C0  48 1F 6E 49 */	bl Stage_GetCamTrackSmooth
 /* 8002DCE4 0002A8C4  38 9C 00 00 */	addi r4, r28, 0
 /* 8002DCE8 0002A8C8  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8002DCEC 0002A8CC  4B FF BD C1 */	bl func_80029AAC
-/* 8002DCF0 0002A8D0  48 1F 6E 39 */	bl get_cam_track_smooth
+/* 8002DCF0 0002A8D0  48 1F 6E 39 */	bl Stage_GetCamTrackSmooth
 /* 8002DCF4 0002A8D4  38 9C 00 00 */	addi r4, r28, 0
 /* 8002DCF8 0002A8D8  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8002DCFC 0002A8DC  4B FF BF 8D */	bl func_80029C88
-/* 8002DD00 0002A8E0  48 1F 6E 29 */	bl get_cam_track_smooth
+/* 8002DD00 0002A8E0  48 1F 6E 29 */	bl Stage_GetCamTrackSmooth
 /* 8002DD04 0002A8E4  38 9B 00 00 */	addi r4, r27, 0
 /* 8002DD08 0002A8E8  38 61 00 44 */	addi r3, r1, 0x44
 /* 8002DD0C 0002A8EC  4B FF BD A1 */	bl func_80029AAC
-/* 8002DD10 0002A8F0  48 1F 6E 19 */	bl get_cam_track_smooth
+/* 8002DD10 0002A8F0  48 1F 6E 19 */	bl Stage_GetCamTrackSmooth
 /* 8002DD14 0002A8F4  38 9B 00 00 */	addi r4, r27, 0
 /* 8002DD18 0002A8F8  38 61 00 44 */	addi r3, r1, 0x44
 /* 8002DD1C 0002A8FC  4B FF BF 6D */	bl func_80029C88
@@ -5755,9 +5755,9 @@ lbl_8002DCD8:
 /* 8002DD4C 0002A92C  D0 1F 02 B4 */	stfs f0, 0x2b4(r31)
 /* 8002DD50 0002A930  B0 1B 00 00 */	sth r0, 0(r27)
 lbl_8002DD54:
-/* 8002DD54 0002A934  48 1F 6D 01 */	bl get_cam_bounds_left_offset
+/* 8002DD54 0002A934  48 1F 6D 01 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002DD58 0002A938  FF E0 08 90 */	fmr f31, f1
-/* 8002DD5C 0002A93C  48 1F 6D 0D */	bl get_cam_bounds_right_offset
+/* 8002DD5C 0002A93C  48 1F 6D 0D */	bl Stage_GetCamBoundsRightOffset
 /* 8002DD60 0002A940  EC 21 F8 28 */	fsubs f1, f1, f31
 /* 8002DD64 0002A944  C0 1F 02 B4 */	lfs f0, 0x2b4(r31)
 /* 8002DD68 0002A948  3C 00 43 30 */	lis r0, 0x4330
@@ -5797,7 +5797,7 @@ func_8002DDC4:
 /* 8002DDE0 0002A9C0  3B 9D 00 14 */	addi r28, r29, 0x14
 /* 8002DDE4 0002A9C4  3B FC 00 0C */	addi r31, r28, 0xc
 /* 8002DDE8 0002A9C8  38 7F 00 00 */	addi r3, r31, 0
-/* 8002DDEC 0002A9CC  48 1F 6E C1 */	bl func_80224CAC
+/* 8002DDEC 0002A9CC  48 1F 6E C1 */	bl Stage_80224CAC
 /* 8002DDF0 0002A9D0  C0 1D 00 20 */	lfs f0, 0x20(r29)
 /* 8002DDF4 0002A9D4  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
 /* 8002DDF8 0002A9D8  C0 3C 00 00 */	lfs f1, 0(r28)
@@ -5821,7 +5821,7 @@ func_8002DDC4:
 /* 8002DE40 0002AA20  C0 1D 00 1C */	lfs f0, 0x1c(r29)
 /* 8002DE44 0002AA24  EC 01 01 7A */	fmadds f0, f1, f5, f0
 /* 8002DE48 0002AA28  D0 1D 00 1C */	stfs f0, 0x1c(r29)
-/* 8002DE4C 0002AA2C  48 1F 6E 61 */	bl func_80224CAC
+/* 8002DE4C 0002AA2C  48 1F 6E 61 */	bl Stage_80224CAC
 /* 8002DE50 0002AA30  C0 1D 00 58 */	lfs f0, 0x58(r29)
 /* 8002DE54 0002AA34  C0 3A 00 00 */	lfs f1, 0(r26)
 /* 8002DE58 0002AA38  C0 DB 00 00 */	lfs f6, 0(r27)
@@ -5840,7 +5840,7 @@ func_8002DDC4:
 /* 8002DE8C 0002AA6C  C0 1D 00 54 */	lfs f0, 0x54(r29)
 /* 8002DE90 0002AA70  EC 01 01 BA */	fmadds f0, f1, f6, f0
 /* 8002DE94 0002AA74  D0 1D 00 54 */	stfs f0, 0x54(r29)
-/* 8002DE98 0002AA78  48 1F 6F 21 */	bl get_cam_fixed_fov
+/* 8002DE98 0002AA78  48 1F 6F 21 */	bl Stage_GetCamFixedFov
 /* 8002DE9C 0002AA7C  D0 3D 00 48 */	stfs f1, 0x48(r29)
 /* 8002DEA0 0002AA80  3B 7E 00 7C */	addi r27, r30, 0x7c
 /* 8002DEA4 0002AA84  C0 3D 00 48 */	lfs f1, 0x48(r29)
@@ -5849,7 +5849,7 @@ func_8002DDC4:
 /* 8002DEB0 0002AA90  EC 21 10 28 */	fsubs f1, f1, f2
 /* 8002DEB4 0002AA94  EC 01 10 3A */	fmadds f0, f1, f0, f2
 /* 8002DEB8 0002AA98  D0 1D 00 44 */	stfs f0, 0x44(r29)
-/* 8002DEBC 0002AA9C  48 1F 6E FD */	bl get_cam_fixed_fov
+/* 8002DEBC 0002AA9C  48 1F 6E FD */	bl Stage_GetCamFixedFov
 /* 8002DEC0 0002AAA0  D0 3D 00 80 */	stfs f1, 0x80(r29)
 /* 8002DEC4 0002AAA4  3B 3C 00 24 */	addi r25, r28, 0x24
 /* 8002DEC8 0002AAA8  7F 23 CB 78 */	mr r3, r25
@@ -5859,7 +5859,7 @@ func_8002DDC4:
 /* 8002DED8 0002AAB8  EC 21 10 28 */	fsubs f1, f1, f2
 /* 8002DEDC 0002AABC  EC 01 10 3A */	fmadds f0, f1, f0, f2
 /* 8002DEE0 0002AAC0  D0 1D 00 7C */	stfs f0, 0x7c(r29)
-/* 8002DEE4 0002AAC4  48 1F 6E B1 */	bl set_vec_to_fixed_cam_pos
+/* 8002DEE4 0002AAC4  48 1F 6E B1 */	bl Stage_SetVecToFixedCamPos
 /* 8002DEE8 0002AAC8  C0 1D 00 38 */	lfs f0, 0x38(r29)
 /* 8002DEEC 0002AACC  3B 7E 00 78 */	addi r27, r30, 0x78
 /* 8002DEF0 0002AAD0  C0 3D 00 2C */	lfs f1, 0x2c(r29)
@@ -5880,7 +5880,7 @@ func_8002DDC4:
 /* 8002DF2C 0002AB0C  C0 1D 00 34 */	lfs f0, 0x34(r29)
 /* 8002DF30 0002AB10  EC 01 01 7A */	fmadds f0, f1, f5, f0
 /* 8002DF34 0002AB14  D0 1D 00 34 */	stfs f0, 0x34(r29)
-/* 8002DF38 0002AB18  48 1F 6E 5D */	bl set_vec_to_fixed_cam_pos
+/* 8002DF38 0002AB18  48 1F 6E 5D */	bl Stage_SetVecToFixedCamPos
 /* 8002DF3C 0002AB1C  C0 1D 00 70 */	lfs f0, 0x70(r29)
 /* 8002DF40 0002AB20  7F E3 FB 78 */	mr r3, r31
 /* 8002DF44 0002AB24  C0 3D 00 64 */	lfs f1, 0x64(r29)
@@ -5902,7 +5902,7 @@ func_8002DDC4:
 /* 8002DF84 0002AB64  C0 1D 00 6C */	lfs f0, 0x6c(r29)
 /* 8002DF88 0002AB68  EC 01 01 7A */	fmadds f0, f1, f5, f0
 /* 8002DF8C 0002AB6C  D0 1D 00 6C */	stfs f0, 0x6c(r29)
-/* 8002DF90 0002AB70  4B FD F5 69 */	bl lbvector_diff
+/* 8002DF90 0002AB70  4B FD F5 69 */	bl lbvector_Diff
 /* 8002DF94 0002AB74  C0 21 00 0C */	lfs f1, 0xc(r1)
 /* 8002DF98 0002AB78  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 8002DF9C 0002AB7C  EC 21 00 72 */	fmuls f1, f1, f1
@@ -5999,7 +5999,7 @@ lbl_8002E0DC:
 /* 8002E0DC 0002ACBC  38 64 00 00 */	addi r3, r4, 0
 /* 8002E0E0 0002ACC0  38 9D 00 00 */	addi r4, r29, 0
 /* 8002E0E4 0002ACC4  38 A1 00 14 */	addi r5, r1, 0x14
-/* 8002E0E8 0002ACC8  4B FD F4 11 */	bl lbvector_diff
+/* 8002E0E8 0002ACC8  4B FD F4 11 */	bl lbvector_Diff
 /* 8002E0EC 0002ACCC  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 8002E0F0 0002ACD0  38 9D 00 00 */	addi r4, r29, 0
 /* 8002E0F4 0002ACD4  38 61 00 14 */	addi r3, r1, 0x14
@@ -6011,7 +6011,7 @@ lbl_8002E0DC:
 /* 8002E10C 0002ACEC  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002E110 0002ACF0  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 8002E114 0002ACF4  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 8002E118 0002ACF8  4B FD F3 55 */	bl lbvector_add
+/* 8002E118 0002ACF8  4B FD F3 55 */	bl lbvector_Add
 /* 8002E11C 0002ACFC  80 61 00 14 */	lwz r3, 0x14(r1)
 /* 8002E120 0002AD00  80 01 00 18 */	lwz r0, 0x18(r1)
 /* 8002E124 0002AD04  90 7E 00 00 */	stw r3, 0(r30)
@@ -6177,11 +6177,11 @@ lbl_8002E334:
 /* 8002E34C 0002AF2C  D0 01 00 1C */	stfs f0, 0x1c(r1)
 /* 8002E350 0002AF30  C0 1F 03 60 */	lfs f0, 0x360(r31)
 /* 8002E354 0002AF34  FC 20 00 50 */	fneg f1, f0
-/* 8002E358 0002AF38  4B FD F7 A9 */	bl lbvector_rotate
+/* 8002E358 0002AF38  4B FD F7 A9 */	bl lbvector_Rotate
 /* 8002E35C 0002AF3C  C0 3F 03 64 */	lfs f1, 0x364(r31)
 /* 8002E360 0002AF40  38 61 00 14 */	addi r3, r1, 0x14
 /* 8002E364 0002AF44  38 80 00 02 */	li r4, 2
-/* 8002E368 0002AF48  4B FD F7 99 */	bl lbvector_rotate
+/* 8002E368 0002AF48  4B FD F7 99 */	bl lbvector_Rotate
 /* 8002E36C 0002AF4C  A8 9F 03 5E */	lha r4, 0x35e(r31)
 /* 8002E370 0002AF50  3C 00 43 30 */	lis r0, 0x4330
 /* 8002E374 0002AF54  C8 22 84 40 */	lfd f1, lbl_804D7E20@sda21(r2)
@@ -6191,7 +6191,7 @@ lbl_8002E334:
 /* 8002E384 0002AF64  90 01 00 20 */	stw r0, 0x20(r1)
 /* 8002E388 0002AF68  C8 01 00 20 */	lfd f0, 0x20(r1)
 /* 8002E38C 0002AF6C  EF E0 08 28 */	fsubs f31, f0, f1
-/* 8002E390 0002AF70  4B FD EF 5D */	bl lbvector_normalize
+/* 8002E390 0002AF70  4B FD EF 5D */	bl lbvector_Normalize
 /* 8002E394 0002AF74  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 8002E398 0002AF78  3B BF 00 14 */	addi r29, r31, 0x14
 /* 8002E39C 0002AF7C  38 9D 00 00 */	addi r4, r29, 0
@@ -6204,7 +6204,7 @@ lbl_8002E334:
 /* 8002E3B8 0002AF98  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002E3BC 0002AF9C  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 8002E3C0 0002AFA0  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 8002E3C4 0002AFA4  4B FD F0 A9 */	bl lbvector_add
+/* 8002E3C4 0002AFA4  4B FD F0 A9 */	bl lbvector_Add
 /* 8002E3C8 0002AFA8  80 A1 00 14 */	lwz r5, 0x14(r1)
 /* 8002E3CC 0002AFAC  38 61 00 14 */	addi r3, r1, 0x14
 /* 8002E3D0 0002AFB0  80 01 00 18 */	lwz r0, 0x18(r1)
@@ -6220,14 +6220,14 @@ lbl_8002E334:
 /* 8002E3F8 0002AFD8  D0 01 00 1C */	stfs f0, 0x1c(r1)
 /* 8002E3FC 0002AFDC  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 8002E400 0002AFE0  FC 20 00 50 */	fneg f1, f0
-/* 8002E404 0002AFE4  4B FD F6 FD */	bl lbvector_rotate
+/* 8002E404 0002AFE4  4B FD F6 FD */	bl lbvector_Rotate
 /* 8002E408 0002AFE8  C0 21 00 0C */	lfs f1, 0xc(r1)
 /* 8002E40C 0002AFEC  38 61 00 14 */	addi r3, r1, 0x14
 /* 8002E410 0002AFF0  38 80 00 02 */	li r4, 2
-/* 8002E414 0002AFF4  4B FD F6 ED */	bl lbvector_rotate
+/* 8002E414 0002AFF4  4B FD F6 ED */	bl lbvector_Rotate
 /* 8002E418 0002AFF8  C3 E1 00 08 */	lfs f31, 8(r1)
 /* 8002E41C 0002AFFC  38 61 00 14 */	addi r3, r1, 0x14
-/* 8002E420 0002B000  4B FD EE CD */	bl lbvector_normalize
+/* 8002E420 0002B000  4B FD EE CD */	bl lbvector_Normalize
 /* 8002E424 0002B004  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 8002E428 0002B008  38 9D 00 00 */	addi r4, r29, 0
 /* 8002E42C 0002B00C  38 61 00 14 */	addi r3, r1, 0x14
@@ -6239,7 +6239,7 @@ lbl_8002E334:
 /* 8002E444 0002B024  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 8002E448 0002B028  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 8002E44C 0002B02C  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 8002E450 0002B030  4B FD F0 1D */	bl lbvector_add
+/* 8002E450 0002B030  4B FD F0 1D */	bl lbvector_Add
 /* 8002E454 0002B034  80 61 00 14 */	lwz r3, 0x14(r1)
 /* 8002E458 0002B038  80 01 00 18 */	lwz r0, 0x18(r1)
 /* 8002E45C 0002B03C  90 7F 00 2C */	stw r3, 0x2c(r31)
@@ -6284,7 +6284,7 @@ lbl_8002E4DC:
 /* 8002E4E4 0002B0C4  48 00 00 58 */	b lbl_8002E53C
 lbl_8002E4E8:
 /* 8002E4E8 0002B0C8  80 7F 03 44 */	lwz r3, 0x344(r31)
-/* 8002E4EC 0002B0CC  48 00 5C 25 */	bl func_80034110
+/* 8002E4EC 0002B0CC  48 00 5C 25 */	bl Player_GetEntity
 /* 8002E4F0 0002B0D0  28 03 00 00 */	cmplwi r3, 0
 /* 8002E4F4 0002B0D4  41 82 00 80 */	beq lbl_8002E574
 /* 8002E4F8 0002B0D8  48 05 86 7D */	bl func_80086B74
@@ -6468,7 +6468,7 @@ lbl_8002E768:
 /* 8002E770 0002B350  48 00 00 58 */	b lbl_8002E7C8
 lbl_8002E774:
 /* 8002E774 0002B354  80 65 00 00 */	lwz r3, 0(r5)
-/* 8002E778 0002B358  48 00 59 99 */	bl func_80034110
+/* 8002E778 0002B358  48 00 59 99 */	bl Player_GetEntity
 /* 8002E77C 0002B35C  28 03 00 00 */	cmplwi r3, 0
 /* 8002E780 0002B360  41 82 00 80 */	beq lbl_8002E800
 /* 8002E784 0002B364  48 05 83 F1 */	bl func_80086B74
@@ -6553,7 +6553,7 @@ lbl_8002E898:
 /* 8002E8A0 0002B480  48 00 00 58 */	b lbl_8002E8F8
 lbl_8002E8A4:
 /* 8002E8A4 0002B484  80 65 00 00 */	lwz r3, 0(r5)
-/* 8002E8A8 0002B488  48 00 58 69 */	bl func_80034110
+/* 8002E8A8 0002B488  48 00 58 69 */	bl Player_GetEntity
 /* 8002E8AC 0002B48C  28 03 00 00 */	cmplwi r3, 0
 /* 8002E8B0 0002B490  41 82 00 80 */	beq lbl_8002E930
 /* 8002E8B4 0002B494  48 05 82 C1 */	bl func_80086B74
@@ -6633,7 +6633,7 @@ lbl_8002E9B4:
 /* 8002E9BC 0002B59C  48 00 00 58 */	b lbl_8002EA14
 lbl_8002E9C0:
 /* 8002E9C0 0002B5A0  80 65 00 00 */	lwz r3, 0(r5)
-/* 8002E9C4 0002B5A4  48 00 57 4D */	bl func_80034110
+/* 8002E9C4 0002B5A4  48 00 57 4D */	bl Player_GetEntity
 /* 8002E9C8 0002B5A8  28 03 00 00 */	cmplwi r3, 0
 /* 8002E9CC 0002B5AC  41 82 00 80 */	beq lbl_8002EA4C
 /* 8002E9D0 0002B5B0  48 05 81 A5 */	bl func_80086B74
@@ -7050,7 +7050,7 @@ lbl_8002EF78:
 /* 8002EF80 0002BB60  48 00 00 58 */	b lbl_8002EFD8
 lbl_8002EF84:
 /* 8002EF84 0002BB64  80 7F 03 44 */	lwz r3, 0x344(r31)
-/* 8002EF88 0002BB68  48 00 51 89 */	bl func_80034110
+/* 8002EF88 0002BB68  48 00 51 89 */	bl Player_GetEntity
 /* 8002EF8C 0002BB6C  28 03 00 00 */	cmplwi r3, 0
 /* 8002EF90 0002BB70  41 82 00 80 */	beq lbl_8002F010
 /* 8002EF94 0002BB74  48 05 7B E1 */	bl func_80086B74
@@ -7210,7 +7210,7 @@ lbl_8002F1B4:
 /* 8002F1B4 0002BD94  38 7F 00 2C */	addi r3, r31, 0x2c
 /* 8002F1B8 0002BD98  38 9F 00 14 */	addi r4, r31, 0x14
 /* 8002F1BC 0002BD9C  38 A1 00 0C */	addi r5, r1, 0xc
-/* 8002F1C0 0002BDA0  4B FD E3 39 */	bl lbvector_diff
+/* 8002F1C0 0002BDA0  4B FD E3 39 */	bl lbvector_Diff
 /* 8002F1C4 0002BDA4  C0 21 00 0C */	lfs f1, 0xc(r1)
 /* 8002F1C8 0002BDA8  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 8002F1CC 0002BDAC  EC 21 00 72 */	fmuls f1, f1, f1
@@ -7219,11 +7219,11 @@ lbl_8002F1B4:
 /* 8002F1D8 0002BDB8  4B FD E3 E5 */	bl sqrtf__Ff
 /* 8002F1DC 0002BDBC  FC 40 08 90 */	fmr f2, f1
 /* 8002F1E0 0002BDC0  C0 21 00 10 */	lfs f1, 0x10(r1)
-/* 8002F1E4 0002BDC4  4B FF 3A 4D */	bl func_80022C30
+/* 8002F1E4 0002BDC4  4B FF 3A 4D */	bl atan2f
 /* 8002F1E8 0002BDC8  FF C0 08 90 */	fmr f30, f1
 /* 8002F1EC 0002BDCC  C0 21 00 0C */	lfs f1, 0xc(r1)
 /* 8002F1F0 0002BDD0  C0 41 00 14 */	lfs f2, 0x14(r1)
-/* 8002F1F4 0002BDD4  4B FF 3A 3D */	bl func_80022C30
+/* 8002F1F4 0002BDD4  4B FF 3A 3D */	bl atan2f
 /* 8002F1F8 0002BDD8  C0 41 00 0C */	lfs f2, 0xc(r1)
 /* 8002F1FC 0002BDDC  FF E0 08 90 */	fmr f31, f1
 /* 8002F200 0002BDE0  C0 01 00 10 */	lfs f0, 0x10(r1)
@@ -7415,13 +7415,13 @@ lbl_8002F488:
 /* 8002F490 0002C070  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8002F494 0002C074  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8002F498 0002C078  7C 7F 1B 78 */	mr r31, r3
-/* 8002F49C 0002C07C  48 1F 55 B9 */	bl get_cam_bounds_left_offset
+/* 8002F49C 0002C07C  48 1F 55 B9 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002F4A0 0002C080  D0 3F 00 08 */	stfs f1, 8(r31)
-/* 8002F4A4 0002C084  48 1F 55 C5 */	bl get_cam_bounds_right_offset
+/* 8002F4A4 0002C084  48 1F 55 C5 */	bl Stage_GetCamBoundsRightOffset
 /* 8002F4A8 0002C088  D0 3F 00 0C */	stfs f1, 0xc(r31)
-/* 8002F4AC 0002C08C  48 1F 55 D5 */	bl get_cam_bounds_top_offset
+/* 8002F4AC 0002C08C  48 1F 55 D5 */	bl Stage_GetCamBoundsTopOffset
 /* 8002F4B0 0002C090  D0 3F 00 00 */	stfs f1, 0(r31)
-/* 8002F4B4 0002C094  48 1F 55 E5 */	bl get_cam_bounds_bottom_offset
+/* 8002F4B4 0002C094  48 1F 55 E5 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002F4B8 0002C098  D0 3F 00 04 */	stfs f1, 4(r31)
 /* 8002F4BC 0002C09C  38 60 00 01 */	li r3, 1
 /* 8002F4C0 0002C0A0  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -7469,30 +7469,30 @@ lbl_8002F544:
 /* 8002F54C 0002C12C  3B BF 02 C4 */	addi r29, r31, 0x2c4
 /* 8002F550 0002C130  98 7F 02 C4 */	stb r3, 0x2c4(r31)
 /* 8002F554 0002C134  98 9F 02 C5 */	stb r4, 0x2c5(r31)
-/* 8002F558 0002C138  48 1F 54 FD */	bl get_cam_bounds_left_offset
+/* 8002F558 0002C138  48 1F 54 FD */	bl Stage_GetCamBoundsLeftOffset
 /* 8002F55C 0002C13C  D0 3F 02 D8 */	stfs f1, 0x2d8(r31)
-/* 8002F560 0002C140  48 1F 55 09 */	bl get_cam_bounds_right_offset
+/* 8002F560 0002C140  48 1F 55 09 */	bl Stage_GetCamBoundsRightOffset
 /* 8002F564 0002C144  D0 3F 02 DC */	stfs f1, 0x2dc(r31)
-/* 8002F568 0002C148  48 1F 55 19 */	bl get_cam_bounds_top_offset
+/* 8002F568 0002C148  48 1F 55 19 */	bl Stage_GetCamBoundsTopOffset
 /* 8002F56C 0002C14C  D0 3F 02 D0 */	stfs f1, 0x2d0(r31)
-/* 8002F570 0002C150  48 1F 55 29 */	bl get_cam_bounds_bottom_offset
+/* 8002F570 0002C150  48 1F 55 29 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002F574 0002C154  D0 3F 02 D4 */	stfs f1, 0x2d4(r31)
 /* 8002F578 0002C158  C0 02 84 CC */	lfs f0, lbl_804D7EAC@sda21(r2)
 /* 8002F57C 0002C15C  D0 1F 02 E0 */	stfs f0, 0x2e0(r31)
 /* 8002F580 0002C160  C0 02 84 D0 */	lfs f0, lbl_804D7EB0@sda21(r2)
 /* 8002F584 0002C164  D0 1F 02 E4 */	stfs f0, 0x2e4(r31)
-/* 8002F588 0002C168  48 1F 56 C5 */	bl get_cam_angle_radians_up
+/* 8002F588 0002C168  48 1F 56 C5 */	bl Stage_GetCamAngleRadiansUp
 /* 8002F58C 0002C16C  D0 3F 02 E8 */	stfs f1, 0x2e8(r31)
-/* 8002F590 0002C170  48 1F 56 D5 */	bl get_cam_angle_radians_down
+/* 8002F590 0002C170  48 1F 56 D5 */	bl Stage_GetCamAngleRadiansDown
 /* 8002F594 0002C174  D0 3F 02 EC */	stfs f1, 0x2ec(r31)
-/* 8002F598 0002C178  48 1F 56 FD */	bl get_cam_angle_radians_right
+/* 8002F598 0002C178  48 1F 56 FD */	bl Stage_GetCamAngleRadiansRight
 /* 8002F59C 0002C17C  D0 3F 02 F0 */	stfs f1, 0x2f0(r31)
-/* 8002F5A0 0002C180  48 1F 56 DD */	bl get_cam_angle_radians_left
+/* 8002F5A0 0002C180  48 1F 56 DD */	bl Stage_GetCamAngleRadiansLeft
 /* 8002F5A4 0002C184  D0 3F 02 F4 */	stfs f1, 0x2f4(r31)
-/* 8002F5A8 0002C188  48 1F 56 75 */	bl get_pausecam_zpos_min
+/* 8002F5A8 0002C188  48 1F 56 75 */	bl Stage_GetPauseCamZPosMin
 /* 8002F5AC 0002C18C  3B DF 02 F8 */	addi r30, r31, 0x2f8
 /* 8002F5B0 0002C190  D0 3F 02 F8 */	stfs f1, 0x2f8(r31)
-/* 8002F5B4 0002C194  48 1F 56 89 */	bl get_pausecam_zpos_max
+/* 8002F5B4 0002C194  48 1F 56 89 */	bl Stage_GetPauseCamZPosMax
 /* 8002F5B8 0002C198  3C 60 80 03 */	lis r3, lbl_8002F488@ha
 /* 8002F5BC 0002C19C  D0 3F 02 FC */	stfs f1, 0x2fc(r31)
 /* 8002F5C0 0002C1A0  38 03 F4 88 */	addi r0, r3, lbl_8002F488@l
@@ -7504,7 +7504,7 @@ lbl_8002F544:
 /* 8002F5D8 0002C1B8  40 80 00 08 */	bge lbl_8002F5E0
 /* 8002F5DC 0002C1BC  48 00 00 18 */	b lbl_8002F5F4
 lbl_8002F5E0:
-/* 8002F5E0 0002C1C0  48 1F 56 4D */	bl get_pausecam_zpos_init
+/* 8002F5E0 0002C1C0  48 1F 56 4D */	bl Stage_GetPauseCamZPosInit
 /* 8002F5E4 0002C1C4  FF E0 08 90 */	fmr f31, f1
 /* 8002F5E8 0002C1C8  48 00 00 20 */	b lbl_8002F608
 lbl_8002F5EC:
@@ -7527,7 +7527,7 @@ lbl_8002F608:
 /* 8002F624 0002C204  41 80 00 34 */	blt lbl_8002F658
 /* 8002F628 0002C208  2C 03 00 06 */	cmpwi r3, 6
 /* 8002F62C 0002C20C  40 80 00 2C */	bge lbl_8002F658
-/* 8002F630 0002C210  48 00 4A E1 */	bl func_80034110
+/* 8002F630 0002C210  48 00 4A E1 */	bl Player_GetEntity
 /* 8002F634 0002C214  28 03 00 00 */	cmplwi r3, 0
 /* 8002F638 0002C218  41 82 00 20 */	beq lbl_8002F658
 /* 8002F63C 0002C21C  48 05 75 39 */	bl func_80086B74
@@ -7581,7 +7581,7 @@ lbl_8002F6B4:
 /* 8002F6F0 0002C2D0  90 1F 00 24 */	stw r0, 0x24(r31)
 /* 8002F6F4 0002C2D4  80 1F 03 10 */	lwz r0, 0x310(r31)
 /* 8002F6F8 0002C2D8  90 1F 00 28 */	stw r0, 0x28(r31)
-/* 8002F6FC 0002C2DC  4B FD DD 71 */	bl lbvector_add
+/* 8002F6FC 0002C2DC  4B FD DD 71 */	bl lbvector_Add
 /* 8002F700 0002C2E0  80 BE 00 00 */	lwz r5, 0(r30)
 /* 8002F704 0002C2E4  7F 84 E3 78 */	mr r4, r28
 /* 8002F708 0002C2E8  80 1E 00 04 */	lwz r0, 4(r30)
@@ -7590,7 +7590,7 @@ lbl_8002F6B4:
 /* 8002F714 0002C2F4  90 1F 00 3C */	stw r0, 0x3c(r31)
 /* 8002F718 0002C2F8  80 1E 00 08 */	lwz r0, 8(r30)
 /* 8002F71C 0002C2FC  90 1F 00 40 */	stw r0, 0x40(r31)
-/* 8002F720 0002C300  4B FD DD 4D */	bl lbvector_add
+/* 8002F720 0002C300  4B FD DD 4D */	bl lbvector_Add
 /* 8002F724 0002C304  BB 61 00 34 */	lmw r27, 0x34(r1)
 /* 8002F728 0002C308  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 8002F72C 0002C30C  CB E1 00 48 */	lfd f31, 0x48(r1)
@@ -7649,7 +7649,7 @@ func_8002F7AC:
 /* 8002F7D0 0002C3B0  98 7F 02 C4 */	stb r3, 0x2c4(r31)
 /* 8002F7D4 0002C3B4  88 7F 02 C4 */	lbz r3, 0x2c4(r31)
 /* 8002F7D8 0002C3B8  7C 63 07 74 */	extsb r3, r3
-/* 8002F7DC 0002C3BC  48 00 49 35 */	bl func_80034110
+/* 8002F7DC 0002C3BC  48 00 49 35 */	bl Player_GetEntity
 /* 8002F7E0 0002C3C0  28 03 00 00 */	cmplwi r3, 0
 /* 8002F7E4 0002C3C4  41 82 00 C8 */	beq lbl_8002F8AC
 /* 8002F7E8 0002C3C8  48 05 73 8D */	bl func_80086B74
@@ -7690,14 +7690,14 @@ lbl_8002F854:
 /* 8002F85C 0002C43C  40 81 00 1C */	ble lbl_8002F878
 /* 8002F860 0002C440  48 35 0C C9 */	bl HSD_Randf
 /* 8002F864 0002C444  FF E0 08 90 */	fmr f31, f1
-/* 8002F868 0002C448  48 1F 54 15 */	bl get_cam_angle_radians_left
+/* 8002F868 0002C448  48 1F 54 15 */	bl Stage_GetCamAngleRadiansLeft
 /* 8002F86C 0002C44C  EC 1F 00 72 */	fmuls f0, f31, f1
 /* 8002F870 0002C450  D0 1F 02 CC */	stfs f0, 0x2cc(r31)
 /* 8002F874 0002C454  48 00 00 1C */	b lbl_8002F890
 lbl_8002F878:
 /* 8002F878 0002C458  48 35 0C B1 */	bl HSD_Randf
 /* 8002F87C 0002C45C  FF E0 08 90 */	fmr f31, f1
-/* 8002F880 0002C460  48 1F 54 15 */	bl get_cam_angle_radians_right
+/* 8002F880 0002C460  48 1F 54 15 */	bl Stage_GetCamAngleRadiansRight
 /* 8002F884 0002C464  FC 00 08 50 */	fneg f0, f1
 /* 8002F888 0002C468  EC 1F 00 32 */	fmuls f0, f31, f0
 /* 8002F88C 0002C46C  D0 1F 02 CC */	stfs f0, 0x2cc(r31)
@@ -7746,15 +7746,15 @@ lbl_8002F908:
 /* 8002F91C 0002C4FC  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8002F920 0002C500  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8002F924 0002C504  7C 7E 1B 78 */	mr r30, r3
-/* 8002F928 0002C508  48 1F 51 2D */	bl get_cam_bounds_left_offset
+/* 8002F928 0002C508  48 1F 51 2D */	bl Stage_GetCamBoundsLeftOffset
 /* 8002F92C 0002C50C  FF E0 08 90 */	fmr f31, f1
-/* 8002F930 0002C510  48 1F 51 39 */	bl get_cam_bounds_right_offset
+/* 8002F930 0002C510  48 1F 51 39 */	bl Stage_GetCamBoundsRightOffset
 /* 8002F934 0002C514  EC 21 F8 2A */	fadds f1, f1, f31
 /* 8002F938 0002C518  C0 02 84 50 */	lfs f0, lbl_804D7E30@sda21(r2)
 /* 8002F93C 0002C51C  EF C0 00 72 */	fmuls f30, f0, f1
-/* 8002F940 0002C520  48 1F 51 15 */	bl get_cam_bounds_left_offset
+/* 8002F940 0002C520  48 1F 51 15 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002F944 0002C524  FF E0 08 90 */	fmr f31, f1
-/* 8002F948 0002C528  48 1F 51 21 */	bl get_cam_bounds_right_offset
+/* 8002F948 0002C528  48 1F 51 21 */	bl Stage_GetCamBoundsRightOffset
 /* 8002F94C 0002C52C  EC 21 F8 28 */	fsubs f1, f1, f31
 /* 8002F950 0002C530  C0 02 84 50 */	lfs f0, lbl_804D7E30@sda21(r2)
 /* 8002F954 0002C534  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
@@ -7766,15 +7766,15 @@ lbl_8002F908:
 /* 8002F96C 0002C54C  EC 1E 00 28 */	fsubs f0, f30, f0
 /* 8002F970 0002C550  D0 3E 00 0C */	stfs f1, 0xc(r30)
 /* 8002F974 0002C554  D0 1E 00 08 */	stfs f0, 8(r30)
-/* 8002F978 0002C558  48 1F 51 21 */	bl get_cam_bounds_bottom_offset
+/* 8002F978 0002C558  48 1F 51 21 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002F97C 0002C55C  FF E0 08 90 */	fmr f31, f1
-/* 8002F980 0002C560  48 1F 51 01 */	bl get_cam_bounds_top_offset
+/* 8002F980 0002C560  48 1F 51 01 */	bl Stage_GetCamBoundsTopOffset
 /* 8002F984 0002C564  EC 21 F8 2A */	fadds f1, f1, f31
 /* 8002F988 0002C568  C0 02 84 50 */	lfs f0, lbl_804D7E30@sda21(r2)
 /* 8002F98C 0002C56C  EF C0 00 72 */	fmuls f30, f0, f1
-/* 8002F990 0002C570  48 1F 51 09 */	bl get_cam_bounds_bottom_offset
+/* 8002F990 0002C570  48 1F 51 09 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002F994 0002C574  FF E0 08 90 */	fmr f31, f1
-/* 8002F998 0002C578  48 1F 50 E9 */	bl get_cam_bounds_top_offset
+/* 8002F998 0002C578  48 1F 50 E9 */	bl Stage_GetCamBoundsTopOffset
 /* 8002F99C 0002C57C  EC 41 F8 28 */	fsubs f2, f1, f31
 /* 8002F9A0 0002C580  C0 22 84 50 */	lfs f1, lbl_804D7E30@sda21(r2)
 /* 8002F9A4 0002C584  C0 1F 00 B0 */	lfs f0, 0xb0(r31)
@@ -7818,25 +7818,25 @@ func_8002F9E4:
 /* 8002FA30 0002C610  3B BE 03 2C */	addi r29, r30, 0x32c
 /* 8002FA34 0002C614  C0 1F 00 40 */	lfs f0, 0x40(r31)
 /* 8002FA38 0002C618  D0 1E 03 2C */	stfs f0, 0x32c(r30)
-/* 8002FA3C 0002C61C  48 1F 50 19 */	bl get_cam_bounds_left_offset
+/* 8002FA3C 0002C61C  48 1F 50 19 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002FA40 0002C620  D0 3E 02 D8 */	stfs f1, 0x2d8(r30)
-/* 8002FA44 0002C624  48 1F 50 25 */	bl get_cam_bounds_right_offset
+/* 8002FA44 0002C624  48 1F 50 25 */	bl Stage_GetCamBoundsRightOffset
 /* 8002FA48 0002C628  D0 3E 02 DC */	stfs f1, 0x2dc(r30)
-/* 8002FA4C 0002C62C  48 1F 50 35 */	bl get_cam_bounds_top_offset
+/* 8002FA4C 0002C62C  48 1F 50 35 */	bl Stage_GetCamBoundsTopOffset
 /* 8002FA50 0002C630  D0 3E 02 D0 */	stfs f1, 0x2d0(r30)
-/* 8002FA54 0002C634  48 1F 50 45 */	bl get_cam_bounds_bottom_offset
+/* 8002FA54 0002C634  48 1F 50 45 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002FA58 0002C638  D0 3E 02 D4 */	stfs f1, 0x2d4(r30)
 /* 8002FA5C 0002C63C  C0 1F 00 A8 */	lfs f0, 0xa8(r31)
 /* 8002FA60 0002C640  D0 1E 02 E0 */	stfs f0, 0x2e0(r30)
 /* 8002FA64 0002C644  C0 1F 00 A4 */	lfs f0, 0xa4(r31)
 /* 8002FA68 0002C648  D0 1E 02 E4 */	stfs f0, 0x2e4(r30)
-/* 8002FA6C 0002C64C  48 1F 51 E1 */	bl get_cam_angle_radians_up
+/* 8002FA6C 0002C64C  48 1F 51 E1 */	bl Stage_GetCamAngleRadiansUp
 /* 8002FA70 0002C650  D0 3E 02 E8 */	stfs f1, 0x2e8(r30)
-/* 8002FA74 0002C654  48 1F 51 F1 */	bl get_cam_angle_radians_down
+/* 8002FA74 0002C654  48 1F 51 F1 */	bl Stage_GetCamAngleRadiansDown
 /* 8002FA78 0002C658  D0 3E 02 EC */	stfs f1, 0x2ec(r30)
-/* 8002FA7C 0002C65C  48 1F 52 19 */	bl get_cam_angle_radians_right
+/* 8002FA7C 0002C65C  48 1F 52 19 */	bl Stage_GetCamAngleRadiansRight
 /* 8002FA80 0002C660  D0 3E 02 F0 */	stfs f1, 0x2f0(r30)
-/* 8002FA84 0002C664  48 1F 51 F9 */	bl get_cam_angle_radians_left
+/* 8002FA84 0002C664  48 1F 51 F9 */	bl Stage_GetCamAngleRadiansLeft
 /* 8002FA88 0002C668  D0 3E 02 F4 */	stfs f1, 0x2f4(r30)
 /* 8002FA8C 0002C66C  3C 60 80 03 */	lis r3, lbl_8002F908@ha
 /* 8002FA90 0002C670  38 03 F9 08 */	addi r0, r3, lbl_8002F908@l
@@ -7894,7 +7894,7 @@ lbl_8002FB1C:
 /* 8002FB58 0002C738  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 8002FB5C 0002C73C  80 1E 03 10 */	lwz r0, 0x310(r30)
 /* 8002FB60 0002C740  90 1E 00 28 */	stw r0, 0x28(r30)
-/* 8002FB64 0002C744  4B FD D9 09 */	bl lbvector_add
+/* 8002FB64 0002C744  4B FD D9 09 */	bl lbvector_Add
 /* 8002FB68 0002C748  80 BC 00 00 */	lwz r5, 0(r28)
 /* 8002FB6C 0002C74C  7F 64 DB 78 */	mr r4, r27
 /* 8002FB70 0002C750  80 1C 00 04 */	lwz r0, 4(r28)
@@ -7903,7 +7903,7 @@ lbl_8002FB1C:
 /* 8002FB7C 0002C75C  90 1E 00 3C */	stw r0, 0x3c(r30)
 /* 8002FB80 0002C760  80 1C 00 08 */	lwz r0, 8(r28)
 /* 8002FB84 0002C764  90 1E 00 40 */	stw r0, 0x40(r30)
-/* 8002FB88 0002C768  4B FD D8 E5 */	bl lbvector_add
+/* 8002FB88 0002C768  4B FD D8 E5 */	bl lbvector_Add
 /* 8002FB8C 0002C76C  BB 61 00 14 */	lmw r27, 0x14(r1)
 /* 8002FB90 0002C770  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8002FB94 0002C774  38 21 00 28 */	addi r1, r1, 0x28
@@ -7918,15 +7918,15 @@ lbl_8002FBA0:
 /* 8002FBB4 0002C794  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8002FBB8 0002C798  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8002FBBC 0002C79C  7C 7E 1B 78 */	mr r30, r3
-/* 8002FBC0 0002C7A0  48 1F 4E 95 */	bl get_cam_bounds_left_offset
+/* 8002FBC0 0002C7A0  48 1F 4E 95 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002FBC4 0002C7A4  FF E0 08 90 */	fmr f31, f1
-/* 8002FBC8 0002C7A8  48 1F 4E A1 */	bl get_cam_bounds_right_offset
+/* 8002FBC8 0002C7A8  48 1F 4E A1 */	bl Stage_GetCamBoundsRightOffset
 /* 8002FBCC 0002C7AC  EC 21 F8 2A */	fadds f1, f1, f31
 /* 8002FBD0 0002C7B0  C0 02 84 50 */	lfs f0, lbl_804D7E30@sda21(r2)
 /* 8002FBD4 0002C7B4  EF C0 00 72 */	fmuls f30, f0, f1
-/* 8002FBD8 0002C7B8  48 1F 4E 7D */	bl get_cam_bounds_left_offset
+/* 8002FBD8 0002C7B8  48 1F 4E 7D */	bl Stage_GetCamBoundsLeftOffset
 /* 8002FBDC 0002C7BC  FF E0 08 90 */	fmr f31, f1
-/* 8002FBE0 0002C7C0  48 1F 4E 89 */	bl get_cam_bounds_right_offset
+/* 8002FBE0 0002C7C0  48 1F 4E 89 */	bl Stage_GetCamBoundsRightOffset
 /* 8002FBE4 0002C7C4  EC 21 F8 28 */	fsubs f1, f1, f31
 /* 8002FBE8 0002C7C8  C0 02 84 50 */	lfs f0, lbl_804D7E30@sda21(r2)
 /* 8002FBEC 0002C7CC  3C 60 80 3C */	lis r3, lbl_803BCCA0@ha
@@ -7938,15 +7938,15 @@ lbl_8002FBA0:
 /* 8002FC04 0002C7E4  EC 1E 00 28 */	fsubs f0, f30, f0
 /* 8002FC08 0002C7E8  D0 3E 00 0C */	stfs f1, 0xc(r30)
 /* 8002FC0C 0002C7EC  D0 1E 00 08 */	stfs f0, 8(r30)
-/* 8002FC10 0002C7F0  48 1F 4E 89 */	bl get_cam_bounds_bottom_offset
+/* 8002FC10 0002C7F0  48 1F 4E 89 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002FC14 0002C7F4  FF E0 08 90 */	fmr f31, f1
-/* 8002FC18 0002C7F8  48 1F 4E 69 */	bl get_cam_bounds_top_offset
+/* 8002FC18 0002C7F8  48 1F 4E 69 */	bl Stage_GetCamBoundsTopOffset
 /* 8002FC1C 0002C7FC  EC 21 F8 2A */	fadds f1, f1, f31
 /* 8002FC20 0002C800  C0 02 84 50 */	lfs f0, lbl_804D7E30@sda21(r2)
 /* 8002FC24 0002C804  EF C0 00 72 */	fmuls f30, f0, f1
-/* 8002FC28 0002C808  48 1F 4E 71 */	bl get_cam_bounds_bottom_offset
+/* 8002FC28 0002C808  48 1F 4E 71 */	bl Stage_GetCamBoundsBottomOffset
 /* 8002FC2C 0002C80C  FF E0 08 90 */	fmr f31, f1
-/* 8002FC30 0002C810  48 1F 4E 51 */	bl get_cam_bounds_top_offset
+/* 8002FC30 0002C810  48 1F 4E 51 */	bl Stage_GetCamBoundsTopOffset
 /* 8002FC34 0002C814  EC 41 F8 28 */	fsubs f2, f1, f31
 /* 8002FC38 0002C818  C0 22 84 50 */	lfs f1, lbl_804D7E30@sda21(r2)
 /* 8002FC3C 0002C81C  C0 1F 00 B0 */	lfs f0, 0xb0(r31)
@@ -7990,25 +7990,25 @@ func_8002FC7C:
 /* 8002FCC8 0002C8A8  3B BE 03 2C */	addi r29, r30, 0x32c
 /* 8002FCCC 0002C8AC  C0 1F 00 40 */	lfs f0, 0x40(r31)
 /* 8002FCD0 0002C8B0  D0 1E 03 2C */	stfs f0, 0x32c(r30)
-/* 8002FCD4 0002C8B4  48 1F 4D 81 */	bl get_cam_bounds_left_offset
+/* 8002FCD4 0002C8B4  48 1F 4D 81 */	bl Stage_GetCamBoundsLeftOffset
 /* 8002FCD8 0002C8B8  D0 3E 02 D8 */	stfs f1, 0x2d8(r30)
-/* 8002FCDC 0002C8BC  48 1F 4D 8D */	bl get_cam_bounds_right_offset
+/* 8002FCDC 0002C8BC  48 1F 4D 8D */	bl Stage_GetCamBoundsRightOffset
 /* 8002FCE0 0002C8C0  D0 3E 02 DC */	stfs f1, 0x2dc(r30)
-/* 8002FCE4 0002C8C4  48 1F 4D 9D */	bl get_cam_bounds_top_offset
+/* 8002FCE4 0002C8C4  48 1F 4D 9D */	bl Stage_GetCamBoundsTopOffset
 /* 8002FCE8 0002C8C8  D0 3E 02 D0 */	stfs f1, 0x2d0(r30)
-/* 8002FCEC 0002C8CC  48 1F 4D AD */	bl get_cam_bounds_bottom_offset
+/* 8002FCEC 0002C8CC  48 1F 4D AD */	bl Stage_GetCamBoundsBottomOffset
 /* 8002FCF0 0002C8D0  D0 3E 02 D4 */	stfs f1, 0x2d4(r30)
 /* 8002FCF4 0002C8D4  C0 1F 00 A8 */	lfs f0, 0xa8(r31)
 /* 8002FCF8 0002C8D8  D0 1E 02 E0 */	stfs f0, 0x2e0(r30)
 /* 8002FCFC 0002C8DC  C0 1F 00 A4 */	lfs f0, 0xa4(r31)
 /* 8002FD00 0002C8E0  D0 1E 02 E4 */	stfs f0, 0x2e4(r30)
-/* 8002FD04 0002C8E4  48 1F 4F 49 */	bl get_cam_angle_radians_up
+/* 8002FD04 0002C8E4  48 1F 4F 49 */	bl Stage_GetCamAngleRadiansUp
 /* 8002FD08 0002C8E8  D0 3E 02 E8 */	stfs f1, 0x2e8(r30)
-/* 8002FD0C 0002C8EC  48 1F 4F 59 */	bl get_cam_angle_radians_down
+/* 8002FD0C 0002C8EC  48 1F 4F 59 */	bl Stage_GetCamAngleRadiansDown
 /* 8002FD10 0002C8F0  D0 3E 02 EC */	stfs f1, 0x2ec(r30)
-/* 8002FD14 0002C8F4  48 1F 4F 81 */	bl get_cam_angle_radians_right
+/* 8002FD14 0002C8F4  48 1F 4F 81 */	bl Stage_GetCamAngleRadiansRight
 /* 8002FD18 0002C8F8  D0 3E 02 F0 */	stfs f1, 0x2f0(r30)
-/* 8002FD1C 0002C8FC  48 1F 4F 61 */	bl get_cam_angle_radians_left
+/* 8002FD1C 0002C8FC  48 1F 4F 61 */	bl Stage_GetCamAngleRadiansLeft
 /* 8002FD20 0002C900  D0 3E 02 F4 */	stfs f1, 0x2f4(r30)
 /* 8002FD24 0002C904  3C 60 80 03 */	lis r3, lbl_8002FBA0@ha
 /* 8002FD28 0002C908  38 03 FB A0 */	addi r0, r3, lbl_8002FBA0@l
@@ -8066,7 +8066,7 @@ lbl_8002FDB4:
 /* 8002FDF0 0002C9D0  90 1E 00 24 */	stw r0, 0x24(r30)
 /* 8002FDF4 0002C9D4  80 1E 03 10 */	lwz r0, 0x310(r30)
 /* 8002FDF8 0002C9D8  90 1E 00 28 */	stw r0, 0x28(r30)
-/* 8002FDFC 0002C9DC  4B FD D6 71 */	bl lbvector_add
+/* 8002FDFC 0002C9DC  4B FD D6 71 */	bl lbvector_Add
 /* 8002FE00 0002C9E0  80 BC 00 00 */	lwz r5, 0(r28)
 /* 8002FE04 0002C9E4  7F 64 DB 78 */	mr r4, r27
 /* 8002FE08 0002C9E8  80 1C 00 04 */	lwz r0, 4(r28)
@@ -8075,7 +8075,7 @@ lbl_8002FDB4:
 /* 8002FE14 0002C9F4  90 1E 00 3C */	stw r0, 0x3c(r30)
 /* 8002FE18 0002C9F8  80 1C 00 08 */	lwz r0, 8(r28)
 /* 8002FE1C 0002C9FC  90 1E 00 40 */	stw r0, 0x40(r30)
-/* 8002FE20 0002CA00  4B FD D6 4D */	bl lbvector_add
+/* 8002FE20 0002CA00  4B FD D6 4D */	bl lbvector_Add
 /* 8002FE24 0002CA04  BB 61 00 14 */	lmw r27, 0x14(r1)
 /* 8002FE28 0002CA08  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8002FE2C 0002CA0C  38 21 00 28 */	addi r1, r1, 0x28
@@ -8142,11 +8142,11 @@ func_8002FEEC:
 /* 8002FF08 0002CAE8  3B C4 2C 68 */	addi r30, r4, lbl_80452C68@l
 /* 8002FF0C 0002CAEC  93 A1 00 34 */	stw r29, 0x34(r1)
 /* 8002FF10 0002CAF0  3B A3 00 00 */	addi r29, r3, 0
-/* 8002FF14 0002CAF4  48 00 41 FD */	bl func_80034110
+/* 8002FF14 0002CAF4  48 00 41 FD */	bl Player_GetEntity
 /* 8002FF18 0002CAF8  28 03 00 00 */	cmplwi r3, 0
 /* 8002FF1C 0002CAFC  41 82 01 30 */	beq lbl_8003004C
 /* 8002FF20 0002CB00  7F A3 EB 78 */	mr r3, r29
-/* 8002FF24 0002CB04  48 00 41 ED */	bl func_80034110
+/* 8002FF24 0002CB04  48 00 41 ED */	bl Player_GetEntity
 /* 8002FF28 0002CB08  48 05 6C 4D */	bl func_80086B74
 /* 8002FF2C 0002CB0C  7C 7F 1B 79 */	or. r31, r3, r3
 /* 8002FF30 0002CB10  41 82 01 1C */	beq lbl_8003004C
@@ -8200,7 +8200,7 @@ lbl_8002FF50:
 /* 8002FFEC 0002CBCC  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8002FFF0 0002CBD0  90 1E 03 D0 */	stw r0, 0x3d0(r30)
 /* 8002FFF4 0002CBD4  D0 3E 03 D4 */	stfs f1, 0x3d4(r30)
-/* 8002FFF8 0002CBD8  4B FD D5 01 */	bl lbvector_diff
+/* 8002FFF8 0002CBD8  4B FD D5 01 */	bl lbvector_Diff
 /* 8002FFFC 0002CBDC  C0 3F 00 00 */	lfs f1, 0(r31)
 /* 80030000 0002CBE0  3B BE 03 B4 */	addi r29, r30, 0x3b4
 /* 80030004 0002CBE4  C0 1E 03 B4 */	lfs f0, 0x3b4(r30)
@@ -8339,7 +8339,7 @@ func_8003019C:
 /* 800301A8 0002CD88  38 63 30 04 */	addi r3, r3, lbl_80453004@l
 /* 800301AC 0002CD8C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 800301B0 0002CD90  80 63 00 04 */	lwz r3, 4(r3)
-/* 800301B4 0002CD94  48 00 3F 5D */	bl func_80034110
+/* 800301B4 0002CD94  48 00 3F 5D */	bl Player_GetEntity
 /* 800301B8 0002CD98  48 05 69 BD */	bl func_80086B74
 /* 800301BC 0002CD9C  38 63 00 1C */	addi r3, r3, 0x1c
 /* 800301C0 0002CDA0  80 01 00 0C */	lwz r0, 0xc(r1)
@@ -8719,7 +8719,7 @@ func_80030688:
 /* 800306F0 0002D2D0  38 83 01 D0 */	addi r4, r3, lbl_800301D0@l
 /* 800306F4 0002D2D4  38 7E 00 00 */	addi r3, r30, 0
 /* 800306F8 0002D2D8  38 A0 00 02 */	li r5, 2
-/* 800306FC 0002D2DC  48 36 00 61 */	bl func_8039075C
+/* 800306FC 0002D2DC  48 36 00 61 */	bl GObj_SetupGXLinkMax
 /* 80030700 0002D2E0  3C 60 80 03 */	lis r3, lbl_8002F360@ha
 /* 80030704 0002D2E4  38 83 F3 60 */	addi r4, r3, lbl_8002F360@l
 /* 80030708 0002D2E8  38 7E 00 00 */	addi r3, r30, 0
@@ -8860,10 +8860,10 @@ lbl_8003088C:
 /* 800308D4 0002D4B4  C0 01 00 30 */	lfs f0, 0x30(r1)
 /* 800308D8 0002D4B8  EC 03 00 BC */	fnmsubs f0, f3, f2, f0
 /* 800308DC 0002D4BC  D0 1C 00 00 */	stfs f0, 0(r28)
-/* 800308E0 0002D4C0  48 2F 5A F5 */	bl func_803263D4
+/* 800308E0 0002D4C0  48 2F 5A F5 */	bl sinf
 /* 800308E4 0002D4C4  FF C0 08 90 */	fmr f30, f1
 /* 800308E8 0002D4C8  FC 20 F8 90 */	fmr f1, f31
-/* 800308EC 0002D4CC  48 2F 59 55 */	bl func_80326240
+/* 800308EC 0002D4CC  48 2F 59 55 */	bl cosf
 /* 800308F0 0002D4D0  C0 81 00 48 */	lfs f4, 0x48(r1)
 /* 800308F4 0002D4D4  C0 A1 00 50 */	lfs f5, 0x50(r1)
 /* 800308F8 0002D4D8  EC 44 07 B2 */	fmuls f2, f4, f30
@@ -8904,10 +8904,10 @@ lbl_8003096C:
 lbl_80030974:
 /* 80030974 0002D554  FF C0 F8 50 */	fneg f30, f31
 /* 80030978 0002D558  FC 20 F0 90 */	fmr f1, f30
-/* 8003097C 0002D55C  48 2F 5A 59 */	bl func_803263D4
+/* 8003097C 0002D55C  48 2F 5A 59 */	bl sinf
 /* 80030980 0002D560  FF E0 08 90 */	fmr f31, f1
 /* 80030984 0002D564  FC 20 F0 90 */	fmr f1, f30
-/* 80030988 0002D568  48 2F 58 B9 */	bl func_80326240
+/* 80030988 0002D568  48 2F 58 B9 */	bl cosf
 /* 8003098C 0002D56C  C0 81 00 48 */	lfs f4, 0x48(r1)
 /* 80030990 0002D570  C0 A1 00 50 */	lfs f5, 0x50(r1)
 /* 80030994 0002D574  EC 44 07 F2 */	fmuls f2, f4, f31
@@ -9121,7 +9121,7 @@ func_80030BBC:
 /* 80030BF0 0002D7D0  83 E5 00 28 */	lwz r31, 0x28(r5)
 /* 80030BF4 0002D7D4  38 A1 00 28 */	addi r5, r1, 0x28
 /* 80030BF8 0002D7D8  38 7F 00 00 */	addi r3, r31, 0
-/* 80030BFC 0002D7DC  4B FD D6 15 */	bl func_8000E210
+/* 80030BFC 0002D7DC  4B FD D6 15 */	bl lbvector_WorldToScreen
 /* 80030C00 0002D7E0  28 03 00 00 */	cmplwi r3, 0
 /* 80030C04 0002D7E4  40 82 00 0C */	bne lbl_80030C10
 /* 80030C08 0002D7E8  38 60 00 00 */	li r3, 0
@@ -9219,7 +9219,7 @@ func_80030CFC:
 /* 80030D44 0002D924  38 81 00 50 */	addi r4, r1, 0x50
 /* 80030D48 0002D928  38 BE 00 1C */	addi r5, r30, 0x1c
 /* 80030D4C 0002D92C  38 C1 00 38 */	addi r6, r1, 0x38
-/* 80030D50 0002D930  4B FD DA E9 */	bl func_8000E838
+/* 80030D50 0002D930  4B FD DA E9 */	bl lbvector_8000E838
 /* 80030D54 0002D934  C0 1E 00 3C */	lfs f0, 0x3c(r30)
 /* 80030D58 0002D938  EC 00 F8 2A */	fadds f0, f0, f31
 /* 80030D5C 0002D93C  FC 01 00 40 */	fcmpo cr0, f1, f0
@@ -9230,9 +9230,9 @@ lbl_80030D6C:
 /* 80030D6C 0002D94C  38 61 00 38 */	addi r3, r1, 0x38
 /* 80030D70 0002D950  38 9E 00 1C */	addi r4, r30, 0x1c
 /* 80030D74 0002D954  38 A1 00 20 */	addi r5, r1, 0x20
-/* 80030D78 0002D958  4B FD C7 81 */	bl lbvector_diff
+/* 80030D78 0002D958  4B FD C7 81 */	bl lbvector_Diff
 /* 80030D7C 0002D95C  38 61 00 20 */	addi r3, r1, 0x20
-/* 80030D80 0002D960  4B FD C5 6D */	bl lbvector_normalize
+/* 80030D80 0002D960  4B FD C5 6D */	bl lbvector_Normalize
 /* 80030D84 0002D964  C0 3E 00 3C */	lfs f1, 0x3c(r30)
 /* 80030D88 0002D968  38 61 00 20 */	addi r3, r1, 0x20
 /* 80030D8C 0002D96C  C0 01 00 20 */	lfs f0, 0x20(r1)
@@ -9246,7 +9246,7 @@ lbl_80030D6C:
 /* 80030DAC 0002D98C  C0 01 00 28 */	lfs f0, 0x28(r1)
 /* 80030DB0 0002D990  EC 00 00 72 */	fmuls f0, f0, f1
 /* 80030DB4 0002D994  D0 01 00 28 */	stfs f0, 0x28(r1)
-/* 80030DB8 0002D998  4B FD C6 B5 */	bl lbvector_add
+/* 80030DB8 0002D998  4B FD C6 B5 */	bl lbvector_Add
 /* 80030DBC 0002D99C  38 61 00 20 */	addi r3, r1, 0x20
 /* 80030DC0 0002D9A0  38 80 00 00 */	li r4, 0
 /* 80030DC4 0002D9A4  4B FF FD F9 */	bl func_80030BBC
@@ -9879,7 +9879,7 @@ lbl_8003157C:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B73B8
 lbl_803B73B8:
 	.float 0
@@ -9903,7 +9903,7 @@ lbl_803B73DC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BCB18
 lbl_803BCB18:
     .4byte func_8002B3D4
@@ -10059,11 +10059,10 @@ lbl_803BCCA0:
     .4byte 0x44960000
     .4byte 0xBE4CCCCD
     .4byte 0x3F99999A
-    .4byte NULL
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80452C68
 lbl_80452C68:
 	.skip 0x39C
@@ -10074,16 +10073,15 @@ lbl_80453004:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3938
 lbl_804D3938:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6458
 lbl_804D6458:
 	.skip 0x4
@@ -10102,7 +10100,7 @@ lbl_804D6468:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D7E00
 lbl_804D7E00:
 	.4byte 0xFF7FFFFF

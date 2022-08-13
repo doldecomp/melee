@@ -318,7 +318,7 @@ lbl_80252D24:
 /* 80252D60 0024F940  90 1E 00 4C */	stw r0, 0x4c(r30)
 /* 80252D64 0024F944  48 00 00 C8 */	b lbl_80252E2C
 lbl_80252D68:
-/* 80252D68 0024F948  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 80252D68 0024F948  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 80252D6C 0024F94C  2C 00 00 03 */	cmpwi r0, 3
 /* 80252D70 0024F950  41 80 00 38 */	blt lbl_80252DA8
 /* 80252D74 0024F954  3C 60 80 4C */	lis r3, HSD_PadCopyStatus@ha
@@ -615,7 +615,7 @@ lbl_80253104:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EFCE8
 lbl_803EFCE8:
     .4byte NULL
@@ -875,55 +875,31 @@ lbl_803EFCE8:
     .4byte 0x000000F4
     .4byte 0x000000F5
     .4byte 0x00000100
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E426F
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E426F
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E426F
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E426F
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
-    .4byte NULL
+    .asciz "MenMainConBo_Top_joint"
+    .balign 4
+    .asciz "MenMainConBo_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConBo_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConBo_Top_shapeanim_joint"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A09B0
 lbl_804A09B0:
 	.skip 0x60
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C80
 lbl_804D6C80:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC268
 lbl_804DC268:
 	.4byte 0xC1180000

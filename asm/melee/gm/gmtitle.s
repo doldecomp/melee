@@ -419,7 +419,7 @@ func_801A185C:
 /* 801A18A0 0019E480  38 83 18 14 */	addi r4, r3, lbl_801A1814@l
 /* 801A18A4 0019E484  38 7F 00 00 */	addi r3, r31, 0
 /* 801A18A8 0019E488  38 A0 00 0C */	li r5, 0xc
-/* 801A18AC 0019E48C  48 1E EE B1 */	bl func_8039075C
+/* 801A18AC 0019E48C  48 1E EE B1 */	bl GObj_SetupGXLinkMax
 /* 801A18B0 0019E490  38 00 02 09 */	li r0, 0x209
 /* 801A18B4 0019E494  90 1F 00 24 */	stw r0, 0x24(r31)
 /* 801A18B8 0019E498  38 00 00 00 */	li r0, 0
@@ -482,7 +482,7 @@ func_801A1944:
 /* 801A1988 0019E568  38 83 18 D4 */	addi r4, r3, lbl_801A18D4@l
 /* 801A198C 0019E56C  38 7F 00 00 */	addi r3, r31, 0
 /* 801A1990 0019E570  38 A0 00 00 */	li r5, 0
-/* 801A1994 0019E574  48 1E ED C9 */	bl func_8039075C
+/* 801A1994 0019E574  48 1E ED C9 */	bl GObj_SetupGXLinkMax
 /* 801A1998 0019E578  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 801A199C 0019E57C  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 801A19A0 0019E580  38 21 00 10 */	addi r1, r1, 0x10
@@ -701,7 +701,7 @@ lbl_801A1C78:
 /* 801A1CB4 0019E894  48 00 2E AD */	bl func_801A4B60
 /* 801A1CB8 0019E898  48 00 00 6C */	b lbl_801A1D24
 lbl_801A1CBC:
-/* 801A1CBC 0019E89C  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 801A1CBC 0019E89C  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 801A1CC0 0019E8A0  2C 00 00 03 */	cmpwi r0, 3
 /* 801A1CC4 0019E8A4  41 80 00 60 */	blt lbl_801A1D24
 /* 801A1CC8 0019E8A8  57 E0 05 29 */	rlwinm. r0, r31, 0, 0x14, 0x14
@@ -948,7 +948,7 @@ lbl_801A1EAC:
 /* 801A2048 0019EC28  38 83 18 D4 */	addi r4, r3, lbl_801A18D4@l
 /* 801A204C 0019EC2C  38 79 00 00 */	addi r3, r25, 0
 /* 801A2050 0019EC30  38 A0 00 00 */	li r5, 0
-/* 801A2054 0019EC34  48 1E E7 09 */	bl func_8039075C
+/* 801A2054 0019EC34  48 1E E7 09 */	bl GObj_SetupGXLinkMax
 /* 801A2058 0019EC38  38 60 00 13 */	li r3, 0x13
 /* 801A205C 0019EC3C  38 80 00 14 */	li r4, 0x14
 /* 801A2060 0019EC40  38 A0 00 00 */	li r5, 0
@@ -964,7 +964,7 @@ lbl_801A1EAC:
 /* 801A2088 0019EC68  38 83 18 14 */	addi r4, r3, lbl_801A1814@l
 /* 801A208C 0019EC6C  38 79 00 00 */	addi r3, r25, 0
 /* 801A2090 0019EC70  38 A0 00 0C */	li r5, 0xc
-/* 801A2094 0019EC74  48 1E E6 C9 */	bl func_8039075C
+/* 801A2094 0019EC74  48 1E E6 C9 */	bl GObj_SetupGXLinkMax
 /* 801A2098 0019EC78  38 00 02 09 */	li r0, 0x209
 /* 801A209C 0019EC7C  90 19 00 24 */	stw r0, 0x24(r25)
 /* 801A20A0 0019EC80  93 B9 00 20 */	stw r29, 0x20(r25)
@@ -1029,7 +1029,7 @@ lbl_801A2170:
 lbl_801A217C:
 /* 801A217C 0019ED5C  7F 23 CB 78 */	mr r3, r25
 /* 801A2180 0019ED60  48 1C E7 A9 */	bl HSD_JObjAnimAll
-/* 801A2184 0019ED64  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 801A2184 0019ED64  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 801A2188 0019ED68  2C 00 00 01 */	cmpwi r0, 1
 /* 801A218C 0019ED6C  41 80 00 84 */	blt lbl_801A2210
 /* 801A2190 0019ED70  38 60 00 00 */	li r3, 0
@@ -1073,7 +1073,7 @@ lbl_801A2210:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7D50
 lbl_803B7D50:
 	.asciz "GmTtAll.dat"
@@ -1085,7 +1085,7 @@ lbl_803B7D5C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803DA4F0
 lbl_803DA4F0:
     .4byte NULL
@@ -1100,88 +1100,43 @@ lbl_803DA4FC:
     .4byte NULL
     .4byte 0xC0400000
     .4byte NULL
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
-    .4byte 0x54746C4D
-    .4byte 0x6F6A695F
-    .4byte 0x546F705F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x54746C4D
-    .4byte 0x6F6A695F
-    .4byte 0x546F705F
-    .4byte 0x616E696D
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x54746C4D
-    .4byte 0x6F6A695F
-    .4byte 0x546F705F
-    .4byte 0x6D617461
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x54746C4D
-    .4byte 0x6F6A695F
-    .4byte 0x546F705F
-    .4byte 0x73686170
-    .4byte 0x65616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x53635469
-    .4byte 0x746C655F
-    .4byte 0x63616D5F
-    .4byte 0x696E7431
-    .4byte 0x5F63616D
-    .4byte 0x65726100
-    .4byte 0x53635469
-    .4byte 0x746C655F
-    .4byte 0x7363656E
-    .4byte 0x655F6C69
-    .4byte 0x67687473
-    .4byte NULL
-    .4byte 0x53635469
-    .4byte 0x746C655F
-    .4byte 0x666F6700
-    .4byte 0x54746C42
-    .4byte 0x675F546F
-    .4byte 0x705F6A6F
-    .4byte 0x696E7400
-    .4byte 0x54746C42
-    .4byte 0x675F546F
-    .4byte 0x705F616E
-    .4byte 0x696D6A6F
-    .4byte 0x696E7400
-    .4byte 0x54746C42
-    .4byte 0x675F546F
-    .4byte 0x705F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x54746C42
-    .4byte 0x675F546F
-    .4byte 0x705F7368
-    .4byte 0x61706561
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x5469746C
-    .4byte 0x654D6172
-    .4byte 0x6B5F736F
-    .4byte 0x626A6465
-    .4byte 0x73630000
-    .4byte NULL
+    .asciz "translate"
+    .balign 4
+    .asciz "TtlMoji_Top_joint"
+    .balign 4
+    .asciz "TtlMoji_Top_animjoint"
+    .balign 4
+    .asciz "TtlMoji_Top_matanim_joint"
+    .balign 4
+    .asciz "TtlMoji_Top_shapeanim_joint"
+    .balign 4
+    .asciz "ScTitle_cam_int1_camera"
+    .balign 4
+    .asciz "ScTitle_scene_lights"
+    .balign 4
+    .asciz "ScTitle_fog"
+    .balign 4
+    .asciz "TtlBg_Top_joint"
+    .balign 4
+    .asciz "TtlBg_Top_animjoint"
+    .balign 4
+    .asciz "TtlBg_Top_matanim_joint"
+    .balign 4
+    .asciz "TtlBg_Top_shapeanim_joint"
+    .balign 4
+    .asciz "TitleMark_sobjdesc"
+    .balign 4
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80479B28
 lbl_80479B28:
 	.skip 0xA0
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4230
 lbl_804D4230:
     .asciz "jobj.h"
@@ -1194,11 +1149,10 @@ lbl_804D4238:
 lbl_804D4240:
     .asciz "%s"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6708
 lbl_804D6708:
 	.skip 0x4
@@ -1220,7 +1174,7 @@ lbl_804D671C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DA998
 lbl_804DA998:
 	.4byte 0x43020000

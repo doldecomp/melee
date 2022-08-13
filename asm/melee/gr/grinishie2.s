@@ -696,7 +696,7 @@ lbl_801FD4F0:
 /* 801FD520 001FA100  4B E5 A1 19 */	bl func_80057638
 /* 801FD524 001FA104  2C 1F 00 00 */	cmpwi r31, 0
 /* 801FD528 001FA108  40 82 00 24 */	bne lbl_801FD54C
-/* 801FD52C 001FA10C  48 02 76 0D */	bl get_blast_zone_right_offset
+/* 801FD52C 001FA10C  48 02 76 0D */	bl Stage_GetBlastZoneRightOffset
 /* 801FD530 001FA110  1C 1F 00 0C */	mulli r0, r31, 0xc
 /* 801FD534 001FA114  80 6D B3 60 */	lwz r3, lbl_804D6A00@sda21(r13)
 /* 801FD538 001FA118  7C 63 02 14 */	add r3, r3, r0
@@ -705,7 +705,7 @@ lbl_801FD4F0:
 /* 801FD544 001FA124  D0 01 00 20 */	stfs f0, 0x20(r1)
 /* 801FD548 001FA128  48 00 00 20 */	b lbl_801FD568
 lbl_801FD54C:
-/* 801FD54C 001FA12C  48 02 76 05 */	bl get_blast_zone_left_offset
+/* 801FD54C 001FA12C  48 02 76 05 */	bl Stage_GetBlastZoneLeftOffset
 /* 801FD550 001FA130  1C 1F 00 0C */	mulli r0, r31, 0xc
 /* 801FD554 001FA134  80 6D B3 60 */	lwz r3, lbl_804D6A00@sda21(r13)
 /* 801FD558 001FA138  7C 63 02 14 */	add r3, r3, r0
@@ -931,7 +931,7 @@ func_801FD824:
 /* 801FD854 001FA434  4B E5 9D E5 */	bl func_80057638
 /* 801FD858 001FA438  2C 1D 00 00 */	cmpwi r29, 0
 /* 801FD85C 001FA43C  40 82 00 24 */	bne lbl_801FD880
-/* 801FD860 001FA440  48 02 72 D9 */	bl get_blast_zone_right_offset
+/* 801FD860 001FA440  48 02 72 D9 */	bl Stage_GetBlastZoneRightOffset
 /* 801FD864 001FA444  1C 1D 00 0C */	mulli r0, r29, 0xc
 /* 801FD868 001FA448  80 6D B3 60 */	lwz r3, lbl_804D6A00@sda21(r13)
 /* 801FD86C 001FA44C  7C 63 02 14 */	add r3, r3, r0
@@ -940,7 +940,7 @@ func_801FD824:
 /* 801FD878 001FA458  D0 01 00 20 */	stfs f0, 0x20(r1)
 /* 801FD87C 001FA45C  48 00 00 20 */	b lbl_801FD89C
 lbl_801FD880:
-/* 801FD880 001FA460  48 02 72 D1 */	bl get_blast_zone_left_offset
+/* 801FD880 001FA460  48 02 72 D1 */	bl Stage_GetBlastZoneLeftOffset
 /* 801FD884 001FA464  1C 1D 00 0C */	mulli r0, r29, 0xc
 /* 801FD888 001FA468  80 6D B3 60 */	lwz r3, lbl_804D6A00@sda21(r13)
 /* 801FD88C 001FA46C  7C 63 02 14 */	add r3, r3, r0
@@ -1065,13 +1065,13 @@ func_801FD9EC:
 /* 801FDA40 001FA620  C0 23 00 D8 */	lfs f1, 0xd8(r3)
 /* 801FDA44 001FA624  C0 03 00 CC */	lfs f0, 0xcc(r3)
 /* 801FDA48 001FA628  EF E1 00 2A */	fadds f31, f1, f0
-/* 801FDA4C 001FA62C  48 02 70 1D */	bl get_cam_bounds_right_offset
+/* 801FDA4C 001FA62C  48 02 70 1D */	bl Stage_GetCamBoundsRightOffset
 /* 801FDA50 001FA630  FC 1F 08 40 */	fcmpo cr0, f31, f1
 /* 801FDA54 001FA634  40 81 00 0C */	ble lbl_801FDA60
 /* 801FDA58 001FA638  38 00 00 02 */	li r0, 2
 /* 801FDA5C 001FA63C  48 00 00 1C */	b lbl_801FDA78
 lbl_801FDA60:
-/* 801FDA60 001FA640  48 02 6F F5 */	bl get_cam_bounds_left_offset
+/* 801FDA60 001FA640  48 02 6F F5 */	bl Stage_GetCamBoundsLeftOffset
 /* 801FDA64 001FA644  FC 1F 08 40 */	fcmpo cr0, f31, f1
 /* 801FDA68 001FA648  40 80 00 0C */	bge lbl_801FDA74
 /* 801FDA6C 001FA64C  38 00 00 01 */	li r0, 1
@@ -1102,13 +1102,13 @@ lbl_801FDABC:
 /* 801FDAC0 001FA6A0  C0 23 00 D8 */	lfs f1, 0xd8(r3)
 /* 801FDAC4 001FA6A4  C0 03 00 CC */	lfs f0, 0xcc(r3)
 /* 801FDAC8 001FA6A8  EF E1 00 2A */	fadds f31, f1, f0
-/* 801FDACC 001FA6AC  48 02 6F 9D */	bl get_cam_bounds_right_offset
+/* 801FDACC 001FA6AC  48 02 6F 9D */	bl Stage_GetCamBoundsRightOffset
 /* 801FDAD0 001FA6B0  FC 1F 08 40 */	fcmpo cr0, f31, f1
 /* 801FDAD4 001FA6B4  40 81 00 0C */	ble lbl_801FDAE0
 /* 801FDAD8 001FA6B8  38 60 00 02 */	li r3, 2
 /* 801FDADC 001FA6BC  48 00 00 1C */	b lbl_801FDAF8
 lbl_801FDAE0:
-/* 801FDAE0 001FA6C0  48 02 6F 75 */	bl get_cam_bounds_left_offset
+/* 801FDAE0 001FA6C0  48 02 6F 75 */	bl Stage_GetCamBoundsLeftOffset
 /* 801FDAE4 001FA6C4  FC 1F 08 40 */	fcmpo cr0, f31, f1
 /* 801FDAE8 001FA6C8  40 80 00 0C */	bge lbl_801FDAF4
 /* 801FDAEC 001FA6CC  38 60 00 01 */	li r3, 1
@@ -1414,14 +1414,14 @@ lbl_801FDED8:
 /* 801FDF0C 001FAAEC  38 A1 00 1C */	addi r5, r1, 0x1c
 /* 801FDF10 001FAAF0  38 80 00 00 */	li r4, 0
 /* 801FDF14 001FAAF4  4B E0 D2 B9 */	bl func_8000B1CC
-/* 801FDF18 001FAAF8  48 02 6C 21 */	bl get_blast_zone_right_offset
+/* 801FDF18 001FAAF8  48 02 6C 21 */	bl Stage_GetBlastZoneRightOffset
 /* 801FDF1C 001FAAFC  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 801FDF20 001FAB00  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801FDF24 001FAB04  40 81 00 0C */	ble lbl_801FDF30
 /* 801FDF28 001FAB08  38 00 00 01 */	li r0, 1
 /* 801FDF2C 001FAB0C  48 00 00 20 */	b lbl_801FDF4C
 lbl_801FDF30:
-/* 801FDF30 001FAB10  48 02 6C 21 */	bl get_blast_zone_left_offset
+/* 801FDF30 001FAB10  48 02 6C 21 */	bl Stage_GetBlastZoneLeftOffset
 /* 801FDF34 001FAB14  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 801FDF38 001FAB18  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801FDF3C 001FAB1C  40 80 00 0C */	bge lbl_801FDF48
@@ -1488,7 +1488,7 @@ lbl_801FDFF0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E4A60
 lbl_803E4A60:
     .4byte 0x00000001
@@ -1634,7 +1634,7 @@ lbl_803E4C00:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4760
 lbl_804D4760:
     .asciz "jobj.h"
@@ -1646,14 +1646,14 @@ lbl_804D4768:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A00
 lbl_804D6A00:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB610
 lbl_804DB610:
 	.4byte 0x3F800000

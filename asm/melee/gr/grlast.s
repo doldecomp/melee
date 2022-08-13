@@ -850,22 +850,22 @@ lbl_8021B0F0:
 /* 8021B170 00217D50  4B DF 00 5D */	bl func_8000B1CC
 /* 8021B174 00217D54  38 61 00 20 */	addi r3, r1, 0x20
 /* 8021B178 00217D58  38 81 00 38 */	addi r4, r1, 0x38
-/* 8021B17C 00217D5C  4B DF 23 49 */	bl lbvector_sub
+/* 8021B17C 00217D5C  4B DF 23 49 */	bl lbvector_Sub
 /* 8021B180 00217D60  38 61 00 20 */	addi r3, r1, 0x20
-/* 8021B184 00217D64  4B DF 21 69 */	bl lbvector_normalize
+/* 8021B184 00217D64  4B DF 21 69 */	bl lbvector_Normalize
 /* 8021B188 00217D68  38 81 00 14 */	addi r4, r1, 0x14
 /* 8021B18C 00217D6C  38 7D 00 00 */	addi r3, r29, 0
 /* 8021B190 00217D70  38 A4 00 00 */	addi r5, r4, 0
 /* 8021B194 00217D74  4B DF 00 39 */	bl func_8000B1CC
 /* 8021B198 00217D78  38 61 00 14 */	addi r3, r1, 0x14
 /* 8021B19C 00217D7C  38 81 00 38 */	addi r4, r1, 0x38
-/* 8021B1A0 00217D80  4B DF 23 25 */	bl lbvector_sub
+/* 8021B1A0 00217D80  4B DF 23 25 */	bl lbvector_Sub
 /* 8021B1A4 00217D84  38 61 00 14 */	addi r3, r1, 0x14
-/* 8021B1A8 00217D88  4B DF 21 45 */	bl lbvector_normalize
+/* 8021B1A8 00217D88  4B DF 21 45 */	bl lbvector_Normalize
 /* 8021B1AC 00217D8C  38 61 00 2C */	addi r3, r1, 0x2c
 /* 8021B1B0 00217D90  38 81 00 14 */	addi r4, r1, 0x14
 /* 8021B1B4 00217D94  38 A1 00 20 */	addi r5, r1, 0x20
-/* 8021B1B8 00217D98  4B DF 2E 3D */	bl func_8000DFF4
+/* 8021B1B8 00217D98  4B DF 2E 3D */	bl lbvector_EulerAnglesFromPartialONB
 /* 8021B1BC 00217D9C  80 7F 00 E0 */	lwz r3, 0xe0(r31)
 /* 8021B1C0 00217DA0  38 00 00 00 */	li r0, 0
 /* 8021B1C4 00217DA4  80 81 00 38 */	lwz r4, 0x38(r1)
@@ -970,10 +970,10 @@ func_8021B2E8:
 /* 8021B2F8 00217ED8  93 C1 00 40 */	stw r30, 0x40(r1)
 /* 8021B2FC 00217EDC  7C 7E 1B 78 */	mr r30, r3
 /* 8021B300 00217EE0  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 8021B304 00217EE4  48 00 9E 91 */	bl func_80225194
+/* 8021B304 00217EE4  48 00 9E 91 */	bl Stage_80225194
 /* 8021B308 00217EE8  2C 03 00 B0 */	cmpwi r3, 0xb0
 /* 8021B30C 00217EEC  41 82 00 10 */	beq lbl_8021B31C
-/* 8021B310 00217EF0  48 00 9E 85 */	bl func_80225194
+/* 8021B310 00217EF0  48 00 9E 85 */	bl Stage_80225194
 /* 8021B314 00217EF4  2C 03 00 FB */	cmpwi r3, 0xfb
 /* 8021B318 00217EF8  40 82 00 F0 */	bne lbl_8021B408
 lbl_8021B31C:
@@ -2456,7 +2456,7 @@ lbl_8021C748:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8480
 lbl_803B8480:
     .4byte 0x3F800000
@@ -2472,11 +2472,10 @@ lbl_803B8498:
     .4byte 0x00000000
     .4byte 0x00000000
     .4byte 0x3F800000
-    .4byte 0x00000000
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E7EB0
 lbl_803E7EB0:
     .asciz "grlast.c"
@@ -2535,9 +2534,8 @@ lbl_803E7EBC:
     .4byte NULL
 .global lbl_803E7F84
 lbl_803E7F84:
-    .4byte 0x2F47724E
-    .4byte 0x4C612E64
-    .4byte 0x61740000
+    .asciz "/GrNLa.dat"
+    .balign 4
 .global lbl_803E7F90
 lbl_803E7F90:
     .4byte 0x00000025
@@ -2553,15 +2551,8 @@ lbl_803E7F90:
     .4byte 0x00000001
     .4byte lbl_804D4968
     .4byte 0x00000001
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E7FE8
 lbl_803E7FE8:
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
@@ -2616,18 +2607,10 @@ jtbl_803E8080:
 	.4byte lbl_8021B8BC
 	.4byte lbl_8021B8C4
 	.4byte lbl_8021B8E8
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6C76
-    .4byte 0x5F676F62
-    .4byte 0x6A5B695D
-    .4byte NULL
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E6C76
-    .4byte 0x5F676F62
-    .4byte 0x6A5B355D
-    .4byte NULL
+    .asciz "gp->u.map.lv_gobj[i]"
+    .balign 4
+    .asciz "gp->u.map.lv_gobj[5]"
+    .balign 4
 .global jtbl_803E80F8
 jtbl_803E80F8:
 	.4byte lbl_8021C3F8
@@ -2651,7 +2634,7 @@ jtbl_803E80F8:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4968
 lbl_804D4968:
     .4byte 0x00000003
@@ -2676,18 +2659,17 @@ lbl_804D4984:
 lbl_804D498C:
     .asciz "aobj"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AD0
 lbl_804D6AD0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBB70
 lbl_804DBB70:
 	.4byte 0x3F800000

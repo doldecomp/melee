@@ -1479,7 +1479,7 @@ _HSD_DispForgetMemory:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80406AE0
 lbl_80406AE0:
     .4byte NULL
@@ -1542,7 +1542,7 @@ lbl_80406B40:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5DD8
 lbl_804D5DD8:
     .4byte 0x00000000
@@ -1567,11 +1567,10 @@ lbl_804D5DF0:
 lbl_804D5DF4:
     .asciz "jobj.h"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7698
 lbl_804D7698:
 	.skip 0x4
@@ -1599,7 +1598,7 @@ lbl_804D76B4:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE578
 lbl_804DE578:
 	.4byte 0x00000000

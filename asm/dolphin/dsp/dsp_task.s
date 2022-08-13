@@ -104,7 +104,7 @@ lbl_803363B4:
 /* 803363BC 00332F9C  40 82 FF F8 */	bne lbl_803363B4
 /* 803363C0 00332FA0  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
 /* 803363C4 00332FA4  80 8D BB 7C */	lwz r4, __DSP_rude_task@sda21(r13)
-/* 803363C8 00332FA8  48 00 02 B9 */	bl func_80336680
+/* 803363C8 00332FA8  48 00 02 B9 */	bl __DSP_exec_task
 /* 803363CC 00332FAC  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
 /* 803363D0 00332FB0  38 80 00 02 */	li r4, 2
 /* 803363D4 00332FB4  38 00 00 00 */	li r0, 0
@@ -145,7 +145,7 @@ lbl_80336448:
 /* 80336450 00333030  40 82 FF F8 */	bne lbl_80336448
 /* 80336454 00333034  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
 /* 80336458 00333038  80 8D BB 88 */	lwz r4, __DSP_first_task@sda21(r13)
-/* 8033645C 0033303C  48 00 02 25 */	bl func_80336680
+/* 8033645C 0033303C  48 00 02 25 */	bl __DSP_exec_task
 /* 80336460 00333040  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
 /* 80336464 00333044  38 00 00 02 */	li r0, 2
 /* 80336468 00333048  90 03 00 00 */	stw r0, 0(r3)
@@ -162,7 +162,7 @@ lbl_80336484:
 /* 8033648C 0033306C  40 82 FF F8 */	bne lbl_80336484
 /* 80336490 00333070  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
 /* 80336494 00333074  80 83 00 38 */	lwz r4, 0x38(r3)
-/* 80336498 00333078  48 00 01 E9 */	bl func_80336680
+/* 80336498 00333078  48 00 01 E9 */	bl __DSP_exec_task
 /* 8033649C 0033307C  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
 /* 803364A0 00333080  38 00 00 02 */	li r0, 2
 /* 803364A4 00333084  90 03 00 00 */	stw r0, 0(r3)
@@ -190,9 +190,9 @@ lbl_803364E8:
 /* 803364F0 003330D0  40 82 FF F8 */	bne lbl_803364E8
 /* 803364F4 003330D4  38 60 00 00 */	li r3, 0
 /* 803364F8 003330D8  80 8D BB 7C */	lwz r4, __DSP_rude_task@sda21(r13)
-/* 803364FC 003330DC  48 00 01 85 */	bl func_80336680
+/* 803364FC 003330DC  48 00 01 85 */	bl __DSP_exec_task
 /* 80336500 003330E0  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
-/* 80336504 003330E4  48 00 05 49 */	bl func_80336A4C
+/* 80336504 003330E4  48 00 05 49 */	bl __DSP_remove_task
 /* 80336508 003330E8  80 6D BB 7C */	lwz r3, __DSP_rude_task@sda21(r13)
 /* 8033650C 003330EC  38 00 00 00 */	li r0, 0
 /* 80336510 003330F0  90 0D BB 78 */	stw r0, __DSP_rude_task_pending@sda21(r13)
@@ -224,7 +224,7 @@ lbl_8033655C:
 /* 8033656C 0033314C  38 00 00 03 */	li r0, 3
 /* 80336570 00333150  90 03 00 00 */	stw r0, 0(r3)
 /* 80336574 00333154  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
-/* 80336578 00333158  48 00 04 D5 */	bl func_80336A4C
+/* 80336578 00333158  48 00 04 D5 */	bl __DSP_remove_task
 /* 8033657C 0033315C  48 00 00 E0 */	b lbl_8033665C
 lbl_80336580:
 /* 80336580 00333160  81 85 00 30 */	lwz r12, 0x30(r5)
@@ -246,11 +246,11 @@ lbl_803365A4:
 /* 803365B8 00333198  38 60 00 00 */	li r3, 0
 /* 803365BC 0033319C  90 04 00 00 */	stw r0, 0(r4)
 /* 803365C0 003331A0  80 8D BB 88 */	lwz r4, __DSP_first_task@sda21(r13)
-/* 803365C4 003331A4  48 00 00 BD */	bl func_80336680
+/* 803365C4 003331A4  48 00 00 BD */	bl __DSP_exec_task
 /* 803365C8 003331A8  80 0D BB 88 */	lwz r0, __DSP_first_task@sda21(r13)
 /* 803365CC 003331AC  80 6D BB 84 */	lwz r3, __DSP_last_task@sda21(r13)
 /* 803365D0 003331B0  90 0D BB 8C */	stw r0, __DSP_curr_task@sda21(r13)
-/* 803365D4 003331B4  48 00 04 79 */	bl func_80336A4C
+/* 803365D4 003331B4  48 00 04 79 */	bl __DSP_remove_task
 /* 803365D8 003331B8  48 00 00 84 */	b lbl_8033665C
 lbl_803365DC:
 /* 803365DC 003331BC  81 85 00 30 */	lwz r12, 0x30(r5)
@@ -273,13 +273,13 @@ lbl_80336600:
 /* 80336618 003331F8  90 04 00 00 */	stw r0, 0(r4)
 /* 8033661C 003331FC  80 8D BB 8C */	lwz r4, __DSP_curr_task@sda21(r13)
 /* 80336620 00333200  80 84 00 38 */	lwz r4, 0x38(r4)
-/* 80336624 00333204  48 00 00 5D */	bl func_80336680
+/* 80336624 00333204  48 00 00 5D */	bl __DSP_exec_task
 /* 80336628 00333208  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
 /* 8033662C 0033320C  80 03 00 38 */	lwz r0, 0x38(r3)
 /* 80336630 00333210  90 0D BB 8C */	stw r0, __DSP_curr_task@sda21(r13)
 /* 80336634 00333214  80 6D BB 8C */	lwz r3, __DSP_curr_task@sda21(r13)
 /* 80336638 00333218  80 63 00 3C */	lwz r3, 0x3c(r3)
-/* 8033663C 0033321C  48 00 04 11 */	bl func_80336A4C
+/* 8033663C 0033321C  48 00 04 11 */	bl __DSP_remove_task
 /* 80336640 00333220  48 00 00 1C */	b lbl_8033665C
 lbl_80336644:
 /* 80336644 00333224  81 85 00 34 */	lwz r12, 0x34(r5)
@@ -299,8 +299,8 @@ lbl_8033665C:
 /* 80336678 00333258  7C 08 03 A6 */	mtlr r0
 /* 8033667C 0033325C  4E 80 00 20 */	blr 
 
-.global func_80336680
-func_80336680:
+.global __DSP_exec_task
+__DSP_exec_task:
 /* 80336680 00333260  7C 08 02 A6 */	mflr r0
 /* 80336684 00333264  90 01 00 04 */	stw r0, 4(r1)
 /* 80336688 00333268  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -427,8 +427,8 @@ lbl_80336808:
 /* 80336818 003333F8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033681C 003333FC  4E 80 00 20 */	blr 
 
-.global func_80336820
-func_80336820:
+.global __DSP_boot_task
+__DSP_boot_task:
 /* 80336820 00333400  7C 08 02 A6 */	mflr r0
 /* 80336824 00333404  3C 80 80 40 */	lis r4, lbl_80400C40@ha
 /* 80336828 00333408  90 01 00 04 */	stw r0, 4(r1)
@@ -540,8 +540,8 @@ lbl_80336928:
 /* 803369A4 00333584  38 21 00 18 */	addi r1, r1, 0x18
 /* 803369A8 00333588  4E 80 00 20 */	blr 
 
-.global func_803369AC
-func_803369AC:
+.global __DSP_insert_task
+__DSP_insert_task:
 /* 803369AC 0033358C  80 0D BB 88 */	lwz r0, __DSP_first_task@sda21(r13)
 /* 803369B0 00333590  28 00 00 00 */	cmplwi r0, 0
 /* 803369B4 00333594  40 82 00 20 */	bne lbl_803369D4
@@ -589,8 +589,8 @@ lbl_80336A24:
 /* 80336A44 00333624  90 6D BB 84 */	stw r3, __DSP_last_task@sda21(r13)
 /* 80336A48 00333628  4E 80 00 20 */	blr 
 
-.global func_80336A4C
-func_80336A4C:
+.global __DSP_remove_task
+__DSP_remove_task:
 /* 80336A4C 0033362C  38 80 00 00 */	li r4, 0
 /* 80336A50 00333630  90 83 00 08 */	stw r4, 8(r3)
 /* 80336A54 00333634  38 00 00 03 */	li r0, 3
@@ -634,7 +634,7 @@ lbl_80336ABC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400C40
 lbl_80400C40:
     .asciz "DSP is booting task: 0x%08X\n"
@@ -655,7 +655,7 @@ lbl_80400C40:
 
 
 .section .sbss
-
+    .balign 8
 .global __DSP_rude_task_pending
 __DSP_rude_task_pending:
 	.skip 0x4

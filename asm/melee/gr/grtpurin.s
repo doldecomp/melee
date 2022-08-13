@@ -321,7 +321,7 @@ lbl_80223578:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B84B8
 lbl_803B84B8:
     .4byte 0x00370039
@@ -331,7 +331,7 @@ lbl_803B84B8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E9338
 lbl_803E9338:
 	.4byte lbl_802232F4
@@ -356,9 +356,8 @@ lbl_803E9338:
     .4byte NULL
 .global lbl_803E9388
 lbl_803E9388:
-    .4byte 0x2F477254
-    .4byte 0x50722E64
-    .4byte 0x61740000
+    .asciz "/GrTPr.dat"
+    .balign 4
 .global lbl_803E9394
 lbl_803E9394:
     .4byte 0x0000003A
@@ -374,29 +373,20 @@ lbl_803E9394:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727470
-    .4byte 0x7572696E
-    .4byte 0x2E630000
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grtpurin.c"
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6B10
 lbl_804D6B10:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBCC8
 lbl_804DBCC8:
 	.4byte 0x43020000

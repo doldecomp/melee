@@ -1,6 +1,6 @@
-.section .data  # 0x803B9840 - 0x804316C0
-
 .include "macros.inc"
+
+.section .data  # 0x803B9840 - 0x804316C0
 
 .global lbl_8040601C
 lbl_8040601C:
@@ -39,4 +39,3 @@ jtbl_8040608C:
     .4byte HSD_ForeachAnim + 0xA4
     .4byte HSD_ForeachAnim + 0xC0
     .4byte HSD_ForeachAnim + 0xD8
-    .4byte NULL

@@ -155,7 +155,7 @@ lbl_80015AC0:
 /* 80015ACC 000126AC  38 7D 00 00 */	addi r3, r29, 0
 /* 80015AD0 000126B0  38 9A 00 00 */	addi r4, r26, 0
 /* 80015AD4 000126B4  3B 3F 00 10 */	addi r25, r31, 0x10
-/* 80015AD8 000126B8  48 35 F9 51 */	bl func_80375428
+/* 80015AD8 000126B8  48 35 F9 51 */	bl HSD_CreateMainHeap
 /* 80015ADC 000126BC  90 79 00 00 */	stw r3, 0(r25)
 /* 80015AE0 000126C0  7C 1D D0 50 */	subf r0, r29, r26
 /* 80015AE4 000126C4  3B 40 00 00 */	li r26, 0
@@ -253,12 +253,12 @@ func_80015BD0:
 /* 80015C2C 0001280C  7C 60 1B 78 */	mr r0, r3
 /* 80015C30 00012810  80 7F 00 00 */	lwz r3, 0(r31)
 /* 80015C34 00012814  7C 1D 03 78 */	mr r29, r0
-/* 80015C38 00012818  48 35 F7 D5 */	bl func_8037540C
+/* 80015C38 00012818  48 35 F7 D5 */	bl HSD_SetHeap
 /* 80015C3C 0001281C  7F 83 E3 78 */	mr r3, r28
 /* 80015C40 00012820  48 36 95 A5 */	bl HSD_MemAlloc
 /* 80015C44 00012824  3B E3 00 00 */	addi r31, r3, 0
 /* 80015C48 00012828  38 7D 00 00 */	addi r3, r29, 0
-/* 80015C4C 0001282C  48 35 F7 C1 */	bl func_8037540C
+/* 80015C4C 0001282C  48 35 F7 C1 */	bl HSD_SetHeap
 /* 80015C50 00012830  48 00 00 2C */	b lbl_80015C7C
 lbl_80015C54:
 /* 80015C54 00012834  80 7F 00 04 */	lwz r3, 4(r31)
@@ -319,11 +319,11 @@ lbl_80015D08:
 /* 80015D18 000128F8  7C 60 1B 78 */	mr r0, r3
 /* 80015D1C 000128FC  80 7F 00 00 */	lwz r3, 0(r31)
 /* 80015D20 00012900  7C 1F 03 78 */	mr r31, r0
-/* 80015D24 00012904  48 35 F6 E9 */	bl func_8037540C
+/* 80015D24 00012904  48 35 F6 E9 */	bl HSD_SetHeap
 /* 80015D28 00012908  7F A3 EB 78 */	mr r3, r29
 /* 80015D2C 0001290C  48 36 94 85 */	bl HSD_Free
 /* 80015D30 00012910  7F E3 FB 78 */	mr r3, r31
-/* 80015D34 00012914  48 35 F6 D9 */	bl func_8037540C
+/* 80015D34 00012914  48 35 F6 D9 */	bl HSD_SetHeap
 /* 80015D38 00012918  48 00 00 10 */	b lbl_80015D48
 lbl_80015D3C:
 /* 80015D3C 0001291C  80 7F 00 04 */	lwz r3, 4(r31)
@@ -482,7 +482,7 @@ func_80015F3C:
 /* 80015F5C 00012B3C  3B DF 00 04 */	addi r30, r31, 4
 /* 80015F60 00012B40  38 9E 00 00 */	addi r4, r30, 0
 /* 80015F64 00012B44  93 A1 00 0C */	stw r29, 0xc(r1)
-/* 80015F68 00012B48  48 35 F4 AD */	bl func_80375414
+/* 80015F68 00012B48  48 35 F4 AD */	bl HSD_GetNextArena
 /* 80015F6C 00012B4C  3B BF 00 08 */	addi r29, r31, 8
 /* 80015F70 00012B50  38 7D 00 00 */	addi r3, r29, 0
 /* 80015F74 00012B54  38 9F 00 0C */	addi r4, r31, 0xc
@@ -622,7 +622,7 @@ lbl_80016134:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BA380
 lbl_803BA380:
     .4byte 0x00000002
@@ -705,18 +705,17 @@ lbl_803BA43C:
     .balign 4
     .asciz "   ARAM Total : %5d KB( %8d)\n"
     .balign 4
-    .4byte NULL
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80431FA0
 lbl_80431FA0:
 	.skip 0xB8
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D37A0
 lbl_804D37A0:
     .asciz "%s :"

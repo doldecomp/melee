@@ -363,7 +363,7 @@ lbl_80017998:
 /* 80017998 00014578  80 7C 00 04 */	lwz r3, 4(r28)
 /* 8001799C 0001457C  2C 03 01 48 */	cmpwi r3, 0x148
 /* 800179A0 00014580  41 82 00 08 */	beq lbl_800179A8
-/* 800179A4 00014584  48 20 D8 11 */	bl func_802251B4
+/* 800179A4 00014584  48 20 D8 11 */	bl Stage_802251B4
 lbl_800179A8:
 /* 800179A8 00014588  3B 60 00 00 */	li r27, 0
 /* 800179AC 0001458C  3B DC 00 00 */	addi r30, r28, 0
@@ -956,7 +956,7 @@ func_8001819C:
 /* 800181B4 00014D94  7C 7E 1B 78 */	mr r30, r3
 /* 800181B8 00014D98  48 31 F7 B5 */	bl DVDConvertPathToEntrynum
 /* 800181BC 00014D9C  4B FF FD 01 */	bl func_80017EBC
-/* 800181C0 00014DA0  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 800181C0 00014DA0  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 800181C4 00014DA4  3B E3 00 00 */	addi r31, r3, 0
 /* 800181C8 00014DA8  2C 00 00 00 */	cmpwi r0, 0
 /* 800181CC 00014DAC  41 82 00 44 */	beq lbl_80018210
@@ -2140,7 +2140,7 @@ lbl_80019100:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B72C0
 lbl_803B72C0:
     .4byte 0x02000000
@@ -2162,7 +2162,7 @@ lbl_803B72C0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BA638
 lbl_803BA638:
     .4byte NULL
@@ -2222,235 +2222,16 @@ lbl_803BA6E8:
     .asciz "[LbDvd] %s is not PRELOADed.\n"
     .balign 4
 
-.global lbl_803BA708
-lbl_803BA708:
-    .4byte 0x83668342
-    .4byte 0x8358834E
-    .4byte 0x834A836F
-    .4byte 0x815B82F0
-    .4byte 0x95C282DF
-    .4byte 0x82C482AD
-    .4byte 0x82BE82B3
-    .4byte 0x82A28142
-    .4byte NULL
-
-.global lbl_803BA72C
-lbl_803BA72C:
-    .4byte 0x8358837D
-    .4byte 0x83628356
-    .4byte 0x83858375
-    .4byte 0x83898355
-    .4byte 0x815B8359
-    .4byte 0x82638277
-    .4byte 0x82CC8366
-    .4byte 0x83428358
-    .4byte 0x834E82F0
-    .4byte 0x835A8362
-    .4byte 0x836782B5
-    .4byte 0x82C482AD
-    .4byte 0x82BE82B3
-    .4byte 0x82A28142
-    .4byte NULL
-
-.global lbl_803BA768
-lbl_803BA768:
-    .4byte 0x82B182CC
-    .4byte 0x83668342
-    .4byte 0x8358834E
-    .4byte 0x82CD0000
-
-.global lbl_803BA778
-lbl_803BA778:
-    .4byte 0x8358837D
-    .4byte 0x83628356
-    .4byte 0x83858375
-    .4byte 0x83898355
-    .4byte 0x815B8359
-    .4byte 0x82638277
-    .4byte 0x82CC8366
-    .4byte 0x83428358
-    .4byte 0x834E82C5
-    .4byte 0x82CD82A0
-    .4byte 0x82E882DC
-    .4byte 0x82B982F1
-    .4byte 0x81420000
-
-.global lbl_803BA7AC
-lbl_803BA7AC:
-    .4byte 0x83668342
-    .4byte 0x8358834E
-    .4byte 0x82F093C7
-    .4byte 0x82DF82DC
-    .4byte 0x82B982F1
-    .4byte 0x82C582B5
-    .4byte 0x82BD8142
-    .4byte NULL
-
-.global lbl_803BA7CC
-lbl_803BA7CC:
-    .4byte 0x8FDA82B5
-    .4byte 0x82AD82CD
-    .4byte 0x967B91CC
-    .4byte 0x82CC8EE6
-    .4byte 0x88B590E0
-    .4byte 0x96BE8F91
-    .4byte 0x82F082A8
-    .4byte 0x93C782DD
-    .4byte 0x82AD82BE
-    .4byte 0x82B382A2
-    .4byte 0x81420000
-
-.global lbl_803BA7F8
-lbl_803BA7F8:
-    .4byte 0x83478389
-    .4byte 0x815B82AA
-    .4byte 0x94AD90B6
-    .4byte 0x82B582DC
-    .4byte 0x82B582BD
-    .4byte 0x81420000
-
-.global lbl_803BA810
-lbl_803BA810:
-    .4byte 0x967B91CC
-    .4byte 0x82CC8370
-    .4byte 0x838F815B
-    .4byte 0x837B835E
-    .4byte 0x839382F0
-    .4byte 0x899F82B5
-    .4byte 0x82C49364
-    .4byte 0x8CB982F0
-    .4byte 0x826E8265
-    .4byte 0x826582C9
-    .4byte 0x82B58141
-    .4byte NULL
-
-.global lbl_803BA840
-lbl_803BA840:
-    .4byte 0x967B91CC
-    .4byte 0x82CC8EE6
-    .4byte 0x88B590E0
-    .4byte 0x96BE8F91
-    .4byte 0x82CC8E77
-    .4byte 0x8EA682C9
-    .4byte 0x82B582BD
-    .4byte 0x82AA82C1
-    .4byte 0x82C482AD
-    .4byte 0x82BE82B3
-    .4byte 0x82A28142
-    .4byte NULL
-
-.global lbl_803BA870
-lbl_803BA870:
-    .4byte 0x83668342
-    .4byte 0x8358834E
-    .4byte 0x82F093C7
-    .4byte 0x82DD8D9E
-    .4byte 0x82F182C5
-    .4byte 0x82A282DC
-    .4byte 0x82B78142
-    .4byte NULL
-    .4byte lbl_804D3800
-    .4byte lbl_803BA708
-    .4byte lbl_804D3800
-    .4byte lbl_804D3800
-    .4byte lbl_803BA72C
-    .4byte lbl_804D3800
-    .4byte lbl_803BA768
-    .4byte lbl_803BA778
-    .4byte lbl_803BA72C
-    .4byte lbl_803BA7AC
-    .4byte lbl_803BA7CC
-    .4byte lbl_804D3800
-    .4byte lbl_803BA7F8
-    .4byte lbl_803BA810
-    .4byte lbl_803BA840
-    .4byte lbl_804D3800
-    .4byte lbl_803BA870
-    .4byte lbl_804D3800
-
-.global lbl_803BA8D8
-lbl_803BA8D8:
-    .asciz "Close the Disc Cover."
-    .balign 4
-
-.global lbl_803BA8F0
-lbl_803BA8F0:
-    .asciz "Insert the Super Smash Bros. Melee Game Disc."
-    .balign 4
-
-.global lbl_803BA920
-lbl_803BA920:
-    .asciz "The inserted Game Disc is not"
-    .balign 4
-
-.global lbl_803BA940
-lbl_803BA940:
-    .asciz "Super Smash Bros. Melee."
-    .balign 4
-
-.global lbl_803BA95C
-lbl_803BA95C:
-    .asciz "The Game Disc could not be read."
-    .balign 4
-
-.global lbl_803BA980
-lbl_803BA980:
-    .asciz "Read the NINTENDO GAMECUBE Instruction Booklet"
-    .balign 4
-
-.global lbl_803BA9B0
-lbl_803BA9B0:
-    .asciz "for more information."
-    .balign 4
-
-.global lbl_803BA9C8
-lbl_803BA9C8:
-    .asciz "An error has occurred. Turn the power OFF and"
-    .balign 4
-
-.global lbl_803BA9F8
-lbl_803BA9F8:
-    .asciz "check the NINTENDO GAMECUBE Instruction Booklet"
-    .balign 4
-
-.global lbl_803BAA28
-lbl_803BAA28:
-    .asciz "for further instructions."
-    .balign 4
-
-.global lbl_803BAA44
-lbl_803BAA44:
-    .asciz "Reading the Game Disc..."
-    .balign 4
-    .4byte lbl_804D3800
-    .4byte lbl_803BA8D8
-    .4byte lbl_804D3800
-    .4byte lbl_804D3800
-    .4byte lbl_803BA8F0
-    .4byte lbl_804D3800
-    .4byte lbl_803BA920
-    .4byte lbl_803BA940
-    .4byte lbl_803BA8F0
-    .4byte lbl_803BA95C
-    .4byte lbl_803BA980
-    .4byte lbl_803BA9B0
-    .4byte lbl_803BA9C8
-    .4byte lbl_803BA9F8
-    .4byte lbl_803BAA28
-    .4byte lbl_804D3800
-    .4byte lbl_803BAA44
-    .4byte lbl_804D3800
-
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80432078
 lbl_80432078:
 	.skip 0x978
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D37D0
 lbl_804D37D0:
     .asciz "lbdvd.c"
@@ -2475,7 +2256,4 @@ lbl_804D37EC:
 lbl_804D37F4:
     .4byte 0x00000004
     .4byte 0x00000005
-    .4byte 0x00000000
-.global lbl_804D3800
-lbl_804D3800:
     .4byte 0x00000000

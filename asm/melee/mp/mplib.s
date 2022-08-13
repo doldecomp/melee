@@ -10199,7 +10199,7 @@ lbl_80056078:
 /* 8005608C 00052C6C  48 33 21 95 */	bl __assert
 lbl_80056090:
 /* 80056090 00052C70  7F C3 F3 78 */	mr r3, r30
-/* 80056094 00052C74  4B FB 1C D5 */	bl HSD_JObjGetMtxPtr
+/* 80056094 00052C74  4B FB 1C D5 */	bl HSD_JObjUnkMtxPtr
 /* 80056098 00052C78  38 DE 00 44 */	addi r6, r30, 0x44
 /* 8005609C 00052C7C  C0 9E 00 44 */	lfs f4, 0x44(r30)
 /* 800560A0 00052C80  C0 1E 00 58 */	lfs f0, 0x58(r30)
@@ -10362,7 +10362,7 @@ lbl_800562D8:
 /* 800562F4 00052ED4  48 33 1F 2D */	bl __assert
 lbl_800562F8:
 /* 800562F8 00052ED8  7F C3 F3 78 */	mr r3, r30
-/* 800562FC 00052EDC  4B FB 1A 6D */	bl HSD_JObjGetMtxPtr
+/* 800562FC 00052EDC  4B FB 1A 6D */	bl HSD_JObjUnkMtxPtr
 /* 80056300 00052EE0  C0 22 86 70 */	lfs f1, lbl_804D8050@sda21(r2)
 /* 80056304 00052EE4  38 7E 00 44 */	addi r3, r30, 0x44
 /* 80056308 00052EE8  C0 1E 00 48 */	lfs f0, 0x48(r30)
@@ -10798,7 +10798,7 @@ lbl_80056868:
 /* 800568E8 000534C8  D0 1E 00 04 */	stfs f0, 4(r30)
 /* 800568EC 000534CC  C0 02 86 70 */	lfs f0, lbl_804D8050@sda21(r2)
 /* 800568F0 000534D0  D0 1E 00 08 */	stfs f0, 8(r30)
-/* 800568F4 000534D4  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 800568F4 000534D4  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 800568F8 000534D8  2C 00 00 03 */	cmpwi r0, 3
 /* 800568FC 000534DC  41 80 00 D0 */	blt lbl_800569CC
 /* 80056900 000534E0  C0 3E 00 00 */	lfs f1, 0(r30)
@@ -13853,7 +13853,7 @@ lbl_80059388:
 /* 800593AC 00055F8C  4B FF F7 B1 */	bl func_80058B5C
 lbl_800593B0:
 /* 800593B0 00055F90  7F 83 E3 78 */	mr r3, r28
-/* 800593B4 00055F94  48 21 1F 4D */	bl func_8026B300
+/* 800593B4 00055F94  48 21 1F 4D */	bl itGetKind
 /* 800593B8 00055F98  2C 03 00 3E */	cmpwi r3, 0x3e
 /* 800593BC 00055F9C  40 82 00 14 */	bne lbl_800593D0
 /* 800593C0 00055FA0  80 7C 00 2C */	lwz r3, 0x2c(r28)
@@ -14972,13 +14972,13 @@ func_8005A340:
 /* 8005A3B0 00056F90  38 61 00 7C */	addi r3, r1, 0x7c
 /* 8005A3B4 00056F94  38 80 00 00 */	li r4, 0
 /* 8005A3B8 00056F98  48 2E 70 DD */	bl func_80341494
-/* 8005A3BC 00056F9C  48 1C A7 95 */	bl get_blast_zone_left_offset
+/* 8005A3BC 00056F9C  48 1C A7 95 */	bl Stage_GetBlastZoneLeftOffset
 /* 8005A3C0 00056FA0  FF E0 08 90 */	fmr f31, f1
-/* 8005A3C4 00056FA4  48 1C A7 75 */	bl get_blast_zone_right_offset
+/* 8005A3C4 00056FA4  48 1C A7 75 */	bl Stage_GetBlastZoneRightOffset
 /* 8005A3C8 00056FA8  FF C0 08 90 */	fmr f30, f1
-/* 8005A3CC 00056FAC  48 1C A7 B5 */	bl get_blast_zone_bottom_offset
+/* 8005A3CC 00056FAC  48 1C A7 B5 */	bl Stage_GetBlastZoneBottomOffset
 /* 8005A3D0 00056FB0  FF A0 08 90 */	fmr f29, f1
-/* 8005A3D4 00056FB4  48 1C A7 95 */	bl get_blast_zone_top_offset
+/* 8005A3D4 00056FB4  48 1C A7 95 */	bl Stage_GetBlastZoneTopOffset
 /* 8005A3D8 00056FB8  80 82 87 64 */	lwz r4, lbl_804D8144@sda21(r2)
 /* 8005A3DC 00056FBC  FF 80 08 90 */	fmr f28, f1
 /* 8005A3E0 00056FC0  80 02 87 60 */	lwz r0, lbl_804D8140@sda21(r2)
@@ -15045,13 +15045,13 @@ func_8005A340:
 /* 8005A4D4 000570B4  D3 FF 80 00 */	stfs f31, -0x8000(r31)
 /* 8005A4D8 000570B8  D3 BF 80 00 */	stfs f29, -0x8000(r31)
 /* 8005A4DC 000570BC  D0 1F 80 00 */	stfs f0, -0x8000(r31)
-/* 8005A4E0 000570C0  48 1C A5 75 */	bl get_cam_bounds_left_offset
+/* 8005A4E0 000570C0  48 1C A5 75 */	bl Stage_GetCamBoundsLeftOffset
 /* 8005A4E4 000570C4  FF 80 08 90 */	fmr f28, f1
-/* 8005A4E8 000570C8  48 1C A5 81 */	bl get_cam_bounds_right_offset
+/* 8005A4E8 000570C8  48 1C A5 81 */	bl Stage_GetCamBoundsRightOffset
 /* 8005A4EC 000570CC  FF A0 08 90 */	fmr f29, f1
-/* 8005A4F0 000570D0  48 1C A5 A9 */	bl get_cam_bounds_bottom_offset
+/* 8005A4F0 000570D0  48 1C A5 A9 */	bl Stage_GetCamBoundsBottomOffset
 /* 8005A4F4 000570D4  FF C0 08 90 */	fmr f30, f1
-/* 8005A4F8 000570D8  48 1C A5 89 */	bl get_cam_bounds_top_offset
+/* 8005A4F8 000570D8  48 1C A5 89 */	bl Stage_GetCamBoundsTopOffset
 /* 8005A4FC 000570DC  80 82 87 6C */	lwz r4, lbl_804D814C@sda21(r2)
 /* 8005A500 000570E0  FF E0 08 90 */	fmr f31, f1
 /* 8005A504 000570E4  80 02 87 68 */	lwz r0, lbl_804D8148@sda21(r2)
@@ -15185,7 +15185,7 @@ lbl_8005A6C0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BD3D8
 lbl_803BD3D8:
     .4byte 0x3F800000
@@ -17648,7 +17648,7 @@ lbl_803BF760:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80458868
 lbl_80458868:
 	.skip 0x20
@@ -17659,7 +17659,7 @@ lbl_80458888:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3958
 lbl_804D3958:
     .asciz "mplib.c"
@@ -17688,11 +17688,10 @@ lbl_804D397C:
 lbl_804D3984:
     .4byte 0x00040005
     .4byte 0x00060007
-    .4byte 0x00000000
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D64B0
 lbl_804D64B0:
 	.skip 0x4
@@ -17738,7 +17737,7 @@ lbl_804D64E4:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8018
 lbl_804D8018:
 	.4byte 0x7F7FFFFF

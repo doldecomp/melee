@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "sysdolphin/baselib/archive.h"
+#include <sysdolphin/baselib/archive.h>
 
 inline void Locate(HSD_Archive* archive)
 {
@@ -57,8 +57,6 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
     return 0;
 }
 
-#pragma push
-#pragma peephole on
 void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols) {
     int i;
     
@@ -102,4 +100,3 @@ void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
         offset = next;
     }
 }
-#pragma pop

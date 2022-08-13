@@ -622,7 +622,7 @@ func_802F7AF8:
 /* 802F7B08 002F46E8  BF 61 00 14 */	stmw r27, 0x14(r1)
 /* 802F7B0C 002F46EC  3B 63 00 00 */	addi r27, r3, 0
 /* 802F7B10 002F46F0  3B C4 13 40 */	addi r30, r4, lbl_804A1340@l
-/* 802F7B14 002F46F4  4B D3 E9 15 */	bl func_80036428
+/* 802F7B14 002F46F4  4B D3 E9 15 */	bl Player_80036428
 /* 802F7B18 002F46F8  57 7D 1D 78 */	rlwinm r29, r27, 3, 0x15, 0x1c
 /* 802F7B1C 002F46FC  7F 9E EA 14 */	add r28, r30, r29
 /* 802F7B20 002F4700  3B E3 00 00 */	addi r31, r3, 0
@@ -901,7 +901,7 @@ lbl_802F7EC4:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F9780
 lbl_803F9780:
     .asciz "ScInfStc_scene_models"
@@ -910,18 +910,17 @@ lbl_803F9780:
 lbl_803F9798:
     .asciz "translate"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A1340
 lbl_804A1340:
 	.skip 0x38
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D57C8
 lbl_804D57C8:
     .asciz "jobj.h"
@@ -933,7 +932,7 @@ lbl_804D57D0:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DDAB0
 lbl_804DDAB0:
 	.4byte 0x43300000

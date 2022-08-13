@@ -235,7 +235,7 @@ lbl_8022385C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E93F8
 lbl_803E93F8:
 	.4byte lbl_8022370C
@@ -260,9 +260,8 @@ lbl_803E93F8:
     .4byte NULL
 .global lbl_803E9448
 lbl_803E9448:
-    .4byte 0x2F477254
-    .4byte 0x53732E64
-    .4byte 0x61740000
+    .asciz "/GrTSs.dat"
+    .balign 4
 .global lbl_803E9454
 lbl_803E9454:
     .4byte 0x0000003B
@@ -278,15 +277,6 @@ lbl_803E9454:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727473
-    .4byte 0x616D7573
-    .4byte 0x2E630000
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grtsamus.c"

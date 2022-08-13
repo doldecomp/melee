@@ -444,7 +444,7 @@ func_802F390C:
 /* 802F399C 002F057C  38 83 36 B8 */	addi r4, r3, lbl_802F36B8@l
 /* 802F39A0 002F0580  38 7D 00 00 */	addi r3, r29, 0
 /* 802F39A4 002F0584  38 A0 00 08 */	li r5, 8
-/* 802F39A8 002F0588  48 09 CD B5 */	bl func_8039075C
+/* 802F39A8 002F0588  48 09 CD B5 */	bl GObj_SetupGXLinkMax
 /* 802F39AC 002F058C  38 00 0D 00 */	li r0, 0xd00
 /* 802F39B0 002F0590  90 1D 00 24 */	stw r0, 0x24(r29)
 /* 802F39B4 002F0594  3C 60 80 4A */	lis r3, lbl_804A0FD8@ha
@@ -532,23 +532,22 @@ lbl_802F3AC0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803F94D0
 lbl_803F94D0:
     .asciz "ScInfDmg_scene_data"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A0FD8
 lbl_804A0FD8:
 	.skip 0xA0
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5780
 lbl_804D5780:
     .asciz "IfAll"
@@ -556,7 +555,7 @@ lbl_804D5780:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6D58
 lbl_804D6D58:
 	.skip 0x4
@@ -566,7 +565,7 @@ lbl_804D6D5C:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DDA30
 lbl_804DDA30:
 	.4byte 0x3F266666

@@ -546,7 +546,7 @@ func_8024CD64:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803EF668
 lbl_803EF668:
     .4byte NULL
@@ -565,59 +565,30 @@ lbl_803EF680:
     .4byte 0x40400000
     .4byte 0x40800000
     .4byte 0x40A00000
-    .4byte 0x43616E27
-    .4byte 0x74206765
-    .4byte 0x74207573
-    .4byte 0x65725F64
-    .4byte 0x6174612E
-    .4byte 0x0A000000
-    .4byte 0x6D6E6879
-    .4byte 0x616B752E
-    .4byte 0x63000000
-    .4byte 0x75736572
-    .4byte 0x5F646174
-    .4byte 0x61000000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4B6D
-    .4byte 0x5F546F70
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4B6D
-    .4byte 0x5F546F70
-    .4byte 0x5F616E69
-    .4byte 0x6D6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4B6D
-    .4byte 0x5F546F70
-    .4byte 0x5F6D6174
-    .4byte 0x616E696D
-    .4byte 0x5F6A6F69
-    .4byte 0x6E740000
-    .4byte 0x4D656E4D
-    .4byte 0x61696E43
-    .4byte 0x6F6E4B6D
-    .4byte 0x5F546F70
-    .4byte 0x5F736861
-    .4byte 0x7065616E
-    .4byte 0x696D5F6A
-    .4byte 0x6F696E74
-    .4byte NULL
+    .asciz "Can't get user_data.\n"
+    .balign 4
+    .asciz "mnhyaku.c"
+    .balign 4
+    .asciz "user_data"
+    .balign 4
+    .asciz "MenMainConKm_Top_joint"
+    .balign 4
+    .asciz "MenMainConKm_Top_animjoint"
+    .balign 4
+    .asciz "MenMainConKm_Top_matanim_joint"
+    .balign 4
+    .asciz "MenMainConKm_Top_shapeanim_joint"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A08E8
 lbl_804A08E8:
 	.skip 0x10
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5020
 lbl_804D5020:
     .4byte 0xABACADAE
@@ -625,14 +596,14 @@ lbl_804D5020:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6C58
 lbl_804D6C58:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DC130
 lbl_804DC130:
 	.4byte 0xC1180000

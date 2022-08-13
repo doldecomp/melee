@@ -1627,7 +1627,7 @@ lbl_8034AB54:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402358
 lbl_80402358:
     .4byte 0xFFFFFFFF
@@ -1685,7 +1685,7 @@ lbl_8040236C:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global Packet
 Packet:
 	.skip 0x80
@@ -1707,7 +1707,7 @@ lbl_804A7F58:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D73C8
 lbl_804D73C8:
 	.skip 0x4

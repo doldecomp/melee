@@ -321,7 +321,7 @@ lbl_8021FC58:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E8548
 lbl_803E8548:
 	.4byte lbl_8021F9CC
@@ -379,7 +379,7 @@ lbl_803E85A4:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBCB0
 lbl_804DBCB0:
 	.4byte 0xC2F00000

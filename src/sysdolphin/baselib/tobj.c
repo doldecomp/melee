@@ -1,11 +1,18 @@
-#include "sysdolphin/baselib/tobj.h"
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/aobj.h>
 
-#include "sysdolphin/baselib/aobj.h"
+extern void TObjInfoInit(void);
+
+HSD_TObjInfo hsdTObj = { TObjInfoInit };
+
+extern HSD_TObj* tobj_head;
 
 extern char lbl_804055B8[];
-extern char lbl_804D5C90[7];// = "tobj.c\0";
 
-inline void HSD_TObjRemoveAnim(HSD_TObj* tobj)
+char lbl_804D5C90[7] = "tobj.c\0";
+char lbl_804D5C98[5] = "tobj\0";
+
+void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
     if (tobj == NULL){
         return;
@@ -26,7 +33,7 @@ void HSD_TObjRemoveAnimAll(HSD_TObj* tobj)
     }
 }
 
-static inline HSD_TexAnim* lookupTextureAnim(s32 id, HSD_TexAnim* texanim)
+static HSD_TexAnim* lookupTextureAnim(s32 id, HSD_TexAnim* texanim)
 {
     HSD_TexAnim* ta;
     for (ta = texanim; ta; ta = ta->next) {
@@ -81,22 +88,11 @@ void HSD_TObjAddAnimAll(HSD_TObj* tobj, HSD_TexAnim* texanim)
     }
 }
 
-inline void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
+void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags)
 {
     if (tobj != NULL) {
         if (flags & TOBJ_ANIM) {
             HSD_AObjReqAnim(tobj->aobj, startframe);
-        }
-    }
-}
-
-inline void HSD_TObjReqAnimAllByFlags_inline(HSD_TObj* tobj, f32 startframe, u32 flags)
-{
-    HSD_TObj* tp;
-
-    if (tobj != NULL) {
-        for (tp = tobj; tp != NULL; tp = tp->next) {
-            HSD_TObjReqAnimByFlags(tp, startframe, flags);
         }
     }
 }
@@ -119,11 +115,9 @@ void HSD_TObjReqAnim(HSD_TObj* tobj, f32 startframe)
 
 void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
 {
-    HSD_TObjReqAnimAllByFlags_inline(tobj, startframe, TOBJ_ANIM);
+    HSD_TObjReqAnimAllByFlags(tobj, startframe, TOBJ_ANIM);
 }
 
-// Non-matching due to jump table
-#ifdef NON_MATCHING
 static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
 {
     HSD_TObj* tobj = obj;
@@ -135,7 +129,7 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
     case HSD_A_T_TIMG: {
         int n;
         if (tobj->imagetbl == NULL){
-            __assert(lbl_804D5C90, 276, lbl_804055B8);
+            __assert(lbl_804D5C90, 276, "tobj->imagetbl");
         }
         n = (int)val->fv;
         if (tobj->imagetbl[n]) {
@@ -178,44 +172,187 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
         tobj->lod->LODBias = val->fv;
         break;
     case HSD_A_T_KONST_R:
-        tobj->tev->konst.r = (u8)(255.0 * val->fv);
+        tobj->tev->konst.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_G:
-        tobj->tev->konst.g = (u8)(255.0 * val->fv);
+        tobj->tev->konst.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_B:
-        tobj->tev->konst.b = (u8)(255.0 * val->fv);
+        tobj->tev->konst.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_A:
-        tobj->tev->konst.a = (u8)(255.0 * val->fv);
+        tobj->tev->konst.u8.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_R:
-        tobj->tev->tev0.r = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_G:
-        tobj->tev->tev0.g = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_B:
-        tobj->tev->tev0.b = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_A:
-        tobj->tev->tev0.a = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.u8.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_R:
-        tobj->tev->tev1.r = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_G:
-        tobj->tev->tev1.g = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_B:
-        tobj->tev->tev1.b = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_A:
-        tobj->tev->tev1.a = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.u8.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TS_BLEND:
         tobj->blending = val->fv;
         break;
     }
 }
-#endif
+
+void HSD_TObjAnim(HSD_TObj* tobj)
+{
+    if (tobj == NULL) {
+        return;
+    }
+    
+    HSD_AObjInterpretAnim(tobj->aobj, tobj, TObjUpdateFunc);
+}
+
+void HSD_TObjAnimAll(HSD_TObj* tobj)
+{
+    HSD_TObj* i;
+
+    if (tobj == NULL) {
+        return;
+    }
+    
+    for (i = tobj; i != NULL; i = i->next) {
+        HSD_TObjAnim(i);
+    }
+}
+
+/*static*/ int TObjLoad(HSD_TObj* tobj, HSD_TObjDesc* td)
+{
+    tobj->next = HSD_TObjLoadDesc(td->next);
+    tobj->id = td->id;
+    tobj->src = td->src;
+    tobj->mtxid = GX_IDENTITY;
+    tobj->rotate.x = td->rotate.x;
+    tobj->rotate.y = td->rotate.y;
+    tobj->rotate.z = td->rotate.z;
+    tobj->scale = td->scale;
+    tobj->translate = td->translate;
+    tobj->wrap_s = td->wrap_s;
+    tobj->wrap_t = td->wrap_t;
+    tobj->repeat_s = td->repeat_s;
+    tobj->repeat_t = td->repeat_t;
+    tobj->flags = td->blend_flags;
+    tobj->blending = td->blending;
+    tobj->magFilt = td->magFilt;
+    tobj->imagedesc = td->imagedesc;
+    tobj->tlut = HSD_TlutLoadDesc(td->tlutdesc);
+    tobj->lod = td->lod;
+    tobj->aobj = NULL;
+    tobj->flags |= TEX_MTX_DIRTY;
+    tobj->tlut_no = (u8)-1;
+    tobj->tev = HSD_TObjTevLoadDesc(td->tev);
+
+    return 0;
+}
+
+HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
+{
+    if (td != NULL) {
+        HSD_TObj* tobj;
+        HSD_ClassInfo* info;
+
+        if (!td->class_name || !(info = hsdSearchClassInfo(td->class_name))) {
+            tobj = allocShadowTObj();
+        } else {
+            tobj = hsdNew(info);
+            if (tobj == NULL) {
+                __assert(lbl_804D5C90, 468, lbl_804D5C98);
+            }
+        }
+        HSD_TOBJ_METHOD(tobj)->load(tobj, td);
+        return tobj;
+    } else {
+        return NULL;
+    }
+}
+
+HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc *tlutdesc)
+{
+    if (tlutdesc != NULL) {
+        HSD_Tlut* tlut = HSD_TlutAlloc();
+        memcpy(tlut, tlutdesc, sizeof(HSD_Tlut));
+        return tlut;
+    }
+    return NULL;
+}
+
+HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc)
+{
+    if (tevdesc != NULL) {
+        HSD_TObjTev* new = HSD_TObjTevAlloc();
+        memcpy(new, tevdesc, sizeof(HSD_TObjTev));
+        return new;
+    }
+    return NULL;
+}
+
+HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping)
+{
+    HSD_TObj* tp;
+
+    if (from == NULL) {
+        tp = tobj_head;
+    }
+    else {
+        tp = from->next;
+    }
+
+    for (; tp != NULL; tp = tp->next) {
+        if (tobj_coord(tp) == mapping)
+            goto END;
+    }
+
+    tp = NULL;
+END:
+    return tp;
+}
+
+char lbl_8040562C[23] = "unexpected texmap id.\n\0";
+
+#pragma push
+#pragma force_active on
+static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
+{
+	switch(id)
+	{
+	case GX_TEXMAP0:
+		return GX_PTTEXMTX0;
+	case GX_TEXMAP1:
+		return GX_PTTEXMTX1;
+	case GX_TEXMAP2:
+		return GX_PTTEXMTX2;
+	case GX_TEXMAP3:
+		return GX_PTTEXMTX3;
+	case GX_TEXMAP4:
+		return GX_PTTEXMTX4;
+	case GX_TEXMAP5:
+		return GX_PTTEXMTX5;
+	case GX_TEXMAP6:
+		return GX_PTTEXMTX6;
+	case GX_TEXMAP7:
+		return GX_PTTEXMTX7;
+	default:
+		HSD_Panic(lbl_804D5C90, 574, lbl_8040562C);
+	}
+	return 0;
+}
+#pragma pop

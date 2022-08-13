@@ -278,7 +278,7 @@ lbl_80224A4C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E9880
 lbl_803E9880:
 	.4byte lbl_8022486C
@@ -303,9 +303,8 @@ lbl_803E9880:
     .4byte NULL
 .global lbl_803E98D0
 lbl_803E98D0:
-    .4byte 0x2F477254
-    .4byte 0x476E2E64
-    .4byte 0x61740000
+    .asciz "/GrTGn.dat"
+    .balign 4
 .global lbl_803E98DC
 lbl_803E98DC:
     .4byte 0x00000041
@@ -321,22 +320,13 @@ lbl_803E98DC:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727467
-    .4byte 0x616E6F6E
-    .4byte 0x2E630000
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grtganon.c"
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6B18
 lbl_804D6B18:
-	.skip 0x8
+	.skip 0x4

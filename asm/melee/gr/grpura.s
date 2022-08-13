@@ -32,26 +32,26 @@ lbl_80211D00:
 /* 80211D58 0020E938  4B FB 1C 69 */	bl func_801C39C0
 /* 80211D5C 0020E93C  4B FB 1E 59 */	bl func_801C3BB4
 /* 80211D60 0020E940  38 61 00 08 */	addi r3, r1, 8
-/* 80211D64 0020E944  48 01 2E 95 */	bl unk_set_vec3_to_cam_offset_80224BF8
-/* 80211D68 0020E948  48 01 2D 19 */	bl get_cam_bounds_top_offset
+/* 80211D64 0020E944  48 01 2E 95 */	bl Stage_UnkSetVec3TCam_Offset
+/* 80211D68 0020E948  48 01 2D 19 */	bl Stage_GetCamBoundsTopOffset
 /* 80211D6C 0020E94C  C0 41 00 0C */	lfs f2, 0xc(r1)
 /* 80211D70 0020E950  C0 02 C0 78 */	lfs f0, lbl_804DBA58@sda21(r2)
 /* 80211D74 0020E954  EC 21 10 28 */	fsubs f1, f1, f2
 /* 80211D78 0020E958  EC 20 00 72 */	fmuls f1, f0, f1
 /* 80211D7C 0020E95C  4B FB 1B 05 */	bl func_801C3880
-/* 80211D80 0020E960  48 01 2D 19 */	bl get_cam_bounds_bottom_offset
+/* 80211D80 0020E960  48 01 2D 19 */	bl Stage_GetCamBoundsBottomOffset
 /* 80211D84 0020E964  C0 41 00 0C */	lfs f2, 0xc(r1)
 /* 80211D88 0020E968  C0 02 C0 78 */	lfs f0, lbl_804DBA58@sda21(r2)
 /* 80211D8C 0020E96C  EC 21 10 28 */	fsubs f1, f1, f2
 /* 80211D90 0020E970  EC 20 00 72 */	fmuls f1, f0, f1
 /* 80211D94 0020E974  4B FB 1A FD */	bl func_801C3890
-/* 80211D98 0020E978  48 01 2C BD */	bl get_cam_bounds_left_offset
+/* 80211D98 0020E978  48 01 2C BD */	bl Stage_GetCamBoundsLeftOffset
 /* 80211D9C 0020E97C  C0 41 00 08 */	lfs f2, 8(r1)
 /* 80211DA0 0020E980  C0 02 C0 78 */	lfs f0, lbl_804DBA58@sda21(r2)
 /* 80211DA4 0020E984  EC 21 10 28 */	fsubs f1, f1, f2
 /* 80211DA8 0020E988  EC 20 00 72 */	fmuls f1, f0, f1
 /* 80211DAC 0020E98C  4B FB 1A F5 */	bl func_801C38A0
-/* 80211DB0 0020E990  48 01 2C B9 */	bl get_cam_bounds_right_offset
+/* 80211DB0 0020E990  48 01 2C B9 */	bl Stage_GetCamBoundsRightOffset
 /* 80211DB4 0020E994  C0 41 00 08 */	lfs f2, 8(r1)
 /* 80211DB8 0020E998  C0 02 C0 78 */	lfs f0, lbl_804DBA58@sda21(r2)
 /* 80211DBC 0020E99C  EC 21 10 28 */	fsubs f1, f1, f2
@@ -1508,7 +1508,7 @@ lbl_80213184:
 /* 8021318C 0020FD6C  80 7D 00 08 */	lwz r3, 8(r29)
 /* 80213190 0020FD70  28 03 00 00 */	cmplwi r3, 0
 /* 80213194 0020FD74  41 82 00 08 */	beq lbl_8021319C
-/* 80213198 0020FD78  48 15 06 F5 */	bl func_8036388C
+/* 80213198 0020FD78  48 15 06 F5 */	bl HSD_MObjCompileTev
 lbl_8021319C:
 /* 8021319C 0020FD7C  7F DF F3 78 */	mr r31, r30
 /* 802131A0 0020FD80  48 00 00 18 */	b lbl_802131B8
@@ -1516,7 +1516,7 @@ lbl_802131A4:
 /* 802131A4 0020FD84  28 1F 00 00 */	cmplwi r31, 0
 /* 802131A8 0020FD88  41 82 00 0C */	beq lbl_802131B4
 /* 802131AC 0020FD8C  80 7F 00 08 */	lwz r3, 8(r31)
-/* 802131B0 0020FD90  48 15 06 DD */	bl func_8036388C
+/* 802131B0 0020FD90  48 15 06 DD */	bl HSD_MObjCompileTev
 lbl_802131B4:
 /* 802131B4 0020FD94  83 FF 00 04 */	lwz r31, 4(r31)
 lbl_802131B8:
@@ -1525,7 +1525,7 @@ lbl_802131B8:
 /* 802131C0 0020FDA0  80 7E 00 08 */	lwz r3, 8(r30)
 /* 802131C4 0020FDA4  28 03 00 00 */	cmplwi r3, 0
 /* 802131C8 0020FDA8  41 82 00 08 */	beq lbl_802131D0
-/* 802131CC 0020FDAC  48 15 06 C1 */	bl func_8036388C
+/* 802131CC 0020FDAC  48 15 06 C1 */	bl HSD_MObjCompileTev
 lbl_802131D0:
 /* 802131D0 0020FDB0  7F 9F E3 78 */	mr r31, r28
 /* 802131D4 0020FDB4  48 00 00 18 */	b lbl_802131EC
@@ -1533,7 +1533,7 @@ lbl_802131D8:
 /* 802131D8 0020FDB8  28 1F 00 00 */	cmplwi r31, 0
 /* 802131DC 0020FDBC  41 82 00 0C */	beq lbl_802131E8
 /* 802131E0 0020FDC0  80 7F 00 08 */	lwz r3, 8(r31)
-/* 802131E4 0020FDC4  48 15 06 A9 */	bl func_8036388C
+/* 802131E4 0020FDC4  48 15 06 A9 */	bl HSD_MObjCompileTev
 lbl_802131E8:
 /* 802131E8 0020FDC8  83 FF 00 04 */	lwz r31, 4(r31)
 lbl_802131EC:
@@ -1542,7 +1542,7 @@ lbl_802131EC:
 /* 802131F4 0020FDD4  80 7C 00 08 */	lwz r3, 8(r28)
 /* 802131F8 0020FDD8  28 03 00 00 */	cmplwi r3, 0
 /* 802131FC 0020FDDC  41 82 00 08 */	beq lbl_80213204
-/* 80213200 0020FDE0  48 15 06 8D */	bl func_8036388C
+/* 80213200 0020FDE0  48 15 06 8D */	bl HSD_MObjCompileTev
 lbl_80213204:
 /* 80213204 0020FDE4  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 80213208 0020FDE8  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1561,7 +1561,7 @@ func_80213224:
 /* 80213230 0020FE10  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80213234 0020FE14  41 82 00 0C */	beq lbl_80213240
 /* 80213238 0020FE18  80 63 00 08 */	lwz r3, 8(r3)
-/* 8021323C 0020FE1C  48 15 06 51 */	bl func_8036388C
+/* 8021323C 0020FE1C  48 15 06 51 */	bl HSD_MObjCompileTev
 lbl_80213240:
 /* 80213240 0020FE20  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80213244 0020FE24  38 21 00 08 */	addi r1, r1, 8
@@ -1620,7 +1620,7 @@ lbl_802132E8:
 /* 802132F0 0020FED0  80 7D 00 08 */	lwz r3, 8(r29)
 /* 802132F4 0020FED4  28 03 00 00 */	cmplwi r3, 0
 /* 802132F8 0020FED8  41 82 00 08 */	beq lbl_80213300
-/* 802132FC 0020FEDC  48 15 05 91 */	bl func_8036388C
+/* 802132FC 0020FEDC  48 15 05 91 */	bl HSD_MObjCompileTev
 lbl_80213300:
 /* 80213300 0020FEE0  83 BF 00 08 */	lwz r29, 8(r31)
 /* 80213304 0020FEE4  28 1D 00 00 */	cmplwi r29, 0
@@ -1665,7 +1665,7 @@ lbl_8021337C:
 /* 80213384 0020FF64  80 7D 00 08 */	lwz r3, 8(r29)
 /* 80213388 0020FF68  28 03 00 00 */	cmplwi r3, 0
 /* 8021338C 0020FF6C  41 82 00 08 */	beq lbl_80213394
-/* 80213390 0020FF70  48 15 04 FD */	bl func_8036388C
+/* 80213390 0020FF70  48 15 04 FD */	bl HSD_MObjCompileTev
 lbl_80213394:
 /* 80213394 0020FF74  80 1F 00 14 */	lwz r0, 0x14(r31)
 /* 80213398 0020FF78  70 00 40 20 */	andi. r0, r0, 0x4020
@@ -1700,7 +1700,7 @@ lbl_802133F0:
 /* 802133F8 0020FFD8  80 7F 00 08 */	lwz r3, 8(r31)
 /* 802133FC 0020FFDC  28 03 00 00 */	cmplwi r3, 0
 /* 80213400 0020FFE0  41 82 00 08 */	beq lbl_80213408
-/* 80213404 0020FFE4  48 15 04 89 */	bl func_8036388C
+/* 80213404 0020FFE4  48 15 04 89 */	bl HSD_MObjCompileTev
 lbl_80213408:
 /* 80213408 0020FFE8  7F BF EB 78 */	mr r31, r29
 /* 8021340C 0020FFEC  48 00 00 18 */	b lbl_80213424
@@ -1708,7 +1708,7 @@ lbl_80213410:
 /* 80213410 0020FFF0  28 1F 00 00 */	cmplwi r31, 0
 /* 80213414 0020FFF4  41 82 00 0C */	beq lbl_80213420
 /* 80213418 0020FFF8  80 7F 00 08 */	lwz r3, 8(r31)
-/* 8021341C 0020FFFC  48 15 04 71 */	bl func_8036388C
+/* 8021341C 0020FFFC  48 15 04 71 */	bl HSD_MObjCompileTev
 lbl_80213420:
 /* 80213420 00210000  83 FF 00 04 */	lwz r31, 4(r31)
 lbl_80213424:
@@ -1717,7 +1717,7 @@ lbl_80213424:
 /* 8021342C 0021000C  80 7D 00 08 */	lwz r3, 8(r29)
 /* 80213430 00210010  28 03 00 00 */	cmplwi r3, 0
 /* 80213434 00210014  41 82 00 08 */	beq lbl_8021343C
-/* 80213438 00210018  48 15 04 55 */	bl func_8036388C
+/* 80213438 00210018  48 15 04 55 */	bl HSD_MObjCompileTev
 lbl_8021343C:
 /* 8021343C 0021001C  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 80213440 00210020  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1729,7 +1729,7 @@ lbl_8021343C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E6800
 lbl_803E6800:
 	.4byte lbl_80211EF0
@@ -1874,9 +1874,8 @@ lbl_803E6800:
     .4byte 0x80000000
 .global lbl_803E6A30
 lbl_803E6A30:
-    .4byte 0x2F477250
-    .4byte 0x752E6461
-    .4byte 0x74000000
+    .asciz "/GrPu.dat"
+    .balign 4
 .global lbl_803E6A3C
 lbl_803E6A3C:
     .4byte 0x00000011
@@ -1892,18 +1891,10 @@ lbl_803E6A3C:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727075
-    .4byte 0x72612E63
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grpura.c"
+    .balign 4
 .global lbl_803E6AA0
 lbl_803E6AA0:
     .4byte 0x000000FF
@@ -1991,12 +1982,8 @@ lbl_803E6AA0:
     .4byte 0xFFFFFFFF
     .4byte 0x3F800000
     .4byte 0xFFFFFFFF
-    .4byte 0x47726449
-    .4byte 0x7A756D69
-    .4byte 0x53746172
-    .4byte 0x5F546F70
-    .4byte 0x4E5F6A6F
-    .4byte 0x696E7400
+    .asciz "GrdIzumiStar_TopN_joint"
+    .balign 4
 .global lbl_803E6C0C
 lbl_803E6C0C:
     .4byte 0x00140002
@@ -2657,7 +2644,7 @@ lbl_803E7620:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D48E8
 lbl_804D48E8:
     .asciz "jobj.h"
@@ -2674,18 +2661,17 @@ lbl_804D48F8:
 lbl_804D4900:
     .asciz "gp"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AA0
 lbl_804D6AA0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBA58
 lbl_804DBA58:
 	.4byte 0x3F4CCCCD

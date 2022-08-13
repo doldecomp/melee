@@ -226,14 +226,14 @@ lbl_80073884:
 lbl_800738DC:
 /* 800738DC 000704BC  38 60 00 00 */	li r3, 0
 /* 800738E0 000704C0  38 80 00 01 */	li r4, 1
-/* 800738E4 000704C4  48 2E B5 85 */	bl func_8035EE68
+/* 800738E4 000704C4  48 2E B5 85 */	bl _HSD_TObjGetCurrentByType
 /* 800738E8 000704C8  28 03 00 00 */	cmplwi r3, 0
 /* 800738EC 000704CC  41 82 00 08 */	beq lbl_800738F4
 /* 800738F0 000704D0  63 9C 00 03 */	ori r28, r28, 3
 lbl_800738F4:
 /* 800738F4 000704D4  38 60 00 00 */	li r3, 0
 /* 800738F8 000704D8  38 80 00 02 */	li r4, 2
-/* 800738FC 000704DC  48 2E B5 6D */	bl func_8035EE68
+/* 800738FC 000704DC  48 2E B5 6D */	bl _HSD_TObjGetCurrentByType
 /* 80073900 000704E0  28 03 00 00 */	cmplwi r3, 0
 /* 80073904 000704E4  41 82 00 08 */	beq lbl_8007390C
 /* 80073908 000704E8  63 9C 00 05 */	ori r28, r28, 5
@@ -345,14 +345,14 @@ lbl_80073A58:
 lbl_80073A88:
 /* 80073A88 00070668  38 60 00 00 */	li r3, 0
 /* 80073A8C 0007066C  38 80 00 01 */	li r4, 1
-/* 80073A90 00070670  48 2E B3 D9 */	bl func_8035EE68
+/* 80073A90 00070670  48 2E B3 D9 */	bl _HSD_TObjGetCurrentByType
 /* 80073A94 00070674  28 03 00 00 */	cmplwi r3, 0
 /* 80073A98 00070678  41 82 00 08 */	beq lbl_80073AA0
 /* 80073A9C 0007067C  63 DE 00 03 */	ori r30, r30, 3
 lbl_80073AA0:
 /* 80073AA0 00070680  38 60 00 00 */	li r3, 0
 /* 80073AA4 00070684  38 80 00 02 */	li r4, 2
-/* 80073AA8 00070688  48 2E B3 C1 */	bl func_8035EE68
+/* 80073AA8 00070688  48 2E B3 C1 */	bl _HSD_TObjGetCurrentByType
 /* 80073AAC 0007068C  28 03 00 00 */	cmplwi r3, 0
 /* 80073AB0 00070690  41 82 00 08 */	beq lbl_80073AB8
 /* 80073AB4 00070694  63 DE 00 05 */	ori r30, r30, 5
@@ -521,14 +521,14 @@ func_80073CA8:
 lbl_80073D04:
 /* 80073D04 000708E4  38 60 00 00 */	li r3, 0
 /* 80073D08 000708E8  38 80 00 01 */	li r4, 1
-/* 80073D0C 000708EC  48 2E B1 5D */	bl func_8035EE68
+/* 80073D0C 000708EC  48 2E B1 5D */	bl _HSD_TObjGetCurrentByType
 /* 80073D10 000708F0  28 03 00 00 */	cmplwi r3, 0
 /* 80073D14 000708F4  41 82 00 08 */	beq lbl_80073D1C
 /* 80073D18 000708F8  62 31 00 03 */	ori r17, r17, 3
 lbl_80073D1C:
 /* 80073D1C 000708FC  38 60 00 00 */	li r3, 0
 /* 80073D20 00070900  38 80 00 02 */	li r4, 2
-/* 80073D24 00070904  48 2E B1 45 */	bl func_8035EE68
+/* 80073D24 00070904  48 2E B1 45 */	bl _HSD_TObjGetCurrentByType
 /* 80073D28 00070908  28 03 00 00 */	cmplwi r3, 0
 /* 80073D2C 0007090C  41 82 00 08 */	beq lbl_80073D34
 /* 80073D30 00070910  62 31 00 05 */	ori r17, r17, 5
@@ -729,7 +729,7 @@ lbl_80073FE8:
 /* 80073FE8 00070BC8  2C 1A 00 00 */	cmpwi r26, 0
 /* 80073FEC 00070BCC  41 82 00 28 */	beq lbl_80074014
 /* 80073FF0 00070BD0  7E A3 AB 78 */	mr r3, r21
-/* 80073FF4 00070BD4  48 2E CF 31 */	bl func_80360F24
+/* 80073FF4 00070BD4  48 2E CF 31 */	bl HSD_Index2TexMtx
 /* 80073FF8 00070BD8  38 83 00 00 */	addi r4, r3, 0
 /* 80073FFC 00070BDC  38 61 00 7C */	addi r3, r1, 0x7c
 /* 80074000 00070BE0  38 A0 00 00 */	li r5, 0
@@ -2150,7 +2150,7 @@ lbl_80075298:
 /* 800752A8 00071E88  48 00 00 48 */	b lbl_800752F0
 lbl_800752AC:
 /* 800752AC 00071E8C  3B DE 00 01 */	addi r30, r30, 1
-/* 800752B0 00071E90  48 2E BE C5 */	bl func_80361174
+/* 800752B0 00071E90  48 2E BE C5 */	bl HSD_TObjGetNext
 /* 800752B4 00071E94  4B FF FF E4 */	b lbl_80075298
 lbl_800752B8:
 /* 800752B8 00071E98  3B FF 00 04 */	addi r31, r31, 4
@@ -3142,7 +3142,7 @@ lbl_80075FFC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803C08F8
 lbl_803C08F8:
     .4byte func_80073700
@@ -3207,16 +3207,10 @@ lbl_803C0998:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x66696768
-    .4byte 0x7465725F
-    .4byte 0x636C6173
-    .4byte 0x735F6C69
-    .4byte 0x62726172
-    .4byte 0x79000000
-    .4byte 0x66745F69
-    .4byte 0x6E74705F
-    .4byte 0x6A6F626A
-    .4byte NULL
+    .asciz "fighter_class_library"
+    .balign 4
+    .asciz "ft_intp_jobj"
+    .balign 4
 .global lbl_803C0A08
 lbl_803C0A08:
     .asciz "ftparts.c"
@@ -3270,7 +3264,7 @@ lbl_803C0BD0:
 
 
 .section .bss
-
+    .balign 8
 .global lbl_80459028
 lbl_80459028:
 	.skip 0x2C
@@ -3292,7 +3286,7 @@ lbl_80459240:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3A30
 lbl_804D3A30:
     .asciz "jobj.h"
@@ -3321,11 +3315,10 @@ lbl_804D3A58:
 lbl_804D3A5C:
     .asciz "rotate"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D82C8
 lbl_804D82C8:
 	.4byte 0x3F800000

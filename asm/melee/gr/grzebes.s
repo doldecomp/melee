@@ -5131,7 +5131,7 @@ func_801DCCC8:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B7FF0
 lbl_803B7FF0:
     .4byte 0x00000000
@@ -5183,7 +5183,7 @@ lbl_803B8044:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E1A10
 lbl_803E1A10:
     .4byte 0x00010006
@@ -5258,9 +5258,8 @@ lbl_803E1A30:
     .4byte NULL
 .global lbl_803E1B20
 lbl_803E1B20:
-    .4byte 0x2F47725A
-    .4byte 0x652E6461
-    .4byte 0x74000000
+    .asciz "/GrZe.dat"
+    .balign 4
 .global lbl_803E1B2C
 lbl_803E1B2C:
     .4byte 0x00000008
@@ -5276,15 +5275,8 @@ lbl_803E1B2C:
     .4byte 0x00000001
     .4byte lbl_803E1A10
     .4byte 0x00000005
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E1B84
 lbl_803E1B84:
     .asciz "grzebes.c"
@@ -5377,9 +5369,8 @@ lbl_803E1C80:
     .4byte 0x42600000
     .4byte 0x40900000
     .4byte 0x40C00000
-    .4byte 0x73696D61
-    .4byte 0x5F6A6F62
-    .4byte 0x6A000000
+    .asciz "sima_jobj"
+    .balign 4
 .global lbl_803E1CEC
 lbl_803E1CEC:
     .asciz "map_a_gobj"
@@ -5400,11 +5391,10 @@ lbl_803E1CEC:
 lbl_803E1D28:
     .asciz "translate"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8049F140
 lbl_8049F140:
 	.skip 0x18
@@ -5417,7 +5407,7 @@ lbl_8049F170:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4630
 lbl_804D4630:
     .asciz "jobj.h"
@@ -5434,11 +5424,10 @@ lbl_804D4640:
 lbl_804D4648:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6990
 lbl_804D6990:
 	.skip 0x4
@@ -5447,11 +5436,11 @@ lbl_804D6994:
 	.skip 0x4
 .global lbl_804D6998
 lbl_804D6998:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB088
 lbl_804DB088:
 	.4byte 0x00000000

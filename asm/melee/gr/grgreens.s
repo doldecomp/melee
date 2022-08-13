@@ -2560,7 +2560,7 @@ lbl_80215754:
 /* 8021577C 0021235C  50 60 26 F6 */	rlwimi r0, r3, 4, 0x1b, 0x1b
 /* 80215780 00212360  98 18 00 01 */	stb r0, 1(r24)
 /* 80215784 00212364  40 82 00 0C */	bne lbl_80215790
-/* 80215788 00212368  48 00 F3 E1 */	bl get_blast_zone_top_offset
+/* 80215788 00212368  48 00 F3 E1 */	bl Stage_GetBlastZoneTopOffset
 /* 8021578C 0021236C  48 00 00 1C */	b lbl_802157A8
 lbl_80215790:
 /* 80215790 00212370  1C 7C 00 48 */	mulli r3, r28, 0x48
@@ -4185,7 +4185,7 @@ lbl_80216E6C:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E7638
 lbl_803E7638:
 	.4byte lbl_8021360C
@@ -4225,9 +4225,8 @@ lbl_803E7638:
     .4byte 0xC0000000
 .global lbl_803E76C4
 lbl_803E76C4:
-    .4byte 0x2F477247
-    .4byte 0x722E6461
-    .4byte 0x74000000
+    .asciz "/GrGr.dat"
+    .balign 4
 .global lbl_803E76D0
 lbl_803E76D0:
     .4byte 0x0000000D
@@ -4243,15 +4242,8 @@ lbl_803E76D0:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E7728
 lbl_803E7728:
     .asciz "grgreens.c"
@@ -4357,51 +4349,26 @@ lbl_803E7840:
     .4byte 0x00180019
     .4byte 0x001A001B
     .4byte 0x001C001D
-    .4byte 0x626C6F63
-    .4byte 0x6B2D3E73
-    .4byte 0x74617475
-    .4byte 0x733D3D47
-    .4byte 0x725F4772
-    .4byte 0x65656E73
-    .4byte 0x5F426C6F
-    .4byte 0x636B5F53
-    .4byte 0x74617475
-    .4byte 0x735F4E6F
-    .4byte 0x6E650000
-    .4byte 0x6E756D3C
-    .4byte 0x47725F47
-    .4byte 0x7265656E
-    .4byte 0x735F426C
-    .4byte 0x6F636B5F
-    .4byte 0x4D617800
-    .4byte 0x626C6F63
-    .4byte 0x6B5F676F
-    .4byte 0x626A0000
-    .4byte 0x69783C47
-    .4byte 0x725F4772
-    .4byte 0x65656E73
-    .4byte 0x5F426C6F
-    .4byte 0x636B5F43
-    .4byte 0x6F6C756D
-    .4byte 0x2A320000
-    .4byte 0x69783C47
-    .4byte 0x725F4772
-    .4byte 0x65656E73
-    .4byte 0x5F426C6F
-    .4byte 0x636B5F43
-    .4byte 0x6F6C756D
-    .4byte NULL
+    .asciz "block->status==Gr_Greens_Block_Status_None"
+    .balign 4
+    .asciz "num<Gr_Greens_Block_Max"
+    .balign 4
+    .asciz "block_gobj"
+    .balign 4
+    .asciz "ix<Gr_Greens_Block_Colum*2"
+    .balign 4
+    .asciz "ix<Gr_Greens_Block_Colum"
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_8049F9E0
 lbl_8049F9E0:
 	.skip 0x20
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4908
 lbl_804D4908:
     .asciz "jobj.h"
@@ -4414,11 +4381,10 @@ lbl_804D4910:
 lbl_804D4918:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AA8
 lbl_804D6AA8:
 	.skip 0x4
@@ -4431,7 +4397,7 @@ lbl_804D6AAD:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBA80
 lbl_804DBA80:
 	.4byte 0x3F800000

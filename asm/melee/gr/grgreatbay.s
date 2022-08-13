@@ -2493,7 +2493,7 @@ lbl_801F6448:
 /* 801F6450 001F3030  4B E1 4D 7D */	bl func_8000B1CC
 /* 801F6454 001F3034  C0 02 BB 58 */	lfs f0, lbl_804DB538@sda21(r2)
 /* 801F6458 001F3038  D0 01 00 68 */	stfs f0, 0x68(r1)
-/* 801F645C 001F303C  48 02 E7 25 */	bl get_blast_zone_bottom_offset
+/* 801F645C 001F303C  48 02 E7 25 */	bl Stage_GetBlastZoneBottomOffset
 /* 801F6460 001F3040  C0 01 00 64 */	lfs f0, 0x64(r1)
 /* 801F6464 001F3044  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801F6468 001F3048  4C 40 13 82 */	cror 2, 0, 2
@@ -2790,7 +2790,7 @@ lbl_801F6854:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B81C8
 lbl_803B81C8:
     .4byte 0x3F7D70A4
@@ -2820,7 +2820,97 @@ lbl_803B81D4:
 
 
 .section .data
-
+    .balign 8
+.global lbl_803E3E60
+lbl_803E3E60:
+    .4byte 0x00000002
+    .4byte 0x00310001
+    .4byte 0x00010002
+    .4byte 0x00020001
+    .4byte 0x00030004
+    .4byte 0x00010022
+    .4byte 0x00030001
+    .4byte 0x00260005
+    .4byte 0x000A0000
+.global lbl_803E3E84
+lbl_803E3E84:
+    .4byte lbl_801F4404
+    .4byte lbl_801F4430
+    .4byte lbl_801F4438
+    .4byte lbl_801F443C
+    .4byte NULL
+    .4byte lbl_801F4694
+    .4byte lbl_801F4994
+    .4byte lbl_801F499C
+    .4byte lbl_801F545C
+    .4byte NULL
+    .4byte lbl_801F454C
+    .4byte lbl_801F4650
+    .4byte lbl_801F4658
+    .4byte lbl_801F4690
+    .4byte 0xC0000000
+    .4byte lbl_801F4440
+    .4byte lbl_801F44A0
+    .4byte lbl_801F44A8
+    .4byte lbl_801F44AC
+    .4byte NULL
+    .4byte lbl_801F44B0
+    .4byte lbl_801F4510
+    .4byte lbl_801F4518
+    .4byte lbl_801F451C
+    .4byte NULL
+    .4byte lbl_801F598C
+    .4byte lbl_801F59F0
+    .4byte lbl_801F59F8
+    .4byte lbl_801F59FC
+    .4byte NULL
+    .4byte lbl_801F598C
+    .4byte lbl_801F59F0
+    .4byte lbl_801F59F8
+    .4byte lbl_801F59FC
+    .4byte NULL
+    .4byte lbl_801F598C
+    .4byte lbl_801F59F0
+    .4byte lbl_801F59F8
+    .4byte lbl_801F59FC
+    .4byte NULL
+    .4byte lbl_801F598C
+    .4byte lbl_801F59F0
+    .4byte lbl_801F59F8
+    .4byte lbl_801F59FC
+    .4byte NULL
+    .4byte lbl_801F5A00
+    .4byte lbl_801F5AF0
+    .4byte lbl_801F5AF8
+    .4byte lbl_801F5D48
+    .4byte NULL
+    .4byte lbl_801F5460
+    .4byte lbl_801F55F8
+    .4byte lbl_801F5600
+    .4byte lbl_801F5988
+    .4byte NULL
+.global lbl_803E3F60
+lbl_803E3F60:
+    .asciz "/GrGb.dat"
+    .balign 4
+.global lbl_803E3F6C
+lbl_803E3F6C:
+    .4byte 0x00000006
+    .4byte lbl_803E3E84
+    .4byte lbl_803E3F60
+    .4byte func_801F4240
+    .4byte func_801F423C
+    .4byte lbl_801F42D0
+    .4byte lbl_801F42D4
+    .4byte lbl_801F42F8
+    .4byte lbl_801F680C
+    .4byte lbl_801F6814
+    .4byte 0x00000001
+    .4byte lbl_803E3E60
+    .4byte 0x00000006
+lbl_803E3FA0:
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E3FC4
 lbl_803E3FC4:
     .asciz "grgreatbay.c"
@@ -2859,11 +2949,10 @@ lbl_803E4048:
     .4byte 0x001C0011
     .4byte 0x001B0013
     .4byte 0x00270015
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D46F8
 lbl_804D46F8:
     .asciz "jobj.h"
@@ -2876,18 +2965,17 @@ lbl_804D4700:
 lbl_804D4708:
     .asciz "0"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D69E0
 lbl_804D69E0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB538
 lbl_804DB538:
 	.4byte 0x00000000

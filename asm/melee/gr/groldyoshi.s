@@ -951,7 +951,7 @@ lbl_8020F454:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B83F0
 lbl_803B83F0:
     .4byte 0x00000001
@@ -963,7 +963,7 @@ lbl_803B83F0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E6488
 lbl_803E6488:
 	.4byte lbl_8020E93C
@@ -998,9 +998,8 @@ lbl_803E6488:
     .4byte NULL
 .global lbl_803E6500
 lbl_803E6500:
-    .4byte 0x2F47724F
-    .4byte 0x792E6461
-    .4byte 0x74000000
+    .asciz "/GrOy.dat"
+    .balign 4
 .global lbl_803E650C
 lbl_803E650C:
     .4byte 0x0000001D
@@ -1016,19 +1015,10 @@ lbl_803E650C:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67726F6C
-    .4byte 0x64796F73
-    .4byte 0x68692E63
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "groldyoshi.c"
+    .balign 4
 .global lbl_803E6574
 lbl_803E6574:
     .4byte 0x00000001
@@ -1037,7 +1027,7 @@ lbl_803E6574:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4878
 lbl_804D4878:
     .asciz "jobj.h"
@@ -1049,14 +1039,14 @@ lbl_804D4880:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A88
 lbl_804D6A88:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB9A8
 lbl_804DB9A8:
 	.4byte 0x00000000

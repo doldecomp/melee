@@ -1967,7 +1967,7 @@ lbl_8034E944:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402C90
 lbl_80402C90:
     .4byte PADOnReset
@@ -2011,7 +2011,7 @@ lbl_80402C90:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_804A89A0
 lbl_804A89A0:
 	.skip 0x10
@@ -2021,7 +2021,7 @@ lbl_804A89B0:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5C38
 lbl_804D5C38:
     .4byte 0x00000020
@@ -2049,11 +2049,10 @@ lbl_804D5C50:
 lbl_804D5C54:
     .asciz "Pad.c"
     .balign 4
-    .4byte NULL
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D73F0
 lbl_804D73F0:
 	.skip 0x4

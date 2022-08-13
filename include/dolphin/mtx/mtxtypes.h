@@ -1,7 +1,7 @@
 #ifndef _MTXTYPES_h_
 #define _MTXTYPES_h_
 
-#include "dolphin/types.h"
+#include <dolphin/types.h>
 
 typedef struct
 {
@@ -12,6 +12,16 @@ typedef struct
 {
     s16 x, y, z;
 } S16Vec, *S16VecPtr;
+
+typedef struct
+{
+    s8 x, y, z;
+} S8Vec, *S8VecPtr;
+
+typedef struct
+{
+    s32 x, y, z;
+} S32Vec, *S32VecPtr;
 
 typedef struct
 {

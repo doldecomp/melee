@@ -31,7 +31,7 @@ lbl_8021EF3C:
 /* 8021EF90 0021BB70  48 00 00 5D */	bl func_8021EFEC
 /* 8021EF94 0021BB74  4B FA 4A 2D */	bl func_801C39C0
 /* 8021EF98 0021BB78  4B FA 4C 1D */	bl func_801C3BB4
-/* 8021EF9C 0021BB7C  48 00 5B CD */	bl get_blast_zone_top_offset
+/* 8021EF9C 0021BB7C  48 00 5B CD */	bl Stage_GetBlastZoneTopOffset
 /* 8021EFA0 0021BB80  C0 02 C2 B8 */	lfs f0, lbl_804DBC98@sda21(r2)
 /* 8021EFA4 0021BB84  EC 20 00 72 */	fmuls f1, f0, f1
 /* 8021EFA8 0021BB88  4B FA 49 D9 */	bl func_801C3980
@@ -687,17 +687,16 @@ lbl_8021F838:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B84A8
 lbl_803B84A8:
     .4byte 0x00000000
     .4byte 0x42200000
     .4byte 0x00000000
-    .4byte 0x00000000
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E83B8
 lbl_803E83B8:
     .4byte 0x001D001E
@@ -768,9 +767,8 @@ lbl_803E8454:
     .4byte NULL
 .global lbl_803E84B8
 lbl_803E84B8:
-    .4byte 0x2F477248
-    .4byte 0x652E6461
-    .4byte 0x74000000
+    .asciz "/GrHe.dat"
+    .balign 4
 .global lbl_803E84C4
 lbl_803E84C4:
     .4byte 0x00000042
@@ -786,15 +784,8 @@ lbl_803E84C4:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E851C
 lbl_803E851C:
     .asciz "grheal.c"
@@ -804,7 +795,7 @@ lbl_803E851C:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D49D8
 lbl_804D49D8:
     .4byte 0x00070008
@@ -816,14 +807,14 @@ lbl_804D49E0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6AF0
 lbl_804D6AF0:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DBC98
 lbl_804DBC98:
 	.4byte 0x40000000

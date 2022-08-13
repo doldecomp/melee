@@ -1009,7 +1009,7 @@ lbl_8005B4A0:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B73E8
 lbl_803B73E8:
     .4byte 0x00000001
@@ -1055,23 +1055,22 @@ lbl_803B73E8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803BF790
 lbl_803BF790:
     .asciz "mpisland.c"
     .balign 4
-    .4byte NULL
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global lbl_80458E88
 lbl_80458E88:
 	.skip 0x28
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D3990
 lbl_804D3990:
     .asciz "mpisp"
@@ -1083,7 +1082,7 @@ lbl_804D3998:
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804D8158
 lbl_804D8158:
 	.4byte 0x00000000
@@ -1093,4 +1092,3 @@ lbl_804D815C:
 .global lbl_804D8160
 lbl_804D8160:
 	.4byte 0x7F7FFFFF
-	.4byte 0x00000000

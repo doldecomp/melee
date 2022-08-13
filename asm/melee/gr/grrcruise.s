@@ -701,7 +701,7 @@ func_801FFADC:
 /* 801FFB08 001FC6E8  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 801FFB0C 001FC6EC  40 82 05 40 */	bne lbl_8020004C
 /* 801FFB10 001FC6F0  38 61 00 4C */	addi r3, r1, 0x4c
-/* 801FFB14 001FC6F4  48 02 50 E5 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 801FFB14 001FC6F4  48 02 50 E5 */	bl Stage_UnkSetVec3TCam_Offset
 /* 801FFB18 001FC6F8  80 1D 00 EC */	lwz r0, 0xec(r29)
 /* 801FFB1C 001FC6FC  28 00 00 00 */	cmplwi r0, 0
 /* 801FFB20 001FC700  40 82 00 1C */	bne lbl_801FFB3C
@@ -717,7 +717,7 @@ lbl_801FFB3C:
 /* 801FFB44 001FC724  80 84 00 2C */	lwz r4, 0x2c(r4)
 /* 801FFB48 001FC728  83 C4 00 F0 */	lwz r30, 0xf0(r4)
 /* 801FFB4C 001FC72C  83 E4 00 F4 */	lwz r31, 0xf4(r4)
-/* 801FFB50 001FC730  48 02 50 A9 */	bl unk_set_vec3_to_cam_offset_80224BF8
+/* 801FFB50 001FC730  48 02 50 A9 */	bl Stage_UnkSetVec3TCam_Offset
 /* 801FFB54 001FC734  38 7F 00 00 */	addi r3, r31, 0
 /* 801FFB58 001FC738  38 A1 00 18 */	addi r5, r1, 0x18
 /* 801FFB5C 001FC73C  38 80 00 00 */	li r4, 0
@@ -729,7 +729,7 @@ lbl_801FFB3C:
 /* 801FFB74 001FC754  38 61 00 24 */	addi r3, r1, 0x24
 /* 801FFB78 001FC758  38 81 00 18 */	addi r4, r1, 0x18
 /* 801FFB7C 001FC75C  38 A1 00 30 */	addi r5, r1, 0x30
-/* 801FFB80 001FC760  4B E0 D9 79 */	bl lbvector_diff
+/* 801FFB80 001FC760  4B E0 D9 79 */	bl lbvector_Diff
 /* 801FFB84 001FC764  C0 21 00 20 */	lfs f1, 0x20(r1)
 /* 801FFB88 001FC768  38 61 00 64 */	addi r3, r1, 0x64
 /* 801FFB8C 001FC76C  C0 01 00 38 */	lfs f0, 0x38(r1)
@@ -745,7 +745,7 @@ lbl_801FFB3C:
 /* 801FFBB4 001FC794  D0 01 00 68 */	stfs f0, 0x68(r1)
 /* 801FFBB8 001FC798  C0 02 BC 64 */	lfs f0, lbl_804DB644@sda21(r2)
 /* 801FFBBC 001FC79C  D0 01 00 6C */	stfs f0, 0x6c(r1)
-/* 801FFBC0 001FC7A0  4B E0 D9 05 */	bl lbvector_sub
+/* 801FFBC0 001FC7A0  4B E0 D9 05 */	bl lbvector_Sub
 /* 801FFBC4 001FC7A4  C0 21 00 68 */	lfs f1, 0x68(r1)
 /* 801FFBC8 001FC7A8  38 7D 00 D4 */	addi r3, r29, 0xd4
 /* 801FFBCC 001FC7AC  C0 02 BC 78 */	lfs f0, lbl_804DB658@sda21(r2)
@@ -753,7 +753,7 @@ lbl_801FFB3C:
 /* 801FFBD4 001FC7B4  38 BD 00 E0 */	addi r5, r29, 0xe0
 /* 801FFBD8 001FC7B8  EC 01 00 2A */	fadds f0, f1, f0
 /* 801FFBDC 001FC7BC  D0 01 00 68 */	stfs f0, 0x68(r1)
-/* 801FFBE0 001FC7C0  4B E0 D9 19 */	bl lbvector_diff
+/* 801FFBE0 001FC7C0  4B E0 D9 19 */	bl lbvector_Diff
 /* 801FFBE4 001FC7C4  80 A1 00 64 */	lwz r5, 0x64(r1)
 /* 801FFBE8 001FC7C8  38 61 00 64 */	addi r3, r1, 0x64
 /* 801FFBEC 001FC7CC  80 01 00 68 */	lwz r0, 0x68(r1)
@@ -772,7 +772,7 @@ lbl_801FFB3C:
 /* 801FFC20 001FC800  C0 01 00 6C */	lfs f0, 0x6c(r1)
 /* 801FFC24 001FC804  EC 00 00 72 */	fmuls f0, f0, f1
 /* 801FFC28 001FC808  D0 01 00 6C */	stfs f0, 0x6c(r1)
-/* 801FFC2C 001FC80C  4B E0 D8 41 */	bl lbvector_add
+/* 801FFC2C 001FC80C  4B E0 D8 41 */	bl lbvector_Add
 /* 801FFC30 001FC810  83 BC 00 28 */	lwz r29, 0x28(r28)
 /* 801FFC34 001FC814  28 1D 00 00 */	cmplwi r29, 0
 /* 801FFC38 001FC818  41 82 01 08 */	beq lbl_801FFD40
@@ -2087,7 +2087,7 @@ lbl_80200EA0:
 /* 80200EB4 001FDA94  38 AD 90 E8 */	addi r5, r13, lbl_804D4788@sda21
 /* 80200EB8 001FDA98  48 18 73 69 */	bl __assert
 lbl_80200EBC:
-/* 80200EBC 001FDA9C  48 02 3B DD */	bl get_cam_bounds_bottom_offset
+/* 80200EBC 001FDA9C  48 02 3B DD */	bl Stage_GetCamBoundsBottomOffset
 /* 80200EC0 001FDAA0  C0 1A 00 3C */	lfs f0, 0x3c(r26)
 /* 80200EC4 001FDAA4  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 80200EC8 001FDAA8  4C 40 13 82 */	cror 2, 0, 2
@@ -2263,7 +2263,7 @@ func_80201110:
 /* 80201128 001FDD08  80 7F 00 C8 */	lwz r3, 0xc8(r31)
 /* 8020112C 001FDD0C  C0 23 00 0C */	lfs f1, 0xc(r3)
 /* 80201130 001FDD10  C0 43 00 04 */	lfs f2, 4(r3)
-/* 80201134 001FDD14  4B E2 1A FD */	bl func_80022C30
+/* 80201134 001FDD14  4B E2 1A FD */	bl atan2f
 /* 80201138 001FDD18  C0 5F 00 CC */	lfs f2, 0xcc(r31)
 /* 8020113C 001FDD1C  C8 02 BC C0 */	lfd f0, lbl_804DB6A0@sda21(r2)
 /* 80201140 001FDD20  EF E1 10 2A */	fadds f31, f1, f2
@@ -2277,11 +2277,11 @@ lbl_80201150:
 /* 8020115C 001FDD3C  C3 E2 BC D0 */	lfs f31, lbl_804DB6B0@sda21(r2)
 lbl_80201160:
 /* 80201160 001FDD40  FC 20 F8 90 */	fmr f1, f31
-/* 80201164 001FDD44  48 12 50 DD */	bl func_80326240
+/* 80201164 001FDD44  48 12 50 DD */	bl cosf
 /* 80201168 001FDD48  80 7F 00 C8 */	lwz r3, 0xc8(r31)
 /* 8020116C 001FDD4C  D0 23 00 04 */	stfs f1, 4(r3)
 /* 80201170 001FDD50  FC 20 F8 90 */	fmr f1, f31
-/* 80201174 001FDD54  48 12 52 61 */	bl func_803263D4
+/* 80201174 001FDD54  48 12 52 61 */	bl sinf
 /* 80201178 001FDD58  80 9F 00 C8 */	lwz r4, 0xc8(r31)
 /* 8020117C 001FDD5C  3C 60 88 89 */	lis r3, 0x88888889@ha
 /* 80201180 001FDD60  38 03 88 89 */	addi r0, r3, 0x88888889@l
@@ -3082,17 +3082,16 @@ lbl_80201C58:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B8288
 lbl_803B8288:
     .4byte 0x3F800000
     .4byte 0x00000000
     .4byte 0x00000000
-    .4byte 0x00000000
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E4DA8
 lbl_803E4DA8:
     .4byte 0x00000001
@@ -3169,9 +3168,8 @@ lbl_803E4E34:
     .4byte NULL
 .global lbl_803E4EC0
 lbl_803E4EC0:
-    .4byte 0x2F477252
-    .4byte 0x632E6461
-    .4byte 0x74000000
+    .asciz "/GrRc.dat"
+    .balign 4
 .global lbl_803E4ECC
 lbl_803E4ECC:
     .4byte 0x00000003
@@ -3187,15 +3185,8 @@ lbl_803E4ECC:
     .4byte 0x00000004
     .4byte lbl_803E4DA8
     .4byte 0x00000017
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E4F24
 lbl_803E4F24:
     .asciz "grrcruise.c"
@@ -3275,23 +3266,13 @@ lbl_803E4FF0:
     .4byte 0x00000001
     .4byte 0x001D0017
     .4byte 0x00000001
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E7661
-    .4byte 0x6E697368
-    .4byte NULL
-    .4byte 0x67702D3E
-    .4byte 0x752E6D61
-    .4byte 0x702E7661
-    .4byte 0x6E697368
-    .4byte 0x5B695D2E
-    .4byte 0x6A6F626A
-    .4byte NULL
-    .4byte NULL
+    .asciz "gp->u.map.vanish"
+    .balign 4
+    .asciz "gp->u.map.vanish[i].jobj"
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D4780
 lbl_804D4780:
     .asciz "jobj.h"
@@ -3307,14 +3288,14 @@ lbl_804D4790:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A10
 lbl_804D6A10:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB640
 lbl_804DB640:
 	.4byte 0x3ECCCCCD

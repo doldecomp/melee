@@ -655,7 +655,7 @@ lbl_80347B80:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80402318
 lbl_80402318:
     .4byte 0x00000100
@@ -673,7 +673,7 @@ lbl_80402318:
 
 
 .section .sbss
-
+    .4byte NULL
 .global lbl_804D7378
 lbl_804D7378:
 	.skip 0x4

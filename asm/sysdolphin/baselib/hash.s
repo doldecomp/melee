@@ -136,7 +136,7 @@ lbl_80382BE0:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80407720
 lbl_80407720:
     .asciz "idx < hash->table_size"
@@ -144,7 +144,7 @@ lbl_80407720:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5FC0
 lbl_804D5FC0:
     .asciz "hash.c"

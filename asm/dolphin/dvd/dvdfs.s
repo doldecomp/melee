@@ -345,7 +345,7 @@ lbl_80337D78:
 /* 80337D90 00334970  38 BC 00 00 */	addi r5, r28, 0
 /* 80337D94 00334974  39 1F 00 00 */	addi r8, r31, 0
 /* 80337D98 00334978  7C C0 EA 14 */	add r6, r0, r29
-/* 80337D9C 0033497C  48 00 1A ED */	bl func_80339888
+/* 80337D9C 0033497C  48 00 1A ED */	bl DVDReadAbsAsyncPrio
 /* 80337DA0 00334980  BB 41 00 20 */	lmw r26, 0x20(r1)
 /* 80337DA4 00334984  38 60 00 01 */	li r3, 1
 /* 80337DA8 00334988  80 01 00 3C */	lwz r0, 0x3c(r1)
@@ -371,7 +371,7 @@ lbl_80337DD8:
 
 
 .section .data
-
+    .balign 8
 .global lbl_80400D80
 lbl_80400D80:
     .asciz "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n"
@@ -380,11 +380,10 @@ lbl_80400D80:
 lbl_80400E48:
     .asciz "DVDReadAsync(): specified area is out of the file  "
     .balign 4
-    .4byte NULL
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D5B88
 lbl_804D5B88:
     .asciz "dvdfs.c"
@@ -392,7 +391,7 @@ lbl_804D5B88:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D7278
 lbl_804D7278:
 	.skip 0x4

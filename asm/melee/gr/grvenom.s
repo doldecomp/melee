@@ -402,7 +402,7 @@ lbl_80203B18:
 /* 80203B9C 0020077C  93 FD 00 28 */	stw r31, 0x28(r29)
 /* 80203BA0 00200780  93 FD 00 34 */	stw r31, 0x34(r29)
 /* 80203BA4 00200784  93 FD 00 40 */	stw r31, 0x40(r29)
-/* 80203BA8 00200788  48 02 15 ED */	bl func_80225194
+/* 80203BA8 00200788  48 02 15 ED */	bl Stage_80225194
 /* 80203BAC 0020078C  2C 03 00 E9 */	cmpwi r3, 0xe9
 /* 80203BB0 00200790  40 82 00 08 */	bne lbl_80203BB8
 /* 80203BB4 00200794  48 00 00 08 */	b lbl_80203BBC
@@ -786,7 +786,7 @@ lbl_802040B4:
 /* 802040BC 00200C9C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 802040C0 00200CA0  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 802040C4 00200CA4  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 802040C8 00200CA8  48 02 10 CD */	bl func_80225194
+/* 802040C8 00200CA8  48 02 10 CD */	bl Stage_80225194
 /* 802040CC 00200CAC  2C 03 00 E4 */	cmpwi r3, 0xe4
 /* 802040D0 00200CB0  40 82 00 0C */	bne lbl_802040DC
 /* 802040D4 00200CB4  38 00 00 01 */	li r0, 1
@@ -2890,28 +2890,28 @@ func_80205DF8:
 /* 80205E00 002029E0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80205E04 002029E4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80205E08 002029E8  7C 7F 1B 78 */	mr r31, r3
-/* 80205E0C 002029EC  48 01 ED 2D */	bl get_blast_zone_right_offset
+/* 80205E0C 002029EC  48 01 ED 2D */	bl Stage_GetBlastZoneRightOffset
 /* 80205E10 002029F0  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 80205E14 002029F4  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 80205E18 002029F8  40 81 00 0C */	ble lbl_80205E24
 /* 80205E1C 002029FC  38 60 00 01 */	li r3, 1
 /* 80205E20 00202A00  48 00 00 50 */	b lbl_80205E70
 lbl_80205E24:
-/* 80205E24 00202A04  48 01 ED 2D */	bl get_blast_zone_left_offset
+/* 80205E24 00202A04  48 01 ED 2D */	bl Stage_GetBlastZoneLeftOffset
 /* 80205E28 00202A08  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 80205E2C 00202A0C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 80205E30 00202A10  40 80 00 0C */	bge lbl_80205E3C
 /* 80205E34 00202A14  38 60 00 01 */	li r3, 1
 /* 80205E38 00202A18  48 00 00 38 */	b lbl_80205E70
 lbl_80205E3C:
-/* 80205E3C 00202A1C  48 01 ED 2D */	bl get_blast_zone_top_offset
+/* 80205E3C 00202A1C  48 01 ED 2D */	bl Stage_GetBlastZoneTopOffset
 /* 80205E40 00202A20  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 80205E44 00202A24  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 80205E48 00202A28  40 81 00 0C */	ble lbl_80205E54
 /* 80205E4C 00202A2C  38 60 00 01 */	li r3, 1
 /* 80205E50 00202A30  48 00 00 20 */	b lbl_80205E70
 lbl_80205E54:
-/* 80205E54 00202A34  48 01 ED 2D */	bl get_blast_zone_bottom_offset
+/* 80205E54 00202A34  48 01 ED 2D */	bl Stage_GetBlastZoneBottomOffset
 /* 80205E58 00202A38  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 80205E5C 00202A3C  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 80205E60 00202A40  40 80 00 0C */	bge lbl_80205E6C
@@ -2933,7 +2933,7 @@ func_80205E84:
 /* 80205E8C 00202A6C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80205E90 00202A70  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80205E94 00202A74  7C 7F 1B 78 */	mr r31, r3
-/* 80205E98 00202A78  48 01 EC A1 */	bl get_blast_zone_right_offset
+/* 80205E98 00202A78  48 01 EC A1 */	bl Stage_GetBlastZoneRightOffset
 /* 80205E9C 00202A7C  C0 42 BE 28 */	lfs f2, lbl_804DB808@sda21(r2)
 /* 80205EA0 00202A80  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 80205EA4 00202A84  EC 21 10 28 */	fsubs f1, f1, f2
@@ -2942,7 +2942,7 @@ func_80205E84:
 /* 80205EB0 00202A90  38 60 00 01 */	li r3, 1
 /* 80205EB4 00202A94  48 00 00 68 */	b lbl_80205F1C
 lbl_80205EB8:
-/* 80205EB8 00202A98  48 01 EC 99 */	bl get_blast_zone_left_offset
+/* 80205EB8 00202A98  48 01 EC 99 */	bl Stage_GetBlastZoneLeftOffset
 /* 80205EBC 00202A9C  C0 42 BE 28 */	lfs f2, lbl_804DB808@sda21(r2)
 /* 80205EC0 00202AA0  C0 1F 00 00 */	lfs f0, 0(r31)
 /* 80205EC4 00202AA4  EC 22 08 2A */	fadds f1, f2, f1
@@ -2951,7 +2951,7 @@ lbl_80205EB8:
 /* 80205ED0 00202AB0  38 60 00 01 */	li r3, 1
 /* 80205ED4 00202AB4  48 00 00 48 */	b lbl_80205F1C
 lbl_80205ED8:
-/* 80205ED8 00202AB8  48 01 EC 91 */	bl get_blast_zone_top_offset
+/* 80205ED8 00202AB8  48 01 EC 91 */	bl Stage_GetBlastZoneTopOffset
 /* 80205EDC 00202ABC  C0 42 BE 28 */	lfs f2, lbl_804DB808@sda21(r2)
 /* 80205EE0 00202AC0  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 80205EE4 00202AC4  EC 21 10 28 */	fsubs f1, f1, f2
@@ -2960,7 +2960,7 @@ lbl_80205ED8:
 /* 80205EF0 00202AD0  38 60 00 01 */	li r3, 1
 /* 80205EF4 00202AD4  48 00 00 28 */	b lbl_80205F1C
 lbl_80205EF8:
-/* 80205EF8 00202AD8  48 01 EC 89 */	bl get_blast_zone_bottom_offset
+/* 80205EF8 00202AD8  48 01 EC 89 */	bl Stage_GetBlastZoneBottomOffset
 /* 80205EFC 00202ADC  C0 42 BE 28 */	lfs f2, lbl_804DB808@sda21(r2)
 /* 80205F00 00202AE0  C0 1F 00 04 */	lfs f0, 4(r31)
 /* 80205F04 00202AE4  EC 22 08 2A */	fadds f1, f2, f1
@@ -3491,7 +3491,7 @@ lbl_80206678:
 /* 80206678 00203258  7C 1A DA 14 */	add r0, r26, r27
 /* 8020667C 0020325C  54 1A 07 BE */	clrlwi r26, r0, 0x1e
 /* 80206680 00203260  38 7A 00 00 */	addi r3, r26, 0
-/* 80206684 00203264  4B E2 BD 99 */	bl func_8003241C
+/* 80206684 00203264  4B E2 BD 99 */	bl Player_GetPlayerSlotType
 /* 80206688 00203268  2C 03 00 03 */	cmpwi r3, 3
 /* 8020668C 0020326C  40 82 00 10 */	bne lbl_8020669C
 /* 80206690 00203270  3B 7B 00 01 */	addi r27, r27, 1
@@ -3500,7 +3500,7 @@ lbl_80206678:
 lbl_8020669C:
 /* 8020669C 0020327C  38 7A 00 00 */	addi r3, r26, 0
 /* 802066A0 00203280  38 81 00 88 */	addi r4, r1, 0x88
-/* 802066A4 00203284  4B E2 C0 29 */	bl func_800326CC
+/* 802066A4 00203284  4B E2 C0 29 */	bl Player_LoadPlayerCoords
 /* 802066A8 00203288  C0 41 00 88 */	lfs f2, 0x88(r1)
 /* 802066AC 0020328C  C0 22 BD 60 */	lfs f1, lbl_804DB740@sda21(r2)
 /* 802066B0 00203290  FC 02 08 40 */	fcmpo cr0, f2, f1
@@ -4065,7 +4065,7 @@ lbl_80206E14:
 
 
 .section .rodata
-
+    .balign 8
 .global lbl_803B82D0
 lbl_803B82D0:
     .4byte 0x00000000
@@ -4079,7 +4079,7 @@ lbl_803B82DC:
 
 
 .section .data
-
+    .balign 8
 .global lbl_803E5348
 lbl_803E5348:
     .4byte 0x00000005
@@ -4198,15 +4198,8 @@ lbl_803E54CC:
     .4byte 0x00000001
     .4byte lbl_803E5348
     .4byte 0x00000005
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E5524
 lbl_803E5524:
     .asciz "grvenom.c"
@@ -4264,22 +4257,10 @@ lbl_803E5524:
     .4byte 0x00000003
     .4byte 0x00000003
     .4byte 0x00000006
-    .4byte 0x61727769
-    .4byte 0x6E3A7573
-    .4byte 0x65722064
-    .4byte 0x61746120
-    .4byte 0x6572726F
-    .4byte 0x720A0000
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
+    .asciz "arwin:user data error\n"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
     .4byte 0xFFFFFFFF
     .4byte 0xFFFFFFFF
     .4byte 0x00000001
@@ -4302,9 +4283,8 @@ lbl_803E5680:
     .4byte 0x00000004
     .4byte 0x00000004
     .4byte 0x00000003
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
+    .asciz "translate"
+    .balign 4
     .4byte 0x00000001
     .4byte 0x00000001
     .4byte 0x00000001
@@ -4314,7 +4294,7 @@ lbl_803E5680:
 
 
 .section .sdata
-
+    .balign 8
 .global lbl_804D47B8
 lbl_804D47B8:
     .asciz "/GrVe"
@@ -4342,7 +4322,7 @@ lbl_804D47E0:
 
 
 .section .sbss
-
+    .balign 8
 .global lbl_804D6A30
 lbl_804D6A30:
 	.skip 0x4
@@ -4357,11 +4337,11 @@ lbl_804D6A3C:
 	.skip 0x4
 .global lbl_804D6A40
 lbl_804D6A40:
-	.skip 0x8
+	.skip 0x4
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DB738
 lbl_804DB738:
 	.4byte 0xBF800000

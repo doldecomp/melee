@@ -1,531 +1,1992 @@
-#include "melee/pl/player.h"
+#include <melee/pl/player.h>
 
-extern StaticPlayer lbl_80453080[4];
+typedef struct _ftMapping {
+    s8 internal_id;
+    s8 extra_internal_id;
+    s8 has_transformation;
+} ftMapping;
 
-extern char* lbl_803BCDC0;
-extern u32 lbl_803BCDE0[];
-extern char* lbl_803BCE44;
-extern char* lbl_803BCE60;
+struct plAllocInfo {
+    s32 internal_id;
+    u8 slot;
+    s8 unk8;
+    struct {
+        u8 b0 : 1;
+        u8 has_transformation : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } bits;
+};
 
-extern char* lbl_804D3940;
+/// TODO probably the same struct as above, figure out how to make them work as one
+struct plAllocInfo2 {
+    s32 internal_id;
+    u8 slot;
+    s32 unk8;
+    struct {
+        u8 b0 : 1;
+        u8 has_transformation : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } bits;
+};
 
-void inline Player_CheckSlot(s32 slot, u32 line)
+
+/// TODO delete after fixing functions that use this
+struct Unk_Struct_w_Array {
+    char some_str[8+4];  //"PdPm.dat"
+    char another_str[16+4]; 
+    S8Vec vec_arr[30];  ///ftMapping_list
+};
+
+
+//// .data
+char str_PdPmdat_start_of_data[] = "PdPm.dat"; 
+char str_plLoadCommonData[] = "plLoadCommonData"; 
+ftMapping ftMapping_list[33] = {   //////ftMapping_list
+    { 0x02, 0xFF, 0x00 },
+    { 0x03, 0xFF, 0x00 },
+    { 0x01, 0xFF, 0x00 },
+    { 0x18, 0xFF, 0x00 },
+    { 0x04, 0xFF, 0x00 },
+    { 0x05, 0xFF, 0x00 },
+    { 0x06, 0xFF, 0x00 },
+    { 0x11, 0xFF, 0x00 },
+    { 0x00, 0xFF, 0x00 },
+    { 0x12, 0xFF, 0x00 },
+    { 0x10, 0xFF, 0x00 },
+    { 0x08, 0xFF, 0x00 },
+    { 0x09, 0xFF, 0x00 },
+    { 0x0C, 0xFF, 0x00 },
+    { 0x0A, 0x0B, 0x00 },
+    { 0x0F, 0xFF, 0x00 },
+    { 0x0D, 0xFF, 0x00 },
+    { 0x0E, 0xFF, 0x00 },
+    { 0x13, 0x07, 0x01 },
+    { 0x07, 0x13, 0x01 },
+    { 0x16, 0xFF, 0x00 },
+    { 0x14, 0xFF, 0x00 },
+    { 0x15, 0xFF, 0x00 },
+    { 0x1A, 0xFF, 0x00 },
+    { 0x17, 0xFF, 0x00 },
+    { 0x19, 0xFF, 0x00 },
+    { 0x1B, 0xFF, 0x00 },
+    { 0x1D, 0xFF, 0x00 },
+    { 0x1E, 0xFF, 0x00 },
+    { 0x1F, 0xFF, 0x00 },
+    { 0x1C, 0xFF, 0x00 },
+    { 0x20, 0xFF, 0x00 },
+    { 0x0A, 0xFF, 0x00 }
+};
+
+
+////.bss
+StaticPlayer player_slots[6]; 
+HSD_ObjAllocData lbl_804587E0;
+
+extern s32 lbl_804D6470;
+
+extern void ftData_SetScale();
+extern void func_SetEntityFacingDirection();
+extern void func_80087140();
+extern void func_80086664();
+extern s32 func_8008701C(HSD_GObj*);
+extern s32 func_800873CC();
+extern s32 func_8016C5C0(s32);
+extern void func_802F6E1C(s32);
+extern void func_800D4FF4(HSD_GObj*);
+extern f32 func_800869F8(HSD_GObj*);
+extern void func_80087BEC(HSD_GObj*, s8);
+extern void func_80087BC0(HSD_GObj*, s8);
+extern void func_800870F0(HSD_GObj*, s32);
+extern void func_802F6D10(s32);
+extern void func_802F6AF8(s32);
+extern void func_802F69C0(s32, s32);
+extern void func_802F6C04(s32);
+extern s32 func_8016B168();
+extern BOOL func_80086F4C(HSD_GObj*);
+extern double func_80086F80(HSD_GObj*);
+extern s32 func_800872A4(HSD_GObj*);
+extern s32 func_80087300(HSD_GObj*);
+extern void func_80087AC0(HSD_GObj*, s32);
+extern void func_80086A4C(HSD_GObj*, f32);
+extern void func_80087BAC(HSD_GObj*, s32);
+extern void func_80086BB4(HSD_GObj*);
+extern void func_80086B90(HSD_GObj*, s32);
+extern void func_8003891C(s32);
+extern void func_80038F10(s32);
+extern void func_8003715C();
+extern void func_80037590();
+extern void Fighter_FirstInitialize_80067A84();
+extern void func_800BEB60(s32, s32, s32);
+extern s32 func_800865F0(HSD_GObj*);
+extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
+extern HSD_GObj* Fighter_80068E98(struct plAllocInfo*);
+
+inline hasExtraFighterID(ftMapping* data) { return data->extra_internal_id != -1; } ///TODO this can be used in more places when functions are fixed to use correct structs
+
+void inline Player_CheckSlot(s32 slot)
 {
-    if (slot < 0 || 6 < slot) {
+    if (slot < 0 || 6 <= slot) {
         OSReport("cant get player struct! %d\n", slot);
-        __assert(__FILE__, line, "0");
+        __assert(__FILE__, 102, "0");
     }
 }
 
 // Matches when everything is moved over
-#ifdef NON_MATCHING
-StaticPlayer* Player_GetPtrForSlot(s32 slot)
+StaticPlayer* Player_GetPtrForSlot(s32 slot)  
 {
-    Player_CheckSlot(slot, 102);
-    return &lbl_80453080[slot];
-}
-#else
-asm StaticPlayer* Player_GetPtrForSlot(s32 slot)
-{
-    nofralloc
-/* 80031724 0002E304  7C 08 02 A6 */	mflr r0
-/* 80031728 0002E308  90 01 00 04 */	stw r0, 4(r1)
-/* 8003172C 0002E30C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80031730 0002E310  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80031734 0002E314  7C 7F 1B 79 */	or. r31, r3, r3
-/* 80031738 0002E318  41 80 00 0C */	blt lbl_80031744
-/* 8003173C 0002E31C  2C 1F 00 06 */	cmpwi r31, 6
-/* 80031740 0002E320  41 80 00 2C */	blt lbl_8003176C
-lbl_80031744:
-/* 80031744 0002E324  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
-/* 80031748 0002E328  4C C6 31 82 */	crclr 6
-/* 8003174C 0002E32C  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
-/* 80031750 0002E330  38 9F 00 00 */	addi r4, r31, 0
-/* 80031754 0002E334  48 31 3F 55 */	bl OSReport
-/* 80031758 0002E338  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
-/* 8003175C 0002E33C  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
-/* 80031760 0002E340  38 80 00 66 */	li r4, 0x66
-/* 80031764 0002E344  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
-/* 80031768 0002E348  48 35 6A B9 */	bl __assert
-lbl_8003176C:
-/* 8003176C 0002E34C  1C 9F 0E 90 */	mulli r4, r31, 0xe90
-/* 80031770 0002E350  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80031774 0002E354  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 80031778 0002E358  38 03 30 80 */	addi r0, r3, lbl_80453080@l
-/* 8003177C 0002E35C  7C 60 22 14 */	add r3, r0, r4
-/* 80031780 0002E360  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80031784 0002E364  38 21 00 18 */	addi r1, r1, 0x18
-/* 80031788 0002E368  7C 08 03 A6 */	mtlr r0
-/* 8003178C 0002E36C  4E 80 00 20 */	blr 
-}
-#endif
-
-asm void Player_80031790(s32 slot)
-{
-    nofralloc
-/* 80031790 0002E370  7C 08 02 A6 */	mflr r0
-/* 80031794 0002E374  90 01 00 04 */	stw r0, 4(r1)
-/* 80031798 0002E378  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8003179C 0002E37C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800317A0 0002E380  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 800317A4 0002E384  7C 7E 1B 79 */	or. r30, r3, r3
-/* 800317A8 0002E388  41 80 00 0C */	blt lbl_800317B4
-/* 800317AC 0002E38C  2C 1E 00 06 */	cmpwi r30, 6
-/* 800317B0 0002E390  41 80 00 2C */	blt lbl_800317DC
-lbl_800317B4:
-/* 800317B4 0002E394  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
-/* 800317B8 0002E398  4C C6 31 82 */	crclr 6
-/* 800317BC 0002E39C  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
-/* 800317C0 0002E3A0  38 9E 00 00 */	addi r4, r30, 0
-/* 800317C4 0002E3A4  48 31 3E E5 */	bl OSReport
-/* 800317C8 0002E3A8  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
-/* 800317CC 0002E3AC  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
-/* 800317D0 0002E3B0  38 80 00 66 */	li r4, 0x66
-/* 800317D4 0002E3B4  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
-/* 800317D8 0002E3B8  48 35 6A 49 */	bl __assert
-lbl_800317DC:
-/* 800317DC 0002E3BC  1C 9E 0E 90 */	mulli r4, r30, 0xe90
-/* 800317E0 0002E3C0  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 800317E4 0002E3C4  38 03 30 80 */	addi r0, r3, lbl_80453080@l
-/* 800317E8 0002E3C8  7F E0 22 14 */	add r31, r0, r4
-/* 800317EC 0002E3CC  80 1F 00 08 */	lwz r0, 8(r31)
-/* 800317F0 0002E3D0  2C 00 00 00 */	cmpwi r0, 0
-/* 800317F4 0002E3D4  41 82 00 0C */	beq lbl_80031800
-/* 800317F8 0002E3D8  2C 00 00 01 */	cmpwi r0, 1
-/* 800317FC 0002E3DC  40 82 00 34 */	bne lbl_80031830
-lbl_80031800:
-/* 80031800 0002E3E0  3B C0 00 00 */	li r30, 0
-lbl_80031804:
-/* 80031804 0002E3E4  38 1E 00 0C */	addi r0, r30, 0xc
-/* 80031808 0002E3E8  7C 1F 00 AE */	lbzx r0, r31, r0
-/* 8003180C 0002E3EC  54 03 10 3A */	slwi r3, r0, 2
-/* 80031810 0002E3F0  38 03 00 B0 */	addi r0, r3, 0xb0
-/* 80031814 0002E3F4  7C 7F 00 2E */	lwzx r3, r31, r0
-/* 80031818 0002E3F8  28 03 00 00 */	cmplwi r3, 0
-/* 8003181C 0002E3FC  41 82 00 08 */	beq lbl_80031824
-/* 80031820 0002E400  48 05 4F C9 */	bl func_800867E8
-lbl_80031824:
-/* 80031824 0002E404  3B DE 00 01 */	addi r30, r30, 1
-/* 80031828 0002E408  2C 1E 00 02 */	cmpwi r30, 2
-/* 8003182C 0002E40C  41 80 FF D8 */	blt lbl_80031804
-lbl_80031830:
-/* 80031830 0002E410  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80031834 0002E414  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80031838 0002E418  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8003183C 0002E41C  38 21 00 18 */	addi r1, r1, 0x18
-/* 80031840 0002E420  7C 08 03 A6 */	mtlr r0
-/* 80031844 0002E424  4E 80 00 20 */	blr 
+    Player_CheckSlot(slot);
+    return &player_slots[slot];
 }
 
-asm void Player_80031848(s32 slot)
-{
-    nofralloc
-/* 80031848 0002E428  7C 08 02 A6 */	mflr r0
-/* 8003184C 0002E42C  90 01 00 04 */	stw r0, 4(r1)
-/* 80031850 0002E430  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80031854 0002E434  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80031858 0002E438  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8003185C 0002E43C  7C 7E 1B 79 */	or. r30, r3, r3
-/* 80031860 0002E440  41 80 00 0C */	blt lbl_8003186C
-/* 80031864 0002E444  2C 1E 00 06 */	cmpwi r30, 6
-/* 80031868 0002E448  41 80 00 2C */	blt lbl_80031894
-lbl_8003186C:
-/* 8003186C 0002E44C  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
-/* 80031870 0002E450  4C C6 31 82 */	crclr 6
-/* 80031874 0002E454  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
-/* 80031878 0002E458  38 9E 00 00 */	addi r4, r30, 0
-/* 8003187C 0002E45C  48 31 3E 2D */	bl OSReport
-/* 80031880 0002E460  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
-/* 80031884 0002E464  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
-/* 80031888 0002E468  38 80 00 66 */	li r4, 0x66
-/* 8003188C 0002E46C  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
-/* 80031890 0002E470  48 35 69 91 */	bl __assert
-lbl_80031894:
-/* 80031894 0002E474  1C 9E 0E 90 */	mulli r4, r30, 0xe90
-/* 80031898 0002E478  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 8003189C 0002E47C  38 03 30 80 */	addi r0, r3, lbl_80453080@l
-/* 800318A0 0002E480  7F E0 22 14 */	add r31, r0, r4
-/* 800318A4 0002E484  80 1F 00 08 */	lwz r0, 8(r31)
-/* 800318A8 0002E488  2C 00 00 00 */	cmpwi r0, 0
-/* 800318AC 0002E48C  41 82 00 0C */	beq lbl_800318B8
-/* 800318B0 0002E490  2C 00 00 01 */	cmpwi r0, 1
-/* 800318B4 0002E494  40 82 00 34 */	bne lbl_800318E8
-lbl_800318B8:
-/* 800318B8 0002E498  3B C0 00 00 */	li r30, 0
-lbl_800318BC:
-/* 800318BC 0002E49C  38 1E 00 0C */	addi r0, r30, 0xc
-/* 800318C0 0002E4A0  7C 1F 00 AE */	lbzx r0, r31, r0
-/* 800318C4 0002E4A4  54 03 10 3A */	slwi r3, r0, 2
-/* 800318C8 0002E4A8  38 03 00 B0 */	addi r0, r3, 0xb0
-/* 800318CC 0002E4AC  7C 7F 00 2E */	lwzx r3, r31, r0
-/* 800318D0 0002E4B0  28 03 00 00 */	cmplwi r3, 0
-/* 800318D4 0002E4B4  41 82 00 08 */	beq lbl_800318DC
-/* 800318D8 0002E4B8  48 05 4F B5 */	bl func_8008688C
-lbl_800318DC:
-/* 800318DC 0002E4BC  3B DE 00 01 */	addi r30, r30, 1
-/* 800318E0 0002E4C0  2C 1E 00 02 */	cmpwi r30, 2
-/* 800318E4 0002E4C4  41 80 FF D8 */	blt lbl_800318BC
-lbl_800318E8:
-/* 800318E8 0002E4C8  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800318EC 0002E4CC  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800318F0 0002E4D0  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 800318F4 0002E4D4  38 21 00 18 */	addi r1, r1, 0x18
-/* 800318F8 0002E4D8  7C 08 03 A6 */	mtlr r0
-/* 800318FC 0002E4DC  4E 80 00 20 */	blr 
+void Player_80031790(s32 slot) {  
+
+    StaticPlayer* player;
+    int i;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    if ((player->slot_type == 0) || (player->slot_type == 1)) {
+        for (i = 0; i < 2; i++) {  
+            /// transformed will either be [1,0] (normal) or [0,1] (transformed)
+            /// checks to see if the player is in a transformed state, and calls
+            /// the function only once depending on the state
+            if ((player->player_entity[player->transformed[i]])) {
+                func_800867E8(player->player_entity[player->transformed[i]]);
+            }
+        }
+    }
 }
 
-asm void Player_80031900(s32 slot) 
-{
-    nofralloc
-/* 80031900 0002E4E0  7C 08 02 A6 */	mflr r0
-/* 80031904 0002E4E4  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 80031908 0002E4E8  90 01 00 04 */	stw r0, 4(r1)
-/* 8003190C 0002E4EC  3C 80 80 3C */	lis r4, lbl_803BCE44@ha
-/* 80031910 0002E4F0  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 80031914 0002E4F4  BF 61 00 0C */	stmw r27, 0xc(r1)
-/* 80031918 0002E4F8  3B 83 30 80 */	addi r28, r3, lbl_80453080@l
-/* 8003191C 0002E4FC  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
-/* 80031920 0002E500  3B C4 CE 44 */	addi r30, r4, lbl_803BCE44@l
-/* 80031924 0002E504  3B E3 CE 60 */	addi r31, r3, lbl_803BCE60@l
-/* 80031928 0002E508  3B 60 00 00 */	li r27, 0
-lbl_8003192C:
-/* 8003192C 0002E50C  2C 1B 00 00 */	cmpwi r27, 0
-/* 80031930 0002E510  41 80 00 0C */	blt lbl_8003193C
-/* 80031934 0002E514  2C 1B 00 06 */	cmpwi r27, 6
-/* 80031938 0002E518  41 80 00 24 */	blt lbl_8003195C
-lbl_8003193C:
-/* 8003193C 0002E51C  38 7E 00 00 */	addi r3, r30, 0
-/* 80031940 0002E520  4C C6 31 82 */	crclr 6
-/* 80031944 0002E524  38 9B 00 00 */	addi r4, r27, 0
-/* 80031948 0002E528  48 31 3D 61 */	bl OSReport
-/* 8003194C 0002E52C  38 7F 00 00 */	addi r3, r31, 0
-/* 80031950 0002E530  38 80 00 66 */	li r4, 0x66
-/* 80031954 0002E534  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
-/* 80031958 0002E538  48 35 68 C9 */	bl __assert
-lbl_8003195C:
-/* 8003195C 0002E53C  80 1C 00 08 */	lwz r0, 8(r28)
-/* 80031960 0002E540  2C 00 00 00 */	cmpwi r0, 0
-/* 80031964 0002E544  41 82 00 0C */	beq lbl_80031970
-/* 80031968 0002E548  2C 00 00 01 */	cmpwi r0, 1
-/* 8003196C 0002E54C  40 82 00 34 */	bne lbl_800319A0
-lbl_80031970:
-/* 80031970 0002E550  3B A0 00 00 */	li r29, 0
-lbl_80031974:
-/* 80031974 0002E554  38 1D 00 0C */	addi r0, r29, 0xc
-/* 80031978 0002E558  7C 1C 00 AE */	lbzx r0, r28, r0
-/* 8003197C 0002E55C  54 03 10 3A */	slwi r3, r0, 2
-/* 80031980 0002E560  38 03 00 B0 */	addi r0, r3, 0xb0
-/* 80031984 0002E564  7C 7C 00 2E */	lwzx r3, r28, r0
-/* 80031988 0002E568  28 03 00 00 */	cmplwi r3, 0
-/* 8003198C 0002E56C  41 82 00 08 */	beq lbl_80031994
-/* 80031990 0002E570  48 05 4E FD */	bl func_8008688C
-lbl_80031994:
-/* 80031994 0002E574  3B BD 00 01 */	addi r29, r29, 1
-/* 80031998 0002E578  2C 1D 00 02 */	cmpwi r29, 2
-/* 8003199C 0002E57C  41 80 FF D8 */	blt lbl_80031974
-lbl_800319A0:
-/* 800319A0 0002E580  3B 7B 00 01 */	addi r27, r27, 1
-/* 800319A4 0002E584  2C 1B 00 06 */	cmpwi r27, 6
-/* 800319A8 0002E588  3B 9C 0E 90 */	addi r28, r28, 0xe90
-/* 800319AC 0002E58C  41 80 FF 80 */	blt lbl_8003192C
-/* 800319B0 0002E590  BB 61 00 0C */	lmw r27, 0xc(r1)
-/* 800319B4 0002E594  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 800319B8 0002E598  38 21 00 20 */	addi r1, r1, 0x20
-/* 800319BC 0002E59C  7C 08 03 A6 */	mtlr r0
-/* 800319C0 0002E5A0  4E 80 00 20 */	blr 
+void Player_80031848(s32 slot) { 
+    StaticPlayer* player;
+    int i;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    if ((player->slot_type == 0) || (player->slot_type == 1)) {
+        for (i = 0; i < 2; i++) {  
+            /// transformed will either be [1,0] (normal) or [0,1] (transformed)
+            /// checks to see if the player is in a transformed state, and calls
+            /// the function only once depending on the state
+            if ((player->player_entity[player->transformed[i]])) {
+                func_8008688C(player->player_entity[player->transformed[i]]);
+            }
+        }
+    }
 }
 
-asm BOOL Player_800319C4(s32 slot, BOOL param_2)
+void inline func_8008688C_wrapper(StaticPlayer* player)   
 {
-    nofralloc
-/* 800319C4 0002E5A4  7C 08 02 A6 */	mflr r0
-/* 800319C8 0002E5A8  90 01 00 04 */	stw r0, 4(r1)
-/* 800319CC 0002E5AC  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 800319D0 0002E5B0  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 800319D4 0002E5B4  3B E4 00 00 */	addi r31, r4, 0
-/* 800319D8 0002E5B8  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 800319DC 0002E5BC  7C 7E 1B 79 */	or. r30, r3, r3
-/* 800319E0 0002E5C0  41 80 00 0C */	blt lbl_800319EC
-/* 800319E4 0002E5C4  2C 1E 00 06 */	cmpwi r30, 6
-/* 800319E8 0002E5C8  41 80 00 2C */	blt lbl_80031A14
-lbl_800319EC:
-/* 800319EC 0002E5CC  3C 60 80 3C */	lis r3, lbl_803BCE44@ha
-/* 800319F0 0002E5D0  4C C6 31 82 */	crclr 6
-/* 800319F4 0002E5D4  38 63 CE 44 */	addi r3, r3, lbl_803BCE44@l
-/* 800319F8 0002E5D8  38 9E 00 00 */	addi r4, r30, 0
-/* 800319FC 0002E5DC  48 31 3C AD */	bl OSReport
-/* 80031A00 0002E5E0  3C 60 80 3C */	lis r3, lbl_803BCE60@ha
-/* 80031A04 0002E5E4  38 63 CE 60 */	addi r3, r3, lbl_803BCE60@l
-/* 80031A08 0002E5E8  38 80 00 66 */	li r4, 0x66
-/* 80031A0C 0002E5EC  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
-/* 80031A10 0002E5F0  48 35 68 11 */	bl __assert
-lbl_80031A14:
-/* 80031A14 0002E5F4  1C 9E 0E 90 */	mulli r4, r30, 0xe90
-/* 80031A18 0002E5F8  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 80031A1C 0002E5FC  38 03 30 80 */	addi r0, r3, lbl_80453080@l
-/* 80031A20 0002E600  2C 1F 00 00 */	cmpwi r31, 0
-/* 80031A24 0002E604  7C 80 22 14 */	add r4, r0, r4
-/* 80031A28 0002E608  41 82 00 4C */	beq lbl_80031A74
-/* 80031A2C 0002E60C  88 04 00 0C */	lbz r0, 0xc(r4)
-/* 80031A30 0002E610  54 03 10 3A */	slwi r3, r0, 2
-/* 80031A34 0002E614  38 03 00 B0 */	addi r0, r3, 0xb0
-/* 80031A38 0002E618  7C 04 00 2E */	lwzx r0, r4, r0
-/* 80031A3C 0002E61C  28 00 00 00 */	cmplwi r0, 0
-/* 80031A40 0002E620  40 82 00 0C */	bne lbl_80031A4C
-/* 80031A44 0002E624  38 60 00 00 */	li r3, 0
-/* 80031A48 0002E628  48 00 00 70 */	b lbl_80031AB8
-lbl_80031A4C:
-/* 80031A4C 0002E62C  88 04 00 0D */	lbz r0, 0xd(r4)
-/* 80031A50 0002E630  54 03 10 3A */	slwi r3, r0, 2
-/* 80031A54 0002E634  38 03 00 B0 */	addi r0, r3, 0xb0
-/* 80031A58 0002E638  7C 04 00 2E */	lwzx r0, r4, r0
-/* 80031A5C 0002E63C  28 00 00 00 */	cmplwi r0, 0
-/* 80031A60 0002E640  40 82 00 0C */	bne lbl_80031A6C
-/* 80031A64 0002E644  38 60 00 00 */	li r3, 0
-/* 80031A68 0002E648  48 00 00 50 */	b lbl_80031AB8
-lbl_80031A6C:
-/* 80031A6C 0002E64C  38 60 00 01 */	li r3, 1
-/* 80031A70 0002E650  48 00 00 48 */	b lbl_80031AB8
-lbl_80031A74:
-/* 80031A74 0002E654  88 04 00 0C */	lbz r0, 0xc(r4)
-/* 80031A78 0002E658  54 03 10 3A */	slwi r3, r0, 2
-/* 80031A7C 0002E65C  38 03 00 B0 */	addi r0, r3, 0xb0
-/* 80031A80 0002E660  7C 04 00 2E */	lwzx r0, r4, r0
-/* 80031A84 0002E664  28 00 00 00 */	cmplwi r0, 0
-/* 80031A88 0002E668  41 82 00 0C */	beq lbl_80031A94
-/* 80031A8C 0002E66C  38 60 00 00 */	li r3, 0
-/* 80031A90 0002E670  48 00 00 28 */	b lbl_80031AB8
-lbl_80031A94:
-/* 80031A94 0002E674  88 04 00 0D */	lbz r0, 0xd(r4)
-/* 80031A98 0002E678  54 03 10 3A */	slwi r3, r0, 2
-/* 80031A9C 0002E67C  38 03 00 B0 */	addi r0, r3, 0xb0
-/* 80031AA0 0002E680  7C 04 00 2E */	lwzx r0, r4, r0
-/* 80031AA4 0002E684  28 00 00 00 */	cmplwi r0, 0
-/* 80031AA8 0002E688  41 82 00 0C */	beq lbl_80031AB4
-/* 80031AAC 0002E68C  38 60 00 00 */	li r3, 0
-/* 80031AB0 0002E690  48 00 00 08 */	b lbl_80031AB8
-lbl_80031AB4:
-/* 80031AB4 0002E694  38 60 00 01 */	li r3, 1
-lbl_80031AB8:
-/* 80031AB8 0002E698  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 80031ABC 0002E69C  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 80031AC0 0002E6A0  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 80031AC4 0002E6A4  38 21 00 20 */	addi r1, r1, 0x20
-/* 80031AC8 0002E6A8  7C 08 03 A6 */	mtlr r0
-/* 80031ACC 0002E6AC  4E 80 00 20 */	blr 
+    if ((player->slot_type == 0) || (player->slot_type == 1)) {
+        s32 i;
+        for (i = 0; i < 2; i++) {  
+            if ((player->player_entity[player->transformed[i]])) {
+                func_8008688C(player->player_entity[player->transformed[i]]);
+            }
+        }
+    }
 }
 
-asm void Player_80031AD0(s32 slot)
-{
-    nofralloc
-/* 80031AD0 0002E6B0  7C 08 02 A6 */	mflr r0
-/* 80031AD4 0002E6B4  90 01 00 04 */	stw r0, 4(r1)
-/* 80031AD8 0002E6B8  94 21 FF B8 */	stwu r1, -0x48(r1)
-/* 80031ADC 0002E6BC  BF 61 00 34 */	stmw r27, 0x34(r1)
-/* 80031AE0 0002E6C0  7C 7C 1B 79 */	or. r28, r3, r3
-/* 80031AE4 0002E6C4  3C 60 80 3C */	lis r3, lbl_803BCDC0@ha
-/* 80031AE8 0002E6C8  3B E3 CD C0 */	addi r31, r3, lbl_803BCDC0@l
-/* 80031AEC 0002E6CC  41 80 00 0C */	blt lbl_80031AF8
-/* 80031AF0 0002E6D0  2C 1C 00 06 */	cmpwi r28, 6
-/* 80031AF4 0002E6D4  41 80 00 24 */	blt lbl_80031B18
-lbl_80031AF8:
-/* 80031AF8 0002E6D8  38 9C 00 00 */	addi r4, r28, 0
-/* 80031AFC 0002E6DC  4C C6 31 82 */	crclr 6
-/* 80031B00 0002E6E0  38 7F 00 84 */	addi r3, r31, 0x84
-/* 80031B04 0002E6E4  48 31 3B A5 */	bl OSReport
-/* 80031B08 0002E6E8  38 7F 00 A0 */	addi r3, r31, 0xa0
-/* 80031B0C 0002E6EC  38 80 00 66 */	li r4, 0x66
-/* 80031B10 0002E6F0  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
-/* 80031B14 0002E6F4  48 35 67 0D */	bl __assert
-lbl_80031B18:
-/* 80031B18 0002E6F8  1C 9C 0E 90 */	mulli r4, r28, 0xe90
-/* 80031B1C 0002E6FC  3C 60 80 45 */	lis r3, lbl_80453080@ha
-/* 80031B20 0002E700  38 03 30 80 */	addi r0, r3, lbl_80453080@l
-/* 80031B24 0002E704  7F C0 22 14 */	add r30, r0, r4
-/* 80031B28 0002E708  80 1E 00 04 */	lwz r0, 4(r30)
-/* 80031B2C 0002E70C  3B BF 00 21 */	addi r29, r31, 0x21
-/* 80031B30 0002E710  1C 00 00 03 */	mulli r0, r0, 3
-/* 80031B34 0002E714  7C 1D 00 AE */	lbzx r0, r29, r0
-/* 80031B38 0002E718  7C 00 07 74 */	extsb r0, r0
-/* 80031B3C 0002E71C  2C 00 FF FF */	cmpwi r0, -1
-/* 80031B40 0002E720  41 82 00 14 */	beq lbl_80031B54
-/* 80031B44 0002E724  88 1E 00 AC */	lbz r0, 0xac(r30)
-/* 80031B48 0002E728  38 60 00 01 */	li r3, 1
-/* 80031B4C 0002E72C  50 60 2E B4 */	rlwimi r0, r3, 5, 0x1a, 0x1a
-/* 80031B50 0002E730  98 1E 00 AC */	stb r0, 0xac(r30)
-lbl_80031B54:
-/* 80031B54 0002E734  80 1E 00 04 */	lwz r0, 4(r30)
-/* 80031B58 0002E738  2C 1C 00 00 */	cmpwi r28, 0
-/* 80031B5C 0002E73C  1C 00 00 03 */	mulli r0, r0, 3
-/* 80031B60 0002E740  7C 7F 02 14 */	add r3, r31, r0
-/* 80031B64 0002E744  8B 63 00 20 */	lbz r27, 0x20(r3)
-/* 80031B68 0002E748  7F 7B 07 74 */	extsb r27, r27
-/* 80031B6C 0002E74C  41 80 00 0C */	blt lbl_80031B78
-/* 80031B70 0002E750  2C 1C 00 06 */	cmpwi r28, 6
-/* 80031B74 0002E754  41 80 00 24 */	blt lbl_80031B98
-lbl_80031B78:
-/* 80031B78 0002E758  38 9C 00 00 */	addi r4, r28, 0
-/* 80031B7C 0002E75C  4C C6 31 82 */	crclr 6
-/* 80031B80 0002E760  38 7F 00 84 */	addi r3, r31, 0x84
-/* 80031B84 0002E764  48 31 3B 25 */	bl OSReport
-/* 80031B88 0002E768  38 7F 00 A0 */	addi r3, r31, 0xa0
-/* 80031B8C 0002E76C  38 80 00 66 */	li r4, 0x66
-/* 80031B90 0002E770  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
-/* 80031B94 0002E774  48 35 66 8D */	bl __assert
-lbl_80031B98:
-/* 80031B98 0002E778  93 61 00 24 */	stw r27, 0x24(r1)
-/* 80031B9C 0002E77C  38 A0 00 00 */	li r5, 0
-/* 80031BA0 0002E780  38 00 FF FF */	li r0, -1
-/* 80031BA4 0002E784  9B 81 00 28 */	stb r28, 0x28(r1)
-/* 80031BA8 0002E788  38 61 00 24 */	addi r3, r1, 0x24
-/* 80031BAC 0002E78C  88 81 00 2A */	lbz r4, 0x2a(r1)
-/* 80031BB0 0002E790  50 A4 3E 30 */	rlwimi r4, r5, 7, 0x18, 0x18
-/* 80031BB4 0002E794  98 81 00 2A */	stb r4, 0x2a(r1)
-/* 80031BB8 0002E798  88 81 00 2A */	lbz r4, 0x2a(r1)
-/* 80031BBC 0002E79C  50 A4 36 72 */	rlwimi r4, r5, 6, 0x19, 0x19
-/* 80031BC0 0002E7A0  98 81 00 2A */	stb r4, 0x2a(r1)
-/* 80031BC4 0002E7A4  98 01 00 29 */	stb r0, 0x29(r1)
-/* 80031BC8 0002E7A8  48 03 72 D1 */	bl func_80068E98
-/* 80031BCC 0002E7AC  90 7E 00 B0 */	stw r3, 0xb0(r30)
-/* 80031BD0 0002E7B0  38 00 00 02 */	li r0, 2
-/* 80031BD4 0002E7B4  90 1E 00 00 */	stw r0, 0(r30)
-/* 80031BD8 0002E7B8  80 1E 00 04 */	lwz r0, 4(r30)
-/* 80031BDC 0002E7BC  1C 00 00 03 */	mulli r0, r0, 3
-/* 80031BE0 0002E7C0  7C 7D 00 AE */	lbzx r3, r29, r0
-/* 80031BE4 0002E7C4  7C 7D 07 74 */	extsb r29, r3
-/* 80031BE8 0002E7C8  2C 1D FF FF */	cmpwi r29, -1
-/* 80031BEC 0002E7CC  41 82 00 8C */	beq lbl_80031C78
-/* 80031BF0 0002E7D0  7C 7F 02 14 */	add r3, r31, r0
-/* 80031BF4 0002E7D4  8B 63 00 22 */	lbz r27, 0x22(r3)
-/* 80031BF8 0002E7D8  2C 1C 00 00 */	cmpwi r28, 0
-/* 80031BFC 0002E7DC  7F 7B 07 74 */	extsb r27, r27
-/* 80031C00 0002E7E0  41 80 00 0C */	blt lbl_80031C0C
-/* 80031C04 0002E7E4  2C 1C 00 06 */	cmpwi r28, 6
-/* 80031C08 0002E7E8  41 80 00 24 */	blt lbl_80031C2C
-lbl_80031C0C:
-/* 80031C0C 0002E7EC  38 9C 00 00 */	addi r4, r28, 0
-/* 80031C10 0002E7F0  4C C6 31 82 */	crclr 6
-/* 80031C14 0002E7F4  38 7F 00 84 */	addi r3, r31, 0x84
-/* 80031C18 0002E7F8  48 31 3A 91 */	bl OSReport
-/* 80031C1C 0002E7FC  38 7F 00 A0 */	addi r3, r31, 0xa0
-/* 80031C20 0002E800  38 80 00 66 */	li r4, 0x66
-/* 80031C24 0002E804  38 AD 82 A0 */	addi r5, r13, lbl_804D3940
-/* 80031C28 0002E808  48 35 65 F9 */	bl __assert
-lbl_80031C2C:
-/* 80031C2C 0002E80C  93 A1 00 18 */	stw r29, 0x18(r1)
-/* 80031C30 0002E810  38 80 00 01 */	li r4, 1
-/* 80031C34 0002E814  38 00 FF FF */	li r0, -1
-/* 80031C38 0002E818  9B 81 00 1C */	stb r28, 0x1c(r1)
-/* 80031C3C 0002E81C  88 61 00 1E */	lbz r3, 0x1e(r1)
-/* 80031C40 0002E820  50 83 3E 30 */	rlwimi r3, r4, 7, 0x18, 0x18
-/* 80031C44 0002E824  98 61 00 1E */	stb r3, 0x1e(r1)
-/* 80031C48 0002E828  38 61 00 18 */	addi r3, r1, 0x18
-/* 80031C4C 0002E82C  88 81 00 1E */	lbz r4, 0x1e(r1)
-/* 80031C50 0002E830  53 64 36 72 */	rlwimi r4, r27, 6, 0x19, 0x19
-/* 80031C54 0002E834  98 81 00 1E */	stb r4, 0x1e(r1)
-/* 80031C58 0002E838  98 01 00 1D */	stb r0, 0x1d(r1)
-/* 80031C5C 0002E83C  48 03 72 3D */	bl func_80068E98
-/* 80031C60 0002E840  90 7E 00 B4 */	stw r3, 0xb4(r30)
-/* 80031C64 0002E844  80 1E 00 00 */	lwz r0, 0(r30)
-/* 80031C68 0002E848  2C 00 00 01 */	cmpwi r0, 1
-/* 80031C6C 0002E84C  41 82 00 0C */	beq lbl_80031C78
-/* 80031C70 0002E850  38 00 00 02 */	li r0, 2
-/* 80031C74 0002E854  90 1E 00 00 */	stw r0, 0(r30)
-lbl_80031C78:
-/* 80031C78 0002E858  80 1E 00 00 */	lwz r0, 0(r30)
-/* 80031C7C 0002E85C  2C 00 00 02 */	cmpwi r0, 2
-/* 80031C80 0002E860  40 82 00 1C */	bne lbl_80031C9C
-/* 80031C84 0002E864  81 9E 00 B8 */	lwz r12, 0xb8(r30)
-/* 80031C88 0002E868  28 0C 00 00 */	cmplwi r12, 0
-/* 80031C8C 0002E86C  41 82 00 10 */	beq lbl_80031C9C
-/* 80031C90 0002E870  7D 88 03 A6 */	mtlr r12
-/* 80031C94 0002E874  38 7C 00 00 */	addi r3, r28, 0
-/* 80031C98 0002E878  4E 80 00 21 */	blrl 
-lbl_80031C9C:
-/* 80031C9C 0002E87C  BB 61 00 34 */	lmw r27, 0x34(r1)
-/* 80031CA0 0002E880  80 01 00 4C */	lwz r0, 0x4c(r1)
-/* 80031CA4 0002E884  38 21 00 48 */	addi r1, r1, 0x48
-/* 80031CA8 0002E888  7C 08 03 A6 */	mtlr r0
-/* 80031CAC 0002E88C  4E 80 00 20 */	blr 
+void Player_80031900() { 
+    s32 slot;
+    for (slot = 0; slot < 6; slot++) {
+        StaticPlayer* player = &player_slots[slot];
+        Player_CheckSlot(slot);
+        func_8008688C_wrapper(player);
+    }
 }
 
-asm void Player_80031CB0(s32 id, s32 slot)
-{
-    nofralloc
-/* 80031CB0 0002E890  7C 08 02 A6 */	mflr r0
-/* 80031CB4 0002E894  90 01 00 04 */	stw r0, 4(r1)
-/* 80031CB8 0002E898  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80031CBC 0002E89C  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80031CC0 0002E8A0  1F E3 00 03 */	mulli r31, r3, 3
-/* 80031CC4 0002E8A4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80031CC8 0002E8A8  3C 60 80 3C */	lis r3, lbl_803BCDE0@ha
-/* 80031CCC 0002E8AC  38 03 CD E0 */	addi r0, r3, lbl_803BCDE0@l
-/* 80031CD0 0002E8B0  7C 60 FA 14 */	add r3, r0, r31
-/* 80031CD4 0002E8B4  88 03 00 00 */	lbz r0, 0(r3)
-/* 80031CD8 0002E8B8  3B C4 00 00 */	addi r30, r4, 0
-/* 80031CDC 0002E8BC  7C 03 07 74 */	extsb r3, r0
-/* 80031CE0 0002E8C0  2C 03 FF FF */	cmpwi r3, -1
-/* 80031CE4 0002E8C4  41 82 00 0C */	beq lbl_80031CF0
-/* 80031CE8 0002E8C8  7F C4 F3 78 */	mr r4, r30
-/* 80031CEC 0002E8CC  48 05 38 DD */	bl func_800855C8
-lbl_80031CF0:
-/* 80031CF0 0002E8D0  3C 60 80 3C */	lis r3, lbl_803BCDE0@ha
-/* 80031CF4 0002E8D4  38 03 CD E0 */	addi r0, r3, lbl_803BCDE0@l
-/* 80031CF8 0002E8D8  7C 60 FA 14 */	add r3, r0, r31
-/* 80031CFC 0002E8DC  88 03 00 01 */	lbz r0, 1(r3)
-/* 80031D00 0002E8E0  7C 03 07 74 */	extsb r3, r0
-/* 80031D04 0002E8E4  2C 03 FF FF */	cmpwi r3, -1
-/* 80031D08 0002E8E8  41 82 00 0C */	beq lbl_80031D14
-/* 80031D0C 0002E8EC  7F C4 F3 78 */	mr r4, r30
-/* 80031D10 0002E8F0  48 05 38 B9 */	bl func_800855C8
-lbl_80031D14:
-/* 80031D14 0002E8F4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80031D18 0002E8F8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80031D1C 0002E8FC  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80031D20 0002E900  38 21 00 18 */	addi r1, r1, 0x18
-/* 80031D24 0002E904  7C 08 03 A6 */	mtlr r0
-/* 80031D28 0002E908  4E 80 00 20 */	blr 
+BOOL Player_800319C4(s32 slot, BOOL arg1) {  
+
+    s32 unused;
+
+    s32 i;
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = (&player_slots[slot]);
+
+
+    if (arg1) {
+        for (i = 0; i < 2; i++) {
+            if (!player->player_entity[player->transformed[i]]) {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
+            return FALSE;
+        } 
+    }
+    
+    return TRUE;
+
 }
 
-asm void Player_80031D2C(s32 id, s32 slot)
-{
-    nofralloc
-/* 80031D2C 0002E90C  7C 08 02 A6 */	mflr r0
-/* 80031D30 0002E910  90 01 00 04 */	stw r0, 4(r1)
-/* 80031D34 0002E914  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80031D38 0002E918  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80031D3C 0002E91C  1F E3 00 03 */	mulli r31, r3, 3
-/* 80031D40 0002E920  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80031D44 0002E924  3C 60 80 3C */	lis r3, lbl_803BCDE0@ha
-/* 80031D48 0002E928  38 03 CD E0 */	addi r0, r3, lbl_803BCDE0@l
-/* 80031D4C 0002E92C  7C 60 FA 14 */	add r3, r0, r31
-/* 80031D50 0002E930  88 03 00 00 */	lbz r0, 0(r3)
-/* 80031D54 0002E934  3B C4 00 00 */	addi r30, r4, 0
-/* 80031D58 0002E938  7C 03 07 74 */	extsb r3, r0
-/* 80031D5C 0002E93C  2C 03 FF FF */	cmpwi r3, -1
-/* 80031D60 0002E940  41 82 00 0C */	beq lbl_80031D6C
-/* 80031D64 0002E944  7F C4 F3 78 */	mr r4, r30
-/* 80031D68 0002E948  48 05 3A 25 */	bl func_8008578C
-lbl_80031D6C:
-/* 80031D6C 0002E94C  3C 60 80 3C */	lis r3, lbl_803BCDE0@ha
-/* 80031D70 0002E950  38 03 CD E0 */	addi r0, r3, lbl_803BCDE0@l
-/* 80031D74 0002E954  7C 60 FA 14 */	add r3, r0, r31
-/* 80031D78 0002E958  88 03 00 01 */	lbz r0, 1(r3)
-/* 80031D7C 0002E95C  7C 03 07 74 */	extsb r3, r0
-/* 80031D80 0002E960  2C 03 FF FF */	cmpwi r3, -1
-/* 80031D84 0002E964  41 82 00 0C */	beq lbl_80031D90
-/* 80031D88 0002E968  7F C4 F3 78 */	mr r4, r30
-/* 80031D8C 0002E96C  48 05 3A 01 */	bl func_8008578C
-lbl_80031D90:
-/* 80031D90 0002E970  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80031D94 0002E974  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80031D98 0002E978  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80031D9C 0002E97C  38 21 00 18 */	addi r1, r1, 0x18
-/* 80031DA0 0002E980  7C 08 03 A6 */	mtlr r0
-/* 80031DA4 0002E984  4E 80 00 20 */	blr 
+void Player_80031AD0(s32 slot) {  ///decomp.me/scratch/lYkLv
+
+    struct plAllocInfo first_struct;
+    s32 internal_id;
+    s32 has_transformation;
+    s8 byte_check;
+    s8* offset_arr;
+    s32 unused;
+    StaticPlayer* player;
+
+    struct plAllocInfo second_struct;
+
+    s32 unused_buffer[3]; 
+
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    /// the commented line below makes more sense, but is off by one byte.
+    //  temp_vec = unused_ptr = ftMapping_list;    //// replace
+    offset_arr = (s8*) (&ftMapping_list[0].extra_internal_id);
+    if (offset_arr[player->player_character * sizeof(ftMapping)] != -1) {
+        player->flags.b2 = 1;
+    }
+
+    internal_id = ftMapping_list[player->player_character].internal_id;
+    Player_CheckSlot(slot);
+
+    first_struct.internal_id = internal_id;
+    first_struct.slot = slot;
+    first_struct.bits.b0 = 0; 
+    first_struct.bits.has_transformation = 0;  
+    first_struct.unk8 = -1;
+
+    player->player_entity[0] = Fighter_80068E98(&first_struct);
+    player->player_state = 2;
+
+    internal_id = byte_check = offset_arr[player->player_character * sizeof(ftMapping)];
+    if (byte_check != -1) {
+        has_transformation = ftMapping_list[player->player_character].has_transformation;
+        Player_CheckSlot(slot);
+        second_struct.internal_id = internal_id;
+        second_struct.slot = slot;
+        second_struct.bits.b0 = 1;  
+        second_struct.bits.has_transformation = has_transformation; 
+        second_struct.unk8 = -1;
+
+        player->player_entity[1] = Fighter_80068E98(&second_struct);
+        if (player->player_state != 1) {
+            player->player_state = 2;
+        }
+    }
+    if (player->player_state == 2) {
+        if (player->struct_func != 0) {
+            player->struct_func(slot);
+        }
+    }
+}
+
+void Player_80031CB0(s32 id, s32 slot) { 
+    if (ftMapping_list[id].internal_id != -1) {
+        func_800855C8(ftMapping_list[id].internal_id, slot);
+    }
+    if (hasExtraFighterID(&ftMapping_list[id])) {
+        func_800855C8(ftMapping_list[id].extra_internal_id, slot);
+    }
+}
+
+
+void Player_80031D2C(s32 id, s32 slot) {   
+    if (ftMapping_list[id].internal_id != -1) {
+        func_8008578C(ftMapping_list[id].internal_id, slot);
+    }
+    if (hasExtraFighterID(&ftMapping_list[id])) {
+        func_8008578C(ftMapping_list[id].extra_internal_id, slot);
+    }
 }
 
 void Player_80031DA8(s32 param_1, s32 param_2)
 {
     func_800EED50(param_1, param_2);
 }
+
+void Player_80031DC8(void func_arg(s32, s32)) {  
+
+    s32 slot;
+    for (slot = 0; slot < 6; slot++) {
+        Player_CheckSlot(slot);
+
+        if (player_slots[slot].player_state) {
+            func_arg(ftMapping_list[player_slots[slot].player_character].internal_id, 0);
+            if (hasExtraFighterID(&ftMapping_list[player_slots[slot].player_character])) {
+                func_arg(ftMapping_list[player_slots[slot].player_character].extra_internal_id, 0);
+            }
+        }
+    }
+}
+
+void Player_80031EBC(s32 slot) { 
+
+    s32 i;
+    Player_CheckSlot(slot);
+
+    for (i = 0; i < 2; i++) {
+        StaticPlayer*player = &player_slots[slot];
+        if ((player->player_entity[player->transformed[i]])) {
+            if (!func_8008701C(player->player_entity[player->transformed[i]])) {
+                func_800D4F24(player->player_entity[player->transformed[i]], 1);
+            }
+            func_80390228(player->player_entity[player->transformed[i]]);
+        }
+    }
+
+}
+
+void Player_80031FB0(s32 slot, s32 entity_index) { 
+    s32 unused;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+
+    player = &player_slots[slot];
+    player->player_entity[player->transformed[entity_index]] = 0;
+    if (((player->flags.b2 == 0) || Player_800319C4(slot, 0) != 0)) {
+        player->player_state = 0;
+    }
+}
+
+/// new match decomp.me/scratch/oHfiV  TODO
+//// old match decomp.me/scratch/8otnq
+void Player_80032070(s32 slot, BOOL bool_arg) {   
+    StaticPlayer* player;
+    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    
+    if (bool_arg == 0) {
+        func_800D4FF4(player->player_entity[player->transformed[0]]);
+        if((player->flags.b2) 
+                && unkStruct->vec_arr[player->player_character].z == 0 
+                && func_8008701C(player->player_entity[player->transformed[1]])) 
+        {
+            func_800D4FF4(player->player_entity[player->transformed[1]]);
+        }
+        func_802F6E1C(slot);
+        return;
+    }
+
+    if (func_800873CC(player->player_entity[player->transformed[0]])) {
+        func_800D4FF4(player->player_entity[player->transformed[1]]);
+    }
+}
+
+
+void Player_8003219C(s32 slot) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    func_8008701C(player->player_entity[player->transformed[0]]);
+}
+
+BOOL Player_8003221C(s32 slot) {   
+
+    StaticPlayer* player;
+
+    if (Player_GetPlayerState(slot) == 2) {   ///2 means in-game
+        Player_CheckSlot(slot);
+        player = &player_slots[slot];
+
+        if (!func_8008701C(player->player_entity[player->transformed[0]])) {
+            return 1;
+        }
+
+    }
+
+    return 0;
+}
+
+
+s32 Player_GetPlayerState(s32 slot) { 
+    s32 state;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    state = player->player_state;
+    return state;
+}
+
+s32 Player_GetPlayerCharacter(s32 slot) {  
+    s32 unused;
+    StaticPlayer* player; 
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    return player->player_character;
+}
+
+void Player_SetPlayerCharacter(s32 slot, s32 value) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->player_character = value;
+}
+
+s32 Player_GetPlayerSlotType(s32 slot) { 
+    s32 slot_type;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    slot_type = player->slot_type;
+    return slot_type;
+}
+
+s32 Player_8003248C(s32 slot, BOOL arg1) {   /// decomp.me/scratch/3yC1W
+    
+    s32 slot_type;
+    struct Unk_Struct_w_Array* unk_struct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    StaticPlayer* player;
+ 
+    Player_CheckSlot(slot);
+
+    player = &player_slots[slot];
+
+    if (arg1 == 1) {
+
+        if (unk_struct->vec_arr[player->player_character].z == 0) {
+            if (player->slot_type == 0 || player->slot_type == 1) {
+                return 1;
+            }
+        }
+    }
+    slot_type = player->slot_type;
+
+    return slot_type;
+}
+
+void Player_SetSlottype(s32 slot, s32 value) { 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->slot_type = value;
+}
+
+s8 Player_800325C8(s32 slot, BOOL b) { 
+    
+    
+    if (!b) {
+        return ftMapping_list[slot].internal_id;
+    }
+    else if (b == 1) {
+        return ftMapping_list[slot].extra_internal_id;
+    }
+
+    return -1;
+}
+
+s8 Player_80032610(s32 slot, BOOL arg1) {  //// decomp.me/scratch/pHTx2
+
+    struct Unk_Struct_w_Array* some_struct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    StaticPlayer* player;
+    s32 error_value = -1;
+
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    if (arg1 == 0) {
+        return some_struct->vec_arr[player->player_character].x;
+    }
+    if (arg1 == 1) {
+        return some_struct->vec_arr[player->player_character].y;
+    }
+
+    return error_value;
+}
+
+void Player_LoadPlayerCoords(s32 slot, Vec* arg_vec) {
+    StaticPlayer* player;
+    Vec* player_vecs;
+
+    Player_CheckSlot(slot);
+
+    player = &player_slots[slot];
+    player_vecs = player->player_poses.byIndex;
+    *arg_vec = player_vecs[player->transformed[0]];
+}
+
+
+void Player_80032768(s32 slot, Vec* arg_vec) { 
+    StaticPlayer* player;
+    Vec* player_vecs;
+
+    Vec* dst_vec;
+    Vec* dst_vec2;
+
+    Player_CheckSlot(slot);
+
+    player = &player_slots[slot];
+
+    player_vecs = player->player_poses.byIndex;
+    dst_vec = &player_vecs[player->transformed[0]];
+    *dst_vec = *arg_vec;
+
+    player_vecs = player->player_poses.byIndex;
+    dst_vec2 = &player_vecs[player->transformed[1]];
+    *dst_vec2 = *arg_vec;
+}
+
+void Player_80032828(s32 slot, s32 index, Vec* arg_vec) {  
+    StaticPlayer* player;
+    Vec* player_vecs;
+
+    Player_CheckSlot(slot);
+
+    player = &player_slots[slot];
+
+    player_vecs = player->player_poses.byIndex;
+    player_vecs[player->transformed[index]] = *arg_vec;
+
+}
+
+void Player_800328D4(s32 slot, Vec* arg_vec) {  
+    StaticPlayer* player;
+    s32 i;
+    Vec* player_vecs;
+    Vec* player_vecs2;
+
+    Vec* dst_vec;
+    Vec* dst_vec2;
+
+    Vec* unused;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    Player_CheckSlot(slot);
+
+    player_vecs = player->player_poses.byIndex;
+    dst_vec = &player_vecs[player->transformed[0]];
+    *dst_vec = *arg_vec;
+
+    player_vecs2 = player->player_poses.byIndex;
+    dst_vec2 = &player_vecs2[player->transformed[1]];
+    *dst_vec2 = *arg_vec;
+    
+
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
+            func_80087140(player->player_entity[player->transformed[i]]);
+        }
+    }
+}
+
+void Player_80032A04(s32 slot, Vec* arg_vec) {  
+    StaticPlayer* player;
+    s32 i;
+
+    Player_CheckSlot(slot);
+
+    for (i = 0; i < 2; i++) {
+        player = &player_slots[slot];
+
+        player->player_poses.byIndex[player->transformed[i]] = *arg_vec;
+                
+        if (player->player_entity[player->transformed[i]]) {
+            func_80086664(player->player_entity[player->transformed[i]], arg_vec);
+        }
+    }
+}
+
+void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 direction) {  
+    StaticPlayer* player;
+    s32 i;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    for (i = 0; i < 2; i++) {
+        player->facing_direction = direction;
+        if (player->player_entity[player->transformed[i]]) {
+            func_SetEntityFacingDirection(direction, player->player_entity[player->transformed[i]]);
+        }
+    }
+}
+
+f32 Player_80032BB0(s32 slot) {   
+    StaticPlayer* player;
+    f32 temp;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    temp = func_800869F8(player->player_entity[player->transformed[0]]);
+    return temp / player->model_scale;
+
+}
+
+
+void Player_SetScale(s32 slot, f32 scale) {  
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->model_scale = scale;
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
+            ftData_SetScale(scale, player->player_entity[player->transformed[i]]);
+        }
+    }
+
+}
+
+void Player_GetSpawnPlatformPos(s32 slot, Vec* arg_vec) { 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    *arg_vec = player->player_poses.byVecName.spawn_platform_final_pos;
+}
+
+void Player_SetSpawnPlatformPos(s32 slot, Vec* arg_vec) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->player_poses.byVecName.spawn_platform_final_pos = *arg_vec;
+}
+
+void Player_GetSomePos(s32 slot, Vec* arg_vec) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    *arg_vec = player->player_poses.byVecName.some_other_player_pos;
+}
+
+void Player_SetSomePos(s32 slot, Vec* arg_vec) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->player_poses.byVecName.some_other_player_pos = *arg_vec;
+}
+
+s32 Player_80032F30(s32 slot) { 
+    StaticPlayer* player;
+    s32 value;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    value = player->unk4E;
+    return value;
+}
+
+
+void Player_80032FA4(s32 slot, s32 arg) {  
+    StaticPlayer* player;
+    s32 value;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->unk4E = arg;
+}
+
+
+f32 Player_GetFacingDirection(s32 slot) {  
+    StaticPlayer* player;
+    s32 value;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    return player->facing_direction;
+}
+
+void Player_SetFacingDirection(s32 slot, f32 direction) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->facing_direction = direction;
+}
+
+void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction) { 
+    StaticPlayer* player;
+    s32 unused;
+    if (!b) {
+        Player_CheckSlot(slot);
+        player = &player_slots[slot];
+        player->facing_direction = direction;
+    }
+}
+
+u32 Player_GetCostumeId(s32 slot) {   
+    u8 costume_id;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    costume_id = player->costume_id;
+    return costume_id;
+}
+
+void Player_SetCostumeId(s32 slot, s8 costume_id) { 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->costume_id = costume_id;
+}
+
+u8 Player_GetControllerIndex(s32 slot) {   
+    s8 controller_index;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    controller_index = player->controller_index;
+    return controller_index;
+}
+
+void Player_SetControllerIndex(s32 slot, s8 controller_index) {    
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->controller_index = controller_index;
+}
+
+s8 Player_GetTeam(s32 slot) {  
+    s8 team;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    team = player->team;
+    return team;
+}
+
+void Player_SetTeam(s32 slot, s8 team) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->team = team;
+}
+
+
+s8 Player_GetPlayerId(s32 slot) {  
+    s8 player_id;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player_id = player->player_id;
+    return player_id;
+}
+
+void Player_SetPlayerId(s32 slot, s8 player_id) {
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->player_id = player_id;
+}
+
+
+s8 Player_GetCpuLevel(s32 slot) {  
+    s8 cpu_level;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    cpu_level = player->cpu_level;
+    return cpu_level;
+}
+
+
+void Player_SetPlayerAndEntityCpuLevel(s32 slot, s8 cpu_level) {   
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->cpu_level = cpu_level;
+    for (i = 0; i < 2; i++){
+        if (player->player_entity[player->transformed[i]]) {
+            func_80087BEC(player->player_entity[player->transformed[i]], cpu_level);
+        }
+    }
+}
+
+s8 Player_GetCpuType(s32 slot) {  
+    s8 cpu_type;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    cpu_type = player->cpu_type;
+    return cpu_type;
+}
+
+
+void Player_SetPlayerAndEntityCpuType(s32 slot, s8 cpu_type) { 
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->cpu_type = cpu_type;
+    for (i = 0; i < 2; i++){
+        if (player->player_entity[player->transformed[i]]) {
+            func_80087BC0(player->player_entity[player->transformed[i]], cpu_type);
+        }
+    }
+}
+
+s8 Player_GetHandicap(s32 slot) {  
+    s8 handicap;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    handicap = player->handicap;
+    return handicap;
+}
+
+void Player_SetHandicap(s32 slot, s8 handicap) { 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->handicap = handicap;
+}
+
+f32 Player_GetUnk50(s32 slot) {  
+    f32 unk50;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    unk50 = player->unk50;
+    return unk50;
+}
+
+f32 Player_GetAttackRatio(s32 slot) {  
+    f32 attack_ratio;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    attack_ratio = player->attack_ratio;
+    return attack_ratio;
+}
+
+void Player_SetAttackRatio(s32 slot, f32 attack_ratio) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->attack_ratio = attack_ratio;
+}
+
+f32 Player_GetDefenseRatio(s32 slot) {   
+    f32 defense_ratio;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    defense_ratio = player->defense_ratio;
+    return defense_ratio;
+}
+
+void Player_SetDefenseRatio(s32 slot, f32 defense_ratio) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->defense_ratio = defense_ratio;
+}
+
+f32 Player_GetModelScale(s32 slot) { 
+    f32 model_scale;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    model_scale = player->model_scale;
+    return model_scale;
+}
+
+void Player_SetModelScale(s32 slot, f32 model_scale) {   
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->model_scale = model_scale;
+}
+
+s32 Player_80033BB8(s32 slot) {  
+    return func_8016C5C0(slot);
+}
+
+s32 Player_GetStocks(s32 slot) { 
+    s8 stocks;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    stocks = player->stocks;
+    return stocks;
+}
+
+
+s32 Player_GetP1Stock() {  
+    return player_slots[0].stocks;
+}
+
+
+void Player_SetStocks(s32 slot, s32 stocks) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->stocks = stocks;
+}
+
+void Player_LoseStock(s32 slot) {   
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    if (player->stocks > 0){
+        player->stocks = player->stocks - 1;
+    }
+}
+
+s32 Player_GetCoins(s32 slot) {  
+    s32 current_coins;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    current_coins = player->current_coins;
+    return current_coins;
+}
+
+void Player_SetCoins(s32 slot, s32 current_coins) {   
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->current_coins = current_coins;
+}
+
+s32 Player_GetTotalCoins(s32 slot) {  
+    s32 total_coins;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    total_coins = player->total_coins;
+    return total_coins;
+}
+
+void Player_SetTotalCoins(s32 slot, s32 coins) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->total_coins = coins;
+}
+
+s32 Player_GetUnk98(s32 slot) {
+    s32 unk98;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    unk98 = player->unk98;
+    return unk98;
+}
+
+void Player_SetUnk98(s32 slot, s32 unk98) { 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->unk98 = unk98;
+}
+
+s32 Player_GetUnk9C(s32 slot) {   
+    s32 unk9C;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    unk9C = player->unk9C;
+    return unk9C;
+}
+
+void Player_SetUnk9C(s32 slot, s32 unk9C) { 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->unk9C = unk9C;
+}
+
+HSD_GObj* Player_GetEntity(s32 slot) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    return player->player_entity[player->transformed[0]];
+}
+
+HSD_GObj* Player_GetEntityAtIndex(s32 slot, s32 index) {  //   Mostly called by Ice Climbers code, must be because they have 2nd entity
+    StaticPlayer* player;
+    s32 entity_index;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    entity_index = player->transformed[index];
+    return player->player_entity[entity_index];
+}
+
+void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2) {  
+    u8 temp_r5;
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    temp_r5 = player->transformed[arg1];
+    player->transformed[arg1] = player->transformed[arg2];
+    player->transformed[arg2] = temp_r5;
+}
+
+s32 Player_GetDamage(s32 slot) {   
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    return player->staminas.byIndex[player->transformed[0]];
+}
+
+void Player_SetHUDDamage(s32 slot,s32 arg1) {  
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+
+    for (i = 0; i < 2; i++) {
+        player = &player_slots[slot];
+        player->staminas.byIndex[player->transformed[i]] = arg1;
+        if (player->player_entity[player->transformed[i]]) {
+            func_800870F0(player->player_entity[player->transformed[i]], arg1);
+        }
+    }
+}
+
+void Player_SetHPByIndex(s32 slot, s32 arg1, s32 arg2) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+
+    player = &player_slots[slot];
+    player->staminas.byIndex[player->transformed[arg1]] = arg2;
+}
+
+s16 Player_GetOtherStamina(s32 slot) {  
+    s16 stamina; 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    stamina = player->staminas.byName.stamina;
+    return stamina;
+}
+
+void Player_SetOtherStamina(s32 slot, s32 stamina) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->staminas.byName.stamina = stamina;
+}
+
+u32 Player_GetRemainingHP(s32 slot) {  
+    StaticPlayer* player;
+    s32 result;
+    u32 result2;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    result = player->staminas.byName.stamina - player->staminas.byIndex[player->transformed[0]];
+    result2 = result;
+    if (result < 0) { result2 = 0; }
+    return result2;
+}
+
+u8 Player_GetMoreFlagsBit2(s32 slot) { 
+    StaticPlayer* player;
+    u8 bit2;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    bit2 = player->more_flags.b2;
+    return bit2;
+}
+
+void Player_SetMoreFlagsBit2(s32 slot, u8 bit2) {  
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    player->more_flags.b2 = bit2;
+}
+
+s32 Player_GetMoreFlagsBit3(s32 slot) {   
+    StaticPlayer* player;
+    s32 bit3;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    bit3 = player->more_flags.b3;
+    return bit3;
+}
+
+void Player_SetMoreFlagsBit3(s32 slot, u8 bit3) {   
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    player->more_flags.b3 = bit3;
+}
+
+void Player_SetMoreFlagsBit4(s32 slot, u8 bit4) {
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    player->more_flags.b4 = bit4;
+}
+
+s32 Player_GetMoreFlagsBit4(s32 slot) {
+    StaticPlayer* player;
+    u8 bit4;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    bit4 = player->more_flags.b4;
+    return bit4;
+}
+
+u8 Player_GetMoreFlagsBit5(s32 slot) { 
+    StaticPlayer* player;
+    u8 bit5;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    bit5 = player->more_flags.b5;
+    return bit5;
+}
+
+
+void Player_SetMoreFlagsBit5(s32 slot, u8 bit5) {
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    player->more_flags.b5 = bit5;
+}
+
+u8 Player_GetMoreFlagsBit6(s32 slot) {  
+    StaticPlayer* player;
+    u8 bit6;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    bit6 = player->more_flags.b6;
+    return bit6;
+}
+
+
+void Player_SetMoreFlagsBit6(s32 slot, u8 bit6) {   
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    player->more_flags.b6 = bit6;
+}
+
+u8 Player_GetFlagsAEBit0(s32 slot) {   
+    StaticPlayer* player;
+    u8 bit0;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    bit0 = player->flagsAE.b0;
+    return bit0;
+}
+
+void Player_SetFlagsAEBit0(s32 slot, u8 bit0) {   
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    player->flagsAE.b0 = bit0;
+}
+
+u32 Player_GetRemainingHPByIndex(s32 slot, s32 index) { 
+    StaticPlayer* player;
+    u32 stamina;
+    s32 result;
+    u32 result2;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    stamina = player->staminas.byName.stamina;
+    result = stamina - player->staminas.byIndex[player->transformed[index]];
+    result2 = result;
+    if (result < 0) { result2 = 0; }
+    return result2;
+}
+
+s32 Player_GetFalls(s32 slot) {  /// decomp.me/scratch/8ijor
+    StaticPlayer* player;
+    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    if (unkStruct->vec_arr[player->player_character].y != -1 && unkStruct->vec_arr[player->player_character].z != 0) {
+        return player->falls[player->transformed[0]] + player->falls[player->transformed[1]];
+    }
+
+    return player->falls[player->transformed[0]];
+}
+
+s32 Player_GetFallsByIndex(s32 slot, s32 arg1) {  
+    StaticPlayer* player;
+    s32 falls;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    falls = player->falls[player->transformed[arg1]];
+    return falls;
+}
+
+void Player_SetFalls(s32 slot, s32 falls) {   
+    StaticPlayer* player;
+    s32 unused;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->falls[player->transformed[0]] = falls;
+}
+
+void Player_SetFallsByIndex(s32 slot, s32 index, s32 falls) {   
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->falls[player->transformed[index]] = falls;
+}
+
+
+s32 Player_GetKOsByPlayerIndex(s32 slot, s32 index) {   
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    return player->kos_by_player[index];
+}
+
+void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot) {  
+    StaticPlayer* player;
+    StaticPlayer* other_player;
+
+    s32 unused[4];
+
+    s32 player_team;
+    s32 other_player_team;
+
+    s32 kos;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+
+    if (bool_arg == 0) {
+        kos = player->kos_by_player[other_slot];
+
+        if (kos < -1U) {
+            player->kos_by_player[other_slot]++;
+        }
+
+        if (slot == other_slot){
+            func_802F6D10(other_slot);
+        } else {
+
+            if (func_8016B168() != 0) {
+                Player_CheckSlot(slot);
+                Player_CheckSlot(other_slot);
+                other_player = &player_slots[other_slot];
+                player_team = player->team;
+                other_player_team = other_player->team;
+                if (player_team == other_player_team) {
+                    func_802F69C0(other_slot, slot);
+                    return;
+                }
+            }
+
+            func_802F6AF8(other_slot);
+        }
+    }
+}
+
+
+u32 Player_GetMatchFrameCount(s32 slot) {   
+    StaticPlayer* player;
+    s32 count;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    count = player->match_frame_count;
+    return count;
+}
+
+
+void Player_UpdateMatchFrameCount(s32 slot, BOOL condition) {   
+    StaticPlayer* player;
+    s32 unused;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    if ((condition == 0) && (player->match_frame_count + 0x10000) == 0xffff) {
+        player->match_frame_count = func_8016AEDC();
+    }
+}
+
+
+u16 Player_GetSuicideCount(s32 slot) { 
+    StaticPlayer* player;
+    u16 count;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    count = player->suicide_count;
+    return count;
+}
+
+void Player_SetSuicideCount(s32 slot, u32 suicide_count) {  
+    StaticPlayer* player;
+    if (suicide_count > 0xffff || 0 >(s32)suicide_count) {
+        return;
+    }
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->suicide_count = suicide_count;
+}
+
+void Player_IncSuicideCount(s32 slot, s32 condition) {   
+    StaticPlayer* player;
+    u16 suicide_count;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    if (condition == 0) {
+        suicide_count = player->suicide_count;
+        if (suicide_count < 0xffff) {
+            player->suicide_count++;
+            func_802F6C04(slot);
+        }
+    }
+}
+
+BOOL Player_800353BC(s32 slot) {   
+    StaticPlayer* player;
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    if (player->player_state == 2 && (player->flags.b0)) {
+        return 1;
+    }
+
+    return 0;
+}
+
+BOOL Player_8003544C(s32 slot, BOOL condition) {  
+    StaticPlayer* player;
+
+    s32 unused;
+
+    if (condition == FALSE) {
+        Player_CheckSlot(slot);
+        player = &player_slots[slot];
+
+        if (player->player_state == 2 && (player->flags.b0)) {
+            return TRUE;
+        }
+    }
+
+    return 0;
+}
+
+void Player_SetFlagsBit0(s32 slot, s32 bit0) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->flags.b0 = bit0;
+}
+
+
+s8 Player_GetNametagSlotID(s32 slot) {  
+    StaticPlayer* player;
+    s32 nametag_slot_id;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    nametag_slot_id = player->nametag_slot_id;
+    return nametag_slot_id & 0xFF;
+}
+
+void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->nametag_slot_id = nametag_slot_id;
+}
+
+
+s32 Player_GetFlagsBit1(s32 slot) {  
+    StaticPlayer* player;
+    u8 bit1;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit1 = player->flags.b1;
+    return bit1;
+}
+
+void Player_SetFlagsBit1(s32 slot) {  
+    StaticPlayer* player;
+    s8 one = 1;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->flags.b1 = one;
+}
+
+
+void Player_UnsetFlagsBit1(s32 slot) {  
+    StaticPlayer* player;
+    s8 zero = 0;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->flags.b1 = zero;
+}
+
+s32 Player_GetFlagsBit3(s32 slot) {  
+    StaticPlayer* player;
+    u8 bit3;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit3 = player->flags.b3;
+    return bit3;
+}
+
+void Player_SetFlagsBit3(s32 slot, u8 bit3) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->flags.b3 = bit3;
+}
+
+
+u8 Player_GetFlagsBit4(s32 slot) {  
+    StaticPlayer* player;
+    u8 bit4;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit4 = player->flags.b4;
+    return bit4;
+}
+
+u8 Player_GetFlagsBit5(s32 slot) {  
+    StaticPlayer* player;
+    u8 bit5;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit5 = player->flags.b5;
+    return bit5;
+}
+
+void Player_SetFlagsBit5(s32 slot, u8 bit5) {   
+    StaticPlayer* player;   
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->flags.b5 = bit5;
+}
+
+
+u8 Player_GetFlagsBit6(s32 slot) { 
+    StaticPlayer* player;
+    u8 bit6;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit6 = player->flags.b6;
+    return bit6;
+}
+
+void Player_SetFlagsBit6(s32 slot, u8 bit6) { 
+    StaticPlayer* player;   
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->flags.b6 = bit6;
+}
+
+u8 Player_GetFlagsBit7(s32 slot) {   
+    StaticPlayer* player;
+    u8 bit7;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit7 = player->flags.b7;
+    return bit7;
+}
+
+void Player_SetFlagsBit7(s32 slot, u8 bit7) {  
+    StaticPlayer* player;   
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->flags.b7 = bit7;
+}
+
+u8 Player_GetMoreFlagsBit0(s32 slot) { 
+    StaticPlayer* player;
+    u8 bit0;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit0 = player->more_flags.b0;
+    return bit0;
+}
+
+u8 Player_GetMoreFlagsBit1(s32 slot) {   
+    StaticPlayer* player;
+    u8 bit1;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit1 = player->more_flags.b1;
+    return bit1;
+}
+
+void Player_SetMoreFlagsBit1(s32 slot, u8 bit1) { 
+    StaticPlayer* player;   
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->more_flags.b1 = bit1;
+}
+
+s32 Player_GetUnk4D(s32 slot) {   
+    StaticPlayer* player;
+    u8 unk4D;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    unk4D = player->unk4D;
+    return unk4D;
+}
+
+
+void Player_SetUnk4D(s32 slot, s8 unk4D) {   
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->unk4D = unk4D;
+}
+
+u8 Player_GetFlagsAEBit1(s32 slot) {  
+    StaticPlayer* player;
+    u8 bit1;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    bit1 = player->flagsAE.b1;
+    return bit1;
+}
+
+////output is actually void, but needs u8 to match, most likely typo from Nintendo
+u8 Player_SetFlagsAEBit1(s32 slot, u8 bit1) {  
+    StaticPlayer* player; 
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player_slots[slot].flagsAE.b1 = bit1;
+}
+
+u8 Player_GetUnk4C(s32 slot) {  
+    StaticPlayer* player;
+    u8 unk4C;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    unk4C = player->unk4C;
+    return unk4C;
+}
+
+void Player_SetUnk4C(s32 slot, u8 unk4C) {
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->unk4C = unk4C;
+}
+
+void Player_80036058(s32 slot) {   
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    func_80086F4C(player->player_entity[player->transformed[0]]);
+}
+
+void Player_800360D8(s32 slot) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    func_80086F80(player->player_entity[player->transformed[0]]);
+}
+
+void Player_SetStructFunc(s32 slot, void* arg_func) { 
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->struct_func = arg_func;
+}
+
+s32* Player_GetTotalAttackCountPtr(s32 slot) {  
+    StaticPlayer* player;
+    s32* attack_count;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    attack_count = &player->total_attack_count;
+    return attack_count;
+}
+
+s32* Player_GetStaleMoveTableIndexPtr(s32 slot) {  
+    StaticPlayer* player;
+    s32* stale_move_table_index;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    stale_move_table_index = &player->stale_move_table_current_write_index;
+    return stale_move_table_index;
+}
+
+s32* Player_GetUnk6A8Ptr(s32 slot) {   
+    StaticPlayer* player;
+    s32* unk6A8;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    unk6A8 = &player->unk6A8;
+    return unk6A8;
+}
+
+s32* Player_GetStaleMoveTableIndexPtr2(s32 slot) { 
+    StaticPlayer* player;
+    s32* stale_move_table_index;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    stale_move_table_index = &player->stale_move_table_current_write_index;
+    return stale_move_table_index;
+}
+
+s32 Player_80036394(s32 slot) { 
+    StaticPlayer* player;
+    HSD_GObj* entity;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    entity = player->player_entity[player->transformed[0]];
+
+    if (entity) {
+        return func_800872A4(entity);
+    }
+    return -1;
+}
+
+s32 Player_80036428(s32 slot) {  
+    StaticPlayer* player;
+    HSD_GObj* entity;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    entity = player->player_entity[player->transformed[0]];
+
+    if (entity) {
+        return func_80087300(entity);
+    }
+    return 6;
+}
+
+void Player_SetUnk45(s32 slot, s8 unk45) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    player->unk45 = unk45;
+}
+
+u8 Player_GetUnk45(s32 slot) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    if (player->slot_type == 0) {
+        return player->unk45;
+    }
+
+    return 4;
+}
+
+
+void Player_UpdateJoystickCountByIndex(s32 slot, s32 index) {   
+    StaticPlayer* player;
+    s32 transformed;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    transformed = player->transformed[index];
+    player->joystick_direction_input_count[transformed]++;
+}
+
+
+s32 Player_GetJoystickCountByIndex(s32 slot, s32 index) {  
+    StaticPlayer* player;
+    s32 transformed;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    transformed = player->transformed[index];
+    return player->joystick_direction_input_count[transformed];
+}
+
+void Player_800366DC(s32 slot, s32 arg1) {  
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
+            func_80087AC0(player->player_entity[player->transformed[i]], arg1);
+        }
+    }
+}
+
+void Player_80036790(s32 slot, f32 arg1) {   
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
+            func_80086A4C(player->player_entity[player->transformed[i]], arg1);
+        }
+    }
+}
+
+void Player_80036844(s32 slot, s32 arg1) {  
+    StaticPlayer* player;
+    s32 i;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
+            func_80087BAC(player->player_entity[player->transformed[i]], arg1);
+        }
+    }
+}
+
+void Player_800368F8(s32 slot) {  
+    StaticPlayer* player;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    func_80086BB4(player->player_entity[player->transformed[0]]);
+}
+
+void Player_80036978(s32 slot, s32 arg1) {  
+    StaticPlayer* player;
+    s32 unused;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    func_80086B90(player->player_entity[player->transformed[0]], arg1);
+}
+
+
+
+void Player_InitOrResetPlayer(s32 slot) {   
+    StaticPlayer* player;
+    u8 *transformed0;
+    u8 *transformed1;
+    f32 zerofloat;
+    f32 onefloat;
+    s32 unused[14];
+
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    player->player_state = 0;
+    player->player_character = 8;
+    transformed0 = &player->transformed[0];
+    transformed1 = &player->transformed[1];
+
+    zerofloat = 0.0f;
+    player->player_poses.byIndex[*transformed0].z = zerofloat;
+    player->player_poses.byIndex[*transformed0].y = zerofloat;
+    player->player_poses.byIndex[*transformed0].x = zerofloat;
+
+    player->player_poses.byIndex[*transformed1].z = zerofloat;
+    player->player_poses.byIndex[*transformed1].y = zerofloat;
+    player->player_poses.byIndex[*transformed1].x = zerofloat;
+
+    player->player_poses.byIndex[2].z = zerofloat;
+    player->player_poses.byIndex[2].y = zerofloat;
+    player->player_poses.byIndex[2].x = zerofloat;
+    player->player_poses.byIndex[3].z = zerofloat;
+    player->player_poses.byIndex[3].y = zerofloat;
+    player->player_poses.byIndex[3].x = zerofloat;
+
+    player->costume_id = 0;
+    player->slot_type = 3;
+    player->transformed[0] = 0;
+    player->transformed[1] =  1;
+
+    player->unk45 = 0;
+    player->controller_index = 0;
+    player->team = 0;
+    player->player_id = 0;
+    player->cpu_level = 0;
+
+    player->cpu_type = 4;
+
+    player->handicap = 0;
+    player->unk4C = 0;
+
+    player->unk4D = 4;
+    player->unk4E = -1;
+
+    onefloat = 1.0;
+    player->unk50 = onefloat;
+    player->attack_ratio = onefloat;
+    player->defense_ratio = onefloat;
+    player->model_scale = onefloat;
+
+    player->staminas.byIndex[player->transformed[0]] = 0;
+    player->staminas.byIndex[player->transformed[1]] = 0;
+    player->staminas.byIndex[2] = 0;
+
+    player->falls[player->transformed[0]] =  0;
+    player->falls[player->transformed[1]] =  0;
+
+    player->kos_by_player[0] = 0;
+    player->kos_by_player[1] = 0;
+    player->kos_by_player[2] = 0;
+    player->kos_by_player[3] = 0;
+    player->kos_by_player[4] = 0;
+    player->kos_by_player[5] = 0;
+
+    player->match_frame_count = -1;
+    player->suicide_count = 0;
+    player->stocks = 0;
+
+    player->current_coins = 0;
+    player->total_coins = 0;
+    player->unk98 = 0;
+    player->unk9C = 0;
+
+    player->joystick_direction_input_count[*transformed0] = 0;
+    player->joystick_direction_input_count[*transformed1] = 0;
+
+    player->flags.b0 = 0;
+    player->nametag_slot_id = 0;
+    player->flags.b1 = 0;
+    player->flags.b2 = 0;
+    player->flags.b3 = 0;
+    player->flags.b4 = 0;
+    player->flags.b5 = 0;
+    player->flags.b6 = 0;
+    player->flags.b7 = 0;
+
+    player->more_flags.b0 = 0;
+    player->more_flags.b1 = 0;
+    player->more_flags.b2 = 0;
+    player->more_flags.b3 = 0;
+    player->more_flags.b4 = 0;
+    player->more_flags.b5 = 0;
+    player->more_flags.b6 = 0;
+
+    player->flagsAE.b0 = 0;
+    player->flagsAE.b1 = 0;
+
+    player->player_entity[*transformed0] = 0;
+    player->player_entity[*transformed1] = 0;
+
+    player->struct_func = 0;
+}
+
+void Player_80036CF0(s32 slot) {   
+    Player_InitOrResetPlayer(slot);
+    func_8003891C(slot);
+}
+
+
+void Player_80036D24(s32 slot) {   
+    Player_InitOrResetPlayer(slot);
+    func_80038F10(slot);
+}
+
+void Player_InitAllPlayers() {   
+    s32 i;
+    func_8003715C();
+    func_80037590();
+
+    for (i = 0; i < 6; i++) {
+        Player_InitOrResetPlayer(i);
+        func_8003891C(i);
+    }
+}
+
+void Player_80036DA4() { 
+    HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
+    Fighter_FirstInitialize_80067A84();
+}
+
+void Player_80036DD8() {   
+    s32 *sp8;
+
+    func_80016C64(str_PdPmdat_start_of_data, &sp8, str_plLoadCommonData, 0);
+    lbl_804D6470 = *sp8;
+}
+
+void Player_80036E20(s32 arg0, s32 arg1, s32 arg2) {   /// decomp.me/scratch/J1Elr
+    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    func_800BEB60(unkStruct->vec_arr[arg0].x, arg1, arg2);
+    if ((unkStruct->vec_arr[arg0].y != -1) && (unkStruct->vec_arr[arg0].z == 0)) {
+        func_800BEB60(unkStruct->vec_arr[arg0].y, arg1, arg2);
+    }
+}
+
+s32 Player_80036EA0(s32 slot) { 
+    StaticPlayer* player;
+    HSD_GObj* entity;
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+
+    entity = player->player_entity[player->transformed[0]];
+
+    if (entity) { return func_800865F0(entity);  } 
+
+    return 0;
+}
+
+void Player_80036F34(s32 slot, s32 arg1) { 
+    struct plAllocInfo2 some_struct;
+    u8 unused;
+
+    StaticPlayer* player;
+    
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    some_struct.internal_id = ftMapping_list[player->player_character].internal_id;
+    some_struct.slot = slot;  
+    some_struct.bits.has_transformation = 0; 
+    some_struct.unk8 = arg1;  
+    some_struct.bits.b0 = 0;
+
+
+    player->slot_type = 2;
+    player->player_entity[0] = func_800BE7E0(&some_struct);
+    if ((ftMapping_list[player->player_character].extra_internal_id != -1) && (ftMapping_list[player->player_character].has_transformation == 0)) {
+        some_struct.internal_id = ftMapping_list[player->player_character].extra_internal_id;
+        some_struct.bits.has_transformation = 1;
+        player->player_entity[1] = func_800BE7E0(&some_struct);
+    }  
+}
+
+
+void Player_80037054(s32 slot, s32 arg1) { 
+    struct plAllocInfo2 some_struct;
+    u8 unused;
+
+    StaticPlayer* player;
+    
+    Player_CheckSlot(slot);
+    player = &player_slots[slot];
+    some_struct.internal_id = ftMapping_list[player->player_character].internal_id;  
+    some_struct.slot = slot;  
+    some_struct.bits.has_transformation = 0;  
+    some_struct.unk8 = arg1;  
+    some_struct.bits.b0 = 1;
+
+
+    player->slot_type = 2;
+    player->player_entity[0] = func_800BE7E0(&some_struct);
+    if ((ftMapping_list[player->player_character].extra_internal_id != -1) && (ftMapping_list[player->player_character].has_transformation == 0)) {
+        some_struct.internal_id = ftMapping_list[player->player_character].extra_internal_id;
+        some_struct.bits.has_transformation = 1;
+        player->player_entity[1] = func_800BE7E0(&some_struct);
+    }
+}
+

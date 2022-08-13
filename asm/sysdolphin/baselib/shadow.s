@@ -64,9 +64,9 @@ lbl_8037F43C:
 lbl_8037F454:
 /* 8037F454 0037C034  83 DF 00 08 */	lwz r30, 8(r31)
 /* 8037F458 0037C038  80 7E 00 58 */	lwz r3, 0x58(r30)
-/* 8037F45C 0037C03C  4B FE 1E F5 */	bl func_80361350
+/* 8037F45C 0037C03C  4B FE 1E F5 */	bl HSD_ImageDescFree
 /* 8037F460 0037C040  7F C3 F3 78 */	mr r3, r30
-/* 8037F464 0037C044  4B FE 1D 85 */	bl func_803611E8
+/* 8037F464 0037C044  4B FE 1D 85 */	bl HSD_TObjFree
 /* 8037F468 0037C048  3C 60 80 4C */	lis r3, shadow_alloc_data@ha
 /* 8037F46C 0037C04C  38 63 25 D8 */	addi r3, r3, shadow_alloc_data@l
 /* 8037F470 0037C050  38 9F 00 00 */	addi r4, r31, 0
@@ -770,7 +770,7 @@ lbl_8037FE18:
 /* 8037FE20 0037CA00  4B FE 9E 11 */	bl func_80369C30
 /* 8037FE24 0037CA04  FC 20 F0 90 */	fmr f1, f30
 /* 8037FE28 0037CA08  FC 40 F8 90 */	fmr f2, f31
-/* 8037FE2C 0037CA0C  4B CA 2E 05 */	bl func_80022C30
+/* 8037FE2C 0037CA0C  4B CA 2E 05 */	bl atan2f
 /* 8037FE30 0037CA10  7F E3 FB 78 */	mr r3, r31
 /* 8037FE34 0037CA14  4B FE 9D B9 */	bl func_80369BEC
 /* 8037FE38 0037CA18  48 00 00 74 */	b lbl_8037FEAC
@@ -1036,8 +1036,7 @@ lbl_803801B0:
 
 
 .section .data
-
-    .4byte NULL
+    .balign 8
 .global lbl_80407310
 lbl_80407310:
     .asciz "shadow.c"
@@ -1130,14 +1129,14 @@ lbl_80407448:
 
 
 .section .bss, "wa"
-
+    .balign 8
 .global shadow_alloc_data
 shadow_alloc_data:
 	.skip 0x30
 
 
 .section .sdata
-    .4byte NULL
+    .balign 8
 .global lbl_804D5F78
 lbl_804D5F78:
     .asciz "shadow"
@@ -1150,11 +1149,10 @@ lbl_804D5F80:
 lbl_804D5F84:
     .asciz "rect"
     .balign 4
-    .4byte NULL
 
 
 .section .sdata2
-
+    .balign 8
 .global lbl_804DE768
 lbl_804DE768:
 	.4byte 0x3F000000
