@@ -287,7 +287,7 @@ lbl_804D7958:
     .balign 8
 .global lbl_804DEA68
 lbl_804DEA68:
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEA6C
 lbl_804DEA6C:
-	.4byte 0x3F800000
+	.float 1.0
