@@ -16,8 +16,15 @@ typedef struct ftMewtwoSpecialHi {
 
 } ftMewtwoSpecialHi;
 
+typedef struct ftMewtwoSpecialS {
+
+	u8 isConfusionReflect : 1; // 0x2340 - ???
+
+} ftMewtwoSpecialS;
+
 typedef union ftMewtwoStateVars {
 
+	ftMewtwoSpecialS SpecialS;
 	ftMewtwoSpecialHi specialHi;
 
 } ftMewtwoStateVars;

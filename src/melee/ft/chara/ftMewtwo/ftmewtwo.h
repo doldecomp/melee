@@ -1,13 +1,12 @@
 #ifndef _ftMewTwo_h_
 #define _ftMewTwo_h_
 
-#include <global.h>
-
-#include <dolphin/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/it/item.h>
+#include <melee/it/itkind.h>
 
 typedef enum ftMewtwoAction {
 
@@ -35,11 +34,27 @@ typedef enum ftMewtwoAction {
 
 } ftMewtwoAction;
 
+// Flag values read during Confusion's reflect think function
+
+#define CONFUSION_REFLECT_NONE 0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is either 1 or 2 because 0 does nothing). 
+
+#define CONFUSION_REFLECT_ON 1 // Toggle reflect bubble on.
+
+#define CONFUSION_REFLECT_OFF 2 // Toggle reflect bubble off.
+
 // Flags used by Mewtwo in Action State Change //
+
+// SpecialS/SpecialAirS //
+
+#define FTMEWTWO_SPECIALS_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 // SpecialHi/SpecialAirHi //
 
 #define FTMEWTWO_SPECIALHI_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+
+// SpecialLw/SpecialAirLw //
+
+#define FTMEWTWO_SPECIALLW_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 typedef struct _ftMewtwoAttributes {
 
@@ -76,8 +91,8 @@ typedef struct _ftMewtwoAttributes {
 
     // DOWN SPECIAL - DISABLE (SpecialLw/SpecialAirLw) //
 
-    f32 x78_MEWTWO_DISABLE_TERMINAL_VELOCITY;
-    f32 x7C_MEWTWO_DISABLE_VEL_Y_MUL;
+    f32 x78_MEWTWO_DISABLE_GRAVITY;
+    f32 x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY;
     f32 x80_MEWTWO_DISABLE_OFFSET_X;
     f32 x84_MEWTWO_DISABLE_OFFSET_Y;
 
@@ -85,7 +100,9 @@ typedef struct _ftMewtwoAttributes {
 
 // Mewtwo functions //
 
-void ftMewtwo_OnDeath(HSD_GObj* gobj);
+void ftMewtwo_OnDeath(HSD_GObj* fighter_gobj);
+void ftMewtwo_OnDeath2(HSD_GObj* fighter_gobj);
+void ftMewtwo_OnTakeDamage(HSD_GObj* fighter_gobj);
 
 // Up Special - Teleport (SpecialHi/SpecialAirHi) //
 
@@ -127,5 +144,41 @@ void ftMewtwo_SpecialAirHiLost_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHiLost_GroundToAir(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHiLost_Action(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirHiLost_Action(HSD_GObj* fighter_gobj);
+
+// Down Special - Disable (SpecialLw/SpecialAirLw) //
+
+void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirLw_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirLw_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirLw_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirLw_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* fighter_gobj);
+
+// Side Special - Confusion (SpecialS/SpecialAirS) //
+
+void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_OnReflect(HSD_GObj* fighter_gobj);
 
 #endif

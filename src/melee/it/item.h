@@ -803,7 +803,7 @@ f32 func_8026B424(s32 damage);                                /* extern */
 u8 func_8026B7B0(HSD_GObj* item_gobj);                         // Get Team ID //
 void func_8026BDCC(HSD_GObj* item_gobj);                         /* extern */
 void func_8026C368(HSD_GObj* item_gobj);                         /* extern */
-void func_8026D324(s32);
+s32 func_8026D324(s32);
 s32 func_8026D604(HSD_GObj* item_gobj);
 void func_8026F9A0();
 void func_802701BC(HSD_GObj* item_gobj);
