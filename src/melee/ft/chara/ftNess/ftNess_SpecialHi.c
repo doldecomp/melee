@@ -208,12 +208,12 @@ BOOL ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* fighter_gobj)
 BOOL ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj) // Checks if Ness is in SpecialHiHold/SpecialAirHiHold (PK Thunder control loop) //
 {
     s32 ASID;
-    Fighter* fighter_data;
+    Fighter* fp;
     s32 phi_r3;
-    Fighter* new_var;
+    Fighter* fp_1;
 
-    fighter_data = (new_var = getFighter(fighter_gobj));
-    ASID = fighter_data->x10_action_state_index;
+    fp = (fp_1 = getFighter(fighter_gobj));
+    ASID = fp->x10_action_state_index;
 
     phi_r3 = TRUE;
 
@@ -235,13 +235,13 @@ BOOL ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj) // Checks if Ness is in S
 void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj)  // OnTakeDamage? //
 {
     Fighter* fighter_data;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     s32 ASID;
 
-    temp_fighter = fighter_gobj->user_data;
-    if (temp_fighter->sa.ness.x2244_pkThunderGObj != NULL)
+    temp_fp = fighter_gobj->user_data;
+    if (temp_fp->sa.ness.x2244_pkThunderGObj != NULL)
     {
-        temp_fighter->sa.ness.x2244_pkThunderGObj = NULL;
+        temp_fp->sa.ness.x2244_pkThunderGObj = NULL;
     }
     fighter_data = getFighter(fighter_gobj);
     ASID = fighter_data->x10_action_state_index;
@@ -260,9 +260,9 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj)  // OnTakeDamage? //
         fighter_data->sa.ness.x224C_thunderGFX = FALSE;
 
     default:
-        temp_fighter->cb.x21E4_callback_OnDeath2 = NULL;
-        temp_fighter->cb.x21DC_callback_OnTakeDamage = NULL;
-        func_8007592C(temp_fighter, 0, 0.0f);
+        temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
+        temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        func_8007592C(temp_fp, 0, 0.0f);
     }
 }
 
@@ -275,13 +275,13 @@ void ftNess_SpecialHiTakeDamage(HSD_GObj* fighter_gobj)  // OnTakeDamage again? 
     s32 ASID;
     Fighter* fighter_data;
     Fighter* fighter_data2;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
 
-    temp_fighter = fighter_gobj->user_data;
-    fighter_data = temp_fighter;
-    if (temp_fighter->sa.ness.x2244_pkThunderGObj != NULL)
+    temp_fp = fighter_gobj->user_data;
+    fighter_data = temp_fp;
+    if (temp_fp->sa.ness.x2244_pkThunderGObj != NULL)
     {
-        func_802AB9C0(temp_fighter->sa.ness.x2244_pkThunderGObj);
+        func_802AB9C0(temp_fp->sa.ness.x2244_pkThunderGObj);
         fighter_data->sa.ness.x2244_pkThunderGObj = NULL;
     }
     fighter_data2 = getFighter(fighter_gobj);
@@ -300,9 +300,9 @@ void ftNess_SpecialHiTakeDamage(HSD_GObj* fighter_gobj)  // OnTakeDamage again? 
         efLib_DestroyAll(fighter_gobj);
         fighter_data2->sa.ness.x224C_thunderGFX = FALSE;
     default:
-        temp_fighter->cb.x21E4_callback_OnDeath2 = NULL;
-        temp_fighter->cb.x21DC_callback_OnTakeDamage = NULL;
-        func_8007592C(temp_fighter, 0, 0.0f);
+        temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
+        temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+        func_8007592C(temp_fp, 0, 0.0f);
     }
 }
 
@@ -311,12 +311,12 @@ void ftNess_SpecialHiTakeDamage(HSD_GObj* fighter_gobj)  // OnTakeDamage again? 
 void ftNess_ItemPKThunderCheckOwn(HSD_GObj* fighter_gobj, HSD_GObj* thunder_gobj) // Run from PK Thunder's OnReflect callback. Sets Ness's reference to PK Thunder to NULL if he is reflecting his own PK Thunder. //
 {
     HSD_GObj* temp_thunder;
-    Fighter* temp_fighter = getFighter(fighter_gobj);
+    Fighter* temp_fp = getFighter(fighter_gobj);
 
-    temp_thunder = temp_fighter->sa.ness.x2244_pkThunderGObj;
+    temp_thunder = temp_fp->sa.ness.x2244_pkThunderGObj;
     if ((temp_thunder != NULL) && (temp_thunder == thunder_gobj))
     {
-        temp_fighter->sa.ness.x2244_pkThunderGObj = NULL;
+        temp_fp->sa.ness.x2244_pkThunderGObj = NULL;
     }
 }
 
@@ -410,7 +410,7 @@ void ftNess_SpecialHi_StartAction(HSD_GObj* fighter_gobj)  // Ness's grounded PK
     f32 temp_f1_2;
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     ftNessAttributes* temp_attr;
     f64 phi_f0;
 
@@ -422,21 +422,21 @@ void ftNess_SpecialHi_StartAction(HSD_GObj* fighter_gobj)  // Ness's grounded PK
     fighter_data->x2208_ftcmd_var2 = 0;
     fighter_data->x2204_ftcmd_var1 = 0;
     fighter_data->x2200_ftcmd_var0 = 0;
-    temp_fighter = fighter_gobj->user_data;
-    temp_attr = getFtSpecialAttrs(temp_fighter);
-    temp_fighter->nessVars[0].SpecialHi.thunderTimerLoop1 = (s32)temp_attr->x40_PK_THUNDER_LOOP1;
-    temp_fighter->nessVars[0].SpecialHi.thunderTimerLoop2 = (s32)temp_attr->x44_PK_THUNDER_LOOP2;
-    temp_fighter->nessVars[0].SpecialHi.gravityDelay = (s32)temp_attr->x48_PK_THUNDER_GRAVITY_DELAY;
+    temp_fp = fighter_gobj->user_data;
+    temp_attr = getFtSpecialAttrs(temp_fp);
+    temp_fp->nessVars[0].SpecialHi.thunderTimerLoop1 = (s32)temp_attr->x40_PK_THUNDER_LOOP1;
+    temp_fp->nessVars[0].SpecialHi.thunderTimerLoop2 = (s32)temp_attr->x44_PK_THUNDER_LOOP2;
+    temp_fp->nessVars[0].SpecialHi.gravityDelay = (s32)temp_attr->x48_PK_THUNDER_GRAVITY_DELAY;
     temp_f1_2 = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.fallAccel = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVector1.z = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVector1.y = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVector1.x = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVar4 = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVar3 = 0.0f;
-    temp_fighter->cb.x21E4_callback_OnDeath2 = NULL;
-    temp_fighter->cb.x21DC_callback_OnTakeDamage = NULL;
-    func_8007592C(temp_fighter, 0, 0.0f);
+    temp_fp->nessVars[0].SpecialHi.fallAccel = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVector1.z = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVector1.y = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVector1.x = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVar4 = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVar3 = 0.0f;
+    temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
+    temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    func_8007592C(temp_fp, 0, 0.0f);
     fighter_data->nessVars[0].SpecialHi.thunderColl = 1;
     fighter_data->nessVars[0].SpecialHi.gravityDelay = (s32)ness_attr->x48_PK_THUNDER_GRAVITY_DELAY;
     fighter_data->nessVars[0].SpecialHi.jibakuGFX = 0;
@@ -469,7 +469,7 @@ void ftNess_SpecialAirHiStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial P
     f32 temp_f1_2;
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     ftNessAttributes* temp_attr;
     f64 phi_f0;
 
@@ -481,21 +481,21 @@ void ftNess_SpecialAirHiStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial P
     fighter_data->x2208_ftcmd_var2 = 0;
     fighter_data->x2204_ftcmd_var1 = 0;
     fighter_data->x2200_ftcmd_var0 = 0;
-    temp_fighter = fighter_gobj->user_data;
-    temp_attr = temp_fighter->x2D4_specialAttributes;
-    temp_fighter->nessVars[0].SpecialHi.thunderTimerLoop1 = (s32)temp_attr->x40_PK_THUNDER_LOOP1;
-    temp_fighter->nessVars[0].SpecialHi.thunderTimerLoop2 = (s32)temp_attr->x44_PK_THUNDER_LOOP2;
-    temp_fighter->nessVars[0].SpecialHi.gravityDelay = (s32)temp_attr->x48_PK_THUNDER_GRAVITY_DELAY;
+    temp_fp = fighter_gobj->user_data;
+    temp_attr = temp_fp->x2D4_specialAttributes;
+    temp_fp->nessVars[0].SpecialHi.thunderTimerLoop1 = (s32)temp_attr->x40_PK_THUNDER_LOOP1;
+    temp_fp->nessVars[0].SpecialHi.thunderTimerLoop2 = (s32)temp_attr->x44_PK_THUNDER_LOOP2;
+    temp_fp->nessVars[0].SpecialHi.gravityDelay = (s32)temp_attr->x48_PK_THUNDER_GRAVITY_DELAY;
     temp_f1_2 = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.fallAccel = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVector1.z = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVector1.y = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVector1.x = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVar4 = 0.0f;
-    temp_fighter->nessVars[0].SpecialHi.unkVar3 = 0.0f;
-    temp_fighter->cb.x21E4_callback_OnDeath2 = NULL;
-    temp_fighter->cb.x21DC_callback_OnTakeDamage = NULL;
-    func_8007592C(temp_fighter, 0, 0.0f);
+    temp_fp->nessVars[0].SpecialHi.fallAccel = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVector1.z = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVector1.y = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVector1.x = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVar4 = 0.0f;
+    temp_fp->nessVars[0].SpecialHi.unkVar3 = 0.0f;
+    temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
+    temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+    func_8007592C(temp_fp, 0, 0.0f);
     fighter_data->nessVars[0].SpecialHi.thunderColl = 1;
     fighter_data->nessVars[0].SpecialHi.gravityDelay = (s32)ness_attr->x48_PK_THUNDER_GRAVITY_DELAY;
     fighter_data->nessVars[0].SpecialHi.jibakuGFX = FALSE;
@@ -831,11 +831,11 @@ void ftNess_SpecialHi_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
     s32 ASID;
     Fighter* fighter_data;
     Fighter* fighter_data2;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
 
-    temp_fighter = fighter_gobj->user_data;
-    temp_fighter->nessVars[0].SpecialHi.jibakuGFX = (s32)(temp_fighter->nessVars[0].SpecialHi.jibakuGFX + 1);
-    if ((s32)temp_fighter->nessVars[0].SpecialHi.jibakuGFX == 1)
+    temp_fp = fighter_gobj->user_data;
+    temp_fp->nessVars[0].SpecialHi.jibakuGFX = (s32)(temp_fp->nessVars[0].SpecialHi.jibakuGFX + 1);
+    if ((s32)temp_fp->nessVars[0].SpecialHi.jibakuGFX == 1)
     {
         fighter_data = fighter_gobj->user_data;
         ftNess_SpecialHiStopGFX(fighter_gobj);
@@ -1012,11 +1012,11 @@ void ftNess_SpecialAirHiEnd_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Thu
 {
     s32 filler[2];
     Fighter* fighter_data;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     ftNessAttributes* ness_attr;
 
-    fighter_data = temp_fighter = fighter_gobj->user_data;
-    ness_attr = temp_fighter->x2D4_specialAttributes;
+    fighter_data = temp_fp = fighter_gobj->user_data;
+    ness_attr = temp_fp->x2D4_specialAttributes;
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
         fighter_data->x1968_jumpsUsed = fighter_data->x110_attr.x168_MaxJumps;
@@ -1076,11 +1076,11 @@ void ftNess_SpecialAirHiRebound_Anim(HSD_GObj* fighter_gobj) // Ness's PK Thunde
 {
     s32 filler[2];
     Fighter* fighter_data;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     ftNessAttributes* ness_attr;
 
-    fighter_data = temp_fighter = fighter_gobj->user_data;
-    ness_attr = temp_fighter->x2D4_specialAttributes;
+    fighter_data = temp_fp = fighter_gobj->user_data;
+    ness_attr = temp_fp->x2D4_specialAttributes;
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
         func_8007D60C(fighter_data);
@@ -1149,14 +1149,14 @@ void ftNess_SpecialAirHiRebound_IASA(HSD_GObj* fighter_gobj)
 
 inline void ThunderPhysTimer(HSD_GObj* fighter_gobj)
 {
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     s32 thunderPhysTimer;
 
-    temp_fighter = fighter_gobj->user_data;
-    thunderPhysTimer = temp_fighter->nessVars[0].SpecialHi.gravityDelay;
+    temp_fp = fighter_gobj->user_data;
+    thunderPhysTimer = temp_fp->nessVars[0].SpecialHi.gravityDelay;
     if (thunderPhysTimer != 0)
     {
-        temp_fighter->nessVars[0].SpecialHi.gravityDelay = (s32)(thunderPhysTimer - 1);
+        temp_fp->nessVars[0].SpecialHi.gravityDelay = (s32)(thunderPhysTimer - 1);
     }
 }
 
@@ -1190,37 +1190,37 @@ void ftNess_SpecialHi_Phys(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
     f32 temp_f2;
     f32 temp_f3;
     Fighter* fighter_data;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     ftNessAttributes* ness_attr;
 
-    temp_fighter = fighter_gobj->user_data;
-    temp_f2 = temp_fighter->xEC_ground_vel;
-    temp_f3 = temp_fighter->x80_self_vel.y;
-    ness_attr = temp_fighter->x2D4_specialAttributes;
-    temp_fighter->xEC_ground_vel = (f32)-((ness_attr->x5C_PK_THUNDER_2_DECELERATION_RATE * temp_fighter->x2C_facing_direction) - temp_f2);
-    if (1.0f == temp_fighter->x2C_facing_direction)
+    temp_fp = fighter_gobj->user_data;
+    temp_f2 = temp_fp->xEC_ground_vel;
+    temp_f3 = temp_fp->x80_self_vel.y;
+    ness_attr = temp_fp->x2D4_specialAttributes;
+    temp_fp->xEC_ground_vel = (f32)-((ness_attr->x5C_PK_THUNDER_2_DECELERATION_RATE * temp_fp->x2C_facing_direction) - temp_f2);
+    if (1.0f == temp_fp->x2C_facing_direction)
     {
-        if (temp_fighter->xEC_ground_vel <= 9.999999747378752e-05f)
+        if (temp_fp->xEC_ground_vel <= 9.999999747378752e-05f)
         {
-            temp_fighter->xEC_ground_vel = temp_f2;
+            temp_fp->xEC_ground_vel = temp_f2;
         }
     }
-    else if (temp_fighter->xEC_ground_vel >= -9.999999747378752e-05f)
+    else if (temp_fp->xEC_ground_vel >= -9.999999747378752e-05f)
     {
-        temp_fighter->xEC_ground_vel = temp_f2;
+        temp_fp->xEC_ground_vel = temp_f2;
     }
-    if (1.0f == temp_fighter->nessVars[0].SpecialHi.facingDir)
+    if (1.0f == temp_fp->nessVars[0].SpecialHi.facingDir)
     {
-        if (temp_fighter->x80_self_vel.y <= 9.999999747378752e-05f)
+        if (temp_fp->x80_self_vel.y <= 9.999999747378752e-05f)
         {
-            temp_fighter->x80_self_vel.y = temp_f3;
+            temp_fp->x80_self_vel.y = temp_f3;
         }
     }
-    else if (temp_fighter->x80_self_vel.y >= -9.999999747378752e-05f)
+    else if (temp_fp->x80_self_vel.y >= -9.999999747378752e-05f)
     {
-        temp_fighter->x80_self_vel.y = temp_f3;
+        temp_fp->x80_self_vel.y = temp_f3;
     }
-    temp_fighter->x2374_Vec3 = temp_fighter->x80_self_vel;
+    temp_fp->x2374_Vec3 = temp_fp->x80_self_vel;
     func_8007CB74(fighter_gobj);
     fighter_data = fighter_gobj->user_data;
     func_8007592C(fighter_data, 0, (fighter_data->x2C_facing_direction * atan2f(fighter_data->x80_self_vel.x, fighter_data->x80_self_vel.y)) - 1.5707963705062866f);
@@ -1451,7 +1451,7 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
     s32 ecbFlag2;
     Fighter* fighter_data2;
     Fighter* fighter_data;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     ftNessAttributes* temp_attr;
     f64 phi_f31;
     f64 phi_f31_2;
@@ -1463,20 +1463,20 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
         if (((ecbFlag & 0x3F) != 0) || ((ecbFlag & 0xFC0) != 0))
         {
             func_8007D60C(fighter_data);
-            temp_fighter = fighter_gobj->user_data;
-            temp_attr = temp_fighter->x2D4_specialAttributes;
-            temp_fighter->nessVars[0].SpecialHi.thunderTimerLoop1 = (s32)temp_attr->x40_PK_THUNDER_LOOP1;
-            temp_fighter->nessVars[0].SpecialHi.thunderTimerLoop2 = (s32)temp_attr->x44_PK_THUNDER_LOOP2;
-            temp_fighter->nessVars[0].SpecialHi.gravityDelay = (s32)temp_attr->x48_PK_THUNDER_GRAVITY_DELAY;
-            temp_fighter->nessVars[0].SpecialHi.fallAccel = 0.0f;
-            temp_fighter->nessVars[0].SpecialHi.unkVector1.z = 0.0f;
-            temp_fighter->nessVars[0].SpecialHi.unkVector1.y = 0.0f;
-            temp_fighter->nessVars[0].SpecialHi.unkVector1.x = 0.0f;
-            temp_fighter->nessVars[0].SpecialHi.unkVar4 = 0.0f;
-            temp_fighter->nessVars[0].SpecialHi.unkVar3 = 0.0f;
-            temp_fighter->cb.x21E4_callback_OnDeath2 = NULL;
-            temp_fighter->cb.x21DC_callback_OnTakeDamage = NULL;
-            func_8007592C(temp_fighter, 0, 0.0f);
+            temp_fp = fighter_gobj->user_data;
+            temp_attr = temp_fp->x2D4_specialAttributes;
+            temp_fp->nessVars[0].SpecialHi.thunderTimerLoop1 = (s32)temp_attr->x40_PK_THUNDER_LOOP1;
+            temp_fp->nessVars[0].SpecialHi.thunderTimerLoop2 = (s32)temp_attr->x44_PK_THUNDER_LOOP2;
+            temp_fp->nessVars[0].SpecialHi.gravityDelay = (s32)temp_attr->x48_PK_THUNDER_GRAVITY_DELAY;
+            temp_fp->nessVars[0].SpecialHi.fallAccel = 0.0f;
+            temp_fp->nessVars[0].SpecialHi.unkVector1.z = 0.0f;
+            temp_fp->nessVars[0].SpecialHi.unkVector1.y = 0.0f;
+            temp_fp->nessVars[0].SpecialHi.unkVector1.x = 0.0f;
+            temp_fp->nessVars[0].SpecialHi.unkVar4 = 0.0f;
+            temp_fp->nessVars[0].SpecialHi.unkVar3 = 0.0f;
+            temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
+            temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
+            func_8007592C(temp_fp, 0, 0.0f);
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRHI_END, FTNESS_SPECIALHI_COLL_FLAG, NULL, fighter_data->x894_currentAnimFrame, 1.0f, 0.0f);
             return;
         }

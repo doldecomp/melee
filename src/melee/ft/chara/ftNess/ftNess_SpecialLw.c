@@ -6,14 +6,14 @@ void ftNess_SpecialLwStart_Action(HSD_GObj* fighter_gobj) // Ness's grounded PSI
 {
     s32 filler[7];
     ftNessAttributes* ness_attr;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
 
-    temp_fighter = fighter_gobj->user_data;
-    ness_attr = temp_fighter->x2D4_specialAttributes;
-    temp_fighter->nessVars[0].SpecialLw.releaseLag = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
-    temp_fighter->nessVars[0].SpecialLw.isRelease = 0;
-    temp_fighter->nessVars[0].SpecialLw.gravityDelay = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
-    temp_fighter->x2350_stateVar5 = 0;
+    temp_fp = fighter_gobj->user_data;
+    ness_attr = temp_fp->x2D4_specialAttributes;
+    temp_fp->nessVars[0].SpecialLw.releaseLag = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
+    temp_fp->nessVars[0].SpecialLw.isRelease = 0;
+    temp_fp->nessVars[0].SpecialLw.gravityDelay = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
+    temp_fp->x2350_stateVar5 = 0;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_START, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 }
@@ -23,17 +23,17 @@ void ftNess_SpecialLwStart_Action(HSD_GObj* fighter_gobj) // Ness's grounded PSI
 void ftNess_SpecialAirLwStart_Action(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Action State handler //
 {
     s32 filler[7];
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
     ftNessAttributes* ness_attr;
 
-    temp_fighter = fighter_gobj->user_data;
-    ness_attr = temp_fighter->x2D4_specialAttributes;
-    temp_fighter->nessVars[0].SpecialLw.releaseLag = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
-    temp_fighter->nessVars[0].SpecialLw.isRelease = 0;
-    temp_fighter->nessVars[0].SpecialLw.gravityDelay = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
-    temp_fighter->x2350_stateVar5 = 0;
-    temp_fighter->x80_self_vel.y = 0.0f;
-    temp_fighter->x80_self_vel.x /= ness_attr->x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
+    temp_fp = fighter_gobj->user_data;
+    ness_attr = temp_fp->x2D4_specialAttributes;
+    temp_fp->nessVars[0].SpecialLw.releaseLag = (s32)ness_attr->x74_PSI_MAGNET_RELEASE_LAG;
+    temp_fp->nessVars[0].SpecialLw.isRelease = 0;
+    temp_fp->nessVars[0].SpecialLw.gravityDelay = (s32)ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
+    temp_fp->x2350_stateVar5 = 0;
+    temp_fp->x80_self_vel.y = 0.0f;
+    temp_fp->x80_self_vel.x /= ness_attr->x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_START, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 }

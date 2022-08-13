@@ -1,17 +1,17 @@
 #include <ftsamus.h>
 
 void ftSamus_ClearThrowFlagsUnk(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    fighter->x2210_ThrowFlags.flags = 0;
-    fighter->cb.x21BC_callback_Accessory4 = &ftSamus_8012A074;
+    Fighter* fp = fighterObj->user_data;
+    fp->x2210_ThrowFlags.flags = 0;
+    fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012A074;
 }
 
 void ftSamus_SpecialS_StartAction(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
-    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fighter);
-    fighter->xEC_ground_vel /= samus_attr->x2C; 
-    fighter->x80_self_vel.y = 0.0f;
-    if (fighter->x673 < samus_attr->x28) {
+    Fighter* fp = getFighter(fighterObj);
+    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
+    fp->xEC_ground_vel /= samus_attr->x2C; 
+    fp->x80_self_vel.y = 0.0f;
+    if (fp->x673 < samus_attr->x28) {
         Fighter_ActionStateChange_800693AC(fighterObj, 0x15E, 0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(fighterObj);
     } else {
@@ -22,10 +22,10 @@ void ftSamus_SpecialS_StartAction(HSD_GObj* fighterObj) {
 }
 
 void ftSamus_SpecialAirS_StartAction(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
-    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fighter);
-    fighter->x80_self_vel.x /= samus_attr->x2C; 
-    if (fighter->x673 < samus_attr->x28) {
+    Fighter* fp = getFighter(fighterObj);
+    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
+    fp->x80_self_vel.x /= samus_attr->x2C; 
+    if (fp->x673 < samus_attr->x28) {
         Fighter_ActionStateChange_800693AC(fighterObj, 0x160, 0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(fighterObj);
     } else {
@@ -60,11 +60,11 @@ void ftSamus_8012A400(HSD_GObj* fighterObj) {
 void ftSamus_8012A420(HSD_GObj *fighterObj)
 {
     s32 unused[5];
-    Fighter *fighter = getFighterPlus(fighterObj);
-    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fighter);
+    Fighter *fp = getFighterPlus(fighterObj);
+    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     Fighter *fighter2;
-    func_8007D4B8(fighter);
-    fighter2 = fighter;
+    func_8007D4B8(fp);
+    fighter2 = fp;
     func_8007CE94(fighter2, samus_attr->x30);
 }
 
@@ -106,14 +106,14 @@ void ftSamus_8012A580(HSD_GObj *fighterObj)
 {
     s32 unused[8];  /// this func is so strange
     Fighter *fighter2;
-    Fighter *fighter;
+    Fighter *fp;
     ftSamusAttributes *samus_attr;
     ftSamusAttributes *samus_attr2;
-    fighter = fighter2 = getFighterPlus(fighterObj);
-    samus_attr = getFtSpecialAttrs(fighter);
-    func_8007D4B8(fighter);
+    fp = fighter2 = getFighterPlus(fighterObj);
+    samus_attr = getFtSpecialAttrs(fp);
+    func_8007D4B8(fp);
     samus_attr2 = samus_attr; 
-    func_8007CE94(fighter, samus_attr2->x30);
+    func_8007CE94(fp, samus_attr2->x30);
 }
 
 void ftSamus_8012A5C8(HSD_GObj* fighterObj) {
@@ -129,7 +129,7 @@ void ftSamus_8012A604(HSD_GObj* fighterObj) {
 }
 
 void ftSamus_8012A640(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighterPlus(fighterObj);
+    Fighter* fp = getFighterPlus(fighterObj);
     efLib_DestroyAll(fighterObj);
-    fighter->sa.samus.x2244 = 0; 
+    fp->sa.samus.x2244 = 0; 
 }

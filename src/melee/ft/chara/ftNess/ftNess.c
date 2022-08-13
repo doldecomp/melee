@@ -2,21 +2,21 @@
 
 void ftNess_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
-    ft->sa.ness.x2240_flashGObj = NULL;
-    ft->sa.ness.x2244_pkThunderGObj = NULL;
-    ft->sa.ness.x2248_baseballBatGObj = NULL;
-    ft->sa.ness.x222C_yoyoGObj = NULL;
-    ft->sa.ness.x224C_thunderGFX = FALSE;
+    fp->sa.ness.x2240_flashGObj = NULL;
+    fp->sa.ness.x2244_pkThunderGObj = NULL;
+    fp->sa.ness.x2248_baseballBatGObj = NULL;
+    fp->sa.ness.x222C_yoyoGObj = NULL;
+    fp->sa.ness.x224C_thunderGFX = FALSE;
 }
 
 void ftNess_OnLoad(HSD_GObj* gobj) 
 {
-    Fighter* ft = gobj->user_data;
-    void** item_list = ft->x10C_ftData->x48_items;
+    Fighter* fp = gobj->user_data;
+    void** item_list = fp->x10C_ftData->x48_items;
 
-    PUSH_ATTRS(ft, ftNessAttributes);
+    PUSH_ATTRS(fp, ftNessAttributes);
 
     func_8026B3F8(item_list[0], It_Kind_Ness_PKFire);
     func_8026B3F8(item_list[1], It_Kind_Ness_PKFire_Flame);
@@ -44,9 +44,9 @@ void ftNess_OnAbsorb(HSD_GObj* gobj)
     ftNess_AbsorbThink_DecideAction(gobj);
 }
 
-f32 ftNess_GetAbsorbHeal(Fighter* ft)
+f32 ftNess_GetAbsorbHeal(Fighter* fp)
 {
-    return ((ftNessAttributes*)ft->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
+    return ((ftNessAttributes*)fp->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
 }
 
 void ftNess_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag) {

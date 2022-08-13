@@ -1,18 +1,18 @@
 #include <ftpikachu.h>
 
-void ftPikachu_OnLoadForPichu(Fighter* fighter) {
-    PUSH_ATTRS(fighter, ftPikachuAttributes);
+void ftPikachu_OnLoadForPichu(Fighter* fp) {
+    PUSH_ATTRS(fp, ftPikachuAttributes);
 }
 
 
 void ftPikachu_OnLoad(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    void** item_list = fighter->x10C_ftData->x48_items;
+    Fighter* fp = fighterObj->user_data;
+    void** item_list = fp->x10C_ftData->x48_items;
 
-    PUSH_ATTRS(fighter, ftPikachuAttributes);
+    PUSH_ATTRS(fp, ftPikachuAttributes);
 
     {
-        ftPikachuAttributes *pika_attr = fighter->x2D4_specialAttributes;
+        ftPikachuAttributes *pika_attr = fp->x2D4_specialAttributes;
         func_8026B3F8(item_list[0], pika_attr->xDC);
         func_8026B3F8(item_list[1], pika_attr->x14);
         func_8026B3F8(item_list[2], pika_attr->x18);
@@ -57,7 +57,7 @@ void ftPikachu_801246C0(HSD_GObj* fighterObj) {
 
 void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftPikachuAttributes);
-    if (ft->x34_scale.y != 1.0f) {
+    if (fp->x34_scale.y != 1.0f) {
         SCALE_HEIGHT_ATTRS(6); 
     }
 }

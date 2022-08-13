@@ -251,6 +251,7 @@ lbl_80348A48:
 /* 80348A68 00345648  38 21 00 18 */	addi r1, r1, 0x18
 /* 80348A6C 0034564C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/W02Di
 .global OSGetResetSwitchState
 OSGetResetSwitchState:
 /* 80348A70 00345650  7C 08 02 A6 */	mflr r0

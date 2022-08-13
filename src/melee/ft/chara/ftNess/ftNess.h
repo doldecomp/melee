@@ -136,7 +136,7 @@ void ftNess_OnDeath(HSD_GObj* gobj);
 void ftNess_OnLoad(HSD_GObj* gobj);
 void ftNess_OnDamage(HSD_GObj* gobj);
 void ftNess_OnAbsorb(HSD_GObj* gobj);
-f32 ftNess_GetAbsorbHeal(Fighter* ft);
+f32 ftNess_GetAbsorbHeal(Fighter* fp);
 void ftNess_OnItemPickup(HSD_GObj* gobj, BOOL catchItemFlag);
 void ftNess_OnItemInvisible(HSD_GObj* gobj);
 void ftNess_OnItemVisible(HSD_GObj* gobj);

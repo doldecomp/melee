@@ -16018,30 +16018,26 @@ lbl_803B721C:
     .balign 8
 .global lbl_803B9670
 lbl_803B9670:
-    .4byte 0x48414C20
-    .4byte 0x4C61626F
-    .4byte 0x7261746F
-    .4byte 0x72792C20
-    .4byte 0x496E632E
-    .4byte 0x00000000
+    .ascii "HAL Laboratory, Inc."
+    .4byte NULL
     .4byte 0x00010501
     .4byte 0x01010101
     .4byte 0x01000000
-    .4byte 0x00000000
+    .4byte NULL
     .4byte 0x00010203
     .4byte 0x04050607
     .4byte 0x08090A0B
     .4byte 0x00030101
     .4byte 0x01010101
     .4byte 0x01010100
-    .4byte 0x00000000
+    .4byte NULL
     .4byte 0x00010203
     .4byte 0x04050607
     .4byte 0x08090A0B
     .4byte 0x00020103
     .4byte 0x03020403
     .4byte 0x05050404
-    .4byte 0x0000017D
+    .int 381
     .4byte 0x01020300
     .4byte 0x04110512
     .4byte 0x21314106
@@ -16137,27 +16133,27 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888410
-    .4byte 0xFFFFFFFB
-    .4byte 0xFFFFFFFF
+    .int -5
+    .int -1
     .4byte 0x002BFFFF
     .4byte 0x0000BFFF
     .4byte 0x00002FFF
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xF8000000
     .4byte 0xFF400000
     .4byte 0xFFE10000
     .4byte 0xFFF40000
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
@@ -16182,15 +16178,15 @@ lbl_8040FF80:
     .4byte 0xFFF20000
     .4byte 0xFF800000
     .4byte 0xFB000000
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0xFFFFFFFF
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int -1
     .4byte 0xFFFFBBBB
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
@@ -16198,7 +16194,7 @@ lbl_8040FF80:
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
-    .4byte 0xFFFFFFFE
+    .int -2
     .4byte 0xBBBBB841
     .4byte NULL
     .4byte NULL
@@ -16214,11 +16210,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x00000044
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 68
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16226,7 +16222,7 @@ lbl_8040FF80:
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
-    .4byte 0x44440000
+    .float 784.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16251,11 +16247,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x0000008F
-    .4byte 0x000002FF
+    .int 8
+    .int 143
+    .int 767
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00048BEF
     .4byte 0x04DFFFFF
     .4byte 0x8FFFFEB8
@@ -16265,7 +16261,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x10000000
     .4byte 0xFEB82000
-    .4byte 0xFFFFFD40
+    .int -704
     .4byte 0x8BEFFFF8
     .4byte 0x001DFFFF
     .4byte 0x0001EFFF
@@ -16317,7 +16313,7 @@ lbl_8040FF80:
     .4byte 0x00004FFF
     .4byte 0x00000EFF
     .4byte 0x000008FF
-    .4byte 0x000001EF
+    .int 495
     .4byte 0xFF800000
     .4byte 0xFF800000
     .4byte 0xFF800000
@@ -16342,8 +16338,8 @@ lbl_8040FF80:
     .4byte 0xFFE00000
     .4byte 0xFF800000
     .4byte 0xFD100000
-    .4byte 0x0000004F
-    .4byte 0x00000008
+    .int 79
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16361,7 +16357,7 @@ lbl_8040FF80:
     .4byte 0x0002FFFF
     .4byte 0x004EFFFF
     .4byte 0xBEFFFFFF
-    .4byte 0xFFFFFFDB
+    .int -37
     .4byte 0xBB842100
     .4byte NULL
     .4byte NULL
@@ -16376,25 +16372,25 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000088
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 136
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFF1000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte NULL
     .4byte NULL
     .4byte 0x88888410
-    .4byte 0xFFFFFFFB
-    .4byte 0xFFFFFFFF
+    .int -5
+    .int -1
     .4byte 0x004DFFFF
     .4byte 0x0001EFFF
     .4byte 0x00008FFF
@@ -16406,14 +16402,14 @@ lbl_8040FF80:
     .4byte 0xFF200000
     .4byte 0xFFB00000
     .4byte 0xFFE00000
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
@@ -16421,7 +16417,7 @@ lbl_8040FF80:
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF4444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x00004FFF
     .4byte 0x00004FFF
     .4byte 0x00004FFF
@@ -16429,7 +16425,7 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x0004FFFF
     .4byte 0x448FFFFF
-    .4byte 0xFFFFFFD8
+    .int -40
     .4byte 0xFFF20000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
@@ -16438,15 +16434,15 @@ lbl_8040FF80:
     .4byte 0xFE200000
     .4byte 0xE4000000
     .4byte 0x20000000
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0xFFFFFFFF
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int -1
     .4byte 0xFFFF4444
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
@@ -16454,7 +16450,7 @@ lbl_8040FF80:
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
-    .4byte 0xFFFFFF82
+    .int -126
     .4byte 0x44BFFFFF
     .4byte 0x0008FFFF
     .4byte 0x0000BFFF
@@ -16470,11 +16466,11 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte 0xFFE00000
     .4byte 0xFFF00000
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x00000044
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 68
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16482,7 +16478,7 @@ lbl_8040FF80:
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
-    .4byte 0x44440000
+    .float 784.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16498,7 +16494,7 @@ lbl_8040FF80:
     .4byte 0xFFF40000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
-    .4byte 0x44410000
+    .float 772.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16506,12 +16502,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000001E
-    .4byte 0x0000008F
-    .4byte 0x000000DF
+    .int 2
+    .int 30
+    .int 143
+    .int 223
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00288BEF
     .4byte 0x2BFFFFFF
     .4byte 0xEFFFFD88
@@ -16521,7 +16517,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xFFDB8200
-    .4byte 0xFFFFFFD4
+    .int -44
     .4byte 0x8BFFFFFF
     .4byte 0x002DFFFF
     .4byte 0x0002FFFF
@@ -16534,30 +16530,30 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0xFE100000
     .4byte 0xFF800000
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000DF
-    .4byte 0x0000008F
-    .4byte 0x0000004F
-    .4byte 0x00000008
+    .int 255
+    .int 255
+    .int 223
+    .int 143
+    .int 79
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFF2000
     .4byte 0xFFFFB000
-    .4byte 0xFFFFFD40
-    .4byte 0xFFFFFFFD
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -704
+    .int -3
+    .int -1
+    .int -1
     .4byte 0x8FFFFFFF
     .4byte 0x04DFFFFF
     .4byte 0x00008FFF
     .4byte 0x00008FFF
-    .4byte 0x00000100
+    .int 256
     .4byte 0x80000000
     .4byte 0xFE810000
     .4byte 0xFFFFB200
-    .4byte 0xFFFFFFB2
-    .4byte 0xFFFFFFFE
+    .int -78
+    .int -2
     .4byte 0xFF800000
     .4byte 0xFFB00000
     .4byte 0x01000000
@@ -16565,25 +16561,25 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000244
+    .int 580
     .4byte 0x000008FF
     .4byte 0x000004FF
-    .4byte 0x000001FF
-    .4byte 0x000000BF
+    .int 511
+    .int 191
     .4byte 0x0008DFFF
     .4byte 0x000004BF
-    .4byte 0x00000002
-    .4byte 0x44420000
+    .int 2
+    .float 776.0
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFE0000
     .4byte 0xFFFF2000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x8EFFFFFF
     .4byte 0x018FFFFF
     .4byte 0x0008FFFF
@@ -16598,8 +16594,8 @@ lbl_8040FF80:
     .4byte 0xFFF40000
     .4byte 0xFFF20000
     .4byte 0xFFE00000
-    .4byte 0x0000004F
-    .4byte 0x00000008
+    .int 79
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16617,7 +16613,7 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x0018FFFF
     .4byte 0xBBFFFFFF
-    .4byte 0xFFFFFFD8
+    .int -40
     .4byte 0xBB888200
     .4byte NULL
     .4byte NULL
@@ -16632,24 +16628,24 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000088
-    .4byte 0x000000FF
-    .4byte 0x000000EF
+    .int 136
+    .int 255
+    .int 239
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFEFFF
     .4byte 0xFFF80000
     .4byte 0xFFF80000
@@ -16738,7 +16734,7 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
-    .4byte 0x00000244
+    .int 580
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16746,7 +16742,7 @@ lbl_8040FF80:
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
-    .4byte 0x44420000
+    .float 776.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16776,7 +16772,7 @@ lbl_8040FF80:
     .4byte 0xFFF40000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000288
+    .int 648
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
@@ -16827,9 +16823,9 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x000008FF
     .4byte 0x000008FF
-    .4byte 0x000002FF
-    .4byte 0x000000DF
-    .4byte 0x0000008F
+    .int 767
+    .int 223
+    .int 143
     .4byte 0xFFF40000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
@@ -16854,8 +16850,8 @@ lbl_8040FF80:
     .4byte 0xFFF20000
     .4byte 0xFFD00000
     .4byte 0xFF800000
-    .4byte 0x0000000D
-    .4byte 0x00000002
+    .int 13
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -16873,7 +16869,7 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x0028FFFF
     .4byte 0xBBFFFFFD
-    .4byte 0xFFFFFD81
+    .int -639
     .4byte 0xBB882000
     .4byte NULL
     .4byte NULL
@@ -16904,8 +16900,8 @@ lbl_8040FF80:
     .4byte 0xFFFE0000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000088
-    .4byte 0x000002FF
+    .int 136
+    .int 767
     .4byte 0x000008FF
     .4byte 0x00000BFF
     .4byte 0x00000EFF
@@ -16918,22 +16914,22 @@ lbl_8040FF80:
     .4byte 0xFFFD0000
     .4byte 0xFFF80000
     .4byte 0xFFF20000
-    .4byte 0x000002FF
-    .4byte 0x000000DF
-    .4byte 0x0000008F
-    .4byte 0x0000004F
-    .4byte 0x0000000E
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000001
+    .int 767
+    .int 223
+    .int 143
+    .int 79
+    .int 14
+    .int 8
+    .int 8
+    .int 1
     .4byte 0xFFFF4000
     .4byte 0xFFFF8000
     .4byte 0xFFFFB000
     .4byte 0xFFFFF100
     .4byte 0xFFFFF400
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFD00
-    .4byte 0xFFFFFF20
+    .int -768
+    .int -224
     .4byte 0x00008FFF
     .4byte 0x0000BFFF
     .4byte 0x0001EFFF
@@ -16999,10 +16995,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBFFFFF10
-    .4byte 0xFFFFFD00
+    .int -768
     .4byte 0xFFFFF800
     .4byte 0xFFFFF200
-    .4byte 0x44444000
+    .float 785.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17024,15 +17020,15 @@ lbl_8040FF80:
     .4byte 0x000DFFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000024
-    .4byte 0x0000008F
-    .4byte 0x000000BF
-    .4byte 0x000000EF
+    .int 36
+    .int 143
+    .int 191
+    .int 239
     .4byte 0x200002FF
     .4byte 0x400004FF
     .4byte NULL
     .4byte NULL
-    .4byte 0x44200000
+    .float 640.0
     .4byte 0xFF800000
     .4byte 0xFFB00000
     .4byte 0xFFE00000
@@ -17084,8 +17080,8 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x000008FF
     .4byte 0x000004FF
-    .4byte 0x000001FF
-    .4byte 0x000000EF
+    .int 511
+    .int 239
     .4byte 0xFB00BFD0
     .4byte 0xFD00DFB0
     .4byte 0xFF00FF80
@@ -17110,11 +17106,11 @@ lbl_8040FF80:
     .4byte 0xFFF40000
     .4byte 0xFFF10000
     .4byte 0xFFE00000
-    .4byte 0x000000BF
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000002F
-    .4byte 0x00000004
+    .int 191
+    .int 143
+    .int 143
+    .int 47
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17122,7 +17118,7 @@ lbl_8040FF80:
     .4byte 0xFFEFF800
     .4byte 0xFFFFF400
     .4byte 0xFFFFF100
-    .4byte 0x44444000
+    .float 785.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17138,32 +17134,32 @@ lbl_8040FF80:
     .4byte 0xFF800000
     .4byte 0xFF800000
     .4byte 0xFF200000
-    .4byte 0x44000000
+    .float 512.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000288
-    .4byte 0x000001DF
-    .4byte 0x0000004F
-    .4byte 0x0000000B
-    .4byte 0x00000002
+    .int 648
+    .int 479
+    .int 79
+    .int 11
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888100
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFF20
-    .4byte 0xFFFFFF80
+    .int -224
+    .int -128
     .4byte 0xEFFFFFF2
     .4byte 0x8FFFFFFB
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000000D
-    .4byte 0x0000008F
-    .4byte 0x000002FF
+    .int 2
+    .int 13
+    .int 143
+    .int 767
     .4byte 0x00000DFF
     .4byte 0x00008FF8
     .4byte NULL
@@ -17172,7 +17168,7 @@ lbl_8040FF80:
     .4byte 0xFF800000
     .4byte 0xFB000000
     .4byte 0xE1000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17224,8 +17220,8 @@ lbl_8040FF80:
     .4byte 0xBFF40000
     .4byte 0xFFFFB000
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFE10
-    .4byte 0xFFFFFF80
+    .int -496
+    .int -128
     .4byte 0xDFFFFFF2
     .4byte 0x8FFFFFFB
     .4byte 0x0DFFFFFF
@@ -17236,11 +17232,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xD1000000
-    .4byte 0x00000008
-    .4byte 0x0000002E
-    .4byte 0x000000DF
+    .int 8
+    .int 46
+    .int 223
     .4byte 0x000008FF
     .4byte 0x00000444
     .4byte NULL
@@ -17266,7 +17262,7 @@ lbl_8040FF80:
     .4byte 0xFF200000
     .4byte 0xFFB00000
     .4byte 0xFFF40000
-    .4byte 0x44420000
+    .float 776.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17275,34 +17271,34 @@ lbl_8040FF80:
     .4byte 0x00004888
     .4byte 0x00004FFF
     .4byte 0x000008FF
-    .4byte 0x000001EF
-    .4byte 0x0000008F
-    .4byte 0x0000000B
+    .int 495
+    .int 143
+    .int 11
     .4byte NULL
     .4byte NULL
     .4byte 0x88880000
     .4byte 0xFFFF8000
     .4byte 0xFFFFE100
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFF20
-    .4byte 0xFFFFFFB0
+    .int -224
+    .int -80
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x0000001E
-    .4byte 0x0000008F
+    .int 4
+    .int 30
+    .int 143
     .4byte NULL
     .4byte NULL
     .4byte 0x04884000
     .4byte 0x2EFF4000
-    .4byte 0xBFF80000
+    .float -1.9375
     .4byte 0xFFD00000
     .4byte 0xFF200000
     .4byte 0xF8000000
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17310,7 +17306,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte 0x8FFFFFFD
     .4byte 0x0DFFFFFF
     .4byte 0x04FFFFFF
@@ -17318,16 +17314,16 @@ lbl_8040FF80:
     .4byte 0x001EFFFF
     .4byte 0x0008FFFF
     .4byte 0x0000BFFF
-    .4byte 0x000002FF
+    .int 767
     .4byte 0x00000DFF
-	.4byte 0x80008FF8
+    .4byte 0x80008FF8
     .4byte 0xE102EFD1
     .4byte 0xF80BFF40
     .4byte 0xFE8EFB00
     .4byte 0xFFFFE100
     .4byte 0xFFFF4000
     .4byte 0xD1000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17378,7 +17374,7 @@ lbl_8040FF80:
     .4byte 0x000008FF
     .4byte 0x000008FF
     .4byte 0x000008FF
-    .4byte 0x00000244
+    .int 580
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17386,7 +17382,7 @@ lbl_8040FF80:
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
-    .4byte 0x44420000
+    .float 776.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17400,24 +17396,24 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000048
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x00000001
+    .int 72
+    .int 191
+    .int 191
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEFFFFF
     .4byte 0x000BFFFF
     .4byte 0x008FFFFF
@@ -17440,17 +17436,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000000D
-    .4byte 0x0000008F
+    .int 2
+    .int 13
+    .int 143
     .4byte 0x000004FF
     .4byte 0x00001DFF
     .4byte 0x0000BFFF
     .4byte 0x0BFFFFFF
     .4byte 0x8FFFFFFE
-    .4byte 0xFFFFFFF4
-    .4byte 0xFFFFFF80
-    .4byte 0xFFFFFD10
+    .int -12
+    .int -128
+    .int -752
     .4byte 0xFFFFF400
     .4byte 0xFFFF8000
     .4byte 0xFFFD0000
@@ -17468,16 +17464,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x0000002F
+    .int 8
+    .int 47
     .4byte 0x0004FFFF
     .4byte 0x001EFFFF
     .4byte 0x00BFFFFF
     .4byte 0x08FFFFFF
     .4byte 0x2EFFFFFF
     .4byte 0xDFFFFFFB
-    .4byte 0xFFFFFFE1
-    .4byte 0xFFFFFF40
+    .int -31
+    .int -192
     .4byte 0xFFF20000
     .4byte 0xFF800000
     .4byte 0xFB000000
@@ -17494,35 +17490,35 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000001DF
+    .int 479
     .4byte 0x000008FF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
-    .4byte 0x00000244
+    .int 580
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFF810
     .4byte 0xFFFFE444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44420000
+    .float 776.0
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
-    .4byte 0x44420000
+    .float 776.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17594,10 +17590,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000008
-    .4byte 0x0000000B
-    .4byte 0x0000000B
+    .int 1
+    .int 8
+    .int 11
+    .int 11
     .4byte NULL
     .4byte 0x00028BBB
     .4byte 0x04DFEFFF
@@ -17608,7 +17604,7 @@ lbl_8040FF80:
     .4byte 0xFFFFB000
     .4byte 0x000BFFFF
     .4byte 0xEFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x444DFFFF
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
@@ -17622,8 +17618,8 @@ lbl_8040FF80:
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0xB0000000
-    .4byte 0x00000008
-    .4byte 0x00000008
+    .int 8
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17650,18 +17646,18 @@ lbl_8040FF80:
     .4byte 0xB0000000
     .4byte 0xE0000000
     .4byte 0xF2000000
-    .4byte 0x42000000
+    .float 32.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
+    .int 2
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte 0x88888200
@@ -17686,26 +17682,26 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte 0xFFFFF418
     .4byte 0xFFFFFBEF
-    .4byte 0xFFFFFFD8
-    .4byte 0xFFFFFD10
+    .int -40
+    .int -752
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte NULL
     .4byte NULL
     .4byte 0xDFFD8100
-    .4byte 0xFFFFFE20
+    .int -480
     .4byte 0x8DFFFFF4
     .4byte 0x00BFFFFD
     .4byte 0x004FFFFF
@@ -17718,14 +17714,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x80000000
     .4byte 0xB0000000
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
@@ -17750,20 +17746,20 @@ lbl_8040FF80:
     .4byte 0xF1000000
     .4byte 0xD0000000
     .4byte 0x80000000
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000001
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFE40
-    .4byte 0xFFFFFEFD
+    .int -448
+    .int -259
     .4byte 0xFFFFD2DF
     .4byte 0x44442004
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte 0x008FFFFF
@@ -17774,7 +17770,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17821,7 +17817,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte 0x00008BDF
@@ -17833,7 +17829,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xFED84000
-    .4byte 0xFFFFFD40
+    .int -704
     .4byte 0x28DFFFF8
     .4byte 0x001EFFFF
     .4byte 0x0008FFFF
@@ -17843,17 +17839,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xD0000000
     .4byte 0xF2000000
-    .4byte 0x0000000B
-    .4byte 0x0000000D
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000E
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000002
+    .int 11
+    .int 13
+    .int 15
+    .int 15
+    .int 14
+    .int 11
+    .int 8
+    .int 2
     .4byte 0xFFFFF100
     .4byte 0xFFFFF000
     .4byte 0xFFFFF000
@@ -17871,7 +17867,7 @@ lbl_8040FF80:
     .4byte 0x0004FFFF
     .4byte 0x0008FFFF
     .4byte 0xF4000000
-    .4byte 0x42000000
+    .float 32.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -17936,7 +17932,7 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x41000000
+    .float 8.0
     .4byte 0xB1000000
     .4byte 0xB1000000
     .4byte 0xB1000000
@@ -17949,9 +17945,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
-    .4byte 0x00000010
+    .int 16
     .4byte 0x0004BEFE
     .4byte 0x01BFFFFF
     .4byte 0x0BFFFFF8
@@ -17974,14 +17970,14 @@ lbl_8040FF80:
     .4byte 0xB1000000
     .4byte 0xB1000000
     .4byte 0xB1000000
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000002
+    .int 8
+    .int 8
+    .int 11
+    .int 11
+    .int 11
+    .int 8
+    .int 8
+    .int 2
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
@@ -18077,9 +18073,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00018BDF
     .4byte 0x008EFFFF
     .4byte 0x08FFFFB4
@@ -18100,20 +18096,20 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x80000000
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000002
+    .int 8
+    .int 8
+    .int 11
+    .int 11
+    .int 11
+    .int 8
+    .int 8
+    .int 2
     .4byte 0xFFFFF100
     .4byte 0xFFFFF000
     .4byte 0xFFFFFBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFF888
     .4byte 0xFFFFF000
     .4byte 0xFFFFF100
@@ -18121,7 +18117,7 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte 0xBBBEFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte 0x00021414
     .4byte 0x000BFFFF
@@ -18176,8 +18172,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000018
-    .4byte 0x000002EF
+    .int 24
+    .int 751
     .4byte 0x00000BFF
     .4byte 0x00002FFF
     .4byte 0x00008FFF
@@ -18185,7 +18181,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xDFFD8400
-    .4byte 0xFFFFFF80
+    .int -128
     .4byte 0xFFFDDF80
     .4byte 0xFF800220
     .4byte 0xFF100000
@@ -18217,7 +18213,7 @@ lbl_8040FF80:
     .4byte 0xFF000000
     .4byte 0xFF000000
     .4byte 0xFF888840
-    .4byte 0xFFFFFF80
+    .int -128
     .4byte 0xFFBBBD40
     .4byte 0xFF000000
     .4byte 0xFF000000
@@ -18282,7 +18278,7 @@ lbl_8040FF80:
     .4byte 0xFF000000
     .4byte 0xFF000000
     .4byte 0xFF000000
-    .4byte 0x44000000
+    .float 512.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -18335,7 +18331,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00028BEF
     .4byte 0x02BFFFFF
     .4byte 0x1DFFFFD4
@@ -18345,7 +18341,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x01000000
     .4byte 0xFFDB8118
-    .4byte 0xFFFFFEDF
+    .int -289
     .4byte 0x48FFFFFF
     .4byte 0x008FFFFD
     .4byte 0x004FFFFE
@@ -18391,11 +18387,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x10000000
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000008
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000002
+    .int 2
+    .int 8
+    .int 11
+    .int 8
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte 0x8EFFFB10
@@ -18403,7 +18399,7 @@ lbl_8040FF80:
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0xFFFFF200
-    .4byte 0xFFFFFD40
+    .int -704
     .4byte 0x8EFFFFFF
     .4byte 0x018BEFFF
     .4byte 0x002DFFFF
@@ -18412,7 +18408,7 @@ lbl_8040FF80:
     .4byte 0x0001FFFF
     .4byte 0x0008FFFF
     .4byte 0x018DFFFF
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xFFFFD840
     .4byte 0xB0000000
     .4byte 0xF2000000
@@ -18466,15 +18462,15 @@ lbl_8040FF80:
     .4byte 0xFFFFF800
     .4byte 0xFFFFF804
     .4byte 0xFFFFF88F
-    .4byte 0xFFFFFEFF
-    .4byte 0xFFFFFFE8
-    .4byte 0xFFFFFF40
+    .int -257
+    .int -24
+    .int -192
     .4byte 0xFFFFF800
     .4byte NULL
     .4byte 0x00200000
     .4byte 0x8DFEB810
-    .4byte 0xFFFFFFD2
-    .4byte 0xFFFFFFFB
+    .int -46
+    .int -5
     .4byte 0x108FFFFF
     .4byte 0x000BFFFF
     .4byte 0x0008FFFF
@@ -18546,7 +18542,7 @@ lbl_8040FF80:
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -18560,7 +18556,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000288
+    .int 648
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
@@ -18590,15 +18586,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000144
+    .int 324
     .4byte NULL
-    .4byte 0x00000288
+    .int 648
     .4byte 0x001114FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x44410000
+    .float 772.0
     .4byte NULL
     .4byte 0x88820000
     .4byte 0xFFF41100
@@ -18658,7 +18654,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x00000144
+    .int 324
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -18666,7 +18662,7 @@ lbl_8040FF80:
     .4byte 0xFFF40000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
-    .4byte 0x44410000
+    .float 772.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -18718,7 +18714,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000244
+    .int 580
     .4byte NULL
     .4byte 0x00000488
     .4byte 0x000008FF
@@ -18726,7 +18722,7 @@ lbl_8040FF80:
     .4byte 0x000008FF
     .4byte 0x000008FF
     .4byte 0x000008FF
-    .4byte 0x44400000
+    .float 768.0
     .4byte NULL
     .4byte 0x88800000
     .4byte 0xFFF10000
@@ -18878,10 +18874,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFDDF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFDEF
+    .int -545
+    .int -1
+    .int -1
+    .int -529
     .4byte 0xFFFFF88F
     .4byte 0xFFFFF80E
     .4byte 0xFFFFE808
@@ -18892,7 +18888,7 @@ lbl_8040FF80:
     .4byte 0xFFFF4000
     .4byte 0xFFFFE100
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFF40
+    .int -192
     .4byte 0xBFFFFFD0
     .4byte NULL
     .4byte NULL
@@ -18930,7 +18926,7 @@ lbl_8040FF80:
     .4byte 0x20000000
     .4byte 0xD0000000
     .4byte 0xF8000000
-    .4byte 0x44000000
+    .float 512.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -18944,7 +18940,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000288
+    .int 648
     .4byte 0x000014FF
     .4byte 0x000014FF
     .4byte 0x000004FF
@@ -19042,7 +19038,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x00000144
+    .int 324
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -19050,7 +19046,7 @@ lbl_8040FF80:
     .4byte 0xFFF40000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
-    .4byte 0x44410000
+    .float 772.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -19106,12 +19102,12 @@ lbl_8040FF80:
     .4byte 0x00001000
     .4byte 0x028DFEB2
     .4byte 0x4FFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xE402DFFF
     .4byte 0x20004FFF
     .4byte 0x00004FFF
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00008BEF
     .4byte 0x801BFFFF
     .4byte 0xF4BFFEFF
@@ -19224,25 +19220,25 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
+    .int 2
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte 0x88888004
     .4byte 0xFFFFE18F
     .4byte 0xFFFFEBFF
-    .4byte 0xFFFFFFD4
-    .4byte 0xFFFFFE10
+    .int -44
+    .int -496
     .4byte 0xFFFFF400
     .4byte NULL
     .4byte 0x00100000
     .4byte 0x8DFDB400
-    .4byte 0xFFFFFF80
-    .4byte 0xFFFFFFF8
+    .int -128
+    .int -8
     .4byte 0x01BFFFFF
     .4byte 0x001EFFFF
     .4byte 0x000BFFFF
@@ -19254,14 +19250,14 @@ lbl_8040FF80:
     .4byte 0x10000000
     .4byte 0x80000000
     .4byte 0x80000000
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
@@ -19286,11 +19282,11 @@ lbl_8040FF80:
     .4byte 0xB2000000
     .4byte 0xB2000000
     .4byte 0xB2000000
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000002
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -19314,7 +19310,7 @@ lbl_8040FF80:
     .4byte 0xB2000000
     .4byte 0xB2000000
     .4byte 0xB2000000
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -19357,7 +19353,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte 0x00008BDF
@@ -19382,14 +19378,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x20000000
     .4byte 0x80000000
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000004
-    .4byte 0x00000001
+    .int 8
+    .int 8
+    .int 11
+    .int 11
+    .int 11
+    .int 8
+    .int 4
+    .int 1
     .4byte 0xFFFFF200
     .4byte 0xFFFFF000
     .4byte 0xFFFFF000
@@ -19480,24 +19476,24 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
+    .int 2
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte 0x88884028
     .4byte 0xFFFFE8FF
-    .4byte 0xFFFFFFD8
-    .4byte 0xFFFFFD10
+    .int -40
+    .int -752
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte NULL
     .4byte 0x01000000
     .4byte 0xDFEB8100
-    .4byte 0xFFFFFD20
+    .int -736
     .4byte 0x8DFFFFE2
     .4byte 0x01DFFFFD
     .4byte 0x004FFFFF
@@ -19510,14 +19506,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x80000000
     .4byte 0xB0000000
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
@@ -19542,17 +19538,17 @@ lbl_8040FF80:
     .4byte 0xF1000000
     .4byte 0xE0000000
     .4byte 0xB0000000
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
-    .4byte 0x00000004
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
+    .int 4
     .4byte 0xFFFFF400
-    .4byte 0xFFFFFE20
-    .4byte 0xFFFFFFFD
+    .int -480
+    .int -3
     .4byte 0xFFFFF8DF
     .4byte 0xFFFFF404
     .4byte 0xFFFFF400
@@ -19566,7 +19562,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -19613,7 +19609,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte 0x0002BDEE
@@ -19632,20 +19628,20 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xB1000000
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0xB0000000
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000002
+    .int 8
+    .int 8
+    .int 11
+    .int 11
+    .int 11
+    .int 8
+    .int 8
+    .int 2
     .4byte 0xFFFFF800
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
@@ -19784,12 +19780,12 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0xD1000000
     .4byte 0x80000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
+    .float 2.0
+    .float 2.0
+    .float 2.0
+    .float 2.0
+    .float 2.0
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -19814,10 +19810,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
+    .float 2.0
+    .float 2.0
+    .float 2.0
+    .float 2.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
@@ -19871,7 +19867,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00028BDF
     .4byte 0x008FFFFF
     .4byte 0x08FFFFD4
@@ -19913,8 +19909,8 @@ lbl_8040FF80:
     .4byte 0x40224442
     .4byte 0xFE820000
     .4byte 0xFFFFB400
-    .4byte 0xFFFFFF80
-    .4byte 0xFFFFFFF8
+    .int -128
+    .int -8
     .4byte 0xBFFFFFFD
     .4byte 0x02DFFFFF
     .4byte 0x008FFFFF
@@ -19925,7 +19921,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x20000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -19945,7 +19941,7 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x008FFFFD
     .4byte 0x88FFFFF2
-    .4byte 0xFFFFFD20
+    .int -736
     .4byte 0xBB882000
     .4byte NULL
     .4byte NULL
@@ -19974,7 +19970,7 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00008FFF
     .4byte 0x00008FFF
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20065,15 +20061,15 @@ lbl_8040FF80:
     .4byte 0x00004FFF
     .4byte 0x00001FFF
     .4byte 0x000008FF
-    .4byte 0x000001BF
-    .4byte 0x00000002
+    .int 447
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFF800000
     .4byte 0xFFD20420
-    .4byte 0xFFFFFFB0
-    .4byte 0xFFFFFFB0
+    .int -80
+    .int -80
     .4byte 0x8BB88200
     .4byte NULL
     .4byte NULL
@@ -20120,7 +20116,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20210,7 +20206,7 @@ lbl_8040FF80:
     .4byte 0xF1000000
     .4byte 0xF1000000
     .4byte 0xF1000000
-    .4byte 0x42100000
+    .float 36.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20248,10 +20244,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000002
+    .int 8
+    .int 11
+    .int 8
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20384,7 +20380,7 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000028
+    .int 40
     .4byte 0x4000008F
     .4byte 0x800000DF
     .4byte 0xB00001FF
@@ -20439,10 +20435,10 @@ lbl_8040FF80:
     .4byte 0xFFFD0000
     .4byte 0xFFF80000
     .4byte 0x000008FF
-    .4byte 0x000001FF
-    .4byte 0x000000DF
-    .4byte 0x0000008F
-    .4byte 0x00000024
+    .int 511
+    .int 223
+    .int 143
+    .int 36
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20450,7 +20446,7 @@ lbl_8040FF80:
     .4byte 0xFFFFF800
     .4byte 0xFFFFF800
     .4byte 0xFFFFF200
-    .4byte 0x44444000
+    .float 785.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20466,7 +20462,7 @@ lbl_8040FF80:
     .4byte 0xFFF10000
     .4byte 0xFFD00000
     .4byte 0xFF800000
-    .4byte 0x44200000
+    .float 640.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20504,8 +20500,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x00000002
+    .int 4
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20520,7 +20516,7 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000288
+    .int 648
     .4byte 0x00000DFF
     .4byte 0x00008FFB
     .4byte 0x2004FFD1
@@ -20556,8 +20552,8 @@ lbl_8040FF80:
     .4byte 0xFFFD1000
     .4byte 0xFFFF8000
     .4byte 0xFFFFF400
-    .4byte 0xFFFFFD10
-    .4byte 0xFFFFFF80
+    .int -752
+    .int -128
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20569,8 +20565,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x00000004
+    .int 8
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20578,7 +20574,7 @@ lbl_8040FF80:
     .4byte 0x1DFF8000
     .4byte 0x8FF80000
     .4byte 0xFFD10000
-    .4byte 0x44200000
+    .float 640.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20594,7 +20590,7 @@ lbl_8040FF80:
     .4byte 0x10000000
     .4byte 0x80000000
     .4byte 0xF4000000
-    .4byte 0x42000000
+    .float 32.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20632,25 +20628,25 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000018
-    .4byte 0x0000000D
-    .4byte 0x00000002
+    .int 24
+    .int 13
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888400
-    .4byte 0xFFFFFE10
-    .4byte 0xFFFFFF80
+    .int -496
+    .int -128
     .4byte 0x8FFFFFE0
     .4byte 0x2FFFFFF8
     .4byte 0x08FFFFFD
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000018
-    .4byte 0x0000008F
-    .4byte 0x000000DF
+    .int 24
+    .int 143
+    .int 223
     .4byte 0x000004FF
     .4byte 0x000008FF
     .4byte 0x00001FFD
@@ -20660,7 +20656,7 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0xF2000000
     .4byte 0x80000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20678,7 +20674,7 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00000DFF
     .4byte 0x000008FF
-	.4byte 0x80008FF8
+    .4byte 0x80008FF8
     .4byte 0xD000DFE0
     .4byte 0xF804FF80
     .4byte 0xFD0BFF20
@@ -20702,14 +20698,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000DF
-    .4byte 0x0000008F
-    .4byte 0x0000000B
-    .4byte 0x00000004
-    .4byte 0x00000008
-    .4byte 0x0000001E
-    .4byte 0x0000008F
-    .4byte 0x000000DF
+    .int 223
+    .int 143
+    .int 11
+    .int 4
+    .int 8
+    .int 30
+    .int 143
+    .int 223
     .4byte 0xFFFE0000
     .4byte 0xFFF80000
     .4byte 0xFFF10000
@@ -20773,18 +20769,18 @@ lbl_8040FF80:
     .4byte 0x4DBBBBBB
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBDFFFFFF
     .4byte 0x0DFFFFFF
     .4byte 0x8FFFFFF8
-    .4byte 0xFFFFFF80
+    .int -128
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0x20000000
@@ -20798,15 +20794,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000002E
-    .4byte 0x000001DF
+    .int 46
+    .int 479
     .4byte 0x000008FF
     .4byte 0x00008FFF
     .4byte 0x0002FFFF
     .4byte 0x001DFFFF
     .4byte 0x00BFFFFF
     .4byte 0x08FFFFFF
-    .4byte 0xFFFFFD10
+    .int -752
     .4byte 0xFFFFE200
     .4byte 0xFFFF8000
     .4byte 0xFFF80000
@@ -20823,25 +20819,25 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000002
+    .int 1
+    .int 8
+    .int 8
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x4FFFFFFB
     .4byte 0xEFFFFFE2
-    .4byte 0xFFFFFFFE
-    .4byte 0xFFFFFFFF
+    .int -2
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
@@ -20850,7 +20846,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xF4000000
     .4byte 0xF4000000
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -20890,15 +20886,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000EF
-    .4byte 0x000000EF
+    .int 239
+    .int 239
     .4byte NULL
     .4byte NULL
     .4byte 0x0000CFFF
     .4byte 0x0000FFFF
     .4byte 0x0001FFFF
     .4byte 0x0004FFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBCFFFF
     .4byte 0x0007FFFF
     .4byte 0x0008FFFD
@@ -20906,7 +20902,7 @@ lbl_8040FF80:
     .4byte 0xD0000000
     .4byte 0xA0000000
     .4byte 0xA346888B
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBB97887
     .4byte NULL
     .4byte NULL
@@ -20922,10 +20918,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x0000004F
-    .4byte 0x000000AF
-    .4byte 0x000001EF
+    .int 8
+    .int 79
+    .int 175
+    .int 495
     .4byte 0x0008FFFE
     .4byte 0x002CFFFF
     .4byte 0x06EFFFF9
@@ -20935,7 +20931,7 @@ lbl_8040FF80:
     .4byte 0xFF25FFF7
     .4byte 0xFC04FFFD
     .4byte 0xBBB96300
-    .4byte 0xFFFFFFC5
+    .int -59
     .4byte 0x06FFFFFF
     .4byte 0x09FE8FFF
     .4byte 0x0EFB0BFF
@@ -20953,9 +20949,9 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000003FF
-    .4byte 0x000000EF
-    .4byte 0x0000006F
-    .4byte 0x00000004
+    .int 239
+    .int 111
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte 0xF804FFFF
@@ -20971,7 +20967,7 @@ lbl_8040FF80:
     .4byte 0x60004FFF
     .4byte 0x0005EFFF
     .4byte 0x58CFFFFC
-    .4byte 0xFFFFFC60
+    .int -928
     .4byte 0x9A852000
     .4byte NULL
     .4byte 0xFF600000
@@ -20997,15 +20993,15 @@ lbl_8040FF80:
     .4byte 0x000EFFFF
     .4byte 0x000FFFFF
     .4byte 0x002FFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
-    .4byte 0x42000000
+    .float 32.0
     .4byte 0xF6000000
     .4byte 0xF3000000
     .4byte 0xE0000000
     .4byte 0xB0000000
     .4byte 0xC779BBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -21021,21 +21017,21 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0xFFFFFFFF
+    .int 7
+    .int -1
     .4byte 0x43AFFFFF
     .4byte 0x008FFFFF
     .4byte 0x008FFFFC
     .4byte 0x00BFFFFE
     .4byte 0x00BFFFFF
     .4byte 0x3BFFFFFD
-    .4byte 0xFFFFFFF8
+    .int -8
     .4byte 0xFFEBBBBB
     .4byte 0x20000000
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBB8720
-    .4byte 0xFFFFFFFD
+    .int -3
     .4byte 0x77DFFFFF
     .4byte 0x00EFFFFF
     .4byte 0x97700000
@@ -21046,7 +21042,7 @@ lbl_8040FF80:
     .4byte 0x71000000
     .4byte 0xFD400000
     .4byte 0xFFF50000
-    .4byte 0x0000009F
+    .int 159
     .4byte 0x000008FF
     .4byte 0x00003FFF
     .4byte 0x0000BFFF
@@ -21054,7 +21050,7 @@ lbl_8040FF80:
     .4byte 0x0007FFFF
     .4byte 0x000AFFFF
     .4byte 0x000BFFFF
-    .4byte 0xFFFFFFF8
+    .int -8
     .4byte 0xFFEFFFF7
     .4byte 0xFA8FFFF7
     .4byte 0xF17FFFF7
@@ -21083,13 +21079,13 @@ lbl_8040FF80:
     .4byte 0x0006FFFF
     .4byte 0x0001EFFF
     .4byte 0x00003DFF
-    .4byte 0x00000158
+    .int 344
     .4byte NULL
     .4byte NULL
     .4byte 0x000EFFFF
     .4byte 0x400CFFFF
     .4byte 0xEBEFFFF6
-    .4byte 0xFFFFFC30
+    .int -976
     .4byte 0xFFFC6003
     .4byte 0x86200000
     .4byte NULL
@@ -21098,7 +21094,7 @@ lbl_8040FF80:
     .4byte 0x600003FF
     .4byte 0x00006EFF
     .4byte 0x147DFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xEFFFEB72
     .4byte 0x57430000
     .4byte NULL
@@ -21143,13 +21139,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000038
-    .4byte 0x0000006F
-    .4byte 0x0000008F
-    .4byte 0x000000BF
-    .4byte 0x000000CF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 56
+    .int 111
+    .int 143
+    .int 191
+    .int 207
+    .int 255
+    .int 255
     .4byte NULL
     .4byte 0x63000000
     .4byte 0xFFFA0000
@@ -21160,7 +21156,7 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000100
+    .int 256
     .4byte 0x0003CE10
     .4byte 0x0004FFC0
     .4byte 0x0000BFF7
@@ -21174,14 +21170,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x20000000
     .4byte 0x80000000
-    .4byte 0x000002FF
+    .int 767
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000003FF
-    .4byte 0x000000FF
+    .int 255
     .4byte 0xFF800000
     .4byte 0xFF700000
     .4byte 0xFF400000
@@ -21206,17 +21202,17 @@ lbl_8040FF80:
     .4byte 0xFF600000
     .4byte 0xFF800000
     .4byte 0xFFA00000
-    .4byte 0x000000CF
-    .4byte 0x0000008F
-    .4byte 0x0000002F
-    .4byte 0x00000008
+    .int 207
+    .int 143
+    .int 47
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFD007A0
     .4byte 0xFFFA9FF4
-    .4byte 0xFFFFFFB0
+    .int -80
     .4byte 0xFFFFFC10
     .4byte 0x6DFD7000
     .4byte 0x00100000
@@ -21231,7 +21227,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xFE800000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -21241,7 +21237,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000310
+    .int 784
     .4byte 0x00004FFC
     .4byte 0x00006FFF
     .4byte 0x00008FFF
@@ -21259,7 +21255,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000042
+    .int 66
     .4byte 0x00001AFC
     .4byte 0x00001EFF
     .4byte NULL
@@ -21287,13 +21283,13 @@ lbl_8040FF80:
     .4byte 0xF7000000
     .4byte 0xF4000000
     .4byte 0x000008FF
-    .4byte 0x000002FF
-    .4byte 0x000000CF
-    .4byte 0x0000008F
-    .4byte 0x0000004F
-    .4byte 0x0000001F
-    .4byte 0x0000000E
-    .4byte 0x0000000B
+    .int 767
+    .int 207
+    .int 143
+    .int 79
+    .int 31
+    .int 14
+    .int 11
     .4byte 0xF7000000
     .4byte 0xFE100000
     .4byte 0xFF900000
@@ -21318,14 +21314,14 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0xFD000580
     .4byte 0xFF806EF5
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000008
+    .int 11
+    .int 8
+    .int 8
+    .int 8
+    .int 8
+    .int 8
+    .int 8
+    .int 8
     .4byte 0xFFFFC000
     .4byte 0xFFFFF100
     .4byte 0xFFFFF400
@@ -21337,20 +21333,20 @@ lbl_8040FF80:
     .4byte 0x00007FFF
     .4byte 0x00001EFF
     .4byte 0x000006FF
-    .4byte 0x0000006E
-    .4byte 0x00000001
+    .int 110
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFF7
-    .4byte 0xFFFFFF90
+    .int -9
+    .int -112
     .4byte 0xFFFFFB00
     .4byte 0xFFFF8000
     .4byte 0x68720000
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
+    .int 5
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -21405,22 +21401,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x00BFFFFF
     .4byte 0x00468AEF
-    .4byte 0x00000003
+    .int 3
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000258
+    .int 600
     .4byte 0x0038CFFF
     .4byte 0x8DFFFFEA
     .4byte 0xFFFFC950
-    .4byte 0xFFFFFFA0
+    .int -96
     .4byte 0x7DFFFF20
     .4byte 0x004BF900
     .4byte 0x00005200
     .4byte 0xABBA6200
-    .4byte 0xFFFFFF80
+    .int -128
     .4byte 0x78CFFFF9
     .4byte NULL
     .4byte NULL
@@ -21430,9 +21426,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x0000000D
-    .4byte 0x00000006
+    .int 79
+    .int 13
+    .int 6
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -21455,7 +21451,7 @@ lbl_8040FF80:
     .4byte 0x0002FFFF
     .4byte 0x0007FFFF
     .4byte 0x60000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xF2000000
     .4byte 0xF4000000
     .4byte 0xF4000000
@@ -21473,7 +21469,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x000016AF
     .4byte 0x002DFFFF
     .4byte 0x000AFB95
@@ -21512,9 +21508,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x97742000
-    .4byte 0xFFFFFEB8
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFD
+    .int -328
+    .int -1
+    .int -3
     .4byte 0x16BFFFF6
     .4byte 0x0002BFD0
     .4byte 0x00000550
@@ -21529,22 +21525,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000028D
+    .int 653
     .4byte 0x0000AFFF
     .4byte 0x00008FFF
     .4byte 0x00001EFF
     .4byte 0x000007D4
-    .4byte 0x00000014
+    .int 20
     .4byte 0x00058CFF
     .4byte 0x59EFFFFF
-    .4byte 0xFFFFFFEA
+    .int -22
     .4byte 0xFFFFA500
     .4byte 0xFF920000
     .4byte 0xA2000000
     .4byte NULL
     .4byte 0x58885100
-    .4byte 0xFFFFFFB4
-    .4byte 0xFFFFFFFF
+    .int -76
+    .int -1
     .4byte 0x779EFFFF
     .4byte 0x0002DFFF
     .4byte 0x00004FFF
@@ -21558,7 +21554,7 @@ lbl_8040FF80:
     .4byte 0xFFD00000
     .4byte 0xFFF30000
     .4byte 0xFFF60000
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -21600,8 +21596,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000039F
+    .int 2
+    .int 927
     .4byte 0x0369DFFF
     .4byte 0x07FFFFFF
     .4byte 0x00CEB851
@@ -21660,16 +21656,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x00000008
+    .int 3
+    .int 8
     .4byte 0x000AFFFE
     .4byte 0x0007CFFF
-    .4byte 0x0000028E
-    .4byte 0x00000001
+    .int 654
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte 0x458879BB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xB9620000
     .4byte 0xFFFFC200
     .4byte 0xFFFFB000
@@ -21677,7 +21673,7 @@ lbl_8040FF80:
     .4byte 0x02C40000
     .4byte 0x00244710
     .4byte 0xEFFFFF80
-    .4byte 0xFFFFFD40
+    .int -704
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -21686,7 +21682,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
+    .int 5
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -21695,7 +21691,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xCA88744B
-    .4byte 0x0000008F
+    .int 143
     .4byte 0x000007FF
     .4byte 0x00005FFF
     .4byte 0x0003EFFF
@@ -21719,11 +21715,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000009
-    .4byte 0x0000004F
-    .4byte 0x000000AF
-    .4byte 0x00000007
+    .int 1
+    .int 9
+    .int 79
+    .int 175
+    .int 7
     .4byte NULL
     .4byte NULL
     .4byte 0x3FFFFC00
@@ -21763,14 +21759,14 @@ lbl_8040FF80:
     .4byte 0x03FFFFFF
     .4byte 0x04CFFFFF
     .4byte 0x00016BFF
-    .4byte 0x0000003A
+    .int 58
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xEB841000
-    .4byte 0xFFFFFC30
-    .4byte 0xFFFFFD10
+    .int -976
+    .int -752
     .4byte 0xFFFFF400
     .4byte 0x4CFF8000
     .4byte 0x008B0000
@@ -21792,16 +21788,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x10024468
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFEF
+    .int -1
+    .int -17
     .4byte 0x7874424F
-    .4byte 0x000001DF
+    .int 479
     .4byte 0x00001CFF
     .4byte 0x00009FFF
     .4byte 0x00010241
     .4byte 0x8ABCFFFB
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFE3
+    .int -1
+    .int -29
     .4byte 0xFFFFFC10
     .4byte 0xFFFFC100
     .4byte 0xFFFC1000
@@ -21819,21 +21815,21 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
-    .4byte 0x0000002E
-    .4byte 0x000000BF
+    .int 5
+    .int 46
+    .int 191
     .4byte 0x0007FFFF
     .4byte 0x004FFFFF
     .4byte 0x01EFFFFF
     .4byte 0x0CFFFFFF
     .4byte 0x8FFFFFA3
-    .4byte 0xFFFFFD10
+    .int -752
     .4byte 0xFFFFF400
     .4byte 0xFFFF8000
     .4byte 0xFC100000
     .4byte 0xF9786100
     .4byte 0xFFFFFC10
-    .4byte 0xFFFFFF70
+    .int -144
     .4byte 0x9FFFFFA0
     .4byte 0x1FFFFFB0
     .4byte 0x0FFFFFB0
@@ -21852,7 +21848,7 @@ lbl_8040FF80:
     .4byte 0x0007FFFF
     .4byte 0x0002AFFF
     .4byte 0x000005DF
-    .4byte 0x00000019
+    .int 25
     .4byte NULL
     .4byte 0xFFFC0000
     .4byte 0xFFF30000
@@ -21860,7 +21856,7 @@ lbl_8040FF80:
     .4byte 0xFD000000
     .4byte 0xF4000000
     .4byte 0xB0000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte 0x0FFFFFB0
     .4byte 0x0FFFFFB0
@@ -21914,16 +21910,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000003BB
+    .int 955
     .4byte 0x000004FF
-    .4byte 0x00000144
+    .int 324
     .4byte NULL
     .4byte 0x0004FFFE
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
     .4byte 0xBBBCFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x4447FFFF
     .4byte 0x0004FFFF
     .4byte 0x0000AFFC
@@ -21933,9 +21929,9 @@ lbl_8040FF80:
     .4byte 0xFFFFFB2F
     .4byte 0xFBBBC60A
     .4byte 0x10000006
-    .4byte 0x00000002
+    .int 2
     .4byte 0x10000000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte 0xFC100000
     .4byte 0xFFC00000
     .4byte 0xFFF80000
@@ -21945,9 +21941,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000002E
-    .4byte 0x000000BF
+    .int 3
+    .int 46
+    .int 191
     .4byte 0x000004FF
     .4byte 0x000008FF
     .4byte 0x0004FFFF
@@ -21959,7 +21955,7 @@ lbl_8040FF80:
     .4byte 0xF404FFFF
     .4byte 0xE004FFFF
     .4byte 0x87864000
-    .4byte 0xFFFFFE81
+    .int -383
     .4byte 0x89DFFFFE
     .4byte 0x0004EFFF
     .4byte 0x00003EFF
@@ -21978,8 +21974,8 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x000008FF
     .4byte 0x000003FF
-    .4byte 0x0000006F
-    .4byte 0x00000004
+    .int 111
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte 0xB004FFFF
@@ -22022,8 +22018,8 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte 0xBBBEFFFF
-    .4byte 0x00000002
-    .4byte 0x0000008F
+    .int 2
+    .int 143
     .4byte 0x700004FF
     .4byte 0x8000009F
     .4byte 0x8000001C
@@ -22045,32 +22041,32 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0xFFFFFFFF
+    .int 8
+    .int -1
     .4byte 0xBBBEFFFF
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte 0x001CFFFF
     .4byte 0x29EFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFF7
+    .int -1
+    .int -9
     .4byte 0xC7744440
     .4byte 0x80000000
     .4byte 0x80000000
     .4byte 0xC7886300
-    .4byte 0xFFFFFFFA
-    .4byte 0xFFFFFFFF
+    .int -6
+    .int -1
     .4byte 0xA36AFFFF
     .4byte 0x09FFFFF8
     .4byte 0x05FFFFB4
     .4byte 0x00EFD500
     .4byte 0x00881000
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xFB100000
     .4byte 0xFFE30000
-    .4byte 0x000001CF
+    .int 463
     .4byte 0x00001CFF
     .4byte 0x0000AFFF
     .4byte 0x0004FFFF
@@ -22107,14 +22103,14 @@ lbl_8040FF80:
     .4byte 0x0008FFFD
     .4byte 0x0001CFFF
     .4byte 0x00001AFF
-    .4byte 0x00000028
+    .int 40
     .4byte NULL
     .4byte NULL
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte 0x100DFFFF
     .4byte 0xD7BFFFFF
-    .4byte 0xFFFFFFF8
+    .int -8
     .4byte 0xBEFFEA50
     .4byte 0x00110000
     .4byte NULL
@@ -22155,9 +22151,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000006F
-    .4byte 0x0000005F
+    .int 3
+    .int 111
+    .int 95
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -22167,16 +22163,16 @@ lbl_8040FF80:
     .4byte 0xFE300000
     .4byte 0xFFE10000
     .4byte NULL
-    .4byte 0x0000036A
+    .int 874
     .4byte 0x0059EFFF
     .4byte 0x00EFFFFF
     .4byte 0x00AFE85D
     .4byte 0x0046003F
-    .4byte 0x0000009F
-    .4byte 0x000000EF
+    .int 159
+    .int 239
     .4byte 0x8FFFFFA7
     .4byte 0xEFFFFFFF
-    .4byte 0xFFFFFDBB
+    .int -581
     .4byte 0xFFFFF500
     .4byte 0xFFFFE000
     .4byte 0xFFFF9000
@@ -22246,7 +22242,7 @@ lbl_8040FF80:
     .4byte 0x000017AE
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFE00
+    .int -512
     .4byte 0xFFFFF900
     .4byte 0xFFFFF300
     .4byte 0xFFFF9000
@@ -22269,7 +22265,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
+    .int 3
     .4byte NULL
     .4byte 0x01200000
     .4byte 0x06FC7200
@@ -22283,7 +22279,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004D
+    .int 77
     .4byte 0x000007FF
     .4byte 0x000007FF
     .4byte 0x00004100
@@ -22294,7 +22290,7 @@ lbl_8040FF80:
     .4byte 0x32EFF400
     .4byte 0xE24F9000
     .4byte 0xFC130000
-    .4byte 0x00000008
+    .int 8
     .4byte 0x000036AE
     .4byte 0x059EFFFF
     .4byte 0x0EFFFFFF
@@ -22303,7 +22299,7 @@ lbl_8040FF80:
     .4byte 0x000009FF
     .4byte 0x00000EFF
     .4byte 0xFFFFFA78
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFDBBF
     .4byte 0xFFFF5002
     .4byte 0xFFFE0000
@@ -22372,7 +22368,7 @@ lbl_8040FF80:
     .4byte 0x0CFFFFFF
     .4byte 0x029FFFFF
     .4byte 0x00017AEF
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte 0xFFFFE000
     .4byte 0xFFFF9000
@@ -22399,21 +22395,21 @@ lbl_8040FF80:
     .4byte 0x000008CB
     .4byte 0x000008FF
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00006ADF
     .4byte 0x00009FFF
     .4byte 0x00002FFF
     .4byte 0x00000BFF
     .4byte 0xBBBBBDFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte 0x58400000
     .4byte 0xFF900000
     .4byte 0xFFE00000
     .4byte 0xFFF50000
     .4byte 0xFFFA3779
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFCB
+    .int -1
+    .int -53
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -22431,19 +22427,19 @@ lbl_8040FF80:
     .4byte 0x00003444
     .4byte NULL
     .4byte 0xBBBA87BF
-    .4byte 0x0000001F
-    .4byte 0x00000009
+    .int 31
+    .int 9
     .4byte 0x4444467A
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFE
-    .4byte 0x44441000
+    .int -1
+    .int -2
+    .float 784.25
     .4byte NULL
     .4byte 0xFFFFC000
     .4byte 0xFFFFF200
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFEBE
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFE8
+    .int -322
+    .int -1
+    .int -24
     .4byte 0x2EFFFFF3
     .4byte 0x08FFFFFA
     .4byte NULL
@@ -22456,8 +22452,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000009F
+    .int 6
+    .int 159
     .4byte 0x000007FF
     .4byte 0x00000EFF
     .4byte 0x00003FFF
@@ -22465,14 +22461,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x169BEFFE
     .4byte 0xEFFFFFFF
-    .4byte 0xFFFFFEBB
+    .int -325
     .4byte 0xFFFD4000
     .4byte 0xFFF30000
     .4byte 0xFFC00000
     .4byte 0xFFB00000
     .4byte 0x02FFFFFF
     .4byte 0xB8CFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xDFFFFFFF
     .4byte 0x027DFF92
     .4byte 0x00017300
@@ -22489,30 +22485,30 @@ lbl_8040FF80:
     .4byte 0x00003FFF
     .4byte 0x00000EFF
     .4byte 0x000007FF
-    .4byte 0x000000BF
-    .4byte 0x00000007
+    .int 191
+    .int 7
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFE00000
     .4byte 0xFFF70000
     .4byte 0xFFFF8100
-    .4byte 0xFFFFFFCB
+    .int -53
     .4byte 0xEFFFFFFF
     .4byte 0x16ABEFFF
-    .4byte 0x00000100
+    .int 256
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x000247AE
     .4byte 0xBDFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFCBB874
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x70000000
     .4byte 0x80000000
     .4byte 0x10000000
@@ -22524,7 +22520,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000344
+    .int 836
     .4byte 0x00000BFF
     .4byte NULL
     .4byte NULL
@@ -22533,15 +22529,15 @@ lbl_8040FF80:
     .4byte 0x0000BFFF
     .4byte 0x00005FFF
     .4byte 0x78878FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte 0x35000000
     .4byte 0xFF100001
     .4byte 0xFF600000
     .4byte 0xFFA00000
     .4byte 0xFFF22457
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x0006C400
     .4byte 0x140CFF60
     .4byte 0xDF71CFF8
@@ -22549,9 +22545,9 @@ lbl_8040FF80:
     .4byte 0x0AFF9650
     .4byte 0x95DFC100
     .4byte 0xF3590000
-    .4byte 0xC3000000
+    .float -128.0
     .4byte 0x000009FF
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte 0x0000EFFF
@@ -22560,18 +22556,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xFFFEBBFF
     .4byte 0x0010009F
-    .4byte 0x0000004F
+    .int 79
     .4byte 0x0000344D
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x88854443
     .4byte NULL
     .4byte 0xFFFF7200
     .4byte 0xFFFF8000
     .4byte 0xFFFFD000
     .4byte 0xFFFFF99B
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFCA
+    .int -1
+    .int -54
     .4byte 0xAFFFFF90
     .4byte 0x2FFFFFF1
     .4byte NULL
@@ -22584,8 +22580,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x000000AF
+    .int 6
+    .int 175
     .4byte 0x000008FF
     .4byte 0x00002FFF
     .4byte 0x00006FFF
@@ -22593,15 +22589,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x037ABBB9
     .4byte 0xDFFFFFFF
-    .4byte 0xFFFFFFEF
+    .int -17
     .4byte 0xFFFE7200
     .4byte 0xFFF30000
     .4byte 0xFFA00000
     .4byte 0xFF800000
     .4byte 0x0BFFFFF8
     .4byte 0x66FFFFFE
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x37DFFF92
     .4byte 0x0007A200
     .4byte NULL
@@ -22618,15 +22614,15 @@ lbl_8040FF80:
     .4byte 0x00005FFF
     .4byte 0x00000EFF
     .4byte 0x000006FF
-    .4byte 0x0000005E
-    .4byte 0x00000001
+    .int 94
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte 0xFF900000
     .4byte 0xFFE10000
     .4byte 0xFFFC2000
     .4byte 0xFFFFFA77
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x6BEFFFFF
     .4byte 0x00014444
     .4byte NULL
@@ -22634,9 +22630,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x000036A9
     .4byte 0x8ABEFFFD
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFDB96
-    .4byte 0x43010000
+    .float 129.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -22658,17 +22654,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000001C
-    .4byte 0x000003CF
+    .int 28
+    .int 975
     .4byte 0x00003EFF
     .4byte 0x0005EFFF
     .4byte 0x00010000
     .4byte 0x004E9000
     .4byte 0x07FFF900
     .4byte 0x9FFFFFC1
-    .4byte 0xFFFFFFFC
-    .4byte 0xFFFFFFF9
-    .4byte 0xFFFFFC30
+    .int -4
+    .int -7
+    .int -976
     .4byte 0xFFFE7000
     .4byte NULL
     .4byte NULL
@@ -22681,15 +22677,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000006F
+    .int 6
+    .int 111
     .4byte 0x000003FF
     .4byte 0x00001EFF
     .4byte 0x00007FFF
     .4byte 0x006FFFFF
     .4byte 0x06FFFFFF
     .4byte 0x6FFFFFFC
-    .4byte 0xFFFFFF91
+    .int -111
     .4byte 0xFFFFE600
     .4byte 0xFFFE3000
     .4byte 0xFFD10000
@@ -22712,7 +22708,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00004FFF
     .4byte 0x000006EF
-    .4byte 0x0000002B
+    .int 43
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -22720,7 +22716,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xFFFB3000
     .4byte 0xFFFFF910
-    .4byte 0xFFFFFFE6
+    .int -26
     .4byte 0x8FFFFFFF
     .4byte 0x04EFFFFF
     .4byte 0x001CFFFF
@@ -22733,7 +22729,7 @@ lbl_8040FF80:
     .4byte 0xFF800000
     .4byte 0xFFFC3000
     .4byte 0xFFFFE600
-    .4byte 0xFFFFFFB1
+    .int -79
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -22750,22 +22746,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000003E
-    .4byte 0x00000002
+    .int 62
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFD
+    .int -3
     .4byte 0xCFFFFFFF
     .4byte 0x1CFFFFFF
     .4byte 0x009FFFFF
     .4byte 0x0009FFFF
     .4byte 0x00009FF8
     .4byte 0x00000AB0
-    .4byte 0x00000010
+    .int 16
     .4byte 0x30000000
     .4byte 0xF7000000
     .4byte 0xFD100000
@@ -22786,17 +22782,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000001B
-    .4byte 0x000002CF
+    .int 27
+    .int 719
     .4byte 0x00003EFF
     .4byte 0x0005EFFF
     .4byte 0x00010000
     .4byte 0x003E9000
     .4byte 0x06FFFB10
     .4byte 0x9FFFFFC1
-    .4byte 0xFFFFFFFD
-    .4byte 0xFFFFFFF9
-    .4byte 0xFFFFFC40
+    .int -3
+    .int -7
+    .int -960
     .4byte 0xFFFF8000
     .4byte NULL
     .4byte NULL
@@ -22809,15 +22805,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000006F
+    .int 6
+    .int 111
     .4byte 0x000004FF
     .4byte 0x00001EFF
     .4byte 0x00007FFF
     .4byte 0x006FFFFF
     .4byte 0x06FFFFFF
     .4byte 0x6FFFFFFD
-    .4byte 0xFFFFFFA1
+    .int -95
     .4byte 0xFFFFF700
     .4byte 0xFFFE3000
     .4byte 0xFFD20000
@@ -22827,8 +22823,8 @@ lbl_8040FF80:
     .4byte 0x30005FE3
     .4byte 0x00003EFD
     .4byte 0x000004FF
-    .4byte 0x0000009F
-    .4byte 0x0000002B
+    .int 159
+    .int 43
     .4byte NULL
     .4byte 0x79000000
     .4byte 0xFFA10000
@@ -22840,7 +22836,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00004FFF
     .4byte 0x000006EF
-    .4byte 0x0000002C
+    .int 44
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -22848,7 +22844,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xFFFB3000
     .4byte 0xFFFFF910
-    .4byte 0xFFFFFFE7
+    .int -25
     .4byte 0x8FFFFFFF
     .4byte 0x04EFFFFF
     .4byte 0x001BFFFF
@@ -22857,11 +22853,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xC3000000
+    .float -128.0
     .4byte 0xFF800000
     .4byte 0xFFFC3000
     .4byte 0xFFFFF700
-    .4byte 0xFFFFFFB1
+    .int -79
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -22878,23 +22874,23 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000003E
-    .4byte 0x00000002
+    .int 62
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFE
+    .int -2
     .4byte 0xCFFFFFFF
     .4byte 0x1BFFFFFF
     .4byte 0x009FFFFF
     .4byte 0x0009FFFF
     .4byte 0x00009FF8
     .4byte 0x00000AB0
-    .4byte 0x00000010
-    .4byte 0x40000000
+    .int 16
+    .float 2.0
     .4byte 0xF8000000
     .4byte 0xFE200000
     .4byte 0xF3000000
@@ -22951,8 +22947,8 @@ lbl_8040FF80:
     .4byte 0x80000000
     .4byte 0x80000000
     .4byte 0x0008FFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x443AFFFF
     .4byte 0x0008FFFF
     .4byte 0x0008FFFF
@@ -23041,7 +23037,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x43000000
+    .float 128.0
     .4byte 0xF9000000
     .4byte 0xF8000000
     .4byte 0xF5000000
@@ -23080,7 +23076,7 @@ lbl_8040FF80:
     .4byte 0x80000000
     .4byte 0x00FFFFFB
     .4byte 0x78FFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBEFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x00BFFFFF
@@ -23118,11 +23114,11 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte 0x00BFFFFE
     .4byte 0x01EFFFFA
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
+    .float 2.0
+    .float 2.0
+    .float 2.0
+    .float 2.0
+    .float 2.0
     .4byte 0x30000000
     .4byte NULL
     .4byte NULL
@@ -23137,7 +23133,7 @@ lbl_8040FF80:
     .4byte 0xB0000000
     .4byte 0xD0000000
     .4byte 0x70000004
-    .4byte 0x0000039F
+    .int 927
     .4byte 0x0027CFFF
     .4byte 0x003FFFFF
     .4byte 0x000CFB73
@@ -23161,26 +23157,26 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x0000000F
-    .4byte 0x0000000E
+    .int 9
+    .int 15
+    .int 14
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x00002444
     .4byte 0xBCFEFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x014468AC
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44410000
-    .4byte 0xFFFFFEBA
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .float 772.0
+    .int -326
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x1469DFFF
     .4byte NULL
     .4byte NULL
@@ -23206,7 +23202,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000027D
+    .int 637
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -23223,8 +23219,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000001B
-    .4byte 0x000000BF
+    .int 27
+    .int 191
     .4byte 0x000007FF
     .4byte 0x00001EFF
     .4byte 0x00007FFF
@@ -23245,7 +23241,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -23257,24 +23253,24 @@ lbl_8040FF80:
     .4byte 0x00009FFF
     .4byte 0x00004FFF
     .4byte 0x000006FF
-    .4byte 0x0000005D
+    .int 93
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFC854444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x58CFFFFF
     .4byte 0x00001444
     .4byte NULL
     .4byte NULL
     .4byte 0x44779BDF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFEF
+    .int -1
+    .int -1
+    .int -1
+    .int -17
     .4byte 0x44444101
     .4byte NULL
     .4byte NULL
@@ -23289,26 +23285,26 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000037
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x00000034
+    .int 55
+    .int 191
+    .int 191
+    .int 52
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x8ABCFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x4788BCFF
-    .4byte 0x00000003
+    .int 3
     .4byte NULL
     .4byte NULL
     .4byte 0x01000000
     .4byte 0xFFDBB974
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x69CFFFFE
     .4byte 0x0006FC20
     .4byte 0x1834EFE4
@@ -23335,7 +23331,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x000159FA
-    .4byte 0x00000023
+    .int 35
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -23351,7 +23347,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000003D
+    .int 61
     .4byte 0x000003EF
     .4byte 0x00000DFF
     .4byte 0x00007FFD
@@ -23386,23 +23382,23 @@ lbl_8040FF80:
     .4byte 0x0000DFFF
     .4byte 0x00005FFF
     .4byte 0x000004DF
-    .4byte 0x00000005
+    .int 5
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xA5200000
     .4byte 0xFFFEFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x9BEFFFFF
     .4byte 0x00003444
     .4byte NULL
     .4byte NULL
     .4byte 0x024579BE
     .4byte 0xEFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x44444100
     .4byte NULL
     .4byte NULL
@@ -23423,12 +23419,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00004ADF
     .4byte 0x00003FFF
     .4byte 0x00000AFF
     .4byte 0x000004FF
-    .4byte 0x000000BF
+    .int 191
     .4byte 0x0002438F
     .4byte NULL
     .4byte 0x59500000
@@ -23455,15 +23451,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xFFEFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888744
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x0279BBBB
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFC9
+    .int -1
+    .int -55
     .4byte 0xBFFFFF90
     .4byte 0x4FFFFFF2
     .4byte 0x0BFFFFF9
@@ -23478,8 +23474,8 @@ lbl_8040FF80:
     .4byte 0x20000000
     .4byte 0xA0000000
     .4byte 0xF4000000
-    .4byte 0x00000003
-    .4byte 0x0000006E
+    .int 3
+    .int 110
     .4byte 0x000003FF
     .4byte 0x00000BFF
     .4byte 0x00002FFF
@@ -23487,52 +23483,52 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00007FFF
     .4byte 0xBFFFFFFF
-    .4byte 0xFFFFFFFE
+    .int -2
     .4byte 0xFFFFB510
     .4byte 0xFFF90000
     .4byte 0xFFD00000
     .4byte 0xFF800000
     .4byte 0xFF800000
     .4byte 0xFF800000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x037DFFFF
     .4byte 0x00007EFF
     .4byte 0x000003EC
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte 0xFB000000
     .4byte 0xFF500000
     .4byte 0xFFC00000
     .4byte 0xFA200000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x00004FFF
     .4byte 0x00001EFF
     .4byte 0x000007FF
-    .4byte 0x0000009F
-    .4byte 0x00000008
+    .int 159
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFD00000
     .4byte 0xFFF80000
     .4byte 0xFFFF9100
-    .4byte 0xFFFFFFB8
-    .4byte 0xFFFFFFFF
+    .int -72
+    .int -1
     .4byte 0x27BEFFFF
     .4byte 0x00002444
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000158
+    .int 344
     .4byte 0x779BDFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFDB9
-    .4byte 0x44301000
+    .int -1
+    .int -583
+    .float 704.25
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -23551,12 +23547,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x00006BEF
     .4byte 0x00006FFF
     .4byte 0x00000EFF
     .4byte 0x000008FF
-    .4byte 0x000001DF
+    .int 479
     .4byte 0x000343BF
     .4byte NULL
     .4byte 0x69300000
@@ -23582,16 +23578,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x88888644
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x0379BBBA
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFB8
+    .int -1
+    .int -72
     .4byte 0xEFFFFF60
     .4byte 0x8FFFFFD0
     .4byte 0x1EFFFFF6
@@ -23606,8 +23602,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x70000000
     .4byte 0xE1000000
-    .4byte 0x00000005
-    .4byte 0x0000008F
+    .int 5
+    .int 143
     .4byte 0x000007FF
     .4byte 0x00001EFF
     .4byte 0x00006FFF
@@ -23615,19 +23611,19 @@ lbl_8040FF80:
     .4byte 0x0000BFFF
     .4byte 0x0000BFFF
     .4byte 0xDFFFFFFF
-    .4byte 0xFFFFFFFE
+    .int -2
     .4byte 0xFFFF9410
     .4byte 0xFFF60000
     .4byte 0xFF900000
     .4byte 0xFF500000
     .4byte 0xFF400000
     .4byte 0xFF500000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x148EFFFF
     .4byte 0x00019FFF
     .4byte 0x000006FA
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte 0xF8000000
@@ -23641,26 +23637,26 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00004FFF
     .4byte 0x00000BFF
-    .4byte 0x000001CF
-    .4byte 0x0000001B
+    .int 463
+    .int 27
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFF900000
     .4byte 0xFFF40000
     .4byte 0xFFFE7000
-    .4byte 0xFFFFFEA7
-    .4byte 0xFFFFFFFF
+    .int -345
+    .int -1
     .4byte 0x38BEFFFF
     .4byte 0x00002444
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000026A
+    .int 618
     .4byte 0x879BDFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFEFCB9
-    .4byte 0x44200000
+    .float 640.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -23672,12 +23668,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000AD
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000DF
-    .4byte 0x000000FF
+    .int 173
+    .int 191
+    .int 191
+    .int 191
+    .int 223
+    .int 255
     .4byte NULL
     .4byte NULL
     .4byte 0xBB972000
@@ -23702,14 +23698,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000002FF
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 767
     .4byte 0xFFFF0000
     .4byte 0xFFFE0000
     .4byte 0xFFFB0000
@@ -23741,7 +23737,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x000002FF
+    .int 767
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
@@ -23756,8 +23752,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x0000006F
+    .int 8
+    .int 111
     .4byte NULL
     .4byte 0x00A92000
     .4byte 0x04FF3000
@@ -23766,32 +23762,32 @@ lbl_8040FF80:
     .4byte 0xCFF10000
     .4byte 0xFF900000
     .4byte 0xFF200000
-    .4byte 0x000000EF
-    .4byte 0x0000009F
-    .4byte 0x0000004F
-    .4byte 0x00000009
+    .int 239
+    .int 159
+    .int 79
+    .int 9
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFD200
-    .4byte 0xFFFFFE96
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -362
+    .int -1
+    .int -1
     .4byte 0x8FFFFFFF
     .4byte 0x049EFFFF
     .4byte 0x00002444
     .4byte NULL
     .4byte 0x00001AFF
     .4byte 0x4469EFFF
-    .4byte 0xFFFFFFFD
-    .4byte 0xFFFFFFC1
+    .int -3
+    .int -63
     .4byte 0xFFFFE700
     .4byte 0xFEB71000
     .4byte 0x20000000
     .4byte NULL
     .4byte 0xF8000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
@@ -23799,13 +23795,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000032
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000EF
-    .4byte 0x000000FF
+    .int 50
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 239
+    .int 255
     .4byte NULL
     .4byte 0x01000000
     .4byte 0xEFDB3000
@@ -23819,7 +23815,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000033
+    .int 51
     .4byte 0x000005FE
     .4byte 0x004C61EF
     .4byte NULL
@@ -23830,13 +23826,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x30000000
     .4byte 0xE3000000
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
     .4byte 0x000003FF
     .4byte 0xFFFF0000
     .4byte 0xFFFD0000
@@ -23850,7 +23846,7 @@ lbl_8040FF80:
     .4byte 0x000BFF48
     .4byte 0x0002EFD3
     .4byte 0x00007E50
-    .4byte 0x00000100
+    .int 256
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -23869,7 +23865,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x000001FF
+    .int 511
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
@@ -23883,9 +23879,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000000B
-    .4byte 0x0000019F
+    .int 1
+    .int 11
+    .int 415
     .4byte 0x00100000
     .4byte 0x01DC3000
     .4byte 0x06FF3000
@@ -23894,26 +23890,26 @@ lbl_8040FF80:
     .4byte 0xEFE00000
     .4byte 0xFF800000
     .4byte 0xFE100000
-    .4byte 0x000000DF
-    .4byte 0x0000008F
-    .4byte 0x0000002F
-    .4byte 0x00000006
+    .int 223
+    .int 143
+    .int 47
+    .int 6
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFE500
-    .4byte 0xFFFFFFD9
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -39
+    .int -1
+    .int -1
     .4byte 0x5EFFFFFF
     .4byte 0x016ADFFF
-    .4byte 0x00000101
+    .int 257
     .4byte NULL
     .4byte 0x00004DFF
     .4byte 0x78ADFFFF
-    .4byte 0xFFFFFFFA
-    .4byte 0xFFFFFF80
+    .int -6
+    .int -128
     .4byte 0xFFFFB400
     .4byte 0xDB830000
     .4byte NULL
@@ -23939,17 +23935,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000010
+    .int 16
     .4byte 0xBBBBBEFE
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte 0x8C978710
     .4byte 0xBFFFFF40
     .4byte 0xBFFFFF40
     .4byte 0x8FFFFF40
     .4byte 0x8FFFFF74
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -23963,9 +23959,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x00000009
-    .4byte 0x0000000C
+    .int 4
+    .int 9
+    .int 12
     .4byte 0xBBA77777
     .4byte NULL
     .4byte 0x006CFFC5
@@ -23977,9 +23973,9 @@ lbl_8040FF80:
     .4byte 0xCFFFFF74
     .4byte 0x8FFFFF40
     .4byte 0x8FFFFF70
-    .4byte 0xFFFFFF80
-    .4byte 0xFFFFFF80
-    .4byte 0xFFFFFF80
+    .int -128
+    .int -128
+    .int -128
     .4byte 0xBFFFFF80
     .4byte 0x6FFFFF80
     .4byte 0x44444300
@@ -23990,12 +23986,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000E
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000002
+    .int 15
+    .int 15
+    .int 14
+    .int 11
+    .int 8
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFF0000
@@ -24010,8 +24006,8 @@ lbl_8040FF80:
     .4byte 0x4FFFFF80
     .4byte 0x8FFFFF80
     .4byte 0xDFFFFF70
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF10
+    .int -192
+    .int -240
     .4byte 0xCFFFFB00
     .4byte 0xCFFFF600
     .4byte NULL
@@ -24031,7 +24027,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x00001005
-    .4byte 0x0000003E
+    .int 62
     .4byte 0x000005EF
     .4byte 0x0003AFFF
     .4byte 0x38CFFFFF
@@ -24069,15 +24065,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88878BBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte 0x78544200
-    .4byte 0xFFFFFE00
-    .4byte 0xFFFFFF00
+    .int -512
+    .int -256
     .4byte 0xCFFFFF00
     .4byte 0xBFFFFF10
     .4byte 0xEFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x0732DD10
     .4byte 0x8FC2DFC0
     .4byte 0x2EF84FF9
@@ -24091,9 +24087,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000000C
-    .4byte 0x0000001F
+    .int 6
+    .int 12
+    .int 31
     .4byte 0xFFDBBBBB
     .4byte NULL
     .4byte 0x0049BB71
@@ -24106,9 +24102,9 @@ lbl_8040FF80:
     .4byte 0x8FFFFF00
     .4byte 0x7FFFFF20
     .4byte 0xCFFFFF40
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
+    .int -192
+    .int -192
+    .int -192
     .4byte 0xAFFFFF40
     .4byte 0x88888400
     .4byte NULL
@@ -24118,12 +24114,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000001F
-    .4byte 0x0000000D
-    .4byte 0x00000007
+    .int 79
+    .int 79
+    .int 79
+    .int 31
+    .int 13
+    .int 7
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFB0000
@@ -24131,15 +24127,15 @@ lbl_8040FF80:
     .4byte 0xFFFD0000
     .4byte 0xFFFF4001
     .4byte 0xFFFFE54C
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xCFFFFFFF
     .4byte 0x19FFFFA4
     .4byte 0x8FFFFF40
     .4byte 0x8FFFFF40
     .4byte 0xAFFFFF40
     .4byte 0xEFFFFF40
-    .4byte 0xFFFFFF10
-    .4byte 0xFFFFFD00
+    .int -240
+    .int -768
     .4byte 0xDFFFF900
     .4byte 0xCFFFF400
     .4byte NULL
@@ -24159,7 +24155,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x00144105
-    .4byte 0x0000003E
+    .int 62
     .4byte 0x000004EF
     .4byte 0x00019FFF
     .4byte 0x259FFFFF
@@ -24170,7 +24166,7 @@ lbl_8040FF80:
     .4byte 0xFFFE3000
     .4byte 0xFFF60000
     .4byte 0xFF600000
-    .4byte 0xC3000000
+    .float -128.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -24185,11 +24181,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000003B
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
+    .int 59
+    .int 79
+    .int 79
+    .int 79
+    .int 79
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -24214,27 +24210,27 @@ lbl_8040FF80:
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0xB0000000
-    .4byte 0x0000004F
-    .4byte 0x0000004F
+    .int 79
+    .int 79
     .4byte 0x0034447F
     .4byte 0x00EFFFFF
     .4byte 0x00FFFFFF
     .4byte 0x0078537F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
+    .int 79
+    .int 79
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
     .4byte 0xFFFFA588
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFEF
+    .int -1
+    .int -17
     .4byte 0xFFFFA100
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte 0x877DFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
@@ -24246,14 +24242,14 @@ lbl_8040FF80:
     .4byte 0xB0001000
     .4byte 0xB0000000
     .4byte 0xB0000000
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000003F
-    .4byte 0x0000000F
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 63
+    .int 15
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
@@ -24266,8 +24262,8 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte 0x000DFFFF
     .4byte 0x448FFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFE6
+    .int -1
+    .int -26
     .4byte 0x88888610
     .4byte NULL
     .4byte 0xB0000000
@@ -24278,16 +24274,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000C
-    .4byte 0x00000007
-    .4byte 0x00000001
+    .int 12
+    .int 7
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFF400
-    .4byte 0xFFFFFE30
+    .int -464
     .4byte 0xEFFFFFF8
     .4byte 0x3EFFFFFF
     .4byte 0x029EFFFF
@@ -24298,7 +24294,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x41000034
     .4byte 0xFFEFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -24312,12 +24308,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x000000AF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 1
+    .int 175
+    .int 191
+    .int 191
+    .int 191
+    .int 191
     .4byte NULL
     .4byte NULL
     .4byte 0x10000000
@@ -24335,53 +24331,53 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte NULL
-    .4byte 0x00000100
+    .int 256
     .4byte 0x2330BE30
     .4byte 0x9FE2AFE1
     .4byte 0x5CFA2FFA
     .4byte 0x35FF5AFE
     .4byte 0x41FFC471
     .4byte 0x40BA4000
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 191
+    .int 191
+    .int 191
     .4byte 0x05CBBBEF
     .4byte 0x08FFFFFF
     .4byte 0x05CB87DF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 191
+    .int 191
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF5444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFF5444
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte 0x447FFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x405FFFFF
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
-    .4byte 0x40000000
-    .4byte 0x40000000
+    .float 2.0
+    .float 2.0
     .4byte 0xA7885000
     .4byte 0xFFFFB000
     .4byte 0xFEFFA000
     .4byte 0x50010000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x0000009F
+    .float 2.0
+    .float 2.0
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 159
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
@@ -24394,29 +24390,29 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x005FFFFF
     .4byte 0x01BFFFFF
-    .4byte 0xFFFFFFFB
-    .4byte 0xFFFFFFE3
+    .int -5
+    .int -29
     .4byte 0xCBBBB710
     .4byte NULL
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
+    .float 2.0
+    .float 2.0
+    .float 2.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000007F
-    .4byte 0x0000003F
-    .4byte 0x0000000B
-    .4byte 0x00000002
+    .int 127
+    .int 63
+    .int 11
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFF6000
     .4byte 0xFFFFD100
-    .4byte 0xFFFFFD61
+    .int -671
     .4byte 0xEFFFFFFF
     .4byte 0x2BFFFFFF
     .4byte 0x00268BBB
@@ -24426,7 +24422,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xEBBBBBCF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -24439,13 +24435,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000020
+    .int 32
     .4byte 0x000006FB
     .4byte 0x00001DFF
     .4byte 0x000004FF
-    .4byte 0x0000006F
-    .4byte 0x00000009
-    .4byte 0x00000001
+    .int 111
+    .int 9
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte 0x20000000
@@ -24482,17 +24478,17 @@ lbl_8040FF80:
     .4byte 0x09FFE300
     .4byte 0x01EE3000
     .4byte 0x00640004
-    .4byte 0x0000035E
+    .int 862
     .4byte 0xBBDFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xCBA8767E
     .4byte 0x09FFFFE1
     .4byte 0x2FFFFF30
     .4byte 0xAFFFF600
     .4byte 0xFFFF7000
     .4byte 0xFFFE88BB
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFDB
+    .int -1
+    .int -37
     .4byte 0xFFFD7200
     .4byte NULL
     .4byte NULL
@@ -24548,32 +24544,32 @@ lbl_8040FF80:
     .4byte 0x007FFFFF
     .4byte 0x0006EFFF
     .4byte 0x000017DF
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xB5200002
     .4byte 0xFFFEFFEF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x47888888
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x41000000
+    .float 8.0
     .4byte 0xF1000000
     .4byte 0xD0000000
     .4byte 0x50000000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000210
+    .int 528
     .4byte 0x00004ED4
     .4byte 0x0000AFFF
     .4byte 0x00001EFF
     .4byte 0x000003EF
-    .4byte 0x0000006F
-    .4byte 0x0000000A
+    .int 111
+    .int 10
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -24598,7 +24594,7 @@ lbl_8040FF80:
     .4byte 0x8961EF90
     .4byte 0x5FF37FF6
     .4byte 0x0BFD3DFE
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -24612,15 +24608,15 @@ lbl_8040FF80:
     .4byte 0x0460001E
     .4byte 0x000024BF
     .4byte 0xBDFEFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBB8776CF
     .4byte 0x4FFFFF40
     .4byte 0xCFFFF800
     .4byte 0xFFFF9000
     .4byte 0xFFFB0000
     .4byte 0xFFF97ABB
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFEBB
+    .int -1
+    .int -325
     .4byte 0xFFE83000
     .4byte 0x04FF97E6
     .4byte 0x00DFC210
@@ -24676,21 +24672,21 @@ lbl_8040FF80:
     .4byte 0x04FFFFFD
     .4byte 0x003DFFFF
     .4byte 0x00006CFF
-    .4byte 0x00000014
+    .int 20
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x73000014
-    .4byte 0xFFFFFEFF
-    .4byte 0xFFFFFFFF
+    .int -257
+    .int -1
     .4byte 0x78888887
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x20000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x20000000
     .4byte NULL
     .4byte NULL
@@ -24729,13 +24725,13 @@ lbl_8040FF80:
     .4byte 0x00FFFFFF
     .4byte 0x00FFFFFF
     .4byte 0x0044443A
-    .4byte 0x0000000C
-    .4byte 0x0000003F
-    .4byte 0x0000008F
-    .4byte 0x000000CF
-    .4byte 0x000002FF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFDBB
+    .int 12
+    .int 63
+    .int 143
+    .int 207
+    .int 767
+    .int -1
+    .int -581
     .4byte 0xFFFFF600
     .4byte 0xFFFFF100
     .4byte 0xFFFFC000
@@ -24803,14 +24799,14 @@ lbl_8040FF80:
     .4byte 0x80006FFF
     .4byte 0x50001EFF
     .4byte 0x100003DF
-    .4byte 0x00000005
+    .int 5
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x82000002
     .4byte 0xFFEFFFEF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xABEFFFFF
     .4byte NULL
     .4byte NULL
@@ -24857,13 +24853,13 @@ lbl_8040FF80:
     .4byte 0x00BFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x00344438
-    .4byte 0x00000009
-    .4byte 0x0000000D
-    .4byte 0x0000003F
-    .4byte 0x0000008F
-    .4byte 0x000000CF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFEBB
+    .int 9
+    .int 13
+    .int 63
+    .int 143
+    .int 207
+    .int -1
+    .int -325
     .4byte 0xFFFFF900
     .4byte 0xFFFFF500
     .4byte 0xFFFFF100
@@ -24886,7 +24882,7 @@ lbl_8040FF80:
     .4byte 0xFFFFF800
     .4byte 0xFFFFF600
     .4byte 0x37DFF400
-    .4byte 0x000002FF
+    .int 767
     .4byte 0x000007FF
     .4byte 0x00000BFF
     .4byte 0x00001FFF
@@ -24937,8 +24933,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x70000000
     .4byte 0xFEBBBBBD
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xDFFFFFFF
     .4byte 0x01444444
     .4byte NULL
@@ -24948,7 +24944,7 @@ lbl_8040FF80:
     .4byte 0xFFFFF000
     .4byte 0xFFFFF000
     .4byte 0xFFFFE000
-    .4byte 0x44430000
+    .float 780.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -24986,11 +24982,11 @@ lbl_8040FF80:
     .4byte 0x0005CBBB
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
-    .4byte 0x00000009
-    .4byte 0x0000000E
-    .4byte 0x0000006F
-    .4byte 0xFFFFFFFF
+    .int 5
+    .int 9
+    .int 14
+    .int 111
+    .int -1
     .4byte 0xCFFFFFC7
     .4byte 0x8FFFFF50
     .4byte 0xDFFFFD00
@@ -24998,14 +24994,14 @@ lbl_8040FF80:
     .4byte 0xFFFFF200
     .4byte 0xFFFFB004
     .4byte 0xFFFF88EF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x87444410
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x7ABBB851
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFE300000
     .4byte 0x10000000
     .4byte NULL
@@ -25014,30 +25010,30 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x91000000
-    .4byte 0x000000AF
-    .4byte 0x000002FF
+    .int 175
+    .int 767
     .4byte 0x000008FF
     .4byte 0x00001EFF
     .4byte 0x00002DFF
-    .4byte 0x0000004A
+    .int 74
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFA5
+    .int -1
+    .int -91
     .4byte 0xFFFFA200
     .4byte 0xFFF90000
     .4byte 0xFF900000
     .4byte 0xFD100000
     .4byte 0x23000000
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x446AFFFF
     .4byte 0x00003DFF
     .4byte 0x000003FF
-    .4byte 0x000000AF
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x000000BF
+    .int 175
+    .int 143
+    .int 143
+    .int 191
     .4byte 0xFE300000
     .4byte 0xFFE30000
     .4byte 0xFFFB0000
@@ -25066,7 +25062,7 @@ lbl_8040FF80:
     .4byte 0x00003EFF
     .4byte 0x0039FFFF
     .4byte 0xBDFFFFFF
-    .4byte 0xFFFFFFFC
+    .int -4
     .4byte 0xFFCB9620
     .4byte NULL
     .4byte NULL
@@ -25113,59 +25109,59 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte 0x000AFFFE
     .4byte 0x00001000
-    .4byte 0x00000001
-    .4byte 0x00000007
-    .4byte 0x0000000C
-    .4byte 0x0000002F
-    .4byte 0x0000008F
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFCB
+    .int 1
+    .int 7
+    .int 12
+    .int 47
+    .int 143
+    .int -1
+    .int -53
     .4byte 0xBFFFFF20
     .4byte 0xFFFFFB00
     .4byte 0xFFFFF600
     .4byte 0xFFFFE100
     .4byte 0xFFFF9001
     .4byte 0xFFFF56CF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xB9788744
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x47887410
-    .4byte 0xFFFFFFFA
+    .int -6
     .4byte 0xFE000000
-    .4byte 0x42000000
+    .float 32.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
-    .4byte 0x000000DF
+    .float 2.0
+    .int 223
     .4byte 0x000004FF
     .4byte 0x000009FF
     .4byte 0x00002FFF
     .4byte 0x00006FFF
-    .4byte 0x0000039E
-    .4byte 0x00000001
+    .int 926
+    .int 1
     .4byte NULL
     .4byte 0xFFFFEFFF
-    .4byte 0xFFFFFFC8
+    .int -56
     .4byte 0xFFFFB400
     .4byte 0xFFF90000
     .4byte 0xFF900000
     .4byte 0xFC000000
     .4byte 0x64000000
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x78BFFFFF
     .4byte 0x00019FFF
     .4byte 0x000009FF
-    .4byte 0x000001FF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000DF
+    .int 511
+    .int 191
+    .int 191
+    .int 223
     .4byte 0xF8000000
     .4byte 0xFF900000
     .4byte 0xFFF60000
@@ -25194,9 +25190,9 @@ lbl_8040FF80:
     .4byte 0x00003DFF
     .4byte 0x0017EFFF
     .4byte 0x7AFFFFFF
-    .4byte 0xFFFFFFFE
+    .int -2
     .4byte 0xFFFFC850
-    .4byte 0x44100000
+    .float 576.0
     .4byte NULL
     .4byte 0xFFFC0000
     .4byte 0xFFF60000
@@ -25242,7 +25238,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000014
+    .int 20
     .4byte 0x00006DFF
     .4byte 0x00006FFF
     .4byte 0x00002FE9
@@ -25257,8 +25253,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x24441000
-    .4byte 0xFFFFFC71
-    .4byte 0xFFFFFFFE
+    .int -911
+    .int -2
     .4byte 0x458EFFFF
     .4byte 0x0001AFFF
     .4byte 0x00000DFF
@@ -25266,7 +25262,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xF4000000
     .4byte 0xFE100000
     .4byte 0xFF700000
@@ -25287,9 +25283,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x000006FF
-    .4byte 0x000002FF
-    .4byte 0x000000FF
-    .4byte 0x000001FF
+    .int 767
+    .int 255
+    .int 511
     .4byte 0x000004FF
     .4byte 0x000008FF
     .4byte 0x00002EFF
@@ -25311,7 +25307,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
+    .int 3
     .4byte 0x006CBCFF
     .4byte 0x006FFFFF
     .4byte 0x00288743
@@ -25341,7 +25337,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25357,7 +25353,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xCFFFEC95
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25374,7 +25370,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFC9630
     .4byte 0xA6200000
     .4byte NULL
@@ -25385,11 +25381,11 @@ lbl_8040FF80:
     .4byte 0xEFFFFFFF
     .4byte 0x0148EFFF
     .4byte 0x00001CFF
-    .4byte 0x000001CF
-    .4byte 0x0000004F
-    .4byte 0x0000000C
-    .4byte 0x00000009
-    .4byte 0x00000008
+    .int 463
+    .int 79
+    .int 12
+    .int 9
+    .int 8
     .4byte 0xFF910000
     .4byte 0xFFFA0000
     .4byte 0xFFFF7000
@@ -25414,11 +25410,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x00000009
-    .4byte 0x0000000D
-    .4byte 0x0000003F
-    .4byte 0x000000BF
+    .int 8
+    .int 9
+    .int 13
+    .int 63
+    .int 191
     .4byte 0x000007FF
     .4byte 0x00008FFF
     .4byte 0x004BFFFF
@@ -25438,7 +25434,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x07879BDF
     .4byte 0x0DFFFFFF
     .4byte 0x0AFFFFEB
@@ -25447,7 +25443,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x6BFFFFFF
-    .4byte 0xFFFFFFD4
+    .int -44
     .4byte 0xFFFE9400
     .4byte 0xA7300000
     .4byte NULL
@@ -25469,7 +25465,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25485,7 +25481,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBEFFFCA6
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x00006200
     .4byte 0x000AFE40
     .4byte 0x6D53EFF6
@@ -25502,7 +25498,7 @@ lbl_8040FF80:
     .4byte 0x00100000
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFD9641
     .4byte 0xD8300000
     .4byte NULL
@@ -25513,19 +25509,19 @@ lbl_8040FF80:
     .4byte 0xEFFFFFFF
     .4byte 0x0147DFFF
     .4byte 0x000019FF
-    .4byte 0x0000009F
-    .4byte 0x0000001E
-    .4byte 0x00000009
-    .4byte 0x00000006
-    .4byte 0x00000004
+    .int 159
+    .int 30
+    .int 9
+    .int 6
+    .int 4
     .4byte 0xFFC10000
     .4byte 0xFFFC1000
     .4byte 0xFFFF9000
     .4byte 0xFFFFF200
     .4byte 0xFFFFF800
     .4byte 0xFFFFFB00
-    .4byte 0xFFFFFE00
-    .4byte 0xFFFFFF00
+    .int -512
+    .int -256
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25542,16 +25538,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x00000006
-    .4byte 0x00000008
-    .4byte 0x0000000D
-    .4byte 0x0000006F
-    .4byte 0x000002EF
+    .int 4
+    .int 6
+    .int 8
+    .int 13
+    .int 111
+    .int 751
     .4byte 0x00002CFF
     .4byte 0x0006EFFF
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFD00
+    .int -256
+    .int -768
     .4byte 0xFFFFFA00
     .4byte 0xFFFFF600
     .4byte 0xFFFFD000
@@ -25575,7 +25571,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x17DFFFFF
-    .4byte 0xFFFFFFFA
+    .int -6
     .4byte 0xFFFFE930
     .4byte 0xEB840000
     .4byte NULL
@@ -25603,15 +25599,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x888ABBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFEFDBBBA
     .4byte 0x20100006
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000014
+    .int 20
     .4byte 0xEFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xAFFFFFB8
     .4byte 0xDFFF9200
     .4byte NULL
@@ -25630,7 +25626,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000002BF
+    .int 703
     .4byte 0x00003EFF
     .4byte 0x0003EFFF
     .4byte 0x001DFFFF
@@ -25697,7 +25693,7 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x0006EFFF
     .4byte 0x00003BFF
-    .4byte 0x0000004A
+    .int 74
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25705,9 +25701,9 @@ lbl_8040FF80:
     .4byte 0xF9000000
     .4byte 0xFFD60000
     .4byte 0xFFFFEB87
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x159BEFFF
-    .4byte 0x00000024
+    .int 36
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25715,7 +25711,7 @@ lbl_8040FF80:
     .4byte 0x84000000
     .4byte 0xF6000000
     .4byte 0xF3000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25731,21 +25727,21 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x879BBBBD
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFEFDBBB8
     .4byte 0x10100018
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x10000024
-    .4byte 0xFFFFFEFF
-    .4byte 0xFFFFFFFF
+    .int -257
+    .int -1
     .4byte 0xBFFFFEA8
     .4byte 0xEFFE7100
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44444000
+    .float 785.0
     .4byte 0xFFFFF000
     .4byte 0xFFFFF000
     .4byte 0x54444000
@@ -25825,7 +25821,7 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte 0x0008FFFF
     .4byte 0x00005DFF
-    .4byte 0x0000016C
+    .int 364
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25833,9 +25829,9 @@ lbl_8040FF80:
     .4byte 0xF6000000
     .4byte 0xFFB40000
     .4byte 0xFFFFDA88
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x279BEFFF
-    .4byte 0x00000034
+    .int 52
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -25863,12 +25859,12 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte NULL
-    .4byte 0x41000000
+    .float 8.0
     .4byte 0xF5000000
     .4byte 0xF4000000
     .4byte 0xF1000000
     .4byte 0xF0000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xB0000000
     .4byte NULL
     .4byte NULL
@@ -25899,7 +25895,7 @@ lbl_8040FF80:
     .4byte 0xB0000003
     .4byte 0xC00159DF
     .4byte 0xF7BFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFEB974
     .4byte 0xC7410000
     .4byte NULL
@@ -25910,8 +25906,8 @@ lbl_8040FF80:
     .4byte 0xFFF80000
     .4byte 0x30000000
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000006F
+    .int 3
+    .int 111
     .4byte 0x000005FF
     .4byte 0x00001EFF
     .4byte 0x00006FFF
@@ -25945,15 +25941,15 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00003FFF
     .4byte 0x000008FF
-    .4byte 0x0000009F
-    .4byte 0x00000005
+    .int 159
+    .int 5
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFD00000
     .4byte 0xFFFA1000
     .4byte 0xFFFFE964
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xCFFFFFFF
     .4byte 0x0269BBEF
     .4byte NULL
@@ -25962,9 +25958,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x10000145
     .4byte 0xFFFFEFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFE
-    .4byte 0x00000010
+    .int -1
+    .int -2
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte 0x00110000
@@ -25995,7 +25991,7 @@ lbl_8040FF80:
     .4byte 0x80000000
     .4byte 0x80000001
     .4byte 0x50000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x20000000
     .4byte NULL
     .4byte NULL
@@ -26024,10 +26020,10 @@ lbl_8040FF80:
     .4byte 0x17DFFFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x100058DF
     .4byte 0x66AFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFEB97
     .4byte 0xC8510000
     .4byte 0x00710000
@@ -26036,10 +26032,10 @@ lbl_8040FF80:
     .4byte 0xFF800000
     .4byte 0xFFB00000
     .4byte 0xFFD00000
-    .4byte 0x44200000
+    .float 640.0
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x000001BF
+    .int 6
+    .int 447
     .4byte 0x00001CFF
     .4byte 0x00009FFF
     .4byte 0x0001FFFF
@@ -26074,24 +26070,24 @@ lbl_8040FF80:
     .4byte 0x0001FFFF
     .4byte 0x00008FFF
     .4byte 0x000009FF
-    .4byte 0x0000007E
+    .int 126
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFE100000
     .4byte 0xFFA10000
     .4byte 0xFFFD7300
-    .4byte 0xFFFFFFFC
-    .4byte 0xFFFFFFFF
+    .int -4
+    .int -1
     .4byte 0x59BEFFFF
-    .4byte 0x00000344
+    .int 836
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000014
+    .int 20
     .4byte 0xBBBBBEFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444441
     .4byte NULL
     .4byte NULL
@@ -26108,7 +26104,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x0024443A
     .4byte NULL
     .4byte NULL
@@ -26137,13 +26133,13 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte 0x001444BF
-    .4byte 0x000001EF
+    .int 495
     .4byte 0x000006FF
     .4byte 0x00000AFF
     .4byte 0x00001FFF
     .4byte 0x00006FFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFEBB
+    .int -1
+    .int -325
     .4byte 0xFFFA0000
     .4byte 0xFFF40000
     .4byte 0xFFD00000
@@ -26152,14 +26148,14 @@ lbl_8040FF80:
     .4byte 0xFD000000
     .4byte 0xF4039FFF
     .4byte 0x9200017E
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte 0x00EFFCC5
     .4byte 0x00FFFFF8
     .4byte 0x00FFFFF8
     .4byte 0x00FFFFF8
     .4byte 0xFFFFA610
-    .4byte 0xFFFFFD10
+    .int -752
     .4byte 0xAFFFF500
     .4byte 0x04EFA000
     .4byte 0x001A3000
@@ -26188,7 +26184,7 @@ lbl_8040FF80:
     .4byte 0x00BFFFF8
     .4byte 0x00BFFFF8
     .4byte 0xBBEFFFF8
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xBBFFFFFF
     .4byte NULL
     .4byte NULL
@@ -26212,15 +26208,15 @@ lbl_8040FF80:
     .4byte 0x02FFFFE8
     .4byte 0x006FFFFF
     .4byte 0x00039EFF
-    .4byte 0x00000024
+    .int 36
     .4byte NULL
     .4byte 0x008FFFFF
     .4byte 0x008FFFFF
     .4byte 0x009FFFFB
     .4byte 0x7BFFFFF5
-    .4byte 0xFFFFFF90
+    .int -112
     .4byte 0xFFFEB500
-    .4byte 0x44200000
+    .float 640.0
     .4byte NULL
     .4byte 0xFFFFA300
     .4byte 0xFFFFF900
@@ -26251,9 +26247,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x01445888
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -26343,9 +26339,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xFEFFEFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x03444444
     .4byte NULL
     .4byte NULL
@@ -26354,7 +26350,7 @@ lbl_8040FF80:
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte 0xFFEFD300
-    .4byte 0x42010000
+    .float 32.25
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -26362,14 +26358,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x0000ABEF
     .4byte 0x0000EFFF
     .4byte 0x0000BFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x0000004F
+    .int 79
+    .int 79
     .4byte 0x3100004F
     .4byte 0xF400004F
     .4byte 0xF400007F
@@ -26381,7 +26377,7 @@ lbl_8040FF80:
     .4byte 0xFFFFD000
     .4byte 0xFFFFB000
     .4byte 0xFFFF8000
-    .4byte 0xFFFFFC95
+    .int -875
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -26406,8 +26402,8 @@ lbl_8040FF80:
     .4byte 0xFF2008FF
     .4byte 0xFF500BFF
     .4byte 0xFF801EFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFCBFFF
     .4byte 0xFFF608FF
     .4byte 0xFFF300BF
@@ -26433,8 +26429,8 @@ lbl_8040FF80:
     .4byte 0xFFD04FFF
     .4byte 0xFFF28FFF
     .4byte 0xFFFACFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x9FFFFFFB
     .4byte 0x2FFFFFF4
     .4byte 0x09FFFF85
@@ -26453,12 +26449,12 @@ lbl_8040FF80:
     .4byte 0xFFFFF000
     .4byte 0xFFFFC000
     .4byte 0xFFFFB100
-    .4byte 0xFFFFFC30
+    .int -976
     .4byte 0x03FFF800
     .4byte 0x00CFFE89
     .4byte 0x003EFFFF
     .4byte 0x0003BFFF
-    .4byte 0x00000144
+    .int 324
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -26478,8 +26474,8 @@ lbl_8040FF80:
     .4byte 0x00144300
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFE1
-    .4byte 0xFFFFFFC0
+    .int -31
+    .int -64
     .4byte 0xFF6AFF70
     .4byte 0xF601EF20
     .4byte 0x20007B00
@@ -26487,15 +26483,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000034
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 52
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
     .4byte NULL
-    .4byte 0x41000000
+    .float 8.0
     .4byte 0xFFFE3000
     .4byte 0xFFFF4000
     .4byte 0xFFFF2000
@@ -26521,16 +26517,16 @@ lbl_8040FF80:
     .4byte 0x00BFFFFF
     .4byte 0x00FFFFFF
     .4byte 0x00EFBBEF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000CF
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 207
     .4byte 0xFFFF0006
     .4byte 0xFFFD02BF
     .4byte 0xFFFB6EFF
-    .4byte 0xFFFFFFF9
-    .4byte 0xFFFFFF60
+    .int -7
+    .int -160
     .4byte 0xFFFFE300
     .4byte 0xFFFE3000
     .4byte 0xFFFB0000
@@ -26538,10 +26534,10 @@ lbl_8040FF80:
     .4byte 0xFFFEFFFF
     .4byte 0xE8204EFF
     .4byte 0x100006FF
-    .4byte 0x000000EF
-    .4byte 0x000000BF
-    .4byte 0x0000009F
-    .4byte 0x0000008F
+    .int 239
+    .int 191
+    .int 159
+    .int 143
     .4byte 0xFE300000
     .4byte 0xFFD10000
     .4byte 0xFFF70000
@@ -26566,11 +26562,11 @@ lbl_8040FF80:
     .4byte 0xFFFB01EF
     .4byte 0xFFFB09FF
     .4byte 0xFFFB0DFF
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
+    .int 143
+    .int 143
+    .int 143
     .4byte 0x49BBB9BF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBCFFF
     .4byte 0xF90002CF
     .4byte 0xD00000CF
@@ -26581,14 +26577,14 @@ lbl_8040FF80:
     .4byte 0xFFFF4000
     .4byte 0xFFFF6000
     .4byte 0xFFFFFB20
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte 0x007C00BF
     .4byte 0x001200BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x00000034
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 52
     .4byte NULL
     .4byte 0xFFFB0EFF
     .4byte 0xFFFB0DFF
@@ -26596,18 +26592,18 @@ lbl_8040FF80:
     .4byte 0xFFFB01CF
     .4byte 0xFFFB0006
     .4byte 0xFFFB0000
-    .4byte 0x44430000
+    .float 780.0
     .4byte NULL
     .4byte 0xB00001FF
     .4byte 0xF30006FF
     .4byte 0xFE746EFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xDFFFFFFA
     .4byte 0x02444300
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFE2
-    .4byte 0xFFFFFF80
+    .int -30
+    .int -128
     .4byte 0xFF86FF20
     .4byte 0xF9008A00
     .4byte 0x40001200
@@ -26619,8 +26615,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000005E
+    .int 2
+    .int 94
     .4byte 0x000006FF
     .4byte NULL
     .4byte NULL
@@ -26634,8 +26630,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBA86200
-    .4byte 0xFFFFFFD7
-    .4byte 0xFFFFFFFF
+    .int -41
+    .int -1
     .4byte 0xFFC8EFFF
     .4byte 0xFF901AFF
     .4byte NULL
@@ -26673,7 +26669,7 @@ lbl_8040FF80:
     .4byte 0xFFFF7000
     .4byte 0xFFFFE200
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFD00
+    .int -768
     .4byte 0xCFFFFF30
     .4byte 0x9FFFFF50
     .4byte 0x8FFFFF80
@@ -26700,8 +26696,8 @@ lbl_8040FF80:
     .4byte 0xB0000001
     .4byte 0x70000005
     .4byte 0x30000009
-    .4byte 0x0000003F
-    .4byte 0x000001CF
+    .int 63
+    .int 463
     .4byte 0x8FFFFF80
     .4byte 0x9FFFFF70
     .4byte 0xBFFFFF40
@@ -26713,13 +26709,13 @@ lbl_8040FF80:
     .4byte 0x000BFFF6
     .4byte 0x0003EFFF
     .4byte 0x00003DFF
-    .4byte 0x0000017C
+    .int 380
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x1CFFFFC0
-    .4byte 0xFFFFFE30
+    .int -464
     .4byte 0xFFFFE300
     .4byte 0xFFD92000
     .4byte 0x01000000
@@ -26789,10 +26785,10 @@ lbl_8040FF80:
     .4byte 0x80000000
     .4byte 0x80000000
     .4byte 0x70000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x005FFFFF
     .4byte 0xFEFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x879FFFFF
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
@@ -26814,9 +26810,9 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
+    .float 2.0
+    .float 2.0
+    .float 2.0
     .4byte 0x40000025
     .4byte 0x40006CFF
     .4byte 0x401BFFFF
@@ -26826,8 +26822,8 @@ lbl_8040FF80:
     .4byte 0x000FFFFF
     .4byte 0x000FFFFF
     .4byte 0x878FFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x745FFFFF
     .4byte 0x000FFFFF
     .4byte 0x80000000
@@ -26858,11 +26854,11 @@ lbl_8040FF80:
     .4byte 0x000EFFFF
     .4byte 0x004FFFFF
     .4byte 0xCBFFFFFF
-    .4byte 0xFFFFFFE6
+    .int -26
     .4byte 0xFFEB9610
     .4byte 0x01000000
     .4byte NULL
-    .4byte 0xFFFFFF30
+    .int -208
     .4byte 0xCCFFFB00
     .4byte 0x90CFF400
     .4byte 0x401DC000
@@ -26910,7 +26906,7 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte 0x00BFFFFE
     .4byte 0x00BFFFFB
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x33FFFFFF
     .4byte 0x33FFFFFF
     .4byte 0x01888888
@@ -26919,8 +26915,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x00BFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x77CFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x00BFFFFF
@@ -26945,7 +26941,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000147
+    .int 327
     .4byte 0x0002AFFF
     .4byte 0x006FFFFF
     .4byte 0x02EFFFFA
@@ -26954,8 +26950,8 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte 0x008FFFFF
     .4byte 0x87CFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x53AFFFFF
     .4byte 0x008FFFFF
     .4byte NULL
@@ -26980,13 +26976,13 @@ lbl_8040FF80:
     .4byte 0x32EFFFFE
     .4byte 0x305EFFFF
     .4byte 0x00017BEF
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte 0x007FFFFF
     .4byte 0x007FFFFF
     .4byte 0x00AFFFFF
     .4byte 0xBDFFFFFB
-    .4byte 0xFFFFFFB1
+    .int -79
     .4byte 0xFFCB8400
     .4byte NULL
     .4byte NULL
@@ -27038,7 +27034,7 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte 0x00BFFFFE
     .4byte 0x00BFFFFB
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x33FFFFFF
     .4byte 0x33FFFFFF
     .4byte 0x01888888
@@ -27047,8 +27043,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x00BFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x77CFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x00BFFFFF
@@ -27073,7 +27069,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000147
+    .int 327
     .4byte 0x0002AFFF
     .4byte 0x006FFFFF
     .4byte 0x02EFFFFA
@@ -27082,8 +27078,8 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte 0x008FFFFF
     .4byte 0x87CFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x53AFFFFF
     .4byte 0x008FFFFF
     .4byte NULL
@@ -27108,13 +27104,13 @@ lbl_8040FF80:
     .4byte 0x32EFFFFE
     .4byte 0x305EFFFF
     .4byte 0x00027BEF
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte 0x007FFFFF
     .4byte 0x007FFFFF
     .4byte 0x00AFFFFF
     .4byte 0xBDFFFFFB
-    .4byte 0xFFFFFFB1
+    .int -79
     .4byte 0xFFCB8400
     .4byte NULL
     .4byte NULL
@@ -27158,9 +27154,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x70000000
     .4byte 0xFD610000
-    .4byte 0x00000002
-    .4byte 0x0000001C
-    .4byte 0x0000009F
+    .int 2
+    .int 28
+    .int 159
     .4byte 0x000004FF
     .4byte 0x00000DFF
     .4byte 0x00006FFF
@@ -27183,7 +27179,7 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00008FFF
     .4byte 0xFFFE8300
-    .4byte 0xFFFFFF40
+    .int -192
     .4byte 0x5EFFFA00
     .4byte 0x02CFF200
     .4byte 0x30087000
@@ -27202,7 +27198,7 @@ lbl_8040FF80:
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0xB0000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xF1000000
     .4byte 0xF8000000
     .4byte 0xFE300000
@@ -27224,23 +27220,23 @@ lbl_8040FF80:
     .4byte 0x80000000
     .4byte 0x00009FFF
     .4byte 0x00001EFF
-    .4byte 0x000003DF
-    .4byte 0x0000001A
+    .int 991
+    .int 26
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFE83003
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x28DFFFFF
     .4byte 0x00014444
     .4byte NULL
     .4byte NULL
     .4byte 0x8EFFFFFD
-    .4byte 0xFFFFFFE3
-    .4byte 0xFFFFFE30
+    .int -29
+    .int -464
     .4byte 0xFFFFB200
     .4byte 0xFD830000
     .4byte 0x10000000
@@ -27258,7 +27254,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000146
+    .int 326
     .4byte 0x009BEFFF
     .4byte 0x009FFFFF
     .4byte 0x007FD962
@@ -27287,9 +27283,9 @@ lbl_8040FF80:
     .4byte 0x403B1000
     .4byte 0xFA200000
     .4byte 0x00120001
-    .4byte 0x00000009
-    .4byte 0x0000007F
-    .4byte 0x000002FF
+    .int 9
+    .int 127
+    .int 767
     .4byte 0x00000BFF
     .4byte 0x00004FFF
     .4byte 0x0000AFFF
@@ -27311,12 +27307,12 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00008FFF
     .4byte 0xFFFB5000
-    .4byte 0xFFFFFE30
+    .int -464
     .4byte 0x9FFFFC00
     .4byte 0x05EFF400
     .4byte 0x202CA000
     .4byte 0x70001000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xF2000000
     .4byte 0x0006FFFF
     .4byte 0x0008FFFF
@@ -27327,7 +27323,7 @@ lbl_8040FF80:
     .4byte 0x0007FFFF
     .4byte 0x0003FFFF
     .4byte 0xF1000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0xB0000000
@@ -27353,22 +27349,22 @@ lbl_8040FF80:
     .4byte 0x0000BFFF
     .4byte 0x00003FFF
     .4byte 0x000006FF
-    .4byte 0x0000003D
-    .4byte 0x00000001
+    .int 61
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFC40000
     .4byte 0xFFFFEBBE
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x6CFFFFFF
     .4byte 0x00257887
     .4byte NULL
     .4byte NULL
     .4byte 0x4BFFFFFE
-    .4byte 0xFFFFFFF6
-    .4byte 0xFFFFFF60
+    .int -10
+    .int -160
     .4byte 0xFFFFE500
     .4byte 0xFFC71000
     .4byte 0x52000000
@@ -27415,8 +27411,8 @@ lbl_8040FF80:
     .4byte 0x606EF910
     .4byte 0xFD500000
     .4byte 0x00110001
-    .4byte 0x0000000B
-    .4byte 0x0000008F
+    .int 11
+    .int 143
     .4byte 0x000004FF
     .4byte 0x00000DFF
     .4byte 0x00006FFF
@@ -27439,7 +27435,7 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00008FFF
     .4byte 0xFFFD6200
-    .4byte 0xFFFFFF30
+    .int -208
     .4byte 0x5FFFFB00
     .4byte 0x03DFF300
     .4byte 0x20198000
@@ -27455,10 +27451,10 @@ lbl_8040FF80:
     .4byte 0x0006FFFF
     .4byte 0x0002FFFF
     .4byte 0xF0000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xB0000000
     .4byte 0xB0000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xF1000000
     .4byte 0xF8000000
     .4byte 0xFE300000
@@ -27480,23 +27476,23 @@ lbl_8040FF80:
     .4byte 0x80000000
     .4byte 0x00009FFF
     .4byte 0x00001EFF
-    .4byte 0x000003DF
-    .4byte 0x0000001A
+    .int 991
+    .int 26
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFE83003
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x28DFFFFF
     .4byte 0x00014444
     .4byte NULL
     .4byte NULL
     .4byte 0x8EFFFFFD
-    .4byte 0xFFFFFFE3
-    .4byte 0xFFFFFE50
+    .int -29
+    .int -432
     .4byte 0xFFFFB200
     .4byte 0xFD830000
     .4byte 0x10000000
@@ -27524,8 +27520,8 @@ lbl_8040FF80:
     .4byte 0x0AFFFFFF
     .4byte 0x027DFFFF
     .4byte 0x00006DFF
-    .4byte 0x0000008F
-    .4byte 0x00000003
+    .int 143
+    .int 3
     .4byte NULL
     .4byte NULL
     .4byte 0x10000000
@@ -27575,8 +27571,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xD6000000
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x0000003E
+    .int 7
+    .int 62
     .4byte 0x000003EF
     .4byte 0x00003EFF
     .4byte 0x0003EFFF
@@ -27594,10 +27590,10 @@ lbl_8040FF80:
     .4byte 0xFFFF7009
     .4byte 0xFFFFE102
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFD00
-    .4byte 0xFFFFFF10
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
+    .int -768
+    .int -240
+    .int -192
+    .int -192
     .4byte 0xFF400000
     .4byte 0xFFE30000
     .4byte 0xFFFD1000
@@ -27614,20 +27610,20 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x00000008
+    .int 3
+    .int 8
     .4byte 0x3520017F
     .4byte 0x7FFEEFFF
     .4byte 0x4FFFFFFF
     .4byte 0x28888887
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFF30
-    .4byte 0xFFFFFE00
+    .int -208
+    .int -512
     .4byte 0xFFFFF700
     .4byte 0xFFFFB000
     .4byte 0xFFD70000
-    .4byte 0x42000000
+    .float 32.0
     .4byte NULL
     .4byte NULL
     .4byte 0x05FFFFB3
@@ -27652,8 +27648,8 @@ lbl_8040FF80:
     .4byte 0x3FFFFFFF
     .4byte 0x059FFFFF
     .4byte 0x00029FFF
-    .4byte 0x000003CF
-    .4byte 0x00000009
+    .int 975
+    .int 9
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -27701,10 +27697,10 @@ lbl_8040FF80:
     .4byte 0x00300000
     .4byte NULL
     .4byte NULL
-    .4byte 0xC1000000
-    .4byte 0x00000005
-    .4byte 0x0000001D
-    .4byte 0x0000009F
+    .float -8.0
+    .int 5
+    .int 29
+    .int 159
     .4byte 0x000009FF
     .4byte 0x00009FFF
     .4byte 0x0009FFFF
@@ -27717,7 +27713,7 @@ lbl_8040FF80:
     .4byte 0xE100000B
     .4byte 0x80000008
     .4byte 0x10000008
-    .4byte 0x00000008
+    .int 8
     .4byte 0xFFE3008F
     .4byte 0xFFFD103F
     .4byte 0xFFFF8009
@@ -27742,8 +27738,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000A
-    .4byte 0x0000001E
+    .int 10
+    .int 30
     .4byte 0x541003BF
     .4byte 0xEFFFFFFF
     .4byte 0xBFFFFFFF
@@ -27755,7 +27751,7 @@ lbl_8040FF80:
     .4byte 0xFFFFE100
     .4byte 0xFFFF5000
     .4byte 0xFFB30000
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte 0x0CFFFE80
@@ -27780,8 +27776,8 @@ lbl_8040FF80:
     .4byte 0x3FFFFFFF
     .4byte 0x039EFFFF
     .4byte 0x00019FFF
-    .4byte 0x000002CF
-    .4byte 0x00000009
+    .int 719
+    .int 9
     .4byte NULL
     .4byte NULL
     .4byte 0x10000000
@@ -27816,7 +27812,7 @@ lbl_8040FF80:
     .4byte 0x00004FFF
     .4byte 0x7B00004F
     .4byte 0x0100002F
-    .4byte 0x00000008
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte 0x50000000
@@ -27829,10 +27825,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xC1000000
-    .4byte 0x00000004
-    .4byte 0x0000001C
-    .4byte 0x0000009F
+    .float -8.0
+    .int 4
+    .int 28
+    .int 159
     .4byte 0x000009FF
     .4byte 0x00009FFF
     .4byte 0x0009FFFF
@@ -27845,7 +27841,7 @@ lbl_8040FF80:
     .4byte 0xE100000B
     .4byte 0x80000008
     .4byte 0x10000008
-    .4byte 0x00000008
+    .int 8
     .4byte 0xFFE3008F
     .4byte 0xFFFD103F
     .4byte 0xFFFF8009
@@ -27870,8 +27866,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000A
-    .4byte 0x0000001E
+    .int 10
+    .int 30
     .4byte 0x541003AF
     .4byte 0xEFFFFFFF
     .4byte 0xBFFFFFFF
@@ -27883,7 +27879,7 @@ lbl_8040FF80:
     .4byte 0xFFFFE100
     .4byte 0xFFFF5000
     .4byte 0xFFB30000
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte 0x0BFFFF91
@@ -27927,8 +27923,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000006F
+    .int 6
+    .int 111
     .4byte 0x000003FF
     .4byte 0x00003EFF
     .4byte 0x0003EFFF
@@ -27957,12 +27953,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x20000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x0CFFFFFE
     .4byte 0x06EFFFF6
     .4byte 0x002CFFB0
     .4byte 0x00009F30
-    .4byte 0x00000300
+    .int 768
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -27978,10 +27974,10 @@ lbl_8040FF80:
     .4byte 0x0000CFFF
     .4byte 0x00004FFF
     .4byte 0x00000BFF
-    .4byte 0x000002FF
-    .4byte 0x0000009F
-    .4byte 0x0000002E
-    .4byte 0x00000008
+    .int 767
+    .int 159
+    .int 46
+    .int 8
     .4byte 0xF8000000
     .4byte 0xFF400000
     .4byte 0xFFD10000
@@ -27989,7 +27985,7 @@ lbl_8040FF80:
     .4byte 0xFFFF5000
     .4byte 0xFFFFE200
     .4byte 0xFFFFFB00
-    .4byte 0xFFFFFF70
+    .int -144
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -28006,7 +28002,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -28055,8 +28051,8 @@ lbl_8040FF80:
     .4byte 0xDFE29FD2
     .4byte 0x3FFC3710
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x0000008F
+    .int 9
+    .int 143
     .4byte 0x000006FF
     .4byte 0x00006FFF
     .4byte 0x0006FFFF
@@ -28107,9 +28103,9 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00001EFF
     .4byte 0x000006FF
-    .4byte 0x000000CF
-    .4byte 0x0000004F
-    .4byte 0x0000000B
+    .int 207
+    .int 79
+    .int 11
     .4byte 0xF6000000
     .4byte 0xFE200000
     .4byte 0xFFB00000
@@ -28117,7 +28113,7 @@ lbl_8040FF80:
     .4byte 0xFFFF3000
     .4byte 0xFFFFD100
     .4byte 0xFFFFF900
-    .4byte 0xFFFFFF50
+    .int -176
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -28134,7 +28130,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -28142,7 +28138,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFC0
+    .int -64
     .4byte 0x9FFFFC20
     .4byte 0x1EFF8000
     .4byte 0x08E40000
@@ -28183,8 +28179,8 @@ lbl_8040FF80:
     .4byte 0x9FC7EF60
     .4byte 0xFF205FB0
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000006F
+    .int 6
+    .int 111
     .4byte 0x000006FF
     .4byte 0x00006FFF
     .4byte 0x0006FFFF
@@ -28213,12 +28209,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x20000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x2FFFFFFB
     .4byte 0x04EFFFF3
     .4byte 0x001AFF90
     .4byte 0x00007C10
-    .4byte 0x00000100
+    .int 256
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -28234,10 +28230,10 @@ lbl_8040FF80:
     .4byte 0x0000BFFF
     .4byte 0x00004FFF
     .4byte 0x000009FF
-    .4byte 0x000002FF
-    .4byte 0x0000008F
-    .4byte 0x0000001E
-    .4byte 0x00000007
+    .int 767
+    .int 143
+    .int 30
+    .int 7
     .4byte 0xF8000000
     .4byte 0xFF400000
     .4byte 0xFFD10000
@@ -28245,7 +28241,7 @@ lbl_8040FF80:
     .4byte 0xFFFF5000
     .4byte 0xFFFFE100
     .4byte 0xFFFFFA00
-    .4byte 0xFFFFFF50
+    .int -176
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -28298,8 +28294,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x8888888A
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFD
+    .int -1
+    .int -3
     .4byte 0x01FFFFF8
     .4byte 0x00FFFFF8
     .4byte NULL
@@ -28320,17 +28316,17 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0xB0000000
     .4byte 0xB0000000
-	.4byte 0x80010000
+    .4byte 0x80010000
     .4byte 0x807FFFFF
     .4byte 0x808FFFFF
 	.4byte lbl_80244444
     .4byte 0x50000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x00FFFFF8
     .4byte 0x00FFFFF8
     .4byte 0x01FFFFFA
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x45FFFFFB
     .4byte 0x00FFFFFB
     .4byte 0x00FFFFFB
@@ -28350,9 +28346,9 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
+    .float 2.0
+    .float 2.0
+    .float 2.0
     .4byte 0x4000037A
     .4byte 0x4003BFFF
     .4byte 0x405FFFFF
@@ -28362,7 +28358,7 @@ lbl_8040FF80:
     .4byte 0x00FFFFFF
     .4byte 0x00FFFFFF
     .4byte 0xBBFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFEFFFFFF
     .4byte 0x20BFFFFF
     .4byte 0x00BFFFFF
@@ -28373,7 +28369,7 @@ lbl_8040FF80:
     .4byte 0xB6100000
     .4byte 0xFFFA2000
     .4byte 0xFFFFF910
-    .4byte 0xFFFFFF40
+    .int -192
     .4byte 0x004FFFFF
     .4byte 0x001FFFFF
     .4byte 0x000FFFFF
@@ -28387,15 +28383,15 @@ lbl_8040FF80:
     .4byte 0x70EFFFFB
     .4byte 0xA05EFFFF
     .4byte 0x30028DFF
-    .4byte 0x00000024
+    .int 36
     .4byte NULL
     .4byte NULL
     .4byte 0x00BFFFFE
     .4byte 0x00DFFFFC
     .4byte 0x7BFFFFF8
-    .4byte 0xFFFFFFC1
+    .int -63
     .4byte 0xFFFFD710
-    .4byte 0x44410000
+    .float 772.0
     .4byte NULL
     .4byte NULL
     .4byte 0xAFFFFA00
@@ -28426,11 +28422,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xCFFFFFDB
     .4byte 0x4FFFFF80
     .4byte 0x4FFFFF80
-    .4byte 0x00000200
+    .int 512
     .4byte 0x1740DE30
     .4byte 0x5FE2BFD0
     .4byte 0x8DF84FF8
@@ -28457,17 +28453,17 @@ lbl_8040FF80:
     .4byte 0x4FFFFF80
     .4byte 0x4FFFFF80
     .4byte 0x7FFFFFA3
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x7FFFFFA3
     .4byte 0x4FFFFF80
     .4byte 0x3FFFFF80
     .4byte NULL
     .4byte NULL
-    .4byte 0x44770000
+    .float 988.0
     .4byte 0xFFFF0000
     .4byte 0xFFFE0000
-    .4byte 0x43000000
+    .float 128.0
     .4byte NULL
     .4byte NULL
     .4byte 0x04FFFFF4
@@ -28490,8 +28486,8 @@ lbl_8040FF80:
     .4byte 0x0FFFFFB0
     .4byte 0x0FFFFFB0
     .4byte 0xBFFFFFB0
-    .4byte 0xFFFFFFFB
-    .4byte 0xFFFFFFFF
+    .int -5
+    .int -1
     .4byte 0x1FFFFFFF
     .4byte 0x0FFFFFFF
     .4byte NULL
@@ -28554,7 +28550,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xCFFFFFDB
     .4byte 0x4FFFFF80
     .4byte 0x4FFFFF80
@@ -28585,8 +28581,8 @@ lbl_8040FF80:
     .4byte 0x4FFFFF80
     .4byte 0x4FFFFF80
     .4byte 0x7FFFFFA3
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x7FFFFF80
     .4byte 0x4FFFFF80
     .4byte 0x4FFFFF80
@@ -28618,8 +28614,8 @@ lbl_8040FF80:
     .4byte 0x4FFFFF80
     .4byte 0x4FFFFF90
     .4byte 0xCFFFFFB0
-    .4byte 0xFFFFFFF9
-    .4byte 0xFFFFFFFF
+    .int -7
+    .int -1
     .4byte 0x1FFFFFFF
     .4byte 0x0FFFFFFF
     .4byte NULL
@@ -28649,7 +28645,7 @@ lbl_8040FF80:
     .4byte 0x0FFFFFDC
     .4byte 0x2FFFFFA1
     .4byte 0xAFFFFF70
-    .4byte 0xFFFFFD10
+    .int -752
     .4byte 0xFFFF9100
     .4byte 0x87410000
     .4byte NULL
@@ -28677,15 +28673,15 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x88877DFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
-    .4byte 0x44100000
+    .float 576.0
     .4byte 0xFFE00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF87888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -28702,21 +28698,21 @@ lbl_8040FF80:
     .4byte 0x00004FFF
     .4byte 0x00004FFF
     .4byte 0x00001444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x44444CFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44443AFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFF10001
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF54444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFF93444
     .4byte 0xDBB30000
     .4byte NULL
@@ -28725,12 +28721,12 @@ lbl_8040FF80:
     .4byte 0x58500000
     .4byte 0xFFB00000
     .4byte 0xFFA00000
-    .4byte 0x42000000
+    .float 32.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000019F
+    .int 2
+    .int 415
     .4byte 0x00001CFF
     .4byte 0x00009FFF
     .4byte 0x0001EFFF
@@ -28738,7 +28734,7 @@ lbl_8040FF80:
     .4byte 0x000008FF
     .4byte 0x00023AFF
     .4byte 0x7BEFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFDBCFF
     .4byte 0xFC4004FF
     .4byte 0xF20004FF
@@ -28747,8 +28743,8 @@ lbl_8040FF80:
     .4byte 0xFFF80000
     .4byte 0xFFFA1000
     .4byte 0xFFFFFA50
-    .4byte 0xFFFFFFFD
-    .4byte 0xFFFFFFFF
+    .int -3
+    .int -1
     .4byte 0xFFFEFFFF
     .4byte NULL
     .4byte NULL
@@ -28763,14 +28759,14 @@ lbl_8040FF80:
     .4byte 0x0001FFFF
     .4byte 0x00008FFF
     .4byte 0x000009FF
-    .4byte 0x00000049
+    .int 73
     .4byte NULL
     .4byte NULL
     .4byte 0xC00004FF
     .4byte 0xB00004FF
     .4byte 0xF30009FF
     .4byte 0xFE97AFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xDFFFFFFD
     .4byte 0x01444410
     .4byte NULL
@@ -28792,16 +28788,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000058
-    .4byte 0x0000009F
-    .4byte 0x0000008F
-    .4byte 0x00000024
+    .int 88
+    .int 159
+    .int 143
+    .int 36
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x888ABBEF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFDBFFF
     .4byte 0x41002FFF
     .4byte 0x00005FFF
@@ -28827,7 +28823,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000006C
+    .int 108
     .4byte 0x00002BFF
     .4byte 0x0003EFFF
     .4byte 0x0000CFFF
@@ -28835,8 +28831,8 @@ lbl_8040FF80:
     .4byte 0x0006FFFF
     .4byte 0x000AFFFF
     .4byte 0x145FFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xB9FFFFFE
     .4byte 0xFF10008F
     .4byte 0xFA00008F
@@ -28845,7 +28841,7 @@ lbl_8040FF80:
     .4byte 0xA00000FF
     .4byte 0xD97203FF
     .4byte 0xFFFFCBFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFF9000
     .4byte 0xFFFF7000
     .4byte 0xFFFF4000
@@ -28880,9 +28876,9 @@ lbl_8040FF80:
     .4byte 0x001EFFFF
     .4byte 0xFFF30000
     .4byte 0xFFFFA400
-    .4byte 0xFFFFFFB0
-    .4byte 0xFFFFFFB0
-    .4byte 0xFFFFFF40
+    .int -80
+    .int -80
+    .int -192
     .4byte 0xF8CFFC00
     .4byte 0xE01CF600
 	.4byte lbl_80019100
@@ -28897,7 +28893,7 @@ lbl_8040FF80:
     .4byte 0xFFE30000
     .4byte 0xFE300000
     .4byte 0x91000000
-    .4byte 0x0000004B
+    .int 75
     .4byte 0x00005DFF
     .4byte 0x00006FFF
     .4byte 0x00000AA5
@@ -28933,13 +28929,13 @@ lbl_8040FF80:
     .4byte 0x0BFFFFF7
     .4byte 0x0BFFFFF4
     .4byte 0x0BFFFFF7
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000039
+    .int 57
     .4byte 0x477950CF
     .4byte 0xFFFF70BF
     .4byte NULL
@@ -28954,17 +28950,17 @@ lbl_8040FF80:
     .4byte 0x008CBB97
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000388
+    .int 904
     .4byte 0x00008FFF
     .4byte 0x0004FFFF
     .4byte 0x000AFFFE
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x7DFFFFF7
     .4byte 0x0BFFFFF4
     .4byte 0x0BFFFFF1
     .4byte 0x2BFFFFF0
     .4byte 0xFEFFFFF0
-    .4byte 0xFFFFFFF0
+    .int -16
     .4byte 0x9FFFFFF0
     .4byte 0xFFEF701D
     .4byte 0x41010004
@@ -28996,8 +28992,8 @@ lbl_8040FF80:
     .4byte 0x08FFFFF0
     .4byte 0x09FFFFF0
     .4byte 0x1DFFFFF0
-    .4byte 0xFFFFFFF0
-    .4byte 0xFFFFFFF0
+    .int -16
+    .int -16
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -29015,7 +29011,7 @@ lbl_8040FF80:
     .4byte 0x8FFF1000
     .4byte 0x8FFF5000
     .4byte 0x00003BFE
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -29028,14 +29024,14 @@ lbl_8040FF80:
     .4byte 0x08FFFFFF
     .4byte 0x01CFFFFF
     .4byte 0x0006CFFF
-    .4byte 0x00000034
+    .int 52
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000004D
+    .int 3
+    .int 77
     .4byte 0xB7879CFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFE
+    .int -1
+    .int -2
     .4byte 0x44444410
     .4byte NULL
     .4byte 0xAFFF8000
@@ -29050,10 +29046,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000003CF
+    .int 975
     .4byte 0x000004FF
-    .4byte 0x000001FF
-    .4byte 0x000000FF
+    .int 511
+    .int 255
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -29068,7 +29064,7 @@ lbl_8040FF80:
     .4byte 0xBFFFFF60
     .4byte 0xBFFFFF40
     .4byte 0xEFFFFF10
-    .4byte 0xFFFFFD00
+    .int -768
     .4byte 0xFFFFF900
     .4byte NULL
     .4byte NULL
@@ -29078,25 +29074,25 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000DF
-    .4byte 0x000000BF
-    .4byte 0x0000009F
-    .4byte 0x000000AF
+    .int 223
+    .int 191
+    .int 159
+    .int 175
     .4byte 0x000007FF
     .4byte 0x00004FFF
     .4byte 0x0001DFFF
     .4byte 0x0008FFFF
     .4byte 0xFFFABFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFD86D
     .4byte 0xFFFA001E
     .4byte 0xFFF8004F
     .4byte 0xFFFB008F
     .4byte 0xFFFC00CF
     .4byte 0xFFFF02FF
-    .4byte 0xFFFFFC50
-    .4byte 0xFFFFFFFE
-    .4byte 0xFFFFFFFF
+    .int -944
+    .int -2
+    .int -1
     .4byte 0xFFFFCEFF
     .4byte 0xFFFF33FF
     .4byte 0xFFFE008F
@@ -29133,7 +29129,7 @@ lbl_8040FF80:
     .4byte 0xF400000B
     .4byte 0xB000001F
     .4byte 0x4000006F
-    .4byte 0x000000DF
+    .int 223
     .4byte 0xFFFFF100
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
@@ -29155,14 +29151,14 @@ lbl_8040FF80:
     .4byte 0xFFFFF600
     .4byte 0xFFFE6038
     .4byte 0xFC71003F
-    .4byte 0x0000000C
+    .int 12
     .4byte NULL
     .4byte NULL
     .4byte 0x000008FF
     .4byte 0x00009FFF
     .4byte 0x005CFFFF
     .4byte 0xAEFFFFFF
-    .4byte 0xFFFFFE92
+    .int -366
     .4byte 0xEB974000
     .4byte NULL
     .4byte NULL
@@ -29215,15 +29211,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xCFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xDFFFFFB7
     .4byte 0x8FFFFF40
     .4byte 0x9FFFFF30
     .4byte 0xBFFFFF00
     .4byte 0xBFFFFD00
     .4byte 0xEFFFFC44
-    .4byte 0xFFFFFF80
-    .4byte 0xFFFFFF70
+    .int -128
+    .int -144
     .4byte 0x86444300
     .4byte NULL
     .4byte NULL
@@ -29241,13 +29237,13 @@ lbl_8040FF80:
     .4byte 0x000ABBBB
     .4byte 0x000FFFFF
     .4byte 0x000ABBBC
-    .4byte 0x00000004
-    .4byte 0x00000006
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int 4
+    .int 6
+    .int 8
+    .int 8
+    .int 8
+    .int -1
+    .int -1
     .4byte 0xFFFFFA34
     .4byte 0xFFFFF800
     .4byte 0xFFFFF600
@@ -29270,8 +29266,8 @@ lbl_8040FF80:
     .4byte 0x0FFFD000
     .4byte 0x0FFFF200
     .4byte 0x1FFFF400
-    .4byte 0x00000007
-    .4byte 0x00000004
+    .int 7
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -29284,14 +29280,14 @@ lbl_8040FF80:
     .4byte 0x5FFFFFE8
     .4byte 0x06EFFFFF
     .4byte 0x0027CFFF
-    .4byte 0x00000146
+    .int 326
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x410026BF
     .4byte 0xFFFEFFFF
-    .4byte 0xFFFFFFFD
+    .int -3
     .4byte 0x88885420
     .4byte NULL
     .4byte 0x5FFFF400
@@ -29341,7 +29337,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000037B
+    .int 891
     .4byte 0x3879B300
     .4byte 0x4FFFF700
     .4byte 0x1FFFF900
@@ -29374,7 +29370,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFC0
+    .int -64
     .4byte 0x829FFFF1
     .4byte 0x006FFFF4
     .4byte 0x003FFFF7
@@ -29382,11 +29378,11 @@ lbl_8040FF80:
     .4byte 0x000BFFFD
     .4byte 0x0008FFFF
     .4byte 0x0006FFFF
-    .4byte 0x000001DF
-    .4byte 0x0000007F
-    .4byte 0x0000004F
-    .4byte 0x0000006F
-    .4byte 0x000000BF
+    .int 479
+    .int 127
+    .int 79
+    .int 111
+    .int 191
     .4byte 0x00103AFF
     .4byte 0x06FFFFFF
     .4byte 0x36FFFEB7
@@ -29432,12 +29428,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000024
-    .4byte 0x0000007F
-    .4byte 0x0000004F
-    .4byte 0x0000001E
-    .4byte 0x0000000B
-    .4byte 0x00000008
+    .int 36
+    .int 127
+    .int 79
+    .int 30
+    .int 11
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte 0x788B3000
@@ -29459,39 +29455,39 @@ lbl_8040FF80:
     .4byte 0x63000000
     .4byte 0xFF300000
     .4byte 0xF8000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x20000000
     .4byte NULL
-    .4byte 0x00000005
-    .4byte 0x00000002
-    .4byte 0x00000159
+    .int 5
+    .int 2
+    .int 345
     .4byte 0x0038BFFF
     .4byte 0x03FFFFFF
     .4byte 0x01EFFFC6
     .4byte 0x00BF9300
     .4byte 0x00320000
     .4byte 0xFFFFF815
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFF73
-    .4byte 0xFFFFFF40
+    .int -1
+    .int -1
+    .int -141
+    .int -192
     .4byte 0x6FFFFF80
     .4byte 0x1FFFFFB0
     .4byte 0x0DFFFFE0
     .4byte 0x7AFFFFFD
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFDBBDFFF
     .4byte 0x100002AF
-    .4byte 0x00000009
-    .4byte 0x00000001
+    .int 9
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte 0xA7200000
     .4byte 0xFFF80000
     .4byte 0xFFFFB000
     .4byte 0xFFFFF700
-    .4byte 0xFFFFFE00
-    .4byte 0xFFFFFF30
+    .int -512
+    .int -208
     .4byte 0xBFFFFF40
     .4byte 0xBFFFFF40
     .4byte NULL
@@ -29511,8 +29507,8 @@ lbl_8040FF80:
     .4byte 0x007FFFFF
     .4byte 0x004FFFFF
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x0000018F
+    .int 7
+    .int 399
     .4byte 0x03CBBFFF
     .4byte 0x04FFFFFF
     .4byte 0x22EFFFEB
@@ -29573,7 +29569,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000007
+    .int 7
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -29590,7 +29586,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000041
+    .int 65
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000006FF
@@ -29598,7 +29594,7 @@ lbl_8040FF80:
     .4byte 0x000008FF
     .4byte 0x000008FF
     .4byte 0x000009FF
-    .4byte 0x0000000F
+    .int 15
     .4byte 0xFD30000C
     .4byte 0xFF30000B
     .4byte 0xFF00029E
@@ -29610,7 +29606,7 @@ lbl_8040FF80:
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFFD950
-    .4byte 0xFFFFFFFD
+    .int -3
     .4byte 0xFFFFCFFF
     .4byte 0xFFFE1CFF
     .4byte 0xFFFF04FF
@@ -29670,8 +29666,8 @@ lbl_8040FF80:
     .4byte 0x03DFFFF9
     .4byte 0x00DFB710
     .4byte 0x00210000
-    .4byte 0xFFFFFFFE
-    .4byte 0xFFFFFE81
+    .int -2
+    .int -383
     .4byte 0xFFC53000
     .4byte 0xFE200000
     .4byte 0xE3000000
@@ -29695,8 +29691,8 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte 0x000CFFFF
     .4byte NULL
-    .4byte 0x0000001B
-    .4byte 0x0000000F
+    .int 27
+    .int 15
     .4byte 0xA000000E
     .4byte 0xE000000B
     .4byte 0xB000000B
@@ -29708,8 +29704,8 @@ lbl_8040FF80:
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0xFFFFC410
-    .4byte 0xFFFFFFFC
-    .4byte 0xFFFFFFFF
+    .int -4
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -29734,7 +29730,7 @@ lbl_8040FF80:
     .4byte 0xF400000B
     .4byte 0xB000000B
     .4byte 0x6000000B
-    .4byte 0xFFFFFEFF
+    .int -257
     .4byte 0xFFFFE4DF
     .4byte 0xFFFFE04F
     .4byte 0xFFFFF00C
@@ -29759,7 +29755,7 @@ lbl_8040FF80:
     .4byte 0x002FFFFF
     .4byte 0x000FFFFF
     .4byte 0x2000000B
-    .4byte 0x0000000B
+    .int 11
     .4byte 0x0034000B
     .4byte 0x4BFB000B
     .4byte 0x4FFF700E
@@ -29772,8 +29768,8 @@ lbl_8040FF80:
     .4byte 0xFFFFD02F
     .4byte 0xFFFFB1CF
     .4byte 0xFFFFBCFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFFF600
     .4byte 0xFFFFF300
     .4byte 0xFFFFE000
@@ -29802,7 +29798,7 @@ lbl_8040FF80:
     .4byte 0xFFE30000
     .4byte 0xFF600000
     .4byte 0xF6000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -29868,7 +29864,7 @@ lbl_8040FF80:
     .4byte 0xFF800000
     .4byte 0xFF800000
     .4byte 0xFFC78888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFD77888
     .4byte NULL
     .4byte NULL
@@ -29884,13 +29880,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000009F
+    .int 6
+    .int 159
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x000001FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 511
+    .int 255
+    .int 255
     .4byte 0x024778FF
     .4byte 0xDFFFFFFF
     .4byte 0xFFEA77DF
@@ -29901,7 +29897,7 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFEA6100
-    .4byte 0xFFFFFE92
+    .int -366
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -29914,8 +29910,8 @@ lbl_8040FF80:
     .4byte 0x00000AFF
     .4byte 0x00000BFF
     .4byte 0x000008FF
-    .4byte 0x000001DF
-    .4byte 0x00000019
+    .int 479
+    .int 25
     .4byte NULL
     .4byte NULL
     .4byte 0xFC1000BF
@@ -29923,15 +29919,15 @@ lbl_8040FF80:
     .4byte 0xF40000BF
     .4byte 0xFA0001EF
     .4byte 0xFFC87DFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x14788852
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFC7EFFF
     .4byte 0xFFB03CFF
     .4byte 0xFF9001CF
     .4byte 0xFE20001C
-    .4byte 0xC3000000
+    .float -128.0
     .4byte NULL
     .4byte NULL
     .4byte 0x80000000
@@ -29959,7 +29955,7 @@ lbl_8040FF80:
     .4byte 0x000008FF
     .4byte 0x000008FF
     .4byte NULL
-    .4byte 0x44410000
+    .float 772.0
     .4byte 0xFFF70000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
@@ -29992,7 +29988,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0xFFF80000
     .4byte 0xFFFDBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFEBBBB
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
@@ -30009,7 +30005,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000016
+    .int 22
     .4byte 0x000007EF
     .4byte 0x0000BFFF
     .4byte 0x0008FFFF
@@ -30018,7 +30014,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000005FF
     .4byte 0x9BEFEFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBBBFF
     .4byte 0xF70000FF
     .4byte 0x700000FF
@@ -30027,8 +30023,8 @@ lbl_8040FF80:
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFFE950
-    .4byte 0xFFFFFFFD
-    .4byte 0xFFFFFFFF
+    .int -3
+    .int -1
     .4byte 0xFFFFEFFF
     .4byte NULL
     .4byte NULL
@@ -30044,14 +30040,14 @@ lbl_8040FF80:
     .4byte 0x0009FFFF
     .4byte 0x0001CFFF
     .4byte 0x000006CF
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte 0x100000FF
-    .4byte 0x000000FF
+    .int 255
     .4byte 0x400003FF
     .4byte 0xE6102CFF
     .4byte 0xFFFEFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x57888642
     .4byte NULL
     .4byte 0xFFFE3BFF
@@ -30076,22 +30072,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000002DB
+    .int 731
     .4byte 0x000004FF
     .4byte NULL
     .4byte 0x009BB986
     .4byte 0x04FFFFFF
     .4byte 0x06EFFFFF
     .4byte 0x00038DFF
-    .4byte 0x00000039
+    .int 57
     .4byte 0x85200000
     .4byte 0xFFFB0000
     .4byte NULL
-    .4byte 0x41000000
+    .float 8.0
     .4byte 0xFFC96200
-    .4byte 0xFFFFFFC6
-    .4byte 0xFFFFFFFA
-    .4byte 0xFFFFFFF2
+    .int -58
+    .int -6
+    .int -14
     .4byte 0x29FFFFB0
     .4byte 0x002BFF60
     .4byte NULL
@@ -30117,14 +30113,14 @@ lbl_8040FF80:
     .4byte 0xFF800169
     .4byte 0xFF508EFF
     .4byte 0xFF8EFFFF
-    .4byte 0xFFFFFE84
+    .int -380
     .4byte 0x00007C10
-    .4byte 0x00000100
+    .int 256
     .4byte NULL
     .4byte NULL
     .4byte 0xBEFFEB83
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x1038EFFF
     .4byte NULL
     .4byte NULL
@@ -30140,7 +30136,7 @@ lbl_8040FF80:
     .4byte 0x0003FFFF
     .4byte 0x0004FFFF
     .4byte 0x00028BDF
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte 0xFFFFA100
     .4byte 0xFFF70000
@@ -30152,12 +30148,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00001CFF
     .4byte 0x000003FF
-    .4byte 0x000000BF
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x000000CF
-    .4byte 0x000002FF
+    .int 191
+    .int 143
+    .int 143
+    .int 143
+    .int 207
+    .int 767
     .4byte 0xFFFD0000
     .4byte 0xFFFF5000
     .4byte 0xFFFF8000
@@ -30186,9 +30182,9 @@ lbl_8040FF80:
     .4byte 0x00019FFF
     .4byte 0x006DFFFF
     .4byte 0xAEFFFFFF
-    .4byte 0xFFFFFFC6
+    .int -58
     .4byte 0xFFEB8300
-    .4byte 0x43000000
+    .float 128.0
     .4byte NULL
     .4byte 0xFFFB0000
     .4byte 0xFFE20000
@@ -30200,9 +30196,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000078
-    .4byte 0x000000FF
-    .4byte 0x000001FF
+    .int 120
+    .int 255
+    .int 511
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000006FF
@@ -30267,14 +30263,14 @@ lbl_8040FF80:
     .4byte 0x000009FF
     .4byte 0x000008FF
     .4byte 0x000005FF
-    .4byte 0x000001EF
-    .4byte 0x0000007F
-    .4byte 0x00000005
+    .int 495
+    .int 127
+    .int 5
     .4byte 0xFFF00310
     .4byte 0xFFF11DA0
     .4byte 0xFFFDEFF6
-    .4byte 0xFFFFFFD1
-    .4byte 0xFFFFFE30
+    .int -47
+    .int -464
     .4byte 0xFFFFF600
     .4byte 0xFFFE5000
     .4byte 0xBB720000
@@ -30328,33 +30324,33 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000014
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x00000007
+    .int 20
+    .int 79
+    .int 79
+    .int 7
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444478
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFE
+    .int -1
+    .int -2
     .4byte 0x88854434
-    .4byte 0x0000003E
+    .int 62
     .4byte 0x000004EF
     .4byte NULL
     .4byte NULL
     .4byte 0x88878BB9
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFD
-    .4byte 0xFFFFFFC1
+    .int -1
+    .int -1
+    .int -3
+    .int -63
     .4byte 0xFFFFF900
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x70000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x30000000
     .4byte NULL
     .4byte NULL
@@ -30363,23 +30359,23 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000006F
+    .int 6
+    .int 111
     .4byte 0x000006FF
     .4byte 0x00006FFF
     .4byte 0x0006FFFF
     .4byte 0x006FFFFF
     .4byte 0x06FFFFFF
     .4byte 0x6FFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFB
+    .int -1
+    .int -5
     .4byte 0xFFFFFA20
     .4byte 0xFFFF8000
     .4byte 0xFFF60000
     .4byte 0xFE300000
     .4byte 0xD3001000
     .4byte 0xBCFFFEA7
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x878CFFFF
     .4byte 0x00003CFF
     .4byte NULL
@@ -30406,10 +30402,10 @@ lbl_8040FF80:
     .4byte 0x019FFFFF
     .4byte 0x0CFFFFFF
     .4byte 0x6FFFF404
-    .4byte 0x000001DF
-    .4byte 0x0000004F
-    .4byte 0x0000000D
-    .4byte 0x00000009
+    .int 479
+    .int 79
+    .int 13
+    .int 9
     .4byte 0x40000008
     .4byte 0xFE700008
     .4byte 0xFFFC100A
@@ -30436,7 +30432,7 @@ lbl_8040FF80:
     .4byte 0x1DFFFA10
     .4byte 0x03CFFFFB
     .4byte 0x0006BEFF
-    .4byte 0x00000024
+    .int 36
     .4byte NULL
     .4byte 0x4FFFE05F
     .4byte 0x0EFFF8DF
@@ -30444,7 +30440,7 @@ lbl_8040FF80:
     .4byte 0x0AFFFFFF
     .4byte 0xBEFFFFFE
     .4byte 0xFFFFD961
-    .4byte 0x44200000
+    .float 640.0
     .4byte NULL
     .4byte 0xFFFF6000
     .4byte 0xFFFC0000
@@ -30455,13 +30451,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x0000001F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000001F
+    .int 4
+    .int 31
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 31
     .4byte NULL
     .4byte 0x20100000
     .4byte 0xFEFE8000
@@ -30490,20 +30486,20 @@ lbl_8040FF80:
     .4byte 0x00BFFFFF
     .4byte 0x00BFEFDF
     .4byte 0x0032001E
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000003F
+    .int 15
+    .int 15
+    .int 15
+    .int 63
     .4byte 0xFFFF8004
     .4byte 0xFFFF709F
     .4byte 0xFFFFABFF
-    .4byte 0xFFFFFFFA
-    .4byte 0xFFFFFF70
+    .int -6
+    .int -144
     .4byte 0xFFFFE600
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
     .4byte 0xDFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xE712EFFF
     .4byte 0x10008FFF
     .4byte 0x00008FFF
@@ -30551,12 +30547,12 @@ lbl_8040FF80:
     .4byte 0xFB000100
     .4byte 0xFD007E30
     .4byte 0x0008200F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x00000004
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 4
     .4byte NULL
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
@@ -30564,18 +30560,18 @@ lbl_8040FF80:
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
-    .4byte 0x44442000
+    .float 784.5
     .4byte NULL
     .4byte 0x0004FFFF
     .4byte 0x0001FFFF
     .4byte 0x0000BFFF
     .4byte 0x00003DFF
-    .4byte 0x00000158
+    .int 344
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFCDFFD1
-    .4byte 0xFFFFFF60
+    .int -160
     .4byte 0xFFFFD400
     .4byte 0xFFE81000
     .4byte 0x74000000
@@ -30584,26 +30580,26 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x00000007
+    .int 4
+    .int 15
+    .int 15
+    .int 7
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444788
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFE
+    .int -1
+    .int -2
     .4byte 0x8744441A
-    .4byte 0x0000009F
+    .int 159
     .4byte 0x000009FF
     .4byte NULL
     .4byte NULL
     .4byte 0x888ABBB1
-    .4byte 0xFFFFFFFB
-    .4byte 0xFFFFFFFE
-    .4byte 0xFFFFFFC1
+    .int -5
+    .int -2
+    .int -63
     .4byte 0xFFFFFC10
     .4byte 0xFFFF9100
     .4byte NULL
@@ -30619,23 +30615,23 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x0000009F
+    .int 9
+    .int 159
     .4byte 0x000009FF
     .4byte 0x00009FFF
     .4byte 0x0009FFFF
     .4byte 0x009FFFFF
     .4byte 0x09FFFFFF
     .4byte 0x9FFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFA
+    .int -1
+    .int -6
     .4byte 0xFFFFE710
     .4byte 0xFFF90000
     .4byte 0xFF900000
     .4byte 0xF9000000
     .4byte 0xB1444300
-    .4byte 0xFFFFFFFA
-    .4byte 0xFFFFFFFF
+    .int -6
+    .int -1
     .4byte 0x779DFFFF
     .4byte 0x00007EFF
     .4byte NULL
@@ -30651,25 +30647,25 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x0008FFFF
     .4byte 0x00006EFE
-    .4byte 0x000003E4
-    .4byte 0x00000010
+    .int 996
+    .int 16
     .4byte NULL
     .4byte 0xFFFC2000
     .4byte 0xFF910000
     .4byte 0xFC000000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x000005FF
-    .4byte 0x000000BF
-    .4byte 0x0000007F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000006F
-    .4byte 0x0000009F
-    .4byte 0x000002FF
+    .int 191
+    .int 127
+    .int 79
+    .int 79
+    .int 111
+    .int 159
+    .int 767
     .4byte 0xFFFF5000
     .4byte 0xFFFF9000
     .4byte 0xFFFFD000
@@ -30698,7 +30694,7 @@ lbl_8040FF80:
     .4byte 0x0003CFFF
     .4byte 0x05AFFFFF
     .4byte 0xEFFFFFFF
-    .4byte 0xFFFFFFE9
+    .int -23
     .4byte 0xFEBA7400
     .4byte 0x10000000
     .4byte NULL
@@ -30755,8 +30751,8 @@ lbl_8040FF80:
     .4byte 0x04FFFF80
     .4byte 0x04FFFF80
     .4byte 0x05FFFF80
-    .4byte 0xFFFFFF70
-    .4byte 0xFFFFFFCD
+    .int -144
+    .int -51
     .4byte 0x35FFFFFF
     .4byte NULL
     .4byte NULL
@@ -30764,7 +30760,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00478610
     .4byte 0x8EFFFFF9
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xD646DFFF
     .4byte NULL
     .4byte NULL
@@ -30772,32 +30768,32 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x10000000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte 0xFB000000
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x0000009F
+    .int 9
+    .int 159
     .4byte 0x000009FF
     .4byte 0x00003FFF
     .4byte 0x04FFFFF7
     .4byte 0x04FFFF70
     .4byte 0x07FFFF40
     .4byte 0x8FFFFF40
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
+    .int -192
+    .int -192
+    .int -192
     .4byte 0xE7FFFF40
     .4byte 0x00001EFF
     .4byte 0x000006FF
-    .4byte 0x000001FF
-    .4byte 0x000000DF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000EF
+    .int 511
+    .int 223
+    .int 191
+    .int 191
+    .int 191
+    .int 239
     .4byte 0xFF400000
     .4byte 0xFFA00000
     .4byte 0xFFE00000
@@ -30807,8 +30803,8 @@ lbl_8040FF80:
     .4byte 0xFFF30000
     .4byte 0xFFE00000
     .4byte 0x000006FF
-    .4byte 0x00000069
-    .4byte 0x00000001
+    .int 105
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -30822,7 +30818,7 @@ lbl_8040FF80:
     .4byte 0x04FFFF70
     .4byte 0x01444420
     .4byte NULL
-    .4byte 0x000002FF
+    .int 767
     .4byte 0x000009FF
     .4byte 0x00006FFF
     .4byte 0x688CFFFF
@@ -30861,7 +30857,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000100
+    .int 256
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -30877,23 +30873,23 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFE03
+    .int 6
+    .int -192
+    .int -509
     .4byte 0xEFFFFFAF
     .4byte 0xBFFFFFFF
     .4byte 0xBFFFFFFB
     .4byte 0xBFFFFF90
     .4byte 0xBFFFFF10
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte 0x028BEFEB
     .4byte 0xBFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFA536DFF
     .4byte 0x200001CF
-    .4byte 0x0000002F
-    .4byte 0x0000000A
-    .4byte 0x00000006
+    .int 47
+    .int 10
+    .int 6
     .4byte 0x71000000
     .4byte 0xFE500000
     .4byte 0xFFF60000
@@ -30901,8 +30897,8 @@ lbl_8040FF80:
     .4byte 0xFFFFD000
     .4byte 0xFFFFF600
     .4byte 0xFFFFFA00
-    .4byte 0xFFFFFE00
-    .4byte 0x0000006F
+    .int -512
+    .int 111
     .4byte 0x000007FF
     .4byte 0x00009FFF
     .4byte 0x0009FFFF
@@ -30910,28 +30906,28 @@ lbl_8040FF80:
     .4byte 0x02EFFFF7
     .4byte 0x003EFFB0
     .4byte 0x0006FE20
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
+    .int -256
+    .int -256
+    .int -256
     .4byte 0xEFFFFF00
     .4byte 0xAFFFFF00
     .4byte 0xBFFFFF00
     .4byte 0xBFFFFF00
-    .4byte 0x00000004
-    .4byte 0x00000001
+    .int 4
+    .int 1
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000004
-    .4byte 0x00000007
-    .4byte 0x0000000A
-    .4byte 0xFFFFFF20
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF10
-    .4byte 0xFFFFFE00
+    .int 1
+    .int 4
+    .int 7
+    .int 10
+    .int -224
+    .int -192
+    .int -192
+    .int -192
+    .int -240
+    .int -512
     .4byte 0xFFFFFA00
     .4byte 0xFFFFF600
     .4byte 0x00006700
@@ -30950,8 +30946,8 @@ lbl_8040FF80:
     .4byte 0xBFFFFF40
     .4byte 0x34444410
     .4byte NULL
-    .4byte 0x0000003F
-    .4byte 0x000003DF
+    .int 63
+    .int 991
     .4byte 0x44459EFF
     .4byte 0x8FFFFFFF
     .4byte 0x7FFFFFD9
@@ -30962,7 +30958,7 @@ lbl_8040FF80:
     .4byte 0xFFFF3000
     .4byte 0xFFE60000
     .4byte 0xFB300000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -30981,15 +30977,15 @@ lbl_8040FF80:
     .4byte 0x000DFFFF
     .4byte 0x006FFFFF
     .4byte 0x8BEFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte 0x10000000
     .4byte 0xFD910000
     .4byte 0xFFA00000
     .4byte 0xFE200000
     .4byte 0xF8044478
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -31001,17 +30997,17 @@ lbl_8040FF80:
     .4byte 0x0004FFFE
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x0000000B
-    .4byte 0x0000004F
-    .4byte 0x000000BF
+    .int 4
+    .int 11
+    .int 79
+    .int 191
     .4byte 0x000004FF
     .4byte 0xCFFFFFFA
     .4byte 0x4FFFFFD0
     .4byte 0xBFFFFF30
-    .4byte 0xFFFFFD7B
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFEF
+    .int -645
+    .int -1
+    .int -17
     .4byte 0xFFFFA204
     .4byte 0xFFFB0000
     .4byte 0x76444101
@@ -31037,7 +31033,7 @@ lbl_8040FF80:
     .4byte 0x000AFFFF
     .4byte 0x001DFFFF
     .4byte 0x00006BFF
-    .4byte 0x00000026
+    .int 38
     .4byte 0xFFF20000
     .4byte 0xFF900001
     .4byte 0xFF20005D
@@ -31048,8 +31044,8 @@ lbl_8040FF80:
     .4byte 0x07FFFF70
     .4byte 0x0DFFFFFF
     .4byte 0x8EFFFFFA
-    .4byte 0xFFFFFF90
-    .4byte 0xFFFFFFB0
+    .int -112
+    .int -80
     .4byte 0xAAFFFFB0
     .4byte 0x07FFFFB0
     .4byte 0x08FFFFB0
@@ -31076,14 +31072,14 @@ lbl_8040FF80:
     .4byte 0x09FFFFFE
     .4byte 0x01DFFFFF
     .4byte 0x0017DFFF
-    .4byte 0x00000247
+    .int 583
     .4byte NULL
     .4byte 0x08FFFFB0
     .4byte 0x02444430
     .4byte NULL
     .4byte 0x84100000
     .4byte 0xFFFEFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -31129,11 +31125,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
-    .4byte 0x0000000A
-    .4byte 0x0000001F
-    .4byte 0x0000007F
-    .4byte 0x000000CF
+    .int 5
+    .int 10
+    .int 31
+    .int 127
+    .int 207
     .4byte 0x3FFFFFE1
     .4byte 0x8FFFFF90
     .4byte 0xEFFFFF30
@@ -31141,7 +31137,7 @@ lbl_8040FF80:
     .4byte 0xFFFFF600
     .4byte 0xFFFFD249
     .4byte 0xFFFFDCFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -31149,7 +31145,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xBBA71000
     .4byte 0xFFFFE300
-    .4byte 0xFFFFFD00
+    .int -768
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -31158,7 +31154,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000002FF
+    .int 767
     .4byte 0x000008FF
     .4byte 0x00000DFF
     .4byte 0x00005FFF
@@ -31196,7 +31192,7 @@ lbl_8040FF80:
     .4byte 0x01FFFFFE
     .4byte 0x06FFFFFA
     .4byte 0x0269DFF6
-    .4byte 0x00000271
+    .int 625
     .4byte NULL
     .4byte 0xE0000000
     .4byte 0x90000000
@@ -31257,14 +31253,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00000488
     .4byte 0x000008FF
-    .4byte 0x00000244
+    .int 580
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte 0x00002888
@@ -31272,7 +31268,7 @@ lbl_8040FF80:
     .4byte 0x00004FFF
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x44444BFF
     .4byte 0x00000DFF
     .4byte 0x63004FFF
@@ -31284,7 +31280,7 @@ lbl_8040FF80:
     .4byte 0xFFF10000
     .4byte 0xFF500000
     .4byte 0xF9000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
@@ -31320,9 +31316,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000039
-    .4byte 0x000001EF
-    .4byte 0x00000068
+    .int 57
+    .int 495
+    .int 104
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -31362,25 +31358,25 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x4444444E
-    .4byte 0x0000002F
+    .int 47
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFC100
-    .4byte 0xFFFFFE30
-    .4byte 0xFFFFFF30
+    .int -464
+    .int -208
     .4byte 0xFFFFF800
     .4byte NULL
     .4byte NULL
@@ -31398,7 +31394,7 @@ lbl_8040FF80:
     .4byte 0x0000BFFF
     .4byte 0x0000BFFF
     .4byte 0x0000BFFF
-    .4byte 0x0000007F
+    .int 127
     .4byte 0xBB5000DF
     .4byte 0xFF8005FF
     .4byte 0xFF800BFF
@@ -31446,7 +31442,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000002A
+    .int 42
     .4byte 0x000039FF
     .4byte 0x0004FFFF
     .4byte 0x0000DEA6
@@ -31522,8 +31518,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000001C
+    .int 1
+    .int 28
     .4byte 0x000004EF
     .4byte 0x00019FFF
     .4byte 0x0005FFF9
@@ -31543,8 +31539,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000039E
+    .int 1
+    .int 926
     .4byte 0x00006FFF
     .4byte 0x00002973
     .4byte NULL
@@ -31554,10 +31550,10 @@ lbl_8040FF80:
     .4byte 0x6DFFFFEF
     .4byte 0xFFFF944F
     .4byte 0xE961004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
+    .int 79
+    .int 79
+    .int 79
+    .int 79
     .4byte 0xFFF40000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
@@ -31582,13 +31578,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x00000014
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 20
     .4byte NULL
     .4byte 0xFFF40000
     .4byte 0xFFF40000
@@ -31596,7 +31592,7 @@ lbl_8040FF80:
     .4byte 0xFFF40000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
-    .4byte 0x44410000
+    .float 772.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -31622,7 +31618,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000073
+    .int 115
     .4byte 0x000005FE
     .4byte 0x00001EFF
     .4byte 0x0000BFFF
@@ -31643,19 +31639,19 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
+    .int 5
     .4byte 0x000017DF
     .4byte 0x0059FFFF
-    .4byte 0x00000006
-    .4byte 0x0000008F
+    .int 6
+    .int 143
     .4byte 0x00002BFF
     .4byte 0x0007EFFF
     .4byte 0x04DFFFFF
     .4byte 0xBFFFFFFF
     .4byte 0xFFFFF98F
     .4byte 0xFFD8203F
-    .4byte 0xFFFFFFF6
-    .4byte 0xFFFFFE40
+    .int -10
+    .int -448
     .4byte 0xFFFFC100
     .4byte 0xFFFF7000
     .4byte 0xFFFF8000
@@ -31679,13 +31675,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x7300004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
@@ -31710,12 +31706,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
+    .int 79
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFF8000
@@ -31769,16 +31765,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000034
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 52
+    .int 191
+    .int 191
+    .int 191
+    .int 191
     .4byte 0x000008FF
     .4byte 0x000008FF
     .4byte 0x000007FF
     .4byte 0x44444AFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFD88888
     .4byte 0xFFB00000
     .4byte 0xFFB00000
@@ -31786,7 +31782,7 @@ lbl_8040FF80:
     .4byte 0xFF400000
     .4byte 0xFF400000
     .4byte 0xFF744444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888FFF
     .4byte 0x00000EFF
     .4byte 0x00000EFF
@@ -31798,10 +31794,10 @@ lbl_8040FF80:
     .4byte 0xFF400000
     .4byte 0xFF300000
     .4byte 0xFF000000
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x00000034
+    .int 191
+    .int 191
+    .int 191
+    .int 52
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -31809,7 +31805,7 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
-    .4byte 0x44300000
+    .float 704.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -31826,7 +31822,7 @@ lbl_8040FF80:
     .4byte 0xFB000000
     .4byte 0xF7000000
     .4byte 0xF3000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x60000000
     .4byte NULL
     .4byte NULL
@@ -31840,7 +31836,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000039
+    .int 57
     .4byte 0x00248CFF
     .4byte 0x01DFFFFE
     .4byte 0x007BA740
@@ -31877,15 +31873,15 @@ lbl_8040FF80:
     .4byte 0x00000FFF
     .4byte 0x00000FFF
     .4byte 0x00001FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
-    .4byte 0x44300000
+    .float 704.0
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -31902,7 +31898,7 @@ lbl_8040FF80:
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFA444444
     .4byte 0xF7000000
     .4byte 0xF8000000
@@ -31910,13 +31906,13 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0xF8000000
     .4byte 0xF8000000
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x444444CF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000EF
-    .4byte 0x000000FF
+    .int 191
+    .int 191
+    .int 191
+    .int 239
+    .int 255
     .4byte 0x000003FF
     .4byte 0xFFFFA000
     .4byte 0xFFFFF100
@@ -31967,7 +31963,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000002A
+    .int 42
     .4byte 0x00027CFF
     .4byte 0x5BEFFFFF
     .4byte 0x5FFFFFEA
@@ -32024,15 +32020,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x0000003B
+    .int 79
+    .int 59
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBDFF
     .4byte 0x000004FF
     .4byte 0x000004FF
@@ -32040,7 +32036,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBBBBB
     .4byte 0xFF700000
     .4byte 0xFF700000
@@ -32089,14 +32085,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00000588
     .4byte 0x00000CFF
-    .4byte 0x00000344
+    .int 836
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x000003FF
     .4byte 0x88888AFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
@@ -32104,7 +32100,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xFF700000
     .4byte 0xFFC88888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
@@ -32113,7 +32109,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x88700000
     .4byte 0xFFF10000
-    .4byte 0x44400000
+    .float 768.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -32131,22 +32127,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00001FFF
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFF10000
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44430000
+    .float 780.0
     .4byte 0xFFFB0000
     .4byte 0xFFFA0000
     .4byte NULL
@@ -32223,7 +32219,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -32231,7 +32227,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -32291,7 +32287,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBDFF
     .4byte 0x000009FF
     .4byte 0x04FFFF40
@@ -32299,9 +32295,9 @@ lbl_8040FF80:
     .4byte 0x04FFFF40
     .4byte 0x04FFFF40
     .4byte 0x05FFFF50
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFCB
-    .4byte 0xFFFFFF40
+    .int -1
+    .int -53
+    .int -192
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -32326,7 +32322,7 @@ lbl_8040FF80:
     .4byte 0x00CFFFB0
     .4byte 0x09FFFB10
     .4byte 0x9FFF9000
-    .4byte 0xFFFFFF40
+    .int -192
     .4byte 0xFEFFFF40
     .4byte 0xD6FFFF40
     .4byte 0x43FFFF40
@@ -32342,8 +32338,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x000002CF
+    .int 9
+    .int 719
     .4byte 0x00001DFE
     .4byte 0x00000481
     .4byte NULL
@@ -32355,7 +32351,7 @@ lbl_8040FF80:
     .4byte 0x70000000
     .4byte 0x000006B8
     .4byte 0x000008FF
-    .4byte 0x00000268
+    .int 616
     .4byte NULL
     .4byte NULL
     .4byte 0x04FFFF40
@@ -32415,7 +32411,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888FFF
     .4byte 0x00003FFF
     .4byte 0x0000AFFF
@@ -32423,15 +32419,15 @@ lbl_8040FF80:
     .4byte 0x0008FFFF
     .4byte 0x001EFFFF
     .4byte 0xBBEFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFE
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -2
+    .int -1
+    .int -1
     .4byte 0xFBBFFFFF
     .4byte 0xF3AFFFFF
     .4byte 0xBBBBBA00
-    .4byte 0xFFFFFF10
+    .int -240
     .4byte 0x88888700
     .4byte NULL
     .4byte NULL
@@ -32442,8 +32438,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x0000006F
+    .int 8
+    .int 111
     .4byte 0x000008FF
     .4byte 0x0001AFFF
     .4byte 0x008FFFFF
@@ -32489,8 +32485,8 @@ lbl_8040FF80:
     .4byte 0x00BFFFFF
     .4byte 0x00CFFFFF
     .4byte 0x8AFFFFFC
-    .4byte 0xFFFFFFF6
-    .4byte 0xFFFFFE70
+    .int -10
+    .int -400
     .4byte 0x03444000
     .4byte NULL
     .4byte NULL
@@ -32519,7 +32515,7 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
@@ -32543,7 +32539,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBCFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88AFFFFF
     .4byte 0x003FFFFF
     .4byte 0x004FFFFF
@@ -32551,7 +32547,7 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte 0x00AFFFFF
     .4byte 0xFBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xE888888C
     .4byte 0xB0000007
     .4byte 0xB0000008
@@ -32572,8 +32568,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000001C
+    .int 3
+    .int 28
     .4byte 0x00CFFFFE
     .4byte 0x01FFFFFB
     .4byte 0x06FFFFF7
@@ -32583,13 +32579,13 @@ lbl_8040FF80:
     .4byte 0xFFFFF700
     .4byte 0xFFFFB000
     .4byte 0x1000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000C
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000003F
-    .4byte 0x0000005F
-    .4byte 0x0000008F
+    .int 11
+    .int 12
+    .int 15
+    .int 15
+    .int 63
+    .int 95
+    .int 143
     .4byte 0xFFFFF100
     .4byte 0xFFFFE000
     .4byte 0xFFFFF100
@@ -32598,7 +32594,7 @@ lbl_8040FF80:
     .4byte 0xFFFFA000
     .4byte 0xFFFF8000
     .4byte 0xFFFF5000
-    .4byte 0x000001CF
+    .int 463
     .4byte 0x00001CFF
     .4byte 0x0006EFFF
     .4byte 0x00AFFFFA
@@ -32616,7 +32612,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x200000BF
     .4byte 0xCC6204FF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x9EFFFFFF
     .4byte 0x016BEFFF
     .4byte 0x00001478
@@ -32647,7 +32643,7 @@ lbl_8040FF80:
     .4byte 0x000FFFFF
     .4byte 0x000FFFFF
     .4byte NULL
-    .4byte 0x41000000
+    .float 8.0
     .4byte 0xF4000000
     .4byte 0xF4000000
     .4byte 0xF4000000
@@ -32671,7 +32667,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x888FFFFF
     .4byte 0x000EFFFF
     .4byte 0x000FFFFF
@@ -32679,7 +32675,7 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte 0xFCBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFA88888D
     .4byte 0xF300000B
     .4byte 0xF100000B
@@ -32701,7 +32697,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
+    .int 5
     .4byte 0x006FFFFF
     .4byte 0x009FFFFF
     .4byte 0x00CFFFFE
@@ -32712,12 +32708,12 @@ lbl_8040FF80:
     .4byte 0xFFFFE200
     .4byte 0x8000000D
     .4byte 0x4000001F
-    .4byte 0x0000000F
-    .4byte 0x0000001F
-    .4byte 0x0000004F
-    .4byte 0x0000005F
-    .4byte 0x0000008F
-    .4byte 0x000000BF
+    .int 15
+    .int 31
+    .int 79
+    .int 95
+    .int 143
+    .int 191
     .4byte 0xFFFFE000
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
@@ -32726,7 +32722,7 @@ lbl_8040FF80:
     .4byte 0xFFFF7000
     .4byte 0xFFFF5000
     .4byte 0xFFFF2000
-    .4byte 0x0000006E
+    .int 110
     .4byte 0x000008FF
     .4byte 0x0004BFFF
     .4byte 0x003FFFFC
@@ -32737,12 +32733,12 @@ lbl_8040FF80:
     .4byte 0xFFFE3000
     .4byte 0xFFC30000
     .4byte 0xF9100000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000001FF
+    .int 511
     .4byte 0x0A7209FF
     .4byte 0x5FFFFFFF
     .4byte 0x4DFFFFFF
@@ -32775,7 +32771,7 @@ lbl_8040FF80:
     .4byte 0x00005FFF
     .4byte 0x00147FFF
     .4byte NULL
-    .4byte 0x44000000
+    .float 512.0
     .4byte 0xFF000000
     .4byte 0xFF300000
     .4byte 0xFF400000
@@ -32798,15 +32794,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44411FFF
     .4byte 0x00000FFF
     .4byte 0x00000DFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x00000AFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEB8888
     .4byte 0xFFB00000
     .4byte 0xFFC00000
@@ -32832,15 +32828,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x000008FF
     .4byte 0xBBDFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x887447FF
     .4byte 0x000004FF
     .4byte 0x000003FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 255
+    .int 255
     .4byte 0xFFF74588
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFEBB
+    .int -1
+    .int -325
     .4byte 0xFFF80000
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
@@ -32862,12 +32858,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000EF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x0000008F
-    .4byte 0x00000038
+    .int 239
+    .int 191
+    .int 191
+    .int 191
+    .int 143
+    .int 56
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFF0000
@@ -32926,15 +32922,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44415FFF
     .4byte 0x00004FFF
     .4byte 0x00002FFF
     .4byte 0x00000EFF
     .4byte 0x00001FFF
     .4byte 0x00000DFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFDB8888
     .4byte 0xFF700000
     .4byte 0xFF800000
@@ -32960,15 +32956,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00000BFF
     .4byte 0xBBEFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88744AFF
     .4byte 0x000007FF
     .4byte 0x000007FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0xFFF54688
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFDBB
+    .int -1
+    .int -581
     .4byte 0xFFF50000
     .4byte 0xFFF70000
     .4byte 0xFFF70000
@@ -32991,11 +32987,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x000003FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000EF
-    .4byte 0x000000CF
-    .4byte 0x00000058
+    .int 255
+    .int 255
+    .int 239
+    .int 207
+    .int 88
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFB0000
@@ -33037,7 +33033,7 @@ lbl_8040FF80:
     .4byte 0xD0000000
     .4byte 0x60000000
     .4byte 0x98888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -33048,9 +33044,9 @@ lbl_8040FF80:
     .4byte 0xFFFF6000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000000B
-    .4byte 0x0000009F
+    .int 1
+    .int 11
+    .int 159
     .4byte 0x000009FF
     .4byte 0x0003BFFF
     .4byte 0x000BFFFB
@@ -33063,11 +33059,11 @@ lbl_8040FF80:
     .4byte 0xE6000000
     .4byte 0x20000000
     .4byte 0xBBBBBBCF
-    .4byte 0x0000005F
-    .4byte 0x0000007F
-    .4byte 0x0000009F
-    .4byte 0x000000CF
-    .4byte 0x000001FF
+    .int 95
+    .int 127
+    .int 159
+    .int 207
+    .int 511
     .4byte 0x000006FF
     .4byte 0x00000AFF
     .4byte 0xFFFFF300
@@ -33093,7 +33089,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
+    .int 8
     .4byte 0x00002FFF
     .4byte 0x00009FFF
     .4byte 0x0002FFFF
@@ -33101,7 +33097,7 @@ lbl_8040FF80:
     .4byte 0x008FFFFF
     .4byte 0x06FFFFFC
     .4byte 0x6FFFFFE3
-    .4byte 0xFFFFFE30
+    .int -464
     .4byte 0xFFE00000
     .4byte 0xFF800000
     .4byte 0xFE100000
@@ -33112,7 +33108,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00003ACF
     .4byte 0x00002FFF
     .4byte 0x000007A8
@@ -33121,7 +33117,7 @@ lbl_8040FF80:
     .4byte 0x000004CF
     .4byte 0x0004BFFF
     .4byte 0x58DFFFFF
-    .4byte 0xFFFFFFE9
+    .int -23
     .4byte 0xFFEB8500
     .4byte 0x64100000
     .4byte NULL
@@ -33165,7 +33161,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x0106FE30
     .4byte 0x6E91CFE3
     .4byte 0x7FF72FFD
@@ -33175,9 +33171,9 @@ lbl_8040FF80:
     .4byte 0x87410000
     .4byte 0xFFE10000
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x0000002E
-    .4byte 0x000000BF
+    .int 7
+    .int 46
+    .int 191
     .4byte 0x000009FF
     .4byte 0x00009FFF
     .4byte 0x003BFFFE
@@ -33220,27 +33216,27 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000019F
+    .int 6
+    .int 415
     .4byte 0x0002FFFF
     .4byte 0x0009FFFF
     .4byte 0x003FFFFF
     .4byte 0x00CFFFFF
     .4byte 0x08FFFFF9
     .4byte 0x6FFFFFC0
-    .4byte 0xFFFFFD10
+    .int -752
     .4byte 0xFFFFD300
     .4byte 0xFD000000
     .4byte 0xF6000000
     .4byte 0xD0000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000015
+    .int 21
     .4byte 0x0003ADFF
     .4byte 0x0002FFFF
     .4byte 0x00007A87
@@ -33249,9 +33245,9 @@ lbl_8040FF80:
     .4byte 0x00004DFF
     .4byte 0x006BFFFF
     .4byte 0x9EFFFFFF
-    .4byte 0xFFFFFF94
+    .int -108
     .4byte 0xFFD96100
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFC1000
@@ -33271,13 +33267,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x0000000B
-    .4byte 0x0000000C
-    .4byte 0x0000000F
-    .4byte 0x0000001F
-    .4byte 0x0000004F
-    .4byte 0x0000007F
+    .int 8
+    .int 11
+    .int 12
+    .int 15
+    .int 31
+    .int 79
+    .int 127
     .4byte NULL
     .4byte 0x86410000
     .4byte 0xFFFFD600
@@ -33302,8 +33298,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000CF
-    .4byte 0x000002FF
+    .int 207
+    .int 767
     .4byte 0x000008FF
     .4byte 0x00001EFF
     .4byte 0x00008FFF
@@ -33311,7 +33307,7 @@ lbl_8040FF80:
     .4byte 0x001CFFFA
     .4byte 0x00AFFF90
     .4byte 0xFFFFBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFD88888
     .4byte 0xFF300000
     .4byte 0xF7000000
@@ -33319,7 +33315,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x8FFFFFFA
     .4byte 0x0EFFFFF3
     .4byte 0x0EFFFFF3
@@ -33327,7 +33323,7 @@ lbl_8040FF80:
     .4byte 0x4FFFFFF0
     .4byte 0x4FFFFFE0
     .4byte 0xBBBBBA00
-    .4byte 0xFFFFFF10
+    .int -240
     .4byte 0x88888700
     .4byte NULL
     .4byte NULL
@@ -33345,16 +33341,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000006
-    .4byte 0x0000000D
-    .4byte 0x0000008F
+    .int 1
+    .int 6
+    .int 13
+    .int 143
     .4byte 0x000006FF
     .4byte 0x6FFFFFB0
     .4byte 0x8FFFFF90
     .4byte 0xBFFFFF60
-    .4byte 0xFFFFFF30
-    .4byte 0xFFFFFD00
+    .int -208
+    .int -768
     .4byte 0xFFFFF600
     .4byte 0xFFFFD000
     .4byte 0xFFFF3000
@@ -33368,18 +33364,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x000003DF
-    .4byte 0x000000CF
-    .4byte 0x00000037
+    .int 3
+    .int 991
+    .int 207
+    .int 55
     .4byte NULL
     .4byte NULL
     .4byte 0x00008FFF
     .4byte 0x006CFFFF
     .4byte 0x8DFFFFFF
-    .4byte 0xFFFFFFA4
+    .int -92
     .4byte 0xFFD96100
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte 0xFFF60000
@@ -33399,13 +33395,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x0000000F
-    .4byte 0x0000001F
-    .4byte 0x0000004F
-    .4byte 0x0000005F
-    .4byte 0x0000008F
-    .4byte 0x000000BF
+    .int 9
+    .int 15
+    .int 31
+    .int 79
+    .int 95
+    .int 143
+    .int 191
     .4byte NULL
     .4byte 0x85300000
     .4byte 0xFFFFC400
@@ -33430,7 +33426,7 @@ lbl_8040FF80:
     .4byte 0x00BD4000
     .4byte 0x00100000
     .4byte NULL
-    .4byte 0x000001FF
+    .int 511
     .4byte 0x000006FF
     .4byte 0x00000BFF
     .4byte 0x00004FFF
@@ -33439,7 +33435,7 @@ lbl_8040FF80:
     .4byte 0x003EFFF6
     .4byte 0x02CFFF60
     .4byte 0xFFFEBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFB88888
     .4byte 0xFD000000
     .4byte 0xF3000000
@@ -33447,7 +33443,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xAFFFFFF8
     .4byte 0x3FFFFFF0
     .4byte 0x4FFFFFD0
@@ -33473,15 +33469,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
-    .4byte 0x0000000A
-    .4byte 0x0000002F
-    .4byte 0x000000CF
+    .int 5
+    .int 10
+    .int 47
+    .int 207
     .4byte 0x000009FF
     .4byte 0x9FFFFF80
     .4byte 0xBFFFFF60
     .4byte 0xEFFFFF30
-    .4byte 0xFFFFFD00
+    .int -768
     .4byte 0xFFFFF800
     .4byte 0xFFFFF200
     .4byte 0xFFFF9000
@@ -33496,18 +33492,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000015
+    .int 21
     .4byte 0x000005FF
-    .4byte 0x000001FF
-    .4byte 0x00000057
+    .int 511
+    .int 87
     .4byte NULL
     .4byte NULL
     .4byte 0x0001AFFF
     .4byte 0x018EFFFF
     .4byte 0x9EFFFFFF
-    .4byte 0xFFFFFE92
+    .int -366
     .4byte 0xFFC95000
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte 0xFFE30000
@@ -33539,7 +33535,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -33547,7 +33543,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBCFF
     .4byte 0x000004FF
     .4byte NULL
@@ -33631,7 +33627,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -33639,10 +33635,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBCFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888AFF
     .4byte 0x000003FF
-    .4byte 0x00000144
+    .int 324
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -33650,7 +33646,7 @@ lbl_8040FF80:
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
-    .4byte 0x44430000
+    .float 780.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -33667,16 +33663,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00005FFF
     .4byte 0x0007FE70
     .4byte 0x2A829FF9
@@ -33759,7 +33755,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -33767,7 +33763,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x8888AFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBCFFF
     .4byte 0x00004FFF
     .4byte 0x00002888
@@ -33783,15 +33779,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x0000001F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 7
+    .int 31
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte NULL
-    .4byte 0x44420000
+    .float 776.0
     .4byte 0xFFFFA000
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
@@ -33814,25 +33810,25 @@ lbl_8040FF80:
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
-    .4byte 0x0000001F
+    .int 31
     .4byte 0x00AFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x0034445F
-    .4byte 0x0000000E
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 14
+    .int 15
+    .int 15
+    .int 15
     .4byte 0xFFFFB000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFFC444
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0x001FFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x445FFFFF
     .4byte 0x000EFFFF
     .4byte 0x000FFFFF
@@ -33846,10 +33842,10 @@ lbl_8040FF80:
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000001F
-    .4byte 0x0000000A
+    .int 15
+    .int 15
+    .int 31
+    .int 10
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -33886,8 +33882,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000018E
+    .int 3
+    .int 398
     .4byte 0x00269EFF
     .4byte 0x05FFFFFF
     .4byte 0x00DFFC96
@@ -33911,13 +33907,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000032
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 50
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
     .4byte NULL
     .4byte NULL
     .4byte 0xFFEA0000
@@ -33941,18 +33937,18 @@ lbl_8040FF80:
     .4byte 0x34FF75FA
     .4byte 0x40BFF430
     .4byte 0x404D5000
-    .4byte 0x40000000
-    .4byte 0x000000BF
+    .float 2.0
+    .int 191
     .4byte 0x05BBBBEF
     .4byte 0x08FFFFFF
     .4byte 0x048888DF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 191
+    .int 191
+    .int 191
+    .int 191
     .4byte 0xFFFF0000
     .4byte 0xFFFFBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFF8888
     .4byte 0xFFFE0000
     .4byte 0xFFFF0000
@@ -33960,24 +33956,24 @@ lbl_8040FF80:
     .4byte 0xFFFF0000
     .4byte 0x00BFFFFF
     .4byte 0xBBEFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88DFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x00BFFFFF
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xCBBBA000
     .4byte 0xFFFFF100
     .4byte 0xA8887000
     .4byte 0x30000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x40000000
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000AF
+    .float 2.0
+    .float 2.0
+    .float 2.0
+    .int 191
+    .int 191
+    .int 191
+    .int 175
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -33998,7 +33994,7 @@ lbl_8040FF80:
     .4byte 0x08FFFFF2
     .4byte 0x1EFFFF90
     .4byte 0x9FFFFE10
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
@@ -34014,8 +34010,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x000002AF
+    .int 7
+    .int 687
     .4byte 0x00159FFF
     .4byte 0x2CFFFFFF
     .4byte 0x0CFFFEA6
@@ -34040,8 +34036,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000A
-    .4byte 0x00000008
+    .int 10
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -34049,7 +34045,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x88300000
     .4byte 0xFFFC7100
-    .4byte 0xFFFFFF92
+    .int -110
     .4byte 0x3EFFFFFF
     .4byte 0x01CFFFFF
     .4byte 0x001CFFFF
@@ -34060,7 +34056,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x81000000
     .4byte 0xF7000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x20000000
     .4byte NULL
     .4byte NULL
@@ -34076,14 +34072,14 @@ lbl_8040FF80:
     .4byte 0x001EFFFF
     .4byte 0x0004BFFF
     .4byte 0x000004CF
-    .4byte 0x00000007
+    .int 7
     .4byte NULL
     .4byte 0x00001DF5
     .4byte 0x00000480
     .4byte 0x73000000
     .4byte 0xFFE94000
-    .4byte 0xFFFFFD30
-    .4byte 0xFFFFFE20
+    .int -720
+    .int -480
     .4byte 0xFFFFF500
     .4byte 0x3EFFA000
     .4byte NULL
@@ -34092,8 +34088,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000001C
+    .int 1
+    .int 28
     .4byte NULL
     .4byte 0x0003C400
     .4byte 0x000CFF10
@@ -34108,22 +34104,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000245
+    .int 581
     .4byte 0x00008FFF
     .4byte 0x01CF1000
     .4byte 0x00250000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000016
+    .int 22
     .4byte 0x000169FF
     .4byte 0x89CFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0x000003CF
+    .int -1
+    .int 975
     .4byte 0x00005EFF
     .4byte 0x0019FFFF
     .4byte 0x06EFFFFF
     .4byte 0xDFFFFFF6
-    .4byte 0xFFFFFF60
+    .int -160
     .4byte 0xFFFFE600
     .4byte 0xFFFC3000
     .4byte 0xFFB00000
@@ -34138,13 +34134,13 @@ lbl_8040FF80:
     .4byte 0x00000DFF
     .4byte 0x000008FF
     .4byte 0x000003FF
-    .4byte 0x000000CF
-    .4byte 0x00000021
+    .int 207
+    .int 33
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFF92
+    .int -1
+    .int -1
+    .int -110
     .4byte 0xFFFC7200
     .4byte 0xB7200000
     .4byte NULL
@@ -34168,8 +34164,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x0000000A
+    .int 4
+    .int 10
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -34184,7 +34180,7 @@ lbl_8040FF80:
     .4byte 0x0003EFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000069
+    .int 105
     .4byte 0x000003FF
     .4byte 0x4000006F
     .4byte 0xF6000006
@@ -34204,14 +34200,14 @@ lbl_8040FF80:
     .4byte 0x000DFFFF
     .4byte 0x0018EFFF
     .4byte 0x000018EF
-    .4byte 0x0000002A
+    .int 42
     .4byte NULL
     .4byte 0x00003EF8
     .4byte 0x000006C0
     .4byte 0x30000000
     .4byte 0xFEA60000
     .4byte 0xFFFFE920
-    .4byte 0xFFFFFF30
+    .int -208
     .4byte 0xFFFFF800
     .4byte 0x7FFFC000
     .4byte NULL
@@ -34221,7 +34217,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
+    .int 9
     .4byte NULL
     .4byte 0x00019200
     .4byte 0x000AFE10
@@ -34236,22 +34232,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00006DFF
     .4byte 0x03EF4000
     .4byte 0x00480000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x000016BF
     .4byte 0x468CFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0x0000009F
+    .int -1
+    .int 159
     .4byte 0x00001CFF
     .4byte 0x0005EFFF
     .4byte 0x02AFFFFF
     .4byte 0x9FFFFFFA
-    .4byte 0xFFFFFF91
+    .int -111
     .4byte 0xFFFFF900
     .4byte 0xFFFE6000
     .4byte 0xFFD10000
@@ -34266,13 +34262,13 @@ lbl_8040FF80:
     .4byte 0x00000EFF
     .4byte 0x000008FF
     .4byte 0x000003FF
-    .4byte 0x000000DF
-    .4byte 0x00000044
+    .int 223
+    .int 68
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFD6
+    .int -1
+    .int -1
+    .int -42
     .4byte 0xFFFFA500
     .4byte 0xEA610000
     .4byte 0x10000000
@@ -34306,16 +34302,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x446FFFFF
     .4byte 0x004FFFFF
     .4byte NULL
@@ -34341,7 +34337,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x009FFFFF
     .4byte 0x00DFFFFF
     .4byte 0x03FFFFFF
@@ -34365,9 +34361,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000029
-    .4byte 0x0000001E
-    .4byte 0x000000AF
+    .int 41
+    .int 30
+    .int 175
     .4byte 0x000006FF
     .4byte 0x00006FFF
     .4byte 0x0006FFFF
@@ -34376,12 +34372,12 @@ lbl_8040FF80:
     .4byte 0xFFFFF910
     .4byte 0xFFFFC000
     .4byte 0xFFFFE700
-    .4byte 0xFFFFFFD5
+    .int -43
     .4byte 0xFF7BFFFF
     .4byte 0xF601CFFF
     .4byte 0x60001EFF
     .4byte 0x000003EF
-    .4byte 0x0000005F
+    .int 95
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -34406,7 +34402,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -34435,7 +34431,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -34443,7 +34439,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x889FFFFF
     .4byte 0x005FFFFF
     .4byte 0x000CFD40
@@ -34469,7 +34465,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x00AFFFFF
     .4byte 0x00EFFFFF
     .4byte 0x05FFFFFF
@@ -34493,9 +34489,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000018
-    .4byte 0x0000001D
-    .4byte 0x0000009F
+    .int 24
+    .int 29
+    .int 159
     .4byte 0x000006FF
     .4byte 0x00003FFF
     .4byte 0x0005EFFF
@@ -34504,12 +34500,12 @@ lbl_8040FF80:
     .4byte 0xEFFFFB20
     .4byte 0xFFFFD000
     .4byte 0xFFFFC200
-    .4byte 0xFFFFFF91
+    .int -111
     .4byte 0xFFBFFFFE
     .4byte 0xF906FFFF
     .4byte 0x70006FFF
     .4byte 0x000006FF
-    .4byte 0x0000009F
+    .int 159
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -34528,14 +34524,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xFFFD5000
     .4byte 0xFD600000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000C
-    .4byte 0x00000002
+    .int 12
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -34592,17 +34588,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x04FFFFF8
     .4byte 0x8CFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBAFFFFFC
     .4byte 0x03FFFFF7
     .4byte 0x04FFFFF8
     .4byte 0x04FFFFF8
     .4byte 0x04FFFFF8
     .4byte 0x00034444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x6444436F
-    .4byte 0x000000BF
+    .int 191
     .4byte 0x000004FF
     .4byte 0x00000CFF
     .4byte 0x00009FFF
@@ -34658,14 +34654,14 @@ lbl_8040FF80:
     .4byte 0x00EFFFFF
     .4byte 0x006FFFFF
     .4byte 0x0004AEFF
-    .4byte 0x00000024
+    .int 36
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xA5444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
@@ -34674,7 +34670,7 @@ lbl_8040FF80:
     .4byte 0x789B6000
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
-    .4byte 0x44442000
+    .float 784.5
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -34720,15 +34716,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x0BFFFFF1
     .4byte 0x9EFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x9DFFFFF8
     .4byte 0x0BFFFFE0
     .4byte 0x0BFFFFF0
     .4byte 0x0BFFFFF0
     .4byte 0x0BFFFFF0
     .4byte 0x00144444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x444442CF
     .4byte 0x000003FF
     .4byte 0x00000BFF
@@ -34786,14 +34782,14 @@ lbl_8040FF80:
     .4byte 0x07FFFFFE
     .4byte 0x01CFFFFF
     .4byte 0x0018DFFF
-    .4byte 0x00000144
+    .int 324
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x74444445
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
@@ -34802,7 +34798,7 @@ lbl_8040FF80:
     .4byte 0x88BB0000
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
-    .4byte 0x44440000
+    .float 784.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -34824,12 +34820,12 @@ lbl_8040FF80:
     .4byte 0xFE300000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000039
-    .4byte 0x0000004F
-    .4byte 0x0000005F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x000000AF
+    .int 57
+    .int 79
+    .int 95
+    .int 143
+    .int 143
+    .int 175
     .4byte NULL
     .4byte NULL
     .4byte 0x74100000
@@ -34840,22 +34836,22 @@ lbl_8040FF80:
     .4byte 0xFFFF6000
     .4byte 0x00000BFF
     .4byte 0x000004FF
-    .4byte 0x000000BF
-    .4byte 0x0000005F
-    .4byte 0x0000000E
-    .4byte 0x00000009
-    .4byte 0x00000001
+    .int 191
+    .int 95
+    .int 14
+    .int 9
+    .int 1
     .4byte NULL
     .4byte 0xFFE30000
     .4byte 0xFFFE4000
     .4byte 0xFFFFA000
     .4byte 0xFFF80000
     .4byte 0xFE500000
-    .4byte 0xC2000000
+    .float -32.0
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000CF
-    .4byte 0x000001FF
+    .int 207
+    .int 511
     .4byte 0x000004FF
     .4byte 0x000007FF
     .4byte 0x00000CFF
@@ -34883,8 +34879,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000003C
+    .int 1
+    .int 60
     .4byte 0x000005EF
     .4byte 0x0006FFFF
     .4byte 0x001DFFFF
@@ -34904,10 +34900,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000004F
-    .4byte 0x0000000B
-    .4byte 0x00000001
+    .int 3
+    .int 79
+    .int 11
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte 0x00019FFF
@@ -34953,7 +34949,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000220
+    .int 544
     .4byte 0x000008FC
     .4byte 0x000007FF
     .4byte 0x000009FF
@@ -34971,9 +34967,9 @@ lbl_8040FF80:
     .4byte 0x00004FFF
     .4byte 0x00000CFF
     .4byte 0x000006FF
-    .4byte 0x000000EF
-    .4byte 0x0000009C
-    .4byte 0x00000010
+    .int 239
+    .int 156
+    .int 16
     .4byte 0xE3000000
     .4byte 0xFE300000
     .4byte 0xFFE30000
@@ -35011,8 +35007,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000003E
+    .int 3
+    .int 62
     .4byte 0x000003EF
     .4byte 0x002FFFFF
     .4byte 0x009FFFFF
@@ -35023,7 +35019,7 @@ lbl_8040FF80:
     .4byte 0xFFFF9000
     .4byte 0xFFF90000
     .4byte 0xB0000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -35033,10 +35029,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000039
+    .int 57
     .4byte 0x000005FF
-    .4byte 0x000000DE
-    .4byte 0x00000021
+    .int 222
+    .int 33
     .4byte NULL
     .4byte 0x00007FFF
     .4byte 0x002BFFFF
@@ -35084,8 +35080,8 @@ lbl_8040FF80:
     .4byte 0xF2000000
     .4byte 0xA0000000
     .4byte 0x60000000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -35096,9 +35092,9 @@ lbl_8040FF80:
     .4byte 0xFFFFF500
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
-    .4byte 0x0000001E
-    .4byte 0x000001CF
+    .int 5
+    .int 30
+    .int 463
     .4byte 0x00001CFF
     .4byte 0x0003CFFF
     .4byte 0x000BFFF8
@@ -35111,10 +35107,10 @@ lbl_8040FF80:
     .4byte 0xC307FFFF
     .4byte 0x00007FFF
     .4byte 0x4444445F
-    .4byte 0x0000003F
-    .4byte 0x0000006F
-    .4byte 0x0000009F
-    .4byte 0x000000DF
+    .int 63
+    .int 111
+    .int 159
+    .int 223
     .4byte 0x100003FF
     .4byte 0xE81009FF
     .4byte 0xFFD51EFF
@@ -35135,20 +35131,20 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x000006FF
-    .4byte 0x0000005F
-    .4byte 0x00000006
+    .int 95
+    .int 6
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x000003CF
+    .int 9
+    .int 975
     .4byte 0xFFFFDFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x8FFFFFFF
     .4byte 0x0DFFFFFE
     .4byte 0x6FFFFFE3
-    .4byte 0xFFFFFE30
+    .int -464
     .4byte 0xFFFFE300
     .4byte 0xFF800000
     .4byte 0xFE100000
@@ -35168,7 +35164,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00029FFF
     .4byte 0x16BFFFFF
-    .4byte 0xFFFFFFFD
+    .int -3
     .4byte 0xFFFFE950
     .4byte 0xEB840000
     .4byte NULL
@@ -35213,7 +35209,7 @@ lbl_8040FF80:
     .4byte 0x20000000
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x0105FE60
     .4byte 0x4D81CFF8
     .4byte 0x9FF90DFF
@@ -35223,9 +35219,9 @@ lbl_8040FF80:
     .4byte 0xBBA10000
     .4byte 0xFFFC1000
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000001E
-    .4byte 0x000000AF
+    .int 6
+    .int 30
+    .int 175
     .4byte 0x000009FF
     .4byte 0x00009FFF
     .4byte 0x0019FFFF
@@ -35239,8 +35235,8 @@ lbl_8040FF80:
     .4byte 0x803FFFFD
     .4byte 0x0008FFFF
     .4byte 0x888887DF
-    .4byte 0x000000CF
-    .4byte 0x000001FF
+    .int 207
+    .int 511
     .4byte 0x000004FF
     .4byte 0x000008FF
     .4byte 0x00000DFF
@@ -35264,23 +35260,23 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00006FFF
     .4byte 0x000006FF
-    .4byte 0x0000006F
-    .4byte 0x00000009
+    .int 111
+    .int 9
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000004E
+    .int 2
+    .int 78
     .4byte 0x000019FF
     .4byte 0xFFFAFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0xCFFFFFF7
     .4byte 0xCFFFFF90
     .4byte 0xFFFFF900
     .4byte 0xFFFF9000
     .4byte 0xFD000000
     .4byte 0xF6000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x30000000
     .4byte NULL
     .4byte NULL
@@ -35296,7 +35292,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x0016DFFF
     .4byte 0x38EFFFFF
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xFFFFE930
     .4byte 0xEB830000
     .4byte NULL
@@ -35304,7 +35300,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xFFE60000
     .4byte 0xFB200000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -35329,17 +35325,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x44588BDF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x874447FF
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x000159EF
     .4byte 0x47AEFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFD8641
     .4byte 0xFFFB0000
     .4byte NULL
@@ -35363,16 +35359,16 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x444447FF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x000005FF
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFC4444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFB0000
     .4byte NULL
     .4byte NULL
@@ -35416,7 +35412,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
+    .int 4
     .4byte 0x000038CF
     .4byte 0x00006FFF
     .4byte 0x00000CCA
@@ -35430,7 +35426,7 @@ lbl_8040FF80:
     .4byte 0x72000000
     .4byte NULL
     .4byte NULL
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
@@ -35457,17 +35453,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x44588BDF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x874447FF
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x000159EF
     .4byte 0x47AEFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFD8641
     .4byte 0xFFFB0000
     .4byte NULL
@@ -35491,16 +35487,16 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x444447FF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x000005FF
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFC4444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFB0000
     .4byte 0x3FFA0EFC
     .4byte 0x09FF6791
@@ -35544,7 +35540,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
+    .int 4
     .4byte 0x000038CF
     .4byte 0x00006FFF
     .4byte 0x00000CDA
@@ -35558,7 +35554,7 @@ lbl_8040FF80:
     .4byte 0x72000000
     .4byte NULL
     .4byte NULL
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
@@ -35608,12 +35604,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000043
+    .int 67
     .4byte 0x000008FD
     .4byte 0x000004FF
-    .4byte 0x000000AF
-    .4byte 0x0000005F
-    .4byte 0x0000000D
+    .int 175
+    .int 95
+    .int 13
     .4byte NULL
     .4byte 0x00002AC1
     .4byte 0x00003FFB
@@ -35638,9 +35634,9 @@ lbl_8040FF80:
     .4byte 0xFD000000
     .4byte 0xF9000000
     .4byte 0xF6000000
-    .4byte 0x00000009
-    .4byte 0x00000005
-    .4byte 0x00000001
+    .int 9
+    .int 5
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -35678,8 +35674,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000005E
+    .int 3
+    .int 94
     .4byte 0x000019FF
     .4byte 0x0028EFFF
     .4byte 0x09FFFE92
@@ -35720,9 +35716,9 @@ lbl_8040FF80:
     .4byte 0x00000CFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 9
+    .int 15
+    .int 15
     .4byte 0x4000003F
     .4byte 0xE200004F
     .4byte 0xFC00005F
@@ -35741,7 +35737,7 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x000007FF
     .4byte 0x000004FF
-    .4byte 0x000001A4
+    .int 420
     .4byte 0x100007FF
     .4byte 0xB00002FF
     .4byte 0xF60000DF
@@ -35780,8 +35776,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000007F
+    .int 6
+    .int 127
     .4byte 0x0000DFFF
     .4byte 0x0006FFFF
     .4byte 0x001EFFFF
@@ -35801,8 +35797,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x00000002
+    .int 7
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -35811,12 +35807,12 @@ lbl_8040FF80:
     .4byte 0x28EFFFFB
     .4byte 0xFFFFFB40
     .4byte 0xFFD82000
-    .4byte 0x44000000
+    .float 512.0
     .4byte NULL
     .4byte NULL
     .4byte 0xFFE40000
     .4byte 0xF9100000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -35908,8 +35904,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x0000007F
+    .int 7
+    .int 127
     .4byte 0x000AFFFF
     .4byte 0x002FFFFF
     .4byte 0x00AFFFFD
@@ -35929,10 +35925,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x000000BF
-    .4byte 0x0000005F
-    .4byte 0x00000006
+    .int 4
+    .int 191
+    .int 95
+    .int 6
     .4byte NULL
     .4byte 0x000009FF
     .4byte 0x0004CFFF
@@ -35961,16 +35957,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000005B
-    .4byte 0x0000008F
-    .4byte 0x00000048
+    .int 91
+    .int 143
+    .int 72
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -35978,7 +35974,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -36001,16 +35997,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444CFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFF74444
     .4byte 0xFFF40000
     .4byte 0xFFF40000
@@ -36056,10 +36052,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000028
+    .int 40
     .4byte 0x00003DFF
     .4byte 0x00000DFF
-    .4byte 0x00000384
+    .int 900
     .4byte NULL
     .4byte NULL
     .4byte 0x009FFFFF
@@ -36089,24 +36085,24 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000EF
-    .4byte 0x000000FF
-    .4byte 0x00000044
+    .int 239
+    .int 255
+    .int 68
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
@@ -36129,16 +36125,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44447FFF
     .4byte 0x00004FFF
     .4byte 0x00004FFF
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFC44444
     .4byte 0xFFB00000
     .4byte 0xFFB00000
@@ -36184,7 +36180,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000015B
+    .int 347
     .4byte 0x00009EFF
     .4byte 0x00006FFF
     .4byte 0x00000862
@@ -36267,7 +36263,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xDA730000
     .4byte 0xFFFFE940
-    .4byte 0xFFFFFFFD
+    .int -3
     .4byte 0x3CFFFFFF
     .4byte 0x007EFFFF
     .4byte NULL
@@ -36296,8 +36292,8 @@ lbl_8040FF80:
     .4byte 0x04FFFFF8
     .4byte 0x0002BFFF
     .4byte 0x000009FF
-    .4byte 0x0000006F
-    .4byte 0x00000006
+    .int 111
+    .int 6
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -36362,10 +36358,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000011
-    .4byte 0x000003DC
+    .int 17
+    .int 988
     .4byte 0x000004FF
-    .4byte 0x0000004F
+    .int 79
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -36390,12 +36386,12 @@ lbl_8040FF80:
     .4byte 0x04FFFFFE
     .4byte 0x04FFFFF8
     .4byte 0x04FFFFF7
-    .4byte 0x00000007
+    .int 7
     .4byte NULL
     .4byte NULL
     .4byte 0xC9730000
     .4byte 0xFFFFD940
-    .4byte 0xFFFFFFFD
+    .int -3
     .4byte 0x3CFFFFFF
     .4byte 0x007EFFFF
     .4byte 0xFF900000
@@ -36424,8 +36420,8 @@ lbl_8040FF80:
     .4byte 0x04FFFFF8
     .4byte 0x0002BFFF
     .4byte 0x000009FF
-    .4byte 0x0000006F
-    .4byte 0x00000006
+    .int 111
+    .int 6
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -36480,12 +36476,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000EF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 239
+    .int 255
+    .int 255
+    .int 255
+    .int 255
+    .int 255
     .4byte NULL
     .4byte NULL
     .4byte 0xFEBA0000
@@ -36510,18 +36506,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000FF
-    .4byte 0x000001FF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int 255
+    .int 511
+    .int -1
+    .int -1
     .4byte 0x444445FF
-    .4byte 0x000000EF
-    .4byte 0x000000FF
-    .4byte 0x000000EF
+    .int 239
+    .int 255
+    .int 239
     .4byte 0xFFFF0000
     .4byte 0xFFFF1000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFF5444
     .4byte 0xFFFF0000
     .4byte 0xFFFF0000
@@ -36542,7 +36538,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000001FF
+    .int 511
     .4byte 0x000004FF
     .4byte 0x000007FF
     .4byte 0x00000AFF
@@ -36557,7 +36553,7 @@ lbl_8040FF80:
     .4byte 0xFFA00000
     .4byte 0xFF400000
     .4byte 0xFA000000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -36567,7 +36563,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x0000259F
     .4byte 0x0001DFFF
     .4byte 0x00008FFC
@@ -36611,25 +36607,25 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44420000
+    .float 776.0
     .4byte 0xFFF80000
     .4byte 0xFFF80000
-    .4byte 0x44420000
+    .float 776.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -36703,24 +36699,24 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888700
-    .4byte 0xFFFFFF10
-    .4byte 0xFFFFFE00
+    .int -240
+    .int -512
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -36732,22 +36728,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x000007FF
     .4byte 0x000008FF
-    .4byte 0x00000244
+    .int 580
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x4445FFFF
     .4byte 0x0003FFFF
     .4byte NULL
@@ -36781,11 +36777,11 @@ lbl_8040FF80:
     .4byte 0x00AFFFFF
     .4byte 0x02FFFFFE
     .4byte 0x99FFFFF8
-    .4byte 0xFFFFFFD1
+    .int -47
     .4byte 0xFD000000
     .4byte 0xF8000000
     .4byte 0xF3000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x60000000
     .4byte NULL
     .4byte NULL
@@ -36798,18 +36794,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000002CF
-    .4byte 0x0000000A
-    .4byte 0x0000001D
-    .4byte 0x000001CF
+    .int 719
+    .int 10
+    .int 29
+    .int 463
     .4byte 0x00000AFF
     .4byte 0x0001BFFF
     .4byte 0x003CFFFF
     .4byte 0x07EFFFFC
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFE20
-    .4byte 0xFFFFFFE7
-    .4byte 0xFFFFFFFF
+    .int -192
+    .int -480
+    .int -25
+    .int -1
     .4byte 0xFFFEFFFF
     .4byte 0xFF53EFFF
     .4byte 0xE4003EFF
@@ -36822,7 +36818,7 @@ lbl_8040FF80:
     .4byte 0xFFF60000
     .4byte 0xFFFFA000
     .4byte 0xFFFFB100
-    .4byte 0x00000006
+    .int 6
     .4byte 0x000027DF
     .4byte 0x001AFFFF
     .4byte 0x000CFFFC
@@ -36838,8 +36834,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000006F
-    .4byte 0x00000008
+    .int 111
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -36863,13 +36859,13 @@ lbl_8040FF80:
     .4byte 0x00002888
     .4byte 0x00004FFF
     .4byte NULL
-    .4byte 0x00000310
+    .int 784
     .4byte 0x00001EFF
     .4byte 0x00000FFF
     .4byte 0x00000FFF
     .4byte 0x00000EFF
     .4byte 0x88888FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte 0xFE800000
@@ -36877,7 +36873,7 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFD88888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -36894,13 +36890,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000003D
+    .int 1
+    .int 61
     .4byte 0x000005EF
     .4byte 0xFFEFFFFF
     .4byte 0x001CFFFF
@@ -36908,19 +36904,19 @@ lbl_8040FF80:
     .4byte 0x03FFFFFF
     .4byte 0x2EFFFFFE
     .4byte 0xCFFFFFE3
-    .4byte 0xFFFFFC30
+    .int -976
     .4byte 0xFFFFA000
     .4byte 0xFFE10000
     .4byte 0xFF700000
     .4byte 0xF9000000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
+    .int 3
     .4byte 0x000258DF
     .4byte 0x000CFFFF
     .4byte 0x0006FFD9
@@ -36929,7 +36925,7 @@ lbl_8040FF80:
     .4byte 0x0001AFFF
     .4byte 0x018EFFFF
     .4byte 0x8EFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFC73EFF
     .4byte 0x62000FFF
     .4byte 0x00000FFF
@@ -37009,7 +37005,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x42000000
+    .float 32.0
     .4byte 0xF7000000
     .4byte 0xF4000000
     .4byte 0xF3000000
@@ -37038,7 +37034,7 @@ lbl_8040FF80:
     .4byte 0x07FFFFF7
     .4byte 0x0DFFFFF2
     .4byte 0x4FFFFFA0
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x90000000
     .4byte 0x60000000
     .4byte 0x20000000
@@ -37055,9 +37051,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x0000001D
-    .4byte 0x0000009F
+    .int 4
+    .int 29
+    .int 159
     .4byte 0x000009FF
     .4byte 0x00009FFF
     .4byte 0x001AFFFF
@@ -37078,7 +37074,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x000038DF
     .4byte 0x000AFFFF
     .4byte 0x0006FFD9
@@ -37114,10 +37110,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x0000000B
+    .int 4
+    .int 8
+    .int 8
+    .int 11
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37142,14 +37138,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000C
-    .4byte 0x0000000F
-    .4byte 0x0000001F
-    .4byte 0x0000004F
-    .4byte 0x0000007F
-    .4byte 0x000000AF
+    .int 11
+    .int 11
+    .int 12
+    .int 15
+    .int 31
+    .int 79
+    .int 127
+    .int 175
     .4byte 0xFFFFF700
     .4byte 0xFFFFF400
     .4byte 0xFFFFF200
@@ -37163,9 +37159,9 @@ lbl_8040FF80:
     .4byte 0x00001FFF
     .4byte 0x00000AFF
     .4byte 0x000005FF
-    .4byte 0x000000EF
-    .4byte 0x0000009F
-    .4byte 0x0000005F
+    .int 239
+    .int 159
+    .int 95
     .4byte 0x20000000
     .4byte 0xB0000000
     .4byte 0xF5000000
@@ -37174,7 +37170,7 @@ lbl_8040FF80:
     .4byte 0xFFE10000
     .4byte 0xFFF80000
     .4byte 0xFFFE1000
-    .4byte 0x000001FF
+    .int 511
     .4byte 0x000005FF
     .4byte 0x00000AFF
     .4byte 0x00002FFF
@@ -37190,10 +37186,10 @@ lbl_8040FF80:
     .4byte 0x60000000
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000E
-    .4byte 0x0000000A
-    .4byte 0x00000006
-    .4byte 0x00000002
+    .int 14
+    .int 10
+    .int 6
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37201,7 +37197,7 @@ lbl_8040FF80:
     .4byte 0xFFFF8000
     .4byte 0xFFFFE000
     .4byte 0xFFFFF600
-    .4byte 0xFFFFFD00
+    .int -768
     .4byte 0xDFFFFF40
     .4byte 0x9FFFFFA0
     .4byte 0x6FFFFFF1
@@ -37242,10 +37238,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000A
-    .4byte 0x0000001F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 10
+    .int 31
+    .int 15
+    .int 15
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37256,7 +37252,7 @@ lbl_8040FF80:
     .4byte 0xFFFFF400
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte 0x0004B300
     .4byte 0x007FFC10
@@ -37270,14 +37266,14 @@ lbl_8040FF80:
     .4byte 0x00CFB000
     .4byte 0x00260000
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000003F
-    .4byte 0x0000004F
-    .4byte 0x0000006F
-    .4byte 0x0000009F
-    .4byte 0x000000CF
-    .4byte 0x000001FF
+    .int 15
+    .int 15
+    .int 63
+    .int 79
+    .int 111
+    .int 159
+    .int 207
+    .int 511
     .4byte 0xFFFFF100
     .4byte 0xFFFFE000
     .4byte 0xFFFFB000
@@ -37291,9 +37287,9 @@ lbl_8040FF80:
     .4byte 0x00005FFF
     .4byte 0x00000DFF
     .4byte 0x000008FF
-    .4byte 0x000002FF
-    .4byte 0x000000CF
-    .4byte 0x0000008F
+    .int 767
+    .int 207
+    .int 143
     .4byte 0x10000000
     .4byte 0x90000000
     .4byte 0xF3000000
@@ -37318,11 +37314,11 @@ lbl_8040FF80:
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000003F
-    .4byte 0x0000000D
-    .4byte 0x00000009
-    .4byte 0x00000006
-    .4byte 0x00000001
+    .int 63
+    .int 13
+    .int 9
+    .int 6
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37330,7 +37326,7 @@ lbl_8040FF80:
     .4byte 0xFFFFB000
     .4byte 0xFFFFF300
     .4byte 0xFFFFF900
-    .4byte 0xFFFFFF10
+    .int -240
     .4byte 0xDFFFFF70
     .4byte 0x9FFFFFC0
     .4byte 0x6FFFFFC1
@@ -37370,10 +37366,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x0000001F
-    .4byte 0x0000000F
-    .4byte 0x0000000E
+    .int 7
+    .int 31
+    .int 15
+    .int 14
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37398,14 +37394,14 @@ lbl_8040FF80:
     .4byte 0x0BFA4AFB
     .4byte 0x03EFFFE3
     .4byte 0x0029B920
-    .4byte 0x0000002F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
-    .4byte 0x0000006F
-    .4byte 0x0000008F
-    .4byte 0x000000BF
-    .4byte 0x000000EF
-    .4byte 0x000002FF
+    .int 47
+    .int 79
+    .int 79
+    .int 111
+    .int 143
+    .int 191
+    .int 239
+    .int 767
     .4byte 0xFFFFF000
     .4byte 0xFFFFC000
     .4byte 0xFFFFA000
@@ -37420,8 +37416,8 @@ lbl_8040FF80:
     .4byte 0x00001FFF
     .4byte 0x00000BFF
     .4byte 0x000006FF
-    .4byte 0x000000EF
-    .4byte 0x000000AF
+    .int 239
+    .int 175
     .4byte NULL
     .4byte 0x50000000
     .4byte 0xD1000000
@@ -37446,19 +37442,19 @@ lbl_8040FF80:
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000006F
-    .4byte 0x0000001F
-    .4byte 0x0000000B
-    .4byte 0x00000008
-    .4byte 0x00000004
-    .4byte 0x00000001
+    .int 111
+    .int 31
+    .int 11
+    .int 8
+    .int 4
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFF2000
     .4byte 0xFFFF9000
     .4byte 0xFFFFF200
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFE00
+    .int -512
     .4byte 0xEFFFFF60
     .4byte 0xBFFFFFB0
     .4byte 0x8FFFFFE1
@@ -37517,7 +37513,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37539,14 +37535,14 @@ lbl_8040FF80:
     .4byte 0xFFF00000
     .4byte 0xFFF00027
     .4byte 0xFFF69DFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFC
+    .int -1
+    .int -4
     .4byte 0xFFF54200
-    .4byte 0x0000006E
+    .int 110
     .4byte 0x00006DFF
     .4byte 0x028DFFFF
     .4byte 0xCFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFDA72
     .4byte 0xA8520000
     .4byte NULL
@@ -37592,16 +37588,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00000AFF
     .4byte 0x000007FF
-    .4byte 0x000002EF
-    .4byte 0x0000003E
-    .4byte 0x00000001
+    .int 751
+    .int 62
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFF10000
     .4byte 0xFFF70000
     .4byte 0xFFFFC888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x68BDFFFF
     .4byte NULL
     .4byte NULL
@@ -37609,8 +37605,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x8888889B
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37640,12 +37636,12 @@ lbl_8040FF80:
     .4byte 0xFF800000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000008
+    .int 2
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000017
+    .int 23
     .4byte 0x00065000
     .4byte 0x007FF800
     .4byte 0xB81CFF90
@@ -37667,14 +37663,14 @@ lbl_8040FF80:
     .4byte 0xFF800000
     .4byte 0xFF70148D
     .4byte 0xFFCBEFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFEBA8
     .4byte 0xFF900000
     .4byte 0x000006DF
     .4byte 0x0006DFFF
     .4byte 0x39EFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFB
+    .int -1
+    .int -5
     .4byte 0xFFEB8510
     .4byte 0x53000000
     .4byte NULL
@@ -37721,7 +37717,7 @@ lbl_8040FF80:
     .4byte 0x00002FFF
     .4byte 0x00000DFF
     .4byte 0x000005FF
-    .4byte 0x0000005D
+    .int 93
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37729,7 +37725,7 @@ lbl_8040FF80:
     .4byte 0xFF900000
     .4byte 0xFFE40000
     .4byte 0xFFFFEBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x368ABBBB
     .4byte NULL
     .4byte NULL
@@ -37737,7 +37733,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBEF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -37767,13 +37763,13 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000000B
-    .4byte 0x0000001F
-    .4byte 0x0000000D
-    .4byte 0x00000007
+    .int 3
+    .int 11
+    .int 31
+    .int 13
+    .int 7
     .4byte NULL
-    .4byte 0x00000003
+    .int 3
     .4byte 0x29B82000
     .4byte 0xEFFFE300
     .4byte 0xFA4AFB00
@@ -37795,18 +37791,18 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte 0xFFB00048
     .4byte 0xFFC7AEFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFEB
+    .int -1
+    .int -21
     .4byte 0xFFC44100
-    .4byte 0x0000018F
+    .int 399
     .4byte 0x00018EFF
     .4byte 0x049FFFFF
     .4byte 0xDFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFC961
     .4byte 0x97410000
     .4byte NULL
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xF9000000
     .4byte 0xFF700000
     .4byte 0xFFF30000
@@ -37849,15 +37845,15 @@ lbl_8040FF80:
     .4byte 0x00000EFF
     .4byte 0x00000AFF
     .4byte 0x000004FF
-    .4byte 0x0000006F
-    .4byte 0x00000001
+    .int 111
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFC00000
     .4byte 0xFFF40000
     .4byte 0xFFFFB888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x69BDFFFF
     .4byte NULL
     .4byte NULL
@@ -37865,8 +37861,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x8888889B
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37891,7 +37887,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -37899,7 +37895,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888AFF
     .4byte 0x000003FF
     .4byte NULL
@@ -37954,20 +37950,20 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
-    .4byte 0x0000006F
+    .int 6
+    .int 111
     .4byte 0x000019FF
     .4byte 0x0004DFFF
     .4byte 0x004FFFFF
     .4byte 0x01DFFFFF
     .4byte 0x09FFFFF8
     .4byte 0x6FFFFFC0
-    .4byte 0xFFFFFD10
+    .int -752
     .4byte 0xFFFFC200
     .4byte 0xFFFC1000
     .4byte 0xFF800000
     .4byte 0xD0000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -37975,7 +37971,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000027
+    .int 39
     .4byte 0x00005CFF
     .4byte 0x00003FFF
     .4byte 0x00000685
@@ -38019,16 +38015,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00008FFF
     .4byte 0x0002CC30
     .4byte 0x0652FFE3
@@ -38081,15 +38077,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000003E
+    .int 3
+    .int 62
     .4byte 0x000003EF
     .4byte 0x00005EFF
     .4byte 0x0019FFFF
     .4byte 0x04FFFFFD
     .4byte 0x0BFFFFF5
     .4byte 0x7FFFFFB0
-    .4byte 0xFFFFFE20
+    .int -480
     .4byte 0xFFFFF400
     .4byte 0xFFFF6000
     .4byte 0xFFE60000
@@ -38103,7 +38099,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000028
+    .int 40
     .4byte 0x00026AFF
     .4byte 0x0009FFFF
     .4byte 0x0002FDA6
@@ -38147,16 +38143,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00008FFF
     .4byte 0x003DFFD3
     .4byte 0x01EFDDFE
@@ -38209,15 +38205,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000003E
+    .int 3
+    .int 62
     .4byte 0x000003EF
     .4byte 0x00005EFF
     .4byte 0x0019FFFF
     .4byte 0x04FFFFFD
     .4byte 0x0CFFFFF5
     .4byte 0x7FFFFFB0
-    .4byte 0xFFFFFE10
+    .int -496
     .4byte 0xFFFFF400
     .4byte 0xFFFF6000
     .4byte 0xFFE60000
@@ -38231,7 +38227,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000028
+    .int 40
     .4byte 0x00037AFF
     .4byte 0x000AFFFF
     .4byte 0x0002FD96
@@ -38296,9 +38292,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000001C
-    .4byte 0x000000BF
+    .int 2
+    .int 28
+    .int 191
     .4byte 0x000009FF
     .4byte 0x00007FFF
     .4byte 0x0006FFFF
@@ -38335,7 +38331,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xB0000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -38345,9 +38341,9 @@ lbl_8040FF80:
     .4byte 0x0000AFFF
     .4byte 0x00001EFF
     .4byte 0x000005FF
-    .4byte 0x000000AF
-    .4byte 0x0000001E
-    .4byte 0x00000005
+    .int 175
+    .int 30
+    .int 5
     .4byte NULL
     .4byte NULL
     .4byte 0xFF600000
@@ -38355,7 +38351,7 @@ lbl_8040FF80:
     .4byte 0xFFFE3000
     .4byte 0xFFFFD100
     .4byte 0xFFFFFC10
-    .4byte 0xFFFFFFA0
+    .int -96
     .4byte 0xBFFFFFF7
     .4byte 0x2EFFFFA2
     .4byte NULL
@@ -38410,8 +38406,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000039
-    .4byte 0x000001DF
+    .int 57
+    .int 479
     .4byte 0x1000003E
     .4byte 0xE3000006
     .4byte NULL
@@ -38423,9 +38419,9 @@ lbl_8040FF80:
     .4byte 0xFE39A100
     .4byte 0xFFE10000
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000000C
-    .4byte 0x0000009F
+    .int 1
+    .int 12
+    .int 159
     .4byte 0x000008FF
     .4byte 0x00006FFF
     .4byte 0x0003FFFF
@@ -38474,17 +38470,17 @@ lbl_8040FF80:
     .4byte 0x0000BFFF
     .4byte 0x00002EFF
     .4byte 0x000006FF
-    .4byte 0x000000BF
-    .4byte 0x0000002F
-    .4byte 0x00000008
+    .int 191
+    .int 47
+    .int 8
     .4byte NULL
     .4byte 0xF9000000
     .4byte 0xFF800000
     .4byte 0xFFF60000
     .4byte 0xFFFF4000
     .4byte 0xFFFFE300
-    .4byte 0xFFFFFD10
-    .4byte 0xFFFFFFB0
+    .int -752
+    .int -80
     .4byte 0xDFFFFC30
     .4byte NULL
     .4byte NULL
@@ -38536,10 +38532,10 @@ lbl_8040FF80:
     .4byte 0x01CFFFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000002E
-    .4byte 0x0000009F
-    .4byte 0x000000CF
+    .int 3
+    .int 46
+    .int 159
+    .int 207
     .4byte 0x3000009F
     .4byte 0xE400002E
     .4byte NULL
@@ -38552,8 +38548,8 @@ lbl_8040FF80:
     .4byte 0xFFFF8000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x0000009F
+    .int 9
+    .int 159
     .4byte 0x000006FF
     .4byte 0x00006FFF
     .4byte 0x0003EFFF
@@ -38602,17 +38598,17 @@ lbl_8040FF80:
     .4byte 0x00009FFF
     .4byte 0x00001DFF
     .4byte 0x000004FF
-    .4byte 0x0000009F
-    .4byte 0x0000001D
-    .4byte 0x00000005
+    .int 159
+    .int 29
+    .int 5
     .4byte NULL
     .4byte 0xFC100000
     .4byte 0xFFC00000
     .4byte 0xFFF90000
     .4byte 0xFFFF8000
     .4byte 0xFFFFF600
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFFE1
+    .int -192
+    .int -31
     .4byte 0xAFFFFE50
     .4byte NULL
     .4byte NULL
@@ -38685,9 +38681,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x88888FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBFFF
     .4byte 0x00000FFF
     .4byte 0x00000FFF
@@ -38695,7 +38691,7 @@ lbl_8040FF80:
     .4byte 0xDFA00FFF
     .4byte 0xFFA00FFF
     .4byte 0xFFD88888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBBBBB
     .4byte 0xFFB00000
     .4byte 0xFFB00000
@@ -38710,8 +38706,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x10000000
     .4byte 0x90000000
-    .4byte 0x0000001E
-    .4byte 0x0000009F
+    .int 30
+    .int 159
     .4byte 0x000005FF
     .4byte 0x00003EFF
     .4byte 0x0001CFFF
@@ -38745,15 +38741,15 @@ lbl_8040FF80:
     .4byte 0x009FFFF3
     .4byte 0x0006FF90
     .4byte 0x00004C10
-    .4byte 0x00000001
-    .4byte 0x00000001
+    .int 1
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x00000EFF
     .4byte 0x10001FFF
     .4byte 0x9D88BFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x8DFFFFFF
     .4byte 0x00268BBB
     .4byte NULL
@@ -38791,7 +38787,7 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0xB870003D
     .4byte 0xFFF1006F
     .4byte 0xFFF00006
@@ -38813,9 +38809,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x88888DFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBEFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
@@ -38823,7 +38819,7 @@ lbl_8040FF80:
     .4byte 0xAFD10BFF
     .4byte 0xFFD00BFF
     .4byte 0xFFF88888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFBBBBB
     .4byte 0xFFF00000
     .4byte 0xFFF00000
@@ -38837,10 +38833,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x30000000
-    .4byte 0xC1000000
-    .4byte 0x0000000B
-    .4byte 0x0000005F
-    .4byte 0x000002EF
+    .float -8.0
+    .int 11
+    .int 95
+    .int 751
     .4byte 0x00001CFF
     .4byte 0x00009FFF
     .4byte 0x0009FFFF
@@ -38919,7 +38915,7 @@ lbl_8040FF80:
     .4byte 0x00000FFF
     .4byte 0x00000EFF
     .4byte NULL
-    .4byte 0x00000008
+    .int 8
     .4byte 0xBB80001F
     .4byte 0xFFC0004F
     .4byte 0xFFB0002F
@@ -38941,9 +38937,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x88888FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBFFF
     .4byte 0x00000FFF
     .4byte 0x00000FFF
@@ -38951,7 +38947,7 @@ lbl_8040FF80:
     .4byte 0xDFA00FFF
     .4byte 0xFFA00FFF
     .4byte 0xFFD88888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBBBBB
     .4byte 0xFFB00000
     .4byte 0xFFB00000
@@ -38965,9 +38961,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x10000000
-    .4byte 0xC0000000
-    .4byte 0x0000001E
-    .4byte 0x0000009F
+    .float -2.0
+    .int 30
+    .int 159
     .4byte 0x000005FF
     .4byte 0x00003EFF
     .4byte 0x0001CFFF
@@ -39001,15 +38997,15 @@ lbl_8040FF80:
     .4byte 0x009FFFF3
     .4byte 0x0006FF90
     .4byte 0x00004C10
-    .4byte 0x00000001
-    .4byte 0x00000001
+    .int 1
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x00000EFF
     .4byte 0x10001FFF
     .4byte 0x9D88BFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x8DFFFFFF
     .4byte 0x00268BBB
     .4byte NULL
@@ -39042,16 +39038,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x444448FF
     .4byte 0x000009FF
     .4byte NULL
@@ -39068,8 +39064,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000008
-    .4byte 0x0000006F
+    .int 8
+    .int 111
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -39094,8 +39090,8 @@ lbl_8040FF80:
     .4byte 0x30000000
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000003C
-    .4byte 0x00000001
+    .int 60
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -39109,11 +39105,11 @@ lbl_8040FF80:
     .4byte 0x0008FFFF
     .4byte 0x00009FFF
     .4byte 0x00000CFF
-    .4byte 0x000001EF
+    .int 495
     .4byte 0xFFFFB100
     .4byte 0xFFF80000
     .4byte 0xFD400000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte 0xF9000000
     .4byte 0xFFB10000
     .4byte 0xFFFC1000
@@ -39134,16 +39130,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x00000008
-    .4byte 0x00000001
+    .int 79
+    .int 8
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFD20
-    .4byte 0xFFFFFD30
+    .int -736
+    .int -720
     .4byte 0xDFFF9100
     .4byte 0x6FF60000
     .4byte 0x0A400000
@@ -39160,17 +39156,17 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000000B
-    .4byte 0x0000001E
-    .4byte 0x00000002
+    .int 3
+    .int 11
+    .int 30
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x87444200
-    .4byte 0xFFFFFFFE
-    .4byte 0xFFFFFFFF
+    .int -2
+    .int -1
     .4byte 0x479CFFFF
     .4byte 0x0000158D
     .4byte NULL
@@ -39178,9 +39174,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBB874100
-    .4byte 0xFFFFFFEB
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -21
+    .int -1
+    .int -1
     .4byte 0x38EFFFFF
     .4byte NULL
     .4byte NULL
@@ -39189,31 +39185,31 @@ lbl_8040FF80:
     .4byte 0x70000000
     .4byte 0xD0000000
     .4byte 0x80000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000006
-    .4byte 0x00000002
+    .int 1
+    .int 6
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xEFCB8743
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x8CFFFFFF
     .4byte 0x0016AFFF
-    .4byte 0x0000016C
+    .int 364
     .4byte 0x0006BFFE
-    .4byte 0x000003AA
+    .int 938
     .4byte NULL
     .4byte NULL
     .4byte 0xEB863000
-    .4byte 0xFFFFFD94
-    .4byte 0xFFFFFFF9
-    .4byte 0xFFFFFFF3
+    .int -620
+    .int -7
+    .int -13
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -39225,7 +39221,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000100
+    .int 256
     .4byte 0x00000DFF
     .4byte 0x00005FFF
     .4byte 0x0000278B
@@ -39235,7 +39231,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xDBA87410
-    .4byte 0xFFFFFFFE
+    .int -2
     .4byte 0xEFFFFFFF
     .4byte 0x036AEFFF
     .4byte 0x4AFFFFE0
@@ -39245,7 +39241,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xB8630000
     .4byte 0xFFFFEB73
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -39270,11 +39266,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x6BFFFFFF
     .4byte 0x004BFFFF
     .4byte 0x00004BFF
-    .4byte 0x0000004C
+    .int 76
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -39350,13 +39346,13 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000007
-    .4byte 0x0000000A
-    .4byte 0x0000000F
-    .4byte 0x0000005F
-    .4byte 0x0000009F
-    .4byte 0x000001DF
+    .int 2
+    .int 7
+    .int 10
+    .int 15
+    .int 95
+    .int 159
+    .int 479
     .4byte 0x04BBBEFF
     .4byte 0xFFFFB000
     .4byte 0xFFFF5000
@@ -39365,15 +39361,15 @@ lbl_8040FF80:
     .4byte 0xFFF20000
     .4byte 0xFFA00000
     .4byte 0xFF844788
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x0003FFFC
     .4byte 0x00009FFF
     .4byte 0x00002FFF
     .4byte 0x000009FF
-    .4byte 0x000001FF
+    .int 511
     .4byte 0x000014DF
     .4byte 0xABCFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x10000000
     .4byte 0x90000000
     .4byte 0xF7000000
@@ -39390,10 +39386,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFD
+    .int -1
+    .int -3
     .4byte 0xFFEA7410
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -39407,7 +39403,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFF600
-    .4byte 0xFFFFFE00
+    .int -512
     .4byte 0xEFFFE910
     .4byte 0xAFD71000
     .4byte 0x56000000
@@ -39443,7 +39439,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x50000000
     .4byte 0x70000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x20000000
     .4byte NULL
     .4byte NULL
@@ -39467,9 +39463,9 @@ lbl_8040FF80:
     .4byte 0x1FFFFFF2
     .4byte 0x6FFFFFC0
     .4byte 0xDFFFFF60
-    .4byte 0xFFFFFE00
-    .4byte 0xFFFFFE71
-    .4byte 0xFFFFFFFE
+    .int -512
+    .int -399
+    .int -2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -39486,16 +39482,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000007F
-    .4byte 0x000002FF
+    .int 127
+    .int 767
     .4byte 0x00000BFF
     .4byte 0x00008FFF
     .4byte 0x0005FFFF
     .4byte 0x003EFFFF
     .4byte 0x03EFFFFC
     .4byte 0x6EFFFFB1
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFAFFFF
     .4byte 0xFF803DFF
     .4byte 0xFB0001CF
@@ -39510,7 +39506,7 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0x60000000
     .4byte NULL
-    .4byte 0x00000008
+    .int 8
     .4byte 0x000004CF
     .4byte 0x0002AFFF
     .4byte 0x006FFFFE
@@ -39555,7 +39551,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBFFFF
     .4byte 0x0000FFFF
     .4byte NULL
@@ -39563,7 +39559,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFEBBBBBB
     .4byte 0xFB000000
     .4byte NULL
@@ -39587,16 +39583,16 @@ lbl_8040FF80:
     .4byte 0x0000FFFF
     .4byte 0x0000FFFF
     .4byte 0x0001FFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x4445FFFF
     .4byte 0xFB000000
     .4byte 0xFB000000
     .4byte 0xFB000000
     .4byte 0xFB000000
     .4byte 0xFB000000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFC444444
     .4byte NULL
     .4byte NULL
@@ -39649,14 +39645,14 @@ lbl_8040FF80:
     .4byte 0x0000CFFF
     .4byte 0x00007FFF
     .4byte 0x00001CFF
-    .4byte 0x0000006B
+    .int 107
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFF400000
     .4byte 0xFFFA8888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xEFFFFFFF
     .4byte NULL
     .4byte NULL
@@ -39717,20 +39713,20 @@ lbl_8040FF80:
     .4byte 0x0004FFFF
     .4byte 0x0002FFFF
     .4byte 0xABCFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x30000000
     .4byte 0x50000001
     .4byte 0xC89BBEFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xF6441AFF
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44100000
+    .float 576.0
     .4byte 0xFFC20000
     .4byte 0xFFF40000
     .4byte 0xFFA00000
@@ -39775,12 +39771,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x000003FF
-    .4byte 0x000000FF
-    .4byte 0x000000CF
-    .4byte 0x000000AF
-    .4byte 0x0000008F
-    .4byte 0x0000005F
-    .4byte 0x00000013
+    .int 255
+    .int 207
+    .int 175
+    .int 143
+    .int 95
+    .int 19
     .4byte NULL
     .4byte 0xFF900000
     .4byte 0xFFB00000
@@ -39821,7 +39817,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x10000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -39831,7 +39827,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00011000
     .4byte NULL
-    .4byte 0x00000014
+    .int 20
     .4byte 0x00ABDFFF
     .4byte 0x00FFFFFF
     .4byte 0x00898744
@@ -39840,22 +39836,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x005FFFFF
     .4byte 0x46AFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x200AFFFF
     .4byte 0x0007FFFF
     .4byte 0x0005FFFF
     .4byte 0x0003FFFF
     .4byte 0x7244788B
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFDCF
+    .int -1
+    .int -561
     .4byte 0xF541007F
     .4byte 0xF20000CF
     .4byte 0xF60003FF
     .4byte 0xF80009FF
     .4byte 0xFB004FFF
     .4byte 0xBEFFE300
-    .4byte 0xFFFFFE20
+    .int -480
     .4byte 0xFFFFFB00
     .4byte 0xFFFFF200
     .4byte 0xFFFF8000
@@ -39905,9 +39901,9 @@ lbl_8040FF80:
     .4byte 0x000009FF
     .4byte 0x000006FF
     .4byte 0x000004FF
-    .4byte 0x000001FF
-    .4byte 0x000000EF
-    .4byte 0x000000AC
+    .int 511
+    .int 239
+    .int 172
     .4byte NULL
     .4byte NULL
     .4byte 0xFFF60000
@@ -39977,7 +39973,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBA0
-    .4byte 0xFFFFFFD0
+    .int -48
     .4byte 0x05FFFFB0
     .4byte 0x05FFFF80
     .4byte 0x07FFFF60
@@ -40031,8 +40027,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0xFFFFFFFF
+    .int 3
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -40040,7 +40036,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xEFFFD000
     .4byte 0xFFFFB000
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -40059,24 +40055,24 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000EF
-    .4byte 0x000000FF
-    .4byte 0x00000044
+    .int 239
+    .int 255
+    .int 68
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44CFFFFF
     .4byte NULL
     .4byte NULL
@@ -40110,7 +40106,7 @@ lbl_8040FF80:
     .4byte 0x08FFFFF8
     .4byte 0x0BFFFFF6
     .4byte 0x0CFFFFF4
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x20000000
     .4byte NULL
     .4byte NULL
@@ -40141,7 +40137,7 @@ lbl_8040FF80:
     .4byte 0x9FFFFF70
     .4byte 0xBFFFFF40
     .4byte 0xDFFFFF30
-    .4byte 0xFFFFFE00
+    .int -512
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -40159,16 +40155,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444447
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFD44
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -700
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -40215,16 +40211,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000024
-    .4byte 0x0000008F
-    .4byte 0x0000005B
+    .int 36
+    .int 143
+    .int 91
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -40232,14 +40228,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBDFFF
     .4byte 0x00007FFF
     .4byte 0x00007FFF
     .4byte 0x00008FFF
     .4byte 0x00008FFF
     .4byte NULL
-    .4byte 0x41000000
+    .float 8.0
     .4byte 0xF4000000
     .4byte 0xF4000000
     .4byte 0xF4000000
@@ -40247,16 +40243,16 @@ lbl_8040FF80:
     .4byte 0xF4000000
     .4byte 0xF4000000
     .4byte NULL
-    .4byte 0x00000005
-    .4byte 0x0000000D
-    .4byte 0x00000005
+    .int 5
+    .int 13
+    .int 5
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -40264,7 +40260,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00007FFF
     .4byte 0x8888CFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x8888CFFF
     .4byte 0x00007FFF
     .4byte 0x00008FFF
@@ -40280,24 +40276,24 @@ lbl_8040FF80:
     .4byte 0xF4000000
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 191
+    .int 191
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x00007FFF
     .4byte 0x00008FFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00008FFF
     .4byte 0x00002444
     .4byte NULL
@@ -40307,7 +40303,7 @@ lbl_8040FF80:
     .4byte 0xF4000000
     .4byte 0xF4000000
     .4byte 0xF4000000
-    .4byte 0x41000000
+    .float 8.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -40323,22 +40319,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444AFF
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44420000
+    .float 776.0
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
@@ -40357,7 +40353,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x000007FF
     .4byte 0x000008FF
     .4byte 0x000008FF
@@ -40365,7 +40361,7 @@ lbl_8040FF80:
     .4byte 0x000008FF
     .4byte 0x000007FF
     .4byte 0x88888CFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
@@ -40382,7 +40378,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -40390,7 +40386,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x000008FF
     .4byte 0x000007FF
     .4byte 0x000008FF
@@ -40416,7 +40412,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -40424,10 +40420,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x000007FF
     .4byte 0xBBBBBDFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBDFF
     .4byte 0x000008FF
-    .4byte 0x00000244
+    .int 580
     .4byte NULL
     .4byte NULL
     .4byte 0xFFF80000
@@ -40435,37 +40431,37 @@ lbl_8040FF80:
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
-    .4byte 0x44420000
+    .float 776.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000024
-    .4byte 0x0000008F
-    .4byte 0x0000007F
+    .int 36
+    .int 143
+    .int 127
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x42000000
+    .float 32.0
     .4byte 0xF8000000
     .4byte 0xF7000000
     .4byte NULL
@@ -40481,7 +40477,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -40489,9 +40485,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBFF
-    .4byte 0x000002FF
+    .int 767
     .4byte 0x000004FF
     .4byte 0x000007FF
     .4byte NULL
@@ -40536,21 +40532,21 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000002
+    .int 2
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004B
+    .int 75
     .4byte 0x00027CFF
     .4byte 0x79DFFFFF
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0x9FCA7410
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFC30
+    .int -976
     .4byte 0xFFFF8100
     .4byte 0xFF920000
     .4byte 0x61000000
@@ -40568,7 +40564,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000274
+    .int 628
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
@@ -40576,7 +40572,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte NULL
     .4byte NULL
-    .4byte 0x44300000
+    .float 704.0
     .4byte 0xFFF70000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
@@ -40592,7 +40588,7 @@ lbl_8040FF80:
     .4byte 0x0000BFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0x44000000
+    .float 512.0
     .4byte 0xFF000000
     .4byte 0xFF000000
     .4byte 0xFF000000
@@ -40634,7 +40630,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x00000144
+    .int 324
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -40642,7 +40638,7 @@ lbl_8040FF80:
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte 0xFFF80000
-    .4byte 0x44420000
+    .float 776.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -40672,7 +40668,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004B
+    .int 75
     .4byte 0x00027CFF
     .4byte 0x009FFFFF
     .4byte 0x005FFFC8
@@ -40683,7 +40679,7 @@ lbl_8040FF80:
     .4byte 0xFFFFF900
     .4byte 0xFFFE7000
     .4byte 0xFD810000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -40696,12 +40692,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
+    .int 3
+    .int 11
+    .int 11
+    .int 11
+    .int 11
+    .int 11
     .4byte NULL
     .4byte NULL
     .4byte 0x30000002
@@ -40712,7 +40708,7 @@ lbl_8040FF80:
     .4byte 0xFFFFB008
     .4byte NULL
     .4byte NULL
-    .4byte 0x41000000
+    .float 8.0
     .4byte 0xFFFFE300
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
@@ -40726,14 +40722,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
-    .4byte 0x0000000B
+    .int 11
+    .int 11
+    .int 11
+    .int 11
+    .int 11
+    .int 11
+    .int 11
+    .int 11
     .4byte 0xFFFFB008
     .4byte 0xFFFFB008
     .4byte 0xFFFFB008
@@ -40758,12 +40754,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00004900
     .4byte 0x0000CF90
-    .4byte 0x0000000B
-    .4byte 0x0000000D
-    .4byte 0x0000000F
-    .4byte 0x0000003F
-    .4byte 0x0000007F
-    .4byte 0x000000CF
+    .int 11
+    .int 13
+    .int 15
+    .int 63
+    .int 127
+    .int 207
     .4byte 0x000003FF
     .4byte 0x00000AFF
     .4byte 0xFFFFB008
@@ -40779,9 +40775,9 @@ lbl_8040FF80:
     .4byte 0xFFFFF400
     .4byte 0xFFFFF400
     .4byte 0xFFFFF44D
-    .4byte 0xFFFFFDFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -513
+    .int -1
+    .int -1
     .4byte 0x0008FF70
     .4byte 0x006FFE10
     .4byte 0x06FFF800
@@ -40806,9 +40802,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFD
-    .4byte 0xFFFFFFA1
+    .int -1
+    .int -3
+    .int -95
     .4byte 0x6FFFE600
     .4byte 0x06E81000
     .4byte 0x00100000
@@ -40824,7 +40820,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000286
+    .int 646
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
@@ -40832,7 +40828,7 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte NULL
     .4byte NULL
-    .4byte 0x44300000
+    .float 704.0
     .4byte 0xFFFA0000
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
@@ -40901,15 +40897,15 @@ lbl_8040FF80:
     .4byte 0xFFFB0000
     .4byte 0xFFFB0004
     .4byte 0xFFFC58DF
-    .4byte 0xFFFFFFFF
-    .4byte 0x00000006
-    .4byte 0x0000006F
+    .int -1
+    .int 6
+    .int 111
     .4byte 0x000019FF
     .4byte 0x0004CFFF
     .4byte 0x029FFFFF
     .4byte 0x9FFFFFFE
-    .4byte 0xFFFFFFE3
-    .4byte 0xFFFFFE30
+    .int -29
+    .int -464
     .4byte 0xFFFA0000
     .4byte 0xFFE20000
     .4byte 0xFF700000
@@ -40920,16 +40916,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x000001CF
-    .4byte 0x0000001C
-    .4byte 0x00000001
+    .int 463
+    .int 28
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFD8
+    .int -1
+    .int -1
+    .int -1
+    .int -40
     .4byte 0xCFFD9500
     .4byte 0x16200000
     .4byte NULL
@@ -40963,7 +40959,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFC888888
     .4byte 0xF7000000
     .4byte NULL
@@ -40971,9 +40967,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x888888DF
-    .4byte 0x000000BF
+    .int 191
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -40998,14 +40994,14 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0xF8000000
     .4byte 0xF8000000
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
@@ -41030,14 +41026,14 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0xF8000000
     .4byte 0xF7000000
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
@@ -41055,18 +41051,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xF8000000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFA444444
     .4byte 0xB5000000
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000BF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int 191
+    .int -1
+    .int -1
     .4byte 0x444444DF
-    .4byte 0x0000008B
+    .int 139
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -41111,16 +41107,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000034
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 52
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 191
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFF88888
     .4byte 0xFFE00000
     .4byte 0xFFF00000
@@ -41128,7 +41124,7 @@ lbl_8040FF80:
     .4byte 0xFFF00000
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x8888AFFF
     .4byte 0x00003FFF
     .4byte 0x00004FFF
@@ -41142,9 +41138,9 @@ lbl_8040FF80:
     .4byte 0xFB000000
     .4byte 0xF9000000
     .4byte 0xF6000000
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x00000034
+    .int 191
+    .int 191
+    .int 52
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -41152,7 +41148,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xFFF00000
     .4byte 0xFFF00000
-    .4byte 0x44400000
+    .float 768.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -41182,8 +41178,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000005E
+    .int 1
+    .int 94
     .4byte 0x00005BFF
     .4byte 0x004EFFFE
     .4byte 0x001DC850
@@ -41219,7 +41215,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFEBBBBBB
     .4byte 0xFB000000
     .4byte NULL
@@ -41227,9 +41223,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBEF
-    .4byte 0x000000BF
+    .int 191
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -41254,10 +41250,10 @@ lbl_8040FF80:
     .4byte 0xFB000000
     .4byte 0xFA000000
     .4byte NULL
-    .4byte 0x000000BF
-    .4byte 0x000000CF
-    .4byte 0x000000FF
-    .4byte 0x000001FF
+    .int 191
+    .int 207
+    .int 255
+    .int 511
     .4byte 0x000004FF
     .4byte 0x000006FF
     .4byte 0x000009FF
@@ -41285,7 +41281,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
+    .int 4
     .4byte 0x00003FFF
     .4byte 0x00009FFF
     .4byte 0x0002FFFF
@@ -41310,7 +41306,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000019F
+    .int 415
     .4byte 0x00028EFF
     .4byte 0x06CFFFFF
     .4byte 0x09FFFFA6
@@ -41346,18 +41342,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x444445FF
-    .4byte 0x000000EF
+    .int 239
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -41378,16 +41374,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
-    .4byte 0x000000EF
-    .4byte 0x000001FF
+    .int 239
+    .int 511
     .4byte 0x000004FF
     .4byte 0x000005FF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444EFF
     .4byte 0x00002FFF
     .4byte 0xFFFF4000
@@ -41413,7 +41409,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
+    .int 4
     .4byte 0x00007FFF
     .4byte 0x0000CFFF
     .4byte 0x0004FFFF
@@ -41432,18 +41428,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000009
-    .4byte 0x00000002
+    .int 1
+    .int 9
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000019F
+    .int 415
     .4byte 0x00028EFF
     .4byte 0x37CFFFFF
-    .4byte 0xFFFFFFD8
+    .int -40
     .4byte 0xFFEB8300
-    .4byte 0x43000000
+    .float 128.0
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFC100
@@ -41467,15 +41463,15 @@ lbl_8040FF80:
     .4byte 0x00000BC8
     .4byte 0x00004FFF
     .4byte 0x000018FF
-    .4byte 0x0000002C
-    .4byte 0x00000001
+    .int 44
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x50000000
     .4byte 0xFE940000
     .4byte 0xFFFFB400
-    .4byte 0xFFFFFFB2
+    .int -78
     .4byte 0x9FFFFFFE
     .4byte 0x06FFFFFF
     .4byte NULL
@@ -41517,7 +41513,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000001A
+    .int 26
     .4byte NULL
     .4byte NULL
     .4byte 0x0006C400
@@ -41538,16 +41534,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000005
+    .int 5
     .4byte 0x000027DF
     .4byte 0x148CFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0x000001CF
+    .int -1
+    .int 463
     .4byte 0x00003EFF
     .4byte 0x0008FFFF
     .4byte 0x05DFFFFF
     .4byte 0xBFFFFFF6
-    .4byte 0xFFFFFF60
+    .int -160
     .4byte 0xFFFFE300
     .4byte 0xFFFB1000
     .4byte 0xFFC00000
@@ -41566,9 +41562,9 @@ lbl_8040FF80:
     .4byte 0x00000872
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFF92
+    .int -1
+    .int -1
+    .int -110
     .4byte 0xFFFD7100
     .4byte 0xD8300000
     .4byte NULL
@@ -41630,7 +41626,7 @@ lbl_8040FF80:
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
     .4byte 0x000BFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFBBBBBBB
     .4byte 0xF0000000
     .4byte 0xF0000000
@@ -41638,7 +41634,7 @@ lbl_8040FF80:
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBCFF
     .4byte 0x000004FF
     .4byte 0x000004FF
@@ -41690,12 +41686,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000018
+    .int 24
     .4byte 0x000028EF
     .4byte 0x258CFFFF
     .4byte 0xEFFFFFFF
@@ -41755,24 +41751,24 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000078
-    .4byte 0x000001FF
-    .4byte 0x00000044
+    .int 120
+    .int 511
+    .int 68
     .4byte 0x0004EBBB
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
     .4byte 0x0003FFFF
     .4byte 0x888AFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x4447FFFF
     .4byte 0x80000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0xB0000000
     .4byte 0xD8888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xB44447FF
     .4byte NULL
     .4byte NULL
@@ -41816,11 +41812,11 @@ lbl_8040FF80:
     .4byte 0xFF000000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000005E
+    .int 3
+    .int 94
     .4byte 0x00001BFF
     .4byte 0x00000CF9
-    .4byte 0x00000230
+    .int 560
     .4byte NULL
     .4byte 0x08FFFE20
     .4byte 0x3FFFF600
@@ -41884,15 +41880,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000008
+    .int 2
+    .int 8
     .4byte 0x0DB97400
     .4byte 0x0FFFFD00
     .4byte 0x3FFFFA00
     .4byte 0x5FFFF700
     .4byte 0x8FFFF100
     .4byte 0xBFFFE888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFA4444
     .4byte NULL
     .4byte NULL
@@ -41900,7 +41896,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x7FFFFC44
     .4byte NULL
     .4byte NULL
@@ -41910,12 +41906,12 @@ lbl_8040FF80:
     .4byte 0x88820000
     .4byte 0xFFF40000
     .4byte 0x44410001
-    .4byte 0x0000001E
-    .4byte 0x0000009F
+    .int 30
+    .int 159
     .4byte 0x000006FF
     .4byte 0x00003FFE
     .4byte 0x00002CC3
-    .4byte 0x00000100
+    .int 256
     .4byte NULL
     .4byte NULL
     .4byte 0xFFE10000
@@ -41924,8 +41920,8 @@ lbl_8040FF80:
     .4byte 0x50000000
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000008
+    .int 2
+    .int 8
     .4byte 0x3FFFFB00
     .4byte 0x4FFFF900
     .4byte 0x7FFFF700
@@ -41946,12 +41942,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000001
+    .int 2
+    .int 1
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000001E
-    .4byte 0x000001CF
+    .int 30
+    .int 463
     .4byte 0x00003CFF
     .4byte 0x0049FFFF
     .4byte 0xADFFFFF9
@@ -42199,9 +42195,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x000003FF
-    .4byte 0x0000008F
-    .4byte 0x0000000D
-    .4byte 0x00000004
+    .int 143
+    .int 13
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -42297,7 +42293,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte 0x000017DF
     .4byte 0x0001CFFF
     .4byte 0x000BFC40
@@ -42332,7 +42328,7 @@ lbl_8040FF80:
     .4byte 0x001EF600
     .4byte 0x0006FFB7
     .4byte 0x00006EFF
-    .4byte 0x00000168
+    .int 360
     .4byte NULL
     .4byte 0x006FA000
     .4byte 0x004FB000
@@ -42442,7 +42438,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44400000
+    .float 768.0
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
@@ -42465,8 +42461,8 @@ lbl_8040FF80:
     .4byte 0x00004FFF
     .4byte 0x00004FFF
     .4byte 0x00003BBE
-    .4byte 0x0000001F
-    .4byte 0x0000007F
+    .int 31
+    .int 127
     .4byte 0x000007FF
     .4byte 0x00003FFD
     .4byte 0x00000660
@@ -42573,7 +42569,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44400000
+    .float 768.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -42657,7 +42653,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000018D
+    .int 397
     .4byte 0x00002DFF
     .4byte 0x0000BFFF
     .4byte 0x0004FFFF
@@ -42690,7 +42686,7 @@ lbl_8040FF80:
     .4byte 0x0004FFFF
     .4byte 0x0000CFFF
     .4byte 0x00003EFF
-    .4byte 0x0000019D
+    .int 413
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -42819,7 +42815,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000344
+    .int 836
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x88840000
@@ -42827,7 +42823,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44420000
+    .float 776.0
     .4byte 0xFFF80000
     .4byte 0xFFF80000
     .4byte NULL
@@ -42850,7 +42846,7 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x00000AFF
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -42947,7 +42943,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000244
+    .int 580
     .4byte 0x000008FF
     .4byte 0x000008FF
     .4byte 0x88850000
@@ -42955,7 +42951,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44430000
+    .float 780.0
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte NULL
@@ -42978,9 +42974,9 @@ lbl_8040FF80:
     .4byte 0x000008FF
     .4byte 0x000008FF
     .4byte 0x000005CB
-    .4byte 0x00000004
-    .4byte 0x0000000A
-    .4byte 0x000001AF
+    .int 4
+    .int 10
+    .int 431
     .4byte 0x000006FF
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
@@ -42989,7 +42985,7 @@ lbl_8040FF80:
     .4byte 0xFFF60000
     .4byte 0xFFE10000
     .4byte 0xFF600000
-    .4byte 0xC3000000
+    .float -128.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -43005,10 +43001,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000024
+    .int 36
     .4byte 0x0004AEFF
     .4byte 0x02BFFFFF
     .4byte 0x1DFFFF71
@@ -43016,9 +43012,9 @@ lbl_8040FF80:
     .4byte 0xFFFFF300
     .4byte NULL
     .4byte NULL
-    .4byte 0x44300000
+    .float 704.0
     .4byte 0xFFFFC720
-    .4byte 0xFFFFFFE6
+    .int -26
     .4byte 0x03AFFFFF
     .4byte 0x000BFFFF
     .4byte 0x0006FFFF
@@ -43030,8 +43026,8 @@ lbl_8040FF80:
     .4byte 0x60000000
     .4byte 0xE1000000
     .4byte 0xF5000000
-    .4byte 0x00000005
-    .4byte 0x00000002
+    .int 5
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -43044,8 +43040,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x0000008F
+    .int 9
+    .int 143
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
     .4byte 0x0008FFFF
@@ -43057,7 +43053,7 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0xF7000000
     .4byte 0xF4000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
@@ -43070,12 +43066,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000002FF
+    .int 767
     .4byte 0x000007FF
     .4byte 0x000009FF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
-    .4byte 0x00000344
+    .int 836
     .4byte NULL
     .4byte 0x000008CB
     .4byte 0xFFF40000
@@ -43083,7 +43079,7 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
-    .4byte 0x44300000
+    .float 704.0
     .4byte NULL
     .4byte 0xBC800000
     .4byte NULL
@@ -43107,7 +43103,7 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x00000AFF
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte 0xFFB00000
@@ -43172,8 +43168,8 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000003FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
+    .int 255
+    .int 255
     .4byte 0xFFF80000
     .4byte 0xFFF70000
     .4byte 0xFFF40000
@@ -43198,20 +43194,20 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000FF
-    .4byte 0x000000DF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x00000034
+    .int 255
+    .int 223
+    .int 191
+    .int 191
+    .int 191
+    .int 52
     .4byte NULL
-    .4byte 0x000003BB
+    .int 955
     .4byte 0xFFF00000
     .4byte 0xFFD00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
-    .4byte 0x44300000
+    .float 704.0
     .4byte NULL
     .4byte 0xBBB30000
     .4byte NULL
@@ -43275,7 +43271,7 @@ lbl_8040FF80:
     .4byte 0xCEFFF800
     .4byte 0x01AFFF50
     .4byte 0x0004DFD2
-    .4byte 0x00000010
+    .int 16
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -43484,32 +43480,32 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -43557,7 +43553,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -43565,7 +43561,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -43573,7 +43569,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888870
-    .4byte 0xFFFFFFF0
+    .int -16
     .4byte 0x008FFFFF
     .4byte 0x005CBBBB
     .4byte NULL
@@ -43582,7 +43578,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -43590,7 +43586,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBBB
     .4byte NULL
     .4byte NULL
@@ -43598,7 +43594,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFF0
+    .int -16
     .4byte 0xBBBBBBA0
     .4byte NULL
     .4byte NULL
@@ -43660,9 +43656,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000001C
-    .4byte 0x00000100
+    .int 1
+    .int 28
+    .int 256
     .4byte 0x00001CA0
     .4byte 0x0001CFF9
     .4byte 0x001CFFF6
@@ -43684,9 +43680,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000001C
-    .4byte 0x000001CF
+    .int 1
+    .int 28
+    .int 463
     .4byte 0x00001CFF
     .4byte 0x0001CFFF
     .4byte 0x001CFFF6
@@ -43708,9 +43704,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000003E
-    .4byte 0x000001CF
+    .int 3
+    .int 62
+    .int 463
     .4byte 0x00003CFF
     .4byte 0x0003EFFE
     .4byte 0x003EFFE3
@@ -43802,7 +43798,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x000004BF
     .4byte 0x00008FFF
     .4byte 0x0009FFFF
@@ -43811,8 +43807,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x68863000
-    .4byte 0xFFFFFC60
-    .4byte 0xFFFFFFFD
+    .int -928
+    .int -3
     .4byte 0xDBBEFFFF
     .4byte NULL
     .4byte NULL
@@ -43839,7 +43835,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x00005BFF
-    .4byte 0x00000039
+    .int 57
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -43847,7 +43843,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFC877
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x28DFFFFF
     .4byte 0x00058BBB
     .4byte NULL
@@ -43902,14 +43898,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
@@ -43934,14 +43930,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
@@ -43966,14 +43962,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
@@ -43998,14 +43994,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
@@ -44299,9 +44295,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000000B
-    .4byte 0x0000004F
+    .int 2
+    .int 11
+    .int 79
     .4byte NULL
     .4byte 0x000027C4
     .4byte 0x0019FFF4
@@ -44326,8 +44322,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000AF
-    .4byte 0x000001FF
+    .int 175
+    .int 511
     .4byte 0x000006FF
     .4byte 0x000008FF
     .4byte 0x00000BFF
@@ -44364,8 +44360,8 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x000009FF
     .4byte 0x000007FF
-    .4byte 0x000002FF
-    .4byte 0x000000CF
+    .int 767
+    .int 207
     .4byte 0xFF800000
     .4byte 0xFF800000
     .4byte 0xFF800000
@@ -44390,9 +44386,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000006F
-    .4byte 0x0000000D
-    .4byte 0x00000004
+    .int 111
+    .int 13
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -44405,7 +44401,7 @@ lbl_8040FF80:
     .4byte 0x06FFFE71
     .4byte 0x003CFFF4
     .4byte 0x00005AF4
-    .4byte 0x00000021
+    .int 33
     .4byte NULL
     .4byte 0x07C60000
     .4byte 0x08FFE700
@@ -44419,7 +44415,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x10000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0xF7000000
     .4byte 0xFE100000
     .4byte NULL
@@ -44440,12 +44436,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x000007FF
     .4byte 0x000004FF
-    .4byte 0x000001FF
-    .4byte 0x000000FF
-    .4byte 0x000000DF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
+    .int 511
+    .int 255
+    .int 223
+    .int 191
+    .int 191
+    .int 191
     .4byte 0xFF700000
     .4byte 0xFFC00000
     .4byte 0xFFF20000
@@ -44470,12 +44466,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000BF
-    .4byte 0x000000EF
-    .4byte 0x000000FF
+    .int 191
+    .int 191
+    .int 191
+    .int 191
+    .int 239
+    .int 255
     .4byte 0x000003FF
     .4byte 0x000006FF
     .4byte 0xFFFB0000
@@ -44560,7 +44556,7 @@ lbl_8040FF80:
     .4byte 0x00000FFF
     .4byte NULL
     .4byte 0x88888885
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xFFDBBBC8
     .4byte 0xFF800000
     .4byte 0xFF800000
@@ -44659,17 +44655,17 @@ lbl_8040FF80:
     .4byte 0xFF800000
     .4byte 0xFF800000
     .4byte 0xFFC78885
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xBBBBBBC8
     .4byte NULL
     .4byte NULL
     .4byte 0x02888888
     .4byte 0x04FFFFFF
     .4byte 0x03BBBBBF
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte NULL
     .4byte 0x88884000
     .4byte 0xFFFF8000
@@ -44694,14 +44690,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
@@ -44726,14 +44722,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
     .4byte 0xFFFF8000
@@ -44758,10 +44754,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
-    .4byte 0x0000000F
+    .int 15
+    .int 15
+    .int 15
+    .int 15
     .4byte 0x0288878F
     .4byte 0x04FFFFFF
     .4byte 0x03BBBBBB
@@ -44808,15 +44804,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000019
-    .4byte 0x000000AF
+    .int 25
+    .int 175
     .4byte 0x000004FF
     .4byte 0x000008FF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte NULL
     .4byte 0x27ABEFFA
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xFFFFB743
     .4byte 0xFFFB0000
     .4byte 0xFFF60000
@@ -44906,8 +44902,8 @@ lbl_8040FF80:
     .4byte 0x00000BFF
     .4byte 0x000009FF
     .4byte 0x000006FF
-    .4byte 0x000000CF
-    .4byte 0x0000003D
+    .int 207
+    .int 61
     .4byte NULL
     .4byte NULL
     .4byte 0xFFF40000
@@ -44915,7 +44911,7 @@ lbl_8040FF80:
     .4byte 0xFFF50000
     .4byte 0xFFF90000
     .4byte 0xFFFF8410
-    .4byte 0xFFFFFFFA
+    .int -6
     .4byte 0x6AEFFFFB
     .4byte 0x00003443
     .4byte 0x00110000
@@ -44956,8 +44952,8 @@ lbl_8040FF80:
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x000000DF
-    .4byte 0x0000003C
+    .int 223
+    .int 60
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
@@ -44965,7 +44961,7 @@ lbl_8040FF80:
     .4byte 0xFFFB0000
     .4byte 0xFFFE0000
     .4byte 0xFFFFA200
-    .4byte 0xFFFFFE00
+    .int -512
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -44982,15 +44978,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
-    .4byte 0x000000BF
+    .int 9
+    .int 191
     .4byte 0x000003FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte 0xFFFFC500
     .4byte 0xFFFF2000
     .4byte 0xFFFB0000
@@ -45057,11 +45053,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000007F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
+    .int 1
+    .int 127
+    .int 143
+    .int 143
+    .int 143
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45086,28 +45082,28 @@ lbl_8040FF80:
     .4byte 0x00001444
     .4byte 0x00004FFF
     .4byte 0x00004FFF
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
+    .int 143
+    .int 143
+    .int 143
+    .int 143
+    .int 143
     .4byte 0x444443AF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF54444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44443000
+    .float 784.75
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0x00004FFF
@@ -45118,16 +45114,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x444443AF
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int 143
+    .int 143
+    .int 143
+    .int 143
+    .int 143
+    .int -1
+    .int -1
     .4byte 0xFFF54444
     .4byte 0xFFF00000
     .4byte 0xFFF00000
@@ -45136,7 +45132,7 @@ lbl_8040FF80:
     .4byte 0xFFF00000
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
-    .4byte 0x44443000
+    .float 784.75
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45150,11 +45146,11 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000008F
-    .4byte 0x0000007F
-    .4byte 0x00000001
+    .int 143
+    .int 143
+    .int 143
+    .int 127
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45220,22 +45216,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44443000
+    .float 784.75
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0x00004FFF
@@ -45246,16 +45242,16 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
@@ -45264,7 +45260,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
-    .4byte 0x44443000
+    .float 784.75
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45309,7 +45305,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000009
+    .int 9
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45324,8 +45320,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000001C
+    .int 1
+    .int 28
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45334,9 +45330,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0xB4000000
     .4byte 0xFE600000
-    .4byte 0x000000BF
-    .4byte 0x0000007F
-    .4byte 0x00000006
+    .int 191
+    .int 127
+    .int 6
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45350,7 +45346,7 @@ lbl_8040FF80:
     .4byte 0x003EFFFF
     .4byte 0x0003EFFF
     .4byte 0x00003EFF
-    .4byte 0x000003DF
+    .int 991
     .4byte 0x00003EFF
     .4byte 0x0003EFFF
     .4byte 0x005EFFFF
@@ -45361,7 +45357,7 @@ lbl_8040FF80:
     .4byte 0xFFF60000
     .4byte 0xFFE40000
     .4byte 0xFC300000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte 0x10000000
     .4byte NULL
     .4byte NULL
@@ -45371,9 +45367,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000003
-    .4byte 0x0000003E
-    .4byte 0x000001DF
+    .int 3
+    .int 62
+    .int 479
     .4byte 0x00000AFF
     .4byte 0x0001AFFF
     .4byte 0x001CFFFF
@@ -45384,7 +45380,7 @@ lbl_8040FF80:
     .4byte 0xFFFC2000
     .4byte 0xFFFF3000
     .4byte 0xFFFFE500
-    .4byte 0xFFFFFF60
+    .int -160
     .4byte 0x7BFFFFF6
     .4byte 0x019FFFFF
     .4byte 0x0009FFFF
@@ -45398,8 +45394,8 @@ lbl_8040FF80:
     .4byte 0xF8000000
     .4byte 0xFF900000
     .4byte 0xFFF70000
-    .4byte 0x0000004E
-    .4byte 0x00000003
+    .int 78
+    .int 3
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45414,8 +45410,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000008F
-    .4byte 0x00000006
+    .int 143
+    .int 6
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45472,30 +45468,30 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte NULL
     .4byte NULL
-    .4byte 0x44441000
+    .float 784.25
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
-    .4byte 0x44441000
+    .float 784.25
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000100
+    .int 256
     .4byte 0x0000AFFF
     .4byte 0x0000BFFF
     .4byte 0x0000BFFF
@@ -45504,18 +45500,18 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -45578,7 +45574,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000006
+    .int 6
     .4byte 0x000006DF
     .4byte 0x0006DFFF
     .4byte 0x04DFFFFF
@@ -45587,35 +45583,35 @@ lbl_8040FF80:
     .4byte 0x0006A100
     .4byte 0x06DFF600
     .4byte 0xDFFFFD00
-    .4byte 0xFFFFFF60
-    .4byte 0xFFFFFD50
+    .int -160
+    .int -688
     .4byte 0xFFFD6000
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x000002AF
+    .int 4
+    .int 687
     .4byte 0x00029FFF
     .4byte 0x03AFFFFF
-    .4byte 0x00000004
+    .int 4
     .4byte 0x000004BF
     .4byte 0x0004BFFF
     .4byte 0x04BFFFFF
     .4byte 0xBFFFFFFF
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xFFFFFB40
     .4byte 0xFFF93000
     .4byte 0xBFFFFFFF
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xFFFFFB40
     .4byte 0xFFFB4000
     .4byte 0xFB400000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte 0xFB500000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45625,26 +45621,26 @@ lbl_8040FF80:
     .4byte 0x05EFFFFF
     .4byte 0x0006DFFF
     .4byte 0x000006DF
-    .4byte 0x00000018
+    .int 24
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFE50000
     .4byte 0xFFFFD710
-    .4byte 0xFFFFFFE8
+    .int -24
     .4byte 0xEFFFFFFF
     .4byte 0x18EFFFFF
     .4byte 0x0018EFFF
     .4byte 0x000018EF
-    .4byte 0x00000018
+    .int 24
     .4byte NULL
     .4byte NULL
     .4byte 0x10000000
     .4byte 0xE8100000
     .4byte 0xFFE81000
     .4byte 0xFFFFE810
-    .4byte 0xFFFFFFE8
+    .int -24
     .4byte 0xEFFFFFFF
     .4byte NULL
     .4byte NULL
@@ -45673,15 +45669,15 @@ lbl_8040FF80:
     .4byte 0x18FFFFFF
     .4byte 0x0029FFFF
     .4byte 0x000029FF
-    .4byte 0x00000029
+    .int 41
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFF92000
     .4byte 0xFFFFFA20
-    .4byte 0xFFFFFF70
-    .4byte 0xFFFFFE10
+    .int -144
+    .int -496
     .4byte 0x29FFF800
     .4byte 0x002AD100
     .4byte 0x00001000
@@ -45701,7 +45697,7 @@ lbl_8040FF80:
     .4byte 0x92000000
     .4byte 0xFF920000
     .4byte 0xFFFF9200
-    .4byte 0xFFFFFF91
+    .int -111
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45718,27 +45714,27 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000029E
-    .4byte 0x00000001
+    .int 670
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFE
+    .int -2
     .4byte 0x8EFFFFFF
     .4byte 0x018EFFFF
     .4byte 0x00018EFF
-    .4byte 0x0000018E
-    .4byte 0x00000001
+    .int 398
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte 0x81000000
     .4byte 0xFE810000
     .4byte 0xFFFE8100
-    .4byte 0xFFFFFE81
-    .4byte 0xFFFFFFFE
+    .int -383
+    .int -2
     .4byte 0x8EFFFFFF
     .4byte 0x018EFFFF
     .4byte 0x00005CFF
@@ -45749,7 +45745,7 @@ lbl_8040FF80:
     .4byte 0x81000000
     .4byte 0xFE600000
     .4byte 0xFFFD6000
-    .4byte 0xFFFFFD60
+    .int -672
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45757,24 +45753,24 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004B
+    .int 75
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004B
+    .int 75
     .4byte 0x00004BFF
     .4byte 0x004BFFFF
     .4byte 0x4BFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x00001AFF
     .4byte 0x004AFFFF
     .4byte 0x4BFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFB4
+    .int -1
+    .int -76
     .4byte 0xFFFFB400
     .4byte 0xFFB40000
     .4byte 0xB4000000
-    .4byte 0xFFFFFFA1
+    .int -95
     .4byte 0xFFFF9200
     .4byte 0xFFA20000
     .4byte 0xB4000000
@@ -45790,7 +45786,7 @@ lbl_8040FF80:
     .4byte 0x0008E600
     .4byte 0x00010000
     .4byte NULL
-    .4byte 0xFFFFFFC4
+    .int -60
     .4byte 0xFFFFD600
     .4byte 0xFFD60000
     .4byte 0xD6000000
@@ -45820,24 +45816,24 @@ lbl_8040FF80:
     .4byte 0x00003CBB
     .4byte 0x00000CFF
     .4byte 0x000003FF
-    .4byte 0x0000008F
-    .4byte 0x0000001D
+    .int 143
+    .int 29
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBB4000
     .4byte 0xFFFFD000
     .4byte 0xFFFFF700
-    .4byte 0xFFFFFE10
-    .4byte 0xFFFFFF90
+    .int -496
+    .int -112
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000000B
+    .int 2
+    .int 11
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -45846,15 +45842,15 @@ lbl_8040FF80:
     .4byte 0x7FFC0000
     .4byte 0xEFF30000
     .4byte 0xFF800000
-    .4byte 0x00000004
+    .int 4
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000288
-    .4byte 0xFFFFFFF2
+    .int 648
+    .int -14
     .4byte 0x9FFFFFFB
     .4byte 0x1EFFFFFF
     .4byte 0x05FFFFFF
@@ -45862,8 +45858,8 @@ lbl_8040FF80:
     .4byte 0x002EFFFF
     .4byte 0x0006FFFF
     .4byte 0x8878EFFF
-    .4byte 0x0000006F
-    .4byte 0x000001EF
+    .int 111
+    .int 495
     .4byte 0x400009FF
     .4byte 0xD0004FFC
     .4byte 0xF700DFF3
@@ -45884,22 +45880,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x000004FF
     .4byte 0x000004FF
-    .4byte 0x00000288
+    .int 648
     .4byte NULL
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFEFFF
     .4byte 0x000004FF
     .4byte 0x000004FF
     .4byte 0xFFFFEFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88887AFF
     .4byte 0x000004FF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFD7788
     .4byte 0xFFFB0000
     .4byte 0xFFFB0000
@@ -45946,12 +45942,12 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000000C
-    .4byte 0x0000006F
-    .4byte 0x000000AF
-    .4byte 0x0000003B
-    .4byte 0x0000004F
+    .int 1
+    .int 12
+    .int 111
+    .int 175
+    .int 59
+    .int 79
     .4byte 0x000157AF
     .4byte 0x06CFFFFF
     .4byte 0xBFFFFFFF
@@ -45961,8 +45957,8 @@ lbl_8040FF80:
     .4byte 0xC5000000
     .4byte 0xF8000000
     .4byte 0xFC762000
-    .4byte 0xFFFFFD71
-    .4byte 0xFFFFFFFD
+    .int -655
+    .int -3
     .4byte 0xF96FFFFF
     .4byte 0xF707FFFF
     .4byte 0xF800DFFF
@@ -45974,20 +45970,20 @@ lbl_8040FF80:
     .4byte 0xE3000000
     .4byte 0xFC000000
     .4byte 0xFF500000
-    .4byte 0x000000EF
-    .4byte 0x000000FF
-    .4byte 0x000000EF
-    .4byte 0x000000BF
-    .4byte 0x0000007F
-    .4byte 0x0000000C
-    .4byte 0x00000001
+    .int 239
+    .int 255
+    .int 239
+    .int 191
+    .int 127
+    .int 12
+    .int 1
     .4byte NULL
     .4byte 0xFFFF104F
     .4byte 0xFFFF704F
     .4byte 0xFFFFF74F
-    .4byte 0xFFFFFFEF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -17
+    .int -1
+    .int -1
     .4byte 0xCFFFFFFF
     .4byte 0x1AFFFFFF
     .4byte 0xF8009FFF
@@ -45997,10 +45993,10 @@ lbl_8040FF80:
     .4byte 0xFC200000
     .4byte 0xFFFA4000
     .4byte 0xFFFFFB40
-    .4byte 0xFFFFFFFB
+    .int -5
     .4byte 0xFF800000
     .4byte 0xFFB00000
-    .4byte 0x44300000
+    .float 704.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -46013,18 +46009,18 @@ lbl_8040FF80:
     .4byte 0x000005CB
     .4byte 0x000005FF
     .4byte 0x000003FF
-    .4byte 0x000000EF
+    .int 239
     .4byte 0x004BFFFF
     .4byte 0x00004AFF
-    .4byte 0x0000005F
-    .4byte 0x0000004F
+    .int 95
+    .int 79
     .4byte 0xBBC8004F
     .4byte 0xFFFB004F
     .4byte 0xFFFD004F
     .4byte 0xFFFF104F
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0xFCBFFFFF
     .4byte 0xF707FFFF
     .4byte 0xF8009FFF
@@ -46038,9 +46034,9 @@ lbl_8040FF80:
     .4byte 0xFFF00000
     .4byte 0xFFE00000
     .4byte 0xFFB00000
-    .4byte 0x0000008F
-    .4byte 0x0000001C
-    .4byte 0x00000002
+    .int 143
+    .int 28
+    .int 2
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -46051,13 +46047,13 @@ lbl_8040FF80:
     .4byte 0xCFFFFCAF
     .4byte 0x19FFFFFF
     .4byte 0x0028CFFF
-    .4byte 0x0000005F
-    .4byte 0x0000004F
-    .4byte 0x0000004F
+    .int 95
+    .int 79
+    .int 79
     .4byte 0xF8008FFF
     .4byte 0xF703EFFF
     .4byte 0xFBAFFFFF
-    .4byte 0xFFFFFFFA
+    .int -6
     .4byte 0xFFEBA720
     .4byte 0xF8000000
     .4byte 0xF8000000
@@ -46072,8 +46068,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x000003BF
+    .int 2
+    .int 959
     .4byte 0x00006FFF
     .4byte 0x0006FFFF
     .4byte 0x003FFFFF
@@ -46090,9 +46086,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x0000000C
-    .4byte 0x0000009F
+    .int 2
+    .int 12
+    .int 159
     .4byte 0x000006FF
     .4byte NULL
     .4byte NULL
@@ -46115,7 +46111,7 @@ lbl_8040FF80:
     .4byte 0x00AFFFFC
     .4byte 0x08FFFFF8
     .4byte 0x6FFFFFF2
-    .4byte 0xFFFFFF90
+    .int -112
     .4byte 0xFFFFFC01
     .4byte 0xFFFFC10B
     .4byte 0x00003FFB
@@ -46136,7 +46132,7 @@ lbl_8040FF80:
     .4byte 0xFFFFC100
     .4byte 0x0006EFFF
     .4byte 0x000018DF
-    .4byte 0x00000001
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -46166,12 +46162,12 @@ lbl_8040FF80:
     .4byte 0x01CFFFF7
     .4byte 0x09FFFFF3
     .4byte 0x7FFFFFD0
-    .4byte 0x00000001
-    .4byte 0x00000009
-    .4byte 0x0000006F
+    .int 1
+    .int 9
+    .int 111
     .4byte 0x000004FF
     .4byte 0x000004ED
-    .4byte 0x00000023
+    .int 35
     .4byte NULL
     .4byte NULL
     .4byte 0xCFE30000
@@ -46187,10 +46183,10 @@ lbl_8040FF80:
     .4byte 0x04FFB9FF
     .4byte 0x006FFFFF
     .4byte 0x0004BFFF
-    .4byte 0x00000388
+    .int 904
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFF60
+    .int -160
     .4byte 0xFFFFFA00
     .4byte 0xFFFFC100
     .4byte 0xFFFC1000
@@ -46230,26 +46226,26 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x00010000
-    .4byte 0x000000EF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte 0x000000AB
+    .int 239
+    .int 255
+    .int 255
+    .int 255
+    .int 171
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xFFEFFFFE
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0xBBCFFFBB
     .4byte 0x004FFE00
     .4byte 0x005FFB00
     .4byte 0x008FFA00
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
+    .int -1
     .4byte 0xBBBDFFDB
     .4byte 0x000BFF70
     .4byte 0x000DFF40
@@ -46274,18 +46270,18 @@ lbl_8040FF80:
     .4byte 0x00BFF600
     .4byte 0x00EFF400
     .4byte 0xBBFFFCBB
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFEFF
+    .int -1
+    .int -1
+    .int -1
+    .int -257
     .4byte 0x003FFF00
     .4byte 0x004FFC00
     .4byte 0x007FFB00
     .4byte 0xBBDFFDBB
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -46331,20 +46327,20 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000007
-    .4byte 0x0000000E
-    .4byte 0x0000003F
+    .int 7
+    .int 14
+    .int 63
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000344
+    .int 836
     .4byte 0x029CFFFF
     .4byte 0x7FFFFFFF
-    .4byte 0xFFFFFC54
+    .int -940
     .4byte 0xFFFFF200
     .4byte 0xFFFFF000
     .4byte NULL
     .4byte NULL
-    .4byte 0x42000000
+    .float 32.0
     .4byte 0xFFE92000
     .4byte 0xFFFFF600
     .4byte 0xCFFFFF20
@@ -46358,22 +46354,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x0000003F
-    .4byte 0x0000000E
-    .4byte 0x00000009
-    .4byte 0x00000001
+    .int 79
+    .int 63
+    .int 14
+    .int 9
+    .int 1
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000019
+    .int 25
     .4byte 0xFFFFF100
     .4byte 0xFFFFF600
-    .4byte 0xFFFFFE11
-    .4byte 0xFFFFFFCD
+    .int -495
+    .int -51
     .4byte 0xEFFFFFFF
     .4byte 0x5FFFFFFF
     .4byte 0x2EFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x1FFFFFB0
     .4byte 0x6FFFFF80
     .4byte 0xDFFFFE20
@@ -46390,7 +46386,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x000003DF
+    .int 991
     .4byte 0x00003EFF
     .4byte 0x0000CFFF
     .4byte 0x0005FFFF
@@ -46409,12 +46405,12 @@ lbl_8040FF80:
     .4byte 0xFFE30034
     .4byte 0xFFFC10EF
     .4byte 0xFFFFB2FF
-    .4byte 0xFFFFFDFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -513
+    .int -1
+    .int -1
     .4byte 0xDFFFFFFF
     .4byte 0x3EFFFFFF
-    .4byte 0x44441000
+    .float 784.25
     .4byte 0xFFFF1000
     .4byte 0xFFFD0000
     .4byte 0xFFF90000
@@ -46426,14 +46422,14 @@ lbl_8040FF80:
     .4byte 0x0001EFFF
     .4byte 0x00007FFF
     .4byte 0x000007FF
-    .4byte 0x00000029
+    .int 41
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0xF9000000
     .4byte 0xFF400000
     .4byte 0xFFF82003
-    .4byte 0xFFFFFEFF
+    .int -257
     .4byte 0xEFFFFFFF
     .4byte 0x03478886
     .4byte NULL
@@ -46441,7 +46437,7 @@ lbl_8040FF80:
     .4byte 0x05FFFFFF
     .4byte 0x03EFFFFF
     .4byte 0x9FFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFB53EFF
     .4byte 0x41000010
     .4byte NULL
@@ -46468,15 +46464,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000000C
+    .int 1
+    .int 12
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x43000000
+    .float 128.0
     .4byte 0xFF500000
     .4byte NULL
     .4byte NULL
@@ -46494,8 +46490,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000004F
-    .4byte 0x0000002F
+    .int 79
+    .int 47
     .4byte 0x0660000C
     .4byte 0x9FFC1008
     .4byte 0xFFFFC105
@@ -46526,14 +46522,14 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000001D
+    .int 29
     .4byte 0x00026AEB
     .4byte 0x17CFFF90
     .4byte 0xBFFFF902
     .4byte 0xEFFF9006
     .4byte 0x8FF90009
     .4byte 0x0540000D
-    .4byte 0x0000002F
+    .int 47
     .4byte 0xFF700000
     .4byte 0xDAEEA730
     .4byte 0xD62EFFFD
@@ -46547,7 +46543,7 @@ lbl_8040FF80:
     .4byte 0x60000000
     .4byte 0xF5000000
     .4byte 0xF7000000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -46558,8 +46554,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x0000003F
-    .4byte 0x00000008
+    .int 63
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -46587,9 +46583,9 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x0000001C
-    .4byte 0x000000CF
+    .int 1
+    .int 28
+    .int 207
     .4byte NULL
     .4byte NULL
     .4byte 0x0000158A
@@ -46601,10 +46597,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBA85100
-    .4byte 0xFFFFFFA3
+    .int -93
     .4byte 0x778BFFFF
     .4byte 0x000016DF
-    .4byte 0x00000008
+    .int 8
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -46678,9 +46674,9 @@ lbl_8040FF80:
     .4byte 0xFFFC1000
     .4byte 0xFFC10000
     .4byte 0xD7100000
-    .4byte 0x000001DF
-    .4byte 0x0000003E
-    .4byte 0x00000003
+    .int 479
+    .int 62
+    .int 3
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -46695,10 +46691,10 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x00002442
-    .4byte 0x00000006
+    .int 6
     .4byte 0x000005CF
     .4byte 0x778BEFFF
-    .4byte 0xFFFFFFA4
+    .int -92
     .4byte 0xBBB86100
     .4byte NULL
     .4byte NULL
@@ -46728,8 +46724,8 @@ lbl_8040FF80:
     .4byte 0xF8830BFF
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFF5445F
     .4byte 0xFFE0002F
     .4byte 0xFFF0006F
@@ -46771,7 +46767,7 @@ lbl_8040FF80:
     .4byte 0xFFFB0000
     .4byte 0xFFF90000
     .4byte 0xFFFDBB50
-    .4byte 0xFFFFFF70
+    .int -144
     .4byte 0xDFFFFF40
     .4byte 0xAFFFFF40
     .4byte 0x0007FFFF
@@ -46795,11 +46791,11 @@ lbl_8040FF80:
     .4byte 0xFFFFA002
     .4byte 0xFFFFF206
     .4byte 0xFFFFFB0A
-    .4byte 0xFFFFFF8E
+    .int -114
     .4byte 0xC9FFFFFF
     .4byte 0x50DFFFFF
     .4byte 0xDFFFFF10
-    .4byte 0xFFFFFD00
+    .int -768
     .4byte 0xFFFFF900
     .4byte 0xFFFFF500
     .4byte 0xFFFFE000
@@ -46856,16 +46852,16 @@ lbl_8040FF80:
     .4byte 0xF883AFFF
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xF99FFFFC
     .4byte 0xF66FFFFA
     .4byte 0xF66FFFFA
     .4byte 0xF66FFFFA
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
+    .int -192
+    .int -192
     .4byte 0x7FFFFF40
     .4byte 0x3FFFFF40
     .4byte 0x4FFFFF40
@@ -46889,7 +46885,7 @@ lbl_8040FF80:
     .4byte 0xF66FFFFA
     .4byte 0xF66FFFFA
     .4byte 0xFBBFFFFD
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFDDFFFFE
     .4byte 0xF66FFFFA
     .4byte 0xF66FFFFA
@@ -46897,7 +46893,7 @@ lbl_8040FF80:
     .4byte 0x4FFFFF40
     .4byte 0x3FFFFF40
     .4byte 0xAFFFFF40
-    .4byte 0xFFFFFF40
+    .int -192
     .4byte 0xCFFFFF40
     .4byte 0x4FFFFF40
     .4byte 0x4FFFFF40
@@ -46922,16 +46918,16 @@ lbl_8040FF80:
     .4byte 0xF66FFFFA
     .4byte 0xF66FFFFA
     .4byte 0xF99FFFFC
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00BFFFFF
     .4byte 0x00BFFFFF
     .4byte 0x4FFFFF40
     .4byte 0x4FFFFF40
     .4byte 0x3FFFFF40
     .4byte 0x7FFFFF40
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
+    .int -192
+    .int -192
     .4byte 0x10000000
     .4byte NULL
     .4byte 0x0008FFFF
@@ -46947,7 +46943,7 @@ lbl_8040FF80:
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
-    .4byte 0xC0000000
+    .float -2.0
     .4byte 0x50000000
     .4byte NULL
     .4byte 0x00BFFFFF
@@ -46976,7 +46972,7 @@ lbl_8040FF80:
     .4byte 0x03BBFFFD
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFEEEE
     .4byte 0x00002555
     .4byte 0x00004FFF
@@ -46984,7 +46980,7 @@ lbl_8040FF80:
     .4byte 0xBBBBCFFF
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xEEEFFFFF
     .4byte 0x55400000
     .4byte 0xFFB00000
@@ -46992,8 +46988,8 @@ lbl_8040FF80:
     .4byte 0xFFEBBBBB
     .4byte NULL
     .4byte 0x44444410
-    .4byte 0xFFFFFF40
-    .4byte 0xFFFFFF40
+    .int -192
+    .int -192
     .4byte 0x8FFFFF40
     .4byte 0x7FFFFF40
     .4byte 0x7FFFFF40
@@ -47006,19 +47002,19 @@ lbl_8040FF80:
     .4byte 0x0000FFFF
     .4byte 0x0000FFFF
     .4byte 0x0000FFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x7777AFFF
     .4byte 0x00004FFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFC447FFF
     .4byte 0xFB003FFF
     .4byte 0xFC447FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFD77777
     .4byte 0xFFB00000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFC445FF
     .4byte 0xFFB000EF
     .4byte 0xFFC445FF
@@ -47038,20 +47034,20 @@ lbl_8040FF80:
     .4byte 0x0001FFFF
     .4byte 0x0000ABBB
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFB005FFF
     .4byte 0xFB003FFF
     .4byte 0xFD88AFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBCFFF
     .4byte 0x00003FFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFB001FF
     .4byte 0xFFB000EF
     .4byte 0xFFD888FF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBBBBB
     .4byte 0xFFB00000
     .4byte 0xFFF80000
@@ -47071,7 +47067,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x7777AFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBCFFF
     .4byte 0x00004FFF
     .4byte 0x00004FFF
@@ -47079,15 +47075,15 @@ lbl_8040FF80:
     .4byte 0x00004FFF
     .4byte 0x00001444
     .4byte 0xFFD77777
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBBBBB
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
-    .4byte 0x44200000
+    .float 640.0
     .4byte 0x77778870
-    .4byte 0xFFFFFFF1
+    .int -15
     .4byte 0xBBBBBBA0
     .4byte NULL
     .4byte NULL
@@ -47112,16 +47108,16 @@ lbl_8040FF80:
     .4byte 0x0FFFFFB2
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x444AFFFF
     .4byte 0x000AFFFF
     .4byte 0x000BFFFF
     .4byte 0x444EFFFA
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFE0
-    .4byte 0xFFFFFFF0
+    .int -32
+    .int -16
     .4byte 0xFA444440
     .4byte 0xD1000000
     .4byte 0x20000000
@@ -47142,21 +47138,21 @@ lbl_8040FF80:
     .4byte 0x0EFFFFA7
     .4byte 0x0FFFFFA7
     .4byte 0x0FFFFFA7
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFFC444
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
+    .int -256
     .4byte 0x8FFFFF00
     .4byte 0x7FFFFF00
     .4byte 0x8FFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
+    .int -256
     .4byte 0xAFFFFF00
     .4byte 0x00003294
     .4byte 0x000003FF
@@ -47177,15 +47173,15 @@ lbl_8040FF80:
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0xFFFFEBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x7778FFFF
     .4byte 0x5100EFFF
     .4byte 0xFFDAFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x7FFFFF00
     .4byte 0x7FFFFF00
     .4byte 0xDFFFFF00
-    .4byte 0xFFFFFF10
+    .int -240
     .4byte 0xFB777700
     .4byte 0xF7470000
     .4byte 0xFFFF7000
@@ -47232,7 +47228,7 @@ lbl_8040FF80:
     .4byte 0x0007FFFF
     .4byte NULL
     .4byte 0xDB710000
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEFFFFF
     .4byte 0xFD9FFFFC
     .4byte 0xF87FFFFB
@@ -47240,16 +47236,16 @@ lbl_8040FF80:
     .4byte 0x907FFFFB
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44333334
     .4byte 0x00577771
     .4byte 0x00CFFFF4
     .4byte 0x00BFFFF4
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFA0
-    .4byte 0xFFFFFFB0
+    .int -96
+    .int -80
     .4byte 0x4CFFFFB0
     .4byte 0x0BFFFFB0
     .4byte 0x0BFFFFB0
@@ -47271,16 +47267,16 @@ lbl_8040FF80:
     .4byte 0x808FFFFB
     .4byte 0x808FFFFA
     .4byte 0x00BFFFF5
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44CFFFF7
     .4byte 0x00BFFFF3
     .4byte 0x00BFFFF3
     .4byte 0x24CFFFF7
     .4byte 0x7FFFFFFF
     .4byte 0x0BFFFFB0
-    .4byte 0xFFFFFFB0
-    .4byte 0xFFFFFFB0
+    .int -80
+    .int -80
     .4byte 0x4CFFFFB0
     .4byte 0x0BFFFFB0
     .4byte 0x0BFFFFB0
@@ -47338,7 +47334,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -47346,7 +47342,7 @@ lbl_8040FF80:
     .4byte 0x0BFFFFB0
     .4byte 0x0BFFFFB0
     .4byte 0xBEFFFFB0
-    .4byte 0xFFFFFFB0
+    .int -80
     .4byte 0x8DFFFFB0
     .4byte 0x0BFFFFB0
     .4byte 0x03444430
@@ -47364,12 +47360,12 @@ lbl_8040FF80:
     .4byte 0x0004FFFF
     .4byte 0x00014444
     .4byte 0x10000000
-    .4byte 0xC1000000
+    .float -8.0
     .4byte 0xFC100000
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFE
-    .4byte 0xFFFFFFFF
+    .int -2
+    .int -1
     .4byte 0x45FFFFFF
     .4byte 0x00EFFFFF
     .4byte 0x00FFFFFF
@@ -47386,7 +47382,7 @@ lbl_8040FF80:
     .4byte 0x00008FFF
     .4byte 0x00002FFC
     .4byte 0x00000C90
-    .4byte 0x00000200
+    .int 512
     .4byte NULL
     .4byte 0x07888888
     .4byte 0x1FFFFFFF
@@ -47406,8 +47402,8 @@ lbl_8040FF80:
     .4byte 0x0BFFFFFF
     .4byte 0x0EFFFFFF
     .4byte 0x5FFFFFFF
-    .4byte 0x40000000
-    .4byte 0x40000000
+    .float 2.0
+    .float 2.0
     .4byte 0x50000000
     .4byte 0x80000000
     .4byte 0xA0000000
@@ -47431,7 +47427,7 @@ lbl_8040FF80:
     .4byte 0xFB01CFFF
     .4byte 0xFB1CFFFC
     .4byte 0xBFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFA8FF
     .4byte 0xFFFD00DF
     .4byte 0xFFE3003F
@@ -47467,15 +47463,15 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte 0x005EFFC0
     .4byte 0x0003CF60
-    .4byte 0x00000300
+    .int 768
     .4byte NULL
     .4byte 0xBBBBBBD8
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte 0x88888870
     .4byte NULL
     .4byte 0x00003444
@@ -47499,13 +47495,13 @@ lbl_8040FF80:
     .4byte 0xFFF00000
     .4byte 0xFFE0028D
     .4byte 0xFFF9DFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFEBA74
     .4byte 0xFFF10000
     .4byte NULL
     .4byte 0x008B1000
     .4byte 0x6DFFD300
-    .4byte 0xFFFFFF40
+    .int -192
     .4byte 0xFFFFEA40
     .4byte 0xFC840000
     .4byte 0x10100000
@@ -47530,7 +47526,7 @@ lbl_8040FF80:
     .4byte 0xFFE00000
     .4byte 0xFFF30000
     .4byte 0xFFFEBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x77777777
     .4byte NULL
     .4byte 0xBBBBBBBB
@@ -47558,21 +47554,21 @@ lbl_8040FF80:
     .4byte 0xFB000BFF
     .4byte 0xFB000BFF
     .4byte 0xFB000BFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFD88888
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFEBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFD88888
-    .4byte 0xFFFFFF10
+    .int -240
     .4byte 0xDFFFFF00
     .4byte 0xBFFFFF00
     .4byte 0xBFFFFF00
     .4byte 0xBFFFFF00
     .4byte 0xEFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte 0xDFFFFF00
     .4byte 0x0000FFFF
     .4byte 0x0000FFFF
@@ -47594,7 +47590,7 @@ lbl_8040FF80:
     .4byte 0xFFB00000
     .4byte 0xFFB00000
     .4byte 0xFFEBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFD88888
     .4byte 0xFFA00000
     .4byte NULL
@@ -47602,7 +47598,7 @@ lbl_8040FF80:
     .4byte 0xBFFFFF00
     .4byte 0xBFFFFF00
     .4byte 0xEFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte 0xDFFFFF00
     .4byte 0xAFFFFE00
     .4byte NULL
@@ -47616,22 +47612,22 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x44442000
+    .float 784.5
     .4byte 0xFFFF8000
     .4byte 0xFFFF7000
     .4byte NULL
@@ -47649,7 +47645,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBEFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
@@ -47657,7 +47653,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFCBBBB
     .4byte 0xFFF40000
     .4byte 0xFFF40035
@@ -47665,7 +47661,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888884
-    .4byte 0xFFFFFFF8
+    .int -8
     .4byte 0xBBBBBBB5
     .4byte NULL
     .4byte NULL
@@ -47701,21 +47697,21 @@ lbl_8040FF80:
     .4byte 0xFFFE2000
     .4byte 0xFFFFB000
     .4byte 0xFFFFF600
-    .4byte 0xFFFFFE20
+    .int -480
     .4byte 0x009FFFC1
     .4byte 0x02FFFE30
     .4byte 0x0AFFF300
     .4byte 0x3FFF6000
     .4byte 0x16C40005
-    .4byte 0x00000006
-    .4byte 0x00000001
+    .int 6
+    .int 1
     .4byte NULL
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x00000BFF
     .4byte 0x74446FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xEFFFFFFE
     .4byte NULL
     .4byte 0xFFF40000
@@ -47744,15 +47740,15 @@ lbl_8040FF80:
     .4byte 0x00BFFFFB
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x4AFFFFF7
     .4byte 0x07FFFFF3
     .4byte 0x07FFFFF4
     .4byte 0x07FFFFF7
     .4byte NULL
     .4byte NULL
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0x44444444
     .4byte 0x1FFFFFFF
     .4byte 0x0EEEEEFF
@@ -47762,8 +47758,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444440
-    .4byte 0xFFFFFFF0
-    .4byte 0xFFFFFFF0
+    .int -16
+    .int -16
     .4byte 0x5FFFFFE0
     .4byte 0x4FFFFFB0
     .4byte 0x00BFFFFD
@@ -47775,7 +47771,7 @@ lbl_8040FF80:
     .4byte 0x00BFFFFB
     .4byte 0x00BFFFFE
     .4byte 0x8BFFFFF9
-    .4byte 0xFFFFFFF7
+    .int -9
     .4byte 0xBDFFFFF5
     .4byte 0x07FFFFF4
     .4byte 0x07FFFFF4
@@ -47806,14 +47802,14 @@ lbl_8040FF80:
     .4byte 0x00BFFFFB
     .4byte 0x00BFFFFC
     .4byte 0x01CFFFFF
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte 0x8BFFFFF4
     .4byte 0x07FFFFF4
     .4byte 0x07FFFFF4
     .4byte 0x07FFFFF4
     .4byte 0x07FFFFF4
     .4byte 0x7DFFFFF4
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte 0x0AFFFF82
     .4byte 0x06FFFFB8
     .4byte 0x01EFFFFE
@@ -47845,7 +47841,7 @@ lbl_8040FF80:
     .4byte 0x08FFFFFA
     .4byte 0x08FFFFFC
     .4byte 0x07FFFFE4
-    .4byte 0x00000010
+    .int 16
     .4byte 0x0001DFFF
     .4byte 0x001CFFFF
     .4byte 0x01CFFF76
@@ -47873,19 +47869,19 @@ lbl_8040FF80:
     .4byte NULL
     .4byte 0x00000EFF
     .4byte 0x00001FFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44445FFF
     .4byte 0xAAAABFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte 0xFFE00000
     .4byte 0xFFF10000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFF5445F
     .4byte 0xFFFBAABF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -47893,7 +47889,7 @@ lbl_8040FF80:
     .4byte 0xFFFFF000
     .4byte 0xFFFFF000
     .4byte 0xFFFFFBB3
-    .4byte 0xFFFFFFF5
+    .int -11
     .4byte 0x28876666
     .4byte 0x00046666
     .4byte 0x000CFFFF
@@ -47904,25 +47900,25 @@ lbl_8040FF80:
     .4byte 0x00011111
     .4byte 0x66667FFF
     .4byte 0x66667FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xAAAABFFF
     .4byte 0x44445FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xEEEEEFFF
     .4byte 0x11112FFF
     .4byte 0xFFF7667F
     .4byte 0xFFF7667F
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFBAAAA
     .4byte 0xFFF54444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFEEEEE
     .4byte 0xFFF21111
     .4byte 0xFFFFF882
     .4byte 0xFFFFE000
     .4byte 0xFFFFF100
     .4byte 0xAAAAA000
-    .4byte 0x44444000
+    .float 785.0
     .4byte 0xFFFFF000
     .4byte 0xEEEED000
     .4byte 0x11111100
@@ -47935,23 +47931,23 @@ lbl_8040FF80:
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
     .4byte 0xEEEEEFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x44444444
     .4byte 0xAAAAAAAA
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFB777777
     .4byte 0xF7000000
     .4byte 0xFDBBBBBB
     .4byte 0xFFFEEEEE
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x44444444
     .4byte 0xAAAAAAAA
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x777777BF
-    .4byte 0x0000007F
+    .int 127
     .4byte 0xBBBBBBDF
     .4byte 0xEEEEEFF4
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte 0x44444441
     .4byte 0xAAAA2000
     .4byte 0xFFFF4000
@@ -47966,22 +47962,22 @@ lbl_8040FF80:
     .4byte 0x0004FFFF
     .4byte 0x0004FFFF
     .4byte 0x00014444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFC888888
     .4byte 0xF6000000
     .4byte 0xFC888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFDBBBBBB
     .4byte 0xF8000000
-    .4byte 0x42000000
-    .4byte 0xFFFFFFFF
+    .float 32.0
+    .int -1
     .4byte 0x888888CF
-    .4byte 0x0000006F
+    .int 111
     .4byte 0x888888CF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBBDF
-    .4byte 0x0000008F
-    .4byte 0x00000013
+    .int 143
+    .int 19
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
     .4byte 0xFFFF4000
@@ -48002,11 +47998,11 @@ lbl_8040FF80:
     .4byte 0xBBB8001D
     .4byte 0xFFFC000D
     .4byte 0x88850009
-    .4byte 0x00000006
-    .4byte 0x00000003
+    .int 6
+    .int 3
     .4byte 0xFFFFA000
     .4byte 0xFFFFA5BB
-    .4byte 0x43000000
+    .float 128.0
     .4byte 0xFE500004
     .4byte 0xFFF60007
     .4byte 0xFFFF600A
@@ -48016,7 +48012,7 @@ lbl_8040FF80:
     .4byte 0xFFCAABCE
     .4byte 0x62000000
     .4byte 0xFFC73000
-    .4byte 0xFFFFFD20
+    .int -736
     .4byte 0xFFFFF600
     .4byte 0xFFFF6000
     .4byte 0xFFF60000
@@ -48032,21 +48028,21 @@ lbl_8040FF80:
     .4byte 0x05888888
     .4byte 0x444428FF
     .4byte 0x00000488
-    .4byte 0x44440000
+    .float 784.0
     .4byte 0xFFFF0000
     .4byte 0xFFFE0000
     .4byte NULL
-    .4byte 0x0000007F
+    .int 127
     .4byte 0x8887008F
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x888FFFFF
     .4byte 0x000EFFFF
     .4byte 0x000FFFFF
     .4byte 0x000FFFFF
     .4byte 0x001FFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFC0
+    .int -1
+    .int -1
+    .int -64
     .4byte 0xF8888850
     .4byte 0xE0000000
     .4byte 0xF0000000
@@ -48075,7 +48071,7 @@ lbl_8040FF80:
     .4byte 0x000FFFFF
     .4byte 0x000EFFFF
     .4byte 0x888FFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBFFFFF
     .4byte 0x000FFFFF
     .4byte 0xF5444200
@@ -48083,7 +48079,7 @@ lbl_8040FF80:
     .4byte 0xF0000000
     .4byte 0xE0000000
     .4byte 0xF8888882
-    .4byte 0xFFFFFFF5
+    .int -11
     .4byte 0xFBBBBBB3
     .4byte 0xF0000000
     .4byte 0x0BFFFF37
@@ -48117,7 +48113,7 @@ lbl_8040FF80:
     .4byte 0xF0000000
     .4byte 0xF0000000
     .4byte 0xF0000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -48126,7 +48122,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000333
+    .int 819
     .4byte 0x00000FFF
     .4byte 0x00000FFF
     .4byte 0x00000FFF
@@ -48189,7 +48185,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte 0x0003FFFF
     .4byte 0x0008FFFF
     .4byte 0x001EFFFF
@@ -48202,7 +48198,7 @@ lbl_8040FF80:
     .4byte 0xFFFFD000
     .4byte 0xFFFFF400
     .4byte 0xFFFFFB00
-    .4byte 0xFFFFFF40
+    .int -192
     .4byte 0x5FFFFFC0
     .4byte 0x08FFFFF8
     .4byte 0x009FFFFF
@@ -48214,8 +48210,8 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x50000000
-    .4byte 0x0000001C
-    .4byte 0x000001CF
+    .int 28
+    .int 463
     .4byte 0x00002CFF
     .4byte 0x0005EFFF
     .4byte 0x01AFFFFB
@@ -48226,15 +48222,15 @@ lbl_8040FF80:
     .4byte 0xFFFE3000
     .4byte 0xFFC20000
     .4byte 0xF8000000
-    .4byte 0x40000000
+    .float 2.0
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x000BFFFF
     .4byte 0x00009FFF
     .4byte 0x000008FF
-    .4byte 0x0000005E
-    .4byte 0x00000001
+    .int 94
+    .int 1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -48245,7 +48241,7 @@ lbl_8040FF80:
     .4byte 0x9FFFFD40
     .4byte 0x04BFFFF8
     .4byte 0x00049FF3
-    .4byte 0x00000340
+    .int 832
     .4byte 0x00002100
     .4byte 0x00007FDB
     .4byte 0x0000AFFF
@@ -48261,15 +48257,15 @@ lbl_8040FF80:
     .4byte 0xFC000FFF
     .4byte 0xF5000EFF
     .4byte 0xE4445FFF
-    .4byte 0xFFFFFFFF
-    .4byte 0x44400000
+    .int -1
+    .float 768.0
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFE00000
     .4byte 0xFFF54444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -48277,7 +48273,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444400
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte 0x001FFFFF
     .4byte 0x006FFFF4
     .4byte 0x00BFFF70
@@ -48286,7 +48282,7 @@ lbl_8040FF80:
     .4byte 0x5FFE3000
     .4byte 0x4DE30000
     .4byte 0x01300000
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x00001FFF
     .4byte 0x00000FFF
     .4byte 0x00000FFF
@@ -48294,7 +48290,7 @@ lbl_8040FF80:
     .4byte 0x00000FFF
     .4byte 0x00000FFF
     .4byte 0x00000EFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFF10000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
@@ -48302,7 +48298,7 @@ lbl_8040FF80:
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFE00000
-    .4byte 0xFFFFFE00
+    .int -512
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -48319,7 +48315,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBFFF
     .4byte 0x00000FFF
     .4byte 0x00000FFF
@@ -48327,7 +48323,7 @@ lbl_8040FF80:
     .4byte 0x00000FFF
     .4byte 0x00000FFF
     .4byte 0xFFF88888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFBBBBB
     .4byte 0xFFF00000
     .4byte 0xFFF00000
@@ -48355,7 +48351,7 @@ lbl_8040FF80:
     .4byte 0x00000FFF
     .4byte 0x00000FFF
     .4byte 0xBBBBBFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888887
     .4byte NULL
     .4byte 0xFFF00000
@@ -48363,7 +48359,7 @@ lbl_8040FF80:
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFFBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x78888888
     .4byte NULL
     .4byte NULL
@@ -48371,7 +48367,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xBBBBBBB2
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte 0x88888882
     .4byte NULL
     .4byte NULL
@@ -48382,30 +48378,30 @@ lbl_8040FF80:
     .4byte 0x14444444
     .4byte 0x4FFFFFFF
     .4byte 0x4FFFFFFF
-    .4byte 0x0000004A
+    .int 74
     .4byte 0xFFFF35FF
     .4byte 0xFFFF41FF
     .4byte 0x444410AF
-    .4byte 0x0000005F
+    .int 95
     .4byte 0x4444400E
     .4byte 0xFFFFF34C
     .4byte 0xFFFFD8FF
-    .4byte 0x40000000
+    .float 2.0
     .4byte 0xF8000001
     .4byte 0xFFB10004
     .4byte 0xFFFD3007
     .4byte 0xFFFFF30C
     .4byte 0xFFFD931F
     .4byte 0xFFA6345A
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xA8400000
     .4byte 0xFFFEA630
-    .4byte 0xFFFFFF30
+    .int -208
     .4byte 0xFFFFF600
     .4byte 0xFFFF6000
     .4byte 0xFFE50000
     .4byte 0xFF844400
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte NULL
     .4byte NULL
     .4byte 0x04888888
@@ -48422,7 +48418,7 @@ lbl_8040FF80:
     .4byte 0x000008FF
     .4byte 0x000008FF
     .4byte 0xBBBB27FF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFF50000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
@@ -48430,7 +48426,7 @@ lbl_8040FF80:
     .4byte 0xFFF40000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte 0x8FFFFF00
     .4byte 0x7FFFFF00
     .4byte 0x8FFFFF00
@@ -48449,22 +48445,22 @@ lbl_8040FF80:
     .4byte 0xFFFF37FF
     .4byte 0x888817FF
     .4byte 0x000007FF
-    .4byte 0x0000001F
+    .int 31
     .4byte 0xFFFF400E
     .4byte 0xFFFF401F
     .4byte 0xFFFF404F
     .4byte 0xFFFF406F
     .4byte 0xFFF74444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFFA8FF
     .4byte 0xFFFFA7FF
     .4byte 0xFFFF77FF
     .4byte 0xFFFF66FF
     .4byte 0xFFFF37FF
     .4byte 0xAFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFE00
+    .int -256
+    .int -512
     .4byte 0xFFF50000
     .4byte 0xFFF40000
     .4byte 0xFFF40000
@@ -48483,7 +48479,7 @@ lbl_8040FF80:
     .4byte 0xFFFF35FF
     .4byte 0xFFFF6DFF
     .4byte 0xFFFFEFFF
-    .4byte 0xFFFFFFFE
+    .int -2
     .4byte 0x4444DF92
     .4byte 0x00002200
     .4byte 0xFFFF07FF
@@ -48492,17 +48488,17 @@ lbl_8040FF80:
     .4byte 0xFF6008FF
     .4byte 0xF80007FF
     .4byte 0x600002EF
-    .4byte 0x00000017
+    .int 23
     .4byte NULL
     .4byte 0xFFF5FD61
     .4byte 0xFFF5EFFB
     .4byte 0xFFF5EFFA
     .4byte 0xFFF4EFF6
     .4byte 0xFFFBFFF3
-    .4byte 0xFFFFFF90
+    .int -112
     .4byte 0x88888500
     .4byte NULL
-    .4byte 0x00000240
+    .int 576
     .4byte 0x000008FF
     .4byte 0x00000BFF
     .4byte 0x00000EFF
@@ -48525,7 +48521,7 @@ lbl_8040FF80:
     .4byte 0x08FFFFF8
     .4byte 0x07FFFFF7
     .4byte 0x08FFFFF8
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -48533,7 +48529,7 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFF7
+    .int -9
     .4byte 0x0003FFFF
     .4byte 0x0008FFFF
     .4byte 0x000DFFFF
@@ -48550,15 +48546,15 @@ lbl_8040FF80:
     .4byte 0xF40002FF
     .4byte 0xF40006FF
     .4byte 0xF4000AFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFF8
+    .int -1
+    .int -1
+    .int -1
+    .int -1
+    .int -1
+    .int -1
+    .int -1
+    .int -1
+    .int -8
     .4byte 0xFFA44442
     .4byte 0xFF700000
     .4byte 0xFFB00000
@@ -48582,14 +48578,14 @@ lbl_8040FF80:
     .4byte 0xF31FFFE2
     .4byte 0xF39FFF70
     .4byte 0xF8FFFFEF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xD9FFFFF9
     .4byte 0x67FFFFF7
     .4byte 0x07FFFFF7
     .4byte 0x07FFFFF7
     .4byte 0x08FFFFF8
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFF1000
     .4byte 0xFFFF6000
     .4byte 0xDFFFC000
@@ -48614,7 +48610,7 @@ lbl_8040FF80:
     .4byte 0xF4000000
     .4byte 0xF4000000
     .4byte 0x31000000
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x4AFFFFFA
     .4byte 0x07FFFFF7
     .4byte 0x08FFFFF8
@@ -48624,7 +48620,7 @@ lbl_8040FF80:
     .4byte 0x01444441
     .4byte 0xFFFB9FFB
     .4byte 0x44420BFD
-    .4byte 0x000001A3
+    .int 419
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -48640,24 +48636,24 @@ lbl_8040FF80:
     .4byte 0x04FFFFF8
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte 0x0ABBBB80
     .4byte 0x1FFFFFC0
     .4byte 0x0FFFFFB0
     .4byte NULL
     .4byte 0x44444430
-    .4byte 0xFFFFFFB0
-    .4byte 0xFFFFFFB0
+    .int -80
+    .int -80
     .4byte 0x1FFFFFB0
     .4byte 0x0FFFFFB0
     .4byte 0x0FFFFFB0
@@ -48672,7 +48668,7 @@ lbl_8040FF80:
     .4byte 0x04FFFFF7
     .4byte NULL
     .4byte 0x68888888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x9AABBBBB
     .4byte 0x04400000
     .4byte 0x5FF91000
@@ -48680,7 +48676,7 @@ lbl_8040FF80:
     .4byte 0x0AFFFF80
     .4byte 0x0EFFFFB0
     .4byte 0x8FFFFFD8
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBFFFFFEB
     .4byte 0x0FFFFFB0
     .4byte 0x0FFFFFB0
@@ -48712,7 +48708,7 @@ lbl_8040FF80:
     .4byte 0x001B8788
     .4byte 0x2EFFFFB0
     .4byte 0xEFFFFFB0
-    .4byte 0xFFFFFFB0
+    .int -80
     .4byte 0x4EFFFFB0
     .4byte 0x0FFFFFB0
     .4byte 0x0EFFFFB0
@@ -48738,7 +48734,7 @@ lbl_8040FF80:
     .4byte 0x0006BBBB
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -48746,7 +48742,7 @@ lbl_8040FF80:
     .4byte 0xBBBA6100
     .4byte NULL
     .4byte 0xBBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte NULL
@@ -48754,7 +48750,7 @@ lbl_8040FF80:
     .4byte 0x0FFFFFB0
     .4byte 0x0FFFFFB0
     .4byte 0xBFFFFFB0
-    .4byte 0xFFFFFFB0
+    .int -80
     .4byte 0x8FFFFFB0
     .4byte 0x0FFFFFB0
     .4byte 0x04444430
@@ -48768,27 +48764,27 @@ lbl_8040FF80:
     .4byte 0x08FFFFEB
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00000FFF
     .4byte 0x77778FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xBBBBBFFF
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFF00000
     .4byte 0xFFF87777
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFBBBBB
     .4byte NULL
-    .4byte 0x44443000
+    .float 784.75
     .4byte 0xFFFFB000
     .4byte 0xFFFFA000
     .4byte NULL
     .4byte 0x77777840
-    .4byte 0xFFFFFF80
+    .int -128
     .4byte 0xBEFFFF80
     .4byte 0x08FFFFB0
     .4byte 0x08FFFFA7
@@ -48796,7 +48792,7 @@ lbl_8040FF80:
     .4byte 0x08FFFFB1
     .4byte 0x08FFFFB1
     .4byte 0x07FFFF98
-    .4byte 0x00000007
+    .int 7
     .4byte NULL
     .4byte 0x00001EFF
     .4byte 0xFFFE5EFF
@@ -48831,19 +48827,19 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte 0x77777777
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xDBBBBFFF
     .4byte 0x70000EFF
     .4byte 0xB7778FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xDBBBBFFF
     .4byte 0x70000EFF
     .4byte 0x77777777
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBBBBF
     .4byte 0xFFB0000E
     .4byte 0xFFD7778F
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFEBBBBF
     .4byte 0xFFB0000E
     .4byte 0x78885000
@@ -48863,29 +48859,29 @@ lbl_8040FF80:
     .4byte NULL
     .4byte NULL
     .4byte 0xA4445FFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x90001FFF
     .4byte 0x30000FFF
     .4byte 0x00000CFF
     .4byte 0x000005EF
-    .4byte 0x00000004
+    .int 4
     .4byte 0xFFC4445F
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFB00000
     .4byte 0xFFE20000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x44444444
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0xEFFFE960
     .4byte 0x0CFFFFF0
     .4byte 0x6FFFFFA0
-    .4byte 0xFFFFFF30
+    .int -208
     .4byte 0xFFFFE600
-    .4byte 0x44440000
+    .float 784.0
     .4byte NULL
     .4byte 0x02444444
     .4byte 0x08FFFFFF
@@ -48895,7 +48891,7 @@ lbl_8040FF80:
     .4byte 0x3BBBBBBB
     .4byte 0x5FFFFFFF
     .4byte NULL
-    .4byte 0x44410000
+    .float 772.0
     .4byte 0xFFF40000
     .4byte 0xFFF41444
     .4byte 0x00004FFF
@@ -48906,16 +48902,16 @@ lbl_8040FF80:
     .4byte 0x004FFFFF
     .4byte 0x004FFFFF
     .4byte 0x447FFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x005FFFFF
     .4byte 0x004FFFFF
     .4byte 0x10000000
     .4byte 0x80000000
     .4byte 0x70000000
     .4byte 0xA4444441
-    .4byte 0xFFFFFFF4
-    .4byte 0xFFFFFFF4
+    .int -12
+    .int -12
     .4byte 0x80000000
     .4byte 0x70000000
     .4byte 0x28888888
@@ -48938,20 +48934,20 @@ lbl_8040FF80:
 .global lbl_80430004
 lbl_80430004:
     .4byte 0xBBCFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x88888888
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x70000000
     .4byte 0xDBBBBA00
-    .4byte 0xFFFFFF10
+    .int -240
     .4byte 0x88888700
     .4byte NULL
     .4byte 0x44444430
-    .4byte 0xFFFFFFB0
-    .4byte 0xFFFFFFB0
+    .int -80
+    .int -80
     .4byte 0x08FFFFFF
     .4byte 0x05BBBBBB
     .4byte NULL
@@ -48997,7 +48993,7 @@ lbl_80430004:
     .4byte 0xFFF802FF
     .4byte 0xFFF70BFF
     .4byte 0xFFF88FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x888BFFE7
     .4byte 0x00009810
     .4byte 0xFFFE07FF
@@ -49006,15 +49002,15 @@ lbl_80430004:
     .4byte 0xFF8008FF
     .4byte 0xFC0008FF
     .4byte 0xA10007FF
-    .4byte 0x0000019E
+    .int 414
     .4byte NULL
     .4byte 0xFF727200
     .4byte 0xFF73FFD7
     .4byte 0xFF73FFFC
     .4byte 0xFF62FFF9
     .4byte 0xFF97FFF6
-    .4byte 0xFFFFFFE1
-    .4byte 0xFFFFFC30
+    .int -31
+    .int -976
     .4byte NULL
     .4byte NULL
     .4byte 0x00003444
@@ -49026,18 +49022,18 @@ lbl_80430004:
     .4byte 0x003FFFFE
     .4byte NULL
     .4byte 0x44444444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFEFFFFFF
     .4byte 0x03FFFFFF
     .4byte 0x09FFFFFE
     .4byte 0x4FFFFFF3
     .4byte 0xDFFFFF60
-    .4byte 0x00000030
+    .int 48
     .4byte 0x444405F9
     .4byte 0xFFFFACFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFD6
+    .int -1
+    .int -1
+    .int -42
     .4byte 0x7FFFFFC0
     .4byte 0x0AFFFFFA
     .4byte NULL
@@ -49061,7 +49057,7 @@ lbl_80430004:
     .4byte 0xFFE50000
     .4byte 0xFB200000
     .4byte 0xFBBBBBBB
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x8FFFFFD8
     .4byte 0x0EFFFFB0
     .4byte 0x01CFFFFF
@@ -49069,7 +49065,7 @@ lbl_80430004:
     .4byte 0x0001BFFF
     .4byte 0x000008FF
     .4byte 0xBBBBBBEF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0x8FFFFFD8
     .4byte 0x0EFFFFB0
     .4byte 0xFFFFD500
@@ -49077,7 +49073,7 @@ lbl_80430004:
     .4byte 0xFFB00000
     .4byte 0xFFFC3000
     .4byte 0xFFFFF800
-    .4byte 0xFFFFFFD4
+    .int -44
     .4byte 0x865AFFF4
     .4byte 0x00001650
     .4byte NULL
@@ -49091,30 +49087,30 @@ lbl_80430004:
     .4byte 0x0FFFFFB0
     .4byte 0x0FFFFFB0
     .4byte 0x1FFFFFB0
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x7FFFFFA4
     .4byte 0x4FFFFF60
     .4byte 0x9FFFFF20
     .4byte 0x0FFFFFB0
     .4byte 0x0FFFFFB0
     .4byte 0x1FFFFFB0
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x5FFFFFC4
     .4byte 0x0EFFFFB0
     .4byte 0x0FFFFFB0
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFE00
-    .4byte 0xFFFFFF00
+    .int -512
+    .int -256
     .4byte 0x44444400
     .4byte NULL
     .4byte 0x01000000
-    .4byte 0x00000001
-    .4byte 0x00000008
-    .4byte 0x0000006F
+    .int 1
+    .int 8
+    .int 111
     .4byte 0x000019FF
     .4byte 0x0038EFFF
     .4byte 0x1DFFFFFF
@@ -49141,7 +49137,7 @@ lbl_80430004:
     .4byte 0x06FFFFF0
     .4byte 0x08FFFFB0
     .4byte 0x4DFFFF70
-    .4byte 0xFFFFFE10
+    .int -496
     .4byte 0xFFFEA200
     .4byte NULL
     .4byte NULL
@@ -49166,16 +49162,16 @@ lbl_80430004:
     .4byte 0xFFFF8000
     .4byte 0xFFFF7000
     .4byte 0xFFFF8000
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFFE0
-    .4byte 0xFFFFFFF0
+    .int -32
+    .int -16
     .4byte 0x5FFFFFFF
     .4byte 0x3BBDFFFF
     .4byte 0x0007FFFF
@@ -49197,7 +49193,7 @@ lbl_80430004:
     .4byte 0xFFFF8000
     .4byte 0xFFFF7000
     .4byte 0xFFFFC888
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFFFDBBB
     .4byte 0xFFFF6000
     .4byte 0x44444440
@@ -49205,7 +49201,7 @@ lbl_80430004:
     .4byte NULL
     .4byte NULL
     .4byte 0x88888820
-    .4byte 0xFFFFFF40
+    .int -192
     .4byte 0xEFFFFF40
     .4byte 0xBFFFFF10
     .4byte 0x0007FFFF
@@ -49227,10 +49223,10 @@ lbl_80430004:
     .4byte 0xFFFFA100
     .4byte 0xFFFFF600
     .4byte 0xFFFFFA02
-    .4byte 0xFFFFFF05
-    .4byte 0xFFFFFF58
-    .4byte 0xFFFFFFEE
-    .4byte 0xFFFFFFFF
+    .int -251
+    .int -168
+    .int -18
+    .int -1
     .4byte 0xFFCFFFFF
     .4byte 0xBFFFFF00
     .4byte 0xEFFFFC00
@@ -49282,12 +49278,12 @@ lbl_80430004:
     .4byte 0x04FFFFFF
     .4byte NULL
     .4byte 0x44444441
-    .4byte 0xFFFFFFF4
-    .4byte 0xFFFFFFF4
+    .int -12
+    .int -12
     .4byte 0x01FFFFF4
     .4byte 0x00FFFFF4
     .4byte 0xBBFFFFF4
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte NULL
     .4byte 0x34444444
     .4byte 0xAFFFFFFF
@@ -49298,12 +49294,12 @@ lbl_80430004:
     .4byte 0xAFFFFFFF
     .4byte NULL
     .4byte 0x44444400
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
+    .int -256
     .4byte 0x8FFFFF00
     .4byte 0x7FFFFF00
     .4byte 0xDFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte 0x04FFFFFA
     .4byte 0x04FFFFF3
     .4byte 0x04FFFFF7
@@ -49315,11 +49311,11 @@ lbl_80430004:
     .4byte 0x88FFFFF4
     .4byte 0x00EFFFF4
     .4byte 0x45FFFFF4
-    .4byte 0xFFFFFFF4
-    .4byte 0xFFFFFFE3
+    .int -12
+    .int -29
     .4byte NULL
-    .4byte 0x0000000A
-    .4byte 0x0000000B
+    .int 10
+    .int 11
     .4byte 0xAFFFFD88
     .4byte 0xAFFFFB00
     .4byte 0xAFFFFC44
@@ -49331,8 +49327,8 @@ lbl_80430004:
     .4byte 0xCFFFFF00
     .4byte 0x7FFFFF00
     .4byte 0xAFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
+    .int -256
     .4byte 0x8FFFFF00
     .4byte 0x7FFFFF00
     .4byte 0x8FFFFF00
@@ -49353,8 +49349,8 @@ lbl_80430004:
     .4byte 0x00AFFFFF
     .4byte 0x04FFFFDC
     .4byte 0xFFFFC440
-    .4byte 0xFFFFFFF3
-    .4byte 0xFFFFFFF3
+    .int -13
+    .int -13
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
     .4byte 0xFFFFB000
@@ -49415,7 +49411,7 @@ lbl_80430004:
     .4byte 0x00000FFF
     .4byte 0x00000EFF
     .4byte 0x44445FFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte 0xFFE00000
     .4byte 0xFFF00000
@@ -49423,7 +49419,7 @@ lbl_80430004:
     .4byte 0xFFF00000
     .4byte 0xFFE00000
     .4byte 0xFFF54444
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -49431,41 +49427,41 @@ lbl_80430004:
     .4byte NULL
     .4byte NULL
     .4byte 0x44444441
-    .4byte 0xFFFFFFF4
+    .int -12
     .4byte 0x4FFFFFFF
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000004
-    .4byte 0x0000000A
-    .4byte 0xFFFFFFFF
+    .int 4
+    .int 10
+    .int -1
     .4byte 0x0AFFFFFF
     .4byte 0x0DFFFFFF
     .4byte 0x2FFFFFFF
     .4byte 0x7FFFFFFF
     .4byte 0xCFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFB0
-    .4byte 0xFFFFFFE0
-    .4byte 0xFFFFFFF5
-    .4byte 0xFFFFFFF9
-    .4byte 0xFFFFFFFE
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFF4
+    .int -1
+    .int -1
+    .int -1
+    .int -80
+    .int -32
+    .int -11
+    .int -7
+    .int -2
+    .int -1
+    .int -1
+    .int -12
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte 0x60000000
-    .4byte 0xC0000000
-    .4byte 0x0000002F
-    .4byte 0x0000009F
+    .float -2.0
+    .int 47
+    .int 159
     .4byte 0x000003FF
     .4byte 0x00000BFF
     .4byte 0x00005FFF
@@ -49479,7 +49475,7 @@ lbl_80430004:
     .4byte 0xFE300FFF
     .4byte 0xF5000FFF
     .4byte 0xEBBBBFFF
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xFFECFFFF
     .4byte 0xFFE3EFFF
     .4byte 0xFFF06FFF
@@ -49487,7 +49483,7 @@ lbl_80430004:
     .4byte 0xFFF001CF
     .4byte 0xFFF0002E
     .4byte 0xFFFBBBBD
-    .4byte 0xFFFFFFFF
+    .int -1
     .4byte 0xF4000000
     .4byte 0xFB000000
     .4byte 0xFF500000
@@ -49519,11 +49515,11 @@ lbl_80430004:
     .4byte 0xFFF00000
     .4byte 0xFFF00000
     .4byte 0xFFF00000
-    .4byte 0x44400000
+    .float 768.0
     .4byte 0x51CFFF90
     .4byte 0x0019FFF8
     .4byte 0x00005EE4
-    .4byte 0x00000230
+    .int 560
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -49538,7 +49534,7 @@ lbl_80430004:
     .4byte 0x08FFFFF0
     .4byte NULL
     .4byte 0x88888703
-    .4byte 0xFFFFFF08
+    .int -248
     .4byte 0xDFFFFF07
     .4byte 0x7FFFFF07
     .4byte 0x7FFFFF07
@@ -49546,20 +49542,20 @@ lbl_80430004:
     .4byte 0x7FFFFF07
     .4byte NULL
     .4byte 0x88888888
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFDBB
+    .int -1
+    .int -581
     .4byte 0xFFFFF700
     .4byte 0xFFFFF700
     .4byte 0xFFFFF800
     .4byte 0xFFFFF800
     .4byte NULL
     .4byte 0x88888700
-    .4byte 0xFFFFFF10
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -240
+    .int -256
+    .int -256
+    .int -256
+    .int -256
+    .int -256
     .4byte 0x08FFFFF0
     .4byte 0x08FFFFF0
     .4byte 0x08FFFFF0
@@ -49572,26 +49568,26 @@ lbl_80430004:
     .4byte 0x7FFFFF07
     .4byte 0x7FFFFF07
     .4byte 0xDFFFFF07
-    .4byte 0xFFFFFF07
+    .int -249
     .4byte 0xBFFFFF07
     .4byte 0x7FFFFF07
     .4byte 0x7FFFFF07
     .4byte 0xFFFFF700
     .4byte 0xFFFFFA45
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFFF801
     .4byte 0xFFFFF700
     .4byte 0xFFFFF800
     .4byte 0xFFFFF800
     .4byte 0xEFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
+    .int -256
+    .int -256
+    .int -256
+    .int -256
+    .int -256
+    .int -256
     .4byte 0x08FFFFF0
     .4byte 0x08FFFFF0
     .4byte 0x08FFFFF0
@@ -49606,24 +49602,24 @@ lbl_80430004:
     .4byte 0x7FFFFE0B
     .4byte 0x7FFFFE1D
     .4byte 0xDFFFFE2F
-    .4byte 0xFFFFFF7F
+    .int -129
     .4byte 0x888877DF
     .4byte 0xFFFFF500
     .4byte 0xFFFFF501
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0xFFFFC445
     .4byte 0xFFFF7000
     .4byte 0xFFFE1000
     .4byte 0xFFF70000
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
+    .int -256
+    .int -256
+    .int -256
+    .int -256
     .4byte 0xEFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
+    .int -256
+    .int -256
     .4byte 0x07FFFFE0
     .4byte NULL
     .4byte NULL
@@ -49648,10 +49644,10 @@ lbl_80430004:
     .4byte 0x005FFFFF
     .4byte 0x000DFFFF
     .4byte NULL
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF00
-    .4byte 0xFFFFFF10
-    .4byte 0xFFFFFE00
+    .int -256
+    .int -256
+    .int -240
+    .int -512
     .4byte 0xFFFFFB00
     .4byte 0xFFFFF600
     .4byte 0xFFFC7000
@@ -49698,19 +49694,19 @@ jtbl_80430B84:
     .4byte NULL
 .global lbl_80430BD0
 lbl_80430BD0:
-    .4byte 0x00000026
-    .4byte 0x000000FF
-    .4byte 0x000000E8
-    .4byte 0x000000EF
-    .4byte 0x00000042
-    .4byte 0x000000D6
-    .4byte 0x00000001
-    .4byte 0x00000054
-    .4byte 0x00000014
-    .4byte 0x000000A3
-    .4byte 0x00000080
-    .4byte 0x000000FD
-    .4byte 0x0000006E
+    .int 38
+    .int 255
+    .int 232
+    .int 239
+    .int 66
+    .int 214
+    .int 1
+    .int 84
+    .int 20
+    .int 163
+    .int 128
+    .int 253
+    .int 110
 .global jtbl_80430C04
 jtbl_80430C04:
 	.4byte lbl_803B2E88
@@ -49743,11 +49739,7 @@ lbl_80430C40:
     .4byte 0x12162538
     .4byte 0x446D674D
     .4byte 0x18233740
-    .4byte 0x5168715C
-    .4byte 0x31404E57
-    .4byte 0x67797865
-    .4byte 0x485C5F62
-    .4byte 0x70646763
+    .ascii "Qhq\\1@NWgyxeH\\_bpdgc"
 .global lbl_80430C80
 lbl_80430C80:
     .4byte 0x1112182F
@@ -49755,17 +49747,7 @@ lbl_80430C80:
     .4byte 0x12151A42
     .4byte 0x63636363
     .4byte 0x181A3863
-    .4byte 0x63636363
-    .4byte 0x2F426363
-    .4byte 0x63636363
-    .4byte 0x63636363
-    .4byte 0x63636363
-    .4byte 0x63636363
-    .4byte 0x63636363
-    .4byte 0x63636363
-    .4byte 0x63636363
-    .4byte 0x63636363
-    .4byte 0x63636363
+    .ascii "cccc/Bcccccccccccccccccccccccccccccccccccccc"
     .4byte 0x000A0000
     .4byte 0x00010004
     .4byte 0x000B001A
@@ -49888,7 +49870,7 @@ lbl_80430C80:
     .4byte 0x10101010
     .4byte 0x10101010
     .4byte 0x10100000
-    .4byte 0x00000001
+    .int 1
     .4byte 0x0004000A
     .4byte 0x00180019
     .4byte 0x00380078
@@ -50048,7 +50030,7 @@ lbl_80431090:
     .4byte 0x00010203
     .4byte 0x04050607
     .4byte 0x08090A0B
-    .4byte 0x00000001
+    .int 1
     .4byte 0x0004000A
     .4byte 0x000B000C
     .4byte 0x001A001B
@@ -50252,7 +50234,7 @@ lbl_80431090:
     .4byte 0x10101010
     .4byte 0x10101010
     .4byte 0x10100000
-    .4byte 0x00000001
+    .int 1
     .4byte 0x0004000A
     .4byte 0x000B0018
     .4byte 0x0019001A
@@ -50392,12 +50374,11 @@ lbl_80431638:
     .4byte 0x1E252C33
     .4byte 0x3A3B342D
     .4byte 0x261F272E
-    .4byte 0x353C3D36
-    .4byte 0x2F373E3F
+    .ascii "5<=6/7>?"
 
 .global lbl_80431678
 lbl_80431678:
-    .4byte 0x00000002
+    .int 2
     .4byte 0x00030004
     .4byte 0x00050006
     .4byte 0x000E001E
@@ -50410,7 +50391,7 @@ lbl_80431690:
     .4byte 0x06070809
 .global lbl_8043169C
 lbl_8043169C:
-    .4byte 0x00000001
+    .int 1
     .4byte 0x00020006
     .4byte 0x000E001E
     .4byte 0x003E007E
@@ -50512,7 +50493,7 @@ lbl_804D79C8:
     .balign 8
 .global lbl_804DEB10
 lbl_804DEB10:
-	.4byte 0x3F000000
+	.float 0.5
 .global lbl_804DEB14
 lbl_804DEB14:
 	.4byte 0xBE2CBFB1
@@ -50536,7 +50517,7 @@ lbl_804DEB2C:
 	.4byte 0x3F1645A2
 .global lbl_804DEB30
 lbl_804DEB30:
-	.4byte 0x43300000
+	.float 176.0
 	.4byte 0x80000000
 .global lbl_804DEB38
 lbl_804DEB38:
@@ -50583,7 +50564,7 @@ lbl_804DEB88:
 	.4byte 0x4A464946
 .global lbl_804DEB8C
 lbl_804DEB8C:
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEB90
 lbl_804DEB90:
 	.4byte 0x3FEF6297
@@ -50618,7 +50599,7 @@ lbl_804DEBC8:
 	.4byte 0xCA2DB61C
 .global lbl_804DEBD0
 lbl_804DEBD0:
-	.4byte 0x43300000
+	.float 176.0
 	.4byte 0x80000000
 .global lbl_804DEBD8
 lbl_804DEBD8:
@@ -50626,10 +50607,10 @@ lbl_804DEBD8:
 	.4byte 0x8D4FDF3B
 .global lbl_804DEBE0
 lbl_804DEBE0:
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEBE4
 lbl_804DEBE4:
-	.4byte 0x437F0000
+	.float 255.0
 .global lbl_804DEBE8
 lbl_804DEBE8:
 	.4byte 0x3EB02DE0
@@ -50639,7 +50620,7 @@ lbl_804DEBEC:
 .global lbl_804DEBF0
 lbl_804DEBF0:
 	.4byte 0x3FE2CA58
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEBF8
 lbl_804DEBF8:
 	.4byte 0x3F53A92A
