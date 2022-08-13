@@ -1,5 +1,5 @@
 #include <ftyoshi.h>
-
+#include <melee/it/itkind.h>
 
 ///https://decomp.me/scratch/ufrFK
 void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg) {
@@ -132,9 +132,9 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     func_8012B6E8(fp, temp_r27);
     func_8012B6E8(fp, temp_r28);
     PUSH_ATTRS(fp, ftYoshiAttributes);
-    func_8026B3F8(item_list[0], 0x56U);
-    func_8026B3F8(item_list[1], 0x58U);
-    func_8026B3F8(item_list[2], 0x57U);
+    func_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
+    func_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
+    func_8026B3F8(item_list[2], It_Kind_Yoshi_EggLay);
     fp->x2226_flag.bits.b1 = 1;
   
 }
