@@ -2,7 +2,7 @@
 
 void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj) 
 {
-    Fighter* fighter = fighter_gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     func_80074A4C(fighter_gobj, 0U, 0);
     func_80074A4C(fighter_gobj, 1U, -1);
     func_80074A4C(fighter_gobj, 2U, 0);
@@ -14,44 +14,44 @@ void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
     func_80074A4C(fighter_gobj, 8U, -1);
     func_80074A4C(fighter_gobj, 9U, -1);
     func_80074A4C(fighter_gobj, 0xAU, -1);
-    fighter->sa.gaw.x222C_judgeVar1 = 1;
-    fighter->sa.gaw.x2230_judgeVar2 = 0;
-    fighter->sa.gaw.x2234 = 0;
-    fighter->sa.gaw.x223C_panicDamage = 0;
-    fighter->sa.gaw.x2240_chefVar1 = 1;
-    fighter->sa.gaw.x2244_chefVar2 = 3;
-    fighter->sa.gaw.x2248_manholeGObj = NULL;
-    fighter->sa.gaw.x224C_greenhouseGObj = NULL;
-    fighter->sa.gaw.x2250_manholeGObj2 = NULL;
-    fighter->sa.gaw.x2254_fireGObj = NULL;
-    fighter->sa.gaw.x2258_parachuteGObj = NULL;
-    fighter->sa.gaw.x225C_turtleGObj = NULL;
-    fighter->sa.gaw.x2260_sparkyGObj = NULL;
-    fighter->sa.gaw.x2264_judgementGObj = NULL;
-    fighter->sa.gaw.x2268_panicGObj = NULL;
-    fighter->sa.gaw.x226C_rescueGObj = NULL;
+    fp->sa.gaw.x222C_judgeVar1 = 1;
+    fp->sa.gaw.x2230_judgeVar2 = 0;
+    fp->sa.gaw.x2234 = 0;
+    fp->sa.gaw.x223C_panicDamage = 0;
+    fp->sa.gaw.x2240_chefVar1 = 1;
+    fp->sa.gaw.x2244_chefVar2 = 3;
+    fp->sa.gaw.x2248_manholeGObj = NULL;
+    fp->sa.gaw.x224C_greenhouseGObj = NULL;
+    fp->sa.gaw.x2250_manholeGObj2 = NULL;
+    fp->sa.gaw.x2254_fireGObj = NULL;
+    fp->sa.gaw.x2258_parachuteGObj = NULL;
+    fp->sa.gaw.x225C_turtleGObj = NULL;
+    fp->sa.gaw.x2260_sparkyGObj = NULL;
+    fp->sa.gaw.x2264_judgementGObj = NULL;
+    fp->sa.gaw.x2268_panicGObj = NULL;
+    fp->sa.gaw.x226C_rescueGObj = NULL;
 }
 
 void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj) 
 {
-    Fighter* fighter = fighter_gobj->user_data;
-    void** items = fighter->x10C_ftData->x48_items;
+    Fighter* fp = fighter_gobj->user_data;
+    void** items = fp->x10C_ftData->x48_items;
 
-    fighter->x2222_flag.bits.b6 = 0;
-    fighter->x2223_flag.bits.b1 = 1;
-    fighter->x2224_flag.bits.b0 = 1;
+    fp->x2222_flag.bits.b6 = 0;
+    fp->x2223_flag.bits.b1 = 1;
+    fp->x2224_flag.bits.b0 = 1;
 
 
-    PUSH_ATTRS(fighter, ftGameWatchAttributes);
-    fighter->sa.gaw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
+    PUSH_ATTRS(fp, ftGameWatchAttributes);
+    fp->sa.gaw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
 
     {
         
-        ftGameWatchAttributes *attr = fighter->x2D4_specialAttributes;
-        fighter->x34_scale.z = attr->x0_GAMEWATCH_WIDTH;
-        fighter->x614 = attr->x14_GAMEWATCH_OUTLINE;
-        func_800BFB4C(fighter_gobj, &attr->x4_GAMEWATCH_COLOR[fighter->x619_costume_id]);
-        fighter->x5C8 = items[10];
+        ftGameWatchAttributes *attr = fp->x2D4_specialAttributes;
+        fp->x34_scale.z = attr->x0_GAMEWATCH_WIDTH;
+        fp->x614 = attr->x14_GAMEWATCH_OUTLINE;
+        func_800BFB4C(fighter_gobj, &attr->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
+        fp->x5C8 = items[10];
         
         func_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);
         func_8026B3F8(items[1], It_Kind_GameWatch_Manhole);
@@ -82,8 +82,8 @@ void ftGameWatch_OnDamage(HSD_GObj* fighter_gobj)
 
 void ftGameWatch_8014A538(HSD_GObj* fighter_gobj) 
 {
-    Fighter* fighter = getFighter(fighter_gobj);
-    if (fighter->xE0_ground_or_air == GA_Air) 
+    Fighter* fp = getFighter(fighter_gobj);
+    if (fp->xE0_ground_or_air == GA_Air) 
     {
         ftGameWatch_ItemGreenhouseRemove(fighter_gobj);
         ftGameWatch_ItemManholeOnDamage(fighter_gobj);

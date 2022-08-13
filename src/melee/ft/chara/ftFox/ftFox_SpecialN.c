@@ -3,7 +3,7 @@
 #define PI64 3.141592653589793
 
 // 0x800E5CB0
-// https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position for Blaster GFX - used in Fox's fighter code
+// https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position for Blaster GFX - used in Fox's fp code
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 {
     Vec3 sp14;

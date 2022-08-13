@@ -26,9 +26,9 @@ void ftZakoBoy_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
 
 void ftZakoBoy_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
-    PUSH_ATTRS(ft, ftZakoboyAttributes);
+    PUSH_ATTRS(fp, ftZakoboyAttributes);
 
 
 }

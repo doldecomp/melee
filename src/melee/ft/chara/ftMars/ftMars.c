@@ -3,10 +3,10 @@
 // 80136258 00132E38
 // https://decomp.me/scratch/6RQ5w
 void ftMars_OnDeath(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
-    ft->sa.mars.x222C = 0;
+    fp->sa.mars.x222C = 0;
 }
 
 // 801362B0 00132E90
@@ -38,15 +38,15 @@ void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL bool1) {
 
 // 80136474 00133054
 // https://decomp.me/scratch/2TlGi
-void ftMars_OnLoadForRoy(Fighter* ft) {
-    PUSH_ATTRS(ft, MarsAttributes);
+void ftMars_OnLoadForRoy(Fighter* fp) {
+    PUSH_ATTRS(fp, MarsAttributes);
 }
 
 // 801364AC 0013308C
 // https://decomp.me/scratch/9UJHY
 void ftMars_OnLoad(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    PUSH_ATTRS(ft, MarsAttributes);
+    Fighter* fp = gobj->user_data;
+    PUSH_ATTRS(fp, MarsAttributes);
 }
 
 // 801364E8 001330C8
@@ -71,55 +71,55 @@ void ftMars_OnKnockbackExit(HSD_GObj* gobj) {
 // 801365A8 00133188
 // https://decomp.me/scratch/Jqd2A
 void lbl_801365A8(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     s32 result;
-    if (!ft->x2219_flag.bits.b0) {
+    if (!fp->x2219_flag.bits.b0) {
         result = func_800872A4(gobj);
         switch (result) {
             case 0x12:
-                ef_Spawn(0x4F2, gobj, ft->x5E8_fighterBones->x0_jobj);
+                ef_Spawn(0x4F2, gobj, fp->x5E8_fighterBones->x0_jobj);
                 break;
             case 0x1A:
-                ef_Spawn(0x511, gobj, ft->x5E8_fighterBones->x0_jobj);
+                ef_Spawn(0x511, gobj, fp->x5E8_fighterBones->x0_jobj);
                 break;
         }
-        ft->x2219_flag.bits.b0 = 1;
+        fp->x2219_flag.bits.b0 = 1;
     }
 
-    ft->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    ft->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    ft->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->cb.x21BC_callback_Accessory4 = 0;
     return;
 }
 
 // 8013666C 0013324C
 // https://decomp.me/scratch/Jqd2A
 void lbl_8013666C(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     s32 result;
-    if (!ft->x2219_flag.bits.b0) {
+    if (!fp->x2219_flag.bits.b0) {
         result = func_800872A4(gobj);
         switch (result) {
             case 0x12:
-                ef_Spawn(0x4F3, gobj, ft->x5E8_fighterBones->x0_jobj);
+                ef_Spawn(0x4F3, gobj, fp->x5E8_fighterBones->x0_jobj);
                 break;
             case 0x1A:
-                ef_Spawn(0x512, gobj, ft->x5E8_fighterBones->x0_jobj);
+                ef_Spawn(0x512, gobj, fp->x5E8_fighterBones->x0_jobj);
                 break;
         }
-        ft->x2219_flag.bits.b0 = 1;
+        fp->x2219_flag.bits.b0 = 1;
     }
 
-    ft->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    ft->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    ft->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp->cb.x21BC_callback_Accessory4 = 0;
     return;
 }
 
 // 80136730 00133310
 // https://decomp.me/scratch/Jqd2A
 void lbl_80136730(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    ft->x2200_ftcmd_var0 = 0;
-    ft->x2340_stateVar1 = 0;
+    Fighter* fp = gobj->user_data;
+    fp->x2200_ftcmd_var0 = 0;
+    fp->x2340_stateVar1 = 0;
 }

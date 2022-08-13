@@ -142,17 +142,17 @@ void func_8007CC78(Fighter* fp, f32 max)
     }
 }
 
-void func_8007CCA0(Fighter* arg0, f32 arg1)
+void func_8007CCA0(Fighter* fp, f32 arg1)
 {
-    if (arg0->xF0_ground_kb_vel < 0) {
-        arg0->xF0_ground_kb_vel = arg0->xF0_ground_kb_vel + arg1;
-        if (arg0->xF0_ground_kb_vel > 0) {
-            arg0->xF0_ground_kb_vel = 0;
+    if (fp->xF0_ground_kb_vel < 0) {
+        fp->xF0_ground_kb_vel = fp->xF0_ground_kb_vel + arg1;
+        if (fp->xF0_ground_kb_vel > 0) {
+            fp->xF0_ground_kb_vel = 0;
         }
     } else {
-        arg0->xF0_ground_kb_vel = arg0->xF0_ground_kb_vel - arg1;
-        if (arg0->xF0_ground_kb_vel < 0) {
-            arg0->xF0_ground_kb_vel = 0;
+        fp->xF0_ground_kb_vel = fp->xF0_ground_kb_vel - arg1;
+        if (fp->xF0_ground_kb_vel < 0) {
+            fp->xF0_ground_kb_vel = 0;
         }
     }
 }
@@ -2076,14 +2076,14 @@ void func_80080484(Fighter* fp)
     }
 }
 
-void func_800804A0(Fighter* arg0, f32 arg8)
+void func_800804A0(Fighter* fp, f32 arg8)
 {
     f32 temp_f1;
     f32 phi_f31 = arg8;
-    if ((temp_f1 = func_80084A40(arg0)) < 1) {
+    if ((temp_f1 = func_80084A40(fp)) < 1) {
         phi_f31 *= temp_f1;
     }
-    arg0->xE8_ground_accel_2 = phi_f31;
+    fp->xE8_ground_accel_2 = phi_f31;
 }
 
 f32 func_800804EC(Fighter* fp)

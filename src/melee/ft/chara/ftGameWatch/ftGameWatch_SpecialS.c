@@ -1,9 +1,9 @@
 #include <ftgamewatch.h>
 
-void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter);
+void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fp);
 extern void func_8028FAF4(HSD_GObj*, Vec3*);
 extern HSD_GObj* func_802C7774(f32, HSD_GObj*, Vec3*, s32, u32);
-void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter);
+void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fp);
 
 // 0x8014C46C 
 // https://decomp.me/scratch/ohXu0 // Create Judgement item

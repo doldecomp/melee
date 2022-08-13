@@ -1452,7 +1452,7 @@ void func_8008031C();
 // ? func_80080474(?);
 // ? func_80080484(?);
 // ? func_800804A0(?);
-f32 func_800804EC(struct _Fighter *); // DataOffset_PlayerScale_MultiplyBySomething, returns fighter->x40*fighter->x34
+f32 func_800804EC(struct _Fighter *); // DataOffset_PlayerScale_MultiplyBySomething, returns fp->x40*fp->x34
 void func_800804FC();
 // ? func_8008051C(?);
 // ? func_800805C8(?);

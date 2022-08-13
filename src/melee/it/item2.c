@@ -349,7 +349,7 @@ extern f32 func_800864A8(Vec3*, s32);
 
 // 0x8026B684 //
 // https://decomp.me/scratch/2wWfM //
-f32 func_8026B684(Vec3* pos) // Get facing direction of fighter (?) with argument 0 //
+f32 func_8026B684(Vec3* pos) // Get facing direction of fp (?) with argument 0 //
 {
     return func_800864A8(pos, 0);
 }
@@ -358,7 +358,7 @@ extern f32 func_800864A8(Vec3*, s32);
 
 // 0x8026B6A8 //
 // https://decomp.me/scratch/LJ42K //
-f32 func_8026B6A8(Vec3* pos, s32 arg) // Get facing direction of fighter (?) with variable argument //
+f32 func_8026B6A8(Vec3* pos, s32 arg) // Get facing direction of fp (?) with variable argument //
 {
     func_800864A8(pos, arg);
 }
@@ -783,7 +783,7 @@ extern void func_80086990(HSD_GObj*, Vec3*);
 
 // 0x8026BB68 //
 // https://decomp.me/scratch/U1sE9 //
-void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos) // Adjust item's position to fighter bone //
+void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos) // Adjust item's position to fp bone //
 {
     func_80086990(fighter_gobj, pos);
 }
@@ -824,7 +824,7 @@ extern void func_80086A4C(HSD_GObj*, f32);
 
 // 0x8026BC14 //
 // https://decomp.me/scratch/j3vB2 //
-void func_8026BC14(HSD_GObj* item_gobj) // Check if item owner is a fighter + decrement hitlag //
+void func_8026BC14(HSD_GObj* item_gobj) // Check if item owner is a fp + decrement hitlag //
 {
     Item* item_data;
 

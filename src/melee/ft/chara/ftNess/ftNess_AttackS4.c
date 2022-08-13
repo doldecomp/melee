@@ -99,7 +99,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation ca
 
     if (fighter_data1->x2218_flag.bits.b3 == 0)
     {
-        if (fighter_data1->x2200_ftcmd_var0 != FALSE) // Check if reflect bubble flag is enabled in fighter script //
+        if (fighter_data1->x2200_ftcmd_var0 != FALSE) // Check if reflect bubble flag is enabled in fp script //
         {
             ness_attr = fighter_data1->x2D4_specialAttributes;
             ftColl_CreateReflectHit(fighter_gobj, &ness_attr->xB8_BASEBALL_BAT, ftNess_AttackS4_OnReflect); // Create reflect bubble //
