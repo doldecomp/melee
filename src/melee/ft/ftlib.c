@@ -90,7 +90,7 @@ HSD_GObj* func_80086198(HSD_GObj* gobj)
     return result;
 }
 
-// get closest opposing fighter?
+// get closest opposing fp?
 HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
 {
     Vec3 cur_v;
@@ -135,7 +135,7 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
     return result;
 }
 
-// get closest opposing fighter, on given side (left/right)
+// get closest opposing fp, on given side (left/right)
 HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
 {
     Vec3 sp24;

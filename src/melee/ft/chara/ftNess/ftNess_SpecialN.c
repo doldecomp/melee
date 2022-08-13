@@ -91,7 +91,7 @@ void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK 
 {
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
 
     fighter_data = getFighterPlus(fighter_gobj);
 
@@ -102,17 +102,17 @@ void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK 
     fighter_data->x2204_ftcmd_var1 = 0;
     fighter_data->x2200_ftcmd_var0 = 0;
 
-    temp_fighter = fighter_gobj->user_data;
-    ness_attr = getFtSpecialAttrs(temp_fighter);
+    temp_fp = fighter_gobj->user_data;
+    ness_attr = getFtSpecialAttrs(temp_fp);
 
-    temp_fighter->nessVars[0].specialN.flashTimerLoop1 = (s32)ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
-    temp_fighter->nessVars[0].specialN.flashTimerLoop2 = (s32)ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
-    temp_fighter->nessVars[0].specialN.gravityDelay = (s32)ness_attr->x8_PKFLASH_GRAVITY_DELAY;
+    temp_fp->nessVars[0].specialN.flashTimerLoop1 = (s32)ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
+    temp_fp->nessVars[0].specialN.flashTimerLoop2 = (s32)ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
+    temp_fp->nessVars[0].specialN.gravityDelay = (s32)ness_attr->x8_PKFLASH_GRAVITY_DELAY;
 
-    temp_fighter->sa.ness.x2240_flashGObj = NULL;
-    temp_fighter->nessVars[0].specialN.flashTimerMin = (s32)ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
-    temp_fighter->cb.x21E4_callback_OnDeath2 = NULL;
-    temp_fighter->cb.x21DC_callback_OnTakeDamage = NULL;
+    temp_fp->sa.ness.x2240_flashGObj = NULL;
+    temp_fp->nessVars[0].specialN.flashTimerMin = (s32)ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
+    temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
+    temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
     func_8006EBA4(fighter_gobj);
 }
 
@@ -122,7 +122,7 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK
 {
     Fighter* fighter_data;
     ftNessAttributes* ness_attr;
-    Fighter* temp_fighter;
+    Fighter* temp_fp;
 
     fighter_data = getFighterPlus(fighter_gobj);
 
@@ -134,19 +134,19 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK
     fighter_data->x2200_ftcmd_var0 = 0;
     fighter_data->x80_self_vel.y = 0.0f;
 
-    temp_fighter = fighter_gobj->user_data;
-    ness_attr = getFtSpecialAttrs(temp_fighter);
+    temp_fp = fighter_gobj->user_data;
+    ness_attr = getFtSpecialAttrs(temp_fp);
 
-    temp_fighter->nessVars[0].specialN.flashTimerLoop1 = (s32)ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
-    temp_fighter->nessVars[0].specialN.flashTimerLoop2 = (s32)ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
-    temp_fighter->nessVars[0].specialN.gravityDelay = (s32)ness_attr->x8_PKFLASH_GRAVITY_DELAY;
+    temp_fp->nessVars[0].specialN.flashTimerLoop1 = (s32)ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
+    temp_fp->nessVars[0].specialN.flashTimerLoop2 = (s32)ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
+    temp_fp->nessVars[0].specialN.gravityDelay = (s32)ness_attr->x8_PKFLASH_GRAVITY_DELAY;
 
-    temp_fighter->sa.ness.x2240_flashGObj = NULL;
+    temp_fp->sa.ness.x2240_flashGObj = NULL;
 
-    temp_fighter->nessVars[0].specialN.flashTimerMin = (s32)ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
+    temp_fp->nessVars[0].specialN.flashTimerMin = (s32)ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
 
-    temp_fighter->cb.x21E4_callback_OnDeath2 = NULL;
-    temp_fighter->cb.x21DC_callback_OnTakeDamage = NULL;
+    temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
+    temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
 
     func_8006EBA4(fighter_gobj);
 }

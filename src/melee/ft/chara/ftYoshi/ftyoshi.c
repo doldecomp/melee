@@ -2,7 +2,7 @@
 
 
 ///https://decomp.me/scratch/ufrFK
-void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg) {
+void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg) {
 
     s32 filler[5];
 
@@ -13,14 +13,14 @@ void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg) {
     s32 i;
     f32 zero_float;
     
-    attr_r26 = fighter->x10C_ftData->ext_attr;
+    attr_r26 = fp->x10C_ftData->ext_attr;
     index = (unk_struct1 = unk_struct_arg)->unk_struct->xC_start_index;
     ptr2EndIndex = (s32 *) (&unk_struct1->unk_struct->x8_end_index);
     zero_float = 0.0f;
     
     for (i = 0; i < *ptr2EndIndex; i++) {
 
-        HSD_DObj* dobj_r3 = fighter->x5F0[index[i]];
+        HSD_DObj* dobj_r3 = fp->x5F0[index[i]];
         HSD_MObj *mobj_r3;
         HSD_AObj *aobj_r24;
 
@@ -46,7 +46,7 @@ void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg) {
     }
 }
 
-void func_8012B804(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_frame) {
+void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_frame) {
 
     s32 filler[2];
 
@@ -62,7 +62,7 @@ void func_8012B804(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg, f32 st
         
         for (i = 0; i < *ptr2EndIndex; i++) {
 
-            HSD_DObj* dobj_r3 = fighter->x5F0[index[i]];
+            HSD_DObj* dobj_r3 = fp->x5F0[index[i]];
             HSD_MObj* mobj_r3;
             HSD_MObj* mobj;
 
@@ -83,25 +83,25 @@ void func_8012B804(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg, f32 st
 
 void func_8012B8A4(HSD_GObj* fighterObj) {
     s32 unused[4];
-    Fighter* fighter = fighterObj->user_data;
-    ftYoshiAttributes *attr = fighter->x2D4_specialAttributes;
-    f32 tempf = attr->xC * (1.0f - (fighter->x1998_shieldHealth / p_ftCommonData->x260_startShieldHealth));
-    func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5B8, tempf);
-    func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5BC, tempf);
+    Fighter* fp = fighterObj->user_data;
+    ftYoshiAttributes *attr = fp->x2D4_specialAttributes;
+    f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth / p_ftCommonData->x260_startShieldHealth));
+    func_8012B804(fp, (struct S_UNK_YOSHI1*)fp->x5B8, tempf);
+    func_8012B804(fp, (struct S_UNK_YOSHI1*)fp->x5BC, tempf);
 }
 
 
 void func_8012B918(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
+    Fighter* fp = fighterObj->user_data;
 
-    func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5B8, 0.0f);
-    func_8012B804(fighter, (struct S_UNK_YOSHI1*)fighter->x5BC, 0.0f);
+    func_8012B804(fp, (struct S_UNK_YOSHI1*)fp->x5B8, 0.0f);
+    func_8012B804(fp, (struct S_UNK_YOSHI1*)fp->x5BC, 0.0f);
 }
 
 void ftYoshi_OnDeath(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
+    Fighter* fp = fighterObj->user_data;
     func_80074A4C(fighterObj, 0, 0);
-    fighter->sa.yoshi.x2238 = 0;
+    fp->sa.yoshi.x2238 = 0;
 }
 
 
@@ -113,12 +113,12 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     struct S_UNK_YOSHI1* temp;
     ftData *fighter_data;
     struct S_UNK_YOSHI1* temp_r27;
-    Fighter *fighter;
+    Fighter *fp;
     
-    fighter = fighterObj->user_data;
-    temp = temp_r27 = (struct S_UNK_YOSHI1*) fighter->x5B8;
-    fighter_data = fighter->x10C_ftData;
-    temp_r28 = (struct S_UNK_YOSHI1*)fighter->x5BC;
+    fp = fighterObj->user_data;
+    temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
+    fighter_data = fp->x10C_ftData;
+    temp_r28 = (struct S_UNK_YOSHI1*)fp->x5BC;
     item_list = fighter_data->x48_items;
     other_attr = fighter_data->ext_attr;
     
@@ -129,13 +129,13 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     }
 
     other_attr->xC = 0.0f;
-    func_8012B6E8(fighter, temp_r27);
-    func_8012B6E8(fighter, temp_r28);
-    PUSH_ATTRS(fighter, ftYoshiAttributes);
+    func_8012B6E8(fp, temp_r27);
+    func_8012B6E8(fp, temp_r28);
+    PUSH_ATTRS(fp, ftYoshiAttributes);
     func_8026B3F8(item_list[0], 0x56U);
     func_8026B3F8(item_list[1], 0x58U);
     func_8026B3F8(item_list[2], 0x57U);
-    fighter->x2226_flag.bits.b1 = 1;
+    fp->x2226_flag.bits.b1 = 1;
   
 }
 
@@ -144,8 +144,8 @@ void ftYoshi_8012BA8C(HSD_GObj* fighterObj) {
     func_8012DF18(fighterObj);
 }
 
-f32 ftYoshi_8012BAC0(Fighter* fighter) {
-    ftYoshiAttributes *attr = fighter->x2D4_specialAttributes;
+f32 ftYoshi_8012BAC0(Fighter* fp) {
+    ftYoshiAttributes *attr = fp->x2D4_specialAttributes;
     return attr->x120;
 }
 

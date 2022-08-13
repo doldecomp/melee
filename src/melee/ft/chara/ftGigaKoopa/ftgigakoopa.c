@@ -5,13 +5,13 @@
 
 void ftGKoopa_OnDeath(HSD_GObj* fighterObj) {
     s32 unused[2];
-    Fighter* ft = fighterObj->user_data;
-    ftKoopaAttributes* koopaAttr = ft->x2D4_specialAttributes;
+    Fighter* fp = fighterObj->user_data;
+    ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
 
     func_80074A4C(fighterObj, 0, 0);
-    ft->dmg.x18B0 = koopaAttr->x0;
-    ft->sa.gkoopa.x222C = koopaAttr->x10;
-    ft->sa.gkoopa.x2230 = koopaAttr->x18;
+    fp->dmg.x18B0 = koopaAttr->x0;
+    fp->sa.gkoopa.x222C = koopaAttr->x10;
+    fp->sa.gkoopa.x2230 = koopaAttr->x18;
 }
 
 #pragma peephole on
@@ -23,15 +23,15 @@ void func_8014F698(HSD_GObj* gobj)
 
 void ftGKoopa_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    ftData* ftdata = ft->x10C_ftData;
+    Fighter* fp = gobj->user_data;
+    ftData* ftdata = fp->x10C_ftData;
     void** items = ftdata->x48_items;
 
-    ftKoopa_OnLoadForGKoopa(ft);
+    ftKoopa_OnLoadForGKoopa(fp);
     func_8026B3F8(items[0], It_Kind_Koopa_Flame);
 
-    ft->x2226_flag.bits.b1 = 1;
-    ft->x222A_flag.bits.b0 = 1;
+    fp->x2226_flag.bits.b1 = 1;
+    fp->x222A_flag.bits.b0 = 1;
 }
 
 void ftGKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {

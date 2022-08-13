@@ -71,7 +71,7 @@ void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim) // Combo Count Logic 
     HSD_GObj* itemOwner = func_8026BC78(attackItem);
     s32 attackID = func_8026BC84(attackItem);
 
-    if (func_80086960(itemOwner) != FALSE) // Check if item's owner is a fighter //
+    if (func_80086960(itemOwner) != FALSE) // Check if item's owner is a fp //
     {
         func_800763C0(itemOwner, victim, attackID);
     }
@@ -150,7 +150,7 @@ void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon 
     Fighter* fp;
     HSD_GObj* gobj;
 
-    gobj = lbl_804D782C->x20_fighterGObj; // Get fighter GObj from global list of entities (?) //
+    gobj = lbl_804D782C->x20_fighterGObj; // Get fp GObj from global list of entities (?) //
     while (gobj != NULL)
     {
         fp = getFighter(gobj); 
@@ -158,7 +158,7 @@ void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon 
         {
             fp->x2094 = NULL;
         }
-        gobj = gobj->next; // Repeat until there are no more fighter GObjs left //
+        gobj = gobj->next; // Repeat until there are no more fp GObjs left //
     }
 }
 

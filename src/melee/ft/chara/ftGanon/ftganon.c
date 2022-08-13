@@ -2,11 +2,11 @@
 
 void ftGanon_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, -1);
-    ft->sa.captain.x2230_isSpecialSGFX = FALSE;
-    ft->sa.captain.x222C_isSpecialSStartGFX = FALSE;
+    fp->sa.captain.x2230_isSpecialSGFX = FALSE;
+    fp->sa.captain.x222C_isSpecialSStartGFX = FALSE;
 }
 
 void ftGanon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {

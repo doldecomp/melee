@@ -72,7 +72,7 @@ struct ItemLogicTable
     s32 (*x2C_callback_OnAbsorb)(HSD_GObj* item);
     s32 (*x30_callback_OnShieldBounce)(HSD_GObj* item);
     s32 (*x34_callback_OnHitShield)(HSD_GObj* item);
-    void (*x38_callback_OnUnknown)(HSD_GObj* item, HSD_GObj* fighter);
+    void (*x38_callback_OnUnknown)(HSD_GObj* item, HSD_GObj* fp);
 };
 
 typedef struct _CameraBoxFlags
@@ -211,7 +211,7 @@ typedef struct ItemDynamicsDesc
 
 typedef struct ItemDynamics
 {
-    s32 x0_dynamics_num;            // 0x8 number of dynamic bonesets for this fighter
+    s32 x0_dynamics_num;            // 0x8 number of dynamic bonesets for this fp
     ItemDynamicsDesc* x4_dynamicsDesc; // 0x4 boneset data array (one for each boneset)
 }ItemDynamics;
 
@@ -464,7 +464,7 @@ typedef struct _Item
         f32 xCE4;                                       // 0xce4
         f32 xCE8;                                       // 0xce8
         HSD_GObj* xCEC_fighterGObj;                     // 0xcec
-        HSD_GObj* xCF0_itemGObj;                        // 0xcf0, is a fighter GObj, but is the owner of the fighter that hit the item (?)
+        HSD_GObj* xCF0_itemGObj;                        // 0xcf0, is a fp GObj, but is the owner of the fp that hit the item (?)
     } itdmg;
     HSD_GObj* xCF4_fighterGObjUnk;
     HSD_GObj* xCF8_detectGObj; // GObj that was detected by this item's inert hitbox
@@ -487,8 +487,8 @@ typedef struct _Item
         void (*xD28_callback_EnterHitlag)(HSD_GObj* item);                              // 0xd28, runs after applying hitlag in damage apply proc 8026a62c
         void (*xD2C_callback_ExitHitlag)(HSD_GObj* item);                               // 0xd2c, runs after exiting hitlag in hitlag update proc 8026a200
         s32 (*xD30_callback_JumpedOn)(HSD_GObj* item);                                 // 0xd30, runs when the item is "jumped on", 80269bac
-        void (*xD34_callback_Grab_ItemCB)(HSD_GObj* item);                       // 0xd34, when grabbing a fighter, run this function on self
-        void (*xD38_callback_Grab_VictimCB)(HSD_GObj* victim, HSD_GObj* item); // 0xd38, when grabbing a fighter, run this function on fighter
+        void (*xD34_callback_Grab_ItemCB)(HSD_GObj* item);                       // 0xd34, when grabbing a fp, run this function on self
+        void (*xD38_callback_Grab_VictimCB)(HSD_GObj* victim, HSD_GObj* item); // 0xd38, when grabbing a fp, run this function on fp
     } itcb;
     f32 xD3C_spinSpeed;
     f32 xD40;
@@ -618,7 +618,7 @@ typedef struct BobOmbRain
 
 typedef struct SpawnItem
 {
-    HSD_GObj* x0_parent_gobj;  // Primary owner of the item; usually a fighter GObj
+    HSD_GObj* x0_parent_gobj;  // Primary owner of the item; usually a fp GObj
     HSD_GObj* x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness' PK Fire Pillar has this set to PK Fire Spark's item GObj
     s32 x8_item_id;            // 0x8, ID of the item to spawn
     s32 xC_hold_kind;          // Defines the behavior of the item, such as thrown and pickup. 0 = capsule
@@ -746,8 +746,8 @@ s32 func_8026B588(void);                                           // Get unknow
 BOOL func_8026B594(HSD_GObj* item_gobj);                           // Check if item can fire projectiles //
 HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj); // Unknown item camera check? //
 HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj); // Unknown item camera check 2? //
-f32 func_8026B684(Vec3* pos);                                      // Get facing direction of fighter (?) with argument 0 //
-f32 func_8026B6A8(Vec3* pos, s32 arg);                             // Get facing direction of fighter (?) with variable argument //
+f32 func_8026B684(Vec3* pos);                                      // Get facing direction of fp (?) with argument 0 //
+f32 func_8026B6A8(Vec3* pos, s32 arg);                             // Get facing direction of fp (?) with variable argument //
 BOOL func_8026B6C8(HSD_GObj* item_gobj);                           // Check if item is a stage item? //
 void func_8026B718(HSD_GObj* item_gobj, f32 hitlagFrames);         // Set item's hitlag frames //
 void func_8026B724(HSD_GObj* item_gobj);                           // Toggle bit 3 of 0xDC8 word ON //
@@ -768,10 +768,10 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2);       // Transfer i
 void func_8026BAE8(HSD_GObj* item_gobj, f32 scale_mul);            // Multiply item's scale //
 void func_8026BB20(HSD_GObj* item_gobj);                           // Clear JObj flags on item model //
 void func_8026BB44(HSD_GObj* item_gobj);                           // Set JObj flags on item model //
-void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos);             // Adjust item's position to fighter bone //
+void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos);             // Adjust item's position to fp bone //
 void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos);                // Adjust item's position based on ECB? //
 void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos);                // Adjust item's ECB position? //
-void func_8026BC14(HSD_GObj* item_gobj);                           // Check if item owner is a fighter + decrement hitlag //
+void func_8026BC14(HSD_GObj* item_gobj);                           // Check if item owner is a fp + decrement hitlag //
 s32 func_8026BC68(HSD_GObj* item_gobj);                            // Return bit 0 of 0xDD0 //
 HSD_GObj* func_8026BC78(HSD_GObj* item_gobj);                      // Get item owner //
 BOOL func_8026BC84(HSD_GObj* item_gobj);                            // Get item attack kind //
