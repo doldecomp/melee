@@ -8722,7 +8722,6 @@ void func_80390228(struct _HSD_GObj *);
 // ? func_80394E8C(?);
 // ? func_80395550(?);
 // ? func_80395970(?);
-// ? func_80397520(?);
 // ? func_803975D4(?);
 // ? func_80397DA4(?);
 // ? Exception_StoreDebugLevel(?);

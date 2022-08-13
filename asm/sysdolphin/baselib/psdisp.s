@@ -4593,18 +4593,18 @@ lbl_803A38C4:
     .balign 8
 .global lbl_803B9628
 lbl_803B9628:
-    .4byte 0x3F800000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x3F800000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x3F800000
-    .4byte 0x00000000
+    .float 1.0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .float 1.0
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .4byte NULL
+    .float 1.0
+    .4byte NULL
 
 .section .data
     .balign 8
@@ -4620,8 +4620,8 @@ lbl_8040C300:
     .4byte 0x00010000
     .4byte 0x01000101
     .4byte 0x01010100
-    .4byte 0x00000001
-    .4byte 0x00000001
+    .int 1
+    .int 1
     .4byte 0x01010100
     .4byte 0x01000101
     .4byte 0x00010000
@@ -4715,37 +4715,37 @@ lbl_804D7948:
     .balign 8
 .global lbl_804DEA10
 lbl_804DEA10:
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEA14
 lbl_804DEA14:
 	.4byte 0x34000000
 .global lbl_804DEA18
 lbl_804DEA18:
-	.4byte 0x40000000
+	.float 2.0
 .global lbl_804DEA1C
 lbl_804DEA1C:
-	.4byte 0x3F800000
+	.float 1.0
 .global lbl_804DEA20
 lbl_804DEA20:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
+	.float 1.75
+	.4byte NULL
 .global lbl_804DEA28
 lbl_804DEA28:
-	.4byte 0x40080000
-	.4byte 0x00000000
+	.float 2.125
+	.4byte NULL
 .global lbl_804DEA30
 lbl_804DEA30:
 	.4byte 0x40454000
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEA38
 lbl_804DEA38:
-	.4byte 0x437F0000
+	.float 255.0
 .global lbl_804DEA3C
 lbl_804DEA3C:
-	.4byte 0x40C00000
+	.float 6.0
 .global lbl_804DEA40
 lbl_804DEA40:
-	.4byte 0xBF800000
+	.float -1.0
 .global lbl_804DEA44
 lbl_804DEA44:
 	.4byte 0x00800000
@@ -4761,9 +4761,9 @@ lbl_804DEA50:
 	.4byte 0x47AE147B
 .global lbl_804DEA58
 lbl_804DEA58:
-	.4byte 0x3F000000
-	.4byte 0x00000000
+	.float 0.5
+	.4byte NULL
 .global lbl_804DEA60
 lbl_804DEA60:
-	.4byte 0x43300000
-	.4byte 0x00000000
+	.float 176.0
+	.4byte NULL
