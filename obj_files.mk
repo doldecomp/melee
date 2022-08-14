@@ -772,6 +772,9 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobj.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_003.s.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_002.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_002.s.o\
 
@@ -803,6 +806,10 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/db/db_data.s.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_003.s.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_004.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_005.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_006.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_007.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_008.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_001.c.o\

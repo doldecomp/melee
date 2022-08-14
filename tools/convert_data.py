@@ -8,7 +8,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': root / "asm/sysdolphin/baselib/baselib_unknown_001.s"
+    'input_glob': root / "asm/sysdolphin/baselib/baselib_unknown_002.s"
 }
 
 default_options = {
