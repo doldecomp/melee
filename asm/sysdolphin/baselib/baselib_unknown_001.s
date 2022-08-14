@@ -2064,9 +2064,9 @@ lbl_803B46C0:
     .balign 4
 
 lbl_804DEB88:
-	.float 3248721.5
+	.4byte 0x4A464946
 lbl_804DEB8C:
-	.float 0.0
+	.skip 0x4
 
 .section .text
 
