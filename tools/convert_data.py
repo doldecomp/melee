@@ -8,7 +8,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': root / "asm/sysdolphin/baselib/baselib_unknown_*.s"
+    'input_glob': root / "asm/sysdolphin/baselib/baselib_unknown_001.s"
 }
 
 default_options = {
@@ -19,16 +19,22 @@ default_options = {
     # 'float': replace zero with '0.0'
 
     'find_asciz': True,  # Attempt to find zero-terminated ASCII strings
-    'find_f32': True,  # Attempt to find 4-byte floating-point
+    'find_f32': True,  # Attempt to find 4-byte floating-point values
+    'find_f64': True,  # Attempt to find 8-byte floating-point values
     'find_s32': True,  # Attempt to find negative 4-byte values
     'find_u32': True,  # Attempt to find positive 4-byte values
 
     'min_asciz_len': 4,  # Minimum length for a byte array to be considered a string
     's32_min_value': -1000,  # Lowest acceptable value for s32
     'u32_max_value': 1000,  # Highest acceptable value for u32
-    'f32_max_abs_value': 1000,  # Biggest acceptable  value for f32
-    'f32_min_abs_value': 0.0001,  # Smallest acceptable value for f32
-    'f32_max_digits': 5,  # Maximum number of digits for f32 (excludes - and .)
+
+    'f32_max_abs_value': 1e10,  # Biggest acceptable  value for f32
+    'f32_min_abs_value': 1e-10,  # Smallest acceptable value for f32
+    'f32_max_digits': 20,  # Maximum number of digits for f32 (excludes - and .)
+
+    'f64_max_abs_value': 1e20,  # Biggest acceptable  value for f64
+    'f64_min_abs_value': 1e-20,  # Smallest acceptable value for f64
+    'f64_max_digits': 20,  # Maximum number of digits for f64 (excludes - and .)
 }
 
 options = {**options, **default_options}
@@ -44,15 +50,25 @@ def take_buffer_len(buffer: bytearray, length: int, str_fn: Callable[[bytearray]
     return None, buffer
 
 
-def try_get_dword(buffer: bytearray, unpack_format: str, result_filter: Callable[[Any], bool],
-                  instruction: str, result_format: str) -> Tuple[Union[str, List[str], None], bytearray]:
-    def get_dword_str(dword: bytearray) -> str:
-        result, = struct.unpack(unpack_format, dword)
+def try_unpack_value(buffer: bytearray, size: int, unpack_format: str, result_filter: Callable[[Any], bool],
+                     instruction: str, result_format: str) -> Tuple[Union[str, List[str], None], bytearray]:
+    def get_value_str(value: bytearray) -> str:
+        result, = struct.unpack(unpack_format, value)
         if not result_filter(result):
             return None
         return f'{instruction} {result_format.format(result)}'
 
-    return take_buffer_len(buffer, 4, get_dword_str)
+    return take_buffer_len(buffer, size, get_value_str)
+
+
+def try_get_dword(buffer: bytearray, unpack_format: str, result_filter: Callable[[Any], bool],
+                  instruction: str, result_format: str) -> Tuple[Union[str, List[str], None], bytearray]:
+    return try_unpack_value(buffer, 4, unpack_format, result_filter, instruction, result_format)
+
+
+def try_get_qword(buffer: bytearray, unpack_format: str, result_filter: Callable[[Any], bool],
+                  instruction: str, result_format: str) -> Tuple[Union[str, List[str], None], bytearray]:
+    return try_unpack_value(buffer, 8, unpack_format, result_filter, instruction, result_format)
 
 
 def try_get_zero(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
@@ -79,22 +95,37 @@ def try_get_zero(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytear
     return take_buffer_len(buffer, 4, get_dword_str)
 
 
-def try_get_f32(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
-    def result_filter(f: float) -> bool:
-        if f == 0.0:
+def filter_float(f: float, min_opt_name='f32_min_abs_value', max_opt_name='f32_max_abs_value',
+                 digits_opt_name='f32_max_digits') -> bool:
+    if f == 0.0:
+        return False
+    if f != f:  # NaN
+        return False
+    abs_f = abs(f)
+    if (min_abs := options.get(min_opt_name)) and abs_f < min_abs:
+        return False
+    if (max_abs := options.get(max_opt_name)) and abs_f > max_abs:
+        return False
+    if max_digits := options.get(digits_opt_name):
+        s = str(abs_f).replace('.', '').strip('0')
+        if len(s) > max_digits:
             return False
-        if f != f:  # NaN
-            return False
-        abs_f = abs(f)
-        if (min_abs := options.get('f32_min_abs_value')) and abs_f < min_abs:
-            return False
-        if (max_abs := options.get('f32_max_abs_value')) and abs_f > max_abs:
-            return False
-        if (max_digits := options.get('f32_max_digits')) and len(str(abs_f).replace('.', '')) > max_digits:
-            return False
-        return True
 
-    return try_get_dword(buffer, '>f', result_filter, 'float', '{}')
+    return True
+
+
+def try_get_f32(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
+    def filter_f32(f: float) -> bool:
+        return filter_float(f, 'f32_min_abs_value', 'f32_max_abs_value', 'f32_max_digits')
+
+    return try_get_dword(buffer, '>f', filter_f32, 'float', '{}')
+
+
+def try_get_f64(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
+    def filter_f64(f: float) -> bool:
+        return filter_float(f, 'f64_min_abs_value', 'f64_max_abs_value', 'f64_max_digits')
+
+    return try_get_qword(buffer, '>d', filter_f64, 'double', '{}')
 
 
 def try_get_u32(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearray]:
@@ -179,6 +210,7 @@ def take_buffer(buffer: bytearray) -> Tuple[Union[str, List[str], None], bytearr
     try_funcs = [
         try_get_asciz if options.get('find_asciz') else None,
         try_get_zero,
+        try_get_f64 if options.get('find_f64') else None,
         try_get_f32 if options.get('find_f32') else None,
         try_get_s32 if options.get('find_s32') else None,
         try_get_u32 if options.get('find_u32') else None,
