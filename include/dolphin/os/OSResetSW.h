@@ -6,18 +6,35 @@
 
 struct _OSResetSW_Unk1;
 typedef BOOL (*OSResetSW_Predicate)(struct _OSResetSW_Unk1 *);
+typedef union
+{
+    OSResetSW_Predicate predicate;
+    struct
+    {
+        u8 x0_addr_prefix;
+        u8 x1_addr_suffix;
+    } bytes;
+} OSResetSW_Predicate_Union;
+
+typedef enum
+{
+    OSRESETSW_ENUM1_UNK0,
+    OSRESETSW_ENUM1_UNK1,
+    OSRESETSW_ENUM1_UNK2,
+    OSRESETSW_ENUM1_UNK3,
+    OSRESETSW_ENUM1_UNK4,
+    OSRESETSW_ENUM1_UNK5,
+    OSRESETSW_ENUM1_UNK6,
+} OSResetSW_Enum1;
+
 typedef struct _OSResetSW_Unk1
 {
-    union
-    {
-        u32 u32;
-        u8 bytes[4];
-    } x0_maybe_color;
+    OSResetSW_Predicate_Union x0_predicate_union;
     s32 x4;
     s32 x8;
     u8 *xC_buffer;
     u8 x10_pad[0x14 - 0x10];
-    u32 x14;
+    OSResetSW_Enum1 x14_enum;
     u8 x18_pad[0x54 - 0x18];
     u8 *x54_buffer;
     u8 x58_pad[0x5E - 0x58];
@@ -29,12 +46,12 @@ typedef struct _OSResetSW_Unk1
     u8 x9B_pad[0xB4 - 0x9B];
     u8 *xB4_buffer;
     u8 xB8_pad[0xBC - 0xB8];
-    u32 xBC;
+    u32 xBC_flags;
     u8 xC0_pad[0xC4 - 0xC0];
     BOOL xC4;
     u8 xCC_pad[0xD0 - 0xCC];
     BOOL xD0;
-    OSResetSW_Predicate xD4;
+    OSResetSW_Predicate xD4_predicate;
 } OSResetSW_Unk1;
 
 typedef BOOL (*OSResetSW_MulticastPredicate)(OSResetSW_Predicate *);
