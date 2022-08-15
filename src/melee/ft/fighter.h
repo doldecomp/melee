@@ -433,7 +433,7 @@ typedef struct _ECBFlagStruct {
 
 typedef struct SurfaceData {
     s32 index;
-    s32 unk;
+    u32 unk;
     Vec3 normal;
 } SurfaceData;
 
@@ -486,9 +486,7 @@ typedef struct _CollData
     s32 x134_envFlags;
     s32 filler138;
     s32 filler13C;
-    s32 x140;
-    s32 filler144;
-    s32 filler148;
+    Vec3 x140;
     SurfaceData x14C_ground;
     SurfaceData x160_rightwall;
     SurfaceData x174_leftwall;

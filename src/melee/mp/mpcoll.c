@@ -1,5 +1,4 @@
-// python ../asm-differ/diff.py -mwobs func_80043754
-// https://decomp.me/scratch/JEEcj
+// python ../asm-differ/diff.py -mwobs func_X
 
 #include "mpcoll.h"
 #include "melee/ft/ftlib.h"
@@ -7,7 +6,6 @@
 #include "melee/lb/lbvector.h"
 
 // TODO: proper signatures, mplib.h
-s32 func_800509B8();
 s32 func_80052700();
 s32 func_8004F008();
 s32 func_80054584();
@@ -809,7 +807,7 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
     dist_top_y = fabs_inline(dist_top_y);
 
     dist_right_y = arg1->x84_ecb.right.y - arg1->xA4_ecbCurrCorrect.right.y;
-    if (dist_right_y < 0) dist_right_y= -dist_right_y;
+    if (dist_right_y < 0) dist_right_y = -dist_right_y;
 
     if (dist_top_y < dist_right_y) {
         dist_top_y = dist_right_y;
@@ -844,243 +842,80 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
     return ret;
 }
 
-// 800439FC
-#ifdef NON_MATCHING
+// 800439FC https://decomp.me/scratch/T1yAJ
 void func_800439FC(CollData* arg0) {
-    f32 sp14;
-    f32 sp10;
+    Vec3 sp10;
     f32 spC;
+    f32 temp_f3;
+    f32 temp_f4;
     f32 var_f31;
 
-    var_f31 = fabs_inline(arg0->xA4_ecbCurrCorrect.right.x);
-    if (func_800501CC(&arg0->x140, 0, 0, 0, arg0->x48, arg0->x4C, (arg0->x188_ceiling.normal.y * var_f31) + arg0->x4_vec.x + var_f31, -((arg0->x188_ceiling.normal.x * var_f31) - (arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y))) != 0) {
-        sp10 = arg0->x140 - var_f31;
-        sp14 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (func_8004E090(arg0->x188_ceiling.index, &sp10, &spC, &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal, arg0->x4_vec.y) != -1) {
+    var_f31 = arg0->xA4_ecbCurrCorrect.right.x;
+    temp_f3 = arg0->x4_vec.x + var_f31;
+    temp_f4 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y;
+    if (var_f31 < 0.0f) {
+        var_f31 = -var_f31;
+    }
+    if (func_800501CC(
+            (arg0->x188_ceiling.normal.y * var_f31) + temp_f3,
+            -((arg0->x188_ceiling.normal.x * var_f31) - temp_f4),
+            temp_f3, temp_f4,
+            &arg0->x140,
+            NULL, NULL, NULL,
+            arg0->x48, arg0->x4C) != 0) {
+        sp10.x = arg0->x140.x - var_f31;
+        sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
+        if (func_8004E090(arg0->x188_ceiling.index, (Point3d* ) &sp10, &spC, (u32* ) &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal) != -1) {
             arg0->x4_vec.y += spC;
-            arg0->x4_vec.x = sp10;
+            arg0->x4_vec.x = sp10.x;
         }
     }
 }
-#else
-asm void func_800439FC(CollData* arg0) {
-    nofralloc
-/* 800439FC 000405DC  7C 08 02 A6 */	mflr r0
-/* 80043A00 000405E0  90 01 00 04 */	stw r0, 4(r1)
-/* 80043A04 000405E4  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 80043A08 000405E8  DB E1 00 28 */	stfd f31, 0x28(r1)
-/* 80043A0C 000405EC  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 80043A10 000405F0  7C 7F 1B 78 */	mr r31, r3
-/* 80043A14 000405F4  C0 02 85 C4 */	lfs f0, 0.0f
-/* 80043A18 000405F8  C3 E3 00 B4 */	lfs f31, 0xb4(r3)
-/* 80043A1C 000405FC  C0 43 00 04 */	lfs f2, 4(r3)
-/* 80043A20 00040600  FC 1F 00 40 */	fcmpo cr0, f31, f0
-/* 80043A24 00040604  C0 23 00 08 */	lfs f1, 8(r3)
-/* 80043A28 00040608  C0 03 00 B8 */	lfs f0, 0xb8(r3)
-/* 80043A2C 0004060C  EC 62 F8 2A */	fadds f3, f2, f31
-/* 80043A30 00040610  EC 81 00 2A */	fadds f4, f1, f0
-/* 80043A34 00040614  40 80 00 08 */	bge lbl_80043A3C
-/* 80043A38 00040618  FF E0 F8 50 */	fneg f31, f31
-lbl_80043A3C:
-/* 80043A3C 0004061C  C0 3F 01 94 */	lfs f1, 0x194(r31)
-/* 80043A40 00040620  38 7F 01 40 */	addi r3, r31, 0x140
-/* 80043A44 00040624  C0 1F 01 90 */	lfs f0, 0x190(r31)
-/* 80043A48 00040628  38 80 00 00 */	li r4, 0
-/* 80043A4C 0004062C  EC 21 1F FA */	fmadds f1, f1, f31, f3
-/* 80043A50 00040630  EC 40 27 FC */	fnmsubs f2, f0, f31, f4
-/* 80043A54 00040634  80 FF 00 48 */	lwz r7, 0x48(r31)
-/* 80043A58 00040638  81 1F 00 4C */	lwz r8, 0x4c(r31)
-/* 80043A5C 0004063C  38 A0 00 00 */	li r5, 0
-/* 80043A60 00040640  38 C0 00 00 */	li r6, 0
-/* 80043A64 00040644  48 00 C7 69 */	bl func_800501CC
-/* 80043A68 00040648  2C 03 00 00 */	cmpwi r3, 0
-/* 80043A6C 0004064C  41 82 00 58 */	beq lbl_80043AC4
-/* 80043A70 00040650  C0 1F 01 40 */	lfs f0, 0x140(r31)
-/* 80043A74 00040654  38 81 00 10 */	addi r4, r1, 0x10
-/* 80043A78 00040658  38 A1 00 0C */	addi r5, r1, 0xc
-/* 80043A7C 0004065C  EC 00 F8 28 */	fsubs f0, f0, f31
-/* 80043A80 00040660  38 DF 01 8C */	addi r6, r31, 0x18c
-/* 80043A84 00040664  38 FF 01 90 */	addi r7, r31, 0x190
-/* 80043A88 00040668  D0 01 00 10 */	stfs f0, 0x10(r1)
-/* 80043A8C 0004066C  C0 3F 00 08 */	lfs f1, 8(r31)
-/* 80043A90 00040670  C0 1F 00 A8 */	lfs f0, 0xa8(r31)
-/* 80043A94 00040674  EC 01 00 2A */	fadds f0, f1, f0
-/* 80043A98 00040678  D0 01 00 14 */	stfs f0, 0x14(r1)
-/* 80043A9C 0004067C  80 7F 01 88 */	lwz r3, 0x188(r31)
-/* 80043AA0 00040680  48 00 A5 F1 */	bl func_8004E090
-/* 80043AA4 00040684  2C 03 FF FF */	cmpwi r3, -1
-/* 80043AA8 00040688  41 82 00 1C */	beq lbl_80043AC4
-/* 80043AAC 0004068C  C0 3F 00 08 */	lfs f1, 8(r31)
-/* 80043AB0 00040690  C0 01 00 0C */	lfs f0, 0xc(r1)
-/* 80043AB4 00040694  EC 01 00 2A */	fadds f0, f1, f0
-/* 80043AB8 00040698  D0 1F 00 08 */	stfs f0, 8(r31)
-/* 80043ABC 0004069C  C0 01 00 10 */	lfs f0, 0x10(r1)
-/* 80043AC0 000406A0  D0 1F 00 04 */	stfs f0, 4(r31)
-lbl_80043AC4:
-/* 80043AC4 000406A4  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 80043AC8 000406A8  CB E1 00 28 */	lfd f31, 0x28(r1)
-/* 80043ACC 000406AC  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 80043AD0 000406B0  38 21 00 30 */	addi r1, r1, 0x30
-/* 80043AD4 000406B4  7C 08 03 A6 */	mtlr r0
-/* 80043AD8 000406B8  4E 80 00 20 */	blr 
-}
-#endif
 
 // 80043ADC
-#ifdef NON_MATCHING
 void func_80043ADC(CollData* arg0) {
-    f32 sp14;
-    f32 sp10;
+    Vec3 sp10;
     f32 spC;
-    f32 temp_f1;
     f32 temp_f3;
+    f32 temp_f4;
     f32 var_f31;
 
     var_f31 = arg0->xA4_ecbCurrCorrect.left.x;
     temp_f3 = arg0->x4_vec.x + var_f31;
+    temp_f4 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.left.y;
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
-    if (func_800509B8(&arg0->x140, 0, 0, 0, arg0->x48, arg0->x4C, -((arg0->x188_ceiling.normal.y * var_f31) - temp_f3), (arg0->x188_ceiling.normal.x * var_f31) + (arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.left.y)) != 0) {
-        sp10 = arg0->x140 + var_f31;
-        temp_f1 = arg0->x4_vec.y;
-        sp14 = temp_f1 + arg0->xA4_ecbCurrCorrect.top.y;
-        if (func_8004E090(arg0->x188_ceiling.index, &sp10, &spC, &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal, temp_f1) != -1) {
+    if (func_800509B8(-((arg0->x188_ceiling.normal.y * var_f31) - temp_f3), ((arg0->x188_ceiling.normal.x * var_f31) + temp_f4), temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL, arg0->x48, arg0->x4C) != 0) {
+        sp10.x = arg0->x140.x + var_f31;
+        sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
+        if (func_8004E090(arg0->x188_ceiling.index, &sp10, &spC, &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal) != -1) {
             arg0->x4_vec.y += spC;
-            arg0->x4_vec.x = sp10;
+            arg0->x4_vec.x = sp10.x;
         }
     }
 }
-#else
-asm void func_80043ADC() {
-    nofralloc
-/* 80043ADC 000406BC  7C 08 02 A6 */	mflr r0
-/* 80043AE0 000406C0  90 01 00 04 */	stw r0, 4(r1)
-/* 80043AE4 000406C4  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 80043AE8 000406C8  DB E1 00 28 */	stfd f31, 0x28(r1)
-/* 80043AEC 000406CC  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 80043AF0 000406D0  7C 7F 1B 78 */	mr r31, r3
-/* 80043AF4 000406D4  C0 02 85 C4 */	lfs f0, 0.0f
-/* 80043AF8 000406D8  C3 E3 00 BC */	lfs f31, 0xbc(r3)
-/* 80043AFC 000406DC  C0 43 00 04 */	lfs f2, 4(r3)
-/* 80043B00 000406E0  FC 1F 00 40 */	fcmpo cr0, f31, f0
-/* 80043B04 000406E4  C0 23 00 08 */	lfs f1, 8(r3)
-/* 80043B08 000406E8  C0 03 00 C0 */	lfs f0, 0xc0(r3)
-/* 80043B0C 000406EC  EC 62 F8 2A */	fadds f3, f2, f31
-/* 80043B10 000406F0  EC 81 00 2A */	fadds f4, f1, f0
-/* 80043B14 000406F4  40 80 00 08 */	bge lbl_80043B1C
-/* 80043B18 000406F8  FF E0 F8 50 */	fneg f31, f31
-lbl_80043B1C:
-/* 80043B1C 000406FC  C0 3F 01 94 */	lfs f1, 0x194(r31)
-/* 80043B20 00040700  38 7F 01 40 */	addi r3, r31, 0x140
-/* 80043B24 00040704  C0 1F 01 90 */	lfs f0, 0x190(r31)
-/* 80043B28 00040708  38 80 00 00 */	li r4, 0
-/* 80043B2C 0004070C  EC 21 1F FC */	fnmsubs f1, f1, f31, f3
-/* 80043B30 00040710  EC 40 27 FA */	fmadds f2, f0, f31, f4
-/* 80043B34 00040714  80 FF 00 48 */	lwz r7, 0x48(r31)
-/* 80043B38 00040718  81 1F 00 4C */	lwz r8, 0x4c(r31)
-/* 80043B3C 0004071C  38 A0 00 00 */	li r5, 0
-/* 80043B40 00040720  38 C0 00 00 */	li r6, 0
-/* 80043B44 00040724  48 00 CE 75 */	bl func_800509B8
-/* 80043B48 00040728  2C 03 00 00 */	cmpwi r3, 0
-/* 80043B4C 0004072C  41 82 00 58 */	beq lbl_80043BA4
-/* 80043B50 00040730  C0 1F 01 40 */	lfs f0, 0x140(r31)
-/* 80043B54 00040734  38 81 00 10 */	addi r4, r1, 0x10
-/* 80043B58 00040738  38 A1 00 0C */	addi r5, r1, 0xc
-/* 80043B5C 0004073C  EC 00 F8 2A */	fadds f0, f0, f31
-/* 80043B60 00040740  38 DF 01 8C */	addi r6, r31, 0x18c
-/* 80043B64 00040744  38 FF 01 90 */	addi r7, r31, 0x190
-/* 80043B68 00040748  D0 01 00 10 */	stfs f0, 0x10(r1)
-/* 80043B6C 0004074C  C0 3F 00 08 */	lfs f1, 8(r31)
-/* 80043B70 00040750  C0 1F 00 A8 */	lfs f0, 0xa8(r31)
-/* 80043B74 00040754  EC 01 00 2A */	fadds f0, f1, f0
-/* 80043B78 00040758  D0 01 00 14 */	stfs f0, 0x14(r1)
-/* 80043B7C 0004075C  80 7F 01 88 */	lwz r3, 0x188(r31)
-/* 80043B80 00040760  48 00 A5 11 */	bl func_8004E090
-/* 80043B84 00040764  2C 03 FF FF */	cmpwi r3, -1
-/* 80043B88 00040768  41 82 00 1C */	beq lbl_80043BA4
-/* 80043B8C 0004076C  C0 3F 00 08 */	lfs f1, 8(r31)
-/* 80043B90 00040770  C0 01 00 0C */	lfs f0, 0xc(r1)
-/* 80043B94 00040774  EC 01 00 2A */	fadds f0, f1, f0
-/* 80043B98 00040778  D0 1F 00 08 */	stfs f0, 8(r31)
-/* 80043B9C 0004077C  C0 01 00 10 */	lfs f0, 0x10(r1)
-/* 80043BA0 00040780  D0 1F 00 04 */	stfs f0, 4(r31)
-lbl_80043BA4:
-/* 80043BA4 00040784  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 80043BA8 00040788  CB E1 00 28 */	lfd f31, 0x28(r1)
-/* 80043BAC 0004078C  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 80043BB0 00040790  38 21 00 30 */	addi r1, r1, 0x30
-/* 80043BB4 00040794  7C 08 03 A6 */	mtlr r0
-/* 80043BB8 00040798  4E 80 00 20 */	blr 
-}
-#pragma peephole on
-#endif
 
 // 80043BBC
-#ifdef NON_MATCHING
 s32 func_80043BBC(CollData* arg0, s32* arg1) {
     s32 sp10;
     s32 temp_r31;
+    f32 new_var;
 
     temp_r31 = func_80052700(arg0->x14C_ground.index);
-    if ((func_800501CC(NULL, (s32) &sp10, 0, 0, arg0->x48, arg0->x4C, arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.bottom.x, arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y) != 0) && (sp10 != temp_r31)) {
+    new_var = arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.bottom.x;
+    if ((func_800501CC(
+            new_var,
+            arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y,
+            arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.right.x,
+            arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y,
+            NULL, &sp10, NULL, NULL, arg0->x48, arg0->x4C)
+        != 0) && (sp10 != temp_r31)) {
         *arg1 = sp10;
         return 1;
     }
     return 0;
 }
-#else
-asm void func_80043BBC() {
-    nofralloc
-/* 80043BBC 0004079C  7C 08 02 A6 */	mflr r0
-/* 80043BC0 000407A0  90 01 00 04 */	stw r0, 4(r1)
-/* 80043BC4 000407A4  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 80043BC8 000407A8  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 80043BCC 000407AC  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 80043BD0 000407B0  7C 9E 23 78 */	mr r30, r4
-/* 80043BD4 000407B4  93 A1 00 1C */	stw r29, 0x1c(r1)
-/* 80043BD8 000407B8  7C 7D 1B 78 */	mr r29, r3
-/* 80043BDC 000407BC  80 63 01 4C */	lwz r3, 0x14c(r3)
-/* 80043BE0 000407C0  48 00 EB 21 */	bl func_80052700
-/* 80043BE4 000407C4  C0 7D 00 04 */	lfs f3, 4(r29)
-/* 80043BE8 000407C8  7C 7F 1B 78 */	mr r31, r3
-/* 80043BEC 000407CC  C0 3D 00 AC */	lfs f1, 0xac(r29)
-/* 80043BF0 000407D0  38 81 00 10 */	addi r4, r1, 0x10
-/* 80043BF4 000407D4  C0 1D 00 B4 */	lfs f0, 0xb4(r29)
-/* 80043BF8 000407D8  EC 23 08 2A */	fadds f1, f3, f1
-/* 80043BFC 000407DC  C0 9D 00 08 */	lfs f4, 8(r29)
-/* 80043C00 000407E0  C0 5D 00 B0 */	lfs f2, 0xb0(r29)
-/* 80043C04 000407E4  EC 63 00 2A */	fadds f3, f3, f0
-/* 80043C08 000407E8  C0 1D 00 B8 */	lfs f0, 0xb8(r29)
-/* 80043C0C 000407EC  EC 44 10 2A */	fadds f2, f4, f2
-/* 80043C10 000407F0  80 FD 00 48 */	lwz r7, 0x48(r29)
-/* 80043C14 000407F4  EC 84 00 2A */	fadds f4, f4, f0
-/* 80043C18 000407F8  81 1D 00 4C */	lwz r8, 0x4c(r29)
-/* 80043C1C 000407FC  38 60 00 00 */	li r3, 0
-/* 80043C20 00040800  38 A0 00 00 */	li r5, 0
-/* 80043C24 00040804  38 C0 00 00 */	li r6, 0
-/* 80043C28 00040808  48 00 C5 A5 */	bl func_800501CC
-/* 80043C2C 0004080C  2C 03 00 00 */	cmpwi r3, 0
-/* 80043C30 00040810  41 82 00 1C */	beq lbl_80043C4C
-/* 80043C34 00040814  80 01 00 10 */	lwz r0, 0x10(r1)
-/* 80043C38 00040818  7C 00 F8 00 */	cmpw r0, r31
-/* 80043C3C 0004081C  41 82 00 10 */	beq lbl_80043C4C
-/* 80043C40 00040820  90 1E 00 00 */	stw r0, 0(r30)
-/* 80043C44 00040824  38 60 00 01 */	li r3, 1
-/* 80043C48 00040828  48 00 00 08 */	b lbl_80043C50
-lbl_80043C4C:
-/* 80043C4C 0004082C  38 60 00 00 */	li r3, 0
-lbl_80043C50:
-/* 80043C50 00040830  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 80043C54 00040834  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 80043C58 00040838  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 80043C5C 0004083C  83 A1 00 1C */	lwz r29, 0x1c(r1)
-/* 80043C60 00040840  38 21 00 28 */	addi r1, r1, 0x28
-/* 80043C64 00040844  7C 08 03 A6 */	mtlr r0
-/* 80043C68 00040848  4E 80 00 20 */	blr 
-}
-#pragma peephole on
-#endif
 
 // 80043C6C
 #ifdef NON_MATCHING
