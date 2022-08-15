@@ -783,6 +783,9 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_003.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_009.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_010.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_011.s.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_002.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_002.s.o\
 
