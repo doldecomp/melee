@@ -18,6 +18,12 @@ struct_803BB0B0:
     .4byte NULL
     .4byte 0x3F800000
 
+.section .bss, "wa"
+    .balign 8
+
+skip40_804336D0:
+	.skip 0x40
+
 .section .text
 
 # https://decomp.me/scratch/2RGzd

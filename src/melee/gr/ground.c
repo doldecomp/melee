@@ -3988,7 +3988,7 @@ BOOL func_801C4E20(void)
     return TRUE;
 }
 
-// Not matching due to an epilogue ordering bug in frank.py
+// Not matching due to an epilogue ordering bug in @frank
 #ifdef NON_MATCHING
 void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
                    HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5)
