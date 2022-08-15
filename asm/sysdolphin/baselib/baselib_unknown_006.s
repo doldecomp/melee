@@ -2,7 +2,7 @@
 
 .section .text
 
-# https://decomp.me/scratch/SRLby
+# https://decomp.me/scratch/SBhbM // 18500 (0%)
 .global func_803B2B20
 func_803B2B20:
 /* 803B2B20 003AF700  7C 08 02 A6 */	mflr r0

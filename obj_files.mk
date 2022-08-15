@@ -38,7 +38,15 @@ TEXT_O_FILES :=\
 	$(BUILD_DIR)/asm/melee/lb/lbmthp.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbjpeg.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o\
-	$(BUILD_DIR)/asm/melee/lb/lbrefract.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/melee/lb/lbrefract_shared_001.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbrefract_001.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbrefract_002.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbrefract_003_data.s.o\
+	$(BUILD_DIR)/src/melee/lb/lbrefract.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/lb/lbaudio_ax.s.o\
 
 TEXT_O_FILES +=\

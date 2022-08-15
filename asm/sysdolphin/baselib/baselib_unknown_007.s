@@ -29,6 +29,7 @@ jtbl_80430C04:
 
 .section .text
 
+# https://decomp.me/scratch/nfhCq // 8200 (20.39%)
 func_803B2E04:
 /* 803B2E04 003AF9E4  3C A0 4E C5 */	lis r5, 0x4EC4EC4F@ha
 /* 803B2E08 003AF9E8  54 66 06 3E */	clrlwi r6, r3, 0x18
@@ -141,6 +142,7 @@ lbl_803B2F78:
 /* 803B2F98 003AFB78  54 03 06 3E */	clrlwi r3, r0, 0x18
 /* 803B2F9C 003AFB7C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/2HBMp // 1864 (46.74%)
 .global func_803B2FA0
 func_803B2FA0:
 /* 803B2FA0 003AFB80  7C 08 02 A6 */	mflr r0

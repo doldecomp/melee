@@ -44,9 +44,9 @@
 /* 003AFF24 */ extern void func_803B3344(s8);
 /* 003AFDAC */ extern s32 func_803B31CC(unk_t, s32);
 /* 003AFC0C */ extern s32 func_803B302C(s8, u8);
-/* 003AFB80 */ extern s32 func_803B2FA0(s32, s32);
+/* 003AFB80 */ extern s32 func_803B2FA0(u8 *, size_t);
 /* 003AF9E4 */ extern u8 func_803B2E04(u8, u8);
-/* 003AF700 */ extern void func_803B2B20(u8 *, s32, s32);
+/* 003AF700 */ extern void func_803B2B20(u8 *, size_t, size_t);
 /* 003AF6BC */ extern BOOL func_803B2ADC(unk_t);
 /* 003AF62C */ extern s32 func_803B2A4C(s32, s32, s32, s32);
 /* 003AF5B8 */ extern s32 func_803B29D8(s32, s32, s32, s32);
