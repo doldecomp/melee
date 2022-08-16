@@ -7,7 +7,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"asm\melee\ft\*_unknown_*.s"
+    'input_glob': r"asm\melee\ft\*_unknown_006.s"
 }
 
 default_options = {
