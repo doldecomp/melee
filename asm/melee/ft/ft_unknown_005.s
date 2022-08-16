@@ -243,7 +243,6 @@ lbl_8045993C:
 .global lbl_8045996C
 lbl_8045996C:
     .skip 0x84
-.global lbl_804599F0
 lbl_804599F0:
     .skip 0x78
 
@@ -322,11 +321,9 @@ CostumeListsForeachCharacter:
 
 .section .sdata
     .balign 8
-.global lbl_804D3AA8
 lbl_804D3AA8:
     .asciz "jobj.h"
     .balign 4
-.global lbl_804D3AB0
 lbl_804D3AB0:
     .asciz "jobj"
     .balign 4
