@@ -7,7 +7,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"asm\melee\if\code_802F7288.s"
+    'input_glob': r"asm\melee\db\code_80225374.s"
 }
 
 default_options = {

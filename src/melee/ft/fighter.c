@@ -30,7 +30,7 @@ extern HSD_PadStatus HSD_PadRumbleData[4];
 
 extern StageInfo stage_info; // from asm/melee/text_2.s
 
-extern s32 g_debugLevel; // asm/melee/db/code_80225374.s
+extern s32 g_debugLevel; // asm/melee/db/db_unknown_001.s
 
 extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
