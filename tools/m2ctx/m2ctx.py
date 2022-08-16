@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-import os
-import sys
 import subprocess
-import tempfile
+import sys
 from pathlib import Path
 
 here = Path(__file__).parent
@@ -28,7 +26,7 @@ MWCC_FLAGS = [
 ]
 
 
-def normalize_path(p: str | os.PathLike) -> str:
+def normalize_path(p: str) -> str:
     p = Path(p)
     if not p.is_relative_to(root):
         p = root / p
@@ -36,13 +34,12 @@ def normalize_path(p: str | os.PathLike) -> str:
     return str(p)
 
 
-def import_c_file(in_file: str | os.PathLike) -> str:
+def import_c_file(in_file: str) -> str:
     in_file = normalize_path(src / in_file)
     c_command = [normalize_path(mwcc_command), *MWCC_FLAGS, "-E", in_file]
 
-    out_text = ""
     try:
-        out_text += subprocess.check_output(c_command, cwd=root, encoding="utf-8", shell=True)
+        out_text = subprocess.check_output(c_command, cwd=root, encoding="utf8")
     except subprocess.CalledProcessError:
         print(
             "Failed to preprocess input file, when running command:\n"
@@ -70,7 +67,7 @@ def main():
 
     output = import_c_file(args.c_file)
 
-    with open(root / "ctx.c", "w", encoding="UTF-8") as f:
+    with open(root / "ctx.c", "w", encoding="utf8") as f:
         f.write(output)
 
 
