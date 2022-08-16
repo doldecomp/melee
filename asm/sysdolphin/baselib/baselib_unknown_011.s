@@ -229,7 +229,7 @@ func_80392474:
 /* 80392478 0038F058  90 0D C1 B0 */	stw r0, lbl_804D7850@sda21(r13)
 /* 8039247C 0038F05C  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/vqBio // 4200 (0%)
+# https://decomp.me/scratch/vqBio // 465 (88.93%)
 func_80392480:
 /* 80392480 0038F060  7C 08 02 A6 */	mflr r0
 /* 80392484 0038F064  90 01 00 04 */	stw r0, 4(r1)
@@ -279,7 +279,7 @@ lbl_8039250C:
 /* 80392520 0038F100  7C 08 03 A6 */	mtlr r0
 /* 80392524 0038F104  4E 80 00 20 */	blr 
 
-# https://decomp.me/scratch/tB1gU // 900 (0%)
+# https://decomp.me/scratch/tB1gU // 5 (99.44%) @permuter
 .global func_80392528
 func_80392528:
 /* 80392528 0038F108  7C 08 02 A6 */	mflr r0
