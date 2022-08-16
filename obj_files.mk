@@ -458,7 +458,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/if/ifall.s.o\
 	$(BUILD_DIR)/asm/melee/if/iftime.s.o\
 	$(BUILD_DIR)/asm/melee/if/ifstatus.s.o\
-	$(BUILD_DIR)/asm/melee/if/code_802F7288.s.o\
+	$(BUILD_DIR)/asm/melee/if/if_unknown_001.s.o\
 	$(BUILD_DIR)/asm/melee/if/ifstock.s.o\
 	$(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 

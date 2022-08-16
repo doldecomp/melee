@@ -1,4 +1,3 @@
-import glob
 import re
 import struct
 from math import ceil
@@ -8,7 +7,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': root / "asm/sysdolphin/baselib/baselib_unknown_002.s"
+    'input_glob': r"asm\melee\if\code_802F7288.s"
 }
 
 default_options = {
@@ -246,12 +245,7 @@ def read_match(match: Match[str] | None):
     return None
 
 
-def main():
-    for path in glob.glob(str(options['input_glob'])):
-        method_name(path)
-
-
-def method_name(path):
+def process_file(path):
     with open(path, "r") as f:
         text = f.readlines()
         text.append('')
@@ -278,6 +272,11 @@ def method_name(path):
                     write_buffer(f, buffer, indent)
                     indent = None
                 f.write(line)
+
+
+def main():
+    for path in root.glob(options['input_glob']):
+        process_file(path)
 
 
 if __name__ == "__main__":

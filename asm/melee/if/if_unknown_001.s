@@ -2,7 +2,7 @@
 
 .section .text  # 0x802F3394 - 0x8032261C
 
-.global func_802F7288
+# https://decomp.me/scratch/RDqRe // 7800 (1.27%)
 func_802F7288:
 /* 802F7288 002F3E68  7C 08 02 A6 */	mflr r0
 /* 802F728C 002F3E6C  90 01 00 04 */	stw r0, 4(r1)
@@ -87,6 +87,7 @@ lbl_802F73A0:
 /* 802F73BC 002F3F9C  7C 08 03 A6 */	mtlr r0
 /* 802F73C0 002F3FA0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/C1FoM // 6600 (1.49%)
 .global lbl_802F73C4
 lbl_802F73C4:
 /* 802F73C4 002F3FA4  7C 08 02 A6 */	mflr r0
@@ -164,6 +165,7 @@ lbl_802F74B4:
 /* 802F74C8 002F40A8  7C 08 03 A6 */	mtlr r0
 /* 802F74CC 002F40AC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/yu4V2 // 6400 (1.54%)
 .global lbl_802F74D0
 lbl_802F74D0:
 /* 802F74D0 002F40B0  7C 08 02 A6 */	mflr r0
@@ -239,6 +241,7 @@ lbl_802F75B8:
 /* 802F75CC 002F41AC  7C 08 03 A6 */	mtlr r0
 /* 802F75D0 002F41B0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/ompWa // 13600 (0.73%)
 func_802F75D4:
 /* 802F75D4 002F41B4  7C 08 02 A6 */	mflr r0
 /* 802F75D8 002F41B8  90 01 00 04 */	stw r0, 4(r1)
@@ -398,7 +401,7 @@ lbl_802F77E0:
 /* 802F77F0 002F43D0  7C 08 03 A6 */	mtlr r0
 /* 802F77F4 002F43D4  4E 80 00 20 */	blr 
 
-.global func_802F77F8
+# https://decomp.me/scratch/W1OSN // 19100 (0.52%)
 func_802F77F8:
 /* 802F77F8 002F43D8  7C 08 02 A6 */	mflr r0
 /* 802F77FC 002F43DC  3C C0 80 4A */	lis r6, lbl_804A1340@ha
@@ -613,6 +616,7 @@ lbl_802F7AE4:
 /* 802F7AF0 002F46D0  7C 08 03 A6 */	mtlr r0
 /* 802F7AF4 002F46D4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/WadtZ // 4600 (2.13%)
 .global func_802F7AF8
 func_802F7AF8:
 /* 802F7AF8 002F46D8  7C 08 02 A6 */	mflr r0
@@ -665,6 +669,7 @@ lbl_802F7BA0:
 /* 802F7BAC 002F478C  7C 08 03 A6 */	mtlr r0
 /* 802F7BB0 002F4790  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/f14tv // 3000 (3.23%)
 .global func_802F7BB4
 func_802F7BB4:
 /* 802F7BB4 002F4794  7C 08 02 A6 */	mflr r0
@@ -700,6 +705,7 @@ lbl_802F7C14:
 /* 802F7C28 002F4808  7C 08 03 A6 */	mtlr r0
 /* 802F7C2C 002F480C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/vLGeu // 5300 (1.85%)
 .global func_802F7C30
 func_802F7C30:
 /* 802F7C30 002F4810  7C 08 02 A6 */	mflr r0
@@ -759,6 +765,7 @@ lbl_802F7CEC:
 /* 802F7D00 002F48E0  7C 08 03 A6 */	mtlr r0
 /* 802F7D04 002F48E4  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/31ni8 // 7000 (1.41%)
 .global func_802F7D08
 func_802F7D08:
 /* 802F7D08 002F48E8  7C 08 02 A6 */	mflr r0
@@ -836,6 +843,7 @@ lbl_802F7E08:
 /* 802F7E1C 002F49FC  7C 08 03 A6 */	mtlr r0
 /* 802F7E20 002F4A00  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/XTs8a // 2100 (4.55%)
 .global func_802F7E24
 func_802F7E24:
 /* 802F7E24 002F4A04  7C 08 02 A6 */	mflr r0
@@ -861,6 +869,7 @@ func_802F7E24:
 /* 802F7E74 002F4A54  7C 08 03 A6 */	mtlr r0
 /* 802F7E78 002F4A58  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/RCHtv // 3100 (3.12%)
 .global func_802F7E7C
 func_802F7E7C:
 /* 802F7E7C 002F4A5C  7C 08 02 A6 */	mflr r0
@@ -899,47 +908,34 @@ lbl_802F7EC4:
 /* 802F7EF4 002F4AD4  7C 08 03 A6 */	mtlr r0
 /* 802F7EF8 002F4AD8  4E 80 00 20 */	blr 
 
-
 .section .data
     .balign 8
-.global lbl_803F9780
 lbl_803F9780:
     .asciz "ScInfStc_scene_models"
     .balign 4
-.global lbl_803F9798
 lbl_803F9798:
     .asciz "translate"
     .balign 4
 
-
 .section .bss, "wa"
     .balign 8
-.global lbl_804A1340
 lbl_804A1340:
 	.skip 0x38
 
-
 .section .sdata
     .balign 8
-.global lbl_804D57C8
 lbl_804D57C8:
     .asciz "jobj.h"
     .balign 4
-.global lbl_804D57D0
 lbl_804D57D0:
     .asciz "jobj"
     .balign 4
 
-
 .section .sdata2
     .balign 8
-.global lbl_804DDAB0
 lbl_804DDAB0:
-	.4byte 0x43300000
-	.4byte 0x00000000
-.global lbl_804DDAB8
+	.double 4503599627370496.0
 lbl_804DDAB8:
-	.4byte 0x00000000
-.global lbl_804DDABC
+	.float 0.0
 lbl_804DDABC:
-	.4byte 0x41400000
+	.float 12.0
