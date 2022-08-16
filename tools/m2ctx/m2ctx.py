@@ -5,10 +5,11 @@ import os
 import sys
 import subprocess
 import tempfile
+from pathlib import Path
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
-root_dir = os.path.abspath(os.path.join(script_dir, ".."))
-src_dir = root_dir + "src/"
+here = Path(__file__).parent.resolve()
+root = (here / '../../').resolve()
+src = (root / "src").resolve()
 
 # Project-specific
 CPP_FLAGS = [
@@ -25,24 +26,25 @@ CPP_FLAGS = [
     "-DM2CTX",
 ]
 
+
 def import_c_file(in_file) -> str:
-    in_file = os.path.relpath(in_file, root_dir)
+    in_file = os.path.relpath(in_file, root)
     cpp_command = ["gcc", "-E", "-P", "-dM", *CPP_FLAGS, in_file]
     cpp_command2 = ["gcc", "-E", "-P", *CPP_FLAGS, in_file]
 
     with tempfile.NamedTemporaryFile(suffix=".c") as tmp:
-        stock_macros = subprocess.check_output(["gcc", "-E", "-P", "-dM", tmp.name], cwd=root_dir, encoding="utf-8")
+        stock_macros = subprocess.check_output(["gcc", "-E", "-P", "-dM", tmp.name], cwd=root, encoding="utf-8")
 
     out_text = ""
     try:
-        out_text += subprocess.check_output(cpp_command, cwd=root_dir, encoding="utf-8")
-        out_text += subprocess.check_output(cpp_command2, cwd=root_dir, encoding="utf-8")
+        out_text += subprocess.check_output(cpp_command, cwd=root, encoding="utf-8")
+        out_text += subprocess.check_output(cpp_command2, cwd=root, encoding="utf-8")
     except subprocess.CalledProcessError:
         print(
             "Failed to preprocess input file, when running command:\n"
             + ' '.join(cpp_command),
             file=sys.stderr,
-            )
+        )
         sys.exit(1)
 
     if not out_text:
@@ -52,6 +54,7 @@ def import_c_file(in_file) -> str:
     for line in stock_macros.strip().splitlines():
         out_text = out_text.replace(line + "\n", "")
     return out_text
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -65,7 +68,7 @@ def main():
 
     output = import_c_file(args.c_file)
 
-    with open(os.path.join(root_dir, "ctx.c"), "w", encoding="UTF-8") as f:
+    with open(os.path.join(root, "ctx.c"), "w", encoding="UTF-8") as f:
         f.write(output)
 
 
