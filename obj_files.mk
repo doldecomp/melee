@@ -55,7 +55,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/pl/player.c.o\
-	$(BUILD_DIR)/asm/melee/pl/code_8003715C.s.o\
+	$(BUILD_DIR)/asm/melee/pl/pl_unknown_001.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/mp/mpcoll.s.o\
