@@ -7,42 +7,46 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-here = Path(__file__).parent.resolve()
-root = (here / '../../').resolve()
-src = (root / "src").resolve()
+here = Path(__file__).parent
+root = here / '../../'
+src = root / "src"
+mwcc_command = root / "tools/mwcc_compiler/1.2.5e/mwcceppc.exe"
 
-# Project-specific
-CPP_FLAGS = [
-    "-Iinclude",
-    "-Isrc",
-    "-Iver/current/build/include",
-    "-D_LANGUAGE_C",
-    "-DF3DEX_GBI_2",
-    "-D_MIPS_SZLONG=32",
-    "-DSCRIPT(...)={}",
-    "-D__attribute__(...)=",
-    "-D__asm__(...)=",
-    "-ffreestanding",
+MWCC_FLAGS = [
+    "-EP",
+    "-Cpp_exceptions", "off",
+    "-proc", "gekko",
+    "-fp", "hard",
+    "-fp_contract", "on",
+    "-O4,p",
+    "-enum", "int",
+    "-nodefaults",
+    "-inline", "auto", "-I-",
+    "-i", "include",
+    "-i", "src",
     "-DM2CTX",
 ]
 
 
-def import_c_file(in_file) -> str:
-    in_file = os.path.relpath(in_file, root)
-    cpp_command = ["gcc", "-E", "-P", "-dM", *CPP_FLAGS, in_file]
-    cpp_command2 = ["gcc", "-E", "-P", *CPP_FLAGS, in_file]
+def normalize_path(p: str | os.PathLike) -> str:
+    p = Path(p)
+    if not p.is_relative_to(root):
+        p = root / p
+    p = p.resolve().relative_to(root.resolve())
+    return str(p)
 
-    with tempfile.NamedTemporaryFile(suffix=".c") as tmp:
-        stock_macros = subprocess.check_output(["gcc", "-E", "-P", "-dM", tmp.name], cwd=root, encoding="utf-8")
+
+def import_c_file(in_file: str | os.PathLike) -> str:
+    in_file = normalize_path(src / in_file)
+    c_command = [normalize_path(mwcc_command), *MWCC_FLAGS, "-E", in_file]
 
     out_text = ""
     try:
-        out_text += subprocess.check_output(cpp_command, cwd=root, encoding="utf-8")
-        out_text += subprocess.check_output(cpp_command2, cwd=root, encoding="utf-8")
+        out_text += subprocess.check_output(c_command, cwd=root, encoding="utf-8", shell=True)
     except subprocess.CalledProcessError:
         print(
             "Failed to preprocess input file, when running command:\n"
-            + ' '.join(cpp_command),
+            + ' '.join(c_command),
             file=sys.stderr,
         )
         sys.exit(1)
@@ -51,8 +55,6 @@ def import_c_file(in_file) -> str:
         print("Output is empty - aborting")
         sys.exit(1)
 
-    for line in stock_macros.strip().splitlines():
-        out_text = out_text.replace(line + "\n", "")
     return out_text
 
 
@@ -68,7 +70,7 @@ def main():
 
     output = import_c_file(args.c_file)
 
-    with open(os.path.join(root, "ctx.c"), "w", encoding="UTF-8") as f:
+    with open(root / "ctx.c", "w", encoding="UTF-8") as f:
         f.write(output)
 
 
