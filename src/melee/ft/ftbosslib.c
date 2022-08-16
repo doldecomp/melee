@@ -1,5 +1,5 @@
-#include <types.h>
-#include <fighter.h>
+#include <dolphin/types.h>
+#include <melee/ft/fighter.h>
 #include <melee/lb/lbvector.h>
 #include <ftlib.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>

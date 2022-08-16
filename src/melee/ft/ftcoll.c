@@ -14,7 +14,7 @@
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
-#include <fighter.h>
+#include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 
 // 0x800763C0 //
