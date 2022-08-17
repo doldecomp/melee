@@ -49,15 +49,15 @@ typedef enum _GXSpotFn
 typedef struct _GXLightObj
 {
     char UNK_0x0[0xC];
-    GXColor; // at 0xC
-    f32 aa;  // at 0x10
-    f32 ab;  // at 0x14
-    f32 ac;  // at 0x18
-    f32 ka;  // at 0x1C
-    f32 kb;  // at 0x20
-    f32 kc;  // at 0x24
-    Vec pos; // at 0x28
-    Vec dir; // at 0x34
+    GXColor color; // at 0xC
+    f32 aa;        // at 0x10
+    f32 ab;        // at 0x14
+    f32 ac;        // at 0x18
+    f32 ka;        // at 0x1C
+    f32 kb;        // at 0x20
+    f32 kc;        // at 0x24
+    Vec pos;       // at 0x28
+    Vec dir;       // at 0x34
 } GXLightObj;
 
 /* 0033B188 */ extern void GXSetChanCtrl(GXChannelID, u8, GXColorSrc, GXColorSrc, GXLightID, GXDiffuseFn, GXAttnFn);
@@ -70,6 +70,6 @@ typedef struct _GXLightObj
 /* 0033ACD0 */ extern void GXInitLightPos(GXLightObj *, f32, f32, f32);
 /* 0033AC00 */ extern void GXInitLightDistAttn(GXLightObj *, f32, f32, GXDistAttnFn);
 /* 0033AA80 */ extern void GXInitLightSpot(GXLightObj *, f32, GXSpotFn);
-/* 0033AA64 */ extern void GXInitLightAttn(GXLightObj *, f32, f32, f32, f32, f32, f32);
+/* 0033AA64 */ extern void GXInitLightAttn(GXLightObj *lobj, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc);
 
 #endif
