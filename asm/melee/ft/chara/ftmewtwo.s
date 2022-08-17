@@ -263,9 +263,3 @@ lbl_803D0F5C:
     .4byte lbl_803D0E84
     .4byte lbl_803D0EA0
     .4byte NULL
-.global lbl_803D0F90
-lbl_803D0F90:
-    .4byte 0x00030DB9
-    .4byte 0x00030DBC
-    .4byte 0x00030DBF
-    .4byte 0x00030DC2
