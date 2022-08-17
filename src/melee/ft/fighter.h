@@ -1077,8 +1077,8 @@ struct SpecialAttrs_Purin {
 
 struct SpecialAttrs_Mewtwo {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
+    /* 0x2230 */ HSD_GObj* x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
+    /* 0x2234 */ s32 x2234_shadowBallCharge;     // Number of cycles Shadow Ball has been charged
     /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
     /* 0x223C */ BOOL x223C_isConfusionBoost;
 };
@@ -1753,6 +1753,10 @@ typedef struct _Fighter {
     /* 0x232C */ s32 x232C;
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
+
+    /* The following series of individual unions with array size 0 is a temporary hack to bypass compiler errors and size shifts for this mess of a struct.
+    These StateVar structs should be one big union once the rest is cleaned up. */
+
     union {
         union {
             ftCommonStateVars commonVars[0]; // 0x2340
