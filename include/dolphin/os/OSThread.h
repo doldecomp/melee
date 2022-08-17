@@ -63,12 +63,12 @@ typedef struct OSThread
 typedef void (*OSSwitchThreadCallback)(OSThread *, OSThread *);
 
 OSThreadQueue OS_THREAD_QUEUE
-#ifndef M2C_CONTEXT
+#ifndef M2CTX
     : 0x800000DC
 #endif
     ;
 OSThread *OS_CURRENT_THREAD
-#ifndef M2C_CONTEXT
+#ifndef M2CTX
     : 0x800000E4
 #endif
     ;

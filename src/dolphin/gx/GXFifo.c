@@ -8,7 +8,7 @@
 /* 004D3EE4 */ extern unk_t lbl_804D7304;
 /* 004D3EE0 */ extern unk_t lbl_804D7300;
 /* 004D3EDC */ extern unk_t lbl_804D72FC;
-/* 004D3ED8 */ extern __GXFifoUnknown *lbl_804D72F8;
+/* 004D3ED8 */ extern u16 *__peReg; // OSPhysicalToUncached (0x0C001000)
 /* 004D3ED4 */ extern __GXGPFifo *lbl_804D72F4;
 /* 004D3ED0 */ extern unk_t lbl_804D72F0;
 /* 0033893C */ extern void __GXWriteFifoIntReset(s8, s32);

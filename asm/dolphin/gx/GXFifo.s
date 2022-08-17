@@ -471,8 +471,8 @@ lbl_804D72F4:
 	.skip 0x4
 
 # decl __gx.h
-.global lbl_804D72F8
-lbl_804D72F8:
+.global __peReg
+__peReg:
 	.skip 0x4
 
 # decl __gx.h

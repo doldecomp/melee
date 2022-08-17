@@ -554,7 +554,10 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXMisc.s.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXMisc_shared_data.s.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXMisc_001.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXMisc_002.c.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXMisc_003.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GX.s.o\
 
 TEXT_O_FILES +=\

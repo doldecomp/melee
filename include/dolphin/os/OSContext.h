@@ -24,13 +24,13 @@ typedef struct OSContext
 } OSContext;
 
 OSContext *OS_CURRENT_CONTEXT
-#ifndef M2C_CONTEXT
+#ifndef M2CTX
     : 0x800000D4;
 #endif
 ;
 
 OSContext *OS_CURRENT_FPU_CONTEXT
-#ifndef M2C_CONTEXT
+#ifndef M2CTX
     : 0x800000D8
 #endif
     ;

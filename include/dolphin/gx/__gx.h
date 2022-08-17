@@ -76,12 +76,12 @@ typedef struct
 
 typedef struct
 {
-    s16 x0;
-    s16 x2;
-    s16 x4;
-    s16 x6;
-    s16 x8;
-} __GXFifoUnknown;
+    u16 z_mode;
+    u16 color_settings;
+    u16 dst_alpha;
+    u16 x6;
+    u16 x8;
+} GXSettings;
 
 typedef enum _GXChannelID
 {
@@ -97,11 +97,8 @@ typedef enum _GXChannelID
     GX_CHANNEL_ID_INVALID = 0xFF
 } GXChannelID;
 
-extern volatile u8 WGPIPE_OP
-#ifndef M2C_CONTEXT
-    : 0xCC010000
-#endif
-    ;
+// todo this is actually a ptr in GXFifo but somehow writes to 0xC001000
+extern u16 *__peReg; // OSPhysicalToUncached (0x0C001000)
 
 extern volatile union
 {
@@ -116,7 +113,7 @@ extern volatile union
     f32 f32;
 
 } WGPIPE
-#ifndef M2C_CONTEXT
+#ifndef M2CTX
     : 0xCC008000
 #endif
     ;
@@ -143,7 +140,6 @@ extern GXContexts __GXContexts;
 #pragma region GXFifo
 extern unk_t lbl_804D72F0;
 extern __GXGPFifo *lbl_804D72F4;
-extern __GXFifoUnknown *lbl_804D72F8;
 extern unk_t lbl_804D72FC;
 void GXInitFifoBase(unk_t, unk_t, u32);
 void GXSetCPUFifo(GXFifoObj *fifo);
