@@ -1,7 +1,8 @@
 // https://github.com/ogamespec/dolwin-docs/blob/0d1ea56663af6281e2b407f47dd6987f0e79c50c/RE/GX/GXMisc.c
 
-#include <dolphin/gx/__gx.h>
-#include <dolphin/gx/GXMisc.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/gx/GXMisc/__GXMisc.h>
+#include <dolphin/gx/__GXFifo.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/base/PPCArch.h>
 

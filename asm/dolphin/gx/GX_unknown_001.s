@@ -3,7 +3,6 @@
 .section .text  # 0x80005940 - 0x803B7240
 
 # https://decomp.me/scratch/mHuNc // 3500 (0%)
-# decl __gx.h
 .global __GXSetDirtyState
 __GXSetDirtyState:
 /* 8033D050 00339C30  7C 08 02 A6 */	mflr r0
@@ -48,7 +47,6 @@ lbl_8033D0C0:
 /* 8033D0D8 00339CB8  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/CwsOr // 5500 (0%)
-# decl GX.h
 .global func_8033D0DC
 func_8033D0DC:
 /* 8033D0DC 00339CBC  7C 08 02 A6 */	mflr r0
@@ -1045,8 +1043,8 @@ GXInitLightAttn:
 /* 8033DE98 0033AA78  D0 C3 00 24 */	stfs f6, 0x24(r3)
 /* 8033DE9C 0033AA7C  4E 80 00 20 */	blr 
 
-.global func_8033DEA0
-func_8033DEA0:
+.global GXInitLightSpot
+GXInitLightSpot:
 /* 8033DEA0 0033AA80  7C 08 02 A6 */	mflr r0
 /* 8033DEA4 0033AA84  90 01 00 04 */	stw r0, 4(r1)
 /* 8033DEA8 0033AA88  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1154,8 +1152,8 @@ lbl_8033DFFC:
 /* 8033E018 0033ABF8  7C 08 03 A6 */	mtlr r0
 /* 8033E01C 0033ABFC  4E 80 00 20 */	blr 
 
-.global func_8033E020
-func_8033E020:
+.global GXInitLightDistAttn
+GXInitLightDistAttn:
 /* 8033E020 0033AC00  C0 02 E8 50 */	lfs f0, lbl_804DE230@sda21(r2)
 /* 8033E024 0033AC04  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8033E028 0033AC08  40 80 00 08 */	bge lbl_8033E030
@@ -1349,7 +1347,6 @@ lbl_8033E1E8:
 /* 8033E288 0033AE68  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/DOTYM // 9765 (0%)
-# decl GXLight.h
 .global GXSetChanAmbColor
 GXSetChanAmbColor:
 /* 8033E28C 0033AE6C  2C 03 00 03 */	cmpwi r3, 3
@@ -2409,7 +2406,6 @@ func_8033F06C:
 /* 8033F104 0033BCE4  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/GFUrl // 7200 (0%)
-# decl __gx.h
 .global func_8033F108
 func_8033F108:
 /* 8033F108 0033BCE8  2C 06 00 01 */	cmpwi r6, 1
@@ -2497,7 +2493,6 @@ lbl_8033F1D4:
 /* 8033F224 0033BE04  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/5Ta0r // 0 (100%)
-# decl __gx.h
 .global func_8033F228
 func_8033F228:
 /* 8033F228 0033BE08  38 00 00 00 */	li r0, 0
@@ -2614,7 +2609,6 @@ func_8033F2E0:
 /* 8033F3A8 0033BF88  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/QG7Ms // 9100 (0%)
-# decl GX.c
 func_8033F3AC:
 /* 8033F3AC 0033BF8C  7C 08 02 A6 */	mflr r0
 /* 8033F3B0 0033BF90  90 01 00 04 */	stw r0, 4(r1)
@@ -2724,7 +2718,6 @@ lbl_8033F504:
 /* 8033F514 0033C0F4  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/QfxT4 // 3865 (73.16%)
-# decl __gx.h
 .global func_8033F518
 func_8033F518:
 /* 8033F518 0033C0F8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -5298,7 +5291,6 @@ func_80341850:
 /* 80341874 0033E454  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/lS9KQ // 0 (100%)
-# decl __gx.h
 .global func_80341878
 func_80341878:
 /* 80341878 0033E458  2C 03 00 05 */	cmpwi r3, 5
@@ -5338,7 +5330,6 @@ lbl_803418EC:
 /* 803418F8 0033E4D8  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/gAvJm // 3230 (94.13%)
-# decl __gx.h
 .global func_803418FC
 func_803418FC:
 /* 803418FC 0033E4DC  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
@@ -5973,7 +5964,6 @@ func_80342194:
 .section .data
     .balign 8
 
-# decl __gx.h
 .global lbl_80401168
 lbl_80401168:
     .4byte NULL
@@ -5992,7 +5982,6 @@ lbl_80401168:
     .4byte 0x0A0C0A08
     .4byte 0x08000000
 
-# decl GX.c
 .global lbl_804011A4
 lbl_804011A4:
     .4byte NULL
@@ -6011,7 +6000,6 @@ lbl_804011A4:
     .4byte 0x15161500
     .4byte NULL
 
-# decl GX.c
 .global lbl_804011E0
 lbl_804011E0:
     .4byte 0x00000002
@@ -6030,7 +6018,6 @@ lbl_804011E0:
     .4byte 0x15161500
     .4byte NULL
 
-# decl __gx.h
 .global lbl_8040121C
 lbl_8040121C:
     .4byte 0x00000008
@@ -6049,7 +6036,6 @@ lbl_8040121C:
     .4byte 0x0A0C0A08
     .4byte 0x08000000
 
-# decl __gx.h
 .global lbl_80401258
 lbl_80401258:
     .4byte 0x00000004
@@ -6069,7 +6055,6 @@ lbl_80401258:
     .4byte 0x08000000
     .4byte NULL
 
-# decl ignored
 jtbl_80401298:
 	.4byte lbl_8033DFF0
 	.4byte lbl_8033DF10
@@ -6080,7 +6065,6 @@ jtbl_80401298:
 	.4byte lbl_8033DFB8
     .4byte NULL
 
-# decl ignored
 jtbl_804012B8:
 	.4byte lbl_8033E7B4
 	.4byte lbl_8033E7C0
@@ -6144,7 +6128,6 @@ jtbl_804012B8:
 	.4byte lbl_8033E7D8
 	.4byte lbl_8033E7CC
 
-# decl ignored
 jtbl_804013AC:
 	.4byte lbl_8033E908
 	.4byte lbl_8033E914
@@ -6208,7 +6191,6 @@ jtbl_804013AC:
 	.4byte lbl_8033E92C
 	.4byte lbl_8033E920
 
-# decl ignored
 jtbl_804014A0:
 	.4byte lbl_8033EB58
 	.4byte lbl_8033EB6C
@@ -6227,7 +6209,6 @@ jtbl_804014A0:
 	.4byte lbl_8033EBA8
     .4byte NULL
 
-# decl GX.c
 .global lbl_804014E0
 lbl_804014E0:
     .4byte NULL
@@ -6241,7 +6222,6 @@ lbl_804014E0:
     .4byte 0x00000006
     .4byte NULL
 
-# decl GX.c
 .global lbl_80401508
 lbl_80401508:
     .4byte NULL
@@ -6253,7 +6233,6 @@ lbl_80401508:
     .4byte 0x00000004
     .4byte 0x00000005
 
-# decl ignored
 jtbl_80401528:
 	.4byte lbl_80341E70
 	.4byte lbl_80341E8C
@@ -6279,7 +6258,6 @@ jtbl_80401528:
 	.4byte lbl_8034216C
 	.4byte lbl_80342184
 
-# decl ignored
 jtbl_80401584:
 	.4byte lbl_80341A40
 	.4byte lbl_80341A60
@@ -6322,42 +6300,34 @@ jtbl_80401584:
 .section .sdata
     .balign 8
 
-# decl GX.c
 lbl_804D5BC0:
     .4byte 0x80818283
     .4byte 0xA0A1A2A3
 
-# decl GX.c
 lbl_804D5BC8:
     .4byte 0x84858687
     .4byte 0xA4A5A6A7
 
-# decl GX.c
 lbl_804D5BD0:
     .4byte 0x88898A8B
     .4byte 0xA8A9AAAB
 
-# decl GX.c
 lbl_804D5BD8:
     .4byte 0x8C8D8E8F
     .4byte 0xACADAEAF
 
-# decl GX.c
 lbl_804D5BE0:
     .4byte 0x90919293
     .4byte 0xB0B1B2B3
 
-# decl GX.c
 lbl_804D5BE8:
     .4byte 0x94959697
     .4byte 0xB4B5B6B7
 
-# decl GX.c
 lbl_804D5BF0:
     .4byte 0x98999A9B
     .4byte 0xB8B9BABB
 
-# decl GX.c
 lbl_804D5BF8:
     .4byte 0x00040105
     .4byte 0x02060000
@@ -6366,188 +6336,146 @@ lbl_804D5BF8:
 .section .sdata2
     .balign 8
 
-# decl GX.c
 lbl_804DE220:
 	.4byte 0x43800000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE228:
 	.4byte 0x43300000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE230:
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE234:
 	.4byte 0x42B40000
 
-# decl GX.c
 lbl_804DE238:
 	.4byte 0x40490FDB
 
-# decl GX.c
 lbl_804DE23C:
 	.4byte 0x43340000
 
-# decl GX.c
 lbl_804DE240:
 	.4byte 0xC47A0000
 
-# decl GX.c
 lbl_804DE244:
 	.4byte 0x447A0000
 
-# decl GX.c
 lbl_804DE248:
 	.4byte 0x3F800000
 
-# decl GX.c
 lbl_804DE24C:
 	.4byte 0x40000000
 
-# decl GX.c
 lbl_804DE250:
 	.4byte 0xBF800000
 
-# decl GX.c
 lbl_804DE254:
 	.4byte 0xC0800000
 
-# decl GX.c
 lbl_804DE258:
 	.4byte 0x40800000
 
-# decl GX.c
 lbl_804DE25C:
 	.4byte 0xC0000000
 
-# decl GX.c
 lbl_804DE260:
 	.4byte 0x3F000000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE268:
 	.4byte 0x41800000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE270:
 	.4byte 0x43300000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE278:
 	.4byte 0xC0800000
 
-# decl GX.c
 lbl_804DE27C:
 	.4byte 0x40800000
 
-# decl GX.c
 lbl_804DE280:
 	.4byte 0x407F5C29
 
-# decl GX.c
 lbl_804DE284:
 	.4byte 0x42000000
 
-# decl GX.c
 lbl_804DE288:
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE28C:
 	.4byte 0x41200000
 
-# decl GX.c
 lbl_804DE290:
 	.4byte 0x44800000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE298:
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE29C:
 	.4byte 0x3F000000
 
-# decl GX.c
 lbl_804DE2A0:
 	.4byte 0x3FF00000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2A8:
 	.4byte 0x40000000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2B0:
 	.4byte 0x3FE00000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2B8:
 	.4byte 0x4B00001E
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2C0:
 	.4byte 0x43300000
 	.4byte 0x80000000
 
-# decl GX.c
 lbl_804DE2C8:
 	.4byte 0x00000000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2D0:
 	.4byte 0x3F800000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2D8:
 	.4byte 0x40080000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2E0:
 	.4byte 0x43800000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2E8:
 	.4byte 0x43300000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2F0:
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE2F4:
 	.4byte 0x3F800000
 
-# decl GX.c
 lbl_804DE2F8:
 	.4byte 0x3F000000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE300:
 	.4byte 0x43300000
 	.4byte 0x00000000
 
-# decl GX.c
 lbl_804DE308:
 	.4byte 0x43AB0000
 
-# decl GX.c
 lbl_804DE30C:
 	.4byte 0x4B7FFFFF

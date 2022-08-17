@@ -3,7 +3,6 @@
 .section .text  # 0x80005940 - 0x803B7240
 
 # // https://decomp.me/scratch/wdCL6 // 2039 (34.23%)
-# decl GXInit.c
 __GXDefaultTexRegionCallback:
 /* 8033A6E0 003372C0  7C 08 02 A6 */	mflr r0
 /* 8033A6E4 003372C4  90 01 00 04 */	stw r0, 4(r1)
@@ -40,7 +39,6 @@ lbl_8033A74C:
 /* 8033A758 00337338  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/vLLix // 2270 (33.24%)
-# decl GXInit.c
 lbl_8033A75C:
 /* 8033A75C 0033733C  28 03 00 14 */	cmplwi r3, 0x14
 /* 8033A760 00337340  41 80 00 0C */	blt lbl_8033A76C
@@ -55,7 +53,6 @@ lbl_8033A77C:
 /* 8033A77C 0033735C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/gAywS // 49600 (0%)
-# decl GXInit.h
 .global GXInit
 GXInit:
 /* 8033A780 00337360  7C 08 02 A6 */	mflr r0
@@ -577,7 +574,6 @@ lbl_8033AE6C:
 /* 8033AF3C 00337B1C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/r2ALq // 7842 (85.20%)
-# decl GXInit.c
 __GXInitGX:
 /* 8033AF40 00337B20  7C 08 02 A6 */	mflr r0
 /* 8033AF44 00337B24  90 01 00 04 */	stw r0, 4(r1)
@@ -1128,14 +1124,12 @@ lbl_8033B674:
 .section .bss, "wa"
     .balign 8
 
-# decl GXInit.c
 __GXContext:
 	.skip 0x578
 
 .section .sdata
     .balign 8
 
-# decl __gx.h
 .global __GXContexts
 __GXContexts:
     .4byte __GXContext
@@ -1144,31 +1138,24 @@ __GXContexts:
 .section .sdata2
     .balign 8
 
-# decl GXInit.c
 lbl_804DE200:
 	.4byte 0x404040FF
 
-# decl GXInit.c
 lbl_804DE204:
 	.4byte 0x00000000
 
-# decl GXInit.c
 lbl_804DE208:
 	.4byte 0xFFFFFFFF
 
-# decl GXInit.c
 lbl_804DE20C:
 	.4byte 0x3F800000
 
-# decl GXInit.c
 lbl_804DE210:
 	.4byte 0x00000000
 
-# decl GXInit.c
 lbl_804DE214:
 	.4byte 0x3DCCCCCD
 
-# decl GXInit.c
 lbl_804DE218:
 	.4byte 0x43300000
 	.4byte 0x00000000

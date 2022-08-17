@@ -4,7 +4,7 @@
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXMisc.h>
-#include <dolphin/gx/GX.h>
+#include <dolphin/gx/GX_unknown_001.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/util.h>

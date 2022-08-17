@@ -3,7 +3,6 @@
 .section .text  # 0x80005940 - 0x803B7240
 
 # https://decomp.me/scratch/J1BYq // 3435 (60.06%)
-# decl GXAttr.c
 __GXXfVtxSpecs:
 /* 8033BDA8 00338988  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
 /* 8033BDAC 0033898C  80 85 00 14 */	lwz r4, 0x14(r5)
@@ -116,7 +115,6 @@ lbl_8033BEC4:
 /* 8033BEFC 00338ADC  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/nxMLx // 420 (98.06%)
-# decl GXAttr.c
 .global GXSetVtxDesc
 GXSetVtxDesc:
 /* 8033BF00 00338AE0  28 03 00 19 */	cmplwi r3, 0x19
@@ -365,7 +363,6 @@ lbl_8033C24C:
 /* 8033C25C 00338E3C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/NAwYO // 4529 (49.68%)
-# decl __gx.h
 .global __GXSetVCD
 __GXSetVCD:
 /* 8033C260 00338E40  7C 08 02 A6 */	mflr r0
@@ -484,7 +481,6 @@ GXClearVtxDesc:
 /* 8033C410 00338FF0  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/OfeGM // 4110 (80.88%)
-# decl GXAttr.h
 .global GXSetVtxAttrFmt
 GXSetVtxAttrFmt:
 /* 8033C414 00338FF4  38 04 FF F7 */	addi r0, r4, -9
@@ -718,7 +714,6 @@ lbl_8033C73C:
 /* 8033C76C 0033934C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/C2Aa1 // 2370 (39.23%)
-# decl __gx.h
 .global __GXSetVAT
 __GXSetVAT:
 /* 8033C770 00339350  81 4D A5 08 */	lwz r10, __GXContexts@sda21(r13)
@@ -765,7 +760,6 @@ lbl_8033C7F0:
 /* 8033C808 003393E8  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/4R7jo // 1595 (54.43%)
-# decl GXAttr.h
 .global GXSetArray
 GXSetArray:
 /* 8033C80C 003393EC  2C 03 00 19 */	cmpwi r3, 0x19
@@ -807,7 +801,6 @@ lbl_8033C858:
 /* 8033C894 00339474  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/wVMVF // 0 (100%)
-# decl GXAttr.h
 .global GXInvalidateVtxCache
 GXInvalidateVtxCache:
 /* 8033C898 00339478  38 00 00 48 */	li r0, 0x48
@@ -816,7 +809,6 @@ GXInvalidateVtxCache:
 /* 8033C8A4 00339484  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/o8jpO // 3315 (81.58%)
-# decl GXAttr.h
 .global GXSetTexCoordGen2
 GXSetTexCoordGen2:
 /* 8033C8A8 00339488  7C 08 02 A6 */	mflr r0
@@ -1057,7 +1049,6 @@ GXSetNumTexGens:
 .section .data
     .balign 8
 
-# decl ignored
 jtbl_80401048:
 	.4byte lbl_8033BF20
 	.4byte lbl_8033BF38
@@ -1086,7 +1077,6 @@ jtbl_80401048:
 	.4byte lbl_8033C204
 	.4byte lbl_8033C094
 
-# decl ignored
 jtbl_804010B0:
 	.4byte lbl_8033C450
 	.4byte lbl_8033C48C
@@ -1106,7 +1096,6 @@ jtbl_804010B0:
 	.4byte lbl_8033C73C
 	.4byte lbl_8033C48C
 
-# decl ignored
 jtbl_804010F4:
 	.4byte lbl_8033CA6C
 	.4byte lbl_8033CA8C
@@ -1116,7 +1105,6 @@ jtbl_804010F4:
 	.4byte lbl_8033CB04
 	.4byte lbl_8033CB24
 
-# decl ignored
 jtbl_80401110:
 	.4byte lbl_8033C8E0
 	.4byte lbl_8033C8EC
@@ -1144,15 +1132,12 @@ jtbl_80401110:
 .section .sdata
     .balign 8
 
-# decl GXAttr.c
 lbl_804D5BB0:
     .4byte 0x00040102
 
-# decl GXAttr.c
 lbl_804D5BB4:
     .4byte 0x00080102
 
-# decl GXAttr.c
 lbl_804D5BB8:
     .4byte 0x000C0102
     .4byte 0x00000000

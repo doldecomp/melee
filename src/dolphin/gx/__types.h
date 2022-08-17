@@ -1,10 +1,7 @@
-// todo: rework GX interdependencies
-// this file should not be necessary
+#ifndef DOLPHIN_GX___TYPES_H
+#define DOLPHIN_GX___TYPES_H
 
-#ifndef DOLPHIN_GX___GX_H
-#define DOLPHIN_GX___GX_H
-
-#include <dolphin/gx/gxtypes.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/os/OSContext.h>
 
@@ -83,7 +80,7 @@ typedef struct
     u16 x8;
 } GXSettings;
 
-typedef enum _GXChannelID
+typedef enum
 {
     GX_CHAN_RGB_0,
     GX_CHAN_RGB_1,
@@ -97,7 +94,7 @@ typedef enum _GXChannelID
     GX_CHANNEL_ID_INVALID = 0xFF
 } GXChannelID;
 
-// todo this is actually a ptr in GXFifo but somehow writes to 0xC001000
+// todo: this is actually a ptr in GXFifo but somehow writes to 0xC001000
 extern u16 *__peReg; // OSPhysicalToUncached (0x0C001000)
 
 extern volatile union
@@ -133,40 +130,4 @@ typedef struct
     GXContext *null;
 } GXContexts;
 
-#pragma region GXInit
-extern GXContexts __GXContexts;
-#pragma endregion
-
-#pragma region GXFifo
-extern unk_t lbl_804D72F0;
-extern __GXGPFifo *lbl_804D72F4;
-extern unk_t lbl_804D72FC;
-void GXInitFifoBase(unk_t, unk_t, u32);
-void GXSetCPUFifo(GXFifoObj *fifo);
-void GXSetGPFifo(__GXGPFifo *gp_fifo);
-void __GXFifoInit();
-#pragma endregion
-
-#pragma region GXAttr
-void __GXSetVCD();
-void __GXSetVAT();
-#pragma endregion
-
-#pragma region GXMisc
-#pragma endregion
-
-#pragma region GX
-extern GXRenderModeObj lbl_80401168, lbl_8040121C, lbl_80401258;
-
-void __GXSetDirtyState();
-void func_8033D3A0(s32);
-void func_8033D408(s16, s32, s16, s16);
-void func_8033F108(unk_t, s8, u32, s32, u32, s32, s32);
-void func_8033F228(s32 *, s32, s32);
-void func_8033F518(s32);
-void func_8033FDA0(GXContext *, s32, u8 *);
-s32 func_80341878(s32);
-void func_803418FC(u32, u32);
-
-#pragma endregion
 #endif
