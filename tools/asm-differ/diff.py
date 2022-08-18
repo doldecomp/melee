@@ -1140,7 +1140,7 @@ def search_map_file(
     elif project.map_format == "mw":
         find = re.findall(
             #            ram   elf rom  alignment
-            r"  \S+ \S+ (\S+) (\S+) +\S+ "
+            r"()  \S+ \S+ (\S+)(?: +\S+)? "
             + re.escape(fn_name)
             + r"(?: \(entry of "
             + re.escape(config.diff_section)
@@ -1396,7 +1396,9 @@ def dump_objfile(
 
     refobjfile = "expected/" + objfile
     if not os.path.isfile(refobjfile):
-        fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
+        refobjfile = refobjfile.replace("/src/", "/asm/").replace(".c.o", ".s.o")
+        if not os.path.isfile(refobjfile):
+            fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
 
     if project.disassemble_all:
         disassemble_flag = "-D"
