@@ -1,3 +1,5 @@
+import os
+
 def apply(config, args):
     config["baseimg"] = "expected/build/ssbm.us.1.2/main.dol"
     config["myimg"] = "build/ssbm.us.1.2/main.dol"
@@ -7,4 +9,4 @@ def apply(config, args):
     config["map_format"] = "mw" # gnu, mw, ms
     config["build_dir"] = "build/ssbm.us.1.2/src" # only needed for mw and ms map format
     # config["makeflags"] = []
-    config["objdump_executable"] = "/opt/devkitpro/devkitPPC/bin/powerpc-eabi-objdump.exe"
+    config["objdump_executable"] = f"{os.environ['DEVKITPRO']}/devkitPPC/bin/powerpc-eabi-objdump.exe"
