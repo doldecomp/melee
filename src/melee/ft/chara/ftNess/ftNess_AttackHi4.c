@@ -298,13 +298,12 @@ struct Unknown {
 
 extern void func_80088510(Fighter*, s32, s32, s32);
 extern void func_802BFE5C(HSD_GObj*, Vec3*, f32);
-extern const Vec3 lbl_803B7598;
+const Vec3 AttackHi4Pos = { 0.0f, 0.0f, 0.0f };
 
 // 0x8011556C //
 // https://decomp.me/scratch/DYuTl // 
 void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj)  // Applies Smash Charge attributes to Ness's Up/Down Smash //
 {
-
     HSD_GObj* yoyo_GObj;
     s32 filler;
     Vec3 sp18;
@@ -327,7 +326,7 @@ void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj)  // Applies Smash Charge attr
         item_data = yoyo_GObj->user_data;
         article = item_data->xC4_article_data;
         yoyo_attr = article->x4_specialAttributes;
-        sp18 = lbl_803B7598;
+        sp18 = AttackHi4Pos;
         sp18.x = yoyo_attr->x24_YOYO_RELEASE_VEL_X;
         posX = sp18.x;
         sp18.x = posX * fp->x2C_facing_direction;
@@ -353,7 +352,8 @@ void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj)  // Applies Smash Charge attr
 }
 
 extern void func_802C0010(HSD_GObj*, void*);              /* extern */
-extern const Vec3 lbl_803B75A4;
+
+const Vec3 YoyoChargePos = { 0.0f, 0.0f, 0.0f };
 
 // 0x80115680 //
 // https://decomp.me/scratch/gj6Zo //
@@ -379,7 +379,7 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj) // the extremely specifi
         item_data = yoyo_GObj->user_data;
         article = item_data->xC4_article_data;
         yoyo_attr = article->x4_specialAttributes;
-        sp30 = lbl_803B75A4;
+        sp30 = YoyoChargePos;
         func_802C0010(yoyo_GObj, &sp30);
         fp->sa.ness.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
@@ -396,13 +396,12 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj) // the extremely specifi
 extern void func_802BE5D8(void*, f32);                        /* extern */
 extern void func_802BE958(void*);                             /* extern */
 extern void func_802BFEC4(void*);                             /* extern */
-extern const Vec3 lbl_803B75B0;
+const Vec3 YoyoThinkPos = { 0.0f, 0.0f, 0.0f };
 
 // 0x80115784 //
 // https://decomp.me/scratch/Ns56L //
 BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj) // Ness Yo-Yo Think //
 {
-
     s32 ASID;
     s32 yoyoSmashFrameCurr;
     s32 yoyoSmashFrameCurr2;
@@ -452,7 +451,7 @@ BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj) // Ness Yo-Yo Think //
             fp->x2204_ftcmd_var1 = 0U;
             func_802BE5D8(yoyo_GObj, 0.0f);
             fp->sa.ness.x223C = 0.0f;
-            func_80088510(fp, 0x334B0, 0x7F, 0x40);
+            func_80088510(fp, 0x334B0, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
         ASID = fp->x10_action_state_index;
         if ((ASID >= AS_NESS_ATTACKHI4) && (ASID <= AS_NESS_ATTACKHI4_RELEASE))
@@ -468,16 +467,16 @@ BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj) // Ness Yo-Yo Think //
         yoyoSmashFrameCurr2 = fp->nessVars[0].AttackHi4.yoyoCurrentFrame;
         if (yoyoSmashFrameCurr2 == yoyoRotFrame)
         {
-            sp14 = lbl_803B75B0;
+            sp14 = YoyoThinkPos;
             func_802C0010(yoyo_GObj, &sp14);
             ASID = fp->x10_action_state_index;
             if ((ASID >= AS_NESS_ATTACKHI4) && (ASID <= AS_NESS_ATTACKHI4_RELEASE))
             {
-                func_80088510(fp, 0x334B3, 0x7F, 0x40);
+                func_80088510(fp, 0x334B3, SFX_VOLUME_MAX, SFX_PAN_MID);
             }
             else
             {
-                func_80088510(fp, 0x334AD, 0x7F, 0x40);
+                func_80088510(fp, 0x334AD, SFX_VOLUME_MAX, SFX_PAN_MID);
             }
         }
         else if (yoyoSmashFrameCurr2 == yoyoNudgeFrame)
@@ -628,7 +627,7 @@ void ftNess_AttackHi4_Action(HSD_GObj* fighter_gobj) // Ness's Up Smash Action S
     temp_fp->nessVars[0].AttackHi4.yoyoCurrentFrame = 1;
     temp_fp->nessVars[0].AttackHi4.yoyoRehitTimer = 0;
 
-    temp_fp->nessVars[0].AttackHi4.isPosUpdateMod = 1;
+    temp_fp->nessVars[0].AttackHi4.isPosUpdateMod = TRUE;
     temp_fp->sa.ness.x2230_yoyoHitboxPos.z = 0.0f;
     temp_fp->sa.ness.x2230_yoyoHitboxPos.y = 0.0f;
     temp_fp->sa.ness.x2230_yoyoHitboxPos.x = 0.0f;
@@ -1036,12 +1035,12 @@ void ftNess_AttackHi4_Release_Action(HSD_GObj* fighter_gobj)  // Ness's Up Smash
     if ((yoyo_GObj = fighter_data2->sa.ness.x222C_yoyoGObj) != NULL) 
     {
         yoyo_attr = GetYoyoAttr(yoyo_GObj);
-        sp34 = lbl_803B75A4;
+        sp34 = YoyoChargePos;
         func_802C0010(yoyo_GObj, &sp34);
         fighter_data2->sa.ness.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
 
-    func_80088510(fighter_data2, 0x334AA, 0x7F, 0x40);
+    func_80088510(fighter_data2, 0x334AA, SFX_VOLUME_MAX, SFX_PAN_MID);
 
     ftNess_YoyoApplyDamage(fighter_data2->x2114_SmashAttr.x2118_frames, fighter_gobj);
 

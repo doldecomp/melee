@@ -51,19 +51,6 @@ BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
     return FALSE;
 }
 
-
-typedef struct AppealS
-{
-    s32 ASID[3];
-} AppealS;
-
-typedef struct StarFoxTaunt
-{
-    AppealS facingDir[2]; // 0 = left, 1 = right (?)
-} StarFoxTaunt;
-
-extern struct StarFoxTaunt lbl_803C7DD0;
-
 f32 setFloatOrder(void)
 {
     return 0.0f;
@@ -83,13 +70,15 @@ inline BOOL ftFox_AppealS_GetLR(f32 x1, f32 x2)
     else return 1;
 }
 
+static s32 ASID_AppealS[2][3] = { AS_FOX_APPEALS_START_R, AS_FOX_APPEALS_R, AS_FOX_APPEALS_END_R, AS_FOX_APPEALS_START_L, AS_FOX_APPEALS_L, AS_FOX_APPEALS_END_L };
+
 // 0x800E5A90
 // https://decomp.me/scratch/PFxY9 // Fox & Falco's Special Taunt Action State handler
 void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
 {
     s32 facingDir;
-    s32 var1;
-    s32 var2;
+    s32 actionDir;
+    s32 animCount;
     Fighter* fp = fighter_gobj->user_data;
 
     fp->foxVars[0].AppealS.animCount = 0;
@@ -98,10 +87,10 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     fp->foxVars[0].AppealS.facingDir = facingDir;
     fp->x2210_ThrowFlags.flags = 0;
 
-    var1 = fp->foxVars[0].AppealS.facingDir;
-    var2 = fp->foxVars[0].AppealS.animCount;
+    actionDir = fp->foxVars[0].AppealS.facingDir;
+    animCount = fp->foxVars[0].AppealS.animCount;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, lbl_803C7DD0.facingDir[var1].ASID[var2], 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[actionDir][animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
 extern void func_8008A324(HSD_GObj*);
@@ -155,7 +144,7 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
             func_8008A324(fighter_gobj);
             return;
         }
-        Fighter_ActionStateChange_800693AC(fighter_gobj, lbl_803C7DD0.facingDir[fp->foxVars[0].AppealS.facingDir].ASID[fp->foxVars[0].AppealS.animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[fp->foxVars[0].AppealS.facingDir][fp->foxVars[0].AppealS.animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
     }
 }
 
