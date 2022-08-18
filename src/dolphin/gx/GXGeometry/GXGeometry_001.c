@@ -31,7 +31,7 @@ void __GXSendFlushPrim()
 {
     u32 size;
     u32 i;
-    
+
     GXContext *ctx = __GXContexts.main;
     size = ctx->x4 * ctx->x6;
 
@@ -42,4 +42,13 @@ void __GXSendFlushPrim()
         WGPIPE.u32 = 0;
 
     __GXContexts.main->x0.u16[1] = 1;
+}
+
+void GXSetLineWidth(u8 width, GXTexOffset texOffsets)
+{
+    INSERT_FIELD(__GXContexts.main->x7C, width, 8, 0);
+    INSERT_FIELD(__GXContexts.main->x7C, texOffsets, 3, 16);
+    GX_WRITE_U8(0x61);
+    GX_WRITE_U32(__GXContexts.main->x7C);
+    __GXContexts.main->x0.u16[1] = 0;
 }
