@@ -5,6 +5,24 @@
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/os/OSContext.h>
 
+#define GX_WRITE_U8(ub) \
+    WGPIPE.u8 = (u8)(ub)
+
+#define GX_WRITE_U16(us) \
+    WGPIPE.u16 = (u16)(us)
+
+#define GX_WRITE_U32(ui) \
+    WGPIPE.u32 = (u32)(ui)
+
+#define GX_WRITE_F32(f) \
+    WGPIPE.f32 = (f32)(f);
+
+#define INSERT_FIELD(reg, value, nbits, shift)                                                 \
+    do                                                                                         \
+    {                                                                                          \
+        (reg) = ((u32)(reg) & ~(((1 << (nbits)) - 1) << (shift))) | ((u32)(value) << (shift)); \
+    } while (0)
+
 // GXFifoObj private fields
 typedef struct
 {
@@ -23,8 +41,11 @@ typedef void (*GXTexRegionCallback)(void); // signature unknown
 // https://github.com/kiwi515/open_rvl/blob/366b440e58f030aa0aacc9316d2717289d58fe16/include/GX/GXInit.h#L9-L41
 typedef struct
 {
-    s16 x0;                                             // at 0x000
-    s16 x2;                                             // at 0x002
+    union
+    {
+        u32 u32;
+        u16 u16[2];
+    } x0;                                               // at 0x000
     u16 x4;                                             // at 0x004
     u16 x6;                                             // at 0x006
     OSContext *x8;                                      // at 0x008
@@ -64,7 +85,7 @@ typedef struct
     u32 x49C_data[(0x4EC - 0x49C) / 4];                 // at 0x49C
     u8 x4EC_pad[2];                                     // at 0x4EC
     u8 x4EE;                                            // at 0x4EE
-    s32 x4F0;                                           // at 0x4F0
+    u32 x4F0;                                           // at 0x4F0
     GXFifoObj *fifo;                                    // at 0x4F4
     u8 x4F8_pad[0x570 - 0x4F8];                         // at 0x4F8
     u32 dirtyFlags;                                     // at 0x570
@@ -78,20 +99,6 @@ typedef struct
     u16 x6;
     u16 x8;
 } GXSettings;
-
-typedef enum
-{
-    GX_CHAN_RGB_0,
-    GX_CHAN_RGB_1,
-    GX_CHAN_ALPHA_0,
-    GX_CHAN_ALPHA_1,
-    GX_CHAN_RGBA_0,
-    GX_CHAN_RGBA_1,
-    GX_CHANNEL_ID_6,
-    GX_CHANNEL_ID_7,
-    GX_CHANNEL_ID_8,
-    GX_CHANNEL_ID_INVALID = 0xFF
-} GXChannelID;
 
 // todo: this is actually a ptr in GXFifo but somehow writes to 0xC001000
 extern u16 *__peReg; // OSPhysicalToUncached (0x0C001000)

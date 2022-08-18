@@ -67,6 +67,6 @@
 /* 0033BA08 */ extern void func_8033EE28(unk_t, unk_t, s32);
 /* 0033B4C8 */ extern void func_8033E8E8(u32, s16, s16, s32 *, s32 *, s32 *);
 /* 00339FC4 */ extern void __GXSetGenMode();
-/* 00339D98 */ extern void local_8033D1B8();
+/* 00339D98 */ extern void __GXSendFlushPrim();
 
 #endif

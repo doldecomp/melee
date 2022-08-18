@@ -5,47 +5,6 @@
 
 #include <dolphin/gx/__types.h>
 
-typedef enum _GXAttnFn
-{
-    GX_ATTN_FN_0,
-    GX_ATTN_FN_1,
-    GX_ATTN_FN_2,
-} GXAttnFn;
-
-typedef enum _GXColorSrc
-{
-    GX_COLOR_SRC_0,
-} GXColorSrc;
-
-typedef enum _GXDiffuseFn
-{
-    GX_DIFFUSE_FN_0,
-} GXDiffuseFn;
-
-typedef enum _GXDistAttnFn
-{
-    GX_DIST_ATTN_FN_0,
-    GX_DIST_ATTN_FN_1,
-    GX_DIST_ATTN_FN_2,
-    GX_DIST_ATTN_FN_3
-} GXDistAttnFn;
-
-typedef enum _GXLightID
-{
-    GX_LIGHT_ID_0,
-} GXLightID;
-
-typedef enum _GXSpotFn
-{
-    GX_SPOT_FN_0,
-    GX_SPOT_FN_1,
-    GX_SPOT_FN_2,
-    GX_SPOT_FN_3,
-    GX_SPOT_FN_4,
-    GX_SPOT_FN_5,
-    GX_SPOT_FN_6
-} GXSpotFn;
-
 typedef struct _GXLightObj
 {
     char UNK_0x0[0xC];

@@ -10,76 +10,6 @@
 
 // From GXEnum.h
 
-// Compare function.
-typedef enum
-{
-    GX_NEVER,
-    GX_LESS,
-    GX_EQUAL,
-    GX_LEQUAL,
-    GX_GREATER,
-    GX_NEQUAL,
-    GX_GEQUAL,
-    GX_ALWAYS
-} GXCompare;
-
-/*
- * Determines value of alpha read from a frame buffer with no alpha channel.
- * GX_READ_00 or GX_READ_FF returns 0x00 or 0xFF respectedly as alpha value when you call GXPeekARGB. GX_READ_NONE will be used if you want to get alpha value from the EFB. If the EFB doesn't have alpha plane, the alpha value is undefined.
- */
-typedef enum
-{
-    GX_READ_00,
-    GX_READ_FF,
-    GX_READ_NONE
-} GXAlphaReadMode;
-
-// Blending mode.
-typedef enum
-{
-    GX_BM_NONE,
-    GX_BM_BLEND,    // dst_pix_clr = src_pix_clr * src_factor + dst_pix_clr * dst_factor
-    GX_BM_LOGIC,    // blended using logical bitwise operations
-    GX_BM_SUBTRACT, // dst_pix_clr = dst_pix_clr - src_pix_clr [clamped to zero]
-    GX_MAX_BLENDMODE
-} GXBlendMode;
-
-typedef enum
-{
-    GX_BL_ZERO,                       // 0.0
-    GX_BL_ONE,                        // 1.0
-    GX_BL_SRCCLR,                     // source color
-    GX_BL_INVSRCCLR,                  // 1.0 - (source color)
-    GX_BL_SRCALPHA,                   // source alpha
-    GX_BL_INVSRCALPHA,                // 1.0 - (source alpha)
-    GX_BL_DSTALPHA,                   // frame buffer alpha
-    GX_BL_INVDSTALPHA,                // 1.0 - (frame buffer alpha)
-    GX_BL_DSTCLR = GX_BL_SRCCLR,      // frame buffer color
-    GX_BL_INVDSTCLR = GX_BL_INVSRCCLR // 1.0 - (frame buffer color)
-} GXBlendFactor;
-
-typedef enum
-{
-    GX_LO_CLEAR,   // dst = 0
-    GX_LO_AND,     // dst = src & dst
-    GX_LO_REVAND,  // dst = src & ~dst
-    GX_LO_COPY,    // dst = src
-    GX_LO_INVAND,  // dst = ~src & dst
-    GX_LO_NOOP,    // dst = dst
-    GX_LO_XOR,     // dst = src ^ dst
-    GX_LO_OR,      // dst = src | dst
-    GX_LO_NOR,     // dst = ~(src | dst)
-    GX_LO_EQUIV,   // dst = ~(src ^ dst)
-    GX_LO_INV,     // dst = ~dst
-    GX_LO_REVOR,   // dst = src | ~dst
-    GX_LO_INVCOPY, // dst = ~src
-    GX_LO_INVOR,   // dst = ~src | dest
-    GX_LO_NAND,    // dst = ~(src & dst)
-    GX_LO_SET      // dst = 1
-} GXLogicOp;
-
-// From GXInit.c
-
 #define PE_POKE_ZMODE_ID 0
 #define PE_POKE_CMODE0_ID 1
 #define PE_POKE_CMODE1_ID 2
@@ -87,9 +17,6 @@ typedef enum
 #define PE_POKE_AMODE1_ID 4
 
 #define PI_MEMSP_EFB 0x08000000
-
-#define INSERT_FIELD(reg, value, nbits, shift) \
-    (reg) = ((u32)(reg) & ~(((1 << (nbits)) - 1) << (shift))) | ((u32)(value) << (shift));
 
 /*
  * This function sets a threshold which is compared to the alpha of pixels written to the Embedded Frame Buffer (EFB) using the GXPoke* functions. The GXPoke* functions allow the CPU to write directly to the EFB.  The compare function order is:

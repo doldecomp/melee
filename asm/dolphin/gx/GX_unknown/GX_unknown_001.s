@@ -2,75 +2,12 @@
 
 .section .text
 
-# https://decomp.me/scratch/CwsOr // 5500 (0%)
-.global func_8033D0DC
-func_8033D0DC:
-/* 8033D0DC 00339CBC  7C 08 02 A6 */	mflr r0
-/* 8033D0E0 00339CC0  90 01 00 04 */	stw r0, 4(r1)
-/* 8033D0E4 00339CC4  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 8033D0E8 00339CC8  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8033D0EC 00339CCC  3B E5 00 00 */	addi r31, r5, 0
-/* 8033D0F0 00339CD0  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 8033D0F4 00339CD4  3B C4 00 00 */	addi r30, r4, 0
-/* 8033D0F8 00339CD8  93 A1 00 1C */	stw r29, 0x1c(r1)
-/* 8033D0FC 00339CDC  3B A3 00 00 */	addi r29, r3, 0
-/* 8033D100 00339CE0  80 CD A5 08 */	lwz r6, __GXContexts@sda21(r13)
-/* 8033D104 00339CE4  80 06 04 F0 */	lwz r0, 0x4f0(r6)
-/* 8033D108 00339CE8  28 00 00 00 */	cmplwi r0, 0
-/* 8033D10C 00339CEC  41 82 00 6C */	beq lbl_8033D178
-/* 8033D110 00339CF0  54 00 07 FF */	clrlwi. r0, r0, 0x1f
-/* 8033D114 00339CF4  41 82 00 08 */	beq lbl_8033D11C
-/* 8033D118 00339CF8  48 00 22 95 */	bl __GXSetSUTexSize
-lbl_8033D11C:
-/* 8033D11C 00339CFC  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D120 00339D00  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 8033D124 00339D04  54 00 07 BD */	rlwinm. r0, r0, 0, 0x1e, 0x1e
-/* 8033D128 00339D08  41 82 00 08 */	beq lbl_8033D130
-/* 8033D12C 00339D0C  48 00 2B A9 */	bl __GXUpdateBPMask
-lbl_8033D130:
-/* 8033D130 00339D10  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D134 00339D14  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 8033D138 00339D18  54 00 07 7B */	rlwinm. r0, r0, 0, 0x1d, 0x1d
-/* 8033D13C 00339D1C  41 82 00 08 */	beq lbl_8033D144
-/* 8033D140 00339D20  48 00 02 A5 */	bl __GXSetGenMode
-lbl_8033D144:
-/* 8033D144 00339D24  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D148 00339D28  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 8033D14C 00339D2C  54 00 07 39 */	rlwinm. r0, r0, 0, 0x1c, 0x1c
-/* 8033D150 00339D30  41 82 00 08 */	beq lbl_8033D158
-/* 8033D154 00339D34  4B FF F1 0D */	bl __GXSetVCD
-lbl_8033D158:
-/* 8033D158 00339D38  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D15C 00339D3C  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 8033D160 00339D40  54 00 06 F7 */	rlwinm. r0, r0, 0, 0x1b, 0x1b
-/* 8033D164 00339D44  41 82 00 08 */	beq lbl_8033D16C
-/* 8033D168 00339D48  4B FF F6 09 */	bl __GXSetVAT
-lbl_8033D16C:
-/* 8033D16C 00339D4C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D170 00339D50  38 00 00 00 */	li r0, 0
-/* 8033D174 00339D54  90 03 04 F0 */	stw r0, 0x4f0(r3)
-lbl_8033D178:
-/* 8033D178 00339D58  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D17C 00339D5C  80 03 00 00 */	lwz r0, 0(r3)
-/* 8033D180 00339D60  28 00 00 00 */	cmplwi r0, 0
-/* 8033D184 00339D64  40 82 00 08 */	bne lbl_8033D18C
-/* 8033D188 00339D68  48 00 00 31 */	bl local_8033D1B8
-lbl_8033D18C:
-/* 8033D18C 00339D6C  7F C0 EB 78 */	or r0, r30, r29
-/* 8033D190 00339D70  3C 60 CC 01 */	lis r3, 0xCC008000@ha
-/* 8033D194 00339D74  98 03 80 00 */	stb r0, 0xCC008000@l(r3)
-/* 8033D198 00339D78  B3 E3 80 00 */	sth r31, -0x8000(r3)
-/* 8033D19C 00339D7C  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 8033D1A0 00339D80  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 8033D1A4 00339D84  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 8033D1A8 00339D88  83 A1 00 1C */	lwz r29, 0x1c(r1)
-/* 8033D1AC 00339D8C  38 21 00 28 */	addi r1, r1, 0x28
-/* 8033D1B0 00339D90  7C 08 03 A6 */	mtlr r0
-/* 8033D1B4 00339D94  4E 80 00 20 */	blr 
+.global GXBegin
+
 
 # https://decomp.me/scratch/vLLix // 2270 (33.24%)
-.global local_8033D1B8
-local_8033D1B8:
+.global __GXSendFlushPrim
+__GXSendFlushPrim:
 /* 8033D1B8 00339D98  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
 /* 8033D1BC 00339D9C  38 00 00 98 */	li r0, 0x98
 /* 8033D1C0 00339DA0  3C A0 CC 01 */	lis r5, 0xCC008000@ha

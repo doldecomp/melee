@@ -78,6 +78,6 @@
 /* 00339ECC */ extern void func_8033D2EC(s32, s32, s32);
 /* 00339E78 */ extern void func_8033D298(s32, s32);
 /* 00339E20 */ extern void func_8033D240(s32, s32);
-/* 00339CBC */ extern void func_8033D0DC(s32, s32, s16);
+/* 00339CBC */ extern void GXBegin(s32, s32, s16);
 
 #endif
