@@ -910,8 +910,8 @@ func_8033F2E0:
 /* 8033F3A8 0033BF88  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/QG7Ms // 9100 (0%)
-.global func_8033F3AC
-func_8033F3AC:
+.global __GXSetSUTexSize
+__GXSetSUTexSize:
 /* 8033F3AC 0033BF8C  7C 08 02 A6 */	mflr r0
 /* 8033F3B0 0033BF90  90 01 00 04 */	stw r0, 4(r1)
 /* 8033F3B4 0033BF94  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -1563,8 +1563,8 @@ func_8033FC8C:
 /* 8033FCCC 0033C8AC  7C 08 03 A6 */	mtlr r0
 /* 8033FCD0 0033C8B0  4E 80 00 20 */	blr 
 
-.global func_8033FCD4
-func_8033FCD4:
+.global __GXUpdateBPMask
+__GXUpdateBPMask:
 /* 8033FCD4 0033C8B4  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
 /* 8033FCD8 0033C8B8  38 C0 00 00 */	li r6, 0
 /* 8033FCDC 0033C8BC  38 80 00 00 */	li r4, 0

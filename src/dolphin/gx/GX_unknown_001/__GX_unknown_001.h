@@ -1,5 +1,7 @@
 // header for shared private declarations of unsplit GX files
 // todo: move into split sections' GX_*.c
+#ifndef DOLPHIN_GX_GX_UNKNOWN_001___GX_UNKNOWN_001_H
+#define DOLPHIN_GX_GX_UNKNOWN_001___GX_UNKNOWN_001_H
 
 #include <dolphin/types.h>
 
@@ -59,10 +61,12 @@
 /* 0033E01C */ extern void func_8034143C(unk_t, s8 *, s8 *);
 /* 0033DFE8 */ extern void func_80341408(unk_t, s8 *, s8 *);
 /* 0033DCB4 */ extern void func_803410D4(f32, f32);
-/* 0033C8B4 */ extern void func_8033FCD4(s32);
-/* 0033BF8C */ extern void func_8033F3AC();
+/* 0033C8B4 */ extern void __GXUpdateBPMask();
+/* 0033BF8C */ extern void __GXSetSUTexSize();
 /* 0033BEC0 */ extern void func_8033F2E0(s32, s32);
 /* 0033BA08 */ extern void func_8033EE28(unk_t, unk_t, s32);
 /* 0033B4C8 */ extern void func_8033E8E8(u32, s16, s16, s32 *, s32 *, s32 *);
-/* 00339FC4 */ extern void local_8033D3E4();
+/* 00339FC4 */ extern void __GXSetGenMode();
 /* 00339D98 */ extern void local_8033D1B8();
+
+#endif

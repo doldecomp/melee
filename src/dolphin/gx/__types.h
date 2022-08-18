@@ -42,7 +42,6 @@ typedef struct
     u8 x98_data[0x10];                                  // at 0x098
     GXColor ambColors[2];                               // at 0x0A8
     GXColor matColors[2];                               // at 0x0B0
-    s32 xB4;                                            // at 0x0B4
     s32 xB8;                                            // at 0x0B8
     u8 xBC_pad[0xF8 - 0xBC];                            // at 0x0BC
     s32 xF8;                                            // at 0x0F8
@@ -60,9 +59,9 @@ typedef struct
     Vec x448_vec;                                       // at 0x448
     u8 x454_pad[4];                                     // at 0x454
     f32 x458;                                           // at 0x458
-    s32 x45C_data[0x20];                                // at 0x45C
-    s32 x47C_data[0x20];                                // at 0x47C
-    u32 x49C_data[(0x4E8 - 0x49C) / 4];                 // at 0x49C
+    s32 x45C_data[0x20 / 4];                            // at 0x45C
+    s32 x47C_data[0x20 / 4];                            // at 0x47C
+    u32 x49C_data[(0x4EC - 0x49C) / 4];                 // at 0x49C
     u8 x4EC_pad[2];                                     // at 0x4EC
     u8 x4EE;                                            // at 0x4EE
     s32 x4F0;                                           // at 0x4F0
