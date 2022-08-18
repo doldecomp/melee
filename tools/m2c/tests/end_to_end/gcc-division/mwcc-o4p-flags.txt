@@ -1,0 +1,1 @@
+--context orig.c --function test_s8 --function test_s16 --function test_s32_div --function test_s32_mod --function test_u32_div --function test_u32_mod --target ppc-mwcc-c
