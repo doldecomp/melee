@@ -4,49 +4,6 @@
 
 .global GXBegin
 
-
-# https://decomp.me/scratch/vLLix // 2270 (33.24%)
-.global __GXSendFlushPrim
-__GXSendFlushPrim:
-/* 8033D1B8 00339D98  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D1BC 00339D9C  38 00 00 98 */	li r0, 0x98
-/* 8033D1C0 00339DA0  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033D1C4 00339DA4  A0 C3 00 04 */	lhz r6, 4(r3)
-/* 8033D1C8 00339DA8  38 80 00 00 */	li r4, 0
-/* 8033D1CC 00339DAC  A0 63 00 06 */	lhz r3, 6(r3)
-/* 8033D1D0 00339DB0  7C E6 19 D6 */	mullw r7, r6, r3
-/* 8033D1D4 00339DB4  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
-/* 8033D1D8 00339DB8  B0 C5 80 00 */	sth r6, -0x8000(r5)
-/* 8033D1DC 00339DBC  38 67 00 03 */	addi r3, r7, 3
-/* 8033D1E0 00339DC0  28 07 00 00 */	cmplwi r7, 0
-/* 8033D1E4 00339DC4  54 63 F0 BE */	srwi r3, r3, 2
-/* 8033D1E8 00339DC8  40 81 00 48 */	ble lbl_8033D230
-/* 8033D1EC 00339DCC  54 60 E8 FF */	rlwinm. r0, r3, 0x1d, 3, 0x1f
-/* 8033D1F0 00339DD0  7C 09 03 A6 */	mtctr r0
-/* 8033D1F4 00339DD4  41 82 00 30 */	beq lbl_8033D224
-lbl_8033D1F8:
-/* 8033D1F8 00339DD8  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D1FC 00339DDC  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D200 00339DE0  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D204 00339DE4  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D208 00339DE8  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D20C 00339DEC  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D210 00339DF0  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D214 00339DF4  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D218 00339DF8  42 00 FF E0 */	bdnz lbl_8033D1F8
-/* 8033D21C 00339DFC  70 63 00 07 */	andi. r3, r3, 7
-/* 8033D220 00339E00  41 82 00 10 */	beq lbl_8033D230
-lbl_8033D224:
-/* 8033D224 00339E04  7C 69 03 A6 */	mtctr r3
-lbl_8033D228:
-/* 8033D228 00339E08  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033D22C 00339E0C  42 00 FF FC */	bdnz lbl_8033D228
-lbl_8033D230:
-/* 8033D230 00339E10  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D234 00339E14  38 00 00 01 */	li r0, 1
-/* 8033D238 00339E18  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033D23C 00339E1C  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/Vrpb1 // 730 (66.82%)
 .global func_8033D240
 func_8033D240:

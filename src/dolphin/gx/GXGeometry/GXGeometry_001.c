@@ -26,3 +26,20 @@ void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts)
     WGPIPE.u8 = vtxfmt | type;
     WGPIPE.u16 = nverts;
 }
+
+void __GXSendFlushPrim()
+{
+    u32 size;
+    u32 i;
+    
+    GXContext *ctx = __GXContexts.main;
+    size = ctx->x4 * ctx->x6;
+
+    WGPIPE.u8 = GX_DRAW_TRIANGLE_STRIP;
+    WGPIPE.u16 = ctx->x4;
+
+    for (i = 0; i < size; i += 4)
+        WGPIPE.u32 = 0;
+
+    __GXContexts.main->x0.u16[1] = 1;
+}
