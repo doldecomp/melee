@@ -11,12 +11,5 @@
 /* 004D3EE8 */ extern OSThread *__GXCurrentThread;
 /* 004D3EE4 */ extern unk_t lbl_804D7304;
 /* 004D3EE0 */ extern unk_t lbl_804D7300;
-/* 0033893C */ extern void __GXWriteFifoIntReset(s8, s32);
-/* 003388F0 */ extern void __GXWriteFifoIntEnable(s32, s32);
-/* 003388AC */ extern void __GXFifoLink(s8);
-/* 00338888 */ extern void __GXFifoReadDisable();
-/* 00338860 */ extern void __GXFifoReadEnable();
-/* 00338580 */ extern void GXInitFifoLimits(unk_t, s32, s32);
-/* 00338510 */ extern void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr);
 
 #endif
