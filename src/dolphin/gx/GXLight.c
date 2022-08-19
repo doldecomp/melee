@@ -121,21 +121,18 @@ void GXInitLightDistAttn(GXLightObj *light, f32 ref_distance, f32 ref_brightness
     GXInitLightAttnK(light, ka, kb, kc);
 }
 
+void GXInitLightPos(GXLightObj *light, f32 x, f32 y, f32 z)
+{
+    light->pos.x = x;
+    light->pos.y = y;
+    light->pos.z = z;
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-asm void GXInitLightPos(GXLightObj *, f32, f32, f32)
-{ // clang-format off
-    nofralloc
-/* 8033E0F0 0033ACD0  D0 23 00 28 */	stfs f1, 0x28(r3)
-/* 8033E0F4 0033ACD4  D0 43 00 2C */	stfs f2, 0x2c(r3)
-/* 8033E0F8 0033ACD8  D0 63 00 30 */	stfs f3, 0x30(r3)
-/* 8033E0FC 0033ACDC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 asm void GXInitLightDir(GXLightObj *, f32, f32, f32)
 { // clang-format off
