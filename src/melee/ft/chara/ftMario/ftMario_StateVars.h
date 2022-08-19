@@ -1,7 +1,7 @@
 #ifndef _FTMARIO_STATEVARS_H_
 #define _FTMARIO_STATEVARS_H_
 
-#include <types.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftMarioSpecialS {
@@ -21,8 +21,8 @@ typedef struct ftMarioSpecialLw {
 
 typedef union ftMarioStateVars {
 
-	ftMarioSpecialS specialS;
-	ftMarioSpecialLw specialLw;
+	ftMarioSpecialS SpecialS;
+	ftMarioSpecialLw SpecialLw;
 
 } ftMarioStateVars;
 

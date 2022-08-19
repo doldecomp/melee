@@ -44,6 +44,12 @@ typedef enum ftMewtwoAction {
 
 // Flags used by Mewtwo in Action State Change //
 
+// SpecialN/SpecialAirN //
+
+#define FTMEWTWO_SPECIALN_ACTION_FLAG FIGHTER_MATANIM_NOUPDATE | FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222
+
+#define FTMEWTWO_SPECIALN_COLL_FLAG FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+
 // SpecialS/SpecialAirS //
 
 #define FTMEWTWO_SPECIALS_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
@@ -84,7 +90,7 @@ typedef struct _ftMewtwoAttributes {
     f32 x5C_MEWTWO_TELEPORT_MOMENTUM;
     f32 x60_MEWTWO_TELEPORT_MOMENTUM_ADD;
     f32 x64_MEWTWO_TELEPORT_DRIFT;
-    s32 x68_MEWTWO_TELEPORT_ANGLE_CLAMP; // Clamp teleport travel if surface angle is greater than this valuei88iiiiiiiiii 
+    s32 x68_MEWTWO_TELEPORT_ANGLE_CLAMP; // Clamp teleport travel if surface angle is greater than this value
     f32 x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
     f32 x70_MEWTWO_TELEPORT_FREEFALL_MOBILITY;
     f32 x74_MEWTWO_TELEPORT_LANDING_LAG;
@@ -180,5 +186,59 @@ void ftMewtwo_SpecialS_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialS_OnReflect(HSD_GObj* fighter_gobj);
+
+// Neutral Special - Shadow Ball (SpecialN/SpecialAirN) //
+
+s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel, s32* chargeCycles);
+BOOL ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* fighter_gobj);
+BOOL ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_SetNULL(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_OnTakeDamage(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_OnDeath(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNStart_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNFull_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNCancel_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNEnd_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNFull_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNCancel_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNStart_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNLoop_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNFull_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNCancel_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNEnd_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNLoop_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNFull_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNCancel_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNEnd_IASA(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNStart_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNLoop_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNFull_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNCancel_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNEnd_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNStart_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNLoop_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNFull_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNCancel_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNEnd_Phys(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNStart_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNLoop_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNFull_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNCancel_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialNEnd_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNStart_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNLoop_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNFull_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNCancel_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_Shoot(HSD_GObj* fighter_gobj);
 
 #endif

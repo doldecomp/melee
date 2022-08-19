@@ -1,6 +1,6 @@
 #include <functions.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <fighter.h>
+#include <melee/ft/fighter.h>
 
 extern ftCommonData* p_ftCommonData; // defined in fighter.s
 #define p_ftcommon_r4 p_ftCommonData

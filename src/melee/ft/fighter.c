@@ -1,4 +1,4 @@
-#include <fighter.h>
+#include <melee/ft/fighter.h>
 
 #define HALF_PI 1.5707963267948966
 
