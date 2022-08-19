@@ -227,33 +227,9 @@ static void __GXWriteFifoIntEnable(GXBool flag0, GXBool flag1)
     __cpReg[1] = *x8;
 }
 
-#ifdef NON_MATCHING
-
-#else
-
-#endif
-
-static asm void __GXWriteFifoIntReset(u8 arg0, u8 arg1)
-{ // clang-format off
-    nofralloc
-/* 8033BD5C 0033893C  80 AD A5 08 */	lwz r5, __GXContexts(r13)
-/* 8033BD60 00338940  54 63 06 3E */	clrlwi r3, r3, 0x18
-/* 8033BD64 00338944  54 80 0D FC */	rlwinm r0, r4, 1, 0x17, 0x1e
-/* 8033BD68 00338948  38 C5 00 10 */	addi r6, r5, 0x10
-/* 8033BD6C 0033894C  80 A5 00 10 */	lwz r5, 0x10(r5)
-/* 8033BD70 00338950  54 A4 00 3C */	rlwinm r4, r5, 0, 0, 0x1e
-/* 8033BD74 00338954  7C 83 1B 78 */	or r3, r4, r3
-/* 8033BD78 00338958  90 66 00 00 */	stw r3, 0(r6)
-/* 8033BD7C 0033895C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033BD80 00338960  38 83 00 10 */	addi r4, r3, 0x10
-/* 8033BD84 00338964  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 8033BD88 00338968  54 63 07 FA */	rlwinm r3, r3, 0, 0x1f, 0x1d
-/* 8033BD8C 0033896C  7C 60 03 78 */	or r0, r3, r0
-/* 8033BD90 00338970  90 04 00 00 */	stw r0, 0(r4)
-/* 8033BD94 00338974  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033BD98 00338978  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BD9C 0033897C  80 04 00 10 */	lwz r0, 0x10(r4)
-/* 8033BDA0 00338980  B0 03 00 04 */	sth r0, 4(r3)
-/* 8033BDA4 00338984  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
+static void __GXWriteFifoIntReset(GXBool flag0, GXBool flag1)
+{
+    INSERT_FIELD(__GXContexts.main->x10, flag0, 1, 0);
+    INSERT_FIELD(__GXContexts.main->x10, flag1, 1, 1);
+    __cpReg[2] = __GXContexts.main->x10;
+}

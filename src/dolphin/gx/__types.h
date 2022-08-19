@@ -50,7 +50,7 @@ typedef struct
     u16 x6;                                             // at 0x006
     OSContext *x8;                                      // at 0x008
     u32 xC;                                             // at 0x00C
-    s32 x10;                                            // at 0x010
+    u32 x10;                                            // at 0x010
     u32 x14;                                            // at 0x014
     u32 x18;                                            // at 0x018
     s32 x1C_data[(0x3C - 0x1C) / 4];                    // at 0x01C
