@@ -27,13 +27,9 @@ typedef struct _GXRenderModeObj
     u8 vfilter[7];
 } GXRenderModeObj;
 
-typedef union _GXColor
+typedef struct _GXColor
 {
-    struct
-    {
-        u8 r, g, b, a;
-    } u8;
-    u32 u32;
+    u8 r, g, b, a;
 } GXColor;
 
 typedef struct _GXColorS10

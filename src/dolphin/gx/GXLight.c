@@ -135,28 +135,16 @@ void GXInitLightDir(GXLightObj *light, f32 x, f32 y, f32 z)
     light->dir.z = -z;
 }
 
+void GXInitLightColor(GXLightObj *light, GXColor *color)
+{
+    *(u32 *)&light->color = (color->r << 24) | (color->g << 16) | (color->b << 8) | color->a;
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-// https://decomp.me/scratch/Dk5Fr // 135 (86.50%)
-asm void GXInitLightColor(GXLightObj *, GXColor *)
-{ // clang-format off
-    nofralloc
-/* 8033E11C 0033ACFC  88 04 00 01 */	lbz r0, 1(r4)
-/* 8033E120 0033AD00  88 A4 00 00 */	lbz r5, 0(r4)
-/* 8033E124 0033AD04  88 C4 00 02 */	lbz r6, 2(r4)
-/* 8033E128 0033AD08  54 00 80 1E */	slwi r0, r0, 0x10
-/* 8033E12C 0033AD0C  50 A0 C0 0E */	rlwimi r0, r5, 0x18, 0, 7
-/* 8033E130 0033AD10  88 84 00 03 */	lbz r4, 3(r4)
-/* 8033E134 0033AD14  50 C0 44 2E */	rlwimi r0, r6, 8, 0x10, 0x17
-/* 8033E138 0033AD18  7C 80 03 78 */	or r0, r4, r0
-/* 8033E13C 0033AD1C  90 03 00 0C */	stw r0, 0xc(r3)
-/* 8033E140 0033AD20  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 // https://decomp.me/scratch/dLcp8 // 0 (100%)
 asm void GXLoadLightObjImm(GXLightObj *, u32)
