@@ -199,26 +199,18 @@ static void __GXFifoReadEnable()
     __cpReg[1] = (s32)__GXContexts.main->x8;
 }
 
+static void __GXFifoReadDisable()
+{
+    u32 *x8 = (u32 *)&__GXContexts.main->x8;
+    INSERT_FIELD(*x8, 0, 1, 0);
+    __cpReg[1] = (s32)__GXContexts.main->x8;
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-static asm void __GXFifoReadDisable(void)
-{ // clang-format off
-    nofralloc
-/* 8033BCA8 00338888  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033BCAC 0033888C  84 03 00 08 */	lwzu r0, 8(r3)
-/* 8033BCB0 00338890  54 00 00 3C */	rlwinm r0, r0, 0, 0, 0x1e
-/* 8033BCB4 00338894  90 03 00 00 */	stw r0, 0(r3)
-/* 8033BCB8 00338898  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033BCBC 0033889C  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BCC0 003388A0  80 04 00 08 */	lwz r0, 8(r4)
-/* 8033BCC4 003388A4  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033BCC8 003388A8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 static asm void __GXFifoLink(u8 arg0)
 { // clang-format off
