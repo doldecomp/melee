@@ -72,20 +72,19 @@ void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr)
     OSRestoreInterrupts(intrEnabled);
 }
 
+void GXInitFifoLimits(GXFifoObj *fifo, u32 hiWaterMark, u32 loWaterMark)
+{
+    __GXFifoObj *__fifo = (__GXFifoObj *)fifo;
+
+    __fifo->hiWaterMark = hiWaterMark;
+    __fifo->loWaterMark = loWaterMark;
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-asm void GXInitFifoLimits(GXFifoObj *fifo, u32 hiWaterMark, u32 loWaterMark)
-{ // clang-format off
-    nofralloc
-/* 8033B9A0 00338580  90 83 00 0C */	stw r4, 0xc(r3)
-/* 8033B9A4 00338584  90 A3 00 10 */	stw r5, 0x10(r3)
-/* 8033B9A8 00338588  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 asm void GXSetCPUFifo(GXFifoObj *fifo)
 { // clang-format off
