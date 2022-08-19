@@ -59,46 +59,24 @@ void GXInitFifoBase(GXFifoObj *fifo, void *base, u32 size)
     GXInitFifoPtrs(fifo, base, base);
 }
 
+void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr)
+{
+    __GXFifoObj *__fifo = (__GXFifoObj *)fifo;
+    BOOL intrEnabled = OSDisableInterrupts();
+
+    __fifo->readPtr = readPtr;
+    __fifo->writePtr = writePtr;
+    __fifo->x1C = (u8 *)writePtr - (u8 *)readPtr;
+    if (__fifo->x1C < 0)
+        __fifo->x1C += __fifo->size;
+    OSRestoreInterrupts(intrEnabled);
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-asm void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr)
-{ // clang-format off
-    nofralloc
-/* 8033B930 00338510  7C 08 02 A6 */	mflr r0
-/* 8033B934 00338514  90 01 00 04 */	stw r0, 4(r1)
-/* 8033B938 00338518  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 8033B93C 0033851C  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8033B940 00338520  3B E5 00 00 */	addi r31, r5, 0
-/* 8033B944 00338524  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 8033B948 00338528  3B C4 00 00 */	addi r30, r4, 0
-/* 8033B94C 0033852C  93 A1 00 1C */	stw r29, 0x1c(r1)
-/* 8033B950 00338530  3B A3 00 00 */	addi r29, r3, 0
-/* 8033B954 00338534  48 00 BA 11 */	bl OSDisableInterrupts
-/* 8033B958 00338538  93 DD 00 14 */	stw r30, 0x14(r29)
-/* 8033B95C 0033853C  7C 1E F8 50 */	subf r0, r30, r31
-/* 8033B960 00338540  93 FD 00 18 */	stw r31, 0x18(r29)
-/* 8033B964 00338544  90 1D 00 1C */	stw r0, 0x1c(r29)
-/* 8033B968 00338548  80 9D 00 1C */	lwz r4, 0x1c(r29)
-/* 8033B96C 0033854C  2C 04 00 00 */	cmpwi r4, 0
-/* 8033B970 00338550  40 80 00 10 */	bge lbl_8033B980
-/* 8033B974 00338554  80 1D 00 08 */	lwz r0, 8(r29)
-/* 8033B978 00338558  7C 04 02 14 */	add r0, r4, r0
-/* 8033B97C 0033855C  90 1D 00 1C */	stw r0, 0x1c(r29)
-lbl_8033B980:
-/* 8033B980 00338560  48 00 BA 0D */	bl OSRestoreInterrupts
-/* 8033B984 00338564  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 8033B988 00338568  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 8033B98C 0033856C  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 8033B990 00338570  7C 08 03 A6 */	mtlr r0
-/* 8033B994 00338574  83 A1 00 1C */	lwz r29, 0x1c(r1)
-/* 8033B998 00338578  38 21 00 28 */	addi r1, r1, 0x28
-/* 8033B99C 0033857C  4E 80 00 20 */	blr 
-} // clang-format on 
-#pragma peephole on
 
 asm void GXInitFifoLimits(GXFifoObj *fifo, u32 hiWaterMark, u32 loWaterMark)
 { // clang-format off
