@@ -2,6 +2,7 @@
 
 #include <dolphin/gx/types.h>
 #include <dolphin/gx/GXMisc/__GXMisc.h>
+#include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/base/PPCArch.h>

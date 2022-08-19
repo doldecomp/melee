@@ -1120,6 +1120,24 @@ lbl_8033B674:
 /* 8033B780 00338360  38 21 00 78 */	addi r1, r1, 0x78
 /* 8033B784 00338364  4E 80 00 20 */	blr 
 
+.section .sbss
+	.balign 8
+
+.global __piReg
+__piReg:
+	.skip 0x4
+
+.global __cpReg
+__cpReg:
+	.skip 0x4
+
+.global __peReg
+__peReg:
+	.skip 0x4
+
+.global lbl_804D72FC
+ lbl_804D72FC:
+	.skip 0x4
 
 .section .bss, "wa"
     .balign 8

@@ -3,23 +3,21 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 
-/* 004D3EF8 */ extern s32 __GXOverflowCount;
-/* 004D3EF4 */ extern void (*BreakPointCB)();
-/* 004D3EF0 */ extern BOOL GXOverflowSuspendInProgress;
-/* 004D3EEC */ extern GXBool CPGPLinked;
-/* 004D3EE8 */ extern OSThread *__GXCurrentThread;
+static GXFifoObj *CPUFifo;
+static GXFifoObj *GPFifo;
+static OSThread *__GXCurrentThread;
+static GXBool CPGPLinked;
+static BOOL GXOverflowSuspendInProgress;
+static void (*BreakPointCB)();
+static s32 __GXOverflowCount;
 
-// todo: order is swapped from SMB. Confirm they are named correctly.
-/* 004D3EE4 */ extern GXFifoObj *GPFifo;
-/* 004D3EE0 */ extern GXFifoObj *CPUFifo;
-
-void __GXWriteFifoIntReset(u8 arg0, u8 arg1);
-void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr);
-void GXInitFifoLimits(GXFifoObj *fifo, u32 hiWaterMark, u32 loWaterMark);
-void __GXWriteFifoIntEnable(GXBool flag0, GXBool flag1);
-void __GXFifoLink(GXBool flag);
-void __GXFifoReadEnable();
-void __GXFifoReadDisable();
+static void __GXWriteFifoIntReset(u8 arg0, u8 arg1);
+static void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr);
+static void GXInitFifoLimits(GXFifoObj *fifo, u32 hiWaterMark, u32 loWaterMark);
+static void __GXWriteFifoIntEnable(GXBool flag0, GXBool flag1);
+static void __GXFifoLink(GXBool flag);
+static void __GXFifoReadEnable();
+static void __GXFifoReadDisable();
 
 static void GXCPInterruptHandler(__OSInterrupt unused, OSContext *ctx)
 {
