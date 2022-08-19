@@ -5,6 +5,7 @@
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/os/OSContext.h>
 #include <dolphin/gx/GXCommandList.h>
+#include <dolphin/gx/GXEnum.h>
 
 #define GX_WRITE_U8(ub) \
     WGPIPE.u8 = (u8)(ub)
@@ -82,8 +83,8 @@ typedef struct
     u8 x98_data[0x10];                                  // at 0x098
     GXColor ambColors[2];                               // at 0x0A8
     GXColor matColors[2];                               // at 0x0B0
-    s32 xB8;                                            // at 0x0B8
-    u8 xBC_pad[0xF8 - 0xBC];                            // at 0x0BC
+    s32 xB8[GX_MAX_TEXCOORD];                           // at 0x0B8
+    u8 xD8_pad[0xF8 - 0xD8];                            // at 0x0D8
     s32 xF8;                                            // at 0x0F8
     s32 xFC;                                            // at 0x0FC
     s32 x100_data[(0x130 - 0x100) / 4];                 // at 0x100

@@ -2,35 +2,6 @@
 
 .section .text
 
-# https://decomp.me/scratch/HgiIF // 260 (89.60%)
-.global func_8033D2EC
-func_8033D2EC:
-/* 8033D2EC 00339ECC  80 0D A5 08 */	lwz r0, __GXContexts@sda21(r13)
-/* 8033D2F0 00339ED0  54 67 10 3A */	slwi r7, r3, 2
-/* 8033D2F4 00339ED4  7C C0 3A 14 */	add r6, r0, r7
-/* 8033D2F8 00339ED8  80 66 00 B8 */	lwz r3, 0xb8(r6)
-/* 8033D2FC 00339EDC  54 80 91 9A */	rlwinm r0, r4, 0x12, 6, 0xd
-/* 8033D300 00339EE0  54 A4 99 58 */	rlwinm r4, r5, 0x13, 5, 0xc
-/* 8033D304 00339EE4  54 63 03 98 */	rlwinm r3, r3, 0, 0xe, 0xc
-/* 8033D308 00339EE8  7C 60 03 78 */	or r0, r3, r0
-/* 8033D30C 00339EEC  90 06 00 B8 */	stw r0, 0xb8(r6)
-/* 8033D310 00339EF0  38 60 00 61 */	li r3, 0x61
-/* 8033D314 00339EF4  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033D318 00339EF8  80 CD A5 08 */	lwz r6, __GXContexts@sda21(r13)
-/* 8033D31C 00339EFC  38 00 00 00 */	li r0, 0
-/* 8033D320 00339F00  7D 06 3A 14 */	add r8, r6, r7
-/* 8033D324 00339F04  80 C8 00 B8 */	lwz r6, 0xb8(r8)
-/* 8033D328 00339F08  54 C6 03 56 */	rlwinm r6, r6, 0, 0xd, 0xb
-/* 8033D32C 00339F0C  7C C4 23 78 */	or r4, r6, r4
-/* 8033D330 00339F10  90 88 00 B8 */	stw r4, 0xb8(r8)
-/* 8033D334 00339F14  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033D338 00339F18  98 65 80 00 */	stb r3, 0xCC008000@l(r5)
-/* 8033D33C 00339F1C  7C 64 3A 14 */	add r3, r4, r7
-/* 8033D340 00339F20  80 63 00 B8 */	lwz r3, 0xb8(r3)
-/* 8033D344 00339F24  90 65 80 00 */	stw r3, -0x8000(r5)
-/* 8033D348 00339F28  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033D34C 00339F2C  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/sAjjF // 0 (100%)
 .global func_8033D350
 func_8033D350:
