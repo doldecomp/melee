@@ -55,7 +55,7 @@ void GXSetLineWidth(u8 width, GXTexOffset texOffsets)
 {
     INSERT_FIELD(__GXContexts.main->x7C, width, 8, 0);
     INSERT_FIELD(__GXContexts.main->x7C, texOffsets, 3, 16);
-    GX_WRITE_U8(0x61);
+    GX_WRITE_U8(GX_LOAD_BP_REG);
     GX_WRITE_U32(__GXContexts.main->x7C);
     set_x2(GX_FALSE);
 }
@@ -64,7 +64,7 @@ void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets)
 {
     INSERT_FIELD(__GXContexts.main->x7C, pointSize, 8, 8);
     INSERT_FIELD(__GXContexts.main->x7C, texOffsets, 3, 19);
-    GX_WRITE_U8(0x61);
+    GX_WRITE_U8(GX_LOAD_BP_REG);
     GX_WRITE_U32(__GXContexts.main->x7C);
     set_x2(GX_FALSE);
 }
@@ -73,7 +73,7 @@ void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable, GXBool point_ena
 {
     INSERT_FIELD(__GXContexts.main->xB8[coord], line_enable, 1, 18);
     INSERT_FIELD(__GXContexts.main->xB8[coord], point_enable, 1, 19);
-    GX_WRITE_U8(0x61);
+    GX_WRITE_U8(GX_LOAD_BP_REG);
     GX_WRITE_U32(__GXContexts.main->xB8[coord]);
     set_x2(GX_FALSE);
 }
@@ -96,15 +96,15 @@ void GXSetCullMode(GXCullMode mode)
 void GXSetCoPlanar(GXBool enable)
 {
     INSERT_FIELD(__GXContexts.main->x204, enable, 1, 19);
-    GX_WRITE_U8(0x61);
+    GX_WRITE_U8(GX_LOAD_BP_REG);
     GX_WRITE_U32(0xFE080000);
-    GX_WRITE_U8(0x61);
+    GX_WRITE_U8(GX_LOAD_BP_REG);
     GX_WRITE_U32(__GXContexts.main->x204);
 }
 
 static void __GXSetGenMode()
 {
-    GX_WRITE_U8(0x61);
+    GX_WRITE_U8(GX_LOAD_BP_REG);
     GX_WRITE_U32(__GXContexts.main->x204);
     set_x2(GX_FALSE);
 }
