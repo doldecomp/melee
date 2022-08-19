@@ -2,7 +2,9 @@
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
 
-void __GXSetDirtyState(void)
+void __GXSetGenMode();
+
+void __GXSetDirtyState()
 {
     if (__GXContexts.main->x4F0 & 1)
         __GXSetSUTexSize();
@@ -93,4 +95,11 @@ void GXSetCoPlanar(GXBool enable)
     GX_WRITE_U32(0xFE080000);
     GX_WRITE_U8(0x61);
     GX_WRITE_U32(__GXContexts.main->x204);
+}
+
+static void __GXSetGenMode()
+{
+    GX_WRITE_U8(0x61);
+    GX_WRITE_U32(__GXContexts.main->x204);
+    __GXContexts.main->x0.u16[1] = 0;
 }

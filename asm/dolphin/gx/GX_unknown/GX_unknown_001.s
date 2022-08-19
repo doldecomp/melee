@@ -2,19 +2,6 @@
 
 .section .text
 
-# https://decomp.me/scratch/NM2oq // 900 (0%)
-.global __GXSetGenMode
-__GXSetGenMode:
-/* 8033D3E4 00339FC4  38 00 00 61 */	li r0, 0x61
-/* 8033D3E8 00339FC8  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033D3EC 00339FCC  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033D3F0 00339FD0  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
-/* 8033D3F4 00339FD4  38 00 00 00 */	li r0, 0
-/* 8033D3F8 00339FD8  80 64 02 04 */	lwz r3, 0x204(r4)
-/* 8033D3FC 00339FDC  90 65 80 00 */	stw r3, -0x8000(r5)
-/* 8033D400 00339FE0  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033D404 00339FE4  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/UcyNc // 755 (84.27%)
 .global func_8033D408
 func_8033D408:
