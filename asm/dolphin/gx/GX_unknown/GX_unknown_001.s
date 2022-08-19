@@ -2,33 +2,6 @@
 
 .section .text
 
-.global GXBegin
-
-# https://decomp.me/scratch/bpm0c // 840 (60%)
-.global func_8033D298
-func_8033D298:
-/* 8033D298 00339E78  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
-/* 8033D29C 00339E7C  54 86 98 18 */	slwi r6, r4, 0x13
-/* 8033D2A0 00339E80  84 05 00 7C */	lwzu r0, 0x7c(r5)
-/* 8033D2A4 00339E84  38 80 00 61 */	li r4, 0x61
-/* 8033D2A8 00339E88  54 00 06 1E */	rlwinm r0, r0, 0, 0x18, 0xf
-/* 8033D2AC 00339E8C  50 60 44 2E */	rlwimi r0, r3, 8, 0x10, 0x17
-/* 8033D2B0 00339E90  90 05 00 00 */	stw r0, 0(r5)
-/* 8033D2B4 00339E94  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033D2B8 00339E98  38 00 00 00 */	li r0, 0
-/* 8033D2BC 00339E9C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D2C0 00339EA0  38 E3 00 7C */	addi r7, r3, 0x7c
-/* 8033D2C4 00339EA4  80 63 00 7C */	lwz r3, 0x7c(r3)
-/* 8033D2C8 00339EA8  54 63 03 52 */	rlwinm r3, r3, 0, 0xd, 9
-/* 8033D2CC 00339EAC  7C 63 33 78 */	or r3, r3, r6
-/* 8033D2D0 00339EB0  90 67 00 00 */	stw r3, 0(r7)
-/* 8033D2D4 00339EB4  98 85 80 00 */	stb r4, 0xCC008000@l(r5)
-/* 8033D2D8 00339EB8  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033D2DC 00339EBC  80 64 00 7C */	lwz r3, 0x7c(r4)
-/* 8033D2E0 00339EC0  90 65 80 00 */	stw r3, -0x8000(r5)
-/* 8033D2E4 00339EC4  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033D2E8 00339EC8  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/HgiIF // 260 (89.60%)
 .global func_8033D2EC
 func_8033D2EC:

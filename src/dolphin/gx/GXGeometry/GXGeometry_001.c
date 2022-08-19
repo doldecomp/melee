@@ -52,3 +52,12 @@ void GXSetLineWidth(u8 width, GXTexOffset texOffsets)
     GX_WRITE_U32(__GXContexts.main->x7C);
     __GXContexts.main->x0.u16[1] = 0;
 }
+
+void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets)
+{
+    INSERT_FIELD(__GXContexts.main->x7C, pointSize, 8, 8);
+    INSERT_FIELD(__GXContexts.main->x7C, texOffsets, 3, 19);
+    GX_WRITE_U8(0x61);
+    GX_WRITE_U32(__GXContexts.main->x7C);
+    __GXContexts.main->x0.u16[1] = 0;
+}

@@ -76,7 +76,7 @@
 /* 00339FE8 */ extern void func_8033D408(s16, s32, s16, s16);
 /* 00339F30 */ extern void func_8033D350(s32);
 /* 00339ECC */ extern void func_8033D2EC(s32, s32, s32);
-/* 00339E78 */ extern void func_8033D298(s32, s32);
+/* 00339E78 */ extern void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets);
 /* 00339E20 */ extern void GXSetLineWidth(u8 width, GXTexOffset texOffsets);
 /* 00339CBC */ extern void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts);
 
