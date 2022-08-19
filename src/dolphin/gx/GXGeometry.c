@@ -4,6 +4,11 @@
 
 void __GXSetGenMode();
 
+static void set_x2(GXBool value)
+{
+    __GXContexts.main->x0.u16[1] = value;
+}
+
 void __GXSetDirtyState()
 {
     if (__GXContexts.main->x4F0 & 1)
@@ -43,7 +48,7 @@ void __GXSendFlushPrim()
     for (i = 0; i < size; i += 4)
         WGPIPE.u32 = 0;
 
-    __GXContexts.main->x0.u16[1] = 1;
+    set_x2(GX_TRUE);
 }
 
 void GXSetLineWidth(u8 width, GXTexOffset texOffsets)
@@ -52,7 +57,7 @@ void GXSetLineWidth(u8 width, GXTexOffset texOffsets)
     INSERT_FIELD(__GXContexts.main->x7C, texOffsets, 3, 16);
     GX_WRITE_U8(0x61);
     GX_WRITE_U32(__GXContexts.main->x7C);
-    __GXContexts.main->x0.u16[1] = 0;
+    set_x2(GX_FALSE);
 }
 
 void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets)
@@ -61,7 +66,7 @@ void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets)
     INSERT_FIELD(__GXContexts.main->x7C, texOffsets, 3, 19);
     GX_WRITE_U8(0x61);
     GX_WRITE_U32(__GXContexts.main->x7C);
-    __GXContexts.main->x0.u16[1] = 0;
+    set_x2(GX_FALSE);
 }
 
 void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable, GXBool point_enable)
@@ -70,7 +75,7 @@ void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable, GXBool point_ena
     INSERT_FIELD(__GXContexts.main->xB8[coord], point_enable, 1, 19);
     GX_WRITE_U8(0x61);
     GX_WRITE_U32(__GXContexts.main->xB8[coord]);
-    __GXContexts.main->x0.u16[1] = 0;
+    set_x2(GX_FALSE);
 }
 
 void GXSetCullMode(GXCullMode mode)
@@ -101,5 +106,5 @@ static void __GXSetGenMode()
 {
     GX_WRITE_U8(0x61);
     GX_WRITE_U32(__GXContexts.main->x204);
-    __GXContexts.main->x0.u16[1] = 0;
+    set_x2(GX_FALSE);
 }
