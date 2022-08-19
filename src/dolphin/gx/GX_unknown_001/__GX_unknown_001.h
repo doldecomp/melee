@@ -66,6 +66,5 @@
 /* 0033BEC0 */ extern void func_8033F2E0(s32, s32);
 /* 0033BA08 */ extern void func_8033EE28(unk_t, unk_t, s32);
 /* 0033B4C8 */ extern void func_8033E8E8(u32, s16, s16, s32 *, s32 *, s32 *);
-/* 00339D98 */ extern void __GXSendFlushPrim();
 
 #endif

@@ -74,10 +74,5 @@
 /* 0033A168 */ extern void func_8033D588(s32);
 /* 0033A0A8 */ extern void func_8033D4C8(s16, s32, s16, s16);
 /* 00339FE8 */ extern void func_8033D408(s16, s32, s16, s16);
-/* 00339F30 */ extern void GXSetCullMode(GXCullMode);
-/* 00339ECC */ extern void GXEnableTexOffsets(s32, s32, s32);
-/* 00339E78 */ extern void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets);
-/* 00339E20 */ extern void GXSetLineWidth(u8 width, GXTexOffset texOffsets);
-/* 00339CBC */ extern void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts);
 
 #endif
