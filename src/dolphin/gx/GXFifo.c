@@ -2,7 +2,16 @@
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
-#include <dolphin/gx/GXFifo/GXFifo_001.h>
+
+/* 004D3EF8 */ extern s32 __GXOverflowCount;
+/* 004D3EF4 */ extern void (*BreakPointCB)();
+/* 004D3EF0 */ extern BOOL GXOverflowSuspendInProgress;
+/* 004D3EEC */ extern GXBool CPGPLinked;
+/* 004D3EE8 */ extern OSThread *__GXCurrentThread;
+
+// todo: order is swapped from SMB. Confirm they are assigned correctly.
+/* 004D3EE4 */ extern GXFifoObj *GPFifo;
+/* 004D3EE0 */ extern GXFifoObj *CPUFifo;
 
 void __GXWriteFifoIntReset(u8 arg0, u8 arg1);
 void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr);
@@ -80,88 +89,61 @@ void GXInitFifoLimits(GXFifoObj *fifo, u32 hiWaterMark, u32 loWaterMark)
     __fifo->loWaterMark = loWaterMark;
 }
 
+void GXSetCPUFifo(GXFifoObj *fifo)
+{
+    __GXFifoObj *__fifo = (__GXFifoObj *)fifo;
+    BOOL intrEnabled = OSDisableInterrupts();
+
+    CPUFifo = fifo;
+    if (fifo == GPFifo)
+    {
+        u32 temp_r6;
+
+        __piReg[3] = (u32)__fifo->base & 0x3FFFFFFF;
+        __piReg[4] = (u32)__fifo->end & 0x3FFFFFFF;
+        temp_r6 = (u32)__fifo->writePtr & ~0xC000001F;
+        __piReg[5] = temp_r6 & 0xFBFFFFFF;
+
+        CPGPLinked = GX_TRUE;
+        __GXWriteFifoIntReset(1, 1);
+        __GXWriteFifoIntEnable(1, 0);
+        __GXFifoLink(1);
+    }
+    else
+    {
+        u32 temp_r0;
+
+        if (CPGPLinked)
+        {
+            __GXFifoLink(0);
+            CPGPLinked = FALSE;
+        }
+        __GXWriteFifoIntEnable(0, 0);
+
+        __piReg[3] = (u32)__fifo->base & 0x3FFFFFFF;
+        __piReg[4] = (u32)__fifo->end & 0x3FFFFFFF;
+        temp_r0 = (u32)__fifo->writePtr & ~0xC000001F;
+        __piReg[5] = temp_r0 & 0xFBFFFFFF;
+    }
+
+    __sync();
+
+    OSRestoreInterrupts(intrEnabled);
+    return;
+
+// Despite this obviously being dead code, it still is needed to match the function.
+// todo: This is weird; try to match without it.
+#ifndef NON_MATCHING
+    asm {nop}
+#pragma peephole on
+#endif
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-asm void GXSetCPUFifo(GXFifoObj *fifo)
-{ // clang-format off
-    nofralloc
-/* 8033B9AC 0033858C  7C 08 02 A6 */	mflr r0
-/* 8033B9B0 00338590  90 01 00 04 */	stw r0, 4(r1)
-/* 8033B9B4 00338594  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8033B9B8 00338598  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8033B9BC 0033859C  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8033B9C0 003385A0  7C 7E 1B 78 */	mr r30, r3
-/* 8033B9C4 003385A4  48 00 B9 A1 */	bl OSDisableInterrupts
-/* 8033B9C8 003385A8  80 0D BC 64 */	lwz r0, lbl_804D7304(r13)
-/* 8033B9CC 003385AC  3B E3 00 00 */	addi r31, r3, 0
-/* 8033B9D0 003385B0  93 CD BC 60 */	stw r30, lbl_804D7300(r13)
-/* 8033B9D4 003385B4  7C 1E 00 40 */	cmplw r30, r0
-/* 8033B9D8 003385B8  40 82 00 64 */	bne lbl_8033BA3C
-/* 8033B9DC 003385BC  80 BE 00 00 */	lwz r5, 0(r30)
-/* 8033B9E0 003385C0  38 00 00 01 */	li r0, 1
-/* 8033B9E4 003385C4  80 8D BC 50 */	lwz r4, lbl_804D72F0(r13)
-/* 8033B9E8 003385C8  38 60 00 01 */	li r3, 1
-/* 8033B9EC 003385CC  54 A5 00 BE */	clrlwi r5, r5, 2
-/* 8033B9F0 003385D0  90 A4 00 0C */	stw r5, 0xc(r4)
-/* 8033B9F4 003385D4  38 80 00 01 */	li r4, 1
-/* 8033B9F8 003385D8  80 DE 00 04 */	lwz r6, 4(r30)
-/* 8033B9FC 003385DC  80 AD BC 50 */	lwz r5, lbl_804D72F0(r13)
-/* 8033BA00 003385E0  54 C6 00 BE */	clrlwi r6, r6, 2
-/* 8033BA04 003385E4  90 C5 00 10 */	stw r6, 0x10(r5)
-/* 8033BA08 003385E8  80 DE 00 18 */	lwz r6, 0x18(r30)
-/* 8033BA0C 003385EC  80 AD BC 50 */	lwz r5, lbl_804D72F0(r13)
-/* 8033BA10 003385F0  54 C6 00 B4 */	rlwinm r6, r6, 0, 2, 0x1a
-/* 8033BA14 003385F4  54 C6 01 88 */	rlwinm r6, r6, 0, 6, 4
-/* 8033BA18 003385F8  90 C5 00 14 */	stw r6, 0x14(r5)
-/* 8033BA1C 003385FC  98 0D BC 6C */	stb r0, lbl_804D730C(r13)
-/* 8033BA20 00338600  48 00 03 3D */	bl __GXWriteFifoIntReset
-/* 8033BA24 00338604  38 60 00 01 */	li r3, 1
-/* 8033BA28 00338608  38 80 00 00 */	li r4, 0
-/* 8033BA2C 0033860C  48 00 02 E5 */	bl __GXWriteFifoIntEnable
-/* 8033BA30 00338610  38 60 00 01 */	li r3, 1
-/* 8033BA34 00338614  48 00 02 99 */	bl __GXFifoLink
-/* 8033BA38 00338618  48 00 00 60 */	b lbl_8033BA98
-lbl_8033BA3C:
-/* 8033BA3C 0033861C  88 0D BC 6C */	lbz r0, lbl_804D730C(r13)
-/* 8033BA40 00338620  28 00 00 00 */	cmplwi r0, 0
-/* 8033BA44 00338624  41 82 00 14 */	beq lbl_8033BA58
-/* 8033BA48 00338628  38 60 00 00 */	li r3, 0
-/* 8033BA4C 0033862C  48 00 02 81 */	bl __GXFifoLink
-/* 8033BA50 00338630  38 00 00 00 */	li r0, 0
-/* 8033BA54 00338634  98 0D BC 6C */	stb r0, lbl_804D730C(r13)
-lbl_8033BA58:
-/* 8033BA58 00338638  38 60 00 00 */	li r3, 0
-/* 8033BA5C 0033863C  38 80 00 00 */	li r4, 0
-/* 8033BA60 00338640  48 00 02 B1 */	bl __GXWriteFifoIntEnable
-/* 8033BA64 00338644  80 1E 00 00 */	lwz r0, 0(r30)
-/* 8033BA68 00338648  80 6D BC 50 */	lwz r3, lbl_804D72F0(r13)
-/* 8033BA6C 0033864C  54 00 00 BE */	clrlwi r0, r0, 2
-/* 8033BA70 00338650  90 03 00 0C */	stw r0, 0xc(r3)
-/* 8033BA74 00338654  80 1E 00 04 */	lwz r0, 4(r30)
-/* 8033BA78 00338658  80 6D BC 50 */	lwz r3, lbl_804D72F0(r13)
-/* 8033BA7C 0033865C  54 00 00 BE */	clrlwi r0, r0, 2
-/* 8033BA80 00338660  90 03 00 10 */	stw r0, 0x10(r3)
-/* 8033BA84 00338664  80 1E 00 18 */	lwz r0, 0x18(r30)
-/* 8033BA88 00338668  80 6D BC 50 */	lwz r3, lbl_804D72F0(r13)
-/* 8033BA8C 0033866C  54 00 00 B4 */	rlwinm r0, r0, 0, 2, 0x1a
-/* 8033BA90 00338670  54 00 01 88 */	rlwinm r0, r0, 0, 6, 4
-/* 8033BA94 00338674  90 03 00 14 */	stw r0, 0x14(r3)
-lbl_8033BA98:
-/* 8033BA98 00338678  7C 00 04 AC */	sync 
-/* 8033BA9C 0033867C  7F E3 FB 78 */	mr r3, r31
-/* 8033BAA0 00338680  48 00 B8 ED */	bl OSRestoreInterrupts
-/* 8033BAA4 00338684  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8033BAA8 00338688  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8033BAAC 0033868C  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8033BAB0 00338690  7C 08 03 A6 */	mtlr r0
-/* 8033BAB4 00338694  38 21 00 18 */	addi r1, r1, 0x18
-/* 8033BAB8 00338698  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 asm void GXSetGPFifo()
 { // clang-format off
@@ -178,7 +160,7 @@ asm void GXSetGPFifo()
 /* 8033BAE0 003386C0  38 60 00 00 */	li r3, 0
 /* 8033BAE4 003386C4  38 80 00 00 */	li r4, 0
 /* 8033BAE8 003386C8  48 00 02 29 */	bl __GXWriteFifoIntEnable
-/* 8033BAEC 003386CC  93 CD BC 64 */	stw r30, lbl_804D7304(r13)
+/* 8033BAEC 003386CC  93 CD BC 64 */	stw r30, GPFifo(r13)
 /* 8033BAF0 003386D0  80 6D BC 54 */	lwz r3, __cpReg(r13)
 /* 8033BAF4 003386D4  80 1E 00 00 */	lwz r0, 0(r30)
 /* 8033BAF8 003386D8  B0 03 00 20 */	sth r0, 0x20(r3)
@@ -229,12 +211,12 @@ asm void GXSetGPFifo()
 /* 8033BBAC 0033878C  54 00 84 3E */	srwi r0, r0, 0x10
 /* 8033BBB0 00338790  B0 03 00 2E */	sth r0, 0x2e(r3)
 /* 8033BBB4 00338794  7C 00 04 AC */	sync 
-/* 8033BBB8 00338798  80 6D BC 60 */	lwz r3, lbl_804D7300(r13)
-/* 8033BBBC 0033879C  80 0D BC 64 */	lwz r0, lbl_804D7304(r13)
+/* 8033BBB8 00338798  80 6D BC 60 */	lwz r3, CPUFifo(r13)
+/* 8033BBBC 0033879C  80 0D BC 64 */	lwz r0, GPFifo(r13)
 /* 8033BBC0 003387A0  7C 03 00 40 */	cmplw r3, r0
 /* 8033BBC4 003387A4  40 82 00 24 */	bne lbl_8033BBE8
 /* 8033BBC8 003387A8  38 00 00 01 */	li r0, 1
-/* 8033BBCC 003387AC  98 0D BC 6C */	stb r0, lbl_804D730C(r13)
+/* 8033BBCC 003387AC  98 0D BC 6C */	stb r0, CPGPLinked(r13)
 /* 8033BBD0 003387B0  38 60 00 01 */	li r3, 1
 /* 8033BBD4 003387B4  38 80 00 00 */	li r4, 0
 /* 8033BBD8 003387B8  48 00 01 39 */	bl __GXWriteFifoIntEnable
@@ -243,7 +225,7 @@ asm void GXSetGPFifo()
 /* 8033BBE4 003387C4  48 00 00 20 */	b lbl_8033BC04
 lbl_8033BBE8:
 /* 8033BBE8 003387C8  38 00 00 00 */	li r0, 0
-/* 8033BBEC 003387CC  98 0D BC 6C */	stb r0, lbl_804D730C(r13)
+/* 8033BBEC 003387CC  98 0D BC 6C */	stb r0, CPGPLinked(r13)
 /* 8033BBF0 003387D0  38 60 00 00 */	li r3, 0
 /* 8033BBF4 003387D4  38 80 00 00 */	li r4, 0
 /* 8033BBF8 003387D8  48 00 01 19 */	bl __GXWriteFifoIntEnable
@@ -281,8 +263,8 @@ asm void __GXFifoInit()
 /* 8033BC5C 0033883C  38 00 00 00 */	li r0, 0
 /* 8033BC60 00338840  90 6D BC 68 */	stw r3, __GXCurrentThread(r13)
 /* 8033BC64 00338844  90 0D BC 70 */	stw r0, GXOverflowSuspendInProgress(r13)
-/* 8033BC68 00338848  90 0D BC 60 */	stw r0, lbl_804D7300(r13)
-/* 8033BC6C 0033884C  90 0D BC 64 */	stw r0, lbl_804D7304(r13)
+/* 8033BC68 00338848  90 0D BC 60 */	stw r0, CPUFifo(r13)
+/* 8033BC6C 0033884C  90 0D BC 64 */	stw r0, GPFifo(r13)
 /* 8033BC70 00338850  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8033BC74 00338854  38 21 00 08 */	addi r1, r1, 8
 /* 8033BC78 00338858  7C 08 03 A6 */	mtlr r0

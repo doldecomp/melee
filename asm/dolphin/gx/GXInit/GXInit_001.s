@@ -77,7 +77,7 @@ GXInit:
 /* 8033A7CC 003373AC  93 E6 04 DC */	stw r31, 0x4dc(r6)
 /* 8033A7D0 003373B0  80 CD A5 08 */	lwz r6, __GXContexts@sda21(r13)
 /* 8033A7D4 003373B4  B3 E6 00 04 */	sth r31, 4(r6)
-/* 8033A7D8 003373B8  90 AD BC 50 */	stw r5, lbl_804D72F0@sda21(r13)
+/* 8033A7D8 003373B8  90 AD BC 50 */	stw r5, __piReg@sda21(r13)
 /* 8033A7DC 003373BC  90 8D BC 54 */	stw r4, __cpReg@sda21(r13)
 /* 8033A7E0 003373C0  90 6D BC 58 */	stw r3, __peReg@sda21(r13)
 /* 8033A7E4 003373C4  90 0D BC 5C */	stw r0, lbl_804D72FC@sda21(r13)

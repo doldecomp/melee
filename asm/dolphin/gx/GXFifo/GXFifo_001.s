@@ -7,8 +7,8 @@
 .section .sbss
     .balign 8
 
-.global lbl_804D72F0
-lbl_804D72F0:
+.global __piReg
+__piReg:
 	.skip 0x4
 
 .global __cpReg
@@ -23,20 +23,20 @@ __peReg:
 lbl_804D72FC:
 	.skip 0x4
 
-.global lbl_804D7300
-lbl_804D7300:
+.global CPUFifo
+CPUFifo:
 	.skip 0x4
 
-.global lbl_804D7304
-lbl_804D7304:
+.global GPFifo
+GPFifo:
 	.skip 0x4
 
 .global __GXCurrentThread
 __GXCurrentThread:
 	.skip 0x4
 
-.global lbl_804D730C
-lbl_804D730C:
+.global CPGPLinked
+CPGPLinked:
 	.skip 0x4
 
 .global GXOverflowSuspendInProgress
