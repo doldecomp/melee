@@ -3,8 +3,8 @@
 #define HALF_PI64 1.5707963267948966
 
 extern HSD_GObj* func_802C8038(HSD_GObj*, Vec3*, s32, s32, f32, f32);
-void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter);
-void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter);
+void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fp);
+void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fp);
 
 // 0x8014DEF0
 // https://decomp.me/scratch/6Vtu9 // Create Fire Rescue item

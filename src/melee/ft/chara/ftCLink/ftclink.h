@@ -28,16 +28,16 @@ void ftCLink_OnItemDrop(HSD_GObj*, BOOL);
 
 inline void checkFighter2244(HSD_GObj* gobj)
 {
-    Fighter* ft;
+    Fighter* fp;
 
     if (gobj == NULL) {
         return;
     }
 
-    ft = gobj->user_data;
-    if (ft != NULL && ft->sa.clink.x2244 != 0) {
-        func_802C8C34(ft->sa.clink.x2244);
-        ft->sa.clink.x2244 = 0;
+    fp = gobj->user_data;
+    if (fp != NULL && fp->sa.clink.x2244 != 0) {
+        func_802C8C34(fp->sa.clink.x2244);
+        fp->sa.clink.x2244 = 0;
     }
 
     if (gobj == NULL) {

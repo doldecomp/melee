@@ -1368,25 +1368,25 @@ jtbl_8040C3DC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000002
+    .int 2
+    .int 2
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte NULL
-    .4byte NULL
+    .int 255
+    .int 255
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .int 2
+    .int 2
     .4byte NULL
     .asciz "Out CameraDisp Range\n"
     .balign 4
@@ -1418,14 +1418,14 @@ lbl_804D7960:
     .balign 8
 .global lbl_804DEA70
 lbl_804DEA70:
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEA74
 lbl_804DEA74:
-	.4byte 0x3F800000
+	.float 1.0
 .global lbl_804DEA78
 lbl_804DEA78:
-	.4byte 0x43300000
-	.4byte 0x00000000
+	.float 176.0
+	.4byte NULL
 .global lbl_804DEA80
 lbl_804DEA80:
 	.4byte 0xFFA60000
@@ -1443,12 +1443,12 @@ lbl_804DEA90:
 	.4byte 0xFF00FF80
 .global lbl_804DEA94
 lbl_804DEA94:
-	.4byte 0x3F000000
+	.float 0.5
 .global lbl_804DEA98
 lbl_804DEA98:
-	.4byte 0x40000000
-	.4byte 0x00000000
+	.float 2.0
+	.4byte NULL
 .global lbl_804DEAA0
 lbl_804DEAA0:
-	.4byte 0x43300000
+	.float 176.0
 	.4byte 0x80000000

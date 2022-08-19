@@ -5,12 +5,12 @@ void ftPichu_OnLoad(HSD_GObj* gobj)
     ftPichuAttributes* attrs;
     u32 unused[2];
 
-    Fighter* ft = gobj->user_data;
-    ftData* ftdata = ft->x10C_ftData;
+    Fighter* fp = gobj->user_data;
+    ftData* ftdata = fp->x10C_ftData;
     void** items = ftdata->x48_items;
-    ft->x2224_flag.bits.b7 = 1;
-    ftPikachu_OnLoadForPichu(ft);
-    attrs = ft->x2D4_specialAttributes;
+    fp->x2224_flag.bits.b7 = 1;
+    ftPikachu_OnLoadForPichu(fp);
+    attrs = fp->x2D4_specialAttributes;
     func_8026B3F8(items[0], attrs->xDC);
     func_8026B3F8(items[1], attrs->x14);
     func_8026B3F8(items[2], attrs->x18);
@@ -19,10 +19,10 @@ void ftPichu_OnLoad(HSD_GObj* gobj)
 void ftPichu_OnDeath(HSD_GObj* gobj)
 {
     u8 temp_r0;
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
     func_80074A4C(gobj, 0, 0);
-    temp_r0 = ft->x619_costume_id;
+    temp_r0 = fp->x619_costume_id;
 
     switch (temp_r0) {
         case 0:
