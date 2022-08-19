@@ -1,37 +1,40 @@
 #include <functions.h> // todo
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
+#include <dolphin/gx/__GXLight.h>
 
 extern void *jtbl_80401298[8];
-extern const float lbl_804DE230;
-extern const float lbl_804DE234;
-extern const float lbl_804DE238;
-extern const float lbl_804DE23C;
-extern const float lbl_804DE240;
-extern const float lbl_804DE244;
-extern const float lbl_804DE248;
-extern const float lbl_804DE24C;
-extern const float lbl_804DE250;
-extern const float lbl_804DE254;
-extern const float lbl_804DE258;
-extern const float lbl_804DE25C;
-extern const double lbl_804DE260;
+extern const f32 lbl_804DE230;
+extern const f32 lbl_804DE234;
+extern const f32 lbl_804DE238;
+extern const f32 lbl_804DE23C;
+extern const f32 lbl_804DE240;
+extern const f32 lbl_804DE244;
+extern const f32 lbl_804DE248;
+extern const f32 lbl_804DE24C;
+extern const f32 lbl_804DE250;
+extern const f32 lbl_804DE254;
+extern const f32 lbl_804DE258;
+extern const f32 lbl_804DE25C;
+extern const f64 lbl_804DE260;
 
-// https://decomp.me/scratch/64FA7 // 0 (100%)
-asm void GXInitLightAttn()
-{ // clang-format off
-    nofralloc
-/* 8033DE84 0033AA64  D0 23 00 10 */	stfs f1, 0x10(r3)
-/* 8033DE88 0033AA68  D0 43 00 14 */	stfs f2, 0x14(r3)
-/* 8033DE8C 0033AA6C  D0 63 00 18 */	stfs f3, 0x18(r3)
-/* 8033DE90 0033AA70  D0 83 00 1C */	stfs f4, 0x1c(r3)
-/* 8033DE94 0033AA74  D0 A3 00 20 */	stfs f5, 0x20(r3)
-/* 8033DE98 0033AA78  D0 C3 00 24 */	stfs f6, 0x24(r3)
-/* 8033DE9C 0033AA7C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
+void GXInitLightAttn(GXLightObj *light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc)
+{
+    light->aa = aa;
+    light->ab = ab;
+    light->ac = ac;
+    light->ka = ka;
+    light->kb = kb;
+    light->kc = kc;
+}
 
-asm void GXInitLightSpot()
+#ifdef NON_MATCHING
+
+#else
+
+#endif
+
+asm void GXInitLightSpot(GXLightObj *, f32, GXSpotFn)
 { // clang-format off
     nofralloc
 /* 8033DEA0 0033AA80  7C 08 02 A6 */	mflr r0
@@ -143,7 +146,7 @@ lbl_8033DFFC:
 } // clang-format on
 #pragma peephole on
 
-asm void GXInitLightDistAttn()
+asm void GXInitLightDistAttn(GXLightObj *, f32, f32, GXDistAttnFn)
 { // clang-format off
     nofralloc
 /* 8033E020 0033AC00  C0 02 E8 50 */	lfs f0, lbl_804DE230(r2)
@@ -210,7 +213,7 @@ lbl_8033E0E0:
 } // clang-format on
 #pragma peephole on
 
-asm void GXInitLightPos()
+asm void GXInitLightPos(GXLightObj *, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 8033E0F0 0033ACD0  D0 23 00 28 */	stfs f1, 0x28(r3)
@@ -220,7 +223,7 @@ asm void GXInitLightPos()
 } // clang-format on
 #pragma peephole on
 
-asm void GXInitLightDir()
+asm void GXInitLightDir(GXLightObj *, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 8033E100 0033ACE0  FC 80 08 50 */	fneg f4, f1
@@ -234,7 +237,7 @@ asm void GXInitLightDir()
 #pragma peephole on
 
 // https://decomp.me/scratch/Dk5Fr // 135 (86.50%)
-asm void GXInitLightColor()
+asm void GXInitLightColor(GXLightObj *, GXColor *)
 { // clang-format off
     nofralloc
 /* 8033E11C 0033ACFC  88 04 00 01 */	lbz r0, 1(r4)
@@ -251,7 +254,7 @@ asm void GXInitLightColor()
 #pragma peephole on
 
 // https://decomp.me/scratch/dLcp8 // 0 (100%)
-asm void GXLoadLightObjImm()
+asm void GXLoadLightObjImm(GXLightObj *, u32)
 { // clang-format off
     nofralloc
 /* 8033E144 0033AD24  2C 04 00 10 */	cmpwi r4, 0x10
@@ -353,7 +356,7 @@ lbl_8033E1E8:
 #pragma peephole on
 
 // https://decomp.me/scratch/DOTYM // 9765 (0%)
-asm void GXSetChanAmbColor()
+asm void GXSetChanAmbColor(GXChannelID, GXColor *)
 { // clang-format off
     nofralloc
 /* 8033E28C 0033AE6C  2C 03 00 03 */	cmpwi r3, 3
@@ -457,7 +460,7 @@ lbl_8033E3BC:
 } // clang-format on
 #pragma peephole on
 
-asm void GXSetChanMatColor()
+asm void GXSetChanMatColor(GXChannelID, GXColor *)
 { // clang-format off
     nofralloc
 /* 8033E3F4 0033AFD4  2C 03 00 03 */	cmpwi r3, 3
@@ -562,7 +565,7 @@ lbl_8033E524:
 #pragma peephole on
 
 // https://decomp.me/scratch/MXbI8 // 290 (84.74%)
-asm void GXSetNumChans()
+asm void GXSetNumChans(u8)
 { // clang-format off
     nofralloc
 /* 8033E55C 0033B13C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
@@ -587,7 +590,7 @@ asm void GXSetNumChans()
 } // clang-format on
 #pragma peephole on
 
-asm void GXSetChanCtrl()
+asm void GXSetChanCtrl(GXChannelID, u8, GXColorSrc, GXColorSrc, GXLightID, GXDiffuseFn, GXAttnFn)
 { // clang-format off
     nofralloc
 /* 8033E5A8 0033B188  94 21 FF C8 */	stwu r1, -0x38(r1)
