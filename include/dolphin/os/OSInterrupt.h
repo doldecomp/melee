@@ -5,7 +5,7 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/types.h>
 
-typedef s16 __OSInterrupt;
+typedef u8 __OSInterrupt;
 typedef enum
 {
     OS_INTR_MEM_0,

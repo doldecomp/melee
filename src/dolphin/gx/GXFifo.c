@@ -182,36 +182,21 @@ void GXSetGPFifo(GXFifoObj *fifo)
     OSRestoreInterrupts(intrEnabled);
 }
 
+void __GXFifoInit()
+{
+    __OSSetInterruptHandler(OS_INTR_PI_CP, GXCPInterruptHandler);
+    __OSUnmaskInterrupts(0x4000);
+    __GXCurrentThread = OSGetCurrentThread();
+    GXOverflowSuspendInProgress = FALSE;
+    CPUFifo = NULL;
+    GPFifo = NULL;
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-asm void __GXFifoInit()
-{ // clang-format off
-    nofralloc
-/* 8033BC34 00338814  7C 08 02 A6 */	mflr r0
-/* 8033BC38 00338818  3C 60 80 34 */	lis r3, GXCPInterruptHandler@ha
-/* 8033BC3C 0033881C  90 01 00 04 */	stw r0, 4(r1)
-/* 8033BC40 00338820  38 83 B7 88 */	addi r4, r3, GXCPInterruptHandler@l
-/* 8033BC44 00338824  38 60 00 11 */	li r3, 0x11
-/* 8033BC48 00338828  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8033BC4C 0033882C  48 00 B7 65 */	bl __OSSetInterruptHandler
-/* 8033BC50 00338830  38 60 40 00 */	li r3, 0x4000
-/* 8033BC54 00338834  48 00 BB 61 */	bl __OSUnmaskInterrupts
-/* 8033BC58 00338838  48 00 F0 E5 */	bl OSGetCurrentThread
-/* 8033BC5C 0033883C  38 00 00 00 */	li r0, 0
-/* 8033BC60 00338840  90 6D BC 68 */	stw r3, __GXCurrentThread(r13)
-/* 8033BC64 00338844  90 0D BC 70 */	stw r0, GXOverflowSuspendInProgress(r13)
-/* 8033BC68 00338848  90 0D BC 60 */	stw r0, CPUFifo(r13)
-/* 8033BC6C 0033884C  90 0D BC 64 */	stw r0, GPFifo(r13)
-/* 8033BC70 00338850  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8033BC74 00338854  38 21 00 08 */	addi r1, r1, 8
-/* 8033BC78 00338858  7C 08 03 A6 */	mtlr r0
-/* 8033BC7C 0033885C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 static asm void __GXFifoReadEnable(void)
 { // clang-format off
