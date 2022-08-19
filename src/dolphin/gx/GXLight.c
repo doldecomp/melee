@@ -140,113 +140,68 @@ void GXInitLightColor(GXLightObj *light, GXColor *color)
     *(u32 *)&light->color = (color->r << 24) | (color->g << 16) | (color->b << 8) | color->a;
 }
 
+void GXLoadLightObjImm(GXLightObj *light, GXLightID light_id)
+{
+    u32 ordinal_id;
+
+    switch (light_id)
+    {
+    case GX_LIGHT0:
+        ordinal_id = 0;
+        break;
+    case GX_LIGHT1:
+        ordinal_id = 1;
+        break;
+    case GX_LIGHT2:
+        ordinal_id = 2;
+        break;
+    case GX_LIGHT3:
+        ordinal_id = 3;
+        break;
+    case GX_LIGHT4:
+        ordinal_id = 4;
+        break;
+    case GX_LIGHT5:
+        ordinal_id = 5;
+        break;
+    case GX_LIGHT6:
+        ordinal_id = 6;
+        break;
+    case GX_LIGHT7:
+        ordinal_id = 7;
+        break;
+    default:
+        ordinal_id = 0;
+        break;
+    }
+
+    WGPIPE.u8 = GX_LOAD_XF_REG;
+    WGPIPE.u32 = ((ordinal_id << 4) + 0x600) | 0xF0000;
+    WGPIPE.u32 = 0;
+    WGPIPE.u32 = 0;
+    WGPIPE.u32 = 0;
+    GX_WRITE_U32(light->color);
+    GX_WRITE_F32(light->aa);
+    GX_WRITE_F32(light->ab);
+    GX_WRITE_F32(light->ac);
+    GX_WRITE_F32(light->ka);
+    GX_WRITE_F32(light->kb);
+    GX_WRITE_F32(light->kc);
+    GX_WRITE_F32(light->pos.x);
+    GX_WRITE_F32(light->pos.y);
+    GX_WRITE_F32(light->pos.z);
+    GX_WRITE_F32(light->dir.x);
+    GX_WRITE_F32(light->dir.y);
+    GX_WRITE_F32(light->dir.z);
+
+    set_x2(GX_TRUE);
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-// https://decomp.me/scratch/dLcp8 // 0 (100%)
-asm void GXLoadLightObjImm(GXLightObj *, u32)
-{ // clang-format off
-    nofralloc
-/* 8033E144 0033AD24  2C 04 00 10 */	cmpwi r4, 0x10
-/* 8033E148 0033AD28  41 82 00 7C */	beq lbl_8033E1C4
-/* 8033E14C 0033AD2C  40 80 00 34 */	bge lbl_8033E180
-/* 8033E150 0033AD30  2C 04 00 04 */	cmpwi r4, 4
-/* 8033E154 0033AD34  41 82 00 60 */	beq lbl_8033E1B4
-/* 8033E158 0033AD38  40 80 00 1C */	bge lbl_8033E174
-/* 8033E15C 0033AD3C  2C 04 00 02 */	cmpwi r4, 2
-/* 8033E160 0033AD40  41 82 00 4C */	beq lbl_8033E1AC
-/* 8033E164 0033AD44  40 80 00 80 */	bge lbl_8033E1E4
-/* 8033E168 0033AD48  2C 04 00 01 */	cmpwi r4, 1
-/* 8033E16C 0033AD4C  40 80 00 38 */	bge lbl_8033E1A4
-/* 8033E170 0033AD50  48 00 00 74 */	b lbl_8033E1E4
-lbl_8033E174:
-/* 8033E174 0033AD54  2C 04 00 08 */	cmpwi r4, 8
-/* 8033E178 0033AD58  41 82 00 44 */	beq lbl_8033E1BC
-/* 8033E17C 0033AD5C  48 00 00 68 */	b lbl_8033E1E4
-lbl_8033E180:
-/* 8033E180 0033AD60  2C 04 00 40 */	cmpwi r4, 0x40
-/* 8033E184 0033AD64  41 82 00 50 */	beq lbl_8033E1D4
-/* 8033E188 0033AD68  40 80 00 10 */	bge lbl_8033E198
-/* 8033E18C 0033AD6C  2C 04 00 20 */	cmpwi r4, 0x20
-/* 8033E190 0033AD70  41 82 00 3C */	beq lbl_8033E1CC
-/* 8033E194 0033AD74  48 00 00 50 */	b lbl_8033E1E4
-lbl_8033E198:
-/* 8033E198 0033AD78  2C 04 00 80 */	cmpwi r4, 0x80
-/* 8033E19C 0033AD7C  41 82 00 40 */	beq lbl_8033E1DC
-/* 8033E1A0 0033AD80  48 00 00 44 */	b lbl_8033E1E4
-lbl_8033E1A4:
-/* 8033E1A4 0033AD84  38 00 00 00 */	li r0, 0
-/* 8033E1A8 0033AD88  48 00 00 40 */	b lbl_8033E1E8
-lbl_8033E1AC:
-/* 8033E1AC 0033AD8C  38 00 00 01 */	li r0, 1
-/* 8033E1B0 0033AD90  48 00 00 38 */	b lbl_8033E1E8
-lbl_8033E1B4:
-/* 8033E1B4 0033AD94  38 00 00 02 */	li r0, 2
-/* 8033E1B8 0033AD98  48 00 00 30 */	b lbl_8033E1E8
-lbl_8033E1BC:
-/* 8033E1BC 0033AD9C  38 00 00 03 */	li r0, 3
-/* 8033E1C0 0033ADA0  48 00 00 28 */	b lbl_8033E1E8
-lbl_8033E1C4:
-/* 8033E1C4 0033ADA4  38 00 00 04 */	li r0, 4
-/* 8033E1C8 0033ADA8  48 00 00 20 */	b lbl_8033E1E8
-lbl_8033E1CC:
-/* 8033E1CC 0033ADAC  38 00 00 05 */	li r0, 5
-/* 8033E1D0 0033ADB0  48 00 00 18 */	b lbl_8033E1E8
-lbl_8033E1D4:
-/* 8033E1D4 0033ADB4  38 00 00 06 */	li r0, 6
-/* 8033E1D8 0033ADB8  48 00 00 10 */	b lbl_8033E1E8
-lbl_8033E1DC:
-/* 8033E1DC 0033ADBC  38 00 00 07 */	li r0, 7
-/* 8033E1E0 0033ADC0  48 00 00 08 */	b lbl_8033E1E8
-lbl_8033E1E4:
-/* 8033E1E4 0033ADC4  38 00 00 00 */	li r0, 0
-lbl_8033E1E8:
-/* 8033E1E8 0033ADC8  54 05 20 36 */	slwi r5, r0, 4
-/* 8033E1EC 0033ADCC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033E1F0 0033ADD0  38 05 06 00 */	addi r0, r5, 0x600
-/* 8033E1F4 0033ADD4  38 A0 00 10 */	li r5, 0x10
-/* 8033E1F8 0033ADD8  3C C0 CC 01 */	lis r6, 0xCC008000@ha
-/* 8033E1FC 0033ADDC  98 A6 80 00 */	stb r5, 0xCC008000@l(r6)
-/* 8033E200 0033ADE0  64 00 00 0F */	oris r0, r0, 0xf
-/* 8033E204 0033ADE4  38 A0 00 00 */	li r5, 0
-/* 8033E208 0033ADE8  90 06 80 00 */	stw r0, -0x8000(r6)
-/* 8033E20C 0033ADEC  38 00 00 01 */	li r0, 1
-/* 8033E210 0033ADF0  90 A6 80 00 */	stw r5, -0x8000(r6)
-/* 8033E214 0033ADF4  90 A6 80 00 */	stw r5, -0x8000(r6)
-/* 8033E218 0033ADF8  90 A6 80 00 */	stw r5, -0x8000(r6)
-/* 8033E21C 0033ADFC  80 A3 00 0C */	lwz r5, 0xc(r3)
-/* 8033E220 0033AE00  90 A6 80 00 */	stw r5, -0x8000(r6)
-/* 8033E224 0033AE04  C0 03 00 10 */	lfs f0, 0x10(r3)
-/* 8033E228 0033AE08  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E22C 0033AE0C  C0 03 00 14 */	lfs f0, 0x14(r3)
-/* 8033E230 0033AE10  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E234 0033AE14  C0 03 00 18 */	lfs f0, 0x18(r3)
-/* 8033E238 0033AE18  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E23C 0033AE1C  C0 03 00 1C */	lfs f0, 0x1c(r3)
-/* 8033E240 0033AE20  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E244 0033AE24  C0 03 00 20 */	lfs f0, 0x20(r3)
-/* 8033E248 0033AE28  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E24C 0033AE2C  C0 03 00 24 */	lfs f0, 0x24(r3)
-/* 8033E250 0033AE30  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E254 0033AE34  C0 03 00 28 */	lfs f0, 0x28(r3)
-/* 8033E258 0033AE38  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E25C 0033AE3C  C0 03 00 2C */	lfs f0, 0x2c(r3)
-/* 8033E260 0033AE40  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E264 0033AE44  C0 03 00 30 */	lfs f0, 0x30(r3)
-/* 8033E268 0033AE48  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E26C 0033AE4C  C0 03 00 34 */	lfs f0, 0x34(r3)
-/* 8033E270 0033AE50  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E274 0033AE54  C0 03 00 38 */	lfs f0, 0x38(r3)
-/* 8033E278 0033AE58  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E27C 0033AE5C  C0 03 00 3C */	lfs f0, 0x3c(r3)
-/* 8033E280 0033AE60  D0 06 80 00 */	stfs f0, -0x8000(r6)
-/* 8033E284 0033AE64  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033E288 0033AE68  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 // https://decomp.me/scratch/DOTYM // 9765 (0%)
 asm void GXSetChanAmbColor(GXChannelID, GXColor *)

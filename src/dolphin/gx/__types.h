@@ -8,16 +8,16 @@
 #include <dolphin/gx/GXEnum.h>
 
 #define GX_WRITE_U8(ub) \
-    WGPIPE.u8 = (u8)(ub)
+    WGPIPE.u8 = ((u8 *)&ub);
 
 #define GX_WRITE_U16(us) \
-    WGPIPE.u16 = (u16)(us)
+    WGPIPE.u16 = (*(u16 *)&us);
 
 #define GX_WRITE_U32(ui) \
-    WGPIPE.u32 = (u32)(ui)
+    WGPIPE.u32 = (*(u32 *)&ui);
 
 #define GX_WRITE_F32(f) \
-    WGPIPE.f32 = (f32)(f);
+    WGPIPE.f32 = (*(f32 *)&f);
 
 #define INSERT_FIELD(reg, value, nbits, shift) \
     (reg) = ((u32)(reg) & ~(((1 << (nbits)) - 1) << (shift))) | ((u32)(value) << (shift));

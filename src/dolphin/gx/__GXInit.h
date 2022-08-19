@@ -9,4 +9,9 @@ extern volatile u16 *__peReg; // todo: OSPhysicalToUncached (0x0C001000)
 
 /* 004D2788 */ extern GXContexts __GXContexts;
 
+static void set_x2(GXBool value)
+{
+    __GXContexts.main->x0.u16[1] = value;
+}
+
 #endif

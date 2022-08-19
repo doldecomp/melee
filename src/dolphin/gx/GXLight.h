@@ -23,7 +23,7 @@ typedef struct _GXLightObj
 /* 0033B13C */ extern void GXSetNumChans(u8);
 /* 0033AFD4 */ extern void GXSetChanMatColor(GXChannelID, GXColor *);
 /* 0033AE6C */ extern void GXSetChanAmbColor(GXChannelID, GXColor *);
-/* 0033AD24 */ extern void GXLoadLightObjImm(GXLightObj *, u32);
+/* 0033AD24 */ extern void GXLoadLightObjImm(GXLightObj *, GXLightID);
 /* 0033ACFC */ extern void GXInitLightColor(GXLightObj *, GXColor *);
 /* 0033ACE0 */ extern void GXInitLightDir(GXLightObj *, f32, f32, f32);
 /* 0033ACD0 */ extern void GXInitLightPos(GXLightObj *, f32, f32, f32);
