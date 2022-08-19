@@ -128,24 +128,18 @@ void GXInitLightPos(GXLightObj *light, f32 x, f32 y, f32 z)
     light->pos.z = z;
 }
 
+void GXInitLightDir(GXLightObj *light, f32 x, f32 y, f32 z)
+{
+    light->dir.x = -x;
+    light->dir.y = -y;
+    light->dir.z = -z;
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-asm void GXInitLightDir(GXLightObj *, f32, f32, f32)
-{ // clang-format off
-    nofralloc
-/* 8033E100 0033ACE0  FC 80 08 50 */	fneg f4, f1
-/* 8033E104 0033ACE4  FC 20 10 50 */	fneg f1, f2
-/* 8033E108 0033ACE8  FC 00 18 50 */	fneg f0, f3
-/* 8033E10C 0033ACEC  D0 83 00 34 */	stfs f4, 0x34(r3)
-/* 8033E110 0033ACF0  D0 23 00 38 */	stfs f1, 0x38(r3)
-/* 8033E114 0033ACF4  D0 03 00 3C */	stfs f0, 0x3c(r3)
-/* 8033E118 0033ACF8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 // https://decomp.me/scratch/Dk5Fr // 135 (86.50%)
 asm void GXInitLightColor(GXLightObj *, GXColor *)
