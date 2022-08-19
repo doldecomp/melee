@@ -4,7 +4,7 @@
 #include <dolphin/os/OSThread.h>
 #include <dolphin/gx/GXFifo/GXFifo_001.h>
 
-void GXCPInterruptHandler(__OSInterrupt unused, OSContext *ctx)
+/* static */ void GXCPInterruptHandler(__OSInterrupt unused, OSContext *ctx)
 {
     OSContext sp10;
 
@@ -37,4 +37,16 @@ void GXCPInterruptHandler(__OSInterrupt unused, OSContext *ctx)
             OSSetCurrentContext(ctx);
         }
     }
+}
+
+void GXInitFifoBase(GXFifoObj *fifo, void *base, u32 size)
+{
+    __GXFifoObj *__fifo = (__GXFifoObj *)fifo;
+
+    __fifo->base = base;
+    __fifo->end = (u8 *)base + size - 4;
+    __fifo->size = size;
+    __fifo->x1C = 0;
+    GXInitFifoLimits(fifo, size - 0x4000, (size >> 1) & ~0x1F);
+    GXInitFifoPtrs(fifo, base, base);
 }

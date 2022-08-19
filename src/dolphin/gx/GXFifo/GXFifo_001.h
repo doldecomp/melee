@@ -17,6 +17,6 @@
 /* 00338888 */ extern void __GXFifoReadDisable();
 /* 00338860 */ extern void __GXFifoReadEnable();
 /* 00338580 */ extern void GXInitFifoLimits(unk_t, s32, s32);
-/* 00338510 */ extern void GXInitFifoPtrs(unk_t, s32, s32);
+/* 00338510 */ extern void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr);
 
 #endif

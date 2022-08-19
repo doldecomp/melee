@@ -2,38 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-# https://decomp.me/scratch/DSit3 // 2700 (0%)
-.global GXInitFifoBase
-GXInitFifoBase:
-/* 8033B8C4 003384A4  7C 08 02 A6 */	mflr r0
-/* 8033B8C8 003384A8  90 01 00 04 */	stw r0, 4(r1)
-/* 8033B8CC 003384AC  38 05 FF FC */	addi r0, r5, -4
-/* 8033B8D0 003384B0  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8033B8D4 003384B4  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8033B8D8 003384B8  3B E4 00 00 */	addi r31, r4, 0
-/* 8033B8DC 003384BC  7C 1F 02 14 */	add r0, r31, r0
-/* 8033B8E0 003384C0  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8033B8E4 003384C4  3B C3 00 00 */	addi r30, r3, 0
-/* 8033B8E8 003384C8  38 85 C0 00 */	addi r4, r5, -16384
-/* 8033B8EC 003384CC  93 E3 00 00 */	stw r31, 0(r3)
-/* 8033B8F0 003384D0  90 03 00 04 */	stw r0, 4(r3)
-/* 8033B8F4 003384D4  38 00 00 00 */	li r0, 0
-/* 8033B8F8 003384D8  90 A3 00 08 */	stw r5, 8(r3)
-/* 8033B8FC 003384DC  54 A5 F8 74 */	rlwinm r5, r5, 0x1f, 1, 0x1a
-/* 8033B900 003384E0  90 1E 00 1C */	stw r0, 0x1c(r30)
-/* 8033B904 003384E4  48 00 00 9D */	bl GXInitFifoLimits
-/* 8033B908 003384E8  38 7E 00 00 */	addi r3, r30, 0
-/* 8033B90C 003384EC  38 9F 00 00 */	addi r4, r31, 0
-/* 8033B910 003384F0  38 BF 00 00 */	addi r5, r31, 0
-/* 8033B914 003384F4  48 00 00 1D */	bl GXInitFifoPtrs
-/* 8033B918 003384F8  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8033B91C 003384FC  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8033B920 00338500  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 8033B924 00338504  7C 08 03 A6 */	mtlr r0
-/* 8033B928 00338508  38 21 00 20 */	addi r1, r1, 0x20
-/* 8033B92C 0033850C  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/1a1Bv // 2800 (0%)
+.global GXInitFifoPtrs
 GXInitFifoPtrs:
 /* 8033B930 00338510  7C 08 02 A6 */	mflr r0
 /* 8033B934 00338514  90 01 00 04 */	stw r0, 4(r1)
@@ -66,6 +36,7 @@ lbl_8033B980:
 /* 8033B99C 0033857C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/Yb9o0 // 300 (0%)
+.global GXInitFifoLimits
 GXInitFifoLimits:
 /* 8033B9A0 00338580  90 83 00 0C */	stw r4, 0xc(r3)
 /* 8033B9A4 00338584  90 A3 00 10 */	stw r5, 0x10(r3)

@@ -25,14 +25,15 @@
 // GXFifoObj private fields
 typedef struct
 {
-    unk_t unk0;  // base
-    unk_t unk4;  // end
-    u32 unk8;    // size
-    u32 unkC;    // hiWaterMark
-    u32 unk10;   // loWaterMark
-    unk_t unk14; // readPtr
-    unk_t unk18; // writePtr
-    s32 unk1C;
+    void *base;      // at 0x00
+    void *end;       // at 0x04
+    u32 size;        // at 0x08
+    u32 hiWaterMark; // at 0x0C
+    u32 loWaterMark; // at 0x10
+    void *readPtr;   // at 0x14
+    void *writePtr;  // at 0x18
+    s32 x1C;         // at 0x1C
+    u8 x20_pad[4];   // at 0x20
 } __GXFifoObj;
 
 typedef void (*GXTexRegionCallback)(void); // signature unknown
