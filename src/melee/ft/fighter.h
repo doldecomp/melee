@@ -1077,8 +1077,8 @@ struct SpecialAttrs_Purin {
 
 struct SpecialAttrs_Mewtwo {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
+    /* 0x2230 */ HSD_GObj* x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
+    /* 0x2234 */ s32 x2234_shadowBallCharge;     // Number of cycles Shadow Ball has been charged
     /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
     /* 0x223C */ BOOL x223C_isConfusionBoost;
 };
@@ -1753,6 +1753,10 @@ typedef struct _Fighter {
     /* 0x232C */ s32 x232C;
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
+
+    /* The following series of individual unions with array size 0 is a temporary hack to bypass compiler errors and size shifts for this mess of a struct.
+    These StateVar structs should be one big union once the rest is cleaned up. */
+
     union {
         union {
             ftCommonStateVars commonVars[0]; // 0x2340
@@ -1907,13 +1911,13 @@ inline Fighter* getFighter(HSD_GObj* fighterObj)
 
 inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
 {
-    Fighter* fighter_data = fighter_gobj->user_data;
-    return fighter_data;
+    Fighter* fp = fighter_gobj->user_data;
+    return fp;
 }
 
-inline void* getFtSpecialAttrs(Fighter* fighter_data)
+inline void* getFtSpecialAttrs(Fighter* fp)
 {
-    void* fighter_attr = fighter_data->x2D4_specialAttributes;
+    void* fighter_attr = fp->x2D4_specialAttributes;
     return fighter_attr;
 }
 
@@ -1932,9 +1936,9 @@ inline s32 ftGetAction(Fighter* fp)
     return fp->x10_action_state_index;
 }
 
-inline void* getFtSpecialAttrs2CC(Fighter* fighter_data)
+inline void* getFtSpecialAttrs2CC(Fighter* fp)
 {
-    void* fighter_attr = fighter_data->x2CC;
+    void* fighter_attr = fp->x2CC;
     return fighter_attr;
 }
 

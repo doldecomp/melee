@@ -5,10 +5,10 @@
 // https://decomp.me/scratch/XZ1Jx
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fighter_data = (Fighter*)fighter_gobj->user_data;
+    Fighter* fp = (Fighter*)fighter_gobj->user_data;
     func_80074A4C(fighter_gobj,0,0);
-    fighter_data->sa.captain.x2230_isSpecialSGFX = 0;
-    fighter_data->sa.captain.x222C_isSpecialSStartGFX = 0;
+    fp->sa.captain.x2230_isSpecialSGFX = 0;
+    fp->sa.captain.x222C_isSpecialSStartGFX = 0;
 }
 
 // lbl_800E28C8

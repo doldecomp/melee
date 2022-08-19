@@ -108,13 +108,14 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_4.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftfox.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_AppealS.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialN.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialHi.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialLw.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialS.c.o\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.s.o\
+
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/chara/ftLink/ftlink.c.o\
@@ -211,12 +212,12 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftmewtwo.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialLw.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialS.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialN.c.o\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftclink.c.o\
@@ -443,6 +444,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/mn/mnstagesel.s.o\
 	$(BUILD_DIR)/asm/melee/mn/mncharsel.s.o\
 	$(BUILD_DIR)/src/melee/it/item.c.o\
+	$(BUILD_DIR)/src/melee/it/item2.c.o\
 	$(BUILD_DIR)/asm/melee/it/code_80266F3C.s.o\
 	$(BUILD_DIR)/asm/melee/it/code_8027CF30.s.o\
 

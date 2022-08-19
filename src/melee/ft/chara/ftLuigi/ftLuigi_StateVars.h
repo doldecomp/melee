@@ -22,8 +22,8 @@ typedef struct ftLuigiSpecialLw {
 
 typedef union ftLuigiStateVars {
 
-	ftLuigiSpecialS specialS;
-	ftLuigiSpecialLw specialLw;
+	ftLuigiSpecialS SpecialS;
+	ftLuigiSpecialLw SpecialLw;
 
 } ftLuigiStateVars;
 
