@@ -16,7 +16,7 @@
 void __GXWriteFifoIntReset(u8 arg0, u8 arg1);
 void GXInitFifoPtrs(GXFifoObj *fifo, void *readPtr, void *writePtr);
 void GXInitFifoLimits(GXFifoObj *fifo, u32 hiWaterMark, u32 loWaterMark);
-void __GXWriteFifoIntEnable(u8 arg0, u8 arg1);
+void __GXWriteFifoIntEnable(GXBool flag0, GXBool flag1);
 void __GXFifoLink(GXBool flag);
 void __GXFifoReadEnable();
 void __GXFifoReadDisable();
@@ -196,14 +196,16 @@ static void __GXFifoReadEnable()
 {
     u32 *x8 = (u32 *)&__GXContexts.main->x8;
     INSERT_FIELD(*x8, 1, 1, 0);
-    __cpReg[1] = (s32)__GXContexts.main->x8;
+    x8 = (u32 *)&__GXContexts.main->x8;
+    __cpReg[1] = *x8;
 }
 
 static void __GXFifoReadDisable()
 {
     u32 *x8 = (u32 *)&__GXContexts.main->x8;
     INSERT_FIELD(*x8, 0, 1, 0);
-    __cpReg[1] = (u32)__GXContexts.main->x8;
+    x8 = (u32 *)&__GXContexts.main->x8;
+    __cpReg[1] = *x8;
 }
 
 static void __GXFifoLink(GXBool flag)
@@ -211,7 +213,18 @@ static void __GXFifoLink(GXBool flag)
     BOOL flag32 = flag ? TRUE : FALSE;
     u32 *x8 = (u32 *)&__GXContexts.main->x8;
     INSERT_FIELD(*x8, flag32, 1, 4);
-    __cpReg[1] = (u32)__GXContexts.main->x8;
+    x8 = (u32 *)&__GXContexts.main->x8;
+    __cpReg[1] = *x8;
+}
+
+static void __GXWriteFifoIntEnable(GXBool flag0, GXBool flag1)
+{
+    u32 *x8 = (u32 *)&__GXContexts.main->x8;
+    INSERT_FIELD(*x8, flag0, 1, 2);
+    x8 = (u32 *)&__GXContexts.main->x8;
+    INSERT_FIELD(*x8, flag1, 1, 3);
+    x8 = (u32 *)&__GXContexts.main->x8;
+    __cpReg[1] = *x8;
 }
 
 #ifdef NON_MATCHING
@@ -219,31 +232,6 @@ static void __GXFifoLink(GXBool flag)
 #else
 
 #endif
-
-static asm void __GXWriteFifoIntEnable(u8 arg0, u8 arg1)
-{ // clang-format off
-    nofralloc
-/* 8033BD10 003388F0  80 AD A5 08 */	lwz r5, __GXContexts(r13)
-/* 8033BD14 003388F4  54 63 15 BA */	rlwinm r3, r3, 2, 0x16, 0x1d
-/* 8033BD18 003388F8  54 80 1D 78 */	rlwinm r0, r4, 3, 0x15, 0x1c
-/* 8033BD1C 003388FC  38 C5 00 08 */	addi r6, r5, 8
-/* 8033BD20 00338900  80 A5 00 08 */	lwz r5, 8(r5)
-/* 8033BD24 00338904  54 A4 07 B8 */	rlwinm r4, r5, 0, 0x1e, 0x1c
-/* 8033BD28 00338908  7C 83 1B 78 */	or r3, r4, r3
-/* 8033BD2C 0033890C  90 66 00 00 */	stw r3, 0(r6)
-/* 8033BD30 00338910  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033BD34 00338914  38 83 00 08 */	addi r4, r3, 8
-/* 8033BD38 00338918  80 63 00 08 */	lwz r3, 8(r3)
-/* 8033BD3C 0033891C  54 63 07 76 */	rlwinm r3, r3, 0, 0x1d, 0x1b
-/* 8033BD40 00338920  7C 60 03 78 */	or r0, r3, r0
-/* 8033BD44 00338924  90 04 00 00 */	stw r0, 0(r4)
-/* 8033BD48 00338928  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033BD4C 0033892C  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BD50 00338930  80 04 00 08 */	lwz r0, 8(r4)
-/* 8033BD54 00338934  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033BD58 00338938  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 static asm void __GXWriteFifoIntReset(u8 arg0, u8 arg1)
 { // clang-format off
