@@ -3,19 +3,6 @@
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
 #include <dolphin/gx/__GXLight.h>
 
-extern void *jtbl_80401298[8];
-extern const f32 lbl_804DE230;
-extern const f32 lbl_804DE234;
-extern const f32 lbl_804DE238;
-extern const f32 lbl_804DE23C;
-extern const f32 lbl_804DE240;
-extern const f32 lbl_804DE244;
-extern const f32 lbl_804DE248;
-extern const f32 lbl_804DE24C;
-extern const f32 lbl_804DE250;
-extern const f32 lbl_804DE254;
-extern const f32 lbl_804DE258;
-extern const f32 lbl_804DE25C;
 extern const f64 lbl_804DE260;
 
 void GXInitLightAttn(GXLightObj *light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc)
@@ -28,190 +15,117 @@ void GXInitLightAttn(GXLightObj *light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, 
     light->kc = kc;
 }
 
+void GXInitLightSpot(GXLightObj *light, f32 angle, GXSpotFn fn)
+{
+    f32 rad, temp;
+    f32 a, b, c;
+
+    if (angle <= 0.0f || angle > 90.0f)
+        fn = GX_SP_OFF;
+
+    rad = cosf((3.1415927410125732f * angle) / 180.0f);
+
+    switch (fn)
+    {
+    case GX_SP_FLAT:
+        a = -1000.0f * rad;
+        b = 1000.0f;
+        c = 0.0f;
+        break;
+    case GX_SP_COS:
+        c = 0.0f;
+        a = -rad / (1.0f - rad);
+        b = 1.0f / (1.0f - rad);
+        break;
+    case GX_SP_COS2:
+        a = 0.0f;
+        b = -rad / (1.0f - rad);
+        c = 1.0f / (1.0f - rad);
+        break;
+    case GX_SP_SHARP:
+        temp = 1.0f - rad;
+        temp *= temp;
+        b = 2.0f / temp;
+        a = (rad * (rad - 2.0f)) / temp;
+        c = -1.0f / temp;
+        break;
+    case GX_SP_RING1:
+        temp = 1.0f - rad;
+        temp *= temp;
+        a = (-4.0f * rad) / temp;
+        b = (4.0f * (1.0f + rad)) / temp;
+        c = -4.0f / temp;
+        break;
+    case GX_SP_RING2:
+        temp = 1.0f - rad;
+        temp *= temp;
+        a = 1.0f - ((2.0f * rad * rad) / temp);
+        b = (4.0f * rad) / temp;
+        c = -2.0f / temp;
+        break;
+    case GX_SP_OFF:
+    default:
+        b = 0.0f;
+        a = 1.0f;
+        c = 0.0f;
+        break;
+    }
+
+    light->aa = a;
+    light->ab = b;
+    light->ac = c;
+}
+
+static void GXInitLightAttnK(GXLightObj *light, f32 ka, f32 kb, f32 kc)
+{
+    light->ka = ka;
+    light->kb = kb;
+    light->kc = kc;
+}
+
+void GXInitLightDistAttn(GXLightObj *light, f32 ref_distance, f32 ref_brightness, GXDistAttnFn dist_fn)
+{
+    f32 ka, kb, kc;
+
+    if (ref_distance < 0.0f)
+        dist_fn = GX_DA_OFF;
+
+    if (ref_brightness <= 0.0f || ref_brightness >= 1.0f)
+        dist_fn = GX_DA_OFF;
+
+    switch (dist_fn)
+    {
+    case GX_DA_GENTLE:
+        ka = 1.0f;
+        kb = (1.0f - ref_brightness) / (ref_brightness * ref_distance);
+        kc = 0.0f;
+        break;
+    case GX_DA_MEDIUM:
+        ka = 1.0f;
+        kb = (0.5f * (1.0f - ref_brightness)) / (ref_brightness * ref_distance);
+        kc = (0.5f * (1.0f - ref_brightness)) / (ref_brightness * ref_distance * ref_distance);
+        break;
+    case GX_DA_STEEP:
+        ka = 1.0f;
+        kb = 0.0f;
+        kc = (1.0f - ref_brightness) / (ref_brightness * ref_distance * ref_distance);
+        break;
+    case GX_DA_OFF:
+    default:
+        ka = 1.0f;
+        kb = 0.0f;
+        kc = 0.0f;
+        break;
+    }
+
+    GXInitLightAttnK(light, ka, kb, kc);
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-asm void GXInitLightSpot(GXLightObj *, f32, GXSpotFn)
-{ // clang-format off
-    nofralloc
-/* 8033DEA0 0033AA80  7C 08 02 A6 */	mflr r0
-/* 8033DEA4 0033AA84  90 01 00 04 */	stw r0, 4(r1)
-/* 8033DEA8 0033AA88  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8033DEAC 0033AA8C  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8033DEB0 0033AA90  3B E4 00 00 */	addi r31, r4, 0
-/* 8033DEB4 0033AA94  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8033DEB8 0033AA98  3B C3 00 00 */	addi r30, r3, 0
-/* 8033DEBC 0033AA9C  C0 02 E8 50 */	lfs f0, lbl_804DE230(r2)
-/* 8033DEC0 0033AAA0  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8033DEC4 0033AAA4  4C 40 13 82 */	cror 2, 0, 2
-/* 8033DEC8 0033AAA8  41 82 00 10 */	beq lbl_8033DED8
-/* 8033DECC 0033AAAC  C0 02 E8 54 */	lfs f0, lbl_804DE234(r2)
-/* 8033DED0 0033AAB0  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8033DED4 0033AAB4  40 81 00 08 */	ble lbl_8033DEDC
-lbl_8033DED8:
-/* 8033DED8 0033AAB8  3B E0 00 00 */	li r31, 0
-lbl_8033DEDC:
-/* 8033DEDC 0033AABC  C0 42 E8 58 */	lfs f2, lbl_804DE238(r2)
-/* 8033DEE0 0033AAC0  C0 02 E8 5C */	lfs f0, lbl_804DE23C(r2)
-/* 8033DEE4 0033AAC4  EC 22 00 72 */	fmuls f1, f2, f1
-/* 8033DEE8 0033AAC8  EC 21 00 24 */	fdivs f1, f1, f0
-/* 8033DEEC 0033AACC  4B FE 83 55 */	bl cosf
-/* 8033DEF0 0033AAD0  28 1F 00 06 */	cmplwi r31, 6
-/* 8033DEF4 0033AAD4  41 81 00 FC */	bgt lbl_8033DFF0
-/* 8033DEF8 0033AAD8  3C 60 80 40 */	lis r3, jtbl_80401298@ha
-/* 8033DEFC 0033AADC  38 63 12 98 */	addi r3, r3, jtbl_80401298@l
-/* 8033DF00 0033AAE0  57 E0 10 3A */	slwi r0, r31, 2
-/* 8033DF04 0033AAE4  7C 03 00 2E */	lwzx r0, r3, r0
-/* 8033DF08 0033AAE8  7C 09 03 A6 */	mtctr r0
-/* 8033DF0C 0033AAEC  4E 80 04 20 */	bctr 
-lbl_8033DF10:
-/* 8033DF10 0033AAF0  C0 02 E8 60 */	lfs f0, lbl_804DE240(r2)
-/* 8033DF14 0033AAF4  C0 42 E8 64 */	lfs f2, lbl_804DE244(r2)
-/* 8033DF18 0033AAF8  EC A0 00 72 */	fmuls f5, f0, f1
-/* 8033DF1C 0033AAFC  C0 62 E8 50 */	lfs f3, lbl_804DE230(r2)
-/* 8033DF20 0033AB00  48 00 00 DC */	b lbl_8033DFFC
-lbl_8033DF24:
-/* 8033DF24 0033AB04  C0 02 E8 68 */	lfs f0, lbl_804DE248(r2)
-/* 8033DF28 0033AB08  FC 40 08 50 */	fneg f2, f1
-/* 8033DF2C 0033AB0C  C0 62 E8 50 */	lfs f3, lbl_804DE230(r2)
-/* 8033DF30 0033AB10  EC 20 08 28 */	fsubs f1, f0, f1
-/* 8033DF34 0033AB14  EC A2 08 24 */	fdivs f5, f2, f1
-/* 8033DF38 0033AB18  EC 40 08 24 */	fdivs f2, f0, f1
-/* 8033DF3C 0033AB1C  48 00 00 C0 */	b lbl_8033DFFC
-lbl_8033DF40:
-/* 8033DF40 0033AB20  C0 02 E8 68 */	lfs f0, lbl_804DE248(r2)
-/* 8033DF44 0033AB24  FC 40 08 50 */	fneg f2, f1
-/* 8033DF48 0033AB28  C0 A2 E8 50 */	lfs f5, lbl_804DE230(r2)
-/* 8033DF4C 0033AB2C  EC 20 08 28 */	fsubs f1, f0, f1
-/* 8033DF50 0033AB30  EC 42 08 24 */	fdivs f2, f2, f1
-/* 8033DF54 0033AB34  EC 60 08 24 */	fdivs f3, f0, f1
-/* 8033DF58 0033AB38  48 00 00 A4 */	b lbl_8033DFFC
-lbl_8033DF5C:
-/* 8033DF5C 0033AB3C  C0 02 E8 68 */	lfs f0, lbl_804DE248(r2)
-/* 8033DF60 0033AB40  C0 62 E8 6C */	lfs f3, lbl_804DE24C(r2)
-/* 8033DF64 0033AB44  EC 80 08 28 */	fsubs f4, f0, f1
-/* 8033DF68 0033AB48  C0 02 E8 70 */	lfs f0, lbl_804DE250(r2)
-/* 8033DF6C 0033AB4C  EC 41 18 28 */	fsubs f2, f1, f3
-/* 8033DF70 0033AB50  EC 84 01 32 */	fmuls f4, f4, f4
-/* 8033DF74 0033AB54  EC 21 00 B2 */	fmuls f1, f1, f2
-/* 8033DF78 0033AB58  EC 43 20 24 */	fdivs f2, f3, f4
-/* 8033DF7C 0033AB5C  EC A1 20 24 */	fdivs f5, f1, f4
-/* 8033DF80 0033AB60  EC 60 20 24 */	fdivs f3, f0, f4
-/* 8033DF84 0033AB64  48 00 00 78 */	b lbl_8033DFFC
-lbl_8033DF88:
-/* 8033DF88 0033AB68  C0 02 E8 68 */	lfs f0, lbl_804DE248(r2)
-/* 8033DF8C 0033AB6C  C0 62 E8 74 */	lfs f3, lbl_804DE254(r2)
-/* 8033DF90 0033AB70  EC 80 08 28 */	fsubs f4, f0, f1
-/* 8033DF94 0033AB74  C0 42 E8 78 */	lfs f2, lbl_804DE258(r2)
-/* 8033DF98 0033AB78  EC 00 08 2A */	fadds f0, f0, f1
-/* 8033DF9C 0033AB7C  EC 23 00 72 */	fmuls f1, f3, f1
-/* 8033DFA0 0033AB80  EC 84 01 32 */	fmuls f4, f4, f4
-/* 8033DFA4 0033AB84  EC 02 00 32 */	fmuls f0, f2, f0
-/* 8033DFA8 0033AB88  EC A1 20 24 */	fdivs f5, f1, f4
-/* 8033DFAC 0033AB8C  EC 40 20 24 */	fdivs f2, f0, f4
-/* 8033DFB0 0033AB90  EC 63 20 24 */	fdivs f3, f3, f4
-/* 8033DFB4 0033AB94  48 00 00 48 */	b lbl_8033DFFC
-lbl_8033DFB8:
-/* 8033DFB8 0033AB98  C0 82 E8 68 */	lfs f4, lbl_804DE248(r2)
-/* 8033DFBC 0033AB9C  C0 02 E8 6C */	lfs f0, lbl_804DE24C(r2)
-/* 8033DFC0 0033ABA0  EC A4 08 28 */	fsubs f5, f4, f1
-/* 8033DFC4 0033ABA4  C0 42 E8 78 */	lfs f2, lbl_804DE258(r2)
-/* 8033DFC8 0033ABA8  EC 60 00 72 */	fmuls f3, f0, f1
-/* 8033DFCC 0033ABAC  C0 02 E8 7C */	lfs f0, lbl_804DE25C(r2)
-/* 8033DFD0 0033ABB0  EC 42 00 72 */	fmuls f2, f2, f1
-/* 8033DFD4 0033ABB4  EC A5 01 72 */	fmuls f5, f5, f5
-/* 8033DFD8 0033ABB8  EC 23 00 72 */	fmuls f1, f3, f1
-/* 8033DFDC 0033ABBC  EC 42 28 24 */	fdivs f2, f2, f5
-/* 8033DFE0 0033ABC0  EC 21 28 24 */	fdivs f1, f1, f5
-/* 8033DFE4 0033ABC4  EC 60 28 24 */	fdivs f3, f0, f5
-/* 8033DFE8 0033ABC8  EC A4 08 28 */	fsubs f5, f4, f1
-/* 8033DFEC 0033ABCC  48 00 00 10 */	b lbl_8033DFFC
-lbl_8033DFF0:
-/* 8033DFF0 0033ABD0  C0 42 E8 50 */	lfs f2, lbl_804DE230(r2)
-/* 8033DFF4 0033ABD4  C0 A2 E8 68 */	lfs f5, lbl_804DE248(r2)
-/* 8033DFF8 0033ABD8  FC 60 10 90 */	fmr f3, f2
-lbl_8033DFFC:
-/* 8033DFFC 0033ABDC  D0 BE 00 10 */	stfs f5, 0x10(r30)
-/* 8033E000 0033ABE0  D0 5E 00 14 */	stfs f2, 0x14(r30)
-/* 8033E004 0033ABE4  D0 7E 00 18 */	stfs f3, 0x18(r30)
-/* 8033E008 0033ABE8  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8033E00C 0033ABEC  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8033E010 0033ABF0  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 8033E014 0033ABF4  38 21 00 20 */	addi r1, r1, 0x20
-/* 8033E018 0033ABF8  7C 08 03 A6 */	mtlr r0
-/* 8033E01C 0033ABFC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
-
-asm void GXInitLightDistAttn(GXLightObj *, f32, f32, GXDistAttnFn)
-{ // clang-format off
-    nofralloc
-/* 8033E020 0033AC00  C0 02 E8 50 */	lfs f0, lbl_804DE230(r2)
-/* 8033E024 0033AC04  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8033E028 0033AC08  40 80 00 08 */	bge lbl_8033E030
-/* 8033E02C 0033AC0C  38 80 00 00 */	li r4, 0
-lbl_8033E030:
-/* 8033E030 0033AC10  C0 02 E8 50 */	lfs f0, lbl_804DE230(r2)
-/* 8033E034 0033AC14  FC 02 00 40 */	fcmpo cr0, f2, f0
-/* 8033E038 0033AC18  4C 40 13 82 */	cror 2, 0, 2
-/* 8033E03C 0033AC1C  41 82 00 14 */	beq lbl_8033E050
-/* 8033E040 0033AC20  C0 02 E8 68 */	lfs f0, lbl_804DE248(r2)
-/* 8033E044 0033AC24  FC 02 00 40 */	fcmpo cr0, f2, f0
-/* 8033E048 0033AC28  4C 41 13 82 */	cror 2, 1, 2
-/* 8033E04C 0033AC2C  40 82 00 08 */	bne lbl_8033E054
-lbl_8033E050:
-/* 8033E050 0033AC30  38 80 00 00 */	li r4, 0
-lbl_8033E054:
-/* 8033E054 0033AC34  2C 04 00 02 */	cmpwi r4, 2
-/* 8033E058 0033AC38  41 82 00 3C */	beq lbl_8033E094
-/* 8033E05C 0033AC3C  40 80 00 14 */	bge lbl_8033E070
-/* 8033E060 0033AC40  2C 04 00 00 */	cmpwi r4, 0
-/* 8033E064 0033AC44  41 82 00 70 */	beq lbl_8033E0D4
-/* 8033E068 0033AC48  40 80 00 14 */	bge lbl_8033E07C
-/* 8033E06C 0033AC4C  48 00 00 68 */	b lbl_8033E0D4
-lbl_8033E070:
-/* 8033E070 0033AC50  2C 04 00 04 */	cmpwi r4, 4
-/* 8033E074 0033AC54  40 80 00 60 */	bge lbl_8033E0D4
-/* 8033E078 0033AC58  48 00 00 40 */	b lbl_8033E0B8
-lbl_8033E07C:
-/* 8033E07C 0033AC5C  C0 A2 E8 68 */	lfs f5, lbl_804DE248(r2)
-/* 8033E080 0033AC60  EC 02 00 72 */	fmuls f0, f2, f1
-/* 8033E084 0033AC64  C0 82 E8 50 */	lfs f4, lbl_804DE230(r2)
-/* 8033E088 0033AC68  EC 25 10 28 */	fsubs f1, f5, f2
-/* 8033E08C 0033AC6C  EC 61 00 24 */	fdivs f3, f1, f0
-/* 8033E090 0033AC70  48 00 00 50 */	b lbl_8033E0E0
-lbl_8033E094:
-/* 8033E094 0033AC74  C0 A2 E8 68 */	lfs f5, lbl_804DE248(r2)
-/* 8033E098 0033AC78  EC 82 00 72 */	fmuls f4, f2, f1
-/* 8033E09C 0033AC7C  C0 62 E8 80 */	lfs f3, lbl_804DE260(r2)
-/* 8033E0A0 0033AC80  EC 45 10 28 */	fsubs f2, f5, f2
-/* 8033E0A4 0033AC84  EC 01 01 32 */	fmuls f0, f1, f4
-/* 8033E0A8 0033AC88  EC 23 00 B2 */	fmuls f1, f3, f2
-/* 8033E0AC 0033AC8C  EC 61 20 24 */	fdivs f3, f1, f4
-/* 8033E0B0 0033AC90  EC 81 00 24 */	fdivs f4, f1, f0
-/* 8033E0B4 0033AC94  48 00 00 2C */	b lbl_8033E0E0
-lbl_8033E0B8:
-/* 8033E0B8 0033AC98  EC 02 00 72 */	fmuls f0, f2, f1
-/* 8033E0BC 0033AC9C  C0 A2 E8 68 */	lfs f5, lbl_804DE248(r2)
-/* 8033E0C0 0033ACA0  C0 62 E8 50 */	lfs f3, lbl_804DE230(r2)
-/* 8033E0C4 0033ACA4  EC 45 10 28 */	fsubs f2, f5, f2
-/* 8033E0C8 0033ACA8  EC 01 00 32 */	fmuls f0, f1, f0
-/* 8033E0CC 0033ACAC  EC 82 00 24 */	fdivs f4, f2, f0
-/* 8033E0D0 0033ACB0  48 00 00 10 */	b lbl_8033E0E0
-lbl_8033E0D4:
-/* 8033E0D4 0033ACB4  C0 62 E8 50 */	lfs f3, lbl_804DE230(r2)
-/* 8033E0D8 0033ACB8  C0 A2 E8 68 */	lfs f5, lbl_804DE248(r2)
-/* 8033E0DC 0033ACBC  FC 80 18 90 */	fmr f4, f3
-lbl_8033E0E0:
-/* 8033E0E0 0033ACC0  D0 A3 00 1C */	stfs f5, 0x1c(r3)
-/* 8033E0E4 0033ACC4  D0 63 00 20 */	stfs f3, 0x20(r3)
-/* 8033E0E8 0033ACC8  D0 83 00 24 */	stfs f4, 0x24(r3)
-/* 8033E0EC 0033ACCC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 asm void GXInitLightPos(GXLightObj *, f32, f32, f32)
 { // clang-format off

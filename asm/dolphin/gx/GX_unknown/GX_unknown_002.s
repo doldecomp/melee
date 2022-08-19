@@ -4264,6 +4264,7 @@ func_80342194:
 /* 803421A0 0033ED80  4E 80 00 20 */	blr 
 
 .section .data
+	.balign 8
 
 jtbl_804012B8:
 	.4byte lbl_8033E7B4
@@ -4531,6 +4532,7 @@ lbl_804D5BF8:
     .4byte 0x02060000
 
 .section .sdata2
+	.balign 8
 
 lbl_804DE268:
 	.4byte 0x41800000
