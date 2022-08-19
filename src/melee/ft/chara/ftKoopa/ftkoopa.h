@@ -5,9 +5,9 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
-#include "melee/ft/fighter.h"
+#include <melee/ft/fighter.h>
 
 typedef struct _ftKoopaAttributes {
     f32 x0;
@@ -57,7 +57,7 @@ typedef struct _ftKoopaVars {
     f32 x4;
 } ftKoopaVars;
 
-void func_80132EFC(HSD_GObj *gobj);
+void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj);
 void func_8013302C(HSD_GObj *gobj);
 void func_801330E4(HSD_GObj* gobj);
 

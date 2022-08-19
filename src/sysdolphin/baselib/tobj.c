@@ -1,6 +1,5 @@
-#include "sysdolphin/baselib/tobj.h"
-
-#include "sysdolphin/baselib/aobj.h"
+#include <sysdolphin/baselib/tobj.h>
+#include <sysdolphin/baselib/aobj.h>
 
 extern void TObjInfoInit(void);
 
@@ -173,40 +172,40 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
         tobj->lod->LODBias = val->fv;
         break;
     case HSD_A_T_KONST_R:
-        tobj->tev->konst.r = (u8)(255.0 * val->fv);
+        tobj->tev->konst.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_G:
-        tobj->tev->konst.g = (u8)(255.0 * val->fv);
+        tobj->tev->konst.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_B:
-        tobj->tev->konst.b = (u8)(255.0 * val->fv);
+        tobj->tev->konst.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_A:
-        tobj->tev->konst.a = (u8)(255.0 * val->fv);
+        tobj->tev->konst.u8.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_R:
-        tobj->tev->tev0.r = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_G:
-        tobj->tev->tev0.g = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_B:
-        tobj->tev->tev0.b = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_A:
-        tobj->tev->tev0.a = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.u8.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_R:
-        tobj->tev->tev1.r = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_G:
-        tobj->tev->tev1.g = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_B:
-        tobj->tev->tev1.b = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_A:
-        tobj->tev->tev1.a = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.u8.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TS_BLEND:
         tobj->blending = val->fv;

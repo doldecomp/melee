@@ -1,8 +1,7 @@
 #include <dolphin/types.h>
-#include <dolphin/gx/gxtypes.h>
-#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/controller.h> // hehe
 #include <sysdolphin/baselib/initialize.h>
-#include <functions.h>
+#include <dolphin/gx/GXInit.h>
 
 extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;
@@ -136,7 +135,7 @@ void main(void)
     HSD_SetInitParameter(HSD_INIT_HEAP_MAX_NUM, 4);
     func_80228C4C();
     HSD_AllocateXFB(2, &lbl_80401168);
-    HSD_GXSetFifoObj(GXInit(HSD_AllocateFIFO(0x40000), 0x40000));
+    HSD_GXSetFifoObj(GXInit(HSD_AllocateFifo(0x40000), 0x40000));
     HSD_InitComponent();
     GXSetMisc(1, 8);
     *seed_ptr = OSGetTick();

@@ -3,7 +3,43 @@
 
 #include <dolphin/types.h>
 
-typedef struct _UnkFlagStruct2 {
+// Most of these should be moved to independent headers once they are created //
+
+// SOUND EFFECTS //
+
+#define SFX_VOLUME_MAX 0x7FU
+#define SFX_PAN_MID 0x40U
+
+// HSD_PAD //
+
+#define HSD_BUTTON_DPAD_DOWN 0x4
+#define HSD_BUTTON_A 0x100 // Also covers Z-Button macro in-game //
+#define HSD_BUTTON_B 0x200
+
+// COLLISION FLAGS //
+
+#define COLL_AIR 0x8000 // From Ness's Yo-Yo collision check //
+
+// STATE FLAGS //
+
+#define GROUND 0
+#define AIR 1 // Used by fighters and items //
+
+typedef struct _Vec2 { float x, y; } Vec2;
+
+struct DemoMotionSymbols
+{
+    char* x0;
+};
+
+struct DemoMotionFiles
+{
+    struct DemoMotionSymbols* x0_demoMotionPtr[14];
+};
+
+typedef Vec Vec3;
+
+typedef struct _UnkFlagStruct {
     struct {
         u8 b0 : 1;
         u8 b1 : 1;
@@ -14,7 +50,27 @@ typedef struct _UnkFlagStruct2 {
         u8 b6 : 1;
         u8 b7 : 1;
     } bits;
-}UnkFlagStruct2;
+} UnkFlagStruct;
+
+typedef struct _ReflectDesc
+{
+    u32 x0_bone_id;
+    s32 x4_max_damage;
+    Vec3 x8_offset;
+    f32 x14_size;
+    f32 x18_damage_mul;
+    f32 x1C_speed_mul;
+    u8 x20_behavior : 8; // Setting this to 0x1 causes the reflector to skip ownership change // 
+
+} ReflectDesc;
+
+typedef struct _AbsorbDesc
+{
+    u32 x0_bone_id;
+    Vec3 x4_offset;
+    f32 x10_size;
+
+} AbsorbDesc;
 
 typedef struct ColorOverlay
 {

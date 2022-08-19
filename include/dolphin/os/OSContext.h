@@ -1,31 +1,51 @@
+// https://github.com/kiwi515/open_rvl/blob/605e2a99ad053441f0ebb9b322a18433f92025e2/include/OS/OSContext.h
 
-#ifndef _DOLPHIN_OSCONTEXT_H_
-#define _DOLPHIN_OSCONTEXT_H_
-
+#ifndef DOLPHIN_OS_OSCONTEXT_H
+#define DOLPHIN_OS_OSCONTEXT_H
 #include <dolphin/types.h>
 
 typedef struct OSContext
 {
-    /*0x000*/ u32 gpr[32];
-    /*0x080*/ u32 cr;
-    /*0x084*/ u32 lr;
-    /*0x088*/ u32 ctr;
-    /*0x08C*/ u32 xer;
-    /*0x090*/ f64 fpr[32];
-    /*0x190*/ u32 fpscr_pad;
-    /*0x194*/ u32 fpscr;
-    /*0x198*/ u32 srr0;
-    /*0x19C*/ u32 srr1;
-    /*0x1A0*/ u16 mode;
-    /*0x1A2*/ u16 state;
-    /*0x1A4*/ u32 gqr[8];
-    /*0x1C4*/ f64 psf[32];
+    u32 gprs[32]; // at 0x0
+    u32 cr;       // at 0x80
+    u32 lr;       // at 0x84
+    u32 ctr;      // at 0x88
+    u32 xer;      // at 0x8C
+    f64 fprs[32]; // at 0x90
+    u32 WORD_0x190;
+    u32 fpscr; // at 0x194
+    u32 srr0;  // at 0x198
+    u32 srr1;  // at 0x19C
+    u16 SHORT_0x1A0;
+    u16 SHORT_0x1A2;
+    u32 gqrs[8]; // at 0x1A4
+    char UNK_0x1C4[0x1C8 - 0x1C4];
+    f64 psfs[32]; // at 0x1C8
 } OSContext;
 
-u32 OSGetStackPointer(void);
-void OSDumpContext(OSContext *context);
-void OSLoadContext(OSContext *context);
-void OSClearContext(OSContext *context);
-void OSSetCurrentContext(OSContext *context);
+OSContext *OS_CURRENT_CONTEXT
+#ifndef M2C_CONTEXT
+    : 0x800000D4;
+#endif
+;
+
+OSContext *OS_CURRENT_FPU_CONTEXT
+#ifndef M2C_CONTEXT
+    : 0x800000D8
+#endif
+    ;
+
+void OSSaveFPUContext(OSContext *);
+void OSSetCurrentContext(OSContext *);
+OSContext *OSGetCurrentContext(void);
+BOOL OSSaveContext(OSContext *);
+void OSLoadContext(OSContext *);
+void *OSGetStackPointer(void);
+void OSSwitchFiber(void *, void *);
+void OSSwitchFiberEx(u32, u32, u32, u32, void *, void *);
+void OSClearContext(OSContext *);
+void OSInitContext(OSContext *, void *, void *);
+void OSDumpContext(const OSContext *);
+void __OSContextInit(void);
 
 #endif

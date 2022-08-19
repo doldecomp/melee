@@ -1,6 +1,6 @@
-#include "ftcommon.h"
+#include <ftcommon.h>
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 extern struct {
     u8 x0_pad[0x20];
@@ -133,7 +133,7 @@ HSD_GObj* func_8007CC1C(HSD_GObj* gobj)
     return gobj;
 }
 
-void func_8007CC78(f32 max, Fighter* fp)
+void func_8007CC78(Fighter* fp, f32 max)
 {
     if (fp->xEC_ground_vel < -max) {
         fp->xEC_ground_vel = -max;
@@ -142,17 +142,17 @@ void func_8007CC78(f32 max, Fighter* fp)
     }
 }
 
-void func_8007CCA0(Fighter* arg0, f32 arg1)
+void func_8007CCA0(Fighter* fp, f32 arg1)
 {
-    if (arg0->xF0_ground_kb_vel < 0) {
-        arg0->xF0_ground_kb_vel = arg0->xF0_ground_kb_vel + arg1;
-        if (arg0->xF0_ground_kb_vel > 0) {
-            arg0->xF0_ground_kb_vel = 0;
+    if (fp->xF0_ground_kb_vel < 0) {
+        fp->xF0_ground_kb_vel = fp->xF0_ground_kb_vel + arg1;
+        if (fp->xF0_ground_kb_vel > 0) {
+            fp->xF0_ground_kb_vel = 0;
         }
     } else {
-        arg0->xF0_ground_kb_vel = arg0->xF0_ground_kb_vel - arg1;
-        if (arg0->xF0_ground_kb_vel < 0) {
-            arg0->xF0_ground_kb_vel = 0;
+        fp->xF0_ground_kb_vel = fp->xF0_ground_kb_vel - arg1;
+        if (fp->xF0_ground_kb_vel < 0) {
+            fp->xF0_ground_kb_vel = 0;
         }
     }
 }
@@ -700,17 +700,17 @@ void func_8007D92C(HSD_GObj* gobj)
 
 f32 func_8007D964(Fighter* fp)
 {
-    return func_someCalcAngle_80022C30(fp->input.x624_lstick_y, fabs_inline(fp->input.x620_lstick_x));
+    return atan2f(fp->input.x624_lstick_y, fabs_inline(fp->input.x620_lstick_x));
 }
 
 f32 func_8007D99C(Fighter* fp)
 {
-    return func_someCalcAngle_80022C30(fp->input.x63C_lsubStick_y, fabs_inline(fp->input.x638_lsubStick_x));
+    return atan2f(fp->input.x63C_lsubStick_y, fabs_inline(fp->input.x638_lsubStick_x));
 }
 
 f32 func_8007D9D4(Fighter* fp)
 {
-    return func_someCalcAngle_80022C30(fp->input.x624_lstick_y, fp->input.x620_lstick_x);
+    return atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x);
 }
 
 void func_8007D9FC(Fighter* fp)
@@ -1239,7 +1239,7 @@ void func_8007E3EC(HSD_GObj* gobj)
 void func_8007E5AC(Fighter* fp)
 {
     Vec* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
-    f32 tmp = -func_someCalcAngle_80022C30(ground_normal->x, ground_normal->y);
+    f32 tmp = -atan2f(ground_normal->x, ground_normal->y);
     assert_line(1146, fp->ground_or_air == GA_Ground);
     func_80075CB4(fp, 0, tmp);
 }
@@ -1261,9 +1261,9 @@ void func_8007E690(Fighter* fp, HSD_AnimJoint* arg1)
     }
 }
 
-extern void (*ft_OnItemRelease[])(HSD_GObj*, s32);
-extern void (*lbl_803C1B20[])(HSD_GObj*, s32); // OnItemDrop?
-extern void (*ft_OnItemCatch[])(HSD_GObj*, s32);
+extern void (*ft_OnItemDropExt[])(HSD_GObj*, s32);
+extern void (*ft_OnItemDrop[])(HSD_GObj*, s32); // OnItemDrop?
+extern void (*ft_OnItemPickup[])(HSD_GObj*, s32);
 
 void func_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
 {
@@ -1275,8 +1275,8 @@ void func_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
     if (func_800C5240(gobj)) {
         func_800C5500(gobj);
     }
-    if (ft_OnItemRelease[fp->x4_fighterKind] != NULL) {
-        ft_OnItemRelease[fp->x4_fighterKind](gobj, arg2);
+    if (ft_OnItemDropExt[fp->x4_fighterKind] != NULL) {
+        ft_OnItemDropExt[fp->x4_fighterKind](gobj, arg2);
     }
     func_8003EA08(fp->xC_playerID, fp->x221F_flag.bits.b4);
     fp->x1974_heldItem = NULL;
@@ -1285,16 +1285,16 @@ void func_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
 void func_8007E79C(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (lbl_803C1B20[fp->x4_fighterKind] != NULL) {
-        lbl_803C1B20[fp->x4_fighterKind](gobj, arg1);
+    if (ft_OnItemDrop[fp->x4_fighterKind] != NULL) {
+        ft_OnItemDrop[fp->x4_fighterKind](gobj, arg1);
     }
 }
 
 void func_8007E7E4(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnItemCatch[fp->x4_fighterKind] != NULL) {
-        ft_OnItemCatch[fp->x4_fighterKind](gobj, arg1);
+    if (ft_OnItemPickup[fp->x4_fighterKind] != NULL) {
+        ft_OnItemPickup[fp->x4_fighterKind](gobj, arg1);
     }
 }
 
@@ -1346,11 +1346,11 @@ void func_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     Fighter* fp = gobj->user_data;
     assert_line(0x4FC, ftGetParasolStatus(gobj) != FtParasol_None);
     if (div == 0) {
-        val = fp->x89C;
+        val = fp->x89C_frameSpeedMul;
     } else if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
-        val = fp->x89C * (func_8028B08C(fp->x1974_heldItem, parasol_table_2[arg1]) / div);
+        val = fp->x89C_frameSpeedMul * (func_8028B08C(fp->x1974_heldItem, parasol_table_2[arg1]) / div);
     } else {
-        val = fp->x89C * (func_802BDA40(fp->x1974_heldItem, parasol_table_4[arg1]) / div);
+        val = fp->x89C_frameSpeedMul * (func_802BDA40(fp->x1974_heldItem, parasol_table_4[arg1]) / div);
     }
     if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
         parasol_table_1[arg1](fp->x1974_heldItem, val);
@@ -1382,7 +1382,7 @@ s32 ftGetParasolStatus(HSD_GObj* gobj)
         }
     }
     if (fp->x1974_heldItem != NULL &&
-        itGetKind(fp->x1974_heldItem) == It_Kind_PeachParasol) {
+        itGetKind(fp->x1974_heldItem) == It_Kind_Peach_Parasol) {
         switch (func_8026B7A4(fp->x1974_heldItem)) {
             case 1:
                 return 4;
@@ -1394,7 +1394,6 @@ s32 ftGetParasolStatus(HSD_GObj* gobj)
     return FtParasol_None;
 }
 
-#define M_PI 3.141592653589793
 
 void func_8007EA90(Fighter* fp, s32 arg1)
 {
@@ -1487,7 +1486,7 @@ void func_8007EE0C(Fighter* fp, s32 arg1)
 void func_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
 {
     if (fp->x1974_heldItem != NULL && fp->x1974_heldItem->classifier == 6
-            && itGetKind(fp->x1974_heldItem) == It_Kind_BeamSword) {
+            && itGetKind(fp->x1974_heldItem) == It_Kind_Sword) {
         f32 multiplier = 1.0 / 256;
         f32 tmp = arg2 * multiplier;
         func_80284FC4(fp->x1974_heldItem, arg1, tmp);
@@ -1497,7 +1496,7 @@ void func_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
 void func_8007EF5C(Fighter* fp, s32 arg1)
 {
     if (fp->x1974_heldItem != NULL && fp->x1974_heldItem->classifier == 6
-            && itGetKind(fp->x1974_heldItem) == It_Kind_BeamSword) {
+            && itGetKind(fp->x1974_heldItem) == It_Kind_Sword) {
         func_80285024(fp->x1974_heldItem, arg1);
     }
 }
@@ -1645,7 +1644,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
 extern void (*ft_OnItemInvisible[])(HSD_GObj*);
 extern void (*ft_OnItemVisible[])(HSD_GObj*);
 extern void (*ft_OnKnockbackEnter[])(HSD_GObj*);
-extern void (*lbl_803C1D30[])(HSD_GObj*);
+extern void (*ft_OnKnockbackExit[])(HSD_GObj*);
 
 void func_8007F578(HSD_GObj* gobj)
 {
@@ -1726,8 +1725,8 @@ void func_8007F824(HSD_GObj* gobj)
 void func_8007F86C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (lbl_803C1D30[fp->x4_fighterKind] != NULL) {
-        lbl_803C1D30[fp->x4_fighterKind](gobj);
+    if (ft_OnKnockbackExit[fp->x4_fighterKind] != NULL) {
+        ft_OnKnockbackExit[fp->x4_fighterKind](gobj);
     }
 }
 
@@ -2077,14 +2076,14 @@ void func_80080484(Fighter* fp)
     }
 }
 
-void func_800804A0(Fighter* arg0, f32 arg8)
+void func_800804A0(Fighter* fp, f32 arg8)
 {
     f32 temp_f1;
     f32 phi_f31 = arg8;
-    if ((temp_f1 = func_80084A40(arg0)) < 1) {
+    if ((temp_f1 = func_80084A40(fp)) < 1) {
         phi_f31 *= temp_f1;
     }
-    arg0->xE8_ground_accel_2 = phi_f31;
+    fp->xE8_ground_accel_2 = phi_f31;
 }
 
 f32 func_800804EC(Fighter* fp)

@@ -1,4 +1,5 @@
-#include "sysdolphin/baselib/tev.h"
+#include <dolphin/gx/GXLight.h>
+#include <sysdolphin/baselib/tev.h>
 
 extern void* lbl_80405B98;
 
@@ -6,6 +7,7 @@ HSD_ObjAllocData render_alloc_data;
 HSD_ObjAllocData tevreg_alloc_data;
 HSD_ObjAllocData chan_alloc_data;
 
+extern s32 lbl_804D75F8;
 extern s32 lbl_804D7600; // state_num_chans
 extern void* lbl_804D7604; // chan_chan
 extern void* lbl_804D760C;

@@ -2,7 +2,7 @@
 
 #include "mpcoll.h"
 #include "melee/ft/ftlib.h"
-#include "melee/lb/code_8000B074.h"
+#include "melee/lb/lbunknown_001.h"
 #include "melee/lb/lbvector.h"
 
 // TODO: proper signatures, mplib.h
@@ -943,7 +943,7 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2) {
     sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
     if (func_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
         if (func_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C, -((arg0->x14C_ground.normal.y * var_f31) - sp20), (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0) {
-            sp20 = arg0->x140 - var_f31;
+            sp20 = arg0->x140.x - var_f31;
             if (arg2 != 0) {
                 sp24 = arg0->x4_vec.y;
             } else {
@@ -963,7 +963,7 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2) {
         sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y - arg0->xA4_ecbCurrCorrect.bottom.y)) - temp_f2);
         sp8 = 0;
         if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0) {
-            sp20 = arg0->x140;
+            sp20 = arg0->x140.x;
             if (arg2 != 0) {
                 sp24 = arg0->x4_vec.y;
             } else {

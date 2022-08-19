@@ -3,8 +3,8 @@
 
 #include <global.h>
 #include <dolphin/types.h>
-#include "sysdolphin/baselib/gobj.h"
-#include "melee/ft/fighter.h"
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 
 typedef struct _MasterHandAttributes {
     s32 x0;
@@ -12,7 +12,7 @@ typedef struct _MasterHandAttributes {
     s32 x8;
     s32 xC;
     s32 x10;
-    f32 x14;
+    s32 x14;
     s32 x18;
     s32 x1C;
     s32 x20;
@@ -80,7 +80,13 @@ typedef struct _MasterHandAttributes {
     f32 x154;
     f32 x158;
     f32 x15C;
-    u8 data_filler_160[0x17C - 0x160];
+    s32 x160;
+    s32 x164;
+    s32 x168;
+    s32 x16C;
+    s32 x170;
+    s32 x174;
+    f32 x178;
 } MasterHandAttributes;
 
 // ftMasterHand_1
@@ -88,7 +94,7 @@ void ftMasterhand_OnDeath(HSD_GObj* gobj);
 void ftMasterhand_OnLoad(HSD_GObj* gobj);
 
 // ftMasterHand_2
-void func_8014FDD0(HSD_GObj* gobj);
+void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj);
 void func_8014FE10(HSD_GObj* gobj);
 void func_8014FE58(HSD_GObj* gobj);
 void func_8014FE5C(HSD_GObj* gobj);

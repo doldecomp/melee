@@ -1,13 +1,12 @@
-#ifndef _ftpeach_h_
-#define _ftpeach_h_
+#pragma once
 
 #include <global.h>
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
-#include "melee/ft/fighter.h"
+#include <melee/ft/fighter.h>
 
 typedef struct _ftPeachAttributes {
     f32 unk0;
@@ -17,4 +16,4 @@ typedef struct _ftPeachAttributes {
 
 void ftPeach_OnDeath(HSD_GObj* gobj);
 
-#endif
+s32 ftPeach_8011BA20(Fighter* fp);

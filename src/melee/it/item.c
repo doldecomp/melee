@@ -1,4 +1,4 @@
-#include "item.h"
+#include <item.h>
 #include <common_structs.h>
 
 extern s32 func_8016AE80();
@@ -592,34 +592,34 @@ void func_80267978(HSD_GObj* item_gobj) // Store Item Pointers //
     Item* item_data;
     item_data = item_gobj->user_data;
     ItemID = item_data->x10_item_kind;
-    if (ItemID < 0x2B)
+    if (ItemID < It_Kind_Kuriboh)
     {
         item_data->xC4_article_data = &(*lbl_804D6D24->article_ptr[ItemID]);
         item_data->xB8_itemLogicTable = &lbl_803F14C4[item_data->x10_item_kind];
         goto block_end;
     }
-    if (ItemID < 0xA1)
+    if (ItemID < Pokemon_Tosakinto)
     {
-        ItemID -= 0x2B;
+        ItemID -= It_Kind_Kuriboh;
         new_var = ItemID;
         ItemID2 = new_var;
         item_data->xC4_article_data = &(*lbl_804D6D38->unkptr[new_var]);
         item_data->xB8_itemLogicTable = &lbl_803F3100[new_var];
         goto block_end;
     }
-    if (ItemID < 0xD0)
+    if (ItemID < It_Kind_Old_Kuri)
     {
-        ItemID -= 0xA1;
+        ItemID -= Pokemon_Tosakinto;
         new_var = ItemID;
         ItemID2 = new_var;
         item_data->xC4_article_data = &(*lbl_804D6D30->unkptr[new_var]);
         item_data->xB8_itemLogicTable = &lbl_803F23CC[new_var];
         goto block_end;
     }
-    ItemID -= 0xD0;
-    item_data->xC4_article_data = &(*lbl_804A0F60[ItemID].unkptr);
+    ItemID -= It_Kind_Old_Kuri;
+    item_data->xC4_article_data = &(*lbl_804A0F60->unkptr[ItemID]);
     item_data->xB8_itemLogicTable = &lbl_803F4D20[ItemID];
-    if (item_data->xC4_article_data == 0U)
+    if (item_data->xC4_article_data == NULL)
     {
         OSReport("not found zako model data! check ground dat file!\n");
         __assert("item.c", 0x2AEU, "0");
@@ -655,7 +655,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     item_data->x24_item_state_index = -1;
     item_data->xC8_joint = item_data->xC4_article_data->x10_modelDesc->x0_joint;
     item_data->xCC_item_attr = item_data->xC4_article_data->x0_common_attr;
-    item_data->x518_ownerGObj = 0;
+    item_data->x518_ownerGObj = NULL;
     item_data->xDC8_word.flags.x0 = 0;
     item_data->x378_itemColl.x19C = -1;
     item_data->xDC4 = 0;
@@ -675,11 +675,11 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     item_data->xDD0_flag.bits.b1 = 0;
     item_data->xDC8_word.flags.x14 = 0;
     item_data->xDC8_word.flags.xE = 0;
-    item_data->itdmg.xCEC_fighterGObj = 0;
-    item_data->itdmg.xCF0_itemGObj = 0;
-    item_data->xCF4_fighterGObjUnk = 0;
-    item_data->xCF8_detectGObj = 0;
-    item_data->itdmg.xC64_reflectGObj = 0;
+    item_data->itdmg.xCEC_fighterGObj = NULL;
+    item_data->itdmg.xCF0_itemGObj = NULL;
+    item_data->xCF4_fighterGObjUnk = NULL;
+    item_data->xCF8_detectGObj = NULL;
+    item_data->itdmg.xC64_reflectGObj = NULL;
     item_data->xCFC = 0;
     item_data->xD04_atkCollItem = 0;
     item_data->xD00_grabGObj = 0;
@@ -796,7 +796,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     {
         item_data->xDAA_flag.bits.b4 = 1;
     }
-    if (spawnItem->x0_parent_gobj == 0)
+    if (spawnItem->x0_parent_gobj == NULL)
     {
         item_data->x20_team_id = 0xFF;
         return;
@@ -815,7 +815,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
 }
 
 extern HSD_JObj* HSD_JObjAlloc();                              /* extern */
-extern void PSMTXIdentity(Mtx*);                               /* extern */
+extern void PSMTXIdentity(Mtx);                               /* extern */
 extern u8 lbl_804D7849;
 
 // 0x802680CC //
@@ -828,14 +828,14 @@ void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj //
 
     item_data = item_gobj->user_data;
     joint = item_data->xC8_joint;
-    if (joint != 0) 
+    if (joint != NULL) 
     {
         jobj = HSD_JObjLoadJoint(item_data->xC8_joint);
         func_80390A70(item_gobj, lbl_804D7849, jobj);
         return;
     }
     jobj = HSD_JObjAlloc();
-    PSMTXIdentity(&jobj->mtx);
+    PSMTXIdentity(jobj->mtx);
     jobj->scl = 0;
     func_80390A70(item_gobj, lbl_804D7849, jobj);
 }
@@ -857,59 +857,59 @@ void func_8026814C(HSD_GObj* item_gobj) // Setup item render objects? //
     HSD_JObj* var_r3;
 
     var_r30 = item_gobj->hsd_obj;
-    while (var_r30 != 0)
+    while (var_r30 != NULL)
     {
         var_r29 = func_80371BEC(var_r30);
     loop_2:
-        if (var_r29 != 0)
+        if (var_r29 != NULL)
         {
             temp_r0 = var_r29->mobj;
-            if (temp_r0 != 0)
+            if (temp_r0 != NULL)
             {
                 func_80382400(temp_r0, &lbl_803F1F90); // Setup MObj? //
             }
-            var_r29 = var_r0 = (var_r29 != 0) ? var_r29->next : 0;
+            var_r29 = var_r0 = (var_r29 != NULL) ? var_r29->next : NULL;
             goto loop_2;
         }
-        if (var_r30 == 0)
+        if (var_r30 == NULL)
         {
-            var_r0_2 = 0;
+            var_r0_2 = NULL;
         }
         else
         {
             var_r0_2 = var_r30->child;
         }
-        if (var_r0_2 != 0)
+        if (var_r0_2 != NULL)
         {
-            var_r30 = var_r0_2 = (var_r30 == 0) ? 0 : var_r30->child;
+            var_r30 = var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->child;
         }
         else
         {
-            var_r0_2 = (var_r30 == 0) ? 0 : var_r30->next;
-            if (var_r0_2 != 0)
+            var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->next;
+            if (var_r0_2 != NULL)
             {
-                var_r30 = var_r0_2 = (var_r30 == 0) ? 0 : var_r30->next;
+                var_r30 = var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->next;
             }
             else
             {
             loop_25:
-                var_r0_2 = (var_r30 == 0) ? 0 : var_r30->parent;
-                if (var_r0_2 == 0)
+                var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->parent;
+                if (var_r0_2 == NULL)
                 {
-                    var_r30 = 0;
+                    var_r30 = NULL;
                 }
                 else
                 {
-                    var_r3 = (var_r30 == 0) ? 0 : var_r30->parent;
-                    var_r0_2 = (var_r3 == 0) ? 0 : var_r3->next;
-                    if (var_r0_2 != 0)
+                    var_r3 = (var_r30 == NULL) ? NULL : var_r30->parent;
+                    var_r0_2 = (var_r3 == NULL) ? NULL : var_r3->next;
+                    if (var_r0_2 != NULL)
                     {
-                        var_r3 = (var_r30 == 0) ? 0 : var_r30->parent;
-                        var_r30 = var_r0_2 = (var_r3 == 0) ? 0 : var_r3->next;
+                        var_r3 = (var_r30 == NULL) ? NULL : var_r30->parent;
+                        var_r30 = var_r0_2 = (var_r3 == NULL) ? NULL : var_r3->next;
                     }
                     else
                     {
-                        var_r30 = var_r0_2 = (var_r30 == 0) ? 0 : var_r30->parent;
+                        var_r30 = var_r0_2 = (var_r30 == NULL) ? NULL : var_r30->parent;
                         goto loop_25;
                     }
                 }
@@ -920,7 +920,7 @@ void func_8026814C(HSD_GObj* item_gobj) // Setup item render objects? //
 
 // 0x802682F0 //
 // https://decomp.me/scratch/Rs4HS //
-s32 func_802682F0(HSD_GObj* item_gobj) // Initialize item bones //
+s32 func_802682F0(HSD_GObj* item_gobj) // Initialize item bones - needs some serious cleaning //
 {
     s32 unused;
     s32 var_r4;
@@ -934,48 +934,48 @@ s32 func_802682F0(HSD_GObj* item_gobj) // Initialize item bones //
     if (item_data->xC4_article_data->x10_modelDesc->x4_bone_count != 0U)
     {
         item_data->xBBC_dynamicBoneTable = HSD_ObjAlloc(&lbl_804A0C0C);
-        if (item_data->xBBC_dynamicBoneTable == 0)
+        if (item_data->xBBC_dynamicBoneTable == NULL)
         {
-            return 0;
+            return FALSE;
         }
         var_r5 = item_gobj->hsd_obj;
         var_r4 = 0;
-        while (var_r5 != 0)
+        while (var_r5 != NULL)
         {
             (item_data->xBBC_dynamicBoneTable->x0_jobj[var_r4]) = var_r5;
             var_r4 += 1;
-            var_r0 = (var_r5 == 0) ? 0 : var_r5->child;
-            if (var_r0 != 0)
+            var_r0 = (var_r5 == NULL) ? NULL : var_r5->child;
+            if (var_r0 != NULL)
             {
-                var_r5 = var_r0 = (var_r5 == 0) ? 0 : var_r5->child;
+                var_r5 = var_r0 = (var_r5 == NULL) ? NULL : var_r5->child;
             }
             else
             {
-                var_r0 = (var_r5 == 0) ? 0 : var_r5->next;
-                if (var_r0 != 0)
+                var_r0 = (var_r5 == NULL) ? NULL : var_r5->next;
+                if (var_r0 != NULL)
                 {
-                    var_r5 = var_r0 = (var_r5 == 0) ? 0 : var_r5->next;
+                    var_r5 = var_r0 = (var_r5 == NULL) ? NULL : var_r5->next;
                 }
                 else
                 {
                 loop_20:
-                    var_r0 = (var_r5 == 0) ? 0 : var_r5->parent;
-                    if (var_r0 == 0)
+                    var_r0 = (var_r5 == NULL) ? NULL : var_r5->parent;
+                    if (var_r0 == NULL)
                     {
-                        var_r5 = 0;
+                        var_r5 = NULL;
                     }
                     else
                     {
-                        var_r3 = (var_r5 == 0) ? 0 : var_r5->parent;
-                        var_r0 = (var_r3 == 0) ? 0 : var_r3->next;
-                        if (var_r0 != 0U)
+                        var_r3 = (var_r5 == NULL) ? NULL : var_r5->parent;
+                        var_r0 = (var_r3 == NULL) ? NULL : var_r3->next;
+                        if (var_r0 != NULL)
                         {
-                            var_r3_2 = (var_r5 == 0) ? 0 : var_r5->parent;
-                            var_r5 = var_r0 = (var_r3_2 == 0) ? 0 : var_r3_2->next;
+                            var_r3_2 = (var_r5 == NULL) ? NULL : var_r5->parent;
+                            var_r5 = var_r0 = (var_r3_2 == NULL) ? NULL : var_r3_2->next;
                         }
                         else
                         {
-                            var_r5 = var_r0 = (var_r5 == 0) ? 0 : var_r5->parent;
+                            var_r5 = var_r0 = (var_r5 == NULL) ? NULL : var_r5->parent;
                             goto loop_20;
                         }
                     }
@@ -1040,7 +1040,7 @@ extern void func_80011710(void*, void*);
 
 // 0x80268560 //
 // https://decomp.me/scratch/d3ZmY //
-void func_80268560(HSD_GObj* item_gobj) // Setup item dynamics //
+void func_80268560(HSD_GObj* item_gobj) // Setup item dynamic bones //
 {
     s32 i;
     Item* item_data;
@@ -1053,7 +1053,7 @@ void func_80268560(HSD_GObj* item_gobj) // Setup item dynamics //
     item_data = item_gobj->user_data;
     article_data = item_data->xC4_article_data;
     temp_dynamics = article_data->x14_dynamics;
-    if (temp_dynamics == 0)
+    if (temp_dynamics == NULL)
     {
         item_data->x374_dynamicBonesNum = 0;
         item_data->xB68 = (s8)0;
@@ -1107,35 +1107,35 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
 
     if (func_8026784C(spawnItem->xC_hold_kind, spawnItem->x8_item_id) != 0)
     {
-        return 0;
+        return NULL;
     }
     temp_r3 = func_803901F0(6, 9, 0);
-    if (temp_r3 == 0)
+    if (temp_r3 == NULL)
     {
-        return 0;
+        return NULL;
     }
     temp_r4 = spawnItem->x8_item_id;
-    if (temp_r4 < 0x2B)
+    if (temp_r4 < It_Kind_Kuriboh) // Check if item is a common item (IDs 0 through 42) //
     {
         GObj_SetupGXLink(temp_r3, lbl_803F1418[temp_r4].x0_renderFunc, 6U, 0U);
     }
-    else if ((temp_r4 ^ 0) < 0xA1)
+    else if (temp_r4 < Pokemon_Tosakinto) // Check if item is common item- or character-related? //
     {
-        temp_r4 -= 0x2B;
+        temp_r4 -= It_Kind_Kuriboh;
         GObj_SetupGXLink(temp_r3, lbl_803F2F28[temp_r4].x0_renderFunc, 6U, 0U);
     }
-    else if (temp_r4 < 0xD0)
+    else if (temp_r4 < It_Kind_Old_Kuri) // Check if item is a Pokémon //
     {
-        temp_r4 -= 0xA1;
+        temp_r4 -= Pokemon_Tosakinto;
         GObj_SetupGXLink(temp_r3, lbl_803F2310[temp_r4].x0_renderFunc, 6U, 0U);
     }
     else
     {
-        temp_r4 -= 0xD0;
+        temp_r4 -= It_Kind_Old_Kuri; // Otherwise item is a stage item //
         GObj_SetupGXLink(temp_r3, lbl_803F4CA8[temp_r4].x0_renderFunc, 6U, 0U);
     }
     temp_r3_2 = HSD_ObjAlloc((HSD_ObjAllocData*)(&lbl_804A0BE0));
-    if (temp_r3_2 == 0)
+    if (temp_r3_2 == NULL)
     {
         func_80390228(temp_r3);
         return 0;
@@ -1144,7 +1144,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
     func_80267AA8(temp_r3, spawnItem);
     item_data = temp_r3->user_data;
     temp_joint = item_data->xC8_joint;
-    if (temp_joint != 0)
+    if (temp_joint != NULL)
     {
         temp_r29 = HSD_JObjLoadJoint(item_data->xC8_joint);
         func_80390A70(temp_r3, lbl_804D7849, temp_r29);
@@ -1152,11 +1152,11 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
     else
     {
         temp_r29 = HSD_JObjAlloc();
-        PSMTXIdentity(&temp_r29->mtx);
+        PSMTXIdentity(temp_r29->mtx);
         temp_r29->scl = 0;
         func_80390A70(temp_r3, lbl_804D7849, temp_r29);
     }
-    if (func_802682F0(temp_r3) != 0)
+    if (func_802682F0(temp_r3) != FALSE)
     {
         func_8026814C(temp_r3);
         temp_jobj = temp_r3->hsd_obj;
@@ -1229,7 +1229,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
         func_802676F4(temp_r3);
         item_data2 = temp_r3->user_data;
         temp_r0_2 = item_data2->x10_item_kind;
-        if (((temp_r0_2 >= 0x30) && (temp_r0_2 < 0x9E)) && (func_80086960(item_data2->x518_ownerGObj) != 0))
+        if ((temp_r0_2 >= It_Kind_Mario_Fire) && (temp_r0_2 < It_Kind_Unk4) && (func_80086960(item_data2->x518_ownerGObj) != FALSE)) // Check if item is a character item + owner != NULL
         {
             item_data2->xDC8_word.flags.xE = 1;
             item_data2->x378_itemColl.x19C = func_800872A4(item_data2->x518_ownerGObj);
@@ -1269,7 +1269,7 @@ block_returnGObj:
 // https://decomp.me/scratch/YyUEI //
 void func_80268B18(SpawnItem* spawnItem) // Item spawn prefunction - spawn airborne //
 {
-    spawnItem->x48_ground_or_air = 1;
+    spawnItem->x48_ground_or_air = AIR;
     spawnItem->x10 = 0;
     func_802674AC(spawnItem);
     func_8026862C(spawnItem);
@@ -1279,7 +1279,7 @@ void func_80268B18(SpawnItem* spawnItem) // Item spawn prefunction - spawn airbo
 // https://decomp.me/scratch/cN7Fn //
 void func_80268B5C(SpawnItem* spawnItem) // Item spawn prefunction - spawn grounded //
 {
-    spawnItem->x48_ground_or_air = 0;
+    spawnItem->x48_ground_or_air = GROUND;
     spawnItem->x10 = 0;
     func_802674AC(spawnItem);
     func_8026862C(spawnItem);
@@ -1289,7 +1289,7 @@ void func_80268B5C(SpawnItem* spawnItem) // Item spawn prefunction - spawn groun
 // https://decomp.me/scratch/V7AgZ //
 void func_80268B9C(SpawnItem* spawnItem) // Item spawn prefunction - spawn grounded and toggle unknown true //
 {
-    spawnItem->x48_ground_or_air = 0;
+    spawnItem->x48_ground_or_air = GROUND;
     spawnItem->x10 = 1;
     func_802674AC(spawnItem);
     func_8026862C(spawnItem);
@@ -1308,27 +1308,27 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
 
     s32 temp_r0;
 
-    if (item_jobj != 0)
+    if (item_jobj != NULL)
     {
-        if (anim_joint != 0)
+        if (anim_joint != NULL)
         {
             for (temp_r0 = 0; temp_r0 < item_data->x374_dynamicBonesNum; temp_r0++)
                 if (item_jobj == item_data->xD4_dynamicBones[temp_r0].x4_root_jobj)
                 {
-                    if ((u32)anim_joint->next != 0U)
+                    if (anim_joint->next != NULL)
                     {
-                        functionArg1 = 0;
-                        functionArg2 = 0;
-                        functionArg3 = 0;
-                        if (anim_joint != 0)
+                        functionArg1 = NULL;
+                        functionArg2 = NULL;
+                        functionArg3 = NULL;
+                        if (anim_joint != NULL)
                         {
                             functionArg1 = anim_joint->next;
                         }
-                        if (matanim_joint != 0)
+                        if (matanim_joint != NULL)
                         {
                             functionArg2 = matanim_joint->next;
                         }
-                        if (arg3 != 0)
+                        if (arg3 != NULL)
                         {
                             functionArg3 = arg3->x4_unk;
                         }
@@ -1338,39 +1338,39 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
                 }
         }
         HSD_JObjAddAnim(item_jobj, anim_joint, matanim_joint, arg3);
-        if ((u32)item_jobj->child != 0U)
+        if (item_jobj->child != NULL)
         {
-            functionArg1 = 0;
-            functionArg2 = 0;
-            functionArg3 = 0;
-            if (anim_joint != 0)
+            functionArg1 = NULL;
+            functionArg2 = NULL;
+            functionArg3 = NULL;
+            if (anim_joint != NULL)
             {
                 functionArg1 = anim_joint->child;
             }
-            if (matanim_joint != 0)
+            if (matanim_joint != NULL)
             {
                 functionArg2 = matanim_joint->child;
             }
-            if (arg3 != 0)
+            if (arg3 != NULL)
             {
                 functionArg3 = arg3->x0_unk;
             }
             func_80268BE0(item_jobj->child, functionArg1, functionArg2, functionArg3, item_data);
         }
-        if (item_jobj->next != 0)
+        if (item_jobj->next != NULL)
         {
-            functionArg1 = 0;
-            functionArg2 = 0;
-            functionArg3 = 0;
-            if (anim_joint != 0)
+            functionArg1 = NULL;
+            functionArg2 = NULL;
+            functionArg3 = NULL;
+            if (anim_joint != NULL)
             {
                 functionArg1 = anim_joint->next;
             }
-            if (matanim_joint != 0)
+            if (matanim_joint != NULL)
             {
                 functionArg2 = matanim_joint->next;
             }
-            if (arg3 != 0)
+            if (arg3 != NULL)
             {
                 functionArg3 = arg3->x4_unk;
             }
@@ -1399,9 +1399,9 @@ void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc) // 
     temp_joint = item_data->xC8_joint;
     if (temp_joint != 0)
     {
-        if (item_jobj == 0)
+        if (item_jobj == NULL)
         {
-            bonestruct_arg = 0;
+            bonestruct_arg = NULL;
         }
         else bonestruct_arg = item_jobj->child;
         func_8000B804(bonestruct_arg, temp_joint->child);
@@ -1444,12 +1444,6 @@ extern struct r13_ColAnimStruct* lbl_804D6D04;
 extern f64 lbl_804DC630;
 extern f32 lbl_804DC638;
 extern f32 lbl_804DC63C;
-
-inline Item* GetItemData(HSD_GObj* item_gobj)
-{
-    Item* item_data = item_gobj->user_data;
-    return item_data;
-}
 
 inline void HSD_JObjSetFacingDirItem(HSD_JObj* item_jobj2, Item* item_data)
 {
@@ -1633,15 +1627,15 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
         func_8026BDCC(item_gobj);
         func_80274EF8(item_gobj);
     }
-    if ((itemStateFlags & 8) != 0)
+    if ((itemStateFlags & ITEM_MODEL_UPDATE) != FALSE)
     {
         func_80274740(item_gobj);
     }
-    if (((itemStateFlags & 0x40) == 0) && ((lbl_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)))
+    if (((itemStateFlags & ITEM_COLANIM_PRESERVE) == FALSE) && ((lbl_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)))
     {
         func_80279BBC(item_data);
     }
-    if ((itemStateFlags & 0x20) == 0)
+    if ((itemStateFlags & ITEM_SFX_PRESERVE) == FALSE)
     {
         func_8026B074(item_data);
     }
@@ -1649,7 +1643,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     {
         HSD_JObjSetFacingDirItem(item_jobj2, item_data);
     }
-    if ((itemStateFlags & 4) != 0)
+    if ((itemStateFlags & ITEM_DROP_UPDATE) != FALSE)
     {
         item_data->itdmg.xC40 = (f32)item_data->itdmg.xC44;
     }
@@ -1657,7 +1651,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     {
         item_data->itdmg.xC40 = 1.0f;
     }
-    if (((itemStateFlags & 0x10) == 0) && (item_data->xDC8_word.flags.x16 != 0))
+    if (((itemStateFlags & ITEM_HIT_PRESERVE) == FALSE) && (item_data->xDC8_word.flags.x16 != 0))
     {
         func_802725D4(item_gobj);
     }
@@ -1671,17 +1665,17 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     {
         item_data->xD0_itemStateDesc = (temp_r23 = (temp_r29 = (new_var2 = &item_data->xC4_article_data->xC_itemStates->x0_itemStateDesc[temp_r0])));
         temp_r23 = (new_var3 = item_data->xD0_itemStateDesc);
-        if ((temp_r23 != 0) && ((itemStateFlags & 2) != 0))
+        if ((temp_r23 != NULL) && ((itemStateFlags & ITEM_ANIM_UPDATE) != FALSE))
         {
             item_jobj1_2 = GetItemJObj(item_gobj);
             item_data2 = GetItemData(item_gobj);
             func_8036F6B4(item_jobj1_2);
             boneCopyArg2 = item_data2->xC8_joint;
-            if (boneCopyArg2 != 0)
+            if (boneCopyArg2 != NULL)
             {
-                if (item_jobj1_2 == 0)
+                if (item_jobj1_2 == NULL)
                 {
-                    boneCopyArg = 0;
+                    boneCopyArg = NULL;
                 }
                 else boneCopyArg = item_jobj1_2->child;
                 func_8000B804(boneCopyArg, boneCopyArg2->child);
@@ -1689,7 +1683,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
             func_80268BE0(item_jobj1_2, temp_r23->x0_anim_joint, temp_r23->x4_matanim_joint, temp_r23->x8_parameters, item_data2);
             func_8000BA0C(item_jobj1_2, item_data2->x5D0_animFrameSpeed);
             HSD_JObjReqAnimAll(item_jobj1_2, 0.0f);
-            if ((itemStateFlags & 0x80) != 0)
+            if ((itemStateFlags & ITEM_UNK_UPDATE) != FALSE)
             {
                 item_jobj1_2 = item_gobj->hsd_obj;
                 item_data3 = GetItemData(item_gobj);
@@ -1709,13 +1703,13 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
                 HSD_JObjSetScaleItem2(item_data4, item_gobj->hsd_obj, &sp40);
             }
             item_data->x52C_item_script = temp_r29->xC_script;
-            item_data->x530 = 0;
+            item_data->x530 = 0U;
             item_data->x524 = 0.0f;
         }
-        else if ((temp_r23 != 0) && ((itemStateFlags & 0x100) != 0))
+        else if ((temp_r23 != 0) && ((itemStateFlags & ITEM_CMD_UPDATE) != FALSE))
         {
             item_data->x52C_item_script = temp_r29->xC_script;
-            item_data->x530 = 0;
+            item_data->x530 = 0U;
             item_data->x524 = 0.0f;
         }
         HSD_JObjAnimAll(item_jobj2);
@@ -1725,16 +1719,16 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     else
     {
         func_8036F6B4(item_jobj2);
-        item_data->x52C_item_script = 0;
+        item_data->x52C_item_script = NULL;
     }
     item_data->itcb.xD14_callback_Anim = temp_r30->x4_callback_anim;
     item_data->itcb.xD18_callback_Phys = temp_r30->x8_callback_phys;
     item_data->itcb.xD1C_callback_Coll = temp_r30->xC_callback_coll;
-    item_data->itcb.xD20_callback_Accessory = 0;
-    item_data->itcb.xD24_callback_Inert = 0;
-    item_data->itcb.xD28_callback_EnterHitlag = 0;
-    item_data->itcb.xD2C_callback_ExitHitlag = 0;
-    item_data->itcb.xD30_callback_JumpedOn = 0;
+    item_data->itcb.xD20_callback_Accessory = NULL;
+    item_data->itcb.xD24_callback_Inert = NULL;
+    item_data->itcb.xD28_callback_EnterHitlag = NULL;
+    item_data->itcb.xD2C_callback_ExitHitlag = NULL;
+    item_data->itcb.xD30_callback_JumpedOn = NULL;
     item_data->xDD0_flag.bits.b5 = 0;
     item_data->xD09 = (s8)0;
     func_802714C0(item_gobj);
@@ -2252,7 +2246,7 @@ s32 func_80269F14(HSD_GObj* item_gobj) // Item Think - On Reflect //
     temp_item->xD94 = temp_item->itdmg.xC78;
     temp_item->xD9C = temp_item->itdmg.xC80;
     temp_item->xDA4_word = (s32)temp_item->itdmg.xC88;
-    temp_item->xDA8_word = (u16)temp_item->itdmg.xC8C;
+    temp_item->xDA8_short = (u16)temp_item->itdmg.xC8C;
     cb_OnReflect = temp_item->xB8_itemLogicTable->x24_callback_OnReflect;
     if ((cb_OnReflect != 0) && (cb_OnReflect(item_gobj) != 0))
     {
@@ -2262,7 +2256,7 @@ s32 func_80269F14(HSD_GObj* item_gobj) // Item Think - On Reflect //
     }
     if (temp_item->xDCC_flag.b0 == 0)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < 4; i++) // 4 here is the maximum amount of hitboxes available in the vanilla Item struct //
         {
             if ((s32)temp_item->x5D4_hitboxes[i].x0_toggle != 0)
             {
@@ -2377,7 +2371,8 @@ void func_8026A1E8(HSD_GObj* item_gobj) // Item Think - Exit Hitlag //
 
 #pragma dont_inline off
 
-inline s32 processCallback(s32(*cb)(HSD_GObj*), HSD_GObj* item_gobj, Item* item_data) {
+inline s32 processCallback(s32(*cb)(HSD_GObj*), HSD_GObj* item_gobj, Item* item_data) 
+{
     if (cb && cb(item_gobj))
     {
         item_data->xD60 = 2;
@@ -2562,11 +2557,6 @@ extern void func_80086764(HSD_GObj*);
 extern s32 func_800867A0(HSD_GObj*, HSD_GObj*);
 extern HSD_GObj* func_800867CC(HSD_GObj*);
 
-inline Item* GetItemDirect(HSD_GObj* item_gobj)
-{
-    return item_gobj->user_data;
-}
-
 // 0x8026A848 //
 // https://decomp.me/scratch/OcqKi //
 void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Remove Item from Player //
@@ -2575,7 +2565,9 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Remove Item f
     Item* temp_item;
 
     temp_item = GetItemDirect(item_gobj);
-    if (((s32)temp_item->x14_hold_kind == 8) && (itemID = temp_item->x10_item_kind, ((itemID == 0x3A) == 0)) && (itemID != 0x3B) && (itemID != 0x63) && (itemID != 0x67)) {
+
+    if (((s32)temp_item->x14_hold_kind == 8) && (itemID = temp_item->x10_item_kind, ((itemID == 0x3A) == 0)) && (itemID != 0x3B) && (itemID != 0x63) && (itemID != 0x67)) 
+    {
         if (func_800867CC(fighter_gobj) == item_gobj)
         {
             func_80086764(fighter_gobj);

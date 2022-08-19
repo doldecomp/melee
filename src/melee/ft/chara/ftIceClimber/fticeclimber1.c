@@ -1,75 +1,39 @@
-#include "fticeclimber.h"
+#include <fticeclimber.h>
 
-/// TODO remove float externs when file is finished and float data is removed from asm
-extern f32 lbl_804D9830;
 
-void ftIcelimber_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
+void ftIceClimber_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
+
+void ftIceClimber_OnItemInvisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
+}
+
+void ftIceClimber_OnItemVisible(HSD_GObj *fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 1);
+}
+
+void ftIceClimber_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_8011EE18(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-        func_80070CC4(fighterObj, 1);
-    }
+void ftIceClimber_OnLoadForNana(Fighter* fp) {
+    PUSH_ATTRS(fp, ftIceClimberAttributes);
 }
 
-void func_8011EE60(HSD_GObj *fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {
-        func_80070C48(fighterObj, 1);
-    }
-}
-
-void func_8011EEA8(HSD_GObj* fighterObj, s32 arg1) {
-    func_80070FB4(fighterObj, 1, -1);
-    if (arg1) {
-        func_80070CC4(fighterObj, 1);
-    }
-}
-
-void ftIcelimber_OnLoadForNana(Fighter* fighter) {
-    PUSH_ATTRS(fighter, ftIceClimberAttributes);
-}
-
-void ftIcelimber_OnLoad(HSD_GObj* fighterObj) {
+void ftIceClimber_OnLoad(HSD_GObj* fighterObj) {
 
     s32 unused;
-    Fighter* fighter = fighterObj->user_data;
-    void** item_list = fighter->x10C_ftData->x48_items;
-    fighter->x2222_flag.bits.b5 = 1; 
+    Fighter* fp = fighterObj->user_data;
+    void** item_list = fp->x10C_ftData->x48_items;
+    fp->x2222_flag.bits.b5 = 1; 
     
-    PUSH_ATTRS(fighter, ftIceClimberAttributes);
+    PUSH_ATTRS(fp, ftIceClimberAttributes);
 
     {
-        ftIceClimberAttributes* attr = fighter->x2D4_specialAttributes;
-        fighter->x40 = attr->x0;
+        ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
+        fp->x40 = attr->x0;
         func_8026B3F8(item_list[0], 0x6AU);
         func_8026B3F8(item_list[1], 0x6BU);
         func_8026B3F8(item_list[2], 0x71U);
@@ -77,15 +41,34 @@ void ftIcelimber_OnLoad(HSD_GObj* fighterObj) {
 
 }
 
-void ftIcelimber_OnDeath(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    ftIceClimberAttributes* attr = fighter->x2D4_specialAttributes;
+void ftIceClimber_OnDeath(HSD_GObj* fighterObj) {
+    Fighter* fp = fighterObj->user_data;
+    ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
     func_80074A4C(fighterObj, 0U, 0);
     func_80074A4C(fighterObj, 1U, 0);
-    fighter->sa.nana.x2234 = 0;
-    fighter->sa.nana.x222C = 0;
-    fighter->sa.nana.x2230.bits.b0 = 0;
-    fighter->sa.nana.x2238 = 0;
-    fighter->sa.nana.x224C = 0;
-    fighter->sa.nana.x2250 = lbl_804D9830;
+    fp->sa.nana.x2234 = 0;
+    fp->sa.nana.x222C = 0;
+    fp->sa.nana.x2230.bits.b0 = 0;
+    fp->sa.nana.x2238 = 0;
+    fp->sa.nana.x224C = 0;
+    fp->sa.nana.x2250 = 0.0f;
+}
+
+void ftIceClimber_8011F060(HSD_GObj* fighterObj) {
+    func_8011F190(fighterObj);
+    func_80122898(fighterObj);
+    func_80121164(fighterObj);
+    func_8011F68C(fighterObj);
+}
+
+void ftIceClimber_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftIceClimberAttributes);
+}
+
+void ftIceClimber_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftIceClimber_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
 }

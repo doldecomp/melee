@@ -1,99 +1,82 @@
-#include "ftfox.h"
+#include <ftfox.h>
 
 BOOL func_800E5534(HSD_GObj* gobj)
 {
-    Fighter* ft = (Fighter*)gobj->user_data;
+    Fighter* fp = (Fighter*)gobj->user_data;
     
-    return ft->sa.fox.x222C ? TRUE : FALSE;
+    return fp->sa.fox.x222C_blasterGObj ? TRUE : FALSE;
 }
 
 void ftFox_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* ft = (Fighter*)gobj->user_data;
+    Fighter* fp = (Fighter*)gobj->user_data;
     
-    ft->sa.fox.x222C = 0;
+    fp->sa.fox.x222C_blasterGObj = 0;
     func_80074A4C(gobj, 0, 0);
 }
 
 void func_800E5588(HSD_GObj* gobj)
 {
-    func_800E5EBC(gobj);
+    ftFox_RemoveBlaster(gobj);
 }
 
-void ftFox_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
-{
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
-    }
+void ftFox_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
 }
 
-void func_800E5688(HSD_GObj* gobj) 
+void ftFox_OnItemInvisible(HSD_GObj* gobj) 
 {
-    Fighter* ft = gobj->user_data;
-
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void func_800E56D0(HSD_GObj* gobj) 
+void ftFox_OnItemVisible(HSD_GObj* gobj) 
 {
-    Fighter* ft = gobj->user_data;
-
-    if (func_8026B2B4(ft->x1974_heldItem) == 0) {
-        func_80070C48(gobj, 1);
-    }
+    Fighter_OnItemVisible(gobj, 1);
 }
 
-void func_800E5718(HSD_GObj* gobj, s32 arg1) 
+void ftFox_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    func_80070FB4(gobj, 1, -1);
-    if (arg1 != 0) {
-        func_80070CC4(gobj, 1);
-    }
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftFox_OnLoadForFalco(Fighter* ft) 
+void ftFox_OnLoadForFalco(Fighter* fp) 
 {
-    PUSH_ATTRS(ft, ftFoxAttributes);
+    PUSH_ATTRS(fp, ftFoxAttributes);
 }
 
 void ftFox_OnLoad(HSD_GObj* gobj) {
 
-    Fighter* ft = gobj->user_data;
-    void** item_list = ft->x10C_ftData->x48_items;
+    Fighter* fp = gobj->user_data;
+    void** item_list = fp->x10C_ftData->x48_items;
 
-    ft->x2224_flag.bits.b7 = 1;
+    fp->x2224_flag.bits.b7 = 1;
 
-    PUSH_ATTRS(ft, ftFoxAttributes);
+    PUSH_ATTRS(fp, ftFoxAttributes);
     
     {
-        ftFoxAttributes *fox_attr = ft->x2D4_specialAttributes;
-        func_8026B3F8(item_list[0], fox_attr->x1C);
-        func_8026B3F8(item_list[1], fox_attr->x20);
-        func_8026B3F8(item_list[2], 0x38U);
+        ftFoxAttributes *fox_attr = fp->x2D4_specialAttributes;
+        func_8026B3F8(item_list[0], fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
+        func_8026B3F8(item_list[1], fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
+        func_8026B3F8(item_list[2], It_Kind_Fox_Illusion);
     }
 }
+
+void ftFox_LoadSpecialAttrs(HSD_GObj* gobj) {
+    COPY_ATTRS(gobj, ftFoxAttributes);
+}
+
+extern f32 lbl_804D9244;  ///0.0f
+
+void ftFox_OnKnockbackEnter(HSD_GObj* gobj) {
+    Fighter_OnKnockbackEnter(gobj, 1);
+    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
+}
+
+void ftFox_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+    ftAnim_ApplyPartAnim(fighterObj, 3, 2, 0.0f);
+    ftAnim_ApplyPartAnim(fighterObj, 4, 2, 0.0f); 
+}
+
+//// End of File

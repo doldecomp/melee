@@ -4,8 +4,8 @@
 
 .section .data
     .balign 8
-.global lbl_803CDD78
-lbl_803CDD78:
+.global as_table_pikachu
+as_table_pikachu:
     .4byte 0x00000127
     .4byte 0x00340111
     .4byte 0x12000000

@@ -14,21 +14,24 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/random.h>
-#include "sysdolphin/baselib/controller.h"
+#include <sysdolphin/baselib/controller.h>
+#include <melee/lb/lbrefract.h>
 #include <sysdolphin/baselib/archive.h>
+#include <common_structs.h>
+#include <melee/ft/ftstatevars.h>
 
-typedef Vec Vec3;
+BOOL func_80081298(HSD_GObj* gobj);
 
 typedef enum FighterKind
 {
     FTKIND_MARIO,
     FTKIND_FOX,
-    FTKIND_FALCON,
-    FTKIND_DK,
+    FTKIND_CAPTAIN,
+    FTKIND_DONKEY,
     FTKIND_KIRBY,
-    FTKIND_BOWSER,
+    FTKIND_KOOPA,
     FTKIND_LINK,
-    FTKIND_SHEIK,
+    FTKIND_SEAK,
     FTKIND_NESS,
     FTKIND_PEACH,
     FTKIND_POPO,
@@ -36,63 +39,467 @@ typedef enum FighterKind
     FTKIND_PIKACHU,
     FTKIND_SAMUS,
     FTKIND_YOSHI,
-    FTKIND_JIGGLYPUFF,
+    FTKIND_PURIN,
     FTKIND_MEWTWO,
     FTKIND_LUIGI,
-    FTKIND_MARTH,
+    FTKIND_MARS,
     FTKIND_ZELDA,
-    FTKIND_YOUNGLINK,
+    FTKIND_CLINK,
     FTKIND_DRMARIO,
     FTKIND_FALCO,
     FTKIND_PICHU,
-    FTKIND_GAW,
-    FTKIND_GANONDORF,
-    FTKIND_ROY,
-    FTKIND_MASTERHAND,
-    FTKIND_CRAZYHAND,
+    FTKIND_GAMEWATCH,
+    FTKIND_GANON,
+    FTKIND_EMBLEM,
+    FTKIND_MASTERH,
+    FTKIND_CREZYH,
     FTKIND_BOY,
     FTKIND_GIRL,
-    FTKIND_GIGABOWSER,
+    FTKIND_GKOOPS,
     FTKIND_SANDBAG,
+    FTKIND_NONE
+
 } FighterKind;
 
 typedef enum CharacterKind
 {
-    CKIND_FALCON,
-    CKIND_DK,
-    CKIND_FOX,
-    CKIND_GAW,
-    CKIND_KIRBY,
-    CKIND_BOWSER,
-    CKIND_LINK,
-    CKIND_LUIGI,
-    CKIND_MARIO,
-    CKIND_MARTH,
-    CKIND_MEWTWO,
-    CKIND_NESS,
-    CKIND_PEACH,
-    CKIND_PIKACHU,
-    CKIND_ICECLIMBERS,
-    CKIND_JIGGLYPUFF,
-    CKIND_SAMUS,
-    CKIND_YOSHI,
-    CKIND_ZELDA,
-    CKIND_SHEIK,
-    CKIND_FALCO,
-    CKIND_YOUNGLINK,
-    CKIND_DRMARIO,
-    CKIND_ROY,
-    CKIND_PICHU,
-    CKIND_GANONDORF,
-    CKIND_MASTERHAND,
-    CKIND_BOY,
-    CKIND_GIRL,
-    CKIND_GIGABOWSER,
-    CKIND_CRAZYHAND,
-    CKIND_SANDBAG,
-    CKIND_POPO,
+    CKIND_CAPTAIN, // Captain Falcon (Captain) //
+    CKIND_DONKEY, // Donkey Kong (Donkey) //
+    CKIND_FOX, // Fox //
+    CKIND_GAMEWATCH, // Mr. Game & Watch (GameWatch) //
+    CKIND_KIRBY, // Kirby //
+    CKIND_KOOPA, // Bowser (Koopa) //
+    CKIND_LINK, // Link //
+    CKIND_LUIGI, // Luigi // 
+    CKIND_MARIO, // Mario //
+    CKIND_MARS, // Marth (Mars) //
+    CKIND_MEWTWO, // Mewtwo //
+    CKIND_NESS, // Ness// 
+    CKIND_PEACH, // Peach //
+    CKIND_PIKACHU, // Pikachu //
+    CKIND_POPONANA, // Ice Climbers (Popo & Nana) //
+    CKIND_PURIN, // Jigglypuff (Purin) //
+    CKIND_SAMUS, // Samus //
+    CKIND_YOSHI, // Yoshi //
+    CKIND_ZELDA, // Zelda (ZE->SE) //
+    CKIND_SEAK, // Sheik (SE->ZE) //
+    CKIND_FALCO, // Falco //
+    CKIND_CLINK, // Young Link (CLink) //
+    CKIND_DRMARIO, // Dr. Mario //
+    CKIND_EMBLEM, // Roy (Emblem) //
+    CKIND_PICHU, // Pichu //
+    CKIND_GANON, // Ganondorf (Ganon) //
+    CKIND_MASTERH, // Master Hand (MasterH) //
+    CKIND_BOY, // Male Wireframe (Boy) //
+    CKIND_GIRL, // Female Wireframe (Girl) //
+    CKIND_GKOOPS, // Giga Bowser (GKoops) //
+    CKIND_CREZYH, // Crazy Hand (CrezyH) //
+    CHKIND_SANDBAG, // Sandbag //
+    CHKIND_POPO, // Popo //
+    CHKIND_NONE // None //
+
 } CharacterKind;
 
+// Action State Change flags
+
+#define FIGHTER_FASTFALL_PRESERVE 0x1
+#define FIGHTER_GFX_PRESERVE 0x2
+#define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
+#define FIGHTER_HIT_NOUPDATE 0x8 // Keep hitboxes
+#define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?) 
+#define FIGHTER_ANIMVEL_NOUPDATE 0x20
+#define FIGHTER_UNK_0x40 0x40
+#define FIGHTER_MATANIM_NOUPDATE 0x80 // Ignore switching to character's "hurt" textures (?) //
+#define FIGHTER_THROW_EXCEPTION_NOUPDATE 0x100 // Resets thrower GObj pointer to NULL if false? //
+#define FIGHTER_SFX_PRESERVE 0x200
+#define FIGHTER_PARASOL_NOUPDATE 0x400 // Ignore Parasol state change //
+#define FIGHTER_RUMBLE_NOUPDATE 0x800 // Ignore rumble update? //
+#define FIGHTER_COLANIM_NOUPDATE 0x1000
+#define FIGHTER_ACCESSORY_PRESERVE 0x2000 // Keep respawn platform? //
+#define FIGHTER_CMD_UPDATE 0x4000 // Run all Subaction Events up to the current animation frame //
+#define FIGHTER_NAMETAGVIS_NOUPDATE 0x8000
+#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
+#define FIGHTER_SWORDTRAIL_PRESERVE 0x20000
+#define FIGHTER_ITEMVIS_NOUPDATE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
+#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x20 of 0x2222? //
+#define FIGHTER_PHYS_UNKUPDATE 0x100000
+#define FIGHTER_FREEZESTATE 0x200000 // Sets anim rate to 0x and some other stuff
+#define FIGHTER_MODELPART_VIS_NOUPDATE 0x400000
+#define FIGHTER_METALB_NOUPDATE 0x800000
+#define FIGHTER_UNK_0x1000000 0x1000000
+#define FIGHTER_ATTACKCOUNT_NOUPDATE 0x2000000
+#define FIGHTER_MODEL_FLAG_NOUPDATE 0x4000000
+#define FIGHTER_UNK_0x2227 0x8000000
+#define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
+#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fp animation?
+#define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
+#define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
+
+
+// LandingFallSpecial flags //
+
+#define IS_INTERRUPTIBLE 1
+
+// Ledge Grab Macros //
+
+#define CLIFFCATCH_BOTH 0
+#define CLIFFCATCH_LEFT -1
+#define CLIFFCATCH_RIGHT 1
+
+// Ternary macro for fcmpo-based facing direction check 
+
+#define CLIFFCATCH_O(fp) \
+(fp->x2C_facing_direction < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+
+// Ternary macro for fcmpu-based facing direction check
+
+#define CLIFFCATCH_U(fp) \
+(fp->x2C_facing_direction != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+
+typedef enum ftCommonAction
+{
+    ASID_DEADDOWN,
+    ASID_DEADLEFT,
+    ASID_DEADRIGHT,
+    ASID_DEADUP,
+    ASID_DEADUPSTAR,
+    ASID_DEADUPSTARICE,
+    ASID_DEADUPFALL,
+    ASID_DEADUPFALLHITCAMERA,
+    ASID_DEADUPFALLHITCAMERAFLAT,
+    ASID_DEADUPFALLICE,
+    ASID_DEADUPFALLHITCAMERAICE,
+    ASID_SLEEP,
+    ASID_REBIRTH,
+    ASID_REBIRTHWAIT,
+    ASID_WAIT,
+    ASID_WALKSLOW,
+    ASID_WALKMIDDLE,
+    ASID_WALKFAST,
+    ASID_TURN,
+    ASID_TURNRUN,
+    ASID_DASH,
+    ASID_RUN,
+    ASID_RUNDIRECT,
+    ASID_RUNBRAKE,
+    ASID_KNEEBEND,
+    ASID_JUMPF,
+    ASID_JUMPB,
+    ASID_JUMPAERIALF,
+    ASID_JUMPAERIALB,
+    ASID_FALL,
+    ASID_FALLF,
+    ASID_FALLB,
+    ASID_FALLAERIAL,
+    ASID_FALLAERIALF,
+    ASID_FALLAERIALB,
+    ASID_FALLSPECIAL,
+    ASID_FALLSPECIALF,
+    ASID_FALLSPECIALB,
+    ASID_DAMAGEFALL,
+    ASID_SQUAT,
+    ASID_SQUATWAIT,
+    ASID_SQUATRV,
+    ASID_LANDING,
+    ASID_LANDINGFALLSPECIAL,
+    ASID_ATTACK11,
+    ASID_ATTACK12,
+    ASID_ATTACK13,
+    ASID_ATTACK100START,
+    ASID_ATTACK100LOOP,
+    ASID_ATTACK100END,
+    ASID_ATTACKDASH,
+    ASID_ATTACKS3HI,
+    ASID_ATTACKS3HIS,
+    ASID_ATTACKS3S,
+    ASID_ATTACKS3LWS,
+    ASID_ATTACKS3LW,
+    ASID_ATTACKHI3,
+    ASID_ATTACKLW3,
+    ASID_ATTACKS4HI,
+    ASID_ATTACKS4HIS,
+    ASID_ATTACKS4S,
+    ASID_ATTACKS4LWS,
+    ASID_ATTACKS4LW,
+    ASID_ATTACKHI4,
+    ASID_ATTACKLW4,
+    ASID_ATTACKAIRN,
+    ASID_ATTACKAIRF,
+    ASID_ATTACKAIRB,
+    ASID_ATTACKAIRHI,
+    ASID_ATTACKAIRLW,
+    ASID_LANDINGAIRN,
+    ASID_LANDINGAIRF,
+    ASID_LANDINGAIRB,
+    ASID_LANDINGAIRHI,
+    ASID_LANDINGAIRLW,
+    ASID_DAMAGEHI1,
+    ASID_DAMAGEHI2,
+    ASID_DAMAGEHI3,
+    ASID_DAMAGEN1,
+    ASID_DAMAGEN2,
+    ASID_DAMAGEN3,
+    ASID_DAMAGELW1,
+    ASID_DAMAGELW2,
+    ASID_DAMAGELW3,
+    ASID_DAMAGEAIR1,
+    ASID_DAMAGEAIR2,
+    ASID_DAMAGEAIR3,
+    ASID_DAMAGEFLYHI,
+    ASID_DAMAGEFLYN,
+    ASID_DAMAGEFLYLW,
+    ASID_DAMAGEFLYTOP,
+    ASID_DAMAGEFLYROLL,
+    ASID_LIGHTGET,
+    ASID_HEAVYGET,
+    ASID_LIGHTTHROWF,
+    ASID_LIGHTTHROWB,
+    ASID_LIGHTTHROWHI,
+    ASID_LIGHTTHROWLW,
+    ASID_LIGHTTHROWDASH,
+    ASID_LIGHTTHROWDROP,
+    ASID_LIGHTTHROWAIRF,
+    ASID_LIGHTTHROWAIRB,
+    ASID_LIGHTTHROWAIRHI,
+    ASID_LIGHTTHROWAIRLW,
+    ASID_HEAVYTHROWF,
+    ASID_HEAVYTHROWB,
+    ASID_HEAVYTHROWHI,
+    ASID_HEAVYTHROWLW,
+    ASID_LIGHTTHROWF4,
+    ASID_LIGHTTHROWB4,
+    ASID_LIGHTTHROWHI4,
+    ASID_LIGHTTHROWLW4,
+    ASID_LIGHTTHROWAIRF4,
+    ASID_LIGHTTHROWAIRB4,
+    ASID_LIGHTTHROWAIRHI4,
+    ASID_LIGHTTHROWAIRLW4,
+    ASID_HEAVYTHROWF4,
+    ASID_HEAVYTHROWB4,
+    ASID_HEAVYTHROWHI4,
+    ASID_HEAVYTHROWLW4,
+    ASID_SWORDSWING1,
+    ASID_SWORDSWING3,
+    ASID_SWORDSWING4,
+    ASID_SWORDSWINGDASH,
+    ASID_BATSWING1,
+    ASID_BATSWING3,
+    ASID_BATSWING4,
+    ASID_BATSWINGDASH,
+    ASID_PARASOLSWING1,
+    ASID_PARASOLSWING3,
+    ASID_PARASOLSWING4,
+    ASID_PARASOLSWINGDASH,
+    ASID_HARISENSWING1,
+    ASID_HARISENSWING3,
+    ASID_HARISENSWING4,
+    ASID_HARISENSWINGDASH,
+    ASID_STARRODSWING1,
+    ASID_STARRODSWING3,
+    ASID_STARRODSWING4,
+    ASID_STARRODSWINGDASH,
+    ASID_LIPSTICKSWING1,
+    ASID_LIPSTICKSWING3,
+    ASID_LIPSTICKSWING4,
+    ASID_LIPSTICKSWINGDASH,
+    ASID_ITEMPARASOLOPEN,
+    ASID_ITEMPARASOLFALL,
+    ASID_ITEMPARASOLFALLSPECIAL,
+    ASID_ITEMPARASOLDAMAGEFALL,
+    ASID_LGUNSHOOT,
+    ASID_LGUNSHOOTAIR,
+    ASID_LGUNSHOOTEMPTY,
+    ASID_LGUNSHOOTAIREMPTY,
+    ASID_FIREFLOWERSHOOT,
+    ASID_FIREFLOWERSHOOTAIR,
+    ASID_ITEMSCREW,
+    ASID_ITEMSCREWAIR,
+    ASID_DAMAGESCREW,
+    ASID_DAMAGESCREWAIR,
+    ASID_ITEMSCOPESTART,
+    ASID_ITEMSCOPERAPID,
+    ASID_ITEMSCOPEFIRE,
+    ASID_ITEMSCOPEEND,
+    ASID_ITEMSCOPEAIRSTART,
+    ASID_ITEMSCOPEAIRRAPID,
+    ASID_ITEMSCOPEAIRFIRE,
+    ASID_ITEMSCOPEAIREND,
+    ASID_ITEMSCOPESTARTEMPTY,
+    ASID_ITEMSCOPERAPIDEMPTY,
+    ASID_ITEMSCOPEFIREEMPTY,
+    ASID_ITEMSCOPEENDEMPTY,
+    ASID_ITEMSCOPEAIRSTARTEMPTY,
+    ASID_ITEMSCOPEAIRRAPIDEMPTY,
+    ASID_ITEMSCOPEAIRFIREEMPTY,
+    ASID_ITEMSCOPEAIRENDEMPTY,
+    ASID_LIFTWAIT,
+    ASID_LIFTWALK1,
+    ASID_LIFTWALK2,
+    ASID_LIFTTURN,
+    ASID_GUARDON,
+    ASID_GUARD,
+    ASID_GUARDOFF,
+    ASID_GUARDSETOFF,
+    ASID_GUARDREFLECT,
+    ASID_DOWNBOUNDU,
+    ASID_DOWNWAITU,
+    ASID_DOWNDAMAGEU,
+    ASID_DOWNSTANDU,
+    ASID_DOWNATTACKU,
+    ASID_DOWNFOWARDU,
+    ASID_DOWNBACKU,
+    ASID_DOWNSPOTU,
+    ASID_DOWNBOUNDD,
+    ASID_DOWNWAITD,
+    ASID_DOWNDAMAGED,
+    ASID_DOWNSTANDD,
+    ASID_DOWNATTACKD,
+    ASID_DOWNFOWARDD,
+    ASID_DOWNBACKD,
+    ASID_DOWNSPOTD,
+    ASID_PASSIVE,
+    ASID_PASSIVESTANDF,
+    ASID_PASSIVESTANDB,
+    ASID_PASSIVEWALL,
+    ASID_PASSIVEWALLJUMP,
+    ASID_PASSIVECEIL,
+    ASID_SHIELDBREAKFLY,
+    ASID_SHIELDBREAKFALL,
+    ASID_SHIELDBREAKDOWNU,
+    ASID_SHIELDBREAKDOWND,
+    ASID_SHIELDBREAKSTANDU,
+    ASID_SHIELDBREAKSTANDD,
+    ASID_FURAFURA,
+    ASID_CATCH,
+    ASID_CATCHPULL,
+    ASID_CATCHDASH,
+    ASID_CATCHDASHPULL,
+    ASID_CATCHWAIT,
+    ASID_CATCHATTACK,
+    ASID_CATCHCUT,
+    ASID_THROWF,
+    ASID_THROWB,
+    ASID_THROWHI,
+    ASID_THROWLW,
+    ASID_CAPTUREPULLEDHI,
+    ASID_CAPTUREWAITHI,
+    ASID_CAPTUREDAMAGEHI,
+    ASID_CAPTUREPULLEDLW,
+    ASID_CAPTUREWAITLW,
+    ASID_CAPTUREDAMAGELW,
+    ASID_CAPTURECUT,
+    ASID_CAPTUREJUMP,
+    ASID_CAPTURENECK,
+    ASID_CAPTUREFOOT,
+    ASID_ESCAPEF,
+    ASID_ESCAPEB,
+    ASID_ESCAPE,
+    ASID_ESCAPEAIR,
+    ASID_REBOUNDSTOP,
+    ASID_REBOUND,
+    ASID_THROWNF,
+    ASID_THROWNB,
+    ASID_THROWNHI,
+    ASID_THROWNLW,
+    ASID_THROWNLWWOMEN,
+    ASID_PASS,
+    ASID_OTTOTTO,
+    ASID_OTTOTTOWAIT,
+    ASID_FLYREFLECTWALL,
+    ASID_FLYREFLECTCEIL,
+    ASID_STOPWALL,
+    ASID_STOPCEIL,
+    ASID_MISSFOOT,
+    ASID_CLIFFCATCH,
+    ASID_CLIFFWAIT,
+    ASID_CLIFFCLIMBSLOW,
+    ASID_CLIFFCLIMBQUICK,
+    ASID_CLIFFATTACKSLOW,
+    ASID_CLIFFATTACKQUICK,
+    ASID_CLIFFESCAPESLOW,
+    ASID_CLIFFESCAPEQUICK,
+    ASID_CLIFFJUMPSLOW1,
+    ASID_CLIFFJUMPSLOW2,
+    ASID_CLIFFJUMPQUICK1,
+    ASID_CLIFFJUMPQUICK2,
+    ASID_APPEALR,
+    ASID_APPEALL,
+    ASID_SHOULDEREDWAIT,
+    ASID_SHOULDEREDWALKSLOW,
+    ASID_SHOULDEREDWALKMIDDLE,
+    ASID_SHOULDEREDWALKFAST,
+    ASID_SHOULDEREDTURN,
+    ASID_THROWNFF,
+    ASID_THROWNFB,
+    ASID_THROWNFHI,
+    ASID_THROWNFLW,
+    ASID_CAPTURECAPTAIN,
+    ASID_CAPTUREYOSHI,
+    ASID_YOSHIEGG,
+    ASID_CAPTUREKOOPA,
+    ASID_CAPTUREDAMAGEKOOPA,
+    ASID_CAPTUREWAITKOOPA,
+    ASID_THROWNKOOPAF,
+    ASID_THROWNKOOPAB,
+    ASID_CAPTUREKOOPAAIR,
+    ASID_CAPTUREDAMAGEKOOPAAIR,
+    ASID_CAPTUREWAITKOOPAAIR,
+    ASID_THROWNKOOPAAIRF,
+    ASID_THROWNKOOPAAIRB,
+    ASID_CAPTUREKIRBY,
+    ASID_CAPTUREWAITKIRBY,
+    ASID_THROWNKIRBYSTAR,
+    ASID_THROWNCOPYSTAR,
+    ASID_THROWNKIRBY,
+    ASID_BARRELWAIT,
+    ASID_BURY,
+    ASID_BURYWAIT,
+    ASID_BURYJUMP,
+    ASID_DAMAGESONG,
+    ASID_DAMAGESONGWAIT,
+    ASID_DAMAGESONGRV,
+    ASID_DAMAGEBIND,
+    ASID_CAPTUREMEWTWO,
+    ASID_CAPTUREMEWTWOAIR,
+    ASID_THROWNMEWTWO,
+    ASID_THROWNMEWTWOAIR,
+    ASID_WARPSTARJUMP,
+    ASID_WARPSTARFALL,
+    ASID_HAMMERWAIT,
+    ASID_HAMMERWALK,
+    ASID_HAMMERTURN,
+    ASID_HAMMERKNEEBEND,
+    ASID_HAMMERFALL,
+    ASID_HAMMERJUMP,
+    ASID_HAMMERLANDING,
+    ASID_KINOKOGIANTSTART,
+    ASID_KINOKOGIANTSTARTAIR,
+    ASID_KINOKOGIANTEND,
+    ASID_KINOKOGIANTENDAIR,
+    ASID_KINOKOSMALLSTART,
+    ASID_KINOKOSMALLSTARTAIR,
+    ASID_KINOKOSMALLEND,
+    ASID_KINOKOSMALLENDAIR,
+    ASID_ENTRY,
+    ASID_ENTRYSTART,
+    ASID_ENTRYEND,
+    ASID_DAMAGEICE,
+    ASID_DAMAGEICEJUMP,
+    ASID_CAPTUREMASTERHAND,
+    ASID_CAPTUREDAMAGEMASTERHAND,
+    ASID_CAPTUREWAITMASTERHAND,
+    ASID_THROWNMASTERHAND,
+    ASID_CAPTUREKIRBYYOSHI,
+    ASID_KIRBYYOSHIEGG,
+    ASID_CAPTURELEADEAD,
+    ASID_CAPTURELIKELIKE,
+    ASID_DOWNREFLECT,
+    ASID_CAPTURECRAZYHAND,
+    ASID_CAPTUREDAMAGECRAZYHAND,
+    ASID_CAPTUREWAITCRAZYHAND,
+    ASID_THROWNCRAZYHAND,
+    ASID_BARREL
+} ftCommonAction;
 
 struct RGBA {
     u8 r;
@@ -101,7 +508,7 @@ struct RGBA {
     u8 a;
 };
 
-// Points to data in PiCo.dat
+// Points to data in PlCo.dat
 typedef struct _ftCommonData {
     /* 0x0 */ f32 x0;
     /* 0x4 */ f32 x4;
@@ -110,7 +517,15 @@ typedef struct _ftCommonData {
     /* 0x10 */ f32 x10;
     /* 0x14 */ f32 x14;
     /* 0x18 */ f32 x18;
-    u8 filler_x4[0x88 - 0x1C];
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ f32 x30;
+    u8 filler_x34[0x70 - 0x34];
+    /* 0x70 */ f32 x70_someLStickYMax;
+    u8 filler_x74[0x88 - 0x74];
     /* 0x88 */ f32 x88;
     /* 0x8C */ s32 x8C;
     u8 filler_x90[0x98 - 0x90];
@@ -118,7 +533,10 @@ typedef struct _ftCommonData {
     u8 filler_x9C[0xEC-0x9C];
     /* 0xEC */ f32 xEC;
     /* 0xF0 */ f32 xF0;
-    u8 filler_xF4[0x134-0xF4];
+    u8 filler_xF4[0x128-0xF4];
+    /* 0x128 */ f32 x128;
+    /* 0x12C */ f32 x12C;
+    /* 0x130 */ f32 x130;
     /* 0x134 */ s32 x134;
     /* 0x138 */ f32 x138;
     /* 0x13C */ f32 x13C;
@@ -159,7 +577,12 @@ typedef struct _ftCommonData {
     u8 filler_x3F0[0x418-0x3F0];
     /* 0x418 */ s32 x418;
     /* 0x41C */ s32 x41C;
-    u8 filler_x420[0x454-0x420];
+    u8 filler_x420[0x440-0x420];
+    /* 0x440 */ f32 x440;
+    /* 0x444 */ f32 x444;
+    /* 0x448 */ f32 x448;
+    /* 0x44C */ f32 x44C;
+    /* 0x450 */ f32 x450;
     /* 0x454 */ f32 x454;
     /* 0x458 */ f32 x458;
     /* 0x45C */ f32 x45C;
@@ -168,9 +591,14 @@ typedef struct _ftCommonData {
     /* 0x480 */ f32 x480;
     u8 filler_x484[0x498-0x484];
     /* 0x498 */ u32 x498_ledgeCooldownTime;
-    u8 filler_x49C[0x4CC-0x49C];
-    /* 0x4CC */ s32 x4CC;
-    u8 filler_x4D0[0x5C0-0x4D0];
+    u8 filler_x49C[0x4C4-0x49C];
+    s32 x4C4;
+    s32 x4C8;
+    s32 x4CC;
+    f32 x4D0;
+    f32 x4D4;
+    u32 x4D8;
+    u8 filler_x4D0[0x5C0-0x4DC];
     /* 0x5F0 */ f32 x5C0;
     u8 filler_x5C4[0x5F0-0x5C4];
     /* 0x5F0 */  u32 x5F0;
@@ -186,7 +614,8 @@ typedef struct _ftCommonData {
     /* 0x708 */ f32 x708;
     /* 0x70C */ f32 x70C;
     /* 0x710 */ f32 x710;
-    u8 filler_x714[0x768-0x714];
+    /* 0x714 */ f32 x714;
+    u8 filler_x718[0x768-0x718];
     /* 0x768 */ f32 x768;
     /* 0x76C */ f32 x76C;
     /* 0x770 */ f32 x770;
@@ -208,7 +637,6 @@ typedef struct _ftCommonData {
     /* 0x7D4 */ s32 x7D4;
     /* 0x7D8 */ s32 x7D8;
     /* 0x7DC */ s32 x7DC;
-
     /* 0x7E0 */ s32 x7E0;
     /* 0x7E4 */ f32 x7E4_scaleZ;
     u8 x7E8_filler[0x814 - 0x7E8];
@@ -252,21 +680,6 @@ typedef struct _ftData
     s32 filler_x50[2];
     void* x58;
 } ftData;
-
-typedef struct _Vec2 { float x, y; } Vec2;
-
-typedef struct _UnkFlagStruct {
-    struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } bits;
-} UnkFlagStruct;
 
 typedef struct _ThrowFlags
 {
@@ -318,7 +731,7 @@ typedef struct attr
     /* 0x180 */ f32 x180_AerialFriction;
     /* 0x184 */ f32 x184_FastfallVelocity;
     /* 0x188 */ f32 x188_HorizontalAirMobilityConstant;
-    /* 0x18C */ s32 x18C_Jab_2InputWindow;
+    /* 0x18C */ f32 x18C_Jab_2InputWindow;
     /* 0x190 */ s32 x190_Jab_3InputWindow;
     /* 0x194 */ s32 x194_FramesToChangeDirectionOnStandingTurn;
     /* 0x198 */ f32 x198_Weight;
@@ -518,7 +931,7 @@ typedef struct ftHurt
 
 typedef struct _SmashAttr {
     s32 x2114_state;                        // 0x2114 0 = none, 1 = pre-charge, 2 = charging, 3 = release
-    f32 x2118_frames;                       // 0x2118 number of frames fighter has charged for
+    f32 x2118_frames;                       // 0x2118 number of frames fp has charged for
     f32 x211C_holdFrame;                    // 0x211c frame that charge begins/ends
     f32 x2120_damageMul;                    // 0x2120 damage multiplier
     f32 x2124_frameSpeedMul;                // 0x2124 speed multiplier?
@@ -597,25 +1010,25 @@ struct S_TEMP4 {
 };
 
 // --------------------------------------------------------------------------------
-// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fighter
+// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fp
 // header includes or something.
 // --------------------------------------------------------------------------------
 struct SpecialAttrs_Mario {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ HSD_GObj* x223C;
+    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo //
+    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo //
+    /* 0x2234 */ BOOL x2234_tornadoCharge;
+    /* 0x2238 */ BOOL x2238_isCapeBoost;
+    /* 0x223C */ HSD_GObj* x223C_capeGObj;
     /* 0x2240 */ u32 x2240;
 };
 
 struct SpecialAttrs_Fox {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ HSD_GObj* x222C_blasterGObj;
 };
 
 struct SpecialAttrs_Captain {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
+    /* 0x222C */ BOOL x222C_isSpecialSStartGFX;
+    /* 0x2230 */ BOOL x2230_isSpecialSGFX;
 };
 
 struct SpecialAttrs_DK {
@@ -670,13 +1083,13 @@ struct SpecialAttrs_Seak {
 };
 
 struct SpecialAttrs_Ness {
-    /* 0x222C */ void* x222C;
-    /* 0x2230 */ Vec3 x2230;
+    /* 0x222C */ HSD_GObj* x222C_yoyoGObj;
+    /* 0x2230 */ Vec3 x2230_yoyoHitboxPos;
     /* 0x223C */ f32 x223C;
-    /* 0x2240 */ void* x2240;
-    /* 0x2244 */ void* x2244;
-    /* 0x2248 */ void* x2248;
-    /* 0x224C */ u32 x224C;
+    /* 0x2240 */ HSD_GObj* x2240_flashGObj;
+    /* 0x2244 */ HSD_GObj* x2244_pkThunderGObj;
+    /* 0x2248 */ HSD_GObj* x2248_baseballBatGObj;
+    /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX? //
 };
 
 struct SpecialAttrs_Peach {
@@ -714,7 +1127,7 @@ struct SpecialAttrs_Pikachu {
 
 struct SpecialAttrs_Samus {
     /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
+    /* 0x2230 */ s32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
@@ -747,15 +1160,15 @@ struct SpecialAttrs_Purin {
 };
 
 struct SpecialAttrs_Mewtwo {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ HSD_GObj* x222C_disableGObj;
     /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
+    /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
+    /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
+    /* 0x223C */ BOOL x223C_isConfusionBoost;
 };
 
 struct SpecialAttrs_Luigi {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ BOOL x222C_cycloneCharge;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
 };
@@ -782,24 +1195,24 @@ struct SpecialAttrs_Pichu {
     char filler0[0x100];
 };
 
-struct SpecialAttrs_Gaw {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
+struct SpecialAttrs_GameWatch {
+    /* 0x222C */ s32 x222C_judgeVar1;
+    /* 0x2230 */ s32 x2230_judgeVar2;
     /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ u32 x2250;
-    /* 0x2254 */ u32 x2254;
-    /* 0x2258 */ u32 x2258;
-    /* 0x225C */ u32 x225C;
-    /* 0x2260 */ u32 x2260;
-    /* 0x2264 */ u32 x2264;
-    /* 0x2268 */ u32 x2268;
-    /* 0x226C */ u32 x226C;
+    /* 0x2238 */ s32 x2238_panicCharge;
+    /* 0x223C */ s32 x223C_panicDamage;
+    /* 0x2240 */ s32 x2240_chefVar1;
+    /* 0x2244 */ s32 x2244_chefVar2;
+    /* 0x2248 */ HSD_GObj* x2248_manholeGObj;
+    /* 0x224C */ HSD_GObj* x224C_greenhouseGObj;
+    /* 0x2250 */ HSD_GObj* x2250_manholeGObj2;
+    /* 0x2254 */ HSD_GObj* x2254_fireGObj;
+    /* 0x2258 */ HSD_GObj* x2258_parachuteGObj;
+    /* 0x225C */ HSD_GObj* x225C_turtleGObj;
+    /* 0x2260 */ HSD_GObj* x2260_sparkyGObj;
+    /* 0x2264 */ HSD_GObj* x2264_judgementGObj;
+    /* 0x2268 */ HSD_GObj* x2268_panicGObj;
+    /* 0x226C */ HSD_GObj* x226C_rescueGObj;
 };
 
 struct SpecialAttrs_Masterhand {
@@ -928,7 +1341,10 @@ typedef struct _Fighter {
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
     u8 filler_x5EC[0x5F0 - 0x5EC];
     /* 0x5F0 */ HSD_DObj** x5F0;
-    /* 0x5F4 */ s32 x5F4;
+    /* 0x5F4 */ s8 x5F4;
+    /* 0x5F5 */ s8 x5F5;
+    /* 0x5F6 */ s8 x5F6;
+    /* 0x5F7 */ s8 x5F7;
     /* 0x5F8 */ s8 x5F8;
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
@@ -969,7 +1385,7 @@ typedef struct _Fighter {
 
         /* 0x658 */ f32 x658;
 
-        /* 0x65C */ s32 x65C;
+        /* 0x65C */ u32 x65C_heldInputs;
         /* 0x660 */ s32 x660;
         /* 0x664 */ s32 x664;
         /* 0x668 */ s32 x668;
@@ -1020,12 +1436,12 @@ typedef struct _Fighter {
     /* 0x6E4 */  Vec3 x6E4;
     /* 0x6F0 */ CollData x6F0_collData;
     /* 0x890 */ CameraBox* x890_cameraBox;
-    /* 0x894 */ f32 x894;
-    /* 0x898 */ f32 x898;
-    /* 0x89C */ f32 x89C;
-    /* 0x8A0 */ f32 x8A0;
-    /* 0x8A4 */ f32 x8A4;
-    /* 0x8A8 */ f32 x8A8;
+    /* 0x894 */ f32 x894_currentAnimFrame;
+    /* 0x898 */ f32 x898_unk;
+    /* 0x89C */ f32 x89C_frameSpeedMul;
+    /* 0x8A0 */ f32 x8A0_unk;
+    /* 0x8A4 */ f32 x8A4_animBlendFrames;
+    /* 0x8A8 */ f32 x8A8_unk;
     /* 0x8AC */ HSD_JObj* x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
     /* 0x914 */ Hitbox x914[4];
@@ -1144,13 +1560,39 @@ typedef struct _Fighter {
     /* 0x19B4 */ f32 x19B4_shieldUnk;
     /* 0x19B8 */ f32 x19B8_shieldUnk;
     /* 0x19BC */ s32 x19BC_shieldDamageTaken3;
-    u8 filler_x19C0[0x1A2C - 0x19C0];
-    /* 0x1A2C */ f32 x1A2C_reflectHitDirection;
-    s32 filler_x1A30[3];
-    /* 0x1A3C */ s32 x1A3C;
-    /* 0x1A40 */ f32 x1A40;
-    /* 0x1A44 */ s32 x1A44;
-    /* 0x1A48 */ s32 x1A48;
+    struct {
+        HSD_JObj* x19C0_boneAttach;
+        u8 x19C4_updatePos : 1;
+        Vec3 x19C8_pos;
+        Vec3 x19D4_offset;
+        f32 x19E0_size;
+    } ShieldHit;
+    struct {
+        HSD_JObj* x19E4_boneAttach;
+        u8 x19E8_updatePos : 1; // Follows attach bone position if toggled OFF //
+        Vec3 x19EC_pos;
+        Vec3 x19F8_offset;
+        f32 x1A04_size;
+    } ReflectHit;
+    struct {
+        HSD_JObj* x1A08_boneAttach;
+        u8 x1A0C_updatePos : 1; // Follows attach bone position if toggled OFF //
+        Vec3 x1A10_pos;
+        Vec3 x1A1C_offset;
+        f32 x1A28_size;
+    } AbsorbHit;
+    struct {
+        f32 x1A2C_reflectHitDirection;
+        s32 x1A30_maxDamage;
+        f32 x1A34_damageMul;
+        f32 x1A38_speedMul;
+        s32 x1A3C_damageOver; // % damage over the maximum reflectable damage threshold //
+    } ReflectAttr;
+    struct {
+        f32 x1A40_absorbHitDirection;
+        s32 x1A44_damageTaken; // unconfirmred? //
+        s32 x1A48_hitsTaken; // unconfirmed? //
+    } AbsorbAttr;
     /* 0x1A4C */ f32 x1A4C;
     /* 0x1A50 */ s8 x1A50;
     /* 0x1A51 */ s8 x1A51;
@@ -1189,7 +1631,8 @@ typedef struct _Fighter {
     /* 0x2040 */ void* x2040;
     u8 filler_x203C[0x2064 - 0x2044];
     /* 0x2064 */ s32 x2064_ledgeCooldown;
-    u8 filler_x2068[0x2070 - 0x2068];
+    /* 0x2068 */s32 x2068_attackID;
+    u8 filler_x206C[0x2070 - 0x206C];
     /* 0x2070 */ union {
                     struct {
                         s8 x2070;
@@ -1212,16 +1655,16 @@ typedef struct _Fighter {
                 };
     u8 filler_x2074[0x208C - 0x2074];
     /* 0x208C */ s32 x208C;
-    /* 0x2090 */ s16 x2090;
-    /* 0x2092 */ s16 x2092;
-    /* 0x2094 */ s32 x2094;
+    /* 0x2090 */ u16 x2090;
+    /* 0x2092 */ u16 x2092;
+    /* 0x2094 */ HSD_GObj* x2094; // GObj pointer of combo victim? //
     /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
     /* 0x20A0 */ struct _HSD_JObj* x20A0_accessory;
     /* 0x20A4 */ s32 x20A4;
     /* 0x20A8 */ s32 x20A8;
-    /* 0x20AC */ u32 x20AC;
+    /* 0x20AC */ HSD_GObj* x20AC;
     u8 filler_x20B0[0x2100 - 0x20B0];
     /* 0x2100 */ s8 x2100;
     /* 0x2101 */ u8 x2101_bits_0to6 : 7;
@@ -1254,33 +1697,33 @@ typedef struct _Fighter {
     /* 0x2188 */ S32Pair x2188;
     // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
     struct cb {
-        void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
-        void (*x2194_callback)(HSD_GObj *fighter); // used
+        void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fp); // used
+        void (*x2194_callback)(HSD_GObj *fp); // used
         void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj*, HSD_GObj*); // used
-        void (*x219C_callback_IASA)(HSD_GObj *fighter); // used
-        void (*x21A0_callback_Anim)(HSD_GObj *fighter);
-        void (*x21A4_callback_Phys)(HSD_GObj *fighter); // xused
-        void (*x21A8_callback_Coll)(HSD_GObj *fighter);
-        void (*x21AC_callback_Cam)(HSD_GObj *fighter);
-        void (*x21B0_callback_Accessory1)(HSD_GObj *fighter);
-        void (*x21B4_callback_Accessory2)(HSD_GObj *fighter); // used
-        void (*x21B8_callback_Accessory3)(HSD_GObj *fighter); // used
-        void (*x21BC_callback_Accessory4)(HSD_GObj *fighter);
-        void (*x21C0_callback_OnGiveDamage)(HSD_GObj *fighter);
-        void (*x21C4_callback_OnShieldHit)(HSD_GObj *fighter);
-        void (*x21C8_callback_OnReflectHit)(HSD_GObj *fighter);
-        void (*x21CC_callback)(HSD_GObj *fighter);
-        void (*x21D0_callback_EveryHitlag)(HSD_GObj *fighter); // xused
-        void (*x21D4_callback_EnterHitlag)(HSD_GObj *fighter);
-        void (*x21D8_callback_ExitHitlag)(HSD_GObj *fighter);
-        void (*x21DC_callback_OnTakeDamage)(HSD_GObj *fighter);
-        void (*x21E0_callback_OnDeath)(HSD_GObj *fighter); // used
-        void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
-        void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
-        void (*x21EC_callback)(HSD_GObj *fighter);
-        void (*x21F0_callback)(HSD_GObj *fighter);
-        void (*x21F4_callback)(HSD_GObj *fighter);
-        void (*x21F8_callback)(HSD_GObj *fighter);
+        void (*x219C_callback_IASA)(HSD_GObj *fp); // used
+        void (*x21A0_callback_Anim)(HSD_GObj *fp);
+        void (*x21A4_callback_Phys)(HSD_GObj *fp); // xused
+        void (*x21A8_callback_Coll)(HSD_GObj *fp);
+        void (*x21AC_callback_Cam)(HSD_GObj *fp);
+        void (*x21B0_callback_Accessory1)(HSD_GObj *fp);
+        void (*x21B4_callback_Accessory2)(HSD_GObj *fp); // used
+        void (*x21B8_callback_Accessory3)(HSD_GObj *fp); // used
+        void (*x21BC_callback_Accessory4)(HSD_GObj *fp);
+        void (*x21C0_callback_OnGiveDamage)(HSD_GObj *fp);
+        void (*x21C4_callback_OnShieldHit)(HSD_GObj *fp);
+        void (*x21C8_callback_OnReflectHit)(HSD_GObj *fp);
+        void (*x21CC_callback)(HSD_GObj *fp);
+        void (*x21D0_callback_EveryHitlag)(HSD_GObj *fp); // xused
+        void (*x21D4_callback_EnterHitlag)(HSD_GObj *fp);
+        void (*x21D8_callback_ExitHitlag)(HSD_GObj *fp);
+        void (*x21DC_callback_OnTakeDamage)(HSD_GObj *fp);
+        void (*x21E0_callback_OnDeath)(HSD_GObj *fp); // used
+        void (*x21E4_callback_OnDeath2)(HSD_GObj *fp); // used. internally Dead_Proc as evidenced by 800f5430
+        void (*x21E8_callback_OnDeath3)(HSD_GObj *fp); // used
+        void (*x21EC_callback)(HSD_GObj *fp);
+        void (*x21F0_callback)(HSD_GObj *fp);
+        void (*x21F4_callback)(HSD_GObj *fp);
+        void (*x21F8_callback)(HSD_GObj *fp);
     } cb;
     /* 0x21FC */ u8 x21FC;
     u8 filler_x21FC[0x2200 - 0x21FD];
@@ -1380,7 +1823,7 @@ typedef struct _Fighter {
         // Mario SpecialAttrs struct is used for DrMario
         // Fox SpecialAttrs struct is used for Falco
         struct SpecialAttrs_Pichu pichu;
-        struct SpecialAttrs_Gaw gaw;
+        struct SpecialAttrs_GameWatch gaw;
         // Cpt Falcon SpecialAttrs struct is used for Ganondorf
         // Mars (Marth) struct is used for Emblem (Roy)
         struct SpecialAttrs_Masterhand masterhand;
@@ -1395,30 +1838,69 @@ typedef struct _Fighter {
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
     union {
+        union {
+            ftCommonStateVars commonVars[0]; // 0x2340
+        };
+        union {
+            ftMarioStateVars marioVars[0]; // 0x2340
+        };
+        union {
+            ftCaptainStateVars captainVars[0]; // 0x2340
+        };
+        union {
+            ftFoxStateVars foxVars[0]; // 0x2340
+        };
+        union {
+            ftNessStateVars nessVars[0]; // 0x2340
+        };
+        union {
+            ftLuigiStateVars luigiVars[0]; // 0x2340
+        };
+        union {
+            ftMewtwoStateVars mewtwoVars[0]; // 0x2340
+        };
+        union {
+            ftGameWatchStateVars gameWatchVars[0]; // 0x2340
+        };
     /* 0x2340 */ s32 x2340_stateVar1;
     /* 0x2340 */ u32 x2340_stateVar1_u32;
     /* 0x2340 */ f32 x2340_f32;
     };
     union {
-    /* 0x2344 */ u32 x2344_stateVar2;
-    /* 0x2344 */ s32 x2344_stateVar2_s32;
-    /* 0x2344 */ void (*x2344_callback)(HSD_GObj*);
-    /* 0x2344 */ f32 x2344_f32;
+        u32 x2344_stateVar2;
+        s32 x2344_stateVar2_s32;
+        void (*x2344_callback)(HSD_GObj*);
+        f32 x2344_f32;
+        struct
+        {
+            union
+            {
+                Vec3 x2344_foxSpecialS[0];
+            };
+        };
     };
     union {
         /* 0x2348 */ u32 x2348_stateVar3;
         /* 0x2348 */ s32 x2348_stateVar3_s32;
+        /* 0x2348 */ f32 x2348_stateVar3_f32;
     };
     union {
         struct {
-            /* 0x234C */ u32 x234C_stateVar4;
+            union {
+                /* 0x234C */ u32 x234C_stateVar4;
+                /* 0x234C */ s32 x234C_stateVar4_s32;
+                /* 0x234C */ f32 x234C_stateVar4_f32;
+            };
             union {
                 /* 0x2350 */ u32 x2350_stateVar5;
                 /* 0x2350 */ s32 x2350_stateVar5_s32;
                 /* 0x2350 */ f32 x2350_stateVar5_f32;
-
             };
-            /* 0x2354 */ f32 x2354_stateVar6;
+            union {
+                /* 0x2354 */ u32 x2354_stateVar6;
+                /* 0x2354 */ s32 x2354_stateVar6_s32;
+                /* 0x2354 */ f32 x2354_stateVar6_f32;
+            };
         };
         /* 0x234C */ Vec3 x234C_pos;
     };
@@ -1460,6 +1942,7 @@ typedef struct _Fighter {
     union {
     /* 0x2374 */ u32 x2374;
     /* 0x2374 */ f32 x2374_f32;
+    /* 0x2374 */ f32 x2374_foxArray[0];
     };
     union {
     /* 0x2378 */ u32 x2378;
@@ -1478,12 +1961,13 @@ typedef struct _Fighter {
     };
     union {
         /* 0x2384 */ u32 x2384_u32;
-        /* 0x2384 */ f32 x2384;
+        /* 0x2384 */ s32 x2384_s32;
         /* 0x2384 */ f32 x2384_f32;
+        /* 0x2384 */ HSD_GObj* x2384_GObj;
     };
     union {
         /* 0x2388 */ u32 x2388_u32;
-        /* 0x2388 */ f32 x2388;
+        /* 0x2388 */ s32 x2388_s32;
         /* 0x2388 */ f32 x2388_f32;
     };
     union {
@@ -1500,8 +1984,66 @@ typedef struct _Fighter {
     /* 0x23B8 */ s32 x23B8;
 } Fighter;
 
-inline Fighter* getFighter(HSD_GObj* fighterObj) {
+inline Fighter* getFighter(HSD_GObj* fighterObj) 
+{
     return fighterObj->user_data;
+}
+
+inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
+{
+    Fighter* fighter_data = fighter_gobj->user_data;
+    return fighter_data;
+}
+
+inline void* getFtSpecialAttrs(Fighter* fighter_data)
+{
+    void* fighter_attr = fighter_data->x2D4_specialAttributes;
+    return fighter_attr;
+}
+
+inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
+{
+    return fp->x2D4_specialAttributes;
+}
+
+inline s32 ftGetKind(Fighter* fp)
+{
+    return fp->x4_fighterKind;
+}
+
+inline s32 ftGetAction(Fighter* fp)
+{
+    return fp->x10_action_state_index;
+}
+
+inline void* getFtSpecialAttrs2CC(Fighter* fighter_data)
+{
+    void* fighter_attr = fighter_data->x2CC;
+    return fighter_attr;
+}
+
+inline attr* getFtAttrs(Fighter* fp)
+{
+    return &fp->x110_attr;
+}
+
+inline CollData* getFtColl(Fighter* fp)
+{
+    return &fp->x6F0_collData;
+}
+
+inline BOOL ftGetGroundAir(Fighter* fp)
+{
+    return fp->xE0_ground_or_air;
+}
+
+inline f32 stickGetDir(f32 x1, f32 x2)
+{
+    if (x1 < x2)
+    {
+        return -x1;
+    }
+    else return x1;
 }
 
 // functions in fighter.c
@@ -1512,13 +2054,13 @@ void Fighter_UpdateModelScale(HSD_GObj* fighterObj);
 void Fighter_UnkInitReset_80067C98(Fighter*);
 void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighterObj);
 void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighterObj);
-void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fighter);
+void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
 void Fighter_ResetInputData_80068854(HSD_GObj* fighterObj);
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata);
 u32 Fighter_NewSpawn_80068E40();
 void Fighter_80068E64(HSD_GObj* fighterObj);
 HSD_GObj* Fighter_80068E98(struct S_TEMP1* input);
-void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA);
+void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 flags, HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
 void Fighter_8006A1BC(HSD_GObj* fighterObj);
 void Fighter_8006A360(HSD_GObj* fighterObj);
 void Fighter_8006ABA0(HSD_GObj* fighterObj);
@@ -1532,10 +2074,10 @@ void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighterObj);
 void Fighter_8006C80C(HSD_GObj* fighterObj);
 void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighterObj);
 void Fighter_8006CB94(HSD_GObj* fighterObj);
-void Fighter_UnkTakeDamage_8006CC30(Fighter* fighter, f32 damage_amount);
+void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 damage_amount);
 void Fighter_TakeDamage_8006CC7C(Fighter*, f32);
-void Fighter_8006CDA4(Fighter* fighter, s32 arg1, s32 arg2, s32 arg3);
-void Fighter_8006CF5C(Fighter* fighter, s32 arg1);
+void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3);
+void Fighter_8006CF5C(Fighter* fp, s32 arg1);
 void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighterObj);
 void Fighter_8006CFE0(HSD_GObj* fighterObj);
 void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighterObj);
@@ -1544,15 +2086,121 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj);
 void Fighter_8006D9AC(HSD_GObj* fighterObj);
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
 void Fighter_8006DA4C(HSD_GObj* fighterObj);
-void Fighter_Unload_8006DABC(Fighter* fighter);
+void Fighter_Unload_8006DABC(Fighter* fp);
 
-#define PUSH_ATTRS(ft, attributeName)                                           \
+
+///// Shared Fighter Code
+
+#define PUSH_ATTRS(fp, attributeName)                                           \
     do {                                                                    \
-        void* backup = (ft)->x2D8_specialAttributes2;                      \
-        attributeName *src = (attributeName*)(ft)->x10C_ftData->ext_attr;  \
-        void* *attr = &(ft)->x2D4_specialAttributes;                       \
-        *(attributeName *)(ft)->x2D8_specialAttributes2 = *src;            \
+        void* backup = (fp)->x2D8_specialAttributes2;                      \
+        attributeName *src = (attributeName*)(fp)->x10C_ftData->ext_attr;  \
+        void* *attr = &(fp)->x2D4_specialAttributes;                       \
+        *(attributeName *)(fp)->x2D8_specialAttributes2 = *src;            \
         *attr = backup;                                                      \
     } while(0)
+
+#define COPY_ATTRS(gobj, attributeName)                                          \
+    Fighter* fp = gobj->user_data;                                               \
+    attributeName* sA2 = (attributeName*)fp->x2D4_specialAttributes;             \
+    attributeName* ext_attr = (attributeName*)fp->x10C_ftData->ext_attr;         \
+    *sA2 = *ext_attr;                                                            \
+
+#define SCALE_HEIGHT_ATTRS(num_attrs)                     \
+    {                                                     \
+        int i;                                            \
+        for (i = 0; i < num_attrs; i++) {                 \
+            sA2->height_attributes[i] *= fp->x34_scale.y; \
+        }                                                 \
+    }  \
+
+
+// Works but unused decided to go with inline instead 
+#define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                             \
+    void FTNAME##_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {                 \
+        Fighter *fp = getFighter(fighterObj);                                \
+        if (!func_8026B2B4(fp->x1974_heldItem)) {                            \
+            switch (func_8026B320(fp->x1974_heldItem)) {                     \
+                case 1:                                                           \
+                    func_80070FB4(fighterObj, param1, 1);                         \
+                    break;                                                        \
+                case 2:                                                           \
+                    func_80070FB4(fighterObj, param1, 0);                         \
+                    break;                                                        \
+                case 3:                                                           \
+                    func_80070FB4(fighterObj, param1, 2);                         \
+                    break;                                                        \
+                case 4:                                                           \
+                    func_80070FB4(fighterObj, param1, 3);                         \
+                    break;                                                        \
+            }                                                                     \
+            if (bool) {                                                           \
+                func_80070C48(fighterObj, param2);                                \
+            }                                                                     \
+        }                                                                         \
+    }                                                                             \
+
+/// used for all fighters except Kirby and Purin
+inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag, BOOL bool2, BOOL bool3) {
+    Fighter *fp = getFighter(fighterObj);            
+    if (!func_8026B2B4(fp->x1974_heldItem)) {        
+        switch (func_8026B320(fp->x1974_heldItem)) { 
+            case 1:                                       
+                func_80070FB4(fighterObj, bool2, 1);     
+                break;                                    
+            case 2:                                       
+                func_80070FB4(fighterObj, bool2, 0);     
+                break;                                    
+            case 3:                                       
+                func_80070FB4(fighterObj, bool2, 2);     
+                break;                                    
+            case 4:                                       
+                func_80070FB4(fighterObj, bool2, 3);     
+                break;                                    
+        }                                                 
+        if (catchItemFlag) {                                       
+            func_80070C48(fighterObj, bool3);            
+        }                                                 
+    }                                                     
+}
+
+inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
+{
+    Fighter* fp = getFighter(gobj);
+    if (!func_8026B2B4(fp->x1974_heldItem)) {
+        func_80070CC4(gobj, bool);
+    }
+}
+
+inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
+{
+    Fighter* fp = getFighter(gobj);
+    if (!func_8026B2B4(fp->x1974_heldItem)) {
+        func_80070C48(gobj, bool);
+    }
+}
+
+inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BOOL bool3)
+{
+    func_80070FB4(gobj, bool2, -1);
+    if (dropItemFlag) {
+        func_80070CC4(gobj, bool3);
+    }
+}
+
+inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1) {
+    func_800704F0(gobj, arg1, 3.0f);
+    func_800704F0(gobj, 0, 3.0f);
+}
+
+inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1) {
+    func_800704F0(gobj, arg1, 0.0f);
+    func_800704F0(gobj, 0, 0.0f);
+}
+
+inline void Fighter_UnsetCmdVar0(HSD_GObj* fighterObj) {
+    Fighter* fp = getFighter(fighterObj);
+    fp->x2200_ftcmd_var0 = 0;
+}
 
 #endif

@@ -1,6 +1,5 @@
-#include "sysdolphin/baselib/mobj.h"
-
-#include "sysdolphin/baselib/memory.h"
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/memory.h>
 
 extern void MObjInfoInit(void);
 
@@ -84,34 +83,34 @@ static void MObjUpdateFunc(void* obj, u32 type, FObjData* val)
 
     switch (type) {
     case HSD_A_M_AMBIENT_R:
-        mobj->mat->ambient.r = (u8)(255.0 * val->fv);
+        mobj->mat->ambient.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_AMBIENT_G:
-        mobj->mat->ambient.g = (u8)(255.0 * val->fv);
+        mobj->mat->ambient.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_AMBIENT_B:
-        mobj->mat->ambient.b = (u8)(255.0 * val->fv);
+        mobj->mat->ambient.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_DIFFUSE_R:
-        mobj->mat->diffuse.r = (u8)(255.0 * val->fv);
+        mobj->mat->diffuse.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_DIFFUSE_G:
-        mobj->mat->diffuse.g = (u8)(255.0 * val->fv);
+        mobj->mat->diffuse.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_DIFFUSE_B:
-        mobj->mat->diffuse.b = (u8)(255.0 * val->fv);
+        mobj->mat->diffuse.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_ALPHA:
         mobj->mat->alpha = lbl_804DE430 - val->fv;
         break;
     case HSD_A_M_SPECULAR_R:
-        mobj->mat->specular.r = (u8)(255.0 * val->fv);
+        mobj->mat->specular.u8.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_SPECULAR_G:
-        mobj->mat->specular.g = (u8)(255.0 * val->fv);
+        mobj->mat->specular.u8.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_SPECULAR_B:
-        mobj->mat->specular.b = (u8)(255.0 * val->fv);
+        mobj->mat->specular.u8.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_M_PE_REF0:
         if (mobj->pe) {

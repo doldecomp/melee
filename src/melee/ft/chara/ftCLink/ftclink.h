@@ -23,21 +23,21 @@ typedef struct _CLinkAttributes {
     f32 xD8;
 } CLinkAttributes;
 
-void func_80148F38(HSD_GObj*, s32);
-void func_80149018(HSD_GObj*, s32);
+void ftCLink_OnItemPickup(HSD_GObj*, BOOL);
+void ftCLink_OnItemDrop(HSD_GObj*, BOOL);
 
 inline void checkFighter2244(HSD_GObj* gobj)
 {
-    Fighter* ft;
+    Fighter* fp;
 
     if (gobj == NULL) {
         return;
     }
 
-    ft = gobj->user_data;
-    if (ft != NULL && ft->sa.clink.x2244 != 0) {
-        func_802C8C34(ft->sa.clink.x2244);
-        ft->sa.clink.x2244 = 0;
+    fp = gobj->user_data;
+    if (fp != NULL && fp->sa.clink.x2244 != 0) {
+        func_802C8C34(fp->sa.clink.x2244);
+        fp->sa.clink.x2244 = 0;
     }
 
     if (gobj == NULL) {

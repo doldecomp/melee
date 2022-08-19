@@ -5,11 +5,10 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
-#include "melee/ft/fighter.h"
+#include <melee/ft/fighter.h>
 
-BOOL func_80081298(HSD_GObj* gobj);
 void func_80081370(HSD_GObj* gobj);
 void func_80081504(HSD_GObj* gobj);
 void func_80081540();

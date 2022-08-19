@@ -46,8 +46,8 @@ lbl_800E49FC:
 /* 800E4A70 000E1650  7C 08 03 A6 */	mtlr r0
 /* 800E4A74 000E1654  4E 80 00 20 */	blr 
 
-.global func_800E4A78
-func_800E4A78:
+.global ftFalcon_SpecialHi_StartAction
+ftFalcon_SpecialHi_StartAction:
 /* 800E4A78 000E1658  7C 08 02 A6 */	mflr r0
 /* 800E4A7C 000E165C  38 80 01 61 */	li r4, 0x161
 /* 800E4A80 000E1660  90 01 00 04 */	stw r0, 4(r1)
@@ -93,7 +93,7 @@ func_800E4B00:
 /* 800E4B14 000E16F4  7C 7E 1B 78 */	mr r30, r3
 /* 800E4B18 000E16F8  80 83 00 2C */	lwz r4, 0x2c(r3)
 /* 800E4B1C 000E16FC  83 E4 02 D4 */	lwz r31, 0x2d4(r4)
-/* 800E4B20 000E1700  4B F8 A7 19 */	bl func_8006F238
+/* 800E4B20 000E1700  4B F8 A7 19 */	bl ftAnim_IsFramesRemaining
 /* 800E4B24 000E1704  2C 03 00 00 */	cmpwi r3, 0
 /* 800E4B28 000E1708  40 82 00 20 */	bne lbl_800E4B48
 /* 800E4B2C 000E170C  C0 3F 00 48 */	lfs f1, 0x48(r31)
@@ -221,8 +221,8 @@ lbl_800E4C80:
 /* 800E4CEC 000E18CC  7C 08 03 A6 */	mtlr r0
 /* 800E4CF0 000E18D0  4E 80 00 20 */	blr 
 
-.global func_800E4CF4
-func_800E4CF4:
+.global ftCFalcon_SpecialAirHi_StartAction
+ftCFalcon_SpecialAirHi_StartAction:
 /* 800E4CF4 000E18D4  7C 08 02 A6 */	mflr r0
 /* 800E4CF8 000E18D8  38 80 01 62 */	li r4, 0x162
 /* 800E4CFC 000E18DC  90 01 00 04 */	stw r0, 4(r1)
@@ -270,7 +270,7 @@ func_800E4D7C:
 /* 800E4D98 000E1978  7C 7D 1B 78 */	mr r29, r3
 /* 800E4D9C 000E197C  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 800E4DA0 000E1980  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
-/* 800E4DA4 000E1984  4B F9 D5 01 */	bl func_800822A4
+/* 800E4DA4 000E1984  4B F9 D5 01 */	bl EnvColl_CheckGroundAndLedge
 /* 800E4DA8 000E1988  2C 03 00 00 */	cmpwi r3, 0
 /* 800E4DAC 000E198C  41 82 00 30 */	beq lbl_800E4DDC
 /* 800E4DB0 000E1990  88 1F 23 42 */	lbz r0, 0x2342(r31)
@@ -320,7 +320,7 @@ func_800E4E1C:
 /* 800E4E48 000E1A28  83 FE 02 D4 */	lwz r31, 0x2d4(r30)
 /* 800E4E4C 000E1A2C  38 7D 00 00 */	addi r3, r29, 0
 /* 800E4E50 000E1A30  38 80 00 00 */	li r4, 0
-/* 800E4E54 000E1A34  4B F9 D4 51 */	bl func_800822A4
+/* 800E4E54 000E1A34  4B F9 D4 51 */	bl EnvColl_CheckGroundAndLedge
 /* 800E4E58 000E1A38  2C 03 00 00 */	cmpwi r3, 0
 /* 800E4E5C 000E1A3C  41 82 00 30 */	beq lbl_800E4E8C
 /* 800E4E60 000E1A40  88 1E 23 42 */	lbz r0, 0x2342(r30)
@@ -372,7 +372,7 @@ func_800E4EE8:
 /* 800E4EFC 000E1ADC  7C 7E 1B 78 */	mr r30, r3
 /* 800E4F00 000E1AE0  80 83 00 2C */	lwz r4, 0x2c(r3)
 /* 800E4F04 000E1AE4  83 E4 02 D4 */	lwz r31, 0x2d4(r4)
-/* 800E4F08 000E1AE8  4B F8 A3 31 */	bl func_8006F238
+/* 800E4F08 000E1AE8  4B F8 A3 31 */	bl ftAnim_IsFramesRemaining
 /* 800E4F0C 000E1AEC  2C 03 00 00 */	cmpwi r3, 0
 /* 800E4F10 000E1AF0  40 82 00 20 */	bne lbl_800E4F30
 /* 800E4F14 000E1AF4  C0 3F 00 48 */	lfs f1, 0x48(r31)
@@ -587,7 +587,7 @@ func_800E51F8:
 /* 800E5200 000E1DE0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 800E5204 000E1DE4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 800E5208 000E1DE8  7C 7F 1B 78 */	mr r31, r3
-/* 800E520C 000E1DEC  4B F8 A0 2D */	bl func_8006F238
+/* 800E520C 000E1DEC  4B F8 A0 2D */	bl ftAnim_IsFramesRemaining
 /* 800E5210 000E1DF0  2C 03 00 00 */	cmpwi r3, 0
 /* 800E5214 000E1DF4  40 82 00 0C */	bne lbl_800E5220
 /* 800E5218 000E1DF8  7F E3 FB 78 */	mr r3, r31
@@ -676,7 +676,7 @@ func_800E5310:
 /* 800E5320 000E1F00  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 800E5324 000E1F04  7C 7E 1B 78 */	mr r30, r3
 /* 800E5328 000E1F08  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 800E532C 000E1F0C  4B F8 9F 0D */	bl func_8006F238
+/* 800E532C 000E1F0C  4B F8 9F 0D */	bl ftAnim_IsFramesRemaining
 /* 800E5330 000E1F10  2C 03 00 00 */	cmpwi r3, 0
 /* 800E5334 000E1F14  40 82 00 0C */	bne lbl_800E5340
 /* 800E5338 000E1F18  7F C3 F3 78 */	mr r3, r30
@@ -827,8 +827,8 @@ lbl_800E550C:
 
 .section .data
     .balign 8
-.global lbl_803C72B8
-lbl_803C72B8:
+.global as_table_cfalcon
+as_table_cfalcon:
     .4byte 0x00000127
     .4byte 0x00440842
     .4byte 0x41000000
@@ -880,50 +880,50 @@ lbl_803C72B8:
     .4byte 0x0000012D
     .4byte 0x00340211
     .4byte 0x12000000
-    .4byte func_800E2C80
-    .4byte func_800E2E38
-    .4byte func_800E2F2C
-    .4byte func_800E3168
+    .4byte ftCaptain_SpecialN_Anim
+    .4byte ftCaptain_SpecialN_IASA
+    .4byte ftCaptain_SpecialN_Phys
+    .4byte ftCaptain_SpecialN_Coll
     .4byte func_800761C8
     .4byte 0x0000012E
     .4byte 0x00340611
     .4byte 0x12000000
-    .4byte func_800E2D5C
-    .4byte func_800E2E3C
-    .4byte func_800E3018
-    .4byte func_800E31F4
+    .4byte ftCaptain_SpecialAirN_Anim
+    .4byte ftCaptain_SpecialAirN_IASA
+    .4byte ftCaptain_SpecialAirN_Phys
+    .4byte ftCaptain_SpecialAirN_Coll
     .4byte func_800761C8
     .4byte 0x0000012F
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte func_800E384C
-    .4byte func_800E3B0C
-    .4byte func_800E3B1C
-    .4byte func_800E3C38
+    .4byte ftCaptain_SpecialSStart_Anim
+    .4byte ftCaptain_SpecialSStart_IASA
+    .4byte ftCaptain_SpecialSStart_Phys
+    .4byte ftCaptain_SpecialSStart_Coll
     .4byte func_800761C8
     .4byte 0x00000130
     .4byte 0x00340212
     .4byte 0x13000000
-    .4byte func_800E3888
-    .4byte func_800E3B10
-    .4byte func_800E3B3C
-    .4byte func_800E3D44
+    .4byte ftCaptain_SpecialS_Anim
+    .4byte ftCaptain_SpecialS_IASA
+    .4byte ftCaptain_SpecialS_Phys
+    .4byte ftCaptain_SpecialS_Coll
     .4byte func_800761C8
     .4byte 0x00000131
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte func_800E3964
-    .4byte func_800E3B14
-    .4byte func_800E3B5C
-    .4byte func_800E3DE4
+    .4byte ftCaptain_SpecialAirSStart_Anim
+    .4byte ftCaptain_SpecialAirSStart_IASA
+    .4byte ftCaptain_SpecialAirSStart_Phys
+    .4byte ftCaptain_SpecialAirSStart_Coll
     .4byte func_800761C8
     .4byte 0x00000132
     .4byte 0x00340612
     .4byte 0x13000000
-    .4byte func_800E39F0
-    .4byte func_800E3B18
-    .4byte func_800E3BD0
-    .4byte func_800E3E40
+    .4byte ftCaptain_SpecialAirS_Anim
+    .4byte ftCaptain_SpecialAirS_IASA
+    .4byte ftCaptain_SpecialAirS_Phys
+    .4byte ftCaptain_SpecialAirS_Coll
     .4byte func_800761C8
     .4byte 0x00000133
     .4byte 0x00340013

@@ -1,46 +1,78 @@
-#include "ftluigi.h"
+#include <ftluigi.h>
 
 void ftLuigi_OnDeath(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
+    Fighter* fp = fighterObj->user_data;
     func_80074A4C(fighterObj, 0, 0);
-    fighter->sa.luigi.x2234 = 0;
+    fp->sa.luigi.x2234 = 0;
 }
 
 void ftLuigi_OnLoad(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
-    void** item_list = fighter->x10C_ftData->x48_items;
+    Fighter* fp = fighterObj->user_data;
+    void** item_list = fp->x10C_ftData->x48_items;
 
-    PUSH_ATTRS(fighter, ftLuigiAttributes);
+    PUSH_ATTRS(fp, ftLuigiAttributes);
     
-    func_8026B3F8(item_list[0], 0x69U);
+    func_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
 
-void ftLuigi_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
+void ftLuigi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
+
+void ftLuigi_OnItemInvisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
+}
+
+void ftLuigi_OnItemVisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 1);
+}
+
+void ftLuigi_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
+}
+
+void ftLuigi_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftLuigiAttributes);
+}
+
+
+void ftLuigi_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftLuigi_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+}
+
+void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2)
 {
-    s32 result, switched_res, unused;
-
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
-
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
+    if (arg0 != 0xA) {
+        if (arg0 < 0xA && arg0 >= 9) {
+            *arg2 = 0xE;
+            *arg1 = 0xE;
         }
-
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
+    } else {
+        *arg2 = 0xF;
+        *arg1 = 0xF;
     }
+}
+
+extern struct DemoMotionFiles lbl_803D0AAC;
+
+// 0x80142640 
+// https://decomp.me/scratch/vH9VM // Get symbol pointers for Luigi cutscenes
+void* func_80142640(s32 demoMotionArg)
+{
+    s32 demoFile;
+
+    switch (demoMotionArg)
+    {
+    case 0x9:
+        demoFile = 14;
+        break;
+    case 0xA:
+        demoFile = 15;
+        break;
+    }
+    return lbl_803D0AAC.x0_demoMotionPtr[demoFile - 14];
 }

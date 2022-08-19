@@ -1,4 +1,4 @@
-#include "melee/pl/player.h"
+#include <melee/pl/player.h>
 
 typedef struct _ftMapping {
     s8 internal_id;

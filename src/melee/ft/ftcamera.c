@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <fighter.h>
 
 typedef struct UnkFloat6_Camera {
     Vec3 x0;
@@ -15,15 +15,15 @@ void func_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul) {
 }
 
 // Camera_CopyPlayerPositionToCameraBoxPosition
-void func_80076064(Fighter* ft) {
+void func_80076064(Fighter* fp) {
     CameraBox* camera_box;
     UnkFloat6_Camera* ftData_floats;
     UnkFloat6_Camera spC;
 
-    camera_box = ft->x890_cameraBox;
-    func_80076018(ft->x10C_ftData->x3C, &spC, ft->x34_scale.y);
+    camera_box = fp->x890_cameraBox;
+    func_80076018(fp->x10C_ftData->x3C, &spC, fp->x34_scale.y);
     camera_box->x8 = 0;
-    if (ft->x2C_facing_direction == 1.0f) {
+    if (fp->x2C_facing_direction == 1.0f) {
         camera_box->x40.x = spC.x0.z;
         camera_box->x40.y = spC.x0.y * Stage_GetCamFixedZoom();
         camera_box->x28 = 1.0f;
@@ -38,25 +38,25 @@ void func_80076064(Fighter* ft) {
     camera_box->x48.z = spC.xC.z;
     camera_box->x2C = camera_box->x40;
     camera_box->x34 = camera_box->x48;
-    camera_box->x10.x = ft->xB0_pos.x;
-    camera_box->x10.y = ft->xB0_pos.y + spC.x0.x;
-    camera_box->x10.z = ft->xB0_pos.z;
+    camera_box->x10.x = fp->xB0_pos.x;
+    camera_box->x10.y = fp->xB0_pos.y + spC.x0.x;
+    camera_box->x10.z = fp->xB0_pos.z;
     camera_box->x1C = camera_box->x10;
 }
 
 // Fighter_UpdateCameraBox
 // Camera_UpdatePlayerCameraBoxPosition
 void func_800761C8(HSD_GObj* gobj) {
-    Fighter* ft;
+    Fighter* fp;
     CameraBox* camera_box;
     UnkFloat6_Camera sp10;
     s32 unused;
 
-    ft = gobj->user_data;
-    camera_box = ft->x890_cameraBox;
-    ft->x2C_facing_direction + 1.0f; // lol
-    func_80076018(ft->x10C_ftData->x3C, &sp10, ft->x34_scale.y);
-    if (ft->x2C_facing_direction == 1.0f) {
+    fp = gobj->user_data;
+    camera_box = fp->x890_cameraBox;
+    fp->x2C_facing_direction + 1.0f; // lol
+    func_80076018(fp->x10C_ftData->x3C, &sp10, fp->x34_scale.y);
+    if (fp->x2C_facing_direction == 1.0f) {
         camera_box->x40.x = sp10.x0.z;
         camera_box->x40.y = sp10.x0.y * Stage_GetCamFixedZoom();
         camera_box->x28 = 1.0f;
@@ -66,26 +66,26 @@ void func_800761C8(HSD_GObj* gobj) {
         camera_box->x28 = -1.0f;
     }
     sp10.xC; //this line changes everything lol
-    camera_box->x10.x = ft->xB0_pos.x;
-    camera_box->x10.y = ft->xB0_pos.y + sp10.x0.x;
-    camera_box->x10.z = ft->xB0_pos.z;
+    camera_box->x10.x = fp->xB0_pos.x;
+    camera_box->x10.y = fp->xB0_pos.y + sp10.x0.x;
+    camera_box->x10.z = fp->xB0_pos.z;
     camera_box->xC_flag.bits.b0 = 0;
     func_800866DC(gobj, &camera_box->x1C); // Fighter_GetCameraBonePos
 }
 
 void func_800762F4(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
-    func_800866DC(gobj, &ft->x890_cameraBox->x1C);
+    Fighter* fp = gobj->user_data;
+    func_800866DC(gobj, &fp->x890_cameraBox->x1C);
 }
 
 void func_80076320(HSD_GObj* gobj) {
     Vec3 center_pos;
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     CameraBox* camera_box;
     f32 temp_f1;
     f32 temp_f31;
 
-    camera_box = ft->x890_cameraBox;
+    camera_box = fp->x890_cameraBox;
     func_800761C8(gobj); // Fighter_UpdateCameraBox
     Stage_UnkSetVec3TCam_Offset(&center_pos);
 

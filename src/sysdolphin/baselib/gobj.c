@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
 extern u32 lbl_804D783C;
 

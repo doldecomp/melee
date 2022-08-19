@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/gobjuserdata.h"
+#include <sysdolphin/baselib/gobjuserdata.h>
 
 extern char lbl_804085D0[];
 

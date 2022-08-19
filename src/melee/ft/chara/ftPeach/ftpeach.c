@@ -1,25 +1,25 @@
-#include "ftpeach.h"
+#include <ftpeach.h>
 
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 
 void ftPeach_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* ft;
+    Fighter* fp;
 
-    ft = gobj->user_data;
-    ft->sa.peach.x222C = 1;
-    ft->sa.peach.x2234 = -1;
-    ft->sa.peach.x2240 = 0;
-    ft->sa.peach.x223C = 0;
-    ft->sa.peach.x2238 = 0;
-    ft->sa.peach.x2244 = 0;
-    ft->sa.peach.x2248 = 0;
+    fp = gobj->user_data;
+    fp->sa.peach.x222C = 1;
+    fp->sa.peach.x2234 = -1;
+    fp->sa.peach.x2240 = 0;
+    fp->sa.peach.x223C = 0;
+    fp->sa.peach.x2238 = 0;
+    fp->sa.peach.x2244 = 0;
+    fp->sa.peach.x2248 = 0;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 2, 0);
     func_80074A4C(gobj, 3, -1);
     func_80074A4C(gobj, 4, 0);
 
-    switch (ft->x619_costume_id)
+    switch (fp->x619_costume_id)
     {
         case 1:
             func_80074A4C(gobj, 1, -1);
@@ -37,54 +37,71 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
 
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    ftPeachAttributes* extAtrrs = ft->x10C_ftData->ext_attr;
-    void** items = ft->x10C_ftData->x48_items;
+    Fighter* fp = gobj->user_data;
+    ftPeachAttributes* extAtrrs = fp->x10C_ftData->ext_attr;
+    void** items = fp->x10C_ftData->x48_items;
 
-    extAtrrs->unk0 = func_8001E8F8(func_80085E50(ft, 18));
-    extAtrrs->unk4 = func_8001E8F8(func_80085E50(ft, 19));
+    extAtrrs->unk0 = func_8001E8F8(func_80085E50(fp, 18));
+    extAtrrs->unk4 = func_8001E8F8(func_80085E50(fp, 19));
 
-    PUSH_ATTRS(ft, ftPeachAttributes);
+    PUSH_ATTRS(fp, ftPeachAttributes);
     
-    func_8026B3F8(items[0], It_Kind_PeachUnk);
-    func_8026B3F8(items[1], It_Kind_PeachTurnip);
-    func_8026B3F8(items[2], It_Kind_PeachParasol);
-    func_8026B3F8(items[3], It_Kind_PeachToad);
-    func_8026B3F8(items[4], It_Kind_PeachToadSpore);
+    func_8026B3F8(items[0], It_Kind_Peach_Explode);
+    func_8026B3F8(items[1], It_Kind_Peach_Turnip);
+    func_8026B3F8(items[2], It_Kind_Peach_Parasol);
+    func_8026B3F8(items[3], It_Kind_Peach_Toad);
+    func_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
 }
 
 void ftPeach_8011B704(HSD_GObj* fighterObj) {
-    func_8011D598(fighterObj);
-    func_8011E2E8(fighterObj);
-    func_8011CFA0(fighterObj);
+    ftPeach_8011D598(fighterObj);
+    ftPeach_8011E2E8(fighterObj);
+    ftPeach_8011CFA0(fighterObj);
 }
 
-void ftPeach_OnItemPickup(HSD_GObj* gobj, BOOL arg1)
-{
-    s32 result, switched_res, unused;
+void ftPeach_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
+    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+}
 
-    Fighter* ft = gobj->user_data;
-    result = func_8026B2B4(ft->x1974_heldItem);
+void ftPeach_OnItemInvisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemInvisible(fighterObj, 1);
+}
 
-    if (result == 0) {
-        switched_res = func_8026B320(ft->x1974_heldItem);
-        switch (switched_res) {
-            case 1:
-                func_80070FB4(gobj, 1, 1);
-                break;
-            case 2:
-                func_80070FB4(gobj, 1, 0);
-                break;
-            case 3:
-                func_80070FB4(gobj, 1, 2);
-                break;
-            case 4:
-                func_80070FB4(gobj, 1, 3);
-                break;
-        }
+void ftPeach_OnItemVisible(HSD_GObj* fighterObj) {
+    Fighter_OnItemVisible(fighterObj, 1);
+}
 
-        if (arg1 != 0) {
-            func_80070C48(gobj, 1);
-        }
+void ftPeach_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
+    Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
+}
+
+void ftPeach_LoadSpecialAttrs(HSD_GObj* fighterObj) {
+    COPY_ATTRS(fighterObj, ftPeachAttributes);
+}
+
+void ftPeach_8011B93C(HSD_GObj* fighterObj) {
+    s32 unused[2];
+    s32 result = func_80074A74(fighterObj, 2);
+    if (result == -1) {
+        func_80074A4C(fighterObj, 2, 0);
+    } else {
+        func_80074A4C(fighterObj, 2, -1);
     }
+}
+
+void ftPeach_OnKnockbackEnter(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackEnter(fighterObj, 1);
+}
+
+void ftPeach_OnKnockbackExit(HSD_GObj* fighterObj) {
+    Fighter_OnKnockbackExit(fighterObj, 1);
+}
+
+s32 ftPeach_8011BA20(Fighter* fp) {
+    s32 result = 1;
+
+    if (!(fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax) && !(fp->input.x65C_heldInputs & 0xC00))
+        result = 0;
+
+    return result;
 }

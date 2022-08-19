@@ -1,5 +1,7 @@
-#include "melee/ft/ftcommon.h"
-#include "melee/lb/lbvector.h"
+#pragma once
+
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mobj.h>
@@ -34,5 +36,5 @@ struct S_UNK_YOSHI1 {
     struct S_UNK_YOSHI2* unk_struct;
 };
 
-void func_8012B6E8(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg);
-void func_8012B804(Fighter* fighter, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_frame);
+void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg);
+void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_frame);

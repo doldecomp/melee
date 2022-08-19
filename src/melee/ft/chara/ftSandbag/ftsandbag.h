@@ -5,17 +5,17 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
-#include "melee/ft/fighter.h"
+#include <melee/ft/fighter.h>
 
 void ftSandbag_OnDeath(void);
 void ftSandbag_OnLoad(HSD_GObj* gobj);
-void func_8014FA30(Fighter* fighter);
-u32 func_8014FB78(HSD_GObj* gobj);
+void func_8014FA30(Fighter* fp);
+void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj);
 
 void ftSandbag_OnKnockbackEnter(void);
-void func_8014FBA0(void);
+void ftSandbag_OnKnockbackExit(void);
 
 void func_8014FBA4(HSD_GObj* gobj);
 

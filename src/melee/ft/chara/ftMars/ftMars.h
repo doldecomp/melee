@@ -3,8 +3,8 @@
 
 #include <global.h>
 #include <dolphin/types.h>
-#include "sysdolphin/baselib/gobj.h"
-#include "melee/ft/fighter.h"
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 
 typedef struct _MarsAttributes {
     s32 x0;
@@ -38,20 +38,20 @@ typedef struct _MarsAttributes {
 
 void ftMars_OnDeath(HSD_GObj* gobj);
 void ftMars_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
-void func_80136390(HSD_GObj* gobj);
-void func_801363D8(HSD_GObj* gobj);
-void func_80136420(HSD_GObj* gobj, s32 arg1);
-void ftMars_OnLoadForRoy(Fighter* ft);
+void ftMars_OnItemInvisible(HSD_GObj* gobj);
+void ftMars_OnItemVisible(HSD_GObj* gobj);
+void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
+void ftMars_OnLoadForRoy(Fighter* fp);
 void ftMars_OnLoad(HSD_GObj* gobj);
-void func_801364E8(HSD_GObj* gobj);
-void func_80136520(HSD_GObj* gobj);
-void func_80136564(HSD_GObj* gobj);
+void ftMars_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftMars_OnKnockbackEnter(HSD_GObj* gobj);
+void ftMars_OnKnockbackExit(HSD_GObj* gobj);
 void lbl_801365A8(HSD_GObj* gobj);
 void lbl_8013666C(HSD_GObj* gobj);
 void lbl_80136730(HSD_GObj* gobj);
 
-void func_80136744(HSD_GObj* gobj);
-void func_801367B8(HSD_GObj* gobj);
+void ftMars_SpecialN_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj);
 void lbl_80136844(HSD_GObj* gobj);
 void lbl_801368AC(HSD_GObj* gobj);
 void lbl_80136914(HSD_GObj* gobj);
@@ -87,8 +87,8 @@ void func_801372A8(HSD_GObj* gobj);
 void func_80137354(HSD_GObj* gobj);
 void func_801373B8(HSD_GObj* gobj);
 
-void func_8013741C(HSD_GObj* gobj);
-void func_801374A0(HSD_GObj* gobj);
+void ftMars_SpecialS_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj);
 void lbl_80137558(HSD_GObj* gobj);
 void lbl_801375B8(HSD_GObj* gobj);
 void lbl_80137618(HSD_GObj* gobj);
@@ -118,8 +118,8 @@ void func_80137FF8(HSD_GObj* gobj);
 void func_8013809C(HSD_GObj* gobj);
 void func_80138148(HSD_GObj* gobj);
 
-void func_80138208(HSD_GObj* gobj);
-void func_8013826C(HSD_GObj* gobj);
+void ftMars_SpecialHi_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj);
 void lbl_801382E8(HSD_GObj* gobj);
 void lbl_80138348(HSD_GObj* gobj);
 void lbl_801383A8(HSD_GObj* gobj);
@@ -130,8 +130,8 @@ void lbl_80138884(HSD_GObj* gobj);
 void lbl_801388B4(HSD_GObj* gobj);
 void lbl_80138940(HSD_GObj* gobj);
 
-void func_801389CC(HSD_GObj* gobj);
-void func_80138A30(HSD_GObj* gobj);
+void ftMars_SpecialLw_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj);
 void lbl_80138AA8(HSD_GObj* gobj);
 void lbl_80138B64(HSD_GObj* gobj);
 void lbl_80138C20(HSD_GObj* gobj);

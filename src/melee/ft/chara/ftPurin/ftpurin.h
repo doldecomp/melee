@@ -1,5 +1,7 @@
-#include "melee/ft/ftcommon.h"
-#include "melee/lb/lbvector.h"
+#pragma once
+
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 typedef struct _ftPurinAttributes {
     f32 x0;

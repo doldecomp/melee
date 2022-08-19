@@ -2,6 +2,7 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+# https://decomp.me/scratch/LAy0B
 .global func_803A44A4
 func_803A44A4:
 /* 803A44A4 003A1084  7C 08 02 A6 */	mflr r0
@@ -17,6 +18,7 @@ func_803A44A4:
 /* 803A44CC 003A10AC  7C 08 03 A6 */	mtlr r0
 /* 803A44D0 003A10B0  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/YScqE
 .global func_803A44D4
 func_803A44D4:
 /* 803A44D4 003A10B4  7C 08 02 A6 */	mflr r0
@@ -136,6 +138,7 @@ lbl_803A464C:
 /* 803A4664 003A1244  7C 08 03 A6 */	mtlr r0
 /* 803A4668 003A1248  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/jvzaI
 .global func_803A466C
 func_803A466C:
 /* 803A466C 003A124C  7C 08 02 A6 */	mflr r0
@@ -200,6 +203,7 @@ lbl_803A472C:
 /* 803A4738 003A1318  7C 08 03 A6 */	mtlr r0
 /* 803A473C 003A131C  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/afkxp
 .global func_803A4740
 func_803A4740:
 /* 803A4740 003A1320  7C 08 02 A6 */	mflr r0
@@ -220,6 +224,7 @@ lbl_803A4760:
 /* 803A4774 003A1354  7C 08 03 A6 */	mtlr r0
 /* 803A4778 003A1358  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/I6wRr
 .global func_803A477C
 func_803A477C:
 /* 803A477C 003A135C  7C 08 02 A6 */	mflr r0
@@ -383,6 +388,7 @@ lbl_803A490C:
 /* 803A49D8 003A15B8  7C 08 03 A6 */	mtlr r0
 /* 803A49DC 003A15BC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/4iDwE
 .global func_803A49E0
 func_803A49E0:
 /* 803A49E0 003A15C0  7C 08 02 A6 */	mflr r0
@@ -425,6 +431,7 @@ lbl_803A4A50:
 /* 803A4A60 003A1640  7C 08 03 A6 */	mtlr r0
 /* 803A4A64 003A1644  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/ykUfq
 .global func_803A4A68
 func_803A4A68:
 /* 803A4A68 003A1648  7C 08 02 A6 */	mflr r0
@@ -1126,6 +1133,7 @@ lbl_803A54B4:
 /* 803A54E4 003A20C4  7C 08 03 A6 */	mtlr r0
 /* 803A54E8 003A20C8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/rwP4G
 .global func_803A54EC
 func_803A54EC:
 /* 803A54EC 003A20CC  7C 08 02 A6 */	mflr r0
@@ -1191,6 +1199,7 @@ lbl_803A55AC:
 /* 803A55D4 003A21B4  7C 08 03 A6 */	mtlr r0
 /* 803A55D8 003A21B8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/LA73x
 .global func_803A55DC
 func_803A55DC:
 /* 803A55DC 003A21BC  7C 08 02 A6 */	mflr r0
@@ -1359,25 +1368,25 @@ jtbl_8040C3DC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0xFFFFFF00
+    .int -256
     .4byte NULL
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000002
+    .int 2
+    .int 2
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
+    .int 2
     .4byte NULL
-    .4byte 0x000000FF
-    .4byte 0x000000FF
-    .4byte NULL
-    .4byte NULL
+    .int 255
+    .int 255
     .4byte NULL
     .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000002
+    .4byte NULL
+    .4byte NULL
+    .int 2
+    .int 2
     .4byte NULL
     .asciz "Out CameraDisp Range\n"
     .balign 4
@@ -1409,14 +1418,14 @@ lbl_804D7960:
     .balign 8
 .global lbl_804DEA70
 lbl_804DEA70:
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEA74
 lbl_804DEA74:
-	.4byte 0x3F800000
+	.float 1.0
 .global lbl_804DEA78
 lbl_804DEA78:
-	.4byte 0x43300000
-	.4byte 0x00000000
+	.float 176.0
+	.4byte NULL
 .global lbl_804DEA80
 lbl_804DEA80:
 	.4byte 0xFFA60000
@@ -1434,12 +1443,12 @@ lbl_804DEA90:
 	.4byte 0xFF00FF80
 .global lbl_804DEA94
 lbl_804DEA94:
-	.4byte 0x3F000000
+	.float 0.5
 .global lbl_804DEA98
 lbl_804DEA98:
-	.4byte 0x40000000
-	.4byte 0x00000000
+	.float 2.0
+	.4byte NULL
 .global lbl_804DEAA0
 lbl_804DEAA0:
-	.4byte 0x43300000
+	.float 176.0
 	.4byte 0x80000000

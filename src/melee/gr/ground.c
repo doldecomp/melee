@@ -1,13 +1,14 @@
-#include "ground.h"
+#include <ground.h>
 
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
@@ -1466,9 +1467,9 @@ lbl_801C1FE0:
 void func_801C1FFC(void)
 {
     if (stage_info.x12C != NULL && stage_info.x12C->ptr != NULL) {
-        func_80030740(stage_info.x12C->ptr->color.r,
-                      stage_info.x12C->ptr->color.g,
-                      stage_info.x12C->ptr->color.b);
+        func_80030740(stage_info.x12C->ptr->color.u8.r,
+                      stage_info.x12C->ptr->color.u8.g,
+                      stage_info.x12C->ptr->color.u8.b);
     } else {
         func_80030740(0, 0, 0);
     }
@@ -3894,7 +3895,6 @@ void func_801C4A08(HSD_GObj* gobj)
     func_80390228(gobj);
 }
 
-#define M_PI 3.141592653589793
 
 void func_801C4B50(s32 arg0, s32 arg1, Vec3* arg2, f32 arg8)
 {
