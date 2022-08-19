@@ -2,91 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-# https://decomp.me/scratch/F6EUw // 813 (89.71%)
-GXCPInterruptHandler:
-/* 8033B788 00338368  7C 08 02 A6 */	mflr r0
-/* 8033B78C 0033836C  90 01 00 04 */	stw r0, 4(r1)
-/* 8033B790 00338370  94 21 FD 20 */	stwu r1, -0x2e0(r1)
-/* 8033B794 00338374  93 E1 02 DC */	stw r31, 0x2dc(r1)
-/* 8033B798 00338378  7C 9F 23 78 */	mr r31, r4
-/* 8033B79C 0033837C  80 AD BC 54 */	lwz r5, lbl_804D72F4@sda21(r13)
-/* 8033B7A0 00338380  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033B7A4 00338384  A0 05 00 00 */	lhz r0, 0(r5)
-/* 8033B7A8 00338388  90 03 00 0C */	stw r0, 0xc(r3)
-/* 8033B7AC 0033838C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033B7B0 00338390  80 03 00 08 */	lwz r0, 8(r3)
-/* 8033B7B4 00338394  54 00 EF FF */	rlwinm. r0, r0, 0x1d, 0x1f, 0x1f
-/* 8033B7B8 00338398  41 82 00 38 */	beq lbl_8033B7F0
-/* 8033B7BC 0033839C  80 03 00 0C */	lwz r0, 0xc(r3)
-/* 8033B7C0 003383A0  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
-/* 8033B7C4 003383A4  41 82 00 2C */	beq lbl_8033B7F0
-/* 8033B7C8 003383A8  80 6D BC 68 */	lwz r3, lbl_804D7308@sda21(r13)
-/* 8033B7CC 003383AC  48 00 FE 51 */	bl OSResumeThread
-/* 8033B7D0 003383B0  38 00 00 00 */	li r0, 0
-/* 8033B7D4 003383B4  90 0D BC 70 */	stw r0, lbl_804D7310@sda21(r13)
-/* 8033B7D8 003383B8  38 60 00 01 */	li r3, 1
-/* 8033B7DC 003383BC  38 80 00 01 */	li r4, 1
-/* 8033B7E0 003383C0  48 00 05 7D */	bl __GXWriteFifoIntReset
-/* 8033B7E4 003383C4  38 60 00 01 */	li r3, 1
-/* 8033B7E8 003383C8  38 80 00 00 */	li r4, 0
-/* 8033B7EC 003383CC  48 00 05 25 */	bl __GXWriteFifoIntEnable
-lbl_8033B7F0:
-/* 8033B7F0 003383D0  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033B7F4 003383D4  80 03 00 08 */	lwz r0, 8(r3)
-/* 8033B7F8 003383D8  54 00 F7 FF */	rlwinm. r0, r0, 0x1e, 0x1f, 0x1f
-/* 8033B7FC 003383DC  41 82 00 44 */	beq lbl_8033B840
-/* 8033B800 003383E0  80 03 00 0C */	lwz r0, 0xc(r3)
-/* 8033B804 003383E4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
-/* 8033B808 003383E8  41 82 00 38 */	beq lbl_8033B840
-/* 8033B80C 003383EC  80 AD BC 78 */	lwz r5, lbl_804D7318@sda21(r13)
-/* 8033B810 003383F0  38 60 00 00 */	li r3, 0
-/* 8033B814 003383F4  38 80 00 01 */	li r4, 1
-/* 8033B818 003383F8  38 05 00 01 */	addi r0, r5, 1
-/* 8033B81C 003383FC  90 0D BC 78 */	stw r0, lbl_804D7318@sda21(r13)
-/* 8033B820 00338400  48 00 04 F1 */	bl __GXWriteFifoIntEnable
-/* 8033B824 00338404  38 60 00 01 */	li r3, 1
-/* 8033B828 00338408  38 80 00 00 */	li r4, 0
-/* 8033B82C 0033840C  48 00 05 31 */	bl __GXWriteFifoIntReset
-/* 8033B830 00338410  38 00 00 01 */	li r0, 1
-/* 8033B834 00338414  80 6D BC 68 */	lwz r3, lbl_804D7308@sda21(r13)
-/* 8033B838 00338418  90 0D BC 70 */	stw r0, lbl_804D7310@sda21(r13)
-/* 8033B83C 0033841C  48 01 00 69 */	bl OSSuspendThread
-lbl_8033B840:
-/* 8033B840 00338420  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033B844 00338424  80 83 00 08 */	lwz r4, 8(r3)
-/* 8033B848 00338428  38 A3 00 08 */	addi r5, r3, 8
-/* 8033B84C 0033842C  54 80 DF FF */	rlwinm. r0, r4, 0x1b, 0x1f, 0x1f
-/* 8033B850 00338430  41 82 00 60 */	beq lbl_8033B8B0
-/* 8033B854 00338434  80 03 00 0C */	lwz r0, 0xc(r3)
-/* 8033B858 00338438  54 00 E7 FF */	rlwinm. r0, r0, 0x1c, 0x1f, 0x1f
-/* 8033B85C 0033843C  41 82 00 54 */	beq lbl_8033B8B0
-/* 8033B860 00338440  54 80 06 F2 */	rlwinm r0, r4, 0, 0x1b, 0x19
-/* 8033B864 00338444  90 05 00 00 */	stw r0, 0(r5)
-/* 8033B868 00338448  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033B86C 0033844C  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
-/* 8033B870 00338450  80 04 00 08 */	lwz r0, 8(r4)
-/* 8033B874 00338454  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033B878 00338458  80 0D BC 74 */	lwz r0, lbl_804D7314@sda21(r13)
-/* 8033B87C 0033845C  28 00 00 00 */	cmplwi r0, 0
-/* 8033B880 00338460  41 82 00 30 */	beq lbl_8033B8B0
-/* 8033B884 00338464  38 61 00 10 */	addi r3, r1, 0x10
-/* 8033B888 00338468  48 00 99 CD */	bl OSClearContext
-/* 8033B88C 0033846C  38 61 00 10 */	addi r3, r1, 0x10
-/* 8033B890 00338470  48 00 97 FD */	bl OSSetCurrentContext
-/* 8033B894 00338474  81 8D BC 74 */	lwz r12, lbl_804D7314@sda21(r13)
-/* 8033B898 00338478  7D 88 03 A6 */	mtlr r12
-/* 8033B89C 0033847C  4E 80 00 21 */	blrl 
-/* 8033B8A0 00338480  38 61 00 10 */	addi r3, r1, 0x10
-/* 8033B8A4 00338484  48 00 99 B1 */	bl OSClearContext
-/* 8033B8A8 00338488  7F E3 FB 78 */	mr r3, r31
-/* 8033B8AC 0033848C  48 00 97 E1 */	bl OSSetCurrentContext
-lbl_8033B8B0:
-/* 8033B8B0 00338490  80 01 02 E4 */	lwz r0, 0x2e4(r1)
-/* 8033B8B4 00338494  83 E1 02 DC */	lwz r31, 0x2dc(r1)
-/* 8033B8B8 00338498  38 21 02 E0 */	addi r1, r1, 0x2e0
-/* 8033B8BC 0033849C  7C 08 03 A6 */	mtlr r0
-/* 8033B8C0 003384A0  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/DSit3 // 2700 (0%)
 .global GXInitFifoBase
 GXInitFifoBase:
@@ -247,53 +162,53 @@ GXSetGPFifo:
 /* 8033BAE4 003386C4  38 80 00 00 */	li r4, 0
 /* 8033BAE8 003386C8  48 00 02 29 */	bl __GXWriteFifoIntEnable
 /* 8033BAEC 003386CC  93 CD BC 64 */	stw r30, lbl_804D7304@sda21(r13)
-/* 8033BAF0 003386D0  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BAF0 003386D0  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BAF4 003386D4  80 1E 00 00 */	lwz r0, 0(r30)
 /* 8033BAF8 003386D8  B0 03 00 20 */	sth r0, 0x20(r3)
 /* 8033BAFC 003386DC  80 1E 00 04 */	lwz r0, 4(r30)
-/* 8033BB00 003386E0  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB00 003386E0  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB04 003386E4  B0 03 00 24 */	sth r0, 0x24(r3)
 /* 8033BB08 003386E8  80 1E 00 1C */	lwz r0, 0x1c(r30)
-/* 8033BB0C 003386EC  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB0C 003386EC  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB10 003386F0  B0 03 00 30 */	sth r0, 0x30(r3)
 /* 8033BB14 003386F4  80 1E 00 18 */	lwz r0, 0x18(r30)
-/* 8033BB18 003386F8  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB18 003386F8  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB1C 003386FC  B0 03 00 34 */	sth r0, 0x34(r3)
 /* 8033BB20 00338700  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 8033BB24 00338704  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB24 00338704  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB28 00338708  B0 03 00 38 */	sth r0, 0x38(r3)
 /* 8033BB2C 0033870C  80 1E 00 0C */	lwz r0, 0xc(r30)
-/* 8033BB30 00338710  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB30 00338710  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB34 00338714  B0 03 00 28 */	sth r0, 0x28(r3)
 /* 8033BB38 00338718  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 8033BB3C 0033871C  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB3C 0033871C  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB40 00338720  B0 03 00 2C */	sth r0, 0x2c(r3)
 /* 8033BB44 00338724  80 1E 00 00 */	lwz r0, 0(r30)
-/* 8033BB48 00338728  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB48 00338728  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB4C 0033872C  54 00 84 BE */	rlwinm r0, r0, 0x10, 0x12, 0x1f
 /* 8033BB50 00338730  B0 03 00 22 */	sth r0, 0x22(r3)
 /* 8033BB54 00338734  80 1E 00 04 */	lwz r0, 4(r30)
-/* 8033BB58 00338738  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB58 00338738  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB5C 0033873C  54 00 84 BE */	rlwinm r0, r0, 0x10, 0x12, 0x1f
 /* 8033BB60 00338740  B0 03 00 26 */	sth r0, 0x26(r3)
 /* 8033BB64 00338744  80 1E 00 1C */	lwz r0, 0x1c(r30)
-/* 8033BB68 00338748  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB68 00338748  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB6C 0033874C  7C 00 86 70 */	srawi r0, r0, 0x10
 /* 8033BB70 00338750  B0 03 00 32 */	sth r0, 0x32(r3)
 /* 8033BB74 00338754  80 1E 00 18 */	lwz r0, 0x18(r30)
-/* 8033BB78 00338758  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB78 00338758  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB7C 0033875C  54 00 84 BE */	rlwinm r0, r0, 0x10, 0x12, 0x1f
 /* 8033BB80 00338760  B0 03 00 36 */	sth r0, 0x36(r3)
 /* 8033BB84 00338764  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 8033BB88 00338768  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB88 00338768  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB8C 0033876C  54 00 84 BE */	rlwinm r0, r0, 0x10, 0x12, 0x1f
 /* 8033BB90 00338770  B0 03 00 3A */	sth r0, 0x3a(r3)
 /* 8033BB94 00338774  80 1E 00 0C */	lwz r0, 0xc(r30)
-/* 8033BB98 00338778  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BB98 00338778  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BB9C 0033877C  54 00 84 3E */	srwi r0, r0, 0x10
 /* 8033BBA0 00338780  B0 03 00 2A */	sth r0, 0x2a(r3)
 /* 8033BBA4 00338784  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 8033BBA8 00338788  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BBA8 00338788  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BBAC 0033878C  54 00 84 3E */	srwi r0, r0, 0x10
 /* 8033BBB0 00338790  B0 03 00 2E */	sth r0, 0x2e(r3)
 /* 8033BBB4 00338794  7C 00 04 AC */	sync 0
@@ -345,8 +260,8 @@ __GXFifoInit:
 /* 8033BC54 00338834  48 00 BB 61 */	bl __OSUnmaskInterrupts
 /* 8033BC58 00338838  48 00 F0 E5 */	bl OSGetCurrentThread
 /* 8033BC5C 0033883C  38 00 00 00 */	li r0, 0
-/* 8033BC60 00338840  90 6D BC 68 */	stw r3, lbl_804D7308@sda21(r13)
-/* 8033BC64 00338844  90 0D BC 70 */	stw r0, lbl_804D7310@sda21(r13)
+/* 8033BC60 00338840  90 6D BC 68 */	stw r3, __GXCurrentThread@sda21(r13)
+/* 8033BC64 00338844  90 0D BC 70 */	stw r0, GXOverflowSuspendInProgress@sda21(r13)
 /* 8033BC68 00338848  90 0D BC 60 */	stw r0, lbl_804D7300@sda21(r13)
 /* 8033BC6C 0033884C  90 0D BC 64 */	stw r0, lbl_804D7304@sda21(r13)
 /* 8033BC70 00338850  80 01 00 0C */	lwz r0, 0xc(r1)
@@ -362,7 +277,7 @@ __GXFifoReadEnable:
 /* 8033BC8C 0033886C  60 00 00 01 */	ori r0, r0, 1
 /* 8033BC90 00338870  90 03 00 00 */	stw r0, 0(r3)
 /* 8033BC94 00338874  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033BC98 00338878  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BC98 00338878  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BC9C 0033887C  80 04 00 08 */	lwz r0, 8(r4)
 /* 8033BCA0 00338880  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BCA4 00338884  4E 80 00 20 */	blr 
@@ -374,7 +289,7 @@ __GXFifoReadDisable:
 /* 8033BCB0 00338890  54 00 00 3C */	rlwinm r0, r0, 0, 0, 0x1e
 /* 8033BCB4 00338894  90 03 00 00 */	stw r0, 0(r3)
 /* 8033BCB8 00338898  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033BCBC 0033889C  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BCBC 0033889C  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BCC0 003388A0  80 04 00 08 */	lwz r0, 8(r4)
 /* 8033BCC4 003388A4  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BCC8 003388A8  4E 80 00 20 */	blr 
@@ -396,12 +311,13 @@ lbl_8033BCE0:
 /* 8033BCF4 003388D4  7C 60 03 78 */	or r0, r3, r0
 /* 8033BCF8 003388D8  90 04 00 00 */	stw r0, 0(r4)
 /* 8033BCFC 003388DC  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033BD00 003388E0  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BD00 003388E0  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BD04 003388E4  80 04 00 08 */	lwz r0, 8(r4)
 /* 8033BD08 003388E8  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BD0C 003388EC  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/mJZcx // 635 (66.58%)
+.global __GXWriteFifoIntEnable
 __GXWriteFifoIntEnable:
 /* 8033BD10 003388F0  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
 /* 8033BD14 003388F4  54 63 15 BA */	rlwinm r3, r3, 2, 0x16, 0x1d
@@ -418,12 +334,13 @@ __GXWriteFifoIntEnable:
 /* 8033BD40 00338920  7C 60 03 78 */	or r0, r3, r0
 /* 8033BD44 00338924  90 04 00 00 */	stw r0, 0(r4)
 /* 8033BD48 00338928  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033BD4C 0033892C  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BD4C 0033892C  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BD50 00338930  80 04 00 08 */	lwz r0, 8(r4)
 /* 8033BD54 00338934  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033BD58 00338938  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/7EFEP // 610 (67.89%)
+.global __GXWriteFifoIntReset
 __GXWriteFifoIntReset:
 /* 8033BD5C 0033893C  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
 /* 8033BD60 00338940  54 63 06 3E */	clrlwi r3, r3, 0x18
@@ -440,7 +357,7 @@ __GXWriteFifoIntReset:
 /* 8033BD8C 0033896C  7C 60 03 78 */	or r0, r3, r0
 /* 8033BD90 00338970  90 04 00 00 */	stw r0, 0(r4)
 /* 8033BD94 00338974  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033BD98 00338978  80 6D BC 54 */	lwz r3, lbl_804D72F4@sda21(r13)
+/* 8033BD98 00338978  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 8033BD9C 0033897C  80 04 00 10 */	lwz r0, 0x10(r4)
 /* 8033BDA0 00338980  B0 03 00 04 */	sth r0, 4(r3)
 /* 8033BDA4 00338984  4E 80 00 20 */	blr 
@@ -452,8 +369,8 @@ __GXWriteFifoIntReset:
 lbl_804D72F0:
 	.skip 0x4
 
-.global lbl_804D72F4
-lbl_804D72F4:
+.global __cpReg
+__cpReg:
 	.skip 0x4
 
 .global __peReg
@@ -470,17 +387,21 @@ lbl_804D7300:
 lbl_804D7304:
 	.skip 0x4
 
-lbl_804D7308:
+.global __GXCurrentThread
+__GXCurrentThread:
 	.skip 0x4
 
 lbl_804D730C:
 	.skip 0x4
 
-lbl_804D7310:
+.global GXOverflowSuspendInProgress
+GXOverflowSuspendInProgress:
 	.skip 0x4
 
-lbl_804D7314:
+.global BreakPointCB
+BreakPointCB:
 	.skip 0x4
 
-lbl_804D7318:
+.global __GXOverflowCount
+__GXOverflowCount:
 	.skip 0x4

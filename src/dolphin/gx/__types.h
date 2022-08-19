@@ -100,8 +100,8 @@ typedef struct
     u16 x8;
 } GXSettings;
 
-// todo: this is actually a ptr in GXFifo but somehow writes to 0xC001000
-extern u16 *__peReg; // OSPhysicalToUncached (0x0C001000)
+extern volatile u16 *__peReg; // todo: OSPhysicalToUncached (0x0C001000)
+extern volatile u16 *__cpReg; // todo: OSPhysicalToUncached (0x0C000000)
 
 extern volatile union
 {
