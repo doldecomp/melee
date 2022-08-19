@@ -23,7 +23,7 @@
 /* 0033BCE8 */ extern void func_8033F108(unk_t, s8, u32, s32, u32, s32, s32);
 /* 0033AA2C */ extern void func_8033DE4C();
 /* 0033A31C */ extern void func_8033D73C(s32);
-/* 00339F80 */ extern void func_8033D3A0(s32);
+/* 00339F80 */ extern void GXSetCoPlanar(GXBool);
 /* 00339C30 */ extern void __GXSetDirtyState();
 
 #endif

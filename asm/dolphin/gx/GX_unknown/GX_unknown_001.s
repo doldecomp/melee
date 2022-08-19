@@ -2,27 +2,6 @@
 
 .section .text
 
-# https://decomp.me/scratch/c6mQg // 455 (73.24%)
-.global func_8033D3A0
-func_8033D3A0:
-/* 8033D3A0 00339F80  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8033D3A4 00339F84  54 60 99 58 */	rlwinm r0, r3, 0x13, 5, 0xc
-/* 8033D3A8 00339F88  38 A0 00 61 */	li r5, 0x61
-/* 8033D3AC 00339F8C  80 64 02 04 */	lwz r3, 0x204(r4)
-/* 8033D3B0 00339F90  38 C4 02 04 */	addi r6, r4, 0x204
-/* 8033D3B4 00339F94  3C 80 CC 01 */	lis r4, 0xCC008000@ha
-/* 8033D3B8 00339F98  54 63 03 56 */	rlwinm r3, r3, 0, 0xd, 0xb
-/* 8033D3BC 00339F9C  7C 60 03 78 */	or r0, r3, r0
-/* 8033D3C0 00339FA0  90 06 00 00 */	stw r0, 0(r6)
-/* 8033D3C4 00339FA4  3C 00 FE 08 */	lis r0, 0xfe08
-/* 8033D3C8 00339FA8  98 A4 80 00 */	stb r5, 0xCC008000@l(r4)
-/* 8033D3CC 00339FAC  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033D3D0 00339FB0  90 04 80 00 */	stw r0, -0x8000(r4)
-/* 8033D3D4 00339FB4  98 A4 80 00 */	stb r5, -0x8000(r4)
-/* 8033D3D8 00339FB8  80 03 02 04 */	lwz r0, 0x204(r3)
-/* 8033D3DC 00339FBC  90 04 80 00 */	stw r0, -0x8000(r4)
-/* 8033D3E0 00339FC0  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/NM2oq // 900 (0%)
 .global __GXSetGenMode
 __GXSetGenMode:

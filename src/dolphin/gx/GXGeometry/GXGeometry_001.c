@@ -85,3 +85,12 @@ void GXSetCullMode(GXCullMode mode)
     INSERT_FIELD(__GXContexts.main->x204, mode, 2, 14);
     __GXContexts.main->x4F0 |= 4;
 }
+
+void GXSetCoPlanar(GXBool enable)
+{
+    INSERT_FIELD(__GXContexts.main->x204, enable, 1, 19);
+    GX_WRITE_U8(0x61);
+    GX_WRITE_U32(0xFE080000);
+    GX_WRITE_U8(0x61);
+    GX_WRITE_U32(__GXContexts.main->x204);
+}
