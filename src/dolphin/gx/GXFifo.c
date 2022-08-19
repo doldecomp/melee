@@ -139,113 +139,54 @@ void GXSetCPUFifo(GXFifoObj *fifo)
 #endif
 }
 
+void GXSetGPFifo(GXFifoObj *fifo)
+{
+    __GXFifoObj *__fifo = (__GXFifoObj *)fifo;
+    BOOL intrEnabled = OSDisableInterrupts();
+
+    __GXFifoReadDisable();
+    __GXWriteFifoIntEnable(0, 0);
+    GPFifo = fifo;
+
+    __cpReg[16] = (u32)__fifo->base & 0xFFFF;
+    __cpReg[18] = (u32)__fifo->end & 0xFFFF;
+    __cpReg[24] = __fifo->x1C & 0xFFFF;
+    __cpReg[26] = (u32)__fifo->writePtr & 0xFFFF;
+    __cpReg[28] = (u32)__fifo->readPtr & 0xFFFF;
+    __cpReg[20] = (u32)__fifo->hiWaterMark & 0xFFFF;
+    __cpReg[22] = (u32)__fifo->loWaterMark & 0xFFFF;
+    __cpReg[17] = ((u32)__fifo->base >> 16) & 0x3FFF;
+    __cpReg[19] = ((u32)__fifo->end >> 16) & 0x3FFF;
+    __cpReg[25] = __fifo->x1C >> 16;
+    __cpReg[27] = ((u32)__fifo->writePtr >> 16) & 0x3FFF;
+    __cpReg[29] = ((u32)__fifo->readPtr >> 16) & 0x3FFF;
+    __cpReg[21] = (u32)__fifo->hiWaterMark >> 16;
+    __cpReg[23] = (u32)__fifo->loWaterMark >> 16;
+
+    __sync();
+
+    if (CPUFifo == GPFifo)
+    {
+        CPGPLinked = TRUE;
+        __GXWriteFifoIntEnable(1, 0);
+        __GXFifoLink(1);
+    }
+    else
+    {
+        CPGPLinked = FALSE;
+        __GXWriteFifoIntEnable(0, 0);
+        __GXFifoLink(0);
+    }
+    __GXWriteFifoIntReset(1, 1);
+    __GXFifoReadEnable();
+    OSRestoreInterrupts(intrEnabled);
+}
+
 #ifdef NON_MATCHING
 
 #else
 
 #endif
-
-asm void GXSetGPFifo()
-{ // clang-format off
-    nofralloc
-/* 8033BABC 0033869C  7C 08 02 A6 */	mflr r0
-/* 8033BAC0 003386A0  90 01 00 04 */	stw r0, 4(r1)
-/* 8033BAC4 003386A4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8033BAC8 003386A8  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8033BACC 003386AC  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8033BAD0 003386B0  7C 7E 1B 78 */	mr r30, r3
-/* 8033BAD4 003386B4  48 00 B8 91 */	bl OSDisableInterrupts
-/* 8033BAD8 003386B8  7C 7F 1B 78 */	mr r31, r3
-/* 8033BADC 003386BC  48 00 01 CD */	bl __GXFifoReadDisable
-/* 8033BAE0 003386C0  38 60 00 00 */	li r3, 0
-/* 8033BAE4 003386C4  38 80 00 00 */	li r4, 0
-/* 8033BAE8 003386C8  48 00 02 29 */	bl __GXWriteFifoIntEnable
-/* 8033BAEC 003386CC  93 CD BC 64 */	stw r30, GPFifo(r13)
-/* 8033BAF0 003386D0  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BAF4 003386D4  80 1E 00 00 */	lwz r0, 0(r30)
-/* 8033BAF8 003386D8  B0 03 00 20 */	sth r0, 0x20(r3)
-/* 8033BAFC 003386DC  80 1E 00 04 */	lwz r0, 4(r30)
-/* 8033BB00 003386E0  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB04 003386E4  B0 03 00 24 */	sth r0, 0x24(r3)
-/* 8033BB08 003386E8  80 1E 00 1C */	lwz r0, 0x1c(r30)
-/* 8033BB0C 003386EC  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB10 003386F0  B0 03 00 30 */	sth r0, 0x30(r3)
-/* 8033BB14 003386F4  80 1E 00 18 */	lwz r0, 0x18(r30)
-/* 8033BB18 003386F8  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB1C 003386FC  B0 03 00 34 */	sth r0, 0x34(r3)
-/* 8033BB20 00338700  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 8033BB24 00338704  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB28 00338708  B0 03 00 38 */	sth r0, 0x38(r3)
-/* 8033BB2C 0033870C  80 1E 00 0C */	lwz r0, 0xc(r30)
-/* 8033BB30 00338710  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB34 00338714  B0 03 00 28 */	sth r0, 0x28(r3)
-/* 8033BB38 00338718  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 8033BB3C 0033871C  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB40 00338720  B0 03 00 2C */	sth r0, 0x2c(r3)
-/* 8033BB44 00338724  80 1E 00 00 */	lwz r0, 0(r30)
-/* 8033BB48 00338728  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB4C 0033872C  54 00 84 BE */	rlwinm r0, r0, 0x10, 0x12, 0x1f
-/* 8033BB50 00338730  B0 03 00 22 */	sth r0, 0x22(r3)
-/* 8033BB54 00338734  80 1E 00 04 */	lwz r0, 4(r30)
-/* 8033BB58 00338738  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB5C 0033873C  54 00 84 BE */	rlwinm r0, r0, 0x10, 0x12, 0x1f
-/* 8033BB60 00338740  B0 03 00 26 */	sth r0, 0x26(r3)
-/* 8033BB64 00338744  80 1E 00 1C */	lwz r0, 0x1c(r30)
-/* 8033BB68 00338748  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB6C 0033874C  7C 00 86 70 */	srawi r0, r0, 0x10
-/* 8033BB70 00338750  B0 03 00 32 */	sth r0, 0x32(r3)
-/* 8033BB74 00338754  80 1E 00 18 */	lwz r0, 0x18(r30)
-/* 8033BB78 00338758  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB7C 0033875C  54 00 84 BE */	rlwinm r0, r0, 0x10, 0x12, 0x1f
-/* 8033BB80 00338760  B0 03 00 36 */	sth r0, 0x36(r3)
-/* 8033BB84 00338764  80 1E 00 14 */	lwz r0, 0x14(r30)
-/* 8033BB88 00338768  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB8C 0033876C  54 00 84 BE */	rlwinm r0, r0, 0x10, 0x12, 0x1f
-/* 8033BB90 00338770  B0 03 00 3A */	sth r0, 0x3a(r3)
-/* 8033BB94 00338774  80 1E 00 0C */	lwz r0, 0xc(r30)
-/* 8033BB98 00338778  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BB9C 0033877C  54 00 84 3E */	srwi r0, r0, 0x10
-/* 8033BBA0 00338780  B0 03 00 2A */	sth r0, 0x2a(r3)
-/* 8033BBA4 00338784  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 8033BBA8 00338788  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 8033BBAC 0033878C  54 00 84 3E */	srwi r0, r0, 0x10
-/* 8033BBB0 00338790  B0 03 00 2E */	sth r0, 0x2e(r3)
-/* 8033BBB4 00338794  7C 00 04 AC */	sync 
-/* 8033BBB8 00338798  80 6D BC 60 */	lwz r3, CPUFifo(r13)
-/* 8033BBBC 0033879C  80 0D BC 64 */	lwz r0, GPFifo(r13)
-/* 8033BBC0 003387A0  7C 03 00 40 */	cmplw r3, r0
-/* 8033BBC4 003387A4  40 82 00 24 */	bne lbl_8033BBE8
-/* 8033BBC8 003387A8  38 00 00 01 */	li r0, 1
-/* 8033BBCC 003387AC  98 0D BC 6C */	stb r0, CPGPLinked(r13)
-/* 8033BBD0 003387B0  38 60 00 01 */	li r3, 1
-/* 8033BBD4 003387B4  38 80 00 00 */	li r4, 0
-/* 8033BBD8 003387B8  48 00 01 39 */	bl __GXWriteFifoIntEnable
-/* 8033BBDC 003387BC  38 60 00 01 */	li r3, 1
-/* 8033BBE0 003387C0  48 00 00 ED */	bl __GXFifoLink
-/* 8033BBE4 003387C4  48 00 00 20 */	b lbl_8033BC04
-lbl_8033BBE8:
-/* 8033BBE8 003387C8  38 00 00 00 */	li r0, 0
-/* 8033BBEC 003387CC  98 0D BC 6C */	stb r0, CPGPLinked(r13)
-/* 8033BBF0 003387D0  38 60 00 00 */	li r3, 0
-/* 8033BBF4 003387D4  38 80 00 00 */	li r4, 0
-/* 8033BBF8 003387D8  48 00 01 19 */	bl __GXWriteFifoIntEnable
-/* 8033BBFC 003387DC  38 60 00 00 */	li r3, 0
-/* 8033BC00 003387E0  48 00 00 CD */	bl __GXFifoLink
-lbl_8033BC04:
-/* 8033BC04 003387E4  38 60 00 01 */	li r3, 1
-/* 8033BC08 003387E8  38 80 00 01 */	li r4, 1
-/* 8033BC0C 003387EC  48 00 01 51 */	bl __GXWriteFifoIntReset
-/* 8033BC10 003387F0  48 00 00 71 */	bl __GXFifoReadEnable
-/* 8033BC14 003387F4  7F E3 FB 78 */	mr r3, r31
-/* 8033BC18 003387F8  48 00 B7 75 */	bl OSRestoreInterrupts
-/* 8033BC1C 003387FC  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8033BC20 00338800  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8033BC24 00338804  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8033BC28 00338808  7C 08 03 A6 */	mtlr r0
-/* 8033BC2C 0033880C  38 21 00 18 */	addi r1, r1, 0x18
-/* 8033BC30 00338810  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
 
 asm void __GXFifoInit()
 { // clang-format off
