@@ -1,4 +1,4 @@
-#include <fighter.h>
+#include <melee/ft/fighter.h>
 
 typedef struct UnkFloat6_Camera {
     Vec3 x0;

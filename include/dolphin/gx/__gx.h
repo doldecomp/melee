@@ -98,7 +98,7 @@ typedef enum _GXChannelID
 } GXChannelID;
 
 extern volatile u8 WGPIPE_OP
-#ifndef M2C_CONTEXT
+#ifndef M2CTX
     : 0xCC010000
 #endif
     ;
@@ -116,7 +116,7 @@ extern volatile union
     f32 f32;
 
 } WGPIPE
-#ifndef M2C_CONTEXT
+#ifndef M2CTX
     : 0xCC008000
 #endif
     ;
