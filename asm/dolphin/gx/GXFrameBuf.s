@@ -3,8 +3,8 @@
 .section .text
 
 # https://decomp.me/scratch/UcyNc // 755 (84.27%)
-.global func_8033D408
-func_8033D408:
+.global GXSetDispCopySrc
+GXSetDispCopySrc:
 /* 8033D408 00339FE8  80 ED A5 08 */	lwz r7, __GXContexts@sda21(r13)
 /* 8033D40C 00339FEC  39 00 00 00 */	li r8, 0
 /* 8033D410 00339FF0  54 84 51 AA */	rlwinm r4, r4, 0xa, 6, 0x15
@@ -55,8 +55,8 @@ func_8033D408:
 /* 8033D4C4 0033A0A4  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/ZuNiA // 755 (84.27%)
-.global func_8033D4C8
-func_8033D4C8:
+.global GXSetTexCopySrc
+GXSetTexCopySrc:
 /* 8033D4C8 0033A0A8  80 ED A5 08 */	lwz r7, __GXContexts@sda21(r13)
 /* 8033D4CC 0033A0AC  39 00 00 00 */	li r8, 0
 /* 8033D4D0 0033A0B0  54 84 51 AA */	rlwinm r4, r4, 0xa, 6, 0x15
@@ -107,8 +107,8 @@ func_8033D4C8:
 /* 8033D584 0033A164  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/S62uD // 265 (84.41%)
-.global func_8033D588
-func_8033D588:
+.global GXSetDispCopyDst
+GXSetDispCopyDst:
 /* 8033D588 0033A168  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
 /* 8033D58C 0033A16C  38 00 00 00 */	li r0, 0
 /* 8033D590 0033A170  90 04 01 E8 */	stw r0, 0x1e8(r4)
@@ -127,8 +127,8 @@ func_8033D588:
 /* 8033D5C4 0033A1A4  90 03 00 00 */	stw r0, 0(r3)
 /* 8033D5C8 0033A1A8  4E 80 00 20 */	blr 
 
-.global func_8033D5CC
-func_8033D5CC:
+.global GXSetTexCopyDst
+GXSetTexCopyDst:
 /* 8033D5CC 0033A1AC  7C 08 02 A6 */	mflr r0
 /* 8033D5D0 0033A1B0  2C 05 00 13 */	cmpwi r5, 0x13
 /* 8033D5D4 0033A1B4  90 01 00 04 */	stw r0, 4(r1)
@@ -227,8 +227,8 @@ lbl_8033D658:
 /* 8033D738 0033A318  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/a5KC6 // 0 (100%)
-.global func_8033D73C
-func_8033D73C:
+.global GXSetDispCopyFrame2Field
+GXSetDispCopyFrame2Field:
 /* 8033D73C 0033A31C  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
 /* 8033D740 0033A320  54 60 60 26 */	slwi r0, r3, 0xc
 /* 8033D744 0033A324  84 64 01 EC */	lwzu r3, 0x1ec(r4)
@@ -242,8 +242,8 @@ func_8033D73C:
 /* 8033D764 0033A344  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/eN1kg // 2515 (18.87%)
-.global func_8033D768
-func_8033D768:
+.global GXSetCopyClamp
+GXSetCopyClamp:
 /* 8033D768 0033A348  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
 /* 8033D76C 0033A34C  54 64 07 FE */	clrlwi r4, r3, 0x1f
 /* 8033D770 0033A350  38 04 FF FF */	addi r0, r4, -1
@@ -277,8 +277,8 @@ func_8033D768:
 /* 8033D7E0 0033A3C0  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/ZNlNl // 620 (86.81%)
-.global func_8033D7E4
-func_8033D7E4:
+.global GXSetDispCopyYScale
+GXSetDispCopyYScale:
 /* 8033D7E4 0033A3C4  7C 08 02 A6 */	mflr r0
 /* 8033D7E8 0033A3C8  90 01 00 04 */	stw r0, 4(r1)
 /* 8033D7EC 0033A3CC  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -328,8 +328,8 @@ func_8033D7E4:
 /* 8033D89C 0033A47C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/uNbv5 // 2555 (1.73%)
-.global func_8033D8A0
-func_8033D8A0:
+.global GXSetCopyClear
+GXSetCopyClear:
 /* 8033D8A0 0033A480  54 80 02 3E */	clrlwi r0, r4, 8
 /* 8033D8A4 0033A484  88 83 00 03 */	lbz r4, 3(r3)
 /* 8033D8A8 0033A488  88 A3 00 00 */	lbz r5, 0(r3)
@@ -358,8 +358,8 @@ func_8033D8A0:
 /* 8033D904 0033A4E4  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/EqBSQ // 6759 (51.02%)
-.global func_8033D908
-func_8033D908:
+.global GXSetCopyFilter
+GXSetCopyFilter:
 /* 8033D908 0033A4E8  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8033D90C 0033A4EC  54 60 06 3F */	clrlwi. r0, r3, 0x18
 /* 8033D910 0033A4F0  BE E1 00 2C */	stmw r23, 0x2c(r1)
@@ -504,8 +504,8 @@ lbl_8033DB00:
 /* 8033DB2C 0033A70C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/tmhsk // 0 (100%)
-.global func_8033DB30
-func_8033DB30:
+.global GXSetDispCopyGamma
+GXSetDispCopyGamma:
 /* 8033DB30 0033A710  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
 /* 8033DB34 0033A714  54 60 38 30 */	slwi r0, r3, 7
 /* 8033DB38 0033A718  84 64 01 EC */	lwzu r3, 0x1ec(r4)
@@ -514,8 +514,8 @@ func_8033DB30:
 /* 8033DB44 0033A724  90 04 00 00 */	stw r0, 0(r4)
 /* 8033DB48 0033A728  4E 80 00 20 */	blr 
 
-.global func_8033DB4C
-func_8033DB4C:
+.global GXCopyDisp
+GXCopyDisp:
 /* 8033DB4C 0033A72C  54 80 06 3F */	clrlwi. r0, r4, 0x18
 /* 8033DB50 0033A730  41 82 00 3C */	beq lbl_8033DB8C
 /* 8033DB54 0033A734  80 ED A5 08 */	lwz r7, __GXContexts@sda21(r13)
@@ -614,8 +614,8 @@ lbl_8033DCAC:
 /* 8033DCB4 0033A894  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033DCB8 0033A898  4E 80 00 20 */	blr 
 
-.global func_8033DCBC
-func_8033DCBC:
+.global GXCopyTex
+GXCopyTex:
 /* 8033DCBC 0033A89C  54 80 06 3F */	clrlwi. r0, r4, 0x18
 /* 8033DCC0 0033A8A0  41 82 00 3C */	beq lbl_8033DCFC
 /* 8033DCC4 0033A8A4  80 ED A5 08 */	lwz r7, __GXContexts@sda21(r13)
@@ -725,8 +725,8 @@ lbl_8033DE3C:
 /* 8033DE48 0033AA28  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/TIMEO // 1035 (26.07%)
-.global func_8033DE4C
-func_8033DE4C:
+.global GXClearBoundingBox
+GXClearBoundingBox:
 /* 8033DE4C 0033AA2C  38 C0 00 61 */	li r6, 0x61
 /* 8033DE50 0033AA30  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
 /* 8033DE54 0033AA34  3C A0 CC 01 */	lis r5, 0xCC008000@ha
@@ -742,11 +742,21 @@ func_8033DE4C:
 /* 8033DE7C 0033AA5C  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033DE80 0033AA60  4E 80 00 20 */	blr 
 
+.section .sdata2
+
+lbl_804DE220:
+	.4byte 0x43800000
+	.4byte 0x00000000
+
+lbl_804DE228:
+	.4byte 0x43300000
+	.4byte 0x00000000
+
 .section .data
     .balign 8
 
-.global lbl_80401168
-lbl_80401168:
+.global GXNtsc480IntDf
+GXNtsc480IntDf:
     .4byte NULL
     .4byte 0x028001E0
     .4byte 0x01E00028
@@ -799,8 +809,8 @@ lbl_804011E0:
     .4byte 0x15161500
     .4byte NULL
 
-.global lbl_8040121C
-lbl_8040121C:
+.global GXMpal480IntDf
+GXMpal480IntDf:
     .4byte 0x00000008
     .4byte 0x028001E0
     .4byte 0x01E00028
@@ -817,8 +827,8 @@ lbl_8040121C:
     .4byte 0x0A0C0A08
     .4byte 0x08000000
 
-.global lbl_80401258
-lbl_80401258:
+.global GXPal528IntDf
+GXPal528IntDf:
     .4byte 0x00000004
     .4byte 0x02800210
     .4byte 0x02100028
@@ -835,13 +845,3 @@ lbl_80401258:
     .4byte 0x0A0C0A08
     .4byte 0x08000000
     .4byte NULL
-
-.section .sdata2
-
-lbl_804DE220:
-	.4byte 0x43800000
-	.4byte 0x00000000
-
-lbl_804DE228:
-	.4byte 0x43300000
-	.4byte 0x00000000

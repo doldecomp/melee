@@ -71,7 +71,8 @@ typedef struct
     s32 x130_data[(0x170 - 0x130) / 4];                 // at 0x130
     s32 x170_data[(0x1AC - 0x170) / 4];                 // at 0x170
     u8 x1AC_pad[0x1B0 - 0x1AC];                         // at 0x1AC
-    GXTexRegionCallback callbacks[(0x204 - 0x1B0) / 4]; // at 0x1B0
+    GXTexRegionCallback callbacks[(0x1D0 - 0x1B0) / 4]; // at 0x1B0
+    u32 x1D0[(0x204 - 0x1D0) / 4];                      // at 0x1D0
     u32 x204;                                           // at 0x204
     u8 x208_pad[0x41C - 0x208];                         // at 0x208
     s8 x41C;                                            // at 0x41C

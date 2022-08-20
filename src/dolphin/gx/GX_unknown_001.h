@@ -6,7 +6,7 @@
 
 /* 003FDDC0 */ extern const GXRenderModeObj lbl_804011E0;
 /* 003FDD84 */ extern const GXRenderModeObj lbl_804011A4;
-/* 003FDD48 */ extern const GXRenderModeObj lbl_80401168;
+/* 003FDD48 */ extern const GXRenderModeObj GXNtsc480IntDf;
 /* 0033E33C */ extern void func_8034175C(s32, s32, s32, s32);
 /* 0033E2F0 */ extern void func_80341710(unk_t);
 /* 0033E2CC */ extern void func_803416EC(f32, f32, f32, f32, f32, f32);
@@ -63,16 +63,16 @@
 /* 0033B804 */ extern void func_8033EC24(unk_t, s32, u16, u16, s32, s32, s32, s8);
 /* 0033B590 */ extern void func_8033E9B0(unk_t, u32, u16, u16, s32, s32, s32, s8);
 /* 0033B36C */ extern s32 func_8033E78C(u16, u16, u32, u8, u8);
-/* 0033A89C */ extern void func_8033DCBC(u32, s8);
-/* 0033A72C */ extern void func_8033DB4C(u32, s8);
-/* 0033A710 */ extern void func_8033DB30(s32);
-/* 0033A4E8 */ extern void func_8033D908(s8, u8 *, s8, u8 *);
-/* 0033A480 */ extern void func_8033D8A0(u8 *, s32);
-/* 0033A3C4 */ extern u32 func_8033D7E4(f32);
-/* 0033A348 */ extern void func_8033D768(s32);
-/* 0033A1AC */ extern void func_8033D5CC(s32, s32, s32, s32);
-/* 0033A168 */ extern void func_8033D588(s32);
-/* 0033A0A8 */ extern void func_8033D4C8(s16, s32, s16, s16);
-/* 00339FE8 */ extern void func_8033D408(s16, s32, s16, s16);
+/* 0033A89C */ extern void GXCopyTex(u32, GXBool);
+/* 0033A72C */ extern void GXCopyDisp(u32, s8);
+/* 0033A710 */ extern void GXSetDispCopyGamma(s32);
+/* 0033A4E8 */ extern void GXSetCopyFilter(s8, u8 *, s8, u8 *);
+/* 0033A480 */ extern void GXSetCopyClear(u8 *, s32);
+/* 0033A3C4 */ extern u32 GXSetDispCopyYScale(f32);
+/* 0033A348 */ extern void GXSetCopyClamp(s32);
+/* 0033A1AC */ extern void GXSetTexCopyDst(s32, s32, s32, s32);
+/* 0033A168 */ extern void GXSetDispCopyDst(s32);
+/* 0033A0A8 */ extern void GXSetTexCopySrc(s16, s32, s16, s16);
+/* 00339FE8 */ extern void GXSetDispCopySrc(s16, s32, s16, s16);
 
 #endif
