@@ -553,9 +553,9 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/dvd/fstload.c.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/gx/GXInit/GXInit_001.s.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXFifo.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXAttr/GXAttr_001.s.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXMisc/__GXMisc.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXMisc/GXMisc_001.s.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXMisc/GXMisc_002.c.o\
