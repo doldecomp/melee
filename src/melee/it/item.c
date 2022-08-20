@@ -1,4 +1,4 @@
-#include <item.h>
+#include <melee/it/item.h>
 #include <common_structs.h>
 
 extern s32 func_8016AE80();

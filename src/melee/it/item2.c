@@ -1,4 +1,4 @@
-#include <item.h>
+#include <melee/it/item.h>
 #include <common_structs.h>
 
 #define FLOAT32_MAX 3.4028234663852886e+38f
