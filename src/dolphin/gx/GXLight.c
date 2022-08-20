@@ -1,7 +1,7 @@
-#include <functions.h> // todo
+#include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/__GXInit.h>
+#include <functions.h> // todo
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
-#include <dolphin/gx/__GXLight.h>
 
 void GXInitLightAttn(GXLightObj *light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc)
 {
@@ -198,7 +198,7 @@ void GXLoadLightObjImm(GXLightObj *light, GXLightID light_id)
 #pragma push
 
 // https://decomp.me/scratch/DOTYM // 9765 (0%)
-asm void GXSetChanAmbColor(GXChannelID, GXColor *)
+asm void GXSetChanAmbColor(GXChannelID chan, GXColor *color)
 { // clang-format off
     nofralloc
 /* 8033E28C 0033AE6C  2C 03 00 03 */	cmpwi r3, 3
@@ -301,7 +301,7 @@ lbl_8033E3BC:
 /* 8033E3F0 0033AFD0  4E 80 00 20 */	blr 
 } // clang-format on
 
-asm void GXSetChanMatColor(GXChannelID, GXColor *)
+asm void GXSetChanMatColor(GXChannelID chan, GXColor *color)
 { // clang-format off
     nofralloc
 /* 8033E3F4 0033AFD4  2C 03 00 03 */	cmpwi r3, 3
