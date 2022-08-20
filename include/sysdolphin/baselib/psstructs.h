@@ -6,7 +6,6 @@
 #include <sysdolphin/baselib/jobj.h>
 
 typedef unk_t HSD_PSAppSRT;
-typedef unk_t GXPosNrmMtx;
 
 struct _HSD_JObj;
 
