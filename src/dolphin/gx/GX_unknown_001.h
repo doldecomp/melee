@@ -47,12 +47,12 @@
 /* 0033CBC8 */ extern void func_8033FFE8(s32, s32, s32, s32, s32);
 /* 0033CB48 */ extern void func_8033FF68(s32, s32, s32, s32, s32);
 /* 0033C9A4 */ extern void func_8033FDC4(s32, s32);
-/* 0033C86C */ extern void func_8033FC8C();
-/* 0033C840 */ extern void func_8033FC60(s32);
-/* 0033C708 */ extern void func_8033FB28(s32, s32, s32);
-/* 0033C534 */ extern void func_8033F954(s32, s32, s32);
-/* 0033C3D4 */ extern void func_8033F7F4(s32, unk_t, s32);
-/* 0033C338 */ extern void func_8033F758(s32, s32, u8, s32, s32, s32, s32, s32);
+/* 0033C86C */ extern void GXSetTevDirect();
+/* 0033C840 */ extern void GXSetNumIndStages(s32);
+/* 0033C708 */ extern void GXSetIndTexOrder(s32, s32, s32);
+/* 0033C534 */ extern void GXSetIndTexCoordScale(s32, s32, s32);
+/* 0033C3D4 */ extern void GXSetIndTexMtx(s32, unk_t, s32);
+/* 0033C338 */ extern void GXSetTevIndirect(s32, s32, u8, s32, s32, s32, s32, s32);
 /* 0033BC4C */ extern void func_8033F06C(unk_t, s32);
 /* 0033BC04 */ extern void func_8033F024(unk_t, u32, s32, u16);
 /* 0033BBB0 */ extern void GXLoadTexObj(unk_t, s32);
