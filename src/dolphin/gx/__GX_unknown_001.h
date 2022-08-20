@@ -24,4 +24,4 @@
 /* 0033AA2C */ extern void GXClearBoundingBox();
 /* 0033A31C */ extern void GXSetDispCopyFrame2Field(s32);
 
-
+#endif
