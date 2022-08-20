@@ -24,44 +24,42 @@ static unk_t lbl_804D7324;
 static GXBool lbl_804D7328[0x4];
 static OSThreadQueue GXDrawDoneThreadQueue;
 
-#pragma push
-asm void GXSetMisc()
-{ // clang-format off
-    nofralloc
-/* 8033CBC0 003397A0  2C 03 00 01 */	cmpwi r3, 1
-/* 8033CBC4 003397A4  41 82 00 14 */	beq lbl_8033CBD8
-/* 8033CBC8 003397A8  4D 80 00 20 */	bltlr 
-/* 8033CBCC 003397AC  2C 03 00 03 */	cmpwi r3, 3
-/* 8033CBD0 003397B0  4C 80 00 20 */	bgelr 
-/* 8033CBD4 003397B4  48 00 00 4C */	b lbl_8033CC20
-lbl_8033CBD8:
-/* 8033CBD8 003397B8  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033CBDC 003397BC  38 00 00 01 */	li r0, 1
-/* 8033CBE0 003397C0  B0 83 00 04 */	sth r4, 4(r3)
-/* 8033CBE4 003397C4  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033CBE8 003397C8  A0 64 00 04 */	lhz r3, 4(r4)
-/* 8033CBEC 003397CC  7C 63 00 34 */	cntlzw r3, r3
-/* 8033CBF0 003397D0  54 63 DC 3E */	rlwinm r3, r3, 0x1b, 0x10, 0x1f
-/* 8033CBF4 003397D4  B0 64 00 00 */	sth r3, 0(r4)
-/* 8033CBF8 003397D8  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033CBFC 003397DC  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033CC00 003397E0  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033CC04 003397E4  A0 03 00 04 */	lhz r0, 4(r3)
-/* 8033CC08 003397E8  28 00 00 00 */	cmplwi r0, 0
-/* 8033CC0C 003397EC  4D 82 00 20 */	beqlr 
-/* 8033CC10 003397F0  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 8033CC14 003397F4  60 00 00 08 */	ori r0, r0, 8
-/* 8033CC18 003397F8  90 03 04 F0 */	stw r0, 0x4f0(r3)
-/* 8033CC1C 003397FC  4E 80 00 20 */	blr 
-lbl_8033CC20:
-/* 8033CC20 00339800  7C 84 00 D0 */	neg r4, r4
-/* 8033CC24 00339804  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033CC28 00339808  30 04 FF FF */	addic r0, r4, -1
-/* 8033CC2C 0033980C  7C 00 21 10 */	subfe r0, r0, r4
-/* 8033CC30 00339810  98 03 04 ED */	stb r0, 0x4ed(r3)
-/* 8033CC34 00339814  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+static inline void GXSetMisc_inline_1(u16 arg0)
+{
+    __GXContexts.main->x4 = arg0;
+}
+
+static inline void GXSetMisc_inline_2()
+{
+    GXContext *gx = __GXContexts.main;
+    gx->x0.u16[0] = !gx->x4;
+    set_x2(GX_TRUE);
+}
+
+static inline void GXSetMisc_inline_3()
+{
+    GXContext *gx = __GXContexts.main;
+
+    if (gx->x4)
+        gx->x4F0 |= 8;
+}
+
+void GXSetMisc(s32 arg0, u32 arg1)
+{
+    switch (arg0)
+    {
+    case 0:
+        break;
+    case 1:
+        GXSetMisc_inline_1(arg1);
+        GXSetMisc_inline_2();
+        GXSetMisc_inline_3();
+        break;
+    case 2:
+        __GXContexts.main->x4ED = arg1 != 0;
+        break;
+    }
+}
 
 void GXSetDrawDone()
 {

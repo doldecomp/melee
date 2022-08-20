@@ -85,7 +85,8 @@ typedef struct
     s32 x45C_data[0x20 / 4];                            // at 0x45C
     s32 x47C_data[0x20 / 4];                            // at 0x47C
     u32 x49C_data[(0x4EC - 0x49C) / 4];                 // at 0x49C
-    u8 x4EC_pad[2];                                     // at 0x4EC
+    u8 x4EC;                                            // at 0x4EC
+    GXBool x4ED;                                        // at 0x4ED
     u8 x4EE;                                            // at 0x4EE
     u32 x4F0;                                           // at 0x4F0
     GXFifoObj *fifo;                                    // at 0x4F4
