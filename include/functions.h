@@ -924,8 +924,6 @@ void func_8038FD54(struct _HSD_GObj *, void (*)(struct _HSD_GObj *), s32);
 struct _HSD_GObj *func_803901F0(s32, s32, s32);
 void func_80390228(struct _HSD_GObj *);
 
-// void GObj_SetupGXLink();
-
 void efLib_PauseAll(struct _HSD_GObj *);
 void efLib_ResumeAll(struct _HSD_GObj *);
 BOOL EnvColl_CheckGroundAndLedge(HSD_GObj *, s32);
