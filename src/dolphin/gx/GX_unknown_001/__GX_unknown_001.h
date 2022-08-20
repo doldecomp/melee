@@ -44,10 +44,10 @@
 /* 004D27A0 */ extern const u32 GXTexMode0Ids[2];
 /* 003FE0E8 */ extern const u32 lbl_80401508[8];
 /* 003FE0C0 */ extern const u32 lbl_804014E0[10];
-/* 0033E050 */ extern void func_80341470(unk_t, s8 *);
-/* 0033E01C */ extern void func_8034143C(unk_t, s8 *, s8 *);
-/* 0033DFE8 */ extern void func_80341408(unk_t, s8 *, s8 *);
-/* 0033DCB4 */ extern void func_803410D4(f32, f32);
+/* 0033E050 */ extern void WriteMTXPS4x2(unk_t, s8 *);
+/* 0033E01C */ extern void WriteMTXPS3x3from3x4(unk_t, s8 *, s8 *);
+/* 0033DFE8 */ extern void WriteMTXPS4x3(unk_t, s8 *, s8 *);
+/* 0033DCB4 */ extern void __GXSetRange(f32, f32);
 /* 0033C8B4 */ extern void __GXUpdateBPMask();
 /* 0033BF8C */ extern void __GXSetSUTexSize();
 /* 0033BEC0 */ extern void __SetSURegs(s32, s32);

@@ -2,11 +2,6 @@
 
 .section .text
 
-# https://decomp.me/scratch/4EbpN // 0 (100%)
-.global func_803410D4
-func_803410D4:
-/* 803410D4 0033DCB4  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/HEw0V
 .global GXCallDisplayList
 GXCallDisplayList:
