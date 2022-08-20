@@ -25,6 +25,7 @@ clean.bat
 # Other
 src/m2ctx.py
 ctx.c
+ctx_includes.h
 
 # Epilogue hack folder
 epilogue/
