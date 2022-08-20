@@ -137,21 +137,12 @@ lbl_8033CCF4:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm void GXPixModeSync()
-{ // clang-format off
-    nofralloc
-/* 8033CD1C 003398FC  38 00 00 61 */	li r0, 0x61
-/* 8033CD20 00339900  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033CD24 00339904  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033CD28 00339908  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
-/* 8033CD2C 0033990C  38 00 00 00 */	li r0, 0
-/* 8033CD30 00339910  80 64 01 DC */	lwz r3, 0x1dc(r4)
-/* 8033CD34 00339914  90 65 80 00 */	stw r3, -0x8000(r5)
-/* 8033CD38 00339918  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033CD3C 0033991C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXPixModeSync()
+{
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(__GXContexts.main->x1D0[3]);
+    set_x2(GX_FALSE);
+}
 
 /*
  * This function sets a threshold which is compared to the alpha of pixels written to the Embedded Frame Buffer (EFB) using the GXPoke* functions. The GXPoke* functions allow the CPU to write directly to the EFB.  The compare function order is:
