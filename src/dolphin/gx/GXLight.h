@@ -1,5 +1,3 @@
-// https://github.com/kiwi515/open_rvl/blob/366b440e58f030aa0aacc9316d2717289d58fe16/include/GX/GXLight.h
-
 #ifndef DOLPHIN_GX_GXLIGHT_H
 #define DOLPHIN_GX_GXLIGHT_H
 
@@ -7,8 +5,8 @@
 
 typedef struct _GXLightObj
 {
-    char UNK_0x0[0xC];
-    GXColor color; // at 0xC
+    char x0[0xC];  // at 0x00
+    GXColor color; // at 0x0C
     f32 aa;        // at 0x10
     f32 ab;        // at 0x14
     f32 ac;        // at 0x18
@@ -19,17 +17,17 @@ typedef struct _GXLightObj
     Vec dir;       // at 0x34
 } GXLightObj;
 
-/* 0033B188 */ extern void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src,
-                                         u32 light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn);
-/* 0033B13C */ extern void GXSetNumChans(u8);
-/* 0033AFD4 */ extern void GXSetChanMatColor(GXChannelID, GXColor *);
-/* 0033AE6C */ extern void GXSetChanAmbColor(GXChannelID, GXColor *);
-/* 0033AD24 */ extern void GXLoadLightObjImm(GXLightObj *, GXLightID);
-/* 0033ACFC */ extern void GXInitLightColor(GXLightObj *, GXColor *);
-/* 0033ACE0 */ extern void GXInitLightDir(GXLightObj *, f32, f32, f32);
-/* 0033ACD0 */ extern void GXInitLightPos(GXLightObj *, f32, f32, f32);
-/* 0033AC00 */ extern void GXInitLightDistAttn(GXLightObj *, f32, f32, GXDistAttnFn);
-/* 0033AA80 */ extern void GXInitLightSpot(GXLightObj *, f32, GXSpotFn);
-/* 0033AA64 */ extern void GXInitLightAttn(GXLightObj *lobj, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc);
+void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src,
+                   u32 light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn);
+void GXSetNumChans(u8);
+void GXSetChanMatColor(GXChannelID, GXColor *);
+void GXSetChanAmbColor(GXChannelID, GXColor *);
+void GXLoadLightObjImm(GXLightObj *, GXLightID);
+void GXInitLightColor(GXLightObj *, GXColor *);
+void GXInitLightDir(GXLightObj *, f32, f32, f32);
+void GXInitLightPos(GXLightObj *, f32, f32, f32);
+void GXInitLightDistAttn(GXLightObj *, f32, f32, GXDistAttnFn);
+void GXInitLightSpot(GXLightObj *, f32, GXSpotFn);
+void GXInitLightAttn(GXLightObj *lobj, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc);
 
 #endif

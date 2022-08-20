@@ -3,8 +3,6 @@
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
 #include <dolphin/gx/__GXLight.h>
 
-extern const f64 lbl_804DE260;
-
 void GXInitLightAttn(GXLightObj *light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc)
 {
     light->aa = aa;

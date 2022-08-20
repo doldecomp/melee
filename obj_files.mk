@@ -563,7 +563,6 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/gx/GXGeometry.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GX_unknown/GX_unknown_001.s.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXLight.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXLight/GXLight_001.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GX_unknown/GX_unknown_002.s.o\
 
 TEXT_O_FILES +=\
