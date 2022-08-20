@@ -34,14 +34,14 @@
 /* 004DAE48 */ extern const f32 lbl_804DE268[2];
 /* 004DAE08 */ extern const f32 lbl_804DE228[2];
 /* 004DAE00 */ extern const f32 lbl_804DE220[2];
-/* 004D27D8 */ extern const u32 lbl_804D5BF8[2];
-/* 004D27D0 */ extern const u32 lbl_804D5BF0[2];
-/* 004D27C8 */ extern const u32 lbl_804D5BE8[2];
-/* 004D27C0 */ extern const u32 lbl_804D5BE0[2];
-/* 004D27B8 */ extern const u32 lbl_804D5BD8[2];
-/* 004D27B0 */ extern const u32 lbl_804D5BD0[2];
-/* 004D27A8 */ extern const u32 lbl_804D5BC8[2];
-/* 004D27A0 */ extern const u32 lbl_804D5BC0[2];
+/* 004D27D8 */ extern const u32 GX2HWFiltConv[2];
+/* 004D27D0 */ extern const u32 GXTexTlutIds[2];
+/* 004D27C8 */ extern const u32 GXTexImage3Ids[2];
+/* 004D27C0 */ extern const u32 GXTexImage2Ids[2];
+/* 004D27B8 */ extern const u32 GXTexImage1Ids[2];
+/* 004D27B0 */ extern const u32 GXTexImage0Ids[2];
+/* 004D27A8 */ extern const u32 GXTexMode1Ids[2];
+/* 004D27A0 */ extern const u32 GXTexMode0Ids[2];
 /* 003FE0E8 */ extern const u32 lbl_80401508[8];
 /* 003FE0C0 */ extern const u32 lbl_804014E0[10];
 /* 0033E050 */ extern void func_80341470(unk_t, s8 *);
@@ -50,8 +50,8 @@
 /* 0033DCB4 */ extern void func_803410D4(f32, f32);
 /* 0033C8B4 */ extern void __GXUpdateBPMask();
 /* 0033BF8C */ extern void __GXSetSUTexSize();
-/* 0033BEC0 */ extern void func_8033F2E0(s32, s32);
-/* 0033BA08 */ extern void func_8033EE28(unk_t, unk_t, s32);
-/* 0033B4C8 */ extern void func_8033E8E8(u32, s16, s16, s32 *, s32 *, s32 *);
+/* 0033BEC0 */ extern void __SetSURegs(s32, s32);
+/* 0033BA08 */ extern void GXLoadTexObjPreLoaded(unk_t, unk_t, s32);
+/* 0033B4C8 */ extern void __GetImageTileCount(u32, s16, s16, s32 *, s32 *, s32 *);
 
 #endif

@@ -7,7 +7,6 @@ from pathlib import Path
 
 here = Path(__file__).parent
 root = here / '../../'
-src = root / "src"
 mwcc_command = root / "tools/mwcc_compiler/1.2.5e/mwcceppc.exe"
 
 MWCC_FLAGS = [
@@ -35,15 +34,16 @@ def normalize_path(p: str) -> str:
 
 
 def import_c_file(in_file: str) -> str:
-    in_file = normalize_path(src / in_file)
+    in_file = normalize_path(root / in_file)
     c_command = [normalize_path(mwcc_command), *MWCC_FLAGS, "-E", in_file]
 
     try:
         out_text = subprocess.check_output(c_command, cwd=root, encoding="utf8")
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as err:
         print(
             "Failed to preprocess input file, when running command:\n"
-            + ' '.join(c_command),
+            + ' '.join(c_command)
+            + f'\n\n{err.output}',
             file=sys.stderr,
         )
         sys.exit(1)
