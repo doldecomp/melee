@@ -21,7 +21,7 @@
 
 static unk_t lbl_804D7320;
 static unk_t lbl_804D7324;
-static u8 lbl_804D7328[0x4];
+static GXBool lbl_804D7328[0x4];
 static OSThreadQueue GXDrawDoneThreadQueue;
 
 #pragma push
@@ -109,33 +109,15 @@ lbl_8033CC80:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm void GXWaitDrawDone()
-{ // clang-format off
-    nofralloc
-/* 8033CCD0 003398B0  7C 08 02 A6 */	mflr r0
-/* 8033CCD4 003398B4  90 01 00 04 */	stw r0, 4(r1)
-/* 8033CCD8 003398B8  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8033CCDC 003398BC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8033CCE0 003398C0  48 00 A6 85 */	bl OSDisableInterrupts
-/* 8033CCE4 003398C4  7C 7F 1B 78 */	mr r31, r3
-/* 8033CCE8 003398C8  48 00 00 0C */	b lbl_8033CCF4
-lbl_8033CCEC:
-/* 8033CCEC 003398CC  38 6D BC 8C */	addi r3, r13, GXDrawDoneThreadQueue
-/* 8033CCF0 003398D0  48 00 ED 25 */	bl OSSleepThread
-lbl_8033CCF4:
-/* 8033CCF4 003398D4  88 0D BC 88 */	lbz r0, lbl_804D7328(r13)
-/* 8033CCF8 003398D8  28 00 00 00 */	cmplwi r0, 0
-/* 8033CCFC 003398DC  41 82 FF F0 */	beq lbl_8033CCEC
-/* 8033CD00 003398E0  7F E3 FB 78 */	mr r3, r31
-/* 8033CD04 003398E4  48 00 A6 89 */	bl OSRestoreInterrupts
-/* 8033CD08 003398E8  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8033CD0C 003398EC  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8033CD10 003398F0  38 21 00 10 */	addi r1, r1, 0x10
-/* 8033CD14 003398F4  7C 08 03 A6 */	mtlr r0
-/* 8033CD18 003398F8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXWaitDrawDone()
+{
+    u32 interrupt_enabled = OSDisableInterrupts();
+
+    while (!lbl_804D7328[0])
+        OSSleepThread(&GXDrawDoneThreadQueue);
+
+    OSRestoreInterrupts(interrupt_enabled);
+}
 
 void GXPixModeSync()
 {
