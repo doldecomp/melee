@@ -12,7 +12,7 @@
 /* 0033E458 */ extern s32 func_80341878(s32);
 /* 0033E430 */ extern void func_80341850(s32);
 /* 0033E3EC */ extern void func_8034180C(s32, s32);
-/* 0033DBFC */ extern void func_8034101C(s32, s8);
+/* 0033DBFC */ extern void GXSetFieldMask(s32, s8);
 /* 0033C980 */ extern void __GXFlushTextureState(GXContext *, s32, u8 *);
 /* 0033C980 */ extern void __GXFlushTextureState(GXContext *, s32, u8 *);
 /* 0033C0F8 */ extern void __GXSetTmemConfig(s32);
