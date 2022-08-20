@@ -3,6 +3,8 @@
 
 #include <dolphin/mtx/mtxtypes.h>
 
+#ifndef M2CTX
+
 typedef Vec Vec3;
 
 BOOL func_8000B074(struct _HSD_JObj*);
@@ -50,5 +52,7 @@ s32 func_8000CDA8(s32 i);
 struct _HSD_LObj* func_8000CDC0(struct _HSD_LObj*);
 void func_8000CE30(struct _HSD_DObj*, struct _HSD_DObj*);
 void func_8000CE40(struct _HSD_JObj*, struct _HSD_DObj*);
+
+#endif
 
 #endif
