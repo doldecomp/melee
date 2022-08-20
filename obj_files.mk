@@ -570,7 +570,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/gx/GXStubs.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXDisplayList.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXTransform.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GX_unknown/GX_unknown_002.s.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXPerf.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx.s.o\

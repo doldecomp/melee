@@ -3,8 +3,8 @@
 .section .text
 
 # https://decomp.me/scratch/gAvJm // 3230 (94.13%)
-.global func_803418FC
-func_803418FC:
+.global GXSetGPMetric
+GXSetGPMetric:
 /* 803418FC 0033E4DC  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
 /* 80341900 0033E4E0  80 05 04 E0 */	lwz r0, 0x4e0(r5)
 /* 80341904 0033E4E4  2C 00 00 22 */	cmpwi r0, 0x22
@@ -626,8 +626,8 @@ lbl_80342184:
 /* 80342190 0033ED70  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/YOR2u // 0 (100%)
-.global func_80342194
-func_80342194:
+.global GXClearGPMetric
+GXClearGPMetric:
 /* 80342194 0033ED74  80 6D BC 54 */	lwz r3, __cpReg@sda21(r13)
 /* 80342198 0033ED78  38 00 00 04 */	li r0, 4
 /* 8034219C 0033ED7C  B0 03 00 04 */	sth r0, 4(r3)

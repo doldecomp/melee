@@ -7,8 +7,8 @@
 
 /* 003FDE38 */ extern GXRenderModeObj GXPal528IntDf;
 /* 003FDDFC */ extern GXRenderModeObj GXMpal480IntDf;
-/* 0033ED74 */ extern void func_80342194();
-/* 0033E4DC */ extern void func_803418FC(u32, u32);
+/* 0033ED74 */ extern void GXClearGPMetric();
+/* 0033E4DC */ extern void GXSetGPMetric(u32, u32);
 /* 0033E458 */ extern s32 __GXSetMatrixIndex(s32);
 /* 0033E430 */ extern void GXSetClipMode(s32);
 /* 0033E3EC */ extern void GXSetScissorBoxOffset(s32, s32);
