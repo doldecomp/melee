@@ -44,17 +44,17 @@ pushd $HERE
 if [ "$clean" = true ]; then
     echo "Cleaning."
     make clean
-elif [ $rebuild = true ]; then
+elif [ "$rebuild" = true ]; then
     echo "Deleting object files."
     find build/ -name '*.o' -delete
 fi
 
 echo "Running make with NON_MATCHING=$non_matching and GENERATE_MAP=$generate_map"
-make non_matching=$non_matching generate_map=$generate_map
+make NON_MATCHING=$non_matching GENERATE_MAP=$generate_map
 result=$?
 
 if [ "$expected" = true ]; then
-    if [ $result != 0 ]; then
+    if [ "$result" != 0 ]; then
         echo >&2 "Make failed. Not syncing to expected."
     else
         echo "Syncing build to expected."
