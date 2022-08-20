@@ -2,7 +2,7 @@
 
 #define HALF_PI 1.5707963267948966
 
-// external vars from asm/melee/ft/code_8008521C.s
+// external vars from asm/melee/ft/ft_unknown_005.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)();
 
@@ -30,7 +30,7 @@ extern HSD_PadStatus HSD_PadRumbleData[4];
 
 extern StageInfo stage_info; // from asm/melee/text_2.s
 
-extern s32 g_debugLevel; // asm/melee/db/code_80225374.s
+extern s32 g_debugLevel; // asm/melee/db/db_unknown_001.s
 
 extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 

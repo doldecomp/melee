@@ -8,7 +8,7 @@
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/GXAttr.h>
 #include <sysdolphin/baselib/tev.h>
-#include <dolphin/gx/GX.h>
+#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>

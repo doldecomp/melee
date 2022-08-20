@@ -1467,9 +1467,9 @@ lbl_801C1FE0:
 void func_801C1FFC(void)
 {
     if (stage_info.x12C != NULL && stage_info.x12C->ptr != NULL) {
-        func_80030740(stage_info.x12C->ptr->color.u8.r,
-                      stage_info.x12C->ptr->color.u8.g,
-                      stage_info.x12C->ptr->color.u8.b);
+        func_80030740(stage_info.x12C->ptr->color.r,
+                      stage_info.x12C->ptr->color.g,
+                      stage_info.x12C->ptr->color.b);
     } else {
         func_80030740(0, 0, 0);
     }
@@ -3988,7 +3988,7 @@ BOOL func_801C4E20(void)
     return TRUE;
 }
 
-// Not matching due to an epilogue ordering bug in frank.py
+// Not matching due to an epilogue ordering bug in @frank
 #ifdef NON_MATCHING
 void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
                    HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5)

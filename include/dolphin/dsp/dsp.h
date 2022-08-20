@@ -5,6 +5,7 @@
 
 #include <dolphin/types.h>
 #include <dolphin/os/OSTime.h>
+#include <dolphin/os/OSInterrupt.h>
 
 #define HW_REG(reg, type) *(volatile type *)(uintptr_t)(reg)
 volatile u16 __DSPRegs[]
@@ -47,7 +48,7 @@ BOOL DSPCheckInit(void);
 
 void __DSP_debug_printf(const char *fmt, ...);
 
-//void __DSPHandler(__OSInterrupt intr, OSContext *ctx);
+void __DSPHandler(__OSInterrupt intr, OSContext *ctx);
 void __DSP_boot_task(DSPTaskInfo *task);
 void __DSP_insert_task(DSPTaskInfo *task);
 void __DSP_remove_task(DSPTaskInfo *task);
