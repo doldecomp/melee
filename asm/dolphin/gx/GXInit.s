@@ -39,7 +39,7 @@ lbl_8033A74C:
 /* 8033A758 00337338  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/vLLix // 2270 (33.24%)
-lbl_8033A75C:
+__GXDefaultTlutRegionCallback:
 /* 8033A75C 0033733C  28 03 00 14 */	cmplwi r3, 0x14
 /* 8033A760 00337340  41 80 00 0C */	blt lbl_8033A76C
 /* 8033A764 00337344  38 60 00 00 */	li r3, 0
@@ -80,7 +80,7 @@ GXInit:
 /* 8033A7D8 003373B8  90 AD BC 50 */	stw r5, __piReg@sda21(r13)
 /* 8033A7DC 003373BC  90 8D BC 54 */	stw r4, __cpReg@sda21(r13)
 /* 8033A7E0 003373C0  90 6D BC 58 */	stw r3, __peReg@sda21(r13)
-/* 8033A7E4 003373C4  90 0D BC 5C */	stw r0, lbl_804D72FC@sda21(r13)
+/* 8033A7E4 003373C4  90 0D BC 5C */	stw r0, __memReg@sda21(r13)
 /* 8033A7E8 003373C8  48 00 14 4D */	bl __GXFifoInit
 /* 8033A7EC 003373CC  7F 64 DB 78 */	mr r4, r27
 /* 8033A7F0 003373D0  7F 45 D3 78 */	mr r5, r26
@@ -829,8 +829,8 @@ lbl_8033AFD0:
 /* 8033B314 00337EF4  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
 /* 8033B318 00337EF8  90 04 02 CC */	stw r0, 0x2cc(r4)
 /* 8033B31C 00337EFC  48 00 3F 9D */	bl GXSetTexRegionCallback
-/* 8033B320 00337F00  3C 60 80 34 */	lis r3, lbl_8033A75C@ha
-/* 8033B324 00337F04  38 63 A7 5C */	addi r3, r3, lbl_8033A75C@l
+/* 8033B320 00337F00  3C 60 80 34 */	lis r3, __GXDefaultTlutRegionCallback@ha
+/* 8033B324 00337F04  38 63 A7 5C */	addi r3, r3, __GXDefaultTlutRegionCallback@l
 /* 8033B328 00337F08  48 00 3F A5 */	bl GXSetTlutRegionCallback
 /* 8033B32C 00337F0C  38 60 00 00 */	li r3, 0
 /* 8033B330 00337F10  38 80 00 00 */	li r4, 0
@@ -1120,25 +1120,6 @@ lbl_8033B674:
 /* 8033B780 00338360  38 21 00 78 */	addi r1, r1, 0x78
 /* 8033B784 00338364  4E 80 00 20 */	blr 
 
-.section .sbss
-	.balign 8
-
-.global __piReg
-__piReg:
-	.skip 0x4
-
-.global __cpReg
-__cpReg:
-	.skip 0x4
-
-.global __peReg
-__peReg:
-	.skip 0x4
-
-.global lbl_804D72FC
- lbl_804D72FC:
-	.skip 0x4
-
 .section .bss, "wa"
     .balign 8
 
@@ -1177,3 +1158,22 @@ lbl_804DE214:
 lbl_804DE218:
 	.4byte 0x43300000
 	.4byte 0x00000000
+
+.section .sbss
+	.balign 8
+
+.global __piReg
+__piReg:
+	.skip 0x4
+
+.global __cpReg
+__cpReg:
+	.skip 0x4
+
+.global __peReg
+__peReg:
+	.skip 0x4
+
+.global __memReg
+ __memReg:
+	.skip 0x4

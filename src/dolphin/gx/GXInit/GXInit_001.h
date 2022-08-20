@@ -12,7 +12,7 @@
 /* 004DADE0 */ extern const s32 lbl_804DE200;
 /* 004A42A8 */ extern const GXContext *__GXContext;
 /* 00337B20 */ extern void __GXInitGX();
-/* 0033733C */ extern void lbl_8033A75C();
+/* 0033733C */ extern void __GXDefaultTlutRegionCallback();
 /* 003372C0 */ extern void *__GXDefaultTexRegionCallback(GXTexRegionCallback);
 
 #endif
