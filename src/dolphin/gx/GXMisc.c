@@ -63,51 +63,23 @@ lbl_8033CC20:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm void GXSetDrawDone()
-{ // clang-format off
-    nofralloc
-/* 8033CC38 00339818  7C 08 02 A6 */	mflr r0
-/* 8033CC3C 0033981C  90 01 00 04 */	stw r0, 4(r1)
-/* 8033CC40 00339820  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8033CC44 00339824  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8033CC48 00339828  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8033CC4C 0033982C  48 00 A7 19 */	bl OSDisableInterrupts
-/* 8033CC50 00339830  38 00 00 61 */	li r0, 0x61
-/* 8033CC54 00339834  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033CC58 00339838  3C C0 CC 01 */	lis r6, 0xCC008000@ha
-/* 8033CC5C 0033983C  3C A0 45 00 */	lis r5, 0x45000002@ha
-/* 8033CC60 00339840  98 06 80 00 */	stb r0, 0xCC008000@l(r6)
-/* 8033CC64 00339844  38 05 00 02 */	addi r0, r5, 0x45000002@l
-/* 8033CC68 00339848  90 06 80 00 */	stw r0, -0x8000(r6)
-/* 8033CC6C 0033984C  7C 7E 1B 78 */	mr r30, r3
-/* 8033CC70 00339850  80 04 04 F0 */	lwz r0, 0x4f0(r4)
-/* 8033CC74 00339854  28 00 00 00 */	cmplwi r0, 0
-/* 8033CC78 00339858  41 82 00 08 */	beq lbl_8033CC80
-/* 8033CC7C 0033985C  48 00 03 D5 */	bl __GXSetDirtyState
-lbl_8033CC80:
-/* 8033CC80 00339860  3B E0 00 00 */	li r31, 0
-/* 8033CC84 00339864  3C 60 CC 01 */	lis r3, 0xCC008000@ha
-/* 8033CC88 00339868  93 E3 80 00 */	stw r31, 0xCC008000@l(r3)
-/* 8033CC8C 0033986C  93 E3 80 00 */	stw r31, -0x8000(r3)
-/* 8033CC90 00339870  93 E3 80 00 */	stw r31, -0x8000(r3)
-/* 8033CC94 00339874  93 E3 80 00 */	stw r31, -0x8000(r3)
-/* 8033CC98 00339878  93 E3 80 00 */	stw r31, -0x8000(r3)
-/* 8033CC9C 0033987C  93 E3 80 00 */	stw r31, -0x8000(r3)
-/* 8033CCA0 00339880  93 E3 80 00 */	stw r31, -0x8000(r3)
-/* 8033CCA4 00339884  93 E3 80 00 */	stw r31, -0x8000(r3)
-/* 8033CCA8 00339888  4B FF 91 E5 */	bl PPCSync
-/* 8033CCAC 0033988C  9B ED BC 88 */	stb r31, lbl_804D7328(r13)
-/* 8033CCB0 00339890  7F C3 F3 78 */	mr r3, r30
-/* 8033CCB4 00339894  48 00 A6 D9 */	bl OSRestoreInterrupts
-/* 8033CCB8 00339898  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8033CCBC 0033989C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8033CCC0 003398A0  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8033CCC4 003398A4  7C 08 03 A6 */	mtlr r0
-/* 8033CCC8 003398A8  38 21 00 18 */	addi r1, r1, 0x18
-/* 8033CCCC 003398AC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetDrawDone()
+{
+    u16 i;
+    BOOL interrupt_enabled = OSDisableInterrupts();
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    WGPIPE.u32 = 0x45000002;
+
+    if (__GXContexts.main->x4F0 != 0)
+        __GXSetDirtyState();
+
+    for (i = 0; i < 8; i++)
+        WGPIPE.u32 = 0;
+
+    PPCSync();
+    lbl_804D7328[0] = GX_FALSE;
+    OSRestoreInterrupts(interrupt_enabled);
+}
 
 void GXWaitDrawDone()
 {
