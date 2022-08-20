@@ -197,11 +197,7 @@ void GXLoadLightObjImm(GXLightObj *light, GXLightID light_id)
     set_x2(GX_TRUE);
 }
 
-#ifdef NON_MATCHING
-
-#else
-
-#endif
+#pragma push
 
 // https://decomp.me/scratch/DOTYM // 9765 (0%)
 asm void GXSetChanAmbColor(GXChannelID, GXColor *)
@@ -306,7 +302,6 @@ lbl_8033E3BC:
 /* 8033E3EC 0033AFCC  90 E3 00 A8 */	stw r7, 0xa8(r3)
 /* 8033E3F0 0033AFD0  4E 80 00 20 */	blr 
 } // clang-format on
-#pragma peephole on
 
 asm void GXSetChanMatColor(GXChannelID, GXColor *)
 { // clang-format off
@@ -410,33 +405,23 @@ lbl_8033E524:
 /* 8033E554 0033B134  90 E3 00 B0 */	stw r7, 0xb0(r3)
 /* 8033E558 0033B138  4E 80 00 20 */	blr 
 } // clang-format on
-#pragma peephole on
 
-// https://decomp.me/scratch/MXbI8 // 290 (84.74%)
-asm void GXSetNumChans(u8)
-{ // clang-format off
-    nofralloc
-/* 8033E55C 0033B13C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033E560 0033B140  54 67 06 3E */	clrlwi r7, r3, 0x18
-/* 8033E564 0033B144  54 60 25 36 */	rlwinm r0, r3, 4, 0x14, 0x1b
-/* 8033E568 0033B148  38 C4 02 04 */	addi r6, r4, 0x204
-/* 8033E56C 0033B14C  80 A4 02 04 */	lwz r5, 0x204(r4)
-/* 8033E570 0033B150  38 60 00 10 */	li r3, 0x10
-/* 8033E574 0033B154  3C 80 CC 01 */	lis r4, 0xCC008000@ha
-/* 8033E578 0033B158  54 A5 07 30 */	rlwinm r5, r5, 0, 0x1c, 0x18
-/* 8033E57C 0033B15C  7C A0 03 78 */	or r0, r5, r0
-/* 8033E580 0033B160  90 06 00 00 */	stw r0, 0(r6)
-/* 8033E584 0033B164  38 00 10 09 */	li r0, 0x1009
-/* 8033E588 0033B168  98 64 80 00 */	stb r3, 0xCC008000@l(r4)
-/* 8033E58C 0033B16C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033E590 0033B170  90 04 80 00 */	stw r0, -0x8000(r4)
-/* 8033E594 0033B174  90 E4 80 00 */	stw r7, -0x8000(r4)
-/* 8033E598 0033B178  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 8033E59C 0033B17C  60 00 00 04 */	ori r0, r0, 4
-/* 8033E5A0 0033B180  90 03 04 F0 */	stw r0, 0x4f0(r3)
-/* 8033E5A4 0033B184  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma peephole on
+#pragma pop
+
+void GXSetNumChans(u8 num_chans)
+{
+    INSERT_FIELD(__GXContexts.main->x204, num_chans, 3, 4);
+    WGPIPE.u8 = GX_LOAD_XF_REG;
+    WGPIPE.u32 = 0x1009;
+    WGPIPE.u32 = num_chans;
+    __GXContexts.main->x4F0 |= 4;
+}
+
+#ifdef NON_MATCHING
+
+#else
+
+#endif
 
 asm void GXSetChanCtrl(GXChannelID, u8, GXColorSrc, GXColorSrc, GXLightID, GXDiffuseFn, GXAttnFn)
 { // clang-format off
@@ -569,4 +554,3 @@ lbl_8033E774:
 /* 8033E784 0033B364  38 21 00 38 */	addi r1, r1, 0x38
 /* 8033E788 0033B368  4E 80 00 20 */	blr
 } // clang-format on
-#pragma peephole on
