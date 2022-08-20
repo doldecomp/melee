@@ -19,7 +19,8 @@ typedef struct _GXLightObj
     Vec dir;       // at 0x34
 } GXLightObj;
 
-/* 0033B188 */ extern void GXSetChanCtrl(GXChannelID, u8, GXColorSrc, GXColorSrc, GXLightID, GXDiffuseFn, GXAttnFn);
+/* 0033B188 */ extern void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src,
+                                         u32 light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn);
 /* 0033B13C */ extern void GXSetNumChans(u8);
 /* 0033AFD4 */ extern void GXSetChanMatColor(GXChannelID, GXColor *);
 /* 0033AE6C */ extern void GXSetChanAmbColor(GXChannelID, GXColor *);

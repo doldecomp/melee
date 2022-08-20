@@ -417,140 +417,49 @@ void GXSetNumChans(u8 num_chans)
     __GXContexts.main->x4F0 |= 4;
 }
 
-#ifdef NON_MATCHING
+void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src,
+                   u32 light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn)
+{
+    u32 reg;
+    int r26;
 
-#else
+    if (chan == 4)
+        r26 = 0;
+    else if (chan == 5)
+        r26 = 1;
+    else
+        r26 = chan;
 
-#endif
+    reg = 0;
+    INSERT_FIELD(reg, enable, 1, 1);
+    INSERT_FIELD(reg, mat_src, 1, 0);
+    INSERT_FIELD(reg, amb_src, 1, 6);
+    INSERT_FIELD(reg, (light_mask & GX_LIGHT0) != 0, 1, 2);
+    INSERT_FIELD(reg, (light_mask & GX_LIGHT1) != 0, 1, 3);
+    INSERT_FIELD(reg, (light_mask & GX_LIGHT2) != 0, 1, 4);
+    INSERT_FIELD(reg, (light_mask & GX_LIGHT3) != 0, 1, 5);
+    INSERT_FIELD(reg, (light_mask & GX_LIGHT4) != 0, 1, 11);
+    INSERT_FIELD(reg, (light_mask & GX_LIGHT5) != 0, 1, 12);
+    INSERT_FIELD(reg, (light_mask & GX_LIGHT6) != 0, 1, 13);
+    INSERT_FIELD(reg, (light_mask & GX_LIGHT7) != 0, 1, 14);
+    INSERT_FIELD(reg, (attn_fn == 0) ? 0 : diff_fn, 2, 7);
+    INSERT_FIELD(reg, (attn_fn != 2), 1, 9);
+    INSERT_FIELD(reg, (attn_fn != 0), 1, 10);
 
-asm void GXSetChanCtrl(GXChannelID, u8, GXColorSrc, GXColorSrc, GXLightID, GXDiffuseFn, GXAttnFn)
-{ // clang-format off
-    nofralloc
-/* 8033E5A8 0033B188  94 21 FF C8 */	stwu r1, -0x38(r1)
-/* 8033E5AC 0033B18C  2C 03 00 04 */	cmpwi r3, 4
-/* 8033E5B0 0033B190  93 E1 00 34 */	stw r31, 0x34(r1)
-/* 8033E5B4 0033B194  93 C1 00 30 */	stw r30, 0x30(r1)
-/* 8033E5B8 0033B198  93 A1 00 2C */	stw r29, 0x2c(r1)
-/* 8033E5BC 0033B19C  93 81 00 28 */	stw r28, 0x28(r1)
-/* 8033E5C0 0033B1A0  40 82 00 0C */	bne lbl_8033E5CC
-/* 8033E5C4 0033B1A4  39 60 00 00 */	li r11, 0
-/* 8033E5C8 0033B1A8  48 00 00 18 */	b lbl_8033E5E0
-lbl_8033E5CC:
-/* 8033E5CC 0033B1AC  2C 03 00 05 */	cmpwi r3, 5
-/* 8033E5D0 0033B1B0  40 82 00 0C */	bne lbl_8033E5DC
-/* 8033E5D4 0033B1B4  39 60 00 01 */	li r11, 1
-/* 8033E5D8 0033B1B8  48 00 00 08 */	b lbl_8033E5E0
-lbl_8033E5DC:
-/* 8033E5DC 0033B1BC  7C 6B 1B 78 */	mr r11, r3
-lbl_8033E5E0:
-/* 8033E5E0 0033B1C0  54 84 0D FC */	rlwinm r4, r4, 1, 0x17, 0x1e
-/* 8033E5E4 0033B1C4  7C 8A 33 78 */	or r10, r4, r6
-/* 8033E5E8 0033B1C8  54 E0 07 FE */	clrlwi r0, r7, 0x1f
-/* 8033E5EC 0033B1CC  7C C0 00 D0 */	neg r6, r0
-/* 8033E5F0 0033B1D0  30 86 FF FF */	addic r4, r6, -1
-/* 8033E5F4 0033B1D4  54 E0 07 BC */	rlwinm r0, r7, 0, 0x1e, 0x1e
-/* 8033E5F8 0033B1D8  7D 80 00 D0 */	neg r12, r0
-/* 8033E5FC 0033B1DC  7C C4 31 10 */	subfe r6, r4, r6
-/* 8033E600 0033B1E0  30 8C FF FF */	addic r4, r12, -1
-/* 8033E604 0033B1E4  7C 84 61 10 */	subfe r4, r4, r12
-/* 8033E608 0033B1E8  54 E0 07 7A */	rlwinm r0, r7, 0, 0x1d, 0x1d
-/* 8033E60C 0033B1EC  7F 80 00 D0 */	neg r28, r0
-/* 8033E610 0033B1F0  30 1C FF FF */	addic r0, r28, -1
-/* 8033E614 0033B1F4  54 EC 07 38 */	rlwinm r12, r7, 0, 0x1c, 0x1c
-/* 8033E618 0033B1F8  7C 00 E1 10 */	subfe r0, r0, r28
-/* 8033E61C 0033B1FC  7F AC 00 D0 */	neg r29, r12
-/* 8033E620 0033B200  33 9D FF FF */	addic r28, r29, -1
-/* 8033E624 0033B204  54 EC 06 F6 */	rlwinm r12, r7, 0, 0x1b, 0x1b
-/* 8033E628 0033B208  7F CC 00 D0 */	neg r30, r12
-/* 8033E62C 0033B20C  7F 9C E9 10 */	subfe r28, r28, r29
-/* 8033E630 0033B210  33 BE FF FF */	addic r29, r30, -1
-/* 8033E634 0033B214  54 EC 06 B4 */	rlwinm r12, r7, 0, 0x1a, 0x1a
-/* 8033E638 0033B218  7F EC 00 D0 */	neg r31, r12
-/* 8033E63C 0033B21C  7F BD F1 10 */	subfe r29, r29, r30
-/* 8033E640 0033B220  33 DF FF FF */	addic r30, r31, -1
-/* 8033E644 0033B224  54 EC 06 72 */	rlwinm r12, r7, 0, 0x19, 0x19
-/* 8033E648 0033B228  7F DE F9 10 */	subfe r30, r30, r31
-/* 8033E64C 0033B22C  7F EC 00 D0 */	neg r31, r12
-/* 8033E650 0033B230  31 9F FF FF */	addic r12, r31, -1
-/* 8033E654 0033B234  55 4A 06 B0 */	rlwinm r10, r10, 0, 0x1a, 0x18
-/* 8033E658 0033B238  54 A5 30 32 */	slwi r5, r5, 6
-/* 8033E65C 0033B23C  7D 45 2B 78 */	or r5, r10, r5
-/* 8033E660 0033B240  54 AA 07 B8 */	rlwinm r10, r5, 0, 0x1e, 0x1c
-/* 8033E664 0033B244  54 C5 10 3A */	slwi r5, r6, 2
-/* 8033E668 0033B248  7D 45 2B 78 */	or r5, r10, r5
-/* 8033E66C 0033B24C  54 A5 07 76 */	rlwinm r5, r5, 0, 0x1d, 0x1b
-/* 8033E670 0033B250  54 84 18 38 */	slwi r4, r4, 3
-/* 8033E674 0033B254  7C A4 23 78 */	or r4, r5, r4
-/* 8033E678 0033B258  54 84 07 34 */	rlwinm r4, r4, 0, 0x1c, 0x1a
-/* 8033E67C 0033B25C  54 00 20 36 */	slwi r0, r0, 4
-/* 8033E680 0033B260  7C 80 03 78 */	or r0, r4, r0
-/* 8033E684 0033B264  54 04 06 F2 */	rlwinm r4, r0, 0, 0x1b, 0x19
-/* 8033E688 0033B268  57 80 28 34 */	slwi r0, r28, 5
-/* 8033E68C 0033B26C  7C 80 03 78 */	or r0, r4, r0
-/* 8033E690 0033B270  54 04 05 66 */	rlwinm r4, r0, 0, 0x15, 0x13
-/* 8033E694 0033B274  57 A0 58 28 */	slwi r0, r29, 0xb
-/* 8033E698 0033B278  7C 80 03 78 */	or r0, r4, r0
-/* 8033E69C 0033B27C  54 04 05 24 */	rlwinm r4, r0, 0, 0x14, 0x12
-/* 8033E6A0 0033B280  57 C0 60 26 */	slwi r0, r30, 0xc
-/* 8033E6A4 0033B284  7C 80 03 78 */	or r0, r4, r0
-/* 8033E6A8 0033B288  54 E7 06 30 */	rlwinm r7, r7, 0, 0x18, 0x18
-/* 8033E6AC 0033B28C  7F EC F9 10 */	subfe r31, r12, r31
-/* 8033E6B0 0033B290  7D 87 00 D0 */	neg r12, r7
-/* 8033E6B4 0033B294  30 EC FF FF */	addic r7, r12, -1
-/* 8033E6B8 0033B298  54 04 04 E2 */	rlwinm r4, r0, 0, 0x13, 0x11
-/* 8033E6BC 0033B29C  57 E0 68 24 */	slwi r0, r31, 0xd
-/* 8033E6C0 0033B2A0  7C 80 03 78 */	or r0, r4, r0
-/* 8033E6C4 0033B2A4  7C E7 61 10 */	subfe r7, r7, r12
-/* 8033E6C8 0033B2A8  54 04 04 A0 */	rlwinm r4, r0, 0, 0x12, 0x10
-/* 8033E6CC 0033B2AC  54 E0 70 22 */	slwi r0, r7, 0xe
-/* 8033E6D0 0033B2B0  2C 09 00 00 */	cmpwi r9, 0
-/* 8033E6D4 0033B2B4  7C 86 03 78 */	or r6, r4, r0
-/* 8033E6D8 0033B2B8  40 82 00 08 */	bne lbl_8033E6E0
-/* 8033E6DC 0033B2BC  39 00 00 00 */	li r8, 0
-lbl_8033E6E0:
-/* 8033E6E0 0033B2C0  20 A9 00 02 */	subfic r5, r9, 2
-/* 8033E6E4 0033B2C4  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033E6E8 0033B2C8  30 05 FF FF */	addic r0, r5, -1
-/* 8033E6EC 0033B2CC  7D 40 29 10 */	subfe r10, r0, r5
-/* 8033E6F0 0033B2D0  7C A9 00 D0 */	neg r5, r9
-/* 8033E6F4 0033B2D4  30 05 FF FF */	addic r0, r5, -1
-/* 8033E6F8 0033B2D8  7C E0 29 10 */	subfe r7, r0, r5
-/* 8033E6FC 0033B2DC  54 C5 06 6C */	rlwinm r5, r6, 0, 0x19, 0x16
-/* 8033E700 0033B2E0  55 00 38 30 */	slwi r0, r8, 7
-/* 8033E704 0033B2E4  7C A8 03 78 */	or r8, r5, r0
-/* 8033E708 0033B2E8  38 C0 00 10 */	li r6, 0x10
-/* 8033E70C 0033B2EC  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033E710 0033B2F0  98 C5 80 00 */	stb r6, 0xCC008000@l(r5)
-/* 8033E714 0033B2F4  38 0B 10 0E */	addi r0, r11, 0x100e
-/* 8033E718 0033B2F8  55 09 05 EA */	rlwinm r9, r8, 0, 0x17, 0x15
-/* 8033E71C 0033B2FC  55 48 48 2C */	slwi r8, r10, 9
-/* 8033E720 0033B300  90 05 80 00 */	stw r0, -0x8000(r5)
-/* 8033E724 0033B304  7D 20 43 78 */	or r0, r9, r8
-/* 8033E728 0033B308  54 08 05 A8 */	rlwinm r8, r0, 0, 0x16, 0x14
-/* 8033E72C 0033B30C  54 E0 50 2A */	slwi r0, r7, 0xa
-/* 8033E730 0033B310  7D 07 03 78 */	or r7, r8, r0
-/* 8033E734 0033B314  90 E5 80 00 */	stw r7, -0x8000(r5)
-/* 8033E738 0033B318  38 00 00 01 */	li r0, 1
-/* 8033E73C 0033B31C  2C 03 00 04 */	cmpwi r3, 4
-/* 8033E740 0033B320  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033E744 0033B324  40 82 00 18 */	bne lbl_8033E75C
-/* 8033E748 0033B328  98 C5 80 00 */	stb r6, -0x8000(r5)
-/* 8033E74C 0033B32C  38 00 10 10 */	li r0, 0x1010
-/* 8033E750 0033B330  90 05 80 00 */	stw r0, -0x8000(r5)
-/* 8033E754 0033B334  90 E5 80 00 */	stw r7, -0x8000(r5)
-/* 8033E758 0033B338  48 00 00 1C */	b lbl_8033E774
-lbl_8033E75C:
-/* 8033E75C 0033B33C  2C 03 00 05 */	cmpwi r3, 5
-/* 8033E760 0033B340  40 82 00 14 */	bne lbl_8033E774
-/* 8033E764 0033B344  98 C5 80 00 */	stb r6, -0x8000(r5)
-/* 8033E768 0033B348  38 00 10 11 */	li r0, 0x1011
-/* 8033E76C 0033B34C  90 05 80 00 */	stw r0, -0x8000(r5)
-/* 8033E770 0033B350  90 E5 80 00 */	stw r7, -0x8000(r5)
-lbl_8033E774:
-/* 8033E774 0033B354  83 E1 00 34 */	lwz r31, 0x34(r1)
-/* 8033E778 0033B358  83 C1 00 30 */	lwz r30, 0x30(r1)
-/* 8033E77C 0033B35C  83 A1 00 2C */	lwz r29, 0x2c(r1)
-/* 8033E780 0033B360  83 81 00 28 */	lwz r28, 0x28(r1)
-/* 8033E784 0033B364  38 21 00 38 */	addi r1, r1, 0x38
-/* 8033E788 0033B368  4E 80 00 20 */	blr
-} // clang-format on
+    WGPIPE.u8 = GX_LOAD_XF_REG;
+    WGPIPE.u32 = 0x1000 + (r26 + 14);
+    WGPIPE.u32 = reg;
+    set_x2(GX_TRUE);
+    if (chan == GX_COLOR0A0)
+    {
+        WGPIPE.u8 = GX_LOAD_XF_REG;
+        WGPIPE.u32 = 0x1000 + 16;
+        WGPIPE.u32 = reg;
+    }
+    else if (chan == GX_COLOR1A1)
+    {
+        WGPIPE.u8 = GX_LOAD_XF_REG;
+        WGPIPE.u32 = 0x1000 + 17;
+        WGPIPE.u32 = reg;
+    }
+}
