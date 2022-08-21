@@ -89,62 +89,27 @@ void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
     set_x2(GX_FALSE);
 }
 
-#pragma push
-asm void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
-{ // clang-format off
-    nofralloc
-/* 8034012C 0033CD0C  54 63 10 3A */	slwi r3, r3, 2
-/* 80340130 0033CD10  80 0D A5 08 */	lwz r0, __GXContexts(r13)
-/* 80340134 0033CD14  38 63 01 70 */	addi r3, r3, 0x170
-/* 80340138 0033CD18  7C 60 1A 14 */	add r3, r0, r3
-/* 8034013C 0033CD1C  80 03 00 00 */	lwz r0, 0(r3)
-/* 80340140 0033CD20  2C 04 00 01 */	cmpwi r4, 1
-/* 80340144 0033CD24  54 00 03 98 */	rlwinm r0, r0, 0, 0xe, 0xc
-/* 80340148 0033CD28  50 80 93 5A */	rlwimi r0, r4, 0x12, 0xd, 0xd
-/* 8034014C 0033CD2C  90 03 00 00 */	stw r0, 0(r3)
-/* 80340150 0033CD30  41 81 00 30 */	bgt lbl_80340180
-/* 80340154 0033CD34  81 23 00 00 */	lwz r9, 0(r3)
-/* 80340158 0033CD38  54 C4 A0 16 */	slwi r4, r6, 0x14
-/* 8034015C 0033CD3C  54 A0 80 1E */	slwi r0, r5, 0x10
-/* 80340160 0033CD40  55 25 03 12 */	rlwinm r5, r9, 0, 0xc, 9
-/* 80340164 0033CD44  7C A4 23 78 */	or r4, r5, r4
-/* 80340168 0033CD48  90 83 00 00 */	stw r4, 0(r3)
-/* 8034016C 0033CD4C  80 83 00 00 */	lwz r4, 0(r3)
-/* 80340170 0033CD50  54 84 04 1A */	rlwinm r4, r4, 0, 0x10, 0xd
-/* 80340174 0033CD54  7C 80 03 78 */	or r0, r4, r0
-/* 80340178 0033CD58  90 03 00 00 */	stw r0, 0(r3)
-/* 8034017C 0033CD5C  48 00 00 24 */	b lbl_803401A0
-lbl_80340180:
-/* 80340180 0033CD60  80 03 00 00 */	lwz r0, 0(r3)
-/* 80340184 0033CD64  54 00 03 12 */	rlwinm r0, r0, 0, 0xc, 9
-/* 80340188 0033CD68  50 80 9A 96 */	rlwimi r0, r4, 0x13, 0xa, 0xb
-/* 8034018C 0033CD6C  90 03 00 00 */	stw r0, 0(r3)
-/* 80340190 0033CD70  80 03 00 00 */	lwz r0, 0(r3)
-/* 80340194 0033CD74  54 00 04 1A */	rlwinm r0, r0, 0, 0x10, 0xd
-/* 80340198 0033CD78  64 00 00 03 */	oris r0, r0, 3
-/* 8034019C 0033CD7C  90 03 00 00 */	stw r0, 0(r3)
-lbl_803401A0:
-/* 803401A0 0033CD80  80 83 00 00 */	lwz r4, 0(r3)
-/* 803401A4 0033CD84  54 E0 99 58 */	rlwinm r0, r7, 0x13, 5, 0xc
-/* 803401A8 0033CD88  55 06 B0 12 */	slwi r6, r8, 0x16
-/* 803401AC 0033CD8C  54 84 03 56 */	rlwinm r4, r4, 0, 0xd, 0xb
-/* 803401B0 0033CD90  7C 80 03 78 */	or r0, r4, r0
-/* 803401B4 0033CD94  90 03 00 00 */	stw r0, 0(r3)
-/* 803401B8 0033CD98  38 80 00 61 */	li r4, 0x61
-/* 803401BC 0033CD9C  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 803401C0 0033CDA0  80 E3 00 00 */	lwz r7, 0(r3)
-/* 803401C4 0033CDA4  38 00 00 00 */	li r0, 0
-/* 803401C8 0033CDA8  54 E7 02 8E */	rlwinm r7, r7, 0, 0xa, 7
-/* 803401CC 0033CDAC  7C E6 33 78 */	or r6, r7, r6
-/* 803401D0 0033CDB0  90 C3 00 00 */	stw r6, 0(r3)
-/* 803401D4 0033CDB4  98 85 80 00 */	stb r4, 0xCC008000@l(r5)
-/* 803401D8 0033CDB8  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 803401DC 0033CDBC  80 63 00 00 */	lwz r3, 0(r3)
-/* 803401E0 0033CDC0  90 65 80 00 */	stw r3, -0x8000(r5)
-/* 803401E4 0033CDC4  B0 04 00 02 */	sth r0, 2(r4)
-/* 803401E8 0033CDC8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
+{
+    u32 *temp_r3 = &__GXContexts.main->x170_data[stage];
+
+    INSERT_FIELD(*temp_r3, op & 1, 1, 18);
+    if (op <= 1)
+    {
+        INSERT_FIELD(*temp_r3, scale, 2, 20);
+        INSERT_FIELD(*temp_r3, bias, 2, 16);
+    }
+    else
+    {
+        INSERT_FIELD(*temp_r3, (op >> 1) & 3, 2, 20);
+        INSERT_FIELD(*temp_r3, 3, 2, 16);
+    }
+    INSERT_FIELD(*temp_r3, clamp & 0xFF, 1, 19);
+    INSERT_FIELD(*temp_r3, out_reg, 2, 22);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(*temp_r3);
+    set_x2(GX_FALSE);
+}
 
 // https://decomp.me/scratch/mrEco
 #pragma push
