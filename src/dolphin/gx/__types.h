@@ -66,9 +66,9 @@ typedef struct
     u8 xD8_pad[0xF8 - 0xD8];                            // at 0x0D8
     s32 xF8;                                            // at 0x0F8
     s32 xFC;                                            // at 0x0FC
-    s32 x100_data[(0x130 - 0x100) / 4];                 // at 0x100
+    u32 x100_data[(0x130 - 0x100) / 4];                 // at 0x100
     u32 x130_data[(0x170 - 0x130) / 4];                 // at 0x130
-    s32 x170_data[(0x1AC - 0x170) / 4];                 // at 0x170
+    u32 x170_data[(0x1AC - 0x170) / 4];                 // at 0x170
     u8 x1AC_pad[0x1B0 - 0x1AC];                         // at 0x1AC
     GXTexRegionCallback callbacks[(0x1D0 - 0x1B0) / 4]; // at 0x1B0
     u32 x1D0[(0x204 - 0x1D0) / 4];                      // at 0x1D0
