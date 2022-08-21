@@ -1,6 +1,6 @@
 #include <sysdolphin/baselib/psdisptev.h>
 
-#include <dolphin/gx/GX.h>
+#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GXAttr.h>
 
 /* 004D4530 */ extern s32 lbl_804D7950[2];

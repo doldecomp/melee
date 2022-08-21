@@ -19,7 +19,7 @@
 
 extern OSHeapHandle __OSCurrHeap;
 extern OSHeapHandle lbl_804D6018;
-extern GXRenderModeObj lbl_80401168;
+extern GXRenderModeObj GXNtsc480IntDf;
 extern GXRenderModeObj lbl_804C1D80;
 
 static void *FrameBuffer[HSD_VI_XFB_MAX];
@@ -33,7 +33,7 @@ static s32 init_done;
 static s32 shown;
 
 static volatile OSHeapHandle current_heap = -1;
-static GXRenderModeObj *rmode = &lbl_80401168;
+static GXRenderModeObj *rmode = &GXNtsc480IntDf;
 static int current_z_fmt = GX_ZC_MID;
 static u32 iparam_fifo_size = HSD_DEFAULT_FIFO_SIZE;
 static int iparam_xfb_max_num = HSD_DEFAULT_XFB_MAX_NUM;

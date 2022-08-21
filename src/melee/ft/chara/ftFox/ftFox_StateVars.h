@@ -1,7 +1,7 @@
 #ifndef _FTFOX_STATEVARS_H_
 #define _FTFOX_STATEVARS_H_
 
-#include <types.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftFoxSpecialN {
@@ -47,11 +47,11 @@ typedef struct ftFoxAppealS {
 
 typedef union ftFoxStateVars {
 
-    ftFoxSpecialN specialN;
-    ftFoxSpecialS specialS;
-    ftFoxSpecialHi specialHi;
-    ftFoxSpecialLw specialLw;
-    ftFoxAppealS appealS;
+    ftFoxSpecialN SpecialN;
+    ftFoxSpecialS SpecialS;
+    ftFoxSpecialHi SpecialHi;
+    ftFoxSpecialLw SpecialLw;
+    ftFoxAppealS AppealS;
 
 } ftFoxStateVars;
 

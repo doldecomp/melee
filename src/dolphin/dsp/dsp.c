@@ -7,8 +7,6 @@ extern void* __DSP_first_task;
 extern void* __DSP_last_task;
 extern void* __DSP_tmp_task;
 
-void __DSPHandler();
-
 extern char lbl_80400C08[]; //"DSPInit(): Build Date: %s %s\n"
 
 u32 DSPCheckMailToDSP(void)

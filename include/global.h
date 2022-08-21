@@ -2,7 +2,7 @@
 #define _global_h_
 
 #include <dolphin/types.h>
-#include <dolphin/gx/gxtypes.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
 #include <functions.h>

@@ -1,7 +1,7 @@
 #ifndef _FTCAPTAIN_STATEVARS_H_
 #define _FTCAPTAIN_STATEVARS_H_
 
-#include <types.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftCaptainSpecialS {
@@ -12,7 +12,7 @@ typedef struct ftCaptainSpecialS {
 
 typedef union ftCaptainStateVars {
 
-	ftCaptainSpecialS specialS;
+	ftCaptainSpecialS SpecialS;
 
 } ftCaptainStateVars;
 

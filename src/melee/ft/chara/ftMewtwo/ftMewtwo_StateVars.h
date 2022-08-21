@@ -1,7 +1,7 @@
 #ifndef _FTMEWTWO_STATEVARS_H_
 #define _FTMEWTWO_STATEVARS_H_
 
-#include <types.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftMewtwoSpecialHi {
@@ -22,10 +22,21 @@ typedef struct ftMewtwoSpecialS {
 
 } ftMewtwoSpecialS;
 
+typedef struct ftMewtwoSpecialN {
+
+	BOOL isFull;
+	s32 x2344;
+	BOOL x2348;
+	s32 releaseLag;
+	f32 chargeLevel; // 0x2350 - Charge level of Shadow Ball
+
+} ftMewtwoSpecialN;
+
 typedef union ftMewtwoStateVars {
 
+	ftMewtwoSpecialN SpecialN;
 	ftMewtwoSpecialS SpecialS;
-	ftMewtwoSpecialHi specialHi;
+	ftMewtwoSpecialHi SpecialHi;
 
 } ftMewtwoStateVars;
 

@@ -2,6 +2,8 @@
 #define _common_structs_h_
 
 #include <dolphin/types.h>
+#include <dolphin/gx/types.h>
+#include <dolphin/mtx/mtxtypes.h>
 
 // Most of these should be moved to independent headers once they are created //
 
@@ -15,6 +17,7 @@
 #define HSD_BUTTON_DPAD_DOWN 0x4
 #define HSD_BUTTON_A 0x100 // Also covers Z-Button macro in-game //
 #define HSD_BUTTON_B 0x200
+#define HSD_BUTTON_LR 0x80000000 // Digital input of either L or R
 
 // COLLISION FLAGS //
 

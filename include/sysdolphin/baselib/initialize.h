@@ -4,7 +4,7 @@
 #include <global.h>
 
 #include <dolphin/types.h>
-#include <dolphin/gx/gxtypes.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/os/OSAlloc.h>
 #include <sysdolphin/baselib/video.h>
 

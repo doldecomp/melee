@@ -1,5 +1,5 @@
 #include <ftyoshi.h>
-
+#include <melee/it/itkind.h>
 
 ///https://decomp.me/scratch/ufrFK
 void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg) {
@@ -111,16 +111,16 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     ftYoshiAttributes *other_attr;
     struct S_UNK_YOSHI1* temp_r28;
     struct S_UNK_YOSHI1* temp;
-    ftData *fighter_data;
+    ftData *ft;
     struct S_UNK_YOSHI1* temp_r27;
     Fighter *fp;
     
     fp = fighterObj->user_data;
     temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
-    fighter_data = fp->x10C_ftData;
+    ft = fp->x10C_ftData;
     temp_r28 = (struct S_UNK_YOSHI1*)fp->x5BC;
-    item_list = fighter_data->x48_items;
-    other_attr = fighter_data->ext_attr;
+    item_list = ft->x48_items;
+    other_attr = ft->ext_attr;
     
     if (!temp)
     {
@@ -132,9 +132,9 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     func_8012B6E8(fp, temp_r27);
     func_8012B6E8(fp, temp_r28);
     PUSH_ATTRS(fp, ftYoshiAttributes);
-    func_8026B3F8(item_list[0], 0x56U);
-    func_8026B3F8(item_list[1], 0x58U);
-    func_8026B3F8(item_list[2], 0x57U);
+    func_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
+    func_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
+    func_8026B3F8(item_list[2], It_Kind_Yoshi_EggLay);
     fp->x2226_flag.bits.b1 = 1;
   
 }

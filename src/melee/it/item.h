@@ -53,7 +53,11 @@ struct ItemStateTable
 
 struct ItemStateContainer
 {
-    struct ItemStateTable stateTable[];
+    struct ItemStateTable stateTable[
+#ifdef M2CTX
+        0
+#endif
+    ];
 };
 
 struct ItemLogicTable
@@ -593,12 +597,20 @@ typedef struct CommonItemArticles
 
 typedef struct UnkItemArticles
 {
-    void* unkptr[];
+    void* unkptr[
+#ifdef M2CTX
+        0
+#endif
+    ];
 }UnkItemArticles;
 
 typedef struct UnkItemArticles2
 {
-    void* unkptr[];
+    void* unkptr[
+#ifdef M2CTX
+        0
+#endif
+    ];
 }UnkItemArticles2;
 
 typedef struct UnkItemArticles3

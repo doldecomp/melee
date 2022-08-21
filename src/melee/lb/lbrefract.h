@@ -17,10 +17,15 @@ s32 func_800226A8(HSD_PObj *);
 void func_80022998(s32, s32);
 void func_80022BB8();
 void func_80022BD0();
+
+#pragma region lbrefract_003
+
 f32 atan2f(f32 y, f32 x);
 f32 func_80022D1C(f32);
 f32 func_80022DBC(f32);
-f32 func_80022E68(f32);
+f32 atanf(f32);
+
+#pragma endregion
 
 // todo: locals to be removed
 

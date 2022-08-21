@@ -1,6 +1,6 @@
 #include <sysdolphin/baselib/list.h>
 #include <string.h>
-#include <types.h>
+#include <dolphin/types.h>
 #include <stddef.h>
 
 HSD_ObjAllocData slist_alloc_data;

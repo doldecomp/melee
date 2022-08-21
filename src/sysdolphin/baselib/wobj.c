@@ -235,7 +235,7 @@ void HSD_WObjGetPosition(HSD_WObj* wobj, Vec* vec)
     *vec = wobj->pos;
 }
 
-// Fuck frank.py, all my homies hate frank.py
+// Fuck frank.py, all my homies hate @frank
 #ifdef NON_MATCHING
 #pragma push
 #pragma peephole on
