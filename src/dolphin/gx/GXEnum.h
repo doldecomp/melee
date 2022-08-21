@@ -759,6 +759,13 @@ typedef enum
     GX_CLIP_DISABLE = 1,
 } GXClipMode;
 
+// todo: clean up invocations via defines or inlines
+/* for example,
+inline void WriteBP(u32 i) {
+   WGPIPE.u8 = GX_LOAD_BP_REG;
+   WGPIPE.u32 = i;
+} */
+// most or all GX commands follow a pattern of fixed args
 typedef enum
 {
     GX_NOP = 0x00,

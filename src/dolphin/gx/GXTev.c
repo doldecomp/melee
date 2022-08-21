@@ -39,45 +39,19 @@ void GXSetTevOp(GXTevStageID id, GXTevMode mode)
     GXSetTevAlphaOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
 }
 
-// https://decomp.me/scratch/vc3kY // 2250 (29.69%)
-#pragma push
-asm void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTevColorArg c, GXTevColorArg d)
-{ // clang-format off
-    nofralloc
-/* 8033FF68 0033CB48  54 63 10 3A */	slwi r3, r3, 2
-/* 8033FF6C 0033CB4C  80 0D A5 08 */	lwz r0, __GXContexts(r13)
-/* 8033FF70 0033CB50  39 23 01 30 */	addi r9, r3, 0x130
-/* 8033FF74 0033CB54  7D 20 4A 14 */	add r9, r0, r9
-/* 8033FF78 0033CB58  80 69 00 00 */	lwz r3, 0(r9)
-/* 8033FF7C 0033CB5C  54 80 60 26 */	slwi r0, r4, 0xc
-/* 8033FF80 0033CB60  54 A8 40 2E */	slwi r8, r5, 8
-/* 8033FF84 0033CB64  54 63 05 1E */	rlwinm r3, r3, 0, 0x14, 0xf
-/* 8033FF88 0033CB68  7C 60 03 78 */	or r0, r3, r0
-/* 8033FF8C 0033CB6C  90 09 00 00 */	stw r0, 0(r9)
-/* 8033FF90 0033CB70  54 C4 20 36 */	slwi r4, r6, 4
-/* 8033FF94 0033CB74  38 60 00 61 */	li r3, 0x61
-/* 8033FF98 0033CB78  80 C9 00 00 */	lwz r6, 0(r9)
-/* 8033FF9C 0033CB7C  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033FFA0 0033CB80  38 00 00 00 */	li r0, 0
-/* 8033FFA4 0033CB84  54 C6 06 26 */	rlwinm r6, r6, 0, 0x18, 0x13
-/* 8033FFA8 0033CB88  7C C6 43 78 */	or r6, r6, r8
-/* 8033FFAC 0033CB8C  90 C9 00 00 */	stw r6, 0(r9)
-/* 8033FFB0 0033CB90  80 C9 00 00 */	lwz r6, 0(r9)
-/* 8033FFB4 0033CB94  54 C6 07 2E */	rlwinm r6, r6, 0, 0x1c, 0x17
-/* 8033FFB8 0033CB98  7C C4 23 78 */	or r4, r6, r4
-/* 8033FFBC 0033CB9C  90 89 00 00 */	stw r4, 0(r9)
-/* 8033FFC0 0033CBA0  80 89 00 00 */	lwz r4, 0(r9)
-/* 8033FFC4 0033CBA4  54 84 00 36 */	rlwinm r4, r4, 0, 0, 0x1b
-/* 8033FFC8 0033CBA8  7C 84 3B 78 */	or r4, r4, r7
-/* 8033FFCC 0033CBAC  90 89 00 00 */	stw r4, 0(r9)
-/* 8033FFD0 0033CBB0  98 65 80 00 */	stb r3, 0xCC008000@l(r5)
-/* 8033FFD4 0033CBB4  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033FFD8 0033CBB8  80 89 00 00 */	lwz r4, 0(r9)
-/* 8033FFDC 0033CBBC  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033FFE0 0033CBC0  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033FFE4 0033CBC4  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTevColorArg c, GXTevColorArg d)
+{
+    GXContext *gx = __GXContexts.main;
+    u32 *temp_r9 = &gx->x130_data[stage];
+
+    INSERT_FIELD(*temp_r9, a, 4, 12);
+    INSERT_FIELD(*temp_r9, b, 4, 8);
+    INSERT_FIELD(*temp_r9, c, 4, 4);
+    INSERT_FIELD(*temp_r9, d, 4, 0);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(*temp_r9);
+    set_x2(GX_FALSE);
+}
 
 // https://decomp.me/scratch/HjnyL // 2875 (12.88%)
 #pragma push
