@@ -4,7 +4,6 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/os/OSContext.h>
-#include <dolphin/gx/GXCommandList.h>
 #include <dolphin/gx/GXEnum.h>
 
 #define GX_WRITE_U8(ub) \
@@ -88,7 +87,7 @@ typedef struct
     u8 x4EC;                                            // at 0x4EC
     GXBool x4ED;                                        // at 0x4ED
     u8 x4EE;                                            // at 0x4EE
-    u32 x4F0;                                           // at 0x4F0
+    u32 x4F0_flags;                                     // at 0x4F0
     GXFifoObj *fifo;                                    // at 0x4F4
     u8 x4F8_pad[0x570 - 0x4F8];                         // at 0x4F8
     u32 dirtyFlags;                                     // at 0x570

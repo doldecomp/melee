@@ -8,7 +8,7 @@
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/fobj.h>
 
-#include <dolphin/gx/GXCommandList.h>
+#include <dolphin/gx/GXEnum.h>
 
 #define HSD_A_S_W0 8
 #define HSD_DEFAULT_MAX_SHAPE_VERTICES 2000
@@ -26,9 +26,6 @@
 
 #define SHAPESET_AVERAGE 1
 #define SHAPESET_ADDITIVE 1 << 1
-
-#define GX_VAT_MASK 0x7
-#define GX_OPCODE_MASK 0xF8
 
 typedef enum _PObjSetupFlag {
     SETUP_NORMAL = 1,
