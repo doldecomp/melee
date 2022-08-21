@@ -1152,13 +1152,6 @@ lbl_804D5F84:
 
 
 .section .sdata2
-    .balign 8
-.global lbl_804DE768
-lbl_804DE768:
-	.4byte 0x3F000000
-.global lbl_804DE76C
-lbl_804DE76C:
-	.4byte 0xBF000000
 .global lbl_804DE770
 lbl_804DE770:
 	.4byte 0x00000000

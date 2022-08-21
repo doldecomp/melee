@@ -3988,8 +3988,6 @@ BOOL func_801C4E20(void)
     return TRUE;
 }
 
-// Not matching due to an epilogue ordering bug in @frank
-#ifdef NON_MATCHING
 void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
                    HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5)
 {
@@ -4008,94 +4006,6 @@ void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
     func_8000B1CC(arg5, NULL, &sp20);
     stage_info.x16C = sp20;
 }
-#else
-asm void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
-                       HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5)
-{
-    nofralloc
-/* 801C4E70 001C1A50  7C 08 02 A6 */	mflr r0
-/* 801C4E74 001C1A54  3D 20 80 4A */	lis r9, stage_info@ha
-/* 801C4E78 001C1A58  90 01 00 04 */	stw r0, 4(r1)
-/* 801C4E7C 001C1A5C  94 21 FF B8 */	stwu r1, -0x48(r1)
-/* 801C4E80 001C1A60  BF 41 00 30 */	stmw r26, 0x30(r1)
-/* 801C4E84 001C1A64  3B E9 E6 C8 */	addi r31, r9, stage_info@l
-/* 801C4E88 001C1A68  3B 44 00 00 */	addi r26, r4, 0
-/* 801C4E8C 001C1A6C  3B 65 00 00 */	addi r27, r5, 0
-/* 801C4E90 001C1A70  39 20 00 01 */	li r9, 1
-/* 801C4E94 001C1A74  3B 86 00 00 */	addi r28, r6, 0
-/* 801C4E98 001C1A78  3B A7 00 00 */	addi r29, r7, 0
-/* 801C4E9C 001C1A7C  3B C8 00 00 */	addi r30, r8, 0
-/* 801C4EA0 001C1A80  38 A1 00 20 */	addi r5, r1, 0x20
-/* 801C4EA4 001C1A84  88 1F 00 8C */	lbz r0, 0x8c(r31)
-/* 801C4EA8 001C1A88  51 20 26 F6 */	rlwimi r0, r9, 4, 0x1b, 0x1b
-/* 801C4EAC 001C1A8C  38 80 00 00 */	li r4, 0
-/* 801C4EB0 001C1A90  98 1F 00 8C */	stb r0, 0x8c(r31)
-/* 801C4EB4 001C1A94  4B E4 63 19 */	bl func_8000B1CC
-/* 801C4EB8 001C1A98  80 C1 00 20 */	lwz r6, 0x20(r1)
-/* 801C4EBC 001C1A9C  7F 43 D3 78 */	mr r3, r26
-/* 801C4EC0 001C1AA0  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 801C4EC4 001C1AA4  38 A1 00 20 */	addi r5, r1, 0x20
-/* 801C4EC8 001C1AA8  38 80 00 00 */	li r4, 0
-/* 801C4ECC 001C1AAC  90 DF 01 30 */	stw r6, 0x130(r31)
-/* 801C4ED0 001C1AB0  90 1F 01 34 */	stw r0, 0x134(r31)
-/* 801C4ED4 001C1AB4  80 01 00 28 */	lwz r0, 0x28(r1)
-/* 801C4ED8 001C1AB8  90 1F 01 38 */	stw r0, 0x138(r31)
-/* 801C4EDC 001C1ABC  4B E4 62 F1 */	bl func_8000B1CC
-/* 801C4EE0 001C1AC0  80 C1 00 20 */	lwz r6, 0x20(r1)
-/* 801C4EE4 001C1AC4  7F 63 DB 78 */	mr r3, r27
-/* 801C4EE8 001C1AC8  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 801C4EEC 001C1ACC  38 A1 00 20 */	addi r5, r1, 0x20
-/* 801C4EF0 001C1AD0  38 80 00 00 */	li r4, 0
-/* 801C4EF4 001C1AD4  90 DF 01 3C */	stw r6, 0x13c(r31)
-/* 801C4EF8 001C1AD8  90 1F 01 40 */	stw r0, 0x140(r31)
-/* 801C4EFC 001C1ADC  80 01 00 28 */	lwz r0, 0x28(r1)
-/* 801C4F00 001C1AE0  90 1F 01 44 */	stw r0, 0x144(r31)
-/* 801C4F04 001C1AE4  4B E4 62 C9 */	bl func_8000B1CC
-/* 801C4F08 001C1AE8  80 C1 00 20 */	lwz r6, 0x20(r1)
-/* 801C4F0C 001C1AEC  7F 83 E3 78 */	mr r3, r28
-/* 801C4F10 001C1AF0  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 801C4F14 001C1AF4  38 A1 00 20 */	addi r5, r1, 0x20
-/* 801C4F18 001C1AF8  38 80 00 00 */	li r4, 0
-/* 801C4F1C 001C1AFC  90 DF 01 48 */	stw r6, 0x148(r31)
-/* 801C4F20 001C1B00  90 1F 01 4C */	stw r0, 0x14c(r31)
-/* 801C4F24 001C1B04  80 01 00 28 */	lwz r0, 0x28(r1)
-/* 801C4F28 001C1B08  90 1F 01 50 */	stw r0, 0x150(r31)
-/* 801C4F2C 001C1B0C  4B E4 62 A1 */	bl func_8000B1CC
-/* 801C4F30 001C1B10  80 C1 00 20 */	lwz r6, 0x20(r1)
-/* 801C4F34 001C1B14  7F A3 EB 78 */	mr r3, r29
-/* 801C4F38 001C1B18  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 801C4F3C 001C1B1C  38 A1 00 20 */	addi r5, r1, 0x20
-/* 801C4F40 001C1B20  38 80 00 00 */	li r4, 0
-/* 801C4F44 001C1B24  90 DF 01 54 */	stw r6, 0x154(r31)
-/* 801C4F48 001C1B28  90 1F 01 58 */	stw r0, 0x158(r31)
-/* 801C4F4C 001C1B2C  80 01 00 28 */	lwz r0, 0x28(r1)
-/* 801C4F50 001C1B30  90 1F 01 5C */	stw r0, 0x15c(r31)
-/* 801C4F54 001C1B34  4B E4 62 79 */	bl func_8000B1CC
-/* 801C4F58 001C1B38  80 C1 00 20 */	lwz r6, 0x20(r1)
-/* 801C4F5C 001C1B3C  7F C3 F3 78 */	mr r3, r30
-/* 801C4F60 001C1B40  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 801C4F64 001C1B44  38 A1 00 20 */	addi r5, r1, 0x20
-/* 801C4F68 001C1B48  38 80 00 00 */	li r4, 0
-/* 801C4F6C 001C1B4C  90 DF 01 60 */	stw r6, 0x160(r31)
-/* 801C4F70 001C1B50  90 1F 01 64 */	stw r0, 0x164(r31)
-/* 801C4F74 001C1B54  80 01 00 28 */	lwz r0, 0x28(r1)
-/* 801C4F78 001C1B58  90 1F 01 68 */	stw r0, 0x168(r31)
-/* 801C4F7C 001C1B5C  4B E4 62 51 */	bl func_8000B1CC
-/* 801C4F80 001C1B60  80 61 00 20 */	lwz r3, 0x20(r1)
-/* 801C4F84 001C1B64  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 801C4F88 001C1B68  90 7F 01 6C */	stw r3, 0x16c(r31)
-/* 801C4F8C 001C1B6C  90 1F 01 70 */	stw r0, 0x170(r31)
-/* 801C4F90 001C1B70  80 01 00 28 */	lwz r0, 0x28(r1)
-/* 801C4F94 001C1B74  90 1F 01 74 */	stw r0, 0x174(r31)
-/* 801C4F98 001C1B78  80 01 00 4C */	lwz r0, 0x4c(r1)
-/* 801C4F9C 001C1B7C  BB 41 00 30 */	lmw r26, 0x30(r1)
-/* 801C4FA0 001C1B80  38 21 00 48 */	addi r1, r1, 0x48
-/* 801C4FA4 001C1B84  7C 08 03 A6 */	mtlr r0
-/* 801C4FA8 001C1B88  4E 80 00 20 */	blr 
-}
-#pragma peephole on
-#endif
-
 
 extern char lbl_804D4524[8];
 extern char lbl_804D452C[8];
