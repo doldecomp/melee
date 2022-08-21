@@ -8,8 +8,6 @@ HSD_WObjInfo hsdWObj = { WObjInfoInit };
 
 static HSD_WObjInfo* default_class = NULL;
 
-static char lbl_804D5EF8[] = "wobj.c";
-
 void HSD_WObjRemoveAnim(HSD_WObj* wobj)
 {
     if (wobj != NULL) {
@@ -55,18 +53,10 @@ static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
                 *fval = 1.0;
             }
 
-            if (wobj->aobj == NULL) {
-                __assert(lbl_804D5EF8, 148, "wobj->aobj");
-            }
-
+            assert_line(148, wobj->aobj);
             jp = (HSD_JObj*)wobj->aobj->hsd_obj;
-            if (jp == NULL) {
-                __assert(lbl_804D5EF8, 150, "jp");
-            }
-
-            if (jp->u.spline == NULL) {
-                __assert(lbl_804D5EF8, 151, "jp->u.spline");
-            }
+            assert_line(150, jp);
+            assert_line(151, jp->u.spline);
 
             splArcLengthPoint(&p, jp->u.spline, *fval);
             HSD_WObjSetPosition(wobj, &p);
@@ -124,9 +114,7 @@ void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc)
 void HSD_WObjSetDefaultClass(HSD_WObjInfo* info)
 {
     if (info) {
-        if (!hsdIsDescendantOf(info, &hsdWObj)) {
-            __assert(lbl_804D5EF8, 221, "hsdIsDescendantOf(info, &hsdWObj)"); // The line number here is totally made up, this function is removed in practice but the string isn't
-        }
+        assert_line(221, hsdIsDescendantOf(info, &hsdWObj)); // The line number here is totally made up, this function is removed in practice but the string isn't
     }
     default_class = info;
 }
@@ -140,9 +128,7 @@ HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc)
             wobj = HSD_WObjAlloc();
         } else {
             wobj = hsdNew(info);
-            if (wobj == NULL) {
-                __assert(lbl_804D5EF8, 252, "wobj");
-            }
+            assert_line(252, wobj);
         }
         HSD_WOBJ_METHOD(wobj)->load(wobj, desc);
         return wobj;
@@ -235,9 +221,7 @@ void HSD_WObjGetPosition(HSD_WObj* wobj, Vec* vec)
 
 HSD_WObj* HSD_WObjAlloc(void) {
     HSD_WObj* wobj = (HSD_WObj*)hsdNew((HSD_ClassInfo*)(default_class ? default_class : &hsdWObj));
-    if (wobj == NULL){
-        __assert(lbl_804D5EF8, 591, "wobj");
-    }
+    assert_line(591, wobj);
     return wobj;
 }
 
