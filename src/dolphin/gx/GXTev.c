@@ -111,7 +111,39 @@ void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
     set_x2(GX_FALSE);
 }
 
-// https://decomp.me/scratch/mrEco
+#ifdef NON_MATCHING
+
+// https://decomp.me/scratch/YJOLf // 5225 (0%)
+void GXSetTevColor(GXTevRegID id, GXColor color)
+{
+    u32 temp_r6 = 0;
+    u32 temp_r8 = 0;
+
+    temp_r6 = 0;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    INSERT_FIELD(temp_r6, color.r, 11, 0);
+    INSERT_FIELD(temp_r6, color.a, 8, 12);
+    INSERT_FIELD(temp_r6, 224 + id * 2, 8, 24);
+    GX_WRITE_U32(temp_r6);
+
+    temp_r6 = 0;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    INSERT_FIELD(temp_r6, color.b, 11, 0);
+    INSERT_FIELD(temp_r6, color.g, 8, 12);
+    INSERT_FIELD(temp_r6, 225 + id * 2, 8, 24);
+    GX_WRITE_U32(temp_r6);
+
+    GX_WRITE_U32(temp_r6);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(temp_r6);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(temp_r6);
+
+    set_x2(GX_FALSE);
+}
+
+#else
+
 #pragma push
 asm void GXSetTevColor(GXTevRegID id, GXColor color)
 { // clang-format off
@@ -147,6 +179,8 @@ asm void GXSetTevColor(GXTevRegID id, GXColor color)
 /* 8034025C 0033CE3C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#endif
 
 // https://decomp.me/scratch/UNKO4
 #pragma push
