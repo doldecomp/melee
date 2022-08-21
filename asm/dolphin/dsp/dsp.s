@@ -91,21 +91,3 @@ lbl_803361F4:
 /* 80336204 00332DE4  38 21 00 18 */	addi r1, r1, 0x18
 /* 80336208 00332DE8  4E 80 00 20 */	blr 
 
-
-.section .data
-    .balign 8
-.global lbl_80400C08
-lbl_80400C08:
-    .asciz "DSPInit(): Build Date: %s %s\n"
-    .balign 4
-    .asciz "Sep  8 2001"
-    .balign 4
-    .asciz "01:51:48"
-    .balign 4
-
-
-.section .sbss
-    .balign 8
-.global __DSP_init_flag
-__DSP_init_flag:
-	.skip 0x4
