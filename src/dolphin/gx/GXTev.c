@@ -2,126 +2,42 @@
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GXTev.h>
 
-// https://decomp.me/scratch/0ngR2 // 120 (98.86%)
-#pragma push
-asm void GXSetTevOp(GXTevStageID id, GXTevMode mode)
-{ // clang-format off
-    nofralloc
-/* 8033FDC4 0033C9A4  7C 08 02 A6 */	mflr r0
-/* 8033FDC8 0033C9A8  38 C0 00 0A */	li r6, 0xa
-/* 8033FDCC 0033C9AC  90 01 00 04 */	stw r0, 4(r1)
-/* 8033FDD0 0033C9B0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8033FDD4 0033C9B4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8033FDD8 0033C9B8  3B E0 00 05 */	li r31, 5
-/* 8033FDDC 0033C9BC  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8033FDE0 0033C9C0  7C 7E 1B 79 */	or. r30, r3, r3
-/* 8033FDE4 0033C9C4  41 82 00 0C */	beq lbl_8033FDF0
-/* 8033FDE8 0033C9C8  38 C0 00 00 */	li r6, 0
-/* 8033FDEC 0033C9CC  3B E0 00 00 */	li r31, 0
-lbl_8033FDF0:
-/* 8033FDF0 0033C9D0  2C 04 00 02 */	cmpwi r4, 2
-/* 8033FDF4 0033C9D4  41 82 00 8C */	beq lbl_8033FE80
-/* 8033FDF8 0033C9D8  40 80 00 14 */	bge lbl_8033FE0C
-/* 8033FDFC 0033C9DC  2C 04 00 00 */	cmpwi r4, 0
-/* 8033FE00 0033C9E0  41 82 00 1C */	beq lbl_8033FE1C
-/* 8033FE04 0033C9E4  40 80 00 48 */	bge lbl_8033FE4C
-/* 8033FE08 0033C9E8  48 00 01 10 */	b lbl_8033FF18
-lbl_8033FE0C:
-/* 8033FE0C 0033C9EC  2C 04 00 04 */	cmpwi r4, 4
-/* 8033FE10 0033C9F0  41 82 00 D8 */	beq lbl_8033FEE8
-/* 8033FE14 0033C9F4  40 80 01 04 */	bge lbl_8033FF18
-/* 8033FE18 0033C9F8  48 00 00 9C */	b lbl_8033FEB4
-lbl_8033FE1C:
-/* 8033FE1C 0033C9FC  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE20 0033CA00  38 80 00 0F */	li r4, 0xf
-/* 8033FE24 0033CA04  38 A0 00 08 */	li r5, 8
-/* 8033FE28 0033CA08  38 E0 00 0F */	li r7, 0xf
-/* 8033FE2C 0033CA0C  48 00 01 3D */	bl GXSetTevColorIn
-/* 8033FE30 0033CA10  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE34 0033CA14  38 DF 00 00 */	addi r6, r31, 0
-/* 8033FE38 0033CA18  38 80 00 07 */	li r4, 7
-/* 8033FE3C 0033CA1C  38 A0 00 04 */	li r5, 4
-/* 8033FE40 0033CA20  38 E0 00 07 */	li r7, 7
-/* 8033FE44 0033CA24  48 00 01 A5 */	bl GXSetTevAlphaIn
-/* 8033FE48 0033CA28  48 00 00 D0 */	b lbl_8033FF18
-lbl_8033FE4C:
-/* 8033FE4C 0033CA2C  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE50 0033CA30  38 86 00 00 */	addi r4, r6, 0
-/* 8033FE54 0033CA34  38 A0 00 08 */	li r5, 8
-/* 8033FE58 0033CA38  38 C0 00 09 */	li r6, 9
-/* 8033FE5C 0033CA3C  38 E0 00 0F */	li r7, 0xf
-/* 8033FE60 0033CA40  48 00 01 09 */	bl GXSetTevColorIn
-/* 8033FE64 0033CA44  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE68 0033CA48  38 FF 00 00 */	addi r7, r31, 0
-/* 8033FE6C 0033CA4C  38 80 00 07 */	li r4, 7
-/* 8033FE70 0033CA50  38 A0 00 07 */	li r5, 7
-/* 8033FE74 0033CA54  38 C0 00 07 */	li r6, 7
-/* 8033FE78 0033CA58  48 00 01 71 */	bl GXSetTevAlphaIn
-/* 8033FE7C 0033CA5C  48 00 00 9C */	b lbl_8033FF18
-lbl_8033FE80:
-/* 8033FE80 0033CA60  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE84 0033CA64  38 86 00 00 */	addi r4, r6, 0
-/* 8033FE88 0033CA68  38 A0 00 0C */	li r5, 0xc
-/* 8033FE8C 0033CA6C  38 C0 00 08 */	li r6, 8
-/* 8033FE90 0033CA70  38 E0 00 0F */	li r7, 0xf
-/* 8033FE94 0033CA74  48 00 00 D5 */	bl GXSetTevColorIn
-/* 8033FE98 0033CA78  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE9C 0033CA7C  38 DF 00 00 */	addi r6, r31, 0
-/* 8033FEA0 0033CA80  38 80 00 07 */	li r4, 7
-/* 8033FEA4 0033CA84  38 A0 00 04 */	li r5, 4
-/* 8033FEA8 0033CA88  38 E0 00 07 */	li r7, 7
-/* 8033FEAC 0033CA8C  48 00 01 3D */	bl GXSetTevAlphaIn
-/* 8033FEB0 0033CA90  48 00 00 68 */	b lbl_8033FF18
-lbl_8033FEB4:
-/* 8033FEB4 0033CA94  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FEB8 0033CA98  38 80 00 0F */	li r4, 0xf
-/* 8033FEBC 0033CA9C  38 A0 00 0F */	li r5, 0xf
-/* 8033FEC0 0033CAA0  38 C0 00 0F */	li r6, 0xf
-/* 8033FEC4 0033CAA4  38 E0 00 08 */	li r7, 8
-/* 8033FEC8 0033CAA8  48 00 00 A1 */	bl GXSetTevColorIn
-/* 8033FECC 0033CAAC  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FED0 0033CAB0  38 80 00 07 */	li r4, 7
-/* 8033FED4 0033CAB4  38 A0 00 07 */	li r5, 7
-/* 8033FED8 0033CAB8  38 C0 00 07 */	li r6, 7
-/* 8033FEDC 0033CABC  38 E0 00 04 */	li r7, 4
-/* 8033FEE0 0033CAC0  48 00 01 09 */	bl GXSetTevAlphaIn
-/* 8033FEE4 0033CAC4  48 00 00 34 */	b lbl_8033FF18
-lbl_8033FEE8:
-/* 8033FEE8 0033CAC8  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FEEC 0033CACC  38 E6 00 00 */	addi r7, r6, 0
-/* 8033FEF0 0033CAD0  38 80 00 0F */	li r4, 0xf
-/* 8033FEF4 0033CAD4  38 A0 00 0F */	li r5, 0xf
-/* 8033FEF8 0033CAD8  38 C0 00 0F */	li r6, 0xf
-/* 8033FEFC 0033CADC  48 00 00 6D */	bl GXSetTevColorIn
-/* 8033FF00 0033CAE0  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FF04 0033CAE4  38 FF 00 00 */	addi r7, r31, 0
-/* 8033FF08 0033CAE8  38 80 00 07 */	li r4, 7
-/* 8033FF0C 0033CAEC  38 A0 00 07 */	li r5, 7
-/* 8033FF10 0033CAF0  38 C0 00 07 */	li r6, 7
-/* 8033FF14 0033CAF4  48 00 00 D5 */	bl GXSetTevAlphaIn
-lbl_8033FF18:
-/* 8033FF18 0033CAF8  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FF1C 0033CAFC  38 80 00 00 */	li r4, 0
-/* 8033FF20 0033CB00  38 A0 00 00 */	li r5, 0
-/* 8033FF24 0033CB04  38 C0 00 00 */	li r6, 0
-/* 8033FF28 0033CB08  38 E0 00 01 */	li r7, 1
-/* 8033FF2C 0033CB0C  39 00 00 00 */	li r8, 0
-/* 8033FF30 0033CB10  48 00 01 3D */	bl GXSetTevColorOp
-/* 8033FF34 0033CB14  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FF38 0033CB18  38 80 00 00 */	li r4, 0
-/* 8033FF3C 0033CB1C  38 A0 00 00 */	li r5, 0
-/* 8033FF40 0033CB20  38 C0 00 00 */	li r6, 0
-/* 8033FF44 0033CB24  38 E0 00 01 */	li r7, 1
-/* 8033FF48 0033CB28  39 00 00 00 */	li r8, 0
-/* 8033FF4C 0033CB2C  48 00 01 E1 */	bl GXSetTevAlphaOp
-/* 8033FF50 0033CB30  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8033FF54 0033CB34  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8033FF58 0033CB38  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8033FF5C 0033CB3C  7C 08 03 A6 */	mtlr r0
-/* 8033FF60 0033CB40  38 21 00 18 */	addi r1, r1, 0x18
-/* 8033FF64 0033CB44  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetTevOp(GXTevStageID id, GXTevMode mode)
+{
+    GXTevColorArg inputColor = GX_CC_RASC;
+    GXTevAlphaArg inputAlpha = GX_CA_RASA;
+
+    if (id != GX_TEVSTAGE0)
+    {
+        inputColor = GX_CC_CPREV;
+        inputAlpha = GX_CA_APREV;
+    }
+    switch (mode)
+    {
+    case GX_MODULATE:
+        GXSetTevColorIn(id, GX_CC_ZERO, GX_CC_TEXC, inputColor, GX_CC_ZERO);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_TEXA, inputAlpha, GX_CA_ZERO);
+        break;
+    case GX_DECAL:
+        GXSetTevColorIn(id, inputColor, GX_CC_TEXC, GX_CC_TEXA, GX_CC_ZERO);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, inputAlpha);
+        break;
+    case GX_BLEND:
+        GXSetTevColorIn(id, inputColor, GX_CC_ONE, GX_CC_TEXC, GX_CC_ZERO);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_TEXA, inputAlpha, GX_CA_ZERO);
+        break;
+    case GX_REPLACE:
+        GXSetTevColorIn(id, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_TEXC);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_TEXA);
+        break;
+    case GX_PASSCLR:
+        GXSetTevColorIn(id, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, inputColor);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, inputAlpha);
+        break;
+    }
+    GXSetTevColorOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
+    GXSetTevAlphaOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
+}
 
 // https://decomp.me/scratch/vc3kY // 2250 (29.69%)
 #pragma push
