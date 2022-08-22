@@ -137,7 +137,7 @@ typedef struct _HSD_TObj {
     Vec scale;
     Vec translate;
     u32 wrap_s; //GXTexWrapMode
-    u32 wrap_t; //GXTexWrapMode
+    s32 wrap_t; //GXTexWrapMode
     u8 repeat_s;
     u8 repeat_t;
     u32 flags;

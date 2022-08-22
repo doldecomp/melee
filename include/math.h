@@ -3,7 +3,7 @@
 
 #pragma cplusplus on
 
-#define FLT_EPSILON 1.00000001335e-10
+#define FLT_EPSILON 1.00000001335e-10f
 
 extern inline float sqrtf(float x)
 {

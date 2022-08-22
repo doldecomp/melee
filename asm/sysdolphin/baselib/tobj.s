@@ -3119,17 +3119,12 @@ tobj_head:
 
 .section .sdata2
 
-.global lbl_804DE3EC
-lbl_804DE3EC:
-	.4byte 0x00000000
-.global lbl_804DE3F0
-lbl_804DE3F0:
-	.4byte 0x3F800000
-	.4byte 0x00000000
-.global lbl_804DE3F8
-lbl_804DE3F8:
-	.4byte 0x43300000
-	.4byte 0x00000000
+.set tobj_c_sdata2_start, lbl_804DE400 - 0x20
+
+.set lbl_804DE3EC, tobj_c_sdata2_start + 0xC
+.set lbl_804DE3F0, tobj_c_sdata2_start + 0x10
+.set lbl_804DE3F8, tobj_c_sdata2_start + 0x18
+
 .global lbl_804DE400
 lbl_804DE400:
 	.4byte 0x3F000000
