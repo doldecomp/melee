@@ -2,8 +2,9 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_803A4138
-func_803A4138:
+# https://decomp.me/scratch/6K1oj // 405 (74.69%)
+.global psInitAppSRT
+psInitAppSRT:
 /* 803A4138 003A0D18  7C 08 02 A6 */	mflr r0
 /* 803A413C 003A0D1C  3C 60 80 4D */	lis r3, lbl_804D10B0@ha
 /* 803A4140 003A0D20  90 01 00 04 */	stw r0, 4(r1)
@@ -21,8 +22,9 @@ func_803A4138:
 /* 803A4170 003A0D50  7C 08 03 A6 */	mtlr r0
 /* 803A4174 003A0D54  4E 80 00 20 */	blr 
 
-.global func_803A4178
-func_803A4178:
+# https://decomp.me/scratch/BtnBu
+.global psAddGeneratorAppSRT
+psAddGeneratorAppSRT:
 /* 803A4178 003A0D58  7C 08 02 A6 */	mflr r0
 /* 803A417C 003A0D5C  3C A0 80 4D */	lis r5, lbl_804D10B0@ha
 /* 803A4180 003A0D60  90 01 00 04 */	stw r0, 4(r1)
@@ -83,6 +85,7 @@ lbl_803A423C:
 /* 803A4254 003A0E34  7C 08 03 A6 */	mtlr r0
 /* 803A4258 003A0E38  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/URyZz
 .global func_803A425C
 func_803A425C:
 /* 803A425C 003A0E3C  7C 08 02 A6 */	mflr r0
@@ -92,7 +95,7 @@ func_803A425C:
 /* 803A426C 003A0E4C  3B E3 00 00 */	addi r31, r3, 0
 /* 803A4270 003A0E50  38 64 00 00 */	addi r3, r4, 0
 /* 803A4274 003A0E54  A0 9F 00 1E */	lhz r4, 0x1e(r31)
-/* 803A4278 003A0E58  4B FF FF 01 */	bl func_803A4178
+/* 803A4278 003A0E58  4B FF FF 01 */	bl psAddGeneratorAppSRT
 /* 803A427C 003A0E5C  90 7F 00 8C */	stw r3, 0x8c(r31)
 /* 803A4280 003A0E60  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 803A4284 003A0E64  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -100,8 +103,9 @@ func_803A425C:
 /* 803A428C 003A0E6C  7C 08 03 A6 */	mtlr r0
 /* 803A4290 003A0E70  4E 80 00 20 */	blr 
 
-.global func_803A4294
-func_803A4294:
+# https://decomp.me/scratch/EE6e6
+.global psAddGeneratorAppSRT_begin
+psAddGeneratorAppSRT_begin:
 /* 803A4294 003A0E74  7C 08 02 A6 */	mflr r0
 /* 803A4298 003A0E78  90 01 00 04 */	stw r0, 4(r1)
 /* 803A429C 003A0E7C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -109,7 +113,7 @@ func_803A4294:
 /* 803A42A4 003A0E84  3B E3 00 00 */	addi r31, r3, 0
 /* 803A42A8 003A0E88  38 64 00 00 */	addi r3, r4, 0
 /* 803A42AC 003A0E8C  A0 9F 00 1C */	lhz r4, 0x1c(r31)
-/* 803A42B0 003A0E90  4B FF FE C9 */	bl func_803A4178
+/* 803A42B0 003A0E90  4B FF FE C9 */	bl psAddGeneratorAppSRT
 /* 803A42B4 003A0E94  90 7F 00 54 */	stw r3, 0x54(r31)
 /* 803A42B8 003A0E98  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 803A42BC 003A0E9C  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -117,8 +121,9 @@ func_803A4294:
 /* 803A42C4 003A0EA4  7C 08 03 A6 */	mtlr r0
 /* 803A42C8 003A0EA8  4E 80 00 20 */	blr 
 
-.global func_803A42CC
-func_803A42CC:
+# https://decomp.me/scratch/hvOIc
+.global psAttachParticleAppSRT
+psAttachParticleAppSRT:
 /* 803A42CC 003A0EAC  28 04 00 00 */	cmplwi r4, 0
 /* 803A42D0 003A0EB0  41 82 00 18 */	beq lbl_803A42E8
 /* 803A42D4 003A0EB4  28 03 00 00 */	cmplwi r3, 0
@@ -137,8 +142,9 @@ lbl_803A42F0:
 /* 803A4300 003A0EE0  54 03 04 3E */	clrlwi r3, r0, 0x10
 /* 803A4304 003A0EE4  4E 80 00 20 */	blr 
 
-.global func_803A4308
-func_803A4308:
+# https://decomp.me/scratch/6i2Pu
+.global psAttachGeneratorAppSRT
+psAttachGeneratorAppSRT:
 /* 803A4308 003A0EE8  28 04 00 00 */	cmplwi r4, 0
 /* 803A430C 003A0EEC  41 82 00 18 */	beq lbl_803A4324
 /* 803A4310 003A0EF0  28 03 00 00 */	cmplwi r3, 0
@@ -157,8 +163,9 @@ lbl_803A432C:
 /* 803A433C 003A0F1C  54 03 04 3E */	clrlwi r3, r0, 0x10
 /* 803A4340 003A0F20  4E 80 00 20 */	blr 
 
-.global func_803A4344
-func_803A4344:
+# https://decomp.me/scratch/flXbS
+.global psRemoveParticleAppSRT
+psRemoveParticleAppSRT:
 /* 803A4344 003A0F24  7C 08 02 A6 */	mflr r0
 /* 803A4348 003A0F28  90 01 00 04 */	stw r0, 4(r1)
 /* 803A434C 003A0F2C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -205,8 +212,9 @@ lbl_803A43CC:
 /* 803A43E0 003A0FC0  7C 08 03 A6 */	mtlr r0
 /* 803A43E4 003A0FC4  4E 80 00 20 */	blr 
 
-.global func_803A43E8
-func_803A43E8:
+# https://decomp.me/scratch/80iZw
+.global psRemoveGeneratorSRT
+psRemoveGeneratorSRT:
 /* 803A43E8 003A0FC8  7C 08 02 A6 */	mflr r0
 /* 803A43EC 003A0FCC  90 01 00 04 */	stw r0, 4(r1)
 /* 803A43F0 003A0FD0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -279,7 +287,7 @@ lbl_804D7958:
     .balign 8
 .global lbl_804DEA68
 lbl_804DEA68:
-	.4byte 0x00000000
+	.4byte NULL
 .global lbl_804DEA6C
 lbl_804DEA6C:
-	.4byte 0x3F800000
+	.float 1.0

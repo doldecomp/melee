@@ -92,31 +92,31 @@ lbl_800056C0:
 	.4byte func_8039FC70
     .4byte 0x00000418
     .4byte lbl_80005608
-	.4byte func_803A0088
+	.4byte psDispParticles
     .4byte 0x00003898
     .4byte lbl_80005610
-	.4byte func_803A3920
+	.4byte psSetupTevCommon
     .4byte 0x00000130
     .4byte lbl_80005618
-	.4byte func_803A3A5C
+	.4byte psSetupTev
     .4byte 0x000006DC
     .4byte lbl_80005620
-	.4byte func_803A4138
+	.4byte psInitAppSRT
     .4byte 0x00000040
     .4byte lbl_80005628
-	.4byte func_803A4178
+	.4byte psAddGeneratorAppSRT
     .4byte 0x000000E4
     .4byte lbl_80005630
 	.4byte func_803A425C
     .4byte 0x00000038
     .4byte lbl_80005638
-	.4byte func_803A4294
+	.4byte psAddGeneratorAppSRT_begin
     .4byte 0x00000038
     .4byte lbl_80005640
-	.4byte func_803A4344
+	.4byte psRemoveParticleAppSRT
     .4byte 0x000000A4
     .4byte lbl_80005648
-	.4byte func_803A43E8
+	.4byte psRemoveGeneratorSRT
     .4byte 0x000000BC
     .4byte lbl_80005650
 	.4byte func_803B3344

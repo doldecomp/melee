@@ -1,4 +1,4 @@
-#include "lbtime.h"
+#include <melee/lb/lbtime.h>
 
 #define UINT_MAX 0xFFFFFFFF
 
@@ -33,14 +33,14 @@ u32 func_8000AF24(u32 a, int b, int c) {
     }
 }
 
-u32 func_8000AF74(u32 a, int b, int c) {
+u32 func_8000AF74(u32 a, int b) {
     if (b > 0) {
         u32 r0 = a & 0xff;
         r0 = 0xff - r0;
 
         return (r0 > b) ? a + b : 0xff;
     } else {
-        c = a & 0xff;
+        int c = a & 0xff;
 
         return (c > -b) ? a + b : 0;
     }

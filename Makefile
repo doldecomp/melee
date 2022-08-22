@@ -6,8 +6,11 @@ ifneq ($(findstring MSYS,$(shell uname)),)
 endif
 
 GENERATE_MAP ?= 0
+NON_MATCHING ?= 0
+EPILOGUE_PROCESS ?= 1
 
 VERBOSE ?= 0
+MAX_ERRORS ?= 0     # 0 = no maximum
 
 ifeq ($(VERBOSE),0)
   QUIET := @
@@ -19,17 +22,11 @@ endif
 
 TARGET := ssbm.us.1.2
 
-# Overkill epilogue fixup strategy. Set to 1 if necessary.
-EPILOGUE_PROCESS := 1
-
 BUILD_DIR := build/$(TARGET)
-ifeq ($(EPILOGUE_PROCESS),1)
-EPILOGUE_DIR := epilogue/$(TARGET)
-endif
+VANILLA_DIR := $(BUILD_DIR)/vanilla
+PROFILE_DIR := $(BUILD_DIR)/profile
 
 # Inputs
-S_FILES := $(wildcard asm/*.s)
-C_FILES := $(wildcard src/*.c)
 LDSCRIPT := $(BUILD_DIR)/ldscript.lcf
 
 # Outputs
@@ -38,15 +35,8 @@ ELF     := $(DOL:.dol=.elf)
 MAP     := $(BUILD_DIR)/GALE01.map
 
 include obj_files.mk
-ifeq ($(EPILOGUE_PROCESS),1)
-include e_files.mk
-endif
 
 O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES)
-
-ifeq ($(EPILOGUE_PROCESS),1)
-E_FILES := $(EPILOGUE_UNSCHEDULED)
-endif
 
 DEP_FILES := $(O_FILES:.o=.dep)
 
@@ -64,11 +54,21 @@ MWCC_LD_VERSION := 1.1
 # Programs
 ifeq ($(WINDOWS),1)
   WINE :=
+  CPP     := $(DEVKITPPC)/bin/powerpc-eabi-cpp.exe -P
 else
   WINE ?= wine
+  # Disable wine debug output for cleanliness
+  export WINEDEBUG ?= -all
+  # Default devkitPPC path
+  DEVKITPPC ?= /opt/devkitpro/devkitPPC
+  CPP     := $(DEVKITPPC)/bin/powerpc-eabi-cpp -P
+endif
+ifeq ($(shell uname),Darwin)
+  SHA1SUM := shasum
+else
+  SHA1SUM := sha1sum
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
-CPP     := cpp -P
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
 ifeq ($(EPILOGUE_PROCESS),1)
 CC_EPI   = $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
@@ -76,29 +76,30 @@ endif
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 HOSTCC  := cc
-SHA1SUM := sha1sum
 PYTHON  := python3
 
 FRANK := tools/frank.py
 
 # Options
 INCLUDE_DIRS = $(*D)
-SYSTEM_INCLUDE_DIRS := include include/dolphin include/dolphin/mtx src
+SYSTEM_INCLUDE_DIRS := include include/dolphin src
 #INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
 INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE_DIRS))
+
 
 ASFLAGS := -mgekko -I include
 LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
   LDFLAGS += -map $(MAP)
 endif
-CFLAGS  = -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES)
+CFLAGS  = -cwd source -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES) -maxerrors $(MAX_ERRORS)
+ifeq ($(NON_MATCHING),1)
+CFLAGS += -DNON_MATCHING
+endif
 
-$(EPILOGUE_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
-$(EPILOGUE_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
-$(EPILOGUE_DIR)/src/sysdolphin/baselib/dobj.c.o: CC_EPI := $(CC)
-$(EPILOGUE_DIR)/src/sysdolphin/baselib/wobj.c.o: CC_EPI := $(CC)
 
+$(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
+$(BUILD_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
 
 HOSTCFLAGS := -Wall -O3 -s
 
@@ -114,20 +115,18 @@ HOSTCFLAGS := -Wall -O3 -s
 ### Default target ###
 
 default: $(DOL)
+ifeq ($(NON_MATCHING),1)
+	@echo "Skipping checksum for non-matching build."
+else
 	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1
+endif
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
-ifeq ($(EPILOGUE_PROCESS),1)
-EPI_DIRS := $(sort $(dir $(E_FILES)))
-endif
+ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \
+            $(patsubst $(BUILD_DIR)/%,$(PROFILE_DIR)/%,$(ALL_DIRS))
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
-
-ifeq ($(EPILOGUE_PROCESS),1)
-# Make sure profile directory exists before compiling anything
-DUMMY != mkdir -p $(EPI_DIRS)
-endif
 
 $(LDSCRIPT): ldscript.lcf
 	$(QUIET) $(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
@@ -136,50 +135,47 @@ $(LDSCRIPT): ldscript.lcf
 	@echo Converting $< to $@
 	$(QUIET) $(ELF2DOL) $< $@
 ifeq ($(GENERATE_MAP),1)
-	$(QUIET) $(PYTHON) tools/calcprogress.py $@
+	$(QUIET) $(PYTHON) tools/calcprogress.py $(DOL) $(MAP)
 endif
 
 clean:
 	rm -f -d -r build $(ELF2DOL)
-	rm -f -d -r epilogue
 
 # ELF creation makefile instructions
-ifeq ($(EPILOGUE_PROCESS),1)
-$(ELF): $(O_FILES) $(E_FILES) $(LDSCRIPT)
-	@echo Linking ELF $@
-	$(QUIET) echo $(O_FILES) > build/o_files
-	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files
-else
 $(ELF): $(O_FILES) $(LDSCRIPT)
 	@echo Linking ELF $@
 	$(QUIET) echo $(O_FILES) > build/o_files
 	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files
-endif
 
 $(BUILD_DIR)/%.s.o: %.s
 	@echo Assembling $<
 	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
 
-$(BUILD_DIR)/%.c.o: %.c
-	@echo "Compiling " $<
-	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) -MT $@ $< >/dev/null
+$(BUILD_DIR)/%.c.dep: %.c
+	$(QUIET) $(HOSTCC) -E $(addprefix -I ,$(INCLUDE_DIRS) $(SYSTEM_INCLUDE_DIRS)) -MMD -MF $(@:.o=.dep) \
+		-MT "$(VANILLA_DIR)/$<.o $(PROFILE_DIR)/$<.o" $< >/dev/null
+
+$(BUILD_DIR)/%.c.o: $(VANILLA_DIR)/%.c.o
+	cp $< $@
+
+$(VANILLA_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.dep
+	@echo "Compiling (vanilla)" $<
 	$(QUIET) $(CC) $(CFLAGS) -c -o $@ $<
 
+# Overrides for targets using frank to simulate patched MWCC 1.2.5
 ifeq ($(EPILOGUE_PROCESS),1)
-$(EPILOGUE_DIR)/%.s.o: %.s
-	@echo Assembling $<
-	$(QUIET) $(AS) $(ASFLAGS) -o $@ $<
-
-$(EPILOGUE_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.o
-	@echo Frank is fixing $<
+$(PROFILE_DIR)/%.c.o: %.c $(BUILD_DIR)/%.c.dep
+	@echo "Compiling (profile)" $<
 	$(QUIET) $(CC_EPI) $(CFLAGS) -c -o $@ $<
-	$(QUIET) $(PYTHON) $(FRANK) $(word 2,$^) $@ $(word 2,$^)
-	$(QUIET) touch $@
-	
-endif
 
-$(BUILD_DIR)/src/melee/lb/lbvector.c.o: CFLAGS += -inline auto -fp_contract on
-$(EPILOGUE_DIR)/src/melee/lb/lbvector.c.o: CFLAGS += -inline auto -fp_contract on
+$(BUILD_DIR)/src/melee/%.c.o: $(VANILLA_DIR)/src/melee/%.c.o $(PROFILE_DIR)/src/melee/%.c.o $(FRANK)
+	@echo Frank is fixing $@
+	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
+
+$(BUILD_DIR)/src/sysdolphin/%.c.o: $(VANILLA_DIR)/src/sysdolphin/%.c.o $(PROFILE_DIR)/src/sysdolphin/%.c.o $(FRANK)
+	@echo Frank is fixing $@
+	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
+endif
 
 -include $(DEP_FILES)
 

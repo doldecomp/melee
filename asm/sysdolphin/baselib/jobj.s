@@ -5792,14 +5792,11 @@ lbl_804069D8:
 
 .section .sdata
     .balign 8
-.global lbl_804D5DA0
-lbl_804D5DA0:
-    .asciz "jobj.h"
-    .balign 4
-.global lbl_804D5DA8
-lbl_804D5DA8:
-    .asciz "jobj"
-    .balign 4
+
+.set jobj_c_sdata2_start, lbl_804D5DB0 - 0x10
+.set lbl_804D5DA0, jobj_c_sdata2_start
+.set lbl_804D5DA8, jobj_c_sdata2_start + 8
+
 .global lbl_804D5DB0
 lbl_804D5DB0:
     .asciz "jobj.c"

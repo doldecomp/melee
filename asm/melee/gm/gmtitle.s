@@ -701,7 +701,7 @@ lbl_801A1C78:
 /* 801A1CB4 0019E894  48 00 2E AD */	bl func_801A4B60
 /* 801A1CB8 0019E898  48 00 00 6C */	b lbl_801A1D24
 lbl_801A1CBC:
-/* 801A1CBC 0019E89C  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 801A1CBC 0019E89C  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 801A1CC0 0019E8A0  2C 00 00 03 */	cmpwi r0, 3
 /* 801A1CC4 0019E8A4  41 80 00 60 */	blt lbl_801A1D24
 /* 801A1CC8 0019E8A8  57 E0 05 29 */	rlwinm. r0, r31, 0, 0x14, 0x14
@@ -1029,7 +1029,7 @@ lbl_801A2170:
 lbl_801A217C:
 /* 801A217C 0019ED5C  7F 23 CB 78 */	mr r3, r25
 /* 801A2180 0019ED60  48 1C E7 A9 */	bl HSD_JObjAnimAll
-/* 801A2184 0019ED64  80 0D 93 68 */	lwz r0, lbl_804D4A08@sda21(r13)
+/* 801A2184 0019ED64  80 0D 93 68 */	lwz r0, g_debugLevel@sda21(r13)
 /* 801A2188 0019ED68  2C 00 00 01 */	cmpwi r0, 1
 /* 801A218C 0019ED6C  41 80 00 84 */	blt lbl_801A2210
 /* 801A2190 0019ED70  38 60 00 00 */	li r3, 0
@@ -1100,77 +1100,32 @@ lbl_803DA4FC:
     .4byte NULL
     .4byte 0xC0400000
     .4byte NULL
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
-    .4byte 0x54746C4D
-    .4byte 0x6F6A695F
-    .4byte 0x546F705F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x54746C4D
-    .4byte 0x6F6A695F
-    .4byte 0x546F705F
-    .4byte 0x616E696D
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x54746C4D
-    .4byte 0x6F6A695F
-    .4byte 0x546F705F
-    .4byte 0x6D617461
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x54746C4D
-    .4byte 0x6F6A695F
-    .4byte 0x546F705F
-    .4byte 0x73686170
-    .4byte 0x65616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x53635469
-    .4byte 0x746C655F
-    .4byte 0x63616D5F
-    .4byte 0x696E7431
-    .4byte 0x5F63616D
-    .4byte 0x65726100
-    .4byte 0x53635469
-    .4byte 0x746C655F
-    .4byte 0x7363656E
-    .4byte 0x655F6C69
-    .4byte 0x67687473
-    .4byte NULL
-    .4byte 0x53635469
-    .4byte 0x746C655F
-    .4byte 0x666F6700
-    .4byte 0x54746C42
-    .4byte 0x675F546F
-    .4byte 0x705F6A6F
-    .4byte 0x696E7400
-    .4byte 0x54746C42
-    .4byte 0x675F546F
-    .4byte 0x705F616E
-    .4byte 0x696D6A6F
-    .4byte 0x696E7400
-    .4byte 0x54746C42
-    .4byte 0x675F546F
-    .4byte 0x705F6D61
-    .4byte 0x74616E69
-    .4byte 0x6D5F6A6F
-    .4byte 0x696E7400
-    .4byte 0x54746C42
-    .4byte 0x675F546F
-    .4byte 0x705F7368
-    .4byte 0x61706561
-    .4byte 0x6E696D5F
-    .4byte 0x6A6F696E
-    .4byte 0x74000000
-    .4byte 0x5469746C
-    .4byte 0x654D6172
-    .4byte 0x6B5F736F
-    .4byte 0x626A6465
-    .4byte 0x73630000
-    .4byte NULL
+    .asciz "translate"
+    .balign 4
+    .asciz "TtlMoji_Top_joint"
+    .balign 4
+    .asciz "TtlMoji_Top_animjoint"
+    .balign 4
+    .asciz "TtlMoji_Top_matanim_joint"
+    .balign 4
+    .asciz "TtlMoji_Top_shapeanim_joint"
+    .balign 4
+    .asciz "ScTitle_cam_int1_camera"
+    .balign 4
+    .asciz "ScTitle_scene_lights"
+    .balign 4
+    .asciz "ScTitle_fog"
+    .balign 4
+    .asciz "TtlBg_Top_joint"
+    .balign 4
+    .asciz "TtlBg_Top_animjoint"
+    .balign 4
+    .asciz "TtlBg_Top_matanim_joint"
+    .balign 4
+    .asciz "TtlBg_Top_shapeanim_joint"
+    .balign 4
+    .asciz "TitleMark_sobjdesc"
+    .balign 4
 
 
 .section .bss, "wa"

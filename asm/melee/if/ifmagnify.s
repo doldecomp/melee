@@ -212,7 +212,7 @@ lbl_802FB938:
 /* 802FB9B4 002F8594  D0 01 00 34 */	stfs f0, 0x34(r1)
 /* 802FB9B8 002F8598  C0 21 00 34 */	lfs f1, 0x34(r1)
 /* 802FB9BC 002F859C  C0 41 00 30 */	lfs f2, 0x30(r1)
-/* 802FB9C0 002F85A0  4B D2 72 71 */	bl func_80022C30
+/* 802FB9C0 002F85A0  4B D2 72 71 */	bl atan2f
 /* 802FB9C4 002F85A4  83 5F 00 04 */	lwz r26, 4(r31)
 /* 802FB9C8 002F85A8  FF E0 08 90 */	fmr f31, f1
 /* 802FB9CC 002F85AC  28 1A 00 00 */	cmplwi r26, 0
@@ -987,7 +987,7 @@ lbl_802FC4A0:
 /* 802FC4FC 002F90DC  A0 65 00 04 */	lhz r3, 4(r5)
 /* 802FC500 002F90E0  A0 85 00 06 */	lhz r4, 6(r5)
 /* 802FC504 002F90E4  80 A5 00 08 */	lwz r5, 8(r5)
-/* 802FC508 002F90E8  48 04 22 85 */	bl func_8033E78C
+/* 802FC508 002F90E8  48 04 22 85 */	bl GXGetTexBufferSize
 /* 802FC50C 002F90EC  38 03 00 1F */	addi r0, r3, 0x1f
 /* 802FC510 002F90F0  54 03 00 34 */	rlwinm r3, r0, 0, 0, 0x1a
 /* 802FC514 002F90F4  48 08 2C D1 */	bl HSD_MemAlloc
@@ -1358,13 +1358,13 @@ lbl_803F97E8:
 .global lbl_803F9828
 lbl_803F9828:
 	.4byte func_801C0604
-	.4byte lbl_801C0690
+	.4byte func_801C0690
 	.4byte func_801C0618
-	.4byte lbl_801C0654
-	.4byte lbl_801C06A4
-	.4byte lbl_801C0668
+	.4byte func_801C0654
+	.4byte func_801C06A4
+	.4byte func_801C0668
 	.4byte func_801C062C
-	.4byte lbl_801C067C
+	.4byte func_801C067C
 	.4byte func_801C0640
 .global lbl_803F984C
 lbl_803F984C:

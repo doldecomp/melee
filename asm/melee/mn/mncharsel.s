@@ -4975,7 +4975,7 @@ lbl_80260304:
 /* 802603A8 0025CF88  48 00 00 24 */	b lbl_802603CC
 lbl_802603AC:
 /* 802603AC 0025CF8C  EF 03 00 28 */	fsubs f24, f3, f0
-/* 802603B0 0025CF90  4B DC 28 81 */	bl func_80022C30
+/* 802603B0 0025CF90  4B DC 28 81 */	bl atan2f
 /* 802603B4 0025CF94  FF 20 08 90 */	fmr f25, f1
 /* 802603B8 0025CF98  48 0C 60 1D */	bl sinf
 /* 802603BC 0025CF9C  EF 58 00 72 */	fmuls f26, f24, f1
@@ -5051,7 +5051,7 @@ lbl_80260440:
 /* 802604C4 0025D0A4  48 00 00 24 */	b lbl_802604E8
 lbl_802604C8:
 /* 802604C8 0025D0A8  EF 03 00 28 */	fsubs f24, f3, f0
-/* 802604CC 0025D0AC  4B DC 27 65 */	bl func_80022C30
+/* 802604CC 0025D0AC  4B DC 27 65 */	bl atan2f
 /* 802604D0 0025D0B0  FF 20 08 90 */	fmr f25, f1
 /* 802604D4 0025D0B4  48 0C 5F 01 */	bl sinf
 /* 802604D8 0025D0B8  EF 58 00 72 */	fmuls f26, f24, f1
@@ -7677,7 +7677,7 @@ lbl_80262AB8:
 /* 80262AB8 0025F698  CA E2 CB 70 */	lfd f23, lbl_804DC550@sda21(r2)
 lbl_80262ABC:
 /* 80262ABC 0025F69C  EC 36 08 24 */	fdivs f1, f22, f1
-/* 80262AC0 0025F6A0  4B DC 03 A9 */	bl func_80022E68
+/* 80262AC0 0025F6A0  4B DC 03 A9 */	bl atanf
 /* 80262AC4 0025F6A4  FE D7 08 2A */	fadd f22, f23, f1
 /* 80262AC8 0025F6A8  FE C0 B0 18 */	frsp f22, f22
 lbl_80262ACC:
@@ -7862,7 +7862,7 @@ lbl_80262D60:
 /* 80262D60 0025F940  CA E2 CB 70 */	lfd f23, lbl_804DC550@sda21(r2)
 lbl_80262D64:
 /* 80262D64 0025F944  EC 22 20 24 */	fdivs f1, f2, f4
-/* 80262D68 0025F948  4B DC 01 01 */	bl func_80022E68
+/* 80262D68 0025F948  4B DC 01 01 */	bl atanf
 /* 80262D6C 0025F94C  FE D7 08 2A */	fadd f22, f23, f1
 /* 80262D70 0025F950  FE C0 B0 18 */	frsp f22, f22
 lbl_80262D74:
@@ -12756,16 +12756,12 @@ lbl_803F0DFC:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x25303264
-    .4byte 0x3A253032
-    .4byte 0x64000000
-    .4byte 0x25643A25
-    .4byte 0x3032643A
-    .4byte 0x25303264
-    .4byte NULL
-    .4byte 0x39393A35
-    .4byte 0x393A3539
-    .4byte NULL
+    .asciz "%02d:%02d"
+    .balign 4
+    .asciz "%d:%02d:%02d"
+    .balign 4
+    .asciz "99:59:59"
+    .balign 4
     .4byte 0x25642090
     .4byte 0x6C94B282
     .4byte 0xAB000000
@@ -12869,36 +12865,21 @@ lbl_803F10D4:
 	.4byte lbl_802648D0
 	.4byte lbl_802648D0
 	.4byte lbl_80264868
-    .4byte 0x4D6E536C
-    .4byte 0x4368722E
-    .4byte 0x64617400
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte 0x2E646174
-    .4byte NULL
-    .4byte 0x4D6E536C
-    .4byte 0x4368722E
-    .4byte 0x75736400
-    .4byte 0x4D6E4578
-    .4byte 0x74416C6C
-    .4byte 0x2E757364
-    .4byte NULL
-    .4byte 0x4D6E5365
-    .4byte 0x6C656374
-    .4byte 0x43687244
-    .4byte 0x61746154
-    .4byte 0x61626C65
-    .4byte NULL
-    .4byte 0x5364536C
-    .4byte 0x4368722E
-    .4byte 0x64617400
-    .4byte 0x5349535F
-    .4byte 0x53656C43
-    .4byte 0x68617244
-    .4byte 0x61746100
-    .4byte 0x5364536C
-    .4byte 0x4368722E
-    .4byte 0x75736400
+    .asciz "MnSlChr.dat"
+    .balign 4
+    .asciz "MnExtAll.dat"
+    .balign 4
+    .asciz "MnSlChr.usd"
+    .balign 4
+    .asciz "MnExtAll.usd"
+    .balign 4
+    .asciz "MnSelectChrDataTable"
+    .balign 4
+    .asciz "SdSlChr.dat"
+    .balign 4
+    .asciz "SIS_SelCharData"
+    .balign 4
+    .asciz "SdSlChr.usd"
 
 
 .section .bss, "wa"

@@ -1,4 +1,4 @@
-#include "melee/pl/player.h"
+#include <melee/pl/player.h>
 
 typedef struct _ftMapping {
     s8 internal_id;
@@ -98,8 +98,6 @@ extern void ftData_SetScale();
 extern void func_SetEntityFacingDirection();
 extern void func_80087140();
 extern void func_80086664();
-extern void func_800D4F24();
-extern void func_80390228();
 extern s32 func_8008701C(HSD_GObj*);
 extern s32 func_800873CC();
 extern s32 func_8016C5C0(s32);
@@ -114,7 +112,6 @@ extern void func_802F6AF8(s32);
 extern void func_802F69C0(s32, s32);
 extern void func_802F6C04(s32);
 extern s32 func_8016B168();
-extern s32 func_8016AEDC();
 extern BOOL func_80086F4C(HSD_GObj*);
 extern double func_80086F80(HSD_GObj*);
 extern s32 func_800872A4(HSD_GObj*);
@@ -128,11 +125,11 @@ extern void func_8003891C(s32);
 extern void func_80038F10(s32);
 extern void func_8003715C();
 extern void func_80037590();
-extern void func_80067A84();
+extern void Fighter_FirstInitialize_80067A84();
 extern void func_800BEB60(s32, s32, s32);
 extern s32 func_800865F0(HSD_GObj*);
 extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
-extern HSD_GObj* func_80068E98(struct plAllocInfo*);
+extern HSD_GObj* Fighter_80068E98(struct plAllocInfo*);
 
 inline hasExtraFighterID(ftMapping* data) { return data->extra_internal_id != -1; } ///TODO this can be used in more places when functions are fixed to use correct structs
 
@@ -275,7 +272,7 @@ void Player_80031AD0(s32 slot) {  ///decomp.me/scratch/lYkLv
     first_struct.bits.has_transformation = 0;  
     first_struct.unk8 = -1;
 
-    player->player_entity[0] = func_80068E98(&first_struct);
+    player->player_entity[0] = Fighter_80068E98(&first_struct);
     player->player_state = 2;
 
     internal_id = byte_check = offset_arr[player->player_character * sizeof(ftMapping)];
@@ -288,7 +285,7 @@ void Player_80031AD0(s32 slot) {  ///decomp.me/scratch/lYkLv
         second_struct.bits.has_transformation = has_transformation; 
         second_struct.unk8 = -1;
 
-        player->player_entity[1] = func_80068E98(&second_struct);
+        player->player_entity[1] = Fighter_80068E98(&second_struct);
         if (player->player_state != 1) {
             player->player_state = 2;
         }
@@ -516,7 +513,7 @@ s8 Player_80032610(s32 slot, BOOL arg1) {  //// decomp.me/scratch/pHTx2
     return error_value;
 }
 
-void Player_800326CC(s32 slot, Vec* arg_vec) {
+void Player_LoadPlayerCoords(s32 slot, Vec* arg_vec) {
     StaticPlayer* player;
     Vec* player_vecs;
 
@@ -721,8 +718,8 @@ void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction) {
     }
 }
 
-s8 Player_GetCostumeId(s32 slot) {   
-    s8 costume_id;
+u32 Player_GetCostumeId(s32 slot) {   
+    u8 costume_id;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -737,7 +734,7 @@ void Player_SetCostumeId(s32 slot, s8 costume_id) {
     player->costume_id = costume_id;
 }
 
-s8 Player_GetControllerIndex(s32 slot) {   
+u8 Player_GetControllerIndex(s32 slot) {   
     s8 controller_index;
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1032,7 +1029,7 @@ void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2) {
     player->transformed[arg2] = temp_r5;
 }
 
-s16 Player_GetDamage(s32 slot) {   
+s32 Player_GetDamage(s32 slot) {   
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1108,9 +1105,9 @@ void Player_SetMoreFlagsBit2(s32 slot, u8 bit2) {
     player->more_flags.b2 = bit2;
 }
 
-u8 Player_GetMoreFlagsBit3(s32 slot) {   
+s32 Player_GetMoreFlagsBit3(s32 slot) {   
     StaticPlayer* player;
-    u8 bit3;
+    s32 bit3;
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1137,7 +1134,7 @@ void Player_SetMoreFlagsBit4(s32 slot, u8 bit4) {
     player->more_flags.b4 = bit4;
 }
 
-u8 Player_GetMoreFlagsBit4(s32 slot) { 
+s32 Player_GetMoreFlagsBit4(s32 slot) {
     StaticPlayer* player;
     u8 bit4;
 
@@ -1424,7 +1421,7 @@ void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id) {
 }
 
 
-u8 Player_GetFlagsBit1(s32 slot) {  
+s32 Player_GetFlagsBit1(s32 slot) {  
     StaticPlayer* player;
     u8 bit1;
     Player_CheckSlot(slot);
@@ -1450,7 +1447,7 @@ void Player_UnsetFlagsBit1(s32 slot) {
     player->flags.b1 = zero;
 }
 
-u8 Player_GetFlagsBit3(s32 slot) {  
+s32 Player_GetFlagsBit3(s32 slot) {  
     StaticPlayer* player;
     u8 bit3;
     Player_CheckSlot(slot);
@@ -1550,7 +1547,7 @@ void Player_SetMoreFlagsBit1(s32 slot, u8 bit1) {
     player->more_flags.b1 = bit1;
 }
 
-u8 Player_GetUnk4D(s32 slot) {   
+s32 Player_GetUnk4D(s32 slot) {   
     StaticPlayer* player;
     u8 unk4D;
     Player_CheckSlot(slot);
@@ -1913,7 +1910,7 @@ void Player_InitAllPlayers() {
 
 void Player_80036DA4() { 
     HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
-    func_80067A84();
+    Fighter_FirstInitialize_80067A84();
 }
 
 void Player_80036DD8() {   

@@ -1,0 +1,6 @@
+#ifndef SYSDOLPHIN_BASELIB_BASELIB_UNKNOWN_002_H
+#define SYSDOLPHIN_BASELIB_BASELIB_UNKNOWN_002_H
+
+#include <dolphin/types.h>
+
+#endif
