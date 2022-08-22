@@ -1,4 +1,4 @@
-#include "melee/lb/lbfile.h"
+#include <melee/lb/lbfile.h>
 
 extern char lbl_803BA508[]; //"lbfile.c"
 extern char lbl_803BA514[]; //"!cancelflag"

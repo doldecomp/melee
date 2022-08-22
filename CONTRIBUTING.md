@@ -19,6 +19,7 @@ While not all code submitted at this time conforms to this standard, it is the i
 
 - [Naming](#naming)
 - [Structs](#structs)
+- [Functions](#functions)
 - [Conditionals](#conditionals)
 
 ## <a name="naming"></a>Naming
@@ -59,6 +60,9 @@ While not all code submitted at this time conforms to this standard, it is the i
 			u8 thing;
 		};
 		```
+
+## <a name="functions"></a>Functions
+- Functions acting as just a stub, IE. do nothing, should have an explicit ```return``` rather than being empty
 
 ## <a name="conditionals"></a>Conditionals
 - Make NULL checks explicit

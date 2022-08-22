@@ -2440,15 +2440,8 @@ lbl_803E2858:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E28B0
 lbl_803E28B0:
     .asciz "gronett.c"
@@ -2487,8 +2480,8 @@ lbl_803E2910:
     .balign 8
 .global lbl_804D4688
 lbl_804D4688:
-    .4byte 0x2F47724F
-    .4byte 0x74000000
+    .asciz "/GrOt"
+    .balign 4
 .global lbl_804D4690
 lbl_804D4690:
     .asciz "jobj.h"

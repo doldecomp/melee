@@ -2,8 +2,9 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_8038FF5C
-func_8038FF5C:
+# https://decomp.me/scratch/cBvKB // 2300 (0%)
+.global GObj_PReorder
+GObj_PReorder:
 /* 8038FF5C 0038CB3C  88 C3 00 02 */	lbz r6, 2(r3)
 /* 8038FF60 0038CB40  28 04 00 00 */	cmplwi r4, 0
 /* 8038FF64 0038CB44  90 83 00 0C */	stw r4, 0xc(r3)
@@ -31,8 +32,9 @@ lbl_8038FFA8:
 /* 8038FFB0 0038CB90  7C 64 01 2E */	stwx r3, r4, r0
 /* 8038FFB4 0038CB94  4E 80 00 20 */	blr 
 
-.global func_8038FFB8
-func_8038FFB8:
+# https://decomp.me/scratch/FSuXE // 14200 (0%)
+.global CreateGObj
+CreateGObj:
 /* 8038FFB8 0038CB98  7C 08 02 A6 */	mflr r0
 /* 8038FFBC 0038CB9C  3D 00 80 4D */	lis r8, lbl_804CE380@ha
 /* 8038FFC0 0038CBA0  90 01 00 04 */	stw r0, 4(r1)
@@ -108,7 +110,7 @@ lbl_803900B0:
 /* 803900C0 0038CCA0  7C 05 00 40 */	cmplw r5, r0
 /* 803900C4 0038CCA4  41 81 FF E8 */	bgt lbl_803900AC
 lbl_803900C8:
-/* 803900C8 0038CCA8  4B FF FE 95 */	bl func_8038FF5C
+/* 803900C8 0038CCA8  4B FF FE 95 */	bl GObj_PReorder
 /* 803900CC 0038CCAC  48 00 01 0C */	b lbl_803901D8
 lbl_803900D0:
 /* 803900D0 0038CCB0  88 1F 00 02 */	lbz r0, 2(r31)
@@ -134,7 +136,7 @@ lbl_80390110:
 /* 80390110 0038CCF0  80 8D C1 88 */	lwz r4, lbl_804D7828@sda21(r13)
 /* 80390114 0038CCF4  7C 84 30 2E */	lwzx r4, r4, r6
 lbl_80390118:
-/* 80390118 0038CCF8  4B FF FE 45 */	bl func_8038FF5C
+/* 80390118 0038CCF8  4B FF FE 45 */	bl GObj_PReorder
 /* 8039011C 0038CCFC  48 00 00 BC */	b lbl_803901D8
 lbl_80390120:
 /* 80390120 0038CD00  88 9F 00 02 */	lbz r4, 2(r31)
@@ -199,6 +201,7 @@ lbl_803901DC:
 /* 803901E8 0038CDC8  7C 08 03 A6 */	mtlr r0
 /* 803901EC 0038CDCC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/aRQNu // 1400 (0%)
 .global func_803901F0
 func_803901F0:
 /* 803901F0 0038CDD0  7C 08 02 A6 */	mflr r0
@@ -210,7 +213,7 @@ func_803901F0:
 /* 80390208 0038CDE8  7C 05 03 78 */	mr r5, r0
 /* 8039020C 0038CDEC  38 60 00 00 */	li r3, 0
 /* 80390210 0038CDF0  38 E0 00 00 */	li r7, 0
-/* 80390214 0038CDF4  4B FF FD A5 */	bl func_8038FFB8
+/* 80390214 0038CDF4  4B FF FD A5 */	bl CreateGObj
 /* 80390218 0038CDF8  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8039021C 0038CDFC  38 21 00 08 */	addi r1, r1, 8
 /* 80390220 0038CE00  7C 08 03 A6 */	mtlr r0
@@ -403,7 +406,7 @@ lbl_80390490:
 /* 803904A4 0038D084  41 81 FF E8 */	bgt lbl_8039048C
 lbl_803904A8:
 /* 803904A8 0038D088  7F 63 DB 78 */	mr r3, r27
-/* 803904AC 0038D08C  4B FF FA B1 */	bl func_8038FF5C
+/* 803904AC 0038D08C  4B FF FA B1 */	bl GObj_PReorder
 /* 803904B0 0038D090  48 00 01 10 */	b lbl_803905C0
 lbl_803904B4:
 /* 803904B4 0038D094  88 1B 00 02 */	lbz r0, 2(r27)
@@ -430,7 +433,7 @@ lbl_803904F4:
 /* 803904F8 0038D0D8  7C 83 28 2E */	lwzx r4, r3, r5
 lbl_803904FC:
 /* 803904FC 0038D0DC  7F 63 DB 78 */	mr r3, r27
-/* 80390500 0038D0E0  4B FF FA 5D */	bl func_8038FF5C
+/* 80390500 0038D0E0  4B FF FA 5D */	bl GObj_PReorder
 /* 80390504 0038D0E4  48 00 00 BC */	b lbl_803905C0
 lbl_80390508:
 /* 80390508 0038D0E8  88 9B 00 02 */	lbz r4, 2(r27)

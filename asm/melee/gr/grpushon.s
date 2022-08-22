@@ -1382,9 +1382,8 @@ lbl_803E7AC8:
     .4byte NULL
 .global lbl_803E7B04
 lbl_803E7B04:
-    .4byte 0x2F47724E
-    .4byte 0x506F2E64
-    .4byte 0x61740000
+    .asciz "/GrNPo.dat"
+    .balign 4
 .global lbl_803E7B10
 lbl_803E7B10:
     .4byte 0x00000027
@@ -1400,15 +1399,8 @@ lbl_803E7B10:
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E7B68
 lbl_803E7B68:
     .asciz "grpushon.c"
@@ -1494,15 +1486,8 @@ lbl_803E7B90:
     .4byte 0x3E4CCCCD
     .4byte 0x44480000
     .4byte 0x00000003
-    .4byte 0x4853445F
-    .4byte 0x4C4F626A
-    .4byte 0x47657454
-    .4byte 0x79706528
-    .4byte 0x6C6F626A
-    .4byte 0x293D3D4C
-    .4byte 0x4F424A5F
-    .4byte 0x504F494E
-    .4byte 0x54000000
+    .asciz "HSD_LObjGetType(lobj)==LOBJ_POINT"
+    .balign 4
 .global lbl_803E7CCC
 lbl_803E7CCC:
     .4byte 0x44B42DBA

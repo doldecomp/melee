@@ -1,7 +1,6 @@
 #ifndef _lbfile_h_
 #define _lbfile_h_
 
-#include <global.h>
 
 #include <dolphin/types.h>
 

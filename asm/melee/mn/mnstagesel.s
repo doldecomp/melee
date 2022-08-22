@@ -2587,18 +2587,11 @@ lbl_803F06D0:
     .4byte 0x402CCCCD
     .4byte 0x3F99999A
     .4byte 0x3F800000
-    .4byte 0x4D6E536C
-    .4byte 0x4D61702E
-    .4byte 0x75736400
-    .4byte 0x4D6E536C
-    .4byte 0x4D61702E
-    .4byte 0x64617400
-    .4byte 0x4D6E5365
-    .4byte 0x6C656374
-    .4byte 0x53746167
-    .4byte 0x65446174
-    .4byte 0x61546162
-    .4byte 0x6C650000
+    .asciz "MnSlMap.usd"
+    .balign 4
+    .asciz "MnSlMap.dat"
+    .balign 4
+    .asciz "MnSelectStageDataTable"
 
 
 .section .sdata

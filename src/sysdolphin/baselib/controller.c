@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/controller.h"
+#include <sysdolphin/baselib/controller.h>
 
 extern PadLibData HSD_PadLibData;
 extern HSD_PadStatus HSD_PadMasterStatus[4];

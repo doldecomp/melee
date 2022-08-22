@@ -3500,7 +3500,7 @@ lbl_80206678:
 lbl_8020669C:
 /* 8020669C 0020327C  38 7A 00 00 */	addi r3, r26, 0
 /* 802066A0 00203280  38 81 00 88 */	addi r4, r1, 0x88
-/* 802066A4 00203284  4B E2 C0 29 */	bl Player_800326CC
+/* 802066A4 00203284  4B E2 C0 29 */	bl Player_LoadPlayerCoords
 /* 802066A8 00203288  C0 41 00 88 */	lfs f2, 0x88(r1)
 /* 802066AC 0020328C  C0 22 BD 60 */	lfs f1, lbl_804DB740@sda21(r2)
 /* 802066B0 00203290  FC 02 08 40 */	fcmpo cr0, f2, f1
@@ -4198,15 +4198,8 @@ lbl_803E54CC:
     .4byte 0x00000001
     .4byte lbl_803E5348
     .4byte 0x00000005
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E5524
 lbl_803E5524:
     .asciz "grvenom.c"
@@ -4264,22 +4257,10 @@ lbl_803E5524:
     .4byte 0x00000003
     .4byte 0x00000003
     .4byte 0x00000006
-    .4byte 0x61727769
-    .4byte 0x6E3A7573
-    .4byte 0x65722064
-    .4byte 0x61746120
-    .4byte 0x6572726F
-    .4byte 0x720A0000
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
+    .asciz "arwin:user data error\n"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
     .4byte 0xFFFFFFFF
     .4byte 0xFFFFFFFF
     .4byte 0x00000001
@@ -4302,9 +4283,8 @@ lbl_803E5680:
     .4byte 0x00000004
     .4byte 0x00000004
     .4byte 0x00000003
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
+    .asciz "translate"
+    .balign 4
     .4byte 0x00000001
     .4byte 0x00000001
     .4byte 0x00000001

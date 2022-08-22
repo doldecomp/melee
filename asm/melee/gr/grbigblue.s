@@ -2064,7 +2064,7 @@ lbl_801E744C:
 /* 801E7454 001E4034  FC 20 00 50 */	fneg f1, f0
 /* 801E7458 001E4038  C0 41 01 1C */	lfs f2, 0x11c(r1)
 /* 801E745C 001E403C  D3 E1 01 04 */	stfs f31, 0x104(r1)
-/* 801E7460 001E4040  4B E3 B7 D1 */	bl func_80022C30
+/* 801E7460 001E4040  4B E3 B7 D1 */	bl atan2f
 /* 801E7464 001E4044  D0 21 01 0C */	stfs f1, 0x10c(r1)
 /* 801E7468 001E4048  80 7D 00 0C */	lwz r3, 0xc(r29)
 /* 801E746C 001E404C  80 1D 00 10 */	lwz r0, 0x10(r29)
@@ -4337,7 +4337,7 @@ lbl_801E946C:
 /* 801E9478 001E6058  FC 20 00 50 */	fneg f1, f0
 /* 801E947C 001E605C  C0 41 00 B0 */	lfs f2, 0xb0(r1)
 /* 801E9480 001E6060  D0 61 00 A0 */	stfs f3, 0xa0(r1)
-/* 801E9484 001E6064  4B E3 97 AD */	bl func_80022C30
+/* 801E9484 001E6064  4B E3 97 AD */	bl atan2f
 /* 801E9488 001E6068  D0 21 00 A8 */	stfs f1, 0xa8(r1)
 /* 801E948C 001E606C  38 61 00 C4 */	addi r3, r1, 0xc4
 /* 801E9490 001E6070  38 81 00 A0 */	addi r4, r1, 0xa0
@@ -5221,7 +5221,7 @@ lbl_801EA0F4:
 /* 801EA100 001E6CE0  FC 20 00 50 */	fneg f1, f0
 /* 801EA104 001E6CE4  C0 41 00 70 */	lfs f2, 0x70(r1)
 /* 801EA108 001E6CE8  D0 61 00 5C */	stfs f3, 0x5c(r1)
-/* 801EA10C 001E6CEC  4B E3 8B 25 */	bl func_80022C30
+/* 801EA10C 001E6CEC  4B E3 8B 25 */	bl atan2f
 /* 801EA110 001E6CF0  D0 21 00 64 */	stfs f1, 0x64(r1)
 /* 801EA114 001E6CF4  4B FD 63 85 */	bl func_801C0498
 /* 801EA118 001E6CF8  C0 02 B9 AC */	lfs f0, lbl_804DB38C@sda21(r2)
@@ -7287,7 +7287,7 @@ lbl_801EBE00:
 /* 801EBE30 001E8A10  C0 01 00 24 */	lfs f0, 0x24(r1)
 /* 801EBE34 001E8A14  C0 41 00 28 */	lfs f2, 0x28(r1)
 /* 801EBE38 001E8A18  FC 20 00 50 */	fneg f1, f0
-/* 801EBE3C 001E8A1C  4B E3 6D F5 */	bl func_80022C30
+/* 801EBE3C 001E8A1C  4B E3 6D F5 */	bl atan2f
 /* 801EBE40 001E8A20  FC 20 08 50 */	fneg f1, f1
 /* 801EBE44 001E8A24  48 00 00 0C */	b lbl_801EBE50
 lbl_801EBE48:
@@ -9529,7 +9529,7 @@ lbl_801EDDA0:
 /* 801EDDB8 001EA998  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 801EDDBC 001EA99C  C0 41 00 20 */	lfs f2, 0x20(r1)
 /* 801EDDC0 001EA9A0  FC 20 00 50 */	fneg f1, f0
-/* 801EDDC4 001EA9A4  4B E3 4E 6D */	bl func_80022C30
+/* 801EDDC4 001EA9A4  4B E3 4E 6D */	bl atan2f
 /* 801EDDC8 001EA9A8  80 6D B3 28 */	lwz r3, lbl_804D69C8@sda21(r13)
 /* 801EDDCC 001EA9AC  EC 01 F8 28 */	fsubs f0, f1, f31
 /* 801EDDD0 001EA9B0  C0 23 00 50 */	lfs f1, 0x50(r3)
@@ -12066,9 +12066,8 @@ lbl_803E29E0:
     .4byte NULL
 .global lbl_803E2D14
 lbl_803E2D14:
-    .4byte 0x2F477242
-    .4byte 0x622E6461
-    .4byte 0x74000000
+    .asciz "/GrBb.dat"
+    .balign 4
 .global lbl_803E2D20
 lbl_803E2D20:
     .4byte 0x00000013
@@ -12084,15 +12083,8 @@ lbl_803E2D20:
     .4byte 0x00000001
     .4byte lbl_803E2938
     .4byte 0x0000001C
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
 .global lbl_803E2D78
 lbl_803E2D78:
     .asciz "grbigblue.c"
@@ -12142,38 +12134,16 @@ lbl_803E2D78:
     .4byte 0x001B001C
     .4byte 0x001D001E
     .4byte 0x001F0020
-    .4byte 0x67702D3E
-    .4byte 0x752E6361
-    .4byte 0x726E756C
-    .4byte 0x6C2E636F
-    .4byte 0x6C6C5F6A
-    .4byte 0x6F626A00
-    .4byte 0x67702D3E
-    .4byte 0x752E6361
-    .4byte 0x726E756C
-    .4byte 0x6C2E7261
-    .4byte 0x6E6B0000
-    .4byte 0x6361725F
-    .4byte 0x676F626A
-    .4byte NULL
-    .4byte 0x21286A6F
-    .4byte 0x626A2D3E
-    .4byte 0x666C6167
-    .4byte 0x73202620
-    .4byte 0x4A4F424A
-    .4byte 0x5F555345
-    .4byte 0x5F515541
-    .4byte 0x5445524E
-    .4byte 0x494F4E29
-    .4byte NULL
-    .4byte 0x2A2A2A20
-    .4byte 0x4E6F7420
-    .4byte 0x53657420
-    .4byte 0x506F7369
-    .4byte 0x74696F6E
-    .4byte 0x21284646
-    .4byte 0x6C796572
-    .4byte 0x290A0000
+    .asciz "gp->u.carnull.coll_jobj"
+    .balign 4
+    .asciz "gp->u.carnull.rank"
+    .balign 4
+    .asciz "car_gobj"
+    .balign 4
+    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
+    .balign 4
+    .asciz "*** Not Set Position!(FFlyer)\n"
+    .balign 4
 .global lbl_803E2EB8
 lbl_803E2EB8:
     .asciz "*** Not Set Position!(Tyukei)\n"
@@ -12238,12 +12208,10 @@ lbl_803E2EB8:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte 0x73746172
-    .4byte 0x745F6A6F
-    .4byte 0x626A0000
-    .4byte 0x656E645F
-    .4byte 0x6A6F626A
-    .4byte NULL
+    .asciz "start_jobj"
+    .balign 4
+    .asciz "end_jobj"
+    .balign 4
 .global jtbl_803E2FE0
 jtbl_803E2FE0:
 	.4byte lbl_801EB9AC
@@ -12262,12 +12230,10 @@ jtbl_803E2FE0:
     .4byte 0x0006DDD3
     .4byte 0x0006DDD4
     .4byte 0x0006DDD5
-    .4byte 0x7472616E
-    .4byte 0x736C6174
-    .4byte 0x65000000
-    .4byte 0x6D61705F
-    .4byte 0x676F626A
-    .4byte NULL
+    .asciz "translate"
+    .balign 4
+    .asciz "map_gobj"
+    .balign 4
 .global jtbl_803E3038
 jtbl_803E3038:
 	.4byte lbl_801EEEE4
@@ -12294,14 +12260,7 @@ jtbl_803E3064:
 	.4byte lbl_801EF3A4
 	.4byte lbl_801EF3C4
 	.4byte lbl_801EEF64
-    .4byte 0x6361725F
-    .4byte 0x6E756D21
-    .4byte 0x3D47725F
-    .4byte 0x467A6572
-    .4byte 0x6F5F4361
-    .4byte 0x725F4D61
-    .4byte 0x78000000
-    .4byte NULL
+    .asciz "car_num!=Gr_Fzero_Car_Max"
 
 
 .section .sdata
