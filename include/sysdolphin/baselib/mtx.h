@@ -13,7 +13,7 @@ void func_80379A20(Mtx src, Mtx dest);
 void func_80379C24(Mtx m, Vec* vec);
 void func_80379F6C(Mtx mat, Vec* vec);
 void func_80379F88(Mtx arg0, Vec* arg1);
-void func_8037A120(Mtx arg0, Vec* arg1);
+void HSD_MkRotationMtx(Mtx arg0, Vec* arg1);
 void func_8037A230(Mtx arg0, Quaternion* arg1);
 void func_8037A250(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4);
 void func_8037A43C(Mtx arg0, Vec* arg1, Quaternion* arg2, Vec* arg3, Vec* arg4);

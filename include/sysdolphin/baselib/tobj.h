@@ -137,7 +137,7 @@ typedef struct _HSD_TObj {
     Vec scale;
     Vec translate;
     u32 wrap_s; //GXTexWrapMode
-    u32 wrap_t; //GXTexWrapMode
+    s32 wrap_t; //GXTexWrapMode
     u8 repeat_s;
     u8 repeat_t;
     u32 flags;
@@ -276,6 +276,8 @@ HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td);
 HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc);
 HSD_TObjTev* HSD_TObjTevLoadDesc(HSD_TObjTevDesc* tevdesc);
 HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping);
+
+void MakeTextureMtx(HSD_TObj *tobj);
 
 void HSD_TObjRemoveAll(HSD_TObj* tobj);
 HSD_TObj* HSD_TObjGetNext(HSD_TObj* tobj);

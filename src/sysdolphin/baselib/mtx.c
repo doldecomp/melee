@@ -275,7 +275,7 @@ void func_80379F88(Mtx arg0, Vec* arg1)
     }
 }
 
-void func_8037A120(Mtx arg0, Vec* arg1)
+void HSD_MkRotationMtx(Mtx arg0, Vec* arg1)
 {
     f32 sinX;
     f32 cosX;
