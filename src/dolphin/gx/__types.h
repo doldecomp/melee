@@ -4,7 +4,6 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/os/OSContext.h>
-#include <dolphin/gx/GXCommandList.h>
 #include <dolphin/gx/GXEnum.h>
 
 #define GX_WRITE_U8(ub) \
@@ -67,9 +66,9 @@ typedef struct
     u8 xD8_pad[0xF8 - 0xD8];                            // at 0x0D8
     s32 xF8;                                            // at 0x0F8
     s32 xFC;                                            // at 0x0FC
-    s32 x100_data[(0x130 - 0x100) / 4];                 // at 0x100
-    s32 x130_data[(0x170 - 0x130) / 4];                 // at 0x130
-    s32 x170_data[(0x1AC - 0x170) / 4];                 // at 0x170
+    u32 x100_data[(0x130 - 0x100) / 4];                 // at 0x100
+    u32 x130_data[(0x170 - 0x130) / 4];                 // at 0x130
+    u32 x170_data[(0x1AC - 0x170) / 4];                 // at 0x170
     u8 x1AC_pad[0x1B0 - 0x1AC];                         // at 0x1AC
     GXTexRegionCallback callbacks[(0x1D0 - 0x1B0) / 4]; // at 0x1B0
     u32 x1D0[(0x204 - 0x1D0) / 4];                      // at 0x1D0
@@ -85,9 +84,10 @@ typedef struct
     s32 x45C_data[0x20 / 4];                            // at 0x45C
     s32 x47C_data[0x20 / 4];                            // at 0x47C
     u32 x49C_data[(0x4EC - 0x49C) / 4];                 // at 0x49C
-    u8 x4EC_pad[2];                                     // at 0x4EC
+    u8 x4EC;                                            // at 0x4EC
+    GXBool x4ED;                                        // at 0x4ED
     u8 x4EE;                                            // at 0x4EE
-    u32 x4F0;                                           // at 0x4F0
+    u32 x4F0_flags;                                     // at 0x4F0
     GXFifoObj *fifo;                                    // at 0x4F4
     u8 x4F8_pad[0x570 - 0x4F8];                         // at 0x4F8
     u32 dirtyFlags;                                     // at 0x570

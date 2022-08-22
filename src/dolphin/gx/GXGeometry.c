@@ -6,22 +6,22 @@ void __GXSetGenMode();
 
 void __GXSetDirtyState()
 {
-    if (__GXContexts.main->x4F0 & 1)
+    if (__GXContexts.main->x4F0_flags & 1)
         __GXSetSUTexSize();
-    if (__GXContexts.main->x4F0 & 2)
+    if (__GXContexts.main->x4F0_flags & 2)
         __GXUpdateBPMask();
-    if (__GXContexts.main->x4F0 & 4)
+    if (__GXContexts.main->x4F0_flags & 4)
         __GXSetGenMode();
-    if (__GXContexts.main->x4F0 & 8)
+    if (__GXContexts.main->x4F0_flags & 8)
         __GXSetVCD();
-    if (__GXContexts.main->x4F0 & 0x10)
+    if (__GXContexts.main->x4F0_flags & 0x10)
         __GXSetVAT();
-    __GXContexts.main->x4F0 = 0;
+    __GXContexts.main->x4F0_flags = 0;
 }
 
 void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts)
 {
-    if (__GXContexts.main->x4F0 != 0)
+    if (__GXContexts.main->x4F0_flags != 0)
         __GXSetDirtyState();
     if (__GXContexts.main->x0.u32 == 0)
         __GXSendFlushPrim();
@@ -85,7 +85,7 @@ void GXSetCullMode(GXCullMode mode)
         break;
     }
     INSERT_FIELD(__GXContexts.main->x204, mode, 2, 14);
-    __GXContexts.main->x4F0 |= 4;
+    __GXContexts.main->x4F0_flags |= 4;
 }
 
 void GXSetCoPlanar(GXBool enable)

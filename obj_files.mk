@@ -557,19 +557,16 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXFifo.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXMisc/__GXMisc.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXMisc/GXMisc_001.s.o\
-	$(BUILD_DIR)/src/dolphin/gx/GXMisc/GXMisc_002.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXMisc/GXMisc_003.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXMisc.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXGeometry.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXFrameBuf.s.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXLight.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXTexture.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXBump.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXTev.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXTev.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXPixel.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXStubs.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXDisplayList.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXDisplayList.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXTransform.s.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXPerf.s.o\
 
@@ -681,6 +678,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/pobj.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/jobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/jobj.s.o\
 
 TEXT_O_FILES +=\
