@@ -1937,9 +1937,8 @@ BOOL func_80080144(Fighter* fp)
     return FALSE;
 }
 
-// https://decomp.me/scratch/qWtoZ
-#ifdef NON_MATCHING
-void func_80080174(Fighter* fp)
+// https://decomp.me/scratch/Jjkwx
+void func_80080174(Fighter *fp)
 {
     f32 phi_f2;
     f32 phi_f3;
@@ -1951,65 +1950,12 @@ void func_80080174(Fighter* fp)
     }
     if (fp->x1980 != NULL) {
         v = &fp->x110_attr.x240;
-        if ((phi_f2 = p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708) > p_ftCommonData->x70C)
-            phi_f2 = p_ftCommonData->x70C;
+        if ((phi_f2 = p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708) > (phi_f3 = p_ftCommonData->x70C)) {
+            phi_f2 = phi_f3;
+        }
         func_8029A89C(fp->x1980, phi_f2 * v[1].x * fp->x34_scale.y);
     }
 }
-#else
-#define _SDA2_BASE_ 0x804DF9E0
-#define lbl_804D8340 0x804D8340 // float conversion constant
-asm void func_80080174()
-{
-    nofralloc
-/* 80080174 0007CD54  7C 08 02 A6 */	mflr r0
-/* 80080178 0007CD58  90 01 00 04 */	stw r0, 4(r1)
-/* 8008017C 0007CD5C  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 80080180 0007CD60  93 E1 00 2C */	stw r31, 0x2c(r1)
-/* 80080184 0007CD64  7C 7F 1B 78 */	mr r31, r3
-/* 80080188 0007CD68  80 63 19 7C */	lwz r3, 0x197c(r3)
-/* 8008018C 0007CD6C  28 03 00 00 */	cmplwi r3, 0
-/* 80080190 0007CD70  41 82 00 14 */	beq lbl_800801A4
-/* 80080194 0007CD74  C0 3F 00 38 */	lfs f1, 0x38(r31)
-/* 80080198 0007CD78  C0 1F 02 3C */	lfs f0, 0x23c(r31)
-/* 8008019C 0007CD7C  EC 21 00 32 */	fmuls f1, f1, f0
-/* 800801A0 0007CD80  48 21 4C D9 */	bl func_80294E78
-lbl_800801A4:
-/* 800801A4 0007CD84  80 7F 19 80 */	lwz r3, 0x1980(r31)
-/* 800801A8 0007CD88  28 03 00 00 */	cmplwi r3, 0
-/* 800801AC 0007CD8C  41 82 00 5C */	beq lbl_80080208
-/* 800801B0 0007CD90  80 9F 20 24 */	lwz r4, 0x2024(r31)
-/* 800801B4 0007CD94  3C 00 43 30 */	lis r0, 0x4330
-/* 800801B8 0007CD98  80 AD AE B4 */	lwz r5, p_ftCommonData
-/* 800801BC 0007CD9C  38 DF 02 40 */	addi r6, r31, 0x240
-/* 800801C0 0007CDA0  6C 84 80 00 */	xoris r4, r4, 0x8000
-/* 800801C4 0007CDA4  90 81 00 24 */	stw r4, 0x24(r1)
-/* 800801C8 0007CDA8  C8 42 89 60 */	lfd f2, lbl_804D8340-_SDA2_BASE_(r2)
-/* 800801CC 0007CDAC  90 01 00 20 */	stw r0, 0x20(r1)
-/* 800801D0 0007CDB0  C0 65 07 10 */	lfs f3, 0x710(r5)
-/* 800801D4 0007CDB4  C8 21 00 20 */	lfd f1, 0x20(r1)
-/* 800801D8 0007CDB8  C0 05 07 08 */	lfs f0, 0x708(r5)
-/* 800801DC 0007CDBC  EC 21 10 28 */	fsubs f1, f1, f2
-/* 800801E0 0007CDC0  C0 85 07 0C */	lfs f4, 0x70c(r5)
-/* 800801E4 0007CDC4  EC 43 00 7A */	fmadds f2, f3, f1, f0
-/* 800801E8 0007CDC8  FC 02 20 40 */	fcmpo cr0, f2, f4
-/* 800801EC 0007CDCC  40 81 00 08 */	ble lbl_800801F4
-/* 800801F0 0007CDD0  FC 40 20 90 */	fmr f2, f4
-lbl_800801F4:
-/* 800801F4 0007CDD4  C0 06 00 0C */	lfs f0, 0xc(r6)
-/* 800801F8 0007CDD8  C0 3F 00 38 */	lfs f1, 0x38(r31)
-/* 800801FC 0007CDDC  EC 02 00 32 */	fmuls f0, f2, f0
-/* 80080200 0007CDE0  EC 21 00 32 */	fmuls f1, f1, f0
-/* 80080204 0007CDE4  48 21 A6 99 */	bl func_8029A89C
-lbl_80080208:
-/* 80080208 0007CDE8  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 8008020C 0007CDEC  83 E1 00 2C */	lwz r31, 0x2c(r1)
-/* 80080210 0007CDF0  38 21 00 30 */	addi r1, r1, 0x30
-/* 80080214 0007CDF4  7C 08 03 A6 */	mtlr r0
-/* 80080218 0007CDF8  4E 80 00 20 */	blr 
-}
-#pragma peephole on
-#endif
 
 void func_8008021C(HSD_GObj* gobj)
 {
