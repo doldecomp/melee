@@ -58,8 +58,7 @@ inline void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
     fobj->p1 = 0.f;
     fobj->d0 = 0.f;
     fobj->d1 = 0.f;
-    if (fobj != NULL)
-        fobj->flags = (1 & 0xF) | (fobj->flags & 0xF0);
+    HSD_FObjSetState(fobj, 1);
 }
 
 void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
@@ -86,9 +85,7 @@ void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
         return;
     
     FObj_FlushKeyData(fobj, obj, obj_update, rate);
-    
-    if (fobj)
-        fobj->flags = (0 & 0xF) | (fobj->flags & 0xF0);
+    HSD_FObjSetState(fobj, 0);
 }
 
 void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
