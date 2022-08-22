@@ -52,8 +52,7 @@ elif [ "$rebuild" = true ]; then
     find build/ -name '*.o' -delete
 fi
 
-echo "Running make with NON_MATCHING=$non_matching and GENERATE_MAP=$generate_map"
-make NON_MATCHING=$non_matching GENERATE_MAP=$generate_map
+echo "Running make with NON_MATCHING=$non_matching GENERATE_MAP=$generate_map EPILOGUE_PROCESS=$frank"
 make NON_MATCHING=$non_matching GENERATE_MAP=$generate_map EPILOGUE_PROCESS=$frank
 result=$?
 
