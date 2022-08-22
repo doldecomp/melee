@@ -7,6 +7,7 @@ endif
 
 GENERATE_MAP ?= 0
 NON_MATCHING ?= 0
+EPILOGUE_PROCESS ?= 1
 
 VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
@@ -20,9 +21,6 @@ endif
 #-------------------------------------------------------------------------------
 
 TARGET := ssbm.us.1.2
-
-# Overkill epilogue fixup strategy. Set to 1 if necessary.
-EPILOGUE_PROCESS := 1
 
 BUILD_DIR := build/$(TARGET)
 VANILLA_DIR := $(BUILD_DIR)/vanilla
