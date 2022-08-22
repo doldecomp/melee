@@ -717,6 +717,7 @@ DriveInfo:
 
 
 .section .sbss
+    .balign 8
 
 .global BootInfo
 BootInfo:

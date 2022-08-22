@@ -1,307 +1,153 @@
-.include "macros.inc"
+#include <dolphin/gx/__types.h>
+#include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/GXTev.h>
 
-.section .text
+void GXSetTevOp(GXTevStageID id, GXTevMode mode)
+{
+    GXTevColorArg inputColor = GX_CC_RASC;
+    GXTevAlphaArg inputAlpha = GX_CA_RASA;
 
-# https://decomp.me/scratch/0ngR2 // 120 (98.86%)
-.global GXSetTevOp
-GXSetTevOp:
-/* 8033FDC4 0033C9A4  7C 08 02 A6 */	mflr r0
-/* 8033FDC8 0033C9A8  38 C0 00 0A */	li r6, 0xa
-/* 8033FDCC 0033C9AC  90 01 00 04 */	stw r0, 4(r1)
-/* 8033FDD0 0033C9B0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8033FDD4 0033C9B4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8033FDD8 0033C9B8  3B E0 00 05 */	li r31, 5
-/* 8033FDDC 0033C9BC  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8033FDE0 0033C9C0  7C 7E 1B 79 */	or. r30, r3, r3
-/* 8033FDE4 0033C9C4  41 82 00 0C */	beq lbl_8033FDF0
-/* 8033FDE8 0033C9C8  38 C0 00 00 */	li r6, 0
-/* 8033FDEC 0033C9CC  3B E0 00 00 */	li r31, 0
-lbl_8033FDF0:
-/* 8033FDF0 0033C9D0  2C 04 00 02 */	cmpwi r4, 2
-/* 8033FDF4 0033C9D4  41 82 00 8C */	beq lbl_8033FE80
-/* 8033FDF8 0033C9D8  40 80 00 14 */	bge lbl_8033FE0C
-/* 8033FDFC 0033C9DC  2C 04 00 00 */	cmpwi r4, 0
-/* 8033FE00 0033C9E0  41 82 00 1C */	beq lbl_8033FE1C
-/* 8033FE04 0033C9E4  40 80 00 48 */	bge lbl_8033FE4C
-/* 8033FE08 0033C9E8  48 00 01 10 */	b lbl_8033FF18
-lbl_8033FE0C:
-/* 8033FE0C 0033C9EC  2C 04 00 04 */	cmpwi r4, 4
-/* 8033FE10 0033C9F0  41 82 00 D8 */	beq lbl_8033FEE8
-/* 8033FE14 0033C9F4  40 80 01 04 */	bge lbl_8033FF18
-/* 8033FE18 0033C9F8  48 00 00 9C */	b lbl_8033FEB4
-lbl_8033FE1C:
-/* 8033FE1C 0033C9FC  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE20 0033CA00  38 80 00 0F */	li r4, 0xf
-/* 8033FE24 0033CA04  38 A0 00 08 */	li r5, 8
-/* 8033FE28 0033CA08  38 E0 00 0F */	li r7, 0xf
-/* 8033FE2C 0033CA0C  48 00 01 3D */	bl GXSetTevColorIn
-/* 8033FE30 0033CA10  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE34 0033CA14  38 DF 00 00 */	addi r6, r31, 0
-/* 8033FE38 0033CA18  38 80 00 07 */	li r4, 7
-/* 8033FE3C 0033CA1C  38 A0 00 04 */	li r5, 4
-/* 8033FE40 0033CA20  38 E0 00 07 */	li r7, 7
-/* 8033FE44 0033CA24  48 00 01 A5 */	bl GXSetTevAlphaIn
-/* 8033FE48 0033CA28  48 00 00 D0 */	b lbl_8033FF18
-lbl_8033FE4C:
-/* 8033FE4C 0033CA2C  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE50 0033CA30  38 86 00 00 */	addi r4, r6, 0
-/* 8033FE54 0033CA34  38 A0 00 08 */	li r5, 8
-/* 8033FE58 0033CA38  38 C0 00 09 */	li r6, 9
-/* 8033FE5C 0033CA3C  38 E0 00 0F */	li r7, 0xf
-/* 8033FE60 0033CA40  48 00 01 09 */	bl GXSetTevColorIn
-/* 8033FE64 0033CA44  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE68 0033CA48  38 FF 00 00 */	addi r7, r31, 0
-/* 8033FE6C 0033CA4C  38 80 00 07 */	li r4, 7
-/* 8033FE70 0033CA50  38 A0 00 07 */	li r5, 7
-/* 8033FE74 0033CA54  38 C0 00 07 */	li r6, 7
-/* 8033FE78 0033CA58  48 00 01 71 */	bl GXSetTevAlphaIn
-/* 8033FE7C 0033CA5C  48 00 00 9C */	b lbl_8033FF18
-lbl_8033FE80:
-/* 8033FE80 0033CA60  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE84 0033CA64  38 86 00 00 */	addi r4, r6, 0
-/* 8033FE88 0033CA68  38 A0 00 0C */	li r5, 0xc
-/* 8033FE8C 0033CA6C  38 C0 00 08 */	li r6, 8
-/* 8033FE90 0033CA70  38 E0 00 0F */	li r7, 0xf
-/* 8033FE94 0033CA74  48 00 00 D5 */	bl GXSetTevColorIn
-/* 8033FE98 0033CA78  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FE9C 0033CA7C  38 DF 00 00 */	addi r6, r31, 0
-/* 8033FEA0 0033CA80  38 80 00 07 */	li r4, 7
-/* 8033FEA4 0033CA84  38 A0 00 04 */	li r5, 4
-/* 8033FEA8 0033CA88  38 E0 00 07 */	li r7, 7
-/* 8033FEAC 0033CA8C  48 00 01 3D */	bl GXSetTevAlphaIn
-/* 8033FEB0 0033CA90  48 00 00 68 */	b lbl_8033FF18
-lbl_8033FEB4:
-/* 8033FEB4 0033CA94  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FEB8 0033CA98  38 80 00 0F */	li r4, 0xf
-/* 8033FEBC 0033CA9C  38 A0 00 0F */	li r5, 0xf
-/* 8033FEC0 0033CAA0  38 C0 00 0F */	li r6, 0xf
-/* 8033FEC4 0033CAA4  38 E0 00 08 */	li r7, 8
-/* 8033FEC8 0033CAA8  48 00 00 A1 */	bl GXSetTevColorIn
-/* 8033FECC 0033CAAC  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FED0 0033CAB0  38 80 00 07 */	li r4, 7
-/* 8033FED4 0033CAB4  38 A0 00 07 */	li r5, 7
-/* 8033FED8 0033CAB8  38 C0 00 07 */	li r6, 7
-/* 8033FEDC 0033CABC  38 E0 00 04 */	li r7, 4
-/* 8033FEE0 0033CAC0  48 00 01 09 */	bl GXSetTevAlphaIn
-/* 8033FEE4 0033CAC4  48 00 00 34 */	b lbl_8033FF18
-lbl_8033FEE8:
-/* 8033FEE8 0033CAC8  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FEEC 0033CACC  38 E6 00 00 */	addi r7, r6, 0
-/* 8033FEF0 0033CAD0  38 80 00 0F */	li r4, 0xf
-/* 8033FEF4 0033CAD4  38 A0 00 0F */	li r5, 0xf
-/* 8033FEF8 0033CAD8  38 C0 00 0F */	li r6, 0xf
-/* 8033FEFC 0033CADC  48 00 00 6D */	bl GXSetTevColorIn
-/* 8033FF00 0033CAE0  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FF04 0033CAE4  38 FF 00 00 */	addi r7, r31, 0
-/* 8033FF08 0033CAE8  38 80 00 07 */	li r4, 7
-/* 8033FF0C 0033CAEC  38 A0 00 07 */	li r5, 7
-/* 8033FF10 0033CAF0  38 C0 00 07 */	li r6, 7
-/* 8033FF14 0033CAF4  48 00 00 D5 */	bl GXSetTevAlphaIn
-lbl_8033FF18:
-/* 8033FF18 0033CAF8  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FF1C 0033CAFC  38 80 00 00 */	li r4, 0
-/* 8033FF20 0033CB00  38 A0 00 00 */	li r5, 0
-/* 8033FF24 0033CB04  38 C0 00 00 */	li r6, 0
-/* 8033FF28 0033CB08  38 E0 00 01 */	li r7, 1
-/* 8033FF2C 0033CB0C  39 00 00 00 */	li r8, 0
-/* 8033FF30 0033CB10  48 00 01 3D */	bl GXSetTevColorOp
-/* 8033FF34 0033CB14  38 7E 00 00 */	addi r3, r30, 0
-/* 8033FF38 0033CB18  38 80 00 00 */	li r4, 0
-/* 8033FF3C 0033CB1C  38 A0 00 00 */	li r5, 0
-/* 8033FF40 0033CB20  38 C0 00 00 */	li r6, 0
-/* 8033FF44 0033CB24  38 E0 00 01 */	li r7, 1
-/* 8033FF48 0033CB28  39 00 00 00 */	li r8, 0
-/* 8033FF4C 0033CB2C  48 00 01 E1 */	bl GXSetTevAlphaOp
-/* 8033FF50 0033CB30  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8033FF54 0033CB34  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8033FF58 0033CB38  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8033FF5C 0033CB3C  7C 08 03 A6 */	mtlr r0
-/* 8033FF60 0033CB40  38 21 00 18 */	addi r1, r1, 0x18
-/* 8033FF64 0033CB44  4E 80 00 20 */	blr 
+    if (id != GX_TEVSTAGE0)
+    {
+        inputColor = GX_CC_CPREV;
+        inputAlpha = GX_CA_APREV;
+    }
+    switch (mode)
+    {
+    case GX_MODULATE:
+        GXSetTevColorIn(id, GX_CC_ZERO, GX_CC_TEXC, inputColor, GX_CC_ZERO);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_TEXA, inputAlpha, GX_CA_ZERO);
+        break;
+    case GX_DECAL:
+        GXSetTevColorIn(id, inputColor, GX_CC_TEXC, GX_CC_TEXA, GX_CC_ZERO);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, inputAlpha);
+        break;
+    case GX_BLEND:
+        GXSetTevColorIn(id, inputColor, GX_CC_ONE, GX_CC_TEXC, GX_CC_ZERO);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_TEXA, inputAlpha, GX_CA_ZERO);
+        break;
+    case GX_REPLACE:
+        GXSetTevColorIn(id, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_TEXC);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_TEXA);
+        break;
+    case GX_PASSCLR:
+        GXSetTevColorIn(id, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, inputColor);
+        GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, inputAlpha);
+        break;
+    }
+    GXSetTevColorOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
+    GXSetTevAlphaOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
+}
 
-# https://decomp.me/scratch/vc3kY // 2250 (29.69%)
-.global GXSetTevColorIn
-GXSetTevColorIn:
-/* 8033FF68 0033CB48  54 63 10 3A */	slwi r3, r3, 2
-/* 8033FF6C 0033CB4C  80 0D A5 08 */	lwz r0, __GXContexts@sda21(r13)
-/* 8033FF70 0033CB50  39 23 01 30 */	addi r9, r3, 0x130
-/* 8033FF74 0033CB54  7D 20 4A 14 */	add r9, r0, r9
-/* 8033FF78 0033CB58  80 69 00 00 */	lwz r3, 0(r9)
-/* 8033FF7C 0033CB5C  54 80 60 26 */	slwi r0, r4, 0xc
-/* 8033FF80 0033CB60  54 A8 40 2E */	slwi r8, r5, 8
-/* 8033FF84 0033CB64  54 63 05 1E */	rlwinm r3, r3, 0, 0x14, 0xf
-/* 8033FF88 0033CB68  7C 60 03 78 */	or r0, r3, r0
-/* 8033FF8C 0033CB6C  90 09 00 00 */	stw r0, 0(r9)
-/* 8033FF90 0033CB70  54 C4 20 36 */	slwi r4, r6, 4
-/* 8033FF94 0033CB74  38 60 00 61 */	li r3, 0x61
-/* 8033FF98 0033CB78  80 C9 00 00 */	lwz r6, 0(r9)
-/* 8033FF9C 0033CB7C  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033FFA0 0033CB80  38 00 00 00 */	li r0, 0
-/* 8033FFA4 0033CB84  54 C6 06 26 */	rlwinm r6, r6, 0, 0x18, 0x13
-/* 8033FFA8 0033CB88  7C C6 43 78 */	or r6, r6, r8
-/* 8033FFAC 0033CB8C  90 C9 00 00 */	stw r6, 0(r9)
-/* 8033FFB0 0033CB90  80 C9 00 00 */	lwz r6, 0(r9)
-/* 8033FFB4 0033CB94  54 C6 07 2E */	rlwinm r6, r6, 0, 0x1c, 0x17
-/* 8033FFB8 0033CB98  7C C4 23 78 */	or r4, r6, r4
-/* 8033FFBC 0033CB9C  90 89 00 00 */	stw r4, 0(r9)
-/* 8033FFC0 0033CBA0  80 89 00 00 */	lwz r4, 0(r9)
-/* 8033FFC4 0033CBA4  54 84 00 36 */	rlwinm r4, r4, 0, 0, 0x1b
-/* 8033FFC8 0033CBA8  7C 84 3B 78 */	or r4, r4, r7
-/* 8033FFCC 0033CBAC  90 89 00 00 */	stw r4, 0(r9)
-/* 8033FFD0 0033CBB0  98 65 80 00 */	stb r3, 0xCC008000@l(r5)
-/* 8033FFD4 0033CBB4  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8033FFD8 0033CBB8  80 89 00 00 */	lwz r4, 0(r9)
-/* 8033FFDC 0033CBBC  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033FFE0 0033CBC0  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033FFE4 0033CBC4  4E 80 00 20 */	blr 
+void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTevColorArg c, GXTevColorArg d)
+{
+    GXContext *gx = __GXContexts.main;
+    u32 *temp_r9 = &gx->x130_data[stage];
 
-# https://decomp.me/scratch/HjnyL // 2875 (12.88%)
-.global GXSetTevAlphaIn
-GXSetTevAlphaIn:
-/* 8033FFE8 0033CBC8  54 63 10 3A */	slwi r3, r3, 2
-/* 8033FFEC 0033CBCC  80 0D A5 08 */	lwz r0, __GXContexts@sda21(r13)
-/* 8033FFF0 0033CBD0  39 23 01 70 */	addi r9, r3, 0x170
-/* 8033FFF4 0033CBD4  7D 20 4A 14 */	add r9, r0, r9
-/* 8033FFF8 0033CBD8  81 09 00 00 */	lwz r8, 0(r9)
-/* 8033FFFC 0033CBDC  54 83 68 24 */	slwi r3, r4, 0xd
-/* 80340000 0033CBE0  54 A0 50 2A */	slwi r0, r5, 0xa
-/* 80340004 0033CBE4  55 04 04 DE */	rlwinm r4, r8, 0, 0x13, 0xf
-/* 80340008 0033CBE8  7C 83 1B 78 */	or r3, r4, r3
-/* 8034000C 0033CBEC  90 69 00 00 */	stw r3, 0(r9)
-/* 80340010 0033CBF0  54 C6 38 30 */	slwi r6, r6, 7
-/* 80340014 0033CBF4  54 E4 20 36 */	slwi r4, r7, 4
-/* 80340018 0033CBF8  80 E9 00 00 */	lwz r7, 0(r9)
-/* 8034001C 0033CBFC  38 60 00 61 */	li r3, 0x61
-/* 80340020 0033CC00  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 80340024 0033CC04  54 E7 05 A4 */	rlwinm r7, r7, 0, 0x16, 0x12
-/* 80340028 0033CC08  7C E0 03 78 */	or r0, r7, r0
-/* 8034002C 0033CC0C  90 09 00 00 */	stw r0, 0(r9)
-/* 80340030 0033CC10  38 00 00 00 */	li r0, 0
-/* 80340034 0033CC14  80 E9 00 00 */	lwz r7, 0(r9)
-/* 80340038 0033CC18  54 E7 06 6A */	rlwinm r7, r7, 0, 0x19, 0x15
-/* 8034003C 0033CC1C  7C E6 33 78 */	or r6, r7, r6
-/* 80340040 0033CC20  90 C9 00 00 */	stw r6, 0(r9)
-/* 80340044 0033CC24  80 C9 00 00 */	lwz r6, 0(r9)
-/* 80340048 0033CC28  54 C6 07 30 */	rlwinm r6, r6, 0, 0x1c, 0x18
-/* 8034004C 0033CC2C  7C C4 23 78 */	or r4, r6, r4
-/* 80340050 0033CC30  90 89 00 00 */	stw r4, 0(r9)
-/* 80340054 0033CC34  98 65 80 00 */	stb r3, 0xCC008000@l(r5)
-/* 80340058 0033CC38  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
-/* 8034005C 0033CC3C  80 89 00 00 */	lwz r4, 0(r9)
-/* 80340060 0033CC40  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 80340064 0033CC44  B0 03 00 02 */	sth r0, 2(r3)
-/* 80340068 0033CC48  4E 80 00 20 */	blr 
+    INSERT_FIELD(*temp_r9, a, 4, 12);
+    INSERT_FIELD(*temp_r9, b, 4, 8);
+    INSERT_FIELD(*temp_r9, c, 4, 4);
+    INSERT_FIELD(*temp_r9, d, 4, 0);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(*temp_r9);
+    set_x2(GX_FALSE);
+}
 
-# https://decomp.me/scratch/CEBbS // 3190 (33.54%)
-.global GXSetTevColorOp
-GXSetTevColorOp:
-/* 8034006C 0033CC4C  54 63 10 3A */	slwi r3, r3, 2
-/* 80340070 0033CC50  80 0D A5 08 */	lwz r0, __GXContexts@sda21(r13)
-/* 80340074 0033CC54  38 63 01 30 */	addi r3, r3, 0x130
-/* 80340078 0033CC58  7C 60 1A 14 */	add r3, r0, r3
-/* 8034007C 0033CC5C  80 03 00 00 */	lwz r0, 0(r3)
-/* 80340080 0033CC60  2C 04 00 01 */	cmpwi r4, 1
-/* 80340084 0033CC64  54 00 03 98 */	rlwinm r0, r0, 0, 0xe, 0xc
-/* 80340088 0033CC68  50 80 93 5A */	rlwimi r0, r4, 0x12, 0xd, 0xd
-/* 8034008C 0033CC6C  90 03 00 00 */	stw r0, 0(r3)
-/* 80340090 0033CC70  41 81 00 30 */	bgt lbl_803400C0
-/* 80340094 0033CC74  81 23 00 00 */	lwz r9, 0(r3)
-/* 80340098 0033CC78  54 C4 A0 16 */	slwi r4, r6, 0x14
-/* 8034009C 0033CC7C  54 A0 80 1E */	slwi r0, r5, 0x10
-/* 803400A0 0033CC80  55 25 03 12 */	rlwinm r5, r9, 0, 0xc, 9
-/* 803400A4 0033CC84  7C A4 23 78 */	or r4, r5, r4
-/* 803400A8 0033CC88  90 83 00 00 */	stw r4, 0(r3)
-/* 803400AC 0033CC8C  80 83 00 00 */	lwz r4, 0(r3)
-/* 803400B0 0033CC90  54 84 04 1A */	rlwinm r4, r4, 0, 0x10, 0xd
-/* 803400B4 0033CC94  7C 80 03 78 */	or r0, r4, r0
-/* 803400B8 0033CC98  90 03 00 00 */	stw r0, 0(r3)
-/* 803400BC 0033CC9C  48 00 00 24 */	b lbl_803400E0
-lbl_803400C0:
-/* 803400C0 0033CCA0  80 03 00 00 */	lwz r0, 0(r3)
-/* 803400C4 0033CCA4  54 00 03 12 */	rlwinm r0, r0, 0, 0xc, 9
-/* 803400C8 0033CCA8  50 80 9A 96 */	rlwimi r0, r4, 0x13, 0xa, 0xb
-/* 803400CC 0033CCAC  90 03 00 00 */	stw r0, 0(r3)
-/* 803400D0 0033CCB0  80 03 00 00 */	lwz r0, 0(r3)
-/* 803400D4 0033CCB4  54 00 04 1A */	rlwinm r0, r0, 0, 0x10, 0xd
-/* 803400D8 0033CCB8  64 00 00 03 */	oris r0, r0, 3
-/* 803400DC 0033CCBC  90 03 00 00 */	stw r0, 0(r3)
-lbl_803400E0:
-/* 803400E0 0033CCC0  80 83 00 00 */	lwz r4, 0(r3)
-/* 803400E4 0033CCC4  54 E0 99 58 */	rlwinm r0, r7, 0x13, 5, 0xc
-/* 803400E8 0033CCC8  55 06 B0 12 */	slwi r6, r8, 0x16
-/* 803400EC 0033CCCC  54 84 03 56 */	rlwinm r4, r4, 0, 0xd, 0xb
-/* 803400F0 0033CCD0  7C 80 03 78 */	or r0, r4, r0
-/* 803400F4 0033CCD4  90 03 00 00 */	stw r0, 0(r3)
-/* 803400F8 0033CCD8  38 80 00 61 */	li r4, 0x61
-/* 803400FC 0033CCDC  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 80340100 0033CCE0  80 E3 00 00 */	lwz r7, 0(r3)
-/* 80340104 0033CCE4  38 00 00 00 */	li r0, 0
-/* 80340108 0033CCE8  54 E7 02 8E */	rlwinm r7, r7, 0, 0xa, 7
-/* 8034010C 0033CCEC  7C E6 33 78 */	or r6, r7, r6
-/* 80340110 0033CCF0  90 C3 00 00 */	stw r6, 0(r3)
-/* 80340114 0033CCF4  98 85 80 00 */	stb r4, 0xCC008000@l(r5)
-/* 80340118 0033CCF8  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8034011C 0033CCFC  80 63 00 00 */	lwz r3, 0(r3)
-/* 80340120 0033CD00  90 65 80 00 */	stw r3, -0x8000(r5)
-/* 80340124 0033CD04  B0 04 00 02 */	sth r0, 2(r4)
-/* 80340128 0033CD08  4E 80 00 20 */	blr 
+void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b, GXTevAlphaArg c, GXTevAlphaArg d)
+{
+    u32 *temp_r9 = &__GXContexts.main->x170_data[stage];
 
-.global GXSetTevAlphaOp
-GXSetTevAlphaOp:
-/* 8034012C 0033CD0C  54 63 10 3A */	slwi r3, r3, 2
-/* 80340130 0033CD10  80 0D A5 08 */	lwz r0, __GXContexts@sda21(r13)
-/* 80340134 0033CD14  38 63 01 70 */	addi r3, r3, 0x170
-/* 80340138 0033CD18  7C 60 1A 14 */	add r3, r0, r3
-/* 8034013C 0033CD1C  80 03 00 00 */	lwz r0, 0(r3)
-/* 80340140 0033CD20  2C 04 00 01 */	cmpwi r4, 1
-/* 80340144 0033CD24  54 00 03 98 */	rlwinm r0, r0, 0, 0xe, 0xc
-/* 80340148 0033CD28  50 80 93 5A */	rlwimi r0, r4, 0x12, 0xd, 0xd
-/* 8034014C 0033CD2C  90 03 00 00 */	stw r0, 0(r3)
-/* 80340150 0033CD30  41 81 00 30 */	bgt lbl_80340180
-/* 80340154 0033CD34  81 23 00 00 */	lwz r9, 0(r3)
-/* 80340158 0033CD38  54 C4 A0 16 */	slwi r4, r6, 0x14
-/* 8034015C 0033CD3C  54 A0 80 1E */	slwi r0, r5, 0x10
-/* 80340160 0033CD40  55 25 03 12 */	rlwinm r5, r9, 0, 0xc, 9
-/* 80340164 0033CD44  7C A4 23 78 */	or r4, r5, r4
-/* 80340168 0033CD48  90 83 00 00 */	stw r4, 0(r3)
-/* 8034016C 0033CD4C  80 83 00 00 */	lwz r4, 0(r3)
-/* 80340170 0033CD50  54 84 04 1A */	rlwinm r4, r4, 0, 0x10, 0xd
-/* 80340174 0033CD54  7C 80 03 78 */	or r0, r4, r0
-/* 80340178 0033CD58  90 03 00 00 */	stw r0, 0(r3)
-/* 8034017C 0033CD5C  48 00 00 24 */	b lbl_803401A0
-lbl_80340180:
-/* 80340180 0033CD60  80 03 00 00 */	lwz r0, 0(r3)
-/* 80340184 0033CD64  54 00 03 12 */	rlwinm r0, r0, 0, 0xc, 9
-/* 80340188 0033CD68  50 80 9A 96 */	rlwimi r0, r4, 0x13, 0xa, 0xb
-/* 8034018C 0033CD6C  90 03 00 00 */	stw r0, 0(r3)
-/* 80340190 0033CD70  80 03 00 00 */	lwz r0, 0(r3)
-/* 80340194 0033CD74  54 00 04 1A */	rlwinm r0, r0, 0, 0x10, 0xd
-/* 80340198 0033CD78  64 00 00 03 */	oris r0, r0, 3
-/* 8034019C 0033CD7C  90 03 00 00 */	stw r0, 0(r3)
-lbl_803401A0:
-/* 803401A0 0033CD80  80 83 00 00 */	lwz r4, 0(r3)
-/* 803401A4 0033CD84  54 E0 99 58 */	rlwinm r0, r7, 0x13, 5, 0xc
-/* 803401A8 0033CD88  55 06 B0 12 */	slwi r6, r8, 0x16
-/* 803401AC 0033CD8C  54 84 03 56 */	rlwinm r4, r4, 0, 0xd, 0xb
-/* 803401B0 0033CD90  7C 80 03 78 */	or r0, r4, r0
-/* 803401B4 0033CD94  90 03 00 00 */	stw r0, 0(r3)
-/* 803401B8 0033CD98  38 80 00 61 */	li r4, 0x61
-/* 803401BC 0033CD9C  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 803401C0 0033CDA0  80 E3 00 00 */	lwz r7, 0(r3)
-/* 803401C4 0033CDA4  38 00 00 00 */	li r0, 0
-/* 803401C8 0033CDA8  54 E7 02 8E */	rlwinm r7, r7, 0, 0xa, 7
-/* 803401CC 0033CDAC  7C E6 33 78 */	or r6, r7, r6
-/* 803401D0 0033CDB0  90 C3 00 00 */	stw r6, 0(r3)
-/* 803401D4 0033CDB4  98 85 80 00 */	stb r4, 0xCC008000@l(r5)
-/* 803401D8 0033CDB8  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 803401DC 0033CDBC  80 63 00 00 */	lwz r3, 0(r3)
-/* 803401E0 0033CDC0  90 65 80 00 */	stw r3, -0x8000(r5)
-/* 803401E4 0033CDC4  B0 04 00 02 */	sth r0, 2(r4)
-/* 803401E8 0033CDC8  4E 80 00 20 */	blr 
+    INSERT_FIELD(*temp_r9, a, 3, 13);
+    INSERT_FIELD(*temp_r9, b, 3, 10);
+    INSERT_FIELD(*temp_r9, c, 3, 7);
+    INSERT_FIELD(*temp_r9, d, 3, 4);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(*temp_r9);
+    set_x2(GX_FALSE);
+}
 
-# https://decomp.me/scratch/mrEco
-.global GXSetTevColor
-GXSetTevColor:
+void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
+{
+    u32 *temp_r3 = &__GXContexts.main->x130_data[stage];
+
+    INSERT_FIELD(*temp_r3, op & 1, 1, 18);
+    if (op <= 1)
+    {
+        INSERT_FIELD(*temp_r3, scale, 2, 20);
+        INSERT_FIELD(*temp_r3, bias, 2, 16);
+    }
+    else
+    {
+        INSERT_FIELD(*temp_r3, (op >> 1) & 3, 2, 20);
+        INSERT_FIELD(*temp_r3, 3, 2, 16);
+    }
+    INSERT_FIELD(*temp_r3, clamp & 0xFF, 1, 19);
+    INSERT_FIELD(*temp_r3, out_reg, 2, 22);
+
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(*temp_r3);
+    set_x2(GX_FALSE);
+}
+
+void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
+{
+    u32 *temp_r3 = &__GXContexts.main->x170_data[stage];
+
+    INSERT_FIELD(*temp_r3, op & 1, 1, 18);
+    if (op <= 1)
+    {
+        INSERT_FIELD(*temp_r3, scale, 2, 20);
+        INSERT_FIELD(*temp_r3, bias, 2, 16);
+    }
+    else
+    {
+        INSERT_FIELD(*temp_r3, (op >> 1) & 3, 2, 20);
+        INSERT_FIELD(*temp_r3, 3, 2, 16);
+    }
+    INSERT_FIELD(*temp_r3, clamp & 0xFF, 1, 19);
+    INSERT_FIELD(*temp_r3, out_reg, 2, 22);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(*temp_r3);
+    set_x2(GX_FALSE);
+}
+
+#ifdef NON_MATCHING
+
+// https://decomp.me/scratch/YJOLf // 5225 (0%)
+void GXSetTevColor(GXTevRegID id, GXColor color)
+{
+    u32 temp_r6 = 0;
+    u32 temp_r8 = 0;
+
+    temp_r6 = 0;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    INSERT_FIELD(temp_r6, color.r, 11, 0);
+    INSERT_FIELD(temp_r6, color.a, 8, 12);
+    INSERT_FIELD(temp_r6, 224 + id * 2, 8, 24);
+    GX_WRITE_U32(temp_r6);
+
+    temp_r6 = 0;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    INSERT_FIELD(temp_r6, color.b, 11, 0);
+    INSERT_FIELD(temp_r6, color.g, 8, 12);
+    INSERT_FIELD(temp_r6, 225 + id * 2, 8, 24);
+    GX_WRITE_U32(temp_r6);
+
+    GX_WRITE_U32(temp_r6);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(temp_r6);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    GX_WRITE_U32(temp_r6);
+
+    set_x2(GX_FALSE);
+}
+
+#else
+
+#pragma push
+asm void GXSetTevColor(GXTevRegID id, GXColor color)
+{ // clang-format off
+    nofralloc
 /* 803401EC 0033CDCC  88 04 00 03 */	lbz r0, 3(r4)
 /* 803401F0 0033CDD0  54 68 08 3C */	slwi r8, r3, 1
 /* 803401F4 0033CDD4  88 A4 00 00 */	lbz r5, 0(r4)
@@ -312,7 +158,7 @@ GXSetTevColor:
 /* 80340208 0033CDE8  88 C4 00 01 */	lbz r6, 1(r4)
 /* 8034020C 0033CDEC  54 E7 C0 0E */	slwi r7, r7, 0x18
 /* 80340210 0033CDF0  38 A0 00 61 */	li r5, 0x61
-/* 80340214 0033CDF4  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80340214 0033CDF4  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340218 0033CDF8  3C 80 CC 01 */	lis r4, 0xCC008000@ha
 /* 8034021C 0033CDFC  98 A4 80 00 */	stb r5, 0xCC008000@l(r4)
 /* 80340220 0033CE00  51 27 03 3E */	rlwimi r7, r9, 0, 0xc, 0x1f
@@ -331,10 +177,16 @@ GXSetTevColor:
 /* 80340254 0033CE34  90 C4 80 00 */	stw r6, -0x8000(r4)
 /* 80340258 0033CE38  B0 03 00 02 */	sth r0, 2(r3)
 /* 8034025C 0033CE3C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/UNKO4
-.global GXSetTevColorS10
-GXSetTevColorS10:
+#endif
+
+// https://decomp.me/scratch/UNKO4
+#pragma push
+asm void GXSetTevColorS10(s32, GXColor *)
+{ // clang-format off
+    nofralloc
 /* 80340260 0033CE40  A8 04 00 06 */	lha r0, 6(r4)
 /* 80340264 0033CE44  54 69 08 3C */	slwi r9, r3, 1
 /* 80340268 0033CE48  A8 A4 00 00 */	lha r5, 0(r4)
@@ -345,7 +197,7 @@ GXSetTevColorS10:
 /* 8034027C 0033CE5C  A8 C4 00 02 */	lha r6, 2(r4)
 /* 80340280 0033CE60  55 08 C0 0E */	slwi r8, r8, 0x18
 /* 80340284 0033CE64  38 A0 00 61 */	li r5, 0x61
-/* 80340288 0033CE68  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80340288 0033CE68  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8034028C 0033CE6C  3C 80 CC 01 */	lis r4, 0xCC008000@ha
 /* 80340290 0033CE70  98 A4 80 00 */	stb r5, 0xCC008000@l(r4)
 /* 80340294 0033CE74  51 48 02 7E */	rlwimi r8, r10, 0, 9, 0x1f
@@ -364,9 +216,13 @@ GXSetTevColorS10:
 /* 803402C8 0033CEA8  90 C4 80 00 */	stw r6, -0x8000(r4)
 /* 803402CC 0033CEAC  B0 03 00 02 */	sth r0, 2(r3)
 /* 803402D0 0033CEB0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global GXSetTevKColor
-GXSetTevKColor:
+#pragma push
+asm void GXSetTevKColor(GXTevKColorID id, GXColor color)
+{ // clang-format off
+    nofralloc
 /* 803402D4 0033CEB4  88 04 00 03 */	lbz r0, 3(r4)
 /* 803402D8 0033CEB8  54 65 08 3C */	slwi r5, r3, 1
 /* 803402DC 0033CEBC  88 C4 00 00 */	lbz r6, 0(r4)
@@ -377,7 +233,7 @@ GXSetTevKColor:
 /* 803402F0 0033CED0  89 24 00 02 */	lbz r9, 2(r4)
 /* 803402F4 0033CED4  54 00 03 0E */	rlwinm r0, r0, 0, 0xc, 7
 /* 803402F8 0033CED8  64 08 00 80 */	oris r8, r0, 0x80
-/* 803402FC 0033CEDC  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 803402FC 0033CEDC  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340300 0033CEE0  54 E7 C0 0E */	slwi r7, r7, 0x18
 /* 80340304 0033CEE4  38 00 00 61 */	li r0, 0x61
 /* 80340308 0033CEE8  3C 80 CC 01 */	lis r4, 0xCC008000@ha
@@ -396,12 +252,16 @@ GXSetTevKColor:
 /* 8034033C 0033CF1C  38 00 00 00 */	li r0, 0
 /* 80340340 0033CF20  B0 03 00 02 */	sth r0, 2(r3)
 /* 80340344 0033CF24  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/fj9UW // 1475 (45.37%)
-.global GXSetTevKColorSel
-GXSetTevKColorSel:
+// https://decomp.me/scratch/fj9UW // 1475 (45.37%)
+#pragma push
+asm void GXSetTevKColorSel(GXTevStageID stage, GXTevKColorSel sel)
+{ // clang-format off
+    nofralloc
 /* 80340348 0033CF28  7C 65 0E 70 */	srawi r5, r3, 1
-/* 8034034C 0033CF2C  80 CD A5 08 */	lwz r6, __GXContexts@sda21(r13)
+/* 8034034C 0033CF2C  80 CD A5 08 */	lwz r6, __GXContexts(r13)
 /* 80340350 0033CF30  54 60 07 FF */	clrlwi. r0, r3, 0x1f
 /* 80340354 0033CF34  54 A3 10 3A */	slwi r3, r5, 2
 /* 80340358 0033CF38  38 E3 01 B0 */	addi r7, r3, 0x1b0
@@ -421,7 +281,7 @@ lbl_8034037C:
 /* 8034038C 0033CF6C  90 07 00 00 */	stw r0, 0(r7)
 lbl_80340390:
 /* 80340390 0033CF70  38 00 00 61 */	li r0, 0x61
-/* 80340394 0033CF74  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80340394 0033CF74  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340398 0033CF78  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 8034039C 0033CF7C  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
 /* 803403A0 0033CF80  38 00 00 00 */	li r0, 0
@@ -429,12 +289,16 @@ lbl_80340390:
 /* 803403A8 0033CF88  90 85 80 00 */	stw r4, -0x8000(r5)
 /* 803403AC 0033CF8C  B0 03 00 02 */	sth r0, 2(r3)
 /* 803403B0 0033CF90  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/dsU75 // 1475 (45.37%)
-.global GXSetTevKAlphaSel
-GXSetTevKAlphaSel:
+// https://decomp.me/scratch/dsU75 // 1475 (45.37%)
+#pragma push
+asm void GXSetTevKAlphaSel(GXTevStageID stage, GXTevKAlphaSel sel)
+{ // clang-format off
+    nofralloc
 /* 803403B4 0033CF94  7C 65 0E 70 */	srawi r5, r3, 1
-/* 803403B8 0033CF98  80 CD A5 08 */	lwz r6, __GXContexts@sda21(r13)
+/* 803403B8 0033CF98  80 CD A5 08 */	lwz r6, __GXContexts(r13)
 /* 803403BC 0033CF9C  54 60 07 FF */	clrlwi. r0, r3, 0x1f
 /* 803403C0 0033CFA0  54 A3 10 3A */	slwi r3, r5, 2
 /* 803403C4 0033CFA4  38 E3 01 B0 */	addi r7, r3, 0x1b0
@@ -454,7 +318,7 @@ lbl_803403E8:
 /* 803403F8 0033CFD8  90 07 00 00 */	stw r0, 0(r7)
 lbl_803403FC:
 /* 803403FC 0033CFDC  38 00 00 61 */	li r0, 0x61
-/* 80340400 0033CFE0  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80340400 0033CFE0  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340404 0033CFE4  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 80340408 0033CFE8  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
 /* 8034040C 0033CFEC  38 00 00 00 */	li r0, 0
@@ -462,12 +326,16 @@ lbl_803403FC:
 /* 80340414 0033CFF4  90 85 80 00 */	stw r4, -0x8000(r5)
 /* 80340418 0033CFF8  B0 03 00 02 */	sth r0, 2(r3)
 /* 8034041C 0033CFFC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/xoMcT // 2145 (2.50%)
-.global GXSetTevSwapMode
-GXSetTevSwapMode:
+// https://decomp.me/scratch/xoMcT // 2145 (2.50%)
+#pragma push
+asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel, GXTevSwapSel tex_sel)
+{ // clang-format off
+    nofralloc
 /* 80340420 0033D000  54 63 10 3A */	slwi r3, r3, 2
-/* 80340424 0033D004  80 0D A5 08 */	lwz r0, __GXContexts@sda21(r13)
+/* 80340424 0033D004  80 0D A5 08 */	lwz r0, __GXContexts(r13)
 /* 80340428 0033D008  38 E3 01 70 */	addi r7, r3, 0x170
 /* 8034042C 0033D00C  7C E0 3A 14 */	add r7, r0, r7
 /* 80340430 0033D010  80 07 00 00 */	lwz r0, 0(r7)
@@ -483,17 +351,21 @@ GXSetTevSwapMode:
 /* 80340458 0033D038  7C 84 33 78 */	or r4, r4, r6
 /* 8034045C 0033D03C  90 87 00 00 */	stw r4, 0(r7)
 /* 80340460 0033D040  98 65 80 00 */	stb r3, 0xCC008000@l(r5)
-/* 80340464 0033D044  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80340464 0033D044  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340468 0033D048  80 87 00 00 */	lwz r4, 0(r7)
 /* 8034046C 0033D04C  90 85 80 00 */	stw r4, -0x8000(r5)
 /* 80340470 0033D050  B0 03 00 02 */	sth r0, 2(r3)
 /* 80340474 0033D054  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/y8FRa // 2545 (36.38%)
-.global GXSetTevSwapModeTable
-GXSetTevSwapModeTable:
+// https://decomp.me/scratch/y8FRa // 2545 (36.38%)
+#pragma push
+asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red, GXTevColorChan green, GXTevColorChan blue, GXTevColorChan alpha)
+{ // clang-format off
+    nofralloc
 /* 80340478 0033D058  54 69 08 3C */	slwi r9, r3, 1
-/* 8034047C 0033D05C  80 0D A5 08 */	lwz r0, __GXContexts@sda21(r13)
+/* 8034047C 0033D05C  80 0D A5 08 */	lwz r0, __GXContexts(r13)
 /* 80340480 0033D060  54 63 18 38 */	slwi r3, r3, 3
 /* 80340484 0033D064  39 63 01 B0 */	addi r11, r3, 0x1b0
 /* 80340488 0033D068  7D 60 5A 14 */	add r11, r0, r11
@@ -514,7 +386,7 @@ GXSetTevSwapModeTable:
 /* 803404C4 0033D0A4  54 E3 10 3A */	slwi r3, r7, 2
 /* 803404C8 0033D0A8  38 00 00 00 */	li r0, 0
 /* 803404CC 0033D0AC  99 28 80 00 */	stb r9, 0xCC008000@l(r8)
-/* 803404D0 0033D0B0  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803404D0 0033D0B0  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803404D4 0033D0B4  80 AB 00 00 */	lwz r5, 0(r11)
 /* 803404D8 0033D0B8  7D 44 52 14 */	add r10, r4, r10
 /* 803404DC 0033D0BC  90 A8 80 00 */	stw r5, -0x8000(r8)
@@ -527,20 +399,28 @@ GXSetTevSwapModeTable:
 /* 803404F8 0033D0D8  7C 83 1B 78 */	or r3, r4, r3
 /* 803404FC 0033D0DC  90 6A 00 00 */	stw r3, 0(r10)
 /* 80340500 0033D0E0  99 28 80 00 */	stb r9, -0x8000(r8)
-/* 80340504 0033D0E4  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80340504 0033D0E4  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340508 0033D0E8  80 8A 00 00 */	lwz r4, 0(r10)
 /* 8034050C 0033D0EC  90 88 80 00 */	stw r4, -0x8000(r8)
 /* 80340510 0033D0F0  B0 03 00 02 */	sth r0, 2(r3)
 /* 80340514 0033D0F4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global func_80340518
-func_80340518:
+#pragma push
+asm void func_80340518()
+{ // clang-format off
+    nofralloc
 /* 80340518 0033D0F8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global GXSetAlphaCompare
-GXSetAlphaCompare:
+#pragma push
+asm void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1, u8 ref1)
+{ // clang-format off
+    nofralloc
 /* 8034051C 0033D0FC  54 E7 44 2E */	rlwinm r7, r7, 8, 0x10, 0x17
-/* 80340520 0033D100  81 0D A5 08 */	lwz r8, __GXContexts@sda21(r13)
+/* 80340520 0033D100  81 0D A5 08 */	lwz r8, __GXContexts(r13)
 /* 80340524 0033D104  50 87 06 3E */	rlwimi r7, r4, 0, 0x18, 0x1f
 /* 80340528 0033D108  54 60 80 1E */	slwi r0, r3, 0x10
 /* 8034052C 0033D10C  50 E0 04 3E */	rlwimi r0, r7, 0, 0x10, 0x1f
@@ -559,10 +439,14 @@ GXSetAlphaCompare:
 /* 80340560 0033D140  90 83 80 00 */	stw r4, -0x8000(r3)
 /* 80340564 0033D144  B0 08 00 02 */	sth r0, 2(r8)
 /* 80340568 0033D148  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/N3R8X // 1410 (57.27%)
-.global GXSetZTexture
-GXSetZTexture:
+// https://decomp.me/scratch/N3R8X // 1410 (57.27%)
+#pragma push
+asm void GXSetZTexture(GXZTexOp op, GXTexFmt fmt, u32 bias)
+{ // clang-format off
+    nofralloc
 /* 8034056C 0033D14C  2C 04 00 13 */	cmpwi r4, 0x13
 /* 80340570 0033D150  54 A0 02 3E */	clrlwi r0, r5, 8
 /* 80340574 0033D154  64 07 F4 00 */	oris r7, r0, 0xf400
@@ -588,7 +472,7 @@ lbl_803405B0:
 /* 803405B0 0033D190  38 C0 00 02 */	li r6, 2
 lbl_803405B4:
 /* 803405B4 0033D194  38 00 00 61 */	li r0, 0x61
-/* 803405B8 0033D198  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803405B8 0033D198  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803405BC 0033D19C  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 803405C0 0033D1A0  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
 /* 803405C4 0033D1A4  54 C6 07 B6 */	rlwinm r6, r6, 0, 0x1e, 0x1b
@@ -602,12 +486,18 @@ lbl_803405B4:
 /* 803405E4 0033D1C4  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 803405E8 0033D1C8  B0 04 00 02 */	sth r0, 2(r4)
 /* 803405EC 0033D1CC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/0H3SX // 780 (92.50%)
-.global GXSetTevOrder
-GXSetTevOrder:
+static u32 lbl_804014E0[] = {0, 1, 0, 1, 0, 1, 7, 5, 6, 0};
+
+// https://decomp.me/scratch/0H3SX // 780 (92.50%)
+#pragma push
+asm void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXChannelID color)
+{ // clang-format off
+    nofralloc
 /* 803405F0 0033D1D0  7C 67 0E 70 */	srawi r7, r3, 1
-/* 803405F4 0033D1D4  81 2D A5 08 */	lwz r9, __GXContexts@sda21(r13)
+/* 803405F4 0033D1D4  81 2D A5 08 */	lwz r9, __GXContexts(r13)
 /* 803405F8 0033D1D8  54 AA 06 2C */	rlwinm r10, r5, 0, 0x18, 0x16
 /* 803405FC 0033D1DC  7C E7 01 94 */	addze r7, r7
 /* 80340600 0033D1E0  54 60 10 3A */	slwi r0, r3, 2
@@ -709,48 +599,38 @@ lbl_80340748:
 /* 80340758 0033D338  90 07 00 00 */	stw r0, 0(r7)
 lbl_8034075C:
 /* 8034075C 0033D33C  38 00 00 61 */	li r0, 0x61
-/* 80340760 0033D340  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80340760 0033D340  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340764 0033D344  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 80340768 0033D348  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
 /* 8034076C 0033D34C  38 00 00 00 */	li r0, 0
 /* 80340770 0033D350  80 87 00 00 */	lwz r4, 0(r7)
 /* 80340774 0033D354  90 85 80 00 */	stw r4, -0x8000(r5)
 /* 80340778 0033D358  B0 03 00 02 */	sth r0, 2(r3)
-/* 8034077C 0033D35C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 8034077C 0033D35C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340780 0033D360  80 03 04 F0 */	lwz r0, 0x4f0(r3)
 /* 80340784 0033D364  60 00 00 01 */	ori r0, r0, 1
 /* 80340788 0033D368  90 03 04 F0 */	stw r0, 0x4f0(r3)
 /* 8034078C 0033D36C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/TqgHh // 200 (84.62%)
-.global GXSetNumTevStages
-GXSetNumTevStages:
+// https://decomp.me/scratch/TqgHh // 200 (84.62%)
+#pragma push
+asm void GXSetNumTevStages(u8 nStages)
+{ // clang-format off
+    nofralloc
 /* 80340790 0033D370  54 63 06 3E */	clrlwi r3, r3, 0x18
-/* 80340794 0033D374  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 80340794 0033D374  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80340798 0033D378  38 03 FF FF */	addi r0, r3, -1
 /* 8034079C 0033D37C  84 64 02 04 */	lwzu r3, 0x204(r4)
 /* 803407A0 0033D380  54 00 50 2A */	slwi r0, r0, 0xa
 /* 803407A4 0033D384  54 63 05 A2 */	rlwinm r3, r3, 0, 0x16, 0x11
 /* 803407A8 0033D388  7C 60 03 78 */	or r0, r3, r0
 /* 803407AC 0033D38C  90 04 00 00 */	stw r0, 0(r4)
-/* 803407B0 0033D390  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 803407B0 0033D390  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 803407B4 0033D394  80 03 04 F0 */	lwz r0, 0x4f0(r3)
 /* 803407B8 0033D398  60 00 00 04 */	ori r0, r0, 4
 /* 803407BC 0033D39C  90 03 04 F0 */	stw r0, 0x4f0(r3)
 /* 803407C0 0033D3A0  4E 80 00 20 */	blr 
-
-.section .data
-    .balign 8
-
-.global lbl_804014E0
-lbl_804014E0:
-    .4byte NULL
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000007
-    .4byte 0x00000005
-    .4byte 0x00000006
-    .4byte NULL
+} // clang-format on
+#pragma pop

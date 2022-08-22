@@ -43,7 +43,6 @@
 /* 004D27A8 */ extern const u32 GXTexMode1Ids[2];
 /* 004D27A0 */ extern const u32 GXTexMode0Ids[2];
 /* 003FE0E8 */ extern const u32 lbl_80401508[8];
-/* 003FE0C0 */ extern const u32 lbl_804014E0[10];
 /* 0033E050 */ extern void WriteMTXPS4x2(unk_t, s8 *);
 /* 0033E01C */ extern void WriteMTXPS3x3from3x4(unk_t, s8 *, s8 *);
 /* 0033DFE8 */ extern void WriteMTXPS4x3(unk_t, s8 *, s8 *);

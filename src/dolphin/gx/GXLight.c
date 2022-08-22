@@ -412,7 +412,7 @@ void GXSetNumChans(u8 num_chans)
     WGPIPE.u8 = GX_LOAD_XF_REG;
     WGPIPE.u32 = 0x1009;
     WGPIPE.u32 = num_chans;
-    __GXContexts.main->x4F0 |= 4;
+    __GXContexts.main->x4F0_flags |= 4;
 }
 
 void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src,
