@@ -38,7 +38,15 @@ TEXT_O_FILES :=\
 	$(BUILD_DIR)/asm/melee/lb/lbmthp.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbjpeg.s.o\
 	$(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o\
-	$(BUILD_DIR)/asm/melee/lb/lbrefract.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/melee/lb/lbrefract_shared_data.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbrefract_001.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbrefract_002.s.o\
+	$(BUILD_DIR)/asm/melee/lb/lbrefract_003_data.s.o\
+	$(BUILD_DIR)/src/melee/lb/lbrefract_003.c.o\
+
+TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/lb/lbaudio_ax.s.o\
 
 TEXT_O_FILES +=\
@@ -47,7 +55,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/pl/player.c.o\
-	$(BUILD_DIR)/asm/melee/pl/code_8003715C.s.o\
+	$(BUILD_DIR)/asm/melee/pl/pl_unknown_001.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/mp/mpcoll.s.o\
@@ -75,11 +83,11 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
 	$(BUILD_DIR)/asm/melee/ft/code_80081938.s.o\
 	$(BUILD_DIR)/asm/melee/ft/code_80081B38.s.o\
-	$(BUILD_DIR)/asm/melee/ft/code_8008521C.s.o\
+	$(BUILD_DIR)/asm/melee/ft/ft_unknown_005.s.o\
 	$(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
 	$(BUILD_DIR)/src/melee/ft/ftlib.c.o\
 	$(BUILD_DIR)/asm/melee/ft/ftlib.s.o\
-	$(BUILD_DIR)/asm/melee/ft/code_800877F8.s.o\
+	$(BUILD_DIR)/asm/melee/ft/ft_unknown_006.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey1.c.o\
@@ -108,13 +116,14 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_4.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftfox.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_AppealS.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialN.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialHi.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialLw.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftFox/ftFox_SpecialS.c.o\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftfox.s.o\
+
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/chara/ftLink/ftlink.c.o\
@@ -211,12 +220,12 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftmewtwo.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialLw.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialS.c.o\
 	$(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialN.c.o\
-	$(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftclink.c.o\
@@ -414,7 +423,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/stage.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/melee/db/code_80225374.s.o\
+	$(BUILD_DIR)/asm/melee/db/db_unknown_001.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/text_3.s.o\
@@ -443,6 +452,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/mn/mnstagesel.s.o\
 	$(BUILD_DIR)/asm/melee/mn/mncharsel.s.o\
 	$(BUILD_DIR)/src/melee/it/item.c.o\
+	$(BUILD_DIR)/src/melee/it/item2.c.o\
 	$(BUILD_DIR)/asm/melee/it/code_80266F3C.s.o\
 	$(BUILD_DIR)/asm/melee/it/code_8027CF30.s.o\
 
@@ -450,7 +460,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/if/ifall.s.o\
 	$(BUILD_DIR)/asm/melee/if/iftime.s.o\
 	$(BUILD_DIR)/asm/melee/if/ifstatus.s.o\
-	$(BUILD_DIR)/asm/melee/if/code_802F7288.s.o\
+	$(BUILD_DIR)/asm/melee/if/if_unknown_001.s.o\
 	$(BUILD_DIR)/asm/melee/if/ifstock.s.o\
 	$(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 
@@ -544,10 +554,20 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXFifo.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXFifo.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXMisc.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GX.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXMisc.c.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXGeometry.c.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXFrameBuf.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXLight.c.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXTexture.s.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXBump.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXTev.c.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXPixel.s.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXStubs.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXDisplayList.c.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXTransform.s.o\
+	$(BUILD_DIR)/asm/dolphin/gx/GXPerf.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx.s.o\
@@ -772,6 +792,12 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobj.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_003.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_009.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_010.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_011.s.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_002.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_002.s.o\
 
@@ -794,6 +820,19 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/sislib.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/sislib.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_001.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_002.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/melee/db/db_data.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_003.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_004.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_005.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_006.s.o\
+	$(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_007.s.o\
+	$(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_008.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_001.c.o\

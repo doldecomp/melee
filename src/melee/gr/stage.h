@@ -6,7 +6,11 @@
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
+#ifndef M2CTX
+
 typedef Vec Vec3;
+
+#endif
 
 enum InternalStageID {
     CASTLE = 0x02, // Princess Peach's Castle

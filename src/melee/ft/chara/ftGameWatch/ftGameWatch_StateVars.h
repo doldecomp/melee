@@ -1,7 +1,7 @@
 #ifndef _FTGAMEWATCH_STATEVARS_H_
 #define _FTGAMEWATCH_STATEVARS_H_
 
-#include <types.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftGameWatchAttack11 {
@@ -26,9 +26,9 @@ typedef struct ftGameWatchSpecialLw {
 
 typedef union ftGameWatchVars {
 
-	ftGameWatchAttack11 attack11;
+	ftGameWatchAttack11 Attack11;
 	ftGameWatchSpecialN SpecialN;
-	ftGameWatchSpecialLw specialLw;
+	ftGameWatchSpecialLw SpecialLw;
 
 } ftGameWatchStateVars;
 

@@ -12,27 +12,27 @@ extern HSD_GObj* func_802AD478(HSD_GObj*, Vec3*, s32, f32);
 // https://decomp.me/scratch/66eaB //
 void ftNess_AttackS4_Action(HSD_GObj* fighter_gobj) // Ness's F-Smash Action State handler //
 {
-    Fighter* fighter_data;
+    Fighter* fp;
     HSD_GObj* baseballBatGObj;
 
-    fighter_data = getFighterPlus(fighter_gobj);
+    fp = getFighterPlus(fighter_gobj);
 
-    fighter_data->x2218_flag.bits.b0 = 0;
+    fp->x2218_flag.bits.b0 = 0;
 
-    fighter_data->x2200_ftcmd_var0 = FALSE;
+    fp->x2200_ftcmd_var0 = FALSE;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKS4, 0, NULL, 0.0f, 1.0f, 0.0f);
 
     func_8006EBA4(fighter_gobj);
 
-    baseballBatGObj = func_802AD478(fighter_gobj, &fighter_data->xB0_pos, 0x2A /* Item Hold Bone */, fighter_data->x2C_facing_direction);
+    baseballBatGObj = func_802AD478(fighter_gobj, &fp->xB0_pos, 0x2A /* Item Hold Bone */, fp->x2C_facing_direction);
 
-    fighter_data->sa.ness.x2248_baseballBatGObj = baseballBatGObj;
+    fp->sa.ness.x2248_baseballBatGObj = baseballBatGObj;
 
     if (baseballBatGObj != NULL)
     {
-        fighter_data->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
-        fighter_data->cb.x21DC_callback_OnTakeDamage = ftNess_OnDamage;
+        fp->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
+        fp->cb.x21DC_callback_OnTakeDamage = ftNess_OnDamage;
     }
 };
 
@@ -41,15 +41,15 @@ void ftNess_AttackS4_Action(HSD_GObj* fighter_gobj) // Ness's F-Smash Action Sta
 BOOL ftNess_CheckNessBatRemove(HSD_GObj* fighter_gobj) // Check if Ness is in F-Smash + has Baseball Bat item //
 {
 
-    Fighter* fighter_data = fighter_gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
 
-    if (fighter_data->x10_action_state_index != AS_NESS_ATTACKS4)
+    if (fp->x10_action_state_index != AS_NESS_ATTACKS4)
 
     {
         return TRUE;
     }
 
-    if (fighter_data->sa.ness.x2248_baseballBatGObj == NULL)
+    if (fp->sa.ness.x2248_baseballBatGObj == NULL)
 
     {
         return TRUE;
@@ -65,12 +65,12 @@ extern void func_802AD6B8(HSD_GObj*);
 void ftNess_ItemNessBatRemove(HSD_GObj* fighter_gobj) // Remove Baseball Bat //
 {
 
-    Fighter* fighter_data = fighter_gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
 
-    if (fighter_data->sa.ness.x2248_baseballBatGObj != NULL)
+    if (fp->sa.ness.x2248_baseballBatGObj != NULL)
     {
-        func_802AD6B8(fighter_data->sa.ness.x2248_baseballBatGObj);
-        fighter_data->sa.ness.x2248_baseballBatGObj = NULL;
+        func_802AD6B8(fp->sa.ness.x2248_baseballBatGObj);
+        fp->sa.ness.x2248_baseballBatGObj = NULL;
     }
 
 };
@@ -79,11 +79,11 @@ void ftNess_ItemNessBatRemove(HSD_GObj* fighter_gobj) // Remove Baseball Bat //
 // https://decomp.me/scratch/6ulYB //
 void ftNess_ItemNessBatSetNULL(HSD_GObj* fighter_gobj) // Clear Baseball Bat GObj pointer //
 {
-    Fighter* fighter_data = fighter_gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
 
-    if (fighter_data->sa.ness.x2248_baseballBatGObj != NULL)
+    if (fp->sa.ness.x2248_baseballBatGObj != NULL)
     {
-        fighter_data->sa.ness.x2248_baseballBatGObj = NULL;
+        fp->sa.ness.x2248_baseballBatGObj = NULL;
     }
 };
 
@@ -130,14 +130,14 @@ extern void func_8008A4D4(HSD_GObj*); // Interrupt_Wait //
 // https://decomp.me/scratch/HTgCI //
 void ftNess_AttackS4_IASA(HSD_GObj* fighter_gobj) // Ness's F-Smash IASA Callback //
 {
-    Fighter* fighter_data = getFighterPlus(fighter_gobj);
+    Fighter* fp = getFighterPlus(fighter_gobj);
 
-    if (fighter_data->x2218_flag.bits.b0 != 0)
+    if (fp->x2218_flag.bits.b0 != 0)
     {
-        if (fighter_data->sa.ness.x2248_baseballBatGObj != NULL)
+        if (fp->sa.ness.x2248_baseballBatGObj != NULL)
         {
-            func_802AD6B8(fighter_data->sa.ness.x2248_baseballBatGObj);
-            fighter_data->sa.ness.x2248_baseballBatGObj = NULL;
+            func_802AD6B8(fp->sa.ness.x2248_baseballBatGObj);
+            fp->sa.ness.x2248_baseballBatGObj = NULL;
         }
         func_8008A4D4(fighter_gobj);
     }

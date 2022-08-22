@@ -1,7 +1,7 @@
 #ifndef _FTNESS_STATEVARS_H_
 #define _FTNESS_STATEVARS_H_
 
-#include <types.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftNessYoyo {
@@ -52,11 +52,11 @@ typedef struct ftNessSpecialLw {
 
 typedef union ftNessStateVars
 {
-	ftNessYoyo attackHi4;
-	ftNessYoyo attackLw4;
-	ftNessSpecialN specialN;
-	ftNessSpecialHi specialHi;
-	ftNessSpecialLw specialLw;
+	ftNessYoyo AttackHi4;
+	ftNessYoyo AttackLw4;
+	ftNessSpecialN SpecialN;
+	ftNessSpecialHi SpecialHi;
+	ftNessSpecialLw SpecialLw;
 
 } ftNessStateVars;
 

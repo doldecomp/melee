@@ -1,4 +1,4 @@
-#include <fighter.h>
+#include <melee/ft/fighter.h>
 
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighterObj) {
     Fighter* fp = fighterObj->user_data;

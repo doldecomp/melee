@@ -112,8 +112,18 @@ asm static void __init_registers(void)
 	blr
 }
 
-__declspec(section ".init") extern __rom_copy_info _rom_copy_info[];
-__declspec(section ".init") extern __bss_init_info _bss_init_info[];
+
+#ifndef M2CTX
+__declspec(section ".init")
+#endif
+    extern __rom_copy_info _rom_copy_info[];
+
+
+#ifndef M2CTX
+__declspec(section ".init")
+#endif
+    extern __bss_init_info _bss_init_info[];
+
 
 inline static void __copy_rom_section(void* dst, const void* src, unsigned long size)
 {

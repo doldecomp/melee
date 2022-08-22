@@ -238,8 +238,6 @@ void HSD_DObjSetDefaultClass(HSD_DObjInfo* info)
     default_class = info;
 }
 
-// This really does match, Frank is just breaking it.
-#ifdef NON_MATCHING
 HSD_DObj* HSD_DObjAlloc(void)
 {
     HSD_DObj* dobj = (HSD_DObj*)hsdNew((HSD_ClassInfo*)(default_class ? default_class : &hsdDObj));
@@ -248,41 +246,7 @@ HSD_DObj* HSD_DObjAlloc(void)
     }
     return dobj;
 }
-#else
-asm HSD_DObj* HSD_DObjAlloc(void)
-{
-    nofralloc
-/* 8035E2C0 0035AEA0  7C 08 02 A6 */	mflr r0
-/* 8035E2C4 0035AEA4  90 01 00 04 */	stw r0, 4(r1)
-/* 8035E2C8 0035AEA8  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8035E2CC 0035AEAC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8035E2D0 0035AEB0  80 6D BF 00 */	lwz r3, default_class
-/* 8035E2D4 0035AEB4  28 03 00 00 */	cmplwi r3, 0
-/* 8035E2D8 0035AEB8  41 82 00 08 */	beq lbl_8035E2E0
-/* 8035E2DC 0035AEBC  48 00 00 0C */	b lbl_8035E2E8
-lbl_8035E2E0:
-/* 8035E2E0 0035AEC0  3C 60 80 40 */	lis r3, hsdDObj@ha
-/* 8035E2E4 0035AEC4  38 63 54 50 */	addi r3, r3, hsdDObj@l
-lbl_8035E2E8:
-/* 8035E2E8 0035AEC8  48 02 40 5D */	bl hsdNew
-/* 8035E2EC 0035AECC  7C 7F 1B 79 */	or. r31, r3, r3
-/* 8035E2F0 0035AED0  40 82 00 14 */	bne lbl_8035E304
-/* 8035E2F4 0035AED4  38 6D A5 D8 */	addi r3, r13, lbl_804D5C78
-/* 8035E2F8 0035AED8  38 80 02 0D */	li r4, 0x20d
-/* 8035E2FC 0035AEDC  38 AD A5 E4 */	addi r5, r13, lbl_804D5C84
-/* 8035E300 0035AEE0  48 02 9F 21 */	bl __assert
-lbl_8035E304:
-/* 8035E304 0035AEE4  7F E3 FB 78 */	mr r3, r31
-/* 8035E308 0035AEE8  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8035E30C 0035AEEC  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8035E310 0035AEF0  38 21 00 10 */	addi r1, r1, 0x10
-/* 8035E314 0035AEF4  7C 08 03 A6 */	mtlr r0
-/* 8035E318 0035AEF8  4E 80 00 20 */	blr 
-}
-#endif
 
-#pragma push
-#pragma peephole on
 void HSD_DObjResolveRefs(HSD_DObj* dobj, HSD_DObjDesc* desc)
 {
     if (dobj == NULL || desc == NULL)
@@ -358,4 +322,3 @@ static void DObjInfoInit(void)
     HSD_DOBJ_INFO(&hsdDObj)->disp = HSD_DObjDisp;
     HSD_DOBJ_INFO(&hsdDObj)->load = DObjLoad;
 }
-#pragma pop

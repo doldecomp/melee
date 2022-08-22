@@ -1,7 +1,7 @@
 #ifndef _grshrine_h_
 #define _grshrine_h_
 
-#include <stage.h>
+#include <melee/gr/stage.h>
 
 #include <sysdolphin/baselib/gobj.h>
 
