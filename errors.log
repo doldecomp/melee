@@ -1,0 +1,309 @@
+~/Documents/Code/melee-root/melee ~/Documents/Code/melee-root/melee
+Running make with NON_MATCHING=0 GENERATE_MAP=1 EPILOGUE_PROCESS=1
+Compiling (vanilla) src/MSL/trigf.c
+cp build/ssbm.us.1.2/vanilla/src/MSL/trigf.c.o build/ssbm.us.1.2/src/MSL/trigf.c.o
+Assembling asm/MSL/trigf.s
+Assembling asm/MSL/math.s
+Assembling asm/MetroTRK/mainloop.s
+Assembling asm/MetroTRK/nubevent.s
+Assembling asm/MetroTRK/nubinit.s
+Assembling asm/MetroTRK/msg.s
+Assembling asm/MetroTRK/msgbuf.s
+Assembling asm/MetroTRK/serpoll.s
+Assembling asm/MetroTRK/dispatch.s
+Assembling asm/MetroTRK/msghndlr.s
+Assembling asm/MetroTRK/flush_cache.s
+Assembling asm/MetroTRK/mem_TRK.s
+Assembling asm/MetroTRK/targimpl.s
+Assembling asm/MetroTRK/dolphin_trk.s
+Assembling asm/MetroTRK/mpc_7xx_603e.s
+Assembling asm/MetroTRK/main_TRK.s
+Assembling asm/MetroTRK/dolphin_trk_glue.s
+Assembling asm/MetroTRK/targcont.s
+Compiling (vanilla) src/dolphin/amcstubs/AmcExi2Stubs.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/amcstubs/AmcExi2Stubs.c.o build/ssbm.us.1.2/src/dolphin/amcstubs/AmcExi2Stubs.c.o
+Assembling asm/dolphin/OdemuExi2/DebuggerDriver.s
+Assembling asm/dolphin/hio/hio.s
+Assembling asm/dolphin/mcc/mcc.s
+Assembling asm/dolphin/mcc/fio.s
+Assembling asm/dolphin/thp/THPDec.s
+Assembling asm/dolphin/jpeg/jpegdec.s
+Compiling (vanilla) src/dolphin/base/PPCArch.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/base/PPCArch.c.o build/ssbm.us.1.2/src/dolphin/base/PPCArch.c.o
+Compiling (vanilla) src/dolphin/db/db.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/db/db.c.o build/ssbm.us.1.2/src/dolphin/db/db.c.o
+Compiling (vanilla) src/dolphin/dsp/dsp.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/dsp/dsp.c.o build/ssbm.us.1.2/src/dolphin/dsp/dsp.c.o
+Assembling asm/dolphin/dsp/dsp.s
+Compiling (vanilla) src/dolphin/dsp/dsp_debug.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/dsp/dsp_debug.c.o build/ssbm.us.1.2/src/dolphin/dsp/dsp_debug.c.o
+Assembling asm/dolphin/dsp/dsp_task.s
+Assembling asm/dolphin/dvd/dvdlow.s
+Assembling asm/dolphin/dvd/dvdfs.s
+Assembling asm/dolphin/dvd/dvd.s
+Assembling asm/dolphin/dvd/dvdqueue.s
+Assembling asm/dolphin/dvd/dvderror.s
+Compiling (vanilla) src/dolphin/dvd/fstload.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/dvd/fstload.c.o build/ssbm.us.1.2/src/dolphin/dvd/fstload.c.o
+Assembling asm/dolphin/gx/GXInit.s
+Compiling (vanilla) src/dolphin/gx/GXFifo.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/gx/GXFifo.c.o build/ssbm.us.1.2/src/dolphin/gx/GXFifo.c.o
+Assembling asm/dolphin/gx/GXAttr.s
+Compiling (vanilla) src/dolphin/gx/GXMisc.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/gx/GXMisc.c.o build/ssbm.us.1.2/src/dolphin/gx/GXMisc.c.o
+Compiling (vanilla) src/dolphin/gx/GXGeometry.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/gx/GXGeometry.c.o build/ssbm.us.1.2/src/dolphin/gx/GXGeometry.c.o
+Assembling asm/dolphin/gx/GXFrameBuf.s
+Compiling (vanilla) src/dolphin/gx/GXLight.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/gx/GXLight.c.o build/ssbm.us.1.2/src/dolphin/gx/GXLight.c.o
+Assembling asm/dolphin/gx/GXTexture.s
+Assembling asm/dolphin/gx/GXBump.s
+Compiling (vanilla) src/dolphin/gx/GXTev.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/gx/GXTev.c.o build/ssbm.us.1.2/src/dolphin/gx/GXTev.c.o
+Assembling asm/dolphin/gx/GXPixel.s
+Assembling asm/dolphin/gx/GXStubs.s
+Compiling (vanilla) src/dolphin/gx/GXDisplayList.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/gx/GXDisplayList.c.o build/ssbm.us.1.2/src/dolphin/gx/GXDisplayList.c.o
+Assembling asm/dolphin/gx/GXTransform.s
+Assembling asm/dolphin/gx/GXPerf.s
+Assembling asm/dolphin/mtx/mtx.s
+Assembling asm/dolphin/mtx/mtxvec.s
+Assembling asm/dolphin/mtx/mtx44.s
+Assembling asm/dolphin/mtx/vec.s
+Assembling asm/dolphin/os/OS.s
+Assembling asm/dolphin/os/OSAlarm.s
+Compiling (vanilla) src/dolphin/os/OSAlloc.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/os/OSAlloc.c.o build/ssbm.us.1.2/src/dolphin/os/OSAlloc.c.o
+Assembling asm/dolphin/os/OSAlloc.s
+Compiling (vanilla) src/dolphin/os/OSArena.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/os/OSArena.c.o build/ssbm.us.1.2/src/dolphin/os/OSArena.c.o
+Assembling asm/dolphin/os/OSAudioSystem.s
+Assembling asm/dolphin/os/OSCache.s
+Assembling asm/dolphin/os/OSContext.s
+Assembling asm/dolphin/os/OSError.s
+Assembling asm/dolphin/os/OSExi.s
+Assembling asm/dolphin/os/OSFont.s
+Assembling asm/dolphin/os/OSInterrupt.s
+Compiling (vanilla) src/dolphin/os/OSLink.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/os/OSLink.c.o build/ssbm.us.1.2/src/dolphin/os/OSLink.c.o
+Assembling asm/dolphin/os/OSMemory.s
+Assembling asm/dolphin/os/OSMutex.s
+Assembling asm/dolphin/os/OSReboot.s
+Assembling asm/dolphin/os/OSReset.s
+Assembling asm/dolphin/os/OSResetSW.s
+Assembling asm/dolphin/os/OSRtc.s
+Assembling asm/dolphin/os/OSSerial.s
+Assembling asm/dolphin/os/OSSync.s
+Assembling asm/dolphin/os/OSThread.s
+Assembling asm/dolphin/os/OSTime.s
+Assembling asm/dolphin/os/OSUartExi.s
+Assembling asm/dolphin/os/init/__ppc_eabi_init.s
+Compiling (vanilla) src/dolphin/os/init/__ppc_eabi_init.c
+cp build/ssbm.us.1.2/vanilla/src/dolphin/os/init/__ppc_eabi_init.c.o build/ssbm.us.1.2/src/dolphin/os/init/__ppc_eabi_init.c.o
+Assembling asm/dolphin/pad/Padclamp.s
+Assembling asm/dolphin/pad/Pad.s
+Assembling asm/dolphin/vi/vi.s
+Assembling asm/dolphin/ai/ai.s
+Assembling asm/dolphin/ar/ar.s
+Assembling asm/dolphin/ar/arq.s
+Assembling asm/dolphin/card/CARDBios.s
+Assembling asm/dolphin/card/CARDUnlock.s
+Assembling asm/dolphin/card/CARDRdrw.s
+Assembling asm/dolphin/card/CARDBlock.s
+Assembling asm/dolphin/card/CARDDir.s
+Assembling asm/dolphin/card/CARDCheck.s
+Assembling asm/dolphin/card/CARDMount.s
+Assembling asm/dolphin/card/CARDFormat.s
+Assembling asm/dolphin/card/CARDOpen.s
+Assembling asm/dolphin/card/CARDCreate.s
+Assembling asm/dolphin/card/CARDRead.s
+Assembling asm/dolphin/card/CARDWrite.s
+Assembling asm/dolphin/card/CARDDelete.s
+Assembling asm/dolphin/card/CARDStat.s
+Assembling asm/dolphin/card/CARDRename.s
+Assembling asm/dolphin/ax/AX.s
+Assembling asm/dolphin/ax/AXAlloc.s
+Compiling (vanilla) src/sysdolphin/baselib/dobj.c
+Compiling (profile) src/sysdolphin/baselib/dobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/dobj.c.o
+Compiling (vanilla) src/sysdolphin/baselib/tobj.c
+Compiling (profile) src/sysdolphin/baselib/tobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/tobj.c.o
+Assembling asm/sysdolphin/baselib/tobj.s
+Assembling asm/sysdolphin/baselib/state.s
+Compiling (vanilla) src/sysdolphin/baselib/tev.c
+Compiling (profile) src/sysdolphin/baselib/tev.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/tev.c.o
+Assembling asm/sysdolphin/baselib/tev.s
+Compiling (vanilla) src/sysdolphin/baselib/mobj.c
+Compiling (profile) src/sysdolphin/baselib/mobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/mobj.c.o
+Assembling asm/sysdolphin/baselib/mobj.s
+Compiling (vanilla) src/sysdolphin/baselib/aobj.c
+Compiling (profile) src/sysdolphin/baselib/aobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/aobj.c.o
+Assembling asm/sysdolphin/baselib/aobj.s
+Compiling (vanilla) src/sysdolphin/baselib/lobj.c
+Compiling (profile) src/sysdolphin/baselib/lobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/lobj.c.o
+Assembling asm/sysdolphin/baselib/lobj.s
+Compiling (vanilla) src/sysdolphin/baselib/cobj.c
+Compiling (profile) src/sysdolphin/baselib/cobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/cobj.c.o
+Assembling asm/sysdolphin/baselib/cobj.s
+Compiling (vanilla) src/sysdolphin/baselib/fobj.c
+Compiling (profile) src/sysdolphin/baselib/fobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/fobj.c.o
+Assembling asm/sysdolphin/baselib/fobj.s
+Compiling (vanilla) src/sysdolphin/baselib/pobj.c
+Compiling (profile) src/sysdolphin/baselib/pobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/pobj.c.o
+Assembling asm/sysdolphin/baselib/pobj.s
+Compiling (vanilla) src/sysdolphin/baselib/jobj.c
+Compiling (profile) src/sysdolphin/baselib/jobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/jobj.c.o
+Assembling asm/sysdolphin/baselib/jobj.s
+Compiling (vanilla) src/sysdolphin/baselib/displayfunc.c
+Compiling (profile) src/sysdolphin/baselib/displayfunc.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/displayfunc.c.o
+Assembling asm/sysdolphin/baselib/displayfunc.s
+Compiling (vanilla) src/sysdolphin/baselib/initialize.c
+Compiling (profile) src/sysdolphin/baselib/initialize.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/initialize.c.o
+Assembling asm/sysdolphin/baselib/video.s
+Compiling (vanilla) src/sysdolphin/baselib/controller.c
+Compiling (profile) src/sysdolphin/baselib/controller.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/controller.c.o
+Assembling asm/sysdolphin/baselib/controller.s
+Compiling (vanilla) src/sysdolphin/baselib/rumble.c
+Compiling (profile) src/sysdolphin/baselib/rumble.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/rumble.c.o
+Assembling asm/sysdolphin/baselib/spline.s
+Compiling (vanilla) src/sysdolphin/baselib/mtx.c
+Compiling (profile) src/sysdolphin/baselib/mtx.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/mtx.c.o
+Compiling (vanilla) src/sysdolphin/baselib/util.c
+Compiling (profile) src/sysdolphin/baselib/util.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/util.c.o
+Compiling (vanilla) src/sysdolphin/baselib/objalloc.c
+Compiling (profile) src/sysdolphin/baselib/objalloc.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/objalloc.c.o
+Assembling asm/sysdolphin/baselib/objalloc.s
+Compiling (vanilla) src/sysdolphin/baselib/robj.c
+Compiling (profile) src/sysdolphin/baselib/robj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/robj.c.o
+Assembling asm/sysdolphin/baselib/robj.s
+Compiling (vanilla) src/sysdolphin/baselib/id.c
+Compiling (profile) src/sysdolphin/baselib/id.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/id.c.o
+Compiling (vanilla) src/sysdolphin/baselib/wobj.c
+Compiling (profile) src/sysdolphin/baselib/wobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/wobj.c.o
+Assembling asm/sysdolphin/baselib/fog.s
+Assembling asm/sysdolphin/baselib/perf.s
+Compiling (vanilla) src/sysdolphin/baselib/list.c
+Compiling (profile) src/sysdolphin/baselib/list.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/list.c.o
+Compiling (vanilla) src/sysdolphin/baselib/object.c
+Compiling (profile) src/sysdolphin/baselib/object.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/object.c.o
+Assembling asm/sysdolphin/baselib/quatlib.s
+Compiling (vanilla) src/sysdolphin/baselib/memory.c
+Compiling (profile) src/sysdolphin/baselib/memory.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/memory.c.o
+Compiling (vanilla) src/sysdolphin/baselib/shadow.c
+Compiling (profile) src/sysdolphin/baselib/shadow.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/shadow.c.o
+Assembling asm/sysdolphin/baselib/shadow.s
+Compiling (vanilla) src/sysdolphin/baselib/archive.c
+Compiling (profile) src/sysdolphin/baselib/archive.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/archive.c.o
+Compiling (vanilla) src/sysdolphin/baselib/random.c
+Compiling (profile) src/sysdolphin/baselib/random.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/random.c.o
+Assembling asm/sysdolphin/baselib/bytecode.s
+Compiling (vanilla) src/sysdolphin/baselib/class.c
+Compiling (profile) src/sysdolphin/baselib/class.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/class.c.o
+Assembling asm/sysdolphin/baselib/hash.s
+Compiling (vanilla) src/sysdolphin/baselib/texp.c
+Compiling (profile) src/sysdolphin/baselib/texp.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/texp.c.o
+Assembling asm/sysdolphin/baselib/texp.s
+Assembling asm/sysdolphin/baselib/texpdag.s
+Assembling asm/sysdolphin/baselib/leak.s
+Assembling asm/sysdolphin/baselib/debug.s
+Assembling asm/sysdolphin/baselib/synth.s
+Assembling asm/sysdolphin/baselib/AXDriver.s
+Assembling asm/sysdolphin/baselib/devcom.s
+Assembling asm/sysdolphin/baselib/gobjproc.s
+Assembling asm/sysdolphin/baselib/gobjplink.s
+Compiling (vanilla) src/sysdolphin/baselib/gobjgxlink.c
+Compiling (profile) src/sysdolphin/baselib/gobjgxlink.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/gobjgxlink.c.o
+Assembling asm/sysdolphin/baselib/gobjgxlink.s
+Compiling (vanilla) src/sysdolphin/baselib/gobjobject.c
+Compiling (profile) src/sysdolphin/baselib/gobjobject.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/gobjobject.c.o
+Compiling (vanilla) src/sysdolphin/baselib/gobjuserdata.c
+Compiling (profile) src/sysdolphin/baselib/gobjuserdata.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/gobjuserdata.c.o
+Compiling (vanilla) src/sysdolphin/baselib/gobj.c
+Compiling (profile) src/sysdolphin/baselib/gobj.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/gobj.c.o
+Assembling asm/sysdolphin/baselib/gobj.s
+Assembling asm/sysdolphin/baselib/baselib_shared_data_003.s
+Assembling asm/sysdolphin/baselib/baselib_unknown_009.s
+Assembling asm/sysdolphin/baselib/baselib_unknown_010.s
+Assembling asm/sysdolphin/baselib/baselib_unknown_011.s
+Compiling (vanilla) src/sysdolphin/baselib/baselib_unknown_002.c
+Compiling (profile) src/sysdolphin/baselib/baselib_unknown_002.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/baselib_unknown_002.c.o
+Assembling asm/sysdolphin/baselib/baselib_unknown_002.s
+Compiling (vanilla) src/sysdolphin/baselib/psdisp.c
+Compiling (profile) src/sysdolphin/baselib/psdisp.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/psdisp.c.o
+Assembling asm/sysdolphin/baselib/psdisp.s
+Compiling (vanilla) src/sysdolphin/baselib/psdisptev.c
+Compiling (profile) src/sysdolphin/baselib/psdisptev.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/psdisptev.c.o
+Assembling asm/sysdolphin/baselib/psdisptev.s
+Compiling (vanilla) src/sysdolphin/baselib/psappsrt.c
+Compiling (profile) src/sysdolphin/baselib/psappsrt.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/psappsrt.c.o
+Assembling asm/sysdolphin/baselib/psappsrt.s
+Compiling (vanilla) src/sysdolphin/baselib/sobjlib.c
+Compiling (profile) src/sysdolphin/baselib/sobjlib.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/sobjlib.c.o
+Assembling asm/sysdolphin/baselib/sobjlib.s
+Compiling (vanilla) src/sysdolphin/baselib/sislib.c
+Compiling (profile) src/sysdolphin/baselib/sislib.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/sislib.c.o
+Assembling asm/sysdolphin/baselib/sislib.s
+Assembling asm/sysdolphin/baselib/baselib_shared_data_001.s
+Assembling asm/sysdolphin/baselib/baselib_shared_data_002.s
+Assembling asm/melee/db/db_data.s
+Assembling asm/sysdolphin/baselib/baselib_unknown_003.s
+Assembling asm/sysdolphin/baselib/baselib_unknown_004.s
+Assembling asm/sysdolphin/baselib/baselib_unknown_005.s
+Assembling asm/sysdolphin/baselib/baselib_unknown_006.s
+Assembling asm/sysdolphin/baselib/baselib_unknown_007.s
+Compiling (vanilla) src/sysdolphin/baselib/baselib_unknown_008.c
+Compiling (profile) src/sysdolphin/baselib/baselib_unknown_008.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/baselib_unknown_008.c.o
+Compiling (vanilla) src/sysdolphin/baselib/baselib_unknown_001.c
+Compiling (profile) src/sysdolphin/baselib/baselib_unknown_001.c
+Frank is fixing build/ssbm.us.1.2/src/sysdolphin/baselib/baselib_unknown_001.c.o
+Assembling asm/sysdolphin/baselib/baselib_unknown_001.s
+Linking ELF build/ssbm.us.1.2/main.elf
+Building tool tools/elf2dol
+Converting build/ssbm.us.1.2/main.elf to build/ssbm.us.1.2/main.dol
+Progress:
+	Code sections: 446444 / 3882272 bytes in src (11.499555%)
+	Data sections: 40823 / 1211849 bytes in src (3.368654%)
+
+You have 33 of 293 Trophies and completed 1 of 51 Event Matches.
+Code bytes to go for next trophy: 4059
+build/ssbm.us.1.2/main.dol: OK
+Syncing build to expected.
+~/Documents/Code/melee-root/melee

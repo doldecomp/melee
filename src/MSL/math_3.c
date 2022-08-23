@@ -4,8 +4,6 @@
 #define __HI(x) *(int*)&x
 #define __LO(x) *(1+(int*)&x)
 
-extern const float __sincos_poly[];
-extern const float __sincos_on_quadrant[];
 
 float cosf(float x) {
     float z = __two_over_pi * x;
