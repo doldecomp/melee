@@ -309,7 +309,7 @@ void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     }
     if (collData->x134_envFlags & 0x18000)
     {
-        fp->foxVars[0].SpecialHi.rotateModel = atan2f(-collData->x154_groundNormal.x * fp->x2C_facing_direction, collData->x154_groundNormal.y);
+        fp->foxVars[0].SpecialHi.rotateModel = atan2f(-collData->x14C_ground.normal.x * fp->x2C_facing_direction, collData->x14C_ground.normal.y);
         ftFox_SpecialHi_RotateModel(fighter_gobj);
     }
 }
@@ -344,7 +344,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     {
         if (ftFox_SpecialHi_IsBound(fighter_gobj) != FALSE)
         {
-            if ((!(collData->x134_envFlags & 0x18000)) || (!(lbvector_AngleXY(&collData->x154_groundNormal, &fp->x80_self_vel) < (0.01745329238474369f * (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE)))))
+            if ((!(collData->x134_envFlags & 0x18000)) || (!(lbvector_AngleXY(&collData->x14C_ground.normal, &fp->x80_self_vel) < (0.01745329238474369f * (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE)))))
             {
                 ftFox_SpecialHiBound_Action(fighter_gobj);
                 return;
@@ -363,17 +363,17 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
         {
             if (envFlags & 0x6000)
             {
-                var = lbvector_AngleXY(&collData->x190_vec, &fp->x80_self_vel);
+                var = lbvector_AngleXY(&collData->x188_ceiling.normal, &fp->x80_self_vel);
             }
 
             else if (envFlags & 0x3F)
             {
-                var = lbvector_AngleXY(&collData->x168_vec, &fp->x80_self_vel);
+                var = lbvector_AngleXY(&collData->x160_rightwall.normal, &fp->x80_self_vel);
             }
 
             else if (envFlags & 0xFC0)
             {
-                var = lbvector_AngleXY(&collData->x17C_vec, &fp->x80_self_vel);
+                var = lbvector_AngleXY(&collData->x174_leftwall.normal, &fp->x80_self_vel);
             }
 
             else
@@ -462,7 +462,7 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
         sp20.y = fp->input.x624_lstick_y;
         sp20.z = 0.0f;
 
-        if (!(lbvector_AngleXY(&collData->x154_groundNormal, &sp20) < HALF_PI32) && (func_8009A134(fighter_gobj) == FALSE))
+        if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &sp20) < HALF_PI32) && (func_8009A134(fighter_gobj) == FALSE))
         {
             func_8007D9FC(fp);
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI, 0, NULL, 0.0f, 1.0f, 0.0f);
@@ -472,7 +472,7 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
             fp->foxVars[0].SpecialHi.unk = 0.0f;
             fp->foxVars[0].SpecialHi.unk2 = 0.0f;
             fp->xEC_ground_vel = foxAttrs->x74_FOX_FIREFOX_SPEED * fp->x2C_facing_direction;
-            fp->foxVars[0].SpecialHi.rotateModel = atan2f(-collData->x154_groundNormal.x * fp->x2C_facing_direction, collData->x154_groundNormal.y);
+            fp->foxVars[0].SpecialHi.rotateModel = atan2f(-collData->x14C_ground.normal.x * fp->x2C_facing_direction, collData->x14C_ground.normal.y);
             ftFox_SpecialHi_RotateModel(fighter_gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
             fp->cb.x21F8_callback = func_8007F76C;
@@ -756,7 +756,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* fighter_gobj)
 
     if (fp->x6F0_collData.x134_envFlags & 0x18000)
     {
-        sp1C = -atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y);
+        sp1C = -atan2f(collData->x14C_ground.normal.x, collData->x14C_ground.normal.y);
     }
     else
     {

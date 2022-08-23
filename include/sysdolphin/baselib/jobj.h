@@ -81,25 +81,25 @@
 typedef u32 HSD_TrspMask;
 
 typedef struct _HSD_JObj {
-    HSD_Obj object;
-    struct _HSD_JObj* next;
-    struct _HSD_JObj* parent;
-    struct _HSD_JObj* child;
-    u32 flags;
-    union {
+    /* 0x00 - 0x04 */ HSD_Obj object;
+    /* 0x08 */ struct _HSD_JObj* next;
+    /* 0x0C */ struct _HSD_JObj* parent;
+    /* 0x10 */ struct _HSD_JObj* child;
+    /* 0x14 */ u32 flags;
+    /* 0x18 */ union {
         HSD_SList* ptcl;
         struct _HSD_DObj* dobj;
         struct _HSD_Spline* spline;
     } u;
-    Quaternion rotate;
-    Vec scale;
-    Vec translate;
-    Mtx mtx;
-    Vec* scl;
-    MtxPtr envelopemtx;
-    struct _HSD_AObj* aobj;
-    struct _HSD_RObj* robj;
-    u32 id;
+    /* 0x1C */ Quaternion rotate;
+    /* 0x2C */ Vec scale;
+    /* 0x38 */ Vec translate;
+    /* 0x44 */ Mtx mtx;
+    /* 0x74 */ Vec* scl;
+    /* 0x78 */ MtxPtr envelopemtx;
+    /* 0x7C */ struct _HSD_AObj* aobj;
+    /* 0x80 */ struct _HSD_RObj* robj;
+    /* 0x84 */  u32 id;
 } HSD_JObj;
 
 typedef struct _HSD_Joint {
@@ -130,7 +130,7 @@ typedef struct _HSD_JObjInfo {
 
 extern HSD_JObjInfo hsdJObj;
 
-void HSD_JObjCheckDependAll(HSD_JObj* jobj);
+void HSD_JObjCheckDepend(HSD_JObj* jobj);
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);
 void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
@@ -156,7 +156,7 @@ inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
     BOOL result;
     assert_line(564, jobj);
     result = FALSE;
-    if (!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) {
+    if ((jobj->flags & USER_DEF_MTX) == 0 && (jobj->flags & MTX_DIRTY) != 0) {
         result = TRUE;
     }
     return result;
@@ -212,7 +212,7 @@ inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
     assert_line(916, jobj);
     assert_line(917, translate);
     jobj->translate = *translate;
-    if (!(jobj->flags & 0x2000000)) {
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }

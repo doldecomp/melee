@@ -223,7 +223,7 @@ OSHeapHandle HSD_CreateMainHeap(void *lo, void *hi)
         _HSD_RObjForgetMemory,
         NULL,
     };
-    func_80382718("sysdolphin_base_library");
+    hsdForgetClassLibrary("sysdolphin_base_library");
     HSD_ObjInit();
     for (i = 0; cb_table[i] != NULL; i++)
     {

@@ -58,6 +58,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/pl/pl_unknown_001.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/melee/mp/mpcoll.c.o\
 	$(BUILD_DIR)/asm/melee/mp/mpcoll.s.o\
 	$(BUILD_DIR)/asm/melee/mp/mplib.s.o\
 	$(BUILD_DIR)/asm/melee/mp/mpisland.s.o\
@@ -677,6 +678,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/pobj.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/sysdolphin/baselib/jobj.c.o\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/jobj.s.o\
 
 TEXT_O_FILES +=\
@@ -752,7 +754,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/class.c.o\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/class.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/hash.s.o\

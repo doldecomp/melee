@@ -239,7 +239,7 @@ void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj) {
     ftMarioAttributes* sa = GetMarioAttr(fp);
 
     if ((fp->x220C_ftcmd_var3 != 0U) && ((s32)(fp->marioVars[0].SpecialLw.isUnkColl) != 0)) {
-        func_8007592C(fp, 0, fp->x2C_facing_direction * atan2f(fp->x6F0_collData.x154_groundNormal.x, fp->x6F0_collData.x154_groundNormal.y));
+        func_8007592C(fp, 0, fp->x2C_facing_direction * atan2f(fp->x6F0_collData.x14C_ground.normal.x, fp->x6F0_collData.x14C_ground.normal.y));
     } else {
         func_8007592C(fp, 0, 0.0f);
     }

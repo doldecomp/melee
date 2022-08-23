@@ -43,27 +43,27 @@ BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct/*r3*/)
                 if (wallSideFlag_r0)
                 {
 					// compute absolte position of the ECB's left vertex?
-                    ecb_sp18.x = pCollData_r6->xBC_ecbCurrCorrect_left.x;
-                    ecb_sp18.y = pCollData_r6->xBC_ecbCurrCorrect_left.y;
+                    ecb_sp18.x = pCollData_r6->xA4_ecbCurrCorrect.left.x;
+                    ecb_sp18.y = pCollData_r6->xA4_ecbCurrCorrect.left.y;
                     ecb_sp18.z = 0.0f;
                     ecb_sp18.x += fp_r31->xB0_pos.x;
                     ecb_sp18.y += fp_r31->xB0_pos.y;
                     ecb_sp18.z += fp_r31->xB0_pos.z;
 					// compute distance to the wall?
-                    if (!func_800567C0(pCollData_r6->x174_leftwall_index, &ecb_sp18, &wallPos_sp24))
+                    if (!func_800567C0(pCollData_r6->x174_leftwall.index, &ecb_sp18, &wallPos_sp24))
                         wallPos_sp24.x = 0.0f;
                 }
                 else
                 {
 					// compute absolte position of the ECB's right vertex?
-                    ecb_sp18.x = pCollData_r6->xB4_ecbCurrCorrect_right.x;
-                    ecb_sp18.y = pCollData_r6->xB4_ecbCurrCorrect_right.y;
+                    ecb_sp18.x = pCollData_r6->xA4_ecbCurrCorrect.right.x;
+                    ecb_sp18.y = pCollData_r6->xA4_ecbCurrCorrect.right.y;
                     ecb_sp18.z = 0.0f;
                     ecb_sp18.x += fp_r31->xB0_pos.x;
                     ecb_sp18.y += fp_r31->xB0_pos.y;
                     ecb_sp18.z += fp_r31->xB0_pos.z;
 					// compute distance to the wall?
-                    if (!func_800567C0(pCollData_r6->x160_rightwall_index, &ecb_sp18, &wallPos_sp24))
+                    if (!func_800567C0(pCollData_r6->x160_rightwall.index, &ecb_sp18, &wallPos_sp24))
                         wallPos_sp24.x = 0.0f;
                 }
 				// not sure what this computes, I guess it checks if we are close to the wall and move towards it with sufficent speed

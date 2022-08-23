@@ -88,7 +88,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighterObj) {
             f32 temp_f6 = temp_f5 + temp_f3;
 
             if (!func_80056C54(
-                    colldata->x14C_groundIndex, 
+                    colldata->x14C_ground.index, 
                     &fp->xB0_pos, 
                     0, 
                     &vec_list[i], 

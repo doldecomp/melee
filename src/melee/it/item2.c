@@ -835,7 +835,7 @@ void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's position bas
     f32 temp_float;
     f32 temp_float2 = 0.0f;
 
-    temp_float = 0.5f * (item_data->x378_itemColl.xA8 + item_data->x378_itemColl.xB0);
+    temp_float = 0.5f * (item_data->x378_itemColl.xA4_ecbCurrCorrect.top.y + item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y);
     pos->x = item_data->x4C_pos.x + temp_float2;
     pos->y = item_data->x4C_pos.y + temp_float;
     pos->z = item_data->x4C_pos.z + temp_float2;
@@ -850,7 +850,7 @@ void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's ECB position
     Item* item_data = item_gobj->user_data;
     CollData* collData = &item_data->x378_itemColl;
 
-    temp_float2 = (0.5f * (collData->xE8 + collData->xF0));
+    temp_float2 = (0.5f * (collData->xE4_ecb.top.y + collData->xE4_ecb.bottom.y));
     pos->x = collData->x1C_vec.x + temp_float;
     pos->y = collData->x1C_vec.y + temp_float2;
     pos->z = collData->x1C_vec.z + temp_float;
@@ -1307,7 +1307,7 @@ HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir) // Find the closest item to
 void func_8026C334(HSD_GObj* item_gobj, Vec3* pos) // Unknown item position / ECB update //
 {
     Item* item_data = item_gobj->user_data;
-    f32 temp_ECBvar = item_data->x378_itemColl.xB0;
+    f32 temp_ECBvar = item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y;
     f32 temp_zero = 0.0f;
 
     pos->x = item_data->x4C_pos.x + temp_zero;
@@ -1323,7 +1323,7 @@ void func_8026C368(HSD_GObj* item_gobj) // Run bomb item explosion callbacks //
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    if (item_data->x378_itemColl.x34_flags_3 != 0)
+    if (item_data->x378_itemColl.x34_flags.bits.b7 != 0)
     {
         itemID = item_data->x10_item_kind;
         switch (itemID)

@@ -107,7 +107,7 @@ void func_8007CB74(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     u32 unused[2];
 
-    ground_normal = &fp->x6F0_collData.x154_groundNormal;
+    ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     temp_f1 = func_80084A40(fp);
     if (temp_f1 < 1) {
         fp->xE4_ground_accel_1 *= temp_f1;
@@ -123,7 +123,7 @@ void func_8007CB74(HSD_GObj* gobj)
 HSD_GObj* func_8007CC1C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Vec3* ground_normal = &fp->x6F0_collData.x154_groundNormal;
+    Vec3* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     fp->x74_anim_vel.x = +ground_normal->y * fp->xE4_ground_accel_1;
     fp->x74_anim_vel.y = -ground_normal->x * fp->xE4_ground_accel_1;
     fp->x74_anim_vel.z = 0;
@@ -161,7 +161,7 @@ void func_8007CCE8(Fighter* fp)
 {
     Vec3* ground_normal;
     if (fp->xE0_ground_or_air == GA_Ground && fp->xF0_ground_kb_vel == 0) {
-        ground_normal = &fp->x6F0_collData.x154_groundNormal;
+        ground_normal = &fp->x6F0_collData.x14C_ground.normal;
         fp->xF0_ground_kb_vel = fp->x8c_kb_vel.x;
         if (fp->xF0_ground_kb_vel > p_ftCommonData->x164) {
             fp->xF0_ground_kb_vel = p_ftCommonData->x164;
@@ -582,7 +582,7 @@ BOOL func_8007D528(Fighter* fp)
 void func_8007D5BC(Fighter* fp)
 {
     fp->x6F0_collData.x19C = 0;
-    fp->x6F0_collData.x130 &= 0xFFFFFFEF;
+    fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
 }
 
 void func_8007D5D4(Fighter* fp)
@@ -594,7 +594,7 @@ void func_8007D5D4(Fighter* fp)
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = 1;
     fp->x6F0_collData.x19C = 0xA;
-    fp->x6F0_collData.x130 |= 0x10;
+    fp->x6F0_collData.x130_flags |= 0x10;
 }
 
 void func_8007D60C(Fighter* fp)
@@ -608,7 +608,7 @@ void func_8007D60C(Fighter* fp)
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = attr->x168_MaxJumps;
     fp->x6F0_collData.x19C = 5;
-    fp->x6F0_collData.x130 |= 0x10;
+    fp->x6F0_collData.x130_flags |= 0x10;
 }
 
 void func_8007D698(Fighter* fp)
@@ -634,7 +634,7 @@ void func_8007D6A4(Fighter* fp)
     fp->x1969_walljumpUsed = 0;
     fp->x2227_flag.bits.b0 = 0;
     fp->x6F0_collData.x19C = 0;
-    fp->x6F0_collData.x130 &= 0xFFFFFFEF;
+    fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
     if (!func_80084A18(fp->x0_fighter)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID, fp->x10_action_state_index);
         assert_line(686, 0);
@@ -681,7 +681,7 @@ void func_8007D7FC(Fighter* fp)
     fp->x1969_walljumpUsed = 0;
     fp->x2227_flag.bits.b0 = 0;
     fp->x6F0_collData.x19C = 0;
-    fp->x6F0_collData.x130 &= 0xFFFFFFEF;
+    fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
     if (!func_80084A18(fp->x0_fighter)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID, fp->x10_action_state_index);
         assert_line(0x2AE, 0);
@@ -1238,7 +1238,7 @@ void func_8007E3EC(HSD_GObj* gobj)
 
 void func_8007E5AC(Fighter* fp)
 {
-    Vec* ground_normal = &fp->x6F0_collData.x154_groundNormal;
+    Vec* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     f32 tmp = -atan2f(ground_normal->x, ground_normal->y);
     assert_line(1146, fp->ground_or_air == GA_Ground);
     func_80075CB4(fp, 0, tmp);

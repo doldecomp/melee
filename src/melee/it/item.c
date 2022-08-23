@@ -1944,7 +1944,7 @@ void func_802697D4(HSD_GObj* item_gobj) // Item Think - Physics //
         }
         else
         {
-            func_800567C0(item_data->x378_itemColl.x14C_groundIndex, &item_data->x4C_pos, &item_data->x64_vec_unk2);
+            func_800567C0(item_data->x378_itemColl.x14C_ground.index, &item_data->x4C_pos, &item_data->x64_vec_unk2);
         }
     }
     PSVECAdd(&item_data->x4C_pos, &item_data->x64_vec_unk2, &item_data->x4C_pos);

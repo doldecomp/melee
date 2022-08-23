@@ -2148,7 +2148,7 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
             }
 			else
             {
-                Vec3* pNormal = &fp->x6F0_collData.x154_groundNormal;  
+                Vec3* pNormal = &fp->x6F0_collData.x14C_ground.normal;  
                 struct attr* pAttr;
 
 				if (fp->xF0_ground_kb_vel == 0)
@@ -2192,7 +2192,7 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
             }
             else
             {
-                Vec3* pNormal = &fp->x6F0_collData.x154_groundNormal; // ground_normal offset inside fp is 0x844, surface normal points out of the surface. 
+                Vec3* pNormal = &fp->x6F0_collData.x14C_ground.normal; // ground_normal offset inside fp is 0x844, surface normal points out of the surface. 
                 struct attr* pAttr;
                 
                 if (fp->xF4_ground_attacker_shield_kb_vel == 0)
@@ -2301,7 +2301,7 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
 		Vec3 difference; 
 		// I think this function always returns r3=1, but it contains two __assert functions. But I guess these just stop or reset the game.
 		// result is written to where r5 points to, which is 'difference' in this case
-		if (func_800567C0(fp->x6F0_collData.x14C_groundIndex, &fp->xB0_pos, &difference))
+		if (func_800567C0(fp->x6F0_collData.x14C_ground.index, &fp->xB0_pos, &difference))
 			//fp->position += difference
 			PSVECAdd(&fp->xB0_pos, &difference, &fp->xB0_pos);
     }

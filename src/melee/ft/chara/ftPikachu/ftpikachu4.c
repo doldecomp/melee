@@ -259,7 +259,7 @@ void ftPikachu_80126614(HSD_GObj* fighterObj) {
         collData = &fighter2->x6F0_collData;
         pika_attr = fighter2->x2D4_specialAttributes;
         if (collData->x134_envFlags & 0x18000){
-            f32 angle = atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y);
+            f32 angle = atan2f(collData->x14C_ground.normal.x, collData->x14C_ground.normal.y);
             f32 angle2 = (fighter2->x2C_facing_direction * angle) + pika_attr->x68;
             func_8007592C(fighter2, func_8007500C(fighter2, 2), angle2);
         }
@@ -302,8 +302,8 @@ void ftPikachu_801267C8(HSD_GObj* fighterObj) {
 
 
         if (bool0) {
-            f32 tempf = lbvector_AngleXY(&collData->x154_groundNormal, &fp->x80_self_vel);
-            if (tempf > (DEG_TO_RAD * (90.0f + pika_attr->xA0))) {
+            f32 tempf = lbvector_AngleXY(&collData->x14C_ground.normal, &fp->x80_self_vel);
+            if (tempf > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 func_8007D7FC(fp);
                 ftPikachu_ActionChangeUpdateVel_801274AC(fighterObj);
                 return; 
@@ -316,22 +316,22 @@ void ftPikachu_801267C8(HSD_GObj* fighterObj) {
     if (!func_80081298(fighterObj)) {
 
         if (collData->x134_envFlags & 0x6000) {
-            f32 angle = lbvector_AngleXY(&collData->x190_vec, &fp->x80_self_vel);
-            if (angle > (DEG_TO_RAD * (90.0f + pika_attr->xA0))) {
+            f32 angle = lbvector_AngleXY(&collData->x188_ceiling.normal, &fp->x80_self_vel);
+            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(fighterObj);
             }
         }
 
         if (collData->x134_envFlags & 0x3F) {
-            f32 angle = lbvector_AngleXY(&collData->x168_vec, &fp->x80_self_vel);
-            if (angle > (DEG_TO_RAD * (90.0f + pika_attr->xA0))) {
+            f32 angle = lbvector_AngleXY(&collData->x160_rightwall.normal, &fp->x80_self_vel);
+            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(fighterObj);
             }
         }
 
         if (collData->x134_envFlags & 0xFC0) {
-            f32 angle = lbvector_AngleXY(&collData->x17C_vec, &fp->x80_self_vel);
-            if (angle > (DEG_TO_RAD * (90.0f + pika_attr->xA0))) {
+            f32 angle = lbvector_AngleXY(&collData->x174_leftwall.normal, &fp->x80_self_vel);
+            if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(fighterObj);
             }
         }
@@ -370,7 +370,7 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighterObj) {
     collData = &fp->x6F0_collData;
     pika_attr = fp->x2D4_specialAttributes;
     if (fp->x6F0_collData.x134_envFlags & 0x18000) {
-        f32 angle = (fp->x2C_facing_direction * atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y)) + pika_attr->x68;
+        f32 angle = (fp->x2C_facing_direction * atan2f(collData->x14C_ground.normal.x, collData->x14C_ground.normal.y)) + pika_attr->x68;
         func_8007592C(fp, func_8007500C(fp, 2), angle);
     }
     
@@ -409,8 +409,7 @@ void ftPikachu_80126C0C(HSD_GObj* fighterObj) {
         lstick_direction.y = fp->input.x624_lstick_y;
         lstick_direction.z = 0.0f;
 
-        // if the angular difference between the ground normal and the stick < 90° and (some check on the fp)
-        if (!(lbvector_AngleXY(&collData->x154_groundNormal, &lstick_direction) < HALF_PI) && (!func_8009A134(fighterObj))) {
+        if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &lstick_direction) < HALF_PI) && (!func_8009A134(fighterObj))) {
             Fighter* fighter2;
             func_8007D9FC(fp);
             

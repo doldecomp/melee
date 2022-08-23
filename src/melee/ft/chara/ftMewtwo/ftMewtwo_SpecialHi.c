@@ -301,15 +301,15 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     }
     if (func_80081298(fighter_gobj) == FALSE)
     {
-        if ((collData->x134_envFlags & 0x6000) && (lbvector_AngleXY(&collData->x190_vec, &fp->x80_self_vel) > (DEG_TO_RAD * (90.0f + (f32)mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))))
+        if ((collData->x134_envFlags & 0x6000) && (lbvector_AngleXY(&collData->x188_ceiling.normal, &fp->x80_self_vel) > (DEG_TO_RAD * (90.0f + (f32)mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))))
         {
             ftMewtwo_SpecialAirHiLost_Action(fighter_gobj);
         }
-        if ((collData->x134_envFlags & 0x3F) && (lbvector_AngleXY(&collData->x168_vec, &fp->x80_self_vel) > (DEG_TO_RAD * (90.0f + (f32)mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))))
+        if ((collData->x134_envFlags & 0x3F) && (lbvector_AngleXY(&collData->x160_rightwall.normal, &fp->x80_self_vel) > (DEG_TO_RAD * (90.0f + (f32)mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))))
         {
             ftMewtwo_SpecialAirHiLost_Action(fighter_gobj);
         }
-        if ((collData->x134_envFlags & 0xFC0) && (lbvector_AngleXY(&collData->x17C_vec, &fp->x80_self_vel) > (DEG_TO_RAD * (90.0f + (f32)mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))))
+        if ((collData->x134_envFlags & 0xFC0) && (lbvector_AngleXY(&collData->x174_leftwall.normal, &fp->x80_self_vel) > (DEG_TO_RAD * (90.0f + (f32)mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))))
         {
             ftMewtwo_SpecialAirHiLost_Action(fighter_gobj);
         }
@@ -398,7 +398,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* fighter_gobj)
         stickVec.y = fp->input.x624_lstick_y;
         stickVec.z = 0.0f;
 
-        if (!(lbvector_AngleXY(&collData->x154_groundNormal, &stickVec) < HALF_PI32) && (func_8009A134(fighter_gobj) == FALSE))
+        if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &stickVec) < HALF_PI32) && (func_8009A134(fighter_gobj) == FALSE))
         {
             func_8007D9FC(fp);
 

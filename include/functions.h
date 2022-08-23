@@ -374,8 +374,6 @@ void func_800867E8();
 
 void func_8008688C();
 
-s32 func_80086BE0(struct _HSD_GObj *);
-
 s32 func_80087120(struct _HSD_GObj *);
 
 s32 func_800872A4(struct _HSD_GObj *);
@@ -814,12 +812,7 @@ f32 sinf(f32);
 
 #pragma region "asm/dolphin/mtx/mtx.s"
 void PSMTXIdentity(Mtx m);
-void PSMTXCopy(Mtx src, Mtx dst);
-void PSMTXConcat(Mtx, Mtx, Mtx);
-void PSMTXTranspose(Mtx src, Mtx xPose);
 u32 PSMTXInverse(const Mtx src, Mtx inv);
-void PSMTXRotRad(Mtx m, u8 axis, f32 rad);
-void PSMTXRotTrig(Mtx m, u8 axis, f32 sin, f32 cos);
 void PSMTXRotAxisRad(Mtx m, const Vec *axis, f32 rad);
 void PSMTXTrans(Mtx m, f32 x_trans, f32 y_trans, f32 z_trans);
 void PSMTXScale(Mtx m, f32 x_scale, f32 y_scale, f32 z_scale);
@@ -891,7 +884,6 @@ f32 splGetHelmite(f32, f32, f32, f32, f32, f32);
 
 void splArcLengthPoint(Vec *, struct _HSD_Spline *, f32);
 void func_80379310();
-
 void func_8037A250();
 
 void *func_8037ABC8(struct _HSD_ObjAllocData *data);
@@ -907,14 +899,6 @@ void *func_8037CF98(struct _HSD_IDTable *table, u32 id, u8 *success);
 
 void func_8037EE0C(Vec *, Quaternion *);
 void func_8037EF28(Quaternion *, Quaternion *, Quaternion *, f32);
-
-void hsdInitClassInfo();
-
-void *hsdNew();
-
-BOOL hsdIsDescendantOf(void *, void *);
-
-struct _HSD_ClassInfo *hsdSearchClassInfo(char *);
 
 void func_803881E4(void);
 void HSD_Panic(char *, u32, char *);

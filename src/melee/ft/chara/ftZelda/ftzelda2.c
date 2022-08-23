@@ -329,19 +329,19 @@ void ftZelda_80139D60(HSD_GObj* fighterObj) {
     
     if (func_80081298(fighterObj) == 0) {
         if ((collData->x134_envFlags & 0x6000) != 0) {
-            f32 angle1 = lbvector_AngleXY(&collData->x190_vec, &fp->x80_self_vel);
+            f32 angle1 = lbvector_AngleXY(&collData->x188_ceiling.normal, &fp->x80_self_vel);
             if (angle1 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
         }
         if ((collData->x134_envFlags & 0x3F) != 0) {
-            f32 angle2 = lbvector_AngleXY(&collData->x168_vec, &fp->x80_self_vel);
+            f32 angle2 = lbvector_AngleXY(&collData->x160_rightwall.normal, &fp->x80_self_vel);
             if (angle2 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
         }
         if ((collData->x134_envFlags & 0xFC0) != 0) {
-            f32 angle3 = lbvector_AngleXY(&collData->x17C_vec, &fp->x80_self_vel);
+            f32 angle3 = lbvector_AngleXY(&collData->x174_leftwall.normal, &fp->x80_self_vel);
             if (angle3 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
@@ -435,7 +435,7 @@ void ftZelda_8013A058(HSD_GObj* fighterObj) {
     }
 
     if (!(var_f31 < attributes->x50)) {
-        groundVector = &collData->x154_groundNormal;
+        groundVector = &collData->x14C_ground.normal;
         inputVector.x = fp->input.x620_lstick_x;
         inputVector.y = fp->input.x624_lstick_y;
         inputVector.z = 0;
