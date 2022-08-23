@@ -199,3 +199,8 @@ OSHeapHandle OSCreateHeap(void *start, void *end)
     }
     return -1;
 }
+
+void OSDestroyHeap(size_t idx)
+{
+    *(s32 *)&HeapArray[idx] = -1;
+}

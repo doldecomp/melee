@@ -2,14 +2,6 @@
 
 .section .text  # 0x80343E44 - 0x803444C4
 
-.global OSDestroyHeap
-OSDestroyHeap:
-/* 80344154 00340D34  1C 03 00 0C */	mulli r0, r3, 0xc
-/* 80344158 00340D38  80 6D BC C0 */	lwz r3, HeapArray@sda21(r13)
-/* 8034415C 00340D3C  38 80 FF FF */	li r4, -1
-/* 80344160 00340D40  7C 83 01 2E */	stwx r4, r3, r0
-/* 80344164 00340D44  4E 80 00 20 */	blr 
-
 .global OSCheckHeap
 OSCheckHeap:
 /* 80344168 00340D48  7C 08 02 A6 */	mflr r0

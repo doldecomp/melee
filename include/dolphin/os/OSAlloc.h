@@ -23,6 +23,7 @@ typedef int OSHeapHandle;
 
 void *OSInitAlloc(void *, void *, int);
 OSHeapHandle OSCreateHeap(void *, void *);
+void OSDestroyHeap(size_t idx);
 OSHeapHandle OSSetCurrentHeap(OSHeapHandle);
 void *OSAllocFromHeap(OSHeapHandle, u32);
 long OSCheckHeap(OSHeapHandle);
