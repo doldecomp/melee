@@ -2,39 +2,6 @@
 
 .section .text  # 0x80343E44 - 0x803444C4
 
-.global OSInitAlloc
-OSInitAlloc:
-/* 80344078 00340C58  1C E5 00 0C */	mulli r7, r5, 0xc
-/* 8034407C 00340C5C  90 6D BC C0 */	stw r3, HeapArray@sda21(r13)
-/* 80344080 00340C60  90 AD BC C4 */	stw r5, NumHeaps@sda21(r13)
-/* 80344084 00340C64  38 C0 00 00 */	li r6, 0
-/* 80344088 00340C68  38 66 00 00 */	addi r3, r6, 0
-/* 8034408C 00340C6C  39 00 00 00 */	li r8, 0
-/* 80344090 00340C70  38 A0 FF FF */	li r5, -1
-/* 80344094 00340C74  48 00 00 20 */	b lbl_803440B4
-lbl_80344098:
-/* 80344098 00340C78  80 0D BC C0 */	lwz r0, HeapArray@sda21(r13)
-/* 8034409C 00340C7C  39 08 00 01 */	addi r8, r8, 1
-/* 803440A0 00340C80  7D 20 32 14 */	add r9, r0, r6
-/* 803440A4 00340C84  90 A9 00 00 */	stw r5, 0(r9)
-/* 803440A8 00340C88  38 C6 00 0C */	addi r6, r6, 0xc
-/* 803440AC 00340C8C  90 69 00 08 */	stw r3, 8(r9)
-/* 803440B0 00340C90  90 69 00 04 */	stw r3, 4(r9)
-lbl_803440B4:
-/* 803440B4 00340C94  80 0D BC C4 */	lwz r0, NumHeaps@sda21(r13)
-/* 803440B8 00340C98  7C 08 00 00 */	cmpw r8, r0
-/* 803440BC 00340C9C  41 80 FF DC */	blt lbl_80344098
-/* 803440C0 00340CA0  80 6D BC C0 */	lwz r3, HeapArray@sda21(r13)
-/* 803440C4 00340CA4  54 80 00 34 */	rlwinm r0, r4, 0, 0, 0x1a
-/* 803440C8 00340CA8  38 80 FF FF */	li r4, -1
-/* 803440CC 00340CAC  90 0D BC CC */	stw r0, ArenaEnd@sda21(r13)
-/* 803440D0 00340CB0  7C 63 3A 14 */	add r3, r3, r7
-/* 803440D4 00340CB4  38 03 00 1F */	addi r0, r3, 0x1f
-/* 803440D8 00340CB8  90 8D A5 68 */	stw r4, __OSCurrHeap@sda21(r13)
-/* 803440DC 00340CBC  54 03 00 34 */	rlwinm r3, r0, 0, 0, 0x1a
-/* 803440E0 00340CC0  90 6D BC C8 */	stw r3, ArenaStart@sda21(r13)
-/* 803440E4 00340CC4  4E 80 00 20 */	blr 
-
 .global OSCreateHeap
 OSCreateHeap:
 /* 803440E8 00340CC8  80 CD BC C4 */	lwz r6, NumHeaps@sda21(r13)
