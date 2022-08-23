@@ -60,6 +60,14 @@ typedef enum _GXPTTexMtx
     GX_PTIDENTITY = 125
 } GXPTTexMtx;
 
+typedef enum _GXTexWrapMode
+{
+    GX_CLAMP,
+    GX_REPEAT,
+    GX_MIRROR,
+    GX_MAX_TEXWRAPMODE
+} GXTexWrapMode;
+
 typedef struct {
 	u8 pad[GX_FIFO_OBJSIZE];
 } GXFifoObj;

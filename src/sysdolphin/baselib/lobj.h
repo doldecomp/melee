@@ -4,9 +4,10 @@
 #include <global.h>
 
 #include <dolphin/types.h>
+#include <dolphin/gx/GXLight.h>
 
-#include "sysdolphin/baselib/object.h"
-#include "sysdolphin/baselib/fobj.h"
+#include <sysdolphin/baselib/object.h>
+#include <sysdolphin/baselib/fobj.h>
 #include "sysdolphin/baselib/wobj.h"
 
 #define HSD_A_L_LITC_R 9
@@ -162,11 +163,14 @@ void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
 void HSD_LObjGetLightVector(HSD_LObj *lobj, VecPtr dir);
 void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess, u32 unused);
 
-void HSD_LObjGetPosition(HSD_LObj*, VecPtr);
-void HSD_LObjGetInterest(HSD_LObj*, VecPtr);
+BOOL HSD_LObjGetPosition(HSD_LObj*, Vec const*);
+BOOL HSD_LObjGetInterest(HSD_LObj*, Vec const*);
 
 HSD_WObj* HSD_LObjGetPositionWObj(HSD_LObj* lobj);
 HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj);
+void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe);
+void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
+
 s32 HSD_LightID2Index(GXLightID);
 
 #endif

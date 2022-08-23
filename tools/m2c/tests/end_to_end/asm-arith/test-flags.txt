@@ -1,0 +1,1 @@
+-D sym1 -D sym2=0x10 -U sym3

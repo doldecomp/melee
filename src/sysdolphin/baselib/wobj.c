@@ -1,15 +1,12 @@
-#include "sysdolphin/baselib/wobj.h"
-
-#include "sysdolphin/baselib/jobj.h"
-#include "sysdolphin/baselib/robj.h"
+#include <sysdolphin/baselib/wobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/robj.h>
 
 void WObjInfoInit(void);
 
 HSD_WObjInfo hsdWObj = { WObjInfoInit };
 
 static HSD_WObjInfo* default_class = NULL;
-
-static char lbl_804D5EF8[7] = "wobj.c\0";
 
 void HSD_WObjRemoveAnim(HSD_WObj* wobj)
 {
@@ -56,18 +53,10 @@ static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
                 *fval = 1.0;
             }
 
-            if (wobj->aobj == NULL) {
-                __assert(lbl_804D5EF8, 148, "wobj->aobj");
-            }
-
+            assert_line(148, wobj->aobj);
             jp = (HSD_JObj*)wobj->aobj->hsd_obj;
-            if (jp == NULL) {
-                __assert(lbl_804D5EF8, 150, "jp");
-            }
-
-            if (jp->u.spline == NULL) {
-                __assert(lbl_804D5EF8, 151, "jp->u.spline");
-            }
+            assert_line(150, jp);
+            assert_line(151, jp->u.spline);
 
             splArcLengthPoint(&p, jp->u.spline, *fval);
             HSD_WObjSetPosition(wobj, &p);
@@ -125,14 +114,10 @@ void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc)
 void HSD_WObjSetDefaultClass(HSD_WObjInfo* info)
 {
     if (info) {
-        if (!hsdIsDescendantOf(info, &hsdWObj)) {
-            __assert(lbl_804D5EF8, 221, "hsdIsDescendantOf(info, &hsdWObj)"); // The line number here is totally made up, this function is removed in practice but the string isn't
-        }
+        assert_line(221, hsdIsDescendantOf(info, &hsdWObj)); // The line number here is totally made up, this function is removed in practice but the string isn't
     }
     default_class = info;
 }
-
-static char lbl_804D5F04[5] = "wobj\0";
 
 HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc)
 {
@@ -143,9 +128,7 @@ HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc)
             wobj = HSD_WObjAlloc();
         } else {
             wobj = hsdNew(info);
-            if (wobj == NULL) {
-                __assert(lbl_804D5EF8, 252, lbl_804D5F04);
-            }
+            assert_line(252, wobj);
         }
         HSD_WOBJ_METHOD(wobj)->load(wobj, desc);
         return wobj;
@@ -236,52 +219,12 @@ void HSD_WObjGetPosition(HSD_WObj* wobj, Vec* vec)
     *vec = wobj->pos;
 }
 
-// Fuck frank.py, all my homies hate frank.py
-#ifdef NON_MATCHING
-#pragma push
-#pragma peephole on
 HSD_WObj* HSD_WObjAlloc(void) {
     HSD_WObj* wobj = (HSD_WObj*)hsdNew((HSD_ClassInfo*)(default_class ? default_class : &hsdWObj));
-    if (wobj == NULL){
-        __assert("wobj.c", 591, "wobj");
-    }
+    assert_line(591, wobj);
     return wobj;
 }
-#pragma pop
-#else
-asm HSD_WObj* HSD_WObjAlloc(void) {
-    nofralloc
-/* 8037D808 0037A3E8  7C 08 02 A6 */	mflr r0
-/* 8037D80C 0037A3EC  90 01 00 04 */	stw r0, 4(r1)
-/* 8037D810 0037A3F0  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8037D814 0037A3F4  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8037D818 0037A3F8  80 6D C0 50 */	lwz r3, default_class(r13)
-/* 8037D81C 0037A3FC  28 03 00 00 */	cmplwi r3, 0
-/* 8037D820 0037A400  41 82 00 08 */	beq lbl_8037D828
-/* 8037D824 0037A404  48 00 00 0C */	b lbl_8037D830
-lbl_8037D828:
-/* 8037D828 0037A408  3C 60 80 40 */	lis r3, hsdWObj@ha
-/* 8037D82C 0037A40C  38 63 6F D0 */	addi r3, r3, hsdWObj@l
-lbl_8037D830:
-/* 8037D830 0037A410  48 00 4B 15 */	bl hsdNew
-/* 8037D834 0037A414  7C 7F 1B 79 */	or. r31, r3, r3
-/* 8037D838 0037A418  40 82 00 14 */	bne lbl_8037D84C
-/* 8037D83C 0037A41C  38 6D A8 58 */	addi r3, r13, lbl_804D5EF8
-/* 8037D840 0037A420  38 80 02 4F */	li r4, 0x24f
-/* 8037D844 0037A424  38 AD A8 64 */	addi r5, r13, lbl_804D5F04
-/* 8037D848 0037A428  48 00 A9 D9 */	bl __assert
-lbl_8037D84C:
-/* 8037D84C 0037A42C  7F E3 FB 78 */	mr r3, r31
-/* 8037D850 0037A430  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8037D854 0037A434  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8037D858 0037A438  38 21 00 10 */	addi r1, r1, 0x10
-/* 8037D85C 0037A43C  7C 08 03 A6 */	mtlr r0
-/* 8037D860 0037A440  4E 80 00 20 */	blr 
-}
-#endif
 
-#pragma push
-#pragma peephole on
 static void WObjRelease(HSD_Class* o)
 {
     HSD_WObj* wobj = (HSD_WObj*)o;
@@ -305,4 +248,3 @@ static void WObjInfoInit(void)
     HSD_CLASS_INFO(&hsdWObj)->amnesia = WObjAmnesia;
     HSD_WOBJ_INFO(&hsdWObj)->load = WObjLoad;
 }
-#pragma pop

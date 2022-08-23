@@ -1,17 +1,58 @@
-#include "grstory.h"
+#include <grstory.h>
 
+#include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 
 extern StageInfo stage_info;
 
-struct {
+static StageCallbacks lbl_803E26F0[4] = {
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    }, {
+        func_801E31C0,
+        func_801E3224,
+        func_801E322C,
+        func_801E3230,
+    }, {
+        func_801E3370,
+        func_801E33D8,
+        func_801E33E0,
+        func_801E3414,
+    }, {
+        func_801E3234,
+        func_801E332C,
+        func_801E3334,
+        func_801E336C,
+        0xC0000000,
+    },
+};
+
+static struct {
     f32 unk0;
     f32 unk4;
     f32 unk8;
     f32 vars[7];
 }* lbl_804D69B8;
 
-void func_801E302C(void)
+StageData lbl_803E274C = {
+    0x0000000A,
+    lbl_803E26F0,
+    "/GrSt.dat",
+    func_801E3030,
+    func_801E302C,
+    func_801E30A8,
+    func_801E30AC,
+    func_801E30D0,
+    func_801E36D0,
+    func_801E36D8,
+    0x00000001,
+};
+
+
+static void func_801E302C(s32)
 {
 }
 
@@ -28,16 +69,16 @@ void func_801E3030(void)
     func_801C3BB4();
 }
 
-void lbl_801E30A8(void)
+void func_801E30A8(void)
 {
 }
 
-void lbl_801E30AC(void)
+void func_801E30AC(void)
 {
     func_801CAE04(0);
 }
 
-s32 lbl_801E30D0(void)
+s32 func_801E30D0(void)
 {
     return 0;
 }
@@ -45,13 +86,13 @@ s32 lbl_801E30D0(void)
 HSD_GObj* func_801E30D8(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &lbl_803E26F0.callbacks[arg0];
+    StageCallbacks* callbacks = &lbl_803E26F0[arg0];
 
     gobj = func_801C14D0(arg0);
     if (gobj != NULL) {
         Map* map = gobj->user_data;
-        map->x8 = 0;
-        map->xC = 0;
+        map->x8_callback = NULL;
+        map->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
         if (callbacks->callback3 != NULL) {
             map->x1C_callback = callbacks->callback3;
@@ -65,13 +106,13 @@ HSD_GObj* func_801E30D8(s32 arg0)
             func_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport(lbl_803E26F0.str1, lbl_803E26F0.str2, 0xDC, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220, arg0);
     }
 
     return gobj;
 }
 
-void lbl_801E31C0(HSD_GObj* gobj)
+void func_801E31C0(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
     int unused[2];
@@ -80,16 +121,16 @@ void lbl_801E31C0(HSD_GObj* gobj)
     func_801C8858(func_801C3FA4(gobj, 1), 0x20000000);
 }
 
-s32 lbl_801E3224(void)
+s32 func_801E3224(void)
 {
     return 0;
 }
 
-void lbl_801E322C(void)
+void func_801E322C(HSD_GObj*)
 {
 }
 
-void lbl_801E3230(void)
+void func_801E3230(void)
 {
 }
 
@@ -99,7 +140,7 @@ inline s32 randi(s32 max)
 }
 
 /* Initialize shyguys */
-void lbl_801E3234(HSD_GObj* gobj)
+void func_801E3234(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
@@ -111,19 +152,19 @@ void lbl_801E3234(HSD_GObj* gobj)
     map->x10_flags.b5 = 1;
 }
 
-s32 lbl_801E332C(void)
+s32 func_801E332C(void)
 {
     return 0;
 }
 
-void lbl_801E3334(HSD_GObj* gobj)
+void func_801E3334(HSD_GObj* gobj)
 {
     func_801E3418(gobj);
     func_801C2FE0(gobj);
     func_800115F4();
 }
 
-void lbl_801E336C()
+void func_801E336C()
 {
 }
 
@@ -132,10 +173,10 @@ typedef struct {
     s32 x14;
     u8 x18_fill[0xC4 - 0x18];
     s16 xC4;
-    void* xC8;
+    struct _HSD_JObj* xC8;
 } UnkUserData;
 
-void lbl_801E3370(HSD_GObj* gobj)
+void func_801E3370(HSD_GObj* gobj)
 {
     UnkUserData* data = gobj->user_data;
     int unused[2];
@@ -145,18 +186,18 @@ void lbl_801E3370(HSD_GObj* gobj)
     data->xC8 = func_801C3FA4(gobj, 1);
 }
 
-s32 lbl_801E33D8(void)
+s32 func_801E33D8(void)
 {
     return 0;
 }
 
-void lbl_801E33E0(HSD_GObj* gobj)
+void func_801E33E0(HSD_GObj* gobj)
 {
     func_801C2FE0(gobj);
     func_801E366C(gobj);
 }
 
-void lbl_801E3414(void)
+void func_801E3414(void)
 {
 }
 
@@ -166,6 +207,14 @@ inline f32 frand_amp1()
 {
     return 2.0f * (HSD_Randf() - 0.5f);
 }
+
+typedef struct {
+    u8 x0_fill[0xC4];
+    s8 xC4;
+    s8 xC5;
+    s16 xC6;
+    s32 xC8;
+} UnkUserData2;
 
 // Shy guy spawn timer tick callback
 void func_801E3418(HSD_GObj* gobj)
@@ -177,10 +226,10 @@ void func_801E3418(HSD_GObj* gobj)
 
     u32 unused[2];
 
-    Map* map = gobj->user_data;
+    UnkUserData2* map = gobj->user_data;
 
     // Don't trigger if any shy guys are still onscreen
-    if (func_8026B3C0(ITEM_SHYGUY) != 0) {
+    if (func_8026B3C0(It_Kind_Heiho) != 0) {
         return;
     }
 
@@ -249,12 +298,12 @@ void func_801E366C(HSD_GObj* gobj)
     }
 }
 
-s32 lbl_801E36D0(void)
+static BOOL func_801E36D0(s32)
 {
-    return 0;
+    return FALSE;
 }
 
-BOOL lbl_801E36D8(Vec3* a, u32 unused, u8* joint)
+s32 func_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, NULL, &b);
@@ -265,3 +314,18 @@ BOOL lbl_801E36D8(Vec3* a, u32 unused, u8* joint)
         return FALSE;
     }
 }
+
+static u32 unused[] = {
+    0xC3920000,
+    0x42D20000,
+    0xC3920000,
+    0x42960000,
+    0xC3920000,
+    0x42480000,
+    0x43980000,
+    0x42DC0000,
+    0x43980000,
+    0x42B40000,
+    0,
+    0,
+};
