@@ -175,3 +175,27 @@ void *OSInitAlloc(void *arenaStart, void *arenaEnd, int maxHeaps)
 
     return arenaStart;
 }
+
+OSHeapHandle OSCreateHeap(void *start, void *end)
+{
+    int i;
+    HeapCell *cell = (void *)OSRoundUp32B(start);
+
+    end = (void *)OSRoundDown32B(end);
+    for (i = 0; i < NumHeaps; i++)
+    {
+        Heap *hd = &HeapArray[i];
+
+        if (hd->size < 0)
+        {
+            hd->size = (u8 *)end - (u8 *)cell;
+            cell->prev = NULL;
+            cell->next = NULL;
+            cell->size = hd->size;
+            hd->free = cell;
+            hd->allocated = NULL;
+            return i;
+        }
+    }
+    return -1;
+}
