@@ -27,6 +27,7 @@ src/m2ctx.py
 ctx.c
 ctx_includes.h
 expected/
+*.log
 
 # Epilogue hack folder
 epilogue/
