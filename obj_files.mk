@@ -58,6 +58,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/pl/pl_unknown_001.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/melee/mp/mpcoll.c.o\
 	$(BUILD_DIR)/asm/melee/mp/mpcoll.s.o\
 	$(BUILD_DIR)/asm/melee/mp/mplib.s.o\
 	$(BUILD_DIR)/asm/melee/mp/mpisland.s.o\

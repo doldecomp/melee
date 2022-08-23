@@ -374,8 +374,6 @@ void func_800867E8();
 
 void func_8008688C();
 
-s32 func_80086BE0(struct _HSD_GObj *);
-
 s32 func_80087120(struct _HSD_GObj *);
 
 s32 func_800872A4(struct _HSD_GObj *);

@@ -119,7 +119,7 @@ s32 ftNess_YoyoCheckEnvColl(HSD_GObj* fighter_gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
     push_ecb(&sp34, ECBUnk);
     push_ecb(&sp34, ECBUnk2);
 
-    sp34.x34_flags_1 = 5;
+    sp34.x34_flags.bits.b1234 = 5;
 
     func_8004730C(&sp34, &sp1C); // EnvironmentCollisionCheck_NessYoYo
 
@@ -167,7 +167,7 @@ void ftNess_YoyoSetUnkPos(HSD_GObj* fighter_gobj, Vec3* pos)
     func_8000B1CC(fp->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp14);
     *pos = sp20;
     lbvector_Sub(pos, &sp14);
-    lbvector_Rotate(pos, 4, -atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
+    lbvector_Rotate(pos, 4, -atan2f(collData->x14C_ground.normal.x, collData->x14C_ground.normal.y));
     lbvector_Add(pos, &sp14);
 }
 
@@ -197,7 +197,7 @@ void ftNess_YoyoSetHitPos(HSD_GObj* fighter_gobj) // Set Yo-Yo hitbox position? 
         func_8000B1CC(fp->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp20);
         sp2C = sp14;
         lbvector_Sub(&sp2C, &sp20);
-        lbvector_Rotate(&sp2C, 4, -atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
+        lbvector_Rotate(&sp2C, 4, -atan2f(collData->x14C_ground.normal.x, collData->x14C_ground.normal.y));
         lbvector_Add(&sp2C, &sp20);
     }
     fp->sa.ness.x2230_yoyoHitboxPos = sp2C;
@@ -230,7 +230,7 @@ void ftNess_YoyoSetHitPosUnk(HSD_GObj* fighter_gobj, f32 pos_unk)
         func_8000B1CC(fp->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp24);
         sp3C = sp18;
         lbvector_Sub(&sp3C, &sp24);
-        lbvector_Rotate(&sp3C, 4, -atan2f(collData->x154_groundNormal.x, collData->x154_groundNormal.y));
+        lbvector_Rotate(&sp3C, 4, -atan2f(collData->x14C_ground.normal.x, collData->x14C_ground.normal.y));
         lbvector_Add(&sp3C, &sp24);
     }
     sp30 = fp->sa.ness.x2230_yoyoHitboxPos;
@@ -254,7 +254,7 @@ BOOL ftNess_YoyoCheckNoObstruct(HSD_GObj* fighter_gobj) // Check if Yo-Yo is col
     ECB_X = 0.0f;
     ECB_MUL_Y = 0.5f;
     sp20.x = ECB_X;
-    sp20.y = ECB_MUL_Y * (fp->x6F0_collData.xA8 + fp->x6F0_collData.xB0);
+    sp20.y = ECB_MUL_Y * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y + fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
     sp20.z = ECB_X;
     sp20.x += fp->xB0_pos.x;
     sp20.y += fp->xB0_pos.y;
@@ -627,7 +627,7 @@ void ftNess_AttackHi4_Action(HSD_GObj* fighter_gobj) // Ness's Up Smash Action S
     temp_fp->nessVars[0].AttackHi4.yoyoCurrentFrame = 1;
     temp_fp->nessVars[0].AttackHi4.yoyoRehitTimer = 0;
 
-    temp_fp->nessVars[0].AttackHi4.isPosUpdateMod = TRUE;
+    temp_fp->nessVars[0].AttackHi4.isPosUpdateMod = 1;
     temp_fp->sa.ness.x2230_yoyoHitboxPos.z = 0.0f;
     temp_fp->sa.ness.x2230_yoyoHitboxPos.y = 0.0f;
     temp_fp->sa.ness.x2230_yoyoHitboxPos.x = 0.0f;
@@ -693,7 +693,7 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj) // Ness's Up Smash Animation 
         {
             fighter_data2 = getFighterPlus(fighter_gobj);
             sp18.x = 0.0f;
-            sp18.y = 0.5f * (fighter_data2->x6F0_collData.xA8 + fighter_data2->x6F0_collData.xB0);
+            sp18.y = 0.5f * (fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.top.y + fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
             sp18.z = 0.0f;
             sp18.x += fighter_data2->xB0_pos.x;
             sp18.y += fighter_data2->xB0_pos.y;
