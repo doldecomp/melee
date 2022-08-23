@@ -4,6 +4,7 @@
 #include <global.h>
 
 #include <dolphin/types.h>
+#include <sysdolphin/baselib/debug.h>
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*)o)
 #define HSD_CLASS_METHOD(o) (((HSD_Class*)o)->class_info)
@@ -32,7 +33,7 @@ typedef struct _HSD_ClassInfoHead {
 typedef struct _HSD_ClassInfo {
     struct _HSD_ClassInfoHead head;
     HSD_Class* (*alloc)(struct _HSD_ClassInfo* c);
-    void (*init)(struct _HSD_Class* c);
+    int (*init)(struct _HSD_Class* c);
     void (*release)(struct _HSD_Class* c);
     void (*destroy)(struct _HSD_Class* c);
     void (*amnesia)(struct _HSD_ClassInfo* c);
@@ -57,6 +58,9 @@ void ClassInfoInit(HSD_ClassInfo* info);
 void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, char* base_class_library, char* type, s32 info_size, s32 class_size);
 void OSReport_PrintSpaces(s32 count);
 
-void* hsdAllocMemPiece(u32 size);
+void* hsdAllocMemPiece(s32 size);
+void hsdFreeMemPiece(void* mem, s32 size);
+void* hsdNew(HSD_ClassInfo*);
+HSD_ClassInfo* hsdSearchClassInfo(const char* class_name);
 
 #endif

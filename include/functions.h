@@ -902,14 +902,6 @@ void *func_8037CF98(struct _HSD_IDTable *table, u32 id, u8 *success);
 void func_8037EE0C(Vec *, Quaternion *);
 void func_8037EF28(Quaternion *, Quaternion *, Quaternion *, f32);
 
-void hsdInitClassInfo();
-
-void *hsdNew();
-
-BOOL hsdIsDescendantOf(void *, void *);
-
-struct _HSD_ClassInfo *hsdSearchClassInfo(char *);
-
 void func_803881E4(void);
 void HSD_Panic(char *, u32, char *);
 

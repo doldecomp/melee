@@ -187,14 +187,15 @@ static char lbl_804D5C84[5] = "dobj\0";
 HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
 {
     HSD_DObj* dobj;
+    HSD_ClassInfo* info;
 
     if (desc == NULL)
         return NULL;
     
-    if (desc->class_name == NULL || hsdSearchClassInfo(desc->class_name) == NULL) {
+    if (desc->class_name == NULL || (info = hsdSearchClassInfo(desc->class_name)) == NULL) {
         dobj = HSD_DObjAlloc();
     }else {
-        dobj = HSD_DOBJ(hsdNew());
+        dobj = HSD_DOBJ(hsdNew(info));
         if (dobj == NULL) {
             __assert(lbl_804D5C78, 378, lbl_804D5C84);
         }
