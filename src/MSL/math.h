@@ -8,7 +8,7 @@ float cos__Ff(float x);
 float sin__Ff(float x);
 float cosf(float x);
 float sinf(float x);
-void func_80326578();
+void __sinit_trigf_c();
 void func_803265A8();
 
 #endif

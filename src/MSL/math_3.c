@@ -130,7 +130,7 @@ float sinf(float x) {
     return z * __sincos_on_quadrant[n + 1]; // sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple of pi/2(not pi)
 }
 
-void func_80326578() {
+void __sinit_trigf_c() {
     lbl_80400778[0] = lbl_803B8F40[0];
     lbl_80400778[1] = lbl_803B8F40[1];
     lbl_80400778[2] = lbl_803B8F40[2];
