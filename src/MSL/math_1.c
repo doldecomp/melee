@@ -1,6 +1,4 @@
-// todo: duplicate
-#define __HI(x) *(int *)&x
-#define __LO(x) *(1 + (int *)&x)
+#include <MSL/math.h>
 
 const double lbl_804DE190 = 1.8014398509481984e+16;
 
