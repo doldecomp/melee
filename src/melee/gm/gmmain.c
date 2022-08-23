@@ -1,14 +1,13 @@
 #include <dolphin/types.h>
-#include <dolphin/gx/gxtypes.h>
-#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/controller.h> // hehe
 #include <sysdolphin/baselib/initialize.h>
-#include <functions.h>
+#include <dolphin/gx/GXInit.h>
 
 extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;
 extern u16 lbl_804D6B30; // debug flags
 
-extern GXRenderModeObj lbl_80401168;
+extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
 extern char lbl_803EA6C8[]; // build timestamp string
 extern s32* seed_ptr;
@@ -131,12 +130,12 @@ void main(void)
     }
     arena_size = OSGetArenaHi() - OSGetArenaLo();
     HSD_SetInitParameter(HSD_INIT_XFB_MAX_NUM, 2);
-    HSD_SetInitParameter(HSD_INIT_RENDER_MODE_OBJ, &lbl_80401168);
+    HSD_SetInitParameter(HSD_INIT_RENDER_MODE_OBJ, &GXNtsc480IntDf);
     HSD_SetInitParameter(HSD_INIT_FIFO_SIZE, 0x40000);
     HSD_SetInitParameter(HSD_INIT_HEAP_MAX_NUM, 4);
     func_80228C4C();
-    HSD_AllocateXFB(2, &lbl_80401168);
-    HSD_GXSetFifoObj(GXInit(HSD_AllocateFIFO(0x40000), 0x40000));
+    HSD_AllocateXFB(2, &GXNtsc480IntDf);
+    HSD_GXSetFifoObj(GXInit(HSD_AllocateFifo(0x40000), 0x40000));
     HSD_InitComponent();
     GXSetMisc(1, 8);
     *seed_ptr = OSGetTick();

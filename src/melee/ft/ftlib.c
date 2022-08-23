@@ -1,7 +1,7 @@
-#include "ftlib.h"
+#include <ftlib.h>
 
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/it/id.h>
+#include <melee/it/itkind.h>
 #include <melee/pl/player.h>
 
 extern struct {
@@ -90,7 +90,7 @@ HSD_GObj* func_80086198(HSD_GObj* gobj)
     return result;
 }
 
-// get closest opposing fighter?
+// get closest opposing fp?
 HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
 {
     Vec3 cur_v;
@@ -135,7 +135,7 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
     return result;
 }
 
-// get closest opposing fighter, on given side (left/right)
+// get closest opposing fp, on given side (left/right)
 HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
 {
     Vec3 sp24;
@@ -249,8 +249,8 @@ s32 func_800865CC(HSD_GObj* gobj)
 void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 {
     Fighter* fp = gobj->user_data;
-    *x = fp->x620_lstick_x;
-    *y = fp->x624_lstick_y;
+    *x = fp->input.x620_lstick_x;
+    *y = fp->input.x624_lstick_y;
 }
 
 void* func_800865F0(HSD_GObj* gobj)
@@ -388,9 +388,9 @@ BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1) {
     }
 }
 
-BOOL func_80086960(u16* arg)
+BOOL func_80086960(HSD_GObj* arg)
 {
-    if (arg != NULL && *arg == 4) {
+    if (arg != NULL && arg->classifier == 4) {
         return TRUE;
     } else {
         return FALSE;
@@ -413,7 +413,7 @@ inline void vector_add(Vec* dst, Vec* src, f32 x, f32 y, f32 z)
 void func_80086990(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
-    f32 tmp = 0.5f * (fp->x6F0_collData.xA8 + fp->x6F0_collData.xB0);
+    f32 tmp = 0.5f * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y + fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
     vector_add(v, &fp->xB0_pos, 0.0f, tmp, 0.0f);
 }
 
@@ -507,7 +507,7 @@ CameraBox* func_80086B74(HSD_GObj* gobj)
 f32 func_80086B80(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x890_cameraBox->x50;
+    return fp->x890_cameraBox->x48.z;
 }
 
 void func_80086B90(HSD_GObj* gobj, Vec3* v)
@@ -524,7 +524,7 @@ void func_80086BB4(HSD_GObj* gobj)
     func_80031154(&cam->x10);
 }
 
-s32 func_80086BE0(HSD_GObj* gobj)
+u8 func_80086BE0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     return fp->xC_playerID;
@@ -917,13 +917,13 @@ void func_80087610(u8 arg0)
 
 void func_800876B4(HSD_GObj* gobj)
 {
-    func_8006F238(gobj);
+    ftAnim_IsFramesRemaining(gobj);
 }
 
 BOOL func_800876D4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x2114 == 2) {
+    if (fp->x2114_SmashAttr.x2114_state == 2) {
         return TRUE;
     } else {
         return FALSE;
@@ -945,8 +945,8 @@ s32 func_80087700(HSD_GObj* gobj)
 void func_8008770C(HSD_GObj* gobj, void* dst)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x4_fighterKind == FTKIND_GAW) {
-        func_8014A7F4(gobj, dst);
+    if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
+        ftGameWatch_8014A7F4(gobj, dst);
     } else {
         func_800EEB00(gobj, dst);
     }
@@ -955,8 +955,8 @@ void func_8008770C(HSD_GObj* gobj, void* dst)
 void func_80087744(HSD_GObj* gobj, void* dst)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x4_fighterKind == FTKIND_GAW) {
-        func_8014A814(gobj, dst);
+    if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
+        ftGameWatch_8014A814(gobj, dst);
     } else {
         func_800EEB1C(gobj, dst);
     }
@@ -972,7 +972,7 @@ void func_8008777C(HSD_GObj* gobj)
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
     }
     cd = &fp->x6F0_collData;
-    func_someCalcAngle_80022C30(-cd->x154_groundNormal.x, cd->x154_groundNormal.y);
+    atan2f(-cd->x14C_ground.normal.x, cd->x14C_ground.normal.y);
 }
 
 BOOL func_800877D4(HSD_GObj* gobj)

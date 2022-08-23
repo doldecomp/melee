@@ -181,13 +181,16 @@ if __name__ == "__main__":
     # Calculate percentages
     codeCompletionPcnt = (decomp_code_size / dol_code_size)
     dataCompletionPcnt = (decomp_data_size / dol_data_size)
-    bytesPerTrophy = dol_code_size / 290
+    bytesPerTrophy = dol_code_size / 293
     bytesPerEvent = dol_data_size / 51
     
     trophyCount = math.floor(decomp_code_size / bytesPerTrophy)
     eventCount = math.floor(decomp_data_size / bytesPerEvent)
 
+    bytes_to_go_next_trophy = ((trophyCount + 1) * bytesPerTrophy) - decomp_code_size
+
     print("Progress:")
     print(f"\tCode sections: {decomp_code_size} / {dol_code_size} bytes in src ({codeCompletionPcnt:%})")
     print(f"\tData sections: {decomp_data_size} / {dol_data_size} bytes in src ({dataCompletionPcnt:%})")
-    print("\nYou have {} of 290 Trophies and completed {} of 51 Event Matches.".format(trophyCount, eventCount))
+    print("\nYou have {} of 293 Trophies and completed {} of 51 Event Matches.".format(trophyCount, eventCount))
+    print("Code bytes to go for next trophy:", math.floor(bytes_to_go_next_trophy)+1)

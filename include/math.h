@@ -1,7 +1,12 @@
 #ifndef __MATH_H__
 #define __MATH_H__
 
+#define M_PI 3.14159265358979323846
+#define M_PI_2 1.57079632679489655799
+
 #pragma cplusplus on
+
+#define FLT_EPSILON 1.00000001335e-10f
 
 extern inline float sqrtf(float x)
 {
@@ -19,7 +24,7 @@ volatile float y;
    y=(float)(x*guess);
    return y ;
  }
-  return x ;
+  return x;
 }
 
 #pragma cplusplus reset
@@ -53,7 +58,11 @@ inline s32 __fpclassifyd(double x)
 	                              : __fpclassifyd((double)(x)))
 
 inline f32 fabs_inline(f32 x) {
-	return (x < 0.0f) ? -x : x;
+    if (x < 0) {
+        return -x;
+    } else {
+        return x;
+    }
 }
 
 #endif

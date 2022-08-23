@@ -30,6 +30,7 @@ typedef int                 intptr_t;
 typedef unsigned int        uintptr_t;
 
 typedef unsigned long size_t;
+typedef void *unk_t;
 
 #define TRUE 1
 #define FALSE 0
@@ -40,5 +41,10 @@ typedef unsigned long size_t;
 
 #define assert_line(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
+
+#define STRUCT_PLACEHOLDER(module, number) extern struct _ ## module ## _Unk ## number; \
+typedef struct _ ## module ## _Unk ## number module ## _Unk ## number;
+
+#define CALLBACK_PLACEHOLDER(module, number) typedef void (*module ## _UnkCallback ## number)();
 
 #endif

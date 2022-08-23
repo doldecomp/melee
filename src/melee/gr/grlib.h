@@ -1,7 +1,7 @@
 #ifndef _grtlib_h_
 #define _grtlib_h_
 
-#include "stage.h"
+#include <melee/gr/stage.h>
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -20,8 +20,8 @@ void func_801C9A70(s32, Vec*);
 void func_801C9B20(void*, struct _UnkAnimStruct*, void*);
 void func_801C9B6C(void*);
 void func_801C9B8C(void*);
-static void lbl_801C9BC8(HSD_GObj*);
-static void lbl_801C9C40(HSD_GObj*);
+static void func_801C9BC8(HSD_GObj*);
+static void func_801C9C40(HSD_GObj*);
 HSD_GObj* func_801C9CEC(s32);
 s16 func_801C9E40(void);
 void func_801C9E50(s16);

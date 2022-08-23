@@ -266,128 +266,31 @@ lbl_80407B58:
     .4byte NULL
     .4byte NULL
     .4byte 0xFFFFFFFF
-    .4byte 0x6E6F7720
-    .4byte 0x72656769
-    .4byte 0x73746572
-    .4byte 0x696E6720
-    .4byte 0x73757370
-    .4byte 0x65637469
-    .4byte 0x6E67206D
-    .4byte 0x656D6F72
-    .4byte 0x79202E2E
-    .4byte 0x2E0A0000
-    .4byte 0x5741524E
-    .4byte 0x494E4721
-    .4byte 0x210A0000
-    .4byte 0x546F6F20
-    .4byte 0x6D616E79
-    .4byte 0x206D656D
-    .4byte 0x6F727920
-    .4byte 0x626C6F63
-    .4byte 0x6B732061
-    .4byte 0x72652072
-    .4byte 0x65676973
-    .4byte 0x74657264
-    .4byte 0x20746F20
-    .4byte 0x6D656D6F
-    .4byte 0x72792063
-    .4byte 0x6865636B
-    .4byte 0x65722E0A
-    .4byte NULL
-    .4byte 0x506C6561
-    .4byte 0x73652069
-    .4byte 0x6E637265
-    .4byte 0x61736520
-    .4byte 0x61206361
-    .4byte 0x70616369
-    .4byte 0x7479206F
-    .4byte 0x66206368
-    .4byte 0x65636B65
-    .4byte 0x722E0A00
-    .4byte 0x4E6F6E2D
-    .4byte 0x72656769
-    .4byte 0x73746572
-    .4byte 0x6564206D
-    .4byte 0x656D6F72
-    .4byte 0x7920626C
-    .4byte 0x6F636B20
-    .4byte 0x69732073
-    .4byte 0x70656369
-    .4byte 0x66696564
-    .4byte 0x20282570
-    .4byte 0x292E0A00
-    .4byte 0x6C65616B
-    .4byte 0x20756E72
-    .4byte 0x65676973
-    .4byte 0x74657220
-    .4byte 0x72616E67
-    .4byte 0x65202570
-    .4byte 0x2025700A
-    .4byte NULL
-    .4byte 0x4C65616B
-    .4byte 0x20636865
-    .4byte 0x636B6572
-    .4byte 0x20697320
-    .4byte 0x6E6F7420
-    .4byte 0x696E6974
-    .4byte 0x69616C69
-    .4byte 0x7A65642E
-    .4byte 0x0A000000
-    .4byte 0x42656769
-    .4byte 0x6E206D65
-    .4byte 0x6D6F7279
-    .4byte 0x206C6561
-    .4byte 0x6B206368
-    .4byte 0x65636B20
-    .4byte 0x2E2E2E0A
-    .4byte NULL
-    .4byte 0x6E756D62
-    .4byte 0x6572206F
-    .4byte 0x66207265
-    .4byte 0x67697374
-    .4byte 0x65726564
-    .4byte 0x20707472
-    .4byte 0x3A202564
-    .4byte 0x202F2025
-    .4byte 0x64202870
-    .4byte 0x65616B20
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x6C65616B
-    .4byte 0x20646574
-    .4byte 0x65637465
-    .4byte 0x64202825
-    .4byte 0x7029206E
-    .4byte 0x625F7265
-    .4byte 0x67202825
-    .4byte 0x6429206D
-    .4byte 0x61726B20
-    .4byte 0x28253038
-    .4byte 0x78290A00
-    .4byte 0x6C65616B
-    .4byte 0x20646574
-    .4byte 0x65637465
-    .4byte 0x64202825
-    .4byte 0x7029205B
-    .4byte 0x64657374
-    .4byte 0x726F7965
-    .4byte 0x64206865
-    .4byte 0x61646572
-    .4byte 0x5D0A0000
-    .4byte 0x6E756D62
-    .4byte 0x6572206F
-    .4byte 0x66206C65
-    .4byte 0x616B6564
-    .4byte 0x206D656D
-    .4byte 0x6F72793A
-    .4byte 0x2025642E
-    .4byte 0x0A000000
-    .4byte 0x6C65616B
-    .4byte 0x20697320
-    .4byte 0x6E6F7420
-    .4byte 0x64657465
-    .4byte 0x63746564
-    .4byte 0x2E0A0000
+    .asciz "now registering suspecting memory ...\n"
+    .balign 4
+    .asciz "WARNING!!\n"
+    .balign 4
+    .asciz "Too many memory blocks are registerd to memory checker.\n"
+    .balign 4
+    .asciz "Please increase a capacity of checker.\n"
+    .balign 4
+    .asciz "Non-registered memory block is specified (%p).\n"
+    .balign 4
+    .asciz "leak unregister range %p %p\n"
+    .balign 4
+    .asciz "Leak checker is not initialized.\n"
+    .balign 4
+    .asciz "Begin memory leak check ...\n"
+    .balign 4
+    .asciz "number of registered ptr: %d / %d (peak %d)\n"
+    .balign 4
+    .asciz "leak detected (%p) nb_reg (%d) mark (%08x)\n"
+    .balign 4
+    .asciz "leak detected (%p) [destroyed header]\n"
+    .balign 4
+    .asciz "number of leaked memory: %d.\n"
+    .balign 4
+    .asciz "leak is not detected.\n"
 
 
 .section .sdata
@@ -398,6 +301,4 @@ lbl_804D6000:
     .balign 4
 .global lbl_804D6004
 lbl_804D6004:
-    .4byte 0x646F6E65
-    .4byte 0x2E0A0000
-    .4byte 0x00000000
+    .asciz "done.\n"

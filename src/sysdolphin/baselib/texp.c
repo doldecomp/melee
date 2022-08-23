@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/texp.h"
+#include <sysdolphin/baselib/texp.h>
 
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp) {
     if (texp == NULL) {

@@ -1,4 +1,4 @@
-#include "melee/pl/player.h"
+#include <melee/pl/player.h>
 
 typedef struct _ftMapping {
     s8 internal_id;
@@ -129,7 +129,7 @@ extern void Fighter_FirstInitialize_80067A84();
 extern void func_800BEB60(s32, s32, s32);
 extern s32 func_800865F0(HSD_GObj*);
 extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
-extern HSD_GObj* func_80068E98(struct plAllocInfo*);
+extern HSD_GObj* Fighter_80068E98(struct plAllocInfo*);
 
 inline hasExtraFighterID(ftMapping* data) { return data->extra_internal_id != -1; } ///TODO this can be used in more places when functions are fixed to use correct structs
 
@@ -272,7 +272,7 @@ void Player_80031AD0(s32 slot) {  ///decomp.me/scratch/lYkLv
     first_struct.bits.has_transformation = 0;  
     first_struct.unk8 = -1;
 
-    player->player_entity[0] = func_80068E98(&first_struct);
+    player->player_entity[0] = Fighter_80068E98(&first_struct);
     player->player_state = 2;
 
     internal_id = byte_check = offset_arr[player->player_character * sizeof(ftMapping)];
@@ -285,7 +285,7 @@ void Player_80031AD0(s32 slot) {  ///decomp.me/scratch/lYkLv
         second_struct.bits.has_transformation = has_transformation; 
         second_struct.unk8 = -1;
 
-        player->player_entity[1] = func_80068E98(&second_struct);
+        player->player_entity[1] = Fighter_80068E98(&second_struct);
         if (player->player_state != 1) {
             player->player_state = 2;
         }
@@ -1421,7 +1421,7 @@ void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id) {
 }
 
 
-u8 Player_GetFlagsBit1(s32 slot) {  
+s32 Player_GetFlagsBit1(s32 slot) {  
     StaticPlayer* player;
     u8 bit1;
     Player_CheckSlot(slot);
@@ -1547,7 +1547,7 @@ void Player_SetMoreFlagsBit1(s32 slot, u8 bit1) {
     player->more_flags.b1 = bit1;
 }
 
-u8 Player_GetUnk4D(s32 slot) {   
+s32 Player_GetUnk4D(s32 slot) {   
     StaticPlayer* player;
     u8 unk4D;
     Player_CheckSlot(slot);

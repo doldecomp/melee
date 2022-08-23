@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80155A58 152638
 // https://decomp.me/scratch/Q3fan
@@ -13,7 +13,7 @@ void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2) {
     func_8009750C(gobj_1);
     func_800DD168(gobj_1);
     ft_1->x1A5C = gobj_2;
-    ft_1->x1A58 = gobj_2;
+    ft_1->x1A58_interactedFighter = gobj_2;
     ft_1->x221B_flag.bits.b5 = 0;
     ft_1->x221B_flag.bits.b7 = 0;
     ft_1->x2C_facing_direction = ft_2->x2C_facing_direction;

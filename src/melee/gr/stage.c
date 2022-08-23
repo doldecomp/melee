@@ -1,6 +1,6 @@
-#include "melee/gr/stage.h"
+#include <melee/gr/stage.h>
 
-#include "melee/lb/lbvector.h"
+#include <melee/lb/lbvector.h>
 
 extern struct _StageInfo stage_info;
 
@@ -88,6 +88,7 @@ f32 Stage_GetBlastZoneLeftOffset()
     return stage_info.blast_zone.left + stage_info.cam_info.cam_x_offset;
 }
 
+// named stGetPlyDeadUp according to an assert in ftcamera.c
 f32 Stage_GetBlastZoneTopOffset()
 {
     return stage_info.blast_zone.top + stage_info.cam_info.cam_y_offset;

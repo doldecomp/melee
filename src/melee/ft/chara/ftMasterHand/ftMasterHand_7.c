@@ -1,9 +1,9 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80151B14 14E6F4
 // https://decomp.me/scratch/hxBrR
 void lbl_80151B14(HSD_GObj* arg0) {
-    if (!func_8006F238(arg0)) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         func_80151018(arg0);
     }
 }
@@ -21,8 +21,8 @@ void lbl_80151B50(HSD_GObj* arg0) {
 // 80151B70 14E750
 // https://decomp.me/scratch/50coe
 void lbl_80151B70(HSD_GObj* gobj) {
-    Fighter* fighter = gobj->user_data;
-    if (Player_GetPlayerSlotType(fighter->xC_playerID) == 0) {
+    Fighter* fp = gobj->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
 }

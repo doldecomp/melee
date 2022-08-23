@@ -3,8 +3,11 @@
 
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/gx/GXTransform.h>
+#include <melee/lb/lbrefract.h>
 
-#include "sysdolphin/baselib/cobj.h"
+#include <sysdolphin/baselib/cobj.h>
+
+#define HALF_PI64 1.5707963267948966
 
 extern inline float sqrtf_accurate(float x);
 
@@ -18,8 +21,6 @@ Vec *lbvector_Add_xy(Vec *a, Vec *b);
 Vec *lbvector_Sub(Vec *a, Vec *b);
 Vec *lbvector_Diff(Vec *a, Vec *b, Vec *result);
 Vec *lbvector_CrossprodNormalized(Vec *a, Vec *b, Vec *result);
-
-extern float func_80022D1C(float);
 
 float lbvector_Angle(Vec *a, Vec *b);
 float lbvector_AngleXY(Vec *a, Vec *b);
@@ -35,9 +36,6 @@ void lbvector_Mirror(Vec *a, Vec *b);
 float lbvector_CosAngle(Vec *a, Vec *b);
 Vec *lbvector_Lerp(Vec *a, Vec *b, Vec *result, float f);
 Vec *func_8000DE38(Mtx m, Vec *v, float c);
-
-extern float func_80022DBC(float);
-extern float func_someCalcAngle_80022C30(float, float);
 
 Vec *lbvector_EulerAnglesFromONB(Vec *result_angles, Vec *a, Vec *b, Vec *c);
 Vec *lbvector_EulerAnglesFromPartialONB(Vec *result_angles, Vec *a, Vec *c);

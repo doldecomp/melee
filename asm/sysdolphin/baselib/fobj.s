@@ -1,8 +1,8 @@
 .include "macros.inc"
 
-.set _SDA2_BASE_, 0x804DF9E0
-.set lbl_804DE4D0, 0x804DE4D0
-.set lbl_804DE4E0, 0x804DE4E0
+.set fobj_c_sdata2_start, lbl_804DE4F0 - 0x20
+.set lbl_804DE4D0, fobj_c_sdata2_start
+.set lbl_804DE4E0, fobj_c_sdata2_start + 0x10
 
 .section .text  # 0x80005940 - 0x803B7240
 
@@ -21,7 +21,7 @@ HSD_FObjInterpretAnim:
 /* 8036B058 00367C38  3B C3 63 50 */	addi r30, r3, lbl_80406350@l
 /* 8036B05C 00367C3C  3B 84 00 00 */	addi r28, r4, 0
 /* 8036B060 00367C40  3B 65 00 00 */	addi r27, r5, 0
-/* 8036B064 00367C44  C3 A2 EA F0 */	lfs f29, lbl_804DE4D0-_SDA2_BASE_(r2)
+/* 8036B064 00367C44  C3 A2 EA F0 */	lfs f29, lbl_804DE4D0@sda21(r2)
 /* 8036B068 00367C48  41 82 00 10 */	beq lbl_8036B078
 /* 8036B06C 00367C4C  7F E3 FB 78 */	mr r3, r31
 /* 8036B070 00367C50  4B FF F9 F5 */	bl HSD_FObjGetState
@@ -38,9 +38,9 @@ lbl_8036B07C:
 /* 8036B094 00367C74  C8 02 EB 10 */	lfd f0, lbl_804DE4F0@sda21(r2)
 /* 8036B098 00367C78  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 8036B09C 00367C7C  41 80 06 10 */	blt lbl_8036B6AC
-/* 8036B0A0 00367C80  CB E2 EB 00 */	lfd f31, lbl_804DE4E0-_SDA2_BASE_(r2)
+/* 8036B0A0 00367C80  CB E2 EB 00 */	lfd f31, lbl_804DE4E0@sda21(r2)
 /* 8036B0A4 00367C84  3F A0 43 30 */	lis r29, 0x4330
-/* 8036B0A8 00367C88  C3 C2 EA F0 */	lfs f30, lbl_804DE4D0-_SDA2_BASE_(r2)
+/* 8036B0A8 00367C88  C3 C2 EA F0 */	lfs f30, lbl_804DE4D0@sda21(r2)
 lbl_8036B0AC:
 /* 8036B0AC 00367C8C  2C 03 00 04 */	cmpwi r3, 4
 /* 8036B0B0 00367C90  41 82 05 40 */	beq lbl_8036B5F0

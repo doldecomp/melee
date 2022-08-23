@@ -1,4 +1,4 @@
-#include "lbvector.h"
+#include <melee/lb/lbvector.h>
 #include <math.h>
 
 #define PI 3.1415926535897931
@@ -96,8 +96,6 @@ Vec *lbvector_CrossprodNormalized(Vec *a, Vec *b, Vec *result)
     lbvector_Normalize(result);
     return result;
 }
-
-extern float func_80022D1C(float); // acos
 
 // 8000D620 - returns the angle between a and b
 float lbvector_Angle(Vec *a, Vec *b)
@@ -311,10 +309,6 @@ Vec *func_8000DE38(Mtx m, Vec *v, float c)
     return v;
 }
 
-extern float func_80022DBC(float); // asin
-extern float func_someCalcAngle_80022C30(float, float); // atan2
-
-
 // 8000DF0C - computes euler angles phi_x,phi_y,phi_z that rotate the standard basis (e1,e2,e3) onto the orthonormal basis (b,c,a)
 // with 3 rotations about the x,y,z axes in that order.
 Vec *lbvector_EulerAnglesFromONB(Vec *result_angles, Vec *a, Vec *b, Vec *c)
@@ -324,20 +318,20 @@ Vec *lbvector_EulerAnglesFromONB(Vec *result_angles, Vec *a, Vec *b, Vec *c)
         if (b->z == -1.0f)
         {
             result_angles->y = 1.5707963705062866f; // pi/2
-            result_angles->x = func_someCalcAngle_80022C30(c->x, c->y); // atan2
+            result_angles->x = atan2f(c->x, c->y);
         }
         else
         {
             result_angles->y = -1.5707963705062866f; // -pi/2
-            result_angles->x = func_someCalcAngle_80022C30(-c->x, c->y); // atan2
+            result_angles->x = atan2f(-c->x, c->y);
         }
         result_angles->z = 0.0f;
     }
     else
     {
         result_angles->y = func_80022DBC(-b->z); // asin
-        result_angles->x = func_someCalcAngle_80022C30(c->z, a->z); // atan2
-        result_angles->z = func_someCalcAngle_80022C30(b->y, b->x); // atan2
+        result_angles->x = atan2f(c->z, a->z);
+        result_angles->z = atan2f(b->y, b->x);
     }
     return result_angles;
 }

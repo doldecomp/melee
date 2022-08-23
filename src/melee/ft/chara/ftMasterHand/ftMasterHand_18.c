@@ -1,9 +1,9 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 801539EC 1505CC
 void lbl_801539EC(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -13,8 +13,8 @@ void lbl_801539EC(HSD_GObj* arg0) {
 // 80153A30 150610
 // https://decomp.me/scratch/oph8G
 void lbl_80153A30(HSD_GObj* gobj) {
-    Fighter* fighter = gobj->user_data;
-    MasterHandAttributes* r4_attributes = fighter->x10C_ftData->ext_attr;
+    Fighter* fp = gobj->user_data;
+    MasterHandAttributes* r4_attributes = fp->x10C_ftData->ext_attr;
 
     func_8015BF74(gobj, r4_attributes->x58);
 }

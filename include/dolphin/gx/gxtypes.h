@@ -60,7 +60,15 @@ typedef enum _GXPTTexMtx
     GX_PTIDENTITY = 125
 } GXPTTexMtx;
 
-typedef struct _GXFifoObj {
+typedef enum _GXTexWrapMode
+{
+    GX_CLAMP,
+    GX_REPEAT,
+    GX_MIRROR,
+    GX_MAX_TEXWRAPMODE
+} GXTexWrapMode;
+
+typedef struct {
 	u8 pad[GX_FIFO_OBJSIZE];
 } GXFifoObj;
 
@@ -128,22 +136,6 @@ typedef struct _GXColorS10 {
 #define GX_VA_NBT           25
 #define GX_VA_MAXATTR       26
 #define GX_VA_NULL          0xff
-
-// GXPixelFormat
-#define GX_PF_RGB8_Z24      0
-#define GX_PF_RGBA6_Z24     1
-#define GX_PF_RGB565_Z16    2
-#define GX_PF_Z24           3
-#define GX_PF_Y8            4
-#define GX_PF_U8            5
-#define GX_PF_V8            6
-#define GX_PF_YUV420        7
-
-// GXCompressedZFormat
-#define GX_ZC_LINEAR        0
-#define GX_ZC_NEAR          1
-#define GX_ZC_MID           2
-#define GX_ZC_FAR           3
 
 //GXGamma
 #define GX_GM_1_0           0

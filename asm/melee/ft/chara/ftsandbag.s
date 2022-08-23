@@ -2,8 +2,8 @@
 
 .section .data
     .balign 8
-.global lbl_803D3998
-lbl_803D3998:
+.global as_table_sandbag
+as_table_sandbag:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01400000

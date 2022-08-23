@@ -1,5 +1,8 @@
 #include "sysdolphin/baselib/tobj.h"
 
+#include <math.h>
+#include <dolphin/mtx.h>
+
 #include "sysdolphin/baselib/aobj.h"
 
 extern void TObjInfoInit(void);
@@ -357,3 +360,39 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 	return 0;
 }
 #pragma pop
+
+/*static*/ void MakeTextureMtx(HSD_TObj *tobj)
+{
+    Vec scale;
+    Mtx m;
+    Vec trans;
+    Quaternion rot;
+    u32 unused[2];
+    BOOL no_assert = FALSE;
+
+    if (tobj->repeat_s && tobj->repeat_t) {
+        no_assert = TRUE;
+    }
+
+    if (!no_assert) {
+        __assert(lbl_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
+    }
+
+    scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON ? 0.0F : (f32)tobj->repeat_s / tobj->scale.x;
+    scale.y = __fabsf(tobj->scale.y) < FLT_EPSILON ? 0.0F : (f32)tobj->repeat_t / tobj->scale.y;
+    scale.z = tobj->scale.z;
+    rot.x = tobj->rotate.x;
+    rot.y = tobj->rotate.y;
+    rot.z = -tobj->rotate.z;
+    trans.x = -tobj->translate.x;
+    trans.y = -(tobj->translate.y + (tobj->wrap_t == GX_MIRROR ? 1.0F / (tobj->repeat_t / tobj->scale.y) : 0.0F));
+    trans.z = tobj->translate.z;
+    
+    MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
+    HSD_MkRotationMtx(m, &rot);
+    MTXConcat(m, tobj->mtx, tobj->mtx);
+    MTXScale(m, scale.x, scale.y, scale.z);
+    MTXConcat(m, tobj->mtx, tobj->mtx);
+}
+
+// SetupTexMtx https://decomp.me/scratch/iZ3Ye

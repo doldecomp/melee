@@ -89,6 +89,7 @@ OSInitThreadQueue:
 /* 8034AD34 00347914  90 03 00 00 */	stw r0, 0(r3)
 /* 8034AD38 00347918  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/EPwIs
 .global OSGetCurrentThread
 OSGetCurrentThread:
 /* 8034AD3C 0034791C  3C 60 80 00 */	lis r3, 0x800000E4@ha
@@ -764,6 +765,8 @@ lbl_8034B600:
 /* 8034B614 003481F4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034B618 003481F8  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/UARTk // 7996 (50.64%)
+# decl OSThread.h
 .global OSResumeThread
 OSResumeThread:
 /* 8034B61C 003481FC  7C 08 02 A6 */	mflr r0
@@ -955,6 +958,8 @@ lbl_8034B87C:
 /* 8034B89C 0034847C  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034B8A0 00348480  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/p2ZdW // 9200 (0%)
+# decl OSThread.h
 .global OSSuspendThread
 OSSuspendThread:
 /* 8034B8A4 00348484  7C 08 02 A6 */	mflr r0
@@ -1134,6 +1139,7 @@ lbl_8034BAE0:
 /* 8034BAF8 003486D8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034BAFC 003486DC  4E 80 00 20 */	blr 
 
+# https://decomp.me/scratch/oYS6V
 .global OSWakeupThread
 OSWakeupThread:
 /* 8034BB00 003486E0  7C 08 02 A6 */	mflr r0
@@ -1779,7 +1785,6 @@ lbl_8034C3C8:
 /* 8034C3E4 00348FC4  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034C3E8 00348FC8  7C 08 03 A6 */	mtlr r0
 /* 8034C3EC 00348FCC  4E 80 00 20 */	blr 
-
 
 .section .data
     .balign 8

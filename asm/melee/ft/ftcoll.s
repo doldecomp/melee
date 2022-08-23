@@ -4958,7 +4958,7 @@ lbl_8007A8D8:
 /* 8007A8E8 000774C8  48 00 00 20 */	b lbl_8007A908
 lbl_8007A8EC:
 /* 8007A8EC 000774CC  EC 22 08 24 */	fdivs f1, f2, f1
-/* 8007A8F0 000774D0  4B FA 85 79 */	bl func_80022E68
+/* 8007A8F0 000774D0  4B FA 85 79 */	bl atanf
 /* 8007A8F4 000774D4  C0 02 89 3C */	lfs f0, lbl_804D831C@sda21(r2)
 /* 8007A8F8 000774D8  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8007A8FC 000774DC  FC 00 00 1E */	fctiwz f0, f0
@@ -5646,8 +5646,8 @@ func_8007B1B8:
 /* 8007B234 00077E14  90 07 19 DC */	stw r0, 0x19dc(r7)
 /* 8007B238 00077E18  4E 80 00 20 */	blr 
 
-.global func_8007B23C
-func_8007B23C:
+.global ftColl_CreateReflectHit
+ftColl_CreateReflectHit:
 /* 8007B23C 00077E1C  80 E3 00 2C */	lwz r7, 0x2c(r3)
 /* 8007B240 00077E20  38 C0 00 01 */	li r6, 1
 /* 8007B244 00077E24  38 60 00 00 */	li r3, 0
@@ -5683,8 +5683,8 @@ func_8007B23C:
 /* 8007B2BC 00077E9C  90 07 1A 00 */	stw r0, 0x1a00(r7)
 /* 8007B2C0 00077EA0  4E 80 00 20 */	blr 
 
-.global func_8007B2C4
-func_8007B2C4:
+.global ftColl_CreateAbsorbHit
+ftColl_CreateAbsorbHit:
 /* 8007B2C4 00077EA4  80 C3 00 2C */	lwz r6, 0x2c(r3)
 /* 8007B2C8 00077EA8  38 A0 00 01 */	li r5, 1
 /* 8007B2CC 00077EAC  38 60 00 00 */	li r3, 0
