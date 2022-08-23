@@ -1,4 +1,4 @@
-#include "MSL/math.h"
+#include <MSL/math.h>
 #include <math.h>
 
 #define __HI(x) *(int*)&x
@@ -14,8 +14,6 @@ static float  __four_over_pi_m1[]={0x3E800000,0x3Cbe6080,
 extern const float __sincos_poly[];
 extern const float __sincos_on_quadrant[];
 
-// rename it to two54 later (remove it)
-extern const double lbl_804DE190;
 
 #define __two_over_pi .636619772367581343075535053490057f // lbl_804DE198
 #define __four_over_pi 1.27323954473516268615107010698011f // lbl_804DE19C
@@ -29,30 +27,6 @@ extern const float __sincos_on_quadrant[]; // lbl_803B9358
 
 extern float lbl_80400778[];
 extern const float lbl_803B8F40[4] = { 0.25f, 0.023239374f, 0.00000017055572f, 1.867365e-11f };
-
-double frexp(double x, int* exponent) {
-    int  hx, ix, lx;
-	hx = __HI(x);
-	ix = 0x7fffffff&hx;
-	lx = __LO(x);
-	*exponent = 0;
-	if(ix>=0x7ff00000||((ix|lx)==0)) return x;	/* 0,inf,nan */
-	if (ix<0x00100000) {		/* subnormal */
-	    x *= lbl_804DE190;
-	    hx = __HI(x);
-	    ix = hx&0x7fffffff;
-	    *exponent = -54;
-	}
-	*exponent += (ix>>20)-1022;
-	hx = (hx&0x800fffff)|0x3fe00000;
-	__HI(x) = hx;
-	return x;
-}
-
-double fabsf__Ff(double param_1)
-{
-    return fabs(param_1);
-}
 
 float tanf(float x)
 {
