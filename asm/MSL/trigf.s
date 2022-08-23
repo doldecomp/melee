@@ -12,7 +12,7 @@ cosf:
 /* 80326254 00322E34  DB E1 00 20 */	stfd f31, 0x20(r1)
 /* 80326258 00322E38  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 8032625C 00322E3C  D0 21 00 08 */	stfs f1, 8(r1)
-/* 80326260 00322E40  C0 02 E7 B8 */	lfs f0, lbl_804DE198@sda21(r2)
+/* 80326260 00322E40  C0 02 E7 B8 */	lfs f0, __two_over_pi@sda21(r2)
 /* 80326264 00322E44  80 01 00 08 */	lwz r0, 8(r1)
 /* 80326268 00322E48  C0 C1 00 08 */	lfs f6, 8(r1)
 /* 8032626C 00322E4C  54 00 00 01 */	rlwinm. r0, r0, 0, 0, 0
@@ -51,7 +51,7 @@ lbl_803262A4:
 /* 803262E8 00322EC8  EF E5 01 BA */	fmadds f31, f5, f6, f0
 /* 803262EC 00322ECC  FC 20 F8 90 */	fmr f1, f31
 /* 803262F0 00322ED0  4B FF FE C5 */	bl fabsf__Ff
-/* 803262F4 00322ED4  C0 02 E7 C0 */	lfs f0, lbl_804DE1A0@sda21(r2)
+/* 803262F4 00322ED4  C0 02 E7 C0 */	lfs f0, __SQRT_FLT_EPSILON__@sda21(r2)
 /* 803262F8 00322ED8  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 803262FC 00322EDC  40 80 00 24 */	bge lbl_80326320
 /* 80326300 00322EE0  3C 60 80 3C */	lis r3, __sincos_on_quadrant@ha
@@ -121,7 +121,7 @@ sinf:
 /* 803263E8 00322FC8  DB E1 00 20 */	stfd f31, 0x20(r1)
 /* 803263EC 00322FCC  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 803263F0 00322FD0  D0 21 00 08 */	stfs f1, 8(r1)
-/* 803263F4 00322FD4  C0 02 E7 B8 */	lfs f0, lbl_804DE198@sda21(r2)
+/* 803263F4 00322FD4  C0 02 E7 B8 */	lfs f0, __two_over_pi@sda21(r2)
 /* 803263F8 00322FD8  80 01 00 08 */	lwz r0, 8(r1)
 /* 803263FC 00322FDC  C0 C1 00 08 */	lfs f6, 8(r1)
 /* 80326400 00322FE0  54 00 00 01 */	rlwinm. r0, r0, 0, 0, 0
@@ -160,7 +160,7 @@ lbl_80326438:
 /* 8032647C 0032305C  EF E5 01 BA */	fmadds f31, f5, f6, f0
 /* 80326480 00323060  FC 20 F8 90 */	fmr f1, f31
 /* 80326484 00323064  4B FF FD 31 */	bl fabsf__Ff
-/* 80326488 00323068  C0 02 E7 C0 */	lfs f0, lbl_804DE1A0@sda21(r2)
+/* 80326488 00323068  C0 02 E7 C0 */	lfs f0, __SQRT_FLT_EPSILON__@sda21(r2)
 /* 8032648C 0032306C  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80326490 00323070  40 80 00 34 */	bge lbl_803264C4
 /* 80326494 00323074  3C 60 80 3C */	lis r3, __sincos_on_quadrant@ha
@@ -238,38 +238,3 @@ __sinit_trigf_c:
 /* 8032659C 0032317C  C0 04 00 0C */	lfs f0, 0xc(r4)
 /* 803265A0 00323180  D0 03 00 0C */	stfs f0, 0xc(r3)
 /* 803265A4 00323184  4E 80 00 20 */	blr 
-
-.section .rodata, "a"
-    .balign 8
-tmp_float:
-	.float 0.25
-	.float 0.023239374
-	.float 1.7055572E-7
-	.float 1.867365E-11
-
-.section .data, "wa"
-    .balign 8
-.global lbl_80400770
-lbl_80400770:
-    .4byte 0x7FFFFFFF
-.global lbl_80400774
-lbl_80400774:
-    .4byte 0x7F800000
-__four_over_pi_m1:
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-
-.section .sdata2, "a"
-    .balign 8
-lbl_804DE198:
-	.float 0.63661975
-lbl_804DE19C:
-	.float 0.5
-lbl_804DE1A0:
-	.float 0.00034526698
-.balign 8
-lbl_804DE1A8:
-	.4byte 0x43300000
-	.4byte 0x80000000

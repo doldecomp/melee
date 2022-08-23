@@ -4,29 +4,8 @@
 #define __HI(x) *(int*)&x
 #define __LO(x) *(1+(int*)&x)
 
-#define __two_over_pi .636619772367581343075535053490057f
-#define __four_over_pi 1.27323954473516268615107010698011f
-#define __SQRT_FLT_EPSILON__ 3.4526698300e-04f
-
-const int tmp_float[4]={0x3E800000,0x3Cbe6080,0x34372200,0x2da44152};
-static float  __four_over_pi_m1[]={0x3E800000,0x3Cbe6080,
-                                         0x34372200,0x2da44152}; 
 extern const float __sincos_poly[];
 extern const float __sincos_on_quadrant[];
-
-
-#define __two_over_pi .636619772367581343075535053490057f // lbl_804DE198
-#define __four_over_pi 1.27323954473516268615107010698011f // lbl_804DE19C
-#define __SQRT_FLT_EPSILON__ 3.4526698300e-04f // lbl_804DE1A0
-
-static float  __four_over_pi_m1[]={0x3E800000,0x3Cbe6080,
-                                         0x34372200,0x2da44152}; // lbl_804DE198 - lbl_804DE1A8
-
-extern const float __sincos_poly[]; // lbl_803B9378
-extern const float __sincos_on_quadrant[]; // lbl_803B9358
-
-extern float lbl_80400778[];
-extern const float lbl_803B8F40[4] = { 0.25f, 0.023239374f, 0.00000017055572f, 1.867365e-11f };
 
 float cosf(float x) {
     float z = __two_over_pi * x;
@@ -115,10 +94,9 @@ float sinf(float x) {
 }
 
 void __sinit_trigf_c() {
-    lbl_80400778[0] = lbl_803B8F40[0];
-    lbl_80400778[1] = lbl_803B8F40[1];
-    lbl_80400778[2] = lbl_803B8F40[2];
-    lbl_80400778[3] = lbl_803B8F40[3];
+    __four_over_pi_m1[0] = tmp_float[0];
+    __four_over_pi_m1[1] = tmp_float[1];
+    __four_over_pi_m1[2] = tmp_float[2];
+    __four_over_pi_m1[3] = tmp_float[3];
 }
 
-void func_803265A8(void);
