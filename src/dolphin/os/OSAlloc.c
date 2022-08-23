@@ -2,11 +2,11 @@
 
 #include <dolphin/os/os.h>
 
-extern void *ArenaEnd;
-extern void *ArenaStart;
-extern int NumHeaps;
-extern Heap *HeapArray;
-extern volatile OSHeapHandle __OSCurrHeap; // = -1;
+static Heap *HeapArray;
+static int NumHeaps;
+static void *ArenaStart;
+static void *ArenaEnd;
+volatile OSHeapHandle __OSCurrHeap = -1;
 
 #define InRange(addr, start, end) ((u8 *)(start) <= (u8 *)(addr) && (u8 *)(addr) < (u8 *)(end))
 #define OFFSET(addr, align) (((uintptr_t)(addr) & ((align)-1)))
@@ -204,3 +204,76 @@ void OSDestroyHeap(size_t idx)
 {
     *(s32 *)&HeapArray[idx] = -1;
 }
+
+long OSCheckHeap(OSHeapHandle heap)
+{
+    Heap *hd;
+    HeapCell *cell;
+    int total = 0;
+    int totalFree = 0;
+
+#define CHECK(line, condition)                                      \
+    if (!(condition))                                               \
+    {                                                               \
+        OSReport("OSCheckHeap: Failed " #condition " in %d", line); \
+        return -1;                                                  \
+    }
+
+    // clang-format off
+    CHECK(893, HeapArray)
+    CHECK(894, 0 <= heap && heap < NumHeaps)
+    // clang-format on
+    hd = &HeapArray[heap];
+    // clang-format off
+    CHECK(897, 0 <= hd->size)
+    CHECK(899, hd->allocated == NULL || hd->allocated->prev == NULL)
+    // clang-format on
+
+    for (cell = hd->allocated; cell != NULL; cell = cell->next)
+    {
+        // clang-format off
+        CHECK(902, InRange(cell, ArenaStart, ArenaEnd))
+        CHECK(903, OFFSET(cell, ALIGNMENT) == 0)
+        CHECK(904, cell->next == NULL || cell->next->prev == cell)
+        CHECK(905, MINOBJSIZE <= cell->size)
+        CHECK(906, OFFSET(cell->size, ALIGNMENT) == 0)
+        // clang-format on
+        total += cell->size;
+        // clang-format off
+        CHECK(909, 0 < total && total <= hd->size)
+        // clang-format on
+    }
+
+    CHECK(917, hd->free == NULL || hd->free->prev == NULL)
+    for (cell = hd->free; cell != NULL; cell = cell->next)
+    {
+        // clang-format off
+        CHECK(920, InRange(cell, ArenaStart, ArenaEnd))
+        CHECK(921, OFFSET(cell, ALIGNMENT) == 0)
+        CHECK(922, cell->next == NULL || cell->next->prev == cell)
+        CHECK(923, MINOBJSIZE <= cell->size)
+        CHECK(924, OFFSET(cell->size, ALIGNMENT) == 0)
+        CHECK(925, cell->next == NULL || (char*) cell + cell->size < (char*) cell->next)
+        // clang-format on
+        total += cell->size;
+        totalFree += cell->size - 32;
+        // clang-format off
+        CHECK(929, 0 < total && total <= hd->size)
+        // clang-format on
+    }
+
+    CHECK(936, total == hd->size);
+
+#undef CHECK
+
+    return totalFree;
+}
+
+#pragma force_active on
+static char string__nOSDumpHeap__d___n[] = "\nOSDumpHeap(%d):\n";
+static char string_________Inactive_n[] = "--------Inactive\n";
+static char string_addr_tsize_t_tend_tprev_tnext_n[] = "addr\tsize\t\tend\tprev\tnext\n";
+static char string_________Allocated_n[] = "--------Allocated\n";
+static char string__x_t_d_t_x_t_x_t_x_n[] = "%x\t%d\t%x\t%x\t%x\n";
+static char string_________Free_n[] = "--------Free\n";
+#pragma force_active reset
