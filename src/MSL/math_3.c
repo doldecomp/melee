@@ -28,22 +28,6 @@ extern const float __sincos_on_quadrant[]; // lbl_803B9358
 extern float lbl_80400778[];
 extern const float lbl_803B8F40[4] = { 0.25f, 0.023239374f, 0.00000017055572f, 1.867365e-11f };
 
-float tanf(float x)
-{
-    // tan(x) == sin(x) / cos(x)
-    return func_80326220(x) / func_80326200(x);
-}
-
-float cos__Ff(float x)
-{
-    return func_80326240(x);
-}
-
-float sin__Ff(float x)
-{
-    return func_803263D4(x);
-}
-
 float cosf(float x) {
     float z = __two_over_pi * x;
 
