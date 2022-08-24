@@ -13,4 +13,5 @@
   NamespaceIndentation: All,
   FixNamespaceComments: false,
   SpacesInCStyleCastParentheses: False,
-  SpaceAfterCStyleCast: True }
+  SpaceAfterCStyleCast: True,
+  Cpp11BracedListStyle: False }
