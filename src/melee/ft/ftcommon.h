@@ -55,7 +55,7 @@ s32 func_8007DC08(Fighter*, f32);
 void func_8007DD7C(HSD_GObj*, Vec3*);
 void func_8007DFD0();
 void func_8007E0E4(HSD_GObj*);
-void func_8007E2A4();
+HSD_GObj* func_8007E2A4(HSD_GObj*);
 void func_8007E2D0(Fighter*, s16, void (*cb0)(HSD_GObj*), void (*cb1)(HSD_GObj*), void (*cb2)(HSD_GObj*, HSD_GObj*));
 void func_8007E2F4(Fighter*, s16 val);
 void func_8007E2FC(HSD_GObj*);

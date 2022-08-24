@@ -1709,14 +1709,14 @@ void func_801C2374(HSD_LObj* lobj)
     cur = lobj;
     phi_f31 = func_801C0498();
     while (cur != NULL) {
-        if (func_80366D70(cur, &sp10)) {
+        if (HSD_LObjGetPosition(cur, &sp10)) {
             vtmp = &sp10;
             sp10.x *= phi_f31;
             sp10.y *= phi_f31;
             sp10.z *= phi_f31;
             func_80366CE8(cur, vtmp);
         }
-        if (func_80366E38(cur, &sp10)) {
+        if (HSD_LObjGetInterest(cur, &sp10)) {
             vtmp = &sp10;
             sp10.x *= phi_f31;
             sp10.y *= phi_f31;
@@ -3529,19 +3529,19 @@ void func_801C445C(HSD_LObj* lobj)
     }
     for (cur = lobj; cur != NULL; cur = cur->next) {
 
-        wobj = func_80366E78(lobj);
+        wobj = HSD_LObjGetPositionWObj(lobj);
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &sp38);
         }
 
-        wobj = func_80366E90(lobj);
+        wobj = HSD_LObjGetInterestWObj(lobj);
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &sp20);
         }
 
-        func_80365620(cur);
+        HSD_LObjAnim(cur);
 
-        wobj = func_80366E78(lobj);
+        wobj = HSD_LObjGetPositionWObj(lobj);
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &sp2C);
             if (sp38.x != sp2C.x || sp38.y != sp2C.y || sp38.z != sp2C.z) {
@@ -3553,7 +3553,7 @@ void func_801C445C(HSD_LObj* lobj)
             }
         }
 
-        wobj = func_80366E90(lobj);
+        wobj = HSD_LObjGetInterestWObj(lobj);
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &sp14);
             if (sp20.x != sp14.x || sp20.y != sp14.y || sp20.z != sp14.z) {
@@ -3579,8 +3579,6 @@ static void lbl_801C4640(HSD_GObj* gobj)
 }
 
 extern u8 lbl_804D784A;
-extern void func_80365678();
-extern void func_803656F8();
 extern void func_80011AC4();
 static asm void func_801C466C(void)
 {
@@ -3684,7 +3682,7 @@ lbl_801C47B8:
 lbl_801C47C0:
 /* 801C47C0 001C13A0  38 7B 00 00 */	addi r3, r27, 0
 /* 801C47C4 001C13A4  38 81 00 10 */	addi r4, r1, 0x10
-/* 801C47C8 001C13A8  48 1A 25 A9 */	bl func_80366D70
+/* 801C47C8 001C13A8  48 1A 25 A9 */	bl HSD_LObjGetPosition
 /* 801C47CC 001C13AC  2C 03 00 00 */	cmpwi r3, 0
 /* 801C47D0 001C13B0  41 82 00 34 */	beq lbl_801C4804
 /* 801C47D4 001C13B4  C0 01 00 10 */	lfs f0, 0x10(r1)
@@ -3702,7 +3700,7 @@ lbl_801C47C0:
 lbl_801C4804:
 /* 801C4804 001C13E4  38 7B 00 00 */	addi r3, r27, 0
 /* 801C4808 001C13E8  38 81 00 10 */	addi r4, r1, 0x10
-/* 801C480C 001C13EC  48 1A 26 2D */	bl func_80366E38
+/* 801C480C 001C13EC  48 1A 26 2D */	bl HSD_LObjGetInterest
 /* 801C4810 001C13F0  2C 03 00 00 */	cmpwi r3, 0
 /* 801C4814 001C13F4  41 82 00 34 */	beq lbl_801C4848
 /* 801C4818 001C13F8  C0 01 00 10 */	lfs f0, 0x10(r1)
@@ -3729,7 +3727,7 @@ lbl_801C485C:
 /* 801C4860 001C1440  40 82 FF 60 */	bne lbl_801C47C0
 /* 801C4864 001C1444  7F A3 EB 78 */	mr r3, r29
 /* 801C4868 001C1448  C0 22 B2 C4 */	lfs f1, 0.0f
-/* 801C486C 001C144C  48 1A 0E 8D */	bl func_803656F8
+/* 801C486C 001C144C  48 1A 0E 8D */	bl HSD_LObjReqAnimAll
 /* 801C4870 001C1450  3C 60 80 36 */	lis r3, HSD_AObjSetRate@ha
 /* 801C4874 001C1454  C8 22 B3 58 */	lfd f1, 1.0
 /* 801C4878 001C1458  3F E0 00 01 */	lis r31, 0x0000FFFF@ha
@@ -3797,7 +3795,7 @@ lbl_801C4950:
 /* 801C4954 001C1534  40 82 FF 68 */	bne lbl_801C48BC
 lbl_801C4958:
 /* 801C4958 001C1538  7F A3 EB 78 */	mr r3, r29
-/* 801C495C 001C153C  48 1A 0D 1D */	bl func_80365678
+/* 801C495C 001C153C  48 1A 0D 1D */	bl HSD_LObjAnimAll
 /* 801C4960 001C1540  3C 60 80 1C */	lis r3, lbl_801C461C@ha
 /* 801C4964 001C1544  38 83 46 1C */	addi r4, r3, lbl_801C461C@l
 /* 801C4968 001C1548  38 7E 00 00 */	addi r3, r30, 0
