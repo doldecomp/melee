@@ -99,3 +99,24 @@ While not all code submitted at this time conforms to this standard, it is the i
     else
       // code line
     ```
+
+## <a name="literals"></a>Literals
+- Integer literals
+  - Yes: `123U` for `u32`
+  - Yes: `123456L` for `s64`
+  - Yes: `123456LU` for `u64`
+  - Yes: `0xABC` for hexidecimal
+  - No: `0XABC`
+- Floating-point literals
+  - Yes: `1.23F` for `f32`
+  - No: `1.23f`
+  - Yes: `1.23L` for `f64`
+  - No: `1.23`
+  - Yes: `1.23e-5F`
+  - No: `1.23E-5F`
+  - No:
+    - `1.`
+    - `1.F`
+    - `1.f`
+    - `1.L`
+  - No: `1` for `f32` or `f64`
