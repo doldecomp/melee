@@ -6,6 +6,7 @@ generate_map=0
 non_matching=0
 frank=0
 clear=false
+log=false
 
 usage="$(basename "$0") [-cemnfxh] [-r pattern]
 
@@ -18,13 +19,15 @@ where
     -f  frank: pass EPILOGUE_PROCESS=1 to make
     -m  map: pass GENERATE_MAP=1 to make
     -n  non-matching: pass NON_MATCHING=1 to make
-    -x  clear: clear the console before executing this script"
+    -x  clear: clear the console before executing this script
+    -l  log: tee output to build.log"
 
-while getopts ":cr:emnfxh" arg; do
+while getopts ":cr:emnfxhl" arg; do
     case $arg in
-    h) echo "$usage"
-       exit
-       ;;
+    h)
+        echo "$usage"
+        exit
+        ;;
     c) clean=true ;;
     r) rebuild_pattern=$OPTARG ;;
     e) expected=true ;;
@@ -32,11 +35,14 @@ while getopts ":cr:emnfxh" arg; do
     n) non_matching=1 ;;
     f) frank=1 ;;
     x) clear=true ;;
-    :) printf "missing argument for -%s\n" "$OPTARG" >&2
-       echo "$usage" >&2
-       exit 1
-       ;;
-    \?) printf "illegal option: -%s\n" "$OPTARG" >&2
+    l) log=true ;;
+    :)
+        printf "missing argument for -%s\n" "$OPTARG" >&2
+        echo "$usage" >&2
+        exit 1
+        ;;
+    \?)
+        printf "illegal option: -%s\n" "$OPTARG" >&2
         echo "$usage" >&2
         exit 1
         ;;
@@ -47,26 +53,44 @@ if [ $clear = true ]; then
     clear
 fi
 
-pushd $HERE
-if [ "$clean" = true ]; then
-    echo "Cleaning."
-    make clean
-elif [ "$rebuild_pattern" ]; then
-    rebuild_pattern="*/${rebuild_pattern}*.o"
-    echo "Deleting files matching pattern $rebuild_pattern"
-    find ./build -iwholename $rebuild_pattern -delete
-fi
+pushd "$HERE"
+build_time() {
+    date +%T.%N
+}
 
-echo "Running make with NON_MATCHING=$non_matching GENERATE_MAP=$generate_map EPILOGUE_PROCESS=$frank"
-make NON_MATCHING=$non_matching GENERATE_MAP=$generate_map EPILOGUE_PROCESS=$frank
-result=$?
+build() {
+    echo
+    echo "Build started at $(build_time)."
 
-if [ "$expected" = true ]; then
-    if [ "$result" != 0 ]; then
-        echo >&2 "Make failed. Not syncing to expected."
-    else
-        echo "Syncing build to expected."
-        rsync -a --delete build/ expected/build/
+    if [ "$clean" = true ]; then
+        echo "Cleaning."
+        make clean
+    elif [ "$rebuild_pattern" ]; then
+        rebuild_pattern="*/${rebuild_pattern}*.o"
+        echo "Deleting files matching pattern $rebuild_pattern"
+        find ./build -iwholename $rebuild_pattern -delete
     fi
+
+    echo "Running make with NON_MATCHING=$non_matching GENERATE_MAP=$generate_map EPILOGUE_PROCESS=$frank"
+    make NON_MATCHING=$non_matching GENERATE_MAP=$generate_map EPILOGUE_PROCESS=$frank
+    result=$?
+
+    if [ "$expected" = true ]; then
+        if [ "$result" != 0 ]; then
+            echo >&2 "Make failed. Not syncing to expected."
+        else
+            echo "Syncing build to expected."
+            rsync -a --delete build/ expected/build/
+        fi
+    fi
+
+    echo "Build finished at $(build_time)."
+}
+
+if [ "$log" = true ]; then
+    build | tee -a build.log
+else
+    build
 fi
+
 popd
