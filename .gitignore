@@ -1,4 +1,8 @@
+# Generated
 *.m2c
+ctx.c
+ctx_includes.h
+*.s.c
 
 # .DS_Store
 .DS_Store
@@ -24,8 +28,6 @@ clean.bat
 
 # Other
 src/m2ctx.py
-ctx.c
-ctx_includes.h
 expected/
 *.log
 
