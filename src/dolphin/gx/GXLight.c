@@ -133,9 +133,9 @@ void GXInitLightDir(GXLightObj *light, f32 x, f32 y, f32 z)
     light->dir.z = -z;
 }
 
-void GXInitLightColor(GXLightObj *light, GXColor *color)
+void GXInitLightColor(GXLightObj *light, GXColor color)
 {
-    *(u32 *)&light->color = (color->r << 24) | (color->g << 16) | (color->b << 8) | color->a;
+    *(u32 *)&light->color = (color.r << 24) | (color.g << 16) | (color.b << 8) | color.a;
 }
 
 void GXLoadLightObjImm(GXLightObj *light, GXLightID light_id)

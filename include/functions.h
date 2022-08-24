@@ -822,12 +822,9 @@ void PSMTXMUltiVec(Mtx, Vec *, Vec *);
 
 #pragma region "asm/dolphin/mtx/vec.s"
 void PSVECAdd(Vec *a, Vec *b, Vec *result);
-void PSVECSubtract(Vec *a, Vec *b, Vec *result);
 void PSVECScale(Vec *src, Vec *dst, f32 scale);
-void PSVECNormalize(Vec *src, Vec *unit);
 f32 PSVECMag(Vec *v);
 f32 PSVECDotProduct(Vec *a, Vec *b);
-void PSVECCrossProduct(Vec *a, Vec *b, Vec *result);
 #pragma endregion
 
 void *OSAllocFromHeap(int, u32);
@@ -852,8 +849,8 @@ void HSD_ForeachAnim(void *, ...);
 
 void func_80366BD4();
 
-struct _HSD_WObj *func_80366E78(struct _HSD_LObj *);
-struct _HSD_WObj *func_80366E90(struct _HSD_LObj *);
+struct _HSD_WObj *HSD_LObjGetPositionWObj(struct _HSD_LObj *);
+struct _HSD_WObj *HSD_LObjGetInterestWObj(struct _HSD_LObj *);
 
 f32 HSD_CObjGetNear(struct _HSD_CObj *);
 

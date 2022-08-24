@@ -22,7 +22,7 @@ void GXInitLightSpot(GXLightObj *light, f32 angle, GXSpotFn fn);
 void GXInitLightDistAttn(GXLightObj *light, f32 ref_distance, f32 ref_brightness, GXDistAttnFn dist_fn);
 void GXInitLightPos(GXLightObj *light, f32 x, f32 y, f32 z);
 void GXInitLightDir(GXLightObj *light, f32 x, f32 y, f32 z);
-void GXInitLightColor(GXLightObj *light, GXColor *color);
+void GXInitLightColor(GXLightObj *light, GXColor color);
 void GXLoadLightObjImm(GXLightObj *light, GXLightID light_id);
 void GXSetChanAmbColor(GXChannelID chan, GXColor *color);
 void GXSetChanMatColor(GXChannelID chan, GXColor *color);
