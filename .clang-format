@@ -5,7 +5,8 @@ UseTab: Never
 IndentWidth: 4
 TabWidth: 4
 BreakBeforeBraces: Custom
-BraceWrapping: { AfterFunction: True }
+BraceWrapping:
+  AfterFunction: True
 AllowShortIfStatementsOnASingleLine: False
 IndentCaseLabels: False
 ColumnLimit: 0
