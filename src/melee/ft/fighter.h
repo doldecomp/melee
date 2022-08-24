@@ -1300,7 +1300,8 @@ typedef struct _Fighter {
     /* 0x10C */ ftData* x10C_ftData;
     // TODO: Ask Psi how many of those are confirmed, only a fraction of them is used right now
     attr x110_attr;
-    u8 filler_x294[0x2CC - 0x294];
+    u8 filler_x294[0x2C4 - 0x294];
+    /* 0x2C4 */ Vec2 x2C4;
     /* 0x2CC */ void* x2CC;
     /* 0x2D0 */ void* x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
