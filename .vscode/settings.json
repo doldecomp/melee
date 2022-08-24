@@ -1,3 +1,0 @@
-{
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, DerivePointerAlignment: false, PointerAlignment: Left, UseTab: Never, IndentWidth: 4, TabWidth: 4, BreakBeforeBraces: Custom, BraceWrapping: { AfterFunction: true }, AllowShortIfStatementsOnASingleLine: false, IndentCaseLabels: false, ColumnLimit: 0, AccessModifierOffset: -4, NamespaceIndentation: All, FixNamespaceComments: false, SpacesInCStyleCastParentheses: false, SpaceAfterCStyleCast: true, Cpp11BracedListStyle: false }"
-}
