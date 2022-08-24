@@ -18,7 +18,6 @@ build/
 *.dump
 
 # IDE
-.vscode/
 build.bat
 clean.bat
 
@@ -36,6 +35,20 @@ __pycache__
 *.exe
 *.dll
 *.bat
+
+# https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
 
 # https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
