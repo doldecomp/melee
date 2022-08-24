@@ -274,7 +274,6 @@ void func_8007DB58();
 // void func_8007DBCC(Fighter*, s32);
 
 void func_8007E0E4();
-void func_8007E2A4();
 void func_8007E2D0(struct _Fighter *, s16, void (*)(struct _HSD_GObj *), void (*)(struct _HSD_GObj *), void (*)(struct _HSD_GObj *, struct _HSD_GObj *));
 void func_8007E2F4(struct _Fighter *, s16);
 void func_8007E2FC(struct _HSD_GObj *);
