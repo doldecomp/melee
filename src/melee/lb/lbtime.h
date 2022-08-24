@@ -1,5 +1,5 @@
-#ifndef _lbtime_h_
-#define _lbtime_h_
+#ifndef MELEE_LB_LBTIME_H
+#define MELEE_LB_LBTIME_H
 
 #include <dolphin/os/OSTime.h>
 
