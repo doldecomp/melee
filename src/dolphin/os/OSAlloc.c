@@ -205,7 +205,7 @@ void OSDestroyHeap(size_t idx)
     *(s32 *)&HeapArray[idx] = -1;
 }
 
-long OSCheckHeap(OSHeapHandle heap)
+size_t OSCheckHeap(OSHeapHandle heap)
 {
     Heap *hd;
     HeapCell *cell;
@@ -269,6 +269,7 @@ long OSCheckHeap(OSHeapHandle heap)
     return totalFree;
 }
 
+#pragma push
 #pragma force_active on
 static char string__nOSDumpHeap__d___n[] = "\nOSDumpHeap(%d):\n";
 static char string_________Inactive_n[] = "--------Inactive\n";
@@ -276,4 +277,4 @@ static char string_addr_tsize_t_tend_tprev_tnext_n[] = "addr\tsize\t\tend\tprev\
 static char string_________Allocated_n[] = "--------Allocated\n";
 static char string__x_t_d_t_x_t_x_t_x_n[] = "%x\t%d\t%x\t%x\t%x\n";
 static char string_________Free_n[] = "--------Free\n";
-#pragma force_active reset
+#pragma pop
