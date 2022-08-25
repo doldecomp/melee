@@ -3,5 +3,4 @@
 
 #include <dolphin/types.h>
 #include <melee/ft/fighter.h>
-
 #endif
