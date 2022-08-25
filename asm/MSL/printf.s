@@ -98,8 +98,8 @@ lbl_80323E18:
 /* 80323E30 00320A10  38 21 00 30 */	addi r1, r1, 0x30
 /* 80323E34 00320A14  4E 80 00 20 */	blr 
 
-.global func_80323E38
-func_80323E38:
+.global vprintf
+vprintf:
 /* 80323E38 00320A18  7C 08 02 A6 */	mflr r0
 /* 80323E3C 00320A1C  3C A0 80 40 */	lis r5, lbl_80400430@ha
 /* 80323E40 00320A20  90 01 00 04 */	stw r0, 4(r1)
