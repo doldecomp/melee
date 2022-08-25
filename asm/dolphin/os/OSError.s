@@ -2,16 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240
 
-.global OSSetErrorHandler
-OSSetErrorHandler:
-/* 80345854 00342434  3C A0 80 4A */	lis r5, __OSErrorTable@ha
-/* 80345858 00342438  54 63 13 BA */	rlwinm r3, r3, 2, 0xe, 0x1d
-/* 8034585C 0034243C  38 05 7C 40 */	addi r0, r5, __OSErrorTable@l
-/* 80345860 00342440  7C A0 1A 14 */	add r5, r0, r3
-/* 80345864 00342444  80 65 00 00 */	lwz r3, 0(r5)
-/* 80345868 00342448  90 85 00 00 */	stw r4, 0(r5)
-/* 8034586C 0034244C  4E 80 00 20 */	blr 
-
 .global __OSUnhandledException
 __OSUnhandledException:
 /* 80345870 00342450  7C 08 02 A6 */	mflr r0
@@ -205,13 +195,6 @@ jtbl_804022D4:
 	.4byte lbl_80345A3C
 	.4byte lbl_80345A3C
 	.4byte lbl_803459F0
-
-
-.section .bss, "wa"
-    .balign 8
-.global __OSErrorTable
-__OSErrorTable:
-	.skip 0x40
 
 
 .section .sdata

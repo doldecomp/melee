@@ -35,3 +35,13 @@ void OSPanic(char* file, int line, char* msg, ...)
     }
     PPCHalt();
 }
+
+OSErrorHandler __OSErrorTable[16];
+
+OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler)
+{
+    OSErrorHandler prevHandler = __OSErrorTable[error];
+
+    __OSErrorTable[error] = handler;
+    return prevHandler;
+}
