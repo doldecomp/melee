@@ -67,9 +67,7 @@ def main():
 
     output = import_c_file(args.c_file)
 
-    with open(root / "ctx.c", "w", encoding="utf8") as f:
-        f.write(output)
-
+    print(output)
 
 if __name__ == "__main__":
     main()
