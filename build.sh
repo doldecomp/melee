@@ -80,6 +80,7 @@ build() {
             echo >&2 "Make failed. Not syncing to expected."
         else
             echo "Syncing build to expected."
+            mkdir -p build expected/build
             rsync -a --delete build/ expected/build/
         fi
     fi
