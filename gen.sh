@@ -64,11 +64,14 @@ gen() {
     if [ "$includes" = true ]; then
         echo "Generating $ctx_includes."
 
-        find include/ src/ -type f -name "*.h" |
-            (
+        (
+            echo -e "#pragma region include"
+            find include/ src/ -type f -name "*.h" |
                 sed -r -e "/include\/$ctx_includes/d" -e 's/((include|src)\/)?(.*)/#include <\3>/'
-                cat ./tools/m2c/m2c_macros.h
-            ) |
+            echo -e "#pragma endregion\n\n#pragma region m2c_macros\n"
+            cat ./tools/m2c/m2c_macros.h
+            echo -e "\n#pragma endregion"
+        ) |
             cat >"include/$ctx_includes"
     fi
 
