@@ -1792,7 +1792,7 @@ void Player_InitOrResetPlayer(s32 slot) {
     transformed0 = &player->transformed[0];
     transformed1 = &player->transformed[1];
 
-    zerofloat = 0.0f;
+    zerofloat = 0.0F;
     player->player_poses.byIndex[*transformed0].z = zerofloat;
     player->player_poses.byIndex[*transformed0].y = zerofloat;
     player->player_poses.byIndex[*transformed0].x = zerofloat;

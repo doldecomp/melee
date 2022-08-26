@@ -35,7 +35,7 @@ void ftNess_ItemPKFireSpawn(HSD_GObj* fighter_gobj) //* Ness's PK Fire spawn fun
 
         ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->x2C_facing_direction;
         ItemBonePos.y += ness_attr->x34_PKFIRE_SPAWN_Y;
-        ItemBonePos.z = 0.0f;
+        ItemBonePos.z = 0.0F;
 
         if (fp->xE0_ground_or_air == AIR)
         {
@@ -48,7 +48,7 @@ void ftNess_ItemPKFireSpawn(HSD_GObj* fighter_gobj) //* Ness's PK Fire spawn fun
             PKFireVel = ness_attr->x2C_PKFIRE_GROUNDED_VELOCITY;
         }
 
-        PKFireVelStruct.z = 0.0f;
+        PKFireVelStruct.z = 0.0F;
 
         PKFireVelStruct.x = PKFireVel * cosf(PKFireLaunch) * fp->x2C_facing_direction;
 
@@ -71,7 +71,7 @@ void ftNess_SpecialS_StartAction(HSD_GObj* fighter_gobj)  // Ness's grounded PK 
     fp = fighter_gobj->user_data;
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
     fp->x2200_ftcmd_var0 = 0; // Set ftcmd flag0 to 0; unused in PK Fire? //
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALS, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALS, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftNess_ItemPKFireSpawn; // Store PK Fire spawn function //
 }
@@ -85,7 +85,7 @@ void ftNess_SpecialAirS_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK Fire
     fp = fighter_gobj->user_data;
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
     fp->x2200_ftcmd_var0 = 0; // Set ftcmd flag0 to 0; unused in PK Fire? //
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRS, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRS, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftNess_ItemPKFireSpawn;
 }

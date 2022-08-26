@@ -51,7 +51,7 @@ void ftIceClimber_OnDeath(HSD_GObj* fighterObj) {
     fp->sa.nana.x2230.bits.b0 = 0;
     fp->sa.nana.x2238 = 0;
     fp->sa.nana.x224C = 0;
-    fp->sa.nana.x2250 = 0.0f;
+    fp->sa.nana.x2250 = 0.0F;
 }
 
 void ftIceClimber_8011F060(HSD_GObj* fighterObj) {

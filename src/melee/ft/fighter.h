@@ -149,12 +149,12 @@ typedef enum CharacterKind
 // Ternary macro for fcmpo-based facing direction check 
 
 #define CLIFFCATCH_O(fp) \
-(fp->x2C_facing_direction < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+(fp->x2C_facing_direction < 0.0F) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
 
 // Ternary macro for fcmpu-based facing direction check
 
 #define CLIFFCATCH_U(fp) \
-(fp->x2C_facing_direction != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+(fp->x2C_facing_direction != 1.0F) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
 
 typedef enum ftCommonAction
 {
@@ -2194,13 +2194,13 @@ inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BO
 }
 
 inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1) {
-    func_800704F0(gobj, arg1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    func_800704F0(gobj, arg1, 3.0F);
+    func_800704F0(gobj, 0, 3.0F);
 }
 
 inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1) {
-    func_800704F0(gobj, arg1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+    func_800704F0(gobj, arg1, 0.0F);
+    func_800704F0(gobj, 0, 0.0F);
 }
 
 inline void Fighter_UnsetCmdVar0(HSD_GObj* fighterObj) {

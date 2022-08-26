@@ -34,9 +34,9 @@ void ftSamus_8012AEBC(HSD_GObj* fighterObj) {
     unk_struct.intvec.x = 2;
     unk_struct.intvec.y = 1;
     unk_struct.intvec.z = 0;
-    unk_struct.vec1.x = unk_struct.vec1.y = unk_struct.vec1.z = 0.0f; 
-    unk_struct.vec2.x = unk_struct.vec2.y = unk_struct.vec2.z = 0.0f;
-    unk_struct.single_float = 3.0f; 
+    unk_struct.vec1.x = unk_struct.vec1.y = unk_struct.vec1.z = 0.0F; 
+    unk_struct.vec2.x = unk_struct.vec2.y = unk_struct.vec2.z = 0.0F;
+    unk_struct.single_float = 3.0F; 
     func_8007B5AC(fp, &fp->x11A0_fighterHurtbox[0], &unk_struct); 
 }
 
@@ -51,7 +51,7 @@ void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* fighterObj) {
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.b0 = 0;
     fp->x2340_stateVar1 = 0;
-    if (fp->x894_currentAnimFrame == 3.0f) {
+    if (fp->x894_currentAnimFrame == 3.0F) {
         fp->x2204_ftcmd_var1 = 1;
     }
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012ADF0;
@@ -63,13 +63,13 @@ void ftSamus_SpecialLw_StartAction(HSD_GObj* fighterObj) {
     
     fp->xEC_ground_vel *= samus_attr->x6C;
     if (fp->x10_action_state_index == 0x28) {
-        Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0, NULL, 3.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0, NULL, 3.0F, 1.0F, 0.0F);
         ftSamus_SpecialLw_StartAction_inner(fighterObj);
         fp->x2204_ftcmd_var1 = 2;
         ftSamus_8012B5F0(fighterObj);
         return;
     }
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighterObj);
     ftSamus_SpecialLw_StartAction_inner(fighterObj);
 }
@@ -81,7 +81,7 @@ void ftSamus_SpecialAirLw_StartAction(HSD_GObj* fighterObj) {
     fp->x80_self_vel.x *= samus_attr->x70;
     fp->x80_self_vel.y = samus_attr->x58;
 
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighterObj);
     ftSamus_SpecialLw_StartAction_inner(fighterObj);
 }
@@ -145,7 +145,7 @@ void ftSamus_8012B3A8(HSD_GObj* fighterObj) {
     if (fp->x2200_ftcmd_var0) {
         func_8007CADC(
             fp, 
-            0.0f, 
+            0.0F, 
             ft_attr->x110_WalkInitialVelocity * samus_attr->x64, 
             ft_attr->x118_WalkMaximumVelocity * samus_attr->x5C
         );
@@ -163,7 +163,7 @@ void ftSamus_8012B41C(HSD_GObj* fighterObj) {
     func_8007D4B8(fp);
     func_8007D3A8(
         fp, 
-        0.0f, 
+        0.0F, 
         ft_attr->x174_AerialDriftStickMult * samus_attr->x68, 
         ft_attr->x17C_AerialDriftMax * samus_attr->x60
     );
@@ -205,7 +205,7 @@ void ftSamus_UnkSetStateAndCb(HSD_GObj* fighterObj) {
 void ftSamus_8012B570(HSD_GObj* fighterObj) {
     Fighter* fp = getFighter(fighterObj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ftSamus_UnkSetStateAndCb(fighterObj);
 }
 
@@ -214,13 +214,13 @@ void ftSamus_8012B5F0(HSD_GObj* fighterObj) {
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->x80_self_vel.y = samus_attr->x54;
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x164, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     fp->cb.x21BC_callback_Accessory4 = ftSamus_8012ADF0;
 }
 
 void ftSamus_8012B668(HSD_GObj* fighterObj) {
     Fighter* fp = getFighter(fighterObj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ftSamus_UnkSetStateAndCb(fighterObj);
 }

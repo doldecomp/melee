@@ -55,7 +55,7 @@ void ftMewTwo_80144F58(HSD_GObj* fighterObj) {
 
 void ftMewTwo_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftMewtwoAttributes);
-    if (fp->x34_scale.y != 1.0f) {
+    if (fp->x34_scale.y != 1.0F) {
         sA2->x80_MEWTWO_DISABLE_OFFSET_X *= fp->x34_scale.y;
         sA2->x84_MEWTWO_DISABLE_OFFSET_Y *= fp->x34_scale.y;
     }

@@ -1,13 +1,13 @@
 #include <melee/it/item.h>
 #include <common_structs.h>
 
-#define FLOAT32_MAX 3.4028234663852886e+38f
+#define FLOAT32_MAX 3.4028234663852886e+38F
 
 static inline float _sqrtfItem(float x)
 {
     f64 _half = 0.5;
     volatile f32 y;
-    if (x > 0.0f)
+    if (x > 0.0F)
     {
         f64 guess = __frsqrte((double)x);   // returns an approximation to
         guess = 0.5 * guess * (3.0 - guess * guess * x);  // now have 12 sig bits
@@ -33,7 +33,7 @@ f32 func_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk) // Apply Item Damag
         ret += lbl_804D6D28->x80_float[6];
         if (ret <= 1.0)
         {
-            return ret = 1.0f;
+            return ret = 1.0F;
         }
     }
     return ret;
@@ -629,7 +629,7 @@ asm s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compil
 f32 func_8026B960(HSD_GObj* item_gobj) // Return float result of item kind and state checks - requires -g compiler flag / Frank modifications to match //
 {
     s32 itemID;
-    f32 unk_timer = -1.0f;
+    f32 unk_timer = -1.0F;
     Item* item_data;
 
     item_data = item_gobj->user_data;
@@ -661,7 +661,7 @@ f32 func_8026B960(register HSD_GObj* item_gobj)
 {
     register s32 itemID;
     register Item* item_data;
-    register f32 unk_timer = -1.0f;
+    register f32 unk_timer = -1.0F;
 
     item_data = item_gobj->user_data;
     itemID = item_data->x10_item_kind;
@@ -721,7 +721,7 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item*
             temp_stateDesc = item_data->xD0_itemStateDesc;
             HSD_JObjAddAnimAll(item_jobj2, temp_stateDesc->x0_anim_joint, temp_stateDesc->x4_matanim_joint, temp_stateDesc->x8_parameters);
             func_8000BA0C(item_jobj2, item_data->x5D0_animFrameSpeed);
-            HSD_JObjReqAnimAll(item_jobj2, 0.0f);
+            HSD_JObjReqAnimAll(item_jobj2, 0.0F);
             func_80268E40(item_data, itemStateDesc);
         }
         HSD_JObjAnimAll(item_jobj2);
@@ -748,9 +748,9 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2)
     temp_stateArray = item_data->xC4_article_data->xC_itemStates;
     item_jobj2 = item_gobj->hsd_obj;
     itemStateDesc = &temp_stateArray->x0_itemStateDesc[item_data->x28_item_anim_index];
-    sp1C.z = 0.0f;
-    sp1C.y = 0.0f;
-    sp1C.x = 0.0f;
+    sp1C.z = 0.0F;
+    sp1C.y = 0.0F;
+    sp1C.x = 0.0F;
     func_8027429C(item_gobj, &sp1C);
     func_802742F4(item_gobj, arg1, arg2);
     {
@@ -775,7 +775,7 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2)
                 temp_stateDesc = item_data->xD0_itemStateDesc;
                 HSD_JObjAddAnimAll(item_jobj2, temp_stateDesc->x0_anim_joint, temp_stateDesc->x4_matanim_joint, temp_stateDesc->x8_parameters);
                 func_8000BA0C(item_jobj2, item_data->x5D0_animFrameSpeed);
-                HSD_JObjReqAnimAll(item_jobj2, 0.0f);
+                HSD_JObjReqAnimAll(item_jobj2, 0.0F);
                 func_80268E40(item_data, itemStateDesc);
             }
             HSD_JObjAnimAll(item_jobj2);
@@ -833,9 +833,9 @@ void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's position bas
 {
     Item* item_data = item_gobj->user_data;
     f32 temp_float;
-    f32 temp_float2 = 0.0f;
+    f32 temp_float2 = 0.0F;
 
-    temp_float = 0.5f * (item_data->x378_itemColl.xA4_ecbCurrCorrect.top.y + item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y);
+    temp_float = 0.5F * (item_data->x378_itemColl.xA4_ecbCurrCorrect.top.y + item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y);
     pos->x = item_data->x4C_pos.x + temp_float2;
     pos->y = item_data->x4C_pos.y + temp_float;
     pos->z = item_data->x4C_pos.z + temp_float2;
@@ -845,12 +845,12 @@ void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's position bas
 // https://decomp.me/scratch/WAcXj //
 void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's ECB position? //
 {
-    f32 temp_float = 0.0f;
+    f32 temp_float = 0.0F;
     f32 temp_float2;
     Item* item_data = item_gobj->user_data;
     CollData* collData = &item_data->x378_itemColl;
 
-    temp_float2 = (0.5f * (collData->xE4_ecb.top.y + collData->xE4_ecb.bottom.y));
+    temp_float2 = (0.5F * (collData->xE4_ecb.top.y + collData->xE4_ecb.bottom.y));
     pos->x = collData->x1C_vec.x + temp_float;
     pos->y = collData->x1C_vec.y + temp_float2;
     pos->z = collData->x1C_vec.z + temp_float;
@@ -868,7 +868,7 @@ void func_8026BC14(HSD_GObj* item_gobj) // Check if item owner is a fp + decreme
     item_data = item_gobj->user_data;
     if ((item_data->x518_ownerGObj != NULL) && (func_80086960(item_data->x518_ownerGObj) != FALSE))
     {
-        func_80086A4C(item_data->x518_ownerGObj, item_data->itdmg.xCBC_hitlagFrames - 1.0f);
+        func_80086A4C(item_data->x518_ownerGObj, item_data->itdmg.xCBC_hitlagFrames - 1.0F);
     }
 }
 
@@ -902,9 +902,9 @@ extern void func_80086644(HSD_GObj*, Vec3*);
 // https://decomp.me/scratch/NBrjV //
 void func_8026BC90(HSD_GObj* item_gobj, Vec3* pos) // Unknown item ECB / position update //
 {
-    pos->z = 0.0f;
-    pos->y = 0.0f;
-    pos->x = 0.0f;
+    pos->z = 0.0F;
+    pos->y = 0.0F;
+    pos->x = 0.0F;
     if ((item_gobj != NULL) && (func_80086960(item_gobj) != FALSE))
     {
         func_80086644(item_gobj, pos);
@@ -1280,9 +1280,9 @@ HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir) // Find the closest item to
             {
                 if (item_data->xDC8_word.flags.x13 == 0 || item_data->x518_ownerGObj == NULL)
                 {
-                    if ((facingDir != -1.0f) || !(item_data->x4C_pos.x > vector->x))
+                    if ((facingDir != -1.0F) || !(item_data->x4C_pos.x > vector->x))
                     {
-                        if ((facingDir != 1.0f) || !(item_data->x4C_pos.x < vector->x))
+                        if ((facingDir != 1.0F) || !(item_data->x4C_pos.x < vector->x))
                         {
                             xDist = vector->x - item_data->x4C_pos.x;
                             yDist = vector->y - item_data->x4C_pos.y;
@@ -1308,7 +1308,7 @@ void func_8026C334(HSD_GObj* item_gobj, Vec3* pos) // Unknown item position / EC
 {
     Item* item_data = item_gobj->user_data;
     f32 temp_ECBvar = item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y;
-    f32 temp_zero = 0.0f;
+    f32 temp_zero = 0.0F;
 
     pos->x = item_data->x4C_pos.x + temp_zero;
     pos->y = item_data->x4C_pos.y + temp_ECBvar;

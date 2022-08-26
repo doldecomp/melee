@@ -19,7 +19,7 @@ typedef enum {
 } Gm_PKind;
 
 static float get_zero() { //float reorder hack until hopefully fixing sqrtf fixes it
-    return 0.0f;
+    return 0.0F;
 }
 
 void func_8015BD20(HSD_GObj* gobj) {
@@ -48,7 +48,7 @@ static const double _half=.5;
 static const double _three=3.0;
     s32 unused = 0; // fakematch
 volatile float y;
- if(x > 0.0f)
+ if(x > 0.0F)
  {
 
 
@@ -76,7 +76,7 @@ void func_8015BE40(HSD_GObj* gobj, Point3d* arg1, f32* arg2, f32 arg3, f32 arg4)
     lbvector_Diff(arg1, &fp->xB0_pos, &diff); // third argument is result
     distance = my_lbvector_Len(&diff);
     if (distance < arg3) {
-        *arg2 = 0.0f;
+        *arg2 = 0.0F;
     } else {
         *arg2 = distance;
         lbvector_Normalize(&diff);
@@ -123,7 +123,7 @@ void func_8015C010(HSD_GObj* arg0, f32 arg1) {
     temp_f1 = sp14.x - fp->xB0_pos.x;
     phi_f0 = fabs_inline(temp_f1);
     if (phi_f0 > arg1) {
-        if (temp_f1 > 0.0f) {
+        if (temp_f1 > 0.0F) {
             phi_f0_2 = arg1;
         } else {
             phi_f0_2 = -arg1;
@@ -155,12 +155,12 @@ void func_8015C190(HSD_GObj* arg0) {
     func_80053FF4(0, &sp10);
     if (fp->xB0_pos.x > sp10.x) {
         fp->xB0_pos.x = sp10.x;
-        fp->x80_self_vel.x = 0.0f;
+        fp->x80_self_vel.x = 0.0F;
     }
     func_80054158(0, &sp10);
     if (fp->xB0_pos.x < sp10.x) {
         fp->xB0_pos.x = sp10.x;
-        fp->x80_self_vel.x = 0.0f;
+        fp->x80_self_vel.x = 0.0F;
     }
 }
 
@@ -395,7 +395,7 @@ void func_8015CB9C_inline(Vec3 spC) {
     MasterHandAttributes* attr;
     attr = func_8015C6BC();
     if (attr == 0) {
-        phi_f1 = -1.0f;
+        phi_f1 = -1.0F;
     } else {
         phi_f1 = attr->x178;
     }

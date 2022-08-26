@@ -1,6 +1,6 @@
 #include <ftlink.h>
 
-// extern float lbl_804D92E0; // 0.0f
+// extern float lbl_804D92E0; // 0.0F
 
 s32 func_800EAD64(HSD_GObj* fighterObj) {
     Fighter* fp = fighterObj->user_data;
@@ -96,7 +96,7 @@ void ftLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 
 void ftLink_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftLinkAttributes);
-    if (fp->x34_scale.y != 1.0f) {
+    if (fp->x34_scale.y != 1.0F) {
         sA2->x28 *= fp->x34_scale.y;
     }
 }
@@ -117,7 +117,7 @@ void ftLink_800EB334(HSD_GObj* fighterObj) {
 
     f32 resultf = func_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
     fp->xEC_ground_vel = resultf * p_ftCommonData->x294;
-    if (fp->x19AC < 0.0f) {
+    if (fp->x19AC < 0.0F) {
         new_ground_vel = fp->xEC_ground_vel;
     } else {
         new_ground_vel = -fp->xEC_ground_vel;

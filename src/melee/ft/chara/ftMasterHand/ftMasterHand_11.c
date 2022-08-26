@@ -11,7 +11,7 @@ void lbl_8015236C(void) {
 // 80152370 14EF50
 // https://decomp.me/scratch/ehsMv
 void lbl_80152370(HSD_GObj* arg0) {
-    Fighter_ActionStateChange_800693AC(arg0, 0x163, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x163, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
 }
 
@@ -61,7 +61,7 @@ void lbl_80152478(HSD_GObj* gobj) {
 // 8015247C 14F05C
 // https://decomp.me/scratch/uyDVJ
 void func_8015247C(HSD_GObj* gobj) {
-    Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }
 
@@ -78,7 +78,7 @@ void lbl_801524C8(HSD_GObj* gobj) {
         func_801525E0(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, 0, 0.0F, 1.0F, 0.0F);
         func_8006EBA4(gobj);
     }
 }
@@ -123,7 +123,7 @@ void lbl_801525DC(HSD_GObj* gobj) {
 void func_801525E0(HSD_GObj* gobj) {
     u32 unk[2];
 
-    ((Fighter*)gobj->user_data)->x80_self_vel.x = 0.0f;
-    Fighter_ActionStateChange_800693AC(gobj, 0x165, 0, 0, 0.0f, 1.0f, 0.0f);
+    ((Fighter*)gobj->user_data)->x80_self_vel.x = 0.0F;
+    Fighter_ActionStateChange_800693AC(gobj, 0x165, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }

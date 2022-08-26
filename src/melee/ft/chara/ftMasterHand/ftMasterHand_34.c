@@ -51,7 +51,7 @@ void func_80155D6C(HSD_GObj* gobj, s32 arg1) {
     fp = gobj->user_data;
     fp->x2C_facing_direction = ((Fighter*)fp->x1A58_interactedFighter->user_data)->x2C_facing_direction;
     fp->x2340_stateVar1 = 0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x14A, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x14A, 0, 0, 0.0F, 1.0F, 0.0F);
     fp->x221E_flag.bits.b0 = 0;
     fp->cb.x21B0_callback_Accessory1 = &func_800DE508;
     func_8007E2F4(fp, 0x1FFU);

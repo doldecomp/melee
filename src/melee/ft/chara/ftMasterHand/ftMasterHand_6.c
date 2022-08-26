@@ -36,7 +36,7 @@ void lbl_80151824(void) {
 // 80151828 14E408
 // https://decomp.me/scratch/rsfpE
 void lbl_80151828(HSD_GObj* arg0) {
-    Fighter_ActionStateChange_800693AC(arg0, 0x15A, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x15A, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
 }
 
@@ -87,9 +87,9 @@ void func_80151918(HSD_GObj* gobj) {
     r7_attributes = r8_fp->x10C_ftData->ext_attr;
     r8_fp->x234C_pos.x = (r8_fp->xB0_pos.x - r7_attributes->x3C);
     r8_fp->x234C_pos.y = r7_attributes->x38;
-    r8_fp->x234C_pos.z = 0.0f;
+    r8_fp->x234C_pos.z = 0.0F;
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }
 
@@ -115,8 +115,8 @@ void lbl_8015198C(HSD_GObj* gobj) {
         temp_r7 = temp_r8->x10C_ftData->ext_attr;
         temp_r8->x234C_pos.x = temp_r8->xB0_pos.x - temp_r7->x3C;
         temp_r8->x234C_pos.y = temp_r7->x38;
-        temp_r8->x234C_pos.z = 0.0f;
-        Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
+        temp_r8->x234C_pos.z = 0.0F;
+        Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0F, 1.0F, 0.0F);
         func_8006EBA4(gobj);
     }
 }
@@ -158,6 +158,6 @@ void lbl_80151AC4(void) {
 // 80151AC8 14E6A8
 // https://decomp.me/scratch/AimoS
 void func_80151AC8(HSD_GObj* gobj) {
-    Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }

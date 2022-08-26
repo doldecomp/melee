@@ -23,9 +23,9 @@ u32 lbl_80151428(Vec* vec) {
 inline void func_80151484_inline1(HSD_GObj* gobj) {
     Fighter* r29_fp = gobj->user_data;
     MasterHandAttributes* temp_r30 = r29_fp->x10C_ftData->ext_attr;
-    r29_fp->x80_self_vel.z = 0.0f;
-    r29_fp->x80_self_vel.y = 0.0f;
-    r29_fp->x80_self_vel.x = 0.0f;
+    r29_fp->x80_self_vel.z = 0.0F;
+    r29_fp->x80_self_vel.y = 0.0F;
+    r29_fp->x80_self_vel.x = 0.0F;
     func_802F046C(r29_fp->x2374);
     func_802F046C(r29_fp->x2378);
     func_802F046C(r29_fp->x237C);
@@ -54,7 +54,7 @@ void func_80151484(HSD_GObj* gobj) {
 
     func_80151484_inline1(gobj);
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x158, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x158, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 
     // r3_fp now stored in r28
@@ -94,7 +94,7 @@ void lbl_801515B8(HSD_GObj* gobj) {
 
     // x2348_stateVar3 does that make sense if its u32?
     if ((s32)r31_fp->x2348_stateVar3 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0F, 1.0F, 0.0F);
         func_8006EBA4(gobj);
     }
     temp_r0 = r31_fp->x2348_stateVar3 - 1;
@@ -136,8 +136,8 @@ void lbl_801516B4(HSD_GObj* gobj) {
         r31_fp->x2200_ftcmd_var0 = 0U;
     }
     if (((s32) r31_fp->x2348_stateVar3 > 0) && !ftAnim_IsFramesRemaining(gobj)) {
-        temp_f1 = 0.0f;
-        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, temp_f1, 1.0f, temp_f1);
+        temp_f1 = 0.0F;
+        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, temp_f1, 1.0F, temp_f1);
         func_8006EBA4(gobj);
     }
     temp_r0 = r31_fp->x2348_stateVar3 - 1;

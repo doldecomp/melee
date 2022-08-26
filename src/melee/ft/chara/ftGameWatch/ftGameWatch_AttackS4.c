@@ -100,7 +100,7 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
 
     fp->x2218_flag.bits.b0 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACKS4, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACKS4, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemTorchSetup;
 }

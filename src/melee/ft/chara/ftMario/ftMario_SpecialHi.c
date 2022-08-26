@@ -9,7 +9,7 @@ void ftMario_SpecialHi_StartAction(HSD_GObj* gobj) {
     fp = getFighter(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-	Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALHI, 0, NULL, 0.0f, 1.0f, 0.0f);
+	Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALHI, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }
 
@@ -23,9 +23,9 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
     sa = (ftMarioAttributes*)fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.y = 0.0F;
     fp->x80_self_vel.x = (f32) (fp->x80_self_vel.x * sa->x2C_MARIO_SUPERJUMP_VEL_X);
-    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRHI, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }
 
@@ -50,10 +50,10 @@ void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
     ftMario_SpecialHi_Anim(gobj);
 }
 
-#define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
+#define DEGREES_TO_RADIANS (3.14159265359F / 180.0F)
 #define HALF_PI 1.5707963267948966
 
-#define abs(x) (x < 0.0f ? -x : x)
+#define abs(x) (x < 0.0F ? -x : x)
 
 //https://decomp.me/scratch/9AoMu
 inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj) 
@@ -77,7 +77,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
             tmp_expr = (f32) ((f64) sa->x28_MARIO_SUPERJUMP_ANGLE_DIFF *
                 ((f64) (lstick_x - sa->x24_MARIO_SUPERJUMP_MOMENTUM_STICK_RANGE) / (1.0 - (f64)sa->x24_MARIO_SUPERJUMP_MOMENTUM_STICK_RANGE)));
 
-            tmp = (fp->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * tmp_expr) : (DEGREES_TO_RADIANS * tmp_expr);
+            tmp = (fp->input.x620_lstick_x > 0.0F) ? -(DEGREES_TO_RADIANS * tmp_expr) : (DEGREES_TO_RADIANS * tmp_expr);
             inputStickangle = fp->x6BC_inputStickangle;
 
             if (abs(tmp) > abs(inputStickangle)) {
@@ -164,7 +164,7 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
 
     fp = getFighter(gobj);
     if (fp->xE0_ground_or_air == GA_Air) {
-        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) 
+        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0F) 
         {
             func_80083B68(gobj);
         } 

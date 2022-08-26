@@ -12,7 +12,7 @@ void lbl_80152BCC(HSD_GObj* arg0) {
     Fighter* temp_r31;
 
     temp_r31 = arg0->user_data;
-    Fighter_ActionStateChange_800693AC(arg0, 0x169, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x169, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
     temp_r31->x2368 = -1;
     temp_r31->x236C = -1;
@@ -60,7 +60,7 @@ void lbl_80152CD4(HSD_GObj *arg0) {
 // https://decomp.me/scratch/C5hzY
 void func_80152CD8(HSD_GObj* arg0) {
     Fighter* fp = arg0->user_data;
-    Fighter_ActionStateChange_800693AC(arg0, 0x16A, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x16A, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
     fp->cb.x21BC_callback_Accessory4 = &lbl_80152E28;
     fp->x2200_ftcmd_var0 = 1;
@@ -145,7 +145,7 @@ void lbl_80152E28(HSD_GObj* gobj) {
 void func_80152F80(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x16B, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     func_800236B8(fp->x2368);
     func_800236B8(fp->x236C);

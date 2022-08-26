@@ -57,7 +57,7 @@ void ftPikachu_801246C0(HSD_GObj* fighterObj) {
 
 void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftPikachuAttributes);
-    if (fp->x34_scale.y != 1.0f) {
+    if (fp->x34_scale.y != 1.0F) {
         SCALE_HEIGHT_ATTRS(6); 
     }
 }

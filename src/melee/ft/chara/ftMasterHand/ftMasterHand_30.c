@@ -139,7 +139,7 @@ void lbl_80155814(HSD_GObj* gobj) {
 // 80155818 1523F8
 // https://decomp.me/scratch/qSDro
 void func_80155818(HSD_GObj* gobj) {
-    Fighter_ActionStateChange_800693AC(gobj, 0x183, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x183, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }
 
@@ -185,7 +185,7 @@ void lbl_80155908(HSD_GObj* gobj) {
     Fighter* fp;
 
     fp = gobj->user_data;
-    if ((--fp->x2364 <= 0.0f) && (fp->x2200_ftcmd_var0 != 0)) {
+    if ((--fp->x2364 <= 0.0F) && (fp->x2200_ftcmd_var0 != 0)) {
         func_80155D1C(fp->x1A58_interactedFighter);
         fp->x2200_ftcmd_var0 = 0;
     }
@@ -226,11 +226,11 @@ void lbl_80155A34(HSD_GObj* gobj) {
     Fighter* fp;
 
     fp = gobj->user_data;
-    if (fp->x2358_stateVar7 == 0.0f) {
-        fp->x80_self_vel.z = 0.0f;
-        fp->x80_self_vel.y = 0.0f;
-        fp->x80_self_vel.x = 0.0f;
+    if (fp->x2358_stateVar7 == 0.0F) {
+        fp->x80_self_vel.z = 0.0F;
+        fp->x80_self_vel.y = 0.0F;
+        fp->x80_self_vel.x = 0.0F;
     }
 }
 
-const f32 neg1 = -1.0f;
+const f32 neg1 = -1.0F;

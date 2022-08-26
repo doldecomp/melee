@@ -44,7 +44,7 @@ void func_801530A4(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     attr = fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x16C, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x16C, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     rand = HSD_Randi(attr->xE8 - attr->xE4);
     fp->x2390 = attr->xE4 + rand;
@@ -67,9 +67,9 @@ void lbl_80153160(HSD_GObj* gobj) {
     fp = gobj->user_data;
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         fp->x2208_ftcmd_var2 = 1;
-        temp_f1 = fp->x2390 - 1.0f;
+        temp_f1 = fp->x2390 - 1.0F;
         fp->x2390 = temp_f1;
-        if (temp_f1 < 0.0f) {
+        if (temp_f1 < 0.0F) {
             ftData = fp->x10C_ftData;
             temp_r29 = ftData->ext_attr;
             func_801533CC(gobj);
@@ -104,7 +104,7 @@ static const double _half=.5;
 static const double _three=3.0;
     s32 unk = 0; // fakematch
 volatile float y;
-if(x > 0.0f)
+if(x > 0.0F)
 {
 double guess = __frsqrte((double)x);
 guess = _half*guess*(_three - guess*guess*x);
@@ -136,7 +136,7 @@ void lbl_80153254(HSD_GObj* gobj) {
         func_8015C208(gobj, &sp28_pos);
         sp28_pos.x += attr->xDC;
         sp28_pos.y += attr->xE0;
-        sp28_pos.z = 0.0f;
+        sp28_pos.z = 0.0F;
         lbvector_Diff(&sp28_pos, &fp->xB0_pos, &sp1C_vel);
         len = my_lbvector_Len(&sp1C_vel);
         if (len < attr->x2C) {
@@ -170,13 +170,13 @@ void func_801533CC(HSD_GObj* arg0) {
 
     fp = arg0->user_data;
     attr = fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(arg0, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x16D, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
     if (func_80087120(arg0) > attr->xEC) {
         ftAnim_SetAnimRate(arg0, attr->xF4);
     }
-    fp->x80_self_vel.x = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.x = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
     fp->cb.x21BC_callback_Accessory4 = &lbl_801535B0;
 }
 
@@ -187,13 +187,13 @@ void func_801533CC(HSD_GObj* arg0) {
 inline void lbl_8015346C_inline(HSD_GObj *gobj) {
     Fighter *ft30 = gobj->user_data;
     MasterHandAttributes *attr = ft30->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x16D, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     if (func_80087120(gobj) > attr->xEC) {
         ftAnim_SetAnimRate(gobj, attr->xF4);
     }
-    ft30->x80_self_vel.x = 0.0f;
-    ft30->x80_self_vel.y = 0.0f;
+    ft30->x80_self_vel.x = 0.0F;
+    ft30->x80_self_vel.y = 0.0F;
     ft30->cb.x21BC_callback_Accessory4 = lbl_801535B0;
 }
 
@@ -204,7 +204,7 @@ void lbl_8015346C(HSD_GObj* gobj) {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft4 = gobj->user_data;
         if (--ft4->x2394 == 0) {
-            ftAnim_SetAnimRate(gobj, 1.0f);
+            ftAnim_SetAnimRate(gobj, 1.0F);
             func_80153730(gobj);
         } else {
             lbl_8015346C_inline(gobj);
@@ -288,6 +288,6 @@ void func_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3) {
 // https://decomp.me/scratch/0IqUp
 void func_80153730(HSD_GObj* arg0) {
     s32 unk[2];
-    Fighter_ActionStateChange_800693AC(arg0, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x16E, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
 }

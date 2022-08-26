@@ -27,7 +27,7 @@ void func_80155C94(HSD_GObj* gobj) {
     Fighter* fp;
 
     fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x149, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x149, 0, 0, 0.0F, 1.0F, 0.0F);
     fp->x221E_flag.bits.b0 = 1;
     func_8007E2F4(fp, 0x1FF);
     fp->x2220_flag.bits.b3 = 1;

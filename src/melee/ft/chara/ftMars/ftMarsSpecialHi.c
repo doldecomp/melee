@@ -10,7 +10,7 @@ void ftMars_SpecialHi_StartAction(HSD_GObj* gobj) {
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x16F, 0, NULL, 0.0F, 1.0F, 0.0F);
     // AS_AnimationFrameUpdate&More
     func_8006EBA4(gobj);
 }
@@ -26,10 +26,10 @@ void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj) {
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.y = 0.0F;
     fp->x80_self_vel.x *= attr->x3C;
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x170, 0, NULL, 0.0F, 1.0F, 0.0F);
     // AS_AnimationFrameUpdate&More
     func_8006EBA4(gobj);
 }
@@ -62,9 +62,9 @@ void lbl_80138348(HSD_GObj* gobj) {
     }
 }
 
-#define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
+#define DEGREES_TO_RADIANS (3.14159265359F / 180.0F)
 #define HALF_PI 1.5707963267948966
-#define abs(x) (x < 0.0f ? -x : x)
+#define abs(x) (x < 0.0F ? -x : x)
 
 // 801383A8 00134F88
 // https://decomp.me/scratch/0VOrt
@@ -79,7 +79,7 @@ void lbl_801383A8(HSD_GObj* gobj) {
 
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 = attr->x38 * ((abs_lstick_x - attr->x34) / (1.0/*d*/ - attr->x34));
-        temp_f1 = (fp->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
+        temp_f1 = (fp->input.x620_lstick_x > 0.0F) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
         if (abs(temp_f1) > abs(fp->x6BC_inputStickangle)) {
             fp->x6BC_inputStickangle = temp_f1;
         }
@@ -111,7 +111,7 @@ void lbl_801384F0(HSD_GObj* gobj) {
 
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 = attr->x38 * ((abs_lstick_x - attr->x34) / (1.0/*d*/ - attr->x34));
-        temp_f1 = (fp->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
+        temp_f1 = (fp->input.x620_lstick_x > 0.0F) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
         if (abs(temp_f1) > abs(fp->x6BC_inputStickangle)) {
             fp->x6BC_inputStickangle = temp_f1;
         }
@@ -145,22 +145,22 @@ void lbl_80138638(HSD_GObj* gobj) {
     if (fp->xE0_ground_or_air == GA_Air) {
         if (fp->x2208_ftcmd_var2 == 0) {
             func_80085154(gobj);
-            if (fp->x80_self_vel.x < 0.0f) {
+            if (fp->x80_self_vel.x < 0.0F) {
                 num = -1;
             } else {
                 num = 1;
             }
             if (fp->x2C_facing_direction != num) {
-                fp->x80_self_vel.x *= -1.0f;
+                fp->x80_self_vel.x *= -1.0F;
             }
-            if (fp->x6A4_transNOffset.y < 0.0f) {
+            if (fp->x6A4_transNOffset.y < 0.0F) {
                 fp->x2208_ftcmd_var2 = 1;
             }
         } else {
             attr = fp->x2D4_specialAttributes;
             attr2 = &fp->x110_attr;
             func_8007D494(fp, attr->x44, attr->x48);
-            func_8007D344(fp, 0.0f, attr2->x174_AerialDriftStickMult * attr->x28, attr2->x17C_AerialDriftMax * attr->x28);
+            func_8007D344(fp, 0.0F, attr2->x174_AerialDriftStickMult * attr->x28, attr2->x17C_AerialDriftMax * attr->x28);
         }
     } else {
         func_80084FA8(gobj);
@@ -182,20 +182,20 @@ void lbl_8013873C(HSD_GObj* gobj) {
             fp->x80_self_vel.x *= attr->x40;
             fp->x80_self_vel.y *= attr->x40;
             fp->x80_self_vel.z *= attr->x40;
-            if (fp->x80_self_vel.x < 0.0f) {
+            if (fp->x80_self_vel.x < 0.0F) {
                 num = -1;
             } else {
                 num = 1;
             }
             if (fp->x2C_facing_direction != num) {
-                fp->x80_self_vel.x *= -1.0f;
+                fp->x80_self_vel.x *= -1.0F;
             }
-            if (fp->x6A4_transNOffset.y < 0.0f) {
+            if (fp->x6A4_transNOffset.y < 0.0F) {
                 fp->x2208_ftcmd_var2 = 1;
             }
         } else {
             func_8007D494(fp, attr->x44, attr->x48);
-            func_8007D344(fp, 0.0f, attr2->x174_AerialDriftStickMult * attr->x28, attr2->x17C_AerialDriftMax * attr->x28);
+            func_8007D344(fp, 0.0F, attr2->x174_AerialDriftStickMult * attr->x28, attr2->x17C_AerialDriftMax * attr->x28);
         }
     } else {
         func_8007D494(fp, attr2->x16C_Gravity, attr2->x170_TerminalVelocity);
@@ -218,7 +218,7 @@ void lbl_80138884(HSD_GObj* gobj) {
 void lbl_801388B4(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     if (fp->xE0_ground_or_air == GA_Air) {
-        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
+        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0F) {
             func_80083B68(gobj);
         } else if (fp->x2204_ftcmd_var1 == 0) {
             fp->x2204_ftcmd_var1 = 1;
@@ -236,7 +236,7 @@ void lbl_801388B4(HSD_GObj* gobj) {
 void lbl_80138940(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     if (fp->xE0_ground_or_air == GA_Air) {
-        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
+        if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0F) {
             func_80083B68(gobj);
         } else if (fp->x2204_ftcmd_var1 == 0) {
             fp->x2204_ftcmd_var1 = 1;

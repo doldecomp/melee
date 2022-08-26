@@ -53,13 +53,13 @@ void ftFalco_LoadSpecialAttrs(HSD_GObj* gobj)
 void ftFalco_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
-    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
-    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0F);
+    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0F);
 }
 
 void ftFalco_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
-    ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0F);
+    ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0F);
 }

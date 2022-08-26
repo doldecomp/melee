@@ -34,7 +34,7 @@ void func_80155B80(HSD_GObj* gobj) {
     Fighter* fp;
 
     fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x148, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x148, 0, 0, 0.0F, 1.0F, 0.0F);
     fp->x221E_flag.bits.b0 = 1;
     fp->x2220_flag.bits.b3 = 1;
     fp->cb.x21B0_callback_Accessory1 = &func_800DB464;
@@ -56,7 +56,7 @@ void func_80155C20(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     func_8007DC08(fp, p_ftCommonData->x3A8);
-    if (fp->x1A4C <= 0.0f) {
+    if (fp->x1A4C <= 0.0F) {
         func_80155C94(gobj);
         func_8015483C(fp->x1A58_interactedFighter);
     }

@@ -9,7 +9,7 @@ void ftNess_AttackLw4_Action(HSD_GObj* fighter_gobj)  // Ness's Down Smash Actio
     fp->x2218_flag.bits.b0 = 0;
     fp->nessVars[0].AttackLw4.isChargeDisable = FALSE;
     ftNess_YoyoSetVarAll(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp->x2222_flag.bits.b2 = 1;
     fp->cb.x21C0_callback_OnGiveDamage = ftNess_YoyoStartTimedRehit;
@@ -134,9 +134,9 @@ void ftNess_AttackLw4_Charge_Action(HSD_GObj* fighter_gobj)  // Ness's Down Smas
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4_CHARGE, FIGHTER_ITEMVIS_NOUPDATE, NULL, 12.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4_CHARGE, FIGHTER_ITEMVIS_NOUPDATE, NULL, 12.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
-    ftAnim_SetAnimRate(fighter_gobj, 0.0f);
+    ftAnim_SetAnimRate(fighter_gobj, 0.0F);
     ftNess_YoyoApplySmash(fighter_gobj);
     fp->x2222_flag.bits.b2 = 1;
     fp->cb.x21C0_callback_OnGiveDamage = ftNess_YoyoStartTimedRehit;
@@ -187,15 +187,15 @@ void ftNess_AttackLw4_Release_Phys(HSD_GObj* fighter_gobj)   // Ness's Down Smas
     yoyoSmashFrameCurr = fp->nessVars[0].AttackLw4.yoyoCurrentFrame;
     if (yoyoSmashFrameCurr < 0x13)
     {
-        yoyoSmashUnk = 0.20000000298023224f * ((f32)yoyoSmashFrameCurr - 14.0f);
-        if (yoyoSmashUnk >= 1.0f)
+        yoyoSmashUnk = 0.20000000298023224F * ((f32)yoyoSmashFrameCurr - 14.0F);
+        if (yoyoSmashUnk >= 1.0F)
         {
-            yoyoSmashUnk = 1.0f;
+            yoyoSmashUnk = 1.0F;
         }
 
-        else if (yoyoSmashUnk <= 0.0f)
+        else if (yoyoSmashUnk <= 0.0F)
         {
-            yoyoSmashUnk = 0.0f;
+            yoyoSmashUnk = 0.0F;
         }
         ftNess_YoyoSetHitPosUnk(fighter_gobj, yoyoSmashUnk);
         return;
@@ -222,7 +222,7 @@ void ftNess_AttackLw4_Release_Action(HSD_GObj* fighter_gobj) // Ness's Down Smas
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4_RELEASE, FIGHTER_ITEMVIS_NOUPDATE, NULL, 13.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4_RELEASE, FIGHTER_ITEMVIS_NOUPDATE, NULL, 13.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftNess_YoyoSetChargeDamage(fighter_gobj);
     fp->x2222_flag.bits.b2 = 1;

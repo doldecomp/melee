@@ -22,14 +22,14 @@ void ftDonkey_800E04A4(HSD_GObj* fighterObj, s32 arg1) {
     fp->x2348_stateVar3_f32 = donkey_attr->cargo_hold.x24_JUMP_STARTUP_LAG;
     donkey_attr2 = getFtSpecialAttrs2CC(fp);
     
-    Fighter_ActionStateChange_800693AC(fighterObj, donkey_attr2->action_state + 5, 0, NULL, 0.0f, 1.0f, 0.0f);
-    ftAnim_SetAnimRate(fighterObj, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, donkey_attr2->action_state + 5, 0, NULL, 0.0F, 1.0F, 0.0F);
+    ftAnim_SetAnimRate(fighterObj, 0.0F);
 }
 
 void ftDonkey_800E0518(HSD_GObj* fighterObj) {
     Fighter* fp = getFighter(fighterObj);
-    if (fp->x2348_stateVar3_f32 <= 0.0f) {
+    if (fp->x2348_stateVar3_f32 <= 0.0F) {
         ftDonkey_800E03C0(fighterObj);
     }
-    fp->x2348_stateVar3_f32 -= 1.0f;
+    fp->x2348_stateVar3_f32 -= 1.0F;
 }

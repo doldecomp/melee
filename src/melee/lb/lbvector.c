@@ -9,7 +9,7 @@ extern inline float sqrtf_accurate(float x)
     static const double _half=.5;
     static const double _three=3.0;
     volatile float y;
-    if(x > 0.0f)
+    if(x > 0.0F)
     {
         double guess = __frsqrte((double)x);   // returns an approximation to
         guess = _half*guess*(_three - guess*guess*x);  // now have 12 sig bits
@@ -37,9 +37,9 @@ float lbvector_Normalize(Vec *vec)
     float len = lbvector_Len(vec);
     float inv;
 
-    if (len == 0.0f)
-        return 0.0f;
-    inv = 1.0f / len;
+    if (len == 0.0F)
+        return 0.0F;
+    inv = 1.0F / len;
     vec->x *= inv;
     vec->y *= inv;
     vec->z *= inv;
@@ -51,9 +51,9 @@ float lbvector_NormalizeXY(Vec *a)
     float len = sqrtf_accurate(a->x * a->x + a->y * a->y);
     float inv;
 
-    if (len == 0.0f)
-        return 0.0f;
-    inv = 1.0f / len;
+    if (len == 0.0F)
+        return 0.0F;
+    inv = 1.0F / len;
     a->x *= inv;
     a->y *= inv;
     return len;
@@ -102,17 +102,17 @@ float lbvector_Angle(Vec *a, Vec *b)
 {
     float lena_lenb = lbvector_Len(a) * lbvector_Len(b);
 
-    if (lena_lenb > 0.0000000001f)
+    if (lena_lenb > 0.0000000001F)
     {
         float cosine = (a->x * b->x + a->y * b->y + a->z * b->z) / lena_lenb;
-        if (cosine > 1.0f)
-            cosine = 1.0f;
-        if (cosine < -1.0f)
-            cosine = -1.0f;
+        if (cosine > 1.0F)
+            cosine = 1.0F;
+        if (cosine < -1.0F)
+            cosine = -1.0F;
 
         return func_80022D1C(cosine); // acos
     }
-    return 0.0f;
+    return 0.0F;
 }
 
 // 8000D790 - returns the angle between a and b
@@ -123,13 +123,13 @@ float lbvector_AngleXY(Vec* a, Vec* b)
     if (lena_lenb)
     {
         float cosine = (a->x * b->x + a->y * b->y) / lena_lenb;
-        if (cosine > 1.0f)
-            cosine = 1.0f;
-        if (cosine < -1.0f)
-            cosine = -1.0f;
+        if (cosine > 1.0F)
+            cosine = 1.0F;
+        if (cosine < -1.0F)
+            cosine = -1.0F;
         return func_80022D1C(cosine); // acos
     }
-    return 0.0f;
+    return 0.0F;
 }
 
 // Approximations of sine/cosine which are the best quintic approximations for the x range (-pi,pi). They can be derived by using the Gran-Schmidt Procedure,
@@ -141,7 +141,7 @@ static float sin(float angle)
         angle -= 2.0 * PI;
     else if (angle < -PI)
         angle += 2.0 * PI;
-    return 0.9878619909286499f * angle - 0.15527099370956421f * angle * angle * angle + 0.0056429998949170113f * angle * angle * angle * angle * angle;
+    return 0.9878619909286499F * angle - 0.15527099370956421F * angle * angle * angle + 0.0056429998949170113F * angle * angle * angle * angle * angle;
 }
 
 static float cos(float angle)
@@ -151,7 +151,7 @@ static float cos(float angle)
         angle -= 2.0 * PI;
     else if (angle < -PI)
         angle += 2.0 * PI;
-    return 0.9878619909286499f * angle - 0.15527099370956421f * angle * angle * angle + 0.0056429998949170113f * angle * angle * angle * angle * angle;
+    return 0.9878619909286499F * angle - 0.15527099370956421F * angle * angle * angle + 0.0056429998949170113F * angle * angle * angle * angle * angle;
 }
 
 // 8000D8F4
@@ -175,7 +175,7 @@ void lbvector_RotateAboutUnitAxis(Vec *v, Vec *axis, float angle)
 
     // rotation (1) about the x-axis: rotate everything such that the rotation axis lies in the xz-plane.
     // new v is then (x,y,z), new rotation axis is (b.x, 0, len_axis_yz)
-    if (len_axis_yz > 0.0000000001f)
+    if (len_axis_yz > 0.0000000001F)
     {
         unit_axis_yz_y = axis->z / len_axis_yz;
         unit_axis_yz_z = axis->y / len_axis_yz;
@@ -208,7 +208,7 @@ void lbvector_RotateAboutUnitAxis(Vec *v, Vec *axis, float angle)
     z = -x3 * axis->x  +  z2 * len_axis_yz;
 
     // opposite of rotation (1)
-    if (len_axis_yz > 0.0000000001f)
+    if (len_axis_yz > 0.0000000001F)
     {
         v->x = x;
         v->y = y * unit_axis_yz_y + z * unit_axis_yz_z;
@@ -253,12 +253,12 @@ void lbvector_Rotate(Vec *v, int axis, float angle)
     v->z = z;
 }
 
-float dummy(void) { return 2.0f; } // needed here to force order of floats in .sdata2 section
+float dummy(void) { return 2.0F; } // needed here to force order of floats in .sdata2 section
 
 // 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a at the plane that is perpendicular to b and contains the origin.
 void lbvector_Mirror(Vec *a, Vec *unit_mirror_axis)
 {
-    float f = (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
+    float f = (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0F;
 
     a->x += unit_mirror_axis->x * f;
     a->y += unit_mirror_axis->y * f;
@@ -289,21 +289,21 @@ Vec *func_8000DE38(Mtx m, Vec *v, float c)
     float var1;
     float var2;
 
-    if (c > 1.0f)
-        c = 1.0f;
-    else if (c < 0.0f)
-        c = 0.0f;
+    if (c > 1.0F)
+        c = 1.0F;
+    else if (c < 0.0F)
+        c = 0.0F;
 
-    var1 = m[0][0] *  2.0f - m[0][3] * 4.0f + m[1][2] * 2.0f;
-    var2 = m[0][0] * -3.0f + m[0][3] * 4.0f - m[1][2];
+    var1 = m[0][0] *  2.0F - m[0][3] * 4.0F + m[1][2] * 2.0F;
+    var2 = m[0][0] * -3.0F + m[0][3] * 4.0F - m[1][2];
     v->x = m[0][0] + (var1*c*c + var2*c);
 
-    var1 = m[0][1] *  2.0f - m[1][0] * 4.0f + m[1][3] * 2.0f;
-    var2 = m[0][1] * -3.0f + m[1][0] * 4.0f - m[1][3];
+    var1 = m[0][1] *  2.0F - m[1][0] * 4.0F + m[1][3] * 2.0F;
+    var2 = m[0][1] * -3.0F + m[1][0] * 4.0F - m[1][3];
     v->y = m[0][1] + (var1*c*c + var2*c);
 
-    var1 = m[0][2] *  2.0f - m[1][1] * 4.0f + m[2][0] * 2.0f;
-    var2 = m[0][2] * -3.0f + m[1][1] * 4.0f - m[2][0];
+    var1 = m[0][2] *  2.0F - m[1][1] * 4.0F + m[2][0] * 2.0F;
+    var2 = m[0][2] * -3.0F + m[1][1] * 4.0F - m[2][0];
     v->z = m[0][2] + (var1*c*c + var2*c);
 
     return v;
@@ -313,19 +313,19 @@ Vec *func_8000DE38(Mtx m, Vec *v, float c)
 // with 3 rotations about the x,y,z axes in that order.
 Vec *lbvector_EulerAnglesFromONB(Vec *result_angles, Vec *a, Vec *b, Vec *c)
 {
-    if (b->z == -1.0f || b->z == 1.0f)
+    if (b->z == -1.0F || b->z == 1.0F)
     {
-        if (b->z == -1.0f)
+        if (b->z == -1.0F)
         {
-            result_angles->y = 1.5707963705062866f; // pi/2
+            result_angles->y = 1.5707963705062866F; // pi/2
             result_angles->x = atan2f(c->x, c->y);
         }
         else
         {
-            result_angles->y = -1.5707963705062866f; // -pi/2
+            result_angles->y = -1.5707963705062866F; // -pi/2
             result_angles->x = atan2f(-c->x, c->y);
         }
-        result_angles->z = 0.0f;
+        result_angles->z = 0.0F;
     }
     else
     {
@@ -392,7 +392,7 @@ Vec *lbvector_WorldToScreen(HSD_CObj *cobj, const Point3d *pos3d, Point3d *scree
     {
     case PROJ_PERSPECTIVE:
         C_MTXPerspective(projMtx, cobj->projection_param.perspective.fov, cobj->projection_param.perspective.aspect, cobj->near, cobj->far);
-        projection[0] = 0.0f;
+        projection[0] = 0.0F;
         projection[1] = projMtx[0][0];
         projection[2] = projMtx[0][2];
         projection[3] = projMtx[1][1];
@@ -402,7 +402,7 @@ Vec *lbvector_WorldToScreen(HSD_CObj *cobj, const Point3d *pos3d, Point3d *scree
         break;
     case PROJ_ORTHO:
         C_MTXOrtho(&projMtx, cobj->projection_param.ortho.top, cobj->projection_param.ortho.bottom, cobj->projection_param.ortho.left, cobj->projection_param.ortho.right, cobj->near, cobj->far);
-        projection[0] = 1.0f;
+        projection[0] = 1.0F;
         projection[1] = projMtx[0][0];
         projection[2] = projMtx[0][3];
         projection[3] = projMtx[1][1];
@@ -418,8 +418,8 @@ Vec *lbvector_WorldToScreen(HSD_CObj *cobj, const Point3d *pos3d, Point3d *scree
     viewport[1] = cobj->viewport_top;  // y origin
     viewport[2] = cobj->viewport_right - cobj->viewport_left;  // width
     viewport[3] = cobj->viewport_bottom - cobj->viewport_top;  // height
-    viewport[4] = 0.0f;  // near z
-    viewport[5] = 1.0f;  // far z
+    viewport[4] = 0.0F;  // near z
+    viewport[5] = 1.0F;  // far z
 
     if (d != 0)
     {
@@ -436,9 +436,9 @@ Vec *lbvector_WorldToScreen(HSD_CObj *cobj, const Point3d *pos3d, Point3d *scree
        + mvMtx[2][1] * pos3d->y
        + mvMtx[2][2] * pos3d->z
        + mvMtx[2][3];
-    if (f1 > -0.01f)
+    if (f1 > -0.01F)
     {
-        f1 = -f1 - 0.01f;
+        f1 = -f1 - 0.01F;
         point.x += mvMtx[2][0] * f1;
         point.y += mvMtx[2][1] * f1;
         point.z += mvMtx[2][2] * f1;
@@ -484,9 +484,9 @@ void lbvector_CreateEulerMatrix(Mtx m, Vec *angles)
     m[2][2] = cx * cy;
 
 	// column 4 - no translational component
-    m[0][3] = 0.0f;
-    m[1][3] = 0.0f;
-    m[2][3] = 0.0f;
+    m[0][3] = 0.0F;
+    m[1][3] = 0.0F;
+    m[2][3] = 0.0F;
 }
 
 
@@ -505,7 +505,7 @@ float lbvector_8000E838(Vec *a, Vec *b, Vec *c, Vec *d)
     lbvector_Diff(b, a, &b_a);
     sqrlen_b_a = b_a.x * b_a.x + b_a.y * b_a.y + b_a.z * b_a.z;
     lbvector_Diff(c, a, &c_a);
-    if (sqrlen_b_a < 9.9999997473787516e-06f && sqrlen_b_a > -9.9999997473787516e-06f)
+    if (sqrlen_b_a < 9.9999997473787516e-06F && sqrlen_b_a > -9.9999997473787516e-06F)
         tooSmall = 1;
     else
         tooSmall = 0;

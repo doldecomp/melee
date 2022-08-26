@@ -22,7 +22,7 @@ void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2) {
     func_800DB368(ft_2, ft_1);
     ft_1->cb.x21B0_callback_Accessory1 = &func_800DB464;
     func_8007D5D4(ft_1);
-    Fighter_ActionStateChange_800693AC(gobj_1, 0x147, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj_1, 0x147, 0, 0, 0.0F, 1.0F, 0.0F);
     ft_1->x221E_flag.bits.b0 = 1;
     ft_1->x2220_flag.bits.b3 = 1;
     func_8007E2F4(ft_1, 0x1FFU);

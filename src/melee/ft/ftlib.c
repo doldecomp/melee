@@ -165,8 +165,8 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
             continue;
         }
         func_800866DC(cur, &sp24);
-        if (arg8 == -1.0f && sp24.x > v->x ||
-            arg8 == +1.0f && sp24.x < v->x) {
+        if (arg8 == -1.0F && sp24.x > v->x ||
+            arg8 == +1.0F && sp24.x < v->x) {
             continue;
         }
 
@@ -183,7 +183,7 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
 
 inline s32 sgn(f32 x)
 {
-    if (x < 0.0f) {
+    if (x < 0.0F) {
         return -1;
     } else {
         return +1;
@@ -228,9 +228,9 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
         result = phi_r0;
     }
     if (result < 0) {
-        return -1.0f;
+        return -1.0F;
     } else {
-        return +1.0f;
+        return +1.0F;
     }
 }
 
@@ -413,8 +413,8 @@ inline void vector_add(Vec* dst, Vec* src, f32 x, f32 y, f32 z)
 void func_80086990(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
-    f32 tmp = 0.5f * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y + fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
-    vector_add(v, &fp->xB0_pos, 0.0f, tmp, 0.0f);
+    f32 tmp = 0.5F * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y + fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
+    vector_add(v, &fp->xB0_pos, 0.0F, tmp, 0.0F);
 }
 
 f32 func_800869D4(HSD_GObj* gobj)
@@ -682,7 +682,7 @@ BOOL func_80087074(HSD_GObj* gobj, Vec3* v)
     if (fp->dmg.x18B8 || fp->dmg.x18BC) {
         v->x = fp->dmg.x18B8;
         v->y = fp->dmg.x18BC;
-        v->z = 0.0f;
+        v->z = 0.0F;
         return TRUE;
     }
     return FALSE;

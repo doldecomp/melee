@@ -53,12 +53,12 @@ BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
 
 f32 setFloatOrder(void)
 {
-    return 0.0f;
+    return 0.0F;
 }
 
 f32 setFloatOrder2(void)
 {
-    return 1.0f;
+    return 1.0F;
 }
 
 inline BOOL ftFox_AppealS_GetLR(f32 x1, f32 x2)
@@ -82,7 +82,7 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     fp->foxVars[0].AppealS.animCount = 0;
-    facingDir = ftFox_AppealS_GetLR(1.0f, fp->x2C_facing_direction);
+    facingDir = ftFox_AppealS_GetLR(1.0F, fp->x2C_facing_direction);
 
     fp->foxVars[0].AppealS.facingDir = facingDir;
     fp->x2210_ThrowFlags.flags = 0;
@@ -90,7 +90,7 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     actionDir = fp->foxVars[0].AppealS.facingDir;
     animCount = fp->foxVars[0].AppealS.animCount;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[actionDir][animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[actionDir][animCount], 0, NULL, 0.0F, 1.0F, 0.0F);
 }
 
 extern void func_8008A324(HSD_GObj*);
@@ -144,7 +144,7 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
             func_8008A324(fighter_gobj);
             return;
         }
-        Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[fp->foxVars[0].AppealS.facingDir][fp->foxVars[0].AppealS.animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[fp->foxVars[0].AppealS.facingDir][fp->foxVars[0].AppealS.animCount], 0, NULL, 0.0F, 1.0F, 0.0F);
     }
 }
 

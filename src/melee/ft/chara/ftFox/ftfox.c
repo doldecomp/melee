@@ -65,18 +65,18 @@ void ftFox_LoadSpecialAttrs(HSD_GObj* gobj) {
     COPY_ATTRS(gobj, ftFoxAttributes);
 }
 
-extern f32 lbl_804D9244;  ///0.0f
+extern f32 lbl_804D9244;  ///0.0F
 
 void ftFox_OnKnockbackEnter(HSD_GObj* gobj) {
     Fighter_OnKnockbackEnter(gobj, 1);
-    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
-    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0F);
+    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0F);
 }
 
 void ftFox_OnKnockbackExit(HSD_GObj* fighterObj) {
     Fighter_OnKnockbackExit(fighterObj, 1);
-    ftAnim_ApplyPartAnim(fighterObj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(fighterObj, 4, 2, 0.0f); 
+    ftAnim_ApplyPartAnim(fighterObj, 3, 2, 0.0F);
+    ftAnim_ApplyPartAnim(fighterObj, 4, 2, 0.0F); 
 }
 
 //// End of File

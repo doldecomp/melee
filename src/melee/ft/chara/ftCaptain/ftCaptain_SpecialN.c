@@ -18,12 +18,12 @@ void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj) // Create Aesth
         {
             if ((currentAnimFrame >= 16) && (currentAnimFrame <= 50))
             {
-                func_800119DC(&fp->xB0_pos, 2, 2.0f, 2.0f, 0.0f);
+                func_800119DC(&fp->xB0_pos, 2, 2.0F, 2.0F, 0.0F);
             }
             else if ((currentAnimFrame >= 51) && (currentAnimFrame <= 68))
             {
 
-                func_800119DC(&fp->xB0_pos, 2, 4.0f, 4.0f, 0.0f);
+                func_800119DC(&fp->xB0_pos, 2, 4.0F, 4.0F, 0.0F);
             }
         }
         break;
@@ -37,9 +37,9 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp) // Calculate angle from control 
     f32 stickRangeMinPos;
     f32 stickRangeMinNeg;
     f32 stick_y;
-    f32 floatVar = 0.01745329238474369f;
+    f32 floatVar = 0.01745329238474369F;
 
-    stick_y = stickGetDir(fp->input.x624_lstick_y, 0.0f);
+    stick_y = stickGetDir(fp->input.x624_lstick_y, 0.0F);
 
     stickRangeMinPos = tempAttrs->x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS;
     if (stick_y > stickRangeMinPos)
@@ -50,11 +50,11 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp) // Calculate angle from control 
     stickRangeMinNeg = tempAttrs->x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG;
     stick_y -= stickRangeMinNeg;
 
-    if (stick_y < 0.0f)
+    if (stick_y < 0.0F)
     {
-        stick_y = 0.0f;
+        stick_y = 0.0F;
     }
-    if (fp->input.x624_lstick_y < 0.0f)
+    if (fp->input.x624_lstick_y < 0.0F)
     {
         stick_y = -stick_y;
     }
@@ -71,7 +71,7 @@ void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALN, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALN, 0, NULL, 0.0F, 1.0F, 0.0F);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     func_8006EBA4(fighter_gobj);
@@ -87,7 +87,7 @@ void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRN, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRN, 0, NULL, 0.0F, 1.0F, 0.0F);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     func_8006EBA4(fighter_gobj);
@@ -251,7 +251,7 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
     {
         Fighter* fp = fighter_gobj->user_data;
         func_8007D5D4(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRN, FTCAPTAIN_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRN, FTCAPTAIN_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         func_8007D468(fp);
@@ -266,7 +266,7 @@ void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
     {
         Fighter* fp = fighter_gobj->user_data;
         func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALN, FTCAPTAIN_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALN, FTCAPTAIN_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }

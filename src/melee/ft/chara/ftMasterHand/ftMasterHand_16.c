@@ -37,6 +37,6 @@ void lbl_8015381C(HSD_GObj* gobj) {
 // 80153820 150400
 // https://decomp.me/scratch/d4xeU
 void func_80153820(HSD_GObj* arg0) {
-    Fighter_ActionStateChange_800693AC(arg0, 0x16F, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x16F, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
 }

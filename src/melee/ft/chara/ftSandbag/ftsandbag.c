@@ -36,20 +36,20 @@ void func_8014FA30(Fighter* fp)
     bones = fp->x5E8_fighterBones;
     func_8000C228(bones[7].x4_jobj2, bones[37].x4_jobj2);
 
-    func_8000C420(fp->x5E8_fighterBones[7].x0_jobj, 1, -1.57079637f);
-    func_8000C420(fp->x5E8_fighterBones[7].x0_jobj, 2, -1.57079637f);
-    func_8000C420(fp->x5E8_fighterBones[7].x4_jobj2, 1, -1.57079637f);
-    func_8000C420(fp->x5E8_fighterBones[7].x4_jobj2, 2, -1.57079637f);
+    func_8000C420(fp->x5E8_fighterBones[7].x0_jobj, 1, -1.57079637F);
+    func_8000C420(fp->x5E8_fighterBones[7].x0_jobj, 2, -1.57079637F);
+    func_8000C420(fp->x5E8_fighterBones[7].x4_jobj2, 1, -1.57079637F);
+    func_8000C420(fp->x5E8_fighterBones[7].x4_jobj2, 2, -1.57079637F);
 
     bones = fp->x5E8_fighterBones;
     func_8000C228(bones[6].x0_jobj, bones[5].x0_jobj);
     bones = fp->x5E8_fighterBones;
     func_8000C228(bones[6].x4_jobj2, bones[5].x4_jobj2);
 
-    func_8000C420(fp->x5E8_fighterBones[6].x0_jobj, 1, -1.50098311f);
-    func_8000C420(fp->x5E8_fighterBones[6].x0_jobj, 2, -1.50098311f);
-    func_8000C420(fp->x5E8_fighterBones[6].x4_jobj2, 1, -1.50098311f);
-    func_8000C420(fp->x5E8_fighterBones[6].x4_jobj2, 2, -1.50098311f);
+    func_8000C420(fp->x5E8_fighterBones[6].x0_jobj, 1, -1.50098311F);
+    func_8000C420(fp->x5E8_fighterBones[6].x0_jobj, 2, -1.50098311F);
+    func_8000C420(fp->x5E8_fighterBones[6].x4_jobj2, 1, -1.50098311F);
+    func_8000C420(fp->x5E8_fighterBones[6].x4_jobj2, 2, -1.50098311F);
 }
 
 void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -70,7 +70,7 @@ void func_8014FBA4(HSD_GObj* gobj)
         func_8007D7FC(fp);
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 

@@ -166,7 +166,7 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
     {
         fp->x2218_flag.bits.b0 = 0;
         fp->x2218_flag.bits.b1 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK11, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK11, 0, NULL, 0.0F, 1.0F, 0.0F);
         func_8006EBA4(fighter_gobj);
         fp->x196C_hitlag_mult = (f32)fp->x110_attr.x18C_Jab_2InputWindow;
         fp->x1970 = 44;

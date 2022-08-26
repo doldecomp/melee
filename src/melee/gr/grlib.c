@@ -42,9 +42,9 @@ UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec* arg2)
         phi_r30->x24 *= scale;
         phi_r30->x28 *= scale;
         phi_r30->x2C *= scale;
-        temp_r3->x2C = 0.0f;
-        temp_r3->x28 = 0.0f;
-        temp_r3->x24 = 0.0f;
+        temp_r3->x2C = 0.0F;
+        temp_r3->x28 = 0.0F;
+        temp_r3->x24 = 0.0F;
     }
     return temp_r3;
 }
@@ -200,7 +200,7 @@ void func_801C9B6C(void* arg0)
 
 void func_801C9B8C(void* arg0)
 {
-    func_8001044C(arg0, 0, 0, 0.0f, 0, 0, 0, 0);
+    func_8001044C(arg0, 0, 0, 0.0F, 0, 0, 0, 0);
 }
 
 static void func_801C9BC8(HSD_GObj* gobj)
@@ -310,9 +310,9 @@ asm BOOL func_801C9EE8()
 /* 801C9F08 001C6AE8  93 C1 00 38 */	stw r30, 0x38(r1)
 /* 801C9F0C 001C6AEC  7C 7E 1B 78 */	mr r30, r3
 /* 801C9F10 001C6AF0  80 8D C1 8C */	lwz r4, lbl_804D782C
-/* 801C9F14 001C6AF4  C0 A2 B3 AC */	lfs f5, 0.5f
+/* 801C9F14 001C6AF4  C0 A2 B3 AC */	lfs f5, 0.5F
 /* 801C9F18 001C6AF8  80 A4 00 20 */	lwz r5, 0x20(r4)
-/* 801C9F1C 001C6AFC  C0 02 B3 A8 */	lfs f0, 0.0f
+/* 801C9F1C 001C6AFC  C0 02 B3 A8 */	lfs f0, 0.0F
 /* 801C9F20 001C6B00  48 00 00 A0 */	b lbl_801C9FC0
 lbl_801C9F24:
 /* 801C9F24 001C6B04  80 65 00 2C */	lwz r3, 0x2c(r5)
@@ -364,8 +364,8 @@ lbl_801C9FC0:
 /* 801C9FC0 001C6BA0  28 05 00 00 */	cmplwi r5, 0
 /* 801C9FC4 001C6BA4  40 82 FF 60 */	bne lbl_801C9F24
 /* 801C9FC8 001C6BA8  83 E4 00 24 */	lwz r31, 0x24(r4)
-/* 801C9FCC 001C6BAC  C3 A2 B3 AC */	lfs f29, 0.5f
-/* 801C9FD0 001C6BB0  C3 C2 B3 A8 */	lfs f30, 0.0f
+/* 801C9FCC 001C6BAC  C3 A2 B3 AC */	lfs f29, 0.5F
+/* 801C9FD0 001C6BB0  C3 C2 B3 A8 */	lfs f30, 0.0F
 /* 801C9FD4 001C6BB4  48 00 00 B0 */	b lbl_801CA084
 lbl_801C9FD8:
 /* 801C9FD8 001C6BB8  7F E3 FB 78 */	mr r3, r31

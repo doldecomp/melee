@@ -15,10 +15,10 @@ void func_80152880(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     attr = fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     fp->x2340_f32 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
-    fp->x2344_f32 = 0.0f;
+    fp->x2344_f32 = 0.0F;
 }
 
 
@@ -32,14 +32,14 @@ void lbl_80152928(HSD_GObj* gobj) {
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r4 = gobj->user_data;
-        temp_r4->x2344_f32 = 1.0f;
+        temp_r4->x2344_f32 = 1.0F;
 
-        if (--temp_r4->x2340_f32 < 0.0f) {
-            temp_r4->x2344_f32 = 0.0f;
-            temp_r4->x80_self_vel.x = 0.0f;
-            temp_r4->x80_self_vel.y = 0.0f;
+        if (--temp_r4->x2340_f32 < 0.0F) {
+            temp_r4->x2344_f32 = 0.0F;
+            temp_r4->x80_self_vel.x = 0.0F;
+            temp_r4->x80_self_vel.y = 0.0F;
             temp_r31 = gobj->user_data;
-            Fighter_ActionStateChange_800693AC(gobj, 0x168, 0, 0, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(gobj, 0x168, 0, 0, 0.0F, 1.0F, 0.0F);
             func_8006EBA4(gobj);
             func_80088148(temp_r31, 0x4E207, 0x7F, 0x40);
         }
@@ -77,7 +77,7 @@ static const double _half=.5;
 static const double _three=3.0;
     s32 unused = 0; //fakematch
 volatile float y;
- if(x > 0.0f)
+ if(x > 0.0F)
  {
 
 
@@ -113,7 +113,7 @@ void lbl_80152A50(HSD_GObj* gobj) {
         func_8015C208(gobj, &sp28_pos);
         sp28_pos.x += attr->x98;
         sp28_pos.y += attr->x9C;
-        sp28_pos.z = 0.0f;
+        sp28_pos.z = 0.0F;
         lbvector_Diff(&sp28_pos, &fp->xB0_pos, &sp1C_vel);
         len = my_lbvector_Len(&sp1C_vel);
         if (len < attr->x2C) {

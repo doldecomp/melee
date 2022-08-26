@@ -21,7 +21,7 @@ void ftNess_AttackS4_Action(HSD_GObj* fighter_gobj) // Ness's F-Smash Action Sta
 
     fp->x2200_ftcmd_var0 = FALSE;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKS4, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKS4, 0, NULL, 0.0F, 1.0F, 0.0F);
 
     func_8006EBA4(fighter_gobj);
 

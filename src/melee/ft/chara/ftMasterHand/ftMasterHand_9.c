@@ -40,7 +40,7 @@ void lbl_80151DC0(void) {
 // 80151DC4 14E9A4
 // https://decomp.me/scratch/1PULy
 void lbl_80151DC4(HSD_GObj* arg0) {
-    Fighter_ActionStateChange_800693AC(arg0, 0x15E, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x15E, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
 }
 
@@ -86,7 +86,7 @@ void lbl_80151EB0(void) {
 // 80151EB4 14EA94
 // https://decomp.me/scratch/ZzhS3
 void func_80151EB4(HSD_GObj* gobj) {
-    Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }
 
@@ -100,7 +100,7 @@ static const double _half=.5;
 static const double _three=3.0;
     s32 unused = 0; // fakematch
 volatile float y;
- if(x > 0.0f)
+ if(x > 0.0F)
  {
 
 
@@ -138,7 +138,7 @@ void lbl_80151F00(HSD_GObj* gobj) {
         func_801520D8(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, 0, 0.0F, 1.0F, 0.0F);
         func_8006EBA4(gobj);
     }
 }
@@ -189,7 +189,7 @@ void func_801520D8(HSD_GObj* gobj) {
     f32 temp_f1;
 
     r31_fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x160, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x160, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
-    r31_fp->x80_self_vel.x = 0.0f;
+    r31_fp->x80_self_vel.x = 0.0F;
 }

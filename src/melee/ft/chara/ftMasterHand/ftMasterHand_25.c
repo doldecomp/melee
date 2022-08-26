@@ -58,7 +58,7 @@ void func_80154E78(HSD_GObj* gobj) {
     Fighter* fp;
 
     fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17B, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x17B, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     fp->x2200_ftcmd_var0 = 0;
 }
@@ -83,7 +83,7 @@ void lbl_80154ED8(HSD_GObj* gobj) {
             ft_2 = gobj_2->user_data;
             func_8007E2F4(fp, 0);
             func_800DE2A8(gobj, gobj_2);
-            ft_2->dmg.x1844_direction *= -1.0f;
+            ft_2->dmg.x1844_direction *= -1.0F;
             func_800DE7C0(gobj_2, 0, 0);
         }
         fp->x2360 = 0;

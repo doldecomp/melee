@@ -6,17 +6,17 @@
 
 f32 ftGameWatch_SpecialN_SetFloatOrder1(void)
 {
-    return 2.5f;
+    return 2.5F;
 }
 
 f32 ftGameWatch_SpecialN_SetFloatOrder2(void)
 {
-    return 6.5f;
+    return 6.5F;
 }
 
 f32 ftGameWatch_SpecialN_SetFloatOrder3(void)
 {
-    return 0.0f;
+    return 0.0F;
 }
 
 extern HSD_GObj* func_802C837C(HSD_GObj*, Vec3*, s32, u32, f32);
@@ -48,9 +48,9 @@ void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
         if (((f32)fp->gameWatchVars[0].SpecialN.maxSausage) < gawAttrs->x1C_GAMEWATCH_CHEF_MAX)
         {
             fp->gameWatchVars[0].SpecialN.maxSausage++;
-            sp38.x = 2.5f;
-            sp38.y = 6.5f;
-            sp38.z = 0.0f;
+            sp38.x = 2.5F;
+            sp38.y = 6.5F;
+            sp38.z = 0.0F;
             func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x1F)].x0_jobj, &sp38, &sp44);
             temp_fp = getFighter(fighter_gobj);
             i = 5;
@@ -108,10 +108,10 @@ asm void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
         /* 8014E55C 0014B13C  90 1F 23 44 */	stw r0, 0x2344(r31)
         /* 8014E560 0014B140  38 7F 00 00 */	addi r3, r31, 0
         /* 8014E564 0014B144  38 80 00 1F */	li r4, 0x1f
-        /* 8014E568 0014B148  C0 02 A4 58 */	lfs f0, 2.5f
-        /* 8014E56C 0014B14C  C0 22 A4 5C */	lfs f1, 6.5f
+        /* 8014E568 0014B148  C0 02 A4 58 */	lfs f0, 2.5F
+        /* 8014E56C 0014B14C  C0 22 A4 5C */	lfs f1, 6.5F
         /* 8014E570 0014B150  D0 01 00 38 */	stfs f0, 0x38(r1)
-        /* 8014E574 0014B154  C0 02 A4 60 */	lfs f0, 0.0f
+        /* 8014E574 0014B154  C0 02 A4 60 */	lfs f0, 0.0F
         /* 8014E578 0014B158  D0 21 00 3C */	stfs f1, 0x3c(r1)
         /* 8014E57C 0014B15C  D0 01 00 40 */	stfs f0, 0x40(r1)
         /* 8014E580 0014B160  4B F2 6A 8D */	bl func_8007500C
@@ -189,8 +189,8 @@ inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/VyJIm // Mr. Game & Watch's grounded Chef Action State handler
 void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
-    getFighter(fighter_gobj)->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN, 0, NULL, 0.0f, 1.0f, 0.0f);
+    getFighter(fighter_gobj)->x80_self_vel.y = 0.0F;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialN_SetVars(fighter_gobj);
 }
@@ -199,8 +199,8 @@ void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/VyJIm // Mr. Game & Watch's aerial Chef Action State handler
 void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
-    getFighter(fighter_gobj)->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN, 0, NULL, 0.0f, 1.0f, 0.0f);
+    getFighter(fighter_gobj)->x80_self_vel.y = 0.0F;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialN_SetVars(fighter_gobj);
 }
@@ -336,7 +336,7 @@ void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN, FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN, FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     getFighter(fighter_gobj)->cb.x21BC_callback_Accessory4 = &ftGameWatch_SpecialN_CreateSausage;
 }
 
@@ -347,7 +347,7 @@ void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN, FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN, FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     getFighter(fighter_gobj)->cb.x21BC_callback_Accessory4 = &ftGameWatch_SpecialN_CreateSausage;
 }
 
@@ -358,7 +358,7 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
     Fighter* fp = fp = getFighter(fighter_gobj);
     f32 var;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN, FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL, anim_frame - 1.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN, FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL, anim_frame - 1.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp = fp = getFighter(fighter_gobj);
     fp->x2204_ftcmd_var1 = 0;
@@ -374,7 +374,7 @@ void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
     Fighter* fp = fp = getFighter(fighter_gobj);
     f32 var;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN, FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL, anim_frame - 1.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN, FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL, anim_frame - 1.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp = fp = getFighter(fighter_gobj);
     fp->x2204_ftcmd_var1 = 0;

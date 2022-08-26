@@ -153,8 +153,8 @@ void ftGameWatch_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
         ftGameWatch_SpecialLwShoot_ReleaseOil(fighter_gobj);
         return;
     }
-    fp->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, 0, NULL, 0.0f, 1.0f, 0.0f);
+    fp->x80_self_vel.y = 0.0F;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialLw_SetVars(fighter_gobj);
 }
@@ -172,8 +172,8 @@ void ftGameWatch_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
         return;
     }
     fp->x80_self_vel.x /= gawAttrs->x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
-    fp->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW, 0, NULL, 0.0f, 1.0f, 0.0f);
+    fp->x80_self_vel.y = 0.0F;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialLw_SetVars(fighter_gobj);
 }
@@ -206,9 +206,9 @@ void ftGameWatch_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((38.0f == fp->x894_currentAnimFrame) && ((s32)fp->gameWatchVars[0].SpecialLw.isRelease == FALSE))
+    if ((38.0F == fp->x894_currentAnimFrame) && ((s32)fp->gameWatchVars[0].SpecialLw.isRelease == FALSE))
     {
-        ftGameWatch_SpecialLw_UpdateAction(fighter_gobj, 5.0f);
+        ftGameWatch_SpecialLw_UpdateAction(fighter_gobj, 5.0F);
     }
     ftGameWatch_SpecialLw_UpdateVars(fighter_gobj);
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
@@ -223,9 +223,9 @@ void ftGameWatch_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((38.0f == fp->x894_currentAnimFrame) && ((s32)fp->gameWatchVars[0].SpecialLw.isRelease == FALSE))
+    if ((38.0F == fp->x894_currentAnimFrame) && ((s32)fp->gameWatchVars[0].SpecialLw.isRelease == FALSE))
     {
-        ftGameWatch_SpecialAirLw_UpdateAction(fighter_gobj, 5.0f);
+        ftGameWatch_SpecialAirLw_UpdateAction(fighter_gobj, 5.0F);
     }
     ftGameWatch_SpecialLw_UpdateVars(fighter_gobj);
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
@@ -254,7 +254,7 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj)
     else
     {
         stick_range = fp->input.x620_lstick_x;
-        if (stick_range < 0.0f)
+        if (stick_range < 0.0F)
         {
             stick_range = -stick_range;
         }
@@ -294,7 +294,7 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* fighter_gobj)
     else
     {
         stick_range = fp->input.x620_lstick_x;
-        if (stick_range < 0.0f)
+        if (stick_range < 0.0F)
         {
             stick_range = -stick_range;
         }
@@ -387,7 +387,7 @@ void ftGameWatch_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ftGameWatch_SpecialLw_UpdateVarsColl(fighter_gobj);
 }
 
@@ -398,7 +398,7 @@ void ftGameWatch_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ftGameWatch_SpecialLw_UpdateVarsColl(fighter_gobj);
 }
 
@@ -421,7 +421,7 @@ inline void ftGameWatch_SpecialLw_UpdateVarsAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/qFKjA
 void ftGameWatch_SpecialLw_UpdateAction(HSD_GObj* fighter_gobj, f32 animFrame)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, animFrame - 1.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, animFrame - 1.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
 }
@@ -430,7 +430,7 @@ void ftGameWatch_SpecialLw_UpdateAction(HSD_GObj* fighter_gobj, f32 animFrame)
 // https://decomp.me/scratch/N583p
 void ftGameWatch_SpecialAirLw_UpdateAction(HSD_GObj* fighter_gobj, f32 animFrame)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW, FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, animFrame - 1.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW, FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, animFrame - 1.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
 }
@@ -448,7 +448,7 @@ void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* fighter_gobj)
             func_8008A2BC(fighter_gobj);
             return;
         }
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, 4.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, 4.0F, 1.0F, 0.0F);
         func_8006EBA4(fighter_gobj);
         ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
     }
@@ -466,7 +466,7 @@ void ftGameWatch_SpecialAirLwCatch_Anim(HSD_GObj* fighter_gobj)
             func_800CC730(fighter_gobj);
             return;
         }
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW, FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, 4.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW, FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, 4.0F, 1.0F, 0.0F);
         func_8006EBA4(fighter_gobj);
         ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
     }
@@ -522,7 +522,7 @@ void ftGameWatch_SpecialLwCatch_GroundToAir(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_CATCH, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_CATCH, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 0x8014D954 - Mr. Game & Watch's air -> ground Oil Panic Fill Action State handler
@@ -531,7 +531,7 @@ void ftGameWatch_SpecialAirLwCatch_AirToGround(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW_CATCH, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW_CATCH, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 0x8014D9B4
@@ -552,7 +552,7 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* fighter_gobj)
         ASID = AS_GAMEWATCH_SPECIALLW_CATCH;
     }
     else ASID = AS_GAMEWATCH_SPECIALAIRLW_CATCH;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, ASID, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, ASID, 0, NULL, 0.0F, 1.0F, 0.0F);
     ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
 }
 
@@ -647,7 +647,7 @@ void ftGameWatch_SpecialLwShoot_GroundToAir(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_SHOOT, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_SHOOT, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
 }
@@ -658,7 +658,7 @@ void ftGameWatch_SpecialAirLwShoot_AirToGround(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW_SHOOT, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW_SHOOT, FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
 }
@@ -672,7 +672,7 @@ void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* fighter_gobj)
     void(*cb_Accessory4)(HSD_GObj*);
     f32 panicDamage;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW_SHOOT, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW_SHOOT, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
 
     fp = getFighter(fighter_gobj);
@@ -696,7 +696,7 @@ void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* fighter_gobj)
     void(*cb_Accessory4)(HSD_GObj*);
     f32 panicDamage;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_SHOOT, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_SHOOT, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
 
     fp = getFighter(fighter_gobj);

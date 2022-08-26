@@ -23,14 +23,14 @@ void func_80076064(Fighter* fp) {
     camera_box = fp->x890_cameraBox;
     func_80076018(fp->x10C_ftData->x3C, &spC, fp->x34_scale.y);
     camera_box->x8 = 0;
-    if (fp->x2C_facing_direction == 1.0f) {
+    if (fp->x2C_facing_direction == 1.0F) {
         camera_box->x40.x = spC.x0.z;
         camera_box->x40.y = spC.x0.y * Stage_GetCamFixedZoom();
-        camera_box->x28 = 1.0f;
+        camera_box->x28 = 1.0F;
     } else {
         camera_box->x40.x = -spC.x0.y * Stage_GetCamFixedZoom();
         camera_box->x40.y = -spC.x0.z;
-        camera_box->x28 = -1.0f;
+        camera_box->x28 = -1.0F;
     }
     spC.xC; //this line changes everything lol
     camera_box->x48.x = spC.xC.x;
@@ -54,16 +54,16 @@ void func_800761C8(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     camera_box = fp->x890_cameraBox;
-    fp->x2C_facing_direction + 1.0f; // lol
+    fp->x2C_facing_direction + 1.0F; // lol
     func_80076018(fp->x10C_ftData->x3C, &sp10, fp->x34_scale.y);
-    if (fp->x2C_facing_direction == 1.0f) {
+    if (fp->x2C_facing_direction == 1.0F) {
         camera_box->x40.x = sp10.x0.z;
         camera_box->x40.y = sp10.x0.y * Stage_GetCamFixedZoom();
-        camera_box->x28 = 1.0f;
+        camera_box->x28 = 1.0F;
     } else {
         camera_box->x40.x = -sp10.x0.y * Stage_GetCamFixedZoom();
         camera_box->x40.y = -sp10.x0.z;
-        camera_box->x28 = -1.0f;
+        camera_box->x28 = -1.0F;
     }
     sp10.xC; //this line changes everything lol
     camera_box->x10.x = fp->xB0_pos.x;

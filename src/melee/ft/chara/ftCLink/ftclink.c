@@ -102,7 +102,7 @@ void func_80149114(HSD_GObj* gobj)
     CLinkAttributes* temp_r4 = (void*) fp->x10C_ftData->ext_attr;
     f32 ftmp = func_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
     fp->xEC_ground_vel = ftmp * p_ftCommonData->x294;
-    if (fp->x19AC < 0.0f) {
+    if (fp->x19AC < 0.0F) {
         ftmp = fp->xEC_ground_vel;
     } else {
         ftmp = -fp->xEC_ground_vel;

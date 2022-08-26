@@ -31,8 +31,8 @@ void func_80041C8C(CollData* cd) {
     lbl_804D64A0 = 0;
     lbl_804D64A4 = 0;
     if (g_debugLevel >= 3) {
-        if (!(cd->x4_vec.x < 45000.0f) || !(cd->x4_vec.x > -45000.0f) ||
-            !(cd->x4_vec.y < 45000.0f) || !(cd->x4_vec.y > -45000.0f)) {
+        if (!(cd->x4_vec.x < 45000.0F) || !(cd->x4_vec.x > -45000.0F) ||
+            !(cd->x4_vec.y < 45000.0F) || !(cd->x4_vec.y > -45000.0F)) {
 
             if (func_80086960(cd->x0_gobj) != 0) {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
@@ -83,7 +83,7 @@ void func_80041DD0(CollData* cd, u32 flags) {
 
     if (flags & 0b100) {
         f32 x54 = cd->x54;
-        f32 tmp = 0.5f * cd->x5C;
+        f32 tmp = 0.5F * cd->x5C;
         f32 offset;
 
         right += x54;
@@ -123,31 +123,31 @@ void func_80041EE4(CollData* cd) {
     cd->x44 = -1;
     cd->x14C_ground.index = -1;
     cd->x14C_ground.unk = 0;
-    cd->x14C_ground.normal.x = 0.0f;
-    cd->x14C_ground.normal.y = 1.0f;
-    cd->x14C_ground.normal.z = 0.0f;
+    cd->x14C_ground.normal.x = 0.0F;
+    cd->x14C_ground.normal.y = 1.0F;
+    cd->x14C_ground.normal.z = 0.0F;
     cd->x188_ceiling.index = -1;
     cd->x188_ceiling.unk = 0;
-    cd->x188_ceiling.normal.x = 0.0f;
-    cd->x188_ceiling.normal.y = -1.0f;
-    cd->x188_ceiling.normal.z = 0.0f;
+    cd->x188_ceiling.normal.x = 0.0F;
+    cd->x188_ceiling.normal.y = -1.0F;
+    cd->x188_ceiling.normal.z = 0.0F;
     cd->x174_leftwall.index = -1;
     cd->x174_leftwall.unk = 0;
-    cd->x174_leftwall.normal.x = 0.0f;
-    cd->x174_leftwall.normal.y = 1.0f;
-    cd->x174_leftwall.normal.z = 0.0f;
+    cd->x174_leftwall.normal.x = 0.0F;
+    cd->x174_leftwall.normal.y = 1.0F;
+    cd->x174_leftwall.normal.z = 0.0F;
     cd->x160_rightwall.index = -1;
     cd->x160_rightwall.unk = 0;
-    cd->x160_rightwall.normal.x = 0.0f;
-    cd->x160_rightwall.normal.y = -1.0f;
-    cd->x160_rightwall.normal.z = 0.0f;
+    cd->x160_rightwall.normal.x = 0.0F;
+    cd->x160_rightwall.normal.y = -1.0F;
+    cd->x160_rightwall.normal.z = 0.0F;
     cd->x38 = lbl_804D64AC;
-    cd->x50 = 0.0f;
+    cd->x50 = 0.0F;
     cd->x48 = -1;
     cd->x4C = -1;
-    cd->x54 = 0.0f;
-    cd->x58 = 0.0f;
-    cd->x5C = 0.0f;
+    cd->x54 = 0.0F;
+    cd->x58 = 0.0F;
+    cd->x5C = 0.0F;
     func_8000C160(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
     func_8000C160(&cd->xC4_ecb, sizeof(ftECB));
     func_8000C160(&cd->xE4_ecb, sizeof(ftECB));
@@ -170,17 +170,17 @@ void func_80042078(CollData* cd, HSD_GObj* gobj,
     cd->x10C_joint[4] = arg6;
     cd->x10C_joint[5] = arg7;
     cd->x124 = arg9;
-    cd->x128 = 10.0f;
-    cd->x12C = 10.0f;
+    cd->x128 = 10.0F;
+    cd->x12C = 10.0F;
     if (cd->x34_flags.bits.b0) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.top.y = 8.0f;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.x = 4.0f;
-        cd->xA4_ecbCurrCorrect.right.y = 4.0f;
-        cd->xA4_ecbCurrCorrect.left.x = -4.0f;
-        cd->xA4_ecbCurrCorrect.left.y = 4.0f;
+        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.top.y = 8.0F;
+        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.x = 4.0F;
+        cd->xA4_ecbCurrCorrect.right.y = 4.0F;
+        cd->xA4_ecbCurrCorrect.left.x = -4.0F;
+        cd->xA4_ecbCurrCorrect.left.y = 4.0F;
         cd->xA4_ecbCurrCorrect = cd->xA4_ecbCurrCorrect;
         cd->xC4_ecb = cd->xA4_ecbCurrCorrect;
         cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
@@ -188,7 +188,7 @@ void func_80042078(CollData* cd, HSD_GObj* gobj,
         cd->x84_ecb = cd->xA4_ecbCurrCorrect;
     }
     cd->x36 = -1;
-    cd->x50 = 0.0f;
+    cd->x50 = 0.0F;
 }
 
 // 8004220C https://decomp.me/scratch/nOinn
@@ -199,16 +199,16 @@ void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3, f
     cd->x10C_f32 = arg2;
     cd->x110_f32 = arg3;
     cd->x114_f32 = arg4;
-    cd->x118_f32 = 0.0f;
+    cd->x118_f32 = 0.0F;
     if (cd->x34_flags.bits.b0) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.top.y = 8.0f;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.x = 4.0f;
-        cd->xA4_ecbCurrCorrect.right.y = 4.0f;
-        cd->xA4_ecbCurrCorrect.left.x = -4.0f;
-        cd->xA4_ecbCurrCorrect.left.y = 4.0f;
+        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.top.y = 8.0F;
+        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.x = 4.0F;
+        cd->xA4_ecbCurrCorrect.right.y = 4.0F;
+        cd->xA4_ecbCurrCorrect.left.x = -4.0F;
+        cd->xA4_ecbCurrCorrect.left.y = 4.0F;
         cd->xC4_ecb = cd->xA4_ecbCurrCorrect;
         cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
         cd->x64_ecb = cd->xA4_ecbCurrCorrect;
@@ -228,44 +228,44 @@ void func_80042374(CollData* arg0, f32 arg8, f32 arg9, f32 argA) {
 void func_80042384(CollData* cd) {
     f32 tmp, tmp2;
 
-    if (fabs_inline(cd->x84_ecb.top.y - cd->x84_ecb.bottom.y) < 1.0f) {
-        cd->x84_ecb.top.y += 1.0f;
-        tmp = 0.5f * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
+    if (fabs_inline(cd->x84_ecb.top.y - cd->x84_ecb.bottom.y) < 1.0F) {
+        cd->x84_ecb.top.y += 1.0F;
+        tmp = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
         cd->x84_ecb.left.y = tmp;
         cd->x84_ecb.right.y = tmp;
     }
-    if (cd->x84_ecb.top.y < 1.0f) {
-        cd->x84_ecb.top.y = 1.0f;
+    if (cd->x84_ecb.top.y < 1.0F) {
+        cd->x84_ecb.top.y = 1.0F;
     }
-    if (cd->x84_ecb.left.x > -1.0f) {
-        cd->x84_ecb.left.x = -1.0f;
+    if (cd->x84_ecb.left.x > -1.0F) {
+        cd->x84_ecb.left.x = -1.0F;
     }
-    if (cd->x84_ecb.right.x < 1.0f) {
-        cd->x84_ecb.right.x = 1.0f;
+    if (cd->x84_ecb.right.x < 1.0F) {
+        cd->x84_ecb.right.x = 1.0F;
     }
     if (cd->x84_ecb.top.y < cd->x84_ecb.bottom.y) {
-        cd->x84_ecb.top.y = 1.0f + cd->x84_ecb.bottom.y;
+        cd->x84_ecb.top.y = 1.0F + cd->x84_ecb.bottom.y;
     }
     if (cd->x84_ecb.right.y > cd->x84_ecb.top.y ||
         cd->x84_ecb.right.y < cd->x84_ecb.bottom.y)
     {
-        tmp = 0.5f * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
+        tmp = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
         cd->x84_ecb.left.y = tmp;
         cd->x84_ecb.right.y = tmp;
     }
     tmp = cd->x84_ecb.top.y;
     tmp2 = cd->x84_ecb.right.y;
-    if (tmp - tmp2 < 0.001f ||
-        tmp2 - cd->x84_ecb.bottom.y < 0.001f)
+    if (tmp - tmp2 < 0.001F ||
+        tmp2 - cd->x84_ecb.bottom.y < 0.001F)
     {
-        cd->x84_ecb.right.y = 0.5f * (tmp + cd->x84_ecb.bottom.y);
+        cd->x84_ecb.right.y = 0.5F * (tmp + cd->x84_ecb.bottom.y);
     }
     tmp = cd->x84_ecb.top.y;
     tmp2 = cd->x84_ecb.left.y;
-    if (tmp - tmp2 < 0.001f ||
-        tmp2 - cd->x84_ecb.bottom.y < 0.001f)
+    if (tmp - tmp2 < 0.001F ||
+        tmp2 - cd->x84_ecb.bottom.y < 0.001F)
     {
-        cd->x84_ecb.left.y = 0.5f * (tmp + cd->x84_ecb.bottom.y);
+        cd->x84_ecb.left.y = 0.5F * (tmp + cd->x84_ecb.bottom.y);
     }
 }
 
@@ -290,14 +290,14 @@ void func_800424DC(CollData* cd, u32 flags) {
     f32 tmpval;
 
     if (cd->x130_flags & 0b100000) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.top.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.left.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.left.y = 0.0f;
+        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.top.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.left.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.left.y = 0.0F;
         cd->x130_flags &= ~0b100000;
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
@@ -326,66 +326,66 @@ void func_800424DC(CollData* cd, u32 flags) {
     }
 
     if (!(flags & 0b100)) {
-        left_x -= 2.0f;
-        right_x += 2.0f;
-        bottom_y -= 2.0f;
-        top_y += 2.0f;
+        left_x -= 2.0F;
+        right_x += 2.0F;
+        bottom_y -= 2.0F;
+        top_y += 2.0F;
     }
 
-    phi_f1 = 4.0f > cd->x12C ? 4.0f : cd->x12C;
+    phi_f1 = 4.0F > cd->x12C ? 4.0F : cd->x12C;
     phi_f2 = fabs_inline(right_x - left_x);
 
     if (phi_f2 < phi_f1) {
-        right_x = 0.5f * phi_f2;
+        right_x = 0.5F * phi_f2;
         left_x = -right_x;
     }
 
-    phi_f1 = 4.0f > cd->x128 ? 4.0f : cd->x128;
+    phi_f1 = 4.0F > cd->x128 ? 4.0F : cd->x128;
     phi_f2 = fabs_inline(top_y - bottom_y);
 
     if (phi_f2 < phi_f1) {
-        tmpval = 0.5f * phi_f2;
-        mid_y = 0.5f * (top_y + bottom_y);
+        tmpval = 0.5F * phi_f2;
+        mid_y = 0.5F * (top_y + bottom_y);
         top_y = mid_y + tmpval;
         bottom_y = mid_y - tmpval;
     }
 
     if (flags & 0b1000) {
-        left_x = -1.0f;
-        right_x = +1.0f;
+        left_x = -1.0F;
+        right_x = +1.0F;
     } else {
-        right_x = right_x < +2.0f ? +2.0f : right_x;
-        left_x = left_x > -2.0f ? -2.0f : left_x;
+        right_x = right_x < +2.0F ? +2.0F : right_x;
+        left_x = left_x > -2.0F ? -2.0F : left_x;
     }
 
     if (flags & 1) {
-        bottom_y = 0.0f;
+        bottom_y = 0.0F;
         if (flags & 0b10000) {
-            top_y = 2.0f;
+            top_y = 2.0F;
         }
     } else {
-        if (bottom_y < 0.0f) {
-            bottom_y = 0.0f;
+        if (bottom_y < 0.0F) {
+            bottom_y = 0.0F;
         }
         if (flags & 0b10000) {
-            mid_y = 0.5f * (bottom_y + top_y);
-            bottom_y = mid_y - 1.0f;
-            top_y = mid_y + 1.0f;
-            if (bottom_y < 0.0f) {
-                bottom_y = 0.0f;
-                top_y = 2.0f;
+            mid_y = 0.5F * (bottom_y + top_y);
+            bottom_y = mid_y - 1.0F;
+            top_y = mid_y + 1.0F;
+            if (bottom_y < 0.0F) {
+                bottom_y = 0.0F;
+                top_y = 2.0F;
             }
         }
     }
 
-    cd->x84_ecb.top.x = 0.0f;
+    cd->x84_ecb.top.x = 0.0F;
     cd->x84_ecb.top.y = top_y;
-    cd->x84_ecb.bottom.x = 0.0f;
+    cd->x84_ecb.bottom.x = 0.0F;
     cd->x84_ecb.bottom.y = bottom_y;
     cd->x84_ecb.right.x = right_x;
-    cd->x84_ecb.right.y = cd->x124 + 0.5f * (bottom_y + top_y);
+    cd->x84_ecb.right.y = cd->x124 + 0.5F * (bottom_y + top_y);
     cd->x84_ecb.left.x = left_x;
-    cd->x84_ecb.left.y = cd->x124 + 0.5f * (bottom_y + top_y);
+    cd->x84_ecb.left.y = cd->x124 + 0.5F * (bottom_y + top_y);
     cd->x34_flags.bits.b0 = 0;
 }
 
@@ -442,14 +442,14 @@ void func_8004293C(CollData* cd) {
     
     angle = cd->x118_f32;
     if ((cd->x130_flags & 0x20) != 0) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.top.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.left.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.left.y = 0.0f;
+        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.top.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.left.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.left.y = 0.0F;
         cd->x130_flags &= 0xFFFFFFDF;
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
@@ -465,7 +465,7 @@ void func_8004293C(CollData* cd) {
         left_x = -cd->x110_f32;
     }
     
-    if (angle != 0.0f) {
+    if (angle != 0.0F) {
         sin = sinf(angle);
         cos = cosf(angle);
         
@@ -475,10 +475,10 @@ void func_8004293C(CollData* cd) {
         orig_left_x = left_x;
         
         // fake
-        rot_right_y = 0.5f * (orig_right_x + orig_left_x);
+        rot_right_y = 0.5F * (orig_right_x + orig_left_x);
         midpoint_x = rot_right_y;
         
-        top_y = right_x = bottom_y = left_x = 0.0f;
+        top_y = right_x = bottom_y = left_x = 0.0F;
         
         rot_top_x = -orig_top_y * sin;
         rot_top_y = orig_top_y * cos;
@@ -501,26 +501,26 @@ void func_8004293C(CollData* cd) {
         update_min_max_2(&bottom_y, &top_y, rot_left_y);
     }
     
-    clamp_above_2(&top_y, 0.0f);
-    clamp_below_2(&bottom_y, -0.0f);
-    clamp_above_2(&right_x, 0.0f);
-    clamp_below_2(&left_x, -0.0f);
+    clamp_above_2(&top_y, 0.0F);
+    clamp_below_2(&bottom_y, -0.0F);
+    clamp_above_2(&right_x, 0.0F);
+    clamp_below_2(&left_x, -0.0F);
     
-    if ((top_y - bottom_y) < 3.0f) {
-        top_y = 1.5f;
+    if ((top_y - bottom_y) < 3.0F) {
+        top_y = 1.5F;
         bottom_y = -top_y;
     }
-    if ((right_x - left_x) < 3.0f) {
-        right_x = 1.5f;
+    if ((right_x - left_x) < 3.0F) {
+        right_x = 1.5F;
         left_x = -right_x;
     }
     
-    cd->x84_ecb.top.x = 0.0f;
+    cd->x84_ecb.top.x = 0.0F;
     cd->x84_ecb.top.y = top_y;
-    cd->x84_ecb.bottom.x = 0.0f;
+    cd->x84_ecb.bottom.x = 0.0F;
     cd->x84_ecb.bottom.y = bottom_y;
     
-    midpoint_y = 0.5f * (top_y + bottom_y);
+    midpoint_y = 0.5F * (top_y + bottom_y);
     cd->x84_ecb.right.x = right_x;
     cd->x84_ecb.right.y = midpoint_y;
     cd->x84_ecb.left.x = left_x;
@@ -532,20 +532,20 @@ void func_8004293C(CollData* cd) {
 // 80042C58 https://decomp.me/scratch/pqafT
 void func_80042C58(CollData* arg0, ftECB* arg1) {
     if ((arg0->x130_flags & 0x20) != 0) {
-        arg0->xA4_ecbCurrCorrect.top.x = 0.0f;
-        arg0->xA4_ecbCurrCorrect.top.y = 0.0f;
-        arg0->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        arg0->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        arg0->xA4_ecbCurrCorrect.right.x = 0.0f;
-        arg0->xA4_ecbCurrCorrect.right.y = 0.0f;
-        arg0->xA4_ecbCurrCorrect.left.x = 0.0f;
-        arg0->xA4_ecbCurrCorrect.left.y = 0.0f;
+        arg0->xA4_ecbCurrCorrect.top.x = 0.0F;
+        arg0->xA4_ecbCurrCorrect.top.y = 0.0F;
+        arg0->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        arg0->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        arg0->xA4_ecbCurrCorrect.right.x = 0.0F;
+        arg0->xA4_ecbCurrCorrect.right.y = 0.0F;
+        arg0->xA4_ecbCurrCorrect.left.x = 0.0F;
+        arg0->xA4_ecbCurrCorrect.left.y = 0.0F;
         arg0->x130_flags &= 0xFFFFFFDF;
     }
     arg0->xE4_ecb = arg0->xA4_ecbCurrCorrect;
-    arg0->x84_ecb.top.x = 0.0f;
+    arg0->x84_ecb.top.x = 0.0F;
     arg0->x84_ecb.top.y = arg1->top.x;
-    arg0->x84_ecb.bottom.x = 0.0f;
+    arg0->x84_ecb.bottom.x = 0.0F;
     arg0->x84_ecb.bottom.y = arg1->top.y;
     arg0->x84_ecb.right.x = arg1->right.x;
     arg0->x84_ecb.right.y = arg1->right.y;
@@ -666,7 +666,7 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2) {
         func_80043324_inline2(arg0, arg0->x188_ceiling.index, arg2, arg0->x4_vec.y - arg0->x1C_vec.y);
     }
     if (g_debugLevel >= 3) {
-        if (!(arg0->x4_vec.x < 45000.0f) || !(arg0->x4_vec.x > -45000.0f) || !(arg0->x4_vec.y < 45000.0f) || !(arg0->x4_vec.y > -45000.0f)) {
+        if (!(arg0->x4_vec.x < 45000.0F) || !(arg0->x4_vec.x > -45000.0F) || !(arg0->x4_vec.y < 45000.0F) || !(arg0->x4_vec.y > -45000.0F)) {
             if (func_80086960(arg0->x0_gobj)) {
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) ply=%d ms=%d\n", "mpcoll.c", 1350, arg0->x1C_vec.x, arg0->x1C_vec.y, arg0->x4_vec.x, arg0->x4_vec.y, func_80086BE0(arg0->x0_gobj), func_800874BC(arg0->x0_gobj));
             } else {
@@ -688,9 +688,9 @@ void func_80043558(CollData* arg0, s32 arg1) {
 
     temp_r3 = func_80054C6C(arg1);
     if (temp_r3 == 1) {
-        func_80043268(arg0, arg1, 0, 0.0f);
+        func_80043268(arg0, arg1, 0, 0.0F);
     } else if (temp_r3 == 2) {
-        func_80043324_inline2(arg0, arg1, 0, 0.0f);
+        func_80043324_inline2(arg0, arg1, 0, 0.0F);
     }
 #else
     s32 sp1C;
@@ -708,7 +708,7 @@ void func_80043558(CollData* arg0, s32 arg1) {
             sp1C = 0;
             func_800580FC(temp_r3_2, &sp18, &sp1C);
             if (sp18 != NULL) {
-                (*sp18)(sp1C, temp_r3_2, arg0, arg0->x50, 2, 0.0f);
+                (*sp18)(sp1C, temp_r3_2, arg0, arg0->x50, 2, 0.0F);
             }
         }
     } else if (temp_r3 == 2) {
@@ -717,7 +717,7 @@ void func_80043558(CollData* arg0, s32 arg1) {
             sp14 = 0;
             func_800581BC(temp_r3_3, &sp10, &sp14);
             if (sp10 != NULL) {
-                (*sp10)(sp14, temp_r3_3, arg0, arg0->x50, 0, 0.0f);
+                (*sp10)(sp14, temp_r3_3, arg0, arg0->x50, 0, 0.0F);
             }
         }
     }
@@ -743,7 +743,7 @@ void func_800436D8(CollData* arg0, s32 arg1) {
 }
 
 // TODO: float order hack
-const f32 flt_804D7FD8 = 6.0f;
+const f32 flt_804D7FD8 = 6.0F;
 static f32 six(void) {
     return flt_804D7FD8;
 }
@@ -817,8 +817,8 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
     y = max_inline(y, dist_top_y);
     x = max_inline(x, y);
 
-    if (x > flt_804D7FD8) { //6.0f float order hack
-        var_r30 = (s32) (x / flt_804D7FD8); //6.0f float order hack
+    if (x > flt_804D7FD8) { //6.0F float order hack
+        var_r30 = (s32) (x / flt_804D7FD8); //6.0F float order hack
         var_r30 = var_r30 + 1;
         vel.x /= var_r30;
         vel.y /= var_r30;
@@ -830,7 +830,7 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
     arg1->x4_vec = arg1->x1C_vec;
     arg1->x34_flags.bits.b5 = 0;
     while ((var_r31 < var_r30) && !arg1->x34_flags.bits.b5) {
-        func_80042DB0(arg1, 1.0f / (var_r30 - var_r31));
+        func_80042DB0(arg1, 1.0F / (var_r30 - var_r31));
         arg1->x10_vec = arg1->x4_vec;
         lbvector_Add(&arg1->x4_vec, &vel);
         func_80041DD0(arg1, arg2);
@@ -853,7 +853,7 @@ void func_800439FC(CollData* arg0) {
     var_f31 = arg0->xA4_ecbCurrCorrect.right.x;
     temp_f3 = arg0->x4_vec.x + var_f31;
     temp_f4 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y;
-    if (var_f31 < 0.0f) {
+    if (var_f31 < 0.0F) {
         var_f31 = -var_f31;
     }
     if (func_800501CC(
@@ -883,7 +883,7 @@ void func_80043ADC(CollData* arg0) {
     var_f31 = arg0->xA4_ecbCurrCorrect.left.x;
     temp_f3 = arg0->x4_vec.x + var_f31;
     temp_f4 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.left.y;
-    if (var_f31 < 0.0f) {
+    if (var_f31 < 0.0F) {
         var_f31 = -var_f31;
     }
     if (func_800509B8(-((arg0->x188_ceiling.normal.y * var_f31) - temp_f3), ((arg0->x188_ceiling.normal.x * var_f31) + temp_f4), temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL, arg0->x48, arg0->x4C) != 0) {
@@ -933,7 +933,7 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2) {
     f32 var_f31;
 
     temp_f1 = arg0->xA4_ecbCurrCorrect.right.x;
-    if (temp_f1 < 0.0f) {
+    if (temp_f1 < 0.0F) {
         var_f31 = -temp_f1;
     } else {
         var_f31 = temp_f1;
@@ -956,13 +956,13 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2) {
         }
     } else {
         func_80054584(arg1, &sp20);
-        temp_f4 = 2.0f;
+        temp_f4 = 2.0F;
         temp_f2 = sp24;
         temp_f1_3 = sp20 - temp_f4;
         sp20 = -((temp_f4 * var_f31) - temp_f1_3);
         sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y - arg0->xA4_ecbCurrCorrect.bottom.y)) - temp_f2);
         sp8 = 0;
-        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0) {
+        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24, 0.0F) != 0) {
             sp20 = arg0->x140.x;
             if (arg2 != 0) {
                 sp24 = arg0->x4_vec.y;
@@ -989,7 +989,7 @@ asm void func_80043C6C() {
 /* 80043C88 00040868  3B C4 00 00 */	addi r30, r4, 0
 /* 80043C8C 0004086C  93 A1 00 3C */	stw r29, 0x3c(r1)
 /* 80043C90 00040870  7C 7D 1B 78 */	mr r29, r3
-/* 80043C94 00040874  C0 02 85 C4 */	lfs f0, 0.0f
+/* 80043C94 00040874  C0 02 85 C4 */	lfs f0, 0.0F
 /* 80043C98 00040878  C0 23 00 B4 */	lfs f1, 0xb4(r3)
 /* 80043C9C 0004087C  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80043CA0 00040880  40 80 00 0C */	bge lbl_80043CAC
@@ -1063,7 +1063,7 @@ lbl_80043D94:
 /* 80043D9C 0004097C  48 01 07 E9 */	bl func_80054584
 /* 80043DA0 00040980  C0 01 00 20 */	lfs f0, 0x20(r1)
 /* 80043DA4 00040984  38 00 00 00 */	li r0, 0
-/* 80043DA8 00040988  C0 82 85 E4 */	lfs f4, 2.0f
+/* 80043DA8 00040988  C0 82 85 E4 */	lfs f4, 2.0F
 /* 80043DAC 0004098C  38 7D 01 40 */	addi r3, r29, 0x140
 /* 80043DB0 00040990  C0 41 00 24 */	lfs f2, 0x24(r1)
 /* 80043DB4 00040994  EC 20 20 28 */	fsubs f1, f0, f4
@@ -1081,7 +1081,7 @@ lbl_80043D94:
 /* 80043DE4 000409C4  90 01 00 08 */	stw r0, 8(r1)
 /* 80043DE8 000409C8  C0 61 00 20 */	lfs f3, 0x20(r1)
 /* 80043DEC 000409CC  C0 81 00 24 */	lfs f4, 0x24(r1)
-/* 80043DF0 000409D0  C0 A2 85 C4 */	lfs f5, 0.0f
+/* 80043DF0 000409D0  C0 A2 85 C4 */	lfs f5, 0.0F
 /* 80043DF4 000409D4  80 FD 00 3C */	lwz r7, 0x3c(r29)
 /* 80043DF8 000409D8  81 1D 00 48 */	lwz r8, 0x48(r29)
 /* 80043DFC 000409DC  81 3D 00 4C */	lwz r9, 0x4c(r29)
@@ -1198,7 +1198,7 @@ lbl_80043E70:
 // 8004CC00
 // 8004D024
 
-const f32 flt_804D7FF8 = 5.0f;
+const f32 flt_804D7FF8 = 5.0F;
 const f64 flt_804D8000 = -0.75;
 const f64 flt_804D8008 = 0.75;
-const f32 flt_804D8010 = -3.0f;
+const f32 flt_804D8010 = -3.0F;

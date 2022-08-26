@@ -21,9 +21,9 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj)
         fp->sa.gaw.x2264_judgementGObj = func_802C7774(fp->x2C_facing_direction, fighter_gobj, &sp20, func_8007500C(fp, 0x31), fp->sa.gaw.x222C_judgeVar1);
         if ((s32)fp->sa.gaw.x222C_judgeVar1 == 6)
         {
-            sp14.z = 0.0f;
-            sp14.x = 0.0f;
-            sp14.y = 5.0f;
+            sp14.z = 0.0F;
+            sp14.x = 0.0F;
+            sp14.y = 5.0F;
             func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x1F)].x0_jobj, &sp14, &sp20);
             func_8028FAF4(fighter_gobj, &sp20);
         }
@@ -158,9 +158,9 @@ void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     s32 ASID;
 
-    getFighter(fighter_gobj)->x80_self_vel.y = 0.0f;
+    getFighter(fighter_gobj)->x80_self_vel.y = 0.0F;
     ftGameWatch_SpecialS_GetRandomInt(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialS_SetVars(fighter_gobj);
 }
@@ -175,7 +175,7 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 
     getFighter(fighter_gobj)->x80_self_vel.x /= gawAttrs->x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE;
     ftGameWatch_SpecialS_GetRandomInt(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialS_SetVars(fighter_gobj);
 }
@@ -245,7 +245,7 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
                 fp->sa.gaw.x2234 = 1;
                 fp->x80_self_vel.y = gawAttrs->x28_GAMEWATCH_JUDGE_VEL_Y;
             }
-            else fp->x80_self_vel.y = 0.0f;
+            else fp->x80_self_vel.y = 0.0F;
         }
         func_8007D494(fp, gawAttrs->x2C_GAMEWATCH_JUDGE_FRICTION1, gawAttrs->x30_GAMEWATCH_JUDGE_FRICTION2);
     }
@@ -300,7 +300,7 @@ void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 
     func_8007D5D4(fp);
     !fighter_gobj;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     if ((u32)fp->x2200_ftcmd_var0 == 1)
     {
         fp->x2200_ftcmd_var0 = 2;
@@ -317,6 +317,6 @@ void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
     fp->sa.gaw.x2234 = 0;
     func_8007D7FC(fp);
     !fighter_gobj;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ftGameWatch_SpecialS_SetCall(fighter_gobj);
 }

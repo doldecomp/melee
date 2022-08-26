@@ -1516,7 +1516,7 @@ f32 Fighter_GetModelScale(Fighter* fp)
 void func_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 {
     Vec3 scale;
-    f32 val = 1.0f / fp->x10C_ftData->x0->x8C;
+    f32 val = 1.0F / fp->x10C_ftData->x0->x8C;
     scale.z = val;
     scale.y = val;
     scale.x = val;
@@ -1697,7 +1697,7 @@ void func_8007FDA0(HSD_GObj* gobj)
     fp = gobj->user_data;
     temp_r30 = &fp->x110_attr.x240;
     phi_f31 = fminf(p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708, p_ftCommonData->x70C);
-    temp_f1 = 1.0f / phi_f31;
+    temp_f1 = 1.0F / phi_f31;
     sp20 = *temp_r30;
     sp20.x *= temp_f1;
     sp20.y *= temp_f1;

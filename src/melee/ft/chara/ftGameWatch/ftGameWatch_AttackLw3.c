@@ -129,7 +129,7 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
     if (func_80094790(fighter_gobj) == FALSE)
     {
         fp->x2218_flag.bits.b0 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACKLW3, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACKLW3, 0, NULL, 0.0F, 1.0F, 0.0F);
         func_8006EBA4(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemManholeSetup;
     }

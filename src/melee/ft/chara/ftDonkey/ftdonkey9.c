@@ -14,9 +14,9 @@ void ftDonkey_800E06D8(HSD_GObj* fighterObj) {
     if (ftDonkey_800E0750(fighterObj)) {
         ftDonkey_800E07B0(fighterObj);
     } else {
-        vec.x = vec.y = vec.z = 0.0f;
-        func_8026ABD8(fp->x1974_heldItem, &vec, 1.0f);
-        func_8008E908(fighterObj, 0.0f);  
+        vec.x = vec.y = vec.z = 0.0F;
+        func_8026ABD8(fp->x1974_heldItem, &vec, 1.0F);
+        func_8008E908(fighterObj, 0.0F);  
     }
 }
 
@@ -35,7 +35,7 @@ BOOL ftDonkey_800E0750(HSD_GObj* fighterObj) {
 void ftDonkey_800E07B0(HSD_GObj* fighterObj) {
     Fighter* fp = fighterObj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->x2CC;
-    func_8008DCE0(fighterObj, donkey_attr->action_state + 9, 0.0f);
+    func_8008DCE0(fighterObj, donkey_attr->action_state + 9, 0.0F);
 }
  
 void ftDonkey_800E07E4(HSD_GObj* fighterObj) {

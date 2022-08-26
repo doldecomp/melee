@@ -3,7 +3,7 @@
 
 s32 ftDonkey_800DFA98(HSD_GObj* fighterObj) {
     if (ftWalkCommon_800DFC70(fighterObj)) {
-        ftDonkey_800DFAE4(fighterObj, 0.0f);
+        ftDonkey_800DFAE4(fighterObj, 0.0F);
         return 1;
     }
     return 0;
@@ -16,7 +16,7 @@ void ftDonkey_800DFAE4(HSD_GObj* fighterObj, f32 argf) {
         fighterObj, donkey_attr->action_state + 1, 0, 
         argf, 
         donkey_attr->x8, donkey_attr->xC,  donkey_attr->x10, donkey_attr->x14, donkey_attr->x18, donkey_attr->x1C, 
-        1.0f
+        1.0F
     ); 
 }
 

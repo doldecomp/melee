@@ -41,6 +41,6 @@ void lbl_80151BB4(void) {
 // https://decomp.me/scratch/vjf0b
 void lbl_80151BB8(HSD_GObj* arg0) {
     u32 unused[2];
-    Fighter_ActionStateChange_800693AC(arg0, 0x15D, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x15D, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
 }

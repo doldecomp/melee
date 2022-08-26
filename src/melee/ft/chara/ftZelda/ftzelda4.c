@@ -70,7 +70,7 @@ void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* fighterObj) {
 // https://decomp.me/scratch/jZJgg (with helper)
 // https://decomp.me/scratch/Lw6fO (single function)
 void ftZelda_SpecialLw_StartAction(HSD_GObj* fighterObj) {
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0, NULL, 0.0f, 1.0, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x163, 0, NULL, 0.0F, 1.0, 0.0F);
     
     func_8006EBA4(fighterObj);
     
@@ -82,7 +82,7 @@ void ftZelda_SpecialLw_StartAction(HSD_GObj* fighterObj) {
 // For a scratch using helper function, see the above function.
 // https://decomp.me/scratch/8W7ZF (single function)
 void ftZelda_SpecialAirLw_StartAction(HSD_GObj* fighterObj) {
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x165, 0, NULL, 0.0f, 1.0, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x165, 0, NULL, 0.0F, 1.0, 0.0F);
     
     func_8006EBA4(fighterObj);
     

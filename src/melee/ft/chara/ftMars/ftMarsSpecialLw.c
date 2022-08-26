@@ -6,8 +6,8 @@ void ftMars_SpecialLw_StartAction(HSD_GObj* gobj) {
     Fighter* fp;
     u32 unused[2];
 
-    ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(gobj, 0x171, 0, NULL, 0.0f, 1.0f, 0.0f);
+    ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0F;
+    Fighter_ActionStateChange_800693AC(gobj, 0x171, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     fp = gobj->user_data;
     fp->x2204_ftcmd_var1 = 0;
@@ -25,8 +25,8 @@ void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj) {
     fp = gobj->user_data;
     attr = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= attr->x4C;
-    fp->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(gobj, 0x173, 0, NULL, 0.0f, 1.0f, 0.0f);
+    fp->x80_self_vel.y = 0.0F;
+    Fighter_ActionStateChange_800693AC(gobj, 0x173, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     ft2 = gobj->user_data;
     ft2->x2204_ftcmd_var1 = 0;
@@ -135,7 +135,7 @@ void func_80138D38(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x173, 0x0C4C508C, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x173, 0x0C4C508C, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ft_2 = gobj->user_data;
     attr = ft_2->x2D4_specialAttributes;
     if (ft_2->x2204_ftcmd_var1 == 2) {
@@ -154,7 +154,7 @@ void func_80138DD0(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x171, 0x0C4C508C, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x171, 0x0C4C508C, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     ft_2 = gobj->user_data;
     attr = ft_2->x2D4_specialAttributes;
     if (ft_2->x2204_ftcmd_var1 == 2) {
@@ -278,7 +278,7 @@ void lbl_80139044(HSD_GObj* gobj) {
 void func_80139080(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x174, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x174, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 801390E0 00135CC0
@@ -286,7 +286,7 @@ void func_80139080(HSD_GObj* gobj) {
 void func_801390E0(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x172, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x172, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 80139140 00135D20
@@ -309,13 +309,13 @@ void lbl_80139140(HSD_GObj* gobj) {
         fp->x2340_stateVar1 = (s32) (temp_r0 * attr->x5C);
     }
     func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &sp18);
-    func_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
+    func_800119DC(&sp18, 0x78, 0.9F, 0.02F, 1.0471975803375244F);
     if (fp->xE0_ground_or_air == GA_Ground) {
         thing = 0x172;
     } else {
         thing = 0x174;
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0, NULL, 0.0F, 1.0F, 0.0F);
     ft_2 = gobj->user_data;
     ft_2->x2219_flag; // required for regalloc
     if (ft_2->x2219_flag.bits.b0 == 0) {

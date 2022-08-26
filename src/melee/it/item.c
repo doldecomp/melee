@@ -145,7 +145,7 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     item_data->x2C_facing_direction = temp_f0;
     item_data->x30_initial_facing_dir = temp_f0;
     item_data->x518_ownerGObj = spawnItem->x0_parent_gobj;
-    if (-1.0f == item_data->x2C_facing_direction)
+    if (-1.0F == item_data->x2C_facing_direction)
     {
         temp_r4 = -1;
     }
@@ -188,8 +188,8 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
         }
     }
     func_80273500(item_gobj, &spawnItem->x2C_vel);
-    item_data->x5CC_currentAnimFrame = (f32)0.0f;
-    item_data->x5D0_animFrameSpeed = (f32)1.0f;
+    item_data->x5CC_currentAnimFrame = (f32)0.0F;
+    item_data->x5D0_animFrameSpeed = (f32)1.0F;
     func_802753BC(item_gobj, spawnItem->x3C_damage);
     func_802753DC(item_gobj);
     item_data->itdmg.xC64_reflectGObj = 0;
@@ -666,12 +666,12 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     item_data->itdmg.xCB0_source_ply = 6;
     item_data->itdmg.xCB4 = -1;
     item_data->itdmg.xC38 = -1;
-    item_data->itdmg.xCE8 = 0.0f;
-    item_data->itdmg.xCE4 = 0.0f;
-    item_data->itdmg.xCE0 = 0.0f;
-    item_data->itdmg.xCDC = 0.0f;
-    item_data->itdmg.xCD8 = 0.0f;
-    item_data->itdmg.xCD4 = 0.0f;
+    item_data->itdmg.xCE8 = 0.0F;
+    item_data->itdmg.xCE4 = 0.0F;
+    item_data->itdmg.xCE0 = 0.0F;
+    item_data->itdmg.xCDC = 0.0F;
+    item_data->itdmg.xCD8 = 0.0F;
+    item_data->itdmg.xCD4 = 0.0F;
     item_data->xDD0_flag.bits.b1 = 0;
     item_data->xDC8_word.flags.x14 = 0;
     item_data->xDC8_word.flags.xE = 0;
@@ -683,10 +683,10 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     item_data->xCFC = 0;
     item_data->xD04_atkCollItem = 0;
     item_data->xD00_grabGObj = 0;
-    item_data->itdmg.xCCC_incDamageDirection = 0.0f;
-    item_data->itdmg.xCB8_outDamageDirection = 0.0f;
-    item_data->itdmg.xC68 = 0.0f;
-    item_data->itdmg.xCD0 = 0.0f;
+    item_data->itdmg.xCCC_incDamageDirection = 0.0F;
+    item_data->itdmg.xCB8_outDamageDirection = 0.0F;
+    item_data->itdmg.xC68 = 0.0F;
+    item_data->itdmg.xCD0 = 0.0F;
     temp_r4_2 = lbl_804D6D28->x30;
     func_80275158(item_gobj, temp_r4_2);
     item_data->xDD0_flag.bits.b3 = 0;
@@ -722,10 +722,10 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     item_data->xD60 = 4;
     item_data->xDCE_flag.bits.b5 = 0;
     item_data->xDCE_flag.bits.b4 = 0;
-    item_data->itdmg.xC54 = 0.0f;
-    item_data->itdmg.xC58 = 0.0f;
-    item_data->itdmg.xC58 = 0.0f;
-    item_data->itdmg.xC58 = 0.0f;
+    item_data->itdmg.xC54 = 0.0F;
+    item_data->itdmg.xC58 = 0.0F;
+    item_data->itdmg.xC58 = 0.0F;
+    item_data->itdmg.xC58 = 0.0F;
     item_data->xDC8_word.flags.x9 = 0;
     item_data->xDC8_word.flags.x3 = 0;
     item_data->xDC8_word.flags.x4 = 0;
@@ -737,13 +737,13 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     item_data->xD09 = (s8)0;
     item_data->xDD0_flag.bits.b4 = 0;
     item_data->itdmg.xCA8 = 0;
-    item_data->itdmg.xCBC_hitlagFrames = 0.0f;
-    item_data->itdmg.xCC0 = 0.0f;
+    item_data->itdmg.xCBC_hitlagFrames = 0.0F;
+    item_data->itdmg.xCC0 = 0.0F;
     item_data->xDC8_word.flags.xA = 0;
     item_data->xDC8_word.flags.xB = 0;
     item_data->xDCC_flag.b1 = 0;
-    item_data->itdmg.xC70 = 1.0f;
-    item_data->itdmg.xC6C = 1.0f;
+    item_data->itdmg.xC70 = 1.0F;
+    item_data->itdmg.xC6C = 1.0F;
     item_data->xDCC_flag.b2 = 0;
     item_data->xDD0_flag.bits.b0 = 0;
     item_data->xDCE_flag.bits.b6 = 0;
@@ -753,7 +753,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     item_data->xDD1_flag.bits.b0 = 0;
     item_data->xDCE_flag.bits.b7 = 1;
     item_data->x38_scale = item_data->xCC_item_attr->x60_scale;
-    item_data->x3C = 0.0f;
+    item_data->x3C = 0.0F;
     item_data->xDCD_flag.bits.b3 = 0;
     item_data->xDCD_flag.bits.b4 = 0;
     item_data->xDD0_flag.bits.b7 = 0;
@@ -1223,7 +1223,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
             break;
 
         default:
-            item_data->xD40 = 0.0f;
+            item_data->xD40 = 0.0F;
             item_data->xDD0_flag.bits.b6 = 0;
         }
         func_802676F4(temp_r3);
@@ -1408,7 +1408,7 @@ void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc) // 
     }
     func_80268BE0(item_jobj, itemStateDesc->x0_anim_joint, itemStateDesc->x4_matanim_joint, itemStateDesc->x8_parameters, item_data);
     func_8000BA0C(item_jobj, item_data->x5D0_animFrameSpeed);
-    HSD_JObjReqAnimAll(item_jobj, 0.0f);
+    HSD_JObjReqAnimAll(item_jobj, 0.0F);
 }
 
 // 0x80268DD4 //
@@ -1433,7 +1433,7 @@ void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc) // Copy
 {
     item_data->x52C_item_script = itemStateDesc->xC_script;
     item_data->x530 = 0;
-    item_data->x524 = 0.0f;
+    item_data->x524 = 0.0F;
 }
 
 extern s8 lbl_803F11B0;
@@ -1649,17 +1649,17 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     }
     else
     {
-        item_data->itdmg.xC40 = 1.0f;
+        item_data->itdmg.xC40 = 1.0F;
     }
     if (((itemStateFlags & ITEM_HIT_PRESERVE) == FALSE) && (item_data->xDC8_word.flags.x16 != 0))
     {
         func_802725D4(item_gobj);
     }
 
-    item_data->itdmg.xCC8_knockback = 0.0f;
+    item_data->itdmg.xCC8_knockback = 0.0F;
     temp_r30 = (new_var = &item_data->xBC_itemStateContainer->stateTable[itemStateID]);
     item_data->x28_item_anim_index = temp_r30->x0_state_id;
-    item_data->x5CC_currentAnimFrame = 0.0f;
+    item_data->x5CC_currentAnimFrame = 0.0F;
     temp_r0 = item_data->x28_item_anim_index;
     if (temp_r0 != -1)
     {
@@ -1682,7 +1682,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
             }
             func_80268BE0(item_jobj1_2, temp_r23->x0_anim_joint, temp_r23->x4_matanim_joint, temp_r23->x8_parameters, item_data2);
             func_8000BA0C(item_jobj1_2, item_data2->x5D0_animFrameSpeed);
-            HSD_JObjReqAnimAll(item_jobj1_2, 0.0f);
+            HSD_JObjReqAnimAll(item_jobj1_2, 0.0F);
             if ((itemStateFlags & ITEM_UNK_UPDATE) != FALSE)
             {
                 item_jobj1_2 = item_gobj->hsd_obj;
@@ -1704,13 +1704,13 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
             }
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0U;
-            item_data->x524 = 0.0f;
+            item_data->x524 = 0.0F;
         }
         else if ((temp_r23 != 0) && ((itemStateFlags & ITEM_CMD_UPDATE) != FALSE))
         {
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0U;
-            item_data->x524 = 0.0f;
+            item_data->x524 = 0.0F;
         }
         HSD_JObjAnimAll(item_jobj2);
         func_80279BE0(item_gobj);
@@ -1753,12 +1753,12 @@ void lbl_802693E4(HSD_GObj* item_gobj) // Item Think - Hitlag //
         item_data->xDC8_word.flags.x6 = 0;
     }
     hitlagFrames = item_data->itdmg.xCBC_hitlagFrames;
-    if (hitlagFrames > 0.0f)
+    if (hitlagFrames > 0.0F)
     {
-        item_data->itdmg.xCBC_hitlagFrames = (f32)(hitlagFrames - 1.0f);
-        if (item_data->itdmg.xCBC_hitlagFrames <= 0.0f)
+        item_data->itdmg.xCBC_hitlagFrames = (f32)(hitlagFrames - 1.0F);
+        if (item_data->itdmg.xCBC_hitlagFrames <= 0.0F)
         {
-            item_data->itdmg.xCBC_hitlagFrames = 0.0f;
+            item_data->itdmg.xCBC_hitlagFrames = 0.0F;
             item_data->xDC8_word.flags.xB = 0;
             item_data->xDC8_word.flags.xA = 0;
             if ((item_data->xDC8_word.flags.x8 == 0) && (item_data->xDC8_word.flags.x7 == 0))
@@ -1813,11 +1813,11 @@ void lbl_80269528(HSD_GObj* item_gobj) // Item Think - Animation //
     }
     if (item_data->xDD0_flag.bits.b6 != 0)
     {
-        item_data->xD40 -= 1.0f;
-        if (item_data->xD40 <= 0.0f)
+        item_data->xD40 -= 1.0F;
+        if (item_data->xD40 <= 0.0F)
         {
             item_data->xDD0_flag.bits.b6 = 0;
-            item_data->xD40 = 0.0f;
+            item_data->xD40 = 0.0F;
             func_80279BBC(item_data);
             if (item_data->xDD0_flag.bits.b7 == 0)
             {
@@ -1827,9 +1827,9 @@ void lbl_80269528(HSD_GObj* item_gobj) // Item Think - Animation //
     }
     if ((item_data->xDC8_word.flags.x15 != 0) && (item_data->x10_item_kind < 0x23) && (item_data->xDD0_flag.bits.b3 == 0))
     {
-        item_data->xD44_lifeTimer -= 1.0f;
+        item_data->xD44_lifeTimer -= 1.0F;
         lifeTimer = item_data->xD44_lifeTimer;
-        if (lifeTimer <= 0.0f)
+        if (lifeTimer <= 0.0F)
         {
             item_data->xD60 = 0;
             func_8026A8EC(item_gobj);
@@ -1869,7 +1869,7 @@ s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones //
         return 1;
     }
     temp_r3 = item_data->xDCC_flag.b4567;
-    if (((temp_r3 & 1) != 0) && (item_data->x4C_pos.y > 10000.0f))
+    if (((temp_r3 & 1) != 0) && (item_data->x4C_pos.y > 10000.0F))
     {
         item_data->xD60 = 3;
         func_8026A8EC(item_gobj);
@@ -2128,16 +2128,16 @@ void func_80269CC4(HSD_GObj* item_gobj) // Set damage struct //
     temp_item->itdmg.xCA0 = 0;
     temp_item->itdmg.xCA4 = 0;
     temp_item->itdmg.xC94 = 0;
-    temp_item->itdmg.xCC8_knockback = 0.0f;
+    temp_item->itdmg.xCC8_knockback = 0.0F;
     temp_item->itdmg.xC34_damageDealt = 0;
     temp_item->itdmg.xC48 = 0;
     temp_item->itdmg.xC4C = 0;
     temp_item->itdmg.xC50 = 0;
-    temp_item->itdmg.xCCC_incDamageDirection = 0.0f;
-    temp_item->itdmg.xCB8_outDamageDirection = 0.0f;
-    temp_item->itdmg.xC68 = 0.0f;
-    temp_item->itdmg.xCD0 = 0.0f;
-    temp_item->itdmg.xCC0 = 0.0f;
+    temp_item->itdmg.xCCC_incDamageDirection = 0.0F;
+    temp_item->itdmg.xCB8_outDamageDirection = 0.0F;
+    temp_item->itdmg.xC68 = 0.0F;
+    temp_item->itdmg.xCD0 = 0.0F;
+    temp_item->itdmg.xCC0 = 0.0F;
     temp_item->xDCF_flag.bits.b6 = 0;
     temp_item->itdmg.xCC4 = 0;
     temp_item->itdmg.xCEC_fighterGObj = 0;
@@ -2149,17 +2149,17 @@ void func_80269CC4(HSD_GObj* item_gobj) // Set damage struct //
     temp_item->xCFC = 0;
     temp_item->itdmg.xCB4 = -1;
     temp_item->itdmg.xC38 = -1;
-    temp_item->itdmg.xCE8 = 0.0f;
-    temp_item->itdmg.xCE4 = 0.0f;
-    temp_item->itdmg.xCE0 = 0.0f;
-    temp_item->itdmg.xCDC = 0.0f;
-    temp_item->itdmg.xCD8 = 0.0f;
-    temp_item->itdmg.xCD4 = 0.0f;
+    temp_item->itdmg.xCE8 = 0.0F;
+    temp_item->itdmg.xCE4 = 0.0F;
+    temp_item->itdmg.xCE0 = 0.0F;
+    temp_item->itdmg.xCDC = 0.0F;
+    temp_item->itdmg.xCD8 = 0.0F;
+    temp_item->itdmg.xCD4 = 0.0F;
     temp_item->xDCE_flag.bits.b5 = 0;
     temp_item->xDCE_flag.bits.b4 = 0;
     temp_item->xDCC_flag.b1 = 0;
-    temp_item->itdmg.xC70 = 1.0f;
-    temp_item->itdmg.xC6C = 1.0f;
+    temp_item->itdmg.xC70 = 1.0F;
+    temp_item->itdmg.xC6C = 1.0F;
     temp_item->xDCC_flag.b2 = 0;
     temp_item->xDC8_word.flags.xB = 0;
     temp_item->itdmg.xCA8 = 0;
@@ -2178,14 +2178,14 @@ s32 func_80269DC8(HSD_GObj* item_gobj) // Item Think - Shield Collision //
     struct ItemLogicTable* temp_logicTable;
 
     item_data = item_gobj->user_data;
-    if ((item_data->xDCE_flag.bits.b5 != 0) && ((s32)item_data->xC0_unk_state == 1) && ((item_data->xDCE_flag.bits.b4 != 0) || (item_data->itdmg.xC54 < (0.01745329238474369f * (90.0f + lbl_804D6D28->x80_float[0x18])))))
+    if ((item_data->xDCE_flag.bits.b5 != 0) && ((s32)item_data->xC0_unk_state == 1) && ((item_data->xDCE_flag.bits.b4 != 0) || (item_data->itdmg.xC54 < (0.01745329238474369F * (90.0F + lbl_804D6D28->x80_float[0x18])))))
     {
         if (item_data->xDCE_flag.bits.b4 == 0)
         {
             item_data->itdmg.xC54 = (item_data->itdmg.xC54 - 1.5707963267948966);
-            if (item_data->itdmg.xC54 < 0.0f)
+            if (item_data->itdmg.xC54 < 0.0F)
             {
-                item_data->itdmg.xC54 = 0.0f;
+                item_data->itdmg.xC54 = 0.0F;
             }
         }
         cb_OnShieldBounce = item_data->xB8_itemLogicTable->x30_callback_OnShieldBounce;
@@ -2260,7 +2260,7 @@ s32 func_80269F14(HSD_GObj* item_gobj) // Item Think - On Reflect //
         {
             if ((s32)temp_item->x5D4_hitboxes[i].x0_toggle != 0)
             {
-                temp_f30 = (temp_item->x5D4_hitboxes[i].xC_damage_staled * temp_item->itdmg.xC6C) + 0.9900000095367432f;
+                temp_f30 = (temp_item->x5D4_hitboxes[i].xC_damage_staled * temp_item->itdmg.xC6C) + 0.9900000095367432F;
                 var_r27 = (u32)temp_f30;
                 if (var_r27 > lbl_804D6D28->xD8)
                 {
@@ -2492,7 +2492,7 @@ void lbl_8026A294(HSD_GObj* item_gobj) // Item Think - Hit Collision //
         }
     }
 
-    if ((item_data->xDC8_word.flags.xD) && (item_data->itdmg.xCC0 > 0.0f))
+    if ((item_data->xDC8_word.flags.xD) && (item_data->itdmg.xCC0 > 0.0F))
     {
         checkHitLag(item_data->itdmg.xCC0, item_data);
 
@@ -2534,7 +2534,7 @@ void lbl_8026A788(HSD_GObj* item_gobj) // Item Think - Process Dynamic Bones //
     func_80272304(item_gobj);
     for (i = 0; i < dynamicBonesNum; i++, dynamicBones++)
     {
-        func_8001044C(&dynamicBones->x8_dynamicBones, &item_data->xB6C, item_data->xB68, 0.0f, 0, dynamicBones->x0_apply_phys_num, 0, 1);
+        func_8001044C(&dynamicBones->x8_dynamicBones, &item_data->xB6C, item_data->xB68, 0.0F, 0, dynamicBones->x0_apply_phys_num, 0, 1);
     }
 }
 

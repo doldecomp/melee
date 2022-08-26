@@ -38,7 +38,7 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS_START, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS_START, 0, NULL, 0.0F, 1.0F, 0.0F);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     func_8006EBA4(fighter_gobj);
 
@@ -62,10 +62,10 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21F4_callback = ftCaptain_SpecialS_OnDetect;
 
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
-    fp->xEC_ground_vel = 0.0f;
+    fp->x80_self_vel.z = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
+    fp->x80_self_vel.x = 0.0F;
+    fp->xEC_ground_vel = 0.0F;
 }
 
 extern void func_8007D60C(Fighter*);
@@ -83,7 +83,7 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS_START, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS_START, 0, NULL, 0.0F, 1.0F, 0.0F);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     func_8006EBA4(fighter_gobj);
     ftKind = func_800872A4(fighter_gobj);
@@ -102,10 +102,10 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21F4_callback = ftCaptain_SpecialS_OnDetect;
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
-    fp->captainVars[0].SpecialS.gravity = 0.0f;
+    fp->x80_self_vel.z = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
+    fp->x80_self_vel.x = 0.0F;
+    fp->captainVars[0].SpecialS.gravity = 0.0F;
     func_8007D60C(fp);
 }
 
@@ -114,10 +114,10 @@ inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0F, 1.0F, 0.0F);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.z = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
     fp->xEC_ground_vel *= captainAttrs->x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
 }
 
@@ -126,19 +126,19 @@ inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0F, 1.0F, 0.0F);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.z = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
     fp->xEC_ground_vel *= captainAttrs->x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
 }
 
 inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0F, 1.0F, 0.0F);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
-    fp->x80_self_vel.z = 0.0f;
+    fp->x80_self_vel.z = 0.0F;
 }
 
 // 0x800E350C
@@ -164,17 +164,17 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
             case AS_CAPTAIN_SPECIALS_START:
                 captainAttrs = getFtSpecialAttrsD(fp);
                 func_8007D7FC(fp);
-                Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f, 1.0f, 0.0f);
+                Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0F, 1.0F, 0.0F);
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
-                fp->x80_self_vel.z = 0.0f;
-                fp->x80_self_vel.y = 0.0f;
+                fp->x80_self_vel.z = 0.0F;
+                fp->x80_self_vel.y = 0.0F;
                 fp->xEC_ground_vel *= captainAttrs->x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
                 return;
 
             case AS_CAPTAIN_SPECIALAIRS_START:
-                Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f, 1.0f, 0.0f);
+                Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS, FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0F, 1.0F, 0.0F);
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
-                fp->x80_self_vel.z = 0.0f;
+                fp->x80_self_vel.z = 0.0F;
                 return;
             }
         }
@@ -268,12 +268,12 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG)
+        if (0.0F == captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG)
         {
             func_800CC730(fighter_gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 1, 0, 1.0f, captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 1, 0, 1.0F, captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
     }
 }
 
@@ -307,12 +307,12 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
     {
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG)
+        if (0.0F == captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG)
         {
             func_800CC730(fighter_gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 1, 0, 1.0f, captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 1, 0, 1.0F, captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG);
     }
 }
 
@@ -406,19 +406,19 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
     {
         efLib_DestroyAll(fighter_gobj);
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG)
+        if (0.0F == captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG)
         {
             func_800CC730(fighter_gobj);
             return;
         }
         func_8007D468(fp);
-        func_80096900(fighter_gobj, 1, 1, 0, 1.0f, captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 1, 0, 1.0F, captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
         return;
     }
     if ((u32)fp->x2200_ftcmd_var0 == 1U)
     {
         facingDir = fp->x2C_facing_direction;
-        if (((1.0f == fp->x2C_facing_direction) && (fp->x6F0_collData.x134_envFlags & 0x3F)) || (((-1.0f) == fp->x2C_facing_direction) && (fp->x6F0_collData.x134_envFlags & 0xFC0)))
+        if (((1.0F == fp->x2C_facing_direction) && (fp->x6F0_collData.x134_envFlags & 0x3F)) || (((-1.0F) == fp->x2C_facing_direction) && (fp->x6F0_collData.x134_envFlags & 0xFC0)))
         {
             efLib_DestroyAll(fighter_gobj);
             func_8008A2BC(fighter_gobj);
@@ -440,13 +440,13 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
     {
         efLib_DestroyAll(fighter_gobj);
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG)
+        if (0.0F == captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG)
         {
             func_800CC730(fighter_gobj);
             return;
         }
         func_8007D468(fp);
-        func_80096900(fighter_gobj, 1, 1, 0, 1.0f, captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 1, 0, 1.0F, captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG);
     }
 }
 

@@ -44,14 +44,14 @@ void func_80153910(HSD_GObj* arg0) {
 
     fp = arg0->user_data;
     attr = fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(arg0, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x170, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
     func_8015C208(arg0, &sp10);
     fp->xB0_pos.x = sp10.x;
     fp->xB0_pos.y = attr->x5C;
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
+    fp->x80_self_vel.z = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
+    fp->x80_self_vel.x = 0.0F;
 }
 
 
@@ -64,7 +64,7 @@ void lbl_801539A4(HSD_GObj* arg0) {
 
     if (ftAnim_IsFramesRemaining(arg0) == 0) {
         temp_r4 = arg0->user_data;
-        temp_r4->x80_self_vel.x = 0.0f;
+        temp_r4->x80_self_vel.x = 0.0F;
         func_80153A64(arg0);
     }
 }

@@ -213,8 +213,8 @@ void Stage_80224E64(s32 arg0, Vec* arg_vec)
 
     if (arg0 == 4) {
         bool1 = 0;
-        for (counter_f = -10.0F; counter_f < 100.0f; counter_f += 10.0f) {
-            s32 temp_ret = func_80051EC8(&internal_vec, 0, 0, 0, 1, -1, -1, 0.0F, 10.0f + counter_f, 0.0F, counter_f);
+        for (counter_f = -10.0F; counter_f < 100.0F; counter_f += 10.0F) {
+            s32 temp_ret = func_80051EC8(&internal_vec, 0, 0, 0, 1, -1, -1, 0.0F, 10.0F + counter_f, 0.0F, counter_f);
             if (temp_ret != 0) {
                 bool1 = 1;
                 break;
@@ -222,8 +222,8 @@ void Stage_80224E64(s32 arg0, Vec* arg_vec)
         }
 
         if (bool1 == 0) {
-            for (counter_f = -10.0F; counter_f > -100.0f; counter_f -= 10.0f) {
-                s32 temp_ret = func_80051EC8(&internal_vec, 0, 0, 0, 1, -1, -1, 0.0F, counter_f, 0.0F, counter_f - 10.0f);
+            for (counter_f = -10.0F; counter_f > -100.0F; counter_f -= 10.0F) {
+                s32 temp_ret = func_80051EC8(&internal_vec, 0, 0, 0, 1, -1, -1, 0.0F, counter_f, 0.0F, counter_f - 10.0F);
 
                 if (temp_ret != 0) {
                     bool1 = 1;

@@ -103,7 +103,7 @@ BOOL ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, s32 new_action_state_index) 
 {
     Fighter* fp;
-    Fighter_ActionStateChange_800693AC(gobj, new_action_state_index,0,NULL,0.0f,1.0f,0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, new_action_state_index,0,NULL,0.0F,1.0F,0.0F);
     func_8006EBA4(gobj);
     fp = getFighter(gobj);
     fp->x2208_ftcmd_var2 = 0;
@@ -118,7 +118,7 @@ void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
     Fighter* fp;
     u8 unused[8];
     fp = getFighter(gobj);
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.y = 0.0F;
 
     ftMario_SpecialS_ChangeAction(gobj, AS_MARIO_SPECIALS);
 }
@@ -185,7 +185,7 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
     func_8007AEF8(gobj);
 }
 
-#define PI_3 (3.14159265359f / 3.0f)
+#define PI_3 (3.14159265359F / 3.0F)
 
 // 0x800E15D0
 void ftMario_SpecialS_Phys(HSD_GObj* gobj) 
@@ -201,8 +201,8 @@ void ftMario_SpecialS_Phys(HSD_GObj* gobj)
         fp->x2200_ftcmd_var0 = 2U;
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x4)].x0_jobj,NULL,&coords);
 
-        coords.x += 3.0f * fp->x2C_facing_direction;
-		func_800119DC(&coords, 0x78, 0.9f, 0.02f, PI_3);
+        coords.x += 3.0F * fp->x2C_facing_direction;
+		func_800119DC(&coords, 0x78, 0.9F, 0.02F, PI_3);
     }
 
     func_80084F3C(gobj);
@@ -238,11 +238,11 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             } 
             else 
             {
-                fp->x80_self_vel.y = 0.0f;
+                fp->x80_self_vel.y = 0.0F;
             }
             func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x4)].x0_jobj,NULL,&coords);
-            coords.x += 3.0f * fp->x2C_facing_direction;
-            func_800119DC(&coords, 0x78, 3.0f, 0.1f, PI_3);
+            coords.x += 3.0F * fp->x2C_facing_direction;
+            func_800119DC(&coords, 0x78, 3.0F, 0.1F, PI_3);
         }
         func_8007D494(fp, sa->xC_MARIO_CAPE_GRAVITY, sa->x10_MARIO_CAPE_TERMINAL_VELOCITY);
     } 
@@ -291,7 +291,7 @@ void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 
     fp = getFighter(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRS, FTMARIO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRS, FTMARIO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     if ((s32) fp->x2200_ftcmd_var0 == 1U) 
     {
         fp->x2200_ftcmd_var0 = 2U;
@@ -309,7 +309,7 @@ void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp = gobj->user_data;
     fp->sa.mario.x2238_isCapeBoost = FALSE;
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALS, FTMARIO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALS, FTMARIO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 
     ftMario_SpecialS_UpdateVarsColl(gobj);
 }

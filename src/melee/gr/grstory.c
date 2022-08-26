@@ -144,8 +144,8 @@ void func_801E3234(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
-    func_801C7FF8(gobj, 5, 7, 1, 0.0f, 1.0f);
+    func_801C7FF8(gobj, 0, 7, 0, 0.0F, 1.0F);
+    func_801C7FF8(gobj, 5, 7, 1, 0.0F, 1.0F);
 
     map->xC8 = lbl_804D69B8->unk0 + randi(lbl_804D69B8->unk4);
     map->xC8 = 120;
@@ -205,7 +205,7 @@ void func_801E3414(void)
 // with an amplitude of 1
 inline f32 frand_amp1()
 {
-    return 2.0f * (HSD_Randf() - 0.5f);
+    return 2.0F * (HSD_Randf() - 0.5F);
 }
 
 typedef struct {
@@ -254,12 +254,12 @@ void func_801E3418(HSD_GObj* gobj)
 
     // Choose whether they will spawn on the left or the right
     if (spawn_pattern < 3) {
-        pos.x = -292.0f;
+        pos.x = -292.0F;
     } else {
-        pos.x = 304.0f;
+        pos.x = 304.0F;
     }
     pos.y = lbl_804D69B8->vars[spawn_pattern];
-    pos.z = 2.0f;
+    pos.z = 2.0F;
 
     {
         s32 temp_r29 = randi(3);
@@ -277,9 +277,9 @@ void func_801E3418(HSD_GObj* gobj)
             map->xC4 = 1;
         }
         for (i = 0; i < map->xC4; i++) {
-            func_802D8618(i, &pos, temp_r29, 25.0f * i);
+            func_802D8618(i, &pos, temp_r29, 25.0F * i);
             // Jitter the vertical position of the each subsequent shy guy
-            pos.y = 3.0f * frand_amp1() + lbl_804D69B8->vars[spawn_pattern];
+            pos.y = 3.0F * frand_amp1() + lbl_804D69B8->vars[spawn_pattern];
         }
     }
 }
@@ -308,7 +308,7 @@ s32 func_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
     Vec3 b;
     func_8000B1CC(joint, NULL, &b);
 
-    if (a->y + 1.0f > b.y) {
+    if (a->y + 1.0F > b.y) {
         return TRUE;
     } else {
         return FALSE;

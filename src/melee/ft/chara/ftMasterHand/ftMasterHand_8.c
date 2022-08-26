@@ -49,8 +49,8 @@ void func_80151CA8(HSD_GObj* gobj) {
 
     temp_r31 = gobj->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     temp_r31->xB0_pos.y = temp_r30->x50.x; // TODO: The code matches, but is this right?
-    temp_r31->x80_self_vel.x = 0.0f;
+    temp_r31->x80_self_vel.x = 0.0F;
 }

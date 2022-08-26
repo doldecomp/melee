@@ -40,7 +40,7 @@ void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->mewtwoVars[0].SpecialS.isConfusionReflect = FALSE;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
 
     ftMewtwo_SpecialS_SetGrab(fighter_gobj);
@@ -81,7 +81,7 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
         fp->sa.mewtwo.x223C_isConfusionBoost = TRUE;
     }
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
 
     ftMewtwo_SpecialAirS_SetGrab(fighter_gobj);
@@ -181,7 +181,7 @@ void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, FTMEWTWO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, FTMEWTWO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 
     func_8007D468(fp);
 
@@ -200,7 +200,7 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, FTMEWTWO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, FTMEWTWO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 
     ftMewtwo_SpecialS_SetGrab(fighter_gobj);
 

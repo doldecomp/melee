@@ -7,7 +7,7 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj) {
     s32 thing;
     s32 unused1, unused2, unused3, unused4;
 
-    ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0f;
+    ((Fighter*)gobj->user_data)->x80_self_vel.y = 0.0F;
     fp = gobj->user_data;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -19,7 +19,7 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj) {
         thing = 0x166;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }
 
@@ -37,7 +37,7 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj) {
         fp->sa.mars.x222C = 1;
         fp->x80_self_vel.y = attr->x1C;
     } else {
-        fp->x80_self_vel.y = 0.0f;
+        fp->x80_self_vel.y = 0.0F;
     }
 
     ft2 = gobj->user_data;
@@ -51,7 +51,7 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj) {
         thing = 0x166;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
 }
 
@@ -129,7 +129,7 @@ void func_801376E8(HSD_GObj* gobj) {
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x166, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x166, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 80137748 00134328
@@ -141,7 +141,7 @@ void func_80137748(HSD_GObj* gobj) {
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 801377B0 00134390
@@ -228,7 +228,7 @@ void func_80137940(HSD_GObj* gobj) {
         // default:
         // thing uninitialized
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 801379D0 001345B0
@@ -250,7 +250,7 @@ void func_801379D0(HSD_GObj* gobj) {
         // default:
         // thing uninitialized
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 80137A68 00134648
@@ -283,7 +283,7 @@ void func_80137A9C(HSD_GObj* gobj) {
             thing = 0x168;
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0F, 1.0F, 0.0F);
 }
 
 // 80137B34 00134714
@@ -375,7 +375,7 @@ void func_80137CBC(HSD_GObj* gobj) {
         // thing uninitialized
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 80137D60 00134940
@@ -398,7 +398,7 @@ void func_80137D60(HSD_GObj* gobj) {
             break;
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 80137E0C 001349EC
@@ -432,7 +432,7 @@ void func_80137E0C(HSD_GObj* gobj) {
             }
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0F, 1.0F, 0.0F);
 }
 
 // 80137ECC 00134AAC
@@ -512,7 +512,7 @@ void func_80137FF8(HSD_GObj* gobj) {
         // thing uninitialized
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 8013809C 00134C7C
@@ -538,7 +538,7 @@ void func_8013809C(HSD_GObj* gobj) {
         // thing uninitialized
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 }
 
 // 80138148 00134D28
@@ -572,5 +572,5 @@ void func_80138148(HSD_GObj* gobj) {
             }
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0F, 1.0F, 0.0F);
 }

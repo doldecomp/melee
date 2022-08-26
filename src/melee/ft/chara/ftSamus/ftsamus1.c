@@ -59,7 +59,7 @@ void ftSamus_80128628(HSD_GObj* fighterObj) {
 
 void ftSamus_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     COPY_ATTRS(fighterObj, ftSamusAttributes);
-    if (fp->x34_scale.y != 1.0f) {                                        
+    if (fp->x34_scale.y != 1.0F) {                                        
         sA2->x8 *= fp->x34_scale.y;                                       
         sA2->x74_vec.y *= fp->x34_scale.y;    
         sA2->x54 *= fp->x34_scale.y;                                                                              
@@ -91,7 +91,7 @@ void ftSamus_801287C4(HSD_GObj* fighterObj, s32 index, f32 argf) {
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, unkItemType->x8_anim_joint, unkItemType->xC_matanim_joint, 0);
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, unkItemType->x4_anim_joints[index - 219], 0, 0);
     HSD_ForeachAnim(fighter_copy->x20A0_accessory, 6, 0xFB7F, &ftSamus_80128770, 1, argf);
-    HSD_JObjReqAnimAll(fighter_copy->x20A0_accessory, 0.0f);
+    HSD_JObjReqAnimAll(fighter_copy->x20A0_accessory, 0.0F);
     HSD_JObjAnimAll(fighter_copy->x20A0_accessory);
     func_8000C2F8(fighter_copy->x20A0_accessory, fighter_copy->x5E8_fighterBones[51].x0_jobj);
 }

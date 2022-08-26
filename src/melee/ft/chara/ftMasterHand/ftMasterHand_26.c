@@ -28,7 +28,7 @@ void lbl_80155010(HSD_GObj* gobj) {
 // https://decomp.me/scratch/ZAwzc
 void func_80155014(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17C, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x17C, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(gobj);
     fp->x2200_ftcmd_var0 = 0;
 }

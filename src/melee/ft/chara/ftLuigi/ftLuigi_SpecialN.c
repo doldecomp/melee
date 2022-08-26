@@ -8,7 +8,7 @@ void ftLuigi_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALN, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALN, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
@@ -20,7 +20,7 @@ void ftLuigi_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRN, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRN, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
@@ -93,7 +93,7 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* fighter_gobj)
     {
         fp = getFighter(fighter_gobj);
         func_8007D5D4(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRN, FTLUIGI_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRN, FTLUIGI_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
         fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
     }
 }
@@ -107,7 +107,7 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
     {
         fp = getFighter(fighter_gobj);
         func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALN, FTLUIGI_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALN, FTLUIGI_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
         fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
     }
 }

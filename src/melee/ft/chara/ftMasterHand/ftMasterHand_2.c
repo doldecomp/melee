@@ -36,9 +36,9 @@ void func_8014FE5C(HSD_GObj* gobj) {
         fp->sa.masterhand.x2240_pos = fp->xB0_pos;
     }
     if (fp->sa.masterhand.x2258 == 389) {
-        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0F, 1.0F, 0.0F);
     }
     fp->sa.masterhand.x2258 = 341;
 }
@@ -55,9 +55,9 @@ void func_8014FF1C(HSD_GObj* gobj) {
         fp->sa.masterhand.x2240_pos = fp->xB0_pos;
     }
     if (fp->sa.masterhand.x2258 == 390) {
-        Fighter_ActionStateChange_800693AC(gobj, 342, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 342, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 342, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 342, 0, 0, 0.0F, 1.0F, 0.0F);
     }
     fp->sa.masterhand.x2258 = 342;
 }
@@ -76,9 +76,9 @@ void lbl_8014FFDC(HSD_GObj* gobj) {
             r31_fp->sa.masterhand.x2240_pos = r31_fp->xB0_pos;
         }
         if (r31_fp->sa.masterhand.x2258 == 0x186) {
-            Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, r31_fp->x894_currentAnimFrame, 1.0F, 0.0F);
         } else {
-            Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0F, 1.0F, 0.0F);
         }
         r31_fp->sa.masterhand.x2258 = 0x156;
         return;
@@ -89,9 +89,9 @@ void lbl_8014FFDC(HSD_GObj* gobj) {
         r31_fp->sa.masterhand.x2240_pos = r31_fp->xB0_pos;
     }
     if (r31_fp->sa.masterhand.x2258 == 0x185) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, r31_fp->x894_currentAnimFrame, 1.0F, 0.0F);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0F, 1.0F, 0.0F);
     }
     r31_fp->sa.masterhand.x2258 = 0x155;
 }
@@ -117,9 +117,9 @@ void func_80150144(HSD_GObj* gobj) {
         fp_1->sa.masterhand.x2240_pos = fp_1->xB0_pos;
     }
     if (fp_1->sa.masterhand.x2258 == 389) {
-        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, fp_1->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, fp_1->x894_currentAnimFrame, 1.0F, 0.0F);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0F, 1.0F, 0.0F);
     }
     fp_1->sa.masterhand.x2258 = 341;
 }
@@ -187,9 +187,9 @@ inline void lbl_80150230_inline_1(HSD_GObj* gobj) {
         fp->sa.masterhand.x2240_pos = fp->xB0_pos;
     }
     if (fp->sa.masterhand.x2258 == 0x186) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0F, 1.0F, 0.0F);
     }
     fp->sa.masterhand.x2258 = 0x156;
 }
@@ -224,7 +224,7 @@ void lbl_80150230(HSD_GObj* gobj) {
             }
         }
     } else {
-        if (--fp->sa.masterhand.x223C < 0.0f) {
+        if (--fp->sa.masterhand.x223C < 0.0F) {
             MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
             Vec3 vec;
             s32 unused[6];
@@ -235,25 +235,25 @@ void lbl_80150230(HSD_GObj* gobj) {
                     case 0x179:
                         vec.x = attr->x124_pos.x;
                         vec.y = attr->x124_pos.y;
-                        vec.z = 0.0f;
+                        vec.z = 0.0F;
                         func_80150DC4(gobj, &lbl_80155194, &vec);
                         break;
                     case 0x17A:
                         vec.x = attr->x12C_pos.x;
                         vec.y = attr->x12C_pos.y;
-                        vec.z = 0.0f;
+                        vec.z = 0.0F;
                         func_80150DC4(gobj, &lbl_801552F8, &vec);
                         break;
                     case 0x17B:
                         vec.x = attr->x134_pos.x;
                         vec.y = attr->x134_pos.y;
-                        vec.z = 0.0f;
+                        vec.z = 0.0F;
                         func_80150DC4(gobj, &lbl_80155484, &vec);
                         break;
                     case 0x17C:
                         vec.x = attr->x13C_pos.x;
                         vec.y = attr->x13C_pos.y;
-                        vec.z = 0.0f;
+                        vec.z = 0.0F;
                         break;
                 }
             } else {
@@ -296,25 +296,25 @@ void lbl_80150230(HSD_GObj* gobj) {
                     case 0x15F: // Walk
                         vec.x = attr->x40_pos.x;
                         vec.y = attr->x40_pos.y;
-                        vec.z = 0.0f;
+                        vec.z = 0.0F;
                         func_80150DC4(gobj, &lbl_80151DC4, &vec);
                         break;
                     case 0x162: // Drill
                         vec.x = attr->x88_pos.x;
                         vec.y = attr->x88_pos.y;
-                        vec.z = 0.0f;
+                        vec.z = 0.0F;
                         func_80150DC4(gobj, &lbl_801521DC, &vec);
                         break;
                     case 0x163: // Punch
                         vec.x = attr->xA8_pos.x;
                         vec.y = attr->xA8_pos.y;
-                        vec.z = 0.0f;
+                        vec.z = 0.0F;
                         func_80150DC4(gobj, &lbl_80152370, &vec);
                         break;
                     case 0x166: // Ground Slap
                         vec.x = attr->xBC_pos.x;
                         vec.y = attr->xBC_pos.y;
-                        vec.z = 0.0f;
+                        vec.z = 0.0F;
                         func_80150DC4(gobj, &lbl_801526D8, &vec);
                         break;
                     case 0x167: // Poke
@@ -331,10 +331,10 @@ void lbl_80150230(HSD_GObj* gobj) {
                         break;
                     case 0x16A: // Lasers
                         rand = HSD_Randf();
-                        vec.x = attr->xCC_pos.x * rand * 2.0f + attr->xC4_pos.x - attr->xCC_pos.x;
+                        vec.x = attr->xCC_pos.x * rand * 2.0F + attr->xC4_pos.x - attr->xCC_pos.x;
                         rand = HSD_Randf();
-                        vec.y = attr->xCC_pos.y * rand * 2.0f + attr->xC4_pos.y - attr->xCC_pos.y;
-                        vec.z = 0.0f;
+                        vec.y = attr->xCC_pos.y * rand * 2.0F + attr->xC4_pos.y - attr->xCC_pos.y;
+                        vec.z = 0.0F;
                         func_80150DC4(gobj, &lbl_80152BCC, &vec);
                         break;
                     case 0x16D: // Gun
@@ -417,25 +417,25 @@ void func_80150894(HSD_GObj* gobj) {
         // Walk
         sp10_pos.x = r31_attributes->x40_pos.x;
         sp10_pos.y = r31_attributes->x40_pos.y;
-        sp10_pos.z = 0.0f;
+        sp10_pos.z = 0.0F;
         func_80150DC4(gobj, &lbl_80151DC4, &sp10_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_UP)) {
         // Drill
         sp10_pos.x = r31_attributes->x88_pos.x;
         sp10_pos.y = r31_attributes->x88_pos.y;
-        sp10_pos.z = 0.0f;
+        sp10_pos.z = 0.0F;
         func_80150DC4(gobj, &lbl_801521DC, &sp10_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_RIGHT)) {
         // Punch
         sp10_pos.x = r31_attributes->xA8_pos.x;
         sp10_pos.y = r31_attributes->xA8_pos.y;
-        sp10_pos.z = 0.0f;
+        sp10_pos.z = 0.0F;
         func_80150DC4(gobj, &lbl_80152370, &sp10_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_DOWN)) {
         // Ground Slap
         sp10_pos.x = r31_attributes->xBC_pos.x;
         sp10_pos.y = r31_attributes->xBC_pos.y;
-        sp10_pos.z = 0.0f;
+        sp10_pos.z = 0.0F;
         func_80150DC4(gobj, &lbl_801526D8, &sp10_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_LEFT)) {
         // Poke
@@ -453,10 +453,10 @@ void func_80150894(HSD_GObj* gobj) {
         // Lasers
         f32 rand;
         rand = HSD_Randf();
-        sp10_pos.x = r31_attributes->xCC_pos.x * rand * 2.0f + r31_attributes->xC4_pos.x - r31_attributes->xCC_pos.x;
+        sp10_pos.x = r31_attributes->xCC_pos.x * rand * 2.0F + r31_attributes->xC4_pos.x - r31_attributes->xCC_pos.x;
         rand = HSD_Randf();
-        sp10_pos.y = r31_attributes->xCC_pos.y * rand * 2.0f + r31_attributes->xC4_pos.y - r31_attributes->xCC_pos.y;
-        sp10_pos.z = 0.0f;
+        sp10_pos.y = r31_attributes->xCC_pos.y * rand * 2.0F + r31_attributes->xC4_pos.y - r31_attributes->xCC_pos.y;
+        sp10_pos.z = 0.0F;
         func_80150DC4(gobj, &lbl_80152BCC, &sp10_pos);
     } else if ((r6_button & BUTTON_B) && ((r6_button & DPAD_RIGHT))) {
         // Gun
@@ -475,28 +475,28 @@ void func_80150894(HSD_GObj* gobj) {
             case 0x179: {
                 sp10_pos.x = r31_attributes->x124_pos.x;
                 sp10_pos.y = r31_attributes->x124_pos.y;
-                sp10_pos.z = 0.0f;
+                sp10_pos.z = 0.0F;
                 func_80150DC4(gobj, &lbl_80155194, &sp10_pos);
                 break;
             }
             case 0x17A: {
                 sp10_pos.x = r31_attributes->x12C_pos.x;
                 sp10_pos.y = r31_attributes->x12C_pos.y;
-                sp10_pos.z = 0.0f;
+                sp10_pos.z = 0.0F;
                 func_80150DC4(gobj, &lbl_801552F8, &sp10_pos);
                 break;
             }   
             case 0x17B: {
                 sp10_pos.x = r31_attributes->x134_pos.x;
                 sp10_pos.y = r31_attributes->x134_pos.y;
-                sp10_pos.z = 0.0f;
+                sp10_pos.z = 0.0F;
                 func_80150DC4(gobj, &lbl_80155484, &sp10_pos);
                 break;
             }
             case 0x17C: {
                 sp10_pos.x = r31_attributes->x13C_pos.x;
                 sp10_pos.y = r31_attributes->x13C_pos.y;
-                sp10_pos.z = 0.0f;
+                sp10_pos.z = 0.0F;
                 break;
             }
         }

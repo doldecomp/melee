@@ -30,7 +30,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighterObj) {
     fp->x2229_b3 = 1;
     fp->xB0_pos.x = ftData_attr->x18;
     fp->xB0_pos.y = ftData_attr->x1C;
-    fp->xB0_pos.z = 0.0f;
+    fp->xB0_pos.z = 0.0F;
     fp->x2368 = 0;
     fp->x236C = 0; 
     fp->x2370 = 0;
@@ -38,10 +38,10 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighterObj) {
     fp->x2378 = -1;
     fp->x237C = -1;
     fp->x2380 = -1;
-    fp->x235C = 0.0f;
+    fp->x235C = 0.0F;
     fp->x2360 = 0;
     fp->sa.masterhand.x222C = func_8015C244(fighterObj, &fp->xB0_pos);
-    fp->sa.masterhand.x2238 = 1.0f;
+    fp->sa.masterhand.x2238 = 1.0F;
     fp->sa.masterhand.x224C = 0;
     fp->sa.masterhand.x2250 = 0x159; 
     fp->sa.masterhand.x2254 = 0;

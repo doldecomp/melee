@@ -446,7 +446,7 @@ static BOOL func_801C0A70(Point3d* pos)
             if (Player_GetEntity(player_slot) != NULL) {
                 s32 xoff;
                 Player_LoadPlayerCoords(player_slot, pos);
-                pos->y = -5.0f + Stage_GetBlastZoneTopOffset();
+                pos->y = -5.0F + Stage_GetBlastZoneTopOffset();
                 xoff = HSD_Randi(0x64) - 0x32;
                 pos->x += xoff;
                 return TRUE;
@@ -774,7 +774,7 @@ void func_801C11AC(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     Vec3 scale;
-    f32 tmp = 1.0f;
+    f32 tmp = 1.0F;
     jobj = gobj->hsd_obj;
     scale.z = tmp;
     scale.y = tmp;
@@ -953,7 +953,7 @@ lbl_801C1644:
 /* 801C1698 001BE278  C0 03 00 00 */	lfs f0, 0(r3)
 /* 801C169C 001BE27C  48 00 00 08 */	b lbl_801C16A4
 lbl_801C16A0:
-/* 801C16A0 001BE280  C0 02 B2 E4 */	lfs f0, 1.0f
+/* 801C16A0 001BE280  C0 02 B2 E4 */	lfs f0, 1.0F
 lbl_801C16A4:
 /* 801C16A4 001BE284  3C 60 80 3B */	lis r3, lbl_803B7E0C@ha
 /* 801C16A8 001BE288  38 A3 7E 0C */	addi r5, r3, lbl_803B7E0C@l
@@ -1103,7 +1103,7 @@ lbl_801C18B8:
 /* 801C18C4 001BE4A4  C0 03 00 00 */	lfs f0, 0(r3)
 /* 801C18C8 001BE4A8  48 00 00 08 */	b lbl_801C18D0
 lbl_801C18CC:
-/* 801C18CC 001BE4AC  C0 02 B2 E4 */	lfs f0, 1.0f
+/* 801C18CC 001BE4AC  C0 02 B2 E4 */	lfs f0, 1.0F
 lbl_801C18D0:
 /* 801C18D0 001BE4B0  3C 60 80 3B */	lis r3, lbl_803B7E0C@ha
 /* 801C18D4 001BE4B4  38 A3 7E 0C */	addi r5, r3, lbl_803B7E0C@l
@@ -1434,7 +1434,7 @@ lbl_801C1F34:
 /* 801C1F94 001BEB74  C0 23 00 00 */	lfs f1, 0(r3)
 /* 801C1F98 001BEB78  48 00 00 08 */	b lbl_801C1FA0
 lbl_801C1F9C:
-/* 801C1F9C 001BEB7C  C0 22 B2 E4 */	lfs f1, 1.0f
+/* 801C1F9C 001BEB7C  C0 22 B2 E4 */	lfs f1, 1.0F
 lbl_801C1FA0:
 /* 801C1FA0 001BEB80  C0 1D 00 10 */	lfs f0, 0x10(r29)
 /* 801C1FA4 001BEB84  EC 00 00 72 */	fmuls f0, f0, f1
@@ -2043,7 +2043,7 @@ f32 func_801C2AE8(s32 arg0)
     int i;
     for (i = 0; i < stage_info.x6B0->xB4; i++) {
         if (phi_r5->x0 == arg0) {
-            return (0.01f * stage_info.x6B0->x68) * (0.01f * phi_r5->x18);
+            return (0.01F * stage_info.x6B0->x68) * (0.01F * phi_r5->x18);
         }
         phi_r5 += 1;
     }
@@ -2112,18 +2112,18 @@ BOOL func_801C2D24(s32 arg0, Vec3* arg1)
         func_801C2D24(4, arg1);
         func_801C2D24(5, &sp20);
         lbvector_Add(arg1, &sp20);
-        arg1->x *= 0.5f;
-        arg1->y *= 0.5f;
-        arg1->z *= 0.5f;
+        arg1->x *= 0.5F;
+        arg1->y *= 0.5F;
+        arg1->z *= 0.5F;
         return TRUE;
     }
     if (arg0 == 9) {
         func_801C2D24(6, arg1);
         func_801C2D24(7, &sp14);
         lbvector_Add(arg1, &sp14);
-        arg1->x *= 0.5f;
-        arg1->y *= 0.5f;
-        arg1->z *= 0.5f;
+        arg1->x *= 0.5F;
+        arg1->y *= 0.5F;
+        arg1->z *= 0.5F;
         return TRUE;
     }
     if (stage_info.x280[arg0] != NULL) {
@@ -3203,8 +3203,8 @@ void func_801C3BB4(void)
 s32 func_801C3D44(s32 arg0, f32 arg8, f32 arg9)
 {
     stage_info.unk8C.b6 = 1;
-    stage_info.x70C = 0.5f * arg8;
-    stage_info.x710 = 0.5f * arg9;
+    stage_info.x70C = 0.5F * arg8;
+    stage_info.x710 = 0.5F * arg9;
     stage_info.x90 = arg0;
     if (stage_info.x714 != -1) {
         stage_info.x84 |= 0x10;
@@ -3218,8 +3218,8 @@ s32 func_801C3D44(s32 arg0, f32 arg8, f32 arg9)
 s32 func_801C3DB4(s32 arg0, f32 arg8, f32 arg9)
 {
     stage_info.unk8C.b7 = 1;
-    stage_info.x718 = 0.5f * arg8;
-    stage_info.x71C = 0.5f * arg9;
+    stage_info.x718 = 0.5F * arg8;
+    stage_info.x71C = 0.5F * arg9;
     stage_info.x94 = arg0;
     if (stage_info.x720 != -1) {
         stage_info.x84 |= 0x40;
@@ -3675,7 +3675,7 @@ lbl_801C476C:
 /* 801C47AC 001C138C  C3 E3 00 00 */	lfs f31, 0(r3)
 /* 801C47B0 001C1390  48 00 00 08 */	b lbl_801C47B8
 lbl_801C47B4:
-/* 801C47B4 001C1394  C3 E2 B2 E4 */	lfs f31, 1.0f
+/* 801C47B4 001C1394  C3 E2 B2 E4 */	lfs f31, 1.0F
 lbl_801C47B8:
 /* 801C47B8 001C1398  3B 41 00 10 */	addi r26, r1, 0x10
 /* 801C47BC 001C139C  48 00 00 A0 */	b lbl_801C485C
@@ -3726,7 +3726,7 @@ lbl_801C485C:
 /* 801C485C 001C143C  28 1B 00 00 */	cmplwi r27, 0
 /* 801C4860 001C1440  40 82 FF 60 */	bne lbl_801C47C0
 /* 801C4864 001C1444  7F A3 EB 78 */	mr r3, r29
-/* 801C4868 001C1448  C0 22 B2 C4 */	lfs f1, 0.0f
+/* 801C4868 001C1448  C0 22 B2 C4 */	lfs f1, 0.0F
 /* 801C486C 001C144C  48 1A 0E 8D */	bl HSD_LObjReqAnimAll
 /* 801C4870 001C1450  3C 60 80 36 */	lis r3, HSD_AObjSetRate@ha
 /* 801C4874 001C1454  C8 22 B3 58 */	lfd f1, 1.0
@@ -3927,7 +3927,7 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* arg2, f32 arg8)
     if (sp24.z < 0) {
         phi_f2 = -sp24.z;
     }
-    if (phi_f2 >= 0.99999f) {
+    if (phi_f2 >= 0.99999F) {
         phi_f31 = func_80022DBC(-sp30.y);
         if (sp30.x * cosf(phi_f31) * sinf(result_y) < 0) {
             phi_f31 = M_PI - phi_f31;
@@ -4032,7 +4032,7 @@ asm void func_801C4FAC()
 /* 801C4FF0 001C1BD0  80 1F 01 34 */	lwz r0, 0x134(r31)
 /* 801C4FF4 001C1BD4  C0 41 00 74 */	lfs f2, 0x74(r1)
 /* 801C4FF8 001C1BD8  90 61 00 68 */	stw r3, 0x68(r1)
-/* 801C4FFC 001C1BDC  C0 02 B2 C4 */	lfs f0, 0.0f
+/* 801C4FFC 001C1BDC  C0 02 B2 C4 */	lfs f0, 0.0F
 /* 801C5000 001C1BE0  90 01 00 6C */	stw r0, 0x6c(r1)
 /* 801C5004 001C1BE4  FC 02 00 40 */	fcmpo cr0, f2, f0
 /* 801C5008 001C1BE8  80 1F 01 38 */	lwz r0, 0x138(r31)
@@ -4072,7 +4072,7 @@ lbl_801C5060:
 /* 801C508C 001C1C6C  90 01 00 4C */	stw r0, 0x4c(r1)
 lbl_801C5090:
 /* 801C5090 001C1C70  C0 01 00 7C */	lfs f0, 0x7c(r1)
-/* 801C5094 001C1C74  C0 22 B2 C4 */	lfs f1, 0.0f
+/* 801C5094 001C1C74  C0 22 B2 C4 */	lfs f1, 0.0F
 /* 801C5098 001C1C78  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801C509C 001C1C7C  40 80 01 4C */	bge lbl_801C51E8
 /* 801C50A0 001C1C80  EC 00 00 32 */	fmuls f0, f0, f0
@@ -4099,17 +4099,17 @@ lbl_801C5090:
 /* 801C50F4 001C1CD4  D0 01 00 1C */	stfs f0, 0x1c(r1)
 /* 801C50F8 001C1CD8  C0 81 00 1C */	lfs f4, 0x1c(r1)
 lbl_801C50FC:
-/* 801C50FC 001C1CDC  C0 02 B2 E4 */	lfs f0, 1.0f
+/* 801C50FC 001C1CDC  C0 02 B2 E4 */	lfs f0, 1.0F
 /* 801C5100 001C1CE0  C0 21 00 74 */	lfs f1, 0x74(r1)
 /* 801C5104 001C1CE4  EC 60 20 24 */	fdivs f3, f0, f4
-/* 801C5108 001C1CE8  C0 02 B2 C4 */	lfs f0, 0.0f
+/* 801C5108 001C1CE8  C0 02 B2 C4 */	lfs f0, 0.0F
 /* 801C510C 001C1CEC  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 801C5110 001C1CF0  40 80 00 08 */	bge lbl_801C5118
 /* 801C5114 001C1CF4  FC 20 08 50 */	fneg f1, f1
 lbl_801C5118:
 /* 801C5118 001C1CF8  C0 41 00 7C */	lfs f2, 0x7c(r1)
 /* 801C511C 001C1CFC  EC 83 00 72 */	fmuls f4, f3, f1
-/* 801C5120 001C1D00  C0 02 B2 C4 */	lfs f0, 0.0f
+/* 801C5120 001C1D00  C0 02 B2 C4 */	lfs f0, 0.0F
 /* 801C5124 001C1D04  FC 02 00 40 */	fcmpo cr0, f2, f0
 /* 801C5128 001C1D08  40 80 00 08 */	bge lbl_801C5130
 /* 801C512C 001C1D0C  FC 40 10 50 */	fneg f2, f2
@@ -4192,7 +4192,7 @@ lbl_801C5218:
 /* 801C5254 001C1E34  EC 81 00 28 */	fsubs f4, f1, f0
 /* 801C5258 001C1E38  C0 01 00 28 */	lfs f0, 0x28(r1)
 /* 801C525C 001C1E3C  EC 63 00 28 */	fsubs f3, f3, f0
-/* 801C5260 001C1E40  C0 22 B2 C4 */	lfs f1, 0.0f
+/* 801C5260 001C1E40  C0 22 B2 C4 */	lfs f1, 0.0F
 /* 801C5264 001C1E44  EC 42 00 B2 */	fmuls f2, f2, f2
 /* 801C5268 001C1E48  EC 04 01 32 */	fmuls f0, f4, f4
 /* 801C526C 001C1E4C  EC 63 00 F2 */	fmuls f3, f3, f3
@@ -4231,7 +4231,7 @@ lbl_801C52CC:
 /* 801C52EC 001C1ECC  C0 21 00 28 */	lfs f1, 0x28(r1)
 /* 801C52F0 001C1ED0  EC 63 00 F2 */	fmuls f3, f3, f3
 /* 801C52F4 001C1ED4  EC 84 08 28 */	fsubs f4, f4, f1
-/* 801C52F8 001C1ED8  C0 22 B2 C4 */	lfs f1, 0.0f
+/* 801C52F8 001C1ED8  C0 22 B2 C4 */	lfs f1, 0.0F
 /* 801C52FC 001C1EDC  EC 42 00 B2 */	fmuls f2, f2, f2
 /* 801C5300 001C1EE0  EC 84 01 32 */	fmuls f4, f4, f4
 /* 801C5304 001C1EE4  EC 43 10 2A */	fadds f2, f3, f2
@@ -4258,20 +4258,20 @@ lbl_801C52CC:
 /* 801C5358 001C1F38  D0 21 00 14 */	stfs f1, 0x14(r1)
 /* 801C535C 001C1F3C  C0 A1 00 14 */	lfs f5, 0x14(r1)
 lbl_801C5360:
-/* 801C5360 001C1F40  C0 22 B3 28 */	lfs f1, 10.0f
+/* 801C5360 001C1F40  C0 22 B3 28 */	lfs f1, 10.0F
 /* 801C5364 001C1F44  FF C0 28 90 */	fmr f30, f5
 /* 801C5368 001C1F48  FC 05 08 40 */	fcmpo cr0, f5, f1
 /* 801C536C 001C1F4C  40 80 00 08 */	bge lbl_801C5374
 /* 801C5370 001C1F50  FF C0 08 90 */	fmr f30, f1
 lbl_801C5374:
-/* 801C5374 001C1F54  C0 22 B3 88 */	lfs f1, 5.0f
+/* 801C5374 001C1F54  C0 22 B3 88 */	lfs f1, 5.0F
 /* 801C5378 001C1F58  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 801C537C 001C1F5C  40 80 00 08 */	bge lbl_801C5384
 /* 801C5380 001C1F60  FF E0 08 90 */	fmr f31, f1
 lbl_801C5384:
 /* 801C5384 001C1F64  FC 1F F0 40 */	fcmpo cr0, f31, f30
 /* 801C5388 001C1F68  40 81 00 0C */	ble lbl_801C5394
-/* 801C538C 001C1F6C  C0 02 B2 E4 */	lfs f0, 1.0f
+/* 801C538C 001C1F6C  C0 02 B2 E4 */	lfs f0, 1.0F
 /* 801C5390 001C1F70  EF C0 F8 2A */	fadds f30, f0, f31
 lbl_801C5394:
 /* 801C5394 001C1F74  28 1E 00 00 */	cmplwi r30, 0
@@ -4387,7 +4387,7 @@ void func_801C5694(Map* gp, s32 i, f32 val)
         return;
     }
     if (gp != NULL && gp->x20[i] != -1) {
-        func_80024B1C(gp->x20[i], 63.5f * (val + 1));
+        func_80024B1C(gp->x20[i], 63.5F * (val + 1));
     }
 }
 

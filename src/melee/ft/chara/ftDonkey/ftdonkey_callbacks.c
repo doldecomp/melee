@@ -83,7 +83,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighterObj) {
         s32 i;
         for (i = 0; i < 4; i++) {
 
-            f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) - (donkey_attr->SpecialLw.x68 * 1.5f);
+            f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) - (donkey_attr->SpecialLw.x68 * 1.5F);
             f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->x2C_facing_direction;
             f32 temp_f6 = temp_f5 + temp_f3;
 
@@ -96,14 +96,14 @@ void ftDonkey_8010DB3C(HSD_GObj* fighterObj) {
                     0, 
                     temp_f6,
                     donkey_attr->SpecialLw.x70, 
-                    donkey_attr->SpecialLw.x68 * 1.5f, 
+                    donkey_attr->SpecialLw.x68 * 1.5F, 
                     donkey_attr->SpecialLw.x68
                 )) {
 
                 vec_list[i] = fp->xB0_pos;
             }
 
-            vec_list[i].y += 2.0f; 
+            vec_list[i].y += 2.0F; 
             func_8007B8A8(&fp->x914[i], &vec_list[i]);
         }
     }

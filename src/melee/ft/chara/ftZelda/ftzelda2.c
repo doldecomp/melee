@@ -1,7 +1,7 @@
 #include <ftzelda.h>
 
-#define HALF_PI 1.5707963705062866f
-#define DEG_TO_RAD 0.017453292f
+#define HALF_PI 1.5707963705062866F
+#define DEG_TO_RAD 0.017453292F
 
 // 801396AC - 801396E0 (0x34 bytes)
 // https://decomp.me/scratch/UHxFc
@@ -75,11 +75,11 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp) {
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighterObj) {
     Fighter* fp = getFighterPlus(fighterObj);
 
-    fp->xEC_ground_vel = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
+    fp->xEC_ground_vel = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
+    fp->x80_self_vel.x = 0.0F;
 
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x15D, 0, NULL, 0.0f, 1.0, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x15D, 0, NULL, 0.0F, 1.0, 0.0F);
     func_8006EBA4(fighterObj);
 
     fp = getFighterPlus(fighterObj);
@@ -313,7 +313,7 @@ void ftZelda_80139D60(HSD_GObj* fighterObj) {
     fp->x234C_stateVar4_s32++;
 
     // Determine facing direction
-    if (fp->x2C_facing_direction < 0.0f) {
+    if (fp->x2C_facing_direction < 0.0F) {
         ledgeGrabDir = -1;
     } else {
         ledgeGrabDir = 1;
@@ -330,19 +330,19 @@ void ftZelda_80139D60(HSD_GObj* fighterObj) {
     if (func_80081298(fighterObj) == 0) {
         if ((collData->x134_envFlags & 0x6000) != 0) {
             f32 angle1 = lbvector_AngleXY(&collData->x188_ceiling.normal, &fp->x80_self_vel);
-            if (angle1 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
+            if (angle1 > (DEG_TO_RAD * (90.0F + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
         }
         if ((collData->x134_envFlags & 0x3F) != 0) {
             f32 angle2 = lbvector_AngleXY(&collData->x160_rightwall.normal, &fp->x80_self_vel);
-            if (angle2 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
+            if (angle2 > (DEG_TO_RAD * (90.0F + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
         }
         if ((collData->x134_envFlags & 0xFC0) != 0) {
             f32 angle3 = lbvector_AngleXY(&collData->x174_leftwall.normal, &fp->x80_self_vel);
-            if (angle3 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
+            if (angle3 > (DEG_TO_RAD * (90.0F + attributes->x60))) {
                 ftZelda_8013A764(fighterObj);
             }
         }
@@ -360,7 +360,7 @@ void ftZelda_80139F6C(HSD_GObj* fighterObj) {
 
     func_8007D60C(fp);
     
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x161, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 0.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x161, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 0.0F, 0.0F);
     
     fp->x2223_flag.bits.b4 = 1;
     fp->x221E_flag.bits.b0 = 1;
@@ -377,7 +377,7 @@ void ftZelda_80139FE8(HSD_GObj* fighterObj) {
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x15E, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 0.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x15E, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 0.0F, 0.0F);
     
     fp->x221E_flag.bits.b0 = 1;
 }
@@ -417,7 +417,7 @@ void ftZelda_8013A058(HSD_GObj* fighterObj) {
     
     // Essentially performing a square root operation 
     // (Avoiding sqrtf to preserve stack alignment.)
-    if (var_f4 > 0.0f) {
+    if (var_f4 > 0.0F) {
         f64 guess = __frsqrte(var_f4);
         _half = .5F;
         _three = 3.0F;
@@ -525,7 +525,7 @@ void ftZelda_8013A244(HSD_GObj* fighterObj) {
         if (temp_f1 < 0) {
             temp_f1 = -temp_f1;
         }
-        if (temp_f1 > 0.0010000000474974513f) {
+        if (temp_f1 > 0.0010000000474974513F) {
             func_8007D9FC(fp);
         }
         var_f30 = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->x2C_facing_direction);
@@ -610,7 +610,7 @@ void ftZelda_8013A50C(HSD_GObj* fighterObj) {
     }
 
     temp_f1 = fp->x80_self_vel.y;
-    fp->x80_self_vel.y = temp_f1 - (temp_f1 / 10.0f);
+    fp->x80_self_vel.y = temp_f1 - (temp_f1 / 10.0F);
 
     func_8007CEF4(fp);
 }
@@ -676,7 +676,7 @@ void ftZelda_8013A6A8(HSD_GObj* fighterObj) {
     fp = fighterObj->user_data;
     attributes = fp->x2D4_specialAttributes;
 
-    Fighter_ActionStateChange_800693AC(fighterObj, 0x15F, 0, NULL, temp_f0, 1.0f, temp_f0);
+    Fighter_ActionStateChange_800693AC(fighterObj, 0x15F, 0, NULL, temp_f0, 1.0F, temp_f0);
     func_8006EBA4(fighterObj);
 
     fighter2 = fighterObj->user_data;

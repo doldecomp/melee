@@ -43,15 +43,15 @@ void lbl_80153B90(HSD_GObj* arg0) {
 
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(arg0, 0x172, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
     temp_r31->x2340_f32 = temp_r30->x6C;
     func_8015C208(arg0, &sp10);
     temp_r31->xB0_pos.x = sp10.x;
     temp_r31->xB0_pos.y = temp_r30->x68;
-    temp_r31->x80_self_vel.z = 0.0f;
-    temp_r31->x80_self_vel.y = 0.0f;
-    temp_r31->x80_self_vel.x = 0.0f;
+    temp_r31->x80_self_vel.z = 0.0F;
+    temp_r31->x80_self_vel.y = 0.0F;
+    temp_r31->x80_self_vel.x = 0.0F;
 }
 
 
@@ -61,7 +61,7 @@ void lbl_80153B90(HSD_GObj* arg0) {
 void lbl_80153C48(HSD_GObj* arg0) {
     s32 unk[2];
     if (ftAnim_IsFramesRemaining(arg0) == 0) {
-        ((Fighter*)arg0->user_data)->x80_self_vel.x = 0.0f;
+        ((Fighter*)arg0->user_data)->x80_self_vel.x = 0.0F;
         func_80151018(arg0);
     }
 }
@@ -85,9 +85,9 @@ void lbl_80153CD4(HSD_GObj* gobj) {
     Fighter* r4_fp;
 
     r4_fp = gobj->user_data;
-    if (--r4_fp->x2340_f32 > 0.0f) {
+    if (--r4_fp->x2340_f32 > 0.0F) {
         func_8015BF74(gobj, ((MasterHandAttributes*)r4_fp->x10C_ftData->ext_attr)->x58);
     } else {
-        r4_fp->x80_self_vel.x = 0.0f;
+        r4_fp->x80_self_vel.x = 0.0F;
     }
 }

@@ -31,7 +31,7 @@ void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->sa.mewtwo.x222C_disableGObj = NULL;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALLW, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALLW, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
@@ -47,9 +47,9 @@ void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->sa.mewtwo.x222C_disableGObj = NULL;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.y = 0.0F;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRLW, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRLW, 0, NULL, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
@@ -135,9 +135,9 @@ void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
 
     func_8007D5D4(fp);
 
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.y = 0.0F;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRLW, FTMEWTWO_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRLW, FTMEWTWO_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
 
@@ -155,7 +155,7 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALLW, FTMEWTWO_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALLW, FTMEWTWO_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0F, 0.0F);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
 
