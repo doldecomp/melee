@@ -46,3 +46,13 @@ void func_802F6898()
         v->players[i].flags.hide_all_digits = 1;
     }
 }
+
+// Show All Percentage Digits
+void func_802F68F0(void)
+{
+    s32 i;
+    HudIndex* v = &lbl_804A10C8;
+    for (i = 0; i < 6; i++) {
+        v->players[i].flags.hide_all_digits = 0;
+    }
+}

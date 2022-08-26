@@ -7,17 +7,6 @@ extern unk_t lbl_802F73C4();
 
 extern Thing_803F9628 lbl_803F9628;
 
-
-
-// Show All Percentage Digits
-void func_802F68F0(void) {
-    s32 i;
-    HudIndex* v = &lbl_804A10C8;
-    for (i = 0; i < 6; i++) {
-        v->players[i].flags.hide_all_digits = 0;
-    }
-}
-
 void func_802F6948(s32 player_idx) {
     HudValue* hud_player;
     Placeholder_8016AE50_ret_val* small_thing;
