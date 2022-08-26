@@ -5,128 +5,16 @@ s8 lbl_804D6D60;
 // global array of HUD info
 HudIndex lbl_804A10C8;
 
+extern unk_t lbl_802F74D0();
+extern unk_t lbl_802F73C4();
 
-// unknown signature
-extern void lbl_802F74D0(void);
-// unknown signature
-extern void lbl_802F73C4(void);
-
-// just add extern to fix one function
-// oops, probably garbage
-extern Thing_803F9628 lbl_803F9628;/* = {
-    {{
-         NULL,
-         NULL,
-         lbl_802F74D0,
-         0x0007C860,
-         0x08000000,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-     },
-     {
-         NULL,
-         NULL,
-         lbl_802F73C4,
-         0x0000C351,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-     },
-     {
-         NULL,
-         NULL,
-         lbl_802F74D0,
-         0x0007C85E,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-     },
-     {
-         NULL,
-         NULL,
-         lbl_802F73C4,
-         0x0007C85D,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-     },
-     {
-         NULL,
-         NULL,
-         lbl_802F73C4,
-         0x0007C857,
-         0x0A000000,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-     },
-     {
-         NULL,
-         NULL,
-         lbl_802F74D0,
-         0x0007C855,
-         0x08000000,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-     },
-     {
-         NULL,
-         NULL,
-         lbl_802F74D0,
-         0x00009C48,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL
-    },
-     {
-         NULL,
-         NULL,
-         lbl_802F74D0,
-         0x00009C46,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-         NULL,
-     }},
-    {
-        0x5363496E,
-        0x66436E74,
-        0x5F736365,
-        0x6E655F6D,
-        0x6F64656C,
-        0x73000000,
-
-    }};*/
-
-// START OF FILE
+extern Thing_803F9628 lbl_803F9628;
 
 HudIndex* func_802F4910(void) {
     return &lbl_804A10C8;
 }
 
-asm void /*?*/ func_802F491C(void /*?*/)
+asm unk_t func_802F491C()
 {
 /* 802F491C 002F14FC  7C 08 02 A6 */	mflr r0
 /* 802F4920 002F1500  90 01 00 04 */	stw r0, 4(r1)
@@ -301,7 +189,7 @@ lbl_802F4B60:
 /* 802F4B80 002F1760  4E 80 00 20 */	blr 
 }
 
-asm void /*?*/ func_802F4B84(void /*?*/)
+asm unk_t func_802F4B84()
 {
 /* 802F4B84 002F1764  7C 08 02 A6 */	mflr r0
 /* 802F4B88 002F1768  90 01 00 04 */	stw r0, 4(r1)
@@ -546,7 +434,7 @@ lbl_802F4EA0:
 
 }
 
-asm void /*?*/ func_802F4EDC(void /*?*/)
+asm unk_t func_802F4EDC()
 {
 /* 802F4EDC 002F1ABC  7C 08 02 A6 */	mflr r0
 /* 802F4EE0 002F1AC0  3C 80 80 4A */	lis r4, lbl_804A10C8@ha
@@ -1389,7 +1277,7 @@ lbl_802F5B28:
 /* 802F5B44 002F2724  4E 80 00 20 */	blr 
 }
 
-asm void /*?*/ func_802F5B48(void /*?*/)
+asm unk_t func_802F5B48()
 {
 /* 802F5B48 002F2728  7C 08 02 A6 */	mflr r0
 /* 802F5B4C 002F272C  3C 80 80 4A */	lis r4, lbl_804A10C8@ha
@@ -1644,7 +1532,7 @@ lbl_802F5EB0:
 /* 802F5EBC 002F2A9C  4E 80 00 20 */	blr 
 }
 
-asm void /*?*/ func_802F5EC0(void /*?*/)
+asm unk_t func_802F5EC0()
 {
 /* 802F5EC0 002F2AA0  7C 08 02 A6 */	mflr r0
 /* 802F5EC4 002F2AA4  90 01 00 04 */	stw r0, 4(r1)
@@ -1873,7 +1761,7 @@ HSD_GObj* func_802F6194(HSD_GObj* node, s32 n) {
     return gx;
 }
 
-asm void /*?*/ func_802F61FC(void /*?*/)
+asm unk_t func_802F61FC()
 {
 /* 802F61FC 002F2DDC  7C 08 02 A6 */	mflr r0
 /* 802F6200 002F2DE0  3C C0 80 40 */	lis r6, lbl_803F9598@ha
@@ -2193,7 +2081,7 @@ void func_802F665C(s8 arg0) {
     }
 }
 
-asm void /*?*/ func_802F66A4(void /*?*/)
+asm unk_t func_802F66A4()
 {
 /* 802F66A4 002F3284  7C 08 02 A6 */	mflr r0
 /* 802F66A8 002F3288  3C 60 80 4A */	lis r3, lbl_804A10C8@ha
@@ -2459,7 +2347,7 @@ void func_802F6E3C(s32 player_num) {
     func_802FB6AC(player_num);
 }
 
-asm void /*?*/ func_802F6EA4(void /*?*/)
+asm unk_t func_802F6EA4()
 {
 /* 802F6EA4 002F3A84  7C 08 02 A6 */	mflr r0
 /* 802F6EA8 002F3A88  2C 03 00 08 */	cmpwi r3, 8
@@ -2570,7 +2458,7 @@ lbl_802F7020:
 /* 802F7030 002F3C10  4E 80 00 20 */	blr 
 }
 
-asm void /*?*/ func_802F7034(void /*?*/)
+asm unk_t func_802F7034()
 {
 /* 802F7034 002F3C14  7C 08 02 A6 */	mflr r0
 /* 802F7038 002F3C18  90 01 00 04 */	stw r0, 4(r1)
@@ -2651,7 +2539,7 @@ lbl_802F7120:
 
 // in progress
 // https://decomp.me/scratch/XzfAH
-asm void /*?*/ func_802F7134(void /*?*/)
+asm unk_t func_802F7134()
 {
 /* 802F7134 002F3D14  7C 08 02 A6 */	mflr r0
 /* 802F7138 002F3D18  3C 60 80 40 */	lis r3, lbl_803F9628@ha
