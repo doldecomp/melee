@@ -1,27 +1,27 @@
-#ifndef _ifstatus_h_
-#define _ifstatus_h_
+#ifndef MELEE_IF_IFSTATUS_H
+#define MELEE_IF_IFSTATUS_H
 
-#include <global.h>
 #include <dolphin/types.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <global.h>
+#include <melee/pl/player.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/tobj.h>
-#include "melee/pl/player.h"
 
 typedef struct _HudFlags {
-  u8 explode_animation: 1;
-  u8 unk40: 1;
-  u8 force_digit_shake: 1;
-  u8 unk10: 1;
-  u8 hide_all_digits: 1;
-  u8 animation_status_id: 2;
-  u8 unk1: 1;
+    u8 explode_animation : 1;
+    u8 unk40 : 1;
+    u8 force_digit_shake : 1;
+    u8 unk10 : 1;
+    u8 hide_all_digits : 1;
+    u8 animation_status_id : 2;
+    u8 unk1 : 1;
 } HudFlags;
 
 typedef struct _UnknownClassTypeE {
-  s32 padding[0x24];
-  HSD_JObj* unk28;
+    s32 padding[0x24];
+    HSD_JObj* unk28;
 } UnknownClassTypeE;
 
 typedef struct _HudValue {
@@ -47,7 +47,7 @@ typedef struct _HudValue {
     // 0x0F
     u8 frames_of_shake_remaining;
     // 0x10
-    HudFlags flags; 
+    HudFlags flags;
     // 0x14
     f32 hundreds_digit_x_translation;
     // 0x18
@@ -77,26 +77,26 @@ typedef struct _HudValue {
 } HudValue;
 
 typedef struct _HudIndex {
-  HudValue players[6];
-  // 258 unk
-  HSD_Joint* unk258;
-  // 0x25c
-  void* jobj_desc_parent;
-  // 0x260
-  HSD_AnimJoint* janim_selection_joints;
-  // 0x264
-  void* janim_selection_textures;
-  // 0x268 null?
-  void* unk268;
-  void* unk26C;
-  void* unk270;
-  void* unk274;
-  // 8 elements of size 0x28, what is this?
+    HudValue players[6];
+    // 258 unk
+    HSD_Joint* unk258;
+    // 0x25c
+    void* jobj_desc_parent;
+    // 0x260
+    HSD_AnimJoint* janim_selection_joints;
+    // 0x264
+    void* janim_selection_textures;
+    // 0x268 null?
+    void* unk268;
+    void* unk26C;
+    void* unk270;
+    void* unk274;
+    // 8 elements of size 0x28, what is this?
 } HudIndex;
 
 typedef struct _Element_803F9628_Obj_14 {
-  s32 padding[6];
-  s32 unk1C;
+    s32 padding[6];
+    s32 unk1C;
 } Element_803F9628_Obj_14;
 
 typedef struct _Element_803F9628 {
@@ -124,7 +124,7 @@ typedef struct _Element_803F9628 {
     // 0x24
     u32 unk24;
     // 0x28
-    //u32 unk40;
+    // u32 unk40;
 } Element_803F9628;
 
 typedef struct _Thing_803F9628 {
@@ -133,25 +133,25 @@ typedef struct _Thing_803F9628 {
 } Thing_803F9628;
 
 typedef struct _Coordinate3D {
-  f32 x;
-  f32 y;
-  f32 z;
+    f32 x;
+    f32 y;
+    f32 z;
 } Coordinate3D;
 
 typedef struct _Placeholder_8016AE38_flags {
-  u8 unk80: 1;
-  u8 unk40: 1;
-  u8 unk20: 1;
-  u8 unk10: 1;
-  u8 unk8: 1;
-  u8 unk4: 1;
-  u8 unk2: 1;
-  u8 unk1: 1;
+    u8 unk80 : 1;
+    u8 unk40 : 1;
+    u8 unk20 : 1;
+    u8 unk10 : 1;
+    u8 unk8 : 1;
+    u8 unk4 : 1;
+    u8 unk2 : 1;
+    u8 unk1 : 1;
 } Placeholder_8016AE38_flags;
 
 typedef struct _Placeholder_8016AE38_flags_2 {
-  u8 top3: 3;
-  u8 bot5: 5;
+    u8 top3 : 3;
+    u8 bot5 : 5;
 } Placeholder_8016AE38_flags_2;
 
 // When we figure out what that function is, replace this type with an actual type
@@ -169,16 +169,15 @@ typedef struct _Placeholder_8016AE38_ret_val {
     Placeholder_8016AE38_flags unk24CA;
 } Placeholder_8016AE38_ret_val;
 
-
 typedef struct _Placeholder_8016AE50_flags {
-  u8 unk80: 1;
-  u8 unk40: 1;
-  u8 unk20: 1;
-  u8 unk10: 1;
-  u8 unk8: 1;
-  u8 unk4: 1;
-  u8 unk2: 1;
-  u8 unk1: 1;
+    u8 unk80 : 1;
+    u8 unk40 : 1;
+    u8 unk20 : 1;
+    u8 unk10 : 1;
+    u8 unk8 : 1;
+    u8 unk4 : 1;
+    u8 unk2 : 1;
+    u8 unk1 : 1;
 } Placeholder_8016AE50_flags;
 
 // When we figure out what that function is, replace this type with an actual type
@@ -190,7 +189,7 @@ typedef struct _Placeholder_8016AE50_ret_val {
 
 // external functions we need
 // takes HSD obj* ?
-//extern void func_80391CAC(void*);
+// extern void func_80391CAC(void*);
 extern void func_802FB6AC(s32);
 extern Placeholder_8016AE38_ret_val* func_8016AE38();
 extern Placeholder_8016AE50_ret_val* func_8016AE50();
@@ -204,17 +203,17 @@ extern void func_802FB650(s32);
 // functions defined in this file
 
 HudIndex* func_802F4910(void);
-asm void /*?*/ func_802F491C(void /*?*/);
-asm void /*?*/ func_802F4B84(void /*?*/);
+void /*?*/ func_802F491C();
+void /*?*/ func_802F4B84();
 // Huge function, likely last to reverse
-asm void /*?*/ func_802F4EDC(void /*?*/);
-asm void /*?*/ func_802F5B48(void /*?*/);
-asm void /*?*/ func_802F5EC0(void /*?*/);
+void /*?*/ func_802F4EDC();
+void /*?*/ func_802F5B48();
+void /*?*/ func_802F5EC0();
 HSD_GObj* func_802F6194(HSD_GObj*, s32);
-asm void /*?*/ func_802F61FC(void /*?*/);
-asm void func_802F6508(s32);
+void /*?*/ func_802F61FC();
+void func_802F6508(s32);
 void func_802F665C(s8);
-asm void /*?*/ func_802F66A4(void /*?*/);
+void /*?*/ func_802F66A4();
 void func_802F6788(s32);
 void func_802F6804(void);
 void func_802F6898(void);
@@ -226,12 +225,12 @@ void func_802F6C04(s32);
 void func_802F6D10(s32);
 void func_802F6E1C(void);
 void func_802F6E3C(s32);
-asm void /*?*/ func_802F6EA4(void /*?*/);
+void /*?*/ func_802F6EA4();
 // https://decomp.me/scratch/8CIfp
-asm void /*?*/ func_802F7034(void /*?*/);
+void /*?*/ func_802F7034();
 // in progress
 // https://decomp.me/scratch/XzfAH
-asm void /*?*/ func_802F7134(void /*?*/);
+void /*?*/ func_802F7134();
 void func_802F7220(void);
 
 #endif

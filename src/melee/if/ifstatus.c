@@ -1,4 +1,4 @@
-#include "ifstatus.h"
+#include <melee/if/ifstatus.h>
 
 s8 lbl_804D6D60;
 
