@@ -200,56 +200,46 @@ size_t OSCheckHeap(OSHeapHandle heap)
     int total = 0;
     int totalFree = 0;
 
+    // clang-format off
 #define CHECK(line, condition)                                      \
     if (!(condition)) {                                             \
         OSReport("OSCheckHeap: Failed " #condition " in %d", line); \
         return -1;                                                  \
     }
 
-    // clang-format off
     CHECK(893, HeapArray)
     CHECK(894, 0 <= heap && heap < NumHeaps)
-    // clang-format on
     hd = &HeapArray[heap];
-    // clang-format off
     CHECK(897, 0 <= hd->size)
     CHECK(899, hd->allocated == NULL || hd->allocated->prev == NULL)
-    // clang-format on
 
     for (cell = hd->allocated; cell != NULL; cell = cell->next) {
-        // clang-format off
         CHECK(902, InRange(cell, ArenaStart, ArenaEnd))
         CHECK(903, OFFSET(cell, ALIGNMENT) == 0)
         CHECK(904, cell->next == NULL || cell->next->prev == cell)
         CHECK(905, MINOBJSIZE <= cell->size)
         CHECK(906, OFFSET(cell->size, ALIGNMENT) == 0)
-        // clang-format on
         total += cell->size;
-        // clang-format off
         CHECK(909, 0 < total && total <= hd->size)
-        // clang-format on
     }
 
     CHECK(917, hd->free == NULL || hd->free->prev == NULL)
     for (cell = hd->free; cell != NULL; cell = cell->next) {
-        // clang-format off
         CHECK(920, InRange(cell, ArenaStart, ArenaEnd))
         CHECK(921, OFFSET(cell, ALIGNMENT) == 0)
         CHECK(922, cell->next == NULL || cell->next->prev == cell)
         CHECK(923, MINOBJSIZE <= cell->size)
         CHECK(924, OFFSET(cell->size, ALIGNMENT) == 0)
         CHECK(925, cell->next == NULL || (char*) cell + cell->size < (char*) cell->next)
-        // clang-format on
         total += cell->size;
         totalFree += cell->size - 32;
-        // clang-format off
         CHECK(929, 0 < total && total <= hd->size)
-        // clang-format on
     }
 
     CHECK(936, total == hd->size);
 
 #undef CHECK
+    // clang-format on
 
     return totalFree;
 }
