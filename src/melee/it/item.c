@@ -841,7 +841,6 @@ void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj //
 }
 
 extern HSD_DObj* func_80371BEC(HSD_JObj*);
-extern void func_80382400(HSD_MObj*, void*);
 extern void* lbl_803F1F90[];
 
 // 0x8026814C //
@@ -866,7 +865,7 @@ void func_8026814C(HSD_GObj* item_gobj) // Setup item render objects? //
             temp_r0 = var_r29->mobj;
             if (temp_r0 != NULL)
             {
-                func_80382400(temp_r0, &lbl_803F1F90); // Setup MObj? //
+                hsdChangeClass(temp_r0, &lbl_803F1F90);
             }
             var_r29 = var_r0 = (var_r29 != NULL) ? var_r29->next : NULL;
             goto loop_2;
