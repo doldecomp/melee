@@ -203,17 +203,9 @@ extern void func_802FB650(s32);
 // functions defined in this file
 
 HudIndex* func_802F4910(void);
-void /*?*/ func_802F491C();
-void /*?*/ func_802F4B84();
-// Huge function, likely last to reverse
-void /*?*/ func_802F4EDC();
-void /*?*/ func_802F5B48();
-void /*?*/ func_802F5EC0();
 HSD_GObj* func_802F6194(HSD_GObj*, s32);
-void /*?*/ func_802F61FC();
 void func_802F6508(s32);
 void func_802F665C(s8);
-void /*?*/ func_802F66A4();
 void func_802F6788(s32);
 void func_802F6804(void);
 void func_802F6898(void);
@@ -225,12 +217,6 @@ void func_802F6C04(s32);
 void func_802F6D10(s32);
 void func_802F6E1C(s32);
 void func_802F6E3C(s32);
-void /*?*/ func_802F6EA4();
-// https://decomp.me/scratch/8CIfp
-void /*?*/ func_802F7034();
-// in progress
-// https://decomp.me/scratch/XzfAH
-void /*?*/ func_802F7134();
 void func_802F7220(void);
 
 extern HudIndex lbl_804A10C8; // global array of HUD info
