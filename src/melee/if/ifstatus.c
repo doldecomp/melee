@@ -1,21 +1,13 @@
 #include <melee/if/ifstatus.h>
 
-s8 lbl_804D6D60;
+extern s8 lbl_804D6D60;
 
 extern unk_t lbl_802F74D0();
 extern unk_t lbl_802F73C4();
 
 extern Thing_803F9628 lbl_803F9628;
 
-void func_802F665C(s8 arg0) {
-    s32 i;
 
-    func_802F343C();
-    lbl_804D6D60 = arg0;
-    for (i = 0; i < 6; i++) {
-        func_802F6508(i);        
-    }
-}
 
 asm unk_t func_802F66A4()
 {
