@@ -192,3 +192,17 @@ void func_802F6E1C(s32 player_num)
 {
     func_802F6508(player_num);
 }
+
+void func_802F6E3C(s32 player_num)
+{
+    HudValue* player;
+
+    player = &lbl_804A10C8.players[player_num];
+    if (player->HUD_parent_entity != NULL) {
+        func_80390CAC(player->HUD_parent_entity);
+    }
+    if (player->next != NULL) {
+        func_80390CAC(player->next);
+    }
+    func_802FB6AC(player_num);
+}
