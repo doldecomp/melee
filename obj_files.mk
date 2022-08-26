@@ -461,7 +461,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/if/ifall.s.o\
 	$(BUILD_DIR)/asm/melee/if/iftime.s.o\
 	$(BUILD_DIR)/asm/melee/if/ifstatus_data.s.o\
-	$(BUILD_DIR)/src/melee/if/ifstatus_1.c.o\
+	$(BUILD_DIR)/src/melee/if/ifstatus.c.o\
 	$(BUILD_DIR)/asm/melee/if/ifstatus_2.s.o\
 	$(BUILD_DIR)/src/melee/if/ifstatus_3.c.o\
 	$(BUILD_DIR)/asm/melee/if/ifstatus_4.s.o\
