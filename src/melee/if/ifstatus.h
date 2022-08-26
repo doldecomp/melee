@@ -233,4 +233,6 @@ void /*?*/ func_802F7034();
 void /*?*/ func_802F7134();
 void func_802F7220(void);
 
+extern HudIndex lbl_804A10C8; // global array of HUD info
+
 #endif

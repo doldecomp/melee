@@ -2,12 +2,6 @@
 
 .section .text  # 0x802F3394 - 0x8032261C
 
-.global func_802F4910
-func_802F4910:
-/* 802F4910 002F14F0  3C 60 80 4A */	lis r3, lbl_804A10C8@ha
-/* 802F4914 002F14F4  38 63 10 C8 */	addi r3, r3, lbl_804A10C8@l
-/* 802F4918 002F14F8  4E 80 00 20 */	blr 
-
 .global func_802F491C
 func_802F491C:
 /* 802F491C 002F14FC  7C 08 02 A6 */	mflr r0

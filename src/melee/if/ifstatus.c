@@ -2,17 +2,10 @@
 
 s8 lbl_804D6D60;
 
-// global array of HUD info
-HudIndex lbl_804A10C8;
-
 extern unk_t lbl_802F74D0();
 extern unk_t lbl_802F73C4();
 
 extern Thing_803F9628 lbl_803F9628;
-
-HudIndex* func_802F4910(void) {
-    return &lbl_804A10C8;
-}
 
 asm unk_t func_802F491C()
 {
