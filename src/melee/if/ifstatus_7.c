@@ -36,3 +36,13 @@ void func_802F6804(void)
         i++;
     } while (i < 6);
 }
+
+// Hide Percentage Digits
+void func_802F6898()
+{
+    s32 i;
+    HudIndex* v = &lbl_804A10C8;
+    for (i = 0; i < 6; i++) {
+        v->players[i].flags.hide_all_digits = 1;
+    }
+}

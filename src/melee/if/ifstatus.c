@@ -7,14 +7,7 @@ extern unk_t lbl_802F73C4();
 
 extern Thing_803F9628 lbl_803F9628;
 
-// Hide Percentage Digits
-void func_802F6898() {
-    s32 i;
-    HudIndex* v = &lbl_804A10C8;
-    for (i = 0; i < 6; i++) {
-        v->players[i].flags.hide_all_digits = 1;
-    }
-}
+
 
 // Show All Percentage Digits
 void func_802F68F0(void) {
