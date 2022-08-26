@@ -15,3 +15,24 @@ void func_802F6788(s32 player_idx)
     }
     func_802FB650(player_idx & 0xFF);
 }
+
+void func_802F6804(void)
+{
+    s32 i;
+    HudValue* v;
+
+    i = 0;
+    do {
+        v = &lbl_804A10C8.players[i & 0xFF];
+        if (v->HUD_parent_entity != NULL) {
+            func_80390228(v->HUD_parent_entity);
+            v->HUD_parent_entity = NULL;
+        }
+        if (v->next != NULL) {
+            func_80390228(v->next);
+            v->next = NULL;
+        }
+        func_802FB650((s8) i & 0xFF);
+        i++;
+    } while (i < 6);
+}
