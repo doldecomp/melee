@@ -7,39 +7,6 @@ extern unk_t lbl_802F73C4();
 
 extern Thing_803F9628 lbl_803F9628;
 
-// 99.94% complete
-// https://decomp.me/scratch/in6rt
-void func_802F69C0(s32 player_idx, s32 arg1) {
-    HudValue* hud_player;
-    HudFlags* hud_player_flags;
-    Placeholder_8016AE38_ret_val* big_thing;
-    Placeholder_8016AE50_ret_val* small_thing;
-
-    big_thing = func_8016AE38();
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0)) {
-        func_802F7C30(arg1);
-    }
-    
-    big_thing = func_8016AE38();
-    big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
-    hud_player = &lbl_804A10C8.players[player_idx];
-    hud_player_flags = &hud_player->flags;
-    if (hud_player_flags->explode_animation != 1) {
-        hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
-        if (small_thing->flags.unk1 != 0) {
-            hud_player->unk9 = 1;
-        }
-    }
-    if ((big_thing->unk24CA.unk80 != 0) && ((Player_GetPlayerSlotType(player_idx) == 0) || (Player_GetPlayerSlotType(player_idx) == 1)) && (Player_GetStocks(player_idx) == 0)) {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
-    }
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) && (func_802F7BB4 != NULL)) {
-        func_802F7BB4(player_idx);
-    }
-}
-
 // 99.93% complete
 // https://decomp.me/scratch/SDDvF
 void func_802F6AF8(s32 player_idx) {
