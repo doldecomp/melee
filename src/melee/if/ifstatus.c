@@ -7,37 +7,6 @@ extern unk_t lbl_802F73C4();
 
 extern Thing_803F9628 lbl_803F9628;
 
-inline HSD_GObj* nth_node(HSD_GObj* node, s32 n) {
-    s32 i;
-    HSD_GObj* cur = node;
-    for (i = 0; i < n && node; i++) {
-        if (cur == NULL) {
-            cur = NULL;
-        } else {
-            cur = node->next; 
-        }
-        node = cur;
-    }
-    return node;
-}
-
-// 99.81% match
-// https://decomp.me/scratch/XGFpw
-HSD_GObj* func_802F6194(HSD_GObj* node, s32 n) {
-    HSD_GObj* gx;
-
-    if ((node == NULL) || (n < 0)) {
-        return NULL;
-    }
-    if (node == NULL) {
-        gx = NULL;
-    } else {
-        gx = node->next_gx;
-    }
-    gx = nth_node(gx, n);
-    return gx;
-}
-
 asm unk_t func_802F61FC()
 {
 /* 802F61FC 002F2DDC  7C 08 02 A6 */	mflr r0
