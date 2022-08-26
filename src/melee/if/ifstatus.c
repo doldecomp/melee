@@ -2200,3 +2200,16 @@ lbl_802F663C:
 /* 802F6658 002F3238  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern s8 lbl_804D6D60;
+
+void func_802F665C(s8 arg0)
+{
+    s32 i;
+
+    func_802F343C();
+    lbl_804D6D60 = arg0;
+    for (i = 0; i < 6; i++) {
+        func_802F6508(i);
+    }
+}
