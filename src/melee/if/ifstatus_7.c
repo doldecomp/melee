@@ -187,3 +187,8 @@ void func_802F6D10(s32 player_idx)
         func_802F7D08(player_idx);
     }
 }
+
+void func_802F6E1C(s32 player_num)
+{
+    func_802F6508(player_num);
+}

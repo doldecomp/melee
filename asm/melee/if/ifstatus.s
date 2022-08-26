@@ -2,17 +2,6 @@
 
 .section .text
 
-.global func_802F6E1C
-func_802F6E1C:
-/* 802F6E1C 002F39FC  7C 08 02 A6 */	mflr r0
-/* 802F6E20 002F3A00  90 01 00 04 */	stw r0, 4(r1)
-/* 802F6E24 002F3A04  94 21 FF F8 */	stwu r1, -8(r1)
-/* 802F6E28 002F3A08  4B FF F6 E1 */	bl func_802F6508
-/* 802F6E2C 002F3A0C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 802F6E30 002F3A10  38 21 00 08 */	addi r1, r1, 8
-/* 802F6E34 002F3A14  7C 08 03 A6 */	mtlr r0
-/* 802F6E38 002F3A18  4E 80 00 20 */	blr 
-
 .global func_802F6E3C
 func_802F6E3C:
 /* 802F6E3C 002F3A1C  7C 08 02 A6 */	mflr r0

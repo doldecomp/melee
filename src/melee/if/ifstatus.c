@@ -7,10 +7,6 @@ extern unk_t lbl_802F73C4();
 
 extern Thing_803F9628 lbl_803F9628;
 
-void func_802F6E1C(void) {
-    func_802F6508();
-}
-
 void func_802F6E3C(s32 player_num) {
     HudValue* player;
 
