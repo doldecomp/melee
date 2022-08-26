@@ -2489,7 +2489,7 @@ void func_802F6E3C(s32 player_num)
     func_802FB6AC(player_num);
 }
 
-extern unk_t lbl_803F9628;
+extern Thing_803F9628 lbl_803F9628;
 extern f64 lbl_804DDAA8;
 extern unk_t func_80011C18();
 
@@ -2754,3 +2754,15 @@ asm unk_t func_802F7134()
 /* 802F721C 002F3DFC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+// free
+void func_802F7220(void)
+{
+    s32 i;
+    for (i = 0; i < 8; i++) {
+        if (lbl_803F9628.things[i].unk0 != NULL) {
+            func_80390228(lbl_803F9628.things[i].unk0);
+            lbl_803F9628.things[i].unk0 = NULL;
+        }
+    }
+}
