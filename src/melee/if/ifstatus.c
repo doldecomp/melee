@@ -7,23 +7,6 @@ extern unk_t lbl_802F73C4();
 
 extern Thing_803F9628 lbl_803F9628;
 
-void func_802F6948(s32 player_idx) {
-    HudValue* hud_player;
-    Placeholder_8016AE50_ret_val* small_thing;
-    HudFlags* hud_player_flags;
-
-    small_thing = func_8016AE50();
-    hud_player = &lbl_804A10C8.players[player_idx];
-    hud_player_flags = &hud_player->flags;
-    if (hud_player_flags->explode_animation != 1) {
-        hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
-        if (small_thing->flags.unk1 != 0) {
-            hud_player->unk9 = 1;
-        }
-    }
-}
-
 // 99.94% complete
 // https://decomp.me/scratch/in6rt
 void func_802F69C0(s32 player_idx, s32 arg1) {
