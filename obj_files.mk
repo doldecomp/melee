@@ -89,6 +89,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/ftlib.c.o\
 	$(BUILD_DIR)/asm/melee/ft/ftlib.s.o\
 	$(BUILD_DIR)/asm/melee/ft/ft_unknown_006.s.o\
+	$(BUILD_DIR)/src/melee/ft/ft_unknown_006.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey1.c.o\
@@ -452,6 +453,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/mn/mngallery.s.o\
 	$(BUILD_DIR)/asm/melee/mn/mnstagesel.s.o\
 	$(BUILD_DIR)/asm/melee/mn/mncharsel.s.o\
+	$(BUILD_DIR)/src/melee/mn/mncharsel.c.o\
 	$(BUILD_DIR)/src/melee/it/item.c.o\
 	$(BUILD_DIR)/src/melee/it/item2.c.o\
 	$(BUILD_DIR)/asm/melee/it/code_80266F3C.s.o\
