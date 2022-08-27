@@ -54,7 +54,7 @@
 /* 0033C3D4 */ extern void GXSetIndTexMtx(s32, unk_t, s32);
 /* 0033C338 */ extern void GXSetTevIndirect(s32, s32, u8, s32, s32, s32, s32, s32);
 /* 0033BC4C */ extern void func_8033F06C(unk_t, s32);
-/* 0033BC04 */ extern void func_8033F024(unk_t, u32, s32, u16);
+/* 0033BC04 */ extern void GXInitTlutObj(unk_t, u32, s32, u16);
 /* 0033BBB0 */ extern void GXLoadTexObj(unk_t, s32);
 /* 0033BA00 */ extern u8 GXGetTexObjFmt(unk_t);
 /* 0033B9F0 */ extern u16 GXGetTexObjHeight(unk_t, f32);
