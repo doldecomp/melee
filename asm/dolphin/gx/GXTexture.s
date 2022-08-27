@@ -642,8 +642,8 @@ GXLoadTexObj:
 /* 8033F020 0033BC00  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/Y9lJO
-.global func_8033F024
-func_8033F024:
+.global GXInitTlutObj
+GXInitTlutObj:
 /* 8033F024 0033BC04  38 00 00 00 */	li r0, 0
 /* 8033F028 0033BC08  90 03 00 00 */	stw r0, 0(r3)
 /* 8033F02C 0033BC0C  54 A5 50 2A */	slwi r5, r5, 0xa
