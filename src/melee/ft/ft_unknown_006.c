@@ -296,6 +296,7 @@ s32 func_80087C70(Fighter* fp, s32 arg1)
 }
 
 #ifdef NON_MATCHING
+
 //https://decomp.me/scratch/QCKGz
 s32 func_80087D0C(Fighter* fighter, s32 arg1)
 {
@@ -408,10 +409,12 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
 
     return sfx_id;
 }
+
 #else
+
 #pragma push
 asm s32 func_80087D0C(Fighter* fighter, s32 arg1)
-{
+{ // clang-format off
     nofralloc
 /* 80087D0C 000848EC  7C 08 02 A6 */	mflr r0
 /* 80087D10 000848F0  90 01 00 04 */	stw r0, 4(r1)
@@ -650,7 +653,8 @@ lbl_8008803C:
 /* 80088050 00084C30  38 21 00 30 */	addi r1, r1, 0x30
 /* 80088054 00084C34  7C 08 03 A6 */	mtlr r0
 /* 80088058 00084C38  4E 80 00 20 */	blr 
-}
+} // clang-format on
+
 #endif
 
 #pragma pop
