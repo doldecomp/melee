@@ -174,24 +174,22 @@ s32 func_80087AEC(HSD_GObj* fighterObj)
 
 s32 func_80087B34(HSD_GObj* fighter_gobj)
 {
-    f32 atk_shield_kb_x;
-    f32* atk_shield_kb_y;
-    f32 fVar1;
-    f32 fVar2;
     Fighter* fp = getFighter(fighter_gobj);
-    atk_shield_kb_x = fp->x98_atk_shield_kb.x;
-    fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) + (fp->x80_self_vel.y * fp->x80_self_vel.y);
-    atk_shield_kb_y = &fp->x98_atk_shield_kb.y;
-    fVar2 = (atk_shield_kb_x * atk_shield_kb_x) + ((*atk_shield_kb_y) * (*atk_shield_kb_y));
+    f32 atk_shield_kb_x = fp->x98_atk_shield_kb.x;
+    f32 fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) + (fp->x80_self_vel.y * fp->x80_self_vel.y);
+    f32* atk_shield_kb_y = &fp->x98_atk_shield_kb.y;
+    f32 fVar2 = (atk_shield_kb_x * atk_shield_kb_x) + ((*atk_shield_kb_y) * (*atk_shield_kb_y));
+
     if (fVar1 > ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) + (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y))) {
-        if (fVar1 > ((atk_shield_kb_x * atk_shield_kb_x) + (fp->x98_atk_shield_kb.y * fp->x98_atk_shield_kb.y))) {
+        if (fVar1 > ((atk_shield_kb_x * atk_shield_kb_x) + (fp->x98_atk_shield_kb.y * fp->x98_atk_shield_kb.y)))
             return 0;
-        }
+
         return 2;
     }
-    if ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) + (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y) > fVar2) {
+
+    if ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) + (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y) > fVar2)
         return 1;
-    }
+
     return 2;
 }
 
@@ -203,34 +201,31 @@ void func_80087BAC(HSD_GObj* fighterObj, s32 arg1)
 
 void func_80087BC0(HSD_GObj* fighterObj, s8 arg1)
 {
-    u64 var0;
     Fighter* fp = getFighter(fighterObj);
-    var0 = fp->x1A98;
+    u64 var0 = fp->x1A98;
     func_800A101C(fp, arg1, var0, fp->x1A9C);
 }
 
 void func_80087BEC(HSD_GObj* fighterObj, u8 arg1)
 {
-    u64 var0;
     Fighter* fp = getFighter(fighterObj);
-    var0 = fp->x1A94;
+    u64 var0 = fp->x1A94;
     func_800A101C(fp, var0, arg1, fp->x1A9C);
 }
 
 s32 func_80087C1C()
 {
-    s32 ftKind;
-    u32 var0;
     HSD_GObj* fighterObj;
+    s32 ftKind;
+    u32 result = 0;
 
-    var0 = 0;
     for (fighterObj = lbl_804D782C->x20_fighters; fighterObj != 0; fighterObj = fighterObj->next) {
         ftKind = ((Fighter*) fighterObj->user_data)->x4_fighterKind;
         if (ftKind < 27) {
-            var0 = var0 | 1 << ftKind;
+            result = result | 1 << ftKind;
         }
     }
-    return var0;
+    return result;
 }
 
 s32 func_80087C58(HSD_GObj* fighterObj)
@@ -247,14 +242,13 @@ void func_80087C64(HSD_GObj* fighterObj, s32 arg1)
 
 s32 func_80087C70(Fighter* fp, s32 arg1)
 {
-    s32 temp_r0;
-    s32 var_r4;
     u8 temp_r3;
     u8 temp_r3_2;
     u8 temp_r3_3;
 
-    var_r4 = arg1;
-    temp_r0 = (fp->x2228_flag.bits.b3) & 3;
+    s32 var_r4 = arg1;
+    s32 temp_r0 = (fp->x2228_flag.bits.b3) & 3;
+
     switch (temp_r0) {
     case 0:
         temp_r3 = fp->x2220_flag.flags;
