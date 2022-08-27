@@ -1,7 +1,7 @@
 #include <melee/ft/ft_unknown_006.h>
 
-#include "fighter.h"
-#include "ftcommon.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
 
 extern HSD_GObjList* lbl_804D782C;
 extern s32 func_80023220(s32);
