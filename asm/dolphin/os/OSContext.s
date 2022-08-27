@@ -2,8 +2,8 @@
 
 .section .text  # 0x80344E30 - 0x803456A4
 
-.global OSLoadFPUContext
-OSLoadFPUContext:
+.global __OSLoadFPUContext
+__OSLoadFPUContext:
 /* 80344E30 00341A10  A0 A4 01 A2 */	lhz r5, 0x1a2(r4)
 /* 80344E34 00341A14  54 A5 07 FF */	clrlwi. r5, r5, 0x1f
 /* 80344E38 00341A18  41 82 01 18 */	beq lbl_80344F50
@@ -158,13 +158,13 @@ __OSSaveFPUContext:
 lbl_80345078:
 /* 80345078 00341C58  4E 80 00 20 */	blr 
 
-.global func_8034507C
-func_8034507C:
+.global OSLoadFPUContext
+OSLoadFPUContext:
 /* 8034507C 00341C5C  38 83 00 00 */	addi r4, r3, 0
-/* 80345080 00341C60  4B FF FD B0 */	b OSLoadFPUContext
+/* 80345080 00341C60  4B FF FD B0 */	b __OSLoadFPUContext
 
-.global func_80345084
-func_80345084:
+.global OSSaveFPUContext
+OSSaveFPUContext:
 /* 80345084 00341C64  38 A3 00 00 */	addi r5, r3, 0
 /* 80345088 00341C68  4B FF FE CC */	b __OSSaveFPUContext
 
@@ -576,7 +576,7 @@ OSSwitchFPUContext:
 /* 80345610 003421F0  41 82 00 08 */	beq lbl_80345618
 /* 80345614 003421F4  4B FF F9 41 */	bl __OSSaveFPUContext
 lbl_80345618:
-/* 80345618 003421F8  4B FF F8 19 */	bl OSLoadFPUContext
+/* 80345618 003421F8  4B FF F8 19 */	bl __OSLoadFPUContext
 lbl_8034561C:
 /* 8034561C 003421FC  80 64 00 80 */	lwz r3, 0x80(r4)
 /* 80345620 00342200  7C 6F F1 20 */	mtcrf 0xff, r3
