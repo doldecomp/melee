@@ -76,7 +76,7 @@ struct ItemLogicTable
     s32 (*x2C_callback_OnAbsorb)(HSD_GObj* item);
     s32 (*x30_callback_OnShieldBounce)(HSD_GObj* item);
     s32 (*x34_callback_OnHitShield)(HSD_GObj* item);
-    void (*x38_callback_OnUnknown)(HSD_GObj* item, HSD_GObj* fp);
+    void (*x38_callback_OnUnknown)(HSD_GObj* item, HSD_GObj* fighter);
 };
 
 typedef struct _CameraBoxFlags
