@@ -794,8 +794,8 @@ lbl_8033F1D4:
 /* 8033F224 0033BE04  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/5Ta0r // 0 (100%)
-.global GXInitTlutObj
-GXInitTlutObj:
+.global GXInitTlutRegion
+GXInitTlutRegion:
 /* 8033F228 0033BE08  38 00 00 00 */	li r0, 0
 /* 8033F22C 0033BE0C  90 03 00 00 */	stw r0, 0(r3)
 /* 8033F230 0033BE10  3C 04 FF F8 */	addis r0, r4, 0xfff8
