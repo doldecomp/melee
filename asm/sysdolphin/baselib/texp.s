@@ -1356,8 +1356,8 @@ lbl_80383F30:
 /* 80383F48 00380B28  7C 08 03 A6 */	mtlr r0
 /* 80383F4C 00380B2C  4E 80 00 20 */	blr 
 
-.global func_80383F50
-func_80383F50:
+.global HSD_TExpAlphaIn
+HSD_TExpAlphaIn:
 /* 80383F50 00380B30  7C 08 02 A6 */	mflr r0
 /* 80383F54 00380B34  90 01 00 04 */	stw r0, 4(r1)
 /* 80383F58 00380B38  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -1429,8 +1429,8 @@ lbl_80383FEC:
 /* 80384048 00380C28  7C 08 03 A6 */	mtlr r0
 /* 8038404C 00380C2C  4E 80 00 20 */	blr 
 
-.global func_80384050
-func_80384050:
+.global HSD_TExpOrder
+HSD_TExpOrder:
 /* 80384050 00380C30  7C 08 02 A6 */	mflr r0
 /* 80384054 00380C34  90 01 00 04 */	stw r0, 4(r1)
 /* 80384058 00380C38  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2903,8 +2903,8 @@ lbl_8038542C:
 /* 80385440 00382020  7C 08 03 A6 */	mtlr r0
 /* 80385444 00382024  4E 80 00 20 */	blr 
 
-.global func_80385448
-func_80385448:
+.global HSD_TExpSetupTev
+HSD_TExpSetupTev:
 /* 80385448 00382028  7C 08 02 A6 */	mflr r0
 /* 8038544C 0038202C  90 01 00 04 */	stw r0, 4(r1)
 /* 80385450 00382030  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2923,9 +2923,9 @@ lbl_80385468:
 /* 80385480 00382060  80 03 00 A4 */	lwz r0, 0xa4(r3)
 /* 80385484 00382064  90 1F 00 0C */	stw r0, 0xc(r31)
 lbl_80385488:
-/* 80385488 00382068  4B FD D0 65 */	bl func_803624EC
+/* 80385488 00382068  4B FD D0 65 */	bl HSD_StateAssignTev
 /* 8038548C 0038206C  7F E3 FB 78 */	mr r3, r31
-/* 80385490 00382070  4B FD D0 B9 */	bl func_80362548
+/* 80385490 00382070  4B FD D0 B9 */	bl HSD_SetupTevStage
 /* 80385494 00382074  83 FF 00 00 */	lwz r31, 0(r31)
 lbl_80385498:
 /* 80385498 00382078  28 1F 00 00 */	cmplwi r31, 0
@@ -2936,8 +2936,8 @@ lbl_80385498:
 /* 803854AC 0038208C  7C 08 03 A6 */	mtlr r0
 /* 803854B0 00382090  4E 80 00 20 */	blr 
 
-.global func_803854B4
-func_803854B4:
+.global HSD_TExpCompile
+HSD_TExpCompile:
 /* 803854B4 00382094  7C 08 02 A6 */	mflr r0
 /* 803854B8 00382098  90 01 00 04 */	stw r0, 4(r1)
 /* 803854BC 0038209C  38 00 00 01 */	li r0, 1
@@ -3131,8 +3131,8 @@ lbl_80385710:
 /* 80385750 00382330  7C 08 03 A6 */	mtlr r0
 /* 80385754 00382334  4E 80 00 20 */	blr 
 
-.global func_80385758
-func_80385758:
+.global HSD_TExpFreeTevDesc
+HSD_TExpFreeTevDesc:
 /* 80385758 00382338  7C 08 02 A6 */	mflr r0
 /* 8038575C 0038233C  90 01 00 04 */	stw r0, 4(r1)
 /* 80385760 00382340  94 21 FF E8 */	stwu r1, -0x18(r1)

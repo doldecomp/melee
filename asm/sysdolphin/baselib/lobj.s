@@ -1228,8 +1228,8 @@ lbl_80366A28:
 /* 80366A3C 0036361C  7C 08 03 A6 */	mtlr r0
 /* 80366A40 00363620  4E 80 00 20 */	blr 
 
-.global func_80366A44
-func_80366A44:
+.global HSD_LObjGetCurrentByType
+HSD_LObjGetCurrentByType:
 /* 80366A44 00363624  80 8D BF 9C */	lwz r4, lbl_804D763C@sda21(r13)
 /* 80366A48 00363628  54 65 07 BE */	clrlwi r5, r3, 0x1e
 /* 80366A4C 0036362C  48 00 00 1C */	b lbl_80366A68

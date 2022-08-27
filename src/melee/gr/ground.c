@@ -3575,7 +3575,7 @@ static void lbl_801C461C(HSD_GObj* gobj)
 static void lbl_801C4640(HSD_GObj* gobj)
 {
     func_803668EC(gobj->hsd_obj);
-    func_80365F28(func_8036A288());
+    func_80365F28(HSD_CObjGetCurrent());
 }
 
 extern u8 lbl_804D784A;

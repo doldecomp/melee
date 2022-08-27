@@ -475,7 +475,7 @@ BOOL func_80086A8C(HSD_GObj* gobj)
         temp_r3 = func_80030A50();
         if (temp_r3 != NULL) {
             void* temp_r30 = temp_r3->unk28;
-            if (temp_r30 == func_8036A288()) {
+            if (temp_r30 == HSD_CObjGetCurrent()) {
                 if (func_80030CD8(fp->x890_cameraBox, &fp->x2188)) {
                     fp->x221F_flag.bits.b0 = 0;
                     return TRUE;

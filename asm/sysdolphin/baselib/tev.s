@@ -39,8 +39,8 @@ lbl_80362460:
 /* 80362470 0035F050  7C 08 03 A6 */	mtlr r0
 /* 80362474 0035F054  4E 80 00 20 */	blr 
 
-.global func_80362478
-func_80362478:
+.global HSD_StateRegisterTexGen
+HSD_StateRegisterTexGen:
 /* 80362478 0035F058  7C 08 02 A6 */	mflr r0
 /* 8036247C 0035F05C  90 01 00 04 */	stw r0, 4(r1)
 /* 80362480 0035F060  94 21 FF F8 */	stwu r1, -8(r1)
@@ -82,8 +82,8 @@ func_803624E4:
 /* 803624E4 0035F0C4  80 6D BF 58 */	lwz r3, lbl_804D75F8@sda21(r13)
 /* 803624E8 0035F0C8  4E 80 00 20 */	blr 
 
-.global func_803624EC
-func_803624EC:
+.global HSD_StateAssignTev
+HSD_StateAssignTev:
 /* 803624EC 0035F0CC  7C 08 02 A6 */	mflr r0
 /* 803624F0 0035F0D0  90 01 00 04 */	stw r0, 4(r1)
 /* 803624F4 0035F0D4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -111,8 +111,8 @@ func_80362518:
 /* 80362540 0035F120  7C 08 03 A6 */	mtlr r0
 /* 80362544 0035F124  4E 80 00 20 */	blr 
 
-.global func_80362548
-func_80362548:
+.global HSD_SetupTevStage
+HSD_SetupTevStage:
 /* 80362548 0035F128  7C 08 02 A6 */	mflr r0
 /* 8036254C 0035F12C  90 01 00 04 */	stw r0, 4(r1)
 /* 80362550 0035F130  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -196,7 +196,7 @@ lbl_80362660:
 /* 80362670 0035F250  7C 7F 1B 78 */	mr r31, r3
 lbl_80362674:
 /* 80362674 0035F254  7F C3 F3 78 */	mr r3, r30
-/* 80362678 0035F258  4B FF FE D1 */	bl func_80362548
+/* 80362678 0035F258  4B FF FE D1 */	bl HSD_SetupTevStage
 /* 8036267C 0035F25C  83 DE 00 00 */	lwz r30, 0(r30)
 lbl_80362680:
 /* 80362680 0035F260  28 1E 00 00 */	cmplwi r30, 0

@@ -118,7 +118,7 @@ void main(void)
     u32 unused[2];
 
     OSInit();
-    func_8034EE9C();
+    VIInit();
     DVDInit();
     PADInit();
     CARDInit();
