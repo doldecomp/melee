@@ -119,7 +119,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
 
     if (aobj->flags & AOBJ_FIRST_PLAY) {
         aobj->flags &= 0xF7FFFFFF;
-        rate = 0.0f;
+        rate = 0.0F;
     } else {
         rate = aobj->framerate;
         aobj->curr_frame += aobj->framerate;
@@ -128,7 +128,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
     if ((aobj->flags & AOBJ_LOOP) && aobj->end_frame <= aobj->curr_frame) {
         if (aobj->rewind_frame < aobj->end_frame) {
             f32 x, y;
-            
+
             HSD_FObjStopAnimAll(aobj->fobj, obj, update_func, rate);
             y = aobj->end_frame - aobj->rewind_frame;
             x = aobj->curr_frame - aobj->rewind_frame;
@@ -137,7 +137,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
         } else {
             aobj->curr_frame = aobj->end_frame;
         }
-        rate = 0.0f;
+        rate = 0.0F;
         aobj->flags |= AOBJ_REWINDED;
     } else {
         aobj->flags &= 0xFBFFFFFF;
@@ -161,7 +161,8 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
     }
 }
 
-float fmod(float a, float b) {
+float fmod(float a, float b)
+{
     long long quotient;
     if (__fabs(b) > __fabs(a))
         return a;
@@ -181,7 +182,7 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
     if (aobjdesc != NULL) {
         aobj = HSD_AObjAlloc();
         HSD_AObjSetFlags(aobj, aobjdesc->flags);
-        HSD_AObjSetRewindFrame(aobj, 0.0f);
+        HSD_AObjSetRewindFrame(aobj, 0.0F);
         HSD_AObjSetEndFrame(aobj, aobjdesc->end_frame);
         fobjdesc = aobjdesc->fobjdesc;
         fobj = HSD_FObjLoadDesc(fobjdesc);
@@ -217,7 +218,7 @@ void HSD_AObjRemove(HSD_AObj* aobj)
 {
     if (!aobj)
         return;
-    
+
     if (aobj) {
         if (aobj->fobj)
             HSD_FObjRemoveAll(aobj->fobj);
@@ -226,22 +227,21 @@ void HSD_AObjRemove(HSD_AObj* aobj)
 
     if (aobj) {
         if (aobj->hsd_obj != NULL)
-            HSD_JObjUnref((HSD_JObj*)aobj->hsd_obj);
+            HSD_JObjUnref((HSD_JObj*) aobj->hsd_obj);
         aobj->hsd_obj = NULL;
     }
     HSD_AObjFree(aobj);
 }
 
-HSD_AObj* HSD_AObjAlloc(void) 
+HSD_AObj* HSD_AObjAlloc(void)
 {
-    HSD_AObj* aobj = (HSD_AObj*)HSD_ObjAlloc(&aobj_alloc_data);
-    if (aobj == NULL)
-    {
+    HSD_AObj* aobj = (HSD_AObj*) HSD_ObjAlloc(&aobj_alloc_data);
+    if (aobj == NULL) {
         __assert(lbl_804D5D08, 489, lbl_804D5D10);
     }
     memset(aobj, 0, sizeof(HSD_AObj));
     aobj->flags = AOBJ_NO_ANIM;
-    aobj->framerate = 1.0f;
+    aobj->framerate = 1.0F;
     return aobj;
 }
 
@@ -249,49 +249,49 @@ void HSD_AObjFree(HSD_AObj* aobj)
 {
     if (!aobj)
         return;
-    
-    HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*)aobj);
+
+    HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*) aobj);
 }
 
-void callbackForeachFunc(struct _HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg *arg)
+void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
-    switch(arg_type) {
-        case AOBJ_ARG_A:
-            (*func)(aobj);
-            return;
-        case AOBJ_ARG_AF:
-            (*func)(aobj, arg->f);
-            return;
-        case AOBJ_ARG_AV:
-            (*func)(aobj, arg->v);
-            return;
-        case AOBJ_ARG_AU:
-            (*func)(aobj, arg->d);
-            return;
-        case AOBJ_ARG_AO:
-            (*func)(aobj, obj);
-            return;
-        case AOBJ_ARG_AOT:
-            (*func)(aobj, obj, type);
-            return;
-        case AOBJ_ARG_AOF:
-            (*func)(aobj, obj, arg->f);
-            return;
-        case AOBJ_ARG_AOV:
-            (*func)(aobj, obj, arg->v);
-            return;
-        case AOBJ_ARG_AOU:
-            (*func)(aobj, obj, arg->d);
-            return;
-        case AOBJ_ARG_AOTF:
-            (*func)(aobj, obj, type, arg->f);
-            return;
-        case AOBJ_ARG_AOTV:
-            (*func)(aobj, obj, type, arg->v);
-            return;
-        case AOBJ_ARG_AOTU:
-            (*func)(aobj, obj, type, (u32)arg->d);
-            return;
+    switch (arg_type) {
+    case AOBJ_ARG_A:
+        (*func)(aobj);
+        return;
+    case AOBJ_ARG_AF:
+        (*func)(aobj, arg->f);
+        return;
+    case AOBJ_ARG_AV:
+        (*func)(aobj, arg->v);
+        return;
+    case AOBJ_ARG_AU:
+        (*func)(aobj, arg->d);
+        return;
+    case AOBJ_ARG_AO:
+        (*func)(aobj, obj);
+        return;
+    case AOBJ_ARG_AOT:
+        (*func)(aobj, obj, type);
+        return;
+    case AOBJ_ARG_AOF:
+        (*func)(aobj, obj, arg->f);
+        return;
+    case AOBJ_ARG_AOV:
+        (*func)(aobj, obj, arg->v);
+        return;
+    case AOBJ_ARG_AOU:
+        (*func)(aobj, obj, arg->d);
+        return;
+    case AOBJ_ARG_AOTF:
+        (*func)(aobj, obj, type, arg->f);
+        return;
+    case AOBJ_ARG_AOTV:
+        (*func)(aobj, obj, type, arg->v);
+        return;
+    case AOBJ_ARG_AOTU:
+        (*func)(aobj, obj, type, (u32) arg->d);
+        return;
     }
 }
 
@@ -315,8 +315,9 @@ void RObjForeachAnim(HSD_RObj* robj, s32 flags, void* r5, s32 r6, void* r7)
     }
 }
 
+#pragma push
 asm void func_803647DC(void)
-{
+{ // clang-format off
     nofralloc
     /* 803647DC 003613BC  7C 08 02 A6 */	mflr r0
     /* 803647E0 003613C0  90 01 00 04 */	stw r0, 4(r1)
@@ -409,10 +410,12 @@ lbl_80364908:
     /* 80364918 003614F8  38 21 00 48 */	addi r1, r1, 0x48
     /* 8036491C 003614FC  7C 08 03 A6 */	mtlr r0
     /* 80364920 00361500  4E 80 00 20 */	blr 
-}
+} // clang-format on
+#pragma pop
 
+#pragma push
 asm void func_80364924(void)
-{
+{ // clang-format off
     nofralloc
     /* 80364924 00361504  7C 08 02 A6 */	mflr r0
     /* 80364928 00361508  90 01 00 04 */	stw r0, 4(r1)
@@ -627,10 +630,12 @@ lbl_80364BF4:
     /* 80364BFC 003617DC  38 21 00 50 */	addi r1, r1, 0x50
     /* 80364C00 003617E0  7C 08 03 A6 */	mtlr r0
     /* 80364C04 003617E4  4E 80 00 20 */	blr 
-}
+} // clang-format on
+#pragma pop
 
+#pragma push
 asm void HSD_ForeachAnim(void*, ...)
-{
+{ // clang-format off
     nofralloc
     /* 80364C08 003617E8  7C 08 02 A6 */	mflr r0
     /* 80364C0C 003617EC  90 01 00 04 */	stw r0, 4(r1)
@@ -1127,13 +1132,9 @@ lbl_803652F8:
     /* 80365300 00361EE0  38 21 00 B0 */	addi r1, r1, 0xb0
     /* 80365304 00361EE4  7C 08 03 A6 */	mtlr r0
     /* 80365308 00361EE8  4E 80 00 20 */	blr 
-}
+} // clang-format on
+#pragma pop
 
-// The below peephole pragma is due to the presence of the 'asm' keyword disabling peephole optimization on functions following it.
-// Once that is removed, the pragma can be removed
-
-#pragma push
-#pragma peephole on
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate)
 {
     if (!aobj)
@@ -1166,7 +1167,6 @@ void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
         HSD_FObjReqAnimAll(aobj->fobj, frame);
     }
 }
-#pragma pop
 
 void _HSD_AObjForgetMemory(void)
 {
