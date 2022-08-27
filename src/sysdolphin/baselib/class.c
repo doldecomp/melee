@@ -309,7 +309,7 @@ inline HSD_ClassInfo* HSD_PushClassInfo(HSD_ClassInfo* class_info)
     return ret = class_info;
 }
 
-BOOL func_80382400(HSD_Obj* object, HSD_ClassInfo* class_info)
+inline BOOL hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* var_r29;
     HSD_ClassInfo* var_r28;
@@ -340,6 +340,11 @@ BOOL func_80382400(HSD_Obj* object, HSD_ClassInfo* class_info)
         return TRUE;
     }
     return FALSE;
+}
+
+BOOL hsdChangeClass(void* object, void* class_info)
+{
+    return hsdChangeClass_inline(object, class_info);
 }
 
 BOOL hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
@@ -385,10 +390,9 @@ BOOL hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
     return FALSE;
 }
 
-// (name based on KAR address)
-void func_80420FBC(HSD_ClassInfo* class_info, s32 arg1, s32 arg2)
+void class_set_flags(HSD_ClassInfo* class_info, s32 set, s32 reset)
 {
-    class_info->head.flags = class_info->head.flags & ~arg2 | arg1;
+    class_info->head.flags = class_info->head.flags & ~reset | set;
 }
 
 void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
@@ -404,15 +408,14 @@ void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
     class_info->amnesia(class_info);
     class_info->head.child = NULL;
     class_info->head.parent = NULL;
-    func_80420FBC(class_info, 0, 1);
+    class_set_flags(class_info, 0, 1);
 }
 
-// (name based on KAR address)
-void func_804211B4(const char* name, HSD_ClassInfo* class_info)
+void ForgetClassLibraryChild(const char* library_name, HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo** cur = &class_info->head.child;
     while (*cur != NULL) {
-        if (strcmp(name, (*cur)->head.library_name) == 0) {
+        if (strcmp(library_name, (*cur)->head.library_name) == 0) {
             ForgetClassLibraryReal(*cur);
             *cur = (*cur)->head.next;
         } else {
@@ -421,19 +424,19 @@ void func_804211B4(const char* name, HSD_ClassInfo* class_info)
     }
 }
 
-void hsdForgetClassLibrary(const char* name)
+void hsdForgetClassLibrary(const char* library_name)
 {
-    if (name == NULL) {
-        name = "sysdolphin_base_library";
+    if (library_name == NULL) {
+        library_name = "sysdolphin_base_library";
     }
     if (!(hsdClass.head.flags & 1)) {
         return;
     }
-    if (strcmp(name, hsdClass.head.library_name) == 0) {
+    if (strcmp(library_name, hsdClass.head.library_name) == 0) {
         lbl_804D7708 = 0;
         ForgetClassLibraryReal(&hsdClass);
     } else {
-        func_804211B4(name, &hsdClass);
+        ForgetClassLibraryChild(library_name, &hsdClass);
     }
 }
 
@@ -451,28 +454,27 @@ HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 static char unused5[] = "info_hash";
 #pragma pop
 
-// (name based on KAR address)
-void func_804212F4(HSD_ClassInfo* info, s32 indent)
+void DumpClassStat(HSD_ClassInfo* info, s32 level)
 {
-    OSReport_PrintSpaces(indent);
+    OSReport_PrintSpaces(level);
     OSReport("<class %s>\n", info->head.class_name);
-    OSReport_PrintSpaces(indent);
+    OSReport_PrintSpaces(level);
     OSReport("    info %d object %d nb_exist %d nb_peak %d\n",
         info->head.info_size, info->head.obj_size,
         info->head.nb_exist, info->head.nb_peak);
 }
 
-void func_80382854(HSD_ClassInfo* info, s32 arg1, s32 arg2)
+void hsdDumpClassStat(HSD_ClassInfo* info, BOOL recursive, s32 level)
 {
     if (info == NULL) {
-        func_80382854(&hsdClass, 1, arg2);
+        hsdDumpClassStat(&hsdClass, TRUE, level);
     } else if (info->head.flags & 1) {
-        func_804212F4(info, arg2);
-        if (arg1) {
-            arg2 += 2;
+        DumpClassStat(info, level);
+        if (recursive) {
+            level += 2;
             info = info->head.child;
             while (info != NULL) {
-                func_80382854(info, 1, arg2);
+                hsdDumpClassStat(info, TRUE, level);
                 info = info->head.next;
             }
         }
