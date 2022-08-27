@@ -1,44 +1,21 @@
-#include <dolphin/os/OSThread.h>
-#include <dolphin/types.h>
+#include <dolphin/os/OSMutex.h>
 
-#pragma push
-asm unk_t __OSUnlockAllMutex()
-{ // clang-format off
-    nofralloc
-/* 80347EDC 00344ABC  7C 08 02 A6 */	mflr r0
-/* 80347EE0 00344AC0  90 01 00 04 */	stw r0, 4(r1)
-/* 80347EE4 00344AC4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80347EE8 00344AC8  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80347EEC 00344ACC  3B E0 00 00 */	li r31, 0
-/* 80347EF0 00344AD0  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80347EF4 00344AD4  3B C3 00 00 */	addi r30, r3, 0
-/* 80347EF8 00344AD8  48 00 00 30 */	b lbl_80347F28
-lbl_80347EFC:
-/* 80347EFC 00344ADC  80 A4 00 10 */	lwz r5, 0x10(r4)
-/* 80347F00 00344AE0  38 64 00 00 */	addi r3, r4, 0
-/* 80347F04 00344AE4  28 05 00 00 */	cmplwi r5, 0
-/* 80347F08 00344AE8  40 82 00 0C */	bne lbl_80347F14
-/* 80347F0C 00344AEC  93 FE 02 F8 */	stw r31, 0x2f8(r30)
-/* 80347F10 00344AF0  48 00 00 08 */	b lbl_80347F18
-lbl_80347F14:
-/* 80347F14 00344AF4  93 E5 00 14 */	stw r31, 0x14(r5)
-lbl_80347F18:
-/* 80347F18 00344AF8  90 BE 02 F4 */	stw r5, 0x2f4(r30)
-/* 80347F1C 00344AFC  93 E4 00 0C */	stw r31, 0xc(r4)
-/* 80347F20 00344B00  93 E4 00 08 */	stw r31, 8(r4)
-/* 80347F24 00344B04  48 00 3B DD */	bl OSWakeupThread
-lbl_80347F28:
-/* 80347F28 00344B08  80 9E 02 F4 */	lwz r4, 0x2f4(r30)
-/* 80347F2C 00344B0C  28 04 00 00 */	cmplwi r4, 0
-/* 80347F30 00344B10  40 82 FF CC */	bne lbl_80347EFC
-/* 80347F34 00344B14  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80347F38 00344B18  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80347F3C 00344B1C  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80347F40 00344B20  7C 08 03 A6 */	mtlr r0
-/* 80347F44 00344B24  38 21 00 18 */	addi r1, r1, 0x18
-/* 80347F48 00344B28  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void __OSUnlockAllMutex(OSThread* thread)
+{
+    while (thread->mutexQueue.head != NULL) {
+        OSMutex* head = thread->mutexQueue.head;
+        OSMutex* next = head->link.next;
+
+        if (next == NULL)
+            thread->mutexQueue.tail = NULL;
+        else
+            next->link.prev = NULL;
+        thread->mutexQueue.head = next;
+        head->lock = 0;
+        head->thread = NULL;
+        OSWakeupThread(&head->queue);
+    }
+}
 
 #pragma push
 asm unk_t __OSCheckMutex()
