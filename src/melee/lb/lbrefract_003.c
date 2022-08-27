@@ -59,7 +59,7 @@ f32 atanf(f32);
 
 #if NON_MATCHING
 
-f32 func_80022D1C(f32 x)
+f32 acosf(f32 x)
 {
     f32 result = -(x * x - ONE);
     result = local_80022DF8(result) * x;
@@ -71,7 +71,7 @@ f32 func_80022D1C(f32 x)
 #else
 
 // https://decomp.me/scratch/TeCho // 120 (97%) @frank
-asm f32 func_80022D1C(f32)
+asm f32 acosf(f32)
 { // clang-format off
     nofralloc
 /* 80022D1C 0001F8FC  7C 08 02 A6 */	mflr r0

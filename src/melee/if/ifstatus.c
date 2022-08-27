@@ -464,7 +464,7 @@ extern f32 lbl_804DDA98;
 extern unk_t HSD_JObjClearFlagsAll(HSD_JObj*, s32);
 extern unk_t HSD_JObjSetFlagsAll(HSD_JObj*, s32);
 extern unk_t func_8022F3D8();
-extern unk_t func_8036F644();
+extern unk_t HSD_JObjRemoveAnim();
 
 #pragma push
 asm unk_t func_802F4EDC()
@@ -521,7 +521,7 @@ lbl_802F4F80:
 /* 802F4F88 002F1B68  50 60 0F 7C */	rlwimi r0, r3, 1, 0x1d, 0x1e
 /* 802F4F8C 002F1B6C  98 1F 00 10 */	stb r0, 0x10(r31)
 /* 802F4F90 002F1B70  7F C3 F3 78 */	mr r3, r30
-/* 802F4F94 002F1B74  48 07 A6 B1 */	bl func_8036F644
+/* 802F4F94 002F1B74  48 07 A6 B1 */	bl HSD_JObjRemoveAnim
 /* 802F4F98 002F1B78  3A F9 02 60 */	addi r23, r25, 0x260
 /* 802F4F9C 002F1B7C  80 B9 02 5C */	lwz r5, 0x25c(r25)
 /* 802F4FA0 002F1B80  80 D9 02 60 */	lwz r6, 0x260(r25)
@@ -1646,7 +1646,7 @@ lbl_802F5F6C:
 /* 802F5F74 002F2B54  50 60 0F 7C */	rlwimi r0, r3, 1, 0x1d, 0x1e
 /* 802F5F78 002F2B58  98 1C 00 10 */	stb r0, 0x10(r28)
 /* 802F5F7C 002F2B5C  7F C3 F3 78 */	mr r3, r30
-/* 802F5F80 002F2B60  48 07 96 C5 */	bl func_8036F644
+/* 802F5F80 002F2B60  48 07 96 C5 */	bl HSD_JObjRemoveAnim
 /* 802F5F84 002F2B64  3B FB 02 60 */	addi r31, r27, 0x260
 /* 802F5F88 002F2B68  80 BB 02 5C */	lwz r5, 0x25c(r27)
 /* 802F5F8C 002F2B6C  80 DB 02 60 */	lwz r6, 0x260(r27)

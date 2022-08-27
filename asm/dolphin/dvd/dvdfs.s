@@ -286,8 +286,8 @@ lbl_80337CA4:
 /* 80337CCC 003348AC  90 04 00 0C */	stw r0, 0xc(r4)
 /* 80337CD0 003348B0  4E 80 00 20 */	blr 
 
-.global func_80337CD4
-func_80337CD4:
+.global DVDClose
+DVDClose:
 /* 80337CD4 003348B4  7C 08 02 A6 */	mflr r0
 /* 80337CD8 003348B8  90 01 00 04 */	stw r0, 4(r1)
 /* 80337CDC 003348BC  94 21 FF F8 */	stwu r1, -8(r1)

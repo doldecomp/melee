@@ -87,7 +87,7 @@ void HSD_ShadowRemove(HSD_Shadow* shadow)
     }
     HSD_ShadowDeleteObject(shadow, 0);
     if (shadow->active) {
-        func_80363DC4(shadow->texture);
+        HSD_MObjDeleteShadowTexture(shadow->texture);
     }
     if (shadow->texture->imagedesc->img_ptr != NULL) {
         HSD_Free(shadow->texture->imagedesc->img_ptr);

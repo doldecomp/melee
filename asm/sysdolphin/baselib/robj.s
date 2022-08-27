@@ -1973,8 +1973,8 @@ HSD_RObjSetConstraintObj:
 /* 8037CCCC 003798AC  38 00 00 00 */	li r0, 0
 /* 8037CCD0 003798B0  90 1D 00 08 */	stw r0, 8(r29)
 lbl_8037CCD4:
-/* 8037CCD4 003798B4  3C 60 80 40 */	lis r3, lbl_80406708@ha
-/* 8037CCD8 003798B8  38 83 67 08 */	addi r4, r3, lbl_80406708@l
+/* 8037CCD4 003798B4  3C 60 80 40 */	lis r3, hsdJObj@ha
+/* 8037CCD8 003798B8  38 83 67 08 */	addi r4, r3, hsdJObj@l
 /* 8037CCDC 003798BC  38 7E 00 00 */	addi r3, r30, 0
 /* 8037CCE0 003798C0  48 00 58 F9 */	bl hsdObjIsDescendantOf
 /* 8037CCE4 003798C4  2C 03 00 00 */	cmpwi r3, 0

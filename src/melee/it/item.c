@@ -840,7 +840,7 @@ void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj //
     func_80390A70(item_gobj, lbl_804D7849, jobj);
 }
 
-extern HSD_DObj* func_80371BEC(HSD_JObj*);
+extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
 extern void* lbl_803F1F90[];
 
 // 0x8026814C //
@@ -858,7 +858,7 @@ void func_8026814C(HSD_GObj* item_gobj) // Setup item render objects? //
     var_r30 = item_gobj->hsd_obj;
     while (var_r30 != NULL)
     {
-        var_r29 = func_80371BEC(var_r30);
+        var_r29 = HSD_JObjGetDObj(var_r30);
     loop_2:
         if (var_r29 != NULL)
         {
@@ -1380,7 +1380,7 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
 
 extern void func_8000B804(HSD_JObj*, HSD_Joint*);
 extern void func_8000BA0C(HSD_JObj*, f32);
-extern void func_8036F6B4(HSD_JObj*);
+extern void HSD_JObjRemoveAnimAll(HSD_JObj*);
 
 // 0x80268D34 //
 // https://decomp.me/scratch/BiAE9 //
@@ -1394,7 +1394,7 @@ void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc) // 
 
     item_jobj = item_gobj->hsd_obj;
     item_data = item_gobj->user_data;
-    func_8036F6B4(item_jobj);
+    HSD_JObjRemoveAnimAll(item_jobj);
     temp_joint = item_data->xC8_joint;
     if (temp_joint != 0)
     {
@@ -1668,7 +1668,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
         {
             item_jobj1_2 = GetItemJObj(item_gobj);
             item_data2 = GetItemData(item_gobj);
-            func_8036F6B4(item_jobj1_2);
+            HSD_JObjRemoveAnimAll(item_jobj1_2);
             boneCopyArg2 = item_data2->xC8_joint;
             if (boneCopyArg2 != NULL)
             {
@@ -1717,7 +1717,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     }
     else
     {
-        func_8036F6B4(item_jobj2);
+        HSD_JObjRemoveAnimAll(item_jobj2);
         item_data->x52C_item_script = NULL;
     }
     item_data->itcb.xD14_callback_Anim = temp_r30->x4_callback_anim;

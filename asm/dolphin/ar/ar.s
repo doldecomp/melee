@@ -198,7 +198,7 @@ lbl_80350ED0:
 /* 80350F50 0034DB30  54 00 06 3E */	clrlwi r0, r0, 0x18
 /* 80350F54 0034DB34  50 60 04 2E */	rlwimi r0, r3, 0, 0x10, 0x17
 /* 80350F58 0034DB38  B0 05 00 1A */	sth r0, 0x1a(r5)
-/* 80350F5C 0034DB3C  48 00 00 B5 */	bl func_80351010
+/* 80350F5C 0034DB3C  48 00 00 B5 */	bl __ARChecksize
 /* 80350F60 0034DB40  38 00 00 01 */	li r0, 1
 /* 80350F64 0034DB44  90 0D BE 24 */	stw r0, __AR_init_flag@sda21(r13)
 /* 80350F68 0034DB48  7F E3 FB 78 */	mr r3, r31
@@ -252,8 +252,8 @@ lbl_80350FEC:
 /* 80351008 0034DBE8  7C 08 03 A6 */	mtlr r0
 /* 8035100C 0034DBEC  4E 80 00 20 */	blr 
 
-.global func_80351010
-func_80351010:
+.global __ARChecksize
+__ARChecksize:
 /* 80351010 0034DBF0  7C 08 02 A6 */	mflr r0
 /* 80351014 0034DBF4  3C 60 DE AE */	lis r3, 0xDEADBEEF@ha
 /* 80351018 0034DBF8  90 01 00 04 */	stw r0, 4(r1)

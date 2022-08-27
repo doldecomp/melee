@@ -79,7 +79,7 @@ void func_8013C4F0(HSD_GObj* fighterObj, s32 arg1, s32 arg2) {
         jobj->flags |= 0x03800000;
         HSD_JObjSetMtxDirty(jobj);
           
-        func_803709DC(fp->sa.purin.x223C, arg2, func_80390EB8(arg1), 0);
+        HSD_JObjDispAll(fp->sa.purin.x223C, arg2, func_80390EB8(arg1), 0);
     }
 
 }

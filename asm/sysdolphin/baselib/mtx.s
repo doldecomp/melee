@@ -834,8 +834,8 @@ lbl_80379F4C:
 /* 80379F64 00376B44  7C 08 03 A6 */	mtlr r0
 /* 80379F68 00376B48  4E 80 00 20 */	blr 
 
-.global func_80379F6C
-func_80379F6C:
+.global HSD_MtxGetTranslate
+HSD_MtxGetTranslate:
 /* 80379F6C 00376B4C  C0 03 00 0C */	lfs f0, 0xc(r3)
 /* 80379F70 00376B50  D0 04 00 00 */	stfs f0, 0(r4)
 /* 80379F74 00376B54  C0 03 00 1C */	lfs f0, 0x1c(r3)
@@ -1032,8 +1032,8 @@ func_8037A230:
 /* 8037A248 00376E28  7C 08 03 A6 */	mtlr r0
 /* 8037A24C 00376E2C  4E 80 00 20 */	blr 
 
-.global func_8037A250
-func_8037A250:
+.global HSD_MtxSRT
+HSD_MtxSRT:
 /* 8037A250 00376E30  7C 08 02 A6 */	mflr r0
 /* 8037A254 00376E34  90 01 00 04 */	stw r0, 4(r1)
 /* 8037A258 00376E38  94 21 FF 78 */	stwu r1, -0x88(r1)
@@ -1159,8 +1159,8 @@ lbl_8037A364:
 /* 8037A434 00377014  7C 08 03 A6 */	mtlr r0
 /* 8037A438 00377018  4E 80 00 20 */	blr 
 
-.global func_8037A43C
-func_8037A43C:
+.global HSD_MtxSRTQuat
+HSD_MtxSRTQuat:
 /* 8037A43C 0037701C  7C 08 02 A6 */	mflr r0
 /* 8037A440 00377020  90 01 00 04 */	stw r0, 4(r1)
 /* 8037A444 00377024  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -1232,8 +1232,8 @@ lbl_8037A508:
 /* 8037A544 00377124  7C 08 03 A6 */	mtlr r0
 /* 8037A548 00377128  4E 80 00 20 */	blr 
 
-.global func_8037A54C
-func_8037A54C:
+.global HSD_MtxScaledAdd
+HSD_MtxScaledAdd:
 /* 8037A54C 0037712C  C0 43 00 00 */	lfs f2, 0(r3)
 /* 8037A550 00377130  C0 04 00 00 */	lfs f0, 0(r4)
 /* 8037A554 00377134  EC 01 00 BA */	fmadds f0, f1, f2, f0
@@ -1284,8 +1284,8 @@ func_8037A54C:
 /* 8037A608 003771E8  D0 05 00 2C */	stfs f0, 0x2c(r5)
 /* 8037A60C 003771EC  4E 80 00 20 */	blr 
 
-.global func_8037A610
-func_8037A610:
+.global HSD_VecAlloc
+HSD_VecAlloc:
 /* 8037A610 003771F0  7C 08 02 A6 */	mflr r0
 /* 8037A614 003771F4  3C 60 80 4C */	lis r3, lbl_804C2310@ha
 /* 8037A618 003771F8  90 01 00 04 */	stw r0, 4(r1)
@@ -1307,8 +1307,8 @@ lbl_8037A644:
 /* 8037A654 00377234  7C 08 03 A6 */	mtlr r0
 /* 8037A658 00377238  4E 80 00 20 */	blr 
 
-.global func_8037A65C
-func_8037A65C:
+.global HSD_VecFree
+HSD_VecFree:
 /* 8037A65C 0037723C  7C 08 02 A6 */	mflr r0
 /* 8037A660 00377240  7C 64 1B 79 */	or. r4, r3, r3
 /* 8037A664 00377244  90 01 00 04 */	stw r0, 4(r1)
@@ -1323,8 +1323,8 @@ lbl_8037A67C:
 /* 8037A684 00377264  7C 08 03 A6 */	mtlr r0
 /* 8037A688 00377268  4E 80 00 20 */	blr 
 
-.global func_8037A68C
-func_8037A68C:
+.global HSD_MtxAlloc
+HSD_MtxAlloc:
 /* 8037A68C 0037726C  7C 08 02 A6 */	mflr r0
 /* 8037A690 00377270  3C 60 80 4C */	lis r3, lbl_804C233C@ha
 /* 8037A694 00377274  90 01 00 04 */	stw r0, 4(r1)
@@ -1346,8 +1346,8 @@ lbl_8037A6C0:
 /* 8037A6D0 003772B0  7C 08 03 A6 */	mtlr r0
 /* 8037A6D4 003772B4  4E 80 00 20 */	blr 
 
-.global func_8037A6D8
-func_8037A6D8:
+.global HSD_MtxFree
+HSD_MtxFree:
 /* 8037A6D8 003772B8  7C 08 02 A6 */	mflr r0
 /* 8037A6DC 003772BC  7C 64 1B 79 */	or. r4, r3, r3
 /* 8037A6E0 003772C0  90 01 00 04 */	stw r0, 4(r1)

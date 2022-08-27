@@ -769,8 +769,8 @@ lbl_80363D30:
 /* 80363D58 00360938  7C 08 03 A6 */	mtlr r0
 /* 80363D5C 0036093C  4E 80 00 20 */	blr 
 
-.global func_80363D60
-func_80363D60:
+.global HSD_MObjAddShadowTexture
+HSD_MObjAddShadowTexture:
 /* 80363D60 00360940  7C 08 02 A6 */	mflr r0
 /* 80363D64 00360944  90 01 00 04 */	stw r0, 4(r1)
 /* 80363D68 00360948  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -801,8 +801,8 @@ lbl_80363DB0:
 /* 80363DBC 0036099C  7C 08 03 A6 */	mtlr r0
 /* 80363DC0 003609A0  4E 80 00 20 */	blr 
 
-.global func_80363DC4
-func_80363DC4:
+.global HSD_MObjDeleteShadowTexture
+HSD_MObjDeleteShadowTexture:
 /* 80363DC4 003609A4  28 03 00 00 */	cmplwi r3, 0
 /* 80363DC8 003609A8  41 82 00 3C */	beq lbl_80363E04
 /* 80363DCC 003609AC  38 AD BF 84 */	addi r5, r13, lbl_804D7624@sda21

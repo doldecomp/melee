@@ -29,8 +29,8 @@ splGetHelmite:
 /* 80378A8C 0037566C  EC 26 02 7A */	fmadds f1, f6, f9, f0
 /* 80378A90 00375670  4E 80 00 20 */	blr 
 
-.global func_80378A94
-func_80378A94:
+.global splGetSplinePoint
+splGetSplinePoint:
 /* 80378A94 00375674  94 21 FF A8 */	stwu r1, -0x58(r1)
 /* 80378A98 00375678  C1 02 EC 58 */	lfs f8, lbl_804DE638@sda21(r2)
 /* 80378A9C 0037567C  FC 01 40 40 */	fcmpo cr0, f1, f8
@@ -342,8 +342,8 @@ lbl_80378F30:
 /* 80378F30 00375B10  38 21 00 58 */	addi r1, r1, 0x58
 /* 80378F34 00375B14  4E 80 00 20 */	blr 
 
-.global func_80378F38
-func_80378F38:
+.global splArcLengthGetParameter
+splArcLengthGetParameter:
 /* 80378F38 00375B18  7C 08 02 A6 */	mflr r0
 /* 80378F3C 00375B1C  90 01 00 04 */	stw r0, 4(r1)
 /* 80378F40 00375B20  94 21 FF 20 */	stwu r1, -0xe0(r1)
@@ -602,10 +602,10 @@ splArcLengthPoint:
 /* 803792DC 00375EBC  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 803792E0 00375EC0  3B C3 00 00 */	addi r30, r3, 0x43300000@l
 /* 803792E4 00375EC4  38 7F 00 00 */	addi r3, r31, 0
-/* 803792E8 00375EC8  4B FF FC 51 */	bl func_80378F38
+/* 803792E8 00375EC8  4B FF FC 51 */	bl splArcLengthGetParameter
 /* 803792EC 00375ECC  38 7E 00 00 */	addi r3, r30, 0
 /* 803792F0 00375ED0  38 9F 00 00 */	addi r4, r31, 0
-/* 803792F4 00375ED4  4B FF F7 A1 */	bl func_80378A94
+/* 803792F4 00375ED4  4B FF F7 A1 */	bl splGetSplinePoint
 /* 803792F8 00375ED8  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 803792FC 00375EDC  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 80379300 00375EE0  83 C1 00 18 */	lwz r30, 0x18(r1)
