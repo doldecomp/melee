@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80362400
-func_80362400:
+.global HSD_SetupChannelAll
+HSD_SetupChannelAll:
 /* 80362400 0035EFE0  7C 08 02 A6 */	mflr r0
 /* 80362404 0035EFE4  90 01 00 04 */	stw r0, 4(r1)
 /* 80362408 0035EFE8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -55,8 +55,8 @@ lbl_80362498:
 /* 803624A0 0035F080  7C 08 03 A6 */	mtlr r0
 /* 803624A4 0035F084  4E 80 00 20 */	blr 
 
-.global func_803624A8
-func_803624A8:
+.global HSD_StateSetNumTexGens
+HSD_StateSetNumTexGens:
 /* 803624A8 0035F088  7C 08 02 A6 */	mflr r0
 /* 803624AC 0035F08C  90 01 00 04 */	stw r0, 4(r1)
 /* 803624B0 0035F090  94 21 FF F8 */	stwu r1, -8(r1)
@@ -178,8 +178,8 @@ lbl_8036262C:
 /* 80362638 0035F218  7C 08 03 A6 */	mtlr r0
 /* 8036263C 0035F21C  4E 80 00 20 */	blr 
 
-.global func_80362640
-func_80362640:
+.global HSD_SetupTevStageAll
+HSD_SetupTevStageAll:
 /* 80362640 0035F220  7C 08 02 A6 */	mflr r0
 /* 80362644 0035F224  90 01 00 04 */	stw r0, 4(r1)
 /* 80362648 0035F228  94 21 FF E8 */	stwu r1, -0x18(r1)

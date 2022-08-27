@@ -62,12 +62,12 @@ HSD_PerfSetCPUTime:
 /* 8037E27C 0037AE5C  54 00 D9 7E */	srwi r0, r0, 5
 /* 8037E280 0037AE60  90 01 00 0C */	stw r0, 0xc(r1)
 /* 8037E284 0037AE64  3C 00 43 30 */	lis r0, 0x4330
-/* 8037E288 0037AE68  3C 60 80 40 */	lis r3, lbl_80407218@ha
+/* 8037E288 0037AE68  3C 60 80 40 */	lis r3, HSD_PerfCurrentStat@ha
 /* 8037E28C 0037AE6C  90 01 00 08 */	stw r0, 8(r1)
 /* 8037E290 0037AE70  C8 01 00 08 */	lfd f0, 8(r1)
 /* 8037E294 0037AE74  EC 00 10 28 */	fsubs f0, f0, f2
 /* 8037E298 0037AE78  EC 01 00 24 */	fdivs f0, f1, f0
-/* 8037E29C 0037AE7C  D0 03 72 18 */	stfs f0, lbl_80407218@l(r3)
+/* 8037E29C 0037AE7C  D0 03 72 18 */	stfs f0, HSD_PerfCurrentStat@l(r3)
 /* 8037E2A0 0037AE80  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8037E2A4 0037AE84  38 21 00 10 */	addi r1, r1, 0x10
 /* 8037E2A8 0037AE88  7C 08 03 A6 */	mtlr r0
@@ -88,14 +88,14 @@ HSD_PerfSetDrawTime:
 /* 8037E2D8 0037AEB8  C8 42 ED 38 */	lfd f2, lbl_804DE718@sda21(r2)
 /* 8037E2DC 0037AEBC  80 03 00 F8 */	lwz r0, 0x800000F8@l(r3)
 /* 8037E2E0 0037AEC0  3C 80 88 89 */	lis r4, 0x88888889@ha
-/* 8037E2E4 0037AEC4  3C 60 80 40 */	lis r3, lbl_80407218@ha
+/* 8037E2E4 0037AEC4  3C 60 80 40 */	lis r3, HSD_PerfCurrentStat@ha
 /* 8037E2E8 0037AEC8  54 00 F0 BE */	srwi r0, r0, 2
 /* 8037E2EC 0037AECC  38 84 88 89 */	addi r4, r4, 0x88888889@l
 /* 8037E2F0 0037AED0  7C 04 00 16 */	mulhwu r0, r4, r0
 /* 8037E2F4 0037AED4  54 00 D9 7E */	srwi r0, r0, 5
 /* 8037E2F8 0037AED8  90 01 00 0C */	stw r0, 0xc(r1)
 /* 8037E2FC 0037AEDC  3C 00 43 30 */	lis r0, 0x4330
-/* 8037E300 0037AEE0  38 63 72 18 */	addi r3, r3, lbl_80407218@l
+/* 8037E300 0037AEE0  38 63 72 18 */	addi r3, r3, HSD_PerfCurrentStat@l
 /* 8037E304 0037AEE4  90 01 00 08 */	stw r0, 8(r1)
 /* 8037E308 0037AEE8  C8 01 00 08 */	lfd f0, 8(r1)
 /* 8037E30C 0037AEEC  EC 00 10 28 */	fsubs f0, f0, f2
@@ -121,14 +121,14 @@ HSD_PerfSetTotalTime:
 /* 8037E350 0037AF30  C8 42 ED 38 */	lfd f2, lbl_804DE718@sda21(r2)
 /* 8037E354 0037AF34  80 03 00 F8 */	lwz r0, 0x800000F8@l(r3)
 /* 8037E358 0037AF38  3C 80 88 89 */	lis r4, 0x88888889@ha
-/* 8037E35C 0037AF3C  3C 60 80 40 */	lis r3, lbl_80407218@ha
+/* 8037E35C 0037AF3C  3C 60 80 40 */	lis r3, HSD_PerfCurrentStat@ha
 /* 8037E360 0037AF40  54 00 F0 BE */	srwi r0, r0, 2
 /* 8037E364 0037AF44  38 84 88 89 */	addi r4, r4, 0x88888889@l
 /* 8037E368 0037AF48  7C 04 00 16 */	mulhwu r0, r4, r0
 /* 8037E36C 0037AF4C  54 00 D9 7E */	srwi r0, r0, 5
 /* 8037E370 0037AF50  90 01 00 0C */	stw r0, 0xc(r1)
 /* 8037E374 0037AF54  3C 00 43 30 */	lis r0, 0x4330
-/* 8037E378 0037AF58  38 63 72 18 */	addi r3, r3, lbl_80407218@l
+/* 8037E378 0037AF58  38 63 72 18 */	addi r3, r3, HSD_PerfCurrentStat@l
 /* 8037E37C 0037AF5C  90 01 00 08 */	stw r0, 8(r1)
 /* 8037E380 0037AF60  C8 01 00 08 */	lfd f0, 8(r1)
 /* 8037E384 0037AF64  EC 00 10 28 */	fsubs f0, f0, f2
@@ -153,8 +153,8 @@ HSD_PerfCountEnvelopeBlending:
 /* 8037E3C4 0037AFA4  38 AD A8 A0 */	addi r5, r13, lbl_804D5F40@sda21
 /* 8037E3C8 0037AFA8  48 00 9E 59 */	bl __assert
 lbl_8037E3CC:
-/* 8037E3CC 0037AFAC  3C 60 80 40 */	lis r3, lbl_80407218@ha
-/* 8037E3D0 0037AFB0  38 63 72 18 */	addi r3, r3, lbl_80407218@l
+/* 8037E3CC 0037AFAC  3C 60 80 40 */	lis r3, HSD_PerfCurrentStat@ha
+/* 8037E3D0 0037AFB0  38 63 72 18 */	addi r3, r3, HSD_PerfCurrentStat@l
 /* 8037E3D4 0037AFB4  57 E0 10 3A */	slwi r0, r31, 2
 /* 8037E3D8 0037AFB8  7C 83 02 14 */	add r4, r3, r0
 /* 8037E3DC 0037AFBC  80 64 00 10 */	lwz r3, 0x10(r4)
@@ -207,8 +207,8 @@ lbl_80407188:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_80407218
-lbl_80407218:
+.global HSD_PerfCurrentStat
+HSD_PerfCurrentStat:
     .4byte NULL
     .4byte NULL
     .4byte NULL

@@ -2465,8 +2465,8 @@ lbl_80339F24:
 /* 80339F40 00336B20  7C 08 03 A6 */	mtlr r0
 /* 80339F44 00336B24  4E 80 00 20 */	blr 
 
-.global func_80339F48
-func_80339F48:
+.global DVDGetCurrentDiskID
+DVDGetCurrentDiskID:
 /* 80339F48 00336B28  3C 60 80 00 */	lis r3, 0x8000
 /* 80339F4C 00336B2C  4E 80 00 20 */	blr 
 

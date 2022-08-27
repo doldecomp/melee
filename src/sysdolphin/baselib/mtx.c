@@ -223,7 +223,7 @@ void func_80379C24(Mtx m, Vec* vec)
 }
 
 // These parameters may not be right
-void func_80379F6C(Mtx mat, Vec* vec)
+void HSD_MtxGetTranslate(Mtx mat, Vec* vec)
 {
     vec->x = mat[0][3];
     vec->y = mat[1][3];
@@ -314,7 +314,7 @@ void func_8037A230(Mtx arg0, Quaternion* arg1)
     PSMTXQuat(arg0, arg1);
 }
 
-void func_8037A250(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4)
+void HSD_MtxSRT(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4)
 {
     f32 vec1x_2;
     f32 vec1y_2;
@@ -365,7 +365,7 @@ void func_8037A250(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4)
     m[2][3] = vec3->z;
 }
 
-void func_8037A43C(Mtx arg0, Vec* arg1, Quaternion* arg2, Vec* arg3, Vec* arg4) {
+void HSD_MtxSRTQuat(Mtx arg0, Vec* arg1, Quaternion* arg2, Vec* arg3, Vec* arg4) {
     Mtx temp;
 
     PSMTXScale(arg0, arg1->x, arg1->y, arg1->z);
@@ -388,7 +388,7 @@ void func_8037A43C(Mtx arg0, Vec* arg1, Quaternion* arg2, Vec* arg3, Vec* arg4) 
 }
 
 // might be a fakematch?
-void func_8037A54C(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
+void HSD_MtxScaledAdd(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
 {
     f32 *arr0 = (f32*)&arg0[0][0];
     f32 *arr1 = (f32*)&arg1[0][0];
@@ -410,7 +410,7 @@ void func_8037A54C(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
     *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
 }
 
-void* func_8037A610(void)
+void* HSD_VecAlloc(void)
 {
     void* vec = HSD_ObjAlloc(&lbl_804C2310);
     
@@ -421,14 +421,14 @@ void* func_8037A610(void)
     return vec;
 }
 
-void func_8037A65C(void* arg0)
+void HSD_VecFree(void* arg0)
 {
     if (arg0 != NULL) {
         HSD_ObjFree(&lbl_804C2310, arg0);
     }
 }
 
-void* func_8037A68C(void)
+void* HSD_MtxAlloc(void)
 {
     void* mtx;
 
@@ -439,7 +439,7 @@ void* func_8037A68C(void)
     return mtx;
 }
 
-void func_8037A6D8(void* arg0)
+void HSD_MtxFree(void* arg0)
 {
     if (arg0 != NULL) {
         HSD_ObjFree(&lbl_804C233C, arg0);

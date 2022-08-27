@@ -110,7 +110,7 @@ float lbvector_Angle(Vec *a, Vec *b)
         if (cosine < -1.0f)
             cosine = -1.0f;
 
-        return func_80022D1C(cosine); // acos
+        return acosf(cosine); // acos
     }
     return 0.0f;
 }
@@ -127,7 +127,7 @@ float lbvector_AngleXY(Vec* a, Vec* b)
             cosine = 1.0f;
         if (cosine < -1.0f)
             cosine = -1.0f;
-        return func_80022D1C(cosine); // acos
+        return acosf(cosine); // acos
     }
     return 0.0f;
 }
