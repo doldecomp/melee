@@ -1609,9 +1609,11 @@ typedef struct _Fighter {
     /* 0x1A6C */ f32 x1A6C;
     /* 0x1A70 */ Vec x1A70;
     /* 0x1A7C */ Vec x1A7C;
-    u8 filler_x1A7C[0x1A98-0x1A88];
+    u8 filler_x1A7C[0x1A94-0x1A88];
+    /* 0x1A94 */ u32 x1A94;
     /* 0x1A98 */ u32 x1A98;
-    u8 filler_x1A9C[0x2004-0x1A9C];
+    /* 0x1A9C */ s32 x1A9C;
+    u8 filler_x1A9C[0x2004-0x1AA0];
     /* 0x2008 */ s32 x2004;
     /* 0x2008 */ s32 x2008;
     /* 0x200C */ s32 x200C;
@@ -1756,14 +1758,17 @@ typedef struct _Fighter {
     /* 0x221E */ UnkFlagStruct x221E_flag;
     /* 0x221F */ UnkFlagStruct x221F_flag;
                 struct {
-                    struct {
-                        u8 b0 : 3;
-                        u8 b3 : 1;
-                        u8 b4 : 1;
-                        u8 b5 : 1;
-                        u8 b6 : 1;
-                        u8 b7 : 1;
-                    } bits;
+                    union {
+                        struct {
+                            u8 b0 : 3;
+                            u8 b3 : 1;
+                            u8 b4 : 1;
+                            u8 b5 : 1;
+                            u8 b6 : 1;
+                            u8 b7 : 1;
+                        } bits;
+                        u8 flags;
+                    };
                 } x2220_flag;
     /* 0x2221 */ UnkFlagStruct x2221_flag;
     /* 0x2222 */ UnkFlagStruct x2222_flag;
