@@ -13,8 +13,8 @@ __OSInitAudioSystem:
 /* 8034454C 0034112C  38 A0 00 80 */	li r5, 0x80
 /* 80344550 00341130  38 63 FF 80 */	addi r3, r3, -128
 /* 80344554 00341134  4B CB EC A1 */	bl memcpy
-/* 80344558 00341138  3C 60 80 40 */	lis r3, lbl_80401B70@ha
-/* 8034455C 0034113C  38 83 1B 70 */	addi r4, r3, lbl_80401B70@l
+/* 80344558 00341138  3C 60 80 40 */	lis r3, DSPInitCode@ha
+/* 8034455C 0034113C  38 83 1B 70 */	addi r4, r3, DSPInitCode@l
 /* 80344560 00341140  3C 60 81 00 */	lis r3, 0x8100
 /* 80344564 00341144  38 A0 00 80 */	li r5, 0x80
 /* 80344568 00341148  4B CB EC 8D */	bl memcpy
@@ -195,8 +195,8 @@ lbl_803447A8:
 
 .section .data
     .balign 8
-.global lbl_80401B70
-lbl_80401B70:
+.global DSPInitCode
+DSPInitCode:
     .4byte 0x029F0010
     .4byte 0x029F0033
     .4byte 0x029F0034

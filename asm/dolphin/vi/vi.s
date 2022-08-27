@@ -1806,8 +1806,8 @@ lbl_80350264:
 /* 8035028C 0034CE6C  7C 08 03 A6 */	mtlr r0
 /* 80350290 0034CE70  4E 80 00 20 */	blr 
 
-.global func_80350294
-func_80350294:
+.global VIGetCurrentLine
+VIGetCurrentLine:
 /* 80350294 0034CE74  7C 08 02 A6 */	mflr r0
 /* 80350298 0034CE78  90 01 00 04 */	stw r0, 4(r1)
 /* 8035029C 0034CE7C  94 21 FF F0 */	stwu r1, -0x10(r1)

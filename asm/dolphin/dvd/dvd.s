@@ -2200,8 +2200,8 @@ lbl_80339BD4:
 /* 80339BF0 003367D0  38 21 00 18 */	addi r1, r1, 0x18
 /* 80339BF4 003367D4  4E 80 00 20 */	blr 
 
-.global func_80339BF8
-func_80339BF8:
+.global DVDSetAutoInvalidation
+DVDSetAutoInvalidation:
 /* 80339BF8 003367D8  80 0D A4 F0 */	lwz r0, lbl_804D5B90@sda21(r13)
 /* 80339BFC 003367DC  90 6D A4 F0 */	stw r3, lbl_804D5B90@sda21(r13)
 /* 80339C00 003367E0  7C 03 03 78 */	mr r3, r0
@@ -2460,8 +2460,8 @@ func_80339F48:
 /* 80339F48 00336B28  3C 60 80 00 */	lis r3, 0x8000
 /* 80339F4C 00336B2C  4E 80 00 20 */	blr 
 
-.global func_80339F50
-func_80339F50:
+.global DVDCheckDisk
+DVDCheckDisk:
 /* 80339F50 00336B30  7C 08 02 A6 */	mflr r0
 /* 80339F54 00336B34  90 01 00 04 */	stw r0, 4(r1)
 /* 80339F58 00336B38  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2503,15 +2503,12 @@ lbl_80339FBC:
 /* 80339FD4 00336BB4  7C 04 00 2E */	lwzx r0, r4, r0
 /* 80339FD8 00336BB8  7C 09 03 A6 */	mtctr r0
 /* 80339FDC 00336BBC  4E 80 04 20 */	bctr 
-.global lbl_80339FE0
 lbl_80339FE0:
 /* 80339FE0 00336BC0  3B E0 00 01 */	li r31, 1
 /* 80339FE4 00336BC4  48 00 00 34 */	b lbl_8033A018
-.global lbl_80339FE8
 lbl_80339FE8:
 /* 80339FE8 00336BC8  3B E0 00 00 */	li r31, 0
 /* 80339FEC 00336BCC  48 00 00 2C */	b lbl_8033A018
-.global lbl_80339FF0
 lbl_80339FF0:
 /* 80339FF0 00336BD0  3C 80 CC 00 */	lis r4, 0xCC006000@ha
 /* 80339FF4 00336BD4  38 84 60 00 */	addi r4, r4, 0xCC006000@l
@@ -2534,8 +2531,8 @@ lbl_8033A018:
 /* 8033A02C 00336C0C  7C 08 03 A6 */	mtlr r0
 /* 8033A030 00336C10  4E 80 00 20 */	blr 
 
-.global func_8033A034
-func_8033A034:
+.global __DVDPrepareResetAsync
+__DVDPrepareResetAsync:
 /* 8033A034 00336C14  7C 08 02 A6 */	mflr r0
 /* 8033A038 00336C18  90 01 00 04 */	stw r0, 4(r1)
 /* 8033A03C 00336C1C  94 21 FF E0 */	stwu r1, -0x20(r1)
