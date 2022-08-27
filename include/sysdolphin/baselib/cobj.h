@@ -127,7 +127,7 @@ void HSD_CObjEraseScreen(HSD_CObj *cobj, s32 enable_color, s32 enable_alpha, s32
 void HSD_CObjRemoveAnim(HSD_CObj *cobj);
 HSD_WObj *HSD_CObjGetEyePositionWObj(HSD_CObj *cobj);
 HSD_WObj *HSD_CObjGetInterestWObj(HSD_CObj *cobj);
-void func_8036A194(HSD_CObj *cobj, f32, f32, f32, f32);
+void HSD_CObjSetOrtho(HSD_CObj *cobj, f32, f32, f32, f32);
 unk_t func_8036A590(cobj_Unk1 *);
 HSD_CObj *HSD_CObjAlloc();
 void func_80368718(HSD_CObj *cobj, s32 *);
@@ -138,8 +138,8 @@ void func_80369FC8(HSD_CObj *cobj, f32);
 void func_80369FF4(HSD_CObj *cobj, s16 *);
 void func_8036A058(HSD_CObj *cobj, s16 *);
 void func_8036A144(u32);
-BOOL func_80368458(HSD_Obj *, cobj_UnkCallback1);
-void func_80368608();
+BOOL HSD_CObjSetCurrent(HSD_Obj *, cobj_UnkCallback1);
+void HSD_CObjEndCurrent();
 void func_803695F0(unk_t);
 
 #endif

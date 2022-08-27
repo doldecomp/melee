@@ -692,7 +692,7 @@ f32 func_8026B960(register HSD_GObj* item_gobj)
 
 extern void func_8000B804(HSD_JObj*, HSD_Joint*);
 extern void func_8000BA0C(HSD_JObj*, f32);
-extern void func_8036F6B4(HSD_JObj*);
+extern void HSD_JObjRemoveAnimAll(HSD_JObj*);
 
 inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item* item_data, HSD_JObj* item_jobj2) // Literally what //
 {
@@ -707,7 +707,7 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item*
         item_data->xD0_itemStateDesc = itemStateDesc;
         if (item_data->xD0_itemStateDesc != NULL)
         {
-            func_8036F6B4(item_jobj2);
+            HSD_JObjRemoveAnimAll(item_jobj2);
             temp_joint = item_data->xC8_joint;
             if (temp_joint != NULL)
             {
@@ -729,7 +729,7 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item*
         func_802799E4(item_gobj);
         return;
     }
-    func_8036F6B4(item_jobj2);
+    HSD_JObjRemoveAnimAll(item_jobj2);
     item_data->x52C_item_script = NULL;
 }
 
@@ -765,7 +765,7 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2)
             item_data->xD0_itemStateDesc = itemStateDesc;
             if (item_data->xD0_itemStateDesc != NULL)
             {
-                func_8036F6B4(item_jobj2);
+                HSD_JObjRemoveAnimAll(item_jobj2);
                 if (item_data->xC8_joint != NULL)
                 {
                     item_jobj = (item_jobj2 == NULL) ? NULL : item_jobj2->child;
@@ -783,7 +783,7 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2)
             func_802799E4(item_gobj);
             return;
         }
-        func_8036F6B4(item_jobj2);
+        HSD_JObjRemoveAnimAll(item_jobj2);
         item_data->x52C_item_script = NULL;
     }
 }

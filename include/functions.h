@@ -880,7 +880,7 @@ f32 splGetHelmite(f32, f32, f32, f32, f32, f32);
 
 void splArcLengthPoint(Vec *, struct _HSD_Spline *, f32);
 void func_80379310();
-void func_8037A250();
+void HSD_MtxSRT();
 
 void *func_8037ABC8(struct _HSD_ObjAllocData *data);
 void func_8037AD20(struct _HSD_ObjAllocData *data, struct _HSD_ObjAllocLink *obj);

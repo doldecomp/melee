@@ -1,6 +1,6 @@
 #include <sysdolphin/baselib/util.h>
 
-float lbl_80406DF0[] = {
+float HSD_identityMtx[] = {
     1.0f,
     0,
     0,
@@ -35,7 +35,7 @@ u32 func_8037A7EC(u32 c) {
     return ret;
 }
 
-s32 func_8037A8AC(u32 arg0) {
+s32 HSD_Index2PosNrmMtx(u32 arg0) {
     switch (arg0) {
         case 0:
             return 0;

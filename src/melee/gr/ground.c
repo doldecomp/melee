@@ -3906,7 +3906,7 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* arg2, f32 arg8)
     f32 phi_f2;
     f32 phi_f1;
 
-    func_80378A94(arg1, arg0);
+    splGetSplinePoint(arg1, arg0);
     func_8000E9F0(&sp30, arg0, arg8);
     lbvector_Normalize(&sp30);
     phi_f1 = sp30.y;

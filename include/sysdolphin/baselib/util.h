@@ -8,9 +8,9 @@
 // functions
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest);
 u32 func_8037A7EC(u32 arg0);
-s32 func_8037A8AC(u32 arg0);
+s32 HSD_Index2PosNrmMtx(u32 arg0);
 
 // variables
-extern float lbl_80406DF0[];
+extern float HSD_identityMtx[];
 
 #endif // _UTIL_H_
