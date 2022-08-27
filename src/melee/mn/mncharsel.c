@@ -1,6 +1,6 @@
 
-#include <src/melee/mn/mncharsel.h>
-#include <src/melee/mn/mntext.h>
+#include <melee/mn/mncharsel.h>
+#include <melee/mn/mntext.h>
 
 extern GameRules* func_8015CC34();
 extern s32 lbLang_IsSavedLanguageJP();

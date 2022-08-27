@@ -1,4 +1,4 @@
-#include <ft_unknown_006.h>
+#include <melee/ft/ft_unknown_006.h>
 
 #include "fighter.h"
 #include "ftcommon.h"
@@ -13,11 +13,7 @@ extern s32 func_800C06B4(struct _Fighter*);
 s32 func_800877F8(HSD_GObj* fighterObj, s32 arg1)
 {
     Fighter* fp = getFighter(fighterObj);
-    if (fp->input.x65C_heldInputs & arg1) {
-        return 1;
-    } else {
-        return 0;
-    }
+    return (fp->input.x65C_heldInputs & arg1) ? TRUE : FALSE;
 }
 
 s32 func_80087818(HSD_GObj* fighterObj, s32 arg1)
@@ -178,9 +174,7 @@ void func_80087AC0(HSD_GObj* fighterObj, s32 arg1)
 
 s32 func_80087AEC(HSD_GObj* fighterObj)
 {
-    Fighter* fp;
-
-    fp = fighterObj->user_data;
+    Fighter* fp = fighterObj->user_data;
     if ((fp->x34_scale.y != fp->x34_scale.x) || ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) || (fp->x197C != 0))) {
         return 1;
     }
@@ -193,8 +187,7 @@ s32 func_80087B34(HSD_GObj* fighter_gobj)
     f32* atk_shield_kb_y;
     f32 fVar1;
     f32 fVar2;
-    Fighter* fp;
-    fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(fighter_gobj);
     atk_shield_kb_x = fp->x98_atk_shield_kb.x;
     fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) + (fp->x80_self_vel.y * fp->x80_self_vel.y);
     atk_shield_kb_y = &fp->x98_atk_shield_kb.y;
@@ -219,18 +212,16 @@ void func_80087BAC(HSD_GObj* fighterObj, s32 arg1)
 
 void func_80087BC0(HSD_GObj* fighterObj, s8 arg1)
 {
-    Fighter* fp;
     u64 var0;
-    fp = getFighter(fighterObj);
+    Fighter* fp = getFighter(fighterObj);
     var0 = fp->x1A98;
     func_800A101C(fp, arg1, var0, fp->x1A9C);
 }
 
 void func_80087BEC(HSD_GObj* fighterObj, u8 arg1)
 {
-    Fighter* fp;
     u64 var0;
-    fp = getFighter(fighterObj);
+    Fighter* fp = getFighter(fighterObj);
     var0 = fp->x1A94;
     func_800A101C(fp, var0, arg1, fp->x1A9C);
 }
@@ -381,29 +372,6 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
                 sfx_id -= 0x66;
             }
         }
-        /*
-        ftKind = fighter->x4_fighterKind;
-        if (ftKind < 0xC)
-        {
-            if (ftKind < 0xA)
-            {
-                if (((!arg1) && !arg1) && !arg1)
-                {
-                }
-            }
-            else
-            {
-                if (((0x1FBFD <= sfx_id) && (sfx_id <= 0x1FC62)) && (func_80080144(fighter) == 1))
-                {
-                    sfx_id += 0x66;
-                }
-                if (((0x1FC63 <= sfx_id) && (sfx_id <= 0x1FCC8)) && (func_80080144(fighter) != 1))
-                {
-                    sfx_id -= 0x66;
-                }
-            }
-        }
-        */
     case 6:
     case 7:
     case 8:
@@ -441,6 +409,7 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
     return sfx_id;
 }
 #else
+#pragma push
 asm s32 func_80087D0C(Fighter* fighter, s32 arg1)
 {
     nofralloc
@@ -684,8 +653,7 @@ lbl_8008803C:
 }
 #endif
 
-#pragma push
-#pragma peephole on
+#pragma pop
 
 void func_8008805C(Fighter* arg0, s32 arg1)
 {

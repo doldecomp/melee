@@ -1,8 +1,6 @@
 #ifndef _ftunk006_h_
 #define _ftunk006_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 
 #include <sysdolphin/baselib/gobj.h>
