@@ -23,5 +23,6 @@ typedef struct OSCalendarTime
 
 void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td);
 s64 OSGetTime(void);
+OSTick OSGetTick(void);
 
 #endif

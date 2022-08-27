@@ -1,6 +1,7 @@
 #ifndef DOLPHIN_GX_GXINIT_GXINIT_001_H
 #define DOLPHIN_GX_GXINIT_GXINIT_001_H
 
+#include <dolphin/gx/__types.h>
 #include <dolphin/gx/types.h>
 
 /* 004DADF8 */ extern const f64 lbl_804DE218;

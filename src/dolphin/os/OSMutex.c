@@ -1,44 +1,26 @@
-.include "macros.inc"
+#include <dolphin/os/OSMutex.h>
 
-.section .text  # 0x80342E94 - 0x803B7240 
+void __OSUnlockAllMutex(OSThread* thread)
+{
+    while (thread->mutexQueue.head != NULL) {
+        OSMutex* head = thread->mutexQueue.head;
+        OSMutex* next = head->link.next;
 
-.global __OSUnlockAllMutex
-__OSUnlockAllMutex:
-/* 80347EDC 00344ABC  7C 08 02 A6 */	mflr r0
-/* 80347EE0 00344AC0  90 01 00 04 */	stw r0, 4(r1)
-/* 80347EE4 00344AC4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80347EE8 00344AC8  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80347EEC 00344ACC  3B E0 00 00 */	li r31, 0
-/* 80347EF0 00344AD0  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80347EF4 00344AD4  3B C3 00 00 */	addi r30, r3, 0
-/* 80347EF8 00344AD8  48 00 00 30 */	b lbl_80347F28
-lbl_80347EFC:
-/* 80347EFC 00344ADC  80 A4 00 10 */	lwz r5, 0x10(r4)
-/* 80347F00 00344AE0  38 64 00 00 */	addi r3, r4, 0
-/* 80347F04 00344AE4  28 05 00 00 */	cmplwi r5, 0
-/* 80347F08 00344AE8  40 82 00 0C */	bne lbl_80347F14
-/* 80347F0C 00344AEC  93 FE 02 F8 */	stw r31, 0x2f8(r30)
-/* 80347F10 00344AF0  48 00 00 08 */	b lbl_80347F18
-lbl_80347F14:
-/* 80347F14 00344AF4  93 E5 00 14 */	stw r31, 0x14(r5)
-lbl_80347F18:
-/* 80347F18 00344AF8  90 BE 02 F4 */	stw r5, 0x2f4(r30)
-/* 80347F1C 00344AFC  93 E4 00 0C */	stw r31, 0xc(r4)
-/* 80347F20 00344B00  93 E4 00 08 */	stw r31, 8(r4)
-/* 80347F24 00344B04  48 00 3B DD */	bl OSWakeupThread
-lbl_80347F28:
-/* 80347F28 00344B08  80 9E 02 F4 */	lwz r4, 0x2f4(r30)
-/* 80347F2C 00344B0C  28 04 00 00 */	cmplwi r4, 0
-/* 80347F30 00344B10  40 82 FF CC */	bne lbl_80347EFC
-/* 80347F34 00344B14  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80347F38 00344B18  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80347F3C 00344B1C  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80347F40 00344B20  7C 08 03 A6 */	mtlr r0
-/* 80347F44 00344B24  38 21 00 18 */	addi r1, r1, 0x18
-/* 80347F48 00344B28  4E 80 00 20 */	blr 
+        if (next == NULL)
+            thread->mutexQueue.tail = NULL;
+        else
+            next->link.prev = NULL;
+        thread->mutexQueue.head = next;
+        head->lock = 0;
+        head->thread = NULL;
+        OSWakeupThread(&head->queue);
+    }
+}
 
-.global __OSCheckMutex
-__OSCheckMutex:
+#pragma push
+asm unk_t __OSCheckMutex()
+{ // clang-format off
+    nofralloc
 /* 80347F4C 00344B2C  80 83 00 00 */	lwz r4, 0(r3)
 /* 80347F50 00344B30  38 E0 00 00 */	li r7, 0
 /* 80347F54 00344B34  28 04 00 00 */	cmplwi r4, 0
@@ -113,9 +95,13 @@ lbl_80348030:
 lbl_80348044:
 /* 80348044 00344C24  38 60 00 01 */	li r3, 1
 /* 80348048 00344C28  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSCheckDeadLock
-__OSCheckDeadLock:
+#pragma push
+asm unk_t __OSCheckDeadLock()
+{ // clang-format off
+    nofralloc
 /* 8034804C 00344C2C  80 83 02 F0 */	lwz r4, 0x2f0(r3)
 /* 80348050 00344C30  48 00 00 18 */	b lbl_80348068
 lbl_80348054:
@@ -134,9 +120,13 @@ lbl_80348068:
 lbl_8034807C:
 /* 8034807C 00344C5C  38 60 00 00 */	li r3, 0
 /* 80348080 00344C60  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSCheckMutexes
-__OSCheckMutexes:
+#pragma push
+asm unk_t __OSCheckMutexes()
+{ // clang-format off
+    nofralloc
 /* 80348084 00344C64  7C 08 02 A6 */	mflr r0
 /* 80348088 00344C68  90 01 00 04 */	stw r0, 4(r1)
 /* 8034808C 00344C6C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -171,3 +161,5 @@ lbl_803480E0:
 /* 803480EC 00344CCC  7C 08 03 A6 */	mtlr r0
 /* 803480F0 00344CD0  38 21 00 18 */	addi r1, r1, 0x18
 /* 803480F4 00344CD4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

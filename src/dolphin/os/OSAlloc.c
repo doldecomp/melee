@@ -2,14 +2,14 @@
 
 #include <dolphin/os/os.h>
 
-extern void *ArenaEnd;
-extern void *ArenaStart;
-extern int NumHeaps;
-extern Heap *HeapArray;
-extern volatile OSHeapHandle __OSCurrHeap;// = -1;
+static Heap* HeapArray;
+static int NumHeaps;
+static void* ArenaStart;
+static void* ArenaEnd;
+volatile OSHeapHandle __OSCurrHeap = -1;
 
-#define InRange(addr, start, end) ((u8 *)(start) <= (u8 *)(addr) && (u8 *)(addr) < (u8 *)(end))
-#define OFFSET(addr, align) (((uintptr_t)(addr) & ((align)-1)))
+#define InRange(addr, start, end) ((u8*) (start) <= (u8*) (addr) && (u8*) (addr) < (u8*) (end))
+#define OFFSET(addr, align) (((uintptr_t) (addr) & ((align) -1)))
 
 #define ALIGNMENT 32
 #define MINOBJSIZE 64
@@ -51,7 +51,7 @@ HeapCell* DLInsert(HeapCell* list, HeapCell* cell, void* unused /* needed to mat
     cell->prev = before;
     if (after != NULL) {
         after->prev = cell;
-        if ((u8*)cell + cell->size == (u8*)after) {
+        if ((u8*) cell + cell->size == (u8*) after) {
             cell->size += after->size;
             after = after->next;
             cell->next = after;
@@ -61,7 +61,7 @@ HeapCell* DLInsert(HeapCell* list, HeapCell* cell, void* unused /* needed to mat
     }
     if (before != NULL) {
         before->next = cell;
-        if ((u8*)before + before->size == (u8*)cell) {
+        if ((u8*) before + before->size == (u8*) cell) {
             before->size += cell->size;
             before->next = after;
             if (after != NULL)
@@ -82,7 +82,7 @@ void* OSAllocFromHeap(OSHeapHandle heap, u32 size)
 
     // find first cell with enough capacity
     for (cell = hd->free; cell != NULL; cell = cell->next) {
-        if (sizeAligned <= (s32)cell->size)
+        if (sizeAligned <= (s32) cell->size)
             break;
     }
     if (cell == NULL)
@@ -95,7 +95,7 @@ void* OSAllocFromHeap(OSHeapHandle heap, u32 size)
     } else {
         // remove this cell from the free list and make a new cell out of the
         // remaining space
-        HeapCell* newcell = (void*)((u8*)cell + sizeAligned);
+        HeapCell* newcell = (void*) ((u8*) cell + sizeAligned);
         cell->size = sizeAligned;
         newcell->size = leftoverSpace;
         newcell->prev = cell->prev;
@@ -111,12 +111,12 @@ void* OSAllocFromHeap(OSHeapHandle heap, u32 size)
     // add the cell to the beginning of the allocated list
     hd->allocated = DLAddFront(hd->allocated, cell);
 
-    return (u8*)cell + 32;
+    return (u8*) cell + 32;
 }
 
 void OSFreeToHeap(OSHeapHandle heap, void* ptr)
 {
-    HeapCell* cell = (void*)((u8*)ptr - 32);
+    HeapCell* cell = (void*) ((u8*) ptr - 32);
     Heap* hd = &HeapArray[heap];
     HeapCell* list = hd->allocated;
 
@@ -139,3 +139,117 @@ OSHeapHandle OSSetCurrentHeap(OSHeapHandle heap)
     __OSCurrHeap = heap;
     return old;
 }
+
+void* OSInitAlloc(void* arenaStart, void* arenaEnd, int maxHeaps)
+{
+    u32 totalSize = maxHeaps * sizeof(Heap);
+    int i;
+
+    HeapArray = arenaStart;
+    NumHeaps = maxHeaps;
+
+    for (i = 0; i < NumHeaps; i++) {
+        Heap* heap = &HeapArray[i];
+
+        heap->size = -1;
+        heap->free = heap->allocated = NULL;
+    }
+
+    __OSCurrHeap = -1;
+
+    arenaStart = (u8*) HeapArray + totalSize;
+    arenaStart = (void*) OSRoundUp32B(arenaStart);
+
+    ArenaStart = arenaStart;
+    ArenaEnd = (void*) OSRoundDown32B(arenaEnd);
+
+    return arenaStart;
+}
+
+OSHeapHandle OSCreateHeap(void* start, void* end)
+{
+    int i;
+    HeapCell* cell = (void*) OSRoundUp32B(start);
+
+    end = (void*) OSRoundDown32B(end);
+    for (i = 0; i < NumHeaps; i++) {
+        Heap* hd = &HeapArray[i];
+
+        if (hd->size < 0) {
+            hd->size = (u8*) end - (u8*) cell;
+            cell->prev = NULL;
+            cell->next = NULL;
+            cell->size = hd->size;
+            hd->free = cell;
+            hd->allocated = NULL;
+            return i;
+        }
+    }
+    return -1;
+}
+
+void OSDestroyHeap(size_t idx)
+{
+    *(s32*) &HeapArray[idx] = -1;
+}
+
+size_t OSCheckHeap(OSHeapHandle heap)
+{
+    Heap* hd;
+    HeapCell* cell;
+    int total = 0;
+    int totalFree = 0;
+
+    // clang-format off
+#define CHECK(line, condition)                                      \
+    if (!(condition)) {                                             \
+        OSReport("OSCheckHeap: Failed " #condition " in %d", line); \
+        return -1;                                                  \
+    }
+
+    CHECK(893, HeapArray)
+    CHECK(894, 0 <= heap && heap < NumHeaps)
+    hd = &HeapArray[heap];
+    CHECK(897, 0 <= hd->size)
+    CHECK(899, hd->allocated == NULL || hd->allocated->prev == NULL)
+
+    for (cell = hd->allocated; cell != NULL; cell = cell->next) {
+        CHECK(902, InRange(cell, ArenaStart, ArenaEnd))
+        CHECK(903, OFFSET(cell, ALIGNMENT) == 0)
+        CHECK(904, cell->next == NULL || cell->next->prev == cell)
+        CHECK(905, MINOBJSIZE <= cell->size)
+        CHECK(906, OFFSET(cell->size, ALIGNMENT) == 0)
+        total += cell->size;
+        CHECK(909, 0 < total && total <= hd->size)
+    }
+
+    CHECK(917, hd->free == NULL || hd->free->prev == NULL)
+    for (cell = hd->free; cell != NULL; cell = cell->next) {
+        CHECK(920, InRange(cell, ArenaStart, ArenaEnd))
+        CHECK(921, OFFSET(cell, ALIGNMENT) == 0)
+        CHECK(922, cell->next == NULL || cell->next->prev == cell)
+        CHECK(923, MINOBJSIZE <= cell->size)
+        CHECK(924, OFFSET(cell->size, ALIGNMENT) == 0)
+        CHECK(925, cell->next == NULL || (char*) cell + cell->size < (char*) cell->next)
+        total += cell->size;
+        totalFree += cell->size - 32;
+        CHECK(929, 0 < total && total <= hd->size)
+    }
+
+    CHECK(936, total == hd->size);
+
+#undef CHECK
+    // clang-format on
+
+    return totalFree;
+}
+
+#pragma push
+#pragma force_active on
+static char string__nOSDumpHeap__d___n[] = "\nOSDumpHeap(%d):\n";
+static char string_________Inactive_n[] = "--------Inactive\n";
+static char string_addr_tsize_t_tend_tprev_tnext_n[] = "addr\tsize\t\tend\tprev\tnext\n";
+static char string_________Allocated_n[] = "--------Allocated\n";
+static char string__x_t_d_t_x_t_x_t_x_n[] = "%x\t%d\t%x\t%x\t%x\n";
+static char string_________Free_n[] = "--------Free\n";
+#pragma pop

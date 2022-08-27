@@ -2,17 +2,16 @@
 
 #pragma section code_type ".init"
 
+#define RESET_BUTTON_MASK 0x0EEF
+
 void __check_pad3(void)
 {
-    if ((Pad3Button & 0x0eef) == 0x0eef)
-    {
+    if ((Pad3Button & RESET_BUTTON_MASK) == RESET_BUTTON_MASK)
         OSResetSystem(OS_RESET_RESTART, 0, FALSE);
-    }
-	return;
 }
 
-__declspec (weak) asm void __start(void)
-{
+asm void __start(void)
+{ // clang-format off
     nofralloc
 	bl __init_registers
     bl __init_hardware
@@ -97,10 +96,10 @@ _goto_end:
 	mr r4, r15
 	bl main
 	b exit
-}
+} // clang-format on
 
 asm static void __init_registers(void)
-{
+{ // clang-format off
 	nofralloc
 
 	lis r1,  _stack_addr@h
@@ -110,58 +109,49 @@ asm static void __init_registers(void)
 	lis r13, _SDA_BASE_@h
 	ori r13, r13, _SDA_BASE_@l
 	blr
+} // clang-format on
+
+extern __rom_copy_info _rom_copy_info[];
+extern __bss_init_info _bss_init_info[];
+
+inline static void __copy_rom_section(void* dst, void* const src, size_t size)
+{
+    if (size && (dst != src)) {
+        memcpy(dst, src, size);
+        __flush_cache(dst, size);
+    }
 }
 
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    extern __rom_copy_info _rom_copy_info[];
-
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    extern __bss_init_info _bss_init_info[];
-
-
-inline static void __copy_rom_section(void* dst, const void* src, unsigned long size)
+inline static void __init_bss_section(void* dst, size_t size)
 {
-	if (size && (dst != src)) {
-		memcpy(dst, src, size);
-		__flush_cache(dst, size);
-	}
-}
-
-inline static void __init_bss_section(void* dst, unsigned long size)
-{
-	if (size) {
-		memset(dst, 0, size);
-	}
+    if (size != 0)
+        memset(dst, 0, size);
 }
 
 void __init_data(void)
 {
-    __rom_copy_info *dci;
-    __bss_init_info *bii;
+    __rom_copy_info* dci;
+    __bss_init_info* bii;
 
     dci = _rom_copy_info;
     while (TRUE) {
-        if (dci->size == 0) break;
-		__copy_rom_section(dci->addr, dci->rom, dci->size);
+        if (dci->size == 0)
+            break;
+        __copy_rom_section(dci->addr, dci->rom, dci->size);
         dci++;
     }
 
     bii = _bss_init_info;
     while (TRUE) {
-		if (bii->size == 0) break;
-		__init_bss_section(bii->addr, bii->size);
+        if (bii->size == 0)
+            break;
+        __init_bss_section(bii->addr, bii->size);
         bii++;
     }
 }
 
 asm void __init_hardware(void)
-{
+{ // clang-format off
     nofralloc
     mfmsr r0
     ori  r0,r0,MSR_FP
@@ -171,10 +161,10 @@ asm void __init_hardware(void)
     bl      __OSCacheInit
     mtlr    r31
     blr
-}
+} // clang-format on
 
-asm void __flush_cache(void *address, unsigned int size)
-{
+asm void __flush_cache(void* address, size_t size)
+{ // clang-format off
     nofralloc
     lis     r5, 0xffff
     ori     r5, r5, 0xfff1
@@ -190,4 +180,4 @@ rept:
     bge     rept
     isync
     blr
-}
+} // clang-format on
