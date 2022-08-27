@@ -1,9 +1,10 @@
-.include "macros.inc"
+#include <dolphin/os/OSThread.h>
+#include <dolphin/types.h>
 
-.section .text  # 0x80342E94 - 0x803B7240 
-
-.global __OSUnlockAllMutex
-__OSUnlockAllMutex:
+#pragma push
+asm unk_t __OSUnlockAllMutex()
+{ // clang-format off
+    nofralloc
 /* 80347EDC 00344ABC  7C 08 02 A6 */	mflr r0
 /* 80347EE0 00344AC0  90 01 00 04 */	stw r0, 4(r1)
 /* 80347EE4 00344AC4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -36,9 +37,13 @@ lbl_80347F28:
 /* 80347F40 00344B20  7C 08 03 A6 */	mtlr r0
 /* 80347F44 00344B24  38 21 00 18 */	addi r1, r1, 0x18
 /* 80347F48 00344B28  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSCheckMutex
-__OSCheckMutex:
+#pragma push
+asm unk_t __OSCheckMutex()
+{ // clang-format off
+    nofralloc
 /* 80347F4C 00344B2C  80 83 00 00 */	lwz r4, 0(r3)
 /* 80347F50 00344B30  38 E0 00 00 */	li r7, 0
 /* 80347F54 00344B34  28 04 00 00 */	cmplwi r4, 0
@@ -113,9 +118,13 @@ lbl_80348030:
 lbl_80348044:
 /* 80348044 00344C24  38 60 00 01 */	li r3, 1
 /* 80348048 00344C28  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSCheckDeadLock
-__OSCheckDeadLock:
+#pragma push
+asm unk_t __OSCheckDeadLock()
+{ // clang-format off
+    nofralloc
 /* 8034804C 00344C2C  80 83 02 F0 */	lwz r4, 0x2f0(r3)
 /* 80348050 00344C30  48 00 00 18 */	b lbl_80348068
 lbl_80348054:
@@ -134,9 +143,13 @@ lbl_80348068:
 lbl_8034807C:
 /* 8034807C 00344C5C  38 60 00 00 */	li r3, 0
 /* 80348080 00344C60  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSCheckMutexes
-__OSCheckMutexes:
+#pragma push
+asm unk_t __OSCheckMutexes()
+{ // clang-format off
+    nofralloc
 /* 80348084 00344C64  7C 08 02 A6 */	mflr r0
 /* 80348088 00344C68  90 01 00 04 */	stw r0, 4(r1)
 /* 8034808C 00344C6C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -171,3 +184,5 @@ lbl_803480E0:
 /* 803480EC 00344CCC  7C 08 03 A6 */	mtlr r0
 /* 803480F0 00344CD0  38 21 00 18 */	addi r1, r1, 0x18
 /* 803480F4 00344CD4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
