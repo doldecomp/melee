@@ -2,7 +2,7 @@
 
 typedef void (*voidfunc)(void);
 
-extern voidfunc lbl_803B7240[]; // _ctors
+extern voidfunc __ctors[];
 
 static void __init_cpp(void);
 
@@ -19,7 +19,7 @@ static void __init_cpp(void)
 {
     voidfunc* constructor;
 
-    for (constructor = lbl_803B7240; *constructor; constructor++) {
+    for (constructor = __ctors; *constructor; constructor++) {
         (*constructor)();
     }
 }
