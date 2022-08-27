@@ -590,6 +590,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/os/OSFont.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSLink.c.o\
+	$(BUILD_DIR)/src/dolphin/os/OSMemory.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSMemory.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSMutex.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSReboot.s.o\
