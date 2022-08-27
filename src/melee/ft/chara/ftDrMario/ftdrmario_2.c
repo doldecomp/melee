@@ -1,38 +1,38 @@
-#include "ftdrmario.h"
+#include <ftdrmario.h>
 
 void func_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;
-    Fighter* ft;
+    Fighter* fp;
     u32 tmp;
     int unused2[3];
 
-    ft = gobj->user_data;
-    if (ft->x2200_ftcmd_var0 == 1 && ft->sa.mario.x2240 == 0U) {
-        func_8000B1CC(ft->x5E8_fighterBones->x0_jobj, 0, &sp18);
+    fp = gobj->user_data;
+    if (fp->x2200_ftcmd_var0 == 1 && fp->sa.mario.x2240 == 0U) {
+        func_8000B1CC(fp->x5E8_fighterBones->x0_jobj, 0, &sp18);
         tmp = ftMario_SpecialN_VitaminRandom(gobj);
-        tmp = func_802C0850(gobj, &sp18, tmp, 0x31, ft->x2C_facing_direction);
-        ft->sa.mario.x2240 = tmp;
+        tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->x2C_facing_direction);
+        fp->sa.mario.x2240 = tmp;
         if (tmp != 0) {
-            ft->cb.x21E4_callback_OnDeath2 = func_80149540;
-            ft->cb.x21DC_callback_OnTakeDamage = func_80149540;
+            fp->cb.x21E4_callback_OnDeath2 = func_80149540;
+            fp->cb.x21DC_callback_OnTakeDamage = func_80149540;
         }
-    } else if (ft->x2200_ftcmd_var0 == 2) {
+    } else if (fp->x2200_ftcmd_var0 == 2) {
         func_801497CC(gobj);
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         if (gobj != NULL) {
-            ft = gobj->user_data;
-            if (ft != NULL && ft->sa.mario.x2240 != 0) {
-                func_802C0DBC(ft->sa.mario.x2240);
-                ft->sa.mario.x2240 = 0;
+            fp = gobj->user_data;
+            if (fp != NULL && fp->sa.mario.x2240 != 0) {
+                func_802C0DBC(fp->sa.mario.x2240);
+                fp->sa.mario.x2240 = 0;
             }
         }
         if (gobj != NULL) {
-            ft = gobj->user_data;
-            if (ft != NULL) {
-                ft->cb.x21DC_callback_OnTakeDamage = 0;
-                ft->cb.x21E4_callback_OnDeath2 = 0;
+            fp = gobj->user_data;
+            if (fp != NULL) {
+                fp->cb.x21DC_callback_OnTakeDamage = 0;
+                fp->cb.x21E4_callback_OnDeath2 = 0;
             }
         }
         func_8008A2BC(gobj);

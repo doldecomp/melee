@@ -1,7 +1,6 @@
 #ifndef _lblanguage_h_
 #define _lblanguage_h_
 
-#include <global.h>
 
 #include <dolphin/types.h>
 

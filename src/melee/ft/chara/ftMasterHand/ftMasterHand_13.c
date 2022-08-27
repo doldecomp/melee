@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 8015287C 14F45C
 void lbl_8015287C(HSD_GObj* gobj) {
@@ -9,16 +9,16 @@ void lbl_8015287C(HSD_GObj* gobj) {
 // 80152880 14F460
 // https://decomp.me/scratch/is1xu
 void func_80152880(HSD_GObj* gobj) {
-    Fighter* ft;
+    Fighter* fp;
     MasterHandAttributes* attr;
     s32 unk[2];
 
-    ft = gobj->user_data;
-    attr = ft->x10C_ftData->ext_attr;
+    fp = gobj->user_data;
+    attr = fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    ft->x2340_f32 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
-    ft->x2344_f32 = 0.0f;
+    fp->x2340_f32 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
+    fp->x2344_f32 = 0.0f;
 }
 
 
@@ -61,8 +61,8 @@ void lbl_801529D0(HSD_GObj* arg0) {
 // 80152A0C 14F5EC
 // https://decomp.me/scratch/7UfC7
 void lbl_80152A0C(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -97,7 +97,7 @@ static inline float my_lbvector_Len(Vec3 *vec)
 }
 
 void lbl_80152A50(HSD_GObj* gobj) {
-    Fighter* ft;
+    Fighter* fp;
     MasterHandAttributes* attr;
     f32 speed;
     ftData* ftData;
@@ -105,28 +105,28 @@ void lbl_80152A50(HSD_GObj* gobj) {
     Vec3 sp1C_vel;
     f32 len;
 
-    ft = gobj->user_data;
+    fp = gobj->user_data;
     func_80085134(gobj);
-    if (ft->x2344_f32) {
-        ftData = ft->x10C_ftData;
+    if (fp->x2344_f32) {
+        ftData = fp->x10C_ftData;
         attr = ftData->ext_attr;
         func_8015C208(gobj, &sp28_pos);
         sp28_pos.x += attr->x98;
         sp28_pos.y += attr->x9C;
         sp28_pos.z = 0.0f;
-        lbvector_Diff(&sp28_pos, &ft->xB0_pos, &sp1C_vel);
+        lbvector_Diff(&sp28_pos, &fp->xB0_pos, &sp1C_vel);
         len = my_lbvector_Len(&sp1C_vel);
         if (len < attr->x2C) {
-            ft->x80_self_vel.x = sp1C_vel.x;
-            ft->x80_self_vel.y = sp1C_vel.y;
+            fp->x80_self_vel.x = sp1C_vel.x;
+            fp->x80_self_vel.y = sp1C_vel.y;
         } else {
             lbvector_Normalize(&sp1C_vel);
             speed = len * attr->x28;
             sp1C_vel.x *= speed;
             sp1C_vel.y *= speed;
             sp1C_vel.z *= speed;
-            ft->x80_self_vel.x = sp1C_vel.x;
-            ft->x80_self_vel.y = sp1C_vel.y;
+            fp->x80_self_vel.x = sp1C_vel.x;
+            fp->x80_self_vel.y = sp1C_vel.y;
         }
     }
 }

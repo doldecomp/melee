@@ -5,10 +5,10 @@
 
 #include <dolphin/types.h>
 
-#include "sysdolphin/baselib/gobj.h"
+#include <sysdolphin/baselib/gobj.h>
 
-#include "melee/ft/fighter.h"
-#include "melee/ft/ftcommon.h"
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
 
 typedef enum ftMarioAction {
 
@@ -92,9 +92,9 @@ typedef struct ftMario_SpecialLw_ECB
     u32 x14;
 } ftMario_SpecialLw_ECB;
 
-inline ftMarioAttributes* GetMarioAttr(Fighter* ft)
+inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
 {
-    ftMarioAttributes* mario_attr = ft->x2D4_specialAttributes;
+    ftMarioAttributes* mario_attr = fp->x2D4_specialAttributes;
     return mario_attr;
 }
 

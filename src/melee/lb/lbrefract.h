@@ -2,12 +2,12 @@
 #define _lbrefract_h_
 
 #include <string.h>
-#include "sysdolphin/baselib/memory.h"
-#include "sysdolphin/baselib/cobj.h"
-#include "sysdolphin/baselib/pobj.h"
-#include "sysdolphin/baselib/tobj.h"
-#include "dolphin/gx/GXMisc.h"
-#include "dolphin/os/OSCache.h"
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/pobj.h>
+#include <sysdolphin/baselib/tobj.h>
+#include <dolphin/gx/GXMisc.h>
+#include <dolphin/os/OSCache.h>
 
 void func_800222A4();
 void func_8002247C(HSD_CObj *);
@@ -17,10 +17,15 @@ s32 func_800226A8(HSD_PObj *);
 void func_80022998(s32, s32);
 void func_80022BB8();
 void func_80022BD0();
+
+#pragma region lbrefract_003
+
 f32 atan2f(f32 y, f32 x);
 f32 func_80022D1C(f32);
 f32 func_80022DBC(f32);
-f32 func_80022E68(f32);
+f32 atanf(f32);
+
+#pragma endregion
 
 // todo: locals to be removed
 

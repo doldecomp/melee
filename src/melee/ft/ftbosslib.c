@@ -1,9 +1,9 @@
-#include "types.h"
-#include "fighter.h"
-#include "melee/lb/lbvector.h"
-#include "ftlib.h"
-#include "melee/ft/chara/ftMasterHand/ftMasterHand.h"
-#include "ftbosslib.h"
+#include <dolphin/types.h>
+#include <melee/ft/fighter.h>
+#include <melee/lb/lbvector.h>
+#include <ftlib.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <ftbosslib.h>
 
 extern struct {
     u8 x0_pad[0x20];
@@ -31,8 +31,8 @@ void func_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5) 
 }
 
 void func_8015BDB4(HSD_GObj* arg0) {
-    Fighter *ft = arg0->user_data;
-    Gm_PKind kind = Player_GetPlayerSlotType(ft->xC_playerID);
+    Fighter *fp = arg0->user_data;
+    Gm_PKind kind = Player_GetPlayerSlotType(fp->xC_playerID);
     { // TODO: assert macro
         BOOL bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu);
         if (!bad) {
@@ -68,12 +68,12 @@ static inline float my_lbvector_Len(Vec3 *vec)
 }
 
 void func_8015BE40(HSD_GObj* gobj, Point3d* arg1, f32* arg2, f32 arg3, f32 arg4) {
-    Fighter* ft;
+    Fighter* fp;
     Vec3 diff;
     f32 distance;
 
-    ft = gobj->user_data;
-    lbvector_Diff(arg1, &ft->xB0_pos, &diff); // third argument is result
+    fp = gobj->user_data;
+    lbvector_Diff(arg1, &fp->xB0_pos, &diff); // third argument is result
     distance = my_lbvector_Len(&diff);
     if (distance < arg3) {
         *arg2 = 0.0f;
@@ -84,20 +84,20 @@ void func_8015BE40(HSD_GObj* gobj, Point3d* arg1, f32* arg2, f32 arg3, f32 arg4)
         diff.y *= distance * arg4;
         diff.z *= distance * arg4;
     }
-    ft->x80_self_vel.x = diff.x;
-    ft->x80_self_vel.y = diff.y;
+    fp->x80_self_vel.x = diff.x;
+    fp->x80_self_vel.y = diff.y;
 }
 
 void func_8015BF74(HSD_GObj* arg0, f32 arg1) {
     Vec3 sp14;
-    Fighter* ft;
+    Fighter* fp;
     f32 temp_f1;
     f32 phi_f0;
     f32 phi_f1;
 
-    ft = arg0->user_data;
+    fp = arg0->user_data;
     func_8015C208(arg0, &sp14);
-    temp_f1 = sp14.x - ft->xB0_pos.x;
+    temp_f1 = sp14.x - fp->xB0_pos.x;
     phi_f0 = fabs_inline(temp_f1);
     if (phi_f0 > arg1) {
         if (temp_f1 > get_zero()) { //float reorder hack
@@ -105,22 +105,22 @@ void func_8015BF74(HSD_GObj* arg0, f32 arg1) {
         } else {
             phi_f1 = -arg1;
         }
-        ft->x80_self_vel.x += phi_f1;
+        fp->x80_self_vel.x += phi_f1;
     } else {
-        ft->x80_self_vel.x += temp_f1;
+        fp->x80_self_vel.x += temp_f1;
     }
 }
 
 void func_8015C010(HSD_GObj* arg0, f32 arg1) {
     Vec3 sp14;
-    Fighter* ft;
+    Fighter* fp;
     f32 temp_f1;
     f32 phi_f0;
     f32 phi_f0_2;
 
-    ft = arg0->user_data;
+    fp = arg0->user_data;
     func_8015C208(arg0, &sp14);
-    temp_f1 = sp14.x - ft->xB0_pos.x;
+    temp_f1 = sp14.x - fp->xB0_pos.x;
     phi_f0 = fabs_inline(temp_f1);
     if (phi_f0 > arg1) {
         if (temp_f1 > 0.0f) {
@@ -128,46 +128,46 @@ void func_8015C010(HSD_GObj* arg0, f32 arg1) {
         } else {
             phi_f0_2 = -arg1;
         }
-        ft->x80_self_vel.x = phi_f0_2;
+        fp->x80_self_vel.x = phi_f0_2;
     } else {
-        ft->x80_self_vel.x = temp_f1;
+        fp->x80_self_vel.x = temp_f1;
     }
 }
 
 void func_8015C09C(HSD_GObj* arg0, f32 arg1) {
     HSD_JObj* jobj = arg0->hsd_obj;
-    Fighter* ft = arg0->user_data;
+    Fighter* fp = arg0->user_data;
     Quaternion quat = {0};
     s32 unused[2];
 
-    ft->x2C_facing_direction = arg1;
-    quat.y = M_PI/2 * ft->x2C_facing_direction;
+    fp->x2C_facing_direction = arg1;
+    quat.y = M_PI/2 * fp->x2C_facing_direction;
     HSD_JObjSetRotation(jobj, &quat);
 }
 
 void func_8015C190(HSD_GObj* arg0) {
-    Fighter* ft;
+    Fighter* fp;
     s32 unused1;
     Vec3 sp10;
     s32 unused2;
 
-    ft = arg0->user_data;
+    fp = arg0->user_data;
     func_80053FF4(0, &sp10);
-    if (ft->xB0_pos.x > sp10.x) {
-        ft->xB0_pos.x = sp10.x;
-        ft->x80_self_vel.x = 0.0f;
+    if (fp->xB0_pos.x > sp10.x) {
+        fp->xB0_pos.x = sp10.x;
+        fp->x80_self_vel.x = 0.0f;
     }
     func_80054158(0, &sp10);
-    if (ft->xB0_pos.x < sp10.x) {
-        ft->xB0_pos.x = sp10.x;
-        ft->x80_self_vel.x = 0.0f;
+    if (fp->xB0_pos.x < sp10.x) {
+        fp->xB0_pos.x = sp10.x;
+        fp->x80_self_vel.x = 0.0f;
     }
 }
 
 void func_8015C208(HSD_GObj* arg0, Vec3* arg1) {
     s32 unused;
-    Fighter* ft = arg0->user_data;
-    HSD_GObj* gobj = func_8015C244(arg0, &ft->xB0_pos);
+    Fighter* fp = arg0->user_data;
+    HSD_GObj* gobj = func_8015C244(arg0, &fp->xB0_pos);
     func_80086644(gobj, arg1);
 }
 
@@ -285,37 +285,37 @@ s32 func_8015C530(u32 arg0) {
 }
 
 void func_8015C5F8(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     switch (HSD_Randi(4)) {
     case 0:
-        func_80088148(ft, 0x4E21A, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21A, 0x7F, 0x40); // SFX_PlayCharacterSFX
         return;
     case 1:
-        func_80088148(ft, 0x4E21B, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21B, 0x7F, 0x40); // SFX_PlayCharacterSFX
         return;
     case 2:
-        func_80088148(ft, 0x4E21C, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21C, 0x7F, 0x40); // SFX_PlayCharacterSFX
         return;
     case 3:
-        func_80088148(ft, 0x4E21D, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21D, 0x7F, 0x40); // SFX_PlayCharacterSFX
         return;
     }
 }
 
 MasterHandAttributes* func_8015C6BC(void) {
     HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
-    Fighter* ft;
+    Fighter* fp;
     MasterHandAttributes* attr;
     s32 unused[4];
 
     if (!gobj) {
         return 0;
     }
-    ft = gobj->user_data;
-    if (!ft) {
+    fp = gobj->user_data;
+    if (!fp) {
         return 0;
     }
-    attr = ft->x10C_ftData->ext_attr;
+    attr = fp->x10C_ftData->ext_attr;
     if (!attr) {
         return 0;
     }

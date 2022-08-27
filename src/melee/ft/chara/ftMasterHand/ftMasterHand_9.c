@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80151D20 14E900
 // https://decomp.me/scratch/wVowU
@@ -13,8 +13,8 @@ void lbl_80151D20(HSD_GObj* arg0) {
 // 80151D5C 14E93C
 // https://decomp.me/scratch/8YW2K
 void lbl_80151D5C(HSD_GObj* gobj) {
-    Fighter* fighter = gobj->user_data;
-    if (Player_GetPlayerSlotType(fighter->xC_playerID) == 0) {
+    Fighter* fp = gobj->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
 }
@@ -59,8 +59,8 @@ void lbl_80151E10(HSD_GObj* arg0) {
 // 80151E4C 14EA2C
 // https://decomp.me/scratch/FpXjP
 void lbl_80151E4C(HSD_GObj* gobj) {
-    Fighter* fighter = gobj->user_data;
-    if (Player_GetPlayerSlotType(fighter->xC_playerID) == 0) {
+    Fighter* fp = gobj->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
 }
@@ -122,19 +122,19 @@ static inline float my_lbvector_Len(Vec3 *vec)
 void lbl_80151F00(HSD_GObj* gobj) {
     Vec3 sp28;
     Vec3 sp1C_resultVector;
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
     s32 unk2[1];
 
-    r31_ft_userdata = gobj->user_data;
-    r30_attributes = r31_ft_userdata->x10C_ftData->ext_attr;
-    func_800866DC(func_8015C244(gobj, &r31_ft_userdata->xB0_pos), &sp28);
-    lbvector_Diff(&sp28, &r31_ft_userdata->xB0_pos, &sp1C_resultVector);
+    r31_fp = gobj->user_data;
+    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    func_800866DC(func_8015C244(gobj, &r31_fp->xB0_pos), &sp28);
+    lbvector_Diff(&sp28, &r31_fp->xB0_pos, &sp1C_resultVector);
     if (my_lbvector_Len(&sp1C_resultVector) < r30_attributes->x4C) {
         func_80151CA8(gobj);
     }
     func_80054158(0, &sp28);
-    if (r31_ft_userdata->xB0_pos.x < sp28.x) {
+    if (r31_fp->xB0_pos.x < sp28.x) {
         func_801520D8(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -148,8 +148,8 @@ void lbl_80151F00(HSD_GObj* gobj) {
 // 8015204C 14EC2C
 // https://decomp.me/scratch/6N3wk
 void lbl_8015204C(HSD_GObj* gobj) {
-    Fighter* fighter = gobj->user_data;
-    if (Player_GetPlayerSlotType(fighter->xC_playerID) == 0) {
+    Fighter* fp = gobj->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
 }
@@ -162,14 +162,14 @@ void func_80085134(HSD_GObj*);                             /* extern */
 
 void lbl_80152090(HSD_GObj* gobj) {
     ftData* r4_ftData;
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
 
-    r31_ft_userdata = gobj->user_data;
-    r4_ftData = r31_ft_userdata->x10C_ftData;
+    r31_fp = gobj->user_data;
+    r4_ftData = r31_fp->x10C_ftData;
     r30_attributes = r4_ftData->ext_attr;
     func_80085134(gobj);
-    r31_ft_userdata->x80_self_vel.x = r30_attributes->x40_pos.z;
+    r31_fp->x80_self_vel.x = r30_attributes->x40_pos.z;
 }
 
 
@@ -185,11 +185,11 @@ void lbl_801520D4(void) {
 // 801520D8 14ECB8
 // https://decomp.me/scratch/HUhGv
 void func_801520D8(HSD_GObj* gobj) {
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     f32 temp_f1;
 
-    r31_ft_userdata = gobj->user_data;
+    r31_fp = gobj->user_data;
     Fighter_ActionStateChange_800693AC(gobj, 0x160, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    r31_ft_userdata->x80_self_vel.x = 0.0f;
+    r31_fp->x80_self_vel.x = 0.0f;
 }

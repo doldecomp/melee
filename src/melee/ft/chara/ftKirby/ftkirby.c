@@ -1,4 +1,4 @@
-#include "ftkirby.h"
+#include <ftkirby.h>
 
 //// TODO remove externs
 extern struct S_KIRBY1* lbl_803C9FC8[0x21];
@@ -59,32 +59,32 @@ void func_800EE528() {
 }
 
 void ftKirby_OnDeath(HSD_GObj* fighterObj) {
-    Fighter *fighter = fighterObj->user_data;
+    Fighter *fp = fighterObj->user_data;
     func_80074A4C(fighterObj, 0, 0);
     func_80074A4C(fighterObj, 1, 0);
-    fighter->sa.kirby.x222C = 0;
-    fighter->sa.kirby.x2230 = (s32) (HSD_Randi(5) + 1);
-    fighter->sa.kirby.x223C = 0;
-    fighter->sa.kirby.x2238 = 4;
-    fighter->sa.kirby.x2244 = 0;
-    fighter->sa.kirby.x228C = 0;
-    fighter->sa.kirby.x2290 = 0;
-    if (Player_GetFlagsBit1(fighter->xC_playerID) && Player_GetUnk4D(fighter->xC_playerID) != 4) {
-        func_800F1BAC(fighterObj, Player_GetUnk4D(fighter->xC_playerID), 0);
+    fp->sa.kirby.x222C = 0;
+    fp->sa.kirby.x2230 = (s32) (HSD_Randi(5) + 1);
+    fp->sa.kirby.x223C = 0;
+    fp->sa.kirby.x2238 = 4;
+    fp->sa.kirby.x2244 = 0;
+    fp->sa.kirby.x228C = 0;
+    fp->sa.kirby.x2290 = 0;
+    if (Player_GetFlagsBit1(fp->xC_playerID) && Player_GetUnk4D(fp->xC_playerID) != 4) {
+        func_800F1BAC(fighterObj, Player_GetUnk4D(fp->xC_playerID), 0);
     }
 }
 
 void ftKirby_OnLoad(HSD_GObj* fighterObj) {
 
 
-    Fighter* fighter = fighterObj->user_data;
-    void** item_list = fighter->x10C_ftData->x48_items;
+    Fighter* fp = fighterObj->user_data;
+    void** item_list = fp->x10C_ftData->x48_items;
 
-    PUSH_ATTRS(fighter, ftKirbyAttributes);
+    PUSH_ATTRS(fp, ftKirbyAttributes);
     
-    fighter->x2222_flag.bits.b1 = 1;
-    fighter->x2D0 = fighter->x2D4_specialAttributes;
-    fighter->sa.kirby.x2234.bits.b0 = Player_GetFlagsAEBit1(fighter->xC_playerID);
+    fp->x2222_flag.bits.b1 = 1;
+    fp->x2D0 = fp->x2D4_specialAttributes;
+    fp->sa.kirby.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
     func_8026B3F8(item_list[0], 0x32);
     func_8026B3F8(item_list[1], 0x33);
     func_8026B3F8(item_list[2], 0x34);
@@ -94,51 +94,51 @@ void ftKirby_OnLoad(HSD_GObj* fighterObj) {
 }
 
 void ftKirby_800EE74C(HSD_GObj* fighterObj) {
-    Fighter* fighter = fighterObj->user_data;
+    Fighter* fp = fighterObj->user_data;
     func_800F5524(fighterObj);
     func_800F22D4(fighterObj);
     func_800F5318(fighterObj);
     func_800F9090(fighterObj);
     func_800F19AC(fighterObj);
     func_800F5D04(fighterObj, 0);
-    fighter->cb.x21E8_callback_OnDeath3 = 0;
+    fp->cb.x21E8_callback_OnDeath3 = 0;
 }
 
 void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
-    Fighter* fighter= fighterObj->user_data;
+    Fighter* fp= fighterObj->user_data;
     func_800F5524(fighterObj);
     func_800F22D4(fighterObj);
     func_800F5318(fighterObj);
     func_800F9090(fighterObj);
     func_800F1A8C(fighterObj);
-    fighter->cb.x21E0_callback_OnDeath = 0;
+    fp->cb.x21E0_callback_OnDeath = 0;
 }
 
 //// Matching, but needs more data moved over for DOL match
 // void func_800EE818(HSD_GObj* fighterObj) {
 //     s32 unused[2];
-//     Fighter* fighter = getFighter(fighterObj);
-//     ftKirbyAttributes* attr = fighter->x2D4_specialAttributes;
-//     switch (fighter->sa.kirby.x2238) {
+//     Fighter* fp = getFighter(fighterObj);
+//     ftKirbyAttributes* attr = fp->x2D4_specialAttributes;
+//     switch (fp->sa.kirby.x2238) {
 //         case 3:
-//             if (fighter->sa.kirby.x22E8 == attr->x190) {
-//                 func_800BFFD0(fighter, 0x3A, 0);
+//             if (fp->sa.kirby.x22E8 == attr->x190) {
+//                 func_800BFFD0(fp, 0x3A, 0);
 //             }
 //             break;
 //         case 13:
-//             if (fighter->sa.kirby.x22D4 == attr->x168) {
-//                 func_800BFFD0(fighter, 0x36, 0);
+//             if (fp->sa.kirby.x22D4 == attr->x168) {
+//                 func_800BFFD0(fp, 0x36, 0);
 //             }
 //             break;
 //         case 16:
-//             if (fighter->sa.kirby.x22C8 == attr->x384) {
-//                 func_800BFFD0(fighter, 0x5D, 0);
+//             if (fp->sa.kirby.x22C8 == attr->x384) {
+//                 func_800BFFD0(fp, 0x5D, 0);
 //                 return;
 //             }
 //             break;
 //         case 7:
-//             if (fighter->sa.kirby.x22E0 == 6) {
-//                 func_800BFFD0(fighter, 0x57, 0);
+//             if (fp->sa.kirby.x22E0 == 6) {
+//                 func_800BFFD0(fp, 0x57, 0);
 //             }
 //             break;
 //     }

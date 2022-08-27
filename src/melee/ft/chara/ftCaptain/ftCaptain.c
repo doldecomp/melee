@@ -1,14 +1,14 @@
-#include "ftCaptain.h"
+#include <ftCaptain.h>
 
 // func_800E2888
 // OnRespawn/OnDeath (same function I've seen called differently)
 // https://decomp.me/scratch/XZ1Jx
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fighter_data = (Fighter*)fighter_gobj->user_data;
+    Fighter* fp = (Fighter*)fighter_gobj->user_data;
     func_80074A4C(fighter_gobj,0,0);
-    fighter_data->sa.captain.x2230_isSpecialSGFX = 0;
-    fighter_data->sa.captain.x222C_isSpecialSStartGFX = 0;
+    fp->sa.captain.x2230_isSpecialSGFX = 0;
+    fp->sa.captain.x222C_isSpecialSStartGFX = 0;
 }
 
 // lbl_800E28C8
@@ -50,8 +50,8 @@ void ftCFalcon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 
 // ftCaptain_OnLoadForGanon
 // https://decomp.me/scratch/9AwRw
-void ftCaptain_OnLoadForGanon(Fighter* fighter) {
-    PUSH_ATTRS(fighter, ftCaptainAttributes);
+void ftCaptain_OnLoadForGanon(Fighter* fp) {
+    PUSH_ATTRS(fp, ftCaptainAttributes);
 }
 
 // func_800E2AEC
@@ -59,13 +59,13 @@ void ftCaptain_OnLoadForGanon(Fighter* fighter) {
 // https://decomp.me/scratch/aZ4Wn
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fighter;
+    Fighter* fp;
     ftCaptainAttributes *sA2;
 
-    fighter = (Fighter*)fighter_gobj->user_data;
-    fighter->x2224_flag.bits.b7 = 1;
+    fp = (Fighter*)fighter_gobj->user_data;
+    fp->x2224_flag.bits.b7 = 1;
 
-    PUSH_ATTRS(fighter, ftCaptainAttributes);
+    PUSH_ATTRS(fp, ftCaptainAttributes);
 }
 
 // ftCFalcon_LoadSpecialAttrs

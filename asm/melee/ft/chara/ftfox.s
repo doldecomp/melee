@@ -2,7 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-
 .section .data
     .balign 8
 .global as_table_fox
@@ -384,34 +383,3 @@ lbl_803C7D9C:
     .4byte lbl_803C7CD8
     .4byte lbl_803C7CF0
     .4byte NULL
-.global lbl_803C7DD0
-lbl_803C7DD0:
-    .4byte 0x00000172
-    .4byte 0x00000174
-    .4byte 0x00000176
-    .4byte 0x00000173
-    .4byte 0x00000175
-    .4byte 0x00000177
-.global lbl_803C7DE8
-lbl_803C7DE8:
-    .asciz "ftToSpecialNFox::Caution!!!\n"
-    .balign 4
-.global lbl_803C7E08
-lbl_803C7E08:
-    .asciz "ftfoxspecialn.c"
-
-
-.section .sdata
-    .balign 8
-.global lbl_804D3D80
-lbl_804D3D80:
-    .4byte 0x0001AE17
-    .4byte 0x0001AE1A
-.global lbl_804D3D88
-lbl_804D3D88:
-    .4byte 0x00018703
-    .4byte 0x00018706
-.global lbl_804D3D90
-lbl_804D3D90:
-    .asciz "0"
-    .balign 4

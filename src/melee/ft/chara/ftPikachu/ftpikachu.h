@@ -1,7 +1,7 @@
 #pragma once
 
-#include "melee/ft/ftcommon.h"
-#include "melee/lb/lbvector.h"
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 typedef struct _ftPikachuAttributes {
     f32 x0;
@@ -67,7 +67,7 @@ typedef struct _ftPikachuAttributes {
 
 
 ///pika1
-void ftPikachu_OnLoadForPichu(Fighter* fighter);
+void ftPikachu_OnLoadForPichu(Fighter* fp);
 void ftPikachu_OnLoad(HSD_GObj* fighterObj);
 void ftPikachu_OnDeath(HSD_GObj* fighterObj);
 void ftPikachu_OnItemPickup(HSD_GObj* fighterObj, BOOL arg1);

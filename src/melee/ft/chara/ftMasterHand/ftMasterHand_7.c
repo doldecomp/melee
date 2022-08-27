@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80151B14 14E6F4
 // https://decomp.me/scratch/hxBrR
@@ -21,8 +21,8 @@ void lbl_80151B50(HSD_GObj* arg0) {
 // 80151B70 14E750
 // https://decomp.me/scratch/50coe
 void lbl_80151B70(HSD_GObj* gobj) {
-    Fighter* fighter = gobj->user_data;
-    if (Player_GetPlayerSlotType(fighter->xC_playerID) == 0) {
+    Fighter* fp = gobj->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
 }

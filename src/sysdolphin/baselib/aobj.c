@@ -1,11 +1,11 @@
 #include <stdarg.h>
 #include <string.h>
 
-#include "sysdolphin/baselib/aobj.h"
+#include <sysdolphin/baselib/aobj.h>
 
-#include "sysdolphin/baselib/jobj.h"
-#include "sysdolphin/baselib/robj.h"
-#include "sysdolphin/baselib/tobj.h"
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/robj.h>
+#include <sysdolphin/baselib/tobj.h>
 
 HSD_ObjAllocData aobj_alloc_data;
 
@@ -119,7 +119,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
 
     if (aobj->flags & AOBJ_FIRST_PLAY) {
         aobj->flags &= 0xF7FFFFFF;
-        rate = 0.0f;
+        rate = 0.0F;
     } else {
         rate = aobj->framerate;
         aobj->curr_frame += aobj->framerate;
@@ -128,7 +128,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
     if ((aobj->flags & AOBJ_LOOP) && aobj->end_frame <= aobj->curr_frame) {
         if (aobj->rewind_frame < aobj->end_frame) {
             f32 x, y;
-            
+
             HSD_FObjStopAnimAll(aobj->fobj, obj, update_func, rate);
             y = aobj->end_frame - aobj->rewind_frame;
             x = aobj->curr_frame - aobj->rewind_frame;
@@ -137,7 +137,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
         } else {
             aobj->curr_frame = aobj->end_frame;
         }
-        rate = 0.0f;
+        rate = 0.0F;
         aobj->flags |= AOBJ_REWINDED;
     } else {
         aobj->flags &= 0xFBFFFFFF;
@@ -161,7 +161,8 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
     }
 }
 
-float fmod(float a, float b) {
+float fmod(float a, float b)
+{
     long long quotient;
     if (__fabs(b) > __fabs(a))
         return a;
@@ -169,103 +170,55 @@ float fmod(float a, float b) {
     return a - b * quotient;
 }
 
-asm HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
+HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 {
-    nofralloc
-    /* 8036439C 00360F7C  7C 08 02 A6 */	mflr r0
-    /* 803643A0 00360F80  90 01 00 04 */	stw r0, 4(r1)
-    /* 803643A4 00360F84  94 21 FF E0 */	stwu r1, -0x20(r1)
-    /* 803643A8 00360F88  93 E1 00 1C */	stw r31, 0x1c(r1)
-    /* 803643AC 00360F8C  93 C1 00 18 */	stw r30, 0x18(r1)
-    /* 803643B0 00360F90  93 A1 00 14 */	stw r29, 0x14(r1)
-    /* 803643B4 00360F94  7C 7D 1B 79 */	or. r29, r3, r3
-    /* 803643B8 00360F98  41 82 00 F4 */	beq lbl_803644AC
-    /* 803643BC 00360F9C  48 00 01 81 */	bl HSD_AObjAlloc
-    /* 803643C0 00360FA0  7C 7F 1B 79 */	or. r31, r3, r3
-    /* 803643C4 00360FA4  80 9D 00 00 */	lwz r4, 0(r29)
-    /* 803643C8 00360FA8  41 82 00 14 */	beq lbl_803643DC
-    /* 803643CC 00360FAC  80 1F 00 00 */	lwz r0, 0(r31)
-    /* 803643D0 00360FB0  54 84 00 86 */	rlwinm r4, r4, 0, 2, 3
-    /* 803643D4 00360FB4  7C 00 23 78 */	or r0, r0, r4
-    /* 803643D8 00360FB8  90 1F 00 00 */	stw r0, 0(r31)
-lbl_803643DC:
-    /* 803643DC 00360FBC  7F E3 FB 78 */	mr r3, r31
-    /* 803643E0 00360FC0  C0 22 EA 58 */	lfs f1, 0.0f
-    /* 803643E4 00360FC4  48 00 0F 39 */	bl HSD_AObjSetRewindFrame
-    /* 803643E8 00360FC8  7F E3 FB 78 */	mr r3, r31
-    /* 803643EC 00360FCC  C0 3D 00 04 */	lfs f1, 4(r29)
-    /* 803643F0 00360FD0  48 00 0F 3D */	bl HSD_AObjSetEndFrame
-    /* 803643F4 00360FD4  80 7D 00 08 */	lwz r3, 8(r29)
-    /* 803643F8 00360FD8  48 00 73 45 */	bl HSD_FObjLoadDesc
-    /* 803643FC 00360FDC  28 1F 00 00 */	cmplwi r31, 0
-    /* 80364400 00360FE0  3B C3 00 00 */	addi r30, r3, 0
-    /* 80364404 00360FE4  41 82 00 18 */	beq lbl_8036441C
-    /* 80364408 00360FE8  80 7F 00 14 */	lwz r3, 0x14(r31)
-    /* 8036440C 00360FEC  28 03 00 00 */	cmplwi r3, 0
-    /* 80364410 00360FF0  41 82 00 08 */	beq lbl_80364418
-    /* 80364414 00360FF4  48 00 65 89 */	bl HSD_FObjRemoveAll
-lbl_80364418:
-    /* 80364418 00360FF8  93 DF 00 14 */	stw r30, 0x14(r31)
-lbl_8036441C:
-    /* 8036441C 00360FFC  80 9D 00 0C */	lwz r4, 0xc(r29)
-    /* 80364420 00361000  28 04 00 00 */	cmplwi r4, 0
-    /* 80364424 00361004  41 82 00 80 */	beq lbl_803644A4
-    /* 80364428 00361008  38 60 00 00 */	li r3, 0
-    /* 8036442C 0036100C  38 A0 00 00 */	li r5, 0
-    /* 80364430 00361010  48 01 8B 69 */	bl HSD_IDGetDataFromTable
-    /* 80364434 00361014  28 03 00 00 */	cmplwi r3, 0
-    /* 80364438 00361018  3B C3 00 00 */	addi r30, r3, 0
-    /* 8036443C 0036101C  41 82 00 40 */	beq lbl_8036447C
-    /* 80364440 00361020  41 82 00 48 */	beq lbl_80364488
-    /* 80364444 00361024  38 83 00 04 */	addi r4, r3, 4
-    /* 80364448 00361028  A0 63 00 04 */	lhz r3, 4(r3)
-    /* 8036444C 0036102C  38 03 00 01 */	addi r0, r3, 1
-    /* 80364450 00361030  B0 04 00 00 */	sth r0, 0(r4)
-    /* 80364454 00361034  A0 04 00 00 */	lhz r0, 0(r4)
-    /* 80364458 00361038  28 00 FF FF */	cmplwi r0, 0xffff
-    /* 8036445C 0036103C  40 82 00 2C */	bne lbl_80364488
-    /* 80364460 00361040  3C 60 80 40 */	lis r3, lbl_80405FB8@ha
-    /* 80364464 00361044  3C 80 80 40 */	lis r4, lbl_80405FC4@ha
-    /* 80364468 00361048  38 A4 5F C4 */	addi r5, r4, lbl_80405FC4@l
-    /* 8036446C 0036104C  38 63 5F B8 */	addi r3, r3, lbl_80405FB8@l
-    /* 80364470 00361050  38 80 00 5D */	li r4, 0x5d
-    /* 80364474 00361054  48 02 3D AD */	bl __assert
-    /* 80364478 00361058  48 00 00 10 */	b lbl_80364488
-lbl_8036447C:
-    /* 8036447C 0036105C  80 7D 00 0C */	lwz r3, 0xc(r29)
-    /* 80364480 00361060  48 00 C9 C5 */	bl HSD_JObjLoadJoint
-    /* 80364484 00361064  7C 7E 1B 78 */	mr r30, r3
-lbl_80364488:
-    /* 80364488 00361068  28 1F 00 00 */	cmplwi r31, 0
-    /* 8036448C 0036106C  41 82 00 18 */	beq lbl_803644A4
-    /* 80364490 00361070  80 7F 00 18 */	lwz r3, 0x18(r31)
-    /* 80364494 00361074  28 03 00 00 */	cmplwi r3, 0
-    /* 80364498 00361078  41 82 00 08 */	beq lbl_803644A0
-    /* 8036449C 0036107C  48 00 CC C1 */	bl HSD_JObjUnref
-lbl_803644A0:
-    /* 803644A0 00361080  93 DF 00 18 */	stw r30, 0x18(r31)
-lbl_803644A4:
-    /* 803644A4 00361084  7F E3 FB 78 */	mr r3, r31
-    /* 803644A8 00361088  48 00 00 08 */	b lbl_803644B0
-lbl_803644AC:
-    /* 803644AC 0036108C  38 60 00 00 */	li r3, 0
-lbl_803644B0:
-    /* 803644B0 00361090  80 01 00 24 */	lwz r0, 0x24(r1)
-    /* 803644B4 00361094  83 E1 00 1C */	lwz r31, 0x1c(r1)
-    /* 803644B8 00361098  83 C1 00 18 */	lwz r30, 0x18(r1)
-    /* 803644BC 0036109C  83 A1 00 14 */	lwz r29, 0x14(r1)
-    /* 803644C0 003610A0  38 21 00 20 */	addi r1, r1, 0x20
-    /* 803644C4 003610A4  7C 08 03 A6 */	mtlr r0
-    /* 803644C8 003610A8  4E 80 00 20 */	blr 
+    HSD_FObjDesc* fobjdesc;
+    HSD_AObj* aobj;
+    HSD_JObj* jobj;
+    HSD_FObj* fobj;
+    u32 id;
+    HSD_Obj* phi_r30;
+
+    if (aobjdesc != NULL) {
+        aobj = HSD_AObjAlloc();
+        HSD_AObjSetFlags(aobj, aobjdesc->flags);
+        HSD_AObjSetRewindFrame(aobj, 0.0F);
+        HSD_AObjSetEndFrame(aobj, aobjdesc->end_frame);
+        fobjdesc = aobjdesc->fobjdesc;
+        fobj = HSD_FObjLoadDesc(fobjdesc);
+        HSD_AObjSetFObj(aobj, fobj);
+        id = aobjdesc->obj_id;
+        if (id != 0U) {
+            HSD_Obj* hsd_obj = HSD_IDGetDataFromTable(0, id, 0);
+            phi_r30 = hsd_obj;
+            if (hsd_obj != NULL) {
+                if (hsd_obj != NULL) {
+                    u16* ref_count = &hsd_obj->ref_count;
+                    *ref_count += 1;
+                    if (*ref_count == (u16) -1) {
+                        __assert("object.h", 0x5D, "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
+                    }
+                }
+            } else {
+                phi_r30 = (HSD_Obj*) HSD_JObjLoadJoint((void*) aobjdesc->obj_id);
+            }
+            if (aobj != NULL) {
+                if (aobj->hsd_obj != NULL) {
+                    HSD_JObjUnref((HSD_JObj*) aobj->hsd_obj);
+                }
+                aobj->hsd_obj = phi_r30;
+            }
+        }
+        return aobj;
+    }
+    return NULL;
 }
 
-#pragma push
-#pragma peephole on
 void HSD_AObjRemove(HSD_AObj* aobj)
 {
     if (!aobj)
         return;
-    
+
     if (aobj) {
         if (aobj->fobj)
             HSD_FObjRemoveAll(aobj->fobj);
@@ -274,22 +227,21 @@ void HSD_AObjRemove(HSD_AObj* aobj)
 
     if (aobj) {
         if (aobj->hsd_obj != NULL)
-            HSD_JObjUnref((HSD_JObj*)aobj->hsd_obj);
+            HSD_JObjUnref((HSD_JObj*) aobj->hsd_obj);
         aobj->hsd_obj = NULL;
     }
     HSD_AObjFree(aobj);
 }
 
-HSD_AObj* HSD_AObjAlloc(void) 
+HSD_AObj* HSD_AObjAlloc(void)
 {
-    HSD_AObj* aobj = (HSD_AObj*)HSD_ObjAlloc(&aobj_alloc_data);
-    if (aobj == NULL)
-    {
+    HSD_AObj* aobj = (HSD_AObj*) HSD_ObjAlloc(&aobj_alloc_data);
+    if (aobj == NULL) {
         __assert(lbl_804D5D08, 489, lbl_804D5D10);
     }
     memset(aobj, 0, sizeof(HSD_AObj));
     aobj->flags = AOBJ_NO_ANIM;
-    aobj->framerate = 1.0f;
+    aobj->framerate = 1.0F;
     return aobj;
 }
 
@@ -297,49 +249,49 @@ void HSD_AObjFree(HSD_AObj* aobj)
 {
     if (!aobj)
         return;
-    
-    HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*)aobj);
+
+    HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*) aobj);
 }
 
-void callbackForeachFunc(struct _HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg *arg)
+void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
-    switch(arg_type) {
-        case AOBJ_ARG_A:
-            (*func)(aobj);
-            return;
-        case AOBJ_ARG_AF:
-            (*func)(aobj, arg->f);
-            return;
-        case AOBJ_ARG_AV:
-            (*func)(aobj, arg->v);
-            return;
-        case AOBJ_ARG_AU:
-            (*func)(aobj, arg->d);
-            return;
-        case AOBJ_ARG_AO:
-            (*func)(aobj, obj);
-            return;
-        case AOBJ_ARG_AOT:
-            (*func)(aobj, obj, type);
-            return;
-        case AOBJ_ARG_AOF:
-            (*func)(aobj, obj, arg->f);
-            return;
-        case AOBJ_ARG_AOV:
-            (*func)(aobj, obj, arg->v);
-            return;
-        case AOBJ_ARG_AOU:
-            (*func)(aobj, obj, arg->d);
-            return;
-        case AOBJ_ARG_AOTF:
-            (*func)(aobj, obj, type, arg->f);
-            return;
-        case AOBJ_ARG_AOTV:
-            (*func)(aobj, obj, type, arg->v);
-            return;
-        case AOBJ_ARG_AOTU:
-            (*func)(aobj, obj, type, (u32)arg->d);
-            return;
+    switch (arg_type) {
+    case AOBJ_ARG_A:
+        (*func)(aobj);
+        return;
+    case AOBJ_ARG_AF:
+        (*func)(aobj, arg->f);
+        return;
+    case AOBJ_ARG_AV:
+        (*func)(aobj, arg->v);
+        return;
+    case AOBJ_ARG_AU:
+        (*func)(aobj, arg->d);
+        return;
+    case AOBJ_ARG_AO:
+        (*func)(aobj, obj);
+        return;
+    case AOBJ_ARG_AOT:
+        (*func)(aobj, obj, type);
+        return;
+    case AOBJ_ARG_AOF:
+        (*func)(aobj, obj, arg->f);
+        return;
+    case AOBJ_ARG_AOV:
+        (*func)(aobj, obj, arg->v);
+        return;
+    case AOBJ_ARG_AOU:
+        (*func)(aobj, obj, arg->d);
+        return;
+    case AOBJ_ARG_AOTF:
+        (*func)(aobj, obj, type, arg->f);
+        return;
+    case AOBJ_ARG_AOTV:
+        (*func)(aobj, obj, type, arg->v);
+        return;
+    case AOBJ_ARG_AOTU:
+        (*func)(aobj, obj, type, (u32) arg->d);
+        return;
     }
 }
 
@@ -363,8 +315,9 @@ void RObjForeachAnim(HSD_RObj* robj, s32 flags, void* r5, s32 r6, void* r7)
     }
 }
 
+#pragma push
 asm void func_803647DC(void)
-{
+{ // clang-format off
     nofralloc
     /* 803647DC 003613BC  7C 08 02 A6 */	mflr r0
     /* 803647E0 003613C0  90 01 00 04 */	stw r0, 4(r1)
@@ -457,10 +410,12 @@ lbl_80364908:
     /* 80364918 003614F8  38 21 00 48 */	addi r1, r1, 0x48
     /* 8036491C 003614FC  7C 08 03 A6 */	mtlr r0
     /* 80364920 00361500  4E 80 00 20 */	blr 
-}
+} // clang-format on
+#pragma pop
 
+#pragma push
 asm void func_80364924(void)
-{
+{ // clang-format off
     nofralloc
     /* 80364924 00361504  7C 08 02 A6 */	mflr r0
     /* 80364928 00361508  90 01 00 04 */	stw r0, 4(r1)
@@ -675,10 +630,12 @@ lbl_80364BF4:
     /* 80364BFC 003617DC  38 21 00 50 */	addi r1, r1, 0x50
     /* 80364C00 003617E0  7C 08 03 A6 */	mtlr r0
     /* 80364C04 003617E4  4E 80 00 20 */	blr 
-}
+} // clang-format on
+#pragma pop
 
+#pragma push
 asm void HSD_ForeachAnim(void*, ...)
-{
+{ // clang-format off
     nofralloc
     /* 80364C08 003617E8  7C 08 02 A6 */	mflr r0
     /* 80364C0C 003617EC  90 01 00 04 */	stw r0, 4(r1)
@@ -1175,13 +1132,9 @@ lbl_803652F8:
     /* 80365300 00361EE0  38 21 00 B0 */	addi r1, r1, 0xb0
     /* 80365304 00361EE4  7C 08 03 A6 */	mtlr r0
     /* 80365308 00361EE8  4E 80 00 20 */	blr 
-}
+} // clang-format on
+#pragma pop
 
-// The below peephole pragma is due to the presence of the 'asm' keyword disabling peephole optimization on functions following it.
-// Once that is removed, the pragma can be removed
-
-#pragma push
-#pragma peephole on
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate)
 {
     if (!aobj)
@@ -1214,7 +1167,6 @@ void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
         HSD_FObjReqAnimAll(aobj->fobj, frame);
     }
 }
-#pragma pop
 
 void _HSD_AObjForgetMemory(void)
 {

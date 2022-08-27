@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80152BC8 14F7A8
 void lbl_80152BC8(HSD_GObj* gobj) {
@@ -34,8 +34,8 @@ void lbl_80152C34(HSD_GObj* arg0) {
 // 80152C70 14F850
 // https://decomp.me/scratch/5SqNT
 void lbl_80152C70(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -59,11 +59,11 @@ void lbl_80152CD4(HSD_GObj *arg0) {
 // 80152CD8 14F8B8
 // https://decomp.me/scratch/C5hzY
 void func_80152CD8(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
+    Fighter* fp = arg0->user_data;
     Fighter_ActionStateChange_800693AC(arg0, 0x16A, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
-    ft->cb.x21BC_callback_Accessory4 = &lbl_80152E28;
-    ft->x2200_ftcmd_var0 = 1;
+    fp->cb.x21BC_callback_Accessory4 = &lbl_80152E28;
+    fp->x2200_ftcmd_var0 = 1;
 }
 
 
@@ -92,8 +92,8 @@ void lbl_80152D44(HSD_GObj* arg0) {
 // 80152DC0 14F9A0
 // https://decomp.me/scratch/X13ZG
 void lbl_80152DC0(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -117,24 +117,24 @@ void lbl_80152E24(HSD_GObj* gobj) {
 // 80152E28 14FA08
 // https://decomp.me/scratch/Uqf2Q
 void lbl_80152E28(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     s32 unk1;
     Vec3 sp10;
     s32 unk2;
 
-    if (ft->x2200_ftcmd_var0 != 0) {
-        func_8000B1CC(ft->x5E8_fighterBones[11].x0_jobj, 0, &sp10);
-        ft->x2374 = func_802F0340(gobj, &sp10, &sp10, 0xB, 0x7D, ft->x2C_facing_direction);
-        func_8000B1CC(ft->x5E8_fighterBones[16].x0_jobj, 0, &sp10);
-        ft->x2378 = func_802F0340(gobj, &sp10, &sp10, 0x10, 0x7D, ft->x2C_facing_direction);
-        func_8000B1CC(ft->x5E8_fighterBones[21].x0_jobj, 0, &sp10);
-        ft->x237C = func_802F0340(gobj, &sp10, &sp10, 0x15, 0x7D, ft->x2C_facing_direction);
-        func_8000B1CC(ft->x5E8_fighterBones[26].x0_jobj, 0, &sp10);
-        ft->x2380 = func_802F0340(gobj, &sp10, &sp10, 0x1A, 0x7D, ft->x2C_facing_direction);
-        ft->x2368 = func_800237A8(0x4E204, 0x7F, 0x40);
-        ft->x236C = func_800237A8(0x4E205, 0x7F, 0x40);
-        ft->x2370 = func_800237A8(0x4E206, 0x7F, 0x40);
-        ft->x2200_ftcmd_var0 = 0;
+    if (fp->x2200_ftcmd_var0 != 0) {
+        func_8000B1CC(fp->x5E8_fighterBones[11].x0_jobj, 0, &sp10);
+        fp->x2374 = func_802F0340(gobj, &sp10, &sp10, 0xB, 0x7D, fp->x2C_facing_direction);
+        func_8000B1CC(fp->x5E8_fighterBones[16].x0_jobj, 0, &sp10);
+        fp->x2378 = func_802F0340(gobj, &sp10, &sp10, 0x10, 0x7D, fp->x2C_facing_direction);
+        func_8000B1CC(fp->x5E8_fighterBones[21].x0_jobj, 0, &sp10);
+        fp->x237C = func_802F0340(gobj, &sp10, &sp10, 0x15, 0x7D, fp->x2C_facing_direction);
+        func_8000B1CC(fp->x5E8_fighterBones[26].x0_jobj, 0, &sp10);
+        fp->x2380 = func_802F0340(gobj, &sp10, &sp10, 0x1A, 0x7D, fp->x2C_facing_direction);
+        fp->x2368 = func_800237A8(0x4E204, 0x7F, 0x40);
+        fp->x236C = func_800237A8(0x4E205, 0x7F, 0x40);
+        fp->x2370 = func_800237A8(0x4E206, 0x7F, 0x40);
+        fp->x2200_ftcmd_var0 = 0;
     }
 }
 

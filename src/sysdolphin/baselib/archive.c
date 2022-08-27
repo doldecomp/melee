@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "sysdolphin/baselib/archive.h"
+#include <sysdolphin/baselib/archive.h>
 
 inline void Locate(HSD_Archive* archive)
 {

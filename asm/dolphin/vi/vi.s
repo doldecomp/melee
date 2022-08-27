@@ -8,12 +8,12 @@ __VIRetraceHandler:
 /* 8034E968 0034B548  3C 60 CC 00 */	lis r3, 0xCC002000@ha
 /* 8034E96C 0034B54C  90 01 00 04 */	stw r0, 4(r1)
 /* 8034E970 0034B550  38 A3 20 00 */	addi r5, r3, 0xCC002000@l
-/* 8034E974 0034B554  3C 60 80 4B */	lis r3, lbl_804A89F0@ha
+/* 8034E974 0034B554  3C 60 80 4B */	lis r3, regs@ha
 /* 8034E978 0034B558  94 21 FD 08 */	stwu r1, -0x2f8(r1)
 /* 8034E97C 0034B55C  38 E0 00 00 */	li r7, 0
 /* 8034E980 0034B560  BF 61 02 E4 */	stmw r27, 0x2e4(r1)
 /* 8034E984 0034B564  3B C4 00 00 */	addi r30, r4, 0
-/* 8034E988 0034B568  3B E3 89 F0 */	addi r31, r3, lbl_804A89F0@l
+/* 8034E988 0034B568  3B E3 89 F0 */	addi r31, r3, regs@l
 /* 8034E98C 0034B56C  A4 C5 00 30 */	lhzu r6, 0x30(r5)
 /* 8034E990 0034B570  54 C0 04 21 */	rlwinm. r0, r6, 0, 0x10, 0x10
 /* 8034E994 0034B574  41 82 00 10 */	beq lbl_8034E9A4
@@ -54,17 +54,17 @@ lbl_8034EA08:
 /* 8034EA0C 0034B5EC  4B FF 66 81 */	bl OSSetCurrentContext
 /* 8034EA10 0034B5F0  48 00 01 68 */	b lbl_8034EB78
 lbl_8034EA14:
-/* 8034EA14 0034B5F4  80 8D BD 80 */	lwz r4, lbl_804D7420@sda21(r13)
+/* 8034EA14 0034B5F4  80 8D BD 80 */	lwz r4, retraceCount@sda21(r13)
 /* 8034EA18 0034B5F8  38 61 00 18 */	addi r3, r1, 0x18
 /* 8034EA1C 0034B5FC  38 04 00 01 */	addi r0, r4, 1
-/* 8034EA20 0034B600  90 0D BD 80 */	stw r0, lbl_804D7420@sda21(r13)
+/* 8034EA20 0034B600  90 0D BD 80 */	stw r0, retraceCount@sda21(r13)
 /* 8034EA24 0034B604  4B FF 68 31 */	bl OSClearContext
 /* 8034EA28 0034B608  38 61 00 18 */	addi r3, r1, 0x18
 /* 8034EA2C 0034B60C  4B FF 66 61 */	bl OSSetCurrentContext
-/* 8034EA30 0034B610  81 8D BD 90 */	lwz r12, lbl_804D7430@sda21(r13)
+/* 8034EA30 0034B610  81 8D BD 90 */	lwz r12, PreCB@sda21(r13)
 /* 8034EA34 0034B614  28 0C 00 00 */	cmplwi r12, 0
 /* 8034EA38 0034B618  41 82 00 10 */	beq lbl_8034EA48
-/* 8034EA3C 0034B61C  80 6D BD 80 */	lwz r3, lbl_804D7420@sda21(r13)
+/* 8034EA3C 0034B61C  80 6D BD 80 */	lwz r3, retraceCount@sda21(r13)
 /* 8034EA40 0034B620  7D 88 03 A6 */	mtlr r12
 /* 8034EA44 0034B624  4E 80 00 21 */	blrl 
 lbl_8034EA48:
@@ -74,7 +74,7 @@ lbl_8034EA48:
 /* 8034EA54 0034B634  80 0D BD B0 */	lwz r0, lbl_804D7450@sda21(r13)
 /* 8034EA58 0034B638  28 00 00 01 */	cmplwi r0, 1
 /* 8034EA5C 0034B63C  40 82 00 10 */	bne lbl_8034EA6C
-/* 8034EA60 0034B640  48 00 17 25 */	bl func_80350184
+/* 8034EA60 0034B640  48 00 17 25 */	bl getCurrentFieldEvenOdd
 /* 8034EA64 0034B644  28 03 00 00 */	cmplwi r3, 0
 /* 8034EA68 0034B648  41 82 00 BC */	beq lbl_8034EB24
 lbl_8034EA6C:
@@ -137,13 +137,13 @@ lbl_8034EB28:
 /* 8034EB34 0034B714  90 0D BD 84 */	stw r0, lbl_804D7424@sda21(r13)
 /* 8034EB38 0034B718  4B FF F3 61 */	bl SIRefreshSamplingRate
 lbl_8034EB3C:
-/* 8034EB3C 0034B71C  80 0D BD 94 */	lwz r0, lbl_804D7434@sda21(r13)
+/* 8034EB3C 0034B71C  80 0D BD 94 */	lwz r0, PostCB@sda21(r13)
 /* 8034EB40 0034B720  28 00 00 00 */	cmplwi r0, 0
 /* 8034EB44 0034B724  41 82 00 1C */	beq lbl_8034EB60
 /* 8034EB48 0034B728  38 61 00 18 */	addi r3, r1, 0x18
 /* 8034EB4C 0034B72C  4B FF 67 09 */	bl OSClearContext
-/* 8034EB50 0034B730  81 8D BD 94 */	lwz r12, lbl_804D7434@sda21(r13)
-/* 8034EB54 0034B734  80 6D BD 80 */	lwz r3, lbl_804D7420@sda21(r13)
+/* 8034EB50 0034B730  81 8D BD 94 */	lwz r12, PostCB@sda21(r13)
+/* 8034EB54 0034B734  80 6D BD 80 */	lwz r3, retraceCount@sda21(r13)
 /* 8034EB58 0034B738  7D 88 03 A6 */	mtlr r12
 /* 8034EB5C 0034B73C  4E 80 00 21 */	blrl 
 lbl_8034EB60:
@@ -160,17 +160,17 @@ lbl_8034EB78:
 /* 8034EB84 0034B764  7C 08 03 A6 */	mtlr r0
 /* 8034EB88 0034B768  4E 80 00 20 */	blr 
 
-.global func_8034EB8C
-func_8034EB8C:
+.global VISetPreRetraceCallback
+VISetPreRetraceCallback:
 /* 8034EB8C 0034B76C  7C 08 02 A6 */	mflr r0
 /* 8034EB90 0034B770  90 01 00 04 */	stw r0, 4(r1)
 /* 8034EB94 0034B774  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8034EB98 0034B778  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8034EB9C 0034B77C  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8034EBA0 0034B780  7C 7E 1B 78 */	mr r30, r3
-/* 8034EBA4 0034B784  83 ED BD 90 */	lwz r31, lbl_804D7430@sda21(r13)
+/* 8034EBA4 0034B784  83 ED BD 90 */	lwz r31, PreCB@sda21(r13)
 /* 8034EBA8 0034B788  4B FF 87 BD */	bl OSDisableInterrupts
-/* 8034EBAC 0034B78C  93 CD BD 90 */	stw r30, lbl_804D7430@sda21(r13)
+/* 8034EBAC 0034B78C  93 CD BD 90 */	stw r30, PreCB@sda21(r13)
 /* 8034EBB0 0034B790  4B FF 87 DD */	bl OSRestoreInterrupts
 /* 8034EBB4 0034B794  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8034EBB8 0034B798  7F E3 FB 78 */	mr r3, r31
@@ -180,17 +180,17 @@ func_8034EB8C:
 /* 8034EBC8 0034B7A8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034EBCC 0034B7AC  4E 80 00 20 */	blr 
 
-.global func_8034EBD0
-func_8034EBD0:
+.global VISetPostRetraceCallback
+VISetPostRetraceCallback:
 /* 8034EBD0 0034B7B0  7C 08 02 A6 */	mflr r0
 /* 8034EBD4 0034B7B4  90 01 00 04 */	stw r0, 4(r1)
 /* 8034EBD8 0034B7B8  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8034EBDC 0034B7BC  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8034EBE0 0034B7C0  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8034EBE4 0034B7C4  7C 7E 1B 78 */	mr r30, r3
-/* 8034EBE8 0034B7C8  83 ED BD 94 */	lwz r31, lbl_804D7434@sda21(r13)
+/* 8034EBE8 0034B7C8  83 ED BD 94 */	lwz r31, PostCB@sda21(r13)
 /* 8034EBEC 0034B7CC  4B FF 87 79 */	bl OSDisableInterrupts
-/* 8034EBF0 0034B7D0  93 CD BD 94 */	stw r30, lbl_804D7434@sda21(r13)
+/* 8034EBF0 0034B7D0  93 CD BD 94 */	stw r30, PostCB@sda21(r13)
 /* 8034EBF4 0034B7D4  4B FF 87 99 */	bl OSRestoreInterrupts
 /* 8034EBF8 0034B7D8  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8034EBFC 0034B7DC  7F E3 FB 78 */	mr r3, r31
@@ -200,8 +200,8 @@ func_8034EBD0:
 /* 8034EC0C 0034B7EC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034EC10 0034B7F0  4E 80 00 20 */	blr 
 
-.global func_8034EC14
-func_8034EC14:
+.global getTiming
+getTiming:
 /* 8034EC14 0034B7F4  28 03 00 15 */	cmplwi r3, 0x15
 /* 8034EC18 0034B7F8  3C 80 80 40 */	lis r4, lbl_80402D28@ha
 /* 8034EC1C 0034B7FC  38 A4 2D 28 */	addi r5, r4, lbl_80402D28@l
@@ -212,61 +212,48 @@ func_8034EC14:
 /* 8034EC30 0034B810  7C 04 00 2E */	lwzx r0, r4, r0
 /* 8034EC34 0034B814  7C 09 03 A6 */	mtctr r0
 /* 8034EC38 0034B818  4E 80 04 20 */	bctr 
-.global lbl_8034EC3C
 lbl_8034EC3C:
 /* 8034EC3C 0034B81C  7C A3 2B 78 */	mr r3, r5
 /* 8034EC40 0034B820  4E 80 00 20 */	blr 
-.global lbl_8034EC44
 lbl_8034EC44:
 /* 8034EC44 0034B824  38 65 00 26 */	addi r3, r5, 0x26
 /* 8034EC48 0034B828  4E 80 00 20 */	blr 
-.global lbl_8034EC4C
 lbl_8034EC4C:
 /* 8034EC4C 0034B82C  38 65 00 4C */	addi r3, r5, 0x4c
 /* 8034EC50 0034B830  4E 80 00 20 */	blr 
-.global lbl_8034EC54
 lbl_8034EC54:
 /* 8034EC54 0034B834  38 65 00 72 */	addi r3, r5, 0x72
 /* 8034EC58 0034B838  4E 80 00 20 */	blr 
-.global lbl_8034EC5C
 lbl_8034EC5C:
 /* 8034EC5C 0034B83C  7C A3 2B 78 */	mr r3, r5
 /* 8034EC60 0034B840  4E 80 00 20 */	blr 
-.global lbl_8034EC64
 lbl_8034EC64:
 /* 8034EC64 0034B844  38 65 00 26 */	addi r3, r5, 0x26
 /* 8034EC68 0034B848  4E 80 00 20 */	blr 
-.global lbl_8034EC6C
 lbl_8034EC6C:
 /* 8034EC6C 0034B84C  38 65 00 98 */	addi r3, r5, 0x98
 /* 8034EC70 0034B850  4E 80 00 20 */	blr 
-.global lbl_8034EC74
 lbl_8034EC74:
 /* 8034EC74 0034B854  38 65 00 BE */	addi r3, r5, 0xbe
 /* 8034EC78 0034B858  4E 80 00 20 */	blr 
-.global lbl_8034EC7C
 lbl_8034EC7C:
 /* 8034EC7C 0034B85C  38 65 00 E4 */	addi r3, r5, 0xe4
 /* 8034EC80 0034B860  4E 80 00 20 */	blr 
-.global lbl_8034EC84
 lbl_8034EC84:
 /* 8034EC84 0034B864  38 65 01 0A */	addi r3, r5, 0x10a
 /* 8034EC88 0034B868  4E 80 00 20 */	blr 
-.global lbl_8034EC8C
 lbl_8034EC8C:
 /* 8034EC8C 0034B86C  38 65 00 4C */	addi r3, r5, 0x4c
 /* 8034EC90 0034B870  4E 80 00 20 */	blr 
-.global lbl_8034EC94
 lbl_8034EC94:
 /* 8034EC94 0034B874  38 65 00 72 */	addi r3, r5, 0x72
 /* 8034EC98 0034B878  4E 80 00 20 */	blr 
-.global lbl_8034EC9C
 lbl_8034EC9C:
 /* 8034EC9C 0034B87C  38 60 00 00 */	li r3, 0
 /* 8034ECA0 0034B880  4E 80 00 20 */	blr 
 
-.global func_8034ECA4
-func_8034ECA4:
+.global __VIInit
+__VIInit:
 /* 8034ECA4 0034B884  7C 08 02 A6 */	mflr r0
 /* 8034ECA8 0034B888  90 01 00 04 */	stw r0, 4(r1)
 /* 8034ECAC 0034B88C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -279,7 +266,7 @@ func_8034ECA4:
 /* 8034ECC8 0034B8A8  93 E3 00 CC */	stw r31, 0x800000CC@l(r3)
 /* 8034ECCC 0034B8AC  38 7D 00 00 */	addi r3, r29, 0
 /* 8034ECD0 0034B8B0  57 BE 07 BC */	rlwinm r30, r29, 0, 0x1e, 0x1e
-/* 8034ECD4 0034B8B4  4B FF FF 41 */	bl func_8034EC14
+/* 8034ECD4 0034B8B4  4B FF FF 41 */	bl getTiming
 /* 8034ECD8 0034B8B8  3C 80 CC 00 */	lis r4, 0xCC002000@ha
 /* 8034ECDC 0034B8BC  38 00 00 02 */	li r0, 2
 /* 8034ECE0 0034B8C0  38 A4 20 00 */	addi r5, r4, 0xCC002000@l
@@ -399,8 +386,8 @@ lbl_8034EE80:
 /* 8034EE94 0034BA74  38 21 00 30 */	addi r1, r1, 0x30
 /* 8034EE98 0034BA78  4E 80 00 20 */	blr 
 
-.global func_8034EE9C
-func_8034EE9C:
+.global VIInit
+VIInit:
 /* 8034EE9C 0034BA7C  7C 08 02 A6 */	mflr r0
 /* 8034EEA0 0034BA80  3C 60 CC 00 */	lis r3, 0xCC002000@ha
 /* 8034EEA4 0034BA84  90 01 00 04 */	stw r0, 4(r1)
@@ -413,17 +400,17 @@ func_8034EE9C:
 /* 8034EEC0 0034BAA0  93 A1 00 0C */	stw r29, 0xc(r1)
 /* 8034EEC4 0034BAA4  93 81 00 08 */	stw r28, 8(r1)
 /* 8034EEC8 0034BAA8  3B 83 20 00 */	addi r28, r3, 0xCC002000@l
-/* 8034EECC 0034BAAC  3C 60 80 4B */	lis r3, lbl_804A89F0@ha
+/* 8034EECC 0034BAAC  3C 60 80 4B */	lis r3, regs@ha
 /* 8034EED0 0034BAB0  90 0D BD 98 */	stw r0, lbl_804D7438@sda21(r13)
-/* 8034EED4 0034BAB4  3B E3 89 F0 */	addi r31, r3, lbl_804A89F0@l
+/* 8034EED4 0034BAB4  3B E3 89 F0 */	addi r31, r3, regs@l
 /* 8034EED8 0034BAB8  A4 1C 00 02 */	lhzu r0, 2(r28)
 /* 8034EEDC 0034BABC  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 8034EEE0 0034BAC0  40 82 00 0C */	bne lbl_8034EEEC
 /* 8034EEE4 0034BAC4  38 60 00 00 */	li r3, 0
-/* 8034EEE8 0034BAC8  4B FF FD BD */	bl func_8034ECA4
+/* 8034EEE8 0034BAC8  4B FF FD BD */	bl __VIInit
 lbl_8034EEEC:
 /* 8034EEEC 0034BACC  3B A0 00 00 */	li r29, 0
-/* 8034EEF0 0034BAD0  93 AD BD 80 */	stw r29, lbl_804D7420@sda21(r13)
+/* 8034EEF0 0034BAD0  93 AD BD 80 */	stw r29, retraceCount@sda21(r13)
 /* 8034EEF4 0034BAD4  3C 60 CC 00 */	lis r3, 0xCC002000@ha
 /* 8034EEF8 0034BAD8  38 63 20 00 */	addi r3, r3, 0xCC002000@l
 /* 8034EEFC 0034BADC  93 AD BD AC */	stw r29, lbl_804D744C@sda21(r13)
@@ -532,7 +519,7 @@ lbl_8034F090:
 /* 8034F090 0034BC70  80 03 00 00 */	lwz r0, 0(r3)
 /* 8034F094 0034BC74  57 A3 10 3A */	slwi r3, r29, 2
 /* 8034F098 0034BC78  7C 63 02 14 */	add r3, r3, r0
-/* 8034F09C 0034BC7C  4B FF FB 79 */	bl func_8034EC14
+/* 8034F09C 0034BC7C  4B FF FB 79 */	bl getTiming
 /* 8034F0A0 0034BC80  90 7F 01 44 */	stw r3, 0x144(r31)
 /* 8034F0A4 0034BC84  38 9F 01 44 */	addi r4, r31, 0x144
 /* 8034F0A8 0034BC88  38 00 02 80 */	li r0, 0x280
@@ -695,8 +682,8 @@ lbl_8034F23C:
 /* 8034F2D4 0034BEB4  38 60 00 18 */	li r3, 0x18
 /* 8034F2D8 0034BEB8  54 00 04 7E */	clrlwi r0, r0, 0x11
 /* 8034F2DC 0034BEBC  B0 05 00 34 */	sth r0, 0x34(r5)
-/* 8034F2E0 0034BEC0  93 8D BD 90 */	stw r28, lbl_804D7430@sda21(r13)
-/* 8034F2E4 0034BEC4  93 8D BD 94 */	stw r28, lbl_804D7434@sda21(r13)
+/* 8034F2E0 0034BEC0  93 8D BD 90 */	stw r28, PreCB@sda21(r13)
+/* 8034F2E4 0034BEC4  93 8D BD 94 */	stw r28, PostCB@sda21(r13)
 /* 8034F2E8 0034BEC8  4B FF 80 C9 */	bl __OSSetInterruptHandler
 /* 8034F2EC 0034BECC  38 60 00 80 */	li r3, 0x80
 /* 8034F2F0 0034BED0  4B FF 84 C5 */	bl __OSUnmaskInterrupts
@@ -717,12 +704,12 @@ VIWaitForRetrace:
 /* 8034F320 0034BF00  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8034F324 0034BF04  93 C1 00 08 */	stw r30, 8(r1)
 /* 8034F328 0034BF08  4B FF 80 3D */	bl OSDisableInterrupts
-/* 8034F32C 0034BF0C  83 CD BD 80 */	lwz r30, lbl_804D7420@sda21(r13)
+/* 8034F32C 0034BF0C  83 CD BD 80 */	lwz r30, retraceCount@sda21(r13)
 /* 8034F330 0034BF10  7C 7F 1B 78 */	mr r31, r3
 lbl_8034F334:
 /* 8034F334 0034BF14  38 6D BD 88 */	addi r3, r13, lbl_804D7428@sda21
 /* 8034F338 0034BF18  4B FF C6 DD */	bl OSSleepThread
-/* 8034F33C 0034BF1C  80 0D BD 80 */	lwz r0, lbl_804D7420@sda21(r13)
+/* 8034F33C 0034BF1C  80 0D BD 80 */	lwz r0, retraceCount@sda21(r13)
 /* 8034F340 0034BF20  7C 1E 00 40 */	cmplw r30, r0
 /* 8034F344 0034BF24  41 82 FF F0 */	beq lbl_8034F334
 /* 8034F348 0034BF28  7F E3 FB 78 */	mr r3, r31
@@ -734,11 +721,11 @@ lbl_8034F334:
 /* 8034F360 0034BF40  38 21 00 10 */	addi r1, r1, 0x10
 /* 8034F364 0034BF44  4E 80 00 20 */	blr 
 
-.global func_8034F368
-func_8034F368:
+.global setFbbRegs
+setFbbRegs:
 /* 8034F368 0034BF48  94 21 FF B8 */	stwu r1, -0x48(r1)
-/* 8034F36C 0034BF4C  3D 20 80 4B */	lis r9, lbl_804A89F0@ha
-/* 8034F370 0034BF50  39 29 89 F0 */	addi r9, r9, lbl_804A89F0@l
+/* 8034F36C 0034BF4C  3D 20 80 4B */	lis r9, regs@ha
+/* 8034F370 0034BF50  39 29 89 F0 */	addi r9, r9, regs@l
 /* 8034F374 0034BF54  93 E1 00 44 */	stw r31, 0x44(r1)
 /* 8034F378 0034BF58  89 03 00 2C */	lbz r8, 0x2c(r3)
 /* 8034F37C 0034BF5C  A0 03 00 0E */	lhz r0, 0xe(r3)
@@ -929,15 +916,15 @@ lbl_8034F630:
 /* 8034F634 0034C214  38 21 00 48 */	addi r1, r1, 0x48
 /* 8034F638 0034C218  4E 80 00 20 */	blr 
 
-.global func_8034F63C
-func_8034F63C:
+.global setVerticalRegs
+setVerticalRegs:
 /* 8034F63C 0034C21C  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8034F640 0034C220  54 A0 06 3E */	clrlwi r0, r5, 0x18
-/* 8034F644 0034C224  3D 60 80 4B */	lis r11, lbl_804A89F0@ha
+/* 8034F644 0034C224  3D 60 80 4B */	lis r11, regs@ha
 /* 8034F648 0034C228  93 E1 00 24 */	stw r31, 0x24(r1)
 /* 8034F64C 0034C22C  28 00 00 0A */	cmplwi r0, 0xa
 /* 8034F650 0034C230  83 E1 00 30 */	lwz r31, 0x30(r1)
-/* 8034F654 0034C234  39 6B 89 F0 */	addi r11, r11, lbl_804A89F0@l
+/* 8034F654 0034C234  39 6B 89 F0 */	addi r11, r11, regs@l
 /* 8034F658 0034C238  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 8034F65C 0034C23C  93 A1 00 1C */	stw r29, 0x1c(r1)
 /* 8034F660 0034C240  41 80 00 10 */	blt lbl_8034F670
@@ -1041,17 +1028,17 @@ lbl_8034F730:
 /* 8034F7D4 0034C3B4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034F7D8 0034C3B8  4E 80 00 20 */	blr 
 
-.global func_8034F7DC
-func_8034F7DC:
+.global VIConfigure
+VIConfigure:
 /* 8034F7DC 0034C3BC  7C 08 02 A6 */	mflr r0
 /* 8034F7E0 0034C3C0  3C A0 80 40 */	lis r5, lbl_80402D28@ha
 /* 8034F7E4 0034C3C4  90 01 00 04 */	stw r0, 4(r1)
-/* 8034F7E8 0034C3C8  3C 80 80 4B */	lis r4, lbl_804A89F0@ha
+/* 8034F7E8 0034C3C8  3C 80 80 4B */	lis r4, regs@ha
 /* 8034F7EC 0034C3CC  94 21 FF 88 */	stwu r1, -0x78(r1)
 /* 8034F7F0 0034C3D0  BD C1 00 30 */	stmw r14, 0x30(r1)
 /* 8034F7F4 0034C3D4  3B E3 00 00 */	addi r31, r3, 0
 /* 8034F7F8 0034C3D8  39 E5 2D 28 */	addi r15, r5, lbl_80402D28@l
-/* 8034F7FC 0034C3DC  3B A4 89 F0 */	addi r29, r4, lbl_804A89F0@l
+/* 8034F7FC 0034C3DC  3B A4 89 F0 */	addi r29, r4, regs@l
 /* 8034F800 0034C3E0  4B FF 7B 65 */	bl OSDisableInterrupts
 /* 8034F804 0034C3E4  80 9F 00 00 */	lwz r4, 0(r31)
 /* 8034F808 0034C3E8  3B 9D 01 14 */	addi r28, r29, 0x114
@@ -1179,7 +1166,7 @@ lbl_8034F9AC:
 /* 8034F9BC 0034C59C  80 1C 00 00 */	lwz r0, 0(r28)
 /* 8034F9C0 0034C5A0  54 63 10 3A */	slwi r3, r3, 2
 /* 8034F9C4 0034C5A4  7C 63 02 14 */	add r3, r3, r0
-/* 8034F9C8 0034C5A8  4B FF F2 4D */	bl func_8034EC14
+/* 8034F9C8 0034C5A8  4B FF F2 4D */	bl getTiming
 /* 8034F9CC 0034C5AC  7C 7E 1B 78 */	mr r30, r3
 /* 8034F9D0 0034C5B0  93 DD 01 44 */	stw r30, 0x144(r29)
 /* 8034F9D4 0034C5B4  A0 18 00 00 */	lhz r0, 0(r24)
@@ -1547,7 +1534,7 @@ lbl_8034FEB4:
 /* 8034FEF0 0034CAD0  50 04 44 2E */	rlwimi r4, r0, 8, 0x10, 0x17
 /* 8034FEF4 0034CAD4  B0 9D 00 48 */	sth r4, 0x48(r29)
 /* 8034FEF8 0034CAD8  80 8D BD A8 */	lwz r4, lbl_804D7448@sda21(r13)
-/* 8034FEFC 0034CADC  80 0D BD C8 */	lwz r0, lbl_804D7468@sda21(r13)
+/* 8034FEFC 0034CADC  80 0D BD C8 */	lwz r0, FBSet@sda21(r13)
 /* 8034FF00 0034CAE0  80 AD BD AC */	lwz r5, lbl_804D744C@sda21(r13)
 /* 8034FF04 0034CAE4  28 00 00 00 */	cmplwi r0, 0
 /* 8034FF08 0034CAE8  7C A0 1B 78 */	or r0, r5, r3
@@ -1559,7 +1546,7 @@ lbl_8034FEB4:
 /* 8034FF20 0034CB00  38 BD 01 28 */	addi r5, r29, 0x128
 /* 8034FF24 0034CB04  38 DD 01 3C */	addi r6, r29, 0x13c
 /* 8034FF28 0034CB08  38 FD 01 40 */	addi r7, r29, 0x140
-/* 8034FF2C 0034CB0C  4B FF F4 3D */	bl func_8034F368
+/* 8034FF2C 0034CB0C  4B FF F4 3D */	bl setFbbRegs
 lbl_8034FF30:
 /* 8034FF30 0034CB10  80 1D 01 30 */	lwz r0, 0x130(r29)
 /* 8034FF34 0034CB14  90 01 00 08 */	stw r0, 8(r1)
@@ -1571,7 +1558,7 @@ lbl_8034FF30:
 /* 8034FF4C 0034CB2C  A1 1E 00 06 */	lhz r8, 6(r30)
 /* 8034FF50 0034CB30  A1 3E 00 08 */	lhz r9, 8(r30)
 /* 8034FF54 0034CB34  A1 5E 00 0A */	lhz r10, 0xa(r30)
-/* 8034FF58 0034CB38  4B FF F6 E5 */	bl func_8034F63C
+/* 8034FF58 0034CB38  4B FF F6 E5 */	bl setVerticalRegs
 /* 8034FF5C 0034CB3C  7D C3 73 78 */	mr r3, r14
 /* 8034FF60 0034CB40  4B FF 74 2D */	bl OSRestoreInterrupts
 /* 8034FF64 0034CB44  B9 C1 00 30 */	lmw r14, 0x30(r1)
@@ -1580,8 +1567,8 @@ lbl_8034FF30:
 /* 8034FF70 0034CB50  7C 08 03 A6 */	mtlr r0
 /* 8034FF74 0034CB54  4E 80 00 20 */	blr 
 
-.global func_8034FF78
-func_8034FF78:
+.global VIFlush
+VIFlush:
 /* 8034FF78 0034CB58  7C 08 02 A6 */	mflr r0
 /* 8034FF7C 0034CB5C  90 01 00 04 */	stw r0, 4(r1)
 /* 8034FF80 0034CB60  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -1589,13 +1576,13 @@ func_8034FF78:
 /* 8034FF88 0034CB68  4B FF 73 DD */	bl OSDisableInterrupts
 /* 8034FF8C 0034CB6C  80 ED BD B0 */	lwz r7, lbl_804D7450@sda21(r13)
 /* 8034FF90 0034CB70  3C 80 80 4B */	lis r4, lbl_804A8A68@ha
-/* 8034FF94 0034CB74  3C A0 80 4B */	lis r5, lbl_804A89F0@ha
+/* 8034FF94 0034CB74  3C A0 80 4B */	lis r5, regs@ha
 /* 8034FF98 0034CB78  80 CD BD A0 */	lwz r6, lbl_804D7440@sda21(r13)
 /* 8034FF9C 0034CB7C  38 00 00 00 */	li r0, 0
 /* 8034FFA0 0034CB80  3B A4 8A 68 */	addi r29, r4, lbl_804A8A68@l
 /* 8034FFA4 0034CB84  7C E6 33 78 */	or r6, r7, r6
 /* 8034FFA8 0034CB88  90 CD BD B0 */	stw r6, lbl_804D7450@sda21(r13)
-/* 8034FFAC 0034CB8C  3B E5 89 F0 */	addi r31, r5, lbl_804A89F0@l
+/* 8034FFAC 0034CB8C  3B E5 89 F0 */	addi r31, r5, regs@l
 /* 8034FFB0 0034CB90  3B C3 00 00 */	addi r30, r3, 0
 /* 8034FFB4 0034CB94  90 0D BD A0 */	stw r0, lbl_804D7440@sda21(r13)
 /* 8034FFB8 0034CB98  80 8D BD B8 */	lwz r4, lbl_804D7458@sda21(r13)
@@ -1658,27 +1645,27 @@ lbl_80350054:
 /* 8035008C 0034CC6C  7C 08 03 A6 */	mtlr r0
 /* 80350090 0034CC70  4E 80 00 20 */	blr 
 
-.global func_80350094
-func_80350094:
+.global VISetNextFrameBuffer
+VISetNextFrameBuffer:
 /* 80350094 0034CC74  7C 08 02 A6 */	mflr r0
-/* 80350098 0034CC78  3C 80 80 4B */	lis r4, lbl_804A89F0@ha
+/* 80350098 0034CC78  3C 80 80 4B */	lis r4, regs@ha
 /* 8035009C 0034CC7C  90 01 00 04 */	stw r0, 4(r1)
 /* 803500A0 0034CC80  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 803500A4 0034CC84  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 803500A8 0034CC88  3B E4 89 F0 */	addi r31, r4, lbl_804A89F0@l
+/* 803500A8 0034CC88  3B E4 89 F0 */	addi r31, r4, regs@l
 /* 803500AC 0034CC8C  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 803500B0 0034CC90  3B C3 00 00 */	addi r30, r3, 0
 /* 803500B4 0034CC94  4B FF 72 B1 */	bl OSDisableInterrupts
 /* 803500B8 0034CC98  93 DF 01 20 */	stw r30, 0x120(r31)
 /* 803500BC 0034CC9C  38 00 00 01 */	li r0, 1
 /* 803500C0 0034CCA0  3B C3 00 00 */	addi r30, r3, 0
-/* 803500C4 0034CCA4  90 0D BD C8 */	stw r0, lbl_804D7468@sda21(r13)
+/* 803500C4 0034CCA4  90 0D BD C8 */	stw r0, FBSet@sda21(r13)
 /* 803500C8 0034CCA8  38 7F 00 F0 */	addi r3, r31, 0xf0
 /* 803500CC 0034CCAC  38 9F 01 24 */	addi r4, r31, 0x124
 /* 803500D0 0034CCB0  38 BF 01 28 */	addi r5, r31, 0x128
 /* 803500D4 0034CCB4  38 DF 01 3C */	addi r6, r31, 0x13c
 /* 803500D8 0034CCB8  38 FF 01 40 */	addi r7, r31, 0x140
-/* 803500DC 0034CCBC  4B FF F2 8D */	bl func_8034F368
+/* 803500DC 0034CCBC  4B FF F2 8D */	bl setFbbRegs
 /* 803500E0 0034CCC0  7F C3 F3 78 */	mr r3, r30
 /* 803500E4 0034CCC4  4B FF 72 A9 */	bl OSRestoreInterrupts
 /* 803500E8 0034CCC8  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -1688,14 +1675,14 @@ func_80350094:
 /* 803500F8 0034CCD8  38 21 00 18 */	addi r1, r1, 0x18
 /* 803500FC 0034CCDC  4E 80 00 20 */	blr 
 
-.global func_80350100
-func_80350100:
+.global VISetBlack
+VISetBlack:
 /* 80350100 0034CCE0  7C 08 02 A6 */	mflr r0
-/* 80350104 0034CCE4  3C 80 80 4B */	lis r4, lbl_804A89F0@ha
+/* 80350104 0034CCE4  3C 80 80 4B */	lis r4, regs@ha
 /* 80350108 0034CCE8  90 01 00 04 */	stw r0, 4(r1)
 /* 8035010C 0034CCEC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80350110 0034CCF0  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 80350114 0034CCF4  3B E4 89 F0 */	addi r31, r4, lbl_804A89F0@l
+/* 80350114 0034CCF4  3B E4 89 F0 */	addi r31, r4, regs@l
 /* 80350118 0034CCF8  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8035011C 0034CCFC  3B C3 00 00 */	addi r30, r3, 0
 /* 80350120 0034CD00  4B FF 72 45 */	bl OSDisableInterrupts
@@ -1712,7 +1699,7 @@ func_80350100:
 /* 8035014C 0034CD2C  A1 0A 00 06 */	lhz r8, 6(r10)
 /* 80350150 0034CD30  A1 2A 00 08 */	lhz r9, 8(r10)
 /* 80350154 0034CD34  A1 4A 00 0A */	lhz r10, 0xa(r10)
-/* 80350158 0034CD38  4B FF F4 E5 */	bl func_8034F63C
+/* 80350158 0034CD38  4B FF F4 E5 */	bl setVerticalRegs
 /* 8035015C 0034CD3C  7F C3 F3 78 */	mr r3, r30
 /* 80350160 0034CD40  4B FF 72 2D */	bl OSRestoreInterrupts
 /* 80350164 0034CD44  80 01 00 24 */	lwz r0, 0x24(r1)
@@ -1722,13 +1709,13 @@ func_80350100:
 /* 80350174 0034CD54  38 21 00 20 */	addi r1, r1, 0x20
 /* 80350178 0034CD58  4E 80 00 20 */	blr 
 
-.global func_8035017C
-func_8035017C:
-/* 8035017C 0034CD5C  80 6D BD 80 */	lwz r3, lbl_804D7420@sda21(r13)
+.global VIGetRetraceCount
+VIGetRetraceCount:
+/* 8035017C 0034CD5C  80 6D BD 80 */	lwz r3, retraceCount@sda21(r13)
 /* 80350180 0034CD60  4E 80 00 20 */	blr 
 
-.global func_80350184
-func_80350184:
+.global getCurrentFieldEvenOdd
+getCurrentFieldEvenOdd:
 /* 80350184 0034CD64  3C 60 CC 00 */	lis r3, 0xCC002000@ha
 /* 80350188 0034CD68  38 E3 20 00 */	addi r7, r3, 0xCC002000@l
 /* 8035018C 0034CD6C  A4 07 00 2C */	lhzu r0, 0x2c(r7)
@@ -1758,8 +1745,8 @@ lbl_803501E4:
 /* 803501E4 0034CDC4  38 60 00 00 */	li r3, 0
 /* 803501E8 0034CDC8  4E 80 00 20 */	blr 
 
-.global func_803501EC
-func_803501EC:
+.global VIGetNextField
+VIGetNextField:
 /* 803501EC 0034CDCC  7C 08 02 A6 */	mflr r0
 /* 803501F0 0034CDD0  90 01 00 04 */	stw r0, 4(r1)
 /* 803501F4 0034CDD4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1806,8 +1793,8 @@ lbl_80350264:
 /* 8035028C 0034CE6C  7C 08 03 A6 */	mtlr r0
 /* 80350290 0034CE70  4E 80 00 20 */	blr 
 
-.global func_80350294
-func_80350294:
+.global VIGetCurrentLine
+VIGetCurrentLine:
 /* 80350294 0034CE74  7C 08 02 A6 */	mflr r0
 /* 80350298 0034CE78  90 01 00 04 */	stw r0, 4(r1)
 /* 8035029C 0034CE7C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -1850,8 +1837,8 @@ lbl_80350310:
 /* 80350328 0034CF08  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/W2MjR // 120 (96.13%)
-.global func_8035032C
-func_8035032C:
+.global VIGetTvFormat
+VIGetTvFormat:
 /* 8035032C 0034CF0C  7C 08 02 A6 */	mflr r0
 /* 80350330 0034CF10  90 01 00 04 */	stw r0, 4(r1)
 /* 80350334 0034CF14  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2096,8 +2083,8 @@ jtbl_80402E8C:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804A89F0
-lbl_804A89F0:
+.global regs
+regs:
 	.skip 0x78
 .global lbl_804A8A68
 lbl_804A8A68:
@@ -2109,8 +2096,8 @@ lbl_804A8AE0:
 
 .section .sbss
     .balign 8
-.global lbl_804D7420
-lbl_804D7420:
+.global retraceCount
+retraceCount:
 	.skip 0x4
 .global lbl_804D7424
 lbl_804D7424:
@@ -2118,11 +2105,11 @@ lbl_804D7424:
 .global lbl_804D7428
 lbl_804D7428:
 	.skip 0x8
-.global lbl_804D7430
-lbl_804D7430:
+.global PreCB
+PreCB:
 	.skip 0x4
-.global lbl_804D7434
-lbl_804D7434:
+.global PostCB
+PostCB:
 	.skip 0x4
 .global lbl_804D7438
 lbl_804D7438:
@@ -2157,8 +2144,8 @@ lbl_804D7460:
 .global lbl_804D7464
 lbl_804D7464:
 	.skip 0x4
-.global lbl_804D7468
-lbl_804D7468:
+.global FBSet
+FBSet:
 	.skip 0x4
 .global lbl_804D746C
 lbl_804D746C:

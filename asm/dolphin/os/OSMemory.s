@@ -2,12 +2,6 @@
 
 .section .text  # 0x80347BE4 - 0x80347ED8
 
-.global OSGetPhysicalMemSize
-OSGetPhysicalMemSize:
-/* 80347BE4 003447C4  3C 60 80 00 */	lis r3, 0x80000028@ha
-/* 80347BE8 003447C8  80 63 00 28 */	lwz r3, 0x80000028@l(r3)
-/* 80347BEC 003447CC  4E 80 00 20 */	blr 
-
 .global OSGetConsoleSimulatedMemSize
 OSGetConsoleSimulatedMemSize:
 /* 80347BF0 003447D0  3C 60 80 00 */	lis r3, 0x800000F0@ha

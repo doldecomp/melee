@@ -1,7 +1,6 @@
-#ifndef _lbtime_h_
-#define _lbtime_h_
+#ifndef MELEE_LB_LBTIME_H
+#define MELEE_LB_LBTIME_H
 
-#include <global.h>
 #include <dolphin/os/OSTime.h>
 
 extern s64 __div2i(s64, s64);

@@ -3,9 +3,9 @@
 
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/gx/GXTransform.h>
-#include "melee/lb/lbrefract.h"
+#include <melee/lb/lbrefract.h>
 
-#include "sysdolphin/baselib/cobj.h"
+#include <sysdolphin/baselib/cobj.h>
 
 #define HALF_PI64 1.5707963267948966
 

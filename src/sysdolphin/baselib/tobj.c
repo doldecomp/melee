@@ -1,5 +1,8 @@
 #include "sysdolphin/baselib/tobj.h"
 
+#include <math.h>
+#include <dolphin/mtx.h>
+
 #include "sysdolphin/baselib/aobj.h"
 
 extern void TObjInfoInit(void);
@@ -173,40 +176,40 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
         tobj->lod->LODBias = val->fv;
         break;
     case HSD_A_T_KONST_R:
-        tobj->tev->konst.u8.r = (u8)(255.0 * val->fv);
+        tobj->tev->konst.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_G:
-        tobj->tev->konst.u8.g = (u8)(255.0 * val->fv);
+        tobj->tev->konst.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_B:
-        tobj->tev->konst.u8.b = (u8)(255.0 * val->fv);
+        tobj->tev->konst.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_KONST_A:
-        tobj->tev->konst.u8.a = (u8)(255.0 * val->fv);
+        tobj->tev->konst.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_R:
-        tobj->tev->tev0.u8.r = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_G:
-        tobj->tev->tev0.u8.g = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_B:
-        tobj->tev->tev0.u8.b = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_A:
-        tobj->tev->tev0.u8.a = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_R:
-        tobj->tev->tev1.u8.r = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.r = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_G:
-        tobj->tev->tev1.u8.g = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.g = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_B:
-        tobj->tev->tev1.u8.b = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.b = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_A:
-        tobj->tev->tev1.u8.a = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.a = (u8)(255.0 * val->fv);
         break;
     case HSD_A_T_TS_BLEND:
         tobj->blending = val->fv;
@@ -357,3 +360,39 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 	return 0;
 }
 #pragma pop
+
+/*static*/ void MakeTextureMtx(HSD_TObj *tobj)
+{
+    Vec scale;
+    Mtx m;
+    Vec trans;
+    Quaternion rot;
+    u32 unused[2];
+    BOOL no_assert = FALSE;
+
+    if (tobj->repeat_s && tobj->repeat_t) {
+        no_assert = TRUE;
+    }
+
+    if (!no_assert) {
+        __assert(lbl_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
+    }
+
+    scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON ? 0.0F : (f32)tobj->repeat_s / tobj->scale.x;
+    scale.y = __fabsf(tobj->scale.y) < FLT_EPSILON ? 0.0F : (f32)tobj->repeat_t / tobj->scale.y;
+    scale.z = tobj->scale.z;
+    rot.x = tobj->rotate.x;
+    rot.y = tobj->rotate.y;
+    rot.z = -tobj->rotate.z;
+    trans.x = -tobj->translate.x;
+    trans.y = -(tobj->translate.y + (tobj->wrap_t == GX_MIRROR ? 1.0F / (tobj->repeat_t / tobj->scale.y) : 0.0F));
+    trans.z = tobj->translate.z;
+    
+    MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
+    HSD_MkRotationMtx(m, &rot);
+    MTXConcat(m, tobj->mtx, tobj->mtx);
+    MTXScale(m, scale.x, scale.y, scale.z);
+    MTXConcat(m, tobj->mtx, tobj->mtx);
+}
+
+// SetupTexMtx https://decomp.me/scratch/iZ3Ye

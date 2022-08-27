@@ -1,12 +1,12 @@
-#include "ftemblem.h"
+#include <ftemblem.h>
 
 void ftRoy_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
     func_80074A4C(gobj, 2, -1);
-    ft->sa.mars.x222C = 0;
+    fp->sa.mars.x222C = 0;
 }
 
 void ftRoy_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {

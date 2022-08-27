@@ -1,25 +1,25 @@
-#include "ftpeach.h"
+#include <ftpeach.h>
 
 #include <melee/it/itkind.h>
 
 void ftPeach_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* ft;
+    Fighter* fp;
 
-    ft = gobj->user_data;
-    ft->sa.peach.x222C = 1;
-    ft->sa.peach.x2234 = -1;
-    ft->sa.peach.x2240 = 0;
-    ft->sa.peach.x223C = 0;
-    ft->sa.peach.x2238 = 0;
-    ft->sa.peach.x2244 = 0;
-    ft->sa.peach.x2248 = 0;
+    fp = gobj->user_data;
+    fp->sa.peach.x222C = 1;
+    fp->sa.peach.x2234 = -1;
+    fp->sa.peach.x2240 = 0;
+    fp->sa.peach.x223C = 0;
+    fp->sa.peach.x2238 = 0;
+    fp->sa.peach.x2244 = 0;
+    fp->sa.peach.x2248 = 0;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 2, 0);
     func_80074A4C(gobj, 3, -1);
     func_80074A4C(gobj, 4, 0);
 
-    switch (ft->x619_costume_id)
+    switch (fp->x619_costume_id)
     {
         case 1:
             func_80074A4C(gobj, 1, -1);
@@ -37,14 +37,14 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
 
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    ftPeachAttributes* extAtrrs = ft->x10C_ftData->ext_attr;
-    void** items = ft->x10C_ftData->x48_items;
+    Fighter* fp = gobj->user_data;
+    ftPeachAttributes* extAtrrs = fp->x10C_ftData->ext_attr;
+    void** items = fp->x10C_ftData->x48_items;
 
-    extAtrrs->unk0 = func_8001E8F8(func_80085E50(ft, 18));
-    extAtrrs->unk4 = func_8001E8F8(func_80085E50(ft, 19));
+    extAtrrs->unk0 = func_8001E8F8(func_80085E50(fp, 18));
+    extAtrrs->unk4 = func_8001E8F8(func_80085E50(fp, 19));
 
-    PUSH_ATTRS(ft, ftPeachAttributes);
+    PUSH_ATTRS(fp, ftPeachAttributes);
     
     func_8026B3F8(items[0], It_Kind_Peach_Explode);
     func_8026B3F8(items[1], It_Kind_Peach_Turnip);

@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80152138 14ED18
 // https://decomp.me/scratch/NAMEj
@@ -13,8 +13,8 @@ void lbl_80152138(HSD_GObj* arg0) {
 // 80152174 14ED54
 // https://decomp.me/scratch/6NWxd
 void lbl_80152174(HSD_GObj* gobj) {
-    Fighter* fighter = gobj->user_data;
-    if (Player_GetPlayerSlotType(fighter->xC_playerID) == 0) {
+    Fighter* fp = gobj->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
 }
@@ -64,8 +64,8 @@ void lbl_8015223C(HSD_GObj* arg0) {
 // 80152278 14EE58
 // https://decomp.me/scratch/KNhTn
 void lbl_80152278(HSD_GObj* gobj) {
-    Fighter* fighter = gobj->user_data;
-    if (Player_GetPlayerSlotType(fighter->xC_playerID) == 0) {
+    Fighter* fp = gobj->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
 }
@@ -75,17 +75,17 @@ void lbl_80152278(HSD_GObj* gobj) {
 // 801522BC 14EE9C
 // https://decomp.me/scratch/hAUig
 void lbl_801522BC(HSD_GObj* gobj) {
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     ftData* r4_ftData;
     MasterHandAttributes* r30_attributes;
 
-    r31_ft_userdata = gobj->user_data;
-    r4_ftData = r31_ft_userdata->x10C_ftData;
+    r31_fp = gobj->user_data;
+    r4_ftData = r31_fp->x10C_ftData;
     r30_attributes = r4_ftData->ext_attr;
     func_80085134(gobj);
 
-    if ((--r31_ft_userdata->x2340_f32 > r30_attributes->x84) || (r31_ft_userdata->x2340_f32 < 0.0f)) {
-        r31_ft_userdata->x80_self_vel.x = 0.0f;
+    if ((--r31_fp->x2340_f32 > r30_attributes->x84) || (r31_fp->x2340_f32 < 0.0f)) {
+        r31_fp->x80_self_vel.x = 0.0f;
     } else {
         func_8015C010(gobj, r30_attributes->x80);
     }

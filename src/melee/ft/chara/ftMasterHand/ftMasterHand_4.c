@@ -1,22 +1,22 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 801510B0 14DC90
 // https://decomp.me/scratch/sIqel
 void func_801510B0(HSD_GObj* gobj) {
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
 
-    r31_ft_userdata = gobj->user_data;
-    r30_attributes = r31_ft_userdata->x10C_ftData->ext_attr;
+    r31_fp = gobj->user_data;
+    r30_attributes = r31_fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x157, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    r31_ft_userdata->xB0_pos.x = r30_attributes->x30_pos2.x;
-    r31_ft_userdata->xB0_pos.y = r30_attributes->x30_pos2.y;
-    r31_ft_userdata->xB0_pos.z = 0.0f;
-    r31_ft_userdata->cb.x21BC_callback_Accessory4 = &lbl_801511FC;
-    r31_ft_userdata->x2340_stateVar1 = 0;
-    func_800881D8(r31_ft_userdata, 0x4E201, 0x7F, 0x40 /*, lbl_801511FC */); // probs same file if lbl_801511FC is getting implicitly passed.
-    // func_800881D8(r31_ft_userdata, 0x4E201, 0x7F, 0x40, lbl_801511FC);
+    r31_fp->xB0_pos.x = r30_attributes->x30_pos2.x;
+    r31_fp->xB0_pos.y = r30_attributes->x30_pos2.y;
+    r31_fp->xB0_pos.z = 0.0f;
+    r31_fp->cb.x21BC_callback_Accessory4 = &lbl_801511FC;
+    r31_fp->x2340_stateVar1 = 0;
+    func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, lbl_801511FC */); // probs same file if lbl_801511FC is getting implicitly passed.
+    // func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, lbl_801511FC);
     func_8015C09C(gobj, -1.0f);
 }
 
@@ -25,12 +25,12 @@ void func_801510B0(HSD_GObj* gobj) {
 // 80151168 14DD48
 // https://decomp.me/scratch/896fc
 void lbl_80151168(HSD_GObj* gobj) {
-    Fighter* r4_ft_userdata;
+    Fighter* r4_fp;
     u32 unk[2];
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        r4_ft_userdata = gobj->user_data;
-        r4_ft_userdata->sa.masterhand.x2258 = 0x155;
+        r4_fp = gobj->user_data;
+        r4_fp->sa.masterhand.x2258 = 0x155;
         func_80151018(gobj);
     }
 }
@@ -40,9 +40,9 @@ void lbl_80151168(HSD_GObj* gobj) {
 // 801511B0 14DD90
 // https://decomp.me/scratch/lkMK2
 void lbl_801511B0(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
-    if (!Player_GetPlayerSlotType(ft->xC_playerID)) {
+    if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
         func_8015BD20(gobj);
     }
 }
@@ -67,12 +67,12 @@ void lbl_801511F8(HSD_GObj* gobj) {
 
 // 801511FC 14DDDC
 void lbl_801511FC(HSD_GObj* gobj) {
-    Fighter* ft = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     HSD_GObj* tmp_gobj;
     s32 unused[4];
-    switch(ft->x2340_stateVar1) {
+    switch(fp->x2340_stateVar1) {
         case 0:
-            tmp_gobj = func_8008627C(&ft->xB0_pos, gobj);
+            tmp_gobj = func_8008627C(&fp->xB0_pos, gobj);
             if (tmp_gobj != 0) {
                 func_8002E6FC(func_80086BE0(tmp_gobj));
             } else {
@@ -84,21 +84,21 @@ void lbl_801511FC(HSD_GObj* gobj) {
             func_8002EF14();
             func_8002EC7C(0.0f);
             func_8002F0E4(0x78);
-            ft->x2340_stateVar1 = 1;
+            fp->x2340_stateVar1 = 1;
             break;
         case 1:
             if (func_8002F260() != 0) {
                 func_8002E948(&lbl_80151428);
                 func_8002ED9C(120.0f);
                 func_8002F0E4(0x14);
-                ft->x2340_stateVar1 = 2;
+                fp->x2340_stateVar1 = 2;
             }
             break;
         case 2:
             if (func_8002F260() != 0) {
                 func_8002EC7C(1.5707963705062866f);
                 func_8002F0E4(0x3C);
-                ft->x2340_stateVar1 = 3;
+                fp->x2340_stateVar1 = 3;
             }
             break;
         case 3:
@@ -107,49 +107,49 @@ void lbl_801511FC(HSD_GObj* gobj) {
                 func_8002EC7C(-0.3490658402442932f);
                 func_8002EB5C(-0.2617993950843811f);
                 func_8002EF14();
-                ft->x2340_stateVar1 = 4;
+                fp->x2340_stateVar1 = 4;
             }
             break;
         case 4:
             func_8002F274();
-            ft->x2348_stateVar3 = 0x78;
-            ft->x2340_stateVar1 = 5;
+            fp->x2348_stateVar3 = 0x78;
+            fp->x2340_stateVar1 = 5;
             break;
         case 5:
-            if (--ft->x2348_stateVar3 == 0) {
+            if (--fp->x2348_stateVar3 == 0) {
                 func_8002EC7C(-0.3490658402442932f);
                 func_8002EF14();
                 func_8002ED9C(120.0f);
-                ft->x2348_stateVar3 = 0x1E;
-                ft->x2340_stateVar1 = 6;
+                fp->x2348_stateVar3 = 0x1E;
+                fp->x2340_stateVar1 = 6;
             }
             break;
         case 6:
-            if (--ft->x2348_stateVar3 == 0) {
+            if (--fp->x2348_stateVar3 == 0) {
                 func_8002EC7C(0.3490658402442932f);
                 func_8002EF14();
-                ft->x2348_stateVar3 = 0x1E;
-                ft->x2340_stateVar1 = 7;
+                fp->x2348_stateVar3 = 0x1E;
+                fp->x2340_stateVar1 = 7;
             }
             break;
         case 7:
-            if (--ft->x2348_stateVar3 == 0) {
+            if (--fp->x2348_stateVar3 == 0) {
                 func_8002ED9C(180.0f);
                 func_8002EC7C(-1.5707963705062866f);
                 func_8002EB5C(-0.3490658402442932f);
                 func_8002EF14();
-                ft->x2348_stateVar3 = 0x32;
-                ft->x2340_stateVar1 = 8;
+                fp->x2348_stateVar3 = 0x32;
+                fp->x2340_stateVar1 = 8;
             }
             break;
         case 8:
             func_8002F274();
-            ft->x2340_stateVar1 = 9;
+            fp->x2340_stateVar1 = 9;
             break;
         case 9:
-            if (--ft->x2348_stateVar3 == 0) {
+            if (--fp->x2348_stateVar3 == 0) {
                 func_8002F474();
-                ft->x2340_stateVar1 = 10;
+                fp->x2340_stateVar1 = 10;
             }
             break;
         // no default

@@ -3,8 +3,8 @@
 
 #include <global.h>
 #include <dolphin/types.h>
-#include "sysdolphin/baselib/gobj.h"
-#include "melee/ft/fighter.h"
+#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 
 typedef struct _MarsAttributes {
     s32 x0;
@@ -41,7 +41,7 @@ void ftMars_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
 void ftMars_OnItemInvisible(HSD_GObj* gobj);
 void ftMars_OnItemVisible(HSD_GObj* gobj);
 void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
-void ftMars_OnLoadForRoy(Fighter* ft);
+void ftMars_OnLoadForRoy(Fighter* fp);
 void ftMars_OnLoad(HSD_GObj* gobj);
 void ftMars_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftMars_OnKnockbackEnter(HSD_GObj* gobj);

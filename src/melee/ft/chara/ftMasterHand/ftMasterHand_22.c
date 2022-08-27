@@ -1,14 +1,14 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80154230 150E10
 // https://decomp.me/scratch/dpg50
 void lbl_80154230(HSD_GObj* gobj) {
-    Fighter* r4_userdata;
+    Fighter* r4_fp;
     u32 unk[2];
 
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        r4_userdata = gobj->user_data;
-        (r4_userdata->x2344_callback)(gobj);
+        r4_fp = gobj->user_data;
+        (r4_fp->x2344_callback)(gobj);
     }
 }
 
@@ -17,8 +17,8 @@ void lbl_80154230(HSD_GObj* gobj) {
 
 // 80154278 150E58
 void lbl_80154278(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -42,14 +42,14 @@ void lbl_801542DC(HSD_GObj* gobj) {
 // 801542E0 150EC0
 // https://decomp.me/scratch/pmJHD
 void func_801542E0(HSD_GObj* gobj) {
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
 
-    r31_ft_userdata = gobj->user_data;
-    r30_attributes = r31_ft_userdata->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, r31_ft_userdata->x894_currentAnimFrame, 1.0f, 0.0f);
+    r31_fp = gobj->user_data;
+    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftAnim_SetAnimRate(gobj, r30_attributes->x110_pos.y);
-    r31_ft_userdata->x2348_stateVar3 = (s32) r30_attributes->x110_pos.x;
+    r31_fp->x2348_stateVar3 = (s32) r30_attributes->x110_pos.x;
 }
 
 
@@ -80,8 +80,8 @@ void lbl_80154360(HSD_GObj* gobj) {
 
 // 801543E8 150FC8
 void lbl_801543E8(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -113,7 +113,7 @@ static inline float my_lbvector_Len(Vec3 *vec)
 }
 
 void lbl_8015442C(HSD_GObj* gobj) {
-    Fighter* ft;
+    Fighter* fp;
     MasterHandAttributes* attr;
     f32 len;
     f32 speed;
@@ -121,27 +121,27 @@ void lbl_8015442C(HSD_GObj* gobj) {
     Vec3 sp1C_vel;
     s32 unk[1];
 
-    ft = gobj->user_data;
+    fp = gobj->user_data;
 
-    attr = ft->x10C_ftData->ext_attr;
+    attr = fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
     func_8015C208(gobj, &sp28_pos);
     sp28_pos.x += attr->x108;
     sp28_pos.y += attr->x10C;
     sp28_pos.z = 0.0f;
-    lbvector_Diff(&sp28_pos, &ft->xB0_pos, &sp1C_vel);
+    lbvector_Diff(&sp28_pos, &fp->xB0_pos, &sp1C_vel);
     len = my_lbvector_Len(&sp1C_vel);
     if (len < attr->x2C) {
-        ft->x80_self_vel.x = sp1C_vel.x;
-        ft->x80_self_vel.y = sp1C_vel.y;
+        fp->x80_self_vel.x = sp1C_vel.x;
+        fp->x80_self_vel.y = sp1C_vel.y;
     } else {
         lbvector_Normalize(&sp1C_vel);
         speed = len * attr->x28;
         sp1C_vel.x *= speed;
         sp1C_vel.y *= speed;
         sp1C_vel.z *= speed;
-        ft->x80_self_vel.x = sp1C_vel.x;
-        ft->x80_self_vel.y = sp1C_vel.y;
+        fp->x80_self_vel.x = sp1C_vel.x;
+        fp->x80_self_vel.y = sp1C_vel.y;
     }
 }
 
@@ -189,8 +189,8 @@ void lbl_80154620(HSD_GObj* gobj) {
 
 // 80154670 151250
 void lbl_80154670(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -214,17 +214,17 @@ void lbl_801546D4(HSD_GObj* gobj) {
 // 801546D8 1512B8
 // https://decomp.me/scratch/UYsam
 void func_801546D8(HSD_GObj* gobj) {
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     MasterHandAttributes* temp_r30;
 
-    r31_ft_userdata = gobj->user_data;
+    r31_fp = gobj->user_data;
     // temp_f1 = ;
-    temp_r30 = r31_ft_userdata->x10C_ftData->ext_attr;
+    temp_r30 = r31_fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x17D, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    r31_ft_userdata->x234C_pos.x = temp_r30->x30_pos2.x;
-    r31_ft_userdata->x234C_pos.y = temp_r30->x30_pos2.y;
-    r31_ft_userdata->x234C_pos.z = 0.0f;
+    r31_fp->x234C_pos.x = temp_r30->x30_pos2.x;
+    r31_fp->x234C_pos.y = temp_r30->x30_pos2.y;
+    r31_fp->x234C_pos.z = 0.0f;
 }
 
 
@@ -242,8 +242,8 @@ void lbl_80154758(HSD_GObj* arg0) {
 
 // 80154794 151374
 void lbl_80154794(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -253,16 +253,16 @@ void lbl_80154794(HSD_GObj* arg0) {
 // 801547D8 1513B8
 // https://decomp.me/scratch/e8kBC
 void lbl_801547D8(HSD_GObj* gobj) {
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
 
-    r31_ft_userdata = gobj->user_data;
-    r30_attributes = r31_ft_userdata->x10C_ftData->ext_attr;
+    r31_fp = gobj->user_data;
+    r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
     func_8015BE40(
         gobj,
-        &r31_ft_userdata->x234C_pos,
-        &r31_ft_userdata->x2358_stateVar7,
+        &r31_fp->x234C_pos,
+        &r31_fp->x2358_stateVar7,
         r30_attributes->x2C,
         r30_attributes->x28
     );
@@ -281,21 +281,21 @@ void lbl_80154838(HSD_GObj* gobj) {
 // 8015483C 15141C
 // https://decomp.me/scratch/rkMCg
 void func_8015483C(HSD_GObj* gobj) {
-    Fighter* r31_ft_userdata;
+    Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
 
-    r31_ft_userdata = gobj->user_data;
-    r30_attributes = r31_ft_userdata->x10C_ftData->ext_attr;
+    r31_fp = gobj->user_data;
+    r30_attributes = r31_fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    r31_ft_userdata->x2364 = r30_attributes->x120;
-    r31_ft_userdata->x2200_ftcmd_var0 = 1;
-    r31_ft_userdata->x80_self_vel.x = 0.0f;
-    r31_ft_userdata->x80_self_vel.y = 0.0f;
-    r31_ft_userdata->x80_self_vel.z = 0.0f;
-    r31_ft_userdata->x234C_pos.x = r30_attributes->x30_pos2.x;
-    r31_ft_userdata->x234C_pos.y = r30_attributes->x30_pos2.y;
-    r31_ft_userdata->x234C_pos.z = 0.0f;
+    r31_fp->x2364 = r30_attributes->x120;
+    r31_fp->x2200_ftcmd_var0 = 1;
+    r31_fp->x80_self_vel.x = 0.0f;
+    r31_fp->x80_self_vel.y = 0.0f;
+    r31_fp->x80_self_vel.z = 0.0f;
+    r31_fp->x234C_pos.x = r30_attributes->x30_pos2.x;
+    r31_fp->x234C_pos.y = r30_attributes->x30_pos2.y;
+    r31_fp->x234C_pos.z = 0.0f;
 }
 
 
@@ -304,12 +304,12 @@ void func_8015483C(HSD_GObj* gobj) {
 // 801548D8 1514B8
 // https://decomp.me/scratch/rGeOV
 void lbl_801548D8(HSD_GObj* gobj) {
-    Fighter* r31_ft_userdata = gobj->user_data;
+    Fighter* r31_fp = gobj->user_data;
 
-    if (--r31_ft_userdata->x2364 <= 0.0f && r31_ft_userdata->x2200_ftcmd_var0) {
-        func_80155D1C(r31_ft_userdata->x1A58_interactedFighter);
-        r31_ft_userdata->x2360 = 0;
-        r31_ft_userdata->x2200_ftcmd_var0 = 0;
+    if (--r31_fp->x2364 <= 0.0f && r31_fp->x2200_ftcmd_var0) {
+        func_80155D1C(r31_fp->x1A58_interactedFighter);
+        r31_fp->x2360 = 0;
+        r31_fp->x2200_ftcmd_var0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80151018(gobj);
@@ -321,8 +321,8 @@ void lbl_801548D8(HSD_GObj* gobj) {
 
 // 80154964 151544
 void lbl_80154964(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }

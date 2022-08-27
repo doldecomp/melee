@@ -1,4 +1,4 @@
-#include "ftluigi.h"
+#include <ftluigi.h>
 
 // 0x801445C4
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update
@@ -256,7 +256,7 @@ inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     if (((u32)fp->x220C_ftcmd_var3 != 0U) && ((s32)fp->luigiVars[0].SpecialLw.isUnkColl != FALSE))
     {
-        func_8007592C(fp, 0, fp->x2C_facing_direction * atan2f(fp->x6F0_collData.x154_groundNormal.x, fp->x6F0_collData.x154_groundNormal.y));
+        func_8007592C(fp, 0, fp->x2C_facing_direction * atan2f(fp->x6F0_collData.x14C_ground.normal.x, fp->x6F0_collData.x14C_ground.normal.y));
         return;
     }
     func_8007592C(fp, 0, 0.0f);

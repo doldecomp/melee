@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 80155A58 152638
 // https://decomp.me/scratch/Q3fan

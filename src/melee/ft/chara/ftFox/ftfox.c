@@ -1,17 +1,17 @@
-#include "ftfox.h"
+#include <ftfox.h>
 
 BOOL func_800E5534(HSD_GObj* gobj)
 {
-    Fighter* ft = (Fighter*)gobj->user_data;
+    Fighter* fp = (Fighter*)gobj->user_data;
     
-    return ft->sa.fox.x222C_blasterGObj ? TRUE : FALSE;
+    return fp->sa.fox.x222C_blasterGObj ? TRUE : FALSE;
 }
 
 void ftFox_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* ft = (Fighter*)gobj->user_data;
+    Fighter* fp = (Fighter*)gobj->user_data;
     
-    ft->sa.fox.x222C_blasterGObj = 0;
+    fp->sa.fox.x222C_blasterGObj = 0;
     func_80074A4C(gobj, 0, 0);
 }
 
@@ -39,22 +39,22 @@ void ftFox_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftFox_OnLoadForFalco(Fighter* ft) 
+void ftFox_OnLoadForFalco(Fighter* fp) 
 {
-    PUSH_ATTRS(ft, ftFoxAttributes);
+    PUSH_ATTRS(fp, ftFoxAttributes);
 }
 
 void ftFox_OnLoad(HSD_GObj* gobj) {
 
-    Fighter* ft = gobj->user_data;
-    void** item_list = ft->x10C_ftData->x48_items;
+    Fighter* fp = gobj->user_data;
+    void** item_list = fp->x10C_ftData->x48_items;
 
-    ft->x2224_flag.bits.b7 = 1;
+    fp->x2224_flag.bits.b7 = 1;
 
-    PUSH_ATTRS(ft, ftFoxAttributes);
+    PUSH_ATTRS(fp, ftFoxAttributes);
     
     {
-        ftFoxAttributes *fox_attr = ft->x2D4_specialAttributes;
+        ftFoxAttributes *fox_attr = fp->x2D4_specialAttributes;
         func_8026B3F8(item_list[0], fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
         func_8026B3F8(item_list[1], fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
         func_8026B3F8(item_list[2], It_Kind_Fox_Illusion);

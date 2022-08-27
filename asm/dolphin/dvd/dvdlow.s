@@ -186,7 +186,7 @@ lbl_80336D58:
 /* 80336D6C 0033394C  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
 /* 80336D70 00333950  80 64 00 0C */	lwz r3, 0xc(r4)
 /* 80336D74 00333954  80 84 00 10 */	lwz r4, 0x10(r4)
-/* 80336D78 00333958  48 00 05 B9 */	bl func_80337330
+/* 80336D78 00333958  48 00 05 B9 */	bl DVDLowSeek
 /* 80336D7C 0033395C  38 00 00 01 */	li r0, 1
 /* 80336D80 00333960  48 00 00 08 */	b lbl_80336D88
 lbl_80336D84:
@@ -262,7 +262,7 @@ lbl_80336E64:
 /* 80336E78 00333A58  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
 /* 80336E7C 00333A5C  80 64 00 0C */	lwz r3, 0xc(r4)
 /* 80336E80 00333A60  80 84 00 10 */	lwz r4, 0x10(r4)
-/* 80336E84 00333A64  48 00 04 AD */	bl func_80337330
+/* 80336E84 00333A64  48 00 04 AD */	bl DVDLowSeek
 lbl_80336E88:
 /* 80336E88 00333A68  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80336E8C 00333A6C  38 21 00 08 */	addi r1, r1, 8
@@ -403,14 +403,14 @@ lbl_80337044:
 /* 80337078 00333C58  90 C9 00 24 */	stw r6, 0x24(r9)
 /* 8033707C 00333C5C  90 E9 00 28 */	stw r7, 0x28(r9)
 /* 80337080 00333C60  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
-/* 80337084 00333C64  48 00 02 AD */	bl func_80337330
+/* 80337084 00333C64  48 00 02 AD */	bl DVDLowSeek
 /* 80337088 00333C68  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8033708C 00333C6C  38 21 00 08 */	addi r1, r1, 8
 /* 80337090 00333C70  7C 08 03 A6 */	mtlr r0
 /* 80337094 00333C74  4E 80 00 20 */	blr 
 
-.global func_80337098
-func_80337098:
+.global DVDLowRead
+DVDLowRead:
 /* 80337098 00333C78  7C 08 02 A6 */	mflr r0
 /* 8033709C 00333C7C  3C E0 CC 00 */	lis r7, 0xCC006000@ha
 /* 803370A0 00333C80  90 01 00 04 */	stw r0, 4(r1)
@@ -592,8 +592,8 @@ lbl_80337318:
 /* 80337328 00333F08  7C 08 03 A6 */	mtlr r0
 /* 8033732C 00333F0C  4E 80 00 20 */	blr 
 
-.global func_80337330
-func_80337330:
+.global DVDLowSeek
+DVDLowSeek:
 /* 80337330 00333F10  7C 08 02 A6 */	mflr r0
 /* 80337334 00333F14  90 01 00 04 */	stw r0, 4(r1)
 /* 80337338 00333F18  38 00 00 00 */	li r0, 0
@@ -632,8 +632,8 @@ func_80337330:
 /* 803373BC 00333F9C  38 21 00 18 */	addi r1, r1, 0x18
 /* 803373C0 00333FA0  4E 80 00 20 */	blr 
 
-.global func_803373C4
-func_803373C4:
+.global DVDLowWaitCoverClose
+DVDLowWaitCoverClose:
 /* 803373C4 00333FA4  38 00 00 01 */	li r0, 1
 /* 803373C8 00333FA8  90 6D BB 98 */	stw r3, lbl_804D7238@sda21(r13)
 /* 803373CC 00333FAC  3C 60 CC 00 */	lis r3, 0xCC006000@ha
@@ -646,8 +646,8 @@ func_803373C4:
 /* 803373E8 00333FC8  90 04 00 04 */	stw r0, 4(r4)
 /* 803373EC 00333FCC  4E 80 00 20 */	blr 
 
-.global func_803373F0
-func_803373F0:
+.global DVDLowReadDiskID
+DVDLowReadDiskID:
 /* 803373F0 00333FD0  7C 08 02 A6 */	mflr r0
 /* 803373F4 00333FD4  39 00 00 00 */	li r8, 0
 /* 803373F8 00333FD8  90 01 00 04 */	stw r0, 4(r1)
@@ -690,8 +690,8 @@ func_803373F0:
 /* 8033748C 0033406C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80337490 00334070  4E 80 00 20 */	blr 
 
-.global func_80337494
-func_80337494:
+.global DVDLowStopMotor
+DVDLowStopMotor:
 /* 80337494 00334074  7C 08 02 A6 */	mflr r0
 /* 80337498 00334078  90 01 00 04 */	stw r0, 4(r1)
 /* 8033749C 0033407C  38 00 00 00 */	li r0, 0
@@ -728,8 +728,8 @@ func_80337494:
 /* 80337518 003340F8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033751C 003340FC  4E 80 00 20 */	blr 
 
-.global func_80337520
-func_80337520:
+.global DVDLowRequestError
+DVDLowRequestError:
 /* 80337520 00334100  7C 08 02 A6 */	mflr r0
 /* 80337524 00334104  90 01 00 04 */	stw r0, 4(r1)
 /* 80337528 00334108  38 00 00 00 */	li r0, 0
@@ -766,8 +766,8 @@ func_80337520:
 /* 803375A4 00334184  38 21 00 18 */	addi r1, r1, 0x18
 /* 803375A8 00334188  4E 80 00 20 */	blr 
 
-.global func_803375AC
-func_803375AC:
+.global DVDLowInquiry
+DVDLowInquiry:
 /* 803375AC 0033418C  7C 08 02 A6 */	mflr r0
 /* 803375B0 00334190  38 C0 00 20 */	li r6, 0x20
 /* 803375B4 00334194  90 01 00 04 */	stw r0, 4(r1)
@@ -808,8 +808,8 @@ func_803375AC:
 /* 80337640 00334220  38 21 00 18 */	addi r1, r1, 0x18
 /* 80337644 00334224  4E 80 00 20 */	blr 
 
-.global func_80337648
-func_80337648:
+.global DVDLowAudioStream
+DVDLowAudioStream:
 /* 80337648 00334228  7C 08 02 A6 */	mflr r0
 /* 8033764C 0033422C  90 01 00 04 */	stw r0, 4(r1)
 /* 80337650 00334230  38 00 00 00 */	li r0, 0
@@ -887,8 +887,8 @@ DVDLowRequestAudioStatus:
 /* 80337764 00334344  38 21 00 18 */	addi r1, r1, 0x18
 /* 80337768 00334348  4E 80 00 20 */	blr 
 
-.global func_8033776C
-func_8033776C:
+.global DVDLowAudioBufferConfig
+DVDLowAudioBufferConfig:
 /* 8033776C 0033434C  7C 08 02 A6 */	mflr r0
 /* 80337770 00334350  2C 03 00 00 */	cmpwi r3, 0
 /* 80337774 00334354  90 01 00 04 */	stw r0, 4(r1)
@@ -930,8 +930,8 @@ lbl_80337798:
 /* 80337800 003343E0  38 21 00 20 */	addi r1, r1, 0x20
 /* 80337804 003343E4  4E 80 00 20 */	blr 
 
-.global func_80337808
-func_80337808:
+.global DVDLowReset
+DVDLowReset:
 /* 80337808 003343E8  7C 08 02 A6 */	mflr r0
 /* 8033780C 003343EC  3C 80 CC 00 */	lis r4, 0xCC003000@ha
 /* 80337810 003343F0  90 01 00 04 */	stw r0, 4(r1)

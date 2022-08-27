@@ -1,5 +1,5 @@
-#include "gmmain_lib.h"
-#include "melee/lb/lbtime.h"
+#include <gmmain_lib.h>
+#include <melee/lb/lbtime.h>
 
 void* func_8015CC34(void) {
     return &lbl_804D3EE0->x1850;
@@ -208,7 +208,7 @@ s32* func_8015D06C(u8 arg0) {
 }
 
 #ifdef NON_MATCHING
-// needs a frank patch
+// needs a @frank patch
 s32* func_8015D084(s32 arg0) {
     return &func_8015EDBC()->xB0[arg0 & 0xFF];
 }
@@ -351,7 +351,7 @@ s32* func_8015D438(u8 arg0) {
 }
 
 #ifdef NON_MATCHING
-// needs a frank patch
+// needs a @frank patch
 s32* func_8015D450(s32 arg0) {
     return &func_8015EDBC()->x4C[arg0 & 255];
 }

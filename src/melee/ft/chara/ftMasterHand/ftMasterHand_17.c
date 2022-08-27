@@ -1,4 +1,4 @@
-#include "ftMasterHand.h"
+#include <ftMasterHand.h>
 
 // 8015386C 15044C
 // https://decomp.me/scratch/dCvLa
@@ -12,8 +12,8 @@ void lbl_8015386C(HSD_GObj* arg0) {
 
 // 801538A8 150488
 void lbl_801538A8(HSD_GObj* arg0) {
-    Fighter* ft = arg0->user_data;
-    if (Player_GetPlayerSlotType(ft->xC_playerID) == 0) {
+    Fighter* fp = arg0->user_data;
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
@@ -37,21 +37,21 @@ void lbl_8015390C(HSD_GObj* gobj) {
 // 80153910 1504F0
 // https://decomp.me/scratch/AYDbj
 void func_80153910(HSD_GObj* arg0) {
-    Fighter* ft;
+    Fighter* fp;
     MasterHandAttributes* attr;
     Vec3 sp10;
     s32 unk;
 
-    ft = arg0->user_data;
-    attr = ft->x10C_ftData->ext_attr;
+    fp = arg0->user_data;
+    attr = fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(arg0, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     func_8015C208(arg0, &sp10);
-    ft->xB0_pos.x = sp10.x;
-    ft->xB0_pos.y = attr->x5C;
-    ft->x80_self_vel.z = 0.0f;
-    ft->x80_self_vel.y = 0.0f;
-    ft->x80_self_vel.x = 0.0f;
+    fp->xB0_pos.x = sp10.x;
+    fp->xB0_pos.y = attr->x5C;
+    fp->x80_self_vel.z = 0.0f;
+    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.x = 0.0f;
 }
 
 

@@ -1,8 +1,8 @@
 #ifndef _ftfox_h_
 #define _ftfox_h_
 
-#include "melee/ft/ftcommon.h"
-#include "melee/lb/lbvector.h"
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
@@ -43,6 +43,12 @@ typedef enum ftFoxAction {
     AS_FOX_SPECIALAIRLW_HIT,
     AS_FOX_SPECIALAIRLW_END,
     AS_FOX_SPECIALAIRLW_TURN,
+    AS_FOX_APPEALS_START_R,
+    AS_FOX_APPEALS_START_L,
+    AS_FOX_APPEALS_R,
+    AS_FOX_APPEALS_L,
+    AS_FOX_APPEALS_END_R,
+    AS_FOX_APPEALS_END_L,
 
 } ftFoxAction;
 

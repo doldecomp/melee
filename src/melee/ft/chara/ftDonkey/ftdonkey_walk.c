@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ftdonkey.h>
 
 
 s32 ftDonkey_800DFA98(HSD_GObj* fighterObj) {
@@ -10,8 +10,8 @@ s32 ftDonkey_800DFA98(HSD_GObj* fighterObj) {
 }
 
 void ftDonkey_800DFAE4(HSD_GObj* fighterObj, f32 argf) {
-    Fighter* fighter = getFighter(fighterObj);
-    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fighter);
+    Fighter* fp = getFighter(fighterObj);
+    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
     ftWalkCommon_800DFCA4(
         fighterObj, donkey_attr->action_state + 1, 0, 
         argf, 

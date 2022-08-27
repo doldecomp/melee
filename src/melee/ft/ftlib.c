@@ -1,4 +1,4 @@
-#include "ftlib.h"
+#include <ftlib.h>
 
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/it/itkind.h>
@@ -90,7 +90,7 @@ HSD_GObj* func_80086198(HSD_GObj* gobj)
     return result;
 }
 
-// get closest opposing fighter?
+// get closest opposing fp?
 HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
 {
     Vec3 cur_v;
@@ -135,7 +135,7 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
     return result;
 }
 
-// get closest opposing fighter, on given side (left/right)
+// get closest opposing fp, on given side (left/right)
 HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
 {
     Vec3 sp24;
@@ -388,9 +388,9 @@ BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1) {
     }
 }
 
-BOOL func_80086960(u16* arg)
+BOOL func_80086960(HSD_GObj* arg)
 {
-    if (arg != NULL && *arg == 4) {
+    if (arg != NULL && arg->classifier == 4) {
         return TRUE;
     } else {
         return FALSE;
@@ -413,7 +413,7 @@ inline void vector_add(Vec* dst, Vec* src, f32 x, f32 y, f32 z)
 void func_80086990(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
-    f32 tmp = 0.5f * (fp->x6F0_collData.xA8 + fp->x6F0_collData.xB0);
+    f32 tmp = 0.5f * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y + fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
     vector_add(v, &fp->xB0_pos, 0.0f, tmp, 0.0f);
 }
 
@@ -475,7 +475,7 @@ BOOL func_80086A8C(HSD_GObj* gobj)
         temp_r3 = func_80030A50();
         if (temp_r3 != NULL) {
             void* temp_r30 = temp_r3->unk28;
-            if (temp_r30 == func_8036A288()) {
+            if (temp_r30 == HSD_CObjGetCurrent()) {
                 if (func_80030CD8(fp->x890_cameraBox, &fp->x2188)) {
                     fp->x221F_flag.bits.b0 = 0;
                     return TRUE;
@@ -524,7 +524,7 @@ void func_80086BB4(HSD_GObj* gobj)
     func_80031154(&cam->x10);
 }
 
-s32 func_80086BE0(HSD_GObj* gobj)
+u8 func_80086BE0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     return fp->xC_playerID;
@@ -972,7 +972,7 @@ void func_8008777C(HSD_GObj* gobj)
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
     }
     cd = &fp->x6F0_collData;
-    atan2f(-cd->x154_groundNormal.x, cd->x154_groundNormal.y);
+    atan2f(-cd->x14C_ground.normal.x, cd->x14C_ground.normal.y);
 }
 
 BOOL func_800877D4(HSD_GObj* gobj)

@@ -5,6 +5,7 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/types.h>
 
+typedef u8 __OSInterrupt;
 typedef enum
 {
     OS_INTR_MEM_0,
@@ -49,9 +50,9 @@ extern u32 __OSLastInterruptSrr0;
 extern s16 __OSLastInterrupt;
 extern s64 __OSLastInterruptTime;
 
-u32 OSDisableInterrupts(void);
-u32 OSEnableInterrupts(void);
-void OSRestoreInterrupts(u32);
+BOOL OSDisableInterrupts(void);
+BOOL OSEnableInterrupts(void);
+BOOL OSRestoreInterrupts(BOOL);
 
 OSInterruptHandler __OSSetInterruptHandler(OSInterruptType, OSInterruptHandler);
 OSInterruptHandler __OSGetInterruptHandler(OSInterruptType);

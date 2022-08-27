@@ -1,4 +1,4 @@
-#include "cmsnap.h"
+#include <melee/cm/cmsnap.h>
 #include <dolphin/types.h>
 #include <global.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

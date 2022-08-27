@@ -14,8 +14,8 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/random.h>
-#include "sysdolphin/baselib/controller.h"
-#include "melee/lb/lbrefract.h"
+#include <sysdolphin/baselib/controller.h>
+#include <melee/lb/lbrefract.h>
 #include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
 #include <melee/ft/ftstatevars.h>
@@ -131,7 +131,7 @@ typedef enum CharacterKind
 #define FIGHTER_MODEL_FLAG_NOUPDATE 0x4000000
 #define FIGHTER_UNK_0x2227 0x8000000
 #define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
-#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fighter animation?
+#define FIGHTER_ANIM_NOUPDATE 0x20000000 // Keeps current fp animation?
 #define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
 #define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
 
@@ -140,11 +140,21 @@ typedef enum CharacterKind
 
 #define IS_INTERRUPTIBLE 1
 
-// Ledge Grab Flags //
+// Ledge Grab Macros //
 
 #define CLIFFCATCH_BOTH 0
-#define CLIFFCATCH_RIGHT 1
 #define CLIFFCATCH_LEFT -1
+#define CLIFFCATCH_RIGHT 1
+
+// Ternary macro for fcmpo-based facing direction check 
+
+#define CLIFFCATCH_O(fp) \
+(fp->x2C_facing_direction < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+
+// Ternary macro for fcmpu-based facing direction check
+
+#define CLIFFCATCH_U(fp) \
+(fp->x2C_facing_direction != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
 
 typedef enum ftCommonAction
 {
@@ -813,6 +823,90 @@ typedef struct _CameraBox
   Vec3 x48;
 } CameraBox;
 
+typedef struct _ftECB
+{
+    Vec2 top;
+    Vec2 bottom;
+    Vec2 right;
+    Vec2 left;
+} ftECB;
+
+typedef struct _ECBFlagStruct {
+    union { 
+        struct {
+        u8 b0 : 1;
+        u8 b1234 : 4;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } bits;
+    u8 raw;
+    };
+} ECBFlagStruct;
+
+typedef struct SurfaceData {
+    s32 index;
+    u32 unk;
+    Vec3 normal;
+} SurfaceData;
+
+typedef struct _CollData
+{
+    HSD_GObj* x0_gobj;
+    Vec3 x4_vec;
+    Vec3 x10_vec;
+    Vec3 x1C_vec;
+    Vec3 x28_vec;
+    ECBFlagStruct x34_flags;
+    ECBFlagStruct x35_flags;
+    s16 x36;
+    s32 x38;
+    s32 x3C;
+    s32 x40;
+    u32 x44;
+    u32 x48;
+    u32 x4C;
+    f32 x50;
+    f32 x54;
+    f32 x58;
+    f32 x5C;
+    s32 x60;
+    ftECB x64_ecb;
+    ftECB x84_ecb;
+    ftECB xA4_ecbCurrCorrect;
+    ftECB xC4_ecb;
+    ftECB xE4_ecb;
+    s32 x104; // TODO: this is the start of a substruct with size 0x2C
+    union {
+        struct {
+            HSD_JObj* x108_joint;
+            HSD_JObj* x10C_joint[6];
+        };
+        struct {
+            f32 x108_f32;
+            f32 x10C_f32;
+            f32 x110_f32;
+            f32 x114_f32;
+            f32 x118_f32;
+            f32 x11C_f32;
+            f32 x120_f32;
+        };
+    };
+    f32 x124;
+    f32 x128;
+    f32 x12C;
+    u32 x130_flags;
+    s32 x134_envFlags;
+    s32 filler138;
+    s32 filler13C;
+    Vec3 x140;
+    SurfaceData x14C_ground;
+    SurfaceData x160_rightwall;
+    SurfaceData x174_leftwall;
+    SurfaceData x188_ceiling;
+    /* 0x19C */ s32 x19C;
+} CollData;
+
 typedef struct ftHurt
 {
     u32 x0_bone_state;                    // 0x0, whether or not this hurtbox can be hit
@@ -837,7 +931,7 @@ typedef struct ftHurt
 
 typedef struct _SmashAttr {
     s32 x2114_state;                        // 0x2114 0 = none, 1 = pre-charge, 2 = charging, 3 = release
-    f32 x2118_frames;                       // 0x2118 number of frames fighter has charged for
+    f32 x2118_frames;                       // 0x2118 number of frames fp has charged for
     f32 x211C_holdFrame;                    // 0x211c frame that charge begins/ends
     f32 x2120_damageMul;                    // 0x2120 damage multiplier
     f32 x2124_frameSpeedMul;                // 0x2124 speed multiplier?
@@ -916,7 +1010,7 @@ struct S_TEMP4 {
 };
 
 // --------------------------------------------------------------------------------
-// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fighter
+// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fp
 // header includes or something.
 // --------------------------------------------------------------------------------
 struct SpecialAttrs_Mario {
@@ -1066,11 +1160,11 @@ struct SpecialAttrs_Purin {
 };
 
 struct SpecialAttrs_Mewtwo {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ s32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
+    /* 0x222C */ HSD_GObj* x222C_disableGObj;
+    /* 0x2230 */ HSD_GObj* x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
+    /* 0x2234 */ s32 x2234_shadowBallCharge;     // Number of cycles Shadow Ball has been charged
+    /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
+    /* 0x223C */ BOOL x223C_isConfusionBoost;
 };
 
 struct SpecialAttrs_Luigi {
@@ -1206,7 +1300,8 @@ typedef struct _Fighter {
     /* 0x10C */ ftData* x10C_ftData;
     // TODO: Ask Psi how many of those are confirmed, only a fraction of them is used right now
     attr x110_attr;
-    u8 filler_x294[0x2CC - 0x294];
+    u8 filler_x294[0x2C4 - 0x294];
+    /* 0x2C4 */ Vec2 x2C4;
     /* 0x2CC */ void* x2CC;
     /* 0x2D0 */ void* x2D0;
     /* 0x2D4 */ void* x2D4_specialAttributes;
@@ -1603,33 +1698,33 @@ typedef struct _Fighter {
     /* 0x2188 */ S32Pair x2188;
     // callback struct. Not all of them used by fighter.c, but I'm leaving them in for now.
     struct cb {
-        void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fighter); // used
-        void (*x2194_callback)(HSD_GObj *fighter); // used
+        void (*x2190_callback_OnGrabFighter_Self)(HSD_GObj *fp); // used
+        void (*x2194_callback)(HSD_GObj *fp); // used
         void (*x2198_callback_OnGrabFighter_Victim)(HSD_GObj*, HSD_GObj*); // used
-        void (*x219C_callback_IASA)(HSD_GObj *fighter); // used
-        void (*x21A0_callback_Anim)(HSD_GObj *fighter);
-        void (*x21A4_callback_Phys)(HSD_GObj *fighter); // xused
-        void (*x21A8_callback_Coll)(HSD_GObj *fighter);
-        void (*x21AC_callback_Cam)(HSD_GObj *fighter);
-        void (*x21B0_callback_Accessory1)(HSD_GObj *fighter);
-        void (*x21B4_callback_Accessory2)(HSD_GObj *fighter); // used
-        void (*x21B8_callback_Accessory3)(HSD_GObj *fighter); // used
-        void (*x21BC_callback_Accessory4)(HSD_GObj *fighter);
-        void (*x21C0_callback_OnGiveDamage)(HSD_GObj *fighter);
-        void (*x21C4_callback_OnShieldHit)(HSD_GObj *fighter);
-        void (*x21C8_callback_OnReflectHit)(HSD_GObj *fighter);
-        void (*x21CC_callback)(HSD_GObj *fighter);
-        void (*x21D0_callback_EveryHitlag)(HSD_GObj *fighter); // xused
-        void (*x21D4_callback_EnterHitlag)(HSD_GObj *fighter);
-        void (*x21D8_callback_ExitHitlag)(HSD_GObj *fighter);
-        void (*x21DC_callback_OnTakeDamage)(HSD_GObj *fighter);
-        void (*x21E0_callback_OnDeath)(HSD_GObj *fighter); // used
-        void (*x21E4_callback_OnDeath2)(HSD_GObj *fighter); // used. internally Dead_Proc as evidenced by 800f5430
-        void (*x21E8_callback_OnDeath3)(HSD_GObj *fighter); // used
-        void (*x21EC_callback)(HSD_GObj *fighter);
-        void (*x21F0_callback)(HSD_GObj *fighter);
-        void (*x21F4_callback)(HSD_GObj *fighter);
-        void (*x21F8_callback)(HSD_GObj *fighter);
+        void (*x219C_callback_IASA)(HSD_GObj *fp); // used
+        void (*x21A0_callback_Anim)(HSD_GObj *fp);
+        void (*x21A4_callback_Phys)(HSD_GObj *fp); // xused
+        void (*x21A8_callback_Coll)(HSD_GObj *fp);
+        void (*x21AC_callback_Cam)(HSD_GObj *fp);
+        void (*x21B0_callback_Accessory1)(HSD_GObj *fp);
+        void (*x21B4_callback_Accessory2)(HSD_GObj *fp); // used
+        void (*x21B8_callback_Accessory3)(HSD_GObj *fp); // used
+        void (*x21BC_callback_Accessory4)(HSD_GObj *fp);
+        void (*x21C0_callback_OnGiveDamage)(HSD_GObj *fp);
+        void (*x21C4_callback_OnShieldHit)(HSD_GObj *fp);
+        void (*x21C8_callback_OnReflectHit)(HSD_GObj *fp);
+        void (*x21CC_callback)(HSD_GObj *fp);
+        void (*x21D0_callback_EveryHitlag)(HSD_GObj *fp); // xused
+        void (*x21D4_callback_EnterHitlag)(HSD_GObj *fp);
+        void (*x21D8_callback_ExitHitlag)(HSD_GObj *fp);
+        void (*x21DC_callback_OnTakeDamage)(HSD_GObj *fp);
+        void (*x21E0_callback_OnDeath)(HSD_GObj *fp); // used
+        void (*x21E4_callback_OnDeath2)(HSD_GObj *fp); // used. internally Dead_Proc as evidenced by 800f5430
+        void (*x21E8_callback_OnDeath3)(HSD_GObj *fp); // used
+        void (*x21EC_callback)(HSD_GObj *fp);
+        void (*x21F0_callback)(HSD_GObj *fp);
+        void (*x21F4_callback)(HSD_GObj *fp);
+        void (*x21F8_callback)(HSD_GObj *fp);
     } cb;
     /* 0x21FC */ u8 x21FC;
     u8 filler_x21FC[0x2200 - 0x21FD];
@@ -1743,6 +1838,10 @@ typedef struct _Fighter {
     /* 0x232C */ s32 x232C;
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
+
+    /* The following series of individual unions with array size 0 is a temporary hack to bypass compiler errors and size shifts for this mess of a struct.
+    These StateVar structs should be one big union once the rest is cleaned up. */
+
     union {
         union {
             ftCommonStateVars commonVars[0]; // 0x2340
@@ -1761,6 +1860,9 @@ typedef struct _Fighter {
         };
         union {
             ftLuigiStateVars luigiVars[0]; // 0x2340
+        };
+        union {
+            ftMewtwoStateVars mewtwoVars[0]; // 0x2340
         };
         union {
             ftGameWatchStateVars gameWatchVars[0]; // 0x2340
@@ -1800,9 +1902,9 @@ typedef struct _Fighter {
                 /* 0x2350 */ f32 x2350_stateVar5_f32;
             };
             union {
-                /* 0x2350 */ u32 x2354_stateVar6;
-                /* 0x2350 */ s32 x2354_stateVar6_s32;
-                /* 0x2350 */ f32 x2354_stateVar6_f32;
+                /* 0x2354 */ u32 x2354_stateVar6;
+                /* 0x2354 */ s32 x2354_stateVar6_s32;
+                /* 0x2354 */ f32 x2354_stateVar6_f32;
             };
         };
         /* 0x234C */ Vec3 x234C_pos;
@@ -1894,13 +1996,13 @@ inline Fighter* getFighter(HSD_GObj* fighterObj)
 
 inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
 {
-    Fighter* fighter_data = fighter_gobj->user_data;
-    return fighter_data;
+    Fighter* fp = fighter_gobj->user_data;
+    return fp;
 }
 
-inline void* getFtSpecialAttrs(Fighter* fighter_data)
+inline void* getFtSpecialAttrs(Fighter* fp)
 {
-    void* fighter_attr = fighter_data->x2D4_specialAttributes;
+    void* fighter_attr = fp->x2D4_specialAttributes;
     return fighter_attr;
 }
 
@@ -1919,9 +2021,9 @@ inline s32 ftGetAction(Fighter* fp)
     return fp->x10_action_state_index;
 }
 
-inline void* getFtSpecialAttrs2CC(Fighter* fighter_data)
+inline void* getFtSpecialAttrs2CC(Fighter* fp)
 {
-    void* fighter_attr = fighter_data->x2CC;
+    void* fighter_attr = fp->x2CC;
     return fighter_attr;
 }
 
@@ -1957,7 +2059,7 @@ void Fighter_UpdateModelScale(HSD_GObj* fighterObj);
 void Fighter_UnkInitReset_80067C98(Fighter*);
 void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighterObj);
 void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighterObj);
-void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fighter);
+void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
 void Fighter_ResetInputData_80068854(HSD_GObj* fighterObj);
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata);
 u32 Fighter_NewSpawn_80068E40();
@@ -1977,10 +2079,10 @@ void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighterObj);
 void Fighter_8006C80C(HSD_GObj* fighterObj);
 void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighterObj);
 void Fighter_8006CB94(HSD_GObj* fighterObj);
-void Fighter_UnkTakeDamage_8006CC30(Fighter* fighter, f32 damage_amount);
+void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 damage_amount);
 void Fighter_TakeDamage_8006CC7C(Fighter*, f32);
-void Fighter_8006CDA4(Fighter* fighter, s32 arg1, s32 arg2, s32 arg3);
-void Fighter_8006CF5C(Fighter* fighter, s32 arg1);
+void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3);
+void Fighter_8006CF5C(Fighter* fp, s32 arg1);
 void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighterObj);
 void Fighter_8006CFE0(HSD_GObj* fighterObj);
 void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighterObj);
@@ -1989,31 +2091,31 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj);
 void Fighter_8006D9AC(HSD_GObj* fighterObj);
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
 void Fighter_8006DA4C(HSD_GObj* fighterObj);
-void Fighter_Unload_8006DABC(Fighter* fighter);
+void Fighter_Unload_8006DABC(Fighter* fp);
 
 
 ///// Shared Fighter Code
 
-#define PUSH_ATTRS(ft, attributeName)                                           \
+#define PUSH_ATTRS(fp, attributeName)                                           \
     do {                                                                    \
-        void* backup = (ft)->x2D8_specialAttributes2;                      \
-        attributeName *src = (attributeName*)(ft)->x10C_ftData->ext_attr;  \
-        void* *attr = &(ft)->x2D4_specialAttributes;                       \
-        *(attributeName *)(ft)->x2D8_specialAttributes2 = *src;            \
+        void* backup = (fp)->x2D8_specialAttributes2;                      \
+        attributeName *src = (attributeName*)(fp)->x10C_ftData->ext_attr;  \
+        void* *attr = &(fp)->x2D4_specialAttributes;                       \
+        *(attributeName *)(fp)->x2D8_specialAttributes2 = *src;            \
         *attr = backup;                                                      \
     } while(0)
 
 #define COPY_ATTRS(gobj, attributeName)                                          \
-    Fighter* ft = gobj->user_data;                                               \
-    attributeName* sA2 = (attributeName*)ft->x2D4_specialAttributes;             \
-    attributeName* ext_attr = (attributeName*)ft->x10C_ftData->ext_attr;         \
+    Fighter* fp = gobj->user_data;                                               \
+    attributeName* sA2 = (attributeName*)fp->x2D4_specialAttributes;             \
+    attributeName* ext_attr = (attributeName*)fp->x10C_ftData->ext_attr;         \
     *sA2 = *ext_attr;                                                            \
 
 #define SCALE_HEIGHT_ATTRS(num_attrs)                     \
     {                                                     \
         int i;                                            \
         for (i = 0; i < num_attrs; i++) {                 \
-            sA2->height_attributes[i] *= ft->x34_scale.y; \
+            sA2->height_attributes[i] *= fp->x34_scale.y; \
         }                                                 \
     }  \
 
@@ -2021,9 +2123,9 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
 // Works but unused decided to go with inline instead 
 #define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                             \
     void FTNAME##_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {                 \
-        Fighter *fighter = getFighter(fighterObj);                                \
-        if (!func_8026B2B4(fighter->x1974_heldItem)) {                            \
-            switch (func_8026B320(fighter->x1974_heldItem)) {                     \
+        Fighter *fp = getFighter(fighterObj);                                \
+        if (!func_8026B2B4(fp->x1974_heldItem)) {                            \
+            switch (func_8026B320(fp->x1974_heldItem)) {                     \
                 case 1:                                                           \
                     func_80070FB4(fighterObj, param1, 1);                         \
                     break;                                                        \
@@ -2045,9 +2147,9 @@ void Fighter_Unload_8006DABC(Fighter* fighter);
 
 /// used for all fighters except Kirby and Purin
 inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag, BOOL bool2, BOOL bool3) {
-    Fighter *fighter = getFighter(fighterObj);            
-    if (!func_8026B2B4(fighter->x1974_heldItem)) {        
-        switch (func_8026B320(fighter->x1974_heldItem)) { 
+    Fighter *fp = getFighter(fighterObj);            
+    if (!func_8026B2B4(fp->x1974_heldItem)) {        
+        switch (func_8026B320(fp->x1974_heldItem)) { 
             case 1:                                       
                 func_80070FB4(fighterObj, bool2, 1);     
                 break;                                    
@@ -2069,16 +2171,16 @@ inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag, BOOL 
 
 inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
 {
-    Fighter* ft = getFighter(gobj);
-    if (!func_8026B2B4(ft->x1974_heldItem)) {
+    Fighter* fp = getFighter(gobj);
+    if (!func_8026B2B4(fp->x1974_heldItem)) {
         func_80070CC4(gobj, bool);
     }
 }
 
 inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
 {
-    Fighter* ft = getFighter(gobj);
-    if (!func_8026B2B4(ft->x1974_heldItem)) {
+    Fighter* fp = getFighter(gobj);
+    if (!func_8026B2B4(fp->x1974_heldItem)) {
         func_80070C48(gobj, bool);
     }
 }
@@ -2102,8 +2204,8 @@ inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1) {
 }
 
 inline void Fighter_UnsetCmdVar0(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighter(fighterObj);
-    fighter->x2200_ftcmd_var0 = 0;
+    Fighter* fp = getFighter(fighterObj);
+    fp->x2200_ftcmd_var0 = 0;
 }
 
 #endif

@@ -1,4 +1,4 @@
-#include "sysdolphin/baselib/mtx.h"
+#include <sysdolphin/baselib/mtx.h>
 
 
 #define EPSILON 0.0000000001f
@@ -275,7 +275,7 @@ void func_80379F88(Mtx arg0, Vec* arg1)
     }
 }
 
-void func_8037A120(Mtx arg0, Vec* arg1)
+void HSD_MkRotationMtx(Mtx arg0, Vec* arg1)
 {
     f32 sinX;
     f32 cosX;

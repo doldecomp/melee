@@ -1,4 +1,4 @@
-#include "util.h"
+#include <sysdolphin/baselib/util.h>
 
 float lbl_80406DF0[] = {
     1.0f,
@@ -16,10 +16,10 @@ float lbl_80406DF0[] = {
 };
 
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest) {
-    dest->u8.r = (arg0->u8.r * arg1->u8.r) / 255U;
-    dest->u8.g = (arg0->u8.g * arg1->u8.g) / 255U;
-    dest->u8.b = (arg0->u8.b * arg1->u8.b) / 255U;
-    dest->u8.a = (arg0->u8.a * arg1->u8.a) / 255U;
+    dest->r = (arg0->r * arg1->r) / 255U;
+    dest->g = (arg0->g * arg1->g) / 255U;
+    dest->b = (arg0->b * arg1->b) / 255U;
+    dest->a = (arg0->a * arg1->a) / 255U;
 }
 
 // HSD_CountSetBits?

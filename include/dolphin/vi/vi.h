@@ -3,6 +3,9 @@
 
 #include <dolphin/types.h>
 
-s32 func_8035032C();
+s32 VIGetTvFormat();
+void VIConfigure(s32);
+void VIFlush();
+void VISetNextFrameBuffer(s32);
 
 #endif

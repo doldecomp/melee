@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ftdonkey.h>
 
 s32 ftDonkey_800E0134(HSD_GObj* fighterObj) {
     if (func_800C97A8(fighterObj)) {
@@ -9,7 +9,7 @@ s32 ftDonkey_800E0134(HSD_GObj* fighterObj) {
 }
 
 void ftDonkey_800E017C(HSD_GObj* fighterObj) {
-    Fighter* fighter = getFighterPlus(fighterObj);
-    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fighter);
+    Fighter* fp = getFighterPlus(fighterObj);
+    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
     func_800C9840(fighterObj, donkey_attr->action_state + 4, 0, 0.0f, donkey_attr->cargo_hold.x20_TURN_SPEED, 0.0f);
 }

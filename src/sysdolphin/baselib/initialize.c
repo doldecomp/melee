@@ -1,25 +1,25 @@
-#include "sysdolphin/baselib/initialize.h"
+#include <sysdolphin/baselib/initialize.h>
 
 #include <stdarg.h>
 
-#include "dolphin/os/os.h"
-#include "dolphin/os/OSArena.h"
-#include "dolphin/os/OSMemory.h"
-#include "sysdolphin/baselib/aobj.h"
-#include "sysdolphin/baselib/displayfunc.h"
-#include "sysdolphin/baselib/id.h"
-#include "sysdolphin/baselib/leak.h"
-#include "sysdolphin/baselib/mtx.h"
-#include "sysdolphin/baselib/objalloc.h"
-#include "sysdolphin/baselib/random.h"
-#include "sysdolphin/baselib/robj.h"
-#include "sysdolphin/baselib/shadow.h"
-#include "sysdolphin/baselib/tev.h"
+#include <dolphin/os/os.h>
+#include <dolphin/os/OSArena.h>
+#include <dolphin/os/OSMemory.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/displayfunc.h>
+#include <sysdolphin/baselib/id.h>
+#include <sysdolphin/baselib/leak.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/objalloc.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/robj.h>
+#include <sysdolphin/baselib/shadow.h>
+#include <sysdolphin/baselib/tev.h>
 #include <dolphin/gx/GXLight.h>
 
 extern OSHeapHandle __OSCurrHeap;
 extern OSHeapHandle lbl_804D6018;
-extern GXRenderModeObj lbl_80401168;
+extern GXRenderModeObj GXNtsc480IntDf;
 extern GXRenderModeObj lbl_804C1D80;
 
 static void *FrameBuffer[HSD_VI_XFB_MAX];
@@ -33,7 +33,7 @@ static s32 init_done;
 static s32 shown;
 
 static volatile OSHeapHandle current_heap = -1;
-static GXRenderModeObj *rmode = &lbl_80401168;
+static GXRenderModeObj *rmode = &GXNtsc480IntDf;
 static int current_z_fmt = GX_ZC_MID;
 static u32 iparam_fifo_size = HSD_DEFAULT_FIFO_SIZE;
 static int iparam_xfb_max_num = HSD_DEFAULT_XFB_MAX_NUM;
@@ -159,11 +159,8 @@ static void HSD_GXInit(void)
     GXInitLightPos(&lightobj, 1, 0, 0);
     GXInitLightDir(&lightobj, 1, 0, 0);
     GXInitLightAttn(&lightobj, 1, 0, 0, 1, 0, 0);
-    {
-        GXColor color = lbl_804D5E1C;
-        GXColor *arg = &color;
-        GXInitLightColor(&lightobj, arg);
-    }
+    GXInitLightColor(&lightobj, lbl_804D5E1C);
+
     for (i = 0; i < 8; i++)
     {
         GXLoadLightObjImm(&lightobj, func_80366B64(i));
@@ -223,7 +220,7 @@ OSHeapHandle HSD_CreateMainHeap(void *lo, void *hi)
         _HSD_RObjForgetMemory,
         NULL,
     };
-    func_80382718("sysdolphin_base_library");
+    hsdForgetClassLibrary("sysdolphin_base_library");
     HSD_ObjInit();
     for (i = 0; cb_table[i] != NULL; i++)
     {

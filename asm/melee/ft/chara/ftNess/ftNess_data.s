@@ -391,22 +391,3 @@ lbl_803CCC84:
     .4byte lbl_803CCBC0
     .4byte lbl_803CCBD8
     .4byte NULL
-
-
-.section .rodata
-    .balign 8
-.global lbl_803B7598
-lbl_803B7598:
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-.global lbl_803B75A4
-lbl_803B75A4:
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-.global lbl_803B75B0
-lbl_803B75B0:
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000

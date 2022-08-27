@@ -1,4 +1,4 @@
-#include "ftmario.h"
+#include <ftmario.h>
 #include <sysdolphin/baselib/random.h>
 
 #include <melee/it/itkind.h>
@@ -6,33 +6,33 @@
 extern s32 lbl_803C5A20[];
 
 void ftMario_OnDeath(HSD_GObj* gobj) {
-    Fighter* ft = getFighter(gobj);
+    Fighter* fp = getFighter(gobj);
     func_80074A4C(gobj, 0, 0);
-    ft->sa.mario.x222C_vitaminCurr = 9;
-    ft->sa.mario.x2230_vitaminPrev = 9;
-    ft->sa.mario.x2234_tornadoCharge = FALSE;
-    ft->sa.mario.x2238_isCapeBoost = FALSE;
-    ft->sa.mario.x223C_capeGObj = NULL;
-    ft->sa.mario.x2240 = 0;
+    fp->sa.mario.x222C_vitaminCurr = 9;
+    fp->sa.mario.x2230_vitaminPrev = 9;
+    fp->sa.mario.x2234_tornadoCharge = FALSE;
+    fp->sa.mario.x2238_isCapeBoost = FALSE;
+    fp->sa.mario.x223C_capeGObj = NULL;
+    fp->sa.mario.x2240 = 0;
 }
 
-void ftMario_OnLoadForDrMario(Fighter* ft) {
-	PUSH_ATTRS(ft, ftMarioAttributes);
+void ftMario_OnLoadForDrMario(Fighter* fp) {
+	PUSH_ATTRS(fp, ftMarioAttributes);
 }
 
 void ftMario_OnLoad(HSD_GObj* gobj) {
     ftData* ftDataInfo;
     void** items;
     ftMarioAttributes *sa;
-    Fighter* ft = gobj->user_data;
-    ftDataInfo = ft->x10C_ftData;
+    Fighter* fp = gobj->user_data;
+    ftDataInfo = fp->x10C_ftData;
     items = ftDataInfo->x48_items;
 
-    ft->x2224_flag.bits.b7 = 1;
+    fp->x2224_flag.bits.b7 = 1;
 
-    PUSH_ATTRS(ft, ftMarioAttributes);
+    PUSH_ATTRS(fp, ftMarioAttributes);
 
-    sa = (ftMarioAttributes*)ft->x2D4_specialAttributes;
+    sa = (ftMarioAttributes*)fp->x2D4_specialAttributes;
 
     func_8026B3F8(items[0], It_Kind_Mario_Fire);
     func_8026B3F8(items[2], sa->x14_MARIO_CAPE_IT_KIND);

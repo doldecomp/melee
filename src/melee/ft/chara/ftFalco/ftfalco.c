@@ -1,11 +1,11 @@
-#include "ftfalco.h"
+#include <ftfalco.h>
 
 #include <melee/it/itkind.h>
 
 void ftFalco_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    ft->sa.fox.x222C_blasterGObj = 0;
+    Fighter* fp = gobj->user_data;
+    fp->sa.fox.x222C_blasterGObj = 0;
     func_80074A4C(gobj, 0, 0);
 }
 
@@ -30,16 +30,16 @@ void ftFalco_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 
 void ftFalco_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* ft = gobj->user_data;
-    ftData* ftdata = ft->x10C_ftData;
+    Fighter* fp = gobj->user_data;
+    ftData* ftdata = fp->x10C_ftData;
     s32* sa2;
     void** items = ftdata->x48_items;
     int unused;
 
-    ft->x2224_flag.bits.b7 = 1;
-    ftFox_OnLoadForFalco(ft);
+    fp->x2224_flag.bits.b7 = 1;
+    ftFox_OnLoadForFalco(fp);
 
-    sa2 = ft->x2D4_specialAttributes;
+    sa2 = fp->x2D4_specialAttributes;
     func_8026B3F8(items[0], sa2[7]);
     func_8026B3F8(items[1], sa2[8]);
     func_8026B3F8(items[3], 0x39);

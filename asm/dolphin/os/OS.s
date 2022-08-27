@@ -330,13 +330,13 @@ OSExceptionInit:
 /* 80343318 0033FEF8  BE 81 00 08 */	stmw r20, 8(r1)
 /* 8034331C 0033FEFC  3C 60 80 00 */	lis r3, 0x80000060@ha
 /* 80343320 0033FF00  80 03 00 60 */	lwz r0, 0x80000060@l(r3)
-/* 80343324 0033FF04  3C 80 80 34 */	lis r4, lbl_8034364C@ha
-/* 80343328 0033FF08  3B C4 36 4C */	addi r30, r4, lbl_8034364C@l
+/* 80343324 0033FF04  3C 80 80 34 */	lis r4, __OSEVSetNumber@ha
+/* 80343328 0033FF08  3B C4 36 4C */	addi r30, r4, __OSEVSetNumber@l
 /* 8034332C 0033FF0C  3C A0 80 34 */	lis r5, OSExceptionVector@ha
 /* 80343330 0033FF10  83 3E 00 00 */	lwz r25, 0(r30)
-/* 80343334 0033FF14  3C 80 80 34 */	lis r4, lbl_8034367C@ha
+/* 80343334 0033FF14  3C 80 80 34 */	lis r4, __OSEVEnd@ha
 /* 80343338 0033FF18  38 A5 35 E4 */	addi r5, r5, OSExceptionVector@l
-/* 8034333C 0033FF1C  38 84 36 7C */	addi r4, r4, lbl_8034367C@l
+/* 8034333C 0033FF1C  38 84 36 7C */	addi r4, r4, __OSEVEnd@l
 /* 80343340 0033FF20  3C C0 80 40 */	lis r6, DriveInfo@ha
 /* 80343344 0033FF24  28 00 00 00 */	cmplwi r0, 0
 /* 80343348 0033FF28  7C B8 2B 78 */	mr r24, r5
@@ -372,8 +372,8 @@ lbl_803433A4:
 /* 803433BC 0033FF9C  3B 40 00 00 */	li r26, 0
 /* 803433C0 0033FFA0  48 00 00 04 */	b lbl_803433C4
 lbl_803433C4:
-/* 803433C4 0033FFA4  3C 60 80 34 */	lis r3, lbl_8034363C@ha
-/* 803433C8 0033FFA8  3A A3 36 3C */	addi r21, r3, lbl_8034363C@l
+/* 803433C4 0033FFA4  3C 60 80 34 */	lis r3, __DBVECTOR@ha
+/* 803433C8 0033FFA8  3A A3 36 3C */	addi r21, r3, __DBVECTOR@l
 /* 803433CC 0033FFAC  3E C0 60 00 */	lis r22, 0x6000
 /* 803433D0 0033FFB0  48 00 00 04 */	b lbl_803433D4
 lbl_803433D4:
@@ -558,12 +558,12 @@ OSExceptionVector:
 /* 80343630 00340210  7C 7B 02 A6 */	mfspr r3, 0x1b
 /* 80343634 00340214  90 64 01 9C */	stw r3, 0x19c(r4)
 /* 80343638 00340218  7C 65 1B 78 */	mr r5, r3
-lbl_8034363C:
+__DBVECTOR:
 /* 8034363C 0034021C  60 00 00 00 */	nop 
 /* 80343640 00340220  7C 60 00 A6 */	mfmsr r3
 /* 80343644 00340224  60 63 00 30 */	ori r3, r3, 0x30
 /* 80343648 00340228  7C 7B 03 A6 */	mtspr 0x1b, r3
-lbl_8034364C:
+__OSEVSetNumber:
 /* 8034364C 0034022C  38 60 00 00 */	li r3, 0
 /* 80343650 00340230  80 80 00 D4 */	lwz r4, 0xd4(0)
 /* 80343654 00340234  54 A5 07 BD */	rlwinm. r5, r5, 0, 0x1e, 0x1e
@@ -577,7 +577,7 @@ lbl_8034366C:
 /* 80343670 00340250  80 A5 30 00 */	lwz r5, 0x3000(r5)
 /* 80343674 00340254  7C BA 03 A6 */	mtspr 0x1a, r5
 /* 80343678 00340258  4C 00 00 64 */	rfi 
-lbl_8034367C:
+__OSEVEnd:
 /* 8034367C 0034025C  60 00 00 00 */	nop 
 
 .global OSDefaultExceptionHandler
@@ -717,6 +717,7 @@ DriveInfo:
 
 
 .section .sbss
+    .balign 8
 
 .global BootInfo
 BootInfo:

@@ -11,10 +11,10 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/random.h>
-#include "sysdolphin/baselib/controller.h"
+#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
-#include "fighter.h"
+#include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 
 // 0x800763C0 //
@@ -71,7 +71,7 @@ void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim) // Combo Count Logic 
     HSD_GObj* itemOwner = func_8026BC78(attackItem);
     s32 attackID = func_8026BC84(attackItem);
 
-    if (func_80086960(itemOwner) != FALSE) // Check if item's owner is a fighter //
+    if (func_80086960(itemOwner) != FALSE) // Check if item's owner is a fp //
     {
         func_800763C0(itemOwner, victim, attackID);
     }
@@ -106,7 +106,7 @@ void func_800764DC(HSD_GObj* fighter_gobj) // Check to end combo for victim //
 inline void comboCount_Push(Fighter* fp)
 {
 
-    Vec3* pos = &fp->x6F0_collData.x154_groundNormal;
+    Vec3* pos = &fp->x6F0_collData.x14C_ground.normal;
     f32 temp_f2;
     f32 var_f2;
     if ((s32)fp->x2090 < (s32)p_ftCommonData->x4C8)
@@ -150,7 +150,7 @@ void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon 
     Fighter* fp;
     HSD_GObj* gobj;
 
-    gobj = lbl_804D782C->x20_fighterGObj; // Get fighter GObj from global list of entities (?) //
+    gobj = lbl_804D782C->x20_fighterGObj; // Get fp GObj from global list of entities (?) //
     while (gobj != NULL)
     {
         fp = getFighter(gobj); 
@@ -158,7 +158,7 @@ void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon 
         {
             fp->x2094 = NULL;
         }
-        gobj = gobj->next; // Repeat until there are no more fighter GObjs left //
+        gobj = gobj->next; // Repeat until there are no more fp GObjs left //
     }
 }
 
