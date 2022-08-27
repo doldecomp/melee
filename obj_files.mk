@@ -598,7 +598,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/os/OSResetSW.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSRtc.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSSerial.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSSync.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSSync.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSThread.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSTime.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSUartExi.s.o\
