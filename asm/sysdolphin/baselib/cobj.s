@@ -315,7 +315,7 @@ func_80367C28:
 /* 80367CEC 003648CC  FF A0 10 90 */	fmr f29, f2
 /* 80367CF0 003648D0  EF 40 10 28 */	fsubs f26, f0, f2
 /* 80367CF4 003648D4  41 82 00 28 */	beq lbl_80367D1C
-/* 80367CF8 003648D8  4B FE 84 F5 */	bl func_803501EC
+/* 80367CF8 003648D8  4B FE 84 F5 */	bl VIGetNextField
 /* 80367CFC 003648DC  FC 20 E0 90 */	fmr f1, f28
 /* 80367D00 003648E0  C0 A2 EA 98 */	lfs f5, lbl_804DE478@sda21(r2)
 /* 80367D04 003648E4  FC 40 E8 90 */	fmr f2, f29
@@ -2122,8 +2122,8 @@ func_803695F0:
 /* 8036961C 003661FC  7C 08 03 A6 */	mtlr r0
 /* 80369620 00366200  4E 80 00 20 */	blr 
 
-.global func_80369624
-func_80369624:
+.global HSD_CObjGetInvViewingMtxPtrDirect
+HSD_CObjGetInvViewingMtxPtrDirect:
 /* 80369624 00366204  7C 08 02 A6 */	mflr r0
 /* 80369628 00366208  90 01 00 04 */	stw r0, 4(r1)
 /* 8036962C 0036620C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -3108,8 +3108,8 @@ func_8036A270:
 /* 8036A280 00366E60  90 03 00 08 */	stw r0, 8(r3)
 /* 8036A284 00366E64  4E 80 00 20 */	blr 
 
-.global func_8036A288
-func_8036A288:
+.global HSD_CObjGetCurrent
+HSD_CObjGetCurrent:
 /* 8036A288 00366E68  80 6D BF BC */	lwz r3, lbl_804D765C@sda21(r13)
 /* 8036A28C 00366E6C  4E 80 00 20 */	blr 
 

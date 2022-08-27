@@ -348,8 +348,8 @@ lbl_8033EBCC:
 /* 8033EC20 0033B800  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/YQyg4
-.global func_8033EC24
-func_8033EC24:
+.global GXInitTexObjCI
+GXInitTexObjCI:
 /* 8033EC24 0033B804  7C 08 02 A6 */	mflr r0
 /* 8033EC28 0033B808  90 01 00 04 */	stw r0, 4(r1)
 /* 8033EC2C 0033B80C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -664,8 +664,8 @@ GXInitTlutObj:
 /* 8033F068 0033BC48  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/9AKJV
-.global func_8033F06C
-func_8033F06C:
+.global GXLoadTlut
+GXLoadTlut:
 /* 8033F06C 0033BC4C  7C 08 02 A6 */	mflr r0
 /* 8033F070 0033BC50  90 01 00 04 */	stw r0, 4(r1)
 /* 8033F074 0033BC54  94 21 FF E0 */	stwu r1, -0x20(r1)

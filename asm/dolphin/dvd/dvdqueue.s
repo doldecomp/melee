@@ -19,8 +19,8 @@ __DVDClearWaitingQueue:
 /* 8033A180 00336D60  90 63 00 04 */	stw r3, 4(r3)
 /* 8033A184 00336D64  4E 80 00 20 */	blr 
 
-.global func_8033A188
-func_8033A188:
+.global __DVDPushWaitingQueue
+__DVDPushWaitingQueue:
 /* 8033A188 00336D68  7C 08 02 A6 */	mflr r0
 /* 8033A18C 00336D6C  90 01 00 04 */	stw r0, 4(r1)
 /* 8033A190 00336D70  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -48,8 +48,8 @@ func_8033A188:
 /* 8033A1E8 00336DC8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033A1EC 00336DCC  4E 80 00 20 */	blr 
 
-.global func_8033A1F0
-func_8033A1F0:
+.global __DVDPopWaitingQueue
+__DVDPopWaitingQueue:
 /* 8033A1F0 00336DD0  7C 08 02 A6 */	mflr r0
 /* 8033A1F4 00336DD4  90 01 00 04 */	stw r0, 4(r1)
 /* 8033A1F8 00336DD8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -94,8 +94,8 @@ lbl_8033A27C:
 /* 8033A288 00336E68  7C 08 03 A6 */	mtlr r0
 /* 8033A28C 00336E6C  4E 80 00 20 */	blr 
 
-.global func_8033A290
-func_8033A290:
+.global __DVDCheckWaitingQueue
+__DVDCheckWaitingQueue:
 /* 8033A290 00336E70  7C 08 02 A6 */	mflr r0
 /* 8033A294 00336E74  90 01 00 04 */	stw r0, 4(r1)
 /* 8033A298 00336E78  94 21 FF F8 */	stwu r1, -8(r1)
@@ -122,8 +122,8 @@ lbl_8033A2D8:
 /* 8033A2E0 00336EC0  7C 08 03 A6 */	mtlr r0
 /* 8033A2E4 00336EC4  4E 80 00 20 */	blr 
 
-.global func_8033A2E8
-func_8033A2E8:
+.global __DVDDequeueWaitingQueue
+__DVDDequeueWaitingQueue:
 /* 8033A2E8 00336EC8  7C 08 02 A6 */	mflr r0
 /* 8033A2EC 00336ECC  90 01 00 04 */	stw r0, 4(r1)
 /* 8033A2F0 00336ED0  94 21 FF E8 */	stwu r1, -0x18(r1)

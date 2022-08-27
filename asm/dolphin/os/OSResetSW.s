@@ -272,7 +272,6 @@ lbl_804D73A8:
 .global lbl_804D73AC
 lbl_804D73AC:
 	.skip 0x4
-.global LastState
 LastState:
 	.skip 0x8
 .global HoldUp

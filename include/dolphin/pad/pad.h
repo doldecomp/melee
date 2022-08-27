@@ -17,8 +17,8 @@ typedef struct PADStatus
 
 void PADControlMotor(int chan, u32 command);
 void SISetSamplingRate(u32 rate);
-void func_80350100(BOOL);
-u32 func_8035017C();
+void VISetBlack(BOOL);
+u32 VIGetRetraceCount();
 void PADClamp(u8 *);
 void PADRead(u8 *);
 void PADReset(u32);
