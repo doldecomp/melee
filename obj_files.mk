@@ -575,7 +575,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx.s.o\
 	$(BUILD_DIR)/asm/dolphin/mtx/mtxvec.s.o\
-	$(BUILD_DIR)/asm/dolphin/mtx/mtx44.s.o\
+	$(BUILD_DIR)/src/dolphin/mtx/mtx44.c.o\
 	$(BUILD_DIR)/asm/dolphin/mtx/vec.s.o\
 
 TEXT_O_FILES +=\
