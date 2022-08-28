@@ -343,8 +343,7 @@ void func_803786F0(void)
 
 struct Struct804C22E0 lbl_80406DE0 = {0};
 
-// HSD_PadRumbleInit
-void func_80378828(u16 a, void* b)
+void HSD_PadRumbleInit(u16 a, void* b)
 {
     struct _RumbleInfo* r6 = &HSD_PadLibData.rumble_info;
     int i;
