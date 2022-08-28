@@ -143,7 +143,7 @@ void main(void)
     func_80019AAC(&lbl_8015FD24);
     func_80375934(&lbl_8015FDA0);
     func_8037598C(&lbl_803762C4);
-    func_803767A0(0);
+    HSD_VISetBlack(0);
     func_8001564C();
     func_80015F3C();
     func_80018F68();
