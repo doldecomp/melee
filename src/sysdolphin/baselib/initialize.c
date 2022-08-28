@@ -165,7 +165,7 @@ static void HSD_GXInit(void)
     {
         GXLoadLightObjImm(&lightobj, HSD_Index2LightID(i));
     }
-    func_80361FC4(-1);
+    HSD_StateInvalidate(-1);
 }
 
 static void HSD_OSInit(void)
