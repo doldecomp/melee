@@ -267,7 +267,7 @@ BOOL ftNess_YoyoCheckNoObstruct(HSD_GObj* fighter_gobj) // Check if Yo-Yo is col
         sp20 = sp14;
         sp20.y += fp->x34_scale.y;
         sp14.y += -1.0f * fp->x34_scale.y;
-        if ((ftNess_YoyoCheckEnvColl(fighter_gobj, &sp20, &sp14, 1.5f) & COLL_AIR) != FALSE) 
+        if ((ftNess_YoyoCheckEnvColl(fighter_gobj, &sp20, &sp14, 1.5f) & MPCOLL_GRPUSH) != FALSE) 
         {
             return TRUE;
         }
@@ -699,7 +699,7 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj) // Ness's Up Smash Animation 
             sp18.y += fighter_data2->xB0_pos.y;
             sp18.z += fighter_data2->xB0_pos.z;
             sp24 = fighter_data2->sa.ness.x2230_yoyoHitboxPos;
-            if ((ftNess_YoyoCheckEnvColl(fighter_gobj, &sp18, &sp24, 0.5f) == 0) && (sp24 = fighter_data2->sa.ness.x2230_yoyoHitboxPos, sp18 = sp24, sp18.y += fighter_data2->x34_scale.y, sp24.y += -1.0f * fighter_data2->x34_scale.y, (((ftNess_YoyoCheckEnvColl(fighter_gobj, &sp18, &sp24, 1.5f) & COLL_AIR) == 0) == 0))) 
+            if ((ftNess_YoyoCheckEnvColl(fighter_gobj, &sp18, &sp24, 0.5f) == 0) && (sp24 = fighter_data2->sa.ness.x2230_yoyoHitboxPos, sp18 = sp24, sp18.y += fighter_data2->x34_scale.y, sp24.y += -1.0f * fighter_data2->x34_scale.y, (((ftNess_YoyoCheckEnvColl(fighter_gobj, &sp18, &sp24, 1.5f) & MPCOLL_GRPUSH) == 0) == 0))) 
             {
                 phi_r0 = TRUE;
             }

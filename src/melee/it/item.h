@@ -567,6 +567,27 @@ typedef struct _Item
     } xDD4_itemVar;
 } Item;
 
+typedef struct _ItemLink // user_data struct of GObj class 7
+{
+    struct _ItemLink* x0_prev;
+    struct _ItemLink* x4_next;
+    Vec3 x8_vel;
+    Vec3 x14_pos;
+    Vec3 x20_vec; // Previous position?
+    u8 flag0 : 1;
+    u8 flag1 : 1;
+    u8 flag2 : 1;
+    u8 flag3 : 1;
+    u8 flag4 : 1;
+    u8 flag5 : 1;
+    u8 flag6 : 1;
+    u8 flag7 : 1;
+    CollData x30_collData;
+    HSD_GObj* x1D0_GObj;
+    HSD_GObj* x1D4_GObjLinkNext;
+
+} ItemLink;
+
 extern struct sdata_ItemGXLink
 {
     void (*x0_renderFunc)(HSD_GObj*, s32);

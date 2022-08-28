@@ -149,12 +149,12 @@ typedef enum CharacterKind
 // Ternary macro for fcmpo-based facing direction check 
 
 #define CLIFFCATCH_O(fp) \
-(fp->x2C_facing_direction < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+((fp)->x2C_facing_direction < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
 
 // Ternary macro for fcmpu-based facing direction check
 
 #define CLIFFCATCH_U(fp) \
-(fp->x2C_facing_direction != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+((fp)->x2C_facing_direction != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
 
 typedef enum ftCommonAction
 {

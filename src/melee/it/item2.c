@@ -1,5 +1,5 @@
-#include <melee/it/item.h>
 #include <common_structs.h>
+#include <melee/it/item.h>
 
 #define FLOAT32_MAX 3.4028234663852886e+38f
 
@@ -7,32 +7,29 @@ static inline float _sqrtfItem(float x)
 {
     f64 _half = 0.5;
     volatile f32 y;
-    if (x > 0.0f)
-    {
-        f64 guess = __frsqrte((double)x);   // returns an approximation to
-        guess = 0.5 * guess * (3.0 - guess * guess * x);  // now have 12 sig bits
-        guess = 0.5 * guess * (3.0 - guess * guess * x);  // now have 24 sig bits
-        guess = 0.5 * guess * (3.0 - guess * guess * x);  // now have 32 sig bits
-        y = (f32)(x * guess);
+    if (x > 0.0f) {
+        f64 guess = __frsqrte((double) x);               // returns an approximation to
+        guess = 0.5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess = 0.5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess = 0.5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        y = (f32) (x * guess);
         return y;
     }
     return x;
 }
 
 // 0x8026B1D4 //
-// https://decomp.me/scratch/hrApQ // 
+// https://decomp.me/scratch/hrApQ //
 f32 func_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk) // Apply Item Damage -  may not be itHit* ??? //
 {
     f32 ret = itemHitboxUnk->xC_damage_staled;
     const Item* item_data = item_gobj->user_data;
-    if (item_data->xDC8_word.flags.x14 != 0)
-    {
+    if (item_data->xDC8_word.flags.x14 != 0) {
         f32 itemSpeed = _sqrtfItem(item_data->x40_vel.x * item_data->x40_vel.x + item_data->x40_vel.y * item_data->x40_vel.y + item_data->x40_vel.z * item_data->x40_vel.z);
 
         ret += itemSpeed * lbl_804D6D28->x80_float[5];
         ret += lbl_804D6D28->x80_float[6];
-        if (ret <= 1.0)
-        {
+        if (ret <= 1.0) {
             return ret = 1.0f;
         }
     }
@@ -54,8 +51,7 @@ void func_8026B294(HSD_GObj* item_gobj, Vec3* pos) // Copy Item position vector 
 BOOL func_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy //
 {
     Item* temp_item = item_gobj->user_data;
-    if (temp_item->xCC_item_attr->x0_is_heavy != 0)
-    {
+    if (temp_item->xCC_item_attr->x0_is_heavy != 0) {
         return TRUE;
     }
     return FALSE;
@@ -66,8 +62,7 @@ BOOL func_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy //
 BOOL func_8026B2D8(HSD_GObj* item_gobj) // Check if item is heavy again? //
 {
     Item* temp_item = item_gobj->user_data;
-    if (temp_item->xCC_item_attr->x0_is_heavy == 1)
-    {
+    if (temp_item->xCC_item_attr->x0_is_heavy == 1) {
         return TRUE;
     }
     return FALSE;
@@ -98,7 +93,7 @@ s32 func_8026B320(HSD_GObj* item_gobj) // Return item hold kind //
 }
 
 // 0x8026B334 //
-// https://decomp.me/scratch/Ih7vI // 
+// https://decomp.me/scratch/Ih7vI //
 f32 func_8026B334(HSD_GObj* item_gobj) // Return item damage multiplier //
 {
     Item* temp_item = item_gobj->user_data;
@@ -112,9 +107,9 @@ void func_8026B344(HSD_GObj* item_gobj, Vec3* pos) // Unknown item position math
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    pos->x = (f32)((item_data->x2C_facing_direction * item_data->xBCC_unk.x) + item_data->x4C_pos.x);
-    pos->y = (f32)(item_data->x4C_pos.y + item_data->xBCC_unk.y);
-    pos->z = (f32)item_data->x4C_pos.z;
+    pos->x = (f32) ((item_data->x2C_facing_direction * item_data->xBCC_unk.x) + item_data->x4C_pos.x);
+    pos->y = (f32) (item_data->x4C_pos.y + item_data->xBCC_unk.y);
+    pos->z = (f32) item_data->x4C_pos.z;
 }
 
 // 0x8026B378 //
@@ -135,7 +130,7 @@ f32 func_8026B384(HSD_GObj* item_gobj) // Return item's Y-Axis grab range? //
 
 // 0x8026B390 //
 // https://decomp.me/scratch/n9c0y //
-void func_8026B390(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word ON // 
+void func_8026B390(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word ON //
 {
     Item* temp_item;
 
@@ -145,7 +140,7 @@ void func_8026B390(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word O
 
 // 0x8026B3A8 //
 // https://decomp.me/scratch/DpuNn //
-void func_8026B3A8(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word OFF // 
+void func_8026B3A8(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word OFF //
 {
     Item* temp_item;
 
@@ -165,11 +160,9 @@ u32 func_8026B3C0(s32 itemID) // Count identical item GObj entities? //
 
     i = 0;
     unkItemGObj = lbl_804D782C->x24_itemGObj;
-    while (unkItemGObj != NULL)
-    {
+    while (unkItemGObj != NULL) {
         temp_item = unkItemGObj->user_data;
-        if ((s32)temp_item->x10_item_kind == itemID)
-        {
+        if ((s32) temp_item->x10_item_kind == itemID) {
             i += 1;
         }
         unkItemGObj = unkItemGObj->next;
@@ -201,7 +194,7 @@ f32 func_8026B424(s32 damage) // Item Damage Math //
 {
     ItemCommonData* itCommonData = lbl_804D6D28;
 
-    return (f32)(s32)(((f32)damage * itCommonData->xB8) + itCommonData->xBC);
+    return (f32) (s32) (((f32) damage * itCommonData->xB8) + itCommonData->xBC);
 }
 
 // 0x8026B47C //
@@ -213,8 +206,7 @@ s32 func_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items //
 
     temp_item = item_gobj->user_data;
     itemID = temp_item->x10_item_kind;
-    switch (itemID)
-    {
+    switch (itemID) {
     case It_Kind_Heart:
         return temp_item->xDD4_itemVar.HeartContainer.xDD4_heal;
     case It_Kind_Tomato:
@@ -239,14 +231,13 @@ BOOL func_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item //
 
     temp_item = item_gobj->user_data;
     itemID = temp_item->x10_item_kind;
-    switch (itemID)
-    {
-    case It_Kind_Heart:                     // Heart Container //
-    case It_Kind_Tomato:                    // Maxim Tomato //
-    case It_Kind_Foods:                     // Food //
-    case It_Kind_Coin:                      // Coin ??? //
-    case Pokemon_Lucky_Egg:                 // Chansey's Healing Egg //
-    case It_Kind_WhispyHealApple:           // Healing Whispy Apple //
+    switch (itemID) {
+    case It_Kind_Heart:           // Heart Container //
+    case It_Kind_Tomato:          // Maxim Tomato //
+    case It_Kind_Foods:           // Food //
+    case It_Kind_Coin:            // Coin ??? //
+    case Pokemon_Lucky_Egg:       // Chansey's Healing Egg //
+    case It_Kind_WhispyHealApple: // Healing Whispy Apple //
         return TRUE;
     default:
         return FALSE;
@@ -297,21 +288,19 @@ BOOL func_8026B594(HSD_GObj* item_gobj) // Check if item can fire projectiles //
 
     item_data = item_gobj->user_data;
     itemID = item_data->x10_item_kind;
-    switch (itemID)
-    {
-        case It_Kind_L_Gun:
-        case It_Kind_S_Scope:
-        case It_Kind_StarRod:
-        case It_Kind_LipStick:
-        case It_Kind_F_Flower:
-            if ((s32)item_data->xD4C <= 0)
-            {
-                return TRUE;
-            }
+    switch (itemID) {
+    case It_Kind_L_Gun:
+    case It_Kind_S_Scope:
+    case It_Kind_StarRod:
+    case It_Kind_LipStick:
+    case It_Kind_F_Flower:
+        if ((s32) item_data->xD4C <= 0) {
+            return TRUE;
+        }
 
-        default:
-        case It_Kind_Harisen: // Why though //
-            return FALSE;
+    default:
+    case It_Kind_Harisen: // Why though //
+        return FALSE;
     }
 }
 
@@ -322,8 +311,7 @@ HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj) // Unk
     HSD_GObj* unk_gobj;
 
     unk_gobj = func_8008627C(vector, item_gobj);
-    if (unk_gobj != NULL)
-    {
+    if (unk_gobj != NULL) {
         func_800866DC(unk_gobj, vector2);
     }
     return unk_gobj;
@@ -338,8 +326,7 @@ HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj) // Unk
     HSD_GObj* unk_gobj;
 
     unk_gobj = func_80086368(vector, item_gobj);
-    if (unk_gobj != NULL)
-    {
+    if (unk_gobj != NULL) {
         func_800866DC(unk_gobj, vector2);
     }
     return unk_gobj;
@@ -374,11 +361,9 @@ BOOL func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item? //
 
     item_data = item_gobj->user_data;
     itemID = item_data->x10_item_kind;
-    if (((itemID >= It_Kind_Kuriboh) && (itemID < It_Kind_Octarock_Stone)) || ((itemID_2 = item_data->x10_item_kind, ((itemID_2 < It_Kind_Old_Kuri) == FALSE)) && (itemID_2 < It_Kind_Arwing_Laser)))
-    {
+    if (((itemID >= It_Kind_Kuriboh) && (itemID < It_Kind_Octarock_Stone)) || ((itemID_2 = item_data->x10_item_kind, ((itemID_2 < It_Kind_Old_Kuri) == FALSE)) && (itemID_2 < It_Kind_Arwing_Laser))) {
         itemID_3 = item_data->x10_item_kind;
-        if ((itemID_3 != It_Kind_Kyasarin_Egg) && (itemID_3 != It_Kind_WhispyApple))
-        {
+        if ((itemID_3 != It_Kind_Kyasarin_Egg) && (itemID_3 != It_Kind_WhispyApple)) {
             return TRUE;
         }
     }
@@ -410,12 +395,10 @@ void func_8026B73C(HSD_GObj* item_gobj) // Toggle bits in 0xDC8 word //
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    if (item_data->xDC8_word.flags.x7 != 0)
-    {
+    if (item_data->xDC8_word.flags.x7 != 0) {
         item_data->xDC8_word.flags.x5 = 1;
     }
-    if (item_data->xDC8_word.flags.x3 != 0)
-    {
+    if (item_data->xDC8_word.flags.x3 != 0) {
         item_data->xDC8_word.flags.x3 = 0;
     }
 }
@@ -426,8 +409,7 @@ BOOL func_8026B774(HSD_GObj* item_gobj, u8 arg1) // Bitwise operations in 0xDC8 
 {
     Item* item_data = item_gobj->user_data;
 
-    if (((item_data->xDC8_word.word >> 0xDU) & 0xF & (1 << arg1)) != 0)
-    {
+    if (((item_data->xDC8_word.word >> 0xDU) & 0xF & (1 << arg1)) != 0) {
         return TRUE;
     }
     return FALSE;
@@ -450,7 +432,7 @@ u8 func_8026B7B0(HSD_GObj* item_gobj) // Get Item Team ID //
 }
 
 // 0x8026B7BC //
-// https://decomp.me/scratch/rzabo // 
+// https://decomp.me/scratch/rzabo //
 s32 func_8026B7BC(HSD_GObj* item_gobj) // Get flag 0x14 of 0xDC8 word //
 {
     Item* item_data = item_gobj->user_data;
@@ -466,7 +448,7 @@ s32 func_8026B7CC(HSD_GObj* item_gobj) // Get 0x1C of Item - something to do wit
 }
 
 // 0x8026B7D8 //
-// https://decomp.me/scratch/bIbLR // 
+// https://decomp.me/scratch/bIbLR //
 s32 func_8026B7D8(void) // Get unknown var from global data //
 {
     return lbl_804D6D0C;
@@ -489,8 +471,7 @@ s32 func_8026B7E8(HSD_GObj* item_gobj) // Get bit 1 of 0xDC8 word //
 
 inline void RunCallbackUnk(void (*cb_Process)(HSD_GObj*, HSD_GObj*), HSD_GObj* unk, HSD_GObj* unk2)
 {
-    if (cb_Process != NULL)
-    {
+    if (cb_Process != NULL) {
         cb_Process(unk, unk2);
     }
 }
@@ -506,13 +487,11 @@ void func_8026B7F8(HSD_GObj* fighter_gobj) // Remove item from player on death? 
     s32 i;
 
     enumGObj = lbl_804D782C->x24_itemGObj;
-    while (enumGObj != NULL)
-    {
+    while (enumGObj != NULL) {
         item_data = enumGObj->user_data;
         itemOwner = item_data->x518_ownerGObj;
         RunCallbackUnk(item_data->xB8_itemLogicTable->x38_callback_OnUnknown, enumGObj, fighter_gobj);
-        if ((item_data->xDC8_word.flags.x13 != 0) && (itemOwner == fighter_gobj))
-        {
+        if ((item_data->xDC8_word.flags.x13 != 0) && (itemOwner == fighter_gobj)) {
             func_8026A8EC(enumGObj);
         }
         enumGObj = enumGObj->next;
@@ -529,30 +508,24 @@ BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj) // Remove all
     temp_item = item_gobj->user_data;
     ret = 0;
 
-    if (temp_item->x518_ownerGObj == referenced_gobj)
-    {
+    if (temp_item->x518_ownerGObj == referenced_gobj) {
         temp_item->x518_ownerGObj = NULL;
         ret = 1;
     }
-    if (temp_item->itdmg.xC64_reflectGObj == referenced_gobj)
-    {
+    if (temp_item->itdmg.xC64_reflectGObj == referenced_gobj) {
         temp_item->itdmg.xC64_reflectGObj = NULL;
     }
-    if (temp_item->itdmg.xC90_absorbGObj == referenced_gobj)
-    {
+    if (temp_item->itdmg.xC90_absorbGObj == referenced_gobj) {
         temp_item->itdmg.xC90_absorbGObj = NULL;
     }
-    if (temp_item->itdmg.xCEC_fighterGObj == referenced_gobj)
-    {
+    if (temp_item->itdmg.xCEC_fighterGObj == referenced_gobj) {
         temp_item->itdmg.xCEC_fighterGObj = NULL;
         temp_item->itdmg.xCB0_source_ply = 6;
     }
-    if (temp_item->xCF4_fighterGObjUnk == referenced_gobj)
-    {
+    if (temp_item->xCF4_fighterGObjUnk == referenced_gobj) {
         temp_item->xCF4_fighterGObjUnk = NULL;
     }
-    if (temp_item->xCF8_detectGObj == referenced_gobj)
-    {
+    if (temp_item->xCF8_detectGObj == referenced_gobj) {
         temp_item->xCF8_detectGObj = NULL;
         return ret;
     }
@@ -565,8 +538,8 @@ BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj) // Remove all
 
 // 0x8026B924 //
 // https://decomp.me/scratch/2H33A //
- s32 func_8026B924(HSD_GObj* item_gobj) // Return result of unk item check - requires -g compiler flag / Frank modifications to match //
- {
+s32 func_8026B924(HSD_GObj* item_gobj) // Return result of unk item check - requires -g compiler flag / Frank modifications to match //
+{
     s32 itemID;
     s32 ret;
     Item* item_data;
@@ -574,19 +547,18 @@ BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj) // Remove all
     item_data = item_gobj->user_data;
     itemID = item_data->x10_item_kind;
     ret = -1;
-    switch (itemID)
-    {
-        case It_Kind_Freeze:
-        case It_Kind_Foods:
-        case It_Kind_MSBomb:
-        case It_Kind_Flipper:
-        case It_Kind_LipStick:
-        case It_Kind_Harisen:
-            break;
-        case It_Kind_S_Scope:
-        case It_Kind_StarRod:
-        case It_Kind_L_Gun:
-        case It_Kind_F_Flower:
+    switch (itemID) {
+    case It_Kind_Freeze:
+    case It_Kind_Foods:
+    case It_Kind_MSBomb:
+    case It_Kind_Flipper:
+    case It_Kind_LipStick:
+    case It_Kind_Harisen:
+        break;
+    case It_Kind_S_Scope:
+    case It_Kind_StarRod:
+    case It_Kind_L_Gun:
+    case It_Kind_F_Flower:
         ret = item_data->xD4C;
     }
     return ret;
@@ -598,23 +570,23 @@ BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj) // Remove all
 
 asm s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch //
 {
-        lwz r4, 0x2C(item_gobj); // Get Item Data //
-        li r3, -1;               // Default return value //
-        lwz r0, 0x10(r4);        // Get Item ID //
-        cmpwi r0, 0x17;          // Item ID Switch //
-        bge - lbl_compare;
-        cmpwi r0, 0x10;
-        beq - lbl_getVar;
-        bltlr - ;
-        cmpwi r0, 0x15;
-        bge - lbl_getVar;
-        blr;
-    lbl_compare:
-        cmpwi r0, 0x19;
-        bnelr - ;
-    lbl_getVar:
-        lwz r3, 0xD4C(r4);
-} 
+    lwz r4, 0x2C(item_gobj); // Get Item Data //
+    li r3, -1;               // Default return value //
+    lwz r0, 0x10(r4);        // Get Item ID //
+    cmpwi r0, 0x17;          // Item ID Switch //
+    bge - lbl_compare;
+    cmpwi r0, 0x10;
+    beq - lbl_getVar;
+    bltlr - ;
+    cmpwi r0, 0x15;
+    bge - lbl_getVar;
+    blr;
+lbl_compare:
+    cmpwi r0, 0x19;
+    bnelr - ;
+lbl_getVar:
+    lwz r3, 0xD4C(r4);
+}
 
 #endif
 
@@ -634,18 +606,15 @@ f32 func_8026B960(HSD_GObj* item_gobj) // Return float result of item kind and s
 
     item_data = item_gobj->user_data;
     itemID = item_data->x10_item_kind;
-    switch (itemID)
-    {
+    switch (itemID) {
     case It_Kind_BombHei:
-        if ((s32)item_data->x24_item_state_index != 0xB)
-        {
+        if ((s32) item_data->x24_item_state_index != 0xB) {
             unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
         }
         break;
-   case It_Kind_Link_Bomb:
-        if ((s32)item_data->x24_item_state_index != 5)
-        {
-           unk_timer = item_data->xD44_lifeTimer;
+    case It_Kind_Link_Bomb:
+        if ((s32) item_data->x24_item_state_index != 5) {
+            unk_timer = item_data->xD44_lifeTimer;
         }
     }
     return unk_timer;
@@ -674,12 +643,10 @@ f32 func_8026B960(register HSD_GObj* item_gobj)
             bnelr - ;
             lwz itemID, 0x24(item_data);
             cmpwi itemID, 0xB;
-            beqlr - ;
-        );
+            beqlr - ;);
         return unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
     lbl_block:
-        if (item_data->x24_item_state_index != 0x5)
-        {
+        if (item_data->x24_item_state_index != 0x5) {
             return unk_timer = item_data->xD44_lifeTimer;
         }
     }
@@ -702,20 +669,16 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item*
     item_jobj = NULL;
     item_data->xD54_throwNum -= 1;
     item_data->xDC8_word.flags.x14 = 0;
-    if ((s32)item_data->x28_item_anim_index != -1)
-    {
+    if ((s32) item_data->x28_item_anim_index != -1) {
         item_data->xD0_itemStateDesc = itemStateDesc;
-        if (item_data->xD0_itemStateDesc != NULL)
-        {
+        if (item_data->xD0_itemStateDesc != NULL) {
             HSD_JObjRemoveAnimAll(item_jobj2);
             temp_joint = item_data->xC8_joint;
-            if (temp_joint != NULL)
-            {
-                if (item_jobj2 == NULL)
-                {
+            if (temp_joint != NULL) {
+                if (item_jobj2 == NULL) {
                     item_jobj = NULL;
-                }
-                else item_jobj = item_jobj2->child;
+                } else
+                    item_jobj = item_jobj2->child;
                 func_8000B804(item_jobj, temp_joint->child);
             }
             temp_stateDesc = item_data->xD0_itemStateDesc;
@@ -735,14 +698,14 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item*
 
 // 0x8026B9A8 //
 // https://decomp.me/scratch/yyy9T // Transfer item on character transformation (Zelda <-> Sheik)
-void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2) 
+void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2)
 {
     Vec3 sp1C;
     Item* item_data; // r29 //
     struct ItemStateDesc* itemStateDesc;
-    HSD_JObj* item_jobj2; // r27 //
+    HSD_JObj* item_jobj2;                 // r27 //
     struct ItemStateDesc* temp_stateDesc; // r6 //
-    ItemStateArray* temp_stateArray; // r5 //
+    ItemStateArray* temp_stateArray;      // r5 //
 
     item_data = item_gobj->user_data;
     temp_stateArray = item_data->xC4_article_data->xC_itemStates;
@@ -760,14 +723,11 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2)
         item_jobj = NULL;
         item_data->xD54_throwNum -= 1;
         item_data->xDC8_word.flags.x14 = 0;
-        if ((s32)item_data->x28_item_anim_index != -1)
-        {
+        if ((s32) item_data->x28_item_anim_index != -1) {
             item_data->xD0_itemStateDesc = itemStateDesc;
-            if (item_data->xD0_itemStateDesc != NULL)
-            {
+            if (item_data->xD0_itemStateDesc != NULL) {
                 HSD_JObjRemoveAnimAll(item_jobj2);
-                if (item_data->xC8_joint != NULL)
-                {
+                if (item_data->xC8_joint != NULL) {
                     item_jobj = (item_jobj2 == NULL) ? NULL : item_jobj2->child;
 
                     func_8000B804(item_jobj, item_data->xC8_joint->child);
@@ -802,7 +762,6 @@ void func_8026BAE8(HSD_GObj* item_gobj, f32 scale_mul) // Multiply item's scale 
     item_data->x38_scale = scale;
     func_80272F7C(item_jobj, scale);
 }
-
 
 // 0x8026BB20 //
 // https://decomp.me/scratch/wvM6g //
@@ -866,8 +825,7 @@ void func_8026BC14(HSD_GObj* item_gobj) // Check if item owner is a fp + decreme
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    if ((item_data->x518_ownerGObj != NULL) && (func_80086960(item_data->x518_ownerGObj) != FALSE))
-    {
+    if ((item_data->x518_ownerGObj != NULL) && (func_80086960(item_data->x518_ownerGObj) != FALSE)) {
         func_80086A4C(item_data->x518_ownerGObj, item_data->itdmg.xCBC_hitlagFrames - 1.0f);
     }
 }
@@ -890,7 +848,7 @@ HSD_GObj* func_8026BC78(HSD_GObj* item_gobj) // Get item owner //
 
 // 0x8026BC84 //
 // https://decomp.me/scratch/s3W5l // Get item attack kind //
-BOOL func_8026BC84(HSD_GObj* item_gobj) 
+BOOL func_8026BC84(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
     return item_data->xD88_attackID;
@@ -905,8 +863,7 @@ void func_8026BC90(HSD_GObj* item_gobj, Vec3* pos) // Unknown item ECB / positio
     pos->z = 0.0f;
     pos->y = 0.0f;
     pos->x = 0.0f;
-    if ((item_gobj != NULL) && (func_80086960(item_gobj) != FALSE))
-    {
+    if ((item_gobj != NULL) && (func_80086960(item_gobj) != FALSE)) {
         func_80086644(item_gobj, pos);
     }
 }
@@ -920,7 +877,7 @@ void func_8026BCF4(HSD_GObj* item_gobj) // Toggle bit 2 of 0xDCD OFF //
 }
 
 // 0x8026BD0C //
-// https://decomp.me/scratch/tPuXc // This function is identical to 0x8026BCF4 except for the toggle being 1 instead // 
+// https://decomp.me/scratch/tPuXc // This function is identical to 0x8026BCF4 except for the toggle being 1 instead //
 void func_8026BD0C(HSD_GObj* item_gobj) // Toggle bit 2 of 0xDCD ON //
 {
     Item* item_data = item_gobj->user_data;
@@ -1042,16 +999,13 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch //
     HSD_GObj* bobOmbGObj;
 
     bobOmbGObj = NULL;
-    if ((func_8016B238() != 0) && ((s32)bobOmbRain->x14 != 6))
-    {
+    if ((func_8016B238() != 0) && ((s32) bobOmbRain->x14 != 6)) {
         return NULL;
     }
     bobOmbID = bobOmbRain->x14;
-    switch (bobOmbID)
-    {
+    switch (bobOmbID) {
     case 1:
-        if (func_8026D324(1) != 0)
-        {
+        if (func_8026D324(1) != 0) {
             bobOmbGObj = func_80286088(bobOmbRain->x0);
         }
         break;
@@ -1062,12 +1016,10 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch //
 
     case 8:
         bobOmbGObj = func_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
-        if (bobOmbGObj != NULL)
-        {
+        if (bobOmbGObj != NULL) {
             item_data = GetItemData(bobOmbGObj);
             itemID = item_data->x10_item_kind;
-            switch (itemID)
-            {
+            switch (itemID) {
             case It_Kind_Heart:
                 func_80283BD4(bobOmbGObj);
                 break;
@@ -1080,29 +1032,25 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch //
 
     case 9:
         bobOmbGObj = func_802841B4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
-        if (bobOmbGObj != NULL)
-        {
+        if (bobOmbGObj != NULL) {
             item_data = GetItemData(bobOmbGObj);
             itemID2 = item_data->x10_item_kind;
-            switch (itemID2)
-            {
+            switch (itemID2) {
             case It_Kind_Heart:
                 func_80283BD4(bobOmbGObj);
                 break;
 
             case It_Kind_Tomato: // ...or here //
-                func_8028428C(bobOmbGObj); 
+                func_8028428C(bobOmbGObj);
                 break;
             }
         }
         break;
 
     case 4:
-        if (func_8026D324(4) != 0)
-        {
+        if (func_8026D324(4) != 0) {
             bobOmbGObj = func_802896CC(&bobOmbRain->x8_vec);
-            if (bobOmbGObj != NULL)
-            {
+            if (bobOmbGObj != NULL) {
                 func_80274F10(bobOmbGObj);
             }
         }
@@ -1110,40 +1058,35 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch //
 
     case 12:
         bobOmbGObj = func_80284D54(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
-        {
+        if (bobOmbGObj != NULL) {
             func_80274F10(bobOmbGObj);
         }
         break;
 
     case 21:
         bobOmbGObj = func_80291BE0(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
-        {
+        if (bobOmbGObj != NULL) {
             func_80274F10(bobOmbGObj);
         }
         break;
 
     case 25:
         bobOmbGObj = func_80292D48(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
-        {
+        if (bobOmbGObj != NULL) {
             func_80274F10(bobOmbGObj);
         }
         break;
 
     case 31:
         bobOmbGObj = func_80294DC0(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
-        {
+        if (bobOmbGObj != NULL) {
             func_80274F10(bobOmbGObj);
         }
         break;
 
     case 11:
         bobOmbGObj = func_80284854(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
-        {
+        if (bobOmbGObj != NULL) {
             func_80274F10(bobOmbGObj);
         }
         break;
@@ -1155,8 +1098,7 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch //
         bobOmbGObj = NULL;
         break;
     }
-    if ((bobOmbGObj != NULL) && (bobOmbRain->x1C.bits.b0 != 0))
-    {
+    if ((bobOmbGObj != NULL) && (bobOmbRain->x1C.bits.b0 != 0)) {
         item_data = bobOmbGObj->user_data;
         item_data->xDD0_flag.bits.b3 = !0;
         item_data_2 = bobOmbGObj->user_data;
@@ -1182,8 +1124,7 @@ CollData* func_8026C100(HSD_GObj* item_gobj) // Get item's CollData pointer //
     s32 filler;
 
     collDataPtr = NULL;
-    switch (func_80272D40(item_gobj))
-    {
+    switch (func_80272D40(item_gobj)) {
     case 0:
         collDataPtr = func_80086984(item_gobj);
         break;
@@ -1200,13 +1141,11 @@ CollData* func_8026C100(HSD_GObj* item_gobj) // Get item's CollData pointer //
 void func_8026C16C(HSD_GObj* item_gobj, BOOL isHeadless) // Check if Hammer item's head should break off //
 {
     Item* item_data = item_gobj->user_data;
-    if ((s32)item_data->xD4C <= 0)
-    {
+    if ((s32) item_data->xD4C <= 0) {
         func_802725D4(item_gobj);
         return;
     }
-    if (isHeadless != 0)
-    {
+    if (isHeadless != 0) {
         func_80272784(item_gobj);
         return;
     }
@@ -1235,8 +1174,7 @@ BOOL func_8026C1E8(HSD_GObj* item_gobj) // Check if item has grabbed a GObj? //
 {
     Item* item_data = item_gobj->user_data;
 
-    if ((item_data->xD00_grabGObj != NULL) || (item_data->xDC8_word.flags.x13 != 0) && (item_data->x518_ownerGObj != NULL))
-    {
+    if ((item_data->xD00_grabGObj != NULL) || (item_data->xDC8_word.flags.x13 != 0) && (item_data->x518_ownerGObj != NULL)) {
         return 0;
     }
     return 1;
@@ -1247,7 +1185,7 @@ BOOL func_8026C1E8(HSD_GObj* item_gobj) // Check if item has grabbed a GObj? //
 void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Get item owner's port number //
 {
     Item* item_data = GetItemDirect(item_gobj);
-    item_data->itdmg.xCB0_source_ply = (u8)func_80086BE0(fighter_gobj);
+    item_data->itdmg.xCB0_source_ply = (u8) func_80086BE0(fighter_gobj);
 }
 
 // Shoutouts to CelestialAmber for helping clean up this next one //
@@ -1270,25 +1208,19 @@ HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir) // Find the closest item to
     closest_item_gobj = NULL;
     item_gobj = lbl_804D782C->x24_itemGObj;
 
-    while (item_gobj != NULL)
-    {
+    while (item_gobj != NULL) {
         item_data = item_gobj->user_data;
-        holdKind = item_data->x14_hold_kind; // Might not actually be (exclusively) hold kind in the end??? //
-        if (((int)holdKind == ITEM_UNK_MATO) || (int)(holdKind == 5) || (short)(holdKind == ITEM_UNK_ENEMY) || (int)(holdKind == 7)) // Decide lock-on type for Samus Missile?
+        holdKind = item_data->x14_hold_kind;                                                                                             // Might not actually be (exclusively) hold kind in the end??? //
+        if (((int) holdKind == ITEM_UNK_MATO) || (int) (holdKind == 5) || (short) (holdKind == ITEM_UNK_ENEMY) || (int) (holdKind == 7)) // Decide lock-on type for Samus Missile?
         {
-            if (item_data->xD00_grabGObj == NULL)
-            {
-                if (item_data->xDC8_word.flags.x13 == 0 || item_data->x518_ownerGObj == NULL)
-                {
-                    if ((facingDir != -1.0f) || !(item_data->x4C_pos.x > vector->x))
-                    {
-                        if ((facingDir != 1.0f) || !(item_data->x4C_pos.x < vector->x))
-                        {
+            if (item_data->xD00_grabGObj == NULL) {
+                if (item_data->xDC8_word.flags.x13 == 0 || item_data->x518_ownerGObj == NULL) {
+                    if ((facingDir != -1.0f) || !(item_data->x4C_pos.x > vector->x)) {
+                        if ((facingDir != 1.0f) || !(item_data->x4C_pos.x < vector->x)) {
                             xDist = vector->x - item_data->x4C_pos.x;
                             yDist = vector->y - item_data->x4C_pos.y;
                             magnitude = (xDist * xDist) + (yDist * yDist);
-                            if (magnitude < minMagnitude)
-                            {
+                            if (magnitude < minMagnitude) {
                                 minMagnitude = magnitude;
                                 closest_item_gobj = item_gobj;
                             }
@@ -1323,15 +1255,13 @@ void func_8026C368(HSD_GObj* item_gobj) // Run bomb item explosion callbacks //
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    if (item_data->x378_itemColl.x34_flags.bits.b7 != 0)
-    {
+    if (item_data->x378_itemColl.x34_flags.bits.b7 != 0) {
         itemID = item_data->x10_item_kind;
-        switch (itemID)
-        {
+        switch (itemID) {
         case It_Kind_BombHei: // Bob-Omb //
             func_8027D730(item_gobj);
             return;
-            
+
         case It_Kind_MSBomb: // Motion-Sensor Bomb //
             func_8028FE90(item_gobj);
             return;
@@ -1359,8 +1289,7 @@ void func_8026C3FC(void) // Toggle bit 3 of 0xDC8 ON for all active item GObjs? 
     HSD_GObj* item_gobj = lbl_804D782C->x24_itemGObj;
     Item* item_data;
 
-    while (item_gobj != NULL)
-    {
+    while (item_gobj != NULL) {
         item_data = item_gobj->user_data;
         item_data->xDC8_word.flags.x3 = 1;
         item_gobj = item_gobj->next;
@@ -1375,15 +1304,12 @@ void func_8026C42C(void) // Toggle bits in 0xDC8 for all active item GObjs? //
     Item* item_data;
 
     item_gobj = lbl_804D782C->x24_itemGObj;
-    while (item_gobj != NULL)
-    {
+    while (item_gobj != NULL) {
         item_data = item_gobj->user_data;
-        if (item_data->xDC8_word.flags.x7 != 0)
-        {
+        if (item_data->xDC8_word.flags.x7 != 0) {
             item_data->xDC8_word.flags.x5 = 1;
         }
-        if (item_data->xDC8_word.flags.x3 != 0)
-        {
+        if (item_data->xDC8_word.flags.x3 != 0) {
             item_data->xDC8_word.flags.x3 = 0;
         }
         item_gobj = item_gobj->next;
