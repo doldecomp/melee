@@ -1,6 +1,6 @@
 #include <ftCaptain.h>
 
-// func_800E2888
+// ftCaptain_OnDeath
 // OnRespawn/OnDeath (same function I've seen called differently)
 // https://decomp.me/scratch/XZ1Jx
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
@@ -54,7 +54,7 @@ void ftCaptain_OnLoadForGanon(Fighter* fp) {
     PUSH_ATTRS(fp, ftCaptainAttributes);
 }
 
-// func_800E2AEC
+// ftCaptain_OnLoad
 // OnLoad
 // https://decomp.me/scratch/aZ4Wn
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)

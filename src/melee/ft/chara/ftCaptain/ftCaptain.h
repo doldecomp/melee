@@ -82,8 +82,8 @@ typedef struct _ftCaptainAttributes
 
 // Captain Falcon & Ganondorf functions //
 
-void func_800E2AEC(HSD_GObj* fighter_gobj);
-void func_800E2888(HSD_GObj* fighter_gobj);
+void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
+void ftCaptain_OnDeath(HSD_GObj* fighter_gobj);
 void lbl_800E28C8(HSD_GObj* fighter_gobj);
 void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL unk_var);
 void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj) ;
