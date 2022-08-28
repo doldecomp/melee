@@ -37,7 +37,7 @@ static HSD_PadRumbleListData lbl_8046B1F8[12];
 static void lbl_8015FD24(void)
 {
     PADSetSpec(5);
-    func_80377D98(5, lbl_8046B108, 12, lbl_8046B1F8);
+    HSD_PadInit(5, lbl_8046B108, 12, lbl_8046B1F8);
     HSD_PadLibData.clamp_stickType = 0;
     HSD_PadLibData.clamp_stickShift = 1;
     HSD_PadLibData.clamp_stickMax = 80;
