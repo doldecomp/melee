@@ -30,8 +30,8 @@ ftNess_AttackHi4_Release_Action:
 /* 801164EC 001130CC  28 03 00 00 */	cmplwi r3, 0
 /* 801164F0 001130D0  41 82 00 40 */	beq lbl_80116530
 /* 801164F4 001130D4  80 A3 00 2C */	lwz r5, 0x2c(r3)
-/* 801164F8 001130D8  3C 80 80 3B */	lis r4, lbl_803B75A4@ha
-/* 801164FC 001130DC  38 C4 75 A4 */	addi r6, r4, lbl_803B75A4@l
+/* 801164F8 001130D8  3C 80 80 3B */	lis r4, YoyoChargePos@ha
+/* 801164FC 001130DC  38 C4 75 A4 */	addi r6, r4, YoyoChargePos@l
 /* 80116500 001130E0  80 E5 00 C4 */	lwz r7, 0xc4(r5)
 /* 80116504 001130E4  38 81 00 34 */	addi r4, r1, 0x34
 /* 80116508 001130E8  80 A6 00 00 */	lwz r5, 0(r6)

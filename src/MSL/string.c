@@ -17,7 +17,7 @@ enum __ReadProcActions
 	__TestForError
 };
 
-//lbl_803257E8
+//__StringRead
 int __StringRead(void * isc, int ch, int Action) {
     char RetVal;
 
@@ -46,7 +46,7 @@ int __StringRead(void * isc, int ch, int Action) {
     }
 }
 
-//func_80325878
+//strchr
 char* strchr(const char *str, int chr) {
     const unsigned char *p = (unsigned char*) str - 1;
     unsigned long int c = ((unsigned long int)chr & 0xffu);
@@ -59,7 +59,7 @@ char* strchr(const char *str, int chr) {
     return c ? 0 : (char *) p;
 }
 
-//func_803258A8
+//strncmp
 int strncmp(const char * str1, const char * str2, unsigned long n)
 {
     const	unsigned char * p1 = (unsigned char *) str1 - 1;
@@ -185,7 +185,7 @@ bytecopy:
 
 
 
-//func_80325A0C
+//strncpy
 char * strncpy(char * __restrict dst, const char * __restrict src, unsigned long n)
 {
 	const	unsigned char * p		= (const unsigned char *) src - 1;
@@ -317,7 +317,7 @@ bytecopy:
 	}
 }
 
-//func_80325B04
+//strlen
 unsigned long (strlen)(const char* s) {
     unsigned long k = -1;
     unsigned char * p = (unsigned char *) s - 1;
