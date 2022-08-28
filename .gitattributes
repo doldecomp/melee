@@ -1,5 +1,7 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
 * text=auto
+
+# Enforce Unix-style line endings.
 text eol=lf
 
 # Explicitly declare text files you want to always be normalized and converted
