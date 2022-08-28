@@ -1,12 +1,24 @@
+from pathlib import Path
 from elftools.elf.elffile import ELFFile
 from tqdm import tqdm
+
+root = Path(__file__) / '../../'
+debug_elf = root / 'expected/build/ssbm.us.1.2/main.elf'
+src = root / 'src'
+asm = root / 'asm'
+target_files = [*asm.glob('**/*.s'),
+                *src.glob('**/*.c'),
+                *src.glob('**/*.h')]
+target_files = filter(lambda p: p.suffix not in ['.s.s', '.s.c', '.c.s'], target_files)
+target_files = map(lambda p: p.resolve(), target_files)
+target_files = list(target_files)
 
 f = open(debug_elf, "rb")
 e = ELFFile(f)
 symtab = e.get_section_by_name(".symtab")
 symbols = [x for x in symtab.iter_symbols()]
 
-for fname in asm_files:
+for fname in target_files:
     f = open(fname, "r")
     file_text = f.read()
     f.close()
