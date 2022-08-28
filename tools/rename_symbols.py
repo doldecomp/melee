@@ -1,4 +1,6 @@
 from elftools.elf.elffile import ELFFile
+from tqdm import tqdm
+
 f = open(debug_elf, "rb")
 e = ELFFile(f)
 symtab = e.get_section_by_name(".symtab")
