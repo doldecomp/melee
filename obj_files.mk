@@ -79,7 +79,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/ft/code_8007C114.s.o\
 	$(BUILD_DIR)/asm/melee/ft/code_8007C630.s.o\
 	$(BUILD_DIR)/src/melee/ft/ftcommon.c.o\
-	$(BUILD_DIR)/asm/melee/ft/ftdrawcommon.s.o\
+	$(BUILD_DIR)/src/melee/ft/ftdrawcommon.c.o\
 	$(BUILD_DIR)/src/melee/ft/ftcliffcommon.c.o\
 	$(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
 	$(BUILD_DIR)/asm/melee/ft/code_80081938.s.o\
