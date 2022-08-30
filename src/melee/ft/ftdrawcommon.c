@@ -757,6 +757,78 @@ lbl_80080C10:
 
 #endif
 
+#ifdef NON_MATCHING
+
+// https://decomp.me/scratch/sjQ3z // 155 (98.75%) @permuter
+void func_80080C28(HSD_GObj* gobj, s32 arg1)
+{
+    MtxPtr temp_r28;
+    f32 temp_f31;
+    f32 temp_f0;
+
+    Mtx sp70;
+    Mtx sp40;
+
+    u8 pad0[0xC];
+
+    Vec sp30;
+
+    Fighter* fighter;
+
+    MtxPtr phi_r28;
+    void* temp_r27;
+
+    u8 pad1[0x18];
+
+    fighter = gobj->user_data;
+    if (fighter->x21FC_flag.bits.b7 != 0) {
+        if ((fighter->x221E_flag.bits.b0 == 0) && (fighter->x221E_flag.bits.b5 == 0) && (fighter->x2226_flag.bits.b5 == 0)) {
+            func_8009F5AC(fighter);
+            if (fighter->x5BC != 0U) {
+                func_800750C8(fighter, 0, 0);
+                func_800750C8(fighter, 2, 0);
+                func_800750C8(fighter, 4, 0);
+                func_800750C8(fighter, 1, 1);
+            }
+
+            phi_r28 = NULL;
+
+            fighter->x2223_flag.bits.b2 = 0;
+            fighter->x2223_flag.bits.b3 = 0;
+            fighter->x2227_flag.bits.b7 = 0;
+            fighter->x2228_flag.bits.b0 = 1;
+
+            temp_f31 = temp_f0 = 0.0f;
+            sp30.z = temp_f31;
+            sp30.y = temp_f31;
+            sp30.x = temp_f31;
+
+            if (func_80087074(gobj, &sp30) != 0) {
+                temp_r28 = HSD_CObjGetCurrent()->view_mtx;
+                PSMTXIdentity(sp40);
+
+                mtx_thing(sp40, &sp30, temp_f31, temp_f0);
+
+                PSMTXConcat(temp_r28, sp40, sp70);
+                phi_r28 = sp70;
+            }
+
+            temp_r27 = gobj->hsd_obj;
+            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1), 0);
+            if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
+                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1, (MtxPtr) phi_r28);
+            }
+            func_800C8AF0(fighter);
+            func_8009F7F8(fighter);
+        }
+        if (fighter->x20A0_accessory != NULL) {
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1), 0);
+        }
+    }
+}
+
+#else
+
 #pragma push
 asm unk_t func_80080C28()
 { // clang-format off
@@ -892,6 +964,8 @@ lbl_80080E00:
 /* 80080E14 0007D9F4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#endif
 
 #pragma push
 asm unk_t func_80080E18()
