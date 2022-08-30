@@ -8,6 +8,7 @@ endif
 GENERATE_MAP ?= 0
 NON_MATCHING ?= 0
 EPILOGUE_PROCESS ?= 1
+SKIP_CHECK ?= 0
 
 VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
@@ -117,6 +118,8 @@ HOSTCFLAGS := -Wall -O3 -s
 default: $(DOL)
 ifeq ($(NON_MATCHING),1)
 	@echo "Skipping checksum for non-matching build."
+else ifeq ($(SKIP_CHECK),1)
+	@echo "Skipping checksum for this build."
 else
 	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1
 endif
