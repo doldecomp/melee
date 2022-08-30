@@ -1321,7 +1321,10 @@ typedef struct _Fighter {
     /* 0x2E4 */ f32 x2E4;
     /* 0x2E8 */ f32 x2E8;
     /* 0x2EC */ f32 x2EC;
-    u8 filler_x2F0[0x3E4 - 0x2F0];
+    /* 0x2F0 */ u32 x2F0;
+    /* 0x2F4 */ unk_t x2F4;
+    u8 filler_x2F0[0x3E0 - 0x2F8];
+    /* 0x3E0 */ u32 x3E0;
     /* 0x3E4 */ f32 x3E4;
     /* 0x3E8 */ f32 x3E8;
     /* 0x3EC */ s32 x3EC;
@@ -1463,7 +1466,11 @@ typedef struct _Fighter {
     /* 0x119E */ u8 x119E_hurtboxNum;
     /* 0x119F */ u8 x119F;
     /* 0x11A0 */ ftHurt x11A0_fighterHurtbox[15];
-    u8 filler_x1828[0x1828 - 0x1614];
+    /* 0x1614 */ unk_t x1614;
+    /* 0x1618 */ u8 filler_x1618[0x166C - 0x1618];
+    /* 0x166C */ u32 x166C;
+    /* 0x1670 */ unk_t x1670;
+    /* 0x1674 */ u8 filler_x1674[0x1828 - 0x1674];
     /* 0x1828 */ s32 x1828;
     struct dmg                                                 // 0x182c
     {                                                          //
@@ -1738,7 +1745,7 @@ typedef struct _Fighter {
         void (*x21F4_callback)(HSD_GObj *fp);
         void (*x21F8_callback)(HSD_GObj *fp);
     } cb;
-    /* 0x21FC */ u8 x21FC;
+    /* 0x21FC */ UnkFlagStruct x21FC_flag;
     u8 filler_x21FC[0x2200 - 0x21FD];
     /* 0x2200 */ u32 x2200_ftcmd_var0;
     /* 0x2204 */ u32 x2204_ftcmd_var1;

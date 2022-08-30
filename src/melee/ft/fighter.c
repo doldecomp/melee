@@ -748,7 +748,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata)
     Fighter_UnkInitLoad_80068914_Inner1(fighterObj);
 
     fp->x594_s32 = 0;
-    fp->x21FC = 1;
+    fp->x21FC_flag.u8 = 1;
 
     fp->x221E_flag.bits.b0 = 0;
     fp->x221E_flag.bits.b1 = 0;
