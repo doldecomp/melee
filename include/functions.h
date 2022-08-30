@@ -859,8 +859,6 @@ void HSD_CObjSetScissorx4();
 void HSD_CObjSetViewportfx4();
 u32 HSD_CObjGetProjectionType(struct _HSD_CObj *);
 
-void *HSD_CObjGetCurrent(void);
-
 struct _HSD_PObj *HSD_PObjLoadDesc(struct _HSD_PObjDesc *);
 
 void HSD_EraseRect();

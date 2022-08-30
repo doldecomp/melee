@@ -2,6 +2,7 @@
 #include <dolphin/types.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
+#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/state.h>
@@ -14,15 +15,14 @@ static s32 lbl_804D3A90 = 0x80808080;
 static char lbl_804D3A94[] = "jobj.h";
 static char lbl_804D3A9C[] = "jobj";
 
-static s32 const lbl_804D8368[] = { 0 };
-static s32 const lbl_804D836C[] = { -2 };
-static s32 const lbl_804D8370[] = { -1, 0 };
+extern f32 lbl_804D8368;
+extern s32 lbl_804D836C[1];
+extern s32 lbl_804D8370[2];
 
 extern unk_t lbl_804D782C;
 extern unk_t func_800750C8();
 extern unk_t lbl_803C20CC;
 extern unk_t func_8009F7F8();
-extern unk_t HSD_CObjGetCurrent();
 extern unk_t func_800C8AF0();
 extern unk_t HSD_JObjDispAll();
 extern unk_t func_80390EB8();
@@ -45,57 +45,44 @@ extern unk_t func_8000A244();
 extern unk_t func_8000A584();
 extern unk_t func_80009F54();
 
-#pragma push
-asm unk_t func_8008051C()
-{ // clang-format off
-    nofralloc
-/* 8008051C 0007D0FC  7C 08 02 A6 */	mflr r0
-/* 80080520 0007D100  90 01 00 04 */	stw r0, 4(r1)
-/* 80080524 0007D104  94 21 FF 88 */	stwu r1, -0x78(r1)
-/* 80080528 0007D108  DB E1 00 70 */	stfd f31, 0x70(r1)
-/* 8008052C 0007D10C  93 E1 00 6C */	stw r31, 0x6c(r1)
-/* 80080530 0007D110  93 C1 00 68 */	stw r30, 0x68(r1)
-/* 80080534 0007D114  7C 9E 23 78 */	mr r30, r4
-/* 80080538 0007D118  38 81 00 54 */	addi r4, r1, 0x54
-/* 8008053C 0007D11C  C3 E2 89 88 */	lfs f31, lbl_804D8368(r2)
-/* 80080540 0007D120  D3 E1 00 5C */	stfs f31, 0x5c(r1)
-/* 80080544 0007D124  D3 E1 00 58 */	stfs f31, 0x58(r1)
-/* 80080548 0007D128  D3 E1 00 54 */	stfs f31, 0x54(r1)
-/* 8008054C 0007D12C  48 00 6B 29 */	bl func_80087074
-/* 80080550 0007D130  2C 03 00 00 */	cmpwi r3, 0
-/* 80080554 0007D134  41 82 00 54 */	beq lbl_800805A8
-/* 80080558 0007D138  48 2E 9D 31 */	bl HSD_CObjGetCurrent
-/* 8008055C 0007D13C  3B E3 00 54 */	addi r31, r3, 0x54
-/* 80080560 0007D140  38 61 00 18 */	addi r3, r1, 0x18
-/* 80080564 0007D144  48 2C 1C 41 */	bl PSMTXIdentity
-/* 80080568 0007D148  C0 21 00 54 */	lfs f1, 0x54(r1)
-/* 8008056C 0007D14C  7F E3 FB 78 */	mr r3, r31
-/* 80080570 0007D150  C0 02 89 88 */	lfs f0, lbl_804D8368(r2)
-/* 80080574 0007D154  7F C5 F3 78 */	mr r5, r30
-/* 80080578 0007D158  EC 21 F8 2A */	fadds f1, f1, f31
-/* 8008057C 0007D15C  38 81 00 18 */	addi r4, r1, 0x18
-/* 80080580 0007D160  D0 21 00 24 */	stfs f1, 0x24(r1)
-/* 80080584 0007D164  C0 21 00 58 */	lfs f1, 0x58(r1)
-/* 80080588 0007D168  EC 21 F8 2A */	fadds f1, f1, f31
-/* 8008058C 0007D16C  D0 21 00 34 */	stfs f1, 0x34(r1)
-/* 80080590 0007D170  C0 21 00 5C */	lfs f1, 0x5c(r1)
-/* 80080594 0007D174  EC 01 00 2A */	fadds f0, f1, f0
-/* 80080598 0007D178  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 8008059C 0007D17C  48 2C 1C 69 */	bl PSMTXConcat
-/* 800805A0 0007D180  7F C3 F3 78 */	mr r3, r30
-/* 800805A4 0007D184  48 00 00 08 */	b lbl_800805AC
-lbl_800805A8:
-/* 800805A8 0007D188  38 60 00 00 */	li r3, 0
-lbl_800805AC:
-/* 800805AC 0007D18C  80 01 00 7C */	lwz r0, 0x7c(r1)
-/* 800805B0 0007D190  CB E1 00 70 */	lfd f31, 0x70(r1)
-/* 800805B4 0007D194  83 E1 00 6C */	lwz r31, 0x6c(r1)
-/* 800805B8 0007D198  83 C1 00 68 */	lwz r30, 0x68(r1)
-/* 800805BC 0007D19C  38 21 00 78 */	addi r1, r1, 0x78
-/* 800805C0 0007D1A0  7C 08 03 A6 */	mtlr r0
-/* 800805C4 0007D1A4  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+static inline mtx_thing(MtxPtr mtx, Vec* ptr, f32 val, f32 val2)
+{
+    mtx[0][3] = ptr->x + val;
+    mtx[1][3] = ptr->y + val;
+    mtx[2][3] = ptr->z + val2;
+}
+MtxPtr func_8008051C(HSD_GObj* arg1, MtxPtr arg2)
+{
+    u8 pad2[0x4];
+
+    Vec sp54;
+
+    u8 pad1[0xC];
+
+    Mtx sp18;
+
+    u8 pad0[0x8];
+
+    f32 temp_f31;
+    f32 temp_f0;
+
+    MtxPtr temp_r31;
+
+    temp_f31 = temp_f0 = 0.0F;
+    sp54.z = temp_f31;
+    sp54.y = temp_f31;
+    sp54.x = temp_f31;
+    if (func_80087074(arg1, &sp54)) {
+        temp_r31 = HSD_CObjGetCurrent()->view_mtx;
+        PSMTXIdentity(sp18);
+
+        mtx_thing(sp18, &sp54, temp_f31, temp_f0);
+
+        PSMTXConcat(temp_r31, sp18, arg2);
+        return arg2;
+    }
+    return NULL;
+}
 
 #pragma push
 asm unk_t func_800805C8()
