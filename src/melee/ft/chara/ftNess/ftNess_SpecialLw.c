@@ -66,7 +66,7 @@ void ftNess_SpecialLwStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PSI M
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         fighter_data2->x2350_stateVar5 = 0;
-        if ((s32)fighter_data2->xE0_ground_or_air == GROUND)
+        if ((s32)fighter_data2->xE0_ground_or_air == GA_Ground)
         {
             ftNess_SpecialLwHold_Action(fighter_gobj);
             return;
@@ -102,7 +102,7 @@ void ftNess_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PSI 
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         fighter_data2->x2350_stateVar5 = 0;
-        if ((s32)fighter_data2->xE0_ground_or_air == GROUND)
+        if ((s32)fighter_data2->xE0_ground_or_air == GA_Ground)
         {
             ftNess_SpecialLwHold_Action(fighter_gobj);
             return;
@@ -223,7 +223,7 @@ void ftNess_SpecialLwHold_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PSI Ma
     }
     if (((s32)fp->nessVars[0].SpecialLw.releaseLag <= 0) && ((s32)fp->nessVars[0].SpecialLw.isRelease != 0))
     {
-        if ((s32)fp->xE0_ground_or_air == GROUND)
+        if ((s32)fp->xE0_ground_or_air == GA_Ground)
         {
             ftNess_SpecialLwEnd_Action(fighter_gobj);
         }
@@ -264,7 +264,7 @@ void ftNess_SpecialAirLwHold_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PSI M
     }
     if (((s32)fp->nessVars[0].SpecialLw.releaseLag <= 0) && ((s32)fp->nessVars[0].SpecialLw.isRelease != 0))
     {
-        if ((s32)fp->xE0_ground_or_air == GROUND)
+        if ((s32)fp->xE0_ground_or_air == GA_Ground)
         {
             ftNess_SpecialLwEnd_Action(fighter_gobj);
         }
@@ -657,7 +657,7 @@ void ftNess_SpecialLwHit_Anim(HSD_GObj* arg0) // Ness's grounded PSI Magnet Abso
         temp_r3_2 = arg0->user_data;
         if (((s32)temp_r3_2->nessVars[0].SpecialLw.releaseLag <= 0) && ((s32)temp_r3_2->nessVars[0].SpecialLw.isRelease != 0))
         {
-            if ((s32)temp_r3_2->xE0_ground_or_air == GROUND)
+            if ((s32)temp_r3_2->xE0_ground_or_air == GA_Ground)
             {
                 ftNess_SpecialLwEnd_Action(arg0);
             }
@@ -669,7 +669,7 @@ void ftNess_SpecialLwHit_Anim(HSD_GObj* arg0) // Ness's grounded PSI Magnet Abso
         }
         else
         {
-            if ((s32)temp_r3_2->xE0_ground_or_air == GROUND)
+            if ((s32)temp_r3_2->xE0_ground_or_air == GA_Ground)
             {
                 Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD, FIGHTER_GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
 
@@ -872,7 +872,7 @@ void ftNess_AbsorbThink_DecideAction(HSD_GObj* gobj) // Ness's PSI Magnet OnAbso
 
     if (((temp_r0 != AS_NESS_SPECIALLW_HIT) && (temp_r0 != AS_NESS_SPECIALAIRLW_HIT)) || !(temp_r31->x894_currentAnimFrame <= temp_r30->x7C_PSI_MAGNET_UNK2))
     {
-        if ((s32)temp_r31->xE0_ground_or_air == GROUND)
+        if ((s32)temp_r31->xE0_ground_or_air == GA_Ground)
         {
             phi_r4 = AS_NESS_SPECIALLW_HIT;
         }
