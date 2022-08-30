@@ -954,6 +954,16 @@ typedef struct _ftHit
     s32 x134;
 } ftHit;
 
+typedef struct _itPickup // 0x294
+{
+    Vec2 x0_ground_light_offset;  // 0x294
+    Vec2 x8;                      // 0x29C
+    Vec2 x10_ground_heavy_offset; // 0x2A4
+    Vec2 x18;                     // 0x2AC
+    Vec2 x20_air_light_offset;    // 0x2B4
+    Vec2 x28;                     // 0x2BC
+} itPickup;
+
 typedef struct _S32Pair {
     s32 x, y;
 } S32Pair;
@@ -1300,7 +1310,7 @@ typedef struct _Fighter {
     /* 0x10C */ ftData* x10C_ftData;
     // TODO: Ask Psi how many of those are confirmed, only a fraction of them is used right now
     attr x110_attr;
-    u8 filler_x294[0x2C4 - 0x294];
+    /* 0x294 */ itPickup x294_itPickup;
     /* 0x2C4 */ Vec2 x2C4;
     /* 0x2CC */ void* x2CC;
     /* 0x2D0 */ void* x2D0;
