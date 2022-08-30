@@ -46,7 +46,8 @@ struct DemoMotionFiles
 
 typedef Vec Vec3;
 
-typedef struct _UnkFlagStruct {
+typedef union _UnkFlagStruct {
+    u8 u8;
     struct {
         u8 b0 : 1;
         u8 b1 : 1;
