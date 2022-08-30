@@ -968,12 +968,6 @@ typedef struct _S32Pair {
     s32 x, y;
 } S32Pair;
 
-// Ground/air state for Fighter.xE0_ground_or_air
-enum {
-    GA_Ground = 0,
-    GA_Air = 1,
-};
-
 typedef struct {
     HSD_Joint* joint;
     u8 padding[0x10];
@@ -1294,7 +1288,7 @@ typedef struct _Fighter {
     Vec3 xBC_prevPos;                                     // 0xBC
     Vec3 xC8_pos_delta;                                        // 0xC8
     Vec3 xD4_unk_vel;                                        // 0xD4
-    s32 xE0_ground_or_air;                                         // 0xE0
+    GroundOrAir xE0_ground_or_air;                                         // 0xE0
     f32 xE4_ground_accel_1; // 0xE4
     f32 xE8_ground_accel_2;   // 0xE8
     f32 xEC_ground_vel;                                    // 0xEC

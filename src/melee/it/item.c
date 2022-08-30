@@ -1268,7 +1268,7 @@ block_returnGObj:
 // https://decomp.me/scratch/YyUEI //
 void func_80268B18(SpawnItem* spawnItem) // Item spawn prefunction - spawn airborne //
 {
-    spawnItem->x48_ground_or_air = AIR;
+    spawnItem->x48_ground_or_air = GA_Air;
     spawnItem->x10 = 0;
     func_802674AC(spawnItem);
     func_8026862C(spawnItem);
@@ -1278,7 +1278,7 @@ void func_80268B18(SpawnItem* spawnItem) // Item spawn prefunction - spawn airbo
 // https://decomp.me/scratch/cN7Fn //
 void func_80268B5C(SpawnItem* spawnItem) // Item spawn prefunction - spawn grounded //
 {
-    spawnItem->x48_ground_or_air = GROUND;
+    spawnItem->x48_ground_or_air = GA_Ground;
     spawnItem->x10 = 0;
     func_802674AC(spawnItem);
     func_8026862C(spawnItem);
@@ -1288,7 +1288,7 @@ void func_80268B5C(SpawnItem* spawnItem) // Item spawn prefunction - spawn groun
 // https://decomp.me/scratch/V7AgZ //
 void func_80268B9C(SpawnItem* spawnItem) // Item spawn prefunction - spawn grounded and toggle unknown true //
 {
-    spawnItem->x48_ground_or_air = GROUND;
+    spawnItem->x48_ground_or_air = GA_Ground;
     spawnItem->x10 = 1;
     func_802674AC(spawnItem);
     func_8026862C(spawnItem);

@@ -667,7 +667,7 @@ typedef struct SpawnItem
     UnkFlagStruct x45_flag;
     UnkFlagStruct x46_flag;
     UnkFlagStruct x47_flag;
-    s32 x48_ground_or_air;          // 0x0 = stationary, 0x1 = air (?)
+    GroundOrAir x48_ground_or_air;          // 0x0 = stationary, 0x1 = air (?)
 
 } SpawnItem;
 
