@@ -83,7 +83,7 @@ HSD_LObj *HSD_LObjGetActiveByIndex(s32 idx)
     }
 }
 
-static void LObjUpdateFunc(void *obj, u32 type, FObjData *val)
+static void LObjUpdateFunc(void* obj, u32 type, FObjData* val)
 {
     HSD_LObj *lobj = obj;
 
@@ -220,8 +220,8 @@ void HSD_LObjReqAnimAll(HSD_LObj *lobj, f32 startframe)
     }
 }
 
-Vec const lbl_803B94A0 = {0.0F, 0.0F, 0.0F};
-Vec const lbl_803B94AC = {0.0F, 0.0F, 0.0F};
+Vec const lbl_803B94A0 = { 0.0F, 0.0F, 0.0F };
+Vec const lbl_803B94AC = { 0.0F, 0.0F, 0.0F };
 
 void HSD_LObjGetLightVector(HSD_LObj *lobj, VecPtr dir)
 {
@@ -370,7 +370,7 @@ void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
     GXInitLightPos(&lobj->spec_lightobj, lpos.x, lpos.y, lpos.z);
     if (lobj->flags & 0x40) {
         GXInitLightAttn(&lobj->lightobj, 1.0F, 0.0F, 0.0F,
-            lobj->u.attn.k0, lobj->u.attn.k1, lobj->u.attn.k2);
+                        lobj->u.attn.k0, lobj->u.attn.k1, lobj->u.attn.k2);
     } else {
         f32 ref_br = lobj->u.spot.ref_br;
         f32 ref_dist = lobj->u.spot.ref_dist;
@@ -395,8 +395,8 @@ void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
     GXInitLightDir(&lobj->lightobj, ldir.x, ldir.y, ldir.z);
     if (lobj->flags & 0x40) {
         GXInitLightAttn(&lobj->lightobj,
-            lobj->u.attn.a0, lobj->u.attn.a1, lobj->u.attn.a2,
-            lobj->u.attn.k0, lobj->u.attn.k1, lobj->u.attn.k2);
+                        lobj->u.attn.a0, lobj->u.attn.a1, lobj->u.attn.a2,
+                        lobj->u.attn.k0, lobj->u.attn.k1, lobj->u.attn.k2);
     } else {
         f32 ref_br = lobj->u.point.ref_br;
         f32 ref_dist = lobj->u.point.ref_dist;
