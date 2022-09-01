@@ -413,7 +413,7 @@ void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
 extern char lbl_804D5D24[4];
 #pragma push
 asm void HSD_LObjSetupInit()
-{
+{ // clang-format off
     nofralloc
 /* 80365F28 00362B08  7C 08 02 A6 */	mflr r0
 /* 80365F2C 00362B0C  38 80 00 00 */	li r4, 0
@@ -749,7 +749,7 @@ lbl_8036639C:
 /* 803663A8 00362F88  38 21 00 70 */	addi r1, r1, 0x70
 /* 803663AC 00362F8C  7C 08 03 A6 */	mtlr r0
 /* 803663B0 00362F90  4E 80 00 20 */	blr 
-}
+} // clang-format on
 #pragma pop
 
 extern char lbl_804D5D2C[8];
@@ -833,7 +833,7 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
 
 #pragma push
 asm void HSD_LObjDeleteCurrentAll()
-{
+{ // clang-format off
     nofralloc
 /* 80366654 00363234  7C 08 02 A6 */	mflr r0
 /* 80366658 00363238  90 01 00 04 */	stw r0, 4(r1)
@@ -933,12 +933,12 @@ lbl_80366790:
 /* 8036679C 0036337C  38 21 00 18 */	addi r1, r1, 0x18
 /* 803667A0 00363380  7C 08 03 A6 */	mtlr r0
 /* 803667A4 00363384  4E 80 00 20 */	blr 
-}
+} // clang-format on
 #pragma pop
 
 #pragma push
 asm void HSD_LObjSetCurrentAll()
-{
+{ // clang-format off
     nofralloc
 /* 803667A8 00363388  7C 08 02 A6 */	mflr r0
 /* 803667AC 0036338C  3C 80 80 4C */	lis r4, active_lights@ha
@@ -1031,12 +1031,12 @@ lbl_803668D0:
 /* 803668E0 003634C0  38 21 00 28 */	addi r1, r1, 0x28
 /* 803668E4 003634C4  7C 08 03 A6 */	mtlr r0
 /* 803668E8 003634C8  4E 80 00 20 */	blr 
-}
+} // clang-format on
 #pragma pop
 
 #pragma push
 asm void func_803668EC()
-{
+{ // clang-format off
     nofralloc
 /* 803668EC 003634CC  7C 08 02 A6 */	mflr r0
 /* 803668F0 003634D0  3C 80 80 4C */	lis r4, active_lights@ha
@@ -1136,12 +1136,12 @@ lbl_80366A28:
 /* 80366A38 00363618  38 21 00 28 */	addi r1, r1, 0x28
 /* 80366A3C 0036361C  7C 08 03 A6 */	mtlr r0
 /* 80366A40 00363620  4E 80 00 20 */	blr 
-}
+} // clang-format on
 #pragma pop
 
 #pragma push
 asm HSD_LObj* HSD_LObjGetCurrentByType(u16 type)
-{
+{ // clang-format off
     nofralloc
 /* 80366A44 00363624  80 8D BF 9C */	lwz r4, current_lights(r13)
 /* 80366A48 00363628  54 65 07 BE */	clrlwi r5, r3, 0x1e
@@ -1158,7 +1158,7 @@ lbl_80366A68:
 /* 80366A6C 0036364C  40 82 FF E4 */	bne lbl_80366A50
 /* 80366A70 00363650  38 60 00 00 */	li r3, 0
 /* 80366A74 00363654  4E 80 00 20 */	blr 
-}
+} // clang-format on
 #pragma pop
 
 s32 HSD_LightID2Index(GXLightID arg0)
