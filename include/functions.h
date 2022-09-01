@@ -231,9 +231,6 @@ f32 func_8007BBCC(struct _HSD_GObj *);
 void func_8007BC90();
 void func_8007BE3C(struct _HSD_GObj *);
 
-void func_8007C630(struct _HSD_GObj *);
-void func_8007C6DC();
-void func_8007C77C();
 void func_8007C930(struct _Fighter *, f32);
 
 void func_8007CB74(struct _HSD_GObj *);
@@ -734,8 +731,6 @@ void func_801C8138();
 void func_801C95C4(struct _HSD_GObj *);
 
 s32 Stage_80225194(void);
-
-void func_8026A8EC();
 
 void func_8026ABD8(struct _HSD_GObj *, Vec *, f32);
 

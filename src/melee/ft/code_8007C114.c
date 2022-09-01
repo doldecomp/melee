@@ -1,5 +1,6 @@
 #include <dolphin/types.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcoll.h>
 
 static f32 const lbl_804D8320 = 0.0F;
 static f32 const lbl_804D8324 = 1.0F;
@@ -12,7 +13,6 @@ extern unk_t func_8000ACFC();
 extern unk_t lbl_804D782C;
 extern unk_t func_800089B8();
 extern unk_t func_80007AFC();
-extern BOOL func_8007B868(HSD_GObj* fighterObj);
 
 void func_8007C224(HSD_GObj* fighterObj);
 
