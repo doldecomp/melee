@@ -46,34 +46,34 @@
 
 typedef struct _HSD_LightPoint {
     f32 cutoff;
-    u8 point_func;
+    u32 point_func;
     f32 ref_br;
     f32 ref_dist;
-    u8 dist_func;
+    u32 dist_func;
 } HSD_LightPoint;
 
 typedef struct _HSD_LightPointDesc {
     f32 cutoff;
-    u8 point_func;
+    u32 point_func;
     f32 ref_br;
     f32 ref_dist;
-    u8 dist_func;
+    u32 dist_func;
 } HSD_LightPointDesc;
 
 typedef struct _HSD_LightSpot {
     f32 cutoff;
-    u8 spot_func;
+    u32 spot_func;
     f32 ref_br;
     f32 ref_dist;
-    u8 dist_func;
+    u32 dist_func;
 } HSD_LightSpot;
 
 typedef struct _HSD_LightSpotDesc {
     f32 cutoff;
-    u8 spot_func;
+    u32 spot_func;
     f32 ref_br;
     f32 ref_dist;
-    u8 dist_func;
+    u32 dist_func;
 } HSD_LightSpotDesc;
 
 typedef struct _HSD_LightAttn {
@@ -163,8 +163,8 @@ void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
 void HSD_LObjGetLightVector(HSD_LObj *lobj, VecPtr dir);
 void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess, u32 unused);
 
-BOOL HSD_LObjGetPosition(HSD_LObj*, Vec const*);
-BOOL HSD_LObjGetInterest(HSD_LObj*, Vec const*);
+BOOL HSD_LObjGetPosition(HSD_LObj*, Vec*);
+BOOL HSD_LObjGetInterest(HSD_LObj*, Vec*);
 
 HSD_WObj* HSD_LObjGetPositionWObj(HSD_LObj* lobj);
 HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj);
@@ -172,5 +172,7 @@ void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe);
 void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
 
 s32 HSD_LightID2Index(GXLightID);
+void HSD_LObjDeleteCurrent(HSD_LObj* lobj);
+s32 func_80366B64(u32);
 
 #endif
