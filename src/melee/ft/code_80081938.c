@@ -1,9 +1,16 @@
-.include "macros.inc"
+#include <dolphin/types.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/item.h>
+#include <melee/lb/lbunknown_003.h>
+#include <sysdolphin/baselib/gobj.h>
 
-.section .text  # 0x80081938 - 0x80081B34
+static f32 const lbl_804D83A0 = -1.0F;
+static f32 const lbl_804D83A4 = 1.0F;
 
-.global func_80081938
-func_80081938:
+#pragma push
+asm void func_80081938(HSD_GObj* fighter_gobj)
+{ // clang-format off
+    nofralloc
 /* 80081938 0007E518  94 21 FF 88 */	stwu r1, -0x78(r1)
 /* 8008193C 0007E51C  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 80081940 0007E520  80 65 06 F4 */	lwz r3, 0x6f4(r5)
@@ -32,9 +39,13 @@ func_80081938:
 /* 8008199C 0007E57C  90 05 19 38 */	stw r0, 0x1938(r5)
 /* 800819A0 0007E580  38 21 00 78 */	addi r1, r1, 0x78
 /* 800819A4 0007E584  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global func_800819A8
-func_800819A8:
+#pragma push
+asm void func_800819A8(HSD_GObj* fighter_gobj)
+{ // clang-format off
+    nofralloc
 /* 800819A8 0007E588  94 21 FF 88 */	stwu r1, -0x78(r1)
 /* 800819AC 0007E58C  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 800819B0 0007E590  80 65 06 F4 */	lwz r3, 0x6f4(r5)
@@ -57,9 +68,13 @@ func_800819A8:
 /* 800819F4 0007E5D4  D0 05 19 38 */	stfs f0, 0x1938(r5)
 /* 800819F8 0007E5D8  38 21 00 78 */	addi r1, r1, 0x78
 /* 800819FC 0007E5DC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global func_80081A00
-func_80081A00:
+#pragma push
+asm unk_t func_80081A00()
+{ // clang-format off
+    nofralloc
 /* 80081A00 0007E5E0  7C 08 02 A6 */	mflr r0
 /* 80081A04 0007E5E4  90 01 00 04 */	stw r0, 4(r1)
 /* 80081A08 0007E5E8  94 21 FF 50 */	stwu r1, -0xb0(r1)
@@ -93,7 +108,7 @@ func_80081A00:
 /* 80081A78 0007E658  C0 1F 02 8C */	lfs f0, 0x28c(r31)
 /* 80081A7C 0007E65C  EC 01 00 2A */	fadds f0, f1, f0
 /* 80081A80 0007E660  D0 1F 19 44 */	stfs f0, 0x1944(r31)
-/* 80081A84 0007E664  80 6D C1 8C */	lwz r3, lbl_804D782C@sda21(r13)
+/* 80081A84 0007E664  80 6D C1 8C */	lwz r3, lbl_804D782C(r13)
 /* 80081A88 0007E668  83 7E 00 2C */	lwz r27, 0x2c(r30)
 /* 80081A8C 0007E66C  83 83 00 24 */	lwz r28, 0x24(r3)
 /* 80081A90 0007E670  48 00 00 64 */	b lbl_80081AF4
@@ -112,10 +127,10 @@ lbl_80081A94:
 /* 80081AC0 0007E6A0  C0 1B 00 B0 */	lfs f0, 0xb0(r27)
 /* 80081AC4 0007E6A4  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80081AC8 0007E6A8  40 81 00 0C */	ble lbl_80081AD4
-/* 80081ACC 0007E6AC  C0 02 89 C0 */	lfs f0, lbl_804D83A0@sda21(r2)
+/* 80081ACC 0007E6AC  C0 02 89 C0 */	lfs f0, lbl_804D83A0(r2)
 /* 80081AD0 0007E6B0  48 00 00 08 */	b lbl_80081AD8
 lbl_80081AD4:
-/* 80081AD4 0007E6B4  C0 02 89 C4 */	lfs f0, lbl_804D83A4@sda21(r2)
+/* 80081AD4 0007E6B4  C0 02 89 C4 */	lfs f0, lbl_804D83A4(r2)
 lbl_80081AD8:
 /* 80081AD8 0007E6B8  D0 1D 0C D0 */	stfs f0, 0xcd0(r29)
 /* 80081ADC 0007E6BC  38 00 00 01 */	li r0, 1
@@ -145,11 +160,5 @@ lbl_80081B24:
 /* 80081B2C 0007E70C  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 80081B30 0007E710  7C 08 03 A6 */	mtlr r0
 /* 80081B34 0007E714  4E 80 00 20 */	blr 
-
-
-.section .sdata2
-    .balign 8
-lbl_804D83A0:
-	.4byte 0xBF800000
-lbl_804D83A4:
-	.4byte 0x3F800000
+} // clang-format on
+#pragma pop

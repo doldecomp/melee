@@ -1,5 +1,6 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/code_80081938.h>
 #include <melee/ft/ftdrawcommon.h>
 
 #define HALF_PI 1.5707963267948966

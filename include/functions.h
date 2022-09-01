@@ -303,7 +303,6 @@ void func_8008031C();
 f32 func_800804EC(struct _Fighter *); // DataOffset_PlayerScale_MultiplyBySomething, returns fp->x40*fp->x34
 void func_800804FC();
 
-void func_80081938(struct _HSD_GObj *);
 void func_800819A8();
 
 void func_800852B0();
