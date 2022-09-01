@@ -256,7 +256,7 @@ lbl_80391044:
 /* 80391050 0038DC30  80 63 00 28 */	lwz r3, 0x28(r3)
 /* 80391054 0038DC34  4B FD 58 99 */	bl func_803668EC
 /* 80391058 0038DC38  4B FD 92 31 */	bl HSD_CObjGetCurrent
-/* 8039105C 0038DC3C  4B FD 4E CD */	bl func_80365F28
+/* 8039105C 0038DC3C  4B FD 4E CD */	bl HSD_LObjSetupInit
 /* 80391060 0038DC40  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80391064 0038DC44  38 21 00 08 */	addi r1, r1, 8
 /* 80391068 0038DC48  7C 08 03 A6 */	mtlr r0
@@ -648,7 +648,7 @@ lbl_804085F0:
 .global lbl_80408600
 lbl_80408600:
 	.4byte lbl_80391120
-	.4byte func_80366BD4
+	.4byte HSD_LObjRemoveAll
 	.4byte HSD_JObjRemoveAll
 	.4byte lbl_803911C0
 .global lbl_80408610

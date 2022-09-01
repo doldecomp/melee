@@ -301,8 +301,8 @@ lbl_803672B8:
 /* 803672D4 00363EB4  7C 08 03 A6 */	mtlr r0
 /* 803672D8 00363EB8  4E 80 00 20 */	blr 
 
-.global func_803672DC
-func_803672DC:
+.global HSD_LObjLoadDesc
+HSD_LObjLoadDesc:
 /* 803672DC 00363EBC  7C 08 02 A6 */	mflr r0
 /* 803672E0 00363EC0  3C 80 80 40 */	lis r4, hsdLObj@ha
 /* 803672E4 00363EC4  90 01 00 04 */	stw r0, 4(r1)
@@ -375,8 +375,8 @@ lbl_803673A4:
 /* 803673D0 00363FB0  7C 08 03 A6 */	mtlr r0
 /* 803673D4 00363FB4  4E 80 00 20 */	blr 
 
-.global func_803673D8
-func_803673D8:
+.global HSD_LObjAddAnim
+HSD_LObjAddAnim:
 /* 803673D8 00363FB8  7C 08 02 A6 */	mflr r0
 /* 803673DC 00363FBC  28 03 00 00 */	cmplwi r3, 0
 /* 803673E0 00363FC0  90 01 00 04 */	stw r0, 4(r1)
@@ -445,6 +445,7 @@ lbl_8036749C:
 /* 803674A8 00364088  38 21 00 18 */	addi r1, r1, 0x18
 /* 803674AC 0036408C  7C 08 03 A6 */	mtlr r0
 /* 803674B0 00364090  4E 80 00 20 */	blr 
+
 LObjRelease:
 /* 803674B4 00364094  7C 08 02 A6 */	mflr r0
 /* 803674B8 00364098  90 01 00 04 */	stw r0, 4(r1)
@@ -549,6 +550,7 @@ lbl_803675F4:
 /* 8036761C 003641FC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80367620 00364200  7C 08 03 A6 */	mtlr r0
 /* 80367624 00364204  4E 80 00 20 */	blr 
+
 LObjAmnesia:
 /* 80367628 00364208  7C 08 02 A6 */	mflr r0
 /* 8036762C 0036420C  90 01 00 04 */	stw r0, 4(r1)
@@ -564,7 +566,7 @@ lbl_80367648:
 /* 80367650 00364230  7C 03 00 40 */	cmplw r3, r0
 /* 80367654 00364234  40 82 00 0C */	bne lbl_80367660
 /* 80367658 00364238  38 00 00 00 */	li r0, 0
-/* 8036765C 0036423C  90 0D BF 9C */	stw r0, lbl_804D763C@sda21(r13)
+/* 8036765C 0036423C  90 0D BF 9C */	stw r0, current_lights@sda21(r13)
 lbl_80367660:
 /* 80367660 00364240  3C 80 80 40 */	lis r4, hsdLObj@ha
 /* 80367664 00364244  38 84 60 C0 */	addi r4, r4, hsdLObj@l
@@ -659,8 +661,8 @@ lbl_804D5D3C:
 .global lbl_804D7638
 lbl_804D7638:
 	.skip 0x4
-.global lbl_804D763C
-lbl_804D763C:
+.global current_lights
+current_lights:
 	.skip 0x4
 .global nb_active_lights
 nb_active_lights:

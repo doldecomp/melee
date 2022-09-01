@@ -10,7 +10,7 @@ extern s32 lightmask_attnfunc;
 extern s32 lightmask_alpha;
 extern s32 lightmask_specular;
 extern s32 nb_active_lights;
-extern HSD_SList* lbl_804D763C;
+extern HSD_SList* current_lights;
 
 HSD_LObj *active_lights[GX_MAX_LIGHT];
 
@@ -83,7 +83,7 @@ HSD_LObj *HSD_LObjGetActiveByIndex(s32 idx)
     }
 }
 
-/*static*/ void LObjUpdateFunc(void *obj, u32 type, FObjData *val)
+static void LObjUpdateFunc(void *obj, u32 type, FObjData *val)
 {
     HSD_LObj *lobj = obj;
 
@@ -288,7 +288,7 @@ void HSD_LObjSetup(HSD_LObj *lobj, GXColor color, f32 shininess, u32 unused)
 extern char lbl_804D5D18[8];
 extern char lbl_804D5D20[8];
 
-void func_8036597C(Mtx pmtx)
+void HSD_LObjSetupSpecularInit(Mtx pmtx)
 {
     int i;
     s32 num;
@@ -330,8 +330,7 @@ void func_8036597C(Mtx pmtx)
     }
 }
 
-// setup_spec_lightobj
-void func_80365AC4(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
+void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
 {
     f32 x;
     lobj->spec_id = spec_id;
@@ -360,8 +359,7 @@ void func_80365AC4(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
     }
 }
 
-// setup_point_lightobj
-void func_80365C50(HSD_LObj* lobj, Mtx mtx)
+void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
 {
     Vec lpos;
     GXInitLightColor(&lobj->lightobj, lobj->color);
@@ -383,8 +381,7 @@ void func_80365C50(HSD_LObj* lobj, Mtx mtx)
     }
 }
 
-// setup_spot_lightobj
-void func_80365D6C(HSD_LObj* lobj, Mtx mtx)
+void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
 {
     Vec lpos;
     Vec ldir;
@@ -415,7 +412,7 @@ void func_80365D6C(HSD_LObj* lobj, Mtx mtx)
 
 extern char lbl_804D5D24[4];
 #pragma push
-asm void func_80365F28()
+asm void HSD_LObjSetupInit()
 {
     nofralloc
 /* 80365F28 00362B08  7C 08 02 A6 */	mflr r0
@@ -454,7 +451,7 @@ lbl_80365F9C:
 /* 80365FA4 00362B84  42 00 FF F8 */	bdnz lbl_80365F9C
 lbl_80365FA8:
 /* 80365FA8 00362B88  38 00 00 00 */	li r0, 0
-/* 80365FAC 00362B8C  83 2D BF 9C */	lwz r25, lbl_804D763C(r13)
+/* 80365FAC 00362B8C  83 2D BF 9C */	lwz r25, current_lights(r13)
 /* 80365FB0 00362B90  90 0D BF A0 */	stw r0, nb_active_lights(r13)
 /* 80365FB4 00362B94  3B E1 00 24 */	addi r31, r1, 0x24
 /* 80365FB8 00362B98  C3 E2 EA 80 */	lfs f31, 1048576.0F
@@ -503,7 +500,7 @@ lbl_80366040:
 lbl_8036604C:
 /* 8036604C 00362C2C  54 60 10 3A */	slwi r0, r3, 2
 /* 80366050 00362C30  7F 1E 01 2E */	stwx r24, r30, r0
-/* 80366054 00362C34  48 00 0B 11 */	bl func_80366B64
+/* 80366054 00362C34  48 00 0B 11 */	bl HSD_Index2LightID
 /* 80366058 00362C38  90 78 00 4C */	stw r3, 0x4c(r24)
 lbl_8036605C:
 /* 8036605C 00362C3C  83 4D BF A0 */	lwz r26, nb_active_lights(r13)
@@ -566,12 +563,12 @@ lbl_80366110:
 lbl_80366134:
 /* 80366134 00362D14  38 78 00 00 */	addi r3, r24, 0
 /* 80366138 00362D18  38 9C 00 00 */	addi r4, r28, 0
-/* 8036613C 00362D1C  4B FF FB 15 */	bl func_80365C50
+/* 8036613C 00362D1C  4B FF FB 15 */	bl setup_point_lightobj
 /* 80366140 00362D20  48 00 00 10 */	b lbl_80366150
 lbl_80366144:
 /* 80366144 00362D24  38 78 00 00 */	addi r3, r24, 0
 /* 80366148 00362D28  38 9C 00 00 */	addi r4, r28, 0
-/* 8036614C 00362D2C  4B FF FC 21 */	bl func_80365D6C
+/* 8036614C 00362D2C  4B FF FC 21 */	bl setup_spot_lightobj
 lbl_80366150:
 /* 80366150 00362D30  2C 17 00 08 */	cmpwi r23, 8
 /* 80366154 00362D34  41 82 00 B8 */	beq lbl_8036620C
@@ -628,7 +625,7 @@ lbl_8036620C:
 /* 8036620C 00362DEC  80 B8 00 4C */	lwz r5, 0x4c(r24)
 /* 80366210 00362DF0  38 78 00 00 */	addi r3, r24, 0
 /* 80366214 00362DF4  38 9C 00 00 */	addi r4, r28, 0
-/* 80366218 00362DF8  4B FF F8 AD */	bl func_80365AC4
+/* 80366218 00362DF8  4B FF F8 AD */	bl setup_spec_lightobj
 /* 8036621C 00362DFC  3B 7B 00 01 */	addi r27, r27, 1
 lbl_80366220:
 /* 80366220 00362E00  83 39 00 00 */	lwz r25, 0(r25)
@@ -681,7 +678,7 @@ lbl_803662B4:
 lbl_803662C0:
 /* 803662C0 00362EA0  54 60 10 3A */	slwi r0, r3, 2
 /* 803662C4 00362EA4  7E FE 01 2E */	stwx r23, r30, r0
-/* 803662C8 00362EA8  48 00 08 9D */	bl func_80366B64
+/* 803662C8 00362EA8  48 00 08 9D */	bl HSD_Index2LightID
 /* 803662CC 00362EAC  90 77 00 4C */	stw r3, 0x4c(r23)
 /* 803662D0 00362EB0  48 00 00 10 */	b lbl_803662E0
 lbl_803662D4:
@@ -690,7 +687,7 @@ lbl_803662D8:
 /* 803662D8 00362EB8  28 19 00 00 */	cmplwi r25, 0
 /* 803662DC 00362EBC  40 82 FF 8C */	bne lbl_80366268
 lbl_803662E0:
-/* 803662E0 00362EC0  82 ED BF 9C */	lwz r23, lbl_804D763C(r13)
+/* 803662E0 00362EC0  82 ED BF 9C */	lwz r23, current_lights(r13)
 /* 803662E4 00362EC4  48 00 00 40 */	b lbl_80366324
 lbl_803662E8:
 /* 803662E8 00362EC8  80 77 00 04 */	lwz r3, 4(r23)
@@ -701,11 +698,11 @@ lbl_803662E8:
 /* 803662FC 00362EDC  40 82 00 24 */	bne lbl_80366320
 /* 80366300 00362EE0  38 7A 00 00 */	addi r3, r26, 0
 /* 80366304 00362EE4  3B 5A 00 01 */	addi r26, r26, 1
-/* 80366308 00362EE8  48 00 08 5D */	bl func_80366B64
+/* 80366308 00362EE8  48 00 08 5D */	bl HSD_Index2LightID
 /* 8036630C 00362EEC  38 A3 00 00 */	addi r5, r3, 0
 /* 80366310 00362EF0  38 78 00 00 */	addi r3, r24, 0
 /* 80366314 00362EF4  38 9C 00 00 */	addi r4, r28, 0
-/* 80366318 00362EF8  4B FF F7 AD */	bl func_80365AC4
+/* 80366318 00362EF8  4B FF F7 AD */	bl setup_spec_lightobj
 /* 8036631C 00362EFC  3B 7B 00 01 */	addi r27, r27, 1
 lbl_80366320:
 /* 80366320 00362F00  82 F7 00 00 */	lwz r23, 0(r23)
@@ -764,13 +761,13 @@ inline u8 HSD_LObjGetPriority(HSD_LObj* lobj)
     return lobj->priority;
 }
 
-void func_803663B4(HSD_LObj* lobj)
+void HSD_LObjAddCurrent(HSD_LObj* lobj)
 {
     HSD_SList* node;
     HSD_SList** p;
 
     if (lobj != NULL) {
-        node = lbl_804D763C;
+        node = current_lights;
         while (node != NULL) {
             if (node->data == lobj) {
                 HSD_LObjDeleteCurrent(lobj);
@@ -785,7 +782,7 @@ void func_803663B4(HSD_LObj* lobj)
                 __assert("object.h", 0x5D, "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
             }
         }
-        for (p = &lbl_804D763C; *p != NULL; p = &(*p)->next) {
+        for (p = &current_lights; *p != NULL; p = &(*p)->next) {
             u8 priority1 = HSD_LObjGetPriority(lobj);
             u8 priority2 = HSD_LObjGetPriority((*p)->data);
             if (priority2 > priority1) {
@@ -800,7 +797,7 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
 {
     if (lobj != NULL) {
         HSD_SList** p;
-        for (p = &lbl_804D763C; *p != NULL; p = &(*p)->next) {
+        for (p = &current_lights; *p != NULL; p = &(*p)->next) {
             if ((*p)->data == lobj) {
                 int i;
                 for (i = 0; i < GX_MAX_LIGHT; i++) {
@@ -835,7 +832,7 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
 }
 
 #pragma push
-asm void func_80366654()
+asm void HSD_LObjDeleteCurrentAll()
 {
     nofralloc
 /* 80366654 00363234  7C 08 02 A6 */	mflr r0
@@ -917,11 +914,11 @@ lbl_80366730:
 /* 80366760 00363340  7D 88 03 A6 */	mtlr r12
 /* 80366764 00363344  4E 80 00 21 */	blrl 
 lbl_80366768:
-/* 80366768 00363348  80 6D BF 9C */	lwz r3, lbl_804D763C(r13)
+/* 80366768 00363348  80 6D BF 9C */	lwz r3, current_lights(r13)
 /* 8036676C 0036334C  48 01 7F 11 */	bl HSD_SListRemove
-/* 80366770 00363350  90 6D BF 9C */	stw r3, lbl_804D763C(r13)
+/* 80366770 00363350  90 6D BF 9C */	stw r3, current_lights(r13)
 lbl_80366774:
-/* 80366774 00363354  80 6D BF 9C */	lwz r3, lbl_804D763C(r13)
+/* 80366774 00363354  80 6D BF 9C */	lwz r3, current_lights(r13)
 /* 80366778 00363358  28 03 00 00 */	cmplwi r3, 0
 /* 8036677C 0036335C  40 82 FF 78 */	bne lbl_803666F4
 /* 80366780 00363360  48 00 00 10 */	b lbl_80366790
@@ -940,7 +937,7 @@ lbl_80366790:
 #pragma pop
 
 #pragma push
-asm void func_803667A8()
+asm void HSD_LObjSetCurrentAll()
 {
     nofralloc
 /* 803667A8 00363388  7C 08 02 A6 */	mflr r0
@@ -1012,15 +1009,15 @@ lbl_80366868:
 /* 80366898 00363478  7D 88 03 A6 */	mtlr r12
 /* 8036689C 0036347C  4E 80 00 21 */	blrl 
 lbl_803668A0:
-/* 803668A0 00363480  80 6D BF 9C */	lwz r3, lbl_804D763C(r13)
+/* 803668A0 00363480  80 6D BF 9C */	lwz r3, current_lights(r13)
 /* 803668A4 00363484  48 01 7D D9 */	bl HSD_SListRemove
-/* 803668A8 00363488  90 6D BF 9C */	stw r3, lbl_804D763C(r13)
+/* 803668A8 00363488  90 6D BF 9C */	stw r3, current_lights(r13)
 lbl_803668AC:
-/* 803668AC 0036348C  80 6D BF 9C */	lwz r3, lbl_804D763C(r13)
+/* 803668AC 0036348C  80 6D BF 9C */	lwz r3, current_lights(r13)
 /* 803668B0 00363490  28 03 00 00 */	cmplwi r3, 0
 /* 803668B4 00363494  40 82 FF 78 */	bne lbl_8036682C
 /* 803668B8 00363498  7F E3 FB 78 */	mr r3, r31
-/* 803668BC 0036349C  4B FF FA F9 */	bl func_803663B4
+/* 803668BC 0036349C  4B FF FA F9 */	bl HSD_LObjAddCurrent
 /* 803668C0 003634A0  48 00 00 10 */	b lbl_803668D0
 lbl_803668C4:
 /* 803668C4 003634A4  54 60 10 3A */	slwi r0, r3, 2
@@ -1110,18 +1107,18 @@ lbl_803669AC:
 /* 803669DC 003635BC  7D 88 03 A6 */	mtlr r12
 /* 803669E0 003635C0  4E 80 00 21 */	blrl 
 lbl_803669E4:
-/* 803669E4 003635C4  80 6D BF 9C */	lwz r3, lbl_804D763C(r13)
+/* 803669E4 003635C4  80 6D BF 9C */	lwz r3, current_lights(r13)
 /* 803669E8 003635C8  48 01 7C 95 */	bl HSD_SListRemove
-/* 803669EC 003635CC  90 6D BF 9C */	stw r3, lbl_804D763C(r13)
+/* 803669EC 003635CC  90 6D BF 9C */	stw r3, current_lights(r13)
 lbl_803669F0:
-/* 803669F0 003635D0  80 6D BF 9C */	lwz r3, lbl_804D763C(r13)
+/* 803669F0 003635D0  80 6D BF 9C */	lwz r3, current_lights(r13)
 /* 803669F4 003635D4  28 03 00 00 */	cmplwi r3, 0
 /* 803669F8 003635D8  40 82 FF 78 */	bne lbl_80366970
 /* 803669FC 003635DC  7F FE FB 78 */	mr r30, r31
 /* 80366A00 003635E0  48 00 00 10 */	b lbl_80366A10
 lbl_80366A04:
 /* 80366A04 003635E4  7F C3 F3 78 */	mr r3, r30
-/* 80366A08 003635E8  4B FF F9 AD */	bl func_803663B4
+/* 80366A08 003635E8  4B FF F9 AD */	bl HSD_LObjAddCurrent
 /* 80366A0C 003635EC  83 DE 00 0C */	lwz r30, 0xc(r30)
 lbl_80366A10:
 /* 80366A10 003635F0  28 1E 00 00 */	cmplwi r30, 0
@@ -1146,7 +1143,7 @@ lbl_80366A28:
 asm HSD_LObj* HSD_LObjGetCurrentByType(u16 type)
 {
     nofralloc
-/* 80366A44 00363624  80 8D BF 9C */	lwz r4, lbl_804D763C(r13)
+/* 80366A44 00363624  80 8D BF 9C */	lwz r4, current_lights(r13)
 /* 80366A48 00363628  54 65 07 BE */	clrlwi r5, r3, 0x1e
 /* 80366A4C 0036362C  48 00 00 1C */	b lbl_80366A68
 lbl_80366A50:
@@ -1202,7 +1199,7 @@ s32 HSD_LightID2Index(GXLightID arg0)
     return var_r31;
 }
 
-s32 func_80366B64(u32 arg0)
+s32 HSD_Index2LightID(u32 arg0)
 {
     switch (arg0) {
     case 0:
@@ -1228,7 +1225,7 @@ s32 func_80366B64(u32 arg0)
     }
 }
 
-void func_80366BD4(HSD_LObj* lobj)
+void HSD_LObjRemoveAll(HSD_LObj* lobj)
 {
     HSD_LObj* next;
     HSD_LObj* cur;
@@ -1289,7 +1286,7 @@ void func_80366CD0(HSD_LObj* lobj, f32 ref_dist, f32 ref_br, s32 dist_func)
 
 extern char lbl_80406190[10];
 
-void func_80366CE8(HSD_LObj* lobj, Vec* position)
+void HSD_LObjSetPosition(HSD_LObj* lobj, Vec* position)
 {
     if (lobj == NULL) {
         __assert(lbl_804D5D18, 0x559, lbl_804D5D24);
@@ -1312,7 +1309,7 @@ BOOL HSD_LObjGetPosition(HSD_LObj* lobj, Vec* position)
     return FALSE;
 }
 
-void func_80366DB0(HSD_LObj* lobj, Vec* interest)
+void HSD_LObjSetInterest(HSD_LObj* lobj, Vec* interest)
 {
     if (lobj == NULL) {
         __assert(lbl_804D5D18, 0x57D, lbl_804D5D24);
