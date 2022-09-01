@@ -5,11 +5,6 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <ftbosslib.h>
 
-extern struct {
-    u8 x0_pad[0x20];
-    HSD_GObj* x20;
-}* lbl_804D782C; //TODO: unify this struct
-
 typedef enum {
     Gm_PKind_Human,
     Gm_PKind_Cpu,
@@ -225,7 +220,7 @@ HSD_GObj* func_8015C3E8(s32 arg0) { // get_fighter_gobj(FighterKind)
     HSD_GObj* phi_r31;
     s32 unused[2];
 
-    for (phi_r31 = lbl_804D782C->x20; phi_r31; phi_r31 = phi_r31->next) {
+    for (phi_r31 = lbl_804D782C->x20_fighters; phi_r31; phi_r31 = phi_r31->next) {
         if (arg0 == func_800872A4(phi_r31)) {
             return phi_r31;
         }

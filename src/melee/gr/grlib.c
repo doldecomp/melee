@@ -3,7 +3,6 @@
 
 extern StageInfo stage_info;
 extern u8 lbl_804D7849;
-extern void* lbl_804D782C;
 extern struct _UnkEffectStruct* lbl_804D78FC;
 
 static Vec lbl_8049EF58[6];

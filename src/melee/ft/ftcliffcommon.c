@@ -1,6 +1,7 @@
-#include <ftcliffcommon.h>
-#include <variables.h>
 #include <dolphin/types.h>
+#include <ftcliffcommon.h>
+#include <melee/ft/code_80081B38.h>
+#include <variables.h>
 
 BOOL func_80081298(HSD_GObj* gobj) {
     Fighter* other_fp;

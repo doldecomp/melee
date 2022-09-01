@@ -1,4 +1,6 @@
 #include <melee/ft/fighter.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/code_80081938.h>
 #include <melee/ft/ftdrawcommon.h>
 
 #define HALF_PI 1.5707963267948966
@@ -51,28 +53,28 @@ u32 lbl_804D64F8 = 0;
 
 // the following seems to be an array, initialized in reverse in Fighter_LoadCommonData
 // outcommented because they are in variables.h too. uncomment this when moving data from fighter.s here.
-void* lbl_804D64FC = 0;
-void* lbl_804D6500 = 0;
-void* lbl_804D6504 = 0;
-void* lbl_804D6508 = 0;
-void* lbl_804D650C = 0;
-void* lbl_804D6510 = 0;
-void* lbl_804D6514 = 0;
-void* lbl_804D6518 = 0;
-void* lbl_804D651C = 0;
-void* lbl_804D6520 = 0;
-void* lbl_804D6524 = 0;
-void* lbl_804D6528 = 0;
-void* lbl_804D652C = 0;
-void* lbl_804D6530 = 0;
-void* lbl_804D6534 = 0;
-void* lbl_804D6538 = 0;
-void* lbl_804D653C = 0;
-s32** lbl_804D6540 = 0;
-void* lbl_804D6544 = 0;
-void* lbl_804D6548 = 0;
-void* lbl_804D654C = 0;
-void* lbl_804D6550 = 0;
+unk_t lbl_804D64FC = NULL;
+unk_t lbl_804D6500 = NULL;
+unk_t lbl_804D6504 = NULL;
+unk_t lbl_804D6508 = NULL;
+unk_t lbl_804D650C = NULL;
+unk_t lbl_804D6510 = NULL;
+unk_t lbl_804D6514 = NULL;
+unk_t lbl_804D6518 = NULL;
+unk_t lbl_804D651C = NULL;
+unk_t lbl_804D6520 = NULL;
+unk_t lbl_804D6524 = NULL;
+unk_t lbl_804D6528 = NULL;
+unk_t lbl_804D652C = NULL;
+unk_t lbl_804D6530 = NULL;
+unk_t lbl_804D6534 = NULL;
+unk_t lbl_804D6538 = NULL;
+unk_t lbl_804D653C = NULL;
+s32** lbl_804D6540 = NULL;
+unk_t lbl_804D6544 = NULL;
+unk_t lbl_804D6548 = NULL;
+unk_t lbl_804D654C = NULL;
+unk_t lbl_804D6550 = NULL;
 ftCommonData* p_ftCommonData;
 
 
@@ -2158,7 +2160,7 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
                 pAttr = &fp->x110_attr; 
                 func_8007CCA0(fp,
                     /*effective friction - ground multiplier is usually 1. last factor was 1 when I looked*/
-                    func_80084A40(fp) * pAttr->x128_GroundFriction * p_ftCommonData->x200);
+                    Stage_GetGroundFrictionMultiplier(fp) * pAttr->x128_GroundFriction * p_ftCommonData->x200);
 
 				// set knockback velocity to ground_kb_vel * surfaceTangent
                 p_kb_vel->x =  pNormal->y * fp->xF0_ground_kb_vel;
@@ -2203,7 +2205,7 @@ void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy) {
                 
                 func_8007CE4C(fp,
                     /* effectiveFriction - the last constant variable differs from the one for the knockback friction above*/
-                    func_80084A40(fp) * pAttr->x128_GroundFriction * p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
+                    Stage_GetGroundFrictionMultiplier(fp) * pAttr->x128_GroundFriction * p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
                 
                 pAtkShieldKB->x =  pNormal->y * fp->xF4_ground_attacker_shield_kb_vel;
                 pAtkShieldKB->y = -pNormal->x * fp->xF4_ground_attacker_shield_kb_vel;

@@ -76,15 +76,15 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/ft/ftparts.s.o\
 	$(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
 	$(BUILD_DIR)/asm/melee/ft/ftcoll.s.o\
-	$(BUILD_DIR)/asm/melee/ft/code_8007C114.s.o\
-	$(BUILD_DIR)/asm/melee/ft/code_8007C630.s.o\
+	$(BUILD_DIR)/src/melee/ft/code_8007C114.c.o\
+	$(BUILD_DIR)/src/melee/ft/code_8007C630.c.o\
 	$(BUILD_DIR)/src/melee/ft/ftcommon.c.o\
 	$(BUILD_DIR)/src/melee/ft/ftdrawcommon.c.o\
 	$(BUILD_DIR)/asm/melee/ft/ftdrawcommon_data.s.o\
 	$(BUILD_DIR)/src/melee/ft/ftcliffcommon.c.o\
 	$(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
-	$(BUILD_DIR)/asm/melee/ft/code_80081938.s.o\
-	$(BUILD_DIR)/asm/melee/ft/code_80081B38.s.o\
+	$(BUILD_DIR)/src/melee/ft/code_80081938.c.o\
+	$(BUILD_DIR)/src/melee/ft/code_80081B38.c.o\
 	$(BUILD_DIR)/asm/melee/ft/ft_unknown_005.s.o\
 	$(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
 	$(BUILD_DIR)/src/melee/ft/ftlib.c.o\

@@ -2224,4 +2224,7 @@ inline void Fighter_UnsetCmdVar0(HSD_GObj* fighterObj) {
     fp->x2200_ftcmd_var0 = 0;
 }
 
+extern unk_t lbl_804D6520;
+extern ftCommonData* p_ftCommonData;
+
 #endif

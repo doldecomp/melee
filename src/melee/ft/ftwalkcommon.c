@@ -1,4 +1,5 @@
 #include <melee/ft/fighter.h>
+#include <melee/ft/code_80081B38.h>
 
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighterObj) {
     Fighter* fp = fighterObj->user_data;
@@ -62,7 +63,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* fighterObj) {
     
     Fighter* fp = getFighter(fighterObj);
     
-    if (func_80084A40(fp) < 1.0f) {
+    if (Stage_GetGroundFrictionMultiplier(fp) < 1.0f) {
         velocity_f2 = fp->x2340_f32;
     } else {
         velocity_f2 = fp->xEC_ground_vel;

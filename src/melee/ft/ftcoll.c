@@ -141,8 +141,6 @@ void func_80076528(HSD_GObj* fighter_gobj) // Combo count something + adjust Top
     }
 }
 
-extern struct r13_EntityPointers* lbl_804D782C;
-
 // 0x800765AC //
 // https://decomp.me/scratch/IPBrx //
 void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon freeing memory? //

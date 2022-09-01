@@ -158,8 +158,6 @@ void lbl_8015204C(HSD_GObj* gobj) {
 
 // 80152090 14EC70
 // https://decomp.me/scratch/B021s
-void func_80085134(HSD_GObj*);                             /* extern */
-
 void lbl_80152090(HSD_GObj* gobj) {
     ftData* r4_ftData;
     Fighter* r31_fp;

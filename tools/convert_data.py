@@ -7,11 +7,11 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"asm\**\mtx44.s"
+    'input_glob': r"asm\**\code_80081938.s"
 }
 
 default_options = {
-    'zero': None,  # How to treat zero-value dwords
+    'zero': 'float',  # How to treat zero-value dwords
     # None: replace zero with 'NULL'
     # 'hex': replace zero with '0x00000000'
     # 'int': replace zero with '0'
