@@ -3000,7 +3000,7 @@ void Fighter_Unload_8006DABC(Fighter* fp) {
     HSD_JObjRemoveAll(fp->x8AC_animSkeleton);
     HSD_JObjUnref(fp->x2184);
     func_800859A8(fp);
-    func_80366BD4(fp->x588);
+    HSD_LObjRemoveAll(fp->x588);
     Player_80031FB0(fp->xC_playerID, fp->x221F_flag.bits.b4);
     
     HSD_ObjFree(&objAllocData[(0xDC / 40)], fp->x59C);

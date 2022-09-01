@@ -845,8 +845,6 @@ void HSD_AObjRemove(struct _HSD_AObj *aobj);
 
 void HSD_ForeachAnim(void *, ...);
 
-void func_80366BD4();
-
 struct _HSD_WObj *HSD_LObjGetPositionWObj(struct _HSD_LObj *);
 struct _HSD_WObj *HSD_LObjGetInterestWObj(struct _HSD_LObj *);
 

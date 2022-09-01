@@ -163,7 +163,7 @@ static void HSD_GXInit(void)
 
     for (i = 0; i < 8; i++)
     {
-        GXLoadLightObjImm(&lightobj, func_80366B64(i));
+        GXLoadLightObjImm(&lightobj, HSD_Index2LightID(i));
     }
     func_80361FC4(-1);
 }
