@@ -1316,7 +1316,6 @@ extern unk_t func_80391070();
 extern unk_t func_8016AE44();
 extern u8 lbl_804D7849;
 extern char* lbl_803F95C0;
-extern unk_t lbl_802F5DE0();
 
 #pragma push
 asm unk_t func_802F5B48()
@@ -1510,45 +1509,26 @@ lbl_802F5DCC:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm unk_t lbl_802F5DE0()
-{ // clang-format off
-    nofralloc
-lbl_802F5DE0:
-/* 802F5DE0 002F29C0  7C 08 02 A6 */	mflr r0
-/* 802F5DE4 002F29C4  3C A0 80 4A */	lis r5, lbl_804A10C8@ha
-/* 802F5DE8 002F29C8  90 01 00 04 */	stw r0, 4(r1)
-/* 802F5DEC 002F29CC  38 00 00 06 */	li r0, 6
-/* 802F5DF0 002F29D0  38 C5 10 C8 */	addi r6, r5, lbl_804A10C8@l
-/* 802F5DF4 002F29D4  7C 09 03 A6 */	mtctr r0
-/* 802F5DF8 002F29D8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 802F5DFC 002F29DC  38 A0 00 00 */	li r5, 0
-lbl_802F5E00:
-/* 802F5E00 002F29E0  80 06 00 00 */	lwz r0, 0(r6)
-/* 802F5E04 002F29E4  7C 00 18 40 */	cmplw r0, r3
-/* 802F5E08 002F29E8  40 82 00 18 */	bne lbl_802F5E20
-/* 802F5E0C 002F29EC  1C C5 00 64 */	mulli r6, r5, 0x64
-/* 802F5E10 002F29F0  3C A0 80 4A */	lis r5, lbl_804A10C8@ha
-/* 802F5E14 002F29F4  38 05 10 C8 */	addi r0, r5, lbl_804A10C8@l
-/* 802F5E18 002F29F8  7C A0 32 14 */	add r5, r0, r6
-/* 802F5E1C 002F29FC  48 00 00 14 */	b lbl_802F5E30
-lbl_802F5E20:
-/* 802F5E20 002F2A00  38 C6 00 64 */	addi r6, r6, 0x64
-/* 802F5E24 002F2A04  38 A5 00 01 */	addi r5, r5, 1
-/* 802F5E28 002F2A08  42 00 FF D8 */	bdnz lbl_802F5E00
-/* 802F5E2C 002F2A0C  38 A0 00 00 */	li r5, 0
-lbl_802F5E30:
-/* 802F5E30 002F2A10  88 05 00 10 */	lbz r0, 0x10(r5)
-/* 802F5E34 002F2A14  54 00 EF FF */	rlwinm. r0, r0, 0x1d, 0x1f, 0x1f
-/* 802F5E38 002F2A18  40 82 00 08 */	bne lbl_802F5E40
-/* 802F5E3C 002F2A1C  48 09 B2 35 */	bl func_80391070
-lbl_802F5E40:
-/* 802F5E40 002F2A20  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 802F5E44 002F2A24  38 21 00 08 */	addi r1, r1, 8
-/* 802F5E48 002F2A28  7C 08 03 A6 */	mtlr r0
-/* 802F5E4C 002F2A2C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
+{
+    s32 var_ctr;
+    for(var_ctr = 0; var_ctr < 6; var_ctr++)
+    {
+        if (lbl_804A10C8.players[var_ctr].HUD_parent_entity == parent)
+        {
+            return &lbl_804A10C8.players[var_ctr];
+        }
+    }
+    return NULL;
+}
+
+void lbl_802F5DE0(HSD_GObj* player, void* unk)
+{
+    if (!getPlayerByHUDParent(player)->flags.hide_all_digits)
+    {
+        func_80391070(player, unk);
+    }
+}
 
 #pragma push
 asm unk_t lbl_802F5E50()
