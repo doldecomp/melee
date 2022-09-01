@@ -230,11 +230,7 @@ void func_8007BAC0();
 f32 func_8007BBCC(struct _HSD_GObj *);
 void func_8007BC90();
 void func_8007BE3C(struct _HSD_GObj *);
-void func_8007C114();
-void func_8007C17C(struct _HSD_GObj *);
-void func_8007C224();
 
-void func_8007C4BC();
 void func_8007C630(struct _HSD_GObj *);
 void func_8007C6DC();
 void func_8007C77C();
