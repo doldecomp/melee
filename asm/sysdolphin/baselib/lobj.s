@@ -611,20 +611,6 @@ LObjInfoInit:
 /* 803676F4 003642D4  4E 80 00 20 */	blr 
 
 
-.section .data
-    .balign 4
-    .asciz "hsdIsDescendantOf(info, &hsdLObj)"
-    .balign 4
-.global lbl_804061D4
-lbl_804061D4:
-    .asciz "unexpected lightdesc flags (%x)\n"
-    .balign 4
-    .asciz "sysdolphin_base_library"
-    .balign 4
-    .asciz "hsd_lobj"
-    .balign 4
-
-
 .section .sdata
     .balign 8
 .global lbl_804D5D18

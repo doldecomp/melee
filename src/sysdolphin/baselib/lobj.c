@@ -1347,3 +1347,12 @@ HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj)
     }
     return NULL;
 }
+
+
+#pragma push
+#pragma force_active on
+static char unused1[] = "hsdIsDescendantOf(info, &hsdLObj)";
+char lbl_804061D4[] = "unexpected lightdesc flags (%x)\n";
+static char unused2[] = "sysdolphin_base_library";
+static char unused3[] = "hsd_lobj";
+#pragma pop
