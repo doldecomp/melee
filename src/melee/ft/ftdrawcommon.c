@@ -21,7 +21,6 @@ extern f32 lbl_804D8368;
 extern s32 lbl_804D836C[1];
 extern s32 lbl_804D8370[2];
 
-extern unk_t lbl_804D782C;
 extern unk_t func_800750C8();
 extern unk_t func_8009F7F8();
 extern unk_t func_800C8AF0();

@@ -1,13 +1,11 @@
 #include <sysdolphin/baselib/gobj.h>
 
-extern struct r13_EntityPointers* lbl_804D782C;
-
 extern void (**lbl_804D7810)(void*);
 
 HSD_GObj* func_80390A3C(u16 id, u8 arg1)
 {
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->x0[arg1]; cur != NULL; cur = cur->next) {
+    for (cur = ((HSD_GObj**)lbl_804D782C)[arg1]; cur != NULL; cur = cur->next) {
         if (cur->classifier == id) {
             break;
         }

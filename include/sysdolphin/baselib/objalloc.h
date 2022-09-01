@@ -34,12 +34,6 @@ typedef struct _HSD_ObjAllocData {
     struct _HSD_ObjAllocData* next;
 } HSD_ObjAllocData;
 
-struct r13_EntityPointers {
-    HSD_GObj* x0[8];
-    HSD_GObj* x20_fighterGObj;
-    HSD_GObj* x24_itemGObj;
-};
-
 typedef struct ItemCommonData
 {
     u32 x0;

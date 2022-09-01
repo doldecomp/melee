@@ -148,8 +148,6 @@ void func_8026B3A8(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word O
     temp_item->xDC8_word.flags.x15 = 0;
 }
 
-extern struct r13_EntityPointers* lbl_804D782C;
-
 // 0x8026B3C0 //
 // https://decomp.me/scratch/umbPP //
 u32 func_8026B3C0(s32 itemID) // Count identical item GObj entities? //
@@ -159,7 +157,7 @@ u32 func_8026B3C0(s32 itemID) // Count identical item GObj entities? //
     s32 i;
 
     i = 0;
-    unkItemGObj = lbl_804D782C->x24_itemGObj;
+    unkItemGObj = lbl_804D782C->x24_items;
     while (unkItemGObj != NULL) {
         temp_item = unkItemGObj->user_data;
         if ((s32) temp_item->x10_item_kind == itemID) {
@@ -486,7 +484,7 @@ void func_8026B7F8(HSD_GObj* fighter_gobj) // Remove item from player on death? 
     Item* item_data;
     s32 i;
 
-    enumGObj = lbl_804D782C->x24_itemGObj;
+    enumGObj = lbl_804D782C->x24_items;
     while (enumGObj != NULL) {
         item_data = enumGObj->user_data;
         itemOwner = item_data->x518_ownerGObj;
@@ -1206,7 +1204,7 @@ HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir) // Find the closest item to
     HSD_GObj* closest_item_gobj;
 
     closest_item_gobj = NULL;
-    item_gobj = lbl_804D782C->x24_itemGObj;
+    item_gobj = lbl_804D782C->x24_items;
 
     while (item_gobj != NULL) {
         item_data = item_gobj->user_data;
@@ -1286,7 +1284,7 @@ void func_8026C368(HSD_GObj* item_gobj) // Run bomb item explosion callbacks //
 // https://decomp.me/scratch/T0jPV //
 void func_8026C3FC(void) // Toggle bit 3 of 0xDC8 ON for all active item GObjs? //
 {
-    HSD_GObj* item_gobj = lbl_804D782C->x24_itemGObj;
+    HSD_GObj* item_gobj = lbl_804D782C->x24_items;
     Item* item_data;
 
     while (item_gobj != NULL) {
@@ -1303,7 +1301,7 @@ void func_8026C42C(void) // Toggle bits in 0xDC8 for all active item GObjs? //
     HSD_GObj* item_gobj;
     Item* item_data;
 
-    item_gobj = lbl_804D782C->x24_itemGObj;
+    item_gobj = lbl_804D782C->x24_items;
     while (item_gobj != NULL) {
         item_data = item_gobj->user_data;
         if (item_data->xDC8_word.flags.x7 != 0) {

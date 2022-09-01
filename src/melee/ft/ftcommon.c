@@ -1,11 +1,7 @@
 #include <ftcommon.h>
+#include <melee/ft/code_80081B38.h>
 
 #include <melee/it/itkind.h>
-
-extern struct {
-    u8 x0_pad[0x20];
-    HSD_GObj* unk20;
-}* lbl_804D782C;
 
 const Vec3 lbl_803B74A0 = { 0, 0, 0 };
 
@@ -108,7 +104,7 @@ void func_8007CB74(HSD_GObj* gobj)
     u32 unused[2];
 
     ground_normal = &fp->x6F0_collData.x14C_ground.normal;
-    temp_f1 = func_80084A40(fp);
+    temp_f1 = Stage_GetGroundFrictionMultiplier(fp);
     if (temp_f1 < 1) {
         fp->xE4_ground_accel_1 *= temp_f1;
     }
@@ -853,7 +849,7 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
 
     arg_ft = gobj->user_data;
     phi_r28 = FALSE;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         temp_r31 = &arg_ft->x2C4;
         if (cur != gobj && !func_80086FD4(cur, gobj)) {
             cur_ft = cur->user_data;
@@ -1274,7 +1270,7 @@ void func_8007EC30(u32 arg0, u32 arg1)
     HSD_GObj* cur;
     u32 unused[4];
 
-    cur = lbl_804D782C->unk20;
+    cur = lbl_804D782C->x20_fighters;
     while (cur != NULL) {
         fp = cur->user_data;
         func_8007EBAC(fp, arg0, arg1);
@@ -1857,7 +1853,7 @@ void func_800804A0(Fighter* fp, f32 arg8)
 {
     f32 temp_f1;
     f32 phi_f31 = arg8;
-    if ((temp_f1 = func_80084A40(fp)) < 1) {
+    if ((temp_f1 = Stage_GetGroundFrictionMultiplier(fp)) < 1) {
         phi_f31 *= temp_f1;
     }
     fp->xE8_ground_accel_2 = phi_f31;

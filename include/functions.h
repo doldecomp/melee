@@ -306,40 +306,6 @@ void func_800804FC();
 void func_80081938(struct _HSD_GObj *);
 void func_800819A8();
 
-void func_80081B38(struct _HSD_GObj *);
-void func_80081C88(struct _HSD_GObj *, f32);
-s32 func_80081D0C(struct _HSD_GObj *);
-
-s32 func_800821DC();
-s32 func_8008239C(HSD_GObj *, s32, f32 *);
-
-s32 func_80082708(struct _HSD_GObj *);
-s32 func_800827A0(struct _HSD_GObj *);
-
-s32 func_80082A68(struct _HSD_GObj *);
-void func_80082B1C(struct _HSD_GObj *); /* extern */
-
-struct _HSD_GObj *func_80082E3C(struct _HSD_GObj *);
-
-void func_800831CC(struct _HSD_GObj *, s32 (*)(struct _HSD_GObj *), void (*)(struct _HSD_GObj *));
-
-void func_80083B68(struct _HSD_GObj *);
-
-void func_80083F88(struct _HSD_GObj *);
-
-void func_80084104(struct _HSD_GObj *);
-
-f32 func_80084A40(struct _Fighter *); // Stage_GetGroundFrictionMultiplier very short function
-
-void func_80084EEC(struct _HSD_GObj *);
-void func_80084F3C(struct _HSD_GObj *);
-void func_80084FA8(struct _HSD_GObj *);
-
-void func_80085134(struct _HSD_GObj *);
-void func_80085154(struct _HSD_GObj *);
-
-void func_80085204(struct _HSD_GObj *);
-
 void func_800852B0();
 void func_8008549C();
 
@@ -891,7 +857,6 @@ void func_80390228(struct _HSD_GObj *);
 
 void efLib_PauseAll(struct _HSD_GObj *);
 void efLib_ResumeAll(struct _HSD_GObj *);
-BOOL EnvColl_CheckGroundAndLedge(HSD_GObj *, s32);
 s32 func_80096CC8(struct _HSD_GObj *);
 void ef_Spawn(s32, ...);
 f32 HSD_Randf(void);

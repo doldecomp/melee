@@ -60,33 +60,34 @@ typedef struct _HSD_GObjLibInitData
 } HSD_GObjLibInitData;
 
 typedef struct _HSD_GObjList {
-    struct _HSD_GObj *x0; //0x0
-    struct _HSD_GObj *x4; //0x4
-    struct _HSD_GObj *x8; //0x8
-    struct _HSD_GObj *xC; //0xC
-    struct _HSD_GObj *x10; //0x10
-    struct _HSD_GObj *x14; //0x14
-    struct _HSD_GObj *x18; //0x18
-    struct _HSD_GObj *x1C; //0x1C
-    struct _HSD_GObj *x20_fighters; //0x20
-    struct _HSD_GObj *x24; //0x24
-    struct _HSD_GObj *x28; //0x28
-    struct _HSD_GObj *x2C; //0x2C
-    struct _HSD_GObj *x30; //0x30
-    struct _HSD_GObj *x34; //0x34
-    struct _HSD_GObj *x38; //0x38
-    struct _HSD_GObj *x3C; //0x3C
-    struct _HSD_GObj *x40; //0x40
-    struct _HSD_GObj *x44; //0x44
-    struct _HSD_GObj *x48; //0x48
+    HSD_GObj *x0; //0x0
+    HSD_GObj *x4; //0x4
+    HSD_GObj *x8; //0x8
+    HSD_GObj *xC; //0xC
+    HSD_GObj *x10; //0x10
+    HSD_GObj *x14; //0x14
+    HSD_GObj *x18; //0x18
+    HSD_GObj *x1C; //0x1C
+    HSD_GObj *x20_fighters; //0x20
+    HSD_GObj *x24_items; //0x24
+    HSD_GObj *x28; //0x28
+    HSD_GObj *x2C; //0x2C
+    HSD_GObj *x30; //0x30
+    HSD_GObj *x34; //0x34
+    HSD_GObj *x38; //0x38
+    HSD_GObj *x3C; //0x3C
+    HSD_GObj *x40; //0x40
+    HSD_GObj *x44; //0x44
+    HSD_GObj *x48; //0x48
 } HSD_GObjList;
-
-#endif
 
 extern u8 lbl_804D784B[5];
 extern HSD_GObj* lbl_804D797C;
+extern HSD_GObjList* lbl_804D782C;
 
 void func_80390C5C(HSD_GObj *gobj);
 void func_80390C84(HSD_GObj *gobj);
 void func_80390CAC(HSD_GObj *gobj);
 void func_803910D8(HSD_GObj *, s32);
+
+#endif

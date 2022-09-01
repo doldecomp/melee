@@ -5,11 +5,6 @@
 #include <melee/pl/player.h>
 
 extern struct {
-    u8 fill[0x20];
-    HSD_GObj* unk20;
-}* lbl_804D782C;
-
-extern struct {
     void* unk0;
     u8 unk4;
 } CostumeListsForeachCharacter[];
@@ -21,7 +16,7 @@ s32 func_800860C4(void)
 {
     s32 ret = 0;
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         ret++;
     }
     return ret;
@@ -31,7 +26,7 @@ BOOL func_800860E8(void)
 {
     u32 unused[2];
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         if (func_800872A4(cur) == 0x1B) {
             return TRUE;
         }
@@ -43,7 +38,7 @@ BOOL func_80086140(void)
 {
     u32 unused[2];
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         if (func_800872A4(cur) == 0x1C) {
             return TRUE;
         }
@@ -67,7 +62,7 @@ HSD_GObj* func_80086198(HSD_GObj* gobj)
     }
 
     result = NULL;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         // skip if same player
         if (func_80086FD4(gobj, cur)) {
             continue;
@@ -112,7 +107,7 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
     }
 
     result = NULL;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         // skip if same player
         if (func_80086FD4(gobj, cur)) {
             continue;
@@ -155,7 +150,7 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
     }
 
     result = NULL;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         if (func_80086FD4(gobj, cur)) {
             continue;
         }
@@ -207,7 +202,7 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
         fp = NULL;
     }
 
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         if (func_80086FD4(gobj, cur)) {
             continue;
         }
@@ -355,7 +350,7 @@ void func_80086824(void)
 {
     u32 unused[4];
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         func_800867E8(cur);
     }
 }
@@ -369,7 +364,7 @@ void func_8008688C(HSD_GObj* gobj)
 void func_800868A4(void)
 {
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         func_8008688C(cur);
     }
 }
@@ -562,7 +557,7 @@ void func_80086C9C(s32 arg0, s32 arg1)
 {
     HSD_GObj* cur;
     u32 unused[4];
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         func_80086C18(cur, arg0, arg1);
     }
 }
@@ -576,7 +571,7 @@ void func_80086DC4(s32 arg0, s32 arg1)
 {
     HSD_GObj* cur;
     u32 unused[4];
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         func_80086D40(cur, arg0, arg1);
     }
 }
@@ -838,7 +833,7 @@ BOOL func_800873F4(HSD_GObj* gobj)
 HSD_GObj* func_8008741C(u32 i)
 {
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->unk20; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         Fighter* fp = cur->user_data;
         if (fp->x8_spawnNum == i) {
             return cur;

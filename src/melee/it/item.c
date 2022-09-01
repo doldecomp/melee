@@ -101,7 +101,6 @@ void func_80266FCC(void) // Init item struct? //
     lbl_804A0E30.x4 = (s8)0;
 }
 
-extern void func_800436D8(void*, s32);
 extern s32 func_8017E068();
 extern void func_80225D64(HSD_GObj*, HSD_GObj*);
 extern void func_80225DD8(HSD_GObj*, HSD_GObj*);

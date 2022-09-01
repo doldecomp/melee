@@ -76,9 +76,6 @@ void ftNess_YoyoApplyDamage(f32 unk_float, HSD_GObj* fighter_gobj) // Apply modi
 // 0x80114FF8 //
 // https://decomp.me/scratch/omC8O //
 
-void func_80041EE4(CollData*);
-void func_8004730C(CollData*, f32(*x)[6]);
-
 inline void push_ecb(CollData* a, Vec3* b)
 {
     a->x1C_vec = a->x4_vec; // old = curr

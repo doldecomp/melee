@@ -3810,11 +3810,6 @@ lbl_801C4958:
 }
 #pragma peephole on
 
-extern struct {
-    u8 x0_pad[0xC];
-    HSD_GObj* xC;
-}* lbl_804D782C;
-
 HSD_GObj* func_801C498C(void)
 {
     HSD_GObj* gobj;

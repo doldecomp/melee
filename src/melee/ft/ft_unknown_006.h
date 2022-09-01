@@ -40,5 +40,11 @@ void func_80088080(Fighter* fp);
 void func_800880AC(Fighter* fp);
 void func_800880D8(Fighter* fp);
 void func_80088110(Fighter* fp);
+void func_800D5BF8(HSD_GObj* fighter_gobj);
+unk_t func_800D0EC8();
+unk_t func_8009A3C8();
+unk_t func_8004B4B0();
+unk_t func_8009EDA4();
+unk_t func_8009F39C();
 
 #endif

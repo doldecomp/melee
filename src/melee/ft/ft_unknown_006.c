@@ -5,7 +5,6 @@
 
 #define TEST(expr) (expr) ? TRUE : FALSE
 
-extern HSD_GObjList* lbl_804D782C;
 extern s32 func_80023220(s32);
 extern s32 func_800230C8(s32, s32*, s32*);
 extern s32 func_80023130();

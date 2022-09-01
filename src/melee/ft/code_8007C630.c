@@ -9,7 +9,6 @@ static f32 const lbl_804D8328 = 0.0F;
 static f32 const lbl_804D832C = 1.0F;
 
 extern unk_t func_8016B0B4(void);
-extern struct r13_EntityPointers* lbl_804D782C;
 
 #pragma push
 asm void func_8007C630(HSD_GObj* fighterObj)
