@@ -1,4 +1,4 @@
-#include <grdatfiles.h>
+#include <melee/gr/grdatfiles.h>
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>

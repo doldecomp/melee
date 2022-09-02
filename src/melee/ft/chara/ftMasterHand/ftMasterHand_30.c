@@ -1,4 +1,4 @@
-#include <ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 extern const f32 neg1;
 

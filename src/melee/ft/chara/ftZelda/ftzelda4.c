@@ -1,4 +1,4 @@
-#include <ftzelda.h>
+#include <melee/ft/chara/ftZelda/ftzelda.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE

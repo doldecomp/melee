@@ -1,4 +1,4 @@
-#include <rand.h>
+#include <MSL/rand.h>
 
 static unsigned long int next = 1;
 

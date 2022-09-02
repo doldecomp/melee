@@ -1,4 +1,4 @@
-#include <ftdrmario.h>
+#include <melee/ft/chara/ftDrMario/ftdrmario.h>
 
 void func_80149954(HSD_GObj* gobj)
 {

@@ -1,4 +1,4 @@
-#include <ftdonkey.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
 
 void ftDonkey_800E0568(HSD_GObj* fighterObj) {

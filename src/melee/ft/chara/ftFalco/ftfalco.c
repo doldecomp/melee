@@ -1,4 +1,4 @@
-#include <ftfalco.h>
+#include <melee/ft/chara/ftFalco/ftfalco.h>
 
 #include <melee/it/itkind.h>
 

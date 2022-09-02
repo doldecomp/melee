@@ -1,4 +1,4 @@
-#include <grbattle.h>
+#include <melee/gr/grbattle.h>
 
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>

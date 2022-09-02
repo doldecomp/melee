@@ -1,4 +1,4 @@
-#include <ftgamewatch.h>
+#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
 void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj);
 extern void func_8028FAF4(HSD_GObj*, Vec3*);

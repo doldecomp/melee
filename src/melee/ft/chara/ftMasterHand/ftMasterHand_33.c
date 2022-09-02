@@ -1,4 +1,4 @@
-#include <ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 80155C88 152868
 void func_80155C88(HSD_GObj* gobj) {

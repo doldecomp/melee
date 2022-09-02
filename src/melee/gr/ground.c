@@ -1,4 +1,4 @@
-#include <ground.h>
+#include <melee/gr/ground.h>
 
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>

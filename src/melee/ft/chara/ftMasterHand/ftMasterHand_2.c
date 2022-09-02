@@ -1,4 +1,4 @@
-#include <ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 8014FDD0 0014C9B0
 // https://decomp.me/scratch/HWef2

@@ -1,4 +1,4 @@
-#include <ftNess.h>
+#include <melee/ft/chara/ftNess/ftNess.h>
 
 extern void func_802AA054(HSD_GObj*, Vec3*, Vec3*, f32, f32);
 

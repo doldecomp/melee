@@ -1,4 +1,4 @@
-#include <ftdonkey.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
 void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* fighterObj) {
     Fighter* fp = fighterObj->user_data;

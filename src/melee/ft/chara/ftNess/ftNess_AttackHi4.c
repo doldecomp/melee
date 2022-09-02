@@ -1,4 +1,4 @@
-#include <ftNess.h>
+#include <melee/ft/chara/ftNess/ftNess.h>
 
 extern void func_8007B8A8(Hitbox*, Vec3*); // Update Hitbox Positions //
 

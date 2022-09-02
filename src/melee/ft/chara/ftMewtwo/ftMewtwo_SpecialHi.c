@@ -1,4 +1,4 @@
-#include "ftmewtwo.h"
+#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
 #define HALF_PI32 1.5707963705062866f
 

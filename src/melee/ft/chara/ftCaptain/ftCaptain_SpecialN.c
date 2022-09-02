@@ -1,4 +1,4 @@
-#include <ftCaptain.h>
+#include <melee/ft/chara/ftCaptain/ftCaptain.h>
 
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj) // Create Aesthetic Wind Effect for Warlock Punch
 {

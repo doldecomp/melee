@@ -1,4 +1,4 @@
-#include <ftzakogirl.h>
+#include <melee/ft/chara/ftZakoGirl/ftzakogirl.h>
 
 void ftZakoGirl_OnDeath(HSD_GObj* gobj)
 {

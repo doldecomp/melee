@@ -1,4 +1,4 @@
-#include <ftzelda.h>
+#include <melee/ft/chara/ftZelda/ftzelda.h>
 
 void ftZelda_OnDeath(HSD_GObj* fighterObj) {
     Fighter* fp = fighterObj->user_data;

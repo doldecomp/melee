@@ -1,4 +1,4 @@
-#include <ftpeach.h>
+#include <melee/ft/chara/ftPeach/ftpeach.h>
 
 #include <melee/it/itkind.h>
 

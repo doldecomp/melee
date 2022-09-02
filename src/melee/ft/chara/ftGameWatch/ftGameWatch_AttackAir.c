@@ -1,4 +1,4 @@
-#include <ftgamewatch.h>
+#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
 extern HSD_GObj* func_802C6C38(HSD_GObj*, Vec3*, s32, f32);
 

@@ -1,4 +1,4 @@
-#include "ftmewtwo.h"
+#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
