@@ -49,7 +49,7 @@ void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint)
         return;
     }
     JObjResetRST(jobj, joint);
-    if (!(jobj->flags & 0x1000)) {
+    if (!(jobj->flags & INSTANCE)) {
         HSD_JObj* child_jobj = jobj->child;
         HSD_Joint* child_joint = joint->child;
         while (child_jobj != NULL) {
@@ -76,7 +76,7 @@ void func_8036EFAC(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* args
     if (cb != NULL) {
         cb(jobj, args, type);
     }
-    if (!(jobj->flags & 0x1000)) {
+    if (!(jobj->flags & INSTANCE)) {
         HSD_JObj* child = jobj->child;
         while (child != NULL) {
             func_8036EFAC(child, cb, args);
@@ -93,7 +93,7 @@ void func_8036F0F0(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* args
     if (cb != NULL) {
         cb(jobj, args, 0);
     }
-    if (!(jobj->flags & 0x1000)) {
+    if (!(jobj->flags & INSTANCE)) {
         HSD_JObj* child = jobj->child;
         while (child != NULL) {
             func_8036EFAC(child, cb, args);
@@ -192,7 +192,7 @@ void HSD_JObjRemoveAnimAllByFlags(HSD_JObj* jobj, u32 flags)
 {
     if (jobj != NULL) {
         HSD_JObjRemoveAnimByFlags(jobj, flags);
-        if (!(jobj->flags & 0x1000)) {
+        if (!(jobj->flags & INSTANCE)) {
             HSD_JObj* child = jobj->child;
             while (child != NULL) {
                 HSD_JObjRemoveAnimAllByFlags(child, flags);
@@ -235,7 +235,7 @@ void HSD_JObjReqAnimAllByFlags(HSD_JObj* jobj, u32 flags, f32 frame)
 {
     if (jobj != NULL) {
         HSD_JObjReqAnimByFlags(jobj, flags, frame);
-        if (!(jobj->flags & 0x1000)) {
+        if (!(jobj->flags & INSTANCE)) {
             HSD_JObj* child = jobj->child;
             while (child != NULL) {
                 HSD_JObjReqAnimAllByFlags(child, flags, frame);
