@@ -61,6 +61,7 @@ void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint)
 }
 
 extern char lbl_804D5DB0[8];
+extern char lbl_80406758[0x10];
 void func_8036EFAC(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* args)
 {
     u32 type;
@@ -69,7 +70,7 @@ void func_8036EFAC(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* args
         return;
     }
     if (jobj->parent == NULL) {
-        __assert(lbl_804D5DB0, 0xAE, "jobj->parent");
+        __assert(lbl_804D5DB0, 0xAE, lbl_80406758);
     }
     type = jobj->parent->child == jobj ? 1 : 2;
     if (cb != NULL) {

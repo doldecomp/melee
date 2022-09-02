@@ -4633,6 +4633,10 @@ lbl_803B94D0:
 
 .section .data
     .balign 8
+.global lbl_80406758
+lbl_80406758:
+    .asciz "jobj->parent"
+    .balign 4
     .asciz "jobj->aobj"
     .balign 4
     .asciz "jp->u.spline"
