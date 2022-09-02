@@ -59,12 +59,11 @@ def calc_exec_progress(dol: Dol, asm_list: List[AsmUtil.Section], callback: "fun
     src_code = total_code - asm_code
     src_data = total_data - asm_data
     # Percentages
-    code_pcnt = src_code / total_code
-    data_pcnt = src_data / total_data
-    print(
-        f"Code sections: {src_code} / {total_code} bytes in src ({code_pcnt:%})")
-    print(
-        f"Data sections: {src_data} / {total_data} bytes in src ({data_pcnt:%})")
+    code_percent = src_code / total_code
+    data_percent = src_data / total_data
+    print("Progress:")
+    print(f"\tCode sections: {src_code} / {total_code} bytes in src ({code_percent:%})")
+    print(f"\tData sections: {src_data} / {total_data} bytes in src ({data_percent:%})")
 
     # User callback
     callback(src_code, total_code, src_data, total_data)
