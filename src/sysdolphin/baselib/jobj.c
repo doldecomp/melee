@@ -188,14 +188,14 @@ void HSD_JObjRemoveAnimByFlags(HSD_JObj* jobj, u32 flags)
     }
 }
 
-void HSD_JObjRemoveAnimAllByFlags(HSD_JObj* jobj, u32 arg1)
+void HSD_JObjRemoveAnimAllByFlags(HSD_JObj* jobj, u32 flags)
 {
     if (jobj != NULL) {
-        HSD_JObjRemoveAnimByFlags(jobj, arg1);
+        HSD_JObjRemoveAnimByFlags(jobj, flags);
         if (!(jobj->flags & 0x1000)) {
             HSD_JObj* child = jobj->child;
             while (child != NULL) {
-                HSD_JObjRemoveAnimAllByFlags(child, arg1);
+                HSD_JObjRemoveAnimAllByFlags(child, flags);
                 child = child->next;
             }
         }
