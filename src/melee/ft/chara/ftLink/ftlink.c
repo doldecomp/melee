@@ -1,4 +1,4 @@
-#include <ftlink.h>
+#include <melee/ft/chara/ftLink/ftlink.h>
 
 // extern float lbl_804D92E0; // 0.0f
 

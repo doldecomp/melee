@@ -1,4 +1,4 @@
-#include <ftNess.h>
+#include <melee/ft/chara/ftNess/ftNess.h>
 
 // 0x80116EBC //
 // https://decomp.me/scratch/45pKw //

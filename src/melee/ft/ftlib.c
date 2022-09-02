@@ -1,4 +1,4 @@
-#include <ftlib.h>
+#include <melee/ft/ftlib.h>
 
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/it/itkind.h>

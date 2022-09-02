@@ -1,4 +1,4 @@
-#include <ftfox.h>
+#include <melee/ft/chara/ftFox/ftfox.h>
 
 BOOL func_800E5534(HSD_GObj* gobj)
 {

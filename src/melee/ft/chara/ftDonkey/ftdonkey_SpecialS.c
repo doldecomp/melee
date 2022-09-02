@@ -1,4 +1,4 @@
-#include <ftdonkey.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
 void ftDonkey_SpecialS_StartAction(HSD_GObj* fighterObj) {
     Fighter* fp = getFighterPlus(fighterObj);

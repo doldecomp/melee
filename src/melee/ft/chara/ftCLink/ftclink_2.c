@@ -1,4 +1,4 @@
-#include <ftclink.h>
+#include <melee/ft/chara/ftCLink/ftclink.h>
 
 extern void func_800EAF58(HSD_GObj*);
 

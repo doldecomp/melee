@@ -1,4 +1,4 @@
-#include <ftclink.h>
+#include <melee/ft/chara/ftCLink/ftclink.h>
 
 #include <melee/it/itkind.h>
 

@@ -1,4 +1,4 @@
-#include <ftluigi.h>
+#include <melee/ft/chara/ftLuigi/ftluigi.h>
 
 #define HALF_PI64 1.5707963267948966
 

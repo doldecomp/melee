@@ -1,4 +1,4 @@
-#include <fticeclimber.h>
+#include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 
 
 void ftIceClimber_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {

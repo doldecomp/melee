@@ -1,4 +1,4 @@
-#include <ftsamus.h>
+#include <melee/ft/chara/ftSamus/ftsamus.h>
 
 void ftSamus_801293BC_inner(HSD_GObj* fighterObj) {
     Fighter* fp = getFighterPlus(fighterObj);

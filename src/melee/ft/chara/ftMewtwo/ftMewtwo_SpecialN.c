@@ -1,4 +1,4 @@
-#include "ftmewtwo.h"
+#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
 #define PI64 3.141592653589793
 

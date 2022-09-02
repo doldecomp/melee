@@ -1,4 +1,4 @@
-#include "ftmewtwo.h"
+#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags

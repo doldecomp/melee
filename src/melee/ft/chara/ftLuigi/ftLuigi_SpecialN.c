@@ -1,4 +1,4 @@
-#include <ftluigi.h>
+#include <melee/ft/chara/ftLuigi/ftluigi.h>
 
 // 0x8014267C
 // https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Action State handler

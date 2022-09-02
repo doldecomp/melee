@@ -1,4 +1,4 @@
-#include <ftyoshi.h>
+#include <melee/ft/chara/ftYoshi/ftyoshi.h>
 #include <melee/it/itkind.h>
 
 ///https://decomp.me/scratch/ufrFK

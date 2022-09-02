@@ -1,4 +1,4 @@
-#include <ftMars.h>
+#include <melee/ft/chara/ftMars/ftMars.h>
 
 // 80136744 00133324
 // ftMars_SpecialN

@@ -1,4 +1,4 @@
-#include <ftluigi.h>
+#include <melee/ft/chara/ftLuigi/ftluigi.h>
 
 // 0x801445C4
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update

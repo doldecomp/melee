@@ -1,4 +1,4 @@
-#include <ftkoopa.h>
+#include <melee/ft/chara/ftKoopa/ftkoopa.h>
 
 #include <melee/it/itkind.h>
 

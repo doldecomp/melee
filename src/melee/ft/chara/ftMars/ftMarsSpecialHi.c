@@ -1,4 +1,4 @@
-#include <ftMars.h>
+#include <melee/ft/chara/ftMars/ftMars.h>
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F

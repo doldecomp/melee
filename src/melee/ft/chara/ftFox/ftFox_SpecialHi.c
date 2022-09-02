@@ -1,4 +1,4 @@
-#include <ftfox.h>
+#include <melee/ft/chara/ftFox/ftfox.h>
 
 #define HALF_PI32 1.5707963705062866f
 #define DOUBLE_PI32 6.2831854820251465f

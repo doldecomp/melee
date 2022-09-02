@@ -1,4 +1,4 @@
-#include <ftfox.h>
+#include <melee/ft/chara/ftFox/ftfox.h>
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX

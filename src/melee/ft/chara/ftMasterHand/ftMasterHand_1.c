@@ -1,4 +1,4 @@
-#include <ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 8014FC68 0014C848
 void ftMasterhand_OnDeath(HSD_GObj* gobj) {

@@ -1,4 +1,4 @@
-#include <ftcrazyhand.h>
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 
 void ftCrazyhand_OnDeath(HSD_GObj* fighterObj) {
 

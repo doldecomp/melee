@@ -1,4 +1,4 @@
-#include <ftemblem.h>
+#include <melee/ft/chara/ftEmblem/ftemblem.h>
 
 void ftRoy_OnDeath(HSD_GObj* gobj)
 {

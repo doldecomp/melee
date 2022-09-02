@@ -1,5 +1,5 @@
 #include <dolphin/types.h>
-#include <ftcliffcommon.h>
+#include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/code_80081B38.h>
 #include <variables.h>
 

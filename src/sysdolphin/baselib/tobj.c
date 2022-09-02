@@ -1,9 +1,9 @@
-#include "sysdolphin/baselib/tobj.h"
+#include <sysdolphin/baselib/tobj.h>
 
 #include <math.h>
 #include <dolphin/mtx.h>
 
-#include "sysdolphin/baselib/aobj.h"
+#include <sysdolphin/baselib/aobj.h>
 
 extern void TObjInfoInit(void);
 

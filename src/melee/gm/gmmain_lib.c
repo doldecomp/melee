@@ -1,4 +1,4 @@
-#include <gmmain_lib.h>
+#include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbtime.h>
 
 void* func_8015CC34(void) {

@@ -1,5 +1,5 @@
-#include "sysdolphin/baselib/jobj.h"
-#include "sysdolphin/baselib/mtx.h"
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mtx.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };
