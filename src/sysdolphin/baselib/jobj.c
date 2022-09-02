@@ -257,19 +257,19 @@ void HSD_JObjReqAnim(HSD_JObj* jobj, f32 frame)
 void JObjSortAnim(HSD_AObj* aobj)
 {
     HSD_FObj* fobj;
-    HSD_FObj** fobj_p;
+    HSD_FObj** fobj_ptr;
 
     if (aobj == NULL || aobj->fobj == NULL) {
         return;
     }
-    fobj_p = &aobj->fobj;
-    while ((fobj = *fobj_p) != NULL) {
+    fobj_ptr = &aobj->fobj;
+    while ((fobj = *fobj_ptr) != NULL) {
         if (fobj->obj_type == 0xC) {
-            *fobj_p = fobj->next;
+            *fobj_ptr = fobj->next;
             fobj->next = aobj->fobj;
             aobj->fobj = fobj;
             break;
         }
-        fobj_p = &fobj->next;
+        fobj_ptr = &fobj->next;
     }
 }
