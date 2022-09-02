@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from re import match
+from typing import Dict, List
 
 SYMBOL_NEW_REGEX = r"^\s*"\
     r"(?P<SectOfs>\w{8})\s+"\
@@ -59,7 +60,7 @@ class Map():
     # Dictionary of section header symbols.
     # Outer dict key = object file name, value = header dict
     # Header dict key = section name, value = header symbol
-    headers: dict[str, dict[str, Symbol]]
+    headers: Dict[str, Dict[str, Symbol]]
 
     def __init__(self, path: str, old_linker: bool):
         """Open and parse symbol map file"""
@@ -87,7 +88,7 @@ class Map():
         # Parse last section to EOF
         self.parse_section(sect_name, map_data[sect_start:i], old_linker)
 
-    def parse_section(self, sect_name: str, map_data: list[str], old_linker: bool):
+    def parse_section(self, sect_name: str, map_data: List[str], old_linker: bool):
         """Parse a section of the map file, generating header symbols"""
 
         # Find header symbols

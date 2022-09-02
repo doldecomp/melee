@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import IntEnum
+from typing import List
 
 from .input_stream import InputStream
 
@@ -32,7 +33,7 @@ class Dol():
         CODE = 0
         DATA = 1
 
-    sections: list[Section]
+    sections: List[Section]
     bss: Section
     _code_size: int
     _data_size: int

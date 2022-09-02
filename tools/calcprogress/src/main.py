@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 from sys import argv
+from typing import List
 
 from .asm_util import AsmUtil
 from .cw_map import Map
@@ -7,7 +8,7 @@ from .dol import Dol
 from .progress import SliceGroup, calc_exec_progress, calc_slice_group_progress
 
 
-def main(groups: list[SliceGroup], exec_callback: "function", group_callback: "function"):
+def main(groups: List[SliceGroup], exec_callback: "function", group_callback: "function"):
     parser = ArgumentParser()
     # Either DOL or REL is required
     group = parser.add_mutually_exclusive_group(required=True)
