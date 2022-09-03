@@ -145,6 +145,7 @@ void HSD_JObjAnimAll(HSD_JObj *); // asm/sysdolphin/baselib/jobj.s
 
 #pragma push
 #pragma always_inline on
+
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
     assert_line(405, jobj);
@@ -169,11 +170,12 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
     }
 }
 
-inline void HSD_JObjSetMtxDirty(HSD_JObj* jobj) 
-{
-    if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {
-        HSD_JObjSetMtxDirtySub(jobj);
-    }
+// Why does this seem to be a define while the others are inline functions?
+#define HSD_JObjSetMtxDirty(jobj)                       \
+{                                                       \
+    if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {    \
+        HSD_JObjSetMtxDirtySub(jobj);                   \
+    }                                                   \
 }
 
 inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
