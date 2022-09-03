@@ -143,9 +143,6 @@ HSD_JObj *HSD_JObjLoadJoint(HSD_Joint *);
 void HSD_JObjAddAnimAll(HSD_JObj *, HSD_AnimJoint *, HSD_MatAnimJoint *, HSD_ShapeAnimJoint *);
 void HSD_JObjAnimAll(HSD_JObj *); // asm/sysdolphin/baselib/jobj.s
 
-#pragma push
-#pragma always_inline on
-
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
     assert_line(405, jobj);
@@ -250,7 +247,5 @@ inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
     assert_line(1171, mtx);
     PSMTXCopy(mtx, jobj->mtx); 
 }
-
-#pragma pop
 
 #endif
