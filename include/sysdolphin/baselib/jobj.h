@@ -164,7 +164,7 @@ inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
     BOOL result;
     assert_line(564, jobj);
     result = FALSE;
-    if ((jobj->flags & JOBJ_USER_DEF_MTX) == 0 && (jobj->flags & JOBJ_MTX_DIRTY) != 0) {
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
         result = TRUE;
     }
     return result;
@@ -189,7 +189,7 @@ inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     assert_line(618, jobj);
     jobj->rotate = *quat;
-    if ((jobj->flags & JOBJ_MTX_INDEP_SRT) == 0) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
