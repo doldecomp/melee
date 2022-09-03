@@ -1308,9 +1308,9 @@ void RecalcParentTrspBits(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         HSD_JObj* child = jobj->child;
-        u32 flags = ~(JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU);
+        u32 flags = ~JOBJ_ROOT_MASK;
         while (child != NULL) {
-            flags |= (child->flags | child->flags << 10) & (JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU);
+            flags |= (child->flags | child->flags << 10) & JOBJ_ROOT_MASK;
             child = child->next;
         }
         if (!(jobj->flags & ~flags)) {
@@ -1323,7 +1323,7 @@ void RecalcParentTrspBits(HSD_JObj* jobj)
 
 static void UpdateParentTrspBits(HSD_JObj* jobj, HSD_JObj* child)
 {
-    u32 flags = (child->flags | (child->flags << 10)) & (JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU);
+    u32 flags = (child->flags | (child->flags << 10)) & JOBJ_ROOT_MASK;
     while (jobj != NULL) {
         if (!(flags & ~jobj->flags))
             break;
@@ -1396,7 +1396,7 @@ void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next)
     if (jobj->parent != NULL) {
         cur = jobj->parent->child;
         jobj->parent->child = NULL;
-        jobj->flags &= ~(JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU);
+        jobj->flags &= ~JOBJ_ROOT_MASK;
     } else {
         cur = jobj;
     }

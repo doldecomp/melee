@@ -73,6 +73,8 @@
 #define JOBJ_ROOT_XLU (1 << 29)
 #define JOBJ_ROOT_TEXEDGE (1 << 30)
 
+#define JOBJ_ROOT_MASK (JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU)
+
 #define union_type_dobj(o) ((o->flags & 0x4020) == 0)
 #define union_type_ptcl(o) ((o->flags & PTCL) != 0)
 
