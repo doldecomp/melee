@@ -75,8 +75,9 @@
 
 #define JOBJ_ROOT_MASK (JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU)
 
-#define union_type_dobj(o) ((o->flags & 0x4020) == 0)
-#define union_type_ptcl(o) ((o->flags & PTCL) != 0)
+#define union_type_ptcl(o) ((o)->flags & JOBJ_PTCL ? TRUE : FALSE)
+#define union_type_spline(o) ((o)->flags & JOBJ_SPLINE ? TRUE : FALSE)
+#define union_type_dobj(o) ((o)->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? FALSE : TRUE)
 
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)

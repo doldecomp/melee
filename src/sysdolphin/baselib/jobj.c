@@ -180,7 +180,7 @@ void HSD_JObjRemoveAnimByFlags(HSD_JObj* jobj, u32 flags)
             HSD_AObjRemove(jobj->aobj);
             jobj->aobj = NULL;
         }
-        if (jobj->flags & 0x4020 ? FALSE : TRUE) {
+        if (union_type_dobj(jobj)) {
             HSD_DObjRemoveAnimAllByFlags(jobj->u.dobj, flags);
         }
         HSD_RObjRemoveAnimAllByFlags(jobj->robj, flags);
@@ -218,7 +218,7 @@ void HSD_JObjReqAnimByFlags(HSD_JObj* jobj, u32 flags, f32 frame)
         if (flags & 1) {
             HSD_AObjReqAnim(jobj->aobj, frame);
         }
-        if (jobj->flags & 0x4020) {
+        if (jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE)) {
             has_dobj = FALSE;
         } else {
             has_dobj = TRUE;
@@ -296,7 +296,7 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
                 HSD_JObjClearFlags(jobj, JOBJ_CLASSICAL_SCALE);
             }
         }
-        if (jobj->flags & 0x4020) {
+        if (jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE)) {
             has_dobj = FALSE;
         } else {
             has_dobj = TRUE;
@@ -833,7 +833,7 @@ void HSD_JObjAnim(HSD_JObj* jobj)
         HSD_JObjCheckDepend(jobj);
         HSD_AObjInterpretAnim(jobj->aobj, jobj, JObjUpdateFunc);
         HSD_RObjAnimAll(jobj->robj);
-        if (jobj->flags & 0x4020 ? FALSE : TRUE) {
+        if (union_type_dobj(jobj)) {
             HSD_DObjAnimAll(jobj->u.dobj);
         }
     }
@@ -935,9 +935,9 @@ s32 JObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
     jobj->next = JObjLoadJointSub(joint->next, parent);
     jobj->parent = parent;
     jobj->flags |= joint->flags;
-    if (jobj->flags & JOBJ_SPLINE ? TRUE : FALSE) {
+    if (union_type_spline(jobj)) {
         jobj->u.spline = joint->u.spline;
-    } else if (jobj->flags & JOBJ_PTCL ? TRUE : FALSE) {
+    } else if (union_type_ptcl(jobj)) {
         HSD_SList* slist;
         jobj->u.ptcl = joint->u.ptcl;
         slist = joint->u.ptcl;
@@ -1005,7 +1005,7 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
         }
         ref_INC(jobj->child);
     }
-    if (jobj->flags & 0x4020 ? FALSE : TRUE) {
+    if (union_type_dobj(jobj)) {
         HSD_DObjResolveRefsAll(jobj->u.dobj, joint->u.dobjdesc);
     }
 }
@@ -1440,7 +1440,7 @@ HSD_JObj* HSD_JObjGetPrev(HSD_JObj* jobj)
 
 HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj)
 {
-    if (jobj == NULL || !(jobj->flags & 0x4020 ? FALSE : TRUE)) {
+    if (jobj == NULL || !union_type_dobj(jobj)) {
         return NULL;
     }
     return jobj->u.dobj;
@@ -1448,7 +1448,7 @@ HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj)
 
 void HSD_JObjAddDObj(HSD_JObj* jobj, HSD_DObj* dobj)
 {
-    if (jobj == NULL || dobj == NULL || !(jobj->flags & 0x4020 ? FALSE : TRUE)) {
+    if (jobj == NULL || dobj == NULL || !union_type_dobj(jobj)) {
         return;
     }
     dobj->next = jobj->u.dobj;
@@ -1987,7 +1987,7 @@ void JObjReleaseChild(HSD_JObj* jobj)
     if (jobj->parent != NULL) {
         HSD_JObjReparent(jobj, NULL);
     }
-    if (jobj->flags & 0x4020 ? FALSE : TRUE) {
+    if (union_type_dobj(jobj)) {
         if (jobj->u.dobj != NULL) {
             HSD_DObjRemoveAll(jobj->u.dobj);
             jobj->u.dobj = NULL;
