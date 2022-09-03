@@ -48,4 +48,4 @@ jobs:
         path: build/ssbm.us.1.2/GALE01.map
     - name: Calc progress
       if: matrix.makeflags == 'GENERATE_MAP=1'
-      run: python3 tools/calcprogress.py build/ssbm.us.1.2/main.dol build/ssbm.us.1.2/GALE01.map >> $GITHUB_STEP_SUMMARY
+      run: python3 tools/calcprogress/calcprogress.py --dol build/ssbm.us.1.2/main.dol --map build/ssbm.us.1.2/GALE01.map --asm-obj-ext .s.o --old-map true >> $GITHUB_STEP_SUMMARY

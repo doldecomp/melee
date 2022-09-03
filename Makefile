@@ -138,7 +138,7 @@ $(LDSCRIPT): ldscript.lcf
 	@echo Converting $< to $@
 	$(QUIET) $(ELF2DOL) $< $@
 ifeq ($(GENERATE_MAP),1)
-	$(QUIET) $(PYTHON) tools/calcprogress.py $(DOL) $(MAP)
+	$(QUIET) $(PYTHON) tools/calcprogress/calcprogress.py --dol $(DOL) --map $(MAP) --asm-obj-ext .s.o --old-map true
 endif
 
 clean:
