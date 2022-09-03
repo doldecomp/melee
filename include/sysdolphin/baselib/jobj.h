@@ -47,34 +47,32 @@
 #define HSD_A_J_SETFLOAT8 38
 #define HSD_A_J_SETFLOAT9 39
 
-#define SKELETON (1 << 0)
-#define SKELETON_ROOT (1 << 1)
-#define ENVELOPE_MODEL (1 << 2)
-#define CLASSICAL_SCALE (1 << 3)
-#define HIDDEN (1 << 4)
-#define PTCL (1 << 5)
-#define MTX_DIRTY (1 << 6)
-#define LIGHTING (1 << 7)
-#define TEXGEN (1 << 8)
-#define INSTANCE (1 << 12)
-#define PBILLBOARD (1 << 13)
-#define SPLINE (1 << 14)
-#define FLIP_IK (1 << 15)
-#define SPECULAR (1 << 16)
-#define USE_QUATERNION (1 << 17) // TODO remove
+#define JOBJ_SKELETON (1 << 0)
+#define JOBJ_SKELETON_ROOT (1 << 1)
+#define JOBJ_ENVELOPE_MODEL (1 << 2)
+#define JOBJ_CLASSICAL_SCALE (1 << 3)
+#define JOBJ_HIDDEN (1 << 4)
+#define JOBJ_PTCL (1 << 5)
+#define JOBJ_MTX_DIRTY (1 << 6)
+#define JOBJ_LIGHTING (1 << 7)
+#define JOBJ_TEXGEN (1 << 8)
+#define JOBJ_INSTANCE (1 << 12)
+#define JOBJ_PBILLBOARD (1 << 13)
+#define JOBJ_SPLINE (1 << 14)
+#define JOBJ_FLIP_IK (1 << 15)
+#define JOBJ_SPECULAR (1 << 16)
 #define JOBJ_USE_QUATERNION (1 << 17)
-#define NULL_OBJ (0 << 21)
-#define JOINT1 (1 << 21)
-#define JOINT2 (2 << 21)
-#define EFFECTOR (3 << 21)
-#define USER_DEF_MTX (1 << 23)
-#define MTX_INDEP_PARENT (1 << 24)
-#define MTX_INDEP_SRT (1 << 25)
-#define ROOT_OPA (1 << 28)
-#define ROOT_XLU (1 << 29)
-#define ROOT_TEXEDGE (1 << 30)
+#define JOBJ_NULL_OBJ (0 << 21)
+#define JOBJ_JOINT1 (1 << 21)
+#define JOBJ_JOINT2 (2 << 21)
+#define JOBJ_EFFECTOR (3 << 21)
+#define JOBJ_USER_DEF_MTX (1 << 23)
+#define JOBJ_MTX_INDEP_PARENT (1 << 24)
+#define JOBJ_MTX_INDEP_SRT (1 << 25)
+#define JOBJ_ROOT_OPA (1 << 28)
+#define JOBJ_ROOT_XLU (1 << 29)
+#define JOBJ_ROOT_TEXEDGE (1 << 30)
 
-#define JOBJ_INSTANCE(o) ((o->flags & INSTANCE) == 0)
 #define union_type_dobj(o) ((o->flags & 0x4020) == 0)
 #define union_type_ptcl(o) ((o->flags & PTCL) != 0)
 
@@ -163,7 +161,7 @@ inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
     BOOL result;
     assert_line(564, jobj);
     result = FALSE;
-    if ((jobj->flags & USER_DEF_MTX) == 0 && (jobj->flags & MTX_DIRTY) != 0) {
+    if ((jobj->flags & JOBJ_USER_DEF_MTX) == 0 && (jobj->flags & JOBJ_MTX_DIRTY) != 0) {
         result = TRUE;
     }
     return result;
@@ -188,7 +186,7 @@ inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     assert_line(618, jobj);
     jobj->rotate = *quat;
-    if ((jobj->flags & 0x02000000) == 0) {
+    if ((jobj->flags & JOBJ_MTX_INDEP_SRT) == 0) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -198,7 +196,7 @@ inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
     assert_line(0x27F, jobj);
     assert_line(0x280, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.x = x;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -208,7 +206,7 @@ inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
     assert_line(0x294, jobj);
     assert_line(0x295, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.y = y;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -218,7 +216,7 @@ inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
     assert_line(0x2A9, jobj);
     assert_line(0x2AA, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.z = z;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -234,7 +232,7 @@ inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec* scale)
     assert_line(760, jobj);
     assert_line(761, scale);
     jobj->scale = *scale;
-    if (!(jobj->flags & 0x2000000)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -243,7 +241,7 @@ inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 {
     assert_line(0x308, jobj);
     jobj->scale.x = x;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -252,7 +250,7 @@ inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 {
     assert_line(0x317, jobj);
     jobj->scale.y = y;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -261,7 +259,7 @@ inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 {
     assert_line(0x326, jobj);
     jobj->scale.z = z;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -277,7 +275,7 @@ inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
     assert_line(916, jobj);
     assert_line(917, translate);
     jobj->translate = *translate;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -286,7 +284,7 @@ inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 {
     assert_line(0x3A4, jobj);
     jobj->translate.x = x;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -295,7 +293,7 @@ inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 {
     assert_line(0x3B3, jobj);
     jobj->translate.y = y;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -304,7 +302,7 @@ inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
 {
     assert_line(0x3C2, jobj);
     jobj->translate.z = z;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }

@@ -21,17 +21,17 @@ void HSD_JObjCheckDepend(HSD_JObj* jobj)
 
     switch (HSD_JObjMtxIsDirty(jobj)) {
         case FALSE:
-            if ((jobj->flags & USER_DEF_MTX)){
-                if ((jobj->flags & MTX_INDEP_PARENT) == 0 && jobj->parent != NULL && HSD_JObjMtxIsDirty(jobj->parent)){
-                    jobj->flags |= MTX_DIRTY;
+            if ((jobj->flags & JOBJ_USER_DEF_MTX)){
+                if (!(jobj->flags & JOBJ_MTX_INDEP_PARENT) && jobj->parent != NULL && HSD_JObjMtxIsDirty(jobj->parent)){
+                    jobj->flags |= JOBJ_MTX_DIRTY;
                 }
             }
-            else if (jobj->parent != NULL && (jobj->parent->flags & MTX_DIRTY) != 0
-                || (jobj->flags & EFFECTOR) == JOINT1
-                || (jobj->flags & EFFECTOR) == JOINT2
-                || (jobj->flags & EFFECTOR) == EFFECTOR
+            else if (jobj->parent != NULL && (jobj->parent->flags & JOBJ_MTX_DIRTY)
+                || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT1
+                || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2
+                || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR
                 || jobj->robj != NULL) {
-                    jobj->flags |= MTX_DIRTY;
+                    jobj->flags |= JOBJ_MTX_DIRTY;
             }
         break;
     }
@@ -47,7 +47,7 @@ void JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint)
     jobj->rotate.z = joint->rotation.z;
     jobj->scale = joint->scale;
     jobj->translate = joint->position;
-    if (!(jobj->flags & MTX_INDEP_SRT)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -58,7 +58,7 @@ void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint)
         return;
     }
     JObjResetRST(jobj, joint);
-    if (!(jobj->flags & INSTANCE)) {
+    if (!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObj* child_jobj = jobj->child;
         HSD_Joint* child_joint = joint->child;
         while (child_jobj != NULL) {
@@ -81,7 +81,7 @@ void HSD_JObjWalkTree0(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* 
     if (cb != NULL) {
         cb(jobj, args, type);
     }
-    if (!(jobj->flags & INSTANCE)) {
+    if (!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObj* child = jobj->child;
         while (child != NULL) {
             HSD_JObjWalkTree0(child, cb, args);
@@ -98,7 +98,7 @@ void HSD_JObjWalkTree(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* a
     if (cb != NULL) {
         cb(jobj, args, 0);
     }
-    if (!(jobj->flags & INSTANCE)) {
+    if (!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObj* child = jobj->child;
         while (child != NULL) {
             HSD_JObjWalkTree0(child, cb, args);
@@ -191,7 +191,7 @@ void HSD_JObjRemoveAnimAllByFlags(HSD_JObj* jobj, u32 flags)
 {
     if (jobj != NULL) {
         HSD_JObjRemoveAnimByFlags(jobj, flags);
-        if (!(jobj->flags & INSTANCE)) {
+        if (!(jobj->flags & JOBJ_INSTANCE)) {
             HSD_JObj* child = jobj->child;
             while (child != NULL) {
                 HSD_JObjRemoveAnimAllByFlags(child, flags);
@@ -234,7 +234,7 @@ void HSD_JObjReqAnimAllByFlags(HSD_JObj* jobj, u32 flags, f32 frame)
 {
     if (jobj != NULL) {
         HSD_JObjReqAnimByFlags(jobj, flags, frame);
-        if (!(jobj->flags & INSTANCE)) {
+        if (!(jobj->flags & JOBJ_INSTANCE)) {
             HSD_JObj* child = jobj->child;
             while (child != NULL) {
                 HSD_JObjReqAnimAllByFlags(child, flags, frame);
@@ -291,9 +291,9 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
             JObjSortAnim(jobj->aobj);
             HSD_RObjAddAnimAll(jobj->robj, an_joint->robj_anim);
             if (an_joint->flags & 1) {
-                HSD_JObjSetFlags(jobj, CLASSICAL_SCALE);
+                HSD_JObjSetFlags(jobj, JOBJ_CLASSICAL_SCALE);
             } else {
-                HSD_JObjClearFlags(jobj, CLASSICAL_SCALE);
+                HSD_JObjClearFlags(jobj, JOBJ_CLASSICAL_SCALE);
             }
         }
         if (jobj->flags & 0x4020) {
@@ -429,7 +429,7 @@ void HSD_JObjAddAnimAll(HSD_JObj* jobj, HSD_AnimJoint* arg1,
 
     if (jobj != NULL) {
         HSD_JObjAddAnim(jobj, arg1, arg2, arg3);
-        if (!(jobj->flags & INSTANCE)) {
+        if (!(jobj->flags & JOBJ_INSTANCE)) {
             var_r31 = jobj->child;
             var_r26 = arg1 != NULL ? arg1->child : NULL;
             var_r25 = arg2 != NULL ? arg2->child : NULL;
@@ -675,7 +675,7 @@ void JObjUpdateFunc(void* obj, u32 type, FObjData* val)
             HSD_JObjSetTranslateZ(jobj, p.z);
             break;
         case HSD_A_J_ROTX:
-            if (jobj->flags & JOINT1) {
+            if (jobj->flags & JOBJ_JOINT1) {
                 robj = HSD_RObjGetByType(jobj->robj, REFTYPE_IKHINT, 0);
                 if (robj != NULL) {
                     robj->u.ik_hint.rotate_x = val->fv;
@@ -718,16 +718,16 @@ void JObjUpdateFunc(void* obj, u32 type, FObjData* val)
             break;
         case HSD_A_J_BRANCH:
             if (val->fv > 0.5) {
-                HSD_JObjClearFlagsAll(jobj, HIDDEN);
+                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             } else {
-                HSD_JObjSetFlagsAll(jobj, HIDDEN);
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
             break;
         case HSD_A_J_NODE:
             if (val->fv > 0.5) {
-                HSD_JObjClearFlags(jobj, HIDDEN);
+                HSD_JObjClearFlags(jobj, JOBJ_HIDDEN);
             } else {
-                HSD_JObjSetFlags(jobj, HIDDEN);
+                HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
             }
             break;
         case HSD_A_J_SETBYTE0:
@@ -844,7 +844,7 @@ void JObjAnimAll(HSD_JObj* jobj)
     HSD_JObj* child;
     if (jobj != NULL) {
         HSD_JObjAnim(jobj);
-        if (!(jobj->flags & INSTANCE)) {
+        if (!(jobj->flags & JOBJ_INSTANCE)) {
             child = jobj->child;
             while (child != NULL) {
                 JObjAnimAll(child);
@@ -872,8 +872,8 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
 {
     MtxPtr new_var = vmtx;
     if (jobj != NULL) {
-        if (jobj->flags & INSTANCE) {
-            if (!(jobj->flags & HIDDEN)) {
+        if (jobj->flags & JOBJ_INSTANCE) {
+            if (!(jobj->flags & JOBJ_HIDDEN)) {
                 Mtx mtx;
                 MtxPtr tmp;
                 u32 unused;
@@ -929,15 +929,15 @@ inline HSD_JObj* JObjLoadJointSub(HSD_Joint* joint, HSD_JObj* parent)
 
 s32 JObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
 {
-    if (JOBJ_INSTANCE(joint)) {
+    if (!(joint->flags & JOBJ_INSTANCE)) {
         jobj->child = JObjLoadJointSub(joint->child, jobj);
     }
     jobj->next = JObjLoadJointSub(joint->next, parent);
     jobj->parent = parent;
     jobj->flags |= joint->flags;
-    if (jobj->flags & SPLINE ? TRUE : FALSE) {
+    if (jobj->flags & JOBJ_SPLINE ? TRUE : FALSE) {
         jobj->u.spline = joint->u.spline;
-    } else if (jobj->flags & PTCL ? TRUE : FALSE) {
+    } else if (jobj->flags & JOBJ_PTCL ? TRUE : FALSE) {
         HSD_SList* slist;
         jobj->u.ptcl = joint->u.ptcl;
         slist = joint->u.ptcl;
@@ -997,7 +997,7 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
         return;
     }
     HSD_RObjResolveRefsAll(jobj->robj, joint->robjdesc);
-    if (!JOBJ_INSTANCE(jobj)) {
+    if (!!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObjUnref(jobj->child);
         jobj->child = HSD_IDGetDataFromTable(NULL, (u32) joint->child, NULL);
         if (jobj->child == NULL) {
@@ -1015,7 +1015,7 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
     u32 unused;
     while (jobj != NULL && joint != NULL) {
         HSD_JObjResolveRefs(jobj, joint);
-        if (!(jobj->flags & INSTANCE)) {
+        if (!(jobj->flags & JOBJ_INSTANCE)) {
             HSD_JObjResolveRefsAll(jobj->child, joint->child);
         }
         jobj = jobj->next;
@@ -1308,9 +1308,9 @@ void RecalcParentTrspBits(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         HSD_JObj* child = jobj->child;
-        u32 flags = ~(ROOT_OPA | ROOT_TEXEDGE | ROOT_XLU);
+        u32 flags = ~(JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU);
         while (child != NULL) {
-            flags |= (child->flags | child->flags << 10) & (ROOT_OPA | ROOT_TEXEDGE | ROOT_XLU);
+            flags |= (child->flags | child->flags << 10) & (JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU);
             child = child->next;
         }
         if (!(jobj->flags & ~flags)) {
@@ -1323,7 +1323,7 @@ void RecalcParentTrspBits(HSD_JObj* jobj)
 
 static void UpdateParentTrspBits(HSD_JObj* jobj, HSD_JObj* child)
 {
-    u32 flags = (child->flags | (child->flags << 10)) & (ROOT_OPA | ROOT_TEXEDGE | ROOT_XLU);
+    u32 flags = (child->flags | (child->flags << 10)) & (JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU);
     while (jobj != NULL) {
         if (!(flags & ~jobj->flags))
             break;
@@ -1350,9 +1350,7 @@ void HSD_JObjAddChild(HSD_JObj* jobj, HSD_JObj* child)
     if (jobj->child == NULL) {
         jobj->child = child;
     } else {
-        if ((jobj->flags & INSTANCE)) {
-            __assert(__FILE__, 0x54D, "!(jobj->flags & JOBJ_INSTANCE)");
-        }
+        assert_line(0x54D, !(jobj->flags & JOBJ_INSTANCE));
         last = jobj->child;
         while (last->next != NULL) {
             assert_line(0x550, last != child);
@@ -1398,7 +1396,7 @@ void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next)
     if (jobj->parent != NULL) {
         cur = jobj->parent->child;
         jobj->parent->child = NULL;
-        jobj->flags &= ~(ROOT_OPA | ROOT_TEXEDGE | ROOT_XLU);
+        jobj->flags &= ~(JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU);
     } else {
         cur = jobj;
     }
@@ -1505,7 +1503,7 @@ u32 HSD_JObjGetFlags(HSD_JObj* jobj)
 void HSD_JObjSetFlags(HSD_JObj* jobj, u32 flags)
 {
     if (jobj != NULL) {
-        if ((jobj->flags ^ flags) & CLASSICAL_SCALE) {
+        if ((jobj->flags ^ flags) & JOBJ_CLASSICAL_SCALE) {
             // manually inlined HSD_JObjSetMtxDirty
             if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {
                 HSD_JObjSetMtxDirtySub(jobj);
@@ -1519,7 +1517,7 @@ void HSD_JObjSetFlagsAll(HSD_JObj* jobj, u32 flags)
 {
     if (jobj != NULL) {
         HSD_JObjSetFlags(jobj, flags);
-        if (JOBJ_INSTANCE(jobj)) {
+        if (!(jobj->flags & JOBJ_INSTANCE)) {
             HSD_JObj* i;
             for (i = jobj->child; i != NULL; i = i->next) {
                 HSD_JObjSetFlagsAll(i, flags);
@@ -1531,7 +1529,7 @@ void HSD_JObjSetFlagsAll(HSD_JObj* jobj, u32 flags)
 void HSD_JObjClearFlags(HSD_JObj* jobj, u32 arg1)
 {
     if (jobj != NULL) {
-        if ((jobj->flags ^ arg1) & CLASSICAL_SCALE) {
+        if ((jobj->flags ^ arg1) & JOBJ_CLASSICAL_SCALE) {
             // manually inlined HSD_JObjSetMtxDirty
             if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {
                 HSD_JObjSetMtxDirtySub(jobj);
@@ -1545,7 +1543,7 @@ void HSD_JObjClearFlagsAll(HSD_JObj* jobj, u32 flags)
 {
     if (jobj != NULL) {
         HSD_JObjClearFlags(jobj, flags);
-        if (JOBJ_INSTANCE(jobj)) {
+        if (!(jobj->flags & JOBJ_INSTANCE)) {
             HSD_JObj* i;
             for (i = jobj->child; i != NULL; i = i->next) {
                 HSD_JObjClearFlagsAll(i, flags);
@@ -1576,7 +1574,7 @@ HSD_JObj* HSD_JObjGetCurrent(void)
 inline HSD_JObj* jobj_get_joint2(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
-        if ((jobj->flags & EFFECTOR) == JOINT2) {
+        if ((jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2) {
             return jobj;
         }
         jobj = jobj->next;
@@ -1587,7 +1585,7 @@ inline HSD_JObj* jobj_get_joint2(HSD_JObj* jobj)
 inline HSD_JObj* jobj_get_effector(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
-        if ((jobj->flags & EFFECTOR) == EFFECTOR) {
+        if ((jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR) {
             return jobj;
         }
         jobj = jobj->next;
@@ -1942,10 +1940,10 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
 void HSD_JObjSetMtxDirtySub(HSD_JObj* jobj)
 {
     jobj->flags |= 0x40;
-    if (!(jobj->flags & INSTANCE)) {
+    if (!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObj* child = jobj->child;
         while (child != NULL) {
-            if (!(child->flags & MTX_INDEP_PARENT)) {
+            if (!(child->flags & JOBJ_MTX_INDEP_PARENT)) {
                 if (!HSD_JObjMtxIsDirty(child)) {
                     HSD_JObjSetMtxDirtySub(child);
                 }
@@ -1966,7 +1964,7 @@ int JObjInit(HSD_Class* o)
     if (status >= 0) {
         HSD_JObj* jobj = (HSD_JObj*) o;
         status = 0;
-        jobj->flags = MTX_DIRTY;
+        jobj->flags = JOBJ_MTX_DIRTY;
         jobj->scale.x = 1.0F;
         jobj->scale.y = 1.0F;
         jobj->scale.z = 1.0F;
@@ -1978,7 +1976,7 @@ void JObjReleaseChild(HSD_JObj* jobj)
 {
     HSD_JObj* child;
     if ((child = jobj->child) != NULL) {
-        if (jobj->flags & INSTANCE) {
+        if (jobj->flags & JOBJ_INSTANCE) {
             HSD_JObjUnref(child);
         } else {
             child->parent = NULL;
