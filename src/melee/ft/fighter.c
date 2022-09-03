@@ -86,29 +86,7 @@ inline HSD_JObj *getHSDJObj(HSD_GObj* hsd_gobj) {
     HSD_JObj *hsd_jobj = hsd_gobj->hsd_obj;
     return (void *)hsd_jobj;
 }
-
-// WORKAROUND
-// bleeeehhhh. HSD_JObjSetScale does not have a correct inline depth due to
-// inline auto preferring 3 levels of depth. TODO: Determine if the Setup MTX
-// inline is fake, and correct the inline to adjust if so.
-inline void HSD_JObjSetScale_Hack(HSD_JObj* jobj, Vec* scale)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 760, "jobj")) ;
-    ((scale) ? ((void) 0) : __assert("jobj.h", 761, "scale")) ;
-    jobj->scale = *scale;
-    if (!(jobj->flags & 0x2000000)) {
-#if 0
-        // this is what it should call
-        HSD_JObjSetMtxDirty(jobj);
-#else
-        // this is the code manually inlined...
-        if (jobj != ((void*)0) && !HSD_JObjMtxIsDirty(jobj)) {
-            HSD_JObjSetMtxDirtySub(jobj);
-        }
-#endif
-    }
-}
-// ---------------------------------------------
+// --------------------------------------------
 
 void Fighter_800679B0()
 { 
@@ -197,7 +175,7 @@ void Fighter_UpdateModelScale(HSD_GObj* fighterObj)
     Vec scale;
 
     Fighter_InitScale(fp, &scale, modelScale_f1);
-    HSD_JObjSetScale_Hack(jobj, &scale);
+    HSD_JObjSetScale(jobj, &scale);
 }
 
 void Fighter_UnkInitReset_80067C98(Fighter* fp) {
