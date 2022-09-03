@@ -172,7 +172,7 @@ inline f32 calcVal(f32 x, f32 y)
     }
 }
 
-void func_80379C24(Mtx m, Vec* vec)
+void HSD_MtxGetRotation(Mtx m, Vec* vec)
 {
     f32 length0;
     f32 length1;
@@ -230,7 +230,7 @@ void HSD_MtxGetTranslate(Mtx mat, Vec* vec)
     vec->z = mat[2][3];
 }
 
-void func_80379F88(Mtx arg0, Vec* arg1)
+void HSD_MtxGetScale(Mtx arg0, Vec* arg1)
 {
     f64 scale;
     f64 filler;

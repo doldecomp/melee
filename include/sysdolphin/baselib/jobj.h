@@ -61,7 +61,8 @@
 #define SPLINE (1 << 14)
 #define FLIP_IK (1 << 15)
 #define SPECULAR (1 << 16)
-#define USE_QUATERNION (1 << 17)
+#define USE_QUATERNION (1 << 17) // TODO remove
+#define JOBJ_USE_QUATERNION (1 << 17)
 #define NULL_OBJ (0 << 21)
 #define JOINT1 (1 << 21)
 #define JOINT2 (2 << 21)
@@ -74,9 +75,11 @@
 #define ROOT_TEXEDGE (1 << 30)
 
 #define JOBJ_INSTANCE(o) ((o->flags & INSTANCE) == 0)
-#define JOBJ_USE_QUATERNION(o) ((o->flags & USE_QUATERNION))
 #define union_type_dobj(o) ((o->flags & 0x4020) == 0)
 #define union_type_ptcl(o) ((o->flags & PTCL) != 0)
+
+#define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
+#define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
 
 typedef u32 HSD_TrspMask;
 
@@ -142,6 +145,12 @@ void HSD_JObjRemoveAll(HSD_JObj *); // sysdolphin/baselib/jobj.s
 HSD_JObj *HSD_JObjLoadJoint(HSD_Joint *);
 void HSD_JObjAddAnimAll(HSD_JObj *, HSD_AnimJoint *, HSD_MatAnimJoint *, HSD_ShapeAnimJoint *);
 void HSD_JObjAnimAll(HSD_JObj *); // asm/sysdolphin/baselib/jobj.s
+void HSD_JObjSetFlags(HSD_JObj*, u32 flags);
+void HSD_JObjSetFlagsAll(HSD_JObj*, u32 flags);
+void HSD_JObjClearFlags(HSD_JObj*, u32 flags);
+void HSD_JObjClearFlagsAll(HSD_JObj*, u32 flags);
+HSD_JObj* HSD_JObjAlloc(void);
+void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
 
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
@@ -184,6 +193,36 @@ inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
     }
 }
 
+inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
+{
+    assert_line(0x27F, jobj);
+    assert_line(0x280, !(jobj->flags & JOBJ_USE_QUATERNION));
+    jobj->rotate.x = x;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
+{
+    assert_line(0x294, jobj);
+    assert_line(0x295, !(jobj->flags & JOBJ_USE_QUATERNION));
+    jobj->rotate.y = y;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
+{
+    assert_line(0x2A9, jobj);
+    assert_line(0x2AA, !(jobj->flags & JOBJ_USE_QUATERNION));
+    jobj->rotate.z = z;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion *quat)
 {
     assert_line(699, jobj);
@@ -200,6 +239,33 @@ inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec* scale)
     }
 }
 
+inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
+{
+    assert_line(0x308, jobj);
+    jobj->scale.x = x;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
+{
+    assert_line(0x317, jobj);
+    jobj->scale.y = y;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
+{
+    assert_line(0x326, jobj);
+    jobj->scale.z = z;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec *scale)
 {
     assert_line(823, jobj);
@@ -211,6 +277,33 @@ inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
     assert_line(916, jobj);
     assert_line(917, translate);
     jobj->translate = *translate;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
+{
+    assert_line(0x3A4, jobj);
+    jobj->translate.x = x;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+{
+    assert_line(0x3B3, jobj);
+    jobj->translate.y = y;
+    if (!(jobj->flags & MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
+{
+    assert_line(0x3C2, jobj);
+    jobj->translate.z = z;
     if (!(jobj->flags & MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }

@@ -461,8 +461,6 @@ extern f32 lbl_804DDA6C;
 extern f32 lbl_804DDA70;
 extern s8 lbl_804D6D60;
 extern f32 lbl_804DDA98;
-extern unk_t HSD_JObjClearFlagsAll(HSD_JObj*, s32);
-extern unk_t HSD_JObjSetFlagsAll(HSD_JObj*, s32);
 extern unk_t func_8022F3D8();
 extern unk_t HSD_JObjRemoveAnim();
 

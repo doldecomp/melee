@@ -10,9 +10,9 @@
 void func_80379310(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
 void func_80379A20(Mtx src, Mtx dest);
-void func_80379C24(Mtx m, Vec* vec);
+void HSD_MtxGetRotation(Mtx m, Vec* vec);
 void HSD_MtxGetTranslate(Mtx mat, Vec* vec);
-void func_80379F88(Mtx arg0, Vec* arg1);
+void HSD_MtxGetScale(Mtx arg0, Vec* arg1);
 void HSD_MkRotationMtx(Mtx arg0, Vec* arg1);
 void func_8037A230(Mtx arg0, Quaternion* arg1);
 void HSD_MtxSRT(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4);
