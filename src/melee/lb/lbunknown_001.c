@@ -30,7 +30,7 @@ BOOL func_8000B09C(HSD_JObj* jobj)
         if (jobj->aobj != NULL && !(jobj->aobj->flags & AOBJ_NO_ANIM)) {
             return TRUE;
         }
-        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & INSTANCE)) {
+        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & JOBJ_INSTANCE)) {
             while (TRUE) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
@@ -57,7 +57,7 @@ BOOL func_8000B134(HSD_JObj* jobj)
         if (jobj->aobj != NULL && (jobj->aobj->flags & AOBJ_REWINDED)) {
             return TRUE;
         }
-        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & INSTANCE)) {
+        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & JOBJ_INSTANCE)) {
             while (TRUE) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
@@ -133,8 +133,8 @@ void func_8000B4FC(HSD_JObj* jobj, HSD_Joint* joint)
     jobj->rotate.z = joint->rotation.z;
     jobj->scale = joint->scale;
     jobj->translate = joint->position;
-    HSD_JObjClearFlags(jobj, USE_QUATERNION);
-    if (!(jobj->flags & 0x2000000)) {
+    HSD_JObjClearFlags(jobj, JOBJ_USE_QUATERNION);
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -148,8 +148,8 @@ void func_8000B5DC(HSD_JObj* jobj, HSD_Joint* joint)
     jobj->rotate.y = joint->rotation.y;
     jobj->rotate.z = joint->rotation.z;
     jobj->translate = joint->position;
-    HSD_JObjClearFlags(jobj, USE_QUATERNION);
-    if (!(jobj->flags & 0x2000000)) {
+    HSD_JObjClearFlags(jobj, JOBJ_USE_QUATERNION);
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -161,7 +161,7 @@ void func_8000B6A4(HSD_JObj* jobj, HSD_Joint* joint)
     }
     jobj->scale = joint->scale;
     jobj->translate = joint->position;
-    if (!(jobj->flags & 0x2000000)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -172,7 +172,7 @@ void func_8000B760(HSD_JObj* jobj, HSD_Joint* joint)
         return;
     }
     jobj->translate = joint->position;
-    if (!(jobj->flags & 0x2000000)) {
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -187,8 +187,8 @@ void func_8000B804(HSD_JObj* jobj, HSD_Joint* joint)
     jobj->rotate.z = joint->rotation.z;
     jobj->scale = joint->scale;
     jobj->translate = joint->position;
-    HSD_JObjClearFlags(jobj, USE_QUATERNION);
-    HSD_JObjSetFlags(jobj, MTX_DIRTY);
+    HSD_JObjClearFlags(jobj, JOBJ_USE_QUATERNION);
+    HSD_JObjSetFlags(jobj, JOBJ_MTX_DIRTY);
 
     func_8000B804(jobj->next, joint->next);
     func_8000B804(jobj->child, joint->child);
@@ -683,12 +683,12 @@ void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
     dst->rotate = src->rotate;
     dst->scale = src->scale;
     dst->translate = src->translate;
-    if (HSD_JObjGetFlags(src) & USE_QUATERNION) {
-        HSD_JObjSetFlags(dst, USE_QUATERNION);
+    if (HSD_JObjGetFlags(src) & JOBJ_USE_QUATERNION) {
+        HSD_JObjSetFlags(dst, JOBJ_USE_QUATERNION);
     } else {
-        HSD_JObjClearFlags(dst, USE_QUATERNION);
+        HSD_JObjClearFlags(dst, JOBJ_USE_QUATERNION);
     }
-    HSD_JObjSetFlags(dst, MTX_DIRTY);
+    HSD_JObjSetFlags(dst, JOBJ_MTX_DIRTY);
 }
 
 // https://decomp.me/scratch/63ON3

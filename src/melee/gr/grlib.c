@@ -132,7 +132,7 @@ void func_801C9908(HSD_JObj* jobj)
         }
     }
 
-    if (jobj->flags & 0x1000) {
+    if (jobj->flags & JOBJ_INSTANCE) {
         return;
     }
 

@@ -130,11 +130,8 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     s32 temp_r0;
     s32 temp_r3;
     s32 temp_r4;
-    u32 temp_r4_2;
     Item* item_data2;
     ItemCommonData* temp_lbl;
-    s32 phi_r3;
-    s32 phi_r3_2;
     s32 filler[2];
 
     item_data = item_gobj->user_data;
@@ -156,35 +153,7 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     if (item_data->xDC8_word.flags.x19 == 1)
     {
         temp_f31 = (f32)(1.5707963267948966 * (f64)item_data->x2C_facing_direction);
-        if (model == 0U)
-        {
-            __assert("jobj.h", 0x294U, "jobj");
-        }
-        if ((model->flags & 0x20000) != 0)
-        {
-            __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-        }
-        model->rotate.y = temp_f31;
-        if ((model->flags & 0x02000000) == 0)
-        {
-            if (model != 0)
-            {
-                if (model == 0)
-                {
-                    __assert("jobj.h", 0x234U, "jobj");
-                }
-                temp_r4 = phi_r3 = model->flags;
-                phi_r3 = 0;
-                if (((temp_r4 & 0x800000) == 0) && ((temp_r4 & 0x40) != 0))
-                {
-                    phi_r3 = 1;
-                }
-                if (phi_r3 == 0)
-                {
-                    HSD_JObjSetMtxDirtySub(model);
-                }
-            }
-        }
+        HSD_JObjSetRotationY(model, temp_f31);
     }
     func_80273500(item_gobj, &spawnItem->x2C_vel);
     item_data->x5CC_currentAnimFrame = (f32)0.0f;
@@ -207,35 +176,7 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     }
     func_80275E98(item_gobj, spawnItem);
     func_80274DAC(item_gobj);
-    if (model == 0U)
-    {
-        __assert("jobj.h", 0x394U, "jobj");
-    }
-    if ((&item_data->x4C_pos) == 0)
-    {
-        __assert("jobj.h", 0x395U, "translate");
-    }
-    model->translate = item_data->x4C_pos;
-    if ((model->flags & 0x02000000) == 0)
-    {
-        if (model != 0)
-        {
-            if (model == 0)
-            {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            temp_r4_2 = phi_r3_2 = model->flags;
-            phi_r3_2 = 0;
-            if (((temp_r4_2 & 0x800000) == 0) && ((temp_r4_2 & 0x40) != 0))
-            {
-                phi_r3_2 = 1;
-            }
-            if (phi_r3_2 == 0)
-            {
-                HSD_JObjSetMtxDirtySub(model);
-            }
-        }
-    }
+    HSD_JObjSetTranslate(model, &item_data->x4C_pos);
     func_80274658(item_gobj, lbl_804D6D28->x6C_float);
     func_802725D4(item_gobj);
     func_80271508(item_gobj, 0);
@@ -997,8 +938,6 @@ void func_8026849C(HSD_GObj* item_gobj) // Set item model scale //
     Item* item_data;
     HSD_JObj* temp_jobj;
     f32 temp_f0;
-    s32 var_r3;
-    u32 temp_r4;
 
     temp_jobj = item_gobj->hsd_obj;
     item_data = item_gobj->user_data;
@@ -1006,31 +945,7 @@ void func_8026849C(HSD_GObj* item_gobj) // Set item model scale //
     sp14.z = temp_f0;
     sp14.y = temp_f0;
     sp14.x = temp_f0;
-    if (temp_jobj == 0)
-    {
-        __assert("jobj.h", 0x2F8U, "jobj");
-    }
-    temp_jobj->scale = sp14;
-    if ((temp_jobj->flags & 0x02000000) == 0)
-    {
-        if (temp_jobj != 0)
-        {
-            if (temp_jobj == 0)
-            {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            temp_r4 = var_r3 = temp_jobj->flags;
-            var_r3 = 0;
-            if (((temp_r4 & 0x800000) == 0) && ((temp_r4 & 0x40) != 0))
-            {
-                var_r3 = 1;
-            }
-            if (var_r3 == 0)
-            {
-                HSD_JObjSetMtxDirtySub(temp_jobj);
-            }
-        }
-    }
+    HSD_JObjSetScale(temp_jobj, &sp14);
 }
 
 extern void func_8000FD48(HSD_JObj*, void*, s32);
@@ -1092,9 +1007,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
     s32 temp_r0;
     s32 temp_r0_2;
     s32 temp_r4;
-    s32 temp_r4_2;
     u32 temp_r5;
-    s32 var_r3;
     u32 temp_r0_3;
     HSD_JObj* temp_jobj;
     Item* item_data;
@@ -1164,31 +1077,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
         sp2C.z = temp_f0;
         sp2C.y = temp_f0;
         sp2C.x = temp_f0;
-        if (temp_jobj == 0)
-        {
-            __assert("jobj.h", 0x2F8U, "jobj");
-        }
-        temp_jobj->scale = sp2C;
-        if ((temp_jobj->flags & 0x02000000) == 0)
-        {
-            if (temp_jobj != 0)
-            {
-                if (temp_jobj == 0)
-                {
-                    __assert("jobj.h", 0x234U, "jobj");
-                }
-                temp_r4_2 = (var_r3 = temp_jobj->flags);
-                var_r3 = 0;
-                if (((temp_r4_2 & 0x800000) == 0) && ((temp_r4_2 & 0x40) != 0))
-                {
-                    var_r3 = 1;
-                }
-                if (var_r3 == 0)
-                {
-                    HSD_JObjSetMtxDirtySub(temp_jobj);
-                }
-            }
-        }
+        HSD_JObjSetScale(temp_jobj, &sp2C);
         func_8027163C(temp_r3);
         func_80268560(temp_r3);
         func_8038FD54(temp_r3, lbl_802693E4, 0);
@@ -1445,107 +1334,24 @@ extern f32 lbl_804DC63C;
 
 inline void HSD_JObjSetFacingDirItem(HSD_JObj* item_jobj2, Item* item_data)
 {
-    u32 jobj_flags_2;
-    s32 phi_flags_2;
-    f32 temp_float = 1.5707963267948966 * item_data->x2C_facing_direction;
-    if (item_jobj2 == 0)
-    {
-        __assert("jobj.h", 0x294U, "jobj");
-    }
-    if ((item_jobj2->flags & 0x20000) != 0)
-    {
-        __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-    }
-    item_jobj2->rotate.y = temp_float;
-    if ((item_jobj2->flags & 0x02000000) == 0)
-    {
-        if (item_jobj2 != 0)
-        {
-            if (item_jobj2 == 0)
-            {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            jobj_flags_2 = item_jobj2->flags;
-            phi_flags_2 = 0;
-            if (((jobj_flags_2 & 0x800000) == 0) && ((jobj_flags_2 & 0x40) != 0))
-            {
-                phi_flags_2 = 1;
-            }
-            if (phi_flags_2 == 0)
-            {
-                HSD_JObjSetMtxDirtySub(item_jobj2);
-            }
-        }
-    }
+    HSD_JObjSetRotationY(item_jobj2, (M_PI / 2) * item_data->x2C_facing_direction);
 }
 
 inline void HSD_JObjSetScaleItem(Item* item_data3, HSD_JObj* item_jobj1_2, Vec3* sp4C)
 {
-    u32 jobj_flags_4;
-    s32 phi_flags_3;
     item_data3->x38_scale = (f32)item_data3->xCC_item_attr->x60_scale;
     sp4C->z = item_data3->x38_scale;
     sp4C->y = item_data3->x38_scale;
     sp4C->x = item_data3->x38_scale;
-    if (item_jobj1_2 == 0)
-    {
-        __assert("jobj.h", 0x2F8U, "jobj");
-    }
-    item_jobj1_2->scale = *sp4C;
-    if ((item_jobj1_2->flags & 0x02000000) == 0)
-    {
-        if (item_jobj1_2 != 0)
-        {
-            if (item_jobj1_2 == 0)
-            {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            jobj_flags_4 = item_jobj1_2->flags;
-            phi_flags_3 = 0;
-            if (((jobj_flags_4 & 0x800000) == 0) && ((jobj_flags_4 & 0x40) != 0))
-            {
-                phi_flags_3 = 1;
-            }
-            if (phi_flags_3 == 0)
-            {
-                HSD_JObjSetMtxDirtySub(item_jobj1_2);
-            }
-        }
-    }
+    HSD_JObjSetScale(item_jobj1_2, sp4C);
 }
 
 inline void HSD_JObjSetScaleItem2(Item* item_data4, HSD_JObj* item_jobj1_4, Vec3* sp40)
 {
-    u32 jobj_flags_8;
-    s32 phi_flags_4;
     sp40->z = item_data4->x38_scale;
     sp40->y = item_data4->x38_scale;
     sp40->x = item_data4->x38_scale;
-    if (item_jobj1_4 == 0)
-    {
-        __assert("jobj.h", 0x2F8U, "jobj");
-    }
-    item_jobj1_4->scale = *sp40;
-    if ((item_jobj1_4->flags & 0x02000000) == 0)
-    {
-        if (item_jobj1_4 != 0)
-        {
-            if (item_jobj1_4 == 0)
-            {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            jobj_flags_8 = item_jobj1_4->flags;
-            phi_flags_4 = 0;
-            if (((jobj_flags_8 & 0x800000) == 0) && ((jobj_flags_8 & 0x40) != 0))
-            {
-                phi_flags_4 = 1;
-            }
-            if (phi_flags_4 == 0)
-            {
-                HSD_JObjSetMtxDirtySub(item_jobj1_4);
-            }
-        }
-    }
+    HSD_JObjSetScale(item_jobj1_4, sp40);
 }
 
 inline HSD_JObj* GetItemJObj(HSD_GObj* item_gobj)
@@ -1553,9 +1359,8 @@ inline HSD_JObj* GetItemJObj(HSD_GObj* item_gobj)
     return item_gobj->hsd_obj;
 }
 
-
 // 0x80268E5C //
-// https://decomp.me/scratch/In9qm //
+// https://decomp.me/scratch/cSrfX
 void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // Item State Change //
 {
     Vec3 sp4C;
@@ -1565,7 +1370,6 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     struct ItemStateDesc* temp_r29;
     HSD_JObj* item_jobj1_3;
     HSD_JObj* item_jobj1_2;
-    HSD_JObj* item_jobj1;
     void* new_var;
     void* new_var2;
     void* new_var3;
@@ -1574,12 +1378,11 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     Item* item_data4;
     HSD_JObj* item_jobj2;
     Item* item_data;
-    s32 temp_r4;
-    s32 var_r3;
     ItemAttr* item_attr;
     ItemAttr* item_attr2;
     ItemAttr* item_attr3;
     HSD_JObj* boneCopyArg;
+    HSD_JObj* new_var4;
     HSD_Joint* boneCopyArg2;
     struct ItemStateDesc* temp_r23;
     s32 temp_r0;
@@ -1588,37 +1391,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     item_data = item_gobj->user_data;
     item_data->x24_item_state_index = itemStateID;
     item_data->xDC8_word.flags.x14 = 0;
-    item_jobj1 = item_gobj->hsd_obj;
-    item_jobj1 == 0;
-    if (item_jobj1 == 0)
-    {
-        __assert("jobj.h", 0x394U, "jobj");
-    }
-    if ((&item_data->x4C_pos) == 0)
-    {
-        __assert("jobj.h", 0x395U, "translate");
-    }
-    item_jobj1->translate = item_data->x4C_pos;
-    if ((item_jobj1->flags & 0x02000000) == 0)
-    {
-        if (item_jobj1 != 0)
-        {
-            if (item_jobj1 == 0)
-            {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            temp_r4 = var_r3 = item_jobj1->flags;
-            var_r3 = 0;
-            if (((temp_r4 & 0x800000) == 0) && ((temp_r4 & 0x40) != 0))
-            {
-                var_r3 = 1;
-            }
-            if (var_r3 == 0)
-            {
-                HSD_JObjSetMtxDirtySub(item_jobj1);
-            }
-        }
-    }
+    HSD_JObjSetTranslate(item_gobj->hsd_obj, &item_data->x4C_pos);
     func_80067624(item_gobj, &item_data->xBC0);
     if (item_data->xDC8_word.flags.x2 == 1)
     {
@@ -1663,26 +1436,25 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     {
         item_data->xD0_itemStateDesc = (temp_r23 = (temp_r29 = (new_var2 = &item_data->xC4_article_data->xC_itemStates->x0_itemStateDesc[temp_r0])));
         temp_r23 = (new_var3 = item_data->xD0_itemStateDesc);
-        if ((temp_r23 != NULL) && ((itemStateFlags & ITEM_ANIM_UPDATE) != FALSE))
-        {
+        if (temp_r23 != NULL && (itemStateFlags & ITEM_ANIM_UPDATE)) {
             item_jobj1_2 = GetItemJObj(item_gobj);
             item_data2 = GetItemData(item_gobj);
             HSD_JObjRemoveAnimAll(item_jobj1_2);
+            new_var4 = item_jobj1_2;
             boneCopyArg2 = item_data2->xC8_joint;
             if (boneCopyArg2 != NULL)
             {
-                if (item_jobj1_2 == NULL)
-                {
+                if (item_jobj1_2 == NULL) {
                     boneCopyArg = NULL;
+                } else {
+                    boneCopyArg = new_var4->child;
                 }
-                else boneCopyArg = item_jobj1_2->child;
                 func_8000B804(boneCopyArg, boneCopyArg2->child);
             }
-            func_80268BE0(item_jobj1_2, temp_r23->x0_anim_joint, temp_r23->x4_matanim_joint, temp_r23->x8_parameters, item_data2);
-            func_8000BA0C(item_jobj1_2, item_data2->x5D0_animFrameSpeed);
-            HSD_JObjReqAnimAll(item_jobj1_2, 0.0f);
-            if ((itemStateFlags & ITEM_UNK_UPDATE) != FALSE)
-            {
+            func_80268BE0(new_var4, temp_r23->x0_anim_joint, temp_r23->x4_matanim_joint, temp_r23->x8_parameters, item_data2);
+            func_8000BA0C(new_var4, item_data2->x5D0_animFrameSpeed);
+            HSD_JObjReqAnimAll(new_var4, 0.0f);
+            if (itemStateFlags & 0x80) {
                 item_jobj1_2 = item_gobj->hsd_obj;
                 item_data3 = GetItemData(item_gobj);
                 HSD_JObjSetScaleItem(item_data3, item_jobj1_2, &sp4C);
@@ -1693,9 +1465,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
                 item_data3->xBEC = item_attr2->x20;
                 item_attr3 = item_data3->xCC_item_attr;
                 item_data3->xBDC = item_attr3->x20;
-            }
-            else
-            {
+            } else {
                 item_data4 = item_gobj->user_data;
                 item_jobj1_3 = GetItemJObj(item_gobj);
                 HSD_JObjSetScaleItem2(item_data4, item_gobj->hsd_obj, &sp40);
@@ -1703,9 +1473,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0U;
             item_data->x524 = 0.0f;
-        }
-        else if ((temp_r23 != 0) && ((itemStateFlags & ITEM_CMD_UPDATE) != FALSE))
-        {
+        } else if (temp_r23 != NULL && (itemStateFlags & ITEM_CMD_UPDATE)) {
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0U;
             item_data->x524 = 0.0f;
@@ -1958,8 +1726,6 @@ void func_80269978(HSD_GObj* item_gobj) // Item Think - Collision //
     Item* item_data;
     HSD_JObj* item_jobj;
     s32(*cb_Coll)(HSD_GObj*);
-    s32 var_r3;
-    u32 temp_r4;
 
     item_data = item_gobj->user_data;
     cb_Coll = item_data->itcb.xD1C_callback_Coll;
@@ -1972,34 +1738,7 @@ void func_80269978(HSD_GObj* item_gobj) // Item Think - Collision //
     }
     item_jobj = item_gobj->hsd_obj;
     !item_jobj;
-    if (item_jobj == 0)
-    {
-        __assert("jobj.h", 0x394U, "jobj");
-    }
-    if ((&item_data->x4C_pos) == 0)
-    {
-        __assert("jobj.h", 0x395U, "translate");
-    }
-    item_jobj->translate = item_data->x4C_pos;
-    if ((item_jobj->flags & 0x02000000) == 0)
-    {
-        if (item_jobj != 0)
-        {
-            if (item_jobj == 0)
-            {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            temp_r4 = var_r3 = item_jobj->flags;
-            var_r3 = 0;
-            if (((temp_r4 & 0x800000) == 0) && ((temp_r4 & 0x40) != 0))
-            {
-                var_r3 = 1;
-            }
-            if (var_r3 == 0) {
-                HSD_JObjSetMtxDirtySub(item_jobj);
-            }
-        }
-    }
+    HSD_JObjSetTranslate(item_jobj, &item_data->x4C_pos);
     func_8027574C(item_gobj);
     func_8026C368(item_gobj);
 }

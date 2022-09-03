@@ -3399,7 +3399,7 @@ inline HSD_JObj* jobj_next(HSD_JObj* jobj)
 
 HSD_JObj* func_801C4100(HSD_JObj* jobj)
 {
-    if (!(jobj->flags & 0x1000) && jobj_child(jobj) != NULL) {
+    if (!(jobj->flags & JOBJ_INSTANCE) && jobj_child(jobj) != NULL) {
         return jobj_child(jobj);
     }
     if (jobj_next(jobj) != NULL) {
