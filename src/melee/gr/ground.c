@@ -825,7 +825,6 @@ extern u8 lbl_804D784B[5];
 extern void lbl_801C5F60();
 extern u8 lbl_804D7849;
 extern void PSMTXIdentity();
-extern void HSD_JObjAlloc();
 extern void func_8000F9F8();
 extern void func_80013B14();
 extern void HSD_JObjAddNext();

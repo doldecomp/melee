@@ -603,8 +603,8 @@ lbl_80379C0C:
 /* 80379C1C 003767FC  7C 08 03 A6 */	mtlr r0
 /* 80379C20 00376800  4E 80 00 20 */	blr 
 
-.global func_80379C24
-func_80379C24:
+.global HSD_MtxGetRotation
+HSD_MtxGetRotation:
 /* 80379C24 00376804  7C 08 02 A6 */	mflr r0
 /* 80379C28 00376808  90 01 00 04 */	stw r0, 4(r1)
 /* 80379C2C 0037680C  94 21 FF 98 */	stwu r1, -0x68(r1)
@@ -844,8 +844,8 @@ HSD_MtxGetTranslate:
 /* 80379F80 00376B60  D0 04 00 08 */	stfs f0, 8(r4)
 /* 80379F84 00376B64  4E 80 00 20 */	blr 
 
-.global func_80379F88
-func_80379F88:
+.global HSD_MtxGetScale
+HSD_MtxGetScale:
 /* 80379F88 00376B68  7C 08 02 A6 */	mflr r0
 /* 80379F8C 00376B6C  90 01 00 04 */	stw r0, 4(r1)
 /* 80379F90 00376B70  94 21 FF A8 */	stwu r1, -0x58(r1)

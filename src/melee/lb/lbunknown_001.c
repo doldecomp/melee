@@ -205,7 +205,7 @@ static void lbl_8000B9D8(HSD_JObj* jobj, f32** arg1, s32 arg2)
 void func_8000BA0C(HSD_JObj* jobj, f32 arg8)
 {
     f32* sp10 = &arg8;
-    func_8036F0F0(jobj, lbl_8000B9D8, &sp10);
+    HSD_JObjWalkTree(jobj, lbl_8000B9D8, &sp10);
 }
 
 // lbDObjSetRateAll
@@ -396,7 +396,7 @@ void func_8000C1C0(HSD_JObj* jobj, HSD_JObj* constraint)
     HSD_RObj* robj = HSD_RObjAlloc();
     HSD_RObjSetFlags(robj, 0x90000001);
     HSD_RObjSetConstraintObj(robj, constraint);
-    func_80371C68(jobj, robj);
+    HSD_JObjPrependRObj(jobj, robj);
 }
 
 void func_8000C228(HSD_JObj* jobj, HSD_JObj* constraint)
@@ -404,7 +404,7 @@ void func_8000C228(HSD_JObj* jobj, HSD_JObj* constraint)
     HSD_RObj* robj = HSD_RObjAlloc();
     HSD_RObjSetFlags(robj, 0x90000002);
     HSD_RObjSetConstraintObj(robj, constraint);
-    func_80371C68(jobj, robj);
+    HSD_JObjPrependRObj(jobj, robj);
 }
 
 void func_8000C290(HSD_JObj* jobj, HSD_JObj* constraint)
@@ -412,7 +412,7 @@ void func_8000C290(HSD_JObj* jobj, HSD_JObj* constraint)
     HSD_RObj* robj = HSD_RObjAlloc();
     HSD_RObjSetFlags(robj, 0x90000004);
     HSD_RObjSetConstraintObj(robj, constraint);
-    func_80371C68(jobj, robj);
+    HSD_JObjPrependRObj(jobj, robj);
 }
 
 void func_8000C2F8(HSD_JObj* jobj, HSD_JObj* constraint)
@@ -439,7 +439,7 @@ void func_8000C390(HSD_JObj* jobj)
             break;
         }
         next = robj_next(cur);
-        func_80371C98(jobj, cur);
+        HSD_JObjDeleteRObj(jobj, cur);
         HSD_RObjRemove(cur);
         cur = next;
     }
@@ -452,7 +452,7 @@ void func_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
     if (robj != NULL) {
         robj->u.limit = limit;
     }
-    func_80371C68(jobj, robj);
+    HSD_JObjPrependRObj(jobj, robj);
 }
 
 // https://decomp.me/scratch/atKIC
