@@ -771,7 +771,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/leak.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/debug.s.o\
+	$(BUILD_DIR)/src/sysdolphin/baselib/debug.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/synth.s.o\
