@@ -29,3 +29,10 @@ _db_stack_end = _stack_addr;
 __ArenaLo = (_db_stack_addr + 0x1f) & ~0x1f;
 __ArenaHi = 0x81700000 ;
 }
+
+/* #pragma force_active on is NOT working for this symbol for some reason. So the linker
+ * gets to have a crowbar in its face to stop this symbol from being stripped. Don't you
+ * just love Metrowerks bugs? */
+FORCEACTIVE {
+    lbl_804C28D0
+}
