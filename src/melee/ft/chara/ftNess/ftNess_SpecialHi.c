@@ -23,22 +23,22 @@ f32 return_float4(void) // -0x62A4 //
 
 f32 return_float5(void) // -0x62A0 // 
 {
-    return 1.5707963705062866f;
+    return M_PI / 2;
 }
 
 f64 return_float6(void) // -0x6294 //
 {
-    return 6.283185307179586;
+    return 2 * M_PI;
 }
 
 f64 return_float7(void) // -0x628C //
 {
-    return 3.141592653589793;
+    return M_PI;
 }
 
 f64 return_float8(void) // -0x6284 //
 {
-    return 1.5707963267948966;
+    return M_PI / 2;
 }
 
 f32 return_float9(void) // -0x6280 //
@@ -53,7 +53,7 @@ f64 return_float10(void) // -0x6278 //
 
 f32 return_float12(void) // -0x6270 //
 {
-    return 0.01745329238474369f;
+    return M_PI / 180;
 }
 
 f32 return_float13(void)
@@ -83,17 +83,17 @@ f64 return_float17(void)
 
 f32 return_float18(void)
 {
-    return 9.999999747378752e-05f;
+    return 1e-4F;
 }
 
 f32 return_float19(void)
 {
-    return -9.999999747378752e-05f;
+    return -1e-4F;
 }
 
 f64 return_float20(void)
 {
-    return -1.5707963267948966;
+    return -M_PI / 2;
 }
 
 extern void efLib_DestroyAll(HSD_GObj*);
@@ -333,65 +333,65 @@ void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* fighter_gobj, CollData* coll_
     fp = getFighter(fighter_gobj);
     while (fp->nessVars[0].SpecialHi.aerialVel < 0.0f)
     {
-        fp->nessVars[0].SpecialHi.aerialVel += (f64)6.283185307179586;
+        fp->nessVars[0].SpecialHi.aerialVel += 2 * M_PI;
     }
-    while (fp->nessVars[0].SpecialHi.aerialVel > (f64)6.283185307179586)
+    while (fp->nessVars[0].SpecialHi.aerialVel > 2 * M_PI)
     {
-        fp->nessVars[0].SpecialHi.aerialVel -= (f64)6.283185307179586;
+        fp->nessVars[0].SpecialHi.aerialVel -= 2 * M_PI;
     }
     if ((coll_data->x134_envFlags & 0x3F) != 0)
     {
         phi_f1 = atan2f(coll_data->x160_rightwall.normal.y, coll_data->x160_rightwall.normal.x);
         while (phi_f1 < 0.0f)
         {
-            phi_f1 += (f64)6.283185307179586;
+            phi_f1 += 2 * M_PI;
         }
 
-        while (phi_f1 > (f64)6.283185307179586)
+        while (phi_f1 > 2 * M_PI)
         {
-            phi_f1 -= (f64)6.283185307179586;
+            phi_f1 -= 2 * M_PI;
         }
-        phi_f3 = ((f64)3.141592653589793 + (f64)fp->nessVars[0].SpecialHi.aerialVel);
+        phi_f3 = M_PI + fp->nessVars[0].SpecialHi.aerialVel;
 
         while (phi_f3 < 0.0f)
         {
-            phi_f3 += (f64)6.283185307179586;
+            phi_f3 += 2 * M_PI;
         }
 
-        while (phi_f3 > (f64)6.283185307179586)
+        while (phi_f3 > 2 * M_PI)
         {
-            phi_f3 -= (f64)6.283185307179586;
+            phi_f3 -= 2 * M_PI;
         }
         if ((phi_f3 - phi_f1) < 0.0f)
         {
-            phi_f1 += (f64)1.5707963267948966;
+            phi_f1 += M_PI / 2;
         }
         else
         {
-            phi_f1 -= (f64)1.5707963267948966;
+            phi_f1 -= M_PI / 2;
         }
     }
     if ((coll_data->x134_envFlags & 0xFC0) != 0)
     {
         phi_f1 = atan2f(coll_data->x174_leftwall.normal.y, coll_data->x174_leftwall.normal.x);
-        phi_f3 = (f64)3.141592653589793 + phi_f1;
+        phi_f3 = M_PI + phi_f1;
 
         while (phi_f3 < 0.0f)
         {
-            phi_f3 += (f64)6.283185307179586;
+            phi_f3 += 2 * M_PI;
         }
 
-        while (phi_f3 > (f64)6.283185307179586)
+        while (phi_f3 > 2 * M_PI)
         {
-            phi_f3 -= (f64)6.283185307179586;
+            phi_f3 -= 2 * M_PI;
         }
         if ((fp->nessVars[0].SpecialHi.aerialVel - phi_f3) < 0.0f)
         {
-            phi_f1 += (f64)1.5707963267948966;
+            phi_f1 += M_PI / 2;
         }
         else
         {
-            phi_f1 -= (f64)1.5707963267948966;
+            phi_f1 -= M_PI / 2;
         }
     }
     sp14.y = 0.0f;
@@ -452,7 +452,7 @@ void ftNess_SpecialHi_StartAction(HSD_GObj* fighter_gobj)  // Ness's grounded PK
     }
     else 
     {
-        phi_f0 = (f64)3.141592653589793;
+        phi_f0 = M_PI;
     }
     fp->nessVars[0].SpecialHi.aerialVel = (f32)phi_f0;
     fp->nessVars[0].SpecialHi.facingDir = (f32)1.0f;
@@ -510,7 +510,7 @@ void ftNess_SpecialAirHiStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial P
         phi_f0 = (f64)0.0;
     }
     else {
-        phi_f0 = (f64)3.141592653589793;
+        phi_f0 = M_PI;
     }
     fp->nessVars[0].SpecialHi.aerialVel = (f32)phi_f0;
     fp->nessVars[0].SpecialHi.facingDir = (f32)1.0f;
@@ -1513,22 +1513,22 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
     {
         if (1.0f == fp->x2C_facing_direction)
         {
-            phi_f31 = -1.5707963267948966;
+            phi_f31 = -M_PI / 2;
         }
         else
         {
-            phi_f31 = 1.5707963267948966;
+            phi_f31 = M_PI / 2;
         }
         fp->nessVars[0].SpecialHi.aerialVel = (f32)(phi_f31 + atan2f(fp->x6F0_collData.x14C_ground.normal.y, fp->x6F0_collData.x14C_ground.normal.x));
         return;
     }
     if (1.0f == fp->x2C_facing_direction)
     {
-        phi_f31_2 = 1.5707963267948966;
+        phi_f31_2 = M_PI / 2;
     }
     else
     {
-        phi_f31_2 = -1.5707963267948966;
+        phi_f31_2 = -M_PI / 2;
     }
     fp->nessVars[0].SpecialHi.aerialVel = (f32)(phi_f31_2 + atan2f(fp->x6F0_collData.x14C_ground.normal.y, fp->x6F0_collData.x14C_ground.normal.x));
 }

@@ -7,8 +7,6 @@
 
 #include <sysdolphin/baselib/cobj.h>
 
-#define HALF_PI64 1.5707963267948966
-
 extern inline float sqrtf_accurate(float x);
 
 static float lbvector_Len(Vec *vec);

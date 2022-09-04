@@ -1,7 +1,5 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
-#define PI64 3.141592653589793
-
 // 0x800E5CB0
 // https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position for Blaster GFX - used in Fox's fp code
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
@@ -183,7 +181,7 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
         }
         else
         {
-            launchAngle = PI64 - foxAttrs->x10_FOX_BLASTER_ANGLE;
+            launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
         }
 
         func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
@@ -366,7 +364,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
             }
             else
             {
-                launchAngle = PI64 - foxAttrs->x10_FOX_BLASTER_ANGLE;
+                launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
             }
 
             func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
@@ -508,7 +506,7 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 
             else
             {
-                launchAngle = PI64 - foxAttrs->x10_FOX_BLASTER_ANGLE;
+                launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
             }
 
             func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
