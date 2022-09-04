@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from re import match
-from typing import Dict, List
+from typing import Dict, List, Set, Iterable
 
 SYMBOL_NEW_REGEX = r"^\s*"\
     r"(?P<SectOfs>\w{8})\s+"\
@@ -61,11 +61,15 @@ class Map:
     # Outer dict key = object file name, value = header dict
     # Header dict key = section name, value = header symbol
     headers: Dict[str, Dict[str, Symbol]]
+    correction: int
+    __correction_symbols: Set[str]
 
-    def __init__(self, path: str, old_linker: bool):
+    def __init__(self, path: str, old_linker: bool, correction_symbols: Iterable[str]):
         """Open and parse symbol map file"""
         # Initialize dict
         self.headers = dict()
+        self.correction = 0
+        self.__correction_symbols = set(correction_symbols)
         # Read asm
         with open(path, "r") as f:
             map_data = f.readlines()
@@ -78,7 +82,7 @@ class Map:
         for i in range(len(map_data)):
             # Search for "* section layout"
             sect_match = match(MAP_SECTION_REGEX, map_data[i])
-            if sect_match != None:
+            if sect_match is not None:
                 # Parse current section if this is not the first section
                 if sect_start != -1:
                     self.parse_section(
@@ -99,6 +103,10 @@ class Map:
             if symbol is not None:
                 # "Header symbol" refers to the first symbol in the object file
                 obj_file = symbol.object_file
+               
+                if symbol.name in self.__correction_symbols:
+                    self.correction += symbol.size
+
                 if obj_file != curr_object:
                     # Create object file entry
                     if obj_file not in self.headers:
