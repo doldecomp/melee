@@ -4,6 +4,9 @@ ctx.c
 ctx_includes.h
 *.s.c
 
+# Python
+venv/
+
 # .DS_Store
 .DS_Store
 
