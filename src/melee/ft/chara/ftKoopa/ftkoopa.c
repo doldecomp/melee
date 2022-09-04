@@ -55,8 +55,8 @@ void func_80132B38(void) {
     return;
 }
 
-void ftKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
 void ftKoopa_OnItemInvisible(HSD_GObj* gobj) {

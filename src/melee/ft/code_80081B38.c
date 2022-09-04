@@ -12,7 +12,7 @@ static f32 const lbl_804D83B4 = 0.5F;
 static f64 const lbl_804D83B8 = 0.0F;
 
 #pragma push
-asm void func_80081B38(HSD_GObj* fighterObj)
+asm void func_80081B38(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80081B38 0007E718  7C 08 02 A6 */	mflr r0
@@ -148,7 +148,7 @@ lbl_80081CE0:
 extern unk_t func_80081A00();
 
 #pragma push
-asm BOOL func_80081D0C(HSD_GObj fighterObj)
+asm BOOL func_80081D0C(HSD_GObj fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80081D0C 0007E8EC  7C 08 02 A6 */	mflr r0
@@ -4022,7 +4022,7 @@ lbl_80084EBC:
 #pragma pop
 
 #pragma push
-asm void func_80084EEC(HSD_GObj* fighterObj)
+asm void func_80084EEC(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80084EEC 00081ACC  7C 08 02 A6 */	mflr r0
@@ -4049,7 +4049,7 @@ asm void func_80084EEC(HSD_GObj* fighterObj)
 #pragma pop
 
 #pragma push
-asm void func_80084F3C(HSD_GObj* fighterObj){ // clang-format off
+asm void func_80084F3C(HSD_GObj* fighter_gobj){ // clang-format off
     nofralloc
 /* 80084F3C 00081B1C  7C 08 02 A6 */	mflr r0
 /* 80084F40 00081B20  90 01 00 04 */	stw r0, 4(r1)
@@ -4086,7 +4086,7 @@ lbl_80084F88:
 unk_t func_80085030();
 
 #pragma push
-asm void func_80084FA8(HSD_GObj* fighterObj)
+asm void func_80084FA8(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80084FA8 00081B88  7C 08 02 A6 */	mflr r0
@@ -4235,7 +4235,7 @@ lbl_80085118:
 #pragma pop
 
 #pragma push
-asm void func_80085134(HSD_GObj* fighterObj)
+asm void func_80085134(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80085134 00081D14  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -4250,7 +4250,7 @@ asm void func_80085134(HSD_GObj* fighterObj)
 #pragma pop
 
 #pragma push
-asm void func_80085154(HSD_GObj* fighterObj)
+asm void func_80085154(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80085154 00081D34  7C 08 02 A6 */	mflr r0
@@ -4316,7 +4316,7 @@ lbl_800851F8:
 #pragma pop
 
 #pragma push
-asm void func_80085204(HSD_GObj* fighterObj)
+asm void func_80085204(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80085204 00081DE4  80 63 00 2C */	lwz r3, 0x2c(r3)

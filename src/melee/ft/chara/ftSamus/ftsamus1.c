@@ -1,8 +1,8 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
-void ftSamus_OnDeath(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
-    func_80074A4C(fighterObj, 0, 0);
+void ftSamus_OnDeath(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
+    func_80074A4C(fighter_gobj, 0, 0);
     fp->sa.samus.x222C = 0;
     fp->sa.samus.x2230 = 0;
     fp->sa.samus.x2238 = 0;
@@ -11,9 +11,9 @@ void ftSamus_OnDeath(HSD_GObj* fighterObj) {
     fp->sa.samus.x2240 = 0;
 }
 
-void ftSamus_OnLoad(HSD_GObj* fighterObj) {
+void ftSamus_OnLoad(HSD_GObj* fighter_gobj) {
 
-    Fighter* fp = fighterObj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     void** item_list = fp->x10C_ftData->x48_items;
 
     fp->x2224_flag.bits.b7 = 1;
@@ -26,30 +26,30 @@ void ftSamus_OnLoad(HSD_GObj* fighterObj) {
     func_8026B3F8(item_list[3], 0x60U);
 }
 
-void ftSamus_80128428(HSD_GObj* fighterObj) {
-    ftSamus_80129258(fighterObj);
-    ftSamus_8012A640(fighterObj);
-    func_800D9C98(fighterObj);
+void ftSamus_80128428(HSD_GObj* fighter_gobj) {
+    ftSamus_80129258(fighter_gobj);
+    ftSamus_8012A640(fighter_gobj);
+    func_800D9C98(fighter_gobj);
 }
 
-void ftSamus_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 0, 0);
+void ftSamus_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
 }
 
-void ftSamus_OnItemInvisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemInvisible(fighterObj, 0);
+void ftSamus_OnItemInvisible(HSD_GObj *fighter_gobj) {
+    Fighter_OnItemInvisible(fighter_gobj, 0);
 }
 
-void ftSamus_OnItemVisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemVisible(fighterObj, 0);
+void ftSamus_OnItemVisible(HSD_GObj *fighter_gobj) {
+    Fighter_OnItemVisible(fighter_gobj, 0);
 }
 
-void ftSamus_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
+void ftSamus_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1) {
+    Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
 }
 
-void ftSamus_80128628(HSD_GObj* fighterObj) {
-    Fighter* fp = getFighter(fighterObj);
+void ftSamus_80128628(HSD_GObj* fighter_gobj) {
+    Fighter* fp = getFighter(fighter_gobj);
     ftSamusAttributes* attr = fp->x2D4_specialAttributes;
     s32 samus_x2230 = fp->sa.samus.x2230;
     if (samus_x2230 == attr->x18) {
@@ -57,8 +57,8 @@ void ftSamus_80128628(HSD_GObj* fighterObj) {
     }
 }
 
-void ftSamus_LoadSpecialAttrs(HSD_GObj* fighterObj) {
-    COPY_ATTRS(fighterObj, ftSamusAttributes);
+void ftSamus_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
+    COPY_ATTRS(fighter_gobj, ftSamusAttributes);
     if (fp->x34_scale.y != 1.0f) {                                        
         sA2->x8 *= fp->x34_scale.y;                                       
         sA2->x74_vec.y *= fp->x34_scale.y;    
@@ -68,18 +68,18 @@ void ftSamus_LoadSpecialAttrs(HSD_GObj* fighterObj) {
     }  
 }
 
-void ftSamus_80128770(HSD_AObj* fighterObj, f32 rate) {
-    if (fighterObj && !(HSD_AObjGetFlags(fighterObj) & 0x20000000)) {
-        HSD_AObjSetRate(fighterObj, rate);
+void ftSamus_80128770(HSD_AObj* fighter_gobj, f32 rate) {
+    if (fighter_gobj && !(HSD_AObjGetFlags(fighter_gobj) & 0x20000000)) {
+        HSD_AObjSetRate(fighter_gobj, rate);
     }
 }
 
-void ftSamus_801287C4(HSD_GObj* fighterObj, s32 index, f32 argf) {
+void ftSamus_801287C4(HSD_GObj* fighter_gobj, s32 index, f32 argf) {
 
     Fighter *fighter_copy;
     Vec scale;
 
-    Fighter* fp = getFighter(fighterObj);
+    Fighter* fp = getFighter(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
     struct UNK_SAMUS_S1* unkItemType = item_list[4];
     func_8007E620(fp, unkItemType->x0_joint); 

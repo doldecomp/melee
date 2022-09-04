@@ -20,8 +20,8 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj) {
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx
-void ftCFalcon_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
 // ftCFalcon_OnItemInvisible

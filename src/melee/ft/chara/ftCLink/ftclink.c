@@ -71,8 +71,8 @@ void ftCLink_OnItemDropExt(HSD_GObj* gobj, s32 arg1)
     ftCLink_OnItemDrop(gobj, arg1);
 }
 
-void ftCLink_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+void ftCLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
 void ftCLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)

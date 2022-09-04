@@ -1,13 +1,13 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
-void ftLuigi_OnDeath(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
-    func_80074A4C(fighterObj, 0, 0);
+void ftLuigi_OnDeath(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
+    func_80074A4C(fighter_gobj, 0, 0);
     fp->sa.luigi.x2234 = 0;
 }
 
-void ftLuigi_OnLoad(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
+void ftLuigi_OnLoad(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftLuigiAttributes);
@@ -15,33 +15,33 @@ void ftLuigi_OnLoad(HSD_GObj* fighterObj) {
     func_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
 
-void ftLuigi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+void ftLuigi_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
-void ftLuigi_OnItemInvisible(HSD_GObj* fighterObj) {
-    Fighter_OnItemInvisible(fighterObj, 1);
+void ftLuigi_OnItemInvisible(HSD_GObj* fighter_gobj) {
+    Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
-void ftLuigi_OnItemVisible(HSD_GObj* fighterObj) {
-    Fighter_OnItemVisible(fighterObj, 1);
+void ftLuigi_OnItemVisible(HSD_GObj* fighter_gobj) {
+    Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftLuigi_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
+void ftLuigi_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1) {
+    Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
 }
 
-void ftLuigi_LoadSpecialAttrs(HSD_GObj* fighterObj) {
-    COPY_ATTRS(fighterObj, ftLuigiAttributes);
+void ftLuigi_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
+    COPY_ATTRS(fighter_gobj, ftLuigiAttributes);
 }
 
 
-void ftLuigi_OnKnockbackEnter(HSD_GObj* fighterObj) {
-    Fighter_OnKnockbackEnter(fighterObj, 1);
+void ftLuigi_OnKnockbackEnter(HSD_GObj* fighter_gobj) {
+    Fighter_OnKnockbackEnter(fighter_gobj, 1);
 }
 
-void ftLuigi_OnKnockbackExit(HSD_GObj* fighterObj) {
-    Fighter_OnKnockbackExit(fighterObj, 1);
+void ftLuigi_OnKnockbackExit(HSD_GObj* fighter_gobj) {
+    Fighter_OnKnockbackExit(fighter_gobj, 1);
 }
 
 void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2)

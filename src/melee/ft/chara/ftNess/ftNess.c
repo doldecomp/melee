@@ -49,8 +49,8 @@ f32 ftNess_GetAbsorbHeal(Fighter* fp)
     return ((ftNessAttributes*)fp->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
 }
 
-void ftNess_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag) {
-    Fighter_OnItemPickup(fighterObj, catchItemFlag, 1, 1);
+void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag) {
+    Fighter_OnItemPickup(fighter_gobj, catchItemFlag, 1, 1);
 }
 
 void ftNess_OnItemInvisible(HSD_GObj* gobj)

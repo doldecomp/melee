@@ -60,27 +60,27 @@ typedef struct _ftDonkeyAttributes {
 
 } ftDonkeyAttributes;
 
-void ftDonkey_800DF980(HSD_GObj* fighterObj);
+void ftDonkey_800DF980(HSD_GObj* fighter_gobj);
 
-s32 ftDonkey_800DFA98(HSD_GObj* fighterObj);
+s32 ftDonkey_800DFA98(HSD_GObj* fighter_gobj);
 
-void ftDonkey_800DFAE4(HSD_GObj* fighterObj, f32);
-void ftDonkey_800DFB54(HSD_GObj* fighterObj);
+void ftDonkey_800DFAE4(HSD_GObj* fighter_gobj, f32);
+void ftDonkey_800DFB54(HSD_GObj* fighter_gobj);
 
-void ftDonkey_800E017C(HSD_GObj* fighterObj);
-void ftDonkey_800E0294(HSD_GObj* fighterObj);
-void ftDonkey_800E05E4(HSD_GObj* fighterObj);
-void ftDonkey_800E07B0(HSD_GObj* fighterObj);
+void ftDonkey_800E017C(HSD_GObj* fighter_gobj);
+void ftDonkey_800E0294(HSD_GObj* fighter_gobj);
+void ftDonkey_800E05E4(HSD_GObj* fighter_gobj);
+void ftDonkey_800E07B0(HSD_GObj* fighter_gobj);
 
-void ftDonkey_8010D774(HSD_GObj* fighterObj);
+void ftDonkey_8010D774(HSD_GObj* fighter_gobj);
 
-void ftDonkey_8010DB3C(HSD_GObj* fighterObj);
-void ftDonkey_8010DE88(HSD_GObj* fighterObj);
-void ftDonkey_8010DFF8(HSD_GObj* fighterObj);
+void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj);
+void ftDonkey_8010DE88(HSD_GObj* fighter_gobj);
+void ftDonkey_8010DFF8(HSD_GObj* fighter_gobj);
 
-void ftDonkey_8010E0CC(HSD_GObj* fighterObj);
-void ftDonkey_8010E148(HSD_GObj* fighterObj);
-void ftDonkey_8010E464(HSD_GObj* fighterObj);
-void ftDonkey_8010E4EC(HSD_GObj* fighterObj);
+void ftDonkey_8010E0CC(HSD_GObj* fighter_gobj);
+void ftDonkey_8010E148(HSD_GObj* fighter_gobj);
+void ftDonkey_8010E464(HSD_GObj* fighter_gobj);
+void ftDonkey_8010E4EC(HSD_GObj* fighter_gobj);
 
-void ftDonkey_DestroyAllEffects(HSD_GObj* fighterObj);
+void ftDonkey_DestroyAllEffects(HSD_GObj* fighter_gobj);

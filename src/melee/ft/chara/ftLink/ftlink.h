@@ -26,5 +26,5 @@ typedef struct _ftLinkAttributes {
     f32 xD8;
 } ftLinkAttributes;
 
-void ftLink_OnItemDrop(HSD_GObj* fighterObj, BOOL arg1);
-void ftLink_OnItemPickup(HSD_GObj* fighterObj, BOOL bool);
+void ftLink_OnItemDrop(HSD_GObj* fighter_gobj, BOOL arg1);
+void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool);

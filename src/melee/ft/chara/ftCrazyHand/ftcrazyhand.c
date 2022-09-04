@@ -1,24 +1,24 @@
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 
-void ftCrazyhand_OnDeath(HSD_GObj* fighterObj) {
+void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj) {
 
 }
 
-void ftCrazyhand_OnLoad(HSD_GObj* fighterObj) {
+void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj) {
     ftData* ftdata;
     ftCrazyHandAttributes* ftData_attr;
     void** items;
     Fighter* fp;
 
     
-    fp = fighterObj->user_data;
+    fp = fighter_gobj->user_data;
     ftdata = fp->x10C_ftData;
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 
     PUSH_ATTRS(fp, ftCrazyHandAttributes);
     
-    func_8015BDB4(fighterObj);
+    func_8015BDB4(fighter_gobj);
     func_8026B3F8(items[0], 0x7F);
     func_8026B3F8(items[1], 0x80);
     func_8026B3F8(items[2], 0x81);
@@ -40,7 +40,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighterObj) {
     fp->x2380 = -1;
     fp->x235C = 0.0f;
     fp->x2360 = 0;
-    fp->sa.masterhand.x222C = func_8015C244(fighterObj, &fp->xB0_pos);
+    fp->sa.masterhand.x222C = func_8015C244(fighter_gobj, &fp->xB0_pos);
     fp->sa.masterhand.x2238 = 1.0f;
     fp->sa.masterhand.x224C = 0;
     fp->sa.masterhand.x2250 = 0x159; 

@@ -3,12 +3,12 @@
 
 #include <melee/it/itkind.h>
 
-void ftGKoopa_OnDeath(HSD_GObj* fighterObj) {
+void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj) {
     s32 unused[2];
-    Fighter* fp = fighterObj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
 
-    func_80074A4C(fighterObj, 0, 0);
+    func_80074A4C(fighter_gobj, 0, 0);
     fp->dmg.x18B0 = koopaAttr->x0;
     fp->sa.gkoopa.x222C = koopaAttr->x10;
     fp->sa.gkoopa.x2230 = koopaAttr->x18;
@@ -34,8 +34,8 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     fp->x222A_flag.bits.b0 = 1;
 }
 
-void ftGKoopa_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+void ftGKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
 void ftGKoopa_OnItemInvisible(HSD_GObj* gobj) {

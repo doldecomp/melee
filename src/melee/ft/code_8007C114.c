@@ -12,10 +12,10 @@ extern unk_t func_8000ACFC();
 extern unk_t func_800089B8();
 extern unk_t func_80007AFC();
 
-void func_8007C224(HSD_GObj* fighterObj);
+void func_8007C224(HSD_GObj* fighter_gobj);
 
 #pragma push
-asm void func_8007C114(HSD_GObj* fighterObj)
+asm void func_8007C114(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 8007C114 00078CF4  7C 08 02 A6 */	mflr r0
@@ -50,7 +50,7 @@ lbl_8007C154:
 #pragma pop
 
 #pragma push
-asm void func_8007C17C(HSD_GObj* fighterObj)
+asm void func_8007C17C(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 8007C17C 00078D5C  7C 08 02 A6 */	mflr r0
@@ -99,7 +99,7 @@ asm void func_8007C17C(HSD_GObj* fighterObj)
 #pragma pop
 
 #pragma push
-asm void func_8007C224(HSD_GObj* fighterObj)
+asm void func_8007C224(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 8007C224 00078E04  7C 08 02 A6 */	mflr r0
@@ -294,7 +294,7 @@ lbl_8007C49C:
 #pragma pop
 
 #pragma push
-asm void func_8007C4BC(HSD_GObj* fighterObj)
+asm void func_8007C4BC(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 8007C4BC 0007909C  7C 08 02 A6 */	mflr r0

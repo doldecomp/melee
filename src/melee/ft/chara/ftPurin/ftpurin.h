@@ -21,4 +21,4 @@ typedef struct _ftPurinAttributes {
 
 
 /// functions
-void func_8013C494(HSD_GObj* fighterObj);
+void func_8013C494(HSD_GObj* fighter_gobj);

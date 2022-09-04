@@ -132,13 +132,13 @@ void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj *);
 
 u32 Fighter_NewSpawn_80068E40();
 
-void Fighter_ActionStateChange_800693AC(struct _HSD_GObj *fighterObj, s32 newAction, s32 flags, struct _HSD_GObj *otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
+void Fighter_ActionStateChange_800693AC(struct _HSD_GObj *fighter_gobj, s32 newAction, s32 flags, struct _HSD_GObj *otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
 
 void func_8006E9B4();
 void func_8006EBA4(struct _HSD_GObj *);
-void func_8006EBE8(struct _HSD_GObj *fighterObj, f32, f32, f32);
+void func_8006EBE8(struct _HSD_GObj *fighter_gobj, f32, f32, f32);
 
-void func_8006F0FC(struct _HSD_GObj *fighterObj, f32);
+void func_8006F0FC(struct _HSD_GObj *fighter_gobj, f32);
 void ftAnim_SetAnimRate(struct _HSD_GObj *, f32);
 BOOL ftAnim_IsFramesRemaining(struct _HSD_GObj *);
 
@@ -206,7 +206,7 @@ void func_8007ABD0(struct _Hitbox *, u32 damageAmount, struct _HSD_GObj *);
 void func_8007AE80();
 void func_8007AEE0(struct _HSD_GObj *);
 
-void func_8007AF28(struct _HSD_GObj *fighterObj);
+void func_8007AF28(struct _HSD_GObj *fighter_gobj);
 
 void func_8007AFF8(struct _HSD_GObj *);
 
@@ -440,7 +440,7 @@ s32 func_800C0694();
 
 void func_800C09B4(struct _HSD_GObj *);
 
-void func_800C0A98(struct _HSD_GObj *fighterObj);
+void func_800C0A98(struct _HSD_GObj *fighter_gobj);
 
 void func_800C1E64(struct _HSD_GObj *pPlayerEntityStruct, s32, s32, u8, f32); // UnclePunch Map file: AS_203_PassiveWalljump_Walljump
 
@@ -491,7 +491,7 @@ void func_800D1E80();
 
 void func_800D237C();
 
-void func_800D3158(struct _HSD_GObj *fighterObj);
+void func_800D3158(struct _HSD_GObj *fighter_gobj);
 
 void func_800D4F24(struct _HSD_GObj *, s32);
 
@@ -524,7 +524,7 @@ void func_800DE508(HSD_GObj *);
 
 void func_800DE7C0(struct _HSD_GObj *, s32, s32);
 
-void func_800DEEA8(struct _HSD_GObj *fighterObj);
+void func_800DEEA8(struct _HSD_GObj *fighter_gobj);
 
 u32 func_800DEEE8(struct _Fighter *, struct _Vec2 *);
 void func_800DEF38();
@@ -559,7 +559,7 @@ void ftNess_SpecialHiTakeDamage(struct _HSD_GObj *);
 
 void ftPikachu_LoadSpecialAttrs(struct _HSD_GObj *);
 
-f32 ftSamus_80128AC8(HSD_GObj *fighterObj, f32 farg1, f32 farg2);
+f32 ftSamus_80128AC8(HSD_GObj *fighter_gobj, f32 farg1, f32 farg2);
 void ftSamus_80128B1C(HSD_GObj *, f32, f32, f32);
 
 void ftMars_OnLoadForRoy(struct _Fighter *);
