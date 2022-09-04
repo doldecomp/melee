@@ -20,8 +20,8 @@ void func_800E5588(HSD_GObj* gobj)
     ftFox_RemoveBlaster(gobj);
 }
 
-void ftFox_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+void ftFox_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
 void ftFox_OnItemInvisible(HSD_GObj* gobj) 
@@ -73,10 +73,10 @@ void ftFox_OnKnockbackEnter(HSD_GObj* gobj) {
     ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
 }
 
-void ftFox_OnKnockbackExit(HSD_GObj* fighterObj) {
-    Fighter_OnKnockbackExit(fighterObj, 1);
-    ftAnim_ApplyPartAnim(fighterObj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(fighterObj, 4, 2, 0.0f); 
+void ftFox_OnKnockbackExit(HSD_GObj* fighter_gobj) {
+    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    ftAnim_ApplyPartAnim(fighter_gobj, 3, 2, 0.0f);
+    ftAnim_ApplyPartAnim(fighter_gobj, 4, 2, 0.0f); 
 }
 
 //// End of File

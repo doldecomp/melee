@@ -2005,9 +2005,9 @@ typedef struct _Fighter {
     /* 0x23B8 */ s32 x23B8;
 } Fighter;
 
-inline Fighter* getFighter(HSD_GObj* fighterObj) 
+inline Fighter* getFighter(HSD_GObj* fighter_gobj) 
 {
-    return fighterObj->user_data;
+    return fighter_gobj->user_data;
 }
 
 inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
@@ -2071,42 +2071,42 @@ inline f32 stickGetDir(f32 x1, f32 x2)
 void Fighter_800679B0();
 void Fighter_FirstInitialize_80067A84();
 void Fighter_LoadCommonData();
-void Fighter_UpdateModelScale(HSD_GObj* fighterObj);
+void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj);
 void Fighter_UnkInitReset_80067C98(Fighter*);
-void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighterObj);
-void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighterObj);
+void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj);
+void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighter_gobj);
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
-void Fighter_ResetInputData_80068854(HSD_GObj* fighterObj);
-void Fighter_UnkInitLoad_80068914(HSD_GObj* fighterObj, struct S_TEMP1* argdata);
+void Fighter_ResetInputData_80068854(HSD_GObj* fighter_gobj);
+void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj, struct S_TEMP1* argdata);
 u32 Fighter_NewSpawn_80068E40();
-void Fighter_80068E64(HSD_GObj* fighterObj);
+void Fighter_80068E64(HSD_GObj* fighter_gobj);
 HSD_GObj* Fighter_80068E98(struct S_TEMP1* input);
-void Fighter_ActionStateChange_800693AC(HSD_GObj* fighterObj, s32 new_action_state_index, s32 flags, HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
-void Fighter_8006A1BC(HSD_GObj* fighterObj);
-void Fighter_8006A360(HSD_GObj* fighterObj);
-void Fighter_8006ABA0(HSD_GObj* fighterObj);
-void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighterObj);
-void Fighter_Spaghetti_8006AD10(HSD_GObj* fighterObj);
-void Fighter_procUpdate(HSD_GObj* fighterObj, s32 dummy);
-void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj);
-void Fighter_8006C27C(HSD_GObj* fighterObj, s32 unused, s32 unused2, s32 unused3);
-void Fighter_8006C5F4(HSD_GObj* fighterObj);
-void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighterObj);
-void Fighter_8006C80C(HSD_GObj* fighterObj);
-void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighterObj);
-void Fighter_8006CB94(HSD_GObj* fighterObj);
+void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 new_action_state_index, s32 flags, HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
+void Fighter_8006A1BC(HSD_GObj* fighter_gobj);
+void Fighter_8006A360(HSD_GObj* fighter_gobj);
+void Fighter_8006ABA0(HSD_GObj* fighter_gobj);
+void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighter_gobj);
+void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj);
+void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy);
+void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj);
+void Fighter_8006C27C(HSD_GObj* fighter_gobj, s32 unused, s32 unused2, s32 unused3);
+void Fighter_8006C5F4(HSD_GObj* fighter_gobj);
+void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighter_gobj);
+void Fighter_8006C80C(HSD_GObj* fighter_gobj);
+void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj);
+void Fighter_8006CB94(HSD_GObj* fighter_gobj);
 void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 damage_amount);
 void Fighter_TakeDamage_8006CC7C(Fighter*, f32);
 void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3);
 void Fighter_8006CF5C(Fighter* fp, s32 arg1);
-void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighterObj);
-void Fighter_8006CFE0(HSD_GObj* fighterObj);
-void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighterObj);
-void Fighter_8006D10C(HSD_GObj* fighterObj);
-void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighterObj);
-void Fighter_8006D9AC(HSD_GObj* fighterObj);
-void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighterObj);
-void Fighter_8006DA4C(HSD_GObj* fighterObj);
+void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighter_gobj);
+void Fighter_8006CFE0(HSD_GObj* fighter_gobj);
+void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighter_gobj);
+void Fighter_8006D10C(HSD_GObj* fighter_gobj);
+void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj);
+void Fighter_8006D9AC(HSD_GObj* fighter_gobj);
+void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj);
+void Fighter_8006DA4C(HSD_GObj* fighter_gobj);
 void Fighter_Unload_8006DABC(Fighter* fp);
 
 
@@ -2138,49 +2138,49 @@ void Fighter_Unload_8006DABC(Fighter* fp);
 
 // Works but unused decided to go with inline instead 
 #define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                             \
-    void FTNAME##_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {                 \
-        Fighter *fp = getFighter(fighterObj);                                \
+    void FTNAME##_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {                 \
+        Fighter *fp = getFighter(fighter_gobj);                                \
         if (!func_8026B2B4(fp->x1974_heldItem)) {                            \
             switch (func_8026B320(fp->x1974_heldItem)) {                     \
                 case 1:                                                           \
-                    func_80070FB4(fighterObj, param1, 1);                         \
+                    func_80070FB4(fighter_gobj, param1, 1);                         \
                     break;                                                        \
                 case 2:                                                           \
-                    func_80070FB4(fighterObj, param1, 0);                         \
+                    func_80070FB4(fighter_gobj, param1, 0);                         \
                     break;                                                        \
                 case 3:                                                           \
-                    func_80070FB4(fighterObj, param1, 2);                         \
+                    func_80070FB4(fighter_gobj, param1, 2);                         \
                     break;                                                        \
                 case 4:                                                           \
-                    func_80070FB4(fighterObj, param1, 3);                         \
+                    func_80070FB4(fighter_gobj, param1, 3);                         \
                     break;                                                        \
             }                                                                     \
             if (bool) {                                                           \
-                func_80070C48(fighterObj, param2);                                \
+                func_80070C48(fighter_gobj, param2);                                \
             }                                                                     \
         }                                                                         \
     }                                                                             \
 
 /// used for all fighters except Kirby and Purin
-inline void Fighter_OnItemPickup(HSD_GObj* fighterObj, BOOL catchItemFlag, BOOL bool2, BOOL bool3) {
-    Fighter *fp = getFighter(fighterObj);            
+inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag, BOOL bool2, BOOL bool3) {
+    Fighter *fp = getFighter(fighter_gobj);            
     if (!func_8026B2B4(fp->x1974_heldItem)) {        
         switch (func_8026B320(fp->x1974_heldItem)) { 
             case 1:                                       
-                func_80070FB4(fighterObj, bool2, 1);     
+                func_80070FB4(fighter_gobj, bool2, 1);     
                 break;                                    
             case 2:                                       
-                func_80070FB4(fighterObj, bool2, 0);     
+                func_80070FB4(fighter_gobj, bool2, 0);     
                 break;                                    
             case 3:                                       
-                func_80070FB4(fighterObj, bool2, 2);     
+                func_80070FB4(fighter_gobj, bool2, 2);     
                 break;                                    
             case 4:                                       
-                func_80070FB4(fighterObj, bool2, 3);     
+                func_80070FB4(fighter_gobj, bool2, 3);     
                 break;                                    
         }                                                 
         if (catchItemFlag) {                                       
-            func_80070C48(fighterObj, bool3);            
+            func_80070C48(fighter_gobj, bool3);            
         }                                                 
     }                                                     
 }
@@ -2219,8 +2219,8 @@ inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1) {
     func_800704F0(gobj, 0, 0.0f);
 }
 
-inline void Fighter_UnsetCmdVar0(HSD_GObj* fighterObj) {
-    Fighter* fp = getFighter(fighterObj);
+inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj) {
+    Fighter* fp = getFighter(fighter_gobj);
     fp->x2200_ftcmd_var0 = 0;
 }
 

@@ -58,10 +58,10 @@ void func_800EE528() {
     }
 }
 
-void ftKirby_OnDeath(HSD_GObj* fighterObj) {
-    Fighter *fp = fighterObj->user_data;
-    func_80074A4C(fighterObj, 0, 0);
-    func_80074A4C(fighterObj, 1, 0);
+void ftKirby_OnDeath(HSD_GObj* fighter_gobj) {
+    Fighter *fp = fighter_gobj->user_data;
+    func_80074A4C(fighter_gobj, 0, 0);
+    func_80074A4C(fighter_gobj, 1, 0);
     fp->sa.kirby.x222C = 0;
     fp->sa.kirby.x2230 = (s32) (HSD_Randi(5) + 1);
     fp->sa.kirby.x223C = 0;
@@ -70,14 +70,14 @@ void ftKirby_OnDeath(HSD_GObj* fighterObj) {
     fp->sa.kirby.x228C = 0;
     fp->sa.kirby.x2290 = 0;
     if (Player_GetFlagsBit1(fp->xC_playerID) && Player_GetUnk4D(fp->xC_playerID) != 4) {
-        func_800F1BAC(fighterObj, Player_GetUnk4D(fp->xC_playerID), 0);
+        func_800F1BAC(fighter_gobj, Player_GetUnk4D(fp->xC_playerID), 0);
     }
 }
 
-void ftKirby_OnLoad(HSD_GObj* fighterObj) {
+void ftKirby_OnLoad(HSD_GObj* fighter_gobj) {
 
 
-    Fighter* fp = fighterObj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftKirbyAttributes);
@@ -93,31 +93,31 @@ void ftKirby_OnLoad(HSD_GObj* fighterObj) {
 
 }
 
-void ftKirby_800EE74C(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
-    func_800F5524(fighterObj);
-    func_800F22D4(fighterObj);
-    func_800F5318(fighterObj);
-    func_800F9090(fighterObj);
-    func_800F19AC(fighterObj);
-    func_800F5D04(fighterObj, 0);
+void ftKirby_800EE74C(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
+    func_800F5524(fighter_gobj);
+    func_800F22D4(fighter_gobj);
+    func_800F5318(fighter_gobj);
+    func_800F9090(fighter_gobj);
+    func_800F19AC(fighter_gobj);
+    func_800F5D04(fighter_gobj, 0);
     fp->cb.x21E8_callback_OnDeath3 = 0;
 }
 
-void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
-    Fighter* fp= fighterObj->user_data;
-    func_800F5524(fighterObj);
-    func_800F22D4(fighterObj);
-    func_800F5318(fighterObj);
-    func_800F9090(fighterObj);
-    func_800F1A8C(fighterObj);
+void ftKirby_800EE7B8(HSD_GObj* fighter_gobj) {
+    Fighter* fp= fighter_gobj->user_data;
+    func_800F5524(fighter_gobj);
+    func_800F22D4(fighter_gobj);
+    func_800F5318(fighter_gobj);
+    func_800F9090(fighter_gobj);
+    func_800F1A8C(fighter_gobj);
     fp->cb.x21E0_callback_OnDeath = 0;
 }
 
 //// Matching, but needs more data moved over for DOL match
-// void func_800EE818(HSD_GObj* fighterObj) {
+// void func_800EE818(HSD_GObj* fighter_gobj) {
 //     s32 unused[2];
-//     Fighter* fp = getFighter(fighterObj);
+//     Fighter* fp = getFighter(fighter_gobj);
 //     ftKirbyAttributes* attr = fp->x2D4_specialAttributes;
 //     switch (fp->sa.kirby.x2238) {
 //         case 3:
@@ -144,14 +144,14 @@ void ftKirby_800EE7B8(HSD_GObj* fighterObj) {
 //     }
 // }
 
-///void ftKirby_OnItemPickup(HSD_GObj* fighterObj, BOOL bool)
+///void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 
-// void ftKirby_OnItemInvisible(HSD_GObj* fighterObj) {
-//     Fighter_OnItemInvisible(fighterObj, 1);
+// void ftKirby_OnItemInvisible(HSD_GObj* fighter_gobj) {
+//     Fighter_OnItemInvisible(fighter_gobj, 1);
 // }
 
-// void ftKirby_OnItemVisible(HSD_GObj* fighterObj) {
-//     Fighter_OnItemVisible(fighterObj, 1);
+// void ftKirby_OnItemVisible(HSD_GObj* fighter_gobj) {
+//     Fighter_OnItemVisible(fighter_gobj, 1);
 // }
 
 // void ftKirby_OnItemDrop(HSD_GObj* gobj, BOOL bool1)

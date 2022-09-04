@@ -55,47 +55,47 @@ struct UNK_SAMUS_S2 {
     f32 single_float;
 };
 
-void ftSamus_80128428(HSD_GObj* fighterObj);
-void ftSamus_80129048(HSD_GObj* fighterObj);
-void ftSamus_801290A4(HSD_GObj* fighterObj);
-void ftSamus_801291F0(HSD_GObj* fighterObj);
-void ftSamus_8012A168(HSD_GObj* fighterObj, Vec* spawnlocation);
-void ftSamus_8012A074(HSD_GObj* fighterObj);
-void ftSamus_8012B570(HSD_GObj* fighterObj);
-void ftSamus_8012B5F0(HSD_GObj* fighterObj);
-void ftSamus_8012B668(HSD_GObj* fighterObj);
+void ftSamus_80128428(HSD_GObj* fighter_gobj);
+void ftSamus_80129048(HSD_GObj* fighter_gobj);
+void ftSamus_801290A4(HSD_GObj* fighter_gobj);
+void ftSamus_801291F0(HSD_GObj* fighter_gobj);
+void ftSamus_8012A168(HSD_GObj* fighter_gobj, Vec* spawnlocation);
+void ftSamus_8012A074(HSD_GObj* fighter_gobj);
+void ftSamus_8012B570(HSD_GObj* fighter_gobj);
+void ftSamus_8012B5F0(HSD_GObj* fighter_gobj);
+void ftSamus_8012B668(HSD_GObj* fighter_gobj);
 
-inline void ftSamus_updateDamageDeathCBs(HSD_GObj* fighterObj) {
-    Fighter* fp = getFighterPlus(fighterObj);
+inline void ftSamus_updateDamageDeathCBs(HSD_GObj* fighter_gobj) {
+    Fighter* fp = getFighterPlus(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &ftSamus_80128428;
     fp->cb.x21E4_callback_OnDeath2 = &ftSamus_80128428;
 }
 
 //// only used in ftsamus3 so far (maybe move to there)
-inline void ftSamus_SetAttrx2334(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
+inline void ftSamus_SetAttrx2334(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
     fp->sa.samus.x2234 = 0;
 }
 
-inline void ftSamus_destroyAllEF(HSD_GObj* fighterObj) {
-    if (fighterObj) {
-        Fighter* fp = getFighterPlus(fighterObj);
+inline void ftSamus_destroyAllEF(HSD_GObj* fighter_gobj) {
+    if (fighter_gobj) {
+        Fighter* fp = getFighterPlus(fighter_gobj);
         if (fp->sa.samus.x2234) {
-            efLib_DestroyAll(fighterObj);
+            efLib_DestroyAll(fighter_gobj);
             fp->sa.samus.x2234 = 0;
         }
     }
 }
 
-inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* fighterObj) {
+inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* fighter_gobj) {
 
-    if (fighterObj) {
-        Fighter* fp = fighterObj->user_data;
+    if (fighter_gobj) {
+        Fighter* fp = fighter_gobj->user_data;
         u32 x222C = fp->sa.samus.x222C;
         if (x222C) {
             func_802B5974(x222C);
             fp->sa.samus.x222C = 0;
         }
-        ftSamus_destroyAllEF(fighterObj);
+        ftSamus_destroyAllEF(fighter_gobj);
     } 
 }

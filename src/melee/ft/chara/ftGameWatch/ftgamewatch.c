@@ -97,8 +97,8 @@ void ftGameWatch_8014A538(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftGameWatch_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+void ftGameWatch_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
 void ftGameWatch_OnItemInvisible(HSD_GObj* gobj) {

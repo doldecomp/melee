@@ -81,9 +81,9 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_f
 }
 
 
-void func_8012B8A4(HSD_GObj* fighterObj) {
+void func_8012B8A4(HSD_GObj* fighter_gobj) {
     s32 unused[4];
-    Fighter* fp = fighterObj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     ftYoshiAttributes *attr = fp->x2D4_specialAttributes;
     f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth / p_ftCommonData->x260_startShieldHealth));
     func_8012B804(fp, (struct S_UNK_YOSHI1*)fp->x5B8, tempf);
@@ -91,22 +91,22 @@ void func_8012B8A4(HSD_GObj* fighterObj) {
 }
 
 
-void func_8012B918(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
+void func_8012B918(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
 
     func_8012B804(fp, (struct S_UNK_YOSHI1*)fp->x5B8, 0.0f);
     func_8012B804(fp, (struct S_UNK_YOSHI1*)fp->x5BC, 0.0f);
 }
 
-void ftYoshi_OnDeath(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
-    func_80074A4C(fighterObj, 0, 0);
+void ftYoshi_OnDeath(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
+    func_80074A4C(fighter_gobj, 0, 0);
     fp->sa.yoshi.x2238 = 0;
 }
 
 
 //https://decomp.me/scratch/5TPxg
-void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
+void ftYoshi_OnLoad(HSD_GObj* fighter_gobj) {
     void **item_list;
     ftYoshiAttributes *other_attr;
     struct S_UNK_YOSHI1* temp_r28;
@@ -115,7 +115,7 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
     struct S_UNK_YOSHI1* temp_r27;
     Fighter *fp;
     
-    fp = fighterObj->user_data;
+    fp = fighter_gobj->user_data;
     temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
     ft = fp->x10C_ftData;
     temp_r28 = (struct S_UNK_YOSHI1*)fp->x5BC;
@@ -139,9 +139,9 @@ void ftYoshi_OnLoad(HSD_GObj* fighterObj) {
   
 }
 
-void ftYoshi_8012BA8C(HSD_GObj* fighterObj) {
-    func_8012E270(fighterObj);
-    func_8012DF18(fighterObj);
+void ftYoshi_8012BA8C(HSD_GObj* fighter_gobj) {
+    func_8012E270(fighter_gobj);
+    func_8012DF18(fighter_gobj);
 }
 
 f32 ftYoshi_8012BAC0(Fighter* fp) {
@@ -149,34 +149,34 @@ f32 ftYoshi_8012BAC0(Fighter* fp) {
     return attr->x120;
 }
 
-void ftYoshi_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter_OnItemPickup(fighterObj, bool, 1, 1);
+void ftYoshi_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
-void ftYoshi_OnItemInvisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemInvisible(fighterObj, 1);
+void ftYoshi_OnItemInvisible(HSD_GObj *fighter_gobj) {
+    Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
-void ftYoshi_OnItemVisible(HSD_GObj *fighterObj) {
-    Fighter_OnItemVisible(fighterObj, 1);
+void ftYoshi_OnItemVisible(HSD_GObj *fighter_gobj) {
+    Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftYoshi_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemDrop(fighterObj, bool1, 1, 1);
+void ftYoshi_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1) {
+    Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
 }
 
-void ftYoshi_LoadSpecialAttrs(HSD_GObj* fighterObj) {
-    COPY_ATTRS(fighterObj, ftYoshiAttributes);
+void ftYoshi_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
+    COPY_ATTRS(fighter_gobj, ftYoshiAttributes);
 }
 
-void ftYoshi_OnKnockbackEnter(HSD_GObj* fighterObj) {
-    Fighter_OnKnockbackEnter(fighterObj, 1);
-    ftAnim_ApplyPartAnim(fighterObj, 3, 3, 0.0f);
-    ftAnim_ApplyPartAnim(fighterObj, 4, 3, 0.0f); 
+void ftYoshi_OnKnockbackEnter(HSD_GObj* fighter_gobj) {
+    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    ftAnim_ApplyPartAnim(fighter_gobj, 3, 3, 0.0f);
+    ftAnim_ApplyPartAnim(fighter_gobj, 4, 3, 0.0f); 
 }
 
-void ftYoshi_OnKnockbackExit(HSD_GObj* fighterObj) {
-    Fighter_OnKnockbackExit(fighterObj, 1);
-    ftAnim_ApplyPartAnim(fighterObj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(fighterObj, 4, 2, 0.0f); 
+void ftYoshi_OnKnockbackExit(HSD_GObj* fighter_gobj) {
+    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    ftAnim_ApplyPartAnim(fighter_gobj, 3, 2, 0.0f);
+    ftAnim_ApplyPartAnim(fighter_gobj, 4, 2, 0.0f); 
 }

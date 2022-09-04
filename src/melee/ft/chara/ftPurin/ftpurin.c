@@ -13,20 +13,20 @@ void func_8013C2F8() {
     lbl_8045A1E0[4] = 0;
 }
 
-void ftPurin_OnDeath(HSD_GObj* fighterObj) {
-    func_80074A4C(fighterObj, 0, 0);
+void ftPurin_OnDeath(HSD_GObj* fighter_gobj) {
+    func_80074A4C(fighter_gobj, 0, 0);
 }
 
-void ftPurin_OnUserDataRemove(HSD_GObj* fighterObj) {
-    func_8013C494(fighterObj);
+void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj) {
+    func_8013C494(fighter_gobj);
 }
 
-void func_8013C360(HSD_GObj* fighterObj) {
+void func_8013C360(HSD_GObj* fighter_gobj) {
 
     s32 unused;
 
     HSD_Joint** joint_list = lbl_8045A1E0;
-    Fighter* fp = fighterObj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     
     if (lbl_803D05B4[fp->x619_costume_id]) {
         void** item_list = fp->x10C_ftData->x48_items;
@@ -41,7 +41,7 @@ void func_8013C360(HSD_GObj* fighterObj) {
         fp->sa.purin.x223C = HSD_JObjLoadJoint(joint_list[fp->x619_costume_id]);
         fp->x2225_flag.bits.b2 = 1;
         func_80074170();
-        func_80075650(fighterObj, fp->sa.purin.x223C, &fp->sa.purin.x2240);
+        func_80075650(fighter_gobj, fp->sa.purin.x223C, &fp->sa.purin.x2240);
 
         func_8007487C(&item_list_shifted[1], &fp->sa.purin.x2248, fp->x619_costume_id, &fp->sa.purin.x2240, &fp->sa.purin.x2240);
         func_8009DC54(fp);
@@ -50,8 +50,8 @@ void func_8013C360(HSD_GObj* fighterObj) {
     fp->sa.purin.x223C = 0;
 }
 
-void func_8013C494(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
+void func_8013C494(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
     HSD_JObj* jobj = fp->sa.purin.x223C;
     
     if (jobj) {
@@ -62,10 +62,10 @@ void func_8013C494(HSD_GObj* fighterObj) {
     }
 }
 
-void func_8013C4F0(HSD_GObj* fighterObj, s32 arg1, s32 arg2) {
+void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2) {
   s32 unused[2];
 
-  Fighter *fp = fighterObj->user_data;
+  Fighter *fp = fighter_gobj->user_data;
     
     if (fp->sa.purin.x223C && fp->x2225_flag.bits.b2) {
     
@@ -95,24 +95,24 @@ void func_8013C614(Fighter* fp, s32 arg1, s32 arg2) {
     }
 }
 
-void* func_8013C664(HSD_GObj* fighterObj) {
-    Fighter *fp = fighterObj->user_data;
+void* func_8013C664(HSD_GObj* fighter_gobj) {
+    Fighter *fp = fighter_gobj->user_data;
     if (fp->sa.purin.x223C) {
         return fp->sa.purin.x223C;
     }
-    return fighterObj;
+    return fighter_gobj;
 }
 
-void ftPurin_OnLoad(HSD_GObj* fighterObj) {
-    Fighter* fp = fighterObj->user_data;
+void ftPurin_OnLoad(HSD_GObj* fighter_gobj) {
+    Fighter* fp = fighter_gobj->user_data;
     PUSH_ATTRS(fp, ftPurinAttributes);
     fp->x2222_flag.bits.b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
-    func_8013C360(fighterObj);
+    func_8013C360(fighter_gobj);
 }
 
-void ftPurin_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
-    Fighter *fp = getFighter(fighterObj);            
+void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+    Fighter *fp = getFighter(fighter_gobj);            
     if (!func_8026B2B4(fp->x1974_heldItem)) {        
         switch (func_8026B320(fp->x1974_heldItem)) {
             case 1:
@@ -120,48 +120,48 @@ void ftPurin_OnItemPickup(HSD_GObj* fighterObj, BOOL bool) {
             case 2:
                 break;
             case 3:
-                func_80070FB4(fighterObj, 0, 0);
+                func_80070FB4(fighter_gobj, 0, 0);
                 break;
             case 4:
-                func_80070FB4(fighterObj, 0, 1);
+                func_80070FB4(fighter_gobj, 0, 1);
                 break;
         }   
         if (bool) {                                       
-           func_80070C48(fighterObj, 0);            
+           func_80070C48(fighter_gobj, 0);            
         }  
     }   
 }
 
-void ftPurin_OnItemInvisible(HSD_GObj *fighterObj) {
-    Fighter* fp = getFighter(fighterObj);
+void ftPurin_OnItemInvisible(HSD_GObj *fighter_gobj) {
+    Fighter* fp = getFighter(fighter_gobj);
     if (fp->x1974_heldItem) {
         if (!func_8026B2B4(fp->x1974_heldItem)) {
-            func_80070CC4(fighterObj, 0);
+            func_80070CC4(fighter_gobj, 0);
         }
     }
 }
 
-void ftPurin_OnItemVisible(HSD_GObj *fighterObj) {
-    Fighter* fp = getFighter(fighterObj);
+void ftPurin_OnItemVisible(HSD_GObj *fighter_gobj) {
+    Fighter* fp = getFighter(fighter_gobj);
     if (fp->x1974_heldItem) {
         if (!func_8026B2B4(fp->x1974_heldItem)) {
-            func_80070C48(fighterObj, 0);
+            func_80070C48(fighter_gobj, 0);
         }
     }
 }
 
-void ftPurin_OnItemDrop(HSD_GObj* fighterObj, BOOL bool1) {
-    Fighter_OnItemDrop(fighterObj, bool1, 0, 0);
+void ftPurin_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1) {
+    Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
 }
 
-void ftPurin_LoadSpecialAttrs(HSD_GObj* fighterObj) {
-    COPY_ATTRS(fighterObj, ftPurinAttributes);
+void ftPurin_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
+    COPY_ATTRS(fighter_gobj, ftPurinAttributes);
 }
 
-void ftPurin_OnKnockbackEnter(HSD_GObj* fighterObj) {
-    Fighter_OnKnockbackEnter(fighterObj, 1);
+void ftPurin_OnKnockbackEnter(HSD_GObj* fighter_gobj) {
+    Fighter_OnKnockbackEnter(fighter_gobj, 1);
 }
 
-void ftPurin_OnKnockbackExit(HSD_GObj* fighterObj) {
-    Fighter_OnKnockbackExit(fighterObj, 1);
+void ftPurin_OnKnockbackExit(HSD_GObj* fighter_gobj) {
+    Fighter_OnKnockbackExit(fighter_gobj, 1);
 }
