@@ -9,7 +9,7 @@ _valid_suffixes = {'.c', '.h'}
 
 _asm_func_re = re.compile(
     r"^\basm\s+(?:static|extern|inline\s+)*"
-    r"(?P<type>\w+)\s+(?P<name>\w+)\s*\(.*?\)\s*\{.*?}",
+    r"(?P<type>[\s\w\*]+)\b(?P<name>\w+)\s*\(.*?\)\s*\{.*?}",
     flags=re.MULTILINE | re.DOTALL)
 
 
