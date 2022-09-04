@@ -28,8 +28,3 @@ def search(*src_paths: Iterable[Union[str, bytes, PathLike]]):
         for match in _asm_func_re.finditer(text):
             result.add(match['name'])
     return result
-
-
-if __name__ == '__main__':
-    print(_root.resolve())
-    search(_root / 'src', _root / 'include')
