@@ -40,7 +40,7 @@ class Symbol:
         regex = SYMBOL_OLD_REGEX if old_linker else SYMBOL_NEW_REGEX
         # Search for match
         match_obj = match(regex, line)
-        if match_obj == None:
+        if match_obj is None:
             return None
         # Old linker has no file offset
         fileOfs = -1 if old_linker else int(match_obj.group("FileOfs"), 16)
@@ -56,7 +56,7 @@ class Symbol:
 
 
 @dataclass
-class Map():
+class Map:
     # Dictionary of section header symbols.
     # Outer dict key = object file name, value = header dict
     # Header dict key = section name, value = header symbol
@@ -96,7 +96,7 @@ class Map():
         for line in map_data:
             # Search for symbol in current line
             symbol = Symbol.parse(line, old_linker)
-            if symbol != None:
+            if symbol is not None:
                 # "Header symbol" refers to the first symbol in the object file
                 obj_file = symbol.object_file
                 if obj_file != curr_object:
