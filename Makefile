@@ -28,7 +28,7 @@ VANILLA_DIR := $(BUILD_DIR)/vanilla
 PROFILE_DIR := $(BUILD_DIR)/profile
 
 # Inputs
-LDSCRIPT := $(BUILD_DIR)/ldscript.lcf
+LDSCRIPT := ldscript.lcf
 
 # Outputs
 DOL     := $(BUILD_DIR)/main.dol
@@ -55,14 +55,12 @@ MWCC_LD_VERSION := 1.1
 # Programs
 ifeq ($(WINDOWS),1)
   WINE :=
-  CPP     := $(DEVKITPPC)/bin/powerpc-eabi-cpp.exe -P
 else
   WINE ?= wine
   # Disable wine debug output for cleanliness
   export WINEDEBUG ?= -all
   # Default devkitPPC path
   DEVKITPPC ?= /opt/devkitpro/devkitPPC
-  CPP     := $(DEVKITPPC)/bin/powerpc-eabi-cpp -P
 endif
 ifeq ($(shell uname),Darwin)
   SHA1SUM := shasum
@@ -130,9 +128,6 @@ ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
-
-$(LDSCRIPT): ldscript.lcf
-	$(QUIET) $(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
 
 %.dol: %.elf $(ELF2DOL)
 	@echo Converting $< to $@
