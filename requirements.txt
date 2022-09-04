@@ -1,0 +1,9 @@
+argcomplete==2.0.0
+capstone==4.0.2
+colorama==0.4.5
+coverage==6.4.4
+cxxfilt==0.3.0
+graphviz==0.20.1
+pyelftools==0.29
+python_Levenshtein==0.12.2
+watchdog==2.1.9
