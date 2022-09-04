@@ -1,7 +1,5 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
-#define HALF_PI64 1.5707963267948966
-
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action State handler
 void ftLuigi_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
@@ -135,7 +133,7 @@ void ftLuigi_SpecialHi_IASA(HSD_GObj* fighter_gobj)
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE)
         {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32)(HALF_PI64 * (f64)fp->x2C_facing_direction));
+            func_80075AF0(fp, 0, (M_PI / 2) * fp->x2C_facing_direction);
         }
     }
 }
@@ -217,7 +215,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE)
         {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32)(HALF_PI64 * (f64)fp->x2C_facing_direction));
+            func_80075AF0(fp, 0, (M_PI / 2) * fp->x2C_facing_direction);
         }
     }
 }

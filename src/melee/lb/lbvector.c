@@ -1,8 +1,6 @@
 #include <melee/lb/lbvector.h>
 #include <math.h>
 
-#define PI 3.1415926535897931
-
 // exactly the same as the one from math.h, but with one extra iteration
 extern inline float sqrtf_accurate(float x)
 {
@@ -137,20 +135,20 @@ float lbvector_AngleXY(Vec* a, Vec* b)
 
 static float sin(float angle)
 {
-    if (angle > PI)
-        angle -= 2.0 * PI;
-    else if (angle < -PI)
-        angle += 2.0 * PI;
+    if (angle > M_PI)
+        angle -= 2 * M_PI;
+    else if (angle < -M_PI)
+        angle += 2 * M_PI;
     return 0.9878619909286499f * angle - 0.15527099370956421f * angle * angle * angle + 0.0056429998949170113f * angle * angle * angle * angle * angle;
 }
 
 static float cos(float angle)
 {
-    angle += PI / 2.0;
-    if (angle > PI)
-        angle -= 2.0 * PI;
-    else if (angle < -PI)
-        angle += 2.0 * PI;
+    angle += M_PI / 2;
+    if (angle > M_PI)
+        angle -= 2 * M_PI;
+    else if (angle < -M_PI)
+        angle += 2 * M_PI;
     return 0.9878619909286499f * angle - 0.15527099370956421f * angle * angle * angle + 0.0056429998949170113f * angle * angle * angle * angle * angle;
 }
 

@@ -80,7 +80,7 @@ void lbl_801511FC(HSD_GObj* gobj) {
             }
             func_8002ED9C(40.0f);
             func_8002EEC8(45.0f);
-            func_8002EC7C(-3.1415927410125732f);
+            func_8002EC7C(-M_PI);
             func_8002EF14();
             func_8002EC7C(0.0f);
             func_8002F0E4(0x78);

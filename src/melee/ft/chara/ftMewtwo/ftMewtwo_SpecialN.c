@@ -1,7 +1,5 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
-#define PI64 3.141592653589793
-
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd
 s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel, s32* chargeCycles)
@@ -251,7 +249,7 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
         }
         else
         {
-            facingDir = (f64)PI64;
+            facingDir = M_PI;
         }
         func_802C53F0(fp->sa.mewtwo.x2230_shadowHeldGObj, &sp38, (f32)facingDir, (f32)(u32)fp->sa.mewtwo.x2234_shadowBallCharge, mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES);
         ftMewtwo_SpecialN_SetRecoil(fighter_gobj);
