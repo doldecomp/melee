@@ -8,7 +8,7 @@ _root = Path(__file__).parents[3]
 _valid_suffixes = {'.c', '.h'}
 
 _asm_func_re = re.compile(
-    r"^\basm\s+(?:static|extern|inline\s+)*"
+    r"^[\s\w\*]*?\basm\b[\s\w\*]*?"
     r"(?P<type>[\s\w\*]+)\b(?P<name>\w+)\s*\(.*?\)\s*\{.*?}",
     flags=re.MULTILINE | re.DOTALL)
 
