@@ -8,7 +8,7 @@ ctx_includes.h
 .DS_Store
 
 # Compiler binaries
-mwcc_compiler/
+/tools/mwcc_compiler
 
 # Build artifacts
 build/
