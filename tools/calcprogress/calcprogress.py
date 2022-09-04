@@ -47,7 +47,7 @@ def exec_progress_callback(src_code: int, total_code: int, src_data: int, total_
 
     bytes_to_go_next_trophy = ((trophy_count + 1) * bytes_per_trophy) - src_code
 
-    print("\nYou have {} of 293 Trophies and completed {} of 51 Event Matches.".format(trophy_count, event_count))
+    print("You have {} of 293 Trophies and completed {} of 51 Event Matches.".format(trophy_count, event_count))
     print("Code bytes to go for next trophy:", floor(bytes_to_go_next_trophy)+1)
 
 
