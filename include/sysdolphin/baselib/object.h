@@ -30,6 +30,26 @@ typedef enum _HSD_Type {
     HSD_MAX_TYPE,
 } HSD_Type;
 
+typedef enum _HSD_TypeMask {
+    AOBJ_BITS     = 1 << 0,
+    COBJ_BITS     = 1 << 1,
+    DOBJ_BITS     = 1 << 2,
+    FOBJ_BITS     = 1 << 3,
+    FOG_BITS      = 1 << 4,
+    JOBJ_BITS     = 1 << 5,
+    LOBJ_BITS     = 1 << 6,
+    MOBJ_BITS     = 1 << 7,
+    POBJ_BITS     = 1 << 8,
+    ROBJ_BITS     = 1 << 9,
+    TOBJ_BITS     = 1 << 10,
+    WOBJ_BITS     = 1 << 11,
+    RENDER_BITS   = 1 << 12,
+    CHAN_BITS     = 1 << 13,
+    TEVREG_BITS   = 1 << 14,
+    CBOBJ_BITS    = 1 << 15,
+    ALL_TYPE_BITS = 1 << 16,
+} HSD_TypeMask;
+
 typedef struct _HSD_Obj {
     struct _HSD_Class parent;
     u16 ref_count;
