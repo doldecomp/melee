@@ -615,7 +615,7 @@ lbl_8033AE6C:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/r2ALq // 7842 (85.20%)
+// https://decomp.me/scratch/zVpOX // 7812 (85.26%)
 #pragma push
 asm unk_t __GXInitGX()
 { // clang-format off
