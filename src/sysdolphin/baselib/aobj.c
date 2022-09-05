@@ -296,60 +296,60 @@ void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type, void 
     }
 }
 
-void TObjForeachAnim(HSD_TObj* tobj, s32 flags, void* r5, s32 r6, void* r7)
+void TObjForeachAnim(HSD_TObj* tobj, s32 flags, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
     while (tobj != NULL) {
         if (flags & 0x400 && tobj->aobj != NULL) {
-            callbackForeachFunc(tobj->aobj, tobj, TOBJ_TYPE, r5, (s32) r6, r7);
+            callbackForeachFunc(tobj->aobj, tobj, TOBJ_TYPE, func, arg_type, arg);
         }
         tobj = tobj->next;
     }
 }
 
-void RObjForeachAnim(HSD_RObj* robj, s32 flags, void* r5, s32 r6, void* r7)
+void RObjForeachAnim(HSD_RObj* robj, s32 flags, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
     while (robj != NULL) {
         if (flags & 0x200 && robj->aobj != NULL) {
-            callbackForeachFunc(robj->aobj, robj, ROBJ_TYPE, r5, r6, r7);
+            callbackForeachFunc(robj->aobj, robj, ROBJ_TYPE, func, arg_type, arg);
         }
         robj = robj->next;
     }
 }
 
-void PObjForeachAnim(HSD_PObj* pobj, s32 flags, void* r5, s32 r6, void* r7)
+void PObjForeachAnim(HSD_PObj* pobj, s32 flags, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
     if (pobj == NULL)
         return;
 
     if ((pobj->flags & 0x3000) == 0x1000
         && pobj->u.x14_unk != NULL && pobj->u.x14_unk->aobj != NULL) {
-        callbackForeachFunc(pobj->u.x14_unk->aobj, pobj, POBJ_TYPE, r5, r6, r7);
+        callbackForeachFunc(pobj->u.x14_unk->aobj, pobj, POBJ_TYPE, func, arg_type, arg);
     }
 }
 
-void MObjForeachAnim(HSD_MObj* mobj, s32 flags, void* r5, s32 r6, void* r7)
+void MObjForeachAnim(HSD_MObj* mobj, s32 flags, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
     if (mobj == NULL)
         return;
 
     if (flags & 0x80 && mobj->aobj != NULL) {
-        callbackForeachFunc(mobj->aobj, mobj, MOBJ_TYPE, r5, r6, r7);
+        callbackForeachFunc(mobj->aobj, mobj, MOBJ_TYPE, func, arg_type, arg);
     }
-    TObjForeachAnim(mobj->tobj, flags, r5, r6, r7);
+    TObjForeachAnim(mobj->tobj, flags, func, arg_type, arg);
 }
 
-void DObjForeachAnim(HSD_DObj* dobj, s32 flags, void* r5, s32 r6, void* r7)
+void DObjForeachAnim(HSD_DObj* dobj, s32 flags, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
     HSD_PObj* pobj;
 
     while (dobj != NULL) {
         if (flags & 4 && dobj->aobj != NULL) {
-            callbackForeachFunc(dobj->aobj, dobj, DOBJ_TYPE, r5, r6, r7);
+            callbackForeachFunc(dobj->aobj, dobj, DOBJ_TYPE, func, arg_type, arg);
         }
-        MObjForeachAnim(dobj->mobj, flags, r5, r6, r7);
+        MObjForeachAnim(dobj->mobj, flags, func, arg_type, arg);
         pobj = dobj->pobj;
         if (flags & 0x100) {
-            PObjForeachAnim(pobj, flags, r5, r6, r7);
+            PObjForeachAnim(pobj, flags, func, arg_type, arg);
         }
         dobj = dobj->next;
     }
@@ -357,7 +357,7 @@ void DObjForeachAnim(HSD_DObj* dobj, s32 flags, void* r5, s32 r6, void* r7)
 
 // https://decomp.me/scratch/AOTU9
 #ifdef NON_MATCHING
-void JObjForeachAnim(HSD_JObj* jobj, s32 flags, void* r5, s32 r6, void* r7)
+void JObjForeachAnim(HSD_JObj* jobj, s32 flags, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
     HSD_JObj* child;
     HSD_JObj* new_var;
@@ -365,17 +365,17 @@ void JObjForeachAnim(HSD_JObj* jobj, s32 flags, void* r5, s32 r6, void* r7)
     (jobj != NULL) ? (void)0 : __assert("aobj.c", 0x2CB, "obj");
 
     if (flags & 0x20 && jobj->aobj != NULL) {
-        callbackForeachFunc(jobj->aobj, jobj, JOBJ_TYPE, r5, r6, r7);
+        callbackForeachFunc(jobj->aobj, jobj, JOBJ_TYPE, func, arg_type, arg);
     }
     if (jobj->flags & 0x4020 ? FALSE : TRUE) {
-        DObjForeachAnim(jobj->u.dobj, flags, r5, r6, r7);
+        DObjForeachAnim(jobj->u.dobj, flags, func, arg_type, arg);
     }
-    RObjForeachAnim(jobj->robj, flags, r5, r6, r7);
+    RObjForeachAnim(jobj->robj, flags, func, arg_type, arg);
     if (!(jobj->flags & 0x1000)) {
         child = jobj->child;
         while (child != NULL) {
             new_var = child;
-            JObjForeachAnim(new_var, flags, r5, r6, r7);
+            JObjForeachAnim(new_var, flags, func, arg_type, arg);
             child = child->next;
         }
     }
