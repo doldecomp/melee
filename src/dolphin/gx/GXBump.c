@@ -478,19 +478,9 @@ lbl_8033FD5C:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/RjFuy // 0 (100%)
-#pragma push
-asm unk_t __GXFlushTextureState()
-{ // clang-format off
-    nofralloc
-/* 8033FDA0 0033C980  38 00 00 61 */	li r0, 0x61
-/* 8033FDA4 0033C984  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033FDA8 0033C988  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033FDAC 0033C98C  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
-/* 8033FDB0 0033C990  38 00 00 00 */	li r0, 0
-/* 8033FDB4 0033C994  80 64 01 24 */	lwz r3, 0x124(r4)
-/* 8033FDB8 0033C998  90 65 80 00 */	stw r3, -0x8000(r5)
-/* 8033FDBC 0033C99C  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033FDC0 0033C9A0  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void __GXFlushTextureState()
+{
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    WGPIPE.u32 = __GXContexts.main->x100_data[9];
+    set_x2(GX_FALSE);
+}

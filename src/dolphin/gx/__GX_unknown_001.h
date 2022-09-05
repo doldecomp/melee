@@ -13,8 +13,6 @@
 /* 0033E430 */ extern void GXSetClipMode(s32);
 /* 0033E3EC */ extern void GXSetScissorBoxOffset(s32, s32);
 /* 0033DBFC */ extern void GXSetFieldMask(s32, s8);
-/* 0033C980 */ extern void __GXFlushTextureState(GXContext *, s32, u8 *);
-/* 0033C980 */ extern void __GXFlushTextureState(GXContext *, s32, u8 *);
 /* 0033C0F8 */ extern void __GXSetTmemConfig(s32);
 /* 0033BE50 */ extern void GXInvalidateTexAll(GXContext *, s32, u8 *);
 /* 0033BE08 */ extern void GXInitTlutRegion(s32 *, s32, s32);
