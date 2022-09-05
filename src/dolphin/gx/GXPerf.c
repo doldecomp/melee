@@ -708,14 +708,7 @@ entry lbl_80342184
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/YOR2u // 0 (100%)
-#pragma push
-asm unk_t GXClearGPMetric()
-{ // clang-format off
-    nofralloc
-/* 80342194 0033ED74  80 6D BC 54 */	lwz r3, __cpReg(r13)
-/* 80342198 0033ED78  38 00 00 04 */	li r0, 4
-/* 8034219C 0033ED7C  B0 03 00 04 */	sth r0, 4(r3)
-/* 803421A0 0033ED80  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXClearGPMetric(void)
+{
+    __cpReg[2] = 4;
+}
