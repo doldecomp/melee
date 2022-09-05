@@ -375,24 +375,16 @@ lbl_8033FC2C:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/1XnrG // 0 (100%)
-#pragma push
-asm unk_t GXSetNumIndStages()
-{ // clang-format off
-    nofralloc
-/* 8033FC60 0033C840  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033FC64 0033C844  54 60 82 1E */	rlwinm r0, r3, 0x10, 8, 0xf
-/* 8033FC68 0033C848  84 64 02 04 */	lwzu r3, 0x204(r4)
-/* 8033FC6C 0033C84C  54 63 04 18 */	rlwinm r3, r3, 0, 0x10, 0xc
-/* 8033FC70 0033C850  7C 60 03 78 */	or r0, r3, r0
-/* 8033FC74 0033C854  90 04 00 00 */	stw r0, 0(r4)
-/* 8033FC78 0033C858  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033FC7C 0033C85C  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 8033FC80 0033C860  60 00 00 06 */	ori r0, r0, 6
-/* 8033FC84 0033C864  90 03 04 F0 */	stw r0, 0x4f0(r3)
-/* 8033FC88 0033C868  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetNumIndStages(s32 arg0)
+{
+    GXContext* temp_r3;
+    GXContext* temp_r4;
+
+    temp_r4 = __GXContexts.main;
+    temp_r4->x100_data[0x41] = (temp_r4->x100_data[0x41] & 0xFFF8FFFF) | ((arg0 << 0x10) & 0xFF0000);
+    temp_r3 = __GXContexts.main;
+    temp_r3->x4F0_flags |= 6;
+}
 
 // https://decomp.me/scratch/aRJcf // 362 (79.89%)
 #pragma push
