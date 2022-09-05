@@ -364,18 +364,18 @@ void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
 
     (jobj != NULL) ? (void)0 : __assert("aobj.c", 0x2CB, "obj");
 
-    if (flags & 0x20 && jobj->aobj != NULL) {
+    if (mask & JOBJ_BITS && jobj->aobj != NULL) {
         callbackForeachFunc(jobj->aobj, jobj, JOBJ_TYPE, func, arg_type, arg);
     }
-    if (jobj->flags & 0x4020 ? FALSE : TRUE) {
-        DObjForeachAnim(jobj->u.dobj, flags, func, arg_type, arg);
+    if (union_type_dobj(jobj)) {
+        DObjForeachAnim(jobj->u.dobj, mask, func, arg_type, arg);
     }
-    RObjForeachAnim(jobj->robj, flags, func, arg_type, arg);
-    if (!(jobj->flags & 0x1000)) {
+    RObjForeachAnim(jobj->robj, mask, func, arg_type, arg);
+    if (!(jobj->flags & JOBJ_INSTANCE)) {
         child = jobj->child;
         while (child != NULL) {
             new_var = child;
-            JObjForeachAnim(new_var, flags, func, arg_type, arg);
+            JObjForeachAnim(new_var, mask, func, arg_type, arg);
             child = child->next;
         }
     }
