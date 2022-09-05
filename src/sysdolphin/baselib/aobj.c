@@ -362,7 +362,7 @@ void JObjForeachAnim(HSD_JObj* jobj, s32 flags, void* r5, s32 r6, void* r7)
     HSD_JObj* child;
     HSD_JObj* new_var;
 
-    !(jobj == NULL) ? (void)0 : __assert("aobj.c", 0x2CB, "obj");
+    (jobj != NULL) ? (void)0 : __assert("aobj.c", 0x2CB, "obj");
 
     if (flags & 0x20 && jobj->aobj != NULL) {
         callbackForeachFunc(jobj->aobj, jobj, JOBJ_TYPE, r5, r6, r7);
