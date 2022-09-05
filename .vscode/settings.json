@@ -50,4 +50,9 @@
             ]
         }
     },
+    "files.associations": {
+        "*.c": "c",
+        "*.h": "c",
+        "*.s": "gas"
+    },
 }
