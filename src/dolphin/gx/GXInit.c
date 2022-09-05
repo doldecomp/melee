@@ -20,12 +20,9 @@ volatile u16* __peReg;  // todo: OSPhysicalToUncached (0x0C001000)
 volatile u16* __cpReg;  // todo: OSPhysicalToUncached (0x0C000000)
 volatile u32* __piReg;  // todo: OSPhysicalToUncached (0x0C003000)
 
-#pragma push
-#pragma force_active on
-s32 const lbl_804DE200 = 0x404040FF;
-s32 const lbl_804DE204 = 0;
-s32 const lbl_804DE208 = -1;
-#pragma pop
+GXColor const lbl_804DE200 = { 0x40, 0x40, 0x40, 0xFF };
+GXColor const lbl_804DE204 = { 0x00, 0x00, 0x00, 0x00 };
+GXColor const lbl_804DE208 = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 f32 const lbl_804DE20C = 1.0F;
 f32 const lbl_804DE210 = 0.0F;
@@ -628,13 +625,9 @@ asm unk_t __GXInitGX()
 /* 8033AF48 00337B28  94 21 FF 88 */	stwu r1, -0x78(r1)
 /* 8033AF4C 00337B2C  93 E1 00 74 */	stw r31, 0x74(r1)
 /* 8033AF50 00337B30  93 C1 00 70 */	stw r30, 0x70(r1)
-
-#pragma region wtf
-/* 8033AF54 00337B34  80 82 E8 20 */	lwz r4, -0x17E0(r2)
-/* 8033AF58 00337B38  80 62 E8 24 */	lwz r3, -0x17DC(r2)
-/* 8033AF5C 00337B3C  80 02 E8 28 */	lwz r0, -0x17D8(r2)
-#pragma endregion
-
+/* 8033AF54 00337B34  80 82 E8 20 */	lwz r4, lbl_804DE200(r2)
+/* 8033AF58 00337B38  80 62 E8 24 */	lwz r3, lbl_804DE204(r2)
+/* 8033AF5C 00337B3C  80 02 E8 28 */	lwz r0, lbl_804DE208(r2)
 /* 8033AF60 00337B40  90 81 00 28 */	stw r4, 0x28(r1)
 /* 8033AF64 00337B44  90 61 00 24 */	stw r3, 0x24(r1)
 /* 8033AF68 00337B48  90 01 00 20 */	stw r0, 0x20(r1)
