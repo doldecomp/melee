@@ -299,7 +299,7 @@ void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type, void 
 void TObjForeachAnim(HSD_TObj* tobj, HSD_TypeMask mask, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
     while (tobj != NULL) {
-        if (mask & TOBJ_BITS && tobj->aobj != NULL) {
+        if (mask & TOBJ_MASK && tobj->aobj != NULL) {
             callbackForeachFunc(tobj->aobj, tobj, TOBJ_TYPE, func, arg_type, arg);
         }
         tobj = tobj->next;
@@ -309,7 +309,7 @@ void TObjForeachAnim(HSD_TObj* tobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
 void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
 {
     while (robj != NULL) {
-        if (mask & ROBJ_BITS && robj->aobj != NULL) {
+        if (mask & ROBJ_MASK && robj->aobj != NULL) {
             callbackForeachFunc(robj->aobj, robj, ROBJ_TYPE, func, arg_type, arg);
         }
         robj = robj->next;
@@ -332,7 +332,7 @@ void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
     if (mobj == NULL)
         return;
 
-    if (mask & MOBJ_BITS && mobj->aobj != NULL) {
+    if (mask & MOBJ_MASK && mobj->aobj != NULL) {
         callbackForeachFunc(mobj->aobj, mobj, MOBJ_TYPE, func, arg_type, arg);
     }
     TObjForeachAnim(mobj->tobj, mask, func, arg_type, arg);
@@ -343,12 +343,12 @@ void DObjForeachAnim(HSD_DObj* dobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
     HSD_PObj* pobj;
 
     while (dobj != NULL) {
-        if (mask & DOBJ_BITS && dobj->aobj != NULL) {
+        if (mask & DOBJ_MASK && dobj->aobj != NULL) {
             callbackForeachFunc(dobj->aobj, dobj, DOBJ_TYPE, func, arg_type, arg);
         }
         MObjForeachAnim(dobj->mobj, mask, func, arg_type, arg);
         pobj = dobj->pobj;
-        if (mask & POBJ_BITS) {
+        if (mask & POBJ_MASK) {
             PObjForeachAnim(pobj, mask, func, arg_type, arg);
         }
         dobj = dobj->next;
@@ -364,7 +364,7 @@ void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
 
     (jobj != NULL) ? (void)0 : __assert("aobj.c", 0x2CB, "obj");
 
-    if (mask & JOBJ_BITS && jobj->aobj != NULL) {
+    if (mask & JOBJ_MASK && jobj->aobj != NULL) {
         callbackForeachFunc(jobj->aobj, jobj, JOBJ_TYPE, func, arg_type, arg);
     }
     if (union_type_dobj(jobj)) {

@@ -30,24 +30,26 @@ typedef enum _HSD_Type {
     HSD_MAX_TYPE,
 } HSD_Type;
 
+#define MASK_OF(type) (1 << ((type) - 1))
+
 typedef enum _HSD_TypeMask {
-    AOBJ_BITS     = 1 << 0,
-    COBJ_BITS     = 1 << 1,
-    DOBJ_BITS     = 1 << 2,
-    FOBJ_BITS     = 1 << 3,
-    FOG_BITS      = 1 << 4,
-    JOBJ_BITS     = 1 << 5,
-    LOBJ_BITS     = 1 << 6,
-    MOBJ_BITS     = 1 << 7,
-    POBJ_BITS     = 1 << 8,
-    ROBJ_BITS     = 1 << 9,
-    TOBJ_BITS     = 1 << 10,
-    WOBJ_BITS     = 1 << 11,
-    RENDER_BITS   = 1 << 12,
-    CHAN_BITS     = 1 << 13,
-    TEVREG_BITS   = 1 << 14,
-    CBOBJ_BITS    = 1 << 15,
-    ALL_TYPE_BITS = 1 << 16,
+    AOBJ_MASK     = MASK_OF(AOBJ_TYPE),
+    COBJ_MASK     = MASK_OF(COBJ_TYPE),
+    DOBJ_MASK     = MASK_OF(DOBJ_TYPE),
+    FOBJ_MASK     = MASK_OF(FOBJ_TYPE),
+    FOG_MASK      = MASK_OF(FOG_TYPE),
+    JOBJ_MASK     = MASK_OF(JOBJ_TYPE),
+    LOBJ_MASK     = MASK_OF(LOBJ_TYPE),
+    MOBJ_MASK     = MASK_OF(MOBJ_TYPE),
+    POBJ_MASK     = MASK_OF(POBJ_TYPE),
+    ROBJ_MASK     = MASK_OF(ROBJ_TYPE),
+    TOBJ_MASK     = MASK_OF(TOBJ_TYPE),
+    WOBJ_MASK     = MASK_OF(WOBJ_TYPE),
+    RENDER_MASK   = MASK_OF(RENDER_TYPE),
+    CHAN_MASK     = MASK_OF(CHAN_TYPE),
+    TEVREG_MASK   = MASK_OF(TEVREG_TYPE),
+    CBOBJ_MASK    = MASK_OF(CBOBJ_TYPE),
+    ALL_TYPE_MASK = MASK_OF(HSD_MAX_TYPE),
 } HSD_TypeMask;
 
 typedef struct _HSD_Obj {
