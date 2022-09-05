@@ -283,24 +283,16 @@ lbl_8033D658:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/a5KC6 // 0 (100%)
-#pragma push
-asm unk_t GXSetDispCopyFrame2Field()
-{ // clang-format off
-    nofralloc
-/* 8033D73C 0033A31C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033D740 0033A320  54 60 60 26 */	slwi r0, r3, 0xc
-/* 8033D744 0033A324  84 64 01 EC */	lwzu r3, 0x1ec(r4)
-/* 8033D748 0033A328  54 63 05 22 */	rlwinm r3, r3, 0, 0x14, 0x11
-/* 8033D74C 0033A32C  7C 60 03 78 */	or r0, r3, r0
-/* 8033D750 0033A330  90 04 00 00 */	stw r0, 0(r4)
-/* 8033D754 0033A334  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033D758 0033A338  84 03 01 FC */	lwzu r0, 0x1fc(r3)
-/* 8033D75C 0033A33C  54 00 05 22 */	rlwinm r0, r0, 0, 0x14, 0x11
-/* 8033D760 0033A340  90 03 00 00 */	stw r0, 0(r3)
-/* 8033D764 0033A344  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetDispCopyFrame2Field(s32 arg0)
+{
+    GXContext* temp_r3;
+    GXContext* temp_r4;
+
+    temp_r4 = __GXContexts.main;
+    temp_r4->x100_data[0x3B] = (temp_r4->x100_data[0x3B] & 0xFFFFCFFF) | (arg0 << 0xC);
+    temp_r3 = __GXContexts.main;
+    temp_r3->x100_data[0x3F] = temp_r3->x100_data[0x3F] & 0xFFFFCFFF;
+}
 
 // https://decomp.me/scratch/eN1kg // 2515 (18.87%)
 #pragma push
