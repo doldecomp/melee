@@ -104,6 +104,7 @@ typedef struct
 extern volatile u32* __piReg;
 extern volatile u16* __peReg;
 extern volatile u16* __cpReg;
+extern volatile u32* __memReg;
 
 extern volatile union {
 

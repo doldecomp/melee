@@ -478,7 +478,7 @@ lbl_8033FD5C:
 } // clang-format on
 #pragma pop
 
-void __GXFlushTextureState()
+void __GXFlushTextureState(void)
 {
     WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = __GXContexts.main->x100_data[9];

@@ -110,10 +110,10 @@ class AsmUtil:
                 sect_name = sect_match.group("Name")
                 # Avoid recounting the same section
                 if sect_name not in sections_found:
-                    # Header symbols in current object file
-                    my_file_headers = cw_map.headers[basename(obj_file)]
-                    # Header symbol for current section
                     try:
+                        # Header symbols in current object file
+                        my_file_headers = cw_map.headers[basename(obj_file)]
+                        # Header symbol for current section
                         my_header = my_file_headers[sect_name]
                         # Create summable section object
                         section = AsmUtil.Section(

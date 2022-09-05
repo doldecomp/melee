@@ -7,7 +7,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"asm\**\code_80081938.s"
+    'input_glob': r"src/**/GXInit.c"
 }
 
 default_options = {

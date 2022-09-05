@@ -556,7 +556,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/dvd/fstload.c.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXInit.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXFifo.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXAttr.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXMisc.c.o\
