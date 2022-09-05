@@ -566,7 +566,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/gx/GXTexture.s.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXBump.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXTev.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXPixel.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXPixel.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXStubs.s.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXDisplayList.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXTransform.s.o\

@@ -11,18 +11,6 @@
 /* 004DAED8 */ extern const f32 lbl_804DE2F8[2];
 /* 004DAED4 */ extern const f32 lbl_804DE2F4;
 /* 004DAED0 */ extern const f32 lbl_804DE2F0;
-/* 004DAEC8 */ extern const f32 lbl_804DE2E8[2];
-/* 004DAEC0 */ extern const f32 lbl_804DE2E0[2];
-/* 004DAEB8 */ extern const f32 lbl_804DE2D8[2];
-/* 004DAEB0 */ extern const f32 lbl_804DE2D0[2];
-/* 004DAEA8 */ extern const f32 lbl_804DE2C8[2];
-/* 004DAEA0 */ extern const f32 lbl_804DE2C0[2];
-/* 004DAE98 */ extern const f32 lbl_804DE2B8[2];
-/* 004DAE90 */ extern const f32 lbl_804DE2B0[2];
-/* 004DAE88 */ extern const f32 lbl_804DE2A8[2];
-/* 004DAE80 */ extern const f32 lbl_804DE2A0[2];
-/* 004DAE7C */ extern const f32 lbl_804DE29C;
-/* 004DAE78 */ extern const f32 lbl_804DE298;
 /* 004DAE6C */ extern const f32 lbl_804DE28C;
 /* 004DAE68 */ extern const f32 lbl_804DE288;
 /* 004DAE64 */ extern const f32 lbl_804DE284;
@@ -41,7 +29,6 @@
 /* 004D27B0 */ extern const u32 GXTexImage0Ids[2];
 /* 004D27A8 */ extern const u32 GXTexMode1Ids[2];
 /* 004D27A0 */ extern const u32 GXTexMode0Ids[2];
-/* 003FE0E8 */ extern const u32 lbl_80401508[8];
 /* 0033E050 */ extern void WriteMTXPS4x2(unk_t, s8 *);
 /* 0033E01C */ extern void WriteMTXPS3x3from3x4(unk_t, s8 *, s8 *);
 /* 0033DFE8 */ extern void WriteMTXPS4x3(unk_t, s8 *, s8 *);
