@@ -566,32 +566,20 @@ lbl_8033C3B4:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/445i6 // 0 (100%)
-#pragma push
-asm unk_t GXClearVtxDesc()
-{ // clang-format off
-    nofralloc
-/* 8033C3C8 00338FA8  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033C3CC 00338FAC  38 80 00 00 */	li r4, 0
-/* 8033C3D0 00338FB0  90 83 00 14 */	stw r4, 0x14(r3)
-/* 8033C3D4 00338FB4  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033C3D8 00338FB8  84 03 00 14 */	lwzu r0, 0x14(r3)
-/* 8033C3DC 00338FBC  54 00 05 E8 */	rlwinm r0, r0, 0, 0x17, 0x14
-/* 8033C3E0 00338FC0  60 00 02 00 */	ori r0, r0, 0x200
-/* 8033C3E4 00338FC4  90 03 00 00 */	stw r0, 0(r3)
-/* 8033C3E8 00338FC8  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033C3EC 00338FCC  90 83 00 18 */	stw r4, 0x18(r3)
-/* 8033C3F0 00338FD0  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033C3F4 00338FD4  98 83 04 1C */	stb r4, 0x41c(r3)
-/* 8033C3F8 00338FD8  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033C3FC 00338FDC  98 83 04 1D */	stb r4, 0x41d(r3)
-/* 8033C400 00338FE0  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033C404 00338FE4  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 8033C408 00338FE8  60 00 00 08 */	ori r0, r0, 8
-/* 8033C40C 00338FEC  90 03 04 F0 */	stw r0, 0x4f0(r3)
-/* 8033C410 00338FF0  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXClearVtxDesc(void)
+{
+    GXContext* temp_r3;
+    GXContext* temp_r3_2;
+
+    __GXContexts.main->x14 = 0;
+    temp_r3 = __GXContexts.main;
+    temp_r3->x14 = (temp_r3->x14 & 0xFFFFF9FF) | 0x200;
+    __GXContexts.main->x18 = 0;
+    __GXContexts.main->x41C = GX_FALSE;
+    __GXContexts.main->x41D = GX_FALSE;
+    temp_r3_2 = __GXContexts.main;
+    temp_r3_2->x4F0_flags |= 8;
+}
 
 // https://decomp.me/scratch/OfeGM // 4110 (80.88%)
 #pragma push
