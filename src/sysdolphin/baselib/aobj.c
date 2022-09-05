@@ -3,6 +3,7 @@
 
 #include <sysdolphin/baselib/aobj.h>
 
+#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/robj.h>
 #include <sysdolphin/baselib/tobj.h>
@@ -299,7 +300,7 @@ void TObjForeachAnim(HSD_TObj* tobj, s32 flags, void* r5, s32 r6, void* r7)
 {
     while (tobj != NULL) {
         if (flags & 0x400 && tobj->aobj != NULL) {
-            callbackForeachFunc(tobj->aobj, tobj, 0xB, r5, (s32) r6, r7);
+            callbackForeachFunc(tobj->aobj, tobj, TOBJ_TYPE, r5, (s32) r6, r7);
         }
         tobj = tobj->next;
     }
@@ -309,112 +310,79 @@ void RObjForeachAnim(HSD_RObj* robj, s32 flags, void* r5, s32 r6, void* r7)
 {
     while (robj != NULL) {
         if (flags & 0x200 && robj->aobj != NULL) {
-            callbackForeachFunc(robj->aobj, robj, 0xA, r5, r6, r7);
+            callbackForeachFunc(robj->aobj, robj, ROBJ_TYPE, r5, r6, r7);
         }
         robj = robj->next;
     }
 }
 
-#pragma push
-asm void func_803647DC(void)
-{ // clang-format off
-    nofralloc
-    /* 803647DC 003613BC  7C 08 02 A6 */	mflr r0
-    /* 803647E0 003613C0  90 01 00 04 */	stw r0, 4(r1)
-    /* 803647E4 003613C4  94 21 FF B8 */	stwu r1, -0x48(r1)
-    /* 803647E8 003613C8  BE E1 00 24 */	stmw r23, 0x24(r1)
-    /* 803647EC 003613CC  3B 83 00 00 */	addi r28, r3, 0
-    /* 803647F0 003613D0  3B A5 00 00 */	addi r29, r5, 0
-    /* 803647F4 003613D4  3B C6 00 00 */	addi r30, r6, 0
-    /* 803647F8 003613D8  3B E7 00 00 */	addi r31, r7, 0
-    /* 803647FC 003613DC  54 9A 07 7A */	rlwinm r26, r4, 0, 0x1d, 0x1d
-    /* 80364800 003613E0  54 99 06 30 */	rlwinm r25, r4, 0, 0x18, 0x18
-    /* 80364804 003613E4  54 98 05 6A */	rlwinm r24, r4, 0, 0x15, 0x15
-    /* 80364808 003613E8  54 97 05 EE */	rlwinm r23, r4, 0, 0x17, 0x17
-    /* 8036480C 003613EC  48 00 00 FC */	b lbl_80364908
-lbl_80364810:
-    /* 80364810 003613F0  2C 1A 00 00 */	cmpwi r26, 0
-    /* 80364814 003613F4  41 82 00 28 */	beq lbl_8036483C
-    /* 80364818 003613F8  80 7C 00 10 */	lwz r3, 0x10(r28)
-    /* 8036481C 003613FC  28 03 00 00 */	cmplwi r3, 0
-    /* 80364820 00361400  41 82 00 1C */	beq lbl_8036483C
-    /* 80364824 00361404  38 9C 00 00 */	addi r4, r28, 0
-    /* 80364828 00361408  38 DD 00 00 */	addi r6, r29, 0
-    /* 8036482C 0036140C  38 FE 00 00 */	addi r7, r30, 0
-    /* 80364830 00361410  39 1F 00 00 */	addi r8, r31, 0
-    /* 80364834 00361414  38 A0 00 03 */	li r5, 3
-    /* 80364838 00361418  4B FF FD A1 */	bl callbackForeachFunc
-lbl_8036483C:
-    /* 8036483C 0036141C  83 7C 00 08 */	lwz r27, 8(r28)
-    /* 80364840 00361420  28 1B 00 00 */	cmplwi r27, 0
-    /* 80364844 00361424  41 82 00 70 */	beq lbl_803648B4
-    /* 80364848 00361428  2C 19 00 00 */	cmpwi r25, 0
-    /* 8036484C 0036142C  41 82 00 28 */	beq lbl_80364874
-    /* 80364850 00361430  80 7B 00 14 */	lwz r3, 0x14(r27)
-    /* 80364854 00361434  28 03 00 00 */	cmplwi r3, 0
-    /* 80364858 00361438  41 82 00 1C */	beq lbl_80364874
-    /* 8036485C 0036143C  38 9B 00 00 */	addi r4, r27, 0
-    /* 80364860 00361440  38 DD 00 00 */	addi r6, r29, 0
-    /* 80364864 00361444  38 FE 00 00 */	addi r7, r30, 0
-    /* 80364868 00361448  39 1F 00 00 */	addi r8, r31, 0
-    /* 8036486C 0036144C  38 A0 00 08 */	li r5, 8
-    /* 80364870 00361450  4B FF FD 69 */	bl callbackForeachFunc
-lbl_80364874:
-    /* 80364874 00361454  83 7B 00 08 */	lwz r27, 8(r27)
-    /* 80364878 00361458  48 00 00 34 */	b lbl_803648AC
-lbl_8036487C:
-    /* 8036487C 0036145C  2C 18 00 00 */	cmpwi r24, 0
-    /* 80364880 00361460  41 82 00 28 */	beq lbl_803648A8
-    /* 80364884 00361464  80 7B 00 64 */	lwz r3, 0x64(r27)
-    /* 80364888 00361468  28 03 00 00 */	cmplwi r3, 0
-    /* 8036488C 0036146C  41 82 00 1C */	beq lbl_803648A8
-    /* 80364890 00361470  38 9B 00 00 */	addi r4, r27, 0
-    /* 80364894 00361474  38 DD 00 00 */	addi r6, r29, 0
-    /* 80364898 00361478  38 FE 00 00 */	addi r7, r30, 0
-    /* 8036489C 0036147C  39 1F 00 00 */	addi r8, r31, 0
-    /* 803648A0 00361480  38 A0 00 0B */	li r5, 0xb
-    /* 803648A4 00361484  4B FF FD 35 */	bl callbackForeachFunc
-lbl_803648A8:
-    /* 803648A8 00361488  83 7B 00 08 */	lwz r27, 8(r27)
-lbl_803648AC:
-    /* 803648AC 0036148C  28 1B 00 00 */	cmplwi r27, 0
-    /* 803648B0 00361490  40 82 FF CC */	bne lbl_8036487C
-lbl_803648B4:
-    /* 803648B4 00361494  2C 17 00 00 */	cmpwi r23, 0
-    /* 803648B8 00361498  80 9C 00 0C */	lwz r4, 0xc(r28)
-    /* 803648BC 0036149C  41 82 00 48 */	beq lbl_80364904
-    /* 803648C0 003614A0  28 04 00 00 */	cmplwi r4, 0
-    /* 803648C4 003614A4  41 82 00 40 */	beq lbl_80364904
-    /* 803648C8 003614A8  A0 04 00 0C */	lhz r0, 0xc(r4)
-    /* 803648CC 003614AC  54 00 04 A6 */	rlwinm r0, r0, 0, 0x12, 0x13
-    /* 803648D0 003614B0  2C 00 10 00 */	cmpwi r0, 0x1000
-    /* 803648D4 003614B4  40 82 00 30 */	bne lbl_80364904
-    /* 803648D8 003614B8  80 64 00 14 */	lwz r3, 0x14(r4)
-    /* 803648DC 003614BC  28 03 00 00 */	cmplwi r3, 0
-    /* 803648E0 003614C0  41 82 00 24 */	beq lbl_80364904
-    /* 803648E4 003614C4  80 63 00 20 */	lwz r3, 0x20(r3)
-    /* 803648E8 003614C8  28 03 00 00 */	cmplwi r3, 0
-    /* 803648EC 003614CC  41 82 00 18 */	beq lbl_80364904
-    /* 803648F0 003614D0  38 DD 00 00 */	addi r6, r29, 0
-    /* 803648F4 003614D4  38 FE 00 00 */	addi r7, r30, 0
-    /* 803648F8 003614D8  39 1F 00 00 */	addi r8, r31, 0
-    /* 803648FC 003614DC  38 A0 00 09 */	li r5, 9
-    /* 80364900 003614E0  4B FF FC D9 */	bl callbackForeachFunc
-lbl_80364904:
-    /* 80364904 003614E4  83 9C 00 04 */	lwz r28, 4(r28)
-lbl_80364908:
-    /* 80364908 003614E8  28 1C 00 00 */	cmplwi r28, 0
-    /* 8036490C 003614EC  40 82 FF 04 */	bne lbl_80364810
-    /* 80364910 003614F0  BA E1 00 24 */	lmw r23, 0x24(r1)
-    /* 80364914 003614F4  80 01 00 4C */	lwz r0, 0x4c(r1)
-    /* 80364918 003614F8  38 21 00 48 */	addi r1, r1, 0x48
-    /* 8036491C 003614FC  7C 08 03 A6 */	mtlr r0
-    /* 80364920 00361500  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void PObjForeachAnim(HSD_PObj* pobj, s32 flags, void* r5, s32 r6, void* r7)
+{
+    if (pobj == NULL)
+        return;
 
+    if ((pobj->flags & 0x3000) == 0x1000
+        && pobj->u.x14_unk != NULL && pobj->u.x14_unk->aobj != NULL) {
+        callbackForeachFunc(pobj->u.x14_unk->aobj, pobj, POBJ_TYPE, r5, r6, r7);
+    }
+}
+
+void MObjForeachAnim(HSD_MObj* mobj, s32 flags, void* r5, s32 r6, void* r7)
+{
+    if (mobj == NULL)
+        return;
+
+    if (flags & 0x80 && mobj->aobj != NULL) {
+        callbackForeachFunc(mobj->aobj, mobj, MOBJ_TYPE, r5, r6, r7);
+    }
+    TObjForeachAnim(mobj->tobj, flags, r5, r6, r7);
+}
+
+void DObjForeachAnim(HSD_DObj* dobj, s32 flags, void* r5, s32 r6, void* r7)
+{
+    HSD_PObj* pobj;
+
+    while (dobj != NULL) {
+        if (flags & 4 && dobj->aobj != NULL) {
+            callbackForeachFunc(dobj->aobj, dobj, DOBJ_TYPE, r5, r6, r7);
+        }
+        MObjForeachAnim(dobj->mobj, flags, r5, r6, r7);
+        pobj = dobj->pobj;
+        if (flags & 0x100) {
+            PObjForeachAnim(pobj, flags, r5, r6, r7);
+        }
+        dobj = dobj->next;
+    }
+}
+
+// https://decomp.me/scratch/AOTU9
+#ifdef NON_MATCHING
+void JObjForeachAnim(HSD_JObj* jobj, s32 flags, void* r5, s32 r6, void* r7)
+{
+    HSD_JObj* child;
+    HSD_JObj* new_var;
+
+    !(jobj == NULL) ? (void)0 : __assert("aobj.c", 0x2CB, "obj");
+
+    if (flags & 0x20 && jobj->aobj != NULL) {
+        callbackForeachFunc(jobj->aobj, jobj, JOBJ_TYPE, r5, r6, r7);
+    }
+    if (jobj->flags & 0x4020 ? FALSE : TRUE) {
+        DObjForeachAnim(jobj->u.dobj, flags, r5, r6, r7);
+    }
+    RObjForeachAnim(jobj->robj, flags, r5, r6, r7);
+    if (!(jobj->flags & 0x1000)) {
+        child = jobj->child;
+        while (child != NULL) {
+            new_var = child;
+            JObjForeachAnim(new_var, flags, r5, r6, r7);
+            child = child->next;
+        }
+    }
+}
+#else
 #pragma push
-asm void func_80364924(void)
+asm void JObjForeachAnim()
 { // clang-format off
     nofralloc
     /* 80364924 00361504  7C 08 02 A6 */	mflr r0
@@ -582,7 +550,7 @@ lbl_80364B50:
     /* 80364B60 00361740  38 BB 00 00 */	addi r5, r27, 0
     /* 80364B64 00361744  38 DC 00 00 */	addi r6, r28, 0
     /* 80364B68 00361748  38 FD 00 00 */	addi r7, r29, 0
-    /* 80364B6C 0036174C  4B FF FC 71 */	bl func_803647DC
+    /* 80364B6C 0036174C  4B FF FC 71 */	bl DObjForeachAnim
 lbl_80364B70:
     /* 80364B70 00361750  83 19 00 80 */	lwz r24, 0x80(r25)
     /* 80364B74 00361754  48 00 00 34 */	b lbl_80364BA8
@@ -614,7 +582,7 @@ lbl_80364BC4:
     /* 80364BCC 003617AC  38 BB 00 00 */	addi r5, r27, 0
     /* 80364BD0 003617B0  38 DC 00 00 */	addi r6, r28, 0
     /* 80364BD4 003617B4  38 FD 00 00 */	addi r7, r29, 0
-    /* 80364BD8 003617B8  4B FF FD 4D */	bl func_80364924
+    /* 80364BD8 003617B8  4B FF FD 4D */	bl JObjForeachAnim
     /* 80364BDC 003617BC  82 B5 00 08 */	lwz r21, 8(r21)
 lbl_80364BE0:
     /* 80364BE0 003617C0  28 15 00 00 */	cmplwi r21, 0
@@ -632,6 +600,7 @@ lbl_80364BF4:
     /* 80364C04 003617E4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+#endif
 
 #pragma push
 asm void HSD_ForeachAnim(void*, ...)
@@ -748,7 +717,7 @@ lbl_80364D8C:
     /* 80364D9C 0036197C  38 BE 00 00 */	addi r5, r30, 0
     /* 80364DA0 00361980  38 DF 00 00 */	addi r6, r31, 0
     /* 80364DA4 00361984  38 E1 00 7C */	addi r7, r1, 0x7c
-    /* 80364DA8 00361988  4B FF FA 35 */	bl func_803647DC
+    /* 80364DA8 00361988  4B FF FA 35 */	bl DObjForeachAnim
 lbl_80364DAC:
     /* 80364DAC 0036198C  83 9B 00 80 */	lwz r28, 0x80(r27)
     /* 80364DB0 00361990  57 BA 05 AC */	rlwinm r26, r29, 0, 0x16, 0x16
@@ -781,7 +750,7 @@ lbl_80364E04:
     /* 80364E0C 003619EC  38 BE 00 00 */	addi r5, r30, 0
     /* 80364E10 003619F0  38 DF 00 00 */	addi r6, r31, 0
     /* 80364E14 003619F4  38 E1 00 7C */	addi r7, r1, 0x7c
-    /* 80364E18 003619F8  4B FF FB 0D */	bl func_80364924
+    /* 80364E18 003619F8  4B FF FB 0D */	bl JObjForeachAnim
     /* 80364E1C 003619FC  83 18 00 08 */	lwz r24, 8(r24)
 lbl_80364E20:
     /* 80364E20 00361A00  28 18 00 00 */	cmplwi r24, 0
