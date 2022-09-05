@@ -572,20 +572,11 @@ lbl_8033DB00:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/tmhsk // 0 (100%)
-#pragma push
-asm unk_t GXSetDispCopyGamma()
-{ // clang-format off
-    nofralloc
-/* 8033DB30 0033A710  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033DB34 0033A714  54 60 38 30 */	slwi r0, r3, 7
-/* 8033DB38 0033A718  84 64 01 EC */	lwzu r3, 0x1ec(r4)
-/* 8033DB3C 0033A71C  54 63 06 6C */	rlwinm r3, r3, 0, 0x19, 0x16
-/* 8033DB40 0033A720  7C 60 03 78 */	or r0, r3, r0
-/* 8033DB44 0033A724  90 04 00 00 */	stw r0, 0(r4)
-/* 8033DB48 0033A728  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetDispCopyGamma(s32 arg0)
+{
+    GXContext* temp_r4 = __GXContexts.main;
+    temp_r4->x100_data[0x3B] = (temp_r4->x100_data[0x3B] & 0xFFFFFE7F) | (arg0 << 7);
+}
 
 #pragma push
 asm unk_t GXCopyDisp()
