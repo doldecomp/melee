@@ -913,17 +913,10 @@ lbl_8033C858:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/wVMVF // 0 (100%)
-#pragma push
-asm unk_t GXInvalidateVtxCache()
-{ // clang-format off
-    nofralloc
-/* 8033C898 00339478  38 00 00 48 */	li r0, 0x48
-/* 8033C89C 0033947C  3C 60 CC 01 */	lis r3, 0xCC008000@ha
-/* 8033C8A0 00339480  98 03 80 00 */	stb r0, 0xCC008000@l(r3)
-/* 8033C8A4 00339484  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXInvalidateVtxCache()
+{
+    WGPIPE.u8 = GX_CMD_INVL_VC;
+}
 
 // https://decomp.me/scratch/o8jpO // 3315 (81.58%)
 #pragma push
