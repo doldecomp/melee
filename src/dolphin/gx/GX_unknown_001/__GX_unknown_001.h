@@ -23,7 +23,6 @@
 /* 004DAE80 */ extern const f32 lbl_804DE2A0[2];
 /* 004DAE7C */ extern const f32 lbl_804DE29C;
 /* 004DAE78 */ extern const f32 lbl_804DE298;
-/* 004DAE70 */ extern const f32 lbl_804DE290[2];
 /* 004DAE6C */ extern const f32 lbl_804DE28C;
 /* 004DAE68 */ extern const f32 lbl_804DE288;
 /* 004DAE64 */ extern const f32 lbl_804DE284;
