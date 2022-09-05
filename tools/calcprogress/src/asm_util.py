@@ -105,7 +105,7 @@ class AsmUtil:
         # Find sections in asm file by looking for .section directives
         for line in asm:
             sect_match = match(AsmUtil.SECTION_REGEX, line)
-            if sect_match != None:
+            if sect_match is not None:
                 # Section name
                 sect_name = sect_match.group("Name")
                 # Avoid recounting the same section
@@ -124,15 +124,6 @@ class AsmUtil:
                         # Newer DKP will not generate size 0 sections
                         pass
                     sections_found.add(sect_name)
-
-        # Dump sections
-        # print(f"File: {obj_file}")
-        # print("Sections:")
-        # for i in sections:
-        #     if i.type == AsmUtil.SECTION_DATA:
-        #         print(
-        #             f"start: {hex(i.start & 0xFFFFFFFF)}, size: {hex(i.size & 0xFFFFFFFF)}, type: {('CODE', 'DATA')[i.type]}")
-        # print()
 
         return sections
 
