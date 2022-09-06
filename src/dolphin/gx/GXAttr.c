@@ -65,7 +65,7 @@ void lbl_8033C95C(void);
 void lbl_8033C910(void);
 void lbl_8033C918(void);
 
-static void* jtbl_80401048[] = {
+static jtbl_t jtbl_80401048 = {
     &lbl_8033BF20, &lbl_8033BF38, &lbl_8033BF58, &lbl_8033BF78,
     &lbl_8033BF98, &lbl_8033BFB8, &lbl_8033BFD8, &lbl_8033BFF8,
     &lbl_8033C018, &lbl_8033C038, &lbl_8033C058, &lbl_8033C0D0,
@@ -75,7 +75,7 @@ static void* jtbl_80401048[] = {
     &lbl_8033C204, &lbl_8033C094
 };
 
-static void* jtbl_804010B0[] = {
+static jtbl_t jtbl_804010B0 = {
     &lbl_8033C450, &lbl_8033C48C, &lbl_8033C4F0, &lbl_8033C51C,
     &lbl_8033C548, &lbl_8033C588, &lbl_8033C5C4, &lbl_8033C604,
     &lbl_8033C644, &lbl_8033C684, &lbl_8033C6C4, &lbl_8033C704,
@@ -83,12 +83,12 @@ static void* jtbl_804010B0[] = {
     &lbl_8033C48C
 };
 
-static void* jtbl_804010F4[] = {
+static jtbl_t jtbl_804010F4 = {
     &lbl_8033CA6C, &lbl_8033CA8C, &lbl_8033CAAC, &lbl_8033CACC,
     &lbl_8033CAEC, &lbl_8033CB04, &lbl_8033CB24
 };
 
-static void* jtbl_80401110[] = {
+static jtbl_t jtbl_80401110 = {
     &lbl_8033C8E0, &lbl_8033C8EC, &lbl_8033C8F8, &lbl_8033C904,
     &lbl_8033C920, &lbl_8033C928, &lbl_8033C930, &lbl_8033C938,
     &lbl_8033C940, &lbl_8033C948, &lbl_8033C950, &lbl_8033C958,

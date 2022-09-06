@@ -101,7 +101,7 @@ void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar)
 #else
 
 extern char* lbl_80401FF8;
-extern void* jtbl_804022D4[];
+extern jtbl_t jtbl_804022D4;
 extern char* lbl_804D5C18;
 extern void* lbl_804D738C;
 void lbl_803459C0();
