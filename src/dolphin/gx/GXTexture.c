@@ -725,8 +725,7 @@ asm unk_t GXGetTexObjWidth()
 
 // https://decomp.me/scratch/RPxXA
 #pragma push
-asm unk_t GXGetTexObjHeight()
-{ // clang-format off
+asm unk_t GXGetTexObjHeight(){ // clang-format off
     nofralloc
 /* 8033EE10 0033B9F0  80 03 00 08 */	lwz r0, 8(r3)
 /* 8033EE14 0033B9F4  54 03 B5 BE */	rlwinm r3, r0, 0x16, 0x16, 0x1f
@@ -735,7 +734,8 @@ asm unk_t GXGetTexObjHeight()
 } // clang-format on
 #pragma pop
 
-GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj) {
+GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj)
+{
     return tex_obj->tex_fmt;
 }
 
@@ -1047,31 +1047,13 @@ lbl_8033F1D4:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/5Ta0r // 0 (100%)
-#pragma push
-asm unk_t GXInitTlutRegion()
-{ // clang-format off
-    nofralloc
-/* 8033F228 0033BE08  38 00 00 00 */	li r0, 0
-/* 8033F22C 0033BE0C  90 03 00 00 */	stw r0, 0(r3)
-/* 8033F230 0033BE10  3C 04 FF F8 */	addis r0, r4, 0xfff8
-/* 8033F234 0033BE14  54 04 BA 7E */	srwi r4, r0, 9
-/* 8033F238 0033BE18  80 C3 00 00 */	lwz r6, 0(r3)
-/* 8033F23C 0033BE1C  54 A0 50 2A */	slwi r0, r5, 0xa
-/* 8033F240 0033BE20  54 C5 00 2A */	rlwinm r5, r6, 0, 0, 0x15
-/* 8033F244 0033BE24  7C A4 23 78 */	or r4, r5, r4
-/* 8033F248 0033BE28  90 83 00 00 */	stw r4, 0(r3)
-/* 8033F24C 0033BE2C  80 83 00 00 */	lwz r4, 0(r3)
-/* 8033F250 0033BE30  54 84 05 94 */	rlwinm r4, r4, 0, 0x16, 0xa
-/* 8033F254 0033BE34  7C 80 03 78 */	or r0, r4, r0
-/* 8033F258 0033BE38  90 03 00 00 */	stw r0, 0(r3)
-/* 8033F25C 0033BE3C  80 03 00 00 */	lwz r0, 0(r3)
-/* 8033F260 0033BE40  54 00 02 3E */	clrlwi r0, r0, 8
-/* 8033F264 0033BE44  64 00 65 00 */	oris r0, r0, 0x6500
-/* 8033F268 0033BE48  90 03 00 00 */	stw r0, 0(r3)
-/* 8033F26C 0033BE4C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
+{
+    *arg0 = 0;
+    *arg0 = (*arg0 & 0xFFFFFC00) | ((u32) (arg1 + 0xFFF80000) >> 9U);
+    *arg0 = (*arg0 & 0xFFE003FF) | (arg2 << 0xA);
+    *arg0 = (*arg0 & 0xFFFFFF) | 0x65000000;
+}
 
 // https://decomp.me/scratch/uPSnJ // 1035 (42.50%)
 #pragma push
