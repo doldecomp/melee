@@ -60,5 +60,6 @@ typedef struct _ ## module ## _Unk ## number module ## _Unk ## number;
 #define qr5 5
 #define qr6 6
 #define qr7 7
+#pragma endregion
 
 #endif

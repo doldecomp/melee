@@ -391,7 +391,6 @@ lbl_803415C0:
 
 // https://decomp.me/scratch/RalqB // 342 (95.18%)
 #pragma push
-#pragma dont_inline on
 asm void GXSetViewportJitter(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz, u32 field)
 { // clang-format off
     nofralloc
