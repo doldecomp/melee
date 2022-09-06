@@ -8,7 +8,6 @@
 /* 003FDD84 */ extern const GXRenderModeObj lbl_804011A4;
 /* 003FDD48 */ extern const GXRenderModeObj GXNtsc480IntDf;
 /* 0033E33C */ extern UNK_FUNC(GXSetScissor);
-/* 0033E2CC */ extern UNK_FUNC(GXSetViewport);
 /* 0033E12C */ extern UNK_FUNC(GXLoadTexMtxImm);
 /* 0033E0F0 */ extern void GXSetCurrentMtx(s32);
 /* 0033E0B0 */ extern UNK_FUNC(GXLoadNrmMtxImm);

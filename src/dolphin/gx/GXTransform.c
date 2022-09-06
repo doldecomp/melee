@@ -1,4 +1,5 @@
 #include <common_structs.h>
+#include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
@@ -12,7 +13,7 @@ f32 const lbl_804DE308 = 342.0F;
 f32 const lbl_804DE30C = 16777215.0F;
 
 #pragma push
-asm unk_t GXProject()
+asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx, f32* sy, f32* sz)
 { // clang-format off
     nofralloc
 /* 80341148 0033DD28  C0 83 00 00 */	lfs f4, 0(r3)
@@ -390,7 +391,8 @@ lbl_803415C0:
 
 // https://decomp.me/scratch/RalqB // 342 (95.18%)
 #pragma push
-asm unk_t GXSetViewportJitter()
+#pragma dont_inline on
+asm void GXSetViewportJitter(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz, u32 field)
 { // clang-format off
     nofralloc
 /* 803415D0 0033E1B0  7C 08 02 A6 */	mflr r0
@@ -471,7 +473,7 @@ lbl_80341688:
 
 // https://decomp.me/scratch/xCqrv // 0 (100%)
 #pragma push
-asm unk_t GXSetViewport()
+asm void GXSetViewport(f32, f32, f32, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 803416EC 0033E2CC  7C 08 02 A6 */	mflr r0
