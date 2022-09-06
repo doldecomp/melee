@@ -138,4 +138,10 @@ typedef struct
     GXContext* null;
 } GXContexts;
 
+typedef struct _GXTexObj {
+    u8 x0_pad[0x14];  // at 0x00
+    GXTexFmt tex_fmt; // at 0x14
+    u8 x18_pad[8];    // at 0x18
+} GXTexObj;
+
 #endif

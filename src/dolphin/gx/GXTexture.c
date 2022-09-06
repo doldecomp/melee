@@ -735,15 +735,9 @@ asm unk_t GXGetTexObjHeight()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/raZ4n // 0 (100%)
-#pragma push
-asm unk_t GXGetTexObjFmt()
-{ // clang-format off
-    nofralloc
-/* 8033EE20 0033BA00  80 63 00 14 */	lwz r3, 0x14(r3)
-/* 8033EE24 0033BA04  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj) {
+    return tex_obj->tex_fmt;
+}
 
 // https://decomp.me/scratch/ZnHCT
 #pragma push
