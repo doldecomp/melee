@@ -1,9 +1,20 @@
-.include "macros.inc"
+#include <common_structs.h>
+#include <dolphin/gx/GX_unknown_001.h>
+#include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
+#include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__GX_unknown_001.h>
 
-.section .text
+f32 const lbl_804DE2F0 = 0.0F;
+f32 const lbl_804DE2F4 = 1.0F;
+Vec2 const lbl_804DE2F8 = { 0.5F, 0.0F };
+f64 const lbl_804DE300 = 4503599627370496.0L;
+f32 const lbl_804DE308 = 342.0F;
+f32 const lbl_804DE30C = 16777215.0F;
 
-.global GXProject
-GXProject:
+#pragma push
+asm unk_t GXProject()
+{ // clang-format off
+    nofralloc
 /* 80341148 0033DD28  C0 83 00 00 */	lfs f4, 0(r3)
 /* 8034114C 0033DD2C  C0 03 00 04 */	lfs f0, 4(r3)
 /* 80341150 0033DD30  C0 C3 00 10 */	lfs f6, 0x10(r3)
@@ -20,7 +31,7 @@ GXProject:
 /* 8034117C 0033DD5C  EC 84 00 72 */	fmuls f4, f4, f1
 /* 80341180 0033DD60  EC 40 00 B2 */	fmuls f2, f0, f2
 /* 80341184 0033DD64  ED 6B 00 F2 */	fmuls f11, f11, f3
-/* 80341188 0033DD68  C0 22 E9 10 */	lfs f1, lbl_804DE2F0@sda21(r2)
+/* 80341188 0033DD68  C0 22 E9 10 */	lfs f1, lbl_804DE2F0(r2)
 /* 8034118C 0033DD6C  ED 2A 48 2A */	fadds f9, f10, f9
 /* 80341190 0033DD70  C0 04 00 00 */	lfs f0, 0(r4)
 /* 80341194 0033DD74  ED 08 00 F2 */	fmuls f8, f8, f3
@@ -39,7 +50,7 @@ GXProject:
 /* 803411C8 0033DDA8  ED 25 00 2A */	fadds f9, f5, f0
 /* 803411CC 0033DDAC  40 82 00 4C */	bne lbl_80341218
 /* 803411D0 0033DDB0  FC 00 48 50 */	fneg f0, f9
-/* 803411D4 0033DDB4  C0 22 E9 14 */	lfs f1, lbl_804DE2F4@sda21(r2)
+/* 803411D4 0033DDB4  C0 22 E9 14 */	lfs f1, lbl_804DE2F4(r2)
 /* 803411D8 0033DDB8  C0 C4 00 04 */	lfs f6, 4(r4)
 /* 803411DC 0033DDBC  C0 A4 00 08 */	lfs f5, 8(r4)
 /* 803411E0 0033DDC0  EC 01 00 24 */	fdivs f0, f1, f0
@@ -68,12 +79,12 @@ lbl_80341218:
 /* 80341238 0033DE18  C0 44 00 18 */	lfs f2, 0x18(r4)
 /* 8034123C 0033DE1C  EC C6 28 2A */	fadds f6, f6, f5
 /* 80341240 0033DE20  EC 64 18 2A */	fadds f3, f4, f3
-/* 80341244 0033DE24  C0 02 E9 14 */	lfs f0, lbl_804DE2F4@sda21(r2)
+/* 80341244 0033DE24  C0 02 E9 14 */	lfs f0, lbl_804DE2F4(r2)
 /* 80341248 0033DE28  EC E2 08 2A */	fadds f7, f2, f1
 lbl_8034124C:
 /* 8034124C 0033DE2C  C0 85 00 08 */	lfs f4, 8(r5)
 /* 80341250 0033DE30  FC 20 18 50 */	fneg f1, f3
-/* 80341254 0033DE34  C0 A2 E9 18 */	lfs f5, lbl_804DE2F8@sda21(r2)
+/* 80341254 0033DE34  C0 A2 E9 18 */	lfs f5, lbl_804DE2F8(r2)
 /* 80341258 0033DE38  EC 46 01 32 */	fmuls f2, f6, f4
 /* 8034125C 0033DE3C  C0 65 00 00 */	lfs f3, 0(r5)
 /* 80341260 0033DE40  EC 84 01 72 */	fmuls f4, f4, f5
@@ -99,43 +110,47 @@ lbl_8034124C:
 /* 803412B0 0033DE90  EC 02 00 2A */	fadds f0, f2, f0
 /* 803412B4 0033DE94  D0 08 00 00 */	stfs f0, 0(r8)
 /* 803412B8 0033DE98  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/2kUst
-.global GXSetProjection
-GXSetProjection:
-/* 803412BC 0033DE9C  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
+// https://decomp.me/scratch/2kUst
+#pragma push
+asm unk_t GXSetProjection()
+{ // clang-format off
+    nofralloc
+/* 803412BC 0033DE9C  80 AD A5 08 */	lwz r5, __GXContexts(r13)
 /* 803412C0 0033DEA0  2C 04 00 01 */	cmpwi r4, 1
 /* 803412C4 0033DEA4  90 85 04 20 */	stw r4, 0x420(r5)
 /* 803412C8 0033DEA8  C0 03 00 00 */	lfs f0, 0(r3)
-/* 803412CC 0033DEAC  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803412CC 0033DEAC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803412D0 0033DEB0  D0 04 04 24 */	stfs f0, 0x424(r4)
 /* 803412D4 0033DEB4  C0 03 00 14 */	lfs f0, 0x14(r3)
-/* 803412D8 0033DEB8  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803412D8 0033DEB8  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803412DC 0033DEBC  D0 04 04 2C */	stfs f0, 0x42c(r4)
 /* 803412E0 0033DEC0  C0 03 00 28 */	lfs f0, 0x28(r3)
-/* 803412E4 0033DEC4  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803412E4 0033DEC4  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803412E8 0033DEC8  D0 04 04 34 */	stfs f0, 0x434(r4)
 /* 803412EC 0033DECC  C0 03 00 2C */	lfs f0, 0x2c(r3)
-/* 803412F0 0033DED0  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803412F0 0033DED0  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803412F4 0033DED4  D0 04 04 38 */	stfs f0, 0x438(r4)
 /* 803412F8 0033DED8  40 82 00 20 */	bne lbl_80341318
 /* 803412FC 0033DEDC  C0 03 00 0C */	lfs f0, 0xc(r3)
-/* 80341300 0033DEE0  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 80341300 0033DEE0  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341304 0033DEE4  D0 04 04 28 */	stfs f0, 0x428(r4)
 /* 80341308 0033DEE8  C0 03 00 1C */	lfs f0, 0x1c(r3)
-/* 8034130C 0033DEEC  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 8034130C 0033DEEC  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341310 0033DEF0  D0 03 04 30 */	stfs f0, 0x430(r3)
 /* 80341314 0033DEF4  48 00 00 1C */	b lbl_80341330
 lbl_80341318:
 /* 80341318 0033DEF8  C0 03 00 08 */	lfs f0, 8(r3)
-/* 8034131C 0033DEFC  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 8034131C 0033DEFC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341320 0033DF00  D0 04 04 28 */	stfs f0, 0x428(r4)
 /* 80341324 0033DF04  C0 03 00 18 */	lfs f0, 0x18(r3)
-/* 80341328 0033DF08  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80341328 0033DF08  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8034132C 0033DF0C  D0 03 04 30 */	stfs f0, 0x430(r3)
 lbl_80341330:
 /* 80341330 0033DF10  38 00 00 10 */	li r0, 0x10
-/* 80341334 0033DF14  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 80341334 0033DF14  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341338 0033DF18  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 8034133C 0033DF1C  3C 60 00 06 */	lis r3, 0x00061020@ha
 /* 80341340 0033DF20  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
@@ -158,13 +173,17 @@ lbl_80341330:
 /* 80341384 0033DF64  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80341388 0033DF68  B0 04 00 02 */	sth r0, 2(r4)
 /* 8034138C 0033DF6C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global GXGetProjectionv
-GXGetProjectionv:
+#pragma push
+asm unk_t GXGetProjectionv()
+{ // clang-format off
+    nofralloc
 /* 80341390 0033DF70  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80341394 0033DF74  3C 00 43 30 */	lis r0, 0x4330
-/* 80341398 0033DF78  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
-/* 8034139C 0033DF7C  C8 22 E9 20 */	lfd f1, lbl_804DE300@sda21(r2)
+/* 80341398 0033DF78  80 8D A5 08 */	lwz r4, __GXContexts(r13)
+/* 8034139C 0033DF7C  C8 22 E9 20 */	lfd f1, lbl_804DE300(r2)
 /* 803413A0 0033DF80  80 84 04 20 */	lwz r4, 0x420(r4)
 /* 803413A4 0033DF84  90 81 00 14 */	stw r4, 0x14(r1)
 /* 803413A8 0033DF88  90 01 00 10 */	stw r0, 0x10(r1)
@@ -172,28 +191,33 @@ GXGetProjectionv:
 /* 803413B0 0033DF90  38 21 00 18 */	addi r1, r1, 0x18
 /* 803413B4 0033DF94  EC 00 08 28 */	fsubs f0, f0, f1
 /* 803413B8 0033DF98  D0 03 00 00 */	stfs f0, 0(r3)
-/* 803413BC 0033DF9C  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803413BC 0033DF9C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803413C0 0033DFA0  C0 04 04 24 */	lfs f0, 0x424(r4)
 /* 803413C4 0033DFA4  D0 03 00 04 */	stfs f0, 4(r3)
-/* 803413C8 0033DFA8  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803413C8 0033DFA8  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803413CC 0033DFAC  C0 04 04 28 */	lfs f0, 0x428(r4)
 /* 803413D0 0033DFB0  D0 03 00 08 */	stfs f0, 8(r3)
-/* 803413D4 0033DFB4  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803413D4 0033DFB4  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803413D8 0033DFB8  C0 04 04 2C */	lfs f0, 0x42c(r4)
 /* 803413DC 0033DFBC  D0 03 00 0C */	stfs f0, 0xc(r3)
-/* 803413E0 0033DFC0  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803413E0 0033DFC0  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803413E4 0033DFC4  C0 04 04 30 */	lfs f0, 0x430(r4)
 /* 803413E8 0033DFC8  D0 03 00 10 */	stfs f0, 0x10(r3)
-/* 803413EC 0033DFCC  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803413EC 0033DFCC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803413F0 0033DFD0  C0 04 04 34 */	lfs f0, 0x434(r4)
 /* 803413F4 0033DFD4  D0 03 00 14 */	stfs f0, 0x14(r3)
-/* 803413F8 0033DFD8  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803413F8 0033DFD8  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803413FC 0033DFDC  C0 04 04 38 */	lfs f0, 0x438(r4)
 /* 80341400 0033DFE0  D0 03 00 18 */	stfs f0, 0x18(r3)
 /* 80341404 0033DFE4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/rj8VP // 0 (100%)
-WriteMTXPS4x3:
+// https://decomp.me/scratch/rj8VP // 0 (100%)
+#pragma push
+asm unk_t WriteMTXPS4x3()
+{ // clang-format off
+    nofralloc
 /* 80341408 0033DFE8  E0 03 00 00 */	psq_l f0, 0(r3), 0, qr0
 /* 8034140C 0033DFEC  E0 23 00 08 */	psq_l f1, 8(r3), 0, qr0
 /* 80341410 0033DFF0  E0 43 00 10 */	psq_l f2, 16(r3), 0, qr0
@@ -207,9 +231,14 @@ WriteMTXPS4x3:
 /* 80341430 0033E010  F0 84 00 00 */	psq_st f4, 0(r4), 0, qr0
 /* 80341434 0033E014  F0 A4 00 00 */	psq_st f5, 0(r4), 0, qr0
 /* 80341438 0033E018  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/OH9kG // 0 (100%)
-WriteMTXPS3x3from3x4:
+// https://decomp.me/scratch/OH9kG // 0 (100%)
+#pragma push
+asm unk_t WriteMTXPS3x3from3x4()
+{ // clang-format off
+    nofralloc
 /* 8034143C 0033E01C  E0 03 00 00 */	psq_l f0, 0(r3), 0, qr0
 /* 80341440 0033E020  C0 23 00 08 */	lfs f1, 8(r3)
 /* 80341444 0033E024  E0 43 00 10 */	psq_l f2, 16(r3), 0, qr0
@@ -223,9 +252,14 @@ WriteMTXPS3x3from3x4:
 /* 80341464 0033E044  F0 84 00 00 */	psq_st f4, 0(r4), 0, qr0
 /* 80341468 0033E048  D0 A4 00 00 */	stfs f5, 0(r4)
 /* 8034146C 0033E04C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/VVoAR // 0 (100%)
-WriteMTXPS4x2:
+// https://decomp.me/scratch/VVoAR // 0 (100%)
+#pragma push
+asm unk_t WriteMTXPS4x2()
+{ // clang-format off
+    nofralloc
 /* 80341470 0033E050  E0 03 00 00 */	psq_l f0, 0(r3), 0, qr0
 /* 80341474 0033E054  E0 23 00 08 */	psq_l f1, 8(r3), 0, qr0
 /* 80341478 0033E058  E0 43 00 10 */	psq_l f2, 16(r3), 0, qr0
@@ -235,10 +269,14 @@ WriteMTXPS4x2:
 /* 80341488 0033E068  F0 44 00 00 */	psq_st f2, 0(r4), 0, qr0
 /* 8034148C 0033E06C  F0 64 00 00 */	psq_st f3, 0(r4), 0, qr0
 /* 80341490 0033E070  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/7MZFm // 475 (68.33%)
-.global GXLoadPosMtxImm
-GXLoadPosMtxImm:
+// https://decomp.me/scratch/7MZFm // 475 (68.33%)
+#pragma push
+asm unk_t GXLoadPosMtxImm()
+{ // clang-format off
+    nofralloc
 /* 80341494 0033E074  7C 08 02 A6 */	mflr r0
 /* 80341498 0033E078  90 01 00 04 */	stw r0, 4(r1)
 /* 8034149C 0033E07C  94 21 FF F8 */	stwu r1, -8(r1)
@@ -254,10 +292,14 @@ GXLoadPosMtxImm:
 /* 803414C4 0033E0A4  38 21 00 08 */	addi r1, r1, 8
 /* 803414C8 0033E0A8  7C 08 03 A6 */	mtlr r0
 /* 803414CC 0033E0AC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/1k0kv // 175 (89.06%)
-.global GXLoadNrmMtxImm
-GXLoadNrmMtxImm:
+// https://decomp.me/scratch/1k0kv // 175 (89.06%)
+#pragma push
+asm unk_t GXLoadNrmMtxImm()
+{ // clang-format off
+    nofralloc
 /* 803414D0 0033E0B0  7C 08 02 A6 */	mflr r0
 /* 803414D4 0033E0B4  90 01 00 04 */	stw r0, 4(r1)
 /* 803414D8 0033E0B8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -274,14 +316,18 @@ GXLoadNrmMtxImm:
 /* 80341504 0033E0E4  38 21 00 08 */	addi r1, r1, 8
 /* 80341508 0033E0E8  7C 08 03 A6 */	mtlr r0
 /* 8034150C 0033E0EC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/3z4vX // 300 (80%)
-.global GXSetCurrentMtx
-GXSetCurrentMtx:
+// https://decomp.me/scratch/3z4vX // 300 (80%)
+#pragma push
+asm void GXSetCurrentMtx(s32)
+{ // clang-format off
+    nofralloc
 /* 80341510 0033E0F0  7C 08 02 A6 */	mflr r0
 /* 80341514 0033E0F4  90 01 00 04 */	stw r0, 4(r1)
 /* 80341518 0033E0F8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8034151C 0033E0FC  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 8034151C 0033E0FC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341520 0033E100  38 84 00 80 */	addi r4, r4, 0x80
 /* 80341524 0033E104  80 04 00 00 */	lwz r0, 0(r4)
 /* 80341528 0033E108  54 00 00 32 */	rlwinm r0, r0, 0, 0, 0x19
@@ -293,10 +339,14 @@ GXSetCurrentMtx:
 /* 80341540 0033E120  38 21 00 08 */	addi r1, r1, 8
 /* 80341544 0033E124  7C 08 03 A6 */	mtlr r0
 /* 80341548 0033E128  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/7Jh0i // 435 (86.82%)
-.global GXLoadTexMtxImm
-GXLoadTexMtxImm:
+// https://decomp.me/scratch/7Jh0i // 435 (86.82%)
+#pragma push
+asm unk_t GXLoadTexMtxImm()
+{ // clang-format off
+    nofralloc
 /* 8034154C 0033E12C  7C 08 02 A6 */	mflr r0
 /* 80341550 0033E130  90 01 00 04 */	stw r0, 4(r1)
 /* 80341554 0033E134  94 21 FF F8 */	stwu r1, -8(r1)
@@ -336,10 +386,14 @@ lbl_803415C0:
 /* 803415C4 0033E1A4  38 21 00 08 */	addi r1, r1, 8
 /* 803415C8 0033E1A8  7C 08 03 A6 */	mtlr r0
 /* 803415CC 0033E1AC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/RalqB // 342 (95.18%)
-.global GXSetViewportJitter
-GXSetViewportJitter:
+// https://decomp.me/scratch/RalqB // 342 (95.18%)
+#pragma push
+asm unk_t GXSetViewportJitter()
+{ // clang-format off
+    nofralloc
 /* 803415D0 0033E1B0  7C 08 02 A6 */	mflr r0
 /* 803415D4 0033E1B4  90 01 00 04 */	stw r0, 4(r1)
 /* 803415D8 0033E1B8  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -351,36 +405,36 @@ GXSetViewportJitter:
 /* 803415F0 0033E1D0  DB 41 00 30 */	stfd f26, 0x30(r1)
 /* 803415F4 0033E1D4  28 03 00 00 */	cmplwi r3, 0
 /* 803415F8 0033E1D8  40 82 00 0C */	bne lbl_80341604
-/* 803415FC 0033E1DC  C0 02 E9 18 */	lfs f0, lbl_804DE2F8@sda21(r2)
+/* 803415FC 0033E1DC  C0 02 E9 18 */	lfs f0, lbl_804DE2F8(r2)
 /* 80341600 0033E1E0  EC 42 00 28 */	fsubs f2, f2, f0
 lbl_80341604:
-/* 80341604 0033E1E4  C1 62 E9 18 */	lfs f11, lbl_804DE2F8@sda21(r2)
+/* 80341604 0033E1E4  C1 62 E9 18 */	lfs f11, lbl_804DE2F8(r2)
 /* 80341608 0033E1E8  FD 40 20 50 */	fneg f10, f4
-/* 8034160C 0033E1EC  C0 02 E9 2C */	lfs f0, lbl_804DE30C@sda21(r2)
-/* 80341610 0033E1F0  C1 22 E9 28 */	lfs f9, lbl_804DE308@sda21(r2)
+/* 8034160C 0033E1EC  C0 02 E9 2C */	lfs f0, lbl_804DE30C(r2)
+/* 80341610 0033E1F0  C1 22 E9 28 */	lfs f9, lbl_804DE308(r2)
 /* 80341614 0033E1F4  EF E3 02 F2 */	fmuls f31, f3, f11
-/* 80341618 0033E1F8  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80341618 0033E1F8  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8034161C 0033E1FC  EC E4 02 F2 */	fmuls f7, f4, f11
 /* 80341620 0033E200  D0 23 04 3C */	stfs f1, 0x43c(r3)
 /* 80341624 0033E204  ED 01 F8 2A */	fadds f8, f1, f31
 /* 80341628 0033E208  EF C0 01 B2 */	fmuls f30, f0, f6
-/* 8034162C 0033E20C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 8034162C 0033E20C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341630 0033E210  EC 22 38 2A */	fadds f1, f2, f7
 /* 80341634 0033E214  D0 43 04 40 */	stfs f2, 0x440(r3)
 /* 80341638 0033E218  EC 00 01 72 */	fmuls f0, f0, f5
 /* 8034163C 0033E21C  EF AA 02 F2 */	fmuls f29, f10, f11
-/* 80341640 0033E220  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80341640 0033E220  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341644 0033E224  EF 69 40 2A */	fadds f27, f9, f8
 /* 80341648 0033E228  D0 63 04 44 */	stfs f3, 0x444(r3)
 /* 8034164C 0033E22C  EF 49 08 2A */	fadds f26, f9, f1
 /* 80341650 0033E230  EF 9E 00 28 */	fsubs f28, f30, f0
-/* 80341654 0033E234  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80341654 0033E234  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341658 0033E238  D0 83 04 48 */	stfs f4, 0x448(r3)
-/* 8034165C 0033E23C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 8034165C 0033E23C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341660 0033E240  D0 A3 04 4C */	stfs f5, 0x44c(r3)
-/* 80341664 0033E244  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80341664 0033E244  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341668 0033E248  D0 C3 04 50 */	stfs f6, 0x450(r3)
-/* 8034166C 0033E24C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 8034166C 0033E24C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341670 0033E250  88 03 04 54 */	lbz r0, 0x454(r3)
 /* 80341674 0033E254  28 00 00 00 */	cmplwi r0, 0
 /* 80341678 0033E258  41 82 00 10 */	beq lbl_80341688
@@ -389,7 +443,7 @@ lbl_80341604:
 /* 80341684 0033E264  4B FF FA 51 */	bl __GXSetRange
 lbl_80341688:
 /* 80341688 0033E268  38 00 00 10 */	li r0, 0x10
-/* 8034168C 0033E26C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 8034168C 0033E26C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341690 0033E270  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 80341694 0033E274  3C 80 00 05 */	lis r4, 0x0005101A@ha
 /* 80341698 0033E278  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
@@ -413,10 +467,14 @@ lbl_80341688:
 /* 803416E0 0033E2C0  CB 41 00 30 */	lfd f26, 0x30(r1)
 /* 803416E4 0033E2C4  38 21 00 60 */	addi r1, r1, 0x60
 /* 803416E8 0033E2C8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/xCqrv // 0 (100%)
-.global GXSetViewport
-GXSetViewport:
+// https://decomp.me/scratch/xCqrv // 0 (100%)
+#pragma push
+asm unk_t GXSetViewport()
+{ // clang-format off
+    nofralloc
 /* 803416EC 0033E2CC  7C 08 02 A6 */	mflr r0
 /* 803416F0 0033E2D0  90 01 00 04 */	stw r0, 4(r1)
 /* 803416F4 0033E2D4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -426,34 +484,42 @@ GXSetViewport:
 /* 80341704 0033E2E4  38 21 00 08 */	addi r1, r1, 8
 /* 80341708 0033E2E8  7C 08 03 A6 */	mtlr r0
 /* 8034170C 0033E2EC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/cJr19
-.global GXGetViewportv
-GXGetViewportv:
-/* 80341710 0033E2F0  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+// https://decomp.me/scratch/cJr19
+#pragma push
+asm unk_t GXGetViewportv()
+{ // clang-format off
+    nofralloc
+/* 80341710 0033E2F0  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341714 0033E2F4  C0 04 04 3C */	lfs f0, 0x43c(r4)
 /* 80341718 0033E2F8  D0 03 00 00 */	stfs f0, 0(r3)
-/* 8034171C 0033E2FC  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 8034171C 0033E2FC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341720 0033E300  C0 04 04 40 */	lfs f0, 0x440(r4)
 /* 80341724 0033E304  D0 03 00 04 */	stfs f0, 4(r3)
-/* 80341728 0033E308  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 80341728 0033E308  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 8034172C 0033E30C  C0 04 04 44 */	lfs f0, 0x444(r4)
 /* 80341730 0033E310  D0 03 00 08 */	stfs f0, 8(r3)
-/* 80341734 0033E314  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 80341734 0033E314  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341738 0033E318  C0 04 04 48 */	lfs f0, 0x448(r4)
 /* 8034173C 0033E31C  D0 03 00 0C */	stfs f0, 0xc(r3)
-/* 80341740 0033E320  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 80341740 0033E320  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341744 0033E324  C0 04 04 4C */	lfs f0, 0x44c(r4)
 /* 80341748 0033E328  D0 03 00 10 */	stfs f0, 0x10(r3)
-/* 8034174C 0033E32C  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 8034174C 0033E32C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341750 0033E330  C0 04 04 50 */	lfs f0, 0x450(r4)
 /* 80341754 0033E334  D0 03 00 14 */	stfs f0, 0x14(r3)
 /* 80341758 0033E338  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/R15tQ // 1725 (60.80%)
-.global GXSetScissor
-GXSetScissor:
-/* 8034175C 0033E33C  80 ED A5 08 */	lwz r7, __GXContexts@sda21(r13)
+// https://decomp.me/scratch/R15tQ // 1725 (60.80%)
+#pragma push
+asm unk_t GXSetScissor()
+{ // clang-format off
+    nofralloc
+/* 8034175C 0033E33C  80 ED A5 08 */	lwz r7, __GXContexts(r13)
 /* 80341760 0033E340  39 03 01 56 */	addi r8, r3, 0x156
 /* 80341764 0033E344  38 05 FF FF */	addi r0, r5, -1
 /* 80341768 0033E348  38 A7 00 F8 */	addi r5, r7, 0xf8
@@ -465,7 +531,7 @@ GXSetScissor:
 /* 80341780 0033E360  90 65 00 00 */	stw r3, 0(r5)
 /* 80341784 0033E364  38 66 FF FF */	addi r3, r6, -1
 /* 80341788 0033E368  55 07 60 26 */	slwi r7, r8, 0xc
-/* 8034178C 0033E36C  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r13)
+/* 8034178C 0033E36C  80 AD A5 08 */	lwz r5, __GXContexts(r13)
 /* 80341790 0033E370  7C 84 1A 14 */	add r4, r4, r3
 /* 80341794 0033E374  54 03 60 26 */	slwi r3, r0, 0xc
 /* 80341798 0033E378  39 05 00 F8 */	addi r8, r5, 0xf8
@@ -476,20 +542,20 @@ GXSetScissor:
 /* 803417AC 0033E38C  7C 00 3B 78 */	or r0, r0, r7
 /* 803417B0 0033E390  90 08 00 00 */	stw r0, 0(r8)
 /* 803417B4 0033E394  38 00 00 00 */	li r0, 0
-/* 803417B8 0033E398  80 ED A5 08 */	lwz r7, __GXContexts@sda21(r13)
+/* 803417B8 0033E398  80 ED A5 08 */	lwz r7, __GXContexts(r13)
 /* 803417BC 0033E39C  39 07 00 FC */	addi r8, r7, 0xfc
 /* 803417C0 0033E3A0  80 E8 00 00 */	lwz r7, 0(r8)
 /* 803417C4 0033E3A4  54 E7 00 28 */	rlwinm r7, r7, 0, 0, 0x14
 /* 803417C8 0033E3A8  7C E4 23 78 */	or r4, r7, r4
 /* 803417CC 0033E3AC  90 88 00 00 */	stw r4, 0(r8)
-/* 803417D0 0033E3B0  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803417D0 0033E3B0  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803417D4 0033E3B4  38 E4 00 FC */	addi r7, r4, 0xfc
 /* 803417D8 0033E3B8  80 87 00 00 */	lwz r4, 0(r7)
 /* 803417DC 0033E3BC  54 84 05 10 */	rlwinm r4, r4, 0, 0x14, 8
 /* 803417E0 0033E3C0  7C 83 1B 78 */	or r3, r4, r3
 /* 803417E4 0033E3C4  90 67 00 00 */	stw r3, 0(r7)
 /* 803417E8 0033E3C8  98 C5 80 00 */	stb r6, 0xCC008000@l(r5)
-/* 803417EC 0033E3CC  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803417EC 0033E3CC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803417F0 0033E3D0  80 64 00 F8 */	lwz r3, 0xf8(r4)
 /* 803417F4 0033E3D4  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 803417F8 0033E3D8  98 C5 80 00 */	stb r6, -0x8000(r5)
@@ -497,12 +563,16 @@ GXSetScissor:
 /* 80341800 0033E3E0  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80341804 0033E3E4  B0 04 00 02 */	sth r0, 2(r4)
 /* 80341808 0033E3E8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/LBViQ // 645 (62.06%)
-.global GXSetScissorBoxOffset
-GXSetScissorBoxOffset:
+// https://decomp.me/scratch/LBViQ // 645 (62.06%)
+#pragma push
+asm unk_t GXSetScissorBoxOffset()
+{ // clang-format off
+    nofralloc
 /* 8034180C 0033E3EC  38 A3 01 56 */	addi r5, r3, 0x156
-/* 80341810 0033E3F0  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 80341810 0033E3F0  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80341814 0033E3F4  38 04 01 56 */	addi r0, r4, 0x156
 /* 80341818 0033E3F8  54 A4 F8 7E */	srwi r4, r5, 1
 /* 8034181C 0033E3FC  54 00 F8 7E */	srwi r0, r0, 1
@@ -518,12 +588,16 @@ GXSetScissorBoxOffset:
 /* 80341844 0033E424  90 A4 80 00 */	stw r5, -0x8000(r4)
 /* 80341848 0033E428  B0 03 00 02 */	sth r0, 2(r3)
 /* 8034184C 0033E42C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/i3OSs // 0 (100%)
-.global GXSetClipMode
-GXSetClipMode:
+// https://decomp.me/scratch/i3OSs // 0 (100%)
+#pragma push
+asm unk_t GXSetClipMode()
+{ // clang-format off
+    nofralloc
 /* 80341850 0033E430  38 00 00 10 */	li r0, 0x10
-/* 80341854 0033E434  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 80341854 0033E434  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341858 0033E438  3C C0 CC 01 */	lis r6, 0xCC008000@ha
 /* 8034185C 0033E43C  98 06 80 00 */	stb r0, 0xCC008000@l(r6)
 /* 80341860 0033E440  38 A0 10 05 */	li r5, 0x1005
@@ -532,14 +606,18 @@ GXSetClipMode:
 /* 8034186C 0033E44C  90 66 80 00 */	stw r3, -0x8000(r6)
 /* 80341870 0033E450  B0 04 00 02 */	sth r0, 2(r4)
 /* 80341874 0033E454  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/lS9KQ // 0 (100%)
-.global __GXSetMatrixIndex
-__GXSetMatrixIndex:
+// https://decomp.me/scratch/lS9KQ // 0 (100%)
+#pragma push
+asm unk_t __GXSetMatrixIndex()
+{ // clang-format off
+    nofralloc
 /* 80341878 0033E458  2C 03 00 05 */	cmpwi r3, 5
 /* 8034187C 0033E45C  40 80 00 3C */	bge lbl_803418B8
 /* 80341880 0033E460  38 00 00 08 */	li r0, 8
-/* 80341884 0033E464  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 80341884 0033E464  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 80341888 0033E468  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 8034188C 0033E46C  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
 /* 80341890 0033E470  38 00 00 30 */	li r0, 0x30
@@ -554,7 +632,7 @@ __GXSetMatrixIndex:
 /* 803418B4 0033E494  48 00 00 38 */	b lbl_803418EC
 lbl_803418B8:
 /* 803418B8 0033E498  38 00 00 08 */	li r0, 8
-/* 803418BC 0033E49C  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r13)
+/* 803418BC 0033E49C  80 8D A5 08 */	lwz r4, __GXContexts(r13)
 /* 803418C0 0033E4A0  3C A0 CC 01 */	lis r5, 0xCC008000@ha
 /* 803418C4 0033E4A4  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
 /* 803418C8 0033E4A8  38 00 00 40 */	li r0, 0x40
@@ -567,30 +645,9 @@ lbl_803418B8:
 /* 803418E4 0033E4C4  90 05 80 00 */	stw r0, -0x8000(r5)
 /* 803418E8 0033E4C8  90 85 80 00 */	stw r4, -0x8000(r5)
 lbl_803418EC:
-/* 803418EC 0033E4CC  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r13)
+/* 803418EC 0033E4CC  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 803418F0 0033E4D0  38 00 00 01 */	li r0, 1
 /* 803418F4 0033E4D4  B0 03 00 02 */	sth r0, 2(r3)
 /* 803418F8 0033E4D8  4E 80 00 20 */	blr 
-
-.section .sdata2
-	.balign 8
-
-lbl_804DE2F0:
-	.4byte 0x00000000
-
-lbl_804DE2F4:
-	.4byte 0x3F800000
-
-lbl_804DE2F8:
-	.4byte 0x3F000000
-	.4byte 0x00000000
-
-lbl_804DE300:
-	.4byte 0x43300000
-	.4byte 0x00000000
-
-lbl_804DE308:
-	.4byte 0x43AB0000
-
-lbl_804DE30C:
-	.4byte 0x4B7FFFFF
+} // clang-format on
+#pragma pop

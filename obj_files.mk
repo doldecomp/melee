@@ -569,7 +569,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/gx/GXPixel.c.o\
 	$(BUILD_DIR)/asm/dolphin/gx/GXStubs.s.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXDisplayList.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXTransform.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXTransform.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXPerf.c.o\
 
 TEXT_O_FILES +=\

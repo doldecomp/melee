@@ -7,7 +7,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"src/**/GXTexture.c"
+    'input_glob': r"src/**/GXTransform.c"
 }
 
 default_options = {

@@ -7,9 +7,9 @@
 
 /* 0033ED74 */ extern void GXClearGPMetric();
 /* 0033E4DC */ extern void GXSetGPMetric(u32, u32);
-/* 0033E458 */ extern s32 __GXSetMatrixIndex(s32);
-/* 0033E430 */ extern void GXSetClipMode(s32);
-/* 0033E3EC */ extern void GXSetScissorBoxOffset(s32, s32);
+/* 0033E458 */ extern UNK_FUNC(__GXSetMatrixIndex);
+/* 0033E430 */ extern UNK_FUNC(GXSetClipMode);
+/* 0033E3EC */ extern UNK_FUNC(GXSetScissorBoxOffset);
 /* 0033DBFC */ extern void GXSetFieldMask(s32, s8);
 /* 0033C0F8 */ extern void __GXSetTmemConfig(s32);
 /* 0033BE50 */ extern void GXInvalidateTexAll(GXContext*, s32, u8*);
