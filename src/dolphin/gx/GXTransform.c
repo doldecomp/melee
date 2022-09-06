@@ -213,25 +213,24 @@ asm unk_t GXGetProjectionv()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/rj8VP // 0 (100%)
 #pragma push
-asm unk_t WriteMTXPS4x3()
-{ // clang-format off
-    nofralloc
-/* 80341408 0033DFE8  E0 03 00 00 */	psq_l f0, 0(r3), 0, qr0
-/* 8034140C 0033DFEC  E0 23 00 08 */	psq_l f1, 8(r3), 0, qr0
-/* 80341410 0033DFF0  E0 43 00 10 */	psq_l f2, 16(r3), 0, qr0
-/* 80341414 0033DFF4  E0 63 00 18 */	psq_l f3, 24(r3), 0, qr0
-/* 80341418 0033DFF8  E0 83 00 20 */	psq_l f4, 32(r3), 0, qr0
-/* 8034141C 0033DFFC  E0 A3 00 28 */	psq_l f5, 40(r3), 0, qr0
-/* 80341420 0033E000  F0 04 00 00 */	psq_st f0, 0(r4), 0, qr0
-/* 80341424 0033E004  F0 24 00 00 */	psq_st f1, 0(r4), 0, qr0
-/* 80341428 0033E008  F0 44 00 00 */	psq_st f2, 0(r4), 0, qr0
-/* 8034142C 0033E00C  F0 64 00 00 */	psq_st f3, 0(r4), 0, qr0
-/* 80341430 0033E010  F0 84 00 00 */	psq_st f4, 0(r4), 0, qr0
-/* 80341434 0033E014  F0 A4 00 00 */	psq_st f5, 0(r4), 0, qr0
-/* 80341438 0033E018  4E 80 00 20 */	blr 
-} // clang-format on
+void WriteMTXPS4x3(register Vec2 src[6], register Vec2* dst)
+{
+    asm { // clang-format off
+        psq_l f0, 0(src), 0, qr0
+        psq_l f1, 8(src), 0, qr0
+        psq_l f2, 0x10(src), 0, qr0
+        psq_l f3, 0x18(src), 0, qr0
+        psq_l f4, 0x20(src), 0, qr0
+        psq_l f5, 0x28(src), 0, qr0
+        psq_st f0, 0(dst), 0, qr0
+        psq_st f1, 0(dst), 0, qr0
+        psq_st f2, 0(dst), 0, qr0
+        psq_st f3, 0(dst), 0, qr0
+        psq_st f4, 0(dst), 0, qr0
+        psq_st f5, 0(dst), 0, qr0
+    } // clang-format on
+}
 #pragma pop
 
 // https://decomp.me/scratch/OH9kG // 0 (100%)
