@@ -21,14 +21,6 @@
 /* 004DAE48 */ extern const f32 lbl_804DE268[2];
 /* 004DAE08 */ extern const f32 lbl_804DE228[2];
 /* 004DAE00 */ extern const f32 lbl_804DE220[2];
-/* 004D27D8 */ extern const u32 GX2HWFiltConv[2];
-/* 004D27D0 */ extern const u32 GXTexTlutIds[2];
-/* 004D27C8 */ extern const u32 GXTexImage3Ids[2];
-/* 004D27C0 */ extern const u32 GXTexImage2Ids[2];
-/* 004D27B8 */ extern const u32 GXTexImage1Ids[2];
-/* 004D27B0 */ extern const u32 GXTexImage0Ids[2];
-/* 004D27A8 */ extern const u32 GXTexMode1Ids[2];
-/* 004D27A0 */ extern const u32 GXTexMode0Ids[2];
 /* 0033E050 */ extern void WriteMTXPS4x2(unk_t, s8 *);
 /* 0033E01C */ extern void WriteMTXPS3x3from3x4(unk_t, s8 *, s8 *);
 /* 0033DFE8 */ extern void WriteMTXPS4x3(unk_t, s8 *, s8 *);

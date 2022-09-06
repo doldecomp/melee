@@ -7,7 +7,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"src/**/GXPixel.c"
+    'input_glob': r"src/**/GXTexture.c"
 }
 
 default_options = {
@@ -19,7 +19,7 @@ default_options = {
 
     'find_asciz': True,  # Attempt to find zero-terminated ASCII strings
     'find_f32': True,  # Attempt to find 4-byte floating-point values
-    'find_f64': False,  # Attempt to find 8-byte floating-point values
+    'find_f64': True,  # Attempt to find 8-byte floating-point values
     'find_s32': True,  # Attempt to find negative 4-byte values
     'find_u32': True,  # Attempt to find positive 4-byte values
 
