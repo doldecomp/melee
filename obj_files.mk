@@ -727,7 +727,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/fog.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/perf.s.o\
+	$(BUILD_DIR)/src/sysdolphin/baselib/perf.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/list.c.o\
