@@ -6,27 +6,27 @@
 #include <sysdolphin/baselib/object.h>
 
 typedef struct _HSD_FogAdj {
-    HSD_Obj parent;
-    s16 center; // 0x08
-    u16 width; // 0xA
-    Mtx44 mtx; // 0x0C
-    struct _HSD_AObj* aobj;
+    /* 0x00 */ HSD_Obj parent;
+    /* 0x08 */ s16 center;
+    /* 0x0A */ u16 width;
+    /* 0x0C */ Mtx44 mtx;
+    /* 0x3C */ struct _HSD_AObj* aobj;
 } HSD_FogAdj;
 
 typedef struct _HSD_Fog {
-    HSD_Obj parent;
-    u32 type; // 0x08
-    struct _HSD_FogAdj* fog_adj; // 0x0C
-    f32 start; // 0x10
-    f32 end; // 0x14
-    GXColor color; // 0x18
-    struct _HSD_AObj* aobj; // 0x1C
+    /* 0x00 */ HSD_Obj parent;
+    /* 0x08 */ u32 type;
+    /* 0x0C */ HSD_FogAdj* fog_adj;
+    /* 0x10 */ f32 start;
+    /* 0x14 */ f32 end;
+    /* 0x18 */ GXColor color;
+    /* 0x1C */ struct _HSD_AObj* aobj;
 } HSD_Fog;
 
 typedef struct _HSD_FogAdjDesc {
-    u16 center; // 0x00
-    u16 width; // 0x02
-    Mtx44 mtx; // 0x04
+    /* 0x00 */ u16 center;
+    /* 0x02 */ u16 width;
+    /* 0x04 */ Mtx44 mtx;
 } HSD_FogAdjDesc;
 
 typedef struct _HSD_FogInfo {
@@ -38,11 +38,11 @@ typedef struct _HSD_FogAdjInfo {
 } HSD_FogAdjInfo;
 
 typedef struct _HSD_FogDesc {
-    u32 type;
-    struct _HSD_FogAdjDesc* fogadjdesc; // 0x04
-    f32 start;
-    f32 end;
-    GXColor color;
+    /* 0x00 */ u32 type;
+    /* 0x04 */ HSD_FogAdjDesc* fogadjdesc;
+    /* 0x08 */ f32 start;
+    /* 0x0C */ f32 end;
+    /* 0x10 */ GXColor color;
 } HSD_FogDesc;
 
 void HSD_FogSet(HSD_Fog*);
