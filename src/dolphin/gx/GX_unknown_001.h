@@ -3,6 +3,7 @@
 #define DOLPHIN_GX_GX_UNKNOWN_001_H
 
 #include <dolphin/gx/types.h>
+#include <dolphin/mtx/mtxtypes.h>
 
 /* 003FDDC0 */ extern const GXRenderModeObj lbl_804011E0;
 /* 003FDD84 */ extern const GXRenderModeObj lbl_804011A4;
@@ -22,9 +23,9 @@
 /* 0033D960 */ extern void GXSetAlphaUpdate(s32);
 /* 0033D920 */ extern void GXSetColorUpdate(s32);
 /* 0033D81C */ extern void GXSetBlendMode(s32, s32, s32, s32);
-/* 0033D71C */ extern void GXSetFogRangeAdj(s8, s16, s32*);
-/* 0033D554 */ extern void GXInitFogAdjTable(s16*, u16, unk_t);
-/* 0033D3A4 */ extern void GXSetFog(s32, u8*, f32, f32, f32, f32);
+/* 0033D71C */ extern void GXSetFogRangeAdj(s8, u16, struct _GXFogAdjTbl*);
+/* 0033D554 */ extern void GXInitFogAdjTable(struct _GXFogAdjTbl*, u16, Mtx44Ptr);
+/* 0033D3A4 */ extern void GXSetFog(s32, GXColor, f32, f32, f32, f32);
 /* 0033D370 */ extern void GXSetNumTevStages(s8);
 /* 0033D1D0 */ extern void GXSetTevOrder(u32, s32, s32, s32);
 /* 0033D14C */ extern void GXSetZTexture(s32, s32, s32);

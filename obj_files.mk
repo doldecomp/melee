@@ -711,7 +711,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/objalloc.c.o\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/objalloc.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/robj.c.o\
@@ -724,7 +723,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/wobj.c.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/fog.s.o\
+	$(BUILD_DIR)/src/sysdolphin/baselib/fog.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/perf.c.o\
