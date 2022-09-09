@@ -1358,7 +1358,7 @@ void* func_801C1E84(void)
 
 extern u8 lbl_804D7848;
 extern void func_80030740();
-extern void func_8037DC38();
+extern void HSD_FogLoadDesc();
 static asm void func_801C1E94(void)
 {
     nofralloc
@@ -1415,7 +1415,7 @@ lbl_801C1F34:
 /* 801C1F4C 001BEB2C  48 1C E2 A5 */	bl func_803901F0
 /* 801C1F50 001BEB30  3B C3 00 00 */	addi r30, r3, 0
 /* 801C1F54 001BEB34  38 7D 00 00 */	addi r3, r29, 0
-/* 801C1F58 001BEB38  48 1B BC E1 */	bl func_8037DC38
+/* 801C1F58 001BEB38  48 1B BC E1 */	bl HSD_FogLoadDesc
 /* 801C1F5C 001BEB3C  3B A3 00 00 */	addi r29, r3, 0
 /* 801C1F60 001BEB40  88 8D C1 A8 */	lbz r4, lbl_804D7848
 /* 801C1F64 001BEB44  38 7E 00 00 */	addi r3, r30, 0
