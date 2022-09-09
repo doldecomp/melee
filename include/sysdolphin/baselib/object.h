@@ -3,7 +3,7 @@
 
 #include <sysdolphin/baselib/class.h>
 
-#define HSD_OBJ_NOREF -1
+#define HSD_OBJ_NOREF ((u16) -1)
 
 #define HSD_OBJ(o) ((HSD_Obj*) o)
 #define HSD_OBJECT_INFO(o) (o.parent.parent)
@@ -65,5 +65,36 @@ typedef struct _HSD_ObjInfo {
 extern HSD_ClassInfo hsdObj;
 
 void ObjInfoInit(void);
+
+inline int iref_CNT(void* o)
+{
+    return HSD_OBJ(o)->ref_count_individual;
+}
+
+inline int ref_CNT(void* o)
+{
+    if (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF) {
+        return -1;
+    } else {
+        return HSD_OBJ(o)->ref_count;
+    }
+}
+
+inline BOOL ref_DEC(void* o)
+{
+    BOOL ret = (u64) (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF);
+    if (ret)
+        return ret;
+    return HSD_OBJ(o)->ref_count-- == 0;
+}
+
+inline BOOL iref_DEC(void* o)
+{
+    BOOL ret = (u64) (HSD_OBJ(o)->ref_count_individual == 0);
+    if (ret)
+        return ret;
+    HSD_OBJ(o)->ref_count_individual -= 1;
+    return HSD_OBJ(o)->ref_count_individual == 0;
+}
 
 #endif

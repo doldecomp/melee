@@ -1023,43 +1023,12 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
     }
 }
 
-inline int iref_CNT(void* o)
-{
-    return HSD_OBJ(o)->ref_count_individual;
-}
-
 char lbl_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
 inline int iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
     HSD_OBJ(o)->ref_count_individual != 0 ? (void) 0 :
         __assert(lbl_804068E4, 0x9E, lbl_80406918);
-}
-
-inline int ref_CNT(void* o)
-{
-    if (HSD_OBJ(o)->ref_count == (u16) -1) {
-        return -1;
-    } else {
-        return HSD_OBJ(o)->ref_count;
-    }
-}
-
-inline BOOL ref_DEC(void* o)
-{
-    BOOL ret = (u64) (HSD_OBJ(o)->ref_count == (u16) -1);
-    if (ret)
-        return ret;
-    return HSD_OBJ(o)->ref_count-- == 0;
-}
-
-inline BOOL iref_DEC(void* o)
-{
-    BOOL ret = (u64) (HSD_OBJ(o)->ref_count_individual == 0);
-    if (ret)
-        return ret;
-    HSD_OBJ(o)->ref_count_individual -= 1;
-    return HSD_OBJ(o)->ref_count_individual == 0;
 }
 
 inline BOOL iref_none(void* o)
@@ -1069,7 +1038,7 @@ inline BOOL iref_none(void* o)
 
 // Alternate form to match HSD_JObjUnrefThis
 // (Original version causes regswap)
-// TODO merge with iref_DEC
+// TODO merge with object.h iref_DEC
 inline BOOL iref_DEC_alt(void* o)
 {
     BOOL ret = iref_none(o);

@@ -216,14 +216,6 @@ void FogUpdateFunc(HSD_Fog* fog, u32 type, FObjData* fv)
     }
 }
 
-inline BOOL ref_DEC(void* o)
-{
-    BOOL ret = (u64) (HSD_OBJ(o)->ref_count == (u16) -1);
-    if (ret)
-        return ret;
-    return HSD_OBJ(o)->ref_count-- == 0;
-}
-
 static void FogRelease(HSD_Fog* fog)
 {
     if (fog->fog_adj != NULL) {
