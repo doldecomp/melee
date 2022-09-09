@@ -1032,9 +1032,8 @@ char lbl_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
 inline int iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
-    if (HSD_OBJ(o)->ref_count_individual == 0) {
+    HSD_OBJ(o)->ref_count_individual != 0 ? (void) 0 :
         __assert(lbl_804068E4, 0x9E, lbl_80406918);
-    }
 }
 
 inline int ref_CNT(void* o)
