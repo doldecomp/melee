@@ -7,7 +7,7 @@ void GXProject(
     f32 x, // model coordinates
     f32 y,
     f32 z,
-    MtxPtr mtx, // model-view matrix
+    Mtx mtx, // model-view matrix
     f32* pm,    // projection matrix, as returned by GXGetProjectionv
     f32* vp,    // viewport, as returned by GXGetViewportv
     f32* sx,    // screen coordinates
