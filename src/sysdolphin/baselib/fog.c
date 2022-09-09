@@ -121,14 +121,14 @@ void HSD_FogInit(HSD_Fog* fog, HSD_FogDesc* desc)
 HSD_FogAdj* HSD_FogAdjAlloc(void)
 {
     HSD_FogAdj* adj = hsdNew(&hsdFogAdj);
-    adj ? (void) 0 : __assert("fog.c", 0xD6, "adj");
+    assert_line(0xD6, adj);
     return adj;
 }
 
 HSD_FogAdj* HSD_FogAdjLoadDesc(HSD_FogAdjDesc* desc)
 {
     HSD_FogAdj* adj = HSD_FogAdjAlloc();
-    adj ? (void) 0 : __assert("fog.c", 0xE6, "adj");
+    assert_line(0xE6, adj);
     HSD_FogAdjInit(adj, desc);
     return adj;
 }
