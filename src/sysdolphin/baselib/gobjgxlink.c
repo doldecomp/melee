@@ -1,13 +1,5 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 
-extern HSD_GObj** lbl_804D7820;
-extern HSD_GObj** lbl_804D7824;
-
-extern HSD_GObjLibInitData lbl_804CE380;
-
-extern char lbl_804084F0[13]; //"gobjgxlink.c"
-extern char lbl_80408500[43]; //"gx_link <= HSD_GObjLibInitData.gx_link_max"
-
 #pragma push
 #pragma dont_inline on
 void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
@@ -36,9 +28,7 @@ void GObj_SetupGXLink(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u8 gx_l
     HSD_GObj* i;
     HSD_GObj* prev;
 
-    if (gx_link > lbl_804CE380.gx_link_max) {
-        __assert(lbl_804084F0, 167, lbl_80408500);
-    }
+    assert_line(167, gx_link <= HSD_GObjLibInitData.gx_link_max);
     gobj->render_cb = render_cb;
     gobj->gx_link = gx_link;
     gobj->render_priority = priority;
@@ -53,7 +43,7 @@ void GObj_SetupGXLink(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u8 gx_l
 void GObj_SetupGXLinkMax(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u32 priority)
 {
     HSD_GObj* i;
-    u8 max_link = lbl_804CE380.gx_link_max;
+    u8 max_link = HSD_GObjLibInitData.gx_link_max;
 
     gobj->render_cb = render_cb;
     gobj->gx_link = max_link + 1;
@@ -82,7 +72,7 @@ inline HSD_GObj* GObj_GXFindPrioPosition(HSD_GObj* gobj) {
 void GObj_SetupGXLinkMaxSorted(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32), u32 priority)
 {
     HSD_GObj* i;
-    u8 max_link = lbl_804CE380.gx_link_max;
+    u8 max_link = HSD_GObjLibInitData.gx_link_max;
 
     gobj->render_cb = render_cb;
     gobj->gx_link = max_link + 1;
@@ -96,4 +86,63 @@ void GObj_SetupGXLinkMaxSorted(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32)
         i = lbl_804D7820[gobj->gx_link];
     }
     GObj_GXReorder(gobj, i);
+}
+
+void func_8039084C(HSD_GObj* gobj)
+{
+    HSD_GObj* prev;
+    HSD_GObj* next;
+
+    assert_line(415, gobj->gx_link != HSD_GOBJ_GXLINK_NONE);
+
+    prev = gobj->prev_gx;
+    if (prev != NULL) {
+        prev->next_gx = gobj->next_gx;
+    } else {
+        lbl_804D7824[gobj->gx_link] = gobj->next_gx;
+    }
+    next = gobj->next_gx;
+    if (next != NULL) {
+        next->prev_gx = gobj->prev_gx;
+    } else {
+        lbl_804D7820[gobj->gx_link] = gobj->prev_gx;
+    }
+    gobj->gx_link = HSD_GOBJ_GXLINK_NONE;
+    gobj->render_priority = 0;
+    gobj->prev_gx = NULL;
+    gobj->next_gx = NULL;
+}
+
+inline HSD_GObj* get_by_prio(HSD_GObj* gobj)
+{
+    HSD_GObj* cur = lbl_804D7824[gobj->gx_link];
+    while (cur != NULL && cur->render_priority < gobj->render_priority) {
+        cur = cur->next_gx;
+    }
+    return cur;
+}
+
+void func_80390908(HSD_GObj* gobj, u8 gx_link, u8 priority)
+{
+    HSD_GObj* cur;
+    assert_line(535, gx_link <= HSD_GObjLibInitData.gx_link_max);
+    func_8039084C(gobj);
+    gobj->gx_link = gx_link;
+    gobj->render_priority = priority;
+    cur = get_by_prio(gobj);
+    GObj_GXReorder(gobj, cur != NULL ? cur->prev_gx : lbl_804D7820[gobj->gx_link]);
+}
+
+void func_803909D8(HSD_GObj* gobj, HSD_GObj* other)
+{
+    u8 link;
+    u8 prio;
+    u32 unused[3];
+
+    prio = other->render_priority;
+    link = other->gx_link;
+    func_8039084C(gobj);
+    gobj->gx_link = link;
+    gobj->render_priority = prio;
+    GObj_GXReorder(gobj, other->prev_gx);
 }

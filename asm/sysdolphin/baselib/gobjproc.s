@@ -4,9 +4,9 @@
 
 .global func_8038FAA8
 func_8038FAA8:
-/* 8038FAA8 0038C688  3C 80 80 4D */	lis r4, lbl_804CE380@ha
+/* 8038FAA8 0038C688  3C 80 80 4D */	lis r4, HSD_GObjLibInitData@ha
 /* 8038FAAC 0038C68C  80 C3 00 10 */	lwz r6, 0x10(r3)
-/* 8038FAB0 0038C690  88 A4 E3 80 */	lbz r5, lbl_804CE380@l(r4)
+/* 8038FAB0 0038C690  88 A4 E3 80 */	lbz r5, HSD_GObjLibInitData@l(r4)
 /* 8038FAB4 0038C694  88 03 00 0C */	lbz r0, 0xc(r3)
 /* 8038FAB8 0038C698  7C C4 33 78 */	mr r4, r6
 /* 8038FABC 0038C69C  39 05 00 01 */	addi r8, r5, 1
@@ -50,9 +50,9 @@ lbl_8038FB34:
 lbl_8038FB40:
 /* 8038FB40 0038C720  7C 69 31 2E */	stwx r3, r9, r6
 lbl_8038FB44:
-/* 8038FB44 0038C724  3C A0 80 4D */	lis r5, lbl_804CE380@ha
+/* 8038FB44 0038C724  3C A0 80 4D */	lis r5, HSD_GObjLibInitData@ha
 /* 8038FB48 0038C728  80 CD C1 A4 */	lwz r6, lbl_804D7844@sda21(r13)
-/* 8038FB4C 0038C72C  38 A5 E3 80 */	addi r5, r5, lbl_804CE380@l
+/* 8038FB4C 0038C72C  38 A5 E3 80 */	addi r5, r5, HSD_GObjLibInitData@l
 /* 8038FB50 0038C730  88 A5 00 00 */	lbz r5, 0(r5)
 /* 8038FB54 0038C734  38 A5 00 01 */	addi r5, r5, 1
 /* 8038FB58 0038C738  7C A0 29 D6 */	mullw r5, r0, r5
@@ -124,9 +124,9 @@ func_8038FC18:
 /* 8038FC40 0038C820  80 03 00 04 */	lwz r0, 4(r3)
 /* 8038FC44 0038C824  90 0D C1 90 */	stw r0, lbl_804D7830@sda21(r13)
 lbl_8038FC48:
-/* 8038FC48 0038C828  3C 80 80 4D */	lis r4, lbl_804CE380@ha
+/* 8038FC48 0038C828  3C 80 80 4D */	lis r4, HSD_GObjLibInitData@ha
 /* 8038FC4C 0038C82C  80 AD C1 A4 */	lwz r5, lbl_804D7844@sda21(r13)
-/* 8038FC50 0038C830  38 84 E3 80 */	addi r4, r4, lbl_804CE380@l
+/* 8038FC50 0038C830  38 84 E3 80 */	addi r4, r4, HSD_GObjLibInitData@l
 /* 8038FC54 0038C834  88 84 00 00 */	lbz r4, 0(r4)
 /* 8038FC58 0038C838  38 04 00 01 */	addi r0, r4, 1
 /* 8038FC5C 0038C83C  7C 08 01 D6 */	mullw r0, r8, r0
@@ -206,10 +206,10 @@ lbl_8038FD3C:
 .global func_8038FD54
 func_8038FD54:
 /* 8038FD54 0038C934  7C 08 02 A6 */	mflr r0
-/* 8038FD58 0038C938  3C C0 80 4D */	lis r6, lbl_804CE3B8@ha
+/* 8038FD58 0038C938  3C C0 80 4D */	lis r6, gobjproc_alloc_data@ha
 /* 8038FD5C 0038C93C  90 01 00 04 */	stw r0, 4(r1)
 /* 8038FD60 0038C940  3C E0 80 41 */	lis r7, lbl_80408480@ha
-/* 8038FD64 0038C944  38 06 E3 B8 */	addi r0, r6, lbl_804CE3B8@l
+/* 8038FD64 0038C944  38 06 E3 B8 */	addi r0, r6, gobjproc_alloc_data@l
 /* 8038FD68 0038C948  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 8038FD6C 0038C94C  BF 61 00 24 */	stmw r27, 0x24(r1)
 /* 8038FD70 0038C950  3B 63 00 00 */	addi r27, r3, 0
@@ -225,8 +225,8 @@ func_8038FD54:
 /* 8038FD98 0038C978  38 AD A9 C0 */	addi r5, r13, lbl_804D6060@sda21
 /* 8038FD9C 0038C97C  4B FF 84 85 */	bl __assert
 lbl_8038FDA0:
-/* 8038FDA0 0038C980  3C 60 80 4D */	lis r3, lbl_804CE380@ha
-/* 8038FDA4 0038C984  38 63 E3 80 */	addi r3, r3, lbl_804CE380@l
+/* 8038FDA0 0038C980  3C 60 80 4D */	lis r3, HSD_GObjLibInitData@ha
+/* 8038FDA4 0038C984  38 63 E3 80 */	addi r3, r3, HSD_GObjLibInitData@l
 /* 8038FDA8 0038C988  88 03 00 02 */	lbz r0, 2(r3)
 /* 8038FDAC 0038C98C  57 A3 06 3E */	clrlwi r3, r29, 0x18
 /* 8038FDB0 0038C990  7C 03 00 40 */	cmplw r3, r0
@@ -300,8 +300,8 @@ lbl_8038FE98:
 /* 8038FEA4 0038CA84  80 1E 00 00 */	lwz r0, 0(r30)
 /* 8038FEA8 0038CA88  90 03 00 00 */	stw r0, 0(r3)
 lbl_8038FEAC:
-/* 8038FEAC 0038CA8C  3C 60 80 4D */	lis r3, lbl_804CE3B8@ha
-/* 8038FEB0 0038CA90  38 63 E3 B8 */	addi r3, r3, lbl_804CE3B8@l
+/* 8038FEAC 0038CA8C  3C 60 80 4D */	lis r3, gobjproc_alloc_data@ha
+/* 8038FEB0 0038CA90  38 63 E3 B8 */	addi r3, r3, gobjproc_alloc_data@l
 /* 8038FEB4 0038CA94  38 9E 00 00 */	addi r4, r30, 0
 /* 8038FEB8 0038CA98  4B FE AE 69 */	bl HSD_ObjFree
 lbl_8038FEBC:
@@ -315,11 +315,11 @@ lbl_8038FEBC:
 .global func_8038FED4
 func_8038FED4:
 /* 8038FED4 0038CAB4  7C 08 02 A6 */	mflr r0
-/* 8038FED8 0038CAB8  3C 80 80 4D */	lis r4, lbl_804CE3B8@ha
+/* 8038FED8 0038CAB8  3C 80 80 4D */	lis r4, gobjproc_alloc_data@ha
 /* 8038FEDC 0038CABC  90 01 00 04 */	stw r0, 4(r1)
 /* 8038FEE0 0038CAC0  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8038FEE4 0038CAC4  BF 61 00 14 */	stmw r27, 0x14(r1)
-/* 8038FEE8 0038CAC8  3B E4 E3 B8 */	addi r31, r4, lbl_804CE3B8@l
+/* 8038FEE8 0038CAC8  3B E4 E3 B8 */	addi r31, r4, gobjproc_alloc_data@l
 /* 8038FEEC 0038CACC  3B C0 00 01 */	li r30, 1
 /* 8038FEF0 0038CAD0  83 83 00 18 */	lwz r28, 0x18(r3)
 /* 8038FEF4 0038CAD4  3C 60 80 4D */	lis r3, lbl_804CE3E4@ha
