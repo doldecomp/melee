@@ -91,9 +91,10 @@ while idx < len(profile_bytes) - 16:
     ADDI = 0x38 >> 2
     LI = ADDI # an LI instruction is just an ADDI with RA=0
     LMW = 0xB8 >> 2
+    FDIVS = 0xEC >> 2
 
     if opcode_a == LWZ and \
-       opcode_b in [LI, LFS] and \
+       opcode_b in [LI, LFS, FDIVS] and \
        vanilla_inst_a == profile_inst_b and \
        vanilla_inst_b == profile_inst_a and \
        vanilla_inst_c == profile_inst_c and \
