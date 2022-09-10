@@ -783,9 +783,8 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjproc.s.o\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjplink.s.o\
+	$(BUILD_DIR)/src/sysdolphin/baselib/gobjplink.c.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjgxlink.c.o\
-	$(BUILD_DIR)/asm/sysdolphin/baselib/gobjgxlink.s.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjobject.c.o\
 	$(BUILD_DIR)/src/sysdolphin/baselib/gobjuserdata.c.o\
 
