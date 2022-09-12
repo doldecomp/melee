@@ -83,10 +83,10 @@ lbl_800056C0:
     .4byte func_8039F6CC
     .4byte 0x000000C0
     .4byte lbl_800055F0
-	.4byte func_8039F78C
+	.4byte setVtxDesc
     .4byte 0x00000110
     .4byte lbl_800055F8
-	.4byte func_8039F89C
+	.4byte calcTornadoLastPos
     .4byte 0x0000018C
     .4byte lbl_80005600
 	.4byte func_8039FC70
