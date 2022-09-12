@@ -243,7 +243,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         } while (temp_r25 < 2U);
     }
     if (phi_r30 != 0U) {
-        func_80361FC4(-1);
+        HSD_StateInvalidate(-1);
     }
     if (fighter->x21FC_flag.bits.b7 != 0) {
         if ((fighter->x221E_flag.bits.b0 == 0) && (fighter->x221E_flag.bits.b5 == 0) && (arg2 != 0)) {
@@ -610,7 +610,7 @@ lbl_80080A10:
 /* 80080A10 0007D5F0  28 1E 00 00 */	cmplwi r30, 0
 /* 80080A14 0007D5F4  41 82 00 0C */	beq lbl_80080A20
 /* 80080A18 0007D5F8  38 60 FF FF */	li r3, -1
-/* 80080A1C 0007D5FC  48 2E 15 A9 */	bl func_80361FC4
+/* 80080A1C 0007D5FC  48 2E 15 A9 */	bl HSD_StateInvalidate
 lbl_80080A20:
 /* 80080A20 0007D600  88 1F 21 FC */	lbz r0, 0x21fc(r31)
 /* 80080A24 0007D604  54 00 07 FF */	clrlwi. r0, r0, 0x1f
