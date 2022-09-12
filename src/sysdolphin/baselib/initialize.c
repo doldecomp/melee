@@ -20,7 +20,7 @@
 extern OSHeapHandle __OSCurrHeap;
 extern OSHeapHandle lbl_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;
-extern GXRenderModeObj lbl_804C1D80;
+extern GXRenderModeObj HSD_VIData;
 
 static void *FrameBuffer[HSD_VI_XFB_MAX];
 static HSD_MemReport memReport;
@@ -165,7 +165,7 @@ static void HSD_GXInit(void)
     {
         GXLoadLightObjImm(&lightobj, HSD_Index2LightID(i));
     }
-    func_80361FC4(-1);
+    HSD_StateInvalidate(-1);
 }
 
 static void HSD_OSInit(void)
@@ -248,7 +248,7 @@ HSD_RenderPass HSD_GetCurrentRenderPass(void)
 
 void HSD_StartRender(HSD_RenderPass pass)
 {
-    GXRenderModeObj *rmode = &lbl_804C1D80;
+    GXRenderModeObj *rmode = &HSD_VIData;
     current_render_pass = pass;
     if (rmode->aa)
     {

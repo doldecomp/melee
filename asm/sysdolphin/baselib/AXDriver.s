@@ -8,13 +8,13 @@ AXDriverAlloc:
 /* 8038BB38 00388718  90 01 00 04 */	stw r0, 4(r1)
 /* 8038BB3C 0038871C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8038BB40 00388720  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8038BB44 00388724  80 8D C1 38 */	lwz r4, lbl_804D77D8@sda21(r13)
+/* 8038BB44 00388724  80 8D C1 38 */	lwz r4, axfxallocsize@sda21(r13)
 /* 8038BB48 00388728  80 AD C1 34 */	lwz r5, lbl_804D77D4@sda21(r13)
 /* 8038BB4C 0038872C  7C 64 1A 14 */	add r3, r4, r3
-/* 8038BB50 00388730  80 0D C1 3C */	lwz r0, lbl_804D77DC@sda21(r13)
-/* 8038BB54 00388734  90 6D C1 38 */	stw r3, lbl_804D77D8@sda21(r13)
+/* 8038BB50 00388730  80 0D C1 3C */	lwz r0, axfxmaxsize@sda21(r13)
+/* 8038BB54 00388734  90 6D C1 38 */	stw r3, axfxallocsize@sda21(r13)
 /* 8038BB58 00388738  7F E5 22 14 */	add r31, r5, r4
-/* 8038BB5C 0038873C  80 6D C1 38 */	lwz r3, lbl_804D77D8@sda21(r13)
+/* 8038BB5C 0038873C  80 6D C1 38 */	lwz r3, axfxallocsize@sda21(r13)
 /* 8038BB60 00388740  7C 03 00 40 */	cmplw r3, r0
 /* 8038BB64 00388744  41 80 00 1C */	blt lbl_8038BB80
 /* 8038BB68 00388748  3C 60 80 41 */	lis r3, lbl_80408140@ha
@@ -2976,8 +2976,8 @@ lbl_8038E350:
 lbl_8038E358:
 /* 8038E358 0038AF38  38 00 00 00 */	li r0, 0
 /* 8038E35C 0038AF3C  90 CD C1 34 */	stw r6, lbl_804D77D4@sda21(r13)
-/* 8038E360 0038AF40  90 0D C1 38 */	stw r0, lbl_804D77D8@sda21(r13)
-/* 8038E364 0038AF44  90 ED C1 3C */	stw r7, lbl_804D77DC@sda21(r13)
+/* 8038E360 0038AF40  90 0D C1 38 */	stw r0, axfxallocsize@sda21(r13)
+/* 8038E364 0038AF44  90 ED C1 3C */	stw r7, axfxmaxsize@sda21(r13)
 /* 8038E368 0038AF48  4B FF F9 C9 */	bl AXDriverSetupAux
 lbl_8038E36C:
 /* 8038E36C 0038AF4C  80 01 00 0C */	lwz r0, 0xc(r1)
@@ -3128,19 +3128,19 @@ lbl_8038E528:
 /* 8038E568 0038B148  38 63 CF 48 */	addi r3, r3, lbl_8038CF48@l
 /* 8038E56C 0038B14C  4B FF C6 61 */	bl HSD_SynthSFXSetDriverPauseCallback
 /* 8038E570 0038B150  3B E0 00 00 */	li r31, 0
-/* 8038E574 0038B154  93 ED C1 38 */	stw r31, lbl_804D77D8@sda21(r13)
+/* 8038E574 0038B154  93 ED C1 38 */	stw r31, axfxallocsize@sda21(r13)
 /* 8038E578 0038B158  38 60 00 00 */	li r3, 0
 /* 8038E57C 0038B15C  38 80 00 00 */	li r4, 0
 /* 8038E580 0038B160  93 ED C1 34 */	stw r31, lbl_804D77D4@sda21(r13)
 /* 8038E584 0038B164  38 A0 00 00 */	li r5, 0
-/* 8038E588 0038B168  93 ED C1 3C */	stw r31, lbl_804D77DC@sda21(r13)
+/* 8038E588 0038B168  93 ED C1 3C */	stw r31, axfxmaxsize@sda21(r13)
 /* 8038E58C 0038B16C  4B FF F7 A5 */	bl AXDriverSetupAux
-/* 8038E590 0038B170  93 ED C1 38 */	stw r31, lbl_804D77D8@sda21(r13)
+/* 8038E590 0038B170  93 ED C1 38 */	stw r31, axfxallocsize@sda21(r13)
 /* 8038E594 0038B174  38 60 00 01 */	li r3, 1
 /* 8038E598 0038B178  38 80 00 00 */	li r4, 0
 /* 8038E59C 0038B17C  93 ED C1 34 */	stw r31, lbl_804D77D4@sda21(r13)
 /* 8038E5A0 0038B180  38 A0 00 00 */	li r5, 0
-/* 8038E5A4 0038B184  93 ED C1 3C */	stw r31, lbl_804D77DC@sda21(r13)
+/* 8038E5A4 0038B184  93 ED C1 3C */	stw r31, axfxmaxsize@sda21(r13)
 /* 8038E5A8 0038B188  4B FF F7 89 */	bl AXDriverSetupAux
 /* 8038E5AC 0038B18C  3C 60 80 39 */	lis r3, AXDriverAlloc@ha
 /* 8038E5B0 0038B190  3C 80 80 39 */	lis r4, AXDriverFree@ha
@@ -3746,11 +3746,11 @@ lbl_804D77D0:
 .global lbl_804D77D4
 lbl_804D77D4:
 	.skip 0x4
-.global lbl_804D77D8
-lbl_804D77D8:
+.global axfxallocsize
+axfxallocsize:
 	.skip 0x4
-.global lbl_804D77DC
-lbl_804D77DC:
+.global axfxmaxsize
+axfxmaxsize:
 	.skip 0x4
 .global lbl_804D77E0
 lbl_804D77E0:

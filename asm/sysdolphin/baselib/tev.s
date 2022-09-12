@@ -77,8 +77,8 @@ HSD_StateInitTev:
 /* 803624DC 0035F0BC  90 0D BF 58 */	stw r0, lbl_804D75F8@sda21(r13)
 /* 803624E0 0035F0C0  4E 80 00 20 */	blr 
 
-.global func_803624E4
-func_803624E4:
+.global HSD_StateGetNumTevStages
+HSD_StateGetNumTevStages:
 /* 803624E4 0035F0C4  80 6D BF 58 */	lwz r3, lbl_804D75F8@sda21(r13)
 /* 803624E8 0035F0C8  4E 80 00 20 */	blr 
 
@@ -96,8 +96,8 @@ HSD_StateAssignTev:
 /* 80362510 0035F0F0  7C 08 03 A6 */	mtlr r0
 /* 80362514 0035F0F4  4E 80 00 20 */	blr 
 
-.global func_80362518
-func_80362518:
+.global HSD_StateSetNumTevStages
+HSD_StateSetNumTevStages:
 /* 80362518 0035F0F8  7C 08 02 A6 */	mflr r0
 /* 8036251C 0035F0FC  90 01 00 04 */	stw r0, 4(r1)
 /* 80362520 0035F100  94 21 FF F8 */	stwu r1, -8(r1)
@@ -536,8 +536,8 @@ lbl_803629C8:
 /* 803629D0 0035F5B0  7C 08 03 A6 */	mtlr r0
 /* 803629D4 0035F5B4  4E 80 00 20 */	blr 
 
-.global func_803629D8
-func_803629D8:
+.global HSD_SetTevRegAll
+HSD_SetTevRegAll:
 /* 803629D8 0035F5B8  7C 08 02 A6 */	mflr r0
 /* 803629DC 0035F5BC  3C 60 80 40 */	lis r3, lbl_80405B98@ha
 /* 803629E0 0035F5C0  90 01 00 04 */	stw r0, 4(r1)
