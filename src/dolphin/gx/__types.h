@@ -1,36 +1,36 @@
 #ifndef DOLPHIN_GX___TYPES_H
 #define DOLPHIN_GX___TYPES_H
 
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/os/OSContext.h>
-#include <dolphin/gx/GXEnum.h>
 
 #define GX_WRITE_U8(ub) \
-    WGPIPE.u8 = ((u8 *)&ub);
+    WGPIPE.u8 = ((u8*) &ub);
 
 #define GX_WRITE_U16(us) \
-    WGPIPE.u16 = (*(u16 *)&us);
+    WGPIPE.u16 = (*(u16*) &us);
 
 #define GX_WRITE_U32(ui) \
-    WGPIPE.u32 = (*(u32 *)&ui);
+    WGPIPE.u32 = (*(u32*) &ui);
 
 #define GX_WRITE_F32(f) \
-    WGPIPE.f32 = (*(f32 *)&f);
+    WGPIPE.f32 = (*(f32*) &f);
 
 #define INSERT_FIELD(reg, value, nbits, shift) \
-    (reg) = ((u32)(reg) & ~(((1 << (nbits)) - 1) << (shift))) | ((u32)(value) << (shift));
+    (reg) = ((u32) (reg) & ~(((1 << (nbits)) - 1) << (shift))) | ((u32) (value) << (shift));
 
 // GXFifoObj private fields
 typedef struct
 {
-    void *base;      // at 0x00
-    void *end;       // at 0x04
+    void* base;      // at 0x00
+    void* end;       // at 0x04
     u32 size;        // at 0x08
     u32 hiWaterMark; // at 0x0C
     u32 loWaterMark; // at 0x10
-    void *readPtr;   // at 0x14
-    void *writePtr;  // at 0x18
+    void* readPtr;   // at 0x14
+    void* writePtr;  // at 0x18
     s32 x1C;         // at 0x1C
     u8 x20_pad[4];   // at 0x20
 } __GXFifoObj;
@@ -40,14 +40,13 @@ typedef void (*GXTexRegionCallback)(void); // signature unknown
 // https://github.com/kiwi515/open_rvl/blob/366b440e58f030aa0aacc9316d2717289d58fe16/include/GX/GXInit.h#L9-L41
 typedef struct
 {
-    union
-    {
+    union {
         u32 u32;
         u16 u16[2];
     } x0;                                               // at 0x000
     u16 x4;                                             // at 0x004
     u16 x6;                                             // at 0x006
-    OSContext *x8;                                      // at 0x008
+    OSContext* x8;                                      // at 0x008
     u32 xC;                                             // at 0x00C
     u32 x10;                                            // at 0x010
     u32 x14;                                            // at 0x014
@@ -74,8 +73,8 @@ typedef struct
     u32 x1D0[(0x204 - 0x1D0) / 4];                      // at 0x1D0
     u32 x204;                                           // at 0x204
     u8 x208_pad[0x41C - 0x208];                         // at 0x208
-    s8 x41C;                                            // at 0x41C
-    s8 x41D;                                            // at 0x41D
+    GXBool x41C;                                        // at 0x41C
+    GXBool x41D;                                        // at 0x41D
     u8 x41E_pad[0x43C - 0x41E];                         // at 0x41E
     Vec x43C_vec;                                       // at 0x43C
     Vec x448_vec;                                       // at 0x448
@@ -88,7 +87,7 @@ typedef struct
     GXBool x4ED;                                        // at 0x4ED
     u8 x4EE;                                            // at 0x4EE
     u32 x4F0_flags;                                     // at 0x4F0
-    GXFifoObj *fifo;                                    // at 0x4F4
+    GXFifoObj* fifo;                                    // at 0x4F4
     u8 x4F8_pad[0x570 - 0x4F8];                         // at 0x4F8
     u32 dirtyFlags;                                     // at 0x570
 } GXContext;
@@ -102,12 +101,12 @@ typedef struct
     u16 x8;
 } GXSettings;
 
-extern volatile u32 *__piReg;
-extern volatile u16 *__peReg;
-extern volatile u16 *__cpReg;
+extern volatile u32* __piReg;
+extern volatile u16* __peReg;
+extern volatile u16* __cpReg;
+extern volatile u32* __memReg;
 
-extern volatile union
-{
+extern volatile union {
 
     s8 s8;
     u8 u8;
@@ -135,8 +134,14 @@ typedef struct
 
 typedef struct
 {
-    GXContext *main;
-    GXContext *null;
+    GXContext* main;
+    GXContext* null;
 } GXContexts;
+
+typedef struct _GXTexObj {
+    u8 x0_pad[0x14];  // at 0x00
+    GXTexFmt tex_fmt; // at 0x14
+    u8 x18_pad[8];    // at 0x18
+} GXTexObj;
 
 #endif

@@ -18,8 +18,8 @@ char lbl_80405FB8[9] = "object.h\0";
 char lbl_80405FC4[39] = "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF\0";
 extern s32 lbl_8040601C;
 extern s32 lbl_8040603C;
-extern void* jtbl_80406058;
-extern void* jtbl_8040608C;
+extern jtbl_t jtbl_80406058;
+extern jtbl_t jtbl_8040608C;
 
 static HSD_SList* endcallback_list;
 

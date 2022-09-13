@@ -11,7 +11,7 @@ def flat_map(f, xs):
     return reduce(lambda a, b: a + b, map(f, xs))
 
 
-root = Path(__file__) / '../../'
+root = Path(__file__).parents[1]
 
 src_key_re = re.compile(r"^\w+\.[chis]$")
 src_paths = [root / 'src', root / 'asm', root / 'include']

@@ -31,6 +31,8 @@ typedef unsigned int        uintptr_t;
 
 typedef unsigned long size_t;
 typedef void *unk_t;
+typedef void (*jmp_t)(void);
+typedef jmp_t jtbl_t[];
 
 #define TRUE 1
 #define FALSE 0
@@ -46,5 +48,18 @@ typedef void *unk_t;
 typedef struct _ ## module ## _Unk ## number module ## _Unk ## number;
 
 #define CALLBACK_PLACEHOLDER(module, number) typedef void (*module ## _UnkCallback ## number)();
+
+#define UNK_FUNC(name) unk_t name()
+
+#pragma region "macros.inc"
+#define qr0 0
+#define qr1 1
+#define qr2 2
+#define qr3 3
+#define qr4 4
+#define qr5 5
+#define qr6 6
+#define qr7 7
+#pragma endregion
 
 #endif

@@ -1,17 +1,15 @@
 #ifndef DOLPHIN_GX_TYPES_H
 #define DOLPHIN_GX_TYPES_H
 
-#include <dolphin/types.h>
 #include <dolphin/gx/GXEnum.h>
+#include <dolphin/types.h>
 
 #define GX_FIFO_OBJSIZE 128
-typedef struct _GXFifoObj
-{
+typedef struct _GXFifoObj {
     u8 pad[GX_FIFO_OBJSIZE];
 } GXFifoObj;
 
-typedef struct _GXRenderModeObj
-{
+typedef struct _GXRenderModeObj {
     u32 viTVMode;
     u16 fbWidth;
     u16 efbHeight;
@@ -27,13 +25,11 @@ typedef struct _GXRenderModeObj
     u8 vfilter[7];
 } GXRenderModeObj;
 
-typedef struct _GXColor
-{
+typedef struct _GXColor {
     u8 r, g, b, a;
 } GXColor;
 
-typedef struct _GXColorS10
-{
+typedef struct _GXColorS10 {
     s16 r, g, b, a;
 } GXColorS10;
 

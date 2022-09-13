@@ -1,0 +1,1 @@
+void __GXSetRange(void) {}

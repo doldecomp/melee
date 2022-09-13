@@ -556,21 +556,21 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/dvd/fstload.c.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/gx/GXInit.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXInit.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXFifo.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXAttr.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXAttr.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXMisc.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXGeometry.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXFrameBuf.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXFrameBuf.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXLight.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXTexture.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXBump.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXTexture.c.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXBump.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXTev.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXPixel.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXStubs.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXPixel.c.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXStubs.c.o\
 	$(BUILD_DIR)/src/dolphin/gx/GXDisplayList.c.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXTransform.s.o\
-	$(BUILD_DIR)/asm/dolphin/gx/GXPerf.s.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXTransform.c.o\
+	$(BUILD_DIR)/src/dolphin/gx/GXPerf.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/mtx/mtx.s.o\
