@@ -68,7 +68,19 @@ void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
     }
 }
 
-inline HSD_TExpFree(HSD_TExp* texp)
+static HSD_TExp* TevAlloc() {
+    HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TETev));
+    assert_line(62, texp);
+    return texp;
+}
+
+static HSD_TExp* CnstAlloc() {
+    HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TECnst));
+    assert_line(70, texp);
+    return texp;
+}
+
+HSD_TExpFree(HSD_TExp* texp)
 {
     switch (HSD_TExpGetType(texp)) {
     case HSD_TE_TEV:
@@ -103,7 +115,7 @@ HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
                     *handle = next;
                     continue;
                 default:
-                    __assert(__FILE__, 0xDB, "0");
+                    __assert(__FILE__, 219, "0");
                 }
             }
             handle = &(*handle)->tev.next;
@@ -142,7 +154,7 @@ HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
                     *handle = next;
                     continue;
                 default:
-                    __assert(__FILE__, 0x10B, "0");
+                    __assert(__FILE__, 267, "0");
                 }
             }
             handle = &(*handle)->tev.next;
@@ -150,4 +162,59 @@ HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
     }
 
     return texp_list;
+}
+
+HSD_TExp* HSD_TExpTev(HSD_TExp** texp_list) {
+    int i;
+    HSD_TExp* texp;
+
+    assert_line(294, texp_list);
+    texp = TevAlloc();
+    memset(texp, 0xFF, sizeof(HSD_TETev));
+    texp->type = HSD_TE_TEV;
+    texp->tev.next = *texp_list;
+    *texp_list = texp;
+    texp->tev.c_ref = 0;
+    texp->tev.a_ref = 0;
+    texp->tev.tex = NULL;
+    for (i = 0; i < 4; i++) {
+        texp->tev.c_in[i].exp = NULL;
+        texp->tev.a_in[i].exp = NULL;
+    }
+    return texp;
+}
+
+void* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type, HSD_TExp** texp_list) {
+    HSD_TExp* texp;
+
+    assert_line(361, texp_list);
+
+    texp = *texp_list;
+    do {     
+        while (texp)  {
+            if (texp->type == HSD_TE_CNST && texp->cnst.val == val && texp->cnst.comp == comp) {
+                assert_line(368, texp->cnst.ctype == type);
+                return texp;
+            }
+            texp = texp->cnst.next;
+        }
+
+        
+        if (comp == HSD_TE_0) {
+            return NULL;
+        } 
+        texp = CnstAlloc();
+        texp->cnst.type = HSD_TE_CNST;
+        texp->cnst.next = (*texp_list);
+        *texp_list = texp;
+        texp->cnst.ref = 0;
+        texp->cnst.val = val;
+        texp->cnst.comp = comp;
+        texp->cnst.ctype = type;
+        texp->cnst.reg = 0xFF;
+        texp->cnst.idx = 0xFF;
+        return texp;
+    } while (TRUE);
+    
+    return texp;
 }
