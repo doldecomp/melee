@@ -282,31 +282,30 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
 
 void HSD_MObjCompileTev(HSD_MObj* mobj)
 {
-    HSD_TObj* tobj;
-    HSD_TObj** tobj_list;
+    HSD_TObj* tobj, **tail ;
     HSD_TExp* texp;
 
-    tobj_list = NULL;
+    tail = NULL;
     if (mobj != NULL) {
         if (mobj->tevdesc != NULL) {
             HSD_TExpFreeTevDesc(mobj->tevdesc);
             mobj->tevdesc = NULL;
         }
         if (mobj->texp != NULL) {
-            HSD_TExpFreeList(mobj->texp, 7, 1);
+            HSD_TExpFreeList(mobj->texp, HSD_TE_ALL, 1);
             mobj->texp = NULL;
         }
         tobj = mobj->tobj;
-        if (mobj->rendermode & 0x04000000) {
+        if (mobj->rendermode & RENDER_SHADOW) {
             if (tobj_shadows != NULL) {
-                tobj_list = &tobj;
-                while (*tobj_list != NULL) {
-                    tobj_list = &(*tobj_list)->next;
+                tail = &tobj;
+                while (*tail  != NULL) {
+                    tail  = &(*tail )->next;
                 }
-                *tobj_list = tobj_shadows;
+                *tail = tobj_shadows;
             }
         }
-        if (mobj->rendermode & 0x1000) {
+        if (mobj->rendermode & RENDER_TOON) {
             if (tobj_toon != NULL && tobj_toon->imagedesc != NULL) {
                 tobj_toon->next = tobj;
                 tobj = tobj_toon;
@@ -315,8 +314,8 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
         HSD_TObjAssignResources(tobj);
         texp = HSD_MOBJ_METHOD(mobj)->make_texp(mobj, tobj, &mobj->texp);
         HSD_TExpCompile(texp, &mobj->tevdesc, &mobj->texp);
-        if (tobj_list != NULL) {
-            *tobj_list = NULL;
+        if (tail != NULL) {
+            *tail = NULL;
         }
     }
 }
