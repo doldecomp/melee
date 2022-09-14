@@ -383,7 +383,7 @@ void func_801C0800(StructPairWithStageID* pair)
         }
     }
     if (stage_info.x6B8 != NULL && stage_info.x6BC != NULL) {
-        func_803984F4(0x1E, stage_info.x6B8, stage_info.x6BC, 0, 0);
+        psInitDataBankLoad(0x1E, stage_info.x6B8, stage_info.x6BC, 0, 0);
     }
     func_8004D288(stage_info.x6AC);
     func_80058820();

@@ -5,10 +5,10 @@ lbl_800056C0:
     .4byte func_803983A4
     .4byte 0x00000150
     .4byte lbl_80005520
-    .4byte func_803984F4
+    .4byte psInitDataBankLoad
     .4byte 0x00000120
     .4byte lbl_80005528
-    .4byte func_803989A0
+    .4byte psInitDataBank
     .4byte 0x00000068
     .4byte lbl_80005530
     .4byte func_80398A08
