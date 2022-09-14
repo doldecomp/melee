@@ -130,7 +130,7 @@
 typedef struct _HSD_TObj {
     HSD_Obj parent;
     struct _HSD_TObj* next;
-    u32 id; //GXTexMapID
+    s32 id; //GXTexMapID
     u32 src; //GXTexGenSrc
     GXTexMtx mtxid;
     Quaternion rotate;
