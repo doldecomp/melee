@@ -80,7 +80,7 @@ static HSD_TExp* CnstAlloc() {
     return texp;
 }
 
-HSD_TExpFree(HSD_TExp* texp)
+void HSD_TExpFree(HSD_TExp* texp)
 {
     switch (HSD_TExpGetType(texp)) {
     case HSD_TE_TEV:
@@ -217,4 +217,38 @@ void* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type, HSD_TExp** texp
     } while (TRUE);
     
     return texp;
+}
+
+void HSD_TExpColorOp(HSD_TExp* texp, u32 op, u8 bias, u8 scale, u8 clamp) {
+    s32 unused[2];
+
+    assert_line(0x198, texp);
+    assert_line(0x199, HSD_TExpGetType(texp) == HSD_TE_TEV);
+
+    texp->tev.c_op = op;
+    texp->tev.c_clamp = (clamp ? GX_ENABLE : GX_DISABLE);
+    if (op <= GX_TEV_SUB) {
+        texp->tev.c_bias = bias;
+        texp->tev.c_scale = scale;
+    } else {
+        texp->tev.c_bias = 0;
+        texp->tev.c_scale = 0;
+    }
+}
+
+void HSD_TExpAlphaOp(HSD_TExp* texp, u32 op, u8 bias, u8 scale, u8 clamp) {
+    s32 unused[2];
+
+    assert_line(0x1B2, texp);
+    assert_line(0x1B3, HSD_TExpGetType(texp) == HSD_TE_TEV);
+
+    texp->tev.a_op = op;
+    texp->tev.a_clamp = (clamp ? GX_ENABLE : GX_DISABLE);
+    if (op <= GX_TEV_SUB) {
+        texp->tev.a_bias = bias;
+        texp->tev.a_scale = scale;
+    } else {
+        texp->tev.a_bias = 0;
+        texp->tev.a_scale = 0;
+    }
 }
