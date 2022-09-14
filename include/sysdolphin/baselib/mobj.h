@@ -72,11 +72,6 @@ typedef struct _HSD_MObj {
     struct _HSD_AObj* aobj;
     struct _HSD_TExpTevDesc* tevdesc;
     union _HSD_TExp* texp;
-
-    struct _HSD_TObj* tobj_toon;
-    struct _HSD_TObj* tobj_gradation;
-    struct _HSD_TObj* tobj_backlight;
-    f32 z_offset;
 } HSD_MObj;
 
 typedef struct _HSD_Material {
