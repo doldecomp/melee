@@ -327,33 +327,34 @@ static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";
 
 void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2)
 {
-    assert_line(0x270, mobj->tevdesc);
+    assert_line(624, mobj->tevdesc);
     HSD_TExpSetupTev(mobj->tevdesc, mobj->texp);
     HSD_TObjSetupVolatileTev(tobj, arg2);
 }
 
 void HSD_MObjSetup(HSD_MObj* mobj, u32 rendermode)
 {
-    HSD_TObj* tobj;
-    HSD_TObj** var_r29;
+    HSD_TObj* tobj, **tail;
 
     HSD_StateInitTev();
     rendermode = mobj->rendermode;
     HSD_SetMaterialColor(mobj->mat->ambient, mobj->mat->diffuse, mobj->mat->specular,
                          mobj->mat, mobj->mat->alpha);
-    if (rendermode & 8) {
+    if (rendermode & RENDER_SPECULAR) {
         HSD_SetMaterialShininess(mobj->mat, mobj->mat->shininess);
     }
-    var_r29 = NULL;
+
     tobj = mobj->tobj;
-    if ((rendermode & 0x4000000) && tobj_shadows != NULL) {
-        var_r29 = &tobj;
-        while (*var_r29 != NULL) {
-            var_r29 = &(*var_r29)->next;
+    tail = NULL;
+
+    if ((rendermode & RENDER_SHADOW) && tobj_shadows != NULL) {
+        tail = &tobj;
+        while (*tail != NULL) {
+            tail = &(*tail)->next;
         }
-        *var_r29 = tobj_shadows;
+        *tail = tobj_shadows;
     }
-    if ((rendermode & 0x1000) && tobj_toon != NULL && tobj_toon->imagedesc != NULL) {
+    if ((rendermode & RENDER_TOON) && tobj_toon != NULL && tobj_toon->imagedesc != NULL) {
         tobj_toon->next = tobj;
         tobj = tobj_toon;
     }
@@ -361,8 +362,8 @@ void HSD_MObjSetup(HSD_MObj* mobj, u32 rendermode)
     HSD_TObjSetupTextureCoordGen(tobj);
     HSD_MOBJ_METHOD(mobj)->setup_tev(mobj, tobj, rendermode);
     HSD_SetupRenderModeWithCustomPE(rendermode, mobj->pe);
-    if (var_r29 != NULL) {
-        *var_r29 = NULL;
+    if (tail != NULL) {
+        *tail = NULL;
     }
 }
 
@@ -435,14 +436,14 @@ void HSD_MObjRemove(HSD_MObj* mobj)
 HSD_MObj* HSD_MObjAlloc(void)
 {
     HSD_MObj* mobj = hsdNew((HSD_ClassInfo*) (default_class != NULL ? default_class : &hsdMObj));
-    assert_line(0x393, mobj);
+    assert_line(915, mobj);
     return mobj;
 }
 
 HSD_Material* HSD_MaterialAlloc(void)
 {
     HSD_Material* mat = hsdAllocMemPiece(sizeof(HSD_Material));
-    assert_line(0x3AF, mat);
+    assert_line(943, mat);
     memset(mat, 0, sizeof(HSD_Material));
     mat->alpha = 1.0F;
     return mat;
@@ -451,7 +452,7 @@ HSD_Material* HSD_MaterialAlloc(void)
 void HSD_MObjAddShadowTexture(HSD_TObj* tobj)
 {
     HSD_TObj* cur;
-    assert_line(0x3DE, tobj);
+    assert_line(990, tobj);
     for (cur = tobj_shadows; cur != NULL; cur = cur->next) {
         if (cur == tobj) {
             return;
