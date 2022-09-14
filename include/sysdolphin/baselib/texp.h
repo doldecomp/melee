@@ -3,6 +3,10 @@
 
 #include <dolphin/types.h>
 
+#define HSD_TEXP_RAS -2
+#define HSD_TEXP_TEX -1
+#define HSD_TEXP_ZERO 0
+
 typedef enum _HSD_TEInput {
     HSD_TE_END = 0,
     HSD_TE_RGB = 1,

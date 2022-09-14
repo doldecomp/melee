@@ -174,121 +174,110 @@ HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc)
 
 HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
 {
-    HSD_TExp* sp3C;
-    HSD_TExp* texptev_3;
-    HSD_TExp* sp38;
-    HSD_TExp* result;
-    HSD_TExp* sp30;
-    HSD_TExp* texptev;
-    HSD_TExp* texptev_2;
-    HSD_TExp* texptev_4;
-    HSD_TExp* texptev_5;
-    HSD_TExp* texptev_6;
-    HSD_TExp* texptev_7;
-    HSD_TObj* cur;
-    HSD_TObj* cur_2;
-    HSD_TObj* cur_3;
-    HSD_TObj* tobj;
-    HSD_TObj* cur_4;
-    u32 flags;
+    HSD_TExp* diff, *spec, *ext, *alpha;
+    HSD_TExp* exp, *exp_2, *exp_3;
+    HSD_TObj* tobj, *tobj_2, *tobj_3, *tobj_4, *toon = NULL;
+    u32 done = 0;
     u32 unused[5];
 
-    tobj = NULL;
-    flags = 0;
-    assert_line(0x1A0, list);
+    assert_line(416, list);
     *list = NULL;
-    cur_4 = tobj_top;
-    while (cur_4 != NULL) {
-        if ((cur_4->flags & 0xF) == 4) {
-            tobj = cur_4;
+    for (tobj = tobj_top; tobj != NULL; tobj = tobj->next) {
+        if (tobj_coord(tobj) == TEX_COORD_TOON) {
+            toon = tobj;
         }
-        cur_4 = cur_4->next;
     }
-    if (mobj->rendermode & 2) {
-        texptev_2 = HSD_TExpTev(list);
-        HSD_TExpOrder(texptev_2, NULL, 4);
-        HSD_TExpColorOp(texptev_2, 0, 0, 0, 1);
-        HSD_TExpColorIn(texptev_2, 7, NULL, 7, NULL, 7, NULL, 1, -2);
-        HSD_TExpAlphaOp(texptev_2, 0, 0, 0, 1);
-        HSD_TExpAlphaIn(texptev_2, 7, NULL, 7, NULL, 7, NULL, 5, -2);
-        sp3C = texptev_2;
-        sp30 = texptev_2;
+    
+    if (mobj->rendermode & RENDER_VERTEX) {
+        exp = HSD_TExpTev(list);
+        HSD_TExpOrder(exp, NULL, GX_COLOR0A0);
+        HSD_TExpColorOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, HSD_TEXP_RAS);
+        HSD_TExpAlphaOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpAlphaIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, HSD_TEXP_RAS);
+        diff = exp;
+        alpha = exp;
     } else {
-        HSD_TExp* temp_r25 = HSD_TExpCnst(&mobj->mat->diffuse, 1, 0, list);
-        HSD_TExp* temp_r26 = HSD_TExpCnst(&mobj->mat->alpha, 6, 3, list);
-        texptev_3 = HSD_TExpTev(list);
-        HSD_TExpColorOp(texptev_3, 0, 0, 0, 1);
-        HSD_TExpColorIn(texptev_3, 7, NULL, 7, NULL, 7, 0, 1, temp_r25);
-        HSD_TExpAlphaOp(texptev_3, 0, 0, 0, 1);
-        HSD_TExpAlphaIn(texptev_3, 7, 0, 7, NULL, 7, 0, 6, temp_r26);
-        sp3C = texptev_3;
-        sp30 = texptev_3;
+        HSD_TExp* diff_cnst = HSD_TExpCnst(&mobj->mat->diffuse, HSD_TE_RGB, HSD_TE_U8, list);
+        HSD_TExp* alpha_cnst = HSD_TExpCnst(&mobj->mat->alpha, HSD_TE_X, HSD_TE_F32, list);
+        
+        exp = HSD_TExpTev(list);
+        HSD_TExpColorOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff_cnst);
+        HSD_TExpAlphaOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpAlphaIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_X, alpha_cnst);
+        diff = exp;
+        alpha = exp;
     }
-    cur = tobj_top;
-    while (cur != NULL) {
-        if ((cur->flags & 0x50) && cur->id != 0xFF) {
-            HSD_TOBJ_METHOD(cur)->make_texp(cur, 0x50, 0, &sp3C, &sp30, list);
+
+    for (tobj_2 = tobj_top; tobj_2 != NULL; tobj_2 = tobj_2->next) {
+        if ((tobj_2->flags & (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_AMBIENT)) && tobj_2->id != GX_TEXMAP_NULL) {
+            HSD_TOBJ_METHOD(tobj_2)->make_texp(tobj_2, (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_AMBIENT), done, &diff, &alpha, list);
         }
-        cur = cur->next;
     }
-    flags |= 0x50;
-    if (mobj->rendermode & 4) {
-        texptev_4 = HSD_TExpTev(list);
-        if (tobj != NULL) {
-            HSD_TExpOrder(texptev_4, tobj, 4);
-            HSD_TExpColorOp(texptev_4, 0, 0, 0, 1);
-            HSD_TExpColorIn(texptev_4, 7, NULL, 1, sp3C, 1, -1, 7, NULL);
+    done |= (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_AMBIENT);
+
+    if (mobj->rendermode & RENDER_DIFFUSE) {
+        exp_2 = HSD_TExpTev(list);
+        if (toon != NULL) {
+            HSD_TExpOrder(exp_2, toon, GX_COLOR0A0);
+            HSD_TExpColorOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+            HSD_TExpColorIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff, HSD_TE_RGB, HSD_TEXP_TEX, HSD_TE_0, HSD_TEXP_ZERO);
         } else {
-            HSD_TExpOrder(texptev_4, NULL, 4);
-            HSD_TExpColorOp(texptev_4, 0, 0, 0, 1);
-            HSD_TExpColorIn(texptev_4, 7, NULL, 1, sp3C, 1, -2, 7, NULL);
+            HSD_TExpOrder(exp_2, NULL, GX_COLOR0A0);
+            HSD_TExpColorOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+            HSD_TExpColorIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff, HSD_TE_RGB, HSD_TEXP_RAS, HSD_TE_0, HSD_TEXP_ZERO);
         }
-        sp3C = texptev_4;
-        HSD_TExpAlphaOp(texptev_4, 0, 0, 0, 1);
-        HSD_TExpAlphaIn(texptev_4, 7, 0, 5, sp30, 5, -2, 7, 0);
-        sp30 = texptev_4;
+        diff = exp_2;
+        HSD_TExpAlphaOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpAlphaIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, alpha, HSD_TE_A, HSD_TEXP_RAS, HSD_TE_0, HSD_TEXP_ZERO);
+        alpha = exp_2;
     }
-    if (mobj->rendermode & 8) {
-        HSD_TExp* temp_r27 = HSD_TExpCnst(&mobj->mat->specular, 1, 0, list);
-        texptev_5 = HSD_TExpTev(list);
-        HSD_TExpColorOp(texptev_5, 0, 0, 0, 1);
-        HSD_TExpColorIn(texptev_5, 7, NULL, 7, NULL, 7, NULL, 1, temp_r27);
-        sp38 = texptev_5;
-        cur_2 = tobj_top;
-        while (cur_2 != NULL) {
-            if ((cur_2->flags & 0x20) && cur_2->id != 0xFF) {
-                HSD_TOBJ_METHOD(cur_2)->make_texp(cur_2, 0x20, flags, &sp38, &sp30, list);
+
+    if (mobj->rendermode & RENDER_SPECULAR) {
+        HSD_TExp* cnst = HSD_TExpCnst(&mobj->mat->specular, HSD_TE_RGB, HSD_TE_U8, list);
+        exp_3 = HSD_TExpTev(list);
+        HSD_TExpColorOp(exp_3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(exp_3, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, cnst);
+        spec = exp_3;
+
+        for (tobj_3 = tobj_top; tobj_3 != NULL; tobj_3 = tobj_3->next) {
+            if ((tobj_3->flags & TEX_LIGHTMAP_SPECULAR) && tobj_3->id != GX_TEXMAP_NULL) {
+                HSD_TOBJ_METHOD(tobj_3)->make_texp(tobj_3, TEX_LIGHTMAP_SPECULAR, done, &spec, &alpha, list);
             }
-            cur_2 = cur_2->next;
         }
-        flags |= 0x20;
-        texptev_6 = HSD_TExpTev(list);
-        HSD_TExpOrder(texptev_6, NULL, 5);
-        HSD_TExpColorOp(texptev_6, 0, 0, 0, 1);
-        HSD_TExpColorIn(texptev_6, 7, NULL, 1, sp38, 1, -2, 7, NULL);
-        sp38 = texptev_6;
-        texptev_7 = HSD_TExpTev(list);
-        HSD_TExpColorOp(texptev_7, 0, 0, 0, 1);
-        HSD_TExpColorIn(texptev_7, 1, sp38, 7, NULL, 7, NULL, 1, sp3C);
-        sp3C = texptev_7;
+        done |= TEX_LIGHTMAP_SPECULAR;
+
+        exp_3 = HSD_TExpTev(list);
+        HSD_TExpOrder(exp_3, NULL, GX_COLOR1A1);
+        HSD_TExpColorOp(exp_3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(exp_3, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, spec, HSD_TE_RGB, HSD_TEXP_RAS, HSD_TE_0, HSD_TEXP_ZERO);
+        spec = exp_3;
+
+        exp_3 = HSD_TExpTev(list);
+        HSD_TExpColorOp(exp_3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(exp_3, HSD_TE_RGB, spec, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff);
+        diff = exp_3;
     }
-    cur_3 = tobj_top;
-    result = sp3C;
-    while (cur_3 != NULL) {
-        if ((cur_3->flags & 0x80) && cur_3->id != 0xFF) {
-            HSD_TOBJ_METHOD(cur_3)->make_texp(cur_3, 0x80, flags, &result, &sp30, list);
+
+    ext = diff;
+    
+    for (tobj_4 = tobj_top; tobj_4 != NULL; tobj_4 = tobj_4->next) {
+        if ((tobj_4->flags & TEX_LIGHTMAP_EXT) && tobj_4->id != GX_TEXMAP_NULL) {
+            HSD_TOBJ_METHOD(tobj_4)->make_texp(tobj_4, TEX_LIGHTMAP_EXT, done, &ext, &alpha, list);
         }
-        cur_3 = cur_3->next;
     }
-    if (result != sp30 || HSD_TExpGetType(result) != HSD_TE_TEV || HSD_TExpGetType(sp30) != HSD_TE_TEV) {
-        texptev = HSD_TExpTev(list);
-        HSD_TExpColorOp(texptev, 0, 0, 0, 1);
-        HSD_TExpColorIn(texptev, 7, NULL, 7, NULL, 7, NULL, 1, result);
-        HSD_TExpAlphaOp(texptev, 0, 0, 0, 1);
-        HSD_TExpAlphaIn(texptev, 7, NULL, 7, NULL, 7, NULL, 5, sp30);
-        return texptev;
+
+    if (ext != alpha || HSD_TExpGetType(ext) != HSD_TE_TEV || HSD_TExpGetType(alpha) != HSD_TE_TEV) {
+        exp_2 = HSD_TExpTev(list);
+        HSD_TExpColorOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpColorIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, ext);
+        HSD_TExpAlphaOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
+        HSD_TExpAlphaIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, alpha);
+        return exp_2;
     }
-    return result;
+
+    return ext;
 }
 
 void HSD_MObjCompileTev(HSD_MObj* mobj)
