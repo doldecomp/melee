@@ -278,11 +278,4 @@ lbl_803D0AB4:
     .4byte lbl_803D09A8
     .4byte lbl_803D09C4
     .4byte NULL
-.global lbl_803D0AE8
-lbl_803D0AE8:
-    .4byte 0x41400000
-    .4byte NULL
-    .4byte 0xC0C00000
-    .4byte 0x40C00000
-    .4byte 0x40C00000
-    .4byte 0x40C00000
+
