@@ -95,6 +95,9 @@ extern struct _unk_gobj_struct {
     HSD_GObj* gobj;
 } lbl_804CE3E4;
 
+typedef struct _GObjUnkStruct GObjUnkStruct;
+typedef struct _GObjFuncs GObjFuncs;
+
 extern HSD_GObj* lbl_804D797C;
 extern HSD_GObj** lbl_804D7820;
 extern HSD_GObj** lbl_804D7824;
@@ -108,7 +111,7 @@ void func_80390C84(HSD_GObj* gobj);
 void func_80390CAC(HSD_GObj* gobj);
 u32 func_80390EB8(s32 i);
 void func_803910D8(HSD_GObj*, s32);
-u8 func_803912A8(struct _GObjUnkStruct*, struct _GObjFuncs*);
+u8 func_803912A8(GObjUnkStruct*, GObjFuncs*);
 HSD_GObj* func_803901F0(u16 classifier, u8 p_link, u8 priority);
 
 #endif

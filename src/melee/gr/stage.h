@@ -6,12 +6,6 @@
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
-#ifndef M2CTX
-
-typedef Vec Vec3;
-
-#endif
-
 enum InternalStageID {
     CASTLE = 0x02, // Princess Peach's Castle
     RCRUISE = 0x03, // Rainbow Cruise
@@ -119,7 +113,7 @@ typedef struct _StageInfo {
             GXColor color;
         }* ptr;
     }* x12C;
-    Vec3 x130, x13C, x148, x154, x160, x16C;
+    Vec x130, x13C, x148, x154, x160, x16C;
     BOOL (*x178)(s32);
     void* x17C;
     struct _HSD_GObj* x180[4];
@@ -160,7 +154,7 @@ typedef struct _StageInfo {
     f32 x724;
     f32 x728;
     s32 x72C;
-    Vec3 x730;
+    Vec x730;
     f32 x73C;
     s32 x740;
     u8 x744_pad[0x748 - 0x744];
