@@ -808,8 +808,6 @@ struct _HSD_PObj *HSD_PObjLoadDesc(struct _HSD_PObjDesc *);
 void HSD_EraseRect();
 int HSD_GetHeap(void);
 
-void HSD_ObjInit(void);
-
 void HSD_VIInit(struct _HSD_VIStatus *vi_status, void *xfb0, void *xfb1, void *xfb2);
 
 void func_80378280(u8, int);
