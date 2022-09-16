@@ -96,7 +96,6 @@ BOOL ftGameWatch_ItemCheckPanicRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
-extern void func_80074B0C(HSD_GObj*, s32, s32);
 
 // 0x8014CDC0
 // https://decomp.me/scratch/bF0RR // Update Oil Panic charge level indicator models

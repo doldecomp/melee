@@ -232,3 +232,20 @@ func_8012BDA0:
 /* 8012BE38 00128A18  4E 80 00 20 */	blr 
 }
 #pragma pop
+
+void func_8012BE3C(HSD_GObj* fighter_gobj) {
+    s32* x1CC;
+    Fighter* fp = fighter_gobj->user_data;
+    s32 bone_idx;
+    Fighter* fp2;
+    HSD_JObj* jobj;
+    u32 unused[2];
+    func_80074B0C(fighter_gobj, 0, 0);
+    func_8007B0C0(fighter_gobj, 0);
+
+    x1CC = &fp->x110_attr.x1CC;
+    bone_idx = func_8007500C(fp, 4);
+    fp2 = fighter_gobj->user_data;
+    jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
+    efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
+}
