@@ -775,13 +775,7 @@ void HSD_LObjAddCurrent(HSD_LObj* lobj)
             }
             node = node->next;
         }
-        if (lobj != NULL) {
-            u16* ref_count = &lobj->parent.ref_count;
-            *ref_count += 1;
-            if (*ref_count == (u16) -1U) {
-                __assert("object.h", 0x5D, "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
-            }
-        }
+        ref_INC(lobj);
         for (p = &current_lights; *p != NULL; p = &(*p)->next) {
             u8 priority1 = HSD_LObjGetPriority(lobj);
             u8 priority2 = HSD_LObjGetPriority((*p)->data);
