@@ -30,7 +30,7 @@
 /* 0033D1D0 */ extern void GXSetTevOrder(u32, s32, s32, s32);
 /* 0033D14C */ extern void GXSetZTexture(s32, s32, s32);
 /* 0033D0FC */ extern void GXSetAlphaCompare(s32, s32, s32, s32, s32);
-/* 0033D0F8 */ extern void func_80340518();
+/* 0033D0F8 */ extern void GXSetTevClampMode(s32, s32);
 /* 0033D058 */ extern void GXSetTevSwapModeTable(s32, s32, s32, s32, s32);
 /* 0033D000 */ extern void GXSetTevSwapMode(s32, s32, s32);
 /* 0033CF94 */ extern void GXSetTevKAlphaSel(s32, s32);
