@@ -2,7 +2,7 @@
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GXGeometry.h>
 
-void __GXSetGenMode();
+static void __GXSetGenMode();
 
 void __GXSetDirtyState()
 {
