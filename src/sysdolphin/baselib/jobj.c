@@ -979,8 +979,12 @@ static char unused2[] = "jobj_root == NULL";
 #pragma pop
 
 static char jobj_child[] = "jobj->child";
+
+// Remove once no more inline asm needs this "object.h" literal
 char lbl_804068E4[] = "object.h";
-inline void ref_INC(void* o)
+#ifndef NON_MATCHING
+#define ref_INC ref_INC_alt
+inline void ref_INC_alt(void* o)
 {
     if (o != NULL) {
         HSD_OBJ(o)->ref_count++;
@@ -989,6 +993,7 @@ inline void ref_INC(void* o)
         }
     }
 }
+#endif
 
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 {
