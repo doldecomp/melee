@@ -2,7 +2,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/robj.h>
 
-void WObjInfoInit(void);
+static void WObjInfoInit(void);
 
 HSD_WObjInfo hsdWObj = { WObjInfoInit };
 
