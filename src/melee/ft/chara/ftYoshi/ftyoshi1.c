@@ -47,3 +47,11 @@ void lbl_8012C114(s32 fighter_gobj) {
         return;
     }
 }
+
+void lbl_8012C194(void) {
+    func_80092870();
+}
+
+void lbl_8012C1B4(void) {
+    func_800928AC();
+}
