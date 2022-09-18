@@ -75,9 +75,9 @@ typedef struct
     u8 x208_pad[0x41C - 0x208];                         // at 0x208
     GXBool x41C;                                        // at 0x41C
     GXBool x41D;                                        // at 0x41D
-    u8 x41E_pad[0x43C - 0x41E];                         // at 0x41E
-    Vec x43C_vec;                                       // at 0x43C
-    Vec x448_vec;                                       // at 0x448
+    u32 projection_type;                                // at 0x420
+    f32 projection_v[6];                                // at 0x424
+    f32 viewport_v[6];                                  // at 0x43C
     u8 x454_pad[4];                                     // at 0x454
     f32 x458;                                           // at 0x458
     s32 x45C_data[0x20 / 4];                            // at 0x45C
@@ -139,7 +139,9 @@ typedef struct
 } GXContexts;
 
 typedef struct _GXTexObj {
-    u8 x0_pad[0x14];  // at 0x00
+    u8 x0_pad[0x8];
+    u32 dimensions;
+    u8 xC_pad[0x8];
     GXTexFmt tex_fmt; // at 0x14
     u8 x18_pad[8];    // at 0x18
 } GXTexObj;

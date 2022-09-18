@@ -711,28 +711,15 @@ lbl_8033EDC4:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/7cs9I
-#pragma push
-asm unk_t GXGetTexObjWidth()
-{ // clang-format off
-    nofralloc
-/* 8033EE00 0033B9E0  80 03 00 08 */	lwz r0, 8(r3)
-/* 8033EE04 0033B9E4  54 03 05 BE */	clrlwi r3, r0, 0x16
-/* 8033EE08 0033B9E8  38 63 00 01 */	addi r3, r3, 1
-/* 8033EE0C 0033B9EC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+s32 GXGetTexObjWidth(GXTexObj* tex_obj)
+{
+    return (tex_obj->dimensions & 0x3FF) + 1;
+}
 
-// https://decomp.me/scratch/RPxXA
-#pragma push
-asm unk_t GXGetTexObjHeight(){ // clang-format off
-    nofralloc
-/* 8033EE10 0033B9F0  80 03 00 08 */	lwz r0, 8(r3)
-/* 8033EE14 0033B9F4  54 03 B5 BE */	rlwinm r3, r0, 0x16, 0x16, 0x1f
-/* 8033EE18 0033B9F8  38 63 00 01 */	addi r3, r3, 1
-/* 8033EE1C 0033B9FC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+s32 GXGetTexObjHeight(GXTexObj* tex_obj)
+{
+    return (tex_obj->dimensions >> 10 & 0x3FF) + 1;
+}
 
 GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj)
 {
@@ -1055,31 +1042,15 @@ void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
     *arg0 = (*arg0 & 0xFFFFFF) | 0x65000000;
 }
 
-// https://decomp.me/scratch/uPSnJ // 1035 (42.50%)
-#pragma push
-asm unk_t GXInvalidateTexAll()
-{ // clang-format off
-    nofralloc
-/* 8033F270 0033BE50  7C 08 02 A6 */	mflr r0
-/* 8033F274 0033BE54  90 01 00 04 */	stw r0, 4(r1)
-/* 8033F278 0033BE58  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8033F27C 0033BE5C  48 00 0B 25 */	bl __GXFlushTextureState
-/* 8033F280 0033BE60  38 C0 00 61 */	li r6, 0x61
-/* 8033F284 0033BE64  3C 60 66 00 */	lis r3, 0x66001000@ha
-/* 8033F288 0033BE68  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033F28C 0033BE6C  98 C5 80 00 */	stb r6, 0xCC008000@l(r5)
-/* 8033F290 0033BE70  38 83 10 00 */	addi r4, r3, 0x66001000@l
-/* 8033F294 0033BE74  38 03 11 00 */	addi r0, r3, 0x1100
-/* 8033F298 0033BE78  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033F29C 0033BE7C  98 C5 80 00 */	stb r6, -0x8000(r5)
-/* 8033F2A0 0033BE80  90 05 80 00 */	stw r0, -0x8000(r5)
-/* 8033F2A4 0033BE84  48 00 0A FD */	bl __GXFlushTextureState
-/* 8033F2A8 0033BE88  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8033F2AC 0033BE8C  38 21 00 08 */	addi r1, r1, 8
-/* 8033F2B0 0033BE90  7C 08 03 A6 */	mtlr r0
-/* 8033F2B4 0033BE94  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXInvalidateTexAll(void)
+{
+    __GXFlushTextureState();
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    WGPIPE.u32 = 0x66001000;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    WGPIPE.u32 = 0x66001100;
+    __GXFlushTextureState();
+}
 
 // https://decomp.me/scratch/UXYXZ // 305 (39%)
 #pragma push

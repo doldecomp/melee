@@ -40,142 +40,36 @@ Vec2 const lbl_804DE228 = { 176.0F, 0.0F };
     0x06060808, 0x0A0C0A08, 0x08000000, 0x00000000
 };
 
-// https://decomp.me/scratch/UcyNc // 755 (84.27%)
-#pragma push
-asm unk_t GXSetDispCopySrc()
-{ // clang-format off
-    nofralloc
-/* 8033D408 00339FE8  80 ED A5 08 */	lwz r7, __GXContexts(r13)
-/* 8033D40C 00339FEC  39 00 00 00 */	li r8, 0
-/* 8033D410 00339FF0  54 84 51 AA */	rlwinm r4, r4, 0xa, 6, 0x15
-/* 8033D414 00339FF4  91 07 01 E0 */	stw r8, 0x1e0(r7)
-/* 8033D418 00339FF8  54 A7 04 3E */	clrlwi r7, r5, 0x10
-/* 8033D41C 00339FFC  54 C5 04 3E */	clrlwi r5, r6, 0x10
-/* 8033D420 0033A000  80 CD A5 08 */	lwz r6, __GXContexts(r13)
-/* 8033D424 0033A004  38 05 FF FF */	addi r0, r5, -1
-/* 8033D428 0033A008  54 65 04 3E */	clrlwi r5, r3, 0x10
-/* 8033D42C 0033A00C  39 26 01 E0 */	addi r9, r6, 0x1e0
-/* 8033D430 0033A010  80 C6 01 E0 */	lwz r6, 0x1e0(r6)
-/* 8033D434 0033A014  38 67 FF FF */	addi r3, r7, -1
-/* 8033D438 0033A018  54 C6 00 2A */	rlwinm r6, r6, 0, 0, 0x15
-/* 8033D43C 0033A01C  7C C5 2B 78 */	or r5, r6, r5
-/* 8033D440 0033A020  90 A9 00 00 */	stw r5, 0(r9)
-/* 8033D444 0033A024  54 00 50 2A */	slwi r0, r0, 0xa
-/* 8033D448 0033A028  80 AD A5 08 */	lwz r5, __GXContexts(r13)
-/* 8033D44C 0033A02C  38 C5 01 E0 */	addi r6, r5, 0x1e0
-/* 8033D450 0033A030  80 A5 01 E0 */	lwz r5, 0x1e0(r5)
-/* 8033D454 0033A034  54 A5 05 96 */	rlwinm r5, r5, 0, 0x16, 0xb
-/* 8033D458 0033A038  7C A4 23 78 */	or r4, r5, r4
-/* 8033D45C 0033A03C  90 86 00 00 */	stw r4, 0(r6)
-/* 8033D460 0033A040  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033D464 0033A044  38 A4 01 E0 */	addi r5, r4, 0x1e0
-/* 8033D468 0033A048  80 84 01 E0 */	lwz r4, 0x1e0(r4)
-/* 8033D46C 0033A04C  54 84 02 3E */	clrlwi r4, r4, 8
-/* 8033D470 0033A050  64 84 49 00 */	oris r4, r4, 0x4900
-/* 8033D474 0033A054  90 85 00 00 */	stw r4, 0(r5)
-/* 8033D478 0033A058  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033D47C 0033A05C  91 04 01 E4 */	stw r8, 0x1e4(r4)
-/* 8033D480 0033A060  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033D484 0033A064  38 A4 01 E4 */	addi r5, r4, 0x1e4
-/* 8033D488 0033A068  80 84 01 E4 */	lwz r4, 0x1e4(r4)
-/* 8033D48C 0033A06C  54 84 00 2A */	rlwinm r4, r4, 0, 0, 0x15
-/* 8033D490 0033A070  7C 83 1B 78 */	or r3, r4, r3
-/* 8033D494 0033A074  90 65 00 00 */	stw r3, 0(r5)
-/* 8033D498 0033A078  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033D49C 0033A07C  38 83 01 E4 */	addi r4, r3, 0x1e4
-/* 8033D4A0 0033A080  80 63 01 E4 */	lwz r3, 0x1e4(r3)
-/* 8033D4A4 0033A084  54 63 05 96 */	rlwinm r3, r3, 0, 0x16, 0xb
-/* 8033D4A8 0033A088  7C 60 03 78 */	or r0, r3, r0
-/* 8033D4AC 0033A08C  90 04 00 00 */	stw r0, 0(r4)
-/* 8033D4B0 0033A090  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033D4B4 0033A094  84 03 01 E4 */	lwzu r0, 0x1e4(r3)
-/* 8033D4B8 0033A098  54 00 02 3E */	clrlwi r0, r0, 8
-/* 8033D4BC 0033A09C  64 00 4A 00 */	oris r0, r0, 0x4a00
-/* 8033D4C0 0033A0A0  90 03 00 00 */	stw r0, 0(r3)
-/* 8033D4C4 0033A0A4  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetDispCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
+{
+    __GXContexts.main->x100_data[0x38] = 0;
+    __GXContexts.main->x100_data[0x38] = (__GXContexts.main->x100_data[0x38] & 0xFFFFFC00) | arg0;
+    __GXContexts.main->x100_data[0x38] = (__GXContexts.main->x100_data[0x38] & 0xFFF003FF) | ((u32) (arg1 << 0xA) & 0x03FFFC00);
+    __GXContexts.main->x100_data[0x38] = (__GXContexts.main->x100_data[0x38] & 0xFFFFFF) | 0x49000000;
+    __GXContexts.main->x100_data[0x39] = 0;
+    __GXContexts.main->x100_data[0x39] = (__GXContexts.main->x100_data[0x39] & 0xFFFFFC00) | (arg2 - 1);
+    __GXContexts.main->x100_data[0x39] = (__GXContexts.main->x100_data[0x39] & 0xFFF003FF) | ((arg3 - 1) << 0xA);
+    __GXContexts.main->x100_data[0x39] = (__GXContexts.main->x100_data[0x39] & 0xFFFFFF) | 0x4A000000;
+}
 
-// https://decomp.me/scratch/ZuNiA // 755 (84.27%)
-#pragma push
-asm unk_t GXSetTexCopySrc()
-{ // clang-format off
-    nofralloc
-/* 8033D4C8 0033A0A8  80 ED A5 08 */	lwz r7, __GXContexts(r13)
-/* 8033D4CC 0033A0AC  39 00 00 00 */	li r8, 0
-/* 8033D4D0 0033A0B0  54 84 51 AA */	rlwinm r4, r4, 0xa, 6, 0x15
-/* 8033D4D4 0033A0B4  91 07 01 F0 */	stw r8, 0x1f0(r7)
-/* 8033D4D8 0033A0B8  54 A7 04 3E */	clrlwi r7, r5, 0x10
-/* 8033D4DC 0033A0BC  54 C5 04 3E */	clrlwi r5, r6, 0x10
-/* 8033D4E0 0033A0C0  80 CD A5 08 */	lwz r6, __GXContexts(r13)
-/* 8033D4E4 0033A0C4  38 05 FF FF */	addi r0, r5, -1
-/* 8033D4E8 0033A0C8  54 65 04 3E */	clrlwi r5, r3, 0x10
-/* 8033D4EC 0033A0CC  39 26 01 F0 */	addi r9, r6, 0x1f0
-/* 8033D4F0 0033A0D0  80 C6 01 F0 */	lwz r6, 0x1f0(r6)
-/* 8033D4F4 0033A0D4  38 67 FF FF */	addi r3, r7, -1
-/* 8033D4F8 0033A0D8  54 C6 00 2A */	rlwinm r6, r6, 0, 0, 0x15
-/* 8033D4FC 0033A0DC  7C C5 2B 78 */	or r5, r6, r5
-/* 8033D500 0033A0E0  90 A9 00 00 */	stw r5, 0(r9)
-/* 8033D504 0033A0E4  54 00 50 2A */	slwi r0, r0, 0xa
-/* 8033D508 0033A0E8  80 AD A5 08 */	lwz r5, __GXContexts(r13)
-/* 8033D50C 0033A0EC  38 C5 01 F0 */	addi r6, r5, 0x1f0
-/* 8033D510 0033A0F0  80 A5 01 F0 */	lwz r5, 0x1f0(r5)
-/* 8033D514 0033A0F4  54 A5 05 96 */	rlwinm r5, r5, 0, 0x16, 0xb
-/* 8033D518 0033A0F8  7C A4 23 78 */	or r4, r5, r4
-/* 8033D51C 0033A0FC  90 86 00 00 */	stw r4, 0(r6)
-/* 8033D520 0033A100  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033D524 0033A104  38 A4 01 F0 */	addi r5, r4, 0x1f0
-/* 8033D528 0033A108  80 84 01 F0 */	lwz r4, 0x1f0(r4)
-/* 8033D52C 0033A10C  54 84 02 3E */	clrlwi r4, r4, 8
-/* 8033D530 0033A110  64 84 49 00 */	oris r4, r4, 0x4900
-/* 8033D534 0033A114  90 85 00 00 */	stw r4, 0(r5)
-/* 8033D538 0033A118  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033D53C 0033A11C  91 04 01 F4 */	stw r8, 0x1f4(r4)
-/* 8033D540 0033A120  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033D544 0033A124  38 A4 01 F4 */	addi r5, r4, 0x1f4
-/* 8033D548 0033A128  80 84 01 F4 */	lwz r4, 0x1f4(r4)
-/* 8033D54C 0033A12C  54 84 00 2A */	rlwinm r4, r4, 0, 0, 0x15
-/* 8033D550 0033A130  7C 83 1B 78 */	or r3, r4, r3
-/* 8033D554 0033A134  90 65 00 00 */	stw r3, 0(r5)
-/* 8033D558 0033A138  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033D55C 0033A13C  38 83 01 F4 */	addi r4, r3, 0x1f4
-/* 8033D560 0033A140  80 63 01 F4 */	lwz r3, 0x1f4(r3)
-/* 8033D564 0033A144  54 63 05 96 */	rlwinm r3, r3, 0, 0x16, 0xb
-/* 8033D568 0033A148  7C 60 03 78 */	or r0, r3, r0
-/* 8033D56C 0033A14C  90 04 00 00 */	stw r0, 0(r4)
-/* 8033D570 0033A150  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033D574 0033A154  84 03 01 F4 */	lwzu r0, 0x1f4(r3)
-/* 8033D578 0033A158  54 00 02 3E */	clrlwi r0, r0, 8
-/* 8033D57C 0033A15C  64 00 4A 00 */	oris r0, r0, 0x4a00
-/* 8033D580 0033A160  90 03 00 00 */	stw r0, 0(r3)
-/* 8033D584 0033A164  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
+{
+    __GXContexts.main->callbacks[0x10] = NULL;
+    __GXContexts.main->callbacks[0x10] = (void (*)())(((u32) __GXContexts.main->callbacks[0x10] & 0xFFFFFC00) | arg0);
+    __GXContexts.main->callbacks[0x10] = (void (*)())(((u32) __GXContexts.main->callbacks[0x10] & 0xFFF003FF) | ((u32) (arg1 << 0xA) & 0x03FFFC00));
+    __GXContexts.main->callbacks[0x10] = (void (*)())(((u32) __GXContexts.main->callbacks[0x10] & 0xFFFFFF) | 0x49000000);
+    __GXContexts.main->callbacks[0x11] = NULL;
+    __GXContexts.main->callbacks[0x11] = (void (*)())(((u32) __GXContexts.main->callbacks[0x11] & 0xFFFFFC00) | (arg2 - 1));
+    __GXContexts.main->callbacks[0x11] = (void (*)())(((u32) __GXContexts.main->callbacks[0x11] & 0xFFF003FF) | ((arg3 - 1) << 0xA));
+    __GXContexts.main->callbacks[0x11] = (void (*)())(((u32) __GXContexts.main->callbacks[0x11] & 0xFFFFFF) | 0x4A000000);
+}
 
-// https://decomp.me/scratch/S62uD // 265 (84.41%)
-#pragma push
-asm unk_t GXSetDispCopyDst()
-{ // clang-format off
-    nofralloc
-/* 8033D588 0033A168  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033D58C 0033A16C  38 00 00 00 */	li r0, 0
-/* 8033D590 0033A170  90 04 01 E8 */	stw r0, 0x1e8(r4)
-/* 8033D594 0033A174  54 60 0C 3C */	rlwinm r0, r3, 1, 0x10, 0x1e
-/* 8033D598 0033A178  7C 00 2E 70 */	srawi r0, r0, 5
-/* 8033D59C 0033A17C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033D5A0 0033A180  38 83 01 E8 */	addi r4, r3, 0x1e8
-/* 8033D5A4 0033A184  80 63 01 E8 */	lwz r3, 0x1e8(r3)
-/* 8033D5A8 0033A188  54 63 00 2A */	rlwinm r3, r3, 0, 0, 0x15
-/* 8033D5AC 0033A18C  7C 60 03 78 */	or r0, r3, r0
-/* 8033D5B0 0033A190  90 04 00 00 */	stw r0, 0(r4)
-/* 8033D5B4 0033A194  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033D5B8 0033A198  84 03 01 E8 */	lwzu r0, 0x1e8(r3)
-/* 8033D5BC 0033A19C  54 00 02 3E */	clrlwi r0, r0, 8
-/* 8033D5C0 0033A1A0  64 00 4D 00 */	oris r0, r0, 0x4d00
-/* 8033D5C4 0033A1A4  90 03 00 00 */	stw r0, 0(r3)
-/* 8033D5C8 0033A1A8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetDispCopyDst(s32 arg0)
+{
+    __GXContexts.main->x100_data[0x3A] = 0;
+    __GXContexts.main->x100_data[0x3A] = (__GXContexts.main->x100_data[0x3A] & 0xFFFFFC00) | ((s32) ((u32) (arg0 * 2) & 0xFFFE) >> 5);
+    __GXContexts.main->x100_data[0x3A] = (__GXContexts.main->x100_data[0x3A] & 0xFFFFFF) | 0x4D000000;
+}
 
 extern unk_t __GetImageTileCount();
 extern unk_t __cvt_fp2unsigned();
