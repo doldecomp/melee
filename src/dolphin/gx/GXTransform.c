@@ -134,7 +134,7 @@ void GXSetProjection(f32* proj, s32 projection_type)
     WGPIPE.f32 = __GXContexts.main->projection_v[4];
     WGPIPE.f32 = __GXContexts.main->projection_v[5];
     WGPIPE.u32 = __GXContexts.main->projection_type;
-    __GXContexts.main->x0.u16[1] = 1;
+    set_x2(GX_TRUE);
 }
 
 void GXGetProjectionv(f32* proj)
@@ -363,7 +363,7 @@ void GXSetScissor(s32 left, s32 top, s32 width, s32 height)
     WGPIPE.u32 = __GXContexts.main->xF8;
     WGPIPE.u8 = 0x61;
     WGPIPE.u32 = __GXContexts.main->xFC;
-    __GXContexts.main->x0.u16[1] = 0;
+    set_x2(GX_FALSE);
 }
 
 // https://decomp.me/scratch/LBViQ // 645 (62.06%)
@@ -396,7 +396,7 @@ void GXSetClipMode(s32 mode)
     WGPIPE.u8 = 0x10;
     WGPIPE.u32 = 0x1005;
     WGPIPE.u32 = mode;
-    __GXContexts.main->x0.u16[1] = 1;
+    set_x2(GX_TRUE);
 }
 
 void __GXSetMatrixIndex(s32 arg0)
@@ -416,5 +416,5 @@ void __GXSetMatrixIndex(s32 arg0)
         WGPIPE.u32 = 0x1019;
         WGPIPE.u32 = __GXContexts.main->x84;
     }
-    __GXContexts.main->x0.u16[1] = 1;
+    set_x2(GX_TRUE);
 }
