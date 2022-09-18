@@ -111,76 +111,28 @@ void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
     set_x2(GX_FALSE);
 }
 
-#ifdef NON_MATCHING
-
-// https://decomp.me/scratch/YJOLf // 5225 (0%)
 void GXSetTevColor(GXTevRegID id, GXColor color)
 {
-    u32 temp_r6 = 0;
-    u32 temp_r8 = 0;
-
-    temp_r6 = 0;
+    u32 r30;
+    u32 r31;
+    r30 = 0;
+    INSERT_FIELD(r30, color.r, 11, 0);
+    INSERT_FIELD(r30, color.a, 8, 12);
+    INSERT_FIELD(r30, 224 + id * 2, 8, 24);
+    r31 = 0;
+    INSERT_FIELD(r31, color.b, 11, 0);
+    INSERT_FIELD(r31, color.g, 8, 12);
+    INSERT_FIELD(r31, 225 + id * 2, 8, 24);
     WGPIPE.u8 = GX_LOAD_BP_REG;
-    INSERT_FIELD(temp_r6, color.r, 11, 0);
-    INSERT_FIELD(temp_r6, color.a, 8, 12);
-    INSERT_FIELD(temp_r6, 224 + id * 2, 8, 24);
-    GX_WRITE_U32(temp_r6);
-
-    temp_r6 = 0;
+    WGPIPE.u32 = r30;
     WGPIPE.u8 = GX_LOAD_BP_REG;
-    INSERT_FIELD(temp_r6, color.b, 11, 0);
-    INSERT_FIELD(temp_r6, color.g, 8, 12);
-    INSERT_FIELD(temp_r6, 225 + id * 2, 8, 24);
-    GX_WRITE_U32(temp_r6);
-
-    GX_WRITE_U32(temp_r6);
+    WGPIPE.u32 = r31;
     WGPIPE.u8 = GX_LOAD_BP_REG;
-    GX_WRITE_U32(temp_r6);
+    WGPIPE.u32 = r31;
     WGPIPE.u8 = GX_LOAD_BP_REG;
-    GX_WRITE_U32(temp_r6);
-
-    set_x2(GX_FALSE);
+    WGPIPE.u32 = r31;
+    __GXContexts.main->x0.u16[1] = 0;
 }
-
-#else
-
-#pragma push
-asm void GXSetTevColor(GXTevRegID id, GXColor color)
-{ // clang-format off
-    nofralloc
-/* 803401EC 0033CDCC  88 04 00 03 */	lbz r0, 3(r4)
-/* 803401F0 0033CDD0  54 68 08 3C */	slwi r8, r3, 1
-/* 803401F4 0033CDD4  88 A4 00 00 */	lbz r5, 0(r4)
-/* 803401F8 0033CDD8  38 E8 00 E0 */	addi r7, r8, 0xe0
-/* 803401FC 0033CDDC  54 09 60 26 */	slwi r9, r0, 0xc
-/* 80340200 0033CDE0  50 A9 06 3E */	rlwimi r9, r5, 0, 0x18, 0x1f
-/* 80340204 0033CDE4  89 44 00 02 */	lbz r10, 2(r4)
-/* 80340208 0033CDE8  88 C4 00 01 */	lbz r6, 1(r4)
-/* 8034020C 0033CDEC  54 E7 C0 0E */	slwi r7, r7, 0x18
-/* 80340210 0033CDF0  38 A0 00 61 */	li r5, 0x61
-/* 80340214 0033CDF4  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80340218 0033CDF8  3C 80 CC 01 */	lis r4, 0xCC008000@ha
-/* 8034021C 0033CDFC  98 A4 80 00 */	stb r5, 0xCC008000@l(r4)
-/* 80340220 0033CE00  51 27 03 3E */	rlwimi r7, r9, 0, 0xc, 0x1f
-/* 80340224 0033CE04  38 08 00 E1 */	addi r0, r8, 0xe1
-/* 80340228 0033CE08  90 E4 80 00 */	stw r7, -0x8000(r4)
-/* 8034022C 0033CE0C  54 C7 60 26 */	slwi r7, r6, 0xc
-/* 80340230 0033CE10  54 06 C0 0E */	slwi r6, r0, 0x18
-/* 80340234 0033CE14  51 47 06 3E */	rlwimi r7, r10, 0, 0x18, 0x1f
-/* 80340238 0033CE18  98 A4 80 00 */	stb r5, -0x8000(r4)
-/* 8034023C 0033CE1C  50 E6 03 3E */	rlwimi r6, r7, 0, 0xc, 0x1f
-/* 80340240 0033CE20  90 C4 80 00 */	stw r6, -0x8000(r4)
-/* 80340244 0033CE24  38 00 00 00 */	li r0, 0
-/* 80340248 0033CE28  98 A4 80 00 */	stb r5, -0x8000(r4)
-/* 8034024C 0033CE2C  90 C4 80 00 */	stw r6, -0x8000(r4)
-/* 80340250 0033CE30  98 A4 80 00 */	stb r5, -0x8000(r4)
-/* 80340254 0033CE34  90 C4 80 00 */	stw r6, -0x8000(r4)
-/* 80340258 0033CE38  B0 03 00 02 */	sth r0, 2(r3)
-/* 8034025C 0033CE3C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
-
-#endif
 
 // https://decomp.me/scratch/UNKO4
 #pragma push
@@ -411,32 +363,19 @@ void GXSetTevClampMode(s32, s32)
 {
 }
 
-#pragma push
-asm void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1, u8 ref1)
-{ // clang-format off
-    nofralloc
-/* 8034051C 0033D0FC  54 E7 44 2E */	rlwinm r7, r7, 8, 0x10, 0x17
-/* 80340520 0033D100  81 0D A5 08 */	lwz r8, __GXContexts(r13)
-/* 80340524 0033D104  50 87 06 3E */	rlwimi r7, r4, 0, 0x18, 0x1f
-/* 80340528 0033D108  54 60 80 1E */	slwi r0, r3, 0x10
-/* 8034052C 0033D10C  50 E0 04 3E */	rlwimi r0, r7, 0, 0x10, 0x1f
-/* 80340530 0033D110  54 03 03 52 */	rlwinm r3, r0, 0, 0xd, 9
-/* 80340534 0033D114  54 C0 98 18 */	slwi r0, r6, 0x13
-/* 80340538 0033D118  7C 60 03 78 */	or r0, r3, r0
-/* 8034053C 0033D11C  54 03 02 8E */	rlwinm r3, r0, 0, 0xa, 7
-/* 80340540 0033D120  54 A0 B0 12 */	slwi r0, r5, 0x16
-/* 80340544 0033D124  7C 60 03 78 */	or r0, r3, r0
-/* 80340548 0033D128  54 04 02 3E */	clrlwi r4, r0, 8
-/* 8034054C 0033D12C  38 00 00 61 */	li r0, 0x61
-/* 80340550 0033D130  3C 60 CC 01 */	lis r3, 0xCC008000@ha
-/* 80340554 0033D134  98 03 80 00 */	stb r0, 0xCC008000@l(r3)
-/* 80340558 0033D138  64 84 F3 00 */	oris r4, r4, 0xf300
-/* 8034055C 0033D13C  38 00 00 00 */	li r0, 0
-/* 80340560 0033D140  90 83 80 00 */	stw r4, -0x8000(r3)
-/* 80340564 0033D144  B0 08 00 02 */	sth r0, 2(r8)
-/* 80340568 0033D148  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1, u8 ref1)
+{
+    u32 reg = 0;
+    INSERT_FIELD(reg, ref0,  8,  0);
+    INSERT_FIELD(reg, ref1,  8,  8);
+    INSERT_FIELD(reg, comp0, 3, 16);
+    INSERT_FIELD(reg, comp1, 3, 19);
+    INSERT_FIELD(reg, op,    2, 22);
+    INSERT_FIELD(reg, 0xF3,  8, 24);
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    WGPIPE.u32 = reg;
+    set_x2(GX_FALSE);
+}
 
 // https://decomp.me/scratch/N3R8X // 1410 (57.27%)
 #pragma push
@@ -610,23 +549,8 @@ lbl_8034075C:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/TqgHh // 200 (84.62%)
-#pragma push
-asm void GXSetNumTevStages(u8 nStages)
-{ // clang-format off
-    nofralloc
-/* 80340790 0033D370  54 63 06 3E */	clrlwi r3, r3, 0x18
-/* 80340794 0033D374  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 80340798 0033D378  38 03 FF FF */	addi r0, r3, -1
-/* 8034079C 0033D37C  84 64 02 04 */	lwzu r3, 0x204(r4)
-/* 803407A0 0033D380  54 00 50 2A */	slwi r0, r0, 0xa
-/* 803407A4 0033D384  54 63 05 A2 */	rlwinm r3, r3, 0, 0x16, 0x11
-/* 803407A8 0033D388  7C 60 03 78 */	or r0, r3, r0
-/* 803407AC 0033D38C  90 04 00 00 */	stw r0, 0(r4)
-/* 803407B0 0033D390  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 803407B4 0033D394  80 03 04 F0 */	lwz r0, 0x4f0(r3)
-/* 803407B8 0033D398  60 00 00 04 */	ori r0, r0, 4
-/* 803407BC 0033D39C  90 03 04 F0 */	stw r0, 0x4f0(r3)
-/* 803407C0 0033D3A0  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetNumTevStages(u8 arg0)
+{
+    __GXContexts.main->callbacks[0x15] = (void (*)()) (((u32) __GXContexts.main->callbacks[0x15] & 0xFFFFC3FF) | ((arg0 - 1) << 10));
+    __GXContexts.main->x4F0_flags |= 4;
+}

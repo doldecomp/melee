@@ -377,13 +377,8 @@ lbl_8033FC2C:
 
 void GXSetNumIndStages(s32 arg0)
 {
-    GXContext* temp_r3;
-    GXContext* temp_r4;
-
-    temp_r4 = __GXContexts.main;
-    temp_r4->x100_data[0x41] = (temp_r4->x100_data[0x41] & 0xFFF8FFFF) | ((arg0 << 0x10) & 0xFF0000);
-    temp_r3 = __GXContexts.main;
-    temp_r3->x4F0_flags |= 6;
+    __GXContexts.main->x204 = __GXContexts.main->x204 & 0xFFF8FFFF | arg0 << 0x10 & 0xFF0000;
+    __GXContexts.main->x4F0_flags |= 6;
 }
 
 // https://decomp.me/scratch/aRJcf // 362 (79.89%)
