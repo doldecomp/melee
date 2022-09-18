@@ -104,12 +104,4 @@ lbl_803C7260:
     .4byte func_800C7200
     .4byte NULL
     .4byte NULL
-.global lbl_803C72A0
-lbl_803C72A0:
-    .asciz "A@"
-    .balign 4
-    .4byte NULL
-    .4byte 0xC0C00000
-    .4byte 0x40C00000
-    .4byte 0x40C00000
-    .4byte 0x40C00000
+

@@ -1127,7 +1127,7 @@ inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* fighter_gobj)
             func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp2C);
             sp2C.z = 0.0f;
             sp20.z = 0.0f;
-            func_802C519C(fighter_gobj, &sp20, 0x70, mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES, atan2f(sp20.y - sp2C.y, sp20.x - sp2C.x), fp->x2C_facing_direction);
+            func_802C519C(fighter_gobj, &sp20, It_Kind_Mewtwo_ShadowBall, mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES, atan2f(sp20.y - sp2C.y, sp20.x - sp2C.x), fp->x2C_facing_direction);
             func_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }
