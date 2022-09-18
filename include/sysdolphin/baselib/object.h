@@ -97,4 +97,14 @@ inline BOOL iref_DEC(void* o)
     return HSD_OBJ(o)->ref_count_individual == 0;
 }
 
+inline void ref_INC(void* o)
+{
+    if (o != NULL) {
+        HSD_OBJ(o)->ref_count++;
+        if (!(HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF)) {
+            __assert("object.h", 0x5D, "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
+        }
+    }
+}
+
 #endif

@@ -775,13 +775,7 @@ void HSD_LObjAddCurrent(HSD_LObj* lobj)
             }
             node = node->next;
         }
-        if (lobj != NULL) {
-            u16* ref_count = &lobj->parent.ref_count;
-            *ref_count += 1;
-            if (*ref_count == (u16) -1U) {
-                __assert("object.h", 0x5D, "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
-            }
-        }
+        ref_INC(lobj);
         for (p = &current_lights; *p != NULL; p = &(*p)->next) {
             u8 priority1 = HSD_LObjGetPriority(lobj);
             u8 priority2 = HSD_LObjGetPriority((*p)->data);
@@ -1139,6 +1133,24 @@ lbl_80366A28:
 } // clang-format on
 #pragma pop
 
+// Broken by frank
+// (Profile compiler does not generate beqlr, so instructions do not match)
+// https://decomp.me/scratch/3kqzi
+#ifdef NON_MATCHING
+HSD_LObj* HSD_LObjGetCurrentByType(u16 flags)
+{
+    HSD_SList* cur = current_lights;
+    u32 type = flags & LOBJ_TYPE_MASK;
+    while (cur != NULL) {
+        HSD_LObj* lobj = cur->data;
+        if (type == (lobj->flags & LOBJ_TYPE_MASK)) {
+            return lobj;
+        }
+        cur = cur->next;
+    }
+    return NULL;
+}
+#else
 #pragma push
 asm HSD_LObj* HSD_LObjGetCurrentByType(u16 type)
 { // clang-format off
@@ -1160,6 +1172,7 @@ lbl_80366A68:
 /* 80366A74 00363654  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+#endif
 
 s32 HSD_LightID2Index(GXLightID arg0)
 {

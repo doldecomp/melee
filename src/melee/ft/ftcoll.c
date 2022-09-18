@@ -148,7 +148,7 @@ void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon 
     Fighter* fp;
     HSD_GObj* gobj;
 
-    gobj = lbl_804D782C->x20_fighterGObj; // Get fp GObj from global list of entities (?) //
+    gobj = lbl_804D782C->x20_fighters; // Get fp GObj from global list of entities (?) //
     while (gobj != NULL)
     {
         fp = getFighter(gobj); 

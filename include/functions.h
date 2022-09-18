@@ -148,6 +148,7 @@ void func_8006FE48();
 
 void func_80070308();
 
+void func_80074B0C(HSD_GObj*, s32, s32);
 void func_800704F0(struct _HSD_GObj *, s32, f32);
 
 void func_80070654();
@@ -382,6 +383,8 @@ void func_80090718();
 
 f32 func_80092ED8(s32, void *, f32);
 
+s32 func_80093694();
+s32 func_8009515C(s32);
 void func_80095744();
 
 s32 func_800964FC(struct _Fighter *);
@@ -396,6 +399,7 @@ void func_80098C9C();
 
 void func_80099D9C();
 
+s32 func_8009A080(s32);
 void func_8009A804(struct _HSD_GObj *);
 
 void func_8009CF84();
@@ -590,7 +594,6 @@ void func_80152CD8(struct _HSD_GObj *);
 void func_80152F80(struct _HSD_GObj *);
 void func_801530A4(struct _HSD_GObj *);
 void func_801533CC(struct _HSD_GObj *);
-void func_8015364C(struct _HSD_GObj *, struct _HSD_JObj *, f32, f32);
 void func_80153730(struct _HSD_GObj *);
 void func_80153820(struct _HSD_GObj *);
 void func_80153910(struct _HSD_GObj *);
@@ -789,20 +792,11 @@ u32 OSGetConsoleSimulatedMemSize();
 
 void VIWaitForRetrace(void);
 
-struct _HSD_DObj *HSD_DObjLoadDesc(struct _HSD_DObjDesc *);
-
 struct _HSD_TObj *allocShadowTObj();
 
 struct _HSD_ImageDesc *HSD_ImageDescAlloc();
 
-struct _HSD_MObj *HSD_MObjLoadDesc(struct _HSD_MObjDesc *);
-
-void HSD_AObjRemove(struct _HSD_AObj *aobj);
-
 void HSD_ForeachAnim(void *, ...);
-
-struct _HSD_WObj *HSD_LObjGetPositionWObj(struct _HSD_LObj *);
-struct _HSD_WObj *HSD_LObjGetInterestWObj(struct _HSD_LObj *);
 
 f32 HSD_CObjGetNear(struct _HSD_CObj *);
 
@@ -816,11 +810,7 @@ u32 HSD_CObjGetProjectionType(struct _HSD_CObj *);
 struct _HSD_PObj *HSD_PObjLoadDesc(struct _HSD_PObjDesc *);
 
 void HSD_EraseRect();
-void HSD_GXInit(void);
-void HSD_OSInit(void);
 int HSD_GetHeap(void);
-
-void HSD_ObjInit(void);
 
 void HSD_VIInit(struct _HSD_VIStatus *vi_status, void *xfb0, void *xfb1, void *xfb2);
 
@@ -834,10 +824,6 @@ void HSD_MtxSRT();
 
 void *func_8037ABC8(struct _HSD_ObjAllocData *data);
 void func_8037AD20(struct _HSD_ObjAllocData *data, struct _HSD_ObjAllocLink *obj);
-
-void HSD_RObjRemoveAnimAll(struct _HSD_RObj *robj);
-
-void HSD_RObjReqAnimAll(struct _HSD_RObj *robj, f32 frame);
 
 void HSD_IDSetup(void);
 

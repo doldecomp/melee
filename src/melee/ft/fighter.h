@@ -562,7 +562,11 @@ typedef struct _ftCommonData {
     /* 0x288 */ f32 x288;
     u8 filler_x28C[0x294-0x28C];
     /* 0x294 */ f32 x294;
-    u8 filler_x298[0x2DC-0x298];
+    u8 filler_x298[0x2A4-0x298];
+    /* 0x2A4 */ f32 x2A4;
+    u8 filler_x2A8[0x2B4-0x2A8];
+	/* 0x2B4 */ f32 x2B4;
+    u8 filler_x2B8[0x2DC-0x2B8];
     /* 0x2DC */ f32 x2DC;
     /* 0x2E0 */ f32 x2E0;
     u8 filler_x2E4[0x308-0x2E4];

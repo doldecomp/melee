@@ -407,13 +407,9 @@ asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red, GXTevColo
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm void func_80340518()
-{ // clang-format off
-    nofralloc
-/* 80340518 0033D0F8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetTevClampMode(s32, s32)
+{
+}
 
 #pragma push
 asm void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1, u8 ref1)
