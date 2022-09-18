@@ -3,8 +3,6 @@
 
 #include <melee/it/itkind.h>
 
-extern const ftMario_SpecialLw_ECB lbl_803C72A0;
-
 // 0x800E2050
 // https://decomp.me/scratch/8zo4V
 void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj) 
@@ -166,7 +164,7 @@ void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj) {
     fp->x2208_ftcmd_var2 = 0;
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW, FTMARIO_SPECIALLW_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    ftComm_ClampFalllSpeed(fp, sa->x58_MARIO_TORNADO_TAP_GRAVITY);
+    ftComm_ClampFallSpeed(fp, sa->x58_MARIO_TORNADO_TAP_GRAVITY);
     func_8007D440(fp, sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
@@ -245,24 +243,36 @@ void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj) {
     }
 }
 
+static ftCollisionBox ftMario_SpecialLw_CollisionBox = { 12.0F, 0.0F, -6.0F, 6.0F, 6.0F, 6.0F };
+
 // 0x800E25C4
 // https://decomp.me/scratch/ykJHP
-void ftMario_SpecialLw_Coll(HSD_GObj* gobj) {
+void ftMario_SpecialLw_Coll(HSD_GObj* gobj) 
+{
     Fighter* fp = getFighter(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
-        if (func_80082888(gobj, &lbl_803C72A0) == 0) {
+    if (fp->xE0_ground_or_air == GA_Ground)
+    {
+        if (func_80082888(gobj, &ftMario_SpecialLw_CollisionBox) == FALSE) 
+        {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
-            fp->marioVars[0].SpecialLw.isUnkColl = 0;
-        } else {
-            fp->marioVars[0].SpecialLw.isUnkColl = 1;
+            fp->marioVars[0].SpecialLw.isUnkColl = FALSE;
+        } 
+        else 
+        {
+            fp->marioVars[0].SpecialLw.isUnkColl = TRUE;
         }
-    } else {
-        if (func_800824A0(gobj, &lbl_803C72A0) == 0) {
+    } 
+    else 
+    {
+        if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) == FALSE) 
+        {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
-            fp->marioVars[0].SpecialLw.isUnkColl = 0;
-        } else {
-            fp->marioVars[0].SpecialLw.isUnkColl = 1;
+            fp->marioVars[0].SpecialLw.isUnkColl = FALSE;
+        } 
+        else 
+        {
+            fp->marioVars[0].SpecialLw.isUnkColl = TRUE;
         }
     }
 
@@ -289,7 +299,7 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj) {
 // https://decomp.me/scratch/v3srn
 void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
-    if (func_800824A0(gobj, &lbl_803C72A0) != 0) {
+    if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) != 0) {
         _ftMario_800E2778_helper(gobj);
         fp->marioVars[0].SpecialLw.isUnkColl = 1;
     } else {

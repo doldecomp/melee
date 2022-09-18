@@ -835,6 +835,15 @@ typedef struct _ftECB
     Vec2 left;
 } ftECB;
 
+typedef struct _ftCollisionBox {
+
+    f32 top;
+    f32 bottom;
+    Vec2 left;
+    Vec2 right;
+
+} ftCollisionBox;
+
 typedef struct _ECBFlagStruct {
     union { 
         struct {

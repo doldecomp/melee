@@ -31,7 +31,7 @@ void func_8007D468(Fighter*);
 void func_8007D494(Fighter*, f32, f32);
 void func_8007D4B8(Fighter*);
 void func_8007D4E4(Fighter*);
-void ftComm_ClampFalllSpeed(Fighter*, f32);
+void ftComm_ClampFallSpeed(Fighter*, f32);
 void func_8007D508(Fighter*, f32, f32);
 BOOL func_8007D528(Fighter*);
 void func_8007D5BC(Fighter*);

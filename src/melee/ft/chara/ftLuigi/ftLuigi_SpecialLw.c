@@ -153,7 +153,7 @@ void ftLuigi_SpecialAirLw_IASA(HSD_GObj* fighter_gobj)
     return;
 }
 
-extern void ftComm_ClampFalllSpeed(Fighter*, f32);
+extern void ftComm_ClampFallSpeed(Fighter*, f32);
 extern void func_8007CADC(Fighter*, f32, f32, f32);
 extern void func_8007D440(Fighter*, f32);
 
@@ -164,7 +164,7 @@ inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
     fp->x2208_ftcmd_var2 = 0;
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x166, 0x0C4C508A, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    ftComm_ClampFalllSpeed(fp, luigiAttrs->x90_LUIGI_CYCLONE_TAP_GRAVITY);
+    ftComm_ClampFallSpeed(fp, luigiAttrs->x90_LUIGI_CYCLONE_TAP_GRAVITY);
     func_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -236,20 +236,10 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
     func_8007D3A8(fp, 0.0f, luigiAttrs->x80_LUIGI_CYCLONE_MOMENTUM_X_MUL_AIR, var);
 }
 
-extern BOOL func_800824A0(HSD_GObj*, struct UnkEnvCollBox*);
-extern BOOL func_80082888(HSD_GObj*, struct UnkEnvCollBox*);
+extern BOOL func_800824A0(HSD_GObj*, ftCollisionBox*);
+extern BOOL func_80082888(HSD_GObj*, ftCollisionBox*);
 
-struct UnkEnvCollBox
-{
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-};
-
-extern struct UnkEnvCollBox lbl_803D0AE8;
+static ftCollisionBox ftLuigi_SpecialLw_CollisionBox = { 12.0F, 0.0F, -6.0F, 6.0F, 6.0F, 6.0F };
 
 inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
 {
@@ -271,7 +261,7 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
 
     if ((s32)fp->xE0_ground_or_air == GA_Ground)
     {
-        if (func_80082888(fighter_gobj, &lbl_803D0AE8) == FALSE)
+        if (func_80082888(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) == FALSE)
         {
             ftLuigi_SpecialLw_GroundToAir(fighter_gobj);
             fp->luigiVars[0].SpecialLw.isUnkColl = FALSE;
@@ -281,7 +271,7 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
             fp->luigiVars[0].SpecialLw.isUnkColl = TRUE;
         }
     }
-    else if (func_800824A0(fighter_gobj, &lbl_803D0AE8) == FALSE)
+    else if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) == FALSE)
     {
         ftLuigi_SpecialLw_GroundToAir(fighter_gobj);
         fp->luigiVars[0].SpecialLw.isUnkColl = FALSE;
@@ -314,7 +304,7 @@ void ftLuigi_SpecialAirLw_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     s32 var[8];
 
-    if (func_800824A0(fighter_gobj, &lbl_803D0AE8) != FALSE)
+    if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) != FALSE)
     {
         ftLuigi_SpecialAirLw_AirToGround(fighter_gobj);
         fp->luigiVars[0].SpecialLw.isUnkColl = TRUE;
