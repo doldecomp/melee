@@ -8,11 +8,11 @@
 /* 003FDDC0 */ extern const GXRenderModeObj lbl_804011E0;
 /* 003FDD84 */ extern const GXRenderModeObj lbl_804011A4;
 /* 003FDD48 */ extern const GXRenderModeObj GXNtsc480IntDf;
-/* 0033E33C */ extern UNK_FUNC(GXSetScissor);
-/* 0033E12C */ extern UNK_FUNC(GXLoadTexMtxImm);
+/* 0033E33C */ extern void GXSetScissor(s32 left, s32 top, s32 width, s32 height);
+/* 0033E12C */ extern void GXLoadTexMtxImm(unk_t, u32, s32);
 /* 0033E0F0 */ extern void GXSetCurrentMtx(s32);
-/* 0033E0B0 */ extern UNK_FUNC(GXLoadNrmMtxImm);
-/* 0033E074 */ extern UNK_FUNC(GXLoadPosMtxImm);
+/* 0033E0B0 */ extern void GXLoadNrmMtxImm(unk_t, s32);
+/* 0033E074 */ extern void GXLoadPosMtxImm(unk_t, s32);
 /* 0033DCB8 */ extern void GXCallDisplayList(s32, s32);
 /* 0033DC34 */ extern void GXSetFieldMode(s8, s32);
 /* 0033DBA8 */ extern void GXSetDstAlpha(s32, s32);
