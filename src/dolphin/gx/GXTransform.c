@@ -5,10 +5,6 @@
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 
-f32 const lbl_804DE2F0 = 0.0F;
-f32 const lbl_804DE2F4 = 1.0F;
-Vec2 const lbl_804DE2F8 = { 0.5F, 0.0F };
-
 #pragma push
 asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx, f32* sy, f32* sz)
 { // clang-format off
@@ -29,7 +25,7 @@ asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx, f
 /* 8034117C 0033DD5C  EC 84 00 72 */	fmuls f4, f4, f1
 /* 80341180 0033DD60  EC 40 00 B2 */	fmuls f2, f0, f2
 /* 80341184 0033DD64  ED 6B 00 F2 */	fmuls f11, f11, f3
-/* 80341188 0033DD68  C0 22 E9 10 */	lfs f1, lbl_804DE2F0(r2)
+/* 80341188 0033DD68  C0 22 E9 10 */	lfs f1, 0.0F
 /* 8034118C 0033DD6C  ED 2A 48 2A */	fadds f9, f10, f9
 /* 80341190 0033DD70  C0 04 00 00 */	lfs f0, 0(r4)
 /* 80341194 0033DD74  ED 08 00 F2 */	fmuls f8, f8, f3
@@ -48,7 +44,7 @@ asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx, f
 /* 803411C8 0033DDA8  ED 25 00 2A */	fadds f9, f5, f0
 /* 803411CC 0033DDAC  40 82 00 4C */	bne lbl_80341218
 /* 803411D0 0033DDB0  FC 00 48 50 */	fneg f0, f9
-/* 803411D4 0033DDB4  C0 22 E9 14 */	lfs f1, lbl_804DE2F4(r2)
+/* 803411D4 0033DDB4  C0 22 E9 14 */	lfs f1, 1.0F
 /* 803411D8 0033DDB8  C0 C4 00 04 */	lfs f6, 4(r4)
 /* 803411DC 0033DDBC  C0 A4 00 08 */	lfs f5, 8(r4)
 /* 803411E0 0033DDC0  EC 01 00 24 */	fdivs f0, f1, f0
@@ -77,12 +73,12 @@ lbl_80341218:
 /* 80341238 0033DE18  C0 44 00 18 */	lfs f2, 0x18(r4)
 /* 8034123C 0033DE1C  EC C6 28 2A */	fadds f6, f6, f5
 /* 80341240 0033DE20  EC 64 18 2A */	fadds f3, f4, f3
-/* 80341244 0033DE24  C0 02 E9 14 */	lfs f0, lbl_804DE2F4(r2)
+/* 80341244 0033DE24  C0 02 E9 14 */	lfs f0, 1.0F
 /* 80341248 0033DE28  EC E2 08 2A */	fadds f7, f2, f1
 lbl_8034124C:
 /* 8034124C 0033DE2C  C0 85 00 08 */	lfs f4, 8(r5)
 /* 80341250 0033DE30  FC 20 18 50 */	fneg f1, f3
-/* 80341254 0033DE34  C0 A2 E9 18 */	lfs f5, lbl_804DE2F8(r2)
+/* 80341254 0033DE34  C0 A2 E9 18 */	lfs f5, 0.5F
 /* 80341258 0033DE38  EC 46 01 32 */	fmuls f2, f6, f4
 /* 8034125C 0033DE3C  C0 65 00 00 */	lfs f3, 0(r5)
 /* 80341260 0033DE40  EC 84 01 72 */	fmuls f4, f4, f5
@@ -147,9 +143,6 @@ void GXGetProjectionv(f32* proj)
     proj[5] = __GXContexts.main->projection_v[4];
     proj[6] = __GXContexts.main->projection_v[5];
 }
-
-f32 const lbl_804DE308 = 342.0F;
-f32 const lbl_804DE30C = 16777215.0F;
 
 asm void WriteMTXPS4x3(Vec2 src[6], Vec2* dst)
 {
@@ -226,7 +219,7 @@ void GXLoadNrmMtxImm(void* mtx, s32 arg1)
 
 void GXSetCurrentMtx(s32 arg0)
 {
-    __GXContexts.main->x80 = (__GXContexts.main->x80 & 0xFFFFFFC0) | arg0;
+    INSERT_FIELD(__GXContexts.main->x80, arg0, 6, 0);
     __GXSetMatrixIndex(0);
 }
 
@@ -255,86 +248,50 @@ void GXLoadTexMtxImm(void* arg0, u32 arg1, s32 arg2)
     }
 }
 
-// https://decomp.me/scratch/RalqB // 342 (95.18%)
-#pragma push
-asm void GXSetViewportJitter(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz, u32 field)
-{ // clang-format off
-    nofralloc
-/* 803415D0 0033E1B0  7C 08 02 A6 */	mflr r0
-/* 803415D4 0033E1B4  90 01 00 04 */	stw r0, 4(r1)
-/* 803415D8 0033E1B8  94 21 FF A0 */	stwu r1, -0x60(r1)
-/* 803415DC 0033E1BC  DB E1 00 58 */	stfd f31, 0x58(r1)
-/* 803415E0 0033E1C0  DB C1 00 50 */	stfd f30, 0x50(r1)
-/* 803415E4 0033E1C4  DB A1 00 48 */	stfd f29, 0x48(r1)
-/* 803415E8 0033E1C8  DB 81 00 40 */	stfd f28, 0x40(r1)
-/* 803415EC 0033E1CC  DB 61 00 38 */	stfd f27, 0x38(r1)
-/* 803415F0 0033E1D0  DB 41 00 30 */	stfd f26, 0x30(r1)
-/* 803415F4 0033E1D4  28 03 00 00 */	cmplwi r3, 0
-/* 803415F8 0033E1D8  40 82 00 0C */	bne lbl_80341604
-/* 803415FC 0033E1DC  C0 02 E9 18 */	lfs f0, lbl_804DE2F8(r2)
-/* 80341600 0033E1E0  EC 42 00 28 */	fsubs f2, f2, f0
-lbl_80341604:
-/* 80341604 0033E1E4  C1 62 E9 18 */	lfs f11, lbl_804DE2F8(r2)
-/* 80341608 0033E1E8  FD 40 20 50 */	fneg f10, f4
-/* 8034160C 0033E1EC  C0 02 E9 2C */	lfs f0, lbl_804DE30C(r2)
-/* 80341610 0033E1F0  C1 22 E9 28 */	lfs f9, lbl_804DE308(r2)
-/* 80341614 0033E1F4  EF E3 02 F2 */	fmuls f31, f3, f11
-/* 80341618 0033E1F8  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8034161C 0033E1FC  EC E4 02 F2 */	fmuls f7, f4, f11
-/* 80341620 0033E200  D0 23 04 3C */	stfs f1, 0x43c(r3)
-/* 80341624 0033E204  ED 01 F8 2A */	fadds f8, f1, f31
-/* 80341628 0033E208  EF C0 01 B2 */	fmuls f30, f0, f6
-/* 8034162C 0033E20C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80341630 0033E210  EC 22 38 2A */	fadds f1, f2, f7
-/* 80341634 0033E214  D0 43 04 40 */	stfs f2, 0x440(r3)
-/* 80341638 0033E218  EC 00 01 72 */	fmuls f0, f0, f5
-/* 8034163C 0033E21C  EF AA 02 F2 */	fmuls f29, f10, f11
-/* 80341640 0033E220  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80341644 0033E224  EF 69 40 2A */	fadds f27, f9, f8
-/* 80341648 0033E228  D0 63 04 44 */	stfs f3, 0x444(r3)
-/* 8034164C 0033E22C  EF 49 08 2A */	fadds f26, f9, f1
-/* 80341650 0033E230  EF 9E 00 28 */	fsubs f28, f30, f0
-/* 80341654 0033E234  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80341658 0033E238  D0 83 04 48 */	stfs f4, 0x448(r3)
-/* 8034165C 0033E23C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80341660 0033E240  D0 A3 04 4C */	stfs f5, 0x44c(r3)
-/* 80341664 0033E244  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80341668 0033E248  D0 C3 04 50 */	stfs f6, 0x450(r3)
-/* 8034166C 0033E24C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80341670 0033E250  88 03 04 54 */	lbz r0, 0x454(r3)
-/* 80341674 0033E254  28 00 00 00 */	cmplwi r0, 0
-/* 80341678 0033E258  41 82 00 10 */	beq lbl_80341688
-/* 8034167C 0033E25C  FC 20 28 90 */	fmr f1, f5
-/* 80341680 0033E260  C0 43 04 58 */	lfs f2, 0x458(r3)
-/* 80341684 0033E264  4B FF FA 51 */	bl __GXSetRange
-lbl_80341688:
-/* 80341688 0033E268  38 00 00 10 */	li r0, 0x10
-/* 8034168C 0033E26C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80341690 0033E270  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 80341694 0033E274  3C 80 00 05 */	lis r4, 0x0005101A@ha
-/* 80341698 0033E278  98 05 80 00 */	stb r0, 0xCC008000@l(r5)
-/* 8034169C 0033E27C  38 04 10 1A */	addi r0, r4, 0x0005101A@l
-/* 803416A0 0033E280  90 05 80 00 */	stw r0, -0x8000(r5)
-/* 803416A4 0033E284  38 00 00 01 */	li r0, 1
-/* 803416A8 0033E288  D3 E5 80 00 */	stfs f31, -0x8000(r5)
-/* 803416AC 0033E28C  D3 A5 80 00 */	stfs f29, -0x8000(r5)
-/* 803416B0 0033E290  D3 85 80 00 */	stfs f28, -0x8000(r5)
-/* 803416B4 0033E294  D3 65 80 00 */	stfs f27, -0x8000(r5)
-/* 803416B8 0033E298  D3 45 80 00 */	stfs f26, -0x8000(r5)
-/* 803416BC 0033E29C  D3 C5 80 00 */	stfs f30, -0x8000(r5)
-/* 803416C0 0033E2A0  B0 03 00 02 */	sth r0, 2(r3)
-/* 803416C4 0033E2A4  80 01 00 64 */	lwz r0, 0x64(r1)
-/* 803416C8 0033E2A8  CB E1 00 58 */	lfd f31, 0x58(r1)
-/* 803416CC 0033E2AC  CB C1 00 50 */	lfd f30, 0x50(r1)
-/* 803416D0 0033E2B0  7C 08 03 A6 */	mtlr r0
-/* 803416D4 0033E2B4  CB A1 00 48 */	lfd f29, 0x48(r1)
-/* 803416D8 0033E2B8  CB 81 00 40 */	lfd f28, 0x40(r1)
-/* 803416DC 0033E2BC  CB 61 00 38 */	lfd f27, 0x38(r1)
-/* 803416E0 0033E2C0  CB 41 00 30 */	lfd f26, 0x30(r1)
-/* 803416E4 0033E2C4  38 21 00 60 */	addi r1, r1, 0x60
-/* 803416E8 0033E2C8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetViewportJitter(f32 left, f32 top, f32 width, f32 height, f32 nearz, f32 farz, u32 field)
+{
+    f32 temp_f31;
+    f32 temp_f30;
+    f32 temp_f29;
+    f32 temp_f28;
+    f32 temp_f27;
+    f32 temp_f26;
+    f32 temp_f0;
+    f32 w_half;
+    f32 h_half;
+
+    if (field == 0) {
+        top -= 0.5F;
+    }
+    w_half = width / 2;
+    h_half = height / 2;
+    temp_f31 = width / 2; // f31
+    temp_f29 = -height / 2; // f29
+    temp_f27 = (left + w_half) + 342.0F; // f27
+    temp_f26 = (top + h_half) + 342.0F; // f26
+    temp_f30 = farz * 16777215.0F;
+    temp_f0 = nearz * 16777215.0F; // temp_f0
+    temp_f28 = temp_f30 - temp_f0;
+
+    __GXContexts.main->viewport_v[0] = left;
+    __GXContexts.main->viewport_v[1] = top;
+    __GXContexts.main->viewport_v[2] = width;
+    __GXContexts.main->viewport_v[3] = height;
+    __GXContexts.main->viewport_v[4] = nearz;
+    __GXContexts.main->viewport_v[5] = farz;
+    if (__GXContexts.main->x454_pad[0] != 0) {
+        __GXSetRange(nearz, __GXContexts.main->x458);
+    }
+    WGPIPE.u8 = GX_LOAD_XF_REG;
+    WGPIPE.u32 = 0x5101A;
+    WGPIPE.f32 = temp_f31;
+    WGPIPE.f32 = temp_f29;
+    WGPIPE.f32 = temp_f28;
+    WGPIPE.f32 = temp_f27;
+    WGPIPE.f32 = temp_f26;
+    WGPIPE.f32 = temp_f30;
+    set_x2(GX_TRUE);
+}
 
 void GXSetViewport(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5)
 {
@@ -355,10 +312,10 @@ void GXSetScissor(s32 left, s32 top, s32 width, s32 height)
 {
     s32 temp_r8 = left + 0x156;
     s32 temp_r4 = top + 0x156;
-    __GXContexts.main->xF8 = __GXContexts.main->xF8 & 0xFFFFF800 | temp_r4;
-    __GXContexts.main->xF8 = __GXContexts.main->xF8 & 0xFF800FFF | (temp_r8 << 0xC);
-    __GXContexts.main->xFC = __GXContexts.main->xFC & 0xFFFFF800 | (temp_r4 + height - 1);
-    __GXContexts.main->xFC = __GXContexts.main->xFC & 0xFF800FFF | ((temp_r8 + width - 1) << 0xC);
+    INSERT_FIELD(__GXContexts.main->xF8, temp_r4, 11, 0);
+    INSERT_FIELD(__GXContexts.main->xF8, temp_r8, 11, 12);
+    INSERT_FIELD(__GXContexts.main->xFC, temp_r4 + height - 1, 11, 0);
+    INSERT_FIELD(__GXContexts.main->xFC, temp_r8 + width - 1, 11, 12);
     WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = __GXContexts.main->xF8;
     WGPIPE.u8 = GX_LOAD_BP_REG;
@@ -366,30 +323,16 @@ void GXSetScissor(s32 left, s32 top, s32 width, s32 height)
     set_x2(GX_FALSE);
 }
 
-// https://decomp.me/scratch/LBViQ // 645 (62.06%)
-#pragma push
-asm unk_t GXSetScissorBoxOffset()
-{ // clang-format off
-    nofralloc
-/* 8034180C 0033E3EC  38 A3 01 56 */	addi r5, r3, 0x156
-/* 80341810 0033E3F0  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 80341814 0033E3F4  38 04 01 56 */	addi r0, r4, 0x156
-/* 80341818 0033E3F8  54 A4 F8 7E */	srwi r4, r5, 1
-/* 8034181C 0033E3FC  54 00 F8 7E */	srwi r0, r0, 1
-/* 80341820 0033E400  54 84 05 96 */	rlwinm r4, r4, 0, 0x16, 0xb
-/* 80341824 0033E404  54 00 50 2A */	slwi r0, r0, 0xa
-/* 80341828 0033E408  7C 80 03 78 */	or r0, r4, r0
-/* 8034182C 0033E40C  54 05 02 3E */	clrlwi r5, r0, 8
-/* 80341830 0033E410  38 00 00 61 */	li r0, 0x61
-/* 80341834 0033E414  3C 80 CC 01 */	lis r4, 0xCC008000@ha
-/* 80341838 0033E418  98 04 80 00 */	stb r0, 0xCC008000@l(r4)
-/* 8034183C 0033E41C  64 A5 59 00 */	oris r5, r5, 0x5900
-/* 80341840 0033E420  38 00 00 00 */	li r0, 0
-/* 80341844 0033E424  90 A4 80 00 */	stw r5, -0x8000(r4)
-/* 80341848 0033E428  B0 03 00 02 */	sth r0, 2(r3)
-/* 8034184C 0033E42C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXSetScissorBoxOffset(u32 x_off, u32 y_off)
+{
+    u32 var1 = (x_off + 342) / 2;
+    u32 var2 = (y_off + 342) / 2;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    var1 = (var1 & 0xFFF003FF | var2 << 10) & 0xFFFFFF;
+    var1 |= 0x59000000;
+    WGPIPE.u32 = var1;
+    set_x2(GX_FALSE);
+}
 
 void GXSetClipMode(s32 mode)
 {
@@ -402,14 +345,14 @@ void GXSetClipMode(s32 mode)
 void __GXSetMatrixIndex(s32 arg0)
 {
     if (arg0 < 5) {
-        WGPIPE.u8 = 8;
+        WGPIPE.u8 = GX_LOAD_CP_REG;
         WGPIPE.u8 = GX_LOAD_INDX_C;
         WGPIPE.u32 = __GXContexts.main->x80;
         WGPIPE.u8 = GX_LOAD_XF_REG;
         WGPIPE.u32 = 0x1018;
         WGPIPE.u32 = __GXContexts.main->x80;
     } else {
-        WGPIPE.u8 = 8;
+        WGPIPE.u8 = GX_LOAD_CP_REG;
         WGPIPE.u8 = GX_CMD_CALL_DL;
         WGPIPE.u32 = __GXContexts.main->x84;
         WGPIPE.u8 = GX_LOAD_XF_REG;

@@ -1037,9 +1037,9 @@ lbl_8033F1D4:
 void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
 {
     *arg0 = 0;
-    *arg0 = (*arg0 & 0xFFFFFC00) | ((u32) (arg1 + 0xFFF80000) >> 9U);
-    *arg0 = (*arg0 & 0xFFE003FF) | (arg2 << 0xA);
-    *arg0 = (*arg0 & 0xFFFFFF) | 0x65000000;
+    INSERT_FIELD(*arg0, (arg1 + 0xFFF80000) >> 9, 10, 0);
+    INSERT_FIELD(*arg0, arg2, 11, 10);
+    INSERT_FIELD(*arg0, 0x65, 8, 24);
 }
 
 void GXInvalidateTexAll(void)

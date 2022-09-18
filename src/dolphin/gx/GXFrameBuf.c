@@ -42,33 +42,34 @@ Vec2 const lbl_804DE228 = { 176.0F, 0.0F };
 
 void GXSetDispCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
 {
-    __GXContexts.main->x100_data[0x38] = 0;
-    __GXContexts.main->x100_data[0x38] = (__GXContexts.main->x100_data[0x38] & 0xFFFFFC00) | arg0;
-    __GXContexts.main->x100_data[0x38] = (__GXContexts.main->x100_data[0x38] & 0xFFF003FF) | ((u32) (arg1 << 0xA) & 0x03FFFC00);
-    __GXContexts.main->x100_data[0x38] = (__GXContexts.main->x100_data[0x38] & 0xFFFFFF) | 0x49000000;
-    __GXContexts.main->x100_data[0x39] = 0;
-    __GXContexts.main->x100_data[0x39] = (__GXContexts.main->x100_data[0x39] & 0xFFFFFC00) | (arg2 - 1);
-    __GXContexts.main->x100_data[0x39] = (__GXContexts.main->x100_data[0x39] & 0xFFF003FF) | ((arg3 - 1) << 0xA);
-    __GXContexts.main->x100_data[0x39] = (__GXContexts.main->x100_data[0x39] & 0xFFFFFF) | 0x4A000000;
+    __GXContexts.main->x1D0[4] = 0;
+    INSERT_FIELD(__GXContexts.main->x1D0[4], arg0, 10, 0);
+    __GXContexts.main->x1D0[4] = __GXContexts.main->x1D0[4] & 0xFFF003FF | (u32) (arg1 << 10) & 0x03FFFC00;
+    INSERT_FIELD(__GXContexts.main->x1D0[4], 73, 8, 24);
+    __GXContexts.main->x1D0[5] = 0;
+    INSERT_FIELD(__GXContexts.main->x1D0[5], arg2 - 1, 10, 0);
+    INSERT_FIELD(__GXContexts.main->x1D0[5], arg3 - 1, 10, 10);
+    INSERT_FIELD(__GXContexts.main->x1D0[5], 74, 8, 24);
 }
 
 void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
 {
-    __GXContexts.main->callbacks[0x10] = NULL;
-    __GXContexts.main->callbacks[0x10] = (void (*)())(((u32) __GXContexts.main->callbacks[0x10] & 0xFFFFFC00) | arg0);
-    __GXContexts.main->callbacks[0x10] = (void (*)())(((u32) __GXContexts.main->callbacks[0x10] & 0xFFF003FF) | ((u32) (arg1 << 0xA) & 0x03FFFC00));
-    __GXContexts.main->callbacks[0x10] = (void (*)())(((u32) __GXContexts.main->callbacks[0x10] & 0xFFFFFF) | 0x49000000);
-    __GXContexts.main->callbacks[0x11] = NULL;
-    __GXContexts.main->callbacks[0x11] = (void (*)())(((u32) __GXContexts.main->callbacks[0x11] & 0xFFFFFC00) | (arg2 - 1));
-    __GXContexts.main->callbacks[0x11] = (void (*)())(((u32) __GXContexts.main->callbacks[0x11] & 0xFFF003FF) | ((arg3 - 1) << 0xA));
-    __GXContexts.main->callbacks[0x11] = (void (*)())(((u32) __GXContexts.main->callbacks[0x11] & 0xFFFFFF) | 0x4A000000);
+    __GXContexts.main->x1D0[8] = 0;
+    INSERT_FIELD(__GXContexts.main->x1D0[8], arg0, 10, 0);
+    __GXContexts.main->x1D0[8] = (((u32) __GXContexts.main->x1D0[8] & 0xFFF003FF) | ((u32) (arg1 << 0xA) & 0x03FFFC00));
+    INSERT_FIELD(__GXContexts.main->x1D0[8], 0x49, 8, 24);
+    __GXContexts.main->x1D0[9] = 0;
+    INSERT_FIELD(__GXContexts.main->x1D0[9], arg2 - 1, 10, 0);
+    INSERT_FIELD(__GXContexts.main->x1D0[9], arg3 - 1, 10, 10);
+    INSERT_FIELD(__GXContexts.main->x1D0[9], 0x4A, 8, 24);
 }
 
 void GXSetDispCopyDst(s32 arg0)
 {
-    __GXContexts.main->x100_data[0x3A] = 0;
-    __GXContexts.main->x100_data[0x3A] = (__GXContexts.main->x100_data[0x3A] & 0xFFFFFC00) | ((s32) ((u32) (arg0 * 2) & 0xFFFE) >> 5);
-    __GXContexts.main->x100_data[0x3A] = (__GXContexts.main->x100_data[0x3A] & 0xFFFFFF) | 0x4D000000;
+    s32 val = (s32) ((u32) (arg0 << 1) & 0xFFFE) >> 5;
+    __GXContexts.main->x1D0[6] = 0;
+    INSERT_FIELD(__GXContexts.main->x1D0[6], val, 10, 0);
+    INSERT_FIELD(__GXContexts.main->x1D0[6], 0x4D, 8, 24);
 }
 
 extern unk_t __GetImageTileCount();
@@ -179,13 +180,8 @@ lbl_8033D658:
 
 void GXSetDispCopyFrame2Field(s32 arg0)
 {
-    GXContext* temp_r3;
-    GXContext* temp_r4;
-
-    temp_r4 = __GXContexts.main;
-    temp_r4->x100_data[0x3B] = (temp_r4->x100_data[0x3B] & 0xFFFFCFFF) | (arg0 << 0xC);
-    temp_r3 = __GXContexts.main;
-    temp_r3->x100_data[0x3F] = temp_r3->x100_data[0x3F] & 0xFFFFCFFF;
+    INSERT_FIELD(__GXContexts.main->x1D0[0x7], arg0, 2, 12);
+    INSERT_FIELD(__GXContexts.main->x1D0[0xB], 0, 2, 12);
 }
 
 // https://decomp.me/scratch/eN1kg // 2515 (18.87%)
@@ -468,8 +464,7 @@ lbl_8033DB00:
 
 void GXSetDispCopyGamma(s32 arg0)
 {
-    GXContext* temp_r4 = __GXContexts.main;
-    temp_r4->x100_data[0x3B] = (temp_r4->x100_data[0x3B] & 0xFFFFFE7F) | (arg0 << 7);
+    INSERT_FIELD(__GXContexts.main->x1D0[7], arg0, 2, 7);
 }
 
 #pragma push
