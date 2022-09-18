@@ -1045,9 +1045,9 @@ void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
 void GXInvalidateTexAll(void)
 {
     __GXFlushTextureState();
-    WGPIPE.u8 = 0x61;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = 0x66001000;
-    WGPIPE.u8 = 0x61;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = 0x66001100;
     __GXFlushTextureState();
 }

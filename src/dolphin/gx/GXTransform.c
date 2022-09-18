@@ -125,7 +125,7 @@ void GXSetProjection(f32* proj, s32 projection_type)
         __GXContexts.main->projection_v[1] = proj[2];
         __GXContexts.main->projection_v[3] = proj[6];
     }
-    WGPIPE.u8 = 0x10;
+    WGPIPE.u8 = GX_LOAD_XF_REG;
     WGPIPE.u32 = 0x61020;
     WGPIPE.f32 = __GXContexts.main->projection_v[0];
     WGPIPE.f32 = __GXContexts.main->projection_v[1];
@@ -212,14 +212,14 @@ asm unk_t WriteMTXPS4x2()
 #pragma peephole off
 void GXLoadPosMtxImm(void* mtx, s32 arg1)
 {
-    WGPIPE.u8 = 0x10;
+    WGPIPE.u8 = GX_LOAD_XF_REG;
     WGPIPE.u32 = arg1 * 4 | 0xB0000;
     WriteMTXPS4x3(mtx, (void*) &WGPIPE.u8);
 }
 
 void GXLoadNrmMtxImm(void* mtx, s32 arg1)
 {
-    WGPIPE.u8 = 0x10;
+    WGPIPE.u8 = GX_LOAD_XF_REG;
     WGPIPE.u32 = (arg1 * 3 + 0x400) | 0x80000;
     WriteMTXPS3x3from3x4(mtx, (void*) &WGPIPE.u8);
 }
@@ -245,7 +245,7 @@ void GXLoadTexMtxImm(void* arg0, u32 arg1, s32 arg2)
     } else {
         var_r4 = 0xC;
     }
-    WGPIPE.u8 = 0x10;
+    WGPIPE.u8 = GX_LOAD_XF_REG;
     WGPIPE.u32 = (var_r7 | ((var_r4 - 1) << 0x10));
 
     if (arg2 == 0) {
@@ -359,9 +359,9 @@ void GXSetScissor(s32 left, s32 top, s32 width, s32 height)
     __GXContexts.main->xF8 = __GXContexts.main->xF8 & 0xFF800FFF | (temp_r8 << 0xC);
     __GXContexts.main->xFC = __GXContexts.main->xFC & 0xFFFFF800 | (temp_r4 + height - 1);
     __GXContexts.main->xFC = __GXContexts.main->xFC & 0xFF800FFF | ((temp_r8 + width - 1) << 0xC);
-    WGPIPE.u8 = 0x61;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = __GXContexts.main->xF8;
-    WGPIPE.u8 = 0x61;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = __GXContexts.main->xFC;
     set_x2(GX_FALSE);
 }
@@ -393,7 +393,7 @@ asm unk_t GXSetScissorBoxOffset()
 
 void GXSetClipMode(s32 mode)
 {
-    WGPIPE.u8 = 0x10;
+    WGPIPE.u8 = GX_LOAD_XF_REG;
     WGPIPE.u32 = 0x1005;
     WGPIPE.u32 = mode;
     set_x2(GX_TRUE);
@@ -403,16 +403,16 @@ void __GXSetMatrixIndex(s32 arg0)
 {
     if (arg0 < 5) {
         WGPIPE.u8 = 8;
-        WGPIPE.u8 = 0x30;
+        WGPIPE.u8 = GX_LOAD_INDX_C;
         WGPIPE.u32 = __GXContexts.main->x80;
-        WGPIPE.u8 = 0x10;
+        WGPIPE.u8 = GX_LOAD_XF_REG;
         WGPIPE.u32 = 0x1018;
         WGPIPE.u32 = __GXContexts.main->x80;
     } else {
         WGPIPE.u8 = 8;
-        WGPIPE.u8 = 0x40;
+        WGPIPE.u8 = GX_CMD_CALL_DL;
         WGPIPE.u32 = __GXContexts.main->x84;
-        WGPIPE.u8 = 0x10;
+        WGPIPE.u8 = GX_LOAD_XF_REG;
         WGPIPE.u32 = 0x1019;
         WGPIPE.u32 = __GXContexts.main->x84;
     }
