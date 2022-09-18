@@ -57,10 +57,10 @@ typedef struct
     s32 x7C;                                            // at 0x07C
     s32 x80;                                            // at 0x080
     s32 x84;                                            // at 0x084
-    u8 x88_data[0x10];                                  // at 0x088
-    u8 x98_data[0x10];                                  // at 0x098
-    GXColor ambColors[2];                               // at 0x0A8
-    GXColor matColors[2];                               // at 0x0B0
+    u32 x88_data[4];                                    // at 0x088
+    u32 x98_data[4];                                    // at 0x098
+    u32 ambColors[2];                                   // at 0x0A8
+    u32 matColors[2];                                   // at 0x0B0
     s32 xB8[GX_MAX_TEXCOORD];                           // at 0x0B8
     u8 xD8_pad[0xF8 - 0xD8];                            // at 0x0D8
     s32 xF8;                                            // at 0x0F8
@@ -72,7 +72,8 @@ typedef struct
     GXTexRegionCallback callbacks[(0x1D0 - 0x1B0) / 4]; // at 0x1B0
     u32 x1D0[(0x204 - 0x1D0) / 4];                      // at 0x1D0
     u32 x204;                                           // at 0x204
-    u8 x208_pad[0x41C - 0x208];                         // at 0x208
+    u8 x208_pad[0x418 - 0x208];                         // at 0x208
+    u32 x418;                                           // at 0x418
     GXBool x41C;                                        // at 0x41C
     GXBool x41D;                                        // at 0x41D
     u32 projection_type;                                // at 0x420
