@@ -685,24 +685,11 @@ lbl_8033DE3C:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/TIMEO // 1035 (26.07%)
-#pragma push
-asm unk_t GXClearBoundingBox()
-{ // clang-format off
-    nofralloc
-/* 8033DE4C 0033AA2C  38 C0 00 61 */	li r6, 0x61
-/* 8033DE50 0033AA30  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033DE54 0033AA34  3C A0 CC 01 */	lis r5, 0xCC008000@ha
-/* 8033DE58 0033AA38  3C 80 55 00 */	lis r4, 0x550003FF@ha
-/* 8033DE5C 0033AA3C  98 C5 80 00 */	stb r6, 0xCC008000@l(r5)
-/* 8033DE60 0033AA40  38 04 03 FF */	addi r0, r4, 0x550003FF@l
-/* 8033DE64 0033AA44  90 05 80 00 */	stw r0, -0x8000(r5)
-/* 8033DE68 0033AA48  3C 80 56 00 */	lis r4, 0x560003FF@ha
-/* 8033DE6C 0033AA4C  38 84 03 FF */	addi r4, r4, 0x560003FF@l
-/* 8033DE70 0033AA50  98 C5 80 00 */	stb r6, -0x8000(r5)
-/* 8033DE74 0033AA54  38 00 00 00 */	li r0, 0
-/* 8033DE78 0033AA58  90 85 80 00 */	stw r4, -0x8000(r5)
-/* 8033DE7C 0033AA5C  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033DE80 0033AA60  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void GXClearBoundingBox()
+{
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    WGPIPE.u32 = 0x550003FF;
+    WGPIPE.u8 = GX_LOAD_BP_REG;
+    WGPIPE.u32 = 0x560003FF;
+    set_x2(GX_FALSE);
+}
