@@ -84,3 +84,40 @@ void func_800764DC(HSD_GObj* fighter_gobj)
         }
     }
 }
+
+inline void comboCount_Push(Fighter* fp)
+{
+
+    Vec3* pos = &fp->x6F0_collData.x14C_ground.normal;
+    f32 temp_f2;
+    f32 var_f2;
+    if ((s32)fp->x2090 < (s32)p_ftCommonData->x4C8)
+    {
+        var_f2 = p_ftCommonData->x4D0;
+    }
+    else
+    {
+        var_f2 = p_ftCommonData->x4D4;
+    }
+    temp_f2 = fp->x2C_facing_direction * var_f2;
+    fp->xB0_pos.x = -((pos->y * temp_f2) - fp->xB0_pos.x);
+    fp->xB0_pos.y = -((-pos->x * temp_f2) - fp->xB0_pos.y);
+}
+
+// Combo count something + adjust TopN
+void func_80076528(HSD_GObj* fighter_gobj)
+{
+    u16 temp_r3;
+    Fighter* fp;
+
+    fp = fighter_gobj->user_data;
+    temp_r3 = fp->x2092;
+    if (temp_r3 != 0)
+    {
+        fp->x2092 = (u16)(temp_r3 - 1);
+        if ((fp->x1A58_interactedFighter == NULL) && (fp->xE0_ground_or_air == GA_Ground))
+        {
+            comboCount_Push(fp);
+        }
+    }
+}
