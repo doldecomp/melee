@@ -151,3 +151,20 @@ void func_800765E0(void)
     lbl_804D6558 = 0;
     lbl_804D655C = 0;
 }
+
+// Unk knockback related ?
+f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar)
+{
+    HSD_GObj* currentVictim;
+
+    currentVictim = fp->x1A58_interactedFighter;
+    if ((currentVictim != NULL) && (fp->x221B_flag.bits.b5 == 0) && (currentVictim != victim))
+    {
+        unk_floatvar *= p_ftCommonData->x128;
+    }
+    if (fp->x10_action_state_index == ASID_DAMAGEICE)
+    {
+        unk_floatvar *= p_ftCommonData->x714;
+    }
+    return unk_floatvar * fp->dmg.x182c_behavior;
+}
