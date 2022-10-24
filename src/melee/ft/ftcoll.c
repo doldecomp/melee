@@ -1,3 +1,4 @@
+#include <melee/ft/ftcoll.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
@@ -6195,8 +6196,6 @@ void func_8007B5AC(Fighter* arg0, ftHurt* arg1, s32* arg2)
     arg0->x221A_flag.bits.b6 = 1;
 }
 
-
-
 #pragma push
 asm unk_t func_8007B62C()
 { // clang-format off
@@ -6238,3 +6237,28 @@ lbl_8007B690:
 } // clang-format on
 #pragma pop
 
+#pragma push
+asm unk_t func_8007B6A0()
+{ // clang-format off
+    nofralloc
+/* 8007B6A0 00078280  7C 08 02 A6 */	mflr r0
+/* 8007B6A4 00078284  38 A0 00 00 */	li r5, 0
+/* 8007B6A8 00078288  90 01 00 04 */	stw r0, 4(r1)
+/* 8007B6AC 0007828C  38 00 00 01 */	li r0, 1
+/* 8007B6B0 00078290  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8007B6B4 00078294  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 8007B6B8 00078298  88 83 22 21 */	lbz r4, 0x2221(r3)
+/* 8007B6BC 0007829C  50 04 3E 30 */	rlwimi r4, r0, 7, 0x18, 0x18
+/* 8007B6C0 000782A0  38 00 00 02 */	li r0, 2
+/* 8007B6C4 000782A4  98 83 22 21 */	stb r4, 0x2221(r3)
+/* 8007B6C8 000782A8  38 80 00 09 */	li r4, 9
+/* 8007B6CC 000782AC  90 A3 19 90 */	stw r5, 0x1990(r3)
+/* 8007B6D0 000782B0  38 A0 00 00 */	li r5, 0
+/* 8007B6D4 000782B4  90 03 19 8C */	stw r0, 0x198c(r3)
+/* 8007B6D8 000782B8  48 04 48 F9 */	bl func_800BFFD0
+/* 8007B6DC 000782BC  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8007B6E0 000782C0  38 21 00 08 */	addi r1, r1, 8
+/* 8007B6E4 000782C4  7C 08 03 A6 */	mtlr r0
+/* 8007B6E8 000782C8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
