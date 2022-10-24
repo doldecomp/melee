@@ -22,6 +22,6 @@ void func_8007AFF8(HSD_GObj *);
 void func_8007B0C0(HSD_GObj*, s32);
 void func_8007B1B8(HSD_GObj*, f32*, void (*)(HSD_GObj*));
 void func_8007B4E0(HSD_GObj*);
-
+void func_8007B5AC(Fighter*, ftHurt*, s32*);
 
 #endif 

@@ -6155,4 +6155,42 @@ lbl_8007B58C:
 } // clang-format on
 #pragma pop
 
+static inline BOOL inline_not(BOOL arg0) { return !arg0; }
 
+void func_8007B5AC(Fighter* arg0, ftHurt* arg1, s32* arg2)
+{
+    u32 r0;
+    u32 r7;
+    ftHurt* new_var;
+    s32* p;
+    s32 temp;
+    arg1->x40_bone_index = arg2[0];
+    arg1->x44_hurt_kind = arg2[1];
+    arg1->x48_is_grabbable = arg2[2];
+    arg1->x0_bone_state = 0;
+    r0 = (arg1->x40_bone_index << 4) & 0xfffffff0;
+    r7 = *((u32*) (((u32) arg0->x5E8_fighterBones) + r0));
+    arg1->x20_jobj = (struct _HSD_JObj*) r7;
+    new_var = arg1;
+
+    // These are supposed to be f32s (the stuff in this list). They're a Vec3
+    // I didn't want to load these into the GFPRs, because they're doubles.
+    // Instead we essentially want to copy over the bytes. They're also all right
+    // next to each other.
+    p = (s32*) (&new_var->x4_hurt1_offset.x);
+    r7 = arg2[3];
+    r0 = arg2[4];
+    ((s32*) (&new_var->x4_hurt1_offset.x))[0] = r7;
+    ((s32*) (&new_var->x4_hurt1_offset.x))[1] = r0;
+    ((s32*) (&new_var->x4_hurt1_offset.x))[2] = (s32) arg2[5];
+    r7 = (temp = arg2[6]);
+    r0 = arg2[7];
+    ((s32*) (&new_var->x4_hurt1_offset.x))[3] = r7;
+    ((s32*) (&new_var->x4_hurt1_offset.x))[4] = r0;
+    p[5] = (s32) arg2[8];
+
+    if ((inline_not(r7) && inline_not(r7)) && inline_not(r7)) {
+    }
+    new_var->x1C_scale = ((f32*) arg2)[9];
+    arg0->x221A_flag.bits.b6 = 1;
+}
