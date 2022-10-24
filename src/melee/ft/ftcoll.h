@@ -28,5 +28,6 @@ void func_8007B760(HSD_GObj* fighter_gobj, s32);
 void func_8007B7A4(HSD_GObj* fighter_gobj, s32);
 void func_8007B8CC(Fighter*, HSD_GObj*);
 void func_8007B8E8(HSD_GObj* fighter_obj);
+void func_getWindOffsetVec_8007B924(HSD_GObj*, Vec* out_wind);
 
 #endif 
