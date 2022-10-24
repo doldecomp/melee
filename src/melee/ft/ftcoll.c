@@ -35,3 +35,9 @@ void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID) // Combo 
         }
     }
 }
+
+void func_80076444(HSD_GObj* attacker, HSD_GObj* victim) // Combo Count Logic + Get Attack ID //
+{
+    Fighter* fp = getFighter(attacker);
+    func_800763C0(attacker, victim, fp->x2068_attackID);
+}

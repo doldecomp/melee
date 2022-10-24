@@ -17,13 +17,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 
-// 0x80076444 //
-// https://decomp.me/scratch/PJyPr //
-void func_80076444(HSD_GObj* attacker, HSD_GObj* victim) // Combo Count Logic + Get Attack ID //
-{
-    Fighter* fp = getFighter(attacker);
-    func_800763C0(attacker, victim, fp->x2068_attackID);
-}
+
 
 extern BOOL func_80086960(HSD_GObj*);
 
