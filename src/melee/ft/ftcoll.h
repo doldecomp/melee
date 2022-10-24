@@ -26,5 +26,6 @@ void func_8007B5AC(Fighter*, ftHurt*, s32*);
 void func_8007B6EC(HSD_GObj* fighter_gobj);
 void func_8007B760(HSD_GObj* fighter_gobj, s32);
 void func_8007B7A4(HSD_GObj* fighter_gobj, s32);
+void func_8007B8CC(Fighter*, HSD_GObj*);
 
 #endif 
