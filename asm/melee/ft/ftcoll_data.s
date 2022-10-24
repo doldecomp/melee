@@ -6,14 +6,14 @@
     .balign 8
 .global lbl_803C0C40
 lbl_803C0C40:
-    .4byte 0x0000008D
-    .4byte 0x0000008E
-    .4byte 0x0000008F
+    .int 141
+    .int 142
+    .int 143
 .global lbl_803C0C4C
 lbl_803C0C4C:
-    .4byte 0x0000006B
-    .4byte 0x0000006C
-    .4byte 0x0000006D
+    .int 107
+    .int 108
+    .int 109
 .global lbl_803C0C58
 lbl_803C0C58:
     .asciz "attack power over 500!! %f\n"
@@ -36,17 +36,17 @@ lbl_803C0CAC:
     .4byte 0x000003EC
     .4byte 0x00000479
     .4byte 0x000003ED
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
+    .int -1
     .4byte 0x000003E8
     .4byte 0x000003E8
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
+    .int -1
+    .int -1
     .4byte 0x00000416
-    .4byte 0xFFFFFFFF
-    .4byte 0xFFFFFFFF
-    .4byte NULL
+    .int -1
+    .int -1
+    .float 0.0
 .global lbl_803C0CF0
 lbl_803C0CF0:
     .asciz "in ftCollisionSetHitStatus illegal parts!\n"
@@ -55,7 +55,6 @@ lbl_803C0CF0:
     .balign 4
     .asciz "fighter dynamics hit num over!\n"
     .balign 4
-
 
 .section .bss
     .balign 8
@@ -66,14 +65,12 @@ lbl_80459278:
 lbl_80459598:
 	.skip 0x320
 
-
 .section .sdata
     .balign 8
 .global lbl_804D3A68
 lbl_804D3A68:
     .asciz "0"
     .balign 4
-
 
 .section .sbss
     .balign 8
@@ -87,46 +84,42 @@ lbl_804D655C:
 lbl_804D6560:
 	.skip 0x4
 
-
 .section .sdata2
     .balign 8
 .global lbl_804D82E0
 lbl_804D82E0:
-	.4byte 0x00000000
+	.float 0.0
 .global lbl_804D82E4
 lbl_804D82E4:
-	.4byte 0x43FA0000
+	.float 500.0
 .global lbl_804D82E8
 lbl_804D82E8:
-	.4byte 0x3F000000
+	.float 0.5
 .global lbl_804D82EC
 lbl_804D82EC:
-	.4byte 0x3F800000
+	.float 1.0
 .global lbl_804D82F0
 lbl_804D82F0:
-	.4byte 0xBF800000
-	.4byte 0x00000000
+	.double -0.0078125
 .global lbl_804D82F8
 lbl_804D82F8:
-	.4byte 0x43300000
-	.4byte 0x80000000
+	.double 4503601774854144.0
 .global lbl_804D8300
 lbl_804D8300:
-	.4byte 0x3C8EFA35
-	.4byte 0x00000000
+	.float 0.01745329238474369
+	.float 0.0
 .global lbl_804D8308
 lbl_804D8308:
-	.4byte 0x43300000
-	.4byte 0x00000000
+	.double 4503599627370496.0
 .global lbl_804D8310
 lbl_804D8310:
 	.4byte 0x7F7FFFFF
 .global lbl_804D8314
 lbl_804D8314:
-	.4byte 0x3C23D70A
+	.float 0.009999999776482582
 .global lbl_804D8318
 lbl_804D8318:
-	.4byte 0x3727C5AC
+	.float 9.999999747378752e-06
 .global lbl_804D831C
 lbl_804D831C:
-	.4byte 0x42652EE1
+	.float 57.295780181884766
