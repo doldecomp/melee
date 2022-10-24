@@ -1,5 +1,6 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <melee/it/item.h>
 
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID) // Combo Count Logic //
 {
@@ -40,4 +41,17 @@ void func_80076444(HSD_GObj* attacker, HSD_GObj* victim) // Combo Count Logic + 
 {
     Fighter* fp = getFighter(attacker);
     func_800763C0(attacker, victim, fp->x2068_attackID);
+}
+
+extern BOOL func_80086960(HSD_GObj*);
+
+void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim) // Combo Count Logic w/ Item Owner //
+{
+    HSD_GObj* itemOwner = func_8026BC78(attackItem);
+    s32 attackID = func_8026BC84(attackItem);
+
+    if (func_80086960(itemOwner) != FALSE) // Check if item's owner is a fp //
+    {
+        func_800763C0(itemOwner, victim, attackID);
+    }
 }

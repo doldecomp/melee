@@ -19,20 +19,7 @@
 
 
 
-extern BOOL func_80086960(HSD_GObj*);
 
-// 0x8007646C //
-// https://decomp.me/scratch/TDdx4 //
-void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim) // Combo Count Logic w/ Item Owner //
-{
-    HSD_GObj* itemOwner = func_8026BC78(attackItem);
-    s32 attackID = func_8026BC84(attackItem);
-
-    if (func_80086960(itemOwner) != FALSE) // Check if item's owner is a fp //
-    {
-        func_800763C0(itemOwner, victim, attackID);
-    }
-}
 
 // 0x800764DC //
 // https://decomp.me/scratch/pOUFp //
