@@ -199,7 +199,6 @@ void func_8007AF28(struct _HSD_GObj *fighter_gobj);
 
 void func_8007B760();
 
-void func_8007B8E8();
 void func_getWindOffsetVec_8007B924(struct _HSD_GObj *, Vec *out_wind);
 void func_8007BA0C();
 void func_8007BAC0();
