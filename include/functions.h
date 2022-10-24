@@ -194,7 +194,6 @@ void func_80076528(struct _HSD_GObj *);
 void func_800765AC();
 void func_800765E0();
 
-void func_8007AB80();
 void func_8007ABD0(struct _Hitbox *, u32 damageAmount, struct _HSD_GObj *);
 
 void func_8007AE80();
