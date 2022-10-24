@@ -19,5 +19,6 @@ void func_8007ABD0(Hitbox*, u32 damageAmount, HSD_GObj*);
 void func_8007AEE0(HSD_GObj*);
 void func_8007AF28(HSD_GObj* fighter_gobj);
 void func_8007AFF8(HSD_GObj *);
+void func_8007B0C0(HSD_GObj*, s32);
 
 #endif 

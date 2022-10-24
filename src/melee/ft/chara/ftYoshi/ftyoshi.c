@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
 #include <melee/it/itkind.h>
+#include <melee/ft/ftcoll.h>
 
 extern char* lbl_804D3E58;
 extern char* lbl_804D3E60;
