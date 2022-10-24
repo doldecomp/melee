@@ -1,8 +1,9 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
-
-void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID) // Combo Count Logic //
+ 
+// Combo Count Logic
+void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)
 {
     HSD_GObj* temp_GObj;
     Fighter* fp;
@@ -37,7 +38,8 @@ void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID) // Combo 
     }
 }
 
-void func_80076444(HSD_GObj* attacker, HSD_GObj* victim) // Combo Count Logic + Get Attack ID //
+// Combo Count Logic + Get Attack ID
+void func_80076444(HSD_GObj* attacker, HSD_GObj* victim)
 {
     Fighter* fp = getFighter(attacker);
     func_800763C0(attacker, victim, fp->x2068_attackID);
@@ -45,13 +47,40 @@ void func_80076444(HSD_GObj* attacker, HSD_GObj* victim) // Combo Count Logic + 
 
 extern BOOL func_80086960(HSD_GObj*);
 
-void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim) // Combo Count Logic w/ Item Owner //
+// Combo Count Logic w/ Item Owner
+void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
 {
     HSD_GObj* itemOwner = func_8026BC78(attackItem);
     s32 attackID = func_8026BC84(attackItem);
-
-    if (func_80086960(itemOwner) != FALSE) // Check if item's owner is a fp //
+ 
+    // Check if item's owner is a fp
+    if (func_80086960(itemOwner) != FALSE)
     {
         func_800763C0(itemOwner, victim, attackID);
+    }
+}
+
+// Check to end combo for victim
+void func_800764DC(HSD_GObj* fighter_gobj)
+{
+    u16 hitstunTimer;
+    HSD_GObj* temp_gobj;
+    Fighter* temp_fp;
+    Fighter* fp;
+
+    fp = getFighter(fighter_gobj);
+    hitstunTimer = fp->x2098;
+    if (hitstunTimer != 0)
+    {
+        fp->x2098 = (u16)(hitstunTimer - 1);
+    }
+    temp_gobj = fp->x2094;
+    if (temp_gobj != NULL)
+    {
+        temp_fp = getFighter(temp_gobj);
+        if ((temp_fp->x221C_flag.bits.b6 == 0) && ((u16)temp_fp->x2098 == 0))
+        {
+            fp->x2094 = NULL;
+        }
     }
 }

@@ -17,36 +17,6 @@
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 
-
-
-
-
-// 0x800764DC //
-// https://decomp.me/scratch/pOUFp //
-void func_800764DC(HSD_GObj* fighter_gobj) // Check to end combo for victim //
-{
-    u16 hitstunTimer; // Hitstun timer, presumably? //
-    HSD_GObj* temp_gobj;
-    Fighter* temp_fp;
-    Fighter* fp;
-
-    fp = getFighter(fighter_gobj);
-    hitstunTimer = fp->x2098;
-    if (hitstunTimer != 0)
-    {
-        fp->x2098 = (u16)(hitstunTimer - 1);
-    }
-    temp_gobj = fp->x2094;
-    if (temp_gobj != NULL)
-    {
-        temp_fp = getFighter(temp_gobj);
-        if ((temp_fp->x221C_flag.bits.b6 == 0) && ((u16)temp_fp->x2098 == 0))
-        {
-            fp->x2094 = NULL;
-        }
-    }
-}
-
 inline void comboCount_Push(Fighter* fp)
 {
 
