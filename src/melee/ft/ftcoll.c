@@ -141,3 +141,13 @@ void func_800765AC(HSD_GObj* victim)
         gobj = gobj->next;
     }
 }
+
+extern s32 lbl_804D6558;
+extern s32 lbl_804D655C;
+
+// Reset hitbox and phantom collision count?
+void func_800765E0(void)
+{
+    lbl_804D6558 = 0;
+    lbl_804D655C = 0;
+}

@@ -17,16 +17,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 
-extern s32 lbl_804D6558;
-extern s32 lbl_804D655C;
 
-// 0x800765E0
-// https://decomp.me/scratch/F1xnr
-void func_800765E0(void) // Reset hitbox and phantom collision count?
-{
-    lbl_804D6558 = 0;
-    lbl_804D655C = 0;
-}
 
 // 0x800765F0
 // https://decomp.me/scratch/9hcKb
