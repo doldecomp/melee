@@ -6262,3 +6262,29 @@ asm unk_t func_8007B6A0()
 /* 8007B6E8 000782C8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+inline s32 get_func_800c0694(Fighter *arg0)
+{
+  return func_800C0694(arg0);
+}
+
+void func_8007B6EC(HSD_GObj* fighter_gobj)
+{
+    s32 var_r3;
+    Fighter* new_var;
+    Fighter* fp;
+    fp = (new_var = getFighter(fighter_gobj));
+    var_r3 = 0;
+    fp->x2221_flag.bits.b0 = 0;
+    var_r3 = (s32) fp->x1990;
+    if (var_r3 == 0) {
+        var_r3 = 0;
+        if (((s32) fp->x1994) != 0) {
+            var_r3 = 1;
+        }
+        fp->x198C = var_r3;
+        if (get_func_800c0694(fp) == 9) {
+            func_800C0200(fp, 9);
+        }
+    }
+}
