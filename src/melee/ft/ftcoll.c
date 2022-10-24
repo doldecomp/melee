@@ -193,40 +193,40 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar) // Unk knockb
 // https://decomp.me/scratch/r6vQW
 inline BOOL inline_fn(BOOL arg0) { return !arg0; }
 
-void func_8007B5AC(Fighter *arg0, ftHurt *arg1, s32 *arg2) {
+void func_8007B5AC(Fighter* arg0, ftHurt* arg1, s32* arg2)
+{
+    u32 R0;
+    u32 R7;
+    ftHurt* new_var;
+    s32* p;
+    s32 temp;
+    arg1->x40_bone_index = arg2[0];
+    arg1->x44_hurt_kind = arg2[1];
+    arg1->x48_is_grabbable = arg2[2];
+    arg1->x0_bone_state = 0;
+    R0 = (arg1->x40_bone_index << 4) & 0xfffffff0;
+    R7 = *((u32*) (((u32) arg0->x5E8_fighterBones) + R0));
+    arg1->x20_jobj = (struct _HSD_JObj*) R7;
+    new_var = arg1;
 
-  u32 R0;
-  u32 R7;
-  ftHurt *new_var;
-  s32 *p;
-  s32 temp;
-  arg1->x40_bone_index = arg2[0];
-  arg1->x44_hurt_kind = arg2[1];
-  arg1->x48_is_grabbable = arg2[2];
-  arg1->x0_bone_state = 0;
-  R0 = (arg1->x40_bone_index << 4) & 0xfffffff0;
-  R7 = *((u32 *)(((u32)arg0->x5E8_fighterBones) + R0));
-  arg1->x20_jobj = (struct _HSD_JObj *)R7;
-  new_var = arg1;
+    // These are supposed to be f32s (the stuff in this list). They're a Vec3
+    // I didn't want to load these into the GFPRs, because they're doubles.
+    // Instead we essentially want to copy over the bytes. They're also all right
+    // next to each other.
+    p = (s32*) (&new_var->x4_hurt1_offset.x);
+    R7 = arg2[3];
+    R0 = arg2[4];
+    ((s32*) (&new_var->x4_hurt1_offset.x))[0] = R7;
+    ((s32*) (&new_var->x4_hurt1_offset.x))[1] = R0;
+    ((s32*) (&new_var->x4_hurt1_offset.x))[2] = (s32) arg2[5];
+    R7 = (temp = arg2[6]);
+    R0 = arg2[7];
+    ((s32*) (&new_var->x4_hurt1_offset.x))[3] = R7;
+    ((s32*) (&new_var->x4_hurt1_offset.x))[4] = R0;
+    p[5] = (s32) arg2[8];
 
-  // These are supposed to be f32s (the stuff in this list). They're a Vec3
-  // I didn't want to load these into the GFPRs, because they're doubles.
-  // Instead we essentially want to copy over the bytes. They're also all right
-  // next to each other.
-  p = (s32 *)(&new_var->x4_hurt1_offset.x);
-  R7 = arg2[3];
-  R0 = arg2[4];
-  ((s32 *)(&new_var->x4_hurt1_offset.x))[0] = R7;
-  ((s32 *)(&new_var->x4_hurt1_offset.x))[1] = R0;
-  ((s32 *)(&new_var->x4_hurt1_offset.x))[2] = (s32)arg2[5];
-  R7 = (temp = arg2[6]);
-  R0 = arg2[7];
-  ((s32 *)(&new_var->x4_hurt1_offset.x))[3] = R7;
-  ((s32 *)(&new_var->x4_hurt1_offset.x))[4] = R0;
-  p[5] = (s32)arg2[8];
-
-  if ((inline_fn(R7) && inline_fn(R7)) && inline_fn(R7)) {
-  }
-  new_var->x1C_scale = ((f32 *)arg2)[9];
-  arg0->x221A_flag.bits.b6 = 1;
+    if ((inline_fn(R7) && inline_fn(R7)) && inline_fn(R7)) {
+    }
+    new_var->x1C_scale = ((f32*) arg2)[9];
+    arg0->x221A_flag.bits.b6 = 1;
 }
