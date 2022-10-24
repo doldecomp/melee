@@ -189,9 +189,6 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar) // Unk knockb
     return unk_floatvar * fp->dmg.x182c_behavior;
 }
 
-
-
-
 // 0x8007B5AC //
 // https://decomp.me/scratch/r6vQW
 inline BOOL inline_fn(BOOL arg0) { return !arg0; }
