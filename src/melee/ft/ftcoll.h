@@ -17,5 +17,6 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar); // Unk knock
 BOOL func_8007B868(HSD_GObj* fighter_gobj);
 void func_8007ABD0(Hitbox*, u32 damageAmount, HSD_GObj*);
 void func_8007AEE0(HSD_GObj*);
+void func_8007AF28(HSD_GObj *fighter_gobj);
 
 #endif 
