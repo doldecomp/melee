@@ -20,5 +20,6 @@ void func_8007AEE0(HSD_GObj*);
 void func_8007AF28(HSD_GObj* fighter_gobj);
 void func_8007AFF8(HSD_GObj *);
 void func_8007B0C0(HSD_GObj*, s32);
+void func_8007B1B8(HSD_GObj*, f32*, void (*)(HSD_GObj*));
 
 #endif 
