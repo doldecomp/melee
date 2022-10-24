@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
+#include <melee/ft/ftcoll.h>
 
 // 0x80142A24
 // https://decomp.me/scratch/TEGVv // Luigi's Green Missile GFX callback
