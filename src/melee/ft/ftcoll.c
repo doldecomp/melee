@@ -121,3 +121,23 @@ void func_80076528(HSD_GObj* fighter_gobj)
         }
     }
 }
+
+// Clear victim pointer from attacker upon freeing memory?
+void func_800765AC(HSD_GObj* victim)
+{
+    Fighter* fp;
+    HSD_GObj* gobj;
+ 
+    // Get fp GObj from global list of entities (?)
+    gobj = lbl_804D782C->x20_fighters;
+    while (gobj != NULL)
+    {
+        fp = getFighter(gobj); 
+        if (victim == fp->x2094)
+        {
+            fp->x2094 = NULL;
+        }
+        // Repeat until there are no more fp GObjs left
+        gobj = gobj->next;
+    }
+}

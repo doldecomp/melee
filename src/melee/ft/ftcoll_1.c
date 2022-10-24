@@ -17,27 +17,6 @@
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 
-
-
-// 0x800765AC
-// https://decomp.me/scratch/IPBrx
-void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon freeing memory?
-{
-    Fighter* fp;
-    HSD_GObj* gobj;
-
-    gobj = lbl_804D782C->x20_fighters; // Get fp GObj from global list of entities (?)
-    while (gobj != NULL)
-    {
-        fp = getFighter(gobj); 
-        if (victim == fp->x2094)
-        {
-            fp->x2094 = NULL;
-        }
-        gobj = gobj->next; // Repeat until there are no more fp GObjs left
-    }
-}
-
 extern s32 lbl_804D6558;
 extern s32 lbl_804D655C;
 
