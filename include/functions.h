@@ -194,8 +194,6 @@ void func_80076528(struct _HSD_GObj *);
 void func_800765AC();
 void func_800765E0();
 
-void func_80078754();
-
 void func_80078A2C();
 void func_80078C70();
 void func_8007925C();
