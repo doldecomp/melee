@@ -6300,3 +6300,21 @@ void func_8007B760(HSD_GObj* fighter_gobj, s32 arg1)
     fp->x198C = 2;
     func_800BFFD0(fp, 9, 0);
 }
+
+void func_8007B7A4(HSD_GObj* fighter_gobj, s32 arg1)
+{
+    Fighter* fp;
+    s32 var_r0;
+
+    fp = getFighter(fighter_gobj);
+    if (arg1 > (s32) fp->x1994) {
+        fp->x1994 = arg1;
+    }
+    if ((s32) fp->x1990 != 0) {
+        var_r0 = 2;
+    } else {
+        var_r0 = 1;
+    }
+    fp->x198C = var_r0;
+    func_800BFFD0(fp, 9, 0);
+}
