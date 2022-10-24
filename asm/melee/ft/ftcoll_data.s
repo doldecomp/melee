@@ -86,12 +86,6 @@ lbl_804D6560:
 
 .section .sdata2
     .balign 8
-.global lbl_804D82E0
-lbl_804D82E0:
-	.float 0.0
-.global lbl_804D82E4
-lbl_804D82E4:
-	.float 500.0
 .global lbl_804D82E8
 lbl_804D82E8:
 	.float 0.5

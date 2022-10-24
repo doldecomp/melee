@@ -75,8 +75,8 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/ft/ftaction.s.o\
 	$(BUILD_DIR)/asm/melee/ft/ftparts.s.o\
 	$(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
-	$(BUILD_DIR)/asm/melee/ft/ftcoll_data.s.o\
 	$(BUILD_DIR)/src/melee/ft/ftcoll.c.o\
+	$(BUILD_DIR)/asm/melee/ft/ftcoll_data.s.o\
 	$(BUILD_DIR)/src/melee/ft/code_8007C114.c.o\
 	$(BUILD_DIR)/src/melee/ft/code_8007C630.c.o\
 	$(BUILD_DIR)/src/melee/ft/ftcommon.c.o\

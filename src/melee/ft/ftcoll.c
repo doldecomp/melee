@@ -171,8 +171,8 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar)
     return unk_floatvar * fp->dmg.x182c_behavior;
 }
 
-extern s32 lbl_804D82E0;
-extern s32 lbl_804D82E4;
+static f32 const lbl_804D82E0 = 0.0F;
+static f32 const lbl_804D82E4 = 500.0F;
 extern char* lbl_803C0C58;
 extern char* lbl_803C0C74;
 extern char* lbl_804D3A68;
