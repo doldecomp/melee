@@ -195,8 +195,6 @@ void func_800765AC();
 void func_800765E0();
 
 
-void func_8007AEE0(struct _HSD_GObj *);
-
 void func_8007AF28(struct _HSD_GObj *fighter_gobj);
 
 void func_8007AFF8(struct _HSD_GObj *);
