@@ -194,7 +194,7 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar) // Unk knockb
 
 // 0x8007B5AC //
 // https://decomp.me/scratch/r6vQW
-inline int inline_fn(u32 arg0)
+inline BOOL inline_fn(BOOL arg0)
 {
   return !arg0;
 }
