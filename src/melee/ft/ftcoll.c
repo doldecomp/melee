@@ -188,3 +188,17 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar) // Unk knockb
     }
     return unk_floatvar * fp->dmg.x182c_behavior;
 }
+
+// 8007B760 //
+// https://decomp.me/scratch/mL8R8
+void func_8007B760(void* fighter_gobj, s32 arg1)
+{
+    Fighter* fp;
+
+    fp = getFighter(fighter_gobj);
+    if (arg1 > (s32) fp->x1990) {
+        fp->x1990 = arg1;
+    }
+    fp->x198C = 2;
+    func_800BFFD0(fp, 9, 0);
+}
