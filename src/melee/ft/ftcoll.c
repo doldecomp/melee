@@ -2,6 +2,7 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
+#include <melee/ft/ft_unknown_006.h>
  
 // Combo Count Logic
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)
@@ -6318,3 +6319,39 @@ void func_8007B7A4(HSD_GObj* fighter_gobj, s32 arg1)
     fp->x198C = var_r0;
     func_800BFFD0(fp, 9, 0);
 }
+
+#pragma push
+asm unk_t func_8007B7FC()
+{ // clang-format off
+    nofralloc
+/* 8007B7FC 000783DC  7C 08 02 A6 */	mflr r0
+/* 8007B800 000783E0  38 A0 00 00 */	li r5, 0
+/* 8007B804 000783E4  90 01 00 04 */	stw r0, 4(r1)
+/* 8007B808 000783E8  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8007B80C 000783EC  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8007B810 000783F0  3B E4 00 00 */	addi r31, r4, 0
+/* 8007B814 000783F4  38 80 00 6B */	li r4, 0x6b
+/* 8007B818 000783F8  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 8007B81C 000783FC  7C 7E 1B 78 */	mr r30, r3
+/* 8007B820 00078400  88 03 22 1D */	lbz r0, 0x221d(r3)
+/* 8007B824 00078404  38 60 00 01 */	li r3, 1
+/* 8007B828 00078408  50 60 0F BC */	rlwimi r0, r3, 1, 0x1e, 0x1e
+/* 8007B82C 0007840C  98 1E 22 1D */	stb r0, 0x221d(r30)
+/* 8007B830 00078410  38 7E 00 00 */	addi r3, r30, 0
+/* 8007B834 00078414  93 FE 20 04 */	stw r31, 0x2004(r30)
+/* 8007B838 00078418  48 04 47 99 */	bl func_800BFFD0
+/* 8007B83C 0007841C  48 1E FD 4D */	bl func_8026B588
+/* 8007B840 00078420  7C 1F 18 00 */	cmpw r31, r3
+/* 8007B844 00078424  40 81 00 0C */	ble lbl_8007B850
+/* 8007B848 00078428  7F C3 F3 78 */	mr r3, r30
+/* 8007B84C 0007842C  48 00 C8 35 */	bl func_80088080
+lbl_8007B850:
+/* 8007B850 00078430  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8007B854 00078434  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8007B858 00078438  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 8007B85C 0007843C  38 21 00 18 */	addi r1, r1, 0x18
+/* 8007B860 00078440  7C 08 03 A6 */	mtlr r0
+/* 8007B864 00078444  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
