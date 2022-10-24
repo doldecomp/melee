@@ -196,28 +196,23 @@ inline s32 inline_fn(Fighter *arg0)
 
 // 0x8007B6EC //
 // https://decomp.me/scratch/hjLc1 //
-void func_8007B6EC(HSD_GObj *fighter_gobj)
+void func_8007B6EC(HSD_GObj* fighter_gobj)
 {
-  s32 var_r3;
-  Fighter *new_var;
-  Fighter *fp;
-  fp = (new_var = getFighter(fighter_gobj));
-  var_r3 = 0;
-  fp->x2221_flag.bits.b0 = 0;
-  var_r3 = (s32) fp->x1990;
-  if (var_r3 == 0)
-  {
-    ;
- ;
+    s32 var_r3;
+    Fighter* new_var;
+    Fighter* fp;
+    fp = (new_var = getFighter(fighter_gobj));
     var_r3 = 0;
-    if (((s32) fp->x1994) != 0)
-    {
-      var_r3 = 1;
+    fp->x2221_flag.bits.b0 = 0;
+    var_r3 = (s32) fp->x1990;
+    if (var_r3 == 0) {
+        var_r3 = 0;
+        if (((s32) fp->x1994) != 0) {
+            var_r3 = 1;
+        }
+        fp->x198C = var_r3;
+        if (inline_fn(fp) == 9) {
+            func_800C0200(fp, 9);
+        }
     }
-    fp->x198C = var_r3;
-    if (inline_fn(fp) == 9)
-    {
-      func_800C0200(fp, 9);
-    }
-  }
 }
