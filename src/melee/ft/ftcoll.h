@@ -14,6 +14,7 @@ void func_80076528(HSD_GObj* fighter_gobj); // Combo count something + adjust To
 void func_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker upon freeing memory? //
 void func_800765E0(void); // Reset hitbox and phantom collision count? //
 f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar); // Unk knockback related ? //
+void func_8007B7A4(void* fighter_gobj, s32 arg1);
 BOOL func_8007B868(HSD_GObj* fighter_gobj);
 
 #endif 
