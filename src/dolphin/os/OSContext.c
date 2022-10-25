@@ -182,8 +182,6 @@ asm unk_t OSSaveFPUContext()
 } // clang-format on
 #pragma pop
 
-
-
 #pragma push
 asm unk_t OSSetCurrentContext()
 { // clang-format off
@@ -212,6 +210,19 @@ lbl_803450C4:
 /* 803450DC 00341CBC  7C C0 01 24 */	mtmsr r6
 /* 803450E0 00341CC0  4C 00 01 2C */	isync 
 /* 803450E4 00341CC4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+
+
+
+#pragma push
+asm unk_t OSGetCurrentContext()
+{ // clang-format off
+    nofralloc
+/* 803450E8 00341CC8  3C 60 80 00 */	lis r3, 0x800000D4@ha
+/* 803450EC 00341CCC  80 63 00 D4 */	lwz r3, 0x800000D4@l(r3)
+/* 803450F0 00341CD0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
 
