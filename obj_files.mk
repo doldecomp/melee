@@ -596,6 +596,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/OSExi.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSExi_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSFont.c.o\
+	$(BUILD_DIR)/src/dolphin/os/OSInterrupt.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSLink.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSMemory.c.o\
