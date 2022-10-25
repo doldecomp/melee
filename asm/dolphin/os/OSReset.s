@@ -2,27 +2,6 @@
 
 .section .text  # 0x80348310 - 0x803486E0
 
-.global __OSDoHotReset
-__OSDoHotReset:
-/* 80348404 00344FE4  7C 08 02 A6 */	mflr r0
-/* 80348408 00344FE8  90 01 00 04 */	stw r0, 4(r1)
-/* 8034840C 00344FEC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80348410 00344FF0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80348414 00344FF4  7C 7F 1B 78 */	mr r31, r3
-/* 80348418 00344FF8  4B FF EF 4D */	bl OSDisableInterrupts
-/* 8034841C 00344FFC  3C 60 CC 00 */	lis r3, 0xCC002000@ha
-/* 80348420 00345000  38 63 20 00 */	addi r3, r3, 0xCC002000@l
-/* 80348424 00345004  38 00 00 00 */	li r0, 0
-/* 80348428 00345008  B0 03 00 02 */	sth r0, 2(r3)
-/* 8034842C 0034500C  4B FF C4 E1 */	bl ICFlashInvalidate
-/* 80348430 00345010  57 E3 18 38 */	slwi r3, r31, 3
-/* 80348434 00345014  4B FF FF 61 */	bl Reset
-/* 80348438 00345018  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8034843C 0034501C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80348440 00345020  38 21 00 18 */	addi r1, r1, 0x18
-/* 80348444 00345024  7C 08 03 A6 */	mtlr r0
-/* 80348448 00345028  4E 80 00 20 */	blr 
-
 .global OSResetSystem
 OSResetSystem:
 /* 8034844C 0034502C  7C 08 02 A6 */	mflr r0
