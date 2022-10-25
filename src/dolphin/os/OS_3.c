@@ -15,3 +15,17 @@ asm unk_t __OSSetExceptionHandler()
 /* 803435CC 003401AC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t __OSGetExceptionHandler()
+{ // clang-format off
+    nofralloc
+/* 803435D0 003401B0  54 60 06 3E */	clrlwi r0, r3, 0x18
+/* 803435D4 003401B4  80 6D BC A8 */	lwz r3, OSExceptionTable(r13)
+/* 803435D8 003401B8  54 00 10 3A */	slwi r0, r0, 2
+/* 803435DC 003401BC  7C 63 00 2E */	lwzx r3, r3, r0
+/* 803435E0 003401C0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+
