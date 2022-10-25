@@ -1600,3 +1600,20 @@ lbl_80346F30:
 /* 80346F4C 00343B2C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+
+
+#pragma push
+asm unk_t EXIGetState()
+{ // clang-format off
+    nofralloc
+/* 80346F50 00343B30  3C 80 80 4A */	lis r4, lbl_804A7C80@ha
+/* 80346F54 00343B34  54 63 30 32 */	slwi r3, r3, 6
+/* 80346F58 00343B38  38 04 7C 80 */	addi r0, r4, lbl_804A7C80@l
+/* 80346F5C 00343B3C  7C 60 1A 14 */	add r3, r0, r3
+/* 80346F60 00343B40  80 63 00 0C */	lwz r3, 0xc(r3)
+/* 80346F64 00343B44  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+
