@@ -1,5 +1,6 @@
 #include <dolphin/types.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/base/PPCArch.h>
 
 #pragma push
 asm unk_t DCEnable()
@@ -351,3 +352,56 @@ lbl_80344B30:
 } // clang-format on
 #pragma pop
 
+extern char* lbl_80401BF0[];
+extern unk_t DBPrintf();
+
+#pragma push
+asm unk_t L2GlobalInvalidate()
+{ // clang-format off
+    nofralloc
+/* 80344B44 00341724  7C 08 02 A6 */	mflr r0
+/* 80344B48 00341728  90 01 00 04 */	stw r0, 4(r1)
+/* 80344B4C 0034172C  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80344B50 00341730  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80344B54 00341734  7C 00 04 AC */	sync
+/* 80344B58 00341738  4B FF 13 1D */	bl PPCMfl2cr
+/* 80344B5C 0034173C  54 63 00 7E */	clrlwi r3, r3, 1
+/* 80344B60 00341740  4B FF 13 1D */	bl PPCMtl2cr
+/* 80344B64 00341744  7C 00 04 AC */	sync
+/* 80344B68 00341748  4B FF 13 0D */	bl PPCMfl2cr
+/* 80344B6C 0034174C  64 63 00 20 */	oris r3, r3, 0x20
+/* 80344B70 00341750  4B FF 13 0D */	bl PPCMtl2cr
+/* 80344B74 00341754  48 00 00 04 */	b lbl_80344B78
+lbl_80344B78:
+/* 80344B78 00341758  48 00 00 04 */	b lbl_80344B7C
+lbl_80344B7C:
+/* 80344B7C 0034175C  4B FF 12 F9 */	bl PPCMfl2cr
+/* 80344B80 00341760  54 60 07 FE */	clrlwi r0, r3, 0x1f
+/* 80344B84 00341764  28 00 00 00 */	cmplwi r0, 0
+/* 80344B88 00341768  40 82 FF F4 */	bne lbl_80344B7C
+/* 80344B8C 0034176C  4B FF 12 E9 */	bl PPCMfl2cr
+/* 80344B90 00341770  54 63 02 D2 */	rlwinm r3, r3, 0, 0xb, 9
+/* 80344B94 00341774  4B FF 12 E9 */	bl PPCMtl2cr
+/* 80344B98 00341778  48 00 00 04 */	b lbl_80344B9C
+lbl_80344B9C:
+/* 80344B9C 0034177C  3C 60 80 40 */	lis r3, lbl_80401BF0@ha
+/* 80344BA0 00341780  3B E3 1B F0 */	addi r31, r3, lbl_80401BF0@l
+/* 80344BA4 00341784  48 00 00 04 */	b lbl_80344BA8
+lbl_80344BA8:
+/* 80344BA8 00341788  48 00 00 10 */	b lbl_80344BB8
+lbl_80344BAC:
+/* 80344BAC 0034178C  7F E3 FB 78 */	mr r3, r31
+/* 80344BB0 00341790  4C C6 31 82 */	crclr 6
+/* 80344BB4 00341794  4B FF 13 C5 */	bl DBPrintf
+lbl_80344BB8:
+/* 80344BB8 00341798  4B FF 12 BD */	bl PPCMfl2cr
+/* 80344BBC 0034179C  54 60 07 FE */	clrlwi r0, r3, 0x1f
+/* 80344BC0 003417A0  28 00 00 00 */	cmplwi r0, 0
+/* 80344BC4 003417A4  40 82 FF E8 */	bne lbl_80344BAC
+/* 80344BC8 003417A8  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80344BCC 003417AC  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80344BD0 003417B0  38 21 00 10 */	addi r1, r1, 0x10
+/* 80344BD4 003417B4  7C 08 03 A6 */	mtlr r0
+/* 80344BD8 003417B8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
