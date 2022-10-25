@@ -67,3 +67,33 @@ asm unk_t __DBVECTOR()
 /* 80343648 00340228  7C 7B 03 A6 */	mtspr 0x1b, r3
 } // clang-format on
 #pragma pop
+
+extern unk_t OSDefaultExceptionHandler();
+
+#pragma push
+asm unk_t __OSEVSetNumber()
+{ // clang-format off
+    nofralloc
+/* 8034364C 0034022C  38 60 00 00 */	li r3, 0
+/* 80343650 00340230  80 80 00 D4 */	lwz r4, 0xd4(r0)
+/* 80343654 00340234  54 A5 07 BD */	rlwinm. r5, r5, 0, 0x1e, 0x1e
+/* 80343658 00340238  40 82 00 14 */	bne lbl_8034366C
+/* 8034365C 0034023C  3C A0 80 34 */	lis r5, OSDefaultExceptionHandler@ha
+/* 80343660 00340240  38 A5 36 80 */	addi r5, r5, OSDefaultExceptionHandler@l
+/* 80343664 00340244  7C BA 03 A6 */	mtspr 0x1a, r5
+/* 80343668 00340248  4C 00 00 64 */	rfi 
+lbl_8034366C:
+/* 8034366C 0034024C  54 65 15 BA */	rlwinm r5, r3, 2, 0x16, 0x1d
+/* 80343670 00340250  80 A5 30 00 */	lwz r5, 0x3000(r5)
+/* 80343674 00340254  7C BA 03 A6 */	mtspr 0x1a, r5
+/* 80343678 00340258  4C 00 00 64 */	rfi 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t __OSEVEnd()
+{ // clang-format off
+    nofralloc
+/* 8034367C 0034025C  60 00 00 00 */	nop 
+} // clang-format on
+#pragma pop
