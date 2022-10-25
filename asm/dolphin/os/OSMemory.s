@@ -2,15 +2,6 @@
 
 .section .text  # 0x80347BE4 - 0x80347ED8
 
-.global RealMode
-RealMode:
-/* 80347DA4 00344984  54 63 00 BE */	clrlwi r3, r3, 2
-/* 80347DA8 00344988  7C 7A 03 A6 */	mtspr 0x1a, r3
-/* 80347DAC 0034498C  7C 60 00 A6 */	mfmsr r3
-/* 80347DB0 00344990  54 63 07 32 */	rlwinm r3, r3, 0, 0x1c, 0x19
-/* 80347DB4 00344994  7C 7B 03 A6 */	mtspr 0x1b, r3
-/* 80347DB8 00344998  4C 00 00 64 */	rfi 
-
 .global __OSInitMemoryProtection
 __OSInitMemoryProtection:
 /* 80347DBC 0034499C  7C 08 02 A6 */	mflr r0
