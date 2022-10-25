@@ -2,11 +2,6 @@
 
 .section .text  # 0x80344E30 - 0x803456A4
 
-.global OSGetStackPointer
-OSGetStackPointer:
-/* 8034524C 00341E2C  7C 23 0B 78 */	mr r3, r1
-/* 80345250 00341E30  4E 80 00 20 */	blr 
-
 .global OSClearContext
 OSClearContext:
 /* 80345254 00341E34  38 A0 00 00 */	li r5, 0

@@ -175,7 +175,7 @@ asm unk_t OSLoadFPUContext()
 #pragma pop
 
 #pragma push
-asm void OSSaveFPUContext(OSContext *)
+asm void OSSaveFPUContext(OSContext*)
 { // clang-format off
     nofralloc
 /* 80345084 00341C64  38 A3 00 00 */	addi r5, r3, 0
@@ -184,7 +184,7 @@ asm void OSSaveFPUContext(OSContext *)
 #pragma pop
 
 #pragma push
-asm void OSSetCurrentContext(OSContext *)
+asm void OSSetCurrentContext(OSContext*)
 { // clang-format off
     nofralloc
 /* 8034508C 00341C6C  3C 80 80 00 */	lis r4, 0x800000D4@ha
@@ -215,7 +215,7 @@ lbl_803450C4:
 #pragma pop
 
 #pragma push
-asm OSContext *OSGetCurrentContext(void)
+asm OSContext* OSGetCurrentContext(void)
 { // clang-format off
     nofralloc
 /* 803450E8 00341CC8  3C 60 80 00 */	lis r3, 0x800000D4@ha
@@ -226,7 +226,7 @@ asm OSContext *OSGetCurrentContext(void)
 
 // https://decomp.me/scratch/bNK5a // 0 (100%)
 #pragma push
-asm BOOL OSSaveContext(OSContext *)
+asm BOOL OSSaveContext(OSContext*)
 { // clang-format off
     nofralloc
 /* 803450F4 00341CD4  BD A3 00 34 */	stmw r13, 0x34(r3)
@@ -266,9 +266,8 @@ asm BOOL OSSaveContext(OSContext *)
 
 extern void lbl_80347374(void);
 
-
 #pragma push
-asm void OSLoadContext(OSContext *)
+asm void OSLoadContext(OSContext*)
 { // clang-format off
     nofralloc
 /* 80345174 00341D54  3C 80 80 34 */	lis r4, OSDisableInterrupts@ha
@@ -328,6 +327,17 @@ lbl_803451C8:
 /* 80345240 00341E20  80 83 00 10 */	lwz r4, 0x10(r3)
 /* 80345244 00341E24  80 63 00 0C */	lwz r3, 0xc(r3)
 /* 80345248 00341E28  4C 00 00 64 */	rfi 
+} // clang-format on
+#pragma pop
+
+
+
+#pragma push
+asm unk_t OSGetStackPointer()
+{ // clang-format off
+    nofralloc
+/* 8034524C 00341E2C  7C 23 0B 78 */	mr r3, r1
+/* 80345250 00341E30  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
 
