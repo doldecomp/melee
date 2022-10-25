@@ -32,3 +32,26 @@ lbl_803447FC:
 /* 80344808 003413E8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+// https://decomp.me/scratch/y3hWw
+#pragma push
+asm unk_t DCFlushRange()
+{ // clang-format off
+    nofralloc
+/* 8034480C 003413EC  28 04 00 00 */	cmplwi r4, 0
+/* 80344810 003413F0  4C 81 00 20 */	blelr 
+/* 80344814 003413F4  54 65 06 FF */	clrlwi. r5, r3, 0x1b
+/* 80344818 003413F8  41 82 00 08 */	beq lbl_80344820
+/* 8034481C 003413FC  38 84 00 20 */	addi r4, r4, 0x20
+lbl_80344820:
+/* 80344820 00341400  38 84 00 1F */	addi r4, r4, 0x1f
+/* 80344824 00341404  54 84 D9 7E */	srwi r4, r4, 5
+/* 80344828 00341408  7C 89 03 A6 */	mtctr r4
+lbl_8034482C:
+/* 8034482C 0034140C  7C 00 18 AC */	dcbf 0, r3
+/* 80344830 00341410  38 63 00 20 */	addi r3, r3, 0x20
+/* 80344834 00341414  42 00 FF F8 */	bdnz lbl_8034482C
+/* 80344838 00341418  44 00 00 02 */	sc 
+/* 8034483C 0034141C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
