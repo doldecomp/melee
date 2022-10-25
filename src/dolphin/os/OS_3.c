@@ -151,3 +151,15 @@ asm unk_t __OSPSInit()
 /* 80343708 003402E8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t __OSGetDIConfig()
+{ // clang-format off
+    nofralloc
+/* 8034370C 003402EC  3C 60 CC 00 */	lis r3, 0xCC006000@ha
+/* 80343710 003402F0  38 63 60 00 */	addi r3, r3, 0xCC006000@l
+/* 80343714 003402F4  80 03 00 24 */	lwz r0, 0x24(r3)
+/* 80343718 003402F8  54 03 06 3E */	clrlwi r3, r0, 0x18
+/* 8034371C 003402FC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
