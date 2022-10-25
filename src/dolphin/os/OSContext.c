@@ -164,8 +164,6 @@ lbl_80345078:
 } // clang-format on
 #pragma pop
 
-
-
 #pragma push
 asm unk_t OSLoadFPUContext()
 { // clang-format off
@@ -175,4 +173,14 @@ asm unk_t OSLoadFPUContext()
 } // clang-format on
 #pragma pop
 
+
+
+#pragma push
+asm unk_t OSSaveFPUContext()
+{ // clang-format off
+    nofralloc
+/* 80345084 00341C64  38 A3 00 00 */	addi r5, r3, 0
+/* 80345088 00341C68  4B FF FE CC */	b __OSSaveFPUContext
+} // clang-format on
+#pragma pop
 
