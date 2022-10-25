@@ -1601,8 +1601,6 @@ lbl_80346F30:
 } // clang-format on
 #pragma pop
 
-
-
 #pragma push
 asm unk_t EXIGetState()
 { // clang-format off
@@ -1613,6 +1611,25 @@ asm unk_t EXIGetState()
 /* 80346F5C 00343B3C  7C 60 1A 14 */	add r3, r0, r3
 /* 80346F60 00343B40  80 63 00 0C */	lwz r3, 0xc(r3)
 /* 80346F64 00343B44  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+
+
+#pragma push
+asm unk_t UnlockedHandler()
+{ // clang-format off
+    nofralloc
+/* 80346F68 00343B48  7C 08 02 A6 */	mflr r0
+/* 80346F6C 00343B4C  38 80 00 00 */	li r4, 0
+/* 80346F70 00343B50  90 01 00 04 */	stw r0, 4(r1)
+/* 80346F74 00343B54  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 80346F78 00343B58  38 A1 00 10 */	addi r5, r1, 0x10
+/* 80346F7C 00343B5C  48 00 00 15 */	bl EXIGetID
+/* 80346F80 00343B60  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 80346F84 00343B64  38 21 00 18 */	addi r1, r1, 0x18
+/* 80346F88 00343B68  7C 08 03 A6 */	mtlr r0
+/* 80346F8C 00343B6C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
 
