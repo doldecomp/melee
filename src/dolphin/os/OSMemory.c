@@ -1,6 +1,6 @@
+#include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMemory.h>
-#include <dolphin/os/OSError.h>
 
 u32 OSGetPhysicalMemSize(void)
 {
@@ -79,4 +79,41 @@ lbl_80347C94:
 } // clang-format on
 #pragma pop
 
-
+#pragma push
+asm unk_t Config24MB()
+{ // clang-format off
+    nofralloc
+/* 80347CA4 00344884  38 E0 00 00 */	li r7, 0
+/* 80347CA8 00344888  3C 80 00 00 */	lis r4, 0x00000002@ha
+/* 80347CAC 0034488C  38 84 00 02 */	addi r4, r4, 0x00000002@l
+/* 80347CB0 00344890  3C 60 80 00 */	lis r3, 0x800001FF@ha
+/* 80347CB4 00344894  38 63 01 FF */	addi r3, r3, 0x800001FF@l
+/* 80347CB8 00344898  3C C0 01 00 */	lis r6, 0x01000002@ha
+/* 80347CBC 0034489C  38 C6 00 02 */	addi r6, r6, 0x01000002@l
+/* 80347CC0 003448A0  3C A0 81 00 */	lis r5, 0x810000FF@ha
+/* 80347CC4 003448A4  38 A5 00 FF */	addi r5, r5, 0x810000FF@l
+/* 80347CC8 003448A8  4C 00 01 2C */	isync 
+/* 80347CCC 003448AC  7C F8 83 A6 */	mtdbatu 0, r7
+/* 80347CD0 003448B0  7C 99 83 A6 */	mtdbatl 0, r4
+/* 80347CD4 003448B4  7C 78 83 A6 */	mtdbatu 0, r3
+/* 80347CD8 003448B8  4C 00 01 2C */	isync 
+/* 80347CDC 003448BC  7C F0 83 A6 */	mtibatu 0, r7
+/* 80347CE0 003448C0  7C 91 83 A6 */	mtibatl 0, r4
+/* 80347CE4 003448C4  7C 70 83 A6 */	mtibatu 0, r3
+/* 80347CE8 003448C8  4C 00 01 2C */	isync 
+/* 80347CEC 003448CC  7C FC 83 A6 */	mtdbatu 2, r7
+/* 80347CF0 003448D0  7C DD 83 A6 */	mtdbatl 2, r6
+/* 80347CF4 003448D4  7C BC 83 A6 */	mtdbatu 2, r5
+/* 80347CF8 003448D8  4C 00 01 2C */	isync 
+/* 80347CFC 003448DC  7C F4 83 A6 */	mtibatu 2, r7
+/* 80347D00 003448E0  7C D5 83 A6 */	mtibatl 2, r6
+/* 80347D04 003448E4  7C B4 83 A6 */	mtibatu 2, r5
+/* 80347D08 003448E8  4C 00 01 2C */	isync 
+/* 80347D0C 003448EC  7C 60 00 A6 */	mfmsr r3
+/* 80347D10 003448F0  60 63 00 30 */	ori r3, r3, 0x30
+/* 80347D14 003448F4  7C 7B 03 A6 */	mtspr 0x1b, r3
+/* 80347D18 003448F8  7C 68 02 A6 */	mflr r3
+/* 80347D1C 003448FC  7C 7A 03 A6 */	mtspr 0x1a, r3
+/* 80347D20 00344900  4C 00 00 64 */	rfi 
+} // clang-format on
+#pragma pop
