@@ -1,5 +1,6 @@
-#include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSMemory.h>
+#include <dolphin/os/OSError.h>
 
 u32 OSGetPhysicalMemSize(void)
 {
@@ -38,3 +39,44 @@ lbl_80347C24:
 /* 80347C34 00344814  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern OSErrorHandler __OSErrorTable[];
+extern unk_t __OSUnhandledException();
+
+#pragma push
+asm unk_t MEMIntrruptHandler()
+{ // clang-format off
+    nofralloc
+/* 80347C38 00344818  7C 08 02 A6 */	mflr r0
+/* 80347C3C 0034481C  3C 60 CC 00 */	lis r3, 0xCC004000@ha
+/* 80347C40 00344820  90 01 00 04 */	stw r0, 4(r1)
+/* 80347C44 00344824  39 03 40 00 */	addi r8, r3, 0xCC004000@l
+/* 80347C48 00344828  38 00 00 00 */	li r0, 0
+/* 80347C4C 0034482C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 80347C50 00344830  A0 E3 40 24 */	lhz r7, 0x4024(r3)
+/* 80347C54 00344834  3C 60 80 4A */	lis r3, __OSErrorTable@ha
+/* 80347C58 00344838  A0 C8 00 22 */	lhz r6, 0x22(r8)
+/* 80347C5C 0034483C  38 63 7C 40 */	addi r3, r3, __OSErrorTable@l
+/* 80347C60 00344840  A0 A8 00 1E */	lhz r5, 0x1e(r8)
+/* 80347C64 00344844  50 E6 81 9E */	rlwimi r6, r7, 0x10, 6, 0xf
+/* 80347C68 00344848  B0 08 00 20 */	sth r0, 0x20(r8)
+/* 80347C6C 0034484C  81 83 00 3C */	lwz r12, 0x3c(r3)
+/* 80347C70 00344850  28 0C 00 00 */	cmplwi r12, 0
+/* 80347C74 00344854  41 82 00 18 */	beq lbl_80347C8C
+/* 80347C78 00344858  7D 88 03 A6 */	mtlr r12
+/* 80347C7C 0034485C  38 60 00 0F */	li r3, 0xf
+/* 80347C80 00344860  4C C6 31 82 */	crclr 6
+/* 80347C84 00344864  4E 80 00 21 */	blrl 
+/* 80347C88 00344868  48 00 00 0C */	b lbl_80347C94
+lbl_80347C8C:
+/* 80347C8C 0034486C  38 60 00 0F */	li r3, 0xf
+/* 80347C90 00344870  4B FF DB E1 */	bl __OSUnhandledException
+lbl_80347C94:
+/* 80347C94 00344874  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 80347C98 00344878  38 21 00 08 */	addi r1, r1, 8
+/* 80347C9C 0034487C  7C 08 03 A6 */	mtlr r0
+/* 80347CA0 00344880  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+
