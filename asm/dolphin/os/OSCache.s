@@ -2,25 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240
 
-.global ICInvalidateRange
-ICInvalidateRange:
-/* 803448D4 003414B4  28 04 00 00 */	cmplwi r4, 0
-/* 803448D8 003414B8  4C 81 00 20 */	blelr 
-/* 803448DC 003414BC  54 65 06 FF */	clrlwi. r5, r3, 0x1b
-/* 803448E0 003414C0  41 82 00 08 */	beq lbl_803448E8
-/* 803448E4 003414C4  38 84 00 20 */	addi r4, r4, 0x20
-lbl_803448E8:
-/* 803448E8 003414C8  38 84 00 1F */	addi r4, r4, 0x1f
-/* 803448EC 003414CC  54 84 D9 7E */	srwi r4, r4, 5
-/* 803448F0 003414D0  7C 89 03 A6 */	mtctr r4
-lbl_803448F4:
-/* 803448F4 003414D4  7C 00 1F AC */	icbi 0, r3
-/* 803448F8 003414D8  38 63 00 20 */	addi r3, r3, 0x20
-/* 803448FC 003414DC  42 00 FF F8 */	bdnz lbl_803448F4
-/* 80344900 003414E0  7C 00 04 AC */	sync 0
-/* 80344904 003414E4  4C 00 01 2C */	isync 
-/* 80344908 003414E8  4E 80 00 20 */	blr 
-
 .global ICFlashInvalidate
 ICFlashInvalidate:
 /* 8034490C 003414EC  7C 70 FA A6 */	mfspr r3, 0x3f0
