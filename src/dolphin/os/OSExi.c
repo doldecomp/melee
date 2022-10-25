@@ -83,7 +83,6 @@ lbl_80345B50:
 } // clang-format on
 #pragma pop
 
-
 extern unk_t EXIClearInterrupts();
 
 #pragma push
@@ -253,6 +252,63 @@ lbl_80345DAC:
 /* 80345DB4 00342994  38 21 00 58 */	addi r1, r1, 0x58
 /* 80345DB8 00342998  7C 08 03 A6 */	mtlr r0
 /* 80345DBC 0034299C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+
+extern unk_t EXISync();
+
+#pragma push
+asm unk_t EXIImmEx()
+{ // clang-format off
+    nofralloc
+/* 80345DC0 003429A0  7C 08 02 A6 */	mflr r0
+/* 80345DC4 003429A4  90 01 00 04 */	stw r0, 4(r1)
+/* 80345DC8 003429A8  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 80345DCC 003429AC  BF 61 00 1C */	stmw r27, 0x1c(r1)
+/* 80345DD0 003429B0  3B 63 00 00 */	addi r27, r3, 0
+/* 80345DD4 003429B4  3B 84 00 00 */	addi r28, r4, 0
+/* 80345DD8 003429B8  3B A5 00 00 */	addi r29, r5, 0
+/* 80345DDC 003429BC  3B C6 00 00 */	addi r30, r6, 0
+/* 80345DE0 003429C0  48 00 00 60 */	b lbl_80345E40
+lbl_80345DE4:
+/* 80345DE4 003429C4  2C 1D 00 04 */	cmpwi r29, 4
+/* 80345DE8 003429C8  40 80 00 0C */	bge lbl_80345DF4
+/* 80345DEC 003429CC  7F BF EB 78 */	mr r31, r29
+/* 80345DF0 003429D0  48 00 00 08 */	b lbl_80345DF8
+lbl_80345DF4:
+/* 80345DF4 003429D4  3B E0 00 04 */	li r31, 4
+lbl_80345DF8:
+/* 80345DF8 003429D8  38 BF 00 00 */	addi r5, r31, 0
+/* 80345DFC 003429DC  38 7B 00 00 */	addi r3, r27, 0
+/* 80345E00 003429E0  38 9C 00 00 */	addi r4, r28, 0
+/* 80345E04 003429E4  38 DE 00 00 */	addi r6, r30, 0
+/* 80345E08 003429E8  38 E0 00 00 */	li r7, 0
+/* 80345E0C 003429EC  4B FF FD 59 */	bl EXIImm
+/* 80345E10 003429F0  2C 03 00 00 */	cmpwi r3, 0
+/* 80345E14 003429F4  40 82 00 0C */	bne lbl_80345E20
+/* 80345E18 003429F8  38 60 00 00 */	li r3, 0
+/* 80345E1C 003429FC  48 00 00 30 */	b lbl_80345E4C
+lbl_80345E20:
+/* 80345E20 00342A00  7F 63 DB 78 */	mr r3, r27
+/* 80345E24 00342A04  48 00 01 29 */	bl EXISync
+/* 80345E28 00342A08  2C 03 00 00 */	cmpwi r3, 0
+/* 80345E2C 00342A0C  40 82 00 0C */	bne lbl_80345E38
+/* 80345E30 00342A10  38 60 00 00 */	li r3, 0
+/* 80345E34 00342A14  48 00 00 18 */	b lbl_80345E4C
+lbl_80345E38:
+/* 80345E38 00342A18  7F 9C FA 14 */	add r28, r28, r31
+/* 80345E3C 00342A1C  7F BF E8 50 */	subf r29, r31, r29
+lbl_80345E40:
+/* 80345E40 00342A20  2C 1D 00 00 */	cmpwi r29, 0
+/* 80345E44 00342A24  40 82 FF A0 */	bne lbl_80345DE4
+/* 80345E48 00342A28  38 60 00 01 */	li r3, 1
+lbl_80345E4C:
+/* 80345E4C 00342A2C  BB 61 00 1C */	lmw r27, 0x1c(r1)
+/* 80345E50 00342A30  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 80345E54 00342A34  38 21 00 30 */	addi r1, r1, 0x30
+/* 80345E58 00342A38  7C 08 03 A6 */	mtlr r0
+/* 80345E5C 00342A3C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
 
