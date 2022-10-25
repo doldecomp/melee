@@ -56,3 +56,14 @@ asm unk_t OSExceptionVector()
 /* 80343638 00340218  7C 65 1B 78 */	mr r5, r3
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t __DBVECTOR()
+{ // clang-format off
+    nofralloc
+/* 8034363C 0034021C  60 00 00 00 */	nop 
+/* 80343640 00340220  7C 60 00 A6 */	mfmsr r3
+/* 80343644 00340224  60 63 00 30 */	ori r3, r3, 0x30
+/* 80343648 00340228  7C 7B 03 A6 */	mtspr 0x1b, r3
+} // clang-format on
+#pragma pop
