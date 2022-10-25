@@ -1,6 +1,14 @@
 #include <dolphin/types.h>
 #include <dolphin/base/PPCArch.h>
 
+#pragma push
+asm unk_t __OSDBJump()
+{ // clang-format off
+    nofralloc
+/* 803435B0 00340190  48 00 00 63 */	bla 0x60
+} // clang-format on
+#pragma pop
+
 extern unk_t OSExceptionTable;
 
 #pragma push
