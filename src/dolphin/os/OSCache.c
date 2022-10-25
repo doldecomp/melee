@@ -142,3 +142,14 @@ lbl_803448F4:
 /* 80344908 003414E8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t ICFlashInvalidate()
+{ // clang-format off
+    nofralloc
+/* 8034490C 003414EC  7C 70 FA A6 */	mfspr r3, 0x3f0
+/* 80344910 003414F0  60 63 08 00 */	ori r3, r3, 0x800
+/* 80344914 003414F4  7C 70 FB A6 */	mtspr 0x3f0, r3
+/* 80344918 003414F8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

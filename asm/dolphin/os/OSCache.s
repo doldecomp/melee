@@ -2,13 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240
 
-.global ICFlashInvalidate
-ICFlashInvalidate:
-/* 8034490C 003414EC  7C 70 FA A6 */	mfspr r3, 0x3f0
-/* 80344910 003414F0  60 63 08 00 */	ori r3, r3, 0x800
-/* 80344914 003414F4  7C 70 FB A6 */	mtspr 0x3f0, r3
-/* 80344918 003414F8  4E 80 00 20 */	blr 
-
 .global ICEnable
 ICEnable:
 /* 8034491C 003414FC  4C 00 01 2C */	isync 
