@@ -97,3 +97,33 @@ asm unk_t __OSEVEnd()
 /* 8034367C 0034025C  60 00 00 00 */	nop 
 } // clang-format on
 #pragma pop
+
+extern unk_t __OSUnhandledException();
+
+#pragma push
+asm unk_t OSDefaultExceptionHandler()
+{ // clang-format off
+    nofralloc
+/* 80343680 00340260  90 04 00 00 */	stw r0, 0(r4)
+/* 80343684 00340264  90 24 00 04 */	stw r1, 4(r4)
+/* 80343688 00340268  90 44 00 08 */	stw r2, 8(r4)
+/* 8034368C 0034026C  BC C4 00 18 */	stmw r6, 0x18(r4)
+/* 80343690 00340270  7C 11 E2 A6 */	mfspr r0, 0x391
+/* 80343694 00340274  90 04 01 A8 */	stw r0, 0x1a8(r4)
+/* 80343698 00340278  7C 12 E2 A6 */	mfspr r0, 0x392
+/* 8034369C 0034027C  90 04 01 AC */	stw r0, 0x1ac(r4)
+/* 803436A0 00340280  7C 13 E2 A6 */	mfspr r0, 0x393
+/* 803436A4 00340284  90 04 01 B0 */	stw r0, 0x1b0(r4)
+/* 803436A8 00340288  7C 14 E2 A6 */	mfspr r0, 0x394
+/* 803436AC 0034028C  90 04 01 B4 */	stw r0, 0x1b4(r4)
+/* 803436B0 00340290  7C 15 E2 A6 */	mfspr r0, 0x395
+/* 803436B4 00340294  90 04 01 B8 */	stw r0, 0x1b8(r4)
+/* 803436B8 00340298  7C 16 E2 A6 */	mfspr r0, 0x396
+/* 803436BC 0034029C  90 04 01 BC */	stw r0, 0x1bc(r4)
+/* 803436C0 003402A0  7C 17 E2 A6 */	mfspr r0, 0x397
+/* 803436C4 003402A4  90 04 01 C0 */	stw r0, 0x1c0(r4)
+/* 803436C8 003402A8  7C B2 02 A6 */	mfdsisr r5
+/* 803436CC 003402AC  7C D3 02 A6 */	mfdar r6
+/* 803436D0 003402B0  48 00 21 A0 */	b __OSUnhandledException
+} // clang-format on
+#pragma pop
