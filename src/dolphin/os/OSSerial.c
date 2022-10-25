@@ -923,3 +923,15 @@ lbl_8034A0AC:
 /* 8034A0C8 00346CA8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t SISetCommand()
+{ // clang-format off
+    nofralloc
+/* 8034A0CC 00346CAC  1C 03 00 0C */	mulli r0, r3, 0xc
+/* 8034A0D0 00346CB0  3C 60 CC 00 */	lis r3, 0xCC006400@ha
+/* 8034A0D4 00346CB4  38 63 64 00 */	addi r3, r3, 0xCC006400@l
+/* 8034A0D8 00346CB8  7C 83 01 2E */	stwx r4, r3, r0
+/* 8034A0DC 00346CBC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
