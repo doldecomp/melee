@@ -1,4 +1,5 @@
 #include <dolphin/types.h>
+#include <dolphin/base/PPCArch.h>
 
 extern unk_t OSExceptionTable;
 
@@ -125,5 +126,28 @@ asm unk_t OSDefaultExceptionHandler()
 /* 803436C8 003402A8  7C B2 02 A6 */	mfdsisr r5
 /* 803436CC 003402AC  7C D3 02 A6 */	mfdar r6
 /* 803436D0 003402B0  48 00 21 A0 */	b __OSUnhandledException
+} // clang-format on
+#pragma pop
+
+extern unk_t ICFlashInvalidate();
+
+#pragma push
+asm unk_t __OSPSInit()
+{ // clang-format off
+    nofralloc
+/* 803436D4 003402B4  7C 08 02 A6 */	mflr r0
+/* 803436D8 003402B8  90 01 00 04 */	stw r0, 4(r1)
+/* 803436DC 003402BC  94 21 FF F8 */	stwu r1, -8(r1)
+/* 803436E0 003402C0  4B FF 27 C9 */	bl PPCMfhid2
+/* 803436E4 003402C4  64 63 A0 00 */	oris r3, r3, 0xa000
+/* 803436E8 003402C8  4B FF 27 C9 */	bl PPCMthid2
+/* 803436EC 003402CC  48 00 12 21 */	bl ICFlashInvalidate
+/* 803436F0 003402D0  7C 00 04 AC */	sync
+/* 803436F4 003402D4  38 60 00 00 */	li r3, 0
+/* 803436F8 003402D8  7C 70 E3 A6 */	mtspr 0x390, r3
+/* 803436FC 003402DC  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 80343700 003402E0  38 21 00 08 */	addi r1, r1, 8
+/* 80343704 003402E4  7C 08 03 A6 */	mtlr r0
+/* 80343708 003402E8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
