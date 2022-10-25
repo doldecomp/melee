@@ -1,4 +1,6 @@
 #include <dolphin/types.h>
+#include <Runtime/__mem.h>
+#include <dolphin/os/OSArena.h>
 
 extern unk_t BootInfo;
 
@@ -20,3 +22,84 @@ lbl_80342EB8:
 /* 80342EB8 0033FA98  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t OSGetResetCode();
+
+#pragma push
+asm unk_t ClearArena()
+{ // clang-format off
+    nofralloc
+/* 80342EBC 0033FA9C  7C 08 02 A6 */	mflr r0
+/* 80342EC0 0033FAA0  90 01 00 04 */	stw r0, 4(r1)
+/* 80342EC4 0033FAA4  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80342EC8 0033FAA8  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80342ECC 0033FAAC  93 C1 00 08 */	stw r30, 8(r1)
+/* 80342ED0 0033FAB0  48 00 57 E5 */	bl OSGetResetCode
+/* 80342ED4 0033FAB4  3C 03 80 00 */	addis r0, r3, 0x8000
+/* 80342ED8 0033FAB8  28 00 00 00 */	cmplwi r0, 0
+/* 80342EDC 0033FABC  41 82 00 28 */	beq lbl_80342F04
+/* 80342EE0 0033FAC0  48 00 15 E9 */	bl OSGetArenaHi
+/* 80342EE4 0033FAC4  7C 7F 1B 78 */	mr r31, r3
+/* 80342EE8 0033FAC8  48 00 15 E9 */	bl OSGetArenaLo
+/* 80342EEC 0033FACC  7F E3 F8 50 */	subf r31, r3, r31
+/* 80342EF0 0033FAD0  48 00 15 E1 */	bl OSGetArenaLo
+/* 80342EF4 0033FAD4  7F E5 FB 78 */	mr r5, r31
+/* 80342EF8 0033FAD8  38 80 00 00 */	li r4, 0
+/* 80342EFC 0033FADC  4B CC 02 05 */	bl memset
+/* 80342F00 0033FAE0  48 00 00 B0 */	b lbl_80342FB0
+lbl_80342F04:
+/* 80342F04 0033FAE4  3C 60 81 30 */	lis r3, 0x812FDFF0@ha
+/* 80342F08 0033FAE8  83 E3 DF F0 */	lwz r31, 0x812FDFF0@l(r3)
+/* 80342F0C 0033FAEC  83 C3 DF EC */	lwz r30, -0x2014(r3)
+/* 80342F10 0033FAF0  28 1F 00 00 */	cmplwi r31, 0
+/* 80342F14 0033FAF4  40 82 00 28 */	bne lbl_80342F3C
+/* 80342F18 0033FAF8  48 00 15 B1 */	bl OSGetArenaHi
+/* 80342F1C 0033FAFC  7C 7F 1B 78 */	mr r31, r3
+/* 80342F20 0033FB00  48 00 15 B1 */	bl OSGetArenaLo
+/* 80342F24 0033FB04  7F E3 F8 50 */	subf r31, r3, r31
+/* 80342F28 0033FB08  48 00 15 A9 */	bl OSGetArenaLo
+/* 80342F2C 0033FB0C  7F E5 FB 78 */	mr r5, r31
+/* 80342F30 0033FB10  38 80 00 00 */	li r4, 0
+/* 80342F34 0033FB14  4B CC 01 CD */	bl memset
+/* 80342F38 0033FB18  48 00 00 78 */	b lbl_80342FB0
+lbl_80342F3C:
+/* 80342F3C 0033FB1C  48 00 15 95 */	bl OSGetArenaLo
+/* 80342F40 0033FB20  7C 03 F8 40 */	cmplw r3, r31
+/* 80342F44 0033FB24  40 80 00 6C */	bge lbl_80342FB0
+/* 80342F48 0033FB28  48 00 15 81 */	bl OSGetArenaHi
+/* 80342F4C 0033FB2C  7C 03 F8 40 */	cmplw r3, r31
+/* 80342F50 0033FB30  41 81 00 28 */	bgt lbl_80342F78
+/* 80342F54 0033FB34  48 00 15 75 */	bl OSGetArenaHi
+/* 80342F58 0033FB38  7C 7F 1B 78 */	mr r31, r3
+/* 80342F5C 0033FB3C  48 00 15 75 */	bl OSGetArenaLo
+/* 80342F60 0033FB40  7F E3 F8 50 */	subf r31, r3, r31
+/* 80342F64 0033FB44  48 00 15 6D */	bl OSGetArenaLo
+/* 80342F68 0033FB48  7F E5 FB 78 */	mr r5, r31
+/* 80342F6C 0033FB4C  38 80 00 00 */	li r4, 0
+/* 80342F70 0033FB50  4B CC 01 91 */	bl memset
+/* 80342F74 0033FB54  48 00 00 3C */	b lbl_80342FB0
+lbl_80342F78:
+/* 80342F78 0033FB58  48 00 15 59 */	bl OSGetArenaLo
+/* 80342F7C 0033FB5C  7F E3 F8 50 */	subf r31, r3, r31
+/* 80342F80 0033FB60  48 00 15 51 */	bl OSGetArenaLo
+/* 80342F84 0033FB64  7F E5 FB 78 */	mr r5, r31
+/* 80342F88 0033FB68  38 80 00 00 */	li r4, 0
+/* 80342F8C 0033FB6C  4B CC 01 75 */	bl memset
+/* 80342F90 0033FB70  48 00 15 39 */	bl OSGetArenaHi
+/* 80342F94 0033FB74  7C 03 F0 40 */	cmplw r3, r30
+/* 80342F98 0033FB78  40 81 00 18 */	ble lbl_80342FB0
+/* 80342F9C 0033FB7C  48 00 15 2D */	bl OSGetArenaHi
+/* 80342FA0 0033FB80  7C BE 18 50 */	subf r5, r30, r3
+/* 80342FA4 0033FB84  7F C3 F3 78 */	mr r3, r30
+/* 80342FA8 0033FB88  38 80 00 00 */	li r4, 0
+/* 80342FAC 0033FB8C  4B CC 01 55 */	bl memset
+lbl_80342FB0:
+/* 80342FB0 0033FB90  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80342FB4 0033FB94  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80342FB8 0033FB98  83 C1 00 08 */	lwz r30, 8(r1)
+/* 80342FBC 0033FB9C  7C 08 03 A6 */	mtlr r0
+/* 80342FC0 0033FBA0  38 21 00 10 */	addi r1, r1, 0x10
+/* 80342FC4 0033FBA4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
