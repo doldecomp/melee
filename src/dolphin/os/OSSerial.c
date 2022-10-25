@@ -1182,3 +1182,48 @@ lbl_8034A3D0:
 /* 8034A3EC 00346FCC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t Alarm;
+
+#pragma push
+asm unk_t AlarmHandler()
+{ // clang-format off
+    nofralloc
+/* 8034A3F0 00346FD0  7C 08 02 A6 */	mflr r0
+/* 8034A3F4 00346FD4  3C 80 80 4A */	lis r4, Alarm@ha
+/* 8034A3F8 00346FD8  90 01 00 04 */	stw r0, 4(r1)
+/* 8034A3FC 00346FDC  38 04 7E 38 */	addi r0, r4, Alarm@l
+/* 8034A400 00346FE0  3C 80 66 66 */	lis r4, 0x66666667@ha
+/* 8034A404 00346FE4  7C 00 18 50 */	subf r0, r0, r3
+/* 8034A408 00346FE8  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8034A40C 00346FEC  38 64 66 67 */	addi r3, r4, 0x66666667@l
+/* 8034A410 00346FF0  7C 03 00 96 */	mulhw r0, r3, r0
+/* 8034A414 00346FF4  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8034A418 00346FF8  7C 00 26 70 */	srawi r0, r0, 4
+/* 8034A41C 00346FFC  54 03 0F FE */	srwi r3, r0, 0x1f
+/* 8034A420 00347000  7C 00 1A 14 */	add r0, r0, r3
+/* 8034A424 00347004  3C 60 80 4A */	lis r3, Packet@ha
+/* 8034A428 00347008  54 04 28 34 */	slwi r4, r0, 5
+/* 8034A42C 0034700C  38 03 7D B8 */	addi r0, r3, Packet@l
+/* 8034A430 00347010  7F E0 22 14 */	add r31, r0, r4
+/* 8034A434 00347014  80 7F 00 00 */	lwz r3, 0(r31)
+/* 8034A438 00347018  2C 03 FF FF */	cmpwi r3, -1
+/* 8034A43C 0034701C  41 82 00 2C */	beq lbl_8034A468
+/* 8034A440 00347020  80 9F 00 04 */	lwz r4, 4(r31)
+/* 8034A444 00347024  80 BF 00 08 */	lwz r5, 8(r31)
+/* 8034A448 00347028  80 DF 00 0C */	lwz r6, 0xc(r31)
+/* 8034A44C 0034702C  80 FF 00 10 */	lwz r7, 0x10(r31)
+/* 8034A450 00347030  81 1F 00 14 */	lwz r8, 0x14(r31)
+/* 8034A454 00347034  4B FF F9 F1 */	bl __SITransfer
+/* 8034A458 00347038  2C 03 00 00 */	cmpwi r3, 0
+/* 8034A45C 0034703C  41 82 00 0C */	beq lbl_8034A468
+/* 8034A460 00347040  38 00 FF FF */	li r0, -1
+/* 8034A464 00347044  90 1F 00 00 */	stw r0, 0(r31)
+lbl_8034A468:
+/* 8034A468 00347048  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8034A46C 0034704C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8034A470 00347050  38 21 00 20 */	addi r1, r1, 0x20
+/* 8034A474 00347054  7C 08 03 A6 */	mtlr r0
+/* 8034A478 00347058  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
