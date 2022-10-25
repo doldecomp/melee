@@ -1,7 +1,5 @@
 .include "macros.inc"
 
-.section .text  # 0x803486E4 - 0x80348A8C
-
 .section .sbss
 
 .global lbl_804D73A8
