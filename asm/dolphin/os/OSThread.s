@@ -2,13 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240 
 
-.global OSInitThreadQueue
-OSInitThreadQueue:
-/* 8034AD2C 0034790C  38 00 00 00 */	li r0, 0
-/* 8034AD30 00347910  90 03 00 04 */	stw r0, 4(r3)
-/* 8034AD34 00347914  90 03 00 00 */	stw r0, 0(r3)
-/* 8034AD38 00347918  4E 80 00 20 */	blr 
-
 # https://decomp.me/scratch/EPwIs
 .global OSGetCurrentThread
 OSGetCurrentThread:
