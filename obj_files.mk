@@ -584,7 +584,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/OS_1.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OS_2.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OS_3.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OS_4.s.o\
+	$(BUILD_DIR)/asm/dolphin/os/OS_data.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSAlarm.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSAlloc.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSArena.c.o\
