@@ -590,7 +590,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/OSCache.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSCache_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSContext.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSContext.s.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSContext_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSError.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSError.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSExi.s.o\

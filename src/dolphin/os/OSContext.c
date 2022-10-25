@@ -611,8 +611,6 @@ lbl_803455C8:
 } // clang-format on
 #pragma pop
 
-
-
 #pragma push
 asm unk_t OSSwitchFPUContext()
 { // clang-format off
@@ -652,6 +650,35 @@ lbl_8034561C:
 /* 80345654 00342234  80 64 00 0C */	lwz r3, 0xc(r4)
 /* 80345658 00342238  80 84 00 10 */	lwz r4, 0x10(r4)
 /* 8034565C 0034223C  4C 00 00 64 */	rfi 
+} // clang-format on
+#pragma pop
+
+extern char* lbl_80401FD4;
+extern unk_t DBPrintf();
+extern unk_t __OSSetExceptionHandler();
+
+#pragma push
+asm void __OSContextInit(void)
+{ // clang-format off
+    nofralloc
+/* 80345660 00342240  7C 08 02 A6 */	mflr r0
+/* 80345664 00342244  90 01 00 04 */	stw r0, 4(r1)
+/* 80345668 00342248  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8034566C 0034224C  3C 60 80 34 */	lis r3, OSSwitchFPUContext@ha
+/* 80345670 00342250  38 83 55 DC */	addi r4, r3, OSSwitchFPUContext@l
+/* 80345674 00342254  38 60 00 07 */	li r3, 7
+/* 80345678 00342258  4B FF DF 3D */	bl __OSSetExceptionHandler
+/* 8034567C 0034225C  38 00 00 00 */	li r0, 0
+/* 80345680 00342260  4C C6 31 82 */	crclr 6
+/* 80345684 00342264  3C 80 80 00 */	lis r4, 0x800000D8@ha
+/* 80345688 00342268  3C 60 80 40 */	lis r3, lbl_80401FD4@ha
+/* 8034568C 0034226C  90 04 00 D8 */	stw r0, 0x800000D8@l(r4)
+/* 80345690 00342270  38 63 1F D4 */	addi r3, r3, lbl_80401FD4@l
+/* 80345694 00342274  4B FF 08 E5 */	bl DBPrintf
+/* 80345698 00342278  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8034569C 0034227C  38 21 00 08 */	addi r1, r1, 8
+/* 803456A0 00342280  7C 08 03 A6 */	mtlr r0
+/* 803456A4 00342284  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
 
