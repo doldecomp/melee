@@ -336,3 +336,18 @@ lbl_80344B00:
 /* 80344B28 00341708  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t LCQueueWait()
+{ // clang-format off
+    nofralloc
+/* 80344B2C 0034170C  38 63 00 01 */	addi r3, r3, 1
+lbl_80344B30:
+/* 80344B30 00341710  7C 98 E2 A6 */	mfspr r4, 0x398
+/* 80344B34 00341714  54 84 47 3E */	rlwinm r4, r4, 8, 0x1c, 0x1f
+/* 80344B38 00341718  7D 04 18 00 */	cmpw cr2, r4, r3
+/* 80344B3C 0034171C  40 88 FF F4 */	bge cr2, lbl_80344B30
+/* 80344B40 00341720  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
