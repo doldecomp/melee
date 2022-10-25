@@ -946,3 +946,34 @@ asm unk_t SITransferCommands()
 /* 8034A0EC 00346CCC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t SISetXY()
+{ // clang-format off
+    nofralloc
+/* 8034A0F0 00346CD0  7C 08 02 A6 */	mflr r0
+/* 8034A0F4 00346CD4  90 01 00 04 */	stw r0, 4(r1)
+/* 8034A0F8 00346CD8  54 80 40 2E */	slwi r0, r4, 8
+/* 8034A0FC 00346CDC  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8034A100 00346CE0  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8034A104 00346CE4  54 7F 80 1E */	slwi r31, r3, 0x10
+/* 8034A108 00346CE8  7F FF 03 78 */	or r31, r31, r0
+/* 8034A10C 00346CEC  4B FF D2 59 */	bl OSDisableInterrupts
+/* 8034A110 00346CF0  3C 80 80 40 */	lis r4, lbl_80402358@ha
+/* 8034A114 00346CF4  38 84 23 58 */	addi r4, r4, lbl_80402358@l
+/* 8034A118 00346CF8  84 04 00 04 */	lwzu r0, 4(r4)
+/* 8034A11C 00346CFC  54 00 06 0A */	rlwinm r0, r0, 0, 0x18, 5
+/* 8034A120 00346D00  90 04 00 00 */	stw r0, 0(r4)
+/* 8034A124 00346D04  80 04 00 00 */	lwz r0, 0(r4)
+/* 8034A128 00346D08  7C 00 FB 78 */	or r0, r0, r31
+/* 8034A12C 00346D0C  90 04 00 00 */	stw r0, 0(r4)
+/* 8034A130 00346D10  83 E4 00 00 */	lwz r31, 0(r4)
+/* 8034A134 00346D14  4B FF D2 59 */	bl OSRestoreInterrupts
+/* 8034A138 00346D18  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8034A13C 00346D1C  7F E3 FB 78 */	mr r3, r31
+/* 8034A140 00346D20  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8034A144 00346D24  38 21 00 18 */	addi r1, r1, 0x18
+/* 8034A148 00346D28  7C 08 03 A6 */	mtlr r0
+/* 8034A14C 00346D2C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
