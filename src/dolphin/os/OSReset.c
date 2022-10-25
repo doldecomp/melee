@@ -4,7 +4,7 @@
 
 /* 0034502C */ extern void OSResetSystem(BOOL reset, u32 resetCode, BOOL forceMenu);
 
-extern unk_t ResetFunctionQueue;
+static OSThreadQueue ResetFunctionQueue;
 
 #pragma push
 asm unk_t OSRegisterResetFunction()
