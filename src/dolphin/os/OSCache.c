@@ -77,3 +77,24 @@ lbl_80344860:
 /* 80344870 00341450  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t DCFlushRangeNoSync()
+{ // clang-format off
+    nofralloc
+/* 80344874 00341454  28 04 00 00 */	cmplwi r4, 0
+/* 80344878 00341458  4C 81 00 20 */	blelr 
+/* 8034487C 0034145C  54 65 06 FF */	clrlwi. r5, r3, 0x1b
+/* 80344880 00341460  41 82 00 08 */	beq lbl_80344888
+/* 80344884 00341464  38 84 00 20 */	addi r4, r4, 0x20
+lbl_80344888:
+/* 80344888 00341468  38 84 00 1F */	addi r4, r4, 0x1f
+/* 8034488C 0034146C  54 84 D9 7E */	srwi r4, r4, 5
+/* 80344890 00341470  7C 89 03 A6 */	mtctr r4
+lbl_80344894:
+/* 80344894 00341474  7C 00 18 AC */	dcbf 0, r3
+/* 80344898 00341478  38 63 00 20 */	addi r3, r3, 0x20
+/* 8034489C 0034147C  42 00 FF F8 */	bdnz lbl_80344894
+/* 803448A0 00341480  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
