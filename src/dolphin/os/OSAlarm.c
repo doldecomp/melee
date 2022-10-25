@@ -4,7 +4,7 @@
 #include <dolphin/os/OSThread.h>
 
 extern unk_t DecrementerExceptionHandler();
-extern unk_t AlarmQueue;
+static OSThreadQueue AlarmQueue;
 extern unk_t __OSSetExceptionHandler();
 extern unk_t __OSGetExceptionHandler();
 extern unk_t __div2i();
