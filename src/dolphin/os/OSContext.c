@@ -681,5 +681,3 @@ asm void __OSContextInit(void)
 /* 803456A4 00342284  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
-
-
