@@ -34,3 +34,91 @@ lbl_80348AD8:
 /* 80348AEC 003456CC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t EXIDeselect();
+extern unk_t EXIImmEx();
+extern unk_t EXISync();
+extern unk_t EXIImm();
+extern unk_t EXIUnlock();
+extern unk_t EXISelect();
+extern unk_t EXILock();
+
+#pragma push
+asm unk_t WriteSram()
+{ // clang-format off
+    nofralloc
+/* 80348AF0 003456D0  7C 08 02 A6 */	mflr r0
+/* 80348AF4 003456D4  3C C0 80 35 */	lis r6, WriteSramCallback@ha
+/* 80348AF8 003456D8  90 01 00 04 */	stw r0, 4(r1)
+/* 80348AFC 003456DC  38 06 8A 90 */	addi r0, r6, WriteSramCallback@l
+/* 80348B00 003456E0  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 80348B04 003456E4  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 80348B08 003456E8  3B E4 00 00 */	addi r31, r4, 0
+/* 80348B0C 003456EC  38 80 00 01 */	li r4, 1
+/* 80348B10 003456F0  93 C1 00 20 */	stw r30, 0x20(r1)
+/* 80348B14 003456F4  3B C5 00 00 */	addi r30, r5, 0
+/* 80348B18 003456F8  7C 05 03 78 */	mr r5, r0
+/* 80348B1C 003456FC  93 A1 00 1C */	stw r29, 0x1c(r1)
+/* 80348B20 00345700  3B A3 00 00 */	addi r29, r3, 0
+/* 80348B24 00345704  38 60 00 00 */	li r3, 0
+/* 80348B28 00345708  4B FF E2 59 */	bl EXILock
+/* 80348B2C 0034570C  2C 03 00 00 */	cmpwi r3, 0
+/* 80348B30 00345710  40 82 00 0C */	bne lbl_80348B3C
+/* 80348B34 00345714  38 60 00 00 */	li r3, 0
+/* 80348B38 00345718  48 00 00 B4 */	b lbl_80348BEC
+lbl_80348B3C:
+/* 80348B3C 0034571C  38 60 00 00 */	li r3, 0
+/* 80348B40 00345720  38 80 00 01 */	li r4, 1
+/* 80348B44 00345724  38 A0 00 03 */	li r5, 3
+/* 80348B48 00345728  4B FF DB 41 */	bl EXISelect
+/* 80348B4C 0034572C  2C 03 00 00 */	cmpwi r3, 0
+/* 80348B50 00345730  40 82 00 14 */	bne lbl_80348B64
+/* 80348B54 00345734  38 60 00 00 */	li r3, 0
+/* 80348B58 00345738  4B FF E3 1D */	bl EXIUnlock
+/* 80348B5C 0034573C  38 60 00 00 */	li r3, 0
+/* 80348B60 00345740  48 00 00 8C */	b lbl_80348BEC
+lbl_80348B64:
+/* 80348B64 00345744  57 FF 30 32 */	slwi r31, r31, 6
+/* 80348B68 00345748  38 1F 01 00 */	addi r0, r31, 0x100
+/* 80348B6C 0034574C  64 00 A0 00 */	oris r0, r0, 0xa000
+/* 80348B70 00345750  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80348B74 00345754  38 81 00 14 */	addi r4, r1, 0x14
+/* 80348B78 00345758  38 60 00 00 */	li r3, 0
+/* 80348B7C 0034575C  38 A0 00 04 */	li r5, 4
+/* 80348B80 00345760  38 C0 00 01 */	li r6, 1
+/* 80348B84 00345764  38 E0 00 00 */	li r7, 0
+/* 80348B88 00345768  4B FF CF DD */	bl EXIImm
+/* 80348B8C 0034576C  7C 60 00 34 */	cntlzw r0, r3
+/* 80348B90 00345770  54 1F D9 7E */	srwi r31, r0, 5
+/* 80348B94 00345774  38 60 00 00 */	li r3, 0
+/* 80348B98 00345778  4B FF D3 B5 */	bl EXISync
+/* 80348B9C 0034577C  7C 60 00 34 */	cntlzw r0, r3
+/* 80348BA0 00345780  54 00 D9 7E */	srwi r0, r0, 5
+/* 80348BA4 00345784  38 9D 00 00 */	addi r4, r29, 0
+/* 80348BA8 00345788  38 BE 00 00 */	addi r5, r30, 0
+/* 80348BAC 0034578C  7F FF 03 78 */	or r31, r31, r0
+/* 80348BB0 00345790  38 60 00 00 */	li r3, 0
+/* 80348BB4 00345794  38 C0 00 01 */	li r6, 1
+/* 80348BB8 00345798  4B FF D2 09 */	bl EXIImmEx
+/* 80348BBC 0034579C  7C 60 00 34 */	cntlzw r0, r3
+/* 80348BC0 003457A0  54 00 D9 7E */	srwi r0, r0, 5
+/* 80348BC4 003457A4  7F FF 03 78 */	or r31, r31, r0
+/* 80348BC8 003457A8  38 60 00 00 */	li r3, 0
+/* 80348BCC 003457AC  4B FF DB E9 */	bl EXIDeselect
+/* 80348BD0 003457B0  7C 60 00 34 */	cntlzw r0, r3
+/* 80348BD4 003457B4  54 00 D9 7E */	srwi r0, r0, 5
+/* 80348BD8 003457B8  7F FF 03 78 */	or r31, r31, r0
+/* 80348BDC 003457BC  38 60 00 00 */	li r3, 0
+/* 80348BE0 003457C0  4B FF E2 95 */	bl EXIUnlock
+/* 80348BE4 003457C4  7F E0 00 34 */	cntlzw r0, r31
+/* 80348BE8 003457C8  54 03 D9 7E */	srwi r3, r0, 5
+lbl_80348BEC:
+/* 80348BEC 003457CC  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 80348BF0 003457D0  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 80348BF4 003457D4  83 C1 00 20 */	lwz r30, 0x20(r1)
+/* 80348BF8 003457D8  7C 08 03 A6 */	mtlr r0
+/* 80348BFC 003457DC  83 A1 00 1C */	lwz r29, 0x1c(r1)
+/* 80348C00 003457E0  38 21 00 28 */	addi r1, r1, 0x28
+/* 80348C04 003457E4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
