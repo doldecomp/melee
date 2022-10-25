@@ -157,8 +157,6 @@ asm unk_t Config48MB()
 } // clang-format on
 #pragma pop
 
-
-
 #pragma push
 asm unk_t RealMode()
 { // clang-format off
@@ -172,3 +170,87 @@ asm unk_t RealMode()
 } // clang-format on
 #pragma pop
 
+extern unk_t lbl_80402348;
+extern unk_t OSRegisterResetFunction();
+
+#pragma push
+asm unk_t __OSInitMemoryProtection()
+{ // clang-format off
+    nofralloc
+/* 80347DBC 0034499C  7C 08 02 A6 */	mflr r0
+/* 80347DC0 003449A0  90 01 00 04 */	stw r0, 4(r1)
+/* 80347DC4 003449A4  94 21 FF B8 */	stwu r1, -0x48(r1)
+/* 80347DC8 003449A8  93 E1 00 44 */	stw r31, 0x44(r1)
+/* 80347DCC 003449AC  93 C1 00 40 */	stw r30, 0x40(r1)
+/* 80347DD0 003449B0  93 A1 00 3C */	stw r29, 0x3c(r1)
+/* 80347DD4 003449B4  3C 60 80 00 */	lis r3, 0x800000F0@ha
+/* 80347DD8 003449B8  83 A3 00 F0 */	lwz r29, 0x800000F0@l(r3)
+/* 80347DDC 003449BC  4B FF F5 89 */	bl OSDisableInterrupts
+/* 80347DE0 003449C0  3C 00 01 80 */	lis r0, 0x180
+/* 80347DE4 003449C4  7C 1D 00 40 */	cmplw r29, r0
+/* 80347DE8 003449C8  7C 7F 1B 78 */	mr r31, r3
+/* 80347DEC 003449CC  41 81 00 14 */	bgt lbl_80347E00
+/* 80347DF0 003449D0  3C 60 80 34 */	lis r3, Config24MB@ha
+/* 80347DF4 003449D4  38 63 7C A4 */	addi r3, r3, Config24MB@l
+/* 80347DF8 003449D8  4B FF FF AD */	bl RealMode
+/* 80347DFC 003449DC  48 00 00 1C */	b lbl_80347E18
+lbl_80347E00:
+/* 80347E00 003449E0  3C 00 03 00 */	lis r0, 0x300
+/* 80347E04 003449E4  7C 1D 00 40 */	cmplw r29, r0
+/* 80347E08 003449E8  41 81 00 10 */	bgt lbl_80347E18
+/* 80347E0C 003449EC  3C 60 80 34 */	lis r3, Config48MB@ha
+/* 80347E10 003449F0  38 63 7D 24 */	addi r3, r3, Config48MB@l
+/* 80347E14 003449F4  4B FF FF 91 */	bl RealMode
+lbl_80347E18:
+/* 80347E18 003449F8  3C 60 CC 00 */	lis r3, 0xCC004000@ha
+/* 80347E1C 003449FC  3B A3 40 00 */	addi r29, r3, 0xCC004000@l
+/* 80347E20 00344A00  38 00 00 00 */	li r0, 0
+/* 80347E24 00344A04  B0 1D 00 20 */	sth r0, 0x20(r29)
+/* 80347E28 00344A08  38 00 00 FF */	li r0, 0xff
+/* 80347E2C 00344A0C  3C 60 F0 00 */	lis r3, 0xf000
+/* 80347E30 00344A10  B0 1D 00 10 */	sth r0, 0x10(r29)
+/* 80347E34 00344A14  4B FF F8 F9 */	bl __OSMaskInterrupts
+/* 80347E38 00344A18  3C 60 80 34 */	lis r3, MEMIntrruptHandler@ha
+/* 80347E3C 00344A1C  3B C3 7C 38 */	addi r30, r3, MEMIntrruptHandler@l
+/* 80347E40 00344A20  7F C4 F3 78 */	mr r4, r30
+/* 80347E44 00344A24  38 60 00 00 */	li r3, 0
+/* 80347E48 00344A28  4B FF F5 69 */	bl __OSSetInterruptHandler
+/* 80347E4C 00344A2C  7F C4 F3 78 */	mr r4, r30
+/* 80347E50 00344A30  38 60 00 01 */	li r3, 1
+/* 80347E54 00344A34  4B FF F5 5D */	bl __OSSetInterruptHandler
+/* 80347E58 00344A38  7F C4 F3 78 */	mr r4, r30
+/* 80347E5C 00344A3C  38 60 00 02 */	li r3, 2
+/* 80347E60 00344A40  4B FF F5 51 */	bl __OSSetInterruptHandler
+/* 80347E64 00344A44  7F C4 F3 78 */	mr r4, r30
+/* 80347E68 00344A48  38 60 00 03 */	li r3, 3
+/* 80347E6C 00344A4C  4B FF F5 45 */	bl __OSSetInterruptHandler
+/* 80347E70 00344A50  7F C4 F3 78 */	mr r4, r30
+/* 80347E74 00344A54  38 60 00 04 */	li r3, 4
+/* 80347E78 00344A58  4B FF F5 39 */	bl __OSSetInterruptHandler
+/* 80347E7C 00344A5C  3C 60 80 40 */	lis r3, lbl_80402348@ha
+/* 80347E80 00344A60  38 63 23 48 */	addi r3, r3, lbl_80402348@l
+/* 80347E84 00344A64  48 00 04 8D */	bl OSRegisterResetFunction
+/* 80347E88 00344A68  3C 60 80 00 */	lis r3, 0x800000F0@ha
+/* 80347E8C 00344A6C  80 83 00 F0 */	lwz r4, 0x800000F0@l(r3)
+/* 80347E90 00344A70  80 03 00 28 */	lwz r0, 0x28(r3)
+/* 80347E94 00344A74  7C 04 00 40 */	cmplw r4, r0
+/* 80347E98 00344A78  40 80 00 18 */	bge lbl_80347EB0
+/* 80347E9C 00344A7C  3C 04 FE 80 */	addis r0, r4, 0xfe80
+/* 80347EA0 00344A80  28 00 00 00 */	cmplwi r0, 0
+/* 80347EA4 00344A84  40 82 00 0C */	bne lbl_80347EB0
+/* 80347EA8 00344A88  38 00 00 02 */	li r0, 2
+/* 80347EAC 00344A8C  B0 1D 00 28 */	sth r0, 0x28(r29)
+lbl_80347EB0:
+/* 80347EB0 00344A90  3C 60 08 00 */	lis r3, 0x800
+/* 80347EB4 00344A94  4B FF F9 01 */	bl __OSUnmaskInterrupts
+/* 80347EB8 00344A98  7F E3 FB 78 */	mr r3, r31
+/* 80347EBC 00344A9C  4B FF F4 D1 */	bl OSRestoreInterrupts
+/* 80347EC0 00344AA0  80 01 00 4C */	lwz r0, 0x4c(r1)
+/* 80347EC4 00344AA4  83 E1 00 44 */	lwz r31, 0x44(r1)
+/* 80347EC8 00344AA8  83 C1 00 40 */	lwz r30, 0x40(r1)
+/* 80347ECC 00344AAC  7C 08 03 A6 */	mtlr r0
+/* 80347ED0 00344AB0  83 A1 00 3C */	lwz r29, 0x3c(r1)
+/* 80347ED4 00344AB4  38 21 00 48 */	addi r1, r1, 0x48
+/* 80347ED8 00344AB8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
