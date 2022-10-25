@@ -117,3 +117,42 @@ asm unk_t Config24MB()
 /* 80347D20 00344900  4C 00 00 64 */	rfi 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t Config48MB()
+{ // clang-format off
+    nofralloc
+/* 80347D24 00344904  38 E0 00 00 */	li r7, 0
+/* 80347D28 00344908  3C 80 00 00 */	lis r4, 0x00000002@ha
+/* 80347D2C 0034490C  38 84 00 02 */	addi r4, r4, 0x00000002@l
+/* 80347D30 00344910  3C 60 80 00 */	lis r3, 0x800003FF@ha
+/* 80347D34 00344914  38 63 03 FF */	addi r3, r3, 0x800003FF@l
+/* 80347D38 00344918  3C C0 02 00 */	lis r6, 0x02000002@ha
+/* 80347D3C 0034491C  38 C6 00 02 */	addi r6, r6, 0x02000002@l
+/* 80347D40 00344920  3C A0 82 00 */	lis r5, 0x820001FF@ha
+/* 80347D44 00344924  38 A5 01 FF */	addi r5, r5, 0x820001FF@l
+/* 80347D48 00344928  4C 00 01 2C */	isync 
+/* 80347D4C 0034492C  7C F8 83 A6 */	mtdbatu 0, r7
+/* 80347D50 00344930  7C 99 83 A6 */	mtdbatl 0, r4
+/* 80347D54 00344934  7C 78 83 A6 */	mtdbatu 0, r3
+/* 80347D58 00344938  4C 00 01 2C */	isync 
+/* 80347D5C 0034493C  7C F0 83 A6 */	mtibatu 0, r7
+/* 80347D60 00344940  7C 91 83 A6 */	mtibatl 0, r4
+/* 80347D64 00344944  7C 70 83 A6 */	mtibatu 0, r3
+/* 80347D68 00344948  4C 00 01 2C */	isync 
+/* 80347D6C 0034494C  7C FC 83 A6 */	mtdbatu 2, r7
+/* 80347D70 00344950  7C DD 83 A6 */	mtdbatl 2, r6
+/* 80347D74 00344954  7C BC 83 A6 */	mtdbatu 2, r5
+/* 80347D78 00344958  4C 00 01 2C */	isync 
+/* 80347D7C 0034495C  7C F4 83 A6 */	mtibatu 2, r7
+/* 80347D80 00344960  7C D5 83 A6 */	mtibatl 2, r6
+/* 80347D84 00344964  7C B4 83 A6 */	mtibatu 2, r5
+/* 80347D88 00344968  4C 00 01 2C */	isync 
+/* 80347D8C 0034496C  7C 60 00 A6 */	mfmsr r3
+/* 80347D90 00344970  60 63 00 30 */	ori r3, r3, 0x30
+/* 80347D94 00344974  7C 7B 03 A6 */	mtspr 0x1b, r3
+/* 80347D98 00344978  7C 68 02 A6 */	mflr r3
+/* 80347D9C 0034497C  7C 7A 03 A6 */	mtspr 0x1a, r3
+/* 80347DA0 00344980  4C 00 00 64 */	rfi 
+} // clang-format on
+#pragma pop
