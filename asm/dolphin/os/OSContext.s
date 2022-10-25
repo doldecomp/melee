@@ -2,33 +2,6 @@
 
 .section .text  # 0x80344E30 - 0x803456A4
 
-.global OSSetCurrentContext
-OSSetCurrentContext:
-/* 8034508C 00341C6C  3C 80 80 00 */	lis r4, 0x800000D4@ha
-/* 80345090 00341C70  90 64 00 D4 */	stw r3, 0x800000D4@l(r4)
-/* 80345094 00341C74  54 65 00 BE */	clrlwi r5, r3, 2
-/* 80345098 00341C78  90 A4 00 C0 */	stw r5, 0xc0(r4)
-/* 8034509C 00341C7C  80 A4 00 D8 */	lwz r5, 0xd8(r4)
-/* 803450A0 00341C80  7C 05 18 00 */	cmpw r5, r3
-/* 803450A4 00341C84  40 82 00 20 */	bne lbl_803450C4
-/* 803450A8 00341C88  80 C3 01 9C */	lwz r6, 0x19c(r3)
-/* 803450AC 00341C8C  60 C6 20 00 */	ori r6, r6, 0x2000
-/* 803450B0 00341C90  90 C3 01 9C */	stw r6, 0x19c(r3)
-/* 803450B4 00341C94  7C C0 00 A6 */	mfmsr r6
-/* 803450B8 00341C98  60 C6 00 02 */	ori r6, r6, 2
-/* 803450BC 00341C9C  7C C0 01 24 */	mtmsr r6
-/* 803450C0 00341CA0  4E 80 00 20 */	blr 
-lbl_803450C4:
-/* 803450C4 00341CA4  80 C3 01 9C */	lwz r6, 0x19c(r3)
-/* 803450C8 00341CA8  54 C6 04 E2 */	rlwinm r6, r6, 0, 0x13, 0x11
-/* 803450CC 00341CAC  90 C3 01 9C */	stw r6, 0x19c(r3)
-/* 803450D0 00341CB0  7C C0 00 A6 */	mfmsr r6
-/* 803450D4 00341CB4  54 C6 04 E2 */	rlwinm r6, r6, 0, 0x13, 0x11
-/* 803450D8 00341CB8  60 C6 00 02 */	ori r6, r6, 2
-/* 803450DC 00341CBC  7C C0 01 24 */	mtmsr r6
-/* 803450E0 00341CC0  4C 00 01 2C */	isync 
-/* 803450E4 00341CC4  4E 80 00 20 */	blr 
-
 .global OSGetCurrentContext
 OSGetCurrentContext:
 /* 803450E8 00341CC8  3C 60 80 00 */	lis r3, 0x800000D4@ha
