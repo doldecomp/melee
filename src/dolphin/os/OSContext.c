@@ -213,9 +213,6 @@ lbl_803450C4:
 } // clang-format on
 #pragma pop
 
-
-
-
 #pragma push
 asm unk_t OSGetCurrentContext()
 { // clang-format off
@@ -226,4 +223,45 @@ asm unk_t OSGetCurrentContext()
 } // clang-format on
 #pragma pop
 
+
+
+// https://decomp.me/scratch/bNK5a // 0 (100%)
+#pragma push
+asm unk_t OSSaveContext()
+{ // clang-format off
+    nofralloc
+/* 803450F4 00341CD4  BD A3 00 34 */	stmw r13, 0x34(r3)
+/* 803450F8 00341CD8  7C 11 E2 A6 */	mfspr r0, 0x391
+/* 803450FC 00341CDC  90 03 01 A8 */	stw r0, 0x1a8(r3)
+/* 80345100 00341CE0  7C 12 E2 A6 */	mfspr r0, 0x392
+/* 80345104 00341CE4  90 03 01 AC */	stw r0, 0x1ac(r3)
+/* 80345108 00341CE8  7C 13 E2 A6 */	mfspr r0, 0x393
+/* 8034510C 00341CEC  90 03 01 B0 */	stw r0, 0x1b0(r3)
+/* 80345110 00341CF0  7C 14 E2 A6 */	mfspr r0, 0x394
+/* 80345114 00341CF4  90 03 01 B4 */	stw r0, 0x1b4(r3)
+/* 80345118 00341CF8  7C 15 E2 A6 */	mfspr r0, 0x395
+/* 8034511C 00341CFC  90 03 01 B8 */	stw r0, 0x1b8(r3)
+/* 80345120 00341D00  7C 16 E2 A6 */	mfspr r0, 0x396
+/* 80345124 00341D04  90 03 01 BC */	stw r0, 0x1bc(r3)
+/* 80345128 00341D08  7C 17 E2 A6 */	mfspr r0, 0x397
+/* 8034512C 00341D0C  90 03 01 C0 */	stw r0, 0x1c0(r3)
+/* 80345130 00341D10  7C 00 00 26 */	mfcr r0
+/* 80345134 00341D14  90 03 00 80 */	stw r0, 0x80(r3)
+/* 80345138 00341D18  7C 08 02 A6 */	mflr r0
+/* 8034513C 00341D1C  90 03 00 84 */	stw r0, 0x84(r3)
+/* 80345140 00341D20  90 03 01 98 */	stw r0, 0x198(r3)
+/* 80345144 00341D24  7C 00 00 A6 */	mfmsr r0
+/* 80345148 00341D28  90 03 01 9C */	stw r0, 0x19c(r3)
+/* 8034514C 00341D2C  7C 09 02 A6 */	mfctr r0
+/* 80345150 00341D30  90 03 00 88 */	stw r0, 0x88(r3)
+/* 80345154 00341D34  7C 01 02 A6 */	mfxer r0
+/* 80345158 00341D38  90 03 00 8C */	stw r0, 0x8c(r3)
+/* 8034515C 00341D3C  90 23 00 04 */	stw r1, 4(r3)
+/* 80345160 00341D40  90 43 00 08 */	stw r2, 8(r3)
+/* 80345164 00341D44  38 00 00 01 */	li r0, 1
+/* 80345168 00341D48  90 03 00 0C */	stw r0, 0xc(r3)
+/* 8034516C 00341D4C  38 60 00 00 */	li r3, 0
+/* 80345170 00341D50  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
