@@ -2,23 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240
 
-.global LCEnable
-LCEnable:
-/* 803449FC 003415DC  7C 08 02 A6 */	mflr r0
-/* 80344A00 003415E0  90 01 00 04 */	stw r0, 4(r1)
-/* 80344A04 003415E4  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 80344A08 003415E8  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80344A0C 003415EC  48 00 29 59 */	bl OSDisableInterrupts
-/* 80344A10 003415F0  7C 7F 1B 78 */	mr r31, r3
-/* 80344A14 003415F4  4B FF FF 1D */	bl __LCEnable
-/* 80344A18 003415F8  7F E3 FB 78 */	mr r3, r31
-/* 80344A1C 003415FC  48 00 29 71 */	bl OSRestoreInterrupts
-/* 80344A20 00341600  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 80344A24 00341604  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 80344A28 00341608  38 21 00 10 */	addi r1, r1, 0x10
-/* 80344A2C 0034160C  7C 08 03 A6 */	mtlr r0
-/* 80344A30 00341610  4E 80 00 20 */	blr 
-
 .global LCDisable
 LCDisable:
 /* 80344A34 00341614  3C 60 E0 00 */	lis r3, 0xE0000020@ha
