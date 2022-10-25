@@ -593,6 +593,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/os/OSContext_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSError.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSError_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSExi.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSExi.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSFont.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt.s.o\
