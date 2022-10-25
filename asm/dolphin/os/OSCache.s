@@ -2,23 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240
 
-.global DCZeroRange
-DCZeroRange:
-/* 803448A4 00341484  28 04 00 00 */	cmplwi r4, 0
-/* 803448A8 00341488  4C 81 00 20 */	blelr 
-/* 803448AC 0034148C  54 65 06 FF */	clrlwi. r5, r3, 0x1b
-/* 803448B0 00341490  41 82 00 08 */	beq lbl_803448B8
-/* 803448B4 00341494  38 84 00 20 */	addi r4, r4, 0x20
-lbl_803448B8:
-/* 803448B8 00341498  38 84 00 1F */	addi r4, r4, 0x1f
-/* 803448BC 0034149C  54 84 D9 7E */	srwi r4, r4, 5
-/* 803448C0 003414A0  7C 89 03 A6 */	mtctr r4
-lbl_803448C4:
-/* 803448C4 003414A4  7C 00 1F EC */	dcbz 0, r3
-/* 803448C8 003414A8  38 63 00 20 */	addi r3, r3, 0x20
-/* 803448CC 003414AC  42 00 FF F8 */	bdnz lbl_803448C4
-/* 803448D0 003414B0  4E 80 00 20 */	blr 
-
 .global ICInvalidateRange
 ICInvalidateRange:
 /* 803448D4 003414B4  28 04 00 00 */	cmplwi r4, 0
