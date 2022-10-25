@@ -1,4 +1,5 @@
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSThread.h>
 
 void lbl_80347374(void);
 
@@ -339,8 +340,6 @@ lbl_80347728:
 } // clang-format on
 #pragma pop
 
-
-
 #pragma push
 asm u32 __OSMaskInterrupts(u32)
 { // clang-format off
@@ -386,3 +385,51 @@ lbl_80347784:
 } // clang-format on
 #pragma pop
 
+extern unk_t lbl_80402318;
+extern unk_t lbl_804D738C;
+extern unk_t OSGetTime();
+
+#pragma push
+asm u32 __OSUnmaskInterrupts(u32)
+{ // clang-format off
+    nofralloc
+/* 803477B4 00344394  7C 08 02 A6 */	mflr r0
+/* 803477B8 00344398  90 01 00 04 */	stw r0, 4(r1)
+/* 803477BC 0034439C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 803477C0 003443A0  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 803477C4 003443A4  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 803477C8 003443A8  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 803477CC 003443AC  7C 7F 1B 78 */	mr r31, r3
+/* 803477D0 003443B0  4B FF FB 95 */	bl OSDisableInterrupts
+/* 803477D4 003443B4  3C 80 80 00 */	lis r4, 0x800000C4@ha
+/* 803477D8 003443B8  83 A4 00 C4 */	lwz r29, 0x800000C4@l(r4)
+/* 803477DC 003443BC  7C 7E 1B 78 */	mr r30, r3
+/* 803477E0 003443C0  80 A4 00 C8 */	lwz r5, 0xc8(r4)
+/* 803477E4 003443C4  7F A0 2B 78 */	or r0, r29, r5
+/* 803477E8 003443C8  7F E3 00 38 */	and r3, r31, r0
+/* 803477EC 003443CC  7F BF F8 78 */	andc r31, r29, r31
+/* 803477F0 003443D0  93 E4 00 C4 */	stw r31, 0xc4(r4)
+/* 803477F4 003443D4  7F FF 2B 78 */	or r31, r31, r5
+/* 803477F8 003443D8  48 00 00 04 */	b lbl_803477FC
+lbl_803477FC:
+/* 803477FC 003443DC  48 00 00 04 */	b lbl_80347800
+lbl_80347800:
+/* 80347800 003443E0  48 00 00 0C */	b lbl_8034780C
+lbl_80347804:
+/* 80347804 003443E4  7F E4 FB 78 */	mr r4, r31
+/* 80347808 003443E8  4B FF FC 4D */	bl SetInterruptMask
+lbl_8034780C:
+/* 8034780C 003443EC  28 03 00 00 */	cmplwi r3, 0
+/* 80347810 003443F0  40 82 FF F4 */	bne lbl_80347804
+/* 80347814 003443F4  7F C3 F3 78 */	mr r3, r30
+/* 80347818 003443F8  4B FF FB 75 */	bl OSRestoreInterrupts
+/* 8034781C 003443FC  7F A3 EB 78 */	mr r3, r29
+/* 80347820 00344400  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 80347824 00344404  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 80347828 00344408  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 8034782C 0034440C  7C 08 03 A6 */	mtlr r0
+/* 80347830 00344410  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 80347834 00344414  38 21 00 20 */	addi r1, r1, 0x20
+/* 80347838 00344418  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
