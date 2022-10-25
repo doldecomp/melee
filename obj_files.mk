@@ -608,7 +608,8 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/OSResetSW.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSResetSW_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSRtc.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSRtc.s.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSRtc_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSSerial.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSSerial.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSSync.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSThread.s.o\
