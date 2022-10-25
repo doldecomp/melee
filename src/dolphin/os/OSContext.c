@@ -330,14 +330,31 @@ lbl_803451C8:
 } // clang-format on
 #pragma pop
 
-
-
 #pragma push
 asm unk_t OSGetStackPointer()
 { // clang-format off
     nofralloc
 /* 8034524C 00341E2C  7C 23 0B 78 */	mr r3, r1
 /* 80345250 00341E30  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+
+
+#pragma push
+asm void OSClearContext(OSContext *)
+{ // clang-format off
+    nofralloc
+/* 80345254 00341E34  38 A0 00 00 */	li r5, 0
+/* 80345258 00341E38  B0 A3 01 A0 */	sth r5, 0x1a0(r3)
+/* 8034525C 00341E3C  3C 80 80 00 */	lis r4, 0x800000D8@ha
+/* 80345260 00341E40  B0 A3 01 A2 */	sth r5, 0x1a2(r3)
+/* 80345264 00341E44  80 04 00 D8 */	lwz r0, 0x800000D8@l(r4)
+/* 80345268 00341E48  7C 03 00 40 */	cmplw r3, r0
+/* 8034526C 00341E4C  40 82 00 08 */	bne lbl_80345274
+/* 80345270 00341E50  90 A4 00 D8 */	stw r5, 0xd8(r4)
+lbl_80345274:
+/* 80345274 00341E54  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
 
