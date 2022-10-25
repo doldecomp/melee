@@ -2,11 +2,6 @@
 
 .section .text  # 0x80344E30 - 0x803456A4
 
-.global OSLoadFPUContext
-OSLoadFPUContext:
-/* 8034507C 00341C5C  38 83 00 00 */	addi r4, r3, 0
-/* 80345080 00341C60  4B FF FD B0 */	b __OSLoadFPUContext
-
 .global OSSaveFPUContext
 OSSaveFPUContext:
 /* 80345084 00341C64  38 A3 00 00 */	addi r5, r3, 0
