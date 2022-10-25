@@ -244,3 +244,35 @@ lbl_80348D80:
 /* 80348D94 00345974  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t __OSLockSramEx()
+{ // clang-format off
+    nofralloc
+/* 80348D98 00345978  7C 08 02 A6 */	mflr r0
+/* 80348D9C 0034597C  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
+/* 80348DA0 00345980  90 01 00 04 */	stw r0, 4(r1)
+/* 80348DA4 00345984  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80348DA8 00345988  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80348DAC 0034598C  3B E3 7D 60 */	addi r31, r3, lbl_804A7D60@l
+/* 80348DB0 00345990  4B FF E5 B5 */	bl OSDisableInterrupts
+/* 80348DB4 00345994  80 1F 00 48 */	lwz r0, 0x48(r31)
+/* 80348DB8 00345998  38 9F 00 48 */	addi r4, r31, 0x48
+/* 80348DBC 0034599C  2C 00 00 00 */	cmpwi r0, 0
+/* 80348DC0 003459A0  41 82 00 10 */	beq lbl_80348DD0
+/* 80348DC4 003459A4  4B FF E5 C9 */	bl OSRestoreInterrupts
+/* 80348DC8 003459A8  38 60 00 00 */	li r3, 0
+/* 80348DCC 003459AC  48 00 00 14 */	b lbl_80348DE0
+lbl_80348DD0:
+/* 80348DD0 003459B0  90 7F 00 44 */	stw r3, 0x44(r31)
+/* 80348DD4 003459B4  38 00 00 01 */	li r0, 1
+/* 80348DD8 003459B8  38 7F 00 14 */	addi r3, r31, 0x14
+/* 80348DDC 003459BC  90 04 00 00 */	stw r0, 0(r4)
+lbl_80348DE0:
+/* 80348DE0 003459C0  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80348DE4 003459C4  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80348DE8 003459C8  38 21 00 10 */	addi r1, r1, 0x10
+/* 80348DEC 003459CC  7C 08 03 A6 */	mtlr r0
+/* 80348DF0 003459D0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
