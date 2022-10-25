@@ -2,6 +2,22 @@
 #include <dolphin/base/PPCArch.h>
 
 #pragma push
+asm unk_t __OSDBIntegrator()
+{ // clang-format off
+    nofralloc
+/* 8034358C 0034016C  38 A0 00 40 */	li r5, 0x40
+/* 80343590 00340170  7C 68 02 A6 */	mflr r3
+/* 80343594 00340174  90 65 00 0C */	stw r3, 0xc(r5)
+/* 80343598 00340178  80 65 00 08 */	lwz r3, 8(r5)
+/* 8034359C 0034017C  64 63 80 00 */	oris r3, r3, 0x8000
+/* 803435A0 00340180  7C 68 03 A6 */	mtlr r3
+/* 803435A4 00340184  38 60 00 30 */	li r3, 0x30
+/* 803435A8 00340188  7C 60 01 24 */	mtmsr r3
+/* 803435AC 0034018C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
 asm unk_t __OSDBJump()
 { // clang-format off
     nofralloc
