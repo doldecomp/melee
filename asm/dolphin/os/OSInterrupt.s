@@ -2,14 +2,6 @@
 
 .section .text  # 0x80347364 - 0x80347BC8
 
-.global OSEnableInterrupts
-OSEnableInterrupts:
-/* 80347378 00343F58  7C 60 00 A6 */	mfmsr r3
-/* 8034737C 00343F5C  60 64 80 00 */	ori r4, r3, 0x8000
-/* 80347380 00343F60  7C 80 01 24 */	mtmsr r4
-/* 80347384 00343F64  54 63 8F FE */	rlwinm r3, r3, 0x11, 0x1f, 0x1f
-/* 80347388 00343F68  4E 80 00 20 */	blr 
-
 .global OSRestoreInterrupts
 OSRestoreInterrupts:
 /* 8034738C 00343F6C  2C 03 00 00 */	cmpwi r3, 0
