@@ -581,6 +581,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/mtx/vec.s.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/dolphin/os/OS.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OS.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSAlarm.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSAlloc.c.o\
