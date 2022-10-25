@@ -1,4 +1,5 @@
-#include <dolphin/types.h>
+#include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSInterrupt.h>
 
 #pragma push
 asm unk_t __OSLoadFPUContext()
@@ -174,7 +175,7 @@ asm unk_t OSLoadFPUContext()
 #pragma pop
 
 #pragma push
-asm unk_t OSSaveFPUContext()
+asm void OSSaveFPUContext(OSContext *)
 { // clang-format off
     nofralloc
 /* 80345084 00341C64  38 A3 00 00 */	addi r5, r3, 0
@@ -183,7 +184,7 @@ asm unk_t OSSaveFPUContext()
 #pragma pop
 
 #pragma push
-asm unk_t OSSetCurrentContext()
+asm void OSSetCurrentContext(OSContext *)
 { // clang-format off
     nofralloc
 /* 8034508C 00341C6C  3C 80 80 00 */	lis r4, 0x800000D4@ha
@@ -214,7 +215,7 @@ lbl_803450C4:
 #pragma pop
 
 #pragma push
-asm unk_t OSGetCurrentContext()
+asm OSContext *OSGetCurrentContext(void)
 { // clang-format off
     nofralloc
 /* 803450E8 00341CC8  3C 60 80 00 */	lis r3, 0x800000D4@ha
@@ -223,11 +224,9 @@ asm unk_t OSGetCurrentContext()
 } // clang-format on
 #pragma pop
 
-
-
 // https://decomp.me/scratch/bNK5a // 0 (100%)
 #pragma push
-asm unk_t OSSaveContext()
+asm BOOL OSSaveContext(OSContext *)
 { // clang-format off
     nofralloc
 /* 803450F4 00341CD4  BD A3 00 34 */	stmw r13, 0x34(r3)
@@ -262,6 +261,73 @@ asm unk_t OSSaveContext()
 /* 80345168 00341D48  90 03 00 0C */	stw r0, 0xc(r3)
 /* 8034516C 00341D4C  38 60 00 00 */	li r3, 0
 /* 80345170 00341D50  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+extern void lbl_80347374(void);
+
+
+#pragma push
+asm void OSLoadContext(OSContext *)
+{ // clang-format off
+    nofralloc
+/* 80345174 00341D54  3C 80 80 34 */	lis r4, OSDisableInterrupts@ha
+/* 80345178 00341D58  80 C3 01 98 */	lwz r6, 0x198(r3)
+/* 8034517C 00341D5C  38 A4 73 64 */	addi r5, r4, OSDisableInterrupts@l
+/* 80345180 00341D60  7C 06 28 40 */	cmplw r6, r5
+/* 80345184 00341D64  41 80 00 18 */	blt lbl_8034519C
+/* 80345188 00341D68  3C 80 80 34 */	lis r4, lbl_80347374@ha
+/* 8034518C 00341D6C  38 04 73 74 */	addi r0, r4, lbl_80347374@l
+/* 80345190 00341D70  7C 06 00 40 */	cmplw r6, r0
+/* 80345194 00341D74  41 81 00 08 */	bgt lbl_8034519C
+/* 80345198 00341D78  90 A3 01 98 */	stw r5, 0x198(r3)
+lbl_8034519C:
+/* 8034519C 00341D7C  80 03 00 00 */	lwz r0, 0(r3)
+/* 803451A0 00341D80  80 23 00 04 */	lwz r1, 4(r3)
+/* 803451A4 00341D84  80 43 00 08 */	lwz r2, 8(r3)
+/* 803451A8 00341D88  A0 83 01 A2 */	lhz r4, 0x1a2(r3)
+/* 803451AC 00341D8C  54 85 07 BD */	rlwinm. r5, r4, 0, 0x1e, 0x1e
+/* 803451B0 00341D90  41 82 00 14 */	beq lbl_803451C4
+/* 803451B4 00341D94  54 84 07 FA */	rlwinm r4, r4, 0, 0x1f, 0x1d
+/* 803451B8 00341D98  B0 83 01 A2 */	sth r4, 0x1a2(r3)
+/* 803451BC 00341D9C  B8 A3 00 14 */	lmw r5, 0x14(r3)
+/* 803451C0 00341DA0  48 00 00 08 */	b lbl_803451C8
+lbl_803451C4:
+/* 803451C4 00341DA4  B9 A3 00 34 */	lmw r13, 0x34(r3)
+lbl_803451C8:
+/* 803451C8 00341DA8  80 83 01 A8 */	lwz r4, 0x1a8(r3)
+/* 803451CC 00341DAC  7C 91 E3 A6 */	mtspr 0x391, r4
+/* 803451D0 00341DB0  80 83 01 AC */	lwz r4, 0x1ac(r3)
+/* 803451D4 00341DB4  7C 92 E3 A6 */	mtspr 0x392, r4
+/* 803451D8 00341DB8  80 83 01 B0 */	lwz r4, 0x1b0(r3)
+/* 803451DC 00341DBC  7C 93 E3 A6 */	mtspr 0x393, r4
+/* 803451E0 00341DC0  80 83 01 B4 */	lwz r4, 0x1b4(r3)
+/* 803451E4 00341DC4  7C 94 E3 A6 */	mtspr 0x394, r4
+/* 803451E8 00341DC8  80 83 01 B8 */	lwz r4, 0x1b8(r3)
+/* 803451EC 00341DCC  7C 95 E3 A6 */	mtspr 0x395, r4
+/* 803451F0 00341DD0  80 83 01 BC */	lwz r4, 0x1bc(r3)
+/* 803451F4 00341DD4  7C 96 E3 A6 */	mtspr 0x396, r4
+/* 803451F8 00341DD8  80 83 01 C0 */	lwz r4, 0x1c0(r3)
+/* 803451FC 00341DDC  7C 97 E3 A6 */	mtspr 0x397, r4
+/* 80345200 00341DE0  80 83 00 80 */	lwz r4, 0x80(r3)
+/* 80345204 00341DE4  7C 8F F1 20 */	mtcrf 0xff, r4
+/* 80345208 00341DE8  80 83 00 84 */	lwz r4, 0x84(r3)
+/* 8034520C 00341DEC  7C 88 03 A6 */	mtlr r4
+/* 80345210 00341DF0  80 83 00 88 */	lwz r4, 0x88(r3)
+/* 80345214 00341DF4  7C 89 03 A6 */	mtctr r4
+/* 80345218 00341DF8  80 83 00 8C */	lwz r4, 0x8c(r3)
+/* 8034521C 00341DFC  7C 81 03 A6 */	mtxer r4
+/* 80345220 00341E00  7C 80 00 A6 */	mfmsr r4
+/* 80345224 00341E04  54 84 04 5E */	rlwinm r4, r4, 0, 0x11, 0xf
+/* 80345228 00341E08  54 84 07 FA */	rlwinm r4, r4, 0, 0x1f, 0x1d
+/* 8034522C 00341E0C  7C 80 01 24 */	mtmsr r4
+/* 80345230 00341E10  80 83 01 98 */	lwz r4, 0x198(r3)
+/* 80345234 00341E14  7C 9A 03 A6 */	mtspr 0x1a, r4
+/* 80345238 00341E18  80 83 01 9C */	lwz r4, 0x19c(r3)
+/* 8034523C 00341E1C  7C 9B 03 A6 */	mtspr 0x1b, r4
+/* 80345240 00341E20  80 83 00 10 */	lwz r4, 0x10(r3)
+/* 80345244 00341E24  80 63 00 0C */	lwz r3, 0xc(r3)
+/* 80345248 00341E28  4C 00 00 64 */	rfi 
 } // clang-format on
 #pragma pop
 
