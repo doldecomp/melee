@@ -2,13 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240 
 
-.global SITransferCommands
-SITransferCommands:
-/* 8034A0E0 00346CC0  3C 60 CC 00 */	lis r3, 0xCC006438@ha
-/* 8034A0E4 00346CC4  3C 00 80 00 */	lis r0, 0x8000
-/* 8034A0E8 00346CC8  90 03 64 38 */	stw r0, 0xCC006438@l(r3)
-/* 8034A0EC 00346CCC  4E 80 00 20 */	blr 
-
 .global SISetXY
 SISetXY:
 /* 8034A0F0 00346CD0  7C 08 02 A6 */	mflr r0

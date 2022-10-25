@@ -935,3 +935,14 @@ asm unk_t SISetCommand()
 /* 8034A0DC 00346CBC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t SITransferCommands()
+{ // clang-format off
+    nofralloc
+/* 8034A0E0 00346CC0  3C 60 CC 00 */	lis r3, 0xCC006438@ha
+/* 8034A0E4 00346CC4  3C 00 80 00 */	lis r0, 0x8000
+/* 8034A0E8 00346CC8  90 03 64 38 */	stw r0, 0xCC006438@l(r3)
+/* 8034A0EC 00346CCC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
