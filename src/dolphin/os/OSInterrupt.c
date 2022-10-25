@@ -45,7 +45,6 @@ lbl_803473A4:
 } // clang-format on
 #pragma pop
 
-
 extern unk_t lbl_804D7378;
 
 #pragma push
@@ -61,4 +60,19 @@ asm OSInterruptHandler __OSSetInterruptHandler(OSInterruptType, OSInterruptHandl
 /* 803473C8 00343FA8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+
+
+#pragma push
+asm OSInterruptHandler __OSGetInterruptHandler(OSInterruptType)
+{ // clang-format off
+    nofralloc
+/* 803473CC 00343FAC  7C 60 07 34 */	extsh r0, r3
+/* 803473D0 00343FB0  80 6D BC D8 */	lwz r3, lbl_804D7378(r13)
+/* 803473D4 00343FB4  54 00 10 3A */	slwi r0, r0, 2
+/* 803473D8 00343FB8  7C 63 00 2E */	lwzx r3, r3, r0
+/* 803473DC 00343FBC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
 

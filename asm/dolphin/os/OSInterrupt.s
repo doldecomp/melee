@@ -2,14 +2,6 @@
 
 .section .text  # 0x80347364 - 0x80347BC8
 
-.global __OSGetInterruptHandler
-__OSGetInterruptHandler:
-/* 803473CC 00343FAC  7C 60 07 34 */	extsh r0, r3
-/* 803473D0 00343FB0  80 6D BC D8 */	lwz r3, lbl_804D7378@sda21(r13)
-/* 803473D4 00343FB4  54 00 10 3A */	slwi r0, r0, 2
-/* 803473D8 00343FB8  7C 63 00 2E */	lwzx r3, r3, r0
-/* 803473DC 00343FBC  4E 80 00 20 */	blr 
-
 .global __OSInterruptInit
 __OSInterruptInit:
 /* 803473E0 00343FC0  7C 08 02 A6 */	mflr r0
