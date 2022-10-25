@@ -2,18 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240
 
-.global LCStoreBlocks
-LCStoreBlocks:
-/* 80344A5C 0034163C  54 A6 F6 FE */	rlwinm r6, r5, 0x1e, 0x1b, 0x1f
-/* 80344A60 00341640  54 63 01 3E */	clrlwi r3, r3, 4
-/* 80344A64 00341644  7C C6 1B 78 */	or r6, r6, r3
-/* 80344A68 00341648  7C DA E3 A6 */	mtspr 0x39a, r6
-/* 80344A6C 0034164C  54 A6 17 3A */	rlwinm r6, r5, 2, 0x1c, 0x1d
-/* 80344A70 00341650  7C C6 23 78 */	or r6, r6, r4
-/* 80344A74 00341654  60 C6 00 02 */	ori r6, r6, 2
-/* 80344A78 00341658  7C DB E3 A6 */	mtspr 0x39b, r6
-/* 80344A7C 0034165C  4E 80 00 20 */	blr 
-
 .global LCStoreData
 LCStoreData:
 /* 80344A80 00341660  7C 08 02 A6 */	mflr r0
