@@ -366,5 +366,3 @@ lbl_803432F4:
 /* 80343308 0033FEE8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
-
-
