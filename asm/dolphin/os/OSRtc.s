@@ -2,18 +2,6 @@
 
 .section .text  # 0x80348A90 - 0x803B7240 
 
-.global __OSUnlockSram
-__OSUnlockSram:
-/* 803490FC 00345CDC  7C 08 02 A6 */	mflr r0
-/* 80349100 00345CE0  38 80 00 00 */	li r4, 0
-/* 80349104 00345CE4  90 01 00 04 */	stw r0, 4(r1)
-/* 80349108 00345CE8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8034910C 00345CEC  4B FF FC E9 */	bl UnlockSram
-/* 80349110 00345CF0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80349114 00345CF4  38 21 00 08 */	addi r1, r1, 8
-/* 80349118 00345CF8  7C 08 03 A6 */	mtlr r0
-/* 8034911C 00345CFC  4E 80 00 20 */	blr 
-
 .global __OSUnlockSramEx
 __OSUnlockSramEx:
 /* 80349120 00345D00  7C 08 02 A6 */	mflr r0
