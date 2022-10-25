@@ -519,3 +519,14 @@ asm unk_t __OSUnlockSramEx()
 /* 80349140 00345D20  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t __OSSyncSram()
+{ // clang-format off
+    nofralloc
+/* 80349144 00345D24  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
+/* 80349148 00345D28  38 63 7D 60 */	addi r3, r3, lbl_804A7D60@l
+/* 8034914C 00345D2C  80 63 00 4C */	lwz r3, 0x4c(r3)
+/* 80349150 00345D30  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
