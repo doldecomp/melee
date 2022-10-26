@@ -12,3 +12,12 @@ asm s64 OSGetTime(void)
 /* 8034C404 00348FE4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm OSTick OSGetTick(void)
+{ // clang-format off
+    nofralloc
+/* 8034C408 00348FE8  7C 6C 42 E6 */	mftb r3, 0x10c
+/* 8034C40C 00348FEC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
