@@ -304,8 +304,6 @@ void func_800880D8();
 
 void func_80088148(Fighter*, u32, u32, u32);
 
-void func_800887CC();
-
 void func_80088884();
 void func_800888E0();
 
