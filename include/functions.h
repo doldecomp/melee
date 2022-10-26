@@ -304,8 +304,6 @@ void func_800880D8();
 
 void func_80088148(Fighter*, u32, u32, u32);
 
-void func_80089B08(struct _HSD_GObj *pPlayerEntityStruct);
-
 void func_8008A2BC(struct _HSD_GObj *gobj);
 
 // s32 func_8008A9F8(HSD_GObj*);
