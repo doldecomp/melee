@@ -197,3 +197,28 @@ lbl_8034AE24:
 /* 8034AE2C 00347A0C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm s32 __OSGetEffectivePriority(OSThread*)
+{ // clang-format off
+    nofralloc
+/* 8034AE30 00347A10  80 83 02 D4 */	lwz r4, 0x2d4(r3)
+/* 8034AE34 00347A14  80 A3 02 F4 */	lwz r5, 0x2f4(r3)
+/* 8034AE38 00347A18  48 00 00 24 */	b lbl_8034AE5C
+lbl_8034AE3C:
+/* 8034AE3C 00347A1C  80 65 00 00 */	lwz r3, 0(r5)
+/* 8034AE40 00347A20  28 03 00 00 */	cmplwi r3, 0
+/* 8034AE44 00347A24  41 82 00 14 */	beq lbl_8034AE58
+/* 8034AE48 00347A28  80 03 02 D0 */	lwz r0, 0x2d0(r3)
+/* 8034AE4C 00347A2C  7C 00 20 00 */	cmpw r0, r4
+/* 8034AE50 00347A30  40 80 00 08 */	bge lbl_8034AE58
+/* 8034AE54 00347A34  7C 04 03 78 */	mr r4, r0
+lbl_8034AE58:
+/* 8034AE58 00347A38  80 A5 00 10 */	lwz r5, 0x10(r5)
+lbl_8034AE5C:
+/* 8034AE5C 00347A3C  28 05 00 00 */	cmplwi r5, 0
+/* 8034AE60 00347A40  40 82 FF DC */	bne lbl_8034AE3C
+/* 8034AE64 00347A44  7C 83 23 78 */	mr r3, r4
+/* 8034AE68 00347A48  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
