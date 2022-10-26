@@ -2444,3 +2444,13 @@ asm void func_80089824(HSD_GObj* fighter_gobj)
 /* 80089880 00086460  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_80089884()
+{ // clang-format off
+    nofralloc
+/* 80089884 00086464  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 80089888 00086468  38 63 20 70 */	addi r3, r3, 0x2070
+/* 8008988C 0008646C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
