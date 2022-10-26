@@ -59,5 +59,6 @@ void func_800892D4(Fighter* fp);
 void func_800895E0(Fighter* fp, s32 flags);
 void func_80089824(HSD_GObj* fighter_gobj);
 void func_80089B08(HSD_GObj* pPlayerEntityStruct);
+void func_8008A2BC(HSD_GObj* fighter_gobj);
 
 #endif
