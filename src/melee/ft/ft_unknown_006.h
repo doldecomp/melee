@@ -61,5 +61,6 @@ void func_80089824(HSD_GObj* fighter_gobj);
 void func_80089B08(HSD_GObj* pPlayerEntityStruct);
 void func_8008A2BC(HSD_GObj* fighter_gobj);
 void func_8008A324(HSD_GObj* fighter_gobj);
+BOOL func_8008A9F8(HSD_GObj* fighter_gobj);
 
 #endif
