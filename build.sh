@@ -85,7 +85,6 @@ build() {
 
     if [ "$result" != 0 ]; then
         echo "Build failed at $(build_time)."
-        exit "$result"
     fi
 
     if [ "$dump" = true ]; then
@@ -96,7 +95,7 @@ build() {
         dadosod dol "build/ssbm.us.1.2/main.dol" -m "build/map.csv" -o "dump"
     fi
 
-    if [ "$expected" = true ]; then
+    if [ "$expected" = true ] && [ "$result" = 0 ]; then
         echo "Syncing build to expected."
         mkdir -p build expected/build
         rsync -a --delete build/ expected/build/
@@ -109,6 +108,7 @@ build() {
     fi
 
     echo "Build finished at $(build_time)."
+    exit "$result"
 }
 
 if [ "$log" = true ]; then
