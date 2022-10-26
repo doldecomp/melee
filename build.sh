@@ -89,6 +89,7 @@ build() {
     fi
 
     if [ "$dump" = true ]; then
+        echo "Dumping main.dol to dump."
         rm -rf dump
         mkdir -p dump
         python "tools/parse_map.py"
