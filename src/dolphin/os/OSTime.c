@@ -54,3 +54,32 @@ asm unk_t __OSGetSystemTime()
 /* 8034C470 00349050  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t __OSTimeToSystemTime()
+{ // clang-format off
+    nofralloc
+/* 8034C474 00349054  7C 08 02 A6 */	mflr r0
+/* 8034C478 00349058  90 01 00 04 */	stw r0, 4(r1)
+/* 8034C47C 0034905C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8034C480 00349060  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8034C484 00349064  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 8034C488 00349068  7C 7F 1B 78 */	mr r31, r3
+/* 8034C48C 0034906C  7C 9E 23 78 */	mr r30, r4
+/* 8034C490 00349070  4B FF AE D5 */	bl OSDisableInterrupts
+/* 8034C494 00349074  3C A0 80 00 */	lis r5, 0x800030DC@ha
+/* 8034C498 00349078  80 85 30 DC */	lwz r4, 0x800030DC@l(r5)
+/* 8034C49C 0034907C  80 05 30 D8 */	lwz r0, 0x30d8(r5)
+/* 8034C4A0 00349080  7F C4 F0 14 */	addc r30, r4, r30
+/* 8034C4A4 00349084  7F E0 F9 14 */	adde r31, r0, r31
+/* 8034C4A8 00349088  4B FF AE E5 */	bl OSRestoreInterrupts
+/* 8034C4AC 0034908C  7F C4 F3 78 */	mr r4, r30
+/* 8034C4B0 00349090  7F E3 FB 78 */	mr r3, r31
+/* 8034C4B4 00349094  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8034C4B8 00349098  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8034C4BC 0034909C  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 8034C4C0 003490A0  7C 08 03 A6 */	mtlr r0
+/* 8034C4C4 003490A4  38 21 00 20 */	addi r1, r1, 0x20
+/* 8034C4C8 003490A8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
