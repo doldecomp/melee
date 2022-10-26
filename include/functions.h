@@ -274,7 +274,6 @@ void func_800804FC();
 void func_800819A8();
 
 void func_800852B0();
-void func_8008549C();
 
 void func_800855C8();
 void func_8008572C(u32);
