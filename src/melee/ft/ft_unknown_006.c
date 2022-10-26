@@ -3296,3 +3296,21 @@ lbl_8008A310:
 /* 8008A320 00086F00  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern f32 const lbl_804D843C;
+
+#pragma push
+asm void func_8008A324(HSD_GObj* fighter_gobj)
+{ // clang-format off
+    nofralloc
+/* 8008A324 00086F04  7C 08 02 A6 */	mflr r0
+/* 8008A328 00086F08  90 01 00 04 */	stw r0, 4(r1)
+/* 8008A32C 00086F0C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8008A330 00086F10  C0 22 8A 5C */	lfs f1, lbl_804D843C(r2)
+/* 8008A334 00086F14  48 00 00 15 */	bl func_8008A348
+/* 8008A338 00086F18  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8008A33C 00086F1C  38 21 00 08 */	addi r1, r1, 8
+/* 8008A340 00086F20  7C 08 03 A6 */	mtlr r0
+/* 8008A344 00086F24  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
