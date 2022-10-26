@@ -617,7 +617,6 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/OSTime.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSTime_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSUartExi.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSUartExi.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init.s.o\
 	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.c.o\
 
