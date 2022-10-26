@@ -47,7 +47,8 @@ unk_t func_8004B4B0();
 unk_t func_8009EDA4();
 unk_t func_8009F39C();
 unk_t func_800C703C();
-void func_800887CC(HSD_GObj* fighter_gobj);
-void func_80088884(HSD_GObj* fighter_gobj);
+void func_800887CC(Fighter* fp);
+void func_80088884(Fighter* fp);
+void func_800888E0(Fighter* fp);
 
 #endif
