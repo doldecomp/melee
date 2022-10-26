@@ -101,3 +101,14 @@ asm void OSInitThreadQueue(OSThreadQueue*)
 /* 8034AD38 00347918  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+// https://decomp.me/scratch/EPwIs
+#pragma push
+asm OSThread* OSGetCurrentThread(void)
+{ // clang-format off
+    nofralloc
+/* 8034AD3C 0034791C  3C 60 80 00 */	lis r3, 0x800000E4@ha
+/* 8034AD40 00347920  80 63 00 E4 */	lwz r3, 0x800000E4@l(r3)
+/* 8034AD44 00347924  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

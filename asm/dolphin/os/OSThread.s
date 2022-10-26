@@ -2,13 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240 
 
-# https://decomp.me/scratch/EPwIs
-.global OSGetCurrentThread
-OSGetCurrentThread:
-/* 8034AD3C 0034791C  3C 60 80 00 */	lis r3, 0x800000E4@ha
-/* 8034AD40 00347920  80 63 00 E4 */	lwz r3, 0x800000E4@l(r3)
-/* 8034AD44 00347924  4E 80 00 20 */	blr 
-
 .global OSDisableScheduler
 OSDisableScheduler:
 /* 8034AD48 00347928  7C 08 02 A6 */	mflr r0
