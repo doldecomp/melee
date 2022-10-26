@@ -52,5 +52,6 @@ void func_80088884(Fighter* fp);
 void func_800888E0(Fighter* fp);
 void func_80088A50(Fighter* fp);
 void func_80088C5C(Fighter* fp);
+void func_800890BC(Fighter* fp);
 
 #endif

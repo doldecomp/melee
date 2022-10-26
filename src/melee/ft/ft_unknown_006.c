@@ -1831,3 +1831,15 @@ lbl_80088ECC:
 /* 800890B8 00085C98  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm void func_800890BC(Fighter* fp)
+{ // clang-format off
+    nofralloc
+/* 800890BC 00085C9C  38 00 00 01 */	li r0, 1
+/* 800890C0 00085CA0  90 03 20 68 */	stw r0, 0x2068(r3)
+/* 800890C4 00085CA4  38 00 00 00 */	li r0, 0
+/* 800890C8 00085CA8  B0 03 20 6C */	sth r0, 0x206c(r3)
+/* 800890CC 00085CAC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
