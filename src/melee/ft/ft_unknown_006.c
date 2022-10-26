@@ -1843,3 +1843,32 @@ asm void func_800890BC(Fighter* fp)
 /* 800890CC 00085CAC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t func_80037208();
+
+#pragma push
+asm void func_800890D0(Fighter* fp, u8 move_id)
+{ // clang-format off
+    nofralloc
+/* 800890D0 00085CB0  7C 08 02 A6 */	mflr r0
+/* 800890D4 00085CB4  28 04 00 01 */	cmplwi r4, 1
+/* 800890D8 00085CB8  90 01 00 04 */	stw r0, 4(r1)
+/* 800890DC 00085CBC  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800890E0 00085CC0  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 800890E4 00085CC4  3B E3 00 00 */	addi r31, r3, 0
+/* 800890E8 00085CC8  41 82 00 10 */	beq lbl_800890F8
+/* 800890EC 00085CCC  80 1F 20 68 */	lwz r0, 0x2068(r31)
+/* 800890F0 00085CD0  7C 04 00 40 */	cmplw r4, r0
+/* 800890F4 00085CD4  41 82 00 10 */	beq lbl_80089104
+lbl_800890F8:
+/* 800890F8 00085CD8  90 9F 20 68 */	stw r4, 0x2068(r31)
+/* 800890FC 00085CDC  4B FA E1 0D */	bl func_80037208
+/* 80089100 00085CE0  B0 7F 20 6C */	sth r3, 0x206c(r31)
+lbl_80089104:
+/* 80089104 00085CE4  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 80089108 00085CE8  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8008910C 00085CEC  38 21 00 18 */	addi r1, r1, 0x18
+/* 80089110 00085CF0  7C 08 03 A6 */	mtlr r0
+/* 80089114 00085CF4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
