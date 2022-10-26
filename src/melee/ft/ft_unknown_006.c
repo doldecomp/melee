@@ -1,5 +1,6 @@
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/chara/ftFox/ftfox.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 
@@ -2492,5 +2493,36 @@ asm unk_t func_800898B4()
 /* 800898B4 00086494  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 800898B8 00086498  38 63 18 D8 */	addi r3, r3, 0x18d8
 /* 800898BC 0008649C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t func_800898C0()
+{ // clang-format off
+    nofralloc
+/* 800898C0 000864A0  7C 08 02 A6 */	mflr r0
+/* 800898C4 000864A4  90 01 00 04 */	stw r0, 4(r1)
+/* 800898C8 000864A8  94 21 FF F8 */	stwu r1, -8(r1)
+/* 800898CC 000864AC  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 800898D0 000864B0  88 03 20 73 */	lbz r0, 0x2073(r3)
+/* 800898D4 000864B4  28 00 00 71 */	cmplwi r0, 0x71
+/* 800898D8 000864B8  41 82 00 20 */	beq lbl_800898F8
+/* 800898DC 000864BC  28 00 00 72 */	cmplwi r0, 0x72
+/* 800898E0 000864C0  41 82 00 18 */	beq lbl_800898F8
+/* 800898E4 000864C4  28 00 00 63 */	cmplwi r0, 0x63
+/* 800898E8 000864C8  41 82 00 10 */	beq lbl_800898F8
+/* 800898EC 000864CC  48 05 C0 85 */	bl ftFox_AppealS_CheckIfUsed
+/* 800898F0 000864D0  2C 03 00 00 */	cmpwi r3, 0
+/* 800898F4 000864D4  41 82 00 0C */	beq lbl_80089900
+lbl_800898F8:
+/* 800898F8 000864D8  38 60 00 01 */	li r3, 1
+/* 800898FC 000864DC  48 00 00 08 */	b lbl_80089904
+lbl_80089900:
+/* 80089900 000864E0  38 60 00 00 */	li r3, 0
+lbl_80089904:
+/* 80089904 000864E4  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 80089908 000864E8  38 21 00 08 */	addi r1, r1, 8
+/* 8008990C 000864EC  7C 08 03 A6 */	mtlr r0
+/* 80089910 000864F0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
