@@ -8,23 +8,26 @@ skip_check=0
 frank=0
 clear=false
 log=false
+dump=false
 
-usage="$(basename "$0") [-hcefmnsxl] [-r pattern]
+usage="$(basename "$0") [-hcefmnsxld] [-r pattern]
 
 where
     -h  help: show this message
-    -c  clean: ""make clean"" before running make
+    -c  clean: \"make clean\" before running make
     -r  rebuild: delete *.o files matching the given pattern; -c takes priority
     -e  expected: after a successful make run, sync ./build to ./expected/build
-                  (requires ""pacman -S rsync"")
+                  (requires \"pacman -S rsync\")
     -f  frank: pass EPILOGUE_PROCESS=1 to make
     -m  map: pass GENERATE_MAP=1 to make
     -n  non-matching: pass NON_MATCHING=1 to make
     -s  skip check: pass SKIP_CHECK=1 to make
     -x  clear: clear the console before executing this script
-    -l  log: tee output to build.log"
+    -l  log: tee output to build.log
+    -d  dump: dump the built dol to asm afterward
+              (requires rust and \"cargo install --git https://github.com/InusualZ/dadosod\""
 
-while getopts ":hcemnsfxlr:" arg; do
+while getopts ":hcemnsfxldr:" arg; do
     case $arg in
     h)
         echo "$usage"
@@ -39,6 +42,7 @@ while getopts ":hcemnsfxlr:" arg; do
     f) frank=1 ;;
     x) clear=true ;;
     l) log=true ;;
+    d) dump=true ;;
     :)
         printf "missing argument for -%s\n" "$OPTARG" >&2
         echo "$usage" >&2
@@ -79,13 +83,27 @@ build() {
     make $make_flags
     result=$?
 
+    if [ "$result" != 0 ]; then
+        echo "Build failed at $(build_time)."
+        exit "$result"
+    fi
+
+    if [ "$dump" = true ]; then
+        rm -rf dump
+        mkdir -p dump
+        python "tools/parse_map.py"
+        dadosod dol "build/ssbm.us.1.2/main.dol" -m "build/map.csv" -o "dump"
+    fi
+
     if [ "$expected" = true ]; then
-        if [ "$result" != 0 ]; then
-            echo >&2 "Make failed. Not syncing to expected."
-        else
-            echo "Syncing build to expected."
-            mkdir -p build expected/build
-            rsync -a --delete build/ expected/build/
+        echo "Syncing build to expected."
+        mkdir -p build expected/build
+        rsync -a --delete build/ expected/build/
+
+        if [ "$dump" = true ]; then
+            echo "Syncing dump to expected."
+            mkdir -p dump expected/dump
+            rsync -a --delete dump/ expected/dump/
         fi
     fi
 
