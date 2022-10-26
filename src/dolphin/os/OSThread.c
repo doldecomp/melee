@@ -159,3 +159,41 @@ asm s32 OSEnableScheduler(void)
 /* 8034ADC4 003479A4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t UnsetRun()
+{ // clang-format off
+    nofralloc
+/* 8034ADC8 003479A8  80 83 02 E0 */	lwz r4, 0x2e0(r3)
+/* 8034ADCC 003479AC  80 A3 02 DC */	lwz r5, 0x2dc(r3)
+/* 8034ADD0 003479B0  28 04 00 00 */	cmplwi r4, 0
+/* 8034ADD4 003479B4  80 C3 02 E4 */	lwz r6, 0x2e4(r3)
+/* 8034ADD8 003479B8  40 82 00 0C */	bne lbl_8034ADE4
+/* 8034ADDC 003479BC  90 C5 00 04 */	stw r6, 4(r5)
+/* 8034ADE0 003479C0  48 00 00 08 */	b lbl_8034ADE8
+lbl_8034ADE4:
+/* 8034ADE4 003479C4  90 C4 02 E4 */	stw r6, 0x2e4(r4)
+lbl_8034ADE8:
+/* 8034ADE8 003479C8  28 06 00 00 */	cmplwi r6, 0
+/* 8034ADEC 003479CC  40 82 00 0C */	bne lbl_8034ADF8
+/* 8034ADF0 003479D0  90 85 00 00 */	stw r4, 0(r5)
+/* 8034ADF4 003479D4  48 00 00 08 */	b lbl_8034ADFC
+lbl_8034ADF8:
+/* 8034ADF8 003479D8  90 86 02 E0 */	stw r4, 0x2e0(r6)
+lbl_8034ADFC:
+/* 8034ADFC 003479DC  80 05 00 00 */	lwz r0, 0(r5)
+/* 8034AE00 003479E0  28 00 00 00 */	cmplwi r0, 0
+/* 8034AE04 003479E4  40 82 00 20 */	bne lbl_8034AE24
+/* 8034AE08 003479E8  80 03 02 D0 */	lwz r0, 0x2d0(r3)
+/* 8034AE0C 003479EC  38 80 00 01 */	li r4, 1
+/* 8034AE10 003479F0  80 AD BD 38 */	lwz r5, lbl_804D73D8(r13)
+/* 8034AE14 003479F4  20 00 00 1F */	subfic r0, r0, 0x1f
+/* 8034AE18 003479F8  7C 80 00 30 */	slw r0, r4, r0
+/* 8034AE1C 003479FC  7C A0 00 78 */	andc r0, r5, r0
+/* 8034AE20 00347A00  90 0D BD 38 */	stw r0, lbl_804D73D8(r13)
+lbl_8034AE24:
+/* 8034AE24 00347A04  38 00 00 00 */	li r0, 0
+/* 8034AE28 00347A08  90 03 02 DC */	stw r0, 0x2dc(r3)
+/* 8034AE2C 00347A0C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
