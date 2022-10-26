@@ -452,7 +452,6 @@ void func_800CB110(HSD_GObj *, s32, f32);
 
 void func_800CC730(struct _HSD_GObj *);
 
-void func_800D0FA0();
 void func_800D105C(struct _HSD_GObj *);
 void func_800D14E4();
 
