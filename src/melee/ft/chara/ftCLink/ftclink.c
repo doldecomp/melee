@@ -111,15 +111,15 @@ void func_80149114(HSD_GObj* gobj)
     func_80088148(fp, 0x111DA, 0x7F, 0x40);
 }
 
-void func_8014919C(HSD_GObj* gobj)
+void func_8014919C(HSD_GObj* fighter_gobj)
 {
     CLinkAttributes* attrs;
     s32 unused[2];
 
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     if (fp->x5F8 == 0) {
         attrs = (void*) fp->x2D4_specialAttributes;
-        func_8007B1B8(gobj, &attrs->xC4, func_80149114);
+        func_8007B1B8(fighter_gobj, &attrs->xC4, func_80149114);
         fp->x221B_flag.bits.b3 = 1;
         fp->x221B_flag.bits.b4 = 1;
         fp->x221B_flag.bits.b2 = 1;

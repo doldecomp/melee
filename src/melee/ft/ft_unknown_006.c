@@ -1,5 +1,6 @@
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftFox/ftfox.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
@@ -3312,5 +3313,113 @@ asm void func_8008A324(HSD_GObj* fighter_gobj)
 /* 8008A33C 00086F1C  38 21 00 08 */	addi r1, r1, 8
 /* 8008A340 00086F20  7C 08 03 A6 */	mtlr r0
 /* 8008A344 00086F24  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+extern f32 const lbl_804D8440;
+extern unk_t func_800EB3BC();
+extern unk_t func_8008A6D8();
+extern unk_t func_80085FD4();
+extern unk_t func_8008A698();
+extern unk_t func_802BDB94();
+extern unk_t func_800C4ED8();
+extern BOOL func_800C5240(HSD_GObj* fighter_gobj);
+extern unk_t func_800C8B74();
+
+#pragma push
+asm unk_t func_8008A348()
+{ // clang-format off
+    nofralloc
+/* 8008A348 00086F28  7C 08 02 A6 */	mflr r0
+/* 8008A34C 00086F2C  90 01 00 04 */	stw r0, 4(r1)
+/* 8008A350 00086F30  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 8008A354 00086F34  DB E1 00 20 */	stfd f31, 0x20(r1)
+/* 8008A358 00086F38  FF E0 08 90 */	fmr f31, f1
+/* 8008A35C 00086F3C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8008A360 00086F40  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 8008A364 00086F44  7C 7E 1B 78 */	mr r30, r3
+/* 8008A368 00086F48  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 8008A36C 00086F4C  88 03 22 24 */	lbz r0, 0x2224(r3)
+/* 8008A370 00086F50  3B E3 00 00 */	addi r31, r3, 0
+/* 8008A374 00086F54  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
+/* 8008A378 00086F58  41 82 00 10 */	beq lbl_8008A388
+/* 8008A37C 00086F5C  7F C3 F3 78 */	mr r3, r30
+/* 8008A380 00086F60  48 03 E7 F5 */	bl func_800C8B74
+/* 8008A384 00086F64  48 00 00 F4 */	b lbl_8008A478
+lbl_8008A388:
+/* 8008A388 00086F68  7F C3 F3 78 */	mr r3, r30
+/* 8008A38C 00086F6C  48 03 AE B5 */	bl func_800C5240
+/* 8008A390 00086F70  2C 03 00 00 */	cmpwi r3, 0
+/* 8008A394 00086F74  41 82 00 10 */	beq lbl_8008A3A4
+/* 8008A398 00086F78  7F C3 F3 78 */	mr r3, r30
+/* 8008A39C 00086F7C  48 03 AB 3D */	bl func_800C4ED8
+/* 8008A3A0 00086F80  48 00 00 D8 */	b lbl_8008A478
+lbl_8008A3A4:
+/* 8008A3A4 00086F84  80 1F 00 E0 */	lwz r0, 0xe0(r31)
+/* 8008A3A8 00086F88  2C 00 00 01 */	cmpwi r0, 1
+/* 8008A3AC 00086F8C  40 82 00 0C */	bne lbl_8008A3B8
+/* 8008A3B0 00086F90  7F E3 FB 78 */	mr r3, r31
+/* 8008A3B4 00086F94  4B FF 34 49 */	bl func_8007D7FC
+lbl_8008A3B8:
+/* 8008A3B8 00086F98  80 1F 00 04 */	lwz r0, 4(r31)
+/* 8008A3BC 00086F9C  2C 00 00 09 */	cmpwi r0, 9
+/* 8008A3C0 00086FA0  40 82 00 24 */	bne lbl_8008A3E4
+/* 8008A3C4 00086FA4  80 7F 19 74 */	lwz r3, 0x1974(r31)
+/* 8008A3C8 00086FA8  28 03 00 00 */	cmplwi r3, 0
+/* 8008A3CC 00086FAC  41 82 00 18 */	beq lbl_8008A3E4
+/* 8008A3D0 00086FB0  48 1E 0F 31 */	bl itGetKind
+/* 8008A3D4 00086FB4  2C 03 00 67 */	cmpwi r3, 0x67
+/* 8008A3D8 00086FB8  40 82 00 0C */	bne lbl_8008A3E4
+/* 8008A3DC 00086FBC  80 7F 19 74 */	lwz r3, 0x1974(r31)
+/* 8008A3E0 00086FC0  48 23 37 B5 */	bl func_802BDB94
+lbl_8008A3E4:
+/* 8008A3E4 00086FC4  FC 60 F8 90 */	fmr f3, f31
+/* 8008A3E8 00086FC8  C0 22 8A 58 */	lfs f1, lbl_804D8438(r2)
+/* 8008A3EC 00086FCC  C0 42 8A 60 */	lfs f2, lbl_804D8440(r2)
+/* 8008A3F0 00086FD0  38 7E 00 00 */	addi r3, r30, 0
+/* 8008A3F4 00086FD4  38 80 00 0E */	li r4, 0xe
+/* 8008A3F8 00086FD8  38 A0 00 00 */	li r5, 0
+/* 8008A3FC 00086FDC  38 C0 00 00 */	li r6, 0
+/* 8008A400 00086FE0  4B FD EF AD */	bl Fighter_ActionStateChange_800693AC
+/* 8008A404 00086FE4  7F E3 FB 78 */	mr r3, r31
+/* 8008A408 00086FE8  48 00 02 91 */	bl func_8008A698
+/* 8008A40C 00086FEC  2C 03 00 00 */	cmpwi r3, 0
+/* 8008A410 00086FF0  41 82 00 28 */	beq lbl_8008A438
+/* 8008A414 00086FF4  38 7F 00 00 */	addi r3, r31, 0
+/* 8008A418 00086FF8  38 80 00 06 */	li r4, 6
+/* 8008A41C 00086FFC  4B FF BB B9 */	bl func_80085FD4
+/* 8008A420 00087000  80 03 00 08 */	lwz r0, 8(r3)
+/* 8008A424 00087004  28 00 00 00 */	cmplwi r0, 0
+/* 8008A428 00087008  41 82 00 10 */	beq lbl_8008A438
+/* 8008A42C 0008700C  38 7E 00 00 */	addi r3, r30, 0
+/* 8008A430 00087010  38 80 00 06 */	li r4, 6
+/* 8008A434 00087014  48 00 02 A5 */	bl func_8008A6D8
+lbl_8008A438:
+/* 8008A438 00087018  80 8D AE B4 */	lwz r4, p_ftCommonData(r13)
+/* 8008A43C 0008701C  7F E3 FB 78 */	mr r3, r31
+/* 8008A440 00087020  80 84 05 F0 */	lwz r4, 0x5f0(r4)
+/* 8008A444 00087024  4B FF 4B 7D */	bl func_8007EFC0
+/* 8008A448 00087028  80 1F 00 04 */	lwz r0, 4(r31)
+/* 8008A44C 0008702C  2C 00 00 14 */	cmpwi r0, 0x14
+/* 8008A450 00087030  41 82 00 20 */	beq lbl_8008A470
+/* 8008A454 00087034  40 80 00 24 */	bge lbl_8008A478
+/* 8008A458 00087038  2C 00 00 06 */	cmpwi r0, 6
+/* 8008A45C 0008703C  41 82 00 08 */	beq lbl_8008A464
+/* 8008A460 00087040  48 00 00 18 */	b lbl_8008A478
+lbl_8008A464:
+/* 8008A464 00087044  7F C3 F3 78 */	mr r3, r30
+/* 8008A468 00087048  48 06 0F 55 */	bl func_800EB3BC
+/* 8008A46C 0008704C  48 00 00 0C */	b lbl_8008A478
+lbl_8008A470:
+/* 8008A470 00087050  7F C3 F3 78 */	mr r3, r30
+/* 8008A474 00087054  48 0B ED 29 */	bl func_8014919C
+lbl_8008A478:
+/* 8008A478 00087058  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 8008A47C 0008705C  CB E1 00 20 */	lfd f31, 0x20(r1)
+/* 8008A480 00087060  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8008A484 00087064  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 8008A488 00087068  38 21 00 28 */	addi r1, r1, 0x28
+/* 8008A48C 0008706C  7C 08 03 A6 */	mtlr r0
+/* 8008A490 00087070  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop

@@ -4,6 +4,8 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+void func_8014919C(HSD_GObj* fighter_gobj);
+
 typedef struct _CLinkAttributes {
     s32 x0_pad[(0xC - 0x0) / 4];
     s32 xC;
