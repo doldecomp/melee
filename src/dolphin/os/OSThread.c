@@ -1,3 +1,4 @@
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 
 extern unk_t _stack_end;
@@ -110,5 +111,28 @@ asm OSThread* OSGetCurrentThread(void)
 /* 8034AD3C 0034791C  3C 60 80 00 */	lis r3, 0x800000E4@ha
 /* 8034AD40 00347920  80 63 00 E4 */	lwz r3, 0x800000E4@l(r3)
 /* 8034AD44 00347924  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm s32 OSDisableScheduler(void)
+{ // clang-format off
+    nofralloc
+/* 8034AD48 00347928  7C 08 02 A6 */	mflr r0
+/* 8034AD4C 0034792C  90 01 00 04 */	stw r0, 4(r1)
+/* 8034AD50 00347930  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8034AD54 00347934  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8034AD58 00347938  4B FF C6 0D */	bl OSDisableInterrupts
+/* 8034AD5C 0034793C  80 8D BD 40 */	lwz r4, lbl_804D73E0(r13)
+/* 8034AD60 00347940  38 04 00 01 */	addi r0, r4, 1
+/* 8034AD64 00347944  90 0D BD 40 */	stw r0, lbl_804D73E0(r13)
+/* 8034AD68 00347948  7C 9F 23 78 */	mr r31, r4
+/* 8034AD6C 0034794C  4B FF C6 21 */	bl OSRestoreInterrupts
+/* 8034AD70 00347950  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8034AD74 00347954  7F E3 FB 78 */	mr r3, r31
+/* 8034AD78 00347958  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8034AD7C 0034795C  38 21 00 10 */	addi r1, r1, 0x10
+/* 8034AD80 00347960  7C 08 03 A6 */	mtlr r0
+/* 8034AD84 00347964  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
