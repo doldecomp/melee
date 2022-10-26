@@ -29,3 +29,12 @@ lbl_8034C8A4:
 /* 8034C8B0 00349490  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t ReadUARTN()
+{ // clang-format off
+    nofralloc
+/* 8034C8B4 00349494  38 60 00 04 */	li r3, 4
+/* 8034C8B8 00349498  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

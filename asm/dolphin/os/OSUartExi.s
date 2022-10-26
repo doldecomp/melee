@@ -2,11 +2,6 @@
 
 .section .text  # 0x8034C86C - 0x8034CAB8
 
-.global ReadUARTN
-ReadUARTN:
-/* 8034C8B4 00349494  38 60 00 04 */	li r3, 4
-/* 8034C8B8 00349498  4E 80 00 20 */	blr 
-
 .global WriteUARTN
 WriteUARTN:
 /* 8034C8BC 0034949C  7C 08 02 A6 */	mflr r0
