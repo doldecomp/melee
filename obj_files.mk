@@ -613,7 +613,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/os/OSSerial_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSSync.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSThread.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSThread.s.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSThread_data.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSTime.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSUartExi.s.o\
 	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init.s.o\
