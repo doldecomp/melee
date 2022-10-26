@@ -2,25 +2,6 @@
 
 .section .text  # 0x80342E94 - 0x803B7240 
 
-.global OSEnableScheduler
-OSEnableScheduler:
-/* 8034AD88 00347968  7C 08 02 A6 */	mflr r0
-/* 8034AD8C 0034796C  90 01 00 04 */	stw r0, 4(r1)
-/* 8034AD90 00347970  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8034AD94 00347974  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8034AD98 00347978  4B FF C5 CD */	bl OSDisableInterrupts
-/* 8034AD9C 0034797C  80 8D BD 40 */	lwz r4, lbl_804D73E0@sda21(r13)
-/* 8034ADA0 00347980  38 04 FF FF */	addi r0, r4, -1
-/* 8034ADA4 00347984  90 0D BD 40 */	stw r0, lbl_804D73E0@sda21(r13)
-/* 8034ADA8 00347988  7C 9F 23 78 */	mr r31, r4
-/* 8034ADAC 0034798C  4B FF C5 E1 */	bl OSRestoreInterrupts
-/* 8034ADB0 00347990  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8034ADB4 00347994  7F E3 FB 78 */	mr r3, r31
-/* 8034ADB8 00347998  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8034ADBC 0034799C  38 21 00 10 */	addi r1, r1, 0x10
-/* 8034ADC0 003479A0  7C 08 03 A6 */	mtlr r0
-/* 8034ADC4 003479A4  4E 80 00 20 */	blr 
-
 .global UnsetRun
 UnsetRun:
 /* 8034ADC8 003479A8  80 83 02 E0 */	lwz r4, 0x2e0(r3)
