@@ -2002,3 +2002,23 @@ lbl_80089284:
 /* 8008929C 00085E7C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm void func_800892A0(HSD_GObj* fighter_gobj)
+{ // clang-format off
+    nofralloc
+/* 800892A0 00085E80  7C 08 02 A6 */	mflr r0
+/* 800892A4 00085E84  90 01 00 04 */	stw r0, 4(r1)
+/* 800892A8 00085E88  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800892AC 00085E8C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800892B0 00085E90  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800892B4 00085E94  80 1F 20 68 */	lwz r0, 0x2068(r31)
+/* 800892B8 00085E98  4B FA DF 51 */	bl func_80037208
+/* 800892BC 00085E9C  B0 7F 20 6C */	sth r3, 0x206c(r31)
+/* 800892C0 00085EA0  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800892C4 00085EA4  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800892C8 00085EA8  38 21 00 20 */	addi r1, r1, 0x20
+/* 800892CC 00085EAC  7C 08 03 A6 */	mtlr r0
+/* 800892D0 00085EB0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

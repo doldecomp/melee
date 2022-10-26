@@ -54,5 +54,6 @@ void func_80088A50(Fighter* fp);
 void func_80088C5C(Fighter* fp);
 void func_800890BC(Fighter* fp);
 void func_800890D0(Fighter* fp, u8 move_id);
+void func_800892A0(HSD_GObj* fighter_gobj);
 
 #endif
