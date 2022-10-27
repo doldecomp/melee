@@ -1298,7 +1298,7 @@ block_friction:
     func_8007CE94(fp, friction);
 }
 
-extern f32 sqrtf__Ff(f32 arg0);
+extern f32 sqrtf__Ff(f32);
 
 inline void ftNess_atan2(HSD_GObj* fighter_gobj)
 {
