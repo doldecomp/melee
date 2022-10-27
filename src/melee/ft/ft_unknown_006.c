@@ -5439,3 +5439,30 @@ asm unk_t lbl_8008BC00()
 /* 8008BC30 00088810  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t func_8008BC70();
+
+#pragma push
+asm unk_t func_8008BC34()
+{ // clang-format off
+    nofralloc
+/* 8008BC34 00088814  7C 08 02 A6 */	mflr r0
+/* 8008BC38 00088818  90 01 00 04 */	stw r0, 4(r1)
+/* 8008BC3C 0008881C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8008BC40 00088820  80 83 00 2C */	lwz r4, 0x2c(r3)
+/* 8008BC44 00088824  80 04 00 04 */	lwz r0, 4(r4)
+/* 8008BC48 00088828  2C 00 00 18 */	cmpwi r0, 0x18
+/* 8008BC4C 0008882C  41 82 00 08 */	beq lbl_8008BC54
+/* 8008BC50 00088830  48 00 00 0C */	b lbl_8008BC5C
+lbl_8008BC54:
+/* 8008BC54 00088834  48 0B F1 65 */	bl ftGameWatch_AttackLw3_Action
+/* 8008BC58 00088838  48 00 00 08 */	b lbl_8008BC60
+lbl_8008BC5C:
+/* 8008BC5C 0008883C  48 00 00 15 */	bl func_8008BC70
+lbl_8008BC60:
+/* 8008BC60 00088840  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8008BC64 00088844  38 21 00 08 */	addi r1, r1, 8
+/* 8008BC68 00088848  7C 08 03 A6 */	mtlr r0
+/* 8008BC6C 0008884C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
