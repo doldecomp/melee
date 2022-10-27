@@ -303,8 +303,6 @@ void ftFox_SpecialLwLoop_IASA(HSD_GObj* fighter_gobj)
     }
 }
 
-extern BOOL func_800CB870(HSD_GObj*);
-
 // 0x800E8B64
 // https://decomp.me/scratch/SVWjl // Fox & Falco's aerial Reflector Loop IASA callback
 void ftFox_SpecialAirLwLoop_IASA(HSD_GObj* fighter_gobj)
