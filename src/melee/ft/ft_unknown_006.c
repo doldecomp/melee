@@ -2,6 +2,7 @@
 
 #include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftFox/ftfox.h>
+#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftcoll.h>
@@ -4004,5 +4005,32 @@ asm unk_t lbl_8008AB50()
 /* 8008AB78 00087758  38 21 00 18 */	addi r1, r1, 0x18
 /* 8008AB7C 0008775C  7C 08 03 A6 */	mtlr r0
 /* 8008AB80 00087760  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+extern unk_t func_8008ABC0();
+
+#pragma push
+asm unk_t func_8008AB84()
+{ // clang-format off
+    nofralloc
+/* 8008AB84 00087764  7C 08 02 A6 */	mflr r0
+/* 8008AB88 00087768  90 01 00 04 */	stw r0, 4(r1)
+/* 8008AB8C 0008776C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8008AB90 00087770  80 83 00 2C */	lwz r4, 0x2c(r3)
+/* 8008AB94 00087774  80 04 00 04 */	lwz r0, 4(r4)
+/* 8008AB98 00087778  2C 00 00 18 */	cmpwi r0, 0x18
+/* 8008AB9C 0008777C  41 82 00 08 */	beq lbl_8008ABA4
+/* 8008ABA0 00087780  48 00 00 0C */	b lbl_8008ABAC
+lbl_8008ABA4:
+/* 8008ABA4 00087784  48 0C 14 D9 */	bl ftGameWatch_Attack11_Action
+/* 8008ABA8 00087788  48 00 00 08 */	b lbl_8008ABB0
+lbl_8008ABAC:
+/* 8008ABAC 0008778C  48 00 00 15 */	bl func_8008ABC0
+lbl_8008ABB0:
+/* 8008ABB0 00087790  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8008ABB4 00087794  38 21 00 08 */	addi r1, r1, 8
+/* 8008ABB8 00087798  7C 08 03 A6 */	mtlr r0
+/* 8008ABBC 0008779C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop

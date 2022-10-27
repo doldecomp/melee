@@ -11,7 +11,6 @@
 #include <melee/ft/ftcommon.h>
 
 typedef enum ftMarioAction {
-
     AS_MARIO_UNK1 = 341,
     AS_MARIO_UNK2,
     AS_MARIO_SPECIALN,
@@ -22,7 +21,6 @@ typedef enum ftMarioAction {
     AS_MARIO_SPECIALAIRHI,
     AS_MARIO_SPECIALLW,
     AS_MARIO_SPECIALAIRLW,
-
 } ftMarioAction;
 
 // Flags used by Mario & Dr. Mario in Action State Change //

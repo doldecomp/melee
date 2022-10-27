@@ -31,8 +31,7 @@
 
 // Mr. Game & Watch Action State IDs //
 
-typedef enum ftGameWatchAction
-{
+typedef enum ftGameWatchAction {
     AS_GAMEWATCH_ATTACK11 = 341,
     AS_GAMEWATCH_ATTACK100START,
     AS_GAMEWATCH_ATTACK100LOOP,
