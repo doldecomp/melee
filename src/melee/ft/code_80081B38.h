@@ -10,6 +10,8 @@ void func_80084DB0(HSD_GObj* fighter_gobj);
 void func_80082C74(HSD_GObj* fighter_gobj, void cb_OnLand(HSD_GObj*));
 void func_80084EEC(HSD_GObj* fighter_gobj);
 unk_t func_80081DD4();
+unk_t func_80081DD4();
+unk_t func_8008370C();
 unk_t func_800848DC();
 
 #endif
