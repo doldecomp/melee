@@ -210,8 +210,7 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialS_SetReflect(fighter_gobj);
 }
 
-extern void func_8008403C(HSD_GObj*, void(*cb)(HSD_GObj*));
-extern void func_80082C74(HSD_GObj*, void(*cb)(HSD_GObj*));
+extern void func_8008403C(HSD_GObj*, void (*cb)(HSD_GObj*));
 
 // 0x80146BB8 - Mewtwo's grounded Confusion Collision callback
 void ftMewtwo_SpecialS_Coll(HSD_GObj* fighter_gobj)

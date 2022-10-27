@@ -392,8 +392,6 @@ void ftGameWatch_AttackAirN_Phys(HSD_GObj* fighter_gobj)
     func_80084DB0(fighter_gobj);
 }
 
-extern void func_80082C74(HSD_GObj*, void cb_OnLand(HSD_GObj*));
-
 // 0x8014B780
 // https://decomp.me/scratch/aIqYH // Mr. Game & Watch's Neutral Aerial Collision callback
 void ftGameWatch_AttackAirN_Coll(HSD_GObj* fighter_gobj)

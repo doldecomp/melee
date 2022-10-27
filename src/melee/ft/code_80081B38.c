@@ -1337,7 +1337,7 @@ lbl_80082C54:
 #pragma pop
 
 #pragma push
-asm unk_t func_80082C74()
+asm void func_80082C74(HSD_GObj* fighter_gobj, void cb_OnLand(HSD_GObj*))
 { // clang-format off
     nofralloc
 /* 80082C74 0007F854  7C 08 02 A6 */	mflr r0
