@@ -5,6 +5,7 @@
 
 #include <sysdolphin/baselib/gobj.h>
 
+#include <common_structs.h>
 #include <melee/ft/fighter.h>
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1);
@@ -90,5 +91,6 @@ void func_80090780(HSD_GObj* fighter_gobj);
 void func_800CCAAC(HSD_GObj* fighter_gobj);
 void func_80097D40(HSD_GObj* fighter_gobj);
 unk_t func_80090828();
+func_80090594(Fighter* fp, s32 damage_dealt, BOOL bool, s32 action_state_index, GroundOrAir ground_or_air, f32 vibrate_mult);
 
 #endif
