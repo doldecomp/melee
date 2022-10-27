@@ -583,8 +583,6 @@ void ftGameWatch_LandingAirN_Init(HSD_GObj* fighter_gobj)
     func_8008D708(fighter_gobj, AS_GAMEWATCH_LANDINGAIRN, fp->x110_attr.x1F8_NAirLandingLag);
 }
 
-extern void func_800D5D3C(HSD_GObj*);
-
 // 0x8014BB24
 // https://decomp.me/scratch/xQdJ2 // Mr. Game & Watch's Neutral Aerial Landing Animation callback
 void ftGameWatch_LandingAirN_Anim(HSD_GObj* fighter_gobj)

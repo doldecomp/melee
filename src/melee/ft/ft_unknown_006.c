@@ -7727,3 +7727,18 @@ asm void func_8008D708(HSD_GObj* fighter_gobj, s32 asid, f32 lag)
 /* 8008D788 0008A368  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_8008D78C()
+{ // clang-format off
+    nofralloc
+/* 8008D78C 0008A36C  7C 08 02 A6 */	mflr r0
+/* 8008D790 0008A370  90 01 00 04 */	stw r0, 4(r1)
+/* 8008D794 0008A374  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8008D798 0008A378  48 04 85 A5 */	bl func_800D5D3C
+/* 8008D79C 0008A37C  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8008D7A0 0008A380  38 21 00 08 */	addi r1, r1, 8
+/* 8008D7A4 0008A384  7C 08 03 A6 */	mtlr r0
+/* 8008D7A8 0008A388  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
