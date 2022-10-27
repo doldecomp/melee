@@ -13056,3 +13056,13 @@ lbl_80091B78:
 /* 80091B8C 0008E76C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_80091B90()
+{ // clang-format off
+    nofralloc
+/* 80091B90 0008E770  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 80091B94 0008E774  90 83 23 60 */	stw r4, 0x2360(r3)
+/* 80091B98 0008E778  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
