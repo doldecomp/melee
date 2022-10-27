@@ -4727,12 +4727,10 @@ lbl_804DEA1C:
 	.float 1.0
 .global lbl_804DEA20
 lbl_804DEA20:
-	.float 1.75
-	.4byte NULL
+	.double 0.5
 .global lbl_804DEA28
 lbl_804DEA28:
-	.float 2.125
-	.4byte NULL
+	.double 3.0
 .global lbl_804DEA30
 lbl_804DEA30:
 	.4byte 0x40454000

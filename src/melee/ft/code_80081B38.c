@@ -150,7 +150,7 @@ lbl_80081CE0:
 extern unk_t func_80081A00();
 
 #pragma push
-asm BOOL func_80081D0C(HSD_GObj fighter_gobj)
+asm BOOL func_80081D0C(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80081D0C 0007E8EC  7C 08 02 A6 */	mflr r0
