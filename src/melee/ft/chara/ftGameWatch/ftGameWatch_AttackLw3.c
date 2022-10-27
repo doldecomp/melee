@@ -155,7 +155,6 @@ extern BOOL func_800C9468(HSD_GObj*);
 extern BOOL func_800C97DC(HSD_GObj*);
 extern BOOL func_800CA094(HSD_GObj*);
 extern BOOL func_800CAED0(HSD_GObj*);
-extern BOOL func_800D5F58(HSD_GObj*);
 
 // 0x8014AE78
 // https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA callback 
