@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
+#include <melee/ft/ft_unknown_006.h>
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags
@@ -87,8 +88,6 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialAirS_SetGrab(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
 }
-
-extern void func_80090780(HSD_GObj*);
 
 inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 {
