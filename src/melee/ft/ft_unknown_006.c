@@ -4,6 +4,7 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 #include <melee/ft/chara/ftNess/ftNess.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftcoll.h>
@@ -7559,5 +7560,20 @@ lbl_8008D59C:
 /* 8008D5A8 0008A188  38 21 00 20 */	addi r1, r1, 0x20
 /* 8008D5AC 0008A18C  7C 08 03 A6 */	mtlr r0
 /* 8008D5B0 0008A190  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t func_8008D5B4()
+{ // clang-format off
+    nofralloc
+/* 8008D5B4 0008A194  7C 08 02 A6 */	mflr r0
+/* 8008D5B8 0008A198  90 01 00 04 */	stw r0, 4(r1)
+/* 8008D5BC 0008A19C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8008D5C0 0008A1A0  4B FF 77 F1 */	bl func_80084DB0
+/* 8008D5C4 0008A1A4  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8008D5C8 0008A1A8  38 21 00 08 */	addi r1, r1, 8
+/* 8008D5CC 0008A1AC  7C 08 03 A6 */	mtlr r0
+/* 8008D5D0 0008A1B0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop

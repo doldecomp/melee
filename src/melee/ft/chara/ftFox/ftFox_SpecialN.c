@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
+#include <melee/ft/code_80081B38.h>
 
 // 0x800E5CB0
 // https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position for Blaster GFX - used in Fox's fp code
@@ -633,8 +634,6 @@ void ftFox_SpecialNEnd_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084F3C(fighter_gobj);
 }
-
-extern void func_80084DB0(HSD_GObj*);
 
 // 0x800E6BBC - Fox & Falco's aerial Blaster Start Physics callback
 void ftFox_SpecialAirNStart_Phys(HSD_GObj* fighter_gobj)

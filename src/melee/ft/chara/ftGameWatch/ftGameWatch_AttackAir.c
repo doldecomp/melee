@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include <melee/ft/code_80081B38.h>
 
 extern HSD_GObj* func_802C6C38(HSD_GObj*, Vec3*, s32, f32);
 
@@ -383,8 +384,6 @@ void ftGameWatch_AttackAirN_IASA(HSD_GObj* fighter_gobj)
 {
     func_8008D08C(fighter_gobj);
 }
-
-extern void func_80084DB0(HSD_GObj*);
 
 // 0x8014B760
 // https://decomp.me/scratch/EBIVr // Mr. Game & Watch's Neutral Aerial Physics callback

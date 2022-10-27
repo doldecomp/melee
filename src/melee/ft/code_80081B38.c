@@ -1,3 +1,5 @@
+#include <melee/ft/code_80081B38.h>
+
 #include <dolphin/types.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
@@ -3921,7 +3923,7 @@ lbl_80084DA0:
 #pragma pop
 
 #pragma push
-asm unk_t func_80084DB0()
+asm void func_80084DB0(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80084DB0 00081990  7C 08 02 A6 */	mflr r0

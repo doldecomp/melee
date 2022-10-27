@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftCaptain/ftCaptain.h>
+#include <melee/ft/code_80081B38.h>
 
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj) // Create Aesthetic Wind Effect for Warlock Punch
 {
@@ -182,8 +183,6 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
     }
     func_80084FA8(fighter_gobj);
 }
-
-extern void func_80084DB0(HSD_GObj*);
 
 // 0x800E3018
 // https://decomp.me/scratch/CiZfS // Captain Falcon & Ganondorf's aerial Falcon/Warlock Punch Physics callback
