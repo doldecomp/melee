@@ -150,7 +150,6 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
 }
 
 extern BOOL func_8008B658(HSD_GObj*);
-extern BOOL func_8008B980(HSD_GObj*);
 extern BOOL func_8008BB44(HSD_GObj*);
 extern BOOL func_8008BFC4(HSD_GObj*);
 extern BOOL func_8008C830(HSD_GObj*);
