@@ -7864,3 +7864,31 @@ asm f32 scaleBy154_8008D8D8(f32 force)
 /* 8008D8E4 0008A4C4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm BOOL func_8008D8E8(f32 force)
+{ // clang-format off
+    nofralloc
+/* 8008D8E8 0008A4C8  80 6D AE B4 */	lwz r3, p_ftCommonData(r13)
+/* 8008D8EC 0008A4CC  C0 03 01 58 */	lfs f0, 0x158(r3)
+/* 8008D8F0 0008A4D0  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 8008D8F4 0008A4D4  40 80 00 0C */	bge lbl_8008D900
+/* 8008D8F8 0008A4D8  38 60 00 00 */	li r3, 0
+/* 8008D8FC 0008A4DC  4E 80 00 20 */	blr 
+lbl_8008D900:
+/* 8008D900 0008A4E0  C0 03 01 5C */	lfs f0, 0x15c(r3)
+/* 8008D904 0008A4E4  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 8008D908 0008A4E8  40 80 00 0C */	bge lbl_8008D914
+/* 8008D90C 0008A4EC  38 60 00 01 */	li r3, 1
+/* 8008D910 0008A4F0  4E 80 00 20 */	blr 
+lbl_8008D914:
+/* 8008D914 0008A4F4  C0 03 01 60 */	lfs f0, 0x160(r3)
+/* 8008D918 0008A4F8  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 8008D91C 0008A4FC  40 80 00 0C */	bge lbl_8008D928
+/* 8008D920 0008A500  38 60 00 02 */	li r3, 2
+/* 8008D924 0008A504  4E 80 00 20 */	blr 
+lbl_8008D928:
+/* 8008D928 0008A508  38 60 00 03 */	li r3, 3
+/* 8008D92C 0008A50C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

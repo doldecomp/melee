@@ -304,7 +304,6 @@ void func_800880D8();
 
 void func_80088148(Fighter*, u32, u32, u32);
 
-s32 func_8008D8E8(f32);
 void func_8008D930();
 
 void func_8008DCE0(HSD_GObj *, s32, f32);
