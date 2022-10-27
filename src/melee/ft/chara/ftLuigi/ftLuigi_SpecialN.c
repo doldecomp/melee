@@ -46,7 +46,6 @@ void ftLuigi_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 }
 
 extern void func_8008A4D4(HSD_GObj*);
-extern void func_800CCAAC(HSD_GObj*);
 
 // 0x801427D4
 // https://decomp.me/scratch/JesBp // Luigi's grounded Fireball IASA callback
