@@ -3,6 +3,7 @@
 
 #include <dolphin/os/OSReset.h>
 #include <dolphin/types.h>
+#include <Runtime/__mem.h>
 
 #define PAD3_BUTTON_ADDR 0x800030E4
 #define OS_RESET_RESTART 0
@@ -25,7 +26,6 @@ u16 Pad3Button
 
 static u8 Debug_BBA = 0;
 
-extern void memset(void*, size_t, size_t);
 extern int main(size_t argc, char* argv[]);
 extern void exit(int);
 extern void __init_user(void);

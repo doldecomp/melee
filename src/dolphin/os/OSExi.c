@@ -1,9 +1,13 @@
-.include "macros.inc"
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSTime.h>
+#include <dolphin/types.h>
 
-.section .text  # 0x80345A70 - 0x80347308
+extern unk_t lbl_804A7C80;
 
-.global SetExiInterruptMask
-SetExiInterruptMask:
+#pragma push
+asm unk_t SetExiInterruptMask()
+{ // clang-format off
+    nofralloc
 /* 80345A70 00342650  7C 08 02 A6 */	mflr r0
 /* 80345A74 00342654  3C A0 80 4A */	lis r5, lbl_804A7C80@ha
 /* 80345A78 00342658  90 01 00 04 */	stw r0, 4(r1)
@@ -77,9 +81,15 @@ lbl_80345B50:
 /* 80345B58 00342738  38 21 00 18 */	addi r1, r1, 0x18
 /* 80345B5C 0034273C  7C 08 03 A6 */	mtlr r0
 /* 80345B60 00342740  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIImm
-EXIImm:
+extern unk_t EXIClearInterrupts();
+
+#pragma push
+asm unk_t EXIImm()
+{ // clang-format off
+    nofralloc
 /* 80345B64 00342744  7C 08 02 A6 */	mflr r0
 /* 80345B68 00342748  90 01 00 04 */	stw r0, 4(r1)
 /* 80345B6C 0034274C  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -243,9 +253,15 @@ lbl_80345DAC:
 /* 80345DB4 00342994  38 21 00 58 */	addi r1, r1, 0x58
 /* 80345DB8 00342998  7C 08 03 A6 */	mtlr r0
 /* 80345DBC 0034299C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIImmEx
-EXIImmEx:
+extern unk_t EXISync();
+
+#pragma push
+asm unk_t EXIImmEx()
+{ // clang-format off
+    nofralloc
 /* 80345DC0 003429A0  7C 08 02 A6 */	mflr r0
 /* 80345DC4 003429A4  90 01 00 04 */	stw r0, 4(r1)
 /* 80345DC8 003429A8  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -293,9 +309,13 @@ lbl_80345E4C:
 /* 80345E54 00342A34  38 21 00 30 */	addi r1, r1, 0x30
 /* 80345E58 00342A38  7C 08 03 A6 */	mtlr r0
 /* 80345E5C 00342A3C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIDma
-EXIDma:
+#pragma push
+asm unk_t EXIDma()
+{ // clang-format off
+    nofralloc
 /* 80345E60 00342A40  7C 08 02 A6 */	mflr r0
 /* 80345E64 00342A44  90 01 00 04 */	stw r0, 4(r1)
 /* 80345E68 00342A48  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -359,9 +379,15 @@ lbl_80345F38:
 /* 80345F40 00342B20  38 21 00 40 */	addi r1, r1, 0x40
 /* 80345F44 00342B24  7C 08 03 A6 */	mtlr r0
 /* 80345F48 00342B28  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXISync
-EXISync:
+extern unk_t __OSGetDIConfig();
+
+#pragma push
+asm unk_t EXISync()
+{ // clang-format off
+    nofralloc
 /* 80345F4C 00342B2C  7C 08 02 A6 */	mflr r0
 /* 80345F50 00342B30  3C A0 80 4A */	lis r5, lbl_804A7C80@ha
 /* 80345F54 00342B34  90 01 00 04 */	stw r0, 4(r1)
@@ -502,9 +528,13 @@ lbl_8034613C:
 /* 80346148 00342D28  38 21 00 30 */	addi r1, r1, 0x30
 /* 8034614C 00342D2C  7C 08 03 A6 */	mtlr r0
 /* 80346150 00342D30  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIClearInterrupts
-EXIClearInterrupts:
+#pragma push
+asm unk_t EXIClearInterrupts()
+{ // clang-format off
+    nofralloc
 /* 80346154 00342D34  1C 03 00 14 */	mulli r0, r3, 0x14
 /* 80346158 00342D38  3C 60 CC 00 */	lis r3, 0xCC006800@ha
 /* 8034615C 00342D3C  38 E3 68 00 */	addi r7, r3, 0xCC006800@l
@@ -526,9 +556,13 @@ lbl_80346188:
 lbl_80346194:
 /* 80346194 00342D74  90 07 00 00 */	stw r0, 0(r7)
 /* 80346198 00342D78  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXISetExiCallback
-EXISetExiCallback:
+#pragma push
+asm unk_t EXISetExiCallback()
+{ // clang-format off
+    nofralloc
 /* 8034619C 00342D7C  7C 08 02 A6 */	mflr r0
 /* 803461A0 00342D80  90 01 00 04 */	stw r0, 4(r1)
 /* 803461A4 00342D84  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -562,9 +596,15 @@ lbl_803461F8:
 /* 8034620C 00342DEC  38 21 00 28 */	addi r1, r1, 0x28
 /* 80346210 00342DF0  7C 08 03 A6 */	mtlr r0
 /* 80346214 00342DF4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __EXIProbe
-__EXIProbe:
+extern unk_t __div2i();
+
+#pragma push
+asm unk_t __EXIProbe()
+{ // clang-format off
+    nofralloc
 /* 80346218 00342DF8  7C 08 02 A6 */	mflr r0
 /* 8034621C 00342DFC  90 01 00 04 */	stw r0, 4(r1)
 /* 80346220 00342E00  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -666,9 +706,15 @@ lbl_80346378:
 /* 80346380 00342F60  38 21 00 28 */	addi r1, r1, 0x28
 /* 80346384 00342F64  7C 08 03 A6 */	mtlr r0
 /* 80346388 00342F68  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIProbe
-EXIProbe:
+extern unk_t EXIGetID();
+
+#pragma push
+asm unk_t EXIProbe()
+{ // clang-format off
+    nofralloc
 /* 8034638C 00342F6C  7C 08 02 A6 */	mflr r0
 /* 80346390 00342F70  90 01 00 04 */	stw r0, 4(r1)
 /* 80346394 00342F74  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -703,9 +749,13 @@ lbl_803463F4:
 /* 80346400 00342FE0  7C 08 03 A6 */	mtlr r0
 /* 80346404 00342FE4  38 21 00 18 */	addi r1, r1, 0x18
 /* 80346408 00342FE8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIProbeEx
-EXIProbeEx:
+#pragma push
+asm unk_t EXIProbeEx()
+{ // clang-format off
+    nofralloc
 /* 8034640C 00342FEC  7C 08 02 A6 */	mflr r0
 /* 80346410 00342FF0  90 01 00 04 */	stw r0, 4(r1)
 /* 80346414 00342FF4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -756,9 +806,13 @@ lbl_803464A8:
 /* 803464B4 00343094  7C 08 03 A6 */	mtlr r0
 /* 803464B8 00343098  38 21 00 18 */	addi r1, r1, 0x18
 /* 803464BC 0034309C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIAttach
-EXIAttach:
+#pragma push
+asm unk_t EXIAttach()
+{ // clang-format off
+    nofralloc
 /* 803464C0 003430A0  7C 08 02 A6 */	mflr r0
 /* 803464C4 003430A4  90 01 00 04 */	stw r0, 4(r1)
 /* 803464C8 003430A8  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -832,9 +886,13 @@ lbl_803465B8:
 /* 803465C0 003431A0  38 21 00 40 */	addi r1, r1, 0x40
 /* 803465C4 003431A4  7C 08 03 A6 */	mtlr r0
 /* 803465C8 003431A8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIDetach
-EXIDetach:
+#pragma push
+asm unk_t EXIDetach()
+{ // clang-format off
+    nofralloc
 /* 803465CC 003431AC  7C 08 02 A6 */	mflr r0
 /* 803465D0 003431B0  90 01 00 04 */	stw r0, 4(r1)
 /* 803465D4 003431B4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -885,9 +943,13 @@ lbl_8034666C:
 /* 8034667C 0034325C  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80346680 00343260  38 21 00 20 */	addi r1, r1, 0x20
 /* 80346684 00343264  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXISelect
-EXISelect:
+#pragma push
+asm unk_t EXISelect()
+{ // clang-format off
+    nofralloc
 /* 80346688 00343268  7C 08 02 A6 */	mflr r0
 /* 8034668C 0034326C  90 01 00 04 */	stw r0, 4(r1)
 /* 80346690 00343270  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -970,9 +1032,13 @@ lbl_803467A0:
 /* 803467A8 00343388  38 21 00 30 */	addi r1, r1, 0x30
 /* 803467AC 0034338C  7C 08 03 A6 */	mtlr r0
 /* 803467B0 00343390  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIDeselect
-EXIDeselect:
+#pragma push
+asm unk_t EXIDeselect()
+{ // clang-format off
+    nofralloc
 /* 803467B4 00343394  7C 08 02 A6 */	mflr r0
 /* 803467B8 00343398  90 01 00 04 */	stw r0, 4(r1)
 /* 803467BC 0034339C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1048,9 +1114,13 @@ lbl_803468A4:
 /* 803468B8 00343498  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 803468BC 0034349C  38 21 00 20 */	addi r1, r1, 0x20
 /* 803468C0 003434A0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIIntrruptHandler
-EXIIntrruptHandler:
+#pragma push
+asm unk_t EXIIntrruptHandler()
+{ // clang-format off
+    nofralloc
 /* 803468C4 003434A4  7C 08 02 A6 */	mflr r0
 /* 803468C8 003434A8  7C 65 07 34 */	extsh r5, r3
 /* 803468CC 003434AC  90 01 00 04 */	stw r0, 4(r1)
@@ -1102,9 +1172,13 @@ lbl_80346970:
 /* 80346980 00343560  83 A1 02 EC */	lwz r29, 0x2ec(r1)
 /* 80346984 00343564  38 21 02 F8 */	addi r1, r1, 0x2f8
 /* 80346988 00343568  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global TCIntrruptHandler
-TCIntrruptHandler:
+#pragma push
+asm unk_t TCIntrruptHandler()
+{ // clang-format off
+    nofralloc
 /* 8034698C 0034356C  7C 08 02 A6 */	mflr r0
 /* 80346990 00343570  7C 66 07 34 */	extsh r6, r3
 /* 80346994 00343574  90 01 00 04 */	stw r0, 4(r1)
@@ -1245,9 +1319,13 @@ lbl_80346B84:
 /* 80346B98 00343778  83 81 02 E8 */	lwz r28, 0x2e8(r1)
 /* 80346B9C 0034377C  38 21 02 F8 */	addi r1, r1, 0x2f8
 /* 80346BA0 00343780  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXTIntrruptHandler
-EXTIntrruptHandler:
+#pragma push
+asm unk_t EXTIntrruptHandler()
+{ // clang-format off
+    nofralloc
 /* 80346BA4 00343784  7C 08 02 A6 */	mflr r0
 /* 80346BA8 00343788  7C 65 07 34 */	extsh r5, r3
 /* 80346BAC 0034378C  90 01 00 04 */	stw r0, 4(r1)
@@ -1299,9 +1377,15 @@ lbl_80346C58:
 /* 80346C60 00343840  38 21 02 F0 */	addi r1, r1, 0x2f0
 /* 80346C64 00343844  7C 08 03 A6 */	mtlr r0
 /* 80346C68 00343848  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIInit
-EXIInit:
+extern unk_t OSGetConsoleType();
+
+#pragma push
+asm unk_t EXIInit()
+{ // clang-format off
+    nofralloc
 /* 80346C6C 0034384C  7C 08 02 A6 */	mflr r0
 /* 80346C70 00343850  3C 60 00 80 */	lis r3, 0x007F8000@ha
 /* 80346C74 00343854  90 01 00 04 */	stw r0, 4(r1)
@@ -1372,9 +1456,13 @@ lbl_80346D60:
 /* 80346D74 00343954  83 81 00 08 */	lwz r28, 8(r1)
 /* 80346D78 00343958  38 21 00 18 */	addi r1, r1, 0x18
 /* 80346D7C 0034395C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXILock
-EXILock:
+#pragma push
+asm unk_t EXILock()
+{ // clang-format off
+    nofralloc
 /* 80346D80 00343960  7C 08 02 A6 */	mflr r0
 /* 80346D84 00343964  90 01 00 04 */	stw r0, 4(r1)
 /* 80346D88 00343968  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1442,9 +1530,15 @@ lbl_80346E60:
 /* 80346E68 00343A48  38 21 00 30 */	addi r1, r1, 0x30
 /* 80346E6C 00343A4C  7C 08 03 A6 */	mtlr r0
 /* 80346E70 00343A50  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIUnlock
-EXIUnlock:
+extern unk_t memmove();
+
+#pragma push
+asm unk_t EXIUnlock()
+{ // clang-format off
+    nofralloc
 /* 80346E74 00343A54  7C 08 02 A6 */	mflr r0
 /* 80346E78 00343A58  90 01 00 04 */	stw r0, 4(r1)
 /* 80346E7C 00343A5C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1504,18 +1598,26 @@ lbl_80346F30:
 /* 80346F44 00343B24  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 80346F48 00343B28  38 21 00 20 */	addi r1, r1, 0x20
 /* 80346F4C 00343B2C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIGetState
-EXIGetState:
+#pragma push
+asm unk_t EXIGetState()
+{ // clang-format off
+    nofralloc
 /* 80346F50 00343B30  3C 80 80 4A */	lis r4, lbl_804A7C80@ha
 /* 80346F54 00343B34  54 63 30 32 */	slwi r3, r3, 6
 /* 80346F58 00343B38  38 04 7C 80 */	addi r0, r4, lbl_804A7C80@l
 /* 80346F5C 00343B3C  7C 60 1A 14 */	add r3, r0, r3
 /* 80346F60 00343B40  80 63 00 0C */	lwz r3, 0xc(r3)
 /* 80346F64 00343B44  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global UnlockedHandler
-UnlockedHandler:
+#pragma push
+asm unk_t UnlockedHandler()
+{ // clang-format off
+    nofralloc
 /* 80346F68 00343B48  7C 08 02 A6 */	mflr r0
 /* 80346F6C 00343B4C  38 80 00 00 */	li r4, 0
 /* 80346F70 00343B50  90 01 00 04 */	stw r0, 4(r1)
@@ -1526,9 +1628,13 @@ UnlockedHandler:
 /* 80346F84 00343B64  38 21 00 18 */	addi r1, r1, 0x18
 /* 80346F88 00343B68  7C 08 03 A6 */	mtlr r0
 /* 80346F8C 00343B6C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global EXIGetID
-EXIGetID:
+#pragma push
+asm unk_t EXIGetID()
+{ // clang-format off
+    nofralloc
 /* 80346F90 00343B70  7C 08 02 A6 */	mflr r0
 /* 80346F94 00343B74  90 01 00 04 */	stw r0, 4(r1)
 /* 80346F98 00343B78  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -1775,10 +1881,5 @@ lbl_803472F8:
 /* 80347300 00343EE0  38 21 00 40 */	addi r1, r1, 0x40
 /* 80347304 00343EE4  7C 08 03 A6 */	mtlr r0
 /* 80347308 00343EE8  4E 80 00 20 */	blr 
-
-
-.section .bss, "wa"
-    .balign 8
-.global lbl_804A7C80
-lbl_804A7C80:
-	.skip 0xC0
+} // clang-format on
+#pragma pop

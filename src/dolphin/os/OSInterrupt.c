@@ -1,27 +1,37 @@
-.include "macros.inc"
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSThread.h>
 
-.section .text  # 0x80347364 - 0x80347BC8
+void lbl_80347374(void);
 
-.global OSDisableInterrupts
-OSDisableInterrupts:
+#pragma push
+asm BOOL OSDisableInterrupts(void)
+{ // clang-format off
+    nofralloc
 /* 80347364 00343F44  7C 60 00 A6 */	mfmsr r3
 /* 80347368 00343F48  54 64 04 5E */	rlwinm r4, r3, 0, 0x11, 0xf
 /* 8034736C 00343F4C  7C 80 01 24 */	mtmsr r4
 /* 80347370 00343F50  54 63 8F FE */	rlwinm r3, r3, 0x11, 0x1f, 0x1f
-.global lbl_80347374
-lbl_80347374:
+entry lbl_80347374
 /* 80347374 00343F54  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSEnableInterrupts
-OSEnableInterrupts:
+#pragma push
+asm BOOL OSEnableInterrupts(void)
+{ // clang-format off
+    nofralloc
 /* 80347378 00343F58  7C 60 00 A6 */	mfmsr r3
 /* 8034737C 00343F5C  60 64 80 00 */	ori r4, r3, 0x8000
 /* 80347380 00343F60  7C 80 01 24 */	mtmsr r4
 /* 80347384 00343F64  54 63 8F FE */	rlwinm r3, r3, 0x11, 0x1f, 0x1f
 /* 80347388 00343F68  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSRestoreInterrupts
-OSRestoreInterrupts:
+#pragma push
+asm BOOL OSRestoreInterrupts(BOOL)
+{ // clang-format off
+    nofralloc
 /* 8034738C 00343F6C  2C 03 00 00 */	cmpwi r3, 0
 /* 80347390 00343F70  7C 80 00 A6 */	mfmsr r4
 /* 80347394 00343F74  41 82 00 0C */	beq lbl_803473A0
@@ -33,37 +43,55 @@ lbl_803473A4:
 /* 803473A4 00343F84  7C A0 01 24 */	mtmsr r5
 /* 803473A8 00343F88  54 84 8F FE */	rlwinm r4, r4, 0x11, 0x1f, 0x1f
 /* 803473AC 00343F8C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSSetInterruptHandler
-__OSSetInterruptHandler:
+extern unk_t lbl_804D7378;
+
+#pragma push
+asm OSInterruptHandler __OSSetInterruptHandler(OSInterruptType, OSInterruptHandler)
+{ // clang-format off
+    nofralloc
 /* 803473B0 00343F90  7C 60 07 34 */	extsh r0, r3
-/* 803473B4 00343F94  80 6D BC D8 */	lwz r3, lbl_804D7378@sda21(r13)
+/* 803473B4 00343F94  80 6D BC D8 */	lwz r3, lbl_804D7378(r13)
 /* 803473B8 00343F98  54 00 10 3A */	slwi r0, r0, 2
 /* 803473BC 00343F9C  7C A3 02 14 */	add r5, r3, r0
 /* 803473C0 00343FA0  80 65 00 00 */	lwz r3, 0(r5)
 /* 803473C4 00343FA4  90 85 00 00 */	stw r4, 0(r5)
 /* 803473C8 00343FA8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSGetInterruptHandler
-__OSGetInterruptHandler:
+#pragma push
+asm OSInterruptHandler __OSGetInterruptHandler(OSInterruptType)
+{ // clang-format off
+    nofralloc
 /* 803473CC 00343FAC  7C 60 07 34 */	extsh r0, r3
-/* 803473D0 00343FB0  80 6D BC D8 */	lwz r3, lbl_804D7378@sda21(r13)
+/* 803473D0 00343FB0  80 6D BC D8 */	lwz r3, lbl_804D7378(r13)
 /* 803473D4 00343FB4  54 00 10 3A */	slwi r0, r0, 2
 /* 803473D8 00343FB8  7C 63 00 2E */	lwzx r3, r3, r0
 /* 803473DC 00343FBC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSInterruptInit
-__OSInterruptInit:
+extern unk_t lbl_80347B80();
+extern unk_t __OSSetExceptionHandler();
+extern unk_t memset();
+
+#pragma push
+asm void __OSInterruptInit(void)
+{ // clang-format off
+    nofralloc
 /* 803473E0 00343FC0  7C 08 02 A6 */	mflr r0
 /* 803473E4 00343FC4  90 01 00 04 */	stw r0, 4(r1)
 /* 803473E8 00343FC8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 803473EC 00343FCC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 803473F0 00343FD0  3F E0 80 00 */	lis r31, 0x80003040@ha
 /* 803473F4 00343FD4  38 1F 30 40 */	addi r0, r31, 0x80003040@l
-/* 803473F8 00343FD8  90 0D BC D8 */	stw r0, lbl_804D7378@sda21(r13)
+/* 803473F8 00343FD8  90 0D BC D8 */	stw r0, lbl_804D7378(r13)
 /* 803473FC 00343FDC  38 80 00 00 */	li r4, 0
 /* 80347400 00343FE0  38 A0 00 80 */	li r5, 0x80
-/* 80347404 00343FE4  80 6D BC D8 */	lwz r3, lbl_804D7378@sda21(r13)
+/* 80347404 00343FE4  80 6D BC D8 */	lwz r3, lbl_804D7378(r13)
 /* 80347408 00343FE8  4B CB BC F9 */	bl memset
 /* 8034740C 00343FEC  38 00 00 00 */	li r0, 0
 /* 80347410 00343FF0  90 1F 00 C4 */	stw r0, 0xc4(r31)
@@ -83,9 +111,13 @@ __OSInterruptInit:
 /* 80347448 00344028  38 21 00 10 */	addi r1, r1, 0x10
 /* 8034744C 0034402C  7C 08 03 A6 */	mtlr r0
 /* 80347450 00344030  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SetInterruptMask
-SetInterruptMask:
+#pragma push
+asm unk_t SetInterruptMask()
+{ // clang-format off
+    nofralloc
 /* 80347454 00344034  7C 60 00 34 */	cntlzw r0, r3
 /* 80347458 00344038  2C 00 00 0C */	cmpwi r0, 0xc
 /* 8034745C 0034403C  40 80 00 24 */	bge lbl_80347480
@@ -305,9 +337,13 @@ lbl_80347718:
 /* 80347724 00344304  54 63 06 E0 */	rlwinm r3, r3, 0, 0x1b, 0x10
 lbl_80347728:
 /* 80347728 00344308  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSMaskInterrupts
-__OSMaskInterrupts:
+#pragma push
+asm u32 __OSMaskInterrupts(u32)
+{ // clang-format off
+    nofralloc
 /* 8034772C 0034430C  7C 08 02 A6 */	mflr r0
 /* 80347730 00344310  90 01 00 04 */	stw r0, 4(r1)
 /* 80347734 00344314  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -346,9 +382,17 @@ lbl_80347784:
 /* 803477A8 00344388  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 803477AC 0034438C  38 21 00 20 */	addi r1, r1, 0x20
 /* 803477B0 00344390  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSUnmaskInterrupts
-__OSUnmaskInterrupts:
+extern unk_t lbl_80402318;
+extern unk_t lbl_804D738C;
+extern unk_t OSGetTime();
+
+#pragma push
+asm u32 __OSUnmaskInterrupts(u32)
+{ // clang-format off
+    nofralloc
 /* 803477B4 00344394  7C 08 02 A6 */	mflr r0
 /* 803477B8 00344398  90 01 00 04 */	stw r0, 4(r1)
 /* 803477BC 0034439C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -387,7 +431,13 @@ lbl_8034780C:
 /* 80347830 00344410  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80347834 00344414  38 21 00 20 */	addi r1, r1, 0x20
 /* 80347838 00344418  4E 80 00 20 */	blr 
-lbl_8034783C:
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t lbl_8034783C()
+{ // clang-format off
+    nofralloc
 /* 8034783C 0034441C  7C 08 02 A6 */	mflr r0
 /* 80347840 00344420  90 01 00 04 */	stw r0, 4(r1)
 /* 80347844 00344424  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -598,19 +648,19 @@ lbl_80347AF8:
 /* 80347AF8 003446D8  38 63 00 04 */	addi r3, r3, 4
 /* 80347AFC 003446DC  4B FF FF E0 */	b lbl_80347ADC
 lbl_80347B00:
-/* 80347B00 003446E0  80 6D BC D8 */	lwz r3, lbl_804D7378@sda21(r13)
+/* 80347B00 003446E0  80 6D BC D8 */	lwz r3, lbl_804D7378(r13)
 /* 80347B04 003446E4  57 A0 10 3A */	slwi r0, r29, 2
 /* 80347B08 003446E8  7F E3 00 2E */	lwzx r31, r3, r0
 /* 80347B0C 003446EC  28 1F 00 00 */	cmplwi r31, 0
 /* 80347B10 003446F0  41 82 00 4C */	beq lbl_80347B5C
 /* 80347B14 003446F4  2C 1D 00 04 */	cmpwi r29, 4
 /* 80347B18 003446F8  40 81 00 1C */	ble lbl_80347B34
-/* 80347B1C 003446FC  B3 AD BC E0 */	sth r29, __OSLastInterrupt@sda21(r13)
+/* 80347B1C 003446FC  B3 AD BC E0 */	sth r29, __OSLastInterrupt(r13)
 /* 80347B20 00344700  48 00 48 D1 */	bl OSGetTime
-/* 80347B24 00344704  90 8D BC EC */	stw r4, lbl_804D738C@sda21(r13)
-/* 80347B28 00344708  90 6D BC E8 */	stw r3, __OSLastInterruptTime@sda21(r13)
+/* 80347B24 00344704  90 8D BC EC */	stw r4, lbl_804D738C(r13)
+/* 80347B28 00344708  90 6D BC E8 */	stw r3, __OSLastInterruptTime(r13)
 /* 80347B2C 0034470C  80 1E 01 98 */	lwz r0, 0x198(r30)
-/* 80347B30 00344710  90 0D BC DC */	stw r0, __OSLastInterruptSrr0@sda21(r13)
+/* 80347B30 00344710  90 0D BC DC */	stw r0, __OSLastInterruptSrr0(r13)
 lbl_80347B34:
 /* 80347B34 00344714  48 00 32 15 */	bl OSDisableScheduler
 /* 80347B38 00344718  7F A3 EB 78 */	mr r3, r29
@@ -632,7 +682,13 @@ lbl_80347B5C:
 /* 80347B74 00344754  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 80347B78 00344758  38 21 00 28 */	addi r1, r1, 0x28
 /* 80347B7C 0034475C  4E 80 00 20 */	blr 
-lbl_80347B80:
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t lbl_80347B80()
+{ // clang-format off
+    nofralloc
 /* 80347B80 00344760  90 04 00 00 */	stw r0, 0(r4)
 /* 80347B84 00344764  90 24 00 04 */	stw r1, 4(r4)
 /* 80347B88 00344768  90 44 00 08 */	stw r2, 8(r4)
@@ -652,40 +708,5 @@ lbl_80347B80:
 /* 80347BC0 003447A0  7C 17 E2 A6 */	mfspr r0, 0x397
 /* 80347BC4 003447A4  90 04 01 C0 */	stw r0, 0x1c0(r4)
 /* 80347BC8 003447A8  4B FF FC 74 */	b lbl_8034783C
-
-
-.section .data
-    .balign 8
-.global lbl_80402318
-lbl_80402318:
-    .4byte 0x00000100
-    .4byte 0x00000040
-    .4byte 0xF8000000
-    .4byte 0x00000200
-    .4byte 0x00000080
-    .4byte 0x00003000
-    .4byte 0x00000020
-    .4byte 0x03FF8C00
-    .4byte 0x04000000
-    .4byte 0x00004000
-    .4byte 0xFFFFFFFF
-    .4byte NULL
-
-
-.section .sbss
-    .4byte NULL
-.global lbl_804D7378
-lbl_804D7378:
-	.skip 0x4
-.global __OSLastInterruptSrr0
-__OSLastInterruptSrr0:
-	.skip 0x4
-.global __OSLastInterrupt
-__OSLastInterrupt:
-	.skip 0x8
-.global __OSLastInterruptTime
-__OSLastInterruptTime:
-	.skip 0x4
-.global lbl_804D738C
-lbl_804D738C:
-	.skip 0x4
+} // clang-format on
+#pragma pop

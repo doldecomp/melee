@@ -1,9 +1,11 @@
-.include "macros.inc"
+#include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/os.h>
 
-.section .text  # 0x80344E30 - 0x803456A4
-
-.global __OSLoadFPUContext
-__OSLoadFPUContext:
+#pragma push
+asm unk_t __OSLoadFPUContext()
+{ // clang-format off
+    nofralloc
 /* 80344E30 00341A10  A0 A4 01 A2 */	lhz r5, 0x1a2(r4)
 /* 80344E34 00341A14  54 A5 07 FF */	clrlwi. r5, r5, 0x1f
 /* 80344E38 00341A18  41 82 01 18 */	beq lbl_80344F50
@@ -79,9 +81,13 @@ lbl_80344ED0:
 /* 80344F4C 00341B2C  CB E4 01 88 */	lfd f31, 0x188(r4)
 lbl_80344F50:
 /* 80344F50 00341B30  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSSaveFPUContext
-__OSSaveFPUContext:
+#pragma push
+asm unk_t __OSSaveFPUContext()
+{ // clang-format off
+    nofralloc
 /* 80344F54 00341B34  A0 65 01 A2 */	lhz r3, 0x1a2(r5)
 /* 80344F58 00341B38  60 63 00 01 */	ori r3, r3, 1
 /* 80344F5C 00341B3C  B0 65 01 A2 */	sth r3, 0x1a2(r5)
@@ -157,19 +163,31 @@ __OSSaveFPUContext:
 /* 80345074 00341C54  F3 E5 02 C0 */	psq_st f31, 704(r5), 0, qr0
 lbl_80345078:
 /* 80345078 00341C58  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSLoadFPUContext
-OSLoadFPUContext:
+#pragma push
+asm unk_t OSLoadFPUContext()
+{ // clang-format off
+    nofralloc
 /* 8034507C 00341C5C  38 83 00 00 */	addi r4, r3, 0
 /* 80345080 00341C60  4B FF FD B0 */	b __OSLoadFPUContext
+} // clang-format on
+#pragma pop
 
-.global OSSaveFPUContext
-OSSaveFPUContext:
+#pragma push
+asm void OSSaveFPUContext(OSContext*)
+{ // clang-format off
+    nofralloc
 /* 80345084 00341C64  38 A3 00 00 */	addi r5, r3, 0
 /* 80345088 00341C68  4B FF FE CC */	b __OSSaveFPUContext
+} // clang-format on
+#pragma pop
 
-.global OSSetCurrentContext
-OSSetCurrentContext:
+#pragma push
+asm void OSSetCurrentContext(OSContext*)
+{ // clang-format off
+    nofralloc
 /* 8034508C 00341C6C  3C 80 80 00 */	lis r4, 0x800000D4@ha
 /* 80345090 00341C70  90 64 00 D4 */	stw r3, 0x800000D4@l(r4)
 /* 80345094 00341C74  54 65 00 BE */	clrlwi r5, r3, 2
@@ -194,16 +212,24 @@ lbl_803450C4:
 /* 803450DC 00341CBC  7C C0 01 24 */	mtmsr r6
 /* 803450E0 00341CC0  4C 00 01 2C */	isync 
 /* 803450E4 00341CC4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSGetCurrentContext
-OSGetCurrentContext:
+#pragma push
+asm OSContext* OSGetCurrentContext(void)
+{ // clang-format off
+    nofralloc
 /* 803450E8 00341CC8  3C 60 80 00 */	lis r3, 0x800000D4@ha
 /* 803450EC 00341CCC  80 63 00 D4 */	lwz r3, 0x800000D4@l(r3)
 /* 803450F0 00341CD0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/bNK5a // 0 (100%)
-.global OSSaveContext
-OSSaveContext:
+// https://decomp.me/scratch/bNK5a // 0 (100%)
+#pragma push
+asm BOOL OSSaveContext(OSContext*)
+{ // clang-format off
+    nofralloc
 /* 803450F4 00341CD4  BD A3 00 34 */	stmw r13, 0x34(r3)
 /* 803450F8 00341CD8  7C 11 E2 A6 */	mfspr r0, 0x391
 /* 803450FC 00341CDC  90 03 01 A8 */	stw r0, 0x1a8(r3)
@@ -236,9 +262,15 @@ OSSaveContext:
 /* 80345168 00341D48  90 03 00 0C */	stw r0, 0xc(r3)
 /* 8034516C 00341D4C  38 60 00 00 */	li r3, 0
 /* 80345170 00341D50  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSLoadContext
-OSLoadContext:
+extern void lbl_80347374(void);
+
+#pragma push
+asm void OSLoadContext(OSContext*)
+{ // clang-format off
+    nofralloc
 /* 80345174 00341D54  3C 80 80 34 */	lis r4, OSDisableInterrupts@ha
 /* 80345178 00341D58  80 C3 01 98 */	lwz r6, 0x198(r3)
 /* 8034517C 00341D5C  38 A4 73 64 */	addi r5, r4, OSDisableInterrupts@l
@@ -296,14 +328,22 @@ lbl_803451C8:
 /* 80345240 00341E20  80 83 00 10 */	lwz r4, 0x10(r3)
 /* 80345244 00341E24  80 63 00 0C */	lwz r3, 0xc(r3)
 /* 80345248 00341E28  4C 00 00 64 */	rfi 
+} // clang-format on
+#pragma pop
 
-.global OSGetStackPointer
-OSGetStackPointer:
+#pragma push
+asm unk_t OSGetStackPointer()
+{ // clang-format off
+    nofralloc
 /* 8034524C 00341E2C  7C 23 0B 78 */	mr r3, r1
 /* 80345250 00341E30  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSClearContext
-OSClearContext:
+#pragma push
+asm void OSClearContext(OSContext*)
+{ // clang-format off
+    nofralloc
 /* 80345254 00341E34  38 A0 00 00 */	li r5, 0
 /* 80345258 00341E38  B0 A3 01 A0 */	sth r5, 0x1a0(r3)
 /* 8034525C 00341E3C  3C 80 80 00 */	lis r4, 0x800000D8@ha
@@ -314,9 +354,13 @@ OSClearContext:
 /* 80345270 00341E50  90 A4 00 D8 */	stw r5, 0xd8(r4)
 lbl_80345274:
 /* 80345274 00341E54  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSInitContext
-OSInitContext:
+#pragma push
+asm void OSInitContext(OSContext* ctx, unk_t arg1, unk_t arg2)
+{ // clang-format off
+    nofralloc
 /* 80345278 00341E58  90 83 01 98 */	stw r4, 0x198(r3)
 /* 8034527C 00341E5C  90 A3 00 04 */	stw r5, 4(r3)
 /* 80345280 00341E60  39 60 00 00 */	li r11, 0
@@ -364,9 +408,16 @@ OSInitContext:
 /* 80345328 00341F08  90 03 01 BC */	stw r0, 0x1bc(r3)
 /* 8034532C 00341F0C  90 03 01 C0 */	stw r0, 0x1c0(r3)
 /* 80345330 00341F10  4B FF FF 24 */	b OSClearContext
+} // clang-format on
+#pragma pop
 
-.global OSDumpContext
-OSDumpContext:
+extern char* lbl_80401E20[];
+extern unk_t __cvt_fp2unsigned();
+
+#pragma push
+asm void OSDumpContext(const OSContext*)
+{ // clang-format off
+    nofralloc
 /* 80345334 00341F14  7C 08 02 A6 */	mflr r0
 /* 80345338 00341F18  90 01 00 04 */	stw r0, 4(r1)
 /* 8034533C 00341F1C  94 21 FD 08 */	stwu r1, -0x2f8(r1)
@@ -557,9 +608,13 @@ lbl_803455C8:
 /* 803455D0 003421B0  38 21 02 F8 */	addi r1, r1, 0x2f8
 /* 803455D4 003421B4  7C 08 03 A6 */	mtlr r0
 /* 803455D8 003421B8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSSwitchFPUContext
-OSSwitchFPUContext:
+#pragma push
+asm unk_t OSSwitchFPUContext()
+{ // clang-format off
+    nofralloc
 /* 803455DC 003421BC  7C A0 00 A6 */	mfmsr r5
 /* 803455E0 003421C0  60 A5 20 00 */	ori r5, r5, 0x2000
 /* 803455E4 003421C4  7C A0 01 24 */	mtmsr r5
@@ -595,9 +650,17 @@ lbl_8034561C:
 /* 80345654 00342234  80 64 00 0C */	lwz r3, 0xc(r4)
 /* 80345658 00342238  80 84 00 10 */	lwz r4, 0x10(r4)
 /* 8034565C 0034223C  4C 00 00 64 */	rfi 
+} // clang-format on
+#pragma pop
 
-.global __OSContextInit
-__OSContextInit:
+extern char* lbl_80401FD4;
+extern unk_t DBPrintf();
+extern unk_t __OSSetExceptionHandler();
+
+#pragma push
+asm void __OSContextInit(void)
+{ // clang-format off
+    nofralloc
 /* 80345660 00342240  7C 08 02 A6 */	mflr r0
 /* 80345664 00342244  90 01 00 04 */	stw r0, 4(r1)
 /* 80345668 00342248  94 21 FF F8 */	stwu r1, -8(r1)
@@ -616,36 +679,5 @@ __OSContextInit:
 /* 8034569C 0034227C  38 21 00 08 */	addi r1, r1, 8
 /* 803456A0 00342280  7C 08 03 A6 */	mtlr r0
 /* 803456A4 00342284  4E 80 00 20 */	blr 
-
-.section .data
-    .balign 8
-.global lbl_80401E20
-lbl_80401E20:
-    .asciz "------------------------- Context 0x%08x -------------------------\n"
-    .balign 4
-    .asciz "r%-2d  = 0x%08x (%14d)  r%-2d  = 0x%08x (%14d)\n"
-    .balign 4
-    .asciz "LR   = 0x%08x                   CR   = 0x%08x\n"
-    .balign 4
-    .asciz "SRR0 = 0x%08x                   SRR1 = 0x%08x\n"
-    .balign 4
-    .asciz "\nGQRs----------\n"
-    .balign 4
-    .asciz "gqr%d = 0x%08x \t gqr%d = 0x%08x\n"
-    .balign 4
-    .asciz "\n\nFPRs----------\n"
-    .balign 4
-    .asciz "fr%d \t= %d \t fr%d \t= %d\n"
-    .balign 4
-    .asciz "\n\nPSFs----------\n"
-    .balign 4
-    .asciz "ps%d \t= 0x%x \t ps%d \t= 0x%x\n"
-    .balign 4
-    .asciz "\nAddress:      Back Chain    LR Save\n"
-    .balign 4
-    .asciz "0x%08x:   0x%08x    0x%08x\n"
-    .balign 4
-.global lbl_80401FD4
-lbl_80401FD4:
-    .asciz "FPU-unavailable handler installed\n"
-    .balign 4
+} // clang-format on
+#pragma pop

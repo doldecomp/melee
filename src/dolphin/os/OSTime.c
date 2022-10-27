@@ -1,23 +1,32 @@
-.include "macros.inc"
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSTime.h>
 
-.section .text  # 0x80342E94 - 0x803B7240 
-
-.global OSGetTime
-OSGetTime:
+#pragma push
+asm s64 OSGetTime(void)
+{ // clang-format off
+    nofralloc
 /* 8034C3F0 00348FD0  7C 6D 42 E6 */	mftbu r3
 /* 8034C3F4 00348FD4  7C 8C 42 E6 */	mftb r4, 0x10c
 /* 8034C3F8 00348FD8  7C AD 42 E6 */	mftbu r5
 /* 8034C3FC 00348FDC  7C 03 28 00 */	cmpw r3, r5
 /* 8034C400 00348FE0  40 82 FF F0 */	bne OSGetTime
 /* 8034C404 00348FE4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSGetTick
-OSGetTick:
+#pragma push
+asm OSTick OSGetTick(void)
+{ // clang-format off
+    nofralloc
 /* 8034C408 00348FE8  7C 6C 42 E6 */	mftb r3, 0x10c
 /* 8034C40C 00348FEC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSGetSystemTime
-__OSGetSystemTime:
+#pragma push
+asm unk_t __OSGetSystemTime()
+{ // clang-format off
+    nofralloc
 /* 8034C410 00348FF0  7C 08 02 A6 */	mflr r0
 /* 8034C414 00348FF4  90 01 00 04 */	stw r0, 4(r1)
 /* 8034C418 00348FF8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -43,9 +52,13 @@ __OSGetSystemTime:
 /* 8034C468 00349048  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8034C46C 0034904C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034C470 00349050  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSTimeToSystemTime
-__OSTimeToSystemTime:
+#pragma push
+asm unk_t __OSTimeToSystemTime()
+{ // clang-format off
+    nofralloc
 /* 8034C474 00349054  7C 08 02 A6 */	mflr r0
 /* 8034C478 00349058  90 01 00 04 */	stw r0, 4(r1)
 /* 8034C47C 0034905C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -68,9 +81,16 @@ __OSTimeToSystemTime:
 /* 8034C4C0 003490A0  7C 08 03 A6 */	mtlr r0
 /* 8034C4C4 003490A4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034C4C8 003490A8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global GetDates
-GetDates:
+extern unk_t lbl_80402C30;
+extern unk_t lbl_80402C60;
+
+#pragma push
+asm unk_t GetDates()
+{ // clang-format off
+    nofralloc
 /* 8034C4CC 003490AC  3C A0 92 49 */	lis r5, 0x92492493@ha
 /* 8034C4D0 003490B0  38 05 24 93 */	addi r0, r5, 0x92492493@l
 /* 8034C4D4 003490B4  38 E3 00 06 */	addi r7, r3, 6
@@ -186,9 +206,16 @@ lbl_8034C63C:
 /* 8034C65C 0034923C  38 03 00 01 */	addi r0, r3, 1
 /* 8034C660 00349240  90 04 00 0C */	stw r0, 0xc(r4)
 /* 8034C664 00349244  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSTicksToCalendarTime
-OSTicksToCalendarTime:
+extern unk_t __div2i();
+extern unk_t __mod2i();
+
+#pragma push
+asm void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td)
+{ // clang-format off
+    nofralloc
 /* 8034C668 00349248  7C 08 02 A6 */	mflr r0
 /* 8034C66C 0034924C  90 01 00 04 */	stw r0, 4(r1)
 /* 8034C670 00349250  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -320,35 +347,5 @@ lbl_8034C7E8:
 /* 8034C860 00349440  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034C864 00349444  7C 08 03 A6 */	mtlr r0
 /* 8034C868 00349448  4E 80 00 20 */	blr 
-
-
-.section .data
-    .balign 8
-.global lbl_80402C30
-lbl_80402C30:
-    .4byte NULL
-    .4byte 0x0000001F
-    .4byte 0x0000003B
-    .4byte 0x0000005A
-    .4byte 0x00000078
-    .4byte 0x00000097
-    .4byte 0x000000B5
-    .4byte 0x000000D4
-    .4byte 0x000000F3
-    .4byte 0x00000111
-    .4byte 0x00000130
-    .4byte 0x0000014E
-.global lbl_80402C60
-lbl_80402C60:
-    .4byte NULL
-    .4byte 0x0000001F
-    .4byte 0x0000003C
-    .4byte 0x0000005B
-    .4byte 0x00000079
-    .4byte 0x00000098
-    .4byte 0x000000B6
-    .4byte 0x000000D5
-    .4byte 0x000000F4
-    .4byte 0x00000112
-    .4byte 0x00000131
-    .4byte 0x0000014F
+} // clang-format on
+#pragma pop
