@@ -4165,7 +4165,6 @@ lbl_8008506C:
 } // clang-format on
 #pragma pop
 
-unk_t func_80085030();
 unk_t func_800850E0();
 
 #pragma push
