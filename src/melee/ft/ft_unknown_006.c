@@ -13517,3 +13517,43 @@ lbl_80092138:
 /* 80092154 0008ED34  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_80092158()
+{ // clang-format off
+    nofralloc
+/* 80092158 0008ED38  7C 08 02 A6 */	mflr r0
+/* 8009215C 0008ED3C  90 01 00 04 */	stw r0, 4(r1)
+/* 80092160 0008ED40  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 80092164 0008ED44  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 80092168 0008ED48  3B E5 00 00 */	addi r31, r5, 0
+/* 8009216C 0008ED4C  93 C1 00 20 */	stw r30, 0x20(r1)
+/* 80092170 0008ED50  3B C4 00 00 */	addi r30, r4, 0
+/* 80092174 0008ED54  93 A1 00 1C */	stw r29, 0x1c(r1)
+/* 80092178 0008ED58  7C 7D 1B 78 */	mr r29, r3
+/* 8009217C 0008ED5C  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 80092180 0008ED60  88 63 00 0C */	lbz r3, 0xc(r3)
+/* 80092184 0008ED64  4B FA 43 B5 */	bl Player_GetUnk45
+/* 80092188 0008ED68  80 0D AE 6C */	lwz r0, lbl_804D650C(r13)
+/* 8009218C 0008ED6C  54 64 10 3A */	slwi r4, r3, 2
+/* 80092190 0008ED70  38 7E 00 00 */	addi r3, r30, 0
+/* 80092194 0008ED74  4C C6 31 82 */	crclr 6
+/* 80092198 0008ED78  7C E0 22 14 */	add r7, r0, r4
+/* 8009219C 0008ED7C  88 07 00 01 */	lbz r0, 1(r7)
+/* 800921A0 0008ED80  7F A4 EB 78 */	mr r4, r29
+/* 800921A4 0008ED84  88 C7 00 00 */	lbz r6, 0(r7)
+/* 800921A8 0008ED88  38 BF 00 00 */	addi r5, r31, 0
+/* 800921AC 0008ED8C  54 00 40 2E */	slwi r0, r0, 8
+/* 800921B0 0008ED90  88 E7 00 02 */	lbz r7, 2(r7)
+/* 800921B4 0008ED94  50 C0 82 1E */	rlwimi r0, r6, 0x10, 8, 0xf
+/* 800921B8 0008ED98  7C E6 03 78 */	or r6, r7, r0
+/* 800921BC 0008ED9C  4B FC DC 21 */	bl ef_Spawn
+/* 800921C0 0008EDA0  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 800921C4 0008EDA4  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 800921C8 0008EDA8  83 C1 00 20 */	lwz r30, 0x20(r1)
+/* 800921CC 0008EDAC  83 A1 00 1C */	lwz r29, 0x1c(r1)
+/* 800921D0 0008EDB0  38 21 00 28 */	addi r1, r1, 0x28
+/* 800921D4 0008EDB4  7C 08 03 A6 */	mtlr r0
+/* 800921D8 0008EDB8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
