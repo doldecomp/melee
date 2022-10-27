@@ -34,12 +34,11 @@ If you're new to decomp or getting started, check out our [Getting Started guide
 
 - Yes. You require an ISO to build this and no assets are here.
 
-## What can we build once this is done / why would we work on this?
+## What can be done with decompiling Melee?
 
-TODO
+Note that this project's purpose is to only match the ASM with C code. This is entirely for research and archival purposes. After this is created, you essentially have a C project that can be compiled into Melee, but it won't be portable (aka you can't compile it to run on a normal computer). 
 
-- native Melee w/ rollback
-- lowering the barrier for modding
+So creating mods would be a lot easier as C code is much easier to consume than ASM. However, there are additional projects that could be undertaken once this is complete, but those technical endeavours are out-of-scope for this repo.
 
 ## Do we know how the compiler works?
 
