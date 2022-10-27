@@ -7777,3 +7777,79 @@ asm unk_t func_8008D7D0()
 /* 8008D7EC 0008A3CC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern f32 const lbl_804D84D0;
+extern f32 const lbl_804D84D4;
+extern f32 const lbl_804D84D8;
+extern f64 const lbl_804D84E0;
+extern unk_t func_8007AC68();
+
+#pragma push
+asm f32 func_8008D7F0(Fighter* fp)
+{ // clang-format off
+    nofralloc
+/* 8008D7F0 0008A3D0  7C 08 02 A6 */	mflr r0
+/* 8008D7F4 0008A3D4  90 01 00 04 */	stw r0, 4(r1)
+/* 8008D7F8 0008A3D8  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8008D7FC 0008A3DC  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8008D800 0008A3E0  7C 7F 1B 78 */	mr r31, r3
+/* 8008D804 0008A3E4  80 63 18 48 */	lwz r3, 0x1848(r3)
+/* 8008D808 0008A3E8  2C 03 01 69 */	cmpwi r3, 0x169
+/* 8008D80C 0008A3EC  41 82 00 50 */	beq lbl_8008D85C
+/* 8008D810 0008A3F0  4B FE D4 59 */	bl func_8007AC68
+/* 8008D814 0008A3F4  2C 03 00 00 */	cmpwi r3, 0
+/* 8008D818 0008A3F8  41 82 00 18 */	beq lbl_8008D830
+/* 8008D81C 0008A3FC  38 00 00 01 */	li r0, 1
+/* 8008D820 0008A400  98 1F 23 5A */	stb r0, 0x235a(r31)
+/* 8008D824 0008A404  80 6D AE B4 */	lwz r3, p_ftCommonData(r13)
+/* 8008D828 0008A408  80 03 07 F0 */	lwz r0, 0x7f0(r3)
+/* 8008D82C 0008A40C  98 1F 23 5B */	stb r0, 0x235b(r31)
+lbl_8008D830:
+/* 8008D830 0008A410  80 7F 18 48 */	lwz r3, 0x1848(r31)
+/* 8008D834 0008A414  3C 00 43 30 */	lis r0, 0x4330
+/* 8008D838 0008A418  C8 22 8B 00 */	lfd f1, lbl_804D84E0(r2)
+/* 8008D83C 0008A41C  6C 63 80 00 */	xoris r3, r3, 0x8000
+/* 8008D840 0008A420  C0 42 8A F0 */	lfs f2, lbl_804D84D0(r2)
+/* 8008D844 0008A424  90 61 00 14 */	stw r3, 0x14(r1)
+/* 8008D848 0008A428  90 01 00 10 */	stw r0, 0x10(r1)
+/* 8008D84C 0008A42C  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 8008D850 0008A430  EC 00 08 28 */	fsubs f0, f0, f1
+/* 8008D854 0008A434  EC 22 00 32 */	fmuls f1, f2, f0
+/* 8008D858 0008A438  48 00 00 6C */	b lbl_8008D8C4
+lbl_8008D85C:
+/* 8008D85C 0008A43C  80 1F 00 E0 */	lwz r0, 0xe0(r31)
+/* 8008D860 0008A440  2C 00 00 01 */	cmpwi r0, 1
+/* 8008D864 0008A444  40 82 00 10 */	bne lbl_8008D874
+/* 8008D868 0008A448  80 6D AE B4 */	lwz r3, p_ftCommonData(r13)
+/* 8008D86C 0008A44C  C0 23 01 44 */	lfs f1, 0x144(r3)
+/* 8008D870 0008A450  48 00 00 54 */	b lbl_8008D8C4
+lbl_8008D874:
+/* 8008D874 0008A454  80 6D AE B4 */	lwz r3, p_ftCommonData(r13)
+/* 8008D878 0008A458  C0 63 01 4C */	lfs f3, 0x14c(r3)
+/* 8008D87C 0008A45C  FC 01 18 40 */	fcmpo cr0, f1, f3
+/* 8008D880 0008A460  40 80 00 0C */	bge lbl_8008D88C
+/* 8008D884 0008A464  C0 22 8A F4 */	lfs f1, lbl_804D84D4(r2)
+/* 8008D888 0008A468  48 00 00 3C */	b lbl_8008D8C4
+lbl_8008D88C:
+/* 8008D88C 0008A46C  C0 03 01 50 */	lfs f0, 0x150(r3)
+/* 8008D890 0008A470  EC 41 18 28 */	fsubs f2, f1, f3
+/* 8008D894 0008A474  C0 83 01 48 */	lfs f4, 0x148(r3)
+/* 8008D898 0008A478  EC 20 18 28 */	fsubs f1, f0, f3
+/* 8008D89C 0008A47C  C0 62 8A F0 */	lfs f3, lbl_804D84D0(r2)
+/* 8008D8A0 0008A480  C0 02 8A F8 */	lfs f0, lbl_804D84D8(r2)
+/* 8008D8A4 0008A484  EC A3 01 32 */	fmuls f5, f3, f4
+/* 8008D8A8 0008A488  EC 22 08 24 */	fdivs f1, f2, f1
+/* 8008D8AC 0008A48C  EC 04 00 7A */	fmadds f0, f4, f1, f0
+/* 8008D8B0 0008A490  EC 03 00 32 */	fmuls f0, f3, f0
+/* 8008D8B4 0008A494  FC 00 28 40 */	fcmpo cr0, f0, f5
+/* 8008D8B8 0008A498  FC 20 00 90 */	fmr f1, f0
+/* 8008D8BC 0008A49C  40 81 00 08 */	ble lbl_8008D8C4
+/* 8008D8C0 0008A4A0  FC 20 28 90 */	fmr f1, f5
+lbl_8008D8C4:
+/* 8008D8C4 0008A4A4  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8008D8C8 0008A4A8  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8008D8CC 0008A4AC  38 21 00 20 */	addi r1, r1, 0x20
+/* 8008D8D0 0008A4B0  7C 08 03 A6 */	mtlr r0
+/* 8008D8D4 0008A4B4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
