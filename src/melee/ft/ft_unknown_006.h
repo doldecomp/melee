@@ -80,5 +80,6 @@ void func_800D5F38(HSD_GObj* fighter_gobj);
 f32 func_8008D7F0(Fighter* fp);
 f32 scaleBy154_8008D8D8(f32 force);
 BOOL func_8008D8E8(f32 force);
+void func_8008DCE0(HSD_GObj* fighter_gobj, s32 asid, f32);
 
 #endif
