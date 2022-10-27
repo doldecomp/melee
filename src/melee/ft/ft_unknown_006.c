@@ -14860,3 +14860,51 @@ lbl_8009321C:
 /* 8009323C 0008FE1C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_80093240()
+{ // clang-format off
+    nofralloc
+/* 80093240 0008FE20  80 83 00 2C */	lwz r4, 0x2c(r3)
+/* 80093244 0008FE24  88 04 22 1A */	lbz r0, 0x221a(r4)
+/* 80093248 0008FE28  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
+/* 8009324C 0008FE2C  4D 82 00 20 */	beqlr 
+/* 80093250 0008FE30  80 04 00 E0 */	lwz r0, 0xe0(r4)
+/* 80093254 0008FE34  2C 00 00 00 */	cmpwi r0, 0
+/* 80093258 0008FE38  4C 82 00 20 */	bnelr 
+/* 8009325C 0008FE3C  C0 44 06 20 */	lfs f2, 0x620(r4)
+/* 80093260 0008FE40  C0 02 8B 58 */	lfs f0, lbl_804D8538(r2)
+/* 80093264 0008FE44  FC 02 00 40 */	fcmpo cr0, f2, f0
+/* 80093268 0008FE48  40 80 00 0C */	bge lbl_80093274
+/* 8009326C 0008FE4C  FC 20 10 50 */	fneg f1, f2
+/* 80093270 0008FE50  48 00 00 08 */	b lbl_80093278
+lbl_80093274:
+/* 80093274 0008FE54  FC 20 10 90 */	fmr f1, f2
+lbl_80093278:
+/* 80093278 0008FE58  80 AD AE B4 */	lwz r5, p_ftCommonData(r13)
+/* 8009327C 0008FE5C  C0 05 04 B0 */	lfs f0, 0x4b0(r5)
+/* 80093280 0008FE60  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 80093284 0008FE64  4C 41 13 82 */	cror 2, 1, 2
+/* 80093288 0008FE68  4C 82 00 20 */	bnelr 
+/* 8009328C 0008FE6C  88 64 06 70 */	lbz r3, 0x670(r4)
+/* 80093290 0008FE70  80 05 04 B4 */	lwz r0, 0x4b4(r5)
+/* 80093294 0008FE74  7C 03 00 00 */	cmpw r3, r0
+/* 80093298 0008FE78  4C 80 00 20 */	bgelr 
+/* 8009329C 0008FE7C  C0 05 04 B8 */	lfs f0, 0x4b8(r5)
+/* 800932A0 0008FE80  38 00 00 FE */	li r0, 0xfe
+/* 800932A4 0008FE84  C0 65 04 C0 */	lfs f3, 0x4c0(r5)
+/* 800932A8 0008FE88  EC 42 00 32 */	fmuls f2, f2, f0
+/* 800932AC 0008FE8C  C0 24 08 48 */	lfs f1, 0x848(r4)
+/* 800932B0 0008FE90  C0 04 00 B0 */	lfs f0, 0xb0(r4)
+/* 800932B4 0008FE94  EC 43 00 B2 */	fmuls f2, f3, f2
+/* 800932B8 0008FE98  EC 01 00 BA */	fmadds f0, f1, f2, f0
+/* 800932BC 0008FE9C  D0 04 00 B0 */	stfs f0, 0xb0(r4)
+/* 800932C0 0008FEA0  C0 24 08 44 */	lfs f1, 0x844(r4)
+/* 800932C4 0008FEA4  C0 04 00 B4 */	lfs f0, 0xb4(r4)
+/* 800932C8 0008FEA8  FC 20 08 50 */	fneg f1, f1
+/* 800932CC 0008FEAC  EC 01 00 BA */	fmadds f0, f1, f2, f0
+/* 800932D0 0008FEB0  D0 04 00 B4 */	stfs f0, 0xb4(r4)
+/* 800932D4 0008FEB4  98 04 06 70 */	stb r0, 0x670(r4)
+/* 800932D8 0008FEB8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
