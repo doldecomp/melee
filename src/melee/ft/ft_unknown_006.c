@@ -9135,3 +9135,31 @@ lbl_8008E974:
 /* 8008E980 0008B560  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm BOOL func_8008E984(Fighter*)
+{ // clang-format off
+    nofralloc
+/* 8008E984 0008B564  C0 02 8A F4 */	lfs f0, lbl_804D84D4(r2)
+/* 8008E988 0008B568  C0 43 18 50 */	lfs f2, 0x1850(r3)
+/* 8008E98C 0008B56C  FC 00 10 00 */	fcmpu cr0, f0, f2
+/* 8008E990 0008B570  41 82 00 30 */	beq lbl_8008E9C0
+/* 8008E994 0008B574  88 83 22 1A */	lbz r4, 0x221a(r3)
+/* 8008E998 0008B578  54 80 DF FF */	rlwinm. r0, r4, 0x1b, 0x1f, 0x1f
+/* 8008E99C 0008B57C  41 82 00 2C */	beq lbl_8008E9C8
+/* 8008E9A0 0008B580  54 80 E7 FF */	rlwinm. r0, r4, 0x1c, 0x1f, 0x1f
+/* 8008E9A4 0008B584  41 82 00 24 */	beq lbl_8008E9C8
+/* 8008E9A8 0008B588  80 8D AE B4 */	lwz r4, p_ftCommonData(r13)
+/* 8008E9AC 0008B58C  C0 23 18 A8 */	lfs f1, 0x18a8(r3)
+/* 8008E9B0 0008B590  C0 04 01 40 */	lfs f0, 0x140(r4)
+/* 8008E9B4 0008B594  EC 01 00 2A */	fadds f0, f1, f0
+/* 8008E9B8 0008B598  FC 02 00 40 */	fcmpo cr0, f2, f0
+/* 8008E9BC 0008B59C  40 80 00 0C */	bge lbl_8008E9C8
+lbl_8008E9C0:
+/* 8008E9C0 0008B5A0  38 60 00 01 */	li r3, 1
+/* 8008E9C4 0008B5A4  4E 80 00 20 */	blr 
+lbl_8008E9C8:
+/* 8008E9C8 0008B5A8  38 60 00 00 */	li r3, 0
+/* 8008E9CC 0008B5AC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
