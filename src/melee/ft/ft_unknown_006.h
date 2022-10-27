@@ -85,5 +85,6 @@ void func_8008E908(HSD_GObj* fighter_gobj, f32);
 BOOL func_8008E984(Fighter* fp);
 void func_8008E9D0(HSD_GObj* fighter_gobj);
 void func_8008EB58(HSD_GObj* fighter_gobj);
+void func_8008EC90(HSD_GObj* fighter_gobj);
 
 #endif

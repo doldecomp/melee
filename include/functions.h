@@ -304,8 +304,6 @@ void func_800880D8();
 
 void func_80088148(Fighter*, u32, u32, u32);
 
-void func_8008EC90();
-
 void func_80090594();
 u32 func_80090690(struct _Fighter *, struct _Vec2 *);
 void func_80090718();

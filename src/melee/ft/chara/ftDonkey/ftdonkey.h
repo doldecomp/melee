@@ -84,3 +84,5 @@ void ftDonkey_8010E464(HSD_GObj* fighter_gobj);
 void ftDonkey_8010E4EC(HSD_GObj* fighter_gobj);
 
 void ftDonkey_DestroyAllEffects(HSD_GObj* fighter_gobj);
+
+void ftDonkey_800E06D8(HSD_GObj* fighter_gobj);
