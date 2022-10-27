@@ -1546,7 +1546,7 @@ extern unk_t func_800265C4();
 extern void func_80026510(HSD_GObj*);
 
 #pragma push
-asm void func_80088C5C(Fighter* fp)
+asm void func_80088C5C(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80088C5C 0008583C  7C 08 02 A6 */	mflr r0
@@ -9087,5 +9087,51 @@ lbl_8008E8E8:
 /* 8008E8FC 0008B4DC  38 21 00 30 */	addi r1, r1, 0x30
 /* 8008E900 0008B4E0  7C 08 03 A6 */	mtlr r0
 /* 8008E904 0008B4E4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+extern unk_t func_800C318C();
+
+#pragma push
+asm void func_8008E908(HSD_GObj* fighter_gobj, f32)
+{ // clang-format off
+    nofralloc
+/* 8008E908 0008B4E8  7C 08 02 A6 */	mflr r0
+/* 8008E90C 0008B4EC  90 01 00 04 */	stw r0, 4(r1)
+/* 8008E910 0008B4F0  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8008E914 0008B4F4  80 A3 00 2C */	lwz r5, 0x2c(r3)
+/* 8008E918 0008B4F8  88 05 22 1D */	lbz r0, 0x221d(r5)
+/* 8008E91C 0008B4FC  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8008E920 0008B500  41 82 00 10 */	beq lbl_8008E930
+/* 8008E924 0008B504  80 8D AE B4 */	lwz r4, p_ftCommonData(r13)
+/* 8008E928 0008B508  80 04 04 98 */	lwz r0, 0x498(r4)
+/* 8008E92C 0008B50C  90 05 20 64 */	stw r0, 0x2064(r5)
+lbl_8008E930:
+/* 8008E930 0008B510  80 85 18 60 */	lwz r4, 0x1860(r5)
+/* 8008E934 0008B514  28 04 00 06 */	cmplwi r4, 6
+/* 8008E938 0008B518  41 82 00 0C */	beq lbl_8008E944
+/* 8008E93C 0008B51C  28 04 00 07 */	cmplwi r4, 7
+/* 8008E940 0008B520  40 82 00 2C */	bne lbl_8008E96C
+lbl_8008E944:
+/* 8008E944 0008B524  88 05 22 28 */	lbz r0, 0x2228(r5)
+/* 8008E948 0008B528  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
+/* 8008E94C 0008B52C  40 82 00 20 */	bne lbl_8008E96C
+/* 8008E950 0008B530  28 04 00 06 */	cmplwi r4, 6
+/* 8008E954 0008B534  40 82 00 0C */	bne lbl_8008E960
+/* 8008E958 0008B538  38 80 00 00 */	li r4, 0
+/* 8008E95C 0008B53C  48 00 00 08 */	b lbl_8008E964
+lbl_8008E960:
+/* 8008E960 0008B540  38 80 00 01 */	li r4, 1
+lbl_8008E964:
+/* 8008E964 0008B544  48 03 48 29 */	bl func_800C318C
+/* 8008E968 0008B548  48 00 00 0C */	b lbl_8008E974
+lbl_8008E96C:
+/* 8008E96C 0008B54C  38 80 FF FF */	li r4, -1
+/* 8008E970 0008B550  4B FF F3 71 */	bl func_8008DCE0
+lbl_8008E974:
+/* 8008E974 0008B554  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8008E978 0008B558  38 21 00 08 */	addi r1, r1, 8
+/* 8008E97C 0008B55C  7C 08 03 A6 */	mtlr r0
+/* 8008E980 0008B560  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop

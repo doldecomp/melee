@@ -51,7 +51,7 @@ void func_800887CC(Fighter* fp);
 void func_80088884(Fighter* fp);
 void func_800888E0(Fighter* fp);
 void func_80088A50(Fighter* fp);
-void func_80088C5C(Fighter* fp);
+void func_80088C5C(HSD_GObj* fighter_gobj);
 void func_800890BC(Fighter* fp);
 void func_800890D0(Fighter* fp, u8 move_id);
 void func_800892A0(HSD_GObj* fighter_gobj);
@@ -81,5 +81,6 @@ f32 func_8008D7F0(Fighter* fp);
 f32 scaleBy154_8008D8D8(f32 force);
 BOOL func_8008D8E8(f32 force);
 void func_8008DCE0(HSD_GObj* fighter_gobj, s32 asid, f32);
+void func_8008E908(HSD_GObj* fighter_gobj, f32);
 
 #endif
