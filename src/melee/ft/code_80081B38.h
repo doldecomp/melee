@@ -1,6 +1,7 @@
 #ifndef MELEE_FT_CODE_80081B38_H
 #define MELEE_FT_CODE_80081B38_H
 
+#include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
 HSD_GObj* func_80082E3C(HSD_GObj* fighter_gobj);
@@ -14,5 +15,6 @@ unk_t func_80081DD4();
 unk_t func_8008370C();
 unk_t func_800848DC();
 unk_t func_80082638();
+BOOL func_800824A0(HSD_GObj* fighter_gobj, ftCollisionBox*);
 
 #endif

@@ -728,7 +728,7 @@ lbl_8008248C:
 #pragma pop
 
 #pragma push
-asm unk_t func_800824A0()
+asm BOOL func_800824A0(HSD_GObj* fighter_gobj, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 800824A0 0007F080  7C 08 02 A6 */	mflr r0

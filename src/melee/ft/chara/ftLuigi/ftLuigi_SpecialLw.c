@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
+#include <melee/ft/code_80081B38.h>
 
 // 0x801445C4
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update
@@ -235,8 +236,6 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
     }
     func_8007D3A8(fp, 0.0f, luigiAttrs->x80_LUIGI_CYCLONE_MOMENTUM_X_MUL_AIR, var);
 }
-
-extern BOOL func_800824A0(HSD_GObj*, ftCollisionBox*);
 
 static ftCollisionBox ftLuigi_SpecialLw_CollisionBox = { 12.0F, 0.0F, -6.0F, 6.0F, 6.0F, 6.0F };
 
