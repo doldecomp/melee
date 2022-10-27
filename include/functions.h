@@ -304,8 +304,6 @@ void func_800880D8();
 
 void func_80088148(Fighter*, u32, u32, u32);
 
-void func_80090718();
-
 f32 func_80092ED8(s32, void *, f32);
 
 s32 func_80093694();
