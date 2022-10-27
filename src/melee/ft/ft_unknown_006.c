@@ -11546,3 +11546,8 @@ lbl_8009080C:
 /* 80090820 0008D400  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_80090824(HSD_GObj* fighter_gobj)
+{
+    return;
+}
