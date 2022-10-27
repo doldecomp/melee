@@ -153,6 +153,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* gobj);
 void ftNess_AttackS4_IASA(HSD_GObj* gobj);
 void ftNess_AttackS4_Phys(HSD_GObj* gobj);
 void ftNess_AttackS4_Coll(HSD_GObj* gobj);
+void ftNess_AttackS4_Action(HSD_GObj* gobj);
 
 // Yo-Yo item setup & math //
 

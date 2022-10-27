@@ -3,6 +3,7 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftFox/ftfox.h>
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include <melee/ft/chara/ftNess/ftNess.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftcoll.h>
@@ -6018,5 +6019,65 @@ lbl_8008C32C:
 /* 8008C33C 00088F1C  38 21 00 28 */	addi r1, r1, 0x28
 /* 8008C340 00088F20  7C 08 03 A6 */	mtlr r0
 /* 8008C344 00088F24  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+extern jtbl_t jtbl_803C54D8;
+extern unk_t func_8008C3E0();
+extern unk_t ftPeach_8011C1C0();
+void lbl_8008C388(void);
+void lbl_8008C390(void);
+void lbl_8008C398(void);
+void lbl_8008C3A0(void);
+void lbl_8008C3C4(void);
+
+#pragma push
+asm unk_t func_8008C348()
+{ // clang-format off
+    nofralloc
+/* 8008C348 00088F28  7C 08 02 A6 */	mflr r0
+/* 8008C34C 00088F2C  90 01 00 04 */	stw r0, 4(r1)
+/* 8008C350 00088F30  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8008C354 00088F34  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8008C358 00088F38  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 8008C35C 00088F3C  D0 3F 00 2C */	stfs f1, 0x2c(r31)
+/* 8008C360 00088F40  80 9F 00 04 */	lwz r4, 4(r31)
+/* 8008C364 00088F44  38 04 FF F8 */	addi r0, r4, -8
+/* 8008C368 00088F48  28 00 00 10 */	cmplwi r0, 0x10
+/* 8008C36C 00088F4C  41 81 00 58 */	bgt lbl_8008C3C4
+/* 8008C370 00088F50  3C 80 80 3C */	lis r4, jtbl_803C54D8@ha
+/* 8008C374 00088F54  38 84 54 D8 */	addi r4, r4, jtbl_803C54D8@l
+/* 8008C378 00088F58  54 00 10 3A */	slwi r0, r0, 2
+/* 8008C37C 00088F5C  7C 04 00 2E */	lwzx r0, r4, r0
+/* 8008C380 00088F60  7C 09 03 A6 */	mtctr r0
+/* 8008C384 00088F64  4E 80 04 20 */	bctr 
+entry lbl_8008C388
+/* 8008C388 00088F68  48 08 88 9D */	bl ftNess_AttackS4_Action
+/* 8008C38C 00088F6C  48 00 00 40 */	b lbl_8008C3CC
+entry lbl_8008C390
+/* 8008C390 00088F70  48 08 FE 31 */	bl ftPeach_8011C1C0
+/* 8008C394 00088F74  48 00 00 38 */	b lbl_8008C3CC
+entry lbl_8008C398
+/* 8008C398 00088F78  48 0B E6 79 */	bl ftGameWatch_AttackS4_Action
+/* 8008C39C 00088F7C  48 00 00 30 */	b lbl_8008C3CC
+entry lbl_8008C3A0
+/* 8008C3A0 00088F80  FC 20 10 90 */	fmr f1, f2
+/* 8008C3A4 00088F84  48 00 00 3D */	bl func_8008C3E0
+/* 8008C3A8 00088F88  3C 60 80 06 */	lis r3, efLib_PauseAll@ha
+/* 8008C3AC 00088F8C  38 03 BA 40 */	addi r0, r3, efLib_PauseAll@l
+/* 8008C3B0 00088F90  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
+/* 8008C3B4 00088F94  90 1F 21 D4 */	stw r0, 0x21d4(r31)
+/* 8008C3B8 00088F98  38 03 BA C4 */	addi r0, r3, efLib_ResumeAll@l
+/* 8008C3BC 00088F9C  90 1F 21 D8 */	stw r0, 0x21d8(r31)
+/* 8008C3C0 00088FA0  48 00 00 0C */	b lbl_8008C3CC
+entry lbl_8008C3C4
+/* 8008C3C4 00088FA4  FC 20 10 90 */	fmr f1, f2
+/* 8008C3C8 00088FA8  48 00 00 19 */	bl func_8008C3E0
+lbl_8008C3CC:
+/* 8008C3CC 00088FAC  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8008C3D0 00088FB0  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8008C3D4 00088FB4  38 21 00 20 */	addi r1, r1, 0x20
+/* 8008C3D8 00088FB8  7C 08 03 A6 */	mtlr r0
+/* 8008C3DC 00088FBC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
