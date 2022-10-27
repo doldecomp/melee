@@ -18,5 +18,6 @@ unk_t func_80082638();
 BOOL func_800824A0(HSD_GObj* fighter_gobj, ftCollisionBox*);
 void func_80082B1C(HSD_GObj* fighter_gobj);
 void func_800831CC(HSD_GObj*, s32 (*)(HSD_GObj*), void (*)(HSD_GObj*));
+unk_t func_800845B4();
 
 #endif
