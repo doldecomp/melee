@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
+#include <melee/ft/ftcoll.h>
 
 // 0x800E83E0
 // https://decomp.me/scratch/wfS8S // Create Reflector Loop GFX
@@ -332,8 +333,6 @@ void ftFox_SpecialLwLoop_Pass(HSD_GObj* fighter_gobj)
     func_8009A184(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP, FTFOX_SPECIALLW_COLL_FLAG, getFighter(fighter_gobj)->x894_currentAnimFrame);
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
-
-extern void func_8007AEF8(HSD_GObj*);
 
 // 0x800E8C34
 // https://decomp.me/scratch/8fHun // Fox & Falco's grounded Reflector Loop Physics callback

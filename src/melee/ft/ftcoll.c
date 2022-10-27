@@ -5605,7 +5605,7 @@ asm void func_8007AEE0(HSD_GObj*)
 #pragma pop
 
 #pragma push
-asm unk_t func_8007AEF8()
+asm void func_8007AEF8(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 8007AEF8 00077AD8  80 63 00 2C */	lwz r3, 0x2c(r3)

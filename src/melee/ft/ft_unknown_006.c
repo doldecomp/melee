@@ -10,6 +10,7 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftcoll.h>
 
@@ -14057,5 +14058,27 @@ lbl_80092858:
 /* 80092864 0008F444  38 21 00 18 */	addi r1, r1, 0x18
 /* 80092868 0008F448  7C 08 03 A6 */	mtlr r0
 /* 8009286C 0008F44C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t func_80092870()
+{ // clang-format off
+    nofralloc
+/* 80092870 0008F450  7C 08 02 A6 */	mflr r0
+/* 80092874 0008F454  90 01 00 04 */	stw r0, 4(r1)
+/* 80092878 0008F458  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8009287C 0008F45C  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 80092880 0008F460  7C 7F 1B 78 */	mr r31, r3
+/* 80092884 0008F464  4B FF 26 B9 */	bl func_80084F3C
+/* 80092888 0008F468  7F E3 FB 78 */	mr r3, r31
+/* 8009288C 0008F46C  4B FE 86 55 */	bl func_8007AEE0
+/* 80092890 0008F470  7F E3 FB 78 */	mr r3, r31
+/* 80092894 0008F474  4B FE 86 65 */	bl func_8007AEF8
+/* 80092898 0008F478  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8009289C 0008F47C  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 800928A0 0008F480  38 21 00 18 */	addi r1, r1, 0x18
+/* 800928A4 0008F484  7C 08 03 A6 */	mtlr r0
+/* 800928A8 0008F488  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop

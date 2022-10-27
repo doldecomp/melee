@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags
@@ -140,8 +141,6 @@ void ftMewtwo_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 {
     return;
 }
-
-extern void func_8007AEF8(HSD_GObj* fighter_gobj);
 
 // 0x80146988
 // https://decomp.me/scratch/o5TC6 // Mewtwo's grounded Confusion Physics callback
