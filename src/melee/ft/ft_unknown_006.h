@@ -94,5 +94,6 @@ unk_t func_80090828();
 func_80090594(Fighter* fp, s32 damage_dealt, BOOL bool, s32 action_state_index, GroundOrAir ground_or_air, f32 vibrate_mult);
 u32 func_80090690(Fighter* fp, Vec2* shift);
 void func_80090718(Fighter* fp);
+BOOL func_80082888(HSD_GObj* fighter_gobj, ftCollisionBox*);
 
 #endif

@@ -13,5 +13,6 @@ unk_t func_80081DD4();
 unk_t func_80081DD4();
 unk_t func_8008370C();
 unk_t func_800848DC();
+unk_t func_80082638();
 
 #endif

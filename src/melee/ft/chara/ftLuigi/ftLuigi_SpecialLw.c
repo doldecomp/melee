@@ -237,7 +237,6 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
 }
 
 extern BOOL func_800824A0(HSD_GObj*, ftCollisionBox*);
-extern BOOL func_80082888(HSD_GObj*, ftCollisionBox*);
 
 static ftCollisionBox ftLuigi_SpecialLw_CollisionBox = { 12.0F, 0.0F, -6.0F, 6.0F, 6.0F, 6.0F };
 
