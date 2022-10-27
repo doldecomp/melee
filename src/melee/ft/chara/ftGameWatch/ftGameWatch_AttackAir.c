@@ -327,7 +327,6 @@ BOOL ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
-extern void func_8008CFAC(HSD_GObj*, s32);
 extern void ftGameWatch_AttackAirB_Action(HSD_GObj*, s32);
 extern void ftGameWatch_AttackAirHi_Action(HSD_GObj*, s32);
 
