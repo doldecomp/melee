@@ -96,5 +96,6 @@ u32 func_80090690(Fighter* fp, Vec2* shift);
 void func_80090718(Fighter* fp);
 BOOL func_80082888(HSD_GObj* fighter_gobj, ftCollisionBox*);
 BOOL func_80081D0C(HSD_GObj* fighter_gobj);
+void func_800928CC(HSD_GObj* fighter_gobj);
 
 #endif
