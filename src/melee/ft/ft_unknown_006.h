@@ -104,5 +104,6 @@ void func_80092BCC(HSD_GObj* fighter_gobj);
 f32 func_80092ED8(s32, ftLinkAttributes*, f32);
 unk_t func_80093240();
 unk_t func_800932DC();
+unk_t func_80093BC0();
 
 #endif
