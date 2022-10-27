@@ -265,7 +265,6 @@ extern void func_80092450();
 asm unk_t func_8012BECC()
 {
     nofralloc
-func_8012BECC:
 /* 8012BECC 00128AAC  7C 08 02 A6 */	mflr r0
 /* 8012BED0 00128AB0  38 80 01 55 */	li r4, 0x155
 /* 8012BED4 00128AB4  90 01 00 04 */	stw r0, 4(r1)
