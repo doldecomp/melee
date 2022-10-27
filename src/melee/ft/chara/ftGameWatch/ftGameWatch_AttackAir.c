@@ -574,8 +574,6 @@ void ftGameWatch_LandingAirHi_Action(HSD_GObj* fighter_gobj)
     ftGameWatch_OnDamage(fighter_gobj);
 }
 
-extern void func_8008D708(HSD_GObj*, s32, f32);
-
 // 0x8014BAF8
 // https://decomp.me/scratch/8ClCw // Mr. Game & Watch's Neutral Aerial Landing prefunction
 void ftGameWatch_LandingAirN_Init(HSD_GObj* fighter_gobj)

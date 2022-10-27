@@ -1449,5 +1449,4 @@ lbl_804DEA98:
 	.4byte NULL
 .global lbl_804DEAA0
 lbl_804DEAA0:
-	.float 176.0
-	.4byte 0x80000000
+	.double 4503601774854144.0
