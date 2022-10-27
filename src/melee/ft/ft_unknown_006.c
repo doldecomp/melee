@@ -14532,3 +14532,18 @@ lbl_80092DFC:
 /* 80092E0C 0008F9EC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_80092E10()
+{ // clang-format off
+    nofralloc
+/* 80092E10 0008F9F0  7C 08 02 A6 */	mflr r0
+/* 80092E14 0008F9F4  90 01 00 04 */	stw r0, 4(r1)
+/* 80092E18 0008F9F8  94 21 FF F8 */	stwu r1, -8(r1)
+/* 80092E1C 0008F9FC  4B FF 21 21 */	bl func_80084F3C
+/* 80092E20 0008FA00  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 80092E24 0008FA04  38 21 00 08 */	addi r1, r1, 8
+/* 80092E28 0008FA08  7C 08 03 A6 */	mtlr r0
+/* 80092E2C 0008FA0C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
