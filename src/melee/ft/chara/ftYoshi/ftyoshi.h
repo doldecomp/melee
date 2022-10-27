@@ -41,3 +41,4 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_f
 unk_t func_8012BECC();
 unk_t func_8012C1D4();
 unk_t func_8012C49C();
+unk_t func_8012C600();
