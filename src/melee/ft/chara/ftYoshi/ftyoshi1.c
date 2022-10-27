@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/it/itkind.h>
 
 extern f32 lbl_804D9A28;
@@ -35,7 +36,8 @@ void lbl_8012C030(HSD_GObj* fighter_gobj) {
     }
 }
 
-void lbl_8012C114(s32 fighter_gobj) {
+void lbl_8012C114(HSD_GObj* fighter_gobj)
+{
     if (!func_80093694() &&
         !func_8009515C(fighter_gobj) &&
         !func_80099794(fighter_gobj) &&

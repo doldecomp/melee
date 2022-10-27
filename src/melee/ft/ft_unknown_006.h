@@ -105,5 +105,10 @@ f32 func_80092ED8(s32, ftLinkAttributes*, f32);
 unk_t func_80093240();
 unk_t func_800932DC();
 unk_t func_80093BC0();
+BOOL func_80093694();
+BOOL func_8009515C(HSD_GObj* fighter_gobj);
+BOOL func_80099794(HSD_GObj* fighter_gobj);
+BOOL func_800D8990(HSD_GObj* fighter_gobj);
+BOOL func_8009A080(HSD_GObj* fighter_gobj);
 
 #endif

@@ -2,11 +2,9 @@
 
 extern s32 func_8008B658(HSD_GObj*);
 extern s32 func_80096540(HSD_GObj*);
-extern s32 func_80099794(HSD_GObj*);
 extern s32 func_800D6824(HSD_GObj*); 
-extern s32 func_800D68C0(HSD_GObj*); 
-extern s32 func_800D695C(HSD_GObj*); 
-extern s32 func_800D8990(HSD_GObj*); 
+extern s32 func_800D68C0(HSD_GObj*);
+extern s32 func_800D695C(HSD_GObj*);
 
 void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2) {
     Fighter* fp = fighter_gobj->user_data; 
