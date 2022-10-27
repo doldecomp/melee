@@ -1,8 +1,6 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
 #include <melee/it/itkind.h>
 
-void func_80092BCC(HSD_GObj* fighter_gobj);
-
 extern f32 lbl_804D9A28;
 
 void lbl_8012C030(HSD_GObj* fighter_gobj) {

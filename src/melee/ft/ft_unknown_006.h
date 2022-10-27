@@ -97,5 +97,8 @@ void func_80090718(Fighter* fp);
 BOOL func_80082888(HSD_GObj* fighter_gobj, ftCollisionBox*);
 BOOL func_80081D0C(HSD_GObj* fighter_gobj);
 void func_800928CC(HSD_GObj* fighter_gobj);
+BOOL func_8009917C(HSD_GObj* fighter_gobj);
+unk_t func_80092BE8();
+void func_80092BCC(HSD_GObj* fighter_gobj);
 
 #endif

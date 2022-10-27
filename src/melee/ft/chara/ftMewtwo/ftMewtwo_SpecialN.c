@@ -742,8 +742,6 @@ void ftMewtwo_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
     return;
 }
 
-extern BOOL func_8009917C(HSD_GObj*);
-
 // 0x80147E34
 // https://decomp.me/scratch/CGUNi // Mewtwo's grounded Shadow Ball Loop IASA callback
 void ftMewtwo_SpecialNLoop_IASA(HSD_GObj* fighter_gobj)
