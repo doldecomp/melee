@@ -520,7 +520,6 @@ void ftNess_SpecialAirHiStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial P
 }
 
 extern void func_8007D60C(Fighter*);
-extern void func_80097D40(HSD_GObj*);
 
 // 0x80118384 //
 // https://decomp.me/scratch/nOcOo // The link itself agrees with how ramen noodles this function is //
