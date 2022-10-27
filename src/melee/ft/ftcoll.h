@@ -35,5 +35,7 @@ f32 func_8007BBCC(HSD_GObj* fighter_gobj);
 void func_8007BC90(HSD_GObj* fighter_gobj);
 void func_8007BE3C(HSD_GObj* fighter_gobj);
 void func_8007AEF8(HSD_GObj* fighter_gobj);
+void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*));
+
 
 #endif 

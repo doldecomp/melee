@@ -88,8 +88,6 @@ void ftNess_ItemNessBatSetNULL(HSD_GObj* fighter_gobj) // Clear Baseball Bat GOb
     }
 };
 
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*)); // Create Reflect Bubble //
-
 // 0x80114D50
 // https://decomp.me/scratch/M8dFk //
 void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation callback //

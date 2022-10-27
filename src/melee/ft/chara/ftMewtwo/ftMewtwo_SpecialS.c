@@ -222,8 +222,6 @@ void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
     func_80082C74(fighter_gobj, ftMewtwo_SpecialAirS_AirToGround);
 }
 
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*));
-
 // 0x80146C08
 // https://decomp.me/scratch/BDCzb // Confusion Reflect think function
 void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj)

@@ -5902,7 +5902,7 @@ asm void func_8007B1B8(HSD_GObj*, f32*, void (*)(HSD_GObj*))
 #pragma pop
 
 #pragma push
-asm unk_t ftColl_CreateReflectHit()
+asm void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*))
 { // clang-format off
     nofralloc
 /* 8007B23C 00077E1C  80 E3 00 2C */	lwz r7, 0x2c(r3)

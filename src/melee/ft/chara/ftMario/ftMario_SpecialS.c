@@ -166,8 +166,6 @@ void ftMario_SpecialAirS_IASA(HSD_GObj* gobj)
 	return;
 }
 
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*));
-
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj) 
 {
     Fighter* fp = getFighter(gobj);

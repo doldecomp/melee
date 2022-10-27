@@ -410,8 +410,6 @@ void ftFox_SpecialAirLwLoop_AirToGround(HSD_GObj* fighter_gobj)
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
 
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*));
-
 // 0x800E8E2C
 // https://decomp.me/scratch/MYfXM // Create Reflector's reflect bubble
 void ftFox_SpecialLw_CreateReflectHit(HSD_GObj* fighter_gobj)
