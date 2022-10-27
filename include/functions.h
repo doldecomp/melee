@@ -304,7 +304,6 @@ void func_800880D8();
 
 void func_80088148(Fighter*, u32, u32, u32);
 
-f32 scaleBy154_8008D8D8(f32);
 s32 func_8008D8E8(f32);
 void func_8008D930();
 

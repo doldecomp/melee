@@ -7853,3 +7853,14 @@ lbl_8008D8C4:
 /* 8008D8D4 0008A4B4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm f32 scaleBy154_8008D8D8(f32 force)
+{ // clang-format off
+    nofralloc
+/* 8008D8D8 0008A4B8  80 6D AE B4 */	lwz r3, p_ftCommonData(r13)
+/* 8008D8DC 0008A4BC  C0 03 01 54 */	lfs f0, 0x154(r3)
+/* 8008D8E0 0008A4C0  EC 21 00 32 */	fmuls f1, f1, f0
+/* 8008D8E4 0008A4C4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
