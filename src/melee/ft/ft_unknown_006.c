@@ -11766,3 +11766,44 @@ lbl_80090AA8:
 /* 80090ABC 0008D69C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_80090AC0()
+{ // clang-format off
+    nofralloc
+/* 80090AC0 0008D6A0  7C 08 02 A6 */	mflr r0
+/* 80090AC4 0008D6A4  38 80 00 02 */	li r4, 2
+/* 80090AC8 0008D6A8  90 01 00 04 */	stw r0, 4(r1)
+/* 80090ACC 0008D6AC  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 80090AD0 0008D6B0  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 80090AD4 0008D6B4  3B E3 00 00 */	addi r31, r3, 0
+/* 80090AD8 0008D6B8  4B FE 45 35 */	bl func_8007500C
+/* 80090ADC 0008D6BC  C0 3F 00 38 */	lfs f1, 0x38(r31)
+/* 80090AE0 0008D6C0  54 60 20 36 */	slwi r0, r3, 4
+/* 80090AE4 0008D6C4  C0 1F 02 5C */	lfs f0, 0x25c(r31)
+/* 80090AE8 0008D6C8  39 01 00 18 */	addi r8, r1, 0x18
+/* 80090AEC 0008D6CC  80 6D AE B4 */	lwz r3, p_ftCommonData(r13)
+/* 80090AF0 0008D6D0  EC 21 00 32 */	fmuls f1, f1, f0
+/* 80090AF4 0008D6D4  80 9F 05 E8 */	lwz r4, 0x5e8(r31)
+/* 80090AF8 0008D6D8  C0 03 07 A0 */	lfs f0, 0x7a0(r3)
+/* 80090AFC 0008D6DC  4C C6 31 82 */	crclr 6
+/* 80090B00 0008D6E0  7C E4 00 2E */	lwzx r7, r4, r0
+/* 80090B04 0008D6E4  EC 01 00 24 */	fdivs f0, f1, f0
+/* 80090B08 0008D6E8  38 A0 00 03 */	li r5, 3
+/* 80090B0C 0008D6EC  38 C0 04 15 */	li r6, 0x415
+/* 80090B10 0008D6F0  D0 01 00 18 */	stfs f0, 0x18(r1)
+/* 80090B14 0008D6F4  80 7F 00 00 */	lwz r3, 0(r31)
+/* 80090B18 0008D6F8  80 83 00 2C */	lwz r4, 0x2c(r3)
+/* 80090B1C 0008D6FC  38 84 06 0C */	addi r4, r4, 0x60c
+/* 80090B20 0008D700  4B FD 6B D1 */	bl efAsync_Spawn
+/* 80090B24 0008D704  88 1F 22 19 */	lbz r0, 0x2219(r31)
+/* 80090B28 0008D708  38 60 00 01 */	li r3, 1
+/* 80090B2C 0008D70C  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
+/* 80090B30 0008D710  98 1F 22 19 */	stb r0, 0x2219(r31)
+/* 80090B34 0008D714  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 80090B38 0008D718  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 80090B3C 0008D71C  38 21 00 28 */	addi r1, r1, 0x28
+/* 80090B40 0008D720  7C 08 03 A6 */	mtlr r0
+/* 80090B44 0008D724  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
