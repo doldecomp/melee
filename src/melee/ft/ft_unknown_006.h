@@ -3,6 +3,7 @@
 
 #include <dolphin/types.h>
 
+#include <melee/ft/chara/ftLink/ftlink.h>
 #include <sysdolphin/baselib/gobj.h>
 
 #include <common_structs.h>
@@ -100,5 +101,6 @@ void func_800928CC(HSD_GObj* fighter_gobj);
 BOOL func_8009917C(HSD_GObj* fighter_gobj);
 unk_t func_80092BE8();
 void func_80092BCC(HSD_GObj* fighter_gobj);
+f32 func_80092ED8(s32, ftLinkAttributes*, f32);
 
 #endif

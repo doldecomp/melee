@@ -14612,3 +14612,31 @@ lbl_80092EC0:
 /* 80092ED4 0008FAB4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm f32 func_80092ED8(s32, ftLinkAttributes*, f32)
+{ // clang-format off
+    nofralloc
+/* 80092ED8 0008FAB8  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 80092EDC 0008FABC  6C 60 80 00 */	xoris r0, r3, 0x8000
+/* 80092EE0 0008FAC0  80 8D AE B4 */	lwz r4, p_ftCommonData(r13)
+/* 80092EE4 0008FAC4  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80092EE8 0008FAC8  3C 00 43 30 */	lis r0, 0x4330
+/* 80092EEC 0008FACC  C0 A4 02 E4 */	lfs f5, 0x2e4(r4)
+/* 80092EF0 0008FAD0  C0 04 02 E8 */	lfs f0, 0x2e8(r4)
+/* 80092EF4 0008FAD4  90 01 00 10 */	stw r0, 0x10(r1)
+/* 80092EF8 0008FAD8  EC 00 28 28 */	fsubs f0, f0, f5
+/* 80092EFC 0008FADC  C8 82 8B 90 */	lfd f4, lbl_804D8570(r2)
+/* 80092F00 0008FAE0  C8 61 00 10 */	lfd f3, 0x10(r1)
+/* 80092F04 0008FAE4  C0 42 8B 88 */	lfs f2, lbl_804D8568(r2)
+/* 80092F08 0008FAE8  EC 21 28 3A */	fmadds f1, f1, f0, f5
+/* 80092F0C 0008FAEC  EC 63 20 28 */	fsubs f3, f3, f4
+/* 80092F10 0008FAF0  C0 84 02 8C */	lfs f4, 0x28c(r4)
+/* 80092F14 0008FAF4  C0 04 02 90 */	lfs f0, 0x290(r4)
+/* 80092F18 0008FAF8  EC 22 08 28 */	fsubs f1, f2, f1
+/* 80092F1C 0008FAFC  EC 23 00 72 */	fmuls f1, f3, f1
+/* 80092F20 0008FB00  EC 24 00 7A */	fmadds f1, f4, f1, f0
+/* 80092F24 0008FB04  38 21 00 18 */	addi r1, r1, 0x18
+/* 80092F28 0008FB08  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
