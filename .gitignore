@@ -31,6 +31,7 @@ clean.bat
 # Other
 src/m2ctx.py
 expected/
+dump/
 *.log
 
 # Epilogue hack folder
