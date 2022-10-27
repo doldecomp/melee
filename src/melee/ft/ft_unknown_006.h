@@ -70,5 +70,6 @@ BOOL func_800D5F58(HSD_GObj* fighter_gobj);
 BOOL func_8008BFC4(HSD_GObj* fighter_gobj);
 BOOL func_8008C830(HSD_GObj* fighter_gobj);
 BOOL func_8008CB44(HSD_GObj* fighter_gobj);
+s32 func_8008CE68(Fighter* fp);
 
 #endif
