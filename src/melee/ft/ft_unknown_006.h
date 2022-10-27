@@ -76,5 +76,6 @@ BOOL func_800CB870(HSD_GObj* fighter_gobj);
 void func_8008D708(HSD_GObj* fighter_gobj, s32 asid, f32 lag);
 void func_800D5D3C(HSD_GObj* fighter_gobj);
 void func_800D5F18(HSD_GObj* fighter_gobj);
+void func_800D5F38(HSD_GObj* fighter_gobj);
 
 #endif
