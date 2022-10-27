@@ -1,7 +1,6 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
 extern s32 func_8008B658(HSD_GObj*);
-extern s32 func_8008BB44(HSD_GObj*); 
 extern s32 func_8008BFC4(HSD_GObj*); 
 extern s32 func_8008C830(HSD_GObj*); 
 extern s32 func_8008CB44(HSD_GObj*); 
