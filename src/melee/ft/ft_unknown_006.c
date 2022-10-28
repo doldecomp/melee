@@ -1,5 +1,6 @@
 #include <melee/ft/ft_unknown_006.h>
 
+#include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
 
 #include <melee/lb/lbunknown_001.h>
@@ -31364,5 +31365,21 @@ asm unk_t func_8009F460()
 /* 8009F474 0009C054  38 21 00 08 */	addi r1, r1, 8
 /* 8009F478 0009C058  7C 08 03 A6 */	mtlr r0
 /* 8009F47C 0009C05C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t lbl_8009F480()
+{ // clang-format off
+    nofralloc
+/* 8009F480 0009C060  7C 08 02 A6 */	mflr r0
+/* 8009F484 0009C064  90 01 00 04 */	stw r0, 4(r1)
+/* 8009F488 0009C068  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8009F48C 0009C06C  80 63 00 28 */	lwz r3, 0x28(r3)
+/* 8009F490 0009C070  48 2C 61 E9 */	bl HSD_LObjAnimAll
+/* 8009F494 0009C074  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8009F498 0009C078  38 21 00 08 */	addi r1, r1, 8
+/* 8009F49C 0009C07C  7C 08 03 A6 */	mtlr r0
+/* 8009F4A0 0009C080  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
