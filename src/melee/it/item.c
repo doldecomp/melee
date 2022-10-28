@@ -2317,7 +2317,6 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Remove Item f
 }
 
 extern void efLib_DestroyAll(HSD_GObj*);
-extern void func_8000FD18(void*);
 extern void func_80086724(HSD_GObj*, HSD_GObj*);
 extern void func_80086764(HSD_GObj*);
 extern s32 func_800867A0(HSD_GObj*, HSD_GObj*);
