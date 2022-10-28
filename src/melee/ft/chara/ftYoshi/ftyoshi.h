@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI_H
+#define MELEE_FT_CHARA_FTYOSHI_FTYOSHI_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -43,3 +44,6 @@ unk_t func_8012BECC();
 unk_t func_8012C1D4();
 unk_t func_8012C49C();
 unk_t func_8012C600();
+unk_t func_8012BDA0();
+
+#endif
