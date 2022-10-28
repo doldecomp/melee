@@ -21,5 +21,6 @@ void func_800831CC(HSD_GObj*, s32 (*)(HSD_GObj*), void (*)(HSD_GObj*));
 unk_t func_800845B4();
 unk_t func_800841B8();
 BOOL func_80082708(HSD_GObj* fighter_gobj);
+unk_t func_80083090();
 
 #endif
