@@ -3,14 +3,14 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_003.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
 
 #include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
@@ -3577,8 +3577,6 @@ static void lbl_801C4640(HSD_GObj* gobj)
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-extern u8 lbl_804D784A;
-extern void func_80011AC4();
 static asm void func_801C466C(void)
 {
     nofralloc
@@ -3822,7 +3820,7 @@ HSD_GObj* func_801C498C(void)
 
 extern void* lbl_803E06C8[]; // unknown type
 
-void* func_801C49B4(void)
+unk_t func_801C49B4(void)
 {
     UnkArchiveStruct* archive = func_801C6324();
     if (stage_info.x6C4 != NULL) {

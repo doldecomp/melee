@@ -213,7 +213,6 @@ typedef struct _GObjFuncs {
 extern GObjFuncs lbl_80408610;
 extern s8 lbl_804D7848;
 extern s8 lbl_804D7849;
-extern s8 lbl_804D784A;
 extern GObjFuncs lbl_80408620;
 
 void func_80391260(struct _GObjUnkStruct* arg0)

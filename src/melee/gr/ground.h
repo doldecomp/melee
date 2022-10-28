@@ -4,6 +4,7 @@
 #include <melee/gr/stage.h>
 
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/lobj.h>
 
 static void func_801BFFA8(void);
 static void func_801BFFAC(s32);
@@ -44,5 +45,7 @@ extern StageInfo stage_info;
 BOOL func_801C4E20(void);
 BOOL func_801C4DD0(void);
 BOOL func_801C4DA0(Vec3* arg0, f32* arg1);
+void func_801C2374(HSD_LObj* lobj);
+unk_t func_801C49B4(void);
 
 #endif
