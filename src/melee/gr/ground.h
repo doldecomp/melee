@@ -42,5 +42,6 @@ static void func_801C34AC(s32, struct _HSD_JObj*, struct _HSD_Joint*);
 static void func_801C28CC(void*, s32);
 extern StageInfo stage_info;
 BOOL func_801C4E20(void);
+BOOL func_801C4DD0(void);
 
 #endif
