@@ -17,6 +17,7 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
@@ -24894,5 +24895,20 @@ lbl_8009A958:
 /* 8009A960 00097540  38 21 00 18 */	addi r1, r1, 0x18
 /* 8009A964 00097544  7C 08 03 A6 */	mtlr r0
 /* 8009A968 00097548  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t func_8009A96C()
+{ // clang-format off
+    nofralloc
+/* 8009A96C 0009754C  7C 08 02 A6 */	mflr r0
+/* 8009A970 00097550  90 01 00 04 */	stw r0, 4(r1)
+/* 8009A974 00097554  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8009A978 00097558  4B FE 6B CD */	bl func_80081544
+/* 8009A97C 0009755C  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8009A980 00097560  38 21 00 08 */	addi r1, r1, 8
+/* 8009A984 00097564  7C 08 03 A6 */	mtlr r0
+/* 8009A988 00097568  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
