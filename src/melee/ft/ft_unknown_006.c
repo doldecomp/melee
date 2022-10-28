@@ -25970,3 +25970,35 @@ lbl_8009B504:
 /* 8009B514 000980F4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern f32 const lbl_804D8708;
+extern f32 const lbl_804D870C;
+extern unk_t func_8009C5A4();
+
+#pragma push
+asm unk_t func_8009B518()
+{ // clang-format off
+    nofralloc
+/* 8009B518 000980F8  7C 08 02 A6 */	mflr r0
+/* 8009B51C 000980FC  38 A0 00 00 */	li r5, 0
+/* 8009B520 00098100  90 01 00 04 */	stw r0, 4(r1)
+/* 8009B524 00098104  38 C0 00 00 */	li r6, 0
+/* 8009B528 00098108  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 8009B52C 0009810C  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 8009B530 00098110  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 8009B534 00098114  C0 22 8D 28 */	lfs f1, lbl_804D8708(r2)
+/* 8009B538 00098118  80 9F 02 CC */	lwz r4, 0x2cc(r31)
+/* 8009B53C 0009811C  FC 60 08 90 */	fmr f3, f1
+/* 8009B540 00098120  C0 42 8D 2C */	lfs f2, lbl_804D870C(r2)
+/* 8009B544 00098124  80 84 00 04 */	lwz r4, 4(r4)
+/* 8009B548 00098128  4B FC DE 65 */	bl Fighter_ActionStateChange_800693AC
+/* 8009B54C 0009812C  80 7F 1A 58 */	lwz r3, 0x1a58(r31)
+/* 8009B550 00098130  38 80 01 0A */	li r4, 0x10a
+/* 8009B554 00098134  48 00 10 51 */	bl func_8009C5A4
+/* 8009B558 00098138  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 8009B55C 0009813C  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 8009B560 00098140  38 21 00 28 */	addi r1, r1, 0x28
+/* 8009B564 00098144  7C 08 03 A6 */	mtlr r0
+/* 8009B568 00098148  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
