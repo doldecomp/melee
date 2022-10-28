@@ -7,9 +7,8 @@
 #include <melee/ft/fighter.h>
 
 typedef enum ftCaptainAction {
-
-    AS_FTCOMMON = 340,
-    AS_CAPTAIN_SWING42_SWORD,
+ 
+    AS_CAPTAIN_SWING42_SWORD = 341,
     AS_CAPTAIN_SWING42_2,
     AS_CAPTAIN_SWING42_3,
     AS_CAPTAIN_SWING42_4,
