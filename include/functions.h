@@ -750,8 +750,7 @@ void func_8038FD54(struct _HSD_GObj *, void (*)(struct _HSD_GObj *), s32);
 void func_80390228(struct _HSD_GObj *);
 
 void efLib_PauseAll(struct _HSD_GObj *);
-void efLib_ResumeAll(struct _HSD_GObj *);
-s32 func_80096CC8(struct _HSD_GObj *);
+void efLib_ResumeAll(struct _HSD_GObj*);
 void ef_Spawn(s32, ...);
 f32 HSD_Randf(void);
 s32 HSD_Randi(s32);
