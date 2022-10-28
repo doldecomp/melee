@@ -24307,3 +24307,26 @@ asm unk_t func_8009A228()
 /* 8009A2A4 00096E84  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_8009A2A8()
+{ // clang-format off
+    nofralloc
+/* 8009A2A8 00096E88  7C 08 02 A6 */	mflr r0
+/* 8009A2AC 00096E8C  90 01 00 04 */	stw r0, 4(r1)
+/* 8009A2B0 00096E90  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8009A2B4 00096E94  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8009A2B8 00096E98  7C 7F 1B 78 */	mr r31, r3
+/* 8009A2BC 00096E9C  4B FD 4F 7D */	bl ftAnim_IsFramesRemaining
+/* 8009A2C0 00096EA0  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A2C4 00096EA4  40 82 00 0C */	bne lbl_8009A2D0
+/* 8009A2C8 00096EA8  7F E3 FB 78 */	mr r3, r31
+/* 8009A2CC 00096EAC  48 03 24 65 */	bl func_800CC730
+lbl_8009A2D0:
+/* 8009A2D0 00096EB0  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8009A2D4 00096EB4  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8009A2D8 00096EB8  38 21 00 18 */	addi r1, r1, 0x18
+/* 8009A2DC 00096EBC  7C 08 03 A6 */	mtlr r0
+/* 8009A2E0 00096EC0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
