@@ -1,9 +1,8 @@
 #include <melee/gr/grbattle.h>
 
+#include <melee/gr/ground.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
-
-extern StageInfo stage_info;
 
 struct {
     s32 unk0;

@@ -4,6 +4,7 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/gr/ground.h>
 
 #define HALF_PI 1.5707963267948966
 

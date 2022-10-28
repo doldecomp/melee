@@ -1,8 +1,7 @@
 #include <melee/gr/grtness.h>
 
+#include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
-
-extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E9030[4] = {
     {

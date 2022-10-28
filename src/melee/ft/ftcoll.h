@@ -36,6 +36,10 @@ void func_8007BC90(HSD_GObj* fighter_gobj);
 void func_8007BE3C(HSD_GObj* fighter_gobj);
 void func_8007AEF8(HSD_GObj* fighter_gobj);
 void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void (*cb_OnReflect)(HSD_GObj*));
+unk_t func_80078710();
+unk_t func_80079C70();
+void func_800DC920(HSD_GObj* fighter_gobj, HSD_GObj* other_gobj);
+unk_t func_8007AF60();
 
 /* todo
  * Real signature is:
