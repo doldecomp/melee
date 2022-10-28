@@ -153,7 +153,6 @@ void ftNess_AttackS4_Anim(HSD_GObj* gobj);
 void ftNess_AttackS4_IASA(HSD_GObj* gobj);
 void ftNess_AttackS4_Phys(HSD_GObj* gobj);
 void ftNess_AttackS4_Coll(HSD_GObj* gobj);
-void ftNess_AttackS4_Action(HSD_GObj* gobj);
 
 // Yo-Yo item setup & math //
 
@@ -370,5 +369,6 @@ void ftNess_SpecialLwEnd_GroundToAir(HSD_GObj* gobj);
 void ftNess_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj);
 void ftNess_SpecialLwEnd_Action(HSD_GObj* gobj);
 void ftNess_SpecialAirLwEnd_Action(HSD_GObj* gobj);
+void ftNess_AttackS4_Action(HSD_GObj* fighter_gobj);
 
 #endif

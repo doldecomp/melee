@@ -72,7 +72,6 @@ typedef enum ftGameWatchAction {
     AS_GAMEWATCH_SPECIALAIRLW,
     AS_GAMEWATCH_SPECIALAIRLW_CATCH,
     AS_GAMEWATCH_SPECIALAIRLW_SHOOT,
-
 } ftGameWatchAction;
 
 typedef struct ftGameWatchChef
