@@ -26,5 +26,6 @@ void func_8008403C(HSD_GObj* fighter_gobj, void (*cb_Coll)(HSD_GObj* fighter_gob
 void func_80085088(HSD_GObj* fighter_gobj);
 unk_t func_80084C74();
 void func_80083F88(HSD_GObj* fighter_gobj);
+unk_t func_80085004();
 
 #endif
