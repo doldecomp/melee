@@ -23909,3 +23909,20 @@ asm void func_80099D9C(HSD_GObj* fighter_gobj)
 /* 80099E20 00096A00  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t func_80099E44();
+
+#pragma push
+asm unk_t func_80099E24()
+{ // clang-format off
+    nofralloc
+/* 80099E24 00096A04  7C 08 02 A6 */	mflr r0
+/* 80099E28 00096A08  90 01 00 04 */	stw r0, 4(r1)
+/* 80099E2C 00096A0C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 80099E30 00096A10  48 00 00 15 */	bl func_80099E44
+/* 80099E34 00096A14  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 80099E38 00096A18  38 21 00 08 */	addi r1, r1, 8
+/* 80099E3C 00096A1C  7C 08 03 A6 */	mtlr r0
+/* 80099E40 00096A20  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
