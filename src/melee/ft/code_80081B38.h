@@ -32,5 +32,6 @@ unk_t func_80082F28();
 BOOL func_800827A0(HSD_GObj* fighter_gobj);
 BOOL func_800821DC();
 unk_t func_800835B0();
+void func_80083B68(HSD_GObj* fighter_gobj);
 
 #endif
