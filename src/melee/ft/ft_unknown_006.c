@@ -1,6 +1,7 @@
 #include <melee/ft/ft_unknown_006.h>
 
 #include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_003.h>
 
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
@@ -28370,5 +28371,79 @@ lbl_8009CF6C:
 /* 8009CF78 00099B58  38 21 00 58 */	addi r1, r1, 0x58
 /* 8009CF7C 00099B5C  7C 08 03 A6 */	mtlr r0
 /* 8009CF80 00099B60  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+extern char* lbl_803C572C;
+extern char* lbl_804D3B40;
+extern char* lbl_803C5748[];
+
+#pragma push
+asm void func_8009CF84(Fighter* fp)
+{ // clang-format off
+    nofralloc
+/* 8009CF84 00099B64  7C 08 02 A6 */	mflr r0
+/* 8009CF88 00099B68  90 01 00 04 */	stw r0, 4(r1)
+/* 8009CF8C 00099B6C  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 8009CF90 00099B70  BF 61 00 14 */	stmw r27, 0x14(r1)
+/* 8009CF94 00099B74  7C 7E 1B 78 */	mr r30, r3
+/* 8009CF98 00099B78  83 E3 01 0C */	lwz r31, 0x10c(r3)
+/* 8009CF9C 00099B7C  80 7F 00 2C */	lwz r3, 0x2c(r31)
+/* 8009CFA0 00099B80  80 03 00 00 */	lwz r0, 0(r3)
+/* 8009CFA4 00099B84  90 1E 03 E0 */	stw r0, 0x3e0(r30)
+/* 8009CFA8 00099B88  80 1E 03 E0 */	lwz r0, 0x3e0(r30)
+/* 8009CFAC 00099B8C  2C 00 00 0A */	cmpwi r0, 0xa
+/* 8009CFB0 00099B90  41 80 00 28 */	blt lbl_8009CFD8
+/* 8009CFB4 00099B94  3C 60 80 3C */	lis r3, lbl_803C572C@ha
+/* 8009CFB8 00099B98  4C C6 31 82 */	crclr 6
+/* 8009CFBC 00099B9C  38 63 57 2C */	addi r3, r3, lbl_803C572C@l
+/* 8009CFC0 00099BA0  48 2A 86 E9 */	bl OSReport
+/* 8009CFC4 00099BA4  3C 60 80 3C */	lis r3, lbl_803C5748@ha
+/* 8009CFC8 00099BA8  38 63 57 48 */	addi r3, r3, lbl_803C5748@l
+/* 8009CFCC 00099BAC  38 80 00 6D */	li r4, 0x6d
+/* 8009CFD0 00099BB0  38 AD 84 A0 */	addi r5, r13, lbl_804D3B40
+/* 8009CFD4 00099BB4  48 2E B2 4D */	bl __assert
+lbl_8009CFD8:
+/* 8009CFD8 00099BB8  3B 60 00 00 */	li r27, 0
+/* 8009CFDC 00099BBC  1C 1B 00 18 */	mulli r0, r27, 0x18
+/* 8009CFE0 00099BC0  7F 9E 02 14 */	add r28, r30, r0
+/* 8009CFE4 00099BC4  3B A0 00 00 */	li r29, 0
+/* 8009CFE8 00099BC8  48 00 00 68 */	b lbl_8009D050
+lbl_8009CFEC:
+/* 8009CFEC 00099BCC  80 03 00 04 */	lwz r0, 4(r3)
+/* 8009CFF0 00099BD0  38 9C 02 F4 */	addi r4, r28, 0x2f4
+/* 8009CFF4 00099BD4  80 7E 05 E8 */	lwz r3, 0x5e8(r30)
+/* 8009CFF8 00099BD8  7C A0 EA 14 */	add r5, r0, r29
+/* 8009CFFC 00099BDC  80 05 00 00 */	lwz r0, 0(r5)
+/* 8009D000 00099BE0  80 A5 00 08 */	lwz r5, 8(r5)
+/* 8009D004 00099BE4  54 00 20 36 */	slwi r0, r0, 4
+/* 8009D008 00099BE8  7C 63 00 2E */	lwzx r3, r3, r0
+/* 8009D00C 00099BEC  4B F7 2D 3D */	bl func_8000FD48
+/* 8009D010 00099BF0  38 00 00 00 */	li r0, 0
+/* 8009D014 00099BF4  90 1C 02 F0 */	stw r0, 0x2f0(r28)
+/* 8009D018 00099BF8  38 7E 00 00 */	addi r3, r30, 0
+/* 8009D01C 00099BFC  38 9B 00 00 */	addi r4, r27, 0
+/* 8009D020 00099C00  38 A0 00 01 */	li r5, 1
+/* 8009D024 00099C04  38 C0 00 00 */	li r6, 0
+/* 8009D028 00099C08  4B FF FB 19 */	bl func_8009CB40
+/* 8009D02C 00099C0C  80 BF 00 2C */	lwz r5, 0x2c(r31)
+/* 8009D030 00099C10  38 7D 00 04 */	addi r3, r29, 4
+/* 8009D034 00099C14  38 9C 02 F4 */	addi r4, r28, 0x2f4
+/* 8009D038 00099C18  80 05 00 04 */	lwz r0, 4(r5)
+/* 8009D03C 00099C1C  7C 60 1A 14 */	add r3, r0, r3
+/* 8009D040 00099C20  4B F7 46 D1 */	bl func_80011710
+/* 8009D044 00099C24  3B BD 00 18 */	addi r29, r29, 0x18
+/* 8009D048 00099C28  3B 9C 00 18 */	addi r28, r28, 0x18
+/* 8009D04C 00099C2C  3B 7B 00 01 */	addi r27, r27, 1
+lbl_8009D050:
+/* 8009D050 00099C30  80 7F 00 2C */	lwz r3, 0x2c(r31)
+/* 8009D054 00099C34  80 03 00 00 */	lwz r0, 0(r3)
+/* 8009D058 00099C38  7C 1B 00 00 */	cmpw r27, r0
+/* 8009D05C 00099C3C  41 80 FF 90 */	blt lbl_8009CFEC
+/* 8009D060 00099C40  BB 61 00 14 */	lmw r27, 0x14(r1)
+/* 8009D064 00099C44  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 8009D068 00099C48  38 21 00 28 */	addi r1, r1, 0x28
+/* 8009D06C 00099C4C  7C 08 03 A6 */	mtlr r0
+/* 8009D070 00099C50  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
