@@ -46,7 +46,7 @@ So the repo is filled with `.s` files and `.c` files, where the C code inside th
 
 No! And even initially, the code doesn’t have to be super-readable as we’re trying to get 100% match rate first.
 
-So you can actually view the above example in an online tool that we use called decomp.me. Here’s a link to [that specific decompliation](https://decomp.me/scratch/ZN9lq). If you want to try doing this yourself, follow these steps:
+So you can actually view the above example in an online tool that we use called decomp.me. Here’s a link to [that specific decompliation](https://decomp.me/scratch/VP0Gj). If you want to try doing this yourself, follow these steps:
 
 1. Copy the assembly in the example
 2. Hit “New Scratch”
