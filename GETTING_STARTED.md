@@ -20,7 +20,7 @@ void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
 }
 ```
 
-and it’s corresponding PowerPC assembly:
+and its corresponding PowerPC assembly:
 
 ```asm
 .global ftMewtwo_SpecialHi_CreateGFX
