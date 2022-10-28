@@ -1,9 +1,12 @@
-.include "macros.inc"
+#include <dolphin/os/OSInterrupt.h>
 
-.section .text  # 0x80348A90 - 0x803B7240 
+extern unk_t lbl_804A7D60;
+extern unk_t WriteSram();
 
-.global WriteSramCallback
-WriteSramCallback:
+#pragma push
+asm unk_t WriteSramCallback()
+{ // clang-format off
+    nofralloc
 /* 80348A90 00345670  7C 08 02 A6 */	mflr r0
 /* 80348A94 00345674  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
 /* 80348A98 00345678  90 01 00 04 */	stw r0, 4(r1)
@@ -29,9 +32,21 @@ lbl_80348AD8:
 /* 80348AE4 003456C4  7C 08 03 A6 */	mtlr r0
 /* 80348AE8 003456C8  38 21 00 18 */	addi r1, r1, 0x18
 /* 80348AEC 003456CC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global WriteSram
-WriteSram:
+extern unk_t EXIDeselect();
+extern unk_t EXIImmEx();
+extern unk_t EXISync();
+extern unk_t EXIImm();
+extern unk_t EXIUnlock();
+extern unk_t EXISelect();
+extern unk_t EXILock();
+
+#pragma push
+asm unk_t WriteSram()
+{ // clang-format off
+    nofralloc
 /* 80348AF0 003456D0  7C 08 02 A6 */	mflr r0
 /* 80348AF4 003456D4  3C C0 80 35 */	lis r6, WriteSramCallback@ha
 /* 80348AF8 003456D8  90 01 00 04 */	stw r0, 4(r1)
@@ -105,9 +120,16 @@ lbl_80348BEC:
 /* 80348BFC 003457DC  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 80348C00 003457E0  38 21 00 28 */	addi r1, r1, 0x28
 /* 80348C04 003457E4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSInitSram
-__OSInitSram:
+extern unk_t EXIDma();
+extern unk_t DCInvalidateRange();
+
+#pragma push
+asm unk_t __OSInitSram()
+{ // clang-format off
+    nofralloc
 /* 80348C08 003457E8  7C 08 02 A6 */	mflr r0
 /* 80348C0C 003457EC  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
 /* 80348C10 003457F0  90 01 00 04 */	stw r0, 4(r1)
@@ -188,9 +210,13 @@ lbl_80348D18:
 /* 80348D30 00345910  38 21 00 18 */	addi r1, r1, 0x18
 /* 80348D34 00345914  7C 08 03 A6 */	mtlr r0
 /* 80348D38 00345918  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSLockSram
-__OSLockSram:
+#pragma push
+asm unk_t __OSLockSram()
+{ // clang-format off
+    nofralloc
 /* 80348D3C 0034591C  7C 08 02 A6 */	mflr r0
 /* 80348D40 00345920  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
 /* 80348D44 00345924  90 01 00 04 */	stw r0, 4(r1)
@@ -216,9 +242,13 @@ lbl_80348D80:
 /* 80348D8C 0034596C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80348D90 00345970  7C 08 03 A6 */	mtlr r0
 /* 80348D94 00345974  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSLockSramEx
-__OSLockSramEx:
+#pragma push
+asm unk_t __OSLockSramEx()
+{ // clang-format off
+    nofralloc
 /* 80348D98 00345978  7C 08 02 A6 */	mflr r0
 /* 80348D9C 0034597C  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
 /* 80348DA0 00345980  90 01 00 04 */	stw r0, 4(r1)
@@ -244,9 +274,13 @@ lbl_80348DE0:
 /* 80348DE8 003459C8  38 21 00 10 */	addi r1, r1, 0x10
 /* 80348DEC 003459CC  7C 08 03 A6 */	mtlr r0
 /* 80348DF0 003459D0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global UnlockSram
-UnlockSram:
+#pragma push
+asm unk_t UnlockSram()
+{ // clang-format off
+    nofralloc
 /* 80348DF4 003459D4  7C 08 02 A6 */	mflr r0
 /* 80348DF8 003459D8  2C 03 00 00 */	cmpwi r3, 0
 /* 80348DFC 003459DC  90 01 00 04 */	stw r0, 4(r1)
@@ -451,9 +485,13 @@ lbl_803490D4:
 /* 803490F0 00345CD0  38 21 00 30 */	addi r1, r1, 0x30
 /* 803490F4 00345CD4  7C 08 03 A6 */	mtlr r0
 /* 803490F8 00345CD8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSUnlockSram
-__OSUnlockSram:
+#pragma push
+asm unk_t __OSUnlockSram()
+{ // clang-format off
+    nofralloc
 /* 803490FC 00345CDC  7C 08 02 A6 */	mflr r0
 /* 80349100 00345CE0  38 80 00 00 */	li r4, 0
 /* 80349104 00345CE4  90 01 00 04 */	stw r0, 4(r1)
@@ -463,9 +501,13 @@ __OSUnlockSram:
 /* 80349114 00345CF4  38 21 00 08 */	addi r1, r1, 8
 /* 80349118 00345CF8  7C 08 03 A6 */	mtlr r0
 /* 8034911C 00345CFC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSUnlockSramEx
-__OSUnlockSramEx:
+#pragma push
+asm unk_t __OSUnlockSramEx()
+{ // clang-format off
+    nofralloc
 /* 80349120 00345D00  7C 08 02 A6 */	mflr r0
 /* 80349124 00345D04  38 80 00 14 */	li r4, 0x14
 /* 80349128 00345D08  90 01 00 04 */	stw r0, 4(r1)
@@ -475,16 +517,24 @@ __OSUnlockSramEx:
 /* 80349138 00345D18  38 21 00 08 */	addi r1, r1, 8
 /* 8034913C 00345D1C  7C 08 03 A6 */	mtlr r0
 /* 80349140 00345D20  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSSyncSram
-__OSSyncSram:
+#pragma push
+asm unk_t __OSSyncSram()
+{ // clang-format off
+    nofralloc
 /* 80349144 00345D24  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
 /* 80349148 00345D28  38 63 7D 60 */	addi r3, r3, lbl_804A7D60@l
 /* 8034914C 00345D2C  80 63 00 4C */	lwz r3, 0x4c(r3)
 /* 80349150 00345D30  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSGetSoundMode
-OSGetSoundMode:
+#pragma push
+asm unk_t OSGetSoundMode()
+{ // clang-format off
+    nofralloc
 /* 80349154 00345D34  7C 08 02 A6 */	mflr r0
 /* 80349158 00345D38  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
 /* 8034915C 00345D3C  90 01 00 04 */	stw r0, 4(r1)
@@ -521,9 +571,13 @@ lbl_803491B0:
 /* 803491C8 00345DA8  38 21 00 20 */	addi r1, r1, 0x20
 /* 803491CC 00345DAC  7C 08 03 A6 */	mtlr r0
 /* 803491D0 00345DB0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSSetSoundMode
-OSSetSoundMode:
+#pragma push
+asm unk_t OSSetSoundMode()
+{ // clang-format off
+    nofralloc
 /* 803491D4 00345DB4  7C 08 02 A6 */	mflr r0
 /* 803491D8 00345DB8  3C 80 80 4A */	lis r4, lbl_804A7D60@ha
 /* 803491DC 00345DBC  90 01 00 04 */	stw r0, 4(r1)
@@ -569,9 +623,13 @@ lbl_80349260:
 /* 8034926C 00345E4C  7C 08 03 A6 */	mtlr r0
 /* 80349270 00345E50  38 21 00 20 */	addi r1, r1, 0x20
 /* 80349274 00345E54  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSGetProgressiveMode
-OSGetProgressiveMode:
+#pragma push
+asm unk_t OSGetProgressiveMode()
+{ // clang-format off
+    nofralloc
 /* 80349278 00345E58  7C 08 02 A6 */	mflr r0
 /* 8034927C 00345E5C  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
 /* 80349280 00345E60  90 01 00 04 */	stw r0, 4(r1)
@@ -602,9 +660,13 @@ lbl_803492BC:
 /* 803492DC 00345EBC  38 21 00 18 */	addi r1, r1, 0x18
 /* 803492E0 00345EC0  7C 08 03 A6 */	mtlr r0
 /* 803492E4 00345EC4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSSetProgressiveMode
-OSSetProgressiveMode:
+#pragma push
+asm unk_t OSSetProgressiveMode()
+{ // clang-format off
+    nofralloc
 /* 803492E8 00345EC8  7C 08 02 A6 */	mflr r0
 /* 803492EC 00345ECC  3C 80 80 4A */	lis r4, lbl_804A7D60@ha
 /* 803492F0 00345ED0  90 01 00 04 */	stw r0, 4(r1)
@@ -650,9 +712,13 @@ lbl_80349374:
 /* 80349380 00345F60  7C 08 03 A6 */	mtlr r0
 /* 80349384 00345F64  38 21 00 20 */	addi r1, r1, 0x20
 /* 80349388 00345F68  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSGetWirelessID
-OSGetWirelessID:
+#pragma push
+asm unk_t OSGetWirelessID()
+{ // clang-format off
+    nofralloc
 /* 8034938C 00345F6C  7C 08 02 A6 */	mflr r0
 /* 80349390 00345F70  3C 80 80 4A */	lis r4, lbl_804A7D60@ha
 /* 80349394 00345F74  90 01 00 04 */	stw r0, 4(r1)
@@ -688,9 +754,13 @@ lbl_803493DC:
 /* 80349404 00345FE4  7C 08 03 A6 */	mtlr r0
 /* 80349408 00345FE8  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034940C 00345FEC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSSetWirelessID
-OSSetWirelessID:
+#pragma push
+asm unk_t OSSetWirelessID()
+{ // clang-format off
+    nofralloc
 /* 80349410 00345FF0  7C 08 02 A6 */	mflr r0
 /* 80349414 00345FF4  3C A0 80 4A */	lis r5, lbl_804A7D60@ha
 /* 80349418 00345FF8  90 01 00 04 */	stw r0, 4(r1)
@@ -738,10 +808,5 @@ lbl_803494A0:
 /* 803494B0 00346090  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 803494B4 00346094  38 21 00 28 */	addi r1, r1, 0x28
 /* 803494B8 00346098  4E 80 00 20 */	blr 
-
-
-.section .bss, "wa"
-    .balign 8
-.global lbl_804A7D60
-lbl_804A7D60:
-	.skip 0x58
+} // clang-format on
+#pragma pop

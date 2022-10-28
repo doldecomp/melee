@@ -1,9 +1,11 @@
-.include "macros.inc"
+#include <dolphin/os/OSInterrupt.h>
 
-.section .text  # 0x80342E94 - 0x803B7240 
+extern unk_t lbl_80402358;
 
-.global SIBusy
-SIBusy:
+#pragma push
+asm unk_t SIBusy()
+{ // clang-format off
+    nofralloc
 /* 803494BC 0034609C  3C 60 80 40 */	lis r3, lbl_80402358@ha
 /* 803494C0 003460A0  80 03 23 58 */	lwz r0, lbl_80402358@l(r3)
 /* 803494C4 003460A4  2C 00 FF FF */	cmpwi r0, -1
@@ -13,9 +15,15 @@ SIBusy:
 lbl_803494D4:
 /* 803494D4 003460B4  38 60 00 00 */	li r3, 0
 /* 803494D8 003460B8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIIsChanBusy
-SIIsChanBusy:
+extern unk_t Packet;
+
+#pragma push
+asm unk_t SIIsChanBusy()
+{ // clang-format off
+    nofralloc
 /* 803494DC 003460BC  3C 80 80 4A */	lis r4, Packet@ha
 /* 803494E0 003460C0  54 65 28 34 */	slwi r5, r3, 5
 /* 803494E4 003460C4  38 04 7D B8 */	addi r0, r4, Packet@l
@@ -32,9 +40,17 @@ SIIsChanBusy:
 lbl_80349510:
 /* 80349510 003460F0  7C A3 2B 78 */	mr r3, r5
 /* 80349514 003460F4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global CompleteTransfer
-CompleteTransfer:
+extern unk_t lbl_804A7EF8;
+extern unk_t lbl_804A7ED8;
+extern unk_t __OSGetSystemTime();
+
+#pragma push
+asm unk_t CompleteTransfer()
+{ // clang-format off
+    nofralloc
 /* 80349518 003460F8  7C 08 02 A6 */	mflr r0
 /* 8034951C 003460FC  3C 60 CC 00 */	lis r3, 0xCC006400@ha
 /* 80349520 00346100  90 01 00 04 */	stw r0, 4(r1)
@@ -240,9 +256,21 @@ lbl_803497F4:
 /* 80349808 003463E8  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8034980C 003463EC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80349810 003463F0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIInterruptHandler
-SIInterruptHandler:
+extern unk_t GetTypeCallback();
+extern unk_t lbl_804D73C8;
+extern unk_t SIGetResponseRaw();
+extern unk_t VIGetCurrentLine();
+extern unk_t SITransfer();
+extern unk_t OSCancelAlarm();
+extern unk_t __SITransfer();
+
+#pragma push
+asm unk_t SIInterruptHandler()
+{ // clang-format off
+    nofralloc
 /* 80349814 003463F4  7C 08 02 A6 */	mflr r0
 /* 80349818 003463F8  3C A0 CC 00 */	lis r5, 0xCC006434@ha
 /* 8034981C 003463FC  90 01 00 04 */	stw r0, 4(r1)
@@ -355,7 +383,7 @@ lbl_80349988:
 /* 803499B4 00346594  39 04 A5 E8 */	addi r8, r4, GetTypeCallback@l
 /* 803499B8 00346598  54 0A E8 FE */	srwi r10, r0, 3
 /* 803499BC 0034659C  38 77 00 00 */	addi r3, r23, 0
-/* 803499C0 003465A0  38 8D BD 28 */	addi r4, r13, lbl_804D73C8@sda21
+/* 803499C0 003465A0  38 8D BD 28 */	addi r4, r13, lbl_804D73C8
 /* 803499C4 003465A4  38 A0 00 01 */	li r5, 1
 /* 803499C8 003465A8  38 E0 00 03 */	li r7, 3
 /* 803499CC 003465AC  39 20 00 00 */	li r9, 0
@@ -467,9 +495,13 @@ lbl_80349B44:
 /* 80349B4C 0034672C  38 21 00 48 */	addi r1, r1, 0x48
 /* 80349B50 00346730  7C 08 03 A6 */	mtlr r0
 /* 80349B54 00346734  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIEnablePollingInterrupt
-SIEnablePollingInterrupt:
+#pragma push
+asm unk_t SIEnablePollingInterrupt()
+{ // clang-format off
+    nofralloc
 /* 80349B58 00346738  7C 08 02 A6 */	mflr r0
 /* 80349B5C 0034673C  3C 80 80 4A */	lis r4, Packet@ha
 /* 80349B60 00346740  90 01 00 04 */	stw r0, 4(r1)
@@ -512,9 +544,15 @@ lbl_80349BC4:
 /* 80349BE4 003467C4  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 80349BE8 003467C8  38 21 00 30 */	addi r1, r1, 0x30
 /* 80349BEC 003467CC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIRegisterPollingHandler
-SIRegisterPollingHandler:
+extern unk_t lbl_804A7F58;
+
+#pragma push
+asm unk_t SIRegisterPollingHandler()
+{ // clang-format off
+    nofralloc
 /* 80349BF0 003467D0  7C 08 02 A6 */	mflr r0
 /* 80349BF4 003467D4  90 01 00 04 */	stw r0, 4(r1)
 /* 80349BF8 003467D8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -571,9 +609,13 @@ lbl_80349CA4:
 /* 80349CB0 00346890  7C 08 03 A6 */	mtlr r0
 /* 80349CB4 00346894  38 21 00 18 */	addi r1, r1, 0x18
 /* 80349CB8 00346898  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIUnregisterPollingHandler
-SIUnregisterPollingHandler:
+#pragma push
+asm unk_t SIUnregisterPollingHandler()
+{ // clang-format off
+    nofralloc
 /* 80349CBC 0034689C  7C 08 02 A6 */	mflr r0
 /* 80349CC0 003468A0  90 01 00 04 */	stw r0, 4(r1)
 /* 80349CC4 003468A4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -640,9 +682,15 @@ lbl_80349D98:
 /* 80349DA4 00346984  7C 08 03 A6 */	mtlr r0
 /* 80349DA8 00346988  38 21 00 18 */	addi r1, r1, 0x18
 /* 80349DAC 0034698C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIInit
-SIInit:
+extern unk_t SIGetType();
+
+#pragma push
+asm unk_t SIInit()
+{ // clang-format off
+    nofralloc
 /* 80349DB0 00346990  7C 08 02 A6 */	mflr r0
 /* 80349DB4 00346994  3C 60 80 4A */	lis r3, Packet@ha
 /* 80349DB8 00346998  90 01 00 04 */	stw r0, 4(r1)
@@ -681,9 +729,13 @@ lbl_80349DE4:
 /* 80349E38 00346A18  38 21 00 08 */	addi r1, r1, 8
 /* 80349E3C 00346A1C  7C 08 03 A6 */	mtlr r0
 /* 80349E40 00346A20  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __SITransfer
-__SITransfer:
+#pragma push
+asm unk_t __SITransfer()
+{ // clang-format off
+    nofralloc
 /* 80349E44 00346A24  7C 08 02 A6 */	mflr r0
 /* 80349E48 00346A28  3D 20 80 40 */	lis r9, lbl_80402358@ha
 /* 80349E4C 00346A2C  90 01 00 04 */	stw r0, 4(r1)
@@ -828,9 +880,15 @@ lbl_8034A03C:
 /* 8034A044 00346C24  38 21 00 48 */	addi r1, r1, 0x48
 /* 8034A048 00346C28  7C 08 03 A6 */	mtlr r0
 /* 8034A04C 00346C2C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIGetStatus
-SIGetStatus:
+extern unk_t lbl_8040236C;
+
+#pragma push
+asm unk_t SIGetStatus()
+{ // clang-format off
+    nofralloc
 /* 8034A050 00346C30  7C 08 02 A6 */	mflr r0
 /* 8034A054 00346C34  90 01 00 04 */	stw r0, 4(r1)
 /* 8034A058 00346C38  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -863,24 +921,36 @@ lbl_8034A0AC:
 /* 8034A0C0 00346CA0  7C 08 03 A6 */	mtlr r0
 /* 8034A0C4 00346CA4  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034A0C8 00346CA8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SISetCommand
-SISetCommand:
+#pragma push
+asm unk_t SISetCommand()
+{ // clang-format off
+    nofralloc
 /* 8034A0CC 00346CAC  1C 03 00 0C */	mulli r0, r3, 0xc
 /* 8034A0D0 00346CB0  3C 60 CC 00 */	lis r3, 0xCC006400@ha
 /* 8034A0D4 00346CB4  38 63 64 00 */	addi r3, r3, 0xCC006400@l
 /* 8034A0D8 00346CB8  7C 83 01 2E */	stwx r4, r3, r0
 /* 8034A0DC 00346CBC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SITransferCommands
-SITransferCommands:
+#pragma push
+asm unk_t SITransferCommands()
+{ // clang-format off
+    nofralloc
 /* 8034A0E0 00346CC0  3C 60 CC 00 */	lis r3, 0xCC006438@ha
 /* 8034A0E4 00346CC4  3C 00 80 00 */	lis r0, 0x8000
 /* 8034A0E8 00346CC8  90 03 64 38 */	stw r0, 0xCC006438@l(r3)
 /* 8034A0EC 00346CCC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SISetXY
-SISetXY:
+#pragma push
+asm unk_t SISetXY()
+{ // clang-format off
+    nofralloc
 /* 8034A0F0 00346CD0  7C 08 02 A6 */	mflr r0
 /* 8034A0F4 00346CD4  90 01 00 04 */	stw r0, 4(r1)
 /* 8034A0F8 00346CD8  54 80 40 2E */	slwi r0, r4, 8
@@ -905,9 +975,13 @@ SISetXY:
 /* 8034A144 00346D24  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034A148 00346D28  7C 08 03 A6 */	mtlr r0
 /* 8034A14C 00346D2C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIEnablePolling
-SIEnablePolling:
+#pragma push
+asm unk_t SIEnablePolling()
+{ // clang-format off
+    nofralloc
 /* 8034A150 00346D30  7C 08 02 A6 */	mflr r0
 /* 8034A154 00346D34  90 01 00 04 */	stw r0, 4(r1)
 /* 8034A158 00346D38  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -949,9 +1023,13 @@ lbl_8034A1D8:
 /* 8034A1E0 00346DC0  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034A1E4 00346DC4  7C 08 03 A6 */	mtlr r0
 /* 8034A1E8 00346DC8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIDisablePolling
-SIDisablePolling:
+#pragma push
+asm unk_t SIDisablePolling()
+{ // clang-format off
+    nofralloc
 /* 8034A1EC 00346DCC  7C 08 02 A6 */	mflr r0
 /* 8034A1F0 00346DD0  90 01 00 04 */	stw r0, 4(r1)
 /* 8034A1F4 00346DD4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -981,9 +1059,13 @@ lbl_8034A244:
 /* 8034A24C 00346E2C  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034A250 00346E30  7C 08 03 A6 */	mtlr r0
 /* 8034A254 00346E34  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIGetResponseRaw
-SIGetResponseRaw:
+#pragma push
+asm unk_t SIGetResponseRaw()
+{ // clang-format off
+    nofralloc
 /* 8034A258 00346E38  7C 08 02 A6 */	mflr r0
 /* 8034A25C 00346E3C  3C 80 80 4A */	lis r4, Packet@ha
 /* 8034A260 00346E40  90 01 00 04 */	stw r0, 4(r1)
@@ -1040,9 +1122,13 @@ lbl_8034A310:
 /* 8034A320 00346F00  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8034A324 00346F04  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034A328 00346F08  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIGetResponse
-SIGetResponse:
+#pragma push
+asm unk_t SIGetResponse()
+{ // clang-format off
+    nofralloc
 /* 8034A32C 00346F0C  7C 08 02 A6 */	mflr r0
 /* 8034A330 00346F10  3C A0 80 4A */	lis r5, Packet@ha
 /* 8034A334 00346F14  90 01 00 04 */	stw r0, 4(r1)
@@ -1094,9 +1180,15 @@ lbl_8034A3D0:
 /* 8034A3E4 00346FC4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034A3E8 00346FC8  7C 08 03 A6 */	mtlr r0
 /* 8034A3EC 00346FCC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global AlarmHandler
-AlarmHandler:
+extern unk_t Alarm;
+
+#pragma push
+asm unk_t AlarmHandler()
+{ // clang-format off
+    nofralloc
 /* 8034A3F0 00346FD0  7C 08 02 A6 */	mflr r0
 /* 8034A3F4 00346FD4  3C 80 80 4A */	lis r4, Alarm@ha
 /* 8034A3F8 00346FD8  90 01 00 04 */	stw r0, 4(r1)
@@ -1133,9 +1225,15 @@ lbl_8034A468:
 /* 8034A470 00347050  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034A474 00347054  7C 08 03 A6 */	mtlr r0
 /* 8034A478 00347058  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SITransfer
-SITransfer:
+extern unk_t OSSetAlarm();
+
+#pragma push
+asm unk_t SITransfer()
+{ // clang-format off
+    nofralloc
 /* 8034A47C 0034705C  7C 08 02 A6 */	mflr r0
 /* 8034A480 00347060  90 01 00 04 */	stw r0, 4(r1)
 /* 8034A484 00347064  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -1234,9 +1332,17 @@ lbl_8034A5D4:
 /* 8034A5DC 003471BC  38 21 00 60 */	addi r1, r1, 0x60
 /* 8034A5E0 003471C0  7C 08 03 A6 */	mtlr r0
 /* 8034A5E4 003471C4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global GetTypeCallback
-GetTypeCallback:
+extern unk_t lbl_804D73D0;
+extern unk_t OSGetWirelessID();
+extern unk_t OSSetWirelessID();
+
+#pragma push
+asm unk_t GetTypeCallback()
+{ // clang-format off
+    nofralloc
 /* 8034A5E8 003471C8  7C 08 02 A6 */	mflr r0
 /* 8034A5EC 003471CC  90 01 00 04 */	stw r0, 4(r1)
 /* 8034A5F0 003471D0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -1263,10 +1369,10 @@ GetTypeCallback:
 /* 8034A644 00347224  57 40 07 3F */	clrlwi. r0, r26, 0x1c
 /* 8034A648 00347228  90 65 01 20 */	stw r3, 0x120(r5)
 /* 8034A64C 0034722C  7C 84 DC 30 */	srw r4, r4, r27
-/* 8034A650 00347230  80 6D BD 30 */	lwz r3, lbl_804D73D0@sda21(r13)
+/* 8034A650 00347230  80 6D BD 30 */	lwz r3, lbl_804D73D0(r13)
 /* 8034A654 00347234  83 9E 00 00 */	lwz r28, 0(r30)
 /* 8034A658 00347238  7C 60 20 78 */	andc r0, r3, r4
-/* 8034A65C 0034723C  90 0D BD 30 */	stw r0, lbl_804D73D0@sda21(r13)
+/* 8034A65C 0034723C  90 0D BD 30 */	stw r0, lbl_804D73D0(r13)
 /* 8034A660 00347240  7C 7A 20 38 */	and r26, r3, r4
 /* 8034A664 00347244  40 82 00 24 */	bne lbl_8034A688
 /* 8034A668 00347248  57 83 00 C8 */	rlwinm r3, r28, 0, 3, 4
@@ -1415,9 +1521,15 @@ lbl_8034A86C:
 /* 8034A874 00347454  38 21 00 30 */	addi r1, r1, 0x30
 /* 8034A878 00347458  7C 08 03 A6 */	mtlr r0
 /* 8034A87C 0034745C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIGetType
-SIGetType:
+extern unk_t lbl_804D73CC;
+
+#pragma push
+asm unk_t SIGetType()
+{ // clang-format off
+    nofralloc
 /* 8034A880 00347460  7C 08 02 A6 */	mflr r0
 /* 8034A884 00347464  90 01 00 04 */	stw r0, 4(r1)
 /* 8034A888 00347468  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -1523,7 +1635,7 @@ lbl_8034A9D0:
 /* 8034AA04 003475E4  1C 00 00 41 */	mulli r0, r0, 0x41
 /* 8034AA08 003475E8  54 0A E8 FE */	srwi r10, r0, 3
 /* 8034AA0C 003475EC  38 DE 00 00 */	addi r6, r30, 0
-/* 8034AA10 003475F0  38 8D BD 2C */	addi r4, r13, lbl_804D73CC@sda21
+/* 8034AA10 003475F0  38 8D BD 2C */	addi r4, r13, lbl_804D73CC
 /* 8034AA14 003475F4  38 A0 00 01 */	li r5, 1
 /* 8034AA18 003475F8  38 E0 00 03 */	li r7, 3
 /* 8034AA1C 003475FC  39 20 00 00 */	li r9, 0
@@ -1537,9 +1649,15 @@ lbl_8034AA30:
 /* 8034AA38 00347618  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034AA3C 0034761C  7C 08 03 A6 */	mtlr r0
 /* 8034AA40 00347620  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global SIGetTypeAsync
-SIGetTypeAsync:
+extern unk_t lbl_804A7F18;
+
+#pragma push
+asm unk_t SIGetTypeAsync()
+{ // clang-format off
+    nofralloc
 /* 8034AA44 00347624  7C 08 02 A6 */	mflr r0
 /* 8034AA48 00347628  90 01 00 04 */	stw r0, 4(r1)
 /* 8034AA4C 0034762C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1624,96 +1742,5 @@ lbl_8034AB54:
 /* 8034AB74 00347754  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8034AB78 00347758  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034AB7C 0034775C  4E 80 00 20 */	blr 
-
-
-.section .data
-    .balign 8
-.global lbl_80402358
-lbl_80402358:
-    .4byte 0xFFFFFFFF
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-.global lbl_8040236C
-lbl_8040236C:
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x00000008
-    .4byte 0x4E6F2072
-    .4byte 0x6573706F
-    .4byte 0x6E736500
-    .4byte 0x4E363420
-    .4byte 0x636F6E74
-    .4byte 0x726F6C6C
-    .4byte 0x65720000
-    .4byte 0x4E363420
-    .4byte 0x6D696372
-    .4byte 0x6F70686F
-    .4byte 0x6E650000
-    .4byte 0x4E363420
-    .4byte 0x6B657962
-    .4byte 0x6F617264
-    .4byte NULL
-    .4byte 0x4E363420
-    .4byte 0x6D6F7573
-    .4byte 0x65000000
-    .4byte 0x47616D65
-    .4byte 0x426F7920
-    .4byte 0x41647661
-    .4byte 0x6E636500
-    .4byte 0x5374616E
-    .4byte 0x64617264
-    .4byte 0x20636F6E
-    .4byte 0x74726F6C
-    .4byte 0x6C657200
-    .4byte 0x57697265
-    .4byte 0x6C657373
-    .4byte 0x20726563
-    .4byte 0x65697665
-    .4byte 0x72000000
-    .4byte 0x57617665
-    .4byte 0x42697264
-    .4byte 0x20636F6E
-    .4byte 0x74726F6C
-    .4byte 0x6C657200
-    .4byte 0x4B657962
-    .4byte 0x6F617264
-    .4byte NULL
-    .4byte NULL
-
-
-.section .bss, "wa"
-    .balign 8
-.global Packet
-Packet:
-	.skip 0x80
-.global Alarm
-Alarm:
-	.skip 0xA0
-.global lbl_804A7ED8
-lbl_804A7ED8:
-	.skip 0x20
-.global lbl_804A7EF8
-lbl_804A7EF8:
-	.skip 0x20
-.global lbl_804A7F18
-lbl_804A7F18:
-	.skip 0x40
-.global lbl_804A7F58
-lbl_804A7F58:
-	.skip 0x60
-
-
-.section .sbss
-    .balign 8
-.global lbl_804D73C8
-lbl_804D73C8:
-	.skip 0x4
-.global lbl_804D73CC
-lbl_804D73CC:
-	.skip 0x4
-.global lbl_804D73D0
-lbl_804D73D0:
-	.skip 0x8
+} // clang-format on
+#pragma pop

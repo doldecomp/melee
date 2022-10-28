@@ -1,9 +1,19 @@
-.include "macros.inc"
+#include <dolphin/types.h>
+#include <dolphin/base/PPCArch.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSThread.h>
 
-.section .text  # 0x80343720 - 0x80343E40
+extern unk_t DecrementerExceptionHandler();
+static OSThreadQueue AlarmQueue;
+extern unk_t __OSSetExceptionHandler();
+extern unk_t __OSGetExceptionHandler();
+extern unk_t __div2i();
+extern unk_t __OSGetSystemTime();
 
-.global OSInitAlarm
-OSInitAlarm:
+#pragma push
+asm unk_t OSInitAlarm()
+{ // clang-format off
+    nofralloc
 /* 80343720 00340300  7C 08 02 A6 */	mflr r0
 /* 80343724 00340304  38 60 00 08 */	li r3, 8
 /* 80343728 00340308  90 01 00 04 */	stw r0, 4(r1)
@@ -14,25 +24,35 @@ OSInitAlarm:
 /* 8034373C 0034031C  7C 03 20 40 */	cmplw r3, r4
 /* 80343740 00340320  41 82 00 1C */	beq lbl_8034375C
 /* 80343744 00340324  38 00 00 00 */	li r0, 0
-/* 80343748 00340328  38 6D BC B8 */	addi r3, r13, AlarmQueue@sda21
+/* 80343748 00340328  38 6D BC B8 */	addi r3, r13, AlarmQueue
 /* 8034374C 0034032C  90 03 00 04 */	stw r0, 4(r3)
 /* 80343750 00340330  38 60 00 08 */	li r3, 8
-/* 80343754 00340334  90 0D BC B8 */	stw r0, AlarmQueue@sda21(r13)
+/* 80343754 00340334  90 0D BC B8 */	stw r0, AlarmQueue(r13)
 /* 80343758 00340338  4B FF FE 5D */	bl __OSSetExceptionHandler
 lbl_8034375C:
 /* 8034375C 0034033C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80343760 00340340  38 21 00 08 */	addi r1, r1, 8
 /* 80343764 00340344  7C 08 03 A6 */	mtlr r0
 /* 80343768 00340348  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSCreateAlarm
-OSCreateAlarm:
+#pragma push
+asm unk_t OSCreateAlarm()
+{ // clang-format off
+    nofralloc
 /* 8034376C 0034034C  38 00 00 00 */	li r0, 0
 /* 80343770 00340350  90 03 00 00 */	stw r0, 0(r3)
 /* 80343774 00340354  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global InsertAlarm
-InsertAlarm:
+
+
+#pragma push
+asm unk_t InsertAlarm()
+{ // clang-format off
+    nofralloc
 /* 80343778 00340358  7C 08 02 A6 */	mflr r0
 /* 8034377C 0034035C  90 01 00 04 */	stw r0, 4(r1)
 /* 80343780 00340360  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -86,7 +106,7 @@ lbl_80343838:
 /* 8034383C 0034041C  6F 24 80 00 */	xoris r4, r25, 0x8000
 /* 80343840 00340420  93 DD 00 0C */	stw r30, 0xc(r29)
 /* 80343844 00340424  93 3D 00 08 */	stw r25, 8(r29)
-/* 80343848 00340428  80 CD BC B8 */	lwz r6, AlarmQueue@sda21(r13)
+/* 80343848 00340428  80 CD BC B8 */	lwz r6, AlarmQueue(r13)
 /* 8034384C 0034042C  48 00 00 C4 */	b lbl_80343910
 lbl_80343850:
 /* 80343850 00340430  80 06 00 08 */	lwz r0, 8(r6)
@@ -107,7 +127,7 @@ lbl_80343850:
 /* 8034388C 0034046C  93 A3 00 14 */	stw r29, 0x14(r3)
 /* 80343890 00340470  48 00 01 24 */	b lbl_803439B4
 lbl_80343894:
-/* 80343894 00340474  93 AD BC B8 */	stw r29, AlarmQueue@sda21(r13)
+/* 80343894 00340474  93 AD BC B8 */	stw r29, AlarmQueue(r13)
 /* 80343898 00340478  48 00 8B 79 */	bl __OSGetSystemTime
 /* 8034389C 0034047C  80 DD 00 0C */	lwz r6, 0xc(r29)
 /* 803438A0 00340480  38 E0 00 00 */	li r7, 0
@@ -146,7 +166,7 @@ lbl_80343910:
 /* 80343914 003404F4  40 82 FF 3C */	bne lbl_80343850
 /* 80343918 003404F8  3B C0 00 00 */	li r30, 0
 /* 8034391C 003404FC  93 DD 00 14 */	stw r30, 0x14(r29)
-/* 80343920 00340500  38 6D BC B8 */	addi r3, r13, AlarmQueue@sda21
+/* 80343920 00340500  38 6D BC B8 */	addi r3, r13, AlarmQueue
 /* 80343924 00340504  80 83 00 04 */	lwz r4, 4(r3)
 /* 80343928 00340508  97 A3 00 04 */	stwu r29, 4(r3)
 /* 8034392C 0034050C  28 04 00 00 */	cmplwi r4, 0
@@ -156,7 +176,7 @@ lbl_80343910:
 /* 8034393C 0034051C  48 00 00 78 */	b lbl_803439B4
 lbl_80343940:
 /* 80343940 00340520  93 A3 00 00 */	stw r29, 0(r3)
-/* 80343944 00340524  93 AD BC B8 */	stw r29, AlarmQueue@sda21(r13)
+/* 80343944 00340524  93 AD BC B8 */	stw r29, AlarmQueue(r13)
 /* 80343948 00340528  48 00 8A C9 */	bl __OSGetSystemTime
 /* 8034394C 0034052C  80 DD 00 0C */	lwz r6, 0xc(r29)
 /* 80343950 00340530  6F C5 80 00 */	xoris r5, r30, 0x8000
@@ -192,9 +212,13 @@ lbl_803439B4:
 /* 803439BC 0034059C  38 21 00 40 */	addi r1, r1, 0x40
 /* 803439C0 003405A0  7C 08 03 A6 */	mtlr r0
 /* 803439C4 003405A4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSSetAlarm
-OSSetAlarm:
+#pragma push
+asm unk_t OSSetAlarm()
+{ // clang-format off
+    nofralloc
 /* 803439C8 003405A8  7C 08 02 A6 */	mflr r0
 /* 803439CC 003405AC  90 01 00 04 */	stw r0, 4(r1)
 /* 803439D0 003405B0  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -221,9 +245,15 @@ OSSetAlarm:
 /* 80343A24 00340604  38 21 00 38 */	addi r1, r1, 0x38
 /* 80343A28 00340608  7C 08 03 A6 */	mtlr r0
 /* 80343A2C 0034060C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global func_80343A30
-func_80343A30:
+extern unk_t __OSTimeToSystemTime();
+
+#pragma push
+asm unk_t func_80343A30()
+{ // clang-format off
+    nofralloc
 /* 80343A30 00340610  7C 08 02 A6 */	mflr r0
 /* 80343A34 00340614  90 01 00 04 */	stw r0, 4(r1)
 /* 80343A38 00340618  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -255,9 +285,13 @@ func_80343A30:
 /* 80343AA0 00340680  38 21 00 40 */	addi r1, r1, 0x40
 /* 80343AA4 00340684  7C 08 03 A6 */	mtlr r0
 /* 80343AA8 00340688  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global OSCancelAlarm
-OSCancelAlarm:
+#pragma push
+asm unk_t OSCancelAlarm()
+{ // clang-format off
+    nofralloc
 /* 80343AAC 0034068C  7C 08 02 A6 */	mflr r0
 /* 80343AB0 00340690  90 01 00 04 */	stw r0, 4(r1)
 /* 80343AB4 00340694  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -278,7 +312,7 @@ lbl_80343AE8:
 /* 80343AEC 003406CC  28 1D 00 00 */	cmplwi r29, 0
 /* 80343AF0 003406D0  40 82 00 14 */	bne lbl_80343B04
 /* 80343AF4 003406D4  80 1E 00 10 */	lwz r0, 0x10(r30)
-/* 80343AF8 003406D8  38 6D BC B8 */	addi r3, r13, AlarmQueue@sda21
+/* 80343AF8 003406D8  38 6D BC B8 */	addi r3, r13, AlarmQueue
 /* 80343AFC 003406DC  90 03 00 04 */	stw r0, 4(r3)
 /* 80343B00 003406E0  48 00 00 0C */	b lbl_80343B0C
 lbl_80343B04:
@@ -292,7 +326,7 @@ lbl_80343B0C:
 /* 80343B1C 003406FC  48 00 00 80 */	b lbl_80343B9C
 lbl_80343B20:
 /* 80343B20 00340700  28 1D 00 00 */	cmplwi r29, 0
-/* 80343B24 00340704  93 AD BC B8 */	stw r29, AlarmQueue@sda21(r13)
+/* 80343B24 00340704  93 AD BC B8 */	stw r29, AlarmQueue(r13)
 /* 80343B28 00340708  41 82 00 74 */	beq lbl_80343B9C
 /* 80343B2C 0034070C  48 00 88 E5 */	bl __OSGetSystemTime
 /* 80343B30 00340710  80 DD 00 0C */	lwz r6, 0xc(r29)
@@ -337,9 +371,13 @@ lbl_80343BAC:
 /* 80343BBC 0034079C  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80343BC0 003407A0  38 21 00 20 */	addi r1, r1, 0x20
 /* 80343BC4 003407A4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global DecrementerExceptionCallback
-DecrementerExceptionCallback:
+#pragma push
+asm unk_t DecrementerExceptionCallback()
+{ // clang-format off
+    nofralloc
 /* 80343BC8 003407A8  7C 08 02 A6 */	mflr r0
 /* 80343BCC 003407AC  90 01 00 04 */	stw r0, 4(r1)
 /* 80343BD0 003407B0  94 21 FD 10 */	stwu r1, -0x2f0(r1)
@@ -349,7 +387,7 @@ DecrementerExceptionCallback:
 /* 80343BE0 003407C0  7C 9D 23 78 */	mr r29, r4
 /* 80343BE4 003407C4  93 81 02 E0 */	stw r28, 0x2e0(r1)
 /* 80343BE8 003407C8  48 00 88 29 */	bl __OSGetSystemTime
-/* 80343BEC 003407CC  80 0D BC B8 */	lwz r0, AlarmQueue@sda21(r13)
+/* 80343BEC 003407CC  80 0D BC B8 */	lwz r0, AlarmQueue(r13)
 /* 80343BF0 003407D0  3B 84 00 00 */	addi r28, r4, 0
 /* 80343BF4 003407D4  3B C3 00 00 */	addi r30, r3, 0
 /* 80343BF8 003407D8  28 00 00 00 */	cmplwi r0, 0
@@ -403,10 +441,10 @@ lbl_80343CA0:
 lbl_80343CA8:
 /* 80343CA8 00340888  80 7F 00 14 */	lwz r3, 0x14(r31)
 /* 80343CAC 0034088C  28 03 00 00 */	cmplwi r3, 0
-/* 80343CB0 00340890  90 6D BC B8 */	stw r3, AlarmQueue@sda21(r13)
+/* 80343CB0 00340890  90 6D BC B8 */	stw r3, AlarmQueue(r13)
 /* 80343CB4 00340894  40 82 00 14 */	bne lbl_80343CC8
 /* 80343CB8 00340898  38 00 00 00 */	li r0, 0
-/* 80343CBC 0034089C  38 6D BC B8 */	addi r3, r13, AlarmQueue@sda21
+/* 80343CBC 0034089C  38 6D BC B8 */	addi r3, r13, AlarmQueue
 /* 80343CC0 003408A0  90 03 00 04 */	stw r0, 4(r3)
 /* 80343CC4 003408A4  48 00 00 0C */	b lbl_80343CD0
 lbl_80343CC8:
@@ -431,7 +469,7 @@ lbl_80343CD0:
 /* 80343D0C 003408EC  38 A0 00 00 */	li r5, 0
 /* 80343D10 003408F0  4B FF FA 69 */	bl InsertAlarm
 lbl_80343D14:
-/* 80343D14 003408F4  83 8D BC B8 */	lwz r28, AlarmQueue@sda21(r13)
+/* 80343D14 003408F4  83 8D BC B8 */	lwz r28, AlarmQueue(r13)
 /* 80343D18 003408F8  28 1C 00 00 */	cmplwi r28, 0
 /* 80343D1C 003408FC  41 82 00 74 */	beq lbl_80343D90
 /* 80343D20 00340900  48 00 86 F1 */	bl __OSGetSystemTime
@@ -491,9 +529,13 @@ lbl_80343D90:
 /* 80343DEC 003409CC  83 81 02 E0 */	lwz r28, 0x2e0(r1)
 /* 80343DF0 003409D0  38 21 02 F0 */	addi r1, r1, 0x2f0
 /* 80343DF4 003409D4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global DecrementerExceptionHandler
-DecrementerExceptionHandler:
+#pragma push
+asm unk_t DecrementerExceptionHandler()
+{ // clang-format off
+    nofralloc
 /* 80343DF8 003409D8  90 04 00 00 */	stw r0, 0(r4)
 /* 80343DFC 003409DC  90 24 00 04 */	stw r1, 4(r4)
 /* 80343E00 003409E0  90 44 00 08 */	stw r2, 8(r4)
@@ -513,10 +555,5 @@ DecrementerExceptionHandler:
 /* 80343E38 00340A18  7C 17 E2 A6 */	mfspr r0, 0x397
 /* 80343E3C 00340A1C  90 04 01 C0 */	stw r0, 0x1c0(r4)
 /* 80343E40 00340A20  4B FF FD 88 */	b DecrementerExceptionCallback
-
-
-.section .sbss
-
-.global AlarmQueue
-AlarmQueue:
-	.skip 0x8
+} // clang-format on
+#pragma pop
