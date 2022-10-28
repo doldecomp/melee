@@ -21,6 +21,7 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftlib.h>
+#include <melee/ft/ftwalkcommon.h>
 
 #include <melee/it/item.h>
 
@@ -26111,5 +26112,36 @@ asm unk_t func_8009B654()
 /* 8009B670 00098250  38 21 00 08 */	addi r1, r1, 8
 /* 8009B674 00098254  7C 08 03 A6 */	mtlr r0
 /* 8009B678 00098258  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+extern f32 const lbl_804D8710;
+extern unk_t func_8009B6C8();
+
+#pragma push
+asm unk_t func_8009B67C()
+{ // clang-format off
+    nofralloc
+/* 8009B67C 0009825C  7C 08 02 A6 */	mflr r0
+/* 8009B680 00098260  90 01 00 04 */	stw r0, 4(r1)
+/* 8009B684 00098264  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8009B688 00098268  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8009B68C 0009826C  7C 7F 1B 78 */	mr r31, r3
+/* 8009B690 00098270  48 04 45 E1 */	bl ftWalkCommon_800DFC70
+/* 8009B694 00098274  2C 03 00 00 */	cmpwi r3, 0
+/* 8009B698 00098278  41 82 00 18 */	beq lbl_8009B6B0
+/* 8009B69C 0009827C  7F E3 FB 78 */	mr r3, r31
+/* 8009B6A0 00098280  C0 22 8D 30 */	lfs f1, lbl_804D8710(r2)
+/* 8009B6A4 00098284  48 00 00 25 */	bl func_8009B6C8
+/* 8009B6A8 00098288  38 60 00 01 */	li r3, 1
+/* 8009B6AC 0009828C  48 00 00 08 */	b lbl_8009B6B4
+lbl_8009B6B0:
+/* 8009B6B0 00098290  38 60 00 00 */	li r3, 0
+lbl_8009B6B4:
+/* 8009B6B4 00098294  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8009B6B8 00098298  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8009B6BC 0009829C  38 21 00 18 */	addi r1, r1, 0x18
+/* 8009B6C0 000982A0  7C 08 03 A6 */	mtlr r0
+/* 8009B6C4 000982A4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop

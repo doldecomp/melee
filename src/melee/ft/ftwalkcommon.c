@@ -25,15 +25,16 @@ inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj) {
     } else {
         return 0;
     }
-}  
+}
 
-s32 ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj) {
+BOOL ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = fighter_gobj->user_data;
     if ((fp->input.x620_lstick_x * fp->x2C_facing_direction) >= p_ftCommonData->x24) {
-        return 1;
+        return TRUE;
     }
-    return 0;
-} 
+    return FALSE;
+}
 
 void ftWalkCommon_800DFCA4(HSD_GObj *fighter_gobj, s32 arg1, s32 arg2, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD, f32 argE, f32 argF)
 {
