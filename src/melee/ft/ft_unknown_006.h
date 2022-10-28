@@ -120,5 +120,6 @@ void func_80096900(HSD_GObj* fighter_gobj, BOOL, BOOL, BOOL is_interruptible, f3
 BOOL func_80096CC8(HSD_GObj* fighter_gobj);
 void func_8009750C(HSD_GObj* fighter_gobj);
 unk_t func_8009F834();
+void func_80098B20(HSD_GObj* fighter_gobj);
 
 #endif

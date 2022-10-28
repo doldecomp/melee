@@ -6198,7 +6198,7 @@ void func_8007B5AC(Fighter* arg0, ftHurt* arg1, s32* arg2)
 }
 
 #pragma push
-asm unk_t func_8007B62C()
+asm void func_8007B62C()
 { // clang-format off
     nofralloc
 /* 8007B62C 0007820C  7C 08 02 A6 */	mflr r0
