@@ -231,8 +231,6 @@ void func_8007D9FC(struct _Fighter *);
 
 f32 func_8007DA74(s32, u32, f32);
 void func_8007DB24();
-void func_8007DB58();
-// void func_8007DBCC(Fighter*, s32);
 
 void func_8007E0E4();
 void func_8007E2D0(struct _Fighter *, s16, void (*)(struct _HSD_GObj *), void (*)(struct _HSD_GObj *), void (*)(struct _HSD_GObj *, struct _HSD_GObj *));
@@ -303,8 +301,6 @@ s32 func_800872A4(struct _HSD_GObj *);
 void func_800880D8();
 
 void func_80088148(Fighter*, u32, u32, u32);
-
-void func_8009750C(HSD_GObj *);
 
 void func_80098B20();
 void func_80098C9C();

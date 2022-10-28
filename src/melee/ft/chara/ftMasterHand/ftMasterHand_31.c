@@ -9,7 +9,7 @@ void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2) {
 
     ft_1 = gobj_1->user_data;
     ft_2 = gobj_2->user_data;
-    func_8007DB58();
+    func_8007DB58(gobj_1);
     func_8009750C(gobj_1);
     func_800DD168(gobj_1);
     ft_1->x1A5C = gobj_2;
