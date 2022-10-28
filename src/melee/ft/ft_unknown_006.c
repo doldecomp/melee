@@ -22435,3 +22435,8 @@ void func_80098DEC(void)
 {
     return;
 }
+
+void func_80098DF0(void)
+{
+    return;
+}
