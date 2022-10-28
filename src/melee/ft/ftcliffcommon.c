@@ -1,6 +1,7 @@
 #include <dolphin/types.h>
-#include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcliffcommon.h>
 #include <variables.h>
 
 BOOL func_80081298(HSD_GObj* gobj) {
