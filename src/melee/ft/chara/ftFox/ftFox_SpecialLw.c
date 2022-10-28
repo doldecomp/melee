@@ -623,8 +623,6 @@ inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* fighter_gobj)
     ftFox_SpecialLw_Turn(fighter_gobj);
 }
 
-extern BOOL func_800C97A8(HSD_GObj*);
-
 // 0x800E942C
 // https://decomp.me/scratch/Hr5UW // Fox & Falco's Reflector Turn Action State handler
 BOOL ftFox_SpecialLwTurn_Check(HSD_GObj* fighter_gobj)
