@@ -46,13 +46,13 @@ So the repo is filled with `.s` files and `.c` files, where the C code inside th
 
 No! And even initially, the code doesn’t have to be super-readable as we’re trying to get 100% match rate first.
 
-So you can actually view the above example in an online tool that we use called decomp.me. Here’s a link to [that specific decompliation](https://decomp.me/scratch/ZN9lq). If you want to try doing this yourself, follow these steps:
+So you can actually view the above example in an online tool that we use called decomp.me. Here’s a link to [that specific decompliation](https://decomp.me/scratch/VP0Gj). If you want to try doing this yourself, follow these steps:
 
 1. Copy the assembly in the example
 2. Hit “New Scratch”
 3. Select Platform “GameCube / Wii”
 4. Set the preset to “Super Smash Bros. Melee”
-5. Copy in the contents of [this link](https://gist.github.com/stephenjayakar/73e9f7a1f77b9b2df281f0629b95290c) into the “Context” section. More on that later
+5. Copy in the contents of [this link](https://gist.github.com/stephenjayakar/73e9f7a1f77b9b2df281f0629b95290c) into the “Context” section. More on that later.
 6. Copy in the ASM into “Target assembly” and hit “Create scratch”
 
 When you initially create a new “scratch” in this site, it’ll actually do its best to decompile the assembly you give it (try hitting the “Decompile” button in the link). You’ll notice things it spits out like
@@ -61,7 +61,7 @@ When you initially create a new “scratch” in this site, it’ll actually do 
 temp_r31 = arg0->unk2C;
 ```
 
-which can be translated in kind-of-English as “tempr31 takes the value at the memory address of `arg0 + 0x2c`.” If you don’t know anything about `arg0`, you can translate it to sketchy-C
+which can be translated in kind-of-English as “`temp_r31` takes the value at the memory address of `arg0 + 0x2c`.” If you don’t know anything about `arg0`, you can translate it to sketchy-C
 
 ```c
 // The u8* conversion is because C automatically figures out pointer size for
