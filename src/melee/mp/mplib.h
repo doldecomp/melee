@@ -14,7 +14,7 @@ BOOL func_800501CC(f32 surface_normal_y, f32 surface_normal_x, f32 right_x, f32 
                    unk_t, unk_t, unk_t, u32, u32);
 unk_t func_80056A8C();
 unk_t func_80056A1C();
-func_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x, f32 left_y, VecPtr coll_vec,
+unk_t func_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x, f32 left_y, VecPtr coll_vec,
               unk_t, unk_t, unk_t, u32, u32);
 unk_t func_80054CEC();
 
