@@ -25,7 +25,7 @@ While not all code submitted at this time conforms to this standard, it is the i
 - [Pull Requests](#prs)
 
 ## <a name="auto-formatting"></a>Auto Formatting
-C code that's contributed to this codebase should have `clang-format` ran on it. You can do this easily by adding the C files you changed, and then running `git clang-format`, which will run `clang-format` on staged files.
+C code that's contributed to this codebase should have `clang-format` ran on it. You can do this easily by adding the C files you changed, and then running [`git clang-format`](https://ortogonal.github.io/cpp/git-clang-format/), which will run `clang-format` on staged files.
 
 ## <a name="naming"></a>Naming
 - Avoid naming a function that you are not matching. If you have not matched to understand the functionality, don't expect that someone else did just because they named it.
