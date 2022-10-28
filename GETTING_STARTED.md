@@ -23,21 +23,21 @@ void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
 and it’s corresponding PowerPC assembly:
 
 ```asm
-.global func_801450A0
-func_801450A0:
-    mflr r0
-    stw r0,4(r1)
-    stwu r1,-0x18(r1)
-    stw r31,0x14(r1)
-    lwz r31,0x2c(r3)
-    bl func_801450D4
-    li r0,0
-    stw r0,0x21bc(r31)
-    lwz r0,0x1c(r1)
-    lwz r31,0x14(r1)
-    addi r1,r1,0x18
-    mtlr r0
-    blr
+.global ftMewtwo_SpecialHi_CreateGFX
+ftMewtwo_SpecialHi_CreateGFX:
+/* 801450A0 00000000  7C 08 02 A6 */	mflr r0
+/* 801450A4 00000004  90 01 00 04 */	stw r0, 0x4(r1)
+/* 801450A8 00000008  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 801450AC 0000000C  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 801450B0 00000010  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 801450B4 00000014  48 00 00 21 */	bl ftMewtwo_SpecialHi_SetStartGFX
+/* 801450B8 00000018  38 00 00 00 */	li r0, 0x0
+/* 801450BC 0000001C  90 1F 21 BC */	stw r0, 0x21bc(r31)
+/* 801450C0 00000020  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 801450C4 00000024  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 801450C8 00000028  38 21 00 18 */	addi r1, r1, 0x18
+/* 801450CC 0000002C  7C 08 03 A6 */	mtlr r0
+/* 801450D0 00000030  4E 80 00 20 */	blr
 ```
 
 So the repo is filled with `.s` files and `.c` files, where the C code inside the `.c` files should have translated 100% to some contents in a `.s` file that used to be in the repo. Note that once we successfully decompile a function, we normally remove it from the assembly.
