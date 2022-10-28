@@ -31014,3 +31014,8 @@ void func_8009F0B8(void)
 {
     return;
 }
+
+void func_8009F0BC(void)
+{
+    return;
+}
