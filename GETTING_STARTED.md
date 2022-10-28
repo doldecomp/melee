@@ -8,31 +8,36 @@ The goal of this repo is to **write C code that, after being compiled, matches t
 
 ![compilation_diagram](images/compilation_diagram.png)
 
-The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like:
+The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like ([link](https://github.com/doldecomp/melee/blob/d00b11d0489b14401965c87bf386828d54fa0ccc/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c#L5-L13)):
 
 ```c
-void func_8007B8CC(Fighter* fp, HSD_GObj* otherObj) {
-    Fighter* otherFp;
+void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = getFighter(fighter_gobj);
 
-    otherFp = getFighter(otherObj);
-    ((u32 *)fp)[0x466] = (u32) otherObj;
-    fp->x119C_teamUnk = (u8) otherFp->x61B_team;
-    fp->x119D = (u8) otherFp->xC_playerID;
+    ftMewtwo_SpecialHi_SetStartGFX(fighter_gobj);
+    fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 ```
 
 and it’s corresponding PowerPC assembly:
 
 ```asm
-.global func_8007B8CC
-func_8007B8CC:
-/* 8007B8CC 000784AC  80 A4 00 2C */	lwz r5, 0x2c(r4)
-/* 8007B8D0 000784B0  90 83 11 98 */	stw r4, 0x1198(r3)
-/* 8007B8D4 000784B4  88 05 06 1B */	lbz r0, 0x61b(r5)
-/* 8007B8D8 000784B8  98 03 11 9C */	stb r0, 0x119c(r3)
-/* 8007B8DC 000784BC  88 05 00 0C */	lbz r0, 0xc(r5)
-/* 8007B8E0 000784C0  98 03 11 9D */	stb r0, 0x119d(r3)
-/* 8007B8E4 000784C4  4E 80 00 20 */	blr
+.global func_801450A0
+func_801450A0:
+    mflr r0
+    stw r0,4(r1)
+    stwu r1,-0x18(r1)
+    stw r31,0x14(r1)
+    lwz r31,0x2c(r3)
+    bl func_801450D4
+    li r0,0
+    stw r0,0x21bc(r31)
+    lwz r0,0x1c(r1)
+    lwz r31,0x14(r1)
+    addi r1,r1,0x18
+    mtlr r0
+    blr
 ```
 
 So the repo is filled with `.s` files and `.c` files, where the C code inside the `.c` files should have translated 100% to some contents in a `.s` file that used to be in the repo. Note that once we successfully decompile a function, we normally remove it from the assembly.
@@ -41,7 +46,7 @@ So the repo is filled with `.s` files and `.c` files, where the C code inside th
 
 No! And even initially, the code doesn’t have to be super-readable as we’re trying to get 100% match rate first.
 
-So you can actually view the above example in an online tool that we use called decomp.me. Here’s a link to [that specific decompliation](https://decomp.me/scratch/MLlcK). If you want to try doing this yourself, follow these steps:
+So you can actually view the above example in an online tool that we use called decomp.me. Here’s a link to [that specific decompliation](https://decomp.me/scratch/ZN9lq). If you want to try doing this yourself, follow these steps:
 
 1. Copy the assembly in the example
 2. Hit “New Scratch”
@@ -53,22 +58,22 @@ So you can actually view the above example in an online tool that we use called 
 When you initially create a new “scratch” in this site, it’ll actually do its best to decompile the assembly you give it (try hitting the “Decompile” button in the link). You’ll notice things it spits out like
 
 ```c
-temp_r5 = arg1->unk2C;
+temp_r31 = arg0->unk2C;
 ```
 
-which can be translated in kind-of-English as “tempR5 takes the value at the memory address of `arg1 + 0x2c`.” If you don’t know anything about `arg1`, you can translate it to sketchy-C
+which can be translated in kind-of-English as “tempr31 takes the value at the memory address of `arg0 + 0x2c`.” If you don’t know anything about `arg1`, you can translate it to sketchy-C
 
 ```c
 // The u8* conversion is because C automatically figures out pointer size for
 // you, which means for an s32, you'd have to do arg1 + 0x2c / 4
-temp_r5 = *((s32 *) ((u8 *) arg1 + 0x2c))
+temp_r31 = *((s32 *) ((u8 *) arg0 + 0x2c))
 ```
 
-…while this accomplishes the goal of getting a 100% match (you could pretty much do every memory access and set like this), we actually can guess what `arg1` is in this case because of the file it’s in. You can do some digging yourself, but that line ends up translating to something like:
+…while this accomplishes the goal of getting a 100% match (you could pretty much do every memory access and set like this), we actually can guess what `arg0` is in this case because of the file it’s in. You can do some digging yourself, but that line ends up translating to something like:
 
 ```c
-Fighter* otherFp;
-otherFp = getFighter(otherObj);
+Fighter* fp;
+fp = getFighter(otherObj);
 ```
 
 ## What was going on with the Context?
@@ -83,7 +88,7 @@ So you want to find some assembly that:
 - isn’t that long as you’re new
 - isn’t already decompiled
 
-In [this public Trello board](https://trello.com/b/pz2ACtnS/melee-decompilation), you can see which Assembly files have been claimed or unclaimed. So don’t pick a function in a `.s` file that’s claimed.
+In [this public Trello board](https://trello.com/b/pz2ACtnS/melee-decompilation) (note, this is a read-only link. If you want write-access, join the Discord!), you can see which Assembly files have been claimed or unclaimed. So don’t pick a function in a `.s` file that’s claimed.
 
 To make sure it’s not already decompiled, take the label (e.g. `func_8007B8CC`) and search the repo for instances of it. If you don’t see any C code definitions with implementations, then it at least hasn’t been committed to the repo.
 
