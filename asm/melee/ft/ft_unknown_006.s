@@ -2,17 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_8009BD04
-func_8009BD04:
-/* 8009BD04 000988E4  7C 08 02 A6 */	mflr r0
-/* 8009BD08 000988E8  90 01 00 04 */	stw r0, 4(r1)
-/* 8009BD0C 000988EC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8009BD10 000988F0  4B FE 90 A1 */	bl func_80084DB0
-/* 8009BD14 000988F4  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8009BD18 000988F8  38 21 00 08 */	addi r1, r1, 8
-/* 8009BD1C 000988FC  7C 08 03 A6 */	mtlr r0
-/* 8009BD20 00098900  4E 80 00 20 */	blr 
-
 .global func_8009BD24
 func_8009BD24:
 /* 8009BD24 00098904  7C 08 02 A6 */	mflr r0
