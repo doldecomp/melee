@@ -24409,3 +24409,32 @@ asm unk_t func_8009A3A8()
 /* 8009A3C4 00096FA4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t func_8009A410();
+
+#pragma push
+asm unk_t func_8009A3C8()
+{ // clang-format off
+    nofralloc
+/* 8009A3C8 00096FA8  7C 08 02 A6 */	mflr r0
+/* 8009A3CC 00096FAC  90 01 00 04 */	stw r0, 4(r1)
+/* 8009A3D0 00096FB0  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8009A3D4 00096FB4  80 83 00 2C */	lwz r4, 0x2c(r3)
+/* 8009A3D8 00096FB8  80 04 08 24 */	lwz r0, 0x824(r4)
+/* 8009A3DC 00096FBC  54 00 02 11 */	rlwinm. r0, r0, 0, 8, 8
+/* 8009A3E0 00096FC0  41 82 00 1C */	beq lbl_8009A3FC
+/* 8009A3E4 00096FC4  88 04 22 28 */	lbz r0, 0x2228(r4)
+/* 8009A3E8 00096FC8  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
+/* 8009A3EC 00096FCC  40 82 00 10 */	bne lbl_8009A3FC
+/* 8009A3F0 00096FD0  48 00 00 21 */	bl func_8009A410
+/* 8009A3F4 00096FD4  38 60 00 01 */	li r3, 1
+/* 8009A3F8 00096FD8  48 00 00 08 */	b lbl_8009A400
+lbl_8009A3FC:
+/* 8009A3FC 00096FDC  38 60 00 00 */	li r3, 0
+lbl_8009A400:
+/* 8009A400 00096FE0  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8009A404 00096FE4  38 21 00 08 */	addi r1, r1, 8
+/* 8009A408 00096FE8  7C 08 03 A6 */	mtlr r0
+/* 8009A40C 00096FEC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
