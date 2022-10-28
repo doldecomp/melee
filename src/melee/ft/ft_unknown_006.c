@@ -30613,3 +30613,8 @@ lbl_8009EC2C:
 /* 8009EC38 0009B818  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_8009EC3C(void)
+{
+    return;
+}
