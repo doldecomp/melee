@@ -52,7 +52,7 @@ So you can actually view the above example in an online tool that we use called 
 2. Hit “New Scratch”
 3. Select Platform “GameCube / Wii”
 4. Set the preset to “Super Smash Bros. Melee”
-5. Copy in the contents of [this link](https://gist.github.com/stephenjayakar/73e9f7a1f77b9b2df281f0629b95290c) into the “Context” section. More on that later
+5. Copy in the contents of [this link](https://gist.github.com/stephenjayakar/73e9f7a1f77b9b2df281f0629b95290c) into the “Context” section. More on that later.
 6. Copy in the ASM into “Target assembly” and hit “Create scratch”
 
 When you initially create a new “scratch” in this site, it’ll actually do its best to decompile the assembly you give it (try hitting the “Decompile” button in the link). You’ll notice things it spits out like
