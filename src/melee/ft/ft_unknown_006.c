@@ -22542,3 +22542,8 @@ lbl_80098EE4:
 /* 80098EF4 00095AD4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_80098EF8(void)
+{
+    return;
+}
