@@ -128,6 +128,8 @@ C code that's contributed to this codebase should have `clang-format` ran on it.
 
 ## <a name="prs"></a>Pull Requests
 
+If you just matched one function and don't think that you'll be matching anymore, you don't need to create a PR! You can just create an issue against the repo with your decomp.me link. See https://github.com/doldecomp/melee/issues/530 for more information.
+
 In order to make modifications to this repo, you'll have to [fork the repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo) to your personal GitHub. There, you're free to make edits however you want. When actually creating a PR, however, try to match whole files at a time as PR reviewers are a scarce resource.
 
 When you open a PR, the discord #melee channel will be pinged.
