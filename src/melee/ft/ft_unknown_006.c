@@ -30618,3 +30618,8 @@ void func_8009EC3C(void)
 {
     return;
 }
+
+void func_8009EC40(void)
+{
+    return;
+}
