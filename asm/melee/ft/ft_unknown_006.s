@@ -2,10 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_80097E1C
-func_80097E1C:
-/* 80097E1C 000949FC  4E 80 00 20 */	blr 
-
 .global func_80097E20
 func_80097E20:
 /* 80097E20 00094A00  7C 08 02 A6 */	mflr r0
