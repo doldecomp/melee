@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 
 // 0x800E5CB0
 // https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position for Blaster GFX - used in Fox's fp code

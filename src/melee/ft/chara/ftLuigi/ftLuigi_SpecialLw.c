@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 
 // 0x801445C4
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update

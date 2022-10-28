@@ -650,7 +650,7 @@ lbl_8008237C:
 unk_t func_80082838();
 
 #pragma push
-asm BOOL func_8008239C(HSD_GObj* fighter_gobj, s32 facing_direction, f32* height_attributes)
+asm BOOL func_8008239C(HSD_GObj* fighter_gobj, s32 facing_direction, ftCollisionBox* height_attributes)
 { // clang-format off
     nofralloc
 /* 8008239C 0007EF7C  7C 08 02 A6 */	mflr r0

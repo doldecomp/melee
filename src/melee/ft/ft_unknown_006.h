@@ -116,5 +116,6 @@ void func_80095744(HSD_GObj* fighter_gobj, BOOL);
 BOOL func_800964FC(Fighter* fp);
 BOOL func_80096540(HSD_GObj* fighter_gobj);
 void func_800968C8(HSD_GObj* fighter_gobj);
+void func_80096900(HSD_GObj* fighter_gobj, BOOL, BOOL, BOOL is_interruptible, f32 freefall_mobility, f32 landing_lag);
 
 #endif

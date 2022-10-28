@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 
 #define HALF_PI32 1.5707963705062866f
 #define DOUBLE_PI32 6.2831854820251465f
