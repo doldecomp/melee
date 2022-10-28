@@ -14,5 +14,6 @@ void func_80081504(HSD_GObj* gobj);
 void func_80081540();
 void func_80081544(HSD_GObj* gobj);
 void func_80081644(HSD_GObj* gobj);
+void func_800815E4(HSD_GObj* gobj);
 
 #endif

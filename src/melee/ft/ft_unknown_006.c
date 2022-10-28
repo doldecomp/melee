@@ -24912,3 +24912,18 @@ asm unk_t func_8009A96C()
 /* 8009A988 00097568  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_8009A98C()
+{ // clang-format off
+    nofralloc
+/* 8009A98C 0009756C  7C 08 02 A6 */	mflr r0
+/* 8009A990 00097570  90 01 00 04 */	stw r0, 4(r1)
+/* 8009A994 00097574  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8009A998 00097578  4B FE 6C 4D */	bl func_800815E4
+/* 8009A99C 0009757C  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8009A9A0 00097580  38 21 00 08 */	addi r1, r1, 8
+/* 8009A9A4 00097584  7C 08 03 A6 */	mtlr r0
+/* 8009A9A8 00097588  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
