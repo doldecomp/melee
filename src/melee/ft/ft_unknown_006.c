@@ -27939,3 +27939,8 @@ void func_8009CA04(void)
 {
     return;
 }
+
+void func_8009CA08(void)
+{
+    return;
+}
