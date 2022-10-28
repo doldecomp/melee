@@ -118,8 +118,6 @@ BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
-extern BOOL func_80094790(HSD_GObj*);
-
 // 0x8014ADB8
 // https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Action State Handler
 void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
