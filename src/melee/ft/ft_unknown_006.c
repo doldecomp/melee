@@ -18737,3 +18737,22 @@ lbl_80096330:
 /* 80096348 00092F28  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t lbl_80096374();
+
+#pragma push
+asm unk_t func_8009634C()
+{ // clang-format off
+    nofralloc
+/* 8009634C 00092F2C  7C 08 02 A6 */	mflr r0
+/* 80096350 00092F30  3C 80 80 09 */	lis r4, lbl_80096374@ha
+/* 80096354 00092F34  90 01 00 04 */	stw r0, 4(r1)
+/* 80096358 00092F38  38 84 63 74 */	addi r4, r4, lbl_80096374@l
+/* 8009635C 00092F3C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 80096360 00092F40  4B FE C9 15 */	bl func_80082C74
+/* 80096364 00092F44  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 80096368 00092F48  38 21 00 08 */	addi r1, r1, 8
+/* 8009636C 00092F4C  7C 08 03 A6 */	mtlr r0
+/* 80096370 00092F50  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
