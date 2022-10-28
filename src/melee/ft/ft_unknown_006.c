@@ -25436,3 +25436,8 @@ asm unk_t func_8009AF70()
 /* 8009AF8C 00097B6C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_8009AF90(void)
+{
+    return;
+}
