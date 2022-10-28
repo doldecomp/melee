@@ -30919,3 +30919,54 @@ lbl_8009EF94:
 /* 8009EFA0 0009BB80  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern f32 const lbl_804D8790;
+extern f32 const lbl_804D8794;
+
+#pragma push
+asm unk_t func_8009EFA4()
+{ // clang-format off
+    nofralloc
+/* 8009EFA4 0009BB84  7C 08 02 A6 */	mflr r0
+/* 8009EFA8 0009BB88  90 01 00 04 */	stw r0, 4(r1)
+/* 8009EFAC 0009BB8C  38 00 00 00 */	li r0, 0
+/* 8009EFB0 0009BB90  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 8009EFB4 0009BB94  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 8009EFB8 0009BB98  38 81 00 10 */	addi r4, r1, 0x10
+/* 8009EFBC 0009BB9C  93 C1 00 20 */	stw r30, 0x20(r1)
+/* 8009EFC0 0009BBA0  7C 7E 1B 78 */	mr r30, r3
+/* 8009EFC4 0009BBA4  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 8009EFC8 0009BBA8  90 1F 22 10 */	stw r0, 0x2210(r31)
+/* 8009EFCC 0009BBAC  C0 22 8D B0 */	lfs f1, lbl_804D8790(r2)
+/* 8009EFD0 0009BBB0  D0 21 00 10 */	stfs f1, 0x10(r1)
+/* 8009EFD4 0009BBB4  C0 1F 07 98 */	lfs f0, 0x798(r31)
+/* 8009EFD8 0009BBB8  D0 01 00 14 */	stfs f0, 0x14(r1)
+/* 8009EFDC 0009BBBC  D0 21 00 18 */	stfs f1, 0x18(r1)
+/* 8009EFE0 0009BBC0  48 05 2F 3D */	bl func_800F1F1C
+/* 8009EFE4 0009BBC4  C0 22 8D B0 */	lfs f1, lbl_804D8790(r2)
+/* 8009EFE8 0009BBC8  7F C3 F3 78 */	mr r3, r30
+/* 8009EFEC 0009BBCC  C0 42 8D B4 */	lfs f2, lbl_804D8794(r2)
+/* 8009EFF0 0009BBD0  38 80 00 FA */	li r4, 0xfa
+/* 8009EFF4 0009BBD4  FC 60 08 90 */	fmr f3, f1
+/* 8009EFF8 0009BBD8  38 A0 00 00 */	li r5, 0
+/* 8009EFFC 0009BBDC  38 C0 00 00 */	li r6, 0
+/* 8009F000 0009BBE0  4B FC A3 AD */	bl Fighter_ActionStateChange_800693AC
+/* 8009F004 0009BBE4  C0 3F 00 B4 */	lfs f1, 0xb4(r31)
+/* 8009F008 0009BBE8  7F C3 F3 78 */	mr r3, r30
+/* 8009F00C 0009BBEC  C0 01 00 14 */	lfs f0, 0x14(r1)
+/* 8009F010 0009BBF0  C0 5F 06 90 */	lfs f2, 0x690(r31)
+/* 8009F014 0009BBF4  EC 01 00 2A */	fadds f0, f1, f0
+/* 8009F018 0009BBF8  EC 02 00 2A */	fadds f0, f2, f0
+/* 8009F01C 0009BBFC  D0 1F 00 B4 */	stfs f0, 0xb4(r31)
+/* 8009F020 0009BC00  4B FE 3D 21 */	bl func_80082D40
+/* 8009F024 0009BC04  C0 02 8D B0 */	lfs f0, lbl_804D8790(r2)
+/* 8009F028 0009BC08  D0 1F 00 88 */	stfs f0, 0x88(r31)
+/* 8009F02C 0009BC0C  D0 1F 00 84 */	stfs f0, 0x84(r31)
+/* 8009F030 0009BC10  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 8009F034 0009BC14  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 8009F038 0009BC18  83 C1 00 20 */	lwz r30, 0x20(r1)
+/* 8009F03C 0009BC1C  38 21 00 28 */	addi r1, r1, 0x28
+/* 8009F040 0009BC20  7C 08 03 A6 */	mtlr r0
+/* 8009F044 0009BC24  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
