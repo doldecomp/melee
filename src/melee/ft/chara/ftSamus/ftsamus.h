@@ -61,6 +61,8 @@ void ftSamus_801290A4(HSD_GObj* fighter_gobj);
 void ftSamus_801291F0(HSD_GObj* fighter_gobj);
 void ftSamus_8012A168(HSD_GObj* fighter_gobj, Vec* spawnlocation);
 void ftSamus_8012A074(HSD_GObj* fighter_gobj);
+void ftSamus_8012AEBC(HSD_GObj* fighter_gobj);
+void ftSamus_8012AF38(HSD_GObj* fighter_gobj);
 void ftSamus_8012B570(HSD_GObj* fighter_gobj);
 void ftSamus_8012B5F0(HSD_GObj* fighter_gobj);
 void ftSamus_8012B668(HSD_GObj* fighter_gobj);
