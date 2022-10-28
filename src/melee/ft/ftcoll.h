@@ -40,6 +40,9 @@ unk_t func_80078710();
 unk_t func_80079C70();
 void func_800DC920(HSD_GObj* fighter_gobj, HSD_GObj* other_gobj);
 unk_t func_8007AF60();
+unk_t func_80079EA8();
+unk_t func_800788D4();
+unk_t func_80008D30();
 
 /* todo
  * Real signature is:
