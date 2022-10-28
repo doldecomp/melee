@@ -162,8 +162,6 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialLw_SetCall(fighter_gobj);
 }
 
-extern void func_8008403C(HSD_GObj*, void (*cb_Coll)(HSD_GObj*));
-
 // 0x80146544 - Mewtwo's grounded Disable Collision callback
 void ftMewtwo_SpecialLw_Coll(HSD_GObj* fighter_gobj)
 {

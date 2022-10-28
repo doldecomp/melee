@@ -2860,7 +2860,7 @@ lbl_80084020:
 #pragma pop
 
 #pragma push
-asm unk_t func_8008403C()
+asm void func_8008403C(HSD_GObj* fighter_gobj, void (*cb_Coll)(HSD_GObj* fighter_gobj))
 { // clang-format off
     nofralloc
 /* 8008403C 00080C1C  7C 08 02 A6 */	mflr r0
