@@ -22902,3 +22902,45 @@ lbl_80099298:
 /* 800992A4 00095E84  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t func_80099314();
+extern unk_t func_80099438();
+extern unk_t func_80099390();
+
+#pragma push
+asm unk_t func_800992A8()
+{ // clang-format off
+    nofralloc
+/* 800992A8 00095E88  7C 08 02 A6 */	mflr r0
+/* 800992AC 00095E8C  90 01 00 04 */	stw r0, 4(r1)
+/* 800992B0 00095E90  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800992B4 00095E94  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800992B8 00095E98  80 C3 00 2C */	lwz r6, 0x2c(r3)
+/* 800992BC 00095E9C  80 06 00 04 */	lwz r0, 4(r6)
+/* 800992C0 00095EA0  3B E6 00 00 */	addi r31, r6, 0
+/* 800992C4 00095EA4  2C 00 00 0E */	cmpwi r0, 0xe
+/* 800992C8 00095EA8  41 82 00 1C */	beq lbl_800992E4
+/* 800992CC 00095EAC  40 80 00 20 */	bge lbl_800992EC
+/* 800992D0 00095EB0  2C 00 00 0D */	cmpwi r0, 0xd
+/* 800992D4 00095EB4  40 80 00 08 */	bge lbl_800992DC
+/* 800992D8 00095EB8  48 00 00 14 */	b lbl_800992EC
+lbl_800992DC:
+/* 800992DC 00095EBC  48 00 00 B5 */	bl func_80099390
+/* 800992E0 00095EC0  48 00 00 10 */	b lbl_800992F0
+lbl_800992E4:
+/* 800992E4 00095EC4  48 00 01 55 */	bl func_80099438
+/* 800992E8 00095EC8  48 00 00 08 */	b lbl_800992F0
+lbl_800992EC:
+/* 800992EC 00095ECC  48 00 00 29 */	bl func_80099314
+lbl_800992F0:
+/* 800992F0 00095ED0  38 7F 00 00 */	addi r3, r31, 0
+/* 800992F4 00095ED4  38 80 00 17 */	li r4, 0x17
+/* 800992F8 00095ED8  38 A0 00 00 */	li r5, 0
+/* 800992FC 00095EDC  4B FE 58 B1 */	bl func_8007EBAC
+/* 80099300 00095EE0  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 80099304 00095EE4  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 80099308 00095EE8  38 21 00 20 */	addi r1, r1, 0x20
+/* 8009930C 00095EEC  7C 08 03 A6 */	mtlr r0
+/* 80099310 00095EF0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
