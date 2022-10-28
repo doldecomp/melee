@@ -122,5 +122,6 @@ void func_8009750C(HSD_GObj* fighter_gobj);
 unk_t func_8009F834();
 void func_80098B20(HSD_GObj* fighter_gobj);
 void func_80098C9C(HSD_GObj* fighter_gobj);
+void func_80099D9C(HSD_GObj* fighter_gobj);
 
 #endif
