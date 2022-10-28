@@ -300,7 +300,6 @@ void ftFox_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 }
 
 extern f32 func_80075E78(Fighter*, s32);
-extern void func_80085088(HSD_GObj*);
 
 inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
 {

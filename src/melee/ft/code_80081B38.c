@@ -4170,7 +4170,7 @@ lbl_8008506C:
 unk_t func_800850E0();
 
 #pragma push
-asm unk_t func_80085088()
+asm void func_80085088(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80085088 00081C68  7C 08 02 A6 */	mflr r0
