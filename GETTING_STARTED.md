@@ -61,11 +61,11 @@ When you initially create a new “scratch” in this site, it’ll actually do 
 temp_r31 = arg0->unk2C;
 ```
 
-which can be translated in kind-of-English as “tempr31 takes the value at the memory address of `arg0 + 0x2c`.” If you don’t know anything about `arg1`, you can translate it to sketchy-C
+which can be translated in kind-of-English as “tempr31 takes the value at the memory address of `arg0 + 0x2c`.” If you don’t know anything about `arg0`, you can translate it to sketchy-C
 
 ```c
 // The u8* conversion is because C automatically figures out pointer size for
-// you, which means for an s32, you'd have to do arg1 + 0x2c / 4
+// you, which means for an s32, you'd have to do arg0 + 0x2c / 4
 temp_r31 = *((s32 *) ((u8 *) arg0 + 0x2c))
 ```
 
