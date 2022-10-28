@@ -113,5 +113,6 @@ BOOL func_8009A080(HSD_GObj* fighter_gobj);
 void func_800C88D4(HSD_GObj* dst_gobj, s32 src_x2030, BOOL);
 BOOL func_80094790(HSD_GObj* fighter_gobj);
 void func_80095744(HSD_GObj* fighter_gobj, BOOL);
+BOOL func_800964FC(Fighter* fp);
 
 #endif
