@@ -2,42 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-func_800A1AB4:
-/* 800A1AB4 0009E694  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800A1AB8 0009E698  C0 23 00 B4 */	lfs f1, 0xb4(r3)
-/* 800A1ABC 0009E69C  C0 04 00 B4 */	lfs f0, 0xb4(r4)
-/* 800A1AC0 0009E6A0  C0 43 00 B0 */	lfs f2, 0xb0(r3)
-/* 800A1AC4 0009E6A4  EC 61 00 28 */	fsubs f3, f1, f0
-/* 800A1AC8 0009E6A8  C0 24 00 B0 */	lfs f1, 0xb0(r4)
-/* 800A1ACC 0009E6AC  C0 02 8D F8 */	lfs f0, lbl_804D87D8@sda21(r2)
-/* 800A1AD0 0009E6B0  EC 42 08 28 */	fsubs f2, f2, f1
-/* 800A1AD4 0009E6B4  EC 23 00 F2 */	fmuls f1, f3, f3
-/* 800A1AD8 0009E6B8  EC 22 08 BA */	fmadds f1, f2, f2, f1
-/* 800A1ADC 0009E6BC  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 800A1AE0 0009E6C0  40 81 00 50 */	ble lbl_800A1B30
-/* 800A1AE4 0009E6C4  FC 40 08 34 */	frsqrte f2, f1
-/* 800A1AE8 0009E6C8  C8 82 8E 50 */	lfd f4, lbl_804D8830@sda21(r2)
-/* 800A1AEC 0009E6CC  C8 62 8E E0 */	lfd f3, lbl_804D88C0@sda21(r2)
-/* 800A1AF0 0009E6D0  FC 02 00 B2 */	fmul f0, f2, f2
-/* 800A1AF4 0009E6D4  FC 44 00 B2 */	fmul f2, f4, f2
-/* 800A1AF8 0009E6D8  FC 01 18 3C */	fnmsub f0, f1, f0, f3
-/* 800A1AFC 0009E6DC  FC 42 00 32 */	fmul f2, f2, f0
-/* 800A1B00 0009E6E0  FC 02 00 B2 */	fmul f0, f2, f2
-/* 800A1B04 0009E6E4  FC 44 00 B2 */	fmul f2, f4, f2
-/* 800A1B08 0009E6E8  FC 01 18 3C */	fnmsub f0, f1, f0, f3
-/* 800A1B0C 0009E6EC  FC 42 00 32 */	fmul f2, f2, f0
-/* 800A1B10 0009E6F0  FC 02 00 B2 */	fmul f0, f2, f2
-/* 800A1B14 0009E6F4  FC 44 00 B2 */	fmul f2, f4, f2
-/* 800A1B18 0009E6F8  FC 01 18 3C */	fnmsub f0, f1, f0, f3
-/* 800A1B1C 0009E6FC  FC 02 00 32 */	fmul f0, f2, f0
-/* 800A1B20 0009E700  FC 01 00 32 */	fmul f0, f1, f0
-/* 800A1B24 0009E704  FC 00 00 18 */	frsp f0, f0
-/* 800A1B28 0009E708  D0 01 00 10 */	stfs f0, 0x10(r1)
-/* 800A1B2C 0009E70C  C0 21 00 10 */	lfs f1, 0x10(r1)
-lbl_800A1B30:
-/* 800A1B30 0009E710  38 21 00 18 */	addi r1, r1, 0x18
-/* 800A1B34 0009E714  4E 80 00 20 */	blr 
-
 .global func_800A1B38
 func_800A1B38:
 /* 800A1B38 0009E718  7C 08 02 A6 */	mflr r0
@@ -74386,6 +74350,7 @@ lbl_804D88B0:
 .global lbl_804D88B8
 lbl_804D88B8:
 	.double 4503599627370496.0
+.global lbl_804D88C0
 lbl_804D88C0:
 	.double 3.0
 lbl_804D88C8:
