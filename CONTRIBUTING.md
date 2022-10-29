@@ -132,4 +132,4 @@ If you just matched one function and don't think that you'll be matching anymore
 
 In order to make modifications to this repo, you'll have to [fork the repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo) to your personal GitHub. There, you're free to make edits however you want. When actually creating a PR, however, try to match whole files at a time as PR reviewers are a scarce resource.
 
-When you open a PR, the discord #melee channel will be pinged.
+When you open a PR, the `#melee` channel on Discord will be notified.
