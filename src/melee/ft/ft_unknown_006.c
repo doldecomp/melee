@@ -34102,3 +34102,31 @@ lbl_800A18FC:
 /* 800A1900 0009E4E0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern f64 const lbl_804D88B0;
+extern f64 const lbl_804D88B8;
+
+#pragma push
+asm f32 func_800A1904(Fighter* fp)
+{ // clang-format off
+    nofralloc
+/* 800A1904 0009E4E4  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800A1908 0009E4E8  3C 00 43 30 */	lis r0, 0x4330
+/* 800A190C 0009E4EC  88 63 1A 90 */	lbz r3, 0x1a90(r3)
+/* 800A1910 0009E4F0  C8 62 8E D8 */	lfd f3, lbl_804D88B8(r2)
+/* 800A1914 0009E4F4  90 61 00 14 */	stw r3, 0x14(r1)
+/* 800A1918 0009E4F8  C8 22 8E D0 */	lfd f1, lbl_804D88B0(r2)
+/* 800A191C 0009E4FC  90 01 00 10 */	stw r0, 0x10(r1)
+/* 800A1920 0009E500  C8 02 8E B8 */	lfd f0, lbl_804D8898(r2)
+/* 800A1924 0009E504  C8 41 00 10 */	lfd f2, 0x10(r1)
+/* 800A1928 0009E508  FC 42 18 28 */	fsub f2, f2, f3
+/* 800A192C 0009E50C  FC 22 08 24 */	fdiv f1, f2, f1
+/* 800A1930 0009E510  FC 20 08 18 */	frsp f1, f1
+/* 800A1934 0009E514  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 800A1938 0009E518  40 81 00 08 */	ble lbl_800A1940
+/* 800A193C 0009E51C  C0 22 8E 28 */	lfs f1, lbl_804D8808(r2)
+lbl_800A1940:
+/* 800A1940 0009E520  38 21 00 18 */	addi r1, r1, 0x18
+/* 800A1944 0009E524  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
