@@ -1,8 +1,9 @@
 #include <melee/ft/ftlib.h>
 
-#include <sysdolphin/baselib/jobj.h>
+#include <melee/gm/code_801601C4.h>
 #include <melee/it/itkind.h>
 #include <melee/pl/player.h>
+#include <sysdolphin/baselib/jobj.h>
 
 extern struct {
     void* unk0;
