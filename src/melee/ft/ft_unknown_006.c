@@ -34155,3 +34155,12 @@ lbl_800A1984:
 /* 800A1988 0009E568  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm s32 func_800A198C(Fighter* fp)
+{ // clang-format off
+    nofralloc
+/* 800A198C 0009E56C  80 63 1A 88 */	lwz r3, 0x1a88(r3)
+/* 800A1990 0009E570  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

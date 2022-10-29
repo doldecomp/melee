@@ -141,5 +141,6 @@ f32 func_800A17E4(Fighter* fp);
 f32 func_800A1874(Fighter* fp);
 f32 func_800A1904(Fighter* fp);
 f32 func_800A1948(Fighter* fp);
+s32 func_800A198C(Fighter* fp);
 
 #endif
