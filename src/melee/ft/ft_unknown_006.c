@@ -30276,7 +30276,7 @@ lbl_8009E778:
 #pragma pop
 
 #pragma push
-asm func_8009E7B4(Fighter* fp, u8*)
+asm void func_8009E7B4(Fighter* fp, u8*)
 { // clang-format off
     nofralloc
 /* 8009E7B4 0009B394  7C 08 02 A6 */	mflr r0
