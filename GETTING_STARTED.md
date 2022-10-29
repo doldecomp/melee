@@ -40,7 +40,7 @@ ftMewtwo_SpecialHi_CreateGFX:
 /* 801450D0 00000030  4E 80 00 20 */	blr
 ```
 
-So the repo is filled with `.s` files and `.c` files, where the C code inside the `.c` files should have translated 100% to some contents in a `.s` file that used to be in the repo. Note that once we successfully decompile a function, we normally remove it from the assembly.
+So the repo is filled with `.s` files and `.c` files, where the C code inside the `.c` files, each of which are a 100% translation of its corresponding `.s` file that used to be in the repo. Note that once we successfully decompile a function, we remove it from the assembly.
 
 # Do we have to write all this C code by hand?
 
