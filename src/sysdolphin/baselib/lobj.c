@@ -932,7 +932,7 @@ lbl_80366790:
 #pragma pop
 
 #pragma push
-asm void HSD_LObjSetCurrentAll()
+asm unk_t HSD_LObjSetCurrentAll()
 { // clang-format off
     nofralloc
 /* 803667A8 00363388  7C 08 02 A6 */	mflr r0

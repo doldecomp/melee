@@ -178,5 +178,9 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj);
 s32 HSD_Index2LightID(u32);
 
 void func_803668EC(void* hsd_obj);
+void HSD_LObjAddCurrent(HSD_LObj* lobj);
+unk_t HSD_LObjSetCurrentAll();
+void func_80366CA4(HSD_LObj* lobj, GXColor* color);
+void HSD_LObjSetPosition(HSD_LObj* lobj, Vec* position);
 
 #endif
