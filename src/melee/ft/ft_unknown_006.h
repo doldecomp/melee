@@ -140,5 +140,6 @@ void func_800A101C(Fighter* fp, s8 cpu_type, s8 cpu_level, BOOL);
 f32 func_800A17E4(Fighter* fp);
 f32 func_800A1874(Fighter* fp);
 f32 func_800A1904(Fighter* fp);
+f32 func_800A1948(Fighter* fp);
 
 #endif
