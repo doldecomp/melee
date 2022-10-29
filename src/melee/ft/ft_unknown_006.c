@@ -41898,3 +41898,89 @@ lbl_800A80CC:
 /* 800A80E0 000A4CC0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern f64 const lbl_804D8920;
+
+#pragma push
+asm unk_t func_800A80E4()
+{ // clang-format off
+    nofralloc
+/* 800A80E4 000A4CC4  7C 08 02 A6 */	mflr r0
+/* 800A80E8 000A4CC8  90 01 00 04 */	stw r0, 4(r1)
+/* 800A80EC 000A4CCC  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 800A80F0 000A4CD0  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 800A80F4 000A4CD4  7C 7F 1B 78 */	mr r31, r3
+/* 800A80F8 000A4CD8  80 83 1A CC */	lwz r4, 0x1acc(r3)
+/* 800A80FC 000A4CDC  28 04 00 00 */	cmplwi r4, 0
+/* 800A8100 000A4CE0  41 82 00 FC */	beq lbl_800A81FC
+/* 800A8104 000A4CE4  80 1F 00 E0 */	lwz r0, 0xe0(r31)
+/* 800A8108 000A4CE8  2C 00 00 01 */	cmpwi r0, 1
+/* 800A810C 000A4CEC  41 82 00 F0 */	beq lbl_800A81FC
+/* 800A8110 000A4CF0  C0 3F 00 B4 */	lfs f1, 0xb4(r31)
+/* 800A8114 000A4CF4  C0 04 00 B4 */	lfs f0, 0xb4(r4)
+/* 800A8118 000A4CF8  C0 5F 00 B0 */	lfs f2, 0xb0(r31)
+/* 800A811C 000A4CFC  EC 61 00 28 */	fsubs f3, f1, f0
+/* 800A8120 000A4D00  C0 24 00 B0 */	lfs f1, 0xb0(r4)
+/* 800A8124 000A4D04  C0 02 8D F8 */	lfs f0, lbl_804D87D8(r2)
+/* 800A8128 000A4D08  EC 42 08 28 */	fsubs f2, f2, f1
+/* 800A812C 000A4D0C  EC 23 00 F2 */	fmuls f1, f3, f3
+/* 800A8130 000A4D10  EC 82 08 BA */	fmadds f4, f2, f2, f1
+/* 800A8134 000A4D14  FC 04 00 40 */	fcmpo cr0, f4, f0
+/* 800A8138 000A4D18  40 81 00 50 */	ble lbl_800A8188
+/* 800A813C 000A4D1C  FC 20 20 34 */	frsqrte f1, f4
+/* 800A8140 000A4D20  C8 62 8E 50 */	lfd f3, lbl_804D8830(r2)
+/* 800A8144 000A4D24  C8 42 8E E0 */	lfd f2, lbl_804D88C0(r2)
+/* 800A8148 000A4D28  FC 01 00 72 */	fmul f0, f1, f1
+/* 800A814C 000A4D2C  FC 23 00 72 */	fmul f1, f3, f1
+/* 800A8150 000A4D30  FC 04 10 3C */	fnmsub f0, f4, f0, f2
+/* 800A8154 000A4D34  FC 21 00 32 */	fmul f1, f1, f0
+/* 800A8158 000A4D38  FC 01 00 72 */	fmul f0, f1, f1
+/* 800A815C 000A4D3C  FC 23 00 72 */	fmul f1, f3, f1
+/* 800A8160 000A4D40  FC 04 10 3C */	fnmsub f0, f4, f0, f2
+/* 800A8164 000A4D44  FC 21 00 32 */	fmul f1, f1, f0
+/* 800A8168 000A4D48  FC 01 00 72 */	fmul f0, f1, f1
+/* 800A816C 000A4D4C  FC 23 00 72 */	fmul f1, f3, f1
+/* 800A8170 000A4D50  FC 04 10 3C */	fnmsub f0, f4, f0, f2
+/* 800A8174 000A4D54  FC 01 00 32 */	fmul f0, f1, f0
+/* 800A8178 000A4D58  FC 04 00 32 */	fmul f0, f4, f0
+/* 800A817C 000A4D5C  FC 00 00 18 */	frsp f0, f0
+/* 800A8180 000A4D60  D0 01 00 0C */	stfs f0, 0xc(r1)
+/* 800A8184 000A4D64  C0 81 00 0C */	lfs f4, 0xc(r1)
+lbl_800A8188:
+/* 800A8188 000A4D68  C8 02 8F 40 */	lfd f0, lbl_804D8920(r2)
+/* 800A818C 000A4D6C  FC 04 00 40 */	fcmpo cr0, f4, f0
+/* 800A8190 000A4D70  41 81 00 6C */	bgt lbl_800A81FC
+/* 800A8194 000A4D74  38 7F 00 00 */	addi r3, r31, 0
+/* 800A8198 000A4D78  38 84 00 B0 */	addi r4, r4, 0xb0
+/* 800A819C 000A4D7C  38 A1 00 10 */	addi r5, r1, 0x10
+/* 800A81A0 000A4D80  4B FF E5 61 */	bl func_800A6700
+/* 800A81A4 000A4D84  2C 03 00 00 */	cmpwi r3, 0
+/* 800A81A8 000A4D88  41 82 00 54 */	beq lbl_800A81FC
+/* 800A81AC 000A4D8C  80 1F 1A E8 */	lwz r0, 0x1ae8(r31)
+/* 800A81B0 000A4D90  38 BF 1A 88 */	addi r5, r31, 0x1a88
+/* 800A81B4 000A4D94  C0 21 00 14 */	lfs f1, 0x14(r1)
+/* 800A81B8 000A4D98  2C 00 00 00 */	cmpwi r0, 0
+/* 800A81BC 000A4D9C  C0 01 00 10 */	lfs f0, 0x10(r1)
+/* 800A81C0 000A4DA0  40 82 00 3C */	bne lbl_800A81FC
+/* 800A81C4 000A4DA4  D0 05 00 54 */	stfs f0, 0x54(r5)
+/* 800A81C8 000A4DA8  3C 80 80 4A */	lis r4, stage_info@ha
+/* 800A81CC 000A4DAC  3C 60 80 3C */	lis r3, lbl_803C6594@ha
+/* 800A81D0 000A4DB0  D0 25 00 58 */	stfs f1, 0x58(r5)
+/* 800A81D4 000A4DB4  38 84 E6 C8 */	addi r4, r4, stage_info@l
+/* 800A81D8 000A4DB8  38 03 65 94 */	addi r0, r3, lbl_803C6594@l
+/* 800A81DC 000A4DBC  C0 02 8E 68 */	lfs f0, lbl_804D8848(r2)
+/* 800A81E0 000A4DC0  7F E3 FB 78 */	mr r3, r31
+/* 800A81E4 000A4DC4  D0 05 00 38 */	stfs f0, 0x38(r5)
+/* 800A81E8 000A4DC8  80 84 00 88 */	lwz r4, 0x88(r4)
+/* 800A81EC 000A4DCC  54 84 10 3A */	slwi r4, r4, 2
+/* 800A81F0 000A4DD0  7C 80 22 14 */	add r4, r0, r4
+/* 800A81F4 000A4DD4  80 84 00 00 */	lwz r4, 0(r4)
+/* 800A81F8 000A4DD8  4B FF 9A CD */	bl func_800A1CC4
+lbl_800A81FC:
+/* 800A81FC 000A4DDC  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 800A8200 000A4DE0  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 800A8204 000A4DE4  38 21 00 28 */	addi r1, r1, 0x28
+/* 800A8208 000A4DE8  7C 08 03 A6 */	mtlr r0
+/* 800A820C 000A4DEC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
