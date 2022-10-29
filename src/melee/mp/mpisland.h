@@ -7,5 +7,6 @@ extern unk_t func_8005AC14();
 extern unk_t func_8005AB54();
 extern unk_t func_8005AC8C();
 extern unk_t lbl_80458E88;
+extern unk_t func_8005ACE8();
 
 #endif
