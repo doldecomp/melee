@@ -17,5 +17,6 @@ unk_t func_80056A1C();
 BOOL func_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x, f32 left_y, VecPtr coll_vec,
               unk_t, unk_t, unk_t, u32, u32);
 unk_t func_80054CEC();
+unk_t func_8004F8A4();
 
 #endif
