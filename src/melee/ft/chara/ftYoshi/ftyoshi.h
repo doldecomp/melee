@@ -55,5 +55,11 @@ unk_t func_8012CCD0();
 unk_t func_8012CCC4();
 unk_t func_8012CC94();
 unk_t func_8012CDD4();
+unk_t func_8012CD58();
+unk_t func_8012CD40();
+unk_t func_8012CD70();
+unk_t func_8012CD88();
+unk_t func_8012CD28();
+unk_t func_8012CD10();
 
 #endif
