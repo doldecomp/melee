@@ -39088,3 +39088,29 @@ lbl_800A5A20:
 /* 800A5A24 000A2604  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern jtbl_t jtbl_803C5B5C;
+void lbl_800A5A4C(void);
+void lbl_800A5A54(void);
+
+#pragma push
+asm unk_t func_800A5A28()
+{ // clang-format off
+    nofralloc
+/* 800A5A28 000A2608  80 03 00 10 */	lwz r0, 0x10(r3)
+/* 800A5A2C 000A260C  28 00 00 22 */	cmplwi r0, 0x22
+/* 800A5A30 000A2610  41 81 00 24 */	bgt lbl_800A5A54
+/* 800A5A34 000A2614  3C 60 80 3C */	lis r3, jtbl_803C5B5C@ha
+/* 800A5A38 000A2618  38 63 5B 5C */	addi r3, r3, jtbl_803C5B5C@l
+/* 800A5A3C 000A261C  54 00 10 3A */	slwi r0, r0, 2
+/* 800A5A40 000A2620  7C 03 00 2E */	lwzx r0, r3, r0
+/* 800A5A44 000A2624  7C 09 03 A6 */	mtctr r0
+/* 800A5A48 000A2628  4E 80 04 20 */	bctr 
+entry lbl_800A5A4C
+/* 800A5A4C 000A262C  38 60 00 01 */	li r3, 1
+/* 800A5A50 000A2630  4E 80 00 20 */	blr 
+entry lbl_800A5A54
+/* 800A5A54 000A2634  38 60 00 00 */	li r3, 0
+/* 800A5A58 000A2638  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
