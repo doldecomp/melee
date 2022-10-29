@@ -1,5 +1,6 @@
-#include <melee/it/item.h>
 #include <common_structs.h>
+#include <melee/gr/grlib.h>
+#include <melee/it/item.h>
 
 extern s32 func_8016AE80();
 
@@ -1649,8 +1650,6 @@ s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones //
     }
     return 0;
 }
-
-extern void func_801C9E60(Vec3*);                          /* extern */
 
 // 0x802697D4 //
 // https://decomp.me/scratch/iJ7xS //
