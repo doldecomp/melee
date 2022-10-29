@@ -56423,3 +56423,14 @@ lbl_800B460C:
 /* 800B4628 000B1208  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800B462C()
+{ // clang-format off
+    nofralloc
+/* 800B462C 000B120C  38 63 1A 88 */	addi r3, r3, 0x1a88
+/* 800B4630 000B1210  38 03 04 54 */	addi r0, r3, 0x454
+/* 800B4634 000B1214  90 03 05 54 */	stw r0, 0x554(r3)
+/* 800B4638 000B1218  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
