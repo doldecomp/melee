@@ -2,49 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_800A17E4
-func_800A17E4:
-/* 800A17E4 0009E3C4  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800A17E8 0009E3C8  88 63 1A 8C */	lbz r3, 0x1a8c(r3)
-/* 800A17EC 0009E3CC  7C 60 07 75 */	extsb. r0, r3
-/* 800A17F0 0009E3D0  40 81 00 30 */	ble lbl_800A1820
-/* 800A17F4 0009E3D4  7C 60 07 74 */	extsb r0, r3
-/* 800A17F8 0009E3D8  C8 42 8E 20 */	lfd f2, lbl_804D8800@sda21(r2)
-/* 800A17FC 0009E3DC  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 800A1800 0009E3E0  C0 02 8E AC */	lfs f0, lbl_804D888C@sda21(r2)
-/* 800A1804 0009E3E4  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800A1808 0009E3E8  3C 00 43 30 */	lis r0, 0x4330
-/* 800A180C 0009E3EC  90 01 00 10 */	stw r0, 0x10(r1)
-/* 800A1810 0009E3F0  C8 21 00 10 */	lfd f1, 0x10(r1)
-/* 800A1814 0009E3F4  EC 21 10 28 */	fsubs f1, f1, f2
-/* 800A1818 0009E3F8  EC 21 00 24 */	fdivs f1, f1, f0
-/* 800A181C 0009E3FC  48 00 00 2C */	b lbl_800A1848
-lbl_800A1820:
-/* 800A1820 0009E400  7C 60 07 74 */	extsb r0, r3
-/* 800A1824 0009E404  C8 42 8E 20 */	lfd f2, lbl_804D8800@sda21(r2)
-/* 800A1828 0009E408  6C 00 80 00 */	xoris r0, r0, 0x8000
-/* 800A182C 0009E40C  C0 02 8E B0 */	lfs f0, lbl_804D8890@sda21(r2)
-/* 800A1830 0009E410  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800A1834 0009E414  3C 00 43 30 */	lis r0, 0x4330
-/* 800A1838 0009E418  90 01 00 10 */	stw r0, 0x10(r1)
-/* 800A183C 0009E41C  C8 21 00 10 */	lfd f1, 0x10(r1)
-/* 800A1840 0009E420  EC 21 10 28 */	fsubs f1, f1, f2
-/* 800A1844 0009E424  EC 21 00 32 */	fmuls f1, f1, f0
-lbl_800A1848:
-/* 800A1848 0009E428  C8 02 8E B8 */	lfd f0, lbl_804D8898@sda21(r2)
-/* 800A184C 0009E42C  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 800A1850 0009E430  40 81 00 0C */	ble lbl_800A185C
-/* 800A1854 0009E434  C0 22 8E 28 */	lfs f1, lbl_804D8808@sda21(r2)
-/* 800A1858 0009E438  48 00 00 14 */	b lbl_800A186C
-lbl_800A185C:
-/* 800A185C 0009E43C  C8 02 8E C0 */	lfd f0, lbl_804D88A0@sda21(r2)
-/* 800A1860 0009E440  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 800A1864 0009E444  40 80 00 08 */	bge lbl_800A186C
-/* 800A1868 0009E448  C0 22 8E C8 */	lfs f1, lbl_804D88A8@sda21(r2)
-lbl_800A186C:
-/* 800A186C 0009E44C  38 21 00 18 */	addi r1, r1, 0x18
-/* 800A1870 0009E450  4E 80 00 20 */	blr 
-
 .global func_800A1874
 func_800A1874:
 /* 800A1874 0009E454  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -74510,6 +74467,7 @@ lbl_804D87F0:
 lbl_804D87F8:
 	.float 1.3249999284744263
 	.4byte 0x9999999A
+.global lbl_804D8800
 lbl_804D8800:
 	.double 4503601774854144.0
 .global lbl_804D8808
@@ -74581,17 +74539,20 @@ lbl_804D8884:
 .global lbl_804D8888
 lbl_804D8888:
 	.float 3.5
+.global lbl_804D888C
 lbl_804D888C:
 	.float 127.0
+.global lbl_804D8890
 lbl_804D8890:
 	.float 0.0078125
 	.4byte NULL
+.global lbl_804D8898
 lbl_804D8898:
-	.float 1.875
-	.4byte NULL
+	.double 1.0
+.global lbl_804D88A0
 lbl_804D88A0:
-	.float -1.875
-	.4byte NULL
+	.double -1.0
+.global lbl_804D88A8
 lbl_804D88A8:
 	.float -1.0
 	.4byte NULL
