@@ -31659,3 +31659,26 @@ lbl_8009F7E0:
 /* 8009F7F4 0009C3D4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_8009F7F8()
+{ // clang-format off
+    nofralloc
+/* 8009F7F8 0009C3D8  7C 08 02 A6 */	mflr r0
+/* 8009F7FC 0009C3DC  90 01 00 04 */	stw r0, 4(r1)
+/* 8009F800 0009C3E0  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8009F804 0009C3E4  48 02 0E 55 */	bl func_800C0658
+/* 8009F808 0009C3E8  88 03 00 7C */	lbz r0, 0x7c(r3)
+/* 8009F80C 0009C3EC  54 00 D7 FF */	rlwinm. r0, r0, 0x1a, 0x1f, 0x1f
+/* 8009F810 0009C3F0  41 82 00 14 */	beq lbl_8009F824
+/* 8009F814 0009C3F4  80 6D AE C8 */	lwz r3, lbl_804D6568(r13)
+/* 8009F818 0009C3F8  48 2C 70 D5 */	bl func_803668EC
+/* 8009F81C 0009C3FC  48 2C AA 6D */	bl HSD_CObjGetCurrent
+/* 8009F820 0009C400  48 2C 67 09 */	bl HSD_LObjSetupInit
+lbl_8009F824:
+/* 8009F824 0009C404  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8009F828 0009C408  38 21 00 08 */	addi r1, r1, 8
+/* 8009F82C 0009C40C  7C 08 03 A6 */	mtlr r0
+/* 8009F830 0009C410  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
