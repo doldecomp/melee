@@ -12,7 +12,11 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 
+#include <melee/gr/grbigblue.h>
+#include <melee/gr/grcorneria.h>
+#include <melee/gr/grinishie.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grvenom.h>
 
 #include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
@@ -34299,5 +34303,43 @@ asm unk_t func_800A1AB4()
 lbl_800A1B30:
 /* 800A1B30 0009E710  38 21 00 18 */	addi r1, r1, 0x18
 /* 800A1B34 0009E714  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t func_800A1B38()
+{ // clang-format off
+    nofralloc
+/* 800A1B38 0009E718  7C 08 02 A6 */	mflr r0
+/* 800A1B3C 0009E71C  90 01 00 04 */	stw r0, 4(r1)
+/* 800A1B40 0009E720  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800A1B44 0009E724  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 800A1B48 0009E728  7C 7F 1B 78 */	mr r31, r3
+/* 800A1B4C 0009E72C  48 14 DC F9 */	bl func_801EF844
+/* 800A1B50 0009E730  2C 03 00 00 */	cmpwi r3, 0
+/* 800A1B54 0009E734  40 82 00 34 */	bne lbl_800A1B88
+/* 800A1B58 0009E738  7F E3 FB 78 */	mr r3, r31
+/* 800A1B5C 0009E73C  48 15 AF 51 */	bl func_801FCAAC
+/* 800A1B60 0009E740  2C 03 00 00 */	cmpwi r3, 0
+/* 800A1B64 0009E744  40 82 00 24 */	bne lbl_800A1B88
+/* 800A1B68 0009E748  7F E3 FB 78 */	mr r3, r31
+/* 800A1B6C 0009E74C  48 14 12 25 */	bl func_801E2D90
+/* 800A1B70 0009E750  2C 03 00 00 */	cmpwi r3, 0
+/* 800A1B74 0009E754  40 82 00 14 */	bne lbl_800A1B88
+/* 800A1B78 0009E758  7F E3 FB 78 */	mr r3, r31
+/* 800A1B7C 0009E75C  48 16 51 95 */	bl func_80206D10
+/* 800A1B80 0009E760  2C 03 00 00 */	cmpwi r3, 0
+/* 800A1B84 0009E764  41 82 00 0C */	beq lbl_800A1B90
+lbl_800A1B88:
+/* 800A1B88 0009E768  38 60 00 01 */	li r3, 1
+/* 800A1B8C 0009E76C  48 00 00 08 */	b lbl_800A1B94
+lbl_800A1B90:
+/* 800A1B90 0009E770  38 60 00 00 */	li r3, 0
+lbl_800A1B94:
+/* 800A1B94 0009E774  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 800A1B98 0009E778  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 800A1B9C 0009E77C  38 21 00 18 */	addi r1, r1, 0x18
+/* 800A1BA0 0009E780  7C 08 03 A6 */	mtlr r0
+/* 800A1BA4 0009E784  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
