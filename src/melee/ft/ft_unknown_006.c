@@ -44357,3 +44357,100 @@ lbl_800AA308:
 /* 800AA31C 000A6EFC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern jtbl_t jtbl_803C5C70;
+void lbl_800AA364(void);
+void lbl_800AA378(void);
+void lbl_800AA38C(void);
+void lbl_800AA3A0(void);
+void lbl_800AA3B4(void);
+void lbl_800AA3C8(void);
+void lbl_800AA3DC(void);
+void lbl_800AA3F0(void);
+void lbl_800AA404(void);
+void lbl_800AA418(void);
+
+#pragma push
+asm unk_t func_800AA320()
+{ // clang-format off
+    nofralloc
+/* 800AA320 000A6F00  80 03 00 04 */	lwz r0, 4(r3)
+/* 800AA324 000A6F04  2C 00 00 0B */	cmpwi r0, 0xb
+/* 800AA328 000A6F08  40 82 00 18 */	bne lbl_800AA340
+/* 800AA32C 000A6F0C  38 00 00 40 */	li r0, 0x40
+/* 800AA330 000A6F10  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA334 000A6F14  38 00 00 7F */	li r0, 0x7f
+/* 800AA338 000A6F18  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA33C 000A6F1C  4E 80 00 20 */	blr 
+lbl_800AA340:
+/* 800AA340 000A6F20  80 03 1A 98 */	lwz r0, 0x1a98(r3)
+/* 800AA344 000A6F24  28 00 00 09 */	cmplwi r0, 9
+/* 800AA348 000A6F28  4D 81 00 20 */	bgtlr 
+/* 800AA34C 000A6F2C  3C 60 80 3C */	lis r3, jtbl_803C5C70@ha
+/* 800AA350 000A6F30  38 63 5C 70 */	addi r3, r3, jtbl_803C5C70@l
+/* 800AA354 000A6F34  54 00 10 3A */	slwi r0, r0, 2
+/* 800AA358 000A6F38  7C 03 00 2E */	lwzx r0, r3, r0
+/* 800AA35C 000A6F3C  7C 09 03 A6 */	mtctr r0
+/* 800AA360 000A6F40  4E 80 04 20 */	bctr 
+entry lbl_800AA364
+/* 800AA364 000A6F44  38 00 00 01 */	li r0, 1
+/* 800AA368 000A6F48  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA36C 000A6F4C  38 00 00 43 */	li r0, 0x43
+/* 800AA370 000A6F50  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA374 000A6F54  4E 80 00 20 */	blr 
+entry lbl_800AA378
+/* 800AA378 000A6F58  38 00 00 02 */	li r0, 2
+/* 800AA37C 000A6F5C  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA380 000A6F60  38 00 00 48 */	li r0, 0x48
+/* 800AA384 000A6F64  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA388 000A6F68  4E 80 00 20 */	blr 
+entry lbl_800AA38C
+/* 800AA38C 000A6F6C  38 00 00 02 */	li r0, 2
+/* 800AA390 000A6F70  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA394 000A6F74  38 00 00 4D */	li r0, 0x4d
+/* 800AA398 000A6F78  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA39C 000A6F7C  4E 80 00 20 */	blr 
+entry lbl_800AA3A0
+/* 800AA3A0 000A6F80  38 00 00 02 */	li r0, 2
+/* 800AA3A4 000A6F84  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA3A8 000A6F88  38 00 00 52 */	li r0, 0x52
+/* 800AA3AC 000A6F8C  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA3B0 000A6F90  4E 80 00 20 */	blr 
+entry lbl_800AA3B4
+/* 800AA3B4 000A6F94  38 00 00 02 */	li r0, 2
+/* 800AA3B8 000A6F98  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA3BC 000A6F9C  38 00 00 57 */	li r0, 0x57
+/* 800AA3C0 000A6FA0  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA3C4 000A6FA4  4E 80 00 20 */	blr 
+entry lbl_800AA3C8
+/* 800AA3C8 000A6FA8  38 00 00 02 */	li r0, 2
+/* 800AA3CC 000A6FAC  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA3D0 000A6FB0  38 00 00 5C */	li r0, 0x5c
+/* 800AA3D4 000A6FB4  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA3D8 000A6FB8  4E 80 00 20 */	blr 
+entry lbl_800AA3DC
+/* 800AA3DC 000A6FBC  38 00 00 04 */	li r0, 4
+/* 800AA3E0 000A6FC0  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA3E4 000A6FC4  38 00 00 61 */	li r0, 0x61
+/* 800AA3E8 000A6FC8  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA3EC 000A6FCC  4E 80 00 20 */	blr 
+entry lbl_800AA3F0
+/* 800AA3F0 000A6FD0  38 00 00 04 */	li r0, 4
+/* 800AA3F4 000A6FD4  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA3F8 000A6FD8  38 00 00 6B */	li r0, 0x6b
+/* 800AA3FC 000A6FDC  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA400 000A6FE0  4E 80 00 20 */	blr 
+entry lbl_800AA404
+/* 800AA404 000A6FE4  38 00 00 08 */	li r0, 8
+/* 800AA408 000A6FE8  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA40C 000A6FEC  38 00 00 75 */	li r0, 0x75
+/* 800AA410 000A6FF0  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA414 000A6FF4  4E 80 00 20 */	blr 
+entry lbl_800AA418
+/* 800AA418 000A6FF8  38 00 00 08 */	li r0, 8
+/* 800AA41C 000A6FFC  90 04 00 00 */	stw r0, 0(r4)
+/* 800AA420 000A7000  38 00 00 7F */	li r0, 0x7f
+/* 800AA424 000A7004  90 05 00 00 */	stw r0, 0(r5)
+/* 800AA428 000A7008  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
