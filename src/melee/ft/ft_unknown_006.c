@@ -39061,3 +39061,30 @@ lbl_800A59DC:
 /* 800A59E0 000A25C0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800A59E4()
+{ // clang-format off
+    nofralloc
+/* 800A59E4 000A25C4  28 03 00 00 */	cmplwi r3, 0
+/* 800A59E8 000A25C8  40 82 00 0C */	bne lbl_800A59F4
+/* 800A59EC 000A25CC  38 60 00 00 */	li r3, 0
+/* 800A59F0 000A25D0  4E 80 00 20 */	blr 
+lbl_800A59F4:
+/* 800A59F4 000A25D4  80 63 00 10 */	lwz r3, 0x10(r3)
+/* 800A59F8 000A25D8  2C 03 00 18 */	cmpwi r3, 0x18
+/* 800A59FC 000A25DC  41 82 00 1C */	beq lbl_800A5A18
+/* 800A5A00 000A25E0  38 03 FF EA */	addi r0, r3, -22
+/* 800A5A04 000A25E4  28 00 00 01 */	cmplwi r0, 1
+/* 800A5A08 000A25E8  40 81 00 10 */	ble lbl_800A5A18
+/* 800A5A0C 000A25EC  38 03 FF F5 */	addi r0, r3, -11
+/* 800A5A10 000A25F0  28 00 00 02 */	cmplwi r0, 2
+/* 800A5A14 000A25F4  41 81 00 0C */	bgt lbl_800A5A20
+lbl_800A5A18:
+/* 800A5A18 000A25F8  38 60 00 01 */	li r3, 1
+/* 800A5A1C 000A25FC  4E 80 00 20 */	blr 
+lbl_800A5A20:
+/* 800A5A20 000A2600  38 60 00 00 */	li r3, 0
+/* 800A5A24 000A2604  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
