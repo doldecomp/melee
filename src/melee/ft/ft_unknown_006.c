@@ -39114,3 +39114,26 @@ entry lbl_800A5A54
 /* 800A5A58 000A2638  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800A5A5C()
+{ // clang-format off
+    nofralloc
+/* 800A5A5C 000A263C  80 03 00 10 */	lwz r0, 0x10(r3)
+/* 800A5A60 000A2640  2C 00 00 03 */	cmpwi r0, 3
+/* 800A5A64 000A2644  41 82 00 24 */	beq lbl_800A5A88
+/* 800A5A68 000A2648  40 80 00 10 */	bge lbl_800A5A78
+/* 800A5A6C 000A264C  2C 00 00 01 */	cmpwi r0, 1
+/* 800A5A70 000A2650  40 80 00 10 */	bge lbl_800A5A80
+/* 800A5A74 000A2654  48 00 00 14 */	b lbl_800A5A88
+lbl_800A5A78:
+/* 800A5A78 000A2658  2C 00 00 06 */	cmpwi r0, 6
+/* 800A5A7C 000A265C  40 80 00 0C */	bge lbl_800A5A88
+lbl_800A5A80:
+/* 800A5A80 000A2660  38 60 00 01 */	li r3, 1
+/* 800A5A84 000A2664  4E 80 00 20 */	blr 
+lbl_800A5A88:
+/* 800A5A88 000A2668  38 60 00 00 */	li r3, 0
+/* 800A5A8C 000A266C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
