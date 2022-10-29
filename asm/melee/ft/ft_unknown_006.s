@@ -2,45 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_800A49B4
-func_800A49B4:
-/* 800A49B4 000A1594  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 800A49B8 000A1598  38 83 1A 88 */	addi r4, r3, 0x1a88
-/* 800A49BC 000A159C  C0 23 00 B4 */	lfs f1, 0xb4(r3)
-/* 800A49C0 000A15A0  C0 03 1A E0 */	lfs f0, 0x1ae0(r3)
-/* 800A49C4 000A15A4  C0 43 00 B0 */	lfs f2, 0xb0(r3)
-/* 800A49C8 000A15A8  EC 61 00 28 */	fsubs f3, f1, f0
-/* 800A49CC 000A15AC  C0 23 1A DC */	lfs f1, 0x1adc(r3)
-/* 800A49D0 000A15B0  C0 02 8D F8 */	lfs f0, lbl_804D87D8@sda21(r2)
-/* 800A49D4 000A15B4  EC 42 08 28 */	fsubs f2, f2, f1
-/* 800A49D8 000A15B8  EC 23 00 F2 */	fmuls f1, f3, f3
-/* 800A49DC 000A15BC  EC 82 08 BA */	fmadds f4, f2, f2, f1
-/* 800A49E0 000A15C0  FC 04 00 40 */	fcmpo cr0, f4, f0
-/* 800A49E4 000A15C4  40 81 00 50 */	ble lbl_800A4A34
-/* 800A49E8 000A15C8  FC 20 20 34 */	frsqrte f1, f4
-/* 800A49EC 000A15CC  C8 62 8E 50 */	lfd f3, lbl_804D8830@sda21(r2)
-/* 800A49F0 000A15D0  C8 42 8E E0 */	lfd f2, lbl_804D88C0@sda21(r2)
-/* 800A49F4 000A15D4  FC 01 00 72 */	fmul f0, f1, f1
-/* 800A49F8 000A15D8  FC 23 00 72 */	fmul f1, f3, f1
-/* 800A49FC 000A15DC  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 800A4A00 000A15E0  FC 21 00 32 */	fmul f1, f1, f0
-/* 800A4A04 000A15E4  FC 01 00 72 */	fmul f0, f1, f1
-/* 800A4A08 000A15E8  FC 23 00 72 */	fmul f1, f3, f1
-/* 800A4A0C 000A15EC  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 800A4A10 000A15F0  FC 21 00 32 */	fmul f1, f1, f0
-/* 800A4A14 000A15F4  FC 01 00 72 */	fmul f0, f1, f1
-/* 800A4A18 000A15F8  FC 23 00 72 */	fmul f1, f3, f1
-/* 800A4A1C 000A15FC  FC 04 10 3C */	fnmsub f0, f4, f0, f2
-/* 800A4A20 000A1600  FC 01 00 32 */	fmul f0, f1, f0
-/* 800A4A24 000A1604  FC 04 00 32 */	fmul f0, f4, f0
-/* 800A4A28 000A1608  FC 00 00 18 */	frsp f0, f0
-/* 800A4A2C 000A160C  D0 01 00 0C */	stfs f0, 0xc(r1)
-/* 800A4A30 000A1610  C0 81 00 0C */	lfs f4, 0xc(r1)
-lbl_800A4A34:
-/* 800A4A34 000A1614  D0 84 00 5C */	stfs f4, 0x5c(r4)
-/* 800A4A38 000A1618  38 21 00 10 */	addi r1, r1, 0x10
-/* 800A4A3C 000A161C  4E 80 00 20 */	blr 
-
 .global func_800A4A40
 func_800A4A40:
 /* 800A4A40 000A1620  7C 08 02 A6 */	mflr r0
