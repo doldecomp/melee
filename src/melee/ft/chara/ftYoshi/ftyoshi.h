@@ -48,5 +48,12 @@ unk_t func_8012C49C();
 unk_t func_8012C600();
 unk_t func_8012BDA0();
 unk_t func_8012CC1C();
+unk_t func_8012CD00();
+unk_t func_8012CCE0();
+unk_t func_8012CCF0();
+unk_t func_8012CCD0();
+unk_t func_8012CCC4();
+unk_t func_8012CC94();
+unk_t func_8012CDD4();
 
 #endif
