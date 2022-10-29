@@ -135,5 +135,6 @@ BOOL func_8009EF68(HSD_GObj* fighter_gobj);
 void func_8009F4A4(void);
 void func_8009F578(Fighter* fp);
 unk_t func_800C0658();
+void func_800A0DA4(Fighter* fp);
 
 #endif
