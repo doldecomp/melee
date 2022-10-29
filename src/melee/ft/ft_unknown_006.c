@@ -65050,3 +65050,8 @@ void func_800BBC78(void)
 {
     return;
 }
+
+void func_800BBC7C(void)
+{
+    return;
+}
