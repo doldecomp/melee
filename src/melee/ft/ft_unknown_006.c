@@ -11371,7 +11371,7 @@ asm unk_t func_80090574()
 #pragma pop
 
 #pragma push
-asm func_80090594(Fighter* fp, s32 damage_dealt, BOOL bool, s32 action_state_index, GroundOrAir ground_or_air, f32 vibrate_mult)
+asm void func_80090594(Fighter* fp, s32 damage_dealt, BOOL bool, s32 action_state_index, GroundOrAir ground_or_air, f32 vibrate_mult)
 { // clang-format off
     nofralloc
 /* 80090594 0008D174  7C 08 02 A6 */	mflr r0
