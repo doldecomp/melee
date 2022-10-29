@@ -2,41 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_800B463C
-func_800B463C:
-/* 800B463C 000B121C  7C 08 02 A6 */	mflr r0
-/* 800B4640 000B1220  90 01 00 04 */	stw r0, 4(r1)
-/* 800B4644 000B1224  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800B4648 000B1228  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800B464C 000B122C  3B E3 1A 88 */	addi r31, r3, 0x1a88
-/* 800B4650 000B1230  38 1F 05 54 */	addi r0, r31, 0x554
-/* 800B4654 000B1234  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 800B4658 000B1238  3B C4 00 00 */	addi r30, r4, 0
-/* 800B465C 000B123C  80 63 1F DC */	lwz r3, 0x1fdc(r3)
-/* 800B4660 000B1240  7C 03 00 40 */	cmplw r3, r0
-/* 800B4664 000B1244  41 80 00 28 */	blt lbl_800B468C
-/* 800B4668 000B1248  3C 60 80 3C */	lis r3, lbl_803C60E0@ha
-/* 800B466C 000B124C  4C C6 31 82 */	crclr 6
-/* 800B4670 000B1250  38 63 60 E0 */	addi r3, r3, lbl_803C60E0@l
-/* 800B4674 000B1254  48 29 10 35 */	bl OSReport
-/* 800B4678 000B1258  3C 60 80 3C */	lis r3, lbl_803C5DC4@ha
-/* 800B467C 000B125C  38 63 5D C4 */	addi r3, r3, lbl_803C5DC4@l
-/* 800B4680 000B1260  38 80 01 F5 */	li r4, 0x1f5
-/* 800B4684 000B1264  38 AD 84 C8 */	addi r5, r13, lbl_804D3B68@sda21
-/* 800B4688 000B1268  48 2D 3B 99 */	bl __assert
-lbl_800B468C:
-/* 800B468C 000B126C  80 7F 05 54 */	lwz r3, 0x554(r31)
-/* 800B4690 000B1270  9B C3 00 00 */	stb r30, 0(r3)
-/* 800B4694 000B1274  80 7F 05 54 */	lwz r3, 0x554(r31)
-/* 800B4698 000B1278  38 03 00 01 */	addi r0, r3, 1
-/* 800B469C 000B127C  90 1F 05 54 */	stw r0, 0x554(r31)
-/* 800B46A0 000B1280  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 800B46A4 000B1284  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 800B46A8 000B1288  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 800B46AC 000B128C  38 21 00 18 */	addi r1, r1, 0x18
-/* 800B46B0 000B1290  7C 08 03 A6 */	mtlr r0
-/* 800B46B4 000B1294  4E 80 00 20 */	blr 
-
 .global func_800B46B8
 func_800B46B8:
 /* 800B46B8 000B1298  7C 08 02 A6 */	mflr r0
@@ -50722,6 +50687,7 @@ jtbl_803C5D60:
 lbl_803C5DB0:
     .asciz "csP is bad address\n"
     .balign 4
+.global lbl_803C5DC4
 lbl_803C5DC4:
     .asciz "ftcmdscript.c"
     .balign 4
@@ -50922,6 +50888,7 @@ lbl_803C5DD4:
     .4byte lbl_800B43AC
     .4byte lbl_800B4504
     .4byte lbl_800B4570
+.global lbl_803C60E0
 lbl_803C60E0:
     .asciz "command script buffer over flow!\n"
     .balign 4
