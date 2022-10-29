@@ -47,5 +47,6 @@ BOOL func_801C4DD0(void);
 BOOL func_801C4DA0(Vec3* arg0, f32* arg1);
 void func_801C2374(HSD_LObj* lobj);
 unk_t func_801C49B4(void);
+void func_801C4368(f32*, f32*);
 
 #endif
