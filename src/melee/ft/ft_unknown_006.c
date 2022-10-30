@@ -78292,3 +78292,51 @@ asm unk_t func_800C5F60()
 /* 800C5F84 000C2B64  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern f32 const lbl_804D8DA0;
+extern f64 const lbl_804D8DA8;
+
+#pragma push
+asm unk_t func_800C5F88()
+{ // clang-format off
+    nofralloc
+/* 800C5F88 000C2B68  7C 08 02 A6 */	mflr r0
+/* 800C5F8C 000C2B6C  90 01 00 04 */	stw r0, 4(r1)
+/* 800C5F90 000C2B70  3C 00 43 30 */	lis r0, 0x4330
+/* 800C5F94 000C2B74  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 800C5F98 000C2B78  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 800C5F9C 000C2B7C  93 C1 00 20 */	stw r30, 0x20(r1)
+/* 800C5FA0 000C2B80  93 A1 00 1C */	stw r29, 0x1c(r1)
+/* 800C5FA4 000C2B84  7C 7D 1B 78 */	mr r29, r3
+/* 800C5FA8 000C2B88  80 8D AE B4 */	lwz r4, p_ftCommonData(r13)
+/* 800C5FAC 000C2B8C  83 C3 00 2C */	lwz r30, 0x2c(r3)
+/* 800C5FB0 000C2B90  80 84 06 B4 */	lwz r4, 0x6b4(r4)
+/* 800C5FB4 000C2B94  C8 22 93 C8 */	lfd f1, lbl_804D8DA8(r2)
+/* 800C5FB8 000C2B98  38 7E 00 00 */	addi r3, r30, 0
+/* 800C5FBC 000C2B9C  6C 84 80 00 */	xoris r4, r4, 0x8000
+/* 800C5FC0 000C2BA0  90 81 00 14 */	stw r4, 0x14(r1)
+/* 800C5FC4 000C2BA4  90 01 00 10 */	stw r0, 0x10(r1)
+/* 800C5FC8 000C2BA8  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 800C5FCC 000C2BAC  EC 00 08 28 */	fsubs f0, f0, f1
+/* 800C5FD0 000C2BB0  D0 1E 23 44 */	stfs f0, 0x2344(r30)
+/* 800C5FD4 000C2BB4  4B FF F4 F1 */	bl func_800C54C4
+/* 800C5FD8 000C2BB8  3B E3 00 00 */	addi r31, r3, 0
+/* 800C5FDC 000C2BBC  38 7E 00 00 */	addi r3, r30, 0
+/* 800C5FE0 000C2BC0  4B FF F4 AD */	bl func_800C548C
+/* 800C5FE4 000C2BC4  C0 42 93 C0 */	lfs f2, lbl_804D8DA0(r2)
+/* 800C5FE8 000C2BC8  38 7D 00 00 */	addi r3, r29, 0
+/* 800C5FEC 000C2BCC  38 DF 00 00 */	addi r6, r31, 0
+/* 800C5FF0 000C2BD0  38 80 01 39 */	li r4, 0x139
+/* 800C5FF4 000C2BD4  38 A0 00 01 */	li r5, 1
+/* 800C5FF8 000C2BD8  48 00 FA F5 */	bl func_800D5AEC
+/* 800C5FFC 000C2BDC  7F C3 F3 78 */	mr r3, r30
+/* 800C6000 000C2BE0  4B FF EE 95 */	bl func_800C4E94
+/* 800C6004 000C2BE4  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 800C6008 000C2BE8  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 800C600C 000C2BEC  83 C1 00 20 */	lwz r30, 0x20(r1)
+/* 800C6010 000C2BF0  83 A1 00 1C */	lwz r29, 0x1c(r1)
+/* 800C6014 000C2BF4  38 21 00 28 */	addi r1, r1, 0x28
+/* 800C6018 000C2BF8  7C 08 03 A6 */	mtlr r0
+/* 800C601C 000C2BFC  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
