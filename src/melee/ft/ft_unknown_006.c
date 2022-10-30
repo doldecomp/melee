@@ -4,6 +4,7 @@
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
@@ -76156,5 +76157,94 @@ asm unk_t func_800C4704()
 /* 800C4718 000C12F8  38 21 00 08 */	addi r1, r1, 8
 /* 800C471C 000C12FC  7C 08 03 A6 */	mtlr r0
 /* 800C4720 000C1300  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+extern unk_t lbl_800C48AC();
+extern unk_t lbl_800C4858();
+extern f32 const lbl_804D8D48;
+extern f32 const lbl_804D8D4C;
+
+#pragma push
+asm unk_t func_800C4724()
+{ // clang-format off
+    nofralloc
+/* 800C4724 000C1304  7C 08 02 A6 */	mflr r0
+/* 800C4728 000C1308  90 01 00 04 */	stw r0, 4(r1)
+/* 800C472C 000C130C  94 21 FF D8 */	stwu r1, -0x28(r1)
+/* 800C4730 000C1310  93 E1 00 24 */	stw r31, 0x24(r1)
+/* 800C4734 000C1314  93 C1 00 20 */	stw r30, 0x20(r1)
+/* 800C4738 000C1318  93 A1 00 1C */	stw r29, 0x1c(r1)
+/* 800C473C 000C131C  7C 7D 1B 78 */	mr r29, r3
+/* 800C4740 000C1320  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800C4744 000C1324  83 C3 00 28 */	lwz r30, 0x28(r3)
+/* 800C4748 000C1328  80 7F 19 74 */	lwz r3, 0x1974(r31)
+/* 800C474C 000C132C  C0 5F 02 74 */	lfs f2, 0x274(r31)
+/* 800C4750 000C1330  C0 3F 02 C8 */	lfs f1, 0x2c8(r31)
+/* 800C4754 000C1334  48 1C FC DD */	bl func_80294430
+/* 800C4758 000C1338  C0 1F 00 2C */	lfs f0, 0x2c(r31)
+/* 800C475C 000C133C  38 00 00 78 */	li r0, 0x78
+/* 800C4760 000C1340  38 7F 00 00 */	addi r3, r31, 0
+/* 800C4764 000C1344  D0 1F 23 58 */	stfs f0, 0x2358(r31)
+/* 800C4768 000C1348  C0 02 93 68 */	lfs f0, lbl_804D8D48(r2)
+/* 800C476C 000C134C  D0 1F 00 2C */	stfs f0, 0x2c(r31)
+/* 800C4770 000C1350  90 1F 23 5C */	stw r0, 0x235c(r31)
+/* 800C4774 000C1354  80 9F 00 B0 */	lwz r4, 0xb0(r31)
+/* 800C4778 000C1358  80 1F 00 B4 */	lwz r0, 0xb4(r31)
+/* 800C477C 000C135C  90 9F 23 40 */	stw r4, 0x2340(r31)
+/* 800C4780 000C1360  90 1F 23 44 */	stw r0, 0x2344(r31)
+/* 800C4784 000C1364  80 1F 00 B8 */	lwz r0, 0xb8(r31)
+/* 800C4788 000C1368  90 1F 23 48 */	stw r0, 0x2348(r31)
+/* 800C478C 000C136C  D0 1F 23 54 */	stfs f0, 0x2354(r31)
+/* 800C4790 000C1370  D0 1F 23 50 */	stfs f0, 0x2350(r31)
+/* 800C4794 000C1374  D0 1F 23 4C */	stfs f0, 0x234c(r31)
+/* 800C4798 000C1378  4B FB 8E 3D */	bl func_8007D5D4
+/* 800C479C 000C137C  C0 22 93 68 */	lfs f1, lbl_804D8D48(r2)
+/* 800C47A0 000C1380  7F A3 EB 78 */	mr r3, r29
+/* 800C47A4 000C1384  C0 42 93 6C */	lfs f2, lbl_804D8D4C(r2)
+/* 800C47A8 000C1388  38 80 01 31 */	li r4, 0x131
+/* 800C47AC 000C138C  FC 60 08 90 */	fmr f3, f1
+/* 800C47B0 000C1390  38 A0 00 00 */	li r5, 0
+/* 800C47B4 000C1394  38 C0 00 00 */	li r6, 0
+/* 800C47B8 000C1398  4B FA 4B F5 */	bl Fighter_ActionStateChange_800693AC
+/* 800C47BC 000C139C  7F A3 EB 78 */	mr r3, r29
+/* 800C47C0 000C13A0  4B FB 6E E1 */	bl func_8007B6A0
+/* 800C47C4 000C13A4  3C 60 80 0C */	lis r3, lbl_800C4858@ha
+/* 800C47C8 000C13A8  38 03 48 58 */	addi r0, r3, lbl_800C4858@l
+/* 800C47CC 000C13AC  3C 60 80 0C */	lis r3, lbl_800C48AC@ha
+/* 800C47D0 000C13B0  90 1F 21 DC */	stw r0, 0x21dc(r31)
+/* 800C47D4 000C13B4  38 03 48 AC */	addi r0, r3, lbl_800C48AC@l
+/* 800C47D8 000C13B8  90 1F 21 E4 */	stw r0, 0x21e4(r31)
+/* 800C47DC 000C13BC  38 80 00 01 */	li r4, 1
+/* 800C47E0 000C13C0  38 7D 00 00 */	addi r3, r29, 0
+/* 800C47E4 000C13C4  88 1F 22 19 */	lbz r0, 0x2219(r31)
+/* 800C47E8 000C13C8  50 80 2E B4 */	rlwimi r0, r4, 5, 0x1a, 0x1a
+/* 800C47EC 000C13CC  98 1F 22 19 */	stb r0, 0x2219(r31)
+/* 800C47F0 000C13D0  88 1F 22 22 */	lbz r0, 0x2222(r31)
+/* 800C47F4 000C13D4  50 80 07 FE */	rlwimi r0, r4, 0, 0x1f, 0x1f
+/* 800C47F8 000C13D8  98 1F 22 22 */	stb r0, 0x2222(r31)
+/* 800C47FC 000C13DC  88 1F 22 1E */	lbz r0, 0x221e(r31)
+/* 800C4800 000C13E0  50 80 2E B4 */	rlwimi r0, r4, 5, 0x1a, 0x1a
+/* 800C4804 000C13E4  98 1F 22 1E */	stb r0, 0x221e(r31)
+/* 800C4808 000C13E8  4B FB 9A F5 */	bl func_8007E2FC
+/* 800C480C 000C13EC  80 7F 19 74 */	lwz r3, 0x1974(r31)
+/* 800C4810 000C13F0  48 1C FB 55 */	bl func_80294364
+/* 800C4814 000C13F4  38 83 00 00 */	addi r4, r3, 0
+/* 800C4818 000C13F8  38 7E 00 00 */	addi r3, r30, 0
+/* 800C481C 000C13FC  38 A0 00 00 */	li r5, 0
+/* 800C4820 000C1400  38 C0 00 00 */	li r6, 0
+/* 800C4824 000C1404  48 2A B1 ED */	bl HSD_JObjAddAnim
+/* 800C4828 000C1408  7F C3 F3 78 */	mr r3, r30
+/* 800C482C 000C140C  C0 22 93 68 */	lfs f1, lbl_804D8D48(r2)
+/* 800C4830 000C1410  4B FA BF 05 */	bl func_80070734
+/* 800C4834 000C1414  7F C3 F3 78 */	mr r3, r30
+/* 800C4838 000C1418  48 2A BF 49 */	bl HSD_JObjAnim
+/* 800C483C 000C141C  80 01 00 2C */	lwz r0, 0x2c(r1)
+/* 800C4840 000C1420  83 E1 00 24 */	lwz r31, 0x24(r1)
+/* 800C4844 000C1424  83 C1 00 20 */	lwz r30, 0x20(r1)
+/* 800C4848 000C1428  83 A1 00 1C */	lwz r29, 0x1c(r1)
+/* 800C484C 000C142C  38 21 00 28 */	addi r1, r1, 0x28
+/* 800C4850 000C1430  7C 08 03 A6 */	mtlr r0
+/* 800C4854 000C1434  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop

@@ -1183,8 +1183,6 @@ void func_80268B9C(SpawnItem* spawnItem) // Item spawn prefunction - spawn groun
     func_8026862C(spawnItem);
 }
 
-extern void HSD_JObjAddAnim(void*, void*, void*, void*);
-
 // 0x80268BE0 //
 // https://decomp.me/scratch/gL9Td //
 void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3, Item* item_data) // Adds AObjs to item model //
@@ -1225,7 +1223,7 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
                     return;
                 }
         }
-        HSD_JObjAddAnim(item_jobj, anim_joint, matanim_joint, arg3);
+        HSD_JObjAddAnim(item_jobj, anim_joint, matanim_joint, (HSD_ShapeAnimJoint*) arg3);
         if (item_jobj->child != NULL)
         {
             functionArg1 = NULL;

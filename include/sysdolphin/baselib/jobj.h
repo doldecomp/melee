@@ -146,6 +146,7 @@ void HSD_JObjRemoveAll(HSD_JObj *); // sysdolphin/baselib/jobj.s
 HSD_JObj *HSD_JObjLoadJoint(HSD_Joint *);
 void HSD_JObjAddAnimAll(HSD_JObj *, HSD_AnimJoint *, HSD_MatAnimJoint *, HSD_ShapeAnimJoint *);
 void HSD_JObjAnimAll(HSD_JObj *); // asm/sysdolphin/baselib/jobj.s
+void HSD_JObjAnim(HSD_JObj* jobj);
 void HSD_JObjSetFlags(HSD_JObj*, u32 flags);
 void HSD_JObjSetFlagsAll(HSD_JObj*, u32 flags);
 void HSD_JObjClearFlags(HSD_JObj*, u32 flags);
@@ -153,6 +154,7 @@ void HSD_JObjClearFlagsAll(HSD_JObj*, u32 flags);
 HSD_JObj* HSD_JObjAlloc(void);
 void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
 HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj);
+void HSD_JObjAddAnim(HSD_JObj*, HSD_AnimJoint* an_joint, HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint);
 
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
