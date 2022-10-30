@@ -44,5 +44,6 @@ unk_t func_8004CBE8();
 void func_80043680(CollData*, Vec3*);
 unk_t func_800443C4();
 unk_t func_80044164();
+void func_80043670(CollData*);
 
 #endif
