@@ -672,8 +672,6 @@ void ftFox_SpecialNEnd_Coll(HSD_GObj* fighter_gobj)
     func_80083F88(fighter_gobj);
 }
 
-extern void func_80082B78(HSD_GObj*);
-
 // 0x800E6C7C - Fox & Falco's aerial Blaster Start Collision callback
 void ftFox_SpecialAirNStart_Coll(HSD_GObj* fighter_gobj)
 {

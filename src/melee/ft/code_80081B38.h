@@ -37,5 +37,6 @@ unk_t func_800843FC();
 unk_t func_80082D40();
 unk_t func_80083464();
 unk_t func_80084CB0();
+void func_80082B78(HSD_GObj* fighter_gobj);
 
 #endif
