@@ -66501,3 +66501,8 @@ void func_800BCDD4(void)
 {
     return;
 }
+
+void func_800BCDD8(void)
+{
+    return;
+}
