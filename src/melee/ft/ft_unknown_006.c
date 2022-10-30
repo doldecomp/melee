@@ -70361,3 +70361,8 @@ void func_800BFE6C(void)
 {
     return;
 }
+
+void func_800BFE70(void)
+{
+    return;
+}
