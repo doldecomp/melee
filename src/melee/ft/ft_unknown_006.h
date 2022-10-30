@@ -166,5 +166,6 @@ void func_800C2FD8(HSD_GObj* fighter_gobj);
 void func_800C37A0(HSD_GObj* fighter_gobj);
 void func_800C511C(HSD_GObj* fighter_gobj);
 BOOL func_800C5240(HSD_GObj* fighter_gobj);
+void func_800C61B0(HSD_GObj* fighter_gobj);
 
 #endif
