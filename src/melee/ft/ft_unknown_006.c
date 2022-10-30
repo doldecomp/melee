@@ -66511,3 +66511,46 @@ void func_800BCDDC(void)
 {
     return;
 }
+
+extern f32 const lbl_804D8B90;
+extern f32 const lbl_804D8B94;
+
+#pragma push
+asm unk_t func_800BCDE0()
+{ // clang-format off
+    nofralloc
+/* 800BCDE0 000B99C0  7C 08 02 A6 */	mflr r0
+/* 800BCDE4 000B99C4  90 01 00 04 */	stw r0, 4(r1)
+/* 800BCDE8 000B99C8  38 00 00 00 */	li r0, 0
+/* 800BCDEC 000B99CC  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 800BCDF0 000B99D0  93 E1 00 2C */	stw r31, 0x2c(r1)
+/* 800BCDF4 000B99D4  93 C1 00 28 */	stw r30, 0x28(r1)
+/* 800BCDF8 000B99D8  7C 7E 1B 78 */	mr r30, r3
+/* 800BCDFC 000B99DC  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800BCE00 000B99E0  80 BF 1A 58 */	lwz r5, 0x1a58(r31)
+/* 800BCE04 000B99E4  80 C5 00 2C */	lwz r6, 0x2c(r5)
+/* 800BCE08 000B99E8  38 A0 00 00 */	li r5, 0
+/* 800BCE0C 000B99EC  C0 06 00 2C */	lfs f0, 0x2c(r6)
+/* 800BCE10 000B99F0  D0 1F 00 2C */	stfs f0, 0x2c(r31)
+/* 800BCE14 000B99F4  90 1F 23 40 */	stw r0, 0x2340(r31)
+/* 800BCE18 000B99F8  C0 22 91 B0 */	lfs f1, lbl_804D8B90(r2)
+/* 800BCE1C 000B99FC  C0 42 91 B4 */	lfs f2, lbl_804D8B94(r2)
+/* 800BCE20 000B9A00  FC 60 08 90 */	fmr f3, f1
+/* 800BCE24 000B9A04  80 DF 1A 58 */	lwz r6, 0x1a58(r31)
+/* 800BCE28 000B9A08  4B FA C5 85 */	bl Fighter_ActionStateChange_800693AC
+/* 800BCE2C 000B9A0C  3C 60 80 0E */	lis r3, func_800DE508@ha
+/* 800BCE30 000B9A10  38 03 E5 08 */	addi r0, r3, func_800DE508@l
+/* 800BCE34 000B9A14  90 1F 21 B0 */	stw r0, 0x21b0(r31)
+/* 800BCE38 000B9A18  38 7F 00 00 */	addi r3, r31, 0
+/* 800BCE3C 000B9A1C  38 80 01 FF */	li r4, 0x1ff
+/* 800BCE40 000B9A20  4B FC 14 B5 */	bl func_8007E2F4
+/* 800BCE44 000B9A24  7F C3 F3 78 */	mr r3, r30
+/* 800BCE48 000B9A28  4B FB 1D 5D */	bl func_8006EBA4
+/* 800BCE4C 000B9A2C  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 800BCE50 000B9A30  83 E1 00 2C */	lwz r31, 0x2c(r1)
+/* 800BCE54 000B9A34  83 C1 00 28 */	lwz r30, 0x28(r1)
+/* 800BCE58 000B9A38  38 21 00 30 */	addi r1, r1, 0x30
+/* 800BCE5C 000B9A3C  7C 08 03 A6 */	mtlr r0
+/* 800BCE60 000B9A40  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
