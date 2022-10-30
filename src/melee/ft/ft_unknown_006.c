@@ -75842,3 +75842,8 @@ void func_800C4384(void)
 {
     return;
 }
+
+void func_800C4388(void)
+{
+    return;
+}
