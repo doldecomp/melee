@@ -2,5 +2,6 @@
 #define MELEE_PL_PL_UNKNOWN_001_H
 
 unk_t func_8003EC30();
+unk_t func_800403C0();
 
 #endif
