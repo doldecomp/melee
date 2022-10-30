@@ -66422,3 +66422,8 @@ void func_800BCCF8(void)
 {
     return;
 }
+
+void func_800BCCFC(void)
+{
+    return;
+}
