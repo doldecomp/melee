@@ -78697,3 +78697,8 @@ asm unk_t lbl_800C63E0()
 /* 800C6400 000C2FE0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_800C6404()
+{
+    return;
+}
