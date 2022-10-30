@@ -66330,3 +66330,8 @@ void func_800BCC14(void)
 {
     return;
 }
+
+void func_800BCC18(void)
+{
+    return;
+}
