@@ -72115,3 +72115,8 @@ void func_800C134C(void)
 {
     return;
 }
+
+void func_800C1350(void)
+{
+    return;
+}
