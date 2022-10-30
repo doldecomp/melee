@@ -3,8 +3,9 @@
 
 #include <dolphin/types.h>
 
-extern unk_t func_8016B14C();
-extern BOOL func_8016B168(void);
-extern unk_t func_8016C6C0();
+unk_t func_8016B14C();
+BOOL func_8016B168(void);
+unk_t func_8016C6C0();
+unk_t func_80167320();
 
 #endif
