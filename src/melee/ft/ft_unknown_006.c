@@ -72031,3 +72031,45 @@ lbl_800C1234:
 /* 800C1248 000BDE28  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800C124C()
+{ // clang-format off
+    nofralloc
+/* 800C124C 000BDE2C  7C 08 02 A6 */	mflr r0
+/* 800C1250 000BDE30  38 80 01 27 */	li r4, 0x127
+/* 800C1254 000BDE34  90 01 00 04 */	stw r0, 4(r1)
+/* 800C1258 000BDE38  38 A0 10 82 */	li r5, 0x1082
+/* 800C125C 000BDE3C  38 C0 00 00 */	li r6, 0
+/* 800C1260 000BDE40  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800C1264 000BDE44  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 800C1268 000BDE48  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 800C126C 000BDE4C  7C 7E 1B 78 */	mr r30, r3
+/* 800C1270 000BDE50  C0 22 92 58 */	lfs f1, lbl_804D8C38(r2)
+/* 800C1274 000BDE54  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800C1278 000BDE58  FC 60 08 90 */	fmr f3, f1
+/* 800C127C 000BDE5C  C0 42 92 5C */	lfs f2, lbl_804D8C3C(r2)
+/* 800C1280 000BDE60  4B FA 81 2D */	bl Fighter_ActionStateChange_800693AC
+/* 800C1284 000BDE64  7F C3 F3 78 */	mr r3, r30
+/* 800C1288 000BDE68  4B FB D0 75 */	bl func_8007E2FC
+/* 800C128C 000BDE6C  38 7F 00 00 */	addi r3, r31, 0
+/* 800C1290 000BDE70  38 80 01 FF */	li r4, 0x1ff
+/* 800C1294 000BDE74  4B FB D0 61 */	bl func_8007E2F4
+/* 800C1298 000BDE78  88 1F 22 1D */	lbz r0, 0x221d(r31)
+/* 800C129C 000BDE7C  38 60 00 01 */	li r3, 1
+/* 800C12A0 000BDE80  50 60 17 7A */	rlwimi r0, r3, 2, 0x1d, 0x1d
+/* 800C12A4 000BDE84  98 1F 22 1D */	stb r0, 0x221d(r31)
+/* 800C12A8 000BDE88  88 1F 22 20 */	lbz r0, 0x2220(r31)
+/* 800C12AC 000BDE8C  50 60 26 F6 */	rlwimi r0, r3, 4, 0x1b, 0x1b
+/* 800C12B0 000BDE90  98 1F 22 20 */	stb r0, 0x2220(r31)
+/* 800C12B4 000BDE94  88 1F 22 24 */	lbz r0, 0x2224(r31)
+/* 800C12B8 000BDE98  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
+/* 800C12BC 000BDE9C  98 1F 22 24 */	stb r0, 0x2224(r31)
+/* 800C12C0 000BDEA0  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 800C12C4 000BDEA4  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 800C12C8 000BDEA8  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 800C12CC 000BDEAC  38 21 00 18 */	addi r1, r1, 0x18
+/* 800C12D0 000BDEB0  7C 08 03 A6 */	mtlr r0
+/* 800C12D4 000BDEB4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
