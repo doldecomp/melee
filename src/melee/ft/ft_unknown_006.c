@@ -66892,3 +66892,26 @@ void func_800BD198(void)
 {
     return;
 }
+
+#pragma push
+asm unk_t func_800BD19C()
+{ // clang-format off
+    nofralloc
+/* 800BD19C 000B9D7C  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 800BD1A0 000B9D80  C0 44 00 00 */	lfs f2, 0(r4)
+/* 800BD1A4 000B9D84  C0 63 00 B0 */	lfs f3, 0xb0(r3)
+/* 800BD1A8 000B9D88  C0 23 00 B4 */	lfs f1, 0xb4(r3)
+/* 800BD1AC 000B9D8C  C0 04 00 04 */	lfs f0, 4(r4)
+/* 800BD1B0 000B9D90  EC 83 10 28 */	fsubs f4, f3, f2
+/* 800BD1B4 000B9D94  C0 43 00 B8 */	lfs f2, 0xb8(r3)
+/* 800BD1B8 000B9D98  EC 61 00 28 */	fsubs f3, f1, f0
+/* 800BD1BC 000B9D9C  C0 04 00 08 */	lfs f0, 8(r4)
+/* 800BD1C0 000B9DA0  EC 24 01 32 */	fmuls f1, f4, f4
+/* 800BD1C4 000B9DA4  EC 42 00 28 */	fsubs f2, f2, f0
+/* 800BD1C8 000B9DA8  EC 03 00 F2 */	fmuls f0, f3, f3
+/* 800BD1CC 000B9DAC  EC 42 00 B2 */	fmuls f2, f2, f2
+/* 800BD1D0 000B9DB0  EC 01 00 2A */	fadds f0, f1, f0
+/* 800BD1D4 000B9DB4  EC 22 00 2A */	fadds f1, f2, f0
+/* 800BD1D8 000B9DB8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
