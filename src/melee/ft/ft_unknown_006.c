@@ -80703,3 +80703,26 @@ lbl_800C7BD4:
 /* 800C7C5C 000C483C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800C7C60()
+{ // clang-format off
+    nofralloc
+/* 800C7C60 000C4840  7C 08 02 A6 */	mflr r0
+/* 800C7C64 000C4844  90 01 00 04 */	stw r0, 4(r1)
+/* 800C7C68 000C4848  6C 80 80 00 */	xoris r0, r4, 0x8000
+/* 800C7C6C 000C484C  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800C7C70 000C4850  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800C7C74 000C4854  3C 00 43 30 */	lis r0, 0x4330
+/* 800C7C78 000C4858  C8 22 94 50 */	lfd f1, lbl_804D8E30(r2)
+/* 800C7C7C 000C485C  90 01 00 10 */	stw r0, 0x10(r1)
+/* 800C7C80 000C4860  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 800C7C84 000C4864  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 800C7C88 000C4868  EC 20 08 28 */	fsubs f1, f0, f1
+/* 800C7C8C 000C486C  4B FA 4F F1 */	bl Fighter_TakeDamage_8006CC7C
+/* 800C7C90 000C4870  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 800C7C94 000C4874  38 21 00 18 */	addi r1, r1, 0x18
+/* 800C7C98 000C4878  7C 08 03 A6 */	mtlr r0
+/* 800C7C9C 000C487C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
