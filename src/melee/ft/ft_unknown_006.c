@@ -78660,3 +78660,8 @@ void func_800C63B4()
 {
     return;
 }
+
+void func_800C63B8()
+{
+    return;
+}
