@@ -2,10 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_800BD198
-func_800BD198:
-/* 800BD198 000B9D78  4E 80 00 20 */	blr 
-
 .global func_800BD19C
 func_800BD19C:
 /* 800BD19C 000B9D7C  80 63 00 2C */	lwz r3, 0x2c(r3)
