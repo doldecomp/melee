@@ -68179,3 +68179,8 @@ lbl_800BE200:
 /* 800BE254 000BAE34  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_800BE258(void)
+{
+    return;
+}
