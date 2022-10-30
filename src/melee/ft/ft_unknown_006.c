@@ -71967,3 +71967,32 @@ lbl_800C1178:
 /* 800C1190 000BDD70  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800C1194()
+{ // clang-format off
+    nofralloc
+/* 800C1194 000BDD74  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 800C1198 000BDD78  38 83 23 44 */	addi r4, r3, 0x2344
+/* 800C119C 000BDD7C  C0 43 23 58 */	lfs f2, 0x2358(r3)
+/* 800C11A0 000BDD80  C0 03 23 50 */	lfs f0, 0x2350(r3)
+/* 800C11A4 000BDD84  FC 02 00 40 */	fcmpo cr0, f2, f0
+/* 800C11A8 000BDD88  40 80 00 08 */	bge lbl_800C11B0
+/* 800C11AC 000BDD8C  48 00 00 08 */	b lbl_800C11B4
+lbl_800C11B0:
+/* 800C11B0 000BDD90  FC 40 00 90 */	fmr f2, f0
+lbl_800C11B4:
+/* 800C11B4 000BDD94  C0 24 00 04 */	lfs f1, 4(r4)
+/* 800C11B8 000BDD98  C0 03 23 5C */	lfs f0, 0x235c(r3)
+/* 800C11BC 000BDD9C  EC 01 00 2A */	fadds f0, f1, f0
+/* 800C11C0 000BDDA0  D0 04 00 04 */	stfs f0, 4(r4)
+/* 800C11C4 000BDDA4  C0 22 92 5C */	lfs f1, lbl_804D8C3C(r2)
+/* 800C11C8 000BDDA8  C0 04 00 04 */	lfs f0, 4(r4)
+/* 800C11CC 000BDDAC  EC 01 00 2A */	fadds f0, f1, f0
+/* 800C11D0 000BDDB0  FC 00 10 40 */	fcmpo cr0, f0, f2
+/* 800C11D4 000BDDB4  4C 81 00 20 */	blelr 
+/* 800C11D8 000BDDB8  EC 02 08 28 */	fsubs f0, f2, f1
+/* 800C11DC 000BDDBC  D0 04 00 04 */	stfs f0, 4(r4)
+/* 800C11E0 000BDDC0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
