@@ -66590,3 +66590,8 @@ asm unk_t func_800BCE64()
 /* 800BCED4 000B9AB4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_800BCED8(void)
+{
+    return;
+}
