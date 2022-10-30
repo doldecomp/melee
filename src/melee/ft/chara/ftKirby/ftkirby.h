@@ -31,5 +31,13 @@ unk_t func_800F5B20();
 unk_t func_800F5B5C();
 unk_t func_800F5B3C();
 unk_t func_800F5B4C();
+unk_t func_800F5954();
+unk_t func_800F597C();
+unk_t func_800F5A60();
+unk_t func_800F598C();
+unk_t func_800F5B10();
+unk_t func_800F5B00();
+unk_t func_800F5A04();
+unk_t func_800F5A38();
 
 #endif
