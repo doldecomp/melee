@@ -66427,3 +66427,33 @@ void func_800BCCFC(void)
 {
     return;
 }
+
+#pragma push
+asm unk_t func_800BCD00()
+{ // clang-format off
+    nofralloc
+/* 800BCD00 000B98E0  7C 08 02 A6 */	mflr r0
+/* 800BCD04 000B98E4  38 80 01 1D */	li r4, 0x11d
+/* 800BCD08 000B98E8  90 01 00 04 */	stw r0, 4(r1)
+/* 800BCD0C 000B98EC  38 A0 00 00 */	li r5, 0
+/* 800BCD10 000B98F0  38 C0 00 00 */	li r6, 0
+/* 800BCD14 000B98F4  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800BCD18 000B98F8  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 800BCD1C 000B98FC  C0 22 91 A8 */	lfs f1, lbl_804D8B88(r2)
+/* 800BCD20 000B9900  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800BCD24 000B9904  FC 60 08 90 */	fmr f3, f1
+/* 800BCD28 000B9908  C0 42 91 AC */	lfs f2, lbl_804D8B8C(r2)
+/* 800BCD2C 000B990C  4B FA C6 81 */	bl Fighter_ActionStateChange_800693AC
+/* 800BCD30 000B9910  3C 60 80 0E */	lis r3, func_800DB464@ha
+/* 800BCD34 000B9914  38 03 B4 64 */	addi r0, r3, func_800DB464@l
+/* 800BCD38 000B9918  90 1F 21 B0 */	stw r0, 0x21b0(r31)
+/* 800BCD3C 000B991C  38 7F 00 00 */	addi r3, r31, 0
+/* 800BCD40 000B9920  38 80 01 FF */	li r4, 0x1ff
+/* 800BCD44 000B9924  4B FC 15 B1 */	bl func_8007E2F4
+/* 800BCD48 000B9928  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 800BCD4C 000B992C  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 800BCD50 000B9930  38 21 00 18 */	addi r1, r1, 0x18
+/* 800BCD54 000B9934  7C 08 03 A6 */	mtlr r0
+/* 800BCD58 000B9938  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
