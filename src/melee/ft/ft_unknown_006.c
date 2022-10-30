@@ -77355,3 +77355,14 @@ lbl_800C5530:
 /* 800C5548 000C2128  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800C554C()
+{ // clang-format off
+    nofralloc
+/* 800C554C 000C212C  80 8D AE B4 */	lwz r4, p_ftCommonData(r13)
+/* 800C5550 000C2130  80 04 06 B8 */	lwz r0, 0x6b8(r4)
+/* 800C5554 000C2134  90 03 23 3C */	stw r0, 0x233c(r3)
+/* 800C5558 000C2138  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

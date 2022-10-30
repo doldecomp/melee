@@ -2,13 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_800C554C
-func_800C554C:
-/* 800C554C 000C212C  80 8D AE B4 */	lwz r4, p_ftCommonData@sda21(r13)
-/* 800C5550 000C2130  80 04 06 B8 */	lwz r0, 0x6b8(r4)
-/* 800C5554 000C2134  90 03 23 3C */	stw r0, 0x233c(r3)
-/* 800C5558 000C2138  4E 80 00 20 */	blr 
-
 .global func_800C555C
 func_800C555C:
 /* 800C555C 000C213C  7C 08 02 A6 */	mflr r0
