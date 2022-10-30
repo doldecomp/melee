@@ -67050,3 +67050,8 @@ void func_800BD390(void)
 {
     return;
 }
+
+void func_800BD394(void)
+{
+    return;
+}
