@@ -76399,3 +76399,8 @@ lbl_800C499C:
 /* 800C4A10 000C15F0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_800C4A14()
+{
+    return;
+}
