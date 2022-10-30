@@ -67835,3 +67835,8 @@ lbl_800BDD58:
 /* 800BDDC0 000BA9A0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_800BDDC4(void)
+{
+    return;
+}
