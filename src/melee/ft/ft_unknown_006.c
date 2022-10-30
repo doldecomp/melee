@@ -74649,3 +74649,8 @@ lbl_800C3424:
 /* 800C3438 000C0018  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_800C343C(void)
+{
+    return;
+}
