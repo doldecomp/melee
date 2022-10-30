@@ -67,7 +67,6 @@ extern s32 func_80023220(s32);
 extern s32 func_800230C8(s32, s32*, s32*);
 extern s32 func_80023130();
 extern s32 func_800233EC(s32);
-extern s32 func_800C06B4(struct _Fighter*);
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1)
 {
@@ -71080,5 +71079,15 @@ lbl_800C06A8:
 lbl_800C06AC:
 /* 800C06AC 000BD28C  80 63 00 28 */	lwz r3, 0x28(r3)
 /* 800C06B0 000BD290  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm s32 func_800C06B4(Fighter* fp)
+{ // clang-format off
+    nofralloc
+/* 800C06B4 000BD294  80 63 05 30 */	lwz r3, 0x530(r3)
+/* 800C06B8 000BD298  38 63 00 7B */	addi r3, r3, 0x7b
+/* 800C06BC 000BD29C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
