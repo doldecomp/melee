@@ -49,5 +49,6 @@ void func_801C2374(HSD_LObj* lobj);
 unk_t func_801C49B4(void);
 void func_801C4368(f32*, f32*);
 s32 func_801C5794(void);
+BOOL func_801C5700(s32 i);
 
 #endif
