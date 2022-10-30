@@ -146,5 +146,6 @@ f32 func_800A1994(Fighter* fp);
 f32 func_800A1A24(Fighter* fp);
 BOOL func_800A2040(Fighter* fp);
 void func_800B3900(HSD_GObj* fighter_gobj);
+void func_800BFD04(HSD_GObj* fighter_gobj);
 
 #endif
