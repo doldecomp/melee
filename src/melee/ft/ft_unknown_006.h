@@ -162,5 +162,6 @@ extern unk_t lbl_804D6578;
 void func_800C09B4(HSD_GObj* fighter_gobj);
 void func_800C0A98(HSD_GObj* fighter_gobj);
 void func_800C1E64(HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32);
+void func_800C2FD8(HSD_GObj* fighter_gobj);
 
 #endif
