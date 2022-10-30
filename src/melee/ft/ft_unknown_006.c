@@ -76304,3 +76304,39 @@ asm unk_t lbl_800C48AC()
 /* 800C48FC 000C14DC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern unk_t func_800C4A38();
+
+#pragma push
+asm unk_t func_800C4900()
+{ // clang-format off
+    nofralloc
+/* 800C4900 000C14E0  7C 08 02 A6 */	mflr r0
+/* 800C4904 000C14E4  90 01 00 04 */	stw r0, 4(r1)
+/* 800C4908 000C14E8  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800C490C 000C14EC  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 800C4910 000C14F0  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 800C4914 000C14F4  7C 7E 1B 78 */	mr r30, r3
+/* 800C4918 000C14F8  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800C491C 000C14FC  80 7F 23 5C */	lwz r3, 0x235c(r31)
+/* 800C4920 000C1500  38 03 FF FF */	addi r0, r3, -1
+/* 800C4924 000C1504  90 1F 23 5C */	stw r0, 0x235c(r31)
+/* 800C4928 000C1508  48 16 02 41 */	bl Stage_GetBlastZoneTopOffset
+/* 800C492C 000C150C  C0 1F 00 B4 */	lfs f0, 0xb4(r31)
+/* 800C4930 000C1510  FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 800C4934 000C1514  41 81 00 10 */	bgt lbl_800C4944
+/* 800C4938 000C1518  80 1F 23 5C */	lwz r0, 0x235c(r31)
+/* 800C493C 000C151C  2C 00 00 00 */	cmpwi r0, 0
+/* 800C4940 000C1520  40 82 00 0C */	bne lbl_800C494C
+lbl_800C4944:
+/* 800C4944 000C1524  7F C3 F3 78 */	mr r3, r30
+/* 800C4948 000C1528  48 00 00 F1 */	bl func_800C4A38
+lbl_800C494C:
+/* 800C494C 000C152C  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 800C4950 000C1530  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 800C4954 000C1534  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 800C4958 000C1538  38 21 00 18 */	addi r1, r1, 0x18
+/* 800C495C 000C153C  7C 08 03 A6 */	mtlr r0
+/* 800C4960 000C1540  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
