@@ -80307,3 +80307,8 @@ void func_800C77B0()
 {
     return;
 }
+
+void func_800C77B4()
+{
+    return;
+}
