@@ -4,5 +4,6 @@
 #include <dolphin/types.h>
 
 unk_t func_80071028();
+unk_t func_800711DC();
 
 #endif
