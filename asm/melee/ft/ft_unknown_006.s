@@ -2,17 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global lbl_800BE7C0
-lbl_800BE7C0:
-/* 800BE7C0 000BB3A0  7C 08 02 A6 */	mflr r0
-/* 800BE7C4 000BB3A4  90 01 00 04 */	stw r0, 4(r1)
-/* 800BE7C8 000BB3A8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800BE7CC 000BB3AC  4B FA 93 E9 */	bl Fighter_UpdateModelScale
-/* 800BE7D0 000BB3B0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800BE7D4 000BB3B4  38 21 00 08 */	addi r1, r1, 8
-/* 800BE7D8 000BB3B8  7C 08 03 A6 */	mtlr r0
-/* 800BE7DC 000BB3BC  4E 80 00 20 */	blr 
-
 .global func_800BE7E0
 func_800BE7E0:
 /* 800BE7E0 000BB3C0  7C 08 02 A6 */	mflr r0
