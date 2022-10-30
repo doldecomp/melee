@@ -2,24 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global lbl_800BFF70
-lbl_800BFF70:
-/* 800BFF70 000BCB50  7C 08 02 A6 */	mflr r0
-/* 800BFF74 000BCB54  90 01 00 04 */	stw r0, 4(r1)
-/* 800BFF78 000BCB58  38 05 FF EB */	addi r0, r5, -21
-/* 800BFF7C 000BCB5C  3C A0 80 3C */	lis r5, lbl_803C6ADC@ha
-/* 800BFF80 000BCB60  54 06 10 3A */	slwi r6, r0, 2
-/* 800BFF84 000BCB64  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800BFF88 000BCB68  38 05 6A DC */	addi r0, r5, lbl_803C6ADC@l
-/* 800BFF8C 000BCB6C  7C A0 32 14 */	add r5, r0, r6
-/* 800BFF90 000BCB70  81 85 00 00 */	lwz r12, 0(r5)
-/* 800BFF94 000BCB74  7D 88 03 A6 */	mtlr r12
-/* 800BFF98 000BCB78  4E 80 00 21 */	blrl 
-/* 800BFF9C 000BCB7C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800BFFA0 000BCB80  38 21 00 08 */	addi r1, r1, 8
-/* 800BFFA4 000BCB84  7C 08 03 A6 */	mtlr r0
-/* 800BFFA8 000BCB88  4E 80 00 20 */	blr 
-
 .global func_800BFFAC
 func_800BFFAC:
 /* 800BFFAC 000BCB8C  7C 08 02 A6 */	mflr r0
@@ -38343,6 +38325,7 @@ lbl_803C6AD0:
     .4byte func_800BFE74
     .4byte func_800BFEB4
     .4byte func_800BFEF4
+.global lbl_803C6ADC
 lbl_803C6ADC:
     .4byte func_800BFE94
     .4byte func_800BFED4
