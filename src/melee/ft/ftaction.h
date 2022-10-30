@@ -1,0 +1,8 @@
+#ifndef MELEE_FT_FTACTION_H
+#define MELEE_FT_FTACTION_H
+
+#include <dolphin/types.h>
+
+unk_t func_80071028();
+
+#endif

@@ -48,6 +48,7 @@
 #include <melee/ft/code_8007C630.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftaction.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcoll.h>
@@ -70366,3 +70367,18 @@ void func_800BFE70(void)
 {
     return;
 }
+
+#pragma push
+asm unk_t func_800BFE74()
+{ // clang-format off
+    nofralloc
+/* 800BFE74 000BCA54  7C 08 02 A6 */	mflr r0
+/* 800BFE78 000BCA58  90 01 00 04 */	stw r0, 4(r1)
+/* 800BFE7C 000BCA5C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 800BFE80 000BCA60  4B FB 11 A9 */	bl func_80071028
+/* 800BFE84 000BCA64  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 800BFE88 000BCA68  38 21 00 08 */	addi r1, r1, 8
+/* 800BFE8C 000BCA6C  7C 08 03 A6 */	mtlr r0
+/* 800BFE90 000BCA70  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
