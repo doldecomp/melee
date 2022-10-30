@@ -64,5 +64,8 @@ f32 func_80132DE0(HSD_GObj* gobj);
 f32 func_80132DD0(HSD_GObj* gobj);
 f32 func_80132E00(HSD_GObj* gobj);
 f32 func_80132DF0(HSD_GObj* gobj);
+f32 func_80132E20(HSD_GObj* gobj);
+f32 func_80132E10(HSD_GObj* gobj);
+f32 func_80132DC0(HSD_GObj* gobj);
 
 #endif
