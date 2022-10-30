@@ -66325,3 +66325,8 @@ lbl_800BCBFC:
 /* 800BCC10 000B97F0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void func_800BCC14(void)
+{
+    return;
+}
