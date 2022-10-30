@@ -1,3 +1,4 @@
+#include <Runtime/runtime.h>
 #include <common_structs.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GX_unknown_001.h>
@@ -73,7 +74,6 @@ void GXSetDispCopyDst(s32 arg0)
 }
 
 extern unk_t __GetImageTileCount();
-extern unk_t __cvt_fp2unsigned();
 
 #pragma push
 asm unk_t GXSetTexCopyDst()
