@@ -74591,3 +74591,24 @@ asm unk_t func_800C3370()
 /* 800C338C 000BFF6C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800C3390()
+{ // clang-format off
+    nofralloc
+/* 800C3390 000BFF70  7C 08 02 A6 */	mflr r0
+/* 800C3394 000BFF74  38 80 01 2A */	li r4, 0x12a
+/* 800C3398 000BFF78  90 01 00 04 */	stw r0, 4(r1)
+/* 800C339C 000BFF7C  38 A0 10 80 */	li r5, 0x1080
+/* 800C33A0 000BFF80  38 C0 00 00 */	li r6, 0
+/* 800C33A4 000BFF84  94 21 FF F8 */	stwu r1, -8(r1)
+/* 800C33A8 000BFF88  C0 22 92 E8 */	lfs f1, lbl_804D8CC8(r2)
+/* 800C33AC 000BFF8C  C0 42 92 EC */	lfs f2, lbl_804D8CCC(r2)
+/* 800C33B0 000BFF90  FC 60 08 90 */	fmr f3, f1
+/* 800C33B4 000BFF94  4B FA 5F F9 */	bl Fighter_ActionStateChange_800693AC
+/* 800C33B8 000BFF98  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 800C33BC 000BFF9C  38 21 00 08 */	addi r1, r1, 8
+/* 800C33C0 000BFFA0  7C 08 03 A6 */	mtlr r0
+/* 800C33C4 000BFFA4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
