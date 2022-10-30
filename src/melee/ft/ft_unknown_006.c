@@ -71108,3 +71108,47 @@ asm unk_t func_800C06C0()
 /* 800C06E4 000BD2C4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern char* lbl_803C6B18;
+extern char* lbl_803C6B40;
+extern char* lbl_804D3C18;
+
+#pragma push
+asm unk_t func_800C06E8()
+{ // clang-format off
+    nofralloc
+/* 800C06E8 000BD2C8  7C 08 02 A6 */	mflr r0
+/* 800C06EC 000BD2CC  3C C0 80 46 */	lis r6, lbl_80459A68@ha
+/* 800C06F0 000BD2D0  90 01 00 04 */	stw r0, 4(r1)
+/* 800C06F4 000BD2D4  38 C6 9A 68 */	addi r6, r6, lbl_80459A68@l
+/* 800C06F8 000BD2D8  38 E0 00 00 */	li r7, 0
+/* 800C06FC 000BD2DC  94 21 FF F8 */	stwu r1, -8(r1)
+/* 800C0700 000BD2E0  80 06 00 00 */	lwz r0, 0(r6)
+/* 800C0704 000BD2E4  28 00 00 00 */	cmplwi r0, 0
+/* 800C0708 000BD2E8  40 82 00 28 */	bne lbl_800C0730
+/* 800C070C 000BD2EC  1C 07 00 0C */	mulli r0, r7, 0xc
+/* 800C0710 000BD2F0  7C 66 01 2E */	stwx r3, r6, r0
+/* 800C0714 000BD2F4  7C 66 02 14 */	add r3, r6, r0
+/* 800C0718 000BD2F8  90 83 00 04 */	stw r4, 4(r3)
+/* 800C071C 000BD2FC  90 A3 00 08 */	stw r5, 8(r3)
+/* 800C0720 000BD300  80 6D AE D8 */	lwz r3, lbl_804D6578(r13)
+/* 800C0724 000BD304  38 03 00 01 */	addi r0, r3, 1
+/* 800C0728 000BD308  90 0D AE D8 */	stw r0, lbl_804D6578(r13)
+/* 800C072C 000BD30C  48 00 00 28 */	b lbl_800C0754
+lbl_800C0730:
+/* 800C0730 000BD310  3C 60 80 3C */	lis r3, lbl_803C6B18@ha
+/* 800C0734 000BD314  4C C6 31 82 */	crclr 6
+/* 800C0738 000BD318  38 63 6B 18 */	addi r3, r3, lbl_803C6B18@l
+/* 800C073C 000BD31C  48 28 4F 6D */	bl OSReport
+/* 800C0740 000BD320  3C 60 80 3C */	lis r3, lbl_803C6B40@ha
+/* 800C0744 000BD324  38 63 6B 40 */	addi r3, r3, lbl_803C6B40@l
+/* 800C0748 000BD328  38 80 00 49 */	li r4, 0x49
+/* 800C074C 000BD32C  38 AD 85 78 */	addi r5, r13, lbl_804D3C18
+/* 800C0750 000BD330  48 2C 7A D1 */	bl __assert
+lbl_800C0754:
+/* 800C0754 000BD334  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 800C0758 000BD338  38 21 00 08 */	addi r1, r1, 8
+/* 800C075C 000BD33C  7C 08 03 A6 */	mtlr r0
+/* 800C0760 000BD340  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
