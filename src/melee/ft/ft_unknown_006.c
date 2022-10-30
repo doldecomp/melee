@@ -65666,3 +65666,18 @@ lbl_800BC41C:
 /* 800BC434 000B9014  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t lbl_800BC438()
+{ // clang-format off
+    nofralloc
+/* 800BC438 000B9018  7C 08 02 A6 */	mflr r0
+/* 800BC43C 000B901C  90 01 00 04 */	stw r0, 4(r1)
+/* 800BC440 000B9020  94 21 FF F8 */	stwu r1, -8(r1)
+/* 800BC444 000B9024  4B FA B7 71 */	bl Fighter_UpdateModelScale
+/* 800BC448 000B9028  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 800BC44C 000B902C  38 21 00 08 */	addi r1, r1, 8
+/* 800BC450 000B9030  7C 08 03 A6 */	mtlr r0
+/* 800BC454 000B9034  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
