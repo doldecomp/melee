@@ -155,5 +155,9 @@ void func_800C0200(Fighter* fp, s32);
 void func_800C0408(HSD_GObj* fighter_gobj);
 s32 func_800C0694(Fighter* fp);
 s32 func_800C06B4(Fighter* fp);
+extern unk_t lbl_80459A68;
+extern unk_t lbl_804D6570;
+extern unk_t lbl_804D6574;
+extern unk_t lbl_804D6578;
 
 #endif

@@ -71091,3 +71091,20 @@ asm s32 func_800C06B4(Fighter* fp)
 /* 800C06BC 000BD29C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t func_800C06C0()
+{ // clang-format off
+    nofralloc
+/* 800C06C0 000BD2A0  38 00 00 00 */	li r0, 0
+/* 800C06C4 000BD2A4  90 0D AE D0 */	stw r0, lbl_804D6570(r13)
+/* 800C06C8 000BD2A8  3C 60 80 46 */	lis r3, lbl_80459A68@ha
+/* 800C06CC 000BD2AC  90 0D AE D4 */	stw r0, lbl_804D6574(r13)
+/* 800C06D0 000BD2B0  90 0D AE D8 */	stw r0, lbl_804D6578(r13)
+/* 800C06D4 000BD2B4  94 03 9A 68 */	stwu r0, lbl_80459A68@l(r3)
+/* 800C06D8 000BD2B8  90 03 00 0C */	stw r0, 0xc(r3)
+/* 800C06DC 000BD2BC  90 03 00 18 */	stw r0, 0x18(r3)
+/* 800C06E0 000BD2C0  90 03 00 24 */	stw r0, 0x24(r3)
+/* 800C06E4 000BD2C4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
