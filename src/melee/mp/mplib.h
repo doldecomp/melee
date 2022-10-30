@@ -19,5 +19,6 @@ BOOL func_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x, f32 l
 unk_t func_80054CEC();
 unk_t func_8004F8A4();
 unk_t func_80052508();
+unk_t func_800524DC();
 
 #endif
