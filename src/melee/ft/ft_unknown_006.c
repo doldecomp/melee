@@ -68868,3 +68868,57 @@ asm unk_t func_800BEB28()
 /* 800BEB5C 000BB73C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern u32 lbl_803C6948[5];
+extern unk_t func_800BEC08();
+
+#pragma push
+asm unk_t func_800BEB60()
+{ // clang-format off
+    nofralloc
+/* 800Bfunc_800BEC08EB60 000BB740  7C 08 02 A6 */	mflr r0
+/* 800BEB64 000BB744  3C C0 80 3C */	lis r6, lbl_803C25F4@ha
+/* 800BEB68 000BB748  90 01 00 04 */	stw r0, 4(r1)
+/* 800BEB6C 000BB74C  54 67 18 38 */	slwi r7, r3, 3
+/* 800BEB70 000BB750  38 06 25 F4 */	addi r0, r6, lbl_803C25F4@l
+/* 800BEB74 000BB754  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800BEB78 000BB758  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800BEB7C 000BB75C  7F E0 3A 14 */	add r31, r0, r7
+/* 800BEB80 000BB760  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800BEB84 000BB764  3B C4 00 00 */	addi r30, r4, 0
+/* 800BEB88 000BB768  80 1F 00 00 */	lwz r0, 0(r31)
+/* 800BEB8C 000BB76C  28 00 00 00 */	cmplwi r0, 0
+/* 800BEB90 000BB770  40 82 00 60 */	bne lbl_800BEBF0
+/* 800BEB94 000BB774  2C 05 00 04 */	cmpwi r5, 4
+/* 800BEB98 000BB778  41 80 00 30 */	blt lbl_800BEBC8
+/* 800BEB9C 000BB77C  3C 80 80 3C */	lis r4, lbl_803C6948@ha
+/* 800BEBA0 000BB780  38 84 69 48 */	addi r4, r4, lbl_803C6948@l
+/* 800BEBA4 000BB784  54 A0 10 3A */	slwi r0, r5, 2
+/* 800BEBA8 000BB788  7C 84 02 14 */	add r4, r4, r0
+/* 800BEBAC 000BB78C  80 84 FF F0 */	lwz r4, -0x10(r4)
+/* 800BEBB0 000BB790  48 00 00 59 */	bl func_800BEC08
+/* 800BEBB4 000BB794  38 83 00 00 */	addi r4, r3, 0
+/* 800BEBB8 000BB798  38 7E 00 00 */	addi r3, r30, 0
+/* 800BEBBC 000BB79C  48 2C 17 9D */	bl HSD_ArchiveGetPublicAddress
+/* 800BEBC0 000BB7A0  90 7F 00 00 */	stw r3, 0(r31)
+/* 800BEBC4 000BB7A4  48 00 00 2C */	b lbl_800BEBF0
+lbl_800BEBC8:
+/* 800BEBC8 000BB7A8  3C 80 80 3C */	lis r4, lbl_803C2468@ha
+/* 800BEBCC 000BB7AC  54 63 10 3A */	slwi r3, r3, 2
+/* 800BEBD0 000BB7B0  38 04 24 68 */	addi r0, r4, lbl_803C2468@l
+/* 800BEBD4 000BB7B4  7C 60 1A 14 */	add r3, r0, r3
+/* 800BEBD8 000BB7B8  80 83 00 00 */	lwz r4, 0(r3)
+/* 800BEBDC 000BB7BC  54 A0 10 3A */	slwi r0, r5, 2
+/* 800BEBE0 000BB7C0  38 7E 00 00 */	addi r3, r30, 0
+/* 800BEBE4 000BB7C4  7C 84 00 2E */	lwzx r4, r4, r0
+/* 800BEBE8 000BB7C8  48 2C 17 71 */	bl HSD_ArchiveGetPublicAddress
+/* 800BEBEC 000BB7CC  90 7F 00 00 */	stw r3, 0(r31)
+lbl_800BEBF0:
+/* 800BEBF0 000BB7D0  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800BEBF4 000BB7D4  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800BEBF8 000BB7D8  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800BEBFC 000BB7DC  38 21 00 20 */	addi r1, r1, 0x20
+/* 800BEC00 000BB7E0  7C 08 03 A6 */	mtlr r0
+/* 800BEC04 000BB7E4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
