@@ -1,14 +1,10 @@
+#include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
 
 #include <melee/gm/code_801601C4.h>
 #include <melee/it/itkind.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/jobj.h>
-
-extern struct {
-    void* unk0;
-    u8 unk4;
-} CostumeListsForeachCharacter[];
 
 extern s8 lbl_803C26FC[];
 
@@ -891,7 +887,7 @@ void func_80087574(s8 arg)
     u8 i;
     func_8008572C(arg);
     func_8006737C(lbl_803C26FC[arg]);
-    for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++) {
+    for (i = 0; i < CostumeListsForeachCharacter[arg].numCostumes; i++) {
         func_80085820(arg, i);
     }
     func_80085A14(arg);

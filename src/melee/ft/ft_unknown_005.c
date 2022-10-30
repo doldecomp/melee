@@ -50,7 +50,6 @@ lbl_80085250:
 #pragma pop
 
 extern ftData* gFtDataList[33];
-extern unk_t CostumeListsForeachCharacter[];
 
 #pragma push
 asm void func_800852B0(HSD_GObj* fighter_gobj)

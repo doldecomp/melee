@@ -2240,4 +2240,35 @@ inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj) {
 extern unk_t lbl_804D6520;
 extern ftCommonData* p_ftCommonData;
 
+// external vars from asm/melee/ft/ft_unknown_005.s
+typedef void (*ft_callback)(HSD_GObj* gobj);
+typedef void (*fn_ptr_t)();
+
+extern ft_callback ft_OnLoad[33];  // One load  callback for every character.
+extern ft_callback ft_OnDeath[33]; // One death callback for every character.
+extern ft_callback ft_OnAbsorb[33];
+extern ft_callback lbl_803C1DB4[33]; // probably ft_OnSomething
+extern ft_callback ft_OnUserDataRemove[33];
+
+extern fn_ptr_t lbl_803C10D0[33];
+
+extern struct UnkCostumeList CostumeListsForeachCharacter[33];
+
+extern ftData* gFtDataList[33];
+extern struct ActionState ActionStateList[341];
+extern struct ActionState* ActionStateTableByCharacter[33];
+
+extern s8 lbl_803C26FC[33];
+
+extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
+
+extern HSD_PadStatus HSD_PadRumbleData[4];
+
+extern s32 g_debugLevel; // asm/melee/db/db_unknown_001.s
+
+extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
+
+extern HSD_ObjAllocData lbl_80458FD0;
+extern HSD_ObjAllocData lbl_80458FFC;
+
 #endif

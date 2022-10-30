@@ -280,7 +280,6 @@ void func_800857E0(u32);
 void func_80085820();
 
 void func_800859A8();
-void func_80085A14(u32);
 void func_80085B10();
 
 void func_80085CD8();
