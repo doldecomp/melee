@@ -68962,3 +68962,27 @@ lbl_800BEC64:
 /* 800BEC70 000BB850  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern f64 const lbl_804D8BF8;
+
+#pragma push
+asm unk_t func_SetEntityFacingDirection()
+{ // clang-format off
+    nofralloc
+/* 800BEC74 000BB854  7C 08 02 A6 */	mflr r0
+/* 800BEC78 000BB858  38 80 00 00 */	li r4, 0
+/* 800BEC7C 000BB85C  90 01 00 04 */	stw r0, 4(r1)
+/* 800BEC80 000BB860  94 21 FF F8 */	stwu r1, -8(r1)
+/* 800BEC84 000BB864  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 800BEC88 000BB868  D0 23 00 2C */	stfs f1, 0x2c(r3)
+/* 800BEC8C 000BB86C  C8 22 92 18 */	lfd f1, lbl_804D8BF8(r2)
+/* 800BEC90 000BB870  C0 03 00 2C */	lfs f0, 0x2c(r3)
+/* 800BEC94 000BB874  FC 21 00 32 */	fmul f1, f1, f0
+/* 800BEC98 000BB878  FC 20 08 18 */	frsp f1, f1
+/* 800BEC9C 000BB87C  4B FB 6E 55 */	bl func_80075AF0
+/* 800BECA0 000BB880  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 800BECA4 000BB884  38 21 00 08 */	addi r1, r1, 8
+/* 800BECA8 000BB888  7C 08 03 A6 */	mtlr r0
+/* 800BECAC 000BB88C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

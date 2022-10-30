@@ -2,24 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_SetEntityFacingDirection
-func_SetEntityFacingDirection:
-/* 800BEC74 000BB854  7C 08 02 A6 */	mflr r0
-/* 800BEC78 000BB858  38 80 00 00 */	li r4, 0
-/* 800BEC7C 000BB85C  90 01 00 04 */	stw r0, 4(r1)
-/* 800BEC80 000BB860  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800BEC84 000BB864  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 800BEC88 000BB868  D0 23 00 2C */	stfs f1, 0x2c(r3)
-/* 800BEC8C 000BB86C  C8 22 92 18 */	lfd f1, lbl_804D8BF8@sda21(r2)
-/* 800BEC90 000BB870  C0 03 00 2C */	lfs f0, 0x2c(r3)
-/* 800BEC94 000BB874  FC 21 00 32 */	fmul f1, f1, f0
-/* 800BEC98 000BB878  FC 20 08 18 */	frsp f1, f1
-/* 800BEC9C 000BB87C  4B FB 6E 55 */	bl func_80075AF0
-/* 800BECA0 000BB880  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800BECA4 000BB884  38 21 00 08 */	addi r1, r1, 8
-/* 800BECA8 000BB888  7C 08 03 A6 */	mtlr r0
-/* 800BECAC 000BB88C  4E 80 00 20 */	blr 
-
 func_800BECB0:
 /* 800BECB0 000BB890  7C 08 02 A6 */	mflr r0
 /* 800BECB4 000BB894  38 80 00 00 */	li r4, 0
@@ -41591,6 +41573,7 @@ lbl_804D8BF0:
 .global lbl_804D8BF4
 lbl_804D8BF4:
 	.float 1.0
+.global lbl_804D8BF8
 lbl_804D8BF8:
 	.double 1.5707963267948966
 lbl_804D8C00:
