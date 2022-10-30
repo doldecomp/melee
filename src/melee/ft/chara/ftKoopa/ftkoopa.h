@@ -60,5 +60,7 @@ typedef struct _ftKoopaVars {
 void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj);
 void func_8013302C(HSD_GObj *gobj);
 void func_801330E4(HSD_GObj* gobj);
+f32 func_80132DE0(HSD_GObj* gobj);
+f32 func_80132DD0(HSD_GObj* gobj);
 
 #endif
