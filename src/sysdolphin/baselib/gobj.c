@@ -107,8 +107,6 @@ u32 func_80390EB8(s32 i)
     return lbl_804085F0[i];
 }
 
-extern HSD_GObj* lbl_804D7814;
-
 inline void render_gobj(HSD_GObj* cur, s32 i)
 {
     HSD_GObj* saved = lbl_804D7814;

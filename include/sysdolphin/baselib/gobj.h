@@ -100,6 +100,7 @@ typedef struct _GObjFuncs GObjFuncs;
 
 extern HSD_GObj* lbl_804D797C;
 extern HSD_GObj** lbl_804D7820;
+extern HSD_GObj* lbl_804D7814;
 extern HSD_GObj** lbl_804D7824;
 extern HSD_GObjLibInitDataType HSD_GObjLibInitData;
 extern HSD_GObj** plinklow_gobjs;

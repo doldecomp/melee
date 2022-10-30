@@ -155,5 +155,6 @@ typedef union _HSD_TExp {
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp);
 HSD_TExp* HSD_TExpTev(HSD_TExp**);
 HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
+unk_t func_80384F28();
 
 #endif
