@@ -66660,3 +66660,8 @@ void func_800BCF0C(void)
 {
     return;
 }
+
+void func_800BCF10(void)
+{
+    return;
+}
