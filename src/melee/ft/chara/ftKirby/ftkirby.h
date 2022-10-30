@@ -45,5 +45,7 @@ unk_t func_800F5A88();
 unk_t func_800F58AC();
 unk_t func_800F5AD8();
 unk_t func_800F5AC0();
+unk_t func_800F5AB0();
+unk_t func_800F58D8();
 
 #endif
