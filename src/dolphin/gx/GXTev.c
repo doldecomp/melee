@@ -1,4 +1,4 @@
-#include <dolphin/gx/__types.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GXTev.h>
 
@@ -361,6 +361,7 @@ asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red, GXTevColo
 
 void GXSetTevClampMode(s32, s32)
 {
+    return;
 }
 
 void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1, u8 ref1)
