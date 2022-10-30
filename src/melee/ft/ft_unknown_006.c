@@ -57,6 +57,7 @@
 #include <melee/ft/code_8007C630.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_005.h>
 #include <melee/ft/ftaction.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
@@ -79742,5 +79743,20 @@ lbl_800C7144:
 /* 800C714C 000C3D2C  38 21 00 18 */	addi r1, r1, 0x18
 /* 800C7150 000C3D30  7C 08 03 A6 */	mtlr r0
 /* 800C7154 000C3D34  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t func_800C7158()
+{ // clang-format off
+    nofralloc
+/* 800C7158 000C3D38  7C 08 02 A6 */	mflr r0
+/* 800C715C 000C3D3C  90 01 00 04 */	stw r0, 4(r1)
+/* 800C7160 000C3D40  94 21 FF F8 */	stwu r1, -8(r1)
+/* 800C7164 000C3D44  4B FB E0 B9 */	bl func_8008521C
+/* 800C7168 000C3D48  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 800C716C 000C3D4C  38 21 00 08 */	addi r1, r1, 8
+/* 800C7170 000C3D50  7C 08 03 A6 */	mtlr r0
+/* 800C7174 000C3D54  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
