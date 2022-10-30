@@ -71152,3 +71152,52 @@ lbl_800C0754:
 /* 800C0760 000BD340  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+extern char* lbl_803C6B4C;
+
+#pragma push
+asm unk_t func_800C0764()
+{ // clang-format off
+    nofralloc
+/* 800C0764 000BD344  7C 08 02 A6 */	mflr r0
+/* 800C0768 000BD348  3C C0 80 46 */	lis r6, lbl_80459A68@ha
+/* 800C076C 000BD34C  90 01 00 04 */	stw r0, 4(r1)
+/* 800C0770 000BD350  38 00 00 02 */	li r0, 2
+/* 800C0774 000BD354  38 C6 9A 68 */	addi r6, r6, lbl_80459A68@l
+/* 800C0778 000BD358  7C 09 03 A6 */	mtctr r0
+/* 800C077C 000BD35C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 800C0780 000BD360  38 E6 00 0C */	addi r7, r6, 0xc
+/* 800C0784 000BD364  39 00 00 00 */	li r8, 0
+lbl_800C0788:
+/* 800C0788 000BD368  80 07 00 00 */	lwz r0, 0(r7)
+/* 800C078C 000BD36C  28 00 00 00 */	cmplwi r0, 0
+/* 800C0790 000BD370  40 82 00 28 */	bne lbl_800C07B8
+/* 800C0794 000BD374  1C 08 00 0C */	mulli r0, r8, 0xc
+/* 800C0798 000BD378  7C C6 02 14 */	add r6, r6, r0
+/* 800C079C 000BD37C  90 66 00 0C */	stw r3, 0xc(r6)
+/* 800C07A0 000BD380  90 86 00 10 */	stw r4, 0x10(r6)
+/* 800C07A4 000BD384  90 A6 00 14 */	stw r5, 0x14(r6)
+/* 800C07A8 000BD388  80 6D AE D4 */	lwz r3, lbl_804D6574(r13)
+/* 800C07AC 000BD38C  38 03 00 01 */	addi r0, r3, 1
+/* 800C07B0 000BD390  90 0D AE D4 */	stw r0, lbl_804D6574(r13)
+/* 800C07B4 000BD394  48 00 00 34 */	b lbl_800C07E8
+lbl_800C07B8:
+/* 800C07B8 000BD398  38 E7 00 0C */	addi r7, r7, 0xc
+/* 800C07BC 000BD39C  39 08 00 01 */	addi r8, r8, 1
+/* 800C07C0 000BD3A0  42 00 FF C8 */	bdnz lbl_800C0788
+/* 800C07C4 000BD3A4  3C 60 80 3C */	lis r3, lbl_803C6B4C@ha
+/* 800C07C8 000BD3A8  4C C6 31 82 */	crclr 6
+/* 800C07CC 000BD3AC  38 63 6B 4C */	addi r3, r3, lbl_803C6B4C@l
+/* 800C07D0 000BD3B0  48 28 4E D9 */	bl OSReport
+/* 800C07D4 000BD3B4  3C 60 80 3C */	lis r3, lbl_803C6B40@ha
+/* 800C07D8 000BD3B8  38 63 6B 40 */	addi r3, r3, lbl_803C6B40@l
+/* 800C07DC 000BD3BC  38 80 00 6F */	li r4, 0x6f
+/* 800C07E0 000BD3C0  38 AD 85 78 */	addi r5, r13, lbl_804D3C18
+/* 800C07E4 000BD3C4  48 2C 7A 3D */	bl __assert
+lbl_800C07E8:
+/* 800C07E8 000BD3C8  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 800C07EC 000BD3CC  38 21 00 08 */	addi r1, r1, 8
+/* 800C07F0 000BD3D0  7C 08 03 A6 */	mtlr r0
+/* 800C07F4 000BD3D4  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
