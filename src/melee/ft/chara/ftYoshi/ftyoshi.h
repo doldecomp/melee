@@ -61,5 +61,6 @@ unk_t func_8012CD70();
 unk_t func_8012CD88();
 unk_t func_8012CD28();
 unk_t func_8012CD10();
+unk_t func_8012CDB4();
 
 #endif
