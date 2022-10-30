@@ -301,8 +301,6 @@ void func_800880D8();
 
 void func_80088148(Fighter*, u32, u32, u32);
 
-void func_800C09B4(struct _HSD_GObj *);
-
 void func_800C0A98(struct _HSD_GObj *fighter_gobj);
 
 void func_800C1E64(struct _HSD_GObj *pPlayerEntityStruct, s32, s32, u8, f32); // UnclePunch Map file: AS_203_PassiveWalljump_Walljump

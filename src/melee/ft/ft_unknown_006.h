@@ -159,5 +159,6 @@ extern unk_t lbl_80459A68;
 extern unk_t lbl_804D6570;
 extern unk_t lbl_804D6574;
 extern unk_t lbl_804D6578;
+void func_800C09B4(HSD_GObj* fighter_gobj);
 
 #endif
