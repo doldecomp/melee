@@ -3,8 +3,9 @@
 
 #include <dolphin/types.h>
 
-extern unk_t func_8026F3D4();
-extern unk_t func_8027D2DC();
-extern unk_t func_8026F8B4();
+unk_t func_8026F3D4();
+unk_t func_8027D2DC();
+unk_t func_8026F8B4();
+unk_t func_8027B070();
 
 #endif

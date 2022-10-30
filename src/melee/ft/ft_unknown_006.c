@@ -67,6 +67,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftwalkcommon.h>
 
+#include <melee/it/code_80266F3C.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/it/item.h>
 
@@ -76837,5 +76838,48 @@ asm unk_t func_800C4ED8()
 /* 800C4F58 000C1B38  38 21 00 20 */	addi r1, r1, 0x20
 /* 800C4F5C 000C1B3C  7C 08 03 A6 */	mtlr r0
 /* 800C4F60 000C1B40  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
+
+#pragma push
+asm unk_t func_800C4F64()
+{ // clang-format off
+    nofralloc
+/* 800C4F64 000C1B44  7C 08 02 A6 */	mflr r0
+/* 800C4F68 000C1B48  90 01 00 04 */	stw r0, 4(r1)
+/* 800C4F6C 000C1B4C  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 800C4F70 000C1B50  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 800C4F74 000C1B54  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 800C4F78 000C1B58  7C 7E 1B 78 */	mr r30, r3
+/* 800C4F7C 000C1B5C  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 800C4F80 000C1B60  80 1F 23 38 */	lwz r0, 0x2338(r31)
+/* 800C4F84 000C1B64  2C 00 00 00 */	cmpwi r0, 0
+/* 800C4F88 000C1B68  41 82 00 10 */	beq lbl_800C4F98
+/* 800C4F8C 000C1B6C  7F C3 F3 78 */	mr r3, r30
+/* 800C4F90 000C1B70  4B FB 60 69 */	bl func_8007AFF8
+/* 800C4F94 000C1B74  48 00 00 40 */	b lbl_800C4FD4
+lbl_800C4F98:
+/* 800C4F98 000C1B78  C0 3F 08 94 */	lfs f1, 0x894(r31)
+/* 800C4F9C 000C1B7C  C0 02 93 7C */	lfs f0, lbl_804D8D5C(r2)
+/* 800C4FA0 000C1B80  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 800C4FA4 000C1B84  4C 41 13 82 */	cror 2, 1, 2
+/* 800C4FA8 000C1B88  40 82 00 2C */	bne lbl_800C4FD4
+/* 800C4FAC 000C1B8C  C0 1F 08 9C */	lfs f0, 0x89c(r31)
+/* 800C4FB0 000C1B90  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 800C4FB4 000C1B94  40 80 00 20 */	bge lbl_800C4FD4
+/* 800C4FB8 000C1B98  7F C3 F3 78 */	mr r3, r30
+/* 800C4FBC 000C1B9C  4B FC 42 E5 */	bl func_800892A0
+/* 800C4FC0 000C1BA0  7F C3 F3 78 */	mr r3, r30
+/* 800C4FC4 000C1BA4  4B FC 48 61 */	bl func_80089824
+/* 800C4FC8 000C1BA8  80 7F 19 74 */	lwz r3, 0x1974(r31)
+/* 800C4FCC 000C1BAC  7F C4 F3 78 */	mr r4, r30
+/* 800C4FD0 000C1BB0  48 1B 60 A1 */	bl func_8027B070
+lbl_800C4FD4:
+/* 800C4FD4 000C1BB4  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 800C4FD8 000C1BB8  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 800C4FDC 000C1BBC  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 800C4FE0 000C1BC0  38 21 00 18 */	addi r1, r1, 0x18
+/* 800C4FE4 000C1BC4  7C 08 03 A6 */	mtlr r0
+/* 800C4FE8 000C1BC8  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
