@@ -68184,3 +68184,8 @@ void func_800BE258(void)
 {
     return;
 }
+
+void func_800BE25C(void)
+{
+    return;
+}
