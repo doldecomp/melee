@@ -1185,7 +1185,7 @@ void func_80268B9C(SpawnItem* spawnItem) // Item spawn prefunction - spawn groun
 
 // 0x80268BE0 //
 // https://decomp.me/scratch/gL9Td //
-void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3, Item* item_data) // Adds AObjs to item model //
+void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint, Item* item_data) // Adds AObjs to item model //
 {
 
     void* functionArg1;
@@ -1210,20 +1210,20 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
                         {
                             functionArg1 = anim_joint->next;
                         }
-                        if (matanim_joint != NULL)
+                        if (mat_joint != NULL)
                         {
-                            functionArg2 = matanim_joint->next;
+                            functionArg2 = mat_joint->next;
                         }
-                        if (arg3 != NULL)
+                        if (sh_joint != NULL)
                         {
-                            functionArg3 = arg3->x4_unk;
+                            functionArg3 = sh_joint->next;
                         }
                         func_80268BE0(item_jobj->next, functionArg1, functionArg2, functionArg3, item_data);
                     }
                     return;
                 }
         }
-        HSD_JObjAddAnim(item_jobj, anim_joint, matanim_joint, (HSD_ShapeAnimJoint*) arg3);
+        HSD_JObjAddAnim(item_jobj, anim_joint, mat_joint, sh_joint);
         if (item_jobj->child != NULL)
         {
             functionArg1 = NULL;
@@ -1233,13 +1233,13 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
             {
                 functionArg1 = anim_joint->child;
             }
-            if (matanim_joint != NULL)
+            if (mat_joint != NULL)
             {
-                functionArg2 = matanim_joint->child;
+                functionArg2 = mat_joint->child;
             }
-            if (arg3 != NULL)
+            if (sh_joint != NULL)
             {
-                functionArg3 = arg3->x0_unk;
+                functionArg3 = sh_joint->child;
             }
             func_80268BE0(item_jobj->child, functionArg1, functionArg2, functionArg3, item_data);
         }
@@ -1252,13 +1252,13 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
             {
                 functionArg1 = anim_joint->next;
             }
-            if (matanim_joint != NULL)
+            if (mat_joint != NULL)
             {
-                functionArg2 = matanim_joint->next;
+                functionArg2 = mat_joint->next;
             }
-            if (arg3 != NULL)
+            if (sh_joint != NULL)
             {
-                functionArg3 = arg3->x4_unk;
+                functionArg3 = sh_joint->next;
             }
             func_80268BE0(item_jobj->next, functionArg1, functionArg2, functionArg3, item_data);
         }
