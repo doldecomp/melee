@@ -67534,3 +67534,8 @@ void func_800BD9D8(void)
 {
     return;
 }
+
+void func_800BD9DC(void)
+{
+    return;
+}
