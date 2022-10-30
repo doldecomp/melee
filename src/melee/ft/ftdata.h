@@ -13,5 +13,6 @@ extern unk_t lbl_803C52A0;
 extern unk_t lbl_803C2468;
 extern unk_t lbl_803C25F4;
 extern unk_t lbl_803C24EC;
+extern unk_t lbl_803C1E38;
 
 #endif
