@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTKIRBY_FTKIRBY_H
+#define MELEE_FT_CHARA_FTKIRBY_FTKIRBY_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -24,3 +25,11 @@ typedef struct _ftKirbyAttributes {
     f32 x384;
     u8 data_filler_4[0x424 - 0x388];
 } ftKirbyAttributes;
+
+unk_t func_800F5AF0();
+unk_t func_800F5B20();
+unk_t func_800F5B5C();
+unk_t func_800F5B3C();
+unk_t func_800F5B4C();
+
+#endif
