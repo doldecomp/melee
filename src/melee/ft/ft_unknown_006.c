@@ -66645,3 +66645,8 @@ void func_800BCF00(void)
 {
     return;
 }
+
+void func_800BCF04(void)
+{
+    return;
+}
