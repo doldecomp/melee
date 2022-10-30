@@ -1,6 +1,7 @@
 #include <common_structs.h>
 #include <melee/gr/grlib.h>
 #include <melee/it/item.h>
+#include <sysdolphin/baselib/jobj.h>
 
 extern s32 func_8016AE80();
 
@@ -781,7 +782,6 @@ void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj //
     func_80390A70(item_gobj, lbl_804D7849, jobj);
 }
 
-extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
 extern void* lbl_803F1F90[];
 
 // 0x8026814C //

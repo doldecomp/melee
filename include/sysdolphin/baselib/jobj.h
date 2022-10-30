@@ -152,6 +152,7 @@ void HSD_JObjClearFlags(HSD_JObj*, u32 flags);
 void HSD_JObjClearFlagsAll(HSD_JObj*, u32 flags);
 HSD_JObj* HSD_JObjAlloc(void);
 void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
+HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj);
 
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
