@@ -2,17 +2,6 @@
 
 .section .text  # 0x80087818 - 0x800DF934
 
-.global func_800C572C
-func_800C572C:
-/* 800C572C 000C230C  7C 08 02 A6 */	mflr r0
-/* 800C5730 000C2310  90 01 00 04 */	stw r0, 4(r1)
-/* 800C5734 000C2314  94 21 FF F8 */	stwu r1, -8(r1)
-/* 800C5738 000C2318  48 01 A9 29 */	bl ftWalkCommon_800E0060
-/* 800C573C 000C231C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 800C5740 000C2320  38 21 00 08 */	addi r1, r1, 8
-/* 800C5744 000C2324  7C 08 03 A6 */	mtlr r0
-/* 800C5748 000C2328  4E 80 00 20 */	blr 
-
 .global func_800C574C
 func_800C574C:
 /* 800C574C 000C232C  7C 08 02 A6 */	mflr r0
