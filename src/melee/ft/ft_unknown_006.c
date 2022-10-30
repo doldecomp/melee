@@ -66019,3 +66019,8 @@ void func_800BC8C4(void)
 {
     return;
 }
+
+void func_800BC8C8(void)
+{
+    return;
+}
