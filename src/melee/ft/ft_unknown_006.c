@@ -71065,3 +71065,20 @@ lbl_800C068C:
 /* 800C0690 000BD270  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm s32 func_800C0694(Fighter* fp)
+{ // clang-format off
+    nofralloc
+/* 800C0694 000BD274  80 03 04 30 */	lwz r0, 0x430(r3)
+/* 800C0698 000BD278  2C 00 00 00 */	cmpwi r0, 0
+/* 800C069C 000BD27C  41 82 00 0C */	beq lbl_800C06A8
+/* 800C06A0 000BD280  38 63 04 08 */	addi r3, r3, 0x408
+/* 800C06A4 000BD284  48 00 00 08 */	b lbl_800C06AC
+lbl_800C06A8:
+/* 800C06A8 000BD288  38 63 04 88 */	addi r3, r3, 0x488
+lbl_800C06AC:
+/* 800C06AC 000BD28C  80 63 00 28 */	lwz r3, 0x28(r3)
+/* 800C06B0 000BD290  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

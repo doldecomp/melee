@@ -153,5 +153,6 @@ void func_800C0074(Fighter* fp);
 void func_800C0134(Fighter* fp);
 void func_800C0200(Fighter* fp, s32);
 void func_800C0408(HSD_GObj* fighter_gobj);
+s32 func_800C0694(Fighter* fp);
 
 #endif
