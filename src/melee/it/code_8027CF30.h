@@ -26,5 +26,6 @@ unk_t func_802947CC();
 unk_t func_80293E34();
 unk_t func_80293DCC();
 unk_t func_802EAAEC();
+unk_t func_802EAE80();
 
 #endif
