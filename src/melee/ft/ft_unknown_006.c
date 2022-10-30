@@ -76529,3 +76529,8 @@ void func_800C4BA4()
 {
     return;
 }
+
+void func_800C4BA8()
+{
+    return;
+}
