@@ -1,17 +1,25 @@
-.include "macros.inc"
+#include <dolphin/types.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/base/PPCArch.h>
+#include <dolphin/os/os.h>
+#include <dolphin/os/OSError.h>
 
-.section .text  # 0x80342E94 - 0x803B7240
-
-.global DCEnable
-DCEnable:
-/* 803447C8 003413A8  7C 00 04 AC */	sync 0
+#pragma push
+asm unk_t DCEnable()
+{ // clang-format off
+    nofralloc
+/* 803447C8 003413A8  7C 00 04 AC */	sync
 /* 803447CC 003413AC  7C 70 FA A6 */	mfspr r3, 0x3f0
 /* 803447D0 003413B0  60 63 40 00 */	ori r3, r3, 0x4000
 /* 803447D4 003413B4  7C 70 FB A6 */	mtspr 0x3f0, r3
 /* 803447D8 003413B8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global DCInvalidateRange
-DCInvalidateRange:
+#pragma push
+asm unk_t DCInvalidateRange()
+{ // clang-format off
+    nofralloc
 /* 803447DC 003413BC  28 04 00 00 */	cmplwi r4, 0
 /* 803447E0 003413C0  4C 81 00 20 */	blelr 
 /* 803447E4 003413C4  54 65 06 FF */	clrlwi. r5, r3, 0x1b
@@ -26,10 +34,14 @@ lbl_803447FC:
 /* 80344800 003413E0  38 63 00 20 */	addi r3, r3, 0x20
 /* 80344804 003413E4  42 00 FF F8 */	bdnz lbl_803447FC
 /* 80344808 003413E8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-# https://decomp.me/scratch/y3hWw
-.global DCFlushRange
-DCFlushRange:
+// https://decomp.me/scratch/y3hWw
+#pragma push
+asm unk_t DCFlushRange()
+{ // clang-format off
+    nofralloc
 /* 8034480C 003413EC  28 04 00 00 */	cmplwi r4, 0
 /* 80344810 003413F0  4C 81 00 20 */	blelr 
 /* 80344814 003413F4  54 65 06 FF */	clrlwi. r5, r3, 0x1b
@@ -45,9 +57,13 @@ lbl_8034482C:
 /* 80344834 00341414  42 00 FF F8 */	bdnz lbl_8034482C
 /* 80344838 00341418  44 00 00 02 */	sc 
 /* 8034483C 0034141C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global DCStoreRange
-DCStoreRange:
+#pragma push
+asm unk_t DCStoreRange()
+{ // clang-format off
+    nofralloc
 /* 80344840 00341420  28 04 00 00 */	cmplwi r4, 0
 /* 80344844 00341424  4C 81 00 20 */	blelr 
 /* 80344848 00341428  54 65 06 FF */	clrlwi. r5, r3, 0x1b
@@ -63,9 +79,13 @@ lbl_80344860:
 /* 80344868 00341448  42 00 FF F8 */	bdnz lbl_80344860
 /* 8034486C 0034144C  44 00 00 02 */	sc 
 /* 80344870 00341450  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global DCFlushRangeNoSync
-DCFlushRangeNoSync:
+#pragma push
+asm unk_t DCFlushRangeNoSync()
+{ // clang-format off
+    nofralloc
 /* 80344874 00341454  28 04 00 00 */	cmplwi r4, 0
 /* 80344878 00341458  4C 81 00 20 */	blelr 
 /* 8034487C 0034145C  54 65 06 FF */	clrlwi. r5, r3, 0x1b
@@ -80,9 +100,13 @@ lbl_80344894:
 /* 80344898 00341478  38 63 00 20 */	addi r3, r3, 0x20
 /* 8034489C 0034147C  42 00 FF F8 */	bdnz lbl_80344894
 /* 803448A0 00341480  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global DCZeroRange
-DCZeroRange:
+#pragma push
+asm unk_t DCZeroRange()
+{ // clang-format off
+    nofralloc
 /* 803448A4 00341484  28 04 00 00 */	cmplwi r4, 0
 /* 803448A8 00341488  4C 81 00 20 */	blelr 
 /* 803448AC 0034148C  54 65 06 FF */	clrlwi. r5, r3, 0x1b
@@ -97,9 +121,13 @@ lbl_803448C4:
 /* 803448C8 003414A8  38 63 00 20 */	addi r3, r3, 0x20
 /* 803448CC 003414AC  42 00 FF F8 */	bdnz lbl_803448C4
 /* 803448D0 003414B0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global ICInvalidateRange
-ICInvalidateRange:
+#pragma push
+asm unk_t ICInvalidateRange()
+{ // clang-format off
+    nofralloc
 /* 803448D4 003414B4  28 04 00 00 */	cmplwi r4, 0
 /* 803448D8 003414B8  4C 81 00 20 */	blelr 
 /* 803448DC 003414BC  54 65 06 FF */	clrlwi. r5, r3, 0x1b
@@ -113,27 +141,39 @@ lbl_803448F4:
 /* 803448F4 003414D4  7C 00 1F AC */	icbi 0, r3
 /* 803448F8 003414D8  38 63 00 20 */	addi r3, r3, 0x20
 /* 803448FC 003414DC  42 00 FF F8 */	bdnz lbl_803448F4
-/* 80344900 003414E0  7C 00 04 AC */	sync 0
+/* 80344900 003414E0  7C 00 04 AC */	sync
 /* 80344904 003414E4  4C 00 01 2C */	isync 
 /* 80344908 003414E8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global ICFlashInvalidate
-ICFlashInvalidate:
+#pragma push
+asm unk_t ICFlashInvalidate()
+{ // clang-format off
+    nofralloc
 /* 8034490C 003414EC  7C 70 FA A6 */	mfspr r3, 0x3f0
 /* 80344910 003414F0  60 63 08 00 */	ori r3, r3, 0x800
 /* 80344914 003414F4  7C 70 FB A6 */	mtspr 0x3f0, r3
 /* 80344918 003414F8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global ICEnable
-ICEnable:
+#pragma push
+asm unk_t ICEnable()
+{ // clang-format off
+    nofralloc
 /* 8034491C 003414FC  4C 00 01 2C */	isync 
 /* 80344920 00341500  7C 70 FA A6 */	mfspr r3, 0x3f0
 /* 80344924 00341504  60 63 80 00 */	ori r3, r3, 0x8000
 /* 80344928 00341508  7C 70 FB A6 */	mtspr 0x3f0, r3
 /* 8034492C 0034150C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __LCEnable
-__LCEnable:
+#pragma push
+asm unk_t __LCEnable()
+{ // clang-format off
+    nofralloc
 /* 80344930 00341510  7C A0 00 A6 */	mfmsr r5
 /* 80344934 00341514  60 A5 10 00 */	ori r5, r5, 0x1000
 /* 80344938 00341518  7C A0 01 24 */	mtmsr r5
@@ -187,9 +227,13 @@ lbl_803449BC:
 /* 803449F0 003415D0  60 00 00 00 */	nop 
 /* 803449F4 003415D4  60 00 00 00 */	nop 
 /* 803449F8 003415D8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global LCEnable
-LCEnable:
+#pragma push
+asm unk_t LCEnable()
+{ // clang-format off
+    nofralloc
 /* 803449FC 003415DC  7C 08 02 A6 */	mflr r0
 /* 80344A00 003415E0  90 01 00 04 */	stw r0, 4(r1)
 /* 80344A04 003415E4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -204,9 +248,13 @@ LCEnable:
 /* 80344A28 00341608  38 21 00 10 */	addi r1, r1, 0x10
 /* 80344A2C 0034160C  7C 08 03 A6 */	mtlr r0
 /* 80344A30 00341610  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global LCDisable
-LCDisable:
+#pragma push
+asm unk_t LCDisable()
+{ // clang-format off
+    nofralloc
 /* 80344A34 00341614  3C 60 E0 00 */	lis r3, 0xE0000020@ha
 /* 80344A38 00341618  38 80 02 00 */	li r4, 0x200
 /* 80344A3C 0034161C  7C 89 03 A6 */	mtctr r4
@@ -218,9 +266,13 @@ lbl_80344A40:
 /* 80344A50 00341630  54 84 01 04 */	rlwinm r4, r4, 0, 4, 2
 /* 80344A54 00341634  7C 98 E3 A6 */	mtspr 0x398, r4
 /* 80344A58 00341638  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global LCStoreBlocks
-LCStoreBlocks:
+#pragma push
+asm unk_t LCStoreBlocks()
+{ // clang-format off
+    nofralloc
 /* 80344A5C 0034163C  54 A6 F6 FE */	rlwinm r6, r5, 0x1e, 0x1b, 0x1f
 /* 80344A60 00341640  54 63 01 3E */	clrlwi r3, r3, 4
 /* 80344A64 00341644  7C C6 1B 78 */	or r6, r6, r3
@@ -230,9 +282,13 @@ LCStoreBlocks:
 /* 80344A74 00341654  60 C6 00 02 */	ori r6, r6, 2
 /* 80344A78 00341658  7C DB E3 A6 */	mtspr 0x39b, r6
 /* 80344A7C 0034165C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global LCStoreData
-LCStoreData:
+#pragma push
+asm unk_t LCStoreData()
+{ // clang-format off
+    nofralloc
 /* 80344A80 00341660  7C 08 02 A6 */	mflr r0
 /* 80344A84 00341664  90 01 00 04 */	stw r0, 4(r1)
 /* 80344A88 00341668  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -281,9 +337,13 @@ lbl_80344B00:
 /* 80344B20 00341700  83 81 00 18 */	lwz r28, 0x18(r1)
 /* 80344B24 00341704  38 21 00 28 */	addi r1, r1, 0x28
 /* 80344B28 00341708  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global LCQueueWait
-LCQueueWait:
+#pragma push
+asm unk_t LCQueueWait()
+{ // clang-format off
+    nofralloc
 /* 80344B2C 0034170C  38 63 00 01 */	addi r3, r3, 1
 lbl_80344B30:
 /* 80344B30 00341710  7C 98 E2 A6 */	mfspr r4, 0x398
@@ -291,18 +351,25 @@ lbl_80344B30:
 /* 80344B38 00341718  7D 04 18 00 */	cmpw cr2, r4, r3
 /* 80344B3C 0034171C  40 88 FF F4 */	bge cr2, lbl_80344B30
 /* 80344B40 00341720  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global L2GlobalInvalidate
-L2GlobalInvalidate:
+extern char* lbl_80401BF0[];
+extern unk_t DBPrintf();
+
+#pragma push
+asm unk_t L2GlobalInvalidate()
+{ // clang-format off
+    nofralloc
 /* 80344B44 00341724  7C 08 02 A6 */	mflr r0
 /* 80344B48 00341728  90 01 00 04 */	stw r0, 4(r1)
 /* 80344B4C 0034172C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80344B50 00341730  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80344B54 00341734  7C 00 04 AC */	sync 0
+/* 80344B54 00341734  7C 00 04 AC */	sync
 /* 80344B58 00341738  4B FF 13 1D */	bl PPCMfl2cr
 /* 80344B5C 0034173C  54 63 00 7E */	clrlwi r3, r3, 1
 /* 80344B60 00341740  4B FF 13 1D */	bl PPCMtl2cr
-/* 80344B64 00341744  7C 00 04 AC */	sync 0
+/* 80344B64 00341744  7C 00 04 AC */	sync
 /* 80344B68 00341748  4B FF 13 0D */	bl PPCMfl2cr
 /* 80344B6C 0034174C  64 63 00 20 */	oris r3, r3, 0x20
 /* 80344B70 00341750  4B FF 13 0D */	bl PPCMtl2cr
@@ -338,9 +405,13 @@ lbl_80344BB8:
 /* 80344BD0 003417B0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80344BD4 003417B4  7C 08 03 A6 */	mtlr r0
 /* 80344BD8 003417B8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global DMAErrorHandler
-DMAErrorHandler:
+#pragma push
+asm unk_t DMAErrorHandler()
+{ // clang-format off
+    nofralloc
 /* 80344BDC 003417BC  7C 08 02 A6 */	mflr r0
 /* 80344BE0 003417C0  90 01 00 04 */	stw r0, 4(r1)
 /* 80344BE4 003417C4  94 21 FF 80 */	stwu r1, -0x80(r1)
@@ -436,9 +507,13 @@ lbl_80344D18:
 /* 80344D30 00341910  83 A1 00 74 */	lwz r29, 0x74(r1)
 /* 80344D34 00341914  38 21 00 80 */	addi r1, r1, 0x80
 /* 80344D38 00341918  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global __OSCacheInit
-__OSCacheInit:
+#pragma push
+asm unk_t __OSCacheInit()
+{ // clang-format off
+    nofralloc
 /* 80344D3C 0034191C  7C 08 02 A6 */	mflr r0
 /* 80344D40 00341920  90 01 00 04 */	stw r0, 4(r1)
 /* 80344D44 00341924  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -470,15 +545,15 @@ lbl_80344D98:
 /* 80344DA4 00341984  40 82 00 58 */	bne lbl_80344DFC
 /* 80344DA8 00341988  4B FF 10 B5 */	bl PPCMfmsr
 /* 80344DAC 0034198C  7C 7E 1B 78 */	mr r30, r3
-/* 80344DB0 00341990  7C 00 04 AC */	sync 0
+/* 80344DB0 00341990  7C 00 04 AC */	sync
 /* 80344DB4 00341994  38 60 00 30 */	li r3, 0x30
 /* 80344DB8 00341998  4B FF 10 AD */	bl PPCMtmsr
-/* 80344DBC 0034199C  7C 00 04 AC */	sync 0
-/* 80344DC0 003419A0  7C 00 04 AC */	sync 0
+/* 80344DBC 0034199C  7C 00 04 AC */	sync
+/* 80344DC0 003419A0  7C 00 04 AC */	sync
 /* 80344DC4 003419A4  4B FF 10 B1 */	bl PPCMfl2cr
 /* 80344DC8 003419A8  54 63 00 7E */	clrlwi r3, r3, 1
 /* 80344DCC 003419AC  4B FF 10 B1 */	bl PPCMtl2cr
-/* 80344DD0 003419B0  7C 00 04 AC */	sync 0
+/* 80344DD0 003419B0  7C 00 04 AC */	sync
 /* 80344DD4 003419B4  4B FF FD 71 */	bl L2GlobalInvalidate
 /* 80344DD8 003419B8  7F C3 F3 78 */	mr r3, r30
 /* 80344DDC 003419BC  4B FF 10 89 */	bl PPCMtmsr
@@ -503,36 +578,5 @@ lbl_80344DFC:
 /* 80344E24 00341A04  7C 08 03 A6 */	mtlr r0
 /* 80344E28 00341A08  38 21 00 10 */	addi r1, r1, 0x10
 /* 80344E2C 00341A0C  4E 80 00 20 */	blr 
-
-.section .data
-    .balign 8
-lbl_80401BF0:
-    .asciz ">>> L2 INVALIDATE : SHOULD NEVER HAPPEN\n"
-    .balign 4
-    .asciz "Machine check received\n"
-    .balign 4
-    .asciz "HID2 = 0x%x   SRR1 = 0x%x\n"
-    .balign 4
-    .asciz "Machine check was not DMA/locked cache related\n"
-    .balign 4
-    .asciz "DMAErrorHandler(): An error occurred while processing DMA.\n"
-    .balign 4
-    .asciz "The following errors have been detected and cleared :\n"
-    .balign 4
-    .asciz "\t- Requested a locked cache tag that was already in the cache\n"
-    .balign 4
-    .asciz "\t- DMA attempted to access normal cache\n"
-    .balign 4
-    .asciz "\t- DMA missed in data cache\n"
-    .balign 4
-    .asciz "\t- DMA queue overflowed\n"
-    .balign 4
-    .asciz "L1 i-caches initialized\n"
-    .balign 4
-    .asciz "L1 d-caches initialized\n"
-    .balign 4
-    .asciz "L2 cache initialized\n"
-    .balign 4
-    .asciz "Locked cache machine check handler installed\n"
-    .balign 4
-    .4byte NULL
+} // clang-format on
+#pragma pop

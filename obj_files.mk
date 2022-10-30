@@ -582,32 +582,43 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/mtx/vec.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/os/OS.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSAlarm.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OS.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OS_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSAlarm.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSAlloc.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSArena.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSAudioSystem.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSCache.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSContext.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSCache.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSCache_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSContext.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSContext_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSError.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSError.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSExi.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSFont.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt.s.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSError_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSExi.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSExi_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSFont.c.o\
+	$(BUILD_DIR)/src/dolphin/os/OSInterrupt.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSLink.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSMemory.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSMemory.s.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSMemory_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSMutex.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSReboot.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSReset.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSResetSW.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSRtc.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSSerial.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSReboot.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSReboot_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSReset.c.o\
+	$(BUILD_DIR)/src/dolphin/os/OSResetSW.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSResetSW_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSRtc.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSRtc_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSSerial.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSSerial_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSSync.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSThread.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSTime.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSUartExi.s.o\
-	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSThread.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSThread_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSTime.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/OSTime_data.s.o\
+	$(BUILD_DIR)/src/dolphin/os/OSUartExi.c.o\
+	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.c.o\
 
 TEXT_O_FILES +=\
