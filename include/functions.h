@@ -600,9 +600,6 @@ void HSD_IDSetup(void);
 
 void *func_8037CF98(struct _HSD_IDTable *table, u32 id, u8 *success);
 
-void func_8037EE0C(Vec *, Quaternion *);
-void func_8037EF28(Quaternion *, Quaternion *, Quaternion *, f32);
-
 void func_803881E4(void);
 
 void func_8038FD54(struct _HSD_GObj *, void (*)(struct _HSD_GObj *), s32);

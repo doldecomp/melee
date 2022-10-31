@@ -3,7 +3,6 @@
 
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/types.h>
-#include <functions.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/object.h>
