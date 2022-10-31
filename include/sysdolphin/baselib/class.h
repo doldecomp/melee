@@ -62,5 +62,6 @@ void* hsdAllocMemPiece(s32 size);
 void hsdFreeMemPiece(void* mem, s32 size);
 void* hsdNew(HSD_ClassInfo*);
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name);
+BOOL hsdChangeClass(void* object, void* class_info);
 
 #endif

@@ -3,5 +3,6 @@
 
 unk_t func_8006EED4();
 unk_t func_80070734();
+unk_t func_8006DE00();
 
 #endif
