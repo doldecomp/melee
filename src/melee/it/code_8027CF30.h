@@ -1,7 +1,7 @@
 #ifndef MELEE_IT_CODE_8027CF30_H
 #define MELEE_IT_CODE_8027CF30_H
 
-#include <dolphin/types.h>
+#include <dolphin/mtx/mtxtypes.h>
 
 unk_t func_802AD590();
 unk_t func_802A7AAC();
@@ -29,5 +29,6 @@ unk_t func_802EAAEC();
 unk_t func_802EAE80();
 unk_t func_802DBA68();
 unk_t func_802DB9F4();
+void func_802D8618(s32, Vec*, s32, s32);
 
 #endif

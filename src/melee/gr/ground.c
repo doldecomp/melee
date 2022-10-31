@@ -7,6 +7,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbunknown_003.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
@@ -3258,7 +3259,7 @@ f32 func_801C3F20(HSD_JObj* arg0)
     return 0;
 }
 
-asm struct _HSD_JObj* func_801C3FA4(HSD_GObj*, s32 depth)
+asm HSD_JObj* func_801C3FA4(HSD_GObj* gobj, s32 depth)
 {
     nofralloc
 /* 801C3FA4 001C0B84  80 63 00 28 */	lwz r3, 0x28(r3)

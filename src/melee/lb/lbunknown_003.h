@@ -1,6 +1,8 @@
 #ifndef MELEE_LB_LBUNKNOWN_003_H
 #define MELEE_LB_LBUNKNOWN_003_H
 
+#include <dolphin/mtx/mtxtypes.h>
+
 unk_t func_80014638();
 unk_t func_80011710();
 unk_t func_8000FD48();
@@ -10,5 +12,6 @@ unk_t func_80011AC4();
 unk_t func_80014498();
 unk_t func_800144C8();
 unk_t func_80014258();
+void func_80011A50(Vec *, s32, f32, f32, f32, f32, f32, f32, f32);
 
 #endif

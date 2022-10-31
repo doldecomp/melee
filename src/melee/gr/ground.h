@@ -3,6 +3,7 @@
 
 #include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 
 static void func_801BFFA8(void);
@@ -50,5 +51,8 @@ void func_801C4368(f32*, f32*);
 s32 func_801C5794(void);
 BOOL func_801C5700(s32 i);
 void* func_801C49F8(void); // get stage's "yakumono" ("about"?) param
+HSD_JObj* func_801C3FA4(HSD_GObj* gobj, s32 depth);
+HSD_JObj* func_801C2CF4(s32 i);
+HSD_GObj* func_801C2BA4(s32 i);
 
 #endif

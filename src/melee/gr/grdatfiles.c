@@ -1,7 +1,8 @@
 #include <melee/gr/grdatfiles.h>
 
 #include <melee/gr/ground.h>
-#include <sysdolphin/baselib/archive.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbheap.h>
 #include <sysdolphin/baselib/debug.h>
 
 typedef struct _UnkStageDatInternal {

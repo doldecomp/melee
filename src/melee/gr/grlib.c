@@ -1,5 +1,7 @@
 #include <melee/gr/grlib.h>
+
 #include <melee/gr/ground.h>
+#include <melee/it/item.h>
 #include <sysdolphin/baselib/psappsrt.h>
 
 extern u8 lbl_804D7849;

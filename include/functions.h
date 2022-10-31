@@ -2,12 +2,6 @@
 #define _functions_h_
 
 #include <dolphin/types.h>
-#include <dolphin/mtx/mtxtypes.h>
-
-typedef struct _HSD_GObj HSD_GObj;
-typedef struct _Fighter Fighter;
-typedef struct _Item Item;
-typedef struct _Article Article;
 
 /* .text section */
 
@@ -22,17 +16,11 @@ void func_8000EE8C();
 void func_8001044C(void *, void *, s32, f32, s32, s32, s32, s32);
 
 void func_800119DC(Vec *, s32, f32, f32, f32);
-void func_80011A50(Vec *, s32, f32, f32, f32, f32, f32, f32, f32);
 
 void func_80014574(u8, s32, s32, s32);
 void func_800145C0(u8);
 
-struct _HSD_Archive *func_80015BD0(s32, s32);
-
-void func_80016C64(char *, void **, char *, s32, ...); // from lbarchive.s, vararg may start earlier
-void *func_80016DBC(void *, ...);
-
-s32 func_800171CC(void *, ...);
+void func_80016C64(char*, void**, char*, s32, ...); // from lbarchive.s, vararg may start earlier
 
 f32 func_8001E8F8(u32);
 
@@ -97,8 +85,6 @@ void func_800411C4();
 void func_80041280();
 
 void func_8004CBF4(struct _CollData *);
-
-s32 func_80051EC8(Vec *, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
 
 void func_80053DA4(u32, f32 *);
 void func_80053ECC(u32, f32 *);
@@ -483,15 +469,11 @@ BOOL func_801C28AC(s32, u32, s32 *);
 
 struct _HSD_GObj *func_801C2BA4(s32);
 
-struct _HSD_JObj *func_801C2CF4(s32);
-
 BOOL func_801C2D24(s32, Vec *);
 BOOL func_801C2ED0(struct _HSD_JObj *, s32);
 
 void func_801C39C0();
 void func_801C3BB4();
-
-struct _HSD_JObj *func_801C3FA4(struct _HSD_GObj *, s32);
 
 s32 func_801C4210(void);
 void func_801C42AC();
@@ -499,8 +481,6 @@ void func_801C42AC();
 void func_801C5A84();
 
 void func_801C5AA4();
-
-void func_801C7FF8(struct _HSD_GObj *, s32, s32, s32, f32, f32);
 
 void func_801C8138();
 
@@ -512,11 +492,8 @@ void func_8026ABD8(struct _HSD_GObj *, Vec *, f32);
 
 BOOL func_8026B2B4(struct _HSD_GObj *);
 
-s32 itGetKind(struct _HSD_GObj *); // itGetKind
 s32 func_8026B30C(struct _HSD_GObj *);
 s32 func_8026B320(struct _HSD_GObj *);
-
-void func_8026B3F8(struct _Article *, s32);
 
 f32 func_8026B54C(struct _HSD_GObj *);
 f32 func_8026B560(struct _HSD_GObj *);
@@ -544,8 +521,6 @@ void func_802B1FE8(u32, Vec *);
 void func_802B56E4(u32, Vec *, f32, f32, f32);
 
 void *func_802C8B28(struct _HSD_GObj *, Vec *, u32, f32);
-
-void func_802D8618(s32, Vec *, s32, s32);
 
 u32 func_802F0340(struct _HSD_GObj *, Vec *, Vec *, u32, u32, f32);
 void func_802F046C(s32);

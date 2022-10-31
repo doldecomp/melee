@@ -4,7 +4,6 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/types.h>
-#include <functions.h>
 
 enum InternalStageID {
     CASTLE = 0x02, // Princess Peach's Castle
