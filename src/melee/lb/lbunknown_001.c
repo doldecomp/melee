@@ -371,14 +371,7 @@ void func_8000C07C(HSD_JObj* jobj, s32 i, HSD_AnimJoint** arg3,
     HSD_JObjAddAnimAll(jobj, phi_r4, phi_r5, phi_r6);
 }
 
-typedef struct _UnkAnimContainer {
-    u8 x0_pad[0x4];
-    struct _HSD_AnimJoint** x4_anims;
-    struct _HSD_MatAnimJoint** x8_matanims;
-    struct _HSD_ShapeAnimJoint** xC_shapeanims;
-} UnkAnimContainer;
-
-void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _UnkAnimContainer* arg2)
+void func_8000C0E8(HSD_JObj* jobj, s32 i, UnkAnimContainer* arg2)
 {
     func_8000C07C(jobj, i, arg2->x4_anims, arg2->x8_matanims, arg2->xC_shapeanims);
 }
