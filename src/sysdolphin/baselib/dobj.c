@@ -3,6 +3,8 @@
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/pobj.h>
 
+#include <dolphin/os/os.h>
+
 static void DObjInfoInit(void);
 HSD_DObjInfo hsdDObj = { DObjInfoInit };
 

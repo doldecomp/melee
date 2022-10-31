@@ -622,8 +622,6 @@ u32 OSGetConsoleSimulatedMemSize();
 
 void VIWaitForRetrace(void);
 
-struct _HSD_TObj *allocShadowTObj();
-
 struct _HSD_ImageDesc *HSD_ImageDescAlloc();
 
 void HSD_ForeachAnim(void *, ...);
@@ -637,16 +635,12 @@ void HSD_CObjSetScissorx4();
 void HSD_CObjSetViewportfx4();
 u32 HSD_CObjGetProjectionType(struct _HSD_CObj *);
 
-struct _HSD_PObj *HSD_PObjLoadDesc(struct _HSD_PObjDesc *);
-
 void HSD_EraseRect();
 int HSD_GetHeap(void);
 
 void HSD_VIInit(struct _HSD_VIStatus *vi_status, void *xfb0, void *xfb1, void *xfb2);
 
 void func_80378280(u8, int);
-
-f32 splGetHelmite(f32, f32, f32, f32, f32, f32);
 
 void splArcLengthPoint(Vec *, struct _HSD_Spline *, f32);
 void func_80379310();
