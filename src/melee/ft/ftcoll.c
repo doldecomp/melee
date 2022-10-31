@@ -5,6 +5,7 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbcollision.h>
+#include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/gobj.h>
 
 // Combo Count Logic

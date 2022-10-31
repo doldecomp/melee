@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
+
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
 
 void ftSamus_801293BC_inner(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighterPlus(fighter_gobj);

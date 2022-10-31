@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 extern void func_8007E6DC(HSD_GObj*, HSD_GObj*, s32);
 extern HSD_GObj* func_802C65E4(HSD_GObj*, Vec3*, s32, f32);
 extern void ftGameWatch_ItemManholeExitHitlag(HSD_GObj*);

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
+
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
 
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd

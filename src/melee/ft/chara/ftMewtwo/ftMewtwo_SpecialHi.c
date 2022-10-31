@@ -1,6 +1,8 @@
-#include <MSL/trigf.h>
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
+
+#include <MSL/trigf.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
 
 #define HALF_PI32 1.5707963705062866f
 

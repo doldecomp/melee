@@ -2,6 +2,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/lb/lbcollision.h>
+#include <melee/lb/lbunknown_001.h>
 
 static f32 const lbl_804D8320 = 0.0F;
 static f32 const lbl_804D8324 = 1.0F;

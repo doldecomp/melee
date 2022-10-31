@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
+
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
 
 // 0x80116EBC //
 // https://decomp.me/scratch/45pKw //

@@ -2,6 +2,7 @@
 #define  _code_8000B074_h_
 
 #include <dolphin/mtx/mtxtypes.h>
+#include <sysdolphin/baselib/jobj.h>
 
 #ifndef M2CTX
 
@@ -10,6 +11,8 @@ typedef Vec Vec3;
 BOOL func_8000B074(struct _HSD_JObj*);
 BOOL func_8000B09C(struct _HSD_JObj*);
 BOOL func_8000B134(struct _HSD_JObj*);
+
+void func_8000B1CC(HSD_JObj* jobj, Vec3*, Vec3*);
 void func_8000B1CC(struct _HSD_JObj*, Vec3*, Vec3*);
 void func_8000B4FC(struct _HSD_JObj*, struct _HSD_Joint*);
 void func_8000B5DC(struct _HSD_JObj*, struct _HSD_Joint*);

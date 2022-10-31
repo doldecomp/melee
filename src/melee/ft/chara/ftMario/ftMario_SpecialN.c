@@ -1,10 +1,12 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
+
 #include <melee/ft/code_80081B38.h>
+#include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/itkind.h>
-
-int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos) {
+int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
+{
     int r3;
     r3 = (int)arr[HSD_Randi(outpos)];
     fp->sa.mario.x2230_vitaminPrev = fp->sa.mario.x222C_vitaminCurr;

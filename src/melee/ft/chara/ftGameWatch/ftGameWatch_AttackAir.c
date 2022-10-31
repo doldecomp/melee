@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+
 #include <melee/ft/code_80081B38.h>
+#include <melee/lb/lbunknown_001.h>
 
 extern HSD_GObj* func_802C6C38(HSD_GObj*, Vec3*, s32, f32);
 

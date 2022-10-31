@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 // 80153000 14FBE0
 // https://decomp.me/scratch/erd6U
 void lbl_80153000(HSD_GObj* arg0) {

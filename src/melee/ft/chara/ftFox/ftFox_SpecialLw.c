@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
+
 #include <melee/ft/ftcoll.h>
+#include <melee/lb/lbunknown_001.h>
 
 // 0x800E83E0
 // https://decomp.me/scratch/wfS8S // Create Reflector Loop GFX

@@ -1,7 +1,9 @@
-#include <MSL/trigf.h>
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
+
+#include <MSL/trigf.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
 
 #define HALF_PI 1.5707963705062866f
 #define DEG_TO_RAD 0.017453292f

@@ -1,14 +1,14 @@
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
 
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftdata.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/jobj.h>
 
 extern s8 lbl_803C26FC[];
-
 
 s32 func_800860C4(void)
 {
