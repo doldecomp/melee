@@ -3,6 +3,7 @@
 
 #include <dolphin/types.h>
 
-extern unk_t func_8000CEE0();
+unk_t func_8000CEE0();
+s32 func_8000D148(f32, f32, f32, f32, f32, f32, f32);
 
 #endif
