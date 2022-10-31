@@ -2264,8 +2264,6 @@ extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
-extern s32 g_debugLevel; // asm/melee/db/db_unknown_001.s
-
 extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
 extern HSD_ObjAllocData lbl_80458FD0;

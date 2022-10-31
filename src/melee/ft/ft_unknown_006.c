@@ -11,6 +11,7 @@
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <melee/cm/camera.h>
+#include <melee/db/db_unknown_001.h>
 #include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftFox/ftfox.h>

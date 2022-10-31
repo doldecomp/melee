@@ -3,10 +3,10 @@
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/os.h>
 #include <dolphin/types.h>
+#include <melee/db/db_unknown_001.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/initialize.h>
 
-extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;
 extern u16 lbl_804D6B30; // debug flags
 

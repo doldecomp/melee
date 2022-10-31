@@ -2,6 +2,7 @@
 
 #include <MSL/trigf.h>
 #include <dolphin/os/os.h>
+#include <melee/db/db_unknown_001.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
