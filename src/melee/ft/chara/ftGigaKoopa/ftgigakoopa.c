@@ -75,6 +75,8 @@ void func_8014F98C(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
+extern const s32 lbl_803D3984[];
+
 // UB warning: this function may use offset uninitialized
 s32 func_8014F9A4(s32 arg0)
 {
