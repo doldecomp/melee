@@ -403,8 +403,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp) {
 	fp->x221E_flag.bits.b4 = 1;
 	fp->x197C = 0;
 	fp->x2223_flag.bits.b7 = 0;
-	fp->x2028 = 0;
-	fp->x202C = 0;
+    fp->x2028 = FALSE;
+    fp->x202C = 0;
 
 	func_800C88A0(fp);
 
