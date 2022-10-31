@@ -1,7 +1,9 @@
 #include <dolphin/gx/GXInit.h>
+#include <dolphin/os/OSArena.h>
+#include <dolphin/os/OSMemory.h>
 #include <dolphin/os/os.h>
 #include <dolphin/types.h>
-#include <sysdolphin/baselib/controller.h> // hehe
+#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/initialize.h>
 
 extern s32 g_debugLevel; // debug level

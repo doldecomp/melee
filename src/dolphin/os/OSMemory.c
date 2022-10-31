@@ -1,6 +1,7 @@
+#include <dolphin/os/OSMemory.h>
+
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/OSMemory.h>
 
 u32 OSGetPhysicalMemSize(void)
 {
@@ -8,7 +9,7 @@ u32 OSGetPhysicalMemSize(void)
 }
 
 #pragma push
-asm unk_t OSGetConsoleSimulatedMemSize()
+asm u32 OSGetConsoleSimulatedMemSize()
 { // clang-format off
     nofralloc
 /* 80347BF0 003447D0  3C 60 80 00 */	lis r3, 0x800000F0@ha

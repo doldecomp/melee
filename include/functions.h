@@ -614,8 +614,6 @@ f32 PSVECDotProduct(Vec *a, Vec *b);
 
 void *OSAllocFromHeap(int, u32);
 
-u32 OSGetConsoleSimulatedMemSize();
-
 void VIWaitForRetrace(void);
 
 struct _HSD_ImageDesc *HSD_ImageDescAlloc();
