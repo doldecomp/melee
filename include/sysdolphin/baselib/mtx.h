@@ -1,7 +1,6 @@
 #ifndef _mtx_h_
 #define _mtx_h_
 
-#include <global.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <math.h>
 
