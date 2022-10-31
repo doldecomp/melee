@@ -1,5 +1,6 @@
 #include <melee/ft/code_80081B38.h>
 
+#include <MSL/trigf.h>
 #include <dolphin/types.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>

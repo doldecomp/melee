@@ -596,11 +596,6 @@ char *strncpy(char *__restrict, const char *__restrict, unsigned long);
 char *strcpy(char *__restrict, const char *__restrict);
 unsigned long strlen(const char *);
 
-f32 tanf(f32);
-
-f32 cosf(f32);
-f32 sinf(f32);
-
 #pragma region "asm/dolphin/mtx/mtx.s"
 void PSMTXIdentity(Mtx m);
 u32 PSMTXInverse(const Mtx src, Mtx inv);

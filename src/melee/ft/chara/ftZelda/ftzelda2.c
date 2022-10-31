@@ -1,3 +1,4 @@
+#include <MSL/trigf.h>
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 #include <melee/ft/ft_unknown_006.h>
 

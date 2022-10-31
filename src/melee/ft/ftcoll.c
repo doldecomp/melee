@@ -1,9 +1,10 @@
-#include <melee/ft/ftcoll.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <MSL/trigf.h>
 #include <melee/ft/fighter.h>
-#include <melee/it/item.h>
 #include <melee/ft/ft_unknown_006.h>
- 
+#include <melee/ft/ftcoll.h>
+#include <melee/it/item.h>
+#include <sysdolphin/baselib/gobj.h>
+
 // Combo Count Logic
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)
 {

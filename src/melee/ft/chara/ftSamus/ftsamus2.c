@@ -1,3 +1,4 @@
+#include <MSL/trigf.h>
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
 extern s32 func_8008B658(HSD_GObj*);

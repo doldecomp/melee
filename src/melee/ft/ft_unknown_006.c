@@ -1,5 +1,6 @@
 #include <melee/ft/ft_unknown_006.h>
 
+#include <MSL/trigf.h>
 #include <Runtime/runtime.h>
 
 #include <sysdolphin/baselib/class.h>

@@ -1,3 +1,4 @@
+#include <MSL/trigf.h>
 #include <sysdolphin/baselib/mtx.h>
 
 

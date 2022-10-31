@@ -1,3 +1,4 @@
+#include <MSL/trigf.h>
 #include <melee/ft/chara/ftNess/ftNess.h>
 
 // Setup float order //

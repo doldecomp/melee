@@ -1,9 +1,8 @@
-// python ../asm-differ/diff.py -mwobs func_X
-
-#include <melee/mp/mpcoll.h>
 #include "melee/ft/ftlib.h"
+#include <MSL/trigf.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
 
 // TODO: proper signatures, mplib.h
 s32 func_80052700();

@@ -1,3 +1,4 @@
+#include <MSL/trigf.h>
 #include <melee/gr/ground.h>
 
 #include <melee/ft/ftlib.h>
