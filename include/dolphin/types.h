@@ -64,7 +64,5 @@ typedef struct _ ## module ## _Unk ## number module ## _Unk ## number;
 
 // TODO! DO NOT LEAVE THIS IN!
 #include <dolphin/mtx/mtxtypes.h>
-typedef struct _HSD_GObj HSD_GObj;
-typedef struct _Fighter Fighter;
 
 #endif
