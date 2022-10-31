@@ -45,7 +45,7 @@ void func_8000C228(HSD_JObj*, HSD_JObj* constraint);
 void func_8000C290(HSD_JObj*, HSD_JObj* constraint);
 void func_8000C2F8(HSD_JObj*, HSD_JObj* constraint);
 void func_8000C390(HSD_JObj*);
-void func_8000C420(HSD_JObj*, u32 flags, f32 limit);
+void func_8000C420(HSD_JObj* jobj, u32 flags, f32 limit);
 void func_8000C490(HSD_JObj*, HSD_JObj*, HSD_JObj*, f32, f32);
 void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst);
 void func_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, f32, f32);

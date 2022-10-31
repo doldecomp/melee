@@ -5,8 +5,6 @@
 
 /* .text section */
 
-void func_8000C420(struct _HSD_JObj *, u32, f32);
-
 s32 func_8000D148(f32, f32, f32, f32, f32, f32, f32);
 
 void func_8000E9F0(Vec *, s32, f32);

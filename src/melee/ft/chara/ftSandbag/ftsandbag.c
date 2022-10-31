@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 typedef struct _ftSandbagAttributes
 {
     u32 x0_pair[2];
