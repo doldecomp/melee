@@ -1,11 +1,11 @@
 #ifndef _robj_h_
 #define _robj_h_
 
-#include <sysdolphin/baselib/objalloc.h>
-
+#include <dolphin/mtx/mtxtypes.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 #define TYPE_MASK 0x70000000
 #define REFTYPE_JOBJ 0x10000000
@@ -101,5 +101,6 @@ void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim);
 void HSD_RObjRemoveAll(HSD_RObj*);
 void HSD_RObjResolveRefsAll(HSD_RObj*, HSD_RObjDesc*);
 HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc*);
+BOOL HSD_RObjGetGlobalPosition(HSD_RObj* robj, BOOL, VecPtr translate);
 
 #endif

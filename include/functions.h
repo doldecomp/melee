@@ -594,23 +594,7 @@ char *strncpy(char *__restrict, const char *__restrict, unsigned long);
 char *strcpy(char *__restrict, const char *__restrict);
 unsigned long strlen(const char *);
 
-#pragma region "asm/dolphin/mtx/mtx.s"
-void PSMTXIdentity(Mtx m);
-u32 PSMTXInverse(const Mtx src, Mtx inv);
-void PSMTXRotAxisRad(Mtx m, const Vec *axis, f32 rad);
-void PSMTXTrans(Mtx m, f32 x_trans, f32 y_trans, f32 z_trans);
-void PSMTXScale(Mtx m, f32 x_scale, f32 y_scale, f32 z_scale);
-void PSMTXQuat(Mtx m, const Quaternion *q);
-#pragma endregion
-
 void PSMTXMUltiVec(Mtx, Vec *, Vec *);
-
-#pragma region "asm/dolphin/mtx/vec.s"
-void PSVECAdd(Vec *a, Vec *b, Vec *result);
-void PSVECScale(Vec *src, Vec *dst, f32 scale);
-f32 PSVECMag(Vec *v);
-f32 PSVECDotProduct(Vec *a, Vec *b);
-#pragma endregion
 
 void *OSAllocFromHeap(int, u32);
 
@@ -620,16 +604,10 @@ struct _HSD_ImageDesc *HSD_ImageDescAlloc();
 
 void HSD_ForeachAnim(void *, ...);
 
-f32 HSD_CObjGetNear(struct _HSD_CObj *);
-
-f32 HSD_CObjGetFar(struct _HSD_CObj *);
-
 void HSD_CObjSetScissorx4();
 
 void HSD_CObjSetViewportfx4();
-u32 HSD_CObjGetProjectionType(struct _HSD_CObj *);
 
-void HSD_EraseRect();
 int HSD_GetHeap(void);
 
 void HSD_VIInit(struct _HSD_VIStatus *vi_status, void *xfb0, void *xfb1, void *xfb2);

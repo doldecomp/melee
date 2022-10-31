@@ -140,5 +140,8 @@ BOOL HSD_CObjSetCurrent(HSD_Obj *, cobj_UnkCallback1);
 HSD_CObj* HSD_CObjGetCurrent(void);
 void HSD_CObjEndCurrent();
 void func_803695F0(unk_t);
+u32 HSD_CObjGetProjectionType(HSD_CObj* cobj);
+f32 HSD_CObjGetNear(HSD_CObj* cobj);
+f32 HSD_CObjGetFar(HSD_CObj* cobj);
 
 #endif

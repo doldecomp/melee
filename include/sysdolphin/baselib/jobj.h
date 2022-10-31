@@ -1,14 +1,13 @@
 #ifndef _jobj_h_
 #define _jobj_h_
 
+#include <dolphin/mtx.h>
 #include <dolphin/types.h>
-
-#include <sysdolphin/baselib/object.h>
-#include <sysdolphin/baselib/list.h>
-
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/list.h>
 #include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/robj.h>
 

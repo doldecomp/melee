@@ -7,6 +7,8 @@
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
+#include <dolphin/mtx.h>
+#include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/chara/ftCLink/ftclink.h>
@@ -8892,7 +8894,6 @@ lbl_8008E594:
 extern f64 const lbl_804D8500;
 extern f64 const lbl_804D8508;
 extern f32 const lbl_804D84F8;
-extern unk_t PSVECCrossProduct();
 
 #pragma push
 asm unk_t func_8008E5A4()
