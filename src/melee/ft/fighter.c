@@ -28,7 +28,6 @@ u32 lbl_804D64F8 = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
 // the following seems to be an array, initialized in reverse in Fighter_LoadCommonData
-// outcommented because they are in variables.h too. uncomment this when moving data from fighter.s here.
 unk_t lbl_804D64FC = NULL;
 unk_t lbl_804D6500 = NULL;
 unk_t lbl_804D6504 = NULL;
