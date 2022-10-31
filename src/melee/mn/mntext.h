@@ -3,7 +3,7 @@
 
 #include <common_structs.h>
 #include <dolphin/types.h>
-#include <global.h>
+#include <functions.h>
 
 typedef struct _TextGlyphTexture {
     /*0x00*/ u8 data[512];
