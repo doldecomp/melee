@@ -1,8 +1,6 @@
 #ifndef _ftmario_h_
 #define _ftmario_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 
 #include <sysdolphin/baselib/gobj.h>
