@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
+
+#include <dolphin/os/os.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 

@@ -1,6 +1,8 @@
-#include <common_structs.h>
-#include <melee/gr/grlib.h>
 #include <melee/it/item.h>
+
+#include <common_structs.h>
+#include <dolphin/os/os.h>
+#include <melee/gr/grlib.h>
 #include <sysdolphin/baselib/jobj.h>
 
 extern s32 func_8016AE80();

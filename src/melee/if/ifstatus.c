@@ -1,5 +1,7 @@
-#include <melee/gm/code_801601C4.h>
 #include <melee/if/ifstatus.h>
+
+#include <dolphin/os/os.h>
+#include <melee/gm/code_801601C4.h>
 #include <melee/lb/lbunknown_001.h>
 
 HudIndex* func_802F4910(void)

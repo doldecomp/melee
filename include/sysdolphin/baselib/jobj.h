@@ -156,6 +156,7 @@ void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
 HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj);
 void HSD_JObjAddAnim(HSD_JObj*, HSD_AnimJoint* an_joint, HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint);
 void HSD_JObjAddDObj(HSD_JObj* jobj, HSD_DObj* dobj);
+void HSD_JObjUnkMtxPtr(HSD_JObj* jobj);
 
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {

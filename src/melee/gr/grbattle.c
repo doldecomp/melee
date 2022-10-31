@@ -1,5 +1,6 @@
 #include <melee/gr/grbattle.h>
 
+#include <dolphin/os/os.h>
 #include <melee/gr/ground.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>

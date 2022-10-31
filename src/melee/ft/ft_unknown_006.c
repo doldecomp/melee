@@ -2,48 +2,13 @@
 
 #include <MSL/trigf.h>
 #include <Runtime/runtime.h>
-
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tev.h>
-
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
-
-#include <melee/text_2.h>
-
+#include <dolphin/os/os.h>
 #include <melee/cm/camera.h>
-
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcollision.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_002.h>
-#include <melee/lb/lbunknown_003.h>
-
-#include <melee/gm/code_801601C4.h>
-
-#include <melee/mp/mpcoll.h>
-#include <melee/mp/mpisland.h>
-#include <melee/mp/mplib.h>
-
-#include <melee/gr/grbigblue.h>
-#include <melee/gr/grcastle.h>
-#include <melee/gr/grcorneria.h>
-#include <melee/gr/grgreatbay.h>
-#include <melee/gr/grinishie.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grrcruise.h>
-#include <melee/gr/grvenom.h>
-
 #include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftFox/ftfox.h>
@@ -71,12 +36,38 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/ftwalkcommon.h>
-
+#include <melee/gm/code_801601C4.h>
+#include <melee/gr/grbigblue.h>
+#include <melee/gr/grcastle.h>
+#include <melee/gr/grcorneria.h>
+#include <melee/gr/grgreatbay.h>
+#include <melee/gr/grinishie.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/grrcruise.h>
+#include <melee/gr/grvenom.h>
 #include <melee/it/code_80266F3C.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/it/item.h>
-
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_002.h>
+#include <melee/lb/lbunknown_003.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mpisland.h>
+#include <melee/mp/mplib.h>
 #include <melee/pl/pl_unknown_001.h>
+#include <melee/text_2.h>
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tev.h>
 
 #define TEST(expr) (expr) ? TRUE : FALSE
 

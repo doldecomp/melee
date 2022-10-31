@@ -1,7 +1,8 @@
+#include <dolphin/gx/GXInit.h>
+#include <dolphin/os/os.h>
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/controller.h> // hehe
 #include <sysdolphin/baselib/initialize.h>
-#include <dolphin/gx/GXInit.h>
 
 extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;
@@ -128,7 +129,7 @@ void main(void)
     if (OSGetConsoleSimulatedMemSize() / (1024 * 1024) == 48) {
         OSAllocFromArenaHi(0x01800000, 4);
     }
-    arena_size = OSGetArenaHi() - OSGetArenaLo();
+    arena_size = (size_t) OSGetArenaHi() - (size_t) OSGetArenaLo();
     HSD_SetInitParameter(HSD_INIT_XFB_MAX_NUM, 2);
     HSD_SetInitParameter(HSD_INIT_RENDER_MODE_OBJ, &GXNtsc480IntDf);
     HSD_SetInitParameter(HSD_INIT_FIFO_SIZE, 0x40000);

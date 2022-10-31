@@ -1,8 +1,10 @@
-#include <dolphin/types.h>
-#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSCache.h>
+
 #include <dolphin/base/PPCArch.h>
-#include <dolphin/os/os.h>
 #include <dolphin/os/OSError.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/os.h>
+#include <dolphin/types.h>
 
 #pragma push
 asm unk_t DCEnable()
@@ -39,7 +41,7 @@ lbl_803447FC:
 
 // https://decomp.me/scratch/y3hWw
 #pragma push
-asm unk_t DCFlushRange()
+asm void DCFlushRange(u8*, s32)
 { // clang-format off
     nofralloc
 /* 8034480C 003413EC  28 04 00 00 */	cmplwi r4, 0

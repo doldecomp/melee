@@ -1,5 +1,8 @@
-#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include <dolphin/os/os.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/robj.h>
 

@@ -1,7 +1,9 @@
+#include <melee/ft/fighter.h>
+
 #include <MSL/trigf.h>
+#include <dolphin/os/os.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftcoll.h>

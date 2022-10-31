@@ -1,8 +1,6 @@
 #ifndef _robj_h_
 #define _robj_h_
 
-#include <global.h>
-
 #include <sysdolphin/baselib/objalloc.h>
 
 #include <sysdolphin/baselib/aobj.h>

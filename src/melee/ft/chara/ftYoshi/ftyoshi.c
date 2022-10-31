@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
+
+#include <dolphin/os/os.h>
 #include <melee/it/itkind.h>
 #include <melee/ft/ftcoll.h>
 

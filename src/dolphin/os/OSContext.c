@@ -1,5 +1,6 @@
-#include <Runtime/runtime.h>
 #include <dolphin/os/OSContext.h>
+
+#include <Runtime/runtime.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/os.h>
 

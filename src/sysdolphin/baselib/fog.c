@@ -2,6 +2,7 @@
 
 #include <dolphin/gx/GX_unknown_001.h>
 #include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/debug.h>
 
 static void FogInfoInit(void);
 static void FogAdjInfoInit(void);

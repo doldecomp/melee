@@ -1,4 +1,5 @@
 #include <MSL/trigf.h>
+#include <dolphin/os/os.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>

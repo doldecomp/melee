@@ -1,5 +1,7 @@
-#include <melee/gm/code_801601C4.h>
 #include <melee/pl/player.h>
+
+#include <dolphin/os/os.h>
+#include <melee/gm/code_801601C4.h>
 
 typedef struct _ftMapping {
     s8 internal_id;

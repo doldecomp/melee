@@ -3,6 +3,7 @@
 
 #include <sysdolphin/baselib/aobj.h>
 
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/robj.h>

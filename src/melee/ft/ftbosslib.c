@@ -1,9 +1,11 @@
-#include <dolphin/types.h>
-#include <melee/ft/fighter.h>
-#include <melee/lb/lbvector.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/ftbosslib.h>
+
+#include <dolphin/os/os.h>
+#include <dolphin/types.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftlib.h>
+#include <melee/lb/lbvector.h>
 
 typedef enum {
     Gm_PKind_Human,

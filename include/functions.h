@@ -13,8 +13,6 @@ typedef struct _Article Article;
 
 /* .text section */
 
-void *HSD_JObjUnkMtxPtr(); // asm/melee/lb/lbcollision.s
-
 s32 func_80008248(s32, struct ftHurt *, void *, f32, f32, f32);
 
 void func_8000B1CC(struct _HSD_JObj *, Vec *, Vec *);
@@ -616,8 +614,6 @@ f32 PSVECDotProduct(Vec *a, Vec *b);
 
 void *OSAllocFromHeap(int, u32);
 
-void OSReport(char *, ...);
-
 u32 OSGetConsoleSimulatedMemSize();
 
 void VIWaitForRetrace(void);
@@ -657,7 +653,6 @@ void func_8037EE0C(Vec *, Quaternion *);
 void func_8037EF28(Quaternion *, Quaternion *, Quaternion *, f32);
 
 void func_803881E4(void);
-void HSD_Panic(char *, u32, char *);
 
 void func_8038FD54(struct _HSD_GObj *, void (*)(struct _HSD_GObj *), s32);
 

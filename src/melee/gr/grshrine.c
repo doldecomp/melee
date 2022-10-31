@@ -1,4 +1,6 @@
 #include <melee/gr/grshrine.h>
+
+#include <dolphin/os/os.h>
 #include <math.h>
 
 static void* lbl_804D6A18;
