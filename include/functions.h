@@ -19,7 +19,6 @@ typedef struct _HSD_IDTable HSD_IDTable;
 
 /* .text section */
 
-void func_8000ED54();
 void func_8000EE8C();
 
 void func_8001044C(void *, void *, s32, f32, s32, s32, s32, s32);

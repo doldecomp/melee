@@ -54,6 +54,7 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcollision.h>
+#include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_002.h>
 #include <melee/lb/lbunknown_003.h>

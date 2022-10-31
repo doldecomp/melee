@@ -9,6 +9,7 @@
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/gr/ground.h>
+#include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_002.h>
 #include <sysdolphin/baselib/jobj.h>
