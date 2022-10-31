@@ -3,7 +3,7 @@
 
 #include <common_structs.h>
 #include <dolphin/types.h>
-#include <global.h>
+#include <functions.h>
 
 typedef enum _Mode {
     Mode_Time,
