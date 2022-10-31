@@ -2271,6 +2271,8 @@ extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 extern HSD_ObjAllocData lbl_80458FD0;
 extern HSD_ObjAllocData lbl_80458FFC;
 
+extern unk_t lbl_804D6524;
+extern unk_t lbl_804D6528;
 extern s32** lbl_804D6540;
 
 #endif

@@ -1942,6 +1942,25 @@ lbl_80089104:
 
 extern f32 const lbl_804D83E0;
 
+// lbl_804D64FC..lbl_804D6550 are initialized to 0 in Fighter_LoadCommonData, probably all pointers
+extern unk_t lbl_804D64FC;
+extern unk_t lbl_804D6500;
+extern unk_t lbl_804D6504;
+extern unk_t lbl_804D6508;
+extern unk_t lbl_804D650C;
+extern unk_t lbl_804D6510;
+extern unk_t lbl_804D6514;
+extern unk_t lbl_804D6518;
+extern unk_t lbl_804D651C;
+extern unk_t lbl_804D6530;
+extern unk_t lbl_804D6534;
+extern unk_t lbl_804D6538;
+extern unk_t lbl_804D653C;
+extern unk_t lbl_804D6544;
+extern unk_t lbl_804D6548;
+extern unk_t lbl_804D654C;
+extern unk_t lbl_804D6550;
+
 #pragma push
 asm unk_t func_80089118()
 { // clang-format off

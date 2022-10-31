@@ -8,7 +8,6 @@
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/wobj.h>
-#include <variables.h>
 
 #define HSD_A_L_LITC_R 9
 #define HSD_A_L_LITC_G 10
