@@ -2,8 +2,8 @@
 #define _ftmars_h_
 
 #include <dolphin/types.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef struct _MarsAttributes {
     s32 x0;
