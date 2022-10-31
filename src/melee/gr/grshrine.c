@@ -2,6 +2,8 @@
 
 #include <dolphin/os/os.h>
 #include <math.h>
+#include <melee/gr/grdisplay.h>
+#include <melee/gr/ground.h>
 
 static void* lbl_804D6A18;
 

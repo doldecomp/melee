@@ -1,8 +1,7 @@
-#ifndef _ground_h_
-#define _ground_h_
+#ifndef MELEE_GR_GROUND_H
+#define MELEE_GR_GROUND_H
 
 #include <melee/gr/stage.h>
-
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/lobj.h>
 
@@ -50,5 +49,6 @@ unk_t func_801C49B4(void);
 void func_801C4368(f32*, f32*);
 s32 func_801C5794(void);
 BOOL func_801C5700(s32 i);
+void* func_801C49F8(void); // get stage's "yakumono" ("about"?) param
 
 #endif

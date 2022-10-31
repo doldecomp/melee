@@ -68,8 +68,6 @@ void func_8002F0E4(s32);
 s32 func_8002F260(void);
 void func_8002F274(void);
 
-void func_8002F474(void);
-
 void *func_80030A50(void);
 
 BOOL func_80030CFC(struct _CameraBox *, f32);
@@ -498,13 +496,9 @@ struct _HSD_JObj *func_801C3FA4(struct _HSD_GObj *, s32);
 s32 func_801C4210(void);
 void func_801C42AC();
 
-void *func_801C49F8(void); // get stage's "yakumono" ("about"?) param
-
 void func_801C5A84();
 
 void func_801C5AA4();
-
-void func_801C5DB0(struct _HSD_GObj *, s32);
 
 void func_801C7FF8(struct _HSD_GObj *, s32, s32, s32, f32, f32);
 

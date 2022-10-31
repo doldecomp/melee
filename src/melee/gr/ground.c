@@ -3,6 +3,7 @@
 #include <MSL/trigf.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
+#include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/it/itkind.h>

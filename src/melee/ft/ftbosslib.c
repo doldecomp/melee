@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <dolphin/types.h>
+#include <melee/cm/camera.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftlib.h>
