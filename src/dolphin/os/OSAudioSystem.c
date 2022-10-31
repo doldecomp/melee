@@ -2,7 +2,7 @@
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSTime.h>
-#include <string.h>
+#include <MSL/string.h>
 
 u8 DSPInitCode[] = {
     0x02, 0x9F, 0x00, 0x10,

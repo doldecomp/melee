@@ -1,5 +1,5 @@
 #include <stdarg.h>
-#include <string.h>
+#include <MSL/string.h>
 
 #include <sysdolphin/baselib/aobj.h>
 

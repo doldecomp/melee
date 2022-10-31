@@ -381,7 +381,6 @@ extern unk_t OSDefaultExceptionHandler();
 extern unk_t __DBIsExceptionMarked();
 extern unk_t ICInvalidateRange();
 extern unk_t DCFlushRangeNoSync();
-extern unk_t memcpy();
 extern unk_t DBPrintf();
 
 #pragma push

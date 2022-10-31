@@ -1,6 +1,6 @@
 #include <sysdolphin/baselib/baselib_unknown_001.h>
 #include <dolphin/gecko.h>
-#include <string.h>
+#include <MSL/string.h>
 #include <dolphin/card.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <cstring.h>
