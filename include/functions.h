@@ -11,8 +11,6 @@ typedef struct _Article Article;
 
 /* .text section */
 
-void func_8000C228(struct _HSD_JObj *, struct _HSD_JObj *);
-
 void func_8000C420(struct _HSD_JObj *, u32, f32);
 
 s32 func_8000D148(f32, f32, f32, f32, f32, f32, f32);
