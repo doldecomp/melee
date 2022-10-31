@@ -25,7 +25,6 @@ void func_8000BA44(struct _HSD_DObj*, f32);
 void func_8000BB24(struct _HSD_DObj*, f32);
 static struct _HSD_JObj* lbFindJObjWithAObj(struct _HSD_JObj*);
 f32 func_8000BD28(struct _HSD_JObj*);
-f32 func_8000BDB4(struct _HSD_JObj*);
 f32 func_8000BE40(struct _HSD_JObj*);
 static struct _HSD_AnimJoint* func_8000BECC(struct _HSD_AnimJoint* animjoint);
 f32 func_8000BFF0(struct _HSD_AnimJoint* animjoint);
@@ -55,6 +54,7 @@ s32 func_8000CDA8(s32 i);
 struct _HSD_LObj* func_8000CDC0(struct _HSD_LObj*);
 void func_8000CE30(struct _HSD_DObj*, struct _HSD_DObj*);
 void func_8000CE40(struct _HSD_JObj*, struct _HSD_DObj*);
+f32 func_8000BDB4(HSD_JObj* jobj);
 
 #endif
 
