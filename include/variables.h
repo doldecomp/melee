@@ -1,25 +1,27 @@
-#pragma once
+#ifndef __VARIABLES_H__
+#define __VARIABLES_H__
 
-// extern ? lbl_804D64F8;
-extern void* lbl_804D64FC; // lbl_804D64FC..lbl_804D6550 are initialized to 0 in Fighter_LoadCommonData, probably all pointers
-extern void* lbl_804D6500;
-extern void* lbl_804D6504;
-extern void* lbl_804D6508;
-extern void* lbl_804D650C;
-extern void* lbl_804D6510;
-extern void* lbl_804D6514;
-extern void* lbl_804D6518;
-extern void* lbl_804D651C;
-extern void* lbl_804D6524;
-extern void* lbl_804D6528;
-// extern ? lbl_804D652C;
-extern void* lbl_804D6530;
-extern void* lbl_804D6534;
-extern void* lbl_804D6538;
-extern void* lbl_804D653C;
-extern void* lbl_804D6544;
-extern void* lbl_804D6548;
-extern void* lbl_804D654C;
-extern void* lbl_804D6550;
-// extern ? lbl_804D4A00;
+#include <dolphin/types.h>
+
+extern unk_t lbl_804D64FC; // lbl_804D64FC..lbl_804D6550 are initialized to 0 in Fighter_LoadCommonData, probably all pointers
+extern unk_t lbl_804D6500;
+extern unk_t lbl_804D6504;
+extern unk_t lbl_804D6508;
+extern unk_t lbl_804D650C;
+extern unk_t lbl_804D6510;
+extern unk_t lbl_804D6514;
+extern unk_t lbl_804D6518;
+extern unk_t lbl_804D651C;
+extern unk_t lbl_804D6524;
+extern unk_t lbl_804D6528;
+extern unk_t lbl_804D6530;
+extern unk_t lbl_804D6534;
+extern unk_t lbl_804D6538;
+extern unk_t lbl_804D653C;
+extern unk_t lbl_804D6544;
+extern unk_t lbl_804D6548;
+extern unk_t lbl_804D654C;
+extern unk_t lbl_804D6550;
 extern s32 g_debugLevel;
+
+#endif
