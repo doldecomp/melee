@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_FTCOMMON_H
+#define MELEE_FT_FTCOMMON_H
 
 #include <melee/ft/fighter.h>
 
@@ -111,3 +112,5 @@ void func_80080484(Fighter*);
 void func_800804A0(Fighter*, f32);
 f32 func_800804EC(Fighter*);
 void func_800804FC(Fighter*);
+
+#endif

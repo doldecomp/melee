@@ -1,5 +1,7 @@
-#include <MSL/trigf.h>
 #include <melee/ft/chara/ftSamus/ftsamus.h>
+
+#include <MSL/trigf.h>
+#include <melee/lb/lbcollision.h>
 
 extern s32 func_8008B658(HSD_GObj*);
 extern s32 func_800D6824(HSD_GObj*); 

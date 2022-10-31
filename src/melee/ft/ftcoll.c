@@ -4,6 +4,7 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/it/item.h>
+#include <melee/lb/lbcollision.h>
 #include <sysdolphin/baselib/gobj.h>
 
 // Combo Count Logic
