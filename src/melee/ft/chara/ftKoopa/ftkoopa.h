@@ -1,13 +1,9 @@
-#ifndef _ftkoopa_h_
-#define _ftkoopa_h_
-
-#include <global.h>
+#ifndef MELEE_FT_CHARA_FTKOOPA_FTKOOPA_H
+#define MELEE_FT_CHARA_FTKOOPA_FTKOOPA_H
 
 #include <dolphin/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
-
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef struct _ftKoopaAttributes {
     f32 x0;
