@@ -1,8 +1,6 @@
 #ifndef _mobj_h_
 #define _mobj_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 
 #include <sysdolphin/baselib/class.h>
