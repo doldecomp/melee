@@ -1,15 +1,14 @@
-#ifndef _lobj_h_
-#define _lobj_h_
+#ifndef SYSDOLPHIN_BASELIB_LOBJ_H
+#define SYSDOLPHIN_BASELIB_LOBJ_H
 
-#include <global.h>
-
-#include <dolphin/types.h>
 #include <dolphin/gx/GXLight.h>
-
+#include <dolphin/types.h>
+#include <functions.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/wobj.h>
+#include <variables.h>
 
 #define HSD_A_L_LITC_R 9
 #define HSD_A_L_LITC_G 10
