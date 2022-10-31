@@ -5,7 +5,6 @@
 
 /* .text section */
 
-void func_8000E9F0(Vec *, s32, f32);
 void func_8000ED54();
 void func_8000EE8C();
 

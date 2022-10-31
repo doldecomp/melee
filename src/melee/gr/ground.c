@@ -8,6 +8,7 @@
 #include <melee/gr/grdatfiles.h>
 #include <melee/it/itkind.h>
 #include <melee/lb/lbarchive.h>
+#include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_003.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
