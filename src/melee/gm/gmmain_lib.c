@@ -1,4 +1,6 @@
 #include <melee/gm/gmmain_lib.h>
+
+#include <melee/gm/code_801601C4.h>
 #include <melee/lb/lbtime.h>
 
 void* func_8015CC34(void) {
@@ -498,6 +500,8 @@ void* func_8015D804(s32 arg0) {
     return &thing->x1B80[arg0];
 }
 
+void func_8015D888(u32);
+
 s32 func_8015D818(u32 arg0) {
     s32 unused[10];
     if (func_8015D94C(arg0) == 0) {
@@ -511,7 +515,8 @@ s32 func_8015D818(u32 arg0) {
     return 0;
 }
 
-void func_8015D888(u32 arg0) {
+static void func_8015D888(u32 arg0)
+{
     u32 *thing = &lbl_804D3EE0->thing.x1B40[0];
     thing[arg0 / 32] |= (1 << (arg0 % 32));
 }
@@ -536,7 +541,8 @@ void func_8015D924(u32 arg0) {
     thing[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-s32 func_8015D94C(u32 arg0) {
+BOOL func_8015D94C(u32 arg0)
+{
     u32 *thing = &lbl_804D3EE0->thing.x1B4C[0];
     u32 flag = thing[arg0 / 32];
     return flag & (1 << (arg0 % 32));

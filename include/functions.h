@@ -461,14 +461,6 @@ s32 func_8015C4C4(void);
 
 void func_8015C5F8(struct _HSD_GObj *);
 
-s8 *func_8015CE44(s32, s32);
-
-void func_8015D888(u32);
-
-void func_8015D8FC(u32);
-
-s32 func_8015D94C(u32);
-
 BOOL func_80164840(u8);
 
 s32 func_8016AEDC(void);
