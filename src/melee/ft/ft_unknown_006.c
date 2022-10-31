@@ -81680,3 +81680,23 @@ asm void func_800C884C(HSD_GObj* fighter_gobj)
 /* 800C889C 000C547C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm void func_800C88A0(Fighter* fp)
+{ // clang-format off
+    nofralloc
+/* 800C88A0 000C5480  88 03 22 26 */	lbz r0, 0x2226(r3)
+/* 800C88A4 000C5484  38 80 00 00 */	li r4, 0
+/* 800C88A8 000C5488  50 80 1F 38 */	rlwimi r0, r4, 3, 0x1c, 0x1c
+/* 800C88AC 000C548C  98 03 22 26 */	stb r0, 0x2226(r3)
+/* 800C88B0 000C5490  88 03 22 26 */	lbz r0, 0x2226(r3)
+/* 800C88B4 000C5494  50 80 17 7A */	rlwimi r0, r4, 2, 0x1d, 0x1d
+/* 800C88B8 000C5498  98 03 22 26 */	stb r0, 0x2226(r3)
+/* 800C88BC 000C549C  98 83 21 34 */	stb r4, 0x2134(r3)
+/* 800C88C0 000C54A0  90 83 20 30 */	stw r4, 0x2030(r3)
+/* 800C88C4 000C54A4  88 03 22 26 */	lbz r0, 0x2226(r3)
+/* 800C88C8 000C54A8  50 80 07 FE */	rlwimi r0, r4, 0, 0x1f, 0x1f
+/* 800C88CC 000C54AC  98 03 22 26 */	stb r0, 0x2226(r3)
+/* 800C88D0 000C54B0  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
