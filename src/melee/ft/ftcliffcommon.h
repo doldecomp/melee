@@ -1,8 +1,6 @@
 #ifndef _ftcliffcommon_h_
 #define _ftcliffcommon_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 
 #include <sysdolphin/baselib/gobj.h>
