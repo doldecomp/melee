@@ -2,7 +2,6 @@
 #define MELEE_IF_IFSTATUS_H
 
 #include <dolphin/types.h>
-#include <functions.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
