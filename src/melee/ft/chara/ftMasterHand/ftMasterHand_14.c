@@ -63,26 +63,25 @@ static void ftMasterHand_80152CD8(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 1;
 }
 
-// 80152D44 14F924
-// https://decomp.me/scratch/n1fhW
-void lbl_80152D44(HSD_GObj* arg0) {
-    Fighter* temp_r31;
+void ftMasterHand_80152F80(HSD_GObj* fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
-        temp_r31 = arg0->user_data;
-        func_80152F80(arg0);
-        func_802F046C(temp_r31->x2374);
-        func_802F046C(temp_r31->x2378);
-        func_802F046C(temp_r31->x237C);
-        func_802F046C(temp_r31->x2380);
-        temp_r31->x2374 = 0;
-        temp_r31->x2378 = 0;
-        temp_r31->x237C = 0;
-        temp_r31->x2380 = 0;
+void ftMasterHand_80152D44(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp;
+
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
+        fp = fighter_gobj->user_data;
+        ftMasterHand_80152F80(fighter_gobj);
+        func_802F046C(fp->x2374);
+        func_802F046C(fp->x2378);
+        func_802F046C(fp->x237C);
+        func_802F046C(fp->x2380);
+        fp->x2374 = 0;
+        fp->x2378 = 0;
+        fp->x237C = 0;
+        fp->x2380 = 0;
     }
 }
-
-
 
 // 80152DC0 14F9A0
 // https://decomp.me/scratch/X13ZG
@@ -133,15 +132,11 @@ void lbl_80152E28(HSD_GObj* gobj) {
     }
 }
 
-
-
-// 80152F80 14FB60
-// https://decomp.me/scratch/HCvJq
-void func_80152F80(HSD_GObj* gobj)
+void ftMasterHand_80152F80(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    Fighter* fp = fighter_gobj->user_data;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16B, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
     func_800236B8(fp->x2368);
     func_800236B8(fp->x236C);
     func_800236B8(fp->x2370);
