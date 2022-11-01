@@ -27,5 +27,6 @@ void ftMasterHand_80155B80(HSD_GObj* fighter_gobj);
 void ftMasterHand_8015483C(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155C94(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155D1C(HSD_GObj* interacted_fighter_gobj);
+void ftMasterHand_80155D6C(HSD_GObj* interacted_fighter_gobj, s32 unused_arg);
 
 #endif

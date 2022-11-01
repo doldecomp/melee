@@ -383,7 +383,6 @@ void ftMars_LoadSpecialAttrs(HSD_GObj *);
 void func_80149268(HSD_GObj *);
 
 #pragma region "ftMasterHand"
-void ftMasterHand_80155D6C(HSD_GObj*, s32);
 void func_80155FCC();
 void func_80156014();
 
