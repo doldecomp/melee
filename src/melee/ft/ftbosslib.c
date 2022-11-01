@@ -228,7 +228,7 @@ BOOL func_8015C358(void)
     return FALSE;
 }
 
-BOOL func_8015C3A0(void)
+BOOL ftbosslib_8015C3A0(void)
 {
     HSD_GObj* gobj = ftbosslib_8015C3E8(FTKIND_CREZYH);
     if (gobj && ((Fighter*) gobj->user_data)->x221F_flag.bits.b3) {
