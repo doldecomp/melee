@@ -87,7 +87,7 @@ void ftbosslib_8015BE40(HSD_GObj* fighter_gobj, Vec* pos, f32* arg2, f32 arg3, f
     fp->x80_self_vel.y = diff.y;
 }
 
-void ftbosslib_8015BF74(HSD_GObj* arg0, f32 arg1)
+void ftbosslib_8015BF74(HSD_GObj* fighter_gobj, f32 arg1)
 {
     Vec3 sp14;
     Fighter* fp;
@@ -95,8 +95,8 @@ void ftbosslib_8015BF74(HSD_GObj* arg0, f32 arg1)
     f32 phi_f0;
     f32 phi_f1;
 
-    fp = arg0->user_data;
-    func_8015C208(arg0, &sp14);
+    fp = fighter_gobj->user_data;
+    func_8015C208(fighter_gobj, &sp14);
     temp_f1 = sp14.x - fp->xB0_pos.x;
     phi_f0 = fabs_inline(temp_f1);
     if (phi_f0 > arg1) {
@@ -111,7 +111,7 @@ void ftbosslib_8015BF74(HSD_GObj* arg0, f32 arg1)
     }
 }
 
-void ftbosslib_8015C010(HSD_GObj* arg0, f32 arg1)
+void ftbosslib_8015C010(HSD_GObj* fighter_gobj, f32 arg1)
 {
     Vec3 sp14;
     Fighter* fp;
@@ -119,8 +119,8 @@ void ftbosslib_8015C010(HSD_GObj* arg0, f32 arg1)
     f32 phi_f0;
     f32 phi_f0_2;
 
-    fp = arg0->user_data;
-    func_8015C208(arg0, &sp14);
+    fp = fighter_gobj->user_data;
+    func_8015C208(fighter_gobj, &sp14);
     temp_f1 = sp14.x - fp->xB0_pos.x;
     phi_f0 = fabs_inline(temp_f1);
     if (phi_f0 > arg1) {
@@ -135,9 +135,10 @@ void ftbosslib_8015C010(HSD_GObj* arg0, f32 arg1)
     }
 }
 
-void func_8015C09C(HSD_GObj* arg0, f32 arg1) {
-    HSD_JObj* jobj = arg0->hsd_obj;
-    Fighter* fp = arg0->user_data;
+void ftbosslib_8015C09C(HSD_GObj* fighter_gobj, f32 arg1)
+{
+    HSD_JObj* jobj = fighter_gobj->hsd_obj;
+    Fighter* fp = fighter_gobj->user_data;
     Quaternion quat = {0};
     s32 unused[2];
 
@@ -146,13 +147,14 @@ void func_8015C09C(HSD_GObj* arg0, f32 arg1) {
     HSD_JObjSetRotation(jobj, &quat);
 }
 
-void func_8015C190(HSD_GObj* arg0) {
+void func_8015C190(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
     s32 unused1;
     Vec3 sp10;
     s32 unused2;
 
-    fp = arg0->user_data;
+    fp = fighter_gobj->user_data;
     func_80053FF4(0, &sp10);
     if (fp->xB0_pos.x > sp10.x) {
         fp->xB0_pos.x = sp10.x;
@@ -165,15 +167,17 @@ void func_8015C190(HSD_GObj* arg0) {
     }
 }
 
-void func_8015C208(HSD_GObj* arg0, Vec3* arg1) {
+void func_8015C208(HSD_GObj* fighter_gobj, Vec3* arg1)
+{
     s32 unused;
-    Fighter* fp = arg0->user_data;
-    HSD_GObj* gobj = func_8015C244(arg0, &fp->xB0_pos);
+    Fighter* fp = fighter_gobj->user_data;
+    HSD_GObj* gobj = func_8015C244(fighter_gobj, &fp->xB0_pos);
     func_80086644(gobj, arg1);
 }
 
-HSD_GObj* func_8015C244(HSD_GObj* arg0, Point3d* arg1) {
-    return func_8008627C(arg1, arg0);
+HSD_GObj* func_8015C244(HSD_GObj* fighter_gobj, Point3d* arg1)
+{
+    return func_8008627C(arg1, fighter_gobj);
 }
 
 BOOL func_8015C270(void) {
