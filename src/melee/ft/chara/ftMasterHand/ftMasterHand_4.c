@@ -2,10 +2,13 @@
 
 #include <melee/cm/camera.h>
 
+static void ftMasterHand_801511FC(HSD_GObj* fighter_gobj);
+
 void ftMasterHand_801510B0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
     fp->xB0_pos.x = attr->x30_pos2.x;
@@ -19,12 +22,10 @@ void ftMasterHand_801510B0(HSD_GObj* fighter_gobj)
 
 void ftMasterHand_80151168(HSD_GObj* fighter_gobj)
 {
-    Fighter* r4_fp;
-    u32 unk[2];
-
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        r4_fp = fighter_gobj->user_data;
-        r4_fp->sa.masterhand.x2258 = 0x155;
+        Fighter* fp = fighter_gobj->user_data;
+        u32 unk[2];
+        fp->sa.masterhand.x2258 = 0x155;
         ftMasterHand_80151018(fighter_gobj);
     }
 }
@@ -47,7 +48,7 @@ void ftMasterHand_801511F8(HSD_GObj* fighter_gobj)
     return;
 }
 
-void ftMasterHand_801511FC(HSD_GObj* fighter_gobj)
+static void ftMasterHand_801511FC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     HSD_GObj* tmp_gobj;

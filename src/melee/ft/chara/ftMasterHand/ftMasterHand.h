@@ -109,7 +109,6 @@ void ftMasterHand_80151168(HSD_GObj* gobj);
 void ftMasterHand_801511B0(HSD_GObj* gobj);
 void ftMasterHand_801511F4(HSD_GObj* gobj);
 void ftMasterHand_801511F8(HSD_GObj* gobj);
-void ftMasterHand_801511FC(HSD_GObj* gobj);
 
 // ftMasterHand_5
 u32 lbl_80151428(Vec* vec);
