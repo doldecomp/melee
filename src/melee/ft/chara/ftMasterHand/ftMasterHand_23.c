@@ -2,7 +2,7 @@
 
 // 80154A78 151658
 // https://decomp.me/scratch/ci0xf
-void func_80154A78(HSD_GObj* fighter_gobj)
+void ftMasterHand_80154A78(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
     MasterHandAttributes* attr;
@@ -31,11 +31,11 @@ void ftMasterHand_80154B2C(HSD_GObj* fighter_gobj)
         func_8015C5F8(fighter_gobj);
         fp->x2204_ftcmd_var1 = 0;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
         if (((Fighter*) fighter_gobj->user_data)->sa.masterhand.x2250 == 0x17B) {
             ftMasterHand_80154E78(fighter_gobj);
         } else {
-            func_80155014(fighter_gobj);
+            ftMasterHand_80155014(fighter_gobj);
         }
     }
 }

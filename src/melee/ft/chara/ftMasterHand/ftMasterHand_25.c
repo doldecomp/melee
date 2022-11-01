@@ -10,7 +10,7 @@ void lbl_80154D78(HSD_GObj* fighter_gobj)
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
         fp = fighter_gobj->user_data;
         if (fp->x2360 == TRUE) {
-            func_80154A78(fighter_gobj);
+            ftMasterHand_80154A78(fighter_gobj);
         } else {
             func_801546D8(fighter_gobj);
         }

@@ -182,7 +182,7 @@ void lbl_80154620(HSD_GObj* fighter_gobj)
         fp->x80_self_vel.z = temp_f0;
         fp->x80_self_vel.y = temp_f0;
         fp->x80_self_vel.x = temp_f0;
-        func_80154CF8(fighter_gobj, fp);
+        ftMasterHand_80154CF8(fighter_gobj, fp);
     }
 }
 
@@ -371,5 +371,5 @@ void lbl_80154A2C(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.x = 0.0F;
     fp->x2360 = TRUE;
     fp->x221E_flag.bits.b6 = 0;
-    func_80154C78(fighter_gobj);
+    ftMasterHand_80154C78(fighter_gobj);
 }
