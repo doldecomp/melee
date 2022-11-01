@@ -206,31 +206,12 @@ BOOL ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* fighter_gobj)
     return ret;
 }
 
-// 0x80117D9C //
-// https://decomp.me/scratch/QeIRL //
-BOOL ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj) // Checks if Ness is in SpecialHiHold/SpecialAirHiHold (PK Thunder control loop) //
+// Checks if Ness is in SpecialHiHold/SpecialAirHiHold (PK Thunder control loop)
+BOOL ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj)
 {
-    s32 ASID;
-    Fighter* fp;
-    s32 phi_r3;
-    Fighter* fp_1;
+    Fighter* fp = fighter_gobj->user_data;
 
-    fp = (fp_1 = getFighter(fighter_gobj));
-    ASID = fp->x10_action_state_index;
-
-    phi_r3 = TRUE;
-
-    if ((ASID != AS_NESS_SPECIALHI_HOLD) && (ASID != AS_NESS_SPECIALAIRHI_HOLD))
-    {
-        phi_r3 = FALSE;
-    }
-
-    if (phi_r3 != FALSE)
-    {
-        return TRUE;
-    }
-
-    return FALSE;
+    return ((fp->x10_action_state_index == 0x167) || (fp->x10_action_state_index == 0x16B)) ? TRUE : FALSE;
 }
 
 // 0x80117DD4 //
