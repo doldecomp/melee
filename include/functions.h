@@ -382,12 +382,6 @@ void ftMars_LoadSpecialAttrs(HSD_GObj *);
 
 void func_80149268(HSD_GObj *);
 
-#pragma region "ftMasterHand"
-
-void func_8015C5F8(HSD_GObj *);
-
-#pragma endregion
-
 BOOL func_80164840(u8);
 
 s32 func_8016AEDC(void);

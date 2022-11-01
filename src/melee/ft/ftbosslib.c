@@ -294,21 +294,21 @@ s32 func_8015C530(u32 arg0)
     }
 }
 
-void func_8015C5F8(HSD_GObj* gobj)
+void func_8015C5F8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     switch (HSD_Randi(4)) {
     case 0:
-        func_80088148(fp, 0x4E21A, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21A, 0x7F, 0x40);
         return;
     case 1:
-        func_80088148(fp, 0x4E21B, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21B, 0x7F, 0x40);
         return;
     case 2:
-        func_80088148(fp, 0x4E21C, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21C, 0x7F, 0x40);
         return;
     case 3:
-        func_80088148(fp, 0x4E21D, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21D, 0x7F, 0x40);
         return;
     }
 }

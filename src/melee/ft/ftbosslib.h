@@ -19,5 +19,6 @@ BOOL ftbosslib_8015C3A0(void);
 HSD_GObj* ftbosslib_8015C3E8(s32 kind);
 s32 ftbosslib_8015C44C(s32 kind);
 s32 func_8015C4C4(void);
+void func_8015C5F8(HSD_GObj* fighter_gobj);
 
 #endif
