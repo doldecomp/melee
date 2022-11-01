@@ -298,7 +298,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     ftMasterHand_80153820(fighter_gobj);
                     break;
                 case 0x172: // Ram
-                    ftMasterHand_801541C8(fighter_gobj, &lbl_80153B90);
+                    ftMasterHand_801541C8(fighter_gobj, &ftMasterHand_80153B90);
                     break;
                 case 0x173: // Crush
                     ftMasterHand_801541C8(fighter_gobj, &lbl_80153D2C);
@@ -416,7 +416,7 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
         ftMasterHand_80153820(fighter_gobj);
     } else if ((r6_button & BUTTON_A) && (r6_button & DPAD_RIGHT)) {
         // Ram
-        ftMasterHand_801541C8(fighter_gobj, &lbl_80153B90);
+        ftMasterHand_801541C8(fighter_gobj, &ftMasterHand_80153B90);
     } else if ((r6_button & BUTTON_A) && (r6_button & DPAD_DOWN)) {
         // Crush
         ftMasterHand_801541C8(fighter_gobj, &lbl_80153D2C);

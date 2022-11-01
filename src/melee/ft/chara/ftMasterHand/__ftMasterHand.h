@@ -131,5 +131,13 @@ void ftMasterHand_801539A4(HSD_GObj* fighter_gobj);
 void ftMasterHand_801539EC(HSD_GObj* fighter_gobj);
 void ftMasterHand_80153A30(HSD_GObj* fighter_gobj);
 void ftMasterHand_80153A60(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153AEC(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153B28(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153B6C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153B8C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153B90(HSD_GObj* fighter_gobj); // 19 Ram
+void ftMasterHand_80153C48(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153C90(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153CD4(HSD_GObj* fighter_gobj);
 
 #endif
