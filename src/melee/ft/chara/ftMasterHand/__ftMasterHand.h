@@ -21,5 +21,6 @@ void ftMasterHand_801530A4(HSD_GObj* fighter_gobj);
 void ftMasterHand_80153820(HSD_GObj* fighter_gobj);
 void ftMasterHand_80153A64(HSD_GObj* fighter_gobj);
 void ftMasterHand_801541C8(HSD_GObj* fighter_gobj, GObjCallback);
+void ftMasterHand_801542E0(HSD_GObj* fighter_gobj);
 
 #endif

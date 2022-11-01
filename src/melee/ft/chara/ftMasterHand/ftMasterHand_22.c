@@ -1,58 +1,45 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
-// 80154230 150E10
-// https://decomp.me/scratch/dpg50
-void lbl_80154230(HSD_GObj* gobj) {
+void ftMasterHand_80154230(HSD_GObj* fighter_gobj)
+{
     Fighter* r4_fp;
     u32 unk[2];
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        r4_fp = gobj->user_data;
-        (r4_fp->x2344_callback)(gobj);
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
+        r4_fp = fighter_gobj->user_data;
+        (r4_fp->x2344_callback)(fighter_gobj);
     }
 }
 
-
-
-
-// 80154278 150E58
-void lbl_80154278(HSD_GObj* arg0) {
-    Fighter* fp = arg0->user_data;
+void ftMasterHand_80154278(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        func_8015BD20(fighter_gobj);
     }
 }
 
-
-
-// 801542BC 150E9C
-void lbl_801542BC(HSD_GObj* gobj) {
-    func_80085134(gobj);
+void ftMasterHand_801542BC(HSD_GObj* fighter_gobj)
+{
+    func_80085134(fighter_gobj);
 }
 
-
-
-// 801542DC 150EBC
-void lbl_801542DC(HSD_GObj* gobj) {
+void ftMasterHand_801542DC(HSD_GObj* fighter_gobj)
+{
     return;
 }
 
+void ftMasterHand_801542E0(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp;
+    MasterHandAttributes* ext_attr;
 
-
-// 801542E0 150EC0
-// https://decomp.me/scratch/pmJHD
-void func_801542E0(HSD_GObj* gobj) {
-    Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
-
-    r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    ftAnim_SetAnimRate(gobj, r30_attributes->x110_pos.y);
-    r31_fp->x2348_stateVar3 = (s32) r30_attributes->x110_pos.x;
+    fp = fighter_gobj->user_data;
+    ext_attr = fp->x10C_ftData->ext_attr;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    ftAnim_SetAnimRate(fighter_gobj, ext_attr->x110_pos.y);
+    fp->x2348_stateVar3 = (s32) ext_attr->x110_pos.x;
 }
-
-
 
 // 80154360 150F40
 // https://decomp.me/scratch/rwb1V

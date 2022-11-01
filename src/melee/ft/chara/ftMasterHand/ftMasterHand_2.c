@@ -339,10 +339,10 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     ftMasterHand_801530A4(fighter_gobj);
                     break;
                 case 0x17B: // Grab
-                    func_801542E0(fighter_gobj);
+                    ftMasterHand_801542E0(fighter_gobj);
                     break;
                 case 0x17C: // Grab
-                    func_801542E0(fighter_gobj);
+                    ftMasterHand_801542E0(fighter_gobj);
                     break;
                 }
             }
@@ -462,11 +462,11 @@ void func_80150894(HSD_GObj* gobj) {
     } else if ((r6_button & BUTTON_Z) && ((r6_button & DPAD_UP))) {
         // Grab
         r4_fp->sa.masterhand.x2250 = 0x17B;
-        func_801542E0(gobj);
+        ftMasterHand_801542E0(gobj);
     } else if ((r6_button & BUTTON_Z) && ((r6_button & DPAD_RIGHT))) {
         // Grab
         r4_fp->sa.masterhand.x2250 = 0x17C;
-        func_801542E0(gobj);
+        ftMasterHand_801542E0(gobj);
     } else if (((r6_button & BUTTON_Y)) && ((r6_button & DPAD_UP))) {
         // Crazy Hand Combo Attack
         switch (func_8015C4C4()) {
