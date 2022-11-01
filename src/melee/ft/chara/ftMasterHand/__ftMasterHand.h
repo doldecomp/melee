@@ -9,7 +9,8 @@ void ftMasterHand_80154CF8(HSD_GObj* fighter_gobj, Fighter* fp);
 void ftMasterHand_80154E78(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155014(HSD_GObj* fighter_gobj);
 void ftMasterHand_80150DC4(HSD_GObj* fighter_gobj, void (*callback)(HSD_GObj* fighter_gobj), Vec3*);
-void ftMasterHand_80150230(HSD_GObj* gobj);
-void func_801510B0(HSD_GObj* gobj);
+void ftMasterHand_80150230(HSD_GObj* fighter_gobj);
+void ftMasterHand_801510B0(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151CA8(HSD_GObj* fighter_gobj);
 
 #endif

@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 // 80151D20 14E900
 // https://decomp.me/scratch/wVowU
@@ -131,7 +131,7 @@ void lbl_80151F00(HSD_GObj* gobj) {
     func_800866DC(func_8015C244(gobj, &r31_fp->xB0_pos), &sp28);
     lbvector_Diff(&sp28, &r31_fp->xB0_pos, &sp1C_resultVector);
     if (my_lbvector_Len(&sp1C_resultVector) < r30_attributes->x4C) {
-        func_80151CA8(gobj);
+        ftMasterHand_80151CA8(gobj);
     }
     func_80054158(0, &sp28);
     if (r31_fp->xB0_pos.x < sp28.x) {
