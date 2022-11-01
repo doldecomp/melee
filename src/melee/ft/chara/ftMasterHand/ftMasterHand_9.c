@@ -120,7 +120,7 @@ void lbl_80151F00(HSD_GObj* fighter_gobj)
 
     r31_fp = fighter_gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    func_800866DC(func_8015C244(fighter_gobj, &r31_fp->xB0_pos), &sp28);
+    func_800866DC(ftbosslib_8015C244(fighter_gobj, &r31_fp->xB0_pos), &sp28);
     lbvector_Diff(&sp28, &r31_fp->xB0_pos, &sp1C_resultVector);
     if (my_lbvector_Len(&sp1C_resultVector) < r30_attributes->x4C) {
         ftMasterHand_80151CA8(fighter_gobj);

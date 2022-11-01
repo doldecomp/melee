@@ -384,8 +384,6 @@ void func_80149268(HSD_GObj *);
 
 #pragma region "ftMasterHand"
 
-HSD_GObj *func_8015C244(HSD_GObj *, Vec *);
-
 BOOL func_8015C31C(void);
 
 BOOL func_8015C3A0(void);

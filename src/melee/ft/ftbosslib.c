@@ -174,13 +174,13 @@ void ftbosslib_8015C208(HSD_GObj* fighter_gobj, Vec* pos)
 {
     s32 unused;
     Fighter* fp = fighter_gobj->user_data;
-    HSD_GObj* gobj = func_8015C244(fighter_gobj, &fp->xB0_pos);
+    HSD_GObj* gobj = ftbosslib_8015C244(fighter_gobj, &fp->xB0_pos);
     func_80086644(gobj, pos);
 }
 
-HSD_GObj* func_8015C244(HSD_GObj* fighter_gobj, Point3d* arg1)
+HSD_GObj* ftbosslib_8015C244(HSD_GObj* fighter_gobj, Vec* pos)
 {
-    return func_8008627C(arg1, fighter_gobj);
+    return func_8008627C(pos, fighter_gobj);
 }
 
 BOOL func_8015C270(void)
