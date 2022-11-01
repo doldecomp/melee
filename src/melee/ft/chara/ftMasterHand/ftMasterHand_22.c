@@ -1,5 +1,4 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 80154230 150E10
 // https://decomp.me/scratch/dpg50
@@ -172,21 +171,20 @@ void func_801545A0(HSD_GObj* gobj) {
 
 // 80154620 151200
 // https://decomp.me/scratch/iJH90
-void lbl_80154620(HSD_GObj* gobj) {
-    Fighter* temp_r4;
+void lbl_80154620(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp;
     f32 temp_f0;
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        temp_r4 = gobj->user_data;
-        temp_f0 = 0.0f;
-        temp_r4->x80_self_vel.z = temp_f0;
-        temp_r4->x80_self_vel.y = temp_f0;
-        temp_r4->x80_self_vel.x = temp_f0;
-        func_80154CF8(gobj, temp_r4);
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
+        fp = fighter_gobj->user_data;
+        temp_f0 = 0.0F;
+        fp->x80_self_vel.z = temp_f0;
+        fp->x80_self_vel.y = temp_f0;
+        fp->x80_self_vel.x = temp_f0;
+        func_80154CF8(fighter_gobj, fp);
     }
 }
-
-
 
 // 80154670 151250
 void lbl_80154670(HSD_GObj* arg0) {

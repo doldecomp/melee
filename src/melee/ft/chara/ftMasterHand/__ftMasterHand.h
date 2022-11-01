@@ -1,9 +1,10 @@
 #ifndef FT_CHARA_FTMASTERHAND___FTMASTERHAND_H
 #define FT_CHARA_FTMASTERHAND___FTMASTERHAND_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 void func_80154A78(HSD_GObj* fighter_gobj);
 void func_80154C78(HSD_GObj* fighter_gobj);
+void func_80154CF8(HSD_GObj* fighter_gobj, Fighter* fp);
 
 #endif
