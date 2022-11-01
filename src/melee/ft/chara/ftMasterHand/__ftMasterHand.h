@@ -54,6 +54,18 @@ void ftMasterHand_80151BB8(HSD_GObj* fighter_gobj); // 7 Sweep
 void ftMasterHand_80151C04(HSD_GObj* fighter_gobj);
 void ftMasterHand_80151C40(HSD_GObj* fighter_gobj);
 void ftMasterHand_80151C84(HSD_GObj* fighter_gobj);
-void ftMasterHand_80151BB4(void);
+void ftMasterHand_80151D20(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151CA4(void);
+void ftMasterHand_80151D5C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151DA0(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151DC0(void);
+void ftMasterHand_80151DC4(HSD_GObj* fighter_gobj); // 9 Walk
+void ftMasterHand_80151E10(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151E4C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151E90(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151EB0(void);
+void ftMasterHand_8015204C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152090(HSD_GObj* fighter_gobj);
+void ftMasterHand_801520D4(void);
 
 #endif
