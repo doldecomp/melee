@@ -93,16 +93,16 @@ void ftMasterhand_OnDeath(HSD_GObj* gobj);
 void ftMasterhand_OnLoad(HSD_GObj* gobj);
 
 // ftMasterHand_2
-void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj);
-void func_8014FE10(HSD_GObj* gobj);
-void func_8014FE58(HSD_GObj* gobj);
-void func_8014FE5C(HSD_GObj* gobj);
-void func_8014FF1C(HSD_GObj* gobj);
-void lbl_8014FFDC(HSD_GObj* gobj);
-void lbl_8015082C(HSD_GObj* gobj);
-void lbl_80150870(HSD_GObj* gobj);
-void lbl_80150890(HSD_GObj* gobj);
-void func_80150894(HSD_GObj* gobj);
+void ftMasterHand_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftMasterHand_8014FE10(HSD_GObj* fighter_gobj);
+void func_8014FE58(HSD_GObj* fighter_gobj);
+void func_8014FE5C(HSD_GObj* fighter_gobj);
+void func_8014FF1C(HSD_GObj* fighter_gobj);
+void lbl_8014FFDC(HSD_GObj* fighter_gobj);
+void lbl_8015082C(HSD_GObj* fighter_gobj);
+void lbl_80150870(HSD_GObj* fighter_gobj);
+void lbl_80150890(HSD_GObj* fighter_gobj);
+void func_80150894(HSD_GObj* fighter_gobj);
 
 // ftMasterHand_3
 void lbl_80150F00(HSD_GObj* fighter_gobj);

@@ -8,9 +8,7 @@ void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj) {
 
 void ftMasterHand_80150144(HSD_GObj* fighter_gobj);
 
-// 8014FE10 0014C9F0
-// https://decomp.me/scratch/JL2E5
-void func_8014FE10(HSD_GObj* fighter_gobj)
+void ftMasterHand_8014FE10(HSD_GObj* fighter_gobj)
 {
     if (Stage_80225194() == 0xFB) {
         ftMasterHand_80150144(fighter_gobj);
