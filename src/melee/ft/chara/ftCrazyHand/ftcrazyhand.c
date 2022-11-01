@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
+#include <melee/ft/ftbosslib.h>
 
 void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj) {
 
@@ -46,7 +47,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj) {
     fp->sa.masterhand.x2250 = 0x159; 
     fp->sa.masterhand.x2254 = 0;
     fp->x1A98 = 1;
-    func_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.crazyhand.x2238, ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
+    ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.crazyhand.x2238, ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
 }
 
 

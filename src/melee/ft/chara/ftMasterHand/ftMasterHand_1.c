@@ -49,6 +49,6 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj) {
     fp->sa.masterhand.x2250 = 0x15B;
     fp->sa.masterhand.x2254 = 0;
     fp->x1A98 = 1;
-    func_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, ftData_attr->x18, ftData_attr->x20, ftData_attr->x1C);
+    ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, ftData_attr->x18, ftData_attr->x20, ftData_attr->x1C);
 }
 

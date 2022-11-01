@@ -226,7 +226,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
             MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
             Vec3 vec;
             s32 unused[6];
-            func_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, attr->x18, attr->x20, attr->x1C);
+            ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, attr->x18, attr->x20, attr->x1C);
             if (ftbosslib_8015C44C(0x1C) == 0x180) {
                 // Crazy Hand Combo Attack
                 switch (func_8015C4C4()) {
