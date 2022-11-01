@@ -144,5 +144,6 @@ void ftMasterHand_80153D2C(HSD_GObj* fighter_gobj); // 20 Crush
 void ftMasterHand_80153F8C(HSD_GObj* fighter_gobj);
 void ftMasterHand_80154114(HSD_GObj* fighter_gobj);
 void ftMasterHand_80154158(HSD_GObj* fighter_gobj);
+void ftMasterHand_801541C4(HSD_GObj* fighter_gobj);
 
 #endif
