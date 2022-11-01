@@ -351,42 +351,42 @@ as_table_masterhand:
     .4byte 0x00000152
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_8015550C
-    .4byte lbl_80155580
-    .4byte lbl_801555C4
-    .4byte lbl_801555E4
+    .4byte ftMasterHand_8015550C
+    .4byte ftMasterHand_80155580
+    .4byte ftMasterHand_801555C4
+    .4byte ftMasterHand_801555E4
     .4byte func_800761C8
     .4byte 0x00000153
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_801555E8
-    .4byte lbl_8015565C
-    .4byte lbl_801556A0
-    .4byte lbl_801556C0
+    .4byte ftMasterHand_801555E8
+    .4byte ftMasterHand_8015565C
+    .4byte ftMasterHand_801556A0
+    .4byte ftMasterHand_801556C0
     .4byte func_800761C8
     .4byte 0x00000154
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_801556C4
-    .4byte lbl_801557B0
-    .4byte lbl_801557F4
-    .4byte lbl_80155814
+    .4byte ftMasterHand_801556C4
+    .4byte ftMasterHand_801557B0
+    .4byte ftMasterHand_801557F4
+    .4byte ftMasterHand_80155814
     .4byte func_800761C8
     .4byte 0x00000155
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_80155864
-    .4byte lbl_801558A0
-    .4byte lbl_801558E4
-    .4byte lbl_80155904
+    .4byte ftMasterHand_80155864
+    .4byte ftMasterHand_801558A0
+    .4byte ftMasterHand_801558E4
+    .4byte ftMasterHand_80155904
     .4byte func_800761C8
     .4byte 0x00000156
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_80155908
-    .4byte lbl_80155990
-    .4byte lbl_801559D4
-    .4byte lbl_80155A34
+    .4byte ftMasterHand_80155908
+    .4byte ftMasterHand_80155990
+    .4byte ftMasterHand_801559D4
+    .4byte ftMasterHand_80155A34
     .4byte func_800761C8
     .4byte 0x00000157
     .4byte NULL
