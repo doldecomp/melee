@@ -1,14 +1,11 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
-// 8014FC68 0014C848
-void ftMasterhand_OnDeath(HSD_GObj* gobj)
+void ftMasterhand_OnDeath(HSD_GObj* fighter_gobj)
 {
     return;
 }
 
-// 8014FC6C 0014C84C
-// https://decomp.me/scratch/Tbp9G
-void ftMasterhand_OnLoad(HSD_GObj* gobj)
+void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj)
 {
 
     ftData* ftdata;
@@ -16,14 +13,14 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     void** items;
     Fighter* fp;
 
-    fp = gobj->user_data;
+    fp = fighter_gobj->user_data;
     ftdata = fp->x10C_ftData;
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 
     PUSH_ATTRS(fp, MasterHandAttributes);
 
-    func_8015BDB4(gobj);
+    ftbosslib_8015BDB4(fighter_gobj);
     func_8026B3F8(items[0], 0x7D);
     func_8026B3F8(items[1], 0x7E);
     fp->x2229_b5_no_normal_motion = 1;
@@ -44,7 +41,7 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     fp->x2370 = -1;
     fp->x235C = 0.0f;
     fp->x2360 = FALSE;
-    fp->sa.masterhand.x222C = func_8015C244(gobj, &fp->xB0_pos);
+    fp->sa.masterhand.x222C = func_8015C244(fighter_gobj, &fp->xB0_pos);
     fp->sa.masterhand.x2238 = 1.0f;
     fp->sa.masterhand.x224C = 0;
     fp->sa.masterhand.x2250 = 0x15B;

@@ -19,7 +19,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj) {
 
     PUSH_ATTRS(fp, ftCrazyHandAttributes);
     
-    func_8015BDB4(fighter_gobj);
+    ftbosslib_8015BDB4(fighter_gobj);
     func_8026B3F8(items[0], 0x7F);
     func_8026B3F8(items[1], 0x80);
     func_8026B3F8(items[2], 0x81);
