@@ -38,7 +38,7 @@ void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj)
     fp->x2368 = -1;
     fp->x236C = -1;
     fp->x2370 = -1;
-    fp->x235C = 0.0f;
+    fp->x235C = 0.0F;
     fp->x2360 = FALSE;
     fp->sa.masterhand.x222C = ftbosslib_8015C244(fighter_gobj, &fp->xB0_pos);
     fp->sa.masterhand.x2238 = 1.0F;
