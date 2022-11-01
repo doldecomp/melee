@@ -2,6 +2,7 @@
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLight.h>
+#include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/__GXBump.h>

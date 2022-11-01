@@ -62,7 +62,7 @@ typedef struct OSThread {
 
 typedef void (*OSSwitchThreadCallback)(OSThread*, OSThread*);
 
-OSThreadQueue OS_THREAD_QUEUE
+OSThreadQueue* OS_THREAD_QUEUE
 #ifndef M2CTX
     : 0x800000DC
 #endif
