@@ -106,7 +106,6 @@ void lbl_80150890(HSD_GObj* gobj);
 void func_80150894(HSD_GObj* gobj);
 
 // ftMasterHand_3
-void func_80150D28(HSD_GObj* gobj);
 void func_80150DC4(HSD_GObj* gobj, void*, Vec3*);
 void lbl_80150F00(HSD_GObj* gobj);
 void lbl_80150F68(HSD_GObj* gobj);

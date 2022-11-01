@@ -19,20 +19,19 @@ static void ftMasterHand_80150C8C(HSD_GObj* fighter_gobj)
 
 // 80150D28 0014D908
 // https://decomp.me/scratch/ntaE2
-void func_80150D28(HSD_GObj* gobj) {
+static void ftMasterHand_80150D28(HSD_GObj* fighter_gobj)
+{
     Fighter* r31_fp;
 
-    r31_fp = gobj->user_data;
+    r31_fp = fighter_gobj->user_data;
     if ((r31_fp->sa.masterhand.x2258 == 0x156) || (r31_fp->sa.masterhand.x2258 == 0x186)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x186, 0, 0, r31_fp->x894_currentAnimFrame, 1.0F, 0.0F);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, 0.0f, 1.0f, 0.0f);
-        func_8006EBA4(gobj);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x186, 0, 0, 0.0F, 1.0F, 0.0F);
+        func_8006EBA4(fighter_gobj);
     }
     r31_fp->sa.masterhand.x2258 = 0x186;
 }
-
-
 
 // 80150DC4 0014D9A4
 // https://decomp.me/scratch/vZOBB
@@ -128,11 +127,11 @@ void ftMasterHand_80151018(HSD_GObj* fighter_gobj)
     r6_fp->x2360 = FALSE;
     sp1C_pos.x = attr->x30_pos2.x;
     sp1C_pos.y = attr->x30_pos2.y;
-    sp1C_pos.z = 0.0f;
+    sp1C_pos.z = 0.0F;
     r6_fp->sa.masterhand.x2258 = 0x186;
     r31_fp = fighter_gobj->user_data;
     if (r31_fp->sa.masterhand.x2258 == 0x156) {
-        func_80150D28(fighter_gobj);
+        ftMasterHand_80150D28(fighter_gobj);
     } else {
         ftMasterHand_80150C8C(fighter_gobj);
     }
