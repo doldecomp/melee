@@ -113,7 +113,7 @@ void lbl_80154158(HSD_GObj* gobj) {
     r3_fp = gobj->user_data;
     if (--r3_fp->x2340_f32 > 0.0f) {
         r4_attributes = r3_fp->x10C_ftData->ext_attr;
-        func_8015BF74(gobj, r4_attributes->x58);
+        ftbosslib_8015BF74(gobj, r4_attributes->x58);
     } else {
         r3_fp->x80_self_vel.x = 0.0f;
     }

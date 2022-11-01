@@ -13,7 +13,7 @@ void ftMasterHand_80153A30(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
 
-    func_8015BF74(fighter_gobj, ext_attr->x58);
+    ftbosslib_8015BF74(fighter_gobj, ext_attr->x58);
 }
 
 void ftMasterHand_80153A60(HSD_GObj* fighter_gobj)

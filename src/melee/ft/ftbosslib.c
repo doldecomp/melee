@@ -87,7 +87,8 @@ void ftbosslib_8015BE40(HSD_GObj* fighter_gobj, Vec* pos, f32* arg2, f32 arg3, f
     fp->x80_self_vel.y = diff.y;
 }
 
-void func_8015BF74(HSD_GObj* arg0, f32 arg1) {
+void ftbosslib_8015BF74(HSD_GObj* arg0, f32 arg1)
+{
     Vec3 sp14;
     Fighter* fp;
     f32 temp_f1;

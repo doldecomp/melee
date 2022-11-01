@@ -86,7 +86,7 @@ void lbl_80153CD4(HSD_GObj* gobj) {
 
     r4_fp = gobj->user_data;
     if (--r4_fp->x2340_f32 > 0.0f) {
-        func_8015BF74(gobj, ((MasterHandAttributes*)r4_fp->x10C_ftData->ext_attr)->x58);
+        ftbosslib_8015BF74(gobj, ((MasterHandAttributes*) r4_fp->x10C_ftData->ext_attr)->x58);
     } else {
         r4_fp->x80_self_vel.x = 0.0f;
     }
