@@ -128,8 +128,8 @@ C code that's contributed to this codebase should have `clang-format` ran on it.
 
 ## <a name="prs"></a>Pull Requests
 
-If you just want to get started and match a function, you don't need to create a PR! You can just [create an issue](https://github.com/doldecomp/melee/issues/new) with your decomp.me link and a maintainer will add your code to the repo.
+If you just want to get started and match a function, you don't need to create a PR! You can just [create an issue](https://github.com/doldecomp/melee/issues/new) with your [decomp.me](https://decomp.me/) link and a maintainer will add your code to the repo.
 
-If you're familiar with git and want to make changes locally, you can also [fork the repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo) to your personal GitHub. When submitting code, try to group your changes into fewer but larger PRs, as it'a easier to review that way.
+If you're familiar with git and want to make changes locally, you can also [fork the repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo) to your personal GitHub. When submitting code, try to group your changes into fewer but larger PRs, as it's easier to review that way.
 
 When you open a PR, the `#melee` channel on Discord will be notified.
