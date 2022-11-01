@@ -110,9 +110,6 @@ void ftMasterHand_801511B0(HSD_GObj* gobj);
 void ftMasterHand_801511F4(HSD_GObj* gobj);
 void ftMasterHand_801511F8(HSD_GObj* gobj);
 
-// ftMasterHand_14
-void lbl_80152E28(HSD_GObj* gobj);
-
 // ftMasterHand_15
 void lbl_801535B0(HSD_GObj* gobj);
 void func_8015364C(struct _HSD_GObj *, struct _HSD_JObj *, f32, f32);
@@ -126,7 +123,6 @@ void lbl_80154A2C(HSD_GObj* gobj);
 // ftMasterHand_31
 void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2);
 
-void lbl_80152BCC(HSD_GObj*); // 14 Lasers
 void lbl_80153B90(HSD_GObj*); // 19 Ram
 void lbl_80153D2C(HSD_GObj*); // 20 Crush
 void ftMasterHand_80155194(HSD_GObj*); // 27 Crazy Hand Combo Attack 1

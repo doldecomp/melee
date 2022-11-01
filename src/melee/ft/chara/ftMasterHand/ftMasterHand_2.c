@@ -309,7 +309,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     rand = HSD_Randf();
                     vec.y = attr->xCC_pos.y * rand * 2.0F + attr->xC4_pos.y - attr->xCC_pos.y;
                     vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &lbl_80152BCC, &vec);
+                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152BCC, &vec);
                     break;
                 case 0x16D: // Gun
                     ftMasterHand_801530A4(fighter_gobj);
@@ -428,7 +428,7 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
         rand = HSD_Randf();
         sp10_pos.y = r31_attributes->xCC_pos.y * rand * 2.0F + r31_attributes->xC4_pos.y - r31_attributes->xCC_pos.y;
         sp10_pos.z = 0.0F;
-        ftMasterHand_80150DC4(fighter_gobj, &lbl_80152BCC, &sp10_pos);
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152BCC, &sp10_pos);
     } else if ((r6_button & BUTTON_B) && ((r6_button & DPAD_RIGHT))) {
         // Gun
         ftMasterHand_801530A4(fighter_gobj);
