@@ -26,7 +26,7 @@ void ftMasterHand_801521D8(void)
 
 void ftMasterHand_801521DC(HSD_GObj* fighter_gobj)
 {
-    s32 unk[2];
+    u32 unused[2];
 
     Fighter* fp = fighter_gobj->user_data;
 

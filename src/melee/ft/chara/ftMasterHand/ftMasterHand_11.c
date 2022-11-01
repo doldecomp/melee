@@ -11,87 +11,78 @@ void ftMasterHand_80152370(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
-void ftMasterHand_8015247C(HSD_GObj* fighter_gobj);
+static void ftMasterHand_8015247C(HSD_GObj* fighter_gobj);
 
-void lbl_801523BC(HSD_GObj* fighter_gobj)
+void ftMasterHand_801523BC(HSD_GObj* fighter_gobj)
 {
-    Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        Fighter* fp = fighter_gobj->user_data;
+        MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj)) {
-        return;
-    }
-    r31_fp = fighter_gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    ftMasterHand_8015247C(fighter_gobj);
-    r31_fp->x2348_stateVar3 = r30_attributes->xA0;
-}
-
-// 80152414 14EFF4
-// https://decomp.me/scratch/u6Ii5
-void lbl_80152414(HSD_GObj* gobj) {
-    Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        ftbosslib_8015BD20(gobj);
+        ftMasterHand_8015247C(fighter_gobj);
+        fp->x2348_stateVar3 = ext_attr->xA0;
     }
 }
 
-void lbl_80152458(HSD_GObj* arg0)
+void ftMasterHand_80152414(HSD_GObj* fighter_gobj)
 {
-    func_80085134(arg0);
+    Fighter* fp = fighter_gobj->user_data;
+
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+        ftbosslib_8015BD20(fighter_gobj);
 }
 
-void lbl_80152478(HSD_GObj* fighter_gobj)
+void ftMasterHand_80152458(HSD_GObj* fighter_gobj)
+{
+    func_80085134(fighter_gobj);
+}
+
+void ftMasterHand_80152478(HSD_GObj* fighter_gobj)
 {
     return;
 }
 
-void ftMasterHand_8015247C(HSD_GObj* fighter_gobj)
+static void ftMasterHand_8015247C(HSD_GObj* fighter_gobj)
 {
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
 }
 
-void ftMasterHand_801525E0(HSD_GObj* fighter_gobj);
+static void ftMasterHand_801525E0(HSD_GObj* fighter_gobj);
 
-void lbl_801524C8(HSD_GObj* fighter_gobj)
+void ftMasterHand_801524C8(HSD_GObj* fighter_gobj)
 {
-    Fighter* temp_r4;
-    u32 unk[2];
+    u32 unused[2];
 
-    temp_r4 = fighter_gobj->user_data;
-    if (!--temp_r4->x2348_stateVar3) {
+    Fighter* fp = fighter_gobj->user_data;
+
+    if (!--fp->x2348_stateVar3)
         ftMasterHand_801525E0(fighter_gobj);
-    }
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0, 0, 0.0F, 1.0F, 0.0F);
         func_8006EBA4(fighter_gobj);
     }
 }
 
-// 80152544 14F124
-// https://decomp.me/scratch/nlkfy
-void lbl_80152544(HSD_GObj* gobj) {
-    Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        ftbosslib_8015BD20(gobj);
-    }
+void ftMasterHand_80152544(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
+
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+        ftbosslib_8015BD20(fighter_gobj);
 }
 
+void ftMasterHand_80152588(HSD_GObj* fighter_gobj)
+{
+    u32 unused[2];
 
+    ftData* ftdata = ((Fighter*) fighter_gobj->user_data)->x10C_ftData;
+    MasterHandAttributes* ext_attr = ftdata->ext_attr;
 
-// 80152588 14F168
-// https://decomp.me/scratch/2eorR
-void lbl_80152588(HSD_GObj* gobj) {
-    ftData* r4_ftData;
-    MasterHandAttributes* r31_attributes;
-    u32 unk[2];
-
-    r4_ftData = ((Fighter*) gobj->user_data)->x10C_ftData;
-    r31_attributes = r4_ftData->ext_attr;
-    func_80085134(gobj);
-    ftbosslib_8015C010(gobj, r31_attributes->xA4);
-    ftbosslib_8015C190(gobj);
+    func_80085134(fighter_gobj);
+    ftbosslib_8015C010(fighter_gobj, ext_attr->xA4);
+    ftbosslib_8015C190(fighter_gobj);
 }
 
 void ftMasterHand_801525DC(HSD_GObj* fighter_gobj)
@@ -101,7 +92,7 @@ void ftMasterHand_801525DC(HSD_GObj* fighter_gobj)
 
 static void ftMasterHand_801525E0(HSD_GObj* fighter_gobj)
 {
-    u32 unk[2];
+    u32 unused[2];
 
     ((Fighter*) fighter_gobj->user_data)->x80_self_vel.x = 0.0F;
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x165, 0, 0, 0.0F, 1.0F, 0.0F);

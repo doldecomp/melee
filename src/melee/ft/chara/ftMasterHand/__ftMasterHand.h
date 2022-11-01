@@ -75,5 +75,14 @@ void ftMasterHand_801521DC(HSD_GObj* fighter_gobj); // 10 Drill
 void ftMasterHand_8015223C(HSD_GObj* fighter_gobj);
 void ftMasterHand_80152278(HSD_GObj* fighter_gobj);
 void ftMasterHand_801522BC(HSD_GObj* fighter_gobj);
+void ftMasterHand_8015236C(void);
+void ftMasterHand_801523BC(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152414(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152458(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152478(HSD_GObj* fighter_gobj);
+void ftMasterHand_801524C8(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152544(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152588(HSD_GObj* fighter_gobj);
+void ftMasterHand_801525DC(HSD_GObj* fighter_gobj);
 
 #endif
