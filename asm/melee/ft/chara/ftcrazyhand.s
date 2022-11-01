@@ -4853,8 +4853,8 @@ lbl_8015A28C:
 lbl_8015A2AC:
 /* 8015A2AC 00156E8C  4E 80 00 20 */	blr 
 
-.global func_8015A2B0
-func_8015A2B0:
+.global ftCrazyHand_8015A2B0
+ftCrazyHand_8015A2B0:
 /* 8015A2B0 00156E90  7C 08 02 A6 */	mflr r0
 /* 8015A2B4 00156E94  90 01 00 04 */	stw r0, 4(r1)
 /* 8015A2B8 00156E98  94 21 FF E8 */	stwu r1, -0x18(r1)
