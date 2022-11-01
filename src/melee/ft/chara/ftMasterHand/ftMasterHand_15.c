@@ -48,26 +48,27 @@ void ftMasterHand_801530A4(HSD_GObj* fighter_gobj)
     fp->x2208_ftcmd_var2 = 0;
 }
 
-// 80153160 14FD40
-// https://decomp.me/scratch/7Kmdd
-void lbl_80153160(HSD_GObj* gobj) {
+void ftMasterHand_801533CC(HSD_GObj* fighter_gobj);
+
+void ftMasterHand_80153160(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
-    MasterHandAttributes* temp_r29;
+    MasterHandAttributes* ext_attr;
     ftData* ftData;
     f32 temp_f1;
     s32 unk[2];
 
-    fp = gobj->user_data;
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    fp = fighter_gobj->user_data;
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
         fp->x2208_ftcmd_var2 = 1;
         temp_f1 = fp->x2390 - 1.0f;
         fp->x2390 = temp_f1;
-        if (temp_f1 < 0.0f) {
+        if (temp_f1 < 0.0F) {
             ftData = fp->x10C_ftData;
-            temp_r29 = ftData->ext_attr;
-            func_801533CC(gobj);
-            if (func_80087120(gobj) > temp_r29->xEC) {
-                fp->x2394 = (s32) temp_r29->xF0;
+            ext_attr = ftData->ext_attr;
+            ftMasterHand_801533CC(fighter_gobj);
+            if (func_80087120(fighter_gobj) > ext_attr->xEC) {
+                fp->x2394 = (s32) ext_attr->xF0;
             } else {
                 fp->x2394 = 1;
             }
@@ -75,8 +76,6 @@ void lbl_80153160(HSD_GObj* gobj) {
         }
     }
 }
-
-
 
 // 80153210 14FDF0
 // https://decomp.me/scratch/Ssmxs
@@ -147,33 +146,27 @@ void lbl_80153254(HSD_GObj* gobj) {
     }
 }
 
-
-
-// 801533C8 14FFA8
-void lbl_801533C8(HSD_GObj* gobj) {
+void ftMasterHand_801533C8(HSD_GObj* fighter_gobj)
+{
     return;
 }
 
-
-// 801533CC 14FFAC
-// https://decomp.me/scratch/uSNs4
-void func_801533CC(HSD_GObj* arg0) {
+static void ftMasterHand_801533CC(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
-    MasterHandAttributes* attr;
+    MasterHandAttributes* ext_attr;
 
-    fp = arg0->user_data;
-    attr = fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(arg0, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
-    if (func_80087120(arg0) > attr->xEC) {
-        ftAnim_SetAnimRate(arg0, attr->xF4);
+    fp = fighter_gobj->user_data;
+    ext_attr = fp->x10C_ftData->ext_attr;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16D, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
+    if (func_80087120(fighter_gobj) > ext_attr->xEC) {
+        ftAnim_SetAnimRate(fighter_gobj, ext_attr->xF4);
     }
-    fp->x80_self_vel.x = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.x = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
     fp->cb.x21BC_callback_Accessory4 = &lbl_801535B0;
 }
-
-
 
 // 8015346C 15004C
 // https://decomp.me/scratch/6Hvy9
