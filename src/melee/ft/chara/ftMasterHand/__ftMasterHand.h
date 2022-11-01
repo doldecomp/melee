@@ -187,5 +187,10 @@ void ftMasterHand_80155290(HSD_GObj* fighter_gobj);
 void ftMasterHand_801552D4(HSD_GObj* fighter_gobj);
 void ftMasterHand_801552F4(HSD_GObj* fighter_gobj);
 void ftMasterHand_801552F8(HSD_GObj* fighter_gobj); // 28 Crazy Hand Combo Attack 2
+void ftMasterHand_80155388(HSD_GObj* fighter_gobj, unk_t, unk_t);
+void ftMasterHand_8015541C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155460(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155480(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155484(HSD_GObj* fighter_gobj); // 29 Crazy Hand Combo Attack 3
 
 #endif

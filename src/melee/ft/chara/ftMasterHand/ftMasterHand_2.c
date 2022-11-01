@@ -205,7 +205,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     vec.x = ext_attr->x134_pos.x;
                     vec.y = ext_attr->x134_pos.y;
                     vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &lbl_80155484, &vec);
+                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155484, &vec);
                     break;
                 case 0x17C:
                     vec.x = ext_attr->x13C_pos.x;
@@ -445,7 +445,7 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
             pos.x = ext_attr->x134_pos.x;
             pos.y = ext_attr->x134_pos.y;
             pos.z = 0.0F;
-            ftMasterHand_80150DC4(fighter_gobj, &lbl_80155484, &pos);
+            ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155484, &pos);
             break;
         }
         case 0x17C: {
