@@ -12,7 +12,7 @@ void lbl_80154D78(HSD_GObj* fighter_gobj)
         if (fp->x2360 == TRUE) {
             ftMasterHand_80154A78(fighter_gobj);
         } else {
-            func_801546D8(fighter_gobj);
+            ftMasterHand_801546D8(fighter_gobj);
         }
     }
 }
