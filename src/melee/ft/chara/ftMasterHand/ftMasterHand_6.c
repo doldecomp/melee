@@ -89,33 +89,32 @@ static void ftMasterHand_80151918(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
-// 8015198C 14E56C
-// https://decomp.me/scratch/9npQJ
-void lbl_8015198C(HSD_GObj* gobj) {
-    MasterHandAttributes* temp_r7;
-    Fighter* temp_r31;
-    Fighter* temp_r8;
+void ftMasterHand_80151AC8(HSD_GObj* fighter_gobj);
+
+void ftMasterHand_8015198C(HSD_GObj* fighter_gobj)
+{
+    MasterHandAttributes* ext_attr;
+    Fighter* r31_fp;
+    Fighter* r8_fp;
     Vec3 sp14;
     u32 unk[2];
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        temp_r31 = gobj->user_data;
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+        r31_fp = fighter_gobj->user_data;
         func_80054158(0, &sp14);
-        if (temp_r31->xB0_pos.x < sp14.x) {
-            func_80151AC8(gobj);
+        if (r31_fp->xB0_pos.x < sp14.x) {
+            ftMasterHand_80151AC8(fighter_gobj);
             return;
         }
-        temp_r8 = gobj->user_data;
-        temp_r7 = temp_r8->x10C_ftData->ext_attr;
-        temp_r8->x234C_pos.x = temp_r8->xB0_pos.x - temp_r7->x3C;
-        temp_r8->x234C_pos.y = temp_r7->x38;
-        temp_r8->x234C_pos.z = 0.0f;
-        Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
-        func_8006EBA4(gobj);
+        r8_fp = fighter_gobj->user_data;
+        ext_attr = r8_fp->x10C_ftData->ext_attr;
+        r8_fp->x234C_pos.x = r8_fp->xB0_pos.x - ext_attr->x3C;
+        r8_fp->x234C_pos.y = ext_attr->x38;
+        r8_fp->x234C_pos.z = 0.0F;
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, 0, 0.0F, 1.0F, 0.0F);
+        func_8006EBA4(fighter_gobj);
     }
 }
-
-
 
 // 80151A44 14E624
 // https://decomp.me/scratch/RccD3
@@ -139,19 +138,13 @@ void lbl_80151A88(HSD_GObj* gobj) {
     func_8015BE40(gobj, &r5_fp->x234C_pos, &r5_fp->x2358_stateVar7, r6_attributes->x2C, r6_attributes->x28);
 }
 
-
-
-// 80151AC4 14E6A4
-// https://decomp.me/scratch/edLn0
-void lbl_80151AC4(void) {
+void ftMasterHand_80151AC4(void)
+{
     return;
 }
 
-
-
-// 80151AC8 14E6A8
-// https://decomp.me/scratch/AimoS
-void func_80151AC8(HSD_GObj* gobj) {
-    Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+static void ftMasterHand_80151AC8(HSD_GObj* fighter_gobj)
+{
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
 }
