@@ -60,5 +60,5 @@ void lbl_801522BC(HSD_GObj* fighter_gobj)
     else
         ftbosslib_8015C010(fighter_gobj, ext_attr->x80);
 
-    func_8015C190(fighter_gobj);
+    ftbosslib_8015C190(fighter_gobj);
 }

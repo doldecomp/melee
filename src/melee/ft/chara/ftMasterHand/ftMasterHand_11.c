@@ -91,7 +91,7 @@ void lbl_80152588(HSD_GObj* gobj) {
     r31_attributes = r4_ftData->ext_attr;
     func_80085134(gobj);
     ftbosslib_8015C010(gobj, r31_attributes->xA4);
-    func_8015C190(gobj);
+    ftbosslib_8015C190(gobj);
 }
 
 void ftMasterHand_801525DC(HSD_GObj* fighter_gobj)

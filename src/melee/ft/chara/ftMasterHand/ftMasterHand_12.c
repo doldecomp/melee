@@ -90,5 +90,5 @@ void lbl_801527B8(HSD_GObj* gobj) {
     } else {
         r31_fp->x80_self_vel.x = 0.0f;
     }
-    func_8015C190(gobj);
+    ftbosslib_8015C190(gobj);
 }
