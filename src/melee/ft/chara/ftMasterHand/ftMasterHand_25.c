@@ -48,22 +48,15 @@ void lbl_80154E74(HSD_GObj* gobj) {
     return;
 }
 
-
-
-
-// 80154E78 151A58
-// https://decomp.me/scratch/lmtfb
-void func_80154E78(HSD_GObj* gobj) {
+void ftMasterHand_80154E78(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
 
-    fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17B, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    fp = getFighter(fighter_gobj);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0, 0, 0.0f, 1.0f, 0.0f);
+    func_8006EBA4(fighter_gobj);
     fp->x2200_ftcmd_var0 = 0;
 }
-
-
-
 
 // 80154ED8 151AB8
 // https://decomp.me/scratch/6H8xW

@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 // 80154A78 151658
 // https://decomp.me/scratch/ci0xf
@@ -21,27 +21,24 @@ void func_80154A78(HSD_GObj* fighter_gobj)
     fp->x234C_pos.z = 0.0f;
 }
 
-// 80154B2C 15170C
-// https://decomp.me/scratch/6WD6p
-void lbl_80154B2C(HSD_GObj* gobj) {
+void ftMasterHand_80154B2C(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
     s32 unused[2];
 
-    fp = gobj->user_data;
+    fp = getFighter(fighter_gobj);
     if (fp->x2204_ftcmd_var1 != 0) {
-        func_8015C5F8(gobj);
+        func_8015C5F8(fighter_gobj);
         fp->x2204_ftcmd_var1 = 0;
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        if (((Fighter*)gobj->user_data)->sa.masterhand.x2250 == 0x17B) {
-            func_80154E78(gobj);
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+        if (((Fighter*) fighter_gobj->user_data)->sa.masterhand.x2250 == 0x17B) {
+            ftMasterHand_80154E78(fighter_gobj);
         } else {
-            func_80155014(gobj);
+            func_80155014(fighter_gobj);
         }
     }
 }
-
-
 
 // 80154BB0 151790
 void lbl_80154BB0(HSD_GObj* arg0) {

@@ -414,7 +414,6 @@ void func_801542E0(HSD_GObj *);
 void func_801545A0(HSD_GObj *);
 void func_801546D8(HSD_GObj *);
 
-void func_80154E78(HSD_GObj *);
 void func_80155014(HSD_GObj *);
 void func_80155818(HSD_GObj *);
 void func_80155B80(HSD_GObj *);
