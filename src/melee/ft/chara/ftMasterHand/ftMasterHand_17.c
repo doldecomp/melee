@@ -54,6 +54,6 @@ void lbl_801539A4(HSD_GObj* fighter_gobj)
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
         temp_r4 = fighter_gobj->user_data;
         temp_r4->x80_self_vel.x = 0.0F;
-        func_80153A64(fighter_gobj);
+        ftMasterHand_80153A64(fighter_gobj);
     }
 }
