@@ -95,7 +95,7 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj);
 // ftMasterHand_2
 void ftMasterHand_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 void ftMasterHand_8014FE10(HSD_GObj* fighter_gobj);
-void func_8014FE58(HSD_GObj* fighter_gobj);
+void ftMasterHand_8014FE58(HSD_GObj* fighter_gobj);
 void func_8014FE5C(HSD_GObj* fighter_gobj);
 void func_8014FF1C(HSD_GObj* fighter_gobj);
 void lbl_8014FFDC(HSD_GObj* fighter_gobj);

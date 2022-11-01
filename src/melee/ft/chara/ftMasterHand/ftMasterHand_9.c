@@ -44,17 +44,14 @@ void lbl_80151DC4(HSD_GObj* arg0) {
     func_8006EBA4(arg0);
 }
 
+void ftMasterHand_880151EB4(HSD_GObj* fighter_gobj);
 
-
-// 80151E10 14E9F0
-// https://decomp.me/scratch/acoIs
-void lbl_80151E10(HSD_GObj* arg0) {
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
-        func_80151EB4(arg0);
+void ftMasterHand_80151E10(HSD_GObj* fighter_gobj)
+{
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
+        ftMasterHand_880151EB4(fighter_gobj);
     }
 }
-
-
 
 // 80151E4C 14EA2C
 // https://decomp.me/scratch/FpXjP
@@ -73,24 +70,16 @@ void lbl_80151E90(HSD_GObj* gobj) {
     func_80085134(gobj);
 }
 
-
-
-// 80151EB0 14EA90
-// https://decomp.me/scratch/cjk7N
-void lbl_80151EB0(void) {
+void ftMasterHand_80151EB0(void)
+{
     return;
 }
 
-
-
-// 80151EB4 14EA94
-// https://decomp.me/scratch/ZzhS3
-void func_80151EB4(HSD_GObj* gobj) {
-    Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+static void ftMasterHand_880151EB4(HSD_GObj* fighter_gobj)
+{
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15F, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
 }
-
-
 
 // 80151F00 14EAE0
 // https://decomp.me/scratch/12qfC

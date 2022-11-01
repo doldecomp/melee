@@ -382,9 +382,6 @@ void ftMars_LoadSpecialAttrs(HSD_GObj *);
 
 void func_80149268(HSD_GObj *);
 
-void func_8014FE58();
-
-void func_80151EB4(HSD_GObj *);
 void func_801520D8(HSD_GObj *);
 void func_8015247C(HSD_GObj *);
 void func_801525E0(HSD_GObj *);

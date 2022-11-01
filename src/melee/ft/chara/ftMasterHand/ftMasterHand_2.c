@@ -17,9 +17,8 @@ void ftMasterHand_8014FE10(HSD_GObj* fighter_gobj)
     ftMasterHand_801510B0(fighter_gobj);
 }
 
-// 8014FE58 0014CA38
-// https://decomp.me/scratch/kfqG6
-void func_8014FE58(HSD_GObj* gobj) {
+void ftMasterHand_8014FE58(HSD_GObj* fighter_gobj)
+{
     return;
 }
 

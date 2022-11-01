@@ -2746,7 +2746,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj) {
 
                 switch (fp->x4_fighterKind) {
                     case 0x1B:
-                        func_8014FE58(fighter_gobj);
+                        ftMasterHand_8014FE58(fighter_gobj);
                         break;
                     case 0x1C:
                         func_80156014(fighter_gobj);
