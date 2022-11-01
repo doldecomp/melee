@@ -1,27 +1,23 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
-// 8015287C 14F45C
-void lbl_8015287C(HSD_GObj* gobj) {
+void ftMasterHand_8015287C(HSD_GObj* fighter_gobj)
+{
     return;
 }
 
-
-// 80152880 14F460
-// https://decomp.me/scratch/is1xu
-void func_80152880(HSD_GObj* gobj) {
+void ftMasterHand_80152880(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
-    MasterHandAttributes* attr;
+    MasterHandAttributes* ext_attr;
     s32 unk[2];
 
-    fp = gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    fp->x2340_f32 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
-    fp->x2344_f32 = 0.0f;
+    fp = fighter_gobj->user_data;
+    ext_attr = fp->x10C_ftData->ext_attr;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x167, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
+    fp->x2340_f32 = ext_attr->x94 + HSD_Randi(ext_attr->x90 - ext_attr->x94);
+    fp->x2344_f32 = 0.0F;
 }
-
-
 
 // 80152928 14F508
 // https://decomp.me/scratch/WyNdB

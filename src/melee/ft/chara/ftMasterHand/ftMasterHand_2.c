@@ -316,7 +316,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     ftMasterHand_80150DC4(fighter_gobj, &lbl_801526D8, &vec);
                     break;
                 case 0x167: // Poke
-                    func_80152880(fighter_gobj);
+                    ftMasterHand_80152880(fighter_gobj);
                     break;
                 case 0x16F: // Jet
                     func_80153820(fighter_gobj);
@@ -437,7 +437,7 @@ void func_80150894(HSD_GObj* gobj) {
         ftMasterHand_80150DC4(gobj, &lbl_801526D8, &sp10_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_LEFT)) {
         // Poke
-        func_80152880(gobj);
+        ftMasterHand_80152880(gobj);
     } else if ((r6_button & BUTTON_A) && (r6_button & DPAD_UP)) {
         // Jet
         func_80153820(gobj);
