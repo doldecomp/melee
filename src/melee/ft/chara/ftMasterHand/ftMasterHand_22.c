@@ -41,89 +41,85 @@ void ftMasterHand_801542E0(HSD_GObj* fighter_gobj)
     fp->x2348_stateVar3 = (s32) ext_attr->x110_pos.x;
 }
 
-// 80154360 150F40
-// https://decomp.me/scratch/rwb1V
-void lbl_80154360(HSD_GObj* gobj) {
+static void ftMasterHand_801545A0(HSD_GObj* fighter_gobj);
+
+void ftMasterHand_80154360(HSD_GObj* fighter_gobj)
+{
     Fighter* temp_r4;
     f32 temp_f1;
     s32 temp_cr0_eq;
     u32 temp_r0;
 
-    temp_r4 = gobj->user_data;
+    temp_r4 = fighter_gobj->user_data;
     temp_r0 = temp_r4->x2348_stateVar3 - 1;
     temp_cr0_eq = temp_r0 == 0U;
     temp_r4->x2348_stateVar3 = temp_r0;
     if (temp_cr0_eq) {
-        ftAnim_SetAnimRate(gobj, 1.0f);
-        func_801545A0(gobj);
+        ftAnim_SetAnimRate(fighter_gobj, 1.0f);
+        ftMasterHand_801545A0(fighter_gobj);
     }
-    if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, 0.0f, 1.0f, 0.0f);
-        func_8006EBA4(gobj);
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 0, 0, 0.0f, 1.0f, 0.0f);
+        func_8006EBA4(fighter_gobj);
     }
 }
 
-
-
-// 801543E8 150FC8
-void lbl_801543E8(HSD_GObj* arg0) {
-    Fighter* fp = arg0->user_data;
+void ftMasterHand_801543E8(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        func_8015BD20(fighter_gobj);
     }
 }
 
-
-
-// 8015442C 15100C
-// https://decomp.me/scratch/jFGKy
 static inline float my_sqrtf(float x)
 {
-static const double _half=.5;
-static const double _three=3.0;
+    static const double _half = 0.5L;
+    static const double _three = 3.0L;
     s32 unk = 0; // fakematch
-volatile float y;
-if(x > 0.0f)
-{
-double guess = __frsqrte((double)x);
-guess = _half*guess*(_three - guess*guess*x);
-guess = _half*guess*(_three - guess*guess*x);
-guess = _half*guess*(_three - guess*guess*x);
-y=(float)(x*guess);
-return y ;
+    volatile float y;
+    if (x > 0.0F) {
+        double guess = __frsqrte((double) x);
+        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (_three - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
 }
-return x ;
-}
-static inline float my_lbvector_Len(Vec3 *vec)
+
+static inline float my_lbvector_Len(Vec3* vec)
 {
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void lbl_8015442C(HSD_GObj* gobj) {
+void ftMasterHand_8015442C(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
-    MasterHandAttributes* attr;
+    MasterHandAttributes* ext_attr;
     f32 len;
     f32 speed;
     Vec3 sp28_pos;
     Vec3 sp1C_vel;
     s32 unk[1];
 
-    fp = gobj->user_data;
+    fp = fighter_gobj->user_data;
 
-    attr = fp->x10C_ftData->ext_attr;
-    func_80085134(gobj);
-    func_8015C208(gobj, &sp28_pos);
-    sp28_pos.x += attr->x108;
-    sp28_pos.y += attr->x10C;
+    ext_attr = fp->x10C_ftData->ext_attr;
+    func_80085134(fighter_gobj);
+    func_8015C208(fighter_gobj, &sp28_pos);
+    sp28_pos.x += ext_attr->x108;
+    sp28_pos.y += ext_attr->x10C;
     sp28_pos.z = 0.0f;
     lbvector_Diff(&sp28_pos, &fp->xB0_pos, &sp1C_vel);
     len = my_lbvector_Len(&sp1C_vel);
-    if (len < attr->x2C) {
+    if (len < ext_attr->x2C) {
         fp->x80_self_vel.x = sp1C_vel.x;
         fp->x80_self_vel.y = sp1C_vel.y;
     } else {
         lbvector_Normalize(&sp1C_vel);
-        speed = len * attr->x28;
+        speed = len * ext_attr->x28;
         sp1C_vel.x *= speed;
         sp1C_vel.y *= speed;
         sp1C_vel.z *= speed;
@@ -132,29 +128,22 @@ void lbl_8015442C(HSD_GObj* gobj) {
     }
 }
 
-
-
-// 8015459C 15117C
-void lbl_8015459C(HSD_GObj* gobj) {
+void ftMasterHand_8015459C(HSD_GObj* fighter_gobj)
+{
     return;
 }
 
-
-
-// 801545A0 151180
-// https://decomp.me/scratch/K86rj
-void func_801545A0(HSD_GObj* gobj) {
-    Fighter* temp_r31;
+static void ftMasterHand_801545A0(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp;
     f32 temp_f1;
 
-    temp_r31 = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    func_8007E2D0(temp_r31, 0x80U, &lbl_80154A2C, 0U, &lbl_80155A58);
-    temp_r31->x2360 = FALSE;
+    fp = fighter_gobj->user_data;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x176, 0, 0, 0.0f, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
+    func_8007E2D0(fp, 0x80U, &lbl_80154A2C, 0U, &lbl_80155A58);
+    fp->x2360 = FALSE;
 }
-
-
 
 // 80154620 151200
 // https://decomp.me/scratch/iJH90
