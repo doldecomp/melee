@@ -168,37 +168,37 @@ static void ftMasterHand_801533CC(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &lbl_801535B0;
 }
 
-// 8015346C 15004C
-// https://decomp.me/scratch/6Hvy9
-inline void lbl_8015346C_inline(HSD_GObj *gobj) {
-    Fighter *ft30 = gobj->user_data;
-    MasterHandAttributes *attr = ft30->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    if (func_80087120(gobj) > attr->xEC) {
-        ftAnim_SetAnimRate(gobj, attr->xF4);
+inline void ftMasterHand_8015346C_inline(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
+    MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16D, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
+    if (func_80087120(fighter_gobj) > ext_attr->xEC) {
+        ftAnim_SetAnimRate(fighter_gobj, ext_attr->xF4);
     }
-    ft30->x80_self_vel.x = 0.0f;
-    ft30->x80_self_vel.y = 0.0f;
-    ft30->cb.x21BC_callback_Accessory4 = lbl_801535B0;
+    fp->x80_self_vel.x = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
+    fp->cb.x21BC_callback_Accessory4 = lbl_801535B0;
 }
 
-void lbl_8015346C(HSD_GObj* gobj) {
+void ftMasterHand_80153730(HSD_GObj* fighter_gobj);
+
+void ftMasterHand_8015346C(HSD_GObj* fighter_gobj)
+{
     Fighter* ft4;
     s32 unk[2];
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        ft4 = gobj->user_data;
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
+        ft4 = fighter_gobj->user_data;
         if (--ft4->x2394 == 0) {
-            ftAnim_SetAnimRate(gobj, 1.0f);
-            func_80153730(gobj);
+            ftAnim_SetAnimRate(fighter_gobj, 1.0F);
+            ftMasterHand_80153730(fighter_gobj);
         } else {
-            lbl_8015346C_inline(gobj);
+            ftMasterHand_8015346C_inline(fighter_gobj);
         }
     }
 }
-
-
 
 // 80153548 150128
 // https://decomp.me/scratch/VcNLJ
@@ -272,7 +272,8 @@ void func_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3) {
 
 // 80153730 150310
 // https://decomp.me/scratch/0IqUp
-void func_80153730(HSD_GObj* arg0) {
+static void ftMasterHand_80153730(HSD_GObj* arg0)
+{
     s32 unk[2];
     Fighter_ActionStateChange_800693AC(arg0, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
