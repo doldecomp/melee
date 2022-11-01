@@ -385,7 +385,6 @@ void func_80149268(HSD_GObj *);
 void func_8014FE10();
 void func_8014FE58();
 
-void ftMasterHand_80151018(HSD_GObj* gobj);
 void func_801510B0(HSD_GObj *);
 
 void func_80151918(HSD_GObj *);

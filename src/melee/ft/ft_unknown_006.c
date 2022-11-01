@@ -20,6 +20,7 @@
 #include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
 #include <melee/ft/chara/ftMario/ftmario.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/chara/ftNess/ftNess.h>
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
