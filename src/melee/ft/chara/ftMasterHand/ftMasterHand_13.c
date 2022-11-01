@@ -106,7 +106,7 @@ void lbl_80152A50(HSD_GObj* gobj) {
     if (fp->x2344_f32) {
         ftData = fp->x10C_ftData;
         attr = ftData->ext_attr;
-        func_8015C208(gobj, &sp28_pos);
+        ftbosslib_8015C208(gobj, &sp28_pos);
         sp28_pos.x += attr->x98;
         sp28_pos.y += attr->x9C;
         sp28_pos.z = 0.0f;

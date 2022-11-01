@@ -108,7 +108,7 @@ void ftMasterHand_8015442C(HSD_GObj* fighter_gobj)
 
     ext_attr = fp->x10C_ftData->ext_attr;
     func_80085134(fighter_gobj);
-    func_8015C208(fighter_gobj, &sp28_pos);
+    ftbosslib_8015C208(fighter_gobj, &sp28_pos);
     sp28_pos.x += ext_attr->x108;
     sp28_pos.y += ext_attr->x10C;
     sp28_pos.z = 0.0f;

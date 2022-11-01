@@ -99,7 +99,7 @@ void ftbosslib_8015BF74(HSD_GObj* fighter_gobj, f32 arg1)
     f32 phi_f1;
 
     fp = fighter_gobj->user_data;
-    func_8015C208(fighter_gobj, &sp14);
+    ftbosslib_8015C208(fighter_gobj, &sp14);
     temp_f1 = sp14.x - fp->xB0_pos.x;
     phi_f0 = fabs_inline(temp_f1);
     if (phi_f0 > arg1) {
@@ -123,7 +123,7 @@ void ftbosslib_8015C010(HSD_GObj* fighter_gobj, f32 arg1)
     f32 phi_f0_2;
 
     fp = fighter_gobj->user_data;
-    func_8015C208(fighter_gobj, &sp14);
+    ftbosslib_8015C208(fighter_gobj, &sp14);
     temp_f1 = sp14.x - fp->xB0_pos.x;
     phi_f0 = fabs_inline(temp_f1);
     if (phi_f0 > arg1) {
@@ -170,12 +170,12 @@ void ftbosslib_8015C190(HSD_GObj* fighter_gobj)
     }
 }
 
-void func_8015C208(HSD_GObj* fighter_gobj, Vec3* arg1)
+void ftbosslib_8015C208(HSD_GObj* fighter_gobj, Vec* pos)
 {
     s32 unused;
     Fighter* fp = fighter_gobj->user_data;
     HSD_GObj* gobj = func_8015C244(fighter_gobj, &fp->xB0_pos);
-    func_80086644(gobj, arg1);
+    func_80086644(gobj, pos);
 }
 
 HSD_GObj* func_8015C244(HSD_GObj* fighter_gobj, Point3d* arg1)

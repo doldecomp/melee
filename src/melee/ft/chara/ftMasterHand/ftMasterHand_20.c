@@ -26,7 +26,7 @@ void lbl_80153D2C(HSD_GObj* gobj) {
     attr = fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    func_8015C208(gobj, &sp1C);
+    ftbosslib_8015C208(gobj, &sp1C);
     fp->xB0_pos.x = sp1C.x;
     fp->xB0_pos.y = attr->x70;
 

@@ -38,7 +38,7 @@ static void func_80153910(HSD_GObj* arg0)
     attr = fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(arg0, 0x170, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(arg0);
-    func_8015C208(arg0, &sp10);
+    ftbosslib_8015C208(arg0, &sp10);
     fp->xB0_pos.x = sp10.x;
     fp->xB0_pos.y = attr->x5C;
     fp->x80_self_vel.z = 0.0F;

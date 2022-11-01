@@ -46,7 +46,7 @@ void lbl_80153B90(HSD_GObj* arg0) {
     Fighter_ActionStateChange_800693AC(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     temp_r31->x2340_f32 = temp_r30->x6C;
-    func_8015C208(arg0, &sp10);
+    ftbosslib_8015C208(arg0, &sp10);
     temp_r31->xB0_pos.x = sp10.x;
     temp_r31->xB0_pos.y = temp_r30->x68;
     temp_r31->x80_self_vel.z = 0.0f;
