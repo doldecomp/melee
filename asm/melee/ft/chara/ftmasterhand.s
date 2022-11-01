@@ -207,10 +207,10 @@ as_table_masterhand:
     .4byte 0x00000140
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_8015377C
-    .4byte lbl_801537B8
-    .4byte lbl_801537FC
-    .4byte lbl_8015381C
+    .4byte ftMasterHand_8015377C
+    .4byte ftMasterHand_801537B8
+    .4byte ftMasterHand_801537FC
+    .4byte ftMasterHand_8015381C
     .4byte func_800761C8
     .4byte 0x00000141
     .4byte NULL
