@@ -307,7 +307,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     vec.x = attr->xA8_pos.x;
                     vec.y = attr->xA8_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(fighter_gobj, &lbl_80152370, &vec);
+                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152370, &vec);
                     break;
                 case 0x166: // Ground Slap
                     vec.x = attr->xBC_pos.x;
@@ -428,7 +428,7 @@ void func_80150894(HSD_GObj* gobj) {
         sp10_pos.x = r31_attributes->xA8_pos.x;
         sp10_pos.y = r31_attributes->xA8_pos.y;
         sp10_pos.z = 0.0f;
-        ftMasterHand_80150DC4(gobj, &lbl_80152370, &sp10_pos);
+        ftMasterHand_80150DC4(gobj, &ftMasterHand_80152370, &sp10_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_DOWN)) {
         // Ground Slap
         sp10_pos.x = r31_attributes->xBC_pos.x;

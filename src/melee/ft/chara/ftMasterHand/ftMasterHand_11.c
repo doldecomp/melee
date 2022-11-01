@@ -1,37 +1,31 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
-// 8015236C 14EF4C
-// https://decomp.me/scratch/kPOjS
-void lbl_8015236C(void) {
+void ftMasterHand_8015236C(void)
+{
     return;
 }
 
-
-
-// 80152370 14EF50
-// https://decomp.me/scratch/ehsMv
-void lbl_80152370(HSD_GObj* arg0) {
-    Fighter_ActionStateChange_800693AC(arg0, 0x163, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+void ftMasterHand_80152370(HSD_GObj* fighter_gobj)
+{
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
 }
 
+void ftMasterHand_8015247C(HSD_GObj* fighter_gobj);
 
-// 801523BC 14EF9C
-// https://decomp.me/scratch/4nWVy
-void lbl_801523BC(HSD_GObj* gobj) {
+void lbl_801523BC(HSD_GObj* fighter_gobj)
+{
     Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
 
-    if (ftAnim_IsFramesRemaining(gobj)) {
+    if (ftAnim_IsFramesRemaining(fighter_gobj)) {
         return;
     }
-    r31_fp = gobj->user_data;
+    r31_fp = fighter_gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    func_8015247C(gobj);
+    ftMasterHand_8015247C(fighter_gobj);
     r31_fp->x2348_stateVar3 = r30_attributes->xA0;
 }
-
-
 
 // 80152414 14EFF4
 // https://decomp.me/scratch/u6Ii5
@@ -42,30 +36,21 @@ void lbl_80152414(HSD_GObj* gobj) {
     }
 }
 
-
-
-// 80152458 14F038
-// https://decomp.me/scratch/Oin6U
-void lbl_80152458(HSD_GObj* arg0) {
+void lbl_80152458(HSD_GObj* arg0)
+{
     func_80085134(arg0);
 }
 
-
-
-// 80152478 14F058
-void lbl_80152478(HSD_GObj* gobj) {
+void lbl_80152478(HSD_GObj* fighter_gobj)
+{
     return;
 }
 
-
-// 8015247C 14F05C
-// https://decomp.me/scratch/uyDVJ
-void func_8015247C(HSD_GObj* gobj) {
-    Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+void ftMasterHand_8015247C(HSD_GObj* fighter_gobj)
+{
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
 }
-
-
 
 // 801524C8 14F0A8
 // https://decomp.me/scratch/zoAeT

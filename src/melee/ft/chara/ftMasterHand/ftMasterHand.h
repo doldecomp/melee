@@ -140,7 +140,6 @@ void lbl_80151828(HSD_GObj*); // 6 Stage Wide Slap
 void lbl_80151BB8(HSD_GObj*); // 7 Sweep
 void lbl_80151DC4(HSD_GObj*); // 9 Walk
 void lbl_801521DC(HSD_GObj*); // 10 Drill
-void lbl_80152370(HSD_GObj*); // 11 Punch
 void lbl_801526D8(HSD_GObj*); // 12 Ground Slap
 void lbl_80152BCC(HSD_GObj*); // 14 Lasers
 void lbl_80153B90(HSD_GObj*); // 19 Ram
