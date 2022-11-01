@@ -249,29 +249,20 @@ HSD_GObj* ftbosslib_8015C3E8(s32 kind)
     return NULL;
 }
 
-s32 ftbosslib_8015C44C(s32 arg0)
-{ // Fighter_GetState(FighterKind)
-    HSD_GObj* gobj;
+s32 ftbosslib_8015C44C(s32 kind)
+{
+    HSD_GObj* gobj = ftbosslib_8015C3E8(kind);
     s32 unused[4];
 
-    gobj = ftbosslib_8015C3E8(arg0);
-
-    if (gobj) {
-        return func_80086C0C(gobj); // DataOffset_ActionStateLoad
-    } else {
-        return 0;
-    }
+    return gobj != NULL ? func_80086C0C(gobj) : 0;
 }
 
 s32 func_8015C4C4(void)
 {
-    HSD_GObj* gobj;
+    HSD_GObj* gobj = ftbosslib_8015C3E8(FTKIND_CREZYH);
     s32 unused[6];
-    gobj = ftbosslib_8015C3E8(FTKIND_CREZYH);
-    if (gobj) {
-        return ((Fighter*) gobj->user_data)->sa.masterhand.x2250;
-    }
-    return 0;
+
+    return gobj != NULL ? ((Fighter*) gobj->user_data)->sa.masterhand.x2250 : 0;
 }
 
 s32 func_8015C530(u32 arg0)
