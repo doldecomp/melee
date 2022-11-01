@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTCRAZYHAND_FTCRAZYHAND_H
+#define MELEE_FT_CHARA_FTCRAZYHAND_FTCRAZYHAND_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -71,3 +72,7 @@ typedef struct _ftCrazyHandAttributes {
     Vec2 x134_pos;
     Vec2 x13C_pos;
 } ftCrazyHandAttributes;
+
+void ftCrazyHand_80155FCC(HSD_GObj* fighter_gobj);
+
+#endif

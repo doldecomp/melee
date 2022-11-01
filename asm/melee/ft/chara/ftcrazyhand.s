@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80155FCC
-func_80155FCC:
+.global ftCrazyHand_80155FCC
+ftCrazyHand_80155FCC:
 /* 80155FCC 00152BAC  7C 08 02 A6 */	mflr r0
 /* 80155FD0 00152BB0  90 01 00 04 */	stw r0, 4(r1)
 /* 80155FD4 00152BB4  94 21 FF E8 */	stwu r1, -0x18(r1)

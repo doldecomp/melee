@@ -3,6 +3,7 @@
 #include <MSL/trigf.h>
 #include <dolphin/os/os.h>
 #include <melee/db/db_unknown_001.h>
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
@@ -869,7 +870,7 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input) {
         ftMasterHand_8014FE10(fighter_gobj);
     }
     else if (fp->x4_fighterKind == 0x1C) {
-        func_80155FCC(fighter_gobj);
+        ftCrazyHand_80155FCC(fighter_gobj);
     }
     else if (input->flags.bits.b1 != 0) {
         func_800BFD04(fighter_gobj);
