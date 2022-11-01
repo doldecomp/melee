@@ -92,5 +92,10 @@ void ftMasterHand_801526D8(HSD_GObj* fighter_gobj); // 12 Ground Slap
 void ftMasterHand_80152738(HSD_GObj* fighter_gobj);
 void ftMasterHand_80152774(HSD_GObj* fighter_gobj);
 void ftMasterHand_801527B8(HSD_GObj* fighter_gobj);
+void ftMasterHand_8015287C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152928(HSD_GObj* fighter_gobj);
+void ftMasterHand_801529D0(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152A0C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80152A50(HSD_GObj* fighter_gobj);
 
 #endif
