@@ -17,5 +17,6 @@ void ftbosslib_8015C208(HSD_GObj* fighter_gobj, Vec* pos);
 HSD_GObj* ftbosslib_8015C244(HSD_GObj* fighter_gobj, Vec* pos);
 BOOL ftbosslib_8015C31C(void);
 BOOL ftbosslib_8015C3A0(void);
+HSD_GObj* ftbosslib_8015C3E8(s32 kind);
 
 #endif

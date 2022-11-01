@@ -237,15 +237,14 @@ BOOL ftbosslib_8015C3A0(void)
     return FALSE;
 }
 
-HSD_GObj* ftbosslib_8015C3E8(s32 arg0)
-{ // get_fighter_gobj(FighterKind)
-    HSD_GObj* phi_r31;
+HSD_GObj* ftbosslib_8015C3E8(s32 kind)
+{
+    HSD_GObj* cur;
     s32 unused[2];
 
-    for (phi_r31 = lbl_804D782C->x20_fighters; phi_r31; phi_r31 = phi_r31->next) {
-        if (arg0 == func_800872A4(phi_r31))
-            return phi_r31;
-    }
+    for (cur = lbl_804D782C->x20_fighters; cur; cur = cur->next)
+        if (kind == func_800872A4(cur))
+            return cur;
 
     return NULL;
 }
