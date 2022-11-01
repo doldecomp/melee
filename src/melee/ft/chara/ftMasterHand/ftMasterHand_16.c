@@ -1,18 +1,17 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 void ftMasterHand_8015377C(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftMasterHand_80151018(fighter_gobj);
-    }
 }
 
 void ftMasterHand_801537B8(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         ftbosslib_8015BD20(fighter_gobj);
-    }
 }
 
 void ftMasterHand_801537FC(HSD_GObj* fighter_gobj)
