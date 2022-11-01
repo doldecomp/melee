@@ -277,7 +277,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     vec.x = attr->x88_pos.x;
                     vec.y = attr->x88_pos.y;
                     vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &lbl_801521DC, &vec);
+                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801521DC, &vec);
                     break;
                 case 0x163: // Punch
                     vec.x = attr->xA8_pos.x;
@@ -395,7 +395,7 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
         sp10_pos.x = r31_attributes->x88_pos.x;
         sp10_pos.y = r31_attributes->x88_pos.y;
         sp10_pos.z = 0.0F;
-        ftMasterHand_80150DC4(fighter_gobj, &lbl_801521DC, &sp10_pos);
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801521DC, &sp10_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_RIGHT)) {
         // Punch
         sp10_pos.x = r31_attributes->xA8_pos.x;

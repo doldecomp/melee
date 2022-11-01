@@ -126,7 +126,6 @@ void lbl_80154A2C(HSD_GObj* gobj);
 // ftMasterHand_31
 void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2);
 
-void lbl_801521DC(HSD_GObj*); // 10 Drill
 void lbl_801526D8(HSD_GObj*); // 12 Ground Slap
 void lbl_80152BCC(HSD_GObj*); // 14 Lasers
 void lbl_80153B90(HSD_GObj*); // 19 Ram
