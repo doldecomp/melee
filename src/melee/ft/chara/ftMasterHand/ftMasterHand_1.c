@@ -1,27 +1,28 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 // 8014FC68 0014C848
-void ftMasterhand_OnDeath(HSD_GObj* gobj) {
+void ftMasterhand_OnDeath(HSD_GObj* gobj)
+{
     return;
 }
 
 // 8014FC6C 0014C84C
 // https://decomp.me/scratch/Tbp9G
-void ftMasterhand_OnLoad(HSD_GObj* gobj) {
+void ftMasterhand_OnLoad(HSD_GObj* gobj)
+{
 
     ftData* ftdata;
     MasterHandAttributes* ftData_attr;
     void** items;
     Fighter* fp;
 
-    
     fp = gobj->user_data;
     ftdata = fp->x10C_ftData;
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 
     PUSH_ATTRS(fp, MasterHandAttributes);
-    
+
     func_8015BDB4(gobj);
     func_8026B3F8(items[0], 0x7D);
     func_8026B3F8(items[1], 0x7E);
@@ -51,4 +52,3 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj) {
     fp->x1A98 = 1;
     ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, ftData_attr->x18, ftData_attr->x20, ftData_attr->x1C);
 }
-
