@@ -4,6 +4,7 @@
 #include <dolphin/mtx/mtxtypes.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/objalloc.h>
 
