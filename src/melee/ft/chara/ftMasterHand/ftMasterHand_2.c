@@ -260,7 +260,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                 case 0x15B: // Stage-Wide Slap
                     func_80053FF4(0, &vec);
                     vec.y = attr->x38;
-                    ftMasterHand_80150DC4(fighter_gobj, &lbl_80151828, &vec);
+                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151828, &vec);
                     break;
                 case 0x15D: // Sweep
                     func_80053FF4(0, &vec);
@@ -378,7 +378,7 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
         // Stage-Wide Slap
         func_80053FF4(0, &sp10_pos);
         sp10_pos.y = r31_attributes->x38;
-        ftMasterHand_80150DC4(fighter_gobj, &lbl_80151828, &sp10_pos);
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151828, &sp10_pos);
     } else if (l_pressed && (r6_button & DPAD_RIGHT)) {
         // Sweep
         func_80053FF4(0, &sp10_pos);

@@ -34,5 +34,17 @@ void ftMasterHand_80150870(HSD_GObj* fighter_gobj);
 void ftMasterHand_801515B8(HSD_GObj* fighter_gobj);
 void ftMasterHand_801516B4(HSD_GObj* fighter_gobj);
 u32 ftMasterHand_80151428(Vec* vec);
+void ftMasterHand_801517B0(HSD_GObj* fighter_gobj);
+void ftMasterHand_801517F4(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151824(void);
+void ftMasterHand_80151828(HSD_GObj*); // 6 Stage Wide Slap
+void ftMasterHand_80151874(HSD_GObj* fighter_gobj);
+void ftMasterHand_801518B0(HSD_GObj* fighter_gobj);
+void ftMasterHand_801518F4(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151914(void);
+void ftMasterHand_8015198C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151A44(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151A88(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151AC4(void);
 
 #endif
