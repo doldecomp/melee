@@ -40,15 +40,14 @@ void lbl_80151828(HSD_GObj* arg0) {
     func_8006EBA4(arg0);
 }
 
-// 80151874 14E454
-// https://decomp.me/scratch/AmIC0
-void lbl_80151874(HSD_GObj* arg0) {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
-        func_80151918(arg0);
+void ftMasterHand_80151918(HSD_GObj* fighter_gobj);
+
+void ftMasterHand_80151874(HSD_GObj* fighter_gobj)
+{
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        ftMasterHand_80151918(fighter_gobj);
     }
 }
-
-
 
 // 801518B0 14E490
 // https://decomp.me/scratch/x8MEh
@@ -75,25 +74,20 @@ void lbl_80151914(void) {
 
 }
 
+static void ftMasterHand_80151918(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp;
+    MasterHandAttributes* attr;
 
+    fp = fighter_gobj->user_data;
+    attr = fp->x10C_ftData->ext_attr;
+    fp->x234C_pos.x = (fp->xB0_pos.x - attr->x3C);
+    fp->x234C_pos.y = attr->x38;
+    fp->x234C_pos.z = 0.0F;
 
-// 80151918 14E4F8
-// https://decomp.me/scratch/uyxzl
-void func_80151918(HSD_GObj* gobj) {
-    Fighter* r8_fp;
-    MasterHandAttributes* r7_attributes;
-
-    r8_fp = gobj->user_data;
-    r7_attributes = r8_fp->x10C_ftData->ext_attr;
-    r8_fp->x234C_pos.x = (r8_fp->xB0_pos.x - r7_attributes->x3C);
-    r8_fp->x234C_pos.y = r7_attributes->x38;
-    r8_fp->x234C_pos.z = 0.0f;
-
-    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
 }
-
-
 
 // 8015198C 14E56C
 // https://decomp.me/scratch/9npQJ
