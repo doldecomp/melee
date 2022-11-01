@@ -7,15 +7,15 @@ void ftMasterhand_OnDeath(HSD_GObj* fighter_gobj)
 
 void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj)
 {
-    ftData* ft_data;
+    ftData* ftdata;
     MasterHandAttributes* ext_attr;
     void** items;
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    ft_data = fp->x10C_ftData;
-    ext_attr = ft_data->ext_attr;
-    items = ft_data->x48_items;
+    ftdata = fp->x10C_ftData;
+    ext_attr = ftdata->ext_attr;
+    items = ftdata->x48_items;
 
     PUSH_ATTRS(fp, MasterHandAttributes);
 

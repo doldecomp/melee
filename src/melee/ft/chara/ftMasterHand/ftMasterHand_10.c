@@ -51,8 +51,8 @@ void lbl_80152278(HSD_GObj* fighter_gobj)
 void lbl_801522BC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    ftData* ft_data = fp->x10C_ftData;
-    MasterHandAttributes* ext_attr = ft_data->ext_attr;
+    ftData* ftdata = fp->x10C_ftData;
+    MasterHandAttributes* ext_attr = ftdata->ext_attr;
     func_80085134(fighter_gobj);
 
     if ((--fp->x2340_f32 > ext_attr->x84) || (fp->x2340_f32 < 0.0F))
