@@ -130,7 +130,7 @@ as_table_masterhand:
     .4byte lbl_801524C8
     .4byte lbl_80152544
     .4byte lbl_80152588
-    .4byte lbl_801525DC
+    .4byte ftMasterHand_801525DC
     .4byte func_800761C8
     .4byte 0x00000137
     .4byte NULL
