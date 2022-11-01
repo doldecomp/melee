@@ -257,7 +257,7 @@ s32 ftbosslib_8015C44C(s32 kind)
     return gobj != NULL ? func_80086C0C(gobj) : 0;
 }
 
-s32 func_8015C4C4(void)
+s32 ftbosslib_8015C4C4(void)
 {
     HSD_GObj* gobj = ftbosslib_8015C3E8(FTKIND_CREZYH);
     s32 unused[6];

@@ -229,7 +229,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
             ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, attr->x18, attr->x20, attr->x1C);
             if (ftbosslib_8015C44C(0x1C) == 0x180) {
                 // Crazy Hand Combo Attack
-                switch (func_8015C4C4()) {
+                switch (ftbosslib_8015C4C4()) {
                 case 0x179:
                     vec.x = attr->x124_pos.x;
                     vec.y = attr->x124_pos.y;
@@ -469,13 +469,13 @@ void func_80150894(HSD_GObj* gobj) {
         ftMasterHand_801542E0(gobj);
     } else if (((r6_button & BUTTON_Y)) && ((r6_button & DPAD_UP))) {
         // Crazy Hand Combo Attack
-        switch (func_8015C4C4()) {
-            case 0x179: {
-                sp10_pos.x = r31_attributes->x124_pos.x;
-                sp10_pos.y = r31_attributes->x124_pos.y;
-                sp10_pos.z = 0.0f;
-                ftMasterHand_80150DC4(gobj, &ftMasterHand_80155194, &sp10_pos);
-                break;
+        switch (ftbosslib_8015C4C4()) {
+        case 0x179: {
+            sp10_pos.x = r31_attributes->x124_pos.x;
+            sp10_pos.y = r31_attributes->x124_pos.y;
+            sp10_pos.z = 0.0f;
+            ftMasterHand_80150DC4(gobj, &ftMasterHand_80155194, &sp10_pos);
+            break;
             }
             case 0x17A: {
                 sp10_pos.x = r31_attributes->x12C_pos.x;
@@ -497,6 +497,6 @@ void func_80150894(HSD_GObj* gobj) {
                 sp10_pos.z = 0.0f;
                 break;
             }
-        }
+            }
     }
 }
