@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
+
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 
 void ftMasterHand_80155074(HSD_GObj* fighter_gobj, unk_t, unk_t)
 {
