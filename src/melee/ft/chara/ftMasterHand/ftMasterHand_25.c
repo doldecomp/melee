@@ -1,22 +1,21 @@
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 80154D78 151958
 // https://decomp.me/scratch/DzZiN
-void lbl_80154D78(HSD_GObj* gobj) {
+void lbl_80154D78(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
     s32 unused[2];
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        fp = gobj->user_data;
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+        fp = fighter_gobj->user_data;
         if (fp->x2360 == 1) {
-            func_80154A78(gobj);
+            func_80154A78(fighter_gobj);
         } else {
-            func_801546D8(gobj);
+            func_801546D8(fighter_gobj);
         }
     }
 }
-
-
-
 
 // 80154DD0 1519B0
 // https://decomp.me/scratch/5olg2
