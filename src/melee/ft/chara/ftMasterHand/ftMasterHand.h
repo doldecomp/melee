@@ -126,7 +126,6 @@ void lbl_80154A2C(HSD_GObj* gobj);
 // ftMasterHand_31
 void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2);
 
-void lbl_80151BB8(HSD_GObj*); // 7 Sweep
 void lbl_80151DC4(HSD_GObj*); // 9 Walk
 void lbl_801521DC(HSD_GObj*); // 10 Drill
 void lbl_801526D8(HSD_GObj*); // 12 Ground Slap

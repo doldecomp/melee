@@ -265,7 +265,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                 case 0x15D: // Sweep
                     func_80053FF4(0, &vec);
                     vec.y = attr->x50.y;
-                    ftMasterHand_80150DC4(fighter_gobj, &lbl_80151BB8, &vec);
+                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151BB8, &vec);
                     break;
                 case 0x15F: // Walk
                     vec.x = attr->x40_pos.x;
@@ -383,7 +383,7 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
         // Sweep
         func_80053FF4(0, &sp10_pos);
         sp10_pos.y = r31_attributes->x50.y;
-        ftMasterHand_80150DC4(fighter_gobj, &lbl_80151BB8, &sp10_pos);
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151BB8, &sp10_pos);
     } else if (l_pressed && (r6_button & DPAD_DOWN)) {
         // Walk
         sp10_pos.x = r31_attributes->x40_pos.x;
