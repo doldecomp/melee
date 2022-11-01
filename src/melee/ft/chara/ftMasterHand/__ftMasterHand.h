@@ -15,7 +15,6 @@ void ftMasterHand_80150DC4(HSD_GObj* fighter_gobj, GObjCallback, Vec3*);
 void ftMasterHand_80150230(HSD_GObj* fighter_gobj);
 void ftMasterHand_801510B0(HSD_GObj* fighter_gobj);
 void ftMasterHand_80151CA8(HSD_GObj* fighter_gobj);
-
 void ftMasterHand_80152370(HSD_GObj* fighter_gobj); // 11 Punch
 void ftMasterHand_80152880(HSD_GObj* fighter_gobj);
 void ftMasterHand_801530A4(HSD_GObj* fighter_gobj);
@@ -32,5 +31,8 @@ void ftMasterHand_80155D6C(HSD_GObj* interacted_fighter_gobj, s32 unused_arg);
 void ftMasterHand_8014FFDC(HSD_GObj* fighter_gobj);
 void ftMasterHand_8015082C(HSD_GObj* fighter_gobj);
 void ftMasterHand_80150870(HSD_GObj* fighter_gobj);
+void ftMasterHand_801515B8(HSD_GObj* fighter_gobj);
+void ftMasterHand_801516B4(HSD_GObj* fighter_gobj);
+u32 ftMasterHand_80151428(Vec* vec);
 
 #endif

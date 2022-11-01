@@ -31,7 +31,7 @@ as_table_masterhand:
     .4byte 0x0000012A
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_801515B8
+    .4byte ftMasterHand_801515B8
     .4byte lbl_801517B0
     .4byte lbl_801517F4
     .4byte lbl_80151824
@@ -39,7 +39,7 @@ as_table_masterhand:
     .4byte 0x0000012B
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_801516B4
+    .4byte ftMasterHand_801516B4
     .4byte lbl_801517B0
     .4byte lbl_801517F4
     .4byte lbl_80151824

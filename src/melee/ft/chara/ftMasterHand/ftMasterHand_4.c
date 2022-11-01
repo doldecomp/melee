@@ -74,7 +74,7 @@ static void ftMasterHand_801511FC(HSD_GObj* fighter_gobj)
     }
     case 1: {
         if (func_8002F260()) {
-            func_8002E948(&lbl_80151428);
+            func_8002E948(&ftMasterHand_80151428);
             func_8002ED9C(120.0F);
             func_8002F0E4(0x14);
             fp->x2340_stateVar1 = 2;
