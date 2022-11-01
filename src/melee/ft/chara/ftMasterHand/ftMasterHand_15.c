@@ -20,42 +20,33 @@ void lbl_8015303C(HSD_GObj* arg0) {
     }
 }
 
-
-
-// 80153080 14FC60
-void lbl_80153080(HSD_GObj* gobj) {
-    func_80085134(gobj);
+void ftMasterHand_80153080(HSD_GObj* fighter_gobj)
+{
+    func_80085134(fighter_gobj);
 }
 
-
-// 801530A0 14FC80
-// https://decomp.me/scratch/YbpJf
-void lbl_801530A0(HSD_GObj* arg0) {
+void ftMasterHand_801530A0(HSD_GObj* fighter_gobj)
+{
     return;
 }
 
-
-
-// 801530A4 14FC84
-// https://decomp.me/scratch/ZtWrg
-void func_801530A4(HSD_GObj* gobj) {
+void ftMasterHand_801530A4(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
-    MasterHandAttributes* attr;
+    MasterHandAttributes* ext_attr;
     s32 rand;
     s32 unk[2];
 
-    fp = gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x16C, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    rand = HSD_Randi(attr->xE8 - attr->xE4);
-    fp->x2390 = attr->xE4 + rand;
+    fp = fighter_gobj->user_data;
+    ext_attr = fp->x10C_ftData->ext_attr;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x16C, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
+    rand = HSD_Randi(ext_attr->xE8 - ext_attr->xE4);
+    fp->x2390 = ext_attr->xE4 + rand;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
 }
-
-
 
 // 80153160 14FD40
 // https://decomp.me/scratch/7Kmdd

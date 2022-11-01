@@ -15,5 +15,6 @@ void ftMasterHand_80151CA8(HSD_GObj* fighter_gobj);
 
 void ftMasterHand_80152370(HSD_GObj* fighter_gobj); // 11 Punch
 void ftMasterHand_80152880(HSD_GObj* fighter_gobj);
+void ftMasterHand_801530A4(HSD_GObj* fighter_gobj);
 
 #endif
