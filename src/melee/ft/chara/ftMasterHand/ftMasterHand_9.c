@@ -108,31 +108,32 @@ static inline float my_lbvector_Len(Vec3 *vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void lbl_80151F00(HSD_GObj* gobj) {
+void ftMasterHand_801520D8(HSD_GObj* fighter_gobj);
+
+void lbl_80151F00(HSD_GObj* fighter_gobj)
+{
     Vec3 sp28;
     Vec3 sp1C_resultVector;
     Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
     s32 unk2[1];
 
-    r31_fp = gobj->user_data;
+    r31_fp = fighter_gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    func_800866DC(func_8015C244(gobj, &r31_fp->xB0_pos), &sp28);
+    func_800866DC(func_8015C244(fighter_gobj, &r31_fp->xB0_pos), &sp28);
     lbvector_Diff(&sp28, &r31_fp->xB0_pos, &sp1C_resultVector);
     if (my_lbvector_Len(&sp1C_resultVector) < r30_attributes->x4C) {
-        ftMasterHand_80151CA8(gobj);
+        ftMasterHand_80151CA8(fighter_gobj);
     }
     func_80054158(0, &sp28);
     if (r31_fp->xB0_pos.x < sp28.x) {
-        func_801520D8(gobj);
+        ftMasterHand_801520D8(fighter_gobj);
     }
-    if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, 0, 0.0f, 1.0f, 0.0f);
-        func_8006EBA4(gobj);
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15F, 0, 0, 0.0F, 1.0F, 0.0F);
+        func_8006EBA4(fighter_gobj);
     }
 }
-
-
 
 // 8015204C 14EC2C
 // https://decomp.me/scratch/6N3wk
@@ -159,24 +160,18 @@ void lbl_80152090(HSD_GObj* gobj) {
     r31_fp->x80_self_vel.x = r30_attributes->x40_pos.z;
 }
 
-
-
-// 801520D4 14ECB4
-// https://decomp.me/scratch/xDlzv
-void lbl_801520D4(void) {
+void ftMasterHand_801520D4(void)
+{
     return;
 }
 
-
-
-// 801520D8 14ECB8
-// https://decomp.me/scratch/HUhGv
-void func_801520D8(HSD_GObj* gobj) {
+static void ftMasterHand_801520D8(HSD_GObj* fighter_gobj)
+{
     Fighter* r31_fp;
     f32 temp_f1;
 
-    r31_fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x160, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    r31_fp->x80_self_vel.x = 0.0f;
+    r31_fp = fighter_gobj->user_data;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x160, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
+    r31_fp->x80_self_vel.x = 0.0F;
 }
