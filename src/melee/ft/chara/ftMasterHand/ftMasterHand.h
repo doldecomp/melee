@@ -111,7 +111,6 @@ void lbl_80150FC8(HSD_GObj* fighter_gobj);
 void ftMasterHand_80151018(HSD_GObj* fighter_gobj);
 
 // ftMasterHand_4
-void func_801510B0(HSD_GObj* gobj);
 void lbl_80151168(HSD_GObj* gobj);
 void lbl_801511B0(HSD_GObj* gobj);
 void lbl_801511F4(HSD_GObj* gobj);

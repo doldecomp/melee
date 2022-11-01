@@ -16,7 +16,7 @@ void func_8014FE10(HSD_GObj* fighter_gobj)
         ftMasterHand_80150144(fighter_gobj);
         return;
     }
-    func_801510B0(fighter_gobj);
+    ftMasterHand_801510B0(fighter_gobj);
 }
 
 // 8014FE58 0014CA38

@@ -2,27 +2,24 @@
 
 #include <melee/cm/camera.h>
 
-// 801510B0 14DC90
-// https://decomp.me/scratch/sIqel
-void func_801510B0(HSD_GObj* gobj) {
-    Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
+void ftMasterHand_801510B0(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp;
+    MasterHandAttributes* attr;
 
-    r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x157, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    r31_fp->xB0_pos.x = r30_attributes->x30_pos2.x;
-    r31_fp->xB0_pos.y = r30_attributes->x30_pos2.y;
-    r31_fp->xB0_pos.z = 0.0f;
-    r31_fp->cb.x21BC_callback_Accessory4 = &lbl_801511FC;
-    r31_fp->x2340_stateVar1 = 0;
-    func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, lbl_801511FC */); // probs same file if lbl_801511FC is getting implicitly passed.
-    // func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, lbl_801511FC);
-    func_8015C09C(gobj, -1.0f);
+    fp = fighter_gobj->user_data;
+    attr = fp->x10C_ftData->ext_attr;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
+    fp->xB0_pos.x = attr->x30_pos2.x;
+    fp->xB0_pos.y = attr->x30_pos2.y;
+    fp->xB0_pos.z = 0.0F;
+    fp->cb.x21BC_callback_Accessory4 = &lbl_801511FC;
+    fp->x2340_stateVar1 = 0;
+    func_800881D8(fp, 0x4E201, 0x7F, 0x40 /*, lbl_801511FC */); // probs same file if lbl_801511FC is getting implicitly passed.
+    // func_800881D8(fp, 0x4E201, 0x7F, 0x40, lbl_801511FC);
+    func_8015C09C(fighter_gobj, -1.0F);
 }
-
-
 
 // 80151168 14DD48
 // https://decomp.me/scratch/896fc
