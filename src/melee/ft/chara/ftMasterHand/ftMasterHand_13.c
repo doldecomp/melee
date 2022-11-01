@@ -81,6 +81,7 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
+// todo: same inline as ftMasterHand_80153254
 void ftMasterHand_80152A50(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -88,17 +89,17 @@ void ftMasterHand_80152A50(HSD_GObj* fighter_gobj)
     func_80085134(fighter_gobj);
 
     if (fp->x2344_f32) {
-        ftData* ftData = fp->x10C_ftData;
-        MasterHandAttributes* attr = ftData->ext_attr;
-
         Vec3 pos, vel;
         f32 len, speed;
+
+        MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
 
         ftbosslib_8015C208(fighter_gobj, &pos);
 
         pos.x += attr->x98;
         pos.y += attr->x9C;
         pos.z = 0.0F;
+
         lbvector_Diff(&pos, &fp->xB0_pos, &vel);
         len = my_lbvector_Len(&vel);
 
@@ -107,10 +108,12 @@ void ftMasterHand_80152A50(HSD_GObj* fighter_gobj)
             fp->x80_self_vel.y = vel.y;
         } else {
             lbvector_Normalize(&vel);
+
             speed = len * attr->x28;
             vel.x *= speed;
             vel.y *= speed;
             vel.z *= speed;
+
             fp->x80_self_vel.x = vel.x;
             fp->x80_self_vel.y = vel.y;
         }

@@ -110,10 +110,6 @@ void ftMasterHand_801511B0(HSD_GObj* gobj);
 void ftMasterHand_801511F4(HSD_GObj* gobj);
 void ftMasterHand_801511F8(HSD_GObj* gobj);
 
-// ftMasterHand_15
-void lbl_801535B0(HSD_GObj* gobj);
-void func_8015364C(struct _HSD_GObj *, struct _HSD_JObj *, f32, f32);
-
 // ftMasterHand_21
 void lbl_801541C4(HSD_GObj* gobj);
 
