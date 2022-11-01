@@ -145,7 +145,7 @@ void lbl_80152BCC(HSD_GObj*); // 14 Lasers
 void lbl_80153B90(HSD_GObj*); // 19 Ram
 void lbl_80153D2C(HSD_GObj*); // 20 Crush
 void ftMasterHand_80155194(HSD_GObj*); // 27 Crazy Hand Combo Attack 1
-void lbl_801552F8(HSD_GObj*); // 28 Crazy Hand Combo Attack 2
+void ftMasterHand_801552F8(HSD_GObj*); // 28 Crazy Hand Combo Attack 2
 void lbl_80155484(HSD_GObj*); // 29 Crazy Hand Combo Attack 3
 
 #endif

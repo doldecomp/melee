@@ -4948,8 +4948,8 @@ lbl_8015A3D0:
 lbl_8015A3F0:
 /* 8015A3F0 00156FD0  4E 80 00 20 */	blr 
 
-.global func_8015A3F4
-func_8015A3F4:
+.global ftCrazyHand_8015A3F4
+ftCrazyHand_8015A3F4:
 /* 8015A3F4 00156FD4  7C 08 02 A6 */	mflr r0
 /* 8015A3F8 00156FD8  90 01 00 04 */	stw r0, 4(r1)
 /* 8015A3FC 00156FDC  38 00 00 00 */	li r0, 0

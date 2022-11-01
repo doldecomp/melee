@@ -76,5 +76,6 @@ typedef struct _ftCrazyHandAttributes {
 void ftCrazyHand_80155FCC(HSD_GObj* fighter_gobj);
 void ftCrazyHand_80156014(HSD_GObj* fighter_gobj);
 void ftCrazyHand_8015A2B0(HSD_GObj* fighter_gobj);
+void ftCrazyHand_8015A3F4(HSD_GObj* fighter_gobj);
 
 #endif

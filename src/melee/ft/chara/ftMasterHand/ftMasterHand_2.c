@@ -240,7 +240,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     vec.x = attr->x12C_pos.x;
                     vec.y = attr->x12C_pos.y;
                     vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &lbl_801552F8, &vec);
+                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801552F8, &vec);
                     break;
                 case 0x17B:
                     vec.x = attr->x134_pos.x;
@@ -481,7 +481,7 @@ void func_80150894(HSD_GObj* gobj) {
                 sp10_pos.x = r31_attributes->x12C_pos.x;
                 sp10_pos.y = r31_attributes->x12C_pos.y;
                 sp10_pos.z = 0.0f;
-                ftMasterHand_80150DC4(gobj, &lbl_801552F8, &sp10_pos);
+                ftMasterHand_80150DC4(gobj, &ftMasterHand_801552F8, &sp10_pos);
                 break;
             }   
             case 0x17B: {
