@@ -2750,7 +2750,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj) {
                         ftMasterHand_8014FE58(fighter_gobj);
                         break;
                     case 0x1C:
-                        func_80156014(fighter_gobj);
+                        ftCrazyHand_80156014(fighter_gobj);
                         break;
                     default:
                         OSReport("ellegal flag fp->no_reaction_always\n");

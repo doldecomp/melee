@@ -25,8 +25,8 @@ lbl_80156000:
 /* 8015600C 00152BEC  7C 08 03 A6 */	mtlr r0
 /* 80156010 00152BF0  4E 80 00 20 */	blr 
 
-.global func_80156014
-func_80156014:
+.global ftCrazyHand_80156014
+ftCrazyHand_80156014:
 /* 80156014 00152BF4  4E 80 00 20 */	blr 
 
 .global func_80156018
