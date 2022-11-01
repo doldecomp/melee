@@ -69,7 +69,7 @@ void lbl_80154ED8(HSD_GObj* gobj) {
     fp = gobj->user_data;
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = 0;
-        func_80155D6C(fp->x1A58_interactedFighter, 0x14A);
+        ftMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
         if (fp->x1A58_interactedFighter != 0) {
             gobj_2 = fp->x1A58_interactedFighter;
             ft_2 = gobj_2->user_data;

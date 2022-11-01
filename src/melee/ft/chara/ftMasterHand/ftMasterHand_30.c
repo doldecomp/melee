@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 extern const f32 neg1;
 
@@ -75,7 +75,7 @@ void ftMasterHand_801556C4(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = 0;
-        func_80155D6C(fp->x1A58_interactedFighter, 0x14A);
+        ftMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
         if (fp->x1A58_interactedFighter != NULL) {
             other_gobj = fp->x1A58_interactedFighter;
             fp_2 = other_gobj->user_data;
@@ -146,7 +146,7 @@ void ftMasterHand_80155908(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (--fp->x2364 <= 0.0F && fp->x2200_ftcmd_var0) {
-        func_80155D1C(fp->x1A58_interactedFighter);
+        ftMasterHand_80155D1C(fp->x1A58_interactedFighter);
         fp->x2200_ftcmd_var0 = FALSE;
     }
 

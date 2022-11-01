@@ -249,7 +249,7 @@ void lbl_801548D8(HSD_GObj* gobj)
     Fighter* r31_fp = gobj->user_data;
 
     if (--r31_fp->x2364 <= 0.0f && r31_fp->x2200_ftcmd_var0) {
-        func_80155D1C(r31_fp->x1A58_interactedFighter);
+        ftMasterHand_80155D1C(r31_fp->x1A58_interactedFighter);
         r31_fp->x2360 = FALSE;
         r31_fp->x2200_ftcmd_var0 = 0;
     }

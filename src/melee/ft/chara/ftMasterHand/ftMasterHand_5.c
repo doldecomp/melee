@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 #include <melee/lb/lbunknown_001.h>
 
@@ -40,7 +40,7 @@ inline void func_80151484_inline1(HSD_GObj* gobj) {
     func_800236B8(r29_fp->x236C);
     func_800236B8(r29_fp->x2370);
     if (r29_fp->x2360) {
-        func_80155D1C(r29_fp->x1A58_interactedFighter);
+        ftMasterHand_80155D1C(r29_fp->x1A58_interactedFighter);
     }
     r29_fp->x80_self_vel.y = temp_r30->x14C;
     r29_fp->x80_self_vel.z = temp_r30->x154;
