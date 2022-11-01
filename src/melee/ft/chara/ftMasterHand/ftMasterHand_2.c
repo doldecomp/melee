@@ -322,10 +322,10 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     ftMasterHand_80153820(fighter_gobj);
                     break;
                 case 0x172: // Ram
-                    func_801541C8(fighter_gobj, &lbl_80153B90);
+                    ftMasterHand_801541C8(fighter_gobj, &lbl_80153B90);
                     break;
                 case 0x173: // Crush
-                    func_801541C8(fighter_gobj, &lbl_80153D2C);
+                    ftMasterHand_801541C8(fighter_gobj, &lbl_80153D2C);
                     break;
                 case 0x16A: // Lasers
                     rand = HSD_Randf();
@@ -443,10 +443,10 @@ void func_80150894(HSD_GObj* gobj) {
         ftMasterHand_80153820(gobj);
     } else if ((r6_button & BUTTON_A) && (r6_button & DPAD_RIGHT)) {
         // Ram
-        func_801541C8(gobj, &lbl_80153B90);
+        ftMasterHand_801541C8(gobj, &lbl_80153B90);
     } else if ((r6_button & BUTTON_A) && (r6_button & DPAD_DOWN)) {
         // Crush
-        func_801541C8(gobj, &lbl_80153D2C);
+        ftMasterHand_801541C8(gobj, &lbl_80153D2C);
     } else if ((r6_button & BUTTON_B) && (r6_button & DPAD_UP)) {
         // Lasers
         f32 rand;
