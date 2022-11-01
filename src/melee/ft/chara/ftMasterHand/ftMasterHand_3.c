@@ -130,7 +130,7 @@ void func_80151018(HSD_GObj* gobj) {
 
     r6_fp = gobj->user_data;
     r5_attributes = r6_fp->x10C_ftData->ext_attr;
-    r6_fp->x2360 = 0;
+    r6_fp->x2360 = FALSE;
     sp1C_pos.x = r5_attributes->x30_pos2.x;
     sp1C_pos.y = r5_attributes->x30_pos2.y;
     sp1C_pos.z = 0.0f;

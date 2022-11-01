@@ -4,5 +4,6 @@
 #include <sysdolphin/baselib/gobj.h>
 
 void func_80154A78(HSD_GObj* fighter_gobj);
+void func_80154C78(HSD_GObj* fighter_gobj);
 
 #endif

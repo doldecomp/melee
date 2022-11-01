@@ -1,3 +1,4 @@
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 80154230 150E10
@@ -164,7 +165,7 @@ void func_801545A0(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     func_8007E2D0(temp_r31, 0x80U, &lbl_80154A2C, 0U, &lbl_80155A58);
-    temp_r31->x2360 = 0;
+    temp_r31->x2360 = FALSE;
 }
 
 
@@ -308,7 +309,7 @@ void lbl_801548D8(HSD_GObj* gobj) {
 
     if (--r31_fp->x2364 <= 0.0f && r31_fp->x2200_ftcmd_var0) {
         func_80155D1C(r31_fp->x1A58_interactedFighter);
-        r31_fp->x2360 = 0;
+        r31_fp->x2360 = FALSE;
         r31_fp->x2200_ftcmd_var0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -361,15 +362,16 @@ void lbl_80154A08(HSD_GObj* arg0) {
 
 // 80154A2C 15160C
 // https://decomp.me/scratch/j1RLj
-void lbl_80154A2C(HSD_GObj* arg0) {
+void lbl_80154A2C(HSD_GObj* fighter_gobj)
+{
     f32 temp_f0;
-    Fighter* temp_r5;
+    Fighter* fp;
 
-    temp_r5 = arg0->user_data;
-    temp_r5->x80_self_vel.z = 0.0f;
-    temp_r5->x80_self_vel.y = 0.0f;
-    temp_r5->x80_self_vel.x = 0.0f;
-    temp_r5->x2360 = 1;
-    temp_r5->x221E_flag.bits.b6 = 0;
-    func_80154C78(arg0);
+    fp = getFighter(fighter_gobj);
+    fp->x80_self_vel.z = 0.0F;
+    fp->x80_self_vel.y = 0.0F;
+    fp->x80_self_vel.x = 0.0F;
+    fp->x2360 = TRUE;
+    fp->x221E_flag.bits.b6 = 0;
+    func_80154C78(fighter_gobj);
 }

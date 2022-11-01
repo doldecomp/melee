@@ -1950,7 +1950,7 @@ typedef struct _Fighter {
     };
     union {
         /* 0x2360 */ u32 x2360_u32;
-        /* 0x2360 */ s32 x2360;
+        /* 0x2360 */ BOOL x2360;
         /* 0x2360 */ f32 x2360_f32;
     };
     union {

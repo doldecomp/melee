@@ -17,7 +17,7 @@ void lbl_80155074(HSD_GObj* gobj) {
             func_800DE2A8(gobj, gobj_2);
             func_800DE7C0(gobj_2, 0, 0);
         }
-        fp->x2360 = 0;
+        fp->x2360 = FALSE;
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80151018(gobj);

@@ -7,9 +7,9 @@ void lbl_80154D78(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
     s32 unused[2];
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
         fp = fighter_gobj->user_data;
-        if (fp->x2360 == 1) {
+        if (fp->x2360 == TRUE) {
             func_80154A78(fighter_gobj);
         } else {
             func_801546D8(fighter_gobj);
@@ -85,7 +85,7 @@ void lbl_80154ED8(HSD_GObj* gobj) {
             ft_2->dmg.x1844_direction *= -1.0f;
             func_800DE7C0(gobj_2, 0, 0);
         }
-        fp->x2360 = 0;
+        fp->x2360 = FALSE;
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         func_80151018(gobj);

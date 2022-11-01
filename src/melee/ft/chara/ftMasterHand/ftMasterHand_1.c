@@ -42,7 +42,7 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj) {
     fp->x236C = -1;
     fp->x2370 = -1;
     fp->x235C = 0.0f;
-    fp->x2360 = 0;
+    fp->x2360 = FALSE;
     fp->sa.masterhand.x222C = func_8015C244(gobj, &fp->xB0_pos);
     fp->sa.masterhand.x2238 = 1.0f;
     fp->sa.masterhand.x224C = 0;
