@@ -139,5 +139,10 @@ void ftMasterHand_80153B90(HSD_GObj* fighter_gobj); // 19 Ram
 void ftMasterHand_80153C48(HSD_GObj* fighter_gobj);
 void ftMasterHand_80153C90(HSD_GObj* fighter_gobj);
 void ftMasterHand_80153CD4(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153D28(HSD_GObj* fighter_gobj);
+void ftMasterHand_80153D2C(HSD_GObj* fighter_gobj); // 20 Crush
+void ftMasterHand_80153F8C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154114(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154158(HSD_GObj* fighter_gobj);
 
 #endif
