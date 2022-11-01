@@ -17,9 +17,9 @@ void ftMasterHand_8015550C(HSD_GObj* fighter_gobj)
 void ftMasterHand_80155580(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         ftbosslib_8015BD20(fighter_gobj);
-    }
 }
 
 void ftMasterHand_801555C4(HSD_GObj* fighter_gobj)
@@ -49,9 +49,9 @@ void ftMasterHand_801555E8(HSD_GObj* fighter_gobj)
 void ftMasterHand_8015565C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         ftbosslib_8015BD20(fighter_gobj);
-    }
 }
 
 void ftMasterHand_801556A0(HSD_GObj* fighter_gobj)
@@ -64,29 +64,27 @@ void ftMasterHand_801556C0(HSD_GObj* fighter_gobj)
     return;
 }
 
-void ftMasterHand_801556C4(HSD_GObj* fighter_gobj)
+void ftMasterHand_801556C4(HSD_GObj* fighter_gobj, unk_t, unk_t, unk_t, unk_t)
 {
-    Fighter* fp;
-    HSD_GObj* other_gobj;
-    Fighter* fp_2;
-    Fighter* fp_3;
-    s32 unused[4];
+    {
+        Fighter* fp = fighter_gobj->user_data;
 
-    fp = fighter_gobj->user_data;
-    if (fp->x2200_ftcmd_var0 != 0) {
-        fp->x2200_ftcmd_var0 = 0;
-        ftMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
-        if (fp->x1A58_interactedFighter != NULL) {
-            other_gobj = fp->x1A58_interactedFighter;
-            fp_2 = other_gobj->user_data;
-            func_8007E2F4(fp, 0);
-            func_800DE2A8(fighter_gobj, other_gobj);
-            fp_2->dmg.x1844_direction *= neg1;
-            func_800DE7C0(other_gobj, 0, 0);
+        if (fp->x2200_ftcmd_var0 != 0) {
+            fp->x2200_ftcmd_var0 = 0;
+            ftMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
+            if (fp->x1A58_interactedFighter != NULL) {
+                HSD_GObj* other_gobj = fp->x1A58_interactedFighter;
+                Fighter* fp_2 = other_gobj->user_data;
+                func_8007E2F4(fp, 0);
+                func_800DE2A8(fighter_gobj, other_gobj);
+                fp_2->dmg.x1844_direction *= neg1;
+                func_800DE7C0(other_gobj, 0, 0);
+            }
         }
     }
+
     if (ftbosslib_8015C31C() || !ftAnim_IsFramesRemaining(fighter_gobj)) {
-        fp_3 = fighter_gobj->user_data;
+        Fighter* fp_3 = fighter_gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(fighter_gobj);
         fp_3->x1A5C = NULL;
         ftMasterHand_80151018(fighter_gobj);
@@ -96,9 +94,9 @@ void ftMasterHand_801556C4(HSD_GObj* fighter_gobj)
 void ftMasterHand_801557B0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         ftbosslib_8015BD20(fighter_gobj);
-    }
 }
 
 void ftMasterHand_801557F4(HSD_GObj* fighter_gobj)
@@ -157,15 +155,16 @@ void ftMasterHand_80155908(HSD_GObj* fighter_gobj)
 void ftMasterHand_80155990(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         ftbosslib_8015BD20(fighter_gobj);
-    }
 }
 
 void ftMasterHand_801559D4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
+
     func_80085134(fighter_gobj);
     ftbosslib_8015BE40(fighter_gobj, &fp->x234C_pos, &fp->x2358_stateVar7, ext_attr->x2C, ext_attr->x28);
 }
@@ -173,6 +172,7 @@ void ftMasterHand_801559D4(HSD_GObj* fighter_gobj)
 void ftMasterHand_80155A34(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
+
     if (fp->x2358_stateVar7 == 0.0F) {
         fp->x80_self_vel.z = 0.0F;
         fp->x80_self_vel.y = 0.0F;
