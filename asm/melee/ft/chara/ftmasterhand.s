@@ -7,7 +7,7 @@ as_table_masterhand:
     .4byte 0x00000127
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_80150230
+    .4byte ftMasterHand_80150230
     .4byte lbl_8015082C
     .4byte lbl_80150870
     .4byte lbl_80150890
@@ -15,7 +15,7 @@ as_table_masterhand:
     .4byte 0x00000128
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_80150230
+    .4byte ftMasterHand_80150230
     .4byte lbl_8015082C
     .4byte lbl_80150870
     .4byte lbl_80150890

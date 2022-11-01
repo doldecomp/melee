@@ -35,7 +35,8 @@ static void ftMasterHand_80150D28(HSD_GObj* fighter_gobj)
 
 // 80150DC4 0014D9A4
 // https://decomp.me/scratch/vZOBB
-void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos) {
+void ftMasterHand_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
+{
     f32 temp_f1;
     Fighter* r32_fp;
     s32 unk_filler[4];
@@ -62,8 +63,6 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos) {
     r32_fp->x2344_callback = arg1_stateVar2;
     r32_fp->x234C_pos = *arg2_pos;
 }
-
-
 
 // 80150F00 0014DAE0
 // https://decomp.me/scratch/tAkIF

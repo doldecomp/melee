@@ -99,14 +99,12 @@ void func_8014FE58(HSD_GObj* gobj);
 void func_8014FE5C(HSD_GObj* gobj);
 void func_8014FF1C(HSD_GObj* gobj);
 void lbl_8014FFDC(HSD_GObj* gobj);
-void lbl_80150230(HSD_GObj* gobj);
 void lbl_8015082C(HSD_GObj* gobj);
 void lbl_80150870(HSD_GObj* gobj);
 void lbl_80150890(HSD_GObj* gobj);
 void func_80150894(HSD_GObj* gobj);
 
 // ftMasterHand_3
-void func_80150DC4(HSD_GObj* gobj, void*, Vec3*);
 void lbl_80150F00(HSD_GObj* gobj);
 void lbl_80150F68(HSD_GObj* gobj);
 void lbl_80150FC8(HSD_GObj* gobj);
