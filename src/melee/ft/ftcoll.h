@@ -15,5 +15,24 @@ void func_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker upon
 void func_800765E0(void); // Reset hitbox and phantom collision count? //
 f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar); // Unk knockback related ? //
 BOOL func_8007B868(HSD_GObj* fighter_gobj);
+void func_8007ABD0(Hitbox*, u32 damageAmount, HSD_GObj*);
+void func_8007AEE0(HSD_GObj*);
+void func_8007AF28(HSD_GObj* fighter_gobj);
+void func_8007AFF8(HSD_GObj *);
+void func_8007B0C0(HSD_GObj*, s32);
+void func_8007B1B8(HSD_GObj*, f32*, void (*)(HSD_GObj*));
+void func_8007B4E0(HSD_GObj*);
+void func_8007B5AC(Fighter*, ftHurt*, s32*);
+void func_8007B6EC(HSD_GObj* fighter_gobj);
+void func_8007B760(HSD_GObj* fighter_gobj, s32);
+void func_8007B7A4(HSD_GObj* fighter_gobj, s32);
+void func_8007B8CC(Fighter*, HSD_GObj*);
+void func_8007B8E8(HSD_GObj* fighter_obj);
+void func_getWindOffsetVec_8007B924(HSD_GObj*, Vec* out_wind);
+void func_8007BA0C(HSD_GObj* fighter_gobj);
+void func_8007BAC0(HSD_GObj* fighter_gobj);
+f32 func_8007BBCC(HSD_GObj* fighter_gobj);
+void func_8007BC90(HSD_GObj* fighter_gobj);
+void func_8007BE3C(HSD_GObj* fighter_gobj);
 
 #endif 

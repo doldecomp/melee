@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
 
 #include <melee/it/itkind.h>
+#include <melee/ft/ftcoll.h>
 
 extern void func_800BC7E0(HSD_GObj*, HSD_GObj*);
 extern void func_800BC8D4(HSD_GObj*, HSD_GObj*);

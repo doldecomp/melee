@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
 #include <melee/it/itkind.h>
+#include <melee/ft/ftcoll.h>
 
 extern char* lbl_804D3E58;
 extern char* lbl_804D3E60;
@@ -188,7 +189,6 @@ void ftYoshi_OnKnockbackExit(HSD_GObj* fighter_gobj) {
 }
 
 extern f32 lbl_804D9A28;
-void func_8007B5AC(void* arg0, void* arg1, void* arg2);
 
 extern u8 lbl_803B75C0[];
 
