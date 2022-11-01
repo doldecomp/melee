@@ -4,7 +4,7 @@
 // https://decomp.me/scratch/wVowU
 void lbl_80151D20(HSD_GObj* arg0) {
     if (ftAnim_IsFramesRemaining(arg0) == 0) {
-        func_80151018(arg0);
+        ftMasterHand_80151018(arg0);
     }
 }
 

@@ -87,7 +87,7 @@ void lbl_80153F8C(HSD_GObj* gobj_arg) {
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ((Fighter*)gobj->user_data)->x80_self_vel.x = 0.0f;
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 

@@ -9,7 +9,7 @@ void lbl_8015521C(HSD_GObj* gobj) {
         fp = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         fp->x1A5C = 0;
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 

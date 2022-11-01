@@ -33,7 +33,7 @@ void lbl_80151168(HSD_GObj* gobj) {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         r4_fp = gobj->user_data;
         r4_fp->sa.masterhand.x2258 = 0x155;
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 

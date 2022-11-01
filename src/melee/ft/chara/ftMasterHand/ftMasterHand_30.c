@@ -11,7 +11,7 @@ void lbl_8015550C(HSD_GObj* gobj) {
         fp = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         fp->x1A5C = 0;
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 
@@ -106,7 +106,7 @@ void lbl_801556C4(HSD_GObj* gobj) {
         ft_3 = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft_3->x1A5C = 0;
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 
@@ -149,7 +149,7 @@ void func_80155818(HSD_GObj* gobj) {
 // https://decomp.me/scratch/ln57J
 void lbl_80155864(HSD_GObj* gobj) {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 
@@ -190,7 +190,7 @@ void lbl_80155908(HSD_GObj* gobj) {
         fp->x2200_ftcmd_var0 = 0;
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 

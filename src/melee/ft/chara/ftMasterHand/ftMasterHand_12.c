@@ -4,7 +4,7 @@
 // https://decomp.me/scratch/ZAr9B
 void lbl_80152634(HSD_GObj* arg0) {
     if (ftAnim_IsFramesRemaining(arg0) == 0) {
-        func_80151018(arg0);
+        ftMasterHand_80151018(arg0);
     }
 }
 
@@ -53,7 +53,7 @@ void lbl_801526D8(HSD_GObj* arg0) {
 // https://decomp.me/scratch/JppLT
 void lbl_80152738(HSD_GObj* arg0) {
     if (ftAnim_IsFramesRemaining(arg0) == 0) {
-        func_80151018(arg0);
+        ftMasterHand_80151018(arg0);
     }
 }
 

@@ -52,7 +52,7 @@ void lbl_80152928(HSD_GObj* gobj) {
 // https://decomp.me/scratch/IBucf
 void lbl_801529D0(HSD_GObj* arg0) {
     if (ftAnim_IsFramesRemaining(arg0) == 0) {
-        func_80151018(arg0);
+        ftMasterHand_80151018(arg0);
     }
 }
 

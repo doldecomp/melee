@@ -81,7 +81,7 @@ void lbl_80154ED8(HSD_GObj* gobj) {
         fp->x2360 = FALSE;
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 

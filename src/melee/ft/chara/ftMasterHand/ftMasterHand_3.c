@@ -1,23 +1,21 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#pragma push
 #pragma dont_inline on
 
-// 80150C8C 0014D86C
-// https://decomp.me/scratch/Nhsvo
-void func_80150C8C(HSD_GObj* gobj) {
+static void ftMasterHand_80150C8C(HSD_GObj* fighter_gobj)
+{
     Fighter* r31_fp;
 
-    r31_fp = gobj->user_data;
+    r31_fp = fighter_gobj->user_data;
     if ((r31_fp->sa.masterhand.x2258 == 0x155) || (r31_fp->sa.masterhand.x2258 == 0x185)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x185, 0, 0, r31_fp->x894_currentAnimFrame, 1.0F, 0.0F);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, 0.0f, 1.0f, 0.0f);
-        func_8006EBA4(gobj);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x185, 0, 0, 0.0F, 1.0F, 0.0F);
+        func_8006EBA4(fighter_gobj);
     }
     r31_fp->sa.masterhand.x2258 = 0x185;
 }
-
-
 
 // 80150D28 0014D908
 // https://decomp.me/scratch/ntaE2
@@ -117,30 +115,29 @@ void lbl_80150FC8(HSD_GObj* gobj) {
     }
 }
 
-
-
-// 80151018 0014DBF8
-// https://decomp.me/scratch/rjK44
-void func_80151018(HSD_GObj* gobj) {
+void ftMasterHand_80151018(HSD_GObj* fighter_gobj)
+{
     Vec3 sp1C_pos;
-    MasterHandAttributes* r5_attributes;
+    MasterHandAttributes* attr;
     Fighter* r6_fp;
     Fighter* r31_fp;
     u32 unk[4];
 
-    r6_fp = gobj->user_data;
-    r5_attributes = r6_fp->x10C_ftData->ext_attr;
+    r6_fp = fighter_gobj->user_data;
+    attr = r6_fp->x10C_ftData->ext_attr;
     r6_fp->x2360 = FALSE;
-    sp1C_pos.x = r5_attributes->x30_pos2.x;
-    sp1C_pos.y = r5_attributes->x30_pos2.y;
+    sp1C_pos.x = attr->x30_pos2.x;
+    sp1C_pos.y = attr->x30_pos2.y;
     sp1C_pos.z = 0.0f;
     r6_fp->sa.masterhand.x2258 = 0x186;
-    r31_fp = gobj->user_data;
+    r31_fp = fighter_gobj->user_data;
     if (r31_fp->sa.masterhand.x2258 == 0x156) {
-        func_80150D28(gobj);
+        func_80150D28(fighter_gobj);
     } else {
-        func_80150C8C(gobj);
+        ftMasterHand_80150C8C(fighter_gobj);
     }
     r31_fp->x2344_callback = lbl_8014FFDC;
     r31_fp->x234C_pos = sp1C_pos;
 }
+
+#pragma pop

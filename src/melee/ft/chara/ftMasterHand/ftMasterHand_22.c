@@ -233,7 +233,7 @@ void func_801546D8(HSD_GObj* gobj) {
 // https://decomp.me/scratch/D8LVZ
 void lbl_80154758(HSD_GObj* arg0) {
     if (ftAnim_IsFramesRemaining(arg0) == 0) {
-        func_80151018(arg0);
+        ftMasterHand_80151018(arg0);
     }
 }
 
@@ -311,7 +311,7 @@ void lbl_801548D8(HSD_GObj* gobj) {
         r31_fp->x2200_ftcmd_var0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 
