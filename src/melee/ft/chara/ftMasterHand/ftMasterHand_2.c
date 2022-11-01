@@ -6,14 +6,17 @@ void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj) {
     COPY_ATTRS(gobj, MasterHandAttributes);
 }
 
+void ftMasterHand_80150144(HSD_GObj* fighter_gobj);
+
 // 8014FE10 0014C9F0
 // https://decomp.me/scratch/JL2E5
-void func_8014FE10(HSD_GObj* gobj) {
+void func_8014FE10(HSD_GObj* fighter_gobj)
+{
     if (Stage_80225194() == 0xFB) {
-        func_80150144(gobj);
+        ftMasterHand_80150144(fighter_gobj);
         return;
     }
-    func_801510B0(gobj);
+    func_801510B0(fighter_gobj);
 }
 
 // 8014FE58 0014CA38
@@ -96,30 +99,29 @@ void lbl_8014FFDC(HSD_GObj* gobj) {
     r31_fp->sa.masterhand.x2258 = 0x155;
 }
 
-// 80150144 0014CD24
-// https://decomp.me/scratch/S2AJH
-void func_80150144(HSD_GObj* gobj) {
-    MasterHandAttributes* r5_attributes;
+static void ftMasterHand_80150144(HSD_GObj* fighter_gobj)
+{
+    MasterHandAttributes* attr;
     Fighter* fp;
     Fighter* fp_1; // todo: dup?
     Vec2 unusedPos;
 
-    fp = gobj->user_data;
-    r5_attributes = fp->x10C_ftData->ext_attr;
+    fp = fighter_gobj->user_data;
+    attr = fp->x10C_ftData->ext_attr;
     fp->sa.masterhand.x2258 = 341;
     fp->x10_action_state_index = 343;
-    fp->xB0_pos.x = r5_attributes->x30_pos2.x;
-    fp->xB0_pos.y = r5_attributes->x30_pos2.y;
-    fp_1 = gobj->user_data;
+    fp->xB0_pos.x = attr->x30_pos2.x;
+    fp->xB0_pos.y = attr->x30_pos2.y;
+    fp_1 = fighter_gobj->user_data;
     if ((fp_1->x10_action_state_index == 341) || (fp_1->x10_action_state_index == 342)) {
         fp_1->xB0_pos = fp_1->sa.masterhand.x2240_pos;
     } else {
         fp_1->sa.masterhand.x2240_pos = fp_1->xB0_pos;
     }
     if (fp_1->sa.masterhand.x2258 == 389) {
-        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, fp_1->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 341, 0, 0, fp_1->x894_currentAnimFrame, 1.0F, 0.0F);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 341, 0, 0, 0.0F, 1.0F, 0.0F);
     }
     fp_1->sa.masterhand.x2258 = 341;
 }
