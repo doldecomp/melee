@@ -289,7 +289,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     vec.x = attr->xBC_pos.x;
                     vec.y = attr->xBC_pos.y;
                     vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &lbl_801526D8, &vec);
+                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801526D8, &vec);
                     break;
                 case 0x167: // Poke
                     ftMasterHand_80152880(fighter_gobj);
@@ -407,7 +407,7 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
         sp10_pos.x = r31_attributes->xBC_pos.x;
         sp10_pos.y = r31_attributes->xBC_pos.y;
         sp10_pos.z = 0.0F;
-        ftMasterHand_80150DC4(fighter_gobj, &lbl_801526D8, &sp10_pos);
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801526D8, &sp10_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_LEFT)) {
         // Poke
         ftMasterHand_80152880(fighter_gobj);
