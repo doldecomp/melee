@@ -27,7 +27,7 @@ void ftMasterHand_80154E14(HSD_GObj* fighter_gobj)
     MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
 
     func_80085134(fighter_gobj);
-    func_8015BE40(fighter_gobj, &fp->x234C_pos, &fp->x2358_stateVar7, ext_attr->x2C, ext_attr->x28);
+    ftbosslib_8015BE40(fighter_gobj, &fp->x234C_pos, &fp->x2358_stateVar7, ext_attr->x2C, ext_attr->x28);
 }
 
 void ftMasterHand_80154E74(HSD_GObj* fighter_gobj)

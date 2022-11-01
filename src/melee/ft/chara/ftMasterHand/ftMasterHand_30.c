@@ -167,7 +167,7 @@ void ftMasterHand_801559D4(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
     func_80085134(fighter_gobj);
-    func_8015BE40(fighter_gobj, &fp->x234C_pos, &fp->x2358_stateVar7, ext_attr->x2C, ext_attr->x28);
+    ftbosslib_8015BE40(fighter_gobj, &fp->x234C_pos, &fp->x2358_stateVar7, ext_attr->x2C, ext_attr->x28);
 }
 
 void ftMasterHand_80155A34(HSD_GObj* fighter_gobj)

@@ -212,7 +212,7 @@ void lbl_801547D8(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
     ext_attr = fp->x10C_ftData->ext_attr;
     func_80085134(fighter_gobj);
-    func_8015BE40(
+    ftbosslib_8015BE40(
         fighter_gobj,
         &fp->x234C_pos,
         &fp->x2358_stateVar7,
@@ -274,7 +274,7 @@ void lbl_801549A8(HSD_GObj* arg0)
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
     func_80085134(arg0);
-    func_8015BE40(arg0, &temp_r31->x234C_pos, &temp_r31->x2358_stateVar7, temp_r30->x2C, temp_r30->x28);
+    ftbosslib_8015BE40(arg0, &temp_r31->x234C_pos, &temp_r31->x2358_stateVar7, temp_r30->x2C, temp_r30->x28);
 }
 
 void lbl_80154A08(HSD_GObj* arg0)

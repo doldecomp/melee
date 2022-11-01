@@ -37,29 +37,27 @@ void ftbosslib_8015BDB4(HSD_GObj* arg0) {
         BOOL bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu);
         if (!bad) {
             OSReport("boss is human or boss!\n");
-            __assert("ftbosslib.c", 103, "kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu");
+            __assert(__FILE__, 103, "kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu");
         }
     }
 }
 
 static inline float my_sqrtf(float x)
 {
-static const double _half=.5;
-static const double _three=3.0;
+    static const double _half = .5;
+    static const double _three = 3.0;
     s32 unused = 0; // fakematch
-volatile float y;
- if(x > 0.0f)
- {
+    volatile float y;
+    if (x > 0.0f) {
 
-
-   double guess = __frsqrte((double)x);   // returns an approximation to
-   guess = _half*guess*(_three - guess*guess*x);  // now have 12 sig bits
-   guess = _half*guess*(_three - guess*guess*x);  // now have 24 sig bits
-   guess = _half*guess*(_three - guess*guess*x);  // now have 32 sig bits
-   y=(float)(x*guess);
-   return y ;
- }
-  return x ;
+        double guess = __frsqrte((double) x);                 // returns an approximation to
+        guess = _half * guess * (_three - guess * guess * x); // now have 12 sig bits
+        guess = _half * guess * (_three - guess * guess * x); // now have 24 sig bits
+        guess = _half * guess * (_three - guess * guess * x); // now have 32 sig bits
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
 }
 
 static inline float my_lbvector_Len(Vec3 *vec)
@@ -67,16 +65,17 @@ static inline float my_lbvector_Len(Vec3 *vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void func_8015BE40(HSD_GObj* gobj, Point3d* arg1, f32* arg2, f32 arg3, f32 arg4) {
+void ftbosslib_8015BE40(HSD_GObj* fighter_gobj, Vec* pos, f32* arg2, f32 arg3, f32 arg4)
+{
     Fighter* fp;
     Vec3 diff;
     f32 distance;
 
-    fp = gobj->user_data;
-    lbvector_Diff(arg1, &fp->xB0_pos, &diff); // third argument is result
+    fp = fighter_gobj->user_data;
+    lbvector_Diff(pos, &fp->xB0_pos, &diff); // third argument is result
     distance = my_lbvector_Len(&diff);
     if (distance < arg3) {
-        *arg2 = 0.0f;
+        *arg2 = 0.0F;
     } else {
         *arg2 = distance;
         lbvector_Normalize(&diff);

@@ -91,7 +91,7 @@ void lbl_80150F68(HSD_GObj* gobj) {
     r30_ft_attributes = r4_ftdata->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->x234C_pos, &r31_fp->x2358_stateVar7, r30_ft_attributes->x2C, r30_ft_attributes->x28);
+    ftbosslib_8015BE40(gobj, &r31_fp->x234C_pos, &r31_fp->x2358_stateVar7, r30_ft_attributes->x2C, r30_ft_attributes->x28);
 }
 
 
