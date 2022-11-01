@@ -39,7 +39,7 @@ void ftMasterHand_80154B2C(HSD_GObj* fighter_gobj)
 void lbl_80154BB0(HSD_GObj* arg0) {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftbosslib_8015BD20(arg0);
     }
 }
 

@@ -59,7 +59,7 @@ void lbl_801529D0(HSD_GObj* arg0) {
 void lbl_80152A0C(HSD_GObj* arg0) {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftbosslib_8015BD20(arg0);
     }
 }
 

@@ -29,7 +29,7 @@ void ftMasterHand_8015512C(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(fighter_gobj);
+        ftbosslib_8015BD20(fighter_gobj);
 }
 
 void ftMasterHand_80155170(HSD_GObj* fighter_gobj)
@@ -45,7 +45,7 @@ void ftMasterHand_80155190(HSD_GObj* fighter_gobj)
 void ftMasterHand_80155194(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    HSD_GObj* gobj_2 = func_8015C3E8(0x1C);
+    HSD_GObj* gobj_2 = ftbosslib_8015C3E8(0x1C);
 
     if (!func_8015C31C())
         ftCrazyHand_8015A2B0(gobj_2);

@@ -13,7 +13,7 @@ void lbl_801538A8(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(fighter_gobj);
+        ftbosslib_8015BD20(fighter_gobj);
     }
 }
 

@@ -32,7 +32,7 @@ void lbl_801523BC(HSD_GObj* fighter_gobj)
 void lbl_80152414(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(gobj);
+        ftbosslib_8015BD20(gobj);
     }
 }
 
@@ -74,7 +74,7 @@ void lbl_801524C8(HSD_GObj* fighter_gobj)
 void lbl_80152544(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(gobj);
+        ftbosslib_8015BD20(gobj);
     }
 }
 

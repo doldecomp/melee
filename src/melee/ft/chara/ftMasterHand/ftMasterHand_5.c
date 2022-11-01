@@ -9,7 +9,7 @@ u32 lbl_80151428(Vec* vec) {
     HSD_GObj* fetched_gobj;
     // Fighter* ft_userdata;
 
-    fetched_gobj = func_8015C3E8(0x1B); // probably attempt to find crazy hand func.
+    fetched_gobj = ftbosslib_8015C3E8(0x1B); // probably attempt to find crazy hand func.
     // ft_userdata = ((Fighter*) temp_r3->user_data);
     if (fetched_gobj) {
         func_8000B1CC(((Fighter*) fetched_gobj->user_data)->x5E8_fighterBones[5].x0_jobj, 0, vec);

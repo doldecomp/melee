@@ -384,7 +384,6 @@ void func_80149268(HSD_GObj *);
 
 #pragma region "ftMasterHand"
 
-void func_8015BD20(HSD_GObj *);
 void func_8015BD24(s32, f32 *, f32, s32, s32, s32);
 void func_8015BDB4(HSD_GObj *);
 void func_8015BE40(HSD_GObj *gobj, Vec *, f32 *, f32, f32);
@@ -398,8 +397,8 @@ HSD_GObj *func_8015C244(HSD_GObj *, Vec *);
 BOOL func_8015C31C(void);
 
 BOOL func_8015C3A0(void);
-HSD_GObj *func_8015C3E8(s32);
-s32 func_8015C44C(s32);
+HSD_GObj* ftbosslib_8015C3E8(s32);
+s32 ftbosslib_8015C44C(s32);
 s32 func_8015C4C4(void);
 
 void func_8015C5F8(HSD_GObj *);

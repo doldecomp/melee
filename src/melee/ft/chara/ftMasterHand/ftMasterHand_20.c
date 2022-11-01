@@ -97,7 +97,7 @@ void lbl_80153F8C(HSD_GObj* gobj_arg) {
 void lbl_80154114(HSD_GObj* arg0) {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftbosslib_8015BD20(arg0);
     }
 }
 

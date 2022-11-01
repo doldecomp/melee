@@ -20,7 +20,8 @@ static float get_zero() { //float reorder hack until hopefully fixing sqrtf fixe
     return 0.0f;
 }
 
-void func_8015BD20(HSD_GObj* gobj) {
+void ftbosslib_8015BD20(HSD_GObj* gobj)
+{
     return;
 }
 
@@ -174,21 +175,21 @@ HSD_GObj* func_8015C244(HSD_GObj* arg0, Point3d* arg1) {
 }
 
 BOOL func_8015C270(void) {
-    if (func_8015C44C(FTKIND_MASTERH) == 0x157) {
+    if (ftbosslib_8015C44C(FTKIND_MASTERH) == 0x157) {
         return 1;
     }
     return 0;
 }
 
 BOOL func_8015C2A8(void) {
-    if (func_8015C44C(FTKIND_CREZYH) == 0x183) {
+    if (ftbosslib_8015C44C(FTKIND_CREZYH) == 0x183) {
         return 1;
     }
     return 0;
 }
 
 BOOL func_8015C2E0(void) {
-    s32 x = func_8015C44C(FTKIND_MASTERH);
+    s32 x = ftbosslib_8015C44C(FTKIND_MASTERH);
     if (x == 0x158 || x == 0x159) {
         return 1;
     }
@@ -196,7 +197,7 @@ BOOL func_8015C2E0(void) {
 }
 
 BOOL func_8015C31C(void) {
-    s32 x = func_8015C44C(FTKIND_CREZYH);
+    s32 x = ftbosslib_8015C44C(FTKIND_CREZYH);
     if (x == 0x181 || x == 0x182) {
         return 1;
     }
@@ -204,7 +205,7 @@ BOOL func_8015C31C(void) {
 }
 
 BOOL func_8015C358(void) {
-    HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
+    HSD_GObj* gobj = ftbosslib_8015C3E8(FTKIND_MASTERH);
     if (gobj && ((Fighter*)gobj->user_data)->x221F_flag.bits.b3) {
         return 1;
     }
@@ -212,14 +213,15 @@ BOOL func_8015C358(void) {
 }
 
 BOOL func_8015C3A0(void) {
-    HSD_GObj* gobj = func_8015C3E8(FTKIND_CREZYH);
+    HSD_GObj* gobj = ftbosslib_8015C3E8(FTKIND_CREZYH);
     if (gobj && ((Fighter*)gobj->user_data)->x221F_flag.bits.b3) {
         return 1;
     }
     return 0;
 }
 
-HSD_GObj* func_8015C3E8(s32 arg0) { // get_fighter_gobj(FighterKind)
+HSD_GObj* ftbosslib_8015C3E8(s32 arg0)
+{ // get_fighter_gobj(FighterKind)
     HSD_GObj* phi_r31;
     s32 unused[2];
 
@@ -232,11 +234,12 @@ HSD_GObj* func_8015C3E8(s32 arg0) { // get_fighter_gobj(FighterKind)
     return 0;
 }
 
-s32 func_8015C44C(s32 arg0) { // Fighter_GetState(FighterKind)
+s32 ftbosslib_8015C44C(s32 arg0)
+{ // Fighter_GetState(FighterKind)
     HSD_GObj* gobj;
     s32 unused[4];
 
-    gobj = func_8015C3E8(arg0);
+    gobj = ftbosslib_8015C3E8(arg0);
     if (gobj) {
         return func_80086C0C(gobj); // DataOffset_ActionStateLoad
     } else {
@@ -247,7 +250,7 @@ s32 func_8015C44C(s32 arg0) { // Fighter_GetState(FighterKind)
 s32 func_8015C4C4(void) {
     HSD_GObj* gobj;
     s32 unused[6];
-    gobj = func_8015C3E8(FTKIND_CREZYH);
+    gobj = ftbosslib_8015C3E8(FTKIND_CREZYH);
     if (gobj) {
         return ((Fighter*)gobj->user_data)->sa.masterhand.x2250;
     }
@@ -259,7 +262,7 @@ s32 func_8015C530(u32 arg0) {
     HSD_GObj* gobj;
     s32 unused[4];
 
-    gobj = func_8015C3E8(FTKIND_MASTERH);
+    gobj = ftbosslib_8015C3E8(FTKIND_MASTERH);
     if (gobj) {
         attr = getFighter(gobj)->x10C_ftData->ext_attr;
         switch (arg0) {
@@ -301,7 +304,7 @@ void func_8015C5F8(HSD_GObj* gobj) {
 }
 
 MasterHandAttributes* func_8015C6BC(void) {
-    HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
+    HSD_GObj* gobj = ftbosslib_8015C3E8(FTKIND_MASTERH);
     Fighter* fp;
     MasterHandAttributes* attr;
     s32 unused[4];
@@ -366,7 +369,7 @@ s32 func_8015C9CC(void) {
 }
 
 void func_8015CA6C_inline(s32 arg0) {
-    HSD_GObj* crazy_hand = func_8015C3E8(FTKIND_CREZYH);
+    HSD_GObj* crazy_hand = ftbosslib_8015C3E8(FTKIND_CREZYH);
     if (crazy_hand) {
         func_80086A4C(crazy_hand, arg0);
     }
@@ -376,7 +379,7 @@ void func_8015CA6C(s32 arg0) {
     s32 unused[8];
 
     Player_80036790(0, arg0);
-    master_hand = func_8015C3E8(FTKIND_MASTERH);
+    master_hand = ftbosslib_8015C3E8(FTKIND_MASTERH);
     if (master_hand) {
         func_80086A4C(master_hand, arg0);
     }

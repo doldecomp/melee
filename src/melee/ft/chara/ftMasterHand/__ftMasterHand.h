@@ -2,6 +2,7 @@
 #define FT_CHARA_FTMASTERHAND___FTMASTERHAND_H
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/ftbosslib.h>
 
 typedef void (*GObjCallback)(HSD_GObj* fighter_gobj);
 
