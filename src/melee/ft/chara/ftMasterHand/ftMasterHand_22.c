@@ -225,15 +225,15 @@ void lbl_80154838(HSD_GObj* gobj)
     return;
 }
 
-void func_8015483C(HSD_GObj* gobj)
+void ftMasterHand_8015483C(HSD_GObj* fighter_gobj)
 {
     Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
 
-    r31_fp = gobj->user_data;
+    r31_fp = fighter_gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
+    func_8006EBA4(fighter_gobj);
     r31_fp->x2364 = r30_attributes->x120;
     r31_fp->x2200_ftcmd_var0 = 1;
     r31_fp->x80_self_vel.x = 0.0f;

@@ -1,21 +1,16 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
-// 80154A78 151658
-// https://decomp.me/scratch/ci0xf
 void ftMasterHand_80154A78(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    MasterHandAttributes* attr;
-
-    fp = fighter_gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
-    fp->x2204_ftcmd_var1 = 0;
+    Fighter* fp = fighter_gobj->user_data;
+    MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+    fp->x2204_ftcmd_var1 = FALSE;
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17A, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     fp->x2222_flag.bits.b2 = 1;
     func_8007E2F4(fp, 0x1FFU);
     func_8007E2FC(fighter_gobj);
-    func_80155B80(fp->x1A58_interactedFighter);
+    ftMasterHand_80155B80(fp->x1A58_interactedFighter);
     fp->x234C_pos.x = attr->x118_pos.x;
     fp->x234C_pos.y = attr->x118_pos.y;
     fp->x234C_pos.z = 0.0f;

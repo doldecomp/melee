@@ -7408,10 +7408,10 @@ ActionStateList:
     .4byte 0x01000000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte func_80155B70
-    .4byte func_80155B74
-    .4byte func_80155B78
-    .4byte func_80155B7C
+    .4byte ftMasterHand_80155B70
+    .4byte ftMasterHand_80155B74
+    .4byte ftMasterHand_80155B78
+    .4byte ftMasterHand_80155B7C
     .4byte func_800761C8
 
     # Entry 328
@@ -7424,9 +7424,9 @@ ActionStateList:
 
     # Functions (Anim, Input, Action, Collision, Camera)
     .4byte func_80155C20
-    .4byte func_80155C88
-    .4byte func_80155C8C
-    .4byte func_80155C90
+    .4byte ftMasterHand_80155C88
+    .4byte ftMasterHand_80155C8C
+    .4byte ftMasterHand_80155C90
     .4byte func_800761C8
 
     # Entry 329
