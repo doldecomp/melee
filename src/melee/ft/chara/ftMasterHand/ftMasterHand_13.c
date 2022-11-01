@@ -92,24 +92,24 @@ void ftMasterHand_80152A50(HSD_GObj* fighter_gobj)
         Vec3 pos, vel;
         f32 len, speed;
 
-        MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+        MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
 
         ftbosslib_8015C208(fighter_gobj, &pos);
 
-        pos.x += attr->x98;
-        pos.y += attr->x9C;
+        pos.x += ext_attr->x98;
+        pos.y += ext_attr->x9C;
         pos.z = 0.0F;
 
         lbvector_Diff(&pos, &fp->xB0_pos, &vel);
         len = my_lbvector_Len(&vel);
 
-        if (len < attr->x2C) {
+        if (len < ext_attr->x2C) {
             fp->x80_self_vel.x = vel.x;
             fp->x80_self_vel.y = vel.y;
         } else {
             lbvector_Normalize(&vel);
 
-            speed = len * attr->x28;
+            speed = len * ext_attr->x28;
             vel.x *= speed;
             vel.y *= speed;
             vel.z *= speed;

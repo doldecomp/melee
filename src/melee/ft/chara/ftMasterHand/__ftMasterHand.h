@@ -145,5 +145,25 @@ void ftMasterHand_80153F8C(HSD_GObj* fighter_gobj);
 void ftMasterHand_80154114(HSD_GObj* fighter_gobj);
 void ftMasterHand_80154158(HSD_GObj* fighter_gobj);
 void ftMasterHand_801541C4(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154230(HSD_GObj* fighter_gobj, u32, u32);
+void ftMasterHand_80154278(HSD_GObj* fighter_gobj);
+void ftMasterHand_801542BC(HSD_GObj* fighter_gobj);
+void ftMasterHand_801542DC(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154360(HSD_GObj* fighter_gobj, u32);
+void ftMasterHand_801543E8(HSD_GObj* fighter_gobj);
+void ftMasterHand_8015442C(HSD_GObj* fighter_gobj);
+void ftMasterHand_8015459C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154620(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154670(HSD_GObj* fighter_gobj);
+void ftMasterHand_801546B4(HSD_GObj* fighter_gobj);
+void ftMasterHand_801546D4(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154758(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154794(HSD_GObj* fighter_gobj);
+void ftMasterHand_801547D8(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154838(HSD_GObj* fighter_gobj);
+void ftMasterHand_801548D8(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154964(HSD_GObj* fighter_gobj);
+void ftMasterHand_801549A8(HSD_GObj* fighter_gobj);
+void ftMasterHand_80154A08(HSD_GObj* fighter_gobj);
 
 #endif
