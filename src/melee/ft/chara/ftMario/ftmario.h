@@ -12,8 +12,7 @@
 
 typedef enum ftMarioAction {
 
-    AS_FTCOMMON = 340,
-    AS_MARIO_UNK1,
+    AS_MARIO_UNK1 = 341,
     AS_MARIO_UNK2,
     AS_MARIO_SPECIALN,
     AS_MARIO_SPECIALAIRN,

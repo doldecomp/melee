@@ -3,6 +3,7 @@
 import argparse
 import subprocess
 import sys
+import platform
 from pathlib import Path
 
 here = Path(__file__).parent
@@ -36,6 +37,9 @@ def normalize_path(p: str) -> str:
 def import_c_file(in_file: str) -> str:
     in_file = normalize_path(root / in_file)
     c_command = [normalize_path(mwcc_command), *MWCC_FLAGS, "-E", in_file]
+
+    if platform.system() == 'Linux':
+        c_command.insert(0, 'wine')
 
     try:
         out_text = subprocess.check_output(c_command, cwd=root, encoding="utf8")
