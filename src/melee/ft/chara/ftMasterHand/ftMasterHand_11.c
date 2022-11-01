@@ -90,7 +90,7 @@ void lbl_80152588(HSD_GObj* gobj) {
     r4_ftData = ((Fighter*) gobj->user_data)->x10C_ftData;
     r31_attributes = r4_ftData->ext_attr;
     func_80085134(gobj);
-    func_8015C010(gobj, r31_attributes->xA4);
+    ftbosslib_8015C010(gobj, r31_attributes->xA4);
     func_8015C190(gobj);
 }
 

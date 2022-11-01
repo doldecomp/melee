@@ -111,7 +111,8 @@ void ftbosslib_8015BF74(HSD_GObj* arg0, f32 arg1)
     }
 }
 
-void func_8015C010(HSD_GObj* arg0, f32 arg1) {
+void ftbosslib_8015C010(HSD_GObj* arg0, f32 arg1)
+{
     Vec3 sp14;
     Fighter* fp;
     f32 temp_f1;
