@@ -13,7 +13,7 @@ void lbl_80155388(HSD_GObj* gobj) {
         fp->x2204_ftcmd_var1 = 0;
     }
     // inlined? possibly shared with ftMasterHand_8015521C
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
+    if ((ftbosslib_8015C31C() != 0) || (func_8015C3A0() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
         ft_2 = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft_2->x1A5C = 0;
@@ -55,7 +55,7 @@ void lbl_80155484(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     gobj_2 = ftbosslib_8015C3E8(0x1CU);
-    if (func_8015C31C() == 0) {
+    if (ftbosslib_8015C31C() == 0) {
         func_8015A560(gobj_2);
     }
     fp->x1A5C = gobj_2;

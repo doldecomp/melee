@@ -384,8 +384,6 @@ void func_80149268(HSD_GObj *);
 
 #pragma region "ftMasterHand"
 
-BOOL func_8015C31C(void);
-
 BOOL func_8015C3A0(void);
 HSD_GObj* ftbosslib_8015C3E8(s32);
 s32 ftbosslib_8015C44C(s32);

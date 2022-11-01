@@ -47,7 +47,7 @@ void ftMasterHand_80155194(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     HSD_GObj* gobj_2 = ftbosslib_8015C3E8(0x1C);
 
-    if (!func_8015C31C())
+    if (!ftbosslib_8015C31C())
         ftCrazyHand_8015A2B0(gobj_2);
 
     fp->x1A5C = gobj_2;

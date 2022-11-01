@@ -3,7 +3,7 @@
 
 void ftMasterHand_8015521C(HSD_GObj* fighter_gobj)
 {
-    if (func_8015C31C() || func_8015C3A0() || !ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (ftbosslib_8015C31C() || func_8015C3A0() || !ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter* fp = fighter_gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(fighter_gobj);
         fp->x1A5C = NULL;
@@ -37,7 +37,7 @@ void ftMasterHand_801552F8(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = FALSE;
     gobj_2 = ftbosslib_8015C3E8(0x1CU);
 
-    if (!func_8015C31C())
+    if (!ftbosslib_8015C31C())
         ftCrazyHand_8015A3F4(gobj_2);
 
     fp->x1A5C = gobj_2;

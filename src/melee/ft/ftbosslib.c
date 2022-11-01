@@ -209,7 +209,7 @@ BOOL func_8015C2E0(void)
     return FALSE;
 }
 
-BOOL func_8015C31C(void)
+BOOL ftbosslib_8015C31C(void)
 {
     s32 x = ftbosslib_8015C44C(FTKIND_CREZYH);
 
