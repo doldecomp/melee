@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
+#include <melee/ft/ftcoll.h>
+#include <melee/lb/lbunknown_001.h>
+
 // 0x800E83E0
 // https://decomp.me/scratch/wfS8S // Create Reflector Loop GFX
 void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* fighter_gobj)
@@ -303,8 +306,6 @@ void ftFox_SpecialLwLoop_IASA(HSD_GObj* fighter_gobj)
     }
 }
 
-extern BOOL func_800CB870(HSD_GObj*);
-
 // 0x800E8B64
 // https://decomp.me/scratch/SVWjl // Fox & Falco's aerial Reflector Loop IASA callback
 void ftFox_SpecialAirLwLoop_IASA(HSD_GObj* fighter_gobj)
@@ -334,8 +335,6 @@ void ftFox_SpecialLwLoop_Pass(HSD_GObj* fighter_gobj)
     func_8009A184(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP, FTFOX_SPECIALLW_COLL_FLAG, getFighter(fighter_gobj)->x894_currentAnimFrame);
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
-
-extern void func_8007AEF8(HSD_GObj*);
 
 // 0x800E8C34
 // https://decomp.me/scratch/8fHun // Fox & Falco's grounded Reflector Loop Physics callback
@@ -412,8 +411,6 @@ void ftFox_SpecialAirLwLoop_AirToGround(HSD_GObj* fighter_gobj)
     func_8007D468(fp);
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
-
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*));
 
 // 0x800E8E2C
 // https://decomp.me/scratch/MYfXM // Create Reflector's reflect bubble
@@ -627,8 +624,6 @@ inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
     ftFox_SpecialLw_Turn(fighter_gobj);
 }
-
-extern BOOL func_800C97A8(HSD_GObj*);
 
 // 0x800E942C
 // https://decomp.me/scratch/Hr5UW // Fox & Falco's Reflector Turn Action State handler

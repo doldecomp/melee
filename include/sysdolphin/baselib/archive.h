@@ -1,8 +1,6 @@
 #ifndef _archive_h_
 #define _archive_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 
 #define HSD_ARCHIVE_DONT_FREE 1

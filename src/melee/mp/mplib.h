@@ -1,7 +1,7 @@
 #ifndef MELEE_MP_MPLIB_H
 #define MELEE_MP_MPLIB_H
 
-#include <dolphin/types.h>
+#include <dolphin/mtx/mtxtypes.h>
 
 unk_t func_80054F68();
 unk_t func_80054ED8();
@@ -17,5 +17,10 @@ unk_t func_80056A1C();
 BOOL func_800509B8(f32 surface_normal_y, f32 surface_normal_x, f32 left_x, f32 left_y, VecPtr coll_vec,
               unk_t, unk_t, unk_t, u32, u32);
 unk_t func_80054CEC();
+unk_t func_8004F8A4();
+unk_t func_80052508();
+unk_t func_800524DC();
+s32 func_80051EC8(Vec *, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
+
 
 #endif

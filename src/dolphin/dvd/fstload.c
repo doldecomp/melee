@@ -1,7 +1,7 @@
-#include <dolphin/types.h>
 #include <dolphin/dvd/dvd.h>
-#include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
+#include <dolphin/os/os.h>
+#include <dolphin/types.h>
 
 static u32 status;
 static struct bb2struct *bb2;

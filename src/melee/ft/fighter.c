@@ -1,42 +1,22 @@
 #include <melee/ft/fighter.h>
-#include <melee/ft/code_80081B38.h>
+
+#include <MSL/trigf.h>
+#include <dolphin/os/os.h>
+#include <melee/db/db_unknown_001.h>
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/code_80081938.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/gr/ground.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_002.h>
+#include <sysdolphin/baselib/jobj.h>
 
 #define HALF_PI 1.5707963267948966
-
-// external vars from asm/melee/ft/ft_unknown_005.s
-typedef void (*ft_callback)(HSD_GObj* gobj);
-typedef void (*fn_ptr_t)();
-
-
-extern ft_callback ft_OnLoad[33];  // One load  callback for every character.
-extern ft_callback ft_OnDeath[33]; // One death callback for every character.
-extern ft_callback ft_OnAbsorb[33];
-extern ft_callback lbl_803C1DB4[33];  //probably ft_OnSomething
-extern ft_callback ft_OnUserDataRemove[33];
-
-extern fn_ptr_t lbl_803C10D0[33];
-
-extern struct UnkCostumeList CostumeListsForeachCharacter[33];
-
-extern ftData* gFtDataList[33];
-extern struct ActionState ActionStateList[341];
-extern struct ActionState* ActionStateTableByCharacter[33];
-
-extern s8 lbl_803C26FC[33];
-
-extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
-
-
-extern HSD_PadStatus HSD_PadRumbleData[4];
-
-extern StageInfo stage_info; // from asm/melee/text_2.s
-
-extern s32 g_debugLevel; // asm/melee/db/db_unknown_001.s
-
-extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
 // ==== fighter.c variables ====
 // =============================
@@ -53,7 +33,6 @@ u32 lbl_804D64F8 = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
 // the following seems to be an array, initialized in reverse in Fighter_LoadCommonData
-// outcommented because they are in variables.h too. uncomment this when moving data from fighter.s here.
 unk_t lbl_804D64FC = NULL;
 unk_t lbl_804D6500 = NULL;
 unk_t lbl_804D6504 = NULL;
@@ -433,8 +412,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp) {
 	fp->x221E_flag.bits.b4 = 1;
 	fp->x197C = 0;
 	fp->x2223_flag.bits.b7 = 0;
-	fp->x2028 = 0;
-	fp->x202C = 0;
+    fp->x2028 = FALSE;
+    fp->x202C = 0;
 
 	func_800C88A0(fp);
 
@@ -888,10 +867,10 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input) {
     Fighter_UnkProcessDeath_80068354(fighter_gobj);
 
     if (fp->x4_fighterKind == 0x1B) {
-        func_8014FE10(fighter_gobj);
+        ftMasterHand_8014FE10(fighter_gobj);
     }
     else if (fp->x4_fighterKind == 0x1C) {
-        func_80155FCC(fighter_gobj);
+        ftCrazyHand_80155FCC(fighter_gobj);
     }
     else if (input->flags.bits.b1 != 0) {
         func_800BFD04(fighter_gobj);
@@ -1674,7 +1653,7 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj) {
 
 void Fighter_8006ABA0(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
-    if (!fp->x221F_flag.bits.b3 && func_800A2040()) {
+    if (!fp->x221F_flag.bits.b3 && func_800A2040(fp)) {
         func_800B3900(fighter_gobj);
     }
 }
@@ -2768,10 +2747,10 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj) {
 
                 switch (fp->x4_fighterKind) {
                     case 0x1B:
-                        func_8014FE58(fighter_gobj);
+                        ftMasterHand_8014FE58(fighter_gobj);
                         break;
                     case 0x1C:
-                        func_80156014(fighter_gobj);
+                        ftCrazyHand_80156014(fighter_gobj);
                         break;
                     default:
                         OSReport("ellegal flag fp->no_reaction_always\n");

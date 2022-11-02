@@ -1,12 +1,12 @@
-#include <dolphin/types.h>
 #include <Runtime/__mem.h>
-#include <dolphin/os/OSArena.h>
-#include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/os.h>
 #include <dolphin/base/PPCArch.h>
+#include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSAudioSystem.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/init/__start.h>
+#include <dolphin/os/os.h>
+#include <dolphin/types.h>
 
 extern unk_t BootInfo;
 
@@ -381,7 +381,6 @@ extern unk_t OSDefaultExceptionHandler();
 extern unk_t __DBIsExceptionMarked();
 extern unk_t ICInvalidateRange();
 extern unk_t DCFlushRangeNoSync();
-extern unk_t memcpy();
 extern unk_t DBPrintf();
 
 #pragma push

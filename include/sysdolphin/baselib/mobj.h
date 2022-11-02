@@ -1,8 +1,6 @@
 #ifndef _mobj_h_
 #define _mobj_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 
 #include <sysdolphin/baselib/class.h>
@@ -148,6 +146,8 @@ typedef struct _HSD_MObjInfo {
 #define HSD_MOBJ_METHOD(o) HSD_MOBJ_INFO(HSD_CLASS_METHOD(o))
 
 extern HSD_MObjInfo hsdMObj;
+extern HSD_TObj* tobj_shadows;
+extern HSD_TObj* tobj_toon;
 
 void HSD_MObjSetCurrent(HSD_MObj* mobj);
 void HSD_MObjSetFlags(HSD_MObj* mobj, u32 flags);

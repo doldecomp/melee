@@ -1,4 +1,7 @@
+#include <MSL/trigf.h>
 #include <melee/ft/chara/ftFox/ftfox.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 
 #define HALF_PI32 1.5707963705062866f
 #define DOUBLE_PI32 6.2831854820251465f
@@ -586,8 +589,6 @@ void ftFox_SpecialHiLanding_Phys(HSD_GObj* fighter_gobj)
     func_8007C930(fp, foxAttrs->x7C_FOX_FIREFOX_GROUND_MOMENTUM_END);
     func_8007CB74(fighter_gobj);
 }
-
-extern void func_80084DB0(HSD_GObj*);
 
 // 0x800E7F20 - Fox & Falco's aerial Firefox/Firebird End Physics callback
 void ftFox_SpecialHiFall_Phys(HSD_GObj* fighter_gobj)

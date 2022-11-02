@@ -1,8 +1,6 @@
 #ifndef _shadow_h_
 #define _shadow_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 
 #include <sysdolphin/baselib/objalloc.h>

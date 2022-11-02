@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI_H
+#define MELEE_FT_CHARA_FTYOSHI_FTYOSHI_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -38,3 +39,28 @@ struct S_UNK_YOSHI1 {
 
 void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg);
 void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_frame);
+void func_8012C850(HSD_GObj* fighter_gobj);
+void func_8012B8A4(HSD_GObj* fighter_gobj);
+void func_8012BE3C(HSD_GObj* fighter_gobj);
+unk_t func_8012BECC();
+unk_t func_8012C1D4();
+unk_t func_8012C49C();
+unk_t func_8012C600();
+unk_t func_8012BDA0();
+unk_t func_8012CC1C();
+unk_t func_8012CD00();
+unk_t func_8012CCE0();
+unk_t func_8012CCF0();
+unk_t func_8012CCD0();
+unk_t func_8012CCC4();
+unk_t func_8012CC94();
+unk_t func_8012CDD4();
+unk_t func_8012CD58();
+unk_t func_8012CD40();
+unk_t func_8012CD70();
+unk_t func_8012CD88();
+unk_t func_8012CD28();
+unk_t func_8012CD10();
+unk_t func_8012CDB4();
+
+#endif

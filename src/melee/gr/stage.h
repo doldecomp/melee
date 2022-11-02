@@ -1,10 +1,9 @@
-#ifndef _stage_h_
-#define _stage_h_
+#ifndef MELEE_GR_STAGE_H
+#define MELEE_GR_STAGE_H
 
-#include <global.h>
-
-#include <dolphin/types.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/types.h>
 
 enum InternalStageID {
     CASTLE = 0x02, // Princess Peach's Castle

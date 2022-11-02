@@ -219,13 +219,6 @@ typedef struct ItemDynamics
     ItemDynamicsDesc* x4_dynamicsDesc; // 0x4 boneset data array (one for each boneset)
 }ItemDynamics;
 
-typedef struct ItemState_ParamStruct
-{
-    void* x0_unk;
-    void* x4_unk;
-    void* x8_unk;
-}ItemState_ParamStruct;
-
 struct ItemStateDesc
 {
     void* x0_anim_joint;
@@ -880,7 +873,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem);                 // Create Item //
 void func_80268B18(SpawnItem* spawnItem);                      // Item spawn prefunction - spawn airborne //
 void func_80268B5C(SpawnItem* spawnItem);                      // Item spawn prefunction - spawn grounded //
 void func_80268B9C(SpawnItem* spawnItem);                      // Item spawn prefunction - spawn grounded and toggle unknown true //
-void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3, Item* item_data); // Adds AObjs to item model //
+void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint, Item* item_data); // Adds AObjs to item model //
 void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc); // Unk Item AObj-related function //
 void func_80268DD4(HSD_GObj* item_gobj, f32 arg8);             // Advance item animation? //
 void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc); // Copy item script //

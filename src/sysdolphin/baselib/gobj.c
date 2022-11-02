@@ -107,8 +107,6 @@ u32 func_80390EB8(s32 i)
     return lbl_804085F0[i];
 }
 
-extern HSD_GObj* lbl_804D7814;
-
 inline void render_gobj(HSD_GObj* cur, s32 i)
 {
     HSD_GObj* saved = lbl_804D7814;
@@ -213,7 +211,6 @@ typedef struct _GObjFuncs {
 extern GObjFuncs lbl_80408610;
 extern s8 lbl_804D7848;
 extern s8 lbl_804D7849;
-extern s8 lbl_804D784A;
 extern GObjFuncs lbl_80408620;
 
 void func_80391260(struct _GObjUnkStruct* arg0)

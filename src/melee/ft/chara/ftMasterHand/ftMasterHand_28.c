@@ -1,58 +1,48 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
-// 8015521C 151DFC
-// https://decomp.me/scratch/veN50
-void lbl_8015521C(HSD_GObj* gobj) {
-    Fighter* fp;
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (ftAnim_IsFramesRemaining(gobj) == 0)) {
-        fp = gobj->user_data;
-        Fighter_UnkSetFlag_8006CFBC(gobj);
-        fp->x1A5C = 0;
-        func_80151018(gobj);
+void ftMasterHand_8015521C(HSD_GObj* fighter_gobj)
+{
+    if (ftbosslib_8015C31C() || ftbosslib_8015C3A0() || !ftAnim_IsFramesRemaining(fighter_gobj)) {
+        Fighter* fp = fighter_gobj->user_data;
+
+        Fighter_UnkSetFlag_8006CFBC(fighter_gobj);
+        fp->x1A5C = NULL;
+        ftMasterHand_80151018(fighter_gobj);
     }
 }
 
+void ftMasterHand_80155290(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
 
-
-
-// 80155290 151E70
-void lbl_80155290(HSD_GObj* arg0) {
-    Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
-    }
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+        ftbosslib_8015BD20(fighter_gobj);
 }
 
-
-
-// 801552D4 151EB4
-void lbl_801552D4(HSD_GObj* gobj) {
-    func_80085134(gobj);
+void ftMasterHand_801552D4(HSD_GObj* fighter_gobj)
+{
+    func_80085134(fighter_gobj);
 }
 
-
-
-// 801552F4 151ED4
-void lbl_801552F4(HSD_GObj* gobj) {
+void ftMasterHand_801552F4(HSD_GObj* fighter_gobj)
+{
     return;
 }
 
+void ftMasterHand_801552F8(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
+    HSD_GObj* other_gobj;
 
+    fp->x2204_ftcmd_var1 = FALSE;
+    other_gobj = ftbosslib_8015C3E8(FTKIND_CREZYH);
 
-// 801552F8 151ED8
-// https://decomp.me/scratch/x0WJ4
-void lbl_801552F8(HSD_GObj* gobj) {
-    Fighter* fp;
-    HSD_GObj* gobj_2;
+    if (!ftbosslib_8015C31C())
+        ftCrazyHand_8015A3F4(other_gobj);
 
-    fp = gobj->user_data;
-    fp->x2204_ftcmd_var1 = 0;
-    gobj_2 = func_8015C3E8(0x1CU);
-    if (func_8015C31C() == 0) {
-        func_8015A3F4(gobj_2);
-    }
-    fp->x1A5C = gobj_2;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17F, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    fp->x1A5C = other_gobj;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17F, 0, 0, 0.0f, 1.0f, 0.0f);
+    func_8006EBA4(fighter_gobj);
 }

@@ -1,4 +1,6 @@
 #include <dolphin/os/OSContext.h>
+
+#include <Runtime/runtime.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/os.h>
 
@@ -412,7 +414,6 @@ asm void OSInitContext(OSContext* ctx, unk_t arg1, unk_t arg2)
 #pragma pop
 
 extern char* lbl_80401E20[];
-extern unk_t __cvt_fp2unsigned();
 
 #pragma push
 asm void OSDumpContext(const OSContext*)

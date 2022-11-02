@@ -1,5 +1,10 @@
-#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include <dolphin/mtx.h>
+#include <dolphin/mtx/vec.h>
+#include <dolphin/os/os.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/robj.h>
 
@@ -1612,7 +1617,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
     Vec sp98;
     Vec sp8C;
     Vec sp80;
-    struct _HSD_IKHint* new_var;
+    HSD_IKHint* new_var;
     Vec sp74;
     Vec sp68;
     Vec sp5C;

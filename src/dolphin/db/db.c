@@ -1,4 +1,5 @@
 #include <dolphin/db/db.h>
+
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os/os.h>
 

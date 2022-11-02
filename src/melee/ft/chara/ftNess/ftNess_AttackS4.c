@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
+#include <melee/ft/ftcoll.h>
 
 // 0x80114BF4 //
 void ftNess_AttackS4_OnReflect(HSD_GObj* fighter_gobj) // Ness's F-Smash OnReflect callback //
@@ -87,8 +88,6 @@ void ftNess_ItemNessBatSetNULL(HSD_GObj* fighter_gobj) // Clear Baseball Bat GOb
     }
 };
 
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*)); // Create Reflect Bubble //
-
 // 0x80114D50
 // https://decomp.me/scratch/M8dFk //
 void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation callback //
@@ -142,8 +141,6 @@ void ftNess_AttackS4_IASA(HSD_GObj* fighter_gobj) // Ness's F-Smash IASA Callbac
         func_8008A4D4(fighter_gobj);
     }
 };
-
-extern void func_8007AEF8(HSD_GObj*); // Enable Reflect Bubble Update //
 
 // 0x80114E64 //
 // https://decomp.me/scratch/wQc4r //

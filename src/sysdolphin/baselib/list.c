@@ -1,5 +1,5 @@
 #include <sysdolphin/baselib/list.h>
-#include <string.h>
+#include <MSL/string.h>
 #include <dolphin/types.h>
 #include <stddef.h>
 

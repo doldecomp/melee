@@ -1,83 +1,79 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
-// 80154A78 151658
-// https://decomp.me/scratch/ci0xf
-void func_80154A78(HSD_GObj* gobj) {
-    Fighter* fp;
-    MasterHandAttributes* attr;
+void ftMasterHand_80154A78(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
+    MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
 
-    fp = gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
-    fp->x2204_ftcmd_var1 = 0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17A, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    fp->x2222_flag.bits.b2 = 1;
+    fp->x2204_ftcmd_var1 = FALSE;
+
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17A, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
+
+    fp->x2222_flag.bits.b2 = TRUE;
     func_8007E2F4(fp, 0x1FFU);
-    func_8007E2FC(gobj);
-    func_80155B80(fp->x1A58_interactedFighter);
-    fp->x234C_pos.x = attr->x118_pos.x;
-    fp->x234C_pos.y = attr->x118_pos.y;
-    fp->x234C_pos.z = 0.0f;
+    func_8007E2FC(fighter_gobj);
+    ftMasterHand_80155B80(fp->x1A58_interactedFighter);
+
+    fp->x234C_pos.x = ext_attr->x118_pos.x;
+    fp->x234C_pos.y = ext_attr->x118_pos.y;
+    fp->x234C_pos.z = 0.0F;
 }
 
+static void ftMasterHand_80154B2C_inline_1(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = getFighter(fighter_gobj);
 
-
-// 80154B2C 15170C
-// https://decomp.me/scratch/6WD6p
-void lbl_80154B2C(HSD_GObj* gobj) {
-    Fighter* fp;
-    s32 unused[2];
-
-    fp = gobj->user_data;
     if (fp->x2204_ftcmd_var1 != 0) {
-        func_8015C5F8(gobj);
+        func_8015C5F8(fighter_gobj);
         fp->x2204_ftcmd_var1 = 0;
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        if (((Fighter*)gobj->user_data)->sa.masterhand.x2250 == 0x17B) {
-            func_80154E78(gobj);
-        } else {
-            func_80155014(gobj);
-        }
+}
+
+static void ftMasterHand_80154B2C_inline_2(HSD_GObj* fighter_gobj)
+{
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        if (((Fighter*) fighter_gobj->user_data)->sa.masterhand.x2250 == 0x17B)
+            ftMasterHand_80154E78(fighter_gobj);
+        else
+            ftMasterHand_80155014(fighter_gobj);
     }
 }
 
+void ftMasterHand_80154B2C(HSD_GObj* fighter_gobj)
+{
+    u32 unused[2];
 
-
-// 80154BB0 151790
-void lbl_80154BB0(HSD_GObj* arg0) {
-    Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
-    }
+    ftMasterHand_80154B2C_inline_1(fighter_gobj);
+    ftMasterHand_80154B2C_inline_2(fighter_gobj);
 }
 
+void ftMasterHand_80154BB0(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
 
-
-// 80154BF4 1517D4
-// https://decomp.me/scratch/D7Kd4
-void lbl_80154BF4(HSD_GObj* gobj) {
-    Fighter* fp;
-    MasterHandAttributes* attr;
-
-    fp = gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
-    func_80085134(gobj);
-    func_8015BE40(gobj, &fp->x234C_pos, &fp->x2358_stateVar7, attr->x2C, attr->x28);
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+        ftbosslib_8015BD20(fighter_gobj);
 }
 
+void ftMasterHand_80154BF4(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
+    MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
 
+    func_80085134(fighter_gobj);
+    ftbosslib_8015BE40(fighter_gobj, &fp->x234C_pos, &fp->x2358_stateVar7, ext_attr->x2C, ext_attr->x28);
+}
 
-// 80154C54 151834
-// https://decomp.me/scratch/Pp9nI
-void lbl_80154C54(HSD_GObj* gobj) {
-    f32 temp_f1;
-    Fighter* fp;
+void ftMasterHand_80154C54(HSD_GObj* fighter_gobj)
+{
+    u32 unused;
 
-    fp = gobj->user_data;
-    if (fp->x2358_stateVar7 == 0.0f) {
-        fp->x80_self_vel.z = 0.0f;
-        fp->x80_self_vel.y = 0.0f;
-        fp->x80_self_vel.x = 0.0f;
+    Fighter* fp = fighter_gobj->user_data;
+
+    if (fp->x2358_stateVar7 == 0.0F) {
+        fp->x80_self_vel.z = 0.0F;
+        fp->x80_self_vel.y = 0.0F;
+        fp->x80_self_vel.x = 0.0F;
     }
 }

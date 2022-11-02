@@ -5,28 +5,26 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
-// Most of these should be moved to independent headers once they are created //
+// Most of these should be moved to independent headers once they are created
 
-// SOUND EFFECTS //
+// SOUND EFFECTS
 
 #define SFX_VOLUME_MAX 0x7FU
 #define SFX_PAN_MID 0x40U
 
-// HSD_PAD //
+// HSD_PAD
 
 #define HSD_BUTTON_DPAD_DOWN 0x4
-#define HSD_BUTTON_A 0x100 // Also covers Z-Button macro in-game //
+#define HSD_BUTTON_A 0x100 // Also covers Z-Button macro in-game
 #define HSD_BUTTON_B 0x200
 #define HSD_BUTTON_LR 0x80000000 // Digital input of either L or R
 
-// COLLISION FLAGS //
+// COLLISION FLAGS
 
-#define MPCOLL_GRPUSH 0x8000 // From Ness's Yo-Yo collision check //
+#define MPCOLL_GRPUSH 0x8000 // From Ness's Yo-Yo collision check
 #define MPCOLL_LEFTWALL 0xFC0
 #define MPCOLL_RIGHTWALL 0x3F
 #define MPCOLL_CEIL 0x6000
-
-typedef struct _Vec2 { float x, y; } Vec2;
 
 struct DemoMotionSymbols
 {
@@ -37,8 +35,6 @@ struct DemoMotionFiles
 {
     struct DemoMotionSymbols* x0_demoMotionPtr[14];
 };
-
-typedef Vec Vec3;
 
 typedef union _UnkFlagStruct {
     u8 u8;
@@ -62,7 +58,7 @@ typedef struct _ReflectDesc
     f32 x14_size;
     f32 x18_damage_mul;
     f32 x1C_speed_mul;
-    u8 x20_behavior : 8; // Setting this to 0x1 causes the reflector to skip ownership change // 
+    u8 x20_behavior : 8; // Setting this to 0x1 causes the reflector to skip ownership change
 
 } ReflectDesc;
 

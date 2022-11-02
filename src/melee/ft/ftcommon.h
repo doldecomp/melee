@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_FTCOMMON_H
+#define MELEE_FT_FTCOMMON_H
 
 #include <melee/ft/fighter.h>
 
@@ -56,7 +57,7 @@ void func_8007DD7C(HSD_GObj*, Vec3*);
 void func_8007DFD0();
 void func_8007E0E4(HSD_GObj*);
 HSD_GObj* func_8007E2A4(HSD_GObj*);
-void func_8007E2D0(Fighter*, s16, void (*cb0)(HSD_GObj*), void (*cb1)(HSD_GObj*), void (*cb2)(HSD_GObj*, HSD_GObj*));
+void ftCommon_SetOnGrabCallbacks(Fighter*, s16, void (*cb0)(HSD_GObj*), void (*cb1)(HSD_GObj*), void (*cb2)(HSD_GObj*, HSD_GObj*));
 void func_8007E2F4(Fighter*, s16 val);
 void func_8007E2FC(HSD_GObj*);
 void func_8007E358(HSD_GObj*);
@@ -111,3 +112,5 @@ void func_80080484(Fighter*);
 void func_800804A0(Fighter*, f32);
 f32 func_800804EC(Fighter*);
 void func_800804FC(Fighter*);
+
+#endif

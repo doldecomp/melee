@@ -1,7 +1,7 @@
-#include "global.h"
+#include <sysdolphin/baselib/debug.h>
 
-#include <dolphin/os/os.h>
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/os.h>
 
 struct UnkStruct80400430 {
     char filler0[0x52];
@@ -65,11 +65,12 @@ void __assert(char* str, u32 arg1, char* arg2) {
     HSD_Panic(str, arg1, lbl_804D6010);
 }
 
-void HSD_Panic(char* arg0, u32 line, char* arg2) {
+void HSD_Panic(char* file, u32 line, char* msg)
+{
     if (lbl_804D7714 != NULL) {
         OSSaveContext(&lbl_804C2608);
-        OSReport("%s in %s on line %d.\n", arg2, arg0, line);
+        OSReport("%s in %s on line %d.\n", msg, file, line);
         lbl_804D7714(&lbl_804C2608);
     }
-    OSPanic(arg0, line, arg2);
+    OSPanic(file, line, msg);
 }

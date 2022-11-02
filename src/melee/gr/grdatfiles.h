@@ -51,37 +51,6 @@ typedef struct _UnkStage6B0 {
     s32 xD8;
 } UnkStage6B0;
 
-typedef struct _UnkStageDat {
-    void* unk0;
-    s32 unk4;
-
-    struct {
-        struct _HSD_Joint* unk0;
-        u8 x4_fill[0x20 - 0x4];
-        S16Vec* unk20;
-        s32 unk24; // size of unk20 array
-        u8 x28_fill[0x34 - 0x28];
-    }* unk8;
-    s32 unkC;
-
-    s32* unk10;
-    s32 unk14;
-
-    u8 x18_fill[0x20 - 0x18];
-
-    void* unk20;
-    s32 unk24;
-
-    struct _UnkStageDatInternal** unk28;
-    s32 unk2C; // size
-} UnkStageDat;
-
-typedef struct _UnkArchiveStruct {
-    struct _HSD_Archive* unk0;
-    struct _UnkStageDat* unk4;
-    s32 unk8;
-} UnkArchiveStruct;
-
 void func_801C5FC0(struct _HSD_Archive*, void* data, u32 length);
 void func_801C6038(void*, s32, s32);
 static void func_801C6228(struct _UnkStageDat*);

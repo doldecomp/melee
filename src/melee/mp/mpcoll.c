@@ -1,7 +1,9 @@
-// python ../asm-differ/diff.py -mwobs func_X
-
 #include <melee/mp/mpcoll.h>
-#include "melee/ft/ftlib.h"
+
+#include <MSL/trigf.h>
+#include <dolphin/os/os.h>
+#include <melee/db/db_unknown_001.h>
+#include <melee/ft/ftlib.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
 

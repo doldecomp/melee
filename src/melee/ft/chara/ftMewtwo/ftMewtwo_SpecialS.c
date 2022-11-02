@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags
@@ -19,7 +21,7 @@ inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = getFighter(fighter_gobj);
     if (fp->x1A58_interactedFighter == NULL)
     {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BCF18);
+        ftCommon_SetOnGrabCallbacks(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BCF18);
     }
     else
     {
@@ -54,7 +56,7 @@ inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = getFighter(fighter_gobj);
     if (fp->x1A58_interactedFighter == NULL)
     {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BD000);
+        ftCommon_SetOnGrabCallbacks(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BD000);
     }
     else
     {
@@ -87,8 +89,6 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialAirS_SetGrab(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
 }
-
-extern void func_80090780(HSD_GObj*);
 
 inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 {
@@ -141,8 +141,6 @@ void ftMewtwo_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 {
     return;
 }
-
-extern void func_8007AEF8(HSD_GObj* fighter_gobj);
 
 // 0x80146988
 // https://decomp.me/scratch/o5TC6 // Mewtwo's grounded Confusion Physics callback
@@ -210,9 +208,6 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialS_SetReflect(fighter_gobj);
 }
 
-extern void func_8008403C(HSD_GObj*, void(*cb)(HSD_GObj*));
-extern void func_80082C74(HSD_GObj*, void(*cb)(HSD_GObj*));
-
 // 0x80146BB8 - Mewtwo's grounded Confusion Collision callback
 void ftMewtwo_SpecialS_Coll(HSD_GObj* fighter_gobj)
 {
@@ -224,8 +219,6 @@ void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
 {
     func_80082C74(fighter_gobj, ftMewtwo_SpecialAirS_AirToGround);
 }
-
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*));
 
 // 0x80146C08
 // https://decomp.me/scratch/BDCzb // Confusion Reflect think function

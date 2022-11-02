@@ -1,7 +1,9 @@
 #include <melee/gr/grlib.h>
+
+#include <melee/gr/ground.h>
+#include <melee/it/item.h>
 #include <sysdolphin/baselib/psappsrt.h>
 
-extern StageInfo stage_info;
 extern u8 lbl_804D7849;
 extern struct _UnkEffectStruct* lbl_804D78FC;
 

@@ -1,12 +1,10 @@
 #ifndef _player_h_
 #define _player_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
+#include <functions.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-
 
 typedef struct _StaticPlayer
 {
@@ -301,5 +299,6 @@ void Player_80036E20(s32 arg0, s32 arg1, s32 arg2);
 s32 Player_80036EA0(s32 slot);
 void Player_80036F34(s32 slot, s32 arg1);
 void Player_80037054(s32 slot, s32 arg1);
+s32 Player_80033BB8(s32 slot);
 
 #endif

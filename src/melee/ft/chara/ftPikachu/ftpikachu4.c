@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
+
+#include <MSL/trigf.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
 
 #define HALF_PI 1.5707963705062866f
 #define DEG_TO_RAD 0.017453292f
@@ -244,7 +248,7 @@ void ftPikachu_80126614(HSD_GObj* fighter_gobj) {
 
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
-    if (!func_80082888(fighter_gobj, &pika_attr->height_attributes)) {
+    if (!func_80082888(fighter_gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
         if ((collData->x134_envFlags & 0x3F) || (collData->x134_envFlags & 0xFC0)) {
             func_8007D60C(fp);
             ftPikachu_ActionChangeUpdateVel_80127534(fighter_gobj);
@@ -644,7 +648,7 @@ void ftPikachu_8012738C(HSD_GObj* fighter_gobj) {
     s32 unused[2];
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
-    if (!func_80082888(fighter_gobj, &pika_attr->height_attributes)) {
+    if (!func_80082888(fighter_gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
         ftPikachu_ActionChange_8012744C(fighter_gobj);
     }
 }
@@ -653,7 +657,7 @@ void ftPikachu_801273D4(HSD_GObj* fighter_gobj) {
     s32 unused[2];
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
-    if (func_8008239C(fighter_gobj, fp->x2C_facing_direction, pika_attr->height_attributes)) {
+    if (func_8008239C(fighter_gobj, fp->x2C_facing_direction, (ftCollisionBox*) &pika_attr->height_attributes)) {
         func_800D5CB0(fighter_gobj, 0, pika_attr->xB0);
         return;
     }

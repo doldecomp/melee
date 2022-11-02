@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
+
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd
 s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel, s32* chargeCycles)
@@ -741,8 +744,6 @@ void ftMewtwo_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
 {
     return;
 }
-
-extern BOOL func_8009917C(HSD_GObj*);
 
 // 0x80147E34
 // https://decomp.me/scratch/CGUNi // Mewtwo's grounded Shadow Ball Loop IASA callback

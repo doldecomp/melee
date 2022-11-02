@@ -1,9 +1,11 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
+
+#include <melee/ft/ftcoll.h>
+#include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/itkind.h>
-
-extern HSD_GObj* func_802B2560(HSD_GObj*,f32,Vec3*,long,u32);
+extern HSD_GObj* func_802B2560(HSD_GObj*, f32, Vec3*, long, u32);
 
 void ftMario_SpecialS_SetCall(Fighter* fp) 
 {
@@ -164,8 +166,6 @@ void ftMario_SpecialAirS_IASA(HSD_GObj* gobj)
 {
 	return;
 }
-
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*));
 
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj) 
 {

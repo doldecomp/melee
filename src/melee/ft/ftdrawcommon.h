@@ -5,7 +5,7 @@
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
-void func_80080E18(HSD_GObj*, long);
+void func_80080E18(HSD_GObj*, s32);
 MtxPtr func_8008051C(HSD_GObj*, MtxPtr);
 
 #endif

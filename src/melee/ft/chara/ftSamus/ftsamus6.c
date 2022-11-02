@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 void ftSamus_8012ADF0(HSD_GObj* fighter_gobj) {
     Vec vec;
     BOOL bool1;

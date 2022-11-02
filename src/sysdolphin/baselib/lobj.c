@@ -411,8 +411,9 @@ void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
 }
 
 extern char lbl_804D5D24[4];
+
 #pragma push
-asm void HSD_LObjSetupInit()
+asm void HSD_LObjSetupInit(HSD_CObj* cobj)
 { // clang-format off
     nofralloc
 /* 80365F28 00362B08  7C 08 02 A6 */	mflr r0
@@ -931,7 +932,7 @@ lbl_80366790:
 #pragma pop
 
 #pragma push
-asm void HSD_LObjSetCurrentAll()
+asm unk_t HSD_LObjSetCurrentAll()
 { // clang-format off
     nofralloc
 /* 803667A8 00363388  7C 08 02 A6 */	mflr r0
@@ -1029,7 +1030,7 @@ lbl_803668D0:
 #pragma pop
 
 #pragma push
-asm void func_803668EC()
+asm void func_803668EC(void* hsd_obj)
 { // clang-format off
     nofralloc
 /* 803668EC 003634CC  7C 08 02 A6 */	mflr r0

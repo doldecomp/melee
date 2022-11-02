@@ -1,4 +1,4 @@
-#include <dolphin/types.h>
+#include <melee/ft/code_8007C630.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/item.h>

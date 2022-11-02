@@ -15,5 +15,7 @@ void GXProject(
     f32* sz);
 void GXSetViewportJitter(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz, u32 field);
 void GXSetViewport(f32, f32, f32, f32, f32, f32);
+void GXSetCurrentMtx(s32 arg0);
+void GXLoadPosMtxImm(unk_t, s32);
 
 #endif

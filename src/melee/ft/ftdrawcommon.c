@@ -3,6 +3,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdata.h>
+#include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftlib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
@@ -966,7 +967,7 @@ lbl_80080E00:
 #endif
 
 #pragma push
-asm unk_t func_80080E18()
+asm void func_80080E18(HSD_GObj*, s32)
 { // clang-format off
     nofralloc
 /* 80080E18 0007D9F8  7C 08 02 A6 */	mflr r0

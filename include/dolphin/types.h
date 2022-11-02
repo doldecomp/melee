@@ -31,6 +31,7 @@ typedef unsigned int        uintptr_t;
 
 typedef unsigned long size_t;
 typedef void *unk_t;
+typedef void* any_t;
 typedef void (*jmp_t)(void);
 typedef jmp_t jtbl_t[];
 
@@ -61,5 +62,8 @@ typedef struct _ ## module ## _Unk ## number module ## _Unk ## number;
 #define qr6 6
 #define qr7 7
 #pragma endregion
+
+// TODO! DO NOT LEAVE THIS IN!
+#include <dolphin/mtx/mtxtypes.h>
 
 #endif

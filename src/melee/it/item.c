@@ -1,5 +1,10 @@
 #include <melee/it/item.h>
+
 #include <common_structs.h>
+#include <dolphin/os/os.h>
+#include <melee/gr/grlib.h>
+#include <melee/lb/lbunknown_001.h>
+#include <sysdolphin/baselib/jobj.h>
 
 extern s32 func_8016AE80();
 
@@ -780,7 +785,6 @@ void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj //
     func_80390A70(item_gobj, lbl_804D7849, jobj);
 }
 
-extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
 extern void* lbl_803F1F90[];
 
 // 0x8026814C //
@@ -1182,11 +1186,9 @@ void func_80268B9C(SpawnItem* spawnItem) // Item spawn prefunction - spawn groun
     func_8026862C(spawnItem);
 }
 
-extern void HSD_JObjAddAnim(void*, void*, void*, void*);
-
 // 0x80268BE0 //
 // https://decomp.me/scratch/gL9Td //
-void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3, Item* item_data) // Adds AObjs to item model //
+void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint, Item* item_data) // Adds AObjs to item model //
 {
 
     void* functionArg1;
@@ -1211,20 +1213,20 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
                         {
                             functionArg1 = anim_joint->next;
                         }
-                        if (matanim_joint != NULL)
+                        if (mat_joint != NULL)
                         {
-                            functionArg2 = matanim_joint->next;
+                            functionArg2 = mat_joint->next;
                         }
-                        if (arg3 != NULL)
+                        if (sh_joint != NULL)
                         {
-                            functionArg3 = arg3->x4_unk;
+                            functionArg3 = sh_joint->next;
                         }
                         func_80268BE0(item_jobj->next, functionArg1, functionArg2, functionArg3, item_data);
                     }
                     return;
                 }
         }
-        HSD_JObjAddAnim(item_jobj, anim_joint, matanim_joint, arg3);
+        HSD_JObjAddAnim(item_jobj, anim_joint, mat_joint, sh_joint);
         if (item_jobj->child != NULL)
         {
             functionArg1 = NULL;
@@ -1234,13 +1236,13 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
             {
                 functionArg1 = anim_joint->child;
             }
-            if (matanim_joint != NULL)
+            if (mat_joint != NULL)
             {
-                functionArg2 = matanim_joint->child;
+                functionArg2 = mat_joint->child;
             }
-            if (arg3 != NULL)
+            if (sh_joint != NULL)
             {
-                functionArg3 = arg3->x0_unk;
+                functionArg3 = sh_joint->child;
             }
             func_80268BE0(item_jobj->child, functionArg1, functionArg2, functionArg3, item_data);
         }
@@ -1253,13 +1255,13 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJo
             {
                 functionArg1 = anim_joint->next;
             }
-            if (matanim_joint != NULL)
+            if (mat_joint != NULL)
             {
-                functionArg2 = matanim_joint->next;
+                functionArg2 = mat_joint->next;
             }
-            if (arg3 != NULL)
+            if (sh_joint != NULL)
             {
-                functionArg3 = arg3->x4_unk;
+                functionArg3 = sh_joint->next;
             }
             func_80268BE0(item_jobj->next, functionArg1, functionArg2, functionArg3, item_data);
         }
@@ -1649,8 +1651,6 @@ s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones //
     }
     return 0;
 }
-
-extern void func_801C9E60(Vec3*);                          /* extern */
 
 // 0x802697D4 //
 // https://decomp.me/scratch/iJ7xS //
@@ -2317,7 +2317,6 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Remove Item f
 }
 
 extern void efLib_DestroyAll(HSD_GObj*);
-extern void func_8000FD18(void*);
 extern void func_80086724(HSD_GObj*, HSD_GObj*);
 extern void func_80086764(HSD_GObj*);
 extern s32 func_800867A0(HSD_GObj*, HSD_GObj*);
