@@ -1,10 +1,7 @@
-#ifndef _ftmasterhand_h_
-#define _ftmasterhand_h_
+#ifndef FT_CHARA_FTMASTERHAND_FTMASTERHAND_H
+#define FT_CHARA_FTMASTERHAND_FTMASTERHAND_H
 
-#include <global.h>
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 typedef struct _MasterHandAttributes {
     s32 x0;
@@ -89,71 +86,104 @@ typedef struct _MasterHandAttributes {
     f32 x178;
 } MasterHandAttributes;
 
-// ftMasterHand_1
-void ftMasterhand_OnDeath(HSD_GObj* gobj);
-void ftMasterhand_OnLoad(HSD_GObj* gobj);
+typedef enum ftMasterHandAction {
+    AS_MASTERHAND_UNK_341 = 341,
+    AS_MASTERHAND_UNK_342,
+    AS_MASTERHAND_UNK_343,
+    AS_MASTERHAND_UNK_344,
+    AS_MASTERHAND_UNK_345,
+    AS_MASTERHAND_UNK_346,
+    AS_MASTERHAND_UNK_347,
+    AS_MASTERHAND_UNK_348,
+    AS_MASTERHAND_UNK_349,
+    AS_MASTERHAND_UNK_350,
+    AS_MASTERHAND_UNK_351,
+    AS_MASTERHAND_UNK_352,
+    AS_MASTERHAND_UNK_353,
+    AS_MASTERHAND_UNK_354,
+    AS_MASTERHAND_UNK_355,
+    AS_MASTERHAND_UNK_356,
+    AS_MASTERHAND_UNK_357,
+    AS_MASTERHAND_UNK_358,
+    AS_MASTERHAND_UNK_359,
+    AS_MASTERHAND_UNK_360,
+    AS_MASTERHAND_UNK_361,
+    AS_MASTERHAND_UNK_362,
+    AS_MASTERHAND_UNK_363,
+    AS_MASTERHAND_UNK_364,
+    AS_MASTERHAND_UNK_365,
+    AS_MASTERHAND_UNK_366,
+    AS_MASTERHAND_UNK_367,
+    AS_MASTERHAND_UNK_368,
+    AS_MASTERHAND_UNK_369,
+    AS_MASTERHAND_UNK_370,
+    AS_MASTERHAND_UNK_371,
+    AS_MASTERHAND_UNK_372,
+    AS_MASTERHAND_UNK_373,
+    AS_MASTERHAND_UNK_374,
+    AS_MASTERHAND_UNK_375,
+    AS_MASTERHAND_UNK_376,
+    AS_MASTERHAND_UNK_377,
+    AS_MASTERHAND_UNK_378,
+    AS_MASTERHAND_UNK_379,
+    AS_MASTERHAND_UNK_380,
+    AS_MASTERHAND_UNK_381,
+    AS_MASTERHAND_UNK_382,
+    AS_MASTERHAND_UNK_383,
+    AS_MASTERHAND_UNK_384,
+    AS_MASTERHAND_UNK_385,
+    AS_MASTERHAND_UNK_386,
+    AS_MASTERHAND_UNK_387,
+    AS_MASTERHAND_UNK_388,
+    AS_MASTERHAND_UNK_389,
+    AS_MASTERHAND_UNK_390,
+} ftMasterHandAction;
 
-// ftMasterHand_2
-void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj);
-void func_8014FE10(HSD_GObj* gobj);
-void func_8014FE58(HSD_GObj* gobj);
-void func_8014FE5C(HSD_GObj* gobj);
-void func_8014FF1C(HSD_GObj* gobj);
-void lbl_8014FFDC(HSD_GObj* gobj);
-void func_80150144(HSD_GObj* gobj);
-void lbl_80150230(HSD_GObj* gobj);
-void lbl_8015082C(HSD_GObj* gobj);
-void lbl_80150870(HSD_GObj* gobj);
-void lbl_80150890(HSD_GObj* gobj);
-void func_80150894(HSD_GObj* gobj);
+#pragma region "ftMasterHand_1"
+void ftMasterhand_OnDeath(HSD_GObj* fighter_gobj);
+void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_3
-void func_80150C8C(HSD_GObj* gobj);
-void func_80150D28(HSD_GObj* gobj);
-void func_80150DC4(HSD_GObj* gobj, void*, Vec3*);
-void lbl_80150F00(HSD_GObj* gobj);
-void lbl_80150F68(HSD_GObj* gobj);
-void lbl_80150FC8(HSD_GObj* gobj);
-void func_80151018(HSD_GObj* gobj);
+#pragma region "ftMasterHand_2"
+void ftMasterHand_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftMasterHand_8014FE10(HSD_GObj* fighter_gobj);
+void ftMasterHand_8014FE58(HSD_GObj* fighter_gobj);
+void ftMasterHand_80150890(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_4
-void func_801510B0(HSD_GObj* gobj);
-void lbl_80151168(HSD_GObj* gobj);
-void lbl_801511B0(HSD_GObj* gobj);
-void lbl_801511F4(HSD_GObj* gobj);
-void lbl_801511F8(HSD_GObj* gobj);
-void lbl_801511FC(HSD_GObj* gobj);
+#pragma region "ftMasterHand_3"
+void lbl_80150F68(HSD_GObj* fighter_gobj);
+void ftMasterHand_80150FC8(HSD_GObj* fighter_gobj);
+void ftMasterHand_80151018(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_5
-u32 lbl_80151428(Vec* vec);
+#pragma region "ftMasterHand_4"
+void ftMasterHand_80151168(HSD_GObj* fighter_gobj);
+void ftMasterHand_801511B0(HSD_GObj* fighter_gobj);
+void ftMasterHand_801511F4(HSD_GObj* fighter_gobj);
+void ftMasterHand_801511F8(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_14
-void lbl_80152E28(HSD_GObj* gobj);
+#pragma region "ftMasterHand 32"
+void ftMasterHand_80155B7C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155C20(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_15
-void lbl_801535B0(HSD_GObj* gobj);
-void func_8015364C(struct _HSD_GObj *, struct _HSD_JObj *, f32, f32);
+#pragma region "ftMasterHand 33"
+void ftMasterHand_80155C88(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155C8C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155C90(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_21
-void lbl_801541C4(HSD_GObj* gobj);
-
-// ftMasterHand_22
-void lbl_80154A2C(HSD_GObj* gobj);
-
-// ftMasterHand_31
-void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2);
-
-void lbl_80151828(HSD_GObj*); // 6 Stage Wide Slap
-void lbl_80151BB8(HSD_GObj*); // 7 Sweep
-void lbl_80151DC4(HSD_GObj*); // 9 Walk
-void lbl_801521DC(HSD_GObj*); // 10 Drill
-void lbl_80152370(HSD_GObj*); // 11 Punch
-void lbl_801526D8(HSD_GObj*); // 12 Ground Slap
-void lbl_80152BCC(HSD_GObj*); // 14 Lasers
-void lbl_80153B90(HSD_GObj*); // 19 Ram
-void lbl_80153D2C(HSD_GObj*); // 20 Crush
-void lbl_80155194(HSD_GObj*); // 27 Crazy Hand Combo Attack 1
-void lbl_801552F8(HSD_GObj*); // 28 Crazy Hand Combo Attack 2
-void lbl_80155484(HSD_GObj*); // 29 Crazy Hand Combo Attack 3
+#pragma region "ftMasterHand 34"
+void ftMasterHand_80155D5C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155D60(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155D64(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155D68(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155E08(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155E0C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155E10(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155E14(HSD_GObj* fighter_gobj);
+#pragma endregion
 
 #endif

@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
+#include <MSL/trigf.h>
+#include <melee/lb/lbunknown_001.h>
+
 // Setup float order //
 f32 return_float1(void) // -0x62B0 //
 {
@@ -203,31 +206,12 @@ BOOL ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* fighter_gobj)
     return ret;
 }
 
-// 0x80117D9C //
-// https://decomp.me/scratch/QeIRL //
-BOOL ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj) // Checks if Ness is in SpecialHiHold/SpecialAirHiHold (PK Thunder control loop) //
+// Checks if Ness is in SpecialHiHold/SpecialAirHiHold (PK Thunder control loop)
+BOOL ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj)
 {
-    s32 ASID;
-    Fighter* fp;
-    s32 phi_r3;
-    Fighter* fp_1;
+    Fighter* fp = fighter_gobj->user_data;
 
-    fp = (fp_1 = getFighter(fighter_gobj));
-    ASID = fp->x10_action_state_index;
-
-    phi_r3 = TRUE;
-
-    if ((ASID != AS_NESS_SPECIALHI_HOLD) && (ASID != AS_NESS_SPECIALAIRHI_HOLD))
-    {
-        phi_r3 = FALSE;
-    }
-
-    if (phi_r3 != FALSE)
-    {
-        return TRUE;
-    }
-
-    return FALSE;
+    return ((fp->x10_action_state_index == 0x167) || (fp->x10_action_state_index == 0x16B)) ? TRUE : FALSE;
 }
 
 // 0x80117DD4 //
@@ -520,7 +504,6 @@ void ftNess_SpecialAirHiStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial P
 }
 
 extern void func_8007D60C(Fighter*);
-extern void func_80097D40(HSD_GObj*);
 
 // 0x80118384 //
 // https://decomp.me/scratch/nOcOo // The link itself agrees with how ramen noodles this function is //
@@ -1299,7 +1282,7 @@ block_friction:
     func_8007CE94(fp, friction);
 }
 
-extern f32 sqrtf__Ff(f32 arg0);
+extern f32 sqrtf__Ff(f32);
 
 inline void ftNess_atan2(HSD_GObj* fighter_gobj)
 {

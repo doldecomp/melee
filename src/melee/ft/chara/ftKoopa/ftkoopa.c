@@ -164,7 +164,7 @@ void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj)
 
     fp = gobj->user_data;
 
-    func_8007E2D0(fp, 8, func_8013302C, NULL, func_800BC7E0);
+    ftCommon_SetOnGrabCallbacks(fp, 8, func_8013302C, NULL, func_800BC7E0);
 
     fp->x2340_stateVar1 = 0;
     fp->x2348_stateVar3 = 0;
@@ -189,7 +189,7 @@ void ftKoopa_SpecialAirS_StartAction(HSD_GObj *gobj)
 
     fp = gobj->user_data;
 
-    func_8007E2D0(fp, 8, func_801330E4, NULL, func_800BC8D4);
+    ftCommon_SetOnGrabCallbacks(fp, 8, func_801330E4, NULL, func_800BC8D4);
 
     fp->x2340_stateVar1 = 0;
     fp->x2348_stateVar3 = 0;
@@ -239,7 +239,7 @@ void func_8013319C(HSD_GObj* gobj) {
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(gobj, 0x161, 0x0C4C5088, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
     fp = gobj->user_data;
-    func_8007E2D0(fp, 8, func_801330E4, NULL, func_800BC8D4);
+    ftCommon_SetOnGrabCallbacks(fp, 8, func_801330E4, NULL, func_800BC8D4);
     fp->x2340_stateVar1 = 0;
     fp->x2348_stateVar3 = 0;
 }
@@ -254,7 +254,7 @@ void func_8013322C(HSD_GObj* gobj) {
     func_8007D7FC(ft2);
     Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0x0C4C5088, 0, ft2->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
     ft1 = gobj->user_data;
-    func_8007E2D0(ft1, 8, func_8013302C, NULL, func_800BC7E0);
+    ftCommon_SetOnGrabCallbacks(ft1, 8, func_8013302C, NULL, func_800BC7E0);
     ft1->x2340_stateVar1 = 0;
     ft1->x2348_stateVar3 = 0;
     ft2->x2340_stateVar1 = 0;

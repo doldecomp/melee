@@ -73,7 +73,7 @@ ftFalcon_SpecialHi_StartAction:
 /* 800E4AD0 000E16B0  38 7F 00 00 */	addi r3, r31, 0
 /* 800E4AD4 000E16B4  38 80 00 02 */	li r4, 2
 /* 800E4AD8 000E16B8  38 C0 00 00 */	li r6, 0
-/* 800E4ADC 000E16BC  4B F9 97 F5 */	bl func_8007E2D0
+/* 800E4ADC 000E16BC  4B F9 97 F5 */	bl ftCommon_SetOnGrabCallbacks
 /* 800E4AE0 000E16C0  7F C3 F3 78 */	mr r3, r30
 /* 800E4AE4 000E16C4  4B F8 A0 C1 */	bl func_8006EBA4
 /* 800E4AE8 000E16C8  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -248,7 +248,7 @@ ftCFalcon_SpecialAirHi_StartAction:
 /* 800E4D4C 000E192C  38 7F 00 00 */	addi r3, r31, 0
 /* 800E4D50 000E1930  38 80 00 02 */	li r4, 2
 /* 800E4D54 000E1934  38 C0 00 00 */	li r6, 0
-/* 800E4D58 000E1938  4B F9 95 79 */	bl func_8007E2D0
+/* 800E4D58 000E1938  4B F9 95 79 */	bl ftCommon_SetOnGrabCallbacks
 /* 800E4D5C 000E193C  7F C3 F3 78 */	mr r3, r30
 /* 800E4D60 000E1940  4B F8 9E 45 */	bl func_8006EBA4
 /* 800E4D64 000E1944  80 01 00 1C */	lwz r0, 0x1c(r1)

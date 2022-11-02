@@ -1,3 +1,4 @@
+#include <Runtime/runtime.h>
 #include <common_structs.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXInit.h>
@@ -16,8 +17,6 @@ Vec2 const lbl_804DE2D0 = { 1.0F, 0.0F };
 f64 const lbl_804DE2D8 = 3.0L;
 Vec2 const lbl_804DE2E0 = { 256.0F, 0.0F };
 f64 const lbl_804DE2E8 = 4503599627370496.0L;
-
-unk_t __cvt_fp2unsigned();
 
 // https://decomp.me/scratch/yiKJZ // 9594 (11.17%)
 #pragma push
@@ -343,7 +342,7 @@ lbl_80340C00:
 
 // https://decomp.me/scratch/2S68p // 5205 (19.92%)
 #pragma push
-asm unk_t GXSetBlendMode()
+asm void GXSetBlendMode(s32, s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 80340C3C 0033D81C  2C 03 00 01 */	cmpwi r3, 1
@@ -417,7 +416,7 @@ lbl_80340C54:
 
 // https://decomp.me/scratch/yi6mS // 440 (72.50%)
 #pragma push
-asm unk_t GXSetColorUpdate()
+asm void GXSetColorUpdate(s32)
 { // clang-format off
     nofralloc
 /* 80340D40 0033D920  80 8D A5 08 */	lwz r4, __GXContexts(r13)
@@ -441,7 +440,7 @@ asm unk_t GXSetColorUpdate()
 
 // https://decomp.me/scratch/NG4ef // 440 (72.50%)
 #pragma push
-asm unk_t GXSetAlphaUpdate()
+asm void GXSetAlphaUpdate(s32)
 { // clang-format off
     nofralloc
 /* 80340D80 0033D960  80 8D A5 08 */	lwz r4, __GXContexts(r13)
@@ -465,7 +464,7 @@ asm unk_t GXSetAlphaUpdate()
 
 // https://decomp.me/scratch/MBnZl // 1345 (55.17%)
 #pragma push
-asm unk_t GXSetZMode()
+asm void GXSetZMode(s8, s32, s32)
 { // clang-format off
     nofralloc
 /* 80340DC0 0033D9A0  80 CD A5 08 */	lwz r6, __GXContexts(r13)
@@ -503,7 +502,7 @@ asm unk_t GXSetZMode()
 
 // https://decomp.me/scratch/mQjA0 // 440 (72.50%)
 #pragma push
-asm unk_t GXSetZCompLoc()
+asm void GXSetZCompLoc(GXBool before_tex)
 { // clang-format off
     nofralloc
 /* 80340E38 0033DA18  80 8D A5 08 */	lwz r4, __GXContexts(r13)

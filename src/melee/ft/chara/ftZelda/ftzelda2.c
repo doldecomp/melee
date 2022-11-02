@@ -1,4 +1,6 @@
+#include <MSL/trigf.h>
 #include <melee/ft/chara/ftZelda/ftzelda.h>
+#include <melee/ft/ft_unknown_006.h>
 
 #define HALF_PI 1.5707963705062866f
 #define DEG_TO_RAD 0.017453292f

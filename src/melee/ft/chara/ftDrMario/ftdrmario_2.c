@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftDrMario/ftdrmario.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 void func_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;

@@ -1,13 +1,9 @@
-#ifndef _ftkoopa_h_
-#define _ftkoopa_h_
-
-#include <global.h>
+#ifndef MELEE_FT_CHARA_FTKOOPA_FTKOOPA_H
+#define MELEE_FT_CHARA_FTKOOPA_FTKOOPA_H
 
 #include <dolphin/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
-
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef struct _ftKoopaAttributes {
     f32 x0;
@@ -60,5 +56,12 @@ typedef struct _ftKoopaVars {
 void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj);
 void func_8013302C(HSD_GObj *gobj);
 void func_801330E4(HSD_GObj* gobj);
+f32 func_80132DE0(HSD_GObj* gobj);
+f32 func_80132DD0(HSD_GObj* gobj);
+f32 func_80132E00(HSD_GObj* gobj);
+f32 func_80132DF0(HSD_GObj* gobj);
+f32 func_80132E20(HSD_GObj* gobj);
+f32 func_80132E10(HSD_GObj* gobj);
+f32 func_80132DC0(HSD_GObj* gobj);
 
 #endif

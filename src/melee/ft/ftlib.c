@@ -1,16 +1,14 @@
 #include <melee/ft/ftlib.h>
 
-#include <sysdolphin/baselib/jobj.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftdata.h>
+#include <melee/gm/code_801601C4.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/pl/player.h>
-
-extern struct {
-    void* unk0;
-    u8 unk4;
-} CostumeListsForeachCharacter[];
+#include <sysdolphin/baselib/jobj.h>
 
 extern s8 lbl_803C26FC[];
-
 
 s32 func_800860C4(void)
 {
@@ -717,14 +715,14 @@ void func_80087140(HSD_GObj* gobj)
     }
 }
 
-void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
+void func_800871A8(HSD_GObj* fighter_gobj, HSD_GObj* item_gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     u32 unused[2];
     assert_line(1117, itGetKind(item_gobj) == It_Kind_MetalB);
-    func_800C8348(gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
-    func_800D105C(gobj);
-    func_80081C88(gobj, fp->x34_scale.y);
+    func_800C8348(fighter_gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
+    func_800D105C(fighter_gobj);
+    func_80081C88(fighter_gobj, fp->x34_scale.y);
     func_8007EBAC(fp, 0xC, 0);
     func_80030E44(2, &fp->xB0_pos);
     func_80088148(fp, 0x121, 0x7F, 0x40);
@@ -890,7 +888,7 @@ void func_80087574(s8 arg)
     u8 i;
     func_8008572C(arg);
     func_8006737C(lbl_803C26FC[arg]);
-    for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++) {
+    for (i = 0; i < CostumeListsForeachCharacter[arg].numCostumes; i++) {
         func_80085820(arg, i);
     }
     func_80085A14(arg);

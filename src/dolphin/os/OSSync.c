@@ -1,5 +1,5 @@
 #include <dolphin/types.h>
-#include <string.h>
+#include <MSL/string.h>
 
 #define OS_SYS_CALL_HANDLER ((void*) 0x80000C00)
 #define OS_HANDLER_SLOT_SIZE 0x100

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 extern HSD_GObj* func_802C61F4(HSD_GObj*, Vec3*, s32, f32);
 
 // 0x8014BDB0
@@ -152,8 +154,6 @@ BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
     }
     return FALSE;
 }
-
-extern BOOL func_80094790(HSD_GObj*);
 
 // 0x8014C07C
 // https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Action State handler

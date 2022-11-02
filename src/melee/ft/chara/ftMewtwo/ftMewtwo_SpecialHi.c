@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
+#include <MSL/trigf.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
+
 #define HALF_PI32 1.5707963705062866f
 
 // 0x801450A0
@@ -354,7 +358,7 @@ inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = 1;
 
-    func_8007B62C(fighter_gobj, 2);
+    func_8007B62C(fighter_gobj, 2, mewtwoAttrs);
 
     fp->x221E_flag.bits.b0 = 1;
 

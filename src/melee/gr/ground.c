@@ -1,16 +1,21 @@
 #include <melee/gr/ground.h>
 
+#include <MSL/trigf.h>
+#include <dolphin/mtx/vec.h>
+#include <dolphin/os/os.h>
+#include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbshadow.h>
+#include <melee/lb/lbunknown_003.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-
 #include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
@@ -731,8 +736,6 @@ void func_801C1074(StructPairWithStageID* pair, s32 arg1)
 {
     lbl_803DFEDC[pair->stage_id]->callback1(arg1);
 }
-
-void OSPanic(const char *file, int line, const char *msg, ...);
 
 void func_801C10B8(s32 arg0, s32 arg1)
 {
@@ -3257,7 +3260,7 @@ f32 func_801C3F20(HSD_JObj* arg0)
     return 0;
 }
 
-asm struct _HSD_JObj* func_801C3FA4(HSD_GObj*, s32 depth)
+asm HSD_JObj* func_801C3FA4(HSD_GObj* gobj, s32 depth)
 {
     nofralloc
 /* 801C3FA4 001C0B84  80 63 00 28 */	lwz r3, 0x28(r3)
@@ -3577,8 +3580,6 @@ static void lbl_801C4640(HSD_GObj* gobj)
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-extern u8 lbl_804D784A;
-extern void func_80011AC4();
 static asm void func_801C466C(void)
 {
     nofralloc
@@ -3822,7 +3823,7 @@ HSD_GObj* func_801C498C(void)
 
 extern void* lbl_803E06C8[]; // unknown type
 
-void* func_801C49B4(void)
+unk_t func_801C49B4(void)
 {
     UnkArchiveStruct* archive = func_801C6324();
     if (stage_info.x6C4 != NULL) {

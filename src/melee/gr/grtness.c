@@ -1,8 +1,9 @@
 #include <melee/gr/grtness.h>
 
+#include <dolphin/os/os.h>
+#include <melee/gr/grdisplay.h>
+#include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
-
-extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E9030[4] = {
     {

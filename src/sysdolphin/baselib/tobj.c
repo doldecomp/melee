@@ -4,6 +4,7 @@
 #include <dolphin/mtx.h>
 
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/debug.h>
 
 extern void TObjInfoInit(void);
 

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
 void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* fighter_gobj)
@@ -161,9 +163,6 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 
     ftMewtwo_SpecialLw_SetCall(fighter_gobj);
 }
-
-extern void func_8008403C(HSD_GObj*, void(*cb_Coll)(HSD_GObj*));
-extern void func_80082C74(HSD_GObj*, void(*cb_Coll)(HSD_GObj*));
 
 // 0x80146544 - Mewtwo's grounded Disable Collision callback
 void ftMewtwo_SpecialLw_Coll(HSD_GObj* fighter_gobj)

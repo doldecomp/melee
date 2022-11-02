@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
+#include <melee/ft/ft_unknown_006.h>
 
 // 8013B638 - 8013B6D8 (0xA0 bytes)
 // https://decomp.me/scratch/QnXK1

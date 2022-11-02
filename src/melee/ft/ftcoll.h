@@ -18,7 +18,7 @@ BOOL func_8007B868(HSD_GObj* fighter_gobj);
 void func_8007ABD0(Hitbox*, u32 damageAmount, HSD_GObj*);
 void func_8007AEE0(HSD_GObj*);
 void func_8007AF28(HSD_GObj* fighter_gobj);
-void func_8007AFF8(HSD_GObj *);
+void func_8007AFF8(HSD_GObj*);
 void func_8007B0C0(HSD_GObj*, s32);
 void func_8007B1B8(HSD_GObj*, f32*, void (*)(HSD_GObj*));
 void func_8007B4E0(HSD_GObj*);
@@ -34,5 +34,31 @@ void func_8007BAC0(HSD_GObj* fighter_gobj);
 f32 func_8007BBCC(HSD_GObj* fighter_gobj);
 void func_8007BC90(HSD_GObj* fighter_gobj);
 void func_8007BE3C(HSD_GObj* fighter_gobj);
+void func_8007AEF8(HSD_GObj* fighter_gobj);
+void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void (*cb_OnReflect)(HSD_GObj*));
+unk_t func_80078710();
+unk_t func_80079C70();
+void func_800DC920(HSD_GObj* fighter_gobj, HSD_GObj* other_gobj);
+unk_t func_8007AF60();
+unk_t func_80079EA8();
+unk_t func_800788D4();
+unk_t func_80008D30();
+void func_8007B320(HSD_GObj* fighter_gobj);
+unk_t func_80078384();
+unk_t func_80076764();
+unk_t func_80076640();
+unk_t func_80078A2C();
+unk_t func_80078C70();
+unk_t func_8007925C();
 
-#endif 
+
+/* todo
+ * Real signature is:
+ *
+ * void func_8007B62C(HSD_GObj* fighter_gobj, u32, void* ext_attr);
+ *
+ * but some call sites need to be modified to match.
+ */
+void func_8007B62C();
+
+#endif

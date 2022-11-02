@@ -8287,12 +8287,10 @@ lbl_804DEACC:
 	.4byte 0x3B800000
 .global lbl_804DEAD0
 lbl_804DEAD0:
-	.float 176.0
-	.4byte 0x80000000
+	.double 4503601774854144.0
 .global lbl_804DEAD8
 lbl_804DEAD8:
-	.float 176.0
-	.4byte NULL
+	.double 4503599627370496.0
 .global lbl_804DEAE0
 lbl_804DEAE0:
 	.4byte NULL

@@ -1,5 +1,5 @@
-#ifndef __MTX_H__
-#define __MTX_H__
+#ifndef DOLPHIN_MTX_H
+#define DOLPHIN_MTX_H
 
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/types.h>

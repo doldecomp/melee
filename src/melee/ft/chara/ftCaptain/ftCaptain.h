@@ -1,10 +1,9 @@
 #ifndef _ftcaptain_h_
 #define _ftcaptain_h_
 
-#include <global.h>
 #include <dolphin/types.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef enum ftCaptainAction {
  

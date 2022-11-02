@@ -1,9 +1,9 @@
 #include <melee/gr/grdatfiles.h>
 
-#include <sysdolphin/baselib/archive.h>
+#include <melee/gr/ground.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbheap.h>
 #include <sysdolphin/baselib/debug.h>
-
-extern StageInfo stage_info;
 
 typedef struct _UnkStageDatInternal {
     u8 x0_fill[0x4];

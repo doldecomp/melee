@@ -1,9 +1,13 @@
-.include "macros.inc"
+#include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/debug.h>
 
-.section .text  # 0x8008521C - 0x80086194
+extern char* lbl_804D3AA8;
+extern char* lbl_804D3AB0;
 
-.global func_8008521C
-func_8008521C:
+#pragma push
+asm unk_t func_8008521C()
+{ // clang-format off
+    nofralloc
 /* 8008521C 00081DFC  7C 08 02 A6 */	mflr r0
 /* 80085220 00081E00  90 01 00 04 */	stw r0, 4(r1)
 /* 80085224 00081E04  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -13,9 +17,9 @@ func_8008521C:
 /* 80085234 00081E14  83 C3 00 2C */	lwz r30, 0x2c(r3)
 /* 80085238 00081E18  28 1F 00 00 */	cmplwi r31, 0
 /* 8008523C 00081E1C  40 82 00 14 */	bne lbl_80085250
-/* 80085240 00081E20  38 6D 84 08 */	addi r3, r13, lbl_804D3AA8@sda21
+/* 80085240 00081E20  38 6D 84 08 */	addi r3, r13, lbl_804D3AA8
 /* 80085244 00081E24  38 80 03 D3 */	li r4, 0x3d3
-/* 80085248 00081E28  38 AD 84 10 */	addi r5, r13, lbl_804D3AB0@sda21
+/* 80085248 00081E28  38 AD 84 10 */	addi r5, r13, lbl_804D3AB0
 /* 8008524C 00081E2C  48 30 2F D5 */	bl __assert
 lbl_80085250:
 /* 80085250 00081E30  80 7F 00 38 */	lwz r3, 0x38(r31)
@@ -42,9 +46,15 @@ lbl_80085250:
 /* 800852A4 00081E84  38 21 00 28 */	addi r1, r1, 0x28
 /* 800852A8 00081E88  7C 08 03 A6 */	mtlr r0
 /* 800852AC 00081E8C  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global func_800852B0
-func_800852B0:
+extern ftData* gFtDataList[33];
+
+#pragma push
+asm void func_800852B0(HSD_GObj* fighter_gobj)
+{ // clang-format off
+    nofralloc
 /* 800852B0 00081E90  3C 80 80 46 */	lis r4, gFtDataList@ha
 /* 800852B4 00081E94  3C 60 80 3C */	lis r3, CostumeListsForeachCharacter@ha
 /* 800852B8 00081E98  39 03 0E C0 */	addi r8, r3, CostumeListsForeachCharacter@l
@@ -175,9 +185,15 @@ lbl_800853AC:
 /* 80085490 00082070  50 60 2E 74 */	rlwimi r0, r3, 5, 0x19, 0x1a
 /* 80085494 00082074  98 0B 00 06 */	stb r0, 6(r11)
 /* 80085498 00082078  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
 
-.global func_8008549C
-func_8008549C:
+extern unk_t lbl_8045996C;
+
+#pragma push
+asm unk_t func_8008549C()
+{ // clang-format off
+    nofralloc
 /* 8008549C 0008207C  3C 60 80 46 */	lis r3, lbl_8045996C@ha
 /* 800854A0 00082080  38 83 99 6C */	addi r4, r3, lbl_8045996C@l
 /* 800854A4 00082084  38 60 00 00 */	li r3, 0
@@ -230,100 +246,5 @@ lbl_80085550:
 /* 80085554 00082134  7C 84 02 14 */	add r4, r4, r0
 /* 80085558 00082138  4B FF FF D8 */	b lbl_80085530
 /* 8008555C 0008213C  4E 80 00 20 */	blr 
-
-
-.section .bss, "wa"
-    .balign 8
-.global gFtDataList
-gFtDataList:
-    .skip 0x84
-.global lbl_8045993C
-lbl_8045993C:
-    .skip 0x30
-.global lbl_8045996C
-lbl_8045996C:
-    .skip 0x84
-lbl_804599F0:
-    .skip 0x78
-
-
-.section .data
-    .balign 8
-.global CostumeListsForeachCharacter
-CostumeListsForeachCharacter:
-    .4byte lbl_804599F0
-    .4byte 0x05000000
-    .4byte lbl_80459B28
-    .4byte 0x04000000
-    .4byte lbl_80459A98
-    .4byte 0x06000000
-    .4byte lbl_80459CA0
-    .4byte 0x05000000
-    .4byte lbl_80459C10
-    .4byte 0x06000000
-    .4byte lbl_8045A090
-    .4byte 0x04000000
-    .4byte lbl_803C82EC
-    .4byte 0x05000000
-    .4byte lbl_80459D18
-    .4byte 0x05000000
-    .4byte lbl_80459D90
-    .4byte 0x04000000
-    .4byte lbl_80459DF0
-    .4byte 0x05000000
-    .4byte lbl_80459E68
-    .4byte 0x04000000
-    .4byte lbl_80459EC8
-    .4byte 0x04000000
-    .4byte lbl_80459F28
-    .4byte 0x04000000
-    .4byte lbl_80459F88
-    .4byte 0x05000000
-    .4byte lbl_8045A000
-    .4byte 0x06000000
-    .4byte lbl_8045A1F8
-    .4byte 0x05000000
-    .4byte lbl_8045A2D0
-    .4byte 0x04000000
-    .4byte lbl_8045A270
-    .4byte 0x04000000
-    .4byte lbl_8045A0F0
-    .4byte 0x05000000
-    .4byte lbl_8045A168
-    .4byte 0x05000000
-    .4byte lbl_8045A330
-    .4byte 0x05000000
-    .4byte lbl_8045A3A8
-    .4byte 0x05000000
-    .4byte lbl_8045A420
-    .4byte 0x04000000
-    .4byte lbl_8045A480
-    .4byte 0x04000000
-    .4byte lbl_8045A4E0
-    .4byte 0x04000000
-    .4byte lbl_8045A540
-    .4byte 0x05000000
-    .4byte lbl_8045A5B8
-    .4byte 0x05000000
-    .4byte lbl_8045A690
-    .4byte 0x01000000
-    .4byte lbl_8045A6A8
-    .4byte 0x01000000
-    .4byte lbl_8045A630
-    .4byte 0x01000000
-    .4byte lbl_8045A648
-    .4byte 0x01000000
-    .4byte lbl_8045A660
-    .4byte 0x01000000
-    .4byte lbl_8045A678
-    .4byte 0x01000000
-
-
-.section .sdata
-    .balign 8
-lbl_804D3AA8:
-    .asciz "jobj.h"
-    .balign 4
-lbl_804D3AB0:
-    .asciz "jobj"
-    .balign 4
+} // clang-format on
+#pragma pop

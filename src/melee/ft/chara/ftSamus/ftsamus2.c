@@ -1,19 +1,12 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
-extern s32 func_8008A9F8(HSD_GObj*); 
-extern s32 func_8008B658(HSD_GObj*); 
-extern s32 func_8008B980(HSD_GObj*); 
-extern s32 func_8008BB44(HSD_GObj*); 
-extern s32 func_8008BFC4(HSD_GObj*); 
-extern s32 func_8008C830(HSD_GObj*); 
-extern s32 func_8008CB44(HSD_GObj*); 
-extern s32 func_80096540(HSD_GObj*); 
-extern s32 func_80099794(HSD_GObj*);
-extern void func_800D638C(HSD_GObj*);
+#include <MSL/trigf.h>
+#include <melee/lb/lbcollision.h>
+
+extern s32 func_8008B658(HSD_GObj*);
 extern s32 func_800D6824(HSD_GObj*); 
-extern s32 func_800D68C0(HSD_GObj*); 
-extern s32 func_800D695C(HSD_GObj*); 
-extern s32 func_800D8990(HSD_GObj*); 
+extern s32 func_800D68C0(HSD_GObj*);
+extern s32 func_800D695C(HSD_GObj*);
 
 void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2) {
     Fighter* fp = fighter_gobj->user_data; 

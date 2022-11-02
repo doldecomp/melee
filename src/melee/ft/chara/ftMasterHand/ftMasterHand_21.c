@@ -1,19 +1,17 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
-// 801541C4 150DA4
-void lbl_801541C4(HSD_GObj* gobj) {
+void ftMasterHand_801541C4(HSD_GObj* fighter_gobj)
+{
     return;
 }
 
+void ftMasterHand_801541C8(HSD_GObj* fighter_gobj, GObjCallback callback)
+{
+    Fighter* fp = fighter_gobj->user_data;
+    u32 unused[2];
 
-// 801541C8 150DA8
-// https://decomp.me/scratch/WhlXG
-void func_801541C8(HSD_GObj* gobj, void* arg1) {
-    Fighter* r31_fp;
-    u32 unk[2];
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x174, 0, 0, 0.0F, 1.0F, 0.0F);
+    func_8006EBA4(fighter_gobj);
 
-    r31_fp = gobj->user_data;
-    Fighter_ActionStateChange_800693AC(gobj, 0x174, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    r31_fp->x2344_callback = arg1;
+    fp->x2344_callback = callback;
 }

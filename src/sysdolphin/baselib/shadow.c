@@ -1,6 +1,6 @@
 #include <sysdolphin/baselib/shadow.h>
 
-#include <string.h>
+#include <MSL/string.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 

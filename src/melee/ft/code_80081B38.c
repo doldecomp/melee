@@ -1,3 +1,6 @@
+#include <melee/ft/code_80081B38.h>
+
+#include <MSL/trigf.h>
 #include <dolphin/types.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
@@ -148,7 +151,7 @@ lbl_80081CE0:
 extern unk_t func_80081A00();
 
 #pragma push
-asm BOOL func_80081D0C(HSD_GObj fighter_gobj)
+asm BOOL func_80081D0C(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80081D0C 0007E8EC  7C 08 02 A6 */	mflr r0
@@ -648,7 +651,7 @@ lbl_8008237C:
 unk_t func_80082838();
 
 #pragma push
-asm BOOL func_8008239C(HSD_GObj* fighter_gobj, s32 facing_direction, f32* height_attributes)
+asm BOOL func_8008239C(HSD_GObj* fighter_gobj, s32 facing_direction, ftCollisionBox* height_attributes)
 { // clang-format off
     nofralloc
 /* 8008239C 0007EF7C  7C 08 02 A6 */	mflr r0
@@ -726,7 +729,7 @@ lbl_8008248C:
 #pragma pop
 
 #pragma push
-asm unk_t func_800824A0()
+asm BOOL func_800824A0(HSD_GObj* fighter_gobj, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 800824A0 0007F080  7C 08 02 A6 */	mflr r0
@@ -1032,7 +1035,7 @@ lbl_80082880:
 #pragma pop
 
 #pragma push
-asm unk_t func_80082888()
+asm BOOL func_80082888(HSD_GObj* fighter_gobj, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 80082888 0007F468  7C 08 02 A6 */	mflr r0
@@ -1260,7 +1263,7 @@ lbl_80082B60:
 #pragma pop
 
 #pragma push
-asm unk_t func_80082B78()
+asm void func_80082B78(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80082B78 0007F758  7C 08 02 A6 */	mflr r0
@@ -1335,7 +1338,7 @@ lbl_80082C54:
 #pragma pop
 
 #pragma push
-asm unk_t func_80082C74()
+asm void func_80082C74(HSD_GObj* fighter_gobj, void cb_OnLand(HSD_GObj*))
 { // clang-format off
     nofralloc
 /* 80082C74 0007F854  7C 08 02 A6 */	mflr r0
@@ -2858,7 +2861,7 @@ lbl_80084020:
 #pragma pop
 
 #pragma push
-asm unk_t func_8008403C()
+asm void func_8008403C(HSD_GObj* fighter_gobj, void (*cb_Coll)(HSD_GObj* fighter_gobj))
 { // clang-format off
     nofralloc
 /* 8008403C 00080C1C  7C 08 02 A6 */	mflr r0
@@ -3921,7 +3924,7 @@ lbl_80084DA0:
 #pragma pop
 
 #pragma push
-asm unk_t func_80084DB0()
+asm void func_80084DB0(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80084DB0 00081990  7C 08 02 A6 */	mflr r0
@@ -4165,11 +4168,10 @@ lbl_8008506C:
 } // clang-format on
 #pragma pop
 
-unk_t func_80085030();
 unk_t func_800850E0();
 
 #pragma push
-asm unk_t func_80085088()
+asm void func_80085088(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80085088 00081C68  7C 08 02 A6 */	mflr r0

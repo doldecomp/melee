@@ -1,6 +1,8 @@
-#include <dolphin/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/it/item.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbunknown_001.h>
 
 static f32 const lbl_804D8320 = 0.0F;
 static f32 const lbl_804D8324 = 1.0F;
@@ -8,7 +10,6 @@ static f32 const lbl_804D8324 = 1.0F;
 extern unk_t func_800C555C();
 extern void func_80008440(Hitbox*);
 extern unk_t func_80008688();
-extern unk_t func_8000ACFC();
 extern unk_t func_800089B8();
 extern unk_t func_80007AFC();
 

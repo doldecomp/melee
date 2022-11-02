@@ -1,8 +1,10 @@
-#include <dolphin/base/PPCArch.h>
 #include <dolphin/os/OSError.h>
+
+#include <dolphin/base/PPCArch.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
+#include <dolphin/os/os.h>
 #include <stdio.h>
 
 void OSReport(char* msg, ...)
@@ -14,7 +16,7 @@ void OSReport(char* msg, ...)
     va_end(args);
 }
 
-void OSPanic(char* file, int line, char* msg, ...)
+void OSPanic(const char* file, int line, const char* msg, ...)
 {
     va_list args;
     u32 i;

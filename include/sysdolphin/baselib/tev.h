@@ -1,8 +1,6 @@
 #ifndef _tev_h_
 #define _tev_h_
 
-#include <global.h>
-
 #include <sysdolphin/baselib/objalloc.h>
 
 void HSD_RenderInitAllocData(void);
@@ -12,5 +10,7 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void);
 void HSD_SetupChannel(void* ch);
 void HSD_StateSetNumChans(s32 num);
 void HSD_StateInitTev(void);
+unk_t HSD_SetupTevStage();
+unk_t HSD_StateAssignTev();
 
 #endif

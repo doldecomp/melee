@@ -1,10 +1,10 @@
 #include <melee/gr/grtmars.h>
 
-#include <functions.h>
+#include <dolphin/os/os.h>
+#include <melee/gr/grdisplay.h>
+#include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
-
-extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E8EB0[4] = {
     {

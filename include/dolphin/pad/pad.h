@@ -1,5 +1,7 @@
-#ifndef _PAD_H_
-#define _PAD_H_
+#ifndef DOLPHIN_PAD_PAD_H
+#define DOLPHIN_PAD_PAD_H
+
+#include <dolphin/types.h>
 
 typedef struct PADStatus
 {

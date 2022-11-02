@@ -1,9 +1,7 @@
-#ifndef _grtness_h_
-#define _grtness_h_
+#ifndef MELEE_GR_GRTNESS_H
+#define MELEE_GR_GRTNESS_H
 
 #include <dolphin/types.h>
-#include <functions.h>
-
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 

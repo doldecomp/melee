@@ -1,9 +1,10 @@
-#ifndef _ground_h_
-#define _ground_h_
+#ifndef MELEE_GR_GROUND_H
+#define MELEE_GR_GROUND_H
 
 #include <melee/gr/stage.h>
-
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
 
 static void func_801BFFA8(void);
 static void func_801BFFAC(s32);
@@ -40,5 +41,18 @@ static void func_801C2BD4(void* arg0);
 HSD_GObj* func_801C14D0(s32);
 static void func_801C34AC(s32, struct _HSD_JObj*, struct _HSD_Joint*);
 static void func_801C28CC(void*, s32);
+extern StageInfo stage_info;
+BOOL func_801C4E20(void);
+BOOL func_801C4DD0(void);
+BOOL func_801C4DA0(Vec3* arg0, f32* arg1);
+void func_801C2374(HSD_LObj* lobj);
+unk_t func_801C49B4(void);
+void func_801C4368(f32*, f32*);
+s32 func_801C5794(void);
+BOOL func_801C5700(s32 i);
+void* func_801C49F8(void); // get stage's "yakumono" ("about"?) param
+HSD_JObj* func_801C3FA4(HSD_GObj* gobj, s32 depth);
+HSD_JObj* func_801C2CF4(s32 i);
+HSD_GObj* func_801C2BA4(s32 i);
 
 #endif

@@ -1,5 +1,8 @@
 #include <melee/pl/player.h>
 
+#include <dolphin/os/os.h>
+#include <melee/gm/code_801601C4.h>
+
 typedef struct _ftMapping {
     s8 internal_id;
     s8 extra_internal_id;
@@ -111,7 +114,6 @@ extern void func_802F6D10(s32);
 extern void func_802F6AF8(s32);
 extern void func_802F69C0(s32, s32);
 extern void func_802F6C04(s32);
-extern s32 func_8016B168();
 extern BOOL func_80086F4C(HSD_GObj*);
 extern double func_80086F80(HSD_GObj*);
 extern s32 func_800872A4(HSD_GObj*);

@@ -1,7 +1,6 @@
 #ifndef _gmmain_lib_h_
 #define _gmmain_lib_h_
 
-#include <global.h>
 #include <common_structs.h>
 
 struct gmm_x1CB0 {
@@ -161,5 +160,8 @@ struct gmm_retval_EDBC *func_8015EDBC(void);
 struct gmm_x1CB0 *func_8015CC58(void);
 struct gmm_retval_ED98 *func_8015ED98(void);
 struct gmm_retval_EDB0 *func_8015EDB0(void);
+
+void func_8015D8FC(u32);
+BOOL func_8015D94C(u32);
 
 #endif

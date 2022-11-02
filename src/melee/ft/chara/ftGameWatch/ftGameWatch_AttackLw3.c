@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 extern void func_8007E6DC(HSD_GObj*, HSD_GObj*, s32);
 extern HSD_GObj* func_802C65E4(HSD_GObj*, Vec3*, s32, f32);
 extern void ftGameWatch_ItemManholeExitHitlag(HSD_GObj*);
@@ -118,8 +120,6 @@ BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
-extern BOOL func_80094790(HSD_GObj*);
-
 // 0x8014ADB8
 // https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Action State Handler
 void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
@@ -135,8 +135,6 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_800D638C(HSD_GObj*);
-
 // 0x8014AE3C
 // https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation callback
 void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
@@ -149,18 +147,11 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
-extern BOOL func_8008A9F8(HSD_GObj*);
 extern BOOL func_8008B658(HSD_GObj*);
-extern BOOL func_8008B980(HSD_GObj*);
-extern BOOL func_8008BB44(HSD_GObj*);
-extern BOOL func_8008BFC4(HSD_GObj*);
-extern BOOL func_8008C830(HSD_GObj*);
-extern BOOL func_8008CB44(HSD_GObj*);
 extern BOOL func_800C9468(HSD_GObj*);
 extern BOOL func_800C97DC(HSD_GObj*);
 extern BOOL func_800CA094(HSD_GObj*);
 extern BOOL func_800CAED0(HSD_GObj*);
-extern BOOL func_800D5F58(HSD_GObj*);
 
 // 0x8014AE78
 // https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA callback 

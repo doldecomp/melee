@@ -1,11 +1,9 @@
-#ifndef _mtx_h_
-#define _mtx_h_
+#ifndef SYSDOLPHIN_BASELIB_MTX_H
+#define SYSDOLPHIN_BASELIB_MTX_H
 
-#include <global.h>
-#include <sysdolphin/baselib/objalloc.h>
 #include <math.h>
-
 #include <melee/lb/lbrefract.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 void func_80379310(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);

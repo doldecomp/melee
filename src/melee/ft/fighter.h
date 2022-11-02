@@ -1,10 +1,9 @@
-#ifndef _fighter_h_
-#define _fighter_h_
+#ifndef MELEE_FT_FIGHTER_H
+#define MELEE_FT_FIGHTER_H
 
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
-#include <functions.h>
 #include <melee/pl/player.h>
 #include <melee/gr/stage.h>
 #include <math.h>
@@ -22,8 +21,7 @@
 
 BOOL func_80081298(HSD_GObj* gobj);
 
-typedef enum FighterKind
-{
+typedef enum FighterKind {
     FTKIND_MARIO,
     FTKIND_FOX,
     FTKIND_CAPTAIN,
@@ -58,70 +56,67 @@ typedef enum FighterKind
     FTKIND_GKOOPS,
     FTKIND_SANDBAG,
     FTKIND_NONE
-
 } FighterKind;
 
-typedef enum CharacterKind
-{
-    CKIND_CAPTAIN, // Captain Falcon (Captain) //
-    CKIND_DONKEY, // Donkey Kong (Donkey) //
-    CKIND_FOX, // Fox //
-    CKIND_GAMEWATCH, // Mr. Game & Watch (GameWatch) //
-    CKIND_KIRBY, // Kirby //
-    CKIND_KOOPA, // Bowser (Koopa) //
-    CKIND_LINK, // Link //
-    CKIND_LUIGI, // Luigi // 
-    CKIND_MARIO, // Mario //
-    CKIND_MARS, // Marth (Mars) //
-    CKIND_MEWTWO, // Mewtwo //
-    CKIND_NESS, // Ness// 
-    CKIND_PEACH, // Peach //
-    CKIND_PIKACHU, // Pikachu //
-    CKIND_POPONANA, // Ice Climbers (Popo & Nana) //
-    CKIND_PURIN, // Jigglypuff (Purin) //
-    CKIND_SAMUS, // Samus //
-    CKIND_YOSHI, // Yoshi //
-    CKIND_ZELDA, // Zelda (ZE->SE) //
-    CKIND_SEAK, // Sheik (SE->ZE) //
-    CKIND_FALCO, // Falco //
-    CKIND_CLINK, // Young Link (CLink) //
-    CKIND_DRMARIO, // Dr. Mario //
-    CKIND_EMBLEM, // Roy (Emblem) //
-    CKIND_PICHU, // Pichu //
-    CKIND_GANON, // Ganondorf (Ganon) //
-    CKIND_MASTERH, // Master Hand (MasterH) //
-    CKIND_BOY, // Male Wireframe (Boy) //
-    CKIND_GIRL, // Female Wireframe (Girl) //
-    CKIND_GKOOPS, // Giga Bowser (GKoops) //
-    CKIND_CREZYH, // Crazy Hand (CrezyH) //
-    CHKIND_SANDBAG, // Sandbag //
-    CHKIND_POPO, // Popo //
-    CHKIND_NONE // None //
-
+typedef enum CharacterKind {
+    CKIND_CAPTAIN,   // Captain Falcon (Captain)
+    CKIND_DONKEY,    // Donkey Kong (Donkey)
+    CKIND_FOX,       // Fox
+    CKIND_GAMEWATCH, // Mr. Game & Watch (GameWatch)
+    CKIND_KIRBY,     // Kirby
+    CKIND_KOOPA,     // Bowser (Koopa)
+    CKIND_LINK,      // Link
+    CKIND_LUIGI,     // Luigi
+    CKIND_MARIO,     // Mario
+    CKIND_MARS,      // Marth (Mars)
+    CKIND_MEWTWO,    // Mewtwo
+    CKIND_NESS,      // Ness
+    CKIND_PEACH,     // Peach
+    CKIND_PIKACHU,   // Pikachu
+    CKIND_POPONANA,  // Ice Climbers (Popo & Nana)
+    CKIND_PURIN,     // Jigglypuff (Purin)
+    CKIND_SAMUS,     // Samus
+    CKIND_YOSHI,     // Yoshi
+    CKIND_ZELDA,     // Zelda (ZE->SE)
+    CKIND_SEAK,      // Sheik (SE->ZE)
+    CKIND_FALCO,     // Falco
+    CKIND_CLINK,     // Young Link (CLink)
+    CKIND_DRMARIO,   // Dr. Mario
+    CKIND_EMBLEM,    // Roy (Emblem)
+    CKIND_PICHU,     // Pichu
+    CKIND_GANON,     // Ganondorf (Ganon)
+    CKIND_MASTERH,   // Master Hand (MasterH)
+    CKIND_BOY,       // Male Wireframe (Boy)
+    CKIND_GIRL,      // Female Wireframe (Girl)
+    CKIND_GKOOPS,    // Giga Bowser (GKoops)
+    CKIND_CREZYH,    // Crazy Hand (CrezyH)
+    CHKIND_SANDBAG,  // Sandbag
+    CHKIND_POPO,     // Popo
+    CHKIND_NONE      // None
 } CharacterKind;
 
 // Action State Change flags
 
 #define FIGHTER_FASTFALL_PRESERVE 0x1
 #define FIGHTER_GFX_PRESERVE 0x2
-#define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state //
+#define FIGHTER_HITSTATUS_COLANIM_PRESERVE 0x4 // Preserve full body collision state
 #define FIGHTER_HIT_NOUPDATE 0x8 // Keep hitboxes
-#define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?) 
+#define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?)
 #define FIGHTER_ANIMVEL_NOUPDATE 0x20
 #define FIGHTER_UNK_0x40 0x40
-#define FIGHTER_MATANIM_NOUPDATE 0x80 // Ignore switching to character's "hurt" textures (?) //
-#define FIGHTER_THROW_EXCEPTION_NOUPDATE 0x100 // Resets thrower GObj pointer to NULL if false? //
+#define FIGHTER_MATANIM_NOUPDATE 0x80          // Ignore switching to character's "hurt" textures (?)
+#define FIGHTER_THROW_EXCEPTION_NOUPDATE 0x100 // Resets thrower GObj pointer to NULL if false?
 #define FIGHTER_SFX_PRESERVE 0x200
-#define FIGHTER_PARASOL_NOUPDATE 0x400 // Ignore Parasol state change //
-#define FIGHTER_RUMBLE_NOUPDATE 0x800 // Ignore rumble update? //
+#define FIGHTER_PARASOL_NOUPDATE 0x400 // Ignore Parasol state change
+#define FIGHTER_RUMBLE_NOUPDATE 0x800  // Ignore rumble update?
 #define FIGHTER_COLANIM_NOUPDATE 0x1000
-#define FIGHTER_ACCESSORY_PRESERVE 0x2000 // Keep respawn platform? //
-#define FIGHTER_CMD_UPDATE 0x4000 // Run all Subaction Events up to the current animation frame //
+#define FIGHTER_ACCESSORY_PRESERVE 0x2000 // Keep respawn platform?
+#define FIGHTER_CMD_UPDATE 0x4000         // Run all Subaction Events up to the current animation frame
 #define FIGHTER_NAMETAGVIS_NOUPDATE 0x8000
-#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones? //
+#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE 0x10000 // Assume this is for individual bones?
 #define FIGHTER_SWORDTRAIL_PRESERVE 0x20000
-#define FIGHTER_ITEMVIS_NOUPDATE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does //
-#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x20 of 0x2222? //
+#define FIGHTER_ITEMVIS_NOUPDATE 0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the flag does
+#define FIGHTER_SKIP_UNK_0x2222 0x80000  // Skips updating bit 0x20 of 0x2222?
 #define FIGHTER_PHYS_UNKUPDATE 0x100000
 #define FIGHTER_FREEZESTATE 0x200000 // Sets anim rate to 0x and some other stuff
 #define FIGHTER_MODELPART_VIS_NOUPDATE 0x400000
@@ -135,26 +130,25 @@ typedef enum CharacterKind
 #define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
 #define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
 
-
-// LandingFallSpecial flags //
+// LandingFallSpecial flags
 
 #define IS_INTERRUPTIBLE 1
 
-// Ledge Grab Macros //
+// Ledge Grab Macros
 
 #define CLIFFCATCH_BOTH 0
 #define CLIFFCATCH_LEFT -1
 #define CLIFFCATCH_RIGHT 1
 
-// Ternary macro for fcmpo-based facing direction check 
+// Ternary macro for fcmpo-based facing direction check
 
 #define CLIFFCATCH_O(fp) \
-((fp)->x2C_facing_direction < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+    ((fp)->x2C_facing_direction < 0.0F) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 // Ternary macro for fcmpu-based facing direction check
 
 #define CLIFFCATCH_U(fp) \
-((fp)->x2C_facing_direction != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT \
+    ((fp)->x2C_facing_direction != 1.0F) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 typedef enum ftCommonAction
 {
@@ -809,7 +803,7 @@ typedef struct _Hitbox {
     s32 x4;
     s32 x8;
     f32 xC;
-    u8 filler[0x128]; // slightly more detail, f32 needed for 'manual' mods to hitbox damage //
+    u8 filler[0x128]; // slightly more detail, f32 needed for 'manual' mods to hitbox damage
 } Hitbox;
 
 typedef struct _CameraBox
@@ -845,7 +839,7 @@ typedef struct _ftCollisionBox {
 } ftCollisionBox;
 
 typedef struct _ECBFlagStruct {
-    union { 
+    union {
         struct {
         u8 b0 : 1;
         u8 b1234 : 4;
@@ -1001,7 +995,7 @@ struct S_TEMP1 {
 };
 
 struct ActionState {
-    s32 action_id; 
+    s32 action_id;
 
     s32 x4_flags;
 
@@ -1031,8 +1025,8 @@ struct S_TEMP4 {
 // header includes or something.
 // --------------------------------------------------------------------------------
 struct SpecialAttrs_Mario {
-    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo //
-    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo //
+    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo
+    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo
     /* 0x2234 */ BOOL x2234_tornadoCharge;
     /* 0x2238 */ BOOL x2238_isCapeBoost;
     /* 0x223C */ HSD_GObj* x223C_capeGObj;
@@ -1106,7 +1100,7 @@ struct SpecialAttrs_Ness {
     /* 0x2240 */ HSD_GObj* x2240_flashGObj;
     /* 0x2244 */ HSD_GObj* x2244_pkThunderGObj;
     /* 0x2248 */ HSD_GObj* x2248_baseballBatGObj;
-    /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX? //
+    /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX?
 };
 
 struct SpecialAttrs_Peach {
@@ -1233,19 +1227,6 @@ struct SpecialAttrs_GameWatch {
 };
 
 struct SpecialAttrs_Masterhand {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ f32 x2238;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ Vec3 x2240_pos;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ s32 x2250;
-    /* 0x2254 */ s32 x2254;
-    /* 0x2258 */ s32 x2258;
-};
-
-struct SpecialAttrs_Crazyhand {
     /* 0x222C */ HSD_GObj* x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -1397,10 +1378,10 @@ typedef struct _Fighter {
         /* 0x63C */ f32 x63C_lsubStick_y;
         /* 0x640 */ f32 x640_lsubStick_x2;
         /* 0x644 */ f32 x644_lsubStick_y2;
-                    
+
         /* 0x648 */ f32 x648;
         /* 0x64C */ f32 x64C;
-                    
+
         /* 0x650 */ f32 x650;
         /* 0x654 */ f32 x654;
 
@@ -1479,8 +1460,8 @@ typedef struct _Fighter {
     /* 0x1670 */ unk_t x1670;
     /* 0x1674 */ u8 filler_x1674[0x1828 - 0x1674];
     /* 0x1828 */ s32 x1828;
-    struct dmg                                                 // 0x182c
-    {                                                          //
+    struct dmg // 0x182c
+    {
         f32 x182c_behavior;                                    // 0x182c
         f32 x1830_percent;                                     // 0x1830
         f32 x1834;                                             // 0x1834
@@ -1559,7 +1540,7 @@ typedef struct _Fighter {
         f32 x1954;                                             // 0x1954
         f32 x1958;                                             // 0x1958
         f32 x195c_hitlag_frames;                               // 0x195c
-    } dmg;    
+    } dmg;
     /* 0x1960 */ f32 x1960_vibrateMult;
     /* 0x1964 */ f32 x1964;
     /* 0x1968 */ u8 x1968_jumpsUsed;
@@ -1594,14 +1575,14 @@ typedef struct _Fighter {
     } ShieldHit;
     struct {
         HSD_JObj* x19E4_boneAttach;
-        u8 x19E8_updatePos : 1; // Follows attach bone position if toggled OFF //
+        u8 x19E8_updatePos : 1; // Follows attach bone position if toggled OFF
         Vec3 x19EC_pos;
         Vec3 x19F8_offset;
         f32 x1A04_size;
     } ReflectHit;
     struct {
         HSD_JObj* x1A08_boneAttach;
-        u8 x1A0C_updatePos : 1; // Follows attach bone position if toggled OFF //
+        u8 x1A0C_updatePos : 1; // Follows attach bone position if toggled OFF
         Vec3 x1A10_pos;
         Vec3 x1A1C_offset;
         f32 x1A28_size;
@@ -1611,12 +1592,12 @@ typedef struct _Fighter {
         s32 x1A30_maxDamage;
         f32 x1A34_damageMul;
         f32 x1A38_speedMul;
-        s32 x1A3C_damageOver; // % damage over the maximum reflectable damage threshold //
+        s32 x1A3C_damageOver; // % damage over the maximum reflectable damage threshold
     } ReflectAttr;
     struct {
         f32 x1A40_absorbHitDirection;
-        s32 x1A44_damageTaken; // unconfirmred? //
-        s32 x1A48_hitsTaken; // unconfirmed? //
+        s32 x1A44_damageTaken; // unconfirmred?
+        s32 x1A48_hitsTaken;   // unconfirmed?
     } AbsorbAttr;
     /* 0x1A4C */ f32 x1A4C;
     /* 0x1A50 */ s8 x1A50;
@@ -1649,7 +1630,7 @@ typedef struct _Fighter {
     /* 0x2021 */ s8 x2021;
     /* 0x2022 */ s8 x2022;
     /* 0x2024 */ s32 x2024;
-    /* 0x2028 */ s32 x2028;
+    /* 0x2028 */ BOOL x2028;
     /* 0x202C */ s32 x202C;
     /* 0x2030 */ s32 x2030;
     /* 0x2034 */ s32 x2034;
@@ -1669,7 +1650,7 @@ typedef struct _Fighter {
                         u8 x2071_b5: 1;
                         u8 x2071_b6: 1;
                         u8 x2071_b7: 1;
-                        
+
                         u8 x2072_b0_3: 4;
                         u8 x2072_b4: 1;
                         u8 x2072_b5: 1;
@@ -1684,7 +1665,7 @@ typedef struct _Fighter {
     /* 0x208C */ s32 x208C;
     /* 0x2090 */ u16 x2090;
     /* 0x2092 */ u16 x2092;
-    /* 0x2094 */ HSD_GObj* x2094; // GObj pointer of combo victim? //
+    /* 0x2094 */ HSD_GObj* x2094; // GObj pointer of combo victim?
     /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
@@ -1812,7 +1793,7 @@ typedef struct _Fighter {
                         u8 b7 : 1;
                     } bits;
                 } x2228_flag;
-                
+
     /* 0x2229 */ u8 x2229_b0 : 1;
                  u8 x2229_b1 : 1;
                  u8 x2229_b2 : 1;
@@ -1822,7 +1803,6 @@ typedef struct _Fighter {
                  u8 x2229_b6 : 1;
                  u8 x2229_b7 : 1;
 
-                 
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
     // Some of these are clones of each other (they just use another struct)
@@ -1857,7 +1837,6 @@ typedef struct _Fighter {
         // Cpt Falcon SpecialAttrs struct is used for Ganondorf
         // Mars (Marth) struct is used for Emblem (Roy)
         struct SpecialAttrs_Masterhand masterhand;
-        struct SpecialAttrs_Crazyhand crazyhand;
         struct SpecialAttrs_Boy boy;
         struct SpecialAttrs_Girl girl;
         struct SpecialAttrs_GKoopa gkoopa;
@@ -1951,7 +1930,7 @@ typedef struct _Fighter {
     };
     union {
         /* 0x2360 */ u32 x2360_u32;
-        /* 0x2360 */ s32 x2360;
+        /* 0x2360 */ BOOL x2360;
         /* 0x2360 */ f32 x2360_f32;
     };
     union {
@@ -2018,60 +1997,60 @@ typedef struct _Fighter {
     /* 0x23B8 */ s32 x23B8;
 } Fighter;
 
-inline Fighter* getFighter(HSD_GObj* fighter_gobj) 
+static inline Fighter* getFighter(HSD_GObj* fighter_gobj)
 {
     return fighter_gobj->user_data;
 }
 
-inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
+static inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space
 {
     Fighter* fp = fighter_gobj->user_data;
     return fp;
 }
 
-inline void* getFtSpecialAttrs(Fighter* fp)
+static inline void* getFtSpecialAttrs(Fighter* fp)
 {
     void* fighter_attr = fp->x2D4_specialAttributes;
     return fighter_attr;
 }
 
-inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
+static inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
 {
     return fp->x2D4_specialAttributes;
 }
 
-inline s32 ftGetKind(Fighter* fp)
+static inline s32 ftGetKind(Fighter* fp)
 {
     return fp->x4_fighterKind;
 }
 
-inline s32 ftGetAction(Fighter* fp)
+static inline s32 ftGetAction(Fighter* fp)
 {
     return fp->x10_action_state_index;
 }
 
-inline void* getFtSpecialAttrs2CC(Fighter* fp)
+static inline void* getFtSpecialAttrs2CC(Fighter* fp)
 {
     void* fighter_attr = fp->x2CC;
     return fighter_attr;
 }
 
-inline attr* getFtAttrs(Fighter* fp)
+static inline attr* getFtAttrs(Fighter* fp)
 {
     return &fp->x110_attr;
 }
 
-inline CollData* getFtColl(Fighter* fp)
+static inline CollData* getFtColl(Fighter* fp)
 {
     return &fp->x6F0_collData;
 }
 
-inline BOOL ftGetGroundAir(Fighter* fp)
+static inline BOOL ftGetGroundAir(Fighter* fp)
 {
     return fp->xE0_ground_or_air;
 }
 
-inline f32 stickGetDir(f32 x1, f32 x2)
+static inline f32 stickGetDir(f32 x1, f32 x2)
 {
     if (x1 < x2)
     {
@@ -2138,7 +2117,7 @@ void Fighter_Unload_8006DABC(Fighter* fp);
     Fighter* fp = gobj->user_data;                                               \
     attributeName* sA2 = (attributeName*)fp->x2D4_specialAttributes;             \
     attributeName* ext_attr = (attributeName*)fp->x10C_ftData->ext_attr;         \
-    *sA2 = *ext_attr;                                                            \
+    *sA2 = *ext_attr;
 
 #define SCALE_HEIGHT_ATTRS(num_attrs)                     \
     {                                                     \
@@ -2146,59 +2125,34 @@ void Fighter_Unload_8006DABC(Fighter* fp);
         for (i = 0; i < num_attrs; i++) {                 \
             sA2->height_attributes[i] *= fp->x34_scale.y; \
         }                                                 \
-    }  \
-
-
-// Works but unused decided to go with inline instead 
-#define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                             \
-    void FTNAME##_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {                 \
-        Fighter *fp = getFighter(fighter_gobj);                                \
-        if (!func_8026B2B4(fp->x1974_heldItem)) {                            \
-            switch (func_8026B320(fp->x1974_heldItem)) {                     \
-                case 1:                                                           \
-                    func_80070FB4(fighter_gobj, param1, 1);                         \
-                    break;                                                        \
-                case 2:                                                           \
-                    func_80070FB4(fighter_gobj, param1, 0);                         \
-                    break;                                                        \
-                case 3:                                                           \
-                    func_80070FB4(fighter_gobj, param1, 2);                         \
-                    break;                                                        \
-                case 4:                                                           \
-                    func_80070FB4(fighter_gobj, param1, 3);                         \
-                    break;                                                        \
-            }                                                                     \
-            if (bool) {                                                           \
-                func_80070C48(fighter_gobj, param2);                                \
-            }                                                                     \
-        }                                                                         \
-    }                                                                             \
+    }
 
 /// used for all fighters except Kirby and Purin
-inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag, BOOL bool2, BOOL bool3) {
-    Fighter *fp = getFighter(fighter_gobj);            
-    if (!func_8026B2B4(fp->x1974_heldItem)) {        
-        switch (func_8026B320(fp->x1974_heldItem)) { 
-            case 1:                                       
-                func_80070FB4(fighter_gobj, bool2, 1);     
-                break;                                    
-            case 2:                                       
-                func_80070FB4(fighter_gobj, bool2, 0);     
-                break;                                    
-            case 3:                                       
-                func_80070FB4(fighter_gobj, bool2, 2);     
-                break;                                    
-            case 4:                                       
-                func_80070FB4(fighter_gobj, bool2, 3);     
-                break;                                    
-        }                                                 
-        if (catchItemFlag) {                                       
-            func_80070C48(fighter_gobj, bool3);            
-        }                                                 
-    }                                                     
+static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag, BOOL bool2, BOOL bool3)
+{
+    Fighter* fp = getFighter(fighter_gobj);
+    if (!func_8026B2B4(fp->x1974_heldItem)) {
+        switch (func_8026B320(fp->x1974_heldItem)) {
+        case 1:
+            func_80070FB4(fighter_gobj, bool2, 1);
+            break;
+        case 2:
+            func_80070FB4(fighter_gobj, bool2, 0);
+            break;
+        case 3:
+            func_80070FB4(fighter_gobj, bool2, 2);
+            break;
+        case 4:
+            func_80070FB4(fighter_gobj, bool2, 3);
+            break;
+        }
+        if (catchItemFlag) {
+            func_80070C48(fighter_gobj, bool3);
+        }
+    }
 }
 
-inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
+static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
 {
     Fighter* fp = getFighter(gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -2206,7 +2160,7 @@ inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
+static inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
 {
     Fighter* fp = getFighter(gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -2214,7 +2168,7 @@ inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BOOL bool3)
+static inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BOOL bool3)
 {
     func_80070FB4(gobj, bool2, -1);
     if (dropItemFlag) {
@@ -2222,22 +2176,58 @@ inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2, BO
     }
 }
 
-inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1) {
-    func_800704F0(gobj, arg1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+static inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1)
+{
+    func_800704F0(gobj, arg1, 3.0F);
+    func_800704F0(gobj, 0, 3.0F);
 }
 
-inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1) {
-    func_800704F0(gobj, arg1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+static inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
+{
+    func_800704F0(gobj, arg1, 0.0F);
+    func_800704F0(gobj, 0, 0.0F);
 }
 
-inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj) {
+static inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = getFighter(fighter_gobj);
     fp->x2200_ftcmd_var0 = 0;
 }
 
 extern unk_t lbl_804D6520;
 extern ftCommonData* p_ftCommonData;
+
+// external vars from asm/melee/ft/ft_unknown_005.s
+typedef void (*ft_callback)(HSD_GObj* gobj);
+typedef void (*fn_ptr_t)();
+
+extern ft_callback ft_OnLoad[33];  // One load  callback for every character.
+extern ft_callback ft_OnDeath[33]; // One death callback for every character.
+extern ft_callback ft_OnAbsorb[33];
+extern ft_callback lbl_803C1DB4[33]; // probably ft_OnSomething
+extern ft_callback ft_OnUserDataRemove[33];
+
+extern fn_ptr_t lbl_803C10D0[33];
+
+extern struct UnkCostumeList CostumeListsForeachCharacter[33];
+
+extern ftData* gFtDataList[33];
+extern struct ActionState ActionStateList[341];
+extern struct ActionState* ActionStateTableByCharacter[33];
+
+extern s8 lbl_803C26FC[33];
+
+extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
+
+extern HSD_PadStatus HSD_PadRumbleData[4];
+
+extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
+
+extern HSD_ObjAllocData lbl_80458FD0;
+extern HSD_ObjAllocData lbl_80458FFC;
+
+extern unk_t lbl_804D6524;
+extern unk_t lbl_804D6528;
+extern s32** lbl_804D6540;
 
 #endif

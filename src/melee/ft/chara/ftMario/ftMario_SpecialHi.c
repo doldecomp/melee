@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <sysdolphin/baselib/random.h>
 
 #include <melee/it/itkind.h>

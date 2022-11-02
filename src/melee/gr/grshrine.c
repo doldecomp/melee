@@ -1,5 +1,10 @@
 #include <melee/gr/grshrine.h>
+
+#include <dolphin/os/os.h>
 #include <math.h>
+#include <melee/gr/grdisplay.h>
+#include <melee/gr/ground.h>
+#include <melee/lb/lbunknown_003.h>
 
 static void* lbl_804D6A18;
 

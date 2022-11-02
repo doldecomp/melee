@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/ft/code_80081B38.h>
+#include <melee/lb/lbunknown_001.h>
+
 extern HSD_GObj* func_802C6C38(HSD_GObj*, Vec3*, s32, f32);
 
 // 0x8014AFC0
@@ -327,8 +330,6 @@ BOOL ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
-extern s32 func_8008CE68(Fighter*);
-extern void func_8008CFAC(HSD_GObj*, s32);
 extern void ftGameWatch_AttackAirB_Action(HSD_GObj*, s32);
 extern void ftGameWatch_AttackAirHi_Action(HSD_GObj*, s32);
 
@@ -386,16 +387,12 @@ void ftGameWatch_AttackAirN_IASA(HSD_GObj* fighter_gobj)
     func_8008D08C(fighter_gobj);
 }
 
-extern void func_80084DB0(HSD_GObj*);
-
 // 0x8014B760
 // https://decomp.me/scratch/EBIVr // Mr. Game & Watch's Neutral Aerial Physics callback
 void ftGameWatch_AttackAirN_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084DB0(fighter_gobj);
 }
-
-extern void func_80082C74(HSD_GObj*, void cb_OnLand(HSD_GObj*));
 
 // 0x8014B780
 // https://decomp.me/scratch/aIqYH // Mr. Game & Watch's Neutral Aerial Collision callback
@@ -579,8 +576,6 @@ void ftGameWatch_LandingAirHi_Action(HSD_GObj* fighter_gobj)
     ftGameWatch_OnDamage(fighter_gobj);
 }
 
-extern void func_8008D708(HSD_GObj*, s32, f32);
-
 // 0x8014BAF8
 // https://decomp.me/scratch/8ClCw // Mr. Game & Watch's Neutral Aerial Landing prefunction
 void ftGameWatch_LandingAirN_Init(HSD_GObj* fighter_gobj)
@@ -589,8 +584,6 @@ void ftGameWatch_LandingAirN_Init(HSD_GObj* fighter_gobj)
 
     func_8008D708(fighter_gobj, AS_GAMEWATCH_LANDINGAIRN, fp->x110_attr.x1F8_NAirLandingLag);
 }
-
-extern void func_800D5D3C(HSD_GObj*);
 
 // 0x8014BB24
 // https://decomp.me/scratch/xQdJ2 // Mr. Game & Watch's Neutral Aerial Landing Animation callback
@@ -611,16 +604,12 @@ void ftGameWatch_LandingAirN_IASA(HSD_GObj* fighter_gobj)
     return;
 }
 
-extern void func_800D5F18(HSD_GObj*);
-
 // 0x8014BB74
 // https://decomp.me/scratch/SqMil // Mr. Game & Watch's Neutral Aerial Landing Physics callback 
 void ftGameWatch_LandingAirN_Phys(HSD_GObj* fighter_gobj)
 {
     func_800D5F18(fighter_gobj);
 }
-
-extern void func_800D5F38(HSD_GObj*);
 
 // 0x8014BB94
 // https://decomp.me/scratch/2K68T // Mr. Game & Watch's Neutral Aerial Landing Collision callback

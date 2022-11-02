@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
+#include <melee/ft/ft_unknown_006.h>
 
 #include <melee/it/itkind.h>
 
@@ -23,7 +24,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->x10C_ftData;
-    CLinkAttributes* attrs = (void*) ftdata->ext_attr;
+    ftLinkAttributes* attrs = (void*) ftdata->ext_attr;
     void** items = ftdata->x48_items;
 
     fp->x2224_flag.bits.b7 = 1;
@@ -99,7 +100,7 @@ void ftCLink_OnKnockbackExit(HSD_GObj* gobj)
 void func_80149114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    CLinkAttributes* temp_r4 = (void*) fp->x10C_ftData->ext_attr;
+    ftLinkAttributes* temp_r4 = (void*) fp->x10C_ftData->ext_attr;
     f32 ftmp = func_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
     fp->xEC_ground_vel = ftmp * p_ftCommonData->x294;
     if (fp->x19AC < 0.0f) {
@@ -111,15 +112,15 @@ void func_80149114(HSD_GObj* gobj)
     func_80088148(fp, 0x111DA, 0x7F, 0x40);
 }
 
-void func_8014919C(HSD_GObj* gobj)
+void func_8014919C(HSD_GObj* fighter_gobj)
 {
-    CLinkAttributes* attrs;
+    ftLinkAttributes* attrs;
     s32 unused[2];
 
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     if (fp->x5F8 == 0) {
         attrs = (void*) fp->x2D4_specialAttributes;
-        func_8007B1B8(gobj, &attrs->xC4, func_80149114);
+        func_8007B1B8(fighter_gobj, &attrs->xC4, func_80149114);
         fp->x221B_flag.bits.b3 = 1;
         fp->x221B_flag.bits.b4 = 1;
         fp->x221B_flag.bits.b2 = 1;

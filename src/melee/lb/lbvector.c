@@ -1,5 +1,8 @@
 #include <melee/lb/lbvector.h>
+
+#include <dolphin/mtx.h>
 #include <math.h>
+#include <sysdolphin/baselib/cobj.h>
 
 // exactly the same as the one from math.h, but with one extra iteration
 extern inline float sqrtf_accurate(float x)
@@ -399,7 +402,7 @@ Vec *lbvector_WorldToScreen(HSD_CObj *cobj, const Point3d *pos3d, Point3d *scree
         projection[6] = projMtx[2][3];
         break;
     case PROJ_ORTHO:
-        C_MTXOrtho(&projMtx, cobj->projection_param.ortho.top, cobj->projection_param.ortho.bottom, cobj->projection_param.ortho.left, cobj->projection_param.ortho.right, cobj->near, cobj->far);
+        C_MTXOrtho(projMtx, cobj->projection_param.ortho.top, cobj->projection_param.ortho.bottom, cobj->projection_param.ortho.left, cobj->projection_param.ortho.right, cobj->near, cobj->far);
         projection[0] = 1.0f;
         projection[1] = projMtx[0][0];
         projection[2] = projMtx[0][3];

@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
+#include <melee/ft/ft_unknown_006.h>
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX
@@ -299,7 +300,6 @@ void ftFox_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 }
 
 extern f32 func_80075E78(Fighter*, s32);
-extern void func_80085088(HSD_GObj*);
 
 inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
 {
