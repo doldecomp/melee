@@ -207,7 +207,6 @@ void ftMasterHand_801557F4(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155814(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155864(HSD_GObj* fighter_gobj);
 void ftMasterHand_801558A0(HSD_GObj* fighter_gobj);
-;
 void ftMasterHand_801558E4(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155904(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155908(HSD_GObj* fighter_gobj);
@@ -218,6 +217,7 @@ void ftMasterHand_OnGrabFighter_Victim(HSD_GObj* self_gobj, HSD_GObj* victim_gob
 void ftMasterHand_80155B70(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155B74(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155B78(HSD_GObj* fighter_gobj);
+void ftMasterHand_80150F00(HSD_GObj* fighter_gobj);
 
 static void ftMasterHand_CheckPlayerSlotBossStub(HSD_GObj* fighter_gobj)
 {

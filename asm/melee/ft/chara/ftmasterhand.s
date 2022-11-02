@@ -391,7 +391,7 @@ as_table_masterhand:
     .4byte 0x00000157
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_80150F00
+    .4byte ftMasterHand_80150F00
     .4byte NULL
     .4byte lbl_80150F68
     .4byte ftMasterHand_80150FC8
@@ -399,7 +399,7 @@ as_table_masterhand:
     .4byte 0x00000158
     .4byte NULL
     .4byte 0x01000000
-    .4byte lbl_80150F00
+    .4byte ftMasterHand_80150F00
     .4byte NULL
     .4byte lbl_80150F68
     .4byte ftMasterHand_80150FC8

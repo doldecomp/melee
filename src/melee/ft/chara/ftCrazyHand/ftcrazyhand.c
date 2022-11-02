@@ -49,7 +49,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj)
     fp->sa.masterhand.x2250 = 0x159;
     fp->sa.masterhand.x2254 = 0;
     fp->x1A98 = 1;
-    ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.crazyhand.x2238, ext_attr->x0, ext_attr->x8, ext_attr->x4);
+    ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, ext_attr->x0, ext_attr->x8, ext_attr->x4);
 }
 
 void ftCrazyHand_LoadSpecialAttrs(HSD_GObj* gobj)

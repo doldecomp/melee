@@ -152,7 +152,6 @@ void ftMasterHand_80150890(HSD_GObj* fighter_gobj);
 #pragma endregion
 
 #pragma region "ftMasterHand_3"
-void lbl_80150F00(HSD_GObj* fighter_gobj);
 void lbl_80150F68(HSD_GObj* fighter_gobj);
 void ftMasterHand_80150FC8(HSD_GObj* fighter_gobj);
 void ftMasterHand_80151018(HSD_GObj* fighter_gobj);

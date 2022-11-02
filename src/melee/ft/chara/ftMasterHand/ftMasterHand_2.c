@@ -20,78 +20,48 @@ void ftMasterHand_8014FE58(HSD_GObj* fighter_gobj)
     return;
 }
 
+// todo: can maybe be an inline func, but max depth makes it difficult
+#define DO_TRANSITION(check_action, result_action)                                                                    \
+    if ((fp->x10_action_state_index == AS_MASTERHAND_UNK_341) || fp->x10_action_state_index == AS_MASTERHAND_UNK_342) \
+        fp->xB0_pos = fp->sa.masterhand.x2240_pos;                                                                    \
+    else                                                                                                              \
+        fp->sa.masterhand.x2240_pos = fp->xB0_pos;                                                                    \
+                                                                                                                      \
+    if (fp->sa.masterhand.x2258 == check_action)                                                                      \
+        Fighter_ActionStateChange_800693AC(fighter_gobj, result_action, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F); \
+    else                                                                                                              \
+        Fighter_ActionStateChange_800693AC(fighter_gobj, result_action, 0, 0, 0.0F, 1.0F, 0.0F);                      \
+                                                                                                                      \
+    fp->sa.masterhand.x2258 = result_action;
+
 static void ftMasterHand_8014FE5C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-
-    if ((fp->x10_action_state_index == AS_MASTERHAND_UNK_341) || (fp->x10_action_state_index == AS_MASTERHAND_UNK_342))
-        fp->xB0_pos = fp->sa.masterhand.x2240_pos;
-    else
-        fp->sa.masterhand.x2240_pos = fp->xB0_pos;
-
-    if (fp->sa.masterhand.x2258 == AS_MASTERHAND_UNK_389)
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MASTERHAND_UNK_341, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
-    else
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MASTERHAND_UNK_341, 0, 0, 0.0F, 1.0F, 0.0F);
-
-    fp->sa.masterhand.x2258 = AS_MASTERHAND_UNK_341;
+    DO_TRANSITION(AS_MASTERHAND_UNK_389, AS_MASTERHAND_UNK_341)
 }
 
-// todo: shared with ftMasterHand_8014FE5C
 static void ftMasterHand_8014FF1C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-
-    if ((fp->x10_action_state_index == AS_MASTERHAND_UNK_341) || (fp->x10_action_state_index == AS_MASTERHAND_UNK_342))
-        fp->xB0_pos = fp->sa.masterhand.x2240_pos;
-    else
-        fp->sa.masterhand.x2240_pos = fp->xB0_pos;
-
-    if (fp->sa.masterhand.x2258 == AS_MASTERHAND_UNK_390)
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MASTERHAND_UNK_342, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
-    else
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MASTERHAND_UNK_342, 0, 0, 0.0F, 1.0F, 0.0F);
-
-    fp->sa.masterhand.x2258 = AS_MASTERHAND_UNK_342;
+    DO_TRANSITION(AS_MASTERHAND_UNK_390, AS_MASTERHAND_UNK_342)
 }
 
-void ftMasterHand_8014FFDC(HSD_GObj* gobj)
+void ftMasterHand_8014FFDC(HSD_GObj* fighter_gobj)
 {
-    u32 unused[4];
+    u32 args_unused[4];
 
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
 
     if (fp->sa.masterhand.x2258 == AS_MASTERHAND_UNK_390) {
-        if ((fp->x10_action_state_index == AS_MASTERHAND_UNK_341) || (fp->x10_action_state_index == AS_MASTERHAND_UNK_342))
-            // todo: shared with ftMasterHand_8014FE5C
-            fp->xB0_pos = fp->sa.masterhand.x2240_pos;
-        else
-            fp->sa.masterhand.x2240_pos = fp->xB0_pos;
-
-        if (fp->sa.masterhand.x2258 == AS_MASTERHAND_UNK_390)
-            Fighter_ActionStateChange_800693AC(gobj, AS_MASTERHAND_UNK_342, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
-        else
-            Fighter_ActionStateChange_800693AC(gobj, AS_MASTERHAND_UNK_342, 0, 0, 0.0F, 1.0F, 0.0F);
-
-        fp->sa.masterhand.x2258 = AS_MASTERHAND_UNK_342;
+        DO_TRANSITION(AS_MASTERHAND_UNK_390, AS_MASTERHAND_UNK_342);
     } else {
-        if ((fp->x10_action_state_index == AS_MASTERHAND_UNK_341) || (fp->x10_action_state_index == AS_MASTERHAND_UNK_342))
-            fp->xB0_pos = fp->sa.masterhand.x2240_pos;
-        else
-            fp->sa.masterhand.x2240_pos = fp->xB0_pos;
-
-        if (fp->sa.masterhand.x2258 == AS_MASTERHAND_UNK_389)
-            Fighter_ActionStateChange_800693AC(gobj, AS_MASTERHAND_UNK_341, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
-        else
-            Fighter_ActionStateChange_800693AC(gobj, AS_MASTERHAND_UNK_341, 0, 0, 0.0F, 1.0F, 0.0F);
-
-        fp->sa.masterhand.x2258 = AS_MASTERHAND_UNK_341;
+        DO_TRANSITION(AS_MASTERHAND_UNK_389, AS_MASTERHAND_UNK_341);
     }
 }
 
 static void ftMasterHand_80150144(HSD_GObj* fighter_gobj)
 {
-    u32 unused[2];
+    u32 args_unused[2];
 
     Fighter* fp = fighter_gobj->user_data;
     MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
@@ -155,22 +125,10 @@ static MasterHandDataStuff data_stuff = {
       0x00, 0x00 }
 };
 
-// todo: shared with ftMasterHand_8014FE5C
 inline void ftMasterHand_80150230_inline_1(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-
-    if (fp->x10_action_state_index == AS_MASTERHAND_UNK_341 || fp->x10_action_state_index == AS_MASTERHAND_UNK_342)
-        fp->xB0_pos = fp->sa.masterhand.x2240_pos;
-    else
-        fp->sa.masterhand.x2240_pos = fp->xB0_pos;
-
-    if (fp->sa.masterhand.x2258 == AS_MASTERHAND_UNK_390)
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MASTERHAND_UNK_342, 0, 0, fp->x894_currentAnimFrame, 1.0F, 0.0F);
-    else
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MASTERHAND_UNK_342, 0, 0, 0.0F, 1.0F, 0.0F);
-
-    fp->sa.masterhand.x2258 = AS_MASTERHAND_UNK_342;
+    DO_TRANSITION(AS_MASTERHAND_UNK_390, AS_MASTERHAND_UNK_342);
 }
 
 inline void ftMasterHand_80150230_inline_2(HSD_GObj* fighter_gobj)
@@ -187,14 +145,14 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj);
 
 void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
 {
-    u32 unused[2];
+    u32 args_unused[2];
 
     Fighter* fp = fighter_gobj->user_data;
 
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftMasterHand_80150894(fighter_gobj);
 
-        /* inline? */ {
+        /* todo: duplicate branch in this func */ {
             if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
                 if (fp->x10_action_state_index == AS_MASTERHAND_UNK_341)
                     ftMasterHand_80150230_inline_1(fighter_gobj);
@@ -202,136 +160,141 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
                     ftMasterHand_80150230_inline_2(fighter_gobj);
             }
         }
-    } else {
-        if (--fp->sa.masterhand.x223C < 0.0F) {
-            MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
-            Vec3 vec;
-            s32 unused[6];
-            ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, ext_attr->x18, ext_attr->x20, ext_attr->x1C);
-            if (ftbosslib_8015C44C(FTKIND_CREZYH) == AS_MASTERHAND_UNK_384) {
-                // Crazy Hand Combo Attack
-                switch (ftbosslib_8015C4C4()) {
-                case AS_MASTERHAND_UNK_377:
-                    vec.x = ext_attr->x124_pos.x;
-                    vec.y = ext_attr->x124_pos.y;
-                    vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155194, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_378:
-                    vec.x = ext_attr->x12C_pos.x;
-                    vec.y = ext_attr->x12C_pos.y;
-                    vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801552F8, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_379:
-                    vec.x = ext_attr->x134_pos.x;
-                    vec.y = ext_attr->x134_pos.y;
-                    vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155484, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_380:
-                    vec.x = ext_attr->x13C_pos.x;
-                    vec.y = ext_attr->x13C_pos.y;
-                    vec.z = 0.0F;
-                    break;
-                }
-            } else {
-                s32 tmp;
-                s32 tmp2;
-                u8_pair* qwe;
-                f32 rand;
-                if (fp->sa.masterhand.x2254 == ext_attr->x24) {
-                    fp->sa.masterhand.x2254 = 0;
-                    tmp = 2;
-                } else {
-                    s32 qwe4 = data_stuff.x54[fp->sa.masterhand.x224C * 5 + HSD_Randi(5)];
-                    tmp = qwe4;
-                    if (qwe4 == 2) {
-                        fp->sa.masterhand.x2254 = 0;
-                    } else {
-                        fp->sa.masterhand.x2254++;
-                    }
-                }
-                // cast required, don't know why
-                qwe = &((u8_pair*) data_stuff.x48)[tmp];
-                tmp2 = data_stuff.action_states[data_stuff.x38[qwe->a + HSD_Randi(qwe->b)]];
+        return;
+    }
 
-                fp->sa.masterhand.x224C = tmp;
-                fp->sa.masterhand.x2250 = tmp2;
-                if (fp->x221D_flag.bits.b4) {
-                    tmp2 = AS_MASTERHAND_UNK_341;
-                }
-                switch (tmp2) {
-                case AS_MASTERHAND_UNK_347: // Stage-Wide Slap
-                    func_80053FF4(0, &vec);
-                    vec.y = ext_attr->x38;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151828, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_349: // Sweep
-                    func_80053FF4(0, &vec);
-                    vec.y = ext_attr->x50.y;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151BB8, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_351: // Walk
-                    vec.x = ext_attr->x40_pos.x;
-                    vec.y = ext_attr->x40_pos.y;
-                    vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151DC4, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_354: // Drill
-                    vec.x = ext_attr->x88_pos.x;
-                    vec.y = ext_attr->x88_pos.y;
-                    vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801521DC, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_355: // Punch
-                    vec.x = ext_attr->xA8_pos.x;
-                    vec.y = ext_attr->xA8_pos.y;
-                    vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152370, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_358: // Ground Slap
-                    vec.x = ext_attr->xBC_pos.x;
-                    vec.y = ext_attr->xBC_pos.y;
-                    vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801526D8, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_359: // Poke
-                    ftMasterHand_80152880(fighter_gobj);
-                    break;
-                case AS_MASTERHAND_UNK_367: // Jet
-                    ftMasterHand_80153820(fighter_gobj);
-                    break;
-                case AS_MASTERHAND_UNK_370: // Ram
-                    ftMasterHand_801541C8(fighter_gobj, &ftMasterHand_80153B90);
-                    break;
-                case AS_MASTERHAND_UNK_371: // Crush
-                    ftMasterHand_801541C8(fighter_gobj, &ftMasterHand_80153D2C);
-                    break;
-                case AS_MASTERHAND_UNK_362: // Lasers
-                    rand = HSD_Randf();
-                    vec.x = ext_attr->xCC_pos.x * rand * 2.0F + ext_attr->xC4_pos.x - ext_attr->xCC_pos.x;
-                    rand = HSD_Randf();
-                    vec.y = ext_attr->xCC_pos.y * rand * 2.0F + ext_attr->xC4_pos.y - ext_attr->xCC_pos.y;
-                    vec.z = 0.0F;
-                    ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152BCC, &vec);
-                    break;
-                case AS_MASTERHAND_UNK_365: // Gun
-                    ftMasterHand_801530A4(fighter_gobj);
-                    break;
-                case AS_MASTERHAND_UNK_379: // Grab
-                    ftMasterHand_801542E0(fighter_gobj);
-                    break;
-                case AS_MASTERHAND_UNK_380: // Grab
-                    ftMasterHand_801542E0(fighter_gobj);
-                    break;
+    if (--fp->sa.masterhand.x223C < 0.0F) {
+        MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
+        Vec3 vec;
+        s32 unused[6];
+        ftbosslib_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.masterhand.x2238, ext_attr->x18, ext_attr->x20, ext_attr->x1C);
+        if (ftbosslib_8015C44C(FTKIND_CREZYH) == AS_MASTERHAND_UNK_384) {
+            // Crazy Hand Combo Attack
+            switch (ftbosslib_8015C4C4()) {
+            case AS_MASTERHAND_UNK_377:
+                vec.x = ext_attr->x124_pos.x;
+                vec.y = ext_attr->x124_pos.y;
+                vec.z = 0.0F;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155194, &vec);
+                break;
+            case AS_MASTERHAND_UNK_378:
+                vec.x = ext_attr->x12C_pos.x;
+                vec.y = ext_attr->x12C_pos.y;
+                vec.z = 0.0F;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801552F8, &vec);
+                break;
+            case AS_MASTERHAND_UNK_379:
+                vec.x = ext_attr->x134_pos.x;
+                vec.y = ext_attr->x134_pos.y;
+                vec.z = 0.0F;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155484, &vec);
+                break;
+            case AS_MASTERHAND_UNK_380:
+                vec.x = ext_attr->x13C_pos.x;
+                vec.y = ext_attr->x13C_pos.y;
+                vec.z = 0.0F;
+                break;
+            }
+        } else {
+            s32 tmp;
+            s32 tmp2;
+            u8_pair* qwe;
+            f32 rand;
+            if (fp->sa.masterhand.x2254 == ext_attr->x24) {
+                fp->sa.masterhand.x2254 = 0;
+                tmp = 2;
+            } else {
+                s32 qwe4 = data_stuff.x54[fp->sa.masterhand.x224C * 5 + HSD_Randi(5)];
+                tmp = qwe4;
+                if (qwe4 == 2) {
+                    fp->sa.masterhand.x2254 = 0;
+                } else {
+                    fp->sa.masterhand.x2254++;
                 }
             }
-        } else if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-            if (fp->x10_action_state_index == AS_MASTERHAND_UNK_341)
-                ftMasterHand_80150230_inline_1(fighter_gobj);
-            else if (fp->x10_action_state_index == AS_MASTERHAND_UNK_342)
-                ftMasterHand_80150230_inline_2(fighter_gobj);
+            // cast required, don't know why
+            qwe = &((u8_pair*) data_stuff.x48)[tmp];
+            tmp2 = data_stuff.action_states[data_stuff.x38[qwe->a + HSD_Randi(qwe->b)]];
+
+            fp->sa.masterhand.x224C = tmp;
+            fp->sa.masterhand.x2250 = tmp2;
+            if (fp->x221D_flag.bits.b4) {
+                tmp2 = AS_MASTERHAND_UNK_341;
+            }
+            switch (tmp2) {
+            case AS_MASTERHAND_UNK_347: // Stage-Wide Slap
+                func_80053FF4(0, &vec);
+                vec.y = ext_attr->x38;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151828, &vec);
+                break;
+            case AS_MASTERHAND_UNK_349: // Sweep
+                func_80053FF4(0, &vec);
+                vec.y = ext_attr->x50.y;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151BB8, &vec);
+                break;
+            case AS_MASTERHAND_UNK_351: // Walk
+                vec.x = ext_attr->x40_pos.x;
+                vec.y = ext_attr->x40_pos.y;
+                vec.z = 0.0F;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151DC4, &vec);
+                break;
+            case AS_MASTERHAND_UNK_354: // Drill
+                vec.x = ext_attr->x88_pos.x;
+                vec.y = ext_attr->x88_pos.y;
+                vec.z = 0.0F;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801521DC, &vec);
+                break;
+            case AS_MASTERHAND_UNK_355: // Punch
+                vec.x = ext_attr->xA8_pos.x;
+                vec.y = ext_attr->xA8_pos.y;
+                vec.z = 0.0F;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152370, &vec);
+                break;
+            case AS_MASTERHAND_UNK_358: // Ground Slap
+                vec.x = ext_attr->xBC_pos.x;
+                vec.y = ext_attr->xBC_pos.y;
+                vec.z = 0.0F;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801526D8, &vec);
+                break;
+            case AS_MASTERHAND_UNK_359: // Poke
+                ftMasterHand_80152880(fighter_gobj);
+                break;
+            case AS_MASTERHAND_UNK_367: // Jet
+                ftMasterHand_80153820(fighter_gobj);
+                break;
+            case AS_MASTERHAND_UNK_370: // Ram
+                ftMasterHand_801541C8(fighter_gobj, &ftMasterHand_80153B90);
+                break;
+            case AS_MASTERHAND_UNK_371: // Crush
+                ftMasterHand_801541C8(fighter_gobj, &ftMasterHand_80153D2C);
+                break;
+            case AS_MASTERHAND_UNK_362: // Lasers
+                rand = HSD_Randf();
+                vec.x = ext_attr->xCC_pos.x * rand * 2.0F + ext_attr->xC4_pos.x - ext_attr->xCC_pos.x;
+                rand = HSD_Randf();
+                vec.y = ext_attr->xCC_pos.y * rand * 2.0F + ext_attr->xC4_pos.y - ext_attr->xCC_pos.y;
+                vec.z = 0.0F;
+                ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152BCC, &vec);
+                break;
+            case AS_MASTERHAND_UNK_365: // Gun
+                ftMasterHand_801530A4(fighter_gobj);
+                break;
+            case AS_MASTERHAND_UNK_379: // Grab
+                ftMasterHand_801542E0(fighter_gobj);
+                break;
+            case AS_MASTERHAND_UNK_380: // Grab
+                ftMasterHand_801542E0(fighter_gobj);
+                break;
+            }
+        }
+    } else {
+        /* todo: duplicate branch in this func */ {
+            if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+                if (fp->x10_action_state_index == AS_MASTERHAND_UNK_341)
+                    ftMasterHand_80150230_inline_1(fighter_gobj);
+                else if (fp->x10_action_state_index == AS_MASTERHAND_UNK_342)
+                    ftMasterHand_80150230_inline_2(fighter_gobj);
+            }
         }
     }
 }
@@ -371,8 +334,8 @@ extern HSD_PadStatus HSD_PadMasterStatus[4];
 
 static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
 {
-    Vec3 pos;
-    s32 unused;
+    Vec3 arg_pos;
+    s32 arg_unused;
 
     Fighter* fp = fighter_gobj->user_data;
     MasterHandAttributes* ext_attr = fp->x10C_ftData->ext_attr;
@@ -381,38 +344,38 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
 
     if (l_pressed && (r6_button & DPAD_UP)) {
         // Stage-Wide Slap
-        func_80053FF4(0, &pos);
-        pos.y = ext_attr->x38;
-        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151828, &pos);
+        func_80053FF4(0, &arg_pos);
+        arg_pos.y = ext_attr->x38;
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151828, &arg_pos);
     } else if (l_pressed && (r6_button & DPAD_RIGHT)) {
         // Sweep
-        func_80053FF4(0, &pos);
-        pos.y = ext_attr->x50.y;
-        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151BB8, &pos);
+        func_80053FF4(0, &arg_pos);
+        arg_pos.y = ext_attr->x50.y;
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151BB8, &arg_pos);
     } else if (l_pressed && (r6_button & DPAD_DOWN)) {
         // Walk
-        pos.x = ext_attr->x40_pos.x;
-        pos.y = ext_attr->x40_pos.y;
-        pos.z = 0.0F;
-        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151DC4, &pos);
+        arg_pos.x = ext_attr->x40_pos.x;
+        arg_pos.y = ext_attr->x40_pos.y;
+        arg_pos.z = 0.0F;
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80151DC4, &arg_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_UP)) {
         // Drill
-        pos.x = ext_attr->x88_pos.x;
-        pos.y = ext_attr->x88_pos.y;
-        pos.z = 0.0F;
-        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801521DC, &pos);
+        arg_pos.x = ext_attr->x88_pos.x;
+        arg_pos.y = ext_attr->x88_pos.y;
+        arg_pos.z = 0.0F;
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801521DC, &arg_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_RIGHT)) {
         // Punch
-        pos.x = ext_attr->xA8_pos.x;
-        pos.y = ext_attr->xA8_pos.y;
-        pos.z = 0.0F;
-        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152370, &pos);
+        arg_pos.x = ext_attr->xA8_pos.x;
+        arg_pos.y = ext_attr->xA8_pos.y;
+        arg_pos.z = 0.0F;
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152370, &arg_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_DOWN)) {
         // Ground Slap
-        pos.x = ext_attr->xBC_pos.x;
-        pos.y = ext_attr->xBC_pos.y;
-        pos.z = 0.0F;
-        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801526D8, &pos);
+        arg_pos.x = ext_attr->xBC_pos.x;
+        arg_pos.y = ext_attr->xBC_pos.y;
+        arg_pos.z = 0.0F;
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801526D8, &arg_pos);
     } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_LEFT)) {
         // Poke
         ftMasterHand_80152880(fighter_gobj);
@@ -429,11 +392,11 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
         // Lasers
         f32 rand;
         rand = HSD_Randf();
-        pos.x = ext_attr->xCC_pos.x * rand * 2.0F + ext_attr->xC4_pos.x - ext_attr->xCC_pos.x;
+        arg_pos.x = ext_attr->xCC_pos.x * rand * 2.0F + ext_attr->xC4_pos.x - ext_attr->xCC_pos.x;
         rand = HSD_Randf();
-        pos.y = ext_attr->xCC_pos.y * rand * 2.0F + ext_attr->xC4_pos.y - ext_attr->xCC_pos.y;
-        pos.z = 0.0F;
-        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152BCC, &pos);
+        arg_pos.y = ext_attr->xCC_pos.y * rand * 2.0F + ext_attr->xC4_pos.y - ext_attr->xCC_pos.y;
+        arg_pos.z = 0.0F;
+        ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80152BCC, &arg_pos);
     } else if ((r6_button & BUTTON_B) && ((r6_button & DPAD_RIGHT))) {
         // Gun
         ftMasterHand_801530A4(fighter_gobj);
@@ -449,30 +412,30 @@ static void ftMasterHand_80150894(HSD_GObj* fighter_gobj)
         // Crazy Hand Combo Attack
         switch (ftbosslib_8015C4C4()) {
         case AS_MASTERHAND_UNK_377: {
-            pos.x = ext_attr->x124_pos.x;
-            pos.y = ext_attr->x124_pos.y;
-            pos.z = 0.0F;
-            ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155194, &pos);
+            arg_pos.x = ext_attr->x124_pos.x;
+            arg_pos.y = ext_attr->x124_pos.y;
+            arg_pos.z = 0.0F;
+            ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155194, &arg_pos);
             break;
         }
         case AS_MASTERHAND_UNK_378: {
-            pos.x = ext_attr->x12C_pos.x;
-            pos.y = ext_attr->x12C_pos.y;
-            pos.z = 0.0F;
-            ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801552F8, &pos);
+            arg_pos.x = ext_attr->x12C_pos.x;
+            arg_pos.y = ext_attr->x12C_pos.y;
+            arg_pos.z = 0.0F;
+            ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_801552F8, &arg_pos);
             break;
         }
         case AS_MASTERHAND_UNK_379: {
-            pos.x = ext_attr->x134_pos.x;
-            pos.y = ext_attr->x134_pos.y;
-            pos.z = 0.0F;
-            ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155484, &pos);
+            arg_pos.x = ext_attr->x134_pos.x;
+            arg_pos.y = ext_attr->x134_pos.y;
+            arg_pos.z = 0.0F;
+            ftMasterHand_80150DC4(fighter_gobj, &ftMasterHand_80155484, &arg_pos);
             break;
         }
         case AS_MASTERHAND_UNK_380: {
-            pos.x = ext_attr->x13C_pos.x;
-            pos.y = ext_attr->x13C_pos.y;
-            pos.z = 0.0F;
+            arg_pos.x = ext_attr->x13C_pos.x;
+            arg_pos.y = ext_attr->x13C_pos.y;
+            arg_pos.z = 0.0F;
             break;
         }
         }
