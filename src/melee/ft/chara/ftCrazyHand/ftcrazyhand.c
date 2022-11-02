@@ -6,6 +6,7 @@ void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj)
     return;
 }
 
+// todo: shared with ftMasterhand_OnLoad
 void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj)
 {
     ftData* ftdata;
