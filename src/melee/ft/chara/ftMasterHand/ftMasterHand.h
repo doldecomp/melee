@@ -87,8 +87,8 @@ typedef struct _MasterHandAttributes {
 } MasterHandAttributes;
 
 // ftMasterHand_1
-void ftMasterhand_OnDeath(HSD_GObj* gobj);
-void ftMasterhand_OnLoad(HSD_GObj* gobj);
+void ftMasterhand_OnDeath(HSD_GObj* fighter_gobj);
+void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj);
 
 // ftMasterHand_2
 void ftMasterHand_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
@@ -103,9 +103,13 @@ void ftMasterHand_80150FC8(HSD_GObj* fighter_gobj);
 void ftMasterHand_80151018(HSD_GObj* fighter_gobj);
 
 // ftMasterHand_4
-void ftMasterHand_80151168(HSD_GObj* gobj);
-void ftMasterHand_801511B0(HSD_GObj* gobj);
-void ftMasterHand_801511F4(HSD_GObj* gobj);
-void ftMasterHand_801511F8(HSD_GObj* gobj);
+void ftMasterHand_80151168(HSD_GObj* fighter_gobj);
+void ftMasterHand_801511B0(HSD_GObj* fighter_gobj);
+void ftMasterHand_801511F4(HSD_GObj* fighter_gobj);
+void ftMasterHand_801511F8(HSD_GObj* fighter_gobj);
+
+// ftMasterHand 32
+void ftMasterHand_80155B7C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155C20(HSD_GObj* fighter_gobj);
 
 #endif

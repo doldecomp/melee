@@ -7423,7 +7423,7 @@ ActionStateList:
     .4byte 0x01000000
 
     # Functions (Anim, Input, Action, Collision, Camera)
-    .4byte func_80155C20
+    .4byte ftMasterHand_80155C20
     .4byte ftMasterHand_80155C88
     .4byte ftMasterHand_80155C8C
     .4byte ftMasterHand_80155C90
