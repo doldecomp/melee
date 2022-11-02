@@ -31,6 +31,7 @@ typedef unsigned int        uintptr_t;
 
 typedef unsigned long size_t;
 typedef void *unk_t;
+typedef void* any_t;
 typedef void (*jmp_t)(void);
 typedef jmp_t jtbl_t[];
 

@@ -1,6 +1,7 @@
 #ifndef MELEE_LB_LBUNKNOWN_001_H
 #define MELEE_LB_LBUNKNOWN_001_H
 
+#include <common_structs.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
@@ -13,8 +14,6 @@ typedef struct _UnkAnimContainer {
     struct _HSD_MatAnimJoint** x8_matanims;
     struct _HSD_ShapeAnimJoint** xC_shapeanims;
 } UnkAnimContainer;
-
-typedef Vec Vec3;
 
 BOOL func_8000B074(HSD_JObj*);
 BOOL func_8000B09C(HSD_JObj*);

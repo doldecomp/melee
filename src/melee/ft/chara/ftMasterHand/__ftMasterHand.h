@@ -4,8 +4,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 #include <melee/ft/ftbosslib.h>
-
-typedef void (*GObjCallback)(HSD_GObj* fighter_gobj);
+#include <sysdolphin/baselib/gobjproc.h>
 
 void ftMasterHand_80154A78(HSD_GObj* fighter_gobj);
 void ftMasterHand_80154C78(HSD_GObj* fighter_gobj);

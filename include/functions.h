@@ -6,7 +6,6 @@
 typedef struct _CameraBox CameraBox;
 typedef struct _CollData CollData;
 typedef struct _Hitbox Hitbox;
-typedef struct _Vec2 Vec2;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 typedef struct _HSD_VIStatus HSD_VIStatus;
@@ -19,7 +18,7 @@ typedef struct _HSD_IDTable HSD_IDTable;
 
 /* .text section */
 
-void func_8001044C(void *, void *, s32, f32, s32, s32, s32, s32);
+void func_8001044C(unk_t, unk_t, s32, f32, s32, s32, s32, s32);
 
 void func_800119DC(Vec *, s32, f32, f32, f32);
 
