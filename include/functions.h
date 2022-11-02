@@ -25,7 +25,7 @@ void func_800119DC(Vec *, s32, f32, f32, f32);
 void func_80014574(u8, s32, s32, s32);
 void func_800145C0(u8);
 
-void func_80016C64(char*, void**, char*, s32, ...); // from lbarchive.s, vararg may start earlier
+void func_80016C64(char*, unk_t*, char*, s32, ...); // from lbarchive.s, vararg may start earlier
 
 f32 func_8001E8F8(u32);
 
@@ -61,7 +61,7 @@ void func_8002F0E4(s32);
 s32 func_8002F260(void);
 void func_8002F274(void);
 
-void *func_80030A50(void);
+unk_t func_80030A50(void);
 
 BOOL func_80030CFC(CameraBox *, f32);
 
@@ -101,8 +101,8 @@ s32 func_800567C0(s32 /*wallID?*/, Vec * /*ecb_side_vertex?*/, Vec *result);
 void func_8006737C(s8);
 
 void func_80067624();
-void func_80067688(void *);
-void efAsync_Spawn(HSD_GObj *, void *, u32, u32, void *, ...);
+void func_80067688(unk_t);
+void efAsync_Spawn(HSD_GObj*, unk_t, u32, u32, unk_t, ...);
 
 void Fighter_UnkProcessDeath_80068354(HSD_GObj *);
 
@@ -118,7 +118,7 @@ void func_8006F0FC(HSD_GObj *fighter_gobj, f32);
 void ftAnim_SetAnimRate(HSD_GObj *, f32);
 BOOL ftAnim_IsFramesRemaining(HSD_GObj *);
 
-f32 func_8006F484(void *);
+f32 func_8006F484(unk_t);
 
 void func_8006FE48();
 
@@ -258,7 +258,7 @@ void func_800859A8();
 void func_80085B10();
 
 void func_80085CD8();
-u32 func_80085E50(void *, u32);
+u32 func_80085E50(unk_t, u32);
 
 HSD_GObj *func_8008627C(Vec *, HSD_GObj *);
 
@@ -441,7 +441,7 @@ void func_8026B7F8();
 
 void func_8027B4A4();
 
-void *func_8027B5B0(s32, s32, HSD_JObj *, s32, s32);
+unk_t func_8027B5B0(s32, s32, HSD_JObj*, s32, s32);
 
 void func_80294E78(HSD_GObj *, f32);
 
@@ -456,7 +456,7 @@ void func_802B1FE8(u32, Vec *);
 
 void func_802B56E4(u32, Vec *, f32, f32, f32);
 
-void *func_802C8B28(HSD_GObj *, Vec *, u32, f32);
+unk_t func_802C8B28(HSD_GObj*, Vec*, u32, f32);
 
 u32 func_802F0340(HSD_GObj *, Vec *, Vec *, u32, u32, f32);
 void func_802F046C(s32);
@@ -472,7 +472,7 @@ s32 func_80322258(f32 x);
 void __cvt_sll_flt(void);
 void __cvt_dbl_usll(void);
 
-int __StringRead(void *, int, int);
+int __StringRead(unk_t, int, int);
 char *strchr(const char *, int);
 int strncmp(const char *, const char *, unsigned long);
 int strcmp(const char *, const char *);
@@ -482,13 +482,13 @@ unsigned long strlen(const char *);
 
 void PSMTXMUltiVec(Mtx, Vec *, Vec *);
 
-void *OSAllocFromHeap(int, u32);
+unk_t OSAllocFromHeap(int, u32);
 
 void VIWaitForRetrace(void);
 
 HSD_ImageDesc *HSD_ImageDescAlloc();
 
-void HSD_ForeachAnim(void *, ...);
+void HSD_ForeachAnim(unk_t, ...);
 
 void HSD_CObjSetScissorx4();
 
@@ -496,7 +496,7 @@ void HSD_CObjSetViewportfx4();
 
 int HSD_GetHeap(void);
 
-void HSD_VIInit(HSD_VIStatus *vi_status, void *xfb0, void *xfb1, void *xfb2);
+void HSD_VIInit(HSD_VIStatus* vi_status, unk_t xfb0, unk_t xfb1, unk_t xfb2);
 
 void func_80378280(u8, int);
 
@@ -504,12 +504,12 @@ void splArcLengthPoint(Vec *, HSD_Spline *, f32);
 void func_80379310();
 void HSD_MtxSRT();
 
-void *func_8037ABC8(HSD_ObjAllocData *data);
+unk_t func_8037ABC8(HSD_ObjAllocData* data);
 void func_8037AD20(HSD_ObjAllocData *data, HSD_ObjAllocLink *obj);
 
 void HSD_IDSetup(void);
 
-void *func_8037CF98(HSD_IDTable *table, u32 id, u8 *success);
+unk_t func_8037CF98(HSD_IDTable* table, u32 id, u8* success);
 
 void func_803881E4(void);
 
