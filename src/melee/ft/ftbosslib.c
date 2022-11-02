@@ -237,7 +237,7 @@ BOOL ftbosslib_8015C3A0(void)
     return FALSE;
 }
 
-HSD_GObj* ftbosslib_8015C3E8(s32 kind)
+HSD_GObj* ftbosslib_8015C3E8(FighterKind kind)
 {
     HSD_GObj* cur;
     s32 unused[2];
@@ -249,7 +249,7 @@ HSD_GObj* ftbosslib_8015C3E8(s32 kind)
     return NULL;
 }
 
-s32 ftbosslib_8015C44C(s32 kind)
+s32 ftbosslib_8015C44C(FighterKind kind)
 {
     HSD_GObj* gobj = ftbosslib_8015C3E8(kind);
     s32 unused[4];

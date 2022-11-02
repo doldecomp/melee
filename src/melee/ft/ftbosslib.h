@@ -3,7 +3,6 @@
 
 #include <melee/ft/fighter.h>
 
-HSD_GObj* ftbosslib_8015C3E8(s32); // ftbosslib_8015C3E8(FighterKind)
 void ftbosslib_8015BD20(HSD_GObj* fighter_gobj);
 void ftbosslib_8015BD24(s32, f32*, f32, s32, s32, s32);
 void ftbosslib_8015BDB4(HSD_GObj* fighter_gobj);
@@ -16,8 +15,8 @@ void ftbosslib_8015C208(HSD_GObj* fighter_gobj, Vec* pos);
 HSD_GObj* ftbosslib_8015C244(HSD_GObj* fighter_gobj, Vec* pos);
 BOOL ftbosslib_8015C31C(void);
 BOOL ftbosslib_8015C3A0(void);
-HSD_GObj* ftbosslib_8015C3E8(s32 kind);
-s32 ftbosslib_8015C44C(s32 kind);
+HSD_GObj* ftbosslib_8015C3E8(FighterKind kind);
+s32 ftbosslib_8015C44C(FighterKind kind);
 s32 func_8015C4C4(void);
 void func_8015C5F8(HSD_GObj* fighter_gobj);
 

@@ -31,8 +31,8 @@ void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj)
             PUSH_ATTRS(fp, MasterHandAttributes);
 
             ftbosslib_8015BDB4(fighter_gobj);
-            func_8026B3F8(items[0], 0x7D);
-            func_8026B3F8(items[1], 0x7E);
+            func_8026B3F8(items[0], 125);
+            func_8026B3F8(items[1], 126);
         }
 
         fp->x2229_b5_no_normal_motion = TRUE;
@@ -61,7 +61,7 @@ void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj)
         fp->sa.masterhand.x222C = ftbosslib_8015C244(fighter_gobj, &fp->xB0_pos);
         fp->sa.masterhand.x2238 = 1.0F;
         fp->sa.masterhand.x224C = 0;
-        fp->sa.masterhand.x2250 = 347;
+        fp->sa.masterhand.x2250 = AS_MASTERHAND_UNK_347;
         fp->sa.masterhand.x2254 = 0;
 
         fp->x1A98 = 1;

@@ -37,7 +37,7 @@ void ftMasterHand_801552F8(HSD_GObj* fighter_gobj)
     HSD_GObj* other_gobj;
 
     fp->x2204_ftcmd_var1 = FALSE;
-    other_gobj = ftbosslib_8015C3E8(0x1CU);
+    other_gobj = ftbosslib_8015C3E8(FTKIND_CREZYH);
 
     if (!ftbosslib_8015C31C())
         ftCrazyHand_8015A3F4(other_gobj);
