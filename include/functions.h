@@ -209,7 +209,7 @@ f32 func_8007DA74(s32, u32, f32);
 void func_8007DB24();
 
 void func_8007E0E4();
-void func_8007E2D0(Fighter *, s16, void (*)(HSD_GObj *), void (*)(HSD_GObj *), void (*)(HSD_GObj *, HSD_GObj *));
+void ftCommon_SetOnGrabCallbacks(Fighter*, s16, void (*)(HSD_GObj*), void (*)(HSD_GObj*), void (*)(HSD_GObj*, HSD_GObj*));
 void func_8007E2F4(Fighter *, s16);
 void func_8007E2FC(HSD_GObj *);
 

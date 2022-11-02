@@ -142,7 +142,7 @@ static void ftMasterHand_801545A0(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x176, 0, 0, 0.0F, 1.0F, 0.0F);
 
     func_8006EBA4(fighter_gobj);
-    func_8007E2D0(fp, 0x80U, &ftMasterHand_80154A2C, FALSE, &lbl_80155A58);
+    ftCommon_SetOnGrabCallbacks(fp, 0x80U, &ftMasterHand_80154A2C, FALSE, &ftMasterHand_OnGrabFighter_Victim);
 
     fp->x2360 = FALSE;
 }

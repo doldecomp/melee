@@ -1,9 +1,7 @@
-#ifndef _ftmasterhand_h_
-#define _ftmasterhand_h_
+#ifndef FT_CHARA_FTMASTERHAND_FTMASTERHAND_H
+#define FT_CHARA_FTMASTERHAND_FTMASTERHAND_H
 
-#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 typedef struct _MasterHandAttributes {
     s32 x0;
@@ -109,8 +107,5 @@ void ftMasterHand_80151168(HSD_GObj* gobj);
 void ftMasterHand_801511B0(HSD_GObj* gobj);
 void ftMasterHand_801511F4(HSD_GObj* gobj);
 void ftMasterHand_801511F8(HSD_GObj* gobj);
-
-// ftMasterHand_31
-void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2);
 
 #endif

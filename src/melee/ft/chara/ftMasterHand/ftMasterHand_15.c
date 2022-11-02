@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 #include <melee/lb/lbunknown_001.h>
 

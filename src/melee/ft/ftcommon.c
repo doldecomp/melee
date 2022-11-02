@@ -989,8 +989,8 @@ HSD_GObj* func_8007E2A4(HSD_GObj* gobj)
     return gobj;
 }
 
-void func_8007E2D0(Fighter* fp, s16 arg1,
-    void (*cb0)(HSD_GObj*), void (*cb1)(HSD_GObj*), void (*cb2)(HSD_GObj*, HSD_GObj*))
+void ftCommon_SetOnGrabCallbacks(Fighter* fp, s16 arg1,
+                                 void (*cb0)(HSD_GObj*), void (*cb1)(HSD_GObj*), void (*cb2)(HSD_GObj*, HSD_GObj*))
 {
     fp->x221E_flag.bits.b6 = 1;
     fp->x1A68 = arg1;

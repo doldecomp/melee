@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 void ftMasterHand_80152634(HSD_GObj* fighter_gobj)
 {

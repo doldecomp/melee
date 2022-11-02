@@ -21,7 +21,7 @@ inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = getFighter(fighter_gobj);
     if (fp->x1A58_interactedFighter == NULL)
     {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BCF18);
+        ftCommon_SetOnGrabCallbacks(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BCF18);
     }
     else
     {
@@ -56,7 +56,7 @@ inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = getFighter(fighter_gobj);
     if (fp->x1A58_interactedFighter == NULL)
     {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BD000);
+        ftCommon_SetOnGrabCallbacks(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BD000);
     }
     else
     {
