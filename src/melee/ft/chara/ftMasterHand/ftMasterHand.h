@@ -86,35 +86,52 @@ typedef struct _MasterHandAttributes {
     f32 x178;
 } MasterHandAttributes;
 
-// ftMasterHand_1
+#pragma region "ftMasterHand_1"
 void ftMasterhand_OnDeath(HSD_GObj* fighter_gobj);
 void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_2
+#pragma region "ftMasterHand_2"
 void ftMasterHand_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 void ftMasterHand_8014FE10(HSD_GObj* fighter_gobj);
 void ftMasterHand_8014FE58(HSD_GObj* fighter_gobj);
 void ftMasterHand_80150890(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_3
+#pragma region "ftMasterHand_3"
 void lbl_80150F00(HSD_GObj* fighter_gobj);
 void lbl_80150F68(HSD_GObj* fighter_gobj);
 void ftMasterHand_80150FC8(HSD_GObj* fighter_gobj);
 void ftMasterHand_80151018(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand_4
+#pragma region "ftMasterHand_4"
 void ftMasterHand_80151168(HSD_GObj* fighter_gobj);
 void ftMasterHand_801511B0(HSD_GObj* fighter_gobj);
 void ftMasterHand_801511F4(HSD_GObj* fighter_gobj);
 void ftMasterHand_801511F8(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand 32
+#pragma region "ftMasterHand 32"
 void ftMasterHand_80155B7C(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155C20(HSD_GObj* fighter_gobj);
+#pragma endregion
 
-// ftMasterHand 33
+#pragma region "ftMasterHand 33"
 void ftMasterHand_80155C88(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155C8C(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155C90(HSD_GObj* fighter_gobj);
+#pragma endregion
+
+#pragma region "ftMasterHand 34"
+void ftMasterHand_80155D5C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155D60(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155D64(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155D68(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155E08(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155E0C(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155E10(HSD_GObj* fighter_gobj);
+void ftMasterHand_80155E14(HSD_GObj* fighter_gobj);
+#pragma endregion
 
 #endif
