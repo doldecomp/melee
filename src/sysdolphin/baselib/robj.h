@@ -1,7 +1,7 @@
 #ifndef _robj_h_
 #define _robj_h_
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/gobj.h>

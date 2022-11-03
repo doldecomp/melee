@@ -1,9 +1,7 @@
 #ifndef _ftcoll_h_
 #define _ftcoll_h_
 
-#include <dolphin/types.h>
-#include <dolphin/mtx/mtxtypes.h>
-
+#include <melee/ef/ef.h>
 #include <melee/ft/fighter.h>
 
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID); // Combo Count Logic //

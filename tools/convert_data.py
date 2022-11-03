@@ -7,7 +7,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"**/ftcoll_data.s"
+    'input_glob': r"**/ftpurin.s"
 }
 
 default_options = {

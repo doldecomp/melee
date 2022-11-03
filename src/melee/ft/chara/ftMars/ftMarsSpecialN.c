@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
-#include <melee/ft/ftcoll.h>
 
+#include <melee/ef/ef.h>
+#include <melee/ft/ftcoll.h>
 #include <melee/lb/lbunknown_001.h>
 
 // 80136744 00133324

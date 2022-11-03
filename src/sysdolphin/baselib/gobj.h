@@ -1,8 +1,7 @@
-#ifndef _gobj_h_
-#define _gobj_h_
+#ifndef SYSDOLPHIN_BASELIB_GOBJ_H
+#define SYSDOLPHIN_BASELIB_GOBJ_H
 
 #include <dolphin/types.h>
-
 #include <sysdolphin/baselib/objalloc.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
@@ -29,10 +28,10 @@ typedef struct _HSD_GObj {
     /* 0x18 */ struct _HSD_GObjProc* proc;
     /* 0x1C */ void (*render_cb)(struct _HSD_GObj* gobj, s32 code);
     /* 0x20 */ u64 gxlink_prios;
-    /* 0x28 */ void* hsd_obj;
-    /* 0x2C */ void* user_data;
-    /* 0x30 */ void (*user_data_remove_func)(void* data);
-    /* 0x34 */ void* x34_unk;
+    /* 0x28 */ any_t hsd_obj;
+    /* 0x2C */ any_t user_data;
+    /* 0x30 */ void (*user_data_remove_func)(any_t data);
+    /* 0x34 */ unk_t x34_unk;
 } HSD_GObj;
 
 typedef struct _HSD_GObjProc {

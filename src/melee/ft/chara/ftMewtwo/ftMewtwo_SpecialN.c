@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
+#include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/lb/lbunknown_001.h>
 
@@ -283,8 +284,6 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
         func_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
     }
 }
-
-extern void func_80088510(Fighter*, u32, u8, u8);
 
 // 0x801471C8
 // https://decomp.me/scratch/QGj1l // Play Shadow Ball Charge SFX

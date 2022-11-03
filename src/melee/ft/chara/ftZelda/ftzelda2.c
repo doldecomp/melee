@@ -1,5 +1,7 @@
-#include <MSL/trigf.h>
 #include <melee/ft/chara/ftZelda/ftzelda.h>
+
+#include <MSL/trigf.h>
+#include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>
 
 #define HALF_PI 1.5707963705062866f

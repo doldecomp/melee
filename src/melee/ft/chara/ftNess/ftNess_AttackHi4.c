@@ -297,7 +297,6 @@ struct Unknown {
     s32 x4;
 };
 
-extern void func_80088510(Fighter*, s32, s32, s32);
 extern void func_802BFE5C(HSD_GObj*, Vec3*, f32);
 const Vec3 AttackHi4Pos = { 0.0f, 0.0f, 0.0f };
 
