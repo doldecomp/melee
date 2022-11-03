@@ -627,3 +627,14 @@ lbl_8013CE58:
 /* 8013CE78 00139A58  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t lbl_8013CE7C()
+{ // clang-format off
+    nofralloc
+/* 8013CE7C 00139A5C  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 8013CE80 00139A60  38 00 00 00 */	li r0, 0
+/* 8013CE84 00139A64  90 03 21 BC */	stw r0, 0x21bc(r3)
+/* 8013CE88 00139A68  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop

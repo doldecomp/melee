@@ -2,12 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-lbl_8013CE7C:
-/* 8013CE7C 00139A5C  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8013CE80 00139A60  38 00 00 00 */	li r0, 0
-/* 8013CE84 00139A64  90 03 21 BC */	stw r0, 0x21bc(r3)
-/* 8013CE88 00139A68  4E 80 00 20 */	blr 
-
 .global ftPurin_SpecialLw_StartAction
 ftPurin_SpecialLw_StartAction:
 /* 8013CE8C 00139A6C  7C 08 02 A6 */	mflr r0
