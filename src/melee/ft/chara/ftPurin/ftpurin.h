@@ -225,5 +225,6 @@ void func_8013D19C(HSD_GObj*);
 void func_8013D590(HSD_GObj*);
 void func_8013D5F0(HSD_GObj*);
 void lbl_8014222C(HSD_GObj*);
+void ftPurin_SpecialHi_StartAction_inline(HSD_GObj* fighter_gobj);
 
 #endif

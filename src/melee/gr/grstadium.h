@@ -5,6 +5,6 @@
 
 void func_801D511C(void);
 void func_801D39A0(HSD_GObj*);
-void func_801D4FF8(void);
+bool func_801D4FF8(int pl_slot);
 
 #endif
