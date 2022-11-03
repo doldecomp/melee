@@ -318,55 +318,54 @@ void func_8037A230(Mtx arg0, Quaternion* arg1)
     PSMTXQuat(arg0, arg1);
 }
 
-void HSD_MtxSRT(Mtx m, Vec* vec1, Vec* vec2, Vec* vec3, Vec* vec4)
+void HSD_MtxSRT(Mtx mtx, Vec* scale1, Vec* rotation, Vec* translation, Vec* scale2)
 {
-    f32 vec1x_2;
-    f32 vec1y_2;
-    f32 vec1z_2;
-    f32 vec1x_1;
-    f32 vec1y_1;
-    f32 vec1z_1;
-    f32 vec1x;
-    f32 vec1y;
-    f32 vec1z;
-    
-    f32 sinX = sinf(vec2->x);
-    f32 cosX = cosf(vec2->x);
-    f32 sinY = sinf(vec2->y);
-    f32 cosY = cosf(vec2->y);
-    f32 sinZ = sinf(vec2->z);
-    f32 cosZ = cosf(vec2->z);
-    
-    vec1x_2 = vec1x_1 = vec1x = vec1->x;
-    vec1y_2 = vec1y_1 = vec1y = vec1->y;
-    vec1z_2 = vec1z_1 = vec1z = vec1->z;
-    
-    if (vec4 != NULL) {   
-        f32 temp1 = 1.0/vec4->x;
-        f32 temp2 = 1.0/vec4->y;
-        f32 temp3 = 1.0/vec4->z;
-        
-        vec1y_2 *= vec4->y * temp1;
-        vec1z_2 *= vec4->z * temp1;
-        vec1x_1 *= vec4->x * temp2;
-        vec1z_1 *= vec4->z * temp2;
-        vec1x *= vec4->x * temp3;
-        vec1y *= vec4->y * temp3;
+    f32 scale1_x_2;
+    f32 scale1_y_2;
+    f32 scale1_z_2;
+    f32 scale1_x_1;
+    f32 scale1_y_1;
+    f32 scale1_z_1;
+    f32 scale1_x;
+    f32 scale1_y;
+    f32 scale1_z;
+
+    f32 sinX = sinf(rotation->x);
+    f32 cosX = cosf(rotation->x);
+    f32 sinY = sinf(rotation->y);
+    f32 cosY = cosf(rotation->y);
+    f32 sinZ = sinf(rotation->z);
+    f32 cosZ = cosf(rotation->z);
+
+    scale1_x_2 = scale1_x_1 = scale1_x = scale1->x;
+    scale1_y_2 = scale1_y_1 = scale1_y = scale1->y;
+    scale1_z_2 = scale1_z_1 = scale1_z = scale1->z;
+
+    if (scale2 != NULL) {
+        f32 temp1 = 1.0 / scale2->x;
+        f32 temp2 = 1.0 / scale2->y;
+        f32 temp3 = 1.0 / scale2->z;
+
+        scale1_y_2 *= scale2->y * temp1;
+        scale1_z_2 *= scale2->z * temp1;
+        scale1_x_1 *= scale2->x * temp2;
+        scale1_z_1 *= scale2->z * temp2;
+        scale1_x *= scale2->x * temp3;
+        scale1_y *= scale2->y * temp3;
     }
-    
-    
-    m[0][0] = cosZ * (vec1x_2 * cosY);
-    m[1][0] = sinZ * (vec1x_1 * cosY);
-    m[2][0] = -vec1x * sinY;
-    m[0][1] = vec1y_2 * ((cosZ * (sinX * sinY)) - (cosX * sinZ));
-    m[1][1] = vec1y_1 * ((sinZ * (sinX * sinY)) + (cosX * cosZ));
-    m[2][1] = cosY * (vec1y * sinX);
-    m[0][2] = vec1z_2 * ((cosZ * (cosX * sinY)) + (sinX * sinZ));
-    m[1][2] = vec1z_1 * ((sinZ * (cosX * sinY)) - (sinX * cosZ));
-    m[2][2] = cosY * (vec1z * cosX);
-    m[0][3] = vec3->x;
-    m[1][3] = vec3->y;
-    m[2][3] = vec3->z;
+
+    mtx[0][0] = cosZ * (scale1_x_2 * cosY);
+    mtx[1][0] = sinZ * (scale1_x_1 * cosY);
+    mtx[2][0] = -scale1_x * sinY;
+    mtx[0][1] = scale1_y_2 * ((cosZ * (sinX * sinY)) - (cosX * sinZ));
+    mtx[1][1] = scale1_y_1 * ((sinZ * (sinX * sinY)) + (cosX * cosZ));
+    mtx[2][1] = cosY * (scale1_y * sinX);
+    mtx[0][2] = scale1_z_2 * ((cosZ * (cosX * sinY)) + (sinX * sinZ));
+    mtx[1][2] = scale1_z_1 * ((sinZ * (cosX * sinY)) - (sinX * cosZ));
+    mtx[2][2] = cosY * (scale1_z * cosX);
+    mtx[0][3] = translation->x;
+    mtx[1][3] = translation->y;
+    mtx[2][3] = translation->z;
 }
 
 void HSD_MtxSRTQuat(Mtx arg0, Vec* arg1, Quaternion* arg2, Vec* arg3, Vec* arg4) {

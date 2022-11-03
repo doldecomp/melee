@@ -494,9 +494,5 @@ void HSD_VIInit(HSD_VIStatus* vi_status, unk_t xfb0, unk_t xfb1, unk_t xfb2);
 void func_80378280(u8, int);
 
 void func_80379310();
-void HSD_MtxSRT();
-
-unk_t func_8037ABC8(HSD_ObjAllocData* data);
-void func_8037AD20(HSD_ObjAllocData *data, HSD_ObjAllocLink *obj);
 
 #endif

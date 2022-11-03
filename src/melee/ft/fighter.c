@@ -2343,7 +2343,7 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
         HSD_JObjGetRotation(jobj, &rotation);
         HSD_JObjGetTranslation(jobj, &translation);
 
-        HSD_MtxSRT(&mtx2, &scale, &rotation, &translation, 0);
+        HSD_MtxSRT(mtx2, &scale, (Vec*) &rotation, &translation, NULL);
         PSMTXConcat(mtx2, mtx1, fp->x44_mtx);
     }
 }
