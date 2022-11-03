@@ -437,3 +437,8 @@ void lbl_8013CC60(void)
 {
     return;
 }
+
+void lbl_8013CC64(void)
+{
+    return;
+}
