@@ -2316,9 +2316,9 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy) {
     }
 }
 
-inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj, Mtx *mtx)
+inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj, Mtx mtx)
 {
-    func_80379310(&jobj->mtx, mtx);
+    func_80379310(jobj->mtx, mtx);
     return jobj;
 }
 
@@ -2336,7 +2336,7 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
 
         HSD_JObjSetupMatrix(jobj);
         HSD_JObjGetMtx(jobj);
-        HSD_JObjGetScale(Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, &mtx1), &scale);
+        HSD_JObjGetScale(Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, mtx1), &scale);
 
         scale.x = Fighter_GetModelScale(fp);
 
