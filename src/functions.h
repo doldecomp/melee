@@ -489,6 +489,4 @@ void HSD_CObjSetViewportfx4();
 
 int HSD_GetHeap(void);
 
-void HSD_VIInit(HSD_VIStatus* vi_status, unk_t xfb0, unk_t xfb1, unk_t xfb2);
-
 #endif
