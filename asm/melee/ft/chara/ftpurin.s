@@ -7,47 +7,47 @@
 
 .global as_table_purin
 as_table_purin:
-    .4byte 0x00000127
-    .4byte NULL
+    .int 295
+    .float 0.0
     .4byte 0x01000000
     .4byte func_800D7590
     .4byte func_800D7614
     .4byte func_800D7634
     .4byte func_800D767C
     .4byte func_800761C8
-    .4byte 0x00000128
-    .4byte NULL
+    .int 296
+    .float 0.0
     .4byte 0x01000000
     .4byte func_800D7590
     .4byte func_800D7614
     .4byte func_800D7634
     .4byte func_800D767C
     .4byte func_800761C8
-    .4byte 0x00000129
-    .4byte NULL
+    .int 297
+    .float 0.0
     .4byte 0x01000000
     .4byte func_800D7590
     .4byte func_800D7614
     .4byte func_800D7634
     .4byte func_800D767C
     .4byte func_800761C8
-    .4byte 0x0000012A
-    .4byte NULL
+    .int 298
+    .float 0.0
     .4byte 0x01000000
     .4byte func_800D7590
     .4byte func_800D7614
     .4byte func_800D7634
     .4byte func_800D767C
     .4byte func_800761C8
-    .4byte 0x0000012B
-    .4byte NULL
+    .int 299
+    .float 0.0
     .4byte 0x01000000
     .4byte func_800D7590
     .4byte func_800D7614
     .4byte func_800D7634
     .4byte func_800D767C
     .4byte func_800761C8
-    .4byte 0x0000012C
+    .int 300
     .4byte 0x00340211
     .4byte 0x12000000
     .4byte lbl_8013E014
@@ -55,7 +55,7 @@ as_table_purin:
     .4byte lbl_80140620
     .4byte lbl_80140FA4
     .4byte func_800761C8
-    .4byte 0x0000012D
+    .int 301
     .4byte 0x00340211
     .4byte 0x12000000
     .4byte lbl_8013E014
@@ -63,7 +63,7 @@ as_table_purin:
     .4byte lbl_80140620
     .4byte lbl_80140FA4
     .4byte func_800761C8
-    .4byte 0x0000012E
+    .int 302
     .4byte 0x003C0211
     .4byte 0x12000000
     .4byte lbl_8013E0F0
@@ -71,7 +71,7 @@ as_table_purin:
     .4byte lbl_80140650
     .4byte lbl_80141054
     .4byte func_800761C8
-    .4byte 0x0000012F
+    .int 303
     .4byte 0x003C0211
     .4byte 0x12000000
     .4byte lbl_8013E2A0
@@ -79,7 +79,7 @@ as_table_purin:
     .4byte lbl_80140680
     .4byte lbl_80141154
     .4byte func_800761C8
-    .4byte 0x00000130
+    .int 304
     .4byte 0x00340211
     .4byte 0x12000000
     .4byte lbl_8013E410
@@ -87,7 +87,7 @@ as_table_purin:
     .4byte lbl_801406B0
     .4byte lbl_80141254
     .4byte func_800761C8
-    .4byte 0x00000131
+    .int 305
     .4byte 0x00340211
     .4byte 0x12000000
     .4byte lbl_8013E7E0
@@ -95,7 +95,7 @@ as_table_purin:
     .4byte lbl_801408B8
     .4byte lbl_801415F4
     .4byte func_800761C8
-    .4byte 0x00000132
+    .int 306
     .4byte 0x00340211
     .4byte 0x12000000
     .4byte lbl_8013EAD8
@@ -103,7 +103,7 @@ as_table_purin:
     .4byte lbl_80140BAC
     .4byte lbl_801416D0
     .4byte func_800761C8
-    .4byte 0x00000133
+    .int 307
     .4byte 0x00340211
     .4byte 0x12000000
     .4byte lbl_8013EAD8
@@ -111,7 +111,7 @@ as_table_purin:
     .4byte lbl_80140BAC
     .4byte lbl_801416D0
     .4byte func_800761C8
-    .4byte 0x00000134
+    .int 308
     .4byte 0x00340611
     .4byte 0x12000000
     .4byte lbl_8013EDB0
@@ -119,7 +119,7 @@ as_table_purin:
     .4byte lbl_80140BE8
     .4byte lbl_80141730
     .4byte func_800761C8
-    .4byte 0x00000135
+    .int 309
     .4byte 0x00340611
     .4byte 0x12000000
     .4byte lbl_8013EDB0
@@ -127,7 +127,7 @@ as_table_purin:
     .4byte lbl_80140BE8
     .4byte lbl_80141730
     .4byte func_800761C8
-    .4byte 0x00000136
+    .int 310
     .4byte 0x003C0611
     .4byte 0x12000000
     .4byte lbl_8013EE84
@@ -135,7 +135,7 @@ as_table_purin:
     .4byte lbl_80140C18
     .4byte lbl_801417E0
     .4byte func_800761C8
-    .4byte 0x00000137
+    .int 311
     .4byte 0x003C0611
     .4byte 0x12000000
     .4byte lbl_8013F034
@@ -143,7 +143,7 @@ as_table_purin:
     .4byte lbl_80140C48
     .4byte lbl_801418E0
     .4byte func_800761C8
-    .4byte 0x00000138
+    .int 312
     .4byte 0x00340611
     .4byte 0x12000000
     .4byte lbl_8013F1A4
@@ -151,7 +151,7 @@ as_table_purin:
     .4byte lbl_80140C78
     .4byte lbl_801419E0
     .4byte func_800761C8
-    .4byte 0x00000139
+    .int 313
     .4byte 0x00340211
     .4byte 0x12000000
     .4byte lbl_8013F708
@@ -159,7 +159,7 @@ as_table_purin:
     .4byte lbl_80140DF8
     .4byte lbl_80141FB8
     .4byte func_800761C8
-    .4byte 0x0000013A
+    .int 314
     .4byte 0x00340611
     .4byte 0x12000000
     .4byte lbl_8013F9C0
@@ -167,7 +167,7 @@ as_table_purin:
     .4byte lbl_80140F10
     .4byte lbl_80142070
     .4byte func_800761C8
-    .4byte 0x0000013B
+    .int 315
     .4byte 0x00340611
     .4byte 0x12000000
     .4byte lbl_8013F9C0
@@ -175,7 +175,7 @@ as_table_purin:
     .4byte lbl_80140F10
     .4byte lbl_80142070
     .4byte func_800761C8
-    .4byte 0x0000013C
+    .int 316
     .4byte 0x00340611
     .4byte 0x12000000
     .4byte lbl_8013FCAC
@@ -183,7 +183,7 @@ as_table_purin:
     .4byte lbl_80140F40
     .4byte lbl_801420D0
     .4byte func_800761C8
-    .4byte 0x0000013D
+    .int 317
     .4byte 0x00340212
     .4byte 0x13000000
     .4byte lbl_8013D30C
@@ -191,7 +191,7 @@ as_table_purin:
     .4byte lbl_8013D38C
     .4byte lbl_8013D518
     .4byte func_800761C8
-    .4byte 0x0000013E
+    .int 318
     .4byte 0x00340612
     .4byte 0x13000000
     .4byte lbl_8013D348
@@ -199,7 +199,7 @@ as_table_purin:
     .4byte lbl_8013D3AC
     .4byte lbl_8013D554
     .4byte func_800761C8
-    .4byte 0x0000013F
+    .int 319
     .4byte 0x00340013
     .4byte 0x14000000
     .4byte lbl_8013CB68
@@ -207,7 +207,7 @@ as_table_purin:
     .4byte lbl_8013CC68
     .4byte lbl_8013CCA8
     .4byte func_800761C8
-    .4byte 0x00000140
+    .int 320
     .4byte 0x00340413
     .4byte 0x14000000
     .4byte lbl_8013CBE4
@@ -215,7 +215,7 @@ as_table_purin:
     .4byte lbl_8013CC88
     .4byte lbl_8013CCE4
     .4byte func_800761C8
-    .4byte 0x00000141
+    .int 321
     .4byte 0x00340013
     .4byte 0x14000000
     .4byte lbl_8013CB68
@@ -223,7 +223,7 @@ as_table_purin:
     .4byte lbl_8013CC68
     .4byte lbl_8013CCA8
     .4byte func_800761C8
-    .4byte 0x00000142
+    .int 322
     .4byte 0x00340413
     .4byte 0x14000000
     .4byte lbl_8013CBE4
@@ -231,7 +231,7 @@ as_table_purin:
     .4byte lbl_8013CC88
     .4byte lbl_8013CCE4
     .4byte func_800761C8
-    .4byte 0x00000143
+    .int 323
     .4byte 0x00340014
     .4byte 0x15000000
     .4byte lbl_8013CFCC
@@ -239,7 +239,7 @@ as_table_purin:
     .4byte lbl_8013D04C
     .4byte lbl_8013D08C
     .4byte func_800761C8
-    .4byte 0x00000144
+    .int 324
     .4byte 0x00340414
     .4byte 0x15000000
     .4byte lbl_8013D008
@@ -247,7 +247,7 @@ as_table_purin:
     .4byte lbl_8013D06C
     .4byte lbl_8013D0C8
     .4byte func_800761C8
-    .4byte 0x00000145
+    .int 325
     .4byte 0x00340014
     .4byte 0x15000000
     .4byte lbl_8013CFCC
@@ -255,7 +255,7 @@ as_table_purin:
     .4byte lbl_8013D04C
     .4byte lbl_8013D08C
     .4byte func_800761C8
-    .4byte 0x00000146
+    .int 326
     .4byte 0x00340414
     .4byte 0x15000000
     .4byte lbl_8013D008
@@ -421,7 +421,7 @@ lbl_803D0598:
 
 .global lbl_803D05B4
 lbl_803D05B4:
-    .4byte NULL
+    .float 0.0
     .4byte lbl_803D0544
     .4byte lbl_803D0560
     .4byte lbl_803D057C
@@ -429,28 +429,21 @@ lbl_803D05B4:
 
 .global lbl_803D05C8
 lbl_803D05C8:
-    .4byte 0x3F266666
-    .4byte 0x3F333333
-    .4byte 0x3F4CCCCD
-    .4byte 0x3F800000
+    .double 0.00017089841967390384
+    .double 0.0008789064586380846
 
 .global lbl_803D05D8
 lbl_803D05D8:
-    .4byte 0x3F8CCCCD
-    .4byte 0x3FACCCCD
-    .4byte 0x3FA66666
-    .4byte 0x3F99999A
+    .double 0.014062503343302524
+    .double 0.043749995483085516
     .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
     .balign 4
 
 .global lbl_803D0610
 lbl_803D0610:
-    .4byte 0x41000000
-    .4byte NULL
-    .4byte 0xC0800000
-    .4byte 0x40800000
-    .4byte 0x40800000
-    .4byte 0x40800000
+    .double 131072.0
+    .double -512.0001230239868
+    .double 512.0001230239868
 
 
 .section .sdata
@@ -479,103 +472,93 @@ lbl_804D3EA8:
 
 .global lbl_804D9C10
 lbl_804D9C10:
-	.4byte 0xBF800000
+	.float -1.0
 
 .global lbl_804D9C14
 lbl_804D9C14:
-	.4byte 0x00000000
+	.float 0.0
 
 .global lbl_804D9C18
 lbl_804D9C18:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+	.double 0.0078125
 
 .global lbl_804D9C20
 lbl_804D9C20:
-	.4byte 0xBF800000
+	.float -1.0
 
 .global lbl_804D9C24
 lbl_804D9C24:
-	.4byte 0x00000000
+	.float 0.0
 
 .global lbl_804D9C28
 lbl_804D9C28:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+	.double 0.0078125
 
 .global lbl_804D9C30
 lbl_804D9C30:
-	.4byte 0x00000000
+	.float 0.0
 
 .global lbl_804D9C34
 lbl_804D9C34:
-	.4byte 0x3C8EFA35
+	.float 0.01745329238474369
 
 .global lbl_804D9C38
 lbl_804D9C38:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+	.double 0.0078125
 
 .global lbl_804D9C40
 lbl_804D9C40:
-	.4byte 0x3FF921FB
-	.4byte 0x54442D18
+	.double 1.5707963267948966
 
 .global lbl_804D9C48
 lbl_804D9C48:
-	.4byte 0x00000000
+	.float 0.0
 
 .global lbl_804D9C4C
 lbl_804D9C4C:
-	.4byte 0x3FC90FDB
+	.float 1.5707963705062866
 
 .global lbl_804D9C50
 lbl_804D9C50:
-	.4byte 0x3F800000
+	.float 1.0
 
 .global lbl_804D9C54
 lbl_804D9C54:
-	.4byte 0x3F000000
+	.float 0.5
 
 .global lbl_804D9C58
 lbl_804D9C58:
-	.4byte 0x401921FB
-	.4byte 0x54442D18
+	.double 6.283185307179586
 
 .global lbl_804D9C60
 lbl_804D9C60:
-	.4byte 0xBF800000
+	.float -1.0
 
 .global lbl_804D9C64
 lbl_804D9C64:
-	.4byte 0x38D1B717
+	.float 9.999999747378752e-05
 
 .global lbl_804D9C68
 lbl_804D9C68:
-	.4byte 0x3C8EFA35
-	.4byte 0x00000000
+	.float 0.01745329238474369
+	.float 0.0
 
 .global lbl_804D9C70
 lbl_804D9C70:
-	.4byte 0x43300000
-	.4byte 0x80000000
+	.double 4503601774854144.0
 
 .global lbl_804D9C78
 lbl_804D9C78:
-	.4byte 0x3FC99999
-	.4byte 0x9999999A
+	.double 0.2
 
 .global lbl_804D9C80
 lbl_804D9C80:
-	.4byte 0x4012D97C
-	.4byte 0x7F3321D2
+	.double 4.71238898038469
 
 .global lbl_804D9C88
 lbl_804D9C88:
-	.4byte 0x400921FB
-	.4byte 0x54442D18
+	.double 3.141592653589793
 
 .global lbl_804D9C90
 lbl_804D9C90:
-	.4byte 0xBD4CCCCD
-	.4byte 0x00000000
+	.double -2.046363295829523e-13
