@@ -1005,3 +1005,37 @@ asm unk_t ftPurin_SpecialS_StartAction()
 /* 8013D29C 00139E7C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t ftPurin_SpecialAirS_StartAction()
+{ // clang-format off
+    nofralloc
+/* 8013D2A0 00139E80  7C 08 02 A6 */	mflr r0
+/* 8013D2A4 00139E84  38 80 01 6C */	li r4, 0x16c
+/* 8013D2A8 00139E88  90 01 00 04 */	stw r0, 4(r1)
+/* 8013D2AC 00139E8C  38 A0 00 00 */	li r5, 0
+/* 8013D2B0 00139E90  38 C0 00 00 */	li r6, 0
+/* 8013D2B4 00139E94  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8013D2B8 00139E98  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8013D2BC 00139E9C  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 8013D2C0 00139EA0  7C 7E 1B 78 */	mr r30, r3
+/* 8013D2C4 00139EA4  C0 22 A2 50 */	lfs f1, lbl_804D9C30(r2)
+/* 8013D2C8 00139EA8  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 8013D2CC 00139EAC  FC 60 08 90 */	fmr f3, f1
+/* 8013D2D0 00139EB0  C0 42 A2 58 */	lfs f2, lbl_804D9C38(r2)
+/* 8013D2D4 00139EB4  4B F2 C0 D9 */	bl Fighter_ActionStateChange_800693AC
+/* 8013D2D8 00139EB8  7F C3 F3 78 */	mr r3, r30
+/* 8013D2DC 00139EBC  4B F3 18 C9 */	bl func_8006EBA4
+/* 8013D2E0 00139EC0  38 00 00 00 */	li r0, 0
+/* 8013D2E4 00139EC4  90 1F 22 0C */	stw r0, 0x220c(r31)
+/* 8013D2E8 00139EC8  90 1F 22 08 */	stw r0, 0x2208(r31)
+/* 8013D2EC 00139ECC  90 1F 22 04 */	stw r0, 0x2204(r31)
+/* 8013D2F0 00139ED0  90 1F 22 00 */	stw r0, 0x2200(r31)
+/* 8013D2F4 00139ED4  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8013D2F8 00139ED8  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8013D2FC 00139EDC  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 8013D300 00139EE0  38 21 00 18 */	addi r1, r1, 0x18
+/* 8013D304 00139EE4  7C 08 03 A6 */	mtlr r0
+/* 8013D308 00139EE8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
