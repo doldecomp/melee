@@ -81280,7 +81280,7 @@ lbl_800C8318:
 #pragma pop
 
 #pragma push
-asm func_800C8348(HSD_GObj* fighter_gobj, BOOL, s32)
+asm void func_800C8348(HSD_GObj* fighter_gobj, BOOL, s32)
 { // clang-format off
     nofralloc
 /* 800C8348 000C4F28  7C 08 02 A6 */	mflr r0
