@@ -483,6 +483,4 @@ HSD_ImageDesc *HSD_ImageDescAlloc();
 
 void HSD_ForeachAnim(unk_t, ...);
 
-void HSD_CObjSetScissorx4();
-
 #endif
