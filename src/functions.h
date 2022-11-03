@@ -503,6 +503,4 @@ void HSD_IDSetup(void);
 
 unk_t func_8037CF98(HSD_IDTable* table, u32 id, u8* success);
 
-void func_803881E4(void);
-
 #endif
