@@ -8,8 +8,8 @@
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/ft/ftdrawcommon.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_001.h>
@@ -21,8 +21,8 @@
 // ==== fighter.c variables ====
 // =============================
 
-const Vec3 lbl_803B7488 = { 0.0f, 0.0f, 0.0f };
-const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
+const Vec3 lbl_803B7488 = { 0.0F, 0.0F, 0.0F };
+const Vec3 vec3_803B7494 = { 0.0F, 0.0F, 0.0F };
 
 HSD_ObjAllocData lbl_80458FD0;
 HSD_ObjAllocData lbl_80458FFC;
@@ -2316,9 +2316,9 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy) {
     }
 }
 
-inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj, Mtx *mtx)
+inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj, Mtx mtx)
 {
-    func_80379310(&jobj->mtx, mtx);
+    func_80379310(jobj->mtx, mtx);
     return jobj;
 }
 
@@ -2336,14 +2336,14 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
 
         HSD_JObjSetupMatrix(jobj);
         HSD_JObjGetMtx(jobj);
-        HSD_JObjGetScale(Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, &mtx1), &scale);
+        HSD_JObjGetScale(Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, mtx1), &scale);
 
         scale.x = Fighter_GetModelScale(fp);
 
         HSD_JObjGetRotation(jobj, &rotation);
         HSD_JObjGetTranslation(jobj, &translation);
 
-        HSD_MtxSRT(&mtx2, &scale, &rotation, &translation, 0);
+        HSD_MtxSRT(mtx2, &scale, (Vec*) &rotation, &translation, NULL);
         PSMTXConcat(mtx2, mtx1, fp->x44_mtx);
     }
 }

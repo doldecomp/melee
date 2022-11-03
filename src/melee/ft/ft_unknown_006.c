@@ -1,7 +1,7 @@
 #include <melee/ft/ft_unknown_006.h>
 
 #include <MSL/trigf.h>
-#include <Runtime/runtime.h>
+#include <Runtime/Runtime.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXPixel.h>
@@ -12,6 +12,7 @@
 #include <dolphin/os/os.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db_unknown_001.h>
+#include <melee/ef/ef.h>
 #include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftFox/ftfox.h>
@@ -1034,7 +1035,7 @@ lbl_800884F4:
 #pragma pop
 
 #pragma push
-asm unk_t func_80088510()
+asm void func_80088510(Fighter* fp, s32, u8, u8)
 { // clang-format off
     nofralloc
 /* 80088510 000850F0  7C 08 02 A6 */	mflr r0
@@ -3645,8 +3646,6 @@ lbl_8008A630:
 /* 8008A640 00087220  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
-
-void func_80084F3C(HSD_GObj* fighter_gobj);
 
 #pragma push
 asm unk_t func_8008A644()
@@ -57691,7 +57690,7 @@ lbl_800B566C:
 /* 800B5694 000B2274  FD EF 03 B2 */	fmul f15, f15, f14
 /* 800B5698 000B2278  FD CF 03 F2 */	fmul f14, f15, f15
 /* 800B569C 000B227C  FD E4 03 F2 */	fmul f15, f4, f15
-/* 800B56A0 000B2280  FD C2 1B BC */	fnmsub f14, f2, f14, f3
+/* 800B56A0 00ftPurin_SpecialHi_StartAction0B2280  FD C2 1B BC */	fnmsub f14, f2, f14, f3
 /* 800B56A4 000B2284  FD CF 03 B2 */	fmul f14, f15, f14
 /* 800B56A8 000B2288  FD C2 03 B2 */	fmul f14, f2, f14
 /* 800B56AC 000B228C  FD C0 70 18 */	frsp f14, f14
@@ -81281,7 +81280,7 @@ lbl_800C8318:
 #pragma pop
 
 #pragma push
-asm func_800C8348(HSD_GObj* fighter_gobj, BOOL, s32)
+asm void func_800C8348(HSD_GObj* fighter_gobj, BOOL, s32)
 { // clang-format off
     nofralloc
 /* 800C8348 000C4F28  7C 08 02 A6 */	mflr r0

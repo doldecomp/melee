@@ -3,6 +3,7 @@
 #include <dolphin/os/os.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/lb/lbunknown_001.h>
+#include <sysdolphin/baselib/random.h>
 
 HudIndex* func_802F4910(void)
 {
@@ -1571,7 +1572,6 @@ lbl_802F5EB0:
 #pragma pop
 
 extern unk_t func_802F3424();
-extern unk_t func_80390A70();
 
 #pragma push
 asm unk_t func_802F5EC0()

@@ -44,5 +44,9 @@ unk_t func_80083318();
 unk_t func_80083E64();
 unk_t func_800846B0();
 void func_80081C88(HSD_GObj* dst_gobj, f32 scale_y);
+void func_80084F3C(HSD_GObj* fighter_gobj);
+BOOL EnvColl_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction);
+asm void func_80084FA8(HSD_GObj* fighter_gobj);
+unk_t func_80082978();
 
 #endif

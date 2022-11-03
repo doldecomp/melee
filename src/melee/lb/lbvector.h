@@ -1,7 +1,7 @@
 #ifndef _lbvector_h_
 #define _lbvector_h_
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/gx/GXTransform.h>
 #include <melee/lb/lbrefract.h>
 

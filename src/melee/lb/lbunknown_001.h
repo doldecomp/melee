@@ -2,7 +2,7 @@
 #define MELEE_LB_LBUNKNOWN_001_H
 
 #include <common_structs.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 

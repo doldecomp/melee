@@ -20,7 +20,6 @@ MWCC_FLAGS = [
     "-enum", "int",
     "-nodefaults",
     "-inline", "auto", "-I-",
-    "-i", "include",
     "-i", "src",
     "-DM2CTX",
 ]

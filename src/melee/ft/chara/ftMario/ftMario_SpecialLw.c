@@ -1,8 +1,9 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <sysdolphin/baselib/random.h>
 
+#include <melee/ef/ef.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/it/itkind.h>
+#include <sysdolphin/baselib/random.h>
 
 // 0x800E2050
 // https://decomp.me/scratch/8zo4V

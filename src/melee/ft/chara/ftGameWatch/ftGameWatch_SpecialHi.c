@@ -102,7 +102,6 @@ void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
 }
 
 extern void func_8007D60C(Fighter*);
-extern void func_80088510(Fighter*, s32, u8, u8);
 
 inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
 {

@@ -81,12 +81,11 @@ FRANK := tools/frank.py
 
 # Options
 INCLUDE_DIRS = $(*D)
-SYSTEM_INCLUDE_DIRS := include include/dolphin src
-#INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
+SYSTEM_INCLUDE_DIRS := src
 INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE_DIRS))
 
 
-ASFLAGS := -mgekko -I include
+ASFLAGS := -mgekko -I asm
 LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
   LDFLAGS += -map $(MAP)

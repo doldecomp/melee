@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
 #include <MSL/trigf.h>
+#include <melee/ef/ef.h>
 #include <melee/lb/lbunknown_001.h>
 
 // Setup float order //

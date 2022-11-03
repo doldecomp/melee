@@ -1,6 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB___BASELIB_H
 #define SYSDOLPHIN_BASELIB___BASELIB_H
 
+#include <sysdolphin/baselib/baselib.h>
+
 #include <dolphin/types.h>
 typedef struct
 {

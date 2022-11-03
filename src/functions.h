@@ -2,19 +2,12 @@
 #define _functions_h_
 
 #include <dolphin/types.h>
+#include <sysdolphin/sysdolphin.h>
 
 typedef struct _CameraBox CameraBox;
 typedef struct _CollData CollData;
 typedef struct _Hitbox Hitbox;
-typedef struct _HSD_JObj HSD_JObj;
-typedef struct _HSD_ImageDesc HSD_ImageDesc;
-typedef struct _HSD_VIStatus HSD_VIStatus;
-typedef struct _HSD_GObj HSD_GObj;
 typedef struct _Fighter Fighter;
-typedef struct _HSD_Spline HSD_Spline;
-typedef struct _HSD_ObjAllocData HSD_ObjAllocData;
-typedef struct _HSD_ObjAllocLink HSD_ObjAllocLink;
-typedef struct _HSD_IDTable HSD_IDTable;
 
 /* .text section */
 
@@ -489,38 +482,5 @@ void VIWaitForRetrace(void);
 HSD_ImageDesc *HSD_ImageDescAlloc();
 
 void HSD_ForeachAnim(unk_t, ...);
-
-void HSD_CObjSetScissorx4();
-
-void HSD_CObjSetViewportfx4();
-
-int HSD_GetHeap(void);
-
-void HSD_VIInit(HSD_VIStatus* vi_status, unk_t xfb0, unk_t xfb1, unk_t xfb2);
-
-void func_80378280(u8, int);
-
-void splArcLengthPoint(Vec *, HSD_Spline *, f32);
-void func_80379310();
-void HSD_MtxSRT();
-
-unk_t func_8037ABC8(HSD_ObjAllocData* data);
-void func_8037AD20(HSD_ObjAllocData *data, HSD_ObjAllocLink *obj);
-
-void HSD_IDSetup(void);
-
-unk_t func_8037CF98(HSD_IDTable* table, u32 id, u8* success);
-
-void func_803881E4(void);
-
-void func_8038FD54(HSD_GObj *, void (*)(HSD_GObj *), s32);
-
-void func_80390228(HSD_GObj *);
-
-void efLib_PauseAll(HSD_GObj *);
-void efLib_ResumeAll(HSD_GObj*);
-void ef_Spawn(s32, ...);
-f32 HSD_Randf(void);
-s32 HSD_Randi(s32);
 
 #endif

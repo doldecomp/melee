@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_LBUNKNOWN_003_H
 #define MELEE_LB_LBUNKNOWN_003_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 
 unk_t func_80014638();
 unk_t func_80011710();

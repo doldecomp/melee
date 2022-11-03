@@ -5,7 +5,7 @@
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
-#include <Runtime/runtime.h>
+#include <Runtime/Runtime.h>
 #include <sysdolphin/baselib/cobj.h>
 typedef struct
 {

@@ -2,7 +2,7 @@
 #define SYSDOLPHIN_BASELIB_PSSTRUCTS_H
 
 #include <dolphin/types.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/jobj.h>
 
 typedef unk_t HSD_PSAppSRT;
@@ -271,8 +271,6 @@ inline void psDispSub(struct _particle *pp, u8 *texform);
 inline void psDispSubAppSRT(struct _particle *pp, u8 *texform);
 inline void psDispSubAPPSRTPoint(struct _particle *pp);
 #endif
-
-void psDispParticles(u32 target_link, u32 sw);
 
 void psInitDataBankLoad(
     int bank,
