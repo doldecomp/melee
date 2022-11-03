@@ -64,6 +64,6 @@ typedef struct _ ## module ## _Unk ## number module ## _Unk ## number;
 #pragma endregion
 
 // TODO! DO NOT LEAVE THIS IN!
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 
 #endif

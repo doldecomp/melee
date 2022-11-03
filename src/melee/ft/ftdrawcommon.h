@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_FTDRAWCOMMON_H
 #define MELEE_FT_FTDRAWCOMMON_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 

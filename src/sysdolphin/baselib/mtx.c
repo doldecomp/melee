@@ -2,7 +2,7 @@
 
 #include <MSL/trigf.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 
 #define EPSILON 0.0000000001f

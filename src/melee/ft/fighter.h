@@ -2,7 +2,7 @@
 #define MELEE_FT_FIGHTER_H
 
 #include <common_structs.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/types.h>
 #include <math.h>
 #include <melee/ft/ftstatevars.h>

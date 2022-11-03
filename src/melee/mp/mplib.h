@@ -1,7 +1,7 @@
 #ifndef MELEE_MP_MPLIB_H
 #define MELEE_MP_MPLIB_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 
 unk_t func_80054F68();
 unk_t func_80054ED8();

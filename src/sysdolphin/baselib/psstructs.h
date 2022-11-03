@@ -2,7 +2,7 @@
 #define SYSDOLPHIN_BASELIB_PSSTRUCTS_H
 
 #include <dolphin/types.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/jobj.h>
 
 typedef unk_t HSD_PSAppSRT;

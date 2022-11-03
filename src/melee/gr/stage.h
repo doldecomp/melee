@@ -2,7 +2,7 @@
 #define MELEE_GR_STAGE_H
 
 #include <dolphin/gx/types.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/types.h>
 
 enum InternalStageID {

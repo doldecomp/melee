@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_LBARCHIVE_H
 #define MELEE_LB_LBARCHIVE_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/archive.h>
 
