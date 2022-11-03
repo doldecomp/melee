@@ -1,6 +1,6 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
-#include <melee/ef/eflib.h>
+#include <melee/ef/ef.h>
 
 // 0x80119E14 //
 // https://decomp.me/scratch/LwTKg //

@@ -1,6 +1,6 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
-#include <melee/ef/eflib.h>
+#include <melee/ef/ef.h>
 
 void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {

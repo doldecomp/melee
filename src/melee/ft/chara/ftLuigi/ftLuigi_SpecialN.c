@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
+#include <melee/ef/ef.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/lb/lbunknown_001.h>
 
