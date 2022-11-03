@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
+#include <melee/ef/eflib.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/lb/lbunknown_001.h>
 

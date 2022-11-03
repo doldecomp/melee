@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
+
+#include <melee/ef/eflib.h>
 #include <melee/ft/ftcoll.h>
 
 // 8013A830 - 8013A8AC (0x7C bytes)

@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
+
+#include <melee/ef/eflib.h>
 #include <melee/ft/ftcoll.h>
 
 // 0x80142A24

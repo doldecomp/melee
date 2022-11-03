@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
+
+#include <melee/ef/eflib.h>
 #include <melee/ft/ft_unknown_006.h>
 
 // 0x800E9DF8

@@ -517,8 +517,8 @@ void func_8038FD54(HSD_GObj *, void (*)(HSD_GObj *), s32);
 
 void func_80390228(HSD_GObj *);
 
-void efLib_PauseAll(HSD_GObj *);
 void efLib_ResumeAll(HSD_GObj*);
+
 void ef_Spawn(s32, ...);
 
 #endif

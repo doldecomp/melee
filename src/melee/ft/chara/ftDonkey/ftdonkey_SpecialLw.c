@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
+
+#include <melee/ef/eflib.h>
 #include <melee/ft/code_80081B38.h>
 
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj) {

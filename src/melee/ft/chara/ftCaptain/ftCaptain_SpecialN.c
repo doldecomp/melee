@@ -1,5 +1,7 @@
-#include <MSL/trigf.h>
 #include <melee/ft/chara/ftCaptain/ftCaptain.h>
+
+#include <MSL/trigf.h>
+#include <melee/ef/eflib.h>
 #include <melee/ft/code_80081B38.h>
 
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj) // Create Aesthetic Wind Effect for Warlock Punch
