@@ -485,6 +485,4 @@ void HSD_ForeachAnim(unk_t, ...);
 
 void HSD_CObjSetScissorx4();
 
-void HSD_CObjSetViewportfx4();
-
 #endif
