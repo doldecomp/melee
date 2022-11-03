@@ -57690,7 +57690,7 @@ lbl_800B566C:
 /* 800B5694 000B2274  FD EF 03 B2 */	fmul f15, f15, f14
 /* 800B5698 000B2278  FD CF 03 F2 */	fmul f14, f15, f15
 /* 800B569C 000B227C  FD E4 03 F2 */	fmul f15, f4, f15
-/* 800B56A0 000B2280  FD C2 1B BC */	fnmsub f14, f2, f14, f3
+/* 800B56A0 00ftPurin_SpecialHi_StartAction0B2280  FD C2 1B BC */	fnmsub f14, f2, f14, f3
 /* 800B56A4 000B2284  FD CF 03 B2 */	fmul f14, f15, f14
 /* 800B56A8 000B2288  FD C2 03 B2 */	fmul f14, f2, f14
 /* 800B56AC 000B228C  FD C0 70 18 */	frsp f14, f14

@@ -3,6 +3,6 @@
 
 #include <ctypes.h>
 
-unk_t func_801D4FF8();
+BOOL func_801D4FF8(u8 player_id);
 
 #endif
