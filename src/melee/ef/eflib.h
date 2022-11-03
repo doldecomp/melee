@@ -4,5 +4,6 @@
 #include <sysdolphin/baselib/gobj.h>
 
 void efLib_PauseAll(HSD_GObj*);
+void efLib_ResumeAll(HSD_GObj*);
 
 #endif
