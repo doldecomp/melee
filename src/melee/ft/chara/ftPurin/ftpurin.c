@@ -791,3 +791,8 @@ void lbl_8013D044(void)
 {
     return;
 }
+
+void lbl_8013D048(void)
+{
+    return;
+}
