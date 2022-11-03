@@ -521,6 +521,5 @@ void efLib_PauseAll(HSD_GObj *);
 void efLib_ResumeAll(HSD_GObj*);
 void ef_Spawn(s32, ...);
 f32 HSD_Randf(void);
-s32 HSD_Randi(s32);
 
 #endif

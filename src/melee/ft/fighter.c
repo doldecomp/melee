@@ -8,8 +8,8 @@
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/ft/ftdrawcommon.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_001.h>
@@ -21,8 +21,8 @@
 // ==== fighter.c variables ====
 // =============================
 
-const Vec3 lbl_803B7488 = { 0.0f, 0.0f, 0.0f };
-const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
+const Vec3 lbl_803B7488 = { 0.0F, 0.0F, 0.0F };
+const Vec3 vec3_803B7494 = { 0.0F, 0.0F, 0.0F };
 
 HSD_ObjAllocData lbl_80458FD0;
 HSD_ObjAllocData lbl_80458FFC;
