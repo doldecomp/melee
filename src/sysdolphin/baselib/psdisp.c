@@ -5,12 +5,7 @@
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/GX_unknown_001.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/util.h>
 #include <melee/lb/lbrefract.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/mtx.h>
 
 typedef struct
 {
@@ -49,7 +44,6 @@ typedef struct
 /* 00408F40 */ extern psdisp_UnknownType002 lbl_8040C360;
 /* 00408EE0 */ extern psdisp_UnknownType001 lbl_8040C300;
 /* 003B6208 */ extern f32 lbl_803B9628[12];
-/* 0039CC68 */ void psDispParticles(s32, u32);
 /* 0039C850 */ unk_t func_8039FC70(s32, u8, unk_t *, unk_t *);
 /* 0039C754 */ void func_8039FB74(unk_t, unk_t, unk_t);
 /* 0039C608 */ void func_8039FA28(unk_t, unk_t, unk_t);

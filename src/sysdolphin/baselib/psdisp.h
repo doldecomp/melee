@@ -3,4 +3,6 @@
 
 #include <dolphin/types.h>
 
+void psDispParticles(u32 target_link, u32 sw);
+
 #endif

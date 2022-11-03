@@ -1,4 +1,4 @@
-#include <Runtime/runtime.h>
+#include <Runtime/Runtime.h>
 #include <common_structs.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GX_unknown_001.h>

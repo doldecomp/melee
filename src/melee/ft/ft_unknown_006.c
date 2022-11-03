@@ -1,7 +1,7 @@
 #include <melee/ft/ft_unknown_006.h>
 
 #include <MSL/trigf.h>
-#include <Runtime/runtime.h>
+#include <Runtime/Runtime.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXPixel.h>

@@ -272,8 +272,6 @@ inline void psDispSubAppSRT(struct _particle *pp, u8 *texform);
 inline void psDispSubAPPSRTPoint(struct _particle *pp);
 #endif
 
-void psDispParticles(u32 target_link, u32 sw);
-
 void psInitDataBankLoad(
     int bank,
     int *cmdBank,
