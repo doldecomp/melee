@@ -4863,3 +4863,8 @@ lbl_801405F4:
 /* 8014060C 0013D1EC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+void lbl_80140610(void)
+{
+    return;
+}
