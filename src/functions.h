@@ -505,6 +505,4 @@ unk_t func_8037CF98(HSD_IDTable* table, u32 id, u8* success);
 
 void func_803881E4(void);
 
-void func_8038FD54(HSD_GObj *, void (*)(HSD_GObj *), s32);
-
 #endif
