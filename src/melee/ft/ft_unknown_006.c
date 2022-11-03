@@ -3647,8 +3647,6 @@ lbl_8008A630:
 } // clang-format on
 #pragma pop
 
-void func_80084F3C(HSD_GObj* fighter_gobj);
-
 #pragma push
 asm unk_t func_8008A644()
 { // clang-format off
