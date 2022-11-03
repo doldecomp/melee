@@ -499,8 +499,4 @@ void HSD_MtxSRT();
 unk_t func_8037ABC8(HSD_ObjAllocData* data);
 void func_8037AD20(HSD_ObjAllocData *data, HSD_ObjAllocLink *obj);
 
-void HSD_IDSetup(void);
-
-unk_t func_8037CF98(HSD_IDTable* table, u32 id, u8* success);
-
 #endif
