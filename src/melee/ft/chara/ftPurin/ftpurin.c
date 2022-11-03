@@ -15,6 +15,7 @@
 #include <melee/it/item2.h>
 #include <melee/mp/mplib.h>
 #include <MSL/trigf.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* static */ extern char* lbl_803D05B4[5];
 
@@ -217,7 +218,7 @@ extern f32 const lbl_804D9C10;
 extern f32 const lbl_804D9C14;
 extern f32 const lbl_804D9C18;
 
-void ftPurin_SpecialHi_StartAction_inline(HSD_GObj* fighter_gobj)
+inline void ftPurin_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -231,88 +232,58 @@ void ftPurin_SpecialHi_StartAction_inline(HSD_GObj* fighter_gobj)
         fp->x2340_stateVar1 = false;
 }
 
-void ftPurin_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
+inline void
+ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* fighter_gobj,
+                                               u32 left_id, u32 right_id)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fighter = getFighter(fighter_gobj);
 
-    if (lbl_804D9C10 == fp->facing_dir)
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 365, 0, NULL,
+    if (lbl_804D9C10 == fighter->facing_dir)
+        Fighter_ActionStateChange_800693AC(fighter_gobj, left_id, 0, NULL,
                                            lbl_804D9C14, lbl_804D9C18,
                                            lbl_804D9C14);
     else
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 367, 0, NULL,
+        Fighter_ActionStateChange_800693AC(fighter_gobj, right_id, 0, NULL,
                                            lbl_804D9C14, lbl_804D9C18,
                                            lbl_804D9C14);
+}
+
+inline void startHi(HSD_GObj* fighter_gobj, int left_id, int right_id)
+{
+    Fighter* fighter;
+
+    ftPurin_SpecialHi_SetActionFromFacingDirection(fighter_gobj, left_id,
+                                                   right_id);
 
     func_8006EBA4(fighter_gobj);
 
-    ftPurin_SpecialHi_StartAction_inline(fighter_gobj);
+    fighter = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
+
+    if (lbl_804D9C10 == fighter->facing_dir)
+        Fighter_ActionStateChange_800693AC(fighter_gobj, left_id, 0, NULL,
+                                           lbl_804D9C14, lbl_804D9C18,
+                                           lbl_804D9C14);
+    else
+        Fighter_ActionStateChange_800693AC(fighter_gobj, right_id, 0, NULL,
+                                           lbl_804D9C14, lbl_804D9C18,
+                                           lbl_804D9C14);
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void ftPurin_SpecialAirHi_StartAction(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8013CA98 00139678  7C 08 02 A6 */	mflr r0
-/* 8013CA9C 0013967C  90 01 00 04 */	stw r0, 4(r1)
-/* 8013CAA0 00139680  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8013CAA4 00139684  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8013CAA8 00139688  7C 7F 1B 78 */	mr r31, r3
-/* 8013CAAC 0013968C  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8013CAB0 00139690  C0 22 A2 30 */	lfs f1, lbl_804D9C10(r2)
-/* 8013CAB4 00139694  C0 03 00 2C */	lfs f0, 0x2c(r3)
-/* 8013CAB8 00139698  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 8013CABC 0013969C  40 82 00 28 */	bne lbl_8013CAE4
-/* 8013CAC0 001396A0  C0 22 A2 34 */	lfs f1, lbl_804D9C14(r2)
-/* 8013CAC4 001396A4  7F E3 FB 78 */	mr r3, r31
-/* 8013CAC8 001396A8  C0 42 A2 38 */	lfs f2, lbl_804D9C18(r2)
-/* 8013CACC 001396AC  38 80 01 6E */	li r4, 0x16e
-/* 8013CAD0 001396B0  FC 60 08 90 */	fmr f3, f1
-/* 8013CAD4 001396B4  38 A0 00 00 */	li r5, 0
-/* 8013CAD8 001396B8  38 C0 00 00 */	li r6, 0
-/* 8013CADC 001396BC  4B F2 C8 D1 */	bl Fighter_ActionStateChange_800693AC
-/* 8013CAE0 001396C0  48 00 00 24 */	b lbl_8013CB04
-lbl_8013CAE4:
-/* 8013CAE4 001396C4  C0 22 A2 34 */	lfs f1, lbl_804D9C14(r2)
-/* 8013CAE8 001396C8  7F E3 FB 78 */	mr r3, r31
-/* 8013CAEC 001396CC  C0 42 A2 38 */	lfs f2, lbl_804D9C18(r2)
-/* 8013CAF0 001396D0  38 80 01 70 */	li r4, 0x170
-/* 8013CAF4 001396D4  FC 60 08 90 */	fmr f3, f1
-/* 8013CAF8 001396D8  38 A0 00 00 */	li r5, 0
-/* 8013CAFC 001396DC  38 C0 00 00 */	li r6, 0
-/* 8013CB00 001396E0  4B F2 C8 AD */	bl Fighter_ActionStateChange_800693AC
-lbl_8013CB04:
-/* 8013CB04 001396E4  7F E3 FB 78 */	mr r3, r31
-/* 8013CB08 001396E8  4B F3 20 9D */	bl func_8006EBA4
-/* 8013CB0C 001396EC  83 FF 00 2C */	lwz r31, 0x2c(r31)
-/* 8013CB10 001396F0  38 00 00 00 */	li r0, 0
-/* 8013CB14 001396F4  3C 60 80 14 */	lis r3, lbl_8013C94C@ha
-/* 8013CB18 001396F8  90 1F 22 00 */	stw r0, 0x2200(r31)
-/* 8013CB1C 001396FC  38 03 C9 4C */	addi r0, r3, lbl_8013C94C@l
-/* 8013CB20 00139700  90 1F 21 BC */	stw r0, 0x21bc(r31)
-/* 8013CB24 00139704  48 02 E6 B5 */	bl func_8016B1D8
-/* 8013CB28 00139708  2C 03 00 00 */	cmpwi r3, 0
-/* 8013CB2C 0013970C  41 82 00 20 */	beq lbl_8013CB4C
-/* 8013CB30 00139710  88 7F 00 0C */	lbz r3, 0xc(r31)
-/* 8013CB34 00139714  48 09 84 C5 */	bl func_801D4FF8
-/* 8013CB38 00139718  2C 03 00 00 */	cmpwi r3, 0
-/* 8013CB3C 0013971C  41 82 00 10 */	beq lbl_8013CB4C
-/* 8013CB40 00139720  38 00 00 01 */	li r0, 1
-/* 8013CB44 00139724  90 1F 23 40 */	stw r0, 0x2340(r31)
-/* 8013CB48 00139728  48 00 00 0C */	b lbl_8013CB54
-lbl_8013CB4C:
-/* 8013CB4C 0013972C  38 00 00 00 */	li r0, 0
-/* 8013CB50 00139730  90 1F 23 40 */	stw r0, 0x2340(r31)
-lbl_8013CB54:
-/* 8013CB54 00139734  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8013CB58 00139738  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8013CB5C 0013973C  38 21 00 20 */	addi r1, r1, 0x20
-/* 8013CB60 00139740  7C 08 03 A6 */	mtlr r0
-/* 8013CB64 00139744  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void ftPurin_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
+{
+    ftPurin_SpecialHi_SetActionFromFacingDirection(fighter_gobj, 365, 367);
+
+    func_8006EBA4(fighter_gobj);
+    ftPurin_SpecialHi_SetVars(fighter_gobj);
+}
+
+void ftPurin_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
+{
+    ftPurin_SpecialHi_SetActionFromFacingDirection(fighter_gobj, 366, 368);
+
+    func_8006EBA4(fighter_gobj);
+    ftPurin_SpecialHi_SetVars(fighter_gobj);
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
