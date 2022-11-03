@@ -487,6 +487,4 @@ void HSD_CObjSetScissorx4();
 
 void HSD_CObjSetViewportfx4();
 
-int HSD_GetHeap(void);
-
 #endif
