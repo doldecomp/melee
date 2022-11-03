@@ -491,6 +491,4 @@ int HSD_GetHeap(void);
 
 void HSD_VIInit(HSD_VIStatus* vi_status, unk_t xfb0, unk_t xfb1, unk_t xfb2);
 
-void func_80378280(u8, int);
-
 #endif

@@ -40,6 +40,7 @@
 #include <sysdolphin/baselib/quatlib.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/robj.h>
+#include <sysdolphin/baselib/rumble.h>
 #include <sysdolphin/baselib/shadow.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/sobjlib.h>
