@@ -285,8 +285,6 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_80088510(Fighter*, u32, u8, u8);
-
 // 0x801471C8
 // https://decomp.me/scratch/QGj1l // Play Shadow Ball Charge SFX
 void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* fighter_gobj)

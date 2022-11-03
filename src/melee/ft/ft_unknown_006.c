@@ -1035,7 +1035,7 @@ lbl_800884F4:
 #pragma pop
 
 #pragma push
-asm unk_t func_80088510()
+asm void func_80088510(Fighter* fp, s32, u8, u8)
 { // clang-format off
     nofralloc
 /* 80088510 000850F0  7C 08 02 A6 */	mflr r0
