@@ -4878,3 +4878,8 @@ void lbl_80140618(void)
 {
     return;
 }
+
+void lbl_8014061C(void)
+{
+    return;
+}
