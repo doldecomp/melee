@@ -691,3 +691,52 @@ lbl_8013CEF8:
 /* 8013CF28 00139B08  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#pragma push
+asm unk_t ftPurin_SpecialAirLw_StartAction()
+{ // clang-format off
+    nofralloc
+/* 8013CF2C 00139B0C  7C 08 02 A6 */	mflr r0
+/* 8013CF30 00139B10  90 01 00 04 */	stw r0, 4(r1)
+/* 8013CF34 00139B14  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8013CF38 00139B18  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8013CF3C 00139B1C  7C 7F 1B 78 */	mr r31, r3
+/* 8013CF40 00139B20  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 8013CF44 00139B24  C0 22 A2 40 */	lfs f1, lbl_804D9C20(r2)
+/* 8013CF48 00139B28  C0 03 00 2C */	lfs f0, 0x2c(r3)
+/* 8013CF4C 00139B2C  FC 01 00 00 */	fcmpu cr0, f1, f0
+/* 8013CF50 00139B30  40 82 00 28 */	bne lbl_8013CF78
+/* 8013CF54 00139B34  C0 22 A2 44 */	lfs f1, lbl_804D9C24(r2)
+/* 8013CF58 00139B38  7F E3 FB 78 */	mr r3, r31
+/* 8013CF5C 00139B3C  C0 42 A2 48 */	lfs f2, lbl_804D9C28(r2)
+/* 8013CF60 00139B40  38 80 01 72 */	li r4, 0x172
+/* 8013CF64 00139B44  FC 60 08 90 */	fmr f3, f1
+/* 8013CF68 00139B48  38 A0 00 00 */	li r5, 0
+/* 8013CF6C 00139B4C  38 C0 00 00 */	li r6, 0
+/* 8013CF70 00139B50  4B F2 C4 3D */	bl Fighter_ActionStateChange_800693AC
+/* 8013CF74 00139B54  48 00 00 24 */	b lbl_8013CF98
+lbl_8013CF78:
+/* 8013CF78 00139B58  C0 22 A2 44 */	lfs f1, lbl_804D9C24(r2)
+/* 8013CF7C 00139B5C  7F E3 FB 78 */	mr r3, r31
+/* 8013CF80 00139B60  C0 42 A2 48 */	lfs f2, lbl_804D9C28(r2)
+/* 8013CF84 00139B64  38 80 01 74 */	li r4, 0x174
+/* 8013CF88 00139B68  FC 60 08 90 */	fmr f3, f1
+/* 8013CF8C 00139B6C  38 A0 00 00 */	li r5, 0
+/* 8013CF90 00139B70  38 C0 00 00 */	li r6, 0
+/* 8013CF94 00139B74  4B F2 C4 19 */	bl Fighter_ActionStateChange_800693AC
+lbl_8013CF98:
+/* 8013CF98 00139B78  7F E3 FB 78 */	mr r3, r31
+/* 8013CF9C 00139B7C  4B F3 1C 09 */	bl func_8006EBA4
+/* 8013CFA0 00139B80  80 9F 00 2C */	lwz r4, 0x2c(r31)
+/* 8013CFA4 00139B84  38 00 00 00 */	li r0, 0
+/* 8013CFA8 00139B88  3C 60 80 14 */	lis r3, lbl_8013CE7C@ha
+/* 8013CFAC 00139B8C  90 04 22 00 */	stw r0, 0x2200(r4)
+/* 8013CFB0 00139B90  38 03 CE 7C */	addi r0, r3, lbl_8013CE7C@l
+/* 8013CFB4 00139B94  90 04 21 BC */	stw r0, 0x21bc(r4)
+/* 8013CFB8 00139B98  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8013CFBC 00139B9C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8013CFC0 00139BA0  38 21 00 20 */	addi r1, r1, 0x20
+/* 8013CFC4 00139BA4  7C 08 03 A6 */	mtlr r0
+/* 8013CFC8 00139BA8  4E 80 00 20 */	blr 
+} // clang-format on
+#pragma pop
