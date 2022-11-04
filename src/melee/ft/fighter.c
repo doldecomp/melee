@@ -808,6 +808,8 @@ void Fighter_80068E64(HSD_GObj* fighter_gobj)
 }
 
 #include <melee/lb/lbmthp.h>
+#include <melee/ft/ftdata.h>
+
 
 static void Fighter_80068E98_Inline2(HSD_GObj* fighter_gobj)
 {

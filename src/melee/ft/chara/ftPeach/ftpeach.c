@@ -38,6 +38,8 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
 }
 
 #include <melee/lb/lbmthp.h>
+#include <melee/ft/ftdata.h>
+
 
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {

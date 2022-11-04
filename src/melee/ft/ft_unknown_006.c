@@ -13393,6 +13393,8 @@ lbl_80091E64:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftdata.h>
+
 extern f32 const lbl_804D856C;
 extern f64 const lbl_804D8570;
 extern unk_t func_8005F864();

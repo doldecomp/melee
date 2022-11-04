@@ -20,6 +20,8 @@ void ftCLink_OnDeath(HSD_GObj* gobj)
 }
 
 #include <melee/lb/lbmthp.h>
+#include <melee/ft/ftdata.h>
+
 
 void ftCLink_OnLoad(HSD_GObj* gobj)
 {

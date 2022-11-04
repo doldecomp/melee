@@ -34,6 +34,8 @@ void ftLink_OnLoadForCLink(Fighter* fp) {
 }
 
 #include <melee/lb/lbmthp.h>
+#include <melee/ft/ftdata.h>
+
 
 void ftLink_OnLoad(HSD_GObj* fighter_gobj) {
 
