@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/ftanim.h>
+
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
 void ftMars_SpecialHi_StartAction(HSD_GObj* gobj) {

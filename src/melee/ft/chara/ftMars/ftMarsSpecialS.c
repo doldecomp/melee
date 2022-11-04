@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
+#include <melee/ft/ftanim.h>
+
 // 8013741C 00133FFC
 // https://decomp.me/scratch/DLE90
 void ftMars_SpecialS_StartAction(HSD_GObj* gobj) {

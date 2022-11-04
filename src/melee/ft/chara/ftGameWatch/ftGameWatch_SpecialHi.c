@@ -113,6 +113,8 @@ inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemRescueSetup;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014E0AC
 // https://decomp.me/scratch/4Dc4b // Mr. Game & Watch's grounded Fire Rescue Action State handler
 void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj)

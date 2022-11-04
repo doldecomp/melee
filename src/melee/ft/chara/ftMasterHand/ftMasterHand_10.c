@@ -26,6 +26,8 @@ void ftMasterHand_801521D8(void)
     return;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_801521DC(HSD_GObj* fighter_gobj)
 {
     u32 unused[2];

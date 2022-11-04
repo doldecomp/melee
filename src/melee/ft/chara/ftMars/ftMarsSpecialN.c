@@ -4,6 +4,8 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/lb/lbunknown_001.h>
 
+#include <melee/ft/ftanim.h>
+
 // 80136744 00133324
 // ftMars_SpecialN
 // https://decomp.me/scratch/i9Tn0

@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/ftanim.h>
+
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action State handler
 void ftLuigi_SpecialHi_StartAction(HSD_GObj* fighter_gobj)

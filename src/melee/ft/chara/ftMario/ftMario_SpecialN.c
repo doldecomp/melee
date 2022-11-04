@@ -38,6 +38,8 @@ int ftMario_SpecialN_VitaminRandom(HSD_GObj* gobj) // Get random Megavitamin col
     return r3;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMario_SpecialN_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);

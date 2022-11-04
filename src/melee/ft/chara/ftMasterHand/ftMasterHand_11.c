@@ -5,6 +5,8 @@ void ftMasterHand_8015236C(void)
     return;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80152370(HSD_GObj* fighter_gobj)
 {
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0, 0, 0.0F, 1.0F, 0.0F);

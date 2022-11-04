@@ -59,6 +59,8 @@ void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* fighter_gobj) {
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012ADF0;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftSamus_SpecialLw_StartAction(HSD_GObj* fighter_gobj) {
     Fighter *fp = getFighter(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;

@@ -66,6 +66,8 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp) // Calculate angle from control 
     return floatVar * ((stick_y * tempAttrs->x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF) / (stickRangeMinPos - stickRangeMinNeg));
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E2B80
 // https://decomp.me/scratch/4yplr // Captain Falcon & Ganondorf's grounded Falcon/Warlock Punch Action State handler
 void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)

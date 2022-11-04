@@ -4,6 +4,8 @@
 
 #include <melee/it/itkind.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftMario_SpecialHi_StartAction(HSD_GObj* gobj) {
     Fighter* fp;
 

@@ -40,6 +40,8 @@ void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E7238
 // https://decomp.me/scratch/cW6I2 // Fox & Falco's grounded Firefox/Firebird Start Action State handler
 void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj)

@@ -2,6 +2,7 @@
 
 #include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftanim.h>
 #include <melee/ft/ftcoll.h>
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighter_gobj) {

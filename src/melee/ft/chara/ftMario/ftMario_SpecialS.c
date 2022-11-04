@@ -102,6 +102,8 @@ BOOL ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, s32 new_action_state_index) 
 {
     Fighter* fp;

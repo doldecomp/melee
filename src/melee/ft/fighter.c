@@ -1405,6 +1405,7 @@ void Fighter_8006A1BC(HSD_GObj* fighter_gobj)
 }
 
 #include <melee/cm/camera.h>
+#include <melee/ft/ftanim.h>
 
 void Fighter_8006A360(HSD_GObj* fighter_gobj)
 {

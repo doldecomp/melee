@@ -77,6 +77,8 @@ f32 return_void3(void)
     return 1.0f;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80116F94
 // https://decomp.me/scratch/xOc8Y
 void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Start Action State handler

@@ -52,6 +52,8 @@ void ftMewtwo_SpecialHi_SetEndGFX(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x801451DC
 // https://decomp.me/scratch/lXunH // Mewtwo's grounded Teleport Start Action State handler
 void ftMewtwo_SpecialHi_StartAction(HSD_GObj* fighter_gobj)

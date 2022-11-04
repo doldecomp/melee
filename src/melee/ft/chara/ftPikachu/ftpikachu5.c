@@ -126,6 +126,8 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftPikachu_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
 

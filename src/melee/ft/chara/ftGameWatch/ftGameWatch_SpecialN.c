@@ -187,6 +187,8 @@ inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_SpecialN_CreateSausage;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014E644
 // https://decomp.me/scratch/VyJIm // Mr. Game & Watch's grounded Chef Action State handler
 void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj)

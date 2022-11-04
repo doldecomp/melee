@@ -33,6 +33,8 @@ static s32 get_randi(MasterHandAttributes* ext_attr)
     return HSD_Randi(ext_attr->xE8 - ext_attr->xE4);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_801530A4(HSD_GObj* fighter_gobj)
 {
     u32 unused[2];

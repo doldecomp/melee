@@ -65,6 +65,8 @@ void ftNess_ItemPKFireSpawn(HSD_GObj* fighter_gobj) //* Ness' PK Fire spawn func
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80116C94
 // https://decomp.me/scratch/XdzmF
 void ftNess_SpecialS_StartAction(HSD_GObj* fighter_gobj) // Ness' grounded PK Fire Action State handler

@@ -22,6 +22,8 @@ void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x801461F0
 // https://decomp.me/scratch/WnODY // Mewtwo's grounded Disable Action State handler
 void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj)

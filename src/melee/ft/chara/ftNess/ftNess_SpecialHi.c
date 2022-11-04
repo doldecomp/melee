@@ -354,6 +354,8 @@ void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* fighter_gobj, CollData* coll_
     fp->nessVars[0].SpecialHi.aerialVel = atan2f(fp->x80_self_vel.y, fp->x80_self_vel.x);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80118120
 // https://decomp.me/scratch/ARLRd
 void ftNess_SpecialHi_StartAction(HSD_GObj* fighter_gobj) // Ness' grounded PK Thunder Start Action State handler

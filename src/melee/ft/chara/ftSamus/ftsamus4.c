@@ -6,6 +6,8 @@ void ftSamus_ClearThrowFlagsUnk(HSD_GObj* fighter_gobj) {
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012A074;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftSamus_SpecialS_StartAction(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighter(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);

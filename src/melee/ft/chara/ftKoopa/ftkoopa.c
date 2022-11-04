@@ -147,6 +147,8 @@ void func_80132E30(HSD_GObj *gobj) {
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj)
 {
     Fighter *fp = gobj->user_data;

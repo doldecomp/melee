@@ -10,6 +10,8 @@ static inline HSD_JObj* get_jobj(HSD_GObj* fighter_gobj)
     return fighter_gobj->hsd_obj;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80153D2C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

@@ -57,6 +57,8 @@ void ftMario_SpecialLw_SetVar(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
 }
 
+#include <melee/ft/ftanim.h>
+
 //https://decomp.me/scratch/4saR2
 void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
 {

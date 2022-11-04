@@ -144,6 +144,8 @@ inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
     fp->gameWatchVars[0].SpecialLw.turnFrames = 0;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014CEF0
 // https://decomp.me/scratch/P6t9i // Mr. Game & Watch's Oil Panic Start Action State handler
 void ftGameWatch_SpecialLw_StartAction(HSD_GObj* fighter_gobj)

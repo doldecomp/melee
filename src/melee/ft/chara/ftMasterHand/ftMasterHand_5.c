@@ -50,6 +50,8 @@ inline void ftMasterHand_80151484_inline1(HSD_GObj* fighter_gobj)
     r29_fp->x2348_stateVar3 = (s32) temp_r30->x15C;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80151484(HSD_GObj* fighter_gobj)
 {
     s32 unused[2];

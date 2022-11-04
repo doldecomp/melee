@@ -232,6 +232,8 @@ static inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* figh
         Fighter_ActionStateChange_800693AC(fighter_gobj, right_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftPurin_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     ftPurin_SpecialHi_SetActionFromFacingDirection(fighter_gobj, 365, 367);

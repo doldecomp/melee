@@ -3,6 +3,8 @@
 #include <melee/ef/ef.h>
 #include <melee/ft/code_80081B38.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);

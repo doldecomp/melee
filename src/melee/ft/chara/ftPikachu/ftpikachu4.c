@@ -18,6 +18,8 @@ void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighter_gobj) {
     fp->x234C_pos.y = fp->x2C_facing_direction * fabs_inline(fp->x234C_pos.y);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighter_gobj) {
     s32 unused[2]; 
     ftPikachuAttributes* pika_attr;

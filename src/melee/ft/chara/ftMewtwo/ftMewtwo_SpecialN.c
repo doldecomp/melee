@@ -348,6 +348,8 @@ inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* fighter_gobj)
     fp->cb.x21E8_callback_OnDeath3 = ftMewtwo_OnDeath2;
 }
 
+#include <melee/ft/ftanim.h>
+
 inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* fighter_gobj)
 
 {

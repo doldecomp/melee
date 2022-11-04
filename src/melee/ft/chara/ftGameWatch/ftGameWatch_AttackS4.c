@@ -93,6 +93,8 @@ BOOL ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014AA10 
 // https://decomp.me/scratch/GDWNx // Mr. Game & Watch's Forward Smash Action State handler
 void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)

@@ -25,8 +25,12 @@ inline void ftCaptain_SpecialS_SetCall(HSD_GObj* fighter_gobj)
     fp->cb.x21E4_callback_OnDeath2 = &lbl_800E28C8;
 }
 
-// 0x800E32B0
-// https://decomp.me/scratch/uyovM // Captain Falcon & Ganondorf's grounded Raptor Boost/Gerudo Dragon Start Action State handler
+#include <melee/ft/ftanim.h>
+
+/*
+ * Captain Falcon & Ganondorf's grounded Raptor Boost/Gerudo Dragon
+ * start action state handler.
+ */
 void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);

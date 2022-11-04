@@ -556,6 +556,8 @@ void ftNess_YoyoItemSetUnk2(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80115BB0
 // https://decomp.me/scratch/s5VL2
 void ftNess_AttackHi4_Action(HSD_GObj* fighter_gobj) // Ness' Up Smash Action State handler

@@ -4,6 +4,8 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftPikachu_SpecialN_StartAction(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);

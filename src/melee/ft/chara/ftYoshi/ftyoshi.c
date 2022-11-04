@@ -267,6 +267,8 @@ void func_8012BE3C(HSD_GObj* fighter_gobj) {
     efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
 }
 
+#include <melee/ft/ftanim.h>
+
 extern f32 lbl_804D9A2C;
 extern f32 lbl_804D9A28;
 extern void func_80091D58();

@@ -155,6 +155,8 @@ BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
     return FALSE;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014C07C
 // https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Action State handler
 void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)

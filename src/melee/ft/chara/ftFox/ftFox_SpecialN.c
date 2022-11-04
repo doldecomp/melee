@@ -216,6 +216,8 @@ inline void ftFox_SpecialN_SetCall(HSD_GObj* fighter_gobj)
     fp->cb.x21E4_callback_OnDeath2 = func_800E5588;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E608C
 // https://decomp.me/scratch/B3aTL // Fox & Falco's grounded Blaster Action State handler
 void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)

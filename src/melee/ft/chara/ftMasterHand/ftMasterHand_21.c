@@ -5,6 +5,8 @@ void ftMasterHand_801541C4(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_801541C8(HSD_GObj* fighter_gobj, GObjCallback callback)
 {
     Fighter* fp = fighter_gobj->user_data;

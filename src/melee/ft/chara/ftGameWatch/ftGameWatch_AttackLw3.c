@@ -120,6 +120,8 @@ BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014ADB8
 // https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Action State Handler
 void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)

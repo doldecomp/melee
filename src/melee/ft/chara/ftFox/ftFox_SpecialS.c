@@ -55,6 +55,8 @@ f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* fighter_gobj, s32 index)
     return getFighter(fighter_gobj)->foxVars[0].SpecialS.blendFrames[index];
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E9EE8
 // https://decomp.me/scratch/7sYVM // Fox & Falco's grounded Illusion/Phantasm Start Action State handler
 void ftFox_SpecialS_StartAction(HSD_GObj* fighter_gobj)

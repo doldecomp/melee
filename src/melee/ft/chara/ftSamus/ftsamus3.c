@@ -94,6 +94,8 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj) {
     Vec* self_vel;
     Fighter* fp = getFighter(fighter_gobj);

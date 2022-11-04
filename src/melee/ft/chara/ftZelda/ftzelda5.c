@@ -3,6 +3,8 @@
 #include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/ftanim.h>
+
 // 8013B638 - 8013B6D8 (0xA0 bytes)
 // https://decomp.me/scratch/QnXK1
 void ftZelda_SpecialS_StartAction(HSD_GObj* fighter_gobj) {

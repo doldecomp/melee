@@ -40,6 +40,8 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     fp->luigiVars[0].SpecialS.isMisfire = FALSE;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80142B14
 // https://decomp.me/scratch/6eTeE // Luigi's grounded Green Missile Action State handler
 void ftLuigi_SpecialS_StartAction(HSD_GObj* fighter_gobj)

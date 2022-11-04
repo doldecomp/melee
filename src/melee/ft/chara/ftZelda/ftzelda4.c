@@ -73,6 +73,8 @@ void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
 }
 
+#include <melee/ft/ftanim.h>
+
 // Zelda_AS_355_Transform_Grounded
 // 8013AEE0 - 8013AFA4 (0xC4 bytes)
 // https://decomp.me/scratch/jZJgg (with helper)

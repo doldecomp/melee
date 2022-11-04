@@ -42,6 +42,8 @@ inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* fighter_gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x801445F0
 // https://decomp.me/scratch/ // Luigi's grounded Cyclone Action State handler
 void ftLuigi_SpecialLw_StartAction(HSD_GObj* fighter_gobj)

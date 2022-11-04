@@ -73,6 +73,8 @@ inline void ftSamus_80128B1C_inner(HSD_GObj* fighter_gobj, f32 angle)
     func_8007D440(fp, ftAttr->x17C_AerialDriftMax * samus_attr->x10);
 }
 
+#include <melee/ft/ftanim.h>
+
 static void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32 arg9, f32 argA)
 {
     Fighter* fp;

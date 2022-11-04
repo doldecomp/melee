@@ -29,6 +29,8 @@ inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x801466C4
 // https://decomp.me/scratch/X6OTU // Mewtwo's grounded Confusion Action State handler
 void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)

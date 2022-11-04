@@ -4,6 +4,8 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/lb/lbunknown_001.h>
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014267C
 // https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Action State handler
 void ftLuigi_SpecialN_StartAction(HSD_GObj* fighter_gobj)

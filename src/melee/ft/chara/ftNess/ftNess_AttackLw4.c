@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftNess/__ftNess.h>
 
+#include <melee/ft/ftanim.h>
+
 // Ness' down smash action state handler
 void ftNess_AttackLw4_Action(HSD_GObj* fighter_gobj)
 {

@@ -2,6 +2,8 @@
 
 #include <melee/ef/ef.h>
 
+#include <melee/ft/ftanim.h>
+
 // 0x80119E14
 // https://decomp.me/scratch/LwTKg
 void ftNess_SpecialLwStart_Action(HSD_GObj* fighter_gobj) // Ness' grounded PSI Magnet Start Action State handler
