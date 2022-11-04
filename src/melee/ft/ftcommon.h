@@ -87,7 +87,7 @@ void func_8007ED50(Fighter* fp, s32 percent_temp);
 void func_8007EE0C(Fighter* fp, s32);
 void func_8007EEC8(Fighter* fp, s32, s32);
 void func_8007EF5C(Fighter* fp, s32);
-void func_8007EFC0(Fighter* fp, u32 val);
+void func_8007EFC0(Fighter* fp, u32 value);
 void func_8007EFC8(HSD_GObj* fighter_gobj, void (*)(HSD_GObj* fighter_gobj));
 void func_8007F578(HSD_GObj* fighter_gobj);
 void func_8007F5CC(HSD_GObj* fighter_gobj, s32);
