@@ -15,5 +15,6 @@ void func_8003FFDC(u8, s32, u8, s32, s32);
 void func_80040048(u8, s32);
 void func_80040330();
 void func_80040B8C();
+void func_800411C4();
 
 #endif
