@@ -795,6 +795,8 @@ void Fighter_80068E64(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/lb/lbmthp.h>
+
 static void Fighter_80068E98_Inline2(HSD_GObj *fighter_gobj) {
     Fighter *fp = getFighter(fighter_gobj); // you cant do (void*) here to make it consistent, Fighter_80068E98 wont match
     if (fp->x2229_b5_no_normal_motion == 0) {

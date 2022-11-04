@@ -36,6 +36,7 @@ void func_8010D96C(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/lb/lbmthp.h>
 
 void ftDonkey_OnLoad(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;

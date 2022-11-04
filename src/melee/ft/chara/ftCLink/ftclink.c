@@ -18,6 +18,8 @@ void ftCLink_OnDeath(HSD_GObj* gobj)
     fp->sa.clink.x2244 = 0;
 }
 
+#include <melee/lb/lbmthp.h>
+
 void ftCLink_OnLoad(HSD_GObj* gobj)
 {
     int unused[2];

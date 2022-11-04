@@ -35,6 +35,8 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
     }
 }
 
+#include <melee/lb/lbmthp.h>
+
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
