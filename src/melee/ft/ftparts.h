@@ -5,6 +5,7 @@
 
 typedef struct _HSD_ObjAllocData HSD_ObjAllocData;
 typedef struct _HSD_JObj HSD_JObj;
+typedef struct _Fighter Fighter;
 
 unk_t func_8007506C();
 extern HSD_ObjAllocData lbl_80459080;
@@ -16,5 +17,6 @@ void func_800743E0(HSD_GObj* fighter_gobj);
 void func_800749CC(HSD_GObj* fighter_gobj);
 void func_80074A4C(HSD_GObj* fighter_gobj, u32, s32);
 void func_80074A8C(HSD_GObj* fighter_gobj);
+void func_80074E58(Fighter* fp);
 
 #endif
