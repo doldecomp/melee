@@ -254,6 +254,7 @@ func_8012BDA0:
 
 #include <melee/ef/efasync.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/ft_unknown_006.h>
 
 
 void func_8012BE3C(HSD_GObj* fighter_gobj) {
