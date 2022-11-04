@@ -331,8 +331,6 @@ void func_800DE508(HSD_GObj *);
 
 void func_800DE7C0(HSD_GObj *, s32, s32);
 
-void func_800DEEA8(HSD_GObj *fighter_gobj);
-
 void ftFox_LoadSpecialAttrs(HSD_GObj *);
 
 void ftFox_RemoveBlaster(HSD_GObj *);
