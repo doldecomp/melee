@@ -347,7 +347,6 @@ void func_800F1D24();
 void func_800F5BA4();
 void func_800F5C34();
 
-void ftMars_OnLoadForRoy(Fighter *);
 void ftMars_LoadSpecialAttrs(HSD_GObj *);
 
 void func_80149268(HSD_GObj *);
