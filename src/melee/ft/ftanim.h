@@ -4,6 +4,7 @@
 #include <ctypes.h>
 
 typedef struct _HSD_GObj HSD_GObj;
+typedef struct _HSD_JObj HSD_JObj;
 
 unk_t func_8006EED4();
 unk_t func_80070734();
@@ -19,5 +20,6 @@ void func_8006FE48(HSD_GObj* fighter_gobj);
 void func_80070308(HSD_GObj* fighter_gobj);
 void func_800704F0(HSD_GObj* fighter_gobj, s32, f32);
 void func_80070654(HSD_GObj* fighter_gobj);
+void func_80070758(HSD_JObj* jobj);
 
 #endif
