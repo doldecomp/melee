@@ -97,6 +97,8 @@ void ftMasterHand_80152E24(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <melee/lb/lbaudio_ax.h>
+
 static void ftMasterHand_80152E28(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -125,8 +127,6 @@ static void ftMasterHand_80152E28(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 0;
     }
 }
-
-#include <melee/lb/lbaudio_ax.h>
 
 static void ftMasterHand_80152F80(HSD_GObj* fighter_gobj)
 {

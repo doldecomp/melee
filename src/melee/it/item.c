@@ -2540,8 +2540,8 @@ u32 func_8026AE60(void) // Increment something
 
 extern u32 func_800233EC(s32);
 
-// 0x8026AE84
-// https://decomp.me/scratch/zBNtM
+#include <melee/lb/lbaudio_ax.h>
+
 void func_8026AE84(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX
 {
     s32 sfxID_new;
@@ -2557,8 +2557,6 @@ void func_8026AE84(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item S
         item_data->xD6C = func_800237A8(0x83D60U, (u32)pan, (u32)volume);
     }
 }
-
-#include <melee/lb/lbaudio_ax.h>
 
 void func_8026AF0C(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX 2
 {

@@ -5,5 +5,6 @@
 
 unk_t func_80024304();
 void func_800236B8(s32);
+u32 func_800237A8(u32, u32, u32);
 
 #endif

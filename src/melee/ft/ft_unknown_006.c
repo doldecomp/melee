@@ -746,6 +746,8 @@ void func_80088110(Fighter* fp)
 
 extern unk_t func_80024B94();
 
+#include <melee/lb/lbaudio_ax.h>
+
 #pragma push
 asm void func_80088148(Fighter*, u32, u32, u32)
 { // clang-format off

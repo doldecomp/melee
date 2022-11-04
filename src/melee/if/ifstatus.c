@@ -2646,6 +2646,8 @@ void func_802F6E3C(s32 player_num)
     func_802FB6AC(player_num);
 }
 
+#include <melee/lb/lbaudio_ax.h>
+
 extern Thing_803F9628 lbl_803F9628;
 extern f64 lbl_804DDAA8;
 extern unk_t func_80011C18();
