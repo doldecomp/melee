@@ -366,8 +366,7 @@ void ftNess_SpecialHiTakeDamage(HSD_GObj *);
 
 void ftPikachu_LoadSpecialAttrs(HSD_GObj *);
 
-f32 ftSamus_80128AC8(HSD_GObj *fighter_gobj, f32 farg1, f32 farg2);
-void ftSamus_80128B1C(HSD_GObj *, f32, f32, f32);
+f32 ftSamus_80128AC8(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2);
 
 void ftMars_OnLoadForRoy(Fighter *);
 void ftMars_LoadSpecialAttrs(HSD_GObj *);
