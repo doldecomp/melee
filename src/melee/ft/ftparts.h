@@ -11,5 +11,6 @@ extern HSD_ObjAllocData lbl_80459080;
 void func_80074B0C(HSD_GObj* fighter_gobj, s32, s32);
 void func_80074148(void);
 void func_80073758(HSD_JObj* jobj);
+void func_80074170(void);
 
 #endif
