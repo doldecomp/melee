@@ -58,5 +58,6 @@ void func_801C95C4(HSD_GObj* map_gobj);
 void func_801C5AA4(BOOL);
 void func_801C42AC(void);
 s32 func_801C4210(void);
+void func_801C3BB4(void);
 
 #endif
