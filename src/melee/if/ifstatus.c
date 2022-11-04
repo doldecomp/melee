@@ -95,6 +95,8 @@ inline void jobj_flagCheckSetMtxDirtySub(HSD_JObj* jobj) // jobj @ r30 when inli
 inline void jobj_translate_x(HSD_JObj* jobj, f32 dx);
 inline void jobj_translate_y(HSD_JObj* jobj, f32 dy);
 
+#include <sysdolphin/baselib/mtx.h>
+
 inline void jobj_unk_x(UnkX* value, s32 i)
 {
     HSD_JObj* jobj_r30 = value->x54_jobj[i];
@@ -1745,6 +1747,9 @@ lbl_802F5EB0:
 /* 802F5EBC 002F2A9C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 extern unk_t func_802F3424();
 

@@ -1,13 +1,15 @@
 #ifndef _functions_h_
 #define _functions_h_
 
-#include <dolphin/types.h>
-#include <sysdolphin/sysdolphin.h>
+#include <ctypes.h>
 
 typedef struct _CameraBox CameraBox;
 typedef struct _CollData CollData;
 typedef struct _Hitbox Hitbox;
 typedef struct _Fighter Fighter;
+typedef struct _HSD_GObj HSD_GObj;
+typedef struct _HSD_JObj HSD_JObj;
+typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/lb/lbunknown_003"
 void func_8001044C(unk_t, unk_t, s32, f32, s32, s32, s32, s32);

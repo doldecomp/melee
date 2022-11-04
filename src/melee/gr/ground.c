@@ -822,6 +822,8 @@ HSD_JObj* func_801C13D0(s32 arg0, s32 depth)
     return result;
 }
 
+#include <sysdolphin/baselib/gobjplink.h>
+
 char lbl_804D44F8[8] = "archive";
 extern HSD_Joint lbl_803B7E0C;
 extern u8 lbl_804D784B[5];
@@ -831,6 +833,7 @@ extern void PSMTXIdentity();
 extern void func_8000F9F8();
 extern void func_80013B14();
 extern void HSD_JObjAddNext();
+
 asm struct _HSD_GObj* func_801C14D0(s32)
 {
     nofralloc

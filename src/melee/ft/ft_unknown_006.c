@@ -31444,6 +31444,8 @@ asm unk_t lbl_8009F480()
 } // clang-format on
 #pragma pop
 
+#include <sysdolphin/baselib/gobjproc.h>
+
 extern unk_t lbl_804D6568;
 extern unk_t lbl_804D656C;
 extern unk_t lbl_8009F54C();
