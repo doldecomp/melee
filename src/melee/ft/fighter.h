@@ -2075,6 +2075,8 @@ static inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bo
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 static inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1)
 {
     func_800704F0(gobj, arg1, 3.0F);

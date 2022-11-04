@@ -17,5 +17,7 @@ BOOL ftAnim_IsFramesRemaining(HSD_GObj* fighter_gobj);
 f32 func_8006F484(HSD_GObj* fighter_gobj);
 void func_8006FE48(HSD_GObj* fighter_gobj);
 void func_80070308(HSD_GObj* fighter_gobj);
+void func_800704F0(HSD_GObj* fighter_gobj, s32, f32);
+void func_80070654(HSD_GObj* fighter_gobj);
 
 #endif
