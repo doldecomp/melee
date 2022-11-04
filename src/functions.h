@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/ft/ftanim"
-void ftAnim_ApplyPartAnim(HSD_GObj*, s32, s32, f32);
 void func_80070C48(HSD_GObj*, s32);
 void func_80070CC4(HSD_GObj*, s32);
 void func_80070E74();
