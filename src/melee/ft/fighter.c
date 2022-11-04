@@ -2677,6 +2677,8 @@ void Fighter_8006D10C(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/pl/pl_unknown_001.h>
+
 void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     BOOL bool1 = 0;
