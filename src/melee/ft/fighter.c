@@ -819,6 +819,7 @@ static void Fighter_80068E98_Inline2(HSD_GObj* fighter_gobj)
 
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftanim.h>
 
 HSD_GObj* Fighter_80068E98(struct S_TEMP1* input)
 {

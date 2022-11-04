@@ -15,5 +15,6 @@ void func_8006F0FC(HSD_GObj* fighter_gobj, f32);
 void ftAnim_SetAnimRate(HSD_GObj* fighter_gobj, f32);
 BOOL ftAnim_IsFramesRemaining(HSD_GObj* fighter_gobj);
 f32 func_8006F484(HSD_GObj* fighter_gobj);
+void func_8006FE48(HSD_GObj* fighter_gobj);
 
 #endif
