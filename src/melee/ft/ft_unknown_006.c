@@ -25257,6 +25257,8 @@ void func_8009ACA4(void)
     return;
 }
 
+#include <melee/mp/mplib.h>
+
 #pragma push
 asm unk_t func_8009ACA8()
 { // clang-format off

@@ -4,8 +4,7 @@
 #include <dolphin/mtx/types.h>
 
 unk_t func_80054F68();
-unk_t func_80054ED8();
-unk_t func_80054ED8();
+BOOL func_80054ED8(s32 ledge_id);
 unk_t func_80056B34();
 unk_t func_80056AC4();
 unk_t func_80056A54();
@@ -22,5 +21,6 @@ unk_t func_80052508();
 unk_t func_800524DC();
 s32 func_80051EC8(Vec*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
 unk_t func_800569EC();
+void func_80053DA4(u32, f32*);
 
 #endif

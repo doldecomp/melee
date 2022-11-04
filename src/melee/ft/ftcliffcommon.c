@@ -36,6 +36,8 @@ typedef struct _UnkParameterStruct {
     u8 data_filler_1[0x1];
 } UnkParameterStruct;
 
+#include <melee/mp/mplib.h>
+
 void func_80081370(HSD_GObj* gobj) {
     f32 facingDirection;
     f32 ledgeDirection;
