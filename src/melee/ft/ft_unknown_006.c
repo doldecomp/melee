@@ -358,7 +358,7 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
 {
     s32 sp18;
     s32 sp14;
-    enum FighterKind ftKind;
+    FighterKind ftKind;
     s32 var_r30;
     s32 sfx_id;
     int new_var;
@@ -14707,7 +14707,7 @@ lbl_80092EC0:
 #pragma pop
 
 #pragma push
-asm f32 func_80092ED8(s32, ftLinkAttributes*, f32)
+asm f32 func_80092ED8(s32, ftCLinkAttributes*, f32)
 { // clang-format off
     nofralloc
 /* 80092ED8 0008FAB8  94 21 FF E8 */	stwu r1, -0x18(r1)

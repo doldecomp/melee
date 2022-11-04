@@ -122,9 +122,4 @@ struct r13_ColAnimStruct
     u8 x7_unk;
 };
 
-typedef enum GroundOrAir {
-    GA_Ground,
-    GA_Air,
-} GroundOrAir;
-
 #endif

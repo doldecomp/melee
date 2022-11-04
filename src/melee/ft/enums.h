@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_ENUMS_H
 #define MELEE_FT_ENUMS_H
 
-typedef enum FighterKind {
+typedef enum _FighterKind {
     FTKIND_MARIO,
     FTKIND_FOX,
     FTKIND_CAPTAIN,
@@ -38,7 +38,7 @@ typedef enum FighterKind {
     FTKIND_NONE
 } FighterKind;
 
-typedef enum CharacterKind {
+typedef enum _CharacterKind {
     CKIND_CAPTAIN,   // Captain Falcon (Captain)
     CKIND_DONKEY,    // Donkey Kong (Donkey)
     CKIND_FOX,       // Fox
@@ -74,5 +74,10 @@ typedef enum CharacterKind {
     CHKIND_POPO,     // Popo
     CHKIND_NONE      // None
 } CharacterKind;
+
+typedef enum _GroundOrAir {
+    GA_Ground,
+    GA_Air,
+} GroundOrAir;
 
 #endif

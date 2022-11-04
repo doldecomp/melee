@@ -1,13 +1,17 @@
-#ifndef _ftunk006_h_
-#define _ftunk006_h_
+#ifndef MELEE_FT_FT_UNKNOWN_006_H
+#define MELEE_FT_FT_UNKNOWN_006_H
 
-#include <dolphin/types.h>
+#include <ctypes.h>
+#include <melee/ft/enums.h>
 
-#include <melee/ft/chara/ftLink/ftlink.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include <melee/ft/ftcommon.h>
 
 #include <common_structs.h>
 #include <melee/ft/fighter.h>
+
+typedef struct _ftCLinkAttributes ftCLinkAttributes;
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1);
@@ -101,7 +105,7 @@ void func_800928CC(HSD_GObj* fighter_gobj);
 BOOL func_8009917C(HSD_GObj* fighter_gobj);
 unk_t func_80092BE8();
 void func_80092BCC(HSD_GObj* fighter_gobj);
-f32 func_80092ED8(s32, ftLinkAttributes*, f32);
+f32 func_80092ED8(s32, ftCLinkAttributes*, f32);
 unk_t func_80093240();
 unk_t func_800932DC();
 unk_t func_80093BC0();
@@ -208,5 +212,6 @@ void func_800D5AEC(HSD_GObj* fighter_gobj, s32 action_state, BOOL, BOOL, Fighter
 void func_800D5CB0(HSD_GObj* fighter_gobj, BOOL, f32 landing_lag);
 BOOL func_800D67C4(Fighter* fp);
 BOOL func_800D688C(Fighter* fp);
+BOOL func_800D6928(Fighter* fp);
 
 #endif
