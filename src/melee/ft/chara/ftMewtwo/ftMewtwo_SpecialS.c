@@ -232,7 +232,7 @@ void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj)
     switch (reflectFlag)
     {
     case CONFUSION_REFLECT_ON:
-        ftColl_CreateReflectHit(fighter_gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION, ftMewtwo_SpecialS_OnReflect); // Really? A callback that simply returns instead of just NULL? //
+        ftColl_CreateReflectHit(fighter_gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION, ftMewtwo_SpecialS_OnReflect); // Really? A callback that simply returns instead of just NULL?
         fp->x2218_flag.bits.b4 = 1; // Here it is... the reason Confusion cannot change ownership.
         fp->mewtwoVars[0].SpecialS.isConfusionReflect = TRUE;
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;

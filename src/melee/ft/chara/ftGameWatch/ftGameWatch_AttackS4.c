@@ -4,8 +4,8 @@
 
 extern HSD_GObj* func_802C68F8(HSD_GObj*, Vec3*, s32, f32);
 
-// 0x8014A848 //
-// https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up callbacks //
+// 0x8014A848
+// https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up callbacks
 void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
@@ -32,7 +32,7 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014A904
-// https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch //
+// https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch
 void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -42,8 +42,8 @@ void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
 
 extern void func_802C6A2C(HSD_GObj*);
 
-// 0x8014A938 //
-// https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch //
+// 0x8014A938
+// https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch
 void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);

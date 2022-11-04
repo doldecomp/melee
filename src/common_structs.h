@@ -21,7 +21,7 @@
 
 // COLLISION FLAGS
 
-#define MPCOLL_GRPUSH 0x8000 // From Ness's Yo-Yo collision check
+#define MPCOLL_GRPUSH 0x8000 // From Ness' Yo-Yo collision check
 #define MPCOLL_LEFTWALL 0xFC0
 #define MPCOLL_RIGHTWALL 0x3F
 #define MPCOLL_CEIL 0x6000

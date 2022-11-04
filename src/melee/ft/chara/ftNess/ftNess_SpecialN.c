@@ -1,11 +1,11 @@
-#include <melee/ft/chara/ftNess/ftNess.h>
+#include <melee/ft/chara/ftNess/__ftNess.h>
 
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/lb/lbunknown_001.h>
 
-// 0x80116EBC //
-// https://decomp.me/scratch/45pKw //
-BOOL ftNess_CheckSpecialNHold(HSD_GObj* fighter_gobj) // Ness PK Flash Charge ASID check //
+// 0x80116EBC
+// https://decomp.me/scratch/45pKw
+BOOL ftNess_CheckSpecialNHold(HSD_GObj* fighter_gobj) // Ness PK Flash Charge ASID check
 {
     Fighter* fp;
     s32 ASID;
@@ -28,9 +28,9 @@ BOOL ftNess_CheckSpecialNHold(HSD_GObj* fighter_gobj) // Ness PK Flash Charge AS
     return FALSE;
 }
 
-// 0x80116F00 //
-// https://decomp.me/scratch/84rSJ //
-void ftNess_SpecialNSetNULL(HSD_GObj* fighter_gobj) // Clear Ness's callbacks and PK Flash's item GObj pointer //
+// 0x80116F00
+// https://decomp.me/scratch/84rSJ
+void ftNess_SpecialNSetNULL(HSD_GObj* fighter_gobj) // Clear Ness' callbacks and PK Flash's item GObj pointer
 {
     Fighter* fp;
 
@@ -51,9 +51,9 @@ void ftNess_SpecialNSetNULL(HSD_GObj* fighter_gobj) // Clear Ness's callbacks an
 
 extern void func_802AAA50(HSD_GObj*);
 
-// 0x80116F38 //
-// https://decomp.me/scratch/HJkeV //
-void ftNess_ItemPKFlushSetNULL(HSD_GObj* fighter_gobj)  // Clear PK Flash's owner GObj pointer, Ness's pointer to PK Flash's item GObj, and reset callbacks //
+// 0x80116F38
+// https://decomp.me/scratch/HJkeV
+void ftNess_ItemPKFlushSetNULL(HSD_GObj* fighter_gobj) // Clear PK Flash's owner GObj pointer, Ness' pointer to PK Flash's item GObj, and reset callbacks
 {
     Fighter* fp;
 
@@ -73,7 +73,7 @@ void ftNess_ItemPKFlushSetNULL(HSD_GObj* fighter_gobj)  // Clear PK Flash's owne
     }
 }
 
-f32 return_void(void)   // Define float order for match //
+f32 return_void(void) // Define float order for match
 {
     return 0.0f;
 }
@@ -88,9 +88,9 @@ f32 return_void3(void)
     return 1.0f;
 }
 
-// 0x80116F94 //
-// https://decomp.me/scratch/xOc8Y //
-void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK Flash Start Action State handler //
+// 0x80116F94
+// https://decomp.me/scratch/xOc8Y
+void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Start Action State handler
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -119,9 +119,9 @@ void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK 
     func_8006EBA4(fighter_gobj);
 }
 
-// 0x80117034 //
+// 0x80117034
 // https://decomp.me/scratch/ZjUdo
-void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK Flash Start Action State handler //
+void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Start Action State handler
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -156,9 +156,9 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK
 
 extern HSD_GObj* func_802AA8C0(HSD_GObj*, Vec3*, s32, f32);
 
-// 0x801170DC //
-// https://decomp.me/scratch/JhiVu // 
-void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Start Animation callback //
+// 0x801170DC
+// https://decomp.me/scratch/JhiVu
+void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Start Animation callback
 {
     Vec3 sp28;
     void (*cb_OnDeath2)(HSD_GObj*);
@@ -195,9 +195,9 @@ void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Fla
 extern HSD_GObj* func_802AA7E4(HSD_GObj*);
 extern s32 func_802AA7F0(HSD_GObj*);
 
-// 0x801171BC //
-// https://decomp.me/scratch/W8wUK //
-void ftNess_SpecialNHold_Anim(HSD_GObj* fighter_gobj)   // Ness's grounded PK Flash Charge Animation callback //
+// 0x801171BC
+// https://decomp.me/scratch/W8wUK
+void ftNess_SpecialNHold_Anim(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Charge Animation callback
 {
     Fighter* fp;
 
@@ -239,7 +239,7 @@ void ftNess_SpecialNHold_Anim(HSD_GObj* fighter_gobj)   // Ness's grounded PK Fl
     }
 }
 
-inline void SetPKFlashAttr(HSD_GObj* fighter_gobj) // Inline to set all variables and match ASM register data //
+inline void SetPKFlashAttr(HSD_GObj* fighter_gobj) // Inline to set all variables and match ASM register data
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
@@ -253,9 +253,9 @@ inline void SetPKFlashAttr(HSD_GObj* fighter_gobj) // Inline to set all variable
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-// 0x801172F0 //
-// https://decomp.me/scratch/SxwKV //
-void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)   // Ness's grounded PK Flash Release Animation callback //
+// 0x801172F0
+// https://decomp.me/scratch/SxwKV
+void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Release Animation callback
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
 
@@ -267,9 +267,9 @@ void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)   // Ness's grounded PK Fla
     }
 }
 
-// 0x80117378 //
-// https://decomp.me/scratch/YNAD8 //
-void ftNess_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Start Animation callback //
+// 0x80117378
+// https://decomp.me/scratch/YNAD8
+void ftNess_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Start Animation callback
 {
     Vec3 sp28;
     void (*cb_OnDeath2)(HSD_GObj*);
@@ -303,9 +303,9 @@ void ftNess_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
     }
 }
 
-// 0x80117458 //
-// https://decomp.me/scratch/L7e33 //
-void ftNess_SpecialAirNHold_Anim(HSD_GObj* fighter_gobj)   // Ness's aerial PK Flash Charge Animation callback //
+// 0x80117458
+// https://decomp.me/scratch/L7e33
+void ftNess_SpecialAirNHold_Anim(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Charge Animation callback
 {
     Fighter* fp = fighter_gobj->user_data;
     
@@ -346,9 +346,9 @@ void ftNess_SpecialAirNHold_Anim(HSD_GObj* fighter_gobj)   // Ness's aerial PK F
     }
 }
 
-// 0x8011758C //
-// https://decomp.me/scratch/tSQAQ //
-void ftNess_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Release Animation callback //
+// 0x8011758C
+// https://decomp.me/scratch/tSQAQ
+void ftNess_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Release Animation callback
 {
     Fighter* fp = fighter_gobj->user_data;
     ftNessAttributes* ness_attr = getFtSpecialAttrs(fp);
@@ -369,16 +369,16 @@ void ftNess_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Flas
     }
 }
 
-// 0x80117648 //
-// https://decomp.me/scratch/z6MCh //
-void ftNess_SpecialNStart_IASA(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Start IASA callback //
+// 0x80117648
+// https://decomp.me/scratch/z6MCh
+void ftNess_SpecialNStart_IASA(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Start IASA callback
 {
     return;
 }
 
-// 0x8011764C //
-// https://decomp.me/scratch/4Za9q //
-void ftNess_SpecialNHold_IASA(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Charge IASA callback //
+// 0x8011764C
+// https://decomp.me/scratch/4Za9q
+void ftNess_SpecialNHold_IASA(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Charge IASA callback
 {
     HSD_GObj* flash_GObj;
     Fighter* fp;
@@ -410,23 +410,23 @@ void ftNess_SpecialNHold_IASA(HSD_GObj* fighter_gobj) // Ness's grounded PK Flas
     }
 }
 
-// 0x801176C8 //
-// https://decomp.me/scratch/GikiI //
-void ftNess_SpecialNEnd_IASA(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Release IASA callback //
+// 0x801176C8
+// https://decomp.me/scratch/GikiI
+void ftNess_SpecialNEnd_IASA(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Release IASA callback
 {
     return;
 }
 
-// 0x801176CC //
-// https://decomp.me/scratch/3Ea5R //
-void ftNess_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Start IASA callback //
+// 0x801176CC
+// https://decomp.me/scratch/3Ea5R
+void ftNess_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Start IASA callback
 {
     return;
 }
 
-// 0x801176D0 //
-// https://decomp.me/scratch/5oIpZ //
-void ftNess_SpecialAirNHold_IASA(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Charge IASA callback //
+// 0x801176D0
+// https://decomp.me/scratch/5oIpZ
+void ftNess_SpecialAirNHold_IASA(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Charge IASA callback
 {
     HSD_GObj* flash_GObj;
     Fighter* fp;
@@ -458,14 +458,14 @@ void ftNess_SpecialAirNHold_IASA(HSD_GObj* fighter_gobj) // Ness's aerial PK Fla
     }
 }
 
-// 0x8011774C //
-// https://decomp.me/scratch/zCYgB //
-void ftNess_SpecialAirNEnd_IASA(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Release IASA callback //
+// 0x8011774C
+// https://decomp.me/scratch/zCYgB
+void ftNess_SpecialAirNEnd_IASA(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Release IASA callback
 {
     return;
 }
 
-inline void GravityDelay(HSD_GObj* fighter_gobj) // Inline to set remaining frames of gravity delay //
+inline void GravityDelay(HSD_GObj* fighter_gobj) // Inline to set remaining frames of gravity delay
 {
     Fighter* fp = fighter_gobj->user_data;
     
@@ -475,31 +475,31 @@ inline void GravityDelay(HSD_GObj* fighter_gobj) // Inline to set remaining fram
     }
 }
 
-// 0x80117750 //
-// https://decomp.me/scratch/YCEpR //
-void ftNess_SpecialNStart_Phys(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Start Physics callback //
+// 0x80117750
+// https://decomp.me/scratch/YCEpR
+void ftNess_SpecialNStart_Phys(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Start Physics callback
 {
     GravityDelay(fighter_gobj);
     func_80084F3C(fighter_gobj);
 }
 
-// 0x80117788 //
-// https://decomp.me/scratch/ukjDF //
-void ftNess_SpecialNHold_Phys(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Charge Physics callback //
+// 0x80117788
+// https://decomp.me/scratch/ukjDF
+void ftNess_SpecialNHold_Phys(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Charge Physics callback
 {
     func_80084F3C(fighter_gobj);
 }
 
-// 0x801177A8 //
-// https://decomp.me/scratch/jSr9q //
-void ftNess_SpecialNEnd_Phys(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Release Physics callback //
+// 0x801177A8
+// https://decomp.me/scratch/jSr9q
+void ftNess_SpecialNEnd_Phys(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Release Physics callback
 {
     func_80084F3C(fighter_gobj);
 }
 
-// 0x801177C8 //
-// https://decomp.me/scratch/pIHN2 //
-void ftNess_SpecialAirNStart_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Start Physics callback //
+// 0x801177C8
+// https://decomp.me/scratch/pIHN2
+void ftNess_SpecialAirNStart_Phys(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Start Physics callback
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
@@ -517,9 +517,9 @@ void ftNess_SpecialAirNStart_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
     func_8007CE94(fp, airFriction);
 }
 
-// 0x80117828 //
-// https://decomp.me/scratch/y7fPm //
-void ftNess_SpecialAirNHold_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Charge Physics callback //
+// 0x80117828
+// https://decomp.me/scratch/y7fPm
+void ftNess_SpecialAirNHold_Phys(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Charge Physics callback
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
@@ -537,9 +537,9 @@ void ftNess_SpecialAirNHold_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Fla
     func_8007CE94(fp, airFriction);
 }
 
-// 0x80117888 //
-// https://decomp.me/scratch/J7MZG //
-void ftNess_SpecialAirNEnd_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Release Physics callback //
+// 0x80117888
+// https://decomp.me/scratch/J7MZG
+void ftNess_SpecialAirNEnd_Phys(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Release Physics callback
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
@@ -557,9 +557,9 @@ void ftNess_SpecialAirNEnd_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Flas
     func_8007CE94(fp, airFriction);
 }
 
-// 0x801178E8 //
-// https://decomp.me/scratch/vWsFm //
-void ftNess_SpecialNStart_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Start Collision callback //
+// 0x801178E8
+// https://decomp.me/scratch/vWsFm
+void ftNess_SpecialNStart_Coll(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Start Collision callback
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -570,9 +570,9 @@ void ftNess_SpecialNStart_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Fla
     }
 }
 
-// 0x80117954 //
-// https://decomp.me/scratch/6leYl //
-void ftNess_SpecialNHold_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Charge Collision callback //
+// 0x80117954
+// https://decomp.me/scratch/6leYl
+void ftNess_SpecialNHold_Coll(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Charge Collision callback
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -583,9 +583,9 @@ void ftNess_SpecialNHold_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flas
     }
 }
 
-// 0x801179C0 //
-// https://decomp.me/scratch/4QY4r //
-void ftNess_SpecialNEnd_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Release Collision callback //
+// 0x801179C0
+// https://decomp.me/scratch/4QY4r
+void ftNess_SpecialNEnd_Coll(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Release Collision callback
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -596,9 +596,9 @@ void ftNess_SpecialNEnd_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash
     }
 }
 
-// 0x80117A2C //
-// https://decomp.me/scratch/ODFbf //
-void ftNess_SpecialAirNStart_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Start Collision callback //
+// 0x80117A2C
+// https://decomp.me/scratch/ODFbf
+void ftNess_SpecialAirNStart_Coll(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Start Collision callback
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -609,9 +609,9 @@ void ftNess_SpecialAirNStart_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
     }
 }
 
-// 0x80117A98 //
-// https://decomp.me/scratch/qbobW //
-void ftNess_SpecialAirNHold_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Charge Collision callback //
+// 0x80117A98
+// https://decomp.me/scratch/qbobW
+void ftNess_SpecialAirNHold_Coll(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Charge Collision callback
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -622,9 +622,9 @@ void ftNess_SpecialAirNHold_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Fla
     }
 }
 
-// 0x80117B04 //
-// https://decomp.me/scratch/cYdeE //
-void ftNess_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Release Collision callback //
+// 0x80117B04
+// https://decomp.me/scratch/cYdeE
+void ftNess_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash Release Collision callback
 {
     Fighter* fp = getFighter(fighter_gobj);
 

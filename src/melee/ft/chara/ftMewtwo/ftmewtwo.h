@@ -41,29 +41,29 @@ typedef enum ftMewtwoAction {
 
 #define CONFUSION_REFLECT_OFF 2 // Toggle reflect bubble off.
 
-// Flags used by Mewtwo in Action State Change //
+// Flags used by Mewtwo in Action State Change
 
-// SpecialN/SpecialAirN //
+// SpecialN/SpecialAirN
 
 #define FTMEWTWO_SPECIALN_ACTION_FLAG FIGHTER_MATANIM_NOUPDATE | FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222
 
 #define FTMEWTWO_SPECIALN_COLL_FLAG FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-// SpecialS/SpecialAirS //
+// SpecialS/SpecialAirS
 
 #define FTMEWTWO_SPECIALS_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-// SpecialHi/SpecialAirHi //
+// SpecialHi/SpecialAirHi
 
 #define FTMEWTWO_SPECIALHI_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-// SpecialLw/SpecialAirLw //
+// SpecialLw/SpecialAirLw
 
 #define FTMEWTWO_SPECIALLW_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 typedef struct _ftMewtwoAttributes {
 
-    // NEUTRAL SPECIAL - SHADOW BALL (SpecialN/SpecialAirN) // 
+    // NEUTRAL SPECIAL - SHADOW BALL (SpecialN/SpecialAirN)
 
     f32 x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES; // Number of frames each iteration cycle lasts?
     f32 x4_MEWTWO_SHADOWBALL_GROUND_RECOIL_X;
@@ -72,12 +72,12 @@ typedef struct _ftMewtwoAttributes {
     s32 x10_MEWTWO_SHADOWBALL_RELEASE_LAG;
     f32 x14_MEWTWO_SHADOWBALL_LANDING_LAG;
 
-    // SIDE SPECIAL - CONFUSION (SpecialS/SpecialAirS) //
+    // SIDE SPECIAL - CONFUSION (SpecialS/SpecialAirS)
 
     f32 x18_MEWTWO_CONFUSION_AIR_BOOST;
     ReflectDesc x1C_MEWTWO_CONFUSION_REFLECTION;
 
-    // UP SPECIAL - TELEPORT (SpecialHi/SpecialAirHi) //
+    // UP SPECIAL - TELEPORT (SpecialHi/SpecialAirHi)
 
     f32 x40_MEWTWO_TELEPORT_VEL_DIV_X;
     f32 x44_MEWTWO_TELEPORT_VEL_DIV_Y;
@@ -94,22 +94,22 @@ typedef struct _ftMewtwoAttributes {
     f32 x70_MEWTWO_TELEPORT_FREEFALL_MOBILITY;
     f32 x74_MEWTWO_TELEPORT_LANDING_LAG;
 
-    // DOWN SPECIAL - DISABLE (SpecialLw/SpecialAirLw) //
+    // DOWN SPECIAL - DISABLE (SpecialLw/SpecialAirLw)
 
     f32 x78_MEWTWO_DISABLE_GRAVITY;
     f32 x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY;
     f32 x80_MEWTWO_DISABLE_OFFSET_X;
     f32 x84_MEWTWO_DISABLE_OFFSET_Y;
 
-} ftMewtwoAttributes; 
+} ftMewtwoAttributes;
 
-// Mewtwo functions //
+// Mewtwo functions
 
 void ftMewtwo_OnDeath(HSD_GObj* fighter_gobj);
 void ftMewtwo_OnDeath2(HSD_GObj* fighter_gobj);
 void ftMewtwo_OnTakeDamage(HSD_GObj* fighter_gobj);
 
-// Up Special - Teleport (SpecialHi/SpecialAirHi) //
+// Up Special - Teleport (SpecialHi/SpecialAirHi)
 
 void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHi_SetStartGFX(HSD_GObj* fighter_gobj);
@@ -150,7 +150,7 @@ void ftMewtwo_SpecialHiLost_GroundToAir(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHiLost_Action(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirHiLost_Action(HSD_GObj* fighter_gobj);
 
-// Down Special - Disable (SpecialLw/SpecialAirLw) //
+// Down Special - Disable (SpecialLw/SpecialAirLw)
 
 void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* fighter_gobj);
@@ -168,7 +168,7 @@ void ftMewtwo_SpecialLw_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirLw_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* fighter_gobj);
 
-// Side Special - Confusion (SpecialS/SpecialAirS) //
+// Side Special - Confusion (SpecialS/SpecialAirS)
 
 void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj);
@@ -186,7 +186,7 @@ void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialS_OnReflect(HSD_GObj* fighter_gobj);
 
-// Neutral Special - Shadow Ball (SpecialN/SpecialAirN) //
+// Neutral Special - Shadow Ball (SpecialN/SpecialAirN)
 
 s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel, s32* chargeCycles);
 BOOL ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* fighter_gobj);

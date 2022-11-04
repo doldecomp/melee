@@ -17,7 +17,7 @@ int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
 
 // 0x800E0D1C
 // https://decomp.me/scratch/od8nq
-int ftMario_SpecialN_VitaminRandom(HSD_GObj* gobj) // Get random Megavitamin color combo for Dr. Mario //
+int ftMario_SpecialN_VitaminRandom(HSD_GObj* gobj) // Get random Megavitamin color combo for Dr. Mario
 {
     Fighter* fp;
     int arr[9];

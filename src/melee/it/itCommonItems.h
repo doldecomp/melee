@@ -30,21 +30,21 @@ typedef struct FoodVars
 	s32 xDD8_heal;
 }FoodVars;
 
-typedef struct EggVars // Eggs spawned on Yoshi stages / by Chansey //
+typedef struct EggVars // Eggs spawned on Yoshi stages / by Chansey
 {
-	u8 filler[0x60];
+    u8 filler[0x60];
 	s32 xE34_heal;
-}EggVars;
+} EggVars;
 
 typedef struct WhispyAppleVars
 {
 	s32 xDD4_heal;
 }WhispyAppleVars;
 
-typedef struct itUnkAttributes // Might be shared? //
+typedef struct itUnkAttributes // Might be shared?
 {
-	f32 x0_float;
+    f32 x0_float;
 	f32 x4_float;
-}itUnkAttributes;
+} itUnkAttributes;
 
 #endif

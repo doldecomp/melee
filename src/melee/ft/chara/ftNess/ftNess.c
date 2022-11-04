@@ -77,7 +77,7 @@ void ftNess_OnKnockbackEnter(HSD_GObj* gobj)
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures //
+void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures
 {
     Fighter_OnKnockbackExit(fighter_gobj, 1);
 }

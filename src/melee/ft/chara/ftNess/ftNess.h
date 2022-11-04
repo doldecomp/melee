@@ -163,7 +163,7 @@ BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* gobj);
 void ftNess_YoyoSetUnkRate(HSD_GObj* gobj);
 void ftNess_YoyoCreateItem(HSD_GObj* gobj);
 void ftNess_YoyoItemSetFlag(HSD_GObj* gobj);
-void ftNess_YoyoItemDespawn(HSD_GObj* gobj);
+
 void ftNess_YoyoItemSetUnk(HSD_GObj* gobj);
 void ftNess_YoyoItemSetUnk2(HSD_GObj* gobj);
 

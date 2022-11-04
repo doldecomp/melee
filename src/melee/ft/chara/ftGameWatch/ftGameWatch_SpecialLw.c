@@ -6,7 +6,7 @@
 extern HSD_GObj* func_802C7D60(HSD_GObj*, Vec3*, s32, f32);
 
 // 0x8014CBF4
-// https://decomp.me/scratch/c9uUz // Create Oil Panic Item //
+// https://decomp.me/scratch/c9uUz // Create Oil Panic Item
 void ftGameWatch_ItemPanicSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp1C;

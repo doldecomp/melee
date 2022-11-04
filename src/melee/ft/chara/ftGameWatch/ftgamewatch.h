@@ -9,27 +9,27 @@
 #include <melee/it/itkind.h>
 #include <common_structs.h>
 
-// Oil Panic Charge Level Macros //
+// Oil Panic Charge Level Macros
 
 #define GAMEWATCH_PANIC_EMPTY 0
 #define GAMEWATCH_PANIC_LOW 1
 #define GAMEWATCH_PANIC_MID 2
 #define GAMEWATCH_PANIC_FULL 3
 
-// Mr. Game & Watch Action State Change Flags //
+// Mr. Game & Watch Action State Change Flags
 
-// Chef (SpecialN/SpecialAirN) //
+// Chef (SpecialN/SpecialAirN)
 #define FTGAMEWATCH_SPECIALN_COLL_FLAG FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MODEL_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-// Judgement (SpecialS/SpecialAirS) //
+// Judgement (SpecialS/SpecialAirS)
 #define FTGAMEWATCH_SPECIALS_COLL_FLAG FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MODEL_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-// Oil Panic (SpecialLw/SpecialAirLw) //
+// Oil Panic (SpecialLw/SpecialAirLw)
 #define FTGAMEWATCH_SPECIALLW_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 #define FTGAMEWATCH_SPECIALLW_UPDATE_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-// Mr. Game & Watch Action State IDs //
+// Mr. Game & Watch Action State IDs
 
 typedef enum ftGameWatchAction {
     AS_GAMEWATCH_ATTACK11 = 341,
@@ -86,18 +86,18 @@ typedef struct ftGameWatchJudge
 
 typedef struct _ftGameWatchAttributes {
 
-    // MISC. ATTRIBUTES //
+    // MISC. ATTRIBUTES
 
     f32 x0_GAMEWATCH_WIDTH; // Mr. Game & Watch's Z-Axis stretch; 0.01 by default
     s32 x4_GAMEWATCH_COLOR[4]; // Array of four RGBA values, one for each Mr. Game & Watch costume color
     s32 x14_GAMEWATCH_OUTLINE; // Outline color of Mr. Game & Watch's model
 
-    // NEUTRAL SPECIAL - CHEF //
+    // NEUTRAL SPECIAL - CHEF
 
     f32 x18_GAMEWATCH_CHEF_LOOPFRAME; // Allow rapid-firing sausages from this frame onward
     f32 x1C_GAMEWATCH_CHEF_MAX; // Maximum amount of sausages created per Chef use
 
-    // SIDE SPECIAL - JUDGEMENT //
+    // SIDE SPECIAL - JUDGEMENT
 
     f32 x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE; // Horizontal momentum preservation value 
     f32 x24_GAMEWATCH_JUDGE_MOMENTUM_MUL; // Multiplies momentum preservation value
@@ -106,13 +106,13 @@ typedef struct _ftGameWatchAttributes {
     f32 x30_GAMEWATCH_JUDGE_FRICTION2;
     s32 x34_GAMEWATCH_JUDGE_ROLL[9]; // Array of BOOLs that toggle respective Judgement numbers ON/OFF. If a number is OFF, it is excluded from RNG rolls. Game panics if less than 2 numbers are ON.
 
-    // UP SPECIAL - FIRE RESCUE //
+    // UP SPECIAL - FIRE RESCUE
 
     f32 x58_GAMEWATCH_RESCUE_STICK_RANGE; // Minimum control stick range required for directional influence? Also affects how far Mr. Game & Watch flings horizontally (?)
     f32 x5C_GAMEWATCH_RESCUE_ANGLE_UNK; // Radians -- controls how far Mr. Game & Watch can angle Fire Rescue? 
     f32 x60_GAMEWATCH_RESCUE_LANDING; // Landing lag / Freefall toggle
 
-    // DOWN SPECIAL - OIL PANIC //
+    // DOWN SPECIAL - OIL PANIC
 
     f32 x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE; // Horizontal momentum preservation value 
     f32 x68_GAMEWATCH_PANIC_MOMENTUM_MUL; // Multiplies momentum preservation value
@@ -125,10 +125,9 @@ typedef struct _ftGameWatchAttributes {
 
 } ftGameWatchAttributes;
 
+// Mr. Game & Watch Functions
 
-// Mr. Game & Watch Functions //
-
-// General callbacks //
+// General callbacks
 
 void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj);
 void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj);
@@ -144,7 +143,7 @@ void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod);
 void ftGameWatch_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod);
 void ftGameWatch_OnAbsorb(HSD_GObj* fighter_gobj);
 
-// Item-related callbacks //
+// Item-related callbacks
 
 void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj);
@@ -153,7 +152,7 @@ void ftGameWatch_ItemTorchEnterHitlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemTorchExitHitlag(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj);
 
-// Forward Smash (AttackS4) //
+// Forward Smash (AttackS4)
 
 void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackS4_Anim(HSD_GObj* fighter_gobj);
@@ -161,7 +160,7 @@ void ftGameWatch_AttackS4_IASA(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackS4_Phys(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackS4_Coll(HSD_GObj* fighter_gobj);
 
-// Down Tilt (AttackLw3) //
+// Down Tilt (AttackLw3)
 
 void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemManholeRemove(HSD_GObj* fighter_gobj);
@@ -175,7 +174,7 @@ void ftGameWatch_AttackLw3_IASA(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackLw3_Phys(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackLw3_Coll(HSD_GObj* fighter_gobj);
 
-// Aerial Attack Item Setup (AttackAirN) //
+// Aerial Attack Item Setup (AttackAirN)
 
 void ftGameWatch_ItemParachuteSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj);
@@ -196,7 +195,7 @@ void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackAir_DecideAction(HSD_GObj* fighter_gobj);
 
-// Aerial Attacks (AttackAir) //
+// Aerial Attacks (AttackAir)
 
 void ftGameWatch_AttackAirN_Action(HSD_GObj* fighter_gobj, s32 ASID);
 void ftGameWatch_AttackAirN_Anim(HSD_GObj* fighter_gobj);
@@ -232,7 +231,7 @@ void ftGameWatch_LandingAirHi_IASA(HSD_GObj* fighter_gobj);
 void ftGameWatch_LandingAirHi_Phys(HSD_GObj* fighter_gobj);
 void ftGameWatch_LandingAirHi_Coll(HSD_GObj* fighter_gobj);
 
-// Neutral Attack - Greenhouse (Attack11, Attack100Start/Loop/End) //
+// Neutral Attack - Greenhouse (Attack11, Attack100Start/Loop/End)
 
 void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_Attack11_DecideAction(HSD_GObj* fighter_gobj);
@@ -263,7 +262,7 @@ void ftGameWatch_Attack100End_IASA(HSD_GObj* fighter_gobj);
 void ftGameWatch_Attack100End_Phys(HSD_GObj* fighter_gobj);
 void ftGameWatch_Attack100End_Coll(HSD_GObj* fighter_gobj);
 
-// Side Special - Judgement (SpecialS) //
+// Side Special - Judgement (SpecialS)
 
 void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj);
@@ -285,7 +284,7 @@ void ftGameWatch_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj);
 
-// Up Special - Fire Rescue (SpeciialHi) //
+// Up Special - Fire Rescue (SpeciialHi)
 
 void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj);
@@ -304,7 +303,7 @@ void ftGameWatch_SpecialAirHi_Phys(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialHi_Coll(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj);
 
-// Down Special - Oil Panic (SpecialLw) //
+// Down Special - Oil Panic (SpecialLw)
 
 void ftGameWatch_ItemPanicSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemPanicSetFlag(HSD_GObj* fighter_gobj);
@@ -351,7 +350,7 @@ void ftGameWatch_SpecialAirLwShoot_AirToGround(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* fighter_gobj);
 
-// Neutral Special - Chef (SpecialN/) //
+// Neutral Special - Chef (SpecialN/)
 void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);

@@ -8,9 +8,9 @@
 
 extern s32 func_8016AE80();
 
-// 0x80266F3C //
-// https://decomp.me/scratch/QfPX7 //
-s32 func_80266F3C(void)                 // Check if items are enabled //
+// 0x80266F3C
+// https://decomp.me/scratch/QfPX7
+s32 func_80266F3C(void) // Check if items are enabled
 {
     if (func_8016AE80() != -1)
     {
@@ -19,8 +19,8 @@ s32 func_80266F3C(void)                 // Check if items are enabled //
     return 0;
 }
 
-// 0x80266F70 //
-// https://decomp.me/scratch/e1TwW //
+// 0x80266F70
+// https://decomp.me/scratch/e1TwW
 void func_80266F70(void)                // Check to load ItCo.dat/usd
 {
     s32 ItemFreqCheck;
@@ -32,8 +32,8 @@ void func_80266F70(void)                // Check to load ItCo.dat/usd
     func_8027870C(ItemFreqCheck);
 }
 
-// 0x80266FA8 //
-// https://decomp.me/scratch/UbSpT //
+// 0x80266FA8
+// https://decomp.me/scratch/UbSpT
 void func_80266FA8(void)                // ItCo prefunction with 0 
 {
     func_8027870C(0);
@@ -55,7 +55,7 @@ extern s32 lbl_804D6D10;
 extern s32 lbl_804D6D14;
 extern ItemCommonData* lbl_804D6D28;
 
-void func_80266FCC(void) // Init item struct? //
+void func_80266FCC(void) // Init item struct?
 {
     HSD_ObjAllocUnkStruct* lbl = &lbl_804A0BE0;
 
@@ -124,8 +124,8 @@ extern void func_802762BC(Item*);
 extern void func_80279B64(Item*);
 extern void func_8027B0C4(HSD_GObj*, SpawnItem*);
 
-// 0x80267130 //
-// https://decomp.me/scratch/eaaVC //
+// 0x80267130
+// https://decomp.me/scratch/eaaVC
 void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item coordinates?
 {
     Item* item_data;
@@ -217,9 +217,9 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     }
 }
 
-// 0x80267454 //
-// https://decomp.me/scratch/OhwTH //
-void func_80267454(HSD_GObj* item_gobj) // Remove Camera Box //
+// 0x80267454
+// https://decomp.me/scratch/OhwTH
+void func_80267454(HSD_GObj* item_gobj) // Remove Camera Box
 {
     Item* item_data;
 
@@ -232,9 +232,9 @@ void func_80267454(HSD_GObj* item_gobj) // Remove Camera Box //
     }
 }
 
-// 0x802674AC //
-// https://decomp.me/scratch/EzEg7 //
-void func_802674AC(SpawnItem* spawnItem) // Set Item Hold kind //
+// 0x802674AC
+// https://decomp.me/scratch/EzEg7
+void func_802674AC(SpawnItem* spawnItem) // Set Item Hold kind
 {
     s32 ItemID; // Item ID
 
@@ -304,8 +304,8 @@ void func_802674AC(SpawnItem* spawnItem) // Set Item Hold kind //
 
 extern s32 func_8018841C();
 
-// 0x802675A8 //
-// https://decomp.me/scratch/90UMw //
+// 0x802675A8
+// https://decomp.me/scratch/90UMw
 void func_802675A8(HSD_GObj* item_gobj)
 {
     u32 HoldKind;
@@ -364,9 +364,9 @@ void func_802675A8(HSD_GObj* item_gobj)
 
 extern void func_80274EE8(u32);
 
-// 0x802676F4 //
-// https://decomp.me/scratch/hLqWo //
-void func_802676F4(HSD_GObj* item_gobj) // 
+// 0x802676F4
+// https://decomp.me/scratch/hLqWo
+void func_802676F4(HSD_GObj* item_gobj)
 {
     u32 HoldKind;
     u32 temp_r3;
@@ -426,9 +426,9 @@ void func_802676F4(HSD_GObj* item_gobj) //
     }
 }
 
-// 0x8026784C //
-// https://decomp.me/scratch/0VC6C //
-s32 func_8026784C(s32 dropItem, s32 unused) // Decide drop item //
+// 0x8026784C
+// https://decomp.me/scratch/0VC6C
+s32 func_8026784C(s32 dropItem, s32 unused) // Decide drop item
 {
     HSD_ObjAllocUnkStruct* unk_label = &lbl_804A0BE0;
     u32 temp_r3;
@@ -527,9 +527,9 @@ extern struct ItemLogicTable lbl_803F23CC[];
 
 extern struct ItemLogicTable lbl_803F4D20[];
 
-// 0x80267978 //
-// https://decomp.me/scratch/LnIJJ //
-void func_80267978(HSD_GObj* item_gobj) // Store Item Pointers //
+// 0x80267978
+// https://decomp.me/scratch/LnIJJ
+void func_80267978(HSD_GObj* item_gobj) // Store Item Pointers
 {
     s32 ItemID;
     s32 ItemID2;
@@ -577,10 +577,10 @@ extern s32 func_80086960(HSD_GObj*);
 extern u8 func_80086EB4(HSD_GObj*);
 extern u32 func_80225B20();
 
-// Thanks to Altafen for matching the bitshifts! //
-// 0x80267AA8 //
-// https://decomp.me/scratch/eitPf //
-void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item variables //
+// Thanks to Altafen for matching the bitshifts!
+// 0x80267AA8
+// https://decomp.me/scratch/eitPf
+void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item variables
 {
     Item* item_data;
     ItemAttr* item_attr;
@@ -763,9 +763,9 @@ extern HSD_JObj* HSD_JObjAlloc();                              /* extern */
 extern void PSMTXIdentity(Mtx);                               /* extern */
 extern u8 lbl_804D7849;
 
-// 0x802680CC //
-// https://decomp.me/scratch/hnkV9 //
-void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj //
+// 0x802680CC
+// https://decomp.me/scratch/hnkV9
+void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj
 {
     Item* item_data;
     HSD_JObj* jobj;
@@ -787,9 +787,9 @@ void func_802680CC(HSD_GObj* item_gobj) // Setup Item JObj //
 
 extern void* lbl_803F1F90[];
 
-// 0x8026814C //
-// https://decomp.me/scratch/abHa0 //
-void func_8026814C(HSD_GObj* item_gobj) // Setup item render objects? //
+// 0x8026814C
+// https://decomp.me/scratch/abHa0
+void func_8026814C(HSD_GObj* item_gobj) // Setup item render objects?
 {
     s32 filler[4];
     HSD_MObj* temp_r0;
@@ -861,9 +861,9 @@ void func_8026814C(HSD_GObj* item_gobj) // Setup item render objects? //
     }
 }
 
-// 0x802682F0 //
-// https://decomp.me/scratch/Rs4HS //
-s32 func_802682F0(HSD_GObj* item_gobj) // Initialize item bones - needs some serious cleaning //
+// 0x802682F0
+// https://decomp.me/scratch/Rs4HS
+s32 func_802682F0(HSD_GObj* item_gobj) // Initialize item bones - needs some serious cleaning
 {
     s32 unused;
     s32 var_r4;
@@ -932,9 +932,9 @@ block_46:
     return 1;
 }
 
-// 0x8026849C //
-// https://decomp.me/scratch/Ayb2X //
-void func_8026849C(HSD_GObj* item_gobj) // Set item model scale //
+// 0x8026849C
+// https://decomp.me/scratch/Ayb2X
+void func_8026849C(HSD_GObj* item_gobj) // Set item model scale
 {
     s32 filler;
     Vec3 sp14;
@@ -955,9 +955,9 @@ void func_8026849C(HSD_GObj* item_gobj) // Set item model scale //
 extern void func_8000FD48(HSD_JObj*, void*, s32);
 extern void func_80011710(void*, void*);
 
-// 0x80268560 //
-// https://decomp.me/scratch/d3ZmY //
-void func_80268560(HSD_GObj* item_gobj) // Setup item dynamic bones //
+// 0x80268560
+// https://decomp.me/scratch/d3ZmY
+void func_80268560(HSD_GObj* item_gobj) // Setup item dynamic bones
 {
     s32 i;
     Item* item_data;
@@ -998,9 +998,9 @@ extern struct sdata_ItemGXLink lbl_803F2310[];
 extern struct sdata_ItemGXLink lbl_803F2F28[];
 extern struct sdata_ItemGXLink lbl_803F4CA8[];
 
-// 0x8026862C //
-// https://decomp.me/scratch/6h8Z5 //
-HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
+// 0x8026862C
+// https://decomp.me/scratch/6h8Z5
+HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item
 {
     Vec3 sp2C;
     s32 filler[5];
@@ -1030,23 +1030,19 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
         return NULL;
     }
     temp_r4 = spawnItem->x8_item_id;
-    if (temp_r4 < It_Kind_Kuriboh) // Check if item is a common item (IDs 0 through 42) //
+    if (temp_r4 < It_Kind_Kuriboh) // Check if item is a common item (IDs 0 through 42)
     {
         GObj_SetupGXLink(temp_r3, lbl_803F1418[temp_r4].x0_renderFunc, 6U, 0U);
-    }
-    else if (temp_r4 < Pokemon_Tosakinto) // Check if item is common item- or character-related? //
+    } else if (temp_r4 < Pokemon_Tosakinto) // Check if item is common item- or character-related?
     {
         temp_r4 -= It_Kind_Kuriboh;
         GObj_SetupGXLink(temp_r3, lbl_803F2F28[temp_r4].x0_renderFunc, 6U, 0U);
-    }
-    else if (temp_r4 < It_Kind_Old_Kuri) // Check if item is a Pokémon //
+    } else if (temp_r4 < It_Kind_Old_Kuri) // Check if item is a Pokémon
     {
         temp_r4 -= Pokemon_Tosakinto;
         GObj_SetupGXLink(temp_r3, lbl_803F2310[temp_r4].x0_renderFunc, 6U, 0U);
-    }
-    else
-    {
-        temp_r4 -= It_Kind_Old_Kuri; // Otherwise item is a stage item //
+    } else {
+        temp_r4 -= It_Kind_Old_Kuri; // Otherwise item is a stage item
         GObj_SetupGXLink(temp_r3, lbl_803F4CA8[temp_r4].x0_renderFunc, 6U, 0U);
     }
     temp_r3_2 = HSD_ObjAlloc((HSD_ObjAllocData*)(&lbl_804A0BE0));
@@ -1156,9 +1152,9 @@ block_returnGObj:
     return temp_r3;
 }
 
-// 0x80268B18 //
-// https://decomp.me/scratch/YyUEI //
-void func_80268B18(SpawnItem* spawnItem) // Item spawn prefunction - spawn airborne //
+// 0x80268B18
+// https://decomp.me/scratch/YyUEI
+void func_80268B18(SpawnItem* spawnItem) // Item spawn prefunction - spawn airborne
 {
     spawnItem->x48_ground_or_air = GA_Air;
     spawnItem->x10 = 0;
@@ -1166,9 +1162,9 @@ void func_80268B18(SpawnItem* spawnItem) // Item spawn prefunction - spawn airbo
     func_8026862C(spawnItem);
 }
 
-// 0x80268B5C //
-// https://decomp.me/scratch/cN7Fn //
-void func_80268B5C(SpawnItem* spawnItem) // Item spawn prefunction - spawn grounded //
+// 0x80268B5C
+// https://decomp.me/scratch/cN7Fn
+void func_80268B5C(SpawnItem* spawnItem) // Item spawn prefunction - spawn grounded
 {
     spawnItem->x48_ground_or_air = GA_Ground;
     spawnItem->x10 = 0;
@@ -1176,9 +1172,9 @@ void func_80268B5C(SpawnItem* spawnItem) // Item spawn prefunction - spawn groun
     func_8026862C(spawnItem);
 }
 
-// 0x80268B9C //
-// https://decomp.me/scratch/V7AgZ //
-void func_80268B9C(SpawnItem* spawnItem) // Item spawn prefunction - spawn grounded and toggle unknown true //
+// 0x80268B9C
+// https://decomp.me/scratch/V7AgZ
+void func_80268B9C(SpawnItem* spawnItem) // Item spawn prefunction - spawn grounded and toggle unknown true
 {
     spawnItem->x48_ground_or_air = GA_Ground;
     spawnItem->x10 = 1;
@@ -1186,9 +1182,9 @@ void func_80268B9C(SpawnItem* spawnItem) // Item spawn prefunction - spawn groun
     func_8026862C(spawnItem);
 }
 
-// 0x80268BE0 //
-// https://decomp.me/scratch/gL9Td //
-void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint, Item* item_data) // Adds AObjs to item model //
+// 0x80268BE0
+// https://decomp.me/scratch/gL9Td
+void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint, Item* item_data) // Adds AObjs to item model
 {
 
     void* functionArg1;
@@ -1272,9 +1268,9 @@ extern void func_8000B804(HSD_JObj*, HSD_Joint*);
 extern void func_8000BA0C(HSD_JObj*, f32);
 extern void HSD_JObjRemoveAnimAll(HSD_JObj*);
 
-// 0x80268D34 //
-// https://decomp.me/scratch/BiAE9 //
-void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc) // Unk Item AObj-related function //
+// 0x80268D34
+// https://decomp.me/scratch/BiAE9
+void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc) // Unk Item AObj-related function
 {
     HSD_JObj* item_jobj;
     Item* item_data;
@@ -1300,9 +1296,9 @@ void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc) // 
     HSD_JObjReqAnimAll(item_jobj, 0.0f);
 }
 
-// 0x80268DD4 //
-// https://decomp.me/scratch/1G591 //
-void func_80268DD4(HSD_GObj* item_gobj, f32 arg8) // Advance item animation? //
+// 0x80268DD4
+// https://decomp.me/scratch/1G591
+void func_80268DD4(HSD_GObj* item_gobj, f32 arg8) // Advance item animation?
 {
     HSD_JObj* item_jobj;
     Item* item_data;
@@ -1316,9 +1312,9 @@ void func_80268DD4(HSD_GObj* item_gobj, f32 arg8) // Advance item animation? //
     item_data->x5CC_currentAnimFrame = func_8000BDB4(item_jobj);
 }
 
-// 0x80268E40 //
-// https://decomp.me/scratch/a3Je2 //
-void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc) // Copy item script //
+// 0x80268E40
+// https://decomp.me/scratch/a3Je2
+void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc) // Copy item script
 {
     item_data->x52C_item_script = itemStateDesc->xC_script;
     item_data->x530 = 0;
@@ -1361,9 +1357,9 @@ inline HSD_JObj* GetItemJObj(HSD_GObj* item_gobj)
     return item_gobj->hsd_obj;
 }
 
-// 0x80268E5C //
+// 0x80268E5C
 // https://decomp.me/scratch/cSrfX
-void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // Item State Change //
+void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // Item State Change
 {
     Vec3 sp4C;
     Vec3 sp40;
@@ -1502,9 +1498,9 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     func_802714C0(item_gobj);
 }
 
-// 0x802693E4 //
-// https://decomp.me/scratch/v3rQP //
-void lbl_802693E4(HSD_GObj* item_gobj) // Item Think - Hitlag //
+// 0x802693E4
+// https://decomp.me/scratch/v3rQP
+void lbl_802693E4(HSD_GObj* item_gobj) // Item Think - Hitlag
 {
     f32 hitlagFrames;
     Item* item_data;
@@ -1537,9 +1533,9 @@ void lbl_802693E4(HSD_GObj* item_gobj) // Item Think - Hitlag //
     }
 }
 
-// 0x802694CC //
-// https://decomp.me/scratch/RSwz3 //
-void func_802694CC(HSD_GObj* item_gobj) // Advance item animation + script? //
+// 0x802694CC
+// https://decomp.me/scratch/RSwz3
+void func_802694CC(HSD_GObj* item_gobj) // Advance item animation + script?
 {
     s32 filler[2];
     HSD_JObj* item_jobj;
@@ -1552,9 +1548,9 @@ void func_802694CC(HSD_GObj* item_gobj) // Advance item animation + script? //
     func_802799E4(item_gobj);
 }
 
-// 0x80269528 //
-// https://decomp.me/scratch/FGX2f //
-void lbl_80269528(HSD_GObj* item_gobj) // Item Think - Animation //
+// 0x80269528
+// https://decomp.me/scratch/FGX2f
+void lbl_80269528(HSD_GObj* item_gobj) // Item Think - Animation
 {
     s32 filler[6];
     HSD_JObj* item_jobj;
@@ -1613,9 +1609,9 @@ void lbl_80269528(HSD_GObj* item_gobj) // Item Think - Animation //
     func_80279BE0(item_gobj);
 }
 
-// 0x802696CC //
-// https://decomp.me/scratch/fTxLC //
-s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones //
+// 0x802696CC
+// https://decomp.me/scratch/fTxLC
+s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones
 {
     s32 temp_r0;
     s32 temp_r3;
@@ -1652,9 +1648,9 @@ s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones //
     return 0;
 }
 
-// 0x802697D4 //
-// https://decomp.me/scratch/iJ7xS //
-void func_802697D4(HSD_GObj* item_gobj) // Item Think - Physics //
+// 0x802697D4
+// https://decomp.me/scratch/iJ7xS
+void func_802697D4(HSD_GObj* item_gobj) // Item Think - Physics
 {
     Vec3 sp1C;
     s32 filler[4];
@@ -1718,9 +1714,9 @@ void func_802697D4(HSD_GObj* item_gobj) // Item Think - Physics //
     func_802714C0(item_gobj);
 }
 
-// 0x80269978 //
-// https://decomp.me/scratch/luVc4 //
-void func_80269978(HSD_GObj* item_gobj) // Item Think - Collision //
+// 0x80269978
+// https://decomp.me/scratch/luVc4
+void func_80269978(HSD_GObj* item_gobj) // Item Think - Collision
 {
     s32 filler[2];
     Item* item_data;
@@ -1745,9 +1741,9 @@ void func_80269978(HSD_GObj* item_gobj) // Item Think - Collision //
 
 extern void func_80067624(HSD_GObj*, void*);
 
-// 0x80269A9C //
-// https://decomp.me/scratch/uI7DN //
-void lbl_80269A9C(HSD_GObj* item_gobj) // Item Think - Accessory + Camera Box //
+// 0x80269A9C
+// https://decomp.me/scratch/uI7DN
+void lbl_80269A9C(HSD_GObj* item_gobj) // Item Think - Accessory + Camera Box
 {
     s32 filler[2];
     void (*cb_Accessory)(HSD_GObj*);
@@ -1785,9 +1781,9 @@ void lbl_80269A9C(HSD_GObj* item_gobj) // Item Think - Accessory + Camera Box //
 void func_8027137C(HSD_GObj*);                             /* extern */
 void func_8027146C(HSD_GObj*);
 
-// 0x80269B60 //
-// https://decomp.me/scratch/Nqid5 //
-void lbl_80269B60(HSD_GObj* item_gobj) // Item Think - Yellow Bar Collision (cb_JumpedOn) //
+// 0x80269B60
+// https://decomp.me/scratch/Nqid5
+void lbl_80269B60(HSD_GObj* item_gobj) // Item Think - Yellow Bar Collision (cb_JumpedOn)
 {
     s32(*cb_JumpedOn)(HSD_GObj*);
     Item* item_data;
@@ -1808,10 +1804,10 @@ void lbl_80269B60(HSD_GObj* item_gobj) // Item Think - Yellow Bar Collision (cb_
     func_8027146C(item_gobj);
 }
 
-// 0x80269BE4 //
-// https://decomp.me/scratch/qMNDq //
-void lbl_80269BE4(HSD_GObj* item_gobj) // Item Think - Grab //
-// Somewhat arbitrary. Does not run on Hook Shot / Grapple Beam, rather items such as the Barrel Cannon. //
+// 0x80269BE4
+// https://decomp.me/scratch/qMNDq
+void lbl_80269BE4(HSD_GObj* item_gobj) // Item Think - Grab
+// Somewhat arbitrary. Does not run on Hook Shot / Grapple Beam, rather items such as the Barrel Cannon.
 {
     Item* item_data;
     void (*cb_GrabItem)(HSD_GObj*);
@@ -1833,9 +1829,9 @@ void lbl_80269BE4(HSD_GObj* item_gobj) // Item Think - Grab //
     }
 }
 
-// 0x80269C5C //
-// https://decomp.me/scratch/ui7Ut //
-void lbl_80269C5C(HSD_GObj* item_gobj) // Item Think - Hit Collision Logic //
+// 0x80269C5C
+// https://decomp.me/scratch/ui7Ut
+void lbl_80269C5C(HSD_GObj* item_gobj) // Item Think - Hit Collision Logic
 {
     s32 filler[2];
     func_8026F9A0();
@@ -1844,9 +1840,9 @@ void lbl_80269C5C(HSD_GObj* item_gobj) // Item Think - Hit Collision Logic //
     func_80270E30(item_gobj);
 }
 
-// 0x80269CA0 //
-// https://decomp.me/scratch/R5aaH //
-void func_80269CA0(Item* item_data, s32 damage) // Set damage taken //
+// 0x80269CA0
+// https://decomp.me/scratch/R5aaH
+void func_80269CA0(Item* item_data, s32 damage) // Set damage taken
 {
     item_data->itdmg.xC9C = (s32)(item_data->itdmg.xC9C + damage);
     if ((s32)item_data->itdmg.xC9C > 999)
@@ -1855,9 +1851,9 @@ void func_80269CA0(Item* item_data, s32 damage) // Set damage taken //
     }
 }
 
-// 0x80269CC4 //
-// https://decomp.me/scratch/lBljA //
-void func_80269CC4(HSD_GObj* item_gobj) // Set damage struct //
+// 0x80269CC4
+// https://decomp.me/scratch/lBljA
+void func_80269CC4(HSD_GObj* item_gobj) // Set damage struct
 {
     Item* temp_item;
 
@@ -1905,9 +1901,9 @@ void func_80269CC4(HSD_GObj* item_gobj) // Set damage struct //
     temp_item->xDCE_flag.bits.b6 = 0;
 }
 
-// 0x80269DC8 //
-// https://decomp.me/scratch/btcQS //
-s32 func_80269DC8(HSD_GObj* item_gobj) // Item Think - Shield Collision //
+// 0x80269DC8
+// https://decomp.me/scratch/btcQS
+s32 func_80269DC8(HSD_GObj* item_gobj) // Item Think - Shield Collision
 {
     s32(*cb_OnShieldBounce)(HSD_GObj*);
     s32(*cb_OnHitShield)(HSD_GObj*);
@@ -1950,9 +1946,9 @@ block_return:
     return 0;
 }
 
-// 0x80269F14 //
-// https://decomp.me/scratch/r1YTR //
-s32 func_80269F14(HSD_GObj* item_gobj) // Item Think - On Reflect //
+// 0x80269F14
+// https://decomp.me/scratch/r1YTR
+s32 func_80269F14(HSD_GObj* item_gobj) // Item Think - On Reflect
 {
     f32 temp_f30;
     s32(*cb_OnReflect)(HSD_GObj*);
@@ -1993,7 +1989,7 @@ s32 func_80269F14(HSD_GObj* item_gobj) // Item Think - On Reflect //
     }
     if (temp_item->xDCC_flag.b0 == 0)
     {
-        for (i = 0; i < 4; i++) // 4 here is the maximum amount of hitboxes available in the vanilla Item struct //
+        for (i = 0; i < 4; i++) // 4 here is the maximum amount of hitboxes available in the vanilla Item struct
         {
             if ((s32)temp_item->x5D4_hitboxes[i].x0_toggle != 0)
             {
@@ -2010,9 +2006,9 @@ s32 func_80269F14(HSD_GObj* item_gobj) // Item Think - On Reflect //
     return 0;
 }
 
-// 0x8026A0A0 //
-// https://decomp.me/scratch/9CDfn //
-void func_8026A0A0(HSD_GObj* item_gobj) // Item Think - Exit Hitlag Check //
+// 0x8026A0A0
+// https://decomp.me/scratch/9CDfn
+void func_8026A0A0(HSD_GObj* item_gobj) // Item Think - Exit Hitlag Check
 {
     Item* item_data;
 
@@ -2027,9 +2023,9 @@ void func_8026A0A0(HSD_GObj* item_gobj) // Item Think - Exit Hitlag Check //
     }
 }
 
-// 0x8026A0FC //
-// https://decomp.me/scratch/y8uBJ //
-void func_8026A0FC(HSD_GObj* item_gobj) // Item Think - Exit Hitlag Check 2 //
+// 0x8026A0FC
+// https://decomp.me/scratch/y8uBJ
+void func_8026A0FC(HSD_GObj* item_gobj) // Item Think - Exit Hitlag Check 2
 {
     Item* item_data;
 
@@ -2046,9 +2042,9 @@ void func_8026A0FC(HSD_GObj* item_gobj) // Item Think - Exit Hitlag Check 2 //
 
 #pragma dont_inline on
 
-// 0x8026A158 //
-// https://decomp.me/scratch/W12dC //
-void func_8026A158(HSD_GObj* item_gobj) // Item Think - Enter Hitlag //
+// 0x8026A158
+// https://decomp.me/scratch/W12dC
+void func_8026A158(HSD_GObj* item_gobj) // Item Think - Enter Hitlag
 {
     void (*cb_EnterHitlag)(HSD_GObj*);
     Item* item_data;
@@ -2073,9 +2069,9 @@ void func_8026A158(HSD_GObj* item_gobj) // Item Think - Enter Hitlag //
     }
 }
 
-// 0x8026A1E8 //
-// https://decomp.me/scratch/cgRLZ //
-void func_8026A1E8(HSD_GObj* item_gobj) // Item Think - Exit Hitlag //
+// 0x8026A1E8
+// https://decomp.me/scratch/cgRLZ
+void func_8026A1E8(HSD_GObj* item_gobj) // Item Think - Exit Hitlag
 {
     void (*cb_ExitHitlag)(HSD_GObj*);
     Item* item_data;
@@ -2188,9 +2184,9 @@ inline void checkHitLag(f32 min_value, Item* item_data)
     item_data->xDC8_word.flags.xA = 1;
 }
 
-// 0x8026A294 //
-// https://decomp.me/scratch/ZRhI3 //
-void lbl_8026A294(HSD_GObj* item_gobj) // Item Think - Hit Collision //
+// 0x8026A294
+// https://decomp.me/scratch/ZRhI3
+void lbl_8026A294(HSD_GObj* item_gobj) // Item Think - Hit Collision
 {
     Item* item_data = GetItemData(item_gobj);
 
@@ -2259,9 +2255,9 @@ void lbl_8026A294(HSD_GObj* item_gobj) // Item Think - Hit Collision //
     func_80269CC4(item_gobj);
 }
 
-// 0x8026A788 //
-// https://decomp.me/scratch/MJJDV //
-void lbl_8026A788(HSD_GObj* item_gobj) // Item Think - Process Dynamic Bones //
+// 0x8026A788
+// https://decomp.me/scratch/MJJDV
+void lbl_8026A788(HSD_GObj* item_gobj) // Item Think - Process Dynamic Bones
 {
     Item* item_data = item_gobj->user_data;
     int dynamicBonesNum = item_data->x374_dynamicBonesNum;
@@ -2275,9 +2271,9 @@ void lbl_8026A788(HSD_GObj* item_gobj) // Item Think - Process Dynamic Bones //
     }
 }
 
-// 0x8026A810 //
-// https://decomp.me/scratch/KiRDa //
-void func_8026A810(HSD_GObj* item_gobj) // Item Think - Spawn //
+// 0x8026A810
+// https://decomp.me/scratch/KiRDa
+void func_8026A810(HSD_GObj* item_gobj) // Item Think - Spawn
 {
     Item* temp_item = item_gobj->user_data;
     void (*cb_OnSpawn)(HSD_GObj*) = temp_item->xB8_itemLogicTable->x4_callback_OnSpawn;
@@ -2294,9 +2290,9 @@ extern void func_80086764(HSD_GObj*);
 extern s32 func_800867A0(HSD_GObj*, HSD_GObj*);
 extern HSD_GObj* func_800867CC(HSD_GObj*);
 
-// 0x8026A848 //
-// https://decomp.me/scratch/OcqKi //
-void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Remove Item from Player //
+// 0x8026A848
+// https://decomp.me/scratch/OcqKi
+void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Remove Item from Player
 {
     s32 itemID;
     Item* temp_item;
@@ -2371,9 +2367,9 @@ inline void RunCallback(HSD_GObj* item_gobj, void(*cb_Process)(HSD_GObj*))
     }
 }
 
-// 0x8026A8EC //
-// https://decomp.me/scratch/CWnUq //
-void func_8026A8EC(HSD_GObj* item_gobj) // Destroy Item //
+// 0x8026A8EC
+// https://decomp.me/scratch/CWnUq
+void func_8026A8EC(HSD_GObj* item_gobj) // Destroy Item
 {
     void (*cb_OnDestroy)(HSD_GObj*);
     s32 destroyType;
@@ -2432,7 +2428,7 @@ void func_8026A8EC(HSD_GObj* item_gobj) // Destroy Item //
     func_80390228(item_gobj);
 }
 
-void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX, s32 pickupSFX) // Make Item Held //
+void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX, s32 pickupSFX) // Make Item Held
 {
     void (*cb_OnPickup)(HSD_GObj*);
     Item* item_data;
@@ -2445,9 +2441,9 @@ void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX, s32 pickupSFX) // Make It
     func_8026B074(item_data);
 }
 
-// 0x8026ABD8 //
-// https://decomp.me/scratch/sMVJ7 //
-void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2) // Drop Item //
+// 0x8026ABD8
+// https://decomp.me/scratch/sMVJ7
+void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2) // Drop Item
 {
     Item* item_data;
 
@@ -2464,9 +2460,9 @@ void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2) // Drop Item //
     }
 }
 
-// 0x8026AC74 //
-// https://decomp.me/scratch/hiqy7 //
-void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8) // This is actually another Item Drop function //
+// 0x8026AC74
+// https://decomp.me/scratch/hiqy7
+void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8) // This is actually another Item Drop function
 {
     Item* item_data;
 
@@ -2483,9 +2479,9 @@ void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8) // T
     }
 }
 
-// 0x8026AD20 //
-// https://decomp.me/scratch/1O8Je //
-void func_8026AD20(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8) // Throw Item //
+// 0x8026AD20
+// https://decomp.me/scratch/1O8Je
+void func_8026AD20(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8) // Throw Item
 {
     Item* item_data;
 
@@ -2498,9 +2494,9 @@ void func_8026AD20(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8) // T
     func_802754D4(item_gobj);
 }
 
-// 0x8026ADC0 //
-// https://decomp.me/scratch/OcHJR //
-void func_8026ADC0(HSD_GObj* item_gobj) // Make Item Airborne //
+// 0x8026ADC0
+// https://decomp.me/scratch/OcHJR
+void func_8026ADC0(HSD_GObj* item_gobj) // Make Item Airborne
 {
     Item* item_data;
     void (*cb_EnterAir)(HSD_GObj*);
@@ -2515,9 +2511,9 @@ void func_8026ADC0(HSD_GObj* item_gobj) // Make Item Airborne //
     }
 }
 
-// 0x8026AE10 //
-// https://decomp.me/scratch/9jSrP //
-void lbl_8026AE10(Item* item_data) // Clear Item Struct ? //
+// 0x8026AE10
+// https://decomp.me/scratch/9jSrP
+void lbl_8026AE10(Item* item_data) // Clear Item Struct ?
 {
     Item* item_data2 = item_data;
     if (item_data->xBBC_dynamicBoneTable != NULL)
@@ -2527,11 +2523,11 @@ void lbl_8026AE10(Item* item_data) // Clear Item Struct ? //
     HSD_ObjFree(&lbl_804A0BE0.x0, item_data2);
 }
 
-// 0x8026AE60 //
-// https://decomp.me/scratch/g2h93 //
-u32 func_8026AE60(void) // Increment something //
+// 0x8026AE60
+// https://decomp.me/scratch/g2h93
+u32 func_8026AE60(void) // Increment something
 {
-    u32 temp_r4 = lbl_804D6D14; // This label might be U32 entirely, don't remember why it's s32 //
+    u32 temp_r4 = lbl_804D6D14; // This label might be U32 entirely, don't remember why it's s32
 
     lbl_804D6D14 += 1;
     if (lbl_804D6D14 == 0U)
@@ -2543,9 +2539,9 @@ u32 func_8026AE60(void) // Increment something //
 
 extern u32 func_800233EC(s32);
 
-// 0x8026AE84 //
-// https://decomp.me/scratch/zBNtM //
-void func_8026AE84(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX //
+// 0x8026AE84
+// https://decomp.me/scratch/zBNtM
+void func_8026AE84(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX
 {
     s32 sfxID_new;
 
@@ -2561,9 +2557,9 @@ void func_8026AE84(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item S
     }
 }
 
-// 0x8026AF0C //
-// https://decomp.me/scratch/2TNx6 //
-void func_8026AF0C(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX 2 //
+// 0x8026AF0C
+// https://decomp.me/scratch/2TNx6
+void func_8026AF0C(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX 2
 {
     s32 sfxID2;
     u32 sfxID_new;
@@ -2585,9 +2581,9 @@ void func_8026AF0C(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item S
     }
 }
 
-// 0x8026AFA0 //
-// https://decomp.me/scratch/6i5MP //
-void func_8026AFA0(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX 3 //
+// 0x8026AFA0
+// https://decomp.me/scratch/6i5MP
+void func_8026AFA0(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX 3
 {
     s32 sfxID2;
     u32 sfxID_new;
@@ -2609,9 +2605,9 @@ void func_8026AFA0(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item S
     }
 }
 
-// 0x8026B034 //
-// https://decomp.me/scratch/vv88E //
-void func_8026B034(Item* item_data) // Stop Item SFX //
+// 0x8026B034
+// https://decomp.me/scratch/vv88E
+void func_8026B034(Item* item_data) // Stop Item SFX
 {
     s32 itemSFX;
 
@@ -2623,9 +2619,9 @@ void func_8026B034(Item* item_data) // Stop Item SFX //
     item_data->xD64 = -1;
 }
 
-// 0x8026B074 //
-// https://decomp.me/scratch/vrHap // 
-void func_8026B074(Item* item_data) // Stop Item SFX 2 //
+// 0x8026B074
+// https://decomp.me/scratch/vrHap
+void func_8026B074(Item* item_data) // Stop Item SFX 2
 {
     s32 itemSFX;
 
@@ -2640,9 +2636,9 @@ void func_8026B074(Item* item_data) // Stop Item SFX 2 //
 extern void func_80026510(HSD_GObj*);
 extern s32 func_800265C4(HSD_GObj*, s32);
 
-// 0x8026B0B4 //
-// https://decomp.me/scratch/Guevq //
-void func_8026B0B4(HSD_GObj* item_gobj) // Stop All Item SFX // 
+// 0x8026B0B4
+// https://decomp.me/scratch/Guevq
+void func_8026B0B4(HSD_GObj* item_gobj) // Stop All Item SFX
 {
     s32 itemSFX;
     s32 itemSFX_2;
@@ -2690,9 +2686,9 @@ void func_8026B0B4(HSD_GObj* item_gobj) // Stop All Item SFX //
     item_data->xD6C = -1;
 }
 
-// 0x8026B1A4 //
-// https://decomp.me/scratch/54RbZ //
-s32 func_8026B1A4(HSD_GObj* item_gobj) // Check if item is grabbable //
+// 0x8026B1A4
+// https://decomp.me/scratch/54RbZ
+s32 func_8026B1A4(HSD_GObj* item_gobj) // Check if item is grabbable
 {
     Item* temp_item;
 
