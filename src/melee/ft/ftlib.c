@@ -455,6 +455,8 @@ BOOL func_80086A58(HSD_GObj* gobj, S32Pair* x)
     return FALSE;
 }
 
+#include <melee/cm/camera.h>
+
 BOOL func_80086A8C(HSD_GObj* gobj)
 {
     u32 unused[2];
