@@ -25,7 +25,7 @@ void func_80086644(HSD_GObj*, Vec*);
 void func_80086664(HSD_GObj*, Vec*);
 void func_80086684(HSD_GObj*, Vec*);
 void ftData_SetScale(HSD_GObj*, f32);
-void func_800866DC(HSD_GObj*, Vec*);
+void func_800866DC(HSD_GObj* unk_gobj, Vec* pos);
 void func_80086724(HSD_GObj*, HSD_GObj*);
 void func_80086764(HSD_GObj*);
 HSD_GObj* func_80086794(HSD_GObj*);
