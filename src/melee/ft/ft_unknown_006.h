@@ -177,5 +177,6 @@ void func_80088510(Fighter* fp, s32, u8, u8);
 u32 func_800DEEE8(Fighter* fp, Vec2*);
 void func_800DEF38(HSD_GObj* fighter_gobj);
 void func_800DF0D0(HSD_GObj* fighter_gobj);
+void func_800DEEA8(HSD_GObj* fighter_gobj);
 
 #endif
