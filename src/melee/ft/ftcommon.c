@@ -1290,6 +1290,8 @@ void func_8007ECD4(Fighter* fp, s32 arg1)
     }
 }
 
+#include <melee/lb/lbunknown_003.h>
+
 void func_8007ED2C(Fighter* fp)
 {
     func_800145C0(fp->x618_player_id);
