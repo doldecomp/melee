@@ -5,6 +5,7 @@
 #include <melee/ft/enums.h>
 
 typedef struct _HSD_GObj HSD_GObj;
+typedef struct _Fighter Fighter;
 
 void func_80085A14(u32);
 unk_t func_80085B98();
@@ -22,5 +23,6 @@ void func_8008572C(u32);
 void func_8008578C(s32 id, s32 slot);
 void func_800857E0(u32);
 void func_80085820(FighterKind kind, s32 costume_id);
+void func_800859A8(Fighter* fp);
 
 #endif
