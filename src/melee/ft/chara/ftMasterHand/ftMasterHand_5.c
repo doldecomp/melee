@@ -17,6 +17,8 @@ u32 ftMasterHand_80151428(Vec* vec)
     return 0;
 }
 
+#include <melee/lb/lbaudio_ax.h>
+
 inline void ftMasterHand_80151484_inline1(HSD_GObj* fighter_gobj)
 {
     Fighter* r29_fp = fighter_gobj->user_data;

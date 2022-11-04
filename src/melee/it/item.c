@@ -2558,8 +2558,8 @@ void func_8026AE84(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item S
     }
 }
 
-// 0x8026AF0C
-// https://decomp.me/scratch/2TNx6
+#include <melee/lb/lbaudio_ax.h>
+
 void func_8026AF0C(Item* item_data, s32 sfxID, u8 pan, u8 volume) // Play Item SFX 2
 {
     s32 sfxID2;

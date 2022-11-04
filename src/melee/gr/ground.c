@@ -4310,6 +4310,8 @@ void func_801C5414(void* arg0, s32 arg1)
     func_80023870(arg0, 0x7F, 0x40, arg1);
 }
 
+#include <melee/lb/lbaudio_ax.h>
+
 void func_801C5440(Map* gp, s32 i, u32 arg2)
 {
     if (i < 0 || i >= 8) {
