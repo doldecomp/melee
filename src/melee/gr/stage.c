@@ -272,6 +272,8 @@ s32 Stage_80224FDC(Vec* arg0)
     return 0;
 }
 
+#include <melee/lb/lbaudio_ax.h>
+
 s32 Stage_80225074(s32 arg0)
 {
 
