@@ -8120,6 +8120,8 @@ lbl_8008DAFC:
 } // clang-format on
 #pragma pop
 
+#include <melee/lb/lbbgflash.h>
+
 #pragma push
 asm unk_t func_8008DB10()
 { // clang-format off

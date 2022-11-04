@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/lb/lbbgflash"
-s32 func_80021C48();
-#pragma endregion
-
 #pragma region "melee/lb/lbaudio_ax"
 void func_800236B8(s32);
 u32 func_800237A8(u32, u32, u32);
