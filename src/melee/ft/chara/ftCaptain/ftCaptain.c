@@ -20,30 +20,31 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj) {
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx
-void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+void ftCaptain_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
-// ftCFalcon_OnItemInvisible
+// ftCaptain_OnItemInvisible
 // OnMakeItemInvisible
 // https://decomp.me/scratch/maRvM
-void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftCaptain_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
     Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
-// ftCFalcon_OnItemVisible
+// ftCaptain_OnItemVisible
 // OnMakeInvisible
 // https://decomp.me/scratch/95tCp
-void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftCaptain_OnItemVisible(HSD_GObj* fighter_gobj)
 {
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-// ftCFalcon_OnItemDrop
+// ftCaptain_OnItemDrop
 // Used for both OnItemRelease and OnUnknownItemRelated
 // https://decomp.me/scratch/PCT5B
-void ftCFalcon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftCaptain_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
@@ -68,10 +69,10 @@ void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)
     PUSH_ATTRS(fp, ftCaptainAttributes);
 }
 
-// ftCFalcon_LoadSpecialAttrs
+// ftCaptain_LoadSpecialAttrs
 // ResetAttribute
 // https://decomp.me/scratch/mKLYI
-void ftCFalcon_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftCaptain_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
 {
     COPY_ATTRS(fighter_gobj, ftCaptainAttributes);
 }

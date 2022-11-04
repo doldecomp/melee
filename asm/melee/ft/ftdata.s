@@ -1162,7 +1162,7 @@ ft_SpecialS:
 ft_SpecialAirHi:
     .4byte ftMario_SpecialAirHi_StartAction
     .4byte ftFox_SpecialAirHi_StartAction
-    .4byte ftCFalcon_SpecialAirHi_StartAction
+    .4byte ftCaptain_SpecialAirHi_StartAction
     .4byte ftDonkey_SpecialAirHi_StartAction
     .4byte ftKirby_SpecialAirHi_StartAction
     .4byte ftKoopa_SpecialAirHi_StartAction
@@ -1185,7 +1185,7 @@ ft_SpecialAirHi:
     .4byte ftFox_SpecialAirHi_StartAction
     .4byte ftPikachu_SpecialAirHi_StartAction
     .4byte ftGameWatch_SpecialAirHi_StartAction
-    .4byte ftCFalcon_SpecialAirHi_StartAction
+    .4byte ftCaptain_SpecialAirHi_StartAction
     .4byte ftMars_SpecialAirHi_StartAction
     .4byte NULL
     .4byte NULL
@@ -1199,7 +1199,7 @@ ft_SpecialAirHi:
 ft_SpecialAirLw:
     .4byte ftMario_SpecialAirLw_StartAction
     .4byte ftFox_SpecialAirLw_StartAction
-    .4byte ftCFalcon_SpecialAirLw_StartAction
+    .4byte ftCaptain_SpecialAirLw_StartAction
     .4byte NULL
     .4byte ftKirby_SpecialAirLw_StartAction
     .4byte ftKoopa_SpecialAirLw_StartAction
@@ -1222,7 +1222,7 @@ ft_SpecialAirLw:
     .4byte ftFox_SpecialAirLw_StartAction
     .4byte ftPikachu_SpecialAirLw_StartAction
     .4byte ftGameWatch_SpecialAirLw_StartAction
-    .4byte ftCFalcon_SpecialAirLw_StartAction
+    .4byte ftCaptain_SpecialAirLw_StartAction
     .4byte ftMars_SpecialAirLw_StartAction
     .4byte NULL
     .4byte NULL
@@ -1347,7 +1347,7 @@ ft_SpecialN:
 ft_SpecialLw:
     .4byte ftMario_SpecialLw_StartAction
     .4byte ftFox_SpecialLw_StartAction
-    .4byte ftCFalcon_SpecialLw_StartAction
+    .4byte ftCaptain_SpecialLw_StartAction
     .4byte ftDonkey_SpecialLw_StartAction
     .4byte ftKirby_SpecialLw_StartAction
     .4byte ftKoopa_SpecialLw_StartAction
@@ -1370,7 +1370,7 @@ ft_SpecialLw:
     .4byte ftFox_SpecialLw_StartAction
     .4byte ftPikachu_SpecialLw_StartAction
     .4byte ftGameWatch_SpecialLw_StartAction
-    .4byte ftCFalcon_SpecialLw_StartAction
+    .4byte ftCaptain_SpecialLw_StartAction
     .4byte ftMars_SpecialLw_StartAction
     .4byte NULL
     .4byte NULL
@@ -1457,7 +1457,7 @@ ft_OnAbsorb:
 ft_OnItemPickupExt:
     .4byte ftMario_OnItemPickup
     .4byte ftFox_OnItemPickup
-    .4byte ftCFalcon_OnItemPickup
+    .4byte ftCaptain_OnItemPickup
     .4byte ftDonkey_OnItemPickup
     .4byte ftKirby_OnItemPickup 
     .4byte ftKoopa_OnItemPickup
@@ -1493,7 +1493,7 @@ ft_OnItemPickupExt:
 ft_OnItemInvisible:
     .4byte ftMario_OnItemInvisible
     .4byte ftFox_OnItemInvisible
-    .4byte ftCFalcon_OnItemInvisible
+    .4byte ftCaptain_OnItemInvisible
     .4byte ftDonkey_OnItemInvisible
     .4byte ftKirby_OnItemInvisible
     .4byte ftKoopa_OnItemInvisible
@@ -1529,7 +1529,7 @@ ft_OnItemInvisible:
 ft_OnItemVisible:
     .4byte ftMario_OnItemVisible
     .4byte ftFox_OnItemVisible
-    .4byte ftCFalcon_OnItemVisible
+    .4byte ftCaptain_OnItemVisible
     .4byte ftDonkey_OnItemVisible
     .4byte ftKirby_OnItemVisible
     .4byte ftKoopa_OnItemVisible
@@ -1565,7 +1565,7 @@ ft_OnItemVisible:
 ft_OnItemDropExt:
     .4byte ftMario_OnItemDrop
     .4byte ftFox_OnItemDrop
-    .4byte ftCFalcon_OnItemDrop
+    .4byte ftCaptain_OnItemDrop
     .4byte ftDonkey_OnItemDrop
     .4byte ftKirby_OnItemDrop
     .4byte ftKoopa_OnItemDrop
@@ -1601,7 +1601,7 @@ ft_OnItemDropExt:
 ft_OnItemPickup:
     .4byte ftMario_OnItemPickup
     .4byte ftFox_OnItemPickup
-    .4byte ftCFalcon_OnItemPickup
+    .4byte ftCaptain_OnItemPickup
     .4byte ftDonkey_OnItemPickup
     .4byte ftKirby_OnItemPickup
     .4byte ftKoopa_OnItemPickup
@@ -1637,7 +1637,7 @@ ft_OnItemPickup:
 ft_OnItemDrop:
     .4byte ftMario_OnItemDrop
     .4byte ftFox_OnItemDrop
-    .4byte ftCFalcon_OnItemDrop
+    .4byte ftCaptain_OnItemDrop
     .4byte ftDonkey_OnItemDrop
     .4byte ftKirby_OnItemDrop
     .4byte ftKoopa_OnItemDrop
@@ -1889,7 +1889,7 @@ lbl_803C1E38:
 ft_LoadSpecialAttrs:
     .4byte ftMario_LoadSpecialAttrs
     .4byte ftFox_LoadSpecialAttrs
-    .4byte ftCFalcon_LoadSpecialAttrs
+    .4byte ftCaptain_LoadSpecialAttrs
     .4byte ftDonkey_LoadSpecialAttrs
     .4byte ftKirby_LoadSpecialAttrs
     .4byte ftKoopa_LoadSpecialAttrs
