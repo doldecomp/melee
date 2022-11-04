@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/ft/ftcommon"
-void func_800804FC();
-#pragma endregion
-
 #pragma region "melee/ft/code_80081938"
 void func_800819A8();
 #pragma endregion
