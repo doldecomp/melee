@@ -883,6 +883,7 @@ void func_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
 }
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftdata.h>
 
 void func_80087508(s8 arg0, u8 arg1)
 {

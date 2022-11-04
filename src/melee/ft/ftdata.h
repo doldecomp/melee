@@ -2,6 +2,7 @@
 #define MELEE_FT_FTDATA_H
 
 #include <ctypes.h>
+#include <melee/ft/enums.h>
 
 typedef struct _HSD_GObj HSD_GObj;
 
@@ -17,5 +18,6 @@ extern unk_t lbl_803C25F4;
 extern unk_t lbl_803C24EC;
 extern unk_t lbl_803C1E38;
 void func_800855C8(s32 id, s32 slot);
+void func_8008572C(u32);
 
 #endif
