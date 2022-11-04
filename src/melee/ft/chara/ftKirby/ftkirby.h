@@ -53,5 +53,6 @@ unk_t func_800EEEC4();
 unk_t func_800F190C();
 unk_t func_800F5874();
 void func_800EED50(s32 param1, s32 param2);
+void func_800F1D24(HSD_GObj* fighter_gobj);
 
 #endif
