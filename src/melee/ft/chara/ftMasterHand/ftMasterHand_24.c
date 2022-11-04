@@ -15,7 +15,7 @@ void ftMasterHand_80154C78(HSD_GObj* fighter_gobj)
     fp->x234C_pos.z = 0.0F;
 }
 
-// todo: fp_1 is part of an inline
+// TODO fp_1 is part of an inline
 void ftMasterHand_80154CF8(HSD_GObj* fighter_gobj, Fighter* fp)
 {
     Fighter* fp_1 = fighter_gobj->user_data;

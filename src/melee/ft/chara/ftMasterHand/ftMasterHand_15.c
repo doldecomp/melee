@@ -228,7 +228,7 @@ static void ftMasterHand_801535B0(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 0;
     }
 
-    // todo: inline with above block?
+    // TODO inline with above block?
     if (fp->x2204_ftcmd_var1 != 0) {
         ftMasterHand_8015364C(fighter_gobj, fp->x5E8_fighterBones[13].x0_jobj, ext_attr->x100, ext_attr->x104);
         fp->x2204_ftcmd_var1 = 0;

@@ -56,7 +56,7 @@ typedef struct _CollData {
     ftECB xA4_ecbCurrCorrect;
     ftECB xC4_ecb;
     ftECB xE4_ecb;
-    s32 x104; // TODO: this is the start of a substruct with size 0x2C
+    s32 x104; // TODO this is the start of a substruct with size 0x2C
     union {
         struct {
             HSD_JObj* x108_joint;

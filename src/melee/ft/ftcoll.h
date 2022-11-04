@@ -56,7 +56,7 @@ unk_t func_80078C70();
 unk_t func_8007925C();
 void func_800764DC(HSD_GObj* fighter_gobj);
 
-/* todo
+/* TODO
  * Real signature is:
  *
  * void func_8007B62C(HSD_GObj* fighter_gobj, u32, void* ext_attr);

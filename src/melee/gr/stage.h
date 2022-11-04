@@ -103,7 +103,7 @@ typedef struct _StageInfo {
     s32 x9C;
     u8 xA0[4];
     u8 xA4_pad[0x12C - 0xA4];
-    // TODO: determine actual type of x12C
+    // TODO determine actual type of x12C
     // Maybe a GObj with hsd_obj = TObj?
     struct {
         u8 x0_pad[0x28];

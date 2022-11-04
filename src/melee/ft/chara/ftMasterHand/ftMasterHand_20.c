@@ -75,7 +75,7 @@ void ftMasterHand_80153F8C(HSD_GObj* fighter_gobj)
 {
     HSD_GObj* temp_gobj = fighter_gobj;
 
-    /* todo: very likely an inline */ {
+    /* TODO very likely an inline */ {
         Fighter* fp = temp_gobj->user_data;
         u32 unused0;
 

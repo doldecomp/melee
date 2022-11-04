@@ -2173,7 +2173,7 @@ lbl_803C2258:
     .4byte NULL
     .4byte NULL
 
-    # TODO: What is this table?
+    # TODO What is this table?
     .4byte NULL
     .4byte NULL
     .4byte NULL

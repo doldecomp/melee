@@ -58,7 +58,11 @@ void func_8007DA24(Fighter* fp);
 f32 func_8007DA74(s32, u32, f32);
 void func_8007DB24(HSD_GObj* fighter_gobj);
 void func_8007DB58(HSD_GObj* fighter_gobj);
-void func_8007DBCC(Fighter* fp, BOOL, f32);
+
+/* TODO
+* void func_8007DBCC(Fighter* fp, BOOL, f32);
+*/
+
 s32 func_8007DC08(Fighter* fp, f32);
 void func_8007DD7C(HSD_GObj* fighter_gobj, Vec*);
 void func_8007DFD0();

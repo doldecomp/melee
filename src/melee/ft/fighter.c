@@ -30,7 +30,7 @@ const Vec3 vec3_803B7494 = { 0.0F, 0.0F, 0.0F };
 HSD_ObjAllocData lbl_80458FD0;
 HSD_ObjAllocData lbl_80458FFC;
 
-// TODO: verify that this is really a spawn number counter, then rename this var globally
+// TODO verify that this is really a spawn number counter, then rename this var globally
 u32 lbl_804D64F8 = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
@@ -85,7 +85,7 @@ void Fighter_800679B0()
     func_8009F4A4();
     func_800C8064();
     func_800C8F6C();
-    // @TODO: &lbl_80458FD0+2, +3, +4 are not defined in the fighter.s data section, how does this work?
+    // TODO &lbl_80458FD0+2, +3, +4 are not defined in the fighter.s data section, how does this work?
     HSD_ObjAllocInit(&lbl_80458FD0 + 2, /*size*/ 0x8c0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80458FD0 + 3, /*size*/ 0x1f0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80458FD0 + 4, /*size*/ 0x80, /*align*/ 4);
@@ -101,7 +101,7 @@ void Fighter_800679B0()
 void Fighter_FirstInitialize_80067A84()
 {
     Fighter_800679B0();
-    // TODO: size parameter too large to be only the size. maybe this contains flags. In other function calls, size only looks plausible. Or is this virtual memory?
+    // TODO size parameter too large to be only the size. maybe this contains flags. In other function calls, size only looks plausible. Or is this virtual memory?
     HSD_ObjAllocInit(&lbl_804590AC, /*size*/ 0x0000800000008000, /*align*/ 0x20);
 }
 
@@ -798,7 +798,7 @@ static u32 Fighter_NewSpawn_80068E40(void)
 
 void Fighter_80068E64(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = (void*) getFighter(fighter_gobj); // bit of a fake void* cast, but a sacrifice well worth getting rid of an fp_temp and filler. TODO: Maybe we can still do better?
+    Fighter* fp = (void*) getFighter(fighter_gobj); // bit of a fake void* cast, but a sacrifice well worth getting rid of an fp_temp and filler. TODO Maybe we can still do better?
 
     if (stage_info.internal_stage_id == 0x1B) {
         fp->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
@@ -1180,7 +1180,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 new_action_s
     }
 
     // looks gross, used to declare the volatile here to maintain the stack order.
-    // TODO: There has to be some way to get rid of this while maintaining the
+    // TODO There has to be some way to get rid of this while maintaining the
     // effect it has on the stack.
     if (1) {
         volatile s32 volatile_integer = fp->x2070_int;
@@ -2187,7 +2187,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
         // copy selfVel into a stack storage variable
         selfVel = fp->x80_self_vel;
 
-        // TODO: these double_lower_32bit variables are probably integer counters that get decremented each frame,
+        // TODO these double_lower_32bit variables are probably integer counters that get decremented each frame,
         // but I was not able to trigger the following condition.
         // The double value construction then is only used as an interpolation tool between selfVel and some UnkVel2.
         if (fp->dmg.x1948 != 0) {
@@ -2229,7 +2229,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
             if (bit || func_80070FD0(fp) || fp->x594_animCurrFlags1.bits.b7) {
                 // fp->xB0_position += fp->xD4_unk_vel
                 PSVECAdd(&fp->xB0_pos, &fp->xD4_unk_vel, &fp->xB0_pos);
-                // TODO: we set this velocity to 0 after applying it -> Is this SDI or ASDI?
+                // TODO we set this velocity to 0 after applying it -> Is this SDI or ASDI?
                 VEC_CLEAR(fp->xD4_unk_vel);
             }
             // fp->xB0_position += *pAtkShieldKB
@@ -2268,7 +2268,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
     fp->xB0_pos.y += windOffset.y;
     fp->xB0_pos.z += windOffset.z;
 
-    // TODO: do the bitflag tests here tell us if the player is dead?
+    // TODO do the bitflag tests here tell us if the player is dead?
     func_800D3158(fighter_gobj);
 
     if (fp->x2225_flag.bits.b0) {

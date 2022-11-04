@@ -430,7 +430,7 @@ static BOOL func_801C0A70(Point3d* pos)
             OLDPUPUPU,
             OLDYOSHI,
             OLDKONGO,
-            // TODO: what stages are these?
+            // TODO what stages are these?
             36,
             37,
         };
@@ -1501,7 +1501,7 @@ f32 func_801C20D0(void)
     return stage_info.cam_info.cam_vertical_tilt;
 }
 
-// TODO: attempt decomp once param types are known
+// TODO attempt decomp once param types are known
 char lightset[9] = "lightset";
 char plightset[10] = "*lightset";
 static asm void* func_801C20E0()

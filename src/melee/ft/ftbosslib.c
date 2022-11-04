@@ -38,7 +38,7 @@ void ftbosslib_8015BDB4(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     Gm_PKind kind = Player_GetPlayerSlotType(fp->xC_playerID);
-    { // TODO: assert macro
+    { // TODO assert macro
         BOOL bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu);
         if (!bad) {
             OSReport("boss is human or boss!\n");

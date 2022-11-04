@@ -11921,9 +11921,12 @@ extern Vec const lbl_803B74B0;
 extern unk_t lbl_80091274();
 extern unk_t func_8009E140();
 
-// todo: headers are too messy to use dolphin/mtx.h
+// TODO headers are too messy to use (dolphin/mtx.h)
 extern void PSMTXConcat(const Mtx a, const Mtx b, Mtx ab);
 extern void PSMTXTranspose(const Mtx src, Mtx xPose);
+
+// TODO In ftcommon.h
+extern void func_8007DBCC();
 
 #pragma push
 asm unk_t func_80090B60()

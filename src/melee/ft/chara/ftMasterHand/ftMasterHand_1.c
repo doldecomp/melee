@@ -7,7 +7,7 @@ void ftMasterhand_OnDeath(HSD_GObj* fighter_gobj)
 
 void ftMasterhand_OnLoad(HSD_GObj* fighter_gobj)
 {
-    /* todo:
+    /* TODO
      * There's something weird here with the variable layout.
      * `ftdata` and `ext_attr` seem to be in scope 0
      * `fp` seems to be in scope 1

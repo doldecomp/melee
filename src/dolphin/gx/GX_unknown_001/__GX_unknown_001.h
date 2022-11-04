@@ -1,5 +1,5 @@
 // header for shared private declarations of unsplit GX files
-// todo: move into split sections' GX_*.c
+// TODO move into split sections' GX_*.c
 #ifndef DOLPHIN_GX_GX_UNKNOWN_001___GX_UNKNOWN_001_H
 #define DOLPHIN_GX_GX_UNKNOWN_001___GX_UNKNOWN_001_H
 

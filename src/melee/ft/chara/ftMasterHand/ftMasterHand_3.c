@@ -4,7 +4,7 @@
 
 #pragma push
 
-// todo: proper inlines should fix this due to max inline depth.
+// TODO proper inlines should fix this due to max inline depth.
 #pragma dont_inline on
 
 static void ftMasterHand_80150C8C(HSD_GObj* fighter_gobj)

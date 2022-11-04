@@ -87,7 +87,7 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-// todo: same inline as ftMasterHand_80153254
+// TODO same inline as ftMasterHand_80153254
 void ftMasterHand_80152A50(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
