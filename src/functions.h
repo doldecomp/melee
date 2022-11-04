@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/ft/ftfox"
-void ftFox_LoadSpecialAttrs(HSD_GObj*);
 void ftFox_RemoveBlaster(HSD_GObj*);
 #pragma endregion
 

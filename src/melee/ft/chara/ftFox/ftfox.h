@@ -343,5 +343,6 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj);
 void ftFox_SpecialSEnd_Action(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirSEnd_Action(HSD_GObj* fighter_gobj);
+void ftFox_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 
 #endif
