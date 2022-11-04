@@ -128,6 +128,8 @@ void ftPurin_OnLoad(HSD_GObj* fighter_gobj)
     func_8013C360(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 {
     Fighter* fp = getFighter(fighter_gobj);

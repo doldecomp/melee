@@ -2026,6 +2026,8 @@ void Fighter_Unload_8006DABC(Fighter* fp);
         }                                                 \
     }
 
+#include <melee/ft/ftanim.h>
+
 /// used for all fighters except Kirby and Purin
 static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag, BOOL bool2, BOOL bool3)
 {
