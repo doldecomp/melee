@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/lb/lbarchive"
-void func_80016C64(char*, unk_t*, char*, s32, ...); // from lbarchive.s, vararg may start earlier
-#pragma endregion
-
 #pragma region "melee/lb/lbmthp"
 f32 func_8001E8F8(u32);
 #pragma endregion

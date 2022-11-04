@@ -105,6 +105,7 @@ void Fighter_FirstInitialize_80067A84()
 	HSD_ObjAllocInit(&lbl_804590AC, /*size*/0x0000800000008000, /*align*/0x20); 
 }
 
+#include <melee/lb/lbarchive.h>
 
 void Fighter_LoadCommonData()
 {

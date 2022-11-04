@@ -1915,6 +1915,8 @@ void Player_80036DA4() {
     Fighter_FirstInitialize_80067A84();
 }
 
+#include <melee/lb/lbarchive.h>
+
 void Player_80036DD8() {   
     s32 *sp8;
 

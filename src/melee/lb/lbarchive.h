@@ -42,4 +42,7 @@ void func_80016BE0();
 HSD_Archive* func_80016DBC(unk_t, ...);
 s32 func_800171CC(void*, ...);
 
+// vararg may start earlier
+void func_80016C64(char*, unk_t*, char*, s32, ...);
+
 #endif
