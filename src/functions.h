@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/ft/ftcommon"
-void func_8007E2FC(HSD_GObj*);
 void func_8007E83C(HSD_GObj*, s32, f32 div);
 s32 ftGetParasolStatus(HSD_GObj*);
 void func_8007EA90(Fighter*, s32);
