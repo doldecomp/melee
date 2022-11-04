@@ -218,5 +218,6 @@ void func_800D94D8(HSD_GObj* fighter_gobj);
 void func_800DA824(Fighter* victim_fp);
 void func_800DB368(Fighter* victim_fp, Fighter* self_fp);
 void func_800DB464(HSD_GObj* fighter_gobj);
+void func_800DC750(HSD_GObj* interacted_fighter_gobj);
 
 #endif
