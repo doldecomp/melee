@@ -32,7 +32,7 @@ HSD_GObj* func_80086794(HSD_GObj*);
 BOOL func_800867A0(HSD_GObj*, HSD_GObj*);
 HSD_GObj* func_800867CC(HSD_GObj*);
 BOOL func_800867D8(HSD_GObj*);
-void func_800867E8(HSD_GObj*);
+void func_800867E8(HSD_GObj* cur_gobj);
 void func_80086824(void);
 void func_8008688C(HSD_GObj*);
 void func_800868A4(void);
