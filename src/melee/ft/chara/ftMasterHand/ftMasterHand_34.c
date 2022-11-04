@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/ft/ft_unknown_006.h>
+
 void ftMasterHand_80155D1C(HSD_GObj* interacted_gobj)
 {
     Fighter* interacted_fp = interacted_gobj->user_data;

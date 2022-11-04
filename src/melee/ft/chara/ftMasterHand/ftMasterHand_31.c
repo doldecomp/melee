@@ -9,7 +9,7 @@ extern void func_8007DBCC();
 /**
  * TODO Real signature:
  * void ftMasterHand_OnGrabFighter_Victim(HSD_GObj* self_gobj, HSD_GObj* victim_gobj, f32);
- * 
+ *
  * Is supposed to pass its third argument to func_8007DBCC.
  */
 void ftMasterHand_OnGrabFighter_Victim(HSD_GObj* self_gobj, HSD_GObj* victim_gobj)
