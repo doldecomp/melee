@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/ft/fighter"
-u32 Fighter_NewSpawn_80068E40();
 void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 newAction, s32 flags, HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
 #pragma endregion
 

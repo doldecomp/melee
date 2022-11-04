@@ -161,6 +161,8 @@ void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj)
     HSD_JObjSetScale(jobj, &scale);
 }
 
+static u32 Fighter_NewSpawn_80068E40(void);
+
 void Fighter_UnkInitReset_80067C98(Fighter* fp)
 {
     Vec3 player_coords;
@@ -780,7 +782,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj, struct S_TEMP1* argdat
 }
 
 // increments the spawn number, returns the spawn number value before incrementing
-u32 Fighter_NewSpawn_80068E40()
+static u32 Fighter_NewSpawn_80068E40(void)
 {
     u32 spawnNum = g_spawnNumCounter++;
     if (g_spawnNumCounter == 0)

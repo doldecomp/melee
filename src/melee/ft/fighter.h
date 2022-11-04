@@ -1970,7 +1970,6 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighter_gobj);
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
 void Fighter_ResetInputData_80068854(HSD_GObj* fighter_gobj);
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj, struct S_TEMP1* argdata);
-u32 Fighter_NewSpawn_80068E40();
 void Fighter_80068E64(HSD_GObj* fighter_gobj);
 HSD_GObj* Fighter_80068E98(struct S_TEMP1* input);
 void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 new_action_state_index, s32 flags, HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
