@@ -10,5 +10,6 @@ void ftLink_OnItemDrop(HSD_GObj* fighter_gobj, BOOL arg1);
 void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool);
 void func_800EC06C(void);
 void func_800ECD04(HSD_GObj* fighter_gobj);
+void func_800ECD58(HSD_GObj* fighter_gobj);
 
 #endif
