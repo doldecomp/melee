@@ -17,4 +17,6 @@ BOOL func_80164840(u8);
  */
 s32 func_8016AEDC(void);
 
+BOOL func_8016B1C4(void);
+
 #endif

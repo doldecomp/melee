@@ -2450,6 +2450,8 @@ void Fighter_8006C80C(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/gm/code_801601C4.h>
+
 void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj)
 {
 

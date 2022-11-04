@@ -44,6 +44,8 @@ BOOL func_80086140(void)
     return FALSE;
 }
 
+#include <melee/gm/code_801601C4.h>
+
 HSD_GObj* func_80086198(HSD_GObj* gobj)
 {
     Fighter* fp;

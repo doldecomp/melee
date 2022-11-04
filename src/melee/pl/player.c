@@ -1270,6 +1270,8 @@ s32 Player_GetKOsByPlayerIndex(s32 slot, s32 index) {
     return player->kos_by_player[index];
 }
 
+#include <melee/gm/code_801601C4.h>
+
 void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot) {  
     StaticPlayer* player;
     StaticPlayer* other_player;

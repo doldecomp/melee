@@ -36664,6 +36664,8 @@ lbl_800A3828:
 } // clang-format on
 #pragma pop
 
+#include <melee/gm/code_801601C4.h>
+
 #pragma push
 asm unk_t func_800A3844()
 { // clang-format off

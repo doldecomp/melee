@@ -2918,13 +2918,14 @@ lbl_80078A10:
 } // clang-format on
 #pragma pop
 
+#include <melee/gm/code_801601C4.h>
+
 extern f32 lbl_804D8310;
 extern unk_t func_80084CE4();
 extern unk_t func_80007ECC();
 extern unk_t func_8007F804();
 extern unk_t func_8000ACFC();
 extern unk_t func_8016B0D4();
-extern unk_t func_8016B168();
 extern unk_t func_80086FD4();
 
 #pragma push

@@ -2035,6 +2035,7 @@ lbl_802F61E8:
 #endif
 
 #include <melee/pl/player.h>
+#include <melee/gm/code_801601C4.h>
 
 extern char* lbl_803F9598;
 extern char* lbl_804D57C0;
