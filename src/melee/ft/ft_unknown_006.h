@@ -195,4 +195,6 @@ void func_800C9840(HSD_GObj* fighter_gobj, s32 action_state, BOOL, f32, f32 turn
  */
 BOOL func_800CAE80();
 
+void func_800CB110(HSD_GObj* fighter_gobj, BOOL, f32);
+
 #endif
