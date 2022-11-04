@@ -333,7 +333,6 @@ void func_800DE7C0(HSD_GObj *, s32, s32);
 
 void func_800DEEA8(HSD_GObj *fighter_gobj);
 
-u32 func_800DEEE8(Fighter *, Vec2 *);
 void func_800DEF38();
 void func_800DF0D0();
 
