@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/mp/mplib"
-void func_80053ECC(u32, f32*);
 void func_80053FF4(s32, Vec*);
 void func_80054158(s32, Vec*);
 s32 func_800567C0(s32 wall_id, Vec* ecb_side_vertex, Vec* result);
