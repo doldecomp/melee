@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/lb/lbaudio_ax"
-void func_80024B58(s32, s32);
-#pragma endregion
-
 #pragma region "melee/cm/camera"
 CameraBox* func_80029020();
 void func_800290D4();
