@@ -19,7 +19,7 @@ HSD_GObj* func_8007CC1C(HSD_GObj*);
 void func_8007CC78(Fighter*, f32 max);
 void func_8007CCA0(Fighter* fp, f32);
 void func_8007CCE8(Fighter*);
-f32 func_8007CD6C(f32, f32 decrement);
+f32 func_8007CD6C(f32 value, f32 decrement);
 f32 func_8007CDA4(Fighter*);
 f32 func_8007CDF8(Fighter*);
 void func_8007CE4C(Fighter*, f32);
