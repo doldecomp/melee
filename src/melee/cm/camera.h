@@ -25,5 +25,6 @@ unk_t func_80030E44();
 CameraBox* func_80029020();
 void func_800290D4();
 void func_8002A278(f32 x, f32 y);
+void func_8002E6FC(u8);
 
 #endif

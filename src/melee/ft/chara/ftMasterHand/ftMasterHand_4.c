@@ -48,6 +48,8 @@ void ftMasterHand_801511F8(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <melee/cm/camera.h>
+
 static void ftMasterHand_801511FC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
