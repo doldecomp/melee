@@ -55082,6 +55082,8 @@ lbl_800B3394:
 } // clang-format on
 #pragma pop
 
+#include <melee/mp/mplib.h>
+
 extern f64 const lbl_804D88F8;
 extern f32 const lbl_804D89C0;
 extern f32 const lbl_804D89C4;

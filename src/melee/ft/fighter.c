@@ -905,6 +905,7 @@ inline f32 pickValue(f32 argA, u8* unk_byte_ptr)
     return (argA == -1.0f) ? 0.0f :  (argA) ? argA : *unk_byte_ptr;
 }
 
+#include <melee/mp/mplib.h>
 #include <melee/pl/pl_unknown_001.h>
 
 void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 new_action_state_index, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA) {

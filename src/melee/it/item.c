@@ -1499,9 +1499,10 @@ s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones
     return 0;
 }
 
-// 0x802697D4
-// https://decomp.me/scratch/iJ7xS
-void func_802697D4(HSD_GObj* item_gobj) // Item Think - Physics
+#include <melee/mp/mplib.h>
+
+// Item think - physics
+void func_802697D4(HSD_GObj* item_gobj)
 {
     Vec3 sp1C;
     s32 filler[4];

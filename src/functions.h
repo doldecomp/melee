@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/mp/mplib"
-s32 func_800567C0(s32 wall_id, Vec* ecb_side_vertex, Vec* result);
-#pragma endregion
-
 #pragma region "melee/ef/efasync"
 void func_8006737C(s8);
 void func_80067624();
