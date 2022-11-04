@@ -106,6 +106,8 @@ void func_8012B918(HSD_GObj* fighter_gobj)
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, 0.0f);
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftYoshi_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

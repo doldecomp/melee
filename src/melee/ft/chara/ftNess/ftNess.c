@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftNess/__ftNess.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftNess_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

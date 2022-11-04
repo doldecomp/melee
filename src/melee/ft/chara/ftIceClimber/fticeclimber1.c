@@ -41,6 +41,8 @@ void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj) {
 
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftIceClimber_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;

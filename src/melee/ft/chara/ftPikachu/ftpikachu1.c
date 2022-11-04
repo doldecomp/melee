@@ -20,6 +20,8 @@ void ftPikachu_OnLoad(HSD_GObj* fighter_gobj) {
 
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftPikachu_OnDeath(HSD_GObj* fighter_gobj) {
     s32 unused[2];
     func_80074A4C(fighter_gobj, 0, 0);

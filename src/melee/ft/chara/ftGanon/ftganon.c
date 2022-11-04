@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftCaptain/__ftCaptain.h>
 #include <melee/ft/chara/ftGanon/ftganon.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftGanon_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

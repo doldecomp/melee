@@ -17,6 +17,8 @@ void ftNana_OnLoad(HSD_GObj* fighter_gobj) {
 
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftNana_OnDeath(HSD_GObj* fighter_gobj) {
     s32 unused;
     Fighter* fp = fighter_gobj->user_data;

@@ -2,6 +2,8 @@
 #include <melee/ft/chara/ftGigaKoopa/ftgigakoopa.h>
 
 #include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+
 
 void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj) {
     s32 unused[2];

@@ -2,6 +2,8 @@
 
 #include <melee/it/itkind.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/ft/ftparts.h>
+
 
 extern void func_800BC7E0(HSD_GObj*, HSD_GObj*);
 extern void func_800BC8D4(HSD_GObj*, HSD_GObj*);

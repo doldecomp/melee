@@ -24,6 +24,8 @@ void func_8013C2F8()
     lbl_8045A1E0[4] = 0;
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftPurin_OnDeath(HSD_GObj* fighter_gobj)
 {
     func_80074A4C(fighter_gobj, 0, 0);

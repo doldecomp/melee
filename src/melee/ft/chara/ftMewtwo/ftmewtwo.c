@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 #include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+
 
 void ftMewtwo_OnDeath(HSD_GObj* gobj) {
     Fighter* fp = (Fighter*)gobj->user_data;

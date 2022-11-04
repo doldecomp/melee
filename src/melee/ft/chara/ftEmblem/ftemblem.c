@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftEmblem/ftemblem.h>
 
 #include <melee/ft/chara/ftMars/ftMars.h>
+#include <melee/ft/ftparts.h>
 
 void ftRoy_OnDeath(HSD_GObj* gobj)
 {
@@ -11,7 +12,8 @@ void ftRoy_OnDeath(HSD_GObj* gobj)
     fp->sa.mars.x222C = 0;
 }
 
-void ftRoy_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+void ftRoy_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 1);
 }
 

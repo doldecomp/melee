@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
 
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
 #include <melee/it/itkind.h>
 
 void ftCLink_OnDeath(HSD_GObj* gobj)
@@ -74,7 +75,8 @@ void ftCLink_OnItemDropExt(HSD_GObj* gobj, s32 arg1)
     ftCLink_OnItemDrop(gobj, arg1);
 }
 
-void ftCLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+void ftCLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 

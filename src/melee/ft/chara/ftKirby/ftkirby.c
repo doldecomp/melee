@@ -58,6 +58,8 @@ void func_800EE528() {
     }
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftKirby_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter *fp = fighter_gobj->user_data;
     func_80074A4C(fighter_gobj, 0, 0);

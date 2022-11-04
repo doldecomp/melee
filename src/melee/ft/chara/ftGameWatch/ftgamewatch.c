@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj) 
 {
     Fighter* fp = fighter_gobj->user_data;

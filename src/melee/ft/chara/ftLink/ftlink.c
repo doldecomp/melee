@@ -13,6 +13,8 @@ s32 func_800EAD64(HSD_GObj* fighter_gobj) {
     return 0;
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftLink_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     func_80074A4C(fighter_gobj, 0, 0);

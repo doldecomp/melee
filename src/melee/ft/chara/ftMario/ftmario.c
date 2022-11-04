@@ -2,6 +2,8 @@
 #include <sysdolphin/baselib/random.h>
 
 #include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+
 
 extern s32 lbl_803C5A20[];
 
