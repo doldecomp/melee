@@ -215,5 +215,6 @@ BOOL func_800D688C(Fighter* fp);
 BOOL func_800D6928(Fighter* fp);
 void func_800D71D8(HSD_GObj* fighter_gobj);
 void func_800D94D8(HSD_GObj* fighter_gobj);
+void func_800DA824(Fighter* victim_fp);
 
 #endif
