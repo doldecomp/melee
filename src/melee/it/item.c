@@ -952,8 +952,7 @@ void func_8026849C(HSD_GObj* item_gobj) // Set item model scale
     HSD_JObjSetScale(temp_jobj, &sp14);
 }
 
-extern void func_8000FD48(HSD_JObj*, void*, s32);
-extern void func_80011710(void*, void*);
+#include <melee/lb/lbunknown_003.h>
 
 // 0x80268560
 // https://decomp.me/scratch/d3ZmY
@@ -2255,8 +2254,8 @@ void lbl_8026A294(HSD_GObj* item_gobj) // Item Think - Hit Collision
     func_80269CC4(item_gobj);
 }
 
-// 0x8026A788
-// https://decomp.me/scratch/MJJDV
+#include <melee/lb/lbunknown_003.h>
+
 void lbl_8026A788(HSD_GObj* item_gobj) // Item Think - Process Dynamic Bones
 {
     Item* item_data = item_gobj->user_data;
@@ -2366,6 +2365,8 @@ inline void RunCallback(HSD_GObj* item_gobj, void(*cb_Process)(HSD_GObj*))
         cb_Process(item_gobj);
     }
 }
+
+#include <melee/lb/lbunknown_003.h>
 
 // 0x8026A8EC
 // https://decomp.me/scratch/CWnUq

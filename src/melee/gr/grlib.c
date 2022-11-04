@@ -188,6 +188,8 @@ typedef struct _UnkAnimStruct {
     s32 x4_size;
 } UnkAnimStruct;
 
+#include <melee/lb/lbunknown_003.h>
+
 void func_801C9B20(void* arg1, UnkAnimStruct* arg2, void* arg3)
 {
     func_8000FD48(arg1, arg3, arg2->x4_size);

@@ -28438,6 +28438,8 @@ lbl_8009CF6C:
 } // clang-format on
 #pragma pop
 
+#include <melee/lb/lbunknown_003.h>
+
 extern char* lbl_803C572C;
 extern char* lbl_804D3B40;
 extern char* lbl_803C5748[];
@@ -28511,6 +28513,8 @@ lbl_8009D050:
 /* 8009D070 00099C50  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/lb/lbunknown_003.h>
 
 extern unk_t lbl_80459B88;
 
@@ -29525,6 +29529,8 @@ lbl_8009DD80:
 /* 8009DD90 0009A970  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/lb/lbunknown_003.h>
 
 extern f32 const lbl_804D876C;
 extern unk_t func_8009E614();
