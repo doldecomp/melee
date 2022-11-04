@@ -399,7 +399,6 @@ f32 func_8026B54C(HSD_GObj *);
 f32 func_8026B560(HSD_GObj *);
 f32 func_8026B574(HSD_GObj *);
 s32 func_8026B588();
-BOOL func_8026B594(HSD_GObj *);
 
 void func_8026B7F8();
 

@@ -54,6 +54,7 @@
 #include <melee/it/code_80266F3C.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/it/item.h>
+#include <melee/it/item2.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbshadow.h>

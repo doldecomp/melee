@@ -277,9 +277,8 @@ s32 func_8026B588(void) // Get unknown integer from itCommonData
     return lbl_804D6D28->xDC;
 }
 
-// 0x8026B594
-// https://decomp.me/scratch/rBoew
-BOOL func_8026B594(HSD_GObj* item_gobj) // Check if item can fire projectiles
+// Check if item can fire projectiles
+BOOL func_8026B594(HSD_GObj* item_gobj)
 {
     s32 itemID;
     Item* item_data;

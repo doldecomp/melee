@@ -12,6 +12,7 @@
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/gr/ground.h>
 #include <melee/if/ifmagnify.h>
+#include <melee/it/item2.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_002.h>
