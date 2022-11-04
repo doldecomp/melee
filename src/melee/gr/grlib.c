@@ -206,6 +206,8 @@ void func_801C9B8C(void* arg0)
     func_8001044C(arg0, 0, 0, 0.0f, 0, 0, 0, 0);
 }
 
+#include <melee/cm/camera.h>
+
 static void func_801C9BC8(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
