@@ -1,6 +1,7 @@
 #ifndef MELEE_IT_CODE_8027CF30_H
 #define MELEE_IT_CODE_8027CF30_H
 
+#include <ctypes.h>
 #include <dolphin/mtx/types.h>
 
 unk_t func_802AD590();
@@ -30,5 +31,6 @@ unk_t func_802EAE80();
 unk_t func_802DBA68();
 unk_t func_802DB9F4();
 void func_802D8618(s32, Vec*, s32, s32);
+unk_t func_802C8B28(HSD_GObj* fighter_gobj, Vec* pos, s32, f32 facing_direction);
 
 #endif

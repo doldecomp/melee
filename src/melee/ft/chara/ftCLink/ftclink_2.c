@@ -1,10 +1,12 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
 
+#include <melee/it/code_8027CF30.h>
+
 extern void func_800EAF58(HSD_GObj*);
 
 void func_80149354(HSD_GObj* gobj)
 {
-    void* temp_r3;
+    unk_t temp_r3;
     Fighter* fp;
     Fighter* ft2;
     int unused[4];
