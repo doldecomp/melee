@@ -814,7 +814,7 @@ typedef struct _ftCollisionBox {
     Vec2 right;
 
 } ftCollisionBox;
-typedef struct ftHurt
+typedef struct _ftHurt
 {
     u32 x0_bone_state;                    // 0x0, whether or not this hurtbox can be hit
     Vec3 x4_hurt1_offset;                 // 0x4

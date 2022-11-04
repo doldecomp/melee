@@ -1,8 +1,14 @@
-#ifndef _ftcoll_h_
-#define _ftcoll_h_
+#ifndef MELEE_FT_FTCOLL_H
+#define MELEE_FT_FTCOLL_H
 
-#include <melee/ef/ef.h>
-#include <melee/ft/fighter.h>
+#include <ctypes.h>
+
+typedef struct _HSD_GObj HSD_GObj;
+typedef struct _Fighter Fighter;
+typedef struct _Hitbox Hitbox;
+typedef struct _Vec Vec;
+typedef struct _ReflectDesc ReflectDesc;
+typedef struct _ftHurt ftHurt;
 
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID); // Combo Count Logic
 void func_80076444(HSD_GObj* attacker, HSD_GObj* victim);               // Combo Count Logic + Get Attack ID
@@ -48,14 +54,14 @@ unk_t func_80076640();
 unk_t func_80078A2C();
 unk_t func_80078C70();
 unk_t func_8007925C();
-
+void func_800764DC(HSD_GObj* fighter_gobj);
 
 /* todo
  * Real signature is:
  *
  * void func_8007B62C(HSD_GObj* fighter_gobj, u32, void* ext_attr);
- *
- * but some call sites need to be modified to match.
+
+#endif
  */
 void func_8007B62C();
 
