@@ -30211,6 +30211,8 @@ lbl_8009E5EC:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftanim.h>
+
 #pragma push
 asm unk_t func_8009E614()
 { // clang-format off

@@ -911,6 +911,7 @@ inline f32 pickValue(f32 argA, u8* unk_byte_ptr)
 }
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftanim.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/pl_unknown_001.h>
 
