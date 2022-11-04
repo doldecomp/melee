@@ -31,5 +31,6 @@ void func_8002EB5C(f32);
 void func_8002EC7C(f32);
 void func_8002ED9C(f32);
 void func_8002EEC8(f32);
+void func_8002EF14(void);
 
 #endif
