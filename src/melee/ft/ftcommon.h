@@ -23,7 +23,7 @@ f32 func_8007CD6C(f32 value, f32 decrement);
 f32 func_8007CDA4(Fighter* fp);
 f32 func_8007CDF8(Fighter* fp);
 void func_8007CE4C(Fighter* fp, f32 value);
-void func_8007CE94(Fighter* fp, f32);
+void func_8007CE94(Fighter* fp, f32 value);
 void func_8007CEF4(Fighter* fp);
 BOOL func_8007CF58(Fighter* fp);
 BOOL func_8007D050(Fighter* fp, f32);
