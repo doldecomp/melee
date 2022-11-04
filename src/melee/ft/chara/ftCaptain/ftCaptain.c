@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
+#include <melee/ft/chara/ftCaptain/__ftCaptain.h>
 
 // ftCaptain_OnDeath
 // OnRespawn/OnDeath (same function I've seen called differently)

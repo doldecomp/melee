@@ -1,3 +1,4 @@
+#include <melee/ft/chara/ftCaptain/__ftCaptain.h>
 #include <melee/ft/chara/ftGanon/ftganon.h>
 
 void ftGanon_OnDeath(HSD_GObj* gobj)
