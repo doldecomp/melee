@@ -2948,6 +2948,8 @@ inline HSD_ObjAllocData* sub_func(Fighter* uninitalized_fighter, Fighter* fighte
     return objAllocData;
 }
 
+#include <melee/cm/camera.h>
+
 void Fighter_Unload_8006DABC(Fighter* fp) {
     Fighter* uninitalized_fighter;
 

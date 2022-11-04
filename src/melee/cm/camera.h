@@ -23,5 +23,6 @@ unk_t func_8003118C();
 void func_8002F474(void);
 unk_t func_80030E44();
 CameraBox* func_80029020();
+void func_800290D4();
 
 #endif
