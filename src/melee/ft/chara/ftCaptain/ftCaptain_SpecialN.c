@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
+#include <melee/ft/chara/ftCaptain/__ftCaptain.h>
 
 #include <MSL/trigf.h>
 #include <melee/ef/ef.h>

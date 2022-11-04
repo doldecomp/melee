@@ -8,75 +8,48 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/tobj.h>
 
-typedef struct _HudFlags {
+typedef enum _IfDamagePlace {
+    Hundreds,
+    Tens,
+    Ones,
+    Percent,
+    HUD_PLACE_MAX
+} IfDamagePlace;
+
+typedef struct _IfDamageFlags {
     u8 explode_animation : 1;
-    u8 unk40 : 1;
+    u8 randomize_velocity : 1;
     u8 force_digit_shake : 1;
     u8 unk10 : 1;
     u8 hide_all_digits : 1;
     u8 animation_status_id : 2;
     u8 unk1 : 1;
-} HudFlags;
+} IfDamageFlags;
 
 typedef struct _UnknownClassTypeE {
     s32 padding[0x24];
     HSD_JObj* unk28;
 } UnknownClassTypeE;
 
-typedef struct _HudValue {
-    // pointer to "unknown class type E"
-    // 0x00
-    HSD_GObj* HUD_parent_entity;
-    // probably a pointer to "unknown class type E"
-    // 0x04
-    HSD_GObj* next;
-    // represents players 1-6
-    // TODO: list if this 0 indexed, or what
-    // 0x08
-    u8 player_slot;
-    // 0x09
-    u8 unk9;
-    // damage as int
-    // 0x0A
-    u16 damage_percent;
-    // 0x0C
-    u16 old_damage;
-    // 0x0E
-    u8 damage_from_last_attack;
-    // 0x0F
-    u8 frames_of_shake_remaining;
-    // 0x10
-    HudFlags flags;
-    // 0x14
-    f32 hundreds_digit_x_translation;
-    // 0x18
-    f32 tens_digit_x_translation;
-    // 0x1C
-    f32 ones_digit_x_translation;
-    // 0x20
-    f32 percent_sign_x_translation;
-    // 0x24
-    f32 hundreds_digit_y_translation;
-    // 0x28
-    f32 tens_digit_y_translation;
-    f32 ones_digit_y_translation;
-    f32 percent_sign_y_translation;
-    f32 hundreds_x_velocity;
-    f32 hundreds_y_velocity;
-    f32 tens_x_velocity;
-    f32 tens_y_velocity;
-    f32 ones_x_velocity;
-    f32 ones_y_velocity;
-    f32 percent_sign_x_velocity;
-    f32 percent_sign_y_velocity;
-    HSD_JObj* hundreds_jobj;
-    HSD_JObj* tens_jobj;
-    HSD_JObj* ones_jobj;
-    HSD_JObj* percent_sign_jobj;
-} HudValue;
+typedef struct _IfDamageState {
+    HSD_GObj* HUD_parent_entity;      // 0x00
+    HSD_GObj* next;                   // 0x04
+    u8 player_slot;                   // 0x08
+    u8 unk9;                          // 0x09
+    u16 damage_percent;               // 0x0A
+    u16 old_damage;                   // 0x0C
+    u8 damage_from_last_attack;       // 0x0E
+    u8 frames_of_shake_remaining;     // 0x0F
+    IfDamageFlags flags;              // 0x10
+    f32 translation_x[HUD_PLACE_MAX]; // 0x14
+    f32 translation_y[HUD_PLACE_MAX]; // 0x24
+    f32 velocity_x[HUD_PLACE_MAX];    // 0x34
+    f32 velocity_y[HUD_PLACE_MAX];    // 0x44
+    HSD_JObj* jobjs[HUD_PLACE_MAX];   // 0x54
+} IfDamageState;
 
 typedef struct _HudIndex {
-    HudValue players[6];
+    IfDamageState players[6];
     // 258 unk
     HSD_Joint* unk258;
     // 0x25c

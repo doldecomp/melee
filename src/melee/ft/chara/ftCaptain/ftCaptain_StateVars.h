@@ -1,19 +1,18 @@
-#ifndef _FTCAPTAIN_STATEVARS_H_
-#define _FTCAPTAIN_STATEVARS_H_
+#ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_STATEVARS_H
+#define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_STATEVARS_H
 
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftCaptainSpecialS {
-
-	f32 gravity; // 0x2340 - Gravity of aerial Raptor Boost
-
+    /* at 0x2340
+     * Gravity of aerial Raptor Boost
+     */
+    f32 gravity;
 } ftCaptainSpecialS;
 
 typedef union ftCaptainStateVars {
-
-	ftCaptainSpecialS SpecialS;
-
+    ftCaptainSpecialS SpecialS;
 } ftCaptainStateVars;
 
 #endif

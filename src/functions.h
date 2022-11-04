@@ -331,15 +331,6 @@ void func_800DE508(HSD_GObj *);
 
 void func_800DE7C0(HSD_GObj *, s32, s32);
 
-void func_800DEEA8(HSD_GObj *fighter_gobj);
-
-u32 func_800DEEE8(Fighter *, Vec2 *);
-void func_800DEF38();
-void func_800DF0D0();
-
-void ftCaptain_OnLoadForGanon(Fighter *); // UnclePunch map file: FighterOnLoad_Ganondorf
-void ftCFalcon_LoadSpecialAttrs(HSD_GObj *);
-
 void ftFox_LoadSpecialAttrs(HSD_GObj *);
 
 void ftFox_RemoveBlaster(HSD_GObj *);
@@ -365,9 +356,6 @@ void ftNess_ItemPKFlushSetNULL(HSD_GObj *);
 void ftNess_SpecialHiTakeDamage(HSD_GObj *);
 
 void ftPikachu_LoadSpecialAttrs(HSD_GObj *);
-
-f32 ftSamus_80128AC8(HSD_GObj *fighter_gobj, f32 farg1, f32 farg2);
-void ftSamus_80128B1C(HSD_GObj *, f32, f32, f32);
 
 void ftMars_OnLoadForRoy(Fighter *);
 void ftMars_LoadSpecialAttrs(HSD_GObj *);

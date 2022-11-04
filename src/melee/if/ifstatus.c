@@ -15,7 +15,6 @@ extern f32 lbl_804DDA74;
 extern f32 lbl_804DDA78;
 extern f32 lbl_804DDA7C;
 extern f32 lbl_804DDA80;
-extern u8* lbl_804D6D61;
 extern f32 lbl_804DDA6C;
 extern f32 lbl_804DDA8C;
 extern f32 lbl_804DDA90;
@@ -30,8 +29,185 @@ extern f32 lbl_804DDA48;
 extern f32 lbl_804DDA4C;
 extern f32 lbl_804DDA50;
 
+// "jobj.h" @ lbl_804D57B0
+// "jobj" @ lbl_804D57B8
+#define ASSERT_NOT_NULL(value, line)      \
+    if (value == NULL) {                  \
+        __assert("jobj.h", line, "jobj"); \
+    }
+
+extern s8 lbl_804D6D61;
+
+typedef struct _FlagsX {
+    u32 b80 : 1;
+    u32 b40 : 1;
+    u32 b20 : 1;
+    u32 b10 : 1;
+    u32 b8 : 1;
+    u32 b4 : 2;
+    u32 b1 : 1;
+    u8 x;
+    u16 y;
+} FlagsX;
+
+typedef struct _Vec4 {
+    f32 x, y, z, w;
+} Vec4;
+
+typedef struct _UnkX {
+    u8 filler1[0x10];
+    FlagsX x10_flags;
+    u8 filler2[0x34 - 0x14];
+    Vec4 x34_vec; // or f32[4] instead of Vec4
+    Vec4 x44_vec;
+    HSD_JObj* x54_jobj[4];
+} UnkX; // HudIndex
+
+#if NON_MATCHING
+
+inline f32 foo(f32 a, f32 b)
+{
+    f32 result;
+    if (lbl_804D6D61 != 0) {
+        result = -a - b;
+        lbl_804D6D61 = 0;
+    } else {
+        result = a + b;
+        lbl_804D6D61 = 1;
+    }
+    return result;
+}
+
+inline void jobj_flagCheckSetMtxDirtySub(HSD_JObj* jobj) // jobj @ r30 when inlined
+{
+    //@12c
+    if (!(jobj->flags & 0x02000000) && jobj) {
+        //@140
+        ASSERT_NOT_NULL(jobj, 0x234);
+        //@154
+        if ((!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) == 0) {
+            //@178
+            HSD_JObjSetMtxDirtySub(jobj);
+        }
+    }
+}
+
+inline void jobj_translate_x(HSD_JObj* jobj, f32 dx);
+inline void jobj_translate_y(HSD_JObj* jobj, f32 dy);
+
+inline void jobj_unk_x(UnkX* value, s32 i)
+{
+    HSD_JObj* jobj_r30 = value->x54_jobj[i];
+    //@c8
+    ASSERT_NOT_NULL(jobj_r30, 993);
+    //@e0
+    if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f) { // 100.0f @ lbl_804DDA6C
+        //@100
+        jobj_r30 = value->x54_jobj[i];
+        //@108
+        jobj_translate_x(jobj_r30, (&value->x34_vec.x)[i]);
+        //@12c
+        jobj_flagCheckSetMtxDirtySub(jobj_r30);
+    }
+}
+
+inline void jobj_unk_y(UnkX* value, s32 i)
+{
+    HSD_JObj* jobj_r30 = value->x54_jobj[i];
+    //@184
+    ASSERT_NOT_NULL(jobj_r30, 1006);
+    //@19c
+    if (jobj_r30->translate.y > -100.0f) { // -100.0f @ lbl_804DDA8C
+        //@1a8
+        jobj_r30 = value->x54_jobj[i];
+        //@1b0
+        jobj_translate_y(jobj_r30, (&value->x44_vec.x)[i]);
+
+        //@1d4
+        jobj_flagCheckSetMtxDirtySub(jobj_r30);
+        //@228
+        (&value->x44_vec.x)[i] -= 0.2028f; // gravity that makes percent tokens fall down? @ lbl_804DDA90
+    }
+}
+
+inline void jobj_translate_x(HSD_JObj* jobj, f32 dx)
+{
+    //@108
+    ASSERT_NOT_NULL(jobj, 1102);
+    //@120
+    jobj->translate.x += dx;
+}
+
+inline void jobj_translate_y(HSD_JObj* jobj, f32 dy)
+{
+    //@1b0
+    ASSERT_NOT_NULL(jobj, 1114);
+    //@1c8
+    jobj->translate.y += dy;
+}
+
+inline void jobj_unk(UnkX* value)
+{
+    //@b0
+    s32 i;
+    for (i = 0; i < 4; i++) // i@r31
+    {
+        jobj_unk_x(value, i);
+        jobj_unk_y(value, i);
+        //@234 loop increment
+    }
+}
+
+inline void* jobj_get(HSD_JObj* jobj_r30, UnkX* value, s32 i)
+{
+    return value->x54_jobj[i];
+}
+
+// HUD_PercentOnDeathAnimationThink
+void func_802F491C(UnkX* value, s32, s32)
+{
+    s32 i;
+
+    if (value->x10_flags.b40) {
+        for (i = 0; i < 4; i++) // i@r28
+        {
+            (&value->x34_vec.x)[i] = foo(0.6083f * HSD_Randf(), 0.3041f); // var_f0;
+            (&value->x44_vec.x)[i] = 0.811f * HSD_Randf() + 1.2165f;
+        }
+        value->x10_flags.b40 = 0;
+        return;
+    }
+
+    for (i = 0; i < 4; i++) // i@r31
+    {
+        HSD_JObj* jobj_r30 = value->x54_jobj[i];
+        ASSERT_NOT_NULL(jobj_r30, 993);
+        if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f) { // 100.0f @ lbl_804DDA6C
+            f32 f = (&value->x34_vec.x)[i];
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            ASSERT_NOT_NULL(jobj_r30, 1102);
+            jobj_r30->translate.x += f;
+            jobj_flagCheckSetMtxDirtySub(jobj_r30);
+        }
+        jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+        ASSERT_NOT_NULL(jobj_r30, 1006);
+
+        if (jobj_r30->translate.y > -100.0f) {
+            f32 f = (&value->x44_vec.x)[i];
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            ASSERT_NOT_NULL(jobj_r30, 1114);
+            jobj_r30->translate.y += f;
+            jobj_flagCheckSetMtxDirtySub(jobj_r30);
+            (&value->x44_vec.x)[i] -= 0.2028f; // @ lbl_804DDA90
+        }
+    }
+}
+
+#else
+
 #pragma push
-asm unk_t func_802F491C()
+asm void func_802F491C(UnkX* value, s32, s32)
 { // clang-format off
     nofralloc
 /* 802F491C 002F14FC  7C 08 02 A6 */	mflr r0
@@ -207,6 +383,8 @@ lbl_802F4B60:
 /* 802F4B80 002F1760  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#endif
 
 extern f32 lbl_804DDA4C;
 
@@ -1511,13 +1689,11 @@ lbl_802F5DCC:
 } // clang-format on
 #pragma pop
 
-inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
+inline IfDamageState* getPlayerByHUDParent(HSD_GObj* parent)
 {
     s32 var_ctr;
-    for(var_ctr = 0; var_ctr < 6; var_ctr++)
-    {
-        if (lbl_804A10C8.players[var_ctr].HUD_parent_entity == parent)
-        {
+    for (var_ctr = 0; var_ctr < 6; var_ctr++) {
+        if (lbl_804A10C8.players[var_ctr].HUD_parent_entity == parent) {
             return &lbl_804A10C8.players[var_ctr];
         }
     }
@@ -1526,8 +1702,7 @@ inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
 
 void lbl_802F5DE0(HSD_GObj* player, void* unk)
 {
-    if (!getPlayerByHUDParent(player)->flags.hide_all_digits)
-    {
+    if (!getPlayerByHUDParent(player)->flags.hide_all_digits) {
         func_80391070(player, unk);
     }
 }
@@ -2264,7 +2439,7 @@ lbl_802F6770:
 
 void func_802F6788(s32 player_idx)
 {
-    HudValue* player_hud;
+    IfDamageState* player_hud;
     s8 p_idx = (u8) player_idx;
     player_hud = &lbl_804A10C8.players[p_idx & 0xFF];
     if (player_hud->HUD_parent_entity != NULL) {
@@ -2281,7 +2456,7 @@ void func_802F6788(s32 player_idx)
 void func_802F6804(void)
 {
     s32 i;
-    HudValue* v;
+    IfDamageState* v;
 
     i = 0;
     do {
@@ -2321,26 +2496,23 @@ void func_802F68F0(void)
 
 void func_802F6948(s32 player_idx)
 {
-    HudValue* hud_player;
-    Placeholder_8016AE50_ret_val* small_thing;
-    HudFlags* hud_player_flags;
+    Placeholder_8016AE50_ret_val* small_thing = func_8016AE50();
+    IfDamageState* hud_player = &lbl_804A10C8.players[player_idx];
+    IfDamageFlags* hud_player_flags = &hud_player->flags;
 
-    small_thing = func_8016AE50();
-    hud_player = &lbl_804A10C8.players[player_idx];
-    hud_player_flags = &hud_player->flags;
-    if (hud_player_flags->explode_animation != 1) {
-        hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
-        if (small_thing->flags.unk1 != 0) {
-            hud_player->unk9 = 1;
-        }
+    if (hud_player_flags->explode_animation != TRUE) {
+        hud_player_flags->explode_animation = TRUE;
+        hud_player_flags->randomize_velocity = TRUE;
+
+        if (small_thing->flags.unk1)
+            hud_player->unk9 = TRUE;
     }
 }
 
 void func_802F69C0(s32 player_idx, s32 arg1)
 {
-    HudValue* hud_player;
-    HudFlags* hud_player_flags;
+    IfDamageState* hud_player;
+    IfDamageFlags* hud_player_flags;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
 
@@ -2356,7 +2528,7 @@ void func_802F69C0(s32 player_idx, s32 arg1)
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -2371,10 +2543,10 @@ void func_802F69C0(s32 player_idx, s32 arg1)
 
 void func_802F6AF8(s32 player_idx)
 {
-    HudValue* hud_player;
+    IfDamageState* hud_player;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
-    HudFlags* hud_player_flags;
+    IfDamageFlags* hud_player_flags;
 
     big_thing = func_8016AE38();
     big_thing->unkD = player_idx;
@@ -2383,7 +2555,7 @@ void func_802F6AF8(s32 player_idx)
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -2398,8 +2570,8 @@ void func_802F6AF8(s32 player_idx)
 
 void func_802F6C04(s32 player_idx)
 {
-    HudValue* hud_player;
-    HudFlags* hud_player_flags;
+    IfDamageState* hud_player;
+    IfDamageFlags* hud_player_flags;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
 
@@ -2410,7 +2582,7 @@ void func_802F6C04(s32 player_idx)
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -2425,10 +2597,10 @@ void func_802F6C04(s32 player_idx)
 
 void func_802F6D10(s32 player_idx)
 {
-    HudValue* hud_player;
+    IfDamageState* hud_player;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
-    HudFlags* hud_player_flags;
+    IfDamageFlags* hud_player_flags;
 
     big_thing = func_8016AE38();
     big_thing->unkD = player_idx;
@@ -2437,7 +2609,7 @@ void func_802F6D10(s32 player_idx)
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
-        hud_player_flags->unk40 = 1;
+        hud_player_flags->randomize_velocity = 1;
         if (small_thing->flags.unk1 != 0) {
             hud_player->unk9 = 1;
         }
@@ -2457,7 +2629,7 @@ void func_802F6E1C(s32 player_num)
 
 void func_802F6E3C(s32 player_num)
 {
-    HudValue* player;
+    IfDamageState* player;
 
     player = &lbl_804A10C8.players[player_num];
     if (player->HUD_parent_entity != NULL) {
