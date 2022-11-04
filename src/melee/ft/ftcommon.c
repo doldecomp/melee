@@ -1034,6 +1034,8 @@ void func_8007E2FC(HSD_GObj* gobj)
     _func_8007E2FC_inline(gobj);
 }
 
+#include <melee/ft/ftparts.h>
+
 void func_8007E358(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;

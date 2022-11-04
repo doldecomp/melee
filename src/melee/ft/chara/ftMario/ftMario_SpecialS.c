@@ -18,6 +18,8 @@ void ftMario_SpecialS_SetCall(Fighter* fp)
     fp->cb.x21D8_callback_ExitHitlag = ftMario_SpecialS_ExitHitlag;
 }
 
+#include <melee/ft/ftparts.h>
+
 // 0x800E1248
 // https://decomp.me/scratch/AmeqW
 void ftMario_SpecialS_CreateCape(HSD_GObj* gobj) 

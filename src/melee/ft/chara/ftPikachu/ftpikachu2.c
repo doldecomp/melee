@@ -127,6 +127,8 @@ void ftPikachu_ActionChange_80124C20(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftPikachu_EfSpawn_80124C90(HSD_GObj* fighter_gobj) {
     Fighter *fp = fighter_gobj->user_data;
     

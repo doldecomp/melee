@@ -116,6 +116,8 @@ void ftPikachu_ActionChange_801260E4(HSD_GObj* fighter_gobj) {
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x161, 0xC4C5084, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftPikachu_80126144(HSD_GObj* fighter_gobj) {
     Vec vec;
     Vec vec2;
@@ -189,6 +191,8 @@ void ftPikachu_801262B4(HSD_GObj* fighter_gobj) {
 void ftPikachu_Stub_80126424() {}
 
 void ftPikachu_Stub_80126428() {}
+
+#include <melee/ft/ftparts.h>
 
 void ftPikachu_8012642C(HSD_GObj* fighter_gobj) {
     Vec scale;

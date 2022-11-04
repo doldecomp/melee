@@ -5,11 +5,12 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/ftparts.h>
+
 #define HALF_PI32 1.5707963705062866f
 #define DOUBLE_PI32 6.2831854820251465f
 
-// 0x800E7100
-// https://decomp.me/scratch/fnSPl // Create Firefox/Firebird Launch GFX
+// Create Firefox/Firebird launch GFX
 void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -77,6 +78,8 @@ void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateChargeGFX;
 }
+
+#include <melee/ft/ftparts.h>
 
 void ftFox_SpecialHi_RotateModel(HSD_GObj* fighter_gobj)
 {

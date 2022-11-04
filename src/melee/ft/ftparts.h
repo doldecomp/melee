@@ -21,5 +21,6 @@ void func_80074A8C(HSD_GObj* fighter_gobj);
 void func_80074E58(Fighter* fp);
 s32 func_8007500C(Fighter* fp, s32);
 void func_8007584C(HSD_JObj* jobj, Quaternion* rotation);
+void func_8007592C(Fighter* fp, s32, f32);
 
 #endif

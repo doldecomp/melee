@@ -134,6 +134,8 @@ void func_80136A7C(HSD_GObj* gobj) {
 }
 
 #include <melee/lb/lbunknown_003.h>
+#include <melee/ft/ftparts.h>
+
 
 // Animation_MarthNeutralBCharge
 void lbl_80136ADC(HSD_GObj* gobj) {

@@ -2021,6 +2021,8 @@ lbl_8013E0D8:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftparts.h>
+
 extern f32 const lbl_804D9C68;
 extern f64 const lbl_804D9C70;
 

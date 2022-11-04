@@ -85,6 +85,8 @@ void ftMario_SpecialN_Coll(HSD_GObj* gobj)
     }
 }
 
+#include <melee/ft/ftparts.h>
+
 // 0x800E0EE0
 //https://decomp.me/scratch/Of8qP
 void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj) 

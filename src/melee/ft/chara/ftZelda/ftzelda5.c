@@ -162,8 +162,8 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj) {
     }
 }
 
-// 8013BA04 - 8013BA8C (0x88 bytes)
-// https://decomp.me/scratch/TSoo9
+#include <melee/ft/ftparts.h>
+
 void ftZelda_8013BA04(HSD_GObj* fighter_gobj) {
     Fighter* fp;
     ftZeldaAttributes* attributes;

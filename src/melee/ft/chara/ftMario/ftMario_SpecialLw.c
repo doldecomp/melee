@@ -2,12 +2,11 @@
 
 #include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
 #include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 
-// 0x800E2050
-// https://decomp.me/scratch/8zo4V
-void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj) 
+void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj)
 {
     Fighter* fp;
     fp = getFighter(gobj);
@@ -41,7 +40,7 @@ void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
     ftMarioAttributes* sa;
     void* hsd_obj_ptr;
     fp = getFighter(gobj);
-    sa = (ftMarioAttributes*)fp->x2D4_specialAttributes;
+    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->marioVars[0].SpecialLw.groundVelX = (f32) 0.0f;
@@ -59,7 +58,7 @@ void ftMario_SpecialLw_SetVar(HSD_GObj* gobj)
 
 #include <melee/ft/ftanim.h>
 
-//https://decomp.me/scratch/4saR2
+// https://decomp.me/scratch/4saR2
 void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
 {
 
@@ -69,10 +68,10 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
 
     void* hsd_obj_ptr;
     u8 padding[24];
-    
+
     fp = gobj->user_data;
-    
-    sa = (ftMarioAttributes*)fp->x2D4_specialAttributes;
+
+    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     ftMario_SpecialLw_SetVar(gobj);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
@@ -83,8 +82,9 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-//https://decomp.me/scratch/nQT5V
-void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj) {
+// https://decomp.me/scratch/nQT5V
+void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
+{
     f32 sub_val;
     Fighter* fp;
 
@@ -92,10 +92,10 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj) {
 
     void* hsd_obj_ptr;
     u8 padding[24];
-    
+
     fp = gobj->user_data;
-    
-    sa = (ftMarioAttributes*)fp->x2D4_specialAttributes;
+
+    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     ftMario_SpecialLw_SetVar(gobj);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
@@ -111,8 +111,9 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj) {
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj) {
-    Fighter *fp = getFighter(gobj);
+void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj)
+{
+    Fighter* fp = getFighter(gobj);
 
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -122,7 +123,8 @@ void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj) {
 
 // 0x800E22BC
 // https://decomp.me/scratch/FT3Fl
-void ftMario_SpecialLw_Anim(HSD_GObj* gobj) {
+void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
+{
     Fighter* fp;
 
     if (ftAnim_IsFramesRemaining(gobj) == FALSE) {
@@ -133,9 +135,10 @@ void ftMario_SpecialLw_Anim(HSD_GObj* gobj) {
 
 // 0x800E2308
 // https://decomp.me/scratch/QF5fb
-void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj) {
+void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
+{
     Fighter* fp = getFighter(gobj);
-    ftMarioAttributes* sa = (ftMarioAttributes*)fp->x2D4_specialAttributes;
+    ftMarioAttributes* sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
 
     if ((u32) fp->x2204_ftcmd_var1 != 0U) {
         fp->x2204_ftcmd_var1 = 0U;
@@ -143,8 +146,7 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj) {
     }
     if (ftAnim_IsFramesRemaining(gobj) == FALSE) {
         ftMario_SpecialLw_SetNULL(gobj);
-        if (0.0 == (f64)sa->x5C_MARIO_TORNADO_LANDING_LAG) 
-        {
+        if (0.0 == (f64) sa->x5C_MARIO_TORNADO_LANDING_LAG) {
             func_800CC730(gobj);
             return;
         }
@@ -153,18 +155,19 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj) {
 }
 
 // 0x800E23DC
-void ftMario_SpecialLw_IASA(HSD_GObj* gobj) 
+void ftMario_SpecialLw_IASA(HSD_GObj* gobj)
 {
-	return;
+    return;
 }
 
 // 0x800E23E0
-void ftMario_SpecialAirLw_IASA(HSD_GObj* gobj) 
+void ftMario_SpecialAirLw_IASA(HSD_GObj* gobj)
 {
-	return;
+    return;
 }
 
-void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj) {
+void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj)
+{
     Fighter* fp = getFighter(gobj);
     ftMarioAttributes* sa = GetMarioAttr(fp);
     fp->x2208_ftcmd_var2 = 0;
@@ -178,7 +181,8 @@ void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj) {
 
 // 0x800E23E4
 // https://decomp.me/scratch/aJPK4
-void ftMario_SpecialLw_Phys(HSD_GObj* gobj) {
+void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
+{
     f32 flt_var;
     ftMarioAttributes* sa;
     Fighter* fp;
@@ -201,8 +205,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj) {
     ft_tmp = fp;
     func_8007CADC(ft_tmp, 0.0f, sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND, flt_var);
     func_8007CB74(gobj);
-    if (((u32) fp->x2208_ftcmd_var2 != 0U) && ((fp->input.x668 & HSD_BUTTON_B) != 0)) 
-    {
+    if (((u32) fp->x2208_ftcmd_var2 != 0U) && ((fp->input.x668 & HSD_BUTTON_B) != 0)) {
         flt_var = fp->x80_self_vel.y;
         fp->x80_self_vel.y = (f32) (flt_var + sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX);
         _ftMario_800E23E4_800E25C4_helper_0(gobj);
@@ -211,7 +214,8 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj) {
 
 // 0x800E2508
 // https://decomp.me/scratch/sjB2k
-void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj) {
+void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
+{
     f32 flt_var;
     ftMarioAttributes* sa;
     ftMarioAttributes* sa_2;
@@ -221,8 +225,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj) {
     fp = getFighter(gobj);
     sa = fp->x2D4_specialAttributes;
 
-    if (((s32) fp->sa.mario.x2234_tornadoCharge == FALSE) && ((u32) fp->x2208_ftcmd_var2 != 0U) && ((fp->input.x668 & HSD_BUTTON_B) != 0)) 
-    {
+    if (((s32) fp->sa.mario.x2234_tornadoCharge == FALSE) && ((u32) fp->x2208_ftcmd_var2 != 0U) && ((fp->input.x668 & HSD_BUTTON_B) != 0)) {
         func_8007D508(fp, sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX, sa->x58_MARIO_TORNADO_TAP_GRAVITY);
     }
     func_8007D4B8(fp);
@@ -238,11 +241,12 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj) {
     func_8007D3A8(fp, 0.0f, sa->x48_MARIO_TORNADO_MOMENTUM_X_MUL_AIR, flt_var);
 }
 
-void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj) {
+void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj)
+{
     Fighter* fp = getFighter(gobj);
     ftMarioAttributes* sa = GetMarioAttr(fp);
 
-    if ((fp->x220C_ftcmd_var3 != 0U) && ((s32)(fp->marioVars[0].SpecialLw.isUnkColl) != 0)) {
+    if ((fp->x220C_ftcmd_var3 != 0U) && ((s32) (fp->marioVars[0].SpecialLw.isUnkColl) != 0)) {
         func_8007592C(fp, 0, fp->x2C_facing_direction * atan2f(fp->x6F0_collData.x14C_ground.normal.x, fp->x6F0_collData.x14C_ground.normal.y));
     } else {
         func_8007592C(fp, 0, 0.0f);
@@ -253,31 +257,22 @@ static ftCollisionBox ftMario_SpecialLw_CollisionBox = { 12.0F, 0.0F, -6.0F, 6.0
 
 // 0x800E25C4
 // https://decomp.me/scratch/ykJHP
-void ftMario_SpecialLw_Coll(HSD_GObj* gobj) 
+void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground)
-    {
-        if (func_80082888(gobj, &ftMario_SpecialLw_CollisionBox) == FALSE) 
-        {
+    if (fp->xE0_ground_or_air == GA_Ground) {
+        if (func_80082888(gobj, &ftMario_SpecialLw_CollisionBox) == FALSE) {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
             fp->marioVars[0].SpecialLw.isUnkColl = FALSE;
-        } 
-        else 
-        {
+        } else {
             fp->marioVars[0].SpecialLw.isUnkColl = TRUE;
         }
-    } 
-    else 
-    {
-        if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) == FALSE) 
-        {
+    } else {
+        if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) == FALSE) {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
             fp->marioVars[0].SpecialLw.isUnkColl = FALSE;
-        } 
-        else 
-        {
+        } else {
             fp->marioVars[0].SpecialLw.isUnkColl = TRUE;
         }
     }
@@ -285,7 +280,8 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
     _ftMario_800E25C4_800E2778_helper(gobj);
 }
 
-void _ftMario_800E2778_helper(HSD_GObj* gobj) {
+void _ftMario_800E2778_helper(HSD_GObj* gobj)
+{
     Fighter* ft_tmp;
     Fighter* fp;
     ftMarioAttributes* sa;
@@ -303,7 +299,8 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj) {
 
 // 0x800E2778
 // https://decomp.me/scratch/v3srn
-void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj) {
+void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
+{
     Fighter* fp = gobj->user_data;
     if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) != 0) {
         _ftMario_800E2778_helper(gobj);

@@ -208,6 +208,8 @@ BOOL ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj)
     return ((fp->x10_action_state_index == 0x167) || (fp->x10_action_state_index == 0x16B)) ? TRUE : FALSE;
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
@@ -355,10 +357,10 @@ void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* fighter_gobj, CollData* coll_
 }
 
 #include <melee/ft/ftanim.h>
+#include <melee/ft/ftparts.h>
 
-// 0x80118120
-// https://decomp.me/scratch/ARLRd
-void ftNess_SpecialHi_StartAction(HSD_GObj* fighter_gobj) // Ness' grounded PK Thunder Start Action State handler
+// Ness' grounded PK Thunder Start Action State handler
+void ftNess_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     f32 temp_f0;
     f32 temp_f1;

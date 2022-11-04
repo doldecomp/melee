@@ -2785,6 +2785,8 @@ lbl_80089AE8:
 #pragma pop
 
 #include <melee/mp/mplib.h>
+#include <melee/ft/ftparts.h>
+
 
 extern unk_t lbl_804D4AF8;
 extern f32 const lbl_804D8400;
@@ -8286,6 +8288,8 @@ lbl_8008DCD0:
 #pragma pop
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftparts.h>
+
 
 extern f32 lbl_804D84E8;
 extern f32 lbl_804D84EC;

@@ -5,6 +5,7 @@
 extern void func_800EAF58(HSD_GObj*);
 
 #include <melee/ft/ftanim.h>
+#include <melee/ft/ftparts.h>
 
 void func_80149354(HSD_GObj* gobj)
 {

@@ -233,9 +233,10 @@ inline void SetPKFlashAttr(HSD_GObj* fighter_gobj) // Inline to set all variable
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-// 0x801172F0
-// https://decomp.me/scratch/SxwKV
-void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash Release Animation callback
+#include <melee/ft/ftparts.h>
+
+// Ness' grounded PK Flash Release Animation callback
+void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
 

@@ -58,6 +58,8 @@ void ftZelda_8013979C(HSD_GObj* fighter_gobj) {
 }
 
 #include <melee/lb/lbunknown_003.h>
+#include <melee/ft/ftparts.h>
+
 
 // AS_ZeldaUpBStartGround
 void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp) {

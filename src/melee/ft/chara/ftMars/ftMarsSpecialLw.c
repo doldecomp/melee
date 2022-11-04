@@ -298,6 +298,8 @@ void func_801390E0(HSD_GObj* gobj) {
 }
 
 #include <melee/lb/lbunknown_003.h>
+#include <melee/ft/ftparts.h>
+
 
 void lbl_80139140(HSD_GObj* gobj) {
     Fighter* fp;

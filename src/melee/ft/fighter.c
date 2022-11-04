@@ -523,6 +523,8 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighter_gobj)
     func_80390A70(fighter_gobj, lbl_804D7849, jobj);
 }
 
+#include <melee/ft/ftparts.h>
+
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 {
     Vec vec;
@@ -916,6 +918,7 @@ inline f32 pickValue(f32 argA, u8* unk_byte_ptr)
 #include <melee/ef/efasync.h>
 #include <melee/ft/ftaction.h>
 #include <melee/ft/ftanim.h>
+#include <melee/ft/ftparts.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/pl_unknown_001.h>
 

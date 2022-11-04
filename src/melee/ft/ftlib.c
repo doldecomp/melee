@@ -246,6 +246,8 @@ void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
     *y = fp->input.x624_lstick_y;
 }
 
+#include <melee/ft/ftparts.h>
+
 void* func_800865F0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
