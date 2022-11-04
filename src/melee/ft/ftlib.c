@@ -535,6 +535,8 @@ s32 func_80086C0C(HSD_GObj* gobj)
     return fp->x10_action_state_index;
 }
 
+#include <melee/lb/lbunknown_003.h>
+
 inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
 {
     Fighter* fp = gobj->user_data;

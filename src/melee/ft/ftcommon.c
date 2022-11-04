@@ -1259,6 +1259,8 @@ void func_8007EA90(Fighter* fp, s32 arg1)
     }
 }
 
+#include <melee/lb/lbunknown_003.h>
+
 void func_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 {
     if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4) &&
