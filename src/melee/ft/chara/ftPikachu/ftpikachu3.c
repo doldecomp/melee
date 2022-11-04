@@ -1,7 +1,9 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 #include <melee/ft/ftcoll.h>
 
+#include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftPikachu_SpecialS_StartAction(HSD_GObj* fighter_gobj) {
     s32 unused[2];

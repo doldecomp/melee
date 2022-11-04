@@ -12,6 +12,8 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     fp->sa.captain.x222C_isSpecialSStartGFX = FALSE;
 }
 
+#include <melee/ft/fighter.h>
+
 void ftGanon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

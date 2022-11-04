@@ -34,6 +34,8 @@ void ftSamus_80128428(HSD_GObj* fighter_gobj) {
     func_800D9C98(fighter_gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftSamus_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
 }

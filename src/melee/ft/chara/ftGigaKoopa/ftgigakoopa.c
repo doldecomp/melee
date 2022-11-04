@@ -36,6 +36,8 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     fp->x222A_flag.bits.b0 = 1;
 }
 
+#include <melee/ft/fighter.h>
+
 void ftGKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

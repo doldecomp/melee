@@ -46,6 +46,8 @@ void ftMario_OnTakeDamage(HSD_GObj* gobj)
     ftMario_SpecialS_RemoveCape(gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftMario_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

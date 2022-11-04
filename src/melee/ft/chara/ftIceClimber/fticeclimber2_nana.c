@@ -1,10 +1,13 @@
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 
+#include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
+
 /// TODO remove float externs when file is finished and float data is removed from asm
 extern f32 lbl_804D9898;
 
-
-void ftNana_OnLoad(HSD_GObj* fighter_gobj) {
+void ftNana_OnLoad(HSD_GObj* fighter_gobj)
+{
     s32 unused[4];
     Fighter* fp = fighter_gobj->user_data;
     fp->x2222_flag.bits.b4 = 1;
@@ -14,12 +17,12 @@ void ftNana_OnLoad(HSD_GObj* fighter_gobj) {
         ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
         fp->x40 = attr->xC4;
     }
-
 }
 
 #include <melee/ft/ftparts.h>
 
-void ftNana_OnDeath(HSD_GObj* fighter_gobj) {
+void ftNana_OnDeath(HSD_GObj* fighter_gobj)
+{
     s32 unused;
     Fighter* fp = fighter_gobj->user_data;
     ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
@@ -34,10 +37,12 @@ void ftNana_OnDeath(HSD_GObj* fighter_gobj) {
     fp->sa.nana.x2250 = lbl_804D9898;
 }
 
-void ftNana_80122FAC(HSD_GObj* fighter_gobj) {
+void ftNana_80122FAC(HSD_GObj* fighter_gobj)
+{
     func_801238E4(fighter_gobj);
 }
 
-void ftNana_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
+void ftNana_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+{
     COPY_ATTRS(fighter_gobj, ftIceClimberAttributes);
 }

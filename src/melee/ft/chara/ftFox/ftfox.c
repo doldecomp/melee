@@ -22,6 +22,8 @@ void func_800E5588(HSD_GObj* gobj)
     ftFox_RemoveBlaster(gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftFox_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

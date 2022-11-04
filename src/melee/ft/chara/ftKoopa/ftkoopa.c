@@ -58,6 +58,8 @@ void func_80132B38(void) {
     return;
 }
 
+#include <melee/ft/fighter.h>
+
 void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

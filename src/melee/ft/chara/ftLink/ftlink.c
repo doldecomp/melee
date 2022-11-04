@@ -90,6 +90,8 @@ void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, BOOL arg1) {
     ftLink_OnItemDrop(fighter_gobj, arg1);
 }
  
+#include <melee/ft/fighter.h>
+
 
 void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

@@ -13,6 +13,8 @@ void ftZakoGirl_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, s32);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftZakoGirl_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
 }

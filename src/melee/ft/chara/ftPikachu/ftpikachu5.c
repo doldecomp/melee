@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
 #include <melee/ef/ef.h>
+#include <melee/ft/fighter.h>
 #include <melee/it/code_8027CF30.h>
 
 s32 ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)

@@ -19,6 +19,8 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj) {
     ftCaptain_SpecialS_RemoveGFX(fighter_gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx

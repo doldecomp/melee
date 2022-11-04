@@ -17,6 +17,8 @@ void ftLuigi_OnLoad(HSD_GObj* fighter_gobj) {
     func_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftLuigi_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

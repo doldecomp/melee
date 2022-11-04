@@ -58,7 +58,9 @@ void func_800EE528() {
     }
 }
 
+#include <melee/ft/fighter.h>
 #include <melee/ft/ftparts.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftKirby_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter *fp = fighter_gobj->user_data;

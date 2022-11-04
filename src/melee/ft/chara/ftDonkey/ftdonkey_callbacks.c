@@ -13,6 +13,8 @@ void ftDonkey_8010D774(HSD_GObj* fighter_gobj) {
     ftDonkey_DestroyAllEffects_SpecialHi(fighter_gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftDonkey_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

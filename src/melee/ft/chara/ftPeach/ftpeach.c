@@ -63,6 +63,8 @@ void ftPeach_8011B704(HSD_GObj* fighter_gobj) {
     ftPeach_8011CFA0(fighter_gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftPeach_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 
 
+#include <melee/ft/fighter.h>
+
 void ftIceClimber_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -18,9 +20,13 @@ void ftIceClimber_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftIceClimber_OnLoadForNana(Fighter* fp) {
     PUSH_ATTRS(fp, ftIceClimberAttributes);
 }
+
+#include <sysdolphin/baselib/gobj.h>
 
 void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj) {
 

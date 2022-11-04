@@ -13,6 +13,8 @@ void ftMars_OnDeath(HSD_GObj* gobj) {
     fp->sa.mars.x222C = 0;
 }
 
+#include <melee/ft/fighter.h>
+
 // 801362B0 00132E90
 // ftMars_OnItemPickup
 void ftMars_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {

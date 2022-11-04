@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
+#include <melee/ft/fighter.h>
+
 void ftPikachu_OnLoadForPichu(Fighter* fp) {
     PUSH_ATTRS(fp, ftPikachuAttributes);
 }

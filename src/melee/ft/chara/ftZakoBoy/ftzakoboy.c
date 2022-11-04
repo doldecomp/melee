@@ -8,6 +8,8 @@ void ftZakoBoy_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftZakoBoy_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
 }

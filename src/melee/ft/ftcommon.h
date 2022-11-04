@@ -1,9 +1,16 @@
 #ifndef MELEE_FT_FTCOMMON_H
 #define MELEE_FT_FTCOMMON_H
 
-#include <melee/ft/fighter.h>
+#include <ctypes.h>
 
-void func_8007C930(Fighter*, f32);
+typedef struct _Fighter Fighter;
+typedef struct _HSD_GObj HSD_GObj;
+typedef struct _HSD_JObj HSD_JObj;
+typedef struct _HSD_Joint HSD_Joint;
+typedef struct _HSD_AnimJoint HSD_AnimJoint;
+typedef struct _Vec Vec;
+
+void func_8007C930(Fighter* fp, f32 result);
 void func_8007C98C(Fighter*, f32, f32, f32);
 void func_8007CA80(Fighter*, f32, f32);
 void func_8007CADC(Fighter*, f32, f32, f32);
@@ -53,7 +60,7 @@ void func_8007DB24(HSD_GObj*);
 void func_8007DB58(HSD_GObj*);
 void func_8007DBCC(Fighter*, BOOL, f32);
 s32 func_8007DC08(Fighter*, f32);
-void func_8007DD7C(HSD_GObj*, Vec3*);
+void func_8007DD7C(HSD_GObj*, Vec*);
 void func_8007DFD0();
 void func_8007E0E4(HSD_GObj*);
 HSD_GObj* func_8007E2A4(HSD_GObj*);
@@ -91,7 +98,7 @@ void func_8007F7B4(HSD_GObj*);
 void* func_8007F804(Fighter*);
 void func_8007F824(HSD_GObj*);
 void func_8007F86C(HSD_GObj*);
-void func_8007F8B4(Fighter*, Vec3* v);
+void func_8007F8B4(Fighter*, Vec* v);
 void func_8007F8E8(HSD_GObj*);
 void func_8007F948(HSD_GObj*, HSD_GObj*, s32);
 void func_8007F9B4(HSD_GObj*);

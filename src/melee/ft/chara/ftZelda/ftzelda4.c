@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
 #include <melee/ef/ef.h>
+#include <melee/ft/fighter.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE

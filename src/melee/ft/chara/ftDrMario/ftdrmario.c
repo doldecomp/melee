@@ -32,6 +32,8 @@ void func_80149540(HSD_GObj* gobj)
     func_801497CC(gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

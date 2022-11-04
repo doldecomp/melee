@@ -99,6 +99,8 @@ void ftGameWatch_8014A538(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/fighter.h>
+
 void ftGameWatch_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }

@@ -4,6 +4,8 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/it/itkind.h>
 
+#include <melee/ft/fighter.h>
+
 extern char* lbl_804D3E58;
 extern char* lbl_804D3E60;
 extern char* lbl_804D3E68;
