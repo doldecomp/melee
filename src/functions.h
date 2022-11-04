@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/ft/fighter"
-void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 newAction, s32 flags, HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
-#pragma endregion
-
 #pragma region "melee/ft/ftanim"
 void func_8006E9B4();
 void func_8006EBA4(HSD_GObj*);
