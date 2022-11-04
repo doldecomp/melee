@@ -1,4 +1,5 @@
-#include <melee/ft/chara/ftNess/ftNess.h>
+#include <melee/ft/chara/ftNess/__ftNess.h>
+
 #include <melee/ft/ftcoll.h>
 
 // 0x80114BF4 //
@@ -30,8 +31,7 @@ void ftNess_AttackS4_Action(HSD_GObj* fighter_gobj) // Ness's F-Smash Action Sta
 
     fp->sa.ness.x2248_baseballBatGObj = baseballBatGObj;
 
-    if (baseballBatGObj != NULL)
-    {
+    if (baseballBatGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftNess_OnDamage;
     }
@@ -68,12 +68,10 @@ void ftNess_ItemNessBatRemove(HSD_GObj* fighter_gobj) // Remove Baseball Bat //
 
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->sa.ness.x2248_baseballBatGObj != NULL)
-    {
+    if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
         func_802AD6B8(fp->sa.ness.x2248_baseballBatGObj);
         fp->sa.ness.x2248_baseballBatGObj = NULL;
     }
-
 };
 
 // 0x80114D34
@@ -82,8 +80,7 @@ void ftNess_ItemNessBatSetNULL(HSD_GObj* fighter_gobj) // Clear Baseball Bat GOb
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->sa.ness.x2248_baseballBatGObj != NULL)
-    {
+    if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
         fp->sa.ness.x2248_baseballBatGObj = NULL;
     }
 };
@@ -96,8 +93,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation ca
     Fighter* fighter_data2;
     ftNessAttributes* ness_attr;
 
-    if (fighter_data1->x2218_flag.bits.b3 == 0)
-    {
+    if (fighter_data1->x2218_flag.bits.b3 == 0) {
         if (fighter_data1->x2200_ftcmd_var0 != FALSE) // Check if reflect bubble flag is enabled in fp script //
         {
             ness_attr = fighter_data1->x2D4_specialAttributes;
@@ -105,8 +101,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation ca
         }
     }
 
-    else if (fighter_data1->x2200_ftcmd_var0 == FALSE)
-    {
+    else if (fighter_data1->x2200_ftcmd_var0 == FALSE) {
         fighter_data1->x2218_flag.bits.b3 = 0; // Toggle reflect bubble OFF//
     }
 
@@ -114,8 +109,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation ca
     {
 
         fighter_data2 = getFighter(fighter_gobj);
-        if (fighter_data2->sa.ness.x2248_baseballBatGObj != NULL)
-        {
+        if (fighter_data2->sa.ness.x2248_baseballBatGObj != NULL) {
             func_802AD6B8(fighter_data2->sa.ness.x2248_baseballBatGObj); // Despawn the Baseball Bat if animation is over //
             fighter_data2->sa.ness.x2248_baseballBatGObj = NULL;
         }
@@ -131,10 +125,8 @@ void ftNess_AttackS4_IASA(HSD_GObj* fighter_gobj) // Ness's F-Smash IASA Callbac
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
 
-    if (fp->x2218_flag.bits.b0 != 0)
-    {
-        if (fp->sa.ness.x2248_baseballBatGObj != NULL)
-        {
+    if (fp->x2218_flag.bits.b0 != 0) {
+        if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
             func_802AD6B8(fp->sa.ness.x2248_baseballBatGObj);
             fp->sa.ness.x2248_baseballBatGObj = NULL;
         }
