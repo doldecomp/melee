@@ -186,5 +186,6 @@ s32 func_800C8C84(HSD_GObj* fighter_gobj);
 void func_800C8D00(HSD_GObj* fighter_gobj);
 void func_800C8F6C(void);
 void func_800C8FC4(HSD_GObj* fighter_gobj);
+void func_800C9034(HSD_GObj* fighter_gobj);
 
 #endif
