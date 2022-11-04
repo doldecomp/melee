@@ -12,5 +12,6 @@ void func_80074B0C(HSD_GObj* fighter_gobj, s32, s32);
 void func_80074148(void);
 void func_80073758(HSD_JObj* jobj);
 void func_80074170(void);
+void func_800743E0(HSD_GObj* fighter_gobj);
 
 #endif
