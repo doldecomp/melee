@@ -7,7 +7,6 @@
 
 extern void func_800BC7E0(HSD_GObj*, HSD_GObj*);
 extern void func_800BC8D4(HSD_GObj*, HSD_GObj*);
-extern void func_800DE7C0(HSD_GObj*, s32, s32);
 extern void func_800DE2A8(HSD_GObj*, HSD_GObj*);
 
 extern const f32 lbl_804D9ADC; //1.0
