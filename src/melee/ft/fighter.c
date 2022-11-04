@@ -1404,6 +1404,8 @@ void Fighter_8006A1BC(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/cm/camera.h>
+
 void Fighter_8006A360(HSD_GObj* fighter_gobj) {
     Vec vec1;
     Fighter* fp = fighter_gobj->user_data;

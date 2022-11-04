@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/cm/camera"
-f32 func_80031144();
-#pragma endregion
-
 #pragma region "melee/pl/player"
 s32 Player_GetPlayerSlotType(s32);
 #pragma endregion
