@@ -8,5 +8,6 @@ typedef struct _HSD_GObj HSD_GObj;
 
 void ftLink_OnItemDrop(HSD_GObj* fighter_gobj, BOOL arg1);
 void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool);
+void func_800EC06C(void);
 
 #endif
