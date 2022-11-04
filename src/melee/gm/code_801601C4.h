@@ -9,5 +9,6 @@ unk_t func_8016C6C0();
 unk_t func_80167320();
 s8* func_8015CE44(s32, s32);
 BOOL func_8016B1D8(void);
+BOOL func_8016B0FC(void);
 
 #endif
