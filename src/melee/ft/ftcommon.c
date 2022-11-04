@@ -1862,6 +1862,7 @@ void func_800804A0(Fighter* fp, f32 arg8)
     fp->xE8_ground_accel_2 = phi_f31;
 }
 
+// DataOffset_PlayerScale_MultiplyBySomething, returns fp->x40*fp->x34
 f32 func_800804EC(Fighter* fp)
 {
     return fp->x40 * fp->x34_scale.x;
