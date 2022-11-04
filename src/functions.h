@@ -444,8 +444,6 @@ void func_802F046C(s32);
 
 void func_802F0AE0(HSD_GObj *, Vec *, Vec *, s32, s32, f32, f32, f32);
 
-s32 func_802FC998();
-
 void __cvt_sll_flt(void);
 void __cvt_dbl_usll(void);
 
