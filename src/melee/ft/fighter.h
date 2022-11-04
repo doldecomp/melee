@@ -805,21 +805,6 @@ typedef struct _Hitbox {
     u8 filler[0x128]; // slightly more detail, f32 needed for 'manual' mods to hitbox damage
 } Hitbox;
 
-typedef struct _CameraBox
-{
-  u32 data_filler[2];
-  s32 x8;
-  UnkFlagStruct xC_flag;
-  u8 xD_fill[0x10 - 0xD];
-  Vec3 x10; // might be Vec2?
-  Vec3 x1C;
-  f32 x28;
-  Vec2 x2C;
-  Vec3 x34;
-  Vec2 x40;
-  Vec3 x48;
-} CameraBox;
-
 typedef struct _ftECB
 {
     Vec2 top;

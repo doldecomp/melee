@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/cm/camera"
-CameraBox* func_80029020();
 void func_800290D4();
 void func_8002A278(f32 x, f32 y);
 void func_8002E6FC(u8);

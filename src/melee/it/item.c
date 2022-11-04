@@ -988,6 +988,8 @@ void func_80268560(HSD_GObj* item_gobj) // Setup item dynamic bones
     }
 }
 
+#include <melee/cm/camera.h>
+
 extern HSD_JObj* HSD_JObjAlloc();
 extern CameraBox* func_80029044(s32);
 extern s32 func_80086960(HSD_GObj*);

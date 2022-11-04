@@ -121,6 +121,8 @@ void func_800815E4(HSD_GObj* gobj) {
     }
 }
 
+#include <melee/cm/camera.h>
+
 void func_80081644(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

@@ -491,6 +491,8 @@ BOOL func_80086B64(HSD_GObj* gobj)
     return fp->x221F_flag.bits.b0;
 }
 
+#include <melee/cm/camera.h>
+
 CameraBox* func_80086B74(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

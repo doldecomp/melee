@@ -68669,6 +68669,8 @@ asm unk_t lbl_800BE7C0()
 } // clang-format on
 #pragma pop
 
+#include <melee/cm/camera.h>
+
 extern unk_t lbl_803C6908();
 
 #pragma push
