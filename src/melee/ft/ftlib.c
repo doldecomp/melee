@@ -880,6 +880,8 @@ void func_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
     func_8003E4A4(fp->xC_playerID, fp->x221F_flag.bits.b4, arg1, arg2);
 }
 
+#include <melee/ef/efasync.h>
+
 void func_80087508(s8 arg0, u8 arg1)
 {
     func_8008572C(arg0);

@@ -68680,6 +68680,7 @@ asm unk_t lbl_800BE7C0()
 #pragma pop
 
 #include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
 
 extern unk_t lbl_803C6908();
 

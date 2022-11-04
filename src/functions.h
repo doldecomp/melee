@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/ef/efasync"
-void func_8006737C(s8);
 void func_80067624();
 void func_80067688(unk_t);
 void efAsync_Spawn(HSD_GObj*, unk_t, u32, u32, unk_t, ...);
