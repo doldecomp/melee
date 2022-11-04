@@ -14,5 +14,6 @@ unk_t func_800144C8();
 unk_t func_80014258();
 void func_80011A50(Vec *, s32, f32, f32, f32, f32, f32, f32, f32);
 void func_8001044C(unk_t, unk_t, s32, f32, s32, s32, s32, s32);
+void func_800119DC(Vec*, s32, f32, f32, f32);
 
 #endif

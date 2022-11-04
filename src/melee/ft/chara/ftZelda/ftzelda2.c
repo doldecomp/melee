@@ -57,10 +57,9 @@ void ftZelda_8013979C(HSD_GObj* fighter_gobj) {
     fp->cb.x21BC_callback_Accessory4 = 0;
 }
 
+#include <melee/lb/lbunknown_003.h>
+
 // AS_ZeldaUpBStartGround
-// 80139834 - 801398E8 (0xB4 bytes)
-// https://decomp.me/scratch/KUdnf (with helper)
-// https://decomp.me/scratch/52XE3 (as single function)
 void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp) {
     HSD_JObj* jObj;
     s32 boneIndex;

@@ -293,8 +293,8 @@ void func_801390E0(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x172, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-// 80139140 00135D20
-// https://decomp.me/scratch/8uP2v
+#include <melee/lb/lbunknown_003.h>
+
 void lbl_80139140(HSD_GObj* gobj) {
     Fighter* fp;
     Fighter* ft_2;

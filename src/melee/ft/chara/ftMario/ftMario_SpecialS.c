@@ -185,6 +185,7 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
     func_8007AEF8(gobj);
 }
 
+#include <melee/lb/lbunknown_003.h>
 #define PI_3 (3.14159265359f / 3.0f)
 
 // 0x800E15D0

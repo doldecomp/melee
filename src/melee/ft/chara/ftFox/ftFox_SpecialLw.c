@@ -834,8 +834,9 @@ void ftFox_SpecialLwHit_SetCall(HSD_GObj* fighter_gobj)
     fp->cb.x21C8_callback_OnReflectHit = ftFox_SpecialLwHit_Action;
 }
 
-// 0x800E9A68
-// https://decomp.me/scratch/SyGv6 // Fox & Falco's Reflect Hit Action State handler
+#include <melee/lb/lbunknown_003.h>
+
+// Fox & Falco's reflect hit action state handler
 void ftFox_SpecialLwHit_Action(HSD_GObj* fighter_gobj)
 {
     Vec3 sp14;

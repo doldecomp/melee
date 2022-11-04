@@ -129,9 +129,9 @@ void func_80136A7C(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x0C4C5084, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-// 80136ADC 001336BC
+#include <melee/lb/lbunknown_003.h>
+
 // Animation_MarthNeutralBCharge
-// https://decomp.me/scratch/jR5uM
 void lbl_80136ADC(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     s32* specialAttrs = fp->x2D4_specialAttributes;

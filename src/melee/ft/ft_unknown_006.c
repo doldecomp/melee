@@ -30274,6 +30274,8 @@ lbl_8009E6F0:
 } // clang-format on
 #pragma pop
 
+#include <melee/lb/lbunknown_003.h>
+
 #pragma push
 asm unk_t func_8009E714()
 { // clang-format off

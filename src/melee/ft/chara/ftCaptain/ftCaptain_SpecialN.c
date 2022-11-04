@@ -3,6 +3,7 @@
 #include <MSL/trigf.h>
 #include <melee/ef/ef.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/lb/lbunknown_003.h>
 
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj) // Create Aesthetic Wind Effect for Warlock Punch
 {
