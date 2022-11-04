@@ -73,7 +73,7 @@ void func_80087050(s32);
 BOOL func_80087074(HSD_GObj*, Vec*);
 BOOL func_800870BC(HSD_GObj*, unk_t*);
 void func_800870F0(HSD_GObj*, s32);
-s32 func_80087120(HSD_GObj*);
+s32 func_80087120(HSD_GObj* fighter_gobj);
 void func_80087140(HSD_GObj*);
 void func_800871A8(HSD_GObj* fighter_gobj, HSD_GObj* item_gobj);
 BOOL func_80087284(HSD_GObj*);
