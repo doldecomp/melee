@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/mp/mpcoll"
-void func_8004CBF4(CollData*);
-#pragma endregion
-
 #pragma region "melee/mp/mplib"
 void func_80053DA4(u32, f32*);
 void func_80053ECC(u32, f32*);
