@@ -43,7 +43,6 @@ static void func_801C1CD0(HSD_GObj*);
 static void func_801C1D38(HSD_GObj*);
 static void func_801C2BBC(HSD_GObj*, s32);
 static void func_801C2BD4(void*);
-HSD_GObj* func_801C14D0(s32);
 static void func_801C34AC(s32, HSD_JObj*, HSD_Joint*);
 static void func_801C28CC(void*, s32);
 extern StageInfo stage_info;
@@ -69,5 +68,6 @@ BOOL func_801C2ED0(HSD_JObj* jobj, s32 map_id);
 BOOL func_801C2D24(s32, Vec*);
 BOOL func_801C28AC(s32, u32, s32*);
 f32 func_801C0498(void);
+HSD_GObj* func_801C14D0(s32 id);
 
 #endif
