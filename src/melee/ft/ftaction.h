@@ -12,5 +12,6 @@ unk_t func_80071CA4();
 unk_t func_800730B8();
 unk_t func_80073108();
 void func_80073240(HSD_GObj* fighter_gobj);
+void func_80073354(HSD_GObj* fighter_gobj);
 
 #endif
