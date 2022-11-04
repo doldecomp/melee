@@ -338,7 +338,7 @@ void func_800DEF38();
 void func_800DF0D0();
 
 void ftCaptain_OnLoadForGanon(Fighter *); // UnclePunch map file: FighterOnLoad_Ganondorf
-void ftCFalcon_LoadSpecialAttrs(HSD_GObj *);
+void ftCaptain_LoadSpecialAttrs(HSD_GObj*);
 
 void ftFox_LoadSpecialAttrs(HSD_GObj *);
 
