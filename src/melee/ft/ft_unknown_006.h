@@ -213,5 +213,6 @@ void func_800D5CB0(HSD_GObj* fighter_gobj, BOOL, f32 landing_lag);
 BOOL func_800D67C4(Fighter* fp);
 BOOL func_800D688C(Fighter* fp);
 BOOL func_800D6928(Fighter* fp);
+void func_800D71D8(HSD_GObj* fighter_gobj);
 
 #endif
