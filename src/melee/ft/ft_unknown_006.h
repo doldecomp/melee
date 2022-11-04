@@ -204,5 +204,6 @@ void func_800D1E80(HSD_GObj* fighter_gobj);
 void func_800D237C(HSD_GObj* fighter_gobj);
 void func_800D3158(HSD_GObj* fighter_gobj);
 void func_800D4F24(HSD_GObj* fighter_gobj, BOOL);
+void func_800D5AEC(HSD_GObj* fighter_gobj, s32 action_state, BOOL, BOOL, Fighter* fp, f32, f32);
 
 #endif
