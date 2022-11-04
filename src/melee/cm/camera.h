@@ -36,5 +36,6 @@ void func_8002F0E4(s32);
 BOOL func_8002F260(void);
 void func_8002F274(void);
 unk_t func_80030A50(void);
+BOOL func_80030CFC(CameraBox*, f32);
 
 #endif
