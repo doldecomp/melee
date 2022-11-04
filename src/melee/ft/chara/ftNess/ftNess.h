@@ -226,7 +226,6 @@ void ftNess_SpecialAirS_Coll(HSD_GObj* gobj);
 
 BOOL ftNess_CheckSpecialNHold(HSD_GObj* gobj);
 void ftNess_SpecialNSetNULL(HSD_GObj* gobj);
-void ftNess_ItemPKFlushSetNULL(HSD_GObj* gobj);
 void ftNess_SpecialNStart_Action(HSD_GObj* gobj);
 void ftNess_SpecialAirNStart_Action(HSD_GObj* gobj);
 void ftNess_SpecialNStart_Anim(HSD_GObj* gobj);

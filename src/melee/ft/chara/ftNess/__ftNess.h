@@ -5,7 +5,8 @@
 
 void ftNess_ItemNessBatRemove(HSD_GObj* fighter_gobj);
 
-// Despawn yo-yo item
 void ftNess_YoyoItemDespawn(HSD_GObj* fighter_gobj);
+
+void ftNess_ItemPKFlushSetNULL(HSD_GObj* fighter_gobj);
 
 #endif

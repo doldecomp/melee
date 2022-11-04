@@ -347,8 +347,6 @@ void func_800F1D24();
 void func_800F5BA4();
 void func_800F5C34();
 
-void ftNess_ItemPKFlushSetNULL(HSD_GObj *);
-
 void ftNess_SpecialHiTakeDamage(HSD_GObj *);
 
 void ftPikachu_LoadSpecialAttrs(HSD_GObj *);

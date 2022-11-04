@@ -519,6 +519,7 @@ void ftNess_YoyoItemSetFlag(HSD_GObj* fighter_gobj) // Something to do with Yo-Y
     fp->sa.ness.x222C_yoyoGObj = NULL;
 }
 
+// Despawn yo-yo item
 void ftNess_YoyoItemDespawn(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
