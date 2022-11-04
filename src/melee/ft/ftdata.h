@@ -25,5 +25,6 @@ void func_800857E0(u32);
 void func_80085820(FighterKind kind, s32 costume_id);
 void func_800859A8(Fighter* fp);
 void func_80085B10(Fighter* fp);
+void func_80085CD8(Fighter* fp, Fighter* other_fp, s32 action_id);
 
 #endif
