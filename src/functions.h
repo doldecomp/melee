@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/gr/stage"
-s32 Stage_80225194(void);
 void func_801C5A84();
 #pragma endregion
 

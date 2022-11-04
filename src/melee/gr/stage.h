@@ -258,7 +258,7 @@ void Stage_80224E38(Vec* arg0, s32 arg1);
 void Stage_80224E64(s32 arg0, Vec* arg_vec);
 s32 Stage_80224FDC(Vec* arg0);
 s32 Stage_80225074(s32 arg0);
-s32 Stage_80225194();
+s32 Stage_80225194(void);
 s32 Stage_8022519C(s32 idx);
 s32 Stage_802251B4(s32 idx, s32 arg1);
 void Stage_802251E8(s32 idx, s32* unused);
