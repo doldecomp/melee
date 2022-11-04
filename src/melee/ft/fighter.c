@@ -507,6 +507,8 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj)
     func_8007C630(fighter_gobj);
 }
 
+#include <melee/ft/ftparts.h>
+
 void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
