@@ -1706,6 +1706,8 @@ lbl_801C2360:
 }
 #pragma peephole on
 
+#include <sysdolphin/baselib/lobj.h>
+
 void func_801C2374(HSD_LObj* lobj)
 {
     Vec3 sp10;
