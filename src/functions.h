@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/ft/ftlib"
-s32 func_800872A4(HSD_GObj*);
-#pragma endregion
-
 #pragma region "melee/ft/ft_unknown_006"
 void func_800880D8();
 void func_80088148(Fighter*, u32, u32, u32);
