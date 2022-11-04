@@ -52,5 +52,6 @@ unk_t func_800F5A98();
 unk_t func_800EEEC4();
 unk_t func_800F190C();
 unk_t func_800F5874();
+void func_800EED50(s32, s32);
 
 #endif
