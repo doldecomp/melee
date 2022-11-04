@@ -21,5 +21,6 @@ void func_800855C8(s32 id, s32 slot);
 void func_8008572C(u32);
 void func_8008578C(s32 id, s32 slot);
 void func_800857E0(u32);
+void func_80085820(FighterKind kind, s32 costume_id);
 
 #endif
