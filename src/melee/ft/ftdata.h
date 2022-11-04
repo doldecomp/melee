@@ -20,5 +20,6 @@ extern unk_t lbl_803C1E38;
 void func_800855C8(s32 id, s32 slot);
 void func_8008572C(u32);
 void func_8008578C(s32 id, s32 slot);
+void func_800857E0(u32);
 
 #endif
