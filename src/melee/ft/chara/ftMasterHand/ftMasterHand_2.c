@@ -141,6 +141,7 @@ inline void ftMasterHand_80150230_inline_2(HSD_GObj* fighter_gobj)
         ftMasterHand_8014FE5C(fighter_gobj);
 }
 
+#include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
 
 static void ftMasterHand_80150894(HSD_GObj* fighter_gobj);

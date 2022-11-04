@@ -23,5 +23,6 @@ s32 func_80051EC8(Vec*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
 unk_t func_800569EC();
 void func_80053DA4(u32, f32*);
 void func_80053ECC(u32, f32*);
+void func_80053FF4(s32, Vec*);
 
 #endif

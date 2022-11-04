@@ -152,6 +152,8 @@ void ftbosslib_8015C09C(HSD_GObj* fighter_gobj, f32 arg1)
     HSD_JObjSetRotation(jobj, &quat);
 }
 
+#include <melee/mp/mplib.h>
+
 void ftbosslib_8015C190(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
