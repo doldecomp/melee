@@ -65,7 +65,7 @@ void func_8007DFD0();
 void func_8007E0E4(HSD_GObj* fighter_gobj);
 HSD_GObj* func_8007E2A4(HSD_GObj* fighter_gobj);
 void ftCommon_SetOnGrabCallbacks(Fighter* fp, s16, void (*cb0)(HSD_GObj* fighter_gobj), void (*cb1)(HSD_GObj* fighter_gobj), void (*cb2)(HSD_GObj* fighter_gobj, HSD_GObj* unk_gobj));
-void func_8007E2F4(Fighter* fp, s16 val);
+void func_8007E2F4(Fighter* fp, s16 value);
 void func_8007E2FC(HSD_GObj* fighter_gobj);
 void func_8007E358(HSD_GObj* fighter_gobj);
 void func_8007E3EC(HSD_GObj* fighter_gobj);
