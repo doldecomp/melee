@@ -9,6 +9,7 @@ extern s32 func_800D68C0(HSD_GObj*);
 extern s32 func_800D695C(HSD_GObj*);
 
 static void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32, f32);
+static f32 ftSamus_80128AC8(HSD_GObj* fighter_gobj, f32, f32);
 
 void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
 {
@@ -45,7 +46,7 @@ s32 ftSamus_80128A1C(HSD_GObj* fighter_gobj, s32 arg1, f32 farg1)
     return 0;
 }
 
-f32 ftSamus_80128AC8(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
+static f32 ftSamus_80128AC8(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftSamusAttributes* attr = getFtSpecialAttrs(fp);
