@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/gr/ground"
-BOOL func_801C28AC(s32, u32, s32*);
 HSD_GObj* func_801C14D0(s32);
 #pragma endregion
 
