@@ -52,7 +52,7 @@ lbl_80085250:
 extern ftData* gFtDataList[33];
 
 #pragma push
-asm void func_800852B0(HSD_GObj* fighter_gobj)
+asm void func_800852B0(void)
 { // clang-format off
     nofralloc
 /* 800852B0 00081E90  3C 80 80 46 */	lis r4, gFtDataList@ha

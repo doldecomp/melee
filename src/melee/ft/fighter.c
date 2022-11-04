@@ -70,6 +70,8 @@ inline HSD_JObj* getHSDJObj(HSD_GObj* hsd_gobj)
 }
 // --------------------------------------------
 
+#include <melee/ft/ft_unknown_005.h>
+
 void Fighter_800679B0()
 {
     s32 i;
