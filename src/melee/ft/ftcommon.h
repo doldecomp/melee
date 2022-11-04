@@ -14,7 +14,7 @@ void func_8007C930(Fighter* fp, f32 result);
 void func_8007C98C(Fighter*, f32, f32, f32);
 void func_8007CA80(Fighter*, f32, f32);
 void func_8007CADC(Fighter*, f32, f32, f32);
-void func_8007CB74(HSD_GObj*);
+void func_8007CB74(HSD_GObj* fighter_gobj);
 HSD_GObj* func_8007CC1C(HSD_GObj*);
 void func_8007CC78(Fighter*, f32);
 void func_8007CCA0(Fighter*, f32);
