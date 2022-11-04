@@ -5,6 +5,7 @@
 
 typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
+typedef struct _Fighter Fighter;
 
 unk_t func_8006EED4();
 unk_t func_80070734();
@@ -28,5 +29,6 @@ void func_80070CC4(HSD_GObj* fighter_gobj, BOOL);
 void func_80070E74(HSD_GObj* fighter_gobj);
 void func_80070F28(HSD_GObj* fighter_gobj);
 void func_80070FB4(HSD_GObj* fighter_gobj, BOOL, s32);
+BOOL func_80070FD0(Fighter* fp);
 
 #endif

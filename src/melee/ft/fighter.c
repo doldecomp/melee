@@ -2057,6 +2057,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
         vecLocal->x = vecLocal->y = vecLocal->z = c; \
     } while (0)
 
+#include <melee/ft/ftanim.h>
+
 void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
 {
     Fighter* fp = fighter_gobj->user_data;
