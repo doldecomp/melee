@@ -448,8 +448,6 @@ s32 func_802FB6E8(u8);
 
 s32 func_802FC998();
 
-s32 func_80322258(f32 x);
-
 void __cvt_sll_flt(void);
 void __cvt_dbl_usll(void);
 
