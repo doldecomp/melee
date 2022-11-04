@@ -33,5 +33,6 @@ unk_t func_802DB9F4();
 void func_802D8618(s32, Vec*, s32, s32);
 unk_t func_802C8B28(HSD_GObj* fighter_gobj, Vec* pos, s32, f32 facing_direction);
 BOOL func_802B1DEC(u32);
+void func_802B1FE8(BOOL state_var, Vec*);
 
 #endif

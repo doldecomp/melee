@@ -432,7 +432,6 @@ void func_8029A8F4(HSD_GObj *, Vec *, f32);
 
 u32 func_802B1DF8(HSD_GObj *, Vec *, Vec *, s32, s32, s32);
 s32 func_802B1FC8(u32);
-void func_802B1FE8(u32, Vec *);
 
 void func_802B56E4(u32, Vec *, f32, f32, f32);
 
