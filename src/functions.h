@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/ft/ftcommon"
-void func_8007DB24();
 void func_8007E0E4();
 void ftCommon_SetOnGrabCallbacks(Fighter*, s16, void (*)(HSD_GObj*), void (*)(HSD_GObj*), void (*)(HSD_GObj*, HSD_GObj*));
 void func_8007E2F4(Fighter*, s16);
