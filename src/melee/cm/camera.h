@@ -34,5 +34,6 @@ void func_8002EEC8(f32);
 void func_8002EF14(void);
 void func_8002F0E4(s32);
 BOOL func_8002F260(void);
+void func_8002F274(void);
 
 #endif
