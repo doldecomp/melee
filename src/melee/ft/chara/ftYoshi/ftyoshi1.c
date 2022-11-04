@@ -2,6 +2,8 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/itkind.h>
 
+#include <melee/ef/efasync.h>
+
 extern f32 lbl_804D9A28;
 
 void lbl_8012C030(HSD_GObj* fighter_gobj) {

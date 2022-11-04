@@ -8279,6 +8279,8 @@ lbl_8008DCD0:
 } // clang-format on
 #pragma pop
 
+#include <melee/ef/efasync.h>
+
 extern f32 lbl_804D84E8;
 extern f32 lbl_804D84EC;
 extern f64 lbl_804D84F0;

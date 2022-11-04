@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/ef/efasync"
-void efAsync_Spawn(HSD_GObj*, unk_t, u32, u32, unk_t, ...);
-#pragma endregion
-
 #pragma region "melee/ft/fighter"
 void Fighter_UnkProcessDeath_80068354(HSD_GObj*);
 u32 Fighter_NewSpawn_80068E40();

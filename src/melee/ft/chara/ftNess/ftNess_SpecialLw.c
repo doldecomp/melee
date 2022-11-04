@@ -40,9 +40,10 @@ void ftNess_SpecialAirLwStart_Action(HSD_GObj* fighter_gobj) // Ness' aerial PSI
     func_8006EBA4(fighter_gobj);
 }
 
-// 0x80119F20
-// https://decomp.me/scratch/frKYd
-void ftNess_SpecialLwStart_Anim(HSD_GObj* fighter_gobj) // Ness' grounded PSI Magnet Start Animation callback
+#include <melee/ef/efasync.h>
+
+// Ness' grounded PSI Magnet Start Animation callback
+void ftNess_SpecialLwStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
     Fighter* fighter_data2;

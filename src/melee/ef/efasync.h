@@ -6,5 +6,6 @@
 void func_8006737C(s8);
 void func_80067624(HSD_GObj* item_gobj, unk_t);
 void func_80067688(unk_t);
+void efAsync_Spawn(HSD_GObj*, unk_t, u32, u32, unk_t, ...);
 
 #endif
