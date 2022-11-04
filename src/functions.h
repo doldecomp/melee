@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/ft/ft_unknown_006"
-void func_800DE2A8(HSD_GObj*, HSD_GObj*);
 void func_800DE7C0(HSD_GObj*, s32, s32);
 void func_800DE508(HSD_GObj*);
 #pragma endregion
