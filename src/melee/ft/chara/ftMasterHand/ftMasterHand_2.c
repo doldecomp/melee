@@ -141,6 +141,7 @@ inline void ftMasterHand_80150230_inline_2(HSD_GObj* fighter_gobj)
         ftMasterHand_8014FE5C(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
 

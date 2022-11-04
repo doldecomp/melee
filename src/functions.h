@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/ft/ftanim"
-BOOL ftAnim_IsFramesRemaining(HSD_GObj*);
 f32 func_8006F484(unk_t);
 void func_8006FE48();
 void func_80070308();

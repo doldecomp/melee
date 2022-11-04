@@ -37,6 +37,8 @@ void ftPikachu_ZeroVelocity_80124F24(HSD_GObj* fighter_gobj) {
     ftPikachu_ActionChange_80125D28(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftPikachu_80124F64(HSD_GObj* fighter_gobj) {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftPikachu_ActionChange_801254D4(fighter_gobj);

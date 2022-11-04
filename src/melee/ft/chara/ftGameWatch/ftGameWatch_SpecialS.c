@@ -184,6 +184,8 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     ftGameWatch_SpecialS_SetVars(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014C8BC
 // https://decomp.me/scratch/xcOet // Mr. Game & Watch's Grounded Judgement Animation callback
 void ftGameWatch_SpecialS_Anim(HSD_GObj* fighter_gobj)

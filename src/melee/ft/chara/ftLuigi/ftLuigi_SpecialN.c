@@ -31,6 +31,8 @@ void ftLuigi_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014275C
 // https://decomp.me/scratch/X40ls // Luigi's grounded Fireball Animation callback
 void ftLuigi_SpecialN_Anim(HSD_GObj* fighter_gobj) 

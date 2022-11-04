@@ -100,6 +100,8 @@ void ftFox_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800EA004
 // https://decomp.me/scratch/MsR8G // Fox & Falco's grounded Illusion/Phantasm Start Animation callback
 void ftFox_SpecialSStart_Anim(HSD_GObj* fighter_gobj)

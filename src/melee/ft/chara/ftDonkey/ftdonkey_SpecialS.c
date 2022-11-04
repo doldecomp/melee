@@ -24,6 +24,8 @@ void ftDonkey_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E148;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftDonkey_8010E2BC(HSD_GObj* fighter_gobj)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {

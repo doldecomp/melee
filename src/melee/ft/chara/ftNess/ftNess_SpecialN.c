@@ -145,6 +145,8 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj) // Ness' aerial PK F
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 extern HSD_GObj* func_802AA8C0(HSD_GObj*, Vec3*, s32, f32);
 
 // 0x801170DC

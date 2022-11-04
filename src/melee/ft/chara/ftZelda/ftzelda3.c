@@ -80,6 +80,8 @@ void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) {
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A8AC;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 8013AA38 - 8013AACC (0x94 bytes)
 // https://decomp.me/scratch/XcH4E
 void ftZelda_8013AA38(HSD_GObj* fighter_gobj) {

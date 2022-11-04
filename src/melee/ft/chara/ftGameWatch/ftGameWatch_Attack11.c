@@ -179,6 +179,8 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014C138
 // https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation callback
 void ftGameWatch_Attack11_Anim(HSD_GObj* fighter_gobj)  

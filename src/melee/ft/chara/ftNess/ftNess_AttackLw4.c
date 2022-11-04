@@ -17,6 +17,8 @@ void ftNess_AttackLw4_Action(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftNess_YoyoUpdateHitPos;
 }
 
+#include <melee/ft/ftanim.h>
+
 // Ness' down smash animation callback
 void ftNess_AttackLw4_Anim(HSD_GObj* fighter_gobj)
 {

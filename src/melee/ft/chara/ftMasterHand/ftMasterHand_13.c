@@ -29,6 +29,8 @@ static inline void ftMasterHand_80152928_inline(HSD_GObj* fighter_gobj)
     func_80088148(fp, 0x4E207, 0x7F, 0x40);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80152928(HSD_GObj* fighter_gobj)
 {
     u32 unused[2];

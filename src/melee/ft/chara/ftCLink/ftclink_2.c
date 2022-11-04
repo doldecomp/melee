@@ -4,6 +4,8 @@
 
 extern void func_800EAF58(HSD_GObj*);
 
+#include <melee/ft/ftanim.h>
+
 void func_80149354(HSD_GObj* gobj)
 {
     unk_t temp_r3;

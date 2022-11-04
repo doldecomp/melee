@@ -118,6 +118,8 @@ void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj) {
     fp->cb.x21E4_callback_OnDeath2 = NULL;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E22BC
 // https://decomp.me/scratch/FT3Fl
 void ftMario_SpecialLw_Anim(HSD_GObj* gobj) {

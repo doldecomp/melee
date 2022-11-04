@@ -250,6 +250,8 @@ void ftPurin_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     ftPurin_SpecialHi_SetVars(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 #pragma push
 asm unk_t lbl_8013CB68()
 { // clang-format off

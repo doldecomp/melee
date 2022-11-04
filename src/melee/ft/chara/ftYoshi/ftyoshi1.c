@@ -3,6 +3,7 @@
 #include <melee/it/itkind.h>
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftanim.h>
 
 extern f32 lbl_804D9A28;
 

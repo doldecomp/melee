@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
 #include <melee/cm/camera.h>
+#include <melee/ft/ftanim.h>
 
 static void ftMasterHand_801511FC(HSD_GObj* fighter_gobj);
 

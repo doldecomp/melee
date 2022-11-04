@@ -70,6 +70,8 @@ void ftMasterHand_80151484(HSD_GObj* fighter_gobj)
     fp->x23B8 = 0;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_801515B8(HSD_GObj* fighter_gobj)
 {
     s32 temp_r0;

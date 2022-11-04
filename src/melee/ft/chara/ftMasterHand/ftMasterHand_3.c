@@ -65,6 +65,8 @@ void ftMasterHand_80150DC4(HSD_GObj* fighter_gobj, GObjCallback callback, Vec3* 
     fp->x234C_pos = *pos;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80150F00(HSD_GObj* fighter_gobj)
 {
     u32 arg_unused;

@@ -93,6 +93,8 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[actionDir][animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
+#include <melee/ft/ftanim.h>
+
 extern s32 func_801E2B80();
 extern s32 func_801E2C34();
 extern void ftFox_AppealS_OnTakeDamage(HSD_GObj*);

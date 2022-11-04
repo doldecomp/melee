@@ -110,6 +110,8 @@ inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80146858
 // https://decomp.me/scratch/PYxCI // Mewtwo's grounded Confusion Animation callback
 void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)

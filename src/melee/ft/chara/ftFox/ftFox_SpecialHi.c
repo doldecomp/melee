@@ -84,6 +84,8 @@ void ftFox_SpecialHi_RotateModel(HSD_GObj* fighter_gobj)
     func_8007592C(fp, func_8007500C(fp, 2), DOUBLE_PI32 - fp->foxVars[0].SpecialHi.rotateModel);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E7354
 // https://decomp.me/scratch/Q5w2u // Fox & Falco's grounded Firefox/Firebird Start Animation callback
 void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj)

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80152138(HSD_GObj* fighter_gobj)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -25,8 +27,6 @@ void ftMasterHand_801521D8(void)
 {
     return;
 }
-
-#include <melee/ft/ftanim.h>
 
 void ftMasterHand_801521DC(HSD_GObj* fighter_gobj)
 {

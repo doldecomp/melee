@@ -100,6 +100,8 @@ void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E2C80
 // https://decomp.me/scratch/3nbJC // Captain Falcon & Ganondorf's grounded Falcon/Warlock Punch Animation callback
 void ftCaptain_SpecialN_Anim(HSD_GObj* fighter_gobj)

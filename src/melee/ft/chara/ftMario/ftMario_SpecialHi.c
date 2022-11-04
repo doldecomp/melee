@@ -32,6 +32,8 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E1B24
 void ftMario_SpecialHi_Anim(HSD_GObj* gobj) 
 {

@@ -290,6 +290,8 @@ void ftFox_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) // Fox & Falco's aeri
     __assert("ftfoxspecialn.c", 333, "0");
 }
 
+#include <melee/ft/ftanim.h>
+
 extern void func_802ADDD0(HSD_GObj*, s32);
 extern void func_802AE538(HSD_GObj*);
 

@@ -43,6 +43,7 @@ void ftNess_SpecialAirLwStart_Action(HSD_GObj* fighter_gobj) // Ness' aerial PSI
 }
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftanim.h>
 
 // Ness' grounded PSI Magnet Start Animation callback
 void ftNess_SpecialLwStart_Anim(HSD_GObj* fighter_gobj)

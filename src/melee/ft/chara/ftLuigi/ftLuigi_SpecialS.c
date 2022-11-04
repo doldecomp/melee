@@ -87,6 +87,8 @@ void ftLuigi_SpecialS_OnGiveDamage(HSD_GObj* fighter_gobj)
     ftLuigi_SpecialAirSEnd_Action(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80142C40
 // https://decomp.me/scratch/Jk0de // Luigi's grounded Green Missile Start Animation callback
 void ftLuigi_SpecialSStart_Anim(HSD_GObj* fighter_gobj)

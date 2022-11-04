@@ -39,6 +39,8 @@ void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj) {
     ft2->x2340_stateVar1 = 0;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 80138AA8 00135688
 // https://decomp.me/scratch/cZhES
 void lbl_80138AA8(HSD_GObj* gobj) {

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/ft/ftanim.h>
+
 extern const f32 neg1;
 
 void ftMasterHand_8015550C(HSD_GObj* fighter_gobj)

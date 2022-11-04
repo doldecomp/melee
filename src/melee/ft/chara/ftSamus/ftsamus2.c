@@ -92,6 +92,8 @@ static void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32 arg9, f32 ar
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftSamus_80128C04(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

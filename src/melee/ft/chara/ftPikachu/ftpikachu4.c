@@ -52,6 +52,8 @@ void ftPikachu_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftPikachu_80125ED8(HSD_GObj* fighter_gobj) {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftPikachu_80126C0C(fighter_gobj);

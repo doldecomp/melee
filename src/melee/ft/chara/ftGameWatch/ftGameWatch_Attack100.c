@@ -12,6 +12,8 @@ void ftGameWatch_Attack100Start_Action(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemGreenhouseSetup;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014C224
 // https://decomp.me/scratch/sBY5w // Mr. Game & Watch's Rapid Jab Start Animation callback
 void ftGameWatch_Attack100Start_Anim(HSD_GObj* fighter_gobj)

@@ -73,6 +73,8 @@ void ftDonkey_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftDonkey_8010E7B4(HSD_GObj* fighter_gobj) {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x172, 0, NULL, 0.0f, 1.0f, 0.0f);

@@ -224,6 +224,8 @@ inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014E73C
 // https://decomp.me/scratch/thHUb // Mr. Game & Watch's grounded Chef Animation callback
 void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj)

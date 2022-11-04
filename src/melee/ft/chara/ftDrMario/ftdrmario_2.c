@@ -2,6 +2,8 @@
 
 #include <melee/lb/lbunknown_001.h>
 
+#include <melee/ft/ftanim.h>
+
 void func_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;

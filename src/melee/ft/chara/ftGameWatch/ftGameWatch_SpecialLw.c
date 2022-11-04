@@ -204,6 +204,8 @@ inline void ftGameWatch_SpecialLw_UpdateVars(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014D014
 // https://decomp.me/scratch/UxcJl // Mr. Game & Watch's grounded Oil Panic Loop Animation callback
 void ftGameWatch_SpecialLw_Anim(HSD_GObj* fighter_gobj)

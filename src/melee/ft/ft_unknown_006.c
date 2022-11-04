@@ -3785,6 +3785,8 @@ lbl_8008A794:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftanim.h>
+
 extern char* lbl_803C54A8;
 extern char* lbl_803C54C4;
 extern char* lbl_804D3AE0;

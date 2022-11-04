@@ -95,6 +95,8 @@ void ftFox_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     ftFox_SpecialLw_SetVars(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E8694
 // https://decomp.me/scratch/isKUf // Fox & Falco's grounded Reflector Start Animation callback
 void ftFox_SpecialLwStart_Anim(HSD_GObj* fighter_gobj) 

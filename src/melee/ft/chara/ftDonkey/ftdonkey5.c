@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftDonkey_800E01BC(HSD_GObj* fighter_gobj) {
     func_800C9924(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {

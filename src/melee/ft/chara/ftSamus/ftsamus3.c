@@ -128,6 +128,7 @@ void ftSamus_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
 
 void ftSamus_80129684(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;

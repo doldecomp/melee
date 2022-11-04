@@ -2,6 +2,8 @@
 
 #include <melee/lb/lbunknown_001.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80153000(HSD_GObj* fighter_gobj)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj))

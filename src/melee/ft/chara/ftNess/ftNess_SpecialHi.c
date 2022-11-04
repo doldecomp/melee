@@ -615,6 +615,8 @@ void ftNess_SpecialAirHi_Action(HSD_GObj* fighter_gobj) // Ness' PK Thunder 2 Ac
     fighter_data2->x1968_jumpsUsed = fighter_data2->x110_attr.x168_MaxJumps;
 }
 
+#include <melee/ft/ftanim.h>
+
 extern HSD_GObj* func_802AB58C(HSD_GObj*, Vec3*, f32);
 
 // 0x801186B0

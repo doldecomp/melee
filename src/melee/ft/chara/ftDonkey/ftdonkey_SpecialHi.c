@@ -46,6 +46,8 @@ void ftDonkey_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj) {
     ef_Spawn(0x4CA, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftDonkey_8010FCD4(HSD_GObj* fighter_gobj) {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);

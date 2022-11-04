@@ -215,6 +215,8 @@ void ftPikachu_ActionChange_80127C74(HSD_GObj* fighter_gobj)
     func_8007D468(fp);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftPikachu_ActionChange_80127CDC(HSD_GObj* fighter_gobj)
 {
     s32 unused[4];

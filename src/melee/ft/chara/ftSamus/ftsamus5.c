@@ -50,6 +50,8 @@ void ftSamus_DestroyAllUnsetx2444(HSD_GObj* fighter_gobj) {
     fp->sa.samus.x2244 = 0;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftSamus_8012A81C(HSD_GObj *fighter_gobj)
 {
     Fighter *fp = fighter_gobj->user_data;

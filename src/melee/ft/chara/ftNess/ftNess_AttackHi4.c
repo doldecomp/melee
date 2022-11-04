@@ -605,6 +605,8 @@ Fighter* GetFighterData(HSD_GObj* fighter_gobj) // 0x80115C9C literally won't ma
     return fp;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80115C9C
 // https://decomp.me/scratch/8RxlI
 void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj) // Ness' Up Smash Animation Callback

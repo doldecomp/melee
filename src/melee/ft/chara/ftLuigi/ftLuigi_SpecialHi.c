@@ -32,6 +32,8 @@ void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80144098
 // https://decomp.me/scratch/03dix // Luigi's grounded Super Jump Punch Animation callback
 void ftLuigi_SpecialHi_Anim(HSD_GObj* fighter_gobj)

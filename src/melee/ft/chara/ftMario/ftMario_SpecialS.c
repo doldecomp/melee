@@ -139,6 +139,8 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
     ftMario_SpecialS_ChangeAction(gobj, AS_MARIO_SPECIALAIRS);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E1550
 void ftMario_SpecialS_Anim(HSD_GObj* gobj) 
 {

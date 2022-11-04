@@ -13,6 +13,8 @@ void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftDonkey_8010DCD8(HSD_GObj* fighter_gobj)
 {
     s32 unused[2]; // needs either unused filler, or arg params

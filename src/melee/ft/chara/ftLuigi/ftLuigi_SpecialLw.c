@@ -107,6 +107,8 @@ inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* fighter_gobj)
     fp->cb.x21E4_callback_OnDeath2 = NULL;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80144830
 // https://decomp.me/scratch/ye3Hd // Luigi's grounded Cyclone Animation callback
 void ftLuigi_SpecialLw_Anim(HSD_GObj* fighter_gobj)

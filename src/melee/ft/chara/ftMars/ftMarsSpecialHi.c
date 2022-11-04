@@ -37,6 +37,8 @@ void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj) {
     func_8006EBA4(gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 801382E8 00134EC8
 // https://decomp.me/scratch/56Ycw
 void lbl_801382E8(HSD_GObj* gobj) {

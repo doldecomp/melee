@@ -26,6 +26,8 @@ void ftPikachu_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftPikachu_80124908(HSD_GObj* fighter_gobj) {
 
     Vec sp14;

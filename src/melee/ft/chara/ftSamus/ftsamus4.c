@@ -37,6 +37,8 @@ void ftSamus_SpecialAirS_StartAction(HSD_GObj* fighter_gobj) {
     ftSamus_ClearThrowFlagsUnk(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftSamus_8012A380(HSD_GObj* fighter_gobj) {
     s32 unsued[2]; /// don't know how to remove this filler without unused data
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {

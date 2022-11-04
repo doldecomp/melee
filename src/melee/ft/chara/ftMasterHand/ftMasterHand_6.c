@@ -32,6 +32,8 @@ void ftMasterHand_80151828(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 static void ftMasterHand_80151918(HSD_GObj* fighter_gobj);
 
 void ftMasterHand_80151874(HSD_GObj* fighter_gobj)

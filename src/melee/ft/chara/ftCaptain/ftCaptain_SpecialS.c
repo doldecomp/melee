@@ -221,6 +221,8 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E384C
 // https://decomp.me/scratch/F314k // Captain Falcon & Ganondorf's grounded Raptor Boost / Gerudo Dragon Start Animation callback
 void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj)

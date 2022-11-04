@@ -62,6 +62,8 @@ void ftZelda_SpecialAirS_StartAction(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 8013B780 - 8013B89C (0x11C bytes)
 // https://decomp.me/scratch/g2bK5
 void ftZelda_8013B780(HSD_GObj* fighter_gobj) {

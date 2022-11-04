@@ -95,6 +95,8 @@ void ftNess_SpecialAirS_Action(HSD_GObj* fighter_gobj) // Ness' aerial PK Fire A
     fp->cb.x21BC_callback_Accessory4 = ftNess_ItemPKFireSpawn;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x80116D74
 // https://decomp.me/scratch/5NxzS
 void ftNess_SpecialS_Anim(HSD_GObj* fighter_gobj) // Ness' grounded PK Fire Animation callback

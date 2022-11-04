@@ -87,6 +87,8 @@ void ftNess_ItemNessBatSetNULL(HSD_GObj* fighter_gobj) // Clear Baseball Bat GOb
     }
 };
 
+#include <melee/ft/ftanim.h>
+
 // 0x80114D50
 // https://decomp.me/scratch/M8dFk
 void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness' F-Smash Animation callback

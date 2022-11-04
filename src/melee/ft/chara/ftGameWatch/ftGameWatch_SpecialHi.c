@@ -164,6 +164,8 @@ void ftGameWatch_SpecialHi_Anim(HSD_GObj* fighter_gobj)
     ftGameWatch_SpecialAirHi_Anim(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014E218
 // https://decomp.me/scratch/QRkS8 // Mr. Game & Watch's aerial Fire Rescue Animation callback
 void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)

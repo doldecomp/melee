@@ -137,6 +137,8 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014AE3C
 // https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation callback
 void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)

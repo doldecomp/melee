@@ -101,6 +101,8 @@ void ftZelda_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     ftZelda_SpecialLw_StartAction_Helper(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 8013B068 - 8013B0A8 (0x40 bytes)
 // https://decomp.me/scratch/DrRr5
 void ftZelda_8013B068(HSD_GObj* fighter_gobj)

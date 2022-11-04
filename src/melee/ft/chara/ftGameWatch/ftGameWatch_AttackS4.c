@@ -109,6 +109,8 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemTorchSetup;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014AA88 
 // https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash Animation callback
 void ftGameWatch_AttackS4_Anim(HSD_GObj* fighter_gobj)

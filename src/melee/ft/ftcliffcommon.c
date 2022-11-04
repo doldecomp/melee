@@ -84,6 +84,8 @@ void func_80081370(HSD_GObj* gobj)
     func_80088148(fp, 4, 0x7F, 0x40);
 }
 
+#include <melee/ft/ftanim.h>
+
 void func_80081504(HSD_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == FALSE) {
