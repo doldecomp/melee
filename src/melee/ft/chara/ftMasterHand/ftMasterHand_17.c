@@ -8,6 +8,8 @@ void ftMasterHand_8015386C(HSD_GObj* fighter_gobj)
         ftMasterHand_80153910(fighter_gobj);
 }
 
+#include <melee/pl/player.h>
+
 void ftMasterHand_801538A8(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

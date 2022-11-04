@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/pl/player.h>
+
 void ftMasterHand_801517B0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

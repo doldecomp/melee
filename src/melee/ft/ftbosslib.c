@@ -32,6 +32,8 @@ void ftbosslib_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 a
     *arg1 = ((arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;
 }
 
+#include <melee/pl/player.h>
+
 void ftbosslib_8015BDB4(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
