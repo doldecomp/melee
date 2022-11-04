@@ -202,5 +202,6 @@ void func_800D14E4(HSD_GObj* fighter_gobj);
 void func_800D1A8C(HSD_GObj* fighter_gobj);
 void func_800D1E80(HSD_GObj* fighter_gobj);
 void func_800D237C(HSD_GObj* fighter_gobj);
+void func_800D3158(HSD_GObj* fighter_gobj);
 
 #endif
