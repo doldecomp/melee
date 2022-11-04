@@ -29,5 +29,6 @@ void func_8002E6FC(u8);
 void func_8002E948(u32 (*)(Vec*));
 void func_8002EB5C(f32);
 void func_8002EC7C(f32);
+void func_8002ED9C(f32);
 
 #endif
