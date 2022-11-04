@@ -56,5 +56,6 @@ HSD_JObj* func_801C2CF4(s32 i);
 HSD_GObj* func_801C2BA4(s32 i);
 void func_801C95C4(HSD_GObj* map_gobj);
 void func_801C5AA4(BOOL);
+void func_801C42AC(void);
 
 #endif
