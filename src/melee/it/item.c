@@ -1238,6 +1238,8 @@ inline HSD_JObj* GetItemJObj(HSD_GObj* item_gobj)
     return item_gobj->hsd_obj;
 }
 
+#include <melee/ef/efasync.h>
+
 // 0x80268E5C
 // https://decomp.me/scratch/cSrfX
 void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // Item State Change
@@ -1576,8 +1578,6 @@ void func_80269978(HSD_GObj* item_gobj) // Item Think - Collision
     func_8027574C(item_gobj);
     func_8026C368(item_gobj);
 }
-
-extern void func_80067624(HSD_GObj*, void*);
 
 // 0x80269A9C
 // https://decomp.me/scratch/uI7DN
