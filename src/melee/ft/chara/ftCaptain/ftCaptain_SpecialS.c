@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
+#include <melee/ft/chara/ftCaptain/__ftCaptain.h>
 
 #include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>

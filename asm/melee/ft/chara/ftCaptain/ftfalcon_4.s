@@ -221,8 +221,8 @@ lbl_800E4C80:
 /* 800E4CEC 000E18CC  7C 08 03 A6 */	mtlr r0
 /* 800E4CF0 000E18D0  4E 80 00 20 */	blr 
 
-.global ftCFalcon_SpecialAirHi_StartAction
-ftCFalcon_SpecialAirHi_StartAction:
+.global ftCaptain_SpecialAirHi_StartAction
+ftCaptain_SpecialAirHi_StartAction:
 /* 800E4CF4 000E18D4  7C 08 02 A6 */	mflr r0
 /* 800E4CF8 000E18D8  38 80 01 62 */	li r4, 0x162
 /* 800E4CFC 000E18DC  90 01 00 04 */	stw r0, 4(r1)
