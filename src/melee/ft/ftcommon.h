@@ -83,7 +83,7 @@ void func_8007EBAC(Fighter* fp, u32, u32);
 void func_8007EC30(u32, u32);
 void func_8007ECD4(Fighter* fp, s32);
 void func_8007ED2C(Fighter* fp);
-void func_8007ED50(Fighter* fp, s32);
+void func_8007ED50(Fighter* fp, s32 percent_temp);
 void func_8007EE0C(Fighter* fp, s32);
 void func_8007EEC8(Fighter* fp, s32, s32);
 void func_8007EF5C(Fighter* fp, s32);
