@@ -3891,6 +3891,7 @@ void func_801C4A08(HSD_GObj* gobj)
     func_80390228(gobj);
 }
 
+#include <math.h>
 
 void func_801C4B50(s32 arg0, s32 arg1, Vec3* arg2, f32 arg8)
 {

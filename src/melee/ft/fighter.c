@@ -1750,6 +1750,8 @@ static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
     }
 }
 
+#include <math.h>
+
 void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

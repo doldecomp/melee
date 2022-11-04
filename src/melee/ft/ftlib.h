@@ -1,27 +1,31 @@
-#ifndef _ftlib_h_
-#define _ftlib_h_
+#ifndef MELEE_FT_FTLIB_H
+#define MELEE_FT_FTLIB_H
 
-#include <melee/ft/fighter.h>
+#include <ctypes.h>
 
-#include <sysdolphin/baselib/gobj.h>
+typedef struct _Vec Vec;
+typedef struct _S32Pair S32Pair;
+typedef struct _HSD_GObj HSD_GObj;
+typedef struct _CameraBox CameraBox;
+typedef struct _CollData CollData;
 
 s32 func_800860C4(void);
 BOOL func_800860E8(void);
 BOOL func_80086140(void);
 HSD_GObj* func_80086198(HSD_GObj*);
-HSD_GObj* func_8008627C(Vec3*, HSD_GObj*);
-HSD_GObj* func_80086368(Vec3*, HSD_GObj*, f32);
-f32 func_800864A8(Vec3*, HSD_GObj*);
+HSD_GObj* func_8008627C(Vec*, HSD_GObj*);
+HSD_GObj* func_80086368(Vec*, HSD_GObj*, f32);
+f32 func_800864A8(Vec*, HSD_GObj*);
 f32 func_800865C0(HSD_GObj*);
 s32 func_800865CC(HSD_GObj*);
 void func_800865D8(HSD_GObj*, f32*, f32*);
 void* func_800865F0(HSD_GObj*);
 void* func_80086630(HSD_GObj*, s32);
-void func_80086644(HSD_GObj*, Vec3*);
-void func_80086664(HSD_GObj*, Vec3*);
-void func_80086684(HSD_GObj*, Vec3*);
+void func_80086644(HSD_GObj*, Vec*);
+void func_80086664(HSD_GObj*, Vec*);
+void func_80086684(HSD_GObj*, Vec*);
 void ftData_SetScale(HSD_GObj*, f32);
-void func_800866DC(HSD_GObj*, Vec3*);
+void func_800866DC(HSD_GObj*, Vec*);
 void func_80086724(HSD_GObj*, HSD_GObj*);
 void func_80086764(HSD_GObj*);
 HSD_GObj* func_80086794(HSD_GObj*);
@@ -35,7 +39,7 @@ void func_800868A4(void);
 BOOL func_800868D4(HSD_GObj*, HSD_GObj*);
 BOOL func_80086960(HSD_GObj*);
 CollData* func_80086984(HSD_GObj*);
-void func_80086990(HSD_GObj*, Vec3*);
+void func_80086990(HSD_GObj*, Vec*);
 f32 func_800869D4(HSD_GObj*);
 f32 func_800869F8(HSD_GObj*);
 f32 func_80086A0C(HSD_GObj*);
@@ -46,10 +50,10 @@ BOOL func_80086A8C(HSD_GObj*);
 BOOL func_80086B64(HSD_GObj*);
 CameraBox* func_80086B74(HSD_GObj*);
 f32 func_80086B80(HSD_GObj*);
-void func_80086B90(HSD_GObj*, Vec3* v);
+void func_80086B90(HSD_GObj*, Vec* v);
 void func_80086BB4(HSD_GObj*);
 u8 func_80086BE0(HSD_GObj*);
-void func_80086BEC(HSD_GObj*, Vec3*);
+void func_80086BEC(HSD_GObj*, Vec*);
 s32 func_80086C0C(HSD_GObj*);
 void func_80086C18(HSD_GObj*, s32, s32);
 void func_80086C9C(s32, s32);
@@ -66,8 +70,8 @@ BOOL func_80086FD4(HSD_GObj*, HSD_GObj*);
 BOOL func_8008701C(HSD_GObj*);
 void func_8008702C(s32);
 void func_80087050(s32);
-BOOL func_80087074(HSD_GObj*, Vec3*);
-BOOL func_800870BC(HSD_GObj*, void**);
+BOOL func_80087074(HSD_GObj*, Vec*);
+BOOL func_800870BC(HSD_GObj*, unk_t*);
 void func_800870F0(HSD_GObj*, s32);
 s32 func_80087120(HSD_GObj*);
 void func_80087140(HSD_GObj*);
@@ -98,8 +102,8 @@ void func_800876B4(HSD_GObj*);
 BOOL func_800876D4(HSD_GObj*);
 s32 func_800876F4(HSD_GObj*);
 s32 func_80087700(HSD_GObj*);
-void func_8008770C(HSD_GObj*, void* dst);
-void func_80087744(HSD_GObj*, void* dst);
+void func_8008770C(HSD_GObj*, unk_t dst);
+void func_80087744(HSD_GObj*, unk_t dst);
 void func_8008777C(HSD_GObj*);
 BOOL func_800877D4(HSD_GObj*);
 

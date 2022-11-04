@@ -92,6 +92,8 @@ void ftbosslib_8015BE40(HSD_GObj* fighter_gobj, Vec* pos, f32* arg2, f32 arg3, f
     fp->x80_self_vel.y = diff.y;
 }
 
+#include <math.h>
+
 void ftbosslib_8015BF74(HSD_GObj* fighter_gobj, f32 arg1)
 {
     Vec3 sp14;
@@ -181,6 +183,8 @@ void ftbosslib_8015C208(HSD_GObj* fighter_gobj, Vec* pos)
     HSD_GObj* gobj = ftbosslib_8015C244(fighter_gobj, &fp->xB0_pos);
     func_80086644(gobj, pos);
 }
+
+#include <melee/ft/ftlib.h>
 
 HSD_GObj* ftbosslib_8015C244(HSD_GObj* fighter_gobj, Vec* pos)
 {

@@ -301,6 +301,8 @@ BOOL func_8026B594(HSD_GObj* item_gobj)
     }
 }
 
+#include <melee/ft/ftlib.h>
+
 // 0x8026B5E4
 // https://decomp.me/scratch/VShKp
 HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj) // Unknown item camera check?
@@ -314,37 +316,28 @@ HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj) // Unk
     return unk_gobj;
 }
 
-extern HSD_GObj* func_80086368(Vec3*, HSD_GObj*);
-
-// 0x8026B634
-// https://decomp.me/scratch/4IGbM
-HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj) // Unknown item camera check 2?
+HSD_GObj* func_8026B634(Point3d* arg0, Point3d* arg1, HSD_GObj* arg2, f32 arg8)
 {
-    HSD_GObj* unk_gobj;
+    HSD_GObj* temp_r3;
 
-    unk_gobj = func_80086368(vector, item_gobj);
-    if (unk_gobj != NULL) {
-        func_800866DC(unk_gobj, vector2);
+    temp_r3 = func_80086368(arg0, arg2, arg8);
+    if (temp_r3 != NULL) {
+        func_800866DC(temp_r3, arg1);
     }
-    return unk_gobj;
+    return temp_r3;
 }
-
-extern f32 func_800864A8(Vec3*, s32);
 
 // 0x8026B684
 // https://decomp.me/scratch/2wWfM
 f32 func_8026B684(Vec3* pos) // Get facing direction of fp (?) with argument 0
 {
-    return func_800864A8(pos, 0);
+    return func_800864A8(pos, NULL);
 }
 
-extern f32 func_800864A8(Vec3*, s32);
-
-// 0x8026B6A8
-// https://decomp.me/scratch/LJ42K
-f32 func_8026B6A8(Vec3* pos, s32 arg) // Get facing direction of fp (?) with variable argument
+// Get facing direction of fp (?) with variable argument
+void func_8026B6A8(Point3d* arg0, HSD_GObj* arg1)
 {
-    func_800864A8(pos, arg);
+    func_800864A8(arg0, arg1);
 }
 
 // 0x8026B6C8

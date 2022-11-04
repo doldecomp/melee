@@ -226,6 +226,8 @@ void func_80042374(CollData* arg0, f32 arg8, f32 arg9, f32 argA) {
     arg0->x5C = argA;
 }
 
+#include <math.h>
+
 // 80042384 https://decomp.me/scratch/P8djI
 void func_80042384(CollData* cd) {
     f32 tmp, tmp2;

@@ -4,6 +4,8 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 
+#include <math.h>
+
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

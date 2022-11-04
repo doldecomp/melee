@@ -42,6 +42,8 @@ void ftPikachu_SetState_8012764C(HSD_GObj* fighter_gobj)
     fp->x2344_stateVar2 = 3;
 }
 
+#include <math.h>
+
 inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC, f32 pika_attr_xBC_abs, f32 vec_y)
 {
     if (fighter_pos_y + pika_attr_xBC_abs - vec_y < 0.0f) {

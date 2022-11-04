@@ -10,6 +10,8 @@
 #define DEG_TO_RAD 0.017453292f
 #define MAX_STICK_MAG 0.999f
 
+#include <math.h>
+
 // points velocity toward facing direction
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;

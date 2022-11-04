@@ -6,6 +6,8 @@
 #include <melee/it/itkind.h>
 #include <sysdolphin/baselib/jobj.h>
 
+#include <math.h>
+
 const Vec3 lbl_803B74A0 = { 0, 0, 0 };
 
 void func_8007C930(Fighter* fp, f32 result)

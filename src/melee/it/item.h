@@ -939,9 +939,9 @@ f32 func_8026B560(HSD_GObj* item_gobj);                                         
 f32 func_8026B574(HSD_GObj* item_gobj);                                                                                                         // Get unknown float from 0x4 of item's special attributes
 s32 func_8026B588(void);                                                                                                                        // Get unknown integer from itCommonData
 HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj);                                                                      // Unknown item camera check?
-HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj);                                                                      // Unknown item camera check 2?
+HSD_GObj* func_8026B634(Point3d* arg0, Point3d* arg1, HSD_GObj* arg2, f32 arg8);
 f32 func_8026B684(Vec3* pos);                                                                                                                   // Get facing direction of fp (?) with argument 0
-f32 func_8026B6A8(Vec3* pos, s32 arg);                                                                                                          // Get facing direction of fp (?) with variable argument
+void func_8026B6A8(Point3d* arg0, HSD_GObj* arg1);
 BOOL func_8026B6C8(HSD_GObj* item_gobj);                                                                                                        // Check if item is a stage item?
 void func_8026B718(HSD_GObj* item_gobj, f32 hitlagFrames);                                                                                      // Set item's hitlag frames
 void func_8026B724(HSD_GObj* item_gobj);                                                                                                        // Toggle bit 3 of 0xDC8 word ON
