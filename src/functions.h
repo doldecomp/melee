@@ -11,10 +11,6 @@ typedef struct _HSD_GObj HSD_GObj;
 typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
-#pragma region "melee/ft/ftfox"
-void ftFox_RemoveBlaster(HSD_GObj*);
-#pragma endregion
-
 #pragma region "melee/ft/ftlink"
 void func_800EC06C();
 void func_800ECD04(HSD_GObj*);
