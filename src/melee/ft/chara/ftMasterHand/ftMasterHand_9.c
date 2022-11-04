@@ -87,6 +87,8 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
+#include <melee/mp/mplib.h>
+
 static void ftMasterHand_801520D8(HSD_GObj* fighter_gobj);
 
 void ftMasterHand_80151F00(HSD_GObj* fighter_gobj)

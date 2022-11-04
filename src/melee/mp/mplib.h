@@ -24,5 +24,6 @@ unk_t func_800569EC();
 void func_80053DA4(u32, f32*);
 void func_80053ECC(u32, f32*);
 void func_80053FF4(s32, Vec*);
+void func_80054158(s32, Vec*);
 
 #endif

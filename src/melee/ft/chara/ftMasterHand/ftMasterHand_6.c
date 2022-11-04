@@ -71,6 +71,8 @@ static void ftMasterHand_80151918(HSD_GObj* fighter_gobj)
 
 static void ftMasterHand_80151AC8(HSD_GObj* fighter_gobj);
 
+#include <melee/mp/mplib.h>
+
 void ftMasterHand_8015198C(HSD_GObj* fighter_gobj)
 {
     MasterHandAttributes* ext_attr;
