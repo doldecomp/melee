@@ -13777,6 +13777,8 @@ lbl_80092378:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftparts.h>
+
 extern unk_t func_800924C0();
 
 #pragma push

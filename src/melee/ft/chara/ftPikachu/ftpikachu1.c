@@ -42,6 +42,8 @@ void ftPikachu_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1) {
     Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftPikachu_8012467C(HSD_GObj* fighter_gobj) {
     s32 unused[2];
     func_80074A4C(fighter_gobj, 1, -1);

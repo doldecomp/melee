@@ -249,6 +249,8 @@ func_8012BDA0:
 #pragma pop
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftparts.h>
+
 
 void func_8012BE3C(HSD_GObj* fighter_gobj) {
     s32* x1CC;

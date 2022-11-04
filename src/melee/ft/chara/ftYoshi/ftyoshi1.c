@@ -4,10 +4,12 @@
 
 #include <melee/ef/efasync.h>
 #include <melee/ft/ftanim.h>
+#include <melee/ft/ftparts.h>
 
 extern f32 lbl_804D9A28;
 
-void lbl_8012C030(HSD_GObj* fighter_gobj) {
+void lbl_8012C030(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
     s32 bone_idx;
     Fighter* fp2;
@@ -30,11 +32,9 @@ void lbl_8012C030(HSD_GObj* fighter_gobj) {
         jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
 
         efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CFU, jobj, x1CC);
-    }
-    else if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    } else if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
         func_800928CC(fighter_gobj);
-    }
-    else {
+    } else {
         func_8012B8A4(fighter_gobj);
     }
 }
@@ -51,10 +51,12 @@ void lbl_8012C114(HSD_GObj* fighter_gobj)
     }
 }
 
-void lbl_8012C194(void) {
+void lbl_8012C194(void)
+{
     func_80092870();
 }
 
-void lbl_8012C1B4(void) {
+void lbl_8012C1B4(void)
+{
     func_800928AC();
 }
