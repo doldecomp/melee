@@ -194,6 +194,8 @@ void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj)
     ftGameWatch_SpecialAirHi_IASA(fighter_gobj);
 }
 
+#include <melee/ft/ftparts.h>
+
 // 0x8014E2B0
 // https://decomp.me/scratch/2aEQN // Mr. Game & Watch's aerial Fire Rescue IASA callback
 void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)

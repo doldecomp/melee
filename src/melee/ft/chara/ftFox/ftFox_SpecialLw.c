@@ -420,8 +420,11 @@ void ftFox_SpecialAirLwLoop_Action(HSD_GObj* fighter_gobj)
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
 
+#include <melee/ft/ftparts.h>
+
 extern f32 func_80075F48(Fighter*, s32);
 
+#pragma push
 #pragma dont_inline on
 
 // 0x800E8F20
@@ -440,7 +443,7 @@ void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj)
     func_80075AF0(fp, 0, -((0.01745329238474369f * (180.0f / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) - func_80075F48(fp, 0)));
 }
 
-#pragma dont_inline off
+#pragma pop
 
 // 0x800E8F20
 // https://decomp.me/scratch/oQ3MP // Fox & Falco's Reflector Turn function

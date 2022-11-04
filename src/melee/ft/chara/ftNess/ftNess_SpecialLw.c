@@ -400,6 +400,8 @@ inline f32 returnStateVar(s32 stateVar)
     return (f32) stateVar;
 }
 
+#include <melee/ft/ftparts.h>
+
 inline void GetAttrStuff(HSD_GObj* arg0)
 {
     Fighter* temp_r30 = arg0->user_data;

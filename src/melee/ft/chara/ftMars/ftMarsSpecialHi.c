@@ -67,6 +67,8 @@ void lbl_80138348(HSD_GObj* gobj) {
     }
 }
 
+#include <melee/ft/ftparts.h>
+
 #define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
 #define HALF_PI 1.5707963267948966
 #define abs(x) (x < 0.0f ? -x : x)

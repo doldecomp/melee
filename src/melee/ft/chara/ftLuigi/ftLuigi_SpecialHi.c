@@ -65,6 +65,8 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftparts.h>
+
 // 0x80144158
 // https://decomp.me/scratch/M9q8b // Luigi's grounded Super Jump Punch IASA callback
 void ftLuigi_SpecialHi_IASA(HSD_GObj* fighter_gobj)

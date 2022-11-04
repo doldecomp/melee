@@ -20078,6 +20078,8 @@ asm unk_t func_80097130()
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftparts.h>
+
 extern char* lbl_804D3B08;
 extern char* lbl_804D3B10;
 
