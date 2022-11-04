@@ -1249,11 +1249,15 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj);
 // Destroy Item
 void func_8026A8EC(HSD_GObj* item_gobj);
 
-// Make Item Held
-void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX, s32 pickupSFX);
+/**
+ * Make item held.
+ * TODO Real signature:
+ * func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* unk_gobj, s32 pickup_sfx);
+*/
+void func_8026AB54();
 
 // Drop Item
-void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2);
+void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32);
 
 // This is actually another Item Drop function
 void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8);
@@ -1416,8 +1420,12 @@ s32 func_8026B924(HSD_GObj* item_gobj);
 // Return float result of item kind and state checks - requires -g compiler flag / Frank modifications to match
 f32 func_8026B960(HSD_GObj* item_gobj);
 
-// Transfer item on character swap - used for Zelda <-> Sheik
-void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2);
+/**
+ * Transfer item on character swap - used for Zelda <-> Sheik
+ * TODO Real signature:
+ * func_8026B9A8(HSD_GObj* held_item, HSD_GObj* dst, u8);
+ */
+void func_8026B9A8();
 
 // Multiply item's scale
 void func_8026BAE8(HSD_GObj* item_gobj, f32 scale_mul);

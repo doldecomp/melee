@@ -2205,6 +2205,8 @@ void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX, s32 pickupSFX) // Make It
     func_8026B074(item_data);
 }
 
+#include <melee/it/item.h>
+
 // 0x8026ABD8
 // https://decomp.me/scratch/sMVJ7
 void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2) // Drop Item

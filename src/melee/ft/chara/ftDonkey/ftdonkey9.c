@@ -9,6 +9,8 @@ void ftDonkey_800E06B8(HSD_GObj* fighter_gobj) {
     ftDonkey_800DFA70(fighter_gobj);
 }
 
+#include <melee/it/item.h>
+
 void ftDonkey_800E06D8(HSD_GObj* fighter_gobj) {
     Vec vec;
     Fighter* fp = getFighter(fighter_gobj);

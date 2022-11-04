@@ -16928,6 +16928,8 @@ asm unk_t func_80094B44()
 } // clang-format on
 #pragma pop
 
+#include <melee/it/item.h>
+
 extern unk_t func_800C5284();
 
 #pragma push
