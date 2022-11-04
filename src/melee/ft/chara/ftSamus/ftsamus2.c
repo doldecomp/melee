@@ -8,8 +8,12 @@ extern s32 func_800D6824(HSD_GObj*);
 extern s32 func_800D68C0(HSD_GObj*);
 extern s32 func_800D695C(HSD_GObj*);
 
-void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2) {
-    Fighter* fp = fighter_gobj->user_data; 
+static void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32, f32);
+static f32 ftSamus_80128AC8(HSD_GObj* fighter_gobj, f32, f32);
+
+void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
+{
+    Fighter* fp = fighter_gobj->user_data;
     ftSamusAttributes* attr = getFtSpecialAttrs(fp);
     f32 float_result = ftSamus_80128AC8(fighter_gobj, farg1, farg2);
     if (!func_8007B868(fighter_gobj)) {
