@@ -347,8 +347,6 @@ void func_800F1D24();
 void func_800F5BA4();
 void func_800F5C34();
 
-void func_80149268(HSD_GObj *);
-
 BOOL func_80164840(u8);
 
 s32 func_8016AEDC(void);

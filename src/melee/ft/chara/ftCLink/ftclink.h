@@ -8,8 +8,9 @@ void func_8014919C(HSD_GObj* fighter_gobj);
 
 void ftCLink_OnItemPickup(HSD_GObj*, BOOL);
 void ftCLink_OnItemDrop(HSD_GObj*, BOOL);
+void func_80149268(HSD_GObj* gobj);
 
-inline void checkFighter2244(HSD_GObj* gobj)
+static inline void checkFighter2244(HSD_GObj* gobj)
 {
     Fighter* fp;
 
