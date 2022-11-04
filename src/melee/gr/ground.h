@@ -70,4 +70,9 @@ BOOL func_801C28AC(s32, u32, s32*);
 f32 func_801C0498(void);
 HSD_GObj* func_801C14D0(s32 id);
 
+/*
+ * @return Scale
+ */
+f32 func_801C0498(void);
+
 #endif
