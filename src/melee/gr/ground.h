@@ -60,5 +60,6 @@ void func_801C42AC(void);
 s32 func_801C4210(void);
 void func_801C3BB4(void);
 void func_801C39C0(void);
+BOOL func_801C2ED0(HSD_JObj* jobj, s32 map_id);
 
 #endif
