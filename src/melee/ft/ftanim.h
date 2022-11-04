@@ -23,5 +23,6 @@ void func_80070654(HSD_GObj* fighter_gobj);
 void func_80070758(HSD_JObj* jobj);
 void func_8007077C(HSD_GObj* fighter_gobj);
 void ftAnim_ApplyPartAnim(HSD_GObj* fighter_gobj, s32, s32, f32);
+void func_80070C48(HSD_GObj* fighter_gobj, BOOL);
 
 #endif
