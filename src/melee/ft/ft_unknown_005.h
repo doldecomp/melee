@@ -4,6 +4,6 @@
 #include <ctypes.h>
 
 unk_t func_8008521C();
-asm void func_800852B0(void);
+void func_800852B0(void);
 
 #endif

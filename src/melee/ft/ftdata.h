@@ -1,7 +1,9 @@
 #ifndef MELEE_FT_FTDATA_H
 #define MELEE_FT_FTDATA_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <ctypes.h>
+
+typedef struct _HSD_GObj HSD_GObj;
 
 void func_80085A14(u32);
 unk_t func_80085B98();
@@ -14,5 +16,6 @@ extern unk_t lbl_803C2468;
 extern unk_t lbl_803C25F4;
 extern unk_t lbl_803C24EC;
 extern unk_t lbl_803C1E38;
+void func_800855C8(s32 id, s32 slot);
 
 #endif

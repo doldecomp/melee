@@ -299,6 +299,8 @@ void Player_80031AD0(s32 slot) {  ///decomp.me/scratch/lYkLv
     }
 }
 
+#include <melee/ft/ftdata.h>
+
 void Player_80031CB0(s32 id, s32 slot) { 
     if (ftMapping_list[id].internal_id != -1) {
         func_800855C8(ftMapping_list[id].internal_id, slot);
