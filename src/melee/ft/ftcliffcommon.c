@@ -3,6 +3,8 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcliffcommon.h>
 
+#include <melee/pl/pl_unknown_001.h>
+
 BOOL func_80081298(HSD_GObj* gobj) {
     Fighter* other_fp;
     HSD_GObj* other_gobj;
