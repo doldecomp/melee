@@ -419,6 +419,8 @@ void func_8015CB7C(void)
     func_8026C42C();
 }
 
+#include <melee/cm/camera.h>
+
 void func_8015CB9C_inline(Vec3 spC)
 {
     f32 phi_f1;
