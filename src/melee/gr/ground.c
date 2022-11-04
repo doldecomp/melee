@@ -465,6 +465,8 @@ static BOOL func_801C0A70(Point3d* pos)
     }
 }
 
+#include <melee/gm/code_801601C4.h>
+
 extern u32 lbl_803B7DEC[];
 extern void func_8026BE84();
 static asm void func_801C0C2C()

@@ -12,4 +12,9 @@ BOOL func_8016B1D8(void);
 BOOL func_8016B0FC(void);
 BOOL func_80164840(u8);
 
+/*
+ * @return Match frame count
+ */
+s32 func_8016AEDC(void);
+
 #endif

@@ -1323,6 +1323,7 @@ u32 Player_GetMatchFrameCount(s32 slot) {
     return count;
 }
 
+#include <melee/gm/code_801601C4.h>
 
 void Player_UpdateMatchFrameCount(s32 slot, BOOL condition) {   
     StaticPlayer* player;
