@@ -189,4 +189,10 @@ void func_800C8FC4(HSD_GObj* fighter_gobj);
 void func_800C9034(HSD_GObj* fighter_gobj);
 void func_800C9840(HSD_GObj* fighter_gobj, s32 action_state, BOOL, f32, f32 turn_speed, f32);
 
+/* todo
+ * Inconsistent signature at call sites. Should be:
+ * BOOL func_800CAE80(HSD_GObj* fighter_gobj);
+ */
+BOOL func_800CAE80();
+
 #endif
