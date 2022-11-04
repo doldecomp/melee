@@ -208,9 +208,7 @@ BOOL ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj)
     return ((fp->x10_action_state_index == 0x167) || (fp->x10_action_state_index == 0x16B)) ? TRUE : FALSE;
 }
 
-// 0x80117DD4
-// https://decomp.me/scratch/e00Cp
-void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj) // OnTakeDamage?
+void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
     Fighter* temp_fp;
@@ -244,9 +242,7 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj) // OnTakeDamage?
 
 extern void func_802AB9C0(HSD_GObj*);
 
-// 0x80117E60
-// https://decomp.me/scratch/MTTJq
-void ftNess_SpecialHiTakeDamage(HSD_GObj* fighter_gobj) // OnTakeDamage again?
+void ftNess_SpecialHiTakeDamage(HSD_GObj* fighter_gobj)
 {
     s32 ASID;
     Fighter* fp;

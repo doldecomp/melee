@@ -259,7 +259,6 @@ void ftNess_SpecialHiStopGFX(HSD_GObj* gobj);
 BOOL ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj);
 BOOL ftNess_CheckSpecialHiHold(HSD_GObj* gobj);
 void ftNess_ItemPKThunderRemove(HSD_GObj* gobj);
-void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj);
 void ftNess_ItemPKThunderCheckOwn(HSD_GObj* gobj, HSD_GObj* gobj2);
 void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* gobj, CollData* coll_data);
 void ftNess_SpecialHi_StartAction(HSD_GObj* gobj);
