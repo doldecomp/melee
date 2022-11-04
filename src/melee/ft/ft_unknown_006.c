@@ -2505,6 +2505,8 @@ asm unk_t func_80089768()
 } // clang-format on
 #pragma pop
 
+#include <melee/pl/pl_unknown_001.h>
+
 #pragma push
 asm void func_80089824(HSD_GObj* fighter_gobj)
 { // clang-format off
