@@ -2132,11 +2132,11 @@ inline void RunCallback(HSD_GObj* item_gobj, void (*cb_Process)(HSD_GObj*))
     }
 }
 
+#include <melee/ef/efasync.h>
 #include <melee/lb/lbunknown_003.h>
 
-// 0x8026A8EC
-// https://decomp.me/scratch/CWnUq
-void func_8026A8EC(HSD_GObj* item_gobj) // Destroy Item
+// Destroy item
+void func_8026A8EC(HSD_GObj* item_gobj)
 {
     void (*cb_OnDestroy)(HSD_GObj*);
     s32 destroyType;

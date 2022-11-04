@@ -456,6 +456,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2229_b4 = 1;
 }
 
+#include <melee/ef/efasync.h>
+
 void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
