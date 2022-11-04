@@ -303,10 +303,6 @@ s32 func_8016B3A0(void);
 s32 func_8016B41C();
 #pragma endregion
 
-#pragma region "melee/text2"
-s32 func_801A45E8(s32);
-#pragma endregion
-
 #pragma region "melee/gr/granime"
 void func_801C8138();
 #pragma endregion
