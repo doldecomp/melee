@@ -65,6 +65,8 @@ void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
     fp->x235C_f32 = argE;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
 {
     f32 velocity_f2;

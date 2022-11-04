@@ -368,6 +368,8 @@ inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
     func_80088148(fp, 0x30DA1U, SFX_VOLUME_MAX, SFX_PAN_MID);
 }
 
+#include <melee/ft/ftanim.h>
+
 extern BOOL func_8009A134(HSD_GObj*);
 
 // 0x80145990

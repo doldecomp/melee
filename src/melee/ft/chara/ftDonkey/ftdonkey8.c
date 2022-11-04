@@ -16,6 +16,8 @@ void ftDonkey_800E05C4(HSD_GObj* fighter_gobj) {
     ftDonkey_800DFA70(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftDonkey_800E05E4(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);

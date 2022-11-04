@@ -118,6 +118,8 @@ void ftNess_AttackLw4_Charge_Coll(HSD_GObj* fighter_gobj) // Ness' Down Smash Ch
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x801168C4
 // https://decomp.me/scratch/KJ6kU
 void ftNess_AttackLw4_Charge_Action(HSD_GObj* fighter_gobj) // Ness' Down Smash Charge Action State handler

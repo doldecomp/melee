@@ -395,6 +395,8 @@ inline float get_max_and_fill_stack() {
     return MAX_STICK_MAG;
 }
 
+#include <melee/ft/ftanim.h>
+
 // grounded up b zip
 void ftPikachu_80126C0C(HSD_GObj* fighter_gobj) { 
     Fighter* fp = fighter_gobj->user_data;

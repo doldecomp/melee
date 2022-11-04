@@ -7769,6 +7769,8 @@ lbl_8008D6F8:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftanim.h>
+
 extern f32 const lbl_804D84C0;
 extern f32 const lbl_804D84C4;
 extern f32 const lbl_804D84C8;

@@ -388,6 +388,8 @@ void ftZelda_80139FE8(HSD_GObj* fighter_gobj) {
     fp->x221E_flag.bits.b0 = 1;
 }
 
+#include <melee/ft/ftanim.h>
+
 // AS_ZeldaUpBTravelGround
 // 8013A058 - 8013A244 (0x1EC bytes)
 // https://decomp.me/scratch/ruApT

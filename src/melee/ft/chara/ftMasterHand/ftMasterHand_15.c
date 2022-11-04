@@ -159,6 +159,8 @@ void ftMasterHand_801533C8(HSD_GObj* fighter_gobj)
 
 static void ftMasterHand_801535B0(HSD_GObj* fighter_gobj);
 
+#include <melee/ft/ftanim.h>
+
 static void ftMasterHand_801533CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

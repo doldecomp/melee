@@ -1948,6 +1948,8 @@ lbl_8013DFA8:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftanim.h>
+
 extern f32 const lbl_804D9C64;
 
 #pragma push
