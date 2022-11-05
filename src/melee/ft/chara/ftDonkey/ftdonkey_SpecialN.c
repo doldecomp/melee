@@ -16,8 +16,8 @@ void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighter_gobj) {
 
 void ftDonkey_UpdateDKVelocityAfterPunch(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
-    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp); 
-    fp->xEC_ground_vel = fp->x2C_facing_direction * (donkey_attr->SpecialN.x34_PUNCH_HORIZONTAL_VEL * fp->x234C_stateVar4_s32);
+    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
+    fp->xEC_ground_vel = fp->facing_direction * (donkey_attr->SpecialN.x34_PUNCH_HORIZONTAL_VEL * fp->x234C_stateVar4_s32);
 }
 
 void ftDonkey_SpecialN_StartAction(HSD_GObj* fighter_gobj) {
@@ -125,9 +125,9 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj) {
     if (fp->x2348_stateVar3_s32 == 1) {
         fp->x2348_stateVar3_s32++;
         if (fp->xE0_ground_or_air == GA_Air) {
-            ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->facing_direction);
         } else {
-            ef_Spawn(0x4C8, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x4C8, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->facing_direction);
         }
     }
     if (fp->x914[0].x0) {
@@ -166,9 +166,9 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj) {
     if (fp->x2348_stateVar3_s32 == 1) {
         fp->x2348_stateVar3_s32++;
         if (fp->xE0_ground_or_air == GA_Air) {
-            ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->facing_direction);
         } else {
-            ef_Spawn(0x4C8, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x4C8, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->facing_direction);
         }
     }
     if (fp->x914[0].x0 && (fp->x2344_stateVar2_s32 == 0)) {
@@ -230,9 +230,9 @@ void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj) {
     if (fp->x2348_stateVar3_s32 == 1) {
         fp->x2348_stateVar3_s32++;
         if (fp->xE0_ground_or_air == GA_Air) {
-            ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->facing_direction);
         } else {
-            ef_Spawn(0x4C8, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x4C8, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->facing_direction);
         }
     }
     if (fp->x914[0].x0) {
@@ -271,9 +271,9 @@ void ftDonkey_8010EF7C(HSD_GObj* fighter_gobj) {
     if (fp->x2348_stateVar3_s32 == 1) {
         fp->x2348_stateVar3_s32++;
         if (fp->xE0_ground_or_air == GA_Air) {
-            ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->facing_direction);
         } else {
-            ef_Spawn(0x4C8, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x4C8, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj, &fp->facing_direction);
         }
     }
     

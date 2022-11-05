@@ -438,7 +438,7 @@ void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj)
     fp->foxVars[0].SpecialLw.turnFrames--;
     if (((u32) fp->x2200_ftcmd_var0 == 0U) && ((s32) fp->foxVars[0].SpecialLw.turnFrames <= foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) {
         fp->x2200_ftcmd_var0 = 1;
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_direction = -fp->facing_direction;
     }
     func_80075AF0(fp, 0, -((0.01745329238474369f * (180.0f / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) - func_80075F48(fp, 0)));
 }
@@ -455,7 +455,7 @@ inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* fighter_gobj)
     fp->foxVars[0].SpecialLw.turnFrames--;
     if (((u32) fp->x2200_ftcmd_var0 == 0U) && ((s32) fp->foxVars[0].SpecialLw.turnFrames <= foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) {
         fp->x2200_ftcmd_var0 = 1;
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_direction = -fp->facing_direction;
     }
     func_80075AF0(fp, 0, -((0.01745329238474369f * (180.0f / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) - func_80075F48(fp, 0)));
 }
@@ -790,7 +790,7 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = getFighter(fighter_gobj);
     s32 ASID;
 
-    fp->x2C_facing_direction = fp->ReflectAttr.x1A2C_reflectHitDirection;
+    fp->facing_direction = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
     func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, NULL, &sp14);
     func_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f, 1.0471975803375244f);

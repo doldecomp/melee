@@ -141,17 +141,17 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     model = item_gobj->hsd_obj;
     item_data->x4C_pos = spawnItem->x20_pos_prev;
     temp_f0 = spawnItem->x38_facing_direction;
-    item_data->x2C_facing_direction = temp_f0;
+    item_data->facing_direction = temp_f0;
     item_data->x30_initial_facing_dir = temp_f0;
     item_data->x518_ownerGObj = spawnItem->x0_parent_gobj;
-    if (-1.0f == item_data->x2C_facing_direction) {
+    if (-1.0f == item_data->facing_direction) {
         temp_r4 = -1;
     } else {
         temp_r4 = 1;
     }
     func_800436D8(&item_data->x378_itemColl, temp_r4);
     if (item_data->xDC8_word.flags.x19 == 1) {
-        temp_f31 = (f32) (1.5707963267948966 * (f64) item_data->x2C_facing_direction);
+        temp_f31 = (f32) (1.5707963267948966 * (f64) item_data->facing_direction);
         HSD_JObjSetRotationY(model, temp_f31);
     }
     func_80273500(item_gobj, &spawnItem->x2C_vel);
@@ -1215,7 +1215,7 @@ extern f32 lbl_804DC63C;
 
 inline void HSD_JObjSetFacingDirItem(HSD_JObj* item_jobj2, Item* item_data)
 {
-    HSD_JObjSetRotationY(item_jobj2, (M_PI / 2) * item_data->x2C_facing_direction);
+    HSD_JObjSetRotationY(item_jobj2, (M_PI / 2) * item_data->facing_direction);
 }
 
 inline void HSD_JObjSetScaleItem(Item* item_data3, HSD_JObj* item_jobj1_2, Vec3* sp4C)

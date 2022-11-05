@@ -188,8 +188,8 @@ void ftZelda_80139AD4(HSD_GObj* fighter_gobj) {
     s32 ledgeGrabDir;
 
     Fighter* fp = fighter_gobj->user_data;
-    facingDirection = fp->x2C_facing_direction;
-    
+    facingDirection = fp->facing_direction;
+
     if (facingDirection < 0) { // lbl_804D9BA4
         ledgeGrabDir = -1;
     } else {
@@ -325,12 +325,12 @@ void ftZelda_80139D60(HSD_GObj* fighter_gobj) {
     fp->x234C_stateVar4_s32++;
 
     // Determine facing direction
-    if (fp->x2C_facing_direction < 0.0f) {
+    if (fp->facing_direction < 0.0f) {
         ledgeGrabDir = -1;
     } else {
         ledgeGrabDir = 1;
     }
-    
+
     if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) != 0) {
         returnVar = ftZelda_80139D60_Helper(fighter_gobj);
         if (returnVar != 0) {
@@ -457,16 +457,16 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj) {
         if (!(lbvector_AngleXY(groundVector, (Point3d* ) &inputVector.x) < HALF_PI)) {
             if (func_8009A134(fighter_gobj) == 0) {
                 func_8007D9FC(fp);
-                
-                temp_f5 = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->x2C_facing_direction);
-                
+
+                temp_f5 = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->facing_direction);
+
                 fp->x2344_f32 = inputVector.x;
                 fp->x2348_stateVar3_f32 = inputVector.y;
 
                 // Update ground velocity
                 temp_f6 = ((attributes->x54 * var_f31) + attributes->x58) * cosf(temp_f5);
-                fp->xEC_ground_vel = fp->x2C_facing_direction * temp_f6;
-                
+                fp->xEC_ground_vel = fp->facing_direction * temp_f6;
+
                 Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15E, 0, NULL, 35.0, 1.0, 0);
                 func_8006EBA4(fighter_gobj);
                 ftAnim_SetAnimRate(fighter_gobj, 0);
@@ -542,7 +542,7 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj) {
         if (temp_f1 > 0.0010000000474974513f) {
             func_8007D9FC(fp);
         }
-        var_f30 = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->x2C_facing_direction);
+        var_f30 = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->facing_direction);
         fp->x2344_f32 = fp->input.x620_lstick_x;
         fp->x2348_stateVar3_f32 = fp->input.x624_lstick_y;
     } else {
@@ -552,7 +552,7 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj) {
         var_f31 = fp->x2348_stateVar3_f32 = 1.0;
     }
 
-    fp->x80_self_vel.x = fp->x2C_facing_direction * (((attributes->x54 * var_f31) + attributes->x58) * cosf(var_f30));
+    fp->x80_self_vel.x = fp->facing_direction * (((attributes->x54 * var_f31) + attributes->x58) * cosf(var_f30));
     fp->x80_self_vel.y = ((attributes->x54 * var_f31) + attributes->x58) * sinf(var_f30);
     
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x161, 0, NULL, 35.0, 1.0, 0);
@@ -648,8 +648,8 @@ void ftZelda_8013A5C4(HSD_GObj* fighter_gobj) {
 
     fp = fighter_gobj->user_data;
     attributes = fp->x2D4_specialAttributes;
-    
-    if (fp->x2C_facing_direction < 0) {
+
+    if (fp->facing_direction < 0) {
         ledgeGrabDir = -1;
     } else {
         ledgeGrabDir = 1;

@@ -21,7 +21,7 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
     {
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * Fighter_GetModelScale(fp)) - sp10.y);
-        rescueGObj = func_802C8038(fighter_gobj, &sp10, 0, fp->x10_action_state_index - 0x175, fp->x2C_facing_direction, 2.5f);
+        rescueGObj = func_802C8038(fighter_gobj, &sp10, 0, fp->x10_action_state_index - 0x175, fp->facing_direction, 2.5f);
         fp->sa.gaw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL)
         {
@@ -224,7 +224,7 @@ void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
             temp = stick_range_threshold * facing_dir;
             angle = temp * gawAttrs->x5C_GAMEWATCH_RESCUE_ANGLE_UNK;
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (M_PI / 2) * fp->x2C_facing_direction);
+            func_80075AF0(fp, 0, (M_PI / 2) * fp->facing_direction);
             fp->x6BC_inputStickangle = -angle;
             fp->x2200_ftcmd_var0 = 1;
         }
@@ -279,11 +279,10 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
         }
         else
         {
-            if (1.0f == fp->x2C_facing_direction)
-            {
+            if (1.0f == fp->facing_direction) {
                 ledgeGrabDir = 1;
-            }
-            else ledgeGrabDir = -1;
+            } else
+                ledgeGrabDir = -1;
             if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) != FALSE)
             {
                 func_800D5CB0(fighter_gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);

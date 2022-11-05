@@ -8,7 +8,7 @@ void ftSamus_801293BC_inner(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighterPlus(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
     s32 x2230 = fp->sa.samus.x2230;
-    fp->x80_self_vel.x = (fp->x2C_facing_direction * (samus_attr->x1C * x2230));
+    fp->x80_self_vel.x = (fp->facing_direction * (samus_attr->x1C * x2230));
 }
 
 void ftSamus_801291F0(HSD_GObj* fighter_gobj){
@@ -46,7 +46,7 @@ s32 ftSamus_801292E4(HSD_GObj* fighter_gobj) {
         vec2.x = 0.0f;
         func_8000B1CC(fp->x5E8_fighterBones[50].x0_jobj, &vec2, &vec1);
         vec1.z = 0.0f;
-        result = func_802B55C8(fighter_gobj, &vec1, 0x32, 0x5E, fp->x2C_facing_direction);
+        result = func_802B55C8(fighter_gobj, &vec1, 0x32, 0x5E, fp->facing_direction);
         fp->sa.samus.x222C = result;
         if (result) {
             ftSamus_updateDamageDeathCBs(fighter_gobj);
@@ -75,8 +75,8 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj) {
         fp->x2204_ftcmd_var1 = 2;
         func_8000B1CC(fp->x5E8_fighterBones[51].x0_jobj, NULL, &vec1);
         vec1.z = 0.0f;
-        held_item = fp->x1974_heldItem; 
-        if (1.0f == fp->x2C_facing_direction) {
+        held_item = fp->x1974_heldItem;
+        if (1.0f == fp->facing_direction) {
             var_f0 = 0.0;
         } else {
             var_f0 = M_PI;
@@ -89,7 +89,7 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj) {
         fp->sa.samus.x2230 = 0U;
         
         ftSamus_801291F0(fighter_gobj);
-        ef_Spawn(0x486, fighter_gobj, &vec1, &fp->x2C_facing_direction);
+        ef_Spawn(0x486, fighter_gobj, &vec1, &fp->facing_direction);
         fp->x1974_heldItem = held_item;
     }
 }
@@ -361,11 +361,11 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj) {
         Vec position;
         fp->sa.samus.x2238++;
         func_8000B1CC(fp->x5E8_fighterBones[56].x0_jobj, NULL, &position);
-        position.x += (samus_attr->x34 * fp->x2C_facing_direction);
+        position.x += (samus_attr->x34 * fp->facing_direction);
         if ((fp->x10_action_state_index == 0x15D) || (fp->x10_action_state_index == 0x15F)) {
-            func_802B62D0(fighter_gobj, &position, 0, fp->x2C_facing_direction);
+            func_802B62D0(fighter_gobj, &position, 0, fp->facing_direction);
         } else {
-            func_802B62D0(fighter_gobj, &position, 1, fp->x2C_facing_direction);
+            func_802B62D0(fighter_gobj, &position, 1, fp->facing_direction);
         }
         ftSamus_8012A168(fighter_gobj, &position);
         fp->cb.x21BC_callback_Accessory4 = 0;

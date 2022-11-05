@@ -107,7 +107,7 @@ void func_8026B344(HSD_GObj* item_gobj, Vec3* pos) // Unknown item position math
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    pos->x = (f32) ((item_data->x2C_facing_direction * item_data->xBCC_unk.x) + item_data->x4C_pos.x);
+    pos->x = (f32) ((item_data->facing_direction * item_data->xBCC_unk.x) + item_data->x4C_pos.x);
     pos->y = (f32) (item_data->x4C_pos.y + item_data->xBCC_unk.y);
     pos->z = (f32) item_data->x4C_pos.z;
 }

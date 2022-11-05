@@ -246,12 +246,12 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
         switch (ftKind)
         {
         case FTKIND_CAPTAIN:
-            ef_Spawn(0x492, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x492, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->facing_direction);
             fp->sa.captain.x2230_isSpecialSGFX = TRUE;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(0x50E, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x50E, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->facing_direction);
             fp->sa.captain.x2230_isSpecialSGFX = TRUE;
             break;
         }
@@ -301,12 +301,12 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
         switch (ftKind)
         {
         case FTKIND_CAPTAIN:
-            ef_Spawn(0x493, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x493, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->facing_direction);
             fp->sa.captain.x2230_isSpecialSGFX = TRUE;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(0x50F, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x50F, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->facing_direction);
             fp->sa.captain.x2230_isSpecialSGFX = TRUE;
             break;
         }
@@ -426,9 +426,8 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
     }
     if ((u32)fp->x2200_ftcmd_var0 == 1U)
     {
-        facingDir = fp->x2C_facing_direction;
-        if (((1.0f == fp->x2C_facing_direction) && (fp->x6F0_collData.x134_envFlags & 0x3F)) || (((-1.0f) == fp->x2C_facing_direction) && (fp->x6F0_collData.x134_envFlags & 0xFC0)))
-        {
+        facingDir = fp->facing_direction;
+        if (((1.0f == fp->facing_direction) && (fp->x6F0_collData.x134_envFlags & 0x3F)) || (((-1.0f) == fp->facing_direction) && (fp->x6F0_collData.x134_envFlags & 0xFC0))) {
             efLib_DestroyAll(fighter_gobj);
             func_8008A2BC(fighter_gobj);
         }

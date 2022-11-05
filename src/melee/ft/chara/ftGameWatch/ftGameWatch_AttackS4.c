@@ -14,7 +14,7 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 
     fp = getFighter(fighter_gobj);
     func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
-    fp->sa.gaw.x2254_fireGObj = func_802C68F8(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
+    fp->sa.gaw.x2254_fireGObj = func_802C68F8(fighter_gobj, &sp10, 0x20, fp->facing_direction);
     if (fp->sa.gaw.x2254_fireGObj != NULL)
     {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL)

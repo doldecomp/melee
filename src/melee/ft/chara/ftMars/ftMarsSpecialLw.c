@@ -313,7 +313,7 @@ void lbl_80139140(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     attr = fp->x2D4_specialAttributes;
-    fp->x2C_facing_direction = fp->x19AC;
+    fp->facing_direction = fp->x19AC;
     temp_r0 = (s32) fp->x19A4;
     if (temp_r0 > 0) {
         fp->x2340_stateVar1 = (s32) (temp_r0 * attr->x5C);
@@ -331,10 +331,10 @@ void lbl_80139140(HSD_GObj* gobj) {
     if (ft_2->x2219_flag.bits.b0 == 0) {
         switch (func_800872A4(gobj)) {
             case 0x12:
-                ef_Spawn(0x4F1, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->x2C_facing_direction);
+                ef_Spawn(0x4F1, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->facing_direction);
                 break;
             case 0x1A:
-                ef_Spawn(0x510, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->x2C_facing_direction);
+                ef_Spawn(0x510, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->facing_direction);
                 break;
         }
         ft_2->x2219_flag.bits.b0 = 1;

@@ -620,7 +620,7 @@ void func_8007D6A4(Fighter* fp)
 {
     f32 tmp;
     if (fp->x594_animCurrFlags1.bits.b0) {
-        fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
+        fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->facing_direction;
     }
     tmp = fp->x110_attr.x144_GroundedMaxHorizontalVelocity;
     if (fp->xEC_ground_vel < -tmp) {
@@ -667,7 +667,7 @@ void func_8007D7FC(Fighter* fp)
         }
     }
     if (fp->x594_animCurrFlags1.bits.b0) {
-        fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
+        fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->facing_direction;
     }
     fmp = fp->x110_attr.x144_GroundedMaxHorizontalVelocity;
     if (fp->xEC_ground_vel < -fmp) {
@@ -721,7 +721,7 @@ void func_8007D9FC(Fighter* fp)
     } else {
         phi_f0 = -1;
     }
-    fp->x2C_facing_direction = phi_f0;
+    fp->facing_direction = phi_f0;
 }
 
 void func_8007DA24(Fighter* fp)
@@ -733,7 +733,7 @@ void func_8007DA24(Fighter* fp)
         } else {
             phi_f0 = -1;
         }
-        fp->x2C_facing_direction = phi_f0;
+        fp->facing_direction = phi_f0;
     }
 }
 
@@ -867,8 +867,8 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
                                    || cur_gnd == func_8004DC04(arg_gnd)) {
                 func_8007F8B4(cur_ft, &sp24);
                 vtmp = &cur_ft->x2C4;
-                temp_f0 = (temp_r31->x * arg_ft->x2C_facing_direction + v->x) -
-                          (cur_ft->x2C_facing_direction * vtmp->x + sp24.x);
+                temp_f0 = (temp_r31->x * arg_ft->facing_direction + v->x) -
+                          (cur_ft->facing_direction * vtmp->x + sp24.x);
                 if (fabsf(temp_f0) < temp_r31->y + vtmp->y) {
                     if (temp_f0) {
                         arg_ft->xF8_playerNudgeVel.x += temp_f0 < 0 ? -p_ftCommonData->x450 : p_ftCommonData->x450;
@@ -916,8 +916,8 @@ void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
                                 || temp_r30 == func_8004DC04(temp_r0)) {
             func_8007F8B4(temp_r3, &sp1C);
             tmp = &temp_r3->x2C4;
-            temp_f1 = (temp_r31->x * fp->x2C_facing_direction + arg1->x) -
-                    (temp_r3->x2C_facing_direction * tmp->x + sp1C.x);
+            temp_f1 = (temp_r31->x * fp->facing_direction + arg1->x) -
+                      (temp_r3->facing_direction * tmp->x + sp1C.x);
             if (fabsf(temp_f1) < temp_r31->y + tmp->y) {
                 fp->xF8_playerNudgeVel.y -= p_ftCommonData->x45C;
             }
@@ -1366,7 +1366,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->xB0_pos = src->xB0_pos;
     dst->xBC_prevPos = src->xBC_prevPos;
     dst->xC8_pos_delta = src->xC8_pos_delta;
-    dst->x2C_facing_direction = src->x2C_facing_direction;
+    dst->facing_direction = src->facing_direction;
     dst->dmg.x1830_percent = src->dmg.x1830_percent;
     Player_SetHPByIndex(dst->xC_playerID,
         dst->x221F_flag.bits.b4, dst->dmg.x1830_percent);
@@ -1534,15 +1534,15 @@ void func_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 void func_8007F76C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->xEC_ground_vel = fp->x2C_facing_direction * fabs_inline(fp->xEC_ground_vel);
-    fp->x80_self_vel.x = fp->x2C_facing_direction * fabs_inline(fp->x80_self_vel.x);
+    fp->xEC_ground_vel = fp->facing_direction * fabs_inline(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = fp->facing_direction * fabs_inline(fp->x80_self_vel.x);
 }
 
 void func_8007F7B4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->xEC_ground_vel = -fp->x2C_facing_direction * fabs_inline(fp->xEC_ground_vel);
-    fp->x80_self_vel.x = -fp->x2C_facing_direction * fabs_inline(fp->x80_self_vel.x);
+    fp->xEC_ground_vel = -fp->facing_direction * fabs_inline(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = -fp->facing_direction * fabs_inline(fp->x80_self_vel.x);
 }
 
 void* func_8007F804(Fighter* fp)
@@ -1675,7 +1675,7 @@ void func_8007FC7C(HSD_GObj* gobj, f32 arg8)
         func_8007FDA0(gobj);
     } else {
         item_gobj = func_8029A748(gobj, &fp->xB0_pos, fp->x10C_ftData->x8->unk12,
-                                  fp->x2C_facing_direction);
+                                  fp->facing_direction);
         if (item_gobj != NULL) {
             func_8007FE84(gobj, item_gobj, sp20, arg8);
             func_8007FDA0(gobj);

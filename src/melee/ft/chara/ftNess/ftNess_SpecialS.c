@@ -36,7 +36,7 @@ void ftNess_ItemPKFireSpawn(HSD_GObj* fighter_gobj) //* Ness' PK Fire spawn func
     {
         func_8000B1CC(fp->x5E8_fighterBones[42].x0_jobj, NULL, &ItemBonePos);
 
-        ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->x2C_facing_direction;
+        ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->facing_direction;
         ItemBonePos.y += ness_attr->x34_PKFIRE_SPAWN_Y;
         ItemBonePos.z = 0.0f;
 
@@ -53,15 +53,15 @@ void ftNess_ItemPKFireSpawn(HSD_GObj* fighter_gobj) //* Ness' PK Fire spawn func
 
         PKFireVelStruct.z = 0.0f;
 
-        PKFireVelStruct.x = PKFireVel * cosf(PKFireLaunch) * fp->x2C_facing_direction;
+        PKFireVelStruct.x = PKFireVel * cosf(PKFireLaunch) * fp->facing_direction;
 
         PKFireLaunchNew = sinf(PKFireLaunch);
 
         PKFireVelStruct.y = PKFireVel * PKFireLaunchNew;
 
-        PKFireRot = PKFireLaunch * fp->x2C_facing_direction;
+        PKFireRot = PKFireLaunch * fp->facing_direction;
 
-        func_802AA054(fighter_gobj, &ItemBonePos, &PKFireVelStruct, fp->x2C_facing_direction, PKFireRot);
+        func_802AA054(fighter_gobj, &ItemBonePos, &PKFireVelStruct, fp->facing_direction, PKFireRot);
     }
 }
 

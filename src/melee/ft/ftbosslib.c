@@ -149,8 +149,8 @@ void ftbosslib_8015C09C(HSD_GObj* fighter_gobj, f32 arg1)
     Quaternion quat = { 0 };
     s32 unused[2];
 
-    fp->x2C_facing_direction = arg1;
-    quat.y = M_PI / 2 * fp->x2C_facing_direction;
+    fp->facing_direction = arg1;
+    quat.y = M_PI / 2 * fp->facing_direction;
     HSD_JObjSetRotation(jobj, &quat);
 }
 

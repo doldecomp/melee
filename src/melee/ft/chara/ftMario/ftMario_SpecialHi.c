@@ -101,7 +101,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     if (throwflag_flag != 0) {
         if (abs(fp->input.x620_lstick_x) > sa->x20_MARIO_SUPERJUMP_REVERSE_STICK_RANGE) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->x2C_facing_direction));
+            func_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->facing_direction));
         }
     }
 }

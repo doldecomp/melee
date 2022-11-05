@@ -28,7 +28,7 @@ void ftMasterHand_OnGrabFighter_Victim(HSD_GObj* self_gobj, HSD_GObj* victim_gob
     self_fp->x1A58_interactedFighter = victim_gobj;
     self_fp->x221B_flag.bits.b5 = FALSE;
     self_fp->x221B_flag.bits.b7 = FALSE;
-    self_fp->x2C_facing_direction = victim_fp->x2C_facing_direction;
+    self_fp->facing_direction = victim_fp->facing_direction;
 
     func_800DA824(victim_fp);
     func_8007DBCC(self_fp, 0 /*, missing_arg */);

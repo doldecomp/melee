@@ -253,7 +253,7 @@ static void ftMasterHand_8015364C(HSD_GObj* fighter_gobj, HSD_JObj* jobj, f32 x_
     if (func_80087120(fighter_gobj) > ext_attr->xEC)
         b = TRUE;
 
-    func_802F0AE0(fighter_gobj, &sp28_leek, &sp1C_carrot, 0x7E, b, fp->x2C_facing_direction, ext_attr->xD4, ext_attr->xD8);
+    func_802F0AE0(fighter_gobj, &sp28_leek, &sp1C_carrot, 0x7E, b, fp->facing_direction, ext_attr->xD4, ext_attr->xD8);
 }
 
 static void ftMasterHand_80153730(HSD_GObj* fighter_gobj)

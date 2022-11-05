@@ -173,7 +173,7 @@ void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj) // Ness' grounded PK Flas
             func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL, &sp28);
             sp28.z = 0.0f;
             sp28.y += 3.0f * fighter_data2->x34_scale.y;
-            flash_GObj = func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush, fighter_data2->x2C_facing_direction);
+            flash_GObj = func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush, fighter_data2->facing_direction);
             fighter_data2->sa.ness.x2240_flashGObj = flash_GObj;
             if (flash_GObj != NULL) {
                 fighter_data2->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
@@ -271,7 +271,7 @@ void ftNess_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj) // Ness' aerial PK Fla
             func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL, &sp28);
             sp28.z = 0.0f;
             sp28.y += 3.0f * fighter_data2->x34_scale.y;
-            flash_GObj = func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush, fighter_data2->x2C_facing_direction);
+            flash_GObj = func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush, fighter_data2->facing_direction);
             fighter_data2->sa.ness.x2240_flashGObj = flash_GObj;
             if (flash_GObj != NULL) {
                 fighter_data2->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;

@@ -30,7 +30,7 @@ void ftNess_AttackS4_Action(HSD_GObj* fighter_gobj) // Ness' F-Smash Action Stat
 
     func_8006EBA4(fighter_gobj);
 
-    baseballBatGObj = func_802AD478(fighter_gobj, &fp->xB0_pos, 0x2A /* Item Hold Bone */, fp->x2C_facing_direction);
+    baseballBatGObj = func_802AD478(fighter_gobj, &fp->xB0_pos, 0x2A /* Item Hold Bone */, fp->facing_direction);
 
     fp->sa.ness.x2248_baseballBatGObj = baseballBatGObj;
 

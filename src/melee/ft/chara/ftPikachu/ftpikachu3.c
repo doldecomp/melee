@@ -339,7 +339,7 @@ void ftPikachu_ActionChange_80125A54(HSD_GObj* fighter_gobj) {
     fp->x2200_ftcmd_var0 = 0;
 
     fp->x80_self_vel.x = (pika_attr->x40 * fp->x2340_stateVar1) + pika_attr->x3C;
-    fp->x80_self_vel.x *= fp->x2C_facing_direction;
+    fp->x80_self_vel.x *= fp->facing_direction;
 
     fp->x80_self_vel.y = (0.5f * pika_attr->x44) + (pika_attr->x44 * (0.5f * fp->x2340_stateVar1 / pika_attr->x24));
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15E, 0xA, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);

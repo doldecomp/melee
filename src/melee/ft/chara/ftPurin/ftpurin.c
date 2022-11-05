@@ -230,7 +230,7 @@ static inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* figh
 {
     Fighter* fighter = getFighter(fighter_gobj);
 
-    if (lbl_804D9C10 == fighter->x2C_facing_direction)
+    if (lbl_804D9C10 == fighter->facing_direction)
         Fighter_ActionStateChange_800693AC(fighter_gobj, left_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
     else
         Fighter_ActionStateChange_800693AC(fighter_gobj, right_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
@@ -437,7 +437,7 @@ static void func_8013CD34(HSD_GObj* fighter_gobj)
 
     func_8007D5D4(fp);
 
-    if (lbl_804D9C10 == fp->x2C_facing_direction)
+    if (lbl_804D9C10 == fp->facing_direction)
         Fighter_ActionStateChange_800693AC(fighter_gobj, 366, 0x0C4C508A, NULL, fp->x894_currentAnimFrame, lbl_804D9C18, lbl_804D9C14);
     else
         Fighter_ActionStateChange_800693AC(fighter_gobj, 368, 0x0C4C508A, NULL, fp->x894_currentAnimFrame, lbl_804D9C18, lbl_804D9C14);

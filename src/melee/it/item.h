@@ -299,7 +299,7 @@ typedef struct _Item
     u8 x23;
     s32 x24_item_state_index;
     s32 x28_item_anim_index;
-    f32 x2C_facing_direction;
+    f32 facing_direction;
     f32 x30_initial_facing_dir;
     f32 x34_spin_speed;
     f32 x38_scale;

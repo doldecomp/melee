@@ -53,9 +53,9 @@ void func_80081370(HSD_GObj* gobj)
     } else {
         ledgeDirection = -1.0f;
     }
-    facingDirection = fp->x2C_facing_direction;
+    facingDirection = fp->facing_direction;
     if (facingDirection != ledgeDirection) {
-        fp->x2C_facing_direction = -facingDirection;
+        fp->facing_direction = -facingDirection;
     }
     func_8007D780(fp);
     func_8007D5D4(fp);
@@ -65,7 +65,7 @@ void func_80081370(HSD_GObj* gobj)
     func_8007EFC0(fp, p_ftCommonData->x5F0);
     func_8007E2FC(gobj);
     fp->x221D_flag.bits.b7 = 1;
-    if (fp->x2C_facing_direction > 0.0f) {
+    if (fp->facing_direction > 0.0f) {
         fp->commonVars[0].CliffCommon.ledgeID = fp->x6F0_collData.x44;
     } else {
         fp->commonVars[0].CliffCommon.ledgeID = fp->x6F0_collData.x40;
@@ -75,7 +75,7 @@ void func_80081370(HSD_GObj* gobj)
     func_8007E2F4(fp, 0x1FF);
     func_8007EBAC(fp, 0xC, 0);
 
-    if (fp->x2C_facing_direction > 0.0f) {
+    if (fp->facing_direction > 0.0f) {
         func_80053ECC(fp->commonVars[0].CliffCommon.ledgeID, unkParam.x10);
     } else {
         func_80053DA4(fp->commonVars[0].CliffCommon.ledgeID, unkParam.x10);
@@ -103,12 +103,12 @@ void func_80081544(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     if (func_80054ED8(fp->commonVars[0].CliffCommon.ledgeID) != 0) {
-        if (fp->x2C_facing_direction > 0.0f) {
+        if (fp->facing_direction > 0.0f) {
             func_80053ECC(fp->commonVars[0].CliffCommon.ledgeID, sp10);
         } else {
             func_80053DA4(fp->commonVars[0].CliffCommon.ledgeID, sp10);
         }
-        fp->xB0_pos.x = (f32) ((fp->x68C_transNPos.z * fp->x2C_facing_direction) + sp10[0]);
+        fp->xB0_pos.x = (f32) ((fp->x68C_transNPos.z * fp->facing_direction) + sp10[0]);
         fp->xB0_pos.y = (f32) (sp10[1] + fp->x68C_transNPos.y);
         return;
     }
