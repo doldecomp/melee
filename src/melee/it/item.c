@@ -350,7 +350,7 @@ void func_802676F4(HSD_GObj* item_gobj)
     switch (HoldKind) {
     case 0:
         unk_label->x84.x0 += 1;
-        if ((s32) item_data->x10_item_kind == 0x22) {
+        if ((s32) item_data->item_kind == 0x22) {
             unk_label->x84.x1C_struct.x1C += 1;
         }
         break;
@@ -496,10 +496,10 @@ void func_80267978(HSD_GObj* item_gobj) // Store Item Pointers
     unsigned int new_var;
     Item* item_data;
     item_data = item_gobj->user_data;
-    ItemID = item_data->x10_item_kind;
+    ItemID = item_data->item_kind;
     if (ItemID < It_Kind_Kuriboh) {
         item_data->xC4_article_data = &(*lbl_804D6D24->article_ptr[ItemID]);
-        item_data->xB8_itemLogicTable = &lbl_803F14C4[item_data->x10_item_kind];
+        item_data->xB8_itemLogicTable = &lbl_803F14C4[item_data->item_kind];
         goto block_end;
     }
     if (ItemID < Pokemon_Tosakinto) {
@@ -545,7 +545,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     u8 temp_r5;
 
     item_data = item_gobj->user_data;
-    item_data->x10_item_kind = spawnItem->x8_item_id;
+    item_data->item_kind = spawnItem->x8_item_id;
     item_data->x14_hold_kind = spawnItem->xC_hold_kind;
     item_data->x18 = spawnItem->x10;
     temp_r4 = lbl_804D6D10;
@@ -1020,7 +1020,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item
         }
         func_802676F4(temp_r3);
         item_data2 = temp_r3->user_data;
-        temp_r0_2 = item_data2->x10_item_kind;
+        temp_r0_2 = item_data2->item_kind;
         if ((temp_r0_2 >= It_Kind_Mario_Fire) && (temp_r0_2 < It_Kind_Unk4) && (func_80086960(item_data2->x518_ownerGObj) != FALSE)) // Check if item is a character item + owner != NULL
         {
             item_data2->xDC8_word.flags.xE = 1;
@@ -1451,7 +1451,7 @@ void lbl_80269528(HSD_GObj* item_gobj) // Item Think - Animation
             }
         }
     }
-    if ((item_data->xDC8_word.flags.x15 != 0) && (item_data->x10_item_kind < 0x23) && (item_data->xDD0_flag.bits.b3 == 0)) {
+    if ((item_data->xDC8_word.flags.x15 != 0) && (item_data->item_kind < 0x23) && (item_data->xDD0_flag.bits.b3 == 0)) {
         item_data->xD44_lifeTimer -= 1.0f;
         lifeTimer = item_data->xD44_lifeTimer;
         if (lifeTimer <= 0.0f) {
@@ -1784,7 +1784,7 @@ s32 func_80269F14(HSD_GObj* item_gobj) // Item Think - On Reflect
 
     temp_item = item_gobj->user_data;
     if (temp_item->xDCC_flag.b1 == 0) {
-        if ((s32) temp_item->x10_item_kind == 0x22) {
+        if ((s32) temp_item->item_kind == 0x22) {
             if (temp_item->xDCC_flag.b2 == 0) {
                 temp_item->x518_ownerGObj = temp_item->itdmg.xC64_reflectGObj;
                 temp_item->x20_team_id = func_80086EB4(temp_item->x518_ownerGObj);
@@ -2076,7 +2076,7 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj) // Remove Item f
 
     temp_item = GetItemDirect(item_gobj);
 
-    if (((s32) temp_item->x14_hold_kind == 8) && (itemID = temp_item->x10_item_kind, ((itemID == 0x3A) == 0)) && (itemID != 0x3B) && (itemID != 0x63) && (itemID != 0x67)) {
+    if (((s32) temp_item->x14_hold_kind == 8) && (itemID = temp_item->item_kind, ((itemID == 0x3A) == 0)) && (itemID != 0x3B) && (itemID != 0x63) && (itemID != 0x67)) {
         if (func_800867CC(fighter_gobj) == item_gobj) {
             func_80086764(fighter_gobj);
         }
@@ -2098,7 +2098,7 @@ inline void DestroyItemInline(HSD_GObj* item_gobj, Item* item_data)
     Item* item_data3 = item_gobj->user_data;
     HSD_GObj* temp_gobj = item_data->x518_ownerGObj;
     s32 itemID;
-    if ((item_data3->x14_hold_kind == 8) && (itemID = item_data3->x10_item_kind, ((itemID == 0x3A) == 0)) && (itemID != 0x3B) && (itemID != 0x63) && (itemID != 0x67)) {
+    if ((item_data3->x14_hold_kind == 8) && (itemID = item_data3->item_kind, ((itemID == 0x3A) == 0)) && (itemID != 0x3B) && (itemID != 0x63) && (itemID != 0x67)) {
         if (func_800867CC(temp_gobj) == item_gobj) {
             func_80086764(temp_gobj);
         }

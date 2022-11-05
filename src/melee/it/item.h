@@ -289,7 +289,7 @@ typedef struct _Item
     HSD_GObj* x4_GObj;
     s32 x8;
     s32 xC_spawn_kind;
-    s32 x10_item_kind;
+    s32 item_kind;
     s32 x14_hold_kind;
     s32 x18;
     s32 x1C;
