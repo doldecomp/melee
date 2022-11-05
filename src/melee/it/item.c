@@ -479,13 +479,13 @@ extern UnkItemArticles* lbl_804D6D38;
 extern UnkItemArticles2* lbl_804D6D30;
 extern UnkItemArticles3 lbl_804A0F60[];
 
-extern struct ItemLogicTable lbl_803F14C4[];
+extern ItemLogicTable lbl_803F14C4[];
 
-extern struct ItemLogicTable lbl_803F3100[];
+extern ItemLogicTable lbl_803F3100[];
 
-extern struct ItemLogicTable lbl_803F23CC[];
+extern ItemLogicTable lbl_803F23CC[];
 
-extern struct ItemLogicTable lbl_803F4D20[];
+extern ItemLogicTable lbl_803F4D20[];
 
 // 0x80267978
 // https://decomp.me/scratch/LnIJJ
@@ -551,7 +551,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     temp_r4 = lbl_804D6D10;
     lbl_804D6D10 = temp_r4 + 1;
     item_data->x1C = temp_r4;
-    item_data->x4_GObj = item_gobj;
+    item_data->unk_gobj = item_gobj;
     func_80267978(item_gobj);
     item_data->x24_item_state_index = -1;
     item_data->xC8_joint = item_data->xC4_article_data->x10_modelDesc->x0_joint;
@@ -1155,7 +1155,7 @@ extern void HSD_JObjRemoveAnimAll(HSD_JObj*);
 
 // 0x80268D34
 // https://decomp.me/scratch/BiAE9
-void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc) // Unk Item AObj-related function
+void func_80268D34(HSD_GObj* item_gobj, ItemStateDesc* itemStateDesc) // Unk Item AObj-related function
 {
     HSD_JObj* item_jobj;
     Item* item_data;
@@ -1197,12 +1197,14 @@ void func_80268DD4(HSD_GObj* item_gobj, f32 arg8) // Advance item animation?
 
 // 0x80268E40
 // https://decomp.me/scratch/a3Je2
-void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc) // Copy item script
+void func_80268E40(Item* item_data, ItemStateDesc* itemStateDesc) // Copy item script
 {
     item_data->x52C_item_script = itemStateDesc->xC_script;
     item_data->x530 = 0;
     item_data->x524 = 0.0f;
 }
+
+#include <math.h>
 
 extern s8 lbl_803F11B0;
 extern s8 lbl_803F11D8;
@@ -1249,8 +1251,8 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     Vec3 sp4C;
     Vec3 sp40;
     s32 filler;
-    struct ItemStateTable* temp_r30;
-    struct ItemStateDesc* temp_r29;
+    ItemStateTable* temp_r30;
+    ItemStateDesc* temp_r29;
     HSD_JObj* item_jobj1_3;
     HSD_JObj* item_jobj1_2;
     void* new_var;
@@ -1267,7 +1269,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     HSD_JObj* boneCopyArg;
     HSD_JObj* new_var4;
     HSD_Joint* boneCopyArg2;
-    struct ItemStateDesc* temp_r23;
+    ItemStateDesc* temp_r23;
     s32 temp_r0;
 
     item_jobj2 = item_gobj->hsd_obj;
@@ -1739,7 +1741,7 @@ s32 func_80269DC8(HSD_GObj* item_gobj) // Item Think - Shield Collision
     s32 (*cb_OnShieldBounce)(HSD_GObj*);
     s32 (*cb_OnHitShield)(HSD_GObj*);
     Item* item_data;
-    struct ItemLogicTable* temp_logicTable;
+    ItemLogicTable* temp_logicTable;
 
     item_data = item_gobj->user_data;
     if ((item_data->xDCE_flag.bits.b5 != 0) && ((s32) item_data->xC0_unk_state == 1) && ((item_data->xDCE_flag.bits.b4 != 0) || (item_data->itdmg.xC54 < (0.01745329238474369f * (90.0f + lbl_804D6D28->x80_float[0x18]))))) {

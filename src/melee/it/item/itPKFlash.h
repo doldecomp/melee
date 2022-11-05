@@ -1,26 +1,23 @@
-#ifndef _itPKFlash_h_
-#define _itPKFlash_h_
+#ifndef MELEE_IT_ITPKFLASH_H
+#define MELEE_IT_ITPKFLASH_H
 
-#include <dolphin/types.h>
+#include <ctypes.h>
 
-typedef struct PKFlashVars
-{
+typedef struct _PKFlashAttrs {
     s32 xDD4_PKFlash;
     f32 xDD8_PKFlash;
     s32 xDDC_PKFlash;
     HSD_GObj* xDE0_PKFlash_Owner;
     s32 xDE4_PKFlash;
-}PKFlashVars;
+} PKFlashAttrs;
 
-typedef struct PKFlashExplVars
-{
+typedef struct _PKFlashExplAttrs {
     f32 xDD4;
     s32 xDD8;
     HSD_GObj* xDDC;
-}PKFlashExplVars;
+} PKFlashExplAttrs;
 
-typedef struct itFlashAttributes
-{
+typedef struct _itPKFlashAttributes {
     f32 x0_FLASH_LIFETIMER;
     f32 x4_FLASH_HITBOX_SIZE_MUL;
     f32 x8_FLASH_GRAPHIC_SIZE_INIT_MUL;
@@ -32,16 +29,14 @@ typedef struct itFlashAttributes
     f32 x20_FLASH_UNK2;
     f32 x24_FLASH_UNK3;
     f32 x28_FLASH_EXPLOSION_DELAY;
-} itFlashAttributes;
+} itPKFlashAttributes;
 
-typedef struct itFlashExplAttributes
-{
+typedef struct _itPKFlashExplAttributes {
     f32 x0_FLASH_EXPL_HITBOX_SIZE_MUL;
     f32 x4_FLASH_EXPL_GRAPHIC_SIZE_INIT;
     f32 x8_FLASH_EXPL_GRAPHIC_SIZE_GROWTH;
     f32 xC_FLASH_EXPL_BASE_DAMAGE;
     f32 x10_FLASH_EXPL_DAMAGE_MUL;
-
-} itFlashExplAttributes;
+} itPKFlashExplAttributes;
 
 #endif

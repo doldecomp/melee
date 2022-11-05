@@ -221,7 +221,7 @@ void ftNess_SpecialNHold_Anim(HSD_GObj* fighter_gobj) // Ness' grounded PK Flash
     }
 }
 
-inline void SetPKFlashAttr(HSD_GObj* fighter_gobj) // Inline to set all variables and match ASM register data
+inline void SetPKFlashAttrs(HSD_GObj* fighter_gobj) // Inline to set all variables and match ASM register data
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
@@ -242,7 +242,7 @@ void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
 
-    SetPKFlashAttr(fighter_gobj);
+    SetPKFlashAttrs(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
         func_8008A2BC(fighter_gobj);
@@ -324,7 +324,7 @@ void ftNess_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj) // Ness' aerial PK Flash
     f32 landingLag;
     s32 filler;
 
-    SetPKFlashAttr(fighter_gobj);
+    SetPKFlashAttrs(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
     if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) {
         landingLag = ness_attr->x1C_PKFLASH_LANDING_LAG;

@@ -271,6 +271,7 @@ void ftNess_YoyoSetVarAll(HSD_GObj* fighter_gobj) // Set ftcmd-, fp- and stateVa
 }
 
 #include <melee/it/enums.h>
+#include <melee/it/item/itYoyo.h>
 
 
 struct Unknown {

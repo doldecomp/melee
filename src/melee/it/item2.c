@@ -653,9 +653,9 @@ extern void func_8000B804(HSD_JObj*, HSD_Joint*);
 extern void func_8000BA0C(HSD_JObj*, f32);
 extern void HSD_JObjRemoveAnimAll(HSD_JObj*);
 
-inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc, Item* item_data, HSD_JObj* item_jobj2) // Literally what
+inline void What(HSD_GObj* item_gobj, ItemStateDesc* itemStateDesc, Item* item_data, HSD_JObj* item_jobj2) // Literally what
 {
-    struct ItemStateDesc* temp_stateDesc;
+    ItemStateDesc* temp_stateDesc;
     HSD_Joint* temp_joint;
     HSD_JObj* item_jobj; // r30
     item_jobj = NULL;
@@ -694,9 +694,9 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2)
 {
     Vec3 sp1C;
     Item* item_data; // r29
-    struct ItemStateDesc* itemStateDesc;
+    ItemStateDesc* itemStateDesc;
     HSD_JObj* item_jobj2;                 // r27
-    struct ItemStateDesc* temp_stateDesc; // r6
+    ItemStateDesc* temp_stateDesc; // r6
     ItemStateArray* temp_stateArray;      // r5
 
     item_data = item_gobj->user_data;
@@ -709,7 +709,7 @@ void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2)
     func_8027429C(item_gobj, &sp1C);
     func_802742F4(item_gobj, arg1, arg2);
     {
-        struct ItemStateDesc* temp_stateDesc;
+        ItemStateDesc* temp_stateDesc;
         HSD_JObj* item_jobj; // r30
 
         item_jobj = NULL;
