@@ -139,7 +139,7 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
 
     item_data = item_gobj->user_data;
     model = item_gobj->hsd_obj;
-    item_data->x4C_pos = spawnItem->x20_pos_prev;
+    item_data->position = spawnItem->x20_pos_prev;
     temp_f0 = spawnItem->x38_facing_direction;
     item_data->facing_direction = temp_f0;
     item_data->x30_initial_facing_dir = temp_f0;
@@ -172,7 +172,7 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem) // Initialize item
     }
     func_80275E98(item_gobj, spawnItem);
     func_80274DAC(item_gobj);
-    HSD_JObjSetTranslate(model, &item_data->x4C_pos);
+    HSD_JObjSetTranslate(model, &item_data->position);
     func_80274658(item_gobj, lbl_804D6D28->x6C_float);
     func_802725D4(item_gobj);
     func_80271508(item_gobj, 0);
@@ -1274,7 +1274,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags) // 
     item_data = item_gobj->user_data;
     item_data->x24_item_state_index = itemStateID;
     item_data->xDC8_word.flags.x14 = 0;
-    HSD_JObjSetTranslate(item_gobj->hsd_obj, &item_data->x4C_pos);
+    HSD_JObjSetTranslate(item_gobj->hsd_obj, &item_data->position);
     func_80067624(item_gobj, &item_data->xBC0);
     if (item_data->xDC8_word.flags.x2 == 1) {
         func_8026BDCC(item_gobj);
@@ -1478,24 +1478,24 @@ s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones
 
     item_data = item_gobj->user_data;
     temp_r0 = item_data->xDCC_flag.b4567;
-    if ((temp_r0 & 8) && (item_data->x4C_pos.x > Stage_GetBlastZoneRightOffset())) {
+    if ((temp_r0 & 8) && (item_data->position.x > Stage_GetBlastZoneRightOffset())) {
         item_data->xD60 = 3;
         func_8026A8EC(item_gobj);
         return 1;
     }
     temp_r0 = item_data->xDCC_flag.b4567;
-    if ((temp_r0 & 4) && (item_data->x4C_pos.x < Stage_GetBlastZoneLeftOffset())) {
+    if ((temp_r0 & 4) && (item_data->position.x < Stage_GetBlastZoneLeftOffset())) {
         item_data->xD60 = 3;
         func_8026A8EC(item_gobj);
         return 1;
     }
     temp_r3 = item_data->xDCC_flag.b4567;
-    if (((temp_r3 & 1) != 0) && (item_data->x4C_pos.y > 10000.0f)) {
+    if (((temp_r3 & 1) != 0) && (item_data->position.y > 10000.0f)) {
         item_data->xD60 = 3;
         func_8026A8EC(item_gobj);
         return 1;
     }
-    if (((temp_r3 & 2) != 0) && (item_data->x4C_pos.y < Stage_GetBlastZoneBottomOffset())) {
+    if (((temp_r3 & 2) != 0) && (item_data->position.y < Stage_GetBlastZoneBottomOffset())) {
         item_data->xD60 = 3;
         func_8026A8EC(item_gobj);
         return 1;
@@ -1527,7 +1527,7 @@ void func_802697D4(HSD_GObj* item_gobj)
             if ((item_data->xC0_unk_state == 0) && (item_data->xDCD_flag.bits.b3 == 0)) {
                 func_8027737C(item_gobj, &sp1C);
             }
-            PSVECAdd(&item_data->x4C_pos, &sp1C, &item_data->x4C_pos);
+            PSVECAdd(&item_data->position, &sp1C, &item_data->position);
         }
         if ((item_data->xDCC_flag.b3 == 1) && ((item_data->xDCC_flag.b4567 & 0xF) != 0)) {
             if (func_802696CC(item_gobj) != 0) {
@@ -1543,16 +1543,16 @@ void func_802697D4(HSD_GObj* item_gobj)
     if ((item_data->xDD1_flag.bits.b1 != 0) && (item_data->xC0_unk_state == 1)) {
         func_801C9E60(&item_data->x58_vec_unk);
     }
-    PSVECAdd(&item_data->x4C_pos, &item_data->x58_vec_unk, &item_data->x4C_pos);
+    PSVECAdd(&item_data->position, &item_data->x58_vec_unk, &item_data->position);
     func_80273484(item_gobj);
     if ((s32) item_data->xC0_unk_state == 0) {
         if ((item_data->xDCE_flag.bits.b3 != 0) && (func_8026D604(item_gobj) != 0)) {
-            func_800567C0(item_data->xC30, &item_data->x4C_pos, &item_data->x64_vec_unk2);
+            func_800567C0(item_data->xC30, &item_data->position, &item_data->x64_vec_unk2);
         } else {
-            func_800567C0(item_data->x378_itemColl.x14C_ground.index, &item_data->x4C_pos, &item_data->x64_vec_unk2);
+            func_800567C0(item_data->x378_itemColl.x14C_ground.index, &item_data->position, &item_data->x64_vec_unk2);
         }
     }
-    PSVECAdd(&item_data->x4C_pos, &item_data->x64_vec_unk2, &item_data->x4C_pos);
+    PSVECAdd(&item_data->position, &item_data->x64_vec_unk2, &item_data->position);
     func_8027346C(item_gobj);
     func_802714C0(item_gobj);
 }
@@ -1576,7 +1576,7 @@ void func_80269978(HSD_GObj* item_gobj) // Item Think - Collision
     }
     item_jobj = item_gobj->hsd_obj;
     !item_jobj;
-    HSD_JObjSetTranslate(item_jobj, &item_data->x4C_pos);
+    HSD_JObjSetTranslate(item_jobj, &item_data->position);
     func_8027574C(item_gobj);
     func_8026C368(item_gobj);
 }
@@ -1605,8 +1605,8 @@ void lbl_80269A9C(HSD_GObj* item_gobj) // Item Think - Accessory + Camera Box
 
         cameraBox = temp_item->x520_cameraBox;
         if (cameraBox != 0) {
-            cameraBox->x10 = temp_item->x4C_pos;
-            cameraBox->x1C = temp_item->x4C_pos;
+            cameraBox->x10 = temp_item->position;
+            cameraBox->x1C = temp_item->position;
         }
     }
     func_80271A58(item_gobj);

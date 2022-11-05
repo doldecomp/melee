@@ -43,7 +43,7 @@ void func_8026B294(HSD_GObj* item_gobj, Vec3* pos) // Copy Item position vector
     Item* temp_item;
 
     temp_item = item_gobj->user_data;
-    *pos = temp_item->x4C_pos;
+    *pos = temp_item->position;
 }
 
 // 0x8026B2B4
@@ -107,9 +107,9 @@ void func_8026B344(HSD_GObj* item_gobj, Vec3* pos) // Unknown item position math
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    pos->x = (f32) ((item_data->facing_direction * item_data->xBCC_unk.x) + item_data->x4C_pos.x);
-    pos->y = (f32) (item_data->x4C_pos.y + item_data->xBCC_unk.y);
-    pos->z = (f32) item_data->x4C_pos.z;
+    pos->x = (f32) ((item_data->facing_direction * item_data->xBCC_unk.x) + item_data->position.x);
+    pos->y = (f32) (item_data->position.y + item_data->xBCC_unk.y);
+    pos->z = (f32) item_data->position.z;
 }
 
 // 0x8026B378
@@ -787,9 +787,9 @@ void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos) // Adjust item's position bas
     f32 temp_float2 = 0.0f;
 
     temp_float = 0.5f * (item_data->x378_itemColl.xA4_ecbCurrCorrect.top.y + item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y);
-    pos->x = item_data->x4C_pos.x + temp_float2;
-    pos->y = item_data->x4C_pos.y + temp_float;
-    pos->z = item_data->x4C_pos.z + temp_float2;
+    pos->x = item_data->position.x + temp_float2;
+    pos->y = item_data->position.y + temp_float;
+    pos->z = item_data->position.z + temp_float2;
 }
 
 // 0x8026BBCC
@@ -1207,10 +1207,10 @@ HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir) // Find the closest item to
         {
             if (item_data->xD00_grabGObj == NULL) {
                 if (item_data->xDC8_word.flags.x13 == 0 || item_data->x518_ownerGObj == NULL) {
-                    if ((facingDir != -1.0f) || !(item_data->x4C_pos.x > vector->x)) {
-                        if ((facingDir != 1.0f) || !(item_data->x4C_pos.x < vector->x)) {
-                            xDist = vector->x - item_data->x4C_pos.x;
-                            yDist = vector->y - item_data->x4C_pos.y;
+                    if ((facingDir != -1.0f) || !(item_data->position.x > vector->x)) {
+                        if ((facingDir != 1.0f) || !(item_data->position.x < vector->x)) {
+                            xDist = vector->x - item_data->position.x;
+                            yDist = vector->y - item_data->position.y;
                             magnitude = (xDist * xDist) + (yDist * yDist);
                             if (magnitude < minMagnitude) {
                                 minMagnitude = magnitude;
@@ -1234,9 +1234,9 @@ void func_8026C334(HSD_GObj* item_gobj, Vec3* pos) // Unknown item position / EC
     f32 temp_ECBvar = item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y;
     f32 temp_zero = 0.0f;
 
-    pos->x = item_data->x4C_pos.x + temp_zero;
-    pos->y = item_data->x4C_pos.y + temp_ECBvar;
-    pos->z = item_data->x4C_pos.z + temp_zero;
+    pos->x = item_data->position.x + temp_zero;
+    pos->y = item_data->position.y + temp_ECBvar;
+    pos->z = item_data->position.z + temp_zero;
 }
 
 // 0x8026C368

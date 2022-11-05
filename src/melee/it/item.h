@@ -273,7 +273,7 @@ typedef struct itHit
     UnkFlagStruct x43_flags;                  // 0x80 = interact with items only; 0x20 = interact with all?
     s32 x44;
     HSD_JObj* x48_jobj;
-    Vec3 x4C_pos;
+    Vec3 position;
     Vec3 x58_posPrev;
     Vec3 x64_posColl;                         // 0x64   position of hurt collision
     f32 x70_coll_distance;                    // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
@@ -305,7 +305,7 @@ typedef struct _Item
     f32 x38_scale;
     f32 x3C;
     Vec3 x40_vel;
-    Vec3 x4C_pos;
+    Vec3 position;
     Vec3 x58_vec_unk;
     Vec3 x64_vec_unk2;
     Vec3 x70_nudge;
