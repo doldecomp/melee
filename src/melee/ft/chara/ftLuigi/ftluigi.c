@@ -8,6 +8,8 @@ void ftLuigi_OnDeath(HSD_GObj* fighter_gobj) {
     fp->sa.luigi.x2234 = 0;
 }
 
+#include <melee/it/enums.h>
+
 void ftLuigi_OnLoad(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     void** item_list = fp->x10C_ftData->x48_items;

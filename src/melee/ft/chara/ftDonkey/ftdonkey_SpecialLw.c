@@ -77,6 +77,7 @@ void ftDonkey_8010DE54(HSD_GObj* fighter_gobj)
 }
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
 
 void ftDonkey_8010DE88_inner(HSD_GObj* fighter_gobj)
 {

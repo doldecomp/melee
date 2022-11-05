@@ -216,6 +216,8 @@ void ftDonkey_8010ED88(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/ft/fighter.h>
+
 void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj) {
     Fighter *fp = getFighterPlus(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp); 

@@ -34,6 +34,8 @@ void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
     fp->sa.gaw.x226C_rescueGObj = NULL;
 }
 
+#include <melee/it/enums.h>
+
 void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj) 
 {
     Fighter* fp = fighter_gobj->user_data;

@@ -6,8 +6,6 @@
 
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
-#include <melee/it/itkind.h>
-
 typedef enum ftMewtwoAction {
 
     AS_MEWTWO_SPECIALN_START = 341,

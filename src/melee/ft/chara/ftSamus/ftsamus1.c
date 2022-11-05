@@ -61,6 +61,8 @@ void ftSamus_80128628(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/ft/fighter.h>
+
 void ftSamus_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
     COPY_ATTRS(fighter_gobj, ftSamusAttributes);
     if (fp->x34_scale.y != 1.0f) {                                        

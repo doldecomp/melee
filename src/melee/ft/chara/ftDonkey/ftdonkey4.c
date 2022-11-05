@@ -10,6 +10,8 @@ s32 ftDonkey_800E0134(HSD_GObj* fighter_gobj)
     return 0;
 }
 
+#include <melee/ft/fighter.h>
+
 void ftDonkey_800E017C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighterPlus(fighter_gobj);

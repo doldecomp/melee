@@ -1,6 +1,5 @@
 #include <melee/ft/chara/ftFalco/ftfalco.h>
 
-#include <melee/it/itkind.h>
 #include <melee/ft/ftparts.h>
 
 

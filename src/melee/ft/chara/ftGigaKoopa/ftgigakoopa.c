@@ -1,7 +1,6 @@
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
 #include <melee/ft/chara/ftGigaKoopa/ftgigakoopa.h>
 
-#include <melee/it/itkind.h>
 #include <melee/ft/ftparts.h>
 
 
@@ -22,6 +21,9 @@ void func_8014F698(HSD_GObj* gobj)
 {
     func_80132A64(gobj);
 }
+
+#include <melee/it/enums.h>
+
 
 void ftGKoopa_OnLoad(HSD_GObj* gobj)
 {

@@ -3,7 +3,6 @@
 #include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
-#include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 
 void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj)

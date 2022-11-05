@@ -2,8 +2,6 @@
 
 #include <dolphin/os/os.h>
 #include <melee/ft/ftcoll.h>
-#include <melee/it/itkind.h>
-
 #include <melee/ft/fighter.h>
 
 extern char* lbl_804D3E58;
@@ -116,6 +114,8 @@ void ftYoshi_OnDeath(HSD_GObj* fighter_gobj)
     func_80074A4C(fighter_gobj, 0, 0);
     fp->sa.yoshi.x2238 = 0;
 }
+
+#include <melee/it/enums.h>
 
 // https://decomp.me/scratch/5TPxg
 void ftYoshi_OnLoad(HSD_GObj* fighter_gobj)

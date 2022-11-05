@@ -79,6 +79,8 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp) {
 }
 
 #include <melee/ft/ftanim.h>
+#include <melee/ft/fighter.h>
+
 
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighterPlus(fighter_gobj);

@@ -13,6 +13,8 @@ void ftNess_OnDeath(HSD_GObj* gobj)
     fp->sa.ness.x224C_thunderGFX = FALSE;
 }
 
+#include <melee/it/enums.h>
+
 void ftNess_OnLoad(HSD_GObj* gobj) 
 {
     Fighter* fp = gobj->user_data;

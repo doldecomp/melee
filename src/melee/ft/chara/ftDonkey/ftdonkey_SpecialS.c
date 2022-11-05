@@ -2,6 +2,7 @@
 
 #include <melee/ef/ef.h>
 #include <melee/ft/ftanim.h>
+#include <melee/ft/fighter.h>
 
 void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {

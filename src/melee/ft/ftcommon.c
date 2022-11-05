@@ -3,7 +3,6 @@
 #include <dolphin/os/os.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
-#include <melee/it/itkind.h>
 #include <sysdolphin/baselib/jobj.h>
 
 #include <math.h>
@@ -1137,6 +1136,8 @@ void func_8007E82C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->x1984_heldItemSpec = NULL;
 }
+
+#include <melee/it/enums.h>
 
 void func_8028B718(HSD_GObj*, f32);
 void func_8028B780(HSD_GObj*, f32);

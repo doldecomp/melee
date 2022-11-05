@@ -1,6 +1,5 @@
 #include <melee/ft/chara/ftPeach/ftpeach.h>
 
-#include <melee/it/itkind.h>
 #include <melee/ft/ftparts.h>
 
 
@@ -39,6 +38,7 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
 
 #include <melee/lb/lbmthp.h>
 #include <melee/ft/ftdata.h>
+#include <melee/it/enums.h>
 
 
 void ftPeach_OnLoad(HSD_GObj* gobj)

@@ -2,8 +2,6 @@
 
 #include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>
-#include <melee/it/itkind.h>
-
 extern void efLib_DestroyAll(HSD_GObj*);
 
 // 0x800E3278
@@ -147,6 +145,8 @@ inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     fp->x80_self_vel.z = 0.0f;
 }
+
+#include <melee/it/enums.h>
 
 // 0x800E350C
 // https://decomp.me/scratch/8YN1Z // Captain Falcon & Ganondorf's Raptor Boost / Gerudo Dragon Detect function

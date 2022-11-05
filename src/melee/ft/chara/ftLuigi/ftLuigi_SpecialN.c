@@ -118,6 +118,7 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 }
 
 #include <melee/ft/ftparts.h>
+#include <melee/it/enums.h>
 
 extern void func_802C01AC(HSD_GObj*, Vec3*, s32, f32);
 

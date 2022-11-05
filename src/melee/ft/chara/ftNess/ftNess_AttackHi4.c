@@ -270,6 +270,9 @@ void ftNess_YoyoSetVarAll(HSD_GObj* fighter_gobj) // Set ftcmd-, fp- and stateVa
     fp->sa.ness.x223C = 0.0f;
 }
 
+#include <melee/it/enums.h>
+
+
 struct Unknown {
     s32 x0;
     s32 x4;
@@ -326,6 +329,8 @@ void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj) // Applies Smash Charge attri
     func_8007EBAC(fp, 0x24U, 0U);
     func_80088510(fp, 0x334A7, 0x7F, 0x40);
 }
+
+#include <melee/ft/fighter.h>
 
 extern void func_802C0010(HSD_GObj*, void*); /* extern */
 

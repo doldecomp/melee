@@ -6,7 +6,6 @@
 
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
-#include <melee/it/itkind.h>
 #include <common_structs.h>
 
 typedef enum ftLuigiAction

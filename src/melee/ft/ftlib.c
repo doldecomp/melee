@@ -3,7 +3,6 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftdata.h>
 #include <melee/gm/code_801601C4.h>
-#include <melee/it/itkind.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -724,6 +723,8 @@ void func_80087140(HSD_GObj* gobj)
         func_8007D92C(gobj);
     }
 }
+
+#include <melee/it/enums.h>
 
 void func_800871A8(HSD_GObj* fighter_gobj, HSD_GObj* item_gobj)
 {

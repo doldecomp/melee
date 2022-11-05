@@ -1,7 +1,6 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/itkind.h>
 #include <melee/ft/ftparts.h>
 
 
@@ -21,6 +20,8 @@ void ftMario_OnDeath(HSD_GObj* gobj) {
 void ftMario_OnLoadForDrMario(Fighter* fp) {
 	PUSH_ATTRS(fp, ftMarioAttributes);
 }
+
+#include <melee/it/enums.h>
 
 void ftMario_OnLoad(HSD_GObj* gobj) {
     ftData* ftDataInfo;

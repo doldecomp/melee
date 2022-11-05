@@ -431,6 +431,8 @@ void ftMewtwo_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialAirN_ChangeAction(fighter_gobj);
 }
 
+#include <melee/it/enums.h>
+
 extern HSD_GObj* func_802C5000(HSD_GObj*, Vec3*, s32, s32, f32);
 
 // 0x801474C0

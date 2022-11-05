@@ -414,6 +414,8 @@ void ftNess_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 // 0x80118250
 // https://decomp.me/scratch/D08nX
 void ftNess_SpecialAirHiStart_Action(HSD_GObj* fighter_gobj) // Ness' aerial PK Thunder Start Action State handler

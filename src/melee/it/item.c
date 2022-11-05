@@ -472,6 +472,8 @@ s32 func_8026784C(s32 dropItem, s32 unused) // Decide drop item
     }
 }
 
+#include <melee/it/enums.h>
+
 extern CommonItemArticles* lbl_804D6D24;
 extern UnkItemArticles* lbl_804D6D38;
 extern UnkItemArticles2* lbl_804D6D30;

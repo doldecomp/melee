@@ -78,6 +78,7 @@ f32 return_void3(void)
 }
 
 #include <melee/ft/ftanim.h>
+#include <melee/ft/fighter.h>
 
 // 0x80116F94
 // https://decomp.me/scratch/xOc8Y
@@ -146,6 +147,7 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj) // Ness' aerial PK F
 }
 
 #include <melee/ft/ftanim.h>
+#include <melee/it/enums.h>
 
 extern HSD_GObj* func_802AA8C0(HSD_GObj*, Vec3*, s32, f32);
 

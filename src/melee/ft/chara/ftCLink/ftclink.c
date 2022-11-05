@@ -2,8 +2,6 @@
 
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
-#include <melee/it/itkind.h>
-
 void ftCLink_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -21,6 +19,7 @@ void ftCLink_OnDeath(HSD_GObj* gobj)
 
 #include <melee/lb/lbmthp.h>
 #include <melee/ft/ftdata.h>
+#include <melee/it/enums.h>
 
 
 void ftCLink_OnLoad(HSD_GObj* gobj)

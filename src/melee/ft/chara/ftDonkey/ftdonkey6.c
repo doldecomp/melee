@@ -30,6 +30,7 @@ s32 ftDonkey_800E0378(HSD_GObj* fighter_gobj)
 
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftanim.h>
+#include <melee/ft/fighter.h>
 
 void ftDonkey_800E03C0(HSD_GObj* fighter_gobj)
 {

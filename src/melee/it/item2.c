@@ -168,6 +168,8 @@ u32 func_8026B3C0(s32 itemID) // Count identical item GObj entities?
     return i;
 }
 
+#include <melee/it/enums.h>
+
 extern struct r13_ItemTable* lbl_804D6D38;
 
 // 0x8026B3F8

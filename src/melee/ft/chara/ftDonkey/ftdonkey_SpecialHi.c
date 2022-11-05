@@ -12,6 +12,7 @@ void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* fighter_gobj) {
 }
 
 #include <melee/ft/ftanim.h>
+#include <melee/ft/fighter.h>
 
 void ftDonkey_SpecialHi_StartAction(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighterPlus(fighter_gobj);

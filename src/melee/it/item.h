@@ -16,32 +16,10 @@
 #include <sysdolphin/baselib/controller.h>
 #include <common_structs.h>
 
-#include <melee/it/itkind.h>
 #include <melee/it/itCommonItems.h>
 #include <melee/it/itPKFlash.h>
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
-
-// Item State Change Flags
-
-// Apparently there's no 0x1 flag
-#define ITEM_ANIM_UPDATE 0x2       // Updates item model with target Item State's AnimJoint, MatAnimJoint and extra HSD archive node if available
-#define ITEM_DROP_UPDATE 0x4       // Copies 0xC44 to 0xC40 if toggled ON
-#define ITEM_MODEL_UPDATE 0x8      // Runs some JObj function
-#define ITEM_HIT_PRESERVE 0x10     // Keep current hitboxes
-#define ITEM_SFX_PRESERVE 0x20     // Keep current SFX
-#define ITEM_COLANIM_PRESERVE 0x40 // Keep current Color Overlay
-#define ITEM_UNK_UPDATE 0x80       // ???
-#define ITEM_CMD_UPDATE 0x100      // Run item's Subaction Events up to its current animation frame
-
-// Item Unk Kinds
-
-// These are used in 0x8026C258 to determine whether Samus' Homing Missile should lock on its target.
-#define ITEM_UNK_MATO 4 // Item type: Target (Mato)
-#define ITEM_UNK_LOCKON 5
-#define ITEM_UNK_ENEMY 6 // Item type: Stage Enemy (Goomba, Koopa Troopa, etc.)
-
-
 
 struct ItemStateTable
 {

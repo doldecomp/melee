@@ -75,6 +75,10 @@ typedef enum _CharacterKind {
     CHKIND_NONE      // None
 } CharacterKind;
 
+/*
+ * TODO Belongs above ft and it in the hierarchy.
+ * Maybe gm or lb?
+*/ 
 typedef enum _GroundOrAir {
     GA_Ground,
     GA_Air,

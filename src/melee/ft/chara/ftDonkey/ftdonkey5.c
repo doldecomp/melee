@@ -26,6 +26,7 @@ void ftDonkey_800E0274(HSD_GObj* fighter_gobj) {
 }
 
 #include <melee/ft/ftanim.h>
+#include <melee/ft/fighter.h>
 
 void ftDonkey_800E0294(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighterPlus(fighter_gobj);

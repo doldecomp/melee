@@ -48,6 +48,8 @@ void ftFox_OnLoadForFalco(Fighter* fp)
     PUSH_ATTRS(fp, ftFoxAttributes);
 }
 
+#include <melee/it/enums.h>
+
 void ftFox_OnLoad(HSD_GObj* gobj) {
 
     Fighter* fp = gobj->user_data;

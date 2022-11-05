@@ -52,6 +52,8 @@ void ftZelda_8013AEAC(HSD_GObj* fighter_gobj)
 }
 
 #include <melee/lb/lbunknown_003.h>
+#include <melee/ft/fighter.h>
+
 
 // Helper function for both ftZelda_SpecialLw_StartAction / ftZelda_SpecialAirLw_StartAction
 void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* fighter_gobj)

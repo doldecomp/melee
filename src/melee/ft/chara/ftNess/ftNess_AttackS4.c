@@ -11,6 +11,7 @@ void ftNess_AttackS4_OnReflect(HSD_GObj* fighter_gobj) // Ness' F-Smash OnReflec
 extern HSD_GObj* func_802AD478(HSD_GObj*, Vec3*, s32, f32);
 
 #include <melee/ft/ftanim.h>
+#include <melee/ft/fighter.h>
 
 // 0x80114C24
 // https://decomp.me/scratch/66eaB

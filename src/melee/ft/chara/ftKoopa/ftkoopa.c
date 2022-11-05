@@ -1,6 +1,5 @@
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
 
-#include <melee/it/itkind.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftparts.h>
 
@@ -36,6 +35,8 @@ void func_80132A64(HSD_GObj* gobj) {
 void ftKoopa_OnLoadForGKoopa(Fighter* fp) {
     PUSH_ATTRS(fp, ftKoopaAttributes);
 }
+
+#include <melee/it/enums.h>
 
 void ftKoopa_OnLoad(HSD_GObj* gobj) {
     ftData* ftDataInfo; 

@@ -5,7 +5,6 @@
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/it/code_8027CF30.h>
-#include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 
 static StageCallbacks lbl_803E26F0[4] = {
@@ -218,6 +217,8 @@ typedef struct {
     s16 xC6;
     s32 xC8;
 } UnkUserData2;
+
+#include <melee/it/enums.h>
 
 // Shy guy spawn timer tick callback
 void func_801E3418(HSD_GObj* gobj)

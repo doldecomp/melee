@@ -6,7 +6,6 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
-#include <melee/it/itkind.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_003.h>
@@ -3425,6 +3424,8 @@ HSD_JObj* func_801C4100(HSD_JObj* jobj)
         jobj = jobj_parent(jobj);
     }
 }
+
+#include <melee/it/enums.h>
 
 s32 func_801C4210(void)
 {
