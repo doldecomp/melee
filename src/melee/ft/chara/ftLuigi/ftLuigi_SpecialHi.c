@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/ftanim.h>
+
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action State handler
 void ftLuigi_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
@@ -29,6 +31,8 @@ void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x80144098
 // https://decomp.me/scratch/03dix // Luigi's grounded Super Jump Punch Animation callback
@@ -60,6 +64,9 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
         func_80096900(fighter_gobj, 0, 1, 0, luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY, luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
+
+#include <math.h>
+#include <melee/ft/ftparts.h>
 
 // 0x80144158
 // https://decomp.me/scratch/M9q8b // Luigi's grounded Super Jump Punch IASA callback
@@ -134,7 +141,7 @@ void ftLuigi_SpecialHi_IASA(HSD_GObj* fighter_gobj)
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE)
         {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (M_PI / 2) * fp->x2C_facing_direction);
+            func_80075AF0(fp, 0, (M_PI / 2) * fp->facing_direction);
         }
     }
 }
@@ -216,7 +223,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE)
         {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (M_PI / 2) * fp->x2C_facing_direction);
+            func_80075AF0(fp, 0, (M_PI / 2) * fp->facing_direction);
         }
     }
 }

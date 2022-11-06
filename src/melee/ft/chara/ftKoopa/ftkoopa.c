@@ -1,11 +1,11 @@
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
 
-#include <melee/it/itkind.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/ft/ftparts.h>
+
 
 extern void func_800BC7E0(HSD_GObj*, HSD_GObj*);
 extern void func_800BC8D4(HSD_GObj*, HSD_GObj*);
-extern void func_800DE7C0(HSD_GObj*, s32, s32);
 extern void func_800DE2A8(HSD_GObj*, HSD_GObj*);
 
 extern const f32 lbl_804D9ADC; //1.0
@@ -36,6 +36,8 @@ void ftKoopa_OnLoadForGKoopa(Fighter* fp) {
     PUSH_ATTRS(fp, ftKoopaAttributes);
 }
 
+#include <melee/it/enums.h>
+
 void ftKoopa_OnLoad(HSD_GObj* gobj) {
     ftData* ftDataInfo; 
     void** items;
@@ -55,6 +57,8 @@ void ftKoopa_OnLoad(HSD_GObj* gobj) {
 void func_80132B38(void) {
     return;
 }
+
+#include <melee/ft/fighter.h>
 
 void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
@@ -133,7 +137,7 @@ void func_80132E30(HSD_GObj *gobj) {
         flag_set = FALSE;
     }
     if (flag_set != FALSE) {
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_direction = -fp->facing_direction;
         fp->x234C_stateVar4 = 1;
     }
     if ((u32) fp->x2200_ftcmd_var0 != 0) {
@@ -146,6 +150,8 @@ void func_80132E30(HSD_GObj *gobj) {
         }
     }
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftKoopa_SpecialS_StartAction(HSD_GObj *gobj)
 {
@@ -196,6 +202,8 @@ void ftKoopa_SpecialAirS_StartAction(HSD_GObj *gobj)
 
     return;
 }
+
+#include <melee/ft/ftanim.h>
 
 void func_8013302C(HSD_GObj *gobj)
 {
@@ -337,12 +345,12 @@ void func_801334E4(HSD_GObj* gobj) {
     func_8007D7FC(fp);
     
     if ((s32) fp->x234C_stateVar4 != 0) {
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_direction = -fp->facing_direction;
     }
     Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0x0C4C5088, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
     
     if ((s32) fp->x234C_stateVar4 != 0) {
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_direction = -fp->facing_direction;
     }
     if (fp->x1A58_interactedFighter != 0) {
         func_800BCE64(fp->x1A58_interactedFighter, 0x119);
@@ -357,11 +365,11 @@ void func_8013359C(HSD_GObj* gobj) {
     fp = gobj->user_data;
     func_8007D7FC(fp);
     if ((s32) fp->x234C_stateVar4 != 0) {
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_direction = -fp->facing_direction;
     }
     Fighter_ActionStateChange_800693AC(gobj, 0x160, 0x0C4C5088, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
     if ((s32) fp->x234C_stateVar4 != 0) {
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_direction = -fp->facing_direction;
     }
     if (fp->x1A58_interactedFighter != 0U) {
         func_800BCE64(fp->x1A58_interactedFighter, 0x11A);
@@ -369,6 +377,8 @@ void func_8013359C(HSD_GObj* gobj) {
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 void func_80133654(HSD_GObj* gobj) {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {

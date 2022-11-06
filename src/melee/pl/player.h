@@ -141,6 +141,7 @@ typedef struct _StaticPlayer
 
 } StaticPlayer;
 
+s32 Player_GetPlayerSlotType(s32);
 StaticPlayer* Player_GetPtrForSlot(s32 slot);
 void Player_80031790(s32 slot);
 void Player_80031848(s32 slot);

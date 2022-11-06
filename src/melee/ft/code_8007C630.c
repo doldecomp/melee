@@ -111,6 +111,8 @@ lbl_8007C764:
 } // clang-format on
 #pragma pop
 
+#include <melee/pl/player.h>
+
 extern unk_t func_80023870();
 extern unk_t func_802E5EF4();
 extern unk_t func_80007B78();

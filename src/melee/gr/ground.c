@@ -6,7 +6,6 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
-#include <melee/it/itkind.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_003.h>
@@ -397,6 +396,8 @@ void func_801C0800(StructPairWithStageID* pair)
     stage_data->callback0();
 }
 
+#include <sysdolphin/baselib/random.h>
+
 static BOOL func_801C0A70(Point3d* pos)
 {
     if (HSD_Randi(2) != 0) {
@@ -430,7 +431,7 @@ static BOOL func_801C0A70(Point3d* pos)
             OLDPUPUPU,
             OLDYOSHI,
             OLDKONGO,
-            // TODO: what stages are these?
+            // TODO what stages are these?
             36,
             37,
         };
@@ -464,6 +465,8 @@ static BOOL func_801C0A70(Point3d* pos)
         return FALSE;
     }
 }
+
+#include <melee/gm/code_801601C4.h>
 
 extern u32 lbl_803B7DEC[];
 extern void func_8026BE84();
@@ -822,6 +825,8 @@ HSD_JObj* func_801C13D0(s32 arg0, s32 depth)
     return result;
 }
 
+#include <sysdolphin/baselib/gobjplink.h>
+
 char lbl_804D44F8[8] = "archive";
 extern HSD_Joint lbl_803B7E0C;
 extern u8 lbl_804D784B[5];
@@ -831,6 +836,7 @@ extern void PSMTXIdentity();
 extern void func_8000F9F8();
 extern void func_80013B14();
 extern void HSD_JObjAddNext();
+
 asm struct _HSD_GObj* func_801C14D0(s32)
 {
     nofralloc
@@ -1498,7 +1504,7 @@ f32 func_801C20D0(void)
     return stage_info.cam_info.cam_vertical_tilt;
 }
 
-// TODO: attempt decomp once param types are known
+// TODO attempt decomp once param types are known
 char lightset[9] = "lightset";
 char plightset[10] = "*lightset";
 static asm void* func_801C20E0()
@@ -1700,6 +1706,8 @@ lbl_801C2360:
 /* 801C2370 001BEF50  4E 80 00 20 */	blr 
 }
 #pragma peephole on
+
+#include <sysdolphin/baselib/lobj.h>
 
 void func_801C2374(HSD_LObj* lobj)
 {
@@ -3419,6 +3427,8 @@ HSD_JObj* func_801C4100(HSD_JObj* jobj)
     }
 }
 
+#include <melee/it/enums.h>
+
 s32 func_801C4210(void)
 {
     u32 unused;
@@ -3888,6 +3898,7 @@ void func_801C4A08(HSD_GObj* gobj)
     func_80390228(gobj);
 }
 
+#include <math.h>
 
 void func_801C4B50(s32 arg0, s32 arg1, Vec3* arg2, f32 arg8)
 {
@@ -4296,6 +4307,8 @@ lbl_801C53CC:
 /* 801C53E8 001C1FC8  4E 80 00 20 */	blr 
 }
 #pragma peephole on
+
+#include <melee/lb/lbaudio_ax.h>
 
 void func_801C53EC(u32 arg0)
 {

@@ -3,6 +3,7 @@
 #include <MSL/trigf.h>
 #include <melee/ef/ef.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/lb/lbunknown_003.h>
 
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj) // Create Aesthetic Wind Effect for Warlock Punch
 {
@@ -65,6 +66,8 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp) // Calculate angle from control 
     return floatVar * ((stick_y * tempAttrs->x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF) / (stickRangeMinPos - stickRangeMinNeg));
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E2B80
 // https://decomp.me/scratch/4yplr // Captain Falcon & Ganondorf's grounded Falcon/Warlock Punch Action State handler
 void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
@@ -96,6 +99,8 @@ void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     func_8006EBA4(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x800E2C80
 // https://decomp.me/scratch/3nbJC // Captain Falcon & Ganondorf's grounded Falcon/Warlock Punch Animation callback
@@ -140,7 +145,7 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 0U;
         vel = ftCaptain_SpecialN_GetAngleVel(fp);
         fp->x80_self_vel.y = (f32)(captainAttrs->xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X * sinf(vel));
-        fp->x80_self_vel.x = (f32)(captainAttrs->xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X * (fp->x2C_facing_direction * cosf(vel)));
+        fp->x80_self_vel.x = (f32) (captainAttrs->xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X * (fp->facing_direction * cosf(vel)));
     }
 }
 

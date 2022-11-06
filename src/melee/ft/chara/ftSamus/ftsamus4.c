@@ -6,6 +6,8 @@ void ftSamus_ClearThrowFlagsUnk(HSD_GObj* fighter_gobj) {
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012A074;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftSamus_SpecialS_StartAction(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighter(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
@@ -34,6 +36,8 @@ void ftSamus_SpecialAirS_StartAction(HSD_GObj* fighter_gobj) {
     }
     ftSamus_ClearThrowFlagsUnk(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftSamus_8012A380(HSD_GObj* fighter_gobj) {
     s32 unsued[2]; /// don't know how to remove this filler without unused data

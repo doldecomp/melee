@@ -4,6 +4,8 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/lb/lbunknown_001.h>
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014267C
 // https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Action State handler
 void ftLuigi_SpecialN_StartAction(HSD_GObj* fighter_gobj)
@@ -28,6 +30,8 @@ void ftLuigi_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x8014275C
 // https://decomp.me/scratch/X40ls // Luigi's grounded Fireball Animation callback
@@ -113,6 +117,9 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftparts.h>
+#include <melee/it/enums.h>
+
 extern void func_802C01AC(HSD_GObj*, Vec3*, s32, f32);
 
 // 0x8014295C
@@ -135,8 +142,8 @@ void ftLuigi_SpecialN_FireSpawn(HSD_GObj* fighter_gobj)
     if (flag != FALSE)
     {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x17)].x0_jobj, NULL, &sp10);
-        func_802C01AC(fighter_gobj, &sp10, It_Kind_Luigi_Fire, fp->x2C_facing_direction);
-        ef_Spawn(0x507, fighter_gobj, fp->x5E8_fighterBones[func_8007500C(fp, 0x17)].x0_jobj, &fp->x2C_facing_direction);
+        func_802C01AC(fighter_gobj, &sp10, It_Kind_Luigi_Fire, fp->facing_direction);
+        ef_Spawn(0x507, fighter_gobj, fp->x5E8_fighterBones[func_8007500C(fp, 0x17)].x0_jobj, &fp->facing_direction);
     }
 }
 

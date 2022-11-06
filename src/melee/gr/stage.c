@@ -245,6 +245,8 @@ void Stage_80224E64(s32 arg0, Vec* arg_vec)
     func_801C2D24(arg0, arg_vec);
 }
 
+#include <sysdolphin/baselib/random.h>
+
 s32 Stage_80224FDC(Vec* arg0)
 {
     s32 rand_output;
@@ -271,6 +273,8 @@ s32 Stage_80224FDC(Vec* arg0)
 
     return 0;
 }
+
+#include <melee/lb/lbaudio_ax.h>
 
 s32 Stage_80225074(s32 arg0)
 {

@@ -20,7 +20,7 @@ void ftMasterHand_8014FE58(HSD_GObj* fighter_gobj)
     return;
 }
 
-// todo: can maybe be an inline func, but max depth makes it difficult
+// TODO can maybe be an inline func, but max depth makes it difficult
 #define DO_TRANSITION(check_action, result_action)                                                                    \
     if ((fp->x10_action_state_index == AS_MASTERHAND_UNK_341) || fp->x10_action_state_index == AS_MASTERHAND_UNK_342) \
         fp->xB0_pos = fp->sa.masterhand.x2240_pos;                                                                    \
@@ -86,7 +86,7 @@ typedef struct _MasterHandDataStuff {
     u8 x54[6 * 5];
 } MasterHandDataStuff;
 
-/* todo
+/* TODO
  * This is unlikely to be a struct at all.
  * Probably just embedded data within ftMasterHand_80150230.
  */
@@ -141,6 +141,11 @@ inline void ftMasterHand_80150230_inline_2(HSD_GObj* fighter_gobj)
         ftMasterHand_8014FE5C(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/player.h>
+#include <sysdolphin/baselib/random.h>
+
 static void ftMasterHand_80150894(HSD_GObj* fighter_gobj);
 
 void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
@@ -152,7 +157,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftMasterHand_80150894(fighter_gobj);
 
-        /* todo: duplicate branch in this func */ {
+        /* TODO duplicate branch in this func */ {
             if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
                 if (fp->x10_action_state_index == AS_MASTERHAND_UNK_341)
                     ftMasterHand_80150230_inline_1(fighter_gobj);
@@ -288,7 +293,7 @@ void ftMasterHand_80150230(HSD_GObj* fighter_gobj)
             }
         }
     } else {
-        /* todo: duplicate branch in this func */ {
+        /* TODO duplicate branch in this func */ {
             if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
                 if (fp->x10_action_state_index == AS_MASTERHAND_UNK_341)
                     ftMasterHand_80150230_inline_1(fighter_gobj);

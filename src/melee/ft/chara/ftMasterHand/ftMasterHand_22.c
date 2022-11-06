@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80154230(HSD_GObj* fighter_gobj, u32, u32)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -7,6 +9,8 @@ void ftMasterHand_80154230(HSD_GObj* fighter_gobj, u32, u32)
         fp->x2344_callback(fighter_gobj);
     }
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_80154278(HSD_GObj* fighter_gobj)
 {
@@ -38,6 +42,8 @@ void ftMasterHand_801542E0(HSD_GObj* fighter_gobj)
 }
 
 static void ftMasterHand_801545A0(HSD_GObj* fighter_gobj);
+
+#include <melee/ft/ftanim.h>
 
 void ftMasterHand_80154360(HSD_GObj* fighter_gobj, u32)
 {
@@ -89,7 +95,7 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-// todo: same inline as ftMasterHand_80153254
+// TODO same inline as ftMasterHand_80153254
 void ftMasterHand_8015442C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

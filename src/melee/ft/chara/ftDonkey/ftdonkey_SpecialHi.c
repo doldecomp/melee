@@ -11,6 +11,9 @@ void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* fighter_gobj) {
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
+#include <melee/ft/ftanim.h>
+#include <melee/ft/fighter.h>
+
 void ftDonkey_SpecialHi_StartAction(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighterPlus(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp); 
@@ -43,6 +46,8 @@ void ftDonkey_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
     ef_Spawn(0x4CA, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftDonkey_8010FCD4(HSD_GObj* fighter_gobj) {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {

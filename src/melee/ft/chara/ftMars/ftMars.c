@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
 #include <melee/ef/ef.h>
+#include <melee/ft/ftparts.h>
+
 
 // 80136258 00132E38
 // https://decomp.me/scratch/6RQ5w
@@ -10,6 +12,8 @@ void ftMars_OnDeath(HSD_GObj* gobj) {
     func_80074A4C(gobj, 1, 0);
     fp->sa.mars.x222C = 0;
 }
+
+#include <melee/ft/fighter.h>
 
 // 801362B0 00132E90
 // ftMars_OnItemPickup

@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftPichu/ftpichu.h>
 
+#include <melee/ft/chara/ftPikachu/ftpikachu1.h>
+#include <melee/ft/ftparts.h>
+
+
 void ftPichu_OnLoad(HSD_GObj* gobj)
 {
     ftPichuAttributes* attrs;
@@ -47,6 +51,8 @@ void ftPichu_OnDeath(HSD_GObj* gobj)
             break;
     }
 }
+
+#include <melee/ft/fighter.h>
 
 void ftPichu_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);

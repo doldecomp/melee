@@ -1,10 +1,14 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftLuigi_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     func_80074A4C(fighter_gobj, 0, 0);
     fp->sa.luigi.x2234 = 0;
 }
+
+#include <melee/it/enums.h>
 
 void ftLuigi_OnLoad(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
@@ -14,6 +18,8 @@ void ftLuigi_OnLoad(HSD_GObj* fighter_gobj) {
     
     func_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
+
+#include <melee/ft/fighter.h>
 
 void ftLuigi_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

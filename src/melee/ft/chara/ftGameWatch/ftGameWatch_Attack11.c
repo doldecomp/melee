@@ -19,7 +19,7 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
     else
     {
         func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
-        fp->sa.gaw.x224C_greenhouseGObj = func_802C61F4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
+        fp->sa.gaw.x224C_greenhouseGObj = func_802C61F4(fighter_gobj, &sp10, 0x20, fp->facing_direction);
         if (fp->sa.gaw.x224C_greenhouseGObj != NULL)
         {
             if (fp->cb.x21E4_callback_OnDeath2 == NULL)
@@ -155,6 +155,8 @@ BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
     return FALSE;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014C07C
 // https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Action State handler
 void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
@@ -176,6 +178,8 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemGreenhouseSetup;
     }
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x8014C138
 // https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation callback

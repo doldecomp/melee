@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
+#include <melee/ft/ftanim.h>
+
 // 8013741C 00133FFC
 // https://decomp.me/scratch/DLE90
 void ftMars_SpecialS_StartAction(HSD_GObj* gobj) {
@@ -54,6 +56,8 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 // 80137558 00134138
 // https://decomp.me/scratch/jDGXt

@@ -1,7 +1,8 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+
 
 extern s32 lbl_803C5A20[];
 
@@ -19,6 +20,8 @@ void ftMario_OnDeath(HSD_GObj* gobj) {
 void ftMario_OnLoadForDrMario(Fighter* fp) {
 	PUSH_ATTRS(fp, ftMarioAttributes);
 }
+
+#include <melee/it/enums.h>
 
 void ftMario_OnLoad(HSD_GObj* gobj) {
     ftData* ftDataInfo;
@@ -43,6 +46,8 @@ void ftMario_OnTakeDamage(HSD_GObj* gobj)
 {
     ftMario_SpecialS_RemoveCape(gobj);
 }
+
+#include <melee/ft/fighter.h>
 
 void ftMario_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

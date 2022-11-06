@@ -14,6 +14,9 @@ void func_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul) {
     out->xC.z = in->xC.z * mul;
 }
 
+#include <melee/cm/camera.h>
+#include <melee/gr/stage.h>
+
 // Camera_CopyPlayerPositionToCameraBoxPosition
 void func_80076064(Fighter* fp) {
     CameraBox* camera_box;
@@ -23,7 +26,7 @@ void func_80076064(Fighter* fp) {
     camera_box = fp->x890_cameraBox;
     func_80076018(fp->x10C_ftData->x3C, &spC, fp->x34_scale.y);
     camera_box->x8 = 0;
-    if (fp->x2C_facing_direction == 1.0f) {
+    if (fp->facing_direction == 1.0f) {
         camera_box->x40.x = spC.x0.z;
         camera_box->x40.y = spC.x0.y * Stage_GetCamFixedZoom();
         camera_box->x28 = 1.0f;
@@ -54,9 +57,9 @@ void func_800761C8(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     camera_box = fp->x890_cameraBox;
-    fp->x2C_facing_direction + 1.0f; // lol
+    fp->facing_direction + 1.0f; // lol
     func_80076018(fp->x10C_ftData->x3C, &sp10, fp->x34_scale.y);
-    if (fp->x2C_facing_direction == 1.0f) {
+    if (fp->facing_direction == 1.0f) {
         camera_box->x40.x = sp10.x0.z;
         camera_box->x40.y = sp10.x0.y * Stage_GetCamFixedZoom();
         camera_box->x28 = 1.0f;

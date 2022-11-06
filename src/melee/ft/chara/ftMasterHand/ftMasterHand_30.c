@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/ft/ftanim.h>
+
 extern const f32 neg1;
 
 void ftMasterHand_8015550C(HSD_GObj* fighter_gobj)
@@ -13,6 +15,8 @@ void ftMasterHand_8015550C(HSD_GObj* fighter_gobj)
         ftMasterHand_80151018(fighter_gobj);
     }
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_80155580(HSD_GObj* fighter_gobj)
 {
@@ -108,6 +112,8 @@ void ftMasterHand_80155814(HSD_GObj* fighter_gobj)
 {
     return;
 }
+
+#include <melee/ft/ftanim.h>
 
 static void ftMasterHand_80155818(HSD_GObj* fighter_gobj)
 {

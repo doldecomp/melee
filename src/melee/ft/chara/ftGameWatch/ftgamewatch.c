@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj) 
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -31,6 +33,8 @@ void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
     fp->sa.gaw.x2268_panicGObj = NULL;
     fp->sa.gaw.x226C_rescueGObj = NULL;
 }
+
+#include <melee/it/enums.h>
 
 void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj) 
 {
@@ -96,6 +100,8 @@ void ftGameWatch_8014A538(HSD_GObj* fighter_gobj)
         ftGameWatch_ItemRescueRemove(fighter_gobj);
     }
 }
+
+#include <melee/ft/fighter.h>
 
 void ftGameWatch_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

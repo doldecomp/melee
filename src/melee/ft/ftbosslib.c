@@ -27,16 +27,20 @@ void ftbosslib_8015BD20(HSD_GObj* gobj)
     return;
 }
 
+#include <sysdolphin/baselib/random.h>
+
 void ftbosslib_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5)
 {
     *arg1 = ((arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;
 }
 
+#include <melee/pl/player.h>
+
 void ftbosslib_8015BDB4(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     Gm_PKind kind = Player_GetPlayerSlotType(fp->xC_playerID);
-    { // TODO: assert macro
+    { // TODO assert macro
         BOOL bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu);
         if (!bad) {
             OSReport("boss is human or boss!\n");
@@ -89,6 +93,8 @@ void ftbosslib_8015BE40(HSD_GObj* fighter_gobj, Vec* pos, f32* arg2, f32 arg3, f
     fp->x80_self_vel.x = diff.x;
     fp->x80_self_vel.y = diff.y;
 }
+
+#include <math.h>
 
 void ftbosslib_8015BF74(HSD_GObj* fighter_gobj, f32 arg1)
 {
@@ -145,10 +151,12 @@ void ftbosslib_8015C09C(HSD_GObj* fighter_gobj, f32 arg1)
     Quaternion quat = { 0 };
     s32 unused[2];
 
-    fp->x2C_facing_direction = arg1;
-    quat.y = M_PI / 2 * fp->x2C_facing_direction;
+    fp->facing_direction = arg1;
+    quat.y = M_PI / 2 * fp->facing_direction;
     HSD_JObjSetRotation(jobj, &quat);
 }
+
+#include <melee/mp/mplib.h>
 
 void ftbosslib_8015C190(HSD_GObj* fighter_gobj)
 {
@@ -177,6 +185,8 @@ void ftbosslib_8015C208(HSD_GObj* fighter_gobj, Vec* pos)
     HSD_GObj* gobj = ftbosslib_8015C244(fighter_gobj, &fp->xB0_pos);
     func_80086644(gobj, pos);
 }
+
+#include <melee/ft/ftlib.h>
 
 HSD_GObj* ftbosslib_8015C244(HSD_GObj* fighter_gobj, Vec* pos)
 {
@@ -418,6 +428,8 @@ void func_8015CB7C(void)
 {
     func_8026C42C();
 }
+
+#include <melee/cm/camera.h>
 
 void func_8015CB9C_inline(Vec3 spC)
 {

@@ -218,6 +218,8 @@ void ftMasterHand_80155B74(HSD_GObj* fighter_gobj);
 void ftMasterHand_80155B78(HSD_GObj* fighter_gobj);
 void ftMasterHand_80150F00(HSD_GObj* fighter_gobj);
 
+#include <melee/pl/player.h>
+
 static void ftMasterHand_CheckPlayerSlotBossStub(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

@@ -2,11 +2,15 @@
 
 #include <melee/lb/lbunknown_001.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80153000(HSD_GObj* fighter_gobj)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftMasterHand_80151018(fighter_gobj);
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_8015303C(HSD_GObj* fighter_gobj)
 {
@@ -26,10 +30,14 @@ void ftMasterHand_801530A0(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <sysdolphin/baselib/random.h>
+
 static s32 get_randi(MasterHandAttributes* ext_attr)
 {
     return HSD_Randi(ext_attr->xE8 - ext_attr->xE4);
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftMasterHand_801530A4(HSD_GObj* fighter_gobj)
 {
@@ -155,6 +163,8 @@ void ftMasterHand_801533C8(HSD_GObj* fighter_gobj)
 
 static void ftMasterHand_801535B0(HSD_GObj* fighter_gobj);
 
+#include <melee/ft/ftanim.h>
+
 static void ftMasterHand_801533CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -220,7 +230,7 @@ static void ftMasterHand_801535B0(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 0;
     }
 
-    // todo: inline with above block?
+    // TODO inline with above block?
     if (fp->x2204_ftcmd_var1 != 0) {
         ftMasterHand_8015364C(fighter_gobj, fp->x5E8_fighterBones[13].x0_jobj, ext_attr->x100, ext_attr->x104);
         fp->x2204_ftcmd_var1 = 0;
@@ -245,7 +255,7 @@ static void ftMasterHand_8015364C(HSD_GObj* fighter_gobj, HSD_JObj* jobj, f32 x_
     if (func_80087120(fighter_gobj) > ext_attr->xEC)
         b = TRUE;
 
-    func_802F0AE0(fighter_gobj, &sp28_leek, &sp1C_carrot, 0x7E, b, fp->x2C_facing_direction, ext_attr->xD4, ext_attr->xD8);
+    func_802F0AE0(fighter_gobj, &sp28_leek, &sp1C_carrot, 0x7E, b, fp->facing_direction, ext_attr->xD4, ext_attr->xD8);
 }
 
 static void ftMasterHand_80153730(HSD_GObj* fighter_gobj)

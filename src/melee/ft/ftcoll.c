@@ -106,7 +106,7 @@ inline void comboCount_Push(Fighter* fp)
     {
         var_f2 = p_ftCommonData->x4D4;
     }
-    temp_f2 = fp->x2C_facing_direction * var_f2;
+    temp_f2 = fp->facing_direction * var_f2;
     fp->xB0_pos.x = -((pos->y * temp_f2) - fp->xB0_pos.x);
     fp->xB0_pos.y = -((-pos->x * temp_f2) - fp->xB0_pos.y);
 }
@@ -2474,6 +2474,8 @@ asm unk_t func_80078488()
 } // clang-format on
 #pragma pop
 
+#include <sysdolphin/baselib/random.h>
+
 extern u32 lbl_803C0C4C[3];
 
 #pragma push
@@ -2918,13 +2920,14 @@ lbl_80078A10:
 } // clang-format on
 #pragma pop
 
+#include <melee/gm/code_801601C4.h>
+
 extern f32 lbl_804D8310;
 extern unk_t func_80084CE4();
 extern unk_t func_80007ECC();
 extern unk_t func_8007F804();
 extern unk_t func_8000ACFC();
 extern unk_t func_8016B0D4();
-extern unk_t func_8016B168();
 extern unk_t func_80086FD4();
 
 #pragma push
@@ -4244,6 +4247,8 @@ lbl_80079C68:
 } // clang-format on
 #pragma pop
 
+#include <melee/pl/player.h>
+
 extern unk_t func_8016B248();
 
 #pragma push
@@ -4526,6 +4531,8 @@ lbl_8007A064:
 /* 8007A068 00076C48  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/lb/lbrefract.h>
 
 extern unk_t lbl_803C0CAC;
 extern f32 lbl_804D8318;

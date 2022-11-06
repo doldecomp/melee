@@ -75,6 +75,8 @@ void Command_08(CommandInfo* info) {
     info->timer = FLT_MAX;
 }
 
+#include <melee/lb/lbbgflash.h>
+
 void Command_09(CommandInfo* info) {
     Command_09_Struct* cmd = info->u.Command_09;
     func_80021C48(cmd->param_1, cmd->param_2);

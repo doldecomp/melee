@@ -4,6 +4,8 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/lb/lbunknown_001.h>
 
+#include <melee/ft/ftanim.h>
+
 // 801389CC 001355AC
 // https://decomp.me/scratch/r3Of5
 void ftMars_SpecialLw_StartAction(HSD_GObj* gobj) {
@@ -36,6 +38,8 @@ void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj) {
     ft2->x2204_ftcmd_var1 = 0;
     ft2->x2340_stateVar1 = 0;
 }
+
+#include <melee/ft/ftanim.h>
 
 // 80138AA8 00135688
 // https://decomp.me/scratch/cZhES
@@ -293,8 +297,10 @@ void func_801390E0(HSD_GObj* gobj) {
     Fighter_ActionStateChange_800693AC(gobj, 0x172, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-// 80139140 00135D20
-// https://decomp.me/scratch/8uP2v
+#include <melee/lb/lbunknown_003.h>
+#include <melee/ft/ftparts.h>
+
+
 void lbl_80139140(HSD_GObj* gobj) {
     Fighter* fp;
     Fighter* ft_2;
@@ -307,7 +313,7 @@ void lbl_80139140(HSD_GObj* gobj) {
 
     fp = gobj->user_data;
     attr = fp->x2D4_specialAttributes;
-    fp->x2C_facing_direction = fp->x19AC;
+    fp->facing_direction = fp->x19AC;
     temp_r0 = (s32) fp->x19A4;
     if (temp_r0 > 0) {
         fp->x2340_stateVar1 = (s32) (temp_r0 * attr->x5C);
@@ -325,10 +331,10 @@ void lbl_80139140(HSD_GObj* gobj) {
     if (ft_2->x2219_flag.bits.b0 == 0) {
         switch (func_800872A4(gobj)) {
             case 0x12:
-                ef_Spawn(0x4F1, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->x2C_facing_direction);
+                ef_Spawn(0x4F1, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->facing_direction);
                 break;
             case 0x1A:
-                ef_Spawn(0x510, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->x2C_facing_direction);
+                ef_Spawn(0x510, gobj, ft_2->x5E8_fighterBones[func_8007500C(ft_2, 0x23)].x0_jobj, &ft_2->facing_direction);
                 break;
         }
         ft_2->x2219_flag.bits.b0 = 1;

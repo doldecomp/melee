@@ -3,8 +3,10 @@
 #include <dolphin/os/os.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
-#include <melee/it/itkind.h>
+#include <melee/it/item.h>
 #include <sysdolphin/baselib/jobj.h>
+
+#include <math.h>
 
 const Vec3 lbl_803B74A0 = { 0, 0, 0 };
 
@@ -198,11 +200,12 @@ char lbl_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
 // Not sure why this is needed
 // Maybe __FILE__ is allocated separate from ordinary string literals?
 #undef assert_line
-#define assert_line(line, cond)                                                \
+#define assert_line(line, cond) \
     ((cond) ? ((void) 0) : __assert(lbl_803C0D58, line, #cond))
 
+#pragma push
 asm f32 func_8007CDA4(Fighter*)
-{
+{ // clang-format off
     nofralloc
 /* 8007CDA4 00079984  7C 08 02 A6 */   mflr r0
 /* 8007CDA8 00079988  90 01 00 04 */   stw r0, 4(r1)
@@ -226,10 +229,12 @@ lbl_8007CDDC:
 /* 8007CDEC 000799CC  38 21 00 18 */   addi r1, r1, 0x18
 /* 8007CDF0 000799D0  7C 08 03 A6 */   mtlr r0
 /* 8007CDF4 000799D4  4E 80 00 20 */   blr 
-}
+} // clang-format on
+#pragma pop
 
+#pragma push
 asm f32 func_8007CDF8(Fighter*)
-{
+{ // clang-format off
     nofralloc
 /* 8007CDF8 000799D8  7C 08 02 A6 */	mflr r0
 /* 8007CDFC 000799DC  90 01 00 04 */	stw r0, 4(r1)
@@ -253,8 +258,9 @@ lbl_8007CE30:
 /* 8007CE40 00079A20  38 21 00 18 */	addi r1, r1, 0x18
 /* 8007CE44 00079A24  7C 08 03 A6 */	mtlr r0
 /* 8007CE48 00079A28  4E 80 00 20 */	blr 
-}
-#pragma peephole on
+} // clang-format on
+#pragma pop
+
 #else
 
 // to match assert statement
@@ -619,7 +625,7 @@ void func_8007D6A4(Fighter* fp)
 {
     f32 tmp;
     if (fp->x594_animCurrFlags1.bits.b0) {
-        fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
+        fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->facing_direction;
     }
     tmp = fp->x110_attr.x144_GroundedMaxHorizontalVelocity;
     if (fp->xEC_ground_vel < -tmp) {
@@ -666,7 +672,7 @@ void func_8007D7FC(Fighter* fp)
         }
     }
     if (fp->x594_animCurrFlags1.bits.b0) {
-        fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
+        fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->facing_direction;
     }
     fmp = fp->x110_attr.x144_GroundedMaxHorizontalVelocity;
     if (fp->xEC_ground_vel < -fmp) {
@@ -697,6 +703,8 @@ void func_8007D92C(HSD_GObj* gobj)
     }
 }
 
+#include <melee/lb/lbrefract.h>
+
 f32 func_8007D964(Fighter* fp)
 {
     return atan2f(fp->input.x624_lstick_y, fabs_inline(fp->input.x620_lstick_x));
@@ -720,7 +728,7 @@ void func_8007D9FC(Fighter* fp)
     } else {
         phi_f0 = -1;
     }
-    fp->x2C_facing_direction = phi_f0;
+    fp->facing_direction = phi_f0;
 }
 
 void func_8007DA24(Fighter* fp)
@@ -732,7 +740,7 @@ void func_8007DA24(Fighter* fp)
         } else {
             phi_f0 = -1;
         }
-        fp->x2C_facing_direction = phi_f0;
+        fp->facing_direction = phi_f0;
     }
 }
 
@@ -866,8 +874,8 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
                                    || cur_gnd == func_8004DC04(arg_gnd)) {
                 func_8007F8B4(cur_ft, &sp24);
                 vtmp = &cur_ft->x2C4;
-                temp_f0 = (temp_r31->x * arg_ft->x2C_facing_direction + v->x) -
-                          (cur_ft->x2C_facing_direction * vtmp->x + sp24.x);
+                temp_f0 = (temp_r31->x * arg_ft->facing_direction + v->x) -
+                          (cur_ft->facing_direction * vtmp->x + sp24.x);
                 if (fabsf(temp_f0) < temp_r31->y + vtmp->y) {
                     if (temp_f0) {
                         arg_ft->xF8_playerNudgeVel.x += temp_f0 < 0 ? -p_ftCommonData->x450 : p_ftCommonData->x450;
@@ -888,6 +896,8 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
         }
     }
 }
+
+#include <melee/pl/player.h>
 
 void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
 {
@@ -915,8 +925,8 @@ void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
                                 || temp_r30 == func_8004DC04(temp_r0)) {
             func_8007F8B4(temp_r3, &sp1C);
             tmp = &temp_r3->x2C4;
-            temp_f1 = (temp_r31->x * fp->x2C_facing_direction + arg1->x) -
-                    (temp_r3->x2C_facing_direction * tmp->x + sp1C.x);
+            temp_f1 = (temp_r31->x * fp->facing_direction + arg1->x) -
+                      (temp_r3->facing_direction * tmp->x + sp1C.x);
             if (fabsf(temp_f1) < temp_r31->y + tmp->y) {
                 fp->xF8_playerNudgeVel.y -= p_ftCommonData->x45C;
             }
@@ -1034,6 +1044,8 @@ void func_8007E2FC(HSD_GObj* gobj)
     _func_8007E2FC_inline(gobj);
 }
 
+#include <melee/ft/ftparts.h>
+
 void func_8007E358(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
@@ -1133,6 +1145,8 @@ void func_8007E82C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->x1984_heldItemSpec = NULL;
 }
+
+#include <melee/it/enums.h>
 
 void func_8028B718(HSD_GObj*, f32);
 void func_8028B780(HSD_GObj*, f32);
@@ -1259,6 +1273,8 @@ void func_8007EA90(Fighter* fp, s32 arg1)
     }
 }
 
+#include <melee/lb/lbunknown_003.h>
+
 void func_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 {
     if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4) &&
@@ -1287,6 +1303,8 @@ void func_8007ECD4(Fighter* fp, s32 arg1)
         func_80378280(fp->x618_player_id, arg1 + 2);
     }
 }
+
+#include <melee/lb/lbunknown_003.h>
 
 void func_8007ED2C(Fighter* fp)
 {
@@ -1357,7 +1375,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->xB0_pos = src->xB0_pos;
     dst->xBC_prevPos = src->xBC_prevPos;
     dst->xC8_pos_delta = src->xC8_pos_delta;
-    dst->x2C_facing_direction = src->x2C_facing_direction;
+    dst->facing_direction = src->facing_direction;
     dst->dmg.x1830_percent = src->dmg.x1830_percent;
     Player_SetHPByIndex(dst->xC_playerID,
         dst->x221F_flag.bits.b4, dst->dmg.x1830_percent);
@@ -1525,15 +1543,15 @@ void func_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 void func_8007F76C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->xEC_ground_vel = fp->x2C_facing_direction * fabs_inline(fp->xEC_ground_vel);
-    fp->x80_self_vel.x = fp->x2C_facing_direction * fabs_inline(fp->x80_self_vel.x);
+    fp->xEC_ground_vel = fp->facing_direction * fabs_inline(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = fp->facing_direction * fabs_inline(fp->x80_self_vel.x);
 }
 
 void func_8007F7B4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->xEC_ground_vel = -fp->x2C_facing_direction * fabs_inline(fp->xEC_ground_vel);
-    fp->x80_self_vel.x = -fp->x2C_facing_direction * fabs_inline(fp->x80_self_vel.x);
+    fp->xEC_ground_vel = -fp->facing_direction * fabs_inline(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = -fp->facing_direction * fabs_inline(fp->x80_self_vel.x);
 }
 
 void* func_8007F804(Fighter* fp)
@@ -1666,7 +1684,7 @@ void func_8007FC7C(HSD_GObj* gobj, f32 arg8)
         func_8007FDA0(gobj);
     } else {
         item_gobj = func_8029A748(gobj, &fp->xB0_pos, fp->x10C_ftData->x8->unk12,
-                                  fp->x2C_facing_direction);
+                                  fp->facing_direction);
         if (item_gobj != NULL) {
             func_8007FE84(gobj, item_gobj, sp20, arg8);
             func_8007FDA0(gobj);
@@ -1862,6 +1880,7 @@ void func_800804A0(Fighter* fp, f32 arg8)
     fp->xE8_ground_accel_2 = phi_f31;
 }
 
+// DataOffset_PlayerScale_MultiplyBySomething, returns fp->x40*fp->x34
 f32 func_800804EC(Fighter* fp)
 {
     return fp->x40 * fp->x34_scale.x;

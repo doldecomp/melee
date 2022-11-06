@@ -299,6 +299,8 @@ void Player_80031AD0(s32 slot) {  ///decomp.me/scratch/lYkLv
     }
 }
 
+#include <melee/ft/ftdata.h>
+
 void Player_80031CB0(s32 id, s32 slot) { 
     if (ftMapping_list[id].internal_id != -1) {
         func_800855C8(ftMapping_list[id].internal_id, slot);
@@ -1268,6 +1270,8 @@ s32 Player_GetKOsByPlayerIndex(s32 slot, s32 index) {
     return player->kos_by_player[index];
 }
 
+#include <melee/gm/code_801601C4.h>
+
 void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot) {  
     StaticPlayer* player;
     StaticPlayer* other_player;
@@ -1321,6 +1325,7 @@ u32 Player_GetMatchFrameCount(s32 slot) {
     return count;
 }
 
+#include <melee/gm/code_801601C4.h>
 
 void Player_UpdateMatchFrameCount(s32 slot, BOOL condition) {   
     StaticPlayer* player;
@@ -1914,6 +1919,8 @@ void Player_80036DA4() {
     HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
     Fighter_FirstInitialize_80067A84();
 }
+
+#include <melee/lb/lbarchive.h>
 
 void Player_80036DD8() {   
     s32 *sp8;

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftSamus_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     func_80074A4C(fighter_gobj, 0, 0);
@@ -32,6 +34,8 @@ void ftSamus_80128428(HSD_GObj* fighter_gobj) {
     func_800D9C98(fighter_gobj);
 }
 
+#include <melee/ft/fighter.h>
+
 void ftSamus_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
 }
@@ -57,6 +61,8 @@ void ftSamus_80128628(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <melee/ft/fighter.h>
+
 void ftSamus_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
     COPY_ATTRS(fighter_gobj, ftSamusAttributes);
     if (fp->x34_scale.y != 1.0f) {                                        
@@ -73,6 +79,8 @@ void ftSamus_80128770(HSD_AObj* fighter_gobj, f32 rate) {
         HSD_AObjSetRate(fighter_gobj, rate);
     }
 }
+
+#include <melee/pl/player.h>
 
 void ftSamus_801287C4(HSD_GObj* fighter_gobj, s32 index, f32 argf) {
 

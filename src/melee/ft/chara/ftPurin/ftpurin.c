@@ -24,6 +24,8 @@ void func_8013C2F8()
     lbl_8045A1E0[4] = 0;
 }
 
+#include <melee/ft/ftparts.h>
+
 void ftPurin_OnDeath(HSD_GObj* fighter_gobj)
 {
     func_80074A4C(fighter_gobj, 0, 0);
@@ -128,6 +130,9 @@ void ftPurin_OnLoad(HSD_GObj* fighter_gobj)
     func_8013C360(fighter_gobj);
 }
 
+#include <melee/ft/ftanim.h>
+#include <melee/it/item2.h>
+
 void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -226,11 +231,13 @@ static inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* figh
 {
     Fighter* fighter = getFighter(fighter_gobj);
 
-    if (lbl_804D9C10 == fighter->x2C_facing_direction)
+    if (lbl_804D9C10 == fighter->facing_direction)
         Fighter_ActionStateChange_800693AC(fighter_gobj, left_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
     else
         Fighter_ActionStateChange_800693AC(fighter_gobj, right_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftPurin_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
@@ -247,6 +254,8 @@ void ftPurin_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
     ftPurin_SpecialHi_SetVars(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 #pragma push
 asm unk_t lbl_8013CB68()
@@ -429,7 +438,7 @@ static void func_8013CD34(HSD_GObj* fighter_gobj)
 
     func_8007D5D4(fp);
 
-    if (lbl_804D9C10 == fp->x2C_facing_direction)
+    if (lbl_804D9C10 == fp->facing_direction)
         Fighter_ActionStateChange_800693AC(fighter_gobj, 366, 0x0C4C508A, NULL, fp->x894_currentAnimFrame, lbl_804D9C18, lbl_804D9C14);
     else
         Fighter_ActionStateChange_800693AC(fighter_gobj, 368, 0x0C4C508A, NULL, fp->x894_currentAnimFrame, lbl_804D9C18, lbl_804D9C14);
@@ -1193,6 +1202,8 @@ asm unk_t func_8013D5F0()
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftparts.h>
+
 extern char* lbl_804D3E98;
 extern char* lbl_804D3EA0;
 extern char* lbl_804D3EA8;
@@ -1946,6 +1957,8 @@ lbl_8013DFA8:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftanim.h>
+
 extern f32 const lbl_804D9C64;
 
 #pragma push
@@ -2010,6 +2023,8 @@ lbl_8013E0D8:
 /* 8013E0EC 0013ACCC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/ft/ftparts.h>
 
 extern f32 const lbl_804D9C68;
 extern f64 const lbl_804D9C70;

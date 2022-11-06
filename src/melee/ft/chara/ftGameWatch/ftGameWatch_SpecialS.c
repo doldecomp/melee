@@ -2,6 +2,8 @@
 
 #include <melee/lb/lbunknown_001.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj);
 extern void func_8028FAF4(HSD_GObj*, Vec3*);
 extern HSD_GObj* func_802C7774(f32, HSD_GObj*, Vec3*, s32, u32);
@@ -20,7 +22,7 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj)
     {
         fp->x2204_ftcmd_var1 = 0;
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, NULL, &sp20);
-        fp->sa.gaw.x2264_judgementGObj = func_802C7774(fp->x2C_facing_direction, fighter_gobj, &sp20, func_8007500C(fp, 0x31), fp->sa.gaw.x222C_judgeVar1);
+        fp->sa.gaw.x2264_judgementGObj = func_802C7774(fp->facing_direction, fighter_gobj, &sp20, func_8007500C(fp, 0x31), fp->sa.gaw.x222C_judgeVar1);
         if ((s32)fp->sa.gaw.x222C_judgeVar1 == 6)
         {
             sp14.z = 0.0f;
@@ -107,6 +109,8 @@ BOOL ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
+#include <sysdolphin/baselib/random.h>
+
 // 0x8014C6B4 - shououts to EstexNT
 // https://decomp.me/scratch/Dn1jh // Roll Judgement RNG value
 s32 ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj)
@@ -153,6 +157,8 @@ inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemJudgementSetup;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014C7A0
 // https://decomp.me/scratch/PnafK
 void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj)
@@ -181,6 +187,8 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialS_SetVars(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x8014C8BC
 // https://decomp.me/scratch/xcOet // Mr. Game & Watch's Grounded Judgement Animation callback

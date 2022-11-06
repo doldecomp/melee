@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftFalco/ftfalco.h>
 
-#include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+
 
 void ftFalco_OnDeath(HSD_GObj* gobj)
 {
@@ -8,6 +9,8 @@ void ftFalco_OnDeath(HSD_GObj* gobj)
     fp->sa.fox.x222C_blasterGObj = 0;
     func_80074A4C(gobj, 0, 0);
 }
+
+#include <melee/ft/fighter.h>
 
 void ftFalco_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

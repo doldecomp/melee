@@ -17,6 +17,8 @@ u32 ftMasterHand_80151428(Vec* vec)
     return 0;
 }
 
+#include <melee/lb/lbaudio_ax.h>
+
 inline void ftMasterHand_80151484_inline1(HSD_GObj* fighter_gobj)
 {
     Fighter* r29_fp = fighter_gobj->user_data;
@@ -48,6 +50,8 @@ inline void ftMasterHand_80151484_inline1(HSD_GObj* fighter_gobj)
     r29_fp->x2348_stateVar3 = (s32) temp_r30->x15C;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80151484(HSD_GObj* fighter_gobj)
 {
     s32 unused[2];
@@ -65,6 +69,8 @@ void ftMasterHand_80151484(HSD_GObj* fighter_gobj)
     fp->x23B4 = 0;
     fp->x23B8 = 0;
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftMasterHand_801515B8(HSD_GObj* fighter_gobj)
 {

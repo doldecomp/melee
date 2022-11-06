@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/pl/player.h>
+
 void ftMasterHand_801517B0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -22,11 +24,15 @@ void ftMasterHand_80151824(void)
     return;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80151828(HSD_GObj* fighter_gobj)
 {
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0, 0, 0.0F, 1.0F, 0.0F);
     func_8006EBA4(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 static void ftMasterHand_80151918(HSD_GObj* fighter_gobj);
 
@@ -68,6 +74,8 @@ static void ftMasterHand_80151918(HSD_GObj* fighter_gobj)
 }
 
 static void ftMasterHand_80151AC8(HSD_GObj* fighter_gobj);
+
+#include <melee/mp/mplib.h>
 
 void ftMasterHand_8015198C(HSD_GObj* fighter_gobj)
 {

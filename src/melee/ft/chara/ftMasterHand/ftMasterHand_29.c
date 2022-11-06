@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/ft/ftanim.h>
+
 static void ftMasterHand_80155388_inline(HSD_GObj* fighter_gobj)
 {
     // shared with ftMasterHand_8015521C
@@ -21,6 +23,8 @@ void ftMasterHand_80155388(HSD_GObj* fighter_gobj, unk_t, unk_t)
 
     ftMasterHand_80155388_inline(fighter_gobj);
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_8015541C(HSD_GObj* fighter_gobj)
 {

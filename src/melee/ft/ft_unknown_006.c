@@ -54,6 +54,7 @@
 #include <melee/it/code_80266F3C.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/it/item.h>
+#include <melee/it/item2.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbshadow.h>
@@ -357,7 +358,7 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
 {
     s32 sp18;
     s32 sp14;
-    enum FighterKind ftKind;
+    FighterKind ftKind;
     s32 var_r30;
     s32 sfx_id;
     int new_var;
@@ -744,6 +745,9 @@ void func_80088110(Fighter* fp)
 }
 
 extern unk_t func_80024B94();
+
+#include <melee/lb/lbaudio_ax.h>
+#include <sysdolphin/baselib/random.h>
 
 #pragma push
 asm void func_80088148(Fighter*, u32, u32, u32)
@@ -2053,6 +2057,8 @@ lbl_80089214:
 } // clang-format on
 #pragma pop
 
+#include <melee/pl/player.h>
+
 #pragma push
 asm unk_t func_80089228()
 { // clang-format off
@@ -2502,6 +2508,8 @@ asm unk_t func_80089768()
 } // clang-format on
 #pragma pop
 
+#include <melee/pl/pl_unknown_001.h>
+
 #pragma push
 asm void func_80089824(HSD_GObj* fighter_gobj)
 { // clang-format off
@@ -2656,6 +2664,8 @@ lbl_80089984:
 } // clang-format on
 #pragma pop
 
+#include <melee/mp/mplib.h>
+
 extern char* lbl_804D3AD0;
 extern char* lbl_804D3AD8;
 extern f32 const lbl_804D83F0;
@@ -2776,6 +2786,9 @@ lbl_80089AE8:
 /* 80089B04 000866E4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/ft/ftparts.h>
+#include <melee/mp/mplib.h>
 
 extern unk_t lbl_804D4AF8;
 extern f32 const lbl_804D8400;
@@ -3684,6 +3697,8 @@ asm unk_t func_8008A678()
 } // clang-format on
 #pragma pop
 
+#include <melee/it/item2.h>
+
 #pragma push
 asm unk_t func_8008A698()
 { // clang-format off
@@ -3708,6 +3723,8 @@ lbl_8008A6C8:
 /* 8008A6D4 000872B4  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/ft/ftanim.h>
 
 extern f32 const lbl_804D8448;
 extern f32 const lbl_804D844C;
@@ -3773,6 +3790,8 @@ lbl_8008A794:
 /* 8008A7A4 00087384  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/ft/ftanim.h>
 
 extern char* lbl_803C54A8;
 extern char* lbl_803C54C4;
@@ -7758,6 +7777,8 @@ lbl_8008D6F8:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftanim.h>
+
 extern f32 const lbl_804D84C0;
 extern f32 const lbl_804D84C4;
 extern f32 const lbl_804D84C8;
@@ -8119,6 +8140,8 @@ lbl_8008DAFC:
 } // clang-format on
 #pragma pop
 
+#include <melee/lb/lbbgflash.h>
+
 #pragma push
 asm unk_t func_8008DB10()
 { // clang-format off
@@ -8267,6 +8290,9 @@ lbl_8008DCD0:
 /* 8008DCDC 0008A8BC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/ef/efasync.h>
+#include <melee/ft/ftparts.h>
 
 extern f32 lbl_804D84E8;
 extern f32 lbl_804D84EC;
@@ -11900,9 +11926,12 @@ extern Vec const lbl_803B74B0;
 extern unk_t lbl_80091274();
 extern unk_t func_8009E140();
 
-// todo: headers are too messy to use dolphin/mtx.h
+// TODO headers are too messy to use (dolphin/mtx.h)
 extern void PSMTXConcat(const Mtx a, const Mtx b, Mtx ab);
 extern void PSMTXTranspose(const Mtx src, Mtx xPose);
+
+// TODO In ftcommon.h
+extern void func_8007DBCC();
 
 #pragma push
 asm unk_t func_80090B60()
@@ -13372,6 +13401,8 @@ lbl_80091E64:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftdata.h>
+
 extern f32 const lbl_804D856C;
 extern f64 const lbl_804D8570;
 extern unk_t func_8005F864();
@@ -13757,6 +13788,8 @@ lbl_80092378:
 /* 800923B0 0008EF90  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/ft/ftparts.h>
 
 extern unk_t func_800924C0();
 
@@ -14682,7 +14715,7 @@ lbl_80092EC0:
 #pragma pop
 
 #pragma push
-asm f32 func_80092ED8(s32, ftLinkAttributes*, f32)
+asm f32 func_80092ED8(s32, ftCLinkAttributes*, f32)
 { // clang-format off
     nofralloc
 /* 80092ED8 0008FAB8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -16899,6 +16932,8 @@ asm unk_t func_80094B44()
 /* 80094B68 00091748  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/it/item.h>
 
 extern unk_t func_800C5284();
 
@@ -20052,6 +20087,8 @@ asm unk_t func_80097130()
 /* 800971AC 00093D8C  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/ft/ftparts.h>
 
 extern char* lbl_804D3B08;
 extern char* lbl_804D3B10;
@@ -25250,6 +25287,8 @@ void func_8009ACA4(void)
     return;
 }
 
+#include <melee/mp/mplib.h>
+
 #pragma push
 asm unk_t func_8009ACA8()
 { // clang-format off
@@ -28437,6 +28476,8 @@ lbl_8009CF6C:
 } // clang-format on
 #pragma pop
 
+#include <melee/lb/lbunknown_003.h>
+
 extern char* lbl_803C572C;
 extern char* lbl_804D3B40;
 extern char* lbl_803C5748[];
@@ -28510,6 +28551,8 @@ lbl_8009D050:
 /* 8009D070 00099C50  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/lb/lbunknown_003.h>
 
 extern unk_t lbl_80459B88;
 
@@ -29525,6 +29568,8 @@ lbl_8009DD80:
 } // clang-format on
 #pragma pop
 
+#include <melee/lb/lbunknown_003.h>
+
 extern f32 const lbl_804D876C;
 extern unk_t func_8009E614();
 
@@ -30190,6 +30235,8 @@ lbl_8009E5EC:
 } // clang-format on
 #pragma pop
 
+#include <melee/ft/ftanim.h>
+
 #pragma push
 asm unk_t func_8009E614()
 { // clang-format off
@@ -30266,6 +30313,8 @@ lbl_8009E6F0:
 /* 8009E710 0009B2F0  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/lb/lbunknown_003.h>
 
 #pragma push
 asm unk_t func_8009E714()
@@ -31443,6 +31492,9 @@ asm unk_t lbl_8009F480()
 } // clang-format on
 #pragma pop
 
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+
 extern unk_t lbl_804D6568;
 extern unk_t lbl_804D656C;
 extern unk_t lbl_8009F54C();
@@ -31494,7 +31546,6 @@ asm void func_8009F4A4(void)
 /* 8009F540 0009C120  38 21 00 10 */	addi r1, r1, 0x10
 /* 8009F544 0009C124  7C 08 03 A6 */	mtlr r0
 /* 8009F548 0009C128  4E 80 00 20 */	blr 
-
 } // clang-format on
 #pragma pop
 
@@ -36619,6 +36670,8 @@ lbl_800A3828:
 /* 800A3840 000A0420  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/gm/code_801601C4.h>
 
 #pragma push
 asm unk_t func_800A3844()
@@ -55059,6 +55112,8 @@ lbl_800B3394:
 } // clang-format on
 #pragma pop
 
+#include <melee/mp/mplib.h>
+
 extern f64 const lbl_804D88F8;
 extern f32 const lbl_804D89C0;
 extern f32 const lbl_804D89C4;
@@ -68653,6 +68708,11 @@ asm unk_t lbl_800BE7C0()
 /* 800BE7DC 000BB3BC  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
+#include <melee/ft/ftdata.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 
 extern unk_t lbl_803C6908();
 

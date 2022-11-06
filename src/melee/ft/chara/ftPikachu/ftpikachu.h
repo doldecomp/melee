@@ -76,7 +76,6 @@ void ftPikachu_OnItemVisible(HSD_GObj *fighter_gobj);
 void ftPikachu_OnItemDrop(HSD_GObj* fighter_gobj, BOOL arg1);
 void ftPikachu_8012467C(HSD_GObj* fighter_gobj);
 void ftPikachu_801246C0(HSD_GObj* fighter_gobj);
-void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 void ftPikachu_OnKnockbackEnter(HSD_GObj* fighter_gobj);
 void ftPikachu_OnKnockbackExit(HSD_GObj* fighter_gobj);
 

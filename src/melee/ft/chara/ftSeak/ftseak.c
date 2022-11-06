@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftSeak/ftseak.h>
 
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftparts.h>
+#include <sysdolphin/baselib/gobj.h>
+
 void ftSeak_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     fp->sa.seak.x222C = 0;
@@ -34,6 +38,8 @@ void ftSeak_801101CC(HSD_GObj* fighter_gobj) {
         func_800BFFD0(fp, 0x56, 0);
     }
 }
+
+#include <melee/ft/fighter.h>
 
 void ftSeak_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

@@ -27,7 +27,7 @@ f32 atanf(f32);
 
 #pragma endregion
 
-// todo: locals to be removed
+// TODO locals to be removed
 
 struct _RefractCallbackData;
 
