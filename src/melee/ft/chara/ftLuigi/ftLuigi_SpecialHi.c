@@ -65,6 +65,7 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <math.h>
 #include <melee/ft/ftparts.h>
 
 // 0x80144158

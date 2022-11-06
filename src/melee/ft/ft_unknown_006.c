@@ -747,6 +747,7 @@ void func_80088110(Fighter* fp)
 extern unk_t func_80024B94();
 
 #include <melee/lb/lbaudio_ax.h>
+#include <sysdolphin/baselib/random.h>
 
 #pragma push
 asm void func_80088148(Fighter*, u32, u32, u32)
@@ -2055,6 +2056,8 @@ lbl_80089214:
 /* 80089224 00085E04  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/pl/player.h>
 
 #pragma push
 asm unk_t func_80089228()
@@ -3693,6 +3696,8 @@ asm unk_t func_8008A678()
 /* 8008A694 00087274  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/it/item2.h>
 
 #pragma push
 asm unk_t func_8008A698()
@@ -31487,6 +31492,7 @@ asm unk_t lbl_8009F480()
 } // clang-format on
 #pragma pop
 
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 extern unk_t lbl_804D6568;
@@ -31540,7 +31546,6 @@ asm void func_8009F4A4(void)
 /* 8009F540 0009C120  38 21 00 10 */	addi r1, r1, 0x10
 /* 8009F544 0009C124  7C 08 03 A6 */	mtlr r0
 /* 8009F548 0009C128  4E 80 00 20 */	blr 
-
 } // clang-format on
 #pragma pop
 
@@ -68707,6 +68712,7 @@ asm unk_t lbl_800BE7C0()
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/ftdata.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 
 extern unk_t lbl_803C6908();
 

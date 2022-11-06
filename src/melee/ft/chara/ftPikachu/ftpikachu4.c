@@ -119,6 +119,7 @@ void ftPikachu_ActionChange_801260E4(HSD_GObj* fighter_gobj) {
 }
 
 #include <melee/ft/ftparts.h>
+#include <sysdolphin/baselib/random.h>
 
 void ftPikachu_80126144(HSD_GObj* fighter_gobj) {
     Vec vec;

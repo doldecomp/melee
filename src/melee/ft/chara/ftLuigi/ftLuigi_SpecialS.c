@@ -17,6 +17,8 @@ void ftLuigi_SpecialS_SetGFX(HSD_GObj* fighter_gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
+#include <sysdolphin/baselib/random.h>
+
 // 0x80142A5C
 // https://decomp.me/scratch/EHQ0r // Luigi's Green Missile Setup (RNG + calculations)
 void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)

@@ -157,6 +157,8 @@ void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <math.h>
+
 extern void func_8029C6A4(f32, f32, HSD_GObj*, Vec3*, s32);
 extern void func_802AE1D0(HSD_GObj*);
 

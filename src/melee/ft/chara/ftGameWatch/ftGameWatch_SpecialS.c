@@ -109,6 +109,8 @@ BOOL ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
+#include <sysdolphin/baselib/random.h>
+
 // 0x8014C6B4 - shououts to EstexNT
 // https://decomp.me/scratch/Dn1jh // Roll Judgement RNG value
 s32 ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj)

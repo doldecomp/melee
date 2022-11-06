@@ -12,7 +12,6 @@ typedef struct _HSD_JObj HSD_JObj;
 typedef struct _HSD_ImageDesc HSD_ImageDesc;
 
 #pragma region "melee/it/item2"
-s32 func_8026B320(HSD_GObj*);
 BOOL func_8026B2B4(HSD_GObj*);
 s32 func_8026B30C(HSD_GObj*);
 f32 func_8026B54C(HSD_GObj*);
@@ -56,7 +55,6 @@ unsigned long strlen(const char*);
 #pragma endregion
 
 #pragma region "dolphin/mtx/mtxvec"
-void PSMTXMUltiVec(Mtx, Vec*, Vec*);
 #pragma endregion
 
 #pragma region "dolphin/os/OSAlloc"

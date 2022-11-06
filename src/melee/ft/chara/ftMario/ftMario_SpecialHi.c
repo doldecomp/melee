@@ -54,6 +54,7 @@ void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
     ftMario_SpecialHi_Anim(gobj);
 }
 
+#include <math.h>
 #include <melee/ft/ftparts.h>
 
 #define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)

@@ -27,6 +27,8 @@ void ftbosslib_8015BD20(HSD_GObj* gobj)
     return;
 }
 
+#include <sysdolphin/baselib/random.h>
+
 void ftbosslib_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5)
 {
     *arg1 = ((arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;

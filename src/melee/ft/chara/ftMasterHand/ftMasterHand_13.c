@@ -6,6 +6,7 @@ void ftMasterHand_8015287C(HSD_GObj* fighter_gobj)
 }
 
 #include <melee/ft/ftanim.h>
+#include <sysdolphin/baselib/random.h>
 
 void ftMasterHand_80152880(HSD_GObj* fighter_gobj)
 {

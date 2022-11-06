@@ -5,39 +5,31 @@
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftMewtwoSpecialHi {
-
-	s32 travelFrames; // 0x2340 - Number of frames Teleport's zoom animation lasts for
+    s32 travelFrames; // 0x2340 - Number of frames Teleport's zoom animation lasts for
 	f32 stickX;
 	f32 stickY;
 	s32 unk4; // 0x234C - ???
 	f32 velX;
 	f32 velY;
-	f32 groundVelX;
-
+    f32 groundVelX;
 } ftMewtwoSpecialHi;
 
 typedef struct ftMewtwoSpecialS {
-
-	u8 isConfusionReflect : 1; // 0x2340 - ???
-
+    u8 isConfusionReflect : 1; // 0x2340 - ???
 } ftMewtwoSpecialS;
 
 typedef struct ftMewtwoSpecialN {
-
-	BOOL isFull;
+    BOOL isFull;
 	s32 x2344;
 	BOOL x2348;
 	s32 releaseLag;
-	f32 chargeLevel; // 0x2350 - Charge level of Shadow Ball
-
+    f32 chargeLevel; // 0x2350 - Charge level of Shadow Ball
 } ftMewtwoSpecialN;
 
 typedef union ftMewtwoStateVars {
-
-	ftMewtwoSpecialN SpecialN;
+    ftMewtwoSpecialN SpecialN;
 	ftMewtwoSpecialS SpecialS;
-	ftMewtwoSpecialHi SpecialHi;
-
+    ftMewtwoSpecialHi SpecialHi;
 } ftMewtwoStateVars;
 
 #endif

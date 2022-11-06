@@ -163,6 +163,8 @@ void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj)
     HSD_JObjSetScale(jobj, &scale);
 }
 
+#include <melee/pl/player.h>
+
 static u32 Fighter_NewSpawn_80068E40(void);
 
 void Fighter_UnkInitReset_80067C98(Fighter* fp)
@@ -657,6 +659,8 @@ static void Fighter_UnkInitLoad_80068914_Inner1(HSD_GObj* fighter_gobj)
                                                                 fp->x68B = 0xFF;
 }
 
+#include <melee/mp/mpcoll.h>
+
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj, struct S_TEMP1* argdata)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -795,6 +799,11 @@ static u32 Fighter_NewSpawn_80068E40(void)
         g_spawnNumCounter = 1;
     return spawnNum;
 }
+
+/**
+ * @require StageInfo
+ */
+#include <melee/gr/stage.h>
 
 void Fighter_80068E64(HSD_GObj* fighter_gobj)
 {
@@ -2534,6 +2543,8 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
         func_800C8C84(fp->x0_fighter);
     }
 }
+
+#include <sysdolphin/baselib/random.h>
 
 /// https://decomp.me/scratch/9QvFG
 void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)

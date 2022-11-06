@@ -80,6 +80,8 @@ void ftSamus_80128770(HSD_AObj* fighter_gobj, f32 rate) {
     }
 }
 
+#include <melee/pl/player.h>
+
 void ftSamus_801287C4(HSD_GObj* fighter_gobj, s32 index, f32 argf) {
 
     Fighter *fighter_copy;

@@ -1,5 +1,5 @@
 #include <common_structs.h>
-#include <melee/it/item.h>
+#include <melee/it/item2.h>
 
 #define FLOAT32_MAX 3.4028234663852886e+38f
 
@@ -17,6 +17,11 @@ static inline float _sqrtfItem(float x)
     }
     return x;
 }
+
+/**
+ * @require itHit
+ */
+#include <melee/it/item.h>
 
 // 0x8026B1D4
 // https://decomp.me/scratch/hrApQ

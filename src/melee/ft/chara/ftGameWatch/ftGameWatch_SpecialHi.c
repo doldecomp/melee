@@ -194,6 +194,7 @@ void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj)
     ftGameWatch_SpecialAirHi_IASA(fighter_gobj);
 }
 
+#include <math.h>
 #include <melee/ft/ftparts.h>
 
 // 0x8014E2B0

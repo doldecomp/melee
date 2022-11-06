@@ -51,9 +51,9 @@ void ftMasterHand_801511F8(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <math.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
-
 
 static void ftMasterHand_801511FC(HSD_GObj* fighter_gobj)
 {

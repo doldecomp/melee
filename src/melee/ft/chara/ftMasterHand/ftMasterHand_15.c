@@ -30,6 +30,8 @@ void ftMasterHand_801530A0(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <sysdolphin/baselib/random.h>
+
 static s32 get_randi(MasterHandAttributes* ext_attr)
 {
     return HSD_Randi(ext_attr->xE8 - ext_attr->xE4);

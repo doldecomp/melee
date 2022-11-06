@@ -22,6 +22,7 @@ f32 ftGameWatch_SpecialN_SetFloatOrder3(void)
 }
 
 #include <melee/ft/ftparts.h>
+#include <sysdolphin/baselib/random.h>
 
 extern HSD_GObj* func_802C837C(HSD_GObj*, Vec3*, s32, u32, f32);
 
@@ -76,6 +77,8 @@ void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
 }
 
 #else
+
+#include <sysdolphin/baselib/random.h>
 
 #pragma push
 asm void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)

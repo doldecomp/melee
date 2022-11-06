@@ -2474,6 +2474,8 @@ asm unk_t func_80078488()
 } // clang-format on
 #pragma pop
 
+#include <sysdolphin/baselib/random.h>
+
 extern u32 lbl_803C0C4C[3];
 
 #pragma push
@@ -4245,6 +4247,8 @@ lbl_80079C68:
 } // clang-format on
 #pragma pop
 
+#include <melee/pl/player.h>
+
 extern unk_t func_8016B248();
 
 #pragma push
@@ -4527,6 +4531,8 @@ lbl_8007A064:
 /* 8007A068 00076C48  4E 80 00 20 */	blr 
 } // clang-format on
 #pragma pop
+
+#include <melee/lb/lbrefract.h>
 
 extern unk_t lbl_803C0CAC;
 extern f32 lbl_804D8318;

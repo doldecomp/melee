@@ -1313,9 +1313,6 @@ s32 itGetKind(HSD_GObj* item_gobj);
 // Return flag from Item Attributes
 s32 func_8026B30C(HSD_GObj* item_gobj);
 
-// Return item hold kind
-s32 func_8026B320(HSD_GObj* item_gobj);
-
 // Return item damage multiplier
 f32 func_8026B334(HSD_GObj* item_gobj);
 

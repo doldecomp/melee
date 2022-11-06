@@ -6,4 +6,7 @@
 
 BOOL func_8026B594(HSD_GObj* item_gobj); // Check if item can fire projectiles
 
+// Return item hold kind
+s32 func_8026B320(HSD_GObj* item_gobj);
+
 #endif

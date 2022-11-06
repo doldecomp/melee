@@ -15,6 +15,7 @@ void func_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul) {
 }
 
 #include <melee/cm/camera.h>
+#include <melee/gr/stage.h>
 
 // Camera_CopyPlayerPositionToCameraBoxPosition
 void func_80076064(Fighter* fp) {

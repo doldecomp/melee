@@ -136,6 +136,8 @@ void func_801E3230(void)
 {
 }
 
+#include <sysdolphin/baselib/random.h>
+
 inline s32 randi(s32 max)
 {
     return max ? HSD_Randi(max) : 0;

@@ -92,6 +92,7 @@ void ftSamus_8012A8C4(HSD_GObj* fighter_gobj) {
     }
 }
 
+#include <math.h>
 #include <melee/ft/ftparts.h>
 
 void ftSamus_8012A96C(HSD_GObj* fighter_gobj) {

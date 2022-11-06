@@ -240,6 +240,8 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     func_8007D3A8(fp, 0.0f, sa->x48_MARIO_TORNADO_MOMENTUM_X_MUL_AIR, flt_var);
 }
 
+#include <melee/lb/lbrefract.h>
+
 void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);

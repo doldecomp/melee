@@ -184,6 +184,8 @@ inline s32 sgn(f32 x)
     }
 }
 
+#include <sysdolphin/baselib/random.h>
+
 f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
 {
     Vec3 sp20;

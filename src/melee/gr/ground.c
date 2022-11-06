@@ -396,6 +396,8 @@ void func_801C0800(StructPairWithStageID* pair)
     stage_data->callback0();
 }
 
+#include <sysdolphin/baselib/random.h>
+
 static BOOL func_801C0A70(Point3d* pos)
 {
     if (HSD_Randi(2) != 0) {

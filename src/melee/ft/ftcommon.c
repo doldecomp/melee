@@ -703,6 +703,8 @@ void func_8007D92C(HSD_GObj* gobj)
     }
 }
 
+#include <melee/lb/lbrefract.h>
+
 f32 func_8007D964(Fighter* fp)
 {
     return atan2f(fp->input.x624_lstick_y, fabs_inline(fp->input.x620_lstick_x));
@@ -894,6 +896,8 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
         }
     }
 }
+
+#include <melee/pl/player.h>
 
 void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
 {

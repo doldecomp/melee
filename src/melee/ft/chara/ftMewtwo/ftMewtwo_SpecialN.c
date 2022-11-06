@@ -225,6 +225,8 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <math.h>
+
 void func_802C53F0(HSD_GObj*, Vec3*, f32, f32, f32);
 
 // 0x80146FA8

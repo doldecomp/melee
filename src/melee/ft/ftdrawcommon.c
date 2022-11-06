@@ -966,6 +966,8 @@ lbl_80080E00:
 
 #endif
 
+#include <dolphin/mtx/mtxvec.h>
+
 #pragma push
 asm void func_80080E18(HSD_GObj*, s32)
 { // clang-format off
