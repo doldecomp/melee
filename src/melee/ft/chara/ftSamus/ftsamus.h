@@ -67,6 +67,8 @@ void ftSamus_8012B570(HSD_GObj* fighter_gobj);
 void ftSamus_8012B5F0(HSD_GObj* fighter_gobj);
 void ftSamus_8012B668(HSD_GObj* fighter_gobj);
 
+#include <melee/ft/fighter.h>
+
 inline void ftSamus_updateDamageDeathCBs(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighterPlus(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &ftSamus_80128428;

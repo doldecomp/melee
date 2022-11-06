@@ -10,6 +10,8 @@ static inline HSD_JObj* get_jobj(HSD_GObj* fighter_gobj)
     return fighter_gobj->hsd_obj;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80153D2C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -73,7 +75,7 @@ void ftMasterHand_80153F8C(HSD_GObj* fighter_gobj)
 {
     HSD_GObj* temp_gobj = fighter_gobj;
 
-    /* todo: very likely an inline */ {
+    /* TODO very likely an inline */ {
         Fighter* fp = temp_gobj->user_data;
         u32 unused0;
 
@@ -100,6 +102,8 @@ void ftMasterHand_80153F8C(HSD_GObj* fighter_gobj)
 
     stop_x_vel(temp_gobj);
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_80154114(HSD_GObj* fighter_gobj)
 {

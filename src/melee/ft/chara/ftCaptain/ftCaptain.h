@@ -26,7 +26,7 @@ typedef enum ftCaptainAction {
 
 } ftCaptainAction;
 
-// Flags used by Captain Falcon and Ganondorf in ActionStateChange //
+// Flags used by Captain Falcon and Ganondorf in ActionStateChange
 
 // SpecialN/SpecialAirN (Falcon / Warlock Punch)
 #define FTCAPTAIN_SPECIALN_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
@@ -78,7 +78,7 @@ typedef struct _ftCaptainAttributes
 
 } ftCaptainAttributes;
 
-// Captain Falcon & Ganondorf functions //
+// Captain Falcon & Ganondorf functions
 
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj);
@@ -89,7 +89,7 @@ void ftCaptain_OnItemVisible(HSD_GObj* fighter_gobj);
 void ftCaptain_OnItemDrop(HSD_GObj* fighter_gobj, BOOL unk1);
 void ftCaptain_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 
-// Neutral Special - Falcon/Warlock Punch (SpecialN) //
+// Neutral Special - Falcon/Warlock Punch (SpecialN)
 
 void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
@@ -102,7 +102,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj);
 
-// Side Special - Raptor Boost / Gerudo Dragon (SpecialS) //
+// Side Special - Raptor Boost / Gerudo Dragon (SpecialS)
 
 void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj);

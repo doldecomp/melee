@@ -18,10 +18,10 @@ void ftSamus_8012ADF0(HSD_GObj* fighter_gobj) {
         f32 vec_x; 
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &vec);
         vec_x = samus_attr->x74_vec.x;
-        vec.x += (vec_x * fp->x2C_facing_direction);
+        vec.x += (vec_x * fp->facing_direction);
         vec.y += samus_attr->x74_vec.y;
         vec.z += samus_attr->x74_vec.z;
-        func_802B4AC8(fighter_gobj, &vec, fp->x2C_facing_direction, vec_x);
+        func_802B4AC8(fighter_gobj, &vec, fp->facing_direction, vec_x);
         fp->cb.x21BC_callback_Accessory4 = 0;
     }
 }
@@ -59,6 +59,8 @@ void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* fighter_gobj) {
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012ADF0;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftSamus_SpecialLw_StartAction(HSD_GObj* fighter_gobj) {
     Fighter *fp = getFighter(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
@@ -87,6 +89,8 @@ void ftSamus_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
     ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 ///// what the heck is up with the stack in this function... can't get rid of unused params
 void ftSamus_8012B150(HSD_GObj* fighter_gobj, s32 a, s32 b, s32 c, s32 d) {

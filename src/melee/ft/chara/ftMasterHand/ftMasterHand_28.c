@@ -2,6 +2,8 @@
 
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_8015521C(HSD_GObj* fighter_gobj)
 {
     if (ftbosslib_8015C31C() || ftbosslib_8015C3A0() || !ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -12,6 +14,8 @@ void ftMasterHand_8015521C(HSD_GObj* fighter_gobj)
         ftMasterHand_80151018(fighter_gobj);
     }
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_80155290(HSD_GObj* fighter_gobj)
 {

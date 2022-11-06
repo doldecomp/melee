@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
+#include <melee/pl/player.h>
+
 extern u32 func_800386D8(void*, s32);
 extern BOOL func_801E2D14();
 
@@ -82,7 +84,7 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     fp->foxVars[0].AppealS.animCount = 0;
-    facingDir = ftFox_AppealS_GetLR(1.0f, fp->x2C_facing_direction);
+    facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_direction);
 
     fp->foxVars[0].AppealS.facingDir = facingDir;
     fp->x2210_ThrowFlags.flags = 0;
@@ -92,6 +94,8 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[actionDir][animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
 }
+
+#include <melee/ft/ftanim.h>
 
 extern s32 func_801E2B80();
 extern s32 func_801E2C34();

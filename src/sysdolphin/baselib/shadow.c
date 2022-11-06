@@ -35,7 +35,7 @@ HSD_TObj* makeShadowTObj(void)
 HSD_Shadow* HSD_ShadowAlloc(void)
 {
   HSD_Shadow *shadow;
-  f32 hack; // TODO: remove once the whole file is converted and we can use float constants
+  f32 hack; // TODO remove once the whole file is converted and we can use float constants
 
   shadow = HSD_ObjAlloc(&shadow_alloc_data);
   memset(shadow, 0, sizeof(HSD_Shadow));

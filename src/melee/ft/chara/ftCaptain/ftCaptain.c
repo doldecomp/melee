@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftCaptain/__ftCaptain.h>
 
+#include <melee/ft/ftparts.h>
+
 // ftCaptain_OnDeath
 // OnRespawn/OnDeath (same function I've seen called differently)
 // https://decomp.me/scratch/XZ1Jx
@@ -16,6 +18,8 @@ void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
 void lbl_800E28C8(HSD_GObj* fighter_gobj) {
     ftCaptain_SpecialS_RemoveGFX(fighter_gobj);
 }
+
+#include <melee/ft/fighter.h>
 
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch

@@ -5,6 +5,9 @@ void ftMasterHand_8015287C(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <melee/ft/ftanim.h>
+#include <sysdolphin/baselib/random.h>
+
 void ftMasterHand_80152880(HSD_GObj* fighter_gobj)
 {
     u32 unused[2];
@@ -26,6 +29,8 @@ static inline void ftMasterHand_80152928_inline(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
     func_80088148(fp, 0x4E207, 0x7F, 0x40);
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftMasterHand_80152928(HSD_GObj* fighter_gobj)
 {
@@ -49,6 +54,8 @@ void ftMasterHand_801529D0(HSD_GObj* fighter_gobj)
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftMasterHand_80151018(fighter_gobj);
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_80152A0C(HSD_GObj* fighter_gobj)
 {
@@ -81,7 +88,7 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-// todo: same inline as ftMasterHand_80153254
+// TODO same inline as ftMasterHand_80153254
 void ftMasterHand_80152A50(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

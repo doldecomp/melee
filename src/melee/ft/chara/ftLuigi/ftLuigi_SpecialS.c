@@ -17,6 +17,8 @@ void ftLuigi_SpecialS_SetGFX(HSD_GObj* fighter_gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
+#include <sysdolphin/baselib/random.h>
+
 // 0x80142A5C
 // https://decomp.me/scratch/EHQ0r // Luigi's Green Missile Setup (RNG + calculations)
 void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
@@ -39,6 +41,8 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     }
     fp->luigiVars[0].SpecialS.isMisfire = FALSE;
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x80142B14
 // https://decomp.me/scratch/6eTeE // Luigi's grounded Green Missile Action State handler
@@ -84,6 +88,8 @@ void ftLuigi_SpecialS_OnGiveDamage(HSD_GObj* fighter_gobj)
     }
     ftLuigi_SpecialAirSEnd_Action(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x80142C40
 // https://decomp.me/scratch/Jk0de // Luigi's grounded Green Missile Start Animation callback
@@ -699,7 +705,7 @@ void ftLuigi_SpecialSFly_Action(HSD_GObj* fighter_gobj)
     {
         fp->x80_self_vel.x = (f32)((luigiAttrs->x28_LUIGI_GREENMISSILE_MUL_X * (f32)fp->luigiVars[0].SpecialS.chargeFrames) + luigiAttrs->x24_LUIGI_GREENMISSILE_VEL_X);
     }
-    fp->x80_self_vel.x *= fp->x2C_facing_direction;
+    fp->x80_self_vel.x *= fp->facing_direction;
     if ((s32)fp->luigiVars[0].SpecialS.isMisfire != FALSE)
     {
         fp->x80_self_vel.y = (f32)luigiAttrs->x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;

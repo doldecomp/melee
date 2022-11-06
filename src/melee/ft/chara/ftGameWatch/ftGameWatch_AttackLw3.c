@@ -27,7 +27,7 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj)
             func_8026B724(fp->x1974_heldItem);
             func_8007E6DC(fighter_gobj, fp->x1974_heldItem, 1);
         }
-        fp->sa.gaw.x2250_manholeGObj2 = func_802C65E4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
+        fp->sa.gaw.x2250_manholeGObj2 = func_802C65E4(fighter_gobj, &sp10, 0x20, fp->facing_direction);
     }
     if (fp->sa.gaw.x2250_manholeGObj2 != NULL)
     {
@@ -120,6 +120,8 @@ BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014ADB8
 // https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Action State Handler
 void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
@@ -134,6 +136,8 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemManholeSetup;
     }
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x8014AE3C
 // https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation callback

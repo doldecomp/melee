@@ -18,10 +18,10 @@
 GXContext __GXContext;
 GXContexts __GXContexts = { &__GXContext, NULL };
 
-volatile u32* __memReg; // todo: OSPhysicalToUncached (?)
-volatile u16* __peReg;  // todo: OSPhysicalToUncached (0x0C001000)
-volatile u16* __cpReg;  // todo: OSPhysicalToUncached (0x0C000000)
-volatile u32* __piReg;  // todo: OSPhysicalToUncached (0x0C003000)
+volatile u32* __memReg; // TODO OSPhysicalToUncached (?)
+volatile u16* __peReg;  // TODO OSPhysicalToUncached (0x0C001000)
+volatile u16* __cpReg;  // TODO OSPhysicalToUncached (0x0C000000)
+volatile u32* __piReg;  // TODO OSPhysicalToUncached (0x0C003000)
 
 GXColor const lbl_804DE200 = { 0x40, 0x40, 0x40, 0xFF };
 GXColor const lbl_804DE204 = { 0x00, 0x00, 0x00, 0x00 };

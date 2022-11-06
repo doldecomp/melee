@@ -1,4 +1,6 @@
-#include <melee/ft/chara/ftNess/ftNess.h>
+#include <melee/ft/chara/ftNess/__ftNess.h>
+
+#include <melee/ft/ftparts.h>
 
 void ftNess_OnDeath(HSD_GObj* gobj)
 {
@@ -10,6 +12,8 @@ void ftNess_OnDeath(HSD_GObj* gobj)
     fp->sa.ness.x222C_yoyoGObj = NULL;
     fp->sa.ness.x224C_thunderGFX = FALSE;
 }
+
+#include <melee/it/enums.h>
 
 void ftNess_OnLoad(HSD_GObj* gobj) 
 {
@@ -49,6 +53,8 @@ f32 ftNess_GetAbsorbHeal(Fighter* fp)
     return ((ftNessAttributes*)fp->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
 }
 
+#include <melee/ft/fighter.h>
+
 void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag) {
     Fighter_OnItemPickup(fighter_gobj, catchItemFlag, 1, 1);
 }
@@ -72,12 +78,12 @@ void ftNess_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftNessAttributes);
 }
 
-void ftNess_OnKnockbackEnter(HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //
+void ftNess_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures //
+void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures
 {
     Fighter_OnKnockbackExit(fighter_gobj, 1);
 }

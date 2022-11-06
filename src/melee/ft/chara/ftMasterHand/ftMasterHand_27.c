@@ -2,6 +2,8 @@
 
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80155074(HSD_GObj* fighter_gobj, unk_t, unk_t)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -23,6 +25,8 @@ void ftMasterHand_80155074(HSD_GObj* fighter_gobj, unk_t, unk_t)
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftMasterHand_80151018(fighter_gobj);
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_8015512C(HSD_GObj* fighter_gobj)
 {

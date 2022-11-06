@@ -130,7 +130,7 @@ void GXSetCPUFifo(GXFifoObj *fifo)
     return;
 
 // Despite this obviously being dead code, it still is needed to match the function.
-// todo: This is weird; try to match without it.
+// TODO This is weird; try to match without it.
 #ifndef NON_MATCHING
     asm {nop}
 #pragma peephole on

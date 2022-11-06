@@ -21,15 +21,15 @@ typedef enum ftMarioAction {
     AS_MARIO_SPECIALAIRLW,
 } ftMarioAction;
 
-// Flags used by Mario & Dr. Mario in Action State Change //
+// Flags used by Mario & Dr. Mario in Action State Change
 
-// SpecialN/SpecialAirN (Fireball / Megavitamin) //
+// SpecialN/SpecialAirN (Fireball / Megavitamin)
 
-// SpecialS/SpecialAirS (Cape / Super Sheet) //
+// SpecialS/SpecialAirS (Cape / Super Sheet)
 
 #define FTMARIO_SPECIALS_COLL_FLAG FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-// SpecialLw/SpecialAirLw (Mario / Dr. Tornado ) //
+// SpecialLw/SpecialAirLw (Mario / Dr. Tornado )
 
 #define FTMARIO_SPECIALLW_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
@@ -37,7 +37,7 @@ typedef enum ftMarioAction {
 
 typedef struct _ftMarioAttributes {
 
-    // SIDE SPECIAL - CAPE / SUPER SHEET //
+    // SIDE SPECIAL - CAPE / SUPER SHEET
 
     /* 0x00 */ u8 x0_padding[0x04 - 0x0];
 	/* 0x04 */ f32 x4_MARIO_CAPE_VEL_X;
@@ -46,7 +46,7 @@ typedef struct _ftMarioAttributes {
 	/* 0x10 */ f32 x10_MARIO_CAPE_TERMINAL_VELOCITY;
 	/* 0x14 */ s32 x14_MARIO_CAPE_IT_KIND;
 
-    // UP SPECIAL - SUPER JUMP PUNCH //
+    // UP SPECIAL - SUPER JUMP PUNCH
 
     /* 0x18 */ f32 x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY;
     /* 0x1C */ f32 x1C_MARIO_SUPERJUMP_LANDING_LAG;
@@ -57,7 +57,7 @@ typedef struct _ftMarioAttributes {
     /* 0x30 */ f32 x30_MARIO_SUPERJUMP_GRAVITY;
     /* 0x34 */ f32 x34_MARIO_SUPERJUMP_VEL_MUL;
 
-    // DOWN SPECIAL - MARIO TORNADO / DR. TORNADO //
+    // DOWN SPECIAL - MARIO TORNADO / DR. TORNADO
 
     /* 0x38 */ f32 x38_MARIO_TORNADO_GROUND_VEL_Y; // Vertical momentum from inital grounded B-tap
     /* 0x3C */ f32 x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
@@ -70,7 +70,7 @@ typedef struct _ftMarioAttributes {
     /* 0x58 */ f32 x58_MARIO_TORNADO_TAP_GRAVITY;
     /* 0x5C */ s32 x5C_MARIO_TORNADO_LANDING_LAG;
 
-    // CAPE / SUPER SHEET REFLECTION //
+    // CAPE / SUPER SHEET REFLECTION
 
     /* 0x60 */ ReflectDesc x60_MARIO_CAPE_REFLECTION;
 

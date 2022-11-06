@@ -2,7 +2,8 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/itkind.h>
+
+#include <melee/ft/ftanim.h>
 
 void ftMario_SpecialHi_StartAction(HSD_GObj* gobj) {
     Fighter* fp;
@@ -30,6 +31,8 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E1B24
 void ftMario_SpecialHi_Anim(HSD_GObj* gobj) 
 {
@@ -50,6 +53,9 @@ void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
     u8 unused[8];
     ftMario_SpecialHi_Anim(gobj);
 }
+
+#include <math.h>
+#include <melee/ft/ftparts.h>
 
 #define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
 #define HALF_PI (M_PI / 2)
@@ -96,7 +102,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     if (throwflag_flag != 0) {
         if (abs(fp->input.x620_lstick_x) > sa->x20_MARIO_SUPERJUMP_REVERSE_STICK_RANGE) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->x2C_facing_direction));
+            func_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->facing_direction));
         }
     }
 }

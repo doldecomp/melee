@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
 #include <melee/ef/ef.h>
+#include <melee/ft/fighter.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE
@@ -50,6 +51,10 @@ void ftZelda_8013AEAC(HSD_GObj* fighter_gobj)
     func_8007EFC8(fighter_gobj, func_80114758);
 }
 
+#include <melee/lb/lbunknown_003.h>
+#include <melee/ft/fighter.h>
+
+
 // Helper function for both ftZelda_SpecialLw_StartAction / ftZelda_SpecialAirLw_StartAction
 void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* fighter_gobj)
 {
@@ -70,6 +75,8 @@ void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* fighter_gobj)
 
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
 }
+
+#include <melee/ft/ftanim.h>
 
 // Zelda_AS_355_Transform_Grounded
 // 8013AEE0 - 8013AFA4 (0xC4 bytes)
@@ -96,6 +103,8 @@ void ftZelda_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 
     ftZelda_SpecialLw_StartAction_Helper(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 // 8013B068 - 8013B0A8 (0x40 bytes)
 // https://decomp.me/scratch/DrRr5

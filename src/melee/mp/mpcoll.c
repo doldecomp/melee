@@ -7,7 +7,7 @@
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
 
-// TODO: proper signatures, mplib.h
+// TODO proper signatures, mplib.h
 s32 func_80052700();
 s32 func_8004F008();
 s32 func_80054584();
@@ -102,7 +102,7 @@ void func_80041DD0(CollData* cd, u32 flags) {
     func_800588D0(left, bottom, right, top);
 }
 
-// TODO: float order hack
+// TODO float order hack
 const f32 lbl_804D7F9C = -FLT_MAX;
 const f32 lbl_804D7FA0 = FLT_MAX;
 
@@ -225,6 +225,8 @@ void func_80042374(CollData* arg0, f32 arg8, f32 arg9, f32 argA) {
     arg0->x58 = arg9;
     arg0->x5C = argA;
 }
+
+#include <math.h>
 
 // 80042384 https://decomp.me/scratch/P8djI
 void func_80042384(CollData* cd) {
@@ -633,7 +635,7 @@ const char * dummy_string_data = "i<MPCOLL_WALLID_MAX";
 
 // 80043324
 void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) { // see func_80043268
-    s32 dummy = 0; // TODO: fake, breaks func_80043558
+    s32 dummy = 0; // TODO fake, breaks func_80043558
     void (*callback)(s32, s32, CollData*, s32, s32, f32);
     s32 thing;
     s32 temp_r29;
@@ -685,7 +687,7 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2) {
 
 // 80043558
 void func_80043558(CollData* arg0, s32 arg1) {
-#ifdef NON_MATCHING // TODO: dummy stack in func_80043324_inline2 breaks this function
+#ifdef NON_MATCHING // TODO dummy stack in func_80043324_inline2 breaks this function
     s32 temp_r3;
 
     temp_r3 = func_80054C6C(arg1);
@@ -744,7 +746,7 @@ void func_800436D8(CollData* arg0, s32 arg1) {
     arg0->x36 = arg1;
 }
 
-// TODO: float order hack
+// TODO float order hack
 const f32 flt_804D7FD8 = 6.0f;
 static f32 six(void) {
     return flt_804D7FD8;

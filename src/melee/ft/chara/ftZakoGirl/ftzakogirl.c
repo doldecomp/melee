@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftZakoGirl/ftzakogirl.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftZakoGirl_OnDeath(HSD_GObj* gobj)
 {
     func_80074A4C(gobj, 0, 0);
@@ -10,6 +12,8 @@ void ftZakoGirl_OnLoad(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     PUSH_ATTRS(fp, s32);
 }
+
+#include <melee/ft/fighter.h>
 
 void ftZakoGirl_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);

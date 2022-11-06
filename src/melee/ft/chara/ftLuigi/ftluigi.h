@@ -6,7 +6,6 @@
 
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
-#include <melee/it/itkind.h>
 #include <common_structs.h>
 
 typedef enum ftLuigiAction
@@ -32,7 +31,7 @@ typedef enum ftLuigiAction
 
 } ftLuigiAction;
 
-// Flags used by Luigi in Action State Change //
+// Flags used by Luigi in Action State Change
 
 // SpecialN/SpecialAirN (Fireball)
 
@@ -55,7 +54,7 @@ typedef enum ftLuigiAction
 
 typedef struct _ftLuigiAttributes {
 
-    // SIDE SPECIAL - GREEN MISSILE //
+    // SIDE SPECIAL - GREEN MISSILE
 
     f32 x0_LUIGI_GREENMISSILE_UNK1;
     f32 x4_LUIGI_GREENMISSILE_SMASH; 
@@ -77,8 +76,8 @@ typedef struct _ftLuigiAttributes {
     f32 x44_LUIGI_GREENMISSILE_MISFIRE_CHANCE; // 1.0f divided by this value
     f32 x48_LUIGI_GREENMISSILE_MISFIRE_VEL_X;
     f32 x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
-    
-    // UP SPECIAL - SUPER JUMP PUNCH //
+
+    // UP SPECIAL - SUPER JUMP PUNCH
 
     f32 x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY; // Multiplies Luigi's max horionztal aerial mobility
     f32 x54_LUIGI_SUPERJUMP_LANDING_LAG;
@@ -88,8 +87,8 @@ typedef struct _ftLuigiAttributes {
     f32 x64_LUIGI_SUPERJUMP_VEL_X; 
     f32 x68_LUIGI_SUPERJUMP_GRAVITY_START;
     f32 x6C_LUIGI_SUPERJUMP_VEL_Y;
-    
-    // DOWN SPECIAL - LUIGI CYCLONE //
+
+    // DOWN SPECIAL - LUIGI CYCLONE
 
     f32 x70_LUIGI_CYCLONE_TAP_MOMENTUM; // Vertical momentum from (first?) B button tap
     f32 x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
@@ -104,9 +103,9 @@ typedef struct _ftLuigiAttributes {
 
 } ftLuigiAttributes;
 
-// Luigi Functions //
+// Luigi Functions
 
-// Netural Special - Fireball (SpecialN) //
+// Netural Special - Fireball (SpecialN)
 
 void ftLuigi_SpecialN_StartAction(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
@@ -120,7 +119,7 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialN_FireSpawn(HSD_GObj* fighter_gobj);
 
-// Side Special - Green Missile (SpecialS) //
+// Side Special - Green Missile (SpecialS)
 
 void ftLuigi_SpecialS_SetGFX(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj);

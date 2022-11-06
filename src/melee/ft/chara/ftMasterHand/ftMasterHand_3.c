@@ -1,8 +1,10 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/ft/ftanim.h>
+
 #pragma push
 
-// todo: proper inlines should fix this due to max inline depth.
+// TODO proper inlines should fix this due to max inline depth.
 #pragma dont_inline on
 
 static void ftMasterHand_80150C8C(HSD_GObj* fighter_gobj)
@@ -62,6 +64,8 @@ void ftMasterHand_80150DC4(HSD_GObj* fighter_gobj, GObjCallback callback, Vec3* 
     fp->x2344_callback = callback;
     fp->x234C_pos = *pos;
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftMasterHand_80150F00(HSD_GObj* fighter_gobj)
 {

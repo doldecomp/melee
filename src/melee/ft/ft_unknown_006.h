@@ -1,13 +1,17 @@
-#ifndef _ftunk006_h_
-#define _ftunk006_h_
+#ifndef MELEE_FT_FT_UNKNOWN_006_H
+#define MELEE_FT_FT_UNKNOWN_006_H
 
-#include <dolphin/types.h>
+#include <ctypes.h>
+#include <melee/ft/enums.h>
 
-#include <melee/ft/chara/ftLink/ftlink.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#include <melee/ft/ftcommon.h>
 
 #include <common_structs.h>
 #include <melee/ft/fighter.h>
+
+typedef struct _ftCLinkAttributes ftCLinkAttributes;
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1);
@@ -101,7 +105,7 @@ void func_800928CC(HSD_GObj* fighter_gobj);
 BOOL func_8009917C(HSD_GObj* fighter_gobj);
 unk_t func_80092BE8();
 void func_80092BCC(HSD_GObj* fighter_gobj);
-f32 func_80092ED8(s32, ftLinkAttributes*, f32);
+f32 func_80092ED8(s32, ftCLinkAttributes*, f32);
 unk_t func_80093240();
 unk_t func_800932DC();
 unk_t func_80093BC0();
@@ -178,5 +182,46 @@ u32 func_800DEEE8(Fighter* fp, Vec2*);
 void func_800DEF38(HSD_GObj* fighter_gobj);
 void func_800DF0D0(HSD_GObj* fighter_gobj);
 void func_800DEEA8(HSD_GObj* fighter_gobj);
+void func_80088148(Fighter* fp, u32, u32, u32);
+void func_800C89A0(HSD_GObj* fighter_gobj);
+void func_800C8A64(HSD_GObj* fighter_gobj);
+s32 func_800C8B2C(Fighter* fp, u32, BOOL);
+s32 func_800C8C84(HSD_GObj* fighter_gobj);
+void func_800C8D00(HSD_GObj* fighter_gobj);
+void func_800C8F6C(void);
+void func_800C8FC4(HSD_GObj* fighter_gobj);
+void func_800C9034(HSD_GObj* fighter_gobj);
+void func_800C9840(HSD_GObj* fighter_gobj, s32 action_state, BOOL, f32, f32 turn_speed, f32);
+
+/* TODO
+ * Inconsistent signature at call sites. Should be:
+ * BOOL func_800CAE80(HSD_GObj* fighter_gobj);
+ */
+BOOL func_800CAE80();
+
+void func_800CB110(HSD_GObj* fighter_gobj, BOOL, f32);
+void func_800CC730(HSD_GObj* fighter_gobj);
+void func_800D105C(HSD_GObj* dst_fighter_gobj);
+void func_800D14E4(HSD_GObj* fighter_gobj);
+void func_800D1A8C(HSD_GObj* fighter_gobj);
+void func_800D1E80(HSD_GObj* fighter_gobj);
+void func_800D237C(HSD_GObj* fighter_gobj);
+void func_800D3158(HSD_GObj* fighter_gobj);
+void func_800D4F24(HSD_GObj* fighter_gobj, BOOL);
+void func_800D5AEC(HSD_GObj* fighter_gobj, s32 action_state, BOOL, BOOL, Fighter* fp, f32, f32);
+void func_800D5CB0(HSD_GObj* fighter_gobj, BOOL, f32 landing_lag);
+BOOL func_800D67C4(Fighter* fp);
+BOOL func_800D688C(Fighter* fp);
+BOOL func_800D6928(Fighter* fp);
+void func_800D71D8(HSD_GObj* fighter_gobj);
+void func_800D94D8(HSD_GObj* fighter_gobj);
+void func_800DA824(Fighter* victim_fp);
+void func_800DB368(Fighter* victim_fp, Fighter* self_fp);
+void func_800DB464(HSD_GObj* fighter_gobj);
+void func_800DC750(HSD_GObj* interacted_fighter_gobj);
+void func_800DD168(HSD_GObj* self_fighter_gobj);
+void func_800DE2A8(HSD_GObj* self_fighter_gobj, HSD_GObj* victim_fighter_gobj);
+void func_800DE7C0(HSD_GObj* interacted_fighter_gobj, BOOL, BOOL);
+void func_800DE508(HSD_GObj* fighter_gobj);
 
 #endif

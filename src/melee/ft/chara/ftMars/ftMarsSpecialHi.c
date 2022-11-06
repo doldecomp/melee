@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 #include <melee/ft/ft_unknown_006.h>
 
+#include <melee/ft/ftanim.h>
+
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
 void ftMars_SpecialHi_StartAction(HSD_GObj* gobj) {
@@ -35,6 +37,8 @@ void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj) {
     func_8006EBA4(gobj);
 }
 
+#include <melee/ft/ftanim.h>
+
 // 801382E8 00134EC8
 // https://decomp.me/scratch/56Ycw
 void lbl_801382E8(HSD_GObj* gobj) {
@@ -62,6 +66,8 @@ void lbl_80138348(HSD_GObj* gobj) {
         func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
 }
+
+#include <melee/ft/ftparts.h>
 
 #define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
 #define HALF_PI 1.5707963267948966
@@ -94,7 +100,7 @@ void lbl_801383A8(HSD_GObj* gobj) {
     if (phi_r0 != 0) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->x2C_facing_direction));
+            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_direction));
         }
     }
 }
@@ -126,7 +132,7 @@ void lbl_801384F0(HSD_GObj* gobj) {
     if (phi_r0 != 0) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->x2C_facing_direction));
+            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_direction));
         }
     }
 }
@@ -151,7 +157,7 @@ void lbl_80138638(HSD_GObj* gobj) {
             } else {
                 num = 1;
             }
-            if (fp->x2C_facing_direction != num) {
+            if (fp->facing_direction != num) {
                 fp->x80_self_vel.x *= -1.0f;
             }
             if (fp->x6A4_transNOffset.y < 0.0f) {
@@ -188,7 +194,7 @@ void lbl_8013873C(HSD_GObj* gobj) {
             } else {
                 num = 1;
             }
-            if (fp->x2C_facing_direction != num) {
+            if (fp->facing_direction != num) {
                 fp->x80_self_vel.x *= -1.0f;
             }
             if (fp->x6A4_transNOffset.y < 0.0f) {

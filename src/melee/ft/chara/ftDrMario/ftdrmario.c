@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftDrMario/ftdrmario.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftDrMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*)gobj->user_data;
@@ -29,6 +31,8 @@ void func_80149540(HSD_GObj* gobj)
 {
     func_801497CC(gobj);
 }
+
+#include <melee/ft/fighter.h>
 
 void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

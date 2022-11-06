@@ -1,7 +1,8 @@
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
 #include <melee/ft/chara/ftGigaKoopa/ftgigakoopa.h>
 
-#include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+
 
 void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj) {
     s32 unused[2];
@@ -21,6 +22,9 @@ void func_8014F698(HSD_GObj* gobj)
     func_80132A64(gobj);
 }
 
+#include <melee/it/enums.h>
+
+
 void ftGKoopa_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -33,6 +37,8 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     fp->x2226_flag.bits.b1 = 1;
     fp->x222A_flag.bits.b0 = 1;
 }
+
+#include <melee/ft/fighter.h>
 
 void ftGKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

@@ -300,6 +300,8 @@ static void func_8021A340()
 {
 }
 
+#include <sysdolphin/baselib/random.h>
+
 static void func_8021A344(HSD_GObj* gobj)
 {
     u32 unused[6];

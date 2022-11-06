@@ -33,7 +33,7 @@ volatile float y;
 
 enum FloatType { FP_NAN=1, FP_INFINITE=2, FP_ZERO=3, FP_NORMAL=4, FP_SUBNORMAL=5 };
 
-inline s32 __fpclassifyf(float x)
+static inline s32 __fpclassifyf(float x)
 {
 	const s32 exp_mask      = 0b01111111100000000000000000000000; // = 0x7F800000
 	const s32 mantissa_mask = 0b00000000011111111111111111111111; // = 0x007fffff
@@ -45,7 +45,7 @@ inline s32 __fpclassifyf(float x)
 	}
 }
 
-inline s32 __fpclassifyd(double x)
+static inline s32 __fpclassifyd(double x)
 {
 	switch (__HI(x) & 0x7ff00000)
 	{
@@ -59,7 +59,7 @@ inline s32 __fpclassifyd(double x)
 	((sizeof(x) == sizeof(float)) ? __fpclassifyf((float)(x)) \
 	                              : __fpclassifyd((double)(x)))
 
-inline f32 fabs_inline(f32 x) {
+static inline f32 fabs_inline(f32 x) {
     if (x < 0) {
         return -x;
     } else {

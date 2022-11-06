@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     fp->sa.dk.x222C = 0;
@@ -10,6 +12,8 @@ void ftDonkey_8010D774(HSD_GObj* fighter_gobj) {
     ftDonkey_DestroyAllEffectsPlus(fighter_gobj);
     ftDonkey_DestroyAllEffects_SpecialHi(fighter_gobj);
 }
+
+#include <melee/ft/fighter.h>
 
 void ftDonkey_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
@@ -35,6 +39,9 @@ void func_8010D96C(HSD_GObj* fighter_gobj) {
         func_800BFFD0(fp, 0x39, 0);
     }
 }
+
+#include <melee/lb/lbmthp.h>
+#include <melee/ft/ftdata.h>
 
 
 void ftDonkey_OnLoad(HSD_GObj* fighter_gobj) {
@@ -84,7 +91,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj) {
         for (i = 0; i < 4; i++) {
 
             f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) - (donkey_attr->SpecialLw.x68 * 1.5f);
-            f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->x2C_facing_direction;
+            f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->facing_direction;
             f32 temp_f6 = temp_f5 + temp_f3;
 
             if (!func_80056C54(

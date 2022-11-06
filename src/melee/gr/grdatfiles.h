@@ -16,7 +16,7 @@ typedef struct _UnkBgmStruct {
     u8 pad[0x64 - 0x1A];
 } UnkBgmStruct;
 
-// TODO: what is this struct?
+// TODO what is this struct?
 typedef struct _UnkStage6B0 {
     f32 x0;
     s16 x4;

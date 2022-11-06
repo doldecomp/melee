@@ -52,6 +52,8 @@ void ftMewtwo_SpecialHi_SetEndGFX(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x801451DC
 // https://decomp.me/scratch/lXunH // Mewtwo's grounded Teleport Start Action State handler
 void ftMewtwo_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
@@ -366,6 +368,9 @@ inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
     func_80088148(fp, 0x30DA1U, SFX_VOLUME_MAX, SFX_PAN_MID);
 }
 
+#include <math.h>
+#include <melee/ft/ftanim.h>
+
 extern BOOL func_8009A134(HSD_GObj*);
 
 // 0x80145990
@@ -407,11 +412,11 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* fighter_gobj)
         {
             func_8007D9FC(fp);
 
-            vel = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->x2C_facing_direction);
+            vel = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->facing_direction);
 
             fp->mewtwoVars[0].SpecialHi.stickX = stickVec.x;
             fp->mewtwoVars[0].SpecialHi.stickY = stickVec.y;
-            fp->xEC_ground_vel = fp->x2C_facing_direction * (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) + mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) * cosf(vel));
+            fp->xEC_ground_vel = fp->facing_direction * (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) + mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) * cosf(vel));
 
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALHI, 0, NULL, 35.0f, 1.0f, 0.0f);
             func_8006EBA4(fighter_gobj);
@@ -461,7 +466,7 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
         {
             func_8007D9FC(fp);
         }
-        floatVar = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->x2C_facing_direction);
+        floatVar = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->facing_direction);
         fp->mewtwoVars[0].SpecialHi.stickX = fp->input.x620_lstick_x;
         fp->mewtwoVars[0].SpecialHi.stickY = fp->input.x624_lstick_y;
     }
@@ -474,7 +479,7 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
         sqrt_stick = fp->mewtwoVars[0].SpecialHi.stickY = 1.0f;
     }
 
-    fp->x80_self_vel.x = fp->x2C_facing_direction * (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) + mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) * cosf(floatVar));
+    fp->x80_self_vel.x = fp->facing_direction * (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) + mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) * cosf(floatVar));
     fp->x80_self_vel.y = ((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) + mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) * sinf(floatVar);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRHI, 0, NULL, 35.0f, 1.0f, 0.0f);

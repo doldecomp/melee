@@ -95,6 +95,8 @@ inline void jobj_flagCheckSetMtxDirtySub(HSD_JObj* jobj) // jobj @ r30 when inli
 inline void jobj_translate_x(HSD_JObj* jobj, f32 dx);
 inline void jobj_translate_y(HSD_JObj* jobj, f32 dy);
 
+#include <sysdolphin/baselib/mtx.h>
+
 inline void jobj_unk_x(UnkX* value, s32 i)
 {
     HSD_JObj* jobj_r30 = value->x54_jobj[i];
@@ -1746,6 +1748,9 @@ lbl_802F5EB0:
 } // clang-format on
 #pragma pop
 
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+
 extern unk_t func_802F3424();
 
 #pragma push
@@ -2028,6 +2033,9 @@ lbl_802F61E8:
 #pragma pop
 
 #endif
+
+#include <melee/pl/player.h>
+#include <melee/gm/code_801601C4.h>
 
 extern char* lbl_803F9598;
 extern char* lbl_804D57C0;
@@ -2640,6 +2648,8 @@ void func_802F6E3C(s32 player_num)
     }
     func_802FB6AC(player_num);
 }
+
+#include <melee/lb/lbaudio_ax.h>
 
 extern Thing_803F9628 lbl_803F9628;
 extern f64 lbl_804DDAA8;

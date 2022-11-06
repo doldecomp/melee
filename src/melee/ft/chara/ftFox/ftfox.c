@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
+#include <melee/ft/ftparts.h>
+
 BOOL func_800E5534(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*)gobj->user_data;
@@ -19,6 +21,8 @@ void func_800E5588(HSD_GObj* gobj)
 {
     ftFox_RemoveBlaster(gobj);
 }
+
+#include <melee/ft/fighter.h>
 
 void ftFox_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
@@ -43,6 +47,8 @@ void ftFox_OnLoadForFalco(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftFoxAttributes);
 }
+
+#include <melee/it/enums.h>
 
 void ftFox_OnLoad(HSD_GObj* gobj) {
 

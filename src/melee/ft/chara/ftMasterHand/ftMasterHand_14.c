@@ -7,6 +7,8 @@ void ftMasterHand_80152BC8(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80152BCC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -26,6 +28,8 @@ void ftMasterHand_80152C34(HSD_GObj* fighter_gobj)
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftMasterHand_80152CD8(fighter_gobj);
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_80152C70(HSD_GObj* fighter_gobj)
 {
@@ -97,6 +101,8 @@ void ftMasterHand_80152E24(HSD_GObj* fighter_gobj)
     return;
 }
 
+#include <melee/lb/lbaudio_ax.h>
+
 static void ftMasterHand_80152E28(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -107,17 +113,17 @@ static void ftMasterHand_80152E28(HSD_GObj* fighter_gobj)
         u32 unused2;
 
         func_8000B1CC(fp->x5E8_fighterBones[11].x0_jobj, 0, &vec);
-        fp->x2374 = func_802F0340(fighter_gobj, &vec, &vec, 0xB, 0x7D, fp->x2C_facing_direction);
+        fp->x2374 = func_802F0340(fighter_gobj, &vec, &vec, 0xB, 0x7D, fp->facing_direction);
 
         func_8000B1CC(fp->x5E8_fighterBones[16].x0_jobj, 0, &vec);
-        fp->x2378 = func_802F0340(fighter_gobj, &vec, &vec, 0x10, 0x7D, fp->x2C_facing_direction);
+        fp->x2378 = func_802F0340(fighter_gobj, &vec, &vec, 0x10, 0x7D, fp->facing_direction);
 
         func_8000B1CC(fp->x5E8_fighterBones[21].x0_jobj, 0, &vec);
-        fp->x237C = func_802F0340(fighter_gobj, &vec, &vec, 0x15, 0x7D, fp->x2C_facing_direction);
+        fp->x237C = func_802F0340(fighter_gobj, &vec, &vec, 0x15, 0x7D, fp->facing_direction);
 
         func_8000B1CC(fp->x5E8_fighterBones[26].x0_jobj, 0, &vec);
 
-        fp->x2380 = func_802F0340(fighter_gobj, &vec, &vec, 0x1A, 0x7D, fp->x2C_facing_direction);
+        fp->x2380 = func_802F0340(fighter_gobj, &vec, &vec, 0x1A, 0x7D, fp->facing_direction);
         fp->x2368 = func_800237A8(0x4E204, 0x7F, 0x40);
         fp->x236C = func_800237A8(0x4E205, 0x7F, 0x40);
         fp->x2370 = func_800237A8(0x4E206, 0x7F, 0x40);

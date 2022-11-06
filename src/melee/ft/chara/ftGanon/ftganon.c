@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftCaptain/__ftCaptain.h>
 #include <melee/ft/chara/ftGanon/ftganon.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftGanon_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -9,6 +11,8 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     fp->sa.captain.x2230_isSpecialSGFX = FALSE;
     fp->sa.captain.x222C_isSpecialSStartGFX = FALSE;
 }
+
+#include <melee/ft/fighter.h>
 
 void ftGanon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

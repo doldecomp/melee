@@ -4,8 +4,8 @@
 
 extern HSD_GObj* func_802C68F8(HSD_GObj*, Vec3*, s32, f32);
 
-// 0x8014A848 //
-// https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up callbacks //
+// 0x8014A848
+// https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up callbacks
 void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
@@ -14,7 +14,7 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 
     fp = getFighter(fighter_gobj);
     func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
-    fp->sa.gaw.x2254_fireGObj = func_802C68F8(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
+    fp->sa.gaw.x2254_fireGObj = func_802C68F8(fighter_gobj, &sp10, 0x20, fp->facing_direction);
     if (fp->sa.gaw.x2254_fireGObj != NULL)
     {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL)
@@ -32,7 +32,7 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014A904
-// https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch //
+// https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch
 void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -42,8 +42,8 @@ void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
 
 extern void func_802C6A2C(HSD_GObj*);
 
-// 0x8014A938 //
-// https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch //
+// 0x8014A938
+// https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch
 void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -93,6 +93,8 @@ BOOL ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x8014AA10 
 // https://decomp.me/scratch/GDWNx // Mr. Game & Watch's Forward Smash Action State handler
 void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
@@ -106,6 +108,8 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemTorchSetup;
 }
+
+#include <melee/ft/ftanim.h>
 
 // 0x8014AA88 
 // https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash Animation callback

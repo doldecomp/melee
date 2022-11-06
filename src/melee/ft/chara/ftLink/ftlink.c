@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftLink/ftlink.h>
+
+#include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/ft_unknown_006.h>
 
 // extern float lbl_804D92E0; // 0.0f
@@ -10,6 +12,8 @@ s32 func_800EAD64(HSD_GObj* fighter_gobj) {
     }
     return 0;
 }
+
+#include <melee/ft/ftparts.h>
 
 void ftLink_OnDeath(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
@@ -26,16 +30,20 @@ void ftLink_OnDeath(HSD_GObj* fighter_gobj) {
 }
 
 void ftLink_OnLoadForCLink(Fighter* fp) {
-    PUSH_ATTRS(fp, ftLinkAttributes);
+    PUSH_ATTRS(fp, ftCLinkAttributes);
 }
+
+#include <melee/lb/lbmthp.h>
+#include <melee/ft/ftdata.h>
+
 
 void ftLink_OnLoad(HSD_GObj* fighter_gobj) {
 
     Fighter* fp = fighter_gobj->user_data;
-    ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
+    ftCLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
     void** item_list = fp->x10C_ftData->x48_items;
     link_attr->x54 = func_8001E8F8(func_80085E50(fp, 0x48U));
-    PUSH_ATTRS(fp, ftLinkAttributes);
+    PUSH_ATTRS(fp, ftCLinkAttributes);
 
     link_attr = fp->x2D4_specialAttributes;
     func_8026B3F8(item_list[0], link_attr->x48);
@@ -84,6 +92,8 @@ void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, BOOL arg1) {
     ftLink_OnItemDrop(fighter_gobj, arg1);
 }
  
+#include <melee/ft/fighter.h>
+
 
 void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
@@ -96,7 +106,7 @@ void ftLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 }
 
 void ftLink_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
-    COPY_ATTRS(fighter_gobj, ftLinkAttributes);
+    COPY_ATTRS(fighter_gobj, ftCLinkAttributes);
     if (fp->x34_scale.y != 1.0f) {
         sA2->x28 *= fp->x34_scale.y;
     }
@@ -114,7 +124,7 @@ void ftLink_800EB334(HSD_GObj* fighter_gobj) {
     f32 new_ground_vel;
 
     Fighter* fp = fighter_gobj->user_data;
-    ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
+    ftCLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
 
     f32 resultf = func_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
     fp->xEC_ground_vel = resultf * p_ftCommonData->x294;

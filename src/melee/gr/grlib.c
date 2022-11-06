@@ -15,8 +15,6 @@ BOOL func_801C96E8(HSD_GObj* arg0)
     return map->x10_flags.b4;
 }
 
-
-
 UnkGeneratorStruct* func_8039F05C(s8, s8, s32);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
@@ -86,7 +84,7 @@ void func_801C9874(UnkEffectStruct* arg0)
 
 void func_801C98A0(HSD_JObj* jobj)
 {
-    UnkEffectStruct* cur, *next;
+    UnkEffectStruct *cur, *next;
 
     if (jobj == NULL) {
         return;
@@ -188,6 +186,8 @@ typedef struct _UnkAnimStruct {
     s32 x4_size;
 } UnkAnimStruct;
 
+#include <melee/lb/lbunknown_003.h>
+
 void func_801C9B20(void* arg1, UnkAnimStruct* arg2, void* arg3)
 {
     func_8000FD48(arg1, arg3, arg2->x4_size);
@@ -203,6 +203,8 @@ void func_801C9B8C(void* arg0)
 {
     func_8001044C(arg0, 0, 0, 0.0f, 0, 0, 0, 0);
 }
+
+#include <melee/cm/camera.h>
 
 static void func_801C9BC8(HSD_GObj* gobj)
 {
@@ -223,6 +225,8 @@ static void func_801C9C40(HSD_GObj* gobj)
         func_80390228(gobj);
     }
 }
+
+void HSD_ForeachAnim(unk_t, ...);
 
 HSD_GObj* func_801C9CEC(s32 idx1)
 {
@@ -296,9 +300,10 @@ BOOL func_801C9E60(Vec* v)
     return FALSE;
 }
 
+#pragma push
 // Only called from yorster and inishie1
 asm BOOL func_801C9EE8()
-{
+{ // clang-format off
     nofralloc
 /* 801C9EE8 001C6AC8  7C 08 02 A6 */	mflr r0
 /* 801C9EEC 001C6ACC  90 01 00 04 */	stw r0, 4(r1)
@@ -432,4 +437,5 @@ lbl_801CA090:
 /* 801CA0A8 001C6C88  38 21 00 58 */	addi r1, r1, 0x58
 /* 801CA0AC 001C6C8C  7C 08 03 A6 */	mtlr r0
 /* 801CA0B0 001C6C90  4E 80 00 20 */	blr 
-}
+} // clang-format on
+#pragma pop

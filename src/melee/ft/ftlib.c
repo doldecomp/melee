@@ -3,7 +3,6 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftdata.h>
 #include <melee/gm/code_801601C4.h>
-#include <melee/it/itkind.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -43,6 +42,8 @@ BOOL func_80086140(void)
     }
     return FALSE;
 }
+
+#include <melee/gm/code_801601C4.h>
 
 HSD_GObj* func_80086198(HSD_GObj* gobj)
 {
@@ -183,6 +184,8 @@ inline s32 sgn(f32 x)
     }
 }
 
+#include <sysdolphin/baselib/random.h>
+
 f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
 {
     Vec3 sp20;
@@ -230,7 +233,7 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
 f32 func_800865C0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x2C_facing_direction;
+    return fp->facing_direction;
 }
 
 s32 func_800865CC(HSD_GObj* gobj)
@@ -245,6 +248,8 @@ void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
     *x = fp->input.x620_lstick_x;
     *y = fp->input.x624_lstick_y;
 }
+
+#include <melee/ft/ftparts.h>
 
 void* func_800865F0(HSD_GObj* gobj)
 {
@@ -455,6 +460,8 @@ BOOL func_80086A58(HSD_GObj* gobj, S32Pair* x)
     return FALSE;
 }
 
+#include <melee/cm/camera.h>
+
 BOOL func_80086A8C(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -490,6 +497,8 @@ BOOL func_80086B64(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     return fp->x221F_flag.bits.b0;
 }
+
+#include <melee/cm/camera.h>
 
 CameraBox* func_80086B74(HSD_GObj* gobj)
 {
@@ -534,6 +543,8 @@ s32 func_80086C0C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     return fp->x10_action_state_index;
 }
+
+#include <melee/lb/lbunknown_003.h>
 
 inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
 {
@@ -715,6 +726,8 @@ void func_80087140(HSD_GObj* gobj)
     }
 }
 
+#include <melee/it/enums.h>
+
 void func_800871A8(HSD_GObj* fighter_gobj, HSD_GObj* item_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -874,6 +887,9 @@ void func_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
     func_8003E4A4(fp->xC_playerID, fp->x221F_flag.bits.b4, arg1, arg2);
 }
 
+#include <melee/ef/efasync.h>
+#include <melee/ft/ftdata.h>
+
 void func_80087508(s8 arg0, u8 arg1)
 {
     func_8008572C(arg0);
@@ -907,6 +923,8 @@ void func_80087610(u8 arg0)
         }
     }
 }
+
+#include <melee/ft/ftanim.h>
 
 void func_800876B4(HSD_GObj* gobj)
 {

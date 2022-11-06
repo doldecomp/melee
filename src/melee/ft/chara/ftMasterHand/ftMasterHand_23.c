@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/__ftMasterHand.h>
 
+#include <melee/ft/ftanim.h>
+
 void ftMasterHand_80154A78(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -47,6 +49,8 @@ void ftMasterHand_80154B2C(HSD_GObj* fighter_gobj)
     ftMasterHand_80154B2C_inline_1(fighter_gobj);
     ftMasterHand_80154B2C_inline_2(fighter_gobj);
 }
+
+#include <melee/pl/player.h>
 
 void ftMasterHand_80154BB0(HSD_GObj* fighter_gobj)
 {

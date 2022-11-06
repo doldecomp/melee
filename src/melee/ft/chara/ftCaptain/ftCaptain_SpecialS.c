@@ -2,8 +2,6 @@
 
 #include <melee/ef/ef.h>
 #include <melee/ft/ft_unknown_006.h>
-#include <melee/it/itkind.h>
-
 extern void efLib_DestroyAll(HSD_GObj*);
 
 // 0x800E3278
@@ -25,8 +23,12 @@ inline void ftCaptain_SpecialS_SetCall(HSD_GObj* fighter_gobj)
     fp->cb.x21E4_callback_OnDeath2 = &lbl_800E28C8;
 }
 
-// 0x800E32B0
-// https://decomp.me/scratch/uyovM // Captain Falcon & Ganondorf's grounded Raptor Boost/Gerudo Dragon Start Action State handler
+#include <melee/ft/ftanim.h>
+
+/*
+ * Captain Falcon & Ganondorf's grounded Raptor Boost/Gerudo Dragon
+ * start action state handler.
+ */
 void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -144,6 +146,8 @@ inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.z = 0.0f;
 }
 
+#include <melee/it/enums.h>
+
 // 0x800E350C
 // https://decomp.me/scratch/8YN1Z // Captain Falcon & Ganondorf's Raptor Boost / Gerudo Dragon Detect function
 void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
@@ -217,6 +221,8 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
     }
 }
 
+#include <melee/ft/ftanim.h>
+
 // 0x800E384C
 // https://decomp.me/scratch/F314k // Captain Falcon & Ganondorf's grounded Raptor Boost / Gerudo Dragon Start Animation callback
 void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
@@ -240,12 +246,12 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
         switch (ftKind)
         {
         case FTKIND_CAPTAIN:
-            ef_Spawn(0x492, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x492, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->facing_direction);
             fp->sa.captain.x2230_isSpecialSGFX = TRUE;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(0x50E, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x50E, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->facing_direction);
             fp->sa.captain.x2230_isSpecialSGFX = TRUE;
             break;
         }
@@ -295,12 +301,12 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
         switch (ftKind)
         {
         case FTKIND_CAPTAIN:
-            ef_Spawn(0x493, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x493, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->facing_direction);
             fp->sa.captain.x2230_isSpecialSGFX = TRUE;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(0x50F, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->x2C_facing_direction);
+            ef_Spawn(0x50F, fighter_gobj, fp->x5E8_fighterBones[0x1].x0_jobj, &fp->facing_direction);
             fp->sa.captain.x2230_isSpecialSGFX = TRUE;
             break;
         }
@@ -420,9 +426,8 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
     }
     if ((u32)fp->x2200_ftcmd_var0 == 1U)
     {
-        facingDir = fp->x2C_facing_direction;
-        if (((1.0f == fp->x2C_facing_direction) && (fp->x6F0_collData.x134_envFlags & 0x3F)) || (((-1.0f) == fp->x2C_facing_direction) && (fp->x6F0_collData.x134_envFlags & 0xFC0)))
-        {
+        facingDir = fp->facing_direction;
+        if (((1.0f == fp->facing_direction) && (fp->x6F0_collData.x134_envFlags & 0x3F)) || (((-1.0f) == fp->facing_direction) && (fp->x6F0_collData.x134_envFlags & 0xFC0))) {
             efLib_DestroyAll(fighter_gobj);
             func_8008A2BC(fighter_gobj);
         }

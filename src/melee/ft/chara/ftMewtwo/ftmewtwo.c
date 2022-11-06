@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
-#include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+
 
 void ftMewtwo_OnDeath(HSD_GObj* gobj) {
     Fighter* fp = (Fighter*)gobj->user_data;
@@ -10,6 +11,8 @@ void ftMewtwo_OnDeath(HSD_GObj* gobj) {
     fp->sa.mewtwo.x2238_shadowBallGObj = NULL;
     fp->sa.mewtwo.x223C_isConfusionBoost = FALSE;
 }
+
+#include <melee/it/enums.h>
 
 void ftMewtwo_OnLoad(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;

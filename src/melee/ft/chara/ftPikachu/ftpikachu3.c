@@ -1,6 +1,10 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 #include <melee/ft/ftcoll.h>
 
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <sysdolphin/baselib/gobj.h>
+
 void ftPikachu_SpecialS_StartAction(HSD_GObj* fighter_gobj) {
     s32 unused[2];
     Fighter* fp = fighter_gobj->user_data;
@@ -34,6 +38,8 @@ void ftPikachu_ZeroVelocity_80124F24(HSD_GObj* fighter_gobj) {
     }
     ftPikachu_ActionChange_80125D28(fighter_gobj);
 }
+
+#include <melee/ft/ftanim.h>
 
 void ftPikachu_80124F64(HSD_GObj* fighter_gobj) {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -333,7 +339,7 @@ void ftPikachu_ActionChange_80125A54(HSD_GObj* fighter_gobj) {
     fp->x2200_ftcmd_var0 = 0;
 
     fp->x80_self_vel.x = (pika_attr->x40 * fp->x2340_stateVar1) + pika_attr->x3C;
-    fp->x80_self_vel.x *= fp->x2C_facing_direction;
+    fp->x80_self_vel.x *= fp->facing_direction;
 
     fp->x80_self_vel.y = (0.5f * pika_attr->x44) + (pika_attr->x44 * (0.5f * fp->x2340_stateVar1 / pika_attr->x24));
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15E, 0xA, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);

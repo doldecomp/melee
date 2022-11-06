@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
+#include <melee/ft/fighter.h>
+
 void ftPikachu_OnLoadForPichu(Fighter* fp) {
     PUSH_ATTRS(fp, ftPikachuAttributes);
 }
@@ -19,6 +21,8 @@ void ftPikachu_OnLoad(HSD_GObj* fighter_gobj) {
     }
 
 }
+
+#include <melee/ft/ftparts.h>
 
 void ftPikachu_OnDeath(HSD_GObj* fighter_gobj) {
     s32 unused[2];
@@ -41,6 +45,8 @@ void ftPikachu_OnItemVisible(HSD_GObj *fighter_gobj) {
 void ftPikachu_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1) {
     Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
 }
+
+#include <melee/ft/ftparts.h>
 
 void ftPikachu_8012467C(HSD_GObj* fighter_gobj) {
     s32 unused[2];

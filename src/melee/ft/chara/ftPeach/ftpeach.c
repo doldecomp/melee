@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftPeach/ftpeach.h>
 
-#include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+
 
 void ftPeach_OnDeath(HSD_GObj* gobj)
 {
@@ -35,6 +36,11 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
     }
 }
 
+#include <melee/lb/lbmthp.h>
+#include <melee/ft/ftdata.h>
+#include <melee/it/enums.h>
+
+
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -58,6 +64,8 @@ void ftPeach_8011B704(HSD_GObj* fighter_gobj) {
     ftPeach_8011E2E8(fighter_gobj);
     ftPeach_8011CFA0(fighter_gobj);
 }
+
+#include <melee/ft/fighter.h>
 
 void ftPeach_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
