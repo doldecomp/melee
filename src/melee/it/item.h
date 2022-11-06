@@ -1352,9 +1352,6 @@ BOOL func_8026B4F0(HSD_GObj* item_gobj);
 // Get unknown float from 0x0 of item's special attributes
 f32 func_8026B54C(HSD_GObj* item_gobj);
 
-// Identical to 0x8026B54C but likely using a different itAttributes struct
-f32 func_8026B560(HSD_GObj* item_gobj);
-
 // Get unknown float from 0x4 of item's special attributes
 f32 func_8026B574(HSD_GObj* item_gobj);
 

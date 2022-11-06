@@ -726,7 +726,13 @@ void func_80087140(HSD_GObj* gobj)
     }
 }
 
+/**
+ * @require It_Kind
+*/
 #include <melee/it/enums.h>
+
+#include <melee/it/item.h>
+#include <melee/it/item2.h>
 
 void func_800871A8(HSD_GObj* fighter_gobj, HSD_GObj* item_gobj)
 {
