@@ -85,6 +85,7 @@ void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame);
 void _HSD_AObjForgetMemory(void);
+void HSD_ForeachAnim(unk_t, ...);
 
 inline f32 HSD_AObjGetEndFrame(HSD_AObj* aobj) {
     if (!aobj) {

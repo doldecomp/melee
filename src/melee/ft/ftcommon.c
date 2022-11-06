@@ -1625,6 +1625,8 @@ void func_8007F9B4(HSD_GObj* gobj)
     func_80081C88(gobj, fp->x34_scale.y);
 }
 
+#include <melee/it/code_8027CF30.h>
+
 void func_8007FA00(HSD_GObj* gobj)
 {
     Fighter* fp;

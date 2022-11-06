@@ -3427,6 +3427,7 @@ HSD_JObj* func_801C4100(HSD_JObj* jobj)
     }
 }
 
+#include <melee/it/code_80266F3C.h>
 #include <melee/it/enums.h>
 
 s32 func_801C4210(void)
@@ -3589,6 +3590,8 @@ static void lbl_801C4640(HSD_GObj* gobj)
     func_803668EC(gobj->hsd_obj);
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
+
+#include <sysdolphin/baselib/aobj.h>
 
 static asm void func_801C466C(void)
 {

@@ -304,5 +304,6 @@ u32 HSD_Index2TexMtx(u32 index);
 u8 HSD_Index2TexMap(u32 index);
 u32 HSD_TexMap2Index(u8 mapid);
 HSD_TObj* allocShadowTObj();
+HSD_ImageDesc* HSD_ImageDescAlloc();
 
 #endif

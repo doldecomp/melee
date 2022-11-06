@@ -60,6 +60,7 @@ s32 ftSamus_801292E4(HSD_GObj* fighter_gobj) {
 
 #include <math.h>
 #include <melee/pl/player.h>
+#include <melee/it/code_8027CF30.h>
 
 void ftSamus_801293BC(HSD_GObj* fighter_gobj) {
     ftSamusAttributes* samus_attr;

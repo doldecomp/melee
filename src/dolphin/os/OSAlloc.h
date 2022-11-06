@@ -28,6 +28,7 @@ OSHeapHandle OSSetCurrentHeap(OSHeapHandle);
 void *OSAllocFromHeap(OSHeapHandle, u32);
 size_t OSCheckHeap(OSHeapHandle);
 void OSFreeToHeap(OSHeapHandle heap, void *ptr);
+unk_t OSAllocFromHeap(int, u32);
 
 #define OSAlloc(size) OSAllocFromHeap(__OSCurrHeap, (size))
 #define OSFree(ptr)   OSFreeToHeap(__OSCurrHeap, (ptr))
