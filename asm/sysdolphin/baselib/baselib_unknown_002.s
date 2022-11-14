@@ -9729,8 +9729,8 @@ lbl_803984DC:
 /* 803984F0 003950D0  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/R7sZa
-.global func_803984F4
-func_803984F4:
+.global psInitDataBankLoad
+psInitDataBankLoad:
 /* 803984F4 003950D4  7C 08 02 A6 */	mflr r0
 /* 803984F8 003950D8  90 01 00 04 */	stw r0, 4(r1)
 /* 803984FC 003950DC  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -9813,8 +9813,8 @@ lbl_80398600:
 /* 80398610 003951F0  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/t1XA8
-.global func_80398614
-func_80398614:
+.global psInitDataBankLocate
+psInitDataBankLocate:
 /* 80398614 003951F4  A0 C3 00 00 */	lhz r6, 0(r3)
 /* 80398618 003951F8  2C 06 00 40 */	cmpwi r6, 0x40
 /* 8039861C 003951FC  40 80 00 10 */	bge lbl_8039862C
@@ -10081,8 +10081,8 @@ lbl_80398990:
 /* 8039899C 0039557C  4E 80 00 20 */	blr 
 
 # https://decomp.me/scratch/0NHt6
-.global func_803989A0
-func_803989A0:
+.global psInitDataBank
+psInitDataBank:
 /* 803989A0 00395580  7C 08 02 A6 */	mflr r0
 /* 803989A4 00395584  90 01 00 04 */	stw r0, 4(r1)
 /* 803989A8 00395588  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -10097,13 +10097,13 @@ func_803989A0:
 /* 803989CC 003955AC  38 7C 00 00 */	addi r3, r28, 0
 /* 803989D0 003955B0  38 9D 00 00 */	addi r4, r29, 0
 /* 803989D4 003955B4  38 BF 00 00 */	addi r5, r31, 0
-/* 803989D8 003955B8  4B FF FC 3D */	bl func_80398614
+/* 803989D8 003955B8  4B FF FC 3D */	bl psInitDataBankLocate
 /* 803989DC 003955BC  38 7B 00 00 */	addi r3, r27, 0
 /* 803989E0 003955C0  38 9C 00 00 */	addi r4, r28, 0
 /* 803989E4 003955C4  38 BD 00 00 */	addi r5, r29, 0
 /* 803989E8 003955C8  38 DE 00 00 */	addi r6, r30, 0
 /* 803989EC 003955CC  38 FF 00 00 */	addi r7, r31, 0
-/* 803989F0 003955D0  4B FF FB 05 */	bl func_803984F4
+/* 803989F0 003955D0  4B FF FB 05 */	bl psInitDataBankLoad
 lbl_803989F4:
 /* 803989F4 003955D4  BB 61 00 24 */	lmw r27, 0x24(r1)
 /* 803989F8 003955D8  80 01 00 3C */	lwz r0, 0x3c(r1)

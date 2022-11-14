@@ -51,7 +51,7 @@ typedef struct
 /* 003B6208 */ extern f32 lbl_803B9628[12];
 /* 0039CC68 */ void psDispParticles(s32, u32);
 /* 0039C850 */ unk_t func_8039FC70(s32, u8, unk_t *, unk_t *);
-/* 0039C754 */ void func_8039FB74(unk_t, unk_t, unk_t);
-/* 0039C608 */ void func_8039FA28(unk_t, unk_t, unk_t);
-/* 0039C47C */ void func_8039F89C(unk_t, f32 *, f32 *, f32 *);
-/* 0039C36C */ void func_8039F78C(s32);
+/* 0039C754 */ void getColorMatAmb(unk_t, unk_t, unk_t);
+/* 0039C608 */ void getColorPrimEnv(unk_t, unk_t, unk_t);
+/* 0039C47C */ void calcTornadoLastPos(unk_t, f32 *, f32 *, f32 *);
+/* 0039C36C */ void setVtxDesc(s32);

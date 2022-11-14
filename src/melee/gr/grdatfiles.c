@@ -23,7 +23,7 @@ void func_801C5FC0(HSD_Archive* archive, void* data, u32 length)
     map_ptcl = HSD_ArchiveGetPublicAddress(archive, "map_ptcl");
     map_texg = HSD_ArchiveGetPublicAddress(archive, "map_texg");
     if (map_ptcl != NULL && map_texg != NULL) {
-        func_80398614(map_ptcl, map_texg, 0);
+        psInitDataBankLocate(map_ptcl, map_texg, 0);
     }
 }
 
@@ -55,9 +55,9 @@ void func_801C6038(void* arg0, s32 arg1, s32 arg2)
         temp_r3->unk0 = sp14;
         if (stage_info.x6B8 != NULL && stage_info.x6BC != NULL) {
             if (phi_r28 != 0) {
-                func_803984F4(0x40, stage_info.x6B8, stage_info.x6BC, 0, 0);
+                psInitDataBankLoad(0x40, stage_info.x6B8, stage_info.x6BC, 0, 0);
             } else {
-                func_803989A0(0x40, stage_info.x6B8, stage_info.x6BC, 0, 0);
+                psInitDataBank(0x40, stage_info.x6B8, stage_info.x6BC, 0, 0);
             }
         }
         func_801C6228(temp_r3->unk4);

@@ -136,8 +136,6 @@ typedef struct _baselib_Unk18
 /* 00395AEC */ extern void func_80398F0C(s32, s32, f32, s32, s32, s32, s32, s32);
 /* 003957E4 */ extern void func_80398C04(BOOL, s32, s32, s32, s32, s32, s32, s32);
 /* 003955E8 */ extern void func_80398A08();
-/* 003951F4 */ extern void func_80398614(baselib_Unk5 *, s32 *, u32, s32, baselib_Unk6 *);
-/* 003950D4 */ extern void func_803984F4(s32, baselib_Unk8 *, baselib_Unk9 *, s32, baselib_Unk10 *);
 /* 00394F84 */ extern void func_803983A4(HSD_JObj *);
 /* 00394F84 */ extern void func_803983A4(HSD_JObj *);
 /* 00394EF0 */ extern HSD_GObj *func_80398310(s32, s32, s32, u32);
