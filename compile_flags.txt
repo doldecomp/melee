@@ -1,0 +1,10 @@
+-xc
+-std=c99
+-nostdinc
+-Isrc
+-Iinclude
+-Wall
+-Wextra
+-Wno-unknown-pragmas
+-Wno-unused-variable
+-Wno-typedef-redefinition
