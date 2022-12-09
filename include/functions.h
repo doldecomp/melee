@@ -835,7 +835,7 @@ void func_8037EF28(Quaternion *, Quaternion *, Quaternion *, f32);
 void func_803881E4(void);
 void HSD_Panic(char *, u32, char *);
 
-void func_8038FD54(struct _HSD_GObj *, void (*)(struct _HSD_GObj *), s32);
+struct _HSD_GObjProc* func_8038FD54(struct _HSD_GObj *, void (*)(struct _HSD_GObj *), u8);
 
 void func_80390228(struct _HSD_GObj *);
 
