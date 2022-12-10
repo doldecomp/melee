@@ -48,7 +48,6 @@ struct DVDFileInfo
 	/*0x00*/ DVDCommandBlock cb;
     /*0x30*/ u32 startAddr;
     /*0x34*/ u32 length;
-    /*0x38*/ DVDCallback callback;
 };
 
 void DVDInit(void);
@@ -57,7 +56,7 @@ BOOL DVDClose(DVDFileInfo *);
 BOOL DVDChangeDir(char *);
 BOOL DVDFastOpen(s32 entrynum, DVDFileInfo *fileInfo);
 BOOL DVDReadAsyncPrio(DVDFileInfo *fileInfo, void *addr, s32 length, s32 offset, DVDCallback callback, s32 prio);
-s32 DVDConvertPathToEntrynum(char *pathPtr);
+s32 DVDConvertPathToEntrynum(const char* pathPtr);
 s32 DVDCancel(DVDCommandBlock *block);
 s32 DVDGetDriveStatus(void);
 
