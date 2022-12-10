@@ -4,8 +4,8 @@
 
 .global TRKSaveExtended1Block
 TRKSaveExtended1Block:
-/* 8032A868 00327448  3C 40 80 4A */	lis r2, lbl_804A4C98@h
-/* 8032A86C 0032744C  60 42 4C 98 */	ori r2, r2, lbl_804A4C98@l
+/* 8032A868 00327448  3C 40 80 4A */	lis r2, gTRKCPUState@h
+/* 8032A86C 0032744C  60 42 4C 98 */	ori r2, r2, gTRKCPUState@l
 /* 8032A870 00327450  7E 00 04 A6 */	mfsr r16, 0
 /* 8032A874 00327454  7E 21 04 A6 */	mfsr r17, 1
 /* 8032A878 00327458  7E 42 04 A6 */	mfsr r18, 2
@@ -119,10 +119,10 @@ lbl_8032AA1C:
 
 .global TRKRestoreExtended1Block
 TRKRestoreExtended1Block:
-/* 8032AA20 00327600  3C 40 80 4A */	lis r2, lbl_804A4C98@h
-/* 8032AA24 00327604  60 42 4C 98 */	ori r2, r2, lbl_804A4C98@l
-/* 8032AA28 00327608  3C A0 80 40 */	lis r5, lbl_80400848@h
-/* 8032AA2C 0032760C  60 A5 08 48 */	ori r5, r5, lbl_80400848@l
+/* 8032AA20 00327600  3C 40 80 4A */	lis r2, gTRKCPUState@h
+/* 8032AA24 00327604  60 42 4C 98 */	ori r2, r2, gTRKCPUState@l
+/* 8032AA28 00327608  3C A0 80 40 */	lis r5, gTRKRestoreFlags@h
+/* 8032AA2C 0032760C  60 A5 08 48 */	ori r5, r5, gTRKRestoreFlags@l
 /* 8032AA30 00327610  88 65 00 00 */	lbz r3, 0(r5)
 /* 8032AA34 00327614  88 C5 00 01 */	lbz r6, 1(r5)
 /* 8032AA38 00327618  38 00 00 00 */	li r0, 0

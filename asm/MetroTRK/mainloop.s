@@ -44,11 +44,11 @@ lbl_80326778:
 .global TRKNubMainLoop
 TRKNubMainLoop:
 /* 80326788 00323368  7C 08 02 A6 */	mflr r0
-/* 8032678C 0032336C  3C 60 80 4A */	lis r3, lbl_804A4B3C@ha
+/* 8032678C 0032336C  3C 60 80 4A */	lis r3, gTRKInputPendingPtr@ha
 /* 80326790 00323370  90 01 00 04 */	stw r0, 4(r1)
 /* 80326794 00323374  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80326798 00323378  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8032679C 0032337C  3B E3 4B 3C */	addi r31, r3, lbl_804A4B3C@l
+/* 8032679C 0032337C  3B E3 4B 3C */	addi r31, r3, gTRKInputPendingPtr@l
 /* 803267A0 00323380  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 803267A4 00323384  3B C0 00 00 */	li r30, 0
 /* 803267A8 00323388  93 A1 00 14 */	stw r29, 0x14(r1)

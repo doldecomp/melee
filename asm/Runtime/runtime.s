@@ -5,8 +5,8 @@
 .global __cvt_fp2unsigned
 __cvt_fp2unsigned:
 /* 803228C0 0031F4A0  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 803228C4 0031F4A4  3C 80 80 3B */	lis r4, lbl_803B8B90@h
-/* 803228C8 0031F4A8  60 84 8B 90 */	ori r4, r4, lbl_803B8B90@l
+/* 803228C4 0031F4A4  3C 80 80 3B */	lis r4, __constants@h
+/* 803228C8 0031F4A8  60 84 8B 90 */	ori r4, r4, __constants@l
 /* 803228CC 0031F4AC  38 60 00 00 */	li r3, 0
 /* 803228D0 0031F4B0  C8 04 00 00 */	lfd f0, 0(r4)
 /* 803228D4 0031F4B4  C8 64 00 08 */	lfd f3, 8(r4)
@@ -499,8 +499,8 @@ lbl_80322F18:
 
 .section .rodata
     .balign 8
-.global lbl_803B8B90
-lbl_803B8B90:
+.global __constants
+__constants:
 	.double 0
     .double 4.294967296E9
     .double 2.147483648E9
