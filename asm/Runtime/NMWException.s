@@ -32,8 +32,8 @@ __unregister_fragment:
 /* 80322764 0031F344  2C 03 00 01 */	cmpwi r3, 1
 /* 80322768 0031F348  40 80 00 24 */	bge lbl_8032278C
 /* 8032276C 0031F34C  1C 83 00 0C */	mulli r4, r3, 0xc
-/* 80322770 0031F350  3C 60 80 4A */	lis r3, lbl_804A2F38@ha
-/* 80322774 0031F354  38 03 2F 38 */	addi r0, r3, lbl_804A2F38@l
+/* 80322770 0031F350  3C 60 80 4A */	lis r3, fragmentinfo@ha
+/* 80322774 0031F354  38 03 2F 38 */	addi r0, r3, fragmentinfo@l
 /* 80322778 0031F358  7C 60 22 14 */	add r3, r0, r4
 /* 8032277C 0031F35C  38 00 00 00 */	li r0, 0
 /* 80322780 0031F360  90 03 00 00 */	stw r0, 0(r3)
@@ -44,8 +44,8 @@ lbl_8032278C:
 
 .global __register_fragment
 __register_fragment:
-/* 80322790 0031F370  3C A0 80 4A */	lis r5, lbl_804A2F38@ha
-/* 80322794 0031F374  38 A5 2F 38 */	addi r5, r5, lbl_804A2F38@l
+/* 80322790 0031F370  3C A0 80 4A */	lis r5, fragmentinfo@ha
+/* 80322794 0031F374  38 A5 2F 38 */	addi r5, r5, fragmentinfo@l
 /* 80322798 0031F378  48 00 00 04 */	b lbl_8032279C
 lbl_8032279C:
 /* 8032279C 0031F37C  48 00 00 04 */	b lbl_803227A0
@@ -67,8 +67,8 @@ lbl_803227C8:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804A2F38
-lbl_804A2F38:
+.global fragmentinfo
+fragmentinfo:
 	.skip 0x10
 
 

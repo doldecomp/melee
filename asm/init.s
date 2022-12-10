@@ -19,19 +19,8 @@ TRK_memset:
 
 .global gTRKInterruptVectorTable
 gTRKInterruptVectorTable:
-/* 80003298 00000298  4D 65 74 72 */	.4byte 0x4D657472  /* unknown instruction */
-/* 8000329C 0000029C  6F 77 65 72 */	xoris r23, r27, 0x6572
-/* 800032A0 000002A0  6B 73 20 54 */	xori r19, r27, 0x2054
-/* 800032A4 000002A4  61 72 67 65 */	ori r18, r11, 0x6765
-/* 800032A8 000002A8  74 20 52 65 */	andis. r0, r1, 0x5265
-/* 800032AC 000002AC  73 69 64 65 */	andi. r9, r27, 0x6465
-/* 800032B0 000002B0  6E 74 20 4B */	xoris r20, r19, 0x204b
-/* 800032B4 000002B4  65 72 6E 65 */	oris r18, r11, 0x6e65
-/* 800032B8 000002B8  6C 20 66 6F */	xoris r0, r1, 0x666f
-/* 800032BC 000002BC  72 20 50 6F */	andi. r0, r17, 0x506f
-/* 800032C0 000002C0  77 65 72 50 */	andis. r5, r27, 0x7250
-lbl_800032C4:
-/* 800032C4 000002C4  43 00 00 00 */	.4byte 0x43000000  /* unknown instruction */
+    .asciz "Metrowerks Target Resident Kernel for PowerPC"
+    .balign 4
 /* 800032C8 000002C8  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
 /* 800032CC 000002CC  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
 /* 800032D0 000002D0  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */

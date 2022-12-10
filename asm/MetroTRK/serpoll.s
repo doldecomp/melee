@@ -111,9 +111,9 @@ TRKProcessInput:
 /* 8032763C 0032421C  3B E3 00 00 */	addi r31, r3, 0
 /* 80327640 00324220  38 61 00 08 */	addi r3, r1, 8
 /* 80327644 00324224  4B FF F4 59 */	bl TRKConstructEvent
-/* 80327648 00324228  3C 60 80 4A */	lis r3, lbl_804A4B28@ha
+/* 80327648 00324228  3C 60 80 4A */	lis r3, gTRKFramingState@ha
 /* 8032764C 0032422C  93 E1 00 10 */	stw r31, 0x10(r1)
-/* 80327650 00324230  38 83 4B 28 */	addi r4, r3, lbl_804A4B28@l
+/* 80327650 00324230  38 83 4B 28 */	addi r4, r3, gTRKFramingState@l
 /* 80327654 00324234  38 61 00 08 */	addi r3, r1, 8
 /* 80327658 00324238  38 00 FF FF */	li r0, -1
 /* 8032765C 0032423C  90 04 00 00 */	stw r0, 0(r4)
@@ -126,8 +126,8 @@ TRKProcessInput:
 
 .global TRKInitializeSerialHandler
 TRKInitializeSerialHandler:
-/* 80327678 00324258  3C 60 80 4A */	lis r3, lbl_804A4B28@ha
-/* 8032767C 0032425C  38 83 4B 28 */	addi r4, r3, lbl_804A4B28@l
+/* 80327678 00324258  3C 60 80 4A */	lis r3, gTRKFramingState@ha
+/* 8032767C 0032425C  38 83 4B 28 */	addi r4, r3, gTRKFramingState@l
 /* 80327680 00324260  38 00 FF FF */	li r0, -1
 /* 80327684 00324264  90 04 00 00 */	stw r0, 0(r4)
 /* 80327688 00324268  38 00 00 00 */	li r0, 0
