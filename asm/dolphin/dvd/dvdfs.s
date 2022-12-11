@@ -5,7 +5,7 @@
 .global __DVDFSInit
 __DVDFSInit:
 /* 80337934 00334514  3C 60 80 00 */	lis r3, 0x80000038@ha
-/* 80337938 00334518  90 6D BB D8 */	stw r3, lbl_804D7278@sda21(r13)
+/* 80337938 00334518  90 6D BB D8 */	stw r3, BootInfo@sda21(r13)
 /* 8033793C 0033451C  80 03 00 38 */	lwz r0, 0x80000038@l(r3)
 /* 80337940 00334520  90 0D BB DC */	stw r0, FstStart@sda21(r13)
 /* 80337944 00334524  80 6D BB DC */	lwz r3, FstStart@sda21(r13)
@@ -392,8 +392,7 @@ lbl_804D5B88:
 
 .section .sbss
     .balign 8
-.global lbl_804D7278
-lbl_804D7278:
+BootInfo:
 	.skip 0x4
 .global FstStart
 FstStart:
@@ -410,3 +409,6 @@ currentDirectory:
 .global __DVDLongFileNameFlag
 __DVDLongFileNameFlag:
 	.skip 0x4
+.global __DVDThreadQueue
+__DVDThreadQueue:
+	.skip 0x8

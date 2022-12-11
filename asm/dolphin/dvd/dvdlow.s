@@ -5,14 +5,14 @@
 .global __DVDInitWA
 __DVDInitWA:
 /* 80336AE0 003336C0  7C 08 02 A6 */	mflr r0
-/* 80336AE4 003336C4  3C 60 80 4A */	lis r3, lbl_804A7488@ha
+/* 80336AE4 003336C4  3C 60 80 4A */	lis r3, CommandList@ha
 /* 80336AE8 003336C8  90 01 00 04 */	stw r0, 4(r1)
 /* 80336AEC 003336CC  38 00 00 00 */	li r0, 0
 /* 80336AF0 003336D0  38 80 00 00 */	li r4, 0
 /* 80336AF4 003336D4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80336AF8 003336D8  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 80336AF8 003336D8  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 /* 80336AFC 003336DC  38 00 FF FF */	li r0, -1
-/* 80336B00 003336E0  90 03 74 88 */	stw r0, lbl_804A7488@l(r3)
+/* 80336B00 003336E0  90 03 74 88 */	stw r0, CommandList@l(r3)
 /* 80336B04 003336E4  38 60 00 00 */	li r3, 0
 /* 80336B08 003336E8  48 00 0D E9 */	bl __DVDLowSetWAType
 /* 80336B0C 003336EC  48 00 CC 15 */	bl OSInitAlarm
@@ -24,12 +24,12 @@ __DVDInitWA:
 .global __DVDInterruptHandler
 __DVDInterruptHandler:
 /* 80336B20 00333700  7C 08 02 A6 */	mflr r0
-/* 80336B24 00333704  3C 60 80 4A */	lis r3, lbl_804A7488@ha
+/* 80336B24 00333704  3C 60 80 4A */	lis r3, CommandList@ha
 /* 80336B28 00333708  90 01 00 04 */	stw r0, 4(r1)
 /* 80336B2C 0033370C  94 21 FD 18 */	stwu r1, -0x2e8(r1)
 /* 80336B30 00333710  93 E1 02 E4 */	stw r31, 0x2e4(r1)
 /* 80336B34 00333714  93 C1 02 E0 */	stw r30, 0x2e0(r1)
-/* 80336B38 00333718  3B C3 74 88 */	addi r30, r3, lbl_804A7488@l
+/* 80336B38 00333718  3B C3 74 88 */	addi r30, r3, CommandList@l
 /* 80336B3C 0033371C  38 7E 00 68 */	addi r3, r30, 0x68
 /* 80336B40 00333720  93 A1 02 DC */	stw r29, 0x2dc(r1)
 /* 80336B44 00333724  3B A0 00 00 */	li r29, 0
@@ -161,15 +161,15 @@ lbl_80336CF8:
 lbl_80336D10:
 /* 80336D10 003338F0  57 A0 07 FF */	clrlwi. r0, r29, 0x1f
 /* 80336D14 003338F4  41 82 00 80 */	beq lbl_80336D94
-/* 80336D18 003338F8  80 0D BB D4 */	lwz r0, lbl_804D7274@sda21(r13)
+/* 80336D18 003338F8  80 0D BB D4 */	lwz r0, NextCommandNumber@sda21(r13)
 /* 80336D1C 003338FC  1C 00 00 14 */	mulli r0, r0, 0x14
 /* 80336D20 00333900  7C 7E 00 2E */	lwzx r3, r30, r0
 /* 80336D24 00333904  2C 03 00 01 */	cmpwi r3, 1
 /* 80336D28 00333908  40 82 00 30 */	bne lbl_80336D58
-/* 80336D2C 0033390C  80 6D BB D4 */	lwz r3, lbl_804D7274@sda21(r13)
+/* 80336D2C 0033390C  80 6D BB D4 */	lwz r3, NextCommandNumber@sda21(r13)
 /* 80336D30 00333910  7C DE 02 14 */	add r6, r30, r0
 /* 80336D34 00333914  38 03 00 01 */	addi r0, r3, 1
-/* 80336D38 00333918  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 80336D38 00333918  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 /* 80336D3C 0033391C  80 66 00 04 */	lwz r3, 4(r6)
 /* 80336D40 00333920  80 86 00 08 */	lwz r4, 8(r6)
 /* 80336D44 00333924  80 A6 00 0C */	lwz r5, 0xc(r6)
@@ -180,10 +180,10 @@ lbl_80336D10:
 lbl_80336D58:
 /* 80336D58 00333938  2C 03 00 02 */	cmpwi r3, 2
 /* 80336D5C 0033393C  40 82 00 28 */	bne lbl_80336D84
-/* 80336D60 00333940  80 6D BB D4 */	lwz r3, lbl_804D7274@sda21(r13)
+/* 80336D60 00333940  80 6D BB D4 */	lwz r3, NextCommandNumber@sda21(r13)
 /* 80336D64 00333944  7C 9E 02 14 */	add r4, r30, r0
 /* 80336D68 00333948  38 03 00 01 */	addi r0, r3, 1
-/* 80336D6C 0033394C  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 80336D6C 0033394C  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 /* 80336D70 00333950  80 64 00 0C */	lwz r3, 0xc(r4)
 /* 80336D74 00333954  80 84 00 10 */	lwz r4, 0x10(r4)
 /* 80336D78 00333958  48 00 05 B9 */	bl DVDLowSeek
@@ -199,7 +199,7 @@ lbl_80336D94:
 /* 80336D94 00333974  38 00 FF FF */	li r0, -1
 /* 80336D98 00333978  90 1E 00 00 */	stw r0, 0(r30)
 /* 80336D9C 0033397C  38 00 00 00 */	li r0, 0
-/* 80336DA0 00333980  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 80336DA0 00333980  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 lbl_80336DA4:
 /* 80336DA4 00333984  38 61 00 10 */	addi r3, r1, 0x10
 /* 80336DA8 00333988  48 00 E4 AD */	bl OSClearContext
@@ -207,10 +207,10 @@ lbl_80336DA4:
 /* 80336DB0 00333990  48 00 E2 DD */	bl OSSetCurrentContext
 /* 80336DB4 00333994  28 1D 00 00 */	cmplwi r29, 0
 /* 80336DB8 00333998  41 82 00 2C */	beq lbl_80336DE4
-/* 80336DBC 0033399C  81 8D BB 98 */	lwz r12, lbl_804D7238@sda21(r13)
+/* 80336DBC 0033399C  81 8D BB 98 */	lwz r12, Callback@sda21(r13)
 /* 80336DC0 003339A0  38 00 00 00 */	li r0, 0
 /* 80336DC4 003339A4  28 0C 00 00 */	cmplwi r12, 0
-/* 80336DC8 003339A8  90 0D BB 98 */	stw r0, lbl_804D7238@sda21(r13)
+/* 80336DC8 003339A8  90 0D BB 98 */	stw r0, Callback@sda21(r13)
 /* 80336DCC 003339AC  41 82 00 10 */	beq lbl_80336DDC
 /* 80336DD0 003339B0  7D 88 03 A6 */	mtlr r12
 /* 80336DD4 003339B4  38 7D 00 00 */	addi r3, r29, 0
@@ -232,21 +232,22 @@ lbl_80336DF4:
 /* 80336E08 003339E8  83 81 02 D8 */	lwz r28, 0x2d8(r1)
 /* 80336E0C 003339EC  38 21 02 E8 */	addi r1, r1, 0x2e8
 /* 80336E10 003339F0  4E 80 00 20 */	blr 
-lbl_80336E14:
+
+AlarmHandler:
 /* 80336E14 003339F4  7C 08 02 A6 */	mflr r0
-/* 80336E18 003339F8  3C 60 80 4A */	lis r3, lbl_804A7488@ha
+/* 80336E18 003339F8  3C 60 80 4A */	lis r3, CommandList@ha
 /* 80336E1C 003339FC  90 01 00 04 */	stw r0, 4(r1)
-/* 80336E20 00333A00  38 83 74 88 */	addi r4, r3, lbl_804A7488@l
+/* 80336E20 00333A00  38 83 74 88 */	addi r4, r3, CommandList@l
 /* 80336E24 00333A04  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80336E28 00333A08  80 0D BB D4 */	lwz r0, lbl_804D7274@sda21(r13)
+/* 80336E28 00333A08  80 0D BB D4 */	lwz r0, NextCommandNumber@sda21(r13)
 /* 80336E2C 00333A0C  1C 00 00 14 */	mulli r0, r0, 0x14
 /* 80336E30 00333A10  7C 64 00 2E */	lwzx r3, r4, r0
 /* 80336E34 00333A14  2C 03 00 01 */	cmpwi r3, 1
 /* 80336E38 00333A18  40 82 00 2C */	bne lbl_80336E64
-/* 80336E3C 00333A1C  80 6D BB D4 */	lwz r3, lbl_804D7274@sda21(r13)
+/* 80336E3C 00333A1C  80 6D BB D4 */	lwz r3, NextCommandNumber@sda21(r13)
 /* 80336E40 00333A20  7C C4 02 14 */	add r6, r4, r0
 /* 80336E44 00333A24  38 03 00 01 */	addi r0, r3, 1
-/* 80336E48 00333A28  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 80336E48 00333A28  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 /* 80336E4C 00333A2C  80 66 00 04 */	lwz r3, 4(r6)
 /* 80336E50 00333A30  80 86 00 08 */	lwz r4, 8(r6)
 /* 80336E54 00333A34  80 A6 00 0C */	lwz r5, 0xc(r6)
@@ -256,10 +257,10 @@ lbl_80336E14:
 lbl_80336E64:
 /* 80336E64 00333A44  2C 03 00 02 */	cmpwi r3, 2
 /* 80336E68 00333A48  40 82 00 20 */	bne lbl_80336E88
-/* 80336E6C 00333A4C  80 6D BB D4 */	lwz r3, lbl_804D7274@sda21(r13)
+/* 80336E6C 00333A4C  80 6D BB D4 */	lwz r3, NextCommandNumber@sda21(r13)
 /* 80336E70 00333A50  7C 84 02 14 */	add r4, r4, r0
 /* 80336E74 00333A54  38 03 00 01 */	addi r0, r3, 1
-/* 80336E78 00333A58  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 80336E78 00333A58  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 /* 80336E7C 00333A5C  80 64 00 0C */	lwz r3, 0xc(r4)
 /* 80336E80 00333A60  80 84 00 10 */	lwz r4, 0x10(r4)
 /* 80336E84 00333A64  48 00 04 AD */	bl DVDLowSeek
@@ -268,7 +269,8 @@ lbl_80336E88:
 /* 80336E8C 00333A6C  38 21 00 08 */	addi r1, r1, 8
 /* 80336E90 00333A70  7C 08 03 A6 */	mtlr r0
 /* 80336E94 00333A74  4E 80 00 20 */	blr 
-lbl_80336E98:
+
+AlarmHandlerForTimeout:
 /* 80336E98 00333A78  7C 08 02 A6 */	mflr r0
 /* 80336E9C 00333A7C  38 60 04 00 */	li r3, 0x400
 /* 80336EA0 00333A80  90 01 00 04 */	stw r0, 4(r1)
@@ -280,10 +282,10 @@ lbl_80336E98:
 /* 80336EB8 00333A98  48 00 E3 9D */	bl OSClearContext
 /* 80336EBC 00333A9C  38 61 00 10 */	addi r3, r1, 0x10
 /* 80336EC0 00333AA0  48 00 E1 CD */	bl OSSetCurrentContext
-/* 80336EC4 00333AA4  81 8D BB 98 */	lwz r12, lbl_804D7238@sda21(r13)
+/* 80336EC4 00333AA4  81 8D BB 98 */	lwz r12, Callback@sda21(r13)
 /* 80336EC8 00333AA8  38 00 00 00 */	li r0, 0
 /* 80336ECC 00333AAC  28 0C 00 00 */	cmplwi r12, 0
-/* 80336ED0 00333AB0  90 0D BB 98 */	stw r0, lbl_804D7238@sda21(r13)
+/* 80336ED0 00333AB0  90 0D BB 98 */	stw r0, Callback@sda21(r13)
 /* 80336ED4 00333AB4  41 82 00 10 */	beq lbl_80336EE4
 /* 80336ED8 00333AB8  7D 88 03 A6 */	mtlr r12
 /* 80336EDC 00333ABC  38 60 00 10 */	li r3, 0x10
@@ -314,9 +316,9 @@ Read:
 /* 80336F30 00333B10  3B 83 00 00 */	addi r28, r3, 0
 /* 80336F34 00333B14  90 0D BB 90 */	stw r0, StopAtNextInt@sda21(r13)
 /* 80336F38 00333B18  38 00 00 01 */	li r0, 1
-/* 80336F3C 00333B1C  90 CD BB 98 */	stw r6, lbl_804D7238@sda21(r13)
-/* 80336F40 00333B20  3C C0 80 4A */	lis r6, lbl_804A7488@ha
-/* 80336F44 00333B24  3B E6 74 88 */	addi r31, r6, lbl_804A7488@l
+/* 80336F3C 00333B1C  90 CD BB 98 */	stw r6, Callback@sda21(r13)
+/* 80336F40 00333B20  3C C0 80 4A */	lis r6, CommandList@ha
+/* 80336F44 00333B24  3B E6 74 88 */	addi r31, r6, CommandList@l
 /* 80336F48 00333B28  90 0D BB D0 */	stw r0, lbl_804D7270@sda21(r13)
 /* 80336F4C 00333B2C  48 01 54 C5 */	bl __OSGetSystemTime
 /* 80336F50 00333B30  90 8D BB CC */	stw r4, lbl_804D726C@sda21(r13)
@@ -342,8 +344,8 @@ Read:
 /* 80336FA0 00333B80  54 00 F0 BE */	srwi r0, r0, 2
 /* 80336FA4 00333B84  1F C0 00 14 */	mulli r30, r0, 0x14
 /* 80336FA8 00333B88  48 00 C7 C5 */	bl OSCreateAlarm
-/* 80336FAC 00333B8C  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 80336FB0 00333B90  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 80336FAC 00333B8C  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 80336FB0 00333B90  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 80336FB4 00333B94  38 DE 00 00 */	addi r6, r30, 0
 /* 80336FB8 00333B98  38 7F 00 68 */	addi r3, r31, 0x68
 /* 80336FBC 00333B9C  38 A0 00 00 */	li r5, 0
@@ -356,8 +358,8 @@ lbl_80336FC8:
 /* 80336FD4 00333BB4  54 00 F0 BE */	srwi r0, r0, 2
 /* 80336FD8 00333BB8  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 80336FDC 00333BBC  48 00 C7 91 */	bl OSCreateAlarm
-/* 80336FE0 00333BC0  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 80336FE4 00333BC4  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 80336FE0 00333BC0  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 80336FE4 00333BC4  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 80336FE8 00333BC8  38 DE 00 00 */	addi r6, r30, 0
 /* 80336FEC 00333BCC  38 7F 00 68 */	addi r3, r31, 0x68
 /* 80336FF0 00333BD0  38 A0 00 00 */	li r5, 0
@@ -375,10 +377,10 @@ lbl_80336FF8:
 .global SeekTwiceBeforeRead
 SeekTwiceBeforeRead:
 /* 80337018 00333BF8  7C 08 02 A6 */	mflr r0
-/* 8033701C 00333BFC  3C E0 80 4A */	lis r7, lbl_804A7488@ha
+/* 8033701C 00333BFC  3C E0 80 4A */	lis r7, CommandList@ha
 /* 80337020 00333C00  90 01 00 04 */	stw r0, 4(r1)
 /* 80337024 00333C04  54 A8 00 21 */	rlwinm. r8, r5, 0, 0, 0x10
-/* 80337028 00333C08  39 27 74 88 */	addi r9, r7, lbl_804A7488@l
+/* 80337028 00333C08  39 27 74 88 */	addi r9, r7, CommandList@l
 /* 8033702C 00333C0C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80337030 00333C10  40 82 00 0C */	bne lbl_8033703C
 /* 80337034 00333C14  39 40 00 00 */	li r10, 0
@@ -402,7 +404,7 @@ lbl_80337044:
 /* 80337074 00333C54  90 A9 00 20 */	stw r5, 0x20(r9)
 /* 80337078 00333C58  90 C9 00 24 */	stw r6, 0x24(r9)
 /* 8033707C 00333C5C  90 E9 00 28 */	stw r7, 0x28(r9)
-/* 80337080 00333C60  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 80337080 00333C60  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 /* 80337084 00333C64  48 00 02 AD */	bl DVDLowSeek
 /* 80337088 00333C68  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8033708C 00333C6C  38 21 00 08 */	addi r1, r1, 8
@@ -418,8 +420,8 @@ DVDLowRead:
 /* 803370A8 00333C88  BE C1 00 18 */	stmw r22, 0x18(r1)
 /* 803370AC 00333C8C  3B 24 00 00 */	addi r25, r4, 0
 /* 803370B0 00333C90  38 87 60 00 */	addi r4, r7, 0xCC006000@l
-/* 803370B4 00333C94  3C E0 80 4A */	lis r7, lbl_804A7488@ha
-/* 803370B8 00333C98  3B E7 74 88 */	addi r31, r7, lbl_804A7488@l
+/* 803370B4 00333C94  3C E0 80 4A */	lis r7, CommandList@ha
+/* 803370B8 00333C98  3B E7 74 88 */	addi r31, r7, CommandList@l
 /* 803370BC 00333C9C  3B 03 00 00 */	addi r24, r3, 0
 /* 803370C0 00333CA0  3B 45 00 00 */	addi r26, r5, 0
 /* 803370C4 00333CA4  3B DF 00 CC */	addi r30, r31, 0xcc
@@ -435,7 +437,7 @@ DVDLowRead:
 /* 803370EC 00333CCC  90 1F 00 00 */	stw r0, 0(r31)
 /* 803370F0 00333CD0  38 00 00 00 */	li r0, 0
 /* 803370F4 00333CD4  38 78 00 00 */	addi r3, r24, 0
-/* 803370F8 00333CD8  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 803370F8 00333CD8  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 /* 803370FC 00333CDC  38 99 00 00 */	addi r4, r25, 0
 /* 80337100 00333CE0  38 BA 00 00 */	addi r5, r26, 0
 /* 80337104 00333CE4  38 DB 00 00 */	addi r6, r27, 0
@@ -499,7 +501,7 @@ lbl_803371BC:
 /* 803371C8 00333DA8  90 1F 00 00 */	stw r0, 0(r31)
 /* 803371CC 00333DAC  38 00 00 00 */	li r0, 0
 /* 803371D0 00333DB0  38 78 00 00 */	addi r3, r24, 0
-/* 803371D4 00333DB4  90 0D BB D4 */	stw r0, lbl_804D7274@sda21(r13)
+/* 803371D4 00333DB4  90 0D BB D4 */	stw r0, NextCommandNumber@sda21(r13)
 /* 803371D8 00333DB8  38 99 00 00 */	addi r4, r25, 0
 /* 803371DC 00333DBC  38 BA 00 00 */	addi r5, r26, 0
 /* 803371E0 00333DC0  38 DB 00 00 */	addi r6, r27, 0
@@ -544,7 +546,7 @@ lbl_8033721C:
 /* 80337274 00333E54  90 1F 00 00 */	stw r0, 0(r31)
 /* 80337278 00333E58  38 78 00 00 */	addi r3, r24, 0
 /* 8033727C 00333E5C  38 99 00 00 */	addi r4, r25, 0
-/* 80337280 00333E60  90 CD BB D4 */	stw r6, lbl_804D7274@sda21(r13)
+/* 80337280 00333E60  90 CD BB D4 */	stw r6, NextCommandNumber@sda21(r13)
 /* 80337284 00333E64  38 BA 00 00 */	addi r5, r26, 0
 /* 80337288 00333E68  38 DB 00 00 */	addi r6, r27, 0
 /* 8033728C 00333E6C  4B FF FC 7D */	bl Read
@@ -566,13 +568,13 @@ lbl_80337294:
 /* 803372C8 00333EA8  7C A9 28 10 */	subfc r5, r9, r5
 /* 803372CC 00333EAC  7C 88 31 10 */	subfe r4, r8, r6
 /* 803372D0 00333EB0  54 60 E8 FE */	srwi r0, r3, 3
-/* 803372D4 00333EB4  90 CD BB D4 */	stw r6, lbl_804D7274@sda21(r13)
+/* 803372D4 00333EB4  90 CD BB D4 */	stw r6, NextCommandNumber@sda21(r13)
 /* 803372D8 00333EB8  7E E5 00 14 */	addc r23, r5, r0
 /* 803372DC 00333EBC  7E C4 31 14 */	adde r22, r4, r6
 /* 803372E0 00333EC0  38 7F 00 40 */	addi r3, r31, 0x40
 /* 803372E4 00333EC4  48 00 C4 89 */	bl OSCreateAlarm
-/* 803372E8 00333EC8  3C 60 80 33 */	lis r3, lbl_80336E14@ha
-/* 803372EC 00333ECC  38 E3 6E 14 */	addi r7, r3, lbl_80336E14@l
+/* 803372E8 00333EC8  3C 60 80 33 */	lis r3, AlarmHandler@ha
+/* 803372EC 00333ECC  38 E3 6E 14 */	addi r7, r3, AlarmHandler@l
 /* 803372F0 00333ED0  38 D7 00 00 */	addi r6, r23, 0
 /* 803372F4 00333ED4  38 B6 00 00 */	addi r5, r22, 0
 /* 803372F8 00333ED8  38 7F 00 40 */	addi r3, r31, 0x40
@@ -600,7 +602,7 @@ DVDLowSeek:
 /* 8033733C 00333F1C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80337340 00333F20  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80337344 00333F24  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80337348 00333F28  90 8D BB 98 */	stw r4, lbl_804D7238@sda21(r13)
+/* 80337348 00333F28  90 8D BB 98 */	stw r4, Callback@sda21(r13)
 /* 8033734C 00333F2C  3C 80 CC 00 */	lis r4, 0xCC006000@ha
 /* 80337350 00333F30  38 84 60 00 */	addi r4, r4, 0xCC006000@l
 /* 80337354 00333F34  90 0D BB 90 */	stw r0, StopAtNextInt@sda21(r13)
@@ -618,8 +620,8 @@ DVDLowSeek:
 /* 80337384 00333F64  54 00 F0 BE */	srwi r0, r0, 2
 /* 80337388 00333F68  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 8033738C 00333F6C  48 00 C3 E1 */	bl OSCreateAlarm
-/* 80337390 00333F70  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 80337394 00333F74  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 80337390 00333F70  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 80337394 00333F74  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 80337398 00333F78  38 7F 00 00 */	addi r3, r31, 0
 /* 8033739C 00333F7C  38 DE 00 00 */	addi r6, r30, 0
 /* 803373A0 00333F80  38 A0 00 00 */	li r5, 0
@@ -635,7 +637,7 @@ DVDLowSeek:
 .global DVDLowWaitCoverClose
 DVDLowWaitCoverClose:
 /* 803373C4 00333FA4  38 00 00 01 */	li r0, 1
-/* 803373C8 00333FA8  90 6D BB 98 */	stw r3, lbl_804D7238@sda21(r13)
+/* 803373C8 00333FA8  90 6D BB 98 */	stw r3, Callback@sda21(r13)
 /* 803373CC 00333FAC  3C 60 CC 00 */	lis r3, 0xCC006000@ha
 /* 803373D0 00333FB0  90 0D BB AC */	stw r0, lbl_804D724C@sda21(r13)
 /* 803373D4 00333FB4  38 00 00 00 */	li r0, 0
@@ -658,7 +660,7 @@ DVDLowReadDiskID:
 /* 8033740C 00333FEC  3C A0 80 00 */	lis r5, 0x800000F8@ha
 /* 80337410 00333FF0  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80337414 00333FF4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80337418 00333FF8  90 8D BB 98 */	stw r4, lbl_804D7238@sda21(r13)
+/* 80337418 00333FF8  90 8D BB 98 */	stw r4, Callback@sda21(r13)
 /* 8033741C 00333FFC  3C 80 CC 00 */	lis r4, 0xCC006000@ha
 /* 80337420 00334000  38 E4 60 00 */	addi r7, r4, 0xCC006000@l
 /* 80337424 00334004  91 0D BB 90 */	stw r8, StopAtNextInt@sda21(r13)
@@ -676,8 +678,8 @@ DVDLowReadDiskID:
 /* 80337454 00334034  54 00 F0 BE */	srwi r0, r0, 2
 /* 80337458 00334038  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 8033745C 0033403C  48 00 C3 11 */	bl OSCreateAlarm
-/* 80337460 00334040  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 80337464 00334044  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 80337460 00334040  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 80337464 00334044  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 80337468 00334048  38 7F 00 00 */	addi r3, r31, 0
 /* 8033746C 0033404C  38 DE 00 00 */	addi r6, r30, 0
 /* 80337470 00334050  38 A0 00 00 */	li r5, 0
@@ -698,7 +700,7 @@ DVDLowStopMotor:
 /* 803374A0 00334080  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 803374A4 00334084  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 803374A8 00334088  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 803374AC 0033408C  90 6D BB 98 */	stw r3, lbl_804D7238@sda21(r13)
+/* 803374AC 0033408C  90 6D BB 98 */	stw r3, Callback@sda21(r13)
 /* 803374B0 00334090  3C 60 CC 00 */	lis r3, 0xCC006000@ha
 /* 803374B4 00334094  38 83 60 00 */	addi r4, r3, 0xCC006000@l
 /* 803374B8 00334098  90 0D BB 90 */	stw r0, StopAtNextInt@sda21(r13)
@@ -714,8 +716,8 @@ DVDLowStopMotor:
 /* 803374E0 003340C0  54 00 F0 BE */	srwi r0, r0, 2
 /* 803374E4 003340C4  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 803374E8 003340C8  48 00 C2 85 */	bl OSCreateAlarm
-/* 803374EC 003340CC  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 803374F0 003340D0  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 803374EC 003340CC  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 803374F0 003340D0  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 803374F4 003340D4  38 7F 00 00 */	addi r3, r31, 0
 /* 803374F8 003340D8  38 DE 00 00 */	addi r6, r30, 0
 /* 803374FC 003340DC  38 A0 00 00 */	li r5, 0
@@ -736,7 +738,7 @@ DVDLowRequestError:
 /* 8033752C 0033410C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80337530 00334110  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80337534 00334114  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80337538 00334118  90 6D BB 98 */	stw r3, lbl_804D7238@sda21(r13)
+/* 80337538 00334118  90 6D BB 98 */	stw r3, Callback@sda21(r13)
 /* 8033753C 0033411C  3C 60 CC 00 */	lis r3, 0xCC006000@ha
 /* 80337540 00334120  38 83 60 00 */	addi r4, r3, 0xCC006000@l
 /* 80337544 00334124  90 0D BB 90 */	stw r0, StopAtNextInt@sda21(r13)
@@ -752,8 +754,8 @@ DVDLowRequestError:
 /* 8033756C 0033414C  54 00 F0 BE */	srwi r0, r0, 2
 /* 80337570 00334150  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 80337574 00334154  48 00 C1 F9 */	bl OSCreateAlarm
-/* 80337578 00334158  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 8033757C 0033415C  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 80337578 00334158  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 8033757C 0033415C  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 80337580 00334160  38 7F 00 00 */	addi r3, r31, 0
 /* 80337584 00334164  38 DE 00 00 */	addi r6, r30, 0
 /* 80337588 00334168  38 A0 00 00 */	li r5, 0
@@ -776,7 +778,7 @@ DVDLowInquiry:
 /* 803375C0 003341A0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 803375C4 003341A4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 803375C8 003341A8  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 803375CC 003341AC  90 8D BB 98 */	stw r4, lbl_804D7238@sda21(r13)
+/* 803375CC 003341AC  90 8D BB 98 */	stw r4, Callback@sda21(r13)
 /* 803375D0 003341B0  3C 80 CC 00 */	lis r4, 0xCC006000@ha
 /* 803375D4 003341B4  38 E4 60 00 */	addi r7, r4, 0xCC006000@l
 /* 803375D8 003341B8  90 0D BB 90 */	stw r0, StopAtNextInt@sda21(r13)
@@ -794,8 +796,8 @@ DVDLowInquiry:
 /* 80337608 003341E8  54 00 F0 BE */	srwi r0, r0, 2
 /* 8033760C 003341EC  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 80337610 003341F0  48 00 C1 5D */	bl OSCreateAlarm
-/* 80337614 003341F4  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 80337618 003341F8  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 80337614 003341F4  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 80337618 003341F8  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 8033761C 003341FC  38 7F 00 00 */	addi r3, r31, 0
 /* 80337620 00334200  38 DE 00 00 */	addi r6, r30, 0
 /* 80337624 00334204  38 A0 00 00 */	li r5, 0
@@ -816,7 +818,7 @@ DVDLowAudioStream:
 /* 80337654 00334234  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80337658 00334238  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 8033765C 0033423C  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 80337660 00334240  90 CD BB 98 */	stw r6, lbl_804D7238@sda21(r13)
+/* 80337660 00334240  90 CD BB 98 */	stw r6, Callback@sda21(r13)
 /* 80337664 00334244  3C C0 CC 00 */	lis r6, 0xCC006000@ha
 /* 80337668 00334248  38 C6 60 00 */	addi r6, r6, 0xCC006000@l
 /* 8033766C 0033424C  90 0D BB 90 */	stw r0, StopAtNextInt@sda21(r13)
@@ -835,8 +837,8 @@ DVDLowAudioStream:
 /* 803376A0 00334280  54 00 F0 BE */	srwi r0, r0, 2
 /* 803376A4 00334284  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 803376A8 00334288  48 00 C0 C5 */	bl OSCreateAlarm
-/* 803376AC 0033428C  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 803376B0 00334290  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 803376AC 0033428C  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 803376B0 00334290  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 803376B4 00334294  38 7F 00 00 */	addi r3, r31, 0
 /* 803376B8 00334298  38 DE 00 00 */	addi r6, r30, 0
 /* 803376BC 0033429C  38 A0 00 00 */	li r5, 0
@@ -857,7 +859,7 @@ DVDLowRequestAudioStatus:
 /* 803376EC 003342CC  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 803376F0 003342D0  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 803376F4 003342D4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 803376F8 003342D8  90 8D BB 98 */	stw r4, lbl_804D7238@sda21(r13)
+/* 803376F8 003342D8  90 8D BB 98 */	stw r4, Callback@sda21(r13)
 /* 803376FC 003342DC  3C 80 CC 00 */	lis r4, 0xCC006000@ha
 /* 80337700 003342E0  38 84 60 00 */	addi r4, r4, 0xCC006000@l
 /* 80337704 003342E4  90 0D BB 90 */	stw r0, StopAtNextInt@sda21(r13)
@@ -873,8 +875,8 @@ DVDLowRequestAudioStatus:
 /* 8033772C 0033430C  54 00 F0 BE */	srwi r0, r0, 2
 /* 80337730 00334310  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 80337734 00334314  48 00 C0 39 */	bl OSCreateAlarm
-/* 80337738 00334318  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 8033773C 0033431C  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 80337738 00334318  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 8033773C 0033431C  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 80337740 00334320  38 7F 00 00 */	addi r3, r31, 0
 /* 80337744 00334324  38 DE 00 00 */	addi r6, r30, 0
 /* 80337748 00334328  38 A0 00 00 */	li r5, 0
@@ -896,7 +898,7 @@ DVDLowAudioBufferConfig:
 /* 8033777C 0033435C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80337780 00334360  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 80337784 00334364  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 80337788 00334368  90 AD BB 98 */	stw r5, lbl_804D7238@sda21(r13)
+/* 80337788 00334368  90 AD BB 98 */	stw r5, Callback@sda21(r13)
 /* 8033778C 0033436C  90 0D BB 90 */	stw r0, StopAtNextInt@sda21(r13)
 /* 80337790 00334370  41 82 00 08 */	beq lbl_80337798
 /* 80337794 00334374  3C 00 00 01 */	lis r0, 1
@@ -916,8 +918,8 @@ lbl_80337798:
 /* 803377C8 003343A8  54 00 F0 BE */	srwi r0, r0, 2
 /* 803377CC 003343AC  1F C0 00 0A */	mulli r30, r0, 0xa
 /* 803377D0 003343B0  48 00 BF 9D */	bl OSCreateAlarm
-/* 803377D4 003343B4  3C 60 80 33 */	lis r3, lbl_80336E98@ha
-/* 803377D8 003343B8  38 E3 6E 98 */	addi r7, r3, lbl_80336E98@l
+/* 803377D4 003343B4  3C 60 80 33 */	lis r3, AlarmHandlerForTimeout@ha
+/* 803377D8 003343B8  38 E3 6E 98 */	addi r7, r3, AlarmHandlerForTimeout@l
 /* 803377DC 003343BC  38 7F 00 00 */	addi r3, r31, 0
 /* 803377E0 003343C0  38 DE 00 00 */	addi r6, r30, 0
 /* 803377E4 003343C4  38 A0 00 00 */	li r5, 0
@@ -994,8 +996,8 @@ DVDLowClearCallback:
 /* 803378D8 003344B8  3C 60 CC 00 */	lis r3, 0xCC006004@ha
 /* 803378DC 003344BC  38 00 00 00 */	li r0, 0
 /* 803378E0 003344C0  90 03 60 04 */	stw r0, 0xCC006004@l(r3)
-/* 803378E4 003344C4  80 6D BB 98 */	lwz r3, lbl_804D7238@sda21(r13)
-/* 803378E8 003344C8  90 0D BB 98 */	stw r0, lbl_804D7238@sda21(r13)
+/* 803378E4 003344C4  80 6D BB 98 */	lwz r3, Callback@sda21(r13)
+/* 803378E8 003344C8  90 0D BB 98 */	stw r0, Callback@sda21(r13)
 /* 803378EC 003344CC  4E 80 00 20 */	blr 
 
 .global __DVDLowSetWAType
@@ -1021,8 +1023,8 @@ __DVDLowSetWAType:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804A7488
-lbl_804A7488:
+.global CommandList
+CommandList:
 	.skip 0x68
 .global lbl_804A74F0
 lbl_804A74F0:
@@ -1045,8 +1047,8 @@ StopAtNextInt:
 .global lbl_804D7234
 lbl_804D7234:
 	.skip 0x4
-.global lbl_804D7238
-lbl_804D7238:
+.global Callback
+Callback:
 	.skip 0x4
 .global lbl_804D723C
 lbl_804D723C:
@@ -1087,6 +1089,6 @@ lbl_804D726C:
 .global lbl_804D7270
 lbl_804D7270:
 	.skip 0x4
-.global lbl_804D7274
-lbl_804D7274:
+.global NextCommandNumber
+NextCommandNumber:
 	.skip 0x4
