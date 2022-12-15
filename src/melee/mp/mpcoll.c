@@ -24,6 +24,8 @@ void func_80041C78(void) {
     lbl_804D64A8 = 0;
 }
 
+char lbl_804D3948[2] = "0";
+
 // 80041C8C https://decomp.me/scratch/VvSaI
 void func_80041C8C(CollData* cd) {
     u32 unused[2];
@@ -47,7 +49,7 @@ void func_80041C8C(CollData* cd) {
                     OSReport("itkind=%d\n", itGetKind(cd->x0_gobj));
                 }
             }
-            __assert("mpcoll.c", 228, "0");
+            __assert("mpcoll.c", 228, lbl_804D3948);
         }
     }
     cd->x28_vec = cd->x4_vec;
@@ -601,7 +603,7 @@ void func_80042DB0(CollData* ecb, f32 time) {
         fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN
     ) {
         OSReport("error\n");
-        __assert("mpcoll.c", 1193, "0");
+        __assert("mpcoll.c", 1193, lbl_804D3948);
     }
 }
 
@@ -676,7 +678,7 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2) {
                     OSReport("itkind=%d\n", itGetKind(arg0->x0_gobj));
                 }
             }
-            __assert("mpcoll.c", 1374, "0");
+            __assert("mpcoll.c", 1374, lbl_804D3948);
         }
     }
 }

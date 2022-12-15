@@ -12575,6 +12575,7 @@ lbl_803BD250:
     .asciz "plbonusinline.h"
     .balign 4
 
+.global lbl_803BD260
 lbl_803BD260:
     .asciz "total != 0.0F"
     .balign 4
@@ -12630,5 +12631,6 @@ lbl_804D7F78:
 lbl_804D7F80:
 	.float 0.0
 	.float 0.0
+.global lbl_804D7F88
 lbl_804D7F88:
 	.double 4503599627370496.0
