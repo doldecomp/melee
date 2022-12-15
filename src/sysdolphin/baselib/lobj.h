@@ -42,8 +42,6 @@
 #define LOBJ_LIGHT_ATTN_NONE 0
 #define LOBJ_LIGHT_ATTN 1
 
-#define HSD_LObjGetType(o) (o->flags & 0x3)
-
 typedef struct _HSD_LightPoint {
     f32 cutoff;
     u32 point_func;
@@ -161,7 +159,7 @@ void HSD_LObjAnimAll(HSD_LObj *lobj);
 void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe);
 void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
 void HSD_LObjGetLightVector(HSD_LObj *lobj, VecPtr dir);
-void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess, u32 unused);
+void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess);
 
 BOOL HSD_LObjGetPosition(HSD_LObj*, Vec*);
 BOOL HSD_LObjGetInterest(HSD_LObj*, Vec*);
