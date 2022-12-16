@@ -15,7 +15,7 @@ asm OSTick OSGetTick(void)
     mftb r3, 0x10c
 }
 
-extern volatile OSTime OS_SYSTEM_TIME : 0x800030D8;
+extern volatile OSTime OS_SYSTEM_TIME AT_ADDRESS(0x800030D8);
 
 OSTime __OSGetSystemTime(void)
 {

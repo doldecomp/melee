@@ -28,8 +28,8 @@ u32 OSGetConsoleType(void)
 
 extern u32 OSGetResetCode(void);
 
-extern u32 BOOT_REGION_START : 0x812FDFF0;
-extern u32 BOOT_REGION_END : 0x812FDFEC;
+extern u32 BOOT_REGION_START AT_ADDRESS(0x812FDFF0);
+extern u32 BOOT_REGION_END AT_ADDRESS(0x812FDFEC);
 
 void ClearArena(void)
 {
@@ -685,7 +685,7 @@ asm void __OSPSInit(void)
 } // clang-format on
 #pragma pop
 
-extern volatile u32 __DIRegs[0x10] : 0xCC006000;
+extern volatile u32 __DIRegs[0x10] AT_ADDRESS(0xCC006000);
 
 #define DI_CONFIG_IDX 0x9
 #define DI_CONFIG_CONFIG_MASK 0x000000FF

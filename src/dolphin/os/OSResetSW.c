@@ -4,8 +4,8 @@
 
 typedef void (*OSResetCallback)(void);
 
-extern u8 GameChoice : 0x800030E3;
-extern vu32 __PIRegs[12] : 0xCC003000;
+extern u8 GameChoice AT_ADDRESS(0x800030E3);
+extern vu32 __PIRegs[12] AT_ADDRESS(0xCC003000);
 
 static OSResetCallback ResetCallback;
 static BOOL Down;

@@ -88,7 +88,7 @@ typedef struct Unk2 {
     u16 _2;
 } Unk2;
 
-volatile Unk2 DAT_cc002000 : 0xcc002000;
+extern volatile Unk2 DAT_cc002000 AT_ADDRESS(0xCC002000);
 
 typedef struct OSSram {
     u16 checkSum;
@@ -104,7 +104,7 @@ typedef struct OSSram {
 
 extern OSSram* __OSLockSram(void);
 
-OSThreadQueue __OSActiveThreadQueue : 0x800000DC;
+extern OSThreadQueue __OSActiveThreadQueue AT_ADDRESS(0x800000DC);
 
 BOOL __OSCallResetFunctions(u32 arg0)
 {
@@ -190,12 +190,12 @@ void OSResetSystem(int reset, u32 resetCode, BOOL forceMenu)
     __PADDisableRecalibration(disableRecalibration);
 }
 
-volatile u8 DAT_800030e2 : 0x800030e2;
+extern volatile u8 DAT_800030e2 AT_ADDRESS(0x800030E2);
 typedef struct Unk {
     u8 pad[0x24];
     u32 resetCode;
 } Unk;
-volatile Unk DAT_cc003000 : 0xcc003000;
+extern volatile Unk DAT_cc003000 AT_ADDRESS(0xCC003000);
 
 u32 OSGetResetCode(void)
 {

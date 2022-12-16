@@ -911,7 +911,7 @@ lbl_8034A0AC:
 
 extern volatile struct {
     u32 command, x4, x8;
-} SIRegs[] : 0xCC006400;
+} SIRegs[] AT_ADDRESS(0xCC006400);
 
 void SISetCommand(s32 index, s32 value)
 {

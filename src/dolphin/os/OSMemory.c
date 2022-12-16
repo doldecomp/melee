@@ -3,9 +3,9 @@
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSReset.h>
 
-extern volatile u32 Mem_Size : 0x80000028;
-extern volatile u32 Simulated_Mem : 0x800000F0;
-extern volatile u16 __MEMRegs[64] : 0xCC004000;
+extern volatile u32 Mem_Size AT_ADDRESS(0x80000028);
+extern volatile u32 Simulated_Mem AT_ADDRESS(0x800000F0);
+extern volatile u16 __MEMRegs[64] AT_ADDRESS(0xCC004000);
 extern OSErrorHandler __OSErrorTable[];
 
 static BOOL OnReset(BOOL);
