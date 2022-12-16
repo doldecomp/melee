@@ -54,8 +54,8 @@ BOOL OSDisableInterrupts(void);
 BOOL OSEnableInterrupts(void);
 BOOL OSRestoreInterrupts(BOOL);
 
-OSInterruptHandler __OSSetInterruptHandler(OSInterruptType, OSInterruptHandler);
-OSInterruptHandler __OSGetInterruptHandler(OSInterruptType);
+OSInterruptHandler __OSSetInterruptHandler(s16, OSInterruptHandler);
+OSInterruptHandler __OSGetInterruptHandler(s16);
 
 void __OSInterruptInit(void);
 

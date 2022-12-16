@@ -35,7 +35,7 @@ typedef struct
     u8 x20_pad[4];   // at 0x20
 } __GXFifoObj;
 
-typedef void (*GXTexRegionCallback)(void); // signature unknown
+typedef void* (*GXTexRegionCallback)(void); // signature unknown
 
 // https://github.com/kiwi515/open_rvl/blob/366b440e58f030aa0aacc9316d2717289d58fe16/include/GX/GXInit.h#L9-L41
 typedef struct
@@ -72,7 +72,9 @@ typedef struct
     GXTexRegionCallback callbacks[(0x1D0 - 0x1B0) / 4]; // at 0x1B0
     u32 x1D0[(0x204 - 0x1D0) / 4];                      // at 0x1D0
     u32 x204;                                           // at 0x204
-    u8 x208_pad[0x418 - 0x208];                         // at 0x208
+    u8 x208_pad[0x2D0 - 0x208];                         // at 0x208
+    struct { u32 unk[4]; } x2D0[(0x410 - 0x2D0) / 16];  // at 0x2D0
+    u32 x410, x414;
     u32 x418;                                           // at 0x418
     GXBool x41C;                                        // at 0x41C
     GXBool x41D;                                        // at 0x41D

@@ -4,54 +4,53 @@
 
 /* 0034502C */ extern void OSResetSystem(BOOL reset, u32 resetCode, BOOL forceMenu);
 
-static OSThreadQueue ResetFunctionQueue;
+typedef s32 (* OSResetFunction )(s32 final);
+typedef struct OSResetFunctionInfo OSResetFunctionInfo;
 
-#pragma push
-asm unk_t OSRegisterResetFunction()
-{ // clang-format off
-    nofralloc
-/* 80348310 00344EF0  80 AD BD 00 */	lwz r5, ResetFunctionQueue(r13)
-/* 80348314 00344EF4  48 00 00 08 */	b lbl_8034831C
-lbl_80348318:
-/* 80348318 00344EF8  80 A5 00 08 */	lwz r5, 8(r5)
-lbl_8034831C:
-/* 8034831C 00344EFC  28 05 00 00 */	cmplwi r5, 0
-/* 80348320 00344F00  41 82 00 14 */	beq lbl_80348334
-/* 80348324 00344F04  80 85 00 04 */	lwz r4, 4(r5)
-/* 80348328 00344F08  80 03 00 04 */	lwz r0, 4(r3)
-/* 8034832C 00344F0C  7C 04 00 40 */	cmplw r4, r0
-/* 80348330 00344F10  40 81 FF E8 */	ble lbl_80348318
-lbl_80348334:
-/* 80348334 00344F14  28 05 00 00 */	cmplwi r5, 0
-/* 80348338 00344F18  40 82 00 34 */	bne lbl_8034836C
-/* 8034833C 00344F1C  38 AD BD 00 */	addi r5, r13, ResetFunctionQueue
-/* 80348340 00344F20  84 85 00 04 */	lwzu r4, 4(r5)
-/* 80348344 00344F24  28 04 00 00 */	cmplwi r4, 0
-/* 80348348 00344F28  40 82 00 0C */	bne lbl_80348354
-/* 8034834C 00344F2C  90 6D BD 00 */	stw r3, ResetFunctionQueue(r13)
-/* 80348350 00344F30  48 00 00 08 */	b lbl_80348358
-lbl_80348354:
-/* 80348354 00344F34  90 64 00 08 */	stw r3, 8(r4)
-lbl_80348358:
-/* 80348358 00344F38  90 83 00 0C */	stw r4, 0xc(r3)
-/* 8034835C 00344F3C  38 00 00 00 */	li r0, 0
-/* 80348360 00344F40  90 03 00 08 */	stw r0, 8(r3)
-/* 80348364 00344F44  90 65 00 00 */	stw r3, 0(r5)
-/* 80348368 00344F48  4E 80 00 20 */	blr 
-lbl_8034836C:
-/* 8034836C 00344F4C  90 A3 00 08 */	stw r5, 8(r3)
-/* 80348370 00344F50  80 85 00 0C */	lwz r4, 0xc(r5)
-/* 80348374 00344F54  90 65 00 0C */	stw r3, 0xc(r5)
-/* 80348378 00344F58  28 04 00 00 */	cmplwi r4, 0
-/* 8034837C 00344F5C  90 83 00 0C */	stw r4, 0xc(r3)
-/* 80348380 00344F60  40 82 00 0C */	bne lbl_8034838C
-/* 80348384 00344F64  90 6D BD 00 */	stw r3, ResetFunctionQueue(r13)
-/* 80348388 00344F68  4E 80 00 20 */	blr 
-lbl_8034838C:
-/* 8034838C 00344F6C  90 64 00 08 */	stw r3, 8(r4)
-/* 80348390 00344F70  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+typedef struct OSResetFunctionInfo {
+    OSResetFunction func;
+    u32 priority;
+    OSResetFunctionInfo* next;
+    OSResetFunctionInfo* prev;
+
+} OSResetFunctionInfo;
+
+typedef struct OSResetQueue {
+    OSResetFunctionInfo* first;
+    OSResetFunctionInfo* last;
+} OSResetQueue;
+
+static OSResetQueue ResetFunctionQueue;
+
+void OSRegisterResetFunction(OSResetFunctionInfo* func) {
+    OSResetFunctionInfo* tmp;
+    OSResetFunctionInfo* iter;
+
+    for (iter = ResetFunctionQueue.first; iter && iter->priority <= func->priority; iter = iter->next);
+
+    if (iter == NULL) {
+        tmp = ResetFunctionQueue.last;
+        if (tmp == NULL) {
+            ResetFunctionQueue.first = func;
+        } else {
+            tmp->next = func;
+        }
+        func->prev = tmp;
+        func->next = NULL;
+        ResetFunctionQueue.last = func;
+        return;
+    }
+
+    func->next = iter;
+    tmp = iter->prev;
+    iter->prev = func;
+    func->prev = tmp;
+    if (tmp == NULL) {
+        ResetFunctionQueue.first = func;
+        return;
+    }
+    tmp->next = func;
+}
 
 #pragma push
 static asm unk_t Reset()
@@ -99,30 +98,20 @@ lbl_80348400:
 
 extern unk_t ICFlashInvalidate();
 
-#pragma push
-asm unk_t __OSDoHotReset()
-{ // clang-format off
-    nofralloc
-/* 80348404 00344FE4  7C 08 02 A6 */	mflr r0
-/* 80348408 00344FE8  90 01 00 04 */	stw r0, 4(r1)
-/* 8034840C 00344FEC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80348410 00344FF0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80348414 00344FF4  7C 7F 1B 78 */	mr r31, r3
-/* 80348418 00344FF8  4B FF EF 4D */	bl OSDisableInterrupts
-/* 8034841C 00344FFC  3C 60 CC 00 */	lis r3, 0xCC002000@ha
-/* 80348420 00345000  38 63 20 00 */	addi r3, r3, 0xCC002000@l
-/* 80348424 00345004  38 00 00 00 */	li r0, 0
-/* 80348428 00345008  B0 03 00 02 */	sth r0, 2(r3)
-/* 8034842C 0034500C  4B FF C4 E1 */	bl ICFlashInvalidate
-/* 80348430 00345010  57 E3 18 38 */	slwi r3, r31, 3
-/* 80348434 00345014  4B FF FF 61 */	bl Reset
-/* 80348438 00345018  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8034843C 0034501C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80348440 00345020  38 21 00 18 */	addi r1, r1, 0x18
-/* 80348444 00345024  7C 08 03 A6 */	mtlr r0
-/* 80348448 00345028  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+typedef struct Unk2 {
+    u16 _0;
+    u16 _2;
+} Unk2;
+
+volatile Unk2 DAT_cc002000 : 0xcc002000;
+
+#pragma peephole off
+void __OSDoHotReset(s32 arg0) {
+    OSDisableInterrupts();
+    DAT_cc002000._2 = 0;
+    ICFlashInvalidate();
+    Reset(arg0 * 8);
+}
 
 extern unk_t memset();
 extern unk_t __OSReboot();
@@ -324,23 +313,17 @@ lbl_8034863C:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm unk_t OSGetResetCode()
-{ // clang-format off
-    nofralloc
-/* 803486B4 00345294  3C 60 80 00 */	lis r3, 0x800030E2@ha
-/* 803486B8 00345298  88 03 30 E2 */	lbz r0, 0x800030E2@l(r3)
-/* 803486BC 0034529C  28 00 00 00 */	cmplwi r0, 0
-/* 803486C0 003452A0  41 82 00 0C */	beq lbl_803486CC
-/* 803486C4 003452A4  3C 60 80 00 */	lis r3, 0x8000
-/* 803486C8 003452A8  48 00 00 18 */	b lbl_803486E0
-lbl_803486CC:
-/* 803486CC 003452AC  3C 60 CC 00 */	lis r3, 0xCC003000@ha
-/* 803486D0 003452B0  38 63 30 00 */	addi r3, r3, 0xCC003000@l
-/* 803486D4 003452B4  80 03 00 24 */	lwz r0, 0x24(r3)
-/* 803486D8 003452B8  54 00 00 38 */	rlwinm r0, r0, 0, 0, 0x1c
-/* 803486DC 003452BC  54 03 E8 FE */	srwi r3, r0, 3
-lbl_803486E0:
-/* 803486E0 003452C0  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+volatile u8 DAT_800030e2 : 0x800030e2;
+typedef struct Unk {
+    u8 pad[0x24];
+    u32 resetCode;
+} Unk;
+volatile Unk DAT_cc003000 : 0xcc003000;
+
+#pragma peephole off
+u32 OSGetResetCode(void) {
+    if (DAT_800030e2 != 0) {
+        return 0x80000000;
+    }
+    return ((DAT_cc003000.resetCode & ~7) >> 3);
+}

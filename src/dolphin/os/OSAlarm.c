@@ -1,53 +1,48 @@
 #include <dolphin/types.h>
 #include <dolphin/base/PPCArch.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
+#include <dolphin/os/OSTime.h>
 
-extern unk_t DecrementerExceptionHandler();
+typedef struct OSAlarm OSAlarm;
+
+typedef void (*OSAlarmHandler)(struct OSAlarm* alarm, OSContext* context);
+
+struct OSAlarm {
+    OSAlarmHandler  handler;
+    u32             tag;
+    OSTime          fire;
+    OSAlarm*        prev;
+    OSAlarm*        next;
+    OSTime          period;
+    OSTime          start;
+};
+
 static OSThreadQueue AlarmQueue;
 extern unk_t __OSSetExceptionHandler();
-extern unk_t __OSGetExceptionHandler();
 extern unk_t __div2i();
-extern unk_t __OSGetSystemTime();
+extern OSTime __OSGetSystemTime();
 
-#pragma push
-asm unk_t OSInitAlarm()
-{ // clang-format off
-    nofralloc
-/* 80343720 00340300  7C 08 02 A6 */	mflr r0
-/* 80343724 00340304  38 60 00 08 */	li r3, 8
-/* 80343728 00340308  90 01 00 04 */	stw r0, 4(r1)
-/* 8034372C 0034030C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80343730 00340310  4B FF FE A1 */	bl __OSGetExceptionHandler
-/* 80343734 00340314  3C 80 80 34 */	lis r4, DecrementerExceptionHandler@ha
-/* 80343738 00340318  38 84 3D F8 */	addi r4, r4, DecrementerExceptionHandler@l
-/* 8034373C 0034031C  7C 03 20 40 */	cmplw r3, r4
-/* 80343740 00340320  41 82 00 1C */	beq lbl_8034375C
-/* 80343744 00340324  38 00 00 00 */	li r0, 0
-/* 80343748 00340328  38 6D BC B8 */	addi r3, r13, AlarmQueue
-/* 8034374C 0034032C  90 03 00 04 */	stw r0, 4(r3)
-/* 80343750 00340330  38 60 00 08 */	li r3, 8
-/* 80343754 00340334  90 0D BC B8 */	stw r0, AlarmQueue(r13)
-/* 80343758 00340338  4B FF FE 5D */	bl __OSSetExceptionHandler
-lbl_8034375C:
-/* 8034375C 0034033C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80343760 00340340  38 21 00 08 */	addi r1, r1, 8
-/* 80343764 00340344  7C 08 03 A6 */	mtlr r0
-/* 80343768 00340348  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+typedef u8 __OSException;
+typedef void (*__OSExceptionHandler)(__OSException exception, OSContext* context);
+extern void DecrementerExceptionHandler(__OSException exception, OSContext* context);
 
-#pragma push
-asm unk_t OSCreateAlarm()
-{ // clang-format off
-    nofralloc
-/* 8034376C 0034034C  38 00 00 00 */	li r0, 0
-/* 80343770 00340350  90 03 00 00 */	stw r0, 0(r3)
-/* 80343774 00340354  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+extern __OSExceptionHandler __OSGetExceptionHandler(__OSException);
 
+void OSInitAlarm(void)
+{
+    if (__OSGetExceptionHandler(8) != DecrementerExceptionHandler) {
+        AlarmQueue.tail = 0;
+        AlarmQueue.head = 0;
+        __OSSetExceptionHandler(8, DecrementerExceptionHandler);
+    }
+}
 
+void OSCreateAlarm(s32* arg0)
+{
+    *arg0 = 0;
+}
 
 #pragma push
 asm unk_t InsertAlarm()
@@ -215,38 +210,13 @@ lbl_803439B4:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm unk_t OSSetAlarm()
-{ // clang-format off
-    nofralloc
-/* 803439C8 003405A8  7C 08 02 A6 */	mflr r0
-/* 803439CC 003405AC  90 01 00 04 */	stw r0, 4(r1)
-/* 803439D0 003405B0  94 21 FF C8 */	stwu r1, -0x38(r1)
-/* 803439D4 003405B4  BF 61 00 24 */	stmw r27, 0x24(r1)
-/* 803439D8 003405B8  3B 63 00 00 */	addi r27, r3, 0
-/* 803439DC 003405BC  3B A5 00 00 */	addi r29, r5, 0
-/* 803439E0 003405C0  3B 86 00 00 */	addi r28, r6, 0
-/* 803439E4 003405C4  3B C7 00 00 */	addi r30, r7, 0
-/* 803439E8 003405C8  48 00 39 7D */	bl OSDisableInterrupts
-/* 803439EC 003405CC  38 00 00 00 */	li r0, 0
-/* 803439F0 003405D0  90 1B 00 1C */	stw r0, 0x1c(r27)
-/* 803439F4 003405D4  7C 7F 1B 78 */	mr r31, r3
-/* 803439F8 003405D8  90 1B 00 18 */	stw r0, 0x18(r27)
-/* 803439FC 003405DC  48 00 8A 15 */	bl __OSGetSystemTime
-/* 80343A00 003405E0  7C DC 20 14 */	addc r6, r28, r4
-/* 80343A04 003405E4  7C BD 19 14 */	adde r5, r29, r3
-/* 80343A08 003405E8  38 7B 00 00 */	addi r3, r27, 0
-/* 80343A0C 003405EC  38 FE 00 00 */	addi r7, r30, 0
-/* 80343A10 003405F0  4B FF FD 69 */	bl InsertAlarm
-/* 80343A14 003405F4  7F E3 FB 78 */	mr r3, r31
-/* 80343A18 003405F8  48 00 39 75 */	bl OSRestoreInterrupts
-/* 80343A1C 003405FC  BB 61 00 24 */	lmw r27, 0x24(r1)
-/* 80343A20 00340600  80 01 00 3C */	lwz r0, 0x3c(r1)
-/* 80343A24 00340604  38 21 00 38 */	addi r1, r1, 0x38
-/* 80343A28 00340608  7C 08 03 A6 */	mtlr r0
-/* 80343A2C 0034060C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void OSSetAlarm(OSAlarm* alarm, OSTime tick, OSAlarmHandler handler)
+{
+    u32 oldInt = OSDisableInterrupts();
+    alarm->period = 0;
+    InsertAlarm(alarm, __OSGetSystemTime() + tick, handler);
+    OSRestoreInterrupts(oldInt);
+}
 
 extern unk_t __OSTimeToSystemTime();
 
@@ -533,7 +503,7 @@ lbl_80343D90:
 #pragma pop
 
 #pragma push
-asm unk_t DecrementerExceptionHandler()
+asm void DecrementerExceptionHandler(__OSException exception, OSContext* context)
 { // clang-format off
     nofralloc
 /* 80343DF8 003409D8  90 04 00 00 */	stw r0, 0(r4)

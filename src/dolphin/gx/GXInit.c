@@ -71,23 +71,16 @@ lbl_8033A74C:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/vLLix // 2270 (33.24%)
-#pragma push
-asm unk_t __GXDefaultTlutRegionCallback(){ // clang-format off
-    nofralloc
-/* 8033A75C 0033733C  28 03 00 14 */	cmplwi r3, 0x14
-/* 8033A760 00337340  41 80 00 0C */	blt lbl_8033A76C
-/* 8033A764 00337344  38 60 00 00 */	li r3, 0
-/* 8033A768 00337348  48 00 00 14 */	b lbl_8033A77C
-lbl_8033A76C:
-/* 8033A76C 0033734C  54 63 20 36 */	slwi r3, r3, 4
-/* 8033A770 00337350  80 0D A5 08 */	lwz r0, __GXContexts(r13)
-/* 8033A774 00337354  38 63 02 D0 */	addi r3, r3, 0x2d0
-/* 8033A778 00337358  7C 60 1A 14 */	add r3, r0, r3
-lbl_8033A77C:
-/* 8033A77C 0033735C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#pragma peephole off
+
+void* __GXDefaultTlutRegionCallback(u32 arg0)
+{
+    if (arg0 >= 0x14) {
+        return NULL;
+    } else {
+        return &__GXContexts.main->x2D0[arg0];
+    }
+}
 
 unk_t __GXInitGX();
 

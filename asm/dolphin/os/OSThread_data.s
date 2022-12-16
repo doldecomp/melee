@@ -70,12 +70,12 @@ lbl_804D5C28:
 
 .section .sbss
     .balign 8
-.global lbl_804D73D8
-lbl_804D73D8:
+.global RunQueueBits
+RunQueueBits:
 	.skip 0x4
 .global lbl_804D73DC
 lbl_804D73DC:
 	.skip 0x4
-.global lbl_804D73E0
-lbl_804D73E0:
+.global Reschedule
+Reschedule:
 	.skip 0x8

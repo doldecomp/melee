@@ -144,65 +144,55 @@ void GXGetProjectionv(f32* proj)
     proj[6] = __GXContexts.main->projection_v[5];
 }
 
-asm void WriteMTXPS4x3(Vec2 src[6], Vec2* dst)
+asm void WriteMTXPS4x3(register float* src, register float* dst)
 {
-    // clang-format off
-    nofralloc
-    psq_l f0, 0(r3), 0, qr0
-    psq_l f1, 8(r3), 0, qr0
-    psq_l f2, 0x10(r3), 0, qr0
-    psq_l f3, 0x18(r3), 0, qr0
-    psq_l f4, 0x20(r3), 0, qr0
-    psq_l f5, 0x28(r3), 0, qr0
-    psq_st f0, 0(r4), 0, qr0
-    psq_st f1, 0(r4), 0, qr0
-    psq_st f2, 0(r4), 0, qr0
-    psq_st f3, 0(r4), 0, qr0
-    psq_st f4, 0(r4), 0, qr0
-    psq_st f5, 0(r4), 0, qr0
-    blr
-    // clang-format on
+    psq_l f0, 0(src), 0, qr0
+    psq_l f1, 8(src), 0, qr0
+    psq_l f2, 0x10(src), 0, qr0
+    psq_l f3, 0x18(src), 0, qr0
+    psq_l f4, 0x20(src), 0, qr0
+    psq_l f5, 0x28(src), 0, qr0
+    psq_st f0, 0(dst), 0, qr0
+    psq_st f1, 0(dst), 0, qr0
+    psq_st f2, 0(dst), 0, qr0
+    psq_st f3, 0(dst), 0, qr0
+    psq_st f4, 0(dst), 0, qr0
+    psq_st f5, 0(dst), 0, qr0
 }
 
 // https://decomp.me/scratch/OH9kG // 0 (100%)
-asm unk_t WriteMTXPS3x3from3x4()
-{ // clang-format off
-    nofralloc
-/* 8034143C 0033E01C  E0 03 00 00 */	psq_l f0, 0(r3), 0, qr0
-/* 80341440 0033E020  C0 23 00 08 */	lfs f1, 8(r3)
-/* 80341444 0033E024  E0 43 00 10 */	psq_l f2, 16(r3), 0, qr0
-/* 80341448 0033E028  C0 63 00 18 */	lfs f3, 0x18(r3)
-/* 8034144C 0033E02C  E0 83 00 20 */	psq_l f4, 32(r3), 0, qr0
-/* 80341450 0033E030  C0 A3 00 28 */	lfs f5, 0x28(r3)
-/* 80341454 0033E034  F0 04 00 00 */	psq_st f0, 0(r4), 0, qr0
-/* 80341458 0033E038  D0 24 00 00 */	stfs f1, 0(r4)
-/* 8034145C 0033E03C  F0 44 00 00 */	psq_st f2, 0(r4), 0, qr0
-/* 80341460 0033E040  D0 64 00 00 */	stfs f3, 0(r4)
-/* 80341464 0033E044  F0 84 00 00 */	psq_st f4, 0(r4), 0, qr0
-/* 80341468 0033E048  D0 A4 00 00 */	stfs f5, 0(r4)
-/* 8034146C 0033E04C  4E 80 00 20 */	blr 
-} // clang-format on
+asm void WriteMTXPS3x3from3x4(register float* src, register float* dst)
+{
+    psq_l f0, 0(src), 0, qr0
+    lfs f1, 8(src)
+    psq_l f2, 16(src), 0, qr0
+    lfs f3, 0x18(src)
+    psq_l f4, 32(src), 0, qr0
+    lfs f5, 0x28(src)
+    psq_st f0, 0(dst), 0, qr0
+    stfs f1, 0(dst)
+    psq_st f2, 0(dst), 0, qr0
+    stfs f3, 0(dst)
+    psq_st f4, 0(dst), 0, qr0
+    stfs f5, 0(dst)
+}
 
-// https://decomp.me/scratch/VVoAR // 0 (100%)
-asm unk_t WriteMTXPS4x2()
-{ // clang-format off
-    nofralloc
-/* 80341470 0033E050  E0 03 00 00 */	psq_l f0, 0(r3), 0, qr0
-/* 80341474 0033E054  E0 23 00 08 */	psq_l f1, 8(r3), 0, qr0
-/* 80341478 0033E058  E0 43 00 10 */	psq_l f2, 16(r3), 0, qr0
-/* 8034147C 0033E05C  E0 63 00 18 */	psq_l f3, 24(r3), 0, qr0
-/* 80341480 0033E060  F0 04 00 00 */	psq_st f0, 0(r4), 0, qr0
-/* 80341484 0033E064  F0 24 00 00 */	psq_st f1, 0(r4), 0, qr0
-/* 80341488 0033E068  F0 44 00 00 */	psq_st f2, 0(r4), 0, qr0
-/* 8034148C 0033E06C  F0 64 00 00 */	psq_st f3, 0(r4), 0, qr0
-/* 80341490 0033E070  4E 80 00 20 */	blr 
-} // clang-format on
+asm void WriteMTXPS4x2(register float* src, register float* dst)
+{
+    psq_l f0, 0(src), 0, qr0
+    psq_l f1, 8(src), 0, qr0
+    psq_l f2, 16(src), 0, qr0
+    psq_l f3, 24(src), 0, qr0
+    psq_st f0, 0(dst), 0, qr0
+    psq_st f1, 0(dst), 0, qr0
+    psq_st f2, 0(dst), 0, qr0
+    psq_st f3, 0(dst), 0, qr0
+}
 
 // NOTE: peephole off is needed for following functions to match
 // The previous matrix functions were probably inline asm in the original source,
 // which triggered the peephole off MWCC bug.
 
-#pragma peephole off
 void GXLoadPosMtxImm(void* mtx, s32 arg1)
 {
     WGPIPE.u8 = GX_LOAD_XF_REG;

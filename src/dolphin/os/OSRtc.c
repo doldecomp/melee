@@ -1,39 +1,19 @@
 #include <dolphin/os/OSInterrupt.h>
 
-extern unk_t lbl_804A7D60;
-extern unk_t WriteSram();
+static u8 Scb[0x40];
+static s32 lbl_804A7DA0[6];
 
-#pragma push
-asm unk_t WriteSramCallback()
-{ // clang-format off
-    nofralloc
-/* 80348A90 00345670  7C 08 02 A6 */	mflr r0
-/* 80348A94 00345674  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
-/* 80348A98 00345678  90 01 00 04 */	stw r0, 4(r1)
-/* 80348A9C 0034567C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80348AA0 00345680  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80348AA4 00345684  3B E3 7D 60 */	addi r31, r3, lbl_804A7D60@l
-/* 80348AA8 00345688  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80348AAC 0034568C  3B DF 00 40 */	addi r30, r31, 0x40
-/* 80348AB0 00345690  80 9F 00 40 */	lwz r4, 0x40(r31)
-/* 80348AB4 00345694  7C 7F 22 14 */	add r3, r31, r4
-/* 80348AB8 00345698  20 A4 00 40 */	subfic r5, r4, 0x40
-/* 80348ABC 0034569C  48 00 00 35 */	bl WriteSram
-/* 80348AC0 003456A0  90 7F 00 4C */	stw r3, 0x4c(r31)
-/* 80348AC4 003456A4  80 1F 00 4C */	lwz r0, 0x4c(r31)
-/* 80348AC8 003456A8  2C 00 00 00 */	cmpwi r0, 0
-/* 80348ACC 003456AC  41 82 00 0C */	beq lbl_80348AD8
-/* 80348AD0 003456B0  38 00 00 40 */	li r0, 0x40
-/* 80348AD4 003456B4  90 1E 00 00 */	stw r0, 0(r30)
-lbl_80348AD8:
-/* 80348AD8 003456B8  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80348ADC 003456BC  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80348AE0 003456C0  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80348AE4 003456C4  7C 08 03 A6 */	mtlr r0
-/* 80348AE8 003456C8  38 21 00 18 */	addi r1, r1, 0x18
-/* 80348AEC 003456CC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+s32 WriteSram();
+
+void WriteSramCallback(void)
+{
+    s32* temp_r4 = lbl_804A7DA0;
+    u32 unused;
+    lbl_804A7DA0[3] = WriteSram(&Scb[*temp_r4], *temp_r4, 0x40 - *temp_r4);
+    if (lbl_804A7DA0[3] != 0) {
+        *temp_r4 = 0x40;
+    }
+}
 
 extern unk_t EXIDeselect();
 extern unk_t EXIImmEx();
@@ -44,7 +24,7 @@ extern unk_t EXISelect();
 extern unk_t EXILock();
 
 #pragma push
-asm unk_t WriteSram()
+asm s32 WriteSram()
 { // clang-format off
     nofralloc
 /* 80348AF0 003456D0  7C 08 02 A6 */	mflr r0
@@ -131,14 +111,14 @@ asm unk_t __OSInitSram()
 { // clang-format off
     nofralloc
 /* 80348C08 003457E8  7C 08 02 A6 */	mflr r0
-/* 80348C0C 003457EC  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
+/* 80348C0C 003457EC  3C 60 80 4A */	lis r3, Scb@ha
 /* 80348C10 003457F0  90 01 00 04 */	stw r0, 4(r1)
 /* 80348C14 003457F4  38 80 00 40 */	li r4, 0x40
 /* 80348C18 003457F8  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80348C1C 003457FC  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80348C20 00345800  3B E0 00 00 */	li r31, 0
 /* 80348C24 00345804  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 80348C28 00345808  3B C3 7D 60 */	addi r30, r3, lbl_804A7D60@l
+/* 80348C28 00345808  3B C3 7D 60 */	addi r30, r3, Scb@l
 /* 80348C2C 0034580C  38 7E 00 00 */	addi r3, r30, 0
 /* 80348C30 00345810  93 FE 00 44 */	stw r31, 0x44(r30)
 /* 80348C34 00345814  93 FE 00 48 */	stw r31, 0x48(r30)
@@ -213,69 +193,31 @@ lbl_80348D18:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm unk_t __OSLockSram()
-{ // clang-format off
-    nofralloc
-/* 80348D3C 0034591C  7C 08 02 A6 */	mflr r0
-/* 80348D40 00345920  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
-/* 80348D44 00345924  90 01 00 04 */	stw r0, 4(r1)
-/* 80348D48 00345928  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 80348D4C 0034592C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80348D50 00345930  3B E3 7D 60 */	addi r31, r3, lbl_804A7D60@l
-/* 80348D54 00345934  4B FF E6 11 */	bl OSDisableInterrupts
-/* 80348D58 00345938  80 1F 00 48 */	lwz r0, 0x48(r31)
-/* 80348D5C 0034593C  38 9F 00 48 */	addi r4, r31, 0x48
-/* 80348D60 00345940  2C 00 00 00 */	cmpwi r0, 0
-/* 80348D64 00345944  41 82 00 10 */	beq lbl_80348D74
-/* 80348D68 00345948  4B FF E6 25 */	bl OSRestoreInterrupts
-/* 80348D6C 0034594C  3B E0 00 00 */	li r31, 0
-/* 80348D70 00345950  48 00 00 10 */	b lbl_80348D80
-lbl_80348D74:
-/* 80348D74 00345954  90 7F 00 44 */	stw r3, 0x44(r31)
-/* 80348D78 00345958  38 00 00 01 */	li r0, 1
-/* 80348D7C 0034595C  90 04 00 00 */	stw r0, 0(r4)
-lbl_80348D80:
-/* 80348D80 00345960  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 80348D84 00345964  7F E3 FB 78 */	mr r3, r31
-/* 80348D88 00345968  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 80348D8C 0034596C  38 21 00 10 */	addi r1, r1, 0x10
-/* 80348D90 00345970  7C 08 03 A6 */	mtlr r0
-/* 80348D94 00345974  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+u8* __OSLockSram(void)
+{
+    u8* var_r31 = Scb;
+    s32 temp_r3 = OSDisableInterrupts();
+    if (lbl_804A7DA0[2] != 0) {
+        OSRestoreInterrupts(temp_r3);
+        var_r31 = NULL;
+    } else {
+        lbl_804A7DA0[1] = temp_r3;
+        lbl_804A7DA0[2] = 1;
+    }
+    return var_r31;
+}
 
-#pragma push
-asm unk_t __OSLockSramEx()
-{ // clang-format off
-    nofralloc
-/* 80348D98 00345978  7C 08 02 A6 */	mflr r0
-/* 80348D9C 0034597C  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
-/* 80348DA0 00345980  90 01 00 04 */	stw r0, 4(r1)
-/* 80348DA4 00345984  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 80348DA8 00345988  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80348DAC 0034598C  3B E3 7D 60 */	addi r31, r3, lbl_804A7D60@l
-/* 80348DB0 00345990  4B FF E5 B5 */	bl OSDisableInterrupts
-/* 80348DB4 00345994  80 1F 00 48 */	lwz r0, 0x48(r31)
-/* 80348DB8 00345998  38 9F 00 48 */	addi r4, r31, 0x48
-/* 80348DBC 0034599C  2C 00 00 00 */	cmpwi r0, 0
-/* 80348DC0 003459A0  41 82 00 10 */	beq lbl_80348DD0
-/* 80348DC4 003459A4  4B FF E5 C9 */	bl OSRestoreInterrupts
-/* 80348DC8 003459A8  38 60 00 00 */	li r3, 0
-/* 80348DCC 003459AC  48 00 00 14 */	b lbl_80348DE0
-lbl_80348DD0:
-/* 80348DD0 003459B0  90 7F 00 44 */	stw r3, 0x44(r31)
-/* 80348DD4 003459B4  38 00 00 01 */	li r0, 1
-/* 80348DD8 003459B8  38 7F 00 14 */	addi r3, r31, 0x14
-/* 80348DDC 003459BC  90 04 00 00 */	stw r0, 0(r4)
-lbl_80348DE0:
-/* 80348DE0 003459C0  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 80348DE4 003459C4  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 80348DE8 003459C8  38 21 00 10 */	addi r1, r1, 0x10
-/* 80348DEC 003459CC  7C 08 03 A6 */	mtlr r0
-/* 80348DF0 003459D0  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+u8* __OSLockSramEx(void)
+{
+    s32 intr = OSDisableInterrupts();
+    if (lbl_804A7DA0[2] != 0) {
+        OSRestoreInterrupts(intr);
+        return NULL;
+    }
+    lbl_804A7DA0[1] = intr;
+    lbl_804A7DA0[2] = 1;
+    return &Scb[0x14];
+}
 
 #pragma push
 asm unk_t UnlockSram()
@@ -284,10 +226,10 @@ asm unk_t UnlockSram()
 /* 80348DF4 003459D4  7C 08 02 A6 */	mflr r0
 /* 80348DF8 003459D8  2C 03 00 00 */	cmpwi r3, 0
 /* 80348DFC 003459DC  90 01 00 04 */	stw r0, 4(r1)
-/* 80348E00 003459E0  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
+/* 80348E00 003459E0  3C 60 80 4A */	lis r3, Scb@ha
 /* 80348E04 003459E4  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80348E08 003459E8  BF 61 00 1C */	stmw r27, 0x1c(r1)
-/* 80348E0C 003459EC  3B E3 7D 60 */	addi r31, r3, lbl_804A7D60@l
+/* 80348E0C 003459EC  3B E3 7D 60 */	addi r31, r3, Scb@l
 /* 80348E10 003459F0  41 82 02 C4 */	beq lbl_803490D4
 /* 80348E14 003459F4  28 04 00 00 */	cmplwi r4, 0
 /* 80348E18 003459F8  40 82 01 B0 */	bne lbl_80348FC8
@@ -488,44 +430,22 @@ lbl_803490D4:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm unk_t __OSUnlockSram()
-{ // clang-format off
-    nofralloc
-/* 803490FC 00345CDC  7C 08 02 A6 */	mflr r0
-/* 80349100 00345CE0  38 80 00 00 */	li r4, 0
-/* 80349104 00345CE4  90 01 00 04 */	stw r0, 4(r1)
-/* 80349108 00345CE8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8034910C 00345CEC  4B FF FC E9 */	bl UnlockSram
-/* 80349110 00345CF0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80349114 00345CF4  38 21 00 08 */	addi r1, r1, 8
-/* 80349118 00345CF8  7C 08 03 A6 */	mtlr r0
-/* 8034911C 00345CFC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void __OSUnlockSram(void* r3)
+{
+    UnlockSram(r3, 0);
+}
 
-#pragma push
-asm unk_t __OSUnlockSramEx()
-{ // clang-format off
-    nofralloc
-/* 80349120 00345D00  7C 08 02 A6 */	mflr r0
-/* 80349124 00345D04  38 80 00 14 */	li r4, 0x14
-/* 80349128 00345D08  90 01 00 04 */	stw r0, 4(r1)
-/* 8034912C 00345D0C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80349130 00345D10  4B FF FC C5 */	bl UnlockSram
-/* 80349134 00345D14  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80349138 00345D18  38 21 00 08 */	addi r1, r1, 8
-/* 8034913C 00345D1C  7C 08 03 A6 */	mtlr r0
-/* 80349140 00345D20  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void __OSUnlockSramEx(void* r3)
+{
+    UnlockSram(r3, 0x14);
+}
 
 #pragma push
 asm unk_t __OSSyncSram()
 { // clang-format off
     nofralloc
-/* 80349144 00345D24  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
-/* 80349148 00345D28  38 63 7D 60 */	addi r3, r3, lbl_804A7D60@l
+/* 80349144 00345D24  3C 60 80 4A */	lis r3, Scb@ha
+/* 80349148 00345D28  38 63 7D 60 */	addi r3, r3, Scb@l
 /* 8034914C 00345D2C  80 63 00 4C */	lwz r3, 0x4c(r3)
 /* 80349150 00345D30  4E 80 00 20 */	blr 
 } // clang-format on
@@ -536,11 +456,11 @@ asm unk_t OSGetSoundMode()
 { // clang-format off
     nofralloc
 /* 80349154 00345D34  7C 08 02 A6 */	mflr r0
-/* 80349158 00345D38  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
+/* 80349158 00345D38  3C 60 80 4A */	lis r3, Scb@ha
 /* 8034915C 00345D3C  90 01 00 04 */	stw r0, 4(r1)
 /* 80349160 00345D40  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80349164 00345D44  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 80349168 00345D48  3B E3 7D 60 */	addi r31, r3, lbl_804A7D60@l
+/* 80349168 00345D48  3B E3 7D 60 */	addi r31, r3, Scb@l
 /* 8034916C 00345D4C  4B FF E1 F9 */	bl OSDisableInterrupts
 /* 80349170 00345D50  80 1F 00 48 */	lwz r0, 0x48(r31)
 /* 80349174 00345D54  38 9F 00 48 */	addi r4, r31, 0x48
@@ -579,11 +499,11 @@ asm unk_t OSSetSoundMode()
 { // clang-format off
     nofralloc
 /* 803491D4 00345DB4  7C 08 02 A6 */	mflr r0
-/* 803491D8 00345DB8  3C 80 80 4A */	lis r4, lbl_804A7D60@ha
+/* 803491D8 00345DB8  3C 80 80 4A */	lis r4, Scb@ha
 /* 803491DC 00345DBC  90 01 00 04 */	stw r0, 4(r1)
 /* 803491E0 00345DC0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 803491E4 00345DC4  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 803491E8 00345DC8  3B E4 7D 60 */	addi r31, r4, lbl_804A7D60@l
+/* 803491E8 00345DC8  3B E4 7D 60 */	addi r31, r4, Scb@l
 /* 803491EC 00345DCC  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 803491F0 00345DD0  54 7E 17 7A */	rlwinm r30, r3, 2, 0x1d, 0x1d
 /* 803491F4 00345DD4  4B FF E1 71 */	bl OSDisableInterrupts
@@ -631,11 +551,11 @@ asm unk_t OSGetProgressiveMode()
 { // clang-format off
     nofralloc
 /* 80349278 00345E58  7C 08 02 A6 */	mflr r0
-/* 8034927C 00345E5C  3C 60 80 4A */	lis r3, lbl_804A7D60@ha
+/* 8034927C 00345E5C  3C 60 80 4A */	lis r3, Scb@ha
 /* 80349280 00345E60  90 01 00 04 */	stw r0, 4(r1)
 /* 80349284 00345E64  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80349288 00345E68  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8034928C 00345E6C  3B E3 7D 60 */	addi r31, r3, lbl_804A7D60@l
+/* 8034928C 00345E6C  3B E3 7D 60 */	addi r31, r3, Scb@l
 /* 80349290 00345E70  4B FF E0 D5 */	bl OSDisableInterrupts
 /* 80349294 00345E74  80 1F 00 48 */	lwz r0, 0x48(r31)
 /* 80349298 00345E78  38 9F 00 48 */	addi r4, r31, 0x48
@@ -668,11 +588,11 @@ asm unk_t OSSetProgressiveMode()
 { // clang-format off
     nofralloc
 /* 803492E8 00345EC8  7C 08 02 A6 */	mflr r0
-/* 803492EC 00345ECC  3C 80 80 4A */	lis r4, lbl_804A7D60@ha
+/* 803492EC 00345ECC  3C 80 80 4A */	lis r4, Scb@ha
 /* 803492F0 00345ED0  90 01 00 04 */	stw r0, 4(r1)
 /* 803492F4 00345ED4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 803492F8 00345ED8  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 803492FC 00345EDC  3B E4 7D 60 */	addi r31, r4, lbl_804A7D60@l
+/* 803492FC 00345EDC  3B E4 7D 60 */	addi r31, r4, Scb@l
 /* 80349300 00345EE0  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 80349304 00345EE4  54 7E 3E 30 */	rlwinm r30, r3, 7, 0x18, 0x18
 /* 80349308 00345EE8  4B FF E0 5D */	bl OSDisableInterrupts
@@ -720,11 +640,11 @@ asm unk_t OSGetWirelessID()
 { // clang-format off
     nofralloc
 /* 8034938C 00345F6C  7C 08 02 A6 */	mflr r0
-/* 80349390 00345F70  3C 80 80 4A */	lis r4, lbl_804A7D60@ha
+/* 80349390 00345F70  3C 80 80 4A */	lis r4, Scb@ha
 /* 80349394 00345F74  90 01 00 04 */	stw r0, 4(r1)
 /* 80349398 00345F78  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8034939C 00345F7C  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 803493A0 00345F80  3B E4 7D 60 */	addi r31, r4, lbl_804A7D60@l
+/* 803493A0 00345F80  3B E4 7D 60 */	addi r31, r4, Scb@l
 /* 803493A4 00345F84  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 803493A8 00345F88  3B C3 00 00 */	addi r30, r3, 0
 /* 803493AC 00345F8C  4B FF DF B9 */	bl OSDisableInterrupts
@@ -762,11 +682,11 @@ asm unk_t OSSetWirelessID()
 { // clang-format off
     nofralloc
 /* 80349410 00345FF0  7C 08 02 A6 */	mflr r0
-/* 80349414 00345FF4  3C A0 80 4A */	lis r5, lbl_804A7D60@ha
+/* 80349414 00345FF4  3C A0 80 4A */	lis r5, Scb@ha
 /* 80349418 00345FF8  90 01 00 04 */	stw r0, 4(r1)
 /* 8034941C 00345FFC  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 80349420 00346000  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 80349424 00346004  3B E5 7D 60 */	addi r31, r5, lbl_804A7D60@l
+/* 80349424 00346004  3B E5 7D 60 */	addi r31, r5, Scb@l
 /* 80349428 00346008  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 8034942C 0034600C  3B C4 00 00 */	addi r30, r4, 0
 /* 80349430 00346010  93 A1 00 1C */	stw r29, 0x1c(r1)
