@@ -913,6 +913,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 new_action_s
     s32 bone_index;
     u8* unk_byte_ptr;
     BOOL animflags_bool;
+    union Struct2070 x2070;
 
     fp->x10_action_state_index = new_action_state_index;
     fp->x30_facingDirectionRepeated = fp->x2C_facing_direction;
@@ -1163,194 +1164,190 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 new_action_s
         }
     }
 
-    // looks gross, used to declare the volatile here to maintain the stack order.
-    // TODO: There has to be some way to get rid of this while maintaining the
-    // effect it has on the stack.
-    if (1) {
-        union Struct2070 x2070 = fp->x2070;
-        func_800890D0(fp, new_action_state->move_id);
-        func_800895E0(fp, new_action_state->x4_flags);
-        fp->x2225_flag.bits.b3 = new_action_state->x9_flags.bits.b0;
+    // load in the union.
+    x2070 = fp->x2070;
+    func_800890D0(fp, new_action_state->move_id);
+    func_800895E0(fp, new_action_state->x4_flags);
+    fp->x2225_flag.bits.b3 = new_action_state->x9_flags.bits.b0;
 
-        if (fp->x2226_flag.bits.b4 != 0U) {
-            if (fp->x2070.x2071_b5 != 0U) {
-                func_800C8B2C(fp, 0x7E, 0);
-            }
-            if (fp->x2070.x2071_b6 != 0U) {
-                func_800C8B2C(fp, 0x7F, 0);
-            }
+    if (fp->x2226_flag.bits.b4 != 0U) {
+        if (fp->x2070.x2071_b5 != 0U) {
+            func_800C8B2C(fp, 0x7E, 0);
         }
-
-        if (fp->cb.x21EC_callback) {
-            fp->cb.x21EC_callback(fighter_gobj);
-            fp->cb.x21EC_callback = 0U;
+        if (fp->x2070.x2071_b6 != 0U) {
+            func_800C8B2C(fp, 0x7F, 0);
         }
-
-        if ((arg2 & FIGHTER_ATTACKCOUNT_NOUPDATE) == 0) {
-            func_80037C60(fighter_gobj, x2070.x2070_int);
-        }
-
-        fp->x14_action_id = new_action_state->action_id;
-        fp->x89C_frameSpeedMul = arg9;
-        fp->x8A0_unk = arg9;
-    
-        fp->x894_currentAnimFrame = (arg8 - fp->x89C_frameSpeedMul);
-        fp->x898_unk = 0.0f;
-    
-        
-        
-        if ((fp->x594_animCurrFlags1.bits.b0) || (fp->x594_animCurrFlags1.bits.b5)) {
-            animflags_bool = TRUE;
-        } else {
-            animflags_bool = FALSE;
-        }
-    
-        if (fp->x14_action_id != -1) {
-            Vec translation;
-            Quaternion quat;
-
-            bone_index = fp->x596_bits.x7;
-
-            if ((arg2 & FIGHTER_FREEZESTATE) != 0) {
-                fp->x2223_flag.bits.b0 = 1;
-                fp->x104 = 0x14;
-                fp->x89C_frameSpeedMul = 0.0f;
-                arg9 = 0.0f;
-            }
-    
-            if (otherObj != NULL) {
-                Fighter *newFp = GET_FIGHTER_NEW(otherObj);
-                unk_struct_x18 = &newFp->x24[fp->x14_action_id];
-                unk_byte_ptr = &newFp->x28[fp->x14_action_id << 1];
-            } else {
-                Fighter *newFp = fp;
-                unk_struct_x18 = &newFp->x24[fp->x14_action_id];
-                unk_byte_ptr = &newFp->x28[fp->x14_action_id << 1];
-            }
-            fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
-            func_8009E7B4(fp, unk_byte_ptr);
-            if ((arg2 & FIGHTER_ANIM_NOUPDATE) == 0) {
-    
-                if (otherObj != 0U) {
-                    Fighter *newFp = GET_FIGHTER_NEW(otherObj);
-                    func_80085CD8(fp, newFp, fp->x14_action_id);
-                    func_8007B8CC(fp, otherObj);
-                } else {
-                    func_80085CD8(fp, fp, fp->x14_action_id);
-                }
-                fp->x3EC = unk_struct_x18->xC;
-                fp->x3F0 = 0;
-    
-                
-                if (arg8) {
-                    if (fp->x590 != 0U) {
-                        func_8006EBE8(fighter_gobj, arg8 - arg9, arg9,(argA == -1.0f) ? 0.0f :  (argA) ? argA : *unk_byte_ptr);
-                    }
-                    func_8006E9B4(fighter_gobj);
-                    if (fp->x594_animCurrFlags1.bits.b0 != 0U) {
-                        fp->x6B0.x = fp->x6B0.y = fp->x6B0.z = 0.0f;
-                        fp->x6A4_transNOffset.x = fp->x6A4_transNOffset.y = fp->x6A4_transNOffset.z = 0.0f;
-                        fp->x698 = fp->x68C_transNPos;
-                    }
-                    
-                    if (fp->x594_animCurrFlags1.bits.b5 != 0U) {
-                        fp->x6E4.x = fp->x6E4.y = fp->x6E4.z = 0.0f;
-                        fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = 0.0f;
-                        fp->x6CC = fp->x6C0;
-                    }
-                    fp->x3E4 = -arg8;
-                } else {
-                    if (fp->x590 != 0U) {
-                        func_8006EBE8(fighter_gobj, arg8, arg9, (argA == -1.0f) ? 0.0f :  (argA) ? argA : *unk_byte_ptr);
-                    }
-                    fp->x3E4 = 0.0f;
-                }
-    
-                func_8006E9B4(fighter_gobj);
-                if ((bone_index != 0) && (*unk_byte_ptr != 0U)) {
-                    HSD_JObj* temp_joint = fp->x5E8_fighterBones[bone_index].x4_jobj2;
-    
-                    HSD_JObjGetTranslation(temp_joint, &translation);
-                    HSD_JObjSetTranslate(fp->x5E8_fighterBones[bone_index].x0_jobj, &translation);
-                    HSD_JObjGetRotation(temp_joint, &quat);
-                    func_8007584C(fp->x5E8_fighterBones[bone_index].x0_jobj, &quat);
-                }
-    
-                if (fp->x594_animCurrFlags1.bits.b0 != 0U) {
-                    if (!arg8) {
-                        fp->x6B0.x = fp->x6B0.y = fp->x6B0.z = 0.0f;
-                        fp->x6A4_transNOffset.x = fp->x6A4_transNOffset.y = fp->x6A4_transNOffset.z = 0.0f;
-                        fp->x698 = fp->x68C_transNPos;
-                    } else if (((arg2 & FIGHTER_ANIMVEL_NOUPDATE) == 0) && (fp->xE0_ground_or_air == GA_Ground)) {
-                        f32 temp_vel = fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
-                        fp->x80_self_vel.x = temp_vel;
-                        fp->xEC_ground_vel = temp_vel;
-                    }
-                }
-    
-                if (fp->x594_animCurrFlags1.bits.b5 != 0U) {
-                    if (!arg8) {
-                        fp->x6E4.x = fp->x6E4.y = fp->x6E4.z = 0.0f;
-                        fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = 0.0f;
-                        fp->x6CC = fp->x6C0;
-                    } else if (((arg2 & FIGHTER_ANIMVEL_NOUPDATE) == 0) && (fp->xE0_ground_or_air == GA_Ground)) {
-                        f32 temp_vel = fp->x6D8.z * fp->x2C_facing_direction;
-                        fp->x80_self_vel.x = temp_vel;
-                        fp->xEC_ground_vel = temp_vel;
-                    }
-                }
-                if ((arg2 & FIGHTER_CMD_UPDATE) != 0) {
-                    func_8007349C(fighter_gobj);
-                } else if (arg8) {
-                    func_80073354(fighter_gobj);
-                } else {
-                    func_800C0408(fighter_gobj);
-                    func_80073240(fighter_gobj);
-                }
-            } else {
-                fp->x14_action_id = -1;
-            }
-        }
-    
-        
-    
-        if (fp->x14_action_id == -1) {
-            fp->x594_s32 = 0;
-            func_80070758(jobj);
-            func_80070758(fp->x8AC_animSkeleton);
-            fp->x3EC = 0;
-            fp->x8A4_animBlendFrames = 0;
-            fp->x8A8_unk = 0;
-        }
-    
-        if (animflags_bool) {
-            if (!fp->x594_animCurrFlags1.bits.b0 && !fp->x594_animCurrFlags1.bits.b0) {
-                !fp;
-                func_8007CC78(fp, fp->x110_attr.x138_DashrunTerminalVelocity);
-            }
-        }
-    
-        fp->cb.x21A0_callback_Anim = new_action_state->cb_Anim;
-        fp->cb.x219C_callback_IASA = new_action_state->cb_Input;
-        fp->cb.x21A4_callback_Phys = new_action_state->cb_Physics;
-        fp->cb.x21A8_callback_Coll = new_action_state->cb_Collision;
-        fp->cb.x21AC_callback_Cam = new_action_state->cb_Camera;
-    
-        fp->cb.x21B0_callback_Accessory1 = 0;
-        fp->cb.x21BC_callback_Accessory4 = 0;
-        fp->cb.x21C0_callback_OnGiveDamage = 0;
-        fp->cb.x21C4_callback_OnShieldHit = 0;
-        fp->cb.x21C8_callback_OnReflectHit = 0;
-        fp->cb.x21D0_callback_EveryHitlag = 0;
-        fp->cb.x21CC_callback = 0;
-        fp->cb.x21D8_callback_ExitHitlag = 0;
-        fp->cb.x21D4_callback_EnterHitlag = 0;
-        fp->cb.x21DC_callback_OnTakeDamage = 0;
-        fp->cb.x21F0_callback = 0;
-        fp->cb.x21F4_callback = 0;
-        fp->cb.x21F8_callback = 0;
-        fp->cb.x21E4_callback_OnDeath2 = 0;
     }
+
+    if (fp->cb.x21EC_callback) {
+        fp->cb.x21EC_callback(fighter_gobj);
+        fp->cb.x21EC_callback = 0U;
+    }
+
+    if ((arg2 & FIGHTER_ATTACKCOUNT_NOUPDATE) == 0) {
+        func_80037C60(fighter_gobj, x2070.x2070_int);
+    }
+
+    fp->x14_action_id = new_action_state->action_id;
+    fp->x89C_frameSpeedMul = arg9;
+    fp->x8A0_unk = arg9;
+    
+    fp->x894_currentAnimFrame = (arg8 - fp->x89C_frameSpeedMul);
+    fp->x898_unk = 0.0f;
+    
+    
+    
+    if ((fp->x594_animCurrFlags1.bits.b0) || (fp->x594_animCurrFlags1.bits.b5)) {
+        animflags_bool = TRUE;
+    } else {
+        animflags_bool = FALSE;
+    }
+    
+    if (fp->x14_action_id != -1) {
+        Vec translation;
+        Quaternion quat;
+
+        bone_index = fp->x596_bits.x7;
+
+        if ((arg2 & FIGHTER_FREEZESTATE) != 0) {
+            fp->x2223_flag.bits.b0 = 1;
+            fp->x104 = 0x14;
+            fp->x89C_frameSpeedMul = 0.0f;
+            arg9 = 0.0f;
+        }
+    
+        if (otherObj != NULL) {
+            Fighter *newFp = GET_FIGHTER_NEW(otherObj);
+            unk_struct_x18 = &newFp->x24[fp->x14_action_id];
+            unk_byte_ptr = &newFp->x28[fp->x14_action_id << 1];
+        } else {
+            Fighter *newFp = fp;
+            unk_struct_x18 = &newFp->x24[fp->x14_action_id];
+            unk_byte_ptr = &newFp->x28[fp->x14_action_id << 1];
+        }
+        fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
+        func_8009E7B4(fp, unk_byte_ptr);
+        if ((arg2 & FIGHTER_ANIM_NOUPDATE) == 0) {
+    
+            if (otherObj != 0U) {
+                Fighter *newFp = GET_FIGHTER_NEW(otherObj);
+                func_80085CD8(fp, newFp, fp->x14_action_id);
+                func_8007B8CC(fp, otherObj);
+            } else {
+                func_80085CD8(fp, fp, fp->x14_action_id);
+            }
+            fp->x3EC = unk_struct_x18->xC;
+            fp->x3F0 = 0;
+    
+            
+            if (arg8) {
+                if (fp->x590 != 0U) {
+                    func_8006EBE8(fighter_gobj, arg8 - arg9, arg9,(argA == -1.0f) ? 0.0f :  (argA) ? argA : *unk_byte_ptr);
+                }
+                func_8006E9B4(fighter_gobj);
+                if (fp->x594_animCurrFlags1.bits.b0 != 0U) {
+                    fp->x6B0.x = fp->x6B0.y = fp->x6B0.z = 0.0f;
+                    fp->x6A4_transNOffset.x = fp->x6A4_transNOffset.y = fp->x6A4_transNOffset.z = 0.0f;
+                    fp->x698 = fp->x68C_transNPos;
+                }
+                
+                if (fp->x594_animCurrFlags1.bits.b5 != 0U) {
+                    fp->x6E4.x = fp->x6E4.y = fp->x6E4.z = 0.0f;
+                    fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = 0.0f;
+                    fp->x6CC = fp->x6C0;
+                }
+                fp->x3E4 = -arg8;
+            } else {
+                if (fp->x590 != 0U) {
+                    func_8006EBE8(fighter_gobj, arg8, arg9, (argA == -1.0f) ? 0.0f :  (argA) ? argA : *unk_byte_ptr);
+                }
+                fp->x3E4 = 0.0f;
+            }
+    
+            func_8006E9B4(fighter_gobj);
+            if ((bone_index != 0) && (*unk_byte_ptr != 0U)) {
+                HSD_JObj* temp_joint = fp->x5E8_fighterBones[bone_index].x4_jobj2;
+    
+                HSD_JObjGetTranslation(temp_joint, &translation);
+                HSD_JObjSetTranslate(fp->x5E8_fighterBones[bone_index].x0_jobj, &translation);
+                HSD_JObjGetRotation(temp_joint, &quat);
+                func_8007584C(fp->x5E8_fighterBones[bone_index].x0_jobj, &quat);
+            }
+    
+            if (fp->x594_animCurrFlags1.bits.b0 != 0U) {
+                if (!arg8) {
+                    fp->x6B0.x = fp->x6B0.y = fp->x6B0.z = 0.0f;
+                    fp->x6A4_transNOffset.x = fp->x6A4_transNOffset.y = fp->x6A4_transNOffset.z = 0.0f;
+                    fp->x698 = fp->x68C_transNPos;
+                } else if (((arg2 & FIGHTER_ANIMVEL_NOUPDATE) == 0) && (fp->xE0_ground_or_air == GA_Ground)) {
+                    f32 temp_vel = fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
+                    fp->x80_self_vel.x = temp_vel;
+                    fp->xEC_ground_vel = temp_vel;
+                }
+            }
+    
+            if (fp->x594_animCurrFlags1.bits.b5 != 0U) {
+                if (!arg8) {
+                    fp->x6E4.x = fp->x6E4.y = fp->x6E4.z = 0.0f;
+                    fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = 0.0f;
+                    fp->x6CC = fp->x6C0;
+                } else if (((arg2 & FIGHTER_ANIMVEL_NOUPDATE) == 0) && (fp->xE0_ground_or_air == GA_Ground)) {
+                    f32 temp_vel = fp->x6D8.z * fp->x2C_facing_direction;
+                    fp->x80_self_vel.x = temp_vel;
+                    fp->xEC_ground_vel = temp_vel;
+                }
+            }
+            if ((arg2 & FIGHTER_CMD_UPDATE) != 0) {
+                func_8007349C(fighter_gobj);
+            } else if (arg8) {
+                func_80073354(fighter_gobj);
+            } else {
+                func_800C0408(fighter_gobj);
+                func_80073240(fighter_gobj);
+            }
+        } else {
+            fp->x14_action_id = -1;
+        }
+    }
+    
+    
+    
+    if (fp->x14_action_id == -1) {
+        fp->x594_s32 = 0;
+        func_80070758(jobj);
+        func_80070758(fp->x8AC_animSkeleton);
+        fp->x3EC = 0;
+        fp->x8A4_animBlendFrames = 0;
+        fp->x8A8_unk = 0;
+    }
+    
+    if (animflags_bool) {
+        if (!fp->x594_animCurrFlags1.bits.b0 && !fp->x594_animCurrFlags1.bits.b0) {
+            !fp;
+            func_8007CC78(fp, fp->x110_attr.x138_DashrunTerminalVelocity);
+        }
+    }
+    
+    fp->cb.x21A0_callback_Anim = new_action_state->cb_Anim;
+    fp->cb.x219C_callback_IASA = new_action_state->cb_Input;
+    fp->cb.x21A4_callback_Phys = new_action_state->cb_Physics;
+    fp->cb.x21A8_callback_Coll = new_action_state->cb_Collision;
+    fp->cb.x21AC_callback_Cam = new_action_state->cb_Camera;
+    
+    fp->cb.x21B0_callback_Accessory1 = 0;
+    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21C0_callback_OnGiveDamage = 0;
+    fp->cb.x21C4_callback_OnShieldHit = 0;
+    fp->cb.x21C8_callback_OnReflectHit = 0;
+    fp->cb.x21D0_callback_EveryHitlag = 0;
+    fp->cb.x21CC_callback = 0;
+    fp->cb.x21D8_callback_ExitHitlag = 0;
+    fp->cb.x21D4_callback_EnterHitlag = 0;
+    fp->cb.x21DC_callback_OnTakeDamage = 0;
+    fp->cb.x21F0_callback = 0;
+    fp->cb.x21F4_callback = 0;
+    fp->cb.x21F8_callback = 0;
+    fp->cb.x21E4_callback_OnDeath2 = 0;
 }
 
 void Fighter_8006A1BC(HSD_GObj* fighter_gobj) {
