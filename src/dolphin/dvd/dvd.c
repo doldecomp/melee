@@ -30,13 +30,12 @@ static struct {
     u32 userLength;
     u32 padding0;
 } tmpBuffer;
-
 static u8 pad[0x60];
 DVDCommandBlock DummyCommandBlock;
 u8 ResetAlarm[0x28];
 
 static DVDCommandBlock* executing;
-static DVDDiskID* IDShouldBe;
+static DVDDiskID* currID;
 static OSBootInfo* bootInfo;
 static volatile BOOL PauseFlag;
 static volatile BOOL PausingFlag;
@@ -67,7 +66,7 @@ void DVDInit(void)
         __DVDClearWaitingQueue();
         __DVDInitWA();
         bootInfo = (void*) 0x80000000;
-        IDShouldBe = (void*) 0x80000000;
+        currID = (void*) 0x80000000;
         __OSSetInterruptHandler(0x15, __DVDInterruptHandler);
         __OSUnmaskInterrupts(0x400);
         OSInitThreadQueue(&__DVDThreadQueue);
@@ -366,7 +365,7 @@ static void stateCheckID(void)
             DVDLowStopMotor(&cbForStateCheckID1);
             return;
         } else {
-            memcpy(IDShouldBe, &tmpBuffer, sizeof(tmpBuffer));
+            memcpy(currID, &tmpBuffer, sizeof(tmpBuffer));
             executing->state = 1;
             DCInvalidateRange(&tmpBuffer, sizeof(tmpBuffer));
             LastState = stateCheckID2;
@@ -374,7 +373,7 @@ static void stateCheckID(void)
         }
         break;
     default:
-        if (memcmp(&tmpBuffer, IDShouldBe, sizeof(tmpBuffer)) != 0) {
+        if (memcmp(&tmpBuffer, currID, sizeof(tmpBuffer)) != 0) {
             DVDLowStopMotor(&cbForStateCheckID1);
         } else {
             LastState = stateCheckID3;
@@ -386,7 +385,7 @@ static void stateCheckID(void)
 
 static void stateCheckID3(DVDCommandBlock*)
 {
-    DVDLowAudioBufferConfig(IDShouldBe->streaming, 10, cbForStateCheckID3);
+    DVDLowAudioBufferConfig(currID->streaming, 10, cbForStateCheckID3);
 }
 
 static void stateCheckID2(DVDCommandBlock*)
