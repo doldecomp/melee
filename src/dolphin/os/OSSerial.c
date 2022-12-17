@@ -1144,7 +1144,7 @@ lbl_8034A3D0:
 extern unk_t Alarm;
 
 #pragma push
-asm unk_t AlarmHandler()
+static asm unk_t AlarmHandler()
 { // clang-format off
     nofralloc
 /* 8034A3F0 00346FD0  7C 08 02 A6 */	mflr r0
