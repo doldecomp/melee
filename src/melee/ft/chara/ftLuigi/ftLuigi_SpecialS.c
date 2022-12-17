@@ -25,7 +25,7 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     if ((f32)fp->x673 < luigiAttrs->x4_LUIGI_GREENMISSILE_SMASH)
     {
         fp->luigiVars[0].SpecialS.chargeFrames = (s32)luigiAttrs->x8_LUIGI_GREENMISSILE_CHARGE_RATE;
-        fp->x2072_b4 = 1;
+        fp->x2070.x2072_b4 = 1;
     }
     else fp->luigiVars[0].SpecialS.chargeFrames = 0;
 

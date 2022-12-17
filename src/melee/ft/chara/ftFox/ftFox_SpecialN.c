@@ -100,7 +100,7 @@ BOOL ftFox_CheckBlasterAction(HSD_GObj* fighter_gobj)
             case ASID_THROWHI:
             case ASID_THROWLW:
 
-            if (fp->x2071_b6 != FALSE)
+            if (fp->x2070.x2071_b6 != FALSE)
             {
                 return TRUE;
             }
