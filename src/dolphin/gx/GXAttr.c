@@ -442,14 +442,11 @@ static jtbl_t jtbl_80401110 = {
     &lbl_8033C918
 };
 
-// regswaps
-// https://decomp.me/scratch/CGI1t // 80 (97.95%)
-#ifdef NON_MATCHING
 void __GXSetVAT(void)
 {
     u8 i;
     for (i = 0; i < 8; i++) {
-        if (__GXContexts.main->x4EE & (1 << i)) {
+        if (__GXContexts.main->x4EE & (1 << (u32) i)) {
             WGPIPE.u8 = GX_LOAD_CP_REG;
             WGPIPE.u8 = i | 0x70;
             WGPIPE.u32 = __GXContexts.main->x1C_data[i];
@@ -463,56 +460,6 @@ void __GXSetVAT(void)
     }
     __GXContexts.main->x4EE = 0;
 }
-#else
-#pragma push
-asm unk_t __GXSetVAT()
-{ // clang-format off
-    nofralloc
-/* 8033C770 00339350  81 4D A5 08 */	lwz r10, __GXContexts(r13)
-/* 8033C774 00339354  39 80 00 00 */	li r12, 0
-/* 8033C778 00339358  39 60 00 00 */	li r11, 0
-/* 8033C77C 0033935C  3C E0 CC 01 */	lis r7, 0xcc01
-/* 8033C780 00339360  48 00 00 70 */	b lbl_8033C7F0
-lbl_8033C784:
-/* 8033C784 00339364  55 89 06 3E */	clrlwi r9, r12, 0x18
-/* 8033C788 00339368  88 6A 04 EE */	lbz r3, 0x4ee(r10)
-/* 8033C78C 0033936C  38 00 00 01 */	li r0, 1
-/* 8033C790 00339370  7C 00 48 30 */	slw r0, r0, r9
-/* 8033C794 00339374  7C 60 00 39 */	and. r0, r3, r0
-/* 8033C798 00339378  41 82 00 50 */	beq lbl_8033C7E8
-/* 8033C79C 0033937C  39 00 00 08 */	li r8, 8
-/* 8033C7A0 00339380  99 07 80 00 */	stb r8, -0x8000(r7)
-/* 8033C7A4 00339384  61 23 00 70 */	ori r3, r9, 0x70
-/* 8033C7A8 00339388  38 0B 00 1C */	addi r0, r11, 0x1c
-/* 8033C7AC 0033938C  98 67 80 00 */	stb r3, -0x8000(r7)
-/* 8033C7B0 00339390  61 25 00 80 */	ori r5, r9, 0x80
-/* 8033C7B4 00339394  38 8B 00 3C */	addi r4, r11, 0x3c
-/* 8033C7B8 00339398  7C CA 00 2E */	lwzx r6, r10, r0
-/* 8033C7BC 0033939C  61 23 00 90 */	ori r3, r9, 0x90
-/* 8033C7C0 003393A0  38 0B 00 5C */	addi r0, r11, 0x5c
-/* 8033C7C4 003393A4  90 C7 80 00 */	stw r6, -0x8000(r7)
-/* 8033C7C8 003393A8  99 07 80 00 */	stb r8, -0x8000(r7)
-/* 8033C7CC 003393AC  98 A7 80 00 */	stb r5, -0x8000(r7)
-/* 8033C7D0 003393B0  7C 8A 20 2E */	lwzx r4, r10, r4
-/* 8033C7D4 003393B4  90 87 80 00 */	stw r4, -0x8000(r7)
-/* 8033C7D8 003393B8  99 07 80 00 */	stb r8, -0x8000(r7)
-/* 8033C7DC 003393BC  98 67 80 00 */	stb r3, -0x8000(r7)
-/* 8033C7E0 003393C0  7C 0A 00 2E */	lwzx r0, r10, r0
-/* 8033C7E4 003393C4  90 07 80 00 */	stw r0, -0x8000(r7)
-lbl_8033C7E8:
-/* 8033C7E8 003393C8  39 6B 00 04 */	addi r11, r11, 4
-/* 8033C7EC 003393CC  39 8C 00 01 */	addi r12, r12, 1
-lbl_8033C7F0:
-/* 8033C7F0 003393D0  55 80 06 3E */	clrlwi r0, r12, 0x18
-/* 8033C7F4 003393D4  28 00 00 08 */	cmplwi r0, 8
-/* 8033C7F8 003393D8  41 80 FF 8C */	blt lbl_8033C784
-/* 8033C7FC 003393DC  80 6D A5 08 */	lwz r3, __GXContexts(r13)
-/* 8033C800 003393E0  38 00 00 00 */	li r0, 0
-/* 8033C804 003393E4  98 03 04 EE */	stb r0, 0x4ee(r3)
-/* 8033C808 003393E8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
-#endif
 
 void GXSetArray(s32 arg0, s32 arg1, u8 arg2)
 {

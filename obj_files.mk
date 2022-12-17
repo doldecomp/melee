@@ -608,14 +608,12 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/OSResetSW.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSResetSW_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSRtc.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSRtc_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSSerial.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSSerial_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSSync.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSThread.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSThread_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSTime.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSTime_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSUartExi.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/init/__ppc_eabi_init_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.c.o\
@@ -652,7 +650,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/card/CARDRename.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/ax/AX.s.o\
+	$(BUILD_DIR)/src/dolphin/ax/AX.c.o\
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.s.o\
 
 TEXT_O_FILES +=\

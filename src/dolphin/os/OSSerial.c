@@ -1,47 +1,32 @@
 #include <dolphin/os/OSInterrupt.h>
 
-extern unk_t lbl_80402358;
+extern struct {
+    s32 status;
+    u32 xy;
+    s32 unused[0x20 - 0x8];
+} lbl_80402358;
 
-#pragma push
-asm unk_t SIBusy()
-{ // clang-format off
-    nofralloc
-/* 803494BC 0034609C  3C 60 80 40 */	lis r3, lbl_80402358@ha
-/* 803494C0 003460A0  80 03 23 58 */	lwz r0, lbl_80402358@l(r3)
-/* 803494C4 003460A4  2C 00 FF FF */	cmpwi r0, -1
-/* 803494C8 003460A8  41 82 00 0C */	beq lbl_803494D4
-/* 803494CC 003460AC  38 60 00 01 */	li r3, 1
-/* 803494D0 003460B0  4E 80 00 20 */	blr 
-lbl_803494D4:
-/* 803494D4 003460B4  38 60 00 00 */	li r3, 0
-/* 803494D8 003460B8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+BOOL SIBusy(void)
+{
+    if (lbl_80402358.status != -1) {
+        return TRUE;
+    }
+    return FALSE;
+}
 
-extern unk_t Packet;
+extern struct {
+    s32 x0;
+    u8 pad[32 - 4];
+} Packet[];
 
-#pragma push
-asm unk_t SIIsChanBusy()
-{ // clang-format off
-    nofralloc
-/* 803494DC 003460BC  3C 80 80 4A */	lis r4, Packet@ha
-/* 803494E0 003460C0  54 65 28 34 */	slwi r5, r3, 5
-/* 803494E4 003460C4  38 04 7D B8 */	addi r0, r4, Packet@l
-/* 803494E8 003460C8  7C 80 2A 14 */	add r4, r0, r5
-/* 803494EC 003460CC  80 04 00 00 */	lwz r0, 0(r4)
-/* 803494F0 003460D0  38 A0 00 01 */	li r5, 1
-/* 803494F4 003460D4  2C 00 FF FF */	cmpwi r0, -1
-/* 803494F8 003460D8  40 82 00 18 */	bne lbl_80349510
-/* 803494FC 003460DC  3C 80 80 40 */	lis r4, lbl_80402358@ha
-/* 80349500 003460E0  80 04 23 58 */	lwz r0, lbl_80402358@l(r4)
-/* 80349504 003460E4  7C 00 18 00 */	cmpw r0, r3
-/* 80349508 003460E8  41 82 00 08 */	beq lbl_80349510
-/* 8034950C 003460EC  38 A0 00 00 */	li r5, 0
-lbl_80349510:
-/* 80349510 003460F0  7C A3 2B 78 */	mr r3, r5
-/* 80349514 003460F4  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+BOOL SIIsChanBusy(s32 arg0)
+{
+    BOOL var_r5 = TRUE;
+    if (Packet[arg0].x0 == -1 && lbl_80402358.status != arg0) {
+        var_r5 = FALSE;
+    }
+    return var_r5;
+}
 
 extern unk_t lbl_804A7EF8;
 extern unk_t lbl_804A7ED8;
@@ -924,59 +909,32 @@ lbl_8034A0AC:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm unk_t SISetCommand()
-{ // clang-format off
-    nofralloc
-/* 8034A0CC 00346CAC  1C 03 00 0C */	mulli r0, r3, 0xc
-/* 8034A0D0 00346CB0  3C 60 CC 00 */	lis r3, 0xCC006400@ha
-/* 8034A0D4 00346CB4  38 63 64 00 */	addi r3, r3, 0xCC006400@l
-/* 8034A0D8 00346CB8  7C 83 01 2E */	stwx r4, r3, r0
-/* 8034A0DC 00346CBC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+extern volatile struct {
+    u32 command, x4, x8;
+} SIRegs[] : 0xCC006400;
 
-#pragma push
-asm unk_t SITransferCommands()
-{ // clang-format off
-    nofralloc
-/* 8034A0E0 00346CC0  3C 60 CC 00 */	lis r3, 0xCC006438@ha
-/* 8034A0E4 00346CC4  3C 00 80 00 */	lis r0, 0x8000
-/* 8034A0E8 00346CC8  90 03 64 38 */	stw r0, 0xCC006438@l(r3)
-/* 8034A0EC 00346CCC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void SISetCommand(s32 index, s32 value)
+{
+    SIRegs[index].command = value;
+}
 
-#pragma push
-asm unk_t SISetXY()
-{ // clang-format off
-    nofralloc
-/* 8034A0F0 00346CD0  7C 08 02 A6 */	mflr r0
-/* 8034A0F4 00346CD4  90 01 00 04 */	stw r0, 4(r1)
-/* 8034A0F8 00346CD8  54 80 40 2E */	slwi r0, r4, 8
-/* 8034A0FC 00346CDC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8034A100 00346CE0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8034A104 00346CE4  54 7F 80 1E */	slwi r31, r3, 0x10
-/* 8034A108 00346CE8  7F FF 03 78 */	or r31, r31, r0
-/* 8034A10C 00346CEC  4B FF D2 59 */	bl OSDisableInterrupts
-/* 8034A110 00346CF0  3C 80 80 40 */	lis r4, lbl_80402358@ha
-/* 8034A114 00346CF4  38 84 23 58 */	addi r4, r4, lbl_80402358@l
-/* 8034A118 00346CF8  84 04 00 04 */	lwzu r0, 4(r4)
-/* 8034A11C 00346CFC  54 00 06 0A */	rlwinm r0, r0, 0, 0x18, 5
-/* 8034A120 00346D00  90 04 00 00 */	stw r0, 0(r4)
-/* 8034A124 00346D04  80 04 00 00 */	lwz r0, 0(r4)
-/* 8034A128 00346D08  7C 00 FB 78 */	or r0, r0, r31
-/* 8034A12C 00346D0C  90 04 00 00 */	stw r0, 0(r4)
-/* 8034A130 00346D10  83 E4 00 00 */	lwz r31, 0(r4)
-/* 8034A134 00346D14  4B FF D2 59 */	bl OSRestoreInterrupts
-/* 8034A138 00346D18  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8034A13C 00346D1C  7F E3 FB 78 */	mr r3, r31
-/* 8034A140 00346D20  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8034A144 00346D24  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034A148 00346D28  7C 08 03 A6 */	mtlr r0
-/* 8034A14C 00346D2C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void SITransferCommands(void)
+{
+    SIRegs[4].x8 = 0x80000000;
+}
+
+s32 SISetXY(u32 arg0, u32 arg1)
+{
+    BOOL intr;
+    u32 temp_r4 = (arg0 << 0x10);
+    temp_r4 |= (arg1 << 8);
+    intr = OSDisableInterrupts();
+    lbl_80402358.xy &= 0xFC0000FF;
+    lbl_80402358.xy |= temp_r4;
+    temp_r4 = lbl_80402358.xy;
+    OSRestoreInterrupts(intr);
+    return temp_r4;
+}
 
 #pragma push
 asm unk_t SIEnablePolling()

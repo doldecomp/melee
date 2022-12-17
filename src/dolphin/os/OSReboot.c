@@ -2,40 +2,24 @@
 
 extern unk_t ICFlashInvalidate();
 
-#pragma push
-static asm unk_t Run()
-{ // clang-format off
-    nofralloc
-/* 803480F8 00344CD8  7C 08 02 A6 */	mflr r0
-/* 803480FC 00344CDC  90 01 00 04 */	stw r0, 4(r1)
-/* 80348100 00344CE0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80348104 00344CE4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80348108 00344CE8  7C 7F 1B 78 */	mr r31, r3
-/* 8034810C 00344CEC  4B FF F2 59 */	bl OSDisableInterrupts
-/* 80348110 00344CF0  4B FF C7 FD */	bl ICFlashInvalidate
-/* 80348114 00344CF4  7C 00 04 AC */	sync
-/* 80348118 00344CF8  4C 00 01 2C */	isync 
-/* 8034811C 00344CFC  7F E8 03 A6 */	mtlr r31
-/* 80348120 00344D00  4E 80 00 20 */	blr 
-/* 80348124 00344D04  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80348128 00344D08  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8034812C 00344D0C  38 21 00 18 */	addi r1, r1, 0x18
-/* 80348130 00344D10  7C 08 03 A6 */	mtlr r0
-/* 80348134 00344D14  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void Run(register void (*callback)())
+{
+    OSDisableInterrupts();
+    ICFlashInvalidate();
+    __sync();
+    __isync();
+    asm {
+        mtlr callback
+        blr
+    }
+}
 
-extern unk_t lbl_804D7398;
+extern BOOL lbl_804D7398;
 
-#pragma push
-static asm unk_t Callback()
-{ // clang-format off
-    nofralloc
-/* 80348138 00344D18  38 00 00 01 */	li r0, 1
-/* 8034813C 00344D1C  90 0D BC F8 */	stw r0, lbl_804D7398(r13)
-/* 80348140 00344D20  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+static void Callback(void)
+{
+    lbl_804D7398 = TRUE;
+}
 
 extern unk_t lbl_804A7D40;
 extern unk_t lbl_804D7390;

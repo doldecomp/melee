@@ -215,15 +215,10 @@ lbl_803450C4:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm OSContext* OSGetCurrentContext(void)
-{ // clang-format off
-    nofralloc
-/* 803450E8 00341CC8  3C 60 80 00 */	lis r3, 0x800000D4@ha
-/* 803450EC 00341CCC  80 63 00 D4 */	lwz r3, 0x800000D4@l(r3)
-/* 803450F0 00341CD0  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+OSContext* OSGetCurrentContext(void)
+{
+    return OS_CURRENT_CONTEXT;
+}
 
 // https://decomp.me/scratch/bNK5a // 0 (100%)
 #pragma push

@@ -20,8 +20,8 @@ lbl_80402318:
 
 .section .sbss
     .4byte NULL
-.global lbl_804D7378
-lbl_804D7378:
+.global InterruptHandlerTable
+InterruptHandlerTable:
 	.skip 0x4
 .global __OSLastInterruptSrr0
 __OSLastInterruptSrr0:

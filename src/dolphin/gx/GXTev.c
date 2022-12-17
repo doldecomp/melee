@@ -551,6 +551,6 @@ lbl_8034075C:
 
 void GXSetNumTevStages(u8 arg0)
 {
-    __GXContexts.main->callbacks[0x15] = (void (*)()) (((u32) __GXContexts.main->callbacks[0x15] & 0xFFFFC3FF) | ((arg0 - 1) << 10));
+    __GXContexts.main->callbacks[0x15] = (GXTexRegionCallback) (((u32) __GXContexts.main->callbacks[0x15] & 0xFFFFC3FF) | ((arg0 - 1) << 10));
     __GXContexts.main->x4F0_flags |= 4;
 }
