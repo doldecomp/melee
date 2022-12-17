@@ -12,4 +12,8 @@ void OSPanic(char *file, int line, char *msg, ...);
 #define OSRoundUp32B(x)   (((u32)(x) + 32 - 1) & ~(32 - 1))
 #define OSRoundDown32B(x) (((u32)(x)) & ~(32 - 1))
 
+#define OS_CACHED_REGION_PREFIX 0x8000
+#define OS_BASE_CACHED (OS_CACHED_REGION_PREFIX << 16)
+#define OSPhysicalToCached(paddr) ((void*)((u32)(paddr) + OS_BASE_CACHED))
+
 #endif

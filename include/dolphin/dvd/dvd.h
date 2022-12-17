@@ -41,14 +41,21 @@ struct DVDCommandBlock
     /*0x2C*/ void *userData;
 };
 
-typedef struct DVDFileInfo  DVDFileInfo;
+typedef struct DVDFileInfo DVDFileInfo;
 typedef void (*DVDCallback)(s32 result, DVDFileInfo *fileInfo);
 struct DVDFileInfo
 {
-	/*0x00*/ DVDCommandBlock cb;
+    /*0x00*/ DVDCommandBlock cb;
     /*0x30*/ u32 startAddr;
     /*0x34*/ u32 length;
 };
+
+typedef struct DVDDriveInfo {
+    u16 revisionLevel;
+    u16 deviceCode;
+    u32 releaseDate;
+    u8 padding[24];
+} DVDDriveInfo;
 
 void DVDInit(void);
 BOOL DVDOpen(char *, DVDFileInfo *);
@@ -57,6 +64,7 @@ BOOL DVDChangeDir(char *);
 BOOL DVDFastOpen(s32 entrynum, DVDFileInfo *fileInfo);
 BOOL DVDReadAsyncPrio(DVDFileInfo *fileInfo, void *addr, s32 length, s32 offset, DVDCallback callback, s32 prio);
 s32 DVDConvertPathToEntrynum(const char* pathPtr);
+void DVDReset(void);
 s32 DVDCancel(DVDCommandBlock *block);
 s32 DVDGetDriveStatus(void);
 
