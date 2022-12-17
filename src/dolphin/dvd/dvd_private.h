@@ -1,3 +1,5 @@
+static void cbForCancelAllSync(s32, DVDCommandBlock*);
+static void cbForCancelStreamSync(s32, DVDCommandBlock*);
 static void cbForCancelSync(s32, DVDCommandBlock*);
 static void cbForStateBusy(u32 intType);
 static void cbForStateCheckID1(u32 intType);

@@ -57,6 +57,9 @@ typedef struct DVDDriveInfo {
     u8 padding[24];
 } DVDDriveInfo;
 
+typedef void (*DVDLowCallback)(u32 intType);
+DVDLowCallback DVDLowClearCallback(void);
+
 void DVDInit(void);
 BOOL DVDOpen(char *, DVDFileInfo *);
 BOOL DVDClose(DVDFileInfo *);
