@@ -70,6 +70,7 @@ s32 DVDConvertPathToEntrynum(const char* pathPtr);
 void DVDReset(void);
 s32 DVDCancel(DVDCommandBlock *block);
 s32 DVDGetDriveStatus(void);
+void __CARDSetDiskID(const DVDDiskID* id);
 
 #define DVDReadAsync(fileInfo, addr, length, offset, callback) \
     DVDReadAsyncPrio((fileInfo), (addr), (length), (offset), (callback), 2)

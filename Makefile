@@ -173,6 +173,10 @@ $(BUILD_DIR)/src/melee/%.c.o: $(VANILLA_DIR)/src/melee/%.c.o $(PROFILE_DIR)/src/
 $(BUILD_DIR)/src/sysdolphin/%.c.o: $(VANILLA_DIR)/src/sysdolphin/%.c.o $(PROFILE_DIR)/src/sysdolphin/%.c.o $(FRANK)
 	@echo Frank is fixing $@
 	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
+
+$(BUILD_DIR)/src/dolphin/card/%.c.o: $(VANILLA_DIR)/src/dolphin/card/%.c.o $(PROFILE_DIR)/src/dolphin/card/%.c.o $(FRANK)
+	@echo Frank is fixing $@
+	$(QUIET) $(PYTHON) $(FRANK) $(word 1,$^) $(word 2,$^) $@
 endif
 
 -include $(DEP_FILES)

@@ -57,7 +57,7 @@ static struct {
 } tmpBuffer;
 static u8 pad[0x60];
 DVDCommandBlock DummyCommandBlock;
-u8 ResetAlarm[0x28];
+OSAlarm ResetAlarm;
 
 static DVDCommandBlock* executing;
 static DVDDiskID* currID;
@@ -478,7 +478,7 @@ static void cbForStateCheckID3(u32 intType)
     }
 }
 
-static void AlarmHandler(void)
+static void AlarmHandler(OSAlarm*, OSContext*)
 {
     DVDReset();
     DCInvalidateRange(&tmpBuffer, 0x20);
@@ -494,7 +494,6 @@ extern vu32 __OSBusClock : 0x800000F8;
 static void stateCoverClosed(void)
 {
     DVDCommandBlock* finished;
-    u32 clock;
     switch (CurrCommand) {
     case 4:
     case 5:
@@ -510,9 +509,8 @@ static void stateCoverClosed(void)
         break;
     default:
         DVDReset();
-        OSCreateAlarm(ResetAlarm);
-        clock = OS_TIMER_CLOCK;
-        OSSetAlarm(ResetAlarm, 0x10624DD3, 0, 1150 * (clock / 1000), AlarmHandler);
+        OSCreateAlarm(&ResetAlarm);
+        OSSetAlarm(&ResetAlarm, OSMillisecondsToTicks(1150), AlarmHandler);
         break;
     }
 }

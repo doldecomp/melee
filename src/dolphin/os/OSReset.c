@@ -4,17 +4,6 @@
 
 /* 0034502C */ extern void OSResetSystem(BOOL reset, u32 resetCode, BOOL forceMenu);
 
-typedef s32 (* OSResetFunction )(s32 final);
-typedef struct OSResetFunctionInfo OSResetFunctionInfo;
-
-typedef struct OSResetFunctionInfo {
-    OSResetFunction func;
-    u32 priority;
-    OSResetFunctionInfo* next;
-    OSResetFunctionInfo* prev;
-
-} OSResetFunctionInfo;
-
 typedef struct OSResetQueue {
     OSResetFunctionInfo* first;
     OSResetFunctionInfo* last;

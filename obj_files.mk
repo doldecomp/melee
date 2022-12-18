@@ -633,7 +633,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/ar/arq.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/card/CARDBios.s.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDBios.c.o\
 	$(BUILD_DIR)/asm/dolphin/card/CARDUnlock.s.o\
 	$(BUILD_DIR)/asm/dolphin/card/CARDRdrw.s.o\
 	$(BUILD_DIR)/asm/dolphin/card/CARDBlock.s.o\
