@@ -17,4 +17,6 @@ struct OSAlarm {
     OSTime start;
 };
 
+void OSSetAlarm(OSAlarm* alarm, OSTime tick, OSAlarmHandler handler);
+
 #endif // DOLPHIN_OS_OSALARM_H
