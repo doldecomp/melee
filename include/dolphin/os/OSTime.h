@@ -25,4 +25,16 @@ void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td);
 s64 OSGetTime(void);
 OSTick OSGetTick(void);
 
+extern u32 __OSBusClock
+#ifndef M2CTX
+    : 0x800000F8
+#endif
+    ;
+
+#define OS_BUS_CLOCK __OSBusClock
+#define OS_TIMER_CLOCK (OS_BUS_CLOCK / 4)
+#define OSSecondsToTicks(sec) ((sec) * OS_TIMER_CLOCK)
+#define OSMillisecondsToTicks(msec) ((msec) * (OS_TIMER_CLOCK / 1000))
+#define OSNanosecondsToTicks(nsec) (((nsec) * (OS_TIMER_CLOCK / 125000)) / 8000)
+
 #endif
