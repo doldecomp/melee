@@ -626,14 +626,14 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/vi/vi.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/ai/ai.s.o\
+	$(BUILD_DIR)/src/dolphin/ai/ai.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/ar/ar.s.o\
 	$(BUILD_DIR)/asm/dolphin/ar/arq.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/card/CARDBios.s.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDBios.c.o\
 	$(BUILD_DIR)/asm/dolphin/card/CARDUnlock.s.o\
 	$(BUILD_DIR)/asm/dolphin/card/CARDRdrw.s.o\
 	$(BUILD_DIR)/asm/dolphin/card/CARDBlock.s.o\

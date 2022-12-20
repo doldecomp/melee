@@ -17,7 +17,7 @@ struct DiskInfo
     u32 FSTMaxLength;
 };
 
-static void cb(s32 param_1, void* param_2) // param_2 is probably a struct
+void cb(s32 param_1, DVDCommandBlock* block)
 {
     if (param_1 > 0)
     {
@@ -25,11 +25,11 @@ static void cb(s32 param_1, void* param_2) // param_2 is probably a struct
         {
         case 0:
             status = 1;
-            DVDReadAbsAsyncForBS(param_2, bb2, 0x20, 0x420, cb);
+            DVDReadAbsAsyncForBS(block, bb2, 0x20, 0x420, cb);
             break;
         case 1:
             status = 2;
-            DVDReadAbsAsyncForBS(param_2, bb2->FSTLocationInRam, OSRoundUp32B(bb2->_08), bb2->_04, cb);
+            DVDReadAbsAsyncForBS(block, bb2->FSTLocationInRam, OSRoundUp32B(bb2->_08), bb2->_04, cb);
             break;
         }
     }
@@ -39,7 +39,7 @@ static void cb(s32 param_1, void* param_2) // param_2 is probably a struct
     {
         status = 0;
         DVDReset();
-        DVDReadDiskID(param_2, idTmp, cb);
+        DVDReadDiskID(block, idTmp, cb);
     }
 }
 
