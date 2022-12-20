@@ -195,12 +195,6 @@ static void TimeoutHandler(OSAlarm* alarm, OSContext* context)
     }
 }
 
-extern vu32 __OSBusClock : 0x800000F8;
-#define OS_BUS_CLOCK __OSBusClock
-#define OS_TIMER_CLOCK (OS_BUS_CLOCK / 4)
-#define OSMillisecondsToTicks(msec) ((msec) * (OS_TIMER_CLOCK / 1000))
-#define OSSecondsToTicks(sec) ((sec) *OS_TIMER_CLOCK)
-
 static void SetupTimeoutAlarm(CARDControl* card)
 {
     OSCancelAlarm(&card->alarm);

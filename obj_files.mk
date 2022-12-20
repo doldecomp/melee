@@ -626,7 +626,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/vi/vi.s.o\
 
 TEXT_O_FILES +=\
-	$(BUILD_DIR)/asm/dolphin/ai/ai.s.o\
+	$(BUILD_DIR)/src/dolphin/ai/ai.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/ar/ar.s.o\
