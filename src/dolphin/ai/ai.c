@@ -14,8 +14,9 @@ static OSTime min_wait;
 static OSTime max_wait;
 static OSTime buffer;
 
-static void __AISHandler(u8 interrupt, OSContext*);
-static void __AIDHandler(u8 interrupt, OSContext*);
+static void __AI_set_stream_sample_rate(u32 rate);
+static void __AISHandler(__OSInterrupt, OSContext*);
+static void __AIDHandler(__OSInterrupt, OSContext*);
 static void __AICallbackStackSwitch(register AIDCallback);
 static void __AI_SRC_INIT(void);
 
@@ -126,6 +127,13 @@ u32 AIGetDSPSampleRate(void)
 
 void AISetStreamSampleRate(u32 rate)
 {
+    if (rate == 1) {
+        __AI_set_stream_sample_rate(rate);
+    }
+}
+
+static void __AI_set_stream_sample_rate(u32 rate)
+{
     s32 oldInts;
     s32 state;
     u8 left;
@@ -206,7 +214,7 @@ void AIInit(u8* stack)
     __AI_init_flag = TRUE;
 }
 
-static void __AISHandler(u8 interrupt, OSContext* context)
+static void __AISHandler(__OSInterrupt interrupt, OSContext* context)
 {
     OSContext tmpContext;
     __AIRegs[0] |= 8;
@@ -219,7 +227,7 @@ static void __AISHandler(u8 interrupt, OSContext* context)
     OSSetCurrentContext(context);
 }
 
-static void __AIDHandler(u8 interrupt, struct OSContext* context)
+static void __AIDHandler(__OSInterrupt interrupt, struct OSContext* context)
 {
     OSContext tempContext;
     u32 temp = __DSPRegs[5];
