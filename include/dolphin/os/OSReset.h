@@ -15,4 +15,8 @@ struct OSResetFunctionInfo {
 
 void OSResetSystem(BOOL reset, u32 resetCode, BOOL forceMenu);
 
+#define OS_RESET_RESTART 0
+#define OS_RESET_HOTRESET 1
+#define OS_RESET_SHUTDOWN 2
+
 #endif
