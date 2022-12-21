@@ -417,7 +417,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/grtpurin.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtsamus.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtseak.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtyoshi.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtyoshi.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtzelda.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtgamewatch.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtemblem.s.o\
