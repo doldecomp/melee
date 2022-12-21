@@ -17,7 +17,7 @@ static void lbl_8021FE20(HSD_GObj*);
 static void lbl_8021FE24(void);
 static void lbl_8021FE28(HSD_GObj* gobj);
 static s32 lbl_8021FE78(void);
-void lbl_8021FE80(HSD_GObj* gobj);
+static void lbl_8021FE80(HSD_GObj* gobj);
 static void lbl_8021FEB4(void);
 static void lbl_8021FEB8(HSD_GObj* gobj);
 static s32 lbl_8021FF08(void);
