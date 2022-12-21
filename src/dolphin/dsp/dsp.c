@@ -2,10 +2,12 @@
 
 BOOL __DSP_init_flag;
 
-extern void* __DSP_curr_task;
-extern void* __DSP_first_task;
-extern void* __DSP_last_task;
-extern void* __DSP_tmp_task;
+extern DSPTaskInfo* __DSP_curr_task;
+extern DSPTaskInfo* __DSP_first_task;
+extern DSPTaskInfo* __DSP_last_task;
+extern DSPTaskInfo* __DSP_tmp_task;
+extern DSPTaskInfo* __DSP_rude_task;
+extern BOOL __DSP_rude_task_pending;
 
 u32 DSPCheckMailToDSP(void)
 {
@@ -75,4 +77,35 @@ DSPTaskInfo* DSPAddTask(DSPTaskInfo* task)
         __DSP_boot_task(task);
     }
     return task;
+}
+
+// Unknown DSP command
+// Similar to DSPReset, DSPHalt
+void DSPSomething(void)
+{
+    BOOL enabled = OSDisableInterrupts();
+    __DSPRegs[5] = (__DSPRegs[5] & ~0xA8) | 2;
+    OSRestoreInterrupts(enabled);
+}
+
+void* DSPAssertTask(DSPTaskInfo* task)
+{
+    BOOL enabled = OSDisableInterrupts();
+    if (__DSP_curr_task == task) {
+        __DSP_rude_task = task;
+        __DSP_rude_task_pending = 1;
+        OSRestoreInterrupts(enabled);
+        return task;
+    }
+    if (task->priority < __DSP_curr_task->priority) {
+        __DSP_rude_task = task;
+        __DSP_rude_task_pending = 1;
+        if (__DSP_curr_task->state == 1) {
+            DSPSomething();
+        }
+        OSRestoreInterrupts(enabled);
+        return task;
+    }
+    OSRestoreInterrupts(enabled);
+    return NULL;
 }
