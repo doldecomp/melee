@@ -634,20 +634,20 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/card/CARDBios.c.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDUnlock.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDRdrw.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDBlock.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDDir.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDCheck.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDMount.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDFormat.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDOpen.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDCreate.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDRead.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDWrite.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDDelete.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDStat.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDRename.s.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDUnlock.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDRdwr.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDBlock.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDDir.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDCheck.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDMount.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDFormat.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDOpen.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDCreate.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDRead.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDWrite.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDDelete.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDStat.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDRename.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/ax/AX.c.o\
