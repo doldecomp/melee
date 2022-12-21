@@ -405,7 +405,7 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/grtfox.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grticeclimber.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtkirby.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtkoopa.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtkoopa.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtlink.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtluigi.s.o\
 	$(BUILD_DIR)/src/melee/gr/grtmars.c.o\
