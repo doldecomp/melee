@@ -10,7 +10,7 @@ static OSResetFunctionInfo ResetFunctionInfo = { OnReset, 127 };
 
 void __CARDDefaultApiCallback(s32 chan, s32 result) {}
 
-void __CARDSyncCallback(int i)
+void __CARDSyncCallback(s32 i, s32)
 {
     OSWakeupThread(&__CARDBlock[i].threadQueue);
 }
@@ -211,18 +211,6 @@ static void SetupTimeoutAlarm(CARDControl* card)
         break;
     }
 }
-
-typedef struct CARDID {
-    u8 serial[32]; // flashID[12] + timebase[8] + counterBias[4] + language[4] + XXX[4]
-    u16 deviceID;
-    u16 size;
-    u16 encode; // character set -- 0: S-JIS, 1: ANSI
-
-    u8 padding[512 - 32 - 5 * 2];
-
-    u16 checkSum;
-    u16 checkSumInv;
-} CARDID;
 
 static s32 Retry(s32 chan)
 {
