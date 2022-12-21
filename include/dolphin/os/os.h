@@ -6,6 +6,9 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSTime.h>
 
+#define OS_SOUND_MODE_MONO 0
+#define OS_SOUND_MODE_STEREO 1
+
 void OSReport(char *, ...);
 void OSPanic(char *file, int line, char *msg, ...);
 
