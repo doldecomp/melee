@@ -652,6 +652,14 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/ax/AX.c.o\
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXAux.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXCL.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXOut.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXSPB.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXVPB.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXProf.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/DSPCode.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/ax_unk.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o\
