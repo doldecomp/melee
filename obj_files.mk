@@ -381,9 +381,9 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/grshrineroute.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grzebesroute.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grbigblueroute.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure1.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure2.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure3.s.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure1.c.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure2.c.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure3.c.o\
 	$(BUILD_DIR)/asm/melee/gr/groldyoshi.s.o\
 	$(BUILD_DIR)/asm/melee/gr/groldkongo.s.o\
 	$(BUILD_DIR)/asm/melee/gr/groldpupupu.s.o\
