@@ -1293,7 +1293,7 @@ lbl_8034A5D4:
 } // clang-format on
 #pragma pop
 
-extern unk_t lbl_804D73D0;
+extern unk_t __PADFixBits;
 extern unk_t OSGetWirelessID();
 extern unk_t OSSetWirelessID();
 
@@ -1327,10 +1327,10 @@ asm unk_t GetTypeCallback()
 /* 8034A644 00347224  57 40 07 3F */	clrlwi. r0, r26, 0x1c
 /* 8034A648 00347228  90 65 01 20 */	stw r3, 0x120(r5)
 /* 8034A64C 0034722C  7C 84 DC 30 */	srw r4, r4, r27
-/* 8034A650 00347230  80 6D BD 30 */	lwz r3, lbl_804D73D0(r13)
+/* 8034A650 00347230  80 6D BD 30 */	lwz r3, __PADFixBits(r13)
 /* 8034A654 00347234  83 9E 00 00 */	lwz r28, 0(r30)
 /* 8034A658 00347238  7C 60 20 78 */	andc r0, r3, r4
-/* 8034A65C 0034723C  90 0D BD 30 */	stw r0, lbl_804D73D0(r13)
+/* 8034A65C 0034723C  90 0D BD 30 */	stw r0, __PADFixBits(r13)
 /* 8034A660 00347240  7C 7A 20 38 */	and r26, r3, r4
 /* 8034A664 00347244  40 82 00 24 */	bne lbl_8034A688
 /* 8034A668 00347248  57 83 00 C8 */	rlwinm r3, r28, 0, 3, 4

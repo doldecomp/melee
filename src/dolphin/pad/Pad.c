@@ -7,7 +7,7 @@
 
 extern PADStatus Origin[];
 
-extern u32 lbl_804D5C3C;
+extern u32 XPatchBits;
 extern u32 AnalogMode;
 extern u32 EnabledBits;
 extern s32 ResettingChan;
@@ -101,7 +101,7 @@ void UpdateOrigin(s32 arg0)
     origin->stickY -= 0x80;
     origin->substickX -= 0x80;
     origin->substickY -= 0x80;
-    if ((lbl_804D5C3C & bit) && origin->stickX > 0x40 && (SIGetType(arg0) & 0xFFFF0000) == 0x9000000) {
+    if ((XPatchBits & bit) && origin->stickX > 0x40 && (SIGetType(arg0) & 0xFFFF0000) == 0x9000000) {
         origin->stickX = 0U;
     }
 }

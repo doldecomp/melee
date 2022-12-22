@@ -86,6 +86,6 @@ lbl_804D73C8:
 .global lbl_804D73CC
 lbl_804D73CC:
 	.skip 0x4
-.global lbl_804D73D0
-lbl_804D73D0:
+.global __PADFixBits
+__PADFixBits:
 	.skip 0x8
