@@ -4,21 +4,21 @@
 
 .global __AXGetStackHead
 __AXGetStackHead:
-/* 80358AC8 003556A8  3C 80 80 4B */	lis r4, lbl_804A8D78@ha
+/* 80358AC8 003556A8  3C 80 80 4B */	lis r4, __AXStackHead@ha
 /* 80358ACC 003556AC  54 63 10 3A */	slwi r3, r3, 2
-/* 80358AD0 003556B0  38 04 8D 78 */	addi r0, r4, lbl_804A8D78@l
+/* 80358AD0 003556B0  38 04 8D 78 */	addi r0, r4, __AXStackHead@l
 /* 80358AD4 003556B4  7C 60 1A 14 */	add r3, r0, r3
 /* 80358AD8 003556B8  80 63 00 00 */	lwz r3, 0(r3)
 /* 80358ADC 003556BC  4E 80 00 20 */	blr 
 
-.global func_80358AE0
-func_80358AE0:
+.global __AXServiceCallbackStack
+__AXServiceCallbackStack:
 /* 80358AE0 003556C0  7C 08 02 A6 */	mflr r0
 /* 80358AE4 003556C4  90 01 00 04 */	stw r0, 4(r1)
 /* 80358AE8 003556C8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80358AEC 003556CC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80358AF0 003556D0  93 C1 00 08 */	stw r30, 8(r1)
-/* 80358AF4 003556D4  48 00 01 51 */	bl func_80358C44
+/* 80358AF4 003556D4  48 00 01 51 */	bl __AXPopCallbackStack
 /* 80358AF8 003556D8  7C 7F 1B 78 */	mr r31, r3
 /* 80358AFC 003556DC  48 00 00 44 */	b lbl_80358B40
 lbl_80358B00:
@@ -32,12 +32,12 @@ lbl_80358B18:
 /* 80358B18 003556F8  4B FE E8 4D */	bl OSDisableInterrupts
 /* 80358B1C 003556FC  3B C3 00 00 */	addi r30, r3, 0
 /* 80358B20 00355700  38 7F 00 00 */	addi r3, r31, 0
-/* 80358B24 00355704  48 00 01 3D */	bl func_80358C60
+/* 80358B24 00355704  48 00 01 3D */	bl __AXRemoveFromStack
 /* 80358B28 00355708  7F E3 FB 78 */	mr r3, r31
-/* 80358B2C 0035570C  48 00 00 E9 */	bl func_80358C14
+/* 80358B2C 0035570C  48 00 00 E9 */	bl __AXPushFreeStack
 /* 80358B30 00355710  7F C3 F3 78 */	mr r3, r30
 /* 80358B34 00355714  4B FE E8 59 */	bl OSRestoreInterrupts
-/* 80358B38 00355718  48 00 01 0D */	bl func_80358C44
+/* 80358B38 00355718  48 00 01 0D */	bl __AXPopCallbackStack
 /* 80358B3C 0035571C  7C 7F 1B 78 */	mr r31, r3
 lbl_80358B40:
 /* 80358B40 00355720  28 1F 00 00 */	cmplwi r31, 0
@@ -52,13 +52,13 @@ lbl_80358B40:
 .global __AXAllocInit
 __AXAllocInit:
 /* 80358B60 00355740  38 00 00 00 */	li r0, 0
-/* 80358B64 00355744  90 0D BE 50 */	stw r0, lbl_804D74F0@sda21(r13)
+/* 80358B64 00355744  90 0D BE 50 */	stw r0, __AXCallbackStack@sda21(r13)
 /* 80358B68 00355748  38 00 00 02 */	li r0, 2
-/* 80358B6C 0035574C  3C 80 80 4B */	lis r4, lbl_804A8DF8@ha
+/* 80358B6C 0035574C  3C 80 80 4B */	lis r4, __AXStackTail@ha
 /* 80358B70 00355750  7C 09 03 A6 */	mtctr r0
-/* 80358B74 00355754  3C 60 80 4B */	lis r3, lbl_804A8D78@ha
-/* 80358B78 00355758  38 84 8D F8 */	addi r4, r4, lbl_804A8DF8@l
-/* 80358B7C 0035575C  38 63 8D 78 */	addi r3, r3, lbl_804A8D78@l
+/* 80358B74 00355754  3C 60 80 4B */	lis r3, __AXStackHead@ha
+/* 80358B78 00355758  38 84 8D F8 */	addi r4, r4, __AXStackTail@l
+/* 80358B7C 0035575C  38 63 8D 78 */	addi r3, r3, __AXStackHead@l
 lbl_80358B80:
 /* 80358B80 00355760  38 00 00 00 */	li r0, 0
 /* 80358B84 00355764  90 04 00 00 */	stw r0, 0(r4)
@@ -98,10 +98,10 @@ lbl_80358B80:
 /* 80358C0C 003557EC  42 00 FF 74 */	bdnz lbl_80358B80
 /* 80358C10 003557F0  4E 80 00 20 */	blr 
 
-.global func_80358C14
-func_80358C14:
-/* 80358C14 003557F4  3C 80 80 4B */	lis r4, lbl_804A8D78@ha
-/* 80358C18 003557F8  38 A4 8D 78 */	addi r5, r4, lbl_804A8D78@l
+.global __AXPushFreeStack
+__AXPushFreeStack:
+/* 80358C14 003557F4  3C 80 80 4B */	lis r4, __AXStackHead@ha
+/* 80358C18 003557F8  38 A4 8D 78 */	addi r5, r4, __AXStackHead@l
 /* 80358C1C 003557FC  80 85 00 00 */	lwz r4, 0(r5)
 /* 80358C20 00355800  38 00 00 00 */	li r0, 0
 /* 80358C24 00355804  90 83 00 00 */	stw r4, 0(r3)
@@ -109,31 +109,31 @@ func_80358C14:
 /* 80358C2C 0035580C  90 03 00 0C */	stw r0, 0xc(r3)
 /* 80358C30 00355810  4E 80 00 20 */	blr 
 
-.global func_80358C34
-func_80358C34:
-/* 80358C34 00355814  80 0D BE 50 */	lwz r0, lbl_804D74F0@sda21(r13)
+.global __AXPushCallbackStack
+__AXPushCallbackStack:
+/* 80358C34 00355814  80 0D BE 50 */	lwz r0, __AXCallbackStack@sda21(r13)
 /* 80358C38 00355818  90 03 00 08 */	stw r0, 8(r3)
-/* 80358C3C 0035581C  90 6D BE 50 */	stw r3, lbl_804D74F0@sda21(r13)
+/* 80358C3C 0035581C  90 6D BE 50 */	stw r3, __AXCallbackStack@sda21(r13)
 /* 80358C40 00355820  4E 80 00 20 */	blr 
 
-.global func_80358C44
-func_80358C44:
-/* 80358C44 00355824  80 0D BE 50 */	lwz r0, lbl_804D74F0@sda21(r13)
+.global __AXPopCallbackStack
+__AXPopCallbackStack:
+/* 80358C44 00355824  80 0D BE 50 */	lwz r0, __AXCallbackStack@sda21(r13)
 /* 80358C48 00355828  28 00 00 00 */	cmplwi r0, 0
 /* 80358C4C 0035582C  7C 03 03 78 */	mr r3, r0
 /* 80358C50 00355830  4D 82 00 20 */	beqlr 
 /* 80358C54 00355834  80 03 00 08 */	lwz r0, 8(r3)
-/* 80358C58 00355838  90 0D BE 50 */	stw r0, lbl_804D74F0@sda21(r13)
+/* 80358C58 00355838  90 0D BE 50 */	stw r0, __AXCallbackStack@sda21(r13)
 /* 80358C5C 0035583C  4E 80 00 20 */	blr 
 
-.global func_80358C60
-func_80358C60:
+.global __AXRemoveFromStack
+__AXRemoveFromStack:
 /* 80358C60 00355840  80 03 00 0C */	lwz r0, 0xc(r3)
-/* 80358C64 00355844  3C A0 80 4B */	lis r5, lbl_804A8D78@ha
-/* 80358C68 00355848  3C 80 80 4B */	lis r4, lbl_804A8DF8@ha
+/* 80358C64 00355844  3C A0 80 4B */	lis r5, __AXStackHead@ha
+/* 80358C68 00355848  3C 80 80 4B */	lis r4, __AXStackTail@ha
 /* 80358C6C 0035584C  54 06 10 3A */	slwi r6, r0, 2
-/* 80358C70 00355850  38 A5 8D 78 */	addi r5, r5, lbl_804A8D78@l
-/* 80358C74 00355854  38 04 8D F8 */	addi r0, r4, lbl_804A8DF8@l
+/* 80358C70 00355850  38 A5 8D 78 */	addi r5, r5, __AXStackHead@l
+/* 80358C74 00355854  38 04 8D F8 */	addi r0, r4, __AXStackTail@l
 /* 80358C78 00355858  7C E5 32 14 */	add r7, r5, r6
 /* 80358C7C 0035585C  7C A0 32 14 */	add r5, r0, r6
 /* 80358C80 00355860  80 87 00 00 */	lwz r4, 0(r7)
@@ -169,8 +169,8 @@ lbl_80358CE0:
 /* 80358CEC 003558CC  90 83 00 04 */	stw r4, 4(r3)
 /* 80358CF0 003558D0  4E 80 00 20 */	blr 
 
-.global func_80358CF4
-func_80358CF4:
+.global AXFreeVoice
+AXFreeVoice:
 /* 80358CF4 003558D4  7C 08 02 A6 */	mflr r0
 /* 80358CF8 003558D8  90 01 00 04 */	stw r0, 4(r1)
 /* 80358CFC 003558DC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -180,7 +180,7 @@ func_80358CF4:
 /* 80358D0C 003558EC  4B FE E6 59 */	bl OSDisableInterrupts
 /* 80358D10 003558F0  3B E3 00 00 */	addi r31, r3, 0
 /* 80358D14 003558F4  38 7E 00 00 */	addi r3, r30, 0
-/* 80358D18 003558F8  4B FF FF 49 */	bl func_80358C60
+/* 80358D18 003558F8  4B FF FF 49 */	bl __AXRemoveFromStack
 /* 80358D1C 003558FC  A0 1E 01 46 */	lhz r0, 0x146(r30)
 /* 80358D20 00355900  28 00 00 01 */	cmplwi r0, 1
 /* 80358D24 00355904  40 82 00 0C */	bne lbl_80358D30
@@ -188,9 +188,9 @@ func_80358CF4:
 /* 80358D2C 0035590C  90 1E 00 20 */	stw r0, 0x20(r30)
 lbl_80358D30:
 /* 80358D30 00355910  7F C3 F3 78 */	mr r3, r30
-/* 80358D34 00355914  48 00 1E 55 */	bl func_8035AB88
-/* 80358D38 00355918  3C 60 80 4B */	lis r3, lbl_804A8D78@ha
-/* 80358D3C 0035591C  38 A3 8D 78 */	addi r5, r3, lbl_804A8D78@l
+/* 80358D34 00355914  48 00 1E 55 */	bl __AXSetPBDefault
+/* 80358D38 00355918  3C 60 80 4B */	lis r3, __AXStackHead@ha
+/* 80358D3C 0035591C  38 A3 8D 78 */	addi r5, r3, __AXStackHead@l
 /* 80358D40 00355920  80 85 00 00 */	lwz r4, 0(r5)
 /* 80358D44 00355924  38 00 00 00 */	li r0, 0
 /* 80358D48 00355928  38 7F 00 00 */	addi r3, r31, 0
@@ -205,17 +205,17 @@ lbl_80358D30:
 /* 80358D6C 0035594C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80358D70 00355950  4E 80 00 20 */	blr 
 
-.global func_80358D74
-func_80358D74:
+.global AXAcquireVoice
+AXAcquireVoice:
 /* 80358D74 00355954  7C 08 02 A6 */	mflr r0
-/* 80358D78 00355958  3C C0 80 4B */	lis r6, lbl_804A8D78@ha
+/* 80358D78 00355958  3C C0 80 4B */	lis r6, __AXStackHead@ha
 /* 80358D7C 0035595C  90 01 00 04 */	stw r0, 4(r1)
 /* 80358D80 00355960  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 80358D84 00355964  BF 41 00 20 */	stmw r26, 0x20(r1)
 /* 80358D88 00355968  3B 83 00 00 */	addi r28, r3, 0
 /* 80358D8C 0035596C  3B A4 00 00 */	addi r29, r4, 0
 /* 80358D90 00355970  3B C5 00 00 */	addi r30, r5, 0
-/* 80358D94 00355974  3B 66 8D 78 */	addi r27, r6, lbl_804A8D78@l
+/* 80358D94 00355974  3B 66 8D 78 */	addi r27, r6, __AXStackHead@l
 /* 80358D98 00355978  4B FE E5 CD */	bl OSDisableInterrupts
 /* 80358D9C 0035597C  80 9B 00 00 */	lwz r4, 0(r27)
 /* 80358DA0 00355980  3B E3 00 00 */	addi r31, r3, 0
@@ -300,7 +300,7 @@ lbl_80358EB4:
 /* 80358EB8 00355A98  7F 43 D3 78 */	mr r3, r26
 /* 80358EBC 00355A9C  93 BA 00 10 */	stw r29, 0x10(r26)
 /* 80358EC0 00355AA0  93 DA 00 14 */	stw r30, 0x14(r26)
-/* 80358EC4 00355AA4  48 00 1C C5 */	bl func_8035AB88
+/* 80358EC4 00355AA4  48 00 1C C5 */	bl __AXSetPBDefault
 lbl_80358EC8:
 /* 80358EC8 00355AA8  7F E3 FB 78 */	mr r3, r31
 /* 80358ECC 00355AAC  4B FE E4 C1 */	bl OSRestoreInterrupts
@@ -311,8 +311,8 @@ lbl_80358EC8:
 /* 80358EE0 00355AC0  7C 08 03 A6 */	mtlr r0
 /* 80358EE4 00355AC4  4E 80 00 20 */	blr 
 
-.global func_80358EE8
-func_80358EE8:
+.global AXSetVoicePriority
+AXSetVoicePriority:
 /* 80358EE8 00355AC8  7C 08 02 A6 */	mflr r0
 /* 80358EEC 00355ACC  90 01 00 04 */	stw r0, 4(r1)
 /* 80358EF0 00355AD0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -324,10 +324,10 @@ func_80358EE8:
 /* 80358F08 00355AE8  4B FE E4 5D */	bl OSDisableInterrupts
 /* 80358F0C 00355AEC  3B E3 00 00 */	addi r31, r3, 0
 /* 80358F10 00355AF0  38 7D 00 00 */	addi r3, r29, 0
-/* 80358F14 00355AF4  4B FF FD 4D */	bl func_80358C60
-/* 80358F18 00355AF8  3C 60 80 4B */	lis r3, lbl_804A8D78@ha
+/* 80358F14 00355AF4  4B FF FD 4D */	bl __AXRemoveFromStack
+/* 80358F18 00355AF8  3C 60 80 4B */	lis r3, __AXStackHead@ha
 /* 80358F1C 00355AFC  57 C5 10 3A */	slwi r5, r30, 2
-/* 80358F20 00355B00  38 03 8D 78 */	addi r0, r3, lbl_804A8D78@l
+/* 80358F20 00355B00  38 03 8D 78 */	addi r0, r3, __AXStackHead@l
 /* 80358F24 00355B04  7C 80 2A 14 */	add r4, r0, r5
 /* 80358F28 00355B08  80 64 00 00 */	lwz r3, 0(r4)
 /* 80358F2C 00355B0C  38 00 00 00 */	li r0, 0
@@ -341,8 +341,8 @@ func_80358EE8:
 /* 80358F4C 00355B2C  93 A4 00 00 */	stw r29, 0(r4)
 /* 80358F50 00355B30  48 00 00 18 */	b lbl_80358F68
 lbl_80358F54:
-/* 80358F54 00355B34  3C 60 80 4B */	lis r3, lbl_804A8DF8@ha
-/* 80358F58 00355B38  38 03 8D F8 */	addi r0, r3, lbl_804A8DF8@l
+/* 80358F54 00355B34  3C 60 80 4B */	lis r3, __AXStackTail@ha
+/* 80358F58 00355B38  38 03 8D F8 */	addi r0, r3, __AXStackTail@l
 /* 80358F5C 00355B3C  7C 60 2A 14 */	add r3, r0, r5
 /* 80358F60 00355B40  93 A3 00 00 */	stw r29, 0(r3)
 /* 80358F64 00355B44  93 A4 00 00 */	stw r29, 0(r4)
@@ -362,22 +362,22 @@ lbl_80358F68:
 __AXAuxInit:
 /* 80358F90 00355B70  38 E0 00 00 */	li r7, 0
 /* 80358F94 00355B74  38 C0 00 01 */	li r6, 1
-/* 80358F98 00355B78  90 ED BE 58 */	stw r7, lbl_804D74F8@sda21(r13)
+/* 80358F98 00355B78  90 ED BE 58 */	stw r7, __AXCallbackAuxA@sda21(r13)
 /* 80358F9C 00355B7C  38 A0 00 02 */	li r5, 2
-/* 80358FA0 00355B80  3C 80 80 4B */	lis r4, lbl_804A8E80@ha
-/* 80358FA4 00355B84  90 ED BE 5C */	stw r7, lbl_804D74FC@sda21(r13)
+/* 80358FA0 00355B80  3C 80 80 4B */	lis r4, __AXBufferAuxA@ha
+/* 80358FA4 00355B84  90 ED BE 5C */	stw r7, __AXCallbackAuxB@sda21(r13)
 /* 80358FA8 00355B88  38 00 00 1E */	li r0, 0x1e
-/* 80358FAC 00355B8C  3C 60 80 4B */	lis r3, lbl_804AA500@ha
+/* 80358FAC 00355B8C  3C 60 80 4B */	lis r3, __AXBufferAuxB@ha
 /* 80358FB0 00355B90  7C 09 03 A6 */	mtctr r0
-/* 80358FB4 00355B94  90 ED BE 60 */	stw r7, lbl_804D7500@sda21(r13)
-/* 80358FB8 00355B98  38 84 8E 80 */	addi r4, r4, lbl_804A8E80@l
-/* 80358FBC 00355B9C  38 03 A5 00 */	addi r0, r3, lbl_804AA500@l
+/* 80358FB4 00355B94  90 ED BE 60 */	stw r7, __AXContextAuxA@sda21(r13)
+/* 80358FB8 00355B98  38 84 8E 80 */	addi r4, r4, __AXBufferAuxA@l
+/* 80358FBC 00355B9C  38 03 A5 00 */	addi r0, r3, __AXBufferAuxB@l
 /* 80358FC0 00355BA0  7C 83 23 78 */	mr r3, r4
-/* 80358FC4 00355BA4  90 ED BE 64 */	stw r7, lbl_804D7504@sda21(r13)
+/* 80358FC4 00355BA4  90 ED BE 64 */	stw r7, __AXContextAuxB@sda21(r13)
 /* 80358FC8 00355BA8  7C 04 03 78 */	mr r4, r0
-/* 80358FCC 00355BAC  90 ED BE 78 */	stw r7, lbl_804D7518@sda21(r13)
-/* 80358FD0 00355BB0  90 CD BE 7C */	stw r6, lbl_804D751C@sda21(r13)
-/* 80358FD4 00355BB4  90 AD BE 80 */	stw r5, lbl_804D7520@sda21(r13)
+/* 80358FCC 00355BAC  90 ED BE 78 */	stw r7, __AXAuxDspWritePosition@sda21(r13)
+/* 80358FD0 00355BB0  90 CD BE 7C */	stw r6, __AXAuxDspReadPosition@sda21(r13)
+/* 80358FD4 00355BB4  90 AD BE 80 */	stw r5, __AXAuxCpuReadWritePosition@sda21(r13)
 lbl_80358FD8:
 /* 80358FD8 00355BB8  38 00 00 00 */	li r0, 0
 /* 80358FDC 00355BBC  90 03 00 00 */	stw r0, 0(r3)
@@ -417,14 +417,14 @@ lbl_80358FD8:
 /* 80359064 00355C44  42 00 FF 74 */	bdnz lbl_80358FD8
 /* 80359068 00355C48  4E 80 00 20 */	blr 
 
-.global func_8035906C
-func_8035906C:
-/* 8035906C 00355C4C  80 0D BE 58 */	lwz r0, lbl_804D74F8@sda21(r13)
+.global __AXGetAuxAInput
+__AXGetAuxAInput:
+/* 8035906C 00355C4C  80 0D BE 58 */	lwz r0, __AXCallbackAuxA@sda21(r13)
 /* 80359070 00355C50  28 00 00 00 */	cmplwi r0, 0
 /* 80359074 00355C54  41 82 00 20 */	beq lbl_80359094
-/* 80359078 00355C58  80 AD BE 78 */	lwz r5, lbl_804D7518@sda21(r13)
-/* 8035907C 00355C5C  3C 80 80 4B */	lis r4, lbl_804A8E80@ha
-/* 80359080 00355C60  38 04 8E 80 */	addi r0, r4, lbl_804A8E80@l
+/* 80359078 00355C58  80 AD BE 78 */	lwz r5, __AXAuxDspWritePosition@sda21(r13)
+/* 8035907C 00355C5C  3C 80 80 4B */	lis r4, __AXBufferAuxA@ha
+/* 80359080 00355C60  38 04 8E 80 */	addi r0, r4, __AXBufferAuxA@l
 /* 80359084 00355C64  1C 85 07 80 */	mulli r4, r5, 0x780
 /* 80359088 00355C68  7C 00 22 14 */	add r0, r0, r4
 /* 8035908C 00355C6C  90 03 00 00 */	stw r0, 0(r3)
@@ -434,24 +434,24 @@ lbl_80359094:
 /* 80359098 00355C78  90 03 00 00 */	stw r0, 0(r3)
 /* 8035909C 00355C7C  4E 80 00 20 */	blr 
 
-.global func_803590A0
-func_803590A0:
-/* 803590A0 00355C80  80 AD BE 7C */	lwz r5, lbl_804D751C@sda21(r13)
-/* 803590A4 00355C84  3C 80 80 4B */	lis r4, lbl_804A8E80@ha
-/* 803590A8 00355C88  38 04 8E 80 */	addi r0, r4, lbl_804A8E80@l
+.global __AXGetAuxAOutput
+__AXGetAuxAOutput:
+/* 803590A0 00355C80  80 AD BE 7C */	lwz r5, __AXAuxDspReadPosition@sda21(r13)
+/* 803590A4 00355C84  3C 80 80 4B */	lis r4, __AXBufferAuxA@ha
+/* 803590A8 00355C88  38 04 8E 80 */	addi r0, r4, __AXBufferAuxA@l
 /* 803590AC 00355C8C  1C 85 07 80 */	mulli r4, r5, 0x780
 /* 803590B0 00355C90  7C 00 22 14 */	add r0, r0, r4
 /* 803590B4 00355C94  90 03 00 00 */	stw r0, 0(r3)
 /* 803590B8 00355C98  4E 80 00 20 */	blr 
 
-.global func_803590BC
-func_803590BC:
-/* 803590BC 00355C9C  80 0D BE 58 */	lwz r0, lbl_804D74F8@sda21(r13)
+.global __AXGetAuxBInput
+__AXGetAuxBInput:
+/* 803590BC 00355C9C  80 0D BE 58 */	lwz r0, __AXCallbackAuxA@sda21(r13)
 /* 803590C0 00355CA0  28 00 00 00 */	cmplwi r0, 0
 /* 803590C4 00355CA4  41 82 00 20 */	beq lbl_803590E4
-/* 803590C8 00355CA8  80 AD BE 78 */	lwz r5, lbl_804D7518@sda21(r13)
-/* 803590CC 00355CAC  3C 80 80 4B */	lis r4, lbl_804AA500@ha
-/* 803590D0 00355CB0  38 04 A5 00 */	addi r0, r4, lbl_804AA500@l
+/* 803590C8 00355CA8  80 AD BE 78 */	lwz r5, __AXAuxDspWritePosition@sda21(r13)
+/* 803590CC 00355CAC  3C 80 80 4B */	lis r4, __AXBufferAuxB@ha
+/* 803590D0 00355CB0  38 04 A5 00 */	addi r0, r4, __AXBufferAuxB@l
 /* 803590D4 00355CB4  1C 85 07 80 */	mulli r4, r5, 0x780
 /* 803590D8 00355CB8  7C 00 22 14 */	add r0, r0, r4
 /* 803590DC 00355CBC  90 03 00 00 */	stw r0, 0(r3)
@@ -461,40 +461,40 @@ lbl_803590E4:
 /* 803590E8 00355CC8  90 03 00 00 */	stw r0, 0(r3)
 /* 803590EC 00355CCC  4E 80 00 20 */	blr 
 
-.global func_803590F0
-func_803590F0:
-/* 803590F0 00355CD0  80 AD BE 7C */	lwz r5, lbl_804D751C@sda21(r13)
-/* 803590F4 00355CD4  3C 80 80 4B */	lis r4, lbl_804AA500@ha
-/* 803590F8 00355CD8  38 04 A5 00 */	addi r0, r4, lbl_804AA500@l
+.global __AXGetAuxBOutput
+__AXGetAuxBOutput:
+/* 803590F0 00355CD0  80 AD BE 7C */	lwz r5, __AXAuxDspReadPosition@sda21(r13)
+/* 803590F4 00355CD4  3C 80 80 4B */	lis r4, __AXBufferAuxB@ha
+/* 803590F8 00355CD8  38 04 A5 00 */	addi r0, r4, __AXBufferAuxB@l
 /* 803590FC 00355CDC  1C 85 07 80 */	mulli r4, r5, 0x780
 /* 80359100 00355CE0  7C 00 22 14 */	add r0, r0, r4
 /* 80359104 00355CE4  90 03 00 00 */	stw r0, 0(r3)
 /* 80359108 00355CE8  4E 80 00 20 */	blr 
 
-.global func_8035910C
-func_8035910C:
+.global __AXProcessAux
+__AXProcessAux:
 /* 8035910C 00355CEC  7C 08 02 A6 */	mflr r0
-/* 80359110 00355CF0  3C 80 80 4B */	lis r4, lbl_804A8E80@ha
+/* 80359110 00355CF0  3C 80 80 4B */	lis r4, __AXBufferAuxA@ha
 /* 80359114 00355CF4  90 01 00 04 */	stw r0, 4(r1)
 /* 80359118 00355CF8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8035911C 00355CFC  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 80359120 00355D00  3B E4 8E 80 */	addi r31, r4, lbl_804A8E80@l
-/* 80359124 00355D04  80 0D BE 78 */	lwz r0, lbl_804D7518@sda21(r13)
-/* 80359128 00355D08  80 6D BE 7C */	lwz r3, lbl_804D751C@sda21(r13)
+/* 80359120 00355D00  3B E4 8E 80 */	addi r31, r4, __AXBufferAuxA@l
+/* 80359124 00355D04  80 0D BE 78 */	lwz r0, __AXAuxDspWritePosition@sda21(r13)
+/* 80359128 00355D08  80 6D BE 7C */	lwz r3, __AXAuxDspReadPosition@sda21(r13)
 /* 8035912C 00355D0C  1C 80 07 80 */	mulli r4, r0, 0x780
-/* 80359130 00355D10  80 0D BE 58 */	lwz r0, lbl_804D74F8@sda21(r13)
+/* 80359130 00355D10  80 0D BE 58 */	lwz r0, __AXCallbackAuxA@sda21(r13)
 /* 80359134 00355D14  1C 63 07 80 */	mulli r3, r3, 0x780
 /* 80359138 00355D18  7C 9F 22 14 */	add r4, r31, r4
 /* 8035913C 00355D1C  7C 7F 1A 14 */	add r3, r31, r3
 /* 80359140 00355D20  90 8D BE 68 */	stw r4, lbl_804D7508@sda21(r13)
 /* 80359144 00355D24  38 84 16 80 */	addi r4, r4, 0x1680
-/* 80359148 00355D28  90 6D BE 6C */	stw r3, lbl_804D750C@sda21(r13)
+/* 80359148 00355D28  90 6D BE 6C */	stw r3, __AXAuxADspRead@sda21(r13)
 /* 8035914C 00355D2C  38 63 16 80 */	addi r3, r3, 0x1680
 /* 80359150 00355D30  28 00 00 00 */	cmplwi r0, 0
-/* 80359154 00355D34  90 8D BE 70 */	stw r4, lbl_804D7510@sda21(r13)
-/* 80359158 00355D38  90 6D BE 74 */	stw r3, lbl_804D7514@sda21(r13)
+/* 80359154 00355D34  90 8D BE 70 */	stw r4, __AXAuxBDspWrite@sda21(r13)
+/* 80359158 00355D38  90 6D BE 74 */	stw r3, __AXAuxBDspRead@sda21(r13)
 /* 8035915C 00355D3C  41 82 00 50 */	beq lbl_803591AC
-/* 80359160 00355D40  80 0D BE 80 */	lwz r0, lbl_804D7520@sda21(r13)
+/* 80359160 00355D40  80 0D BE 80 */	lwz r0, __AXAuxCpuReadWritePosition@sda21(r13)
 /* 80359164 00355D44  38 80 07 80 */	li r4, 0x780
 /* 80359168 00355D48  1C 00 07 80 */	mulli r0, r0, 0x780
 /* 8035916C 00355D4C  7C BF 02 14 */	add r5, r31, r0
@@ -505,22 +505,22 @@ func_8035910C:
 /* 80359180 00355D60  90 01 00 10 */	stw r0, 0x10(r1)
 /* 80359184 00355D64  80 61 00 08 */	lwz r3, 8(r1)
 /* 80359188 00355D68  4B FE B6 55 */	bl DCInvalidateRange
-/* 8035918C 00355D6C  81 8D BE 58 */	lwz r12, lbl_804D74F8@sda21(r13)
+/* 8035918C 00355D6C  81 8D BE 58 */	lwz r12, __AXCallbackAuxA@sda21(r13)
 /* 80359190 00355D70  38 61 00 08 */	addi r3, r1, 8
-/* 80359194 00355D74  80 8D BE 60 */	lwz r4, lbl_804D7500@sda21(r13)
+/* 80359194 00355D74  80 8D BE 60 */	lwz r4, __AXContextAuxA@sda21(r13)
 /* 80359198 00355D78  7D 88 03 A6 */	mtlr r12
 /* 8035919C 00355D7C  4E 80 00 21 */	blrl 
 /* 803591A0 00355D80  80 61 00 08 */	lwz r3, 8(r1)
 /* 803591A4 00355D84  38 80 07 80 */	li r4, 0x780
 /* 803591A8 00355D88  4B FE B6 CD */	bl DCFlushRangeNoSync
 lbl_803591AC:
-/* 803591AC 00355D8C  80 0D BE 5C */	lwz r0, lbl_804D74FC@sda21(r13)
+/* 803591AC 00355D8C  80 0D BE 5C */	lwz r0, __AXCallbackAuxB@sda21(r13)
 /* 803591B0 00355D90  28 00 00 00 */	cmplwi r0, 0
 /* 803591B4 00355D94  41 82 00 60 */	beq lbl_80359214
-/* 803591B8 00355D98  80 0D BE 94 */	lwz r0, lbl_804D7534@sda21(r13)
+/* 803591B8 00355D98  80 0D BE 94 */	lwz r0, __AXClMode@sda21(r13)
 /* 803591BC 00355D9C  28 00 00 04 */	cmplwi r0, 4
 /* 803591C0 00355DA0  41 82 00 54 */	beq lbl_80359214
-/* 803591C4 00355DA4  80 0D BE 80 */	lwz r0, lbl_804D7520@sda21(r13)
+/* 803591C4 00355DA4  80 0D BE 80 */	lwz r0, __AXAuxCpuReadWritePosition@sda21(r13)
 /* 803591C8 00355DA8  38 80 07 80 */	li r4, 0x780
 /* 803591CC 00355DAC  1C 00 07 80 */	mulli r0, r0, 0x780
 /* 803591D0 00355DB0  7C BF 02 14 */	add r5, r31, r0
@@ -532,30 +532,30 @@ lbl_803591AC:
 /* 803591E8 00355DC8  90 01 00 10 */	stw r0, 0x10(r1)
 /* 803591EC 00355DCC  80 61 00 08 */	lwz r3, 8(r1)
 /* 803591F0 00355DD0  4B FE B5 ED */	bl DCInvalidateRange
-/* 803591F4 00355DD4  81 8D BE 5C */	lwz r12, lbl_804D74FC@sda21(r13)
+/* 803591F4 00355DD4  81 8D BE 5C */	lwz r12, __AXCallbackAuxB@sda21(r13)
 /* 803591F8 00355DD8  38 61 00 08 */	addi r3, r1, 8
-/* 803591FC 00355DDC  80 8D BE 64 */	lwz r4, lbl_804D7504@sda21(r13)
+/* 803591FC 00355DDC  80 8D BE 64 */	lwz r4, __AXContextAuxB@sda21(r13)
 /* 80359200 00355DE0  7D 88 03 A6 */	mtlr r12
 /* 80359204 00355DE4  4E 80 00 21 */	blrl 
 /* 80359208 00355DE8  80 61 00 08 */	lwz r3, 8(r1)
 /* 8035920C 00355DEC  38 80 07 80 */	li r4, 0x780
 /* 80359210 00355DF0  4B FE B6 65 */	bl DCFlushRangeNoSync
 lbl_80359214:
-/* 80359214 00355DF4  80 AD BE 78 */	lwz r5, lbl_804D7518@sda21(r13)
+/* 80359214 00355DF4  80 AD BE 78 */	lwz r5, __AXAuxDspWritePosition@sda21(r13)
 /* 80359218 00355DF8  3C 60 AA AB */	lis r3, 0xAAAAAAAB@ha
-/* 8035921C 00355DFC  80 8D BE 7C */	lwz r4, lbl_804D751C@sda21(r13)
+/* 8035921C 00355DFC  80 8D BE 7C */	lwz r4, __AXAuxDspReadPosition@sda21(r13)
 /* 80359220 00355E00  38 C3 AA AB */	addi r6, r3, 0xAAAAAAAB@l
-/* 80359224 00355E04  80 6D BE 80 */	lwz r3, lbl_804D7520@sda21(r13)
+/* 80359224 00355E04  80 6D BE 80 */	lwz r3, __AXAuxCpuReadWritePosition@sda21(r13)
 /* 80359228 00355E08  38 05 00 01 */	addi r0, r5, 1
 /* 8035922C 00355E0C  38 84 00 01 */	addi r4, r4, 1
-/* 80359230 00355E10  90 0D BE 78 */	stw r0, lbl_804D7518@sda21(r13)
+/* 80359230 00355E10  90 0D BE 78 */	stw r0, __AXAuxDspWritePosition@sda21(r13)
 /* 80359234 00355E14  38 03 00 01 */	addi r0, r3, 1
-/* 80359238 00355E18  90 8D BE 7C */	stw r4, lbl_804D751C@sda21(r13)
-/* 8035923C 00355E1C  81 0D BE 78 */	lwz r8, lbl_804D7518@sda21(r13)
-/* 80359240 00355E20  90 0D BE 80 */	stw r0, lbl_804D7520@sda21(r13)
-/* 80359244 00355E24  80 AD BE 7C */	lwz r5, lbl_804D751C@sda21(r13)
+/* 80359238 00355E18  90 8D BE 7C */	stw r4, __AXAuxDspReadPosition@sda21(r13)
+/* 8035923C 00355E1C  81 0D BE 78 */	lwz r8, __AXAuxDspWritePosition@sda21(r13)
+/* 80359240 00355E20  90 0D BE 80 */	stw r0, __AXAuxCpuReadWritePosition@sda21(r13)
+/* 80359244 00355E24  80 AD BE 7C */	lwz r5, __AXAuxDspReadPosition@sda21(r13)
 /* 80359248 00355E28  7C E6 40 16 */	mulhwu r7, r6, r8
-/* 8035924C 00355E2C  80 6D BE 80 */	lwz r3, lbl_804D7520@sda21(r13)
+/* 8035924C 00355E2C  80 6D BE 80 */	lwz r3, __AXAuxCpuReadWritePosition@sda21(r13)
 /* 80359250 00355E30  7C 86 28 16 */	mulhwu r4, r6, r5
 /* 80359254 00355E34  7C 06 18 16 */	mulhwu r0, r6, r3
 /* 80359258 00355E38  54 E7 F8 7E */	srwi r7, r7, 1
@@ -566,53 +566,53 @@ lbl_80359214:
 /* 8035926C 00355E4C  1C 00 00 03 */	mulli r0, r0, 3
 /* 80359270 00355E50  7C C6 40 50 */	subf r6, r6, r8
 /* 80359274 00355E54  7C 84 28 50 */	subf r4, r4, r5
-/* 80359278 00355E58  90 CD BE 78 */	stw r6, lbl_804D7518@sda21(r13)
+/* 80359278 00355E58  90 CD BE 78 */	stw r6, __AXAuxDspWritePosition@sda21(r13)
 /* 8035927C 00355E5C  7C 00 18 50 */	subf r0, r0, r3
-/* 80359280 00355E60  90 8D BE 7C */	stw r4, lbl_804D751C@sda21(r13)
-/* 80359284 00355E64  90 0D BE 80 */	stw r0, lbl_804D7520@sda21(r13)
+/* 80359280 00355E60  90 8D BE 7C */	stw r4, __AXAuxDspReadPosition@sda21(r13)
+/* 80359284 00355E64  90 0D BE 80 */	stw r0, __AXAuxCpuReadWritePosition@sda21(r13)
 /* 80359288 00355E68  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8035928C 00355E6C  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 80359290 00355E70  38 21 00 20 */	addi r1, r1, 0x20
 /* 80359294 00355E74  7C 08 03 A6 */	mtlr r0
 /* 80359298 00355E78  4E 80 00 20 */	blr 
 
-.global func_8035929C
-func_8035929C:
-/* 8035929C 00355E7C  90 6D BE 58 */	stw r3, lbl_804D74F8@sda21(r13)
-/* 803592A0 00355E80  90 8D BE 60 */	stw r4, lbl_804D7500@sda21(r13)
+.global AXRegisterAuxACallback
+AXRegisterAuxACallback:
+/* 8035929C 00355E7C  90 6D BE 58 */	stw r3, __AXCallbackAuxA@sda21(r13)
+/* 803592A0 00355E80  90 8D BE 60 */	stw r4, __AXContextAuxA@sda21(r13)
 /* 803592A4 00355E84  4E 80 00 20 */	blr 
 
-.global func_803592A8
-func_803592A8:
-/* 803592A8 00355E88  90 6D BE 5C */	stw r3, lbl_804D74FC@sda21(r13)
-/* 803592AC 00355E8C  90 8D BE 64 */	stw r4, lbl_804D7504@sda21(r13)
+.global AXRegisterAuxBCallback
+AXRegisterAuxBCallback:
+/* 803592A8 00355E88  90 6D BE 5C */	stw r3, __AXCallbackAuxB@sda21(r13)
+/* 803592AC 00355E8C  90 8D BE 64 */	stw r4, __AXContextAuxB@sda21(r13)
 /* 803592B0 00355E90  4E 80 00 20 */	blr 
 
 .global __AXGetCommandListCycles
 __AXGetCommandListCycles:
-/* 803592B4 00355E94  80 6D BE 90 */	lwz r3, lbl_804D7530@sda21(r13)
+/* 803592B4 00355E94  80 6D BE 90 */	lwz r3, __AXCommandListCycles@sda21(r13)
 /* 803592B8 00355E98  4E 80 00 20 */	blr 
 
-.global func_803592BC
-func_803592BC:
-/* 803592BC 00355E9C  80 AD BE 88 */	lwz r5, lbl_804D7528@sda21(r13)
-/* 803592C0 00355EA0  3C 60 80 4B */	lis r3, lbl_804ABB80@ha
-/* 803592C4 00355EA4  38 83 BB 80 */	addi r4, r3, lbl_804ABB80@l
+.global __AXGetCommandListAddress
+__AXGetCommandListAddress:
+/* 803592BC 00355E9C  80 AD BE 88 */	lwz r5, __AXCommandListPosition@sda21(r13)
+/* 803592C0 00355EA0  3C 60 80 4B */	lis r3, __AXCommandList@ha
+/* 803592C4 00355EA4  38 83 BB 80 */	addi r4, r3, __AXCommandList@l
 /* 803592C8 00355EA8  38 05 00 01 */	addi r0, r5, 1
-/* 803592CC 00355EAC  90 0D BE 88 */	stw r0, lbl_804D7528@sda21(r13)
+/* 803592CC 00355EAC  90 0D BE 88 */	stw r0, __AXCommandListPosition@sda21(r13)
 /* 803592D0 00355EB0  1C 65 03 00 */	mulli r3, r5, 0x300
-/* 803592D4 00355EB4  80 0D BE 88 */	lwz r0, lbl_804D7528@sda21(r13)
+/* 803592D4 00355EB4  80 0D BE 88 */	lwz r0, __AXCommandListPosition@sda21(r13)
 /* 803592D8 00355EB8  7C 64 1A 14 */	add r3, r4, r3
 /* 803592DC 00355EBC  54 00 07 FE */	clrlwi r0, r0, 0x1f
-/* 803592E0 00355EC0  90 0D BE 88 */	stw r0, lbl_804D7528@sda21(r13)
-/* 803592E4 00355EC4  80 0D BE 88 */	lwz r0, lbl_804D7528@sda21(r13)
+/* 803592E0 00355EC0  90 0D BE 88 */	stw r0, __AXCommandListPosition@sda21(r13)
+/* 803592E4 00355EC4  80 0D BE 88 */	lwz r0, __AXCommandListPosition@sda21(r13)
 /* 803592E8 00355EC8  1C 00 03 00 */	mulli r0, r0, 0x300
 /* 803592EC 00355ECC  7C 04 02 14 */	add r0, r4, r0
-/* 803592F0 00355ED0  90 0D BE 8C */	stw r0, lbl_804D752C@sda21(r13)
+/* 803592F0 00355ED0  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
 /* 803592F4 00355ED4  4E 80 00 20 */	blr 
 
-.global func_803592F8
-func_803592F8:
+.global __AXNextFrame
+__AXNextFrame:
 /* 803592F8 00355ED8  7C 08 02 A6 */	mflr r0
 /* 803592FC 00355EDC  90 01 00 04 */	stw r0, 4(r1)
 /* 80359300 00355EE0  38 00 01 A9 */	li r0, 0x1a9
@@ -622,34 +622,34 @@ func_803592F8:
 /* 80359310 00355EF0  3B C4 00 00 */	addi r30, r4, 0
 /* 80359314 00355EF4  93 A1 00 34 */	stw r29, 0x34(r1)
 /* 80359318 00355EF8  3B A3 00 00 */	addi r29, r3, 0
-/* 8035931C 00355EFC  83 ED BE 8C */	lwz r31, lbl_804D752C@sda21(r13)
-/* 80359320 00355F00  90 0D BE 90 */	stw r0, lbl_804D7530@sda21(r13)
+/* 8035931C 00355EFC  83 ED BE 8C */	lwz r31, __AXClWrite@sda21(r13)
+/* 80359320 00355F00  90 0D BE 90 */	stw r0, __AXCommandListCycles@sda21(r13)
 /* 80359324 00355F04  48 00 0A 69 */	bl __AXGetStudio
 /* 80359328 00355F08  90 61 00 28 */	stw r3, 0x28(r1)
 /* 8035932C 00355F0C  38 00 00 00 */	li r0, 0
-/* 80359330 00355F10  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359330 00355F10  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359334 00355F14  B0 03 00 00 */	sth r0, 0(r3)
-/* 80359338 00355F18  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359338 00355F18  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 8035933C 00355F1C  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 80359340 00355F20  38 63 00 02 */	addi r3, r3, 2
-/* 80359344 00355F24  90 6D BE 8C */	stw r3, lbl_804D752C@sda21(r13)
+/* 80359344 00355F24  90 6D BE 8C */	stw r3, __AXClWrite@sda21(r13)
 /* 80359348 00355F28  54 00 84 3E */	srwi r0, r0, 0x10
-/* 8035934C 00355F2C  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 8035934C 00355F2C  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359350 00355F30  B0 03 00 00 */	sth r0, 0(r3)
-/* 80359354 00355F34  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359354 00355F34  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359358 00355F38  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 8035935C 00355F3C  38 63 00 02 */	addi r3, r3, 2
-/* 80359360 00355F40  90 6D BE 8C */	stw r3, lbl_804D752C@sda21(r13)
-/* 80359364 00355F44  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359360 00355F40  90 6D BE 8C */	stw r3, __AXClWrite@sda21(r13)
+/* 80359364 00355F44  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359368 00355F48  B0 03 00 00 */	sth r0, 0(r3)
-/* 8035936C 00355F4C  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
-/* 80359370 00355F50  80 6D BE 90 */	lwz r3, lbl_804D7530@sda21(r13)
-/* 80359374 00355F54  80 0D BE 94 */	lwz r0, lbl_804D7534@sda21(r13)
+/* 8035936C 00355F4C  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
+/* 80359370 00355F50  80 6D BE 90 */	lwz r3, __AXCommandListCycles@sda21(r13)
+/* 80359374 00355F54  80 0D BE 94 */	lwz r0, __AXClMode@sda21(r13)
 /* 80359378 00355F58  38 84 00 02 */	addi r4, r4, 2
 /* 8035937C 00355F5C  38 63 2E 44 */	addi r3, r3, 0x2e44
-/* 80359380 00355F60  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
+/* 80359380 00355F60  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
 /* 80359384 00355F64  2C 00 00 01 */	cmpwi r0, 1
-/* 80359388 00355F68  90 6D BE 90 */	stw r3, lbl_804D7530@sda21(r13)
+/* 80359388 00355F68  90 6D BE 90 */	stw r3, __AXCommandListCycles@sda21(r13)
 /* 8035938C 00355F6C  41 82 00 74 */	beq lbl_80359400
 /* 80359390 00355F70  40 80 00 10 */	bge lbl_803593A0
 /* 80359394 00355F74  2C 00 00 00 */	cmpwi r0, 0
@@ -660,219 +660,219 @@ lbl_803593A0:
 /* 803593A4 00355F84  41 82 00 5C */	beq lbl_80359400
 /* 803593A8 00355F88  48 00 00 A8 */	b lbl_80359450
 lbl_803593AC:
-/* 803593AC 00355F8C  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 803593AC 00355F8C  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 803593B0 00355F90  38 80 00 07 */	li r4, 7
 /* 803593B4 00355F94  57 A0 84 3E */	srwi r0, r29, 0x10
 /* 803593B8 00355F98  B0 83 00 00 */	sth r4, 0(r3)
-/* 803593BC 00355F9C  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 803593BC 00355F9C  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 803593C0 00355FA0  38 63 00 02 */	addi r3, r3, 2
-/* 803593C4 00355FA4  90 6D BE 8C */	stw r3, lbl_804D752C@sda21(r13)
-/* 803593C8 00355FA8  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 803593C4 00355FA4  90 6D BE 8C */	stw r3, __AXClWrite@sda21(r13)
+/* 803593C8 00355FA8  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 803593CC 00355FAC  B0 03 00 00 */	sth r0, 0(r3)
-/* 803593D0 00355FB0  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 803593D0 00355FB0  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 803593D4 00355FB4  38 03 00 02 */	addi r0, r3, 2
-/* 803593D8 00355FB8  90 0D BE 8C */	stw r0, lbl_804D752C@sda21(r13)
-/* 803593DC 00355FBC  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 803593D8 00355FB8  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
+/* 803593DC 00355FBC  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 803593E0 00355FC0  B3 A3 00 00 */	sth r29, 0(r3)
-/* 803593E4 00355FC4  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
-/* 803593E8 00355FC8  80 6D BE 90 */	lwz r3, lbl_804D7530@sda21(r13)
+/* 803593E4 00355FC4  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
+/* 803593E8 00355FC8  80 6D BE 90 */	lwz r3, __AXCommandListCycles@sda21(r13)
 /* 803593EC 00355FCC  38 84 00 02 */	addi r4, r4, 2
 /* 803593F0 00355FD0  38 03 05 46 */	addi r0, r3, 0x546
-/* 803593F4 00355FD4  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 803593F8 00355FD8  90 0D BE 90 */	stw r0, lbl_804D7530@sda21(r13)
+/* 803593F4 00355FD4  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 803593F8 00355FD8  90 0D BE 90 */	stw r0, __AXCommandListCycles@sda21(r13)
 /* 803593FC 00355FDC  48 00 00 54 */	b lbl_80359450
 lbl_80359400:
-/* 80359400 00355FE0  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359400 00355FE0  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359404 00355FE4  38 80 00 11 */	li r4, 0x11
 /* 80359408 00355FE8  57 A0 84 3E */	srwi r0, r29, 0x10
 /* 8035940C 00355FEC  B0 83 00 00 */	sth r4, 0(r3)
-/* 80359410 00355FF0  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359410 00355FF0  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359414 00355FF4  38 63 00 02 */	addi r3, r3, 2
-/* 80359418 00355FF8  90 6D BE 8C */	stw r3, lbl_804D752C@sda21(r13)
-/* 8035941C 00355FFC  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359418 00355FF8  90 6D BE 8C */	stw r3, __AXClWrite@sda21(r13)
+/* 8035941C 00355FFC  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359420 00356000  B0 03 00 00 */	sth r0, 0(r3)
-/* 80359424 00356004  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359424 00356004  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359428 00356008  38 03 00 02 */	addi r0, r3, 2
-/* 8035942C 0035600C  90 0D BE 8C */	stw r0, lbl_804D752C@sda21(r13)
-/* 80359430 00356010  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 8035942C 0035600C  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
+/* 80359430 00356010  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359434 00356014  B3 A3 00 00 */	sth r29, 0(r3)
-/* 80359438 00356018  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
-/* 8035943C 0035601C  80 6D BE 90 */	lwz r3, lbl_804D7530@sda21(r13)
+/* 80359438 00356018  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
+/* 8035943C 0035601C  80 6D BE 90 */	lwz r3, __AXCommandListCycles@sda21(r13)
 /* 80359440 00356020  38 84 00 02 */	addi r4, r4, 2
 /* 80359444 00356024  38 03 05 E6 */	addi r0, r3, 0x5e6
-/* 80359448 00356028  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 8035944C 0035602C  90 0D BE 90 */	stw r0, lbl_804D7530@sda21(r13)
+/* 80359448 00356028  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 8035944C 0035602C  90 0D BE 90 */	stw r0, __AXCommandListCycles@sda21(r13)
 lbl_80359450:
-/* 80359450 00356030  48 00 17 2D */	bl func_8035AB7C
+/* 80359450 00356030  48 00 17 2D */	bl __AXGetPBs
 /* 80359454 00356034  90 61 00 28 */	stw r3, 0x28(r1)
 /* 80359458 00356038  38 A0 00 02 */	li r5, 2
-/* 8035945C 0035603C  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 8035945C 0035603C  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 80359460 00356040  38 00 00 03 */	li r0, 3
 /* 80359464 00356044  38 61 00 28 */	addi r3, r1, 0x28
 /* 80359468 00356048  B0 A4 00 00 */	sth r5, 0(r4)
-/* 8035946C 0035604C  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 8035946C 0035604C  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 80359470 00356050  80 81 00 28 */	lwz r4, 0x28(r1)
 /* 80359474 00356054  38 A5 00 02 */	addi r5, r5, 2
-/* 80359478 00356058  90 AD BE 8C */	stw r5, lbl_804D752C@sda21(r13)
+/* 80359478 00356058  90 AD BE 8C */	stw r5, __AXClWrite@sda21(r13)
 /* 8035947C 0035605C  54 85 84 3E */	srwi r5, r4, 0x10
-/* 80359480 00356060  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 80359480 00356060  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 80359484 00356064  B0 A4 00 00 */	sth r5, 0(r4)
-/* 80359488 00356068  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 80359488 00356068  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 8035948C 0035606C  80 A1 00 28 */	lwz r5, 0x28(r1)
 /* 80359490 00356070  38 84 00 02 */	addi r4, r4, 2
-/* 80359494 00356074  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 80359498 00356078  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 80359494 00356074  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 80359498 00356078  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 8035949C 0035607C  B0 A4 00 00 */	sth r5, 0(r4)
-/* 803594A0 00356080  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803594A0 00356080  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803594A4 00356084  38 84 00 02 */	addi r4, r4, 2
-/* 803594A8 00356088  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 803594AC 0035608C  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803594A8 00356088  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 803594AC 0035608C  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803594B0 00356090  B0 04 00 00 */	sth r0, 0(r4)
-/* 803594B4 00356094  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803594B4 00356094  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803594B8 00356098  38 04 00 02 */	addi r0, r4, 2
-/* 803594BC 0035609C  90 0D BE 8C */	stw r0, lbl_804D752C@sda21(r13)
-/* 803594C0 003560A0  4B FF FB AD */	bl func_8035906C
+/* 803594BC 0035609C  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
+/* 803594C0 003560A0  4B FF FB AD */	bl __AXGetAuxAInput
 /* 803594C4 003560A4  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 803594C8 003560A8  28 00 00 00 */	cmplwi r0, 0
 /* 803594CC 003560AC  41 82 00 98 */	beq lbl_80359564
-/* 803594D0 003560B0  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803594D0 003560B0  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803594D4 003560B4  38 00 00 04 */	li r0, 4
 /* 803594D8 003560B8  38 61 00 28 */	addi r3, r1, 0x28
 /* 803594DC 003560BC  B0 04 00 00 */	sth r0, 0(r4)
-/* 803594E0 003560C0  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803594E0 003560C0  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803594E4 003560C4  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 803594E8 003560C8  38 84 00 02 */	addi r4, r4, 2
-/* 803594EC 003560CC  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
+/* 803594EC 003560CC  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
 /* 803594F0 003560D0  54 00 84 3E */	srwi r0, r0, 0x10
-/* 803594F4 003560D4  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803594F4 003560D4  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803594F8 003560D8  B0 04 00 00 */	sth r0, 0(r4)
-/* 803594FC 003560DC  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803594FC 003560DC  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 80359500 003560E0  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 80359504 003560E4  38 84 00 02 */	addi r4, r4, 2
-/* 80359508 003560E8  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 8035950C 003560EC  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 80359508 003560E8  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 8035950C 003560EC  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 80359510 003560F0  B0 04 00 00 */	sth r0, 0(r4)
-/* 80359514 003560F4  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 80359514 003560F4  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 80359518 003560F8  38 04 00 02 */	addi r0, r4, 2
-/* 8035951C 003560FC  90 0D BE 8C */	stw r0, lbl_804D752C@sda21(r13)
-/* 80359520 00356100  4B FF FB 81 */	bl func_803590A0
+/* 8035951C 003560FC  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
+/* 80359520 00356100  4B FF FB 81 */	bl __AXGetAuxAOutput
 /* 80359524 00356104  80 01 00 28 */	lwz r0, 0x28(r1)
-/* 80359528 00356108  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359528 00356108  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 8035952C 0035610C  54 00 84 3E */	srwi r0, r0, 0x10
 /* 80359530 00356110  B0 03 00 00 */	sth r0, 0(r3)
-/* 80359534 00356114  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359534 00356114  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359538 00356118  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 8035953C 0035611C  38 63 00 02 */	addi r3, r3, 2
-/* 80359540 00356120  90 6D BE 8C */	stw r3, lbl_804D752C@sda21(r13)
-/* 80359544 00356124  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359540 00356120  90 6D BE 8C */	stw r3, __AXClWrite@sda21(r13)
+/* 80359544 00356124  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359548 00356128  B0 03 00 00 */	sth r0, 0(r3)
-/* 8035954C 0035612C  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
-/* 80359550 00356130  80 6D BE 90 */	lwz r3, lbl_804D7530@sda21(r13)
+/* 8035954C 0035612C  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
+/* 80359550 00356130  80 6D BE 90 */	lwz r3, __AXCommandListCycles@sda21(r13)
 /* 80359554 00356134  38 84 00 02 */	addi r4, r4, 2
 /* 80359558 00356138  38 03 0D ED */	addi r0, r3, 0xded
-/* 8035955C 0035613C  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 80359560 00356140  90 0D BE 90 */	stw r0, lbl_804D7530@sda21(r13)
+/* 8035955C 0035613C  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 80359560 00356140  90 0D BE 90 */	stw r0, __AXCommandListCycles@sda21(r13)
 lbl_80359564:
 /* 80359564 00356144  38 61 00 28 */	addi r3, r1, 0x28
-/* 80359568 00356148  4B FF FB 55 */	bl func_803590BC
+/* 80359568 00356148  4B FF FB 55 */	bl __AXGetAuxBInput
 /* 8035956C 0035614C  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 80359570 00356150  28 00 00 00 */	cmplwi r0, 0
 /* 80359574 00356154  41 82 00 CC */	beq lbl_80359640
-/* 80359578 00356158  80 0D BE 94 */	lwz r0, lbl_804D7534@sda21(r13)
+/* 80359578 00356158  80 0D BE 94 */	lwz r0, __AXClMode@sda21(r13)
 /* 8035957C 0035615C  28 00 00 04 */	cmplwi r0, 4
 /* 80359580 00356160  40 82 00 2C */	bne lbl_803595AC
-/* 80359584 00356164  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359584 00356164  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359588 00356168  38 00 00 10 */	li r0, 0x10
 /* 8035958C 0035616C  B0 03 00 00 */	sth r0, 0(r3)
-/* 80359590 00356170  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
-/* 80359594 00356174  80 6D BE 90 */	lwz r3, lbl_804D7530@sda21(r13)
+/* 80359590 00356170  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
+/* 80359594 00356174  80 6D BE 90 */	lwz r3, __AXCommandListCycles@sda21(r13)
 /* 80359598 00356178  38 84 00 02 */	addi r4, r4, 2
 /* 8035959C 0035617C  38 03 0D ED */	addi r0, r3, 0xded
-/* 803595A0 00356180  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 803595A4 00356184  90 0D BE 90 */	stw r0, lbl_804D7530@sda21(r13)
+/* 803595A0 00356180  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 803595A4 00356184  90 0D BE 90 */	stw r0, __AXCommandListCycles@sda21(r13)
 /* 803595A8 00356188  48 00 00 28 */	b lbl_803595D0
 lbl_803595AC:
-/* 803595AC 0035618C  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 803595AC 0035618C  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 803595B0 00356190  38 00 00 05 */	li r0, 5
 /* 803595B4 00356194  B0 03 00 00 */	sth r0, 0(r3)
-/* 803595B8 00356198  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
-/* 803595BC 0035619C  80 6D BE 90 */	lwz r3, lbl_804D7530@sda21(r13)
+/* 803595B8 00356198  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
+/* 803595BC 0035619C  80 6D BE 90 */	lwz r3, __AXCommandListCycles@sda21(r13)
 /* 803595C0 003561A0  38 84 00 02 */	addi r4, r4, 2
 /* 803595C4 003561A4  38 03 0D ED */	addi r0, r3, 0xded
-/* 803595C8 003561A8  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 803595CC 003561AC  90 0D BE 90 */	stw r0, lbl_804D7530@sda21(r13)
+/* 803595C8 003561A8  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 803595CC 003561AC  90 0D BE 90 */	stw r0, __AXCommandListCycles@sda21(r13)
 lbl_803595D0:
 /* 803595D0 003561B0  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 803595D4 003561B4  38 61 00 28 */	addi r3, r1, 0x28
-/* 803595D8 003561B8  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803595D8 003561B8  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803595DC 003561BC  54 00 84 3E */	srwi r0, r0, 0x10
 /* 803595E0 003561C0  B0 04 00 00 */	sth r0, 0(r4)
-/* 803595E4 003561C4  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803595E4 003561C4  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803595E8 003561C8  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 803595EC 003561CC  38 84 00 02 */	addi r4, r4, 2
-/* 803595F0 003561D0  90 8D BE 8C */	stw r4, lbl_804D752C@sda21(r13)
-/* 803595F4 003561D4  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803595F0 003561D0  90 8D BE 8C */	stw r4, __AXClWrite@sda21(r13)
+/* 803595F4 003561D4  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 803595F8 003561D8  B0 04 00 00 */	sth r0, 0(r4)
-/* 803595FC 003561DC  80 8D BE 8C */	lwz r4, lbl_804D752C@sda21(r13)
+/* 803595FC 003561DC  80 8D BE 8C */	lwz r4, __AXClWrite@sda21(r13)
 /* 80359600 003561E0  38 04 00 02 */	addi r0, r4, 2
-/* 80359604 003561E4  90 0D BE 8C */	stw r0, lbl_804D752C@sda21(r13)
-/* 80359608 003561E8  4B FF FA E9 */	bl func_803590F0
+/* 80359604 003561E4  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
+/* 80359608 003561E8  4B FF FA E9 */	bl __AXGetAuxBOutput
 /* 8035960C 003561EC  80 01 00 28 */	lwz r0, 0x28(r1)
-/* 80359610 003561F0  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359610 003561F0  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359614 003561F4  54 00 84 3E */	srwi r0, r0, 0x10
 /* 80359618 003561F8  B0 03 00 00 */	sth r0, 0(r3)
-/* 8035961C 003561FC  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 8035961C 003561FC  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359620 00356200  80 01 00 28 */	lwz r0, 0x28(r1)
 /* 80359624 00356204  38 63 00 02 */	addi r3, r3, 2
-/* 80359628 00356208  90 6D BE 8C */	stw r3, lbl_804D752C@sda21(r13)
-/* 8035962C 0035620C  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359628 00356208  90 6D BE 8C */	stw r3, __AXClWrite@sda21(r13)
+/* 8035962C 0035620C  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359630 00356210  B0 03 00 00 */	sth r0, 0(r3)
-/* 80359634 00356214  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359634 00356214  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359638 00356218  38 03 00 02 */	addi r0, r3, 2
-/* 8035963C 0035621C  90 0D BE 8C */	stw r0, lbl_804D752C@sda21(r13)
+/* 8035963C 0035621C  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
 lbl_80359640:
-/* 80359640 00356220  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359640 00356220  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 80359644 00356224  38 00 00 0E */	li r0, 0xe
 /* 80359648 00356228  57 A7 84 3E */	srwi r7, r29, 0x10
 /* 8035964C 0035622C  B0 03 00 00 */	sth r0, 0(r3)
 /* 80359650 00356230  57 C6 84 3E */	srwi r6, r30, 0x10
 /* 80359654 00356234  38 00 00 0F */	li r0, 0xf
-/* 80359658 00356238  80 6D BE 8C */	lwz r3, lbl_804D752C@sda21(r13)
+/* 80359658 00356238  80 6D BE 8C */	lwz r3, __AXClWrite@sda21(r13)
 /* 8035965C 0035623C  38 80 03 00 */	li r4, 0x300
 /* 80359660 00356240  38 63 00 02 */	addi r3, r3, 2
-/* 80359664 00356244  90 6D BE 8C */	stw r3, lbl_804D752C@sda21(r13)
+/* 80359664 00356244  90 6D BE 8C */	stw r3, __AXClWrite@sda21(r13)
 /* 80359668 00356248  38 7F 00 00 */	addi r3, r31, 0
-/* 8035966C 0035624C  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 8035966C 0035624C  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 80359670 00356250  B0 E5 00 00 */	sth r7, 0(r5)
-/* 80359674 00356254  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 80359674 00356254  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 80359678 00356258  38 A5 00 02 */	addi r5, r5, 2
-/* 8035967C 0035625C  90 AD BE 8C */	stw r5, lbl_804D752C@sda21(r13)
-/* 80359680 00356260  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 8035967C 0035625C  90 AD BE 8C */	stw r5, __AXClWrite@sda21(r13)
+/* 80359680 00356260  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 80359684 00356264  B3 A5 00 00 */	sth r29, 0(r5)
-/* 80359688 00356268  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 80359688 00356268  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 8035968C 0035626C  38 A5 00 02 */	addi r5, r5, 2
-/* 80359690 00356270  90 AD BE 8C */	stw r5, lbl_804D752C@sda21(r13)
-/* 80359694 00356274  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 80359690 00356270  90 AD BE 8C */	stw r5, __AXClWrite@sda21(r13)
+/* 80359694 00356274  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 80359698 00356278  B0 C5 00 00 */	sth r6, 0(r5)
-/* 8035969C 0035627C  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 8035969C 0035627C  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 803596A0 00356280  38 A5 00 02 */	addi r5, r5, 2
-/* 803596A4 00356284  90 AD BE 8C */	stw r5, lbl_804D752C@sda21(r13)
-/* 803596A8 00356288  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 803596A4 00356284  90 AD BE 8C */	stw r5, __AXClWrite@sda21(r13)
+/* 803596A8 00356288  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 803596AC 0035628C  B3 C5 00 00 */	sth r30, 0(r5)
-/* 803596B0 00356290  80 CD BE 8C */	lwz r6, lbl_804D752C@sda21(r13)
-/* 803596B4 00356294  80 AD BE 90 */	lwz r5, lbl_804D7530@sda21(r13)
+/* 803596B0 00356290  80 CD BE 8C */	lwz r6, __AXClWrite@sda21(r13)
+/* 803596B4 00356294  80 AD BE 90 */	lwz r5, __AXCommandListCycles@sda21(r13)
 /* 803596B8 00356298  38 C6 00 02 */	addi r6, r6, 2
-/* 803596BC 0035629C  90 CD BE 8C */	stw r6, lbl_804D752C@sda21(r13)
+/* 803596BC 0035629C  90 CD BE 8C */	stw r6, __AXClWrite@sda21(r13)
 /* 803596C0 003562A0  38 A5 27 10 */	addi r5, r5, 0x2710
-/* 803596C4 003562A4  90 AD BE 90 */	stw r5, lbl_804D7530@sda21(r13)
-/* 803596C8 003562A8  80 AD BE 8C */	lwz r5, lbl_804D752C@sda21(r13)
+/* 803596C4 003562A4  90 AD BE 90 */	stw r5, __AXCommandListCycles@sda21(r13)
+/* 803596C8 003562A8  80 AD BE 8C */	lwz r5, __AXClWrite@sda21(r13)
 /* 803596CC 003562AC  B0 05 00 00 */	sth r0, 0(r5)
-/* 803596D0 003562B0  80 CD BE 8C */	lwz r6, lbl_804D752C@sda21(r13)
-/* 803596D4 003562B4  80 AD BE 90 */	lwz r5, lbl_804D7530@sda21(r13)
+/* 803596D0 003562B0  80 CD BE 8C */	lwz r6, __AXClWrite@sda21(r13)
+/* 803596D4 003562B4  80 AD BE 90 */	lwz r5, __AXCommandListCycles@sda21(r13)
 /* 803596D8 003562B8  38 C6 00 02 */	addi r6, r6, 2
 /* 803596DC 003562BC  38 05 00 02 */	addi r0, r5, 2
-/* 803596E0 003562C0  90 CD BE 8C */	stw r6, lbl_804D752C@sda21(r13)
-/* 803596E4 003562C4  90 0D BE 90 */	stw r0, lbl_804D7530@sda21(r13)
+/* 803596E0 003562C0  90 CD BE 8C */	stw r6, __AXClWrite@sda21(r13)
+/* 803596E4 003562C4  90 0D BE 90 */	stw r0, __AXCommandListCycles@sda21(r13)
 /* 803596E8 003562C8  4B FE B1 25 */	bl DCFlushRange
 /* 803596EC 003562CC  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 803596F0 003562D0  83 E1 00 3C */	lwz r31, 0x3c(r1)
@@ -884,31 +884,31 @@ lbl_80359640:
 
 .global __AXClInit
 __AXClInit:
-/* 80359708 003562E8  3C 60 80 4B */	lis r3, lbl_804ABB80@ha
+/* 80359708 003562E8  3C 60 80 4B */	lis r3, __AXCommandList@ha
 /* 8035970C 003562EC  38 80 00 00 */	li r4, 0
-/* 80359710 003562F0  38 03 BB 80 */	addi r0, r3, lbl_804ABB80@l
-/* 80359714 003562F4  90 8D BE 94 */	stw r4, lbl_804D7534@sda21(r13)
-/* 80359718 003562F8  90 8D BE 88 */	stw r4, lbl_804D7528@sda21(r13)
-/* 8035971C 003562FC  90 0D BE 8C */	stw r0, lbl_804D752C@sda21(r13)
+/* 80359710 003562F0  38 03 BB 80 */	addi r0, r3, __AXCommandList@l
+/* 80359714 003562F4  90 8D BE 94 */	stw r4, __AXClMode@sda21(r13)
+/* 80359718 003562F8  90 8D BE 88 */	stw r4, __AXCommandListPosition@sda21(r13)
+/* 8035971C 003562FC  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
 /* 80359720 00356300  4E 80 00 20 */	blr 
 
 .global __AXOutNewFrame
 __AXOutNewFrame:
 /* 80359724 00356304  7C 08 02 A6 */	mflr r0
-/* 80359728 00356308  3C 80 80 4B */	lis r4, lbl_804AC180@ha
+/* 80359728 00356308  3C 80 80 4B */	lis r4, __AXOutBuffer@ha
 /* 8035972C 0035630C  90 01 00 04 */	stw r0, 4(r1)
 /* 80359730 00356310  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80359734 00356314  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80359738 00356318  3B E4 C1 80 */	addi r31, r4, lbl_804AC180@l
+/* 80359738 00356318  3B E4 C1 80 */	addi r31, r4, __AXOutBuffer@l
 /* 8035973C 0035631C  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80359740 00356320  3B C3 00 00 */	addi r30, r3, 0
 /* 80359744 00356324  4B FF 2C AD */	bl OSGetTime
 /* 80359748 00356328  90 9F 07 84 */	stw r4, 0x784(r31)
 /* 8035974C 0035632C  90 7F 07 80 */	stw r3, 0x780(r31)
 /* 80359750 00356330  7F C3 F3 78 */	mr r3, r30
-/* 80359754 00356334  48 00 11 E1 */	bl func_8035A934
-/* 80359758 00356338  48 00 06 41 */	bl func_80359D98
-/* 8035975C 0035633C  4B FF FB 61 */	bl func_803592BC
+/* 80359754 00356334  48 00 11 E1 */	bl __AXSyncPBs
+/* 80359758 00356338  48 00 06 41 */	bl __AXPrintStudio
+/* 8035975C 0035633C  4B FF FB 61 */	bl __AXGetCommandListAddress
 /* 80359760 00356340  3C 80 BA BE */	lis r4, 0xBABE0180@ha
 /* 80359764 00356344  3B C3 00 00 */	addi r30, r3, 0
 /* 80359768 00356348  38 64 01 80 */	addi r3, r4, 0xBABE0180@l
@@ -923,18 +923,18 @@ lbl_80359784:
 /* 80359784 00356364  4B FD C8 45 */	bl DSPCheckMailToDSP
 /* 80359788 00356368  28 03 00 00 */	cmplwi r3, 0
 /* 8035978C 0035636C  40 82 FF F8 */	bne lbl_80359784
-/* 80359790 00356370  4B FF F3 51 */	bl func_80358AE0
+/* 80359790 00356370  4B FF F3 51 */	bl __AXServiceCallbackStack
 /* 80359794 00356374  4B FF 2C 5D */	bl OSGetTime
 /* 80359798 00356378  90 9F 07 8C */	stw r4, 0x78c(r31)
 /* 8035979C 0035637C  90 7F 07 88 */	stw r3, 0x788(r31)
-/* 803597A0 00356380  4B FF F9 6D */	bl func_8035910C
+/* 803597A0 00356380  4B FF F9 6D */	bl __AXProcessAux
 /* 803597A4 00356384  4B FF 2C 4D */	bl OSGetTime
 /* 803597A8 00356388  90 9F 07 94 */	stw r4, 0x794(r31)
 /* 803597AC 0035638C  90 7F 07 90 */	stw r3, 0x790(r31)
 /* 803597B0 00356390  4B FF 2C 41 */	bl OSGetTime
 /* 803597B4 00356394  90 9F 07 9C */	stw r4, 0x79c(r31)
 /* 803597B8 00356398  90 7F 07 98 */	stw r3, 0x798(r31)
-/* 803597BC 0035639C  81 8D BE A8 */	lwz r12, lbl_804D7548@sda21(r13)
+/* 803597BC 0035639C  81 8D BE A8 */	lwz r12, __AXUserFrameCallback@sda21(r13)
 /* 803597C0 003563A0  28 0C 00 00 */	cmplwi r12, 0
 /* 803597C4 003563A4  41 82 00 0C */	beq lbl_803597D0
 /* 803597C8 003563A8  7D 88 03 A6 */	mtlr r12
@@ -944,18 +944,18 @@ lbl_803597D0:
 /* 803597D4 003563B4  90 9F 07 A4 */	stw r4, 0x7a4(r31)
 /* 803597D8 003563B8  90 7F 07 A0 */	stw r3, 0x7a0(r31)
 /* 803597DC 003563BC  38 7F 05 00 */	addi r3, r31, 0x500
-/* 803597E0 003563C0  80 0D BE 98 */	lwz r0, lbl_804D7538@sda21(r13)
+/* 803597E0 003563C0  80 0D BE 98 */	lwz r0, __AXOutFrame@sda21(r13)
 /* 803597E4 003563C4  1C 00 02 80 */	mulli r0, r0, 0x280
 /* 803597E8 003563C8  7C 9F 02 14 */	add r4, r31, r0
-/* 803597EC 003563CC  4B FF FB 0D */	bl func_803592F8
-/* 803597F0 003563D0  80 6D BE 98 */	lwz r3, lbl_804D7538@sda21(r13)
+/* 803597EC 003563CC  4B FF FB 0D */	bl __AXNextFrame
+/* 803597F0 003563D0  80 6D BE 98 */	lwz r3, __AXOutFrame@sda21(r13)
 /* 803597F4 003563D4  38 80 02 80 */	li r4, 0x280
 /* 803597F8 003563D8  38 03 00 01 */	addi r0, r3, 1
-/* 803597FC 003563DC  90 0D BE 98 */	stw r0, lbl_804D7538@sda21(r13)
-/* 80359800 003563E0  80 0D BE 98 */	lwz r0, lbl_804D7538@sda21(r13)
+/* 803597FC 003563DC  90 0D BE 98 */	stw r0, __AXOutFrame@sda21(r13)
+/* 80359800 003563E0  80 0D BE 98 */	lwz r0, __AXOutFrame@sda21(r13)
 /* 80359804 003563E4  54 00 07 FE */	clrlwi r0, r0, 0x1f
-/* 80359808 003563E8  90 0D BE 98 */	stw r0, lbl_804D7538@sda21(r13)
-/* 8035980C 003563EC  80 0D BE 98 */	lwz r0, lbl_804D7538@sda21(r13)
+/* 80359808 003563E8  90 0D BE 98 */	stw r0, __AXOutFrame@sda21(r13)
+/* 8035980C 003563EC  80 0D BE 98 */	lwz r0, __AXOutFrame@sda21(r13)
 /* 80359810 003563F0  1C 00 02 80 */	mulli r0, r0, 0x280
 /* 80359814 003563F4  7C 7F 02 14 */	add r3, r31, r0
 /* 80359818 003563F8  4B FF 6C 11 */	bl AIInitDMA
@@ -997,51 +997,57 @@ lbl_80359894:
 /* 803598A0 00356480  7C 08 03 A6 */	mtlr r0
 /* 803598A4 00356484  38 21 00 18 */	addi r1, r1, 0x18
 /* 803598A8 00356488  4E 80 00 20 */	blr 
-lbl_803598AC:
+
+.global __AXOutAiCallback
+__AXOutAiCallback:
 /* 803598AC 0035648C  7C 08 02 A6 */	mflr r0
 /* 803598B0 00356490  90 01 00 04 */	stw r0, 4(r1)
 /* 803598B4 00356494  94 21 FF F8 */	stwu r1, -8(r1)
-/* 803598B8 00356498  80 0D BE 9C */	lwz r0, lbl_804D753C@sda21(r13)
+/* 803598B8 00356498  80 0D BE 9C */	lwz r0, __AXOutDspReady@sda21(r13)
 /* 803598BC 0035649C  28 00 00 00 */	cmplwi r0, 0
 /* 803598C0 003564A0  40 82 00 10 */	bne lbl_803598D0
 /* 803598C4 003564A4  4B FF 2B 2D */	bl OSGetTime
 /* 803598C8 003564A8  90 8D BE A4 */	stw r4, lbl_804D7544@sda21(r13)
-/* 803598CC 003564AC  90 6D BE A0 */	stw r3, lbl_804D7540@sda21(r13)
+/* 803598CC 003564AC  90 6D BE A0 */	stw r3, __AXOsTime@sda21(r13)
 lbl_803598D0:
-/* 803598D0 003564B0  80 0D BE 9C */	lwz r0, lbl_804D753C@sda21(r13)
+/* 803598D0 003564B0  80 0D BE 9C */	lwz r0, __AXOutDspReady@sda21(r13)
 /* 803598D4 003564B4  28 00 00 01 */	cmplwi r0, 1
 /* 803598D8 003564B8  40 82 00 18 */	bne lbl_803598F0
 /* 803598DC 003564BC  38 00 00 00 */	li r0, 0
-/* 803598E0 003564C0  90 0D BE 9C */	stw r0, lbl_804D753C@sda21(r13)
+/* 803598E0 003564C0  90 0D BE 9C */	stw r0, __AXOutDspReady@sda21(r13)
 /* 803598E4 003564C4  38 60 00 00 */	li r3, 0
 /* 803598E8 003564C8  4B FF FE 3D */	bl __AXOutNewFrame
 /* 803598EC 003564CC  48 00 00 18 */	b lbl_80359904
 lbl_803598F0:
 /* 803598F0 003564D0  38 00 00 02 */	li r0, 2
-/* 803598F4 003564D4  3C 60 80 4B */	lis r3, lbl_804AC938@ha
-/* 803598F8 003564D8  90 0D BE 9C */	stw r0, lbl_804D753C@sda21(r13)
-/* 803598FC 003564DC  38 63 C9 38 */	addi r3, r3, lbl_804AC938@l
+/* 803598F4 003564D4  3C 60 80 4B */	lis r3, task@ha
+/* 803598F8 003564D8  90 0D BE 9C */	stw r0, __AXOutDspReady@sda21(r13)
+/* 803598FC 003564DC  38 63 C9 38 */	addi r3, r3, task@l
 /* 80359900 003564E0  4B FD C8 45 */	bl DSPAssertTask
 lbl_80359904:
 /* 80359904 003564E4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80359908 003564E8  38 21 00 08 */	addi r1, r1, 8
 /* 8035990C 003564EC  7C 08 03 A6 */	mtlr r0
 /* 80359910 003564F0  4E 80 00 20 */	blr 
-lbl_80359914:
+
+.global __AXDSPInitCallback
+__AXDSPInitCallback:
 /* 80359914 003564F4  38 00 00 01 */	li r0, 1
-/* 80359918 003564F8  90 0D BE AC */	stw r0, lbl_804D754C@sda21(r13)
+/* 80359918 003564F8  90 0D BE AC */	stw r0, __AXDSPInitFlag@sda21(r13)
 /* 8035991C 003564FC  4E 80 00 20 */	blr 
-lbl_80359920:
+
+.global __AXDSPResumeCallback
+__AXDSPResumeCallback:
 /* 80359920 00356500  7C 08 02 A6 */	mflr r0
 /* 80359924 00356504  90 01 00 04 */	stw r0, 4(r1)
 /* 80359928 00356508  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8035992C 0035650C  80 0D BE 9C */	lwz r0, lbl_804D753C@sda21(r13)
+/* 8035992C 0035650C  80 0D BE 9C */	lwz r0, __AXOutDspReady@sda21(r13)
 /* 80359930 00356510  28 00 00 02 */	cmplwi r0, 2
 /* 80359934 00356514  40 82 00 2C */	bne lbl_80359960
 /* 80359938 00356518  38 00 00 00 */	li r0, 0
-/* 8035993C 0035651C  90 0D BE 9C */	stw r0, lbl_804D753C@sda21(r13)
+/* 8035993C 0035651C  90 0D BE 9C */	stw r0, __AXOutDspReady@sda21(r13)
 /* 80359940 00356520  4B FF 2A B1 */	bl OSGetTime
-/* 80359944 00356524  80 AD BE A0 */	lwz r5, lbl_804D7540@sda21(r13)
+/* 80359944 00356524  80 AD BE A0 */	lwz r5, __AXOsTime@sda21(r13)
 /* 80359948 00356528  80 0D BE A4 */	lwz r0, lbl_804D7544@sda21(r13)
 /* 8035994C 0035652C  7C 00 20 10 */	subfc r0, r0, r4
 /* 80359950 00356530  54 00 F0 BE */	srwi r0, r0, 2
@@ -1050,44 +1056,46 @@ lbl_80359920:
 /* 8035995C 0035653C  48 00 00 0C */	b lbl_80359968
 lbl_80359960:
 /* 80359960 00356540  38 00 00 01 */	li r0, 1
-/* 80359964 00356544  90 0D BE 9C */	stw r0, lbl_804D753C@sda21(r13)
+/* 80359964 00356544  90 0D BE 9C */	stw r0, __AXOutDspReady@sda21(r13)
 lbl_80359968:
 /* 80359968 00356548  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8035996C 0035654C  38 21 00 08 */	addi r1, r1, 8
 /* 80359970 00356550  7C 08 03 A6 */	mtlr r0
 /* 80359974 00356554  4E 80 00 20 */	blr 
-lbl_80359978:
+
+.global __AXDSPDoneCallback
+__AXDSPDoneCallback:
 /* 80359978 00356558  38 00 00 01 */	li r0, 1
-/* 8035997C 0035655C  90 0D BE B0 */	stw r0, lbl_804D7550@sda21(r13)
+/* 8035997C 0035655C  90 0D BE B0 */	stw r0, __AXDSPDoneFlag@sda21(r13)
 /* 80359980 00356560  4E 80 00 20 */	blr 
 
-.global func_80359984
-func_80359984:
+.global __AXOutInitDSP
+__AXOutInitDSP:
 /* 80359984 00356564  7C 08 02 A6 */	mflr r0
-/* 80359988 00356568  3C A0 80 36 */	lis r5, lbl_80359914@ha
+/* 80359988 00356568  3C A0 80 36 */	lis r5, __AXDSPInitCallback@ha
 /* 8035998C 0035656C  90 01 00 04 */	stw r0, 4(r1)
-/* 80359990 00356570  3C 60 80 40 */	lis r3, lbl_80403240@ha
-/* 80359994 00356574  38 03 32 40 */	addi r0, r3, lbl_80403240@l
+/* 80359990 00356570  3C 60 80 40 */	lis r3, axDspSlave@ha
+/* 80359994 00356574  38 03 32 40 */	addi r0, r3, axDspSlave@l
 /* 80359998 00356578  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8035999C 0035657C  3C 80 80 4B */	lis r4, lbl_804AC180@ha
+/* 8035999C 0035657C  3C 80 80 4B */	lis r4, __AXOutBuffer@ha
 /* 803599A0 00356580  39 20 00 00 */	li r9, 0
 /* 803599A4 00356584  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 803599A8 00356588  3B E4 C1 80 */	addi r31, r4, lbl_804AC180@l
-/* 803599AC 0035658C  3C 80 80 36 */	lis r4, lbl_80359920@ha
+/* 803599A8 00356588  3B E4 C1 80 */	addi r31, r4, __AXOutBuffer@l
+/* 803599AC 0035658C  3C 80 80 36 */	lis r4, __AXDSPResumeCallback@ha
 /* 803599B0 00356590  90 1F 07 C4 */	stw r0, 0x7c4(r31)
 /* 803599B4 00356594  39 1F 08 08 */	addi r8, r31, 0x808
 /* 803599B8 00356598  38 E0 00 10 */	li r7, 0x10
-/* 803599BC 0035659C  A0 0D A5 C8 */	lhz r0, lbl_804D5C68@sda21(r13)
+/* 803599BC 0035659C  A0 0D A5 C8 */	lhz r0, axDspSlaveLength@sda21(r13)
 /* 803599C0 003565A0  38 C0 00 30 */	li r6, 0x30
-/* 803599C4 003565A4  38 A5 99 14 */	addi r5, r5, lbl_80359914@l
+/* 803599C4 003565A4  38 A5 99 14 */	addi r5, r5, __AXDSPInitCallback@l
 /* 803599C8 003565A8  90 1F 07 C8 */	stw r0, 0x7c8(r31)
 /* 803599CC 003565AC  38 00 20 00 */	li r0, 0x2000
-/* 803599D0 003565B0  38 84 99 20 */	addi r4, r4, lbl_80359920@l
+/* 803599D0 003565B0  38 84 99 20 */	addi r4, r4, __AXDSPResumeCallback@l
 /* 803599D4 003565B4  91 3F 07 CC */	stw r9, 0x7cc(r31)
-/* 803599D8 003565B8  3C 60 80 36 */	lis r3, lbl_80359978@ha
+/* 803599D8 003565B8  3C 60 80 36 */	lis r3, __AXDSPDoneCallback@ha
 /* 803599DC 003565BC  91 1F 07 D0 */	stw r8, 0x7d0(r31)
 /* 803599E0 003565C0  90 1F 07 D4 */	stw r0, 0x7d4(r31)
-/* 803599E4 003565C4  38 03 99 78 */	addi r0, r3, lbl_80359978@l
+/* 803599E4 003565C4  38 03 99 78 */	addi r0, r3, __AXDSPDoneCallback@l
 /* 803599E8 003565C8  91 3F 07 D8 */	stw r9, 0x7d8(r31)
 /* 803599EC 003565CC  B0 FF 07 DC */	sth r7, 0x7dc(r31)
 /* 803599F0 003565D0  B0 DF 07 DE */	sth r6, 0x7de(r31)
@@ -1096,8 +1104,8 @@ func_80359984:
 /* 803599FC 003565DC  90 1F 07 E8 */	stw r0, 0x7e8(r31)
 /* 80359A00 003565E0  91 3F 07 EC */	stw r9, 0x7ec(r31)
 /* 80359A04 003565E4  91 3F 07 BC */	stw r9, 0x7bc(r31)
-/* 80359A08 003565E8  91 2D BE AC */	stw r9, lbl_804D754C@sda21(r13)
-/* 80359A0C 003565EC  91 2D BE B0 */	stw r9, lbl_804D7550@sda21(r13)
+/* 80359A08 003565E8  91 2D BE AC */	stw r9, __AXDSPInitFlag@sda21(r13)
+/* 80359A0C 003565EC  91 2D BE B0 */	stw r9, __AXDSPDoneFlag@sda21(r13)
 /* 80359A10 003565F0  4B FD C6 BD */	bl DSPCheckInit
 /* 80359A14 003565F4  2C 03 00 00 */	cmpwi r3, 0
 /* 80359A18 003565F8  40 82 00 08 */	bne lbl_80359A20
@@ -1106,7 +1114,7 @@ lbl_80359A20:
 /* 80359A20 00356600  38 7F 07 B8 */	addi r3, r31, 0x7b8
 /* 80359A24 00356604  4B FD C6 B1 */	bl DSPAddTask
 lbl_80359A28:
-/* 80359A28 00356608  80 0D BE AC */	lwz r0, lbl_804D754C@sda21(r13)
+/* 80359A28 00356608  80 0D BE AC */	lwz r0, __AXDSPInitFlag@sda21(r13)
 /* 80359A2C 0035660C  2C 00 00 00 */	cmpwi r0, 0
 /* 80359A30 00356610  41 82 FF F8 */	beq lbl_80359A28
 /* 80359A34 00356614  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1118,15 +1126,15 @@ lbl_80359A28:
 .global __AXOutInit
 __AXOutInit:
 /* 80359A48 00356628  7C 08 02 A6 */	mflr r0
-/* 80359A4C 0035662C  3C 60 80 4B */	lis r3, lbl_804AC180@ha
+/* 80359A4C 0035662C  3C 60 80 4B */	lis r3, __AXOutBuffer@ha
 /* 80359A50 00356630  90 01 00 04 */	stw r0, 4(r1)
 /* 80359A54 00356634  38 00 00 04 */	li r0, 4
 /* 80359A58 00356638  7C 09 03 A6 */	mtctr r0
 /* 80359A5C 0035663C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80359A60 00356640  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 80359A64 00356644  3B E3 C1 80 */	addi r31, r3, lbl_804AC180@l
+/* 80359A64 00356644  3B E3 C1 80 */	addi r31, r3, __AXOutBuffer@l
 /* 80359A68 00356648  38 60 00 00 */	li r3, 0
-/* 80359A6C 0035664C  90 6D BE 98 */	stw r3, lbl_804D7538@sda21(r13)
+/* 80359A6C 0035664C  90 6D BE 98 */	stw r3, __AXOutFrame@sda21(r13)
 /* 80359A70 00356650  38 9F 00 00 */	addi r4, r31, 0
 lbl_80359A74:
 /* 80359A74 00356654  90 64 00 00 */	stw r3, 0(r4)
@@ -1304,19 +1312,19 @@ lbl_80359BD8:
 /* 80359D20 00356900  38 7F 05 00 */	addi r3, r31, 0x500
 /* 80359D24 00356904  38 80 02 80 */	li r4, 0x280
 /* 80359D28 00356908  4B FE AA E5 */	bl DCFlushRange
-/* 80359D2C 0035690C  4B FF FC 59 */	bl func_80359984
-/* 80359D30 00356910  3C 60 80 36 */	lis r3, lbl_803598AC@ha
-/* 80359D34 00356914  38 63 98 AC */	addi r3, r3, lbl_803598AC@l
+/* 80359D2C 0035690C  4B FF FC 59 */	bl __AXOutInitDSP
+/* 80359D30 00356910  3C 60 80 36 */	lis r3, __AXOutAiCallback@ha
+/* 80359D34 00356914  38 63 98 AC */	addi r3, r3, __AXOutAiCallback@l
 /* 80359D38 00356918  4B FF 66 AD */	bl AIRegisterDMACallback
 /* 80359D3C 0035691C  38 7F 05 00 */	addi r3, r31, 0x500
 /* 80359D40 00356920  38 9F 02 80 */	addi r4, r31, 0x280
-/* 80359D44 00356924  4B FF F5 B5 */	bl func_803592F8
+/* 80359D44 00356924  4B FF F5 B5 */	bl __AXNextFrame
 /* 80359D48 00356928  38 00 00 01 */	li r0, 1
-/* 80359D4C 0035692C  90 0D BE 9C */	stw r0, lbl_804D753C@sda21(r13)
+/* 80359D4C 0035692C  90 0D BE 9C */	stw r0, __AXOutDspReady@sda21(r13)
 /* 80359D50 00356930  38 60 00 00 */	li r3, 0
 /* 80359D54 00356934  38 80 02 80 */	li r4, 0x280
-/* 80359D58 00356938  80 0D BE 98 */	lwz r0, lbl_804D7538@sda21(r13)
-/* 80359D5C 0035693C  90 6D BE A8 */	stw r3, lbl_804D7548@sda21(r13)
+/* 80359D58 00356938  80 0D BE 98 */	lwz r0, __AXOutFrame@sda21(r13)
+/* 80359D5C 0035693C  90 6D BE A8 */	stw r3, __AXUserFrameCallback@sda21(r13)
 /* 80359D60 00356940  1C 00 02 80 */	mulli r0, r0, 0x280
 /* 80359D64 00356944  7C 7F 02 14 */	add r3, r31, r0
 /* 80359D68 00356948  4B FF 66 C1 */	bl AIInitDMA
@@ -1329,25 +1337,25 @@ lbl_80359BD8:
 
 .global AXRegisterCallback
 AXRegisterCallback:
-/* 80359D84 00356964  90 6D BE A8 */	stw r3, lbl_804D7548@sda21(r13)
+/* 80359D84 00356964  90 6D BE A8 */	stw r3, __AXUserFrameCallback@sda21(r13)
 /* 80359D88 00356968  4E 80 00 20 */	blr 
 
 .global __AXGetStudio
 __AXGetStudio:
-/* 80359D8C 0035696C  3C 60 80 4B */	lis r3, lbl_804B09A0@ha
-/* 80359D90 00356970  38 63 09 A0 */	addi r3, r3, lbl_804B09A0@l
+/* 80359D8C 0035696C  3C 60 80 4B */	lis r3, __AXStudio@ha
+/* 80359D90 00356970  38 63 09 A0 */	addi r3, r3, __AXStudio@l
 /* 80359D94 00356974  4E 80 00 20 */	blr 
 
-.global func_80359D98
-func_80359D98:
+.global __AXPrintStudio
+__AXPrintStudio:
 /* 80359D98 00356978  7C 08 02 A6 */	mflr r0
 /* 80359D9C 0035697C  3C 60 66 66 */	lis r3, 0x66666667@ha
 /* 80359DA0 00356980  90 01 00 04 */	stw r0, 4(r1)
 /* 80359DA4 00356984  38 03 66 67 */	addi r0, r3, 0x66666667@l
-/* 80359DA8 00356988  3C 60 80 4B */	lis r3, lbl_804B09A0@ha
+/* 80359DA8 00356988  3C 60 80 4B */	lis r3, __AXStudio@ha
 /* 80359DAC 0035698C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80359DB0 00356990  38 63 09 A0 */	addi r3, r3, lbl_804B09A0@l
-/* 80359DB4 00356994  80 AD BE B8 */	lwz r5, lbl_804D7558@sda21(r13)
+/* 80359DB0 00356990  38 63 09 A0 */	addi r3, r3, __AXStudio@l
+/* 80359DB4 00356994  80 AD BE B8 */	lwz r5, __AXSpbAL@sda21(r13)
 /* 80359DB8 00356998  7C 00 28 96 */	mulhw r0, r0, r5
 /* 80359DBC 0035699C  7C 00 36 70 */	srawi r0, r0, 6
 /* 80359DC0 003569A0  54 04 0F FE */	srwi r4, r0, 0x1f
@@ -1364,20 +1372,20 @@ lbl_80359DE4:
 /* 80359DE4 003569C4  90 A3 00 00 */	stw r5, 0(r3)
 /* 80359DE8 003569C8  7C 04 00 D0 */	neg r0, r4
 /* 80359DEC 003569CC  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 80359DF0 003569D0  80 8D BE B8 */	lwz r4, lbl_804D7558@sda21(r13)
+/* 80359DF0 003569D0  80 8D BE B8 */	lwz r4, __AXSpbAL@sda21(r13)
 /* 80359DF4 003569D4  7C 85 20 50 */	subf r4, r5, r4
-/* 80359DF8 003569D8  90 8D BE B8 */	stw r4, lbl_804D7558@sda21(r13)
+/* 80359DF8 003569D8  90 8D BE B8 */	stw r4, __AXSpbAL@sda21(r13)
 /* 80359DFC 003569DC  7C 00 07 34 */	extsh r0, r0
 /* 80359E00 003569E0  B0 03 00 04 */	sth r0, 4(r3)
 /* 80359E04 003569E4  48 00 00 14 */	b lbl_80359E18
 lbl_80359E08:
 /* 80359E08 003569E8  38 00 00 00 */	li r0, 0
-/* 80359E0C 003569EC  90 0D BE B8 */	stw r0, lbl_804D7558@sda21(r13)
+/* 80359E0C 003569EC  90 0D BE B8 */	stw r0, __AXSpbAL@sda21(r13)
 /* 80359E10 003569F0  90 03 00 00 */	stw r0, 0(r3)
 /* 80359E14 003569F4  B0 03 00 04 */	sth r0, 4(r3)
 lbl_80359E18:
 /* 80359E18 003569F8  3C 80 66 66 */	lis r4, 0x66666667@ha
-/* 80359E1C 003569FC  80 AD BE BC */	lwz r5, lbl_804D755C@sda21(r13)
+/* 80359E1C 003569FC  80 AD BE BC */	lwz r5, __AXSpbAR@sda21(r13)
 /* 80359E20 00356A00  38 04 66 67 */	addi r0, r4, 0x66666667@l
 /* 80359E24 00356A04  7C 00 28 96 */	mulhw r0, r0, r5
 /* 80359E28 00356A08  7C 00 36 70 */	srawi r0, r0, 6
@@ -1395,20 +1403,20 @@ lbl_80359E50:
 /* 80359E50 00356A30  90 A3 00 06 */	stw r5, 6(r3)
 /* 80359E54 00356A34  7C 04 00 D0 */	neg r0, r4
 /* 80359E58 00356A38  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 80359E5C 00356A3C  80 8D BE BC */	lwz r4, lbl_804D755C@sda21(r13)
+/* 80359E5C 00356A3C  80 8D BE BC */	lwz r4, __AXSpbAR@sda21(r13)
 /* 80359E60 00356A40  7C 85 20 50 */	subf r4, r5, r4
-/* 80359E64 00356A44  90 8D BE BC */	stw r4, lbl_804D755C@sda21(r13)
+/* 80359E64 00356A44  90 8D BE BC */	stw r4, __AXSpbAR@sda21(r13)
 /* 80359E68 00356A48  7C 00 07 34 */	extsh r0, r0
 /* 80359E6C 00356A4C  B0 03 00 0A */	sth r0, 0xa(r3)
 /* 80359E70 00356A50  48 00 00 14 */	b lbl_80359E84
 lbl_80359E74:
 /* 80359E74 00356A54  38 00 00 00 */	li r0, 0
-/* 80359E78 00356A58  90 0D BE BC */	stw r0, lbl_804D755C@sda21(r13)
+/* 80359E78 00356A58  90 0D BE BC */	stw r0, __AXSpbAR@sda21(r13)
 /* 80359E7C 00356A5C  90 03 00 06 */	stw r0, 6(r3)
 /* 80359E80 00356A60  B0 03 00 0A */	sth r0, 0xa(r3)
 lbl_80359E84:
 /* 80359E84 00356A64  3C 80 66 66 */	lis r4, 0x66666667@ha
-/* 80359E88 00356A68  80 AD BE C0 */	lwz r5, lbl_804D7560@sda21(r13)
+/* 80359E88 00356A68  80 AD BE C0 */	lwz r5, __AXSpbAS@sda21(r13)
 /* 80359E8C 00356A6C  38 04 66 67 */	addi r0, r4, 0x66666667@l
 /* 80359E90 00356A70  7C 00 28 96 */	mulhw r0, r0, r5
 /* 80359E94 00356A74  7C 00 36 70 */	srawi r0, r0, 6
@@ -1426,20 +1434,20 @@ lbl_80359EBC:
 /* 80359EBC 00356A9C  90 A3 00 0C */	stw r5, 0xc(r3)
 /* 80359EC0 00356AA0  7C 04 00 D0 */	neg r0, r4
 /* 80359EC4 00356AA4  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 80359EC8 00356AA8  80 8D BE C0 */	lwz r4, lbl_804D7560@sda21(r13)
+/* 80359EC8 00356AA8  80 8D BE C0 */	lwz r4, __AXSpbAS@sda21(r13)
 /* 80359ECC 00356AAC  7C 85 20 50 */	subf r4, r5, r4
-/* 80359ED0 00356AB0  90 8D BE C0 */	stw r4, lbl_804D7560@sda21(r13)
+/* 80359ED0 00356AB0  90 8D BE C0 */	stw r4, __AXSpbAS@sda21(r13)
 /* 80359ED4 00356AB4  7C 00 07 34 */	extsh r0, r0
 /* 80359ED8 00356AB8  B0 03 00 10 */	sth r0, 0x10(r3)
 /* 80359EDC 00356ABC  48 00 00 14 */	b lbl_80359EF0
 lbl_80359EE0:
 /* 80359EE0 00356AC0  38 00 00 00 */	li r0, 0
-/* 80359EE4 00356AC4  90 0D BE C0 */	stw r0, lbl_804D7560@sda21(r13)
+/* 80359EE4 00356AC4  90 0D BE C0 */	stw r0, __AXSpbAS@sda21(r13)
 /* 80359EE8 00356AC8  90 03 00 0C */	stw r0, 0xc(r3)
 /* 80359EEC 00356ACC  B0 03 00 10 */	sth r0, 0x10(r3)
 lbl_80359EF0:
 /* 80359EF0 00356AD0  3C 80 66 66 */	lis r4, 0x66666667@ha
-/* 80359EF4 00356AD4  80 AD BE C4 */	lwz r5, lbl_804D7564@sda21(r13)
+/* 80359EF4 00356AD4  80 AD BE C4 */	lwz r5, __AXSpbAAL@sda21(r13)
 /* 80359EF8 00356AD8  38 04 66 67 */	addi r0, r4, 0x66666667@l
 /* 80359EFC 00356ADC  7C 00 28 96 */	mulhw r0, r0, r5
 /* 80359F00 00356AE0  7C 00 36 70 */	srawi r0, r0, 6
@@ -1457,20 +1465,20 @@ lbl_80359F28:
 /* 80359F28 00356B08  90 A3 00 12 */	stw r5, 0x12(r3)
 /* 80359F2C 00356B0C  7C 04 00 D0 */	neg r0, r4
 /* 80359F30 00356B10  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 80359F34 00356B14  80 8D BE C4 */	lwz r4, lbl_804D7564@sda21(r13)
+/* 80359F34 00356B14  80 8D BE C4 */	lwz r4, __AXSpbAAL@sda21(r13)
 /* 80359F38 00356B18  7C 85 20 50 */	subf r4, r5, r4
-/* 80359F3C 00356B1C  90 8D BE C4 */	stw r4, lbl_804D7564@sda21(r13)
+/* 80359F3C 00356B1C  90 8D BE C4 */	stw r4, __AXSpbAAL@sda21(r13)
 /* 80359F40 00356B20  7C 00 07 34 */	extsh r0, r0
 /* 80359F44 00356B24  B0 03 00 16 */	sth r0, 0x16(r3)
 /* 80359F48 00356B28  48 00 00 14 */	b lbl_80359F5C
 lbl_80359F4C:
 /* 80359F4C 00356B2C  38 00 00 00 */	li r0, 0
-/* 80359F50 00356B30  90 0D BE C4 */	stw r0, lbl_804D7564@sda21(r13)
+/* 80359F50 00356B30  90 0D BE C4 */	stw r0, __AXSpbAAL@sda21(r13)
 /* 80359F54 00356B34  90 03 00 12 */	stw r0, 0x12(r3)
 /* 80359F58 00356B38  B0 03 00 16 */	sth r0, 0x16(r3)
 lbl_80359F5C:
 /* 80359F5C 00356B3C  3C 80 66 66 */	lis r4, 0x66666667@ha
-/* 80359F60 00356B40  80 AD BE C8 */	lwz r5, lbl_804D7568@sda21(r13)
+/* 80359F60 00356B40  80 AD BE C8 */	lwz r5, __AXSpbAAR@sda21(r13)
 /* 80359F64 00356B44  38 04 66 67 */	addi r0, r4, 0x66666667@l
 /* 80359F68 00356B48  7C 00 28 96 */	mulhw r0, r0, r5
 /* 80359F6C 00356B4C  7C 00 36 70 */	srawi r0, r0, 6
@@ -1488,20 +1496,20 @@ lbl_80359F94:
 /* 80359F94 00356B74  90 A3 00 18 */	stw r5, 0x18(r3)
 /* 80359F98 00356B78  7C 04 00 D0 */	neg r0, r4
 /* 80359F9C 00356B7C  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 80359FA0 00356B80  80 8D BE C8 */	lwz r4, lbl_804D7568@sda21(r13)
+/* 80359FA0 00356B80  80 8D BE C8 */	lwz r4, __AXSpbAAR@sda21(r13)
 /* 80359FA4 00356B84  7C 85 20 50 */	subf r4, r5, r4
-/* 80359FA8 00356B88  90 8D BE C8 */	stw r4, lbl_804D7568@sda21(r13)
+/* 80359FA8 00356B88  90 8D BE C8 */	stw r4, __AXSpbAAR@sda21(r13)
 /* 80359FAC 00356B8C  7C 00 07 34 */	extsh r0, r0
 /* 80359FB0 00356B90  B0 03 00 1C */	sth r0, 0x1c(r3)
 /* 80359FB4 00356B94  48 00 00 14 */	b lbl_80359FC8
 lbl_80359FB8:
 /* 80359FB8 00356B98  38 00 00 00 */	li r0, 0
-/* 80359FBC 00356B9C  90 0D BE C8 */	stw r0, lbl_804D7568@sda21(r13)
+/* 80359FBC 00356B9C  90 0D BE C8 */	stw r0, __AXSpbAAR@sda21(r13)
 /* 80359FC0 00356BA0  90 03 00 18 */	stw r0, 0x18(r3)
 /* 80359FC4 00356BA4  B0 03 00 1C */	sth r0, 0x1c(r3)
 lbl_80359FC8:
 /* 80359FC8 00356BA8  3C 80 66 66 */	lis r4, 0x66666667@ha
-/* 80359FCC 00356BAC  80 AD BE CC */	lwz r5, lbl_804D756C@sda21(r13)
+/* 80359FCC 00356BAC  80 AD BE CC */	lwz r5, __AXSpbAAS@sda21(r13)
 /* 80359FD0 00356BB0  38 04 66 67 */	addi r0, r4, 0x66666667@l
 /* 80359FD4 00356BB4  7C 00 28 96 */	mulhw r0, r0, r5
 /* 80359FD8 00356BB8  7C 00 36 70 */	srawi r0, r0, 6
@@ -1519,20 +1527,20 @@ lbl_8035A000:
 /* 8035A000 00356BE0  90 A3 00 1E */	stw r5, 0x1e(r3)
 /* 8035A004 00356BE4  7C 04 00 D0 */	neg r0, r4
 /* 8035A008 00356BE8  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 8035A00C 00356BEC  80 8D BE CC */	lwz r4, lbl_804D756C@sda21(r13)
+/* 8035A00C 00356BEC  80 8D BE CC */	lwz r4, __AXSpbAAS@sda21(r13)
 /* 8035A010 00356BF0  7C 85 20 50 */	subf r4, r5, r4
-/* 8035A014 00356BF4  90 8D BE CC */	stw r4, lbl_804D756C@sda21(r13)
+/* 8035A014 00356BF4  90 8D BE CC */	stw r4, __AXSpbAAS@sda21(r13)
 /* 8035A018 00356BF8  7C 00 07 34 */	extsh r0, r0
 /* 8035A01C 00356BFC  B0 03 00 22 */	sth r0, 0x22(r3)
 /* 8035A020 00356C00  48 00 00 14 */	b lbl_8035A034
 lbl_8035A024:
 /* 8035A024 00356C04  38 00 00 00 */	li r0, 0
-/* 8035A028 00356C08  90 0D BE CC */	stw r0, lbl_804D756C@sda21(r13)
+/* 8035A028 00356C08  90 0D BE CC */	stw r0, __AXSpbAAS@sda21(r13)
 /* 8035A02C 00356C0C  90 03 00 1E */	stw r0, 0x1e(r3)
 /* 8035A030 00356C10  B0 03 00 22 */	sth r0, 0x22(r3)
 lbl_8035A034:
 /* 8035A034 00356C14  3C 80 66 66 */	lis r4, 0x66666667@ha
-/* 8035A038 00356C18  80 AD BE D0 */	lwz r5, lbl_804D7570@sda21(r13)
+/* 8035A038 00356C18  80 AD BE D0 */	lwz r5, __AXSpbABL@sda21(r13)
 /* 8035A03C 00356C1C  38 04 66 67 */	addi r0, r4, 0x66666667@l
 /* 8035A040 00356C20  7C 00 28 96 */	mulhw r0, r0, r5
 /* 8035A044 00356C24  7C 00 36 70 */	srawi r0, r0, 6
@@ -1550,20 +1558,20 @@ lbl_8035A06C:
 /* 8035A06C 00356C4C  90 A3 00 24 */	stw r5, 0x24(r3)
 /* 8035A070 00356C50  7C 04 00 D0 */	neg r0, r4
 /* 8035A074 00356C54  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 8035A078 00356C58  80 8D BE D0 */	lwz r4, lbl_804D7570@sda21(r13)
+/* 8035A078 00356C58  80 8D BE D0 */	lwz r4, __AXSpbABL@sda21(r13)
 /* 8035A07C 00356C5C  7C 85 20 50 */	subf r4, r5, r4
-/* 8035A080 00356C60  90 8D BE D0 */	stw r4, lbl_804D7570@sda21(r13)
+/* 8035A080 00356C60  90 8D BE D0 */	stw r4, __AXSpbABL@sda21(r13)
 /* 8035A084 00356C64  7C 00 07 34 */	extsh r0, r0
 /* 8035A088 00356C68  B0 03 00 28 */	sth r0, 0x28(r3)
 /* 8035A08C 00356C6C  48 00 00 14 */	b lbl_8035A0A0
 lbl_8035A090:
 /* 8035A090 00356C70  38 00 00 00 */	li r0, 0
-/* 8035A094 00356C74  90 0D BE D0 */	stw r0, lbl_804D7570@sda21(r13)
+/* 8035A094 00356C74  90 0D BE D0 */	stw r0, __AXSpbABL@sda21(r13)
 /* 8035A098 00356C78  90 03 00 24 */	stw r0, 0x24(r3)
 /* 8035A09C 00356C7C  B0 03 00 28 */	sth r0, 0x28(r3)
 lbl_8035A0A0:
 /* 8035A0A0 00356C80  3C 80 66 66 */	lis r4, 0x66666667@ha
-/* 8035A0A4 00356C84  80 AD BE D4 */	lwz r5, lbl_804D7574@sda21(r13)
+/* 8035A0A4 00356C84  80 AD BE D4 */	lwz r5, __AXSpbABR@sda21(r13)
 /* 8035A0A8 00356C88  38 04 66 67 */	addi r0, r4, 0x66666667@l
 /* 8035A0AC 00356C8C  7C 00 28 96 */	mulhw r0, r0, r5
 /* 8035A0B0 00356C90  7C 00 36 70 */	srawi r0, r0, 6
@@ -1581,20 +1589,20 @@ lbl_8035A0D8:
 /* 8035A0D8 00356CB8  90 A3 00 2A */	stw r5, 0x2a(r3)
 /* 8035A0DC 00356CBC  7C 04 00 D0 */	neg r0, r4
 /* 8035A0E0 00356CC0  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 8035A0E4 00356CC4  80 8D BE D4 */	lwz r4, lbl_804D7574@sda21(r13)
+/* 8035A0E4 00356CC4  80 8D BE D4 */	lwz r4, __AXSpbABR@sda21(r13)
 /* 8035A0E8 00356CC8  7C 85 20 50 */	subf r4, r5, r4
-/* 8035A0EC 00356CCC  90 8D BE D4 */	stw r4, lbl_804D7574@sda21(r13)
+/* 8035A0EC 00356CCC  90 8D BE D4 */	stw r4, __AXSpbABR@sda21(r13)
 /* 8035A0F0 00356CD0  7C 00 07 34 */	extsh r0, r0
 /* 8035A0F4 00356CD4  B0 03 00 2E */	sth r0, 0x2e(r3)
 /* 8035A0F8 00356CD8  48 00 00 14 */	b lbl_8035A10C
 lbl_8035A0FC:
 /* 8035A0FC 00356CDC  38 00 00 00 */	li r0, 0
-/* 8035A100 00356CE0  90 0D BE D4 */	stw r0, lbl_804D7574@sda21(r13)
+/* 8035A100 00356CE0  90 0D BE D4 */	stw r0, __AXSpbABR@sda21(r13)
 /* 8035A104 00356CE4  90 03 00 2A */	stw r0, 0x2a(r3)
 /* 8035A108 00356CE8  B0 03 00 2E */	sth r0, 0x2e(r3)
 lbl_8035A10C:
 /* 8035A10C 00356CEC  3C 80 66 66 */	lis r4, 0x66666667@ha
-/* 8035A110 00356CF0  80 AD BE D8 */	lwz r5, lbl_804D7578@sda21(r13)
+/* 8035A110 00356CF0  80 AD BE D8 */	lwz r5, __AXSpbABS@sda21(r13)
 /* 8035A114 00356CF4  38 04 66 67 */	addi r0, r4, 0x66666667@l
 /* 8035A118 00356CF8  7C 00 28 96 */	mulhw r0, r0, r5
 /* 8035A11C 00356CFC  7C 00 36 70 */	srawi r0, r0, 6
@@ -1612,15 +1620,15 @@ lbl_8035A144:
 /* 8035A144 00356D24  90 A3 00 30 */	stw r5, 0x30(r3)
 /* 8035A148 00356D28  7C 04 00 D0 */	neg r0, r4
 /* 8035A14C 00356D2C  1C A4 00 A0 */	mulli r5, r4, 0xa0
-/* 8035A150 00356D30  80 8D BE D8 */	lwz r4, lbl_804D7578@sda21(r13)
+/* 8035A150 00356D30  80 8D BE D8 */	lwz r4, __AXSpbABS@sda21(r13)
 /* 8035A154 00356D34  7C 85 20 50 */	subf r4, r5, r4
-/* 8035A158 00356D38  90 8D BE D8 */	stw r4, lbl_804D7578@sda21(r13)
+/* 8035A158 00356D38  90 8D BE D8 */	stw r4, __AXSpbABS@sda21(r13)
 /* 8035A15C 00356D3C  7C 00 07 34 */	extsh r0, r0
 /* 8035A160 00356D40  B0 03 00 34 */	sth r0, 0x34(r3)
 /* 8035A164 00356D44  48 00 00 14 */	b lbl_8035A178
 lbl_8035A168:
 /* 8035A168 00356D48  38 00 00 00 */	li r0, 0
-/* 8035A16C 00356D4C  90 0D BE D8 */	stw r0, lbl_804D7578@sda21(r13)
+/* 8035A16C 00356D4C  90 0D BE D8 */	stw r0, __AXSpbABS@sda21(r13)
 /* 8035A170 00356D50  90 03 00 30 */	stw r0, 0x30(r3)
 /* 8035A174 00356D54  B0 03 00 34 */	sth r0, 0x34(r3)
 lbl_8035A178:
@@ -1634,69 +1642,69 @@ lbl_8035A178:
 .global __AXSPBInit
 __AXSPBInit:
 /* 8035A190 00356D70  38 00 00 00 */	li r0, 0
-/* 8035A194 00356D74  90 0D BE D8 */	stw r0, lbl_804D7578@sda21(r13)
-/* 8035A198 00356D78  90 0D BE D4 */	stw r0, lbl_804D7574@sda21(r13)
-/* 8035A19C 00356D7C  90 0D BE D0 */	stw r0, lbl_804D7570@sda21(r13)
-/* 8035A1A0 00356D80  90 0D BE CC */	stw r0, lbl_804D756C@sda21(r13)
-/* 8035A1A4 00356D84  90 0D BE C8 */	stw r0, lbl_804D7568@sda21(r13)
-/* 8035A1A8 00356D88  90 0D BE C4 */	stw r0, lbl_804D7564@sda21(r13)
-/* 8035A1AC 00356D8C  90 0D BE C0 */	stw r0, lbl_804D7560@sda21(r13)
-/* 8035A1B0 00356D90  90 0D BE BC */	stw r0, lbl_804D755C@sda21(r13)
-/* 8035A1B4 00356D94  90 0D BE B8 */	stw r0, lbl_804D7558@sda21(r13)
+/* 8035A194 00356D74  90 0D BE D8 */	stw r0, __AXSpbABS@sda21(r13)
+/* 8035A198 00356D78  90 0D BE D4 */	stw r0, __AXSpbABR@sda21(r13)
+/* 8035A19C 00356D7C  90 0D BE D0 */	stw r0, __AXSpbABL@sda21(r13)
+/* 8035A1A0 00356D80  90 0D BE CC */	stw r0, __AXSpbAAS@sda21(r13)
+/* 8035A1A4 00356D84  90 0D BE C8 */	stw r0, __AXSpbAAR@sda21(r13)
+/* 8035A1A8 00356D88  90 0D BE C4 */	stw r0, __AXSpbAAL@sda21(r13)
+/* 8035A1AC 00356D8C  90 0D BE C0 */	stw r0, __AXSpbAS@sda21(r13)
+/* 8035A1B0 00356D90  90 0D BE BC */	stw r0, __AXSpbAR@sda21(r13)
+/* 8035A1B4 00356D94  90 0D BE B8 */	stw r0, __AXSpbAL@sda21(r13)
 /* 8035A1B8 00356D98  4E 80 00 20 */	blr 
 
-.global func_8035A1BC
-func_8035A1BC:
-/* 8035A1BC 00356D9C  80 8D BE B8 */	lwz r4, lbl_804D7558@sda21(r13)
+.global __AXDepopVoice
+__AXDepopVoice:
+/* 8035A1BC 00356D9C  80 8D BE B8 */	lwz r4, __AXSpbAL@sda21(r13)
 /* 8035A1C0 00356DA0  A8 03 00 52 */	lha r0, 0x52(r3)
-/* 8035A1C4 00356DA4  80 AD BE C4 */	lwz r5, lbl_804D7564@sda21(r13)
+/* 8035A1C4 00356DA4  80 AD BE C4 */	lwz r5, __AXSpbAAL@sda21(r13)
 /* 8035A1C8 00356DA8  7C 04 02 14 */	add r0, r4, r0
-/* 8035A1CC 00356DAC  80 8D BE D0 */	lwz r4, lbl_804D7570@sda21(r13)
-/* 8035A1D0 00356DB0  90 0D BE B8 */	stw r0, lbl_804D7558@sda21(r13)
-/* 8035A1D4 00356DB4  81 2D BE BC */	lwz r9, lbl_804D755C@sda21(r13)
+/* 8035A1CC 00356DAC  80 8D BE D0 */	lwz r4, __AXSpbABL@sda21(r13)
+/* 8035A1D0 00356DB0  90 0D BE B8 */	stw r0, __AXSpbAL@sda21(r13)
+/* 8035A1D4 00356DB4  81 2D BE BC */	lwz r9, __AXSpbAR@sda21(r13)
 /* 8035A1D8 00356DB8  A8 03 00 54 */	lha r0, 0x54(r3)
-/* 8035A1DC 00356DBC  81 0D BE C8 */	lwz r8, lbl_804D7568@sda21(r13)
+/* 8035A1DC 00356DBC  81 0D BE C8 */	lwz r8, __AXSpbAAR@sda21(r13)
 /* 8035A1E0 00356DC0  7C 05 02 14 */	add r0, r5, r0
-/* 8035A1E4 00356DC4  80 ED BE D4 */	lwz r7, lbl_804D7574@sda21(r13)
-/* 8035A1E8 00356DC8  90 0D BE C4 */	stw r0, lbl_804D7564@sda21(r13)
-/* 8035A1EC 00356DCC  80 CD BE C0 */	lwz r6, lbl_804D7560@sda21(r13)
+/* 8035A1E4 00356DC4  80 ED BE D4 */	lwz r7, __AXSpbABR@sda21(r13)
+/* 8035A1E8 00356DC8  90 0D BE C4 */	stw r0, __AXSpbAAL@sda21(r13)
+/* 8035A1EC 00356DCC  80 CD BE C0 */	lwz r6, __AXSpbAS@sda21(r13)
 /* 8035A1F0 00356DD0  A8 03 00 56 */	lha r0, 0x56(r3)
-/* 8035A1F4 00356DD4  80 AD BE CC */	lwz r5, lbl_804D756C@sda21(r13)
+/* 8035A1F4 00356DD4  80 AD BE CC */	lwz r5, __AXSpbAAS@sda21(r13)
 /* 8035A1F8 00356DD8  7C 04 02 14 */	add r0, r4, r0
-/* 8035A1FC 00356DDC  80 8D BE D8 */	lwz r4, lbl_804D7578@sda21(r13)
-/* 8035A200 00356DE0  90 0D BE D0 */	stw r0, lbl_804D7570@sda21(r13)
+/* 8035A1FC 00356DDC  80 8D BE D8 */	lwz r4, __AXSpbABS@sda21(r13)
+/* 8035A200 00356DE0  90 0D BE D0 */	stw r0, __AXSpbABL@sda21(r13)
 /* 8035A204 00356DE4  A8 03 00 58 */	lha r0, 0x58(r3)
 /* 8035A208 00356DE8  7C 09 02 14 */	add r0, r9, r0
-/* 8035A20C 00356DEC  90 0D BE BC */	stw r0, lbl_804D755C@sda21(r13)
+/* 8035A20C 00356DEC  90 0D BE BC */	stw r0, __AXSpbAR@sda21(r13)
 /* 8035A210 00356DF0  A8 03 00 5A */	lha r0, 0x5a(r3)
 /* 8035A214 00356DF4  7C 08 02 14 */	add r0, r8, r0
-/* 8035A218 00356DF8  90 0D BE C8 */	stw r0, lbl_804D7568@sda21(r13)
+/* 8035A218 00356DF8  90 0D BE C8 */	stw r0, __AXSpbAAR@sda21(r13)
 /* 8035A21C 00356DFC  A8 03 00 5C */	lha r0, 0x5c(r3)
 /* 8035A220 00356E00  7C 07 02 14 */	add r0, r7, r0
-/* 8035A224 00356E04  90 0D BE D4 */	stw r0, lbl_804D7574@sda21(r13)
+/* 8035A224 00356E04  90 0D BE D4 */	stw r0, __AXSpbABR@sda21(r13)
 /* 8035A228 00356E08  A8 03 00 5E */	lha r0, 0x5e(r3)
 /* 8035A22C 00356E0C  7C 06 02 14 */	add r0, r6, r0
-/* 8035A230 00356E10  90 0D BE C0 */	stw r0, lbl_804D7560@sda21(r13)
+/* 8035A230 00356E10  90 0D BE C0 */	stw r0, __AXSpbAS@sda21(r13)
 /* 8035A234 00356E14  A8 03 00 60 */	lha r0, 0x60(r3)
 /* 8035A238 00356E18  7C 05 02 14 */	add r0, r5, r0
-/* 8035A23C 00356E1C  90 0D BE CC */	stw r0, lbl_804D756C@sda21(r13)
+/* 8035A23C 00356E1C  90 0D BE CC */	stw r0, __AXSpbAAS@sda21(r13)
 /* 8035A240 00356E20  A8 03 00 62 */	lha r0, 0x62(r3)
 /* 8035A244 00356E24  7C 04 02 14 */	add r0, r4, r0
-/* 8035A248 00356E28  90 0D BE D8 */	stw r0, lbl_804D7578@sda21(r13)
+/* 8035A248 00356E28  90 0D BE D8 */	stw r0, __AXSpbABS@sda21(r13)
 /* 8035A24C 00356E2C  4E 80 00 20 */	blr 
 
 .global __AXGetNumVoices
 __AXGetNumVoices:
-/* 8035A250 00356E30  80 6D BE E8 */	lwz r3, lbl_804D7588@sda21(r13)
+/* 8035A250 00356E30  80 6D BE E8 */	lwz r3, __AXNumVoices@sda21(r13)
 /* 8035A254 00356E34  4E 80 00 20 */	blr 
 
-.global func_8035A258
-func_8035A258:
-/* 8035A258 00356E38  80 8D BE E8 */	lwz r4, lbl_804D7588@sda21(r13)
-/* 8035A25C 00356E3C  3C A0 80 4B */	lis r5, lbl_804B09E0@ha
-/* 8035A260 00356E40  38 05 09 E0 */	addi r0, r5, lbl_804B09E0@l
+.global __AXServiceVPB
+__AXServiceVPB:
+/* 8035A258 00356E38  80 8D BE E8 */	lwz r4, __AXNumVoices@sda21(r13)
+/* 8035A25C 00356E3C  3C A0 80 4B */	lis r5, __AXPB@ha
+/* 8035A260 00356E40  38 05 09 E0 */	addi r0, r5, __AXPB@l
 /* 8035A264 00356E44  38 84 00 01 */	addi r4, r4, 1
-/* 8035A268 00356E48  90 8D BE E8 */	stw r4, lbl_804D7588@sda21(r13)
+/* 8035A268 00356E48  90 8D BE E8 */	stw r4, __AXNumVoices@sda21(r13)
 /* 8035A26C 00356E4C  38 C3 01 38 */	addi r6, r3, 0x138
 /* 8035A270 00356E50  80 A3 00 18 */	lwz r5, 0x18(r3)
 /* 8035A274 00356E54  80 83 00 1C */	lwz r4, 0x1c(r3)
@@ -2162,19 +2170,19 @@ lbl_8035A910:
 /* 8035A92C 0035750C  B0 05 00 B8 */	sth r0, 0xb8(r5)
 /* 8035A930 00357510  4E 80 00 20 */	blr 
 
-.global func_8035A934
-func_8035A934:
+.global __AXSyncPBs
+__AXSyncPBs:
 /* 8035A934 00357514  7C 08 02 A6 */	mflr r0
-/* 8035A938 00357518  3C 80 80 4B */	lis r4, lbl_804B09E0@ha
+/* 8035A938 00357518  3C 80 80 4B */	lis r4, __AXPB@ha
 /* 8035A93C 0035751C  90 01 00 04 */	stw r0, 4(r1)
 /* 8035A940 00357520  38 00 00 00 */	li r0, 0
 /* 8035A944 00357524  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8035A948 00357528  BF 21 00 14 */	stmw r25, 0x14(r1)
-/* 8035A94C 0035752C  3B C4 09 E0 */	addi r30, r4, lbl_804B09E0@l
+/* 8035A94C 0035752C  3B C4 09 E0 */	addi r30, r4, __AXPB@l
 /* 8035A950 00357530  3B 23 00 00 */	addi r25, r3, 0
 /* 8035A954 00357534  38 7E 00 00 */	addi r3, r30, 0
 /* 8035A958 00357538  38 80 30 00 */	li r4, 0x3000
-/* 8035A95C 0035753C  90 0D BE E8 */	stw r0, lbl_804D7588@sda21(r13)
+/* 8035A95C 0035753C  90 0D BE E8 */	stw r0, __AXNumVoices@sda21(r13)
 /* 8035A960 00357540  4B FE 9E 7D */	bl DCInvalidateRange
 /* 8035A964 00357544  38 7E 30 00 */	addi r3, r30, 0x3000
 /* 8035A968 00357548  38 80 10 00 */	li r4, 0x1000
@@ -2182,10 +2190,10 @@ func_8035A934:
 /* 8035A970 00357550  4B FF E9 45 */	bl __AXGetCommandListCycles
 /* 8035A974 00357554  3C 03 00 01 */	addis r0, r3, 1
 /* 8035A978 00357558  7F A0 CA 14 */	add r29, r0, r25
-/* 8035A97C 0035755C  3C 80 80 40 */	lis r4, lbl_804031A0@ha
-/* 8035A980 00357560  3C 60 80 40 */	lis r3, lbl_804031B4@ha
-/* 8035A984 00357564  3B E4 31 A0 */	addi r31, r4, lbl_804031A0@l
-/* 8035A988 00357568  3B 43 31 B4 */	addi r26, r3, lbl_804031B4@l
+/* 8035A97C 0035755C  3C 80 80 40 */	lis r4, __AXSrcCycles@ha
+/* 8035A980 00357560  3C 60 80 40 */	lis r3, __AXMixCycles@ha
+/* 8035A984 00357564  3B E4 31 A0 */	addi r31, r4, __AXSrcCycles@l
+/* 8035A988 00357568  3B 43 31 B4 */	addi r26, r3, __AXMixCycles@l
 /* 8035A98C 0035756C  3B 80 00 1F */	li r28, 0x1f
 /* 8035A990 00357570  3B BD AA 10 */	addi r29, r29, -22000
 lbl_8035A994:
@@ -2200,7 +2208,7 @@ lbl_8035A9A4:
 /* 8035A9B0 00357590  80 1B 00 18 */	lwz r0, 0x18(r27)
 /* 8035A9B4 00357594  1C 00 00 C0 */	mulli r0, r0, 0xc0
 /* 8035A9B8 00357598  7C 7E 02 14 */	add r3, r30, r0
-/* 8035A9BC 0035759C  4B FF F8 01 */	bl func_8035A1BC
+/* 8035A9BC 0035759C  4B FF F8 01 */	bl __AXDepopVoice
 lbl_8035A9C0:
 /* 8035A9C0 003575A0  A0 1B 01 46 */	lhz r0, 0x146(r27)
 /* 8035A9C4 003575A4  28 00 00 01 */	cmplwi r0, 1
@@ -2212,7 +2220,7 @@ lbl_8035A9D8:
 /* 8035A9D8 003575B8  A0 1B 01 44 */	lhz r0, 0x144(r27)
 /* 8035A9DC 003575BC  A0 9B 01 DE */	lhz r4, 0x1de(r27)
 /* 8035A9E0 003575C0  54 03 10 3A */	slwi r3, r0, 2
-/* 8035A9E4 003575C4  80 0D BE E0 */	lwz r0, lbl_804D7580@sda21(r13)
+/* 8035A9E4 003575C4  80 0D BE E0 */	lwz r0, __AXMaxDspCycles@sda21(r13)
 /* 8035A9E8 003575C8  7C 7A 1A 14 */	add r3, r26, r3
 /* 8035A9EC 003575CC  54 84 10 3A */	slwi r4, r4, 2
 /* 8035A9F0 003575D0  80 63 00 00 */	lwz r3, 0(r3)
@@ -2224,7 +2232,7 @@ lbl_8035A9D8:
 /* 8035AA08 003575E8  7C 00 E8 40 */	cmplw r0, r29
 /* 8035AA0C 003575EC  40 81 00 10 */	ble lbl_8035AA1C
 /* 8035AA10 003575F0  7F 63 DB 78 */	mr r3, r27
-/* 8035AA14 003575F4  4B FF F8 45 */	bl func_8035A258
+/* 8035AA14 003575F4  4B FF F8 45 */	bl __AXServiceVPB
 /* 8035AA18 003575F8  48 00 00 58 */	b lbl_8035AA70
 lbl_8035AA1C:
 /* 8035AA1C 003575FC  80 1B 00 18 */	lwz r0, 0x18(r27)
@@ -2234,7 +2242,7 @@ lbl_8035AA1C:
 /* 8035AA2C 0035760C  28 00 00 01 */	cmplwi r0, 1
 /* 8035AA30 00357610  40 82 00 0C */	bne lbl_8035AA3C
 /* 8035AA34 00357614  7F 23 CB 78 */	mr r3, r25
-/* 8035AA38 00357618  4B FF F7 85 */	bl func_8035A1BC
+/* 8035AA38 00357618  4B FF F7 85 */	bl __AXDepopVoice
 lbl_8035AA3C:
 /* 8035AA3C 0035761C  38 00 00 00 */	li r0, 0
 /* 8035AA40 00357620  B0 19 00 4C */	sth r0, 0x4c(r25)
@@ -2245,11 +2253,11 @@ lbl_8035AA3C:
 /* 8035AA54 00357634  B0 19 00 44 */	sth r0, 0x44(r25)
 /* 8035AA58 00357638  B0 19 00 0E */	sth r0, 0xe(r25)
 /* 8035AA5C 0035763C  B0 1B 01 46 */	sth r0, 0x146(r27)
-/* 8035AA60 00357640  4B FF E1 D5 */	bl func_80358C34
+/* 8035AA60 00357640  4B FF E1 D5 */	bl __AXPushCallbackStack
 /* 8035AA64 00357644  48 00 00 0C */	b lbl_8035AA70
 lbl_8035AA68:
 /* 8035AA68 00357648  7F 63 DB 78 */	mr r3, r27
-/* 8035AA6C 0035764C  4B FF F7 ED */	bl func_8035A258
+/* 8035AA6C 0035764C  4B FF F7 ED */	bl __AXServiceVPB
 lbl_8035AA70:
 /* 8035AA70 00357650  38 60 00 00 */	li r3, 0
 /* 8035AA74 00357654  90 7B 00 1C */	stw r3, 0x1c(r27)
@@ -2276,7 +2284,7 @@ lbl_8035AAB4:
 /* 8035AAC0 003576A0  80 1F 00 18 */	lwz r0, 0x18(r31)
 /* 8035AAC4 003576A4  1C 00 00 C0 */	mulli r0, r0, 0xc0
 /* 8035AAC8 003576A8  7C 7E 02 14 */	add r3, r30, r0
-/* 8035AACC 003576AC  4B FF F6 F1 */	bl func_8035A1BC
+/* 8035AACC 003576AC  4B FF F6 F1 */	bl __AXDepopVoice
 lbl_8035AAD0:
 /* 8035AAD0 003576B0  38 80 00 00 */	li r4, 0
 /* 8035AAD4 003576B4  90 9F 00 20 */	stw r4, 0x20(r31)
@@ -2323,14 +2331,14 @@ lbl_8035AB3C:
 /* 8035AB74 00357754  7C 08 03 A6 */	mtlr r0
 /* 8035AB78 00357758  4E 80 00 20 */	blr 
 
-.global func_8035AB7C
-func_8035AB7C:
-/* 8035AB7C 0035775C  3C 60 80 4B */	lis r3, lbl_804B09E0@ha
-/* 8035AB80 00357760  38 63 09 E0 */	addi r3, r3, lbl_804B09E0@l
+.global __AXGetPBs
+__AXGetPBs:
+/* 8035AB7C 0035775C  3C 60 80 4B */	lis r3, __AXPB@ha
+/* 8035AB80 00357760  38 63 09 E0 */	addi r3, r3, __AXPB@l
 /* 8035AB84 00357764  4E 80 00 20 */	blr 
 
-.global func_8035AB88
-func_8035AB88:
+.global __AXSetPBDefault
+__AXSetPBDefault:
 /* 8035AB88 00357768  38 A0 00 00 */	li r5, 0
 /* 8035AB8C 0035776C  B0 A3 01 46 */	sth r5, 0x146(r3)
 /* 8035AB90 00357770  38 80 00 A4 */	li r4, 0xa4
@@ -2358,11 +2366,11 @@ __AXVPBInit:
 /* 8035ABDC 003577BC  BF 41 00 18 */	stmw r26, 0x18(r1)
 /* 8035ABE0 003577C0  80 04 00 F8 */	lwz r0, 0x800000F8@l(r4)
 /* 8035ABE4 003577C4  7C 03 00 16 */	mulhwu r0, r3, r0
-/* 8035ABE8 003577C8  3C 60 80 4B */	lis r3, lbl_804B09E0@ha
-/* 8035ABEC 003577CC  3B E3 09 E0 */	addi r31, r3, lbl_804B09E0@l
+/* 8035ABE8 003577C8  3C 60 80 4B */	lis r3, __AXPB@ha
+/* 8035ABEC 003577CC  3B E3 09 E0 */	addi r31, r3, __AXPB@l
 /* 8035ABF0 003577D0  54 00 C9 FE */	srwi r0, r0, 7
 /* 8035ABF4 003577D4  38 60 00 00 */	li r3, 0
-/* 8035ABF8 003577D8  90 0D BE E0 */	stw r0, lbl_804D7580@sda21(r13)
+/* 8035ABF8 003577D8  90 0D BE E0 */	stw r0, __AXMaxDspCycles@sda21(r13)
 /* 8035ABFC 003577DC  38 00 01 80 */	li r0, 0x180
 /* 8035AC00 003577E0  90 6D BE E4 */	stw r3, lbl_804D7584@sda21(r13)
 /* 8035AC04 003577E4  7C 09 03 A6 */	mtctr r0
@@ -2467,7 +2475,7 @@ lbl_8035AD40:
 /* 8035AD78 00357958  B0 BE 00 4E */	sth r5, 0x4e(r30)
 /* 8035AD7C 0035795C  B3 9E 00 50 */	sth r28, 0x50(r30)
 /* 8035AD80 00357960  90 1B 00 0C */	stw r0, 0xc(r27)
-/* 8035AD84 00357964  4B FF DE 91 */	bl func_80358C14
+/* 8035AD84 00357964  4B FF DE 91 */	bl __AXPushFreeStack
 /* 8035AD88 00357968  3B 5A 00 01 */	addi r26, r26, 1
 /* 8035AD8C 0035796C  28 1A 00 40 */	cmplwi r26, 0x40
 /* 8035AD90 00357970  3B DE 00 C0 */	addi r30, r30, 0xc0
@@ -2484,8 +2492,8 @@ lbl_8035AD40:
 /* 8035ADBC 0035799C  7C 08 03 A6 */	mtlr r0
 /* 8035ADC0 003579A0  4E 80 00 20 */	blr 
 
-.global func_8035ADC4
-func_8035ADC4:
+.global AXSetVoiceState
+AXSetVoiceState:
 /* 8035ADC4 003579A4  7C 08 02 A6 */	mflr r0
 /* 8035ADC8 003579A8  90 01 00 04 */	stw r0, 4(r1)
 /* 8035ADCC 003579AC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2560,7 +2568,7 @@ func_8035AE20:
 /* 8035AED0 00357AB0  B0 9F 00 20 */	sth r4, 0x20(r31)
 /* 8035AED4 00357AB4  A0 9E 00 22 */	lhz r4, 0x22(r30)
 /* 8035AED8 00357AB8  B0 9F 00 22 */	sth r4, 0x22(r31)
-/* 8035AEDC 00357ABC  80 8D BE 94 */	lwz r4, lbl_804D7534@sda21(r13)
+/* 8035AEDC 00357ABC  80 8D BE 94 */	lwz r4, __AXClMode@sda21(r13)
 /* 8035AEE0 00357AC0  28 04 00 04 */	cmplwi r4, 4
 /* 8035AEE4 00357AC4  40 82 00 98 */	bne lbl_8035AF7C
 /* 8035AEE8 00357AC8  A0 9E 00 08 */	lhz r4, 8(r30)
@@ -2679,8 +2687,8 @@ lbl_8035B04C:
 /* 8035B074 00357C54  38 21 00 20 */	addi r1, r1, 0x20
 /* 8035B078 00357C58  4E 80 00 20 */	blr 
 
-.global func_8035B07C
-func_8035B07C:
+.global AXSetVoiceItdOn
+AXSetVoiceItdOn:
 /* 8035B07C 00357C5C  7C 08 02 A6 */	mflr r0
 /* 8035B080 00357C60  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B084 00357C64  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2707,8 +2715,8 @@ func_8035B07C:
 /* 8035B0D8 00357CB8  7C 08 03 A6 */	mtlr r0
 /* 8035B0DC 00357CBC  4E 80 00 20 */	blr 
 
-.global func_8035B0E0
-func_8035B0E0:
+.global AXSetVoiceItdTarget
+AXSetVoiceItdTarget:
 /* 8035B0E0 00357CC0  7C 08 02 A6 */	mflr r0
 /* 8035B0E4 00357CC4  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B0E8 00357CC8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2733,8 +2741,8 @@ func_8035B0E0:
 /* 8035B134 00357D14  38 21 00 20 */	addi r1, r1, 0x20
 /* 8035B138 00357D18  4E 80 00 20 */	blr 
 
-.global func_8035B13C
-func_8035B13C:
+.global AXSetVoiceVe
+AXSetVoiceVe:
 /* 8035B13C 00357D1C  7C 08 02 A6 */	mflr r0
 /* 8035B140 00357D20  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B144 00357D24  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2758,8 +2766,8 @@ func_8035B13C:
 /* 8035B18C 00357D6C  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035B190 00357D70  4E 80 00 20 */	blr 
 
-.global func_8035B194
-func_8035B194:
+.global AXSetVoiceVeDelta
+AXSetVoiceVeDelta:
 /* 8035B194 00357D74  7C 08 02 A6 */	mflr r0
 /* 8035B198 00357D78  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B19C 00357D7C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2780,8 +2788,8 @@ func_8035B194:
 /* 8035B1D8 00357DB8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035B1DC 00357DBC  4E 80 00 20 */	blr 
 
-.global func_8035B1E0
-func_8035B1E0:
+.global AXSetVoiceAddr
+AXSetVoiceAddr:
 /* 8035B1E0 00357DC0  7C 08 02 A6 */	mflr r0
 /* 8035B1E4 00357DC4  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B1E8 00357DC8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2855,8 +2863,8 @@ lbl_8035B2B4:
 /* 8035B2E8 00357EC8  38 21 00 20 */	addi r1, r1, 0x20
 /* 8035B2EC 00357ECC  4E 80 00 20 */	blr 
 
-.global func_8035B2F0
-func_8035B2F0:
+.global AXSetVoiceLoop
+AXSetVoiceLoop:
 /* 8035B2F0 00357ED0  7C 08 02 A6 */	mflr r0
 /* 8035B2F4 00357ED4  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B2F8 00357ED8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2877,8 +2885,8 @@ func_8035B2F0:
 /* 8035B334 00357F14  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035B338 00357F18  4E 80 00 20 */	blr 
 
-.global func_8035B33C
-func_8035B33C:
+.global AXSetVoiceLoopAddr
+AXSetVoiceLoopAddr:
 /* 8035B33C 00357F1C  7C 08 02 A6 */	mflr r0
 /* 8035B340 00357F20  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B344 00357F24  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2901,8 +2909,8 @@ func_8035B33C:
 /* 8035B388 00357F68  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035B38C 00357F6C  4E 80 00 20 */	blr 
 
-.global func_8035B390
-func_8035B390:
+.global AXSetVoiceEndAddr
+AXSetVoiceEndAddr:
 /* 8035B390 00357F70  7C 08 02 A6 */	mflr r0
 /* 8035B394 00357F74  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B398 00357F78  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2925,8 +2933,8 @@ func_8035B390:
 /* 8035B3DC 00357FBC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035B3E0 00357FC0  4E 80 00 20 */	blr 
 
-.global func_8035B3E4
-func_8035B3E4:
+.global AXSetVoiceCurrentAddr
+AXSetVoiceCurrentAddr:
 /* 8035B3E4 00357FC4  7C 08 02 A6 */	mflr r0
 /* 8035B3E8 00357FC8  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B3EC 00357FCC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2949,8 +2957,8 @@ func_8035B3E4:
 /* 8035B430 00358010  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035B434 00358014  4E 80 00 20 */	blr 
 
-.global func_8035B438
-func_8035B438:
+.global AXSetVoiceAdpcm
+AXSetVoiceAdpcm:
 /* 8035B438 00358018  7C 08 02 A6 */	mflr r0
 /* 8035B43C 0035801C  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B440 00358020  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -2993,8 +3001,8 @@ func_8035B438:
 /* 8035B4D4 003580B4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8035B4D8 003580B8  4E 80 00 20 */	blr 
 
-.global func_8035B4DC
-func_8035B4DC:
+.global AXSetVoiceSrc
+AXSetVoiceSrc:
 /* 8035B4DC 003580BC  7C 08 02 A6 */	mflr r0
 /* 8035B4E0 003580C0  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B4E4 003580C4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3034,8 +3042,8 @@ func_8035B4DC:
 /* 8035B56C 0035814C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8035B570 00358150  4E 80 00 20 */	blr 
 
-.global func_8035B574
-func_8035B574:
+.global AXSetVoiceSrcRatio
+AXSetVoiceSrcRatio:
 /* 8035B574 00358154  7C 08 02 A6 */	mflr r0
 /* 8035B578 00358158  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B57C 0035815C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -3076,8 +3084,8 @@ lbl_8035B5CC:
 /* 8035B604 003581E4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8035B608 003581E8  4E 80 00 20 */	blr 
 
-.global func_8035B60C
-func_8035B60C:
+.global AXSetVoiceAdpcmLoop
+AXSetVoiceAdpcmLoop:
 /* 8035B60C 003581EC  7C 08 02 A6 */	mflr r0
 /* 8035B610 003581F0  90 01 00 04 */	stw r0, 4(r1)
 /* 8035B614 003581F4  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -3108,21 +3116,21 @@ func_8035B60C:
 
 .global __AXGetCurrentProfile
 __AXGetCurrentProfile:
-/* 8035B678 00358258  80 0D BE FC */	lwz r0, lbl_804D759C@sda21(r13)
+/* 8035B678 00358258  80 0D BE FC */	lwz r0, __AXProfileInitialized@sda21(r13)
 /* 8035B67C 0035825C  28 00 00 00 */	cmplwi r0, 0
 /* 8035B680 00358260  41 82 00 38 */	beq lbl_8035B6B8
-/* 8035B684 00358264  80 6D BE F8 */	lwz r3, lbl_804D7598@sda21(r13)
-/* 8035B688 00358268  80 8D BE F4 */	lwz r4, lbl_804D7594@sda21(r13)
+/* 8035B684 00358264  80 6D BE F8 */	lwz r3, __AXCurrentProfile@sda21(r13)
+/* 8035B688 00358268  80 8D BE F4 */	lwz r4, __AXMaxProfiles@sda21(r13)
 /* 8035B68C 0035826C  38 03 00 01 */	addi r0, r3, 1
-/* 8035B690 00358270  80 CD BE F0 */	lwz r6, lbl_804D7590@sda21(r13)
-/* 8035B694 00358274  90 0D BE F8 */	stw r0, lbl_804D7598@sda21(r13)
+/* 8035B690 00358270  80 CD BE F0 */	lwz r6, __AXProfile@sda21(r13)
+/* 8035B694 00358274  90 0D BE F8 */	stw r0, __AXCurrentProfile@sda21(r13)
 /* 8035B698 00358278  1C 03 00 38 */	mulli r0, r3, 0x38
-/* 8035B69C 0035827C  80 AD BE F8 */	lwz r5, lbl_804D7598@sda21(r13)
+/* 8035B69C 0035827C  80 AD BE F8 */	lwz r5, __AXCurrentProfile@sda21(r13)
 /* 8035B6A0 00358280  7C 66 02 14 */	add r3, r6, r0
 /* 8035B6A4 00358284  7C 05 23 96 */	divwu r0, r5, r4
 /* 8035B6A8 00358288  7C 00 21 D6 */	mullw r0, r0, r4
 /* 8035B6AC 0035828C  7C 00 28 50 */	subf r0, r0, r5
-/* 8035B6B0 00358290  90 0D BE F8 */	stw r0, lbl_804D7598@sda21(r13)
+/* 8035B6B0 00358290  90 0D BE F8 */	stw r0, __AXCurrentProfile@sda21(r13)
 /* 8035B6B4 00358294  4E 80 00 20 */	blr 
 lbl_8035B6B8:
 /* 8035B6B8 00358298  38 60 00 00 */	li r3, 0
@@ -5872,15 +5880,15 @@ func_8035DD8C:
 
 .section .data
     .balign 8
-.global lbl_804031A0
-lbl_804031A0:
+.global __AXSrcCycles
+__AXSrcCycles:
     .4byte 0x00000DF8
     .4byte 0x00000F78
     .4byte 0x000014B8
     .4byte 0x000019F8
     .4byte 0x000019F8
-.global lbl_804031B4
-lbl_804031B4:
+.global __AXMixCycles
+__AXMixCycles:
     .4byte 0x000005BE
     .4byte 0x00000B7C
     .4byte 0x00000B7C
@@ -5916,8 +5924,8 @@ lbl_804031B4:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-.global lbl_80403240
-lbl_80403240:
+.global axDspSlave
+axDspSlave:
     .4byte NULL
     .4byte 0x029F0C10
     .4byte 0x029F0C1F
@@ -8108,39 +8116,39 @@ lbl_80404C50:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804A8D78
-lbl_804A8D78:
+.global __AXStackHead
+__AXStackHead:
 	.skip 0x80
-.global lbl_804A8DF8
-lbl_804A8DF8:
+.global __AXStackTail
+__AXStackTail:
 	.skip 0x88
-.global lbl_804A8E80
-lbl_804A8E80:
+.global __AXBufferAuxA
+__AXBufferAuxA:
 	.skip 0x1680
-.global lbl_804AA500
-lbl_804AA500:
+.global __AXBufferAuxB
+__AXBufferAuxB:
 	.skip 0x1680
-.global lbl_804ABB80
-lbl_804ABB80:
+.global __AXCommandList
+__AXCommandList:
 	.skip 0x600
-.global lbl_804AC180
-lbl_804AC180:
+.global __AXOutBuffer
+__AXOutBuffer:
 	.skip 0x7B8
-.global lbl_804AC938
-lbl_804AC938:
+.global task
+task:
 	.skip 0x4068
-.global lbl_804B09A0
-lbl_804B09A0:
+.global __AXStudio
+__AXStudio:
 	.skip 0x40
-.global lbl_804B09E0
-lbl_804B09E0:
+.global __AXPB
+__AXPB:
 	.skip 0xFE00
 
 
 .section .sdata
     .balign 8
-.global lbl_804D5C68
-lbl_804D5C68:
+.global axDspSlaveLength
+axDspSlaveLength:
     .4byte 0x19E00000
     .4byte 0x00000000
 .global lbl_804D5C70
@@ -8153,122 +8161,122 @@ lbl_804D5C74:
 
 .section .sbss
     .balign 8
-.global lbl_804D74F0
-lbl_804D74F0:
+.global __AXCallbackStack
+__AXCallbackStack:
 	.skip 0x8
-.global lbl_804D74F8
-lbl_804D74F8:
+.global __AXCallbackAuxA
+__AXCallbackAuxA:
 	.skip 0x4
-.global lbl_804D74FC
-lbl_804D74FC:
+.global __AXCallbackAuxB
+__AXCallbackAuxB:
 	.skip 0x4
-.global lbl_804D7500
-lbl_804D7500:
+.global __AXContextAuxA
+__AXContextAuxA:
 	.skip 0x4
-.global lbl_804D7504
-lbl_804D7504:
+.global __AXContextAuxB
+__AXContextAuxB:
 	.skip 0x4
 .global lbl_804D7508
 lbl_804D7508:
 	.skip 0x4
-.global lbl_804D750C
-lbl_804D750C:
+.global __AXAuxADspRead
+__AXAuxADspRead:
 	.skip 0x4
-.global lbl_804D7510
-lbl_804D7510:
+.global __AXAuxBDspWrite
+__AXAuxBDspWrite:
 	.skip 0x4
-.global lbl_804D7514
-lbl_804D7514:
+.global __AXAuxBDspRead
+__AXAuxBDspRead:
 	.skip 0x4
-.global lbl_804D7518
-lbl_804D7518:
+.global __AXAuxDspWritePosition
+__AXAuxDspWritePosition:
 	.skip 0x4
-.global lbl_804D751C
-lbl_804D751C:
+.global __AXAuxDspReadPosition
+__AXAuxDspReadPosition:
 	.skip 0x4
-.global lbl_804D7520
-lbl_804D7520:
+.global __AXAuxCpuReadWritePosition
+__AXAuxCpuReadWritePosition:
 	.skip 0x8
-.global lbl_804D7528
-lbl_804D7528:
+.global __AXCommandListPosition
+__AXCommandListPosition:
 	.skip 0x4
-.global lbl_804D752C
-lbl_804D752C:
+.global __AXClWrite
+__AXClWrite:
 	.skip 0x4
-.global lbl_804D7530
-lbl_804D7530:
+.global __AXCommandListCycles
+__AXCommandListCycles:
 	.skip 0x4
-.global lbl_804D7534
-lbl_804D7534:
+.global __AXClMode
+__AXClMode:
 	.skip 0x4
-.global lbl_804D7538
-lbl_804D7538:
+.global __AXOutFrame
+__AXOutFrame:
 	.skip 0x4
-.global lbl_804D753C
-lbl_804D753C:
+.global __AXOutDspReady
+__AXOutDspReady:
 	.skip 0x4
-.global lbl_804D7540
-lbl_804D7540:
+.global __AXOsTime
+__AXOsTime:
 	.skip 0x4
 .global lbl_804D7544
 lbl_804D7544:
 	.skip 0x4
-.global lbl_804D7548
-lbl_804D7548:
+.global __AXUserFrameCallback
+__AXUserFrameCallback:
 	.skip 0x4
-.global lbl_804D754C
-lbl_804D754C:
+.global __AXDSPInitFlag
+__AXDSPInitFlag:
 	.skip 0x4
-.global lbl_804D7550
-lbl_804D7550:
+.global __AXDSPDoneFlag
+__AXDSPDoneFlag:
 	.skip 0x8
-.global lbl_804D7558
-lbl_804D7558:
+.global __AXSpbAL
+__AXSpbAL:
 	.skip 0x4
-.global lbl_804D755C
-lbl_804D755C:
+.global __AXSpbAR
+__AXSpbAR:
 	.skip 0x4
-.global lbl_804D7560
-lbl_804D7560:
+.global __AXSpbAS
+__AXSpbAS:
 	.skip 0x4
-.global lbl_804D7564
-lbl_804D7564:
+.global __AXSpbAAL
+__AXSpbAAL:
 	.skip 0x4
-.global lbl_804D7568
-lbl_804D7568:
+.global __AXSpbAAR
+__AXSpbAAR:
 	.skip 0x4
-.global lbl_804D756C
-lbl_804D756C:
+.global __AXSpbAAS
+__AXSpbAAS:
 	.skip 0x4
-.global lbl_804D7570
-lbl_804D7570:
+.global __AXSpbABL
+__AXSpbABL:
 	.skip 0x4
-.global lbl_804D7574
-lbl_804D7574:
+.global __AXSpbABR
+__AXSpbABR:
 	.skip 0x4
-.global lbl_804D7578
-lbl_804D7578:
+.global __AXSpbABS
+__AXSpbABS:
 	.skip 0x8
-.global lbl_804D7580
-lbl_804D7580:
+.global __AXMaxDspCycles
+__AXMaxDspCycles:
 	.skip 0x4
 .global lbl_804D7584
 lbl_804D7584:
 	.skip 0x4
-.global lbl_804D7588
-lbl_804D7588:
+.global __AXNumVoices
+__AXNumVoices:
 	.skip 0x8
-.global lbl_804D7590
-lbl_804D7590:
+.global __AXProfile
+__AXProfile:
 	.skip 0x4
-.global lbl_804D7594
-lbl_804D7594:
+.global __AXMaxProfiles
+__AXMaxProfiles:
 	.skip 0x4
-.global lbl_804D7598
-lbl_804D7598:
+.global __AXCurrentProfile
+__AXCurrentProfile:
 	.skip 0x4
-.global lbl_804D759C
-lbl_804D759C:
+.global __AXProfileInitialized
+__AXProfileInitialized:
 	.skip 0x4
 
 
