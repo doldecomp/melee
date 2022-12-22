@@ -381,9 +381,9 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/grshrineroute.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grzebesroute.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grbigblueroute.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure1.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure2.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure3.s.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure1.c.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure2.c.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure3.c.o\
 	$(BUILD_DIR)/asm/melee/gr/groldyoshi.s.o\
 	$(BUILD_DIR)/asm/melee/gr/groldkongo.s.o\
 	$(BUILD_DIR)/asm/melee/gr/groldpupupu.s.o\
@@ -397,27 +397,27 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/grhomerun.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grheal.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtmario.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtfalcon.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtfalcon.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtclink.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtdonkey.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtdonkey.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtdrmario.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtfalco.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtfox.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grticeclimber.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtkirby.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtkoopa.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtkoopa.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtlink.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtluigi.s.o\
 	$(BUILD_DIR)/src/melee/gr/grtmars.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtmewtwo.s.o\
 	$(BUILD_DIR)/src/melee/gr/grtness.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtpeach.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtpichu.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtpichu.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtpikachu.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtpurin.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtsamus.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtseak.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtyoshi.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtyoshi.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtzelda.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtgamewatch.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtemblem.s.o\
@@ -634,24 +634,32 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/card/CARDBios.c.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDUnlock.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDRdrw.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDBlock.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDDir.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDCheck.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDMount.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDFormat.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDOpen.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDCreate.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDRead.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDWrite.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDDelete.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDStat.s.o\
-	$(BUILD_DIR)/asm/dolphin/card/CARDRename.s.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDUnlock.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDRdwr.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDBlock.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDDir.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDCheck.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDMount.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDFormat.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDOpen.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDCreate.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDRead.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDWrite.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDDelete.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDStat.c.o\
+	$(BUILD_DIR)/src/dolphin/card/CARDRename.c.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/ax/AX.c.o\
 	$(BUILD_DIR)/asm/dolphin/ax/AXAlloc.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXAux.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXCL.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXOut.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXSPB.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXVPB.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/AXProf.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/DSPCode.s.o\
+	$(BUILD_DIR)/asm/dolphin/ax/ax_unk.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o\

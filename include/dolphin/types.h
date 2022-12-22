@@ -51,6 +51,16 @@ typedef struct _ ## module ## _Unk ## number module ## _Unk ## number;
 
 #define UNK_FUNC(name) unk_t name()
 
+#ifndef ATTRIBUTE_ALIGN
+#if defined(__MWERKS__) || defined(__GNUC__)
+#define ATTRIBUTE_ALIGN(num) __attribute__((aligned(num)))
+#elif defined(_MSC_VER)
+#define ATTRIBUTE_ALIGN(num)
+#else
+#error unknown compiler
+#endif
+#endif
+
 #pragma region "macros.inc"
 #define qr0 0
 #define qr1 1
