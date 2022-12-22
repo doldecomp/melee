@@ -49,8 +49,8 @@ extern StageData lbl_803E8CCC = {
     0UL
 };
 
-static void func_80221648(long) {} // header
-static void lbl_8022164C(void) { // header
+static void func_80221648(long) {}
+static void lbl_8022164C(void) {
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     func_802216EC(0);
@@ -61,11 +61,11 @@ static void lbl_8022164C(void) { // header
     func_801C4210();
     func_801C42AC();
 }
-static void lbl_802216BC(void) {} // header
-static void lbl_802216C0(void) { // header
+static void lbl_802216BC(void) {}
+static void lbl_802216C0(void) {
     func_801CAE04(0);
 }
-static s32 lbl_802216E4(void) { // header
+static s32 lbl_802216E4(void) {
     return 0;
 }
 static HSD_GObj* func_802216EC(s32 gobj_id){
@@ -93,45 +93,45 @@ static HSD_GObj* func_802216EC(s32 gobj_id){
 
     return gobj;
 }
-static void lbl_802217D4(HSD_GObj* gobj) { // header
+static void lbl_802217D4(HSD_GObj* gobj) {
     Map* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_80221800(void) { // header
+static s32 lbl_80221800(void) {
     return 0;
 }
-static void lbl_80221808(HSD_GObj*) {} // header
-static void lbl_8022180C(void) {} // header
-static void lbl_80221810(HSD_GObj* gobj) { // header
+static void lbl_80221808(HSD_GObj*) {}
+static void lbl_8022180C(void) {}
+static void lbl_80221810(HSD_GObj* gobj) {
     u32 unused[2];
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_80221860(void) { // header
+static s32 lbl_80221860(void) {
     return 0;
 }
-static void lbl_80221868(HSD_GObj* gobj) { // header
+static void lbl_80221868(HSD_GObj* gobj) {
     func_800115F4();
     func_801C2FE0(gobj);
 }
-static void lbl_8022189C(void) {} // header
-static void lbl_802218A0(HSD_GObj* gobj) { // header
+static void lbl_8022189C(void) {}
+static void lbl_802218A0(HSD_GObj* gobj) {
     u32 unused[2];
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_802218F0(void) { // header
+static s32 lbl_802218F0(void) {
     return 0;
 }
-static void lbl_802218F8(HSD_GObj*) { // header
+static void lbl_802218F8(HSD_GObj*) {
     func_801C2FE0();
 }
-static void lbl_80221918(void) {} // header
-static int lbl_8022191C(long) { // header
+static void lbl_80221918(void) {}
+static int lbl_8022191C(long) {
     return 0;
 }
-static s32 lbl_80221924(Vec*, long, struct _HSD_JObj *) { // header
+static s32 lbl_80221924(Vec*, long, struct _HSD_JObj *) {
     return 1;
 }

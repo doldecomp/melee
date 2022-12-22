@@ -381,9 +381,9 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/grshrineroute.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grzebesroute.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grbigblueroute.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure1.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure2.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grfigure3.s.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure1.c.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure2.c.o\
+	$(BUILD_DIR)/src/melee/gr/grfigure3.c.o\
 	$(BUILD_DIR)/asm/melee/gr/groldyoshi.s.o\
 	$(BUILD_DIR)/asm/melee/gr/groldkongo.s.o\
 	$(BUILD_DIR)/asm/melee/gr/groldpupupu.s.o\
@@ -397,9 +397,9 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/grhomerun.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grheal.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtmario.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtfalcon.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtfalcon.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtclink.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtdonkey.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtdonkey.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtdrmario.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtfalco.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtfox.s.o\
@@ -412,12 +412,12 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/melee/gr/grtmewtwo.s.o\
 	$(BUILD_DIR)/src/melee/gr/grtness.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtpeach.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtpichu.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtpichu.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtpikachu.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtpurin.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtsamus.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtseak.s.o\
-	$(BUILD_DIR)/asm/melee/gr/grtyoshi.s.o\
+	$(BUILD_DIR)/src/melee/gr/grtyoshi.c.o\
 	$(BUILD_DIR)/asm/melee/gr/grtzelda.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtgamewatch.s.o\
 	$(BUILD_DIR)/asm/melee/gr/grtemblem.s.o\
