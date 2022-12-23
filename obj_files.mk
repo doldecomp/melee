@@ -598,7 +598,6 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSLink.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSMemory.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSMemory_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSMutex.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSReboot.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSReboot_data.s.o\
