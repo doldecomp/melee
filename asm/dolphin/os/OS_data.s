@@ -106,7 +106,4 @@ OSExceptionTable:
 	.skip 0x8
 .global __OSStartTime
 __OSStartTime:
-	.skip 0x4
-.global lbl_804D7354
-lbl_804D7354:
-	.skip 0x4
+	.skip 0x8
