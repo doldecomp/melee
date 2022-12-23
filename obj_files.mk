@@ -606,7 +606,6 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/os/OSReboot_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSReset.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSResetSW.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSResetSW_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSRtc.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSSerial.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSSerial_data.s.o\

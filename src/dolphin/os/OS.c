@@ -73,7 +73,6 @@ extern void __OSModuleInit(void);
 extern void OSInitAlarm(void);
 extern void __OSInitSystemCall(void);
 extern unk_t OSExceptionInit();
-extern unk_t __OSGetSystemTime();
 
 #pragma push
 asm void OSInit(void)

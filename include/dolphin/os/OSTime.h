@@ -25,6 +25,7 @@ void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td);
 s64 OSGetTime(void);
 OSTick OSGetTick(void);
 OSTime __OSTimeToSystemTime(OSTime);
+OSTime __OSGetSystemTime(void);
 
 extern u32 __OSBusClock
 #ifndef M2CTX
@@ -34,9 +35,10 @@ extern u32 __OSBusClock
 
 #define OS_BUS_CLOCK __OSBusClock
 #define OS_TIMER_CLOCK (OS_BUS_CLOCK / 4)
-#define OSTicksToSeconds(ticks)    ((ticks) / (OS_TIMER_CLOCK))
-#define OSSecondsToTicks(sec)        ((sec) * (OS_TIMER_CLOCK))
-#define OSMillisecondsToTicks(msec) ((msec) * (OS_TIMER_CLOCK / 1000))
-#define OSNanosecondsToTicks(nsec) (((nsec) * (OS_TIMER_CLOCK / 125000)) / 8000)
+#define OSTicksToSeconds(ticks)     ((ticks) / (OS_TIMER_CLOCK))
+#define OSSecondsToTicks(sec)         ((sec) * (OS_TIMER_CLOCK))
+#define OSMillisecondsToTicks(msec)  ((msec) * (OS_TIMER_CLOCK / 1000))
+#define OSMicrosecondsToTicks(usec) (((usec) * (OS_TIMER_CLOCK / 125000)) / 8)
+#define OSNanosecondsToTicks(nsec)  (((nsec) * (OS_TIMER_CLOCK / 125000)) / 8000)
 
 #endif
