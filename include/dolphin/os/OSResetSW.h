@@ -55,6 +55,6 @@ typedef struct _OSResetSW_Unk1
 } OSResetSW_Unk1;
 
 typedef BOOL (*OSResetSW_MulticastPredicate)(OSResetSW_Predicate *);
-s32 OSGetResetSwitchState(OSResetSW_Unk1 *);
+BOOL OSGetResetSwitchState(void);
 
 #endif
