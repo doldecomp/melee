@@ -1,6 +1,9 @@
 #include <dolphin/os/OSInterrupt.h>
 
-extern unk_t ICFlashInvalidate();
+static unk_t Header[0x20 / sizeof(unk_t)];
+static unk_t SaveStart;
+static unk_t SaveEnd;
+static BOOL Prepared;
 
 void Run(register void (*callback)())
 {
@@ -14,16 +17,11 @@ void Run(register void (*callback)())
     }
 }
 
-extern BOOL lbl_804D7398;
-
 static void Callback(void)
 {
-    lbl_804D7398 = TRUE;
+    Prepared = TRUE;
 }
 
-extern unk_t lbl_804A7D40;
-extern unk_t lbl_804D7390;
-extern unk_t lbl_804D7394;
 extern void ICInvalidateRange(void*, u32);
 extern unk_t DVDReadAbsAsyncForBS();
 extern unk_t __OSDoHotReset();
@@ -43,13 +41,13 @@ asm unk_t __OSReboot()
 /* 80348154 00344D34  93 C1 03 40 */	stw r30, 0x340(r1)
 /* 80348158 00344D38  93 A1 03 3C */	stw r29, 0x33c(r1)
 /* 8034815C 00344D3C  7C 7D 1B 78 */	mr r29, r3
-/* 80348160 00344D40  3C 60 80 4A */	lis r3, lbl_804A7D40@ha
-/* 80348164 00344D44  3B C3 7D 40 */	addi r30, r3, lbl_804A7D40@l
+/* 80348160 00344D40  3C 60 80 4A */	lis r3, Header@ha
+/* 80348164 00344D44  3B C3 7D 40 */	addi r30, r3, Header@l
 /* 80348168 00344D48  4B FF F1 FD */	bl OSDisableInterrupts
-/* 8034816C 00344D4C  80 AD BC F0 */	lwz r5, lbl_804D7390(r13)
+/* 8034816C 00344D4C  80 AD BC F0 */	lwz r5, SaveStart(r13)
 /* 80348170 00344D50  3F E0 81 80 */	lis r31, 0x817FFFFC@ha
 /* 80348174 00344D54  38 60 00 00 */	li r3, 0
-/* 80348178 00344D58  80 0D BC F4 */	lwz r0, lbl_804D7394(r13)
+/* 80348178 00344D58  80 0D BC F4 */	lwz r0, SaveEnd(r13)
 /* 8034817C 00344D5C  3C 80 81 30 */	lis r4, 0x812FDFF0@ha
 /* 80348180 00344D60  38 E0 00 01 */	li r7, 1
 /* 80348184 00344D64  93 BF FF FC */	stw r29, 0x817FFFFC@l(r31)
@@ -83,7 +81,7 @@ lbl_803481D8:
 lbl_803481F0:
 /* 803481F0 00344DD0  48 00 00 04 */	b lbl_803481F4
 lbl_803481F4:
-/* 803481F4 00344DD4  80 0D BC F8 */	lwz r0, lbl_804D7398(r13)
+/* 803481F4 00344DD4  80 0D BC F8 */	lwz r0, Prepared(r13)
 /* 803481F8 00344DD8  2C 00 00 00 */	cmpwi r0, 0
 /* 803481FC 00344DDC  41 82 FF F8 */	beq lbl_803481F4
 /* 80348200 00344DE0  7F C4 F3 78 */	mr r4, r30
@@ -123,7 +121,7 @@ lbl_8034825C:
 lbl_80348274:
 /* 80348274 00344E54  48 00 00 04 */	b lbl_80348278
 lbl_80348278:
-/* 80348278 00344E58  80 0D BC F8 */	lwz r0, lbl_804D7398(r13)
+/* 80348278 00344E58  80 0D BC F8 */	lwz r0, Prepared(r13)
 /* 8034827C 00344E5C  2C 00 00 00 */	cmpwi r0, 0
 /* 80348280 00344E60  41 82 FF F8 */	beq lbl_80348278
 /* 80348284 00344E64  7F C5 F3 78 */	mr r5, r30
