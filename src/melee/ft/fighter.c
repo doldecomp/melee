@@ -26,9 +26,6 @@ extern struct ActionState* ActionStateTableByCharacter[33];
 
 extern s8 lbl_803C26FC[33];
 
-extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
-
-
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
 extern StageInfo stage_info; // from asm/melee/text_2.s
@@ -45,6 +42,10 @@ const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
 HSD_ObjAllocData lbl_80458FD0;
 HSD_ObjAllocData lbl_80458FFC;
+HSD_ObjAllocData lbl_80459028;
+HSD_ObjAllocData lbl_80459054;
+HSD_ObjAllocData lbl_80459080;
+HSD_ObjAllocData lbl_804590AC;
 
 
 // TODO: verify that this is really a spawn number counter, then rename this var globally
@@ -93,8 +94,8 @@ void Fighter_800679B0()
 	s32 i;
 
 	// @WARNING: don't hardcode the allocation sizes
-	HSD_ObjAllocInit(&lbl_80458FD0+0, /*size*/0x23ec, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+1, /*size*/0x424 , /*align*/4);
+	HSD_ObjAllocInit(&lbl_80458FD0, sizeof(Fighter), /*align*/4);
+	HSD_ObjAllocInit(&lbl_80458FFC, /*size*/0x424 , /*align*/4);
 	func_800852B0();
 	Fighter_LoadCommonData();
 	func_8008549C();
@@ -102,9 +103,9 @@ void Fighter_800679B0()
 	func_800C8064();
 	func_800C8F6C();
 	// @TODO: &lbl_80458FD0+2, +3, +4 are not defined in the fighter.s data section, how does this work?
-	HSD_ObjAllocInit(&lbl_80458FD0+2, /*size*/0x8c0, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+3, /*size*/0x1f0, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+4, /*size*/0x80 , /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459028, /*size*/0x8c0, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459054, /*size*/0x1f0, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459080, /*size*/0x80 , /*align*/4);
 
 	g_spawnNumCounter = 1;
 
@@ -2947,24 +2948,13 @@ void Fighter_8006DA4C(HSD_GObj* fighter_gobj) {
     }
 }
 
-///https://decomp.me/scratch/MGqg7  --- very weird match using uninitialized pointer and compiler warning
-
-inline HSD_ObjAllocData* sub_func(Fighter* uninitalized_fighter, Fighter* fighter_real) {
-
-    HSD_ObjAllocData* objAllocData = &lbl_80458FD0;
-    
-    if (ft_OnUserDataRemove[uninitalized_fighter->x4_fighterKind]) {
-        ft_OnUserDataRemove[uninitalized_fighter->x4_fighterKind](fighter_real->x0_fighter);
+void Fighter_Unload_8006DABC(void* user_data)
+{
+    Fighter* fp = (Fighter*)user_data;
+    int kind = fp->x4_fighterKind;
+    if (ft_OnUserDataRemove[kind]) {
+        ft_OnUserDataRemove[kind](fp->x0_fighter);
     }
-
-    return objAllocData;
-}
-
-void Fighter_Unload_8006DABC(Fighter* fp) {
-    Fighter* uninitalized_fighter;
-
-    HSD_ObjAllocData *objAllocData = &lbl_80458FD0;
-    objAllocData = sub_func(uninitalized_fighter, fp);
 
     func_8007B8E8(fp->x0_fighter);
     func_80067688(&fp->x60C);
@@ -2982,13 +2972,12 @@ void Fighter_Unload_8006DABC(Fighter* fp) {
     func_800859A8(fp);
     HSD_LObjRemoveAll(fp->x588);
     Player_80031FB0(fp->xC_playerID, fp->x221F_flag.bits.b4);
-    
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], fp->x59C);
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], fp->x5A0);
-    HSD_ObjFree(&objAllocData[(0x58 / 40)], fp->x5E8_fighterBones);
-    HSD_ObjFree(&objAllocData[(0x84 / 40)], fp->x5F0);
-    HSD_ObjFree(&objAllocData[(0xB0 / 40)], fp->x2040);
-    HSD_ObjFree(&objAllocData[(0x2C / 40)], fp->x2D8_specialAttributes2);
-    HSD_ObjFree(objAllocData, fp);
 
+    HSD_ObjFree(&lbl_804590AC, fp->x59C);
+    HSD_ObjFree(&lbl_804590AC, fp->x5A0);
+    HSD_ObjFree(&lbl_80459028, fp->x5E8_fighterBones);
+    HSD_ObjFree(&lbl_80459054, fp->x5F0);
+    HSD_ObjFree(&lbl_80459080, fp->x2040);
+    HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);
+    HSD_ObjFree(&lbl_80458FD0, fp);
 }

@@ -2016,6 +2016,7 @@ typedef struct _Fighter {
     /* 0x23B0 */ s32 x23B0;
     /* 0x23B4 */ s32 x23B4;
     /* 0x23B8 */ s32 x23B8;
+    u8 filler_x23B8[0x23E8 - 0x23B8];
 } Fighter;
 
 inline Fighter* getFighter(HSD_GObj* fighter_gobj) 
@@ -2120,7 +2121,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj);
 void Fighter_8006D9AC(HSD_GObj* fighter_gobj);
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj);
 void Fighter_8006DA4C(HSD_GObj* fighter_gobj);
-void Fighter_Unload_8006DABC(Fighter* fp);
+void Fighter_Unload_8006DABC(void* user_data);
 
 
 ///// Shared Fighter Code
