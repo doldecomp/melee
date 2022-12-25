@@ -2122,7 +2122,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj);
 void Fighter_8006D9AC(HSD_GObj* fighter_gobj);
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj);
 void Fighter_8006DA4C(HSD_GObj* fighter_gobj);
-void Fighter_Unload_8006DABC(Fighter* fp);
+void Fighter_Unload_8006DABC(void* user_data);
 
 
 ///// Shared Fighter Code
@@ -2245,5 +2245,11 @@ extern ftCommonData* p_ftCommonData;
 // Todo: Move everything to this access or the other one.
 #define GET_FIGHTER_NEW(gobj) \
     ((Fighter*)HSD_GobjGetUserData(gobj))
+
+// This probably shouldnt exist, but some functions are just stubborn
+// motherfuckers that wont match without a direct access. TODO: Can we
+// get rid of every one of these?
+#define GET_FIGHTER_NEW_DIRECT(gobj) \
+    ((Fighter*)gobj->user_data)
 
 #endif

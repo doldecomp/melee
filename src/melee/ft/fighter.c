@@ -44,7 +44,10 @@ const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
 HSD_ObjAllocData lbl_80458FD0;
 HSD_ObjAllocData lbl_80458FFC;
-
+HSD_ObjAllocData lbl_80459028;
+HSD_ObjAllocData lbl_80459054;
+HSD_ObjAllocData lbl_80459080;
+HSD_ObjAllocData lbl_804590AC;
 
 // TODO: verify that this is really a spawn number counter, then rename this var globally
 u32 lbl_804D64F8 = 0;
@@ -89,18 +92,17 @@ void Fighter_800679B0()
 	s32 i;
 
 	// @WARNING: don't hardcode the allocation sizes
-	HSD_ObjAllocInit(&lbl_80458FD0+0, /*size*/0x23ec, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+1, /*size*/0x424 , /*align*/4);
+	HSD_ObjAllocInit(&lbl_80458FD0, /*size*/0x23ec, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80458FFC, /*size*/0x424 , /*align*/4);
 	func_800852B0();
 	Fighter_LoadCommonData();
 	func_8008549C();
 	func_8009F4A4();
 	func_800C8064();
 	func_800C8F6C();
-	// @TODO: &lbl_80458FD0+2, +3, +4 are not defined in the fighter.s data section, how does this work?
-	HSD_ObjAllocInit(&lbl_80458FD0+2, /*size*/0x8c0, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+3, /*size*/0x1f0, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+4, /*size*/0x80 , /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459028, /*size*/0x8c0, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459054, /*size*/0x1f0, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459080, /*size*/0x80 , /*align*/4);
 
 	g_spawnNumCounter = 1;
 
@@ -2048,7 +2050,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj) {
     } while(0)
 
 void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy) {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER_NEW_DIRECT(fighter_gobj);
     Vec3 windOffset; 
 
     if (fp->x221F_flag.bits.b3) {
@@ -2321,7 +2323,7 @@ inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj, 
 
 void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj) 
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
 
     if (fp->x34_scale.z != 1.0f) {
         HSD_JObj* jobj = fighter_gobj->hsd_obj;
@@ -2333,7 +2335,8 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
 
         HSD_JObjSetupMatrix(jobj);
         HSD_JObjGetMtx(jobj);
-        HSD_JObjGetScale(Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, &mtx1), &scale);
+        jobj = Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, &mtx1);
+        HSD_JObjGetScale(jobj, &scale);
 
         scale.x = Fighter_GetModelScale(fp);
 
@@ -2346,8 +2349,7 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
 }
 
 void Fighter_8006C27C(HSD_GObj* fighter_gobj, s32 unused, s32 unused2, s32 unused3) {
-
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = (fighter_gobj->user_data);
 
     if (!fp->x221F_flag.bits.b3) {
 
@@ -2417,12 +2419,8 @@ void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighter_gobj) {
     }
 }
 
-inline float Fighter_8006C80C_Inline_1(Fighter* fp, Vec* cam_offset) {
-    return fp->xB0_pos.y + cam_offset->y;
-}
-
 void Fighter_8006C80C(HSD_GObj* fighter_gobj) {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3) {
         func_80067624(fighter_gobj, &fp->x60C);
@@ -2447,8 +2445,8 @@ void Fighter_8006C80C(HSD_GObj* fighter_gobj) {
                 Vec cam_offset;
                 Stage_UnkSetVec3TCam_Offset(&cam_offset);
             
-                if (Fighter_8006C80C_Inline_1(fp, &cam_offset) < fp->x2140) {
-                    fp->x2140 = Fighter_8006C80C_Inline_1(fp, &cam_offset);
+                if (fp->xB0_pos.y + cam_offset.y < fp->x2140) {
+                    fp->x2140 = fp->xB0_pos.y + cam_offset.y;
                 }
             }
         }
@@ -2456,8 +2454,7 @@ void Fighter_8006C80C(HSD_GObj* fighter_gobj) {
 }
 
 void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj) {
-
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3 && !func_8016B1C4()) {
         func_8007BA0C(fighter_gobj);
@@ -2490,7 +2487,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj) {
 
 
 void Fighter_8006CB94(HSD_GObj* fighter_gobj) {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
     f32 func_8007BBCC_float_output;
 
     if (!fp->x221F_flag.bits.b3 && !fp->x2219_flag.bits.b1) {
@@ -2927,24 +2924,13 @@ void Fighter_8006DA4C(HSD_GObj* fighter_gobj) {
     }
 }
 
-///https://decomp.me/scratch/MGqg7  --- very weird match using uninitialized pointer and compiler warning
+void Fighter_Unload_8006DABC(void* user_data) {
+    Fighter* fp = (Fighter*)user_data;
+    int kind = fp->x4_fighterKind;
 
-inline HSD_ObjAllocData* sub_func(Fighter* uninitalized_fighter, Fighter* fighter_real) {
-
-    HSD_ObjAllocData* objAllocData = &lbl_80458FD0;
-    
-    if (ft_OnUserDataRemove[uninitalized_fighter->x4_fighterKind]) {
-        ft_OnUserDataRemove[uninitalized_fighter->x4_fighterKind](fighter_real->x0_fighter);
+    if (ft_OnUserDataRemove[kind]) {
+        ft_OnUserDataRemove[kind](fp->x0_fighter);
     }
-
-    return objAllocData;
-}
-
-void Fighter_Unload_8006DABC(Fighter* fp) {
-    Fighter* uninitalized_fighter;
-
-    HSD_ObjAllocData *objAllocData = &lbl_80458FD0;
-    objAllocData = sub_func(uninitalized_fighter, fp);
 
     func_8007B8E8(fp->x0_fighter);
     func_80067688(&fp->x60C);
@@ -2954,21 +2940,24 @@ void Fighter_Unload_8006DABC(Fighter* fp) {
     func_800765AC(fp->x0_fighter);
     func_80088C5C(fp->x0_fighter);
     func_8000EE8C(&fp->x20A4);
+    
+    
     if (fp->x20A0_accessory) {
         HSD_JObjRemoveAll(fp->x20A0_accessory);
     }
+
     HSD_JObjRemoveAll(fp->x8AC_animSkeleton);
     HSD_JObjUnref(fp->x2184);
     func_800859A8(fp);
     HSD_LObjRemoveAll(fp->x588);
     Player_80031FB0(fp->xC_playerID, fp->x221F_flag.bits.b4);
     
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], fp->x59C);
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], fp->x5A0);
-    HSD_ObjFree(&objAllocData[(0x58 / 40)], fp->x5E8_fighterBones);
-    HSD_ObjFree(&objAllocData[(0x84 / 40)], fp->x5F0);
-    HSD_ObjFree(&objAllocData[(0xB0 / 40)], fp->x2040);
-    HSD_ObjFree(&objAllocData[(0x2C / 40)], fp->x2D8_specialAttributes2);
-    HSD_ObjFree(objAllocData, fp);
+    HSD_ObjFree(&lbl_804590AC, fp->x59C);
+    HSD_ObjFree(&lbl_804590AC, fp->x5A0);
+    HSD_ObjFree(&lbl_80459028, fp->x5E8_fighterBones);
+    HSD_ObjFree(&lbl_80459054, fp->x5F0);
+    HSD_ObjFree(&lbl_80459080, fp->x2040);
+    HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);
+    HSD_ObjFree(&lbl_80458FD0, fp);
 
 }
