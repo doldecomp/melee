@@ -2948,24 +2948,13 @@ void Fighter_8006DA4C(HSD_GObj* fighter_gobj) {
     }
 }
 
-///https://decomp.me/scratch/MGqg7  --- very weird match using uninitialized pointer and compiler warning
-
-inline HSD_ObjAllocData* sub_func(Fighter* uninitalized_fighter, Fighter* fighter_real) {
-
-    HSD_ObjAllocData* objAllocData = &lbl_80458FD0;
-    
-    if (ft_OnUserDataRemove[uninitalized_fighter->x4_fighterKind]) {
-        ft_OnUserDataRemove[uninitalized_fighter->x4_fighterKind](fighter_real->x0_fighter);
+void Fighter_Unload_8006DABC(void* user_data)
+{
+    Fighter* fp = (Fighter*)user_data;
+    int kind = fp->x4_fighterKind;
+    if (ft_OnUserDataRemove[kind]) {
+        ft_OnUserDataRemove[kind](fp->x0_fighter);
     }
-
-    return objAllocData;
-}
-
-void Fighter_Unload_8006DABC(Fighter* fp) {
-    Fighter* uninitalized_fighter;
-
-    HSD_ObjAllocData *objAllocData = &lbl_80458FD0;
-    objAllocData = sub_func(uninitalized_fighter, fp);
 
     func_8007B8E8(fp->x0_fighter);
     func_80067688(&fp->x60C);
@@ -2983,13 +2972,12 @@ void Fighter_Unload_8006DABC(Fighter* fp) {
     func_800859A8(fp);
     HSD_LObjRemoveAll(fp->x588);
     Player_80031FB0(fp->xC_playerID, fp->x221F_flag.bits.b4);
-    
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], fp->x59C);
-    HSD_ObjFree(&objAllocData[(0xDC / 40)], fp->x5A0);
-    HSD_ObjFree(&objAllocData[(0x58 / 40)], fp->x5E8_fighterBones);
-    HSD_ObjFree(&objAllocData[(0x84 / 40)], fp->x5F0);
-    HSD_ObjFree(&objAllocData[(0xB0 / 40)], fp->x2040);
-    HSD_ObjFree(&objAllocData[(0x2C / 40)], fp->x2D8_specialAttributes2);
-    HSD_ObjFree(objAllocData, fp);
 
+    HSD_ObjFree(&lbl_804590AC, fp->x59C);
+    HSD_ObjFree(&lbl_804590AC, fp->x5A0);
+    HSD_ObjFree(&lbl_80459028, fp->x5E8_fighterBones);
+    HSD_ObjFree(&lbl_80459054, fp->x5F0);
+    HSD_ObjFree(&lbl_80459080, fp->x2040);
+    HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);
+    HSD_ObjFree(&lbl_80458FD0, fp);
 }

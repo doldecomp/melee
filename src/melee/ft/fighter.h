@@ -2120,7 +2120,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj);
 void Fighter_8006D9AC(HSD_GObj* fighter_gobj);
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj);
 void Fighter_8006DA4C(HSD_GObj* fighter_gobj);
-void Fighter_Unload_8006DABC(Fighter* fp);
+void Fighter_Unload_8006DABC(void* user_data);
 
 
 ///// Shared Fighter Code
