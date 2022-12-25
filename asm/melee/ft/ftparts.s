@@ -3265,18 +3265,6 @@ lbl_803C0BD0:
 
 .section .bss
     .balign 8
-.global lbl_80459028
-lbl_80459028:
-	.skip 0x2C
-.global lbl_80459054
-lbl_80459054:
-	.skip 0x2C
-.global lbl_80459080
-lbl_80459080:
-	.skip 0x2C
-.global lbl_804590AC
-lbl_804590AC:
-	.skip 0x2C
 .global lbl_804590D8
 lbl_804590D8:
 	.skip 0x168

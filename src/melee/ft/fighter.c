@@ -26,9 +26,6 @@ extern struct ActionState* ActionStateTableByCharacter[33];
 
 extern s8 lbl_803C26FC[33];
 
-extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
-
-
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
 extern StageInfo stage_info; // from asm/melee/text_2.s
@@ -45,6 +42,10 @@ const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
 HSD_ObjAllocData lbl_80458FD0;
 HSD_ObjAllocData lbl_80458FFC;
+HSD_ObjAllocData lbl_80459028;
+HSD_ObjAllocData lbl_80459054;
+HSD_ObjAllocData lbl_80459080;
+HSD_ObjAllocData lbl_804590AC;
 
 
 // TODO: verify that this is really a spawn number counter, then rename this var globally
@@ -93,8 +94,8 @@ void Fighter_800679B0()
 	s32 i;
 
 	// @WARNING: don't hardcode the allocation sizes
-	HSD_ObjAllocInit(&lbl_80458FD0+0, /*size*/0x23ec, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+1, /*size*/0x424 , /*align*/4);
+	HSD_ObjAllocInit(&lbl_80458FD0, /*size*/0x23ec, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80458FFC, /*size*/0x424 , /*align*/4);
 	func_800852B0();
 	Fighter_LoadCommonData();
 	func_8008549C();
@@ -102,9 +103,9 @@ void Fighter_800679B0()
 	func_800C8064();
 	func_800C8F6C();
 	// @TODO: &lbl_80458FD0+2, +3, +4 are not defined in the fighter.s data section, how does this work?
-	HSD_ObjAllocInit(&lbl_80458FD0+2, /*size*/0x8c0, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+3, /*size*/0x1f0, /*align*/4);
-	HSD_ObjAllocInit(&lbl_80458FD0+4, /*size*/0x80 , /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459028, /*size*/0x8c0, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459054, /*size*/0x1f0, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80459080, /*size*/0x80 , /*align*/4);
 
 	g_spawnNumCounter = 1;
 
