@@ -2046,8 +2046,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj) {
         vecLocal->x = vecLocal->y = vecLocal->z = c; \
     } while(0)
 
-void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy) {
-    Fighter* fp = GET_FIGHTER_NEW_DIRECT(fighter_gobj);
+void Fighter_procUpdate(HSD_GObj* fighter_gobj) {
+    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
     Vec3 windOffset; 
 
     if (fp->x221F_flag.bits.b3) {
@@ -2345,14 +2345,22 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
     }
 }
 
-void Fighter_8006C27C(HSD_GObj* fighter_gobj, s32 unused, s32 unused2, s32 unused3) {
-    Fighter* fp = GET_FIGHTER_NEW_DIRECT(fighter_gobj);
+// Kinda silly but helps get rid of dummy fake args so its whatevs.
+inline float Fighter_GetPosX(Fighter* fp) {
+    return fp->xB0_pos.x;
+}
+
+inline float Fighter_GetPosY(Fighter* fp) {
+    return fp->xB0_pos.y;
+}
+
+void Fighter_8006C27C(HSD_GObj* fighter_gobj) {
+    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3) {
-
         if (fp->x6F0_collData.x19C) {
-            fp->x6F0_collData.x19C = fp->x6F0_collData.x19C - 1;
-            if (!fp->x6F0_collData.x19C) {
+            fp->x6F0_collData.x19C--;
+            if (fp->x6F0_collData.x19C == 0) {
                 func_8007D5BC(fp);
             }
         }
@@ -2375,13 +2383,14 @@ void Fighter_8006C27C(HSD_GObj* fighter_gobj, s32 unused, s32 unused2, s32 unuse
                 fpclassify(fp->xB0_pos.y) == FP_NAN ||
                 fpclassify(fp->xB0_pos.z) == FP_NAN)
             {
-                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", fp->xB0_pos.x, fp->xB0_pos.y);
+                f32 x = Fighter_GetPosX(fp);
+                f32 y = Fighter_GetPosY(fp);
+                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x, y);
                 __assert(__FILE__, 2590, "0");
             }
         }
 
         HSD_JObjSetTranslate(fighter_gobj->hsd_obj, &fp->xB0_pos);
-
     }
 }
 
@@ -2923,6 +2932,8 @@ void Fighter_8006DA4C(HSD_GObj* fighter_gobj) {
 }
 
 void Fighter_Unload_8006DABC(void* user_data) {
+    // this doesnt use a GET_FIGHTER_NEW macro, but since it appears to pass it directly
+    // its probably just written directly.
     Fighter* fp = (Fighter*)(user_data);
     int kind = fp->x4_fighterKind;
 
@@ -2938,8 +2949,7 @@ void Fighter_Unload_8006DABC(void* user_data) {
     func_800765AC(fp->x0_fighter);
     func_80088C5C(fp->x0_fighter);
     func_8000EE8C(&fp->x20A4);
-    
-    
+
     if (fp->x20A0_accessory) {
         HSD_JObjRemoveAll(fp->x20A0_accessory);
     }
