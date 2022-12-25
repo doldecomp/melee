@@ -94,7 +94,7 @@ void Fighter_800679B0()
 	s32 i;
 
 	// @WARNING: don't hardcode the allocation sizes
-	HSD_ObjAllocInit(&lbl_80458FD0, /*size*/0x23ec, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80458FD0, sizeof(Fighter), /*align*/4);
 	HSD_ObjAllocInit(&lbl_80458FFC, /*size*/0x424 , /*align*/4);
 	func_800852B0();
 	Fighter_LoadCommonData();

@@ -2016,6 +2016,7 @@ typedef struct _Fighter {
     /* 0x23B0 */ s32 x23B0;
     /* 0x23B4 */ s32 x23B4;
     /* 0x23B8 */ s32 x23B8;
+    u8 filler_x23B8[0x23E8 - 0x23B8];
 } Fighter;
 
 inline Fighter* getFighter(HSD_GObj* fighter_gobj) 
