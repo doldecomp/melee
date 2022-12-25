@@ -1,6 +1,14 @@
 #ifndef _PAD_H_
 #define _PAD_H_
 
+#include <dolphin/types.h>
+
+#define PAD_CHANMAX 4
+
+#define PAD_ERR_NONE 0
+
+#define PAD_SPEC_2 2
+
 typedef struct PADStatus
 {
     u16 button;
@@ -19,7 +27,7 @@ void PADControlMotor(int chan, u32 command);
 void SISetSamplingRate(u32 rate);
 void VISetBlack(BOOL);
 u32 VIGetRetraceCount();
-void PADClamp(u8 *);
+void PADClamp(PADStatus*);
 void PADRead(u8 *);
 void PADReset(u32);
 

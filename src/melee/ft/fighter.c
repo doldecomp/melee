@@ -25,9 +25,6 @@ extern struct ActionState* ActionStateTableByCharacter[33];
 
 extern s8 lbl_803C26FC[33];
 
-extern HSD_ObjAllocData lbl_804590AC; // from ft/ftparts.s
-
-
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
 extern StageInfo stage_info; // from asm/melee/text_2.s
@@ -92,7 +89,7 @@ void Fighter_800679B0()
 	s32 i;
 
 	// @WARNING: don't hardcode the allocation sizes
-	HSD_ObjAllocInit(&lbl_80458FD0, /*size*/0x23ec, /*align*/4);
+	HSD_ObjAllocInit(&lbl_80458FD0, sizeof(Fighter), /*align*/4);
 	HSD_ObjAllocInit(&lbl_80458FFC, /*size*/0x424 , /*align*/4);
 	func_800852B0();
 	Fighter_LoadCommonData();
@@ -2952,7 +2949,7 @@ void Fighter_Unload_8006DABC(void* user_data) {
     func_800859A8(fp);
     HSD_LObjRemoveAll(fp->x588);
     Player_80031FB0(fp->xC_playerID, fp->x221F_flag.bits.b4);
-    
+
     HSD_ObjFree(&lbl_804590AC, fp->x59C);
     HSD_ObjFree(&lbl_804590AC, fp->x5A0);
     HSD_ObjFree(&lbl_80459028, fp->x5E8_fighterBones);
@@ -2960,5 +2957,4 @@ void Fighter_Unload_8006DABC(void* user_data) {
     HSD_ObjFree(&lbl_80459080, fp->x2040);
     HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);
     HSD_ObjFree(&lbl_80458FD0, fp);
-
 }

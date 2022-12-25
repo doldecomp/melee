@@ -544,7 +544,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/dsp/dsp.c.o\
-	$(BUILD_DIR)/asm/dolphin/dsp/dsp.s.o\
 	$(BUILD_DIR)/src/dolphin/dsp/dsp_debug.c.o\
 	$(BUILD_DIR)/asm/dolphin/dsp/dsp_task.s.o\
 
@@ -588,7 +587,6 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/OSArena.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSAudioSystem.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSCache.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSCache_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSContext.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSContext_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSError.c.o\
@@ -600,13 +598,10 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSLink.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSMemory.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSMemory_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSMutex.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSReboot.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSReboot_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSReset.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSResetSW.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSResetSW_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSRtc.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSSerial.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSSerial_data.s.o\
@@ -619,7 +614,9 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/init/__ppc_eabi_init.c.o\
 
 TEXT_O_FILES +=\
+	$(BUILD_DIR)/src/dolphin/pad/PadClamp.c.o\
 	$(BUILD_DIR)/asm/dolphin/pad/Padclamp.s.o\
+	$(BUILD_DIR)/src/dolphin/pad/Pad.c.o\
 	$(BUILD_DIR)/asm/dolphin/pad/Pad.s.o\
 
 TEXT_O_FILES +=\

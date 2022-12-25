@@ -55,7 +55,6 @@ void ClearArena(void)
 
 extern unk_t AreWeInitialized;
 extern unk_t DriveInfo;
-extern unk_t lbl_804D7354;
 extern unk_t __OSStartTime;
 extern unk_t BI2DebugFlag;
 extern unk_t __DVDLongFileNameFlag;
@@ -74,7 +73,6 @@ extern void __OSModuleInit(void);
 extern void OSInitAlarm(void);
 extern void __OSInitSystemCall(void);
 extern unk_t OSExceptionInit();
-extern unk_t __OSGetSystemTime();
 
 #pragma push
 asm void OSInit(void)
@@ -93,7 +91,7 @@ asm void OSInit(void)
 /* 80342FF0 0033FBD0  38 00 00 01 */	li r0, 1
 /* 80342FF4 0033FBD4  90 0D BC A4 */	stw r0, AreWeInitialized(r13)
 /* 80342FF8 0033FBD8  48 00 94 19 */	bl __OSGetSystemTime
-/* 80342FFC 0033FBDC  90 8D BC B4 */	stw r4, lbl_804D7354(r13)
+/* 80342FFC 0033FBDC  90 8D BC B4 */	stw r4, __OSStartTime+4(r13)
 /* 80343000 0033FBE0  90 6D BC B0 */	stw r3, __OSStartTime(r13)
 /* 80343004 0033FBE4  48 00 43 61 */	bl OSDisableInterrupts
 /* 80343008 0033FBE8  38 00 00 00 */	li r0, 0
