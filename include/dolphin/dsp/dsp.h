@@ -8,11 +8,7 @@
 #include <dolphin/os/OSInterrupt.h>
 
 #define HW_REG(reg, type) *(volatile type *)(uintptr_t)(reg)
-volatile u16 __DSPRegs[]
-#ifndef M2CTX
-    : 0xCC005000
-#endif
-    ;
+extern volatile u16 __DSPRegs[] AT_ADDRESS(0xCC005000);
 
 typedef void (*DSPCallback)(void *task);
 

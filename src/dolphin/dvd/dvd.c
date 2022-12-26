@@ -43,7 +43,7 @@ extern volatile struct _IO {
     u32 unk4;
     u32 x8[6];
     u32 error;
-} IO : 0xCC006000;
+} IO AT_ADDRESS(0xCC006000);
 
 static struct {
     u32 bootFilePosition;

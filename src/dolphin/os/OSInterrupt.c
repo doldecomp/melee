@@ -67,10 +67,10 @@ extern unk_t __OSSetExceptionHandler();
 extern volatile struct {
     u32 x0;
     u32 intr;
-} OS_PI : 0xCC003000;
+} OS_PI AT_ADDRESS(0xCC003000);
 
-extern volatile u32 OS_INTR_OLD : 0x800000C4;
-extern volatile u32 OS_INTR_CUR : 0x800000C8;
+extern volatile u32 OS_INTR_OLD AT_ADDRESS(0x800000C4);
+extern volatile u32 OS_INTR_CUR AT_ADDRESS(0x800000C8);
 
 #pragma peephole off
 

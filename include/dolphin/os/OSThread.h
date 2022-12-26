@@ -62,16 +62,8 @@ typedef struct OSThread {
 
 typedef void (*OSSwitchThreadCallback)(OSThread*, OSThread*);
 
-OSThreadQueue OS_THREAD_QUEUE
-#ifndef M2CTX
-    : 0x800000DC
-#endif
-    ;
-OSThread* OS_CURRENT_THREAD
-#ifndef M2CTX
-    : 0x800000E4
-#endif
-    ;
+extern OSThreadQueue OS_THREAD_QUEUE AT_ADDRESS(0x800000DC);
+extern OSThread* OS_CURRENT_THREAD AT_ADDRESS(0x800000E4);
 
 STRUCT_PLACEHOLDER(OSThread, 1)
 STRUCT_PLACEHOLDER(OSThread, 2)

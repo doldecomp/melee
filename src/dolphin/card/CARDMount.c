@@ -2,7 +2,7 @@
 
 #include <dolphin/os/OSRtc.h>
 
-u8 GameChoice : 0x800030E3;
+u8 GameChoice AT_ADDRESS(0x800030E3);
 void __CARDExiHandler(s32 chan, OSContext* context);
 
 u16 __CARDVendorID = 0xFFFF;

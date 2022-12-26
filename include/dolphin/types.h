@@ -61,6 +61,14 @@ typedef struct _ ## module ## _Unk ## number module ## _Unk ## number;
 #endif
 #endif
 
+#if defined(PERMUTER)
+#define AT_ADDRESS(x) = FIXEDADDR(x)
+#elif defined(__MWERKS__)
+#define AT_ADDRESS(x) : (x)
+#else
+#define AT_ADDRESS(x)
+#endif
+
 #pragma region "macros.inc"
 #define qr0 0
 #define qr1 1

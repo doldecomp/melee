@@ -3,7 +3,7 @@
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSRtc.h>
 
-vu16 __VIRegs[59] : 0xCC002000;
+extern vu16 __VIRegs[59] AT_ADDRESS(0xCC002000);
 
 void FormatCallback(s32 chan, s32 result)
 {

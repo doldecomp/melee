@@ -120,11 +120,7 @@ extern volatile union {
     unk_t ptr;
     f32 f32;
 
-} WGPIPE
-#ifndef M2CTX
-    : 0xCC008000
-#endif
-    ;
+} WGPIPE AT_ADDRESS(0xCC008000);
 
 typedef struct
 {
