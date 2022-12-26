@@ -22,7 +22,7 @@ void func_80149354(HSD_GObj* gobj)
     } else if (ft2->x2204_ftcmd_var1 == 2) {
         func_80149268(gobj);
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         checkFighter2244(gobj);
         func_8008A2BC(gobj);
     }

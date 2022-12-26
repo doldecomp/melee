@@ -184,7 +184,7 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/xcOet // Mr. Game & Watch's Grounded Judgement Animation callback
 void ftGameWatch_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -195,7 +195,7 @@ extern void func_800CC730(HSD_GObj* fighter_gobj);
 // 0x8014C8F8 - Mr. Game & Watch's Aerial Judgement Animation callback
 void ftGameWatch_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }

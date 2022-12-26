@@ -51,7 +51,7 @@ void lbl_80152928(HSD_GObj* gobj) {
 // 801529D0 14F5B0
 // https://decomp.me/scratch/IBucf
 void lbl_801529D0(HSD_GObj* arg0) {
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         func_80151018(arg0);
     }
 }

@@ -370,13 +370,13 @@ void func_8013359C(HSD_GObj* gobj) {
 }
 
 void func_80133654(HSD_GObj* gobj) {
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8008A2BC(gobj);
     }
 }
 
 void func_80133690(HSD_GObj* gobj) {
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_800CC730(gobj);
     }
 }
@@ -396,7 +396,7 @@ void func_801336CC(HSD_GObj* gobj) {
         func_8007ABD0(&fp->x914[0], koopaAttr->x2C, gobj);
         fp->x2200_ftcmd_var0 = 0;
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) fp->x2340_stateVar1 != 0) {
             fp->x2344_stateVar2 = 1;
             ft_temp = gobj->user_data;

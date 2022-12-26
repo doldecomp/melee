@@ -94,7 +94,7 @@ void ftNess_SpecialAirS_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK Fire
 // https://decomp.me/scratch/5NxzS //
 void ftNess_SpecialS_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Animation callback //
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -104,7 +104,7 @@ void ftNess_SpecialS_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Ani
 // https://decomp.me/scratch/iFFHn //
 void ftNess_SpecialAirS_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Fire Animation callback //
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }

@@ -99,7 +99,7 @@ void ftCaptain_SpecialN_Anim(HSD_GObj* fighter_gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -111,7 +111,7 @@ void ftCaptain_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }

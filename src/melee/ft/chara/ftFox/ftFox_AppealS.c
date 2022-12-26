@@ -136,7 +136,7 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
             break;
         }
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         fp->foxVars[0].AppealS.animCount++;
         if ((s32)fp->foxVars[0].AppealS.animCount >= 3)

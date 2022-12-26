@@ -37,7 +37,7 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
 
     fp = getFighter(gobj);
     sa = (ftMarioAttributes*)fp->x2D4_specialAttributes;
-    if (ftAnim_IsFramesRemaining(gobj) == FALSE) 
+    if (!ftAnim_IsFramesRemaining(gobj)) 
     {
         func_80096900(gobj, 0, 1, 0, sa->x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY, sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
     }

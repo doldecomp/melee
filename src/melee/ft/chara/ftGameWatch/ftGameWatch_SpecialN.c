@@ -228,7 +228,7 @@ void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
     ftGameWatch_SpecialN_ChefLoop(fighter_gobj);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -257,7 +257,7 @@ void ftGameWatch_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
     ftGameWatch_SpecialAirN_ChefLoop(fighter_gobj);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }

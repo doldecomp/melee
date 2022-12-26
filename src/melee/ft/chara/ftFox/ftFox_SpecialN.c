@@ -299,7 +299,7 @@ void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE538(fp->sa.fox.x222C_blasterGObj);
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_LOOP, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
@@ -320,7 +320,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
         temp_r28->x220C_ftcmd_var3 = 0U;
         func_802AE538(temp_r28->sa.fox.x222C_blasterGObj);
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)temp_r28->foxVars[0].SpecialN.isBlasterLoop == TRUE)
         {
@@ -415,7 +415,7 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE608(fp->sa.fox.x222C_blasterGObj);
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftFox_SpecialN_RemoveBlasterNULL(fighter_gobj);
         func_8008A2BC(fighter_gobj);
@@ -435,7 +435,7 @@ void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE538(fp->sa.fox.x222C_blasterGObj);
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_LOOP, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
@@ -456,7 +456,7 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE538(fp->sa.fox.x222C_blasterGObj);
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)fp->foxVars[0].SpecialN.isBlasterLoop == TRUE)
         {
@@ -544,7 +544,7 @@ void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE608(fp->sa.fox.x222C_blasterGObj);
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftFox_SpecialN_RemoveBlasterNULL(fighter_gobj);
         if (0.0f == foxAttrs->x18_FOX_BLASTER_LANDING_LAG)
@@ -713,7 +713,7 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
 
     if ((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO))
     {
-        if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+        if (!ftAnim_IsFramesRemaining(fighter_gobj))
         {
             fp->sa.fox.x222C_blasterGObj = NULL;
             ftFox_SpecialN_SetNULL(fighter_gobj);

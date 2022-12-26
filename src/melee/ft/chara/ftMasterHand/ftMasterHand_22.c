@@ -6,7 +6,7 @@ void lbl_80154230(HSD_GObj* gobj) {
     Fighter* r4_fp;
     u32 unk[2];
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         r4_fp = gobj->user_data;
         (r4_fp->x2344_callback)(gobj);
     }
@@ -175,7 +175,7 @@ void lbl_80154620(HSD_GObj* gobj) {
     Fighter* temp_r4;
     f32 temp_f0;
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r4 = gobj->user_data;
         temp_f0 = 0.0f;
         temp_r4->x80_self_vel.z = temp_f0;
@@ -233,7 +233,7 @@ void func_801546D8(HSD_GObj* gobj) {
 // 80154758 151338
 // https://decomp.me/scratch/D8LVZ
 void lbl_80154758(HSD_GObj* arg0) {
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         func_80151018(arg0);
     }
 }

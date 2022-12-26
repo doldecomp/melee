@@ -81,7 +81,7 @@ void func_80081370(HSD_GObj* gobj) {
 
 void func_80081504(HSD_GObj* gobj)
 {
-    if (ftAnim_IsFramesRemaining(gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(gobj))
     {
         func_8009A804(gobj);
     }

@@ -138,7 +138,7 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 // 0x800E1550
 void ftMario_SpecialS_Anim(HSD_GObj* gobj) 
 {
-    if (ftAnim_IsFramesRemaining(gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(gobj))
     {
         func_8008A2BC(gobj);
     }
@@ -147,7 +147,7 @@ void ftMario_SpecialS_Anim(HSD_GObj* gobj)
 // 0x800E158C
 void ftMario_SpecialAirS_Anim(HSD_GObj* gobj) 
 {
-    if (ftAnim_IsFramesRemaining(gobj) == FALSE) 
+    if (!ftAnim_IsFramesRemaining(gobj)) 
     {
         func_800CC730(gobj);
     }

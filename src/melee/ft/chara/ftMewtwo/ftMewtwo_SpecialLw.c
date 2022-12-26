@@ -59,7 +59,7 @@ void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/2no6L // Mewtwo's grounded Disable Animation callback
 void ftMewtwo_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if (getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj != NULL)
         {
@@ -73,7 +73,7 @@ void ftMewtwo_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 // 0x80146338 - Mewtwo's aerial Disable Animation callback
 void ftMewtwo_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if (getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj != NULL)
         {

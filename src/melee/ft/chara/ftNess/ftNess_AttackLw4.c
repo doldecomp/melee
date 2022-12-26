@@ -30,7 +30,7 @@ void ftNess_AttackLw4_Anim(HSD_GObj* fighter_gobj) // Ness's Down Smash Animatio
         {
             ftNess_AttackLw4_Charge_Action(fighter_gobj);
         }
-        if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) 
+        if (!ftAnim_IsFramesRemaining(fighter_gobj)) 
         {
             func_8008A2BC(fighter_gobj);
         }
@@ -156,7 +156,7 @@ void ftNess_AttackLw4_Release_Anim(HSD_GObj* fighter_gobj)   // Ness's Down Smas
     if (ftNess_YoyoThink_IsRemove(fighter_gobj) == FALSE) 
     {
         ftNess_YoyoCheckTimedRehit(fighter_gobj);
-        if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) 
+        if (!ftAnim_IsFramesRemaining(fighter_gobj)) 
         {
             func_8008A2BC(fighter_gobj);
         }

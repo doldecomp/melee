@@ -210,7 +210,7 @@ void ftGameWatch_SpecialLw_Anim(HSD_GObj* fighter_gobj)
         ftGameWatch_SpecialLw_UpdateAction(fighter_gobj, 5.0f);
     }
     ftGameWatch_SpecialLw_UpdateVars(fighter_gobj);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -227,7 +227,7 @@ void ftGameWatch_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
         ftGameWatch_SpecialAirLw_UpdateAction(fighter_gobj, 5.0f);
     }
     ftGameWatch_SpecialLw_UpdateVars(fighter_gobj);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }
@@ -440,7 +440,7 @@ void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
         {
@@ -458,7 +458,7 @@ void ftGameWatch_SpecialAirLwCatch_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
         {
@@ -577,7 +577,7 @@ void ftGameWatch_SpecialLwShoot_Anim(HSD_GObj* fighter_gobj)
 
     ftGameWatch_SpecialLwShoot_ApplyDamage(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -590,7 +590,7 @@ void ftGameWatch_SpecialAirLwShoot_Anim(HSD_GObj* fighter_gobj)
 
     ftGameWatch_SpecialLwShoot_ApplyDamage(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }

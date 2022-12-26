@@ -184,7 +184,7 @@ void ftGameWatch_Attack11_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp;
     Fighter* fp2;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }

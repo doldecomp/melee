@@ -85,16 +85,16 @@ void ftZelda_8013AA38(HSD_GObj* fighter_gobj) {
     fp = fighter_gobj->user_data;
     attributes = ((u32)fp->x2D4_specialAttributes);
     
-    if ((u32) fp->x2200_ftcmd_var0 == 1) {
+    if (fp->x2200_ftcmd_var0 == 1) {
         fp->x2200_ftcmd_var0 = 2;
         ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
     }
 
-    if ((u32) fp->x2200_ftcmd_var0 == 0) {
+    if (fp->x2200_ftcmd_var0 == 0) {
         fp->x2218_flag.bits.b3 = 0;
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
@@ -109,16 +109,16 @@ void ftZelda_8013AACC(HSD_GObj* fighter_gobj) {
     fp = fighter_gobj->user_data;
     attributes = ((u32)fp->x2D4_specialAttributes);
     
-    if ((u32) fp->x2200_ftcmd_var0 == 1U) {
+    if (fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
         ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
     }
 
-    if ((u32) fp->x2200_ftcmd_var0 == 0U) {
+    if (fp->x2200_ftcmd_var0 == 0U) {
         fp->x2218_flag.bits.b3 = 0;
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800CC730(fighter_gobj);
     }
 }
@@ -190,7 +190,7 @@ void ftZelda_8013AC88(HSD_GObj* fighter_gobj) {
     fighter2 = fighter_gobj->user_data;
     attributes = ((u32)fighter2->x2D4_specialAttributes);
 
-    if ((u32) fighter2->x2200_ftcmd_var0 == 2U) {
+    if (fighter2->x2200_ftcmd_var0 == 2U) {
         ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A8AC;
@@ -211,7 +211,7 @@ void ftZelda_8013AD1C(HSD_GObj* fighter_gobj) {
     fighter2 = fighter_gobj->user_data;
     attributes = ((u32)fighter2->x2D4_specialAttributes);
     
-    if ((u32) fighter2->x2200_ftcmd_var0 == 2U) {
+    if (fighter2->x2200_ftcmd_var0 == 2U) {
         ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;

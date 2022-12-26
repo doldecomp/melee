@@ -99,7 +99,7 @@ void ftFox_SpecialLwStart_Anim(HSD_GObj* fighter_gobj)
     {
         fp->foxVars[0].SpecialLw.isRelease = TRUE;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)fp->xE0_ground_or_air == GA_Ground)
         {
@@ -123,7 +123,7 @@ void ftFox_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj)
     {
         fp->foxVars[0].SpecialLw.isRelease = TRUE;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)fp->xE0_ground_or_air == GA_Ground)
         {
@@ -708,7 +708,7 @@ void ftFox_SpecialLwHit_Anim(HSD_GObj* fighter_gobj)
     {
         fp->foxVars[0].SpecialLw.releaseLag--;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if (ftFox_SpecialLwHit_Check(fighter_gobj) != FALSE)
         {
@@ -735,7 +735,7 @@ void ftFox_SpecialAirLwHit_Anim(HSD_GObj* fighter_gobj)
     {
         fp->foxVars[0].SpecialLw.releaseLag--;
     }
-    if ((ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) && (ftFox_SpecialLwHit_Check(fighter_gobj) != FALSE))
+    if ((!ftAnim_IsFramesRemaining(fighter_gobj)) && (ftFox_SpecialLwHit_Check(fighter_gobj) != FALSE))
     {
         func_8007DB24(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateLoopGFX;
@@ -869,7 +869,7 @@ void ftFox_SpecialLwEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8007DB24(fighter_gobj);
         func_8007D92C(fighter_gobj);
@@ -882,7 +882,7 @@ void ftFox_SpecialAirLwEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8007DB24(fighter_gobj);
         func_8007D92C(fighter_gobj);

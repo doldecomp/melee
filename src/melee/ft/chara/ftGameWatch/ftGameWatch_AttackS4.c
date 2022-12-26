@@ -109,7 +109,7 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash Animation callback
 void ftGameWatch_AttackS4_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }

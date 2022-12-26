@@ -458,7 +458,7 @@ void ftMewtwo_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
             fp->sa.mewtwo.x2230_shadowHeldGObj = NULL;
         }
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if (((s32)fp->mewtwoVars[0].SpecialN.isFull == TRUE) || ((f32)fp->sa.mewtwo.x2234_shadowBallCharge == mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES))
         {
@@ -579,7 +579,7 @@ void ftMewtwo_SpecialNCancel_Anim(HSD_GObj* fighter_gobj)
 
     ftMewtwo_SpecialN_RemoveShadowBall2(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -594,7 +594,7 @@ void ftMewtwo_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 
     ftMewtwo_SpecialN_ReleaseShadowBall(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -630,7 +630,7 @@ void ftMewtwo_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
         }
     }
     fp->mewtwoVars[0].SpecialN.isFull = FALSE;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if (((s32)fp->mewtwoVars[0].SpecialN.isFull == TRUE) || ((f32)fp->sa.mewtwo.x2234_shadowBallCharge == mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES))
         {
@@ -709,7 +709,7 @@ void ftMewtwo_SpecialAirNCancel_Anim(HSD_GObj* fighter_gobj)
 
     ftMewtwo_SpecialN_RemoveShadowBall2(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }
@@ -725,7 +725,7 @@ void ftMewtwo_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
 
     ftMewtwo_SpecialN_ReleaseShadowBall(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if (0.0f == mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG)
         {

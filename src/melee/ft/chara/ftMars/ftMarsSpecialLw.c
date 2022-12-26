@@ -51,7 +51,7 @@ void lbl_80138AA8(HSD_GObj* gobj) {
     } else if (fp->x2204_ftcmd_var1 == 0) {
         fp->x221B_flag.bits.b0 = 0;
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8008A2BC(gobj);
     }
 }
@@ -74,7 +74,7 @@ void lbl_80138B64(HSD_GObj* gobj) {
     } else if (fp->x2204_ftcmd_var1 == 0) {
         fp->x221B_flag.bits.b0 = 0;
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_800CC730(gobj);
     }
 }
@@ -195,7 +195,7 @@ void lbl_80138E68(HSD_GObj* gobj) {
             hb += 0x138;
         }
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8008A2BC(gobj);
     }
 }
@@ -232,7 +232,7 @@ void lbl_80138F14(HSD_GObj* gobj) {
             hb += 0x138;
         }
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_800CC730(gobj);
     }
 }

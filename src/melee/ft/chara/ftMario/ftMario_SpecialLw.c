@@ -119,7 +119,7 @@ void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj) {
 void ftMario_SpecialLw_Anim(HSD_GObj* gobj) {
     Fighter* fp;
 
-    if (ftAnim_IsFramesRemaining(gobj) == FALSE) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMario_SpecialLw_SetNULL(gobj);
         func_8008A2BC(gobj);
     }
@@ -135,7 +135,7 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj) {
         fp->x2204_ftcmd_var1 = 0U;
         fp->sa.mario.x2234_tornadoCharge = 1;
     }
-    if (ftAnim_IsFramesRemaining(gobj) == FALSE) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMario_SpecialLw_SetNULL(gobj);
         if (0.0 == (f64)sa->x5C_MARIO_TORNADO_LANDING_LAG) 
         {

@@ -709,7 +709,7 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj) // Ness's Up Smash Animation 
                 ftNess_AttackHi4_Charge_Action(fighter_gobj);
             }
         }
-        if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) 
+        if (!ftAnim_IsFramesRemaining(fighter_gobj)) 
         {
             func_8008A2BC(fighter_gobj);
         }
@@ -917,7 +917,7 @@ void ftNess_AttackHi4_Release_Anim(HSD_GObj* fighter_gobj)   // Ness's Up Smash 
                 }
             }
         }
-        if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) 
+        if (!ftAnim_IsFramesRemaining(fighter_gobj)) 
         {
             func_8008A2BC(fighter_gobj);
         }

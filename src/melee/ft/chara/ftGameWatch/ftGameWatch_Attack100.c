@@ -16,7 +16,7 @@ void ftGameWatch_Attack100Start_Action(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/sBY5w // Mr. Game & Watch's Rapid Jab Start Animation callback
 void ftGameWatch_Attack100Start_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftGameWatch_Attack100Loop_Action(fighter_gobj);
     }

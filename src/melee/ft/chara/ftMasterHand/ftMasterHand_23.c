@@ -33,7 +33,7 @@ void lbl_80154B2C(HSD_GObj* gobj) {
         func_8015C5F8(gobj);
         fp->x2204_ftcmd_var1 = 0;
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         if (((Fighter*)gobj->user_data)->sa.masterhand.x2250 == 0x17B) {
             func_80154E78(gobj);
         } else {

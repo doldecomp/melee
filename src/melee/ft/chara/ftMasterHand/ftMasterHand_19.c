@@ -2,7 +2,7 @@
 
 // 80153AEC 1506CC
 void lbl_80153AEC(HSD_GObj* gobj) {
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80151018(gobj);
     }
 }
@@ -60,7 +60,7 @@ void lbl_80153B90(HSD_GObj* arg0) {
 // https://decomp.me/scratch/NrDG9
 void lbl_80153C48(HSD_GObj* arg0) {
     s32 unk[2];
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         ((Fighter*)arg0->user_data)->x80_self_vel.x = 0.0f;
         func_80151018(arg0);
     }

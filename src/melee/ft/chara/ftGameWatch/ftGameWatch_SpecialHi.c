@@ -169,7 +169,7 @@ void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     f32 temp;
 
     gawAttrs = ((Fighter*)fighter_gobj->user_data)->x2D4_specialAttributes;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) 
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) 
     {
         if (0.0f == gawAttrs->x60_GAMEWATCH_RESCUE_LANDING)
         {
