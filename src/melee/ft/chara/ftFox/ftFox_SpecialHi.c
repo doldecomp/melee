@@ -83,7 +83,7 @@ void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)fp->xE0_ground_or_air == GA_Air)
         {
@@ -100,7 +100,7 @@ void ftFox_SpecialHiHoldAir_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)fp->xE0_ground_or_air == GA_Air)
         {
@@ -545,7 +545,7 @@ void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -558,7 +558,7 @@ void ftFox_SpecialHiFall_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY, foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
     }
@@ -676,7 +676,7 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
         fp->x1968_jumpsUsed = (u8)ftAttrs->x168_MaxJumps;
         return;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         if ((s32)fp->xE0_ground_or_air == GA_Air)
         {

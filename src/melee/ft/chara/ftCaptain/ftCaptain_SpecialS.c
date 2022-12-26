@@ -218,7 +218,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/F314k // Captain Falcon & Ganondorf's grounded Raptor Boost / Gerudo Dragon Start Animation callback
 void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -249,7 +249,7 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -265,7 +265,7 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
     f32 var;
 
     fp = temp_fp;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8007D60C(fp);
         if (0.0f == captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG)
@@ -304,7 +304,7 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8007D60C(fp);
         if (0.0f == captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG)

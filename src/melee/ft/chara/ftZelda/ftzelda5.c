@@ -90,7 +90,7 @@ void ftZelda_8013B780(HSD_GObj* fighter_gobj) {
         ef_Spawn(0x4FB, fighter_gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         temp_f1 = 0;
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x158, 0, NULL, temp_f1, 1.0, temp_f1);
         fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
@@ -163,7 +163,7 @@ void ftZelda_8013BA04(HSD_GObj* fighter_gobj) {
 
     func_8007592C(fp, 0, 0);
     
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp = getFighter(fighter_gobj);
         attributes = getFtSpecialAttrs(fp);
         
@@ -212,7 +212,7 @@ void ftZelda_8013BA8C(HSD_GObj* fighter_gobj) {
         ef_Spawn(0x4FB, fighter_gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         temp_f1 = 0;
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, NULL, temp_f1, 1.0, temp_f1);
         fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
@@ -287,7 +287,7 @@ void ftZelda_8013BD10(HSD_GObj* fighter_gobj) {
     
     func_8007592C(fp, 0, 0);
     
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp = getFighter(fighter_gobj);
         attributes2 = getFtSpecialAttrs(fp);
 

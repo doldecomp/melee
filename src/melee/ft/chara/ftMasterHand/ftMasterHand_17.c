@@ -3,7 +3,7 @@
 // 8015386C 15044C
 // https://decomp.me/scratch/dCvLa
 void lbl_8015386C(HSD_GObj* arg0) {
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         func_80153910(arg0);
     }
 }
@@ -62,7 +62,7 @@ void lbl_801539A4(HSD_GObj* arg0) {
     Fighter* temp_r4;
     s32 unk;
 
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         temp_r4 = arg0->user_data;
         temp_r4->x80_self_vel.x = 0.0f;
         func_80153A64(arg0);

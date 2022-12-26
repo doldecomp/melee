@@ -104,7 +104,7 @@ void lbl_8015198C(HSD_GObj* gobj) {
     Vec3 sp14;
     u32 unk[2];
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r31 = gobj->user_data;
         func_80054158(0, &sp14);
         if (temp_r31->xB0_pos.x < sp14.x) {

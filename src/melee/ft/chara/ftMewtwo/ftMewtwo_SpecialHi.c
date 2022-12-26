@@ -90,7 +90,7 @@ void ftMewtwo_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/stKjh // Mewtwo's grounded Teleport Start Animation callback
 void ftMewtwo_SpecialHiStart_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftMewtwo_SpecialHi_Action(fighter_gobj);
     }
@@ -100,7 +100,7 @@ void ftMewtwo_SpecialHiStart_Anim(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/oEogM // Mewtwo's aerial Teleport Start Animation callback
 void ftMewtwo_SpecialAirHiStart_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftMewtwo_SpecialAirHi_Action(fighter_gobj);
     }
@@ -485,7 +485,7 @@ void ftMewtwo_SpecialHiLost_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -498,7 +498,7 @@ void ftMewtwo_SpecialAirHiLost_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, mewtwoAttrs->x70_MEWTWO_TELEPORT_FREEFALL_MOBILITY, mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
     }

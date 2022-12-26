@@ -127,7 +127,7 @@ void ftSamus_80129684(HSD_GObj* fighter_gobj) {
     Fighter* fp = fighter_gobj->user_data;
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
     ftSamus_801292E4(fighter_gobj);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if ((fp->x2340_stateVar1 == 1) || (fp->sa.samus.x2230 == samus_attr->x18)) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0, NULL, 0.0f, 1.0f, 0.0f);
         } else {

@@ -38,7 +38,7 @@ void ftLuigi_SpecialHi_Anim(HSD_GObj* fighter_gobj)
     f32 landing;
 
     luigiAttrs = getFighter(fighter_gobj)->x2D4_specialAttributes;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_80096900(fighter_gobj, 0, 1, 0, luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY, luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
@@ -54,7 +54,7 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     f32 landing2;
 
     luigiAttrs = getFighter(fighter_gobj)->x2D4_specialAttributes;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_80096900(fighter_gobj, 0, 1, 0, luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY, luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }

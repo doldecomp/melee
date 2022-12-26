@@ -38,7 +38,7 @@ void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj) {
 // 80136844 00133424
 // https://decomp.me/scratch/Go6FC
 void lbl_80136844(HSD_GObj* gobj) {
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80136E74(gobj);
         if (((Fighter*)gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
             func_800BFFD0(gobj->user_data, 0x63, 0);
@@ -51,7 +51,7 @@ void lbl_80136844(HSD_GObj* gobj) {
 // 801368AC 0013348C
 // https://decomp.me/scratch/XBFKN
 void lbl_801368AC(HSD_GObj* gobj) {
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80136EAC(gobj);
         if (((Fighter*)gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
             func_800BFFD0(gobj->user_data, 0x63, 0);
@@ -274,7 +274,7 @@ void lbl_80136EE4(HSD_GObj *gobj) {
         func_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
     }
     // FrameTimerCheck
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         // AS_014_Wait_PlayerCheck
         func_8008A2BC(gobj);
     }
@@ -321,7 +321,7 @@ void lbl_80137010(HSD_GObj *gobj) {
         func_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
     }
     // FrameTimerCheck
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         // AS_029_Fall
         func_800CC730(gobj);
     }

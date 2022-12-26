@@ -149,7 +149,7 @@ void func_80137748(HSD_GObj* gobj) {
 void lbl_801377B0(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     // FrameTimerCheck
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
@@ -291,7 +291,7 @@ void func_80137A9C(HSD_GObj* gobj) {
 void lbl_80137B34(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     // FrameTimerCheck
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
@@ -440,7 +440,7 @@ void func_80137E0C(HSD_GObj* gobj) {
 void lbl_80137ECC(HSD_GObj* gobj) {
     Fighter* fp = gobj->user_data;
     // FrameTimerCheck
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);

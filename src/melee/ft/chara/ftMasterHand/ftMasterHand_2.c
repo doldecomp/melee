@@ -216,7 +216,7 @@ void lbl_80150230(HSD_GObj* gobj) {
     s32 unused[2];
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_80150894(gobj);
-        if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        if (!ftAnim_IsFramesRemaining(gobj)) {
             if (fp->x10_action_state_index == 0x155) {
                 lbl_80150230_inline_1(gobj);
             } else if (fp->x10_action_state_index == 0x156) {
@@ -348,7 +348,7 @@ void lbl_80150230(HSD_GObj* gobj) {
                         break;
                 }
             }
-        } else if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        } else if (!ftAnim_IsFramesRemaining(gobj)) {
             if (fp->x10_action_state_index == 0x155) {
                 lbl_80150230_inline_1(gobj);
             } else if (fp->x10_action_state_index == 0x156) {

@@ -107,7 +107,7 @@ void ftLuigi_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftLuigi_SpecialLw_SetNULL(fighter_gobj);
         func_8008A2BC(fighter_gobj);
@@ -128,7 +128,7 @@ void ftLuigi_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
         fp->x2204_ftcmd_var1 = 0U;
         fp->sa.luigi.x222C_cycloneCharge = TRUE;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftLuigi_SpecialLw_SetNULL(fighter_gobj);
         cycloneLanding = luigiAttrs->x94_LUIGI_CYCLONE_LANDING_LAG;

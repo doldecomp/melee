@@ -29,7 +29,7 @@ void ftLuigi_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/X40ls // Luigi's grounded Fireball Animation callback
 void ftLuigi_SpecialN_Anim(HSD_GObj* fighter_gobj) 
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -38,7 +38,7 @@ void ftLuigi_SpecialN_Anim(HSD_GObj* fighter_gobj)
 // 0x80142798 - Luigi's aerial Fireball Animation callback
 void ftLuigi_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }

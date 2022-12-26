@@ -29,7 +29,7 @@ void lbl_8012C030(HSD_GObj* fighter_gobj) {
 
         efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CFU, jobj, x1CC);
     }
-    else if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    else if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800928CC(fighter_gobj);
     }
     else {

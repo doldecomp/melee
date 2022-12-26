@@ -99,7 +99,7 @@ void ftFox_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/MsR8G // Fox & Falco's grounded Illusion/Phantasm Start Animation callback
 void ftFox_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftFox_SpecialS_Action(fighter_gobj);
     }
@@ -109,7 +109,7 @@ void ftFox_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/EmRIa // Fox & Falco's aerial Illusion/Phantasm Start Animation callback
 void ftFox_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftFox_SpecialAirS_Action(fighter_gobj);
     }
@@ -244,7 +244,7 @@ void ftFox_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
     s32 filler[6];
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftFox_SpecialSEnd_Action(fighter_gobj);
     }
@@ -257,7 +257,7 @@ void ftFox_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
     s32 filler[4];
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         ftFox_SpecialAirSEnd_Action(fighter_gobj);
     }
@@ -440,7 +440,7 @@ void ftFox_SpecialAirS_Action(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/u3jZn // Fox & Falco's grounded Illusion/Phantasm End Animation callback
 void ftFox_SpecialSEnd_Anim(HSD_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -453,7 +453,7 @@ void ftFox_SpecialAirSEnd_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, foxAttrs->x4C_FOX_ILLUSION_FREEFALL_MOBILITY, foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
     }

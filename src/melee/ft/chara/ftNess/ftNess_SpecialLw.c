@@ -53,7 +53,7 @@ void ftNess_SpecialLwStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PSI M
         fighter_data2->nessVars[0].SpecialLw.isRelease = 1;
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         fp = fighter_gobj->user_data;
 
@@ -90,7 +90,7 @@ void ftNess_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PSI 
         fighter_data2->nessVars[0].SpecialLw.isRelease = 1;
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         fp = fighter_gobj->user_data;
 
@@ -652,7 +652,7 @@ void ftNess_SpecialLwHit_Anim(HSD_GObj* arg0) // Ness's grounded PSI Magnet Abso
     {
         temp_r4->nessVars[0].SpecialLw.releaseLag = (s32)(temp_r4->nessVars[0].SpecialLw.releaseLag - 1);
     }
-    if (ftAnim_IsFramesRemaining(arg0) == FALSE)
+    if (!ftAnim_IsFramesRemaining(arg0))
     {
         temp_r3_2 = arg0->user_data;
         if (((s32)temp_r3_2->nessVars[0].SpecialLw.releaseLag <= 0) && ((s32)temp_r3_2->nessVars[0].SpecialLw.isRelease != 0))
@@ -722,7 +722,7 @@ void ftNess_SpecialAirLwHit_Anim(HSD_GObj* arg0) // Ness's aerial PSI Magnet Abs
     {
         temp_r4->nessVars[0].SpecialLw.releaseLag = (s32)(temp_r4->nessVars[0].SpecialLw.releaseLag - 1);
     }
-    if ((ftAnim_IsFramesRemaining(arg0) == FALSE) && (ftNess_SpecialLwHold_GroundOrAir(arg0) != FALSE))
+    if ((!ftAnim_IsFramesRemaining(arg0)) && (ftNess_SpecialLwHold_GroundOrAir(arg0) != FALSE))
     {
         func_8007DB24(arg0);
         temp_r31 = arg0->user_data;
@@ -891,7 +891,7 @@ void ftNess_SpecialLwEnd_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PSI Mag
 {
     s32 unused[2];
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8007DB24(fighter_gobj);
         func_8007D92C(fighter_gobj);
@@ -903,7 +903,7 @@ void ftNess_SpecialLwEnd_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PSI Mag
 void ftNess_SpecialAirLwEnd_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet End Animation callback //
 {
     s32 unused[2];
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8007DB24(fighter_gobj);
         func_8007D92C(fighter_gobj);

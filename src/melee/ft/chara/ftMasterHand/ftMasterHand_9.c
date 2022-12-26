@@ -3,7 +3,7 @@
 // 80151D20 14E900
 // https://decomp.me/scratch/wVowU
 void lbl_80151D20(HSD_GObj* arg0) {
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         func_80151018(arg0);
     }
 }
@@ -49,7 +49,7 @@ void lbl_80151DC4(HSD_GObj* arg0) {
 // 80151E10 14E9F0
 // https://decomp.me/scratch/acoIs
 void lbl_80151E10(HSD_GObj* arg0) {
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         func_80151EB4(arg0);
     }
 }

@@ -111,7 +111,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation ca
         fighter_data1->x2218_flag.bits.b3 = 0; // Toggle reflect bubble OFF//
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE) // Check if animation has frames remaining //
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) // Check if animation has frames remaining //
     {
 
         fighter_data2 = getFighter(fighter_gobj);

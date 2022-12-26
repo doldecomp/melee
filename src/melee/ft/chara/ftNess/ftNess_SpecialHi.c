@@ -696,7 +696,7 @@ void ftNess_SpecialHiStart_Anim(HSD_GObj* fighter_gobj) // PK Thunder Grounded S
     Fighter* fp = fighter_gobj->user_data;
     Fighter* fighter_data2;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
 
@@ -817,7 +817,7 @@ void ftNess_SpecialHiHold_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Thu
 void ftNess_SpecialHiEnd_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder End Animation callback //
 {
     s32 filler[2];
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -842,7 +842,7 @@ void ftNess_SpecialHi_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
         ef_Spawn(0x4EF, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
         fp->sa.ness.x224C_thunderGFX = TRUE;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_END, 0, NULL, 0.0f, 1.0f, 0.0f);
         fighter_data2 = fighter_gobj->user_data;
@@ -876,7 +876,7 @@ void ftNess_SpecialAirHiStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK T
     Fighter* fp = fighter_gobj->user_data;
     Fighter* fighter_data2;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRHI_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
 
@@ -1017,7 +1017,7 @@ void ftNess_SpecialAirHiEnd_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Thu
 
     fp = temp_fp = fighter_gobj->user_data;
     ness_attr = temp_fp->x2D4_specialAttributes;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
         func_8007D60C(fp);
@@ -1051,7 +1051,7 @@ void ftNess_SpecialAirHi_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Thunde
         ef_Spawn(0x4EF, fighter_gobj, fighter_data2->x5E8_fighterBones[4].x0_jobj);
         fighter_data2->sa.ness.x224C_thunderGFX = TRUE;
     }
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         temp_f1 = fp->nessVars[0].SpecialHi.fallAccel;
         phi_f1 = temp_f1;
@@ -1081,7 +1081,7 @@ void ftNess_SpecialAirHiRebound_Anim(HSD_GObj* fighter_gobj) // Ness's PK Thunde
 
     fp = temp_fp = fighter_gobj->user_data;
     ness_attr = temp_fp->x2D4_specialAttributes;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8007D60C(fp);
         if (0.0f == ness_attr->x70_PK_THUNDER_2_LANDING_LAG)

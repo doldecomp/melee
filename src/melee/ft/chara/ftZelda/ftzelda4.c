@@ -95,7 +95,7 @@ void ftZelda_8013B068(HSD_GObj* fighter_gobj) {
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AEAC;
     }
 }
@@ -106,7 +106,7 @@ void ftZelda_8013B0A8(HSD_GObj* fighter_gobj) {
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AEAC;
     }
 }
@@ -172,14 +172,14 @@ void ftZelda_8013B238(HSD_GObj* fighter_gobj) {
 
 // 8013B2A4 - 8013B2E0 (0x3C bytes)
 void ftZelda_8013B2A4(HSD_GObj* fighter_gobj) {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
 
 // 8013B2E0 - 8013B31C (0x3C bytes)
 void ftZelda_8013B2E0(HSD_GObj* fighter_gobj) {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800CC730(fighter_gobj);
     }
 }

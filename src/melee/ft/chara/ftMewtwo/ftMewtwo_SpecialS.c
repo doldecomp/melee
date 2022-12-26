@@ -113,7 +113,7 @@ inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -124,7 +124,7 @@ void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800CC730(fighter_gobj);
     }

@@ -168,7 +168,7 @@ void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Fla
     Fighter* fighter_data2;
 
     fp = fighter_gobj->user_data;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
         fighter_data2 = getFighterPlus(fighter_gobj);
@@ -258,7 +258,7 @@ void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)   // Ness's grounded PK Fla
 
     SetPKFlashAttr(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_8008A2BC(fighter_gobj);
     }
@@ -279,7 +279,7 @@ void ftNess_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
     Fighter* fighter_data2;
 
     fp = fighter_gobj->user_data;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
         fighter_data2 = getFighterPlus(fighter_gobj);
@@ -354,7 +354,7 @@ void ftNess_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Flas
 
     SetPKFlashAttr(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         landingLag = ness_attr->x1C_PKFLASH_LANDING_LAG;
         if (landingLag == 0.0f)

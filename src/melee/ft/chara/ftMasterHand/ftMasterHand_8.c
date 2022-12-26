@@ -3,7 +3,7 @@
 // 80151C04 14E7E4
 // https://decomp.me/scratch/ODVZ4
 void lbl_80151C04(HSD_GObj* arg0) {
-    if (ftAnim_IsFramesRemaining(arg0) == 0) {
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         func_80151018(arg0);
     }
 }

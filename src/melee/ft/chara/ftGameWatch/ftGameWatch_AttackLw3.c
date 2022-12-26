@@ -143,7 +143,7 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj); // Filler
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == FALSE)
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
     {
         func_800D638C(fighter_gobj);
     }

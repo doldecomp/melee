@@ -94,7 +94,7 @@ void ftZelda_8013AA38(HSD_GObj* fighter_gobj) {
         fp->x2218_flag.bits.b3 = 0;
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
@@ -118,7 +118,7 @@ void ftZelda_8013AACC(HSD_GObj* fighter_gobj) {
         fp->x2218_flag.bits.b3 = 0;
     }
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800CC730(fighter_gobj);
     }
 }
