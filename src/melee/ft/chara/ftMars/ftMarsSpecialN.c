@@ -136,7 +136,7 @@ void lbl_80136ADC(HSD_GObj* gobj) {
 
     if ((s32)fp->x2340_stateVar1 % 30 == 0) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &sp28);
-        func_800119DC(&sp28, 10, 0.5f, 0.05f, 1.0471975803375244f);
+        func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
     fp->x2340_stateVar1++;
     if ((s32)fp->x2340_stateVar1 > *specialAttrs * 30) {
@@ -156,7 +156,7 @@ void lbl_80136BB4(HSD_GObj* gobj) {
 
     if ((s32)fp->x2340_stateVar1 % 30 == 0) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &sp28);
-        func_800119DC(&sp28, 10, 0.5f, 0.05f, 1.0471975803375244f);
+        func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
     fp->x2340_stateVar1++;
     if ((s32)fp->x2340_stateVar1 > attrs->x0 * 30) {
@@ -258,7 +258,7 @@ void lbl_80136EE4(HSD_GObj *gobj) {
         ndx = 0;
         while (ndx < 4) {
             if (*(s32*)(hb+0x914) == 1) {
-                func_8007ABD0((Hitbox*)(hb+0x914), (f32) (attr->x4 + (s32)fp->x2340_stateVar1 / 30 * attr->x8), gobj);
+                func_8007ABD0((Hitbox*)(hb+0x914), (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8), gobj);
             }
             ndx++;
             hb += 0x138;
@@ -271,7 +271,7 @@ void lbl_80136EE4(HSD_GObj *gobj) {
         //         Fighter_BonePersonalToCommon
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
-        func_800119DC(&position, 120, 0.9f, 0.02f, 1.0471975803375244f);
+        func_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
     }
     // FrameTimerCheck
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
@@ -318,7 +318,7 @@ void lbl_80137010(HSD_GObj *gobj) {
         //         Fighter_BonePersonalToCommon
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
-        func_800119DC(&position, 120, 0.9f, 0.02f, 1.0471975803375244f);
+        func_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
     }
     // FrameTimerCheck
     if (ftAnim_IsFramesRemaining(gobj) == 0) {

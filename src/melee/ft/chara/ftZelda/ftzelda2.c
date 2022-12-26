@@ -21,7 +21,7 @@ void ftZelda_801396E0(HSD_GObj* fighter_gobj) {
     if (flag == 0) {
         func_8000B1CC(fp->x5E8_fighterBones[4].x0_jobj, NULL, &sp10);
 
-        if ((s32) fp->xE0_ground_or_air == 0) {
+        if (fp->xE0_ground_or_air == GA_Ground) {
             ef_Spawn(0x4F6, fighter_gobj, fp->x5E8_fighterBones->x0_jobj);
         } else {
             ef_Spawn(0x4F7, fighter_gobj, fp->x5E8_fighterBones->x0_jobj);
@@ -70,7 +70,7 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp) {
 
     func_8000B1CC(jObj, NULL, &sp24);
 
-    func_800119DC(&sp24, 0x78, 1.5, 0.019999999552965164, 1.0471975803375244);
+    func_800119DC(&sp24, 0x78, 1.5, 0.02, 60 * M_PI / 180);
 }
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj) {
     Fighter* fp = getFighterPlus(fighter_gobj);
@@ -102,8 +102,8 @@ void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj) {
     HSD_JObj* jObj;
     ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
 
-    fp->x80_self_vel.x = (f32) fp->x80_self_vel.x / attributes->x38;
-    fp->x80_self_vel.y = (f32) fp->x80_self_vel.y / attributes->x3C;
+    fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x38;
+    fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x3C;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x160, 0, NULL, 0, 1.0, 0); // lbl_804D9BA4, lbl_804D9BA8
     func_8006EBA4(fighter_gobj);
@@ -116,7 +116,7 @@ void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj) {
     jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
     func_8000B1CC(jObj, NULL, &sp28);
 
-    func_800119DC(&sp28, 0x78, 1.5, 0.019999999552965164, 1.0471975803375244); // lbl_804D9B98, lbl_804D9B9C, lbl_804D9BA0
+    func_800119DC(&sp28, 0x78, 1.5, 0.02, 60 * M_PI / 180); // lbl_804D9B98, lbl_804D9B9C, lbl_804D9BA0
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
@@ -222,8 +222,8 @@ void ftZelda_80139C1C(HSD_GObj* fighter_gobj) {
     Fighter* fp;
 
     fp = getFighter(fighter_gobj);
-    fp->x2340_stateVar1 = (s32) (fp->x2340_stateVar1 - 1);
-    if ((s32) fp->x2340_stateVar1 <= 0) {
+    fp->x2340_stateVar1 -= 1;
+    if (fp->x2340_stateVar1 <= 0) {
         ftZelda_8013A6A8(fighter_gobj);
     }
 }
@@ -234,8 +234,8 @@ void ftZelda_80139C58(HSD_GObj* fighter_gobj) {
     Fighter* fp;
 
     fp = getFighter(fighter_gobj);
-    fp->x2340_stateVar1 = (s32) (fp->x2340_stateVar1 - 1);
-    if ((s32) fp->x2340_stateVar1 <= 0) {
+    fp->x2340_stateVar1 -= 1;
+    if (fp->x2340_stateVar1 <= 0) {
         ftZelda_8013A764(fighter_gobj);
     }
 }
@@ -460,7 +460,7 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj) {
                 fp = fighter_gobj->user_data;
                 attributes = fp->x2D4_specialAttributes;
                 fp->x2340_stateVar1 = attributes->x48;
-                fp->x1968_jumpsUsed = (u8) fp->x110_attr.x168_MaxJumps;
+                fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
                 fp->x2223_flag.bits.b4 = 1;
                 
                 func_8007B62C(fighter_gobj, 2, attributes);
@@ -525,7 +525,7 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj) {
         if (temp_f1 < 0) {
             temp_f1 = -temp_f1;
         }
-        if (temp_f1 > 0.0010000000474974513f) {
+        if (temp_f1 > 0.001f) {
             func_8007D9FC(fp);
         }
         var_f30 = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->x2C_facing_direction);
@@ -547,7 +547,7 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj) {
     
     fp = fighter_gobj->user_data;
     attributes = fp->x2D4_specialAttributes;
-    fp->x2340_stateVar1 = (s32) attributes->x48;
+    fp->x2340_stateVar1 = attributes->x48;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = 1;
     
@@ -603,7 +603,7 @@ void ftZelda_8013A50C(HSD_GObj* fighter_gobj) {
     fp = fighter_gobj->user_data;
     attributes = fp->x2D4_specialAttributes;
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0) {
+    if (fp->x2200_ftcmd_var0 != 0) {
         func_8007D4B8(fp);
         func_8007D440(fp, attributes->x5C * fp->x110_attr.x17C_AerialDriftMax);
         return;
@@ -680,15 +680,15 @@ void ftZelda_8013A6A8(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
 
     fighter2 = fighter_gobj->user_data;
-    fighter2->x2350_stateVar5_f32 = (f32) fighter2->x80_self_vel.x;
-    fighter2->x2354_stateVar6_f32 = (f32) fighter2->x80_self_vel.y;
-    fighter2->x2358_stateVar7 = (f32) fighter2->xEC_ground_vel;
+    fighter2->x2350_stateVar5_f32 = fighter2->x80_self_vel.x;
+    fighter2->x2354_stateVar6_f32 = fighter2->x80_self_vel.y;
+    fighter2->x2358_stateVar7 = fighter2->xEC_ground_vel;
     fighter2->x80_self_vel.y = 0;
     fighter2->x80_self_vel.x = 0;
     fighter2->xEC_ground_vel = 0;
     fighter2->x221E_flag.bits.b0 = 0;
     fighter2->cb.x21BC_callback_Accessory4 = &ftZelda_8013979C;
-    fp->xEC_ground_vel = (f32) (fp->x2358_stateVar7 * attributes->x64);
+    fp->xEC_ground_vel = fp->x2358_stateVar7 * attributes->x64;
 }
 
 // AS_ZeldaUpBEndAir?
@@ -709,14 +709,14 @@ void ftZelda_8013A764(HSD_GObj* fighter_gobj) {
     func_8006EBA4(fighter_gobj);
 
     fighter2 = fighter_gobj->user_data;
-    fighter2->x2350_stateVar5_f32 = (f32) fighter2->x80_self_vel.x;
-    fighter2->x2354_stateVar6_f32 = (f32) fighter2->x80_self_vel.y;
-    fighter2->x2358_stateVar7 = (f32) fighter2->xEC_ground_vel;
+    fighter2->x2350_stateVar5_f32 = fighter2->x80_self_vel.x;
+    fighter2->x2354_stateVar6_f32 = fighter2->x80_self_vel.y;
+    fighter2->x2358_stateVar7 = fighter2->xEC_ground_vel;
     fighter2->x80_self_vel.y = 0;
     fighter2->x80_self_vel.x = 0;
     fighter2->xEC_ground_vel = 0;
     fighter2->x221E_flag.bits.b0 = 0;
     fighter2->cb.x21BC_callback_Accessory4 = &ftZelda_8013979C;
-    fp->x80_self_vel.x = (f32) (fp->x2350_stateVar5_f32 * attributes->x64);
-    fp->x80_self_vel.y = (f32) (fp->x2354_stateVar6_f32 * attributes->x64);
+    fp->x80_self_vel.x = fp->x2350_stateVar5_f32 * attributes->x64;
+    fp->x80_self_vel.y = fp->x2354_stateVar6_f32 * attributes->x64;
 }
