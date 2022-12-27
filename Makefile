@@ -125,7 +125,7 @@ endif
 
 # clang-format all source files
 format:
-	$(QUIET) find src include -name '*.c' -o -name '*.h' -exec $(FORMAT) {} +
+	$(QUIET) find src include \( -name '*.c' -o -name '*.h' \) -exec $(FORMAT) {} +
 
 clean:
 	rm -f -d -r build $(ELF2DOL)
