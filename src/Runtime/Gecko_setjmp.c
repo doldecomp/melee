@@ -1,5 +1,5 @@
 
-asm int __setjmp(register* env)
+asm int __setjmp(register *env)
 { // clang-format off
     nofralloc
 /* 803227CC 0031F3AC  7C A8 02 A6 */	mflr r5
@@ -33,7 +33,7 @@ asm int __setjmp(register* env)
 /* 8032283C 0031F41C  4E 80 00 20 */	blr
 } // clang-format on
 
-asm void longjmp(register* env, register int val)
+asm void longjmp(register *env, register int val)
 { // clang-format off
     nofralloc
 /* 80322840 0031F420  80 A3 00 00 */	lwz r5, 0(r3)
