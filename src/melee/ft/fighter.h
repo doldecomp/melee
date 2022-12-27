@@ -560,6 +560,13 @@ struct RGBA {
     u8 a;
 };
 
+// Table in PlCo.dat
+typedef struct _FighterPartsTable {
+    u8* joint_to_part;
+    u8* part_to_joint;
+    u32 parts_num;
+} FighterPartsTable;
+
 // Points to data in PlCo.dat
 typedef struct _ftCommonData {
     /* 0x0 */ f32 x0;
@@ -2277,5 +2284,6 @@ inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
 
 extern unk_t lbl_804D6520;
 extern ftCommonData* p_ftCommonData;
+extern FighterPartsTable** ftPartsTable;
 
 #endif
