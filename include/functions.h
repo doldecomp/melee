@@ -796,8 +796,6 @@ struct _HSD_TObj* allocShadowTObj();
 
 struct _HSD_ImageDesc* HSD_ImageDescAlloc();
 
-void HSD_ForeachAnim(void*, ...);
-
 f32 HSD_CObjGetNear(struct _HSD_CObj*);
 
 f32 HSD_CObjGetFar(struct _HSD_CObj*);
