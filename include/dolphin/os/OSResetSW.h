@@ -5,9 +5,8 @@
 #include <dolphin/gx/types.h>
 
 struct _OSResetSW_Unk1;
-typedef BOOL (*OSResetSW_Predicate)(struct _OSResetSW_Unk1 *);
-typedef union
-{
+typedef BOOL (*OSResetSW_Predicate)(struct _OSResetSW_Unk1*);
+typedef union {
     OSResetSW_Predicate predicate;
     struct
     {
@@ -16,8 +15,7 @@ typedef union
     } bytes;
 } OSResetSW_Predicate_Union;
 
-typedef enum
-{
+typedef enum {
     OSRESETSW_ENUM1_UNK0,
     OSRESETSW_ENUM1_UNK1,
     OSRESETSW_ENUM1_UNK2,
@@ -27,16 +25,15 @@ typedef enum
     OSRESETSW_ENUM1_UNK6,
 } OSResetSW_Enum1;
 
-typedef struct _OSResetSW_Unk1
-{
+typedef struct _OSResetSW_Unk1 {
     OSResetSW_Predicate_Union x0_predicate_union;
     s32 x4;
     s32 x8;
-    u8 *xC_buffer;
+    u8* xC_buffer;
     u8 x10_pad[0x14 - 0x10];
     OSResetSW_Enum1 x14_enum;
     u8 x18_pad[0x54 - 0x18];
-    u8 *x54_buffer;
+    u8* x54_buffer;
     u8 x58_pad[0x5E - 0x58];
     u8 x5E;
     u8 x5F_pad[0x8E - 0x5F];
@@ -44,7 +41,7 @@ typedef struct _OSResetSW_Unk1
     u8 x8F_pad[0x9A - 0x8F];
     u8 x9A;
     u8 x9B_pad[0xB4 - 0x9B];
-    u8 *xB4_buffer;
+    u8* xB4_buffer;
     u8 xB8_pad[0xBC - 0xB8];
     u32 xBC_flags;
     u8 xC0_pad[0xC4 - 0xC0];
@@ -54,7 +51,7 @@ typedef struct _OSResetSW_Unk1
     OSResetSW_Predicate xD4_predicate;
 } OSResetSW_Unk1;
 
-typedef BOOL (*OSResetSW_MulticastPredicate)(OSResetSW_Predicate *);
+typedef BOOL (*OSResetSW_MulticastPredicate)(OSResetSW_Predicate*);
 BOOL OSGetResetSwitchState(void);
 
 #endif

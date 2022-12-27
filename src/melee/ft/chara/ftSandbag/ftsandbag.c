@@ -1,17 +1,17 @@
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
 
-typedef struct _ftSandbagAttributes
-{
+typedef struct _ftSandbagAttributes {
     u32 x0_pair[2];
 } ftSandbagAttributes;
 
-void ftSandbag_OnDeath(void) {
+void ftSandbag_OnDeath(void)
+{
     return;
 }
 
-void ftSandbag_OnLoad(HSD_GObj* gobj) {
+void ftSandbag_OnLoad(HSD_GObj* gobj)
+{
     Fighter* fp = gobj->user_data;
-
 
     PUSH_ATTRS(fp, ftSandbagAttributes);
 
@@ -74,11 +74,13 @@ void func_8014FBA4(HSD_GObj* gobj)
     func_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 
-void func_8014FC20(void) {
+void func_8014FC20(void)
+{
     return;
 }
 
-void func_8014FC24(void) {
+void func_8014FC24(void)
+{
     return;
 }
 

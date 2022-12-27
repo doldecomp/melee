@@ -1,6 +1,6 @@
 #include <sysdolphin/baselib/robj.h>
 
-HSD_ObjAllocData robj_alloc_data; // robj_alloc_data
+HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
 
 extern const f64 lbl_804DE6A0; // 1.75
@@ -37,8 +37,7 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
         return NULL;
 
     for (curr = robj; curr != NULL; curr = curr->next) {
-        if (curr->flags & 0x80000000)
-        {
+        if (curr->flags & 0x80000000) {
             has_type = TRUE;
         } else {
             has_type = FALSE;
@@ -66,7 +65,7 @@ static void RObjUpdateFunc(void* obj, s32 type, FObjData val)
         return;
     }
 
-    robj = (HSD_RObj*)obj;
+    robj = (HSD_RObj*) obj;
     if (val.fv >= lbl_804DE6A0) {
         robj->flags = robj->flags | 0x80000000;
         return;
@@ -79,7 +78,7 @@ void HSD_RObjAnim(HSD_RObj* robj)
     if (robj == NULL) {
         return;
     }
-    
+
     HSD_AObjInterpretAnim(robj->aobj, robj, RObjUpdateFunc);
 }
 
@@ -163,7 +162,7 @@ void HSD_RObjAddAnim(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
     robj->aobj = HSD_AObjLoadDesc(anim->aobjdesc);
 }
 
-void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim) 
+void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
 {
     HSD_RObj* i;
     HSD_RObjAnimJoint* j;

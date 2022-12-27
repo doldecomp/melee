@@ -10,12 +10,14 @@ static StageCallbacks lbl_803E9030[4] = {
         GrTNess_80222788,
         GrTNess_80222790,
         GrTNess_80222794,
-    }, {
+    },
+    {
         GrTNess_80222828,
         GrTNess_80222878,
         GrTNess_80222880,
         GrTNess_802228A0,
-    }, {
+    },
+    {
         GrTNess_80222798,
         GrTNess_802227E8,
         GrTNess_802227F0,

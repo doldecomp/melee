@@ -36,7 +36,7 @@ typedef enum ftMewtwoAction {
 
 // Flag values read during Confusion's reflect think function
 
-#define CONFUSION_REFLECT_NONE 0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is either 1 or 2 because 0 does nothing). 
+#define CONFUSION_REFLECT_NONE 0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is either 1 or 2 because 0 does nothing).
 
 #define CONFUSION_REFLECT_ON 1 // Toggle reflect bubble on.
 
@@ -63,8 +63,7 @@ typedef enum ftMewtwoAction {
 #define FTMEWTWO_SPECIALLW_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 typedef struct _ftMewtwoAttributes {
-
-    // NEUTRAL SPECIAL - SHADOW BALL (SpecialN/SpecialAirN) // 
+    // NEUTRAL SPECIAL - SHADOW BALL (SpecialN/SpecialAirN) //
 
     f32 x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES; // Number of frames each iteration cycle lasts?
     f32 x4_MEWTWO_SHADOWBALL_GROUND_RECOIL_X;
@@ -102,7 +101,7 @@ typedef struct _ftMewtwoAttributes {
     f32 x80_MEWTWO_DISABLE_OFFSET_X;
     f32 x84_MEWTWO_DISABLE_OFFSET_Y;
 
-} ftMewtwoAttributes; 
+} ftMewtwoAttributes;
 
 // Mewtwo functions //
 

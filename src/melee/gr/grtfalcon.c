@@ -1,44 +1,39 @@
 #include <melee/gr/grtfalcon.h>
 
 static StageCallbacks lbl_803E8608[4] = {
-    {
-        lbl_8021FDEC,
-        lbl_8021FE18,
-        lbl_8021FE20,
-        lbl_8021FE24,
-        0UL
-    }, {
-        lbl_8021FEB8,
-        lbl_8021FF08,
-        lbl_8021FF10,
-        lbl_8021FF30,
-        0UL
-    }, {
-        lbl_8021FE28,
-        lbl_8021FE78,
-        lbl_8021FE80,
-        lbl_8021FEB4,
-        0xC0000000
-    }, {
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        0UL
-    }
+    { lbl_8021FDEC,
+      lbl_8021FE18,
+      lbl_8021FE20,
+      lbl_8021FE24,
+      0UL },
+    { lbl_8021FEB8,
+      lbl_8021FF08,
+      lbl_8021FF10,
+      lbl_8021FF30,
+      0UL },
+    { lbl_8021FE28,
+      lbl_8021FE78,
+      lbl_8021FE80,
+      lbl_8021FEB4,
+      0xC0000000 },
+    { NULL,
+      NULL,
+      NULL,
+      NULL,
+      0UL }
 };
 
 extern StageData lbl_803E8664 = {
     0x00000029,
     lbl_803E8608,
     "/GrTCa.dat",
-	lbl_8021FC64,
-	func_8021FC60,
-	lbl_8021FCD4,
-	lbl_8021FCD8,
-	lbl_8021FCFC,
-	lbl_8021FF34,
-	lbl_8021FF3C,
+    lbl_8021FC64,
+    func_8021FC60,
+    lbl_8021FCD4,
+    lbl_8021FCD8,
+    lbl_8021FCFC,
+    lbl_8021FF34,
+    lbl_8021FF3C,
     0x00000001,
     NULL,
     0UL
@@ -46,8 +41,9 @@ extern StageData lbl_803E8664 = {
 
 extern StageInfo stage_info;
 
-static void func_8021FC60(long){}
-static void lbl_8021FC64(void) {
+static void func_8021FC60(long) {}
+static void lbl_8021FC64(void)
+{
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     func_8021FD04(0);
@@ -58,14 +54,17 @@ static void lbl_8021FC64(void) {
     func_801C4210();
     func_801C42AC();
 }
-static void lbl_8021FCD4(void){}
-static void lbl_8021FCD8(void) {
+static void lbl_8021FCD4(void) {}
+static void lbl_8021FCD8(void)
+{
     func_801CAE04(0);
 }
-static s32 lbl_8021FCFC(void) {
+static s32 lbl_8021FCFC(void)
+{
     return 0;
 }
-static HSD_GObj* func_8021FD04(s32 gobj_id){
+static HSD_GObj* func_8021FD04(s32 gobj_id)
+{
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E8608[gobj_id];
 
@@ -90,45 +89,55 @@ static HSD_GObj* func_8021FD04(s32 gobj_id){
 
     return gobj;
 }
-static void lbl_8021FDEC(HSD_GObj* gobj) {
+static void lbl_8021FDEC(HSD_GObj* gobj)
+{
     Map* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_8021FE18(void) {
+static s32 lbl_8021FE18(void)
+{
     return 0;
 }
-static void lbl_8021FE20(HSD_GObj*){}
-static void lbl_8021FE24(void){}
-static void lbl_8021FE28(HSD_GObj* gobj) {
+static void lbl_8021FE20(HSD_GObj*) {}
+static void lbl_8021FE24(void) {}
+static void lbl_8021FE28(HSD_GObj* gobj)
+{
     u32 unused[2];
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_8021FE78(void) {
+static s32 lbl_8021FE78(void)
+{
     return 0;
 }
-static void lbl_8021FE80(HSD_GObj* gobj) {
+static void lbl_8021FE80(HSD_GObj* gobj)
+{
     func_800115F4();
     func_801C2FE0(gobj);
 }
-static void lbl_8021FEB4(void){}
-static void lbl_8021FEB8(HSD_GObj* gobj) {
+static void lbl_8021FEB4(void) {}
+static void lbl_8021FEB8(HSD_GObj* gobj)
+{
     u32 unused[2];
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_8021FF08(void) {
+static s32 lbl_8021FF08(void)
+{
     return 0;
 }
-static void lbl_8021FF10(HSD_GObj*) {
+static void lbl_8021FF10(HSD_GObj*)
+{
     func_801C2FE0();
 }
-static void lbl_8021FF30(void){}
-static int lbl_8021FF34(long) {
+static void lbl_8021FF30(void) {}
+static int lbl_8021FF34(long)
+{
     return 0;
 }
-static s32 lbl_8021FF3C(Vec*, s32, struct _HSD_JObj *) {
+static s32 lbl_8021FF3C(Vec*, s32, struct _HSD_JObj*)
+{
     return 1;
 }

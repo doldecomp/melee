@@ -2,18 +2,18 @@
 #include <dolphin/os/OSTime.h>
 
 asm OSTime OSGetTime(void)
-{
+{ // clang-format off
     mftbu r3
     mftb r4, 0x10c
     mftbu r5
     cmpw r3, r5
     bne OSGetTime
-}
+} // clang-format on
 
 asm OSTick OSGetTick(void)
-{
+{ // clang-format off
     mftb r3, 0x10c
-}
+} // clang-format on
 
 extern volatile OSTime OS_SYSTEM_TIME AT_ADDRESS(0x800030D8);
 
@@ -39,16 +39,18 @@ OSTime __OSTimeToSystemTime(s64 time)
 #define OS_TIME_WEEK_DAY_MAX 7
 #define OS_TIME_YEAR_DAY_MAX 365
 
-static s32 YearDays[12] = {0, 31, 59, 90, 120, 151,
-181, 212, 243, 273, 304, 334};
-static s32 LeapYearDays[12] = {0, 31, 60, 91, 121, 152,
-182, 213, 244, 274, 305, 335};
+static s32 YearDays[12] = { 0, 31, 59, 90, 120, 151,
+                            181, 212, 243, 273, 304, 334 };
+static s32 LeapYearDays[12] = { 0, 31, 60, 91, 121, 152,
+                                182, 213, 244, 274, 305, 335 };
 
-static BOOL IsLeapYear(s32 year) {
+static BOOL IsLeapYear(s32 year)
+{
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-static s32 GetLeapDays(s32 year) {
+static s32 GetLeapDays(s32 year)
+{
     if (year < 1) {
         return 0;
     }
@@ -219,6 +221,6 @@ lbl_8034C7E8:
 /* 8034C85C 0034943C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8034C860 00349440  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034C864 00349444  7C 08 03 A6 */	mtlr r0
-/* 8034C868 00349448  4E 80 00 20 */	blr 
+/* 8034C868 00349448  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop

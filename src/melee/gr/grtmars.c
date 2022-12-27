@@ -12,12 +12,14 @@ static StageCallbacks lbl_803E8EB0[4] = {
         GrTMars_802220AC,
         GrTMars_802220B4,
         GrTMars_802220B8,
-    }, {
+    },
+    {
         GrTMars_8022214C,
         GrTMars_8022219C,
         GrTMars_802221A4,
         GrTMars_802221C4,
-    }, {
+    },
+    {
         GrTMars_802220BC,
         GrTMars_8022210C,
         GrTMars_80222114,

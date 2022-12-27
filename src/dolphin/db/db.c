@@ -9,10 +9,10 @@ static void __DBExceptionDestination();
 
 void DBInit(void)
 {
-	__DBInterface      = (void *)0x80000040;
-    *(u32 *)0x80000048 = (u32)__DBExceptionDestination - 0x80000000;
-	DBVerbose          = 1;
-	return;
+    __DBInterface = (void*) 0x80000040;
+    *(u32*) 0x80000048 = (u32) __DBExceptionDestination - 0x80000000;
+    DBVerbose = 1;
+    return;
 }
 
 BOOL DBIsDebuggerPresent(void)
@@ -21,13 +21,13 @@ BOOL DBIsDebuggerPresent(void)
         return 0;
     }
 
-    return (BOOL)__DBInterface->bPresent;
+    return (BOOL) __DBInterface->bPresent;
 }
 
 static void __DBExceptionDestinationAux(void)
 {
     u8 dummy[8];
-    OSContext *ctx = (void *)(0x80000000 + *(u32 *)0xC0);  // WTF??
+    OSContext* ctx = (void*) (0x80000000 + *(u32*) 0xC0); // WTF??
     OSReport("DBExceptionDestination\n");
     OSDumpContext(ctx);
     PPCHalt();
@@ -35,13 +35,13 @@ static void __DBExceptionDestinationAux(void)
 
 #ifdef __MWERKS__
 static asm void __DBExceptionDestination(void)
-{
+{ // clang-format off
     nofralloc
     mfmsr r3
     ori r3, r3, 0x30
     mtmsr r3
     b __DBExceptionDestinationAux
-}
+} // clang-format on
 #else
 static void __DBExceptionDestination(void)
 {
@@ -49,8 +49,7 @@ static void __DBExceptionDestination(void)
         "mfmsr %r3\n"
         "ori %r3, %r3, 0x30\n"
         "mtmsr %r3\n"
-        "b __DBExceptionDestinationAux\n"
-    );
+        "b __DBExceptionDestinationAux\n");
 }
 #endif
 
@@ -59,4 +58,4 @@ int __DBIsExceptionMarked(u8 a)
     return __DBInterface->exceptionMask & (1 << a);
 }
 
-void DBPrintf(char *str, ...) {}
+void DBPrintf(char* str, ...) {}

@@ -151,7 +151,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             if ((fighter_2 == 0) && ((s32) fighter->x198C == 0)) {
                 phi_r26 = fighter;
                 phi_r30 = phi_r30;
-                while (phi_r25 <  fighter->x119E_hurtboxNum) {
+                while (phi_r25 < fighter->x119E_hurtboxNum) {
                     if (func_8000A244(phi_r26->x11A0_fighterHurtbox, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0) {
                         phi_r30 = 1U;
                     }

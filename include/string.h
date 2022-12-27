@@ -4,6 +4,6 @@
 #include <stddef.h>
 
 void memcpy(void* dst, void* src, size_t num);
-void *memset(void *ptr, int value, size_t num);
+void* memset(void* ptr, int value, size_t num);
 
 #endif

@@ -43,7 +43,7 @@ typedef struct _HSD_GObjProc {
     /* 0x0D */ u8 flags_1 : 1;
     /* 0x0D */ u8 flags_2 : 1;
     /* 0x0D */ u8 flags_3 : 2;
-    /* 0x10 */ struct _HSD_GObj* gobj; // owner
+    /* 0x10 */ struct _HSD_GObj* gobj;              // owner
     /* 0x14 */ void (*callback)(struct _HSD_GObj*); // on_invoke
 } HSD_GObjProc;
 

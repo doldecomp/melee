@@ -348,7 +348,6 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
     case 13:
         ftKind = fighter->x4_fighterKind;
         if ((ftKind < 0xc) && (10 > ftKind)) {
-
             if ((0x1fbfd < sfx_id) &&
                 ((sfx_id < 0x1fc62 && (func_80080144(fighter) == 1)))) {
                 sfx_id += 0x66;

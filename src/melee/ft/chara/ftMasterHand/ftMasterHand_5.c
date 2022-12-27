@@ -3,7 +3,8 @@
 // 80151428 14E008
 // https://decomp.me/scratch/mNdcr
 // probably isCrazyHandLoaded func
-u32 lbl_80151428(Vec* vec) {
+u32 lbl_80151428(Vec* vec)
+{
     HSD_GObj* fetched_gobj;
     // Fighter* ft_userdata;
 
@@ -16,11 +17,10 @@ u32 lbl_80151428(Vec* vec) {
     return 0;
 }
 
-
-
 // 80151484 14E064
 // https://decomp.me/scratch/0vIXi
-inline void func_80151484_inline1(HSD_GObj* gobj) {
+inline void func_80151484_inline1(HSD_GObj* gobj)
+{
     Fighter* r29_fp = gobj->user_data;
     MasterHandAttributes* temp_r30 = r29_fp->x10C_ftData->ext_attr;
     r29_fp->x80_self_vel.z = 0.0f;
@@ -45,7 +45,8 @@ inline void func_80151484_inline1(HSD_GObj* gobj) {
     r29_fp->x2348_stateVar3 = (s32) temp_r30->x15C;
 }
 
-void func_80151484(HSD_GObj* gobj) {
+void func_80151484(HSD_GObj* gobj)
+{
     s32 unused[2];
     Fighter* r3_fp;
 
@@ -64,11 +65,10 @@ void func_80151484(HSD_GObj* gobj) {
     r3_fp->x23B8 = 0;
 }
 
-
-
 // 801515B8 14E198
 // https://decomp.me/scratch/I5KfO
-void lbl_801515B8(HSD_GObj* gobj) {
+void lbl_801515B8(HSD_GObj* gobj)
+{
     s32 temp_r0;
     s32 temp_r3;
     s32 temp_r3_2;
@@ -93,7 +93,7 @@ void lbl_801515B8(HSD_GObj* gobj) {
     }
 
     // x2348_stateVar3 does that make sense if its u32?
-    if ((s32)r31_fp->x2348_stateVar3 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
+    if ((s32) r31_fp->x2348_stateVar3 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
@@ -106,11 +106,10 @@ void lbl_801515B8(HSD_GObj* gobj) {
     func_800D4F24(gobj, 0);
 }
 
-
-
 // 801516B4 14E294
 // https://decomp.me/scratch/AmIVW
-void lbl_801516B4(HSD_GObj* gobj) {
+void lbl_801516B4(HSD_GObj* gobj)
+{
     f32 temp_f1;
     s32 temp_cr0_eq;
     s32 temp_r0;

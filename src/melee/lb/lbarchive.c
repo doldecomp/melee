@@ -14,7 +14,7 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length)
         OSReport(lbl_803BA588);
         __assert(lbl_803BA5A4, 73, lbl_804D37C0);
     }
-    while (1){
+    while (1) {
         symbol = HSD_ArchiveGetExtern(archive, i++);
         if (symbol != NULL)
             HSD_ArchiveLocateExtern(archive, symbol, NULL);

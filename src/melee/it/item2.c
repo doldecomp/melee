@@ -567,7 +567,7 @@ s32 func_8026B924(HSD_GObj* item_gobj) // Return result of unk item check - requ
 #pragma peephole on
 
 asm s32 func_8026B924(register HSD_GObj* item_gobj) // Inlined ASM due to compiler version generating mismatch //
-{
+{ // clang-format off
     lwz r4, 0x2C(item_gobj); // Get Item Data //
     li r3, -1;               // Default return value //
     lwz r0, 0x10(r4);        // Get Item ID //
@@ -584,7 +584,7 @@ lbl_compare:
     bnelr - ;
 lbl_getVar:
     lwz r3, 0xD4C(r4);
-}
+}                                                   // clang-format on
 
 #endif
 

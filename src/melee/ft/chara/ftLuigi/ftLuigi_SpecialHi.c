@@ -38,8 +38,7 @@ void ftLuigi_SpecialHi_Anim(HSD_GObj* fighter_gobj)
     f32 landing;
 
     luigiAttrs = getFighter(fighter_gobj)->x2D4_specialAttributes;
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_80096900(fighter_gobj, 0, 1, 0, luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY, luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
@@ -54,8 +53,7 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     f32 landing2;
 
     luigiAttrs = getFighter(fighter_gobj)->x2D4_specialAttributes;
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_80096900(fighter_gobj, 0, 1, 0, luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY, luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
@@ -80,58 +78,42 @@ void ftLuigi_SpecialHi_IASA(HSD_GObj* fighter_gobj)
     stick_x = fp->input.x620_lstick_x;
     luigiAttrs = fp->x2D4_specialAttributes;
     stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
-    if ((u32)fp->x2200_ftcmd_var0 == 0U)
-    {
+    if ((u32) fp->x2200_ftcmd_var0 == 0U) {
         superJump_StickRange = luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
-        if (stick_range > superJump_StickRange)
-        {
-            temp_range = (f32)((f64)luigiAttrs->x60_LUIGI_SUPERJUMP_ANGLE_DIFF * ((f64)(stick_range - superJump_StickRange) / (1.0 - (f64)superJump_StickRange)));
-            if (stick_x > 0.0f)
-            {
+        if (stick_range > superJump_StickRange) {
+            temp_range = (f32) ((f64) luigiAttrs->x60_LUIGI_SUPERJUMP_ANGLE_DIFF * ((f64) (stick_range - superJump_StickRange) / (1.0 - (f64) superJump_StickRange)));
+            if (stick_x > 0.0f) {
                 control = -(0.01745329238474369f * temp_range);
-            }
-            else
-            {
+            } else {
                 control = 0.01745329238474369f * temp_range;
             }
             control_2 = fp->x6BC_inputStickangle;
             stick_angle = control_2;
-            if (stick_angle < 0.0f)
-            {
+            if (stick_angle < 0.0f) {
                 stick_angle = -stick_angle;
             }
-            if (control < 0.0f)
-            {
+            if (control < 0.0f) {
                 stick_range_2 = -control;
-            }
-            else
-            {
+            } else {
                 stick_range_2 = control;
             }
-            if (stick_range_2 > stick_angle)
-            {
+            if (stick_range_2 > stick_angle) {
                 fp->x6BC_inputStickangle = control;
             }
         }
     }
-    if (fp->x2210_ThrowFlags.b3 != 0)
-    {
+    if (fp->x2210_ThrowFlags.b3 != 0) {
         fp->x2210_ThrowFlags.b3 = 0;
         flag = TRUE;
-    }
-    else
-    {
+    } else {
         flag = FALSE;
     }
-    if (flag != FALSE)
-    {
+    if (flag != FALSE) {
         control = fp->input.x620_lstick_x;
-        if (control < 0.0f)
-        {
+        if (control < 0.0f) {
             control = -control;
         }
-        if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE)
-        {
+        if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE) {
             func_8007D9FC(fp);
             func_80075AF0(fp, 0, (M_PI / 2) * fp->x2C_facing_direction);
         }
@@ -162,58 +144,42 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
     stick_x = fp->input.x620_lstick_x;
     luigiAttrs = fp->x2D4_specialAttributes;
     stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
-    if ((u32)fp->x2200_ftcmd_var0 == 0U)
-    {
+    if ((u32) fp->x2200_ftcmd_var0 == 0U) {
         superJump_StickRange = luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
-        if (stick_range > superJump_StickRange)
-        {
-            temp_range = (f32)((f64)luigiAttrs->x60_LUIGI_SUPERJUMP_ANGLE_DIFF * ((f64)(stick_range - superJump_StickRange) / (1.0 - (f64)superJump_StickRange)));
-            if (stick_x > 0.0f)
-            {
+        if (stick_range > superJump_StickRange) {
+            temp_range = (f32) ((f64) luigiAttrs->x60_LUIGI_SUPERJUMP_ANGLE_DIFF * ((f64) (stick_range - superJump_StickRange) / (1.0 - (f64) superJump_StickRange)));
+            if (stick_x > 0.0f) {
                 control = -(0.01745329238474369f * temp_range);
-            }
-            else
-            {
+            } else {
                 control = 0.01745329238474369f * temp_range;
             }
             control_2 = fp->x6BC_inputStickangle;
             stick_angle = control_2;
-            if (stick_angle < 0.0f)
-            {
+            if (stick_angle < 0.0f) {
                 stick_angle = -stick_angle;
             }
-            if (control < 0.0f)
-            {
+            if (control < 0.0f) {
                 stick_range_2 = -control;
-            }
-            else
-            {
+            } else {
                 stick_range_2 = control;
             }
-            if (stick_range_2 > stick_angle)
-            {
+            if (stick_range_2 > stick_angle) {
                 fp->x6BC_inputStickangle = control;
             }
         }
     }
-    if (fp->x2210_ThrowFlags.b3 != 0)
-    {
+    if (fp->x2210_ThrowFlags.b3 != 0) {
         fp->x2210_ThrowFlags.b3 = 0;
         flag = TRUE;
-    }
-    else
-    {
+    } else {
         flag = FALSE;
     }
-    if (flag != FALSE)
-    {
+    if (flag != FALSE) {
         control = fp->input.x620_lstick_x;
-        if (control < 0.0f)
-        {
+        if (control < 0.0f) {
             control = -control;
         }
-        if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE)
-        {
+        if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE) {
             func_8007D9FC(fp);
             func_80075AF0(fp, 0, (M_PI / 2) * fp->x2C_facing_direction);
         }
@@ -224,8 +190,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/TmnDt // Luigi's grounded Super Jump Punch Physics callback
 void ftLuigi_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 {
-    if ((s32)getFighter(fighter_gobj)->xE0_ground_or_air == GA_Air)
-    {
+    if ((s32) getFighter(fighter_gobj)->xE0_ground_or_air == GA_Air) {
         func_80085154(fighter_gobj);
         return;
     }
@@ -240,8 +205,7 @@ void ftLuigi_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     attr* ftAttrs = &fp->x110_attr;
 
-    if ((u32)fp->x2200_ftcmd_var0 != 0U)
-    {
+    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         func_80085154(fighter_gobj);
         fp->x80_self_vel.x *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
         fp->x80_self_vel.y *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
@@ -256,7 +220,7 @@ void ftLuigi_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
 void ftLuigi_SpecialHi_CheckLanding(HSD_GObj* fighter_gobj)
 {
-    func_800D5CB0(fighter_gobj, 0, ((ftLuigiAttributes*)getFighter(fighter_gobj)->x2D4_specialAttributes)->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+    func_800D5CB0(fighter_gobj, 0, ((ftLuigiAttributes*) getFighter(fighter_gobj)->x2D4_specialAttributes)->x54_LUIGI_SUPERJUMP_LANDING_LAG);
 }
 
 // 0x801444E4
@@ -265,10 +229,8 @@ void ftLuigi_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((s32)fp->xE0_ground_or_air == GA_Air)
-    {
-        if (((u32)fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
-        {
+    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+        if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f)) {
             func_80083B68(fighter_gobj);
             return;
         }
@@ -284,10 +246,8 @@ void ftLuigi_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((s32)fp->xE0_ground_or_air == GA_Air)
-    {
-        if (((u32)fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
-        {
+    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+        if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f)) {
             func_80083B68(fighter_gobj);
             return;
         }

@@ -80,7 +80,6 @@ StageData lbl_803E7E38 = {
     0x00000001,
 };
 
-
 static void func_80219C98()
 {
     lbl_804D6AC8 = 1;
@@ -322,58 +321,58 @@ static void func_8021A3BC(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_GObj* bg_gobj;
     s32 temp_r0_2;
-    s16 sp28[BATTLE_BG_MAX] = {1, 2, 4};
+    s16 sp28[BATTLE_BG_MAX] = { 1, 2, 4 };
     s32 tmp;
     u32 unused[7];
 
     switch (map->xC4) {
-        case 0:
-            if (map->xD0-- < 0) {
-                map->xC4 = 1;
-                func_801C8138(gobj, map->map_id, 0);
-            }
-            break;
-        case 1:
-            if (HSD_JObjGetFlags(jobj) & 0x10) {
-                HSD_JObjClearFlagsAll(jobj, 0x10);
-            }
-            if (func_801C83D0(gobj, 0, 7)) {
-                if (map->xC8 == -1) {
-                    u32 i;
-                    for (i = 0; i < BATTLE_BG_MAX; i++) {
-                        if (func_801C2BA4(sp28[i])) {
-                            map->xC8 = sp28[i];
-                            break;
-                        }
+    case 0:
+        if (map->xD0-- < 0) {
+            map->xC4 = 1;
+            func_801C8138(gobj, map->map_id, 0);
+        }
+        break;
+    case 1:
+        if (HSD_JObjGetFlags(jobj) & 0x10) {
+            HSD_JObjClearFlagsAll(jobj, 0x10);
+        }
+        if (func_801C83D0(gobj, 0, 7)) {
+            if (map->xC8 == -1) {
+                u32 i;
+                for (i = 0; i < BATTLE_BG_MAX; i++) {
+                    if (func_801C2BA4(sp28[i])) {
+                        map->xC8 = sp28[i];
+                        break;
                     }
-                    assert_line(527, i<BATTLE_BG_MAX);
                 }
-                map->xCC = map->xC8;
-                do {
-                    temp_r0_2 = sp28[HSD_Randi(BATTLE_BG_MAX)];
-                } while ((tmp = map->xCC) == (map->xC8 = temp_r0_2));
-
-                bg_gobj = func_801C2BA4(tmp);
-                assert_line(535, bg_gobj);
-                func_801C9604(bg_gobj, lbl_804D6ACC->unk4, 0);
-
-                bg_gobj = func_80219D84(map->xC8);
-                assert_line(539, bg_gobj);
-                func_801C9604(bg_gobj, lbl_804D6ACC->unk0, 0);
-
-                map->xC4 = 2;
+                assert_line(527, i<BATTLE_BG_MAX);
             }
-            break;
-        case 2:
-            bg_gobj = func_801C2BA4(map->xCC);
-            assert_line(546, bg_gobj);
-            if (func_801C96E8(bg_gobj)) {
-                func_801C4A08(bg_gobj);
-                HSD_JObjSetFlagsAll(jobj, 0x10);
-                map->xC4 = 0;
-                map->xD0 = HSD_Randi(1200) + 2400;
-            }
-            break;
+            map->xCC = map->xC8;
+            do {
+                temp_r0_2 = sp28[HSD_Randi(BATTLE_BG_MAX)];
+            } while ((tmp = map->xCC) == (map->xC8 = temp_r0_2));
+
+            bg_gobj = func_801C2BA4(tmp);
+            assert_line(535, bg_gobj);
+            func_801C9604(bg_gobj, lbl_804D6ACC->unk4, 0);
+
+            bg_gobj = func_80219D84(map->xC8);
+            assert_line(539, bg_gobj);
+            func_801C9604(bg_gobj, lbl_804D6ACC->unk0, 0);
+
+            map->xC4 = 2;
+        }
+        break;
+    case 2:
+        bg_gobj = func_801C2BA4(map->xCC);
+        assert_line(546, bg_gobj);
+        if (func_801C96E8(bg_gobj)) {
+            func_801C4A08(bg_gobj);
+            HSD_JObjSetFlagsAll(jobj, 0x10);
+            map->xC4 = 0;
+            map->xD0 = HSD_Randi(1200) + 2400;
+        }
+        break;
     }
 }
 

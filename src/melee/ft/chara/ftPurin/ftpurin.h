@@ -19,6 +19,5 @@ typedef struct _ftPurinAttributes {
     u8 data_filler_1[0x100 - 0x30];
 } ftPurinAttributes;
 
-
 /// functions
 void func_8013C494(HSD_GObj* fighter_gobj);

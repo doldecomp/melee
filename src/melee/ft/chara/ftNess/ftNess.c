@@ -11,7 +11,7 @@ void ftNess_OnDeath(HSD_GObj* gobj)
     fp->sa.ness.x224C_thunderGFX = FALSE;
 }
 
-void ftNess_OnLoad(HSD_GObj* gobj) 
+void ftNess_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     void** item_list = fp->x10C_ftData->x48_items;
@@ -46,10 +46,11 @@ void ftNess_OnAbsorb(HSD_GObj* gobj)
 
 f32 ftNess_GetAbsorbHeal(Fighter* fp)
 {
-    return ((ftNessAttributes*)fp->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
+    return ((ftNessAttributes*) fp->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
 }
 
-void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag) {
+void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag)
+{
     Fighter_OnItemPickup(fighter_gobj, catchItemFlag, 1, 1);
 }
 
@@ -63,11 +64,12 @@ void ftNess_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag) {
+void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag)
+{
     Fighter_OnItemDrop(gobj, dropItemFlag, 1, 1);
 }
 
-void ftNess_LoadSpecialAttrs(HSD_GObj* gobj) 
+void ftNess_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftNessAttributes);
 }

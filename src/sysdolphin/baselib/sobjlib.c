@@ -26,8 +26,8 @@
 /* 00408F80 */ extern unk_t lbl_8040C3A0;
 /* 003B6244 */ extern Vec lbl_803B9664;
 /* 003B6238 */ extern Vec lbl_803B9658;
-/* 003A21BC */ extern void func_803A55DC(HSD_GObj *, u16, s16, u32);
-/* 003A20CC */ extern void func_803A54EC(HSD_GObj *, s32);
+/* 003A21BC */ extern void func_803A55DC(HSD_GObj*, u16, s16, u32);
+/* 003A20CC */ extern void func_803A54EC(HSD_GObj*, s32);
 /* 003A1648 */ extern void func_803A4A68(unk_t);
 /* 003A15C0 */ extern void func_803A49E0(unk_t);
 /* 003A135C */ extern unk_t func_803A477C(s32, unk_t, s32, s32, s32, s8);

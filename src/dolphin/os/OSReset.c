@@ -15,7 +15,8 @@ void OSRegisterResetFunction(OSResetFunctionInfo* func)
     OSResetFunctionInfo* tmp;
     OSResetFunctionInfo* iter;
 
-    for (iter = ResetFunctionQueue.first; iter && iter->priority <= func->priority; iter = iter->next) {}
+    for (iter = ResetFunctionQueue.first; iter && iter->priority <= func->priority; iter = iter->next) {
+    }
 
     if (iter == NULL) {
         tmp = ResetFunctionQueue.last;
@@ -159,7 +160,8 @@ void OSResetSystem(int reset, u32 resetCode, BOOL forceMenu)
         disableRecalibration = __PADDisableRecalibration(TRUE);
     }
 
-    while (!__OSCallResetFunctions(FALSE)) {}
+    while (!__OSCallResetFunctions(FALSE)) {
+    }
 
     if (reset == OS_RESET_HOTRESET && forceMenu) {
         OSSram* sram;
@@ -168,7 +170,8 @@ void OSResetSystem(int reset, u32 resetCode, BOOL forceMenu)
         sram->flags |= 0x40;
         __OSUnlockSram(TRUE);
 
-        while (!__OSSyncSram()) {}
+        while (!__OSSyncSram()) {
+        }
     }
     OSDisableInterrupts();
     __OSCallResetFunctions(TRUE);

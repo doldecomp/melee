@@ -1,3 +1,4 @@
+// clang-format off
 
 asm void PPCMfmsr() {
 	nofralloc
@@ -37,7 +38,7 @@ asm void PPCMtdec() {
 
 asm void PPCSync() {
 	nofralloc
-	sc 
+	sc
 	blr
 }
 
@@ -45,9 +46,9 @@ asm void PPCHalt() {
     nofralloc
     sync
 halt_loop:
-    nop 
+    nop
     li r3, 0
-    nop 
+    nop
     b halt_loop
 }
 

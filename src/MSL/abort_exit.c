@@ -14,12 +14,13 @@ s32 lbl_804D7068;
 s32 lbl_804D7064;
 s32 lbl_804D7060;
 
-void exit(int) {
+void exit(int)
+{
     void (**dtor)();
 
     if (lbl_804D7060 == 0) {
         while (lbl_804D7064 > 0) {
-            lbl_804A2F48[--lbl_804D7064 ]();
+            lbl_804A2F48[--lbl_804D7064]();
         }
         __destroy_global_chain();
         for (dtor = lbl_803B7260; *dtor != NULL; dtor += 1) {
@@ -40,4 +41,3 @@ void exit(int) {
     }
     _ExitProcess();
 }
-

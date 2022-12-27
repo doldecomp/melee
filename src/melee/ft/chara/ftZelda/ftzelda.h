@@ -48,8 +48,8 @@ void ftZelda_OnDeath(HSD_GObj* fighter_gobj);
 void ftZelda_OnLoad(HSD_GObj* fighter_gobj);
 void ftZelda_801393AC(HSD_GObj* fighter_gobj);
 void ftZelda_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool);
-void ftZelda_OnItemInvisible(HSD_GObj *fighter_gobj);
-void ftZelda_OnItemVisible(HSD_GObj *fighter_gobj);
+void ftZelda_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftZelda_OnItemVisible(HSD_GObj* fighter_gobj);
 void ftZelda_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1);
 void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftZelda_801395C8(HSD_GObj* fighter_gobj);
@@ -171,4 +171,3 @@ void ftZelda_8013C148(HSD_GObj* arg0);
 void ftZelda_8013C1B4(HSD_GObj* arg0);
 void ftZelda_8013C220(HSD_GObj* arg0);
 void ftZelda_8013C28C(HSD_GObj* arg0);
-

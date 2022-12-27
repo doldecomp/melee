@@ -17,12 +17,9 @@ extern void func_800BCF18(HSD_GObj*, HSD_GObj*);
 inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
-    if (fp->x1A58_interactedFighter == NULL)
-    {
+    if (fp->x1A58_interactedFighter == NULL) {
         func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BCF18);
-    }
-    else
-    {
+    } else {
         func_8007E2F4(fp, 0x1FF);
     }
 }
@@ -52,12 +49,9 @@ extern void func_800BD000(HSD_GObj*, HSD_GObj*);
 inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
-    if (fp->x1A58_interactedFighter == NULL)
-    {
+    if (fp->x1A58_interactedFighter == NULL) {
         func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BD000);
-    }
-    else
-    {
+    } else {
         func_8007E2F4(fp, 0x1FF);
     }
 }
@@ -75,8 +69,7 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->mewtwoVars[0].SpecialS.isConfusionReflect = FALSE;
 
-    if (fp->sa.mewtwo.x223C_isConfusionBoost == FALSE)
-    {
+    if (fp->sa.mewtwo.x223C_isConfusionBoost == FALSE) {
         fp->x80_self_vel.y = mewtwoAttrs->x18_MEWTWO_CONFUSION_AIR_BOOST;
         fp->sa.mewtwo.x223C_isConfusionBoost = TRUE;
     }
@@ -94,12 +87,10 @@ inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     HSD_GObj* victimGObj;
-    
-    if ((u32)fp->x2200_ftcmd_var0 != 0)
-    {
+
+    if ((u32) fp->x2200_ftcmd_var0 != 0) {
         victimGObj = fp->x1A58_interactedFighter;
-        if (victimGObj != NULL)
-        {
+        if (victimGObj != NULL) {
             func_8007E2F4(fp, 0);
             func_800DE2A8(fighter_gobj, victimGObj);
             func_80090780(victimGObj);
@@ -113,8 +104,7 @@ inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
@@ -124,8 +114,7 @@ void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800CC730(fighter_gobj);
     }
 }
@@ -163,8 +152,7 @@ void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->mewtwoVars[0].SpecialS.isConfusionReflect != FALSE) 
-    {
+    if (fp->mewtwoVars[0].SpecialS.isConfusionReflect != FALSE) {
         fp->x2218_flag.bits.b3 = 1;
         fp->x2218_flag.bits.b4 = 1;
         fp->cb.x21C8_callback_OnReflectHit = ftMewtwo_SpecialS_OnReflect;
@@ -210,8 +198,8 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialS_SetReflect(fighter_gobj);
 }
 
-extern void func_8008403C(HSD_GObj*, void(*cb)(HSD_GObj*));
-extern void func_80082C74(HSD_GObj*, void(*cb)(HSD_GObj*));
+extern void func_8008403C(HSD_GObj*, void (*cb)(HSD_GObj*));
+extern void func_80082C74(HSD_GObj*, void (*cb)(HSD_GObj*));
 
 // 0x80146BB8 - Mewtwo's grounded Confusion Collision callback
 void ftMewtwo_SpecialS_Coll(HSD_GObj* fighter_gobj)
@@ -225,7 +213,7 @@ void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
     func_80082C74(fighter_gobj, ftMewtwo_SpecialAirS_AirToGround);
 }
 
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*));
+extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void (*cb_OnReflect)(HSD_GObj*));
 
 // 0x80146C08
 // https://decomp.me/scratch/BDCzb // Confusion Reflect think function
@@ -236,18 +224,16 @@ void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj)
     s32 reflectFlag;
 
     reflectFlag = fp->x2204_ftcmd_var1;
-    switch (reflectFlag)
-    {
+    switch (reflectFlag) {
     case CONFUSION_REFLECT_ON:
         ftColl_CreateReflectHit(fighter_gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION, ftMewtwo_SpecialS_OnReflect); // Really? A callback that simply returns instead of just NULL? //
-        fp->x2218_flag.bits.b4 = 1; // Here it is... the reason Confusion cannot change ownership.
+        fp->x2218_flag.bits.b4 = 1;                                                                                        // Here it is... the reason Confusion cannot change ownership.
         fp->mewtwoVars[0].SpecialS.isConfusionReflect = TRUE;
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
         return;
 
     case CONFUSION_REFLECT_OFF:
-        if (fp->mewtwoVars[0].SpecialS.isConfusionReflect != FALSE)
-        {
+        if (fp->mewtwoVars[0].SpecialS.isConfusionReflect != FALSE) {
             fp->x2218_flag.bits.b3 = 0;
             fp->x2218_flag.bits.b4 = 0;
             fp->cb.x21C8_callback_OnReflectHit = NULL;

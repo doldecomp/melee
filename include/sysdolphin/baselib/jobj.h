@@ -103,7 +103,7 @@ typedef struct _HSD_JObj {
     /* 0x78 */ MtxPtr envelopemtx;
     /* 0x7C */ struct _HSD_AObj* aobj;
     /* 0x80 */ struct _HSD_RObj* robj;
-    /* 0x84 */  u32 id;
+    /* 0x84 */ u32 id;
 } HSD_JObj;
 
 typedef struct _HSD_Joint {
@@ -141,11 +141,11 @@ void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
 void HSD_JObjReqAnimAll(HSD_JObj*, f32);
 void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
-void HSD_JObjUnref(HSD_JObj *jobj);
-void HSD_JObjRemoveAll(HSD_JObj *); // sysdolphin/baselib/jobj.s
-HSD_JObj *HSD_JObjLoadJoint(HSD_Joint *);
-void HSD_JObjAddAnimAll(HSD_JObj *, HSD_AnimJoint *, HSD_MatAnimJoint *, HSD_ShapeAnimJoint *);
-void HSD_JObjAnimAll(HSD_JObj *); // asm/sysdolphin/baselib/jobj.s
+void HSD_JObjUnref(HSD_JObj* jobj);
+void HSD_JObjRemoveAll(HSD_JObj*); // sysdolphin/baselib/jobj.s
+HSD_JObj* HSD_JObjLoadJoint(HSD_Joint*);
+void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*, HSD_MatAnimJoint*, HSD_ShapeAnimJoint*);
+void HSD_JObjAnimAll(HSD_JObj*); // asm/sysdolphin/baselib/jobj.s
 void HSD_JObjSetFlags(HSD_JObj*, u32 flags);
 void HSD_JObjSetFlagsAll(HSD_JObj*, u32 flags);
 void HSD_JObjClearFlags(HSD_JObj*, u32 flags);
@@ -178,12 +178,12 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 }
 
 // Why does this seem to be a define while the others are inline functions?
-#define HSD_JObjSetMtxDirty(jobj)                       \
-{                                                       \
-    if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {    \
-        HSD_JObjSetMtxDirtySub(jobj);                   \
-    }                                                   \
-}
+#define HSD_JObjSetMtxDirty(jobj)                        \
+    {                                                    \
+        if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) { \
+            HSD_JObjSetMtxDirtySub(jobj);                \
+        }                                                \
+    }
 
 inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
@@ -224,7 +224,7 @@ inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion *quat)
+inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     assert_line(699, jobj);
     *quat = jobj->rotate;
@@ -267,7 +267,7 @@ inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec *scale)
+inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec* scale)
 {
     assert_line(823, jobj);
     *scale = jobj->scale;
@@ -310,7 +310,7 @@ inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec *translate)
+inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec* translate)
 {
     assert_line(979, jobj);
     assert_line(980, translate);
@@ -339,7 +339,7 @@ inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
 {
     assert_line(1170, jobj);
     assert_line(1171, mtx);
-    PSMTXCopy(mtx, jobj->mtx); 
+    PSMTXCopy(mtx, jobj->mtx);
 }
 
 #endif

@@ -28,7 +28,8 @@ static StageData lbl_803DFEA8 = {
 };
 
 extern StageData
-    lbl_803DFEA8, lbl_803E5764, lbl_803E11A4, lbl_803E4ECC, lbl_803E1800,
+    lbl_803DFEA8,
+    lbl_803E5764, lbl_803E11A4, lbl_803E4ECC, lbl_803E1800,
     lbl_803E52E0, lbl_803E3F6C, lbl_803E5130, lbl_803E1B2C, lbl_803E4D0C,
     lbl_803E274C, lbl_803E51CC, lbl_803E0E5C, lbl_803E76D0, lbl_803E1F08,
     lbl_803E54CC, lbl_803E1334, lbl_803E6A3C, lbl_803E33DC, lbl_803E2D20,
@@ -44,43 +45,117 @@ extern StageData
     lbl_803E821C, lbl_803E62C0, lbl_803E6370, lbl_803E6420, lbl_803E5764;
 
 static StageData* lbl_803DFEDC[] = {
-    &lbl_803DFEA8, &lbl_803E5764, &lbl_803E11A4,
-    &lbl_803E4ECC, &lbl_803E1800, &lbl_803E52E0,
-    &lbl_803E3F6C, &lbl_803E5130, &lbl_803E1B2C,
-    &lbl_803E4D0C, &lbl_803E274C, &lbl_803E51CC,
-    &lbl_803E0E5C, &lbl_803E76D0, &lbl_803E1F08,
-    &lbl_803E54CC, &lbl_803E1334, &lbl_803E6A3C,
-    &lbl_803E33DC, &lbl_803E2D20, &lbl_803E2858,
-    &lbl_803E3D94, &lbl_803E4800, NULL,
-    &lbl_803E4950, &lbl_803E4C00, NULL,
-    &lbl_803E7A00, &lbl_803E6748, &lbl_803E650C,
-    &lbl_803E65E8, &lbl_803E584C, &lbl_803E5988,
-    &lbl_803E5E0C, &lbl_803E617C, &lbl_803E5764,
-    &lbl_803E7E38, &lbl_803E7F90, &lbl_803E7D34,
-    &lbl_803E7B10, &lbl_803E85A4, &lbl_803E8664,
-    &lbl_803E872C, &lbl_803E87EC, &lbl_803E88AC,
-    &lbl_803E8974, &lbl_803E8A34, &lbl_803E8AF4,
-    &lbl_803E8C0C, &lbl_803E8CCC, &lbl_803E8D8C,
-    &lbl_803E8E4C, &lbl_803E8F0C, &lbl_803E8FCC,
-    &lbl_803E908C, &lbl_803E914C, &lbl_803E920C,
-    &lbl_803E92CC, &lbl_803E9394, &lbl_803E9454,
-    &lbl_803E9514, &lbl_803E95D4, &lbl_803E9694,
-    &lbl_803E9754, &lbl_803E981C, &lbl_803E98DC,
-    &lbl_803E84C4, &lbl_803E821C, &lbl_803E62C0,
-    &lbl_803E6370, &lbl_803E6420, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803DFEA8,
+    &lbl_803E5764,
+    &lbl_803E11A4,
+    &lbl_803E4ECC,
+    &lbl_803E1800,
+    &lbl_803E52E0,
+    &lbl_803E3F6C,
+    &lbl_803E5130,
+    &lbl_803E1B2C,
+    &lbl_803E4D0C,
+    &lbl_803E274C,
+    &lbl_803E51CC,
+    &lbl_803E0E5C,
+    &lbl_803E76D0,
+    &lbl_803E1F08,
+    &lbl_803E54CC,
+    &lbl_803E1334,
+    &lbl_803E6A3C,
+    &lbl_803E33DC,
+    &lbl_803E2D20,
+    &lbl_803E2858,
+    &lbl_803E3D94,
+    &lbl_803E4800,
+    NULL,
+    &lbl_803E4950,
+    &lbl_803E4C00,
+    NULL,
+    &lbl_803E7A00,
+    &lbl_803E6748,
+    &lbl_803E650C,
+    &lbl_803E65E8,
+    &lbl_803E584C,
+    &lbl_803E5988,
+    &lbl_803E5E0C,
+    &lbl_803E617C,
+    &lbl_803E5764,
+    &lbl_803E7E38,
+    &lbl_803E7F90,
+    &lbl_803E7D34,
+    &lbl_803E7B10,
+    &lbl_803E85A4,
+    &lbl_803E8664,
+    &lbl_803E872C,
+    &lbl_803E87EC,
+    &lbl_803E88AC,
+    &lbl_803E8974,
+    &lbl_803E8A34,
+    &lbl_803E8AF4,
+    &lbl_803E8C0C,
+    &lbl_803E8CCC,
+    &lbl_803E8D8C,
+    &lbl_803E8E4C,
+    &lbl_803E8F0C,
+    &lbl_803E8FCC,
+    &lbl_803E908C,
+    &lbl_803E914C,
+    &lbl_803E920C,
+    &lbl_803E92CC,
+    &lbl_803E9394,
+    &lbl_803E9454,
+    &lbl_803E9514,
+    &lbl_803E95D4,
+    &lbl_803E9694,
+    &lbl_803E9754,
+    &lbl_803E981C,
+    &lbl_803E98DC,
+    &lbl_803E84C4,
+    &lbl_803E821C,
+    &lbl_803E62C0,
+    &lbl_803E6370,
+    &lbl_803E6420,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
 };
 
 static u8* lbl_804D6950;
@@ -463,7 +538,7 @@ static BOOL func_801C0A70(Point3d* pos)
 extern u32 lbl_803B7DEC[];
 extern void func_8026BE84();
 static asm void func_801C0C2C()
-{
+{ // clang-format off
     nofralloc
 /* 801C0C2C 001BD80C  7C 08 02 A6 */	mflr r0
 /* 801C0C30 001BD810  3C 60 80 4A */	lis r3, stage_info@ha
@@ -545,7 +620,7 @@ lbl_801C0D38:
 /* 801C0D4C 001BD92C  7D 88 03 A6 */	mtlr r12
 /* 801C0D50 001BD930  38 9D 00 00 */	addi r4, r29, 0
 /* 801C0D54 001BD934  38 61 00 50 */	addi r3, r1, 0x50
-/* 801C0D58 001BD938  4E 80 00 21 */	blrl 
+/* 801C0D58 001BD938  4E 80 00 21 */	blrl
 /* 801C0D5C 001BD93C  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0D60 001BD940  41 82 00 0C */	beq lbl_801C0D6C
 lbl_801C0D64:
@@ -619,7 +694,7 @@ lbl_801C0E38:
 /* 801C0E4C 001BDA2C  7D 88 03 A6 */	mtlr r12
 /* 801C0E50 001BDA30  38 9C 00 00 */	addi r4, r28, 0
 /* 801C0E54 001BDA34  38 61 00 50 */	addi r3, r1, 0x50
-/* 801C0E58 001BDA38  4E 80 00 21 */	blrl 
+/* 801C0E58 001BDA38  4E 80 00 21 */	blrl
 /* 801C0E5C 001BDA3C  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0E60 001BDA40  41 82 00 0C */	beq lbl_801C0E6C
 lbl_801C0E64:
@@ -697,8 +772,8 @@ lbl_801C0F48:
 /* 801C0F68 001BDB48  83 81 00 60 */	lwz r28, 0x60(r1)
 /* 801C0F6C 001BDB4C  38 21 00 90 */	addi r1, r1, 0x90
 /* 801C0F70 001BDB50  7C 08 03 A6 */	mtlr r0
-/* 801C0F74 001BDB54  4E 80 00 20 */	blr 
-}
+/* 801C0F74 001BDB54  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 void func_801C0F78(StructPairWithStageID* pair)
@@ -732,7 +807,7 @@ void func_801C1074(StructPairWithStageID* pair, s32 arg1)
     lbl_803DFEDC[pair->stage_id]->callback1(arg1);
 }
 
-void OSPanic(const char *file, int line, const char *msg, ...);
+void OSPanic(const char* file, int line, const char* msg, ...);
 
 void func_801C10B8(s32 arg0, s32 arg1)
 {
@@ -829,7 +904,7 @@ extern void func_8000F9F8();
 extern void func_80013B14();
 extern void HSD_JObjAddNext();
 asm struct _HSD_GObj* func_801C14D0(s32)
-{
+{ // clang-format off
     nofralloc
 /* 801C14D0 001BE0B0  7C 08 02 A6 */	mflr r0
 /* 801C14D4 001BE0B4  3C A0 80 3E */	lis r5, lbl_803DFEA8@ha
@@ -1192,8 +1267,8 @@ lbl_801C1A0C:
 /* 801C1A10 001BE5F0  80 01 00 D4 */	lwz r0, 0xd4(r1)
 /* 801C1A14 001BE5F4  38 21 00 D0 */	addi r1, r1, 0xd0
 /* 801C1A18 001BE5F8  7C 08 03 A6 */	mtlr r0
-/* 801C1A1C 001BE5FC  4E 80 00 20 */	blr 
-}
+/* 801C1A1C 001BE5FC  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 char get_jobj[] = "%s:%d: couldn t get jobj\n";
@@ -1252,7 +1327,8 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     temp_r3_4 = HSD_JObjLoadJoint(&sp18);
     if (temp_r3_4 == NULL) {
         OSReport(get_jobj, __FILE__, 0x4C4);
-        while (TRUE) {}
+        while (TRUE) {
+        }
     }
     HSD_JObjAddNext(temp_r29, temp_r3_4);
     if (temp_r3_4 == NULL) {
@@ -1360,7 +1436,7 @@ extern u8 lbl_804D7848;
 extern void func_80030740();
 extern void HSD_FogLoadDesc();
 static asm void func_801C1E94(void)
-{
+{ // clang-format off
     nofralloc
 /* 801C1E94 001BEA74  7C 08 02 A6 */	mflr r0
 /* 801C1E98 001BEA78  3C 60 80 4A */	lis r3, stage_info@ha
@@ -1459,8 +1535,8 @@ lbl_801C1FE0:
 /* 801C1FEC 001BEBCC  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 801C1FF0 001BEBD0  38 21 00 20 */	addi r1, r1, 0x20
 /* 801C1FF4 001BEBD4  7C 08 03 A6 */	mtlr r0
-/* 801C1FF8 001BEBD8  4E 80 00 20 */	blr 
-}
+/* 801C1FF8 001BEBD8  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 void func_801C1FFC(void)
@@ -1499,7 +1575,7 @@ f32 func_801C20D0(void)
 char lightset[9] = "lightset";
 char plightset[10] = "*lightset";
 static asm void* func_801C20E0()
-{
+{ // clang-format off
     nofralloc
 /* 801C20E0 001BECC0  7C 08 02 A6 */	mflr r0
 /* 801C20E4 001BECC4  90 01 00 04 */	stw r0, 4(r1)
@@ -1694,8 +1770,8 @@ lbl_801C2360:
 /* 801C2364 001BEF44  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 801C2368 001BEF48  38 21 00 28 */	addi r1, r1, 0x28
 /* 801C236C 001BEF4C  7C 08 03 A6 */	mtlr r0
-/* 801C2370 001BEF50  4E 80 00 20 */	blr 
-}
+/* 801C2370 001BEF50  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 void func_801C2374(HSD_LObj* lobj)
@@ -1746,7 +1822,8 @@ extern BOOL func_803048C0(s32);
 
 static const int BGM_Undefined = -1;
 
-static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2) {
+static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
+{
     s32 temp_r25;
     UnkBgmStruct* phi_r30;
     UnkBgmStruct* phi_r30_0;
@@ -1884,7 +1961,7 @@ char str1[] = "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n
 char str2[] = "             check StageParam.csv or StageItem.csv, stdata.c\n";
 char str3[] = " stageid=%d\n";
 static asm void func_801C28CC(void*, s32)
-{
+{ // clang-format off
     nofralloc
 /* 801C28CC 001BF4AC  7C 08 02 A6 */	mflr r0
 /* 801C28D0 001BF4B0  3C A0 80 4A */	lis r5, stage_info@ha
@@ -2027,8 +2104,8 @@ lbl_801C2AC4:
 /* 801C2AC8 001BF6A8  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 801C2ACC 001BF6AC  38 21 00 30 */	addi r1, r1, 0x30
 /* 801C2AD0 001BF6B0  7C 08 03 A6 */	mtlr r0
-/* 801C2AD4 001BF6B4  4E 80 00 20 */	blr 
-}
+/* 801C2AD4 001BF6B4  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 u8* func_801C2AD8(void)
@@ -2047,7 +2124,8 @@ f32 func_801C2AE8(s32 arg0)
         phi_r5 += 1;
     }
     OSReport("%s:%d: not found stage param in DAT\n", "ground.c", 0x927);
-    while (1) {}
+    while (1) {
+    }
 }
 
 HSD_GObj* func_801C2BA4(s32 i)
@@ -2192,7 +2270,7 @@ BOOL func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 static s16 lbl_804D6954;
 extern void func_8004D17C();
 asm void func_801C2FE0()
-{
+{ // clang-format off
     nofralloc
 /* 801C2FE0 001BFBC0  7C 08 02 A6 */	mflr r0
 /* 801C2FE4 001BFBC4  90 01 00 04 */	stw r0, 4(r1)
@@ -2284,8 +2362,8 @@ lbl_801C3114:
 /* 801C3118 001BFCF8  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 801C311C 001BFCFC  38 21 00 30 */	addi r1, r1, 0x30
 /* 801C3120 001BFD00  7C 08 03 A6 */	mtlr r0
-/* 801C3124 001BFD04  4E 80 00 20 */	blr 
-}
+/* 801C3124 001BFD04  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 BOOL func_801C3128(s32 arg0, void (*arg1)(s16))
@@ -2600,7 +2678,7 @@ u32 unknown[] = {
 };
 char unkmsg[] = "%s:%d:Error (root=%08x joint=%08x)\n";
 static asm void func_801C34AC(s32, HSD_JObj*, HSD_Joint*)
-{
+{ // clang-format off
     nofralloc
 /* 801C34AC 001C008C  7C 08 02 A6 */	mflr r0
 /* 801C34B0 001C0090  90 01 00 04 */	stw r0, 4(r1)
@@ -2784,12 +2862,12 @@ lbl_801C36E0:
 /* 801C36E4 001C02C4  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 801C36E8 001C02C8  38 21 00 30 */	addi r1, r1, 0x30
 /* 801C36EC 001C02CC  7C 08 03 A6 */	mtlr r0
-/* 801C36F0 001C02D0  4E 80 00 20 */	blr 
-}
+/* 801C36F0 001C02D0  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 asm void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
-{
+{ // clang-format off
     nofralloc
 /* 801C36F4 001C02D4  7C 08 02 A6 */	mflr r0
 /* 801C36F8 001C02D8  3C C0 80 3E */	lis r6, lbl_803DFEA8@ha
@@ -2906,8 +2984,8 @@ lbl_801C3860:
 /* 801C3870 001C0450  83 81 00 28 */	lwz r28, 0x28(r1)
 /* 801C3874 001C0454  38 21 00 38 */	addi r1, r1, 0x38
 /* 801C3878 001C0458  7C 08 03 A6 */	mtlr r0
-/* 801C387C 001C045C  4E 80 00 20 */	blr 
-}
+/* 801C387C 001C045C  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 void func_801C3880(f32 val)
@@ -3258,13 +3336,13 @@ f32 func_801C3F20(HSD_JObj* arg0)
 }
 
 asm struct _HSD_JObj* func_801C3FA4(HSD_GObj*, s32 depth)
-{
+{ // clang-format off
     nofralloc
 /* 801C3FA4 001C0B84  80 63 00 28 */	lwz r3, 0x28(r3)
 /* 801C3FA8 001C0B88  28 03 00 00 */	cmplwi r3, 0
 /* 801C3FAC 001C0B8C  40 82 00 0C */	bne lbl_801C3FB8
 /* 801C3FB0 001C0B90  38 60 00 00 */	li r3, 0
-/* 801C3FB4 001C0B94  4E 80 00 20 */	blr 
+/* 801C3FB4 001C0B94  4E 80 00 20 */	blr
 lbl_801C3FB8:
 /* 801C3FB8 001C0B98  40 82 00 0C */	bne lbl_801C3FC4
 /* 801C3FBC 001C0B9C  38 60 00 00 */	li r3, 0
@@ -3275,7 +3353,7 @@ lbl_801C3FC8:
 /* 801C3FC8 001C0BA8  28 03 00 00 */	cmplwi r3, 0
 /* 801C3FCC 001C0BAC  40 82 01 20 */	bne lbl_801C40EC
 /* 801C3FD0 001C0BB0  38 60 00 00 */	li r3, 0
-/* 801C3FD4 001C0BB4  4E 80 00 20 */	blr 
+/* 801C3FD4 001C0BB4  4E 80 00 20 */	blr
 /* 801C3FD8 001C0BB8  48 00 01 14 */	b lbl_801C40EC
 lbl_801C3FDC:
 /* 801C3FDC 001C0BBC  80 03 00 14 */	lwz r0, 0x14(r3)
@@ -3368,11 +3446,11 @@ lbl_801C40E4:
 /* 801C40E8 001C0CC8  4B FF FF 6C */	b lbl_801C4054
 lbl_801C40EC:
 /* 801C40EC 001C0CCC  28 03 00 00 */	cmplwi r3, 0
-/* 801C40F0 001C0CD0  4D 82 00 20 */	beqlr 
+/* 801C40F0 001C0CD0  4D 82 00 20 */	beqlr
 /* 801C40F4 001C0CD4  2C 04 00 00 */	cmpwi r4, 0
 /* 801C40F8 001C0CD8  40 82 FE E4 */	bne lbl_801C3FDC
-/* 801C40FC 001C0CDC  4E 80 00 20 */	blr 
-}
+/* 801C40FC 001C0CDC  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
@@ -3527,7 +3605,6 @@ void func_801C445C(HSD_LObj* lobj)
         return;
     }
     for (cur = lobj; cur != NULL; cur = cur->next) {
-
         wobj = HSD_LObjGetPositionWObj(lobj);
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &sp38);
@@ -3580,7 +3657,7 @@ static void lbl_801C4640(HSD_GObj* gobj)
 extern u8 lbl_804D784A;
 extern void func_80011AC4();
 static asm void func_801C466C(void)
-{
+{ // clang-format off
     nofralloc
 /* 801C466C 001C124C  7C 08 02 A6 */	mflr r0
 /* 801C4670 001C1250  3C 60 80 3E */	lis r3, lbl_803DFEA8@ha
@@ -3805,8 +3882,8 @@ lbl_801C4958:
 /* 801C497C 001C155C  CB E1 00 38 */	lfd f31, 0x38(r1)
 /* 801C4980 001C1560  38 21 00 40 */	addi r1, r1, 0x40
 /* 801C4984 001C1564  7C 08 03 A6 */	mtlr r0
-/* 801C4988 001C1568  4E 80 00 20 */	blr 
-}
+/* 801C4988 001C1568  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 HSD_GObj* func_801C498C(void)
@@ -3886,7 +3963,6 @@ void func_801C4A08(HSD_GObj* gobj)
     }
     func_80390228(gobj);
 }
-
 
 void func_801C4B50(s32 arg0, s32 arg1, Vec3* arg2, f32 arg8)
 {
@@ -4004,7 +4080,7 @@ extern char lbl_804D452C[8];
 extern void func_80368784();
 extern void func_8036885C();
 asm void func_801C4FAC()
-{
+{ // clang-format off
     nofralloc
 /* 801C4FAC 001C1B8C  7C 08 02 A6 */	mflr r0
 /* 801C4FB0 001C1B90  3C 80 80 4A */	lis r4, stage_info@ha
@@ -4292,8 +4368,8 @@ lbl_801C53CC:
 /* 801C53DC 001C1FBC  83 C1 00 80 */	lwz r30, 0x80(r1)
 /* 801C53E0 001C1FC0  38 21 00 98 */	addi r1, r1, 0x98
 /* 801C53E4 001C1FC4  7C 08 03 A6 */	mtlr r0
-/* 801C53E8 001C1FC8  4E 80 00 20 */	blr 
-}
+/* 801C53E8 001C1FC8  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 void func_801C53EC(u32 arg0)
@@ -4458,7 +4534,7 @@ extern void func_8031C2EC();
 extern void func_8016B498();
 extern void func_8031C2CC();
 static asm void func_801C5878(void)
-{
+{ // clang-format off
     nofralloc
 /* 801C5878 001C2458  7C 08 02 A6 */	mflr r0
 /* 801C587C 001C245C  90 01 00 04 */	stw r0, 4(r1)
@@ -4487,8 +4563,8 @@ lbl_801C58C8:
 /* 801C58D0 001C24B0  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 801C58D4 001C24B4  38 21 00 18 */	addi r1, r1, 0x18
 /* 801C58D8 001C24B8  7C 08 03 A6 */	mtlr r0
-/* 801C58DC 001C24BC  4E 80 00 20 */	blr 
-}
+/* 801C58DC 001C24BC  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 s32 func_801C58E0(s32 arg0, s32 arg1)

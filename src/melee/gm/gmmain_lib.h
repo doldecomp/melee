@@ -4,9 +4,9 @@
 #include <global.h>
 
 struct gmm_x1CB0 {
-                      u8 padding_x0[0x16 - 0x0];
+    u8 padding_x0[0x16 - 0x0];
     /* 0x1CC6 0x16 */ u8 saved_language;
-                      u8 padding_x16[0x20 - 0x16 - 1];
+    u8 padding_x16[0x20 - 0x16 - 1];
 };
 
 typedef union _UnkFlagStruct {
@@ -76,7 +76,7 @@ struct gmm_x2FF8 {
 
 struct gmm_x1868 {
     /* 0x1868 */ s32 x1868;
-                 u8 padding_x1868[0x1A18 - 0x1868 - 4];
+    u8 padding_x1868[0x1A18 - 0x1868 - 4];
     /* 0x1A18 */ s32 x1A18;
     /* 0x1A1C */ s32 x1A1C;
     /* 0x1A20 */ s32 x1A20;
@@ -99,35 +99,35 @@ struct gmm_x1868 {
     /* 0x1A64 */ s32 x1A64;
     /* 0x1A68 */ s64 x1A68;
     /* 0x1A70 */ s32 x1A70[4];
-                 u8 padding_x1A70[0x1B3C - 0x1A70 - 16];
+    u8 padding_x1A70[0x1B3C - 0x1A70 - 16];
     /* 0x1B3C */ u8 x1B3C;
     /* 0x1B40 */ u32 x1B40[3];
     /* 0x1B4C */ u32 x1B4C[3];
     /* 0x1B58 */ u32 x1B58[3];
-                 u8 padding_x1B58[0x1B80 - 0x1B58 - 3*4];
+    u8 padding_x1B58[0x1B80 - 0x1B58 - 3 * 4];
     /* 0x1B80 */ u32 x1B80[4];
-                 u8 padding_x1B80[0x1C88 - 0x1B80 - 4*4];
+    u8 padding_x1B80[0x1C88 - 0x1B80 - 4 * 4];
     /* 0x1C88 */ u32 x1C88[3];
-                 u8 padding_x1C88[0x1CB0 - 0x1C88 - 3*4];
+    u8 padding_x1C88[0x1CB0 - 0x1C88 - 3 * 4];
     /* 0x1CB0 */ struct gmm_x1CB0 x1CB0;
     /* 0x1CD0 */ s16 x1CD0;
     /* 0x1CD2 */ s16 x1CD2;
     /* 0x1CD4 */ s32 x1CD4;
-                 u8 padding_x1CD4[0x1F2C - 0x1CD4 - 4];
+    u8 padding_x1CD4[0x1F2C - 0x1CD4 - 4];
     /* 0x1F2C */ struct gmm_x1F2C x1F2C[25];
     /* 0x2FF8 */ struct gmm_x2FF8 x2FF8[2];
-                //  u8 padding_x2FF8[0x7000 - 0x2FF8 - 0x1A4*19*2];
+    //  u8 padding_x2FF8[0x7000 - 0x2FF8 - 0x1A4*19*2];
 };
 
 extern struct gmm_x0 {
     /* 0x0000 */ u8 language;
     /* 0x0001 */ u8 x1;
-                 u8 padding_x1[0x39 - 0x1 - 1];
+    u8 padding_x1[0x39 - 0x1 - 1];
     /* 0x0039 */ u8 x39[11];
     /* 0x0044 */ s32 x44;
-                 u8 padding_x44[0x6C - 0x44 - 4];
+    u8 padding_x44[0x6C - 0x44 - 4];
     /* 0x006C */ s32 x6C[4];
-                 u8 padding_x6C[0x51C - 0x6C - 4*4];
+    u8 padding_x6C[0x51C - 0x6C - 4 * 4];
     /* 0x051C */ s32 x51C;
     /* 0x0520 */ s16 x520;
     /* 0x0522 */ s16 x522;
@@ -135,16 +135,16 @@ extern struct gmm_x0 {
     /* 0x0526 */ s16 x526;
     /* 0x0528 */ s32 x528;
     /* 0x052C */ s32 x52C;
-                 u8 padding_x52C[0x57C - 0x52C - 4];
+    u8 padding_x52C[0x57C - 0x52C - 4];
     /* 0x057C */ s32 x57C;
-                 u8 padding_x57C[0x586 - 0x57C - 4];
+    u8 padding_x57C[0x586 - 0x57C - 4];
     /* 0x0586 */ s16 x586;
     /* 0x0588 */ s8 x588[4];
-                 u8 padding_x588[0x1850 - 0x588 - 4];
+    u8 padding_x588[0x1850 - 0x588 - 4];
     /* 0x1850 */ s32 x1850;
-                 u8 padding_x1850[0x1868 - 0x1850 - 4];
+    u8 padding_x1850[0x1868 - 0x1850 - 4];
     struct gmm_x1868 thing;
-} *lbl_804D3EE0;
+}* lbl_804D3EE0;
 
 struct gmm_retval_ED98 {
     u8 padding[0xC];
@@ -161,7 +161,7 @@ struct gmm_retval_EDBC {
     s32 x8;
     u8 padding[0x4C - 0x8 - 4];
     s32 x4C[4];
-    u8 padding_x4C[0xB0 - 0x4C - 4*4];
+    u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
     s32 xB0[4];
 };
 
@@ -170,9 +170,9 @@ struct gmm_retval_EDB0 {
     s32 x4;
 };
 
-struct gmm_retval_EDBC *func_8015EDBC(void);
-struct gmm_x1CB0 *func_8015CC58(void);
-struct gmm_retval_ED98 *func_8015ED98(void);
-struct gmm_retval_EDB0 *func_8015EDB0(void);
+struct gmm_retval_EDBC* func_8015EDBC(void);
+struct gmm_x1CB0* func_8015CC58(void);
+struct gmm_retval_ED98* func_8015ED98(void);
+struct gmm_retval_EDB0* func_8015EDB0(void);
 
 #endif

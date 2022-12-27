@@ -25,30 +25,31 @@ void ftPichu_OnDeath(HSD_GObj* gobj)
     temp_r0 = fp->x619_costume_id;
 
     switch (temp_r0) {
-        case 0:
-            func_80074A4C(gobj, 1, -1);
-            func_80074A4C(gobj, 2, -1);
-            func_80074A4C(gobj, 3, -1);
-            break;
-        case 1:
-            func_80074A4C(gobj, 1, 0);
-            func_80074A4C(gobj, 2, -1);
-            func_80074A4C(gobj, 3, -1);
-            break;
-        case 2:
-            func_80074A4C(gobj, 1, -1);
-            func_80074A4C(gobj, 2, 0);
-            func_80074A4C(gobj, 3, -1);
-            break;
-        case 3:
-            func_80074A4C(gobj, 1, -1);
-            func_80074A4C(gobj, 2, -1);
-            func_80074A4C(gobj, 3, 0);
-            break;
+    case 0:
+        func_80074A4C(gobj, 1, -1);
+        func_80074A4C(gobj, 2, -1);
+        func_80074A4C(gobj, 3, -1);
+        break;
+    case 1:
+        func_80074A4C(gobj, 1, 0);
+        func_80074A4C(gobj, 2, -1);
+        func_80074A4C(gobj, 3, -1);
+        break;
+    case 2:
+        func_80074A4C(gobj, 1, -1);
+        func_80074A4C(gobj, 2, 0);
+        func_80074A4C(gobj, 3, -1);
+        break;
+    case 3:
+        func_80074A4C(gobj, 1, -1);
+        func_80074A4C(gobj, 2, -1);
+        func_80074A4C(gobj, 3, 0);
+        break;
     }
 }
 
-void ftPichu_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+void ftPichu_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
 }
 
@@ -62,7 +63,8 @@ void ftPichu_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 0);
 }
 
-void ftPichu_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1) {
+void ftPichu_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1)
+{
     Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
 }
 

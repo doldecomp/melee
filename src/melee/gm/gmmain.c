@@ -61,32 +61,32 @@ static void func_8015FDA4(void)
         if (lbl_804D6B30 & 0x400) {
             int level = g_debugLevel;
             switch (level) {
-                case DbLKind_NoDebugRom:
-                    level = DbLKind_DebugRom;
-                    break;
-                case DbLKind_DebugDevelop:
-                    level = DbLKind_Develop;
-                    break;
-                case DbLKind_DebugRom:
-                    level = DbLKind_NoDebugRom;
-                    break;
-                case DbLKind_Develop:
-                    level = DbLKind_DebugDevelop;
-                    break;
-                default:
-                    level = DbLKind_DebugDevelop;
-                    break;
+            case DbLKind_NoDebugRom:
+                level = DbLKind_DebugRom;
+                break;
+            case DbLKind_DebugDevelop:
+                level = DbLKind_Develop;
+                break;
+            case DbLKind_DebugRom:
+                level = DbLKind_NoDebugRom;
+                break;
+            case DbLKind_Develop:
+                level = DbLKind_DebugDevelop;
+                break;
+            default:
+                level = DbLKind_DebugDevelop;
+                break;
             }
             g_debugLevel = level;
         } else if (lbl_804D6B30 & 0x800) {
             int level = g_debugLevel;
             switch (level) {
-                case DbLKind_NoDebugRom:
-                    level = DbLKind_DebugRom;
-                    break;
-                case DbLKind_DebugDevelop:
-                    level = DbLKind_Develop;
-                    break;
+            case DbLKind_NoDebugRom:
+                level = DbLKind_DebugRom;
+                break;
+            case DbLKind_DebugDevelop:
+                level = DbLKind_Develop;
+                break;
             }
             g_debugLevel = level;
             lbl_804D6B20 = FALSE;
@@ -101,10 +101,13 @@ static void func_8015FDA4(void)
 
 inline void init_spr_unk()
 {
-    #define MTSPR(spr, val) \
-        asm { li r3, val } \
-        asm { oris r3, r3, val } \
-        asm { mtspr spr, r3 } \
+#define MTSPR(spr, val)  \
+    asm { li r3, val }          \
+    asm                  \
+    {                    \
+        oris r3, r3, val \
+    }                    \
+    asm { mtspr spr, r3 }
 
     MTSPR(0x392, 4);
     MTSPR(0x393, 5);
@@ -181,9 +184,9 @@ void main(void)
         struct datetime dt;
         func_801692E8(func_8000AFBC(), &dt);
         OSReport("# GC Calendar Year %d Month %d Day %d\n",
-            dt.year, dt.month, dt.day);
+                 dt.year, dt.month, dt.day);
         OSReport("#             Hour %d Min %d Sec %d \n",
-            dt.hour, dt.minute, dt.second);
+                 dt.hour, dt.minute, dt.second);
     }
     OSReport("#\n\n");
     lbl_804D6594 = FALSE;

@@ -14,4 +14,7 @@
   FixNamespaceComments: false,
   SpacesInCStyleCastParentheses: false,
   SpaceAfterCStyleCast: true,
-  Cpp11BracedListStyle: false }
+  Cpp11BracedListStyle: false,
+  KeepEmptyLinesAtTheStartOfBlocks: false,
+  SortIncludes: Never,
+  WhitespaceSensitiveMacros: ['assert_line'] }

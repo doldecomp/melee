@@ -321,8 +321,7 @@ void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
     if (pobj == NULL)
         return;
 
-    if ((pobj->flags & 0x3000) == 0x1000
-        && pobj->u.x14_unk != NULL && pobj->u.x14_unk->aobj != NULL) {
+    if ((pobj->flags & 0x3000) == 0x1000 && pobj->u.x14_unk != NULL && pobj->u.x14_unk->aobj != NULL) {
         callbackForeachFunc(pobj->u.x14_unk->aobj, pobj, POBJ_TYPE, func, arg_type, arg);
     }
 }
@@ -362,7 +361,7 @@ void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
     HSD_JObj* child;
     HSD_JObj* new_var;
 
-    (jobj != NULL) ? (void)0 : __assert("aobj.c", 0x2CB, "obj");
+    (jobj != NULL) ? (void) 0 : __assert("aobj.c", 0x2CB, "obj");
 
     if (mask & JOBJ_MASK && jobj->aobj != NULL) {
         callbackForeachFunc(jobj->aobj, jobj, JOBJ_TYPE, func, arg_type, arg);

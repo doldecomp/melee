@@ -29,8 +29,7 @@ void ftNess_AttackS4_Action(HSD_GObj* fighter_gobj) // Ness's F-Smash Action Sta
 
     fp->sa.ness.x2248_baseballBatGObj = baseballBatGObj;
 
-    if (baseballBatGObj != NULL)
-    {
+    if (baseballBatGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftNess_OnDamage;
     }
@@ -40,7 +39,6 @@ void ftNess_AttackS4_Action(HSD_GObj* fighter_gobj) // Ness's F-Smash Action Sta
 // https://decomp.me/scratch/E8Nsh //
 BOOL ftNess_CheckNessBatRemove(HSD_GObj* fighter_gobj) // Check if Ness is in F-Smash + has Baseball Bat item //
 {
-
     Fighter* fp = fighter_gobj->user_data;
 
     if (fp->x10_action_state_index != AS_NESS_ATTACKS4)
@@ -64,15 +62,12 @@ extern void func_802AD6B8(HSD_GObj*);
 // https://decomp.me/scratch/mpl3X //
 void ftNess_ItemNessBatRemove(HSD_GObj* fighter_gobj) // Remove Baseball Bat //
 {
-
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->sa.ness.x2248_baseballBatGObj != NULL)
-    {
+    if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
         func_802AD6B8(fp->sa.ness.x2248_baseballBatGObj);
         fp->sa.ness.x2248_baseballBatGObj = NULL;
     }
-
 };
 
 // 0x80114D34
@@ -81,13 +76,12 @@ void ftNess_ItemNessBatSetNULL(HSD_GObj* fighter_gobj) // Clear Baseball Bat GOb
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->sa.ness.x2248_baseballBatGObj != NULL)
-    {
+    if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
         fp->sa.ness.x2248_baseballBatGObj = NULL;
     }
 };
 
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void(*cb_OnReflect)(HSD_GObj*)); // Create Reflect Bubble //
+extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void (*cb_OnReflect)(HSD_GObj*)); // Create Reflect Bubble //
 
 // 0x80114D50
 // https://decomp.me/scratch/M8dFk //
@@ -97,8 +91,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation ca
     Fighter* fighter_data2;
     ftNessAttributes* ness_attr;
 
-    if (fighter_data1->x2218_flag.bits.b3 == 0)
-    {
+    if (fighter_data1->x2218_flag.bits.b3 == 0) {
         if (fighter_data1->x2200_ftcmd_var0 != FALSE) // Check if reflect bubble flag is enabled in fp script //
         {
             ness_attr = fighter_data1->x2D4_specialAttributes;
@@ -106,17 +99,14 @@ void ftNess_AttackS4_Anim(HSD_GObj* fighter_gobj) // Ness's F-Smash Animation ca
         }
     }
 
-    else if (fighter_data1->x2200_ftcmd_var0 == FALSE)
-    {
+    else if (fighter_data1->x2200_ftcmd_var0 == FALSE) {
         fighter_data1->x2218_flag.bits.b3 = 0; // Toggle reflect bubble OFF//
     }
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) // Check if animation has frames remaining //
     {
-
         fighter_data2 = getFighter(fighter_gobj);
-        if (fighter_data2->sa.ness.x2248_baseballBatGObj != NULL)
-        {
+        if (fighter_data2->sa.ness.x2248_baseballBatGObj != NULL) {
             func_802AD6B8(fighter_data2->sa.ness.x2248_baseballBatGObj); // Despawn the Baseball Bat if animation is over //
             fighter_data2->sa.ness.x2248_baseballBatGObj = NULL;
         }
@@ -132,10 +122,8 @@ void ftNess_AttackS4_IASA(HSD_GObj* fighter_gobj) // Ness's F-Smash IASA Callbac
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
 
-    if (fp->x2218_flag.bits.b0 != 0)
-    {
-        if (fp->sa.ness.x2248_baseballBatGObj != NULL)
-        {
+    if (fp->x2218_flag.bits.b0 != 0) {
+        if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
             func_802AD6B8(fp->sa.ness.x2248_baseballBatGObj);
             fp->sa.ness.x2248_baseballBatGObj = NULL;
         }

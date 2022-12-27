@@ -135,15 +135,13 @@ void UnsetRun(OSThread* thread)
 
     if (next == NULL) {
         queue->tail = prev;
-    }
-    else {
+    } else {
         next->prev = prev;
     }
 
     if (prev == NULL) {
         queue->head = next;
-    }
-    else {
+    } else {
         prev->next = next;
     }
 

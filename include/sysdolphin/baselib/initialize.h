@@ -30,7 +30,7 @@ typedef enum _HSD_InitParam {
 } HSD_InitParam;
 
 void HSD_InitComponent(void);
-void HSD_GXSetFifoObj(GXFifoObj* fifo) ;
+void HSD_GXSetFifoObj(GXFifoObj* fifo);
 static void HSD_DVDInit(void);
 void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm);
 GXFifoObj* HSD_AllocateFifo(u32 size);

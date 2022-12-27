@@ -103,7 +103,7 @@ lbl_8034124C:
 /* 803412AC 0033DE8C  EC 00 00 72 */	fmuls f0, f0, f1
 /* 803412B0 0033DE90  EC 02 00 2A */	fadds f0, f2, f0
 /* 803412B4 0033DE94  D0 08 00 00 */	stfs f0, 0(r8)
-/* 803412B8 0033DE98  4E 80 00 20 */	blr 
+/* 803412B8 0033DE98  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -145,7 +145,7 @@ void GXGetProjectionv(f32* proj)
 }
 
 asm void WriteMTXPS4x3(register float* src, register float* dst)
-{
+{ // clang-format off
     psq_l f0, 0(src), 0, qr0
     psq_l f1, 8(src), 0, qr0
     psq_l f2, 0x10(src), 0, qr0
@@ -158,11 +158,11 @@ asm void WriteMTXPS4x3(register float* src, register float* dst)
     psq_st f3, 0(dst), 0, qr0
     psq_st f4, 0(dst), 0, qr0
     psq_st f5, 0(dst), 0, qr0
-}
+} // clang-format on
 
 // https://decomp.me/scratch/OH9kG // 0 (100%)
 asm void WriteMTXPS3x3from3x4(register float* src, register float* dst)
-{
+{ // clang-format off
     psq_l f0, 0(src), 0, qr0
     lfs f1, 8(src)
     psq_l f2, 16(src), 0, qr0
@@ -175,10 +175,10 @@ asm void WriteMTXPS3x3from3x4(register float* src, register float* dst)
     stfs f3, 0(dst)
     psq_st f4, 0(dst), 0, qr0
     stfs f5, 0(dst)
-}
+} // clang-format on
 
 asm void WriteMTXPS4x2(register float* src, register float* dst)
-{
+{ // clang-format off
     psq_l f0, 0(src), 0, qr0
     psq_l f1, 8(src), 0, qr0
     psq_l f2, 16(src), 0, qr0
@@ -187,7 +187,7 @@ asm void WriteMTXPS4x2(register float* src, register float* dst)
     psq_st f1, 0(dst), 0, qr0
     psq_st f2, 0(dst), 0, qr0
     psq_st f3, 0(dst), 0, qr0
-}
+} // clang-format on
 
 // NOTE: peephole off is needed for following functions to match
 // The previous matrix functions were probably inline asm in the original source,
@@ -255,10 +255,10 @@ void GXSetViewportJitter(f32 left, f32 top, f32 width, f32 height, f32 nearz, f3
     }
     w_half = width / 2;
     h_half = height / 2;
-    temp_f31 = width / 2; // f31
-    temp_f29 = -height / 2; // f29
+    temp_f31 = width / 2;                // f31
+    temp_f29 = -height / 2;              // f29
     temp_f27 = (left + w_half) + 342.0F; // f27
-    temp_f26 = (top + h_half) + 342.0F; // f26
+    temp_f26 = (top + h_half) + 342.0F;  // f26
     temp_f30 = farz * 16777215.0F;
     temp_f0 = nearz * 16777215.0F; // temp_f0
     temp_f28 = temp_f30 - temp_f0;

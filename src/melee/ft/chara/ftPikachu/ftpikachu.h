@@ -65,14 +65,13 @@ typedef struct _ftPikachuAttributes {
     f32 height_attributes[6];
 } ftPikachuAttributes;
 
-
-///pika1
+/// pika1
 void ftPikachu_OnLoadForPichu(Fighter* fp);
 void ftPikachu_OnLoad(HSD_GObj* fighter_gobj);
 void ftPikachu_OnDeath(HSD_GObj* fighter_gobj);
 void ftPikachu_OnItemPickup(HSD_GObj* fighter_gobj, BOOL arg1);
-void ftPikachu_OnItemInvisible(HSD_GObj *fighter_gobj);
-void ftPikachu_OnItemVisible(HSD_GObj *fighter_gobj);
+void ftPikachu_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftPikachu_OnItemVisible(HSD_GObj* fighter_gobj);
 void ftPikachu_OnItemDrop(HSD_GObj* fighter_gobj, BOOL arg1);
 void ftPikachu_8012467C(HSD_GObj* fighter_gobj);
 void ftPikachu_801246C0(HSD_GObj* fighter_gobj);
@@ -80,7 +79,7 @@ void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 void ftPikachu_OnKnockbackEnter(HSD_GObj* fighter_gobj);
 void ftPikachu_OnKnockbackExit(HSD_GObj* fighter_gobj);
 
-///pika2
+/// pika2
 void ftPikachu_SpecialN_StartAction(HSD_GObj* fighter_gobj);
 void ftPikachu_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
 void ftPikachu_80124908(HSD_GObj* fighter_gobj);
@@ -95,8 +94,7 @@ void ftPikachu_EfSpawn_80124C90(HSD_GObj* fighter_gobj);
 void ftPikachu_EfSpawn_80124D2C(HSD_GObj* fighter_gobj);
 void ftPikachu_80124DC8(HSD_GObj* fighter_gobj);
 
-
-//pika3
+// pika3
 void ftPikachu_SpecialS_StartAction(HSD_GObj* fighter_gobj);
 void ftPikachu_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
 void ftPikachu_ZeroVelocity_80124F24(HSD_GObj* fighter_gobj);
@@ -154,7 +152,7 @@ void ftPikachu_80125C80(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChange_80125CD0(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChange_80125D28(HSD_GObj* fighter_gobj);
 
-///pika4
+/// pika4
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighter_gobj);
 void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
 void ftPikachu_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
@@ -194,7 +192,7 @@ void ftPikachu_ActionChange_8012744C(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChangeUpdateVel_801274AC(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChangeUpdateVel_80127534(HSD_GObj* fighter_gobj);
 
-//pika5
+// pika5
 s32 ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj);
 void ftPikachu_80127608(HSD_GObj* fighter_gobj);
 void ftPikachu_SetState_8012764C(HSD_GObj* fighter_gobj);
@@ -235,4 +233,3 @@ void ftPikachu_PrepCallActionChange_8012828C(HSD_GObj* fighter_gobj);
 void ftPikachu_PrepCallActionChange_801282B4(HSD_GObj* fighter_gobj);
 void ftPikachu_PrepCallActionChange_801282DC(HSD_GObj* fighter_gobj);
 void ftPikachu_PrepCallActionChange_80128304(HSD_GObj* fighter_gobj);
-

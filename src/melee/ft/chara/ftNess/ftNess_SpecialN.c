@@ -7,16 +7,12 @@ BOOL ftNess_CheckSpecialNHold(HSD_GObj* fighter_gobj) // Ness PK Flash Charge AS
     Fighter* fp;
     s32 ASID;
 
-    if (fighter_gobj != NULL)
-    {
+    if (fighter_gobj != NULL) {
         fp = fighter_gobj->user_data;
-        if (fp != NULL)
-        {
-            if (fp->sa.ness.x2240_flashGObj != NULL)
-            {
+        if (fp != NULL) {
+            if (fp->sa.ness.x2240_flashGObj != NULL) {
                 ASID = fp->x10_action_state_index;
-                if (ASID == AS_NESS_SPECIALN_HOLD || ASID == AS_NESS_SPECIALAIRN_HOLD)
-                {
+                if (ASID == AS_NESS_SPECIALN_HOLD || ASID == AS_NESS_SPECIALAIRN_HOLD) {
                     return TRUE;
                 }
             }
@@ -31,13 +27,10 @@ void ftNess_SpecialNSetNULL(HSD_GObj* fighter_gobj) // Clear Ness's callbacks an
 {
     Fighter* fp;
 
-    if (fighter_gobj != NULL)
-    {
+    if (fighter_gobj != NULL) {
         fp = fighter_gobj->user_data;
-        if (fp != NULL)
-        {
-            if (fp->sa.ness.x2240_flashGObj != NULL)
-            {
+        if (fp != NULL) {
+            if (fp->sa.ness.x2240_flashGObj != NULL) {
                 fp->sa.ness.x2240_flashGObj = NULL;
             }
             fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -50,17 +43,14 @@ extern void func_802AAA50(HSD_GObj*);
 
 // 0x80116F38 //
 // https://decomp.me/scratch/HJkeV //
-void ftNess_ItemPKFlushSetNULL(HSD_GObj* fighter_gobj)  // Clear PK Flash's owner GObj pointer, Ness's pointer to PK Flash's item GObj, and reset callbacks //
+void ftNess_ItemPKFlushSetNULL(HSD_GObj* fighter_gobj) // Clear PK Flash's owner GObj pointer, Ness's pointer to PK Flash's item GObj, and reset callbacks //
 {
     Fighter* fp;
 
-    if (fighter_gobj != NULL)
-    {
+    if (fighter_gobj != NULL) {
         fp = fighter_gobj->user_data;
-        if (fp != NULL)
-        {
-            if (fp->sa.ness.x2240_flashGObj != NULL)
-            {
+        if (fp != NULL) {
+            if (fp->sa.ness.x2240_flashGObj != NULL) {
                 func_802AAA50(fp->sa.ness.x2240_flashGObj);
                 fp->sa.ness.x2240_flashGObj = NULL;
             }
@@ -70,7 +60,7 @@ void ftNess_ItemPKFlushSetNULL(HSD_GObj* fighter_gobj)  // Clear PK Flash's owne
     }
 }
 
-f32 return_void(void)   // Define float order for match //
+f32 return_void(void) // Define float order for match //
 {
     return 0.0f;
 }
@@ -87,7 +77,7 @@ f32 return_void3(void)
 
 // 0x80116F94 //
 // https://decomp.me/scratch/xOc8Y //
-void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK Flash Start Action State handler //
+void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Start Action State handler //
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -105,12 +95,12 @@ void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK 
     temp_fp = fighter_gobj->user_data;
     ness_attr = getFtSpecialAttrs(temp_fp);
 
-    temp_fp->nessVars[0].SpecialN.flashTimerLoop1 = (s32)ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
-    temp_fp->nessVars[0].SpecialN.flashTimerLoop2 = (s32)ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
-    temp_fp->nessVars[0].SpecialN.gravityDelay = (s32)ness_attr->x8_PKFLASH_GRAVITY_DELAY;
+    temp_fp->nessVars[0].SpecialN.flashTimerLoop1 = (s32) ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
+    temp_fp->nessVars[0].SpecialN.flashTimerLoop2 = (s32) ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
+    temp_fp->nessVars[0].SpecialN.gravityDelay = (s32) ness_attr->x8_PKFLASH_GRAVITY_DELAY;
 
     temp_fp->sa.ness.x2240_flashGObj = NULL;
-    temp_fp->nessVars[0].SpecialN.flashTimerMin = (s32)ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
+    temp_fp->nessVars[0].SpecialN.flashTimerMin = (s32) ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
     temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
     temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
     func_8006EBA4(fighter_gobj);
@@ -118,7 +108,7 @@ void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)  // Ness's grounded PK 
 
 // 0x80117034 //
 // https://decomp.me/scratch/ZjUdo
-void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK Flash Start Action State handler //
+void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Start Action State handler //
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -137,13 +127,13 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK
     temp_fp = fighter_gobj->user_data;
     ness_attr = getFtSpecialAttrs(temp_fp);
 
-    temp_fp->nessVars[0].SpecialN.flashTimerLoop1 = (s32)ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
-    temp_fp->nessVars[0].SpecialN.flashTimerLoop2 = (s32)ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
-    temp_fp->nessVars[0].SpecialN.gravityDelay = (s32)ness_attr->x8_PKFLASH_GRAVITY_DELAY;
+    temp_fp->nessVars[0].SpecialN.flashTimerLoop1 = (s32) ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
+    temp_fp->nessVars[0].SpecialN.flashTimerLoop2 = (s32) ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
+    temp_fp->nessVars[0].SpecialN.gravityDelay = (s32) ness_attr->x8_PKFLASH_GRAVITY_DELAY;
 
     temp_fp->sa.ness.x2240_flashGObj = NULL;
 
-    temp_fp->nessVars[0].SpecialN.flashTimerMin = (s32)ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
+    temp_fp->nessVars[0].SpecialN.flashTimerMin = (s32) ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
 
     temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
     temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
@@ -154,7 +144,7 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK
 extern HSD_GObj* func_802AA8C0(HSD_GObj*, Vec3*, s32, f32);
 
 // 0x801170DC //
-// https://decomp.me/scratch/JhiVu // 
+// https://decomp.me/scratch/JhiVu //
 void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Start Animation callback //
 {
     Vec3 sp28;
@@ -168,24 +158,21 @@ void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Fla
     Fighter* fighter_data2;
 
     fp = fighter_gobj->user_data;
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
         fighter_data2 = getFighterPlus(fighter_gobj);
-        if (fighter_data2->sa.ness.x2240_flashGObj == NULL) 
-        {
+        if (fighter_data2->sa.ness.x2240_flashGObj == NULL) {
             func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL, &sp28);
             sp28.z = 0.0f;
             sp28.y += 3.0f * fighter_data2->x34_scale.y;
             flash_GObj = func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush, fighter_data2->x2C_facing_direction);
             fighter_data2->sa.ness.x2240_flashGObj = flash_GObj;
-            if (flash_GObj != NULL) 
-            {
+            if (flash_GObj != NULL) {
                 fighter_data2->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
                 fighter_data2->cb.x21DC_callback_OnTakeDamage = ftNess_OnDamage;
             }
         }
-        fp->x1968_jumpsUsed = (u8)fp->x110_attr.x168_MaxJumps;
+        fp->x1968_jumpsUsed = (u8) fp->x110_attr.x168_MaxJumps;
     }
 }
 
@@ -194,43 +181,33 @@ extern s32 func_802AA7F0(HSD_GObj*);
 
 // 0x801171BC //
 // https://decomp.me/scratch/W8wUK //
-void ftNess_SpecialNHold_Anim(HSD_GObj* fighter_gobj)   // Ness's grounded PK Flash Charge Animation callback //
+void ftNess_SpecialNHold_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Charge Animation callback //
 {
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (fp->nessVars[0].SpecialN.flashTimerLoop1 != 0)
-    {
+    if (fp->nessVars[0].SpecialN.flashTimerLoop1 != 0) {
         fp->nessVars[0].SpecialN.flashTimerLoop1--;
     }
-    if (fp->sa.ness.x2240_flashGObj == NULL)
-    {
-        if (fp->nessVars[0].SpecialN.flashTimerLoop2 != 0)
-        {
+    if (fp->sa.ness.x2240_flashGObj == NULL) {
+        if (fp->nessVars[0].SpecialN.flashTimerLoop2 != 0) {
             fp->nessVars[0].SpecialN.flashTimerLoop2--;
         }
     }
-    if (fp->sa.ness.x2240_flashGObj == NULL)
-    {
-        if (((s32)fp->nessVars[0].SpecialN.flashTimerLoop1 <= 0) && ((s32)fp->nessVars[0].SpecialN.flashTimerLoop2 <= 0))
-        {
+    if (fp->sa.ness.x2240_flashGObj == NULL) {
+        if (((s32) fp->nessVars[0].SpecialN.flashTimerLoop1 <= 0) && ((s32) fp->nessVars[0].SpecialN.flashTimerLoop2 <= 0)) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_END, 0, NULL, 0.0f, 1.0f, 0.0f);
             return;
         }
-        if ((s32)fp->x10_action_state_index != AS_NESS_SPECIALN_HOLD_RELEASE)
-        {
+        if ((s32) fp->x10_action_state_index != AS_NESS_SPECIALN_HOLD_RELEASE) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_HOLD_RELEASE, 0, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
         }
-    }
-    else
-    {
-        if (func_802AA7E4(fp->sa.ness.x2240_flashGObj) != fighter_gobj)
-        {
+    } else {
+        if (func_802AA7E4(fp->sa.ness.x2240_flashGObj) != fighter_gobj) {
             fp->sa.ness.x2240_flashGObj = NULL;
             return;
         }
-        if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == TRUE) && ((s32)fp->x10_action_state_index != AS_NESS_SPECIALN_HOLD_RELEASE))
-        {
+        if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == TRUE) && ((s32) fp->x10_action_state_index != AS_NESS_SPECIALN_HOLD_RELEASE)) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_HOLD_RELEASE, 0, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
         }
     }
@@ -252,14 +229,13 @@ inline void SetPKFlashAttr(HSD_GObj* fighter_gobj) // Inline to set all variable
 
 // 0x801172F0 //
 // https://decomp.me/scratch/SxwKV //
-void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)   // Ness's grounded PK Flash Release Animation callback //
+void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Release Animation callback //
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
 
     SetPKFlashAttr(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
@@ -279,65 +255,52 @@ void ftNess_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
     Fighter* fighter_data2;
 
     fp = fighter_gobj->user_data;
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
         fighter_data2 = getFighterPlus(fighter_gobj);
-        if (fighter_data2->sa.ness.x2240_flashGObj == NULL)
-        {
+        if (fighter_data2->sa.ness.x2240_flashGObj == NULL) {
             func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL, &sp28);
             sp28.z = 0.0f;
             sp28.y += 3.0f * fighter_data2->x34_scale.y;
             flash_GObj = func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush, fighter_data2->x2C_facing_direction);
             fighter_data2->sa.ness.x2240_flashGObj = flash_GObj;
-            if (flash_GObj != NULL)
-            {
+            if (flash_GObj != NULL) {
                 fighter_data2->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
                 fighter_data2->cb.x21DC_callback_OnTakeDamage = ftNess_OnDamage;
             }
         }
-        fp->x1968_jumpsUsed = (u8)fp->x110_attr.x168_MaxJumps;
+        fp->x1968_jumpsUsed = (u8) fp->x110_attr.x168_MaxJumps;
     }
 }
 
 // 0x80117458 //
 // https://decomp.me/scratch/L7e33 //
-void ftNess_SpecialAirNHold_Anim(HSD_GObj* fighter_gobj)   // Ness's aerial PK Flash Charge Animation callback //
+void ftNess_SpecialAirNHold_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Charge Animation callback //
 {
     Fighter* fp = fighter_gobj->user_data;
-    
-    if (fp->nessVars[0].SpecialN.flashTimerLoop1 != 0)
-    {
+
+    if (fp->nessVars[0].SpecialN.flashTimerLoop1 != 0) {
         fp->nessVars[0].SpecialN.flashTimerLoop1--;
     }
-    if (fp->sa.ness.x2240_flashGObj == NULL)
-    {
-        if (fp->nessVars[0].SpecialN.flashTimerLoop2 != 0)
-        {
+    if (fp->sa.ness.x2240_flashGObj == NULL) {
+        if (fp->nessVars[0].SpecialN.flashTimerLoop2 != 0) {
             fp->nessVars[0].SpecialN.flashTimerLoop2--;
         }
     }
-    if (fp->sa.ness.x2240_flashGObj == NULL)
-    {
-        if (((s32)fp->nessVars[0].SpecialN.flashTimerLoop1 <= 0) && ((s32)fp->nessVars[0].SpecialN.flashTimerLoop2 <= 0))
-        {
+    if (fp->sa.ness.x2240_flashGObj == NULL) {
+        if (((s32) fp->nessVars[0].SpecialN.flashTimerLoop1 <= 0) && ((s32) fp->nessVars[0].SpecialN.flashTimerLoop2 <= 0)) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_END, 0, NULL, 0.0f, 1.0f, 0.0f);
             return;
         }
-        if ((s32)fp->x10_action_state_index != AS_NESS_SPECIALAIRN_HOLD_RELEASE)
-        {
+        if ((s32) fp->x10_action_state_index != AS_NESS_SPECIALAIRN_HOLD_RELEASE) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_HOLD_RELEASE, 0, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
         }
-    }
-    else
-    {
-        if (func_802AA7E4(fp->sa.ness.x2240_flashGObj) != fighter_gobj)
-        {
+    } else {
+        if (func_802AA7E4(fp->sa.ness.x2240_flashGObj) != fighter_gobj) {
             fp->sa.ness.x2240_flashGObj = NULL;
             return;
         }
-        if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == TRUE) && ((s32)fp->x10_action_state_index != AS_NESS_SPECIALAIRN_HOLD_RELEASE))
-        {
+        if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == TRUE) && ((s32) fp->x10_action_state_index != AS_NESS_SPECIALAIRN_HOLD_RELEASE)) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_HOLD_RELEASE, 0, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
         }
     }
@@ -354,11 +317,9 @@ void ftNess_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Flas
 
     SetPKFlashAttr(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         landingLag = ness_attr->x1C_PKFLASH_LANDING_LAG;
-        if (landingLag == 0.0f)
-        {
+        if (landingLag == 0.0f) {
             func_800CC730(fighter_gobj);
             return;
         }
@@ -383,22 +344,16 @@ void ftNess_SpecialNHold_IASA(HSD_GObj* fighter_gobj) // Ness's grounded PK Flas
 
     fp = fighter_gobj->user_data;
     fp->nessVars[0].SpecialN.flashTimerMin--;
-    if ((s32)fp->nessVars[0].SpecialN.flashTimerMin <= 0) 
-    {
+    if ((s32) fp->nessVars[0].SpecialN.flashTimerMin <= 0) {
         fp->nessVars[0].SpecialN.flashTimerMin = 0;
         phi_r0 = TRUE;
-    }
-    else 
-    {
+    } else {
         phi_r0 = FALSE;
     }
-    if ((phi_r0 == TRUE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE) && (fighter_gobj != NULL))
-    {
+    if ((phi_r0 == TRUE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE) && (fighter_gobj != NULL)) {
         fp = fighter_gobj->user_data;
-        if (fp != NULL) 
-        {
-            if (fp->sa.ness.x2240_flashGObj != NULL) 
-            {
+        if (fp != NULL) {
+            if (fp->sa.ness.x2240_flashGObj != NULL) {
                 fp->sa.ness.x2240_flashGObj = NULL;
             }
             fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -430,23 +385,17 @@ void ftNess_SpecialAirNHold_IASA(HSD_GObj* fighter_gobj) // Ness's aerial PK Fla
     s32 phi_r0;
 
     fp = fighter_gobj->user_data;
-    fp->nessVars[0].SpecialN.flashTimerMin = (s32)(fp->nessVars[0].SpecialN.flashTimerMin - 1);
-    if ((s32)fp->nessVars[0].SpecialN.flashTimerMin <= 0)
-    {
+    fp->nessVars[0].SpecialN.flashTimerMin = (s32) (fp->nessVars[0].SpecialN.flashTimerMin - 1);
+    if ((s32) fp->nessVars[0].SpecialN.flashTimerMin <= 0) {
         fp->nessVars[0].SpecialN.flashTimerMin = 0;
         phi_r0 = TRUE;
-    }
-    else
-    {
+    } else {
         phi_r0 = FALSE;
     }
-    if ((phi_r0 == TRUE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE) && (fighter_gobj != NULL))
-    {
+    if ((phi_r0 == TRUE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE) && (fighter_gobj != NULL)) {
         fp = fighter_gobj->user_data;
-        if (fp != NULL)
-        {
-            if (fp->sa.ness.x2240_flashGObj != NULL)
-            {
+        if (fp != NULL) {
+            if (fp->sa.ness.x2240_flashGObj != NULL) {
                 fp->sa.ness.x2240_flashGObj = NULL;
             }
             fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -465,9 +414,8 @@ void ftNess_SpecialAirNEnd_IASA(HSD_GObj* fighter_gobj) // Ness's aerial PK Flas
 inline void GravityDelay(HSD_GObj* fighter_gobj) // Inline to set remaining frames of gravity delay //
 {
     Fighter* fp = fighter_gobj->user_data;
-    
-    if (fp->nessVars[0].SpecialN.gravityDelay != 0)
-    {
+
+    if (fp->nessVars[0].SpecialN.gravityDelay != 0) {
         fp->nessVars[0].SpecialN.gravityDelay--;
     }
 }
@@ -504,11 +452,10 @@ void ftNess_SpecialAirNStart_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
     f32 fallAccel;
     f32 terminalVelocity;
 
-    if (fp->nessVars[0].SpecialN.gravityDelay != 0)
-    {
+    if (fp->nessVars[0].SpecialN.gravityDelay != 0) {
         fp->nessVars[0].SpecialN.gravityDelay--;
-    }
-    else func_8007D494(fp, ness_attr->x14_PKFLASH_FALL_ACCEL, fp->x110_attr.x170_TerminalVelocity);
+    } else
+        func_8007D494(fp, ness_attr->x14_PKFLASH_FALL_ACCEL, fp->x110_attr.x170_TerminalVelocity);
 
     airFriction = fp->x110_attr.x180_AerialFriction;
     func_8007CE94(fp, airFriction);
@@ -524,11 +471,10 @@ void ftNess_SpecialAirNHold_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Fla
     f32 fallAccel;
     f32 terminalVelocity;
 
-    if (fp->nessVars[0].SpecialN.gravityDelay != 0)
-    {
+    if (fp->nessVars[0].SpecialN.gravityDelay != 0) {
         fp->nessVars[0].SpecialN.gravityDelay--;
-    }
-    else func_8007D494(fp, ness_attr->x14_PKFLASH_FALL_ACCEL, fp->x110_attr.x170_TerminalVelocity);
+    } else
+        func_8007D494(fp, ness_attr->x14_PKFLASH_FALL_ACCEL, fp->x110_attr.x170_TerminalVelocity);
 
     airFriction = fp->x110_attr.x180_AerialFriction;
     func_8007CE94(fp, airFriction);
@@ -544,11 +490,10 @@ void ftNess_SpecialAirNEnd_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Flas
     f32 fallAccel;
     f32 terminalVelocity;
 
-    if (fp->nessVars[0].SpecialN.gravityDelay != 0)
-    {
+    if (fp->nessVars[0].SpecialN.gravityDelay != 0) {
         fp->nessVars[0].SpecialN.gravityDelay--;
-    }
-    else func_8007D494(fp, ness_attr->x14_PKFLASH_FALL_ACCEL, fp->x110_attr.x170_TerminalVelocity);
+    } else
+        func_8007D494(fp, ness_attr->x14_PKFLASH_FALL_ACCEL, fp->x110_attr.x170_TerminalVelocity);
 
     airFriction = fp->x110_attr.x180_AerialFriction;
     func_8007CE94(fp, airFriction);
@@ -560,8 +505,7 @@ void ftNess_SpecialNStart_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Fla
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80082708(fighter_gobj) == FALSE) 
-    {
+    if (func_80082708(fighter_gobj) == FALSE) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_START, FTNESS_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
@@ -573,8 +517,7 @@ void ftNess_SpecialNHold_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flas
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80082708(fighter_gobj) == FALSE)
-    {
+    if (func_80082708(fighter_gobj) == FALSE) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_HOLD, FTNESS_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
@@ -586,8 +529,7 @@ void ftNess_SpecialNEnd_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Flash
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80082708(fighter_gobj) == FALSE)
-    {
+    if (func_80082708(fighter_gobj) == FALSE) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_END, FTNESS_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
@@ -599,8 +541,7 @@ void ftNess_SpecialAirNStart_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Fl
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80081D0C(fighter_gobj) != FALSE)
-    {
+    if (func_80081D0C(fighter_gobj) != FALSE) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_START, FTNESS_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
@@ -612,8 +553,7 @@ void ftNess_SpecialAirNHold_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Fla
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80081D0C(fighter_gobj) != FALSE)
-    {
+    if (func_80081D0C(fighter_gobj) != FALSE) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_HOLD, FTNESS_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
@@ -625,8 +565,7 @@ void ftNess_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Flas
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80081D0C(fighter_gobj) != FALSE)
-    {
+    if (func_80081D0C(fighter_gobj) != FALSE) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_END, FTNESS_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }

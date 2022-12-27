@@ -11,7 +11,6 @@ extern struct {
 
 extern s8 lbl_803C26FC[];
 
-
 s32 func_800860C4(void)
 {
     s32 ret = 0;
@@ -369,7 +368,8 @@ void func_800868A4(void)
     }
 }
 
-BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1) {
+BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
+{
     Fighter* fp = gobj->user_data;
     if ((fp->x1974_heldItem != arg1) && (fp->x197C != arg1) && (fp->x1980 != arg1)) {
         return 1;
@@ -434,10 +434,10 @@ BOOL func_80086A18(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     BOOL result = FALSE;
     switch (fp->x10_action_state_index) {
-        case 0xB2:
-        case 0xB3:
-        case 0xB5:
-            result = TRUE;
+    case 0xB2:
+    case 0xB3:
+    case 0xB5:
+        result = TRUE;
     }
     return result;
 }
@@ -629,11 +629,11 @@ BOOL func_80086FA8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     switch (fp->x10_action_state_index) {
-        case 0x78:
-        case 0x79:
-        case 0x7A:
-        case 0x7B:
-            return TRUE;
+    case 0x78:
+    case 0x79:
+    case 0x7A:
+    case 0x7B:
+        return TRUE;
     }
     return FALSE;
 }

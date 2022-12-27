@@ -72,7 +72,7 @@ void func_801CA1C0(UnkStruct* arg)
         }
     }
     if (cur == NULL) {
-insert:
+    insert:
         arg->next = lbl_804D6964;
         lbl_804D6964 = arg;
     }
@@ -105,8 +105,8 @@ s32 func_801CA284(Vec3* v, s32 arg1)
         if (func_80054F68(arg1, cur->unk14)) {
             f32 dx = v->x - cur->unk8.x;
             f32 dy = v->y - cur->unk8.y;
-            f32 dx2 = dx*dx;
-            f32 dy2 = dy*dy;
+            f32 dx2 = dx * dx;
+            f32 dy2 = dy * dy;
             if (do_sqrtf(dx2 + dy2) < cur->unk18) {
                 return cur->unk4;
             }

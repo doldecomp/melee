@@ -9,7 +9,8 @@ void ftFalco_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 }
 
-void ftFalco_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+void ftFalco_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 

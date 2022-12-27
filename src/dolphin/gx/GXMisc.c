@@ -33,14 +33,14 @@ static inline void GXSetMisc_inline_1(u16 arg0)
 
 static inline void GXSetMisc_inline_2()
 {
-    GXContext *gx = __GXContexts.main;
+    GXContext* gx = __GXContexts.main;
     gx->x0.u16[0] = !gx->x4;
     set_x2(GX_TRUE);
 }
 
 static inline void GXSetMisc_inline_3()
 {
-    GXContext *gx = __GXContexts.main;
+    GXContext* gx = __GXContexts.main;
 
     if (gx->x4)
         gx->x4F0_flags |= 8;
@@ -48,8 +48,7 @@ static inline void GXSetMisc_inline_3()
 
 void GXSetMisc(s32 arg0, u32 arg1)
 {
-    switch (arg0)
-    {
+    switch (arg0) {
     case 0:
         break;
     case 1:
@@ -203,7 +202,7 @@ void GXPokeDither(s32 dither)
  */
 void GXPokeZMode(BOOL compare_enable, GXCompare func, BOOL update_enable)
 {
-    __peReg[PE_POKE_ZMODE_ID] = ((u8)compare_enable & ~0xE | (func << 1)) & ~0x10 | ((update_enable * 0x10) & 0xFF0);
+    __peReg[PE_POKE_ZMODE_ID] = ((u8) compare_enable & ~0xE | (func << 1)) & ~0x10 | ((update_enable * 0x10) & 0xFF0);
 }
 
 void GXTokenInterruptHandler(__OSInterrupt unused, OSContext* current_ctx)

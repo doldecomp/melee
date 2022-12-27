@@ -1,29 +1,27 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 80155C88 152868
-void func_80155C88(HSD_GObj* gobj) {
+void func_80155C88(HSD_GObj* gobj)
+{
     return;
 }
-
-
 
 // 80155C8C 15286C
-void func_80155C8C(HSD_GObj* gobj) {
+void func_80155C8C(HSD_GObj* gobj)
+{
     return;
 }
-
-
 
 // 80155C90 152870
-void func_80155C90(HSD_GObj* gobj) {
+void func_80155C90(HSD_GObj* gobj)
+{
     return;
 }
-
-
 
 // 80155C94 152874
 // https://decomp.me/scratch/8Kpd7
-void func_80155C94(HSD_GObj* gobj) {
+void func_80155C94(HSD_GObj* gobj)
+{
     Fighter* fp;
 
     fp = gobj->user_data;
@@ -33,4 +31,3 @@ void func_80155C94(HSD_GObj* gobj) {
     fp->x2220_flag.bits.b3 = 1;
     func_8006EBA4(gobj);
 }
-

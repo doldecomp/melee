@@ -20,10 +20,10 @@ extern OSBootInfo* BootInfo;
 
 u32 OSGetConsoleType(void)
 {
-	if (BootInfo == NULL || BootInfo->consoleType == 0) {
-		return 0x10000002; // default console type
-	}
-	return BootInfo->consoleType;
+    if (BootInfo == NULL || BootInfo->consoleType == 0) {
+        return 0x10000002; // default console type
+    }
+    return BootInfo->consoleType;
 }
 
 extern u32 OSGetResetCode(void);

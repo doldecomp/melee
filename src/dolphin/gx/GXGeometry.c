@@ -34,7 +34,7 @@ void __GXSendFlushPrim()
     u32 size;
     u32 i;
 
-    GXContext *ctx = __GXContexts.main;
+    GXContext* ctx = __GXContexts.main;
     size = ctx->x4 * ctx->x6;
 
     WGPIPE.u8 = GX_DRAW_TRIANGLE_STRIP;
@@ -75,8 +75,7 @@ void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable, GXBool point_ena
 
 void GXSetCullMode(GXCullMode mode)
 {
-    switch (mode)
-    {
+    switch (mode) {
     case GX_CULL_FRONT:
         mode = GX_CULL_BACK;
         break;

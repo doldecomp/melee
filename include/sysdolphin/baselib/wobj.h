@@ -33,7 +33,7 @@ typedef struct _HSD_WObjAnim {
 
 extern HSD_WObjInfo hsdWObj;
 
-#define HSD_WOBJ_INFO(i) ((HSD_WObjInfo*)(i))
+#define HSD_WOBJ_INFO(i) ((HSD_WObjInfo*) (i))
 #define HSD_WOBJ_METHOD(o) HSD_WOBJ_INFO(HSD_OBJECT_METHOD(o))
 
 void HSD_WObjRemoveAnim(HSD_WObj* wobj);

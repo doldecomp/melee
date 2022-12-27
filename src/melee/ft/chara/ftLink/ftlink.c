@@ -2,7 +2,8 @@
 
 // extern float lbl_804D92E0; // 0.0f
 
-s32 func_800EAD64(HSD_GObj* fighter_gobj) {
+s32 func_800EAD64(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = fighter_gobj->user_data;
     if (fp->sa.link.x2234) {
         return 1;
@@ -10,7 +11,8 @@ s32 func_800EAD64(HSD_GObj* fighter_gobj) {
     return 0;
 }
 
-void ftLink_OnDeath(HSD_GObj* fighter_gobj) {
+void ftLink_OnDeath(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = fighter_gobj->user_data;
     func_80074A4C(fighter_gobj, 0, 0);
     func_80074A4C(fighter_gobj, 1, 0);
@@ -24,12 +26,13 @@ void ftLink_OnDeath(HSD_GObj* fighter_gobj) {
     fp->sa.link.x2244 = 0;
 }
 
-void ftLink_OnLoadForCLink(Fighter* fp) {
+void ftLink_OnLoadForCLink(Fighter* fp)
+{
     PUSH_ATTRS(fp, ftLinkAttributes);
 }
 
-void ftLink_OnLoad(HSD_GObj* fighter_gobj) {
-
+void ftLink_OnLoad(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = fighter_gobj->user_data;
     ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
     void** item_list = fp->x10C_ftData->x48_items;
@@ -45,11 +48,13 @@ void ftLink_OnLoad(HSD_GObj* fighter_gobj) {
     func_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], item_list[6]);
 }
 
-void func_800EAF38() {
+void func_800EAF38()
+{
     func_800EC06C();
 }
 
-void func_800EAF58(HSD_GObj* fighter_gobj) {
+void func_800EAF58(HSD_GObj* fighter_gobj)
+{
     func_800EC06C();
     func_800D94D8(fighter_gobj);
     func_800ECD04(fighter_gobj);
@@ -57,7 +62,8 @@ void func_800EAF58(HSD_GObj* fighter_gobj) {
     func_80149268(fighter_gobj);
 }
 
-void ftLink_OnItemPickupExt(HSD_GObj* fighter_gobj, int arg1) {
+void ftLink_OnItemPickupExt(HSD_GObj* fighter_gobj, int arg1)
+{
     Fighter* fp = getFighter(fighter_gobj);
     if (func_8026B2B4(fp->x1974_heldItem) == 1) {
         func_80074A4C(fighter_gobj, 1, 1);
@@ -66,15 +72,18 @@ void ftLink_OnItemPickupExt(HSD_GObj* fighter_gobj, int arg1) {
     ftLink_OnItemPickup(fighter_gobj, arg1);
 }
 
-void ftLink_OnItemInvisible(HSD_GObj* fighter_gobj) {
+void ftLink_OnItemInvisible(HSD_GObj* fighter_gobj)
+{
     Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
-void ftLink_OnItemVisible(HSD_GObj* fighter_gobj) {
+void ftLink_OnItemVisible(HSD_GObj* fighter_gobj)
+{
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, BOOL arg1) {
+void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, BOOL arg1)
+{
     Fighter* fp = getFighter(fighter_gobj);
     if (func_8026B2B4(fp->x1974_heldItem) == 1) {
         func_80074A4C(fighter_gobj, 1, 0);
@@ -82,9 +91,9 @@ void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, BOOL arg1) {
     func_80074A4C(fighter_gobj, 2, 0);
     ftLink_OnItemDrop(fighter_gobj, arg1);
 }
- 
 
-void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
@@ -94,22 +103,26 @@ void ftLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftLink_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
+void ftLink_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+{
     COPY_ATTRS(fighter_gobj, ftLinkAttributes);
     if (fp->x34_scale.y != 1.0f) {
         sA2->x28 *= fp->x34_scale.y;
     }
 }
 
-void ftLink_OnKnockbackEnter(HSD_GObj* fighter_gobj) {
+void ftLink_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+{
     Fighter_OnKnockbackEnter(fighter_gobj, 1);
 }
 
-void ftLink_OnKnockbackExit(HSD_GObj* fighter_gobj) {
+void ftLink_OnKnockbackExit(HSD_GObj* fighter_gobj)
+{
     Fighter_OnKnockbackExit(fighter_gobj, 1);
 }
 
-void ftLink_800EB334(HSD_GObj* fighter_gobj) {
+void ftLink_800EB334(HSD_GObj* fighter_gobj)
+{
     f32 new_ground_vel;
 
     Fighter* fp = fighter_gobj->user_data;

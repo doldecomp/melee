@@ -73,26 +73,28 @@ typedef struct
     u32 x1D0[(0x204 - 0x1D0) / 4];                      // at 0x1D0
     u32 x204;                                           // at 0x204
     u8 x208_pad[0x2D0 - 0x208];                         // at 0x208
-    struct { u32 unk[4]; } x2D0[(0x410 - 0x2D0) / 16];  // at 0x2D0
+    struct {
+        u32 unk[4];
+    } x2D0[(0x410 - 0x2D0) / 16]; // at 0x2D0
     u32 x410, x414;
-    u32 x418;                                           // at 0x418
-    GXBool x41C;                                        // at 0x41C
-    GXBool x41D;                                        // at 0x41D
-    u32 projection_type;                                // at 0x420
-    f32 projection_v[6];                                // at 0x424
-    f32 viewport_v[6];                                  // at 0x43C
-    u8 x454_pad[4];                                     // at 0x454
-    f32 x458;                                           // at 0x458
-    s32 x45C_data[0x20 / 4];                            // at 0x45C
-    s32 x47C_data[0x20 / 4];                            // at 0x47C
-    u32 x49C_data[(0x4EC - 0x49C) / 4];                 // at 0x49C
-    u8 x4EC;                                            // at 0x4EC
-    GXBool x4ED;                                        // at 0x4ED
-    u8 x4EE;                                            // at 0x4EE
-    u32 x4F0_flags;                                     // at 0x4F0
-    GXFifoObj* fifo;                                    // at 0x4F4
-    u8 x4F8_pad[0x570 - 0x4F8];                         // at 0x4F8
-    u32 dirtyFlags;                                     // at 0x570
+    u32 x418;                           // at 0x418
+    GXBool x41C;                        // at 0x41C
+    GXBool x41D;                        // at 0x41D
+    u32 projection_type;                // at 0x420
+    f32 projection_v[6];                // at 0x424
+    f32 viewport_v[6];                  // at 0x43C
+    u8 x454_pad[4];                     // at 0x454
+    f32 x458;                           // at 0x458
+    s32 x45C_data[0x20 / 4];            // at 0x45C
+    s32 x47C_data[0x20 / 4];            // at 0x47C
+    u32 x49C_data[(0x4EC - 0x49C) / 4]; // at 0x49C
+    u8 x4EC;                            // at 0x4EC
+    GXBool x4ED;                        // at 0x4ED
+    u8 x4EE;                            // at 0x4EE
+    u32 x4F0_flags;                     // at 0x4F0
+    GXFifoObj* fifo;                    // at 0x4F4
+    u8 x4F8_pad[0x570 - 0x4F8];         // at 0x4F8
+    u32 dirtyFlags;                     // at 0x570
 } GXContext;
 
 typedef struct
@@ -110,7 +112,6 @@ extern volatile u16* __cpReg;
 extern volatile u32* __memReg;
 
 extern volatile union {
-
     s8 s8;
     u8 u8;
     s16 s16;

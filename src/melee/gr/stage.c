@@ -273,7 +273,6 @@ s32 Stage_80224FDC(Vec* arg0)
 
 s32 Stage_80225074(s32 arg0)
 {
-
     s32 r31;
     s32 spC;
     BOOL tmp;

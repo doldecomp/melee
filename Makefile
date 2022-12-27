@@ -76,6 +76,7 @@ LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 HOSTCC  := cc
 PYTHON  := python3
+FORMAT  := clang-format -i -style=file
 
 FRANK := tools/frank.py
 
@@ -109,7 +110,7 @@ HOSTCFLAGS := -Wall -O3 -s
 # Remove all built-in rules
 .SUFFIXES:
 
-.PHONY: default
+.PHONY: default format clean
 
 ### Default target ###
 
@@ -121,6 +122,13 @@ else ifeq ($(SKIP_CHECK),1)
 else
 	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1
 endif
+
+# clang-format all source files
+format:
+	$(QUIET) find src include -type f \( -name '*.c' -o -name '*.h' \) -exec $(FORMAT) {} +
+
+clean:
+	rm -f -d -r build $(ELF2DOL)
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
 ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \
@@ -135,9 +143,6 @@ DUMMY != mkdir -p $(ALL_DIRS)
 ifeq ($(GENERATE_MAP),1)
 	$(QUIET) $(PYTHON) tools/calcprogress/calcprogress.py --dol $(DOL) --map $(MAP) --asm-obj-ext .s.o --old-map true
 endif
-
-clean:
-	rm -f -d -r build $(ELF2DOL)
 
 # ELF creation makefile instructions
 $(ELF): $(O_FILES) $(LDSCRIPT)

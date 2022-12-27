@@ -9,8 +9,7 @@
 
 #define PAD_SPEC_2 2
 
-typedef struct PADStatus
-{
+typedef struct PADStatus {
     u16 button;
     s8 stickX;
     s8 stickY;
@@ -28,7 +27,7 @@ void SISetSamplingRate(u32 rate);
 void VISetBlack(BOOL);
 u32 VIGetRetraceCount();
 void PADClamp(PADStatus*);
-void PADRead(u8 *);
+void PADRead(u8*);
 void PADReset(u32);
 
 #endif

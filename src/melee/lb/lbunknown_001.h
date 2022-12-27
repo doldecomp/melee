@@ -1,5 +1,5 @@
 #ifndef _code_8000B074_h_
-#define  _code_8000B074_h_
+#define _code_8000B074_h_
 
 #include <dolphin/mtx/mtxtypes.h>
 

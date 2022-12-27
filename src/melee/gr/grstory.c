@@ -11,17 +11,20 @@ static StageCallbacks lbl_803E26F0[4] = {
         NULL,
         NULL,
         NULL,
-    }, {
+    },
+    {
         func_801E31C0,
         func_801E3224,
         func_801E322C,
         func_801E3230,
-    }, {
+    },
+    {
         func_801E3370,
         func_801E33D8,
         func_801E33E0,
         func_801E3414,
-    }, {
+    },
+    {
         func_801E3234,
         func_801E332C,
         func_801E3334,
@@ -50,7 +53,6 @@ StageData lbl_803E274C = {
     func_801E36D8,
     0x00000001,
 };
-
 
 static void func_801E302C(s32)
 {
