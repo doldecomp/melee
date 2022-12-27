@@ -602,7 +602,7 @@ lbl_80364BF4:
 #endif
 
 #pragma push
-asm void HSD_ForeachAnim(void* obj, HSD_Type type, /*HSD_TypeMask*/ u16 mask, void* func, AObj_Arg_Type arg_type, ...)
+asm void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask, void* func, AObj_Arg_Type arg_type, ...)
 { // clang-format off
     nofralloc
     /* 80364C08 003617E8  7C 08 02 A6 */	mflr r0
