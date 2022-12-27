@@ -497,7 +497,7 @@ typedef enum ftCommonAction {
     ASID_BARREL
 } ftCommonAction;
 
-typedef enum _ftCommonBone {
+typedef enum _ftPart {
     TopN,
     TransN,
     XRotN,
@@ -551,7 +551,7 @@ typedef enum _ftCommonBone {
     RHandNb,
     ThrowN,
     TransN2
-} ftCommonBone;
+} ftPart;
 
 struct RGBA {
     u8 r;
