@@ -63,7 +63,7 @@ void func_8007E2FC(HSD_GObj*);
 void func_8007E358(HSD_GObj*);
 void func_8007E3EC(HSD_GObj*);
 void func_8007E5AC(Fighter*);
-void func_8007E620(Fighter*, HSD_Joint*);
+void Fighter_SetAccessory(Fighter*, HSD_Joint*);
 void func_8007E690(Fighter*, HSD_AnimJoint*);
 void func_8007E6DC(HSD_GObj*, HSD_GObj* item_gobj, s32);
 void func_8007E79C(HSD_GObj*, s32);
