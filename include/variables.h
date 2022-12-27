@@ -20,7 +20,6 @@ extern void* lbl_804D6534;
 extern void* lbl_804D6538;
 extern void* lbl_804D653C;
 extern s32** lbl_804D6540;
-extern void* ftPartsTable;
 extern void* lbl_804D6548;
 extern void* lbl_804D654C;
 extern void* lbl_804D6550;
