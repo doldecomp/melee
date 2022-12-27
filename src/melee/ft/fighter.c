@@ -812,9 +812,9 @@ void Fighter_80068E64(HSD_GObj* fighter_gobj)
     }
 }
 
-static void Fighter_80068E98_Inline2(HSD_GObj* fighter_gobj)
+static void Fighter_Create_Inline2(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj); // you cant do (void*) here to make it consistent, Fighter_80068E98 wont match
+    Fighter* fp = getFighter(fighter_gobj); // you cant do (void*) here to make it consistent, Fighter_Create wont match
     if (fp->x2229_b5_no_normal_motion == 0) {
         fp->x2EC = func_8001E8F8(func_80085E50(fp, 0x23));
         if (fp->x2228_flag.bits.b2 == 0) {
@@ -826,7 +826,7 @@ static void Fighter_80068E98_Inline2(HSD_GObj* fighter_gobj)
     }
 }
 
-HSD_GObj* Fighter_80068E98(struct S_TEMP1* input)
+HSD_GObj* Fighter_Create(struct S_TEMP1* input)
 {
     HSD_GObj* fighter_gobj;
     Fighter* fp;
@@ -865,7 +865,7 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input)
         ft_OnLoad[fp->x4_fighterKind](fighter_gobj);
     }
 
-    Fighter_80068E98_Inline2(fighter_gobj);
+    Fighter_Create_Inline2(fighter_gobj);
 
     func_8007B320(fighter_gobj);
     fp->x890_cameraBox = func_80029020();

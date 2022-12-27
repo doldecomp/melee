@@ -126,7 +126,7 @@ extern void Fighter_FirstInitialize_80067A84();
 extern void func_800BEB60(s32, s32, s32);
 extern s32 func_800865F0(HSD_GObj*);
 extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
-extern HSD_GObj* Fighter_80068E98(struct plAllocInfo*);
+extern HSD_GObj* Fighter_Create(struct plAllocInfo*);
 
 inline hasExtraFighterID(ftMapping* data) { return data->extra_internal_id != -1; } /// TODO this can be used in more places when functions are fixed to use correct structs
 
@@ -269,7 +269,7 @@ void Player_80031AD0(s32 slot)
     first_struct.bits.has_transformation = 0;
     first_struct.unk8 = -1;
 
-    player->player_entity[0] = Fighter_80068E98(&first_struct);
+    player->player_entity[0] = Fighter_Create(&first_struct);
     player->player_state = 2;
 
     internal_id = byte_check = offset_arr[player->player_character * sizeof(ftMapping)];
@@ -282,7 +282,7 @@ void Player_80031AD0(s32 slot)
         second_struct.bits.has_transformation = has_transformation;
         second_struct.unk8 = -1;
 
-        player->player_entity[1] = Fighter_80068E98(&second_struct);
+        player->player_entity[1] = Fighter_Create(&second_struct);
         if (player->player_state != 1) {
             player->player_state = 2;
         }
