@@ -16,4 +16,5 @@
   SpaceAfterCStyleCast: true,
   Cpp11BracedListStyle: false,
   KeepEmptyLinesAtTheStartOfBlocks: false,
-  SortIncludes: Never }
+  SortIncludes: Never,
+  WhitespaceSensitiveMacros: ['assert_line'] }
