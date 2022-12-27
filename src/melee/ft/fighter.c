@@ -2916,7 +2916,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     HSD_ObjFree(&lbl_804590AC, fp->x59C);
     HSD_ObjFree(&lbl_804590AC, fp->x5A0);
     HSD_ObjFree(&lbl_80459028, fp->x5E8_fighterBones);
-    HSD_ObjFree(&lbl_80459054, fp->x5F0);
+    HSD_ObjFree(&lbl_80459054, fp->x5EC_dobj_list.data);
     HSD_ObjFree(&lbl_80459080, fp->x2040);
     HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);
     HSD_ObjFree(&fighter_alloc_data, fp);
