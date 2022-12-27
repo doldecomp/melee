@@ -715,6 +715,11 @@ typedef struct _FtCollisionData {
     s32 x34;
 } FtCollisionData;
 
+typedef struct _DObjList {
+    u32 count;
+    HSD_DObj** data;
+} DObjList;
+
 struct UnkFloat6_Camera;
 
 typedef struct _ftData {
@@ -1406,8 +1411,7 @@ typedef struct _Fighter {
     /* 0x5A0 */ void* x5C8;
     u8 filler_x5CC[0x5E8 - 0x5CC];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
-    u8 filler_x5EC[0x5F0 - 0x5EC];
-    /* 0x5F0 */ HSD_DObj** x5F0;
+    /* 0x5EC */ DObjList x5EC_dobj_list;
     /* 0x5F4 */ s8 x5F4;
     /* 0x5F5 */ s8 x5F5;
     /* 0x5F6 */ s8 x5F6;
