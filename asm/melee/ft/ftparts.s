@@ -1042,7 +1042,7 @@ func_800743E0:
 /* 80074400 00070FE0  3B 60 00 00 */	li r27, 0
 /* 80074404 00070FE4  83 C3 00 28 */	lwz r30, 0x28(r3)
 /* 80074408 00070FE8  83 A3 00 2C */	lwz r29, 0x2c(r3)
-/* 8007440C 00070FEC  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 8007440C 00070FEC  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 80074410 00070FF0  93 41 00 14 */	stw r26, 0x14(r1)
 /* 80074414 00070FF4  80 1D 00 04 */	lwz r0, 4(r29)
 /* 80074418 00070FF8  54 00 10 3A */	slwi r0, r0, 2
@@ -1186,7 +1186,7 @@ lbl_800745CC:
 /* 800745D4 000711B4  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800745D8 000711B8  90 1D 05 EC */	stw r0, 0x5ec(r29)
 /* 800745DC 000711BC  80 1D 00 04 */	lwz r0, 4(r29)
-/* 800745E0 000711C0  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 800745E0 000711C0  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 800745E4 000711C4  54 00 10 3A */	slwi r0, r0, 2
 /* 800745E8 000711C8  7C 63 00 2E */	lwzx r3, r3, r0
 /* 800745EC 000711CC  80 03 00 08 */	lwz r0, 8(r3)
@@ -1340,7 +1340,7 @@ lbl_800747C0:
 /* 800747C0 000713A0  28 1C 00 00 */	cmplwi r28, 0
 /* 800747C4 000713A4  40 82 FE 98 */	bne lbl_8007465C
 /* 800747C8 000713A8  80 1F 00 04 */	lwz r0, 4(r31)
-/* 800747CC 000713AC  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 800747CC 000713AC  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 800747D0 000713B0  54 00 10 3A */	slwi r0, r0, 2
 /* 800747D4 000713B4  7C 63 00 2E */	lwzx r3, r3, r0
 /* 800747D8 000713B8  80 03 00 08 */	lwz r0, 8(r3)
@@ -1868,7 +1868,7 @@ lbl_80074EA8:
 /* 80074EC4 00071AA4  7C 83 01 2E */	stwx r4, r3, r0
 lbl_80074EC8:
 /* 80074EC8 00071AA8  80 1E 00 04 */	lwz r0, 4(r30)
-/* 80074ECC 00071AAC  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 80074ECC 00071AAC  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 80074ED0 00071AB0  54 00 10 3A */	slwi r0, r0, 2
 /* 80074ED4 00071AB4  7C 63 00 2E */	lwzx r3, r3, r0
 /* 80074ED8 00071AB8  80 03 00 08 */	lwz r0, 8(r3)
@@ -1952,7 +1952,7 @@ lbl_80074EC8:
 .global func_8007500C
 func_8007500C:
 /* 8007500C 00071BEC  80 03 00 04 */	lwz r0, 4(r3)
-/* 80075010 00071BF0  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 80075010 00071BF0  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 80075014 00071BF4  54 00 10 3A */	slwi r0, r0, 2
 /* 80075018 00071BF8  7C 63 00 2E */	lwzx r3, r3, r0
 /* 8007501C 00071BFC  80 63 00 04 */	lwz r3, 4(r3)
@@ -1961,7 +1961,7 @@ func_8007500C:
 
 .global func_80075028
 func_80075028:
-/* 80075028 00071C08  80 CD AE A4 */	lwz r6, FighterPartsTable@sda21(r13)
+/* 80075028 00071C08  80 CD AE A4 */	lwz r6, ftPartsTable@sda21(r13)
 /* 8007502C 00071C0C  54 80 10 3A */	slwi r0, r4, 2
 /* 80075030 00071C10  7C 86 00 2E */	lwzx r4, r6, r0
 /* 80075034 00071C14  80 04 00 08 */	lwz r0, 8(r4)

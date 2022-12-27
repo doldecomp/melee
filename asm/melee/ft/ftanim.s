@@ -1640,7 +1640,7 @@ lbl_8006F2B0:
 /* 8006F2B4 0006BE94  3B BD 00 01 */	addi r29, r29, 1
 lbl_8006F2B8:
 /* 8006F2B8 0006BE98  80 1F 00 04 */	lwz r0, 4(r31)
-/* 8006F2BC 0006BE9C  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 8006F2BC 0006BE9C  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 8006F2C0 0006BEA0  54 00 10 3A */	slwi r0, r0, 2
 /* 8006F2C4 0006BEA4  7C 63 00 2E */	lwzx r3, r3, r0
 /* 8006F2C8 0006BEA8  80 03 00 08 */	lwz r0, 8(r3)
@@ -1673,7 +1673,7 @@ lbl_8006F324:
 /* 8006F328 0006BF08  3B BD 00 01 */	addi r29, r29, 1
 lbl_8006F32C:
 /* 8006F32C 0006BF0C  80 1F 00 04 */	lwz r0, 4(r31)
-/* 8006F330 0006BF10  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 8006F330 0006BF10  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 8006F334 0006BF14  54 00 10 3A */	slwi r0, r0, 2
 /* 8006F338 0006BF18  7C 63 00 2E */	lwzx r3, r3, r0
 /* 8006F33C 0006BF1C  80 03 00 08 */	lwz r0, 8(r3)
@@ -1737,7 +1737,7 @@ func_8006F3DC:
 /* 8006F3F8 0006BFD8  40 82 00 74 */	bne lbl_8006F46C
 /* 8006F3FC 0006BFDC  80 05 00 04 */	lwz r0, 4(r5)
 /* 8006F400 0006BFE0  38 80 00 00 */	li r4, 0
-/* 8006F404 0006BFE4  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 8006F404 0006BFE4  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 8006F408 0006BFE8  54 00 10 3A */	slwi r0, r0, 2
 /* 8006F40C 0006BFEC  7C 63 00 2E */	lwzx r3, r3, r0
 /* 8006F410 0006BFF0  80 03 00 08 */	lwz r0, 8(r3)
@@ -2571,7 +2571,7 @@ lbl_8006FF2C:
 /* 8006FF30 0006CB10  3B DE 00 01 */	addi r30, r30, 1
 lbl_8006FF34:
 /* 8006FF34 0006CB14  80 1D 00 04 */	lwz r0, 4(r29)
-/* 8006FF38 0006CB18  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 8006FF38 0006CB18  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 8006FF3C 0006CB1C  54 00 10 3A */	slwi r0, r0, 2
 /* 8006FF40 0006CB20  7C 63 00 2E */	lwzx r3, r3, r0
 /* 8006FF44 0006CB24  80 03 00 08 */	lwz r0, 8(r3)
@@ -2618,7 +2618,7 @@ lbl_8006FFD0:
 /* 8006FFD4 0006CBB4  3B DE 00 01 */	addi r30, r30, 1
 lbl_8006FFD8:
 /* 8006FFD8 0006CBB8  80 1D 00 04 */	lwz r0, 4(r29)
-/* 8006FFDC 0006CBBC  80 6D AE A4 */	lwz r3, FighterPartsTable@sda21(r13)
+/* 8006FFDC 0006CBBC  80 6D AE A4 */	lwz r3, ftPartsTable@sda21(r13)
 /* 8006FFE0 0006CBC0  54 00 10 3A */	slwi r0, r0, 2
 /* 8006FFE4 0006CBC4  7C 63 00 2E */	lwzx r3, r3, r0
 /* 8006FFE8 0006CBC8  80 03 00 08 */	lwz r0, 8(r3)
