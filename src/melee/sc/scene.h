@@ -2,7 +2,7 @@
 
 // Model with a single animation or no animation
 typedef struct _StaticModelDesc {
-    struct _HSD_JObjDesc* joint;
+    struct _HSD_Joint* joint;
     struct _HSD_AnimJoint* animjoint;
     struct _HSD_MatAnimJoint* matanim_joint;
     struct _HSD_ShapeAnimJoint* shapeanim_joint;
@@ -10,7 +10,7 @@ typedef struct _StaticModelDesc {
 
 // Model with multiple animations
 typedef struct _DynamicModelDesc {
-    struct _HSD_JObjDesc* joint;
+    struct _HSD_Joint* joint;
     struct _HSD_AnimJoint** anims;
     struct _HSD_MatAnimJoint** matanims;
     struct _HSD_ShapeAnimJoint** shapeanims;
