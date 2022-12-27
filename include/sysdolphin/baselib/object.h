@@ -49,7 +49,7 @@ typedef enum _HSD_TypeMask {
     CHAN_MASK = MASK_OF(CHAN_TYPE),
     TEVREG_MASK = MASK_OF(TEVREG_TYPE),
     CBOBJ_MASK = MASK_OF(CBOBJ_TYPE),
-    ALL_TYPE_MASK = MASK_OF(HSD_MAX_TYPE),
+    ALL_TYPE_MASK = MASK_OF(HSD_MAX_TYPE) - 1,
 } HSD_TypeMask;
 
 typedef struct _HSD_Obj {
