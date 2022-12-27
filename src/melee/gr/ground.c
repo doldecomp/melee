@@ -463,7 +463,7 @@ static BOOL func_801C0A70(Point3d* pos)
 extern u32 lbl_803B7DEC[];
 extern void func_8026BE84();
 static asm void func_801C0C2C()
-{
+{ // clang-format off
     nofralloc
 /* 801C0C2C 001BD80C  7C 08 02 A6 */	mflr r0
 /* 801C0C30 001BD810  3C 60 80 4A */	lis r3, stage_info@ha
@@ -698,7 +698,7 @@ lbl_801C0F48:
 /* 801C0F6C 001BDB4C  38 21 00 90 */	addi r1, r1, 0x90
 /* 801C0F70 001BDB50  7C 08 03 A6 */	mtlr r0
 /* 801C0F74 001BDB54  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 
 void func_801C0F78(StructPairWithStageID* pair)
@@ -1360,7 +1360,7 @@ extern u8 lbl_804D7848;
 extern void func_80030740();
 extern void HSD_FogLoadDesc();
 static asm void func_801C1E94(void)
-{
+{ // clang-format off
     nofralloc
 /* 801C1E94 001BEA74  7C 08 02 A6 */	mflr r0
 /* 801C1E98 001BEA78  3C 60 80 4A */	lis r3, stage_info@ha
@@ -1460,7 +1460,7 @@ lbl_801C1FE0:
 /* 801C1FF0 001BEBD0  38 21 00 20 */	addi r1, r1, 0x20
 /* 801C1FF4 001BEBD4  7C 08 03 A6 */	mtlr r0
 /* 801C1FF8 001BEBD8  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 
 void func_801C1FFC(void)
@@ -1499,7 +1499,7 @@ f32 func_801C20D0(void)
 char lightset[9] = "lightset";
 char plightset[10] = "*lightset";
 static asm void* func_801C20E0()
-{
+{ // clang-format off
     nofralloc
 /* 801C20E0 001BECC0  7C 08 02 A6 */	mflr r0
 /* 801C20E4 001BECC4  90 01 00 04 */	stw r0, 4(r1)
@@ -1695,7 +1695,7 @@ lbl_801C2360:
 /* 801C2368 001BEF48  38 21 00 28 */	addi r1, r1, 0x28
 /* 801C236C 001BEF4C  7C 08 03 A6 */	mtlr r0
 /* 801C2370 001BEF50  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 
 void func_801C2374(HSD_LObj* lobj)
@@ -1884,7 +1884,7 @@ char str1[] = "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n
 char str2[] = "             check StageParam.csv or StageItem.csv, stdata.c\n";
 char str3[] = " stageid=%d\n";
 static asm void func_801C28CC(void*, s32)
-{
+{ // clang-format off
     nofralloc
 /* 801C28CC 001BF4AC  7C 08 02 A6 */	mflr r0
 /* 801C28D0 001BF4B0  3C A0 80 4A */	lis r5, stage_info@ha
@@ -2028,7 +2028,7 @@ lbl_801C2AC4:
 /* 801C2ACC 001BF6AC  38 21 00 30 */	addi r1, r1, 0x30
 /* 801C2AD0 001BF6B0  7C 08 03 A6 */	mtlr r0
 /* 801C2AD4 001BF6B4  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 
 u8* func_801C2AD8(void)
@@ -2600,7 +2600,7 @@ u32 unknown[] = {
 };
 char unkmsg[] = "%s:%d:Error (root=%08x joint=%08x)\n";
 static asm void func_801C34AC(s32, HSD_JObj*, HSD_Joint*)
-{
+{ // clang-format off
     nofralloc
 /* 801C34AC 001C008C  7C 08 02 A6 */	mflr r0
 /* 801C34B0 001C0090  90 01 00 04 */	stw r0, 4(r1)
@@ -2785,7 +2785,7 @@ lbl_801C36E0:
 /* 801C36E8 001C02C8  38 21 00 30 */	addi r1, r1, 0x30
 /* 801C36EC 001C02CC  7C 08 03 A6 */	mtlr r0
 /* 801C36F0 001C02D0  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 
 asm void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
@@ -3580,7 +3580,7 @@ static void lbl_801C4640(HSD_GObj* gobj)
 extern u8 lbl_804D784A;
 extern void func_80011AC4();
 static asm void func_801C466C(void)
-{
+{ // clang-format off
     nofralloc
 /* 801C466C 001C124C  7C 08 02 A6 */	mflr r0
 /* 801C4670 001C1250  3C 60 80 3E */	lis r3, lbl_803DFEA8@ha
@@ -3806,7 +3806,7 @@ lbl_801C4958:
 /* 801C4980 001C1560  38 21 00 40 */	addi r1, r1, 0x40
 /* 801C4984 001C1564  7C 08 03 A6 */	mtlr r0
 /* 801C4988 001C1568  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 
 HSD_GObj* func_801C498C(void)
@@ -4458,7 +4458,7 @@ extern void func_8031C2EC();
 extern void func_8016B498();
 extern void func_8031C2CC();
 static asm void func_801C5878(void)
-{
+{ // clang-format off
     nofralloc
 /* 801C5878 001C2458  7C 08 02 A6 */	mflr r0
 /* 801C587C 001C245C  90 01 00 04 */	stw r0, 4(r1)
@@ -4488,7 +4488,7 @@ lbl_801C58C8:
 /* 801C58D4 001C24B4  38 21 00 18 */	addi r1, r1, 0x18
 /* 801C58D8 001C24B8  7C 08 03 A6 */	mtlr r0
 /* 801C58DC 001C24BC  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 
 s32 func_801C58E0(s32 arg0, s32 arg1)

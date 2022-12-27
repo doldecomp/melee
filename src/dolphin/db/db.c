@@ -35,13 +35,13 @@ static void __DBExceptionDestinationAux(void)
 
 #ifdef __MWERKS__
 static asm void __DBExceptionDestination(void)
-{
+{ // clang-format off
     nofralloc
     mfmsr r3
     ori r3, r3, 0x30
     mtmsr r3
     b __DBExceptionDestinationAux
-}
+} // clang-format on
 #else
 static void __DBExceptionDestination(void)
 {
