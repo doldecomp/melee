@@ -47,7 +47,7 @@ lbl_801CA414:
 /* 801CA42C 001C700C  83 81 00 18 */    lwz r28, 0x18(r1)
 /* 801CA430 001C7010  38 21 00 30 */    addi r1, r1, 0x30
 /* 801CA434 001C7014  7C 08 03 A6 */    mtlr r0
-/* 801CA438 001C7018  4E 80 00 20 */    blr 
+/* 801CA438 001C7018  4E 80 00 20 */    blr
 
 .global func_801CA43C
 func_801CA43C:
@@ -167,7 +167,7 @@ lbl_801CA5B4:
 /* 801CA5D0 001C71B0  38 9E 00 00 */    addi r4, r30, 0
 /* 801CA5D4 001C71B4  38 61 00 18 */    addi r3, r1, 0x18
 /* 801CA5D8 001C71B8  7D 88 03 A6 */    mtlr r12
-/* 801CA5DC 001C71BC  4E 80 00 21 */    blrl 
+/* 801CA5DC 001C71BC  4E 80 00 21 */    blrl
 /* 801CA5E0 001C71C0  90 7A 00 14 */    stw r3, 0x14(r26)
 /* 801CA5E4 001C71C4  48 00 00 34 */    b lbl_801CA618
 lbl_801CA5E8:
@@ -183,7 +183,7 @@ lbl_801CA604:
 /* 801CA608 001C71E8  38 9E 00 00 */    addi r4, r30, 0
 /* 801CA60C 001C71EC  38 61 00 18 */    addi r3, r1, 0x18
 /* 801CA610 001C71F0  7D 88 03 A6 */    mtlr r12
-/* 801CA614 001C71F4  4E 80 00 21 */    blrl 
+/* 801CA614 001C71F4  4E 80 00 21 */    blrl
 lbl_801CA618:
 /* 801CA618 001C71F8  3B BD 00 01 */    addi r29, r29, 1
 /* 801CA61C 001C71FC  48 00 00 28 */    b lbl_801CA644
@@ -213,7 +213,7 @@ lbl_801CA65C:
 /* 801CA66C 001C724C  CB A1 00 40 */    lfd f29, 0x40(r1)
 /* 801CA670 001C7250  38 21 00 58 */    addi r1, r1, 0x58
 /* 801CA674 001C7254  7C 08 03 A6 */    mtlr r0
-/* 801CA678 001C7258  4E 80 00 20 */    blr 
+/* 801CA678 001C7258  4E 80 00 20 */    blr
 
 .global func_801CA67C
 func_801CA67C:
@@ -364,7 +364,7 @@ lbl_801CA87C:
 /* 801CA8A4 001C7484  83 E1 00 1C */    lwz r31, 0x1c(r1)
 /* 801CA8A8 001C7488  38 21 00 20 */    addi r1, r1, 0x20
 /* 801CA8AC 001C748C  7C 08 03 A6 */    mtlr r0
-/* 801CA8B0 001C7490  4E 80 00 20 */    blr 
+/* 801CA8B0 001C7490  4E 80 00 20 */    blr
 
 .global func_801CA8B4
 func_801CA8B4:
@@ -602,7 +602,7 @@ lbl_801CABE0:
 /* 801CAC04 001C77E4  CB 01 00 40 */    lfd f24, 0x40(r1)
 /* 801CAC08 001C77E8  38 21 00 80 */    addi r1, r1, 0x80
 /* 801CAC0C 001C77EC  7C 08 03 A6 */    mtlr r0
-/* 801CAC10 001C77F0  4E 80 00 20 */    blr 
+/* 801CAC10 001C77F0  4E 80 00 20 */    blr
 
 .global func_801CAC14
 func_801CAC14:
@@ -648,7 +648,7 @@ lbl_801CACA0:
 /* 801CACA8 001C7888  83 C1 00 10 */    lwz r30, 0x10(r1)
 /* 801CACAC 001C788C  38 21 00 18 */    addi r1, r1, 0x18
 /* 801CACB0 001C7890  7C 08 03 A6 */    mtlr r0
-/* 801CACB4 001C7894  4E 80 00 20 */    blr 
+/* 801CACB4 001C7894  4E 80 00 20 */    blr
 
 .global func_801CACB8
 func_801CACB8:
@@ -720,7 +720,7 @@ lbl_801CAD9C:
 /* 801CADAC 001C798C  83 81 00 10 */    lwz r28, 0x10(r1)
 /* 801CADB0 001C7990  38 21 00 20 */    addi r1, r1, 0x20
 /* 801CADB4 001C7994  7C 08 03 A6 */    mtlr r0
-/* 801CADB8 001C7998  4E 80 00 20 */    blr 
+/* 801CADB8 001C7998  4E 80 00 20 */    blr
 lbl_801CADBC:
 /* 801CADBC 001C799C  7C 08 02 A6 */    mflr r0
 /* 801CADC0 001C79A0  38 60 00 00 */    li r3, 0
@@ -730,7 +730,7 @@ lbl_801CADBC:
 /* 801CADD0 001C79B0  80 01 00 0C */    lwz r0, 0xc(r1)
 /* 801CADD4 001C79B4  38 21 00 08 */    addi r1, r1, 8
 /* 801CADD8 001C79B8  7C 08 03 A6 */    mtlr r0
-/* 801CADDC 001C79BC  4E 80 00 20 */    blr 
+/* 801CADDC 001C79BC  4E 80 00 20 */    blr
 
 .global func_801CADE0
 func_801CADE0:
@@ -742,7 +742,7 @@ func_801CADE0:
 /* 801CADF4 001C79D4  80 01 00 0C */    lwz r0, 0xc(r1)
 /* 801CADF8 001C79D8  38 21 00 08 */    addi r1, r1, 8
 /* 801CADFC 001C79DC  7C 08 03 A6 */    mtlr r0
-/* 801CAE00 001C79E0  4E 80 00 20 */    blr 
+/* 801CAE00 001C79E0  4E 80 00 20 */    blr
 
 .global func_801CAE04
 func_801CAE04:
@@ -758,7 +758,7 @@ func_801CAE04:
 /* 801CAE28 001C7A08  38 60 00 02 */    li r3, 2
 /* 801CAE2C 001C7A0C  38 80 00 04 */    li r4, 4
 /* 801CAE30 001C7A10  38 A0 00 00 */    li r5, 0
-/* 801CAE34 001C7A14  48 1C 53 BD */    bl func_803901F0
+/* 801CAE34 001C7A14  48 1C 53 BD */    bl GObj_Create
 /* 801CAE38 001C7A18  7C 7F 1B 79 */    or. r31, r3, r3
 /* 801CAE3C 001C7A1C  40 82 00 30 */    bne lbl_801CAE6C
 /* 801CAE40 001C7A20  3C 60 80 3E */    lis r3, lbl_803E0BBC@ha
@@ -790,7 +790,7 @@ lbl_801CAE94:
 /* 801CAEA0 001C7A80  83 A1 00 14 */    lwz r29, 0x14(r1)
 /* 801CAEA4 001C7A84  38 21 00 20 */    addi r1, r1, 0x20
 /* 801CAEA8 001C7A88  7C 08 03 A6 */    mtlr r0
-/* 801CAEAC 001C7A8C  4E 80 00 20 */    blr 
+/* 801CAEAC 001C7A8C  4E 80 00 20 */    blr
 
 .global func_801CAEB0
 func_801CAEB0:
@@ -803,13 +803,13 @@ func_801CAEB0:
 /* 801CAEC8 001C7AA8  38 C5 03 C0 */    addi r6, r5, 0x3c0
 /* 801CAECC 001C7AAC  A8 A5 03 C0 */    lha r5, 0x3c0(r5)
 /* 801CAED0 001C7AB0  2C 05 FF FF */    cmpwi r5, -1
-/* 801CAED4 001C7AB4  4C 82 00 20 */    bnelr 
+/* 801CAED4 001C7AB4  4C 82 00 20 */    bnelr
 /* 801CAED8 001C7AB8  B0 86 00 00 */    sth r4, 0(r6)
 /* 801CAEDC 001C7ABC  80 87 00 00 */    lwz r4, 0(r7)
 /* 801CAEE0 001C7AC0  90 64 03 C8 */    stw r3, 0x3c8(r4)
 /* 801CAEE4 001C7AC4  80 67 00 00 */    lwz r3, 0(r7)
 /* 801CAEE8 001C7AC8  90 03 03 C4 */    stw r0, 0x3c4(r3)
-/* 801CAEEC 001C7ACC  4E 80 00 20 */    blr 
+/* 801CAEEC 001C7ACC  4E 80 00 20 */    blr
 
 .global func_801CAEF0
 func_801CAEF0:
@@ -818,7 +818,7 @@ func_801CAEF0:
 /* 801CAEF8 001C7AD8  88 04 00 0A */    lbz r0, 0xa(r4)
 /* 801CAEFC 001C7ADC  50 60 3E 30 */    rlwimi r0, r3, 7, 0x18, 0x18
 /* 801CAF00 001C7AE0  98 04 00 0A */    stb r0, 0xa(r4)
-/* 801CAF04 001C7AE4  4E 80 00 20 */    blr 
+/* 801CAF04 001C7AE4  4E 80 00 20 */    blr
 
 .global func_801CAF08
 func_801CAF08:
@@ -872,7 +872,7 @@ lbl_801CAF9C:
 /* 801CAFAC 001C7B8C  83 C1 00 10 */    lwz r30, 0x10(r1)
 /* 801CAFB0 001C7B90  38 21 00 18 */    addi r1, r1, 0x18
 /* 801CAFB4 001C7B94  7C 08 03 A6 */    mtlr r0
-/* 801CAFB8 001C7B98  4E 80 00 20 */    blr 
+/* 801CAFB8 001C7B98  4E 80 00 20 */    blr
 
 
 .section .bss

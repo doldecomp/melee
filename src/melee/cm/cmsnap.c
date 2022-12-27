@@ -51,6 +51,6 @@ void func_800316B4(void)
 {
     cmsnap_data.unk0 = 0;
     cmsnap_data.unk1 = 0;
-    GObj_SetupGXLinkMax(func_803901F0(0x12, 0x12, 0), func_80031640, 4);
+    GObj_SetupGXLinkMax(GObj_Create(0x12, 0x12, 0), func_80031640, 4);
     func_800121FC(&cmsnap_data.unk1, 0x280, 0x1E0, 4, 0x7D6);
 }

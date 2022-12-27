@@ -243,7 +243,7 @@ HSD_GObj* func_801C9CEC(s32 idx1)
         return NULL;
     }
     tmp = idx1;
-    gobj = func_803901F0(3, 18, tmp);
+    gobj = GObj_Create(3, 18, tmp);
     jobj = HSD_JObjLoadJoint(stage_info.x6CC->joint);
 
     func_80390A70(gobj, lbl_804D7849, jobj);

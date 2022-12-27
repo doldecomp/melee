@@ -943,7 +943,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem) // Create Item //
     if (func_8026784C(spawnItem->xC_hold_kind, spawnItem->x8_item_id) != 0) {
         return NULL;
     }
-    temp_r3 = func_803901F0(6, 9, 0);
+    temp_r3 = GObj_Create(6, 9, 0);
     if (temp_r3 == NULL) {
         return NULL;
     }
