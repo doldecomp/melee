@@ -15,4 +15,5 @@
   SpacesInCStyleCastParentheses: false,
   SpaceAfterCStyleCast: true,
   Cpp11BracedListStyle: false,
-  KeepEmptyLinesAtTheStartOfBlocks: false }
+  KeepEmptyLinesAtTheStartOfBlocks: false,
+  SortIncludes: Never }
