@@ -79,7 +79,7 @@ void HSD_AObjRemove(HSD_AObj* aobj);
 HSD_AObj* HSD_AObjAlloc(void);
 void HSD_AObjFree(HSD_AObj* aobj);
 void callbackForeachFunc(HSD_AObj* aobj, void* obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg);
-void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask, void* func, AObj_Arg_Type arg_type, ...);
+void HSD_ForeachAnim(void* obj, HSD_Type type, /*HSD_TypeMask*/ u16 mask, void* func, AObj_Arg_Type arg_type, ...);
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate);
 void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame);
