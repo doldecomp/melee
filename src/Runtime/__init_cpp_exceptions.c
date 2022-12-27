@@ -7,11 +7,11 @@ extern s32 __register_fragment(struct __eti_init_info *, char*);
 extern void __unregister_fragment(s32);
 
 extern asm char* GetR2(void)
-{
+{ // clang-format off
     nofralloc
     mr r3, r2
     blr
-}
+} // clang-format on
 
 extern void __fini_cpp_exceptions(void)
 {
@@ -23,7 +23,7 @@ extern void __fini_cpp_exceptions(void)
 
 // Left as asm due to lbl_80005918 being in extabindex, which throws an error about an incompatible section
 extern asm void __init_cpp_exceptions(void)
-{
+{ // clang-format off
     nofralloc
 /* 80322F5C 0031FB3C  7C 08 02 A6 */	mflr r0
 /* 80322F60 0031FB40  90 01 00 04 */	stw r0, 4(r1)
@@ -41,5 +41,5 @@ lbl_80322F8C:
 /* 80322F8C 0031FB6C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80322F90 0031FB70  38 21 00 08 */	addi r1, r1, 8
 /* 80322F94 0031FB74  7C 08 03 A6 */	mtlr r0
-/* 80322F98 0031FB78  4E 80 00 20 */	blr 
-}
+/* 80322F98 0031FB78  4E 80 00 20 */	blr
+} // clang-format on
