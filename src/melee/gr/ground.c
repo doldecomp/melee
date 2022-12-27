@@ -799,7 +799,7 @@ void func_801C0FB8(StructPairWithStageID* pair)
     }
     stage_info.x6A4 = NULL;
 
-    func_8038FD54(func_803901F0(3, 5, 0), func_801C0C2C, 10);
+    func_8038FD54(GObj_Create(3, 5, 0), func_801C0C2C, 10);
 }
 
 void func_801C1074(StructPairWithStageID* pair, s32 arg1)
@@ -918,7 +918,7 @@ asm struct _HSD_GObj* func_801C14D0(s32)
 /* 801C14F4 001BE0D4  38 60 00 03 */	li r3, 3
 /* 801C14F8 001BE0D8  38 80 00 05 */	li r4, 5
 /* 801C14FC 001BE0DC  38 A0 00 00 */	li r5, 0
-/* 801C1500 001BE0E0  48 1C EC F1 */	bl func_803901F0
+/* 801C1500 001BE0E0  48 1C EC F1 */	bl GObj_Create
 /* 801C1504 001BE0E4  7C 7F 1B 79 */	or. r31, r3, r3
 /* 801C1508 001BE0E8  40 82 00 20 */	bne lbl_801C1528
 /* 801C150C 001BE0EC  38 7B 02 50 */	addi r3, r27, 0x250
@@ -1113,7 +1113,7 @@ lbl_801C1798:
 /* 801C17DC 001BE3BC  38 60 00 11 */	li r3, 0x11
 /* 801C17E0 001BE3C0  38 80 00 13 */	li r4, 0x13
 /* 801C17E4 001BE3C4  38 A0 00 00 */	li r5, 0
-/* 801C17E8 001BE3C8  48 1C EA 09 */	bl func_803901F0
+/* 801C17E8 001BE3C8  48 1C EA 09 */	bl GObj_Create
 /* 801C17EC 001BE3CC  80 9D 00 04 */	lwz r4, 4(r29)
 /* 801C17F0 001BE3D0  7C 77 1B 78 */	mr r23, r3
 /* 801C17F4 001BE3D4  80 04 00 08 */	lwz r0, 8(r4)
@@ -1286,7 +1286,7 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     u32 unused;
     HSD_Joint sp18;
 
-    temp_r30 = func_803901F0(3, 5, 0);
+    temp_r30 = GObj_Create(3, 5, 0);
     if (temp_r30 == NULL) {
         OSReport(get_gobj, __FILE__, 0x5B8);
         return NULL;
@@ -1488,7 +1488,7 @@ lbl_801C1F34:
 /* 801C1F40 001BEB20  38 60 00 0A */	li r3, 0xa
 /* 801C1F44 001BEB24  38 80 00 0B */	li r4, 0xb
 /* 801C1F48 001BEB28  38 A0 00 00 */	li r5, 0
-/* 801C1F4C 001BEB2C  48 1C E2 A5 */	bl func_803901F0
+/* 801C1F4C 001BEB2C  48 1C E2 A5 */	bl GObj_Create
 /* 801C1F50 001BEB30  3B C3 00 00 */	addi r30, r3, 0
 /* 801C1F54 001BEB34  38 7D 00 00 */	addi r3, r29, 0
 /* 801C1F58 001BEB38  48 1B BC E1 */	bl HSD_FogLoadDesc
@@ -3709,7 +3709,7 @@ lbl_801C4714:
 /* 801C4714 001C12F4  38 60 00 0D */	li r3, 0xd
 /* 801C4718 001C12F8  38 80 00 03 */	li r4, 3
 /* 801C471C 001C12FC  38 A0 00 00 */	li r5, 0
-/* 801C4720 001C1300  48 1C BA D1 */	bl func_803901F0
+/* 801C4720 001C1300  48 1C BA D1 */	bl GObj_Create
 /* 801C4724 001C1304  7C 7E 1B 79 */	or. r30, r3, r3
 /* 801C4728 001C1308  40 82 00 1C */	bne lbl_801C4744
 /* 801C472C 001C130C  38 7F 08 2C */	addi r3, r31, 0x82c

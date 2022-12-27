@@ -85,7 +85,7 @@ HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority, HSD_GObj
     return gobj;
 }
 
-HSD_GObj* func_803901F0(u16 classifier, u8 p_link, u8 priority)
+HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority)
 {
     return CreateGObj(0, classifier, p_link, priority, NULL);
 }

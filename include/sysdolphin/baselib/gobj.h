@@ -112,6 +112,6 @@ void func_80390CAC(HSD_GObj* gobj);
 u32 func_80390EB8(s32 i);
 void func_803910D8(HSD_GObj*, s32);
 u8 func_803912A8(GObjUnkStruct*, GObjFuncs*);
-HSD_GObj* func_803901F0(u16 classifier, u8 p_link, u8 priority);
+HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 
 #endif
