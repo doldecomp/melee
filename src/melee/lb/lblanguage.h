@@ -1,7 +1,6 @@
 #ifndef _lblanguage_h_
 #define _lblanguage_h_
 
-
 #include <dolphin/types.h>
 
 u8 lbLang_GetLanguageSetting(void);

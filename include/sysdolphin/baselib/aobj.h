@@ -16,8 +16,7 @@
 #define AOBJ_LOOP (1 << 29)
 #define AOBJ_NO_ANIM (1 << 30)
 
-typedef enum _AObj_Arg_Type
-{
+typedef enum _AObj_Arg_Type {
     AOBJ_ARG_A,
     AOBJ_ARG_AF,
     AOBJ_ARG_AV,
@@ -79,14 +78,15 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc);
 void HSD_AObjRemove(HSD_AObj* aobj);
 HSD_AObj* HSD_AObjAlloc(void);
 void HSD_AObjFree(HSD_AObj* aobj);
-void callbackForeachFunc(HSD_AObj *aobj, void *obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg *arg);
+void callbackForeachFunc(HSD_AObj* aobj, void* obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg);
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate);
 void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame);
 void _HSD_AObjForgetMemory(void);
 
-inline f32 HSD_AObjGetEndFrame(HSD_AObj* aobj) {
+inline f32 HSD_AObjGetEndFrame(HSD_AObj* aobj)
+{
     if (!aobj) {
         __assert("aobj.h", 0xAAU, "aobj");
     }

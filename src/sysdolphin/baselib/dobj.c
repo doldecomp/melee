@@ -81,7 +81,7 @@ void HSD_DObjAddAnim(HSD_DObj* dobj, HSD_MatAnim* mat_anim, HSD_ShapeAnimDObj* s
 
     if (sh_anim != NULL) {
         shapeanim = sh_anim->shapeanim;
-    } else{
+    } else {
         shapeanim = NULL;
     }
 
@@ -97,7 +97,7 @@ void HSD_DObjAddAnimAll(HSD_DObj* dobj, HSD_MatAnim* matanim, HSD_ShapeAnimDObj*
 
     if (dobj == NULL)
         return;
-      
+
     for (dp = dobj, ma = matanim, sd = shapeanimdobj; dp != NULL; dp = dp->next, ma = next_p(ma), sd = next_p(sd)) {
         HSD_DObjAddAnim(dp, ma, sd);
     }
@@ -118,7 +118,7 @@ void HSD_DObjReqAnimAllByFlags(HSD_DObj* dobj, f32 startframe, u32 flags)
 
     if (dobj == NULL)
         return;
-        
+
     for (dp = dobj; dp != NULL; dp = dp->next) {
         HSD_DObjReqAnimByFlags(dp, startframe, flags);
     }
@@ -130,9 +130,9 @@ void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 startframe)
 
     if (dobj == NULL)
         return;
-    
+
     for (dp = dobj; dp != NULL; dp = dp->next) {
-        HSD_DObjReqAnimByFlags(dp, startframe,  0x7FF);
+        HSD_DObjReqAnimByFlags(dp, startframe, 0x7FF);
     }
 }
 
@@ -151,7 +151,7 @@ void HSD_DObjAnimAll(HSD_DObj* dobj)
 
     if (dobj == NULL)
         return;
-    
+
     for (dp = dobj; dp != NULL; dp = dp->next) {
         HSD_DObjAnim(dp);
     }
@@ -165,18 +165,18 @@ static int DObjLoad(HSD_DObj* dobj, HSD_DObjDesc* desc)
 
     if (dobj->mobj != NULL) {
         switch (dobj->mobj->rendermode & 0x60000000) {
-            case 0:
-                HSD_DObjModifyFlags(dobj, 2, 0xE);
-                break;
-            case 0x40000000:
-                HSD_DObjModifyFlags(dobj, 8, 0xE);
-                break;
-            case 0x60000000:
-                HSD_DObjModifyFlags(dobj, 4, 0xE);
-                break;
-            default:
-                OSReport("mobj has unexpected blending flags (0x%x).", dobj->mobj->rendermode);
-                HSD_Panic(lbl_804D5C78, 312, "\0");
+        case 0:
+            HSD_DObjModifyFlags(dobj, 2, 0xE);
+            break;
+        case 0x40000000:
+            HSD_DObjModifyFlags(dobj, 8, 0xE);
+            break;
+        case 0x60000000:
+            HSD_DObjModifyFlags(dobj, 4, 0xE);
+            break;
+        default:
+            OSReport("mobj has unexpected blending flags (0x%x).", dobj->mobj->rendermode);
+            HSD_Panic(lbl_804D5C78, 312, "\0");
         }
     }
     return 0;
@@ -191,10 +191,10 @@ HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
 
     if (desc == NULL)
         return NULL;
-    
+
     if (desc->class_name == NULL || (info = hsdSearchClassInfo(desc->class_name)) == NULL) {
         dobj = HSD_DObjAlloc();
-    }else {
+    } else {
         dobj = HSD_DOBJ(hsdNew(info));
         if (dobj == NULL) {
             __assert(lbl_804D5C78, 378, lbl_804D5C84);
@@ -210,8 +210,8 @@ inline void hsdDelete(void* object)
     if (object == NULL)
         return;
 
-    HSD_CLASS_METHOD(object)->release((HSD_Class*)object);
-    HSD_CLASS_METHOD(object)->destroy((HSD_Class*)object);
+    HSD_CLASS_METHOD(object)->release((HSD_Class*) object);
+    HSD_CLASS_METHOD(object)->destroy((HSD_Class*) object);
 }
 
 void HSD_DObjRemove(HSD_DObj* dobj)
@@ -222,7 +222,7 @@ void HSD_DObjRemove(HSD_DObj* dobj)
 void HSD_DObjRemoveAll(HSD_DObj* dobj)
 {
     HSD_DObj* next;
-    
+
     for (; dobj != NULL; dobj = next) {
         next = dobj->next;
         HSD_DObjRemove(dobj);
@@ -241,8 +241,8 @@ void HSD_DObjSetDefaultClass(HSD_DObjInfo* info)
 
 HSD_DObj* HSD_DObjAlloc(void)
 {
-    HSD_DObj* dobj = (HSD_DObj*)hsdNew((HSD_ClassInfo*)(default_class ? default_class : &hsdDObj));
-    if (dobj == NULL){
+    HSD_DObj* dobj = (HSD_DObj*) hsdNew((HSD_ClassInfo*) (default_class ? default_class : &hsdDObj));
+    if (dobj == NULL) {
         __assert(lbl_804D5C78, 525, lbl_804D5C84);
     }
     return dobj;
@@ -251,7 +251,7 @@ HSD_DObj* HSD_DObjAlloc(void)
 void HSD_DObjResolveRefs(HSD_DObj* dobj, HSD_DObjDesc* desc)
 {
     if (dobj == NULL || desc == NULL)
-       return;
+        return;
     HSD_PObjResolveRefsAll(dobj->pobj, desc->pobjdesc);
 }
 
@@ -264,16 +264,13 @@ void HSD_DObjResolveRefsAll(HSD_DObj* dobj, HSD_DObjDesc* desc)
 
 void forceStringAllocation(HSD_DObj* dobj, HSD_MObj* mobj) // This function exists for the sole purpose of causing strings to end up in data by the compiler despite not being used
 {
-    if (dobj->pobj == NULL) 
-    {
+    if (dobj->pobj == NULL) {
         __assert(lbl_804D5C78, 700, "can not find specified pobj in link.\n");
     }
-    if (dobj->pobj == NULL) 
-    {
+    if (dobj->pobj == NULL) {
         __assert(lbl_804D5C78, 702, "can not find specified pobj in link.");
     }
-    if (dobj->mobj != mobj) 
-    {
+    if (dobj->mobj != mobj) {
         __assert(lbl_804D5C78, 704, "dobj->mobj == mobj");
     }
 }

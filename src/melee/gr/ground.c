@@ -28,7 +28,8 @@ static StageData lbl_803DFEA8 = {
 };
 
 extern StageData
-    lbl_803DFEA8, lbl_803E5764, lbl_803E11A4, lbl_803E4ECC, lbl_803E1800,
+    lbl_803DFEA8,
+    lbl_803E5764, lbl_803E11A4, lbl_803E4ECC, lbl_803E1800,
     lbl_803E52E0, lbl_803E3F6C, lbl_803E5130, lbl_803E1B2C, lbl_803E4D0C,
     lbl_803E274C, lbl_803E51CC, lbl_803E0E5C, lbl_803E76D0, lbl_803E1F08,
     lbl_803E54CC, lbl_803E1334, lbl_803E6A3C, lbl_803E33DC, lbl_803E2D20,
@@ -44,43 +45,117 @@ extern StageData
     lbl_803E821C, lbl_803E62C0, lbl_803E6370, lbl_803E6420, lbl_803E5764;
 
 static StageData* lbl_803DFEDC[] = {
-    &lbl_803DFEA8, &lbl_803E5764, &lbl_803E11A4,
-    &lbl_803E4ECC, &lbl_803E1800, &lbl_803E52E0,
-    &lbl_803E3F6C, &lbl_803E5130, &lbl_803E1B2C,
-    &lbl_803E4D0C, &lbl_803E274C, &lbl_803E51CC,
-    &lbl_803E0E5C, &lbl_803E76D0, &lbl_803E1F08,
-    &lbl_803E54CC, &lbl_803E1334, &lbl_803E6A3C,
-    &lbl_803E33DC, &lbl_803E2D20, &lbl_803E2858,
-    &lbl_803E3D94, &lbl_803E4800, NULL,
-    &lbl_803E4950, &lbl_803E4C00, NULL,
-    &lbl_803E7A00, &lbl_803E6748, &lbl_803E650C,
-    &lbl_803E65E8, &lbl_803E584C, &lbl_803E5988,
-    &lbl_803E5E0C, &lbl_803E617C, &lbl_803E5764,
-    &lbl_803E7E38, &lbl_803E7F90, &lbl_803E7D34,
-    &lbl_803E7B10, &lbl_803E85A4, &lbl_803E8664,
-    &lbl_803E872C, &lbl_803E87EC, &lbl_803E88AC,
-    &lbl_803E8974, &lbl_803E8A34, &lbl_803E8AF4,
-    &lbl_803E8C0C, &lbl_803E8CCC, &lbl_803E8D8C,
-    &lbl_803E8E4C, &lbl_803E8F0C, &lbl_803E8FCC,
-    &lbl_803E908C, &lbl_803E914C, &lbl_803E920C,
-    &lbl_803E92CC, &lbl_803E9394, &lbl_803E9454,
-    &lbl_803E9514, &lbl_803E95D4, &lbl_803E9694,
-    &lbl_803E9754, &lbl_803E981C, &lbl_803E98DC,
-    &lbl_803E84C4, &lbl_803E821C, &lbl_803E62C0,
-    &lbl_803E6370, &lbl_803E6420, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803DFEA8,
+    &lbl_803E5764,
+    &lbl_803E11A4,
+    &lbl_803E4ECC,
+    &lbl_803E1800,
+    &lbl_803E52E0,
+    &lbl_803E3F6C,
+    &lbl_803E5130,
+    &lbl_803E1B2C,
+    &lbl_803E4D0C,
+    &lbl_803E274C,
+    &lbl_803E51CC,
+    &lbl_803E0E5C,
+    &lbl_803E76D0,
+    &lbl_803E1F08,
+    &lbl_803E54CC,
+    &lbl_803E1334,
+    &lbl_803E6A3C,
+    &lbl_803E33DC,
+    &lbl_803E2D20,
+    &lbl_803E2858,
+    &lbl_803E3D94,
+    &lbl_803E4800,
+    NULL,
+    &lbl_803E4950,
+    &lbl_803E4C00,
+    NULL,
+    &lbl_803E7A00,
+    &lbl_803E6748,
+    &lbl_803E650C,
+    &lbl_803E65E8,
+    &lbl_803E584C,
+    &lbl_803E5988,
+    &lbl_803E5E0C,
+    &lbl_803E617C,
+    &lbl_803E5764,
+    &lbl_803E7E38,
+    &lbl_803E7F90,
+    &lbl_803E7D34,
+    &lbl_803E7B10,
+    &lbl_803E85A4,
+    &lbl_803E8664,
+    &lbl_803E872C,
+    &lbl_803E87EC,
+    &lbl_803E88AC,
+    &lbl_803E8974,
+    &lbl_803E8A34,
+    &lbl_803E8AF4,
+    &lbl_803E8C0C,
+    &lbl_803E8CCC,
+    &lbl_803E8D8C,
+    &lbl_803E8E4C,
+    &lbl_803E8F0C,
+    &lbl_803E8FCC,
+    &lbl_803E908C,
+    &lbl_803E914C,
+    &lbl_803E920C,
+    &lbl_803E92CC,
+    &lbl_803E9394,
+    &lbl_803E9454,
+    &lbl_803E9514,
+    &lbl_803E95D4,
+    &lbl_803E9694,
+    &lbl_803E9754,
+    &lbl_803E981C,
+    &lbl_803E98DC,
+    &lbl_803E84C4,
+    &lbl_803E821C,
+    &lbl_803E62C0,
+    &lbl_803E6370,
+    &lbl_803E6420,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
+    &lbl_803E5764,
 };
 
 static u8* lbl_804D6950;
@@ -732,7 +807,7 @@ void func_801C1074(StructPairWithStageID* pair, s32 arg1)
     lbl_803DFEDC[pair->stage_id]->callback1(arg1);
 }
 
-void OSPanic(const char *file, int line, const char *msg, ...);
+void OSPanic(const char* file, int line, const char* msg, ...);
 
 void func_801C10B8(s32 arg0, s32 arg1)
 {
@@ -1252,7 +1327,8 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     temp_r3_4 = HSD_JObjLoadJoint(&sp18);
     if (temp_r3_4 == NULL) {
         OSReport(get_jobj, __FILE__, 0x4C4);
-        while (TRUE) {}
+        while (TRUE) {
+        }
     }
     HSD_JObjAddNext(temp_r29, temp_r3_4);
     if (temp_r3_4 == NULL) {
@@ -1746,7 +1822,8 @@ extern BOOL func_803048C0(s32);
 
 static const int BGM_Undefined = -1;
 
-static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2) {
+static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
+{
     s32 temp_r25;
     UnkBgmStruct* phi_r30;
     UnkBgmStruct* phi_r30_0;
@@ -2047,7 +2124,8 @@ f32 func_801C2AE8(s32 arg0)
         phi_r5 += 1;
     }
     OSReport("%s:%d: not found stage param in DAT\n", "ground.c", 0x927);
-    while (1) {}
+    while (1) {
+    }
 }
 
 HSD_GObj* func_801C2BA4(s32 i)
@@ -3527,7 +3605,6 @@ void func_801C445C(HSD_LObj* lobj)
         return;
     }
     for (cur = lobj; cur != NULL; cur = cur->next) {
-
         wobj = HSD_LObjGetPositionWObj(lobj);
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &sp38);
@@ -3886,7 +3963,6 @@ void func_801C4A08(HSD_GObj* gobj)
     }
     func_80390228(gobj);
 }
-
 
 void func_801C4B50(s32 arg0, s32 arg1, Vec3* arg2, f32 arg8)
 {

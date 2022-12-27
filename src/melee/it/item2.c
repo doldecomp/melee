@@ -584,7 +584,7 @@ lbl_compare:
     bnelr - ;
 lbl_getVar:
     lwz r3, 0xD4C(r4);
-} // clang-format on
+}                                                   // clang-format on
 
 #endif
 

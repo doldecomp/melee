@@ -36,13 +36,12 @@ typedef enum ftCaptainAction {
 // SpecialS/SpecialAirS (Raptor Boost / Gerudo Dragon)
 #define FTCAPTAIN_SPECIALS_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-typedef struct _ftCaptainAttributes
-{
-    f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG;   // Minimum control stick range required for downward angle (Negative Y)
-    f32 x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS;   // Minimum control stick range required for upward angle (Positive Y)
-    f32 x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF;          // Maximum angle change from control stick input
-    f32 xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X;          // Momentum gained from aerial Falcon/Warlock Punch
-    f32 x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL;       // Additional momentum from angled Falcon/Warlock Punch
+typedef struct _ftCaptainAttributes {
+    f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG; // Minimum control stick range required for downward angle (Negative Y)
+    f32 x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS; // Minimum control stick range required for upward angle (Positive Y)
+    f32 x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF;        // Maximum angle change from control stick input
+    f32 xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X;        // Momentum gained from aerial Falcon/Warlock Punch
+    f32 x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL;     // Additional momentum from angled Falcon/Warlock Punch
 
     f32 x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
     f32 x18_CAPTAIN_RAPTORBOOST_GRAVITY;
@@ -86,7 +85,7 @@ void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj);
 void lbl_800E28C8(HSD_GObj* fighter_gobj);
 void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL unk_var);
-void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj) ;
+void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj);
 void ftCFalcon_OnItemDrop(HSD_GObj* fighter_gobj, BOOL unk1);
 void ftCFalcon_LoadSpecialAttrs(HSD_GObj* fighter_gobj);

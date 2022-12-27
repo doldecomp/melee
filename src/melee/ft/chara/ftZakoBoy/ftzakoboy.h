@@ -4,8 +4,7 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
 
-typedef struct _ftZakoboyAttributes
-{
+typedef struct _ftZakoboyAttributes {
     s32 x0;
 } ftZakoboyAttributes;
 

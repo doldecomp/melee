@@ -34,7 +34,7 @@ void HSD_FogSet(HSD_Fog* fog)
         HSD_Panic(__FILE__, 0x4D, "You must specify CObj first.\n");
     }
     GXSetFog(fog->type, fog->color, fog->start, fog->end,
-        HSD_CObjGetNear(cobj), HSD_CObjGetFar(cobj));
+             HSD_CObjGetNear(cobj), HSD_CObjGetFar(cobj));
 
     if (fog->fog_adj != NULL) {
         GXGetViewportv(v);
@@ -234,14 +234,14 @@ static void FogRelease(HSD_Fog* fog)
 static void FogInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdFog), &hsdObj,
-        "sysdolphin_base_library", "hsd_fog",
-        sizeof(HSD_FogInfo), sizeof(HSD_Fog));
+                     "sysdolphin_base_library", "hsd_fog",
+                     sizeof(HSD_FogInfo), sizeof(HSD_Fog));
     HSD_CLASS_INFO(&hsdFog)->release = (void*) FogRelease;
 }
 
 static void FogAdjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdFogAdj), &hsdObj,
-        "sysdolphin_base_library", "hsd_fogadj",
-        sizeof(HSD_FogAdjInfo), sizeof(HSD_FogAdj));
+                     "sysdolphin_base_library", "hsd_fogadj",
+                     sizeof(HSD_FogAdjInfo), sizeof(HSD_FogAdj));
 }

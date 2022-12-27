@@ -255,10 +255,10 @@ void GXSetViewportJitter(f32 left, f32 top, f32 width, f32 height, f32 nearz, f3
     }
     w_half = width / 2;
     h_half = height / 2;
-    temp_f31 = width / 2; // f31
-    temp_f29 = -height / 2; // f29
+    temp_f31 = width / 2;                // f31
+    temp_f29 = -height / 2;              // f29
     temp_f27 = (left + w_half) + 342.0F; // f27
-    temp_f26 = (top + h_half) + 342.0F; // f26
+    temp_f26 = (top + h_half) + 342.0F;  // f26
     temp_f30 = farz * 16777215.0F;
     temp_f0 = nearz * 16777215.0F; // temp_f0
     temp_f28 = temp_f30 - temp_f0;

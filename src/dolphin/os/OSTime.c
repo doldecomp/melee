@@ -39,16 +39,18 @@ OSTime __OSTimeToSystemTime(s64 time)
 #define OS_TIME_WEEK_DAY_MAX 7
 #define OS_TIME_YEAR_DAY_MAX 365
 
-static s32 YearDays[12] = {0, 31, 59, 90, 120, 151,
-181, 212, 243, 273, 304, 334};
-static s32 LeapYearDays[12] = {0, 31, 60, 91, 121, 152,
-182, 213, 244, 274, 305, 335};
+static s32 YearDays[12] = { 0, 31, 59, 90, 120, 151,
+                            181, 212, 243, 273, 304, 334 };
+static s32 LeapYearDays[12] = { 0, 31, 60, 91, 121, 152,
+                                182, 213, 244, 274, 305, 335 };
 
-static BOOL IsLeapYear(s32 year) {
+static BOOL IsLeapYear(s32 year)
+{
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-static s32 GetLeapDays(s32 year) {
+static s32 GetLeapDays(s32 year)
+{
     if (year < 1) {
         return 0;
     }

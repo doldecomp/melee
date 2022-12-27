@@ -13,8 +13,6 @@ BOOL func_801C96E8(HSD_GObj* arg0)
     return map->x10_flags.b4;
 }
 
-
-
 UnkGeneratorStruct* func_8039F05C(s8, s8, s32);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
@@ -84,7 +82,7 @@ void func_801C9874(UnkEffectStruct* arg0)
 
 void func_801C98A0(HSD_JObj* jobj)
 {
-    UnkEffectStruct* cur, *next;
+    UnkEffectStruct *cur, *next;
 
     if (jobj == NULL) {
         return;

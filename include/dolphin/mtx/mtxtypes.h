@@ -5,7 +5,7 @@
 
 typedef struct
 {
-	f32 x, y, z;
+    f32 x, y, z;
 } Vec, *VecPtr, Point3d, *Point3dPtr;
 
 typedef struct
@@ -25,7 +25,7 @@ typedef struct
 
 typedef struct
 {
-	f32 x, y, z, w;
+    f32 x, y, z, w;
 } Quaternion, *QuaternionPtr, Qtrn, *QtrnPtr;
 
 typedef f32 Mtx[3][4];

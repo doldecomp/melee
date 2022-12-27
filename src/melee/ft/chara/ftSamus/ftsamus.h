@@ -65,19 +65,22 @@ void ftSamus_8012B570(HSD_GObj* fighter_gobj);
 void ftSamus_8012B5F0(HSD_GObj* fighter_gobj);
 void ftSamus_8012B668(HSD_GObj* fighter_gobj);
 
-inline void ftSamus_updateDamageDeathCBs(HSD_GObj* fighter_gobj) {
+inline void ftSamus_updateDamageDeathCBs(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = getFighterPlus(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &ftSamus_80128428;
     fp->cb.x21E4_callback_OnDeath2 = &ftSamus_80128428;
 }
 
 //// only used in ftsamus3 so far (maybe move to there)
-inline void ftSamus_SetAttrx2334(HSD_GObj* fighter_gobj) {
+inline void ftSamus_SetAttrx2334(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = fighter_gobj->user_data;
     fp->sa.samus.x2234 = 0;
 }
 
-inline void ftSamus_destroyAllEF(HSD_GObj* fighter_gobj) {
+inline void ftSamus_destroyAllEF(HSD_GObj* fighter_gobj)
+{
     if (fighter_gobj) {
         Fighter* fp = getFighterPlus(fighter_gobj);
         if (fp->sa.samus.x2234) {
@@ -87,8 +90,8 @@ inline void ftSamus_destroyAllEF(HSD_GObj* fighter_gobj) {
     }
 }
 
-inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* fighter_gobj) {
-
+inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* fighter_gobj)
+{
     if (fighter_gobj) {
         Fighter* fp = fighter_gobj->user_data;
         u32 x222C = fp->sa.samus.x222C;
@@ -97,5 +100,5 @@ inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* fighter_gobj) {
             fp->sa.samus.x222C = 0;
         }
         ftSamus_destroyAllEF(fighter_gobj);
-    } 
+    }
 }

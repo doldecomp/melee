@@ -134,7 +134,6 @@ void PADOriginCallback(s32, s32 arg1)
 
 void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
 {
-
     if (!(EnabledBits & (PAD_CHAN0_BIT >> chan))) {
         return;
     }

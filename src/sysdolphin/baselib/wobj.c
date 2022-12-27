@@ -54,7 +54,7 @@ static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
             }
 
             assert_line(148, wobj->aobj);
-            jp = (HSD_JObj*)wobj->aobj->hsd_obj;
+            jp = (HSD_JObj*) wobj->aobj->hsd_obj;
             assert_line(150, jp);
             assert_line(151, jp->u.spline);
 
@@ -78,7 +78,7 @@ static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
     }
 }
 
-void HSD_WObjInterpretAnim(HSD_WObj* wobj) 
+void HSD_WObjInterpretAnim(HSD_WObj* wobj)
 {
     if (wobj != NULL) {
         HSD_AObjInterpretAnim(wobj->aobj, wobj, &WObjUpdateFunc);
@@ -86,7 +86,7 @@ void HSD_WObjInterpretAnim(HSD_WObj* wobj)
     }
 }
 
-static int WObjLoad(HSD_WObj* wobj, HSD_WObjDesc* desc) 
+static int WObjLoad(HSD_WObj* wobj, HSD_WObjDesc* desc)
 {
     HSD_WObjSetPosition(wobj, &desc->pos);
     if (wobj->robj != NULL) {
@@ -97,7 +97,7 @@ static int WObjLoad(HSD_WObj* wobj, HSD_WObjDesc* desc)
     return 0;
 }
 
-void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc) 
+void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc)
 {
     if (wobj == NULL || desc == NULL) {
         return;
@@ -154,8 +154,8 @@ void HSD_WObjSetPositionX(HSD_WObj* wobj, f32 val)
     if (wobj != NULL) {
         if ((wobj->flags & 1) != 0) {
             if (wobj->aobj != NULL && wobj->aobj->hsd_obj != NULL) {
-                jp = (HSD_JObj*)wobj->aobj->hsd_obj;
-                HSD_JObjSetupMatrix((HSD_JObj*)wobj->aobj->hsd_obj);
+                jp = (HSD_JObj*) wobj->aobj->hsd_obj;
+                HSD_JObjSetupMatrix((HSD_JObj*) wobj->aobj->hsd_obj);
                 PSMTXMUltiVec(jp->mtx, &wobj->pos, &wobj->pos);
             }
             wobj->flags &= 0xFFFFFFFE;
@@ -172,8 +172,8 @@ void HSD_WObjSetPositionY(HSD_WObj* wobj, f32 val)
     if (wobj != NULL) {
         if ((wobj->flags & 1) != 0) {
             if (wobj->aobj != NULL && wobj->aobj->hsd_obj != NULL) {
-                jp = (HSD_JObj*)wobj->aobj->hsd_obj;
-                HSD_JObjSetupMatrix((HSD_JObj*)wobj->aobj->hsd_obj);
+                jp = (HSD_JObj*) wobj->aobj->hsd_obj;
+                HSD_JObjSetupMatrix((HSD_JObj*) wobj->aobj->hsd_obj);
                 PSMTXMUltiVec(jp->mtx, &wobj->pos, &wobj->pos);
             }
             wobj->flags &= 0xFFFFFFFE;
@@ -190,8 +190,8 @@ void HSD_WObjSetPositionZ(HSD_WObj* wobj, f32 val)
     if (wobj != NULL) {
         if ((wobj->flags & 1) != 0) {
             if (wobj->aobj != NULL && wobj->aobj->hsd_obj != NULL) {
-                jp = (HSD_JObj*)wobj->aobj->hsd_obj;
-                HSD_JObjSetupMatrix((HSD_JObj*)wobj->aobj->hsd_obj);
+                jp = (HSD_JObj*) wobj->aobj->hsd_obj;
+                HSD_JObjSetupMatrix((HSD_JObj*) wobj->aobj->hsd_obj);
                 PSMTXMUltiVec(jp->mtx, &wobj->pos, &wobj->pos);
             }
             wobj->flags &= 0xFFFFFFFE;
@@ -210,8 +210,8 @@ void HSD_WObjGetPosition(HSD_WObj* wobj, Vec* vec)
     }
     if ((wobj->flags & 1) != 0) {
         if (wobj->aobj != NULL && wobj->aobj->hsd_obj != NULL) {
-            jp = (HSD_JObj*)wobj->aobj->hsd_obj;
-            HSD_JObjSetupMatrix((HSD_JObj*)wobj->aobj->hsd_obj);
+            jp = (HSD_JObj*) wobj->aobj->hsd_obj;
+            HSD_JObjSetupMatrix((HSD_JObj*) wobj->aobj->hsd_obj);
             PSMTXMUltiVec(jp->mtx, &wobj->pos, &wobj->pos);
         }
         wobj->flags &= 0xFFFFFFFE;
@@ -219,15 +219,16 @@ void HSD_WObjGetPosition(HSD_WObj* wobj, Vec* vec)
     *vec = wobj->pos;
 }
 
-HSD_WObj* HSD_WObjAlloc(void) {
-    HSD_WObj* wobj = (HSD_WObj*)hsdNew((HSD_ClassInfo*)(default_class ? default_class : &hsdWObj));
+HSD_WObj* HSD_WObjAlloc(void)
+{
+    HSD_WObj* wobj = (HSD_WObj*) hsdNew((HSD_ClassInfo*) (default_class ? default_class : &hsdWObj));
     assert_line(591, wobj);
     return wobj;
 }
 
 static void WObjRelease(HSD_Class* o)
 {
-    HSD_WObj* wobj = (HSD_WObj*)o;
+    HSD_WObj* wobj = (HSD_WObj*) o;
     HSD_RObjRemoveAll(wobj->robj);
     HSD_AObjRemove(wobj->aobj);
     HSD_OBJECT_PARENT_INFO(&hsdWObj)->release(o);

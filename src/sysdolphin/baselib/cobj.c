@@ -4,7 +4,7 @@ extern f64 lbl_804DE468; // 0.5
 extern f32 lbl_804DE470; // 0.5f
 extern f32 lbl_804DE474; // 0.01745329252f
 
-#define DegToRad(a)   ( (a) *  0.01745329252f )
+#define DegToRad(a) ((a) *0.01745329252f)
 
 // Only NON_MATCHING because there's a swapped lfs operation if using extern on the float constants
 #ifdef NON_MATCHING
@@ -12,30 +12,29 @@ void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32
 {
     f32 m_val, z_val, left_res, right_res, top_res, bottom_res;
 
-    if (cobj != NULL && ((enable_color != 0 || enable_alpha != 0 || enable_depth == 0))){
+    if (cobj != NULL && ((enable_color != 0 || enable_alpha != 0 || enable_depth == 0))) {
         z_val = (0.5 * (HSD_CObjGetNear(cobj) + HSD_CObjGetFar(cobj)));
 
-        switch (HSD_CObjGetProjectionType(cobj))
-        {
-            case PROJ_PERSPECTIVE:
-                top_res = (z_val * tanf(0.5f * DegToRad(cobj->projection_param.perspective.fov)));
-                bottom_res = -top_res;
-                right_res = top_res * cobj->projection_param.perspective.aspect;
-                left_res = -right_res;
-                break;
-            case PROJ_FRUSTRUM:
-                m_val = z_val / HSD_CObjGetNear(cobj);
-                right_res = m_val * cobj->projection_param.frustrum.right;
-                left_res = m_val * cobj->projection_param.frustrum.left;
-                top_res = m_val * cobj->projection_param.frustrum.top;
-                bottom_res = m_val * cobj->projection_param.frustrum.bottom;
-                break;
-            case PROJ_ORTHO:
-                right_res = cobj->projection_param.ortho.right;
-                left_res = cobj->projection_param.ortho.left;
-                top_res = cobj->projection_param.ortho.top;
-                bottom_res = cobj->projection_param.ortho.bottom;
-                break;
+        switch (HSD_CObjGetProjectionType(cobj)) {
+        case PROJ_PERSPECTIVE:
+            top_res = (z_val * tanf(0.5f * DegToRad(cobj->projection_param.perspective.fov)));
+            bottom_res = -top_res;
+            right_res = top_res * cobj->projection_param.perspective.aspect;
+            left_res = -right_res;
+            break;
+        case PROJ_FRUSTRUM:
+            m_val = z_val / HSD_CObjGetNear(cobj);
+            right_res = m_val * cobj->projection_param.frustrum.right;
+            left_res = m_val * cobj->projection_param.frustrum.left;
+            top_res = m_val * cobj->projection_param.frustrum.top;
+            bottom_res = m_val * cobj->projection_param.frustrum.bottom;
+            break;
+        case PROJ_ORTHO:
+            right_res = cobj->projection_param.ortho.right;
+            left_res = cobj->projection_param.ortho.left;
+            top_res = cobj->projection_param.ortho.top;
+            bottom_res = cobj->projection_param.ortho.bottom;
+            break;
         }
 
         HSD_EraseRect(top_res, bottom_res, left_res, right_res, -z_val, enable_color, enable_alpha, enable_depth);

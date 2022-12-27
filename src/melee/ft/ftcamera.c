@@ -5,7 +5,8 @@ typedef struct UnkFloat6_Camera {
     Vec3 xC;
 } UnkFloat6_Camera;
 
-void func_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul) {
+void func_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul)
+{
     out->x0.x = in->x0.x * mul;
     out->x0.y = in->x0.y * mul;
     out->x0.z = in->x0.z * mul;
@@ -15,7 +16,8 @@ void func_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul) {
 }
 
 // Camera_CopyPlayerPositionToCameraBoxPosition
-void func_80076064(Fighter* fp) {
+void func_80076064(Fighter* fp)
+{
     CameraBox* camera_box;
     UnkFloat6_Camera* ftData_floats;
     UnkFloat6_Camera spC;
@@ -32,7 +34,7 @@ void func_80076064(Fighter* fp) {
         camera_box->x40.y = -spC.x0.z;
         camera_box->x28 = -1.0f;
     }
-    spC.xC; //this line changes everything lol
+    spC.xC; // this line changes everything lol
     camera_box->x48.x = spC.xC.x;
     camera_box->x48.y = spC.xC.y;
     camera_box->x48.z = spC.xC.z;
@@ -46,7 +48,8 @@ void func_80076064(Fighter* fp) {
 
 // Fighter_UpdateCameraBox
 // Camera_UpdatePlayerCameraBoxPosition
-void func_800761C8(HSD_GObj* gobj) {
+void func_800761C8(HSD_GObj* gobj)
+{
     Fighter* fp;
     CameraBox* camera_box;
     UnkFloat6_Camera sp10;
@@ -65,7 +68,7 @@ void func_800761C8(HSD_GObj* gobj) {
         camera_box->x40.y = -sp10.x0.z;
         camera_box->x28 = -1.0f;
     }
-    sp10.xC; //this line changes everything lol
+    sp10.xC; // this line changes everything lol
     camera_box->x10.x = fp->xB0_pos.x;
     camera_box->x10.y = fp->xB0_pos.y + sp10.x0.x;
     camera_box->x10.z = fp->xB0_pos.z;
@@ -73,12 +76,14 @@ void func_800761C8(HSD_GObj* gobj) {
     func_800866DC(gobj, &camera_box->x1C); // Fighter_GetCameraBonePos
 }
 
-void func_800762F4(HSD_GObj* gobj) {
+void func_800762F4(HSD_GObj* gobj)
+{
     Fighter* fp = gobj->user_data;
     func_800866DC(gobj, &fp->x890_cameraBox->x1C);
 }
 
-void func_80076320(HSD_GObj* gobj) {
+void func_80076320(HSD_GObj* gobj)
+{
     Vec3 center_pos;
     Fighter* fp = gobj->user_data;
     CameraBox* camera_box;

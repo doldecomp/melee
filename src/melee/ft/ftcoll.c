@@ -24,29 +24,22 @@ void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID) // Combo 
     HSD_GObj* temp_GObj;
     Fighter* fp;
 
-    if (attacker != victim)
-    {
+    if (attacker != victim) {
         fp = getFighter(attacker);
         temp_GObj = fp->x2094;
-        if (temp_GObj == NULL)
-        {
+        if (temp_GObj == NULL) {
             fp->x208C = attackID;
             fp->x2090 = 1U;
             fp->x2094 = victim;
             return;
         }
-        if (temp_GObj == victim)
-        {
-            if ((attackID != 1) && ((s32)fp->x208C == attackID))
-            {
-                fp->x2090 = (u16)(fp->x2090 + 1);
-                if (fp->x2090 >= p_ftCommonData->x4C4)
-                {
+        if (temp_GObj == victim) {
+            if ((attackID != 1) && ((s32) fp->x208C == attackID)) {
+                fp->x2090 = (u16) (fp->x2090 + 1);
+                if (fp->x2090 >= p_ftCommonData->x4C4) {
                     fp->x2092 = p_ftCommonData->x4D8;
                 }
-            }
-            else
-            {
+            } else {
                 fp->x2090 = 0U;
                 fp->x208C = attackID;
             }
@@ -88,16 +81,13 @@ void func_800764DC(HSD_GObj* fighter_gobj) // Check to end combo for victim //
 
     fp = getFighter(fighter_gobj);
     hitstunTimer = fp->x2098;
-    if (hitstunTimer != 0)
-    {
-        fp->x2098 = (u16)(hitstunTimer - 1);
+    if (hitstunTimer != 0) {
+        fp->x2098 = (u16) (hitstunTimer - 1);
     }
     temp_gobj = fp->x2094;
-    if (temp_gobj != NULL)
-    {
+    if (temp_gobj != NULL) {
         temp_fp = getFighter(temp_gobj);
-        if ((temp_fp->x221C_flag.bits.b6 == 0) && ((u16)temp_fp->x2098 == 0))
-        {
+        if ((temp_fp->x221C_flag.bits.b6 == 0) && ((u16) temp_fp->x2098 == 0)) {
             fp->x2094 = NULL;
         }
     }
@@ -105,16 +95,12 @@ void func_800764DC(HSD_GObj* fighter_gobj) // Check to end combo for victim //
 
 inline void comboCount_Push(Fighter* fp)
 {
-
     Vec3* pos = &fp->x6F0_collData.x14C_ground.normal;
     f32 temp_f2;
     f32 var_f2;
-    if ((s32)fp->x2090 < (s32)p_ftCommonData->x4C8)
-    {
+    if ((s32) fp->x2090 < (s32) p_ftCommonData->x4C8) {
         var_f2 = p_ftCommonData->x4D0;
-    }
-    else
-    {
+    } else {
         var_f2 = p_ftCommonData->x4D4;
     }
     temp_f2 = fp->x2C_facing_direction * var_f2;
@@ -131,11 +117,9 @@ void func_80076528(HSD_GObj* fighter_gobj) // Combo count something + adjust Top
 
     fp = fighter_gobj->user_data;
     temp_r3 = fp->x2092;
-    if (temp_r3 != 0)
-    {
-        fp->x2092 = (u16)(temp_r3 - 1);
-        if ((fp->x1A58_interactedFighter == NULL) && (fp->xE0_ground_or_air == GA_Ground))
-        {
+    if (temp_r3 != 0) {
+        fp->x2092 = (u16) (temp_r3 - 1);
+        if ((fp->x1A58_interactedFighter == NULL) && (fp->xE0_ground_or_air == GA_Ground)) {
             comboCount_Push(fp);
         }
     }
@@ -149,11 +133,9 @@ void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon 
     HSD_GObj* gobj;
 
     gobj = lbl_804D782C->x20_fighters; // Get fp GObj from global list of entities (?) //
-    while (gobj != NULL)
-    {
-        fp = getFighter(gobj); 
-        if (victim == fp->x2094)
-        {
+    while (gobj != NULL) {
+        fp = getFighter(gobj);
+        if (victim == fp->x2094) {
             fp->x2094 = NULL;
         }
         gobj = gobj->next; // Repeat until there are no more fp GObjs left //
@@ -178,12 +160,10 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar) // Unk knockb
     HSD_GObj* currentVictim;
 
     currentVictim = fp->x1A58_interactedFighter;
-    if ((currentVictim != NULL) && (fp->x221B_flag.bits.b5 == 0) && (currentVictim != victim))
-    {
+    if ((currentVictim != NULL) && (fp->x221B_flag.bits.b5 == 0) && (currentVictim != victim)) {
         unk_floatvar *= p_ftCommonData->x128;
     }
-    if (fp->x10_action_state_index == ASID_DAMAGEICE)
-    {
+    if (fp->x10_action_state_index == ASID_DAMAGEICE) {
         unk_floatvar *= p_ftCommonData->x714;
     }
     return unk_floatvar * fp->dmg.x182c_behavior;

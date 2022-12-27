@@ -69,7 +69,7 @@ typedef struct _HSD_RObj {
 
 typedef struct _HSD_RObjDesc {
     struct _HSD_RObjDesc* next;
-    u32 flags; //0x04
+    u32 flags; // 0x04
     union {
         u32 i;
         struct _HSD_ExpDesc* exp;
@@ -84,7 +84,6 @@ typedef struct _HSD_RObjAnimJoint {
     struct _HSD_RObjAnimJoint* next;
     struct _HSD_AObjDesc* aobjdesc;
 } HSD_RObjAnimJoint;
-
 
 void _HSD_RObjForgetMemory(void);
 void HSD_RObjInitAllocData(void);

@@ -135,8 +135,8 @@ typedef struct _HSD_LObjInfo {
     int (*load)(HSD_LObj* lobj, HSD_LightDesc* ldesc);
 } HSD_LObjInfo;
 
-#define HSD_LOBJ(o) ((HSD_LObj*)(o))
-#define HSD_LOBJ_INFO(i) ((HSD_LObjInfo*)(i))
+#define HSD_LOBJ(o) ((HSD_LObj*) (o))
+#define HSD_LOBJ_INFO(i) ((HSD_LObjInfo*) (i))
 #define HSD_LOBJ_METHOD(o) HSD_LOBJ_INFO(HSD_OBJECT_METHOD(o))
 
 extern HSD_LObjInfo hsdLobj;
@@ -155,10 +155,10 @@ HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx);
 void LObjUpdateFunc(void* obj, u32 type, FObjData* val);
 
 void HSD_LObjAnim(HSD_LObj* lobj);
-void HSD_LObjAnimAll(HSD_LObj *lobj);
+void HSD_LObjAnimAll(HSD_LObj* lobj);
 void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe);
 void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
-void HSD_LObjGetLightVector(HSD_LObj *lobj, VecPtr dir);
+void HSD_LObjGetLightVector(HSD_LObj* lobj, VecPtr dir);
 void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess);
 
 BOOL HSD_LObjGetPosition(HSD_LObj*, Vec*);

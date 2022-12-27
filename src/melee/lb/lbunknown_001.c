@@ -387,7 +387,7 @@ void func_8000C160(void* mem, int size)
 {
     u8* bytes = mem;
     while (size--) {
-       *bytes++ = 0;
+        *bytes++ = 0;
     }
 }
 

@@ -20,19 +20,14 @@ void HSD_JObjCheckDepend(HSD_JObj* jobj)
     }
 
     switch (HSD_JObjMtxIsDirty(jobj)) {
-        case FALSE:
-            if ((jobj->flags & JOBJ_USER_DEF_MTX)){
-                if (!(jobj->flags & JOBJ_MTX_INDEP_PARENT) && jobj->parent != NULL && HSD_JObjMtxIsDirty(jobj->parent)){
-                    jobj->flags |= JOBJ_MTX_DIRTY;
-                }
+    case FALSE:
+        if ((jobj->flags & JOBJ_USER_DEF_MTX)) {
+            if (!(jobj->flags & JOBJ_MTX_INDEP_PARENT) && jobj->parent != NULL && HSD_JObjMtxIsDirty(jobj->parent)) {
+                jobj->flags |= JOBJ_MTX_DIRTY;
             }
-            else if (jobj->parent != NULL && (jobj->parent->flags & JOBJ_MTX_DIRTY)
-                || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT1
-                || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2
-                || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR
-                || jobj->robj != NULL) {
-                    jobj->flags |= JOBJ_MTX_DIRTY;
-            }
+        } else if (jobj->parent != NULL && (jobj->parent->flags & JOBJ_MTX_DIRTY) || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT1 || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2 || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR || jobj->robj != NULL) {
+            jobj->flags |= JOBJ_MTX_DIRTY;
+        }
         break;
     }
 }
@@ -421,7 +416,6 @@ lbl_8036FB3C:
 void HSD_JObjAddAnimAll(HSD_JObj* jobj, HSD_AnimJoint* arg1,
                         HSD_MatAnimJoint* arg2, HSD_ShapeAnimJoint* arg3)
 {
-
     HSD_JObj* var_r31;
     HSD_AnimJoint* var_r26;
     HSD_MatAnimJoint* var_r25;
@@ -1032,8 +1026,7 @@ char lbl_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
 inline int iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
-    HSD_OBJ(o)->ref_count_individual != 0 ? (void) 0 :
-        __assert(lbl_804068E4, 0x9E, lbl_80406918);
+    HSD_OBJ(o)->ref_count_individual != 0 ? (void) 0 : __assert(lbl_804068E4, 0x9E, lbl_80406918);
 }
 
 inline BOOL iref_none(void* o)

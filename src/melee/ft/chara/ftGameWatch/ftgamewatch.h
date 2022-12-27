@@ -31,8 +31,7 @@
 
 // Mr. Game & Watch Action State IDs //
 
-typedef enum ftGameWatchAction
-{
+typedef enum ftGameWatchAction {
     AS_FTCOMMON = 340,
     AS_GAMEWATCH_ATTACK11,
     AS_GAMEWATCH_ATTACK100START,
@@ -77,33 +76,30 @@ typedef enum ftGameWatchAction
 
 } ftGameWatchAction;
 
-typedef struct ftGameWatchChef
-{
+typedef struct ftGameWatchChef {
     s32 sausageCount[5];
 } ftGameWatchChef;
 
-typedef struct ftGameWatchJudge
-{
+typedef struct ftGameWatchJudge {
     s32 rollVar[9];
 } ftGameWatchJudge;
 
 typedef struct _ftGameWatchAttributes {
-
     // MISC. ATTRIBUTES //
 
-    f32 x0_GAMEWATCH_WIDTH; // Mr. Game & Watch's Z-Axis stretch; 0.01 by default
+    f32 x0_GAMEWATCH_WIDTH;    // Mr. Game & Watch's Z-Axis stretch; 0.01 by default
     s32 x4_GAMEWATCH_COLOR[4]; // Array of four RGBA values, one for each Mr. Game & Watch costume color
     s32 x14_GAMEWATCH_OUTLINE; // Outline color of Mr. Game & Watch's model
 
     // NEUTRAL SPECIAL - CHEF //
 
     f32 x18_GAMEWATCH_CHEF_LOOPFRAME; // Allow rapid-firing sausages from this frame onward
-    f32 x1C_GAMEWATCH_CHEF_MAX; // Maximum amount of sausages created per Chef use
+    f32 x1C_GAMEWATCH_CHEF_MAX;       // Maximum amount of sausages created per Chef use
 
     // SIDE SPECIAL - JUDGEMENT //
 
-    f32 x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE; // Horizontal momentum preservation value 
-    f32 x24_GAMEWATCH_JUDGE_MOMENTUM_MUL; // Multiplies momentum preservation value
+    f32 x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE; // Horizontal momentum preservation value
+    f32 x24_GAMEWATCH_JUDGE_MOMENTUM_MUL;      // Multiplies momentum preservation value
     f32 x28_GAMEWATCH_JUDGE_VEL_Y;
     f32 x2C_GAMEWATCH_JUDGE_FRICTION1;
     f32 x30_GAMEWATCH_JUDGE_FRICTION2;
@@ -112,22 +108,21 @@ typedef struct _ftGameWatchAttributes {
     // UP SPECIAL - FIRE RESCUE //
 
     f32 x58_GAMEWATCH_RESCUE_STICK_RANGE; // Minimum control stick range required for directional influence? Also affects how far Mr. Game & Watch flings horizontally (?)
-    f32 x5C_GAMEWATCH_RESCUE_ANGLE_UNK; // Radians -- controls how far Mr. Game & Watch can angle Fire Rescue? 
-    f32 x60_GAMEWATCH_RESCUE_LANDING; // Landing lag / Freefall toggle
+    f32 x5C_GAMEWATCH_RESCUE_ANGLE_UNK;   // Radians -- controls how far Mr. Game & Watch can angle Fire Rescue?
+    f32 x60_GAMEWATCH_RESCUE_LANDING;     // Landing lag / Freefall toggle
 
     // DOWN SPECIAL - OIL PANIC //
 
-    f32 x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE; // Horizontal momentum preservation value 
-    f32 x68_GAMEWATCH_PANIC_MOMENTUM_MUL; // Multiplies momentum preservation value
-    f32 x6C_GAMEWATCH_PANIC_FALL_ACCEL; // Falling acceleration
-    f32 x70_GAMEWATCH_PANIC_VEL_Y_MAX; // Terminal Y velocity? 
-    f32 x74_GAMEWATCH_PANIC_DAMAGE_ADD; // Extra damage added to Oil Panic after formula
-    f32 x78_GAMEWATCH_PANIC_DAMAGE_MUL; // Damage multiplier
+    f32 x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE; // Horizontal momentum preservation value
+    f32 x68_GAMEWATCH_PANIC_MOMENTUM_MUL;      // Multiplies momentum preservation value
+    f32 x6C_GAMEWATCH_PANIC_FALL_ACCEL;        // Falling acceleration
+    f32 x70_GAMEWATCH_PANIC_VEL_Y_MAX;         // Terminal Y velocity?
+    f32 x74_GAMEWATCH_PANIC_DAMAGE_ADD;        // Extra damage added to Oil Panic after formula
+    f32 x78_GAMEWATCH_PANIC_DAMAGE_MUL;        // Damage multiplier
     f32 x7C_GAMEWATCH_PANIC_TURN_FRAMES;
     AbsorbDesc x80_GAMEWATCH_PANIC_ABSORPTION; // Oil Panic absorption attributes
 
 } ftGameWatchAttributes;
-
 
 // Mr. Game & Watch Functions //
 

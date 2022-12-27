@@ -6,8 +6,7 @@
 #include <dolphin/types.h>
 
 typedef u8 __OSInterrupt;
-typedef enum
-{
+typedef enum {
     OS_INTR_MEM_0,
     OS_INTR_MEM_1,
     OS_INTR_MEM_2,
@@ -44,7 +43,7 @@ typedef enum
     OS_INTR_MAX
 } OSInterruptType;
 
-typedef void (*OSInterruptHandler)(u8, OSContext *);
+typedef void (*OSInterruptHandler)(u8, OSContext*);
 
 extern u32 __OSLastInterruptSrr0;
 extern s16 __OSLastInterrupt;

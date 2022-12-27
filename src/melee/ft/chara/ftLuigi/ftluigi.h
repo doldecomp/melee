@@ -9,8 +9,7 @@
 #include <melee/it/itkind.h>
 #include <common_structs.h>
 
-typedef enum ftLuigiAction
-{
+typedef enum ftLuigiAction {
     AS_FTCOMMON = 340,
     AS_LUIGI_SPECIALN,
     AS_LUIGI_SPECIALAIRN,
@@ -53,13 +52,11 @@ typedef enum ftLuigiAction
 
 #define FTLUIGI_SPECIALLW_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-
 typedef struct _ftLuigiAttributes {
-
     // SIDE SPECIAL - GREEN MISSILE //
 
     f32 x0_LUIGI_GREENMISSILE_UNK1;
-    f32 x4_LUIGI_GREENMISSILE_SMASH; 
+    f32 x4_LUIGI_GREENMISSILE_SMASH;
     f32 x8_LUIGI_GREENMISSILE_CHARGE_RATE;
     f32 xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES;
     f32 x10_LUIGI_GREENMISSILE_DAMAGE_TILT;
@@ -78,18 +75,18 @@ typedef struct _ftLuigiAttributes {
     f32 x44_LUIGI_GREENMISSILE_MISFIRE_CHANCE; // 1.0f divided by this value
     f32 x48_LUIGI_GREENMISSILE_MISFIRE_VEL_X;
     f32 x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
-    
+
     // UP SPECIAL - SUPER JUMP PUNCH //
 
     f32 x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY; // Multiplies Luigi's max horionztal aerial mobility
     f32 x54_LUIGI_SUPERJUMP_LANDING_LAG;
-    f32 x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE; // Minimum stick range required for turnaround
+    f32 x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE;  // Minimum stick range required for turnaround
     f32 x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE; // Minimum stick range required for horionztal momentum?
     f32 x60_LUIGI_SUPERJUMP_ANGLE_DIFF;
-    f32 x64_LUIGI_SUPERJUMP_VEL_X; 
+    f32 x64_LUIGI_SUPERJUMP_VEL_X;
     f32 x68_LUIGI_SUPERJUMP_GRAVITY_START;
     f32 x6C_LUIGI_SUPERJUMP_VEL_Y;
-    
+
     // DOWN SPECIAL - LUIGI CYCLONE //
 
     f32 x70_LUIGI_CYCLONE_TAP_MOMENTUM; // Vertical momentum from (first?) B button tap

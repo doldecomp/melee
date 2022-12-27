@@ -2,7 +2,8 @@
 
 // 8013A830 - 8013A8AC (0x7C bytes)
 // https://decomp.me/scratch/6v90P
-void ftZelda_8013A830(HSD_GObj* fighter_gobj) {
+void ftZelda_8013A830(HSD_GObj* fighter_gobj)
+{
     Fighter* fp; // r31
 
     fp = fighter_gobj->user_data;
@@ -17,7 +18,8 @@ void ftZelda_8013A830(HSD_GObj* fighter_gobj) {
 
 // 8013A8AC - 8013A928 (0x7C bytes)
 // https://decomp.me/scratch/rfSO5
-void ftZelda_8013A8AC(HSD_GObj* fighter_gobj) {
+void ftZelda_8013A8AC(HSD_GObj* fighter_gobj)
+{
     Fighter* fp; // r31
 
     fp = fighter_gobj->user_data;
@@ -32,9 +34,10 @@ void ftZelda_8013A8AC(HSD_GObj* fighter_gobj) {
 
 // 8013A928 - 8013A9A4 (0x7C bytes)
 // https://decomp.me/scratch/arJgt
-void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj) {
+void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj)
+{
     f32 temp_f1;
-    Fighter* fp; // r31
+    Fighter* fp;       // r31
     Fighter* fighter2; // r5
     ftZeldaAttributes* attributes;
     f32 unused[5];
@@ -54,7 +57,8 @@ void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj) {
 
 // 8013A9A4 - 8013AA38 (0x94 bytes)
 // https://decomp.me/scratch/DgO7D
-void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) {
+void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
+{
     Fighter* fp; // r31
     Fighter* fighter2;
     ftZeldaAttributes* attributes;
@@ -77,14 +81,15 @@ void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) {
 
 // 8013AA38 - 8013AACC (0x94 bytes)
 // https://decomp.me/scratch/XcH4E
-void ftZelda_8013AA38(HSD_GObj* fighter_gobj) {
+void ftZelda_8013AA38(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
     s32 attributes;
     s32 unused[5];
 
     fp = fighter_gobj->user_data;
-    attributes = ((u32)fp->x2D4_specialAttributes);
-    
+    attributes = ((u32) fp->x2D4_specialAttributes);
+
     if (fp->x2200_ftcmd_var0 == 1) {
         fp->x2200_ftcmd_var0 = 2;
         ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
@@ -101,14 +106,15 @@ void ftZelda_8013AA38(HSD_GObj* fighter_gobj) {
 
 // 8013AACC - 8013AB60 (0x94 bytes)
 // https://decomp.me/scratch/ttWvN
-void ftZelda_8013AACC(HSD_GObj* fighter_gobj) {
+void ftZelda_8013AACC(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
     s32 attributes;
     s32 unused[5];
 
     fp = fighter_gobj->user_data;
-    attributes = ((u32)fp->x2D4_specialAttributes);
-    
+    attributes = ((u32) fp->x2D4_specialAttributes);
+
     if (fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
         ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
@@ -123,18 +129,20 @@ void ftZelda_8013AACC(HSD_GObj* fighter_gobj) {
     }
 }
 
-void ftZelda_8013AB60(HSD_GObj* fighter_gobj) {return;}
-void ftZelda_8013AB64(HSD_GObj* fighter_gobj) {return;}
+void ftZelda_8013AB60(HSD_GObj* fighter_gobj) { return; }
+void ftZelda_8013AB64(HSD_GObj* fighter_gobj) { return; }
 
 // 8013AB68 - 8013AB9C (0x34 bytes)
-void ftZelda_8013AB68(HSD_GObj* fighter_gobj) {
+void ftZelda_8013AB68(HSD_GObj* fighter_gobj)
+{
     func_80084F3C(fighter_gobj);
     func_8007AEF8(fighter_gobj);
 }
 
 // 8013AB9C - 8013AC10 (0x74 bytes)
 // https://decomp.me/scratch/juoPH
-void ftZelda_8013AB9C(HSD_GObj* fighter_gobj) {
+void ftZelda_8013AB9C(HSD_GObj* fighter_gobj)
+{
     Fighter* fp;
     s32 stateVar1;
     attr* fighterAttr;
@@ -146,13 +154,13 @@ void ftZelda_8013AB9C(HSD_GObj* fighter_gobj) {
     stateVar1 = fp->x2340_stateVar1;
     fighterAttr = &fp->x110_attr;
     charAttr = fp->x2D4_specialAttributes;
-    
+
     if (stateVar1 != 0) {
         fp->x2340_stateVar1 = stateVar1 - 1;
     } else {
         arg2 = charAttr->xC;
         arg3 = fighterAttr->x170_TerminalVelocity;
-        func_8007D494(fp, arg2, arg3) ;
+        func_8007D494(fp, arg2, arg3);
     }
 
     func_8007CF58(fp);
@@ -161,7 +169,8 @@ void ftZelda_8013AB9C(HSD_GObj* fighter_gobj) {
 
 // 8013AC10 - 8013AC4C (0x3C bytes)
 // https://decomp.me/scratch/CT7dz
-void ftZelda_8013AC10(HSD_GObj* fighter_gobj) {
+void ftZelda_8013AC10(HSD_GObj* fighter_gobj)
+{
     if (func_80082708(fighter_gobj) == 0) {
         ftZelda_8013AC88(fighter_gobj);
     }
@@ -169,7 +178,8 @@ void ftZelda_8013AC10(HSD_GObj* fighter_gobj) {
 
 // 8013AC4C - 8013AC88 (0x3C bytes)
 // https://decomp.me/scratch/CT7dz
-void ftZelda_8013AC4C(HSD_GObj* fighter_gobj) {
+void ftZelda_8013AC4C(HSD_GObj* fighter_gobj)
+{
     if (func_80081D0C(fighter_gobj) != 0) {
         ftZelda_8013AD1C(fighter_gobj);
     }
@@ -177,7 +187,8 @@ void ftZelda_8013AC4C(HSD_GObj* fighter_gobj) {
 
 // 8013AC88 - 8013AD1C (0x94 bytes)
 // https://decomp.me/scratch/B9loR
-void ftZelda_8013AC88(HSD_GObj* fighter_gobj) {
+void ftZelda_8013AC88(HSD_GObj* fighter_gobj)
+{
     s32 attributes;
     Fighter* fp;
     Fighter* fighter2;
@@ -186,9 +197,9 @@ void ftZelda_8013AC88(HSD_GObj* fighter_gobj) {
     fp = fighter_gobj->user_data;
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x156, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0, 0);
-    
+
     fighter2 = fighter_gobj->user_data;
-    attributes = ((u32)fighter2->x2D4_specialAttributes);
+    attributes = ((u32) fighter2->x2D4_specialAttributes);
 
     if (fighter2->x2200_ftcmd_var0 == 2U) {
         ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
@@ -198,7 +209,8 @@ void ftZelda_8013AC88(HSD_GObj* fighter_gobj) {
 
 // 8013AD1C - 8013ADB0 (0x94 bytes)
 // https://decomp.me/scratch/pQ6Xn
-void ftZelda_8013AD1C(HSD_GObj* fighter_gobj) {
+void ftZelda_8013AD1C(HSD_GObj* fighter_gobj)
+{
     s32 attributes;
     Fighter* fp;
     Fighter* fighter2;
@@ -209,12 +221,12 @@ void ftZelda_8013AD1C(HSD_GObj* fighter_gobj) {
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x155, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0, 0);
 
     fighter2 = fighter_gobj->user_data;
-    attributes = ((u32)fighter2->x2D4_specialAttributes);
-    
+    attributes = ((u32) fighter2->x2D4_specialAttributes);
+
     if (fighter2->x2200_ftcmd_var0 == 2U) {
         ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;
 }
 
-void ftZelda_8013ADB0(HSD_GObj* fighter_gobj) {return;}
+void ftZelda_8013ADB0(HSD_GObj* fighter_gobj) { return; }

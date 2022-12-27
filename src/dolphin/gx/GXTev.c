@@ -7,13 +7,11 @@ void GXSetTevOp(GXTevStageID id, GXTevMode mode)
     GXTevColorArg inputColor = GX_CC_RASC;
     GXTevAlphaArg inputAlpha = GX_CA_RASA;
 
-    if (id != GX_TEVSTAGE0)
-    {
+    if (id != GX_TEVSTAGE0) {
         inputColor = GX_CC_CPREV;
         inputAlpha = GX_CA_APREV;
     }
-    switch (mode)
-    {
+    switch (mode) {
     case GX_MODULATE:
         GXSetTevColorIn(id, GX_CC_ZERO, GX_CC_TEXC, inputColor, GX_CC_ZERO);
         GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_TEXA, inputAlpha, GX_CA_ZERO);
@@ -41,8 +39,8 @@ void GXSetTevOp(GXTevStageID id, GXTevMode mode)
 
 void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTevColorArg c, GXTevColorArg d)
 {
-    GXContext *gx = __GXContexts.main;
-    u32 *temp_r9 = &gx->x130_data[stage];
+    GXContext* gx = __GXContexts.main;
+    u32* temp_r9 = &gx->x130_data[stage];
 
     INSERT_FIELD(*temp_r9, a, 4, 12);
     INSERT_FIELD(*temp_r9, b, 4, 8);
@@ -55,7 +53,7 @@ void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTev
 
 void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b, GXTevAlphaArg c, GXTevAlphaArg d)
 {
-    u32 *temp_r9 = &__GXContexts.main->x170_data[stage];
+    u32* temp_r9 = &__GXContexts.main->x170_data[stage];
 
     INSERT_FIELD(*temp_r9, a, 3, 13);
     INSERT_FIELD(*temp_r9, b, 3, 10);
@@ -68,16 +66,13 @@ void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b, GXTev
 
 void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
 {
-    u32 *temp_r3 = &__GXContexts.main->x130_data[stage];
+    u32* temp_r3 = &__GXContexts.main->x130_data[stage];
 
     INSERT_FIELD(*temp_r3, op & 1, 1, 18);
-    if (op <= 1)
-    {
+    if (op <= 1) {
         INSERT_FIELD(*temp_r3, scale, 2, 20);
         INSERT_FIELD(*temp_r3, bias, 2, 16);
-    }
-    else
-    {
+    } else {
         INSERT_FIELD(*temp_r3, (op >> 1) & 3, 2, 20);
         INSERT_FIELD(*temp_r3, 3, 2, 16);
     }
@@ -91,16 +86,13 @@ void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
 
 void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
 {
-    u32 *temp_r3 = &__GXContexts.main->x170_data[stage];
+    u32* temp_r3 = &__GXContexts.main->x170_data[stage];
 
     INSERT_FIELD(*temp_r3, op & 1, 1, 18);
-    if (op <= 1)
-    {
+    if (op <= 1) {
         INSERT_FIELD(*temp_r3, scale, 2, 20);
         INSERT_FIELD(*temp_r3, bias, 2, 16);
-    }
-    else
-    {
+    } else {
         INSERT_FIELD(*temp_r3, (op >> 1) & 3, 2, 20);
         INSERT_FIELD(*temp_r3, 3, 2, 16);
     }
@@ -136,7 +128,7 @@ void GXSetTevColor(GXTevRegID id, GXColor color)
 
 // https://decomp.me/scratch/UNKO4
 #pragma push
-asm void GXSetTevColorS10(s32, GXColor *)
+asm void GXSetTevColorS10(s32, GXColor*)
 { // clang-format off
     nofralloc
 /* 80340260 0033CE40  A8 04 00 06 */	lha r0, 6(r4)
@@ -366,12 +358,12 @@ void GXSetTevClampMode(s32, s32)
 void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1, u8 ref1)
 {
     u32 reg = 0;
-    INSERT_FIELD(reg, ref0,  8,  0);
-    INSERT_FIELD(reg, ref1,  8,  8);
+    INSERT_FIELD(reg, ref0, 8, 0);
+    INSERT_FIELD(reg, ref1, 8, 8);
     INSERT_FIELD(reg, comp0, 3, 16);
     INSERT_FIELD(reg, comp1, 3, 19);
-    INSERT_FIELD(reg, op,    2, 22);
-    INSERT_FIELD(reg, 0xF3,  8, 24);
+    INSERT_FIELD(reg, op, 2, 22);
+    INSERT_FIELD(reg, 0xF3, 8, 24);
     WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = reg;
     set_x2(GX_FALSE);
@@ -424,7 +416,7 @@ lbl_803405B4:
 } // clang-format on
 #pragma pop
 
-static u32 lbl_804014E0[] = {0, 1, 0, 1, 0, 1, 7, 5, 6, 0};
+static u32 lbl_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
 
 // https://decomp.me/scratch/0H3SX // 780 (92.50%)
 #pragma push

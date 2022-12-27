@@ -63,7 +63,6 @@ typedef enum ftFoxAction {
 #define FTFOX_SPECIALS_COLL_FLAG FIGHTER_MATANIM_NOUPDATE | FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 typedef struct _ftFoxAttributes {
-
     // NEUTRAL SPECIAL - BLASTER //
 
     f32 x0_FOX_BLASTER_UNK1;
@@ -71,7 +70,7 @@ typedef struct _ftFoxAttributes {
     f32 x8_FOX_BLASTER_UNK3;
     f32 xC_FOX_BLASTER_UNK4;
     f32 x10_FOX_BLASTER_ANGLE; // Angle at which Blaster shots are fired
-    f32 x14_FOX_BLASTER_VEL; // Velocity at which Blaster shots are fired
+    f32 x14_FOX_BLASTER_VEL;   // Velocity at which Blaster shots are fired
     f32 x18_FOX_BLASTER_LANDING_LAG;
     s32 x1C_FOX_BLASTER_SHOT_ITKIND;
     s32 x20_FOX_BLASTER_GUN_ITKIND;
@@ -79,7 +78,7 @@ typedef struct _ftFoxAttributes {
     // SIDE SPECIAL - FOX ILLUSION / FALCO PHANTASM //
 
     f32 x24_FOX_ILLUSION_GRAVITY_DELAY; // Frames required to pass before gravity is applied
-    f32 x28_FOX_ILLUSION_GROUND_VEL_X; // Horizontal velocity?
+    f32 x28_FOX_ILLUSION_GROUND_VEL_X;  // Horizontal velocity?
     f32 x2C_FOX_ILLUSION_UNK1;
     f32 x30_FOX_ILLUSION_UNK2;
     f32 x34_FOX_ILLUSION_GROUND_END_VEL_X;
@@ -95,22 +94,22 @@ typedef struct _ftFoxAttributes {
 
     f32 x54_FOX_FIREFOX_GRAVITY_DELAY;
     f32 x58_FOX_FIREFOX_VEL_X; // Initial velocity
-    f32 x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X; 
+    f32 x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X;
     f32 x60_FOX_FIREFOX_FALL_ACCEL;
     f32 x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN; // Minimum control stick range required for direction change
-    f32 x68_FOX_FIREFOX_DURATION; // Amount of frames Firefox/Firebird travels
+    f32 x68_FOX_FIREFOX_DURATION;                  // Amount of frames Firefox/Firebird travels
     s32 x6C_FOX_FIREFOX_BOUNCE_VAR;
     f32 x70_FOX_FIREFOX_DURATION_END;
     f32 x74_FOX_FIREFOX_SPEED;
     f32 x78_FOX_FIREFOX_REVERSE_ACCEL; // ???
     f32 x7C_FOX_FIREFOX_GROUND_MOMENTUM_END;
     f32 x80_FOX_FIREFOX_UNK2;
-    f32 x84_FOX_FIREFOX_BOUND_VEL_X; // Horizontal velocity of SpecialHiBound action state
+    f32 x84_FOX_FIREFOX_BOUND_VEL_X;            // Horizontal velocity of SpecialHiBound action state
     f32 x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN; // Minimum control stick range required to change character's facing direction
     f32 x8C_FOX_FIREFOX_FREEFALL_MOBILITY;
     f32 x90_FOX_FIREFOX_LANDING_LAG;
     f32 x94_FOX_FIREFOX_BOUND_ANGLE;
-    
+
     // DOWN SPECIAL - REFLECTOR //
 
     f32 x98_FOX_REFLECTOR_RELEASE_LAG; // Auto lag frames after initializing Reflector if B is not being held. Reflector is immediately released with no lag once these frames have passed.

@@ -238,7 +238,6 @@ void GXSetVtxDesc(s32 arg0, s32 arg1)
     __GXContexts.main->x4F0_flags |= 8;
 }
 
-
 // https://decomp.me/scratch/NAwYO // 4529 (49.68%)
 #pragma push
 asm unk_t __GXSetVCD()
@@ -484,7 +483,7 @@ void GXSetArray(s32 arg0, s32 arg1, u8 arg2)
     WGPIPE.u32 = arg2;
     idx = temp_r6 - 0xC;
     if (idx >= 0 && idx < 4) {
-        __GXContexts.main->x98_data[idx]= arg2;
+        __GXContexts.main->x98_data[idx] = arg2;
     }
 }
 

@@ -18,32 +18,24 @@ void ftNess_ItemPKFireSpawn(HSD_GObj* fighter_gobj) //* Ness's PK Fire spawn fun
     f32 PKFireLaunch;
     f32 PKFireVel;
 
-
-    if (fp->x2210_ThrowFlags.b0 != 0)
-    {
+    if (fp->x2210_ThrowFlags.b0 != 0) {
         fp->x2210_ThrowFlags.b0 = 0;
         FlagResult = TRUE;
-    }
-    else
-    {
+    } else {
         FlagResult = FALSE;
     }
 
-    if (FlagResult != FALSE)
-    {
+    if (FlagResult != FALSE) {
         func_8000B1CC(fp->x5E8_fighterBones[42].x0_jobj, NULL, &ItemBonePos);
 
         ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->x2C_facing_direction;
         ItemBonePos.y += ness_attr->x34_PKFIRE_SPAWN_Y;
         ItemBonePos.z = 0.0f;
 
-        if (fp->xE0_ground_or_air == GA_Air)
-        {
+        if (fp->xE0_ground_or_air == GA_Air) {
             PKFireLaunch = ness_attr->x20_PKFIRE_AERIAL_LAUNCH_TRAJECTORY;
             PKFireVel = ness_attr->x24_PKFIRE_AERIAL_VELOCITY;
-        }
-        else
-        {
+        } else {
             PKFireLaunch = ness_attr->x28_PKFIRE_GROUNDED_LAUNCH_TRAJECTORY;
             PKFireVel = ness_attr->x2C_PKFIRE_GROUNDED_VELOCITY;
         }
@@ -64,13 +56,13 @@ void ftNess_ItemPKFireSpawn(HSD_GObj* fighter_gobj) //* Ness's PK Fire spawn fun
 
 // 0x80116C94 //
 // https://decomp.me/scratch/XdzmF //
-void ftNess_SpecialS_StartAction(HSD_GObj* fighter_gobj)  // Ness's grounded PK Fire Action State handler //
+void ftNess_SpecialS_StartAction(HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Action State handler //
 {
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
-    fp->x2200_ftcmd_var0 = 0; // Set ftcmd flag0 to 0; unused in PK Fire? //
+    fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; unused in PK Fire? //
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALS, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftNess_ItemPKFireSpawn; // Store PK Fire spawn function //
@@ -78,13 +70,13 @@ void ftNess_SpecialS_StartAction(HSD_GObj* fighter_gobj)  // Ness's grounded PK 
 
 // 0x80116D04 //
 // https://decomp.me/scratch/fnaSW //
-void ftNess_SpecialAirS_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK Fire Action State handler //
+void ftNess_SpecialAirS_Action(HSD_GObj* fighter_gobj) // Ness's aerial PK Fire Action State handler //
 {
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
-    fp->x2200_ftcmd_var0 = 0; // Set ftcmd flag0 to 0; unused in PK Fire? //
+    fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; unused in PK Fire? //
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRS, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftNess_ItemPKFireSpawn;
@@ -94,8 +86,7 @@ void ftNess_SpecialAirS_Action(HSD_GObj* fighter_gobj)  // Ness's aerial PK Fire
 // https://decomp.me/scratch/5NxzS //
 void ftNess_SpecialS_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Animation callback //
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
@@ -104,8 +95,7 @@ void ftNess_SpecialS_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Ani
 // https://decomp.me/scratch/iFFHn //
 void ftNess_SpecialAirS_Anim(HSD_GObj* fighter_gobj) // Ness's aerial PK Fire Animation callback //
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800CC730(fighter_gobj);
     }
 }
@@ -128,8 +118,7 @@ void ftNess_SpecialAirS_Phys(HSD_GObj* fighter_gobj) // Ness's aerial PK Fire Ph
 // https://decomp.me/scratch/gi1NE //
 void ftNess_SpecialS_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Collision callback //
 {
-    if (func_800827A0(fighter_gobj) == FALSE)
-    {
+    if (func_800827A0(fighter_gobj) == FALSE) {
         func_800CC730(fighter_gobj);
     }
 }
@@ -142,8 +131,7 @@ void ftNess_SpecialAirS_Coll(HSD_GObj* fighter_gobj) // Ness's aerial PK Fire Co
     ftNessAttributes* ness_attr;
 
     ness_attr = fp->x2D4_specialAttributes;
-    if (func_80081D0C(fighter_gobj) != FALSE)
-    {
+    if (func_80081D0C(fighter_gobj) != FALSE) {
         func_800D5CB0(fighter_gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
     }
 }

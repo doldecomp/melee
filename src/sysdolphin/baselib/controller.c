@@ -15,7 +15,7 @@ u8 HSD_PadGetRawQueueCount(void)
     intr = OSDisableInterrupts();
     queue_count = p->qcount;
     OSRestoreInterrupts(intr);
-    
+
     return queue_count;
 }
 

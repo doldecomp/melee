@@ -2,7 +2,8 @@
 
 // 80155388 151F68
 // https://decomp.me/scratch/6nLDB
-void lbl_80155388(HSD_GObj* gobj) {
+void lbl_80155388(HSD_GObj* gobj)
+{
     Fighter* fp;
     Fighter* ft_2;
     s32 unused[2];
@@ -21,35 +22,31 @@ void lbl_80155388(HSD_GObj* gobj) {
     }
 }
 
-
-
 // 8015541C 151FFC
-void lbl_8015541C(HSD_GObj* gobj) {
+void lbl_8015541C(HSD_GObj* gobj)
+{
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
 }
 
-
-
 // 80155460 152040
-void lbl_80155460(HSD_GObj* gobj) {
+void lbl_80155460(HSD_GObj* gobj)
+{
     func_80085134(gobj);
 }
 
-
-
 // 80155480 152060
-void lbl_80155480(HSD_GObj* gobj) {
+void lbl_80155480(HSD_GObj* gobj)
+{
     return;
 }
 
-
-
 // 80155484 152064
 // https://decomp.me/scratch/jsnxb
-void lbl_80155484(HSD_GObj* gobj) {
+void lbl_80155484(HSD_GObj* gobj)
+{
     Fighter* fp;
     HSD_GObj* gobj_2;
 

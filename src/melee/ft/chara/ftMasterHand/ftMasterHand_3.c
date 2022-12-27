@@ -4,7 +4,8 @@
 
 // 80150C8C 0014D86C
 // https://decomp.me/scratch/Nhsvo
-void func_80150C8C(HSD_GObj* gobj) {
+void func_80150C8C(HSD_GObj* gobj)
+{
     Fighter* r31_fp;
 
     r31_fp = gobj->user_data;
@@ -17,11 +18,10 @@ void func_80150C8C(HSD_GObj* gobj) {
     r31_fp->sa.masterhand.x2258 = 0x185;
 }
 
-
-
 // 80150D28 0014D908
 // https://decomp.me/scratch/ntaE2
-void func_80150D28(HSD_GObj* gobj) {
+void func_80150D28(HSD_GObj* gobj)
+{
     Fighter* r31_fp;
 
     r31_fp = gobj->user_data;
@@ -34,11 +34,10 @@ void func_80150D28(HSD_GObj* gobj) {
     r31_fp->sa.masterhand.x2258 = 0x186;
 }
 
-
-
 // 80150DC4 0014D9A4
 // https://decomp.me/scratch/vZOBB
-void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos) {
+void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
+{
     f32 temp_f1;
     Fighter* r32_fp;
     s32 unk_filler[4];
@@ -66,11 +65,10 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos) {
     r32_fp->x234C_pos = *arg2_pos;
 }
 
-
-
 // 80150F00 0014DAE0
 // https://decomp.me/scratch/tAkIF
-void lbl_80150F00(HSD_GObj* gobj) {
+void lbl_80150F00(HSD_GObj* gobj)
+{
     u32 unk[1];
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -81,11 +79,10 @@ void lbl_80150F00(HSD_GObj* gobj) {
     }
 }
 
-
-
 // 80150F68 0014DB48
 // https://decomp.me/scratch/kHlJR
-void lbl_80150F68(HSD_GObj* gobj) {
+void lbl_80150F68(HSD_GObj* gobj)
+{
     Fighter* r31_fp;
     MasterHandAttributes* r30_ft_attributes;
     ftData* r4_ftdata;
@@ -98,11 +95,10 @@ void lbl_80150F68(HSD_GObj* gobj) {
     func_8015BE40(gobj, &r31_fp->x234C_pos, &r31_fp->x2358_stateVar7, r30_ft_attributes->x2C, r30_ft_attributes->x28);
 }
 
-
-
 // 80150FC8 0014DBA8
 // https://decomp.me/scratch/8qlZ7
-void lbl_80150FC8(HSD_GObj* gobj) {
+void lbl_80150FC8(HSD_GObj* gobj)
+{
     Fighter* r4_fp;
 
     r4_fp = gobj->user_data;
@@ -112,16 +108,15 @@ void lbl_80150FC8(HSD_GObj* gobj) {
         r4_fp->x80_self_vel.x = 0.0f;
 
         if (r4_fp->x2344_stateVar2) {
-            ((void(*)(HSD_GObj*))r4_fp->x2344_stateVar2)(gobj);
+            ((void (*)(HSD_GObj*)) r4_fp->x2344_stateVar2)(gobj);
         }
     }
 }
 
-
-
 // 80151018 0014DBF8
 // https://decomp.me/scratch/rjK44
-void func_80151018(HSD_GObj* gobj) {
+void func_80151018(HSD_GObj* gobj)
+{
     Vec3 sp1C_pos;
     MasterHandAttributes* r5_attributes;
     Fighter* r6_fp;

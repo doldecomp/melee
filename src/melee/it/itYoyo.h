@@ -3,8 +3,7 @@
 
 #include <dolphin/types.h>
 
-typedef struct itYoyoAttributes
-{
+typedef struct itYoyoAttributes {
     s32 x0_CHARGE_SPAWN_POS;
     s32 x4_UPSMASH_CHARGE_STRING_LENGTH;
     s32 x8_DOWNSMASH_CHARGE_STRING_LENGTH;
@@ -29,6 +28,6 @@ typedef struct itYoyoAttributes
     s32 x54_UNK5;
     s32 x58_UNK6;
     s32 x5C_UNK7;
-}itYoyoAttributes;
+} itYoyoAttributes;
 
 #endif

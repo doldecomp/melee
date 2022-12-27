@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
-void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj) {
+void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = getFighterPlus(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x161, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftSamus_updateDamageDeathCBs(fighter_gobj);
@@ -17,9 +18,10 @@ void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj) {
     fp->sa.samus.x2244 = 1;
 }
 
-void ftSamus_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj) {
+void ftSamus_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = getFighter(fighter_gobj);
-    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes; 
+    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x162, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftSamus_updateDamageDeathCBs(fighter_gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -37,41 +39,19 @@ void ftSamus_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj) {
     fp->sa.samus.x2244 = 1;
 }
 
-
-void ftSamus_DestroyAllUnsetx2444(HSD_GObj* fighter_gobj) {
+void ftSamus_DestroyAllUnsetx2444(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = fighter_gobj->user_data;
     efLib_DestroyAll(fighter_gobj);
     fp->sa.samus.x2244 = 0;
 }
 
-void ftSamus_8012A81C(HSD_GObj *fighter_gobj)
+void ftSamus_8012A81C(HSD_GObj* fighter_gobj)
 {
-    Fighter *fp = fighter_gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     ftSamusAttributes* samus_attr;
     ftSamusAttributes* samus_attr2;
-    samus_attr = samus_attr2 = getFtSpecialAttrs(fp); 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
-        Fighter *fighter2 = fp;
-        ftSamus_DestroyAllUnsetx2444(fighter_gobj);
-        func_8007D60C(fighter2);
-        if (samus_attr->x50 == 0.0f)
-        {
-            func_800CC730(fighter_gobj);
-            return;
-        }
-        func_80096900(fighter_gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
-    }
-}
-
-
-void ftSamus_8012A8C4(HSD_GObj* fighter_gobj) {
- 
-    Fighter *fp = fighter_gobj->user_data;
-    ftSamusAttributes* samus_attr;
-    ftSamusAttributes* samus_attr2;
-    samus_attr = samus_attr2 = getFtSpecialAttrs(fp); 
- 
+    samus_attr = samus_attr2 = getFtSpecialAttrs(fp);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter* fighter2 = fp;
         ftSamus_DestroyAllUnsetx2444(fighter_gobj);
@@ -84,7 +64,27 @@ void ftSamus_8012A8C4(HSD_GObj* fighter_gobj) {
     }
 }
 
-void ftSamus_8012A96C(HSD_GObj* fighter_gobj) {
+void ftSamus_8012A8C4(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
+    ftSamusAttributes* samus_attr;
+    ftSamusAttributes* samus_attr2;
+    samus_attr = samus_attr2 = getFtSpecialAttrs(fp);
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+        Fighter* fighter2 = fp;
+        ftSamus_DestroyAllUnsetx2444(fighter_gobj);
+        func_8007D60C(fighter2);
+        if (samus_attr->x50 == 0.0f) {
+            func_800CC730(fighter_gobj);
+            return;
+        }
+        func_80096900(fighter_gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+    }
+}
+
+void ftSamus_8012A96C(HSD_GObj* fighter_gobj)
+{
     f32 mag;
     f32 lstick_x;
     Fighter* fp = fighter_gobj->user_data;
@@ -96,8 +96,7 @@ void ftSamus_8012A96C(HSD_GObj* fighter_gobj) {
             mag = lstick_x;
         }
         if (mag > samus_attr->x4C) {
-            if (((fp->x2C_facing_direction == 1.0f ) && (lstick_x < 0.0f)) 
-                || ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f))) {
+            if (((fp->x2C_facing_direction == 1.0f) && (lstick_x < 0.0f)) || ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f))) {
                 fp->x2204_ftcmd_var1 = 1;
                 fp->x2340_stateVar1 = 1;
                 func_8007D9FC(fp);
@@ -107,7 +106,8 @@ void ftSamus_8012A96C(HSD_GObj* fighter_gobj) {
     }
 }
 
-void ftSamus_8012AA3C(HSD_GObj* fighter_gobj) {
+void ftSamus_8012AA3C(HSD_GObj* fighter_gobj)
+{
     f32 mag;
     f32 lstick_x;
     Fighter* fp = fighter_gobj->user_data;
@@ -119,8 +119,7 @@ void ftSamus_8012AA3C(HSD_GObj* fighter_gobj) {
             mag = lstick_x;
         }
         if (mag > samus_attr->x4C) {
-            if (((fp->x2C_facing_direction == 1.0f ) && (lstick_x < 0.0f)) 
-                || ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f))) {
+            if (((fp->x2C_facing_direction == 1.0f) && (lstick_x < 0.0f)) || ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f))) {
                 fp->x2204_ftcmd_var1 = 1;
                 fp->x2340_stateVar1 = 1;
                 func_8007D9FC(fp);
@@ -130,10 +129,11 @@ void ftSamus_8012AA3C(HSD_GObj* fighter_gobj) {
     }
 }
 
-void ftSamus_8012AB0C(HSD_GObj* fighter_gobj) {
-    Fighter *fp = getFighter(fighter_gobj);
+void ftSamus_8012AB0C(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = getFighter(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
-    
+
     if (fp->x2200_ftcmd_var0) {
         func_8007D60C(fp);
         fp->x2200_ftcmd_var0 = 0;
@@ -148,17 +148,19 @@ void ftSamus_8012AB0C(HSD_GObj* fighter_gobj) {
     func_80084F3C(fighter_gobj);
 }
 
-void ftSamus_8012ABB4(HSD_GObj* fighter_gobj) {
-    Fighter *fp = fighter_gobj->user_data;
+void ftSamus_8012ABB4(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     func_80084DB0(fighter_gobj);
     func_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
 }
 
-void ftSamus_8012AC00(HSD_GObj* fighter_gobj) {
-    Fighter *fp = getFighter(fighter_gobj);
+void ftSamus_8012AC00(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = getFighter(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
-    
+
     if (fp->xE0_ground_or_air == GA_Air) {
         s32 direction;
 
@@ -185,10 +187,11 @@ void ftSamus_8012AC00(HSD_GObj* fighter_gobj) {
     }
 }
 
-void ftSamus_8012ACF8(HSD_GObj* fighter_gobj) {
-    Fighter *fp = getFighter(fighter_gobj);
+void ftSamus_8012ACF8(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = getFighter(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
-    
+
     if (fp->xE0_ground_or_air == GA_Air) {
         s32 direction;
 

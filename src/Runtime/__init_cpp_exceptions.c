@@ -1,9 +1,9 @@
 #include <dolphin/types.h>
 
-extern const void* lbl_80005918; //info
+extern const void* lbl_80005918; // info
 s32 fragmentID = -2;
 
-extern s32 __register_fragment(struct __eti_init_info *, char*);
+extern s32 __register_fragment(struct __eti_init_info*, char*);
 extern void __unregister_fragment(s32);
 
 extern asm char* GetR2(void)
@@ -15,10 +15,10 @@ extern asm char* GetR2(void)
 
 extern void __fini_cpp_exceptions(void)
 {
-	if (fragmentID != -2) {
-		__unregister_fragment(fragmentID);
-		fragmentID = -2;
-	}
+    if (fragmentID != -2) {
+        __unregister_fragment(fragmentID);
+        fragmentID = -2;
+    }
 }
 
 // Left as asm due to lbl_80005918 being in extabindex, which throws an error about an incompatible section

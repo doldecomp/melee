@@ -20,15 +20,16 @@ struct S_KIRBY1 {
     s32 x2C;
 };
 
-//https://decomp.me/scratch/6dL9q
-void func_800EE528() {
+// https://decomp.me/scratch/6dL9q
+void func_800EE528()
+{
     s32* number_list = lbl_80459B88;
     struct S_KIRBY1** struct_list = lbl_803C9FC8;
 
     s32 i;
     for (i = 0; i < 0x21; i++) {
         struct S_KIRBY1* unk_struct;
-        number_list[i] = 0; 
+        number_list[i] = 0;
         unk_struct = struct_list[i];
         if (unk_struct) {
             unk_struct->x0 = 0;
@@ -58,8 +59,9 @@ void func_800EE528() {
     }
 }
 
-void ftKirby_OnDeath(HSD_GObj* fighter_gobj) {
-    Fighter *fp = fighter_gobj->user_data;
+void ftKirby_OnDeath(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
     func_80074A4C(fighter_gobj, 0, 0);
     func_80074A4C(fighter_gobj, 1, 0);
     fp->sa.kirby.x222C = 0;
@@ -74,14 +76,13 @@ void ftKirby_OnDeath(HSD_GObj* fighter_gobj) {
     }
 }
 
-void ftKirby_OnLoad(HSD_GObj* fighter_gobj) {
-
-
+void ftKirby_OnLoad(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = fighter_gobj->user_data;
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftKirbyAttributes);
-    
+
     fp->x2222_flag.bits.b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
     fp->sa.kirby.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
@@ -89,11 +90,10 @@ void ftKirby_OnLoad(HSD_GObj* fighter_gobj) {
     func_8026B3F8(item_list[1], 0x33);
     func_8026B3F8(item_list[2], 0x34);
     func_8026B3F8(item_list[3], 0x35);
-    
-
 }
 
-void ftKirby_800EE74C(HSD_GObj* fighter_gobj) {
+void ftKirby_800EE74C(HSD_GObj* fighter_gobj)
+{
     Fighter* fp = fighter_gobj->user_data;
     func_800F5524(fighter_gobj);
     func_800F22D4(fighter_gobj);
@@ -104,8 +104,9 @@ void ftKirby_800EE74C(HSD_GObj* fighter_gobj) {
     fp->cb.x21E8_callback_OnDeath3 = 0;
 }
 
-void ftKirby_800EE7B8(HSD_GObj* fighter_gobj) {
-    Fighter* fp= fighter_gobj->user_data;
+void ftKirby_800EE7B8(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = fighter_gobj->user_data;
     func_800F5524(fighter_gobj);
     func_800F22D4(fighter_gobj);
     func_800F5318(fighter_gobj);
@@ -144,7 +145,7 @@ void ftKirby_800EE7B8(HSD_GObj* fighter_gobj) {
 //     }
 // }
 
-///void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+/// void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 
 // void ftKirby_OnItemInvisible(HSD_GObj* fighter_gobj) {
 //     Fighter_OnItemInvisible(fighter_gobj, 1);
@@ -159,11 +160,9 @@ void ftKirby_800EE7B8(HSD_GObj* fighter_gobj) {
 //     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 // }
 
-
 // void ftKirby_LoadSpecialAttrs(HSD_GObj* gobj) {
 //     COPY_ATTRS(gobj, ftKirbyAttributes);
 // }
-
 
 // void ftKirby_OnKnockbackEnter(HSD_GObj* gobj) {
 //     Fighter_OnKnockbackEnter(gobj, 1);

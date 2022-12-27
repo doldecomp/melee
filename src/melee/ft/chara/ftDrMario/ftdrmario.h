@@ -34,7 +34,6 @@ void func_801498A0(HSD_GObj*);
 u32 func_801498EC(HSD_GObj*);
 void func_80149910(HSD_GObj*);
 
-
 // ftdrmario_2.c
 void func_80149954(HSD_GObj*);
 void func_80149A6C(HSD_GObj*);

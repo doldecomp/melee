@@ -27,10 +27,9 @@ void ftLuigi_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
 // 0x8014275C
 // https://decomp.me/scratch/X40ls // Luigi's grounded Fireball Animation callback
-void ftLuigi_SpecialN_Anim(HSD_GObj* fighter_gobj) 
+void ftLuigi_SpecialN_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
@@ -38,8 +37,7 @@ void ftLuigi_SpecialN_Anim(HSD_GObj* fighter_gobj)
 // 0x80142798 - Luigi's aerial Fireball Animation callback
 void ftLuigi_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800CC730(fighter_gobj);
     }
 }
@@ -51,8 +49,7 @@ extern void func_800CCAAC(HSD_GObj*);
 // https://decomp.me/scratch/JesBp // Luigi's grounded Fireball IASA callback
 void ftLuigi_SpecialN_IASA(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U)
-    {
+    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U) {
         func_8008A4D4(fighter_gobj);
     }
 }
@@ -60,8 +57,7 @@ void ftLuigi_SpecialN_IASA(HSD_GObj* fighter_gobj)
 // 0x80142804 - Luigi's aerial Fireball IASA callback
 void ftLuigi_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U)
-    {
+    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U) {
         func_800CCAAC(fighter_gobj);
     }
 }
@@ -89,8 +85,7 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    if (func_80082708(fighter_gobj) == FALSE)
-    {
+    if (func_80082708(fighter_gobj) == FALSE) {
         fp = getFighter(fighter_gobj);
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRN, FTLUIGI_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -103,8 +98,7 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    if (func_80081D0C(fighter_gobj) != FALSE)
-    {
+    if (func_80081D0C(fighter_gobj) != FALSE) {
         fp = getFighter(fighter_gobj);
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALN, FTLUIGI_SPECIALN_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -123,19 +117,15 @@ void ftLuigi_SpecialN_FireSpawn(HSD_GObj* fighter_gobj)
     s32 unused;
     BOOL flag;
 
-
-    if (fp->x2210_ThrowFlags.b0 != 0)
-    {
+    if (fp->x2210_ThrowFlags.b0 != 0) {
         fp->x2210_ThrowFlags.b0 = 0;
         flag = TRUE;
-    }
-    else flag = FALSE;
+    } else
+        flag = FALSE;
 
-    if (flag != FALSE)
-    {
+    if (flag != FALSE) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x17)].x0_jobj, NULL, &sp10);
         func_802C01AC(fighter_gobj, &sp10, It_Kind_Luigi_Fire, fp->x2C_facing_direction);
         ef_Spawn(0x507, fighter_gobj, fp->x5E8_fighterBones[func_8007500C(fp, 0x17)].x0_jobj, &fp->x2C_facing_direction);
     }
 }
-

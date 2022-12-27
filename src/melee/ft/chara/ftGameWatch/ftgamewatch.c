@@ -1,6 +1,6 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj) 
+void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     func_80074A4C(fighter_gobj, 0U, 0);
@@ -32,7 +32,7 @@ void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
     fp->sa.gaw.x226C_rescueGObj = NULL;
 }
 
-void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj) 
+void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     void** items = fp->x10C_ftData->x48_items;
@@ -41,18 +41,16 @@ void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj)
     fp->x2223_flag.bits.b1 = 1;
     fp->x2224_flag.bits.b0 = 1;
 
-
     PUSH_ATTRS(fp, ftGameWatchAttributes);
     fp->sa.gaw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
 
     {
-        
-        ftGameWatchAttributes *attr = fp->x2D4_specialAttributes;
+        ftGameWatchAttributes* attr = fp->x2D4_specialAttributes;
         fp->x34_scale.z = attr->x0_GAMEWATCH_WIDTH;
         fp->x614 = attr->x14_GAMEWATCH_OUTLINE;
         func_800BFB4C(fighter_gobj, &attr->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
         fp->x5C8 = items[10];
-        
+
         func_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);
         func_8026B3F8(items[1], It_Kind_GameWatch_Manhole);
         func_8026B3F8(items[2], It_Kind_GameWatch_Fire);
@@ -64,10 +62,9 @@ void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj)
         func_8026B3F8(items[8], It_Kind_GameWatch_Chef);
         func_8026B3F8(items[9], It_Kind_GameWatch_Rescue);
     }
-
 }
 
-void ftGameWatch_OnDamage(HSD_GObj* fighter_gobj) 
+void ftGameWatch_OnDamage(HSD_GObj* fighter_gobj)
 {
     ftGameWatch_ItemGreenhouseRemove(fighter_gobj);
     ftGameWatch_ItemManholeOnDamage(fighter_gobj);
@@ -80,11 +77,10 @@ void ftGameWatch_OnDamage(HSD_GObj* fighter_gobj)
     ftGameWatch_ItemRescueRemove(fighter_gobj);
 }
 
-void ftGameWatch_8014A538(HSD_GObj* fighter_gobj) 
+void ftGameWatch_8014A538(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->xE0_ground_or_air == GA_Air) 
-    {
+    if (fp->xE0_ground_or_air == GA_Air) {
         ftGameWatch_ItemGreenhouseRemove(fighter_gobj);
         ftGameWatch_ItemManholeOnDamage(fighter_gobj);
         ftGameWatch_ItemTorchOnDamage(fighter_gobj);
@@ -97,11 +93,13 @@ void ftGameWatch_8014A538(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftGameWatch_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+void ftGameWatch_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
-void ftGameWatch_OnItemInvisible(HSD_GObj* gobj) {
+void ftGameWatch_OnItemInvisible(HSD_GObj* gobj)
+{
     Fighter_OnItemInvisible(gobj, 1);
 }
 
@@ -121,23 +119,23 @@ void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, s32 dropItemFlag)
 
 // 0x8014A77C
 // https://decomp.me/scratch/SX2FV // Set Oil Panic Color Overlay
-void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj) 
+void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
-    {
+    if (fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         func_800BFFD0(fp, 5, 0);
     }
 }
 
 // 0x8014A7B4
-// https://decomp.me/scratch/RJvAe // Copy Special Attributes from DAT file struct to Fighter* 
-void ftGameWatch_LoadSpecialAttrs(HSD_GObj* gobj) {
+// https://decomp.me/scratch/RJvAe // Copy Special Attributes from DAT file struct to Fighter*
+void ftGameWatch_LoadSpecialAttrs(HSD_GObj* gobj)
+{
     COPY_ATTRS(gobj, ftGameWatchAttributes);
 }
 
-// 0x8014A7F4 
+// 0x8014A7F4
 // https://decomp.me/scratch/PFWrJ // Apply color to Mr. Game & Watch's items?
 void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 {
@@ -147,8 +145,8 @@ void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
     item_mod->x0_unk = gawAttrs->x4_GAMEWATCH_COLOR[fp->x619_costume_id];
 }
 
-// 0x8014A814 
-// https://decomp.me/scratch/BRo1r // Apply alt color to Mr. Game & Watch's items? 
+// 0x8014A814
+// https://decomp.me/scratch/BRo1r // Apply alt color to Mr. Game & Watch's items?
 void ftGameWatch_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -158,7 +156,7 @@ void ftGameWatch_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 }
 
 // 0x8014A828
-// https://decomp.me/scratch/muS2N // Mr. Game & Watch's OnAbsorb callback 
+// https://decomp.me/scratch/muS2N // Mr. Game & Watch's OnAbsorb callback
 void ftGameWatch_OnAbsorb(HSD_GObj* fighter_gobj)
 {
     ftGameWatch_AbsorbThink_DecideAction(fighter_gobj);

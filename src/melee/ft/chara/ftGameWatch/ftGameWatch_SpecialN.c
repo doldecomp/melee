@@ -2,7 +2,7 @@
 
 /* https://decomp.me/scratch/P7Z9j - first function of SpecialN.c; terrifying code
    https://decomp.me/scratch/kFkx6 - closer match, but just what is going on in this one? temp_fp suggests there is an inline somewhere in the function,
-								     but an inline depth of 2 causes the compiler to start using branch link; no combination of inlines / lack thereof I have tried fully match */
+                                     but an inline depth of 2 causes the compiler to start using branch link; no combination of inlines / lack thereof I have tried fully match */
 
 f32 ftGameWatch_SpecialN_SetFloatOrder1(void)
 {
@@ -42,11 +42,9 @@ void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
 
     fp = getFighter(fighter_gobj);
     gawAttrs = getFtSpecialAttrs(fp);
-    if (fp->x2200_ftcmd_var0 != 0)
-    {
+    if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = randomInt = 0;
-        if (((f32)fp->gameWatchVars[0].SpecialN.maxSausage) < gawAttrs->x1C_GAMEWATCH_CHEF_MAX)
-        {
+        if (((f32) fp->gameWatchVars[0].SpecialN.maxSausage) < gawAttrs->x1C_GAMEWATCH_CHEF_MAX) {
             fp->gameWatchVars[0].SpecialN.maxSausage++;
             sp38.x = 2.5f;
             sp38.y = 6.5f;
@@ -54,10 +52,8 @@ void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
             func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x1F)].x0_jobj, &sp38, &sp44);
             temp_fp = getFighter(fighter_gobj);
             i = 5;
-            for (i -= 5; i < 5; i++)
-            {
-                if ((i != temp_fp->sa.gaw.x2240_chefVar1) && (i != temp_fp->sa.gaw.x2244_chefVar2))
-                {
+            for (i -= 5; i < 5; i++) {
+                if ((i != temp_fp->sa.gaw.x2240_chefVar1) && (i != temp_fp->sa.gaw.x2244_chefVar2)) {
                     sausageCount[randomInt] = i;
                     randomInt++;
                 }
@@ -210,11 +206,9 @@ inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((u32)fp->x2208_ftcmd_var2 != 0U)
-    {
+    if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         fp->x2208_ftcmd_var2 = 0U;
-        if (((f32)fp->gameWatchVars[0].SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX) && ((s32)fp->gameWatchVars[0].SpecialN.isChefLoopDisable == FALSE))
-        {
+        if (((f32) fp->gameWatchVars[0].SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX) && ((s32) fp->gameWatchVars[0].SpecialN.isChefLoopDisable == FALSE)) {
             ftGameWatch_SpecialN_Loop(fighter_gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
         }
     }
@@ -228,8 +222,7 @@ void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
     ftGameWatch_SpecialN_ChefLoop(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
@@ -239,11 +232,9 @@ inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((u32)fp->x2208_ftcmd_var2 != 0U)
-    {
+    if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         fp->x2208_ftcmd_var2 = 0U;
-        if (((s32)fp->gameWatchVars[0].SpecialN.isChefLoopDisable == FALSE) && ((f32)fp->gameWatchVars[0].SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
-        {
+        if (((s32) fp->gameWatchVars[0].SpecialN.isChefLoopDisable == FALSE) && ((f32) fp->gameWatchVars[0].SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX)) {
             ftGameWatch_SpecialAirN_Loop(fighter_gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
         }
     }
@@ -257,8 +248,7 @@ void ftGameWatch_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
     ftGameWatch_SpecialAirN_ChefLoop(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800CC730(fighter_gobj);
     }
 }
@@ -270,12 +260,10 @@ void ftGameWatch_SpecialN_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
-    {
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE) {
         fp->gameWatchVars[0].SpecialN.isChefLoopDisable = TRUE;
     }
-    if (((u32)fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) && ((f32)fp->gameWatchVars[0].SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
-    {
+    if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) && ((f32) fp->gameWatchVars[0].SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX)) {
         ftGameWatch_SpecialN_Loop(fighter_gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
     }
 }
@@ -287,12 +275,10 @@ void ftGameWatch_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = getFighter(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE)
-    {
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE) {
         fp->gameWatchVars[0].SpecialN.isChefLoopDisable = TRUE;
     }
-    if (((u32)fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) && ((f32)fp->gameWatchVars[0].SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
-    {
+    if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) && ((f32) fp->gameWatchVars[0].SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX)) {
         ftGameWatch_SpecialAirN_Loop(fighter_gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
     }
 }
@@ -313,8 +299,7 @@ void ftGameWatch_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/SfsYX // Mr. Game & Watch's grounded Chef Collision callback
 void ftGameWatch_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_800827A0(fighter_gobj) == FALSE)
-    {
+    if (func_800827A0(fighter_gobj) == FALSE) {
         ftGameWatch_SpecialN_GroundToAir(fighter_gobj);
     }
 }
@@ -323,8 +308,7 @@ void ftGameWatch_SpecialN_Coll(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/3uVog // Mr. Game & Watch's aerial Chef Collision callback
 void ftGameWatch_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != FALSE)
-    {
+    if (func_80081D0C(fighter_gobj) != FALSE) {
         ftGameWatch_SpecialAirN_AirToGround(fighter_gobj);
     }
 }

@@ -2,7 +2,7 @@
 
 void ftDrMario_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = (Fighter*)gobj->user_data;
+    Fighter* fp = (Fighter*) gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     fp->sa.mario.x2234_tornadoCharge = 0;
     fp->sa.mario.x2238_isCapeBoost = FALSE;
@@ -30,7 +30,8 @@ void func_80149540(HSD_GObj* gobj)
     func_801497CC(gobj);
 }
 
-void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {
+void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 

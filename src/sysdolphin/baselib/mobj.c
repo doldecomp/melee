@@ -18,13 +18,13 @@ void HSD_MObjSetCurrent(HSD_MObj* mobj)
 
 void HSD_MObjSetFlags(HSD_MObj* mobj, u32 flags)
 {
-    if (mobj != NULL) 
+    if (mobj != NULL)
         mobj->rendermode |= flags;
 }
 
 void HSD_MObjClearFlags(HSD_MObj* mobj, u32 flags)
 {
-    if (mobj != NULL) 
+    if (mobj != NULL)
         mobj->rendermode &= ~flags;
 }
 
@@ -66,7 +66,7 @@ void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags)
     HSD_TObjReqAnimAllByFlags(mobj->tobj, startframe, flags);
 }
 
-void HSD_MObjReqAnim(HSD_MObj *mobj, f32 startframe)
+void HSD_MObjReqAnim(HSD_MObj* mobj, f32 startframe)
 {
     HSD_MObjReqAnimByFlags(mobj, startframe, ALL_ANIM);
 }
@@ -80,48 +80,48 @@ static void MObjUpdateFunc(void* obj, u32 type, FObjData* val)
 
     switch (type) {
     case HSD_A_M_AMBIENT_R:
-        mobj->mat->ambient.r = (u8)(255.0 * val->fv);
+        mobj->mat->ambient.r = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_AMBIENT_G:
-        mobj->mat->ambient.g = (u8)(255.0 * val->fv);
+        mobj->mat->ambient.g = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_AMBIENT_B:
-        mobj->mat->ambient.b = (u8)(255.0 * val->fv);
+        mobj->mat->ambient.b = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_DIFFUSE_R:
-        mobj->mat->diffuse.r = (u8)(255.0 * val->fv);
+        mobj->mat->diffuse.r = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_DIFFUSE_G:
-        mobj->mat->diffuse.g = (u8)(255.0 * val->fv);
+        mobj->mat->diffuse.g = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_DIFFUSE_B:
-        mobj->mat->diffuse.b = (u8)(255.0 * val->fv);
+        mobj->mat->diffuse.b = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_ALPHA:
         mobj->mat->alpha = 1.0F - val->fv;
         break;
     case HSD_A_M_SPECULAR_R:
-        mobj->mat->specular.r = (u8)(255.0 * val->fv);
+        mobj->mat->specular.r = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_SPECULAR_G:
-        mobj->mat->specular.g = (u8)(255.0 * val->fv);
+        mobj->mat->specular.g = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_SPECULAR_B:
-        mobj->mat->specular.b = (u8)(255.0 * val->fv);
+        mobj->mat->specular.b = (u8) (255.0 * val->fv);
         break;
     case HSD_A_M_PE_REF0:
         if (mobj->pe) {
-            mobj->pe->ref0 = (u8)(255.0 * val->fv);
+            mobj->pe->ref0 = (u8) (255.0 * val->fv);
         }
         break;
     case HSD_A_M_PE_REF1:
         if (mobj->pe) {
-            mobj->pe->ref1 = (u8)(255.0 * val->fv);
+            mobj->pe->ref1 = (u8) (255.0 * val->fv);
         }
         break;
     case HSD_A_M_PE_DSTALPHA:
         if (mobj->pe) {
-            mobj->pe->dst_alpha = (u8)(255.0 * val->fv);
+            mobj->pe->dst_alpha = (u8) (255.0 * val->fv);
         }
         break;
     }
@@ -174,9 +174,9 @@ HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc)
 
 HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
 {
-    HSD_TExp* diff, *spec, *ext, *alpha;
-    HSD_TExp* exp, *exp_2, *exp_3;
-    HSD_TObj* tobj, *tobj_2, *tobj_3, *tobj_4, *toon = NULL;
+    HSD_TExp *diff, *spec, *ext, *alpha;
+    HSD_TExp *exp, *exp_2, *exp_3;
+    HSD_TObj *tobj, *tobj_2, *tobj_3, *tobj_4, *toon = NULL;
     u32 done = 0;
     u32 unused[5];
 
@@ -187,7 +187,7 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
             toon = tobj;
         }
     }
-    
+
     if (mobj->rendermode & RENDER_VERTEX) {
         exp = HSD_TExpTev(list);
         HSD_TExpOrder(exp, NULL, GX_COLOR0A0);
@@ -200,7 +200,7 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     } else {
         HSD_TExp* diff_cnst = HSD_TExpCnst(&mobj->mat->diffuse, HSD_TE_RGB, HSD_TE_U8, list);
         HSD_TExp* alpha_cnst = HSD_TExpCnst(&mobj->mat->alpha, HSD_TE_X, HSD_TE_F32, list);
-        
+
         exp = HSD_TExpTev(list);
         HSD_TExpColorOp(exp, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE);
         HSD_TExpColorIn(exp, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, diff_cnst);
@@ -261,7 +261,7 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     }
 
     ext = diff;
-    
+
     for (tobj_4 = tobj_top; tobj_4 != NULL; tobj_4 = tobj_4->next) {
         if ((tobj_4->flags & TEX_LIGHTMAP_EXT) && tobj_4->id != GX_TEXMAP_NULL) {
             HSD_TOBJ_METHOD(tobj_4)->make_texp(tobj_4, TEX_LIGHTMAP_EXT, done, &ext, &alpha, list);
@@ -282,7 +282,7 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
 
 void HSD_MObjCompileTev(HSD_MObj* mobj)
 {
-    HSD_TObj* tobj, **tail ;
+    HSD_TObj *tobj, **tail;
     HSD_TExp* texp;
 
     tail = NULL;
@@ -299,8 +299,8 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
         if (mobj->rendermode & RENDER_SHADOW) {
             if (tobj_shadows != NULL) {
                 tail = &tobj;
-                while (*tail  != NULL) {
-                    tail  = &(*tail )->next;
+                while (*tail != NULL) {
+                    tail = &(*tail)->next;
                 }
                 *tail = tobj_shadows;
             }
@@ -334,7 +334,7 @@ void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2)
 
 void HSD_MObjSetup(HSD_MObj* mobj, u32 rendermode)
 {
-    HSD_TObj* tobj, **tail;
+    HSD_TObj *tobj, **tail;
 
     HSD_StateInitTev();
     rendermode = mobj->rendermode;

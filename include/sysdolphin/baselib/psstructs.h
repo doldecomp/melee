@@ -13,8 +13,7 @@ struct _generator;
 
 struct _psAppSRT;
 
-enum HSD_ParticleKind
-{
+enum HSD_ParticleKind {
     Tornado = 1 << 2,
     TexEdge = 1 << 3,
     ComTLUT = 1 << 4,
@@ -34,8 +33,7 @@ enum HSD_ParticleKind
 };
 
 /* size: 0x1C */
-typedef struct _HSD_PSTexGroup
-{
+typedef struct _HSD_PSTexGroup {
     u32 num; /* 0x0 */
 
     u32 fmt;     /* 0x4 */
@@ -47,19 +45,17 @@ typedef struct _HSD_PSTexGroup
     u16 palnum;  /* 0x14 */
     u16 palflag; /* 0x16 */
 
-    u8 *texTable[1]; /* 0x18 */
+    u8* texTable[1]; /* 0x18 */
 } HSD_PSTexGroup;
 
 /* size: 0x8 */
-typedef struct _HSD_PSFormGroup
-{
+typedef struct _HSD_PSFormGroup {
     u32 num;          /* 0x0 */
-    u8 *formTable[1]; /* 0x4 */
+    u8* formTable[1]; /* 0x4 */
 } HSD_PSFormGroup;
 
 /* size: 0x40 */
-typedef struct _HSD_PSCmdList
-{
+typedef struct _HSD_PSCmdList {
     u16 type;     /* 0x0 */
     u16 texGroup; /* 0x2 */
 
@@ -91,9 +87,8 @@ struct _particle;
 typedef struct _particle HSD_Particle;
 
 /* size: 0x9C */
-struct _particle
-{
-    HSD_Particle *next; /* 0x0 */
+struct _particle {
+    HSD_Particle* next; /* 0x0 */
 
     u32 kind; /* 0x4 */
 
@@ -118,7 +113,7 @@ struct _particle
 
     u16 idnum; /* 0x1E */
 
-    u8 *cmdList;    /* 0x20 */
+    u8* cmdList;    /* 0x20 */
     u16 cmdPtr;     /* 0x24 */
     u16 cmdMarkPtr; /* 0x26 */
     u16 cmdLoopPtr; /* 0x28 */
@@ -180,17 +175,16 @@ struct _particle
 
     float trail; /* 0x88 */
 
-    struct _generator *gen;              /* 0x8C */
-    struct _psAppSRT *appsrt;            /* 0x90 */
-    float *userdata;                     /* 0x94 */
-    int (*callback)(HSD_Particle *part); /* 0x98 */
+    struct _generator* gen;              /* 0x8C */
+    struct _psAppSRT* appsrt;            /* 0x90 */
+    float* userdata;                     /* 0x94 */
+    int (*callback)(HSD_Particle* part); /* 0x98 */
 };
 
-struct _psAppSRT
-{
-    HSD_PSAppSRT *next; /* 0x0 */
+struct _psAppSRT {
+    HSD_PSAppSRT* next; /* 0x0 */
 
-    struct _generator *gp; /* 0x4 */
+    struct _generator* gp; /* 0x4 */
 
     Vec tra;        /* 0x8 */
     Quaternion rot; /* 0x14 */
@@ -205,7 +199,7 @@ struct _psAppSRT
     float ssx; /* 0x64 */
     float ssy; /* 0x68 */
 
-    void (*freefunc)(HSD_PSAppSRT *appSrt); /* 0x6C */
+    void (*freefunc)(HSD_PSAppSRT* appSrt); /* 0x6C */
 
     u16 idnum;    /* 0x70 */
     u8 billboard; /* 0x72 */
@@ -213,27 +207,26 @@ struct _psAppSRT
 };
 
 /* size: 0xC */
-typedef struct _PSUserFunc
-{
-    int (*hookCreate)(HSD_Particle *part);                               /* 0x0 */
-    int (*hookDelete)(HSD_Particle *part);                               /* 0x4 */
-    int (*setUserData)(HSD_Particle *part, u8 unknown1, float unknown2); /* 0x8 */
+typedef struct _PSUserFunc {
+    int (*hookCreate)(HSD_Particle* part);                               /* 0x0 */
+    int (*hookDelete)(HSD_Particle* part);                               /* 0x4 */
+    int (*setUserData)(HSD_Particle* part, u8 unknown1, float unknown2); /* 0x8 */
 } HSD_PSUserFunc;
 
-extern u32 *ptclref[64];
+extern u32* ptclref[64];
 
 extern int psNumTexGroup[64];
-extern HSD_PSTexGroup **psTexGroupArray[64];
+extern HSD_PSTexGroup** psTexGroupArray[64];
 
-extern HSD_PSFormGroup **psFormGroupArray[64];
+extern HSD_PSFormGroup** psFormGroupArray[64];
 
 extern int psNumCmdList[64];
-extern HSD_PSCmdList **psCmdListArray[64];
+extern HSD_PSCmdList** psCmdListArray[64];
 
 extern u16 numActiveParticles;
 extern u16 numPeakParticles;
 
-extern int (**psCallback)(HSD_Particle *part);
+extern int (**psCallback)(HSD_Particle* part);
 
 #define PS_TEXDIRECTION
 #ifdef PS_TEXDIRECTION
@@ -242,73 +235,73 @@ extern int td;
 #endif
 
 #ifndef _NFUNCPROTO
-void psSetFog(struct _HSD_Fog *fog);
+void psSetFog(struct _HSD_Fog* fog);
 
 void psRemoveFog(void);
 #endif
 
 inline void setBlendMode(int blendmode);
 
-inline void setupChanCtrl(struct _particle *pp);
-inline void setupChanReg(struct _particle *pp);
-inline void getClrTrail(struct _particle *pp, GXColor *col);
-inline void setupTevReg(struct _particle *pp);
+inline void setupChanCtrl(struct _particle* pp);
+inline void setupChanReg(struct _particle* pp);
+inline void getClrTrail(struct _particle* pp, GXColor* col);
+inline void setupTevReg(struct _particle* pp);
 inline void psSetCurrentMtx(GXPosNrmMtx idx);
-inline struct _particle *psDispSubPoint(struct _particle *pp);
-inline struct _particle *psDispSubPointTrail(struct _particle *pp);
+inline struct _particle* psDispSubPoint(struct _particle* pp);
+inline struct _particle* psDispSubPointTrail(struct _particle* pp);
 inline void psDispSubMakePolygon(
-    struct _particle *pp,
-    u8 *texform,
+    struct _particle* pp,
+    u8* texform,
     float x, float y, float z,
     float ppvx, float ppvy, float ppvz,
     float x0, float y0, float z0,
     float x1, float y1, float z1);
 
-inline void psDispSub(struct _particle *pp, u8 *texform);
+inline void psDispSub(struct _particle* pp, u8* texform);
 
 #define PS_APPSRT
 #ifdef PS_APPSRT
-inline void psDispSubAppSRT(struct _particle *pp, u8 *texform);
-inline void psDispSubAPPSRTPoint(struct _particle *pp);
+inline void psDispSubAppSRT(struct _particle* pp, u8* texform);
+inline void psDispSubAPPSRTPoint(struct _particle* pp);
 #endif
 
 void psDispParticles(u32 target_link, u32 sw);
 
 void psInitDataBankLoad(
     int bank,
-    int *cmdBank,
-    int *texBank,
-    u32 *ref,
-    int *formBank);
+    int* cmdBank,
+    int* texBank,
+    u32* ref,
+    int* formBank);
 
-void psInitDataBankLocate(int *cmdBank, int *texBank, int *formBank);
+void psInitDataBankLocate(int* cmdBank, int* texBank, int* formBank);
 
 void psInitDataBankRelocate(
-    int *cmdBank,
-    int *texBank,
-    int *formBank,
-    int *newCmdBank,
-    int *newTexBank,
-    int *newFormBank);
+    int* cmdBank,
+    int* texBank,
+    int* formBank,
+    int* newCmdBank,
+    int* newTexBank,
+    int* newFormBank);
 
 void psInitDataBank(
     int bank,
-    int *cmdBank,
-    int *texBank,
-    u32 *ref,
-    int *formBank);
+    int* cmdBank,
+    int* texBank,
+    u32* ref,
+    int* formBank);
 
 void psInitParticle(int num);
 
 void psRemoveParticle(void);
 
-HSD_Particle *psGenerateParticle0(
-    HSD_Particle *p,
+HSD_Particle* psGenerateParticle0(
+    HSD_Particle* p,
     int linkNo,
     int bank,
     u32 kind,
     u16 texGroup,
-    u8 *list,
+    u8* list,
     int life,
     float x, float y, float z,
     float vx, float vy, float vz,
@@ -316,22 +309,22 @@ HSD_Particle *psGenerateParticle0(
     float grav,
     float fric,
     int palflag,
-    struct _generator *gp,
+    struct _generator* gp,
     int flgInterpret);
 
-HSD_Particle *psGenerateParticleID0(
-    HSD_Particle *p,
+HSD_Particle* psGenerateParticleID0(
+    HSD_Particle* p,
     int linkNo,
     int bank,
     int id,
     int flgInterpret);
 
-HSD_Particle *psGenerateParticle(
+HSD_Particle* psGenerateParticle(
     int linkNo,
     int bank,
     u32 kind,
     u16 texGroup,
-    u8 *list,
+    u8* list,
     int life,
     float x, float y, float z,
     float vx, float vy, float vz,
@@ -339,39 +332,39 @@ HSD_Particle *psGenerateParticle(
     float grav,
     float fric,
     int palflag,
-    struct _generator *gp);
+    struct _generator* gp);
 
-HSD_Particle *psGenerateParticleIDPV(
+HSD_Particle* psGenerateParticleIDPV(
     int linkNo,
     int bank,
     int id,
     float px, float py, float pz,
     float vx, float vy, float vz);
 
-HSD_Particle *psGenerateParticleID(int linkNo, int bank, int id);
-HSD_Particle *psGenerateParticleIDN(int linkNo, int bank, int id);
+HSD_Particle* psGenerateParticleID(int linkNo, int bank, int id);
+HSD_Particle* psGenerateParticleIDN(int linkNo, int bank, int id);
 
-void psKillParticle(HSD_Particle *pp);
+void psKillParticle(HSD_Particle* pp);
 void psKillAllParticle(void);
 
-void psSetPointJObj(int no, struct _HSD_JObj *jobj);
-void psSetPointJObjNodup(struct _HSD_JObj *jobj, int no);
+void psSetPointJObj(int no, struct _HSD_JObj* jobj);
+void psSetPointJObjNodup(struct _HSD_JObj* jobj, int no);
 
 void psClearPointJObj(void);
 
-void psDeletePntJObjwithParticle(HSD_Particle *pp);
+void psDeletePntJObjwithParticle(HSD_Particle* pp);
 
 void psKillFamily(u16 idnum, int linkNo);
-void psKillGeneratorChild(struct _generator *gp);
+void psKillGeneratorChild(struct _generator* gp);
 
 void psAddOffsetAll(float xofs, float yofs, float zofs);
 
 void psPauseFamily(u16 idnum, int linkNo);
 void psRestartFamily(u16 idnum, int linkNo);
 
-void psSetCallback(int (**callback)(HSD_Particle *part));
+void psSetCallback(int (**callback)(HSD_Particle* part));
 
-void psSetUserFunc(struct _generator *gp, HSD_PSUserFunc *userfunc);
+void psSetUserFunc(struct _generator* gp, HSD_PSUserFunc* userfunc);
 
 inline void psRemoveBillboardCamera(void);
 

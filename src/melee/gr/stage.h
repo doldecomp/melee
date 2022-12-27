@@ -7,71 +7,71 @@
 #include <dolphin/mtx/mtxtypes.h>
 
 enum InternalStageID {
-    CASTLE = 0x02, // Princess Peach's Castle
-    RCRUISE = 0x03, // Rainbow Cruise
-    KONGO = 0x04, // Kongo Jungle
-    GARDEN = 0x05, // Jungle Japes
-    GREATBAY = 0x06, // Great Bay
-    SHRINE = 0x07, // Hyrule Temple
-    ZEBES = 0x08, // Brinstar
-    KRAID = 0x09, // Brinstar Depths
-    STORY = 0x0A, // Yoshi's Story
-    YORSTER = 0x0B, // Yoshi's Island
-    IZUMI = 0x0C, // Fountain of Dreams
-    GREENS = 0x0D, // Green Greens
-    CORNERIA = 0x0E, // Corneria
-    VENOM = 0x0F, // Venom
-    PSTADIUM = 0x10, // Pokemon Stadium
-    PURA = 0x11, // Poke Floats
-    MUTECITY = 0x12, // Mute City
-    BIGBLUE = 0x13, // Big Blue
-    ONETT = 0x14, // Onett
-    FOURSIDE = 0x15, // Fourside
-    ICEMTN = 0x16, // Icicle Mountain
-    INISHIE1 = 0x18, // Mushroom Kingdom
-    INISHIE2 = 0x19, // Mushroom Kingdom II
-    FLATZONE = 0x1B, // Flat Zone
+    CASTLE = 0x02,    // Princess Peach's Castle
+    RCRUISE = 0x03,   // Rainbow Cruise
+    KONGO = 0x04,     // Kongo Jungle
+    GARDEN = 0x05,    // Jungle Japes
+    GREATBAY = 0x06,  // Great Bay
+    SHRINE = 0x07,    // Hyrule Temple
+    ZEBES = 0x08,     // Brinstar
+    KRAID = 0x09,     // Brinstar Depths
+    STORY = 0x0A,     // Yoshi's Story
+    YORSTER = 0x0B,   // Yoshi's Island
+    IZUMI = 0x0C,     // Fountain of Dreams
+    GREENS = 0x0D,    // Green Greens
+    CORNERIA = 0x0E,  // Corneria
+    VENOM = 0x0F,     // Venom
+    PSTADIUM = 0x10,  // Pokemon Stadium
+    PURA = 0x11,      // Poke Floats
+    MUTECITY = 0x12,  // Mute City
+    BIGBLUE = 0x13,   // Big Blue
+    ONETT = 0x14,     // Onett
+    FOURSIDE = 0x15,  // Fourside
+    ICEMTN = 0x16,    // Icicle Mountain
+    INISHIE1 = 0x18,  // Mushroom Kingdom
+    INISHIE2 = 0x19,  // Mushroom Kingdom II
+    FLATZONE = 0x1B,  // Flat Zone
     OLDPUPUPU = 0x1C, // Dream Land
-    OLDYOSHI = 0x1D, // Yoshi's Island (64)
-    OLDKONGO = 0x1E, // Kongo Jungle (64)
+    OLDYOSHI = 0x1D,  // Yoshi's Island (64)
+    OLDKONGO = 0x1E,  // Kongo Jungle (64)
 };
 
 // This struct is based in part on the datasheet
 // however the info there is likely incorrect as this doesn't quite match grGroundParam
 typedef struct _StageCameraInfo {
-    f32 cam_bounds_left; // 0x0
-    f32 cam_bounds_right; // 0x4
-    f32 cam_bounds_top; // 0x8
-    f32 cam_bounds_bottom; // 0xC
-    f32 cam_x_offset; // 0x10
-    f32 cam_y_offset; // 0x14
-    f32 cam_vertical_tilt; // 0x18
-    f32 cam_pan_degrees; // 0x1C
-    f32 x20; // 0x20
-    f32 x24; // 0x24
-    f32 cam_track_ratio; // 0x28
-    f32 cam_fixed_zoom; // 0x2C
-    f32 cam_track_smooth; // 0x30
-    f32 cam_zoom_rate; // 0x34
-    f32 cam_max_depth; // 0x38
-    f32 x3C; // 0x3C
-    f32 pausecam_zpos_min; // 0x40
-    f32 pausecam_zpos_init; // 0x44
-    f32 pausecam_zpos_max; // 0x48
-    f32 cam_angle_up; // 0x4C
-    f32 cam_angle_down; // 0x50
-    f32 cam_angle_left; // 0x54
-    f32 cam_angle_right; // 0x58
-    Vec fixed_cam_pos; // 0x5C - 0x64
-    f32 fixed_cam_fov; // 0x68
+    f32 cam_bounds_left;      // 0x0
+    f32 cam_bounds_right;     // 0x4
+    f32 cam_bounds_top;       // 0x8
+    f32 cam_bounds_bottom;    // 0xC
+    f32 cam_x_offset;         // 0x10
+    f32 cam_y_offset;         // 0x14
+    f32 cam_vertical_tilt;    // 0x18
+    f32 cam_pan_degrees;      // 0x1C
+    f32 x20;                  // 0x20
+    f32 x24;                  // 0x24
+    f32 cam_track_ratio;      // 0x28
+    f32 cam_fixed_zoom;       // 0x2C
+    f32 cam_track_smooth;     // 0x30
+    f32 cam_zoom_rate;        // 0x34
+    f32 cam_max_depth;        // 0x38
+    f32 x3C;                  // 0x3C
+    f32 pausecam_zpos_min;    // 0x40
+    f32 pausecam_zpos_init;   // 0x44
+    f32 pausecam_zpos_max;    // 0x48
+    f32 cam_angle_up;         // 0x4C
+    f32 cam_angle_down;       // 0x50
+    f32 cam_angle_left;       // 0x54
+    f32 cam_angle_right;      // 0x58
+    Vec fixed_cam_pos;        // 0x5C - 0x64
+    f32 fixed_cam_fov;        // 0x68
     f32 fixed_cam_vert_angle; // 0x6C
     f32 fixed_cam_horz_angle; // 0x70
 } StageCameraInfo;
 
 typedef struct _StageBlastZone {
-    f32 left; // 0x74
-    f32 right; // 0x78
-    f32 top; // 0x7C
+    f32 left;   // 0x74
+    f32 right;  // 0x78
+    f32 top;    // 0x7C
     f32 bottom; // 0x80
 } StageBlastZone;
 
@@ -81,7 +81,7 @@ typedef struct _StageAnim {
 } StageAnim;
 
 typedef struct _StageInfo {
-    StageCameraInfo cam_info; // 0x00 - 0x70
+    StageCameraInfo cam_info;  // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
 
     u32 x84; // 0x84
@@ -114,7 +114,8 @@ typedef struct _StageInfo {
         }* ptr;
     }* x12C;
     Vec x130, x13C, x148, x154, x160, x16C;
-    BOOL (*x178)(s32);
+    BOOL (*x178)
+    (s32);
     void* x17C;
     struct _HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
@@ -177,7 +178,8 @@ typedef struct _StageData {
     void (*callback2)(void);
     void (*callback3)(void);
     s32 (*callback4)();
-    BOOL (*callback5)(s32);
+    BOOL (*callback5)
+    (s32);
     s32 (*callback6)(Vec*, s32, struct _HSD_JObj*);
     u32 flags2;
     S16Vec* x2C;
@@ -190,8 +192,8 @@ typedef struct _StructPairWithStageID {
 } StructPairWithStageID;
 
 typedef struct _Map {
-    int x0;                 // 0x0
-    struct _HSD_GObj* gobj; // 0x4
+    int x0;                                 // 0x0
+    struct _HSD_GObj* gobj;                 // 0x4
     void (*x8_callback)(struct _HSD_GObj*); // 0x8
     void (*xC_callback)(struct _HSD_GObj*); // 0xC
     struct {
@@ -213,7 +215,7 @@ typedef struct _Map {
         u8 b7 : 1;
     } x11_flags;
 
-    int map_id; // 0x14
+    int map_id;            // 0x14
     struct _HSD_GObj* x18; // 0x18
     void (*x1C_callback)(struct _HSD_GObj*);
     s32 x20[8];

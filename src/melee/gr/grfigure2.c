@@ -2,38 +2,34 @@
 #include <melee/gr/grfigure2.h>
 
 static StageCallbacks lbl_803E6328[3] = {
-    {
-        lbl_8020E3FC,
-        lbl_8020E428,
-        lbl_8020E430,
-        lbl_8020E434,
-        0UL
-    }, {
-        lbl_8020E438,
-        lbl_8020E464,
-        lbl_8020E46C,
-        lbl_8020E490,
-        0xC0000000
-    }, {
-        lbl_8020E494,
-        lbl_8020E4E4,
-        lbl_8020E4EC,
-        lbl_8020E4F0,
-        0UL
-    }
+    { lbl_8020E3FC,
+      lbl_8020E428,
+      lbl_8020E430,
+      lbl_8020E434,
+      0UL },
+    { lbl_8020E438,
+      lbl_8020E464,
+      lbl_8020E46C,
+      lbl_8020E490,
+      0xC0000000 },
+    { lbl_8020E494,
+      lbl_8020E4E4,
+      lbl_8020E4EC,
+      lbl_8020E4F0,
+      0UL }
 };
 
 extern StageData lbl_803E6370 = {
     0x00000045,
     lbl_803E6328,
     "/GrEF2.dat",
-	func_8020E274,
-	lbl_8020E270,
-	lbl_8020E2E4,
-	lbl_8020E2E8,
-	lbl_8020E30C,
-	lbl_8020E4F4,
-	lbl_8020E4FC,
+    func_8020E274,
+    lbl_8020E270,
+    lbl_8020E2E4,
+    lbl_8020E2E8,
+    lbl_8020E30C,
+    lbl_8020E4F4,
+    lbl_8020E4FC,
     0x00000001,
     NULL,
     0UL
@@ -43,7 +39,8 @@ void* lbl_804D6A78;
 
 extern StageInfo stage_info;
 
-static void func_8020E274(void) {
+static void func_8020E274(void)
+{
     lbl_804D6A78 = func_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
@@ -54,13 +51,16 @@ static void func_8020E274(void) {
     func_801C3BB4();
 }
 static void lbl_8020E2E4(void) {}
-static void lbl_8020E2E8(void) {
+static void lbl_8020E2E8(void)
+{
     func_801CAE04(0);
 }
-static s32 lbl_8020E30C(void){
+static s32 lbl_8020E30C(void)
+{
     return 0;
 }
-static HSD_GObj* func_8020E314(s32 gobj_id){
+static HSD_GObj* func_8020E314(s32 gobj_id)
+{
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E6328[gobj_id];
 
@@ -84,41 +84,50 @@ static HSD_GObj* func_8020E314(s32 gobj_id){
     }
     return gobj;
 }
-static void lbl_8020E3FC(HSD_GObj* gobj) {
+static void lbl_8020E3FC(HSD_GObj* gobj)
+{
     Map* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_8020E428(void){
+static s32 lbl_8020E428(void)
+{
     return 0;
 }
 static void lbl_8020E430(HSD_GObj* gobj) {}
 static void lbl_8020E434() {}
-static void lbl_8020E438(HSD_GObj* gobj) {
+static void lbl_8020E438(HSD_GObj* gobj)
+{
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
 }
-static s32 lbl_8020E464(void){
+static s32 lbl_8020E464(void)
+{
     return 0;
 }
-static void lbl_8020E46C(HSD_GObj* gobj) {
+static void lbl_8020E46C(HSD_GObj* gobj)
+{
     func_801C2FE0(gobj);
     func_800115F4();
 }
 static void lbl_8020E490() {}
-static void lbl_8020E494(HSD_GObj* gobj) {
+static void lbl_8020E494(HSD_GObj* gobj)
+{
     u32 unused[2];
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_8020E4E4(void){
+static s32 lbl_8020E4E4(void)
+{
     return 0;
 }
 static void lbl_8020E4EC(HSD_GObj* gobj) {}
 static void lbl_8020E4F0() {}
-static int lbl_8020E4F4(s32 number) {
+static int lbl_8020E4F4(s32 number)
+{
     return 0;
 }
-static s32 lbl_8020E4FC(Vec* vector, s32 number, struct _HSD_JObj * jobj) {
+static s32 lbl_8020E4FC(Vec* vector, s32 number, struct _HSD_JObj* jobj)
+{
     return 1;
 }

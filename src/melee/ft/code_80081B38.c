@@ -571,8 +571,7 @@ lbl_80082284:
 #pragma pop
 
 #pragma push
-asm BOOL EnvColl_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction)
-{ // clang-format off
+asm BOOL EnvColl_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction){ // clang-format off
     nofralloc
 /* 800822A4 0007EE84  7C 08 02 A6 */	mflr r0
 /* 800822A8 0007EE88  90 01 00 04 */	stw r0, 4(r1)
@@ -4049,8 +4048,7 @@ asm void func_80084EEC(HSD_GObj* fighter_gobj)
 #pragma pop
 
 #pragma push
-asm void func_80084F3C(HSD_GObj* fighter_gobj)
-{ // clang-format off
+asm void func_80084F3C(HSD_GObj* fighter_gobj){ // clang-format off
     nofralloc
 /* 80084F3C 00081B1C  7C 08 02 A6 */	mflr r0
 /* 80084F40 00081B20  90 01 00 04 */	stw r0, 4(r1)
@@ -4137,8 +4135,7 @@ asm unk_t func_80085004()
 #pragma pop
 
 #pragma push
-asm unk_t func_80085030()
-{ // clang-format off
+asm unk_t func_80085030(){ // clang-format off
     nofralloc
 /* 80085030 00081C10  7C 08 02 A6 */	mflr r0
 /* 80085034 00081C14  90 01 00 04 */	stw r0, 4(r1)

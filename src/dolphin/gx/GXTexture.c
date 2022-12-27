@@ -594,8 +594,7 @@ asm unk_t GXInitTexObjCI()
 
 // https://decomp.me/scratch/K0q3K
 #pragma push
-asm unk_t GXInitTexObjLOD()
-{ // clang-format off
+asm unk_t GXInitTexObjLOD(){ // clang-format off
     nofralloc
 /* 8033EC6C 0033B84C  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 8033EC70 0033B850  C0 02 E8 98 */	lfs f0, lbl_804DE278(r2)

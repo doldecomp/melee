@@ -48,7 +48,7 @@ typedef struct _HSD_PObj {
     struct _HSD_VtxDescList* verts;
     u16 flags;
     u16 n_display;
-    u8* display; //u8 primitive, u8 vtxcnt, u16* indices
+    u8* display; // u8 primitive, u8 vtxcnt, u16* indices
     union {
         struct _HSD_JObj* jobj;
         struct _HSD_ShapeSet* shape_set;
@@ -137,8 +137,8 @@ typedef struct _HSD_PObjInfo {
     void (*update)(void* obj, u32 type, FObjData* val);
 } HSD_PObjInfo;
 
-#define HSD_POBJ(o) ((HSD_PObj*)(o))
-#define HSD_POBJ_INFO(i) ((HSD_PObjInfo*)(i))
+#define HSD_POBJ(o) ((HSD_PObj*) (o))
+#define HSD_POBJ_INFO(i) ((HSD_PObjInfo*) (i))
 #define HSD_POBJ_METHOD(o) HSD_POBJ_INFO(HSD_CLASS_METHOD(o))
 
 u32 HSD_PObjGetFlags(HSD_PObj* pobj);

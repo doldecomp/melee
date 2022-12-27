@@ -45,7 +45,8 @@ static void asm myStrippedFunction()
     nop
 } // clang-format on
 
-int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3) {
+int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
+{
     if (lbl_804D7710 != NULL) {
         lbl_804D7710(arg1, *arg2);
     }
@@ -53,7 +54,8 @@ int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3) {
     return 0;
 }
 
-void func_803881E4(void) {
+void func_803881E4(void)
+{
     if (lbl_804D7718 == NULL) {
         lbl_804D7718 = lbl_80400430.unk84;
     }
@@ -61,12 +63,14 @@ void func_803881E4(void) {
     lbl_80400430.unk52 = 0;
 }
 
-void __assert(char* str, u32 arg1, char* arg2) {
+void __assert(char* str, u32 arg1, char* arg2)
+{
     OSReport("assertion \"%s\" failed", arg2);
     HSD_Panic(str, arg1, lbl_804D6010);
 }
 
-void HSD_Panic(char* arg0, u32 line, char* arg2) {
+void HSD_Panic(char* arg0, u32 line, char* arg2)
+{
     if (lbl_804D7714 != NULL) {
         OSSaveContext(&lbl_804C2608);
         OSReport("%s in %s on line %d.\n", arg2, arg0, line);

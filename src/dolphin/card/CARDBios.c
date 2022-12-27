@@ -304,7 +304,6 @@ s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallback)
     if (!card->attached) {
         result = CARD_RESULT_NOCARD;
     } else {
-
         if (txCallback) {
             card->txCallback = txCallback;
         }

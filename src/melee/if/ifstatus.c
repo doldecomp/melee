@@ -1510,10 +1510,8 @@ lbl_802F5DCC:
 inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
 {
     s32 var_ctr;
-    for(var_ctr = 0; var_ctr < 6; var_ctr++)
-    {
-        if (lbl_804A10C8.players[var_ctr].HUD_parent_entity == parent)
-        {
+    for (var_ctr = 0; var_ctr < 6; var_ctr++) {
+        if (lbl_804A10C8.players[var_ctr].HUD_parent_entity == parent) {
             return &lbl_804A10C8.players[var_ctr];
         }
     }
@@ -1522,8 +1520,7 @@ inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
 
 void lbl_802F5DE0(HSD_GObj* player, void* unk)
 {
-    if (!getPlayerByHUDParent(player)->flags.hide_all_digits)
-    {
+    if (!getPlayerByHUDParent(player)->flags.hide_all_digits) {
         func_80391070(player, unk);
     }
 }

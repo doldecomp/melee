@@ -8,10 +8,9 @@ HSD_ObjAllocData tevreg_alloc_data;
 HSD_ObjAllocData chan_alloc_data;
 
 extern s32 lbl_804D75F8;
-extern s32 lbl_804D7600; // state_num_chans
+extern s32 lbl_804D7600;   // state_num_chans
 extern void* lbl_804D7604; // chan_chan
 extern void* lbl_804D760C;
-
 
 void HSD_RenderInitAllocData(void)
 {

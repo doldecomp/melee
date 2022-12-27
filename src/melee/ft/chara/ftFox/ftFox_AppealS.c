@@ -7,9 +7,8 @@ extern BOOL func_801E2D14();
 // https://decomp.me/scratch/sI1ge // Check if Special Taunt has already been performed
 BOOL ftFox_AppealS_CheckIfUsed(Fighter* fp)
 {
-    void* attackCount = Player_GetTotalAttackCountPtr((s32)fp->xC_playerID);
-    if ((func_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) && (func_801E2D14() != FALSE))
-    {
+    void* attackCount = Player_GetTotalAttackCountPtr((s32) fp->xC_playerID);
+    if ((func_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) && (func_801E2D14() != FALSE)) {
         return TRUE;
     }
     return FALSE;
@@ -24,10 +23,10 @@ inline BOOL ftFox_CheckAppealSCount()
     s32 i;
     void* attackCount;
 
-    for (i = 0; i < 6; i++)
-    {
+    for (i = 0; i < 6; i++) {
         attackCount = Player_GetTotalAttackCountPtr(i);
-        if (func_800386D8(attackCount, 0x72)) return TRUE;
+        if (func_800386D8(attackCount, 0x72))
+            return TRUE;
     }
     return FALSE;
 }
@@ -39,10 +38,8 @@ BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     s32 ftKind = fp->x4_fighterKind;
 
-    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) && (func_801E2CE8() != FALSE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == FALSE) && ((u8)fp->x682 == TRUE))
-    {
-        if (ftFox_CheckAppealSCount() == 0)
-        {
+    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) && (func_801E2CE8() != FALSE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == FALSE) && ((u8) fp->x682 == TRUE)) {
+        if (ftFox_CheckAppealSCount() == 0) {
             ftFox_AppealS_Action(fighter_gobj);
             func_80040120(fp->xC_playerID, fp->x221F_flag.bits.b4);
             return TRUE;
@@ -63,11 +60,10 @@ f32 setFloatOrder2(void)
 
 inline BOOL ftFox_AppealS_GetLR(f32 x1, f32 x2)
 {
-    if (x1 == x2)
-    {
+    if (x1 == x2) {
         return 0;
-    }
-    else return 1;
+    } else
+        return 1;
 }
 
 static s32 ASID_AppealS[2][3] = { AS_FOX_APPEALS_START_R, AS_FOX_APPEALS_R, AS_FOX_APPEALS_END_R, AS_FOX_APPEALS_START_L, AS_FOX_APPEALS_L, AS_FOX_APPEALS_END_L };
@@ -108,39 +104,32 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
     s32 var2;
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->x2210_ThrowFlags.b3 != 0)
-    {
+    if (fp->x2210_ThrowFlags.b3 != 0) {
         fp->x2210_ThrowFlags.b3 = 0;
         flag = TRUE;
-    }
-    else flag = FALSE;
+    } else
+        flag = FALSE;
 
-    if (flag != FALSE)
-    {
+    if (flag != FALSE) {
         ftKind = fp->x4_fighterKind;
 
-        switch (ftKind)
-        {
+        switch (ftKind) {
         case FTKIND_FOX:
-            if (func_801E2B80() != FALSE)
-            {
+            if (func_801E2B80() != FALSE) {
                 fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
             }
             break;
 
         case FTKIND_FALCO:
-            if (func_801E2C34() != FALSE)
-            {
+            if (func_801E2C34() != FALSE) {
                 fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
             }
             break;
         }
     }
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp->foxVars[0].AppealS.animCount++;
-        if ((s32)fp->foxVars[0].AppealS.animCount >= 3)
-        {
+        if ((s32) fp->foxVars[0].AppealS.animCount >= 3) {
             func_8008A324(fighter_gobj);
             return;
         }

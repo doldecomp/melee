@@ -10,22 +10,16 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
     HSD_GObj* greenhouseGObj;
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->sa.gaw.x224C_greenhouseGObj != NULL)
-    {
+    if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
         ftGameWatch_Attack11_DecideAction(fighter_gobj);
-    }
-    else
-    {
+    } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
         fp->sa.gaw.x224C_greenhouseGObj = func_802C61F4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
-        if (fp->sa.gaw.x224C_greenhouseGObj != NULL)
-        {
-            if (fp->cb.x21E4_callback_OnDeath2 == NULL)
-            {
+        if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
+            if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
                 fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             }
-            if (fp->cb.x21DC_callback_OnTakeDamage == NULL)
-            {
+            if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
                 fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
             }
             fp->cb.x21D4_callback_EnterHitlag = ftGameWatch_ItemGreenhouseEnterHitlag;
@@ -47,32 +41,22 @@ void ftGameWatch_Attack11_DecideAction(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     s32 ASID;
 
-    if (fp->sa.gaw.x224C_greenhouseGObj != NULL)
-    {
+    if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
         ASID = fp->x10_action_state_index;
-        if (ASID == AS_GAMEWATCH_ATTACK11)
-        {
+        if (ASID == AS_GAMEWATCH_ATTACK11) {
             func_802C6430(fp->sa.gaw.x224C_greenhouseGObj);
-        }
-        else if (ASID == AS_GAMEWATCH_ATTACK100START)
-        {
+        } else if (ASID == AS_GAMEWATCH_ATTACK100START) {
             func_802C6458(fp->sa.gaw.x224C_greenhouseGObj);
-        }
-        else if (ASID == AS_GAMEWATCH_ATTACK100LOOP)
-        {
+        } else if (ASID == AS_GAMEWATCH_ATTACK100LOOP) {
             func_802C6480(fp->sa.gaw.x224C_greenhouseGObj);
-        }
-        else if (ASID == AS_GAMEWATCH_ATTACK100END)
-        {
+        } else if (ASID == AS_GAMEWATCH_ATTACK100END) {
             func_802C64A8(fp->sa.gaw.x224C_greenhouseGObj);
         }
 
-        if (fp->cb.x21E4_callback_OnDeath2 == NULL)
-        {
+        if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         }
-        if (fp->cb.x21DC_callback_OnTakeDamage == NULL)
-        {
+        if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         }
         fp->cb.x21D4_callback_EnterHitlag = ftGameWatch_ItemGreenhouseEnterHitlag;
@@ -100,8 +84,7 @@ void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     HSD_GObj* greenhouseGObj;
 
-    if (fp->sa.gaw.x224C_greenhouseGObj != NULL)
-    {
+    if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
         func_802C6328(fp->sa.gaw.x224C_greenhouseGObj);
         ftGameWatch_ItemGreenhouseSetFlag(fighter_gobj);
     }
@@ -112,21 +95,19 @@ extern void func_802C6394(HSD_GObj*);
 
 // 0x8014BFD4
 // https://decomp.me/scratch/zVtUN // Apply hitlag to Mr. Game & Watch's Insecticide Sprayer
-void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* fighter_gobj) 
+void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->sa.gaw.x224C_greenhouseGObj != NULL)
-    {
+    if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
         func_802C6374(fp->sa.gaw.x224C_greenhouseGObj);
     }
 }
 
 // 0x8014C004 - Remove hitlag for Mr. Game & Watch's Insecticide Sprayer
-void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj) 
+void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->sa.gaw.x224C_greenhouseGObj != NULL)
-    {
+    if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
         func_802C6394(fp->sa.gaw.x224C_greenhouseGObj);
     }
 }
@@ -136,8 +117,7 @@ void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 BOOL ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 {
     s32 ASID = getFighter(fighter_gobj)->x10_action_state_index;
-    if ((ASID >= AS_GAMEWATCH_ATTACK11) && (ASID <= AS_GAMEWATCH_ATTACK100END))
-    {
+    if ((ASID >= AS_GAMEWATCH_ATTACK11) && (ASID <= AS_GAMEWATCH_ATTACK100END)) {
         return FALSE;
     }
     return TRUE;
@@ -146,8 +126,7 @@ BOOL ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 // 0x8014C05C - Check if Mr. Game & Watch is performing Jab 1 (Attack11)
 BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->x10_action_state_index != AS_GAMEWATCH_ATTACK11)
-    {
+    if (getFighter(fighter_gobj)->x10_action_state_index != AS_GAMEWATCH_ATTACK11) {
         return TRUE;
     }
     return FALSE;
@@ -162,13 +141,12 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     s32 unused;
 
-    if (func_80094790(fighter_gobj) == FALSE)
-    {
+    if (func_80094790(fighter_gobj) == FALSE) {
         fp->x2218_flag.bits.b0 = 0;
         fp->x2218_flag.bits.b1 = 0;
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK11, 0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(fighter_gobj);
-        fp->x196C_hitlag_mult = (f32)fp->x110_attr.x18C_Jab_2InputWindow;
+        fp->x196C_hitlag_mult = (f32) fp->x110_attr.x18C_Jab_2InputWindow;
         fp->x1970 = 44;
         fp->x2218_flag.bits.b2 = 0;
         fp->gameWatchVars[0].Attack11.unk = 0;
@@ -179,13 +157,12 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
 
 // 0x8014C138
 // https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation callback
-void ftGameWatch_Attack11_Anim(HSD_GObj* fighter_gobj)  
+void ftGameWatch_Attack11_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
     Fighter* fp2;
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-    {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
     }
 }
@@ -207,7 +184,7 @@ void ftGameWatch_Attack11_Phys(HSD_GObj* fighter_gobj)
 extern void func_80084104(HSD_GObj*);
 
 // 0x8014C1B4 - Mr. Game & Watch's Jab Collision callback
-void ftGameWatch_Attack11_Coll(HSD_GObj* fighter_gobj) 
+void ftGameWatch_Attack11_Coll(HSD_GObj* fighter_gobj)
 {
     func_80084104(fighter_gobj);
     ftGameWatch_8014A538(fighter_gobj);
