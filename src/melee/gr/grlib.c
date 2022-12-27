@@ -296,7 +296,7 @@ BOOL func_801C9E60(Vec* v)
 
 // Only called from yorster and inishie1
 asm BOOL func_801C9EE8()
-{
+{ // clang-format off
     nofralloc
 /* 801C9EE8 001C6AC8  7C 08 02 A6 */	mflr r0
 /* 801C9EEC 001C6ACC  90 01 00 04 */	stw r0, 4(r1)
@@ -429,5 +429,5 @@ lbl_801CA090:
 /* 801CA0A4 001C6C84  83 C1 00 38 */	lwz r30, 0x38(r1)
 /* 801CA0A8 001C6C88  38 21 00 58 */	addi r1, r1, 0x58
 /* 801CA0AC 001C6C8C  7C 08 03 A6 */	mtlr r0
-/* 801CA0B0 001C6C90  4E 80 00 20 */	blr 
-}
+/* 801CA0B0 001C6C90  4E 80 00 20 */	blr
+} // clang-format on

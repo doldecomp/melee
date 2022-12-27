@@ -419,20 +419,20 @@ void func_8004293C(CollData* cd) {
     f32 angle;
     f32 sin;
     f32 cos;
-    
+
     f32 midpoint_x;
     f32 midpoint_y;
-    
+
     f32 orig_top_y;
     f32 orig_bottom_y;
     f32 orig_right_x;
     f32 orig_left_x;
-    
+
     f32 top_y;
     f32 bottom_y;
     f32 right_x;
     f32 left_x;
-    
+
     f32 rot_top_x;
     f32 rot_top_y;
     f32 rot_bot_x;
@@ -441,7 +441,7 @@ void func_8004293C(CollData* cd) {
     f32 rot_right_y;
     f32 rot_left_y;
     f32 rot_left_x;
-    
+
     angle = cd->x118_f32;
     if ((cd->x130_flags & 0x20) != 0) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0f;
@@ -455,10 +455,10 @@ void func_8004293C(CollData* cd) {
         cd->x130_flags &= 0xFFFFFFDF;
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
-    
+
     bottom_y = -cd->x10C_f32;
     top_y = cd->x108_f32;
-    
+
     if (cd->x36 == 1) {
         right_x = cd->x110_f32;
         left_x = -cd->x114_f32;
@@ -466,27 +466,27 @@ void func_8004293C(CollData* cd) {
         right_x = cd->x114_f32;
         left_x = -cd->x110_f32;
     }
-    
+
     if (angle != 0.0f) {
         sin = sinf(angle);
         cos = cosf(angle);
-        
+
         orig_top_y = top_y;
         orig_bottom_y = bottom_y;
         orig_right_x = right_x;
         orig_left_x = left_x;
-        
+
         // fake
         rot_right_y = 0.5f * (orig_right_x + orig_left_x);
         midpoint_x = rot_right_y;
-        
+
         top_y = right_x = bottom_y = left_x = 0.0f;
-        
+
         rot_top_x = -orig_top_y * sin;
         rot_top_y = orig_top_y * cos;
         update_min_max_2(&left_x, &right_x, rot_top_x);
         update_min_max_2(&bottom_y, &top_y, rot_top_y);
-        
+
         rot_bot_x = -orig_bottom_y * sin;
         rot_bot_y = orig_bottom_y * cos;
         update_min_max_2(&left_x, &right_x, rot_bot_x);
@@ -502,12 +502,12 @@ void func_8004293C(CollData* cd) {
         update_min_max_2(&left_x, &right_x, rot_left_x);
         update_min_max_2(&bottom_y, &top_y, rot_left_y);
     }
-    
+
     clamp_above_2(&top_y, 0.0f);
     clamp_below_2(&bottom_y, -0.0f);
     clamp_above_2(&right_x, 0.0f);
     clamp_below_2(&left_x, -0.0f);
-    
+
     if ((top_y - bottom_y) < 3.0f) {
         top_y = 1.5f;
         bottom_y = -top_y;
@@ -516,18 +516,18 @@ void func_8004293C(CollData* cd) {
         right_x = 1.5f;
         left_x = -right_x;
     }
-    
+
     cd->x84_ecb.top.x = 0.0f;
     cd->x84_ecb.top.y = top_y;
     cd->x84_ecb.bottom.x = 0.0f;
     cd->x84_ecb.bottom.y = bottom_y;
-    
+
     midpoint_y = 0.5f * (top_y + bottom_y);
     cd->x84_ecb.right.x = right_x;
     cd->x84_ecb.right.y = midpoint_y;
     cd->x84_ecb.left.x = left_x;
     cd->x84_ecb.left.y = midpoint_y;
-    
+
     cd->x34_flags.bits.b0 = 0;
 }
 
@@ -979,7 +979,8 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2) {
     }
 }
 #else
-asm void func_80043C6C() {
+asm void func_80043C6C()
+{ // clang-format off
     nofralloc
 /* 80043C6C 0004084C  7C 08 02 A6 */	mflr r0
 /* 80043C70 00040850  90 01 00 04 */	stw r0, 4(r1)
@@ -1125,8 +1126,8 @@ lbl_80043E70:
 /* 80043E80 00040A60  83 A1 00 3C */	lwz r29, 0x3c(r1)
 /* 80043E84 00040A64  38 21 00 50 */	addi r1, r1, 0x50
 /* 80043E88 00040A68  7C 08 03 A6 */	mtlr r0
-/* 80043E8C 00040A6C  4E 80 00 20 */	blr 
-}
+/* 80043E8C 00040A6C  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 #endif
 

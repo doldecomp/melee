@@ -223,7 +223,8 @@ asm void LCDisable(void)
     mtspr 0x398, r4
 } // clang-format on
 
-asm void LCStoreBlocks(register void* dst, register void* src, register u32 nblocks){ // clang-format off
+asm void LCStoreBlocks(register void* dst, register void* src, register u32 nblocks)
+{ // clang-format off
     rlwinm r6, nblocks, 30, 27, 31
     clrlwi dst, dst, 4
     or r6, r6, dst

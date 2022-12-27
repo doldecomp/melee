@@ -2,18 +2,18 @@
 #include <dolphin/os/OSTime.h>
 
 asm OSTime OSGetTime(void)
-{
+{ // clang-format off
     mftbu r3
     mftb r4, 0x10c
     mftbu r5
     cmpw r3, r5
     bne OSGetTime
-}
+} // clang-format on
 
 asm OSTick OSGetTick(void)
-{
+{ // clang-format off
     mftb r3, 0x10c
-}
+} // clang-format on
 
 extern volatile OSTime OS_SYSTEM_TIME AT_ADDRESS(0x800030D8);
 
@@ -219,6 +219,6 @@ lbl_8034C7E8:
 /* 8034C85C 0034943C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8034C860 00349440  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034C864 00349444  7C 08 03 A6 */	mtlr r0
-/* 8034C868 00349448  4E 80 00 20 */	blr 
+/* 8034C868 00349448  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop

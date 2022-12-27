@@ -545,7 +545,7 @@ lbl_801C0D38:
 /* 801C0D4C 001BD92C  7D 88 03 A6 */	mtlr r12
 /* 801C0D50 001BD930  38 9D 00 00 */	addi r4, r29, 0
 /* 801C0D54 001BD934  38 61 00 50 */	addi r3, r1, 0x50
-/* 801C0D58 001BD938  4E 80 00 21 */	blrl 
+/* 801C0D58 001BD938  4E 80 00 21 */	blrl
 /* 801C0D5C 001BD93C  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0D60 001BD940  41 82 00 0C */	beq lbl_801C0D6C
 lbl_801C0D64:
@@ -619,7 +619,7 @@ lbl_801C0E38:
 /* 801C0E4C 001BDA2C  7D 88 03 A6 */	mtlr r12
 /* 801C0E50 001BDA30  38 9C 00 00 */	addi r4, r28, 0
 /* 801C0E54 001BDA34  38 61 00 50 */	addi r3, r1, 0x50
-/* 801C0E58 001BDA38  4E 80 00 21 */	blrl 
+/* 801C0E58 001BDA38  4E 80 00 21 */	blrl
 /* 801C0E5C 001BDA3C  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0E60 001BDA40  41 82 00 0C */	beq lbl_801C0E6C
 lbl_801C0E64:
@@ -697,7 +697,7 @@ lbl_801C0F48:
 /* 801C0F68 001BDB48  83 81 00 60 */	lwz r28, 0x60(r1)
 /* 801C0F6C 001BDB4C  38 21 00 90 */	addi r1, r1, 0x90
 /* 801C0F70 001BDB50  7C 08 03 A6 */	mtlr r0
-/* 801C0F74 001BDB54  4E 80 00 20 */	blr 
+/* 801C0F74 001BDB54  4E 80 00 20 */	blr
 }
 #pragma peephole on
 
@@ -829,7 +829,7 @@ extern void func_8000F9F8();
 extern void func_80013B14();
 extern void HSD_JObjAddNext();
 asm struct _HSD_GObj* func_801C14D0(s32)
-{
+{ // clang-format off
     nofralloc
 /* 801C14D0 001BE0B0  7C 08 02 A6 */	mflr r0
 /* 801C14D4 001BE0B4  3C A0 80 3E */	lis r5, lbl_803DFEA8@ha
@@ -1192,8 +1192,8 @@ lbl_801C1A0C:
 /* 801C1A10 001BE5F0  80 01 00 D4 */	lwz r0, 0xd4(r1)
 /* 801C1A14 001BE5F4  38 21 00 D0 */	addi r1, r1, 0xd0
 /* 801C1A18 001BE5F8  7C 08 03 A6 */	mtlr r0
-/* 801C1A1C 001BE5FC  4E 80 00 20 */	blr 
-}
+/* 801C1A1C 001BE5FC  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 char get_jobj[] = "%s:%d: couldn t get jobj\n";
@@ -1459,7 +1459,7 @@ lbl_801C1FE0:
 /* 801C1FEC 001BEBCC  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 801C1FF0 001BEBD0  38 21 00 20 */	addi r1, r1, 0x20
 /* 801C1FF4 001BEBD4  7C 08 03 A6 */	mtlr r0
-/* 801C1FF8 001BEBD8  4E 80 00 20 */	blr 
+/* 801C1FF8 001BEBD8  4E 80 00 20 */	blr
 }
 #pragma peephole on
 
@@ -1694,7 +1694,7 @@ lbl_801C2360:
 /* 801C2364 001BEF44  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 801C2368 001BEF48  38 21 00 28 */	addi r1, r1, 0x28
 /* 801C236C 001BEF4C  7C 08 03 A6 */	mtlr r0
-/* 801C2370 001BEF50  4E 80 00 20 */	blr 
+/* 801C2370 001BEF50  4E 80 00 20 */	blr
 }
 #pragma peephole on
 
@@ -2027,7 +2027,7 @@ lbl_801C2AC4:
 /* 801C2AC8 001BF6A8  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 801C2ACC 001BF6AC  38 21 00 30 */	addi r1, r1, 0x30
 /* 801C2AD0 001BF6B0  7C 08 03 A6 */	mtlr r0
-/* 801C2AD4 001BF6B4  4E 80 00 20 */	blr 
+/* 801C2AD4 001BF6B4  4E 80 00 20 */	blr
 }
 #pragma peephole on
 
@@ -2192,7 +2192,7 @@ BOOL func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 static s16 lbl_804D6954;
 extern void func_8004D17C();
 asm void func_801C2FE0()
-{
+{ // clang-format off
     nofralloc
 /* 801C2FE0 001BFBC0  7C 08 02 A6 */	mflr r0
 /* 801C2FE4 001BFBC4  90 01 00 04 */	stw r0, 4(r1)
@@ -2284,8 +2284,8 @@ lbl_801C3114:
 /* 801C3118 001BFCF8  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 801C311C 001BFCFC  38 21 00 30 */	addi r1, r1, 0x30
 /* 801C3120 001BFD00  7C 08 03 A6 */	mtlr r0
-/* 801C3124 001BFD04  4E 80 00 20 */	blr 
-}
+/* 801C3124 001BFD04  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 BOOL func_801C3128(s32 arg0, void (*arg1)(s16))
@@ -2784,12 +2784,12 @@ lbl_801C36E0:
 /* 801C36E4 001C02C4  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 801C36E8 001C02C8  38 21 00 30 */	addi r1, r1, 0x30
 /* 801C36EC 001C02CC  7C 08 03 A6 */	mtlr r0
-/* 801C36F0 001C02D0  4E 80 00 20 */	blr 
+/* 801C36F0 001C02D0  4E 80 00 20 */	blr
 }
 #pragma peephole on
 
 asm void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
-{
+{ // clang-format off
     nofralloc
 /* 801C36F4 001C02D4  7C 08 02 A6 */	mflr r0
 /* 801C36F8 001C02D8  3C C0 80 3E */	lis r6, lbl_803DFEA8@ha
@@ -2906,8 +2906,8 @@ lbl_801C3860:
 /* 801C3870 001C0450  83 81 00 28 */	lwz r28, 0x28(r1)
 /* 801C3874 001C0454  38 21 00 38 */	addi r1, r1, 0x38
 /* 801C3878 001C0458  7C 08 03 A6 */	mtlr r0
-/* 801C387C 001C045C  4E 80 00 20 */	blr 
-}
+/* 801C387C 001C045C  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 void func_801C3880(f32 val)
@@ -3258,13 +3258,13 @@ f32 func_801C3F20(HSD_JObj* arg0)
 }
 
 asm struct _HSD_JObj* func_801C3FA4(HSD_GObj*, s32 depth)
-{
+{ // clang-format off
     nofralloc
 /* 801C3FA4 001C0B84  80 63 00 28 */	lwz r3, 0x28(r3)
 /* 801C3FA8 001C0B88  28 03 00 00 */	cmplwi r3, 0
 /* 801C3FAC 001C0B8C  40 82 00 0C */	bne lbl_801C3FB8
 /* 801C3FB0 001C0B90  38 60 00 00 */	li r3, 0
-/* 801C3FB4 001C0B94  4E 80 00 20 */	blr 
+/* 801C3FB4 001C0B94  4E 80 00 20 */	blr
 lbl_801C3FB8:
 /* 801C3FB8 001C0B98  40 82 00 0C */	bne lbl_801C3FC4
 /* 801C3FBC 001C0B9C  38 60 00 00 */	li r3, 0
@@ -3275,7 +3275,7 @@ lbl_801C3FC8:
 /* 801C3FC8 001C0BA8  28 03 00 00 */	cmplwi r3, 0
 /* 801C3FCC 001C0BAC  40 82 01 20 */	bne lbl_801C40EC
 /* 801C3FD0 001C0BB0  38 60 00 00 */	li r3, 0
-/* 801C3FD4 001C0BB4  4E 80 00 20 */	blr 
+/* 801C3FD4 001C0BB4  4E 80 00 20 */	blr
 /* 801C3FD8 001C0BB8  48 00 01 14 */	b lbl_801C40EC
 lbl_801C3FDC:
 /* 801C3FDC 001C0BBC  80 03 00 14 */	lwz r0, 0x14(r3)
@@ -3368,11 +3368,11 @@ lbl_801C40E4:
 /* 801C40E8 001C0CC8  4B FF FF 6C */	b lbl_801C4054
 lbl_801C40EC:
 /* 801C40EC 001C0CCC  28 03 00 00 */	cmplwi r3, 0
-/* 801C40F0 001C0CD0  4D 82 00 20 */	beqlr 
+/* 801C40F0 001C0CD0  4D 82 00 20 */	beqlr
 /* 801C40F4 001C0CD4  2C 04 00 00 */	cmpwi r4, 0
 /* 801C40F8 001C0CD8  40 82 FE E4 */	bne lbl_801C3FDC
-/* 801C40FC 001C0CDC  4E 80 00 20 */	blr 
-}
+/* 801C40FC 001C0CDC  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
@@ -3805,7 +3805,7 @@ lbl_801C4958:
 /* 801C497C 001C155C  CB E1 00 38 */	lfd f31, 0x38(r1)
 /* 801C4980 001C1560  38 21 00 40 */	addi r1, r1, 0x40
 /* 801C4984 001C1564  7C 08 03 A6 */	mtlr r0
-/* 801C4988 001C1568  4E 80 00 20 */	blr 
+/* 801C4988 001C1568  4E 80 00 20 */	blr
 }
 #pragma peephole on
 
@@ -4004,7 +4004,7 @@ extern char lbl_804D452C[8];
 extern void func_80368784();
 extern void func_8036885C();
 asm void func_801C4FAC()
-{
+{ // clang-format off
     nofralloc
 /* 801C4FAC 001C1B8C  7C 08 02 A6 */	mflr r0
 /* 801C4FB0 001C1B90  3C 80 80 4A */	lis r4, stage_info@ha
@@ -4292,8 +4292,8 @@ lbl_801C53CC:
 /* 801C53DC 001C1FBC  83 C1 00 80 */	lwz r30, 0x80(r1)
 /* 801C53E0 001C1FC0  38 21 00 98 */	addi r1, r1, 0x98
 /* 801C53E4 001C1FC4  7C 08 03 A6 */	mtlr r0
-/* 801C53E8 001C1FC8  4E 80 00 20 */	blr 
-}
+/* 801C53E8 001C1FC8  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 void func_801C53EC(u32 arg0)
@@ -4487,7 +4487,7 @@ lbl_801C58C8:
 /* 801C58D0 001C24B0  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 801C58D4 001C24B4  38 21 00 18 */	addi r1, r1, 0x18
 /* 801C58D8 001C24B8  7C 08 03 A6 */	mtlr r0
-/* 801C58DC 001C24BC  4E 80 00 20 */	blr 
+/* 801C58DC 001C24BC  4E 80 00 20 */	blr
 }
 #pragma peephole on
 

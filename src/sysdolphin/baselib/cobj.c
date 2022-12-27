@@ -43,7 +43,7 @@ void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32
 }
 #else
 asm void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32 enable_depth)
-{
+{ // clang-format off
     nofralloc
 /* 803676F8 003642D8  7C 08 02 A6 */	mflr r0
 /* 803676FC 003642DC  90 01 00 04 */	stw r0, 4(r1)
@@ -146,16 +146,16 @@ lbl_80367840:
 /* 80367864 00364444  83 81 00 18 */	lwz r28, 0x18(r1)
 /* 80367868 00364448  38 21 00 50 */	addi r1, r1, 0x50
 /* 8036786C 0036444C  7C 08 03 A6 */	mtlr r0
-/* 80367870 00364450  4E 80 00 20 */	blr 
-}
+/* 80367870 00364450  4E 80 00 20 */	blr
+} // clang-format on
 #endif
 
-#pragma push 
+#pragma push
 #pragma peephole on
 void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
 {
     HSD_WObj* wobj;
-    
+
     if (cobj == NULL) {
         return;
     }
@@ -168,8 +168,8 @@ void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
     HSD_WObjRemoveAnim(wobj);
 }
 
-void HSD_CObjRemoveAnim(HSD_CObj* cobj) 
-{    
+void HSD_CObjRemoveAnim(HSD_CObj* cobj)
+{
     if (cobj == NULL) {
         return;
     }

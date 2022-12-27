@@ -457,7 +457,7 @@ void func_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
 
 // https://decomp.me/scratch/atKIC
 asm void func_8000C490(HSD_JObj*, HSD_JObj*, HSD_JObj*, f32, f32)
-{
+{ // clang-format off
     nofralloc
 /* 8000C490 00009070  7C 08 02 A6 */	mflr r0
 /* 8000C494 00009074  90 01 00 04 */	stw r0, 4(r1)
@@ -674,8 +674,8 @@ lbl_8000C7A4:
 /* 8000C7AC 0000938C  CB E1 00 88 */	lfd f31, 0x88(r1)
 /* 8000C7B0 00009390  38 21 00 90 */	addi r1, r1, 0x90
 /* 8000C7B4 00009394  7C 08 03 A6 */	mtlr r0
-/* 8000C7B8 00009398  4E 80 00 20 */	blr 
-}
+/* 8000C7B8 00009398  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
@@ -693,7 +693,7 @@ void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
 
 // https://decomp.me/scratch/63ON3
 asm void func_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, f32, f32)
-{
+{ // clang-format off
     nofralloc
 /* 8000C868 00009448  7C 08 02 A6 */	mflr r0
 /* 8000C86C 0000944C  90 01 00 04 */	stw r0, 4(r1)
@@ -895,8 +895,8 @@ lbl_8000CB3C:
 /* 8000CB50 00009730  83 81 00 D0 */	lwz r28, 0xd0(r1)
 /* 8000CB54 00009734  38 21 00 E8 */	addi r1, r1, 0xe8
 /* 8000CB58 00009738  7C 08 03 A6 */	mtlr r0
-/* 8000CB5C 0000973C  4E 80 00 20 */	blr 
-}
+/* 8000CB5C 0000973C  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
 static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc,

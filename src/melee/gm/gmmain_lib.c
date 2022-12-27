@@ -213,7 +213,8 @@ s32* func_8015D084(s32 arg0) {
     return &func_8015EDBC()->xB0[arg0 & 0xFF];
 }
 #else
-asm s32* func_8015D084(s32 arg0) {
+asm s32* func_8015D084(s32 arg0)
+{ // clang-format off
     nofralloc
 /* 8015D084 00159C64  7C 08 02 A6 */	mflr r0
 /* 8015D088 00159C68  90 01 00 04 */	stw r0, 4(r1)
@@ -230,7 +231,7 @@ asm s32* func_8015D084(s32 arg0) {
 /* 8015D0B4 00159C94  38 21 00 18 */	addi r1, r1, 0x18
 /* 8015D0B8 00159C98  7C 08 03 A6 */	mtlr r0
 /* 8015D0BC 00159C9C  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 #endif
 
@@ -356,7 +357,8 @@ s32* func_8015D450(s32 arg0) {
     return &func_8015EDBC()->x4C[arg0 & 255];
 }
 #else
-asm s32* func_8015D450(s32 arg0) {
+asm s32* func_8015D450(s32 arg0)
+{ // clang-format off
     nofralloc
 /* 8015D450 0015A030  7C 08 02 A6 */	mflr r0
 /* 8015D454 0015A034  90 01 00 04 */	stw r0, 4(r1)
@@ -372,8 +374,8 @@ asm s32* func_8015D450(s32 arg0) {
 /* 8015D47C 0015A05C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8015D480 0015A060  38 21 00 18 */	addi r1, r1, 0x18
 /* 8015D484 0015A064  7C 08 03 A6 */	mtlr r0
-/* 8015D488 0015A068  4E 80 00 20 */	blr 
-}
+/* 8015D488 0015A068  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 #endif
 
@@ -567,7 +569,8 @@ s32 func_8015D984(s32 arg0) {
     return 0;
 }
 #else
-asm s32 func_8015D984(s32 arg0) {
+asm s32 func_8015D984(s32 arg0)
+{ // clang-format off
     nofralloc
 /* 8015D984 0015A564  7C 08 02 A6 */	mflr r0
 /* 8015D988 0015A568  90 01 00 04 */	stw r0, 4(r1)
@@ -599,7 +602,7 @@ lbl_8015D9DC:
 /* 8015D9E8 0015A5C8  38 21 00 28 */	addi r1, r1, 0x28
 /* 8015D9EC 0015A5CC  7C 08 03 A6 */	mtlr r0
 /* 8015D9F0 0015A5D0  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 #endif
 
@@ -659,7 +662,8 @@ void func_8015DB2C(u8 arg0, s32 arg2) {
     *base = func_8000AF74(*base, 1);
 }
 #else
-asm void func_8015DB2C(u8 arg0, s32 arg2) {
+asm void func_8015DB2C(u8 arg0, s32 arg2)
+{ // clang-format off
     nofralloc
 /* 8015DB2C 0015A70C  7C 08 02 A6 */	mflr r0
 /* 8015DB30 0015A710  54 63 06 3E */	clrlwi r3, r3, 0x18
@@ -677,7 +681,7 @@ asm void func_8015DB2C(u8 arg0, s32 arg2) {
 /* 8015DB60 0015A740  38 21 00 18 */	addi r1, r1, 0x18
 /* 8015DB64 0015A744  7C 08 03 A6 */	mtlr r0
 /* 8015DB68 0015A748  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma peephole on
 #endif
 

@@ -25,7 +25,7 @@ extern HSD_GObj* func_802C837C(HSD_GObj*, Vec3*, s32, u32, f32);
 
 // 0x8014E4F0
 // https://decomp.me/scratch/P7Z9j
-void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj) 
+void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
 {
     Vec3 sp44;
     Vec3 sp38;
@@ -75,9 +75,9 @@ void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
 #else
 
 asm void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
-{
+{ // clang-format off
         nofralloc
-        
+
         /* 8014E4F0 0014B0D0  7C 08 02 A6 */	mflr r0
         /* 8014E4F4 0014B0D4  90 01 00 04 */	stw r0, 4(r1)
         /* 8014E4F8 0014B0D8  94 21 FF 98 */	stwu r1, -0x68(r1)
@@ -168,7 +168,7 @@ asm void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
         /* 8014E638 0014B218  38 21 00 68 */	addi r1, r1, 0x68
         /* 8014E63C 0014B21C  7C 08 03 A6 */	mtlr r0
         /* 8014E640 0014B220  4E 80 00 20 */	blr
-}
+} // clang-format on
 
 #endif
 

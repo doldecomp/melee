@@ -18,19 +18,19 @@ void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg) {
     u8 *index;
     s32 i;
     f32 zero_float;
-    
+
     attr_r26 = fp->x10C_ftData->ext_attr;
     index = (unk_struct1 = unk_struct_arg)->unk_struct->xC_start_index;
     ptr2EndIndex = (s32 *) (&unk_struct1->unk_struct->x8_end_index);
     zero_float = 0.0f;
-    
+
     for (i = 0; i < *ptr2EndIndex; i++) {
 
         HSD_DObj* dobj_r3 = fp->x5F0[index[i]];
         HSD_MObj *mobj_r3;
         HSD_AObj *aobj_r24;
 
-        
+
         if (dobj_r3) {
             mobj_r3 = dobj_r3->mobj;
         } else {
@@ -57,7 +57,7 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_f
     s32 filler[2];
 
     if (unk_struct_arg) {
-        
+
         struct S_UNK_YOSHI2* unk_struct = unk_struct_arg->unk_struct;
         s32 *ptr2EndIndex;
         u8 *index;
@@ -65,14 +65,14 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_f
 
         index = unk_struct->xC_start_index;
         ptr2EndIndex = (s32*) &unk_struct->x8_end_index;
-        
+
         for (i = 0; i < *ptr2EndIndex; i++) {
 
             HSD_DObj* dobj_r3 = fp->x5F0[index[i]];
             HSD_MObj* mobj_r3;
             HSD_MObj* mobj;
 
-        
+
             if (dobj_r3) {
                 mobj_r3 = dobj_r3->mobj;
             } else {
@@ -120,14 +120,14 @@ void ftYoshi_OnLoad(HSD_GObj* fighter_gobj) {
     ftData *ft;
     struct S_UNK_YOSHI1* temp_r27;
     Fighter *fp;
-    
+
     fp = fighter_gobj->user_data;
     temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
     ft = fp->x10C_ftData;
     temp_r28 = (struct S_UNK_YOSHI1*)fp->x5BC;
     item_list = ft->x48_items;
     other_attr = ft->ext_attr;
-    
+
     if (!temp)
     {
         OSReport("yoshi parts_model NULL!!\n");
@@ -142,7 +142,7 @@ void ftYoshi_OnLoad(HSD_GObj* fighter_gobj) {
     func_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
     func_8026B3F8(item_list[2], It_Kind_Yoshi_EggLay);
     fp->x2226_flag.bits.b1 = 1;
-  
+
 }
 
 void ftYoshi_8012BA8C(HSD_GObj* fighter_gobj) {
@@ -178,13 +178,13 @@ void ftYoshi_LoadSpecialAttrs(HSD_GObj* fighter_gobj) {
 void ftYoshi_OnKnockbackEnter(HSD_GObj* fighter_gobj) {
     Fighter_OnKnockbackEnter(fighter_gobj, 1);
     ftAnim_ApplyPartAnim(fighter_gobj, 3, 3, 0.0f);
-    ftAnim_ApplyPartAnim(fighter_gobj, 4, 3, 0.0f); 
+    ftAnim_ApplyPartAnim(fighter_gobj, 4, 3, 0.0f);
 }
 
 void ftYoshi_OnKnockbackExit(HSD_GObj* fighter_gobj) {
     Fighter_OnKnockbackExit(fighter_gobj, 1);
     ftAnim_ApplyPartAnim(fighter_gobj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(fighter_gobj, 4, 2, 0.0f); 
+    ftAnim_ApplyPartAnim(fighter_gobj, 4, 2, 0.0f);
 }
 
 extern f32 lbl_804D9A28;
@@ -235,7 +235,7 @@ func_8012BDA0:
 /* 8012BE2C 00128A0C  83 E1 00 54 */	lwz r31, 0x54(r1)
 /* 8012BE30 00128A10  38 21 00 58 */	addi r1, r1, 0x58
 /* 8012BE34 00128A14  7C 08 03 A6 */	mtlr r0
-/* 8012BE38 00128A18  4E 80 00 20 */	blr 
+/* 8012BE38 00128A18  4E 80 00 20 */	blr
 }
 #pragma pop
 
@@ -263,7 +263,7 @@ extern void func_80092450();
 
 #pragma push
 asm unk_t func_8012BECC()
-{
+{ // clang-format off
     nofralloc
 func_8012BECC:
 /* 8012BECC 00128AAC  7C 08 02 A6 */	mflr r0
@@ -359,7 +359,7 @@ lbl_8012BFF0:
 /* 8012C024 00128C04  38 21 00 38 */	addi r1, r1, 0x38
 /* 8012C028 00128C08  7C 08 03 A6 */	mtlr r0
 /* 8012C02C 00128C0C  4E 80 00 20 */	blr
-}
+} // clang-format on
 #pragma pop
 
 // extern void lbl_8012CACC();

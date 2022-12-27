@@ -199,7 +199,7 @@ char lbl_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
     ((cond) ? ((void) 0) : __assert(lbl_803C0D58, line, #cond))
 
 asm f32 func_8007CDA4(Fighter*)
-{
+{ // clang-format off
     nofralloc
 /* 8007CDA4 00079984  7C 08 02 A6 */   mflr r0
 /* 8007CDA8 00079988  90 01 00 04 */   stw r0, 4(r1)
@@ -222,11 +222,11 @@ lbl_8007CDDC:
 /* 8007CDE8 000799C8  83 E1 00 14 */   lwz r31, 0x14(r1)
 /* 8007CDEC 000799CC  38 21 00 18 */   addi r1, r1, 0x18
 /* 8007CDF0 000799D0  7C 08 03 A6 */   mtlr r0
-/* 8007CDF4 000799D4  4E 80 00 20 */   blr 
-}
+/* 8007CDF4 000799D4  4E 80 00 20 */   blr
+} // clang-format on
 
 asm f32 func_8007CDF8(Fighter*)
-{
+{ // clang-format off
     nofralloc
 /* 8007CDF8 000799D8  7C 08 02 A6 */	mflr r0
 /* 8007CDFC 000799DC  90 01 00 04 */	stw r0, 4(r1)
@@ -249,8 +249,8 @@ lbl_8007CE30:
 /* 8007CE3C 00079A1C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8007CE40 00079A20  38 21 00 18 */	addi r1, r1, 0x18
 /* 8007CE44 00079A24  7C 08 03 A6 */	mtlr r0
-/* 8007CE48 00079A28  4E 80 00 20 */	blr 
-}
+/* 8007CE48 00079A28  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 #else
 

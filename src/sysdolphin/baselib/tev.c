@@ -36,7 +36,7 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void)
 }
 
 asm void HSD_SetupChannel(void* ch)
-{
+{ // clang-format off
     nofralloc
 /* 803620A4 0035EC84  7C 08 02 A6 */	mflr r0
 /* 803620A8 0035EC88  90 01 00 04 */	stw r0, 4(r1)
@@ -253,8 +253,8 @@ lbl_803623BC:
 /* 803623C0 0035EFA0  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 803623C4 0035EFA4  38 21 00 60 */	addi r1, r1, 0x60
 /* 803623C8 0035EFA8  7C 08 03 A6 */	mtlr r0
-/* 803623CC 0035EFAC  4E 80 00 20 */	blr 
-}
+/* 803623CC 0035EFAC  4E 80 00 20 */	blr
+} // clang-format on
 
 #pragma push
 #pragma peephole on
