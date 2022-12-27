@@ -21,7 +21,7 @@ OSContext lbl_804C2608;
 /*
  * Unused symbol probably used by the myStrippedFunction below, but since it got stripped
  * there's no telling what it was for.
- * 
+ *
  * Regarding the pragma, normally this works, but in this case the Metrowerks toolchain is
  * out for fuckin' blood or something. See the FORCEACTIVE section we had to add in the
  * LCF just to get the compiler to stop removing this.
@@ -37,12 +37,13 @@ static char lbl_804D6010[1] = "";
 
 // required stripped asm function to get the peephole off behavior in early
 // CW versions to occur.
-static void asm myStrippedFunction() {
+static void asm myStrippedFunction()
+{ // clang-format off
     nop
     nop
     nop
     nop
-}
+} // clang-format on
 
 int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3) {
     if (lbl_804D7710 != NULL) {
