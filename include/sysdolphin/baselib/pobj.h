@@ -65,7 +65,7 @@ typedef struct _HSD_PObjDesc {
     u16 n_display;
     u8* display;
     union {
-        struct _HSD_JObjDesc* joint;
+        struct _HSD_Joint* joint;
         struct _HSD_ShapeSetDesc* shape_set;
         struct _HSD_EnvelopeDesc** envelope_p;
     } u;
@@ -88,7 +88,7 @@ typedef struct _HSD_Envelope {
 } HSD_Envelope;
 
 typedef struct _HSD_EnvelopeDesc {
-    struct _HSD_JObjDesc* joint;
+    struct _HSD_Joint* joint;
     f32 weight;
 } HSD_EnvelopeDesc;
 
