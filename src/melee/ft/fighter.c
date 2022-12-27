@@ -70,7 +70,7 @@ unk_t lbl_804D6534 = NULL;
 unk_t lbl_804D6538 = NULL;
 unk_t lbl_804D653C = NULL;
 s32** lbl_804D6540 = NULL;
-unk_t FighterPartsTable = NULL;
+unk_t ftPartsTable = NULL;
 unk_t lbl_804D6548 = NULL;
 unk_t lbl_804D654C = NULL;
 unk_t lbl_804D6550 = NULL;
@@ -133,7 +133,7 @@ void Fighter_LoadCommonData()
     lbl_804D6550 = pData[1];
     lbl_804D654C = pData[2];
     lbl_804D6548 = pData[3];
-    FighterPartsTable = pData[4];
+    ftPartsTable = pData[4];
     lbl_804D6540 = pData[5];
     lbl_804D653C = pData[6];
     lbl_804D6538 = pData[7];
