@@ -98,7 +98,7 @@ void ftSamus_CreateThrowGrappleBeam(HSD_GObj* fighter_gobj, s32 action_state, f3
 
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, beam->x8_anim_joint,beam->xC_matanim_joint, 0);
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, beam->x4_anim_joints[action_state - ASID_THROWF], 0, 0);
-    HSD_ForeachAnim(fighter_copy->x20A0_accessory, JOBJ_TYPE, ~TOBJ_MASK & ~MOBJ_MASK, &ftSamus_80128770, AOBJ_ARG_AF, anim_speed);
+    HSD_ForeachAnim(fighter_copy->x20A0_accessory, JOBJ_TYPE, ALL_TYPE_MASK & ~TOBJ_MASK & ~MOBJ_MASK, &ftSamus_80128770, AOBJ_ARG_AF, anim_speed);
     HSD_JObjReqAnimAll(fighter_copy->x20A0_accessory, 0.0f);
     HSD_JObjAnimAll(fighter_copy->x20A0_accessory);
     func_8000C2F8(fighter_copy->x20A0_accessory, fighter_copy->x5E8_fighterBones[51].x0_jobj);
