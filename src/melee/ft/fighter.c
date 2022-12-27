@@ -39,7 +39,7 @@ extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 const Vec3 lbl_803B7488 = { 0.0f, 0.0f, 0.0f };
 const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
-HSD_ObjAllocData lbl_80458FD0;
+HSD_ObjAllocData fighter_alloc_data;
 HSD_ObjAllocData lbl_80458FFC;
 HSD_ObjAllocData lbl_80459028;
 HSD_ObjAllocData lbl_80459054;
@@ -92,7 +92,7 @@ void Fighter_800679B0()
     s32 i;
 
     // @WARNING: don't hardcode the allocation sizes
-    HSD_ObjAllocInit(&lbl_80458FD0, sizeof(Fighter), /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_alloc_data, sizeof(Fighter), /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80458FFC, /*size*/ 0x424, /*align*/ 4);
     func_800852B0();
     Fighter_LoadCommonData();
@@ -100,7 +100,7 @@ void Fighter_800679B0()
     func_8009F4A4();
     func_800C8064();
     func_800C8F6C();
-    // @TODO: &lbl_80458FD0+2, +3, +4 are not defined in the fighter.s data section, how does this work?
+    // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s data section, how does this work?
     HSD_ObjAllocInit(&lbl_80459028, /*size*/ 0x8c0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459054, /*size*/ 0x1f0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459080, /*size*/ 0x80, /*align*/ 4);
@@ -834,7 +834,7 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input)
 
     fighter_gobj = GObj_Create(4, 8, 0);
     GObj_SetupGXLink(fighter_gobj, &func_80080E18, 5U, 0U);
-    fp = HSD_ObjAlloc(&lbl_80458FD0);
+    fp = HSD_ObjAlloc(&fighter_alloc_data);
     fp->x2D8_specialAttributes2 = HSD_ObjAlloc(&lbl_80458FFC);
     GObj_InitUserData(fighter_gobj, 4U, &Fighter_Unload_8006DABC, fp);
     func_8008572C(input->fighterKind);
@@ -2919,5 +2919,5 @@ void Fighter_Unload_8006DABC(void* user_data)
     HSD_ObjFree(&lbl_80459054, fp->x5F0);
     HSD_ObjFree(&lbl_80459080, fp->x2040);
     HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);
-    HSD_ObjFree(&lbl_80458FD0, fp);
+    HSD_ObjFree(&fighter_alloc_data, fp);
 }
