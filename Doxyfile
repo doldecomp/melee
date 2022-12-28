@@ -270,24 +270,24 @@ TAB_SIZE               = 4
 # a double escape (\\{ and \\})
 
 ALIASES                = offset{1}="\xrefitem offset \"Offset\" \"Member Offsets\" <tt>0x\1</tt>." \
-						 offset{2}="\xrefitem offset \"Offset\" \"Member Offsets\" <tt>0x\1</tt>, bit <tt>\2</tt>." \
-						 offset{3}="\xrefitem offset \"Offset\" \"Member Offsets\" <tt>0x\1</tt>, bits <tt>\2</tt> through <tt>\3</tt>." \
-						 at{1}="\offset{\1}" \
-						 at{2}="\offset{\1,\2}" \
-						 at{3}="\offset{\1,\2,\3}" \
-						 size{1}="\xrefitem size \"Size\" \"Member Sizes\" <tt>0x\1</tt> bytes." \
-						 sz{1}="\size{\1}" \
-						 sizebyte="\xrefitem size \"Size\" \"Member Sizes\" <tt>0x1</tt> byte." \
-						 sz1="\sizebyte" \
-						 sizebits{1}="\xrefitem size \"Size\" \"Member Sizes\" <tt>\1</tt> bits." \
-						 szb{1}="\sizebits{\1}" \
-						 sizebit="\xrefitem size \"Size\" \"Member Sizes\" <tt>1</tt> bit." \
-						 szb1="\sizebit" \
-						 was{1}="\xrefitem origname \"Original Name\" \"Original Names\" <tt>\1</tt>." \
-						 glossary{1}="\glossary{\1,\1}" \
-						 glossary{2}="[\1](\ref glossary_\2)" \
-						 g{1}="\glossary{\1}" \
-						 g{2}="\glossary{\1,\2}"
+                         offset{2}="\xrefitem offset \"Offset\" \"Member Offsets\" <tt>0x\1</tt>, bit <tt>\2</tt>." \
+                         offset{3}="\xrefitem offset \"Offset\" \"Member Offsets\" <tt>0x\1</tt>, bits <tt>\2</tt> through <tt>\3</tt>." \
+                         at{1}="\offset{\1}" \
+                         at{2}="\offset{\1,\2}" \
+                         at{3}="\offset{\1,\2,\3}" \
+                         size{1}="\xrefitem size \"Size\" \"Member Sizes\" <tt>0x\1</tt> bytes." \
+                         sz{1}="\size{\1}" \
+                         sizebyte="\xrefitem size \"Size\" \"Member Sizes\" <tt>0x1</tt> byte." \
+                         sz1="\sizebyte" \
+                         sizebits{1}="\xrefitem size \"Size\" \"Member Sizes\" <tt>\1</tt> bits." \
+                         szb{1}="\sizebits{\1}" \
+                         sizebit="\xrefitem size \"Size\" \"Member Sizes\" <tt>1</tt> bit." \
+                         szb1="\sizebit" \
+                         was{1}="\xrefitem origname \"Original Name\" \"Original Names\" <tt>\1</tt>." \
+                         glossary{1}="\glossary{\1,\1}" \
+                         glossary{2}="[\1](\ref glossary_\2)" \
+                         g{1}="\glossary{\1}" \
+                         g{2}="\glossary{\1,\2}"
 
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
@@ -914,8 +914,8 @@ INPUT_ENCODING         = UTF-8
 
 FILE_PATTERNS          = *.c \
                          *.h \
-						 *.dox \
-						 *.md
+                         *.dox \
+                         *.md
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
