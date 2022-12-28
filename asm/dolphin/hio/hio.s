@@ -930,7 +930,6 @@ lbl_8032C734:
 .global Chan
 Chan:
     .4byte 0xFFFFFFFF
-    .4byte 0x00000000
 
 
 .section .sbss

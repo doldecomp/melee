@@ -767,8 +767,7 @@ Hu_IsStub:
     .balign 8
 .global SendCount
 SendCount:
-    .4byte 0x80000000
-    .4byte 0x00000000
+    .byte 0x80
 
 
 .section .sbss
@@ -790,4 +789,4 @@ pEXIInputFlag:
 	.skip 0x4
 .global EXIInputFlag
 EXIInputFlag:
-	.skip 0x4
+	.skip 0x1

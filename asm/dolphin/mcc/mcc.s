@@ -5,8 +5,8 @@
 .global callbackEventStream
 callbackEventStream:
 /* 8032C74C 0032932C  28 04 00 10 */	cmplwi r4, 0x10
-/* 8032C750 00329330  3C A0 80 4A */	lis r5, lbl_804A50E0@ha
-/* 8032C754 00329334  38 C5 50 E0 */	addi r6, r5, lbl_804A50E0@l
+/* 8032C750 00329330  3C A0 80 4A */	lis r5, gChannelInfo@ha
+/* 8032C754 00329334  38 C5 50 E0 */	addi r6, r5, gChannelInfo@l
 /* 8032C758 00329338  40 82 00 14 */	bne lbl_8032C76C
 /* 8032C75C 0032933C  1C 03 00 18 */	mulli r0, r3, 0x18
 /* 8032C760 00329340  7C A6 02 14 */	add r5, r6, r0
@@ -47,11 +47,11 @@ MCCStreamOpen:
 /* 8032C7D0 003293B0  7C 08 02 A6 */	mflr r0
 /* 8032C7D4 003293B4  3C A0 80 33 */	lis r5, callbackEventStream@ha
 /* 8032C7D8 003293B8  90 01 00 04 */	stw r0, 4(r1)
-/* 8032C7DC 003293BC  3C C0 80 4A */	lis r6, lbl_804A50E0@ha
+/* 8032C7DC 003293BC  3C C0 80 4A */	lis r6, gChannelInfo@ha
 /* 8032C7E0 003293C0  38 A5 C7 4C */	addi r5, r5, callbackEventStream@l
 /* 8032C7E4 003293C4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8032C7E8 003293C8  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8032C7EC 003293CC  3B E6 50 E0 */	addi r31, r6, lbl_804A50E0@l
+/* 8032C7EC 003293CC  3B E6 50 E0 */	addi r31, r6, gChannelInfo@l
 /* 8032C7F0 003293D0  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8032C7F4 003293D4  3B C0 00 00 */	li r30, 0
 /* 8032C7F8 003293D8  93 A1 00 14 */	stw r29, 0x14(r1)
@@ -79,11 +79,11 @@ lbl_8032C828:
 .global MCCStreamClose
 MCCStreamClose:
 /* 8032C848 00329428  7C 08 02 A6 */	mflr r0
-/* 8032C84C 0032942C  3C 80 80 4A */	lis r4, lbl_804A50E0@ha
+/* 8032C84C 0032942C  3C 80 80 4A */	lis r4, gChannelInfo@ha
 /* 8032C850 00329430  90 01 00 04 */	stw r0, 4(r1)
 /* 8032C854 00329434  1C 03 00 18 */	mulli r0, r3, 0x18
 /* 8032C858 00329438  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032C85C 0032943C  38 84 50 E0 */	addi r4, r4, lbl_804A50E0@l
+/* 8032C85C 0032943C  38 84 50 E0 */	addi r4, r4, gChannelInfo@l
 /* 8032C860 00329440  7C 84 02 14 */	add r4, r4, r0
 /* 8032C864 00329444  38 00 00 00 */	li r0, 0
 /* 8032C868 00329448  90 04 00 14 */	stw r0, 0x14(r4)
@@ -96,11 +96,11 @@ MCCStreamClose:
 .global MCCStreamWrite
 MCCStreamWrite:
 /* 8032C880 00329460  7C 08 02 A6 */	mflr r0
-/* 8032C884 00329464  3C C0 80 4A */	lis r6, lbl_804A50E0@ha
+/* 8032C884 00329464  3C C0 80 4A */	lis r6, gChannelInfo@ha
 /* 8032C888 00329468  90 01 00 04 */	stw r0, 4(r1)
 /* 8032C88C 0032946C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8032C890 00329470  BF 41 00 18 */	stmw r26, 0x18(r1)
-/* 8032C894 00329474  3B A6 50 E0 */	addi r29, r6, lbl_804A50E0@l
+/* 8032C894 00329474  3B A6 50 E0 */	addi r29, r6, gChannelInfo@l
 /* 8032C898 00329478  3B E3 00 00 */	addi r31, r3, 0
 /* 8032C89C 0032947C  3B 44 00 00 */	addi r26, r4, 0
 /* 8032C8A0 00329480  3B 65 00 00 */	addi r27, r5, 0
@@ -234,12 +234,12 @@ lbl_8032CA4C:
 .global LoadChannelInfo
 LoadChannelInfo:
 /* 8032CA60 00329640  7C 08 02 A6 */	mflr r0
-/* 8032CA64 00329644  3C 80 80 4A */	lis r4, lbl_804A50E0@ha
+/* 8032CA64 00329644  3C 80 80 4A */	lis r4, gChannelInfo@ha
 /* 8032CA68 00329648  90 01 00 04 */	stw r0, 4(r1)
 /* 8032CA6C 0032964C  38 00 00 00 */	li r0, 0
 /* 8032CA70 00329650  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8032CA74 00329654  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8032CA78 00329658  3B E4 50 E0 */	addi r31, r4, lbl_804A50E0@l
+/* 8032CA78 00329658  3B E4 50 E0 */	addi r31, r4, gChannelInfo@l
 /* 8032CA7C 0032965C  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 8032CA80 00329660  93 A1 00 1C */	stw r29, 0x1c(r1)
 /* 8032CA84 00329664  3B A3 00 00 */	addi r29, r3, 0
@@ -315,12 +315,12 @@ lbl_8032CB5C:
 .global FlushChannelInfo
 FlushChannelInfo:
 /* 8032CB7C 0032975C  7C 08 02 A6 */	mflr r0
-/* 8032CB80 00329760  3C 80 80 4A */	lis r4, lbl_804A50E0@ha
+/* 8032CB80 00329760  3C 80 80 4A */	lis r4, gChannelInfo@ha
 /* 8032CB84 00329764  90 01 00 04 */	stw r0, 4(r1)
 /* 8032CB88 00329768  38 00 00 00 */	li r0, 0
 /* 8032CB8C 0032976C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8032CB90 00329770  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8032CB94 00329774  3B E4 50 E0 */	addi r31, r4, lbl_804A50E0@l
+/* 8032CB94 00329774  3B E4 50 E0 */	addi r31, r4, gChannelInfo@l
 /* 8032CB98 00329778  38 9F 01 E0 */	addi r4, r31, 0x1e0
 /* 8032CB9C 0032977C  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8032CBA0 00329780  3B C0 00 00 */	li r30, 0
@@ -401,8 +401,8 @@ MakeMemoryMap:
 /* 8032CC9C 0032987C  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8032CCA0 00329880  3B E3 00 00 */	addi r31, r3, 0
 /* 8032CCA4 00329884  4B CD 64 5D */	bl memset
-/* 8032CCA8 00329888  3C 60 80 4A */	lis r3, lbl_804A50E0@ha
-/* 8032CCAC 0032988C  38 C3 50 E0 */	addi r6, r3, lbl_804A50E0@l
+/* 8032CCA8 00329888  3C 60 80 4A */	lis r3, gChannelInfo@ha
+/* 8032CCAC 0032988C  38 C3 50 E0 */	addi r6, r3, gChannelInfo@l
 /* 8032CCB0 00329890  38 E0 00 00 */	li r7, 0
 /* 8032CCB4 00329894  48 00 00 64 */	b lbl_8032CD18
 lbl_8032CCB8:
@@ -649,12 +649,12 @@ lbl_8032CFC4:
 .global MailboxCheck
 MailboxCheck:
 /* 8032CFD8 00329BB8  7C 08 02 A6 */	mflr r0
-/* 8032CFDC 00329BBC  3C 60 80 4A */	lis r3, lbl_804A50E0@ha
+/* 8032CFDC 00329BBC  3C 60 80 4A */	lis r3, gChannelInfo@ha
 /* 8032CFE0 00329BC0  90 01 00 04 */	stw r0, 4(r1)
 /* 8032CFE4 00329BC4  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 8032CFE8 00329BC8  BF 41 00 20 */	stmw r26, 0x20(r1)
 /* 8032CFEC 00329BCC  3B 80 00 00 */	li r28, 0
-/* 8032CFF0 00329BD0  3B E3 50 E0 */	addi r31, r3, lbl_804A50E0@l
+/* 8032CFF0 00329BD0  3B E3 50 E0 */	addi r31, r3, gChannelInfo@l
 /* 8032CFF4 00329BD4  38 61 00 18 */	addi r3, r1, 0x18
 /* 8032CFF8 00329BD8  93 81 00 18 */	stw r28, 0x18(r1)
 /* 8032CFFC 00329BDC  4B FF EF 25 */	bl HIOReadMailbox
@@ -869,12 +869,12 @@ MCCRxCallback:
 .global mccInitializeCheck
 mccInitializeCheck:
 /* 8032D2B8 00329E98  7C 08 02 A6 */	mflr r0
-/* 8032D2BC 00329E9C  3C 80 80 4A */	lis r4, lbl_804A50E0@ha
+/* 8032D2BC 00329E9C  3C 80 80 4A */	lis r4, gChannelInfo@ha
 /* 8032D2C0 00329EA0  90 01 00 04 */	stw r0, 4(r1)
 /* 8032D2C4 00329EA4  38 A0 00 20 */	li r5, 0x20
 /* 8032D2C8 00329EA8  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8032D2CC 00329EAC  BF 61 00 2C */	stmw r27, 0x2c(r1)
-/* 8032D2D0 00329EB0  3B E4 50 E0 */	addi r31, r4, lbl_804A50E0@l
+/* 8032D2D0 00329EB0  3B E4 50 E0 */	addi r31, r4, gChannelInfo@l
 /* 8032D2D4 00329EB4  3B 63 00 00 */	addi r27, r3, 0
 /* 8032D2D8 00329EB8  38 9F 01 C0 */	addi r4, r31, 0x1c0
 /* 8032D2DC 00329EBC  38 60 06 00 */	li r3, 0x600
@@ -1092,11 +1092,11 @@ lbl_8032D5D4:
 .global MCCInit
 MCCInit:
 /* 8032D5E8 0032A1C8  7C 08 02 A6 */	mflr r0
-/* 8032D5EC 0032A1CC  3C C0 80 4A */	lis r6, lbl_804A50E0@ha
+/* 8032D5EC 0032A1CC  3C C0 80 4A */	lis r6, gChannelInfo@ha
 /* 8032D5F0 0032A1D0  90 01 00 04 */	stw r0, 4(r1)
 /* 8032D5F4 0032A1D4  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8032D5F8 0032A1D8  BF 41 00 48 */	stmw r26, 0x48(r1)
-/* 8032D5FC 0032A1DC  3B E6 50 E0 */	addi r31, r6, lbl_804A50E0@l
+/* 8032D5FC 0032A1DC  3B E6 50 E0 */	addi r31, r6, gChannelInfo@l
 /* 8032D600 0032A1E0  3B A4 00 00 */	addi r29, r4, 0
 /* 8032D604 0032A1E4  3B C5 00 00 */	addi r30, r5, 0
 /* 8032D608 0032A1E8  80 0D BA 1C */	lwz r0, gMccInitialized@sda21(r13)
@@ -1287,8 +1287,8 @@ MCCExit:
 /* 8032D8B0 0032A490  98 0D BA 18 */	stb r0, gLastError@sda21(r13)
 /* 8032D8B4 0032A494  48 00 00 7C */	b lbl_8032D930
 lbl_8032D8B8:
-/* 8032D8B8 0032A498  3C 60 80 4A */	lis r3, lbl_804A50E0@ha
-/* 8032D8BC 0032A49C  3B E3 50 E0 */	addi r31, r3, lbl_804A50E0@l
+/* 8032D8B8 0032A498  3C 60 80 4A */	lis r3, gChannelInfo@ha
+/* 8032D8BC 0032A49C  3B E3 50 E0 */	addi r31, r3, gChannelInfo@l
 /* 8032D8C0 0032A4A0  3B C0 00 01 */	li r30, 1
 /* 8032D8C4 0032A4A4  48 00 00 58 */	b lbl_8032D91C
 lbl_8032D8C8:
@@ -1385,8 +1385,8 @@ lbl_8032D9D8:
 /* 8032D9E4 0032A5C4  98 0D BA 18 */	stb r0, gLastError@sda21(r13)
 /* 8032D9E8 0032A5C8  48 00 00 3C */	b lbl_8032DA24
 lbl_8032D9EC:
-/* 8032D9EC 0032A5CC  3C 60 80 4A */	lis r3, lbl_804A50E0@ha
-/* 8032D9F0 0032A5D0  38 63 50 E0 */	addi r3, r3, lbl_804A50E0@l
+/* 8032D9EC 0032A5CC  3C 60 80 4A */	lis r3, gChannelInfo@ha
+/* 8032D9F0 0032A5D0  38 63 50 E0 */	addi r3, r3, gChannelInfo@l
 /* 8032D9F4 0032A5D4  4B FF F0 6D */	bl LoadChannelInfo
 /* 8032D9F8 0032A5D8  2C 03 00 00 */	cmpwi r3, 0
 /* 8032D9FC 0032A5DC  40 82 00 10 */	bne lbl_8032DA0C
@@ -1446,8 +1446,8 @@ lbl_8032DA98:
 /* 8032DAA4 0032A684  98 0D BA 18 */	stb r0, gLastError@sda21(r13)
 /* 8032DAA8 0032A688  48 00 00 4C */	b lbl_8032DAF4
 lbl_8032DAAC:
-/* 8032DAAC 0032A68C  3C 60 80 4A */	lis r3, lbl_804A50E0@ha
-/* 8032DAB0 0032A690  3B E3 50 E0 */	addi r31, r3, lbl_804A50E0@l
+/* 8032DAAC 0032A68C  3C 60 80 4A */	lis r3, gChannelInfo@ha
+/* 8032DAB0 0032A690  3B E3 50 E0 */	addi r31, r3, gChannelInfo@l
 /* 8032DAB4 0032A694  38 7F 00 00 */	addi r3, r31, 0
 /* 8032DAB8 0032A698  4B FF EF A9 */	bl LoadChannelInfo
 /* 8032DABC 0032A69C  2C 03 00 00 */	cmpwi r3, 0
@@ -1559,8 +1559,8 @@ lbl_8032DC18:
 /* 8032DC1C 0032A7FC  98 0D BA 18 */	stb r0, gLastError@sda21(r13)
 /* 8032DC20 0032A800  48 00 00 74 */	b lbl_8032DC94
 lbl_8032DC24:
-/* 8032DC24 0032A804  3C 60 80 4A */	lis r3, lbl_804A50E0@ha
-/* 8032DC28 0032A808  38 63 50 E0 */	addi r3, r3, lbl_804A50E0@l
+/* 8032DC24 0032A804  3C 60 80 4A */	lis r3, gChannelInfo@ha
+/* 8032DC28 0032A808  38 63 50 E0 */	addi r3, r3, gChannelInfo@l
 /* 8032DC2C 0032A80C  4B FF EE 35 */	bl LoadChannelInfo
 /* 8032DC30 0032A810  2C 03 00 00 */	cmpwi r3, 0
 /* 8032DC34 0032A814  40 82 00 10 */	bne lbl_8032DC44
@@ -1603,11 +1603,11 @@ lbl_8032DC98:
 .global MCCSetChannelEventMask
 MCCSetChannelEventMask:
 /* 8032DCB0 0032A890  7C 08 02 A6 */	mflr r0
-/* 8032DCB4 0032A894  3C A0 80 4A */	lis r5, lbl_804A50E0@ha
+/* 8032DCB4 0032A894  3C A0 80 4A */	lis r5, gChannelInfo@ha
 /* 8032DCB8 0032A898  90 01 00 04 */	stw r0, 4(r1)
 /* 8032DCBC 0032A89C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8032DCC0 0032A8A0  93 E1 00 2C */	stw r31, 0x2c(r1)
-/* 8032DCC4 0032A8A4  3B E5 50 E0 */	addi r31, r5, lbl_804A50E0@l
+/* 8032DCC4 0032A8A4  3B E5 50 E0 */	addi r31, r5, gChannelInfo@l
 /* 8032DCC8 0032A8A8  93 C1 00 28 */	stw r30, 0x28(r1)
 /* 8032DCCC 0032A8AC  3B C0 FF FF */	li r30, -1
 /* 8032DCD0 0032A8B0  93 A1 00 24 */	stw r29, 0x24(r1)
@@ -1685,11 +1685,11 @@ lbl_8032DD9C:
 .global MCCOpen
 MCCOpen:
 /* 8032DDC0 0032A9A0  7C 08 02 A6 */	mflr r0
-/* 8032DDC4 0032A9A4  3C C0 80 4A */	lis r6, lbl_804A50E0@ha
+/* 8032DDC4 0032A9A4  3C C0 80 4A */	lis r6, gChannelInfo@ha
 /* 8032DDC8 0032A9A8  90 01 00 04 */	stw r0, 4(r1)
 /* 8032DDCC 0032A9AC  94 21 FF A8 */	stwu r1, -0x58(r1)
 /* 8032DDD0 0032A9B0  BF 21 00 3C */	stmw r25, 0x3c(r1)
-/* 8032DDD4 0032A9B4  3B 66 50 E0 */	addi r27, r6, lbl_804A50E0@l
+/* 8032DDD4 0032A9B4  3B 66 50 E0 */	addi r27, r6, gChannelInfo@l
 /* 8032DDD8 0032A9B8  3B C3 00 00 */	addi r30, r3, 0
 /* 8032DDDC 0032A9BC  3B 24 00 00 */	addi r25, r4, 0
 /* 8032DDE0 0032A9C0  3B E5 00 00 */	addi r31, r5, 0
@@ -1840,13 +1840,13 @@ lbl_8032DFC8:
 .global MCCClose
 MCCClose:
 /* 8032DFDC 0032ABBC  7C 08 02 A6 */	mflr r0
-/* 8032DFE0 0032ABC0  3C 80 80 4A */	lis r4, lbl_804A50E0@ha
+/* 8032DFE0 0032ABC0  3C 80 80 4A */	lis r4, gChannelInfo@ha
 /* 8032DFE4 0032ABC4  90 01 00 04 */	stw r0, 4(r1)
 /* 8032DFE8 0032ABC8  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 8032DFEC 0032ABCC  93 E1 00 34 */	stw r31, 0x34(r1)
 /* 8032DFF0 0032ABD0  3B E3 00 00 */	addi r31, r3, 0
 /* 8032DFF4 0032ABD4  93 C1 00 30 */	stw r30, 0x30(r1)
-/* 8032DFF8 0032ABD8  3B C4 50 E0 */	addi r30, r4, lbl_804A50E0@l
+/* 8032DFF8 0032ABD8  3B C4 50 E0 */	addi r30, r4, gChannelInfo@l
 /* 8032DFFC 0032ABDC  93 A1 00 2C */	stw r29, 0x2c(r1)
 /* 8032E000 0032ABE0  93 81 00 28 */	stw r28, 0x28(r1)
 /* 8032E004 0032ABE4  80 0D BA 1C */	lwz r0, gMccInitialized@sda21(r13)
@@ -1978,11 +1978,11 @@ lbl_8032E198:
 .global MCCRead
 MCCRead:
 /* 8032E1B8 0032AD98  7C 08 02 A6 */	mflr r0
-/* 8032E1BC 0032AD9C  3D 00 80 4A */	lis r8, lbl_804A50E0@ha
+/* 8032E1BC 0032AD9C  3D 00 80 4A */	lis r8, gChannelInfo@ha
 /* 8032E1C0 0032ADA0  90 01 00 04 */	stw r0, 4(r1)
 /* 8032E1C4 0032ADA4  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8032E1C8 0032ADA8  BF 01 00 50 */	stmw r24, 0x50(r1)
-/* 8032E1CC 0032ADAC  3B C8 50 E0 */	addi r30, r8, lbl_804A50E0@l
+/* 8032E1CC 0032ADAC  3B C8 50 E0 */	addi r30, r8, gChannelInfo@l
 /* 8032E1D0 0032ADB0  3B 23 00 00 */	addi r25, r3, 0
 /* 8032E1D4 0032ADB4  3B 44 00 00 */	addi r26, r4, 0
 /* 8032E1D8 0032ADB8  3B 65 00 00 */	addi r27, r5, 0
@@ -2223,11 +2223,11 @@ lbl_8032E4F0:
 .global MCCWrite
 MCCWrite:
 /* 8032E504 0032B0E4  7C 08 02 A6 */	mflr r0
-/* 8032E508 0032B0E8  3D 00 80 4A */	lis r8, lbl_804A50E0@ha
+/* 8032E508 0032B0E8  3D 00 80 4A */	lis r8, gChannelInfo@ha
 /* 8032E50C 0032B0EC  90 01 00 04 */	stw r0, 4(r1)
 /* 8032E510 0032B0F0  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8032E514 0032B0F4  BF 01 00 50 */	stmw r24, 0x50(r1)
-/* 8032E518 0032B0F8  3B C8 50 E0 */	addi r30, r8, lbl_804A50E0@l
+/* 8032E518 0032B0F8  3B C8 50 E0 */	addi r30, r8, gChannelInfo@l
 /* 8032E51C 0032B0FC  3B 23 00 00 */	addi r25, r3, 0
 /* 8032E520 0032B100  3B 44 00 00 */	addi r26, r4, 0
 /* 8032E524 0032B104  3B 65 00 00 */	addi r27, r5, 0
@@ -2475,11 +2475,11 @@ lbl_8032E854:
 .global MCCCheckAsyncDone
 MCCCheckAsyncDone:
 /* 8032E868 0032B448  7C 08 02 A6 */	mflr r0
-/* 8032E86C 0032B44C  3C 60 80 4A */	lis r3, lbl_804A50E0@ha
+/* 8032E86C 0032B44C  3C 60 80 4A */	lis r3, gChannelInfo@ha
 /* 8032E870 0032B450  90 01 00 04 */	stw r0, 4(r1)
 /* 8032E874 0032B454  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8032E878 0032B458  BF 61 00 2C */	stmw r27, 0x2c(r1)
-/* 8032E87C 0032B45C  3B E3 50 E0 */	addi r31, r3, lbl_804A50E0@l
+/* 8032E87C 0032B45C  3B E3 50 E0 */	addi r31, r3, gChannelInfo@l
 /* 8032E880 0032B460  80 0D BA 1C */	lwz r0, gMccInitialized@sda21(r13)
 /* 8032E884 0032B464  2C 00 00 00 */	cmpwi r0, 0
 /* 8032E888 0032B468  40 82 00 14 */	bne lbl_8032E89C
@@ -2644,9 +2644,17 @@ lbl_804008F8:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804A50E0
-lbl_804A50E0:
-	.skip 0x220
+.global gChannelInfo
+gChannelInfo:
+    .skip 0x180
+gStreamWork:
+    .skip 0x20
+m_szAdapterMode:
+    .skip 0x20
+m_szInitCode:
+    .skip 0x20
+channelInfo:
+    .skip 0x40
 
 
 .section .sdata
@@ -2654,7 +2662,6 @@ lbl_804A50E0:
 .global gIsChannelinfoDirty
 gIsChannelinfoDirty:
     .4byte 0x00000001
-    .4byte 0x00000000
 
 
 .section .sbss
