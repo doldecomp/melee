@@ -244,8 +244,8 @@ lbl_8035D1EC:
 /* 8035D224 00359E04  38 21 00 40 */	addi r1, r1, 0x40
 /* 8035D228 00359E08  4E 80 00 20 */	blr 
 
-.global func_8035D22C
-func_8035D22C:
+.global AXFXChorusInit
+AXFXChorusInit:
 /* 8035D22C 00359E0C  7C 08 02 A6 */	mflr r0
 /* 8035D230 00359E10  90 01 00 04 */	stw r0, 4(r1)
 /* 8035D234 00359E14  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -366,7 +366,7 @@ lbl_8035D2E8:
 /* 8035D3F4 00359FD4  90 9E 00 8C */	stw r4, 0x8c(r30)
 /* 8035D3F8 00359FD8  4B FE 9F 95 */	bl OSRestoreInterrupts
 /* 8035D3FC 00359FDC  7F C3 F3 78 */	mr r3, r30
-/* 8035D400 00359FE0  48 00 00 7D */	bl func_8035D47C
+/* 8035D400 00359FE0  48 00 00 7D */	bl AXFXChorusSettings
 /* 8035D404 00359FE4  48 00 00 10 */	b lbl_8035D414
 lbl_8035D408:
 /* 8035D408 00359FE8  7F E3 FB 78 */	mr r3, r31
@@ -380,8 +380,8 @@ lbl_8035D414:
 /* 8035D424 0035A004  38 21 00 28 */	addi r1, r1, 0x28
 /* 8035D428 0035A008  4E 80 00 20 */	blr 
 
-.global func_8035D42C
-func_8035D42C:
+.global AXFXChorusShutdown
+AXFXChorusShutdown:
 /* 8035D42C 0035A00C  7C 08 02 A6 */	mflr r0
 /* 8035D430 0035A010  90 01 00 04 */	stw r0, 4(r1)
 /* 8035D434 0035A014  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -403,8 +403,8 @@ func_8035D42C:
 /* 8035D474 0035A054  7C 08 03 A6 */	mtlr r0
 /* 8035D478 0035A058  4E 80 00 20 */	blr 
 
-.global func_8035D47C
-func_8035D47C:
+.global AXFXChorusSettings
+AXFXChorusSettings:
 /* 8035D47C 0035A05C  7C 08 02 A6 */	mflr r0
 /* 8035D480 0035A060  90 01 00 04 */	stw r0, 4(r1)
 /* 8035D484 0035A064  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -455,8 +455,8 @@ func_8035D47C:
 /* 8035D538 0035A118  7C 08 03 A6 */	mtlr r0
 /* 8035D53C 0035A11C  4E 80 00 20 */	blr 
 
-.global lbl_8035D540
-lbl_8035D540:
+.global AXFXChorusCallback
+AXFXChorusCallback:
 /* 8035D540 0035A120  7C 08 02 A6 */	mflr r0
 /* 8035D544 0035A124  90 01 00 04 */	stw r0, 4(r1)
 /* 8035D548 0035A128  94 21 FF C8 */	stwu r1, -0x38(r1)

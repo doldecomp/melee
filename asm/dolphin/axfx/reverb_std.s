@@ -55,9 +55,9 @@ lbl_8035C5B4:
 /* 8035C5BC 0035919C  38 A0 01 3C */	li r5, 0x13c
 /* 8035C5C0 003591A0  4B CA 6B 41 */	bl memset
 /* 8035C5C4 003591A4  C0 02 E9 D4 */	lfs f0, lbl_804DE3B4@sda21(r2)
-/* 8035C5C8 003591A8  3C 60 80 40 */	lis r3, lbl_80404C40@ha
+/* 8035C5C8 003591A8  3C 60 80 40 */	lis r3, lens@ha
 /* 8035C5CC 003591AC  C3 C2 E9 C0 */	lfs f30, lbl_804DE3A0@sda21(r2)
-/* 8035C5D0 003591B0  3B C3 4C 40 */	addi r30, r3, lbl_80404C40@l
+/* 8035C5D0 003591B0  3B C3 4C 40 */	addi r30, r3, lens@l
 /* 8035C5D4 003591B4  EF 80 07 32 */	fmuls f28, f0, f28
 /* 8035C5D8 003591B8  CB A2 E9 E0 */	lfd f29, lbl_804DE3C0@sda21(r2)
 /* 8035C5DC 003591BC  3B 77 00 00 */	addi r27, r23, 0
@@ -286,8 +286,7 @@ lbl_8035C8E0:
 /* 8035C908 003594E8  38 21 00 A8 */	addi r1, r1, 0xa8
 /* 8035C90C 003594EC  4E 80 00 20 */	blr 
 
-.global func_8035C910
-func_8035C910:
+HandleReverb:
 /* 8035C910 003594F0  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8035C914 003594F4  BE 21 00 08 */	stmw r17, 8(r1)
 /* 8035C918 003594F8  D9 C1 00 58 */	stfd f14, 0x58(r1)
@@ -297,12 +296,12 @@ func_8035C910:
 /* 8035C928 00359508  DA 41 00 78 */	stfd f18, 0x78(r1)
 /* 8035C92C 0035950C  DA 61 00 80 */	stfd f19, 0x80(r1)
 /* 8035C930 00359510  DA 81 00 88 */	stfd f20, 0x88(r1)
-/* 8035C934 00359514  3F E0 80 4E */	lis r31, lbl_804DE3C8@ha
-/* 8035C938 00359518  C0 DF E3 C8 */	lfs f6, lbl_804DE3C8@l(r31)
-/* 8035C93C 0035951C  3F E0 80 4E */	lis r31, lbl_804DE3CC@ha
-/* 8035C940 00359520  C1 3F E3 CC */	lfs f9, lbl_804DE3CC@l(r31)
-/* 8035C944 00359524  3F E0 80 4E */	lis r31, lbl_804DE3D0@ha
-/* 8035C948 00359528  C8 BF E3 D0 */	lfd f5, lbl_804DE3D0@l(r31)
+/* 8035C934 00359514  3F E0 80 4E */	lis r31, value0_3@ha
+/* 8035C938 00359518  C0 DF E3 C8 */	lfs f6, value0_3@l(r31)
+/* 8035C93C 0035951C  3F E0 80 4E */	lis r31, value0_6@ha
+/* 8035C940 00359520  C1 3F E3 CC */	lfs f9, value0_6@l(r31)
+/* 8035C944 00359524  3F E0 80 4E */	lis r31, i2fMagic@ha
+/* 8035C948 00359528  C8 BF E3 D0 */	lfd f5, i2fMagic@l(r31)
 /* 8035C94C 0035952C  C0 44 00 F0 */	lfs f2, 0xf0(r4)
 /* 8035C950 00359530  C1 64 01 1C */	lfs f11, 0x11c(r4)
 /* 8035C954 00359534  C1 04 01 18 */	lfs f8, 0x118(r4)
@@ -625,8 +624,8 @@ lbl_8035CDA4:
 /* 8035CDB8 00359998  38 21 00 20 */	addi r1, r1, 0x20
 /* 8035CDBC 0035999C  4E 80 00 20 */	blr 
 
-.global func_8035CDC0
-func_8035CDC0:
+.global AXFXReverbStdInit
+AXFXReverbStdInit:
 /* 8035CDC0 003599A0  7C 08 02 A6 */	mflr r0
 /* 8035CDC4 003599A4  90 01 00 04 */	stw r0, 4(r1)
 /* 8035CDC8 003599A8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -655,8 +654,8 @@ func_8035CDC0:
 /* 8035CE24 00359A04  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035CE28 00359A08  4E 80 00 20 */	blr 
 
-.global func_8035CE2C
-func_8035CE2C:
+.global AXFXReverbStdShutdown
+AXFXReverbStdShutdown:
 /* 8035CE2C 00359A0C  7C 08 02 A6 */	mflr r0
 /* 8035CE30 00359A10  90 01 00 04 */	stw r0, 4(r1)
 /* 8035CE34 00359A14  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -677,8 +676,8 @@ func_8035CE2C:
 /* 8035CE70 00359A50  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035CE74 00359A54  4E 80 00 20 */	blr 
 
-.global lbl_8035CE78
-lbl_8035CE78:
+.global AXFXReverbStdCallback
+AXFXReverbStdCallback:
 /* 8035CE78 00359A58  7C 08 02 A6 */	mflr r0
 /* 8035CE7C 00359A5C  90 01 00 04 */	stw r0, 4(r1)
 /* 8035CE80 00359A60  94 21 FF F8 */	stwu r1, -8(r1)
@@ -686,7 +685,7 @@ lbl_8035CE78:
 /* 8035CE88 00359A68  28 00 00 00 */	cmplwi r0, 0
 /* 8035CE8C 00359A6C  40 82 00 0C */	bne lbl_8035CE98
 /* 8035CE90 00359A70  80 63 00 00 */	lwz r3, 0(r3)
-/* 8035CE94 00359A74  4B FF FA 7D */	bl func_8035C910
+/* 8035CE94 00359A74  4B FF FA 7D */	bl HandleReverb
 lbl_8035CE98:
 /* 8035CE98 00359A78  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8035CE9C 00359A7C  38 21 00 08 */	addi r1, r1, 8
@@ -696,8 +695,8 @@ lbl_8035CE98:
 
 .section .data
     .balign 8
-.global lbl_80404C40
-lbl_80404C40:
+.global lens
+lens:
     .4byte 0x000006FD
     .4byte 0x000007CF
     .4byte 0x000001B1
@@ -734,13 +733,10 @@ lbl_804DE3BC:
 lbl_804DE3C0:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.global lbl_804DE3C8
-lbl_804DE3C8:
+value0_3:
 	.4byte 0x3E99999A
-.global lbl_804DE3CC
-lbl_804DE3CC:
+value0_6:
 	.4byte 0x3F19999A
-.global lbl_804DE3D0
-lbl_804DE3D0:
+i2fMagic:
 	.4byte 0x43300000
 	.4byte 0x80000000

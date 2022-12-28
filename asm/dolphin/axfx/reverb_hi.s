@@ -450,7 +450,6 @@ lbl_8035BC44:
 /* 8035BD34 00358914  38 21 00 30 */	addi r1, r1, 0x30
 /* 8035BD38 00358918  4E 80 00 20 */	blr 
 
-.global HandleReverb
 HandleReverb:
 /* 8035BD3C 0035891C  94 21 FF 40 */	stwu r1, -0xc0(r1)
 /* 8035BD40 00358920  BD C1 00 08 */	stmw r14, 8(r1)
