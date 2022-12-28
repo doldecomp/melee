@@ -1876,8 +1876,8 @@ lbl_8035038C:
 /* 803503A0 0034CF80  7C 08 03 A6 */	mtlr r0
 /* 803503A4 0034CF84  4E 80 00 20 */	blr 
 
-.global func_803503A8
-func_803503A8:
+.global VIGetDTVStatus
+VIGetDTVStatus:
 /* 803503A8 0034CF88  7C 08 02 A6 */	mflr r0
 /* 803503AC 0034CF8C  90 01 00 04 */	stw r0, 4(r1)
 /* 803503B0 0034CF90  94 21 FF F0 */	stwu r1, -0x10(r1)
