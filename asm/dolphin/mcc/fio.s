@@ -919,7 +919,7 @@ gmSizeOfBlocks:
 .global gSizeOfBlocks
 gSizeOfBlocks:
 	.byte 0x01
-    .2byte 0x0000
+    .balign 4
 .global gProcDone
 gProcDone:
     .4byte 0x00000001
@@ -944,7 +944,8 @@ gStreamReady:
 	.skip 0x4
 .global gLastErr
 gLastErr:
-	.skip 0x4
+	.skip 0x1
+    .balign 4
 .global bAsyncIsRead
 bAsyncIsRead:
 	.skip 0x4
