@@ -2,7 +2,8 @@
 
 #include <dolphin/os/OSTime.h>
 
-s32 CARDRenameAsync(s32 chan, const char* old, const char* new, CARDCallback callback)
+s32 CARDRenameAsync(s32 chan, const char* old, const char* new,
+                    CARDCallback callback)
 {
     CARDControl* card;
     CARDDir* dir;
@@ -15,7 +16,9 @@ s32 CARDRenameAsync(s32 chan, const char* old, const char* new, CARDCallback cal
     if (*old == 0xff || *new == 0xff || *old == 0x00 || *new == 0x00) {
         return CARD_RESULT_FATAL_ERROR;
     }
-    if (CARD_FILENAME_MAX < (u32) strlen(old) || CARD_FILENAME_MAX < (u32) strlen(new)) {
+    if (CARD_FILENAME_MAX < (u32) strlen(old) ||
+        CARD_FILENAME_MAX < (u32) strlen(new))
+    {
         return CARD_RESULT_NAMETOOLONG;
     }
     result = __CARDGetControlBlock(chan, &card);
@@ -31,8 +34,11 @@ s32 CARDRenameAsync(s32 chan, const char* old, const char* new, CARDCallback cal
             continue;
         }
 
-        if (memcmp(ent->gameName, card->diskID->gameName, sizeof(ent->gameName)) != 0 ||
-            memcmp(ent->company, card->diskID->company, sizeof(ent->company)) != 0) {
+        if (memcmp(ent->gameName, card->diskID->gameName,
+                   sizeof(ent->gameName)) != 0 ||
+            memcmp(ent->company, card->diskID->company, sizeof(ent->company)) !=
+                0)
+        {
             continue;
         }
 

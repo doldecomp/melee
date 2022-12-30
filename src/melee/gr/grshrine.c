@@ -26,17 +26,9 @@ static StageCallbacks lbl_803E50E8[3] = {
 };
 
 StageData lbl_803E5130 = {
-    0x00000007,
-    lbl_803E50E8,
-    "/GrSh.dat",
-    func_80201C64,
-    func_80201C60,
-    func_80201CF0,
-    func_80201CF4,
-    func_80201D18,
-    func_80201F44,
-    func_80201F4C,
-    0x00000001,
+    0x00000007,    lbl_803E50E8,  "/GrSh.dat",   func_80201C64,
+    func_80201C60, func_80201CF0, func_80201CF4, func_80201D18,
+    func_80201F44, func_80201F4C, 0x00000001,
 };
 
 static void func_80201C60()
@@ -56,8 +48,8 @@ static void func_80201C64()
     {
         Vec3 v = { 0.5f, 0.0f, 0.0f };
         u32 unused2;
-        func_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3,
-                      -10000.0f, 10000.0f, 10000.0f, -10000.0f);
+        func_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3, -10000.0f, 10000.0f,
+                      10000.0f, -10000.0f);
     }
 }
 
@@ -97,8 +89,7 @@ static HSD_GObj* func_80201D20(s32 arg0)
             func_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n",
-                 "grshrine.c", 205, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grshrine.c", 205, arg0);
     }
     return gobj;
 }

@@ -33,7 +33,8 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
             return 0;
         }
         if (pool_end - (u32) pool_start < pool_size) {
-            pool_size = pool_end - (u32) pool_start - (pool_end - (u32) pool_start) % data->size;
+            pool_size = pool_end - (u32) pool_start -
+                        (pool_end - (u32) pool_start) % data->size;
         }
         num = pool_size / data->size;
         if (num == 0) {
@@ -49,7 +50,8 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
         obj_heap.remain -= pool_size;
     }
     for (i = 0; i < num - 1; i++) {
-        *(void**) (pool_start + data->size * i) = (void*) (pool_start + data->size * (i + 1));
+        *(void**) (pool_start + data->size * i) =
+            (void*) (pool_start + data->size * (i + 1));
     }
     *(void**) (pool_start + data->size * i) = data->freehead;
     data->freehead = (HSD_ObjAllocLink*) pool_start;

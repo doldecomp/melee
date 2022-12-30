@@ -44,7 +44,9 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
         }
 
         if (has_type) {
-            if ((curr->flags & TYPE_MASK) == type && (!subtype || subtype == (curr->flags & 0xFFFFFFF))) {
+            if ((curr->flags & TYPE_MASK) == type &&
+                (!subtype || subtype == (curr->flags & 0xFFFFFFF)))
+            {
                 return curr;
             }
         }

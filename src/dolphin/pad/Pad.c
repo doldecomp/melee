@@ -101,7 +101,9 @@ void UpdateOrigin(s32 arg0)
     origin->stickY -= 0x80;
     origin->substickX -= 0x80;
     origin->substickY -= 0x80;
-    if ((XPatchBits & bit) && origin->stickX > 0x40 && (SIGetType(arg0) & 0xFFFF0000) == 0x9000000) {
+    if ((XPatchBits & bit) && origin->stickX > 0x40 &&
+        (SIGetType(arg0) & 0xFFFF0000) == 0x9000000)
+    {
         origin->stickX = 0U;
     }
 }
@@ -138,8 +140,9 @@ void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
         return;
     }
 
-    if (!(error &
-          (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN | SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION))) {
+    if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
+                   SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
+    {
         UpdateOrigin(chan);
     }
 
@@ -150,8 +153,9 @@ void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
 
 void PADProbeCallback(s32 chan, u32 error, OSContext* context)
 {
-    if (!(error &
-          (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN | SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION))) {
+    if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
+                   SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
+    {
         PADEnable(ResettingChan);
         WaitingBits |= PAD_CHAN0_BIT >> ResettingChan;
     }

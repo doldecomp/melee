@@ -1,11 +1,12 @@
 #ifndef _itkind_h_
 #define _itkind_h_
 
-// Based on "ID Lists" from the SSBM datasheet, in-game references, and further research by VetriTheRetri //
-// https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8 //
+// Based on "ID Lists" from the SSBM datasheet, in-game references, and further
+// research by VetriTheRetri //
+// https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8
+// //
 
 typedef enum ITKIND {
-
     // COMMON ITEMS
 
     It_Kind_Capsule,  // Capsule //
@@ -172,11 +173,12 @@ typedef enum ITKIND {
     It_Kind_Kirby_SeakNeedleThrow,     // Kirby copy Sheik's Needle (thrown) (B)
     It_Kind_Kirby_SeakNeedleHeld,      // Kirby copy Sheik's Needle (ground) (B)
     It_Kind_Kirby_KoopaFlame,          // Kirby copy Bowser's Flame (B)
-    It_Kind_Kirby_GameWatchChef,       // Kirby copy Mr. Game & Watch's Sausage (B)
-    It_Kind_Kirby_GameWatchChefPan,    // Kirby copy Mr. Game & Watch's Chef Pan (B)
-    It_Kind_Kirby_YoshiEggLay,         // Kirby's Yoshi Egg Lay??? (B)
-    It_Kind_Unk4,                      // (unique)
-    It_Kind_Coin,                      // Coin (?)
+    It_Kind_Kirby_GameWatchChef,    // Kirby copy Mr. Game & Watch's Sausage (B)
+    It_Kind_Kirby_GameWatchChefPan, // Kirby copy Mr. Game & Watch's Chef Pan
+                                    // (B)
+    It_Kind_Kirby_YoshiEggLay,      // Kirby's Yoshi Egg Lay??? (B)
+    It_Kind_Unk4,                   // (unique)
+    It_Kind_Coin,                   // Coin (?)
 
     // POKéMON
 

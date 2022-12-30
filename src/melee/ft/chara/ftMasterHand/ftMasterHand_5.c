@@ -8,10 +8,13 @@ u32 lbl_80151428(Vec* vec)
     HSD_GObj* fetched_gobj;
     // Fighter* ft_userdata;
 
-    fetched_gobj = func_8015C3E8(0x1B); // probably attempt to find crazy hand func.
+    fetched_gobj =
+        func_8015C3E8(0x1B); // probably attempt to find crazy hand func.
     // ft_userdata = ((Fighter*) temp_r3->user_data);
     if (fetched_gobj) {
-        func_8000B1CC(((Fighter*) fetched_gobj->user_data)->x5E8_fighterBones[5].x0_jobj, 0, vec);
+        func_8000B1CC(
+            ((Fighter*) fetched_gobj->user_data)->x5E8_fighterBones[5].x0_jobj,
+            0, vec);
         return 1;
     }
     return 0;
@@ -134,9 +137,11 @@ void lbl_801516B4(HSD_GObj* gobj)
         }
         r31_fp->x2200_ftcmd_var0 = 0U;
     }
-    if (((s32) r31_fp->x2348_stateVar3 > 0) && !ftAnim_IsFramesRemaining(gobj)) {
+    if (((s32) r31_fp->x2348_stateVar3 > 0) && !ftAnim_IsFramesRemaining(gobj))
+    {
         temp_f1 = 0.0f;
-        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, temp_f1, 1.0f, temp_f1);
+        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, temp_f1, 1.0f,
+                                           temp_f1);
         func_8006EBA4(gobj);
     }
     temp_r0 = r31_fp->x2348_stateVar3 - 1;

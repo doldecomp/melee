@@ -119,15 +119,18 @@ s32 func_800163D8(const char* basename)
     return func_8001634C(entry_num);
 }
 
-void func_800164A4(s32 arg0, HSD_Archive* arg1, s32* arg2, s32 arg3, void (*arg4)(s32, s32, s32, BOOL), s32 arg5)
+void func_800164A4(s32 arg0, HSD_Archive* arg1, s32* arg2, s32 arg3,
+                   void (*arg4)(s32, s32, s32, BOOL), s32 arg5)
 {
     s32 var_r0;
     *arg2 = func_8001634C(arg0);
     var_r0 = ((u32) arg1 >= 0x80000000) ? 0x21 : 0x23;
-    HSD_DevComRequest(arg0, 0, arg1, (*arg2 + 0x1F) & 0xFFFFFFE0, var_r0, arg3, arg4, arg5);
+    HSD_DevComRequest(arg0, 0, arg1, (*arg2 + 0x1F) & 0xFFFFFFE0, var_r0, arg3,
+                      arg4, arg5);
 }
 
-void func_80016580(const char* basename, HSD_Archive* arg1, s32* arg2, void (*arg3)(s32, s32, s32, BOOL), s32 arg4)
+void func_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
+                   void (*arg3)(s32, s32, s32, BOOL), s32 arg4)
 {
     u32 unused;
 

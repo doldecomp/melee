@@ -208,9 +208,10 @@ struct _psAppSRT {
 
 /* size: 0xC */
 typedef struct _PSUserFunc {
-    int (*hookCreate)(HSD_Particle* part);                               /* 0x0 */
-    int (*hookDelete)(HSD_Particle* part);                               /* 0x4 */
-    int (*setUserData)(HSD_Particle* part, u8 unknown1, float unknown2); /* 0x8 */
+    int (*hookCreate)(HSD_Particle* part); /* 0x0 */
+    int (*hookDelete)(HSD_Particle* part); /* 0x4 */
+    int (*setUserData)(HSD_Particle* part, u8 unknown1,
+                       float unknown2); /* 0x8 */
 } HSD_PSUserFunc;
 
 extern u32* ptclref[64];
@@ -249,13 +250,10 @@ inline void setupTevReg(struct _particle* pp);
 inline void psSetCurrentMtx(GXPosNrmMtx idx);
 inline struct _particle* psDispSubPoint(struct _particle* pp);
 inline struct _particle* psDispSubPointTrail(struct _particle* pp);
-inline void psDispSubMakePolygon(
-    struct _particle* pp,
-    u8* texform,
-    float x, float y, float z,
-    float ppvx, float ppvy, float ppvz,
-    float x0, float y0, float z0,
-    float x1, float y1, float z1);
+inline void psDispSubMakePolygon(struct _particle* pp, u8* texform, float x,
+                                 float y, float z, float ppvx, float ppvy,
+                                 float ppvz, float x0, float y0, float z0,
+                                 float x1, float y1, float z1);
 
 inline void psDispSub(struct _particle* pp, u8* texform);
 
@@ -267,79 +265,40 @@ inline void psDispSubAPPSRTPoint(struct _particle* pp);
 
 void psDispParticles(u32 target_link, u32 sw);
 
-void psInitDataBankLoad(
-    int bank,
-    int* cmdBank,
-    int* texBank,
-    u32* ref,
-    int* formBank);
+void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
+                        int* formBank);
 
 void psInitDataBankLocate(int* cmdBank, int* texBank, int* formBank);
 
-void psInitDataBankRelocate(
-    int* cmdBank,
-    int* texBank,
-    int* formBank,
-    int* newCmdBank,
-    int* newTexBank,
-    int* newFormBank);
+void psInitDataBankRelocate(int* cmdBank, int* texBank, int* formBank,
+                            int* newCmdBank, int* newTexBank, int* newFormBank);
 
-void psInitDataBank(
-    int bank,
-    int* cmdBank,
-    int* texBank,
-    u32* ref,
-    int* formBank);
+void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
+                    int* formBank);
 
 void psInitParticle(int num);
 
 void psRemoveParticle(void);
 
-HSD_Particle* psGenerateParticle0(
-    HSD_Particle* p,
-    int linkNo,
-    int bank,
-    u32 kind,
-    u16 texGroup,
-    u8* list,
-    int life,
-    float x, float y, float z,
-    float vx, float vy, float vz,
-    float size,
-    float grav,
-    float fric,
-    int palflag,
-    struct _generator* gp,
-    int flgInterpret);
+HSD_Particle* psGenerateParticle0(HSD_Particle* p, int linkNo, int bank,
+                                  u32 kind, u16 texGroup, u8* list, int life,
+                                  float x, float y, float z, float vx, float vy,
+                                  float vz, float size, float grav, float fric,
+                                  int palflag, struct _generator* gp,
+                                  int flgInterpret);
 
-HSD_Particle* psGenerateParticleID0(
-    HSD_Particle* p,
-    int linkNo,
-    int bank,
-    int id,
-    int flgInterpret);
+HSD_Particle* psGenerateParticleID0(HSD_Particle* p, int linkNo, int bank,
+                                    int id, int flgInterpret);
 
-HSD_Particle* psGenerateParticle(
-    int linkNo,
-    int bank,
-    u32 kind,
-    u16 texGroup,
-    u8* list,
-    int life,
-    float x, float y, float z,
-    float vx, float vy, float vz,
-    float size,
-    float grav,
-    float fric,
-    int palflag,
-    struct _generator* gp);
+HSD_Particle* psGenerateParticle(int linkNo, int bank, u32 kind, u16 texGroup,
+                                 u8* list, int life, float x, float y, float z,
+                                 float vx, float vy, float vz, float size,
+                                 float grav, float fric, int palflag,
+                                 struct _generator* gp);
 
-HSD_Particle* psGenerateParticleIDPV(
-    int linkNo,
-    int bank,
-    int id,
-    float px, float py, float pz,
-    float vx, float vy, float vz);
+HSD_Particle* psGenerateParticleIDPV(int linkNo, int bank, int id, float px,
+                                     float py, float pz, float vx, float vy,
+                                     float vz);
 
 HSD_Particle* psGenerateParticleID(int linkNo, int bank, int id);
 HSD_Particle* psGenerateParticleIDN(int linkNo, int bank, int id);

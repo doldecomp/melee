@@ -27,7 +27,9 @@ void ftMewtwo_OnLoad(HSD_GObj* fighter_gobj)
     func_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);
 }
 
-void ftMewTwo_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool) {}
+void ftMewTwo_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+{
+}
 
 void ftMewtwo_OnDeath2(HSD_GObj* fighter_gobj)
 {
@@ -41,11 +43,17 @@ void ftMewtwo_OnTakeDamage(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialN_OnDeath(fighter_gobj);
 }
 
-void ftMewTwo_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool) {}
+void ftMewTwo_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool)
+{
+}
 
-void ftMewTwo_OnItemInvisible(HSD_GObj* fighter_gobj) {}
+void ftMewTwo_OnItemInvisible(HSD_GObj* fighter_gobj)
+{
+}
 
-void ftMewTwo_OnItemVisible(HSD_GObj* fighter_gobj) {}
+void ftMewTwo_OnItemVisible(HSD_GObj* fighter_gobj)
+{
+}
 
 void ftMewTwo_80144F58(HSD_GObj* fighter_gobj)
 {

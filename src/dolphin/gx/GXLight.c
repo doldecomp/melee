@@ -3,7 +3,8 @@
 #include <functions.h> // todo
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
 
-void GXInitLightAttn(GXLightObj* light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc)
+void GXInitLightAttn(GXLightObj* light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb,
+                     f32 kc)
 {
     light->aa = aa;
     light->ab = ab;
@@ -80,7 +81,8 @@ static void GXInitLightAttnK(GXLightObj* light, f32 ka, f32 kb, f32 kc)
     light->kc = kc;
 }
 
-void GXInitLightDistAttn(GXLightObj* light, f32 ref_distance, f32 ref_brightness, GXDistAttnFn dist_fn)
+void GXInitLightDistAttn(GXLightObj* light, f32 ref_distance,
+                         f32 ref_brightness, GXDistAttnFn dist_fn)
 {
     f32 ka, kb, kc;
 
@@ -99,12 +101,14 @@ void GXInitLightDistAttn(GXLightObj* light, f32 ref_distance, f32 ref_brightness
     case GX_DA_MEDIUM:
         ka = 1.0f;
         kb = (0.5f * (1.0f - ref_brightness)) / (ref_brightness * ref_distance);
-        kc = (0.5f * (1.0f - ref_brightness)) / (ref_brightness * ref_distance * ref_distance);
+        kc = (0.5f * (1.0f - ref_brightness)) /
+             (ref_brightness * ref_distance * ref_distance);
         break;
     case GX_DA_STEEP:
         ka = 1.0f;
         kb = 0.0f;
-        kc = (1.0f - ref_brightness) / (ref_brightness * ref_distance * ref_distance);
+        kc = (1.0f - ref_brightness) /
+             (ref_brightness * ref_distance * ref_distance);
         break;
     case GX_DA_OFF:
     default:
@@ -133,7 +137,8 @@ void GXInitLightDir(GXLightObj* light, f32 x, f32 y, f32 z)
 
 void GXInitLightColor(GXLightObj* light, GXColor color)
 {
-    *(u32*) &light->color = (color.r << 24) | (color.g << 16) | (color.b << 8) | color.a;
+    *(u32*) &light->color =
+        (color.r << 24) | (color.g << 16) | (color.b << 8) | color.a;
 }
 
 void GXLoadLightObjImm(GXLightObj* light, GXLightID light_id)
@@ -313,8 +318,9 @@ void GXSetNumChans(u8 num_chans)
     __GXContexts.main->x4F0_flags |= 4;
 }
 
-void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src,
-                   u32 light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn)
+void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src,
+                   GXColorSrc mat_src, u32 light_mask, GXDiffuseFn diff_fn,
+                   GXAttnFn attn_fn)
 {
     u32 reg;
     int r26;

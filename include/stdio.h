@@ -3,8 +3,7 @@
 
 #include <stdarg.h>
 
-typedef struct
-{
+typedef struct {
     int unk0;
     unsigned short unk4b0 : 7;
     unsigned short unk4b7 : 3;

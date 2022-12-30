@@ -40,7 +40,8 @@ static void WriteCallback(s32 chan, s32 result)
             result = CARD_RESULT_BROKEN;
             goto error;
         }
-        result = __CARDEraseSector(chan, card->sectorSize * fileinfo->iBlock, EraseCallback);
+        result = __CARDEraseSector(chan, card->sectorSize * fileinfo->iBlock,
+                                   EraseCallback);
     }
 
     if (result < 0) {
@@ -67,8 +68,8 @@ static void EraseCallback(s32 chan, s32 result)
     }
 
     fileInfo = card->fileInfo;
-    result = __CARDWrite(chan, card->sectorSize * fileInfo->iBlock, card->sectorSize,
-                         card->buffer, WriteCallback);
+    result = __CARDWrite(chan, card->sectorSize * fileInfo->iBlock,
+                         card->sectorSize, card->buffer, WriteCallback);
     if (result < 0) {
         goto error;
     }
@@ -81,8 +82,8 @@ error:
     callback(chan, result);
 }
 
-s32 CARDWriteAsync(CARDFileInfo* fileInfo, const void* buf, u32 length, s32 offset,
-                   CARDCallback callback)
+s32 CARDWriteAsync(CARDFileInfo* fileInfo, const void* buf, u32 length,
+                   s32 offset, CARDCallback callback)
 {
     CARDControl* card;
     s32 result;
@@ -94,7 +95,9 @@ s32 CARDWriteAsync(CARDFileInfo* fileInfo, const void* buf, u32 length, s32 offs
         return result;
     }
 
-    if (OFFSET(offset, card->sectorSize) != 0 || OFFSET(length, card->sectorSize) != 0) {
+    if (OFFSET(offset, card->sectorSize) != 0 ||
+        OFFSET(length, card->sectorSize) != 0)
+    {
         return __CARDPutControlBlock(card, CARD_RESULT_FATAL_ERROR);
     }
 
@@ -108,8 +111,8 @@ s32 CARDWriteAsync(CARDFileInfo* fileInfo, const void* buf, u32 length, s32 offs
     DCStoreRange((void*) buf, length);
     card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
     card->buffer = (void*) buf;
-    result =
-        __CARDEraseSector(fileInfo->chan, card->sectorSize * fileInfo->iBlock, EraseCallback);
+    result = __CARDEraseSector(
+        fileInfo->chan, card->sectorSize * fileInfo->iBlock, EraseCallback);
     if (result < 0) {
         __CARDPutControlBlock(card, result);
     }

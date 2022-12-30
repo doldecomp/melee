@@ -19,12 +19,12 @@ extern struct UnkStruct80400430 lbl_80400430;
 OSContext lbl_804C2608;
 
 /*
- * Unused symbol probably used by the myStrippedFunction below, but since it got stripped
- * there's no telling what it was for.
+ * Unused symbol probably used by the myStrippedFunction below, but since it got
+ * stripped there's no telling what it was for.
  *
- * Regarding the pragma, normally this works, but in this case the Metrowerks toolchain is
- * out for fuckin' blood or something. See the FORCEACTIVE section we had to add in the
- * LCF just to get the compiler to stop removing this.
+ * Regarding the pragma, normally this works, but in this case the Metrowerks
+ * toolchain is out for fuckin' blood or something. See the FORCEACTIVE section
+ * we had to add in the LCF just to get the compiler to stop removing this.
  */
 #pragma push
 #pragma force_active on

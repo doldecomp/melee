@@ -1,1 +1,3 @@
-void __GXSetRange(void) {}
+void __GXSetRange(void)
+{
+}

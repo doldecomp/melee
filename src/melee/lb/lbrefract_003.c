@@ -252,7 +252,8 @@ f32 atanf(f32 x)
             offset_33 = lookup_ptr[33];
 
             result = ONE / (offset_33 + (x + offset_39));
-            result = __fnmsubs(result, lookup_ptr[7], offset_33) + __fnmsubs(result, lookup_ptr[13], offset_39);
+            result = __fnmsubs(result, lookup_ptr[7], offset_33) +
+                     __fnmsubs(result, lookup_ptr[13], offset_39);
         }
     } else {
         result = x;

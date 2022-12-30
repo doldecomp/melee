@@ -1,47 +1,23 @@
 #include <melee/gr/grtdonkey.h>
 
 static StageCallbacks lbl_803E8790[4] = {
-    { lbl_802203B4,
-      lbl_802203E0,
-      lbl_802203E8,
-      lbl_802203EC,
-      0UL },
-    { lbl_80220480,
-      lbl_802204D0,
-      lbl_802204D8,
-      lbl_802204F8,
-      0UL },
-    { lbl_802203F0,
-      lbl_80220440,
-      lbl_80220448,
-      lbl_8022047C,
-      0xC0000000 },
-    { NULL,
-      NULL,
-      NULL,
-      NULL,
-      0UL }
+    { lbl_802203B4, lbl_802203E0, lbl_802203E8, lbl_802203EC, 0UL },
+    { lbl_80220480, lbl_802204D0, lbl_802204D8, lbl_802204F8, 0UL },
+    { lbl_802203F0, lbl_80220440, lbl_80220448, lbl_8022047C, 0xC0000000 },
+    { NULL, NULL, NULL, NULL, 0UL }
 };
 
-extern StageData lbl_803E87EC = {
-    0x0000002B,
-    lbl_803E8790,
-    "/GrTDk.dat",
-    lbl_8022022C,
-    func_80220228,
-    lbl_8022029C,
-    lbl_802202A0,
-    lbl_802202C4,
-    lbl_802204FC,
-    lbl_80220504,
-    0x00000001,
-    NULL,
-    0UL
-};
+extern StageData lbl_803E87EC = { 0x0000002B,   lbl_803E8790,  "/GrTDk.dat",
+                                  lbl_8022022C, func_80220228, lbl_8022029C,
+                                  lbl_802202A0, lbl_802202C4,  lbl_802204FC,
+                                  lbl_80220504, 0x00000001,    NULL,
+                                  0UL };
 
 extern StageInfo stage_info;
 
-static void func_80220228(long) {}
+static void func_80220228(long)
+{
+}
 static void lbl_8022022C(void)
 {
     stage_info.unk8C.b4 = 0;
@@ -54,7 +30,9 @@ static void lbl_8022022C(void)
     func_801C4210();
     func_801C42AC();
 }
-static void lbl_8022029C(void) {}
+static void lbl_8022029C(void)
+{
+}
 static void lbl_802202A0(void)
 {
     func_801CAE04(0);
@@ -84,7 +62,8 @@ static HSD_GObj* func_802202CC(s32 gobj_id)
             func_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtdonkey.c", 0xc3, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtdonkey.c", 0xc3,
+                 gobj_id);
     }
 
     return gobj;
@@ -98,8 +77,12 @@ static s32 lbl_802203E0(void)
 {
     return 0;
 }
-static void lbl_802203E8(HSD_GObj*) {}
-static void lbl_802203EC(void) {}
+static void lbl_802203E8(HSD_GObj*)
+{
+}
+static void lbl_802203EC(void)
+{
+}
 static void lbl_802203F0(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -116,7 +99,9 @@ static void lbl_80220448(HSD_GObj* gobj)
     func_800115F4();
     func_801C2FE0(gobj);
 }
-static void lbl_8022047C(void) {}
+static void lbl_8022047C(void)
+{
+}
 static void lbl_80220480(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -132,7 +117,9 @@ static void lbl_802204D8(HSD_GObj*)
 {
     func_801C2FE0();
 }
-static void lbl_802204F8(void) {}
+static void lbl_802204F8(void)
+{
+}
 static int lbl_802204FC(long)
 {
     return 0;

@@ -1,13 +1,17 @@
 #include <dolphin/card.h>
 
-#define CARDGetBannerFormat(stat) (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)
+#define CARDGetBannerFormat(stat)                                              \
+    (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)
 #define CARDGetIconAnim(stat) (((stat)->bannerFormat) & CARD_STAT_ANIM_MASK)
-#define CARDGetIconFormat(stat, n) (((stat)->iconFormat >> (2 * (n))) & CARD_STAT_ICON_MASK)
-#define CARDGetIconSpeed(stat, n) (((stat)->iconSpeed >> (2 * (n))) & CARD_STAT_SPEED_MASK)
+#define CARDGetIconFormat(stat, n)                                             \
+    (((stat)->iconFormat >> (2 * (n))) & CARD_STAT_ICON_MASK)
+#define CARDGetIconSpeed(stat, n)                                              \
+    (((stat)->iconSpeed >> (2 * (n))) & CARD_STAT_SPEED_MASK)
 
-#define CARDSetIconSpeed(stat, n, f) \
-    ((stat)->iconSpeed =             \
-         (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) | ((f) << (2 * (n)))))
+#define CARDSetIconSpeed(stat, n, f)                                           \
+    ((stat)->iconSpeed =                                                       \
+         (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |   \
+                ((f) << (2 * (n)))))
 
 typedef struct CARDStat {
     char fileName[CARD_FILENAME_MAX];
@@ -127,7 +131,8 @@ s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat* stat)
     return __CARDPutControlBlock(card, result);
 }
 
-s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat, CARDCallback callback)
+s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat,
+                       CARDCallback callback)
 {
     CARDControl* card;
     CARDDir* dir;
@@ -137,7 +142,9 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat, CARDCallback callba
     if (fileNo < 0 || CARD_MAX_FILE <= fileNo ||
         (stat->iconAddr != 0xffffffff && CARD_READ_SIZE <= stat->iconAddr) ||
         (stat->commentAddr != 0xffffffff &&
-         CARD_SYSTEM_BLOCK_SIZE - CARD_COMMENT_SIZE < stat->commentAddr % CARD_SYSTEM_BLOCK_SIZE)) {
+         CARD_SYSTEM_BLOCK_SIZE - CARD_COMMENT_SIZE <
+             stat->commentAddr % CARD_SYSTEM_BLOCK_SIZE))
+    {
         return CARD_RESULT_FATAL_ERROR;
     }
     result = __CARDGetControlBlock(chan, &card);

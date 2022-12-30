@@ -227,7 +227,9 @@ void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess)
     }
 
     if ((lobj->flags & LOBJ_DIFFUSE) != 0) {
-        if (lobj->hw_color.r != color.r || lobj->hw_color.g != color.g || lobj->hw_color.b != color.b || lobj->hw_color.a != color.a) {
+        if (lobj->hw_color.r != color.r || lobj->hw_color.g != color.g ||
+            lobj->hw_color.b != color.b || lobj->hw_color.a != color.a)
+        {
             GXInitLightColor(&lobj->lightobj, color);
             lobj->hw_color = color;
             lobj->flags |= LOBJ_DIFF_DIRTY;
@@ -243,7 +245,8 @@ void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess)
         if (lobj->shininess != shininess) {
             lobj->shininess = shininess;
             k0 *= 0.5F;
-            GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, k0, 0.0F, 1.0F - k0);
+            GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, k0, 0.0F,
+                            1.0F - k0);
             lobj->flags |= LOBJ_SPEC_DIRTY;
         }
 
@@ -308,7 +311,8 @@ void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
         lobj->shininess = 50.0F;
         x = x = lobj->shininess;
         x *= 0.5F;
-        GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, x, 0.0F, 1.0F - x);
+        GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, x, 0.0F,
+                        1.0F - x);
         switch (HSD_LObjGetType(lobj)) {
         case 2:
         case 3:
@@ -338,8 +342,8 @@ void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
     GXInitLightPos(&lobj->lightobj, lpos.x, lpos.y, lpos.z);
     GXInitLightPos(&lobj->spec_lightobj, lpos.x, lpos.y, lpos.z);
     if (lobj->flags & 0x40) {
-        GXInitLightAttn(&lobj->lightobj, 1.0F, 0.0F, 0.0F,
-                        lobj->u.attn.k0, lobj->u.attn.k1, lobj->u.attn.k2);
+        GXInitLightAttn(&lobj->lightobj, 1.0F, 0.0F, 0.0F, lobj->u.attn.k0,
+                        lobj->u.attn.k1, lobj->u.attn.k2);
     } else {
         f32 ref_br = lobj->u.spot.ref_br;
         f32 ref_dist = lobj->u.spot.ref_dist;
@@ -363,9 +367,9 @@ void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
     GXInitLightPos(&lobj->spec_lightobj, lpos.x, lpos.y, lpos.z);
     GXInitLightDir(&lobj->lightobj, ldir.x, ldir.y, ldir.z);
     if (lobj->flags & 0x40) {
-        GXInitLightAttn(&lobj->lightobj,
-                        lobj->u.attn.a0, lobj->u.attn.a1, lobj->u.attn.a2,
-                        lobj->u.attn.k0, lobj->u.attn.k1, lobj->u.attn.k2);
+        GXInitLightAttn(&lobj->lightobj, lobj->u.attn.a0, lobj->u.attn.a1,
+                        lobj->u.attn.a2, lobj->u.attn.k0, lobj->u.attn.k1,
+                        lobj->u.attn.k2);
     } else {
         f32 ref_br = lobj->u.point.ref_br;
         f32 ref_dist = lobj->u.point.ref_dist;
@@ -860,7 +864,8 @@ HSD_LObj* HSD_LObjGetCurrentByType(u16 flags)
 }
 #else
 #pragma push
-asm HSD_LObj* HSD_LObjGetCurrentByType(u16 type){ // clang-format off
+asm HSD_LObj* HSD_LObjGetCurrentByType(u16 type){
+    // clang-format off
     nofralloc
 /* 80366A44 00363624  80 8D BF 9C */	lwz r4, current_lights(r13)
 /* 80366A48 00363628  54 65 07 BE */	clrlwi r5, r3, 0x1e

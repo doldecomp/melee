@@ -15,7 +15,9 @@ void OSRegisterResetFunction(OSResetFunctionInfo* func)
     OSResetFunctionInfo* tmp;
     OSResetFunctionInfo* iter;
 
-    for (iter = ResetFunctionQueue.first; iter && iter->priority <= func->priority; iter = iter->next) {
+    for (iter = ResetFunctionQueue.first;
+         iter && iter->priority <= func->priority; iter = iter->next)
+    {
     }
 
     if (iter == NULL) {

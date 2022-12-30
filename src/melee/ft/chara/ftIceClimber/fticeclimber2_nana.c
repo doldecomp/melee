@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 
-/// TODO remove float externs when file is finished and float data is removed from asm
+/// TODO remove float externs when file is finished and float data is removed
+/// from asm
 extern f32 lbl_804D9898;
 
 void ftNana_OnLoad(HSD_GObj* fighter_gobj)

@@ -14,10 +14,12 @@ void ftSamus_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->xEC_ground_vel /= samus_attr->x2C;
     fp->x80_self_vel.y = 0.0f;
     if (fp->x673 < samus_attr->x28) {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15E, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15E, 0, NULL, 0.0f,
+                                           1.0f, 0.0f);
         func_8006EBA4(fighter_gobj);
     } else {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15D, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15D, 0, NULL, 0.0f,
+                                           1.0f, 0.0f);
         func_8006EBA4(fighter_gobj);
     }
     ftSamus_ClearThrowFlagsUnk(fighter_gobj);
@@ -29,10 +31,12 @@ void ftSamus_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->x80_self_vel.x /= samus_attr->x2C;
     if (fp->x673 < samus_attr->x28) {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x160, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x160, 0, NULL, 0.0f,
+                                           1.0f, 0.0f);
         func_8006EBA4(fighter_gobj);
     } else {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15F, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15F, 0, NULL, 0.0f,
+                                           1.0f, 0.0f);
         func_8006EBA4(fighter_gobj);
     }
     ftSamus_ClearThrowFlagsUnk(fighter_gobj);
@@ -54,9 +58,13 @@ void ftSamus_8012A3BC(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSamus_8012A3F8(HSD_GObj* fighter_gobj) {}
+void ftSamus_8012A3F8(HSD_GObj* fighter_gobj)
+{
+}
 
-void ftSamus_8012A3FC(HSD_GObj* fighter_gobj) {}
+void ftSamus_8012A3FC(HSD_GObj* fighter_gobj)
+{
+}
 
 void ftSamus_8012A400(HSD_GObj* fighter_gobj)
 {
@@ -104,9 +112,13 @@ void ftSamus_8012A51C(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSamus_8012A558(HSD_GObj* fighter_gobj) {}
+void ftSamus_8012A558(HSD_GObj* fighter_gobj)
+{
+}
 
-void ftSamus_8012A55C(HSD_GObj* fighter_gobj) {}
+void ftSamus_8012A55C(HSD_GObj* fighter_gobj)
+{
+}
 
 void ftSamus_8012A560(HSD_GObj* fighter_gobj)
 {

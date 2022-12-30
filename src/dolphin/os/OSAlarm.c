@@ -15,8 +15,10 @@ extern unk_t __div2i();
 extern OSTime __OSGetSystemTime();
 
 typedef u8 __OSException;
-typedef void (*__OSExceptionHandler)(__OSException exception, OSContext* context);
-extern void DecrementerExceptionHandler(__OSException exception, OSContext* context);
+typedef void (*__OSExceptionHandler)(__OSException exception,
+                                     OSContext* context);
+extern void DecrementerExceptionHandler(__OSException exception,
+                                        OSContext* context);
 
 extern __OSExceptionHandler __OSGetExceptionHandler(__OSException);
 
@@ -100,7 +102,8 @@ void OSSetAlarm(OSAlarm* alarm, OSTime tick, OSAlarmHandler handler)
     OSRestoreInterrupts(oldInt);
 }
 
-void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period, OSAlarmHandler handler)
+void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period,
+                        OSAlarmHandler handler)
 {
     BOOL enabled = OSDisableInterrupts();
     alarm->period = period;
@@ -190,7 +193,8 @@ static void DecrementerExceptionCallback(register __OSException exception,
 }
 
 #pragma push
-asm void DecrementerExceptionHandler(__OSException exception, OSContext* context)
+asm void DecrementerExceptionHandler(__OSException exception,
+                                     OSContext* context)
 { // clang-format off
     nofralloc
 /* 80343DF8 003409D8  90 04 00 00 */	stw r0, 0(r4)

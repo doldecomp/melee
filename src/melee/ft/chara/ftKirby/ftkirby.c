@@ -71,7 +71,9 @@ void ftKirby_OnDeath(HSD_GObj* fighter_gobj)
     fp->sa.kirby.x2244 = 0;
     fp->sa.kirby.x228C = 0;
     fp->sa.kirby.x2290 = 0;
-    if (Player_GetFlagsBit1(fp->xC_playerID) && Player_GetUnk4D(fp->xC_playerID) != 4) {
+    if (Player_GetFlagsBit1(fp->xC_playerID) &&
+        Player_GetUnk4D(fp->xC_playerID) != 4)
+    {
         func_800F1BAC(fighter_gobj, Player_GetUnk4D(fp->xC_playerID), 0);
     }
 }

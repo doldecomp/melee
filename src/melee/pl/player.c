@@ -22,7 +22,8 @@ struct plAllocInfo {
     } bits;
 };
 
-/// TODO probably the same struct as above, figure out how to make them work as one
+/// TODO probably the same struct as above, figure out how to make them work as
+/// one
 struct plAllocInfo2 {
     s32 internal_id;
     u8 slot;
@@ -50,39 +51,17 @@ struct Unk_Struct_w_Array {
 char str_PdPmdat_start_of_data[] = "PdPm.dat";
 char str_plLoadCommonData[] = "plLoadCommonData";
 ftMapping ftMapping_list[33] = { //////ftMapping_list
-    { 0x02, 0xFF, 0x00 },
-    { 0x03, 0xFF, 0x00 },
-    { 0x01, 0xFF, 0x00 },
-    { 0x18, 0xFF, 0x00 },
-    { 0x04, 0xFF, 0x00 },
-    { 0x05, 0xFF, 0x00 },
-    { 0x06, 0xFF, 0x00 },
-    { 0x11, 0xFF, 0x00 },
-    { 0x00, 0xFF, 0x00 },
-    { 0x12, 0xFF, 0x00 },
-    { 0x10, 0xFF, 0x00 },
-    { 0x08, 0xFF, 0x00 },
-    { 0x09, 0xFF, 0x00 },
-    { 0x0C, 0xFF, 0x00 },
-    { 0x0A, 0x0B, 0x00 },
-    { 0x0F, 0xFF, 0x00 },
-    { 0x0D, 0xFF, 0x00 },
-    { 0x0E, 0xFF, 0x00 },
-    { 0x13, 0x07, 0x01 },
-    { 0x07, 0x13, 0x01 },
-    { 0x16, 0xFF, 0x00 },
-    { 0x14, 0xFF, 0x00 },
-    { 0x15, 0xFF, 0x00 },
-    { 0x1A, 0xFF, 0x00 },
-    { 0x17, 0xFF, 0x00 },
-    { 0x19, 0xFF, 0x00 },
-    { 0x1B, 0xFF, 0x00 },
-    { 0x1D, 0xFF, 0x00 },
-    { 0x1E, 0xFF, 0x00 },
-    { 0x1F, 0xFF, 0x00 },
-    { 0x1C, 0xFF, 0x00 },
-    { 0x20, 0xFF, 0x00 },
-    { 0x0A, 0xFF, 0x00 }
+    { 0x02, 0xFF, 0x00 }, { 0x03, 0xFF, 0x00 }, { 0x01, 0xFF, 0x00 },
+    { 0x18, 0xFF, 0x00 }, { 0x04, 0xFF, 0x00 }, { 0x05, 0xFF, 0x00 },
+    { 0x06, 0xFF, 0x00 }, { 0x11, 0xFF, 0x00 }, { 0x00, 0xFF, 0x00 },
+    { 0x12, 0xFF, 0x00 }, { 0x10, 0xFF, 0x00 }, { 0x08, 0xFF, 0x00 },
+    { 0x09, 0xFF, 0x00 }, { 0x0C, 0xFF, 0x00 }, { 0x0A, 0x0B, 0x00 },
+    { 0x0F, 0xFF, 0x00 }, { 0x0D, 0xFF, 0x00 }, { 0x0E, 0xFF, 0x00 },
+    { 0x13, 0x07, 0x01 }, { 0x07, 0x13, 0x01 }, { 0x16, 0xFF, 0x00 },
+    { 0x14, 0xFF, 0x00 }, { 0x15, 0xFF, 0x00 }, { 0x1A, 0xFF, 0x00 },
+    { 0x17, 0xFF, 0x00 }, { 0x19, 0xFF, 0x00 }, { 0x1B, 0xFF, 0x00 },
+    { 0x1D, 0xFF, 0x00 }, { 0x1E, 0xFF, 0x00 }, { 0x1F, 0xFF, 0x00 },
+    { 0x1C, 0xFF, 0x00 }, { 0x20, 0xFF, 0x00 }, { 0x0A, 0xFF, 0x00 }
 };
 
 ////.bss
@@ -128,7 +107,11 @@ extern s32 func_800865F0(HSD_GObj*);
 extern HSD_GObj* func_800BE7E0(struct plAllocInfo2*);
 extern HSD_GObj* Fighter_80068E98(struct plAllocInfo*);
 
-inline hasExtraFighterID(ftMapping* data) { return data->extra_internal_id != -1; } /// TODO this can be used in more places when functions are fixed to use correct structs
+inline hasExtraFighterID(ftMapping* data)
+{
+    return data->extra_internal_id != -1;
+} /// TODO this can be used in more places when functions are fixed to use
+  /// correct structs
 
 void inline Player_CheckSlot(s32 slot)
 {
@@ -272,9 +255,11 @@ void Player_80031AD0(s32 slot)
     player->player_entity[0] = Fighter_80068E98(&first_struct);
     player->player_state = 2;
 
-    internal_id = byte_check = offset_arr[player->player_character * sizeof(ftMapping)];
+    internal_id = byte_check =
+        offset_arr[player->player_character * sizeof(ftMapping)];
     if (byte_check != -1) {
-        has_transformation = ftMapping_list[player->player_character].has_transformation;
+        has_transformation =
+            ftMapping_list[player->player_character].has_transformation;
         Player_CheckSlot(slot);
         second_struct.internal_id = internal_id;
         second_struct.slot = slot;
@@ -326,9 +311,14 @@ void Player_80031DC8(void func_arg(s32, s32))
         Player_CheckSlot(slot);
 
         if (player_slots[slot].player_state) {
-            func_arg(ftMapping_list[player_slots[slot].player_character].internal_id, 0);
-            if (hasExtraFighterID(&ftMapping_list[player_slots[slot].player_character])) {
-                func_arg(ftMapping_list[player_slots[slot].player_character].extra_internal_id, 0);
+            func_arg(
+                ftMapping_list[player_slots[slot].player_character].internal_id,
+                0);
+            if (hasExtraFighterID(
+                    &ftMapping_list[player_slots[slot].player_character])) {
+                func_arg(ftMapping_list[player_slots[slot].player_character]
+                             .extra_internal_id,
+                         0);
             }
         }
     }
@@ -368,13 +358,17 @@ void Player_80031FB0(s32 slot, s32 entity_index)
 void Player_80032070(s32 slot, BOOL bool_arg)
 {
     StaticPlayer* player;
-    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    struct Unk_Struct_w_Array* unkStruct =
+        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
     if (bool_arg == 0) {
         func_800D4FF4(player->player_entity[player->transformed[0]]);
-        if ((player->flags.b2) && unkStruct->vec_arr[player->player_character].z == 0 && func_8008701C(player->player_entity[player->transformed[1]])) {
+        if ((player->flags.b2) &&
+            unkStruct->vec_arr[player->player_character].z == 0 &&
+            func_8008701C(player->player_entity[player->transformed[1]]))
+        {
             func_800D4FF4(player->player_entity[player->transformed[1]]);
         }
         func_802F6E1C(slot);
@@ -451,7 +445,8 @@ s32 Player_8003248C(s32 slot, BOOL arg1)
 { /// decomp.me/scratch/3yC1W
 
     s32 slot_type;
-    struct Unk_Struct_w_Array* unk_struct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    struct Unk_Struct_w_Array* unk_struct =
+        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     StaticPlayer* player;
 
     Player_CheckSlot(slot);
@@ -492,7 +487,8 @@ s8 Player_800325C8(s32 slot, BOOL b)
 s8 Player_80032610(s32 slot, BOOL arg1)
 { //// decomp.me/scratch/pHTx2
 
-    struct Unk_Struct_w_Array* some_struct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    struct Unk_Struct_w_Array* some_struct =
+        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     StaticPlayer* player;
     s32 error_value = -1;
 
@@ -599,7 +595,8 @@ void Player_80032A04(s32 slot, Vec* arg_vec)
         player->player_poses.byIndex[player->transformed[i]] = *arg_vec;
 
         if (player->player_entity[player->transformed[i]]) {
-            func_80086664(player->player_entity[player->transformed[i]], arg_vec);
+            func_80086664(player->player_entity[player->transformed[i]],
+                          arg_vec);
         }
     }
 }
@@ -615,7 +612,8 @@ void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 direction)
     for (i = 0; i < 2; i++) {
         player->facing_direction = direction;
         if (player->player_entity[player->transformed[i]]) {
-            func_SetEntityFacingDirection(direction, player->player_entity[player->transformed[i]]);
+            func_SetEntityFacingDirection(
+                direction, player->player_entity[player->transformed[i]]);
         }
     }
 }
@@ -639,7 +637,8 @@ void Player_SetScale(s32 slot, f32 scale)
     player->model_scale = scale;
     for (i = 0; i < 2; i++) {
         if (player->player_entity[player->transformed[i]]) {
-            ftData_SetScale(scale, player->player_entity[player->transformed[i]]);
+            ftData_SetScale(scale,
+                            player->player_entity[player->transformed[i]]);
         }
     }
 }
@@ -814,7 +813,8 @@ void Player_SetPlayerAndEntityCpuLevel(s32 slot, s8 cpu_level)
     player->cpu_level = cpu_level;
     for (i = 0; i < 2; i++) {
         if (player->player_entity[player->transformed[i]]) {
-            func_80087BEC(player->player_entity[player->transformed[i]], cpu_level);
+            func_80087BEC(player->player_entity[player->transformed[i]],
+                          cpu_level);
         }
     }
 }
@@ -838,7 +838,8 @@ void Player_SetPlayerAndEntityCpuType(s32 slot, s8 cpu_type)
     player->cpu_type = cpu_type;
     for (i = 0; i < 2; i++) {
         if (player->player_entity[player->transformed[i]]) {
-            func_80087BC0(player->player_entity[player->transformed[i]], cpu_type);
+            func_80087BC0(player->player_entity[player->transformed[i]],
+                          cpu_type);
         }
     }
 }
@@ -1122,7 +1123,8 @@ u32 Player_GetRemainingHP(s32 slot)
     u32 result2;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    result = player->staminas.byName.stamina - player->staminas.byIndex[player->transformed[0]];
+    result = player->staminas.byName.stamina -
+             player->staminas.byIndex[player->transformed[0]];
     result2 = result;
     if (result < 0) {
         result2 = 0;
@@ -1281,12 +1283,16 @@ u32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
 s32 Player_GetFalls(s32 slot)
 { /// decomp.me/scratch/8ijor
     StaticPlayer* player;
-    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    struct Unk_Struct_w_Array* unkStruct =
+        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    if (unkStruct->vec_arr[player->player_character].y != -1 && unkStruct->vec_arr[player->player_character].z != 0) {
-        return player->falls[player->transformed[0]] + player->falls[player->transformed[1]];
+    if (unkStruct->vec_arr[player->player_character].y != -1 &&
+        unkStruct->vec_arr[player->player_character].z != 0)
+    {
+        return player->falls[player->transformed[0]] +
+               player->falls[player->transformed[1]];
     }
 
     return player->falls[player->transformed[0]];
@@ -1652,7 +1658,8 @@ u8 Player_GetFlagsAEBit1(s32 slot)
     return bit1;
 }
 
-////output is actually void, but needs u8 to match, most likely typo from Nintendo
+////output is actually void, but needs u8 to match, most likely typo from
+/// Nintendo
 u8 Player_SetFlagsAEBit1(s32 slot, u8 bit1)
 {
     StaticPlayer* player;
@@ -2023,9 +2030,11 @@ void Player_80036DD8()
 
 void Player_80036E20(s32 arg0, s32 arg1, s32 arg2)
 { /// decomp.me/scratch/J1Elr
-    struct Unk_Struct_w_Array* unkStruct = (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
+    struct Unk_Struct_w_Array* unkStruct =
+        (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     func_800BEB60(unkStruct->vec_arr[arg0].x, arg1, arg2);
-    if ((unkStruct->vec_arr[arg0].y != -1) && (unkStruct->vec_arr[arg0].z == 0)) {
+    if ((unkStruct->vec_arr[arg0].y != -1) && (unkStruct->vec_arr[arg0].z == 0))
+    {
         func_800BEB60(unkStruct->vec_arr[arg0].y, arg1, arg2);
     }
 }
@@ -2055,7 +2064,8 @@ void Player_80036F34(s32 slot, s32 arg1)
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    some_struct.internal_id = ftMapping_list[player->player_character].internal_id;
+    some_struct.internal_id =
+        ftMapping_list[player->player_character].internal_id;
     some_struct.slot = slot;
     some_struct.bits.has_transformation = 0;
     some_struct.unk8 = arg1;
@@ -2063,8 +2073,11 @@ void Player_80036F34(s32 slot, s32 arg1)
 
     player->slot_type = 2;
     player->player_entity[0] = func_800BE7E0(&some_struct);
-    if ((ftMapping_list[player->player_character].extra_internal_id != -1) && (ftMapping_list[player->player_character].has_transformation == 0)) {
-        some_struct.internal_id = ftMapping_list[player->player_character].extra_internal_id;
+    if ((ftMapping_list[player->player_character].extra_internal_id != -1) &&
+        (ftMapping_list[player->player_character].has_transformation == 0))
+    {
+        some_struct.internal_id =
+            ftMapping_list[player->player_character].extra_internal_id;
         some_struct.bits.has_transformation = 1;
         player->player_entity[1] = func_800BE7E0(&some_struct);
     }
@@ -2079,7 +2092,8 @@ void Player_80037054(s32 slot, s32 arg1)
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    some_struct.internal_id = ftMapping_list[player->player_character].internal_id;
+    some_struct.internal_id =
+        ftMapping_list[player->player_character].internal_id;
     some_struct.slot = slot;
     some_struct.bits.has_transformation = 0;
     some_struct.unk8 = arg1;
@@ -2087,8 +2101,11 @@ void Player_80037054(s32 slot, s32 arg1)
 
     player->slot_type = 2;
     player->player_entity[0] = func_800BE7E0(&some_struct);
-    if ((ftMapping_list[player->player_character].extra_internal_id != -1) && (ftMapping_list[player->player_character].has_transformation == 0)) {
-        some_struct.internal_id = ftMapping_list[player->player_character].extra_internal_id;
+    if ((ftMapping_list[player->player_character].extra_internal_id != -1) &&
+        (ftMapping_list[player->player_character].has_transformation == 0))
+    {
+        some_struct.internal_id =
+            ftMapping_list[player->player_character].extra_internal_id;
         some_struct.bits.has_transformation = 1;
         player->player_entity[1] = func_800BE7E0(&some_struct);
     }

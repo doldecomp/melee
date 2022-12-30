@@ -61,7 +61,7 @@ typedef struct _UnkStageDat {
         S16Vec* unk20;
         s32 unk24; // size of unk20 array
         u8 x28_fill[0x34 - 0x28];
-    }* unk8;
+    } * unk8;
     s32 unkC;
 
     s32* unk10;

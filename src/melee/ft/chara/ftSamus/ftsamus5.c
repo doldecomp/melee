@@ -3,7 +3,8 @@
 void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x161, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x161, 0, NULL, 0.0f, 1.0f,
+                                       0.0f);
     ftSamus_updateDamageDeathCBs(fighter_gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -22,7 +23,8 @@ void ftSamus_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x162, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x162, 0, NULL, 0.0f, 1.0f,
+                                       0.0f);
     ftSamus_updateDamageDeathCBs(fighter_gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -96,7 +98,9 @@ void ftSamus_8012A96C(HSD_GObj* fighter_gobj)
             mag = lstick_x;
         }
         if (mag > samus_attr->x4C) {
-            if (((fp->x2C_facing_direction == 1.0f) && (lstick_x < 0.0f)) || ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f))) {
+            if (((fp->x2C_facing_direction == 1.0f) && (lstick_x < 0.0f)) ||
+                ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f)))
+            {
                 fp->x2204_ftcmd_var1 = 1;
                 fp->x2340_stateVar1 = 1;
                 func_8007D9FC(fp);
@@ -119,7 +123,9 @@ void ftSamus_8012AA3C(HSD_GObj* fighter_gobj)
             mag = lstick_x;
         }
         if (mag > samus_attr->x4C) {
-            if (((fp->x2C_facing_direction == 1.0f) && (lstick_x < 0.0f)) || ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f))) {
+            if (((fp->x2C_facing_direction == 1.0f) && (lstick_x < 0.0f)) ||
+                ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f)))
+            {
                 fp->x2204_ftcmd_var1 = 1;
                 fp->x2340_stateVar1 = 1;
                 func_8007D9FC(fp);

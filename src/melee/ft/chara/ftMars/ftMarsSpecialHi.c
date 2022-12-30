@@ -83,8 +83,11 @@ void lbl_801383A8(HSD_GObj* gobj)
     s32 unused;
 
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
-        f32 temp_f1 = attr->x38 * ((abs_lstick_x - attr->x34) / (1.0 /*d*/ - attr->x34));
-        temp_f1 = (fp->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
+        f32 temp_f1 =
+            attr->x38 * ((abs_lstick_x - attr->x34) / (1.0 /*d*/ - attr->x34));
+        temp_f1 = (fp->input.x620_lstick_x > 0.0f)
+                      ? -(DEGREES_TO_RADIANS * temp_f1)
+                      : (DEGREES_TO_RADIANS * temp_f1);
         if (abs(temp_f1) > abs(fp->x6BC_inputStickangle)) {
             fp->x6BC_inputStickangle = temp_f1;
         }
@@ -116,8 +119,11 @@ void lbl_801384F0(HSD_GObj* gobj)
     s32 unused[6];
 
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
-        f32 temp_f1 = attr->x38 * ((abs_lstick_x - attr->x34) / (1.0 /*d*/ - attr->x34));
-        temp_f1 = (fp->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * temp_f1) : (DEGREES_TO_RADIANS * temp_f1);
+        f32 temp_f1 =
+            attr->x38 * ((abs_lstick_x - attr->x34) / (1.0 /*d*/ - attr->x34));
+        temp_f1 = (fp->input.x620_lstick_x > 0.0f)
+                      ? -(DEGREES_TO_RADIANS * temp_f1)
+                      : (DEGREES_TO_RADIANS * temp_f1);
         if (abs(temp_f1) > abs(fp->x6BC_inputStickangle)) {
             fp->x6BC_inputStickangle = temp_f1;
         }
@@ -167,7 +173,9 @@ void lbl_80138638(HSD_GObj* gobj)
             attr = fp->x2D4_specialAttributes;
             attr2 = &fp->x110_attr;
             func_8007D494(fp, attr->x44, attr->x48);
-            func_8007D344(fp, 0.0f, attr2->x174_AerialDriftStickMult * attr->x28, attr2->x17C_AerialDriftMax * attr->x28);
+            func_8007D344(fp, 0.0f,
+                          attr2->x174_AerialDriftStickMult * attr->x28,
+                          attr2->x17C_AerialDriftMax * attr->x28);
         }
     } else {
         func_80084FA8(gobj);
@@ -203,7 +211,9 @@ void lbl_8013873C(HSD_GObj* gobj)
             }
         } else {
             func_8007D494(fp, attr->x44, attr->x48);
-            func_8007D344(fp, 0.0f, attr2->x174_AerialDriftStickMult * attr->x28, attr2->x17C_AerialDriftMax * attr->x28);
+            func_8007D344(fp, 0.0f,
+                          attr2->x174_AerialDriftStickMult * attr->x28,
+                          attr2->x17C_AerialDriftMax * attr->x28);
         }
     } else {
         func_8007D494(fp, attr2->x16C_Gravity, attr2->x170_TerminalVelocity);

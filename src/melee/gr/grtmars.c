@@ -6,40 +6,30 @@
 
 extern StageInfo stage_info;
 
-static StageCallbacks lbl_803E8EB0[4] = {
-    {
-        GrTMars_80222080,
-        GrTMars_802220AC,
-        GrTMars_802220B4,
-        GrTMars_802220B8,
-    },
-    {
-        GrTMars_8022214C,
-        GrTMars_8022219C,
-        GrTMars_802221A4,
-        GrTMars_802221C4,
-    },
-    {
-        GrTMars_802220BC,
-        GrTMars_8022210C,
-        GrTMars_80222114,
-        GrTMars_80222148,
-        0xC0000000,
-    }
-};
+static StageCallbacks lbl_803E8EB0[4] = { {
+                                              GrTMars_80222080,
+                                              GrTMars_802220AC,
+                                              GrTMars_802220B4,
+                                              GrTMars_802220B8,
+                                          },
+                                          {
+                                              GrTMars_8022214C,
+                                              GrTMars_8022219C,
+                                              GrTMars_802221A4,
+                                              GrTMars_802221C4,
+                                          },
+                                          {
+                                              GrTMars_802220BC,
+                                              GrTMars_8022210C,
+                                              GrTMars_80222114,
+                                              GrTMars_80222148,
+                                              0xC0000000,
+                                          } };
 
 StageData lbl_803E8F0C = {
-    0x00000034,
-    lbl_803E8EB0,
-    "/GrTMs.dat",
-    GrTMars_80221EF8,
-    GrTMars_80221EF4,
-    GrTMars_80221F68,
-    GrTMars_80221F6C,
-    GrTMars_80221F90,
-    GrTMars_802221C8,
-    GrTMars_802221D0,
-    0x00000001,
+    0x00000034,       lbl_803E8EB0,     "/GrTMs.dat",     GrTMars_80221EF8,
+    GrTMars_80221EF4, GrTMars_80221F68, GrTMars_80221F6C, GrTMars_80221F90,
+    GrTMars_802221C8, GrTMars_802221D0, 0x00000001,
 };
 
 static void GrTMars_80221EF4(s32)

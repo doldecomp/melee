@@ -64,7 +64,8 @@ void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets)
     set_x2(GX_FALSE);
 }
 
-void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable, GXBool point_enable)
+void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable,
+                        GXBool point_enable)
 {
     INSERT_FIELD(__GXContexts.main->xB8[coord], line_enable, 1, 18);
     INSERT_FIELD(__GXContexts.main->xB8[coord], point_enable, 1, 19);

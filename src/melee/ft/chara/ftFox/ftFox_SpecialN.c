@@ -1,20 +1,25 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
 // 0x800E5CB0
-// https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position for Blaster GFX - used in Fox's fp code
+// https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position
+// for Blaster GFX - used in Fox's fp code
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 {
     Vec3 sp14;
-    Fighter* fp = fp = getFighter(fighter_gobj); // Double fp init otherwise this will not match when inlined O_O
+    Fighter* fp = fp =
+        getFighter(fighter_gobj); // Double fp init otherwise this will not
+                                  // match when inlined O_O
 
     sp14.x = 0.0f;
     sp14.y = 1.2325000762939453f;
     sp14.z = 4.263599872589111f;
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, &sp14, pos);
+    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, &sp14,
+                  pos);
 }
 
 // 0x800E5D20
-// https://decomp.me/scratch/x2JfZ // Get Fox/Falco's Item Hold Bone Position for Blaster GFX again? - used in Blaster's item code
+// https://decomp.me/scratch/x2JfZ // Get Fox/Falco's Item Hold Bone Position
+// for Blaster GFX again? - used in Blaster's item code
 void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 {
     Vec3 sp14;
@@ -23,11 +28,13 @@ void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
     sp14.x = 0.0f;
     sp14.y = 1.2325000762939453f;
     sp14.z = 0.013600001111626625f;
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, &sp14, pos);
+    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, &sp14,
+                  pos);
 }
 
 // 0x800E5D90
-// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster OnActionStateChange function
+// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster OnActionStateChange
+// function
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -37,7 +44,8 @@ void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E5DC4
-// https://decomp.me/scratch/A0n4M // Check if Fox/Falco has a Blaster GOBj pointer
+// https://decomp.me/scratch/A0n4M // Check if Fox/Falco has a Blaster GOBj
+// pointer
 BOOL ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj)
 {
     if (getFighter(fighter_gobj)->sa.fox.x222C_blasterGObj == NULL) {
@@ -47,7 +55,8 @@ BOOL ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E5DE4 - shoutouts to Olifr� for figuring this one out!
-// https://decomp.me/scratch/aatYF // Get ASID for Fox/Falco moves that require the Blaster item
+// https://decomp.me/scratch/aatYF // Get ASID for Fox/Falco moves that require
+// the Blaster item
 s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj)
 {
     s32 ASID = 9;
@@ -77,7 +86,8 @@ s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E5E38
-// https://decomp.me/scratch/f6oIX // Check if Fox/Falco is performing a move that requires the Blaster item
+// https://decomp.me/scratch/f6oIX // Check if Fox/Falco is performing a move
+// that requires the Blaster item
 BOOL ftFox_CheckBlasterAction(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj != NULL) {
@@ -170,16 +180,19 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
             launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
         }
 
-        func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
+        func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj,
+                      &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
         func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
         ftKind = func_800872A4(fighter_gobj);
         switch (ftKind) {
         case FTKIND_FOX:
-            func_80088148(fp, foxSFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
+            func_80088148(fp, foxSFX[-1.0f == fp->x2C_facing_direction],
+                          SFX_VOLUME_MAX, SFX_PAN_MID);
             return;
 
         case FTKIND_FALCO:
-            func_80088148(fp, falcoSFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
+            func_80088148(fp, falcoSFX[-1.0f == fp->x2C_facing_direction],
+                          SFX_VOLUME_MAX, SFX_PAN_MID);
             return;
         }
     }
@@ -197,7 +210,8 @@ inline void ftFox_SpecialN_SetCall(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E608C
-// https://decomp.me/scratch/B3aTL // Fox & Falco's grounded Blaster Action State handler
+// https://decomp.me/scratch/B3aTL // Fox & Falco's grounded Blaster Action
+// State handler
 void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
@@ -206,7 +220,8 @@ void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_START, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_START, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
 
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -222,7 +237,9 @@ void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
     fp->foxVars[0].SpecialN.isBlasterLoop = FALSE;
 
-    blasterGObj = func_802AE8A8(fp->x2C_facing_direction, fighter_gobj, &fp->xB0_pos, func_8007500C(fp, 0x31), foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
+    blasterGObj = func_802AE8A8(fp->x2C_facing_direction, fighter_gobj,
+                                &fp->xB0_pos, func_8007500C(fp, 0x31),
+                                foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
     fp->sa.fox.x222C_blasterGObj = blasterGObj;
 
     if (blasterGObj != NULL) {
@@ -237,13 +254,15 @@ void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
 // 0x800E61A8
 // https://decomp.me/scratch/TUDhU
-void ftFox_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) // Fox & Falco's aerial Blaster Action State handler
+void ftFox_SpecialAirN_StartAction(
+    HSD_GObj* fighter_gobj) // Fox & Falco's aerial Blaster Action State handler
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     HSD_GObj* blasterGObj;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_START, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_START,
+                                       0, NULL, 0.0f, 1.0f, 0.0f);
 
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -253,7 +272,9 @@ void ftFox_SpecialAirN_StartAction(HSD_GObj* fighter_gobj) // Fox & Falco's aeri
     func_8006EBA4(fighter_gobj);
 
     fp->foxVars[0].SpecialN.isBlasterLoop = FALSE;
-    blasterGObj = func_802AE8A8(fp->x2C_facing_direction, fighter_gobj, &fp->xB0_pos, func_8007500C(fp, 0x31), foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
+    blasterGObj = func_802AE8A8(fp->x2C_facing_direction, fighter_gobj,
+                                &fp->xB0_pos, func_8007500C(fp, 0x31),
+                                foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
     fp->sa.fox.x222C_blasterGObj = blasterGObj;
 
     if (blasterGObj != NULL) {
@@ -270,19 +291,24 @@ extern void func_802ADDD0(HSD_GObj*, s32);
 extern void func_802AE538(HSD_GObj*);
 
 // 0x800E62A4
-// https://decomp.me/scratch/ZOB3l // Fox & Falco's grounded Blaster Start Animation callback
+// https://decomp.me/scratch/ZOB3l // Fox & Falco's grounded Blaster Start
+// Animation callback
 void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     HSD_GObj* blasterGObj;
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
-    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL)) {
+    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE538(fp->sa.fox.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_LOOP, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(
+            fighter_gobj, AS_FOX_SPECIALN_LOOP,
+            (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f,
+            0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
         func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -290,26 +316,36 @@ void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E6368
-// https://decomp.me/scratch/J7zwX // Fox & Falco's grounded Blaster Loop Animation callback
+// https://decomp.me/scratch/J7zwX // Fox & Falco's grounded Blaster Loop
+// Animation callback
 void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* temp_r28 = fighter_gobj->user_data;
 
     func_802ADDD0(temp_r28->sa.fox.x222C_blasterGObj, 1);
-    if (((u32) temp_r28->x220C_ftcmd_var3 == 1U) && (temp_r28->sa.fox.x222C_blasterGObj != NULL)) {
+    if (((u32) temp_r28->x220C_ftcmd_var3 == 1U) &&
+        (temp_r28->sa.fox.x222C_blasterGObj != NULL))
+    {
         temp_r28->x220C_ftcmd_var3 = 0U;
         func_802AE538(temp_r28->sa.fox.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if ((s32) temp_r28->foxVars[0].SpecialN.isBlasterLoop == TRUE) {
             temp_r28->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_LOOP, (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(
+                fighter_gobj, AS_FOX_SPECIALN_LOOP,
+                (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE |
+                 FIGHTER_GFX_PRESERVE),
+                NULL, 0.0f, 1.0f, 0.0f);
             temp_r28->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
             temp_r28->foxVars[0].SpecialN.isBlasterLoop = FALSE;
             func_802ADDD0(temp_r28->sa.fox.x222C_blasterGObj, 1);
         } else {
             HSD_GObj* temp;
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALN_END, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(
+                fighter_gobj, AS_FOX_SPECIALN_END,
+                (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f,
+                1.0f, 0.0f);
             temp = temp_r28->sa.fox.x222C_blasterGObj;
             temp_r28->x2204_ftcmd_var1 = 1;
             func_802ADDD0(temp, 1);
@@ -339,16 +375,20 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
                 launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
             }
 
-            func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
+            func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL,
+                          fighter_gobj, &sp2C,
+                          foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
             func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
             ftKind = func_800872A4(fighter_gobj);
             switch (ftKind) {
             case FTKIND_FOX:
-                func_80088148(fp, foxSFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
+                func_80088148(fp, foxSFX[-1.0f == fp->x2C_facing_direction],
+                              SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
 
             case FTKIND_FALCO:
-                func_80088148(fp, falcoSFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
+                func_80088148(fp, falcoSFX[-1.0f == fp->x2C_facing_direction],
+                              SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
             }
         }
@@ -369,7 +409,8 @@ inline void ftFox_SpecialN_RemoveBlasterNULL(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E65BC
-// https://decomp.me/scratch/aIEIA // Fox & Falco's grounded Blaster End Animation callback
+// https://decomp.me/scratch/aIEIA // Fox & Falco's grounded Blaster End
+// Animation callback
 void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -379,7 +420,9 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
     if ((u32) fp->x2204_ftcmd_var1 == 2U) {
         func_80094818(fighter_gobj, 0);
     }
-    if (((u32) fp->x220C_ftcmd_var3 == 2U) && (fp->sa.fox.x222C_blasterGObj != NULL)) {
+    if (((u32) fp->x220C_ftcmd_var3 == 2U) &&
+        (fp->sa.fox.x222C_blasterGObj != NULL))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE608(fp->sa.fox.x222C_blasterGObj);
     }
@@ -390,19 +433,24 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E667C
-// https://decomp.me/scratch/Os6Ik // Fox & Falco's aerial Blaster Start Animation callback
+// https://decomp.me/scratch/Os6Ik // Fox & Falco's aerial Blaster Start
+// Animation callback
 void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     HSD_GObj* blasterGObj;
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
-    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL)) {
+    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE538(fp->sa.fox.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_LOOP, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(
+            fighter_gobj, AS_FOX_SPECIALAIRN_LOOP,
+            (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f,
+            0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
         func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -410,20 +458,27 @@ void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E6740
-// https://decomp.me/scratch/FyW7c // Fox & Falco's aerial Blaster Loop Animation callback
+// https://decomp.me/scratch/FyW7c // Fox & Falco's aerial Blaster Loop
+// Animation callback
 void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
-    if (((u32) fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL)) {
+    if (((u32) fp->x220C_ftcmd_var3 == 1U) &&
+        (fp->sa.fox.x222C_blasterGObj != NULL))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE538(fp->sa.fox.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if ((s32) fp->foxVars[0].SpecialN.isBlasterLoop == TRUE) {
             fp->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_LOOP, (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(
+                fighter_gobj, AS_FOX_SPECIALAIRN_LOOP,
+                (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE |
+                 FIGHTER_GFX_PRESERVE),
+                NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(fighter_gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
             fp->foxVars[0].SpecialN.isBlasterLoop = FALSE;
@@ -431,7 +486,10 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
         } else {
             HSD_GObj* temp;
 
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRN_END, (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(
+                fighter_gobj, AS_FOX_SPECIALAIRN_END,
+                (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f,
+                1.0f, 0.0f);
             ftFox_SpecialN_SetCall(fighter_gobj);
 
             temp = fp->sa.fox.x222C_blasterGObj;
@@ -462,21 +520,26 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
                 launchAngle = foxAttrs->x10_FOX_BLASTER_ANGLE;
             }
 
-            else {
+            else
+            {
                 launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
             }
 
-            func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
+            func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL,
+                          fighter_gobj, &sp2C,
+                          foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
             func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
 
             ftKind = func_800872A4(fighter_gobj);
             switch (ftKind) {
             case FTKIND_FOX:
-                func_80088148(fp, foxSFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
+                func_80088148(fp, foxSFX[-1.0f == fp->x2C_facing_direction],
+                              SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
 
             case FTKIND_FALCO:
-                func_80088148(fp, falcoSFX[-1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
+                func_80088148(fp, falcoSFX[-1.0f == fp->x2C_facing_direction],
+                              SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
             }
         }
@@ -484,7 +547,8 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E69BC
-// https://decomp.me/scratch/OAWla // Fox & Falco's aerial Blaster End Animation callback
+// https://decomp.me/scratch/OAWla // Fox & Falco's aerial Blaster End Animation
+// callback
 void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -494,7 +558,9 @@ void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
     if ((u32) fp->x2204_ftcmd_var1 == 2U) {
         func_80094818(fighter_gobj, 0);
     }
-    if (((u32) fp->x220C_ftcmd_var3 == 2U) && ((u32) fp->sa.fox.x222C_blasterGObj != 0U)) {
+    if (((u32) fp->x220C_ftcmd_var3 == 2U) &&
+        ((u32) fp->sa.fox.x222C_blasterGObj != 0U))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE608(fp->sa.fox.x222C_blasterGObj);
     }
@@ -504,12 +570,14 @@ void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
             func_800CC730(fighter_gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, 1.0f, foxAttrs->x18_FOX_BLASTER_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, 1.0f,
+                      foxAttrs->x18_FOX_BLASTER_LANDING_LAG);
     }
 }
 
 // 0x800E6AB4
-// https://decomp.me/scratch/7JCEh // Fox & Falco's grounded Blaster Start IASA callback
+// https://decomp.me/scratch/7JCEh // Fox & Falco's grounded Blaster Start IASA
+// callback
 void ftFox_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -520,7 +588,8 @@ void ftFox_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E6ADC
-// https://decomp.me/scratch/7JCEh // Fox & Falco's grounded Blaster Loop IASA callback
+// https://decomp.me/scratch/7JCEh // Fox & Falco's grounded Blaster Loop IASA
+// callback
 void ftFox_SpecialNLoop_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -537,7 +606,8 @@ void ftFox_SpecialNEnd_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E6B08
-// https://decomp.me/scratch/7JCEh // Fox & Falco's aerial Blaster Start IASA callback
+// https://decomp.me/scratch/7JCEh // Fox & Falco's aerial Blaster Start IASA
+// callback
 void ftFox_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -548,7 +618,8 @@ void ftFox_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E6B30
-// https://decomp.me/scratch/7JCEh // Fox & Falco's aerial Blaster Loop IASA callback
+// https://decomp.me/scratch/7JCEh // Fox & Falco's aerial Blaster Loop IASA
+// callback
 void ftFox_SpecialAirNLoop_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -652,7 +723,8 @@ extern HSD_GObj* func_802AE8A8(f32, HSD_GObj*, Vec3*, s32, s32);
 extern void func_800E5588(HSD_GObj*);
 
 // 0x800E6CDC
-// https://decomp.me/scratch/G1jsj // Fox & Falco's Throw Animation callback - spawn Blaster
+// https://decomp.me/scratch/G1jsj // Fox & Falco's Throw Animation callback -
+// spawn Blaster
 void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
@@ -668,18 +740,25 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
         switch (fp->x2204_ftcmd_var1) {
         case 1:
             if (fp->sa.fox.x222C_blasterGObj == NULL) {
-                HSD_GObj* blasterGObj = func_802AE8A8(fp->x2C_facing_direction, fighter_gobj, &fp->xB0_pos, func_8007500C(fp, 0x31), foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
+                HSD_GObj* blasterGObj =
+                    func_802AE8A8(fp->x2C_facing_direction, fighter_gobj,
+                                  &fp->xB0_pos, func_8007500C(fp, 0x31),
+                                  foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
 
                 fp->sa.fox.x222C_blasterGObj = blasterGObj;
                 if (blasterGObj != NULL) {
-                    func_8026BAE8(fp->sa.fox.x222C_blasterGObj, (0.8500000238418579f * (fp->x34_scale.y * fp->x110_attr.x19C_ModelScaling)));
+                    func_8026BAE8(
+                        fp->sa.fox.x222C_blasterGObj,
+                        (0.8500000238418579f *
+                         (fp->x34_scale.y * fp->x110_attr.x19C_ModelScaling)));
                     ftFox_SpecialN_SetCall(fighter_gobj);
                 }
                 return;
             } else {
                 s32 flag;
 
-                func_802ADDD0(fp->sa.fox.x222C_blasterGObj, fp->x2204_ftcmd_var1);
+                func_802ADDD0(fp->sa.fox.x222C_blasterGObj,
+                              fp->x2204_ftcmd_var1);
                 switch (fp->x220C_ftcmd_var3) {
                 case 1:
                     fp->x220C_ftcmd_var3 = 0;
@@ -710,11 +789,17 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                     case ASID_THROWHI:
                     case ASID_THROWLW:
 
-                        func_8029C6CC(atan2f(sp50.y - sp44.y, sp50.x - sp44.x), foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp50, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
+                        func_8029C6CC(atan2f(sp50.y - sp44.y, sp50.x - sp44.x),
+                                      foxAttrs->x14_FOX_BLASTER_VEL,
+                                      fighter_gobj, &sp50,
+                                      foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
 
                     default:
-                        func_8029C6A4(atan2f(sp50.y - sp44.y, sp50.x - sp44.x), foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj, &sp50, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
+                        func_8029C6A4(atan2f(sp50.y - sp44.y, sp50.x - sp44.x),
+                                      foxAttrs->x14_FOX_BLASTER_VEL,
+                                      fighter_gobj, &sp50,
+                                      foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
                     }
                     func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
@@ -723,10 +808,12 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                     case ASID_THROWLW: {
                         switch (func_800872A4(fighter_gobj)) {
                         case FTKIND_FOX:
-                            func_80088148(fp, 0x1AE1DU, SFX_VOLUME_MAX, SFX_PAN_MID);
+                            func_80088148(fp, 0x1AE1DU, SFX_VOLUME_MAX,
+                                          SFX_PAN_MID);
                             return;
                         case FTKIND_FALCO:
-                            func_80088148(fp, 0x18709U, SFX_VOLUME_MAX, SFX_PAN_MID);
+                            func_80088148(fp, 0x18709U, SFX_VOLUME_MAX,
+                                          SFX_PAN_MID);
                             return;
                         }
                     default:
@@ -735,11 +822,15 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                     case ASID_THROWB:
                         switch (func_800872A4(fighter_gobj)) {
                         case FTKIND_FOX:
-                            func_80088148(fp, foxSFX[1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
+                            func_80088148(
+                                fp, foxSFX[1.0f == fp->x2C_facing_direction],
+                                SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
 
                         case FTKIND_FALCO:
-                            func_80088148(fp, falcoSFX[1.0f == fp->x2C_facing_direction], SFX_VOLUME_MAX, SFX_PAN_MID);
+                            func_80088148(
+                                fp, falcoSFX[1.0f == fp->x2C_facing_direction],
+                                SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
                         }
                         break;

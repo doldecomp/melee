@@ -35,8 +35,11 @@ void func_8013C360(HSD_GObj* fighter_gobj)
         void** item_list = fp->x10C_ftData->x48_items;
         void** item_list_shifted = item_list[1];
         if (!joint_list[fp->x619_costume_id]) {
-            UnkCostumeStruct* costume_list = CostumeListsForeachCharacter[fp->x4_fighterKind].costume_list;
-            joint_list[fp->x619_costume_id] = HSD_ArchiveGetPublicAddress(costume_list[fp->x619_costume_id].x14_archive, lbl_803D05B4[fp->x619_costume_id]);
+            UnkCostumeStruct* costume_list =
+                CostumeListsForeachCharacter[fp->x4_fighterKind].costume_list;
+            joint_list[fp->x619_costume_id] = HSD_ArchiveGetPublicAddress(
+                costume_list[fp->x619_costume_id].x14_archive,
+                lbl_803D05B4[fp->x619_costume_id]);
         }
 
         fp->sa.purin.x2244 = HSD_ObjAlloc(&lbl_80459080);
@@ -46,7 +49,9 @@ void func_8013C360(HSD_GObj* fighter_gobj)
         func_80074170();
         func_80075650(fighter_gobj, fp->sa.purin.x223C, &fp->sa.purin.x2240);
 
-        func_8007487C(&item_list_shifted[1], &fp->sa.purin.x2248, fp->x619_costume_id, &fp->sa.purin.x2240, &fp->sa.purin.x2240);
+        func_8007487C(&item_list_shifted[1], &fp->sa.purin.x2248,
+                      fp->x619_costume_id, &fp->sa.purin.x2240,
+                      &fp->sa.purin.x2240);
         func_8009DC54(fp);
         return;
     }
