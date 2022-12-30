@@ -8,7 +8,8 @@ void GXPokeZMode(BOOL compare_enable, GXCompare func, BOOL update_enable);
 void GXPokeDstAlpha(BOOL enable, u8 alpha);
 void GXPokeAlphaRead(s32 mode);
 void GXPokeAlphaMode(GXCompare func, u8 threshold);
-void GXPokeBlendMode(GXBlendMode type, GXBlendFactor src_factor, GXBlendFactor dst_factor, GXLogicOp op);
+void GXPokeBlendMode(GXBlendMode type, GXBlendFactor src_factor,
+                     GXBlendFactor dst_factor, GXLogicOp op);
 void GXPokeDither(s32 dither);
 void GXPokeAlphaUpdate(BOOL update_enable);
 void GXPokeColorUpdate(BOOL update_enable);

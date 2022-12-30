@@ -258,7 +258,8 @@ s32* func_8015D084(s32 arg0)
     return &func_8015EDBC()->xB0[arg0 & 0xFF];
 }
 #else
-asm s32* func_8015D084(s32 arg0){ // clang-format off
+asm s32* func_8015D084(s32 arg0){
+    // clang-format off
     nofralloc
 /* 8015D084 00159C64  7C 08 02 A6 */	mflr r0
 /* 8015D088 00159C68  90 01 00 04 */	stw r0, 4(r1)
@@ -424,7 +425,8 @@ s32* func_8015D450(s32 arg0)
     return &func_8015EDBC()->x4C[arg0 & 255];
 }
 #else
-asm s32* func_8015D450(s32 arg0){ // clang-format off
+asm s32* func_8015D450(s32 arg0){
+    // clang-format off
     nofralloc
 /* 8015D450 0015A030  7C 08 02 A6 */	mflr r0
 /* 8015D454 0015A034  90 01 00 04 */	stw r0, 4(r1)
@@ -768,7 +770,8 @@ void func_8015DB2C(u8 arg0, s32 arg2)
     *base = func_8000AF74(*base, 1);
 }
 #else
-asm void func_8015DB2C(u8 arg0, s32 arg2){ // clang-format off
+asm void func_8015DB2C(u8 arg0, s32 arg2){
+    // clang-format off
     nofralloc
 /* 8015DB2C 0015A70C  7C 08 02 A6 */	mflr r0
 /* 8015DB30 0015A710  54 63 06 3E */	clrlwi r3, r3, 0x18

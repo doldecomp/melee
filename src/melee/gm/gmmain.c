@@ -101,12 +101,12 @@ static void func_8015FDA4(void)
 
 inline void init_spr_unk()
 {
-#define MTSPR(spr, val)  \
-    asm { li r3, val }          \
-    asm                  \
-    {                    \
-        oris r3, r3, val \
-    }                    \
+#define MTSPR(spr, val)                                                        \
+    asm { li r3, val }                                                         \
+    asm                                                                        \
+    {                                                                          \
+        oris r3, r3, val                                                       \
+    }                                                                          \
     asm { mtspr spr, r3 }
 
     MTSPR(0x392, 4);
@@ -158,7 +158,8 @@ void main(void)
     func_8001F87C();
     func_803A6048(0xC000);
     func_8015FBA4();
-    if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 && func_803931A4(-1)) {
+    if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 &&
+        func_803931A4(-1)) {
         func_80393A54(1);
         while (!func_80393A04()) {
             OSReport("please setup server for USB\n");
@@ -177,16 +178,17 @@ void main(void)
         u32 free_aram_start;
         u32 free_aram_end;
         func_800154BC(&free_aram_start, &free_aram_end);
-        OSReport("# ARAM Free Size %d MB\n", (free_aram_end - free_aram_start) / (1024 * 1024));
+        OSReport("# ARAM Free Size %d MB\n",
+                 (free_aram_end - free_aram_start) / (1024 * 1024));
     }
     OSReport("# %s\n", lbl_803EA6C8);
     {
         struct datetime dt;
         func_801692E8(func_8000AFBC(), &dt);
-        OSReport("# GC Calendar Year %d Month %d Day %d\n",
-                 dt.year, dt.month, dt.day);
-        OSReport("#             Hour %d Min %d Sec %d \n",
-                 dt.hour, dt.minute, dt.second);
+        OSReport("# GC Calendar Year %d Month %d Day %d\n", dt.year, dt.month,
+                 dt.day);
+        OSReport("#             Hour %d Min %d Sec %d \n", dt.hour, dt.minute,
+                 dt.second);
     }
     OSReport("#\n\n");
     lbl_804D6594 = FALSE;

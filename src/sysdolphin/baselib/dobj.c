@@ -72,7 +72,8 @@ void HSD_DObjRemoveAnimAllByFlags(HSD_DObj* dobj, u32 flags)
     }
 }
 
-void HSD_DObjAddAnim(HSD_DObj* dobj, HSD_MatAnim* mat_anim, HSD_ShapeAnimDObj* sh_anim)
+void HSD_DObjAddAnim(HSD_DObj* dobj, HSD_MatAnim* mat_anim,
+                     HSD_ShapeAnimDObj* sh_anim)
 {
     HSD_ShapeAnim* shapeanim;
 
@@ -89,7 +90,8 @@ void HSD_DObjAddAnim(HSD_DObj* dobj, HSD_MatAnim* mat_anim, HSD_ShapeAnimDObj* s
     HSD_MObjAddAnim(dobj->mobj, mat_anim);
 }
 
-void HSD_DObjAddAnimAll(HSD_DObj* dobj, HSD_MatAnim* matanim, HSD_ShapeAnimDObj* shapeanimdobj)
+void HSD_DObjAddAnimAll(HSD_DObj* dobj, HSD_MatAnim* matanim,
+                        HSD_ShapeAnimDObj* shapeanimdobj)
 {
     HSD_DObj* dp;
     HSD_MatAnim* ma;
@@ -98,7 +100,9 @@ void HSD_DObjAddAnimAll(HSD_DObj* dobj, HSD_MatAnim* matanim, HSD_ShapeAnimDObj*
     if (dobj == NULL)
         return;
 
-    for (dp = dobj, ma = matanim, sd = shapeanimdobj; dp != NULL; dp = dp->next, ma = next_p(ma), sd = next_p(sd)) {
+    for (dp = dobj, ma = matanim, sd = shapeanimdobj; dp != NULL;
+         dp = dp->next, ma = next_p(ma), sd = next_p(sd))
+    {
         HSD_DObjAddAnim(dp, ma, sd);
     }
 }
@@ -175,7 +179,8 @@ static int DObjLoad(HSD_DObj* dobj, HSD_DObjDesc* desc)
             HSD_DObjModifyFlags(dobj, 4, 0xE);
             break;
         default:
-            OSReport("mobj has unexpected blending flags (0x%x).", dobj->mobj->rendermode);
+            OSReport("mobj has unexpected blending flags (0x%x).",
+                     dobj->mobj->rendermode);
             HSD_Panic(lbl_804D5C78, 312, "\0");
         }
     }
@@ -192,7 +197,9 @@ HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
     if (desc == NULL)
         return NULL;
 
-    if (desc->class_name == NULL || (info = hsdSearchClassInfo(desc->class_name)) == NULL) {
+    if (desc->class_name == NULL ||
+        (info = hsdSearchClassInfo(desc->class_name)) == NULL)
+    {
         dobj = HSD_DObjAlloc();
     } else {
         dobj = HSD_DOBJ(hsdNew(info));
@@ -233,7 +240,13 @@ void HSD_DObjSetDefaultClass(HSD_DObjInfo* info)
 {
     if (info) {
         if (!hsdIsDescendantOf(info, &hsdDObj)) {
-            __assert(lbl_804D5C78, 498, "hsdIsDescendantOf(info, &hsdDObj)"); // The line number here is totally made up, this function is removed in practice but the string isn't
+            __assert(
+                lbl_804D5C78, 498,
+                "hsdIsDescendantOf(info, &hsdDObj)"); // The line number here is
+                                                      // totally made up, this
+                                                      // function is removed in
+                                                      // practice but the string
+                                                      // isn't
         }
     }
     default_class = info;
@@ -241,7 +254,8 @@ void HSD_DObjSetDefaultClass(HSD_DObjInfo* info)
 
 HSD_DObj* HSD_DObjAlloc(void)
 {
-    HSD_DObj* dobj = (HSD_DObj*) hsdNew((HSD_ClassInfo*) (default_class ? default_class : &hsdDObj));
+    HSD_DObj* dobj = (HSD_DObj*) hsdNew(
+        (HSD_ClassInfo*) (default_class ? default_class : &hsdDObj));
     if (dobj == NULL) {
         __assert(lbl_804D5C78, 525, lbl_804D5C84);
     }
@@ -262,7 +276,11 @@ void HSD_DObjResolveRefsAll(HSD_DObj* dobj, HSD_DObjDesc* desc)
     }
 }
 
-void forceStringAllocation(HSD_DObj* dobj, HSD_MObj* mobj) // This function exists for the sole purpose of causing strings to end up in data by the compiler despite not being used
+void forceStringAllocation(
+    HSD_DObj* dobj,
+    HSD_MObj*
+        mobj) // This function exists for the sole purpose of causing strings to
+              // end up in data by the compiler despite not being used
 {
     if (dobj->pobj == NULL) {
         __assert(lbl_804D5C78, 700, "can not find specified pobj in link.\n");
@@ -313,7 +331,9 @@ static void DObjAmnesia(HSD_ClassInfo* info)
 
 static void DObjInfoInit(void)
 {
-    hsdInitClassInfo(HSD_CLASS_INFO(&hsdDObj), HSD_CLASS_INFO(&hsdClass), "sysdolphin_base_library", "hsd_dobj", sizeof(HSD_DObjInfo), sizeof(HSD_DObj));
+    hsdInitClassInfo(HSD_CLASS_INFO(&hsdDObj), HSD_CLASS_INFO(&hsdClass),
+                     "sysdolphin_base_library", "hsd_dobj",
+                     sizeof(HSD_DObjInfo), sizeof(HSD_DObj));
 
     HSD_CLASS_INFO(&hsdDObj)->release = DObjRelease;
     HSD_CLASS_INFO(&hsdDObj)->amnesia = DObjAmnesia;

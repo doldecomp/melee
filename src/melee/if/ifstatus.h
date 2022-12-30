@@ -154,7 +154,8 @@ typedef struct _Placeholder_8016AE38_flags_2 {
     u8 bot5 : 5;
 } Placeholder_8016AE38_flags_2;
 
-// When we figure out what that function is, replace this type with an actual type
+// When we figure out what that function is, replace this type with an actual
+// type
 typedef struct _Placeholder_8016AE38_ret_val {
     u32 unk0;
     u32 unk4;
@@ -180,7 +181,8 @@ typedef struct _Placeholder_8016AE50_flags {
     u8 unk1 : 1;
 } Placeholder_8016AE50_flags;
 
-// When we figure out what that function is, replace this type with an actual type
+// When we figure out what that function is, replace this type with an actual
+// type
 typedef struct _Placeholder_8016AE50_ret_val {
     u8 unk0;
     u8 unk1;

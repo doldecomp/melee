@@ -375,7 +375,9 @@ static void cbForStateGoToRetry(u32 intType)
 
     NumInternalRetry = 0;
 
-    if (CurrCommand == 4 || CurrCommand == 5 || CurrCommand == 13 || CurrCommand == 15) {
+    if (CurrCommand == 4 || CurrCommand == 5 || CurrCommand == 13 ||
+        CurrCommand == 15)
+    {
         ResetRequired = TRUE;
     }
 
@@ -624,8 +626,10 @@ static void stateBusy(DVDCommandBlock* block)
     case 1:
     case 4:
         IO.unk4 = IO.unk4;
-        block->currTransferSize = MIN(block->length - block->transferredSize, 0x80000);
-        DVDLowRead((void*) ((u8*) block->addr + block->transferredSize), block->currTransferSize,
+        block->currTransferSize =
+            MIN(block->length - block->transferredSize, 0x80000);
+        DVDLowRead((void*) ((u8*) block->addr + block->transferredSize),
+                   block->currTransferSize,
                    block->offset + block->transferredSize, cbForStateBusy);
         break;
     case 2:
@@ -717,7 +721,9 @@ static void cbForStateBusy(u32 intType)
         return;
     }
 
-    if (CurrCommand == 1 || CurrCommand == 4 || CurrCommand == 5 || CurrCommand == 14) {
+    if (CurrCommand == 1 || CurrCommand == 4 || CurrCommand == 5 ||
+        CurrCommand == 14)
+    {
         executing->transferredSize += executing->currTransferSize - IO.x8[4];
     }
 
@@ -742,7 +748,9 @@ static void cbForStateBusy(u32 intType)
             return;
         }
 
-        if (CurrCommand == 1 || CurrCommand == 4 || CurrCommand == 5 || CurrCommand == 14) {
+        if (CurrCommand == 1 || CurrCommand == 4 || CurrCommand == 5 ||
+            CurrCommand == 14)
+        {
             if (executing->transferredSize != executing->length) {
                 stateBusy(executing);
                 return;
@@ -756,7 +764,9 @@ static void cbForStateBusy(u32 intType)
                 finished->callback(finished->transferredSize, finished);
             }
             stateReady();
-        } else if (CurrCommand == 9 || CurrCommand == 10 || CurrCommand == 11 || CurrCommand == 12) {
+        } else if (CurrCommand == 9 || CurrCommand == 10 || CurrCommand == 11 ||
+                   CurrCommand == 12)
+        {
             s32 result;
 
             if ((CurrCommand == 11) || (CurrCommand == 10)) {
@@ -786,7 +796,8 @@ static void cbForStateBusy(u32 intType)
                 } else {
                     AutoFinishing = FALSE;
                     executing->currTransferSize = 1;
-                    DVDLowAudioStream(0, executing->length, executing->offset, cbForStateBusy);
+                    DVDLowAudioStream(0, executing->length, executing->offset,
+                                      cbForStateBusy);
                 }
             } else {
                 finished = executing;
@@ -815,8 +826,10 @@ static void cbForStateBusy(u32 intType)
             return;
         }
 
-        if ((CurrCommand == 1 || CurrCommand == 4 || CurrCommand == 5 || CurrCommand == 14) &&
-            (executing->transferredSize == executing->length)) {
+        if ((CurrCommand == 1 || CurrCommand == 4 || CurrCommand == 5 ||
+             CurrCommand == 14) &&
+            (executing->transferredSize == executing->length))
+        {
             if (CheckCancel(0)) {
                 return;
             }
@@ -839,8 +852,9 @@ static BOOL issueCommand(s32 prio, DVDCommandBlock* block)
     BOOL level;
     BOOL result;
 
-    if (autoInvalidation &&
-        (block->command == 1 || block->command == 4 || block->command == 5 || block->command == 14)) {
+    if (autoInvalidation && (block->command == 1 || block->command == 4 ||
+                             block->command == 5 || block->command == 14))
+    {
         DCInvalidateRange(block->addr, block->length);
     }
 
@@ -858,8 +872,8 @@ static BOOL issueCommand(s32 prio, DVDCommandBlock* block)
     return result;
 }
 
-BOOL DVDReadAbsAsyncPrio(DVDCommandBlock* block, void* addr, s32 length, s32 offset,
-                         DVDCBCallback callback, s32 prio)
+BOOL DVDReadAbsAsyncPrio(DVDCommandBlock* block, void* addr, s32 length,
+                         s32 offset, DVDCBCallback callback, s32 prio)
 {
     BOOL idle;
     block->command = 1;
@@ -885,8 +899,8 @@ BOOL DVDSeekAbsAsyncPrio(DVDCommandBlock* block, u32 offset,
     return idle;
 }
 
-BOOL DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length, s32 offset,
-                          DVDCBCallback callback)
+BOOL DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length,
+                          s32 offset, DVDCBCallback callback)
 {
     BOOL idle;
     block->command = 4;
@@ -900,7 +914,8 @@ BOOL DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length, s32 of
     return idle;
 }
 
-BOOL DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID, DVDCBCallback callback)
+BOOL DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID,
+                   DVDCBCallback callback)
 {
     BOOL idle;
     block->command = 5;
@@ -978,8 +993,7 @@ BOOL DVDStopStreamAtEndAsync(DVDCommandBlock* block, DVDCBCallback callback)
     return idle;
 }
 
-BOOL DVDInquiryAsync(DVDCommandBlock* block, void* addr,
-                     DVDCBCallback callback)
+BOOL DVDInquiryAsync(DVDCommandBlock* block, void* addr, DVDCBCallback callback)
 {
     BOOL idle;
     block->command = 14;
@@ -1190,7 +1204,8 @@ s32 DVDCancel(DVDCommandBlock* block)
         if (state == 3) {
             command = ((volatile DVDCommandBlock*) block)->command;
 
-            if (command == 4 || command == 5 || command == 13 || command == 15) {
+            if (command == 4 || command == 5 || command == 13 || command == 15)
+            {
                 break;
             }
         }

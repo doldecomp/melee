@@ -124,7 +124,8 @@ void func_80136A1C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C5084, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C5084, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136A7C 0013365C
@@ -134,7 +135,8 @@ void func_80136A7C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x0C4C5084, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x0C4C5084, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136ADC 001336BC
@@ -148,7 +150,8 @@ void lbl_80136ADC(HSD_GObj* gobj)
     s32 unused[7];
 
     if ((s32) fp->x2340_stateVar1 % 30 == 0) {
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &sp28);
+        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
+                      &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
     fp->x2340_stateVar1++;
@@ -168,7 +171,8 @@ void lbl_80136BB4(HSD_GObj* gobj)
     s32 unused[7];
 
     if ((s32) fp->x2340_stateVar1 % 30 == 0) {
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &sp28);
+        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
+                      &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
     fp->x2340_stateVar1++;
@@ -240,7 +244,8 @@ void func_80136DB4(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     func_8007D5D4(gobj->user_data);
-    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C5A86, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C5A86, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136E14 001339F4
@@ -250,21 +255,24 @@ void func_80136E14(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x0C4C5A86, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x0C4C5A86, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136E74 00133A54
 // https://decomp.me/scratch/M7HBN
 void func_80136E74(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x1200, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x1200, 0, 0.0f, 1.0f,
+                                       0.0f);
 }
 
 // 80136EAC 00133A8C
 // https://decomp.me/scratch/RkI7l
 void func_80136EAC(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x1200, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x1200, 0, 0.0f, 1.0f,
+                                       0.0f);
 }
 
 // 80136EE4 00133AC4
@@ -282,7 +290,10 @@ void lbl_80136EE4(HSD_GObj* gobj)
         ndx = 0;
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
-                func_8007ABD0((Hitbox*) (hb + 0x914), (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8), gobj);
+                func_8007ABD0(
+                    (Hitbox*) (hb + 0x914),
+                    (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8),
+                    gobj);
             }
             ndx++;
             hb += 0x138;
@@ -293,7 +304,8 @@ void lbl_80136EE4(HSD_GObj* gobj)
         s32 unused1, unused2, unused3, unused4, unused5;
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &position);
+        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
+                      &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         func_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
     }
@@ -321,7 +333,8 @@ void lbl_80137010(HSD_GObj* gobj)
         // for (ndx = 0; ndx < 4; ndx++) {
         //     if (fp->x914[ndx].x0 == 1) {
         //         // Hitbox_ApplyDamageStalingAndMore
-        //         func_8007ABD0(&fp->x914[ndx], (f32) (attr->x4 + (s32)fp->x2340_stateVar1 / 30 * attr->x8), gobj);
+        //         func_8007ABD0(&fp->x914[ndx], (f32) (attr->x4 +
+        //         (s32)fp->x2340_stateVar1 / 30 * attr->x8), gobj);
         //     }
         // }
 
@@ -330,7 +343,10 @@ void lbl_80137010(HSD_GObj* gobj)
         ndx = 0;
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
-                func_8007ABD0((Hitbox*) (hb + 0x914), (f32) (attr->x4 + (s32) fp->x2340_stateVar1 / 30 * attr->x8), gobj);
+                func_8007ABD0((Hitbox*) (hb + 0x914),
+                              (f32) (attr->x4 +
+                                     (s32) fp->x2340_stateVar1 / 30 * attr->x8),
+                              gobj);
             }
             ndx++;
             hb += 0x138;
@@ -341,7 +357,8 @@ void lbl_80137010(HSD_GObj* gobj)
         s32 unused1, unused2, unused3, unused4, unused5;
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0, &position);
+        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
+                      &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         func_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
     }
@@ -412,7 +429,8 @@ void func_801371FC(HSD_GObj* gobj)
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     if (fp->x2219_flag.bits.b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -437,7 +455,8 @@ void func_801372A8(HSD_GObj* gobj)
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     if (fp->x2219_flag.bits.b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;

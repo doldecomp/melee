@@ -108,7 +108,8 @@ s32 ReadArrayUnlock(s32 chan, u32 data, void* rbuf, s32 rlen, s32 mode)
 
     err = FALSE;
     err |= !EXIImmEx(chan, cmd, 5, 1);
-    err |= !EXIImmEx(chan, (u8*) card->workArea + (u32) sizeof(CARDID), card->latency, 1);
+    err |= !EXIImmEx(chan, (u8*) card->workArea + (u32) sizeof(CARDID),
+                     card->latency, 1);
     err |= !EXIImmEx(chan, rbuf, rlen, 0);
     err |= !EXIDeselect(chan);
 

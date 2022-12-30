@@ -35,7 +35,8 @@ void DSPInit(void)
     BOOL intr;
     u16 tmp;
 
-    __DSP_debug_printf("DSPInit(): Build Date: %s %s\n", "Sep  8 2001", "01:51:48"); // __DATE__, __TIME__
+    __DSP_debug_printf("DSPInit(): Build Date: %s %s\n", "Sep  8 2001",
+                       "01:51:48"); // __DATE__, __TIME__
 
     if (__DSP_init_flag == TRUE) {
         return;

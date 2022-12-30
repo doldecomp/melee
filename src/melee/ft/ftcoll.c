@@ -19,7 +19,8 @@
 
 // 0x800763C0 //
 // https://decomp.me/scratch/zSqbD //
-void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID) // Combo Count Logic //
+void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
+                   s32 attackID) // Combo Count Logic //
 {
     HSD_GObj* temp_GObj;
     Fighter* fp;
@@ -49,7 +50,8 @@ void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID) // Combo 
 
 // 0x80076444 //
 // https://decomp.me/scratch/PJyPr //
-void func_80076444(HSD_GObj* attacker, HSD_GObj* victim) // Combo Count Logic + Get Attack ID //
+void func_80076444(HSD_GObj* attacker,
+                   HSD_GObj* victim) // Combo Count Logic + Get Attack ID //
 {
     Fighter* fp = getFighter(attacker);
     func_800763C0(attacker, victim, fp->x2068_attackID);
@@ -59,7 +61,8 @@ extern BOOL func_80086960(HSD_GObj*);
 
 // 0x8007646C //
 // https://decomp.me/scratch/TDdx4 //
-void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim) // Combo Count Logic w/ Item Owner //
+void func_8007646C(HSD_GObj* attackItem,
+                   HSD_GObj* victim) // Combo Count Logic w/ Item Owner //
 {
     HSD_GObj* itemOwner = func_8026BC78(attackItem);
     s32 attackID = func_8026BC84(attackItem);
@@ -110,7 +113,8 @@ inline void comboCount_Push(Fighter* fp)
 
 // 0x80076528 //
 // https://decomp.me/scratch/qGiYU //
-void func_80076528(HSD_GObj* fighter_gobj) // Combo count something + adjust TopN //
+void func_80076528(
+    HSD_GObj* fighter_gobj) // Combo count something + adjust TopN //
 {
     u16 temp_r3;
     Fighter* fp;
@@ -119,7 +123,9 @@ void func_80076528(HSD_GObj* fighter_gobj) // Combo count something + adjust Top
     temp_r3 = fp->x2092;
     if (temp_r3 != 0) {
         fp->x2092 = (u16) (temp_r3 - 1);
-        if ((fp->x1A58_interactedFighter == NULL) && (fp->xE0_ground_or_air == GA_Ground)) {
+        if ((fp->x1A58_interactedFighter == NULL) &&
+            (fp->xE0_ground_or_air == GA_Ground))
+        {
             comboCount_Push(fp);
         }
     }
@@ -127,12 +133,15 @@ void func_80076528(HSD_GObj* fighter_gobj) // Combo count something + adjust Top
 
 // 0x800765AC //
 // https://decomp.me/scratch/IPBrx //
-void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon freeing memory? //
+void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon
+                                     // freeing memory? //
 {
     Fighter* fp;
     HSD_GObj* gobj;
 
-    gobj = lbl_804D782C->x20_fighters; // Get fp GObj from global list of entities (?) //
+    gobj =
+        lbl_804D782C
+            ->x20_fighters; // Get fp GObj from global list of entities (?) //
     while (gobj != NULL) {
         fp = getFighter(gobj);
         if (victim == fp->x2094) {
@@ -155,12 +164,15 @@ void func_800765E0(void) // Reset hitbox and phantom collision count? //
 
 // 0x800765F0 //
 // https://decomp.me/scratch/9hcKb //
-f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar) // Unk knockback related ? //
+f32 func_800765F0(Fighter* fp, HSD_GObj* victim,
+                  f32 unk_floatvar) // Unk knockback related ? //
 {
     HSD_GObj* currentVictim;
 
     currentVictim = fp->x1A58_interactedFighter;
-    if ((currentVictim != NULL) && (fp->x221B_flag.bits.b5 == 0) && (currentVictim != victim)) {
+    if ((currentVictim != NULL) && (fp->x221B_flag.bits.b5 == 0) &&
+        (currentVictim != victim))
+    {
         unk_floatvar *= p_ftCommonData->x128;
     }
     if (fp->x10_action_state_index == ASID_DAMAGEICE) {

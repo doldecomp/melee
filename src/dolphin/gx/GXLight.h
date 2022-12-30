@@ -16,9 +16,11 @@ typedef struct _GXLightObj {
     Vec dir;       // at 0x34
 } GXLightObj;
 
-void GXInitLightAttn(GXLightObj* light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb, f32 kc);
+void GXInitLightAttn(GXLightObj* light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb,
+                     f32 kc);
 void GXInitLightSpot(GXLightObj* light, f32 angle, GXSpotFn fn);
-void GXInitLightDistAttn(GXLightObj* light, f32 ref_distance, f32 ref_brightness, GXDistAttnFn dist_fn);
+void GXInitLightDistAttn(GXLightObj* light, f32 ref_distance,
+                         f32 ref_brightness, GXDistAttnFn dist_fn);
 void GXInitLightPos(GXLightObj* light, f32 x, f32 y, f32 z);
 void GXInitLightDir(GXLightObj* light, f32 x, f32 y, f32 z);
 void GXInitLightColor(GXLightObj* light, GXColor color);
@@ -26,7 +28,8 @@ void GXLoadLightObjImm(GXLightObj* light, GXLightID light_id);
 void GXSetChanAmbColor(GXChannelID chan, GXColor* color);
 void GXSetChanMatColor(GXChannelID chan, GXColor* color);
 void GXSetNumChans(u8 num_chans);
-void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src, GXColorSrc mat_src,
-                   u32 light_mask, GXDiffuseFn diff_fn, GXAttnFn attn_fn);
+void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src,
+                   GXColorSrc mat_src, u32 light_mask, GXDiffuseFn diff_fn,
+                   GXAttnFn attn_fn);
 
 #endif

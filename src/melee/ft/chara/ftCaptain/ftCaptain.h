@@ -7,7 +7,6 @@
 #include <melee/ft/fighter.h>
 
 typedef enum ftCaptainAction {
-
     AS_FTCOMMON = 340,
     AS_CAPTAIN_SWING42_SWORD,
     AS_CAPTAIN_SWING42_2,
@@ -31,17 +30,33 @@ typedef enum ftCaptainAction {
 // Flags used by Captain Falcon and Ganondorf in ActionStateChange //
 
 // SpecialN/SpecialAirN (Falcon / Warlock Punch)
-#define FTCAPTAIN_SPECIALN_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTCAPTAIN_SPECIALN_COLL_FLAG                                           \
+    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
+        FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE |                         \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 // SpecialS/SpecialAirS (Raptor Boost / Gerudo Dragon)
-#define FTCAPTAIN_SPECIALS_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTCAPTAIN_SPECIALS_FLAG                                                \
+    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |     \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 typedef struct _ftCaptainAttributes {
-    f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG; // Minimum control stick range required for downward angle (Negative Y)
-    f32 x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS; // Minimum control stick range required for upward angle (Positive Y)
-    f32 x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF;        // Maximum angle change from control stick input
-    f32 xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X;        // Momentum gained from aerial Falcon/Warlock Punch
-    f32 x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL;     // Additional momentum from angled Falcon/Warlock Punch
+    f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG; // Minimum control stick range
+                                                  // required for downward angle
+                                                  // (Negative Y)
+    f32 x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS; // Minimum control stick range
+                                                  // required for upward angle
+                                                  // (Positive Y)
+    f32 x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF; // Maximum angle change from control
+                                           // stick input
+    f32 xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X; // Momentum gained from aerial
+                                           // Falcon/Warlock Punch
+    f32 x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL; // Additional momentum from angled
+                                              // Falcon/Warlock Punch
 
     f32 x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
     f32 x18_CAPTAIN_RAPTORBOOST_GRAVITY;

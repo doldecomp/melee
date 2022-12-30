@@ -85,7 +85,8 @@ error:
     }
 }
 
-s32 __CARDWrite(s32 chan, u32 addr, u32 length, void* dst, CARDCallback callback)
+s32 __CARDWrite(s32 chan, u32 addr, u32 length, void* dst,
+                CARDCallback callback)
 {
     CARDControl* card = &__CARDBlock[chan];
     if (!card->attached) {

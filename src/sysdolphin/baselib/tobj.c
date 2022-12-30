@@ -68,7 +68,8 @@ void HSD_TObjAddAnim(HSD_TObj* tobj, HSD_TexAnim* texanim)
             }
 
             if (ta->n_tluttbl) {
-                tobj->tluttbl = (HSD_Tlut**) HSD_MemAlloc((s32) sizeof(HSD_Tlut*) * (ta->n_tluttbl + 1));
+                tobj->tluttbl = (HSD_Tlut**) HSD_MemAlloc(
+                    (s32) sizeof(HSD_Tlut*) * (ta->n_tluttbl + 1));
                 for (i = 0; i < ta->n_tluttbl; i++) {
                     tobj->tluttbl[i] = HSD_TlutLoadDesc(ta->tluttbl[i]);
                 }
@@ -376,14 +377,21 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
         __assert(lbl_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
     }
 
-    scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON ? 0.0F : (f32) tobj->repeat_s / tobj->scale.x;
-    scale.y = __fabsf(tobj->scale.y) < FLT_EPSILON ? 0.0F : (f32) tobj->repeat_t / tobj->scale.y;
+    scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON
+                  ? 0.0F
+                  : (f32) tobj->repeat_s / tobj->scale.x;
+    scale.y = __fabsf(tobj->scale.y) < FLT_EPSILON
+                  ? 0.0F
+                  : (f32) tobj->repeat_t / tobj->scale.y;
     scale.z = tobj->scale.z;
     rot.x = tobj->rotate.x;
     rot.y = tobj->rotate.y;
     rot.z = -tobj->rotate.z;
     trans.x = -tobj->translate.x;
-    trans.y = -(tobj->translate.y + (tobj->wrap_t == GX_MIRROR ? 1.0F / (tobj->repeat_t / tobj->scale.y) : 0.0F));
+    trans.y =
+        -(tobj->translate.y + (tobj->wrap_t == GX_MIRROR
+                                   ? 1.0F / (tobj->repeat_t / tobj->scale.y)
+                                   : 0.0F));
     trans.z = tobj->translate.z;
 
     MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);

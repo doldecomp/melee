@@ -6,7 +6,8 @@
 #include <dolphin/gx/__GX_unknown_001.h>
 
 #pragma push
-asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx, f32* sy, f32* sz)
+asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx,
+                   f32* sy, f32* sz)
 { // clang-format off
     nofralloc
 /* 80341148 0033DD28  C0 83 00 00 */	lfs f4, 0(r3)
@@ -190,8 +191,8 @@ asm void WriteMTXPS4x2(register float* src, register float* dst)
 } // clang-format on
 
 // NOTE: peephole off is needed for following functions to match
-// The previous matrix functions were probably inline asm in the original source,
-// which triggered the peephole off MWCC bug.
+// The previous matrix functions were probably inline asm in the original
+// source, which triggered the peephole off MWCC bug.
 
 void GXLoadPosMtxImm(void* mtx, s32 arg1)
 {
@@ -238,7 +239,8 @@ void GXLoadTexMtxImm(void* arg0, u32 arg1, s32 arg2)
     }
 }
 
-void GXSetViewportJitter(f32 left, f32 top, f32 width, f32 height, f32 nearz, f32 farz, u32 field)
+void GXSetViewportJitter(f32 left, f32 top, f32 width, f32 height, f32 nearz,
+                         f32 farz, u32 field)
 {
     f32 temp_f31;
     f32 temp_f30;

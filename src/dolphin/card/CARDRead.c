@@ -3,7 +3,8 @@
 #define OFFSET(n, a) (((u32) (n)) & ((a) -1))
 #define TRUNC(n, a) (((u32) (n)) & ~((a) -1))
 
-s32 __CARDSeek(CARDFileInfo* fileInfo, s32 length, s32 offset, CARDControl** pcard)
+s32 __CARDSeek(CARDFileInfo* fileInfo, s32 length, s32 offset,
+               CARDControl** pcard)
 {
     CARDControl* card;
     CARDDir* dir;
@@ -17,14 +18,16 @@ s32 __CARDSeek(CARDFileInfo* fileInfo, s32 length, s32 offset, CARDControl** pca
     }
 
     if (!CARDIsValidBlockNo(card, fileInfo->iBlock) ||
-        card->cBlock * card->sectorSize <= fileInfo->offset) {
+        card->cBlock * card->sectorSize <= fileInfo->offset)
+    {
         return __CARDPutControlBlock(card, CARD_RESULT_FATAL_ERROR);
     }
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileInfo->fileNo];
     if (ent->length * card->sectorSize <= offset ||
-        ent->length * card->sectorSize < offset + length) {
+        ent->length * card->sectorSize < offset + length)
+    {
         return __CARDPutControlBlock(card, CARD_RESULT_LIMIT);
     }
 
@@ -71,7 +74,9 @@ static void ReadCallback(s32 chan, s32 result)
         goto error;
     }
 
-    length = (s32) TRUNC(fileInfo->offset + card->sectorSize, card->sectorSize) - fileInfo->offset;
+    length =
+        (s32) TRUNC(fileInfo->offset + card->sectorSize, card->sectorSize) -
+        fileInfo->offset;
     fileInfo->length -= length;
     if (fileInfo->length <= 0) {
         goto error;
@@ -85,9 +90,11 @@ static void ReadCallback(s32 chan, s32 result)
         goto error;
     }
 
-    result = __CARDRead(chan, card->sectorSize * fileInfo->iBlock,
-                        (fileInfo->length < card->sectorSize) ? fileInfo->length : card->sectorSize,
-                        card->buffer, ReadCallback);
+    result =
+        __CARDRead(chan, card->sectorSize * fileInfo->iBlock,
+                   (fileInfo->length < card->sectorSize) ? fileInfo->length
+                                                         : card->sectorSize,
+                   card->buffer, ReadCallback);
     if (result < 0) {
         goto error;
     }
@@ -109,7 +116,8 @@ s32 CARDReadAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset,
     CARDDir* dir;
     CARDDir* ent;
 
-    if (OFFSET(offset, CARD_SEG_SIZE) != 0 || OFFSET(length, CARD_SEG_SIZE) != 0) {
+    if (OFFSET(offset, CARD_SEG_SIZE) != 0 ||
+        OFFSET(length, CARD_SEG_SIZE) != 0) {
         return CARD_RESULT_FATAL_ERROR;
     }
     result = __CARDSeek(fileInfo, length, offset, &card);
@@ -132,9 +140,11 @@ s32 CARDReadAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset,
     card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
 
     offset = (s32) OFFSET(fileInfo->offset, card->sectorSize);
-    length = (length < card->sectorSize - offset) ? length : card->sectorSize - offset;
-    result = __CARDRead(fileInfo->chan, card->sectorSize * fileInfo->iBlock + offset, length,
-                        buf, ReadCallback);
+    length = (length < card->sectorSize - offset) ? length
+                                                  : card->sectorSize - offset;
+    result =
+        __CARDRead(fileInfo->chan, card->sectorSize * fileInfo->iBlock + offset,
+                   length, buf, ReadCallback);
     if (result < 0) {
         __CARDPutControlBlock(card, result);
     }
@@ -143,7 +153,8 @@ s32 CARDReadAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset,
 
 int CARDRead(CARDFileInfo* fileinfo, void* buf, u32 length, u32 offset)
 {
-    int result = CARDReadAsync(fileinfo, buf, length, offset, __CARDSyncCallback);
+    int result =
+        CARDReadAsync(fileinfo, buf, length, offset, __CARDSyncCallback);
     if (result < 0) {
         return result;
     }

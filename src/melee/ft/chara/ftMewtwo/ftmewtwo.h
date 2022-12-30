@@ -9,7 +9,6 @@
 #include <melee/it/itkind.h>
 
 typedef enum ftMewtwoAction {
-
     AS_FTCOMMON = 340,
     AS_MEWTWO_SPECIALN_START,
     AS_MEWTWO_SPECIALN_LOOP,
@@ -36,7 +35,9 @@ typedef enum ftMewtwoAction {
 
 // Flag values read during Confusion's reflect think function
 
-#define CONFUSION_REFLECT_NONE 0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is either 1 or 2 because 0 does nothing).
+#define CONFUSION_REFLECT_NONE                                                 \
+    0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is
+      // either 1 or 2 because 0 does nothing).
 
 #define CONFUSION_REFLECT_ON 1 // Toggle reflect bubble on.
 
@@ -46,29 +47,52 @@ typedef enum ftMewtwoAction {
 
 // SpecialN/SpecialAirN //
 
-#define FTMEWTWO_SPECIALN_ACTION_FLAG FIGHTER_MATANIM_NOUPDATE | FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222
+#define FTMEWTWO_SPECIALN_ACTION_FLAG                                          \
+    FIGHTER_MATANIM_NOUPDATE | FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE |     \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222
 
-#define FTMEWTWO_SPECIALN_COLL_FLAG FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTMEWTWO_SPECIALN_COLL_FLAG                                            \
+    FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
+        FIGHTER_UNK_0x2227
 
 // SpecialS/SpecialAirS //
 
-#define FTMEWTWO_SPECIALS_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTMEWTWO_SPECIALS_COLL_FLAG                                            \
+    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
+        FIGHTER_UNK_0x2227
 
 // SpecialHi/SpecialAirHi //
 
-#define FTMEWTWO_SPECIALHI_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTMEWTWO_SPECIALHI_COLL_FLAG                                           \
+    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
+        FIGHTER_UNK_0x2227
 
 // SpecialLw/SpecialAirLw //
 
-#define FTMEWTWO_SPECIALLW_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTMEWTWO_SPECIALLW_COLL_FLAG                                           \
+    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
+        FIGHTER_UNK_0x2227
 
 typedef struct _ftMewtwoAttributes {
     // NEUTRAL SPECIAL - SHADOW BALL (SpecialN/SpecialAirN) //
 
-    f32 x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES; // Number of frames each iteration cycle lasts?
+    f32 x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES; // Number of frames each iteration
+                                            // cycle lasts?
     f32 x4_MEWTWO_SHADOWBALL_GROUND_RECOIL_X;
     f32 x8_MEWTWO_SHADOWBALL_AIR_RECOIL_X;
-    s32 xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS; // Number of iterations required for full charge
+    s32 xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS; // Number of iterations required
+                                                // for full charge
     s32 x10_MEWTWO_SHADOWBALL_RELEASE_LAG;
     f32 x14_MEWTWO_SHADOWBALL_LANDING_LAG;
 
@@ -89,7 +113,8 @@ typedef struct _ftMewtwoAttributes {
     f32 x5C_MEWTWO_TELEPORT_MOMENTUM;
     f32 x60_MEWTWO_TELEPORT_MOMENTUM_ADD;
     f32 x64_MEWTWO_TELEPORT_DRIFT;
-    s32 x68_MEWTWO_TELEPORT_ANGLE_CLAMP; // Clamp teleport travel if surface angle is greater than this value
+    s32 x68_MEWTWO_TELEPORT_ANGLE_CLAMP; // Clamp teleport travel if surface
+                                         // angle is greater than this value
     f32 x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
     f32 x70_MEWTWO_TELEPORT_FREEFALL_MOBILITY;
     f32 x74_MEWTWO_TELEPORT_LANDING_LAG;
@@ -188,7 +213,8 @@ void ftMewtwo_SpecialS_OnReflect(HSD_GObj* fighter_gobj);
 
 // Neutral Special - Shadow Ball (SpecialN/SpecialAirN) //
 
-s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel, s32* chargeCycles);
+s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel,
+                                     s32* chargeCycles);
 BOOL ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* fighter_gobj);
 BOOL ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_SetNULL(HSD_GObj* fighter_gobj);

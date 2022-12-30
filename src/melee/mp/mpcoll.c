@@ -36,16 +36,17 @@ void func_80041C8C(CollData* cd)
     lbl_804D64A4 = 0;
     if (g_debugLevel >= 3) {
         if (!(cd->x4_vec.x < 45000.0f) || !(cd->x4_vec.x > -45000.0f) ||
-            !(cd->x4_vec.y < 45000.0f) || !(cd->x4_vec.y > -45000.0f)) {
+            !(cd->x4_vec.y < 45000.0f) || !(cd->x4_vec.y > -45000.0f))
+        {
             if (func_80086960(cd->x0_gobj) != 0) {
-                OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
-                         "mpcoll.c", 203,
-                         func_80086BE0(cd->x0_gobj), func_800874BC(cd->x0_gobj),
-                         cd->x4_vec.x, cd->x4_vec.y);
+                OSReport(
+                    "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
+                    "mpcoll.c", 203, func_80086BE0(cd->x0_gobj),
+                    func_800874BC(cd->x0_gobj), cd->x4_vec.x, cd->x4_vec.y);
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
-                         "mpcoll.c", 212, cd->x0_gobj->classifier,
-                         cd->x4_vec.x, cd->x4_vec.y);
+                         "mpcoll.c", 212, cd->x0_gobj->classifier, cd->x4_vec.x,
+                         cd->x4_vec.y);
                 if (cd->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(cd->x0_gobj));
                 }
@@ -164,9 +165,9 @@ void func_80041EE4(CollData* cd)
 }
 
 // 80042078 https://decomp.me/scratch/hM7h8
-void func_80042078(CollData* cd, HSD_GObj* gobj,
-                   HSD_JObj* arg1, HSD_JObj* arg2, HSD_JObj* arg3, HSD_JObj* arg4,
-                   HSD_JObj* arg5, HSD_JObj* arg6, HSD_JObj* arg7, f32 arg9)
+void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1, HSD_JObj* arg2,
+                   HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5,
+                   HSD_JObj* arg6, HSD_JObj* arg7, f32 arg9)
 {
     cd->x0_gobj = gobj;
     cd->x104 = 1;
@@ -200,7 +201,8 @@ void func_80042078(CollData* cd, HSD_GObj* gobj,
 }
 
 // 8004220C https://decomp.me/scratch/nOinn
-void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
+void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3,
+                   f32 arg4)
 {
     cd->x0_gobj = gobj;
     cd->x104 = 2;
@@ -258,21 +260,20 @@ void func_80042384(CollData* cd)
         cd->x84_ecb.top.y = 1.0f + cd->x84_ecb.bottom.y;
     }
     if (cd->x84_ecb.right.y > cd->x84_ecb.top.y ||
-        cd->x84_ecb.right.y < cd->x84_ecb.bottom.y) {
+        cd->x84_ecb.right.y < cd->x84_ecb.bottom.y)
+    {
         tmp = 0.5f * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
         cd->x84_ecb.left.y = tmp;
         cd->x84_ecb.right.y = tmp;
     }
     tmp = cd->x84_ecb.top.y;
     tmp2 = cd->x84_ecb.right.y;
-    if (tmp - tmp2 < 0.001f ||
-        tmp2 - cd->x84_ecb.bottom.y < 0.001f) {
+    if (tmp - tmp2 < 0.001f || tmp2 - cd->x84_ecb.bottom.y < 0.001f) {
         cd->x84_ecb.right.y = 0.5f * (tmp + cd->x84_ecb.bottom.y);
     }
     tmp = cd->x84_ecb.top.y;
     tmp2 = cd->x84_ecb.left.y;
-    if (tmp - tmp2 < 0.001f ||
-        tmp2 - cd->x84_ecb.bottom.y < 0.001f) {
+    if (tmp - tmp2 < 0.001f || tmp2 - cd->x84_ecb.bottom.y < 0.001f) {
         cd->x84_ecb.left.y = 0.5f * (tmp + cd->x84_ecb.bottom.y);
     }
 }
@@ -320,11 +321,11 @@ void func_800424DC(CollData* cd, u32 flags)
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
 
-#define EXPAND_ECB_FOR(joint)              \
-    func_8000B1CC(joint, NULL, &vec);      \
-    dx = vec.x - temp_x;                   \
-    dy = vec.y - temp_y;                   \
-    update_min_max(&left_x, &right_x, dx); \
+#define EXPAND_ECB_FOR(joint)                                                  \
+    func_8000B1CC(joint, NULL, &vec);                                          \
+    dx = vec.x - temp_x;                                                       \
+    dy = vec.y - temp_y;                                                       \
+    update_min_max(&left_x, &right_x, dx);                                     \
     update_min_max(&bottom_y, &top_y, dy);
 
         EXPAND_ECB_FOR(cd->x10C_joint[1]);
@@ -602,7 +603,8 @@ void func_80042DB0(CollData* ecb, f32 time)
         ecb->x34_flags.bits.b6 = 0;
     }
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.top, &ecb->x84_ecb.top);
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom, &ecb->x84_ecb.bottom);
+    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom,
+                     &ecb->x84_ecb.bottom);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.left, &ecb->x84_ecb.left);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right, &ecb->x84_ecb.right);
     if (fpclassify(ecb->xA4_ecbCurrCorrect.top.x) == FP_NAN ||
@@ -612,7 +614,8 @@ void func_80042DB0(CollData* ecb, f32 time)
         fpclassify(ecb->xA4_ecbCurrCorrect.left.x) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.left.y) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.right.x) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN) {
+        fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN)
+    {
         OSReport("error\n");
         __assert("mpcoll.c", 1193, lbl_804D3948);
     }
@@ -673,22 +676,37 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
     if (arg0->x14C_ground.index != -1) {
         temp_r3 = func_801CA284(&arg0->x4_vec, arg0->x14C_ground.index);
         if (temp_r3 != 0) {
-            arg0->x14C_ground.unk = (arg0->x14C_ground.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
+            arg0->x14C_ground.unk =
+                (arg0->x14C_ground.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
         }
     }
-    if ((arg1 != 0) || (arg0->x134_envFlags & 0x800000) || (arg0->x134_envFlags & 0x100000) || (arg0->x134_envFlags & 0x200000)) {
-        func_80043324_inline(arg0, arg0->x14C_ground.index, arg2, arg0->x4_vec.y - arg0->x1C_vec.y);
+    if ((arg1 != 0) || (arg0->x134_envFlags & 0x800000) ||
+        (arg0->x134_envFlags & 0x100000) || (arg0->x134_envFlags & 0x200000))
+    {
+        func_80043324_inline(arg0, arg0->x14C_ground.index, arg2,
+                             arg0->x4_vec.y - arg0->x1C_vec.y);
     }
     if (arg0->x134_envFlags & 0x6000) {
-        func_80043324_inline2(arg0, arg0->x188_ceiling.index, arg2, arg0->x4_vec.y - arg0->x1C_vec.y);
+        func_80043324_inline2(arg0, arg0->x188_ceiling.index, arg2,
+                              arg0->x4_vec.y - arg0->x1C_vec.y);
     }
     if (g_debugLevel >= 3) {
-        if (!(arg0->x4_vec.x < 45000.0f) || !(arg0->x4_vec.x > -45000.0f) || !(arg0->x4_vec.y < 45000.0f) || !(arg0->x4_vec.y > -45000.0f)) {
+        if (!(arg0->x4_vec.x < 45000.0f) || !(arg0->x4_vec.x > -45000.0f) ||
+            !(arg0->x4_vec.y < 45000.0f) || !(arg0->x4_vec.y > -45000.0f))
+        {
             if (func_80086960(arg0->x0_gobj)) {
-                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) ply=%d ms=%d\n", "mpcoll.c", 1350, arg0->x1C_vec.x, arg0->x1C_vec.y, arg0->x4_vec.x, arg0->x4_vec.y, func_80086BE0(arg0->x0_gobj), func_800874BC(arg0->x0_gobj));
+                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
+                         "ply=%d ms=%d\n",
+                         "mpcoll.c", 1350, arg0->x1C_vec.x, arg0->x1C_vec.y,
+                         arg0->x4_vec.x, arg0->x4_vec.y,
+                         func_80086BE0(arg0->x0_gobj),
+                         func_800874BC(arg0->x0_gobj));
             } else {
                 s32 gobjid = arg0->x0_gobj->classifier;
-                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) gobjid=%d\n", "mpcoll.c", 1358, arg0->x1C_vec.x, arg0->x1C_vec.y, arg0->x4_vec.x, arg0->x4_vec.y, gobjid);
+                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
+                         "gobjid=%d\n",
+                         "mpcoll.c", 1358, arg0->x1C_vec.x, arg0->x1C_vec.y,
+                         arg0->x4_vec.x, arg0->x4_vec.y, gobjid);
                 if (arg0->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(arg0->x0_gobj));
                 }
@@ -701,7 +719,8 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
 // 80043558
 void func_80043558(CollData* arg0, s32 arg1)
 {
-#ifdef NON_MATCHING // TODO: dummy stack in func_80043324_inline2 breaks this function
+#ifdef NON_MATCHING // TODO: dummy stack in func_80043324_inline2 breaks this
+                    // function
     s32 temp_r3;
 
     temp_r3 = func_80054C6C(arg1);
@@ -883,16 +902,17 @@ void func_800439FC(CollData* arg0)
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
-    if (func_800501CC(
-            (arg0->x188_ceiling.normal.y * var_f31) + temp_f3,
-            -((arg0->x188_ceiling.normal.x * var_f31) - temp_f4),
-            temp_f3, temp_f4,
-            &arg0->x140,
-            NULL, NULL, NULL,
-            arg0->x48, arg0->x4C) != 0) {
+    if (func_800501CC((arg0->x188_ceiling.normal.y * var_f31) + temp_f3,
+                      -((arg0->x188_ceiling.normal.x * var_f31) - temp_f4),
+                      temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL,
+                      arg0->x48, arg0->x4C) != 0)
+    {
         sp10.x = arg0->x140.x - var_f31;
         sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (func_8004E090(arg0->x188_ceiling.index, (Point3d*) &sp10, &spC, (u32*) &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal) != -1) {
+        if (func_8004E090(arg0->x188_ceiling.index, (Point3d*) &sp10, &spC,
+                          (u32*) &arg0->x188_ceiling.unk,
+                          &arg0->x188_ceiling.normal) != -1)
+        {
             arg0->x4_vec.y += spC;
             arg0->x4_vec.x = sp10.x;
         }
@@ -914,10 +934,17 @@ void func_80043ADC(CollData* arg0)
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
-    if (func_800509B8(-((arg0->x188_ceiling.normal.y * var_f31) - temp_f3), ((arg0->x188_ceiling.normal.x * var_f31) + temp_f4), temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL, arg0->x48, arg0->x4C) != 0) {
+    if (func_800509B8(-((arg0->x188_ceiling.normal.y * var_f31) - temp_f3),
+                      ((arg0->x188_ceiling.normal.x * var_f31) + temp_f4),
+                      temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL,
+                      arg0->x48, arg0->x4C) != 0)
+    {
         sp10.x = arg0->x140.x + var_f31;
         sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (func_8004E090(arg0->x188_ceiling.index, &sp10, &spC, &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal) != -1) {
+        if (func_8004E090(arg0->x188_ceiling.index, &sp10, &spC,
+                          &arg0->x188_ceiling.unk,
+                          &arg0->x188_ceiling.normal) != -1)
+        {
             arg0->x4_vec.y += spC;
             arg0->x4_vec.x = sp10.x;
         }
@@ -933,13 +960,13 @@ s32 func_80043BBC(CollData* arg0, s32* arg1)
 
     temp_r31 = func_80052700(arg0->x14C_ground.index);
     new_var = arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.bottom.x;
-    if ((func_800501CC(
-             new_var,
-             arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y,
-             arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.right.x,
-             arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y,
-             NULL, &sp10, NULL, NULL, arg0->x48, arg0->x4C) != 0) &&
-        (sp10 != temp_r31)) {
+    if ((func_800501CC(new_var,
+                       arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y,
+                       arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.right.x,
+                       arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y, NULL,
+                       &sp10, NULL, NULL, arg0->x48, arg0->x4C) != 0) &&
+        (sp10 != temp_r31))
+    {
         *arg1 = sp10;
         return 1;
     }
@@ -972,14 +999,20 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     temp_f1_2 = arg0->x4_vec.y;
     sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
     if (func_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
-        if (func_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C, -((arg0->x14C_ground.normal.y * var_f31) - sp20), (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0) {
+        if (func_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C,
+                          -((arg0->x14C_ground.normal.y * var_f31) - sp20),
+                          (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0)
+        {
             sp20 = arg0->x140.x - var_f31;
             if (arg2 != 0) {
                 sp24 = arg0->x4_vec.y;
             } else {
                 sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
-            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30, &arg0->x14C_ground.unk, &arg0->x14C_ground.normal) != -1) {
+            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
+                              &arg0->x14C_ground.unk,
+                              &arg0->x14C_ground.normal) != -1)
+            {
                 arg0->x4_vec.y += sp30;
                 arg0->x4_vec.x = sp20;
             }
@@ -990,16 +1023,23 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
         temp_f2 = sp24;
         temp_f1_3 = sp20 - temp_f4;
         sp20 = -((temp_f4 * var_f31) - temp_f1_3);
-        sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y - arg0->xA4_ecbCurrCorrect.bottom.y)) - temp_f2);
+        sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y -
+                             arg0->xA4_ecbCurrCorrect.bottom.y)) -
+                 temp_f2);
         sp8 = 0;
-        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0) {
+        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C,
+                          0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0)
+        {
             sp20 = arg0->x140.x;
             if (arg2 != 0) {
                 sp24 = arg0->x4_vec.y;
             } else {
                 sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
-            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30, &arg0->x14C_ground.unk, &arg0->x14C_ground.normal) != -1) {
+            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
+                              &arg0->x14C_ground.unk,
+                              &arg0->x14C_ground.normal) != -1)
+            {
                 arg0->x4_vec.y += sp30;
                 arg0->x4_vec.x = sp20;
             }

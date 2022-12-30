@@ -6,24 +6,20 @@
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/os/OSContext.h>
 
-#define GX_WRITE_U8(ub) \
-    WGPIPE.u8 = ((u8*) &ub);
+#define GX_WRITE_U8(ub) WGPIPE.u8 = ((u8*) &ub);
 
-#define GX_WRITE_U16(us) \
-    WGPIPE.u16 = (*(u16*) &us);
+#define GX_WRITE_U16(us) WGPIPE.u16 = (*(u16*) &us);
 
-#define GX_WRITE_U32(ui) \
-    WGPIPE.u32 = (*(u32*) &ui);
+#define GX_WRITE_U32(ui) WGPIPE.u32 = (*(u32*) &ui);
 
-#define GX_WRITE_F32(f) \
-    WGPIPE.f32 = (*(f32*) &f);
+#define GX_WRITE_F32(f) WGPIPE.f32 = (*(f32*) &f);
 
-#define INSERT_FIELD(reg, value, nbits, shift) \
-    (reg) = ((u32) (reg) & ~(((1 << (nbits)) - 1) << (shift))) | ((u32) (value) << (shift));
+#define INSERT_FIELD(reg, value, nbits, shift)                                 \
+    (reg) = ((u32) (reg) & ~(((1 << (nbits)) - 1) << (shift))) |               \
+            ((u32) (value) << (shift));
 
 // GXFifoObj private fields
-typedef struct
-{
+typedef struct {
     void* base;      // at 0x00
     void* end;       // at 0x04
     u32 size;        // at 0x08
@@ -38,8 +34,7 @@ typedef struct
 typedef void* (*GXTexRegionCallback)(void); // signature unknown
 
 // https://github.com/kiwi515/open_rvl/blob/366b440e58f030aa0aacc9316d2717289d58fe16/include/GX/GXInit.h#L9-L41
-typedef struct
-{
+typedef struct {
     union {
         u32 u32;
         u16 u16[2];
@@ -97,8 +92,7 @@ typedef struct
     u32 dirtyFlags;                     // at 0x570
 } GXContext;
 
-typedef struct
-{
+typedef struct {
     u16 z_mode;
     u16 color_settings;
     u16 dst_alpha;
@@ -123,8 +117,7 @@ extern volatile union {
 
 } WGPIPE AT_ADDRESS(0xCC008000);
 
-typedef struct
-{
+typedef struct {
     u16 x0;
     s16 x2;
     s16 x4;
@@ -132,8 +125,7 @@ typedef struct
     u8 x8_pad[0x38 - 0x8];
 } __GXGPFifo;
 
-typedef struct
-{
+typedef struct {
     GXContext* main;
     GXContext* null;
 } GXContexts;

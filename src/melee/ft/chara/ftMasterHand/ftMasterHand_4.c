@@ -16,7 +16,9 @@ void func_801510B0(HSD_GObj* gobj)
     r31_fp->xB0_pos.z = 0.0f;
     r31_fp->cb.x21BC_callback_Accessory4 = &lbl_801511FC;
     r31_fp->x2340_stateVar1 = 0;
-    func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, lbl_801511FC */); // probs same file if lbl_801511FC is getting implicitly passed.
+    func_800881D8(r31_fp, 0x4E201, 0x7F,
+                  0x40 /*, lbl_801511FC */); // probs same file if lbl_801511FC
+                                             // is getting implicitly passed.
     // func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, lbl_801511FC);
     func_8015C09C(gobj, -1.0f);
 }

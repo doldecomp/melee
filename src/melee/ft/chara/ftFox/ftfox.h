@@ -12,7 +12,6 @@
 #define FTFOX_APPEALS_ATTACKID 0x72
 
 typedef enum ftFoxAction {
-
     AS_FTCOMMON = 340,
     AS_FOX_SPECIALN_START,
     AS_FOX_SPECIALN_LOOP,
@@ -56,11 +55,23 @@ typedef enum ftFoxAction {
 
 // SpecialHi (Firefox/Firebird)
 
-#define FTFOX_SPECIALHI_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTFOX_SPECIALHI_COLL_FLAG                                              \
+    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |     \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-#define FTFOX_SPECIALLW_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTFOX_SPECIALLW_COLL_FLAG                                              \
+    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |     \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-#define FTFOX_SPECIALS_COLL_FLAG FIGHTER_MATANIM_NOUPDATE | FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTFOX_SPECIALS_COLL_FLAG                                               \
+    FIGHTER_MATANIM_NOUPDATE | FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE |  \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 typedef struct _ftFoxAttributes {
     // NEUTRAL SPECIAL - BLASTER //
@@ -77,7 +88,8 @@ typedef struct _ftFoxAttributes {
 
     // SIDE SPECIAL - FOX ILLUSION / FALCO PHANTASM //
 
-    f32 x24_FOX_ILLUSION_GRAVITY_DELAY; // Frames required to pass before gravity is applied
+    f32 x24_FOX_ILLUSION_GRAVITY_DELAY; // Frames required to pass before
+                                        // gravity is applied
     f32 x28_FOX_ILLUSION_GROUND_VEL_X;  // Horizontal velocity?
     f32 x2C_FOX_ILLUSION_UNK1;
     f32 x30_FOX_ILLUSION_UNK2;
@@ -96,24 +108,33 @@ typedef struct _ftFoxAttributes {
     f32 x58_FOX_FIREFOX_VEL_X; // Initial velocity
     f32 x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X;
     f32 x60_FOX_FIREFOX_FALL_ACCEL;
-    f32 x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN; // Minimum control stick range required for direction change
-    f32 x68_FOX_FIREFOX_DURATION;                  // Amount of frames Firefox/Firebird travels
+    f32 x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN; // Minimum control stick
+                                                   // range required for
+                                                   // direction change
+    f32 x68_FOX_FIREFOX_DURATION; // Amount of frames Firefox/Firebird travels
     s32 x6C_FOX_FIREFOX_BOUNCE_VAR;
     f32 x70_FOX_FIREFOX_DURATION_END;
     f32 x74_FOX_FIREFOX_SPEED;
     f32 x78_FOX_FIREFOX_REVERSE_ACCEL; // ???
     f32 x7C_FOX_FIREFOX_GROUND_MOMENTUM_END;
     f32 x80_FOX_FIREFOX_UNK2;
-    f32 x84_FOX_FIREFOX_BOUND_VEL_X;            // Horizontal velocity of SpecialHiBound action state
-    f32 x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN; // Minimum control stick range required to change character's facing direction
+    f32 x84_FOX_FIREFOX_BOUND_VEL_X; // Horizontal velocity of SpecialHiBound
+                                     // action state
+    f32 x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN; // Minimum control stick range
+                                                // required to change
+                                                // character's facing direction
     f32 x8C_FOX_FIREFOX_FREEFALL_MOBILITY;
     f32 x90_FOX_FIREFOX_LANDING_LAG;
     f32 x94_FOX_FIREFOX_BOUND_ANGLE;
 
     // DOWN SPECIAL - REFLECTOR //
 
-    f32 x98_FOX_REFLECTOR_RELEASE_LAG; // Auto lag frames after initializing Reflector if B is not being held. Reflector is immediately released with no lag once these frames have passed.
-    f32 x9C_FOX_REFLECTOR_TURN_FRAMES; // Amount of turn frames for changing Reflector direction
+    f32 x98_FOX_REFLECTOR_RELEASE_LAG; // Auto lag frames after initializing
+                                       // Reflector if B is not being held.
+                                       // Reflector is immediately released with
+                                       // no lag once these frames have passed.
+    f32 x9C_FOX_REFLECTOR_TURN_FRAMES; // Amount of turn frames for changing
+                                       // Reflector direction
     f32 xA0_FOX_REFLECTOR_UNK1;
     s32 xA4_FOX_REFLECTOR_GRAVITY_DELAY;
     f32 xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
@@ -307,7 +328,8 @@ void ftFox_SpecialAirLwEnd_Action(HSD_GObj* fighter_gobj);
 void ftFox_SpecialS_CreateGFX(HSD_GObj* fighter_gobj);
 BOOL ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj);
 u32 ftFox_SpecialS_GetCmdVar2(HSD_GObj* fighter_gobj);
-void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index, Vec3* ghostPos);
+void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index,
+                                        Vec3* ghostPos);
 f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* fighter_gobj, s32 index);
 void ftFox_SpecialS_StartAction(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);

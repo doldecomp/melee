@@ -42,7 +42,8 @@ void func_800145C0(u8);
 
 struct _HSD_Archive* func_80015BD0(s32, s32);
 
-void func_80016C64(char*, void**, char*, s32, ...); // from lbarchive.s, vararg may start earlier
+void func_80016C64(char*, void**, char*, s32,
+                   ...); // from lbarchive.s, vararg may start earlier
 void* func_80016DBC(void*, ...);
 
 s32 func_800171CC(void*, ...);
@@ -132,7 +133,11 @@ void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj*);
 
 u32 Fighter_NewSpawn_80068E40();
 
-void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighter_gobj, s32 newAction, s32 flags, struct _HSD_GObj* otherObj, f32 animStart, f32 animSpeed, f32 animBlend);
+void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighter_gobj,
+                                        s32 newAction, s32 flags,
+                                        struct _HSD_GObj* otherObj,
+                                        f32 animStart, f32 animSpeed,
+                                        f32 animBlend);
 
 void func_8006E9B4();
 void func_8006EBA4(struct _HSD_GObj*);
@@ -268,7 +273,9 @@ void func_8007DB58();
 // void func_8007DBCC(Fighter*, s32);
 
 void func_8007E0E4();
-void func_8007E2D0(struct _Fighter*, s16, void (*)(struct _HSD_GObj*), void (*)(struct _HSD_GObj*), void (*)(struct _HSD_GObj*, struct _HSD_GObj*));
+void func_8007E2D0(struct _Fighter*, s16, void (*)(struct _HSD_GObj*),
+                   void (*)(struct _HSD_GObj*),
+                   void (*)(struct _HSD_GObj*, struct _HSD_GObj*));
 void func_8007E2F4(struct _Fighter*, s16);
 void func_8007E2FC(struct _HSD_GObj*);
 
@@ -301,7 +308,9 @@ BOOL func_8007FFD8(struct _Fighter*, f32);
 void func_8008021C();
 void func_8008031C();
 
-f32 func_800804EC(struct _Fighter*); // DataOffset_PlayerScale_MultiplyBySomething, returns fp->x40*fp->x34
+f32 func_800804EC(
+    struct _Fighter*); // DataOffset_PlayerScale_MultiplyBySomething,
+                       // returns fp->x40*fp->x34
 void func_800804FC();
 
 void func_800819A8();
@@ -446,7 +455,8 @@ void func_800C09B4(struct _HSD_GObj*);
 
 void func_800C0A98(struct _HSD_GObj* fighter_gobj);
 
-void func_800C1E64(struct _HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32); // UnclePunch Map file: AS_203_PassiveWalljump_Walljump
+void func_800C1E64(struct _HSD_GObj* pPlayerEntityStruct, s32, s32, u8,
+                   f32); // UnclePunch Map file: AS_203_PassiveWalljump_Walljump
 
 void func_800C2FD8();
 
@@ -534,7 +544,8 @@ u32 func_800DEEE8(struct _Fighter*, struct _Vec2*);
 void func_800DEF38();
 void func_800DF0D0();
 
-void ftCaptain_OnLoadForGanon(struct _Fighter*); // UnclePunch map file: FighterOnLoad_Ganondorf
+void ftCaptain_OnLoadForGanon(
+    struct _Fighter*); // UnclePunch map file: FighterOnLoad_Ganondorf
 void ftCFalcon_LoadSpecialAttrs(struct _HSD_GObj*);
 
 void ftFox_LoadSpecialAttrs(struct _HSD_GObj*);
@@ -812,7 +823,8 @@ struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
 void HSD_EraseRect();
 int HSD_GetHeap(void);
 
-void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1, void* xfb2);
+void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1,
+                void* xfb2);
 
 void func_80378280(u8, int);
 
@@ -823,7 +835,8 @@ void func_80379310();
 void HSD_MtxSRT();
 
 void* func_8037ABC8(struct _HSD_ObjAllocData* data);
-void func_8037AD20(struct _HSD_ObjAllocData* data, struct _HSD_ObjAllocLink* obj);
+void func_8037AD20(struct _HSD_ObjAllocData* data,
+                   struct _HSD_ObjAllocLink* obj);
 
 void HSD_IDSetup(void);
 
@@ -835,7 +848,8 @@ void func_8037EF28(Quaternion*, Quaternion*, Quaternion*, f32);
 void func_803881E4(void);
 void HSD_Panic(char*, u32, char*);
 
-struct _HSD_GObjProc* func_8038FD54(struct _HSD_GObj*, void (*)(struct _HSD_GObj*), u8);
+struct _HSD_GObjProc* func_8038FD54(struct _HSD_GObj*,
+                                    void (*)(struct _HSD_GObj*), u8);
 
 void func_80390228(struct _HSD_GObj*);
 

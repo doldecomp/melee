@@ -30,7 +30,8 @@ BOOL func_8000B09C(HSD_JObj* jobj)
         if (jobj->aobj != NULL && !(jobj->aobj->flags & AOBJ_NO_ANIM)) {
             return TRUE;
         }
-        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & JOBJ_INSTANCE)) {
+        if (jobj->child == NULL && jobj->next == NULL ||
+            (jobj->flags & JOBJ_INSTANCE)) {
             while (TRUE) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
@@ -57,7 +58,8 @@ BOOL func_8000B134(HSD_JObj* jobj)
         if (jobj->aobj != NULL && (jobj->aobj->flags & AOBJ_REWINDED)) {
             return TRUE;
         }
-        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & JOBJ_INSTANCE)) {
+        if (jobj->child == NULL && jobj->next == NULL ||
+            (jobj->flags & JOBJ_INSTANCE)) {
             while (TRUE) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
@@ -217,7 +219,8 @@ void func_8000BA44(HSD_DObj* dobj, f32 val)
     if (dobj->pobj != NULL) {
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
-            if (pobj_type(cur) == POBJ_SHAPEANIM && cur->u.x14_unk->aobj != NULL) {
+            if (pobj_type(cur) == POBJ_SHAPEANIM &&
+                cur->u.x14_unk->aobj != NULL) {
                 HSD_AObjSetRate(cur->u.x14_unk->aobj, val);
             }
         }
@@ -247,7 +250,8 @@ void func_8000BB24(HSD_DObj* dobj, f32 val)
     if (dobj->pobj != NULL) {
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
-            if (pobj_type(cur) == POBJ_SHAPEANIM && cur->u.x14_unk->aobj != NULL) {
+            if (pobj_type(cur) == POBJ_SHAPEANIM &&
+                cur->u.x14_unk->aobj != NULL) {
                 HSD_AObjReqAnim(cur->u.x14_unk->aobj, val);
             }
         }
@@ -380,7 +384,8 @@ typedef struct _UnkAnimContainer {
 
 void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _UnkAnimContainer* arg2)
 {
-    func_8000C07C(jobj, i, arg2->x4_anims, arg2->x8_matanims, arg2->xC_shapeanims);
+    func_8000C07C(jobj, i, arg2->x4_anims, arg2->x8_matanims,
+                  arg2->xC_shapeanims);
 }
 
 void func_8000C160(void* mem, int size)
@@ -899,8 +904,8 @@ lbl_8000CB3C:
 } // clang-format on
 #pragma peephole on
 
-static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc,
-                                 HSD_TExp* texp1, HSD_TExp* texp2)
+static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc, HSD_TExp* texp1,
+                                 HSD_TExp* texp2)
 {
     BOOL register_used[8];
     int i;

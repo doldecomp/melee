@@ -3,28 +3,23 @@
 
 #include <dolphin/types.h>
 
-typedef struct
-{
+typedef struct {
     f32 x, y, z;
 } Vec, *VecPtr, Point3d, *Point3dPtr;
 
-typedef struct
-{
+typedef struct {
     s16 x, y, z;
 } S16Vec, *S16VecPtr;
 
-typedef struct
-{
+typedef struct {
     s8 x, y, z;
 } S8Vec, *S8VecPtr;
 
-typedef struct
-{
+typedef struct {
     s32 x, y, z;
 } S32Vec, *S32VecPtr;
 
-typedef struct
-{
+typedef struct {
     f32 x, y, z, w;
 } Quaternion, *QuaternionPtr, Qtrn, *QtrnPtr;
 

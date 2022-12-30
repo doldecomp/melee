@@ -4,8 +4,7 @@
 static unsigned int lbl_804D5B58 = 0x80808080L; // = K1
 static unsigned int lbl_804D5B5C = 0xfefefeffL; // = K2
 
-typedef struct
-{
+typedef struct {
     const char* NextChar;
     int NullCharDetected;
 } __InStrCtrl;

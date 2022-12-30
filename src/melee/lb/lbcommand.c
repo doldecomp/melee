@@ -3,9 +3,9 @@
 extern const f64 lbl_804D79E0;
 
 void (*lbl_803B9840[16])(CommandInfo*) = {
-    Command_00, Command_01, Command_02, Command_03, Command_04,
-    Command_05, Command_06, Command_07, Command_08, Command_09,
-    NULL, NULL, NULL, NULL, NULL, NULL
+    Command_00, Command_01, Command_02, Command_03, Command_04, Command_05,
+    Command_06, Command_07, Command_08, Command_09, NULL,       NULL,
+    NULL,       NULL,       NULL,       NULL
 };
 
 // Reset
@@ -32,7 +32,8 @@ void Command_02(CommandInfo* info)
 void Command_03(CommandInfo* info)
 {
     info->event_return[info->loop_count++] = info->u.data_position + 1;
-    info->event_return[info->loop_count++] = (u32*) (*info->u.data_position & 0x3ffffff);
+    info->event_return[info->loop_count++] =
+        (u32*) (*info->u.data_position & 0x3ffffff);
     info->u.data_position += 1;
 }
 

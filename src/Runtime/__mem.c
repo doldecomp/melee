@@ -28,7 +28,8 @@ void __fill_mem(void* dst, int val, unsigned long n)
         if (v)
             v |= v << 24 | v << 16 | v << 8;
 
-        ((unsigned long*) dst) = ((unsigned long*) (((unsigned char*) dst) + 1)) - 1;
+        ((unsigned long*) dst) =
+            ((unsigned long*) (((unsigned char*) dst) + 1)) - 1;
 
         i = n >> 5;
 
@@ -53,7 +54,8 @@ void __fill_mem(void* dst, int val, unsigned long n)
             } while (--i);
         }
 
-        ((unsigned char*) dst) = ((unsigned char*) (((unsigned long*) dst) + 1)) - 1;
+        ((unsigned char*) dst) =
+            ((unsigned char*) (((unsigned long*) dst) + 1)) - 1;
 
         n &= 3;
     }

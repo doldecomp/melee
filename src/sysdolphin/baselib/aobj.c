@@ -150,7 +150,8 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
         HSD_FObjInterpretAnimAll(aobj->fobj, obj, update_func, rate);
     }
 
-    if (!(aobj->flags & AOBJ_LOOP) && (aobj->end_frame <= aobj->curr_frame) && aobj) {
+    if (!(aobj->flags & AOBJ_LOOP) && (aobj->end_frame <= aobj->curr_frame) &&
+        aobj) {
         HSD_FObjStopAnimAll(aobj->fobj, obj, update_func, aobj->framerate);
         aobj->flags |= AOBJ_NO_ANIM;
     }
@@ -197,11 +198,13 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
                     u16* ref_count = &hsd_obj->ref_count;
                     *ref_count += 1;
                     if (*ref_count == (u16) -1) {
-                        __assert("object.h", 0x5D, "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
+                        __assert("object.h", 0x5D,
+                                 "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
                     }
                 }
             } else {
-                phi_r30 = (HSD_Obj*) HSD_JObjLoadJoint((void*) aobjdesc->obj_id);
+                phi_r30 =
+                    (HSD_Obj*) HSD_JObjLoadJoint((void*) aobjdesc->obj_id);
             }
             if (aobj != NULL) {
                 if (aobj->hsd_obj != NULL) {
@@ -254,7 +257,9 @@ void HSD_AObjFree(HSD_AObj* aobj)
     HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*) aobj);
 }
 
-void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
+void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type,
+                         void (*func)(), AObj_Arg_Type arg_type,
+                         callbackArg* arg)
 {
     switch (arg_type) {
     case AOBJ_ARG_A:
@@ -296,37 +301,46 @@ void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type, void 
     }
 }
 
-void TObjForeachAnim(HSD_TObj* tobj, HSD_TypeMask mask, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
+void TObjForeachAnim(HSD_TObj* tobj, HSD_TypeMask mask, void (*func)(),
+                     AObj_Arg_Type arg_type, callbackArg* arg)
 {
     while (tobj != NULL) {
         if (mask & TOBJ_MASK && tobj->aobj != NULL) {
-            callbackForeachFunc(tobj->aobj, tobj, TOBJ_TYPE, func, arg_type, arg);
+            callbackForeachFunc(tobj->aobj, tobj, TOBJ_TYPE, func, arg_type,
+                                arg);
         }
         tobj = tobj->next;
     }
 }
 
-void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
+void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, void (*func)(),
+                     AObj_Arg_Type arg_type, callbackArg* arg)
 {
     while (robj != NULL) {
         if (mask & ROBJ_MASK && robj->aobj != NULL) {
-            callbackForeachFunc(robj->aobj, robj, ROBJ_TYPE, func, arg_type, arg);
+            callbackForeachFunc(robj->aobj, robj, ROBJ_TYPE, func, arg_type,
+                                arg);
         }
         robj = robj->next;
     }
 }
 
-void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
+void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, void (*func)(),
+                     AObj_Arg_Type arg_type, callbackArg* arg)
 {
     if (pobj == NULL)
         return;
 
-    if ((pobj->flags & 0x3000) == 0x1000 && pobj->u.x14_unk != NULL && pobj->u.x14_unk->aobj != NULL) {
-        callbackForeachFunc(pobj->u.x14_unk->aobj, pobj, POBJ_TYPE, func, arg_type, arg);
+    if ((pobj->flags & 0x3000) == 0x1000 && pobj->u.x14_unk != NULL &&
+        pobj->u.x14_unk->aobj != NULL)
+    {
+        callbackForeachFunc(pobj->u.x14_unk->aobj, pobj, POBJ_TYPE, func,
+                            arg_type, arg);
     }
 }
 
-void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
+void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, void (*func)(),
+                     AObj_Arg_Type arg_type, callbackArg* arg)
 {
     if (mobj == NULL)
         return;
@@ -337,13 +351,15 @@ void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
     TObjForeachAnim(mobj->tobj, mask, func, arg_type, arg);
 }
 
-void DObjForeachAnim(HSD_DObj* dobj, HSD_TypeMask mask, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
+void DObjForeachAnim(HSD_DObj* dobj, HSD_TypeMask mask, void (*func)(),
+                     AObj_Arg_Type arg_type, callbackArg* arg)
 {
     HSD_PObj* pobj;
 
     while (dobj != NULL) {
         if (mask & DOBJ_MASK && dobj->aobj != NULL) {
-            callbackForeachFunc(dobj->aobj, dobj, DOBJ_TYPE, func, arg_type, arg);
+            callbackForeachFunc(dobj->aobj, dobj, DOBJ_TYPE, func, arg_type,
+                                arg);
         }
         MObjForeachAnim(dobj->mobj, mask, func, arg_type, arg);
         pobj = dobj->pobj;
@@ -356,7 +372,8 @@ void DObjForeachAnim(HSD_DObj* dobj, HSD_TypeMask mask, void (*func)(), AObj_Arg
 
 // https://decomp.me/scratch/AOTU9
 #ifdef NON_MATCHING
-void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(), AObj_Arg_Type arg_type, callbackArg* arg)
+void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(),
+                     AObj_Arg_Type arg_type, callbackArg* arg)
 {
     HSD_JObj* child;
     HSD_JObj* new_var;

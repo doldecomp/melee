@@ -8,7 +8,8 @@
 /* 003FDDC0 */ extern const GXRenderModeObj lbl_804011E0;
 /* 003FDD84 */ extern const GXRenderModeObj lbl_804011A4;
 /* 003FDD48 */ extern const GXRenderModeObj GXNtsc480IntDf;
-/* 0033E33C */ extern void GXSetScissor(s32 left, s32 top, s32 width, s32 height);
+/* 0033E33C */ extern void GXSetScissor(s32 left, s32 top, s32 width,
+                                        s32 height);
 /* 0033E12C */ extern void GXLoadTexMtxImm(unk_t, u32, s32);
 /* 0033E0F0 */ extern void GXSetCurrentMtx(s32);
 /* 0033E0B0 */ extern void GXLoadNrmMtxImm(unk_t, s32);
@@ -24,7 +25,8 @@
 /* 0033D920 */ extern void GXSetColorUpdate(s32);
 /* 0033D81C */ extern void GXSetBlendMode(s32, s32, s32, s32);
 /* 0033D71C */ extern void GXSetFogRangeAdj(s8, u16, struct _GXFogAdjTbl*);
-/* 0033D554 */ extern void GXInitFogAdjTable(struct _GXFogAdjTbl*, u16, Mtx44Ptr);
+/* 0033D554 */ extern void GXInitFogAdjTable(struct _GXFogAdjTbl*, u16,
+                                             Mtx44Ptr);
 /* 0033D3A4 */ extern void GXSetFog(s32, GXColor, f32, f32, f32, f32);
 /* 0033D370 */ extern void GXSetNumTevStages(s8);
 /* 0033D1D0 */ extern void GXSetTevOrder(u32, s32, s32, s32);
@@ -48,16 +50,20 @@
 /* 0033C708 */ extern void GXSetIndTexOrder(s32, s32, s32);
 /* 0033C534 */ extern void GXSetIndTexCoordScale(s32, s32, s32);
 /* 0033C3D4 */ extern void GXSetIndTexMtx(s32, unk_t, s32);
-/* 0033C338 */ extern void GXSetTevIndirect(s32, s32, u8, s32, s32, s32, s32, s32);
+/* 0033C338 */ extern void GXSetTevIndirect(s32, s32, u8, s32, s32, s32, s32,
+                                            s32);
 /* 0033BC4C */ extern void GXLoadTlut(unk_t, s32);
 /* 0033BC04 */ extern void GXInitTlutObj(unk_t, u32, s32, u16);
 /* 0033BBB0 */ extern void GXLoadTexObj(unk_t, s32);
 /* 0033BA00 */ extern u8 GXGetTexObjFmt(unk_t);
 /* 0033B9F0 */ extern u16 GXGetTexObjHeight(unk_t, f32);
 /* 0033B9E0 */ extern u16 GXGetTexObjWidth(unk_t);
-/* 0033B84C */ extern void GXInitTexObjLOD(unk_t, s32, s32, s32, s8, s32, f32, f32, f32);
-/* 0033B804 */ extern void GXInitTexObjCI(unk_t, s32, u16, u16, s32, s32, s32, s8);
-/* 0033B590 */ extern void GXInitTexObj(unk_t, u32, u16, u16, s32, s32, s32, s8);
+/* 0033B84C */ extern void GXInitTexObjLOD(unk_t, s32, s32, s32, s8, s32, f32,
+                                           f32, f32);
+/* 0033B804 */ extern void GXInitTexObjCI(unk_t, s32, u16, u16, s32, s32, s32,
+                                          s8);
+/* 0033B590 */ extern void GXInitTexObj(unk_t, u32, u16, u16, s32, s32, s32,
+                                        s8);
 /* 0033B36C */ extern s32 GXGetTexBufferSize(u16, u16, u32, u8, u8);
 /* 0033A89C */ extern void GXCopyTex(u32, GXBool);
 /* 0033A72C */ extern void GXCopyDisp(u32, s8);

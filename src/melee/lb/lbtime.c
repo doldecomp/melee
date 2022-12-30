@@ -60,5 +60,6 @@ u32 func_8000AFBC(void)
 
 void func_8000B028(OSCalendarTime* td, unsigned int ticks)
 {
-    OSTicksToCalendarTime(ticks * (long long) ((*(unsigned int*) 0x800000F8) >> 2), td);
+    OSTicksToCalendarTime(
+        ticks * (long long) ((*(unsigned int*) 0x800000F8) >> 2), td);
 }

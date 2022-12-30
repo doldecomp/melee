@@ -26,7 +26,9 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
     memcpy(archive, src, sizeof(HSD_ArchiveHeader));
 
     if (archive->header.file_size != file_size) {
-        OSReport("HSD_ArchiveParse: byte-order mismatch! Please check data format %x %x\n", archive->header.file_size, file_size);
+        OSReport("HSD_ArchiveParse: byte-order mismatch! Please check data "
+                 "format %x %x\n",
+                 archive->header.file_size, file_size);
         return -1;
     }
 
@@ -62,7 +64,9 @@ void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols)
     int i;
 
     for (i = 0; i < archive->header.nb_public; i++) {
-        if (strcmp(archive->symbols + archive->public_info[i].symbol, symbols) == 0) // If both strings are equal, we've found the node
+        if (strcmp(archive->symbols + archive->public_info[i].symbol,
+                   symbols) ==
+            0) // If both strings are equal, we've found the node
             return archive->data + archive->public_info[i].offset;
         ;
     }
@@ -86,7 +90,8 @@ void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
 
     offset = -1;
     for (i = 0; i < archive->header.nb_extern; i++) {
-        if (strcmp(symbols, archive->symbols + archive->extern_info[i].symbol) == 0) {
+        if (strcmp(symbols,
+                   archive->symbols + archive->extern_info[i].symbol) == 0) {
             offset = archive->extern_info[i].offset;
             break;
         }

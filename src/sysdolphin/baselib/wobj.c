@@ -114,7 +114,9 @@ void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc)
 void HSD_WObjSetDefaultClass(HSD_WObjInfo* info)
 {
     if (info) {
-        assert_line(221, hsdIsDescendantOf(info, &hsdWObj)); // The line number here is totally made up, this function is removed in practice but the string isn't
+        assert_line(221, hsdIsDescendantOf(info, &hsdWObj)); // The line number here is totally made
+                                         // up, this function is removed in
+                                         // practice but the string isn't
     }
     default_class = info;
 }
@@ -124,7 +126,8 @@ HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc)
     if (desc != NULL) {
         HSD_WObj* wobj;
         HSD_ClassInfo* info;
-        if (desc->class_name == NULL || !(info = hsdSearchClassInfo(desc->class_name))) {
+        if (desc->class_name == NULL ||
+            !(info = hsdSearchClassInfo(desc->class_name))) {
             wobj = HSD_WObjAlloc();
         } else {
             wobj = hsdNew(info);
@@ -221,7 +224,8 @@ void HSD_WObjGetPosition(HSD_WObj* wobj, Vec* vec)
 
 HSD_WObj* HSD_WObjAlloc(void)
 {
-    HSD_WObj* wobj = (HSD_WObj*) hsdNew((HSD_ClassInfo*) (default_class ? default_class : &hsdWObj));
+    HSD_WObj* wobj = (HSD_WObj*) hsdNew(
+        (HSD_ClassInfo*) (default_class ? default_class : &hsdWObj));
     assert_line(591, wobj);
     return wobj;
 }
@@ -244,7 +248,9 @@ static void WObjAmnesia(HSD_ClassInfo* info)
 
 static void WObjInfoInit(void)
 {
-    hsdInitClassInfo(HSD_CLASS_INFO(&hsdWObj), HSD_CLASS_INFO(&hsdObj), "sysdolphin_base_library", "had_wobj", sizeof(HSD_WObjInfo), sizeof(HSD_WObj));
+    hsdInitClassInfo(HSD_CLASS_INFO(&hsdWObj), HSD_CLASS_INFO(&hsdObj),
+                     "sysdolphin_base_library", "had_wobj",
+                     sizeof(HSD_WObjInfo), sizeof(HSD_WObj));
     HSD_CLASS_INFO(&hsdWObj)->release = WObjRelease;
     HSD_CLASS_INFO(&hsdWObj)->amnesia = WObjAmnesia;
     HSD_WOBJ_INFO(&hsdWObj)->load = WObjLoad;

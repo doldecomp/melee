@@ -6,9 +6,15 @@ s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     f32 ground_vel = fp->xEC_ground_vel;
     f32 walking_velocity = fabs_inline(ground_vel);
-    if (walking_velocity >= (fp->x2360_f32 * (p_ftCommonData->x2C * fp->x110_attr.x118_WalkMaximumVelocity))) {
+    if (walking_velocity >=
+        (fp->x2360_f32 *
+         (p_ftCommonData->x2C * fp->x110_attr.x118_WalkMaximumVelocity)))
+    {
         return 2;
-    } else if (walking_velocity >= (fp->x2360_f32 * (p_ftCommonData->x28 * fp->x110_attr.x118_WalkMaximumVelocity))) {
+    } else if (walking_velocity >=
+               (fp->x2360_f32 *
+                (p_ftCommonData->x28 * fp->x110_attr.x118_WalkMaximumVelocity)))
+    {
         return 1;
     } else {
         return 0;
@@ -20,9 +26,14 @@ inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     f32 walking_velocity = fabs_inline(fp->xEC_ground_vel);
     f32 tempf = fp->x2360_f32;
-    if (walking_velocity >= (tempf * (p_ftCommonData->x2C * fp->x110_attr.x118_WalkMaximumVelocity))) {
+    if (walking_velocity >= (tempf * (p_ftCommonData->x2C *
+                                      fp->x110_attr.x118_WalkMaximumVelocity)))
+    {
         return 2;
-    } else if (walking_velocity >= (tempf * (p_ftCommonData->x28 * fp->x110_attr.x118_WalkMaximumVelocity))) {
+    } else if (walking_velocity >=
+               (tempf *
+                (p_ftCommonData->x28 * fp->x110_attr.x118_WalkMaximumVelocity)))
+    {
         return 1;
     } else {
         return 0;
@@ -32,13 +43,16 @@ inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
 s32 ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if ((fp->input.x620_lstick_x * fp->x2C_facing_direction) >= p_ftCommonData->x24) {
+    if ((fp->input.x620_lstick_x * fp->x2C_facing_direction) >=
+        p_ftCommonData->x24) {
         return 1;
     }
     return 0;
 }
 
-void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD, f32 argE, f32 argF)
+void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
+                           f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD,
+                           f32 argE, f32 argF)
 {
     s32 unused[3];
     s32 new_action_state;
@@ -48,7 +62,8 @@ void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
     fp->x2360_f32 = argF;
     walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
     new_action_state = arg1 + walking_state;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, new_action_state, arg2, 0, arg8, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, new_action_state, arg2, 0,
+                                       arg8, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     fp->x2340_f32 = fp->xEC_ground_vel;
     fp->x2344_stateVar2_s32 = arg1;
@@ -91,7 +106,8 @@ void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
     ftAnim_SetAnimRate(fighter_gobj, anim_rate);
 }
 
-void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj, void (*arg_cb)(HSD_GObj*, f32))
+void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
+                           void (*arg_cb)(HSD_GObj*, f32))
 {
     s32 action_state_sum;
     s32 action_state_base;
@@ -126,7 +142,8 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj, void (*arg_cb)(HSD_GObj*, f32
         float_result = func_8006F484(fighter_gobj);
         init_animFrame = fp->x894_currentAnimFrame;
         quotient = init_animFrame / float_result;
-        adjusted_animFrame = fp->x894_currentAnimFrame - (float_result * quotient);
+        adjusted_animFrame =
+            fp->x894_currentAnimFrame - (float_result * quotient);
         final_animFrame = var_f31 * (adjusted_animFrame / float_result);
         arg_cb(fighter_gobj, final_animFrame);
     }
@@ -153,9 +170,12 @@ void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
 
     fp = fighter_gobj->user_data;
     unused_float = ftx2360_f5 = fp->x2360_f32;
-    velocity_f1 = fp->input.x620_lstick_x * fp->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;
+    velocity_f1 = fp->input.x620_lstick_x *
+                  fp->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;
     velocity_f1 += getFtWalkAcceleration(fp, ftx2360_f5);
-    temp_f0 = (fp->input.x620_lstick_x * fp->x110_attr.x118_WalkMaximumVelocity) * ftx2360_f5;
+    temp_f0 =
+        (fp->input.x620_lstick_x * fp->x110_attr.x118_WalkMaximumVelocity) *
+        ftx2360_f5;
     if (temp_f0) {
         temp_f4 = fp->xEC_ground_vel / temp_f0;
         if (temp_f4 > 0.0f && temp_f4 < 1.0f) {

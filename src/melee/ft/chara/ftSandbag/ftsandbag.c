@@ -57,9 +57,13 @@ void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftSandbagAttributes);
 }
 
-void ftSandbag_OnKnockbackEnter() {}
+void ftSandbag_OnKnockbackEnter()
+{
+}
 
-void ftSandbag_OnKnockbackExit() {}
+void ftSandbag_OnKnockbackExit()
+{
+}
 
 void func_8014FBA4(HSD_GObj* gobj)
 {

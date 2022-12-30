@@ -2356,10 +2356,16 @@ void func_802F69C0(s32 player_idx, s32 arg1)
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24CA.unk80 != 0) && ((Player_GetPlayerSlotType(player_idx) == 0) || (Player_GetPlayerSlotType(player_idx) == 1)) && (Player_GetStocks(player_idx) == 0)) {
+    if ((big_thing->unk24CA.unk80 != 0) &&
+        ((Player_GetPlayerSlotType(player_idx) == 0) ||
+         (Player_GetPlayerSlotType(player_idx) == 1)) &&
+        (Player_GetStocks(player_idx) == 0))
+    {
         func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) && (func_802F7BB4 != NULL)) {
+    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
+        (func_802F7BB4 != NULL))
+    {
         func_802F7BB4(player_idx);
     }
 }
@@ -2383,10 +2389,16 @@ void func_802F6AF8(s32 player_idx)
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24CA.unk80 != 0) && ((Player_GetPlayerSlotType(player_idx) == 0) || (Player_GetPlayerSlotType(player_idx) == 1)) && (Player_GetStocks(player_idx) == 0)) {
+    if ((big_thing->unk24CA.unk80 != 0) &&
+        ((Player_GetPlayerSlotType(player_idx) == 0) ||
+         (Player_GetPlayerSlotType(player_idx) == 1)) &&
+        (Player_GetStocks(player_idx) == 0))
+    {
         func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) && (func_802F7AF8 != NULL)) {
+    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
+        (func_802F7AF8 != NULL))
+    {
         func_802F7AF8(player_idx);
     }
 }
@@ -2410,10 +2422,16 @@ void func_802F6C04(s32 player_idx)
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24CA.unk80 != 0) && ((Player_GetPlayerSlotType(player_idx) == 0) || (Player_GetPlayerSlotType(player_idx) == 1)) && (Player_GetStocks(player_idx) == 0)) {
+    if ((big_thing->unk24CA.unk80 != 0) &&
+        ((Player_GetPlayerSlotType(player_idx) == 0) ||
+         (Player_GetPlayerSlotType(player_idx) == 1)) &&
+        (Player_GetStocks(player_idx) == 0))
+    {
         func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) && (func_802F7C30 != NULL)) {
+    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
+        (func_802F7C30 != NULL))
+    {
         func_802F7C30(player_idx);
     }
 }
@@ -2437,10 +2455,16 @@ void func_802F6D10(s32 player_idx)
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24CA.unk80 != 0) && ((Player_GetPlayerSlotType(player_idx) == 0) || (Player_GetPlayerSlotType(player_idx) == 1)) && (Player_GetStocks(player_idx) == 0)) {
+    if ((big_thing->unk24CA.unk80 != 0) &&
+        ((Player_GetPlayerSlotType(player_idx) == 0) ||
+         (Player_GetPlayerSlotType(player_idx) == 1)) &&
+        (Player_GetStocks(player_idx) == 0))
+    {
         func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) && (func_802F7D08 != NULL)) {
+    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
+        (func_802F7D08 != NULL))
+    {
         func_802F7D08(player_idx);
     }
 }

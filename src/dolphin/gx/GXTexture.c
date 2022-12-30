@@ -165,49 +165,43 @@ void lbl_8033EBBC(void);
 void lbl_8033EBA8(void);
 
 static jtbl_t jtbl_804012B8 = {
-    &lbl_8033E7B4, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC,
-    &lbl_8033E7CC, &lbl_8033E7CC, &lbl_8033E7CC, &lbl_8033E7D8,
-    &lbl_8033E7B4, &lbl_8033E7C0, &lbl_8033E7CC, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7D8, &lbl_8033E7CC,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7CC, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7B4, &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7CC,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0,
-    &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC,
-    &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7B4, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7D8,
+    &lbl_8033E7B4, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC, &lbl_8033E7CC,
+    &lbl_8033E7CC, &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7C0,
+    &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7D8, &lbl_8033E7CC,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7D8, &lbl_8033E7C0,
+    &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0,
+    &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC, &lbl_8033E7CC,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7D8,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7D8,
     &lbl_8033E7CC
 };
 
 static jtbl_t jtbl_804013AC = {
-    &lbl_8033E908, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920,
-    &lbl_8033E920, &lbl_8033E920, &lbl_8033E920, &lbl_8033E92C,
-    &lbl_8033E908, &lbl_8033E914, &lbl_8033E920, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E914, &lbl_8033E92C, &lbl_8033E920,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E920, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E908, &lbl_8033E92C, &lbl_8033E914, &lbl_8033E920,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914,
-    &lbl_8033E914, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920,
-    &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E908, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E914, &lbl_8033E914, &lbl_8033E92C,
+    &lbl_8033E908, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920, &lbl_8033E920,
+    &lbl_8033E920, &lbl_8033E920, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E914,
+    &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914, &lbl_8033E92C, &lbl_8033E920,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E92C, &lbl_8033E914,
+    &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914,
+    &lbl_8033E914, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920, &lbl_8033E920,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E92C,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914, &lbl_8033E914, &lbl_8033E92C,
     &lbl_8033E920
 };
 
-static jtbl_t jtbl_804014A0 = {
-    &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB6C, &lbl_8033EB80,
-    &lbl_8033EB80, &lbl_8033EB80, &lbl_8033EB94, &lbl_8033EBBC,
-    &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB80, &lbl_8033EBBC,
-    &lbl_8033EBBC, &lbl_8033EBBC, &lbl_8033EBA8, NULL
-};
+static jtbl_t jtbl_804014A0 = { &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB6C,
+                                &lbl_8033EB80, &lbl_8033EB80, &lbl_8033EB80,
+                                &lbl_8033EB94, &lbl_8033EBBC, &lbl_8033EB58,
+                                &lbl_8033EB6C, &lbl_8033EB80, &lbl_8033EBBC,
+                                &lbl_8033EBBC, &lbl_8033EBBC, &lbl_8033EBA8,
+                                NULL };
 
 // https://decomp.me/scratch/FgNqV // 2963 (65.94%)
 #pragma push
@@ -594,7 +588,8 @@ asm unk_t GXInitTexObjCI()
 
 // https://decomp.me/scratch/K0q3K
 #pragma push
-asm unk_t GXInitTexObjLOD(){ // clang-format off
+asm unk_t GXInitTexObjLOD(){
+    // clang-format off
     nofralloc
 /* 8033EC6C 0033B84C  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 8033EC70 0033B850  C0 02 E8 98 */	lfs f0, lbl_804DE278(r2)

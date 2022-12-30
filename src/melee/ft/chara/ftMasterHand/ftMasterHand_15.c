@@ -237,11 +237,13 @@ void lbl_801535B0(HSD_GObj* gobj)
     fp = gobj->user_data;
     attr = fp->x10C_ftData->ext_attr;
     if (fp->x2200_ftcmd_var0 != 0) {
-        func_8015364C(gobj, fp->x5E8_fighterBones[8].x0_jobj, attr->xF8, attr->xFC);
+        func_8015364C(gobj, fp->x5E8_fighterBones[8].x0_jobj, attr->xF8,
+                      attr->xFC);
         fp->x2200_ftcmd_var0 = 0;
     }
     if (fp->x2204_ftcmd_var1 != 0) {
-        func_8015364C(gobj, fp->x5E8_fighterBones[13].x0_jobj, attr->x100, attr->x104);
+        func_8015364C(gobj, fp->x5E8_fighterBones[13].x0_jobj, attr->x100,
+                      attr->x104);
         fp->x2204_ftcmd_var1 = 0;
     }
 }
@@ -267,7 +269,8 @@ void func_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3)
     if (func_80087120(arg0) > attr->xEC) {
         phi_r29 = 1;
     }
-    func_802F0AE0(arg0, &sp28_leek, &sp1C_carrot, 0x7E, phi_r29, fp->x2C_facing_direction, attr->xD4, attr->xD8);
+    func_802F0AE0(arg0, &sp28_leek, &sp1C_carrot, 0x7E, phi_r29,
+                  fp->x2C_facing_direction, attr->xD4, attr->xD8);
 }
 
 // 80153730 150310
