@@ -42,7 +42,8 @@ float lbvector_sqrtf_accurate(float x);
 
 extern MtxPtr func_80369688(HSD_CObj*);
 
-Vec* lbvector_WorldToScreen(HSD_CObj* cobj, const Point3d* pos3d, Point3d* screenCoords, int d);
+Vec* lbvector_WorldToScreen(HSD_CObj* cobj, const Point3d* pos3d,
+                            Point3d* screenCoords, int d);
 void lbvector_CreateEulerMatrix(Mtx m, Vec* angles);
 float lbvector_8000E838(Vec* a, Vec* b, Vec* c, Vec* d);
 

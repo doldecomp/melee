@@ -21,7 +21,9 @@ void ClassInfoInit(HSD_ClassInfo* info)
 }
 #pragma pop
 
-void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, char* base_class_library, char* type, s32 info_size, s32 class_size)
+void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
+                      char* base_class_library, char* type, s32 info_size,
+                      s32 class_size)
 {
     class_info->head.flags = 1;
     class_info->head.library_name = base_class_library;
@@ -40,7 +42,8 @@ void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, cha
         }
         assert_line(94, class_info->head.obj_size >= parent_info->head.obj_size);
         assert_line(95, class_info->head.info_size >= parent_info->head.info_size);
-        memcpy(&class_info->alloc, &parent_info->alloc, parent_info->head.info_size - 0x28);
+        memcpy(&class_info->alloc, &parent_info->alloc,
+               parent_info->head.info_size - 0x28);
         class_info->head.next = parent_info->head.child;
         parent_info->head.child = class_info;
     }
@@ -68,7 +71,8 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
     assert_line(171, idx >= 0);
 
     if (idx >= nb_memory_list) {
-        if (nb_memory_list == 0) { // In this case, it's uninitialized and allocs the array
+        if (nb_memory_list == 0)
+        { // In this case, it's uninitialized and allocs the array
             s32 new_nb;
 
             for (new_nb = 32; idx >= new_nb; new_nb *= 2) {
@@ -95,7 +99,10 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
             }
 
             memcpy(new_list, memory_list, 4 * nb_memory_list);
-            memset(&new_list[nb_memory_list], 0, 4 * (new_nb - nb_memory_list)); // You start *after* existing ptrs and make sure memory is zero'd
+            memset(&new_list[nb_memory_list], 0,
+                   4 * (new_nb -
+                        nb_memory_list)); // You start *after* existing ptrs and
+                                          // make sure memory is zero'd
 
             old_list = memory_list;
             old_nb = OSRoundDown32B(nb_memory_list * 4);
@@ -172,7 +179,8 @@ void* hsdAllocMemPiece(s32 size)
     var_r28 = temp_r3_3->next;
     while (var_r28 != NULL) {
         if (var_r28->free_list != NULL) {
-            temp_r3_4 = GetMemoryEntry((s32) (var_r28->size - temp_r3_3->size + 0x1F) / 32 - 1);
+            temp_r3_4 = GetMemoryEntry(
+                (s32) (var_r28->size - temp_r3_3->size + 0x1F) / 32 - 1);
             if (temp_r3_4 == NULL) {
                 return NULL;
             }
@@ -325,10 +333,14 @@ inline BOOL hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
     }
     if (var_r29->head.obj_size != var_r28->head.obj_size)
         return FALSE;
-    while (var_r29->head.parent != NULL && var_r29->head.parent->head.obj_size == var_r29->head.obj_size) {
+    while (var_r29->head.parent != NULL &&
+           var_r29->head.parent->head.obj_size == var_r29->head.obj_size)
+    {
         var_r29 = var_r29->head.parent;
     }
-    while (var_r28->head.parent != NULL && var_r28->head.parent->head.obj_size == var_r28->head.obj_size) {
+    while (var_r28->head.parent != NULL &&
+           var_r28->head.parent->head.obj_size == var_r28->head.obj_size)
+    {
         var_r28 = var_r28->head.parent;
     }
     if (var_r29 == var_r28) {
@@ -412,7 +424,8 @@ void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
     class_set_flags(class_info, 0, 1);
 }
 
-void ForgetClassLibraryChild(const char* library_name, HSD_ClassInfo* class_info)
+void ForgetClassLibraryChild(const char* library_name,
+                             HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo** cur = &class_info->head.child;
     while (*cur != NULL) {
@@ -461,8 +474,8 @@ void DumpClassStat(HSD_ClassInfo* info, s32 level)
     OSReport("<class %s>\n", info->head.class_name);
     OSReport_PrintSpaces(level);
     OSReport("    info %d object %d nb_exist %d nb_peak %d\n",
-             info->head.info_size, info->head.obj_size,
-             info->head.nb_exist, info->head.nb_peak);
+             info->head.info_size, info->head.obj_size, info->head.nb_exist,
+             info->head.nb_peak);
 }
 
 void hsdDumpClassStat(HSD_ClassInfo* info, BOOL recursive, s32 level)

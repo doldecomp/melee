@@ -16,8 +16,7 @@ enum __file_orientation {
     __wide_oriented
 };
 
-typedef struct
-{
+typedef struct {
     unsigned int open_mode : 2;
     unsigned int io_mode : 3;
     unsigned int buffer_mode : 2;

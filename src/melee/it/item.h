@@ -25,18 +25,22 @@
 // Item State Change Flags //
 
 // Apparently there's no 0x1 flag //
-#define ITEM_ANIM_UPDATE 0x2       // Updates item model with target Item State's AnimJoint, MatAnimJoint and extra HSD archive node if available //
+#define ITEM_ANIM_UPDATE                                                       \
+    0x2 // Updates item model with target Item State's AnimJoint, MatAnimJoint
+        // and extra HSD archive node if available //
 #define ITEM_DROP_UPDATE 0x4       // Copies 0xC44 to 0xC40 if toggled ON //
 #define ITEM_MODEL_UPDATE 0x8      // Runs some JObj function //
 #define ITEM_HIT_PRESERVE 0x10     // Keep current hitboxes //
 #define ITEM_SFX_PRESERVE 0x20     // Keep current SFX //
 #define ITEM_COLANIM_PRESERVE 0x40 // Keep current Color Overlay //
 #define ITEM_UNK_UPDATE 0x80       // ??? //
-#define ITEM_CMD_UPDATE 0x100      // Run item's Subaction Events up to its current animation frame //
+#define ITEM_CMD_UPDATE                                                        \
+    0x100 // Run item's Subaction Events up to its current animation frame //
 
 // Item Unk Kinds //
 
-// These are used in 0x8026C258 to determine whether Samus' Homing Missile should lock on its target.
+// These are used in 0x8026C258 to determine whether Samus' Homing Missile
+// should lock on its target.
 #define ITEM_UNK_MATO 4 // Item type: Target (Mato)
 #define ITEM_UNK_LOCKON 5
 #define ITEM_UNK_ENEMY 6 // Item type: Stage Enemy (Goomba, Koopa Troopa, etc.)
@@ -127,7 +131,8 @@ typedef struct DynamicBoneTable {
 } DynamicBoneTable;
 
 typedef struct DynamicBones {
-    void* x0_ptr;    // is stored @ 8000fdd4, comes from a nonstandard heap @ -0x52fc(r13)
+    void* x0_ptr;    // is stored @ 8000fdd4, comes from a nonstandard heap @
+                     // -0x52fc(r13)
     s32 x4_jobj_num; // number of bones in this boneset
     f32 x8;          // stored @ 80011718, 0x8 of dynamicdesc
     f32 xc;          // stored @ 80011720, 0xC of dynamicdesc
@@ -137,7 +142,8 @@ typedef struct DynamicBones {
 typedef struct ItemDynamicBones {
     s32 x0_apply_phys_num; // If this is 256, dyanmics are not processed
     HSD_JObj* x4_root_jobj;
-    DynamicBones x8_dynamicBones; // This will be a dynamic bone struct once they're defined //
+    DynamicBones x8_dynamicBones; // This will be a dynamic bone struct once
+                                  // they're defined //
 
 } ItemDynamicBones;
 
@@ -159,13 +165,15 @@ typedef struct ItemAttr {
     u8 x1_67_cam_kind : 2;  // 0x1 0x06, is stored to 0xdcd
     u8 x1_8 : 1;            // 0x1 0x01    char flags3; //0x2
     u8 x3;                  // 0x3
-    f32 x4_throw_speed_mul; // 0x4, speed multiplier at which this item is thrown at
+    f32 x4_throw_speed_mul; // 0x4, speed multiplier at which this item is
+                            // thrown at
     s32 x8;                 //
     f32 xC_spin_speed;      //
     f32 x10_fall_speed;     // 0x10
     f32 x14_fall_speed_max; // 0x14
     f32 x18;                //
-    f32 x1C_damage_mul;     // collision related? referenced on taking damage @ 80270f90
+    f32 x1C_damage_mul;     // collision related? referenced on taking damage @
+                            // 80270f90
     ECB x20;
     Vec2 x30_unk;        // 0x34
     Vec2 x38_grab_range; // 0x38
@@ -202,8 +210,9 @@ typedef struct ItemDynamicsDesc {
 } ItemDynamicsDesc;
 
 typedef struct ItemDynamics {
-    s32 x0_dynamics_num;               // 0x8 number of dynamic bonesets for this fp
-    ItemDynamicsDesc* x4_dynamicsDesc; // 0x4 boneset data array (one for each boneset)
+    s32 x0_dynamics_num; // 0x8 number of dynamic bonesets for this fp
+    ItemDynamicsDesc*
+        x4_dynamicsDesc; // 0x4 boneset data array (one for each boneset)
 } ItemDynamics;
 
 typedef struct ItemState_ParamStruct {
@@ -245,7 +254,8 @@ typedef struct itHurt {
     Vec3 x10_hurt2_offset;
     f32 x1C_scale;
     HSD_JObj* x20_jobj;
-    UnkFlagStruct x24_flags; // 0x80 = hurtbox position update toggle; doesn't update position if toggled ON
+    UnkFlagStruct x24_flags; // 0x80 = hurtbox position update toggle; doesn't
+                             // update position if toggled ON
     UnkFlagStruct x25_flags;
     UnkFlagStruct x26_flags;
     UnkFlagStruct x27_flags;
@@ -256,8 +266,10 @@ typedef struct itHurt {
 } itHurt;
 
 typedef struct itHitVictim {
-    void* x0_victim;   // m-ex header says this is a user_data pointer but proceeds to call it a GObj in the comment below it //
-    s32 x4_timedRehit; // number of frames needed to pass before this entity can be hit again; 0 = can't rehit //
+    void* x0_victim;   // m-ex header says this is a user_data pointer but
+                       // proceeds to call it a GObj in the comment below it //
+    s32 x4_timedRehit; // number of frames needed to pass before this entity can
+                       // be hit again; 0 = can't rehit //
 } itHitVictim;
 
 typedef struct itHit {
@@ -272,19 +284,29 @@ typedef struct itHit {
     s32 x28_wdsk; // Weight-Dependent Set Knockback
     s32 x2C_base_knockback;
     s32 x30_element;       // Normal, fire, electric, etc.
-    s32 x34_shield_damage; // If hitbox damage + shield damage is less than 0 (negative), this will effectively restore shield health
-    s32 x38_SFX_severity;  // 0x38. hurtbox interaction. 0 = none, 1 = grounded, 2 = aerial, 3 = both // What //
+    s32 x34_shield_damage; // If hitbox damage + shield damage is less than 0
+                           // (negative), this will effectively restore shield
+                           // health
+    s32 x38_SFX_severity;  // 0x38. hurtbox interaction. 0 = none, 1 = grounded,
+                           // 2 = aerial, 3 = both // What //
     s32 x3C_SFX_kind;
-    UnkFlagStruct x40_flags; // 0x20 -> check against aerial fighters; 0x10 -> check against grounded fighters
-    UnkFlagStruct x41_flags; // 0x8/0x4/0x2 = timed rehit on item/fighter/shield; 0x1 = can reflect
-    UnkFlagStruct x42_flags; // 0x80 = can absorb; 0x20 = hit only fighters facing the item; 0x10 = can shield; 0x8 = ignore reflect/absorb bubbles(?); 0x4 = ignore hurtboxes; 0x2 = ignore ungrabbable hurtboxes
-    UnkFlagStruct x43_flags; // 0x80 = interact with items only; 0x20 = interact with all?
+    UnkFlagStruct x40_flags; // 0x20 -> check against aerial fighters; 0x10 ->
+                             // check against grounded fighters
+    UnkFlagStruct x41_flags; // 0x8/0x4/0x2 = timed rehit on
+                             // item/fighter/shield; 0x1 = can reflect
+    UnkFlagStruct x42_flags; // 0x80 = can absorb; 0x20 = hit only fighters
+                             // facing the item; 0x10 = can shield; 0x8 = ignore
+                             // reflect/absorb bubbles(?); 0x4 = ignore
+                             // hurtboxes; 0x2 = ignore ungrabbable hurtboxes
+    UnkFlagStruct
+        x43_flags; // 0x80 = interact with items only; 0x20 = interact with all?
     s32 x44;
     HSD_JObj* x48_jobj;
     Vec3 x4C_pos;
     Vec3 x58_posPrev;
     Vec3 x64_posColl;      // 0x64   position of hurt collision
-    f32 x70_coll_distance; // 0x70   Distance From Collding Hurtbox (Used for phantom hit collision calculation)
+    f32 x70_coll_distance; // 0x70   Distance From Collding Hurtbox (Used for
+                           // phantom hit collision calculation)
     itHitVictim x74_tipLog[12];
     itHitVictim xD4_damageLog[12];
     s32 x134;
@@ -400,18 +422,19 @@ typedef struct _Item {
     u32 xC2C;
     u32 xC30;
     struct itdmg {
-        s32 xC34_damageDealt;       // Rounded down
-        s32 xC38;                   // 0xc38
-        f32 xC3C;                   // 0xc3c
-        f32 xC40;                   // 0xc40
-        f32 xC44;                   // 0xc44
-        s32 xC48;                   // 0xc48
-        s32 xC4C;                   // Something to do with damage. 0x80077464 checks this against reflectors' maximum damage threshold
-        s32 xC50;                   // 0xc50
-        f32 xC54;                   // 0xc54
-        f32 xC58;                   // 0xc58
-        s32 xC5C;                   // 0xc5c
-        s32 xC60;                   // 0xc60
+        s32 xC34_damageDealt; // Rounded down
+        s32 xC38;             // 0xc38
+        f32 xC3C;             // 0xc3c
+        f32 xC40;             // 0xc40
+        f32 xC44;             // 0xc44
+        s32 xC48;             // 0xc48
+        s32 xC4C; // Something to do with damage. 0x80077464 checks this against
+                  // reflectors' maximum damage threshold
+        s32 xC50; // 0xc50
+        f32 xC54; // 0xc54
+        f32 xC58; // 0xc58
+        s32 xC5C; // 0xc5c
+        s32 xC60; // 0xc60
         HSD_GObj* xC64_reflectGObj; // GObj that reflected this item?
         f32 xC68;                   // 0xc68
         f32 xC6C;                   // 0xc6c
@@ -445,10 +468,12 @@ typedef struct _Item {
         f32 xCE4;                    // 0xce4
         f32 xCE8;                    // 0xce8
         HSD_GObj* xCEC_fighterGObj;  // 0xcec
-        HSD_GObj* xCF0_itemGObj;     // 0xcf0, is a fp GObj, but is the owner of the fp that hit the item (?)
+        HSD_GObj* xCF0_itemGObj; // 0xcf0, is a fp GObj, but is the owner of the
+                                 // fp that hit the item (?)
     } itdmg;
     HSD_GObj* xCF4_fighterGObjUnk;
-    HSD_GObj* xCF8_detectGObj; // GObj that was detected by this item's inert hitbox
+    HSD_GObj*
+        xCF8_detectGObj; // GObj that was detected by this item's inert hitbox
     s32 xCFC;
     HSD_GObj* xD00_grabGObj;    // GObj that got grabbed by this item
     HSD_GObj* xD04_atkCollItem; // GObj that collided with this item's hitbox?
@@ -459,21 +484,35 @@ typedef struct _Item {
     u32 xD0C;
     s32 xD10;
     struct itcb {
-        s32 (*xD14_callback_Anim)(HSD_GObj* item);                             // 0xd14
-        void (*xD18_callback_Phys)(HSD_GObj* item);                            // 0xd18
-        s32 (*xD1C_callback_Coll)(HSD_GObj* item);                             // 0xd1c
-        void (*xD20_callback_Accessory)(HSD_GObj* item);                       // 0xd20
-        s32 (*xD24_callback_Inert)(HSD_GObj* item);                            // 0xd24, runs when a GObj is detected by this item's inert hibox
-        void (*xD28_callback_EnterHitlag)(HSD_GObj* item);                     // 0xd28, runs after applying hitlag in damage apply proc 8026a62c
-        void (*xD2C_callback_ExitHitlag)(HSD_GObj* item);                      // 0xd2c, runs after exiting hitlag in hitlag update proc 8026a200
-        s32 (*xD30_callback_JumpedOn)(HSD_GObj* item);                         // 0xd30, runs when the item is "jumped on", 80269bac
-        void (*xD34_callback_Grab_ItemCB)(HSD_GObj* item);                     // 0xd34, when grabbing a fp, run this function on self
-        void (*xD38_callback_Grab_VictimCB)(HSD_GObj* victim, HSD_GObj* item); // 0xd38, when grabbing a fp, run this function on fp
+        s32 (*xD14_callback_Anim)(HSD_GObj* item);       // 0xd14
+        void (*xD18_callback_Phys)(HSD_GObj* item);      // 0xd18
+        s32 (*xD1C_callback_Coll)(HSD_GObj* item);       // 0xd1c
+        void (*xD20_callback_Accessory)(HSD_GObj* item); // 0xd20
+        s32 (*xD24_callback_Inert)(
+            HSD_GObj* item); // 0xd24, runs when a GObj is detected by this
+                             // item's inert hibox
+        void (*xD28_callback_EnterHitlag)(
+            HSD_GObj* item); // 0xd28, runs after applying hitlag in damage
+                             // apply proc 8026a62c
+        void (*xD2C_callback_ExitHitlag)(
+            HSD_GObj* item); // 0xd2c, runs after exiting hitlag in hitlag
+                             // update proc 8026a200
+        s32 (*xD30_callback_JumpedOn)(
+            HSD_GObj*
+                item); // 0xd30, runs when the item is "jumped on", 80269bac
+        void (*xD34_callback_Grab_ItemCB)(
+            HSD_GObj*
+                item); // 0xd34, when grabbing a fp, run this function on self
+        void (*xD38_callback_Grab_VictimCB)(
+            HSD_GObj* victim,
+            HSD_GObj*
+                item); // 0xd38, when grabbing a fp, run this function on fp
     } itcb;
     f32 xD3C_spinSpeed;
     f32 xD40;
     f32 xD44_lifeTimer;
-    f32 xD48_halfLifeTimer; // Not radioactive, just the item's original lifetime halved
+    f32 xD48_halfLifeTimer; // Not radioactive, just the item's original
+                            // lifetime halved
     s32 xD4C;
     s32 xD50_landNum;  // Number of times this item has landed
     s32 xD54_throwNum; // Number of times this item has been thrown
@@ -617,10 +656,13 @@ typedef struct BobOmbRain {
 } BobOmbRain;
 
 typedef struct SpawnItem {
-    HSD_GObj* x0_parent_gobj;  // Primary owner of the item; usually a fp GObj
-    HSD_GObj* x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness' PK Fire Pillar has this set to PK Fire Spark's item GObj
-    s32 x8_item_id;            // 0x8, ID of the item to spawn
-    s32 xC_hold_kind;          // Defines the behavior of the item, such as thrown and pickup. 0 = capsule
+    HSD_GObj* x0_parent_gobj; // Primary owner of the item; usually a fp GObj
+    HSD_GObj*
+        x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness' PK Fire
+                         // Pillar has this set to PK Fire Spark's item GObj
+    s32 x8_item_id;      // 0x8, ID of the item to spawn
+    s32 xC_hold_kind;    // Defines the behavior of the item, such as thrown and
+                         // pickup. 0 = capsule
     s32 x10;
     Vec3 x14_pos;
     Vec3 x20_pos_prev;
@@ -813,153 +855,222 @@ typedef struct HSD_ObjAllocUnk6 {
 } HSD_ObjAllocUnk6;
 
 // FUNCTIONS //
-s32 func_80266F3C(void);                                       // Check if items are enabled
-void func_80266F70(void);                                      // Check to load ItCo.dat/usd
-void func_80266FA8(void);                                      // ItCo prefunction with 0
-void func_8027870C(s32);                                       // Load ItCo.dat/usd
-void func_80266FCC(void);                                      // Init item struct?
-void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem); // Initialize item coordinates? //
-void func_80267454(HSD_GObj* item_gobj);                       // Remove Camera Box //
-void func_802674AC(SpawnItem* spawnItem);                      // Set Item Hold kind //
+s32 func_80266F3C(void);  // Check if items are enabled
+void func_80266F70(void); // Check to load ItCo.dat/usd
+void func_80266FA8(void); // ItCo prefunction with 0
+void func_8027870C(s32);  // Load ItCo.dat/usd
+void func_80266FCC(void); // Init item struct?
+void func_80267130(HSD_GObj* item_gobj,
+                   SpawnItem* spawnItem); // Initialize item coordinates? //
+void func_80267454(HSD_GObj* item_gobj);  // Remove Camera Box //
+void func_802674AC(SpawnItem* spawnItem); // Set Item Hold kind //
 void func_802675A8(HSD_GObj* item_gobj);
 void func_802676F4(HSD_GObj* item_gobj);
-s32 func_8026784C(s32 dropItem, s32 unused);                                                                                                       // Decide drop item; 0x8026862C loads two integers into this, but the second one goes unused? //
-void func_80267978(HSD_GObj* item_gobj);                                                                                                           // Store Item Pointers //
-void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem);                                                                                     // Initialize item variables //
-void func_802680CC(HSD_GObj* item_gobj);                                                                                                           // Setup Item JObj //
-void func_8026814C(HSD_GObj* item_gobj);                                                                                                           // Setup item render objects? //
-s32 func_802682F0(HSD_GObj* item_gobj);                                                                                                            // Initialize item bones //
-void func_8026849C(HSD_GObj* item_gobj);                                                                                                           // Set item model scale //
-void func_80268560(HSD_GObj* item_gobj);                                                                                                           // Setup item dynamics //
-HSD_GObj* func_8026862C(SpawnItem* spawnItem);                                                                                                     // Create Item //
-void func_80268B18(SpawnItem* spawnItem);                                                                                                          // Item spawn prefunction - spawn airborne //
-void func_80268B5C(SpawnItem* spawnItem);                                                                                                          // Item spawn prefunction - spawn grounded //
-void func_80268B9C(SpawnItem* spawnItem);                                                                                                          // Item spawn prefunction - spawn grounded and toggle unknown true //
-void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint, HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3, Item* item_data); // Adds AObjs to item model //
-void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc);                                                                      // Unk Item AObj-related function //
-void func_80268DD4(HSD_GObj* item_gobj, f32 arg8);                                                                                                 // Advance item animation? //
-void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc);                                                                          // Copy item script //
-void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags);                                                                      // Item State Change //
-void lbl_802693E4(HSD_GObj* item_gobj);                                                                                                            // Item Think - Hitlag //
-void func_802694CC(HSD_GObj* item_gobj);                                                                                                           // Advance item animation + script? //
-void lbl_80269528(HSD_GObj* item_gobj);                                                                                                            // Item Think - Animation //
-s32 func_802696CC(HSD_GObj* item_gobj);                                                                                                            // Item Think - Check for Blast Zones //
-void func_802697D4(HSD_GObj* item_gobj);                                                                                                           // Item Think - Physics //
-void func_80269978(HSD_GObj* item_gobj);                                                                                                           // Item Think - Collision //
-void lbl_80269A9C(HSD_GObj* item_gobj);                                                                                                            // Item Think - Accessory + Camera Box //
-void lbl_80269B60(HSD_GObj* item_gobj);                                                                                                            // Item Think - Yellow Bar Collision (cb_JumpedOn) //
-void lbl_80269BE4(HSD_GObj* item_gobj);                                                                                                            // Item Think - Grab //
-void lbl_80269C5C(HSD_GObj* item_gobj);                                                                                                            // Item Think - Hit Collision Logic //
-void func_80269CA0(Item* item_data, s32 damage);                                                                                                   // Set damage taken //
-void func_80269CC4(HSD_GObj* item_gobj);                                                                                                           // Set damage struct //
-s32 func_80269DC8(HSD_GObj* item_gobj);                                                                                                            // Item Think - Shield Collision //
-s32 func_80269F14(HSD_GObj* item_gobj);                                                                                                            // Item Think - On Reflect //
-void func_8026A0A0(HSD_GObj* item_gobj);                                                                                                           // Item Think - Exit Hitlag Check //
-void func_8026A0FC(HSD_GObj* item_gobj);                                                                                                           // Item Think - Exit Hitlag Check 2 //
-void func_8026A158(HSD_GObj* item_gobj);                                                                                                           // Item Think - Enter Hitlag //
-void func_8026A1E8(HSD_GObj* item_gobj);                                                                                                           // Item Think - Exit Hitlag //
-void lbl_8026A294(HSD_GObj* item_gobj);                                                                                                            // Item Think - Hit Collision //
-void lbl_8026A788(HSD_GObj* item_gobj);                                                                                                            // Item Think - Process Dynamic Bones //
-void func_8026A810(HSD_GObj* item_gobj);                                                                                                           // Run Item's OnSpawn Callback //
-void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj);                                                                                   // Remove Item from Player //
-void func_8026A8EC(HSD_GObj* item_gobj);                                                                                                           // Destroy Item //
-void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX, s32 pickupSFX);                                                                             // Make Item Held //
-void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2);                                                                                      // Drop Item //
-void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8);                                                                       // This is actually another Item Drop function //
-void func_8026AD20(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8);                                                                       // Throw Item //
-void func_8026ADC0(HSD_GObj* item_gobj);                                                                                                           // Make Item Airborne //
-void lbl_8026AE10(Item* item_data);                                                                                                                // Clear Item Struct ? //
-u32 func_8026AE60(void);                                                                                                                           // Increment something //
-void func_8026AE84(Item* item_data, s32 sfxID, u8 pan, u8 volume);                                                                                 // Play Item SFX //
-void func_8026AF0C(Item* item_data, s32 sfxID, u8 pan, u8 volume);                                                                                 // Play Item SFX 2 //
-void func_8026AFA0(Item* item_data, s32 sfxID, u8 pan, u8 volume);                                                                                 // Play Item SFX 3 //
-void func_8026B034(Item* item_data);                                                                                                               // Stop Item SFX //
-void func_8026B074(Item* item_data);                                                                                                               // Stop Item SFX 2 //
-void func_8026B0B4(HSD_GObj* item_gobj);                                                                                                           // Stop All Item SFX //
-s32 func_8026B1A4(HSD_GObj* item_gobj);                                                                                                            // Check if item is grabbable //
-f32 func_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk);                                                                                      // Apply Item Damage -  may not be itHit* ??? //
-void func_8026B294(HSD_GObj* item_gobj, Vec3* pos);                                                                                                // Copy Item position vector //
-BOOL func_8026B2B4(HSD_GObj* item_gobj);                                                                                                           // Check if item is heavy //
-BOOL func_8026B2D8(HSD_GObj* item_gobj);                                                                                                           // Check if item is heavy again? //
-s32 itGetKind(HSD_GObj* item_gobj);                                                                                                                // Get Item ID //
-s32 func_8026B30C(HSD_GObj* item_gobj);                                                                                                            // Return flag from Item Attributes //
-s32 func_8026B320(HSD_GObj* item_gobj);                                                                                                            // Return item hold kind //
-f32 func_8026B334(HSD_GObj* item_gobj);                                                                                                            // Return item damage multiplier //
-void func_8026B344(HSD_GObj* item_gobj, Vec3* pos);                                                                                                // Unknown item position math, related to velocity? //
-f32 func_8026B378(HSD_GObj* item_gobj);                                                                                                            // Return item's X-Axis grab range? //
-f32 func_8026B384(HSD_GObj* item_gobj);                                                                                                            // Return item's Y-Axis grab range? //
-void func_8026B390(HSD_GObj* item_gobj);                                                                                                           // Toggle item flag 0x15 in 0xDC8 word ON //
-void func_8026B3A8(HSD_GObj* item_gobj);                                                                                                           // Toggle item flag 0x15 in 0xDC8 word OFF //
-u32 func_8026B3C0(s32 itemID);                                                                                                                     // Count item entities of identical kind? //
-void func_8026B3F8(Article* article, s32 itemID);                                                                                                  // Store Item article pointer to table //
-void func_8026B40C(Article* article, s32 itemID);                                                                                                  // Store Stage Item article pointer to table //
-f32 func_8026B424(s32 damage);                                                                                                                     // Item Damage Math //
-s32 func_8026B47C(HSD_GObj* item_gobj);                                                                                                            // Get heal value of healing items //
-BOOL func_8026B4F0(HSD_GObj* item_gobj);                                                                                                           // Check if item is a healing item //
-f32 func_8026B54C(HSD_GObj* item_gobj);                                                                                                            // Get unknown float from 0x0 of item's special attributes //
-f32 func_8026B560(HSD_GObj* item_gobj);                                                                                                            // Identical to 0x8026B54C but likely using a different itAttributes struct //
-f32 func_8026B574(HSD_GObj* item_gobj);                                                                                                            // Get unknown float from 0x4 of item's special attributes //
-s32 func_8026B588(void);                                                                                                                           // Get unknown integer from itCommonData //
-BOOL func_8026B594(HSD_GObj* item_gobj);                                                                                                           // Check if item can fire projectiles //
-HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj);                                                                         // Unknown item camera check? //
-HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj);                                                                         // Unknown item camera check 2? //
-f32 func_8026B684(Vec3* pos);                                                                                                                      // Get facing direction of fp (?) with argument 0 //
-f32 func_8026B6A8(Vec3* pos, s32 arg);                                                                                                             // Get facing direction of fp (?) with variable argument //
-BOOL func_8026B6C8(HSD_GObj* item_gobj);                                                                                                           // Check if item is a stage item? //
-void func_8026B718(HSD_GObj* item_gobj, f32 hitlagFrames);                                                                                         // Set item's hitlag frames //
-void func_8026B724(HSD_GObj* item_gobj);                                                                                                           // Toggle bit 3 of 0xDC8 word ON //
-void func_8026B73C(HSD_GObj* item_gobj);                                                                                                           // Toggle bits in 0xDC8 word //
-BOOL func_8026B774(HSD_GObj* item_gobj, u8 arg1);                                                                                                  // Bitwise operations in 0xDC8 word //
-s32 func_8026B7A4(HSD_GObj* item_gobj);                                                                                                            // Get Item State ID //
-u8 func_8026B7B0(HSD_GObj* item_gobj);                                                                                                             // Get Item Team ID //
-s32 func_8026B7BC(HSD_GObj* item_gobj);                                                                                                            // Get flag 0x14 of 0xDC8 word //
-s32 func_8026B7CC(HSD_GObj* item_gobj);                                                                                                            // Get 0x1C of Item - something to do with stale moves? //
-s32 func_8026B7D8(void);                                                                                                                           // Get unknown var from global data //
-s32 func_8026B7E0(void);                                                                                                                           // Get unknown var from global data //
-s32 func_8026B7E8(HSD_GObj* item_gobj);                                                                                                            // Get bit 1 of 0xDC8 word //
-void func_8026B7F8(HSD_GObj* fighter_gobj);                                                                                                        // Remove item from player on death? //
-BOOL func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj);                                                                                // Remove all GObj interaction references from item //
-s32 func_8026B924(HSD_GObj* item_gobj);                                                                                                            // Return result of unk item check - requires -g compiler flag / Frank modifications to match //
-f32 func_8026B960(HSD_GObj* item_gobj);                                                                                                            // Return float result of item kind and state checks - requires -g compiler flag / Frank modifications to match //
-void func_8026B9A8(HSD_GObj* item_gobj, s32 arg1, s32 arg2);                                                                                       // Transfer item on character swap - used for Zelda <-> Sheik //
-void func_8026BAE8(HSD_GObj* item_gobj, f32 scale_mul);                                                                                            // Multiply item's scale //
-void func_8026BB20(HSD_GObj* item_gobj);                                                                                                           // Clear JObj flags on item model //
-void func_8026BB44(HSD_GObj* item_gobj);                                                                                                           // Set JObj flags on item model //
-void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos);                                                                                             // Adjust item's position to fp bone //
-void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos);                                                                                                // Adjust item's position based on ECB? //
-void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos);                                                                                                // Adjust item's ECB position? //
-void func_8026BC14(HSD_GObj* item_gobj);                                                                                                           // Check if item owner is a fp + decrement hitlag //
-s32 func_8026BC68(HSD_GObj* item_gobj);                                                                                                            // Return bit 0 of 0xDD0 //
-HSD_GObj* func_8026BC78(HSD_GObj* item_gobj);                                                                                                      // Get item owner //
-BOOL func_8026BC84(HSD_GObj* item_gobj);                                                                                                           // Get item attack kind //
-void func_8026BC90(HSD_GObj* item_gobj, Vec3* pos);                                                                                                // Unknown item ECB / position update //
-void func_8026BCF4(HSD_GObj* item_gobj);                                                                                                           // Toggle bit 2 of 0xDCD OFF //
-void func_8026BD0C(HSD_GObj* item_gobj);                                                                                                           // Toggle bit 2 of 0xDCD ON //
-void func_8026BD24(HSD_GObj* item_gobj);                                                                                                           // Toggle bit 3 of 0xDD0 ON //
-void func_8026BD3C(HSD_GObj* item_gobj);                                                                                                           // Toggle bit 3 of 0xDCC ON //
-void func_8026BD54(HSD_GObj* item_gobj);                                                                                                           // Toggle bit 3 of 0xDCC OFF //
-void func_8026BD6C(HSD_GObj* item_gobj);                                                                                                           // Toggle bit 3 of 0xDCD ON //
-void func_8026BD84(HSD_GObj* item_gobj);                                                                                                           // Toggle bit 4 of 0xDCD ON //
-void func_8026BD9C(HSD_GObj* item_gobj);                                                                                                           // Toggle 0x1A of 0xDC8 word ON //
-void func_8026BDB4(HSD_GObj* item_gobj);                                                                                                           // Toggle 0x1A of 0xDC8 word OFF //
-void func_8026BDCC(HSD_GObj* item_gobj);                                                                                                           // Toggle several item flags //
-void func_8026BE28(HSD_GObj* item_gobj);                                                                                                           // Toggle several item flags, inverted //
-void* func_8026BE84(BobOmbRain* bobOmbRain);                                                                                                       // Bob-Omb Rain Switch //
-CollData* func_8026C100(HSD_GObj* item_gobj);                                                                                                      // Get item's CollData pointer //
-void func_8026C16C(HSD_GObj* item_gobj, BOOL isHeadless);                                                                                          // Check if Hammer item's head should break off //
-void func_8026C1B4(HSD_GObj* item_gobj);                                                                                                           // Check if item has a hitbox //
-u32 func_8026C1D4(void);                                                                                                                           // Get unknown var from r13 pointer //
-BOOL func_8026C1E8(HSD_GObj* item_gobj);                                                                                                           // Check if item has grabbed a GObj? //
-void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj);                                                                                   // Get item owner's port number //
-HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir);                                                                                              // Find the closest item to the given position? //
-void func_8026C334(HSD_GObj* item_gobj, Vec3* pos);                                                                                                // Unknown item position / ECB update //
-void func_8026C368(HSD_GObj* item_gobj);                                                                                                           // Run bomb item explosion callbacks //
-void func_8026C3FC(void);                                                                                                                          // Toggle bit 3 of 0xDC8 ON for all active item GObjs? //
-void func_8026C42C(void);                                                                                                                          // Toggle bits in 0xDC8 for all active item GObjs? //
-f32 func_8026B424(s32 damage);                                                                                                                     /* extern */
-u8 func_8026B7B0(HSD_GObj* item_gobj);                                                                                                             // Get Team ID //
-void func_8026BDCC(HSD_GObj* item_gobj);                                                                                                           /* extern */
-void func_8026C368(HSD_GObj* item_gobj);                                                                                                           /* extern */
+s32 func_8026784C(
+    s32 dropItem,
+    s32 unused); // Decide drop item; 0x8026862C loads two integers into this,
+                 // but the second one goes unused? //
+void func_80267978(HSD_GObj* item_gobj); // Store Item Pointers //
+void func_80267AA8(HSD_GObj* item_gobj,
+                   SpawnItem* spawnItem);      // Initialize item variables //
+void func_802680CC(HSD_GObj* item_gobj);       // Setup Item JObj //
+void func_8026814C(HSD_GObj* item_gobj);       // Setup item render objects? //
+s32 func_802682F0(HSD_GObj* item_gobj);        // Initialize item bones //
+void func_8026849C(HSD_GObj* item_gobj);       // Set item model scale //
+void func_80268560(HSD_GObj* item_gobj);       // Setup item dynamics //
+HSD_GObj* func_8026862C(SpawnItem* spawnItem); // Create Item //
+void func_80268B18(
+    SpawnItem* spawnItem); // Item spawn prefunction - spawn airborne //
+void func_80268B5C(
+    SpawnItem* spawnItem); // Item spawn prefunction - spawn grounded //
+void func_80268B9C(SpawnItem* spawnItem); // Item spawn prefunction - spawn
+                                          // grounded and toggle unknown true //
+void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
+                   HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3,
+                   Item* item_data); // Adds AObjs to item model //
+void func_80268D34(
+    HSD_GObj* item_gobj,
+    struct ItemStateDesc* itemStateDesc); // Unk Item AObj-related function //
+void func_80268DD4(HSD_GObj* item_gobj, f32 arg8); // Advance item animation? //
+void func_80268E40(Item* item_data,
+                   struct ItemStateDesc* itemStateDesc); // Copy item script //
+void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID,
+                   s32 itemStateFlags);  // Item State Change //
+void lbl_802693E4(HSD_GObj* item_gobj);  // Item Think - Hitlag //
+void func_802694CC(HSD_GObj* item_gobj); // Advance item animation + script? //
+void lbl_80269528(HSD_GObj* item_gobj);  // Item Think - Animation //
+s32 func_802696CC(HSD_GObj* item_gobj); // Item Think - Check for Blast Zones //
+void func_802697D4(HSD_GObj* item_gobj); // Item Think - Physics //
+void func_80269978(HSD_GObj* item_gobj); // Item Think - Collision //
+void lbl_80269A9C(
+    HSD_GObj* item_gobj); // Item Think - Accessory + Camera Box //
+void lbl_80269B60(
+    HSD_GObj* item_gobj); // Item Think - Yellow Bar Collision (cb_JumpedOn) //
+void lbl_80269BE4(HSD_GObj* item_gobj); // Item Think - Grab //
+void lbl_80269C5C(HSD_GObj* item_gobj); // Item Think - Hit Collision Logic //
+void func_80269CA0(Item* item_data, s32 damage); // Set damage taken //
+void func_80269CC4(HSD_GObj* item_gobj);         // Set damage struct //
+s32 func_80269DC8(HSD_GObj* item_gobj);  // Item Think - Shield Collision //
+s32 func_80269F14(HSD_GObj* item_gobj);  // Item Think - On Reflect //
+void func_8026A0A0(HSD_GObj* item_gobj); // Item Think - Exit Hitlag Check //
+void func_8026A0FC(HSD_GObj* item_gobj); // Item Think - Exit Hitlag Check 2 //
+void func_8026A158(HSD_GObj* item_gobj); // Item Think - Enter Hitlag //
+void func_8026A1E8(HSD_GObj* item_gobj); // Item Think - Exit Hitlag //
+void lbl_8026A294(HSD_GObj* item_gobj);  // Item Think - Hit Collision //
+void lbl_8026A788(HSD_GObj* item_gobj); // Item Think - Process Dynamic Bones //
+void func_8026A810(HSD_GObj* item_gobj); // Run Item's OnSpawn Callback //
+void func_8026A848(HSD_GObj* item_gobj,
+                   HSD_GObj* fighter_gobj); // Remove Item from Player //
+void func_8026A8EC(HSD_GObj* item_gobj);    // Destroy Item //
+void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX,
+                   s32 pickupSFX); // Make Item Held //
+void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2); // Drop Item //
+void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX,
+                   f32 arg8); // This is actually another Item Drop function //
+void func_8026AD20(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX,
+                   f32 arg8);            // Throw Item //
+void func_8026ADC0(HSD_GObj* item_gobj); // Make Item Airborne //
+void lbl_8026AE10(Item* item_data);      // Clear Item Struct ? //
+u32 func_8026AE60(void);                 // Increment something //
+void func_8026AE84(Item* item_data, s32 sfxID, u8 pan,
+                   u8 volume); // Play Item SFX //
+void func_8026AF0C(Item* item_data, s32 sfxID, u8 pan,
+                   u8 volume); // Play Item SFX 2 //
+void func_8026AFA0(Item* item_data, s32 sfxID, u8 pan,
+                   u8 volume);           // Play Item SFX 3 //
+void func_8026B034(Item* item_data);     // Stop Item SFX //
+void func_8026B074(Item* item_data);     // Stop Item SFX 2 //
+void func_8026B0B4(HSD_GObj* item_gobj); // Stop All Item SFX //
+s32 func_8026B1A4(HSD_GObj* item_gobj);  // Check if item is grabbable //
+f32 func_8026B1D4(
+    HSD_GObj* item_gobj,
+    itHit* itemHitboxUnk); // Apply Item Damage -  may not be itHit* ??? //
+void func_8026B294(HSD_GObj* item_gobj,
+                   Vec3* pos);           // Copy Item position vector //
+BOOL func_8026B2B4(HSD_GObj* item_gobj); // Check if item is heavy //
+BOOL func_8026B2D8(HSD_GObj* item_gobj); // Check if item is heavy again? //
+s32 itGetKind(HSD_GObj* item_gobj);      // Get Item ID //
+s32 func_8026B30C(HSD_GObj* item_gobj);  // Return flag from Item Attributes //
+s32 func_8026B320(HSD_GObj* item_gobj);  // Return item hold kind //
+f32 func_8026B334(HSD_GObj* item_gobj);  // Return item damage multiplier //
+void func_8026B344(
+    HSD_GObj* item_gobj,
+    Vec3* pos); // Unknown item position math, related to velocity? //
+f32 func_8026B378(HSD_GObj* item_gobj); // Return item's X-Axis grab range? //
+f32 func_8026B384(HSD_GObj* item_gobj); // Return item's Y-Axis grab range? //
+void func_8026B390(
+    HSD_GObj* item_gobj); // Toggle item flag 0x15 in 0xDC8 word ON //
+void func_8026B3A8(
+    HSD_GObj* item_gobj);      // Toggle item flag 0x15 in 0xDC8 word OFF //
+u32 func_8026B3C0(s32 itemID); // Count item entities of identical kind? //
+void func_8026B3F8(Article* article,
+                   s32 itemID); // Store Item article pointer to table //
+void func_8026B40C(Article* article,
+                   s32 itemID); // Store Stage Item article pointer to table //
+f32 func_8026B424(s32 damage);  // Item Damage Math //
+s32 func_8026B47C(HSD_GObj* item_gobj);  // Get heal value of healing items //
+BOOL func_8026B4F0(HSD_GObj* item_gobj); // Check if item is a healing item //
+f32 func_8026B54C(HSD_GObj* item_gobj);  // Get unknown float from 0x0 of item's
+                                         // special attributes //
+f32 func_8026B560(
+    HSD_GObj* item_gobj); // Identical to 0x8026B54C but likely using a
+                          // different itAttributes struct //
+f32 func_8026B574(HSD_GObj* item_gobj); // Get unknown float from 0x4 of item's
+                                        // special attributes //
+s32 func_8026B588(void); // Get unknown integer from itCommonData //
+BOOL func_8026B594(
+    HSD_GObj* item_gobj); // Check if item can fire projectiles //
+HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2,
+                        HSD_GObj* item_gobj); // Unknown item camera check? //
+HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2,
+                        HSD_GObj* item_gobj); // Unknown item camera check 2? //
+f32 func_8026B684(
+    Vec3* pos); // Get facing direction of fp (?) with argument 0 //
+f32 func_8026B6A8(
+    Vec3* pos,
+    s32 arg); // Get facing direction of fp (?) with variable argument //
+BOOL func_8026B6C8(HSD_GObj* item_gobj); // Check if item is a stage item? //
+void func_8026B718(HSD_GObj* item_gobj,
+                   f32 hitlagFrames);    // Set item's hitlag frames //
+void func_8026B724(HSD_GObj* item_gobj); // Toggle bit 3 of 0xDC8 word ON //
+void func_8026B73C(HSD_GObj* item_gobj); // Toggle bits in 0xDC8 word //
+BOOL func_8026B774(HSD_GObj* item_gobj,
+                   u8 arg1);            // Bitwise operations in 0xDC8 word //
+s32 func_8026B7A4(HSD_GObj* item_gobj); // Get Item State ID //
+u8 func_8026B7B0(HSD_GObj* item_gobj);  // Get Item Team ID //
+s32 func_8026B7BC(HSD_GObj* item_gobj); // Get flag 0x14 of 0xDC8 word //
+s32 func_8026B7CC(HSD_GObj* item_gobj); // Get 0x1C of Item - something to do
+                                        // with stale moves? //
+s32 func_8026B7D8(void);                // Get unknown var from global data //
+s32 func_8026B7E0(void);                // Get unknown var from global data //
+s32 func_8026B7E8(HSD_GObj* item_gobj); // Get bit 1 of 0xDC8 word //
+void func_8026B7F8(
+    HSD_GObj* fighter_gobj); // Remove item from player on death? //
+BOOL func_8026B894(HSD_GObj* item_gobj,
+                   HSD_GObj* referenced_gobj); // Remove all GObj interaction
+                                               // references from item //
+s32 func_8026B924(
+    HSD_GObj* item_gobj); // Return result of unk item check - requires -g
+                          // compiler flag / Frank modifications to match //
+f32 func_8026B960(
+    HSD_GObj* item_gobj); // Return float result of item kind and state checks -
+                          // requires -g compiler flag / Frank modifications to
+                          // match //
+void func_8026B9A8(
+    HSD_GObj* item_gobj, s32 arg1,
+    s32 arg2); // Transfer item on character swap - used for Zelda <-> Sheik //
+void func_8026BAE8(HSD_GObj* item_gobj,
+                   f32 scale_mul);       // Multiply item's scale //
+void func_8026BB20(HSD_GObj* item_gobj); // Clear JObj flags on item model //
+void func_8026BB44(HSD_GObj* item_gobj); // Set JObj flags on item model //
+void func_8026BB68(HSD_GObj* fighter_gobj,
+                   Vec3* pos); // Adjust item's position to fp bone //
+void func_8026BB88(HSD_GObj* item_gobj,
+                   Vec3* pos); // Adjust item's position based on ECB? //
+void func_8026BBCC(HSD_GObj* item_gobj,
+                   Vec3* pos); // Adjust item's ECB position? //
+void func_8026BC14(
+    HSD_GObj* item_gobj); // Check if item owner is a fp + decrement hitlag //
+s32 func_8026BC68(HSD_GObj* item_gobj);       // Return bit 0 of 0xDD0 //
+HSD_GObj* func_8026BC78(HSD_GObj* item_gobj); // Get item owner //
+BOOL func_8026BC84(HSD_GObj* item_gobj);      // Get item attack kind //
+void func_8026BC90(HSD_GObj* item_gobj,
+                   Vec3* pos); // Unknown item ECB / position update //
+void func_8026BCF4(HSD_GObj* item_gobj); // Toggle bit 2 of 0xDCD OFF //
+void func_8026BD0C(HSD_GObj* item_gobj); // Toggle bit 2 of 0xDCD ON //
+void func_8026BD24(HSD_GObj* item_gobj); // Toggle bit 3 of 0xDD0 ON //
+void func_8026BD3C(HSD_GObj* item_gobj); // Toggle bit 3 of 0xDCC ON //
+void func_8026BD54(HSD_GObj* item_gobj); // Toggle bit 3 of 0xDCC OFF //
+void func_8026BD6C(HSD_GObj* item_gobj); // Toggle bit 3 of 0xDCD ON //
+void func_8026BD84(HSD_GObj* item_gobj); // Toggle bit 4 of 0xDCD ON //
+void func_8026BD9C(HSD_GObj* item_gobj); // Toggle 0x1A of 0xDC8 word ON //
+void func_8026BDB4(HSD_GObj* item_gobj); // Toggle 0x1A of 0xDC8 word OFF //
+void func_8026BDCC(HSD_GObj* item_gobj); // Toggle several item flags //
+void func_8026BE28(
+    HSD_GObj* item_gobj); // Toggle several item flags, inverted //
+void* func_8026BE84(BobOmbRain* bobOmbRain);  // Bob-Omb Rain Switch //
+CollData* func_8026C100(HSD_GObj* item_gobj); // Get item's CollData pointer //
+void func_8026C16C(
+    HSD_GObj* item_gobj,
+    BOOL isHeadless); // Check if Hammer item's head should break off //
+void func_8026C1B4(HSD_GObj* item_gobj); // Check if item has a hitbox //
+u32 func_8026C1D4(void);                 // Get unknown var from r13 pointer //
+BOOL func_8026C1E8(HSD_GObj* item_gobj); // Check if item has grabbed a GObj? //
+void func_8026C220(HSD_GObj* item_gobj,
+                   HSD_GObj* fighter_gobj); // Get item owner's port number //
+HSD_GObj*
+func_8026C258(Vec3* vector,
+              f32 facingDir); // Find the closest item to the given position? //
+void func_8026C334(HSD_GObj* item_gobj,
+                   Vec3* pos); // Unknown item position / ECB update //
+void func_8026C368(HSD_GObj* item_gobj); // Run bomb item explosion callbacks //
+void func_8026C3FC(
+    void); // Toggle bit 3 of 0xDC8 ON for all active item GObjs? //
+void func_8026C42C(void); // Toggle bits in 0xDC8 for all active item GObjs? //
+f32 func_8026B424(s32 damage);           /* extern */
+u8 func_8026B7B0(HSD_GObj* item_gobj);   // Get Team ID //
+void func_8026BDCC(HSD_GObj* item_gobj); /* extern */
+void func_8026C368(HSD_GObj* item_gobj); /* extern */
 s32 func_8026D324(s32);
 s32 func_8026D604(HSD_GObj* item_gobj);
 void func_8026F9A0();
@@ -987,11 +1098,13 @@ void func_80272784(HSD_GObj* item_gobj);
 void func_802728C8(HSD_GObj* item_gobj);
 void func_80272A18(HSD_JObj* item_jobj);
 void func_80272A3C(HSD_JObj* item_jobj);
-s32 func_80272D1C(HSD_GObj* item_gobj); // Check if GObj entity class = 0x6 (item) //
+s32 func_80272D1C(
+    HSD_GObj* item_gobj); // Check if GObj entity class = 0x6 (item) //
 s32 func_80272D40(HSD_GObj* item_gobj); // Check GObj entity class //
 void func_80272F7C(HSD_JObj*, f32);
 void func_802728C8(HSD_GObj* item_gobj);
-s32 func_80272D1C(HSD_GObj* item_gobj); // Check if GObj entity class = 0x6 (item) //
+s32 func_80272D1C(
+    HSD_GObj* item_gobj); // Check if GObj entity class = 0x6 (item) //
 void func_80273168(HSD_GObj* item_gobj);
 void func_802731A4(HSD_GObj*);
 void func_802731E0(HSD_GObj*);
@@ -1011,18 +1124,18 @@ void func_80274A64(HSD_GObj* item_gobj); /* extern */
 s32 func_80274C78(HSD_GObj* item_gobj);  /* extern */
 void func_80274DAC(HSD_GObj*);
 void func_8027737C(HSD_GObj* item_gobj, Vec3* pos); /* extern */
-void func_80274EF8(HSD_GObj* item_gobj);            // Toggle flag in 0xDC8 off //
+void func_80274EF8(HSD_GObj* item_gobj); // Toggle flag in 0xDC8 off //
 void func_80274F10(HSD_GObj* item_gobj);
 void func_80275158(HSD_GObj* item_gobj, f32 lifetime); // Set item lifetime //
 void func_80275390(HSD_GObj*);
 void func_802753BC(HSD_GObj*, s16);
 void func_802753DC(HSD_GObj*);
 void func_802742F4(HSD_GObj*, s32, s32);
-void func_80274740(HSD_GObj* item_gobj);               /* extern */
-void func_80274A64(HSD_GObj* item_gobj);               /* extern */
-s32 func_80274C78(HSD_GObj* item_gobj);                /* extern */
-void func_8027737C(HSD_GObj* item_gobj, Vec3* pos);    /* extern */
-void func_80274EF8(HSD_GObj* item_gobj);               // Toggle flag in 0xDC8 off //
+void func_80274740(HSD_GObj* item_gobj);            /* extern */
+void func_80274A64(HSD_GObj* item_gobj);            /* extern */
+s32 func_80274C78(HSD_GObj* item_gobj);             /* extern */
+void func_8027737C(HSD_GObj* item_gobj, Vec3* pos); /* extern */
+void func_80274EF8(HSD_GObj* item_gobj); // Toggle flag in 0xDC8 off //
 void func_80275158(HSD_GObj* item_gobj, f32 lifetime); // Set item lifetime //
 void func_80275390(HSD_GObj*);
 void func_80275474(HSD_GObj* item_gobj); // Toggle several flags in 0xDCD off //

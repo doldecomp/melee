@@ -275,7 +275,8 @@ int func_80378560(HSD_PadRumbleListData* a, u8* b)
     return 0;
 }
 
-void func_803786F0_inline(HSD_PadRumbleListData** r6, HSD_PadRumbleListData* r29)
+void func_803786F0_inline(HSD_PadRumbleListData** r6,
+                          HSD_PadRumbleListData* r29)
 {
     HSD_PadRumbleListData* r5;
 

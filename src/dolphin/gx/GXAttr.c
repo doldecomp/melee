@@ -32,8 +32,7 @@ void lbl_8033C918(void);
 
 // https://decomp.me/scratch/d4i4k // 95 (98.90%)
 #pragma push
-asm unk_t
-__GXXfVtxSpecs()
+asm unk_t __GXXfVtxSpecs()
 { // clang-format off
     nofralloc
 /* 8033BDA8 00338988  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -427,19 +426,17 @@ void GXSetVtxAttrFmt(u32 arg0, u32 arg1, s32 arg2, u32 arg3, u8 arg4)
     __GXContexts.main->x4EE |= (u8) (1 << (u8) arg0);
 }
 
-static jtbl_t jtbl_804010F4 = {
-    &lbl_8033CA6C, &lbl_8033CA8C, &lbl_8033CAAC, &lbl_8033CACC,
-    &lbl_8033CAEC, &lbl_8033CB04, &lbl_8033CB24
-};
+static jtbl_t jtbl_804010F4 = { &lbl_8033CA6C, &lbl_8033CA8C, &lbl_8033CAAC,
+                                &lbl_8033CACC, &lbl_8033CAEC, &lbl_8033CB04,
+                                &lbl_8033CB24 };
 
-static jtbl_t jtbl_80401110 = {
-    &lbl_8033C8E0, &lbl_8033C8EC, &lbl_8033C8F8, &lbl_8033C904,
-    &lbl_8033C920, &lbl_8033C928, &lbl_8033C930, &lbl_8033C938,
-    &lbl_8033C940, &lbl_8033C948, &lbl_8033C950, &lbl_8033C958,
-    &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C,
-    &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C910,
-    &lbl_8033C918
-};
+static jtbl_t jtbl_80401110 = { &lbl_8033C8E0, &lbl_8033C8EC, &lbl_8033C8F8,
+                                &lbl_8033C904, &lbl_8033C920, &lbl_8033C928,
+                                &lbl_8033C930, &lbl_8033C938, &lbl_8033C940,
+                                &lbl_8033C948, &lbl_8033C950, &lbl_8033C958,
+                                &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C,
+                                &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C,
+                                &lbl_8033C95C, &lbl_8033C910, &lbl_8033C918 };
 
 void __GXSetVAT(void)
 {

@@ -136,7 +136,8 @@ void func_801376E8(HSD_GObj* gobj)
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x166, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x166, 0x0C4E508C, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80137748 00134328
@@ -149,7 +150,8 @@ void func_80137748(HSD_GObj* gobj)
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4E508C, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 801377B0 00134390
@@ -241,7 +243,8 @@ void func_80137940(HSD_GObj* gobj)
         // default:
         // thing uninitialized
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 801379D0 001345B0
@@ -264,7 +267,8 @@ void func_801379D0(HSD_GObj* gobj)
         // default:
         // thing uninitialized
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80137A68 00134648
@@ -299,7 +303,8 @@ void func_80137A9C(HSD_GObj* gobj)
             thing = 0x168;
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f,
+                                       0.0f);
 }
 
 // 80137B34 00134714
@@ -396,7 +401,8 @@ void func_80137CBC(HSD_GObj* gobj)
         // thing uninitialized
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80137D60 00134940
@@ -420,7 +426,8 @@ void func_80137D60(HSD_GObj* gobj)
         break;
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80137E0C 001349EC
@@ -455,7 +462,8 @@ void func_80137E0C(HSD_GObj* gobj)
             }
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f,
+                                       0.0f);
 }
 
 // 80137ECC 00134AAC
@@ -540,7 +548,8 @@ void func_80137FF8(HSD_GObj* gobj)
         // thing uninitialized
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 8013809C 00134C7C
@@ -567,7 +576,8 @@ void func_8013809C(HSD_GObj* gobj)
         // thing uninitialized
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80138148 00134D28
@@ -602,5 +612,6 @@ void func_80138148(HSD_GObj* gobj)
             }
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f,
+                                       0.0f);
 }

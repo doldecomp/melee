@@ -61,7 +61,8 @@ void lbl_80154BF4(HSD_GObj* gobj)
     fp = gobj->user_data;
     attr = fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
-    func_8015BE40(gobj, &fp->x234C_pos, &fp->x2358_stateVar7, attr->x2C, attr->x28);
+    func_8015BE40(gobj, &fp->x234C_pos, &fp->x2358_stateVar7, attr->x2C,
+                  attr->x28);
 }
 
 // 80154C54 151834

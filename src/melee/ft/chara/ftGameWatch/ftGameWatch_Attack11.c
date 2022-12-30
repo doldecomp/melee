@@ -14,7 +14,8 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
         ftGameWatch_Attack11_DecideAction(fighter_gobj);
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
-        fp->sa.gaw.x224C_greenhouseGObj = func_802C61F4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
+        fp->sa.gaw.x224C_greenhouseGObj =
+            func_802C61F4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
         if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
             if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
                 fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -22,8 +23,10 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
             if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
                 fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
             }
-            fp->cb.x21D4_callback_EnterHitlag = ftGameWatch_ItemGreenhouseEnterHitlag;
-            fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_ItemGreenhouseExitHitlag;
+            fp->cb.x21D4_callback_EnterHitlag =
+                ftGameWatch_ItemGreenhouseEnterHitlag;
+            fp->cb.x21D8_callback_ExitHitlag =
+                ftGameWatch_ItemGreenhouseExitHitlag;
         }
     }
     fp->cb.x21BC_callback_Accessory4 = NULL;
@@ -59,14 +62,16 @@ void ftGameWatch_Attack11_DecideAction(HSD_GObj* fighter_gobj)
         if (fp->cb.x21DC_callback_OnTakeDamage == NULL) {
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag = ftGameWatch_ItemGreenhouseEnterHitlag;
+        fp->cb.x21D4_callback_EnterHitlag =
+            ftGameWatch_ItemGreenhouseEnterHitlag;
         fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_ItemGreenhouseExitHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
 
 // 0x8014BF48
-// https://decomp.me/scratch/zLba7 // Set flags on Mr. Game & Watch's Insecticide Sprayer
+// https://decomp.me/scratch/zLba7 // Set flags on Mr. Game & Watch's
+// Insecticide Sprayer
 void ftGameWatch_ItemGreenhouseSetFlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -78,7 +83,8 @@ void ftGameWatch_ItemGreenhouseSetFlag(HSD_GObj* fighter_gobj)
 extern void func_802C6328(HSD_GObj*);
 
 // 0x8014BF7C
-// https://decomp.me/scratch/2RDRo // Remove Mr. Game & Watch's Insecticide Sprayer
+// https://decomp.me/scratch/2RDRo // Remove Mr. Game & Watch's Insecticide
+// Sprayer
 void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -94,7 +100,8 @@ extern void func_802C6374(HSD_GObj*);
 extern void func_802C6394(HSD_GObj*);
 
 // 0x8014BFD4
-// https://decomp.me/scratch/zVtUN // Apply hitlag to Mr. Game & Watch's Insecticide Sprayer
+// https://decomp.me/scratch/zVtUN // Apply hitlag to Mr. Game & Watch's
+// Insecticide Sprayer
 void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -113,11 +120,13 @@ void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014C034
-// https://decomp.me/scratch/Nkgz4 // Check if Mr. Game & Watch is in any of his jab action states
+// https://decomp.me/scratch/Nkgz4 // Check if Mr. Game & Watch is in any of his
+// jab action states
 BOOL ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 {
     s32 ASID = getFighter(fighter_gobj)->x10_action_state_index;
-    if ((ASID >= AS_GAMEWATCH_ATTACK11) && (ASID <= AS_GAMEWATCH_ATTACK100END)) {
+    if ((ASID >= AS_GAMEWATCH_ATTACK11) && (ASID <= AS_GAMEWATCH_ATTACK100END))
+    {
         return FALSE;
     }
     return TRUE;
@@ -126,7 +135,8 @@ BOOL ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 // 0x8014C05C - Check if Mr. Game & Watch is performing Jab 1 (Attack11)
 BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->x10_action_state_index != AS_GAMEWATCH_ATTACK11) {
+    if (getFighter(fighter_gobj)->x10_action_state_index !=
+        AS_GAMEWATCH_ATTACK11) {
         return TRUE;
     }
     return FALSE;
@@ -135,7 +145,8 @@ BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 extern BOOL func_80094790(HSD_GObj*);
 
 // 0x8014C07C
-// https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Action State handler
+// https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Action State
+// handler
 void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -144,7 +155,8 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
     if (func_80094790(fighter_gobj) == FALSE) {
         fp->x2218_flag.bits.b0 = 0;
         fp->x2218_flag.bits.b1 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK11, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK11,
+                                           0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(fighter_gobj);
         fp->x196C_hitlag_mult = (f32) fp->x110_attr.x18C_Jab_2InputWindow;
         fp->x1970 = 44;

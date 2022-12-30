@@ -5,8 +5,9 @@
 #define REG_MAX 5
 #define EXI_FREQ_1M 0
 #define REG(chan, idx) (__EXIRegs[(chan)][(idx)])
-#define EXI_0CR(tstart, dma, rw, tlen) \
-    ((((u32) (tstart)) << 0) | (((u32) (dma)) << 1) | (((u32) (rw)) << 2) | (((u32) (tlen)) << 4))
+#define EXI_0CR(tstart, dma, rw, tlen)                                         \
+    ((((u32) (tstart)) << 0) | (((u32) (dma)) << 1) | (((u32) (rw)) << 2) |    \
+     (((u32) (tlen)) << 4))
 #define CPR_CLK(x) ((x) << 4)
 #define CPR_CS(x) ((1u << (x)) << 7)
 
@@ -21,7 +22,9 @@ void SetExiInterruptMask(EXIChannel chan, volatile EXIControl* exi)
 
     switch (chan) {
     case EXI_CHAN_0:
-        if (exi->exiCallback == NULL && exi2->exiCallback == NULL || exi->state & EXI_STATE_LOCKED) {
+        if (exi->exiCallback == NULL && exi2->exiCallback == NULL ||
+            exi->state & EXI_STATE_LOCKED)
+        {
             __OSMaskInterrupts(OS_INTRMASK_EXI_0_EXI | OS_INTRMASK_EXI_2_EXI);
         } else {
             __OSUnmaskInterrupts(OS_INTRMASK_EXI_0_EXI | OS_INTRMASK_EXI_2_EXI);
@@ -35,7 +38,9 @@ void SetExiInterruptMask(EXIChannel chan, volatile EXIControl* exi)
         }
         break;
     case EXI_CHAN_2:
-        if (__OSGetInterruptHandler(OS_INTR_PI_DEBUG) == NULL || exi->state & EXI_STATE_LOCKED) {
+        if (__OSGetInterruptHandler(OS_INTR_PI_DEBUG) == NULL ||
+            exi->state & EXI_STATE_LOCKED)
+        {
             __OSMaskInterrupts(OS_INTRMASK_PI_DEBUG);
         } else {
             __OSUnmaskInterrupts(OS_INTRMASK_PI_DEBUG);
@@ -452,7 +457,9 @@ BOOL EXIDetach(EXIChannel chan)
     }
 
     exi->state &= ~EXI_STATE_ATTACHED;
-    __OSMaskInterrupts((OS_INTRMASK_EXI_0_EXT | OS_INTRMASK_EXI_0_TC | OS_INTRMASK_EXI_0_EXI) >> (3 * chan));
+    __OSMaskInterrupts((OS_INTRMASK_EXI_0_EXT | OS_INTRMASK_EXI_0_TC |
+                        OS_INTRMASK_EXI_0_EXI) >>
+                       (3 * chan));
     OSRestoreInterrupts(enabled);
     return TRUE;
 }
@@ -464,8 +471,10 @@ BOOL EXISelect(EXIChannel chan, u32 dev, u32 freq)
     BOOL enabled = OSDisableInterrupts();
 
     if ((exi->state & EXI_STATE_SELECTED) ||
-        chan != 2 && (dev == 0 && !(exi->state & EXI_STATE_ATTACHED) && !__EXIProbe(chan) ||
-                      !(exi->state & EXI_STATE_LOCKED) || (exi->dev != dev))) {
+        chan != 2 && (dev == 0 && !(exi->state & EXI_STATE_ATTACHED) &&
+                          !__EXIProbe(chan) ||
+                      !(exi->state & EXI_STATE_LOCKED) || (exi->dev != dev)))
+    {
         OSRestoreInterrupts(enabled);
         return FALSE;
     }
@@ -709,7 +718,8 @@ BOOL EXIUnlock(EXIChannel chan)
     if (0 < exi->items) {
         unlockedCallback = exi->queue[0].callback;
         if (0 < --exi->items) {
-            memmove(&exi->queue[0], &exi->queue[1], sizeof(exi->queue[0]) * exi->items);
+            memmove(&exi->queue[0], &exi->queue[1],
+                    sizeof(exi->queue[0]) * exi->items);
         }
         unlockedCallback(chan, 0);
     }

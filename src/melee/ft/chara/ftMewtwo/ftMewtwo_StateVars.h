@@ -5,7 +5,8 @@
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftMewtwoSpecialHi {
-    s32 travelFrames; // 0x2340 - Number of frames Teleport's zoom animation lasts for
+    s32 travelFrames; // 0x2340 - Number of frames Teleport's zoom animation
+                      // lasts for
     f32 stickX;
     f32 stickY;
     s32 unk4; // 0x234C - ???

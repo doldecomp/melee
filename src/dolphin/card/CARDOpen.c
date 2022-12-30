@@ -2,7 +2,7 @@
 
 extern DVDDiskID __CARDDiskNone;
 
-#define CARDIsValidBlockNo(card, iBlock) \
+#define CARDIsValidBlockNo(card, iBlock)                                       \
     (CARD_NUM_SYSTEM_BLOCK <= (iBlock) && (iBlock) < (card)->cBlock)
 
 BOOL __CARDCompareFileName(CARDDir* ent, const char* filename)
@@ -35,8 +35,10 @@ s32 __CARDAccess(CARDControl* card, CARDDir* ent)
         return CARD_RESULT_NOFILE;
     }
 
-    if (card->diskID == &__CARDDiskNone || (memcmp(ent->gameName, card->diskID->gameName, 4) == 0 &&
-                                            memcmp(ent->company, card->diskID->company, 2) == 0)) {
+    if (card->diskID == &__CARDDiskNone ||
+        (memcmp(ent->gameName, card->diskID->gameName, 4) == 0 &&
+         memcmp(ent->company, card->diskID->company, 2) == 0))
+    {
         return CARD_RESULT_READY;
     }
 

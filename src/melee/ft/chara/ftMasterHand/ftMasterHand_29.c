@@ -14,7 +14,9 @@ void lbl_80155388(HSD_GObj* gobj)
         fp->x2204_ftcmd_var1 = 0;
     }
     // inlined? possibly shared with lbl_8015521C
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) || (!ftAnim_IsFramesRemaining(gobj))) {
+    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) ||
+        (!ftAnim_IsFramesRemaining(gobj)))
+    {
         ft_2 = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft_2->x1A5C = 0;

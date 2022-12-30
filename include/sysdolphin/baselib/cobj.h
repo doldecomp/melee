@@ -33,22 +33,19 @@ typedef struct _HSD_CObj {
     f32 near; // 0x38
     f32 far;  // 0x3C
     union {
-        struct
-        {
+        struct {
             f32 fov;
             f32 aspect;
         } perspective;
 
-        struct
-        {
+        struct {
             f32 top;
             f32 bottom;
             f32 left;
             f32 right;
         } frustrum;
 
-        struct
-        {
+        struct {
             f32 top;
             f32 bottom;
             f32 left;
@@ -78,22 +75,19 @@ typedef struct _HSD_CObjDesc {
     f32 near;                            // 0x28
     f32 far;                             // 0x2C
     union {
-        struct
-        {
+        struct {
             f32 fov;
             f32 aspect;
         } perspective;
 
-        struct
-        {
+        struct {
             f32 top;
             f32 bottom;
             f32 left;
             f32 right;
         } frustrum;
 
-        struct
-        {
+        struct {
             f32 top;
             f32 bottom;
             f32 left;
@@ -116,7 +110,8 @@ typedef struct _HSD_CameraAnim {
 STRUCT_PLACEHOLDER(cobj, 1)
 CALLBACK_PLACEHOLDER(cobj, 1)
 
-void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32 enable_depth);
+void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
+                         s32 enable_depth);
 void HSD_CObjRemoveAnim(HSD_CObj* cobj);
 HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
 HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj);

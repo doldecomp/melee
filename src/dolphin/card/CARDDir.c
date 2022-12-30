@@ -49,7 +49,8 @@ static void EraseCallback(s32 chan, s32 result)
     }
 
     dir = __CARDGetDirBlock(card);
-    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 * card->sectorSize;
+    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 *
+           card->sectorSize;
     result = __CARDWrite(chan, addr, 0x2000, dir, WriteCallback);
     if (result < 0) {
         goto error;
@@ -84,10 +85,12 @@ s32 __CARDUpdateDir(s32 chan, CARDCallback callback)
     dir = __CARDGetDirBlock(card);
     check = __CARDGetDirCheck(dir);
     ++check->checkCode;
-    __CARDCheckSum(dir, 0x2000 - sizeof(u32), &check->checkSum, &check->checkSumInv);
+    __CARDCheckSum(dir, 0x2000 - sizeof(u32), &check->checkSum,
+                   &check->checkSumInv);
     DCStoreRange(dir, 0x2000);
 
     card->eraseCallback = callback;
-    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 * card->sectorSize;
+    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 *
+           card->sectorSize;
     return __CARDEraseSector(chan, addr, EraseCallback);
 }

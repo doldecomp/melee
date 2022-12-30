@@ -21,7 +21,8 @@ extern void __fini_cpp_exceptions(void)
     }
 }
 
-// Left as asm due to lbl_80005918 being in extabindex, which throws an error about an incompatible section
+// Left as asm due to lbl_80005918 being in extabindex, which throws an error
+// about an incompatible section
 extern asm void __init_cpp_exceptions(void)
 { // clang-format off
     nofralloc

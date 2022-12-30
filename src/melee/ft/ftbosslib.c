@@ -33,10 +33,13 @@ void func_8015BDB4(HSD_GObj* arg0)
     Fighter* fp = arg0->user_data;
     Gm_PKind kind = Player_GetPlayerSlotType(fp->xC_playerID);
     { // TODO: assert macro
-        BOOL bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu);
+        BOOL bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
+                    kind == Gm_PKind_Cpu);
         if (!bad) {
             OSReport("boss is human or boss!\n");
-            __assert("ftbosslib.c", 103, "kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind == Gm_PKind_Cpu");
+            __assert("ftbosslib.c", 103,
+                     "kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind "
+                     "== Gm_PKind_Cpu");
         }
     }
 }
@@ -48,10 +51,13 @@ static inline float my_sqrtf(float x)
     s32 unused = 0; // fakematch
     volatile float y;
     if (x > 0.0f) {
-        double guess = __frsqrte((double) x);                 // returns an approximation to
-        guess = _half * guess * (_three - guess * guess * x); // now have 12 sig bits
-        guess = _half * guess * (_three - guess * guess * x); // now have 24 sig bits
-        guess = _half * guess * (_three - guess * guess * x); // now have 32 sig bits
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess = _half * guess *
+                (_three - guess * guess * x); // now have 12 sig bits
+        guess = _half * guess *
+                (_three - guess * guess * x); // now have 24 sig bits
+        guess = _half * guess *
+                (_three - guess * guess * x); // now have 32 sig bits
         y = (float) (x * guess);
         return y;
     }
@@ -235,7 +241,8 @@ HSD_GObj* func_8015C3E8(s32 arg0)
     HSD_GObj* phi_r31;
     s32 unused[2];
 
-    for (phi_r31 = lbl_804D782C->x20_fighters; phi_r31; phi_r31 = phi_r31->next) {
+    for (phi_r31 = lbl_804D782C->x20_fighters; phi_r31; phi_r31 = phi_r31->next)
+    {
         if (arg0 == func_800872A4(phi_r31)) {
             return phi_r31;
         }

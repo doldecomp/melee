@@ -8,7 +8,7 @@ extern StageInfo stage_info;
 struct {
     s32 unk0;
     s32 unk4;
-}* lbl_804D6ACC;
+} * lbl_804D6ACC;
 
 static u8 lbl_804D6AC8;
 
@@ -67,17 +67,9 @@ static StageCallbacks lbl_803E7DA0[7] = {
 };
 
 StageData lbl_803E7E38 = {
-    0x00000024,
-    lbl_803E7DA0,
-    "/GrNBa.dat",
-    func_80219CA4,
-    func_80219C98,
-    func_80219D54,
-    func_80219D58,
-    func_80219D7C,
-    func_8021A610,
-    func_8021A618,
-    0x00000001,
+    0x00000024,    lbl_803E7DA0,  "/GrNBa.dat",  func_80219CA4,
+    func_80219C98, func_80219D54, func_80219D58, func_80219D7C,
+    func_8021A610, func_8021A618, 0x00000001,
 };
 
 static void func_80219C98()
@@ -93,7 +85,8 @@ static void func_80219CA4()
 
     func_80219D84(0);
     if (func_8016B3D8() != 0 || Stage_80225194() == 0x111 ||
-        Stage_80225194() == 0xF5) {
+        Stage_80225194() == 0xF5)
+    {
         func_80219D84(5);
     } else {
         func_80219D84(3);

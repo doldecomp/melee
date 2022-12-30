@@ -49,7 +49,8 @@ lbl_803473A4:
 
 extern OSInterruptHandler* InterruptHandlerTable;
 
-OSInterruptHandler __OSSetInterruptHandler(__OSInterrupt id, OSInterruptHandler handler)
+OSInterruptHandler __OSSetInterruptHandler(__OSInterrupt id,
+                                           OSInterruptHandler handler)
 {
     OSInterruptHandler old_handler = InterruptHandlerTable[id];
     InterruptHandlerTable[id] = handler;

@@ -132,7 +132,8 @@ void lbl_80151A88(HSD_GObj* gobj)
 
     r5_fp = gobj->user_data;
     r6_attributes = r5_fp->x10C_ftData->ext_attr;
-    func_8015BE40(gobj, &r5_fp->x234C_pos, &r5_fp->x2358_stateVar7, r6_attributes->x2C, r6_attributes->x28);
+    func_8015BE40(gobj, &r5_fp->x234C_pos, &r5_fp->x2358_stateVar7,
+                  r6_attributes->x2C, r6_attributes->x28);
 }
 
 // 80151AC4 14E6A4

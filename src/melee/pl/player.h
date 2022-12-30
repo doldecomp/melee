@@ -8,16 +8,19 @@
 #include <sysdolphin/baselib/jobj.h>
 
 typedef struct _StaticPlayer {
-    /*0x00*/ s32 player_state;     // 0x02 In-Game (includes dead). 0x00 Otherwise.
+    /*0x00*/ s32 player_state; // 0x02 In-Game (includes dead). 0x00 Otherwise.
     /*0x04*/ s32 player_character; //(External ID)
-    /*0x08*/ s32 slot_type;        // (0x0000000 is HMN, 0x00000001 is CPU, 0x00000002 is Demo, 0x00000003 n/a)
+    /*0x08*/ s32 slot_type; // (0x0000000 is HMN, 0x00000001 is CPU, 0x00000002
+                            // is Demo, 0x00000003 n/a)
 
-    /*0x0C*/ u8 transformed[2]; // 0x0001 for normal, 0x0100 for transformed (Probably Zelda/Sheik only)
+    /*0x0C*/ u8 transformed[2]; // 0x0001 for normal, 0x0100 for transformed
+                                // (Probably Zelda/Sheik only)
     /*0x0E*/ s16 unk0E;
 
     union {
         struct {
-            /*0x10-0x1B*/ Vec nametag_pos; /// Horizontal, Vertical, Depth (floats)
+            /*0x10-0x1B*/ Vec
+                nametag_pos; /// Horizontal, Vertical, Depth (floats)
             /*0x1C-0x27*/ Vec transformed_player_pos;
             /*0x28-0x33*/ Vec spawn_platform_final_pos;
             /*0x34-0x3f*/ Vec some_other_player_pos;
@@ -28,7 +31,8 @@ typedef struct _StaticPlayer {
 
     /*0x40*/ f32 facing_direction;
 
-    /*0x44*/ u8 costume_id; // 00 = normal, 01 = red, 02 = blue, 03 = green (reflected in icon immediately)
+    /*0x44*/ u8 costume_id; // 00 = normal, 01 = red, 02 = blue, 03 = green
+                            // (reflected in icon immediately)
     /*0x45*/ s8 unk45;
     /*0x46*/ s8 controller_index;
     /*0x47*/ u8 team; /// 00 = red, 01 = blue, 02 = green
@@ -62,7 +66,8 @@ typedef struct _StaticPlayer {
 
     /*0x70-0x84*/ s32 kos_by_player[6];
 
-    /*0x88*/ u32 match_frame_count; // If -1 in zz_0035184, then it's set to MatchInfo->frame_count
+    /*0x88*/ u32 match_frame_count; // If -1 in zz_0035184, then it's set to
+                                    // MatchInfo->frame_count
     /*0x8C*/ u16 suicide_count;
 
     /*0x8E*/ s8 stocks;
@@ -74,7 +79,10 @@ typedef struct _StaticPlayer {
     /*0x98*/ s32 unk98;
     /*0x9C*/ s32 unk9C;
 
-    /*0xA0-A4*/ s32 joystick_direction_input_count[2]; // Incremented every time you move the joystick a different direction from neutral.
+    /*0xA0-A4*/ s32
+        joystick_direction_input_count[2]; // Incremented every time you move
+                                           // the joystick a different direction
+                                           // from neutral.
 
     /*0xA8*/ s32 nametag_slot_id;
 
@@ -117,9 +125,14 @@ typedef struct _StaticPlayer {
 
     /*0xB8*/ void (*struct_func)(s32 slot);
 
-    /*0xBC*/ s32 stale_move_table_current_write_index; // Zero-Indexed. Rolls over after 9. Increments after each write.
+    /*0xBC*/ s32
+        stale_move_table_current_write_index; // Zero-Indexed. Rolls over
+                                              // after 9. Increments after each
+                                              // write.
 
-    /*0xC0*/ s32 stale_move_index_0; // 1st Short is the move ID,  2nd Short is the # of action states that character has gone through this game
+    /*0xC0*/ s32 stale_move_index_0; // 1st Short is the move ID,  2nd Short is
+                                     // the # of action states that character
+                                     // has gone through this game
     /*0xC4*/ s32 stale_move_index_1;
     /*0xC8*/ s32 stale_move_index_2;
     /*0xCC*/ s32 stale_move_index_3;

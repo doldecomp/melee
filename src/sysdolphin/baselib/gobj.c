@@ -58,7 +58,8 @@ void func_80390CFC(void)
     HSD_GObjProc* proc;
     HSD_GObj* gobj;
 
-    u64 var_r31 = HSD_GObjLibInitData.unk_2 != NULL ? *HSD_GObjLibInitData.unk_2 : 0;
+    u64 var_r31 =
+        HSD_GObjLibInitData.unk_2 != NULL ? *HSD_GObjLibInitData.unk_2 : 0;
     lbl_804D783C += 1;
     if (lbl_804D783C > 2) {
         lbl_804D783C = 0;
@@ -72,8 +73,8 @@ void func_80390CFC(void)
             if (proc->flags_3 != lbl_804D783C) {
                 proc->flags_3 = lbl_804D783C;
                 gobj = proc->gobj;
-                if (!(var_r31 & (1LL << gobj->p_link)) &&
-                    !(proc->flags_1) && !(proc->flags_2)) {
+                if (!(var_r31 & (1LL << gobj->p_link)) && !(proc->flags_1) &&
+                    !(proc->flags_2)) {
                     lbl_804D781C = gobj;
                     lbl_804D7838 = proc;
                     proc->callback(proc->gobj);
@@ -85,7 +86,8 @@ void func_80390CFC(void)
                         } else {
                             if (lbl_804CE3E4.b3) {
                                 func_8039032C(lbl_804CE3E4.type, proc->gobj,
-                                              lbl_804CE3E4.p_link, lbl_804CE3E4.p_prio,
+                                              lbl_804CE3E4.p_link,
+                                              lbl_804CE3E4.p_prio,
                                               lbl_804CE3E4.gobj);
                             }
                             if (lbl_804CE3E4.b2) {
@@ -132,7 +134,8 @@ void func_80390ED0(HSD_GObj* gobj, u32 mask)
             while (prios) {
                 if (prios & 1) {
                     HSD_GObj* cur;
-                    for (cur = lbl_804D7824[j]; cur != NULL; cur = cur->next_gx) {
+                    for (cur = lbl_804D7824[j]; cur != NULL; cur = cur->next_gx)
+                    {
                         if (cur->render_cb != NULL) {
                             render_gobj(cur, i);
                         }

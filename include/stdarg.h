@@ -2,8 +2,7 @@
 #define STDARG_H
 
 #ifdef __MWERKS__
-typedef struct
-{
+typedef struct {
     char gpr;
     char fpr;
     char reserved[2];

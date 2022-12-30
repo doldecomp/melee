@@ -27,17 +27,9 @@ static StageCallbacks lbl_803E9030[4] = {
 };
 
 StageData lbl_803E908C = {
-    0x00000036,
-    lbl_803E9030,
-    "/GrTNs.dat",
-    GrTNess_802225D4,
-    GrTNess_802225D0,
-    GrTNess_80222644,
-    GrTNess_80222648,
-    GrTNess_8022266C,
-    GrTNess_802228A4,
-    GrTNess_802228AC,
-    0x00000001,
+    0x00000036,       lbl_803E9030,     "/GrTNs.dat",     GrTNess_802225D4,
+    GrTNess_802225D0, GrTNess_80222644, GrTNess_80222648, GrTNess_8022266C,
+    GrTNess_802228A4, GrTNess_802228AC, 0x00000001,
 };
 
 static void GrTNess_802225D0(s32)

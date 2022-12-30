@@ -77,7 +77,8 @@
 
 #define union_type_ptcl(o) ((o)->flags & JOBJ_PTCL ? TRUE : FALSE)
 #define union_type_spline(o) ((o)->flags & JOBJ_SPLINE ? TRUE : FALSE)
-#define union_type_dobj(o) ((o)->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? FALSE : TRUE)
+#define union_type_dobj(o)                                                     \
+    ((o)->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? FALSE : TRUE)
 
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
@@ -128,7 +129,8 @@ typedef struct _HSD_JObjInfo {
     s32 (*load)(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* jobj_2);
     void (*make_mtx)(HSD_JObj* jobj);
     void (*make_pmtx)(HSD_JObj* jobj, Mtx mtx, Mtx rmtx);
-    void (*disp)(HSD_JObj* jobj, Mtx vmtx, Mtx pmtx, HSD_TrspMask trsp_mask, u32 rendermode);
+    void (*disp)(HSD_JObj* jobj, Mtx vmtx, Mtx pmtx, HSD_TrspMask trsp_mask,
+                 u32 rendermode);
     void (*release_child)(HSD_JObj* jobj);
 } HSD_JObjInfo;
 
@@ -144,7 +146,8 @@ void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 void HSD_JObjUnref(HSD_JObj* jobj);
 void HSD_JObjRemoveAll(HSD_JObj*); // sysdolphin/baselib/jobj.s
 HSD_JObj* HSD_JObjLoadJoint(HSD_Joint*);
-void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*, HSD_MatAnimJoint*, HSD_ShapeAnimJoint*);
+void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*, HSD_MatAnimJoint*,
+                        HSD_ShapeAnimJoint*);
 void HSD_JObjAnimAll(HSD_JObj*); // asm/sysdolphin/baselib/jobj.s
 void HSD_JObjSetFlags(HSD_JObj*, u32 flags);
 void HSD_JObjSetFlagsAll(HSD_JObj*, u32 flags);
@@ -178,11 +181,11 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 }
 
 // Why does this seem to be a define while the others are inline functions?
-#define HSD_JObjSetMtxDirty(jobj)                        \
-    {                                                    \
-        if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) { \
-            HSD_JObjSetMtxDirtySub(jobj);                \
-        }                                                \
+#define HSD_JObjSetMtxDirty(jobj)                                              \
+    {                                                                          \
+        if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {                       \
+            HSD_JObjSetMtxDirtySub(jobj);                                      \
+        }                                                                      \
     }
 
 inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)

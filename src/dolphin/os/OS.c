@@ -39,14 +39,18 @@ void ClearArena(void)
         u32 boot_region_start = BOOT_REGION_START;
         u32 boot_region_end = BOOT_REGION_END;
         if (boot_region_start == 0) {
-            memset(OSGetArenaLo(), 0, (u32) OSGetArenaHi() - (u32) OSGetArenaLo());
+            memset(OSGetArenaLo(), 0,
+                   (u32) OSGetArenaHi() - (u32) OSGetArenaLo());
         } else if ((u32) OSGetArenaLo() < boot_region_start) {
             if ((u32) OSGetArenaHi() <= boot_region_start) {
-                memset(OSGetArenaLo(), 0, (u32) OSGetArenaHi() - (u32) OSGetArenaLo());
+                memset(OSGetArenaLo(), 0,
+                       (u32) OSGetArenaHi() - (u32) OSGetArenaLo());
             } else {
-                memset(OSGetArenaLo(), 0, boot_region_start - (u32) OSGetArenaLo());
+                memset(OSGetArenaLo(), 0,
+                       boot_region_start - (u32) OSGetArenaLo());
                 if ((u32) OSGetArenaHi() > boot_region_end) {
-                    memset((void*) boot_region_end, 0, (u32) OSGetArenaHi() - boot_region_end);
+                    memset((void*) boot_region_end, 0,
+                           (u32) OSGetArenaHi() - boot_region_end);
                 }
             }
         }

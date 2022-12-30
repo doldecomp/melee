@@ -10,7 +10,8 @@ void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == FALSE) {
-        ef_Spawn(0x48C, fighter_gobj, fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj);
+        ef_Spawn(0x48C, fighter_gobj,
+                 fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj);
         fp->x2219_flag.bits.b0 = TRUE;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -25,7 +26,8 @@ void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == FALSE) {
-        ef_Spawn(0x48B, fighter_gobj, fp->x5E8_fighterBones[func_8007500C(fp, 1)].x0_jobj);
+        ef_Spawn(0x48B, fighter_gobj,
+                 fp->x5E8_fighterBones[func_8007500C(fp, 1)].x0_jobj);
         fp->x2219_flag.bits.b0 = TRUE;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -34,7 +36,8 @@ void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7238
-// https://decomp.me/scratch/cW6I2 // Fox & Falco's grounded Firefox/Firebird Start Action State handler
+// https://decomp.me/scratch/cW6I2 // Fox & Falco's grounded Firefox/Firebird
+// Start Action State handler
 void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
@@ -43,27 +46,32 @@ void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
     fp = getFighter(fighter_gobj);
     foxAttrs = getFtSpecialAttrs(fp);
 
-    fp->foxVars[0].SpecialHi.gravityDelay = (s32) foxAttrs->x54_FOX_FIREFOX_GRAVITY_DELAY;
+    fp->foxVars[0].SpecialHi.gravityDelay =
+        (s32) foxAttrs->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->xEC_ground_vel /= foxAttrs->x58_FOX_FIREFOX_VEL_X;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLD, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateChargeGFX;
 }
 
 // 0x800E72C4
-// https://decomp.me/scratch/tGXo3 // Fox & Falco's aerial Firefox/Firebird Start Action State handler
+// https://decomp.me/scratch/tGXo3 // Fox & Falco's aerial Firefox/Firebird
+// Start Action State handler
 void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
 
-    fp->foxVars[0].SpecialHi.gravityDelay = (s32) foxAttrs->x54_FOX_FIREFOX_GRAVITY_DELAY;
+    fp->foxVars[0].SpecialHi.gravityDelay =
+        (s32) foxAttrs->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->x80_self_vel.x /= foxAttrs->x58_FOX_FIREFOX_VEL_X;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLDAIR, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLDAIR,
+                                       0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateChargeGFX;
@@ -72,11 +80,13 @@ void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 void ftFox_SpecialHi_RotateModel(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    func_8007592C(fp, func_8007500C(fp, 2), DOUBLE_PI32 - fp->foxVars[0].SpecialHi.rotateModel);
+    func_8007592C(fp, func_8007500C(fp, 2),
+                  DOUBLE_PI32 - fp->foxVars[0].SpecialHi.rotateModel);
 }
 
 // 0x800E7354
-// https://decomp.me/scratch/Q5w2u // Fox & Falco's grounded Firefox/Firebird Start Animation callback
+// https://decomp.me/scratch/Q5w2u // Fox & Falco's grounded Firefox/Firebird
+// Start Animation callback
 void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -91,7 +101,8 @@ void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E73B4
-// https://decomp.me/scratch/p8gkd // Fox & Falco's aerial Firefox/Firebird Start Animation callback
+// https://decomp.me/scratch/p8gkd // Fox & Falco's aerial Firefox/Firebird
+// Start Animation callback
 void ftFox_SpecialHiHoldAir_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -124,7 +135,8 @@ void ftFox_SpecialHiHold_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E743C
-// https://decomp.me/scratch/yA7jr // Fox & Falco's aerial Firefox/Firebird Start Physics callback
+// https://decomp.me/scratch/yA7jr // Fox & Falco's aerial Firefox/Firebird
+// Start Physics callback
 void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -134,14 +146,16 @@ void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* fighter_gobj)
     if (fp->foxVars[0].SpecialHi.gravityDelay != 0) {
         fp->foxVars[0].SpecialHi.gravityDelay -= 1;
     } else {
-        func_8007D494(fp, foxAttrs->x60_FOX_FIREFOX_FALL_ACCEL, ftAttrs->x170_TerminalVelocity);
+        func_8007D494(fp, foxAttrs->x60_FOX_FIREFOX_FALL_ACCEL,
+                      ftAttrs->x170_TerminalVelocity);
     }
 
     func_8007CE94(fp, foxAttrs->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
 }
 
 // 0x800E74A8
-// https://decomp.me/scratch/WhNBS // Fox & Falco's grounded Firerfox/Firebird Start Collision callback
+// https://decomp.me/scratch/WhNBS // Fox & Falco's grounded Firerfox/Firebird
+// Start Collision callback
 void ftFox_SpecialHiHold_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_80082708(fighter_gobj) == FALSE) {
@@ -150,7 +164,8 @@ void ftFox_SpecialHiHold_Coll(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E74E4
-// https://decomp.me/scratch/pGK7L // Fox & Falco's aerial Firefox/Firebird Start Collision callback
+// https://decomp.me/scratch/pGK7L // Fox & Falco's aerial Firefox/Firebird
+// Start Collision callback
 void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -173,25 +188,31 @@ void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7554
-// https://decomp.me/scratch/KIopp // Fox & Falco's ground -> air Firefox/Firebird Start Action State handler
+// https://decomp.me/scratch/KIopp // Fox & Falco's ground -> air
+// Firefox/Firebird Start Action State handler
 void ftFox_SpecialHiHold_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D60C(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLDAIR, FTFOX_SPECIALHI_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLDAIR,
+                                       FTFOX_SPECIALHI_COLL_FLAG, NULL,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateChargeGFX;
 }
 
 // 0x800E75C0
-// https://decomp.me/scratch/7Aiah // Fox & Falco's air -> ground Firefox/Firebird Start Action State handler
+// https://decomp.me/scratch/7Aiah // Fox & Falco's air -> ground
+// Firefox/Firebird Start Action State handler
 void ftFox_SpecialHiHoldAir_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLD, FTFOX_SPECIALHI_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLD,
+                                       FTFOX_SPECIALHI_COLL_FLAG, NULL,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateChargeGFX;
 
@@ -199,7 +220,8 @@ void ftFox_SpecialHiHoldAir_AirToGround(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7634
-// https://decomp.me/scratch/c5P3x // Fox & Falco's grounded Firefox/Firebird Launch Animation callback
+// https://decomp.me/scratch/c5P3x // Fox & Falco's grounded Firefox/Firebird
+// Launch Animation callback
 void ftFox_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -215,7 +237,8 @@ void ftFox_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7684
-// https://decomp.me/scratch/1JTle // Fox & Falco's aerial Firefox/Firebird Launch Animation callback
+// https://decomp.me/scratch/1JTle // Fox & Falco's aerial Firefox/Firebird
+// Launch Animation callback
 void ftFox_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -243,7 +266,8 @@ void ftFox_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E76DC
-// https://decomp.me/scratch/VLFDl // Fox & Falco's grounded Firefox/Firebird Launch Physics callback
+// https://decomp.me/scratch/VLFDl // Fox & Falco's grounded Firefox/Firebird
+// Launch Physics callback
 void ftFox_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -251,7 +275,9 @@ void ftFox_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 
     fp->foxVars[0].SpecialHi.unk++;
 
-    if ((s32) fp->foxVars[0].SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END) {
+    if ((s32) fp->foxVars[0].SpecialHi.unk >=
+        foxAttrs->x70_FOX_FIREFOX_DURATION_END)
+    {
         func_8007C930(fp, foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL);
     }
 
@@ -259,7 +285,8 @@ void ftFox_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7758
-// https://decomp.me/scratch/Ppxao // Fox & Falco's aerial Firefox/Firebird Launch Physics callback
+// https://decomp.me/scratch/Ppxao // Fox & Falco's aerial Firefox/Firebird
+// Launch Physics callback
 void ftFox_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -267,14 +294,24 @@ void ftFox_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 
     fp->foxVars[0].SpecialHi.unk++;
 
-    if ((s32) fp->foxVars[0].SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END) {
-        fp->x80_self_vel.x = (f32) - ((fp->x2C_facing_direction * (foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL * cosf(fp->foxVars[0].SpecialHi.rotateModel))) - fp->x80_self_vel.x);
-        fp->x80_self_vel.y = (f32) - ((foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL * sinf(fp->foxVars[0].SpecialHi.rotateModel)) - fp->x80_self_vel.y);
+    if ((s32) fp->foxVars[0].SpecialHi.unk >=
+        foxAttrs->x70_FOX_FIREFOX_DURATION_END)
+    {
+        fp->x80_self_vel.x =
+            (f32) - ((fp->x2C_facing_direction *
+                      (foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL *
+                       cosf(fp->foxVars[0].SpecialHi.rotateModel))) -
+                     fp->x80_self_vel.x);
+        fp->x80_self_vel.y =
+            (f32) - ((foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL *
+                      sinf(fp->foxVars[0].SpecialHi.rotateModel)) -
+                     fp->x80_self_vel.y);
     }
 }
 
 // 0x800E7800
-// https://decomp.me/scratch/OOL4d // Fox & Falco's grounded Firefox/Firebird Launch Collision callback
+// https://decomp.me/scratch/OOL4d // Fox & Falco's grounded Firefox/Firebird
+// Launch Collision callback
 void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
@@ -289,7 +326,9 @@ void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
         return;
     }
     if (collData->x134_envFlags & 0x18000) {
-        fp->foxVars[0].SpecialHi.rotateModel = atan2f(-collData->x14C_ground.normal.x * fp->x2C_facing_direction, collData->x14C_ground.normal.y);
+        fp->foxVars[0].SpecialHi.rotateModel =
+            atan2f(-collData->x14C_ground.normal.x * fp->x2C_facing_direction,
+                   collData->x14C_ground.normal.y);
         ftFox_SpecialHi_RotateModel(fighter_gobj);
     }
 }
@@ -300,7 +339,8 @@ inline BOOL ftFox_SpecialHi_IsBound(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
-    if (!(fp->foxVars[0].SpecialHi.unk2 < foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR)) {
+    if (!(fp->foxVars[0].SpecialHi.unk2 < foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR))
+    {
         return TRUE;
     } else if (func_8009A134(fighter_gobj) != FALSE) {
         return FALSE;
@@ -309,7 +349,8 @@ inline BOOL ftFox_SpecialHi_IsBound(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E78B4
-// https://decomp.me/scratch/siE5t // Fox & Falco's aerial Firefox/Firebird Launch Collision callback
+// https://decomp.me/scratch/siE5t // Fox & Falco's aerial Firefox/Firebird
+// Launch Collision callback
 void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
     f32 facingDir;
@@ -319,7 +360,12 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     CollData* collData = collData = getFtColl(fp);
     if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_BOTH) != FALSE) {
         if (ftFox_SpecialHi_IsBound(fighter_gobj) != FALSE) {
-            if ((!(collData->x134_envFlags & 0x18000)) || (!(lbvector_AngleXY(&collData->x14C_ground.normal, &fp->x80_self_vel) < (0.01745329238474369f * (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE))))) {
+            if ((!(collData->x134_envFlags & 0x18000)) ||
+                (!(lbvector_AngleXY(&collData->x14C_ground.normal,
+                                    &fp->x80_self_vel) <
+                   (0.01745329238474369f *
+                    (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE)))))
+            {
                 ftFox_SpecialHiBound_Action(fighter_gobj);
                 return;
             } else {
@@ -327,35 +373,47 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             }
         }
     }
-    if (func_80081298(fighter_gobj) == FALSE) // Not a single line of this entire function makes the slightest sliver of sense but it matches so whatever :D
+    if (func_80081298(fighter_gobj) ==
+        FALSE) // Not a single line of this entire function makes the slightest
+               // sliver of sense but it matches so whatever :D
     {
         s32 envFlags = collData->x134_envFlags;
         f32 var;
         do {
             if (envFlags & 0x6000) {
-                var = lbvector_AngleXY(&collData->x188_ceiling.normal, &fp->x80_self_vel);
+                var = lbvector_AngleXY(&collData->x188_ceiling.normal,
+                                       &fp->x80_self_vel);
             }
 
-            else if (envFlags & 0x3F) {
-                var = lbvector_AngleXY(&collData->x160_rightwall.normal, &fp->x80_self_vel);
+            else if (envFlags & 0x3F)
+            {
+                var = lbvector_AngleXY(&collData->x160_rightwall.normal,
+                                       &fp->x80_self_vel);
             }
 
-            else if (envFlags & 0xFC0) {
-                var = lbvector_AngleXY(&collData->x174_leftwall.normal, &fp->x80_self_vel);
+            else if (envFlags & 0xFC0)
+            {
+                var = lbvector_AngleXY(&collData->x174_leftwall.normal,
+                                       &fp->x80_self_vel);
             }
 
-            else {
-                if (((!fp->x80_self_vel.x) && (!fp->x80_self_vel.x)) && (!fp->x80_self_vel.x)) // ??????
+            else
+            {
+                if (((!fp->x80_self_vel.x) && (!fp->x80_self_vel.x)) &&
+                    (!fp->x80_self_vel.x)) // ??????
                 {
                 }
                 break;
             }
 
-            if (var < (0.01745329238474369f * (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE))) {
+            if (var < (0.01745329238474369f *
+                       (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE)))
+            {
                 goto facingDir;
             }
 
-            else {
+            else
+            {
                 continue;
             }
 
@@ -370,14 +428,17 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             }
 
             fp->x2C_facing_direction = facingDir;
-            fp->foxVars[0].SpecialHi.rotateModel = atan2f(fp->x80_self_vel.y, fp->x80_self_vel.x * fp->x2C_facing_direction);
+            fp->foxVars[0].SpecialHi.rotateModel =
+                atan2f(fp->x80_self_vel.y,
+                       fp->x80_self_vel.x * fp->x2C_facing_direction);
             ftFox_SpecialHi_RotateModel(fighter_gobj);
         }
     }
 }
 
 // 0x800E7A78
-// https://decomp.me/scratch/UywcP // Fox & Falco's Firefox/Firebird Launch ground -> air Action State handler
+// https://decomp.me/scratch/UywcP // Fox & Falco's Firefox/Firebird Launch
+// ground -> air Action State handler
 void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -386,13 +447,17 @@ void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
 
     func_8007D60C(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRHI, (FIGHTER_HIT_NOUPDATE | FTFOX_SPECIALHI_COLL_FLAG), NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_FOX_SPECIALAIRHI,
+        (FIGHTER_HIT_NOUPDATE | FTFOX_SPECIALHI_COLL_FLAG), NULL,
+        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2223_flag.bits.b4 = 1;
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
 }
 
 // 0x800E7AF4
-// https://decomp.me/scratch/QFaOo // Fox & Falco's grounded Firefox/Firebird Launch Action State handler
+// https://decomp.me/scratch/QFaOo // Fox & Falco's grounded Firefox/Firebird
+// Launch Action State handler
 void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
 {
     Vec3 sp20;
@@ -417,21 +482,31 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
     temp_stick = fp->input.x620_lstick_x;
     stick_x = stickGetDir(fp->input.x620_lstick_x, 0.0f);
 
-    if (!((stick_x + stick_y) < foxAttrs->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN)) {
+    if (!((stick_x + stick_y) <
+          foxAttrs->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN))
+    {
         sp20.x = temp_stick;
         sp20.y = fp->input.x624_lstick_y;
         sp20.z = 0.0f;
 
-        if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &sp20) < HALF_PI32) && (func_8009A134(fighter_gobj) == FALSE)) {
+        if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &sp20) <
+              HALF_PI32) &&
+            (func_8009A134(fighter_gobj) == FALSE))
+        {
             func_8007D9FC(fp);
-            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI, 0, NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI,
+                                               0, NULL, 0.0f, 1.0f, 0.0f);
             tempAttrs = fp->x2D4_specialAttributes;
             fp->x2223_flag.bits.b4 = 1;
-            fp->foxVars[0].SpecialHi.travelFrames = (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
+            fp->foxVars[0].SpecialHi.travelFrames =
+                (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
             fp->foxVars[0].SpecialHi.unk = 0.0f;
             fp->foxVars[0].SpecialHi.unk2 = 0.0f;
-            fp->xEC_ground_vel = foxAttrs->x74_FOX_FIREFOX_SPEED * fp->x2C_facing_direction;
-            fp->foxVars[0].SpecialHi.rotateModel = atan2f(-collData->x14C_ground.normal.x * fp->x2C_facing_direction, collData->x14C_ground.normal.y);
+            fp->xEC_ground_vel =
+                foxAttrs->x74_FOX_FIREFOX_SPEED * fp->x2C_facing_direction;
+            fp->foxVars[0].SpecialHi.rotateModel = atan2f(
+                -collData->x14C_ground.normal.x * fp->x2C_facing_direction,
+                collData->x14C_ground.normal.y);
             ftFox_SpecialHi_RotateModel(fighter_gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
             fp->cb.x21F8_callback = func_8007F76C;
@@ -443,7 +518,8 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7C98
-// https://decomp.me/scratch/k5tbJ // Fox & Falco's aerial Firefox/Firebird Launch Action State handler
+// https://decomp.me/scratch/k5tbJ // Fox & Falco's aerial Firefox/Firebird
+// Launch Action State handler
 void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 {
     ftFoxAttributes* foxAttrs;
@@ -464,29 +540,37 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 
     stick_x = stickGetDir(temp_stick, 0.0f);
 
-    if ((stick_x + stick_y) >= foxAttrs->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN) {
+    if ((stick_x + stick_y) >=
+        foxAttrs->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN) {
         if (temp_stick < 0.0f) {
             temp_stick = -temp_stick;
         }
         if (temp_stick > foxAttrs->x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN) {
             func_8007D9FC(fp);
         }
-        fp->foxVars[0].SpecialHi.rotateModel = atan2f(fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->x2C_facing_direction);
+        fp->foxVars[0].SpecialHi.rotateModel =
+            atan2f(fp->input.x624_lstick_y,
+                   fp->input.x620_lstick_x * fp->x2C_facing_direction);
     } else {
         fp->foxVars[0].SpecialHi.rotateModel = HALF_PI32;
     }
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRHI, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
 
     tempAttrs = fp->x2D4_specialAttributes;
     fp->x2223_flag.bits.b4 = 1;
 
-    fp->foxVars[0].SpecialHi.travelFrames = (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
+    fp->foxVars[0].SpecialHi.travelFrames =
+        (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
     fp->foxVars[0].SpecialHi.unk = 0;
     fp->foxVars[0].SpecialHi.unk2 = 0;
 
-    fp->x80_self_vel.x = fp->x2C_facing_direction * (foxAttrs->x74_FOX_FIREFOX_SPEED * cosf(fp->foxVars[0].SpecialHi.rotateModel));
-    fp->x80_self_vel.y = foxAttrs->x74_FOX_FIREFOX_SPEED * sinf(fp->foxVars[0].SpecialHi.rotateModel);
+    fp->x80_self_vel.x =
+        fp->x2C_facing_direction * (foxAttrs->x74_FOX_FIREFOX_SPEED *
+                                    cosf(fp->foxVars[0].SpecialHi.rotateModel));
+    fp->x80_self_vel.y = foxAttrs->x74_FOX_FIREFOX_SPEED *
+                         sinf(fp->foxVars[0].SpecialHi.rotateModel);
     ftFox_SpecialHi_RotateModel(fighter_gobj);
     fp->cb.x21F8_callback = func_8007F76C;
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
@@ -494,7 +578,8 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7E3C
-// https://decomp.me/scratch/FiAfN // Fox & Falco's grounded Firefox/Firebird End Animation callback
+// https://decomp.me/scratch/FiAfN // Fox & Falco's grounded Firefox/Firebird
+// End Animation callback
 void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -505,14 +590,17 @@ void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7E78
-// https://decomp.me/scratch/COhLZ // Fox & Falco's aerial Firefox/Firebird End Animation callback
+// https://decomp.me/scratch/COhLZ // Fox & Falco's aerial Firefox/Firebird End
+// Animation callback
 void ftFox_SpecialHiFall_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY, foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+                      foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                      foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
     }
 }
 
@@ -529,7 +617,8 @@ void ftFox_SpecialHiFall_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7EE0
-// https://decomp.me/scratch/eHUMt // Fox & Falco's grounded Firefox/Firebird End Physics callback
+// https://decomp.me/scratch/eHUMt // Fox & Falco's grounded Firefox/Firebird
+// End Physics callback
 void ftFox_SpecialHiLanding_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -548,19 +637,23 @@ void ftFox_SpecialHiFall_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7F40
-// https://decomp.me/scratch/JEGS6 // Fox & Falco's grounded Firefox/Firebird End Collision callback
+// https://decomp.me/scratch/JEGS6 // Fox & Falco's grounded Firefox/Firebird
+// End Collision callback
 void ftFox_SpecialHiLanding_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (func_80082708(fighter_gobj) == FALSE) {
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY, foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+                      foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                      foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
     }
 }
 
 // 0x800E7FA0
-// https://decomp.me/scratch/0Veb7 // Fox & Falco's aerial Firefox/Firebird End Collision callback
+// https://decomp.me/scratch/0Veb7 // Fox & Falco's aerial Firefox/Firebird End
+// Collision callback
 void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -574,16 +667,21 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E7FF0
-// https://decomp.me/scratch/IQ1YX // Fox & Falco's aerial Firefox/Firebird End Action State handler
+// https://decomp.me/scratch/IQ1YX // Fox & Falco's aerial Firefox/Firebird End
+// Action State handler
 void ftFox_SpecialHiFall_Action(HSD_GObj* fighter_gobj)
 {
     func_8007D7FC(fighter_gobj->user_data);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_LANDING, (FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE), NULL, 13.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_FOX_SPECIALHI_LANDING,
+        (FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE), NULL, 13.0f, 1.0f,
+        0.0f);
     func_8006EBA4(fighter_gobj);
 }
 
 // 0x800E8048
-// https://decomp.me/scratch/rGuhz // Fox & Falco's ground -> air Firefox/Firebird End Action State handler
+// https://decomp.me/scratch/rGuhz // Fox & Falco's ground -> air
+// Firefox/Firebird End Action State handler
 void ftFox_SpecialHiFall_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -592,24 +690,28 @@ void ftFox_SpecialHiFall_AirToGround(HSD_GObj* fighter_gobj)
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
         func_8007D7FC(fp);
     }
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_LANDING, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_LANDING,
+                                       0, NULL, 0.0f, 1.0f, 0.0f);
     fp->cb.x21F8_callback = func_8007F76C;
 }
 
 // 0x800E80C0
-// https://decomp.me/scratch/YjAsa // Fox & Falco's Firefox/Firebird End -> Rebound Collision thing
+// https://decomp.me/scratch/YjAsa // Fox & Falco's Firefox/Firebird End ->
+// Rebound Collision thing
 void ftFox_SpecialHiLanding_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
     func_8007DB24(fighter_gobj);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_FALL, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_FALL, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
     fp->cb.x21F8_callback = func_8007F76C;
 }
 
 // 0x800E8124
-// https://decomp.me/scratch/SSvDi // Fox & Falco's Firefox/Firebird Rebound Animation callback
+// https://decomp.me/scratch/SSvDi // Fox & Falco's Firefox/Firebird Rebound
+// Animation callback
 void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
 {
     attr* ftAttrs;
@@ -620,14 +722,20 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
     ftAttrs = &fp->x110_attr;
     foxAttrs = getFtSpecialAttrs(fp);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && ((s32) fp->xE0_ground_or_air == GA_Air)) {
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY, foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) &&
+        ((s32) fp->xE0_ground_or_air == GA_Air))
+    {
+        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+                      foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                      foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
         fp->x1968_jumpsUsed = (u8) ftAttrs->x168_MaxJumps;
         return;
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
-            func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY, foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
+            func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+                          foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                          foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
             fp->x1968_jumpsUsed = (u8) ftAttrs->x168_MaxJumps;
             return;
         }
@@ -644,7 +752,8 @@ void ftFox_SpecialHiBound_IASA(HSD_GObj* fighter_gobj)
 extern void func_800851C0(HSD_GObj*);
 
 // 0x800E8200
-// https://decomp.me/scratch/nIsRU // Fox & Falco's Firefox/Firebird Rebound Physics callback
+// https://decomp.me/scratch/nIsRU // Fox & Falco's Firefox/Firebird Rebound
+// Physics callback
 void ftFox_SpecialHiBound_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -659,7 +768,8 @@ void ftFox_SpecialHiBound_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E824C
-// https://decomp.me/scratch/iGtSK // Fox & Falco's Firefox/Firebird Rebound Collision callback
+// https://decomp.me/scratch/iGtSK // Fox & Falco's Firefox/Firebird Rebound
+// Collision callback
 void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -682,7 +792,8 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
         }
     }
 
-    else {
+    else
+    {
         func_80084104(fighter_gobj);
     }
 }
@@ -694,7 +805,8 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* fighter_gobj)
     CollData* collData = collData = getFtColl(fp);
 
     if (fp->x6F0_collData.x134_envFlags & 0x18000) {
-        sp1C = -atan2f(collData->x14C_ground.normal.x, collData->x14C_ground.normal.y);
+        sp1C = -atan2f(collData->x14C_ground.normal.x,
+                       collData->x14C_ground.normal.y);
     } else {
         sp1C = 0.0f;
     }
@@ -705,13 +817,15 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E82E4
-// https://decomp.me/scratch/ckSnm // Fox & Falco's Firefox/Firebird Rebound Action State handler
+// https://decomp.me/scratch/ckSnm // Fox & Falco's Firefox/Firebird Rebound
+// Action State handler
 void ftFox_SpecialHiBound_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_BOUND, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_BOUND, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21F8_callback = func_8007F76C;
     fp->x80_self_vel.x *= foxAttrs->x84_FOX_FIREFOX_BOUND_VEL_X;

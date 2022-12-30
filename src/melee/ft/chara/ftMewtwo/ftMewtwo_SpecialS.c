@@ -18,14 +18,16 @@ inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
     if (fp->x1A58_interactedFighter == NULL) {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BCF18);
+        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
+                      func_800BCF18);
     } else {
         func_8007E2F4(fp, 0x1FF);
     }
 }
 
 // 0x801466C4
-// https://decomp.me/scratch/X6OTU // Mewtwo's grounded Confusion Action State handler
+// https://decomp.me/scratch/X6OTU // Mewtwo's grounded Confusion Action State
+// handler
 void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
@@ -37,7 +39,8 @@ void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->mewtwoVars[0].SpecialS.isConfusionReflect = FALSE;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 
     ftMewtwo_SpecialS_SetGrab(fighter_gobj);
@@ -50,14 +53,16 @@ inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
     if (fp->x1A58_interactedFighter == NULL) {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL, func_800BD000);
+        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
+                      func_800BD000);
     } else {
         func_8007E2F4(fp, 0x1FF);
     }
 }
 
 // 0x8014677C
-// https://decomp.me/scratch/4DvVc // Mewtwo's aerial Confusion Action State handler
+// https://decomp.me/scratch/4DvVc // Mewtwo's aerial Confusion Action State
+// handler
 void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
@@ -74,7 +79,8 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
         fp->sa.mewtwo.x223C_isConfusionBoost = TRUE;
     }
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 
     ftMewtwo_SpecialAirS_SetGrab(fighter_gobj);
@@ -100,7 +106,8 @@ inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 }
 
 // 0x80146858
-// https://decomp.me/scratch/PYxCI // Mewtwo's grounded Confusion Animation callback
+// https://decomp.me/scratch/PYxCI // Mewtwo's grounded Confusion Animation
+// callback
 void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
@@ -110,7 +117,8 @@ void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x801468EC
-// https://decomp.me/scratch/rpTDv // Mewtwo's aerial Confusion Animation callback
+// https://decomp.me/scratch/rpTDv // Mewtwo's aerial Confusion Animation
+// callback
 void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
@@ -134,7 +142,8 @@ void ftMewtwo_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 extern void func_8007AEF8(HSD_GObj* fighter_gobj);
 
 // 0x80146988
-// https://decomp.me/scratch/o5TC6 // Mewtwo's grounded Confusion Physics callback
+// https://decomp.me/scratch/o5TC6 // Mewtwo's grounded Confusion Physics
+// callback
 void ftMewtwo_SpecialS_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084F3C(fighter_gobj);
@@ -162,14 +171,17 @@ inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
 extern void func_8007D468(Fighter*);
 
 // 0x801469F0
-// https://decomp.me/scratch/W9wyx // Mewtwo's ground -> air Confusion Action State handler
+// https://decomp.me/scratch/W9wyx // Mewtwo's ground -> air Confusion Action
+// State handler
 void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, FTMEWTWO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS,
+                                       FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     func_8007D468(fp);
 
@@ -181,14 +193,17 @@ void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 }
 
 // 0x80146AD4
-// https://decomp.me/scratch/gv2WK // Mewtwo's air -> ground Confusion Action State handler
+// https://decomp.me/scratch/gv2WK // Mewtwo's air -> ground Confusion Action
+// State handler
 void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, FTMEWTWO_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS,
+                                       FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     ftMewtwo_SpecialS_SetGrab(fighter_gobj);
 
@@ -213,7 +228,8 @@ void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
     func_80082C74(fighter_gobj, ftMewtwo_SpecialAirS_AirToGround);
 }
 
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, void (*cb_OnReflect)(HSD_GObj*));
+extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*,
+                                    void (*cb_OnReflect)(HSD_GObj*));
 
 // 0x80146C08
 // https://decomp.me/scratch/BDCzb // Confusion Reflect think function
@@ -226,8 +242,12 @@ void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj)
     reflectFlag = fp->x2204_ftcmd_var1;
     switch (reflectFlag) {
     case CONFUSION_REFLECT_ON:
-        ftColl_CreateReflectHit(fighter_gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION, ftMewtwo_SpecialS_OnReflect); // Really? A callback that simply returns instead of just NULL? //
-        fp->x2218_flag.bits.b4 = 1;                                                                                        // Here it is... the reason Confusion cannot change ownership.
+        ftColl_CreateReflectHit(
+            fighter_gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION,
+            ftMewtwo_SpecialS_OnReflect); // Really? A callback that simply
+                                          // returns instead of just NULL? //
+        fp->x2218_flag.bits.b4 =
+            1; // Here it is... the reason Confusion cannot change ownership.
         fp->mewtwoVars[0].SpecialS.isConfusionReflect = TRUE;
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
         return;

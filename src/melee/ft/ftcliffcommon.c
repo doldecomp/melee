@@ -13,7 +13,9 @@ BOOL func_80081298(HSD_GObj* gobj)
     if (fp->input.x624_lstick_y <= -p_ftCommonData->x480) {
         return FALSE;
     }
-    if (((fp->x6F0_collData.x134_envFlags & 0x03000000) != 0) && (((fp->x2228_flag.bits.b2 & 1) == 0))) {
+    if (((fp->x6F0_collData.x134_envFlags & 0x03000000) != 0) &&
+        (((fp->x2228_flag.bits.b2 & 1) == 0)))
+    {
         other_gobj = func_80082E3C(gobj);
         if (other_gobj == NULL) {
             func_80040048(fp->xC_playerID, fp->x221F_flag.bits.b4);
@@ -21,7 +23,9 @@ BOOL func_80081298(HSD_GObj* gobj)
             return TRUE;
         }
         other_fp = other_gobj->user_data;
-        func_8003FFDC(other_fp->xC_playerID, other_fp->x221F_flag.bits.b4, fp->xC_playerID, fp->x221F_flag.bits.b4, other_fp->commonVars[0].CliffCommon.ledgeID);
+        func_8003FFDC(other_fp->xC_playerID, other_fp->x221F_flag.bits.b4,
+                      fp->xC_playerID, fp->x221F_flag.bits.b4,
+                      other_fp->commonVars[0].CliffCommon.ledgeID);
         fp->x213C = other_fp->commonVars[0].CliffCommon.ledgeID;
         return FALSE;
     }
@@ -74,7 +78,8 @@ void func_80081370(HSD_GObj* gobj)
     } else {
         func_80053DA4(fp->commonVars[0].CliffCommon.ledgeID, unkParam.x10);
     }
-    efAsync_Spawn(gobj, (void*) ((u32) gobj->user_data + 0x60C), 2, 0x41C, 0, &unkParam.x10);
+    efAsync_Spawn(gobj, (void*) ((u32) gobj->user_data + 0x60C), 2, 0x41C, 0,
+                  &unkParam.x10);
     func_80088148(fp, 4, 0x7F, 0x40);
 }
 
@@ -85,7 +90,9 @@ void func_80081504(HSD_GObj* gobj)
     }
 }
 
-void func_80081540() {}
+void func_80081540()
+{
+}
 
 void func_80081544(HSD_GObj* gobj)
 {
@@ -100,7 +107,8 @@ void func_80081544(HSD_GObj* gobj)
         } else {
             func_80053DA4(fp->commonVars[0].CliffCommon.ledgeID, sp10);
         }
-        fp->xB0_pos.x = (f32) ((fp->x68C_transNPos.z * fp->x2C_facing_direction) + sp10[0]);
+        fp->xB0_pos.x =
+            (f32) ((fp->x68C_transNPos.z * fp->x2C_facing_direction) + sp10[0]);
         fp->xB0_pos.y = (f32) (sp10[1] + fp->x68C_transNPos.y);
         return;
     }
@@ -126,7 +134,8 @@ void func_80081644(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_800761C8();
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
-        func_8005811C(&fp->x6F0_collData, fp->commonVars[0].CliffCommon.ledgeID);
+        func_8005811C(&fp->x6F0_collData,
+                      fp->commonVars[0].CliffCommon.ledgeID);
         fp->x890_cameraBox->xC_flag.bits.b0 = 1;
     }
 }

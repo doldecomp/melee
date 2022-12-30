@@ -377,7 +377,8 @@ lbl_8033FC2C:
 
 void GXSetNumIndStages(s32 arg0)
 {
-    __GXContexts.main->x204 = __GXContexts.main->x204 & 0xFFF8FFFF | arg0 << 0x10 & 0xFF0000;
+    __GXContexts.main->x204 =
+        __GXContexts.main->x204 & 0xFFF8FFFF | arg0 << 0x10 & 0xFF0000;
     __GXContexts.main->x4F0_flags |= 6;
 }
 

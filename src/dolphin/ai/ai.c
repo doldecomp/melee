@@ -38,7 +38,8 @@ void AIInitDMA(u32 addr, u32 length)
     oldInts = OSDisableInterrupts();
     __DSPRegs[24] = (u16) ((__DSPRegs[24] & ~0x3FF) | (addr >> 16));
     __DSPRegs[25] = (u16) ((__DSPRegs[25] & ~0xFFE0) | (0xffff & addr));
-    __DSPRegs[27] = (u16) ((__DSPRegs[27] & ~0x7FFF) | (u16) ((length >> 5) & 0xFFFF));
+    __DSPRegs[27] =
+        (u16) ((__DSPRegs[27] & ~0x7FFF) | (u16) ((length >> 5) & 0xFFFF));
     OSRestoreInterrupts(oldInts);
 }
 
@@ -320,7 +321,8 @@ static void __AI_SRC_INIT(void)
             temp = min_wait;
             done = 1;
             ++initCnt;
-        } else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer) {
+        } else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer)
+        {
             temp = max_wait;
             done = 1;
             ++initCnt;

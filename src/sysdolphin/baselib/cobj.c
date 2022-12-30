@@ -6,18 +6,24 @@ extern f32 lbl_804DE474; // 0.01745329252f
 
 #define DegToRad(a) ((a) *0.01745329252f)
 
-// Only NON_MATCHING because there's a swapped lfs operation if using extern on the float constants
+// Only NON_MATCHING because there's a swapped lfs operation if using extern on
+// the float constants
 #ifdef NON_MATCHING
-void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32 enable_depth)
+void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
+                         s32 enable_depth)
 {
     f32 m_val, z_val, left_res, right_res, top_res, bottom_res;
 
-    if (cobj != NULL && ((enable_color != 0 || enable_alpha != 0 || enable_depth == 0))) {
+    if (cobj != NULL &&
+        ((enable_color != 0 || enable_alpha != 0 || enable_depth == 0)))
+    {
         z_val = (0.5 * (HSD_CObjGetNear(cobj) + HSD_CObjGetFar(cobj)));
 
         switch (HSD_CObjGetProjectionType(cobj)) {
         case PROJ_PERSPECTIVE:
-            top_res = (z_val * tanf(0.5f * DegToRad(cobj->projection_param.perspective.fov)));
+            top_res =
+                (z_val *
+                 tanf(0.5f * DegToRad(cobj->projection_param.perspective.fov)));
             bottom_res = -top_res;
             right_res = top_res * cobj->projection_param.perspective.aspect;
             left_res = -right_res;
@@ -37,11 +43,13 @@ void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32
             break;
         }
 
-        HSD_EraseRect(top_res, bottom_res, left_res, right_res, -z_val, enable_color, enable_alpha, enable_depth);
+        HSD_EraseRect(top_res, bottom_res, left_res, right_res, -z_val,
+                      enable_color, enable_alpha, enable_depth);
     }
 }
 #else
-asm void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha, s32 enable_depth)
+asm void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
+                             s32 enable_depth)
 { // clang-format off
     nofralloc
 /* 803676F8 003642D8  7C 08 02 A6 */	mflr r0

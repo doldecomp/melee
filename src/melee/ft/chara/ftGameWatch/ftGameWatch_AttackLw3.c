@@ -23,7 +23,8 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj)
             func_8026B724(fp->x1974_heldItem);
             func_8007E6DC(fighter_gobj, fp->x1974_heldItem, 1);
         }
-        fp->sa.gaw.x2250_manholeGObj2 = func_802C65E4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
+        fp->sa.gaw.x2250_manholeGObj2 =
+            func_802C65E4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
     }
     if (fp->sa.gaw.x2250_manholeGObj2 != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
@@ -98,7 +99,8 @@ void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014AD98
-// https://decomp.me/scratch/IERdX // Check if Mr. Game & Watch is performing Down Tilt - remove if returns true
+// https://decomp.me/scratch/IERdX // Check if Mr. Game & Watch is performing
+// Down Tilt - remove if returns true
 BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -111,14 +113,16 @@ BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
 extern BOOL func_80094790(HSD_GObj*);
 
 // 0x8014ADB8
-// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Action State Handler
+// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Action State
+// Handler
 void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     if (func_80094790(fighter_gobj) == FALSE) {
         fp->x2218_flag.bits.b0 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACKLW3, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACKLW3,
+                                           0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemManholeSetup;
     }
@@ -127,7 +131,8 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
 extern void func_800D638C(HSD_GObj*);
 
 // 0x8014AE3C
-// https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation callback
+// https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation
+// callback
 void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj); // Filler
@@ -184,14 +189,16 @@ void ftGameWatch_AttackLw3_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014AF6C
-// https://decomp.me/scratch/Xp4C5 // Mr. Game & Watch's Down Tilt Physics callback
+// https://decomp.me/scratch/Xp4C5 // Mr. Game & Watch's Down Tilt Physics
+// callback
 void ftGameWatch_AttackLw3_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084F3C(fighter_gobj);
 }
 
 // 0x8014AF8C
-// https://decomp.me/scratch/0stMN // Mr. Game & Watch's Down Tilt Collision callback
+// https://decomp.me/scratch/0stMN // Mr. Game & Watch's Down Tilt Collision
+// callback
 void ftGameWatch_AttackLw3_Coll(HSD_GObj* fighter_gobj)
 {
     func_80084104(fighter_gobj);

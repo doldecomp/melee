@@ -10,7 +10,8 @@ void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
     fp = getFighter(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALHI, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALHI, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -25,8 +26,10 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = (f32) (fp->x80_self_vel.x * sa->x2C_MARIO_SUPERJUMP_VEL_X);
-    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f, 0.0f);
+    fp->x80_self_vel.x =
+        (f32) (fp->x80_self_vel.x * sa->x2C_MARIO_SUPERJUMP_VEL_X);
+    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRHI, 0, NULL,
+                                       0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -39,7 +42,8 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
     fp = getFighter(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 0, 1, 0, sa->x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY, sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
+        func_80096900(gobj, 0, 1, 0, sa->x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY,
+                      sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
     }
 }
 
@@ -74,10 +78,16 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
 
     if ((s32) fp->x2200_ftcmd_var0 == 0U) {
         if (lstick_x > sa->x24_MARIO_SUPERJUMP_MOMENTUM_STICK_RANGE) {
-            tmp_expr = (f32) ((f64) sa->x28_MARIO_SUPERJUMP_ANGLE_DIFF *
-                              ((f64) (lstick_x - sa->x24_MARIO_SUPERJUMP_MOMENTUM_STICK_RANGE) / (1.0 - (f64) sa->x24_MARIO_SUPERJUMP_MOMENTUM_STICK_RANGE)));
+            tmp_expr =
+                (f32) ((f64) sa->x28_MARIO_SUPERJUMP_ANGLE_DIFF *
+                       ((f64) (lstick_x -
+                               sa->x24_MARIO_SUPERJUMP_MOMENTUM_STICK_RANGE) /
+                        (1.0 -
+                         (f64) sa->x24_MARIO_SUPERJUMP_MOMENTUM_STICK_RANGE)));
 
-            tmp = (fp->input.x620_lstick_x > 0.0f) ? -(DEGREES_TO_RADIANS * tmp_expr) : (DEGREES_TO_RADIANS * tmp_expr);
+            tmp = (fp->input.x620_lstick_x > 0.0f)
+                      ? -(DEGREES_TO_RADIANS * tmp_expr)
+                      : (DEGREES_TO_RADIANS * tmp_expr);
             inputStickangle = fp->x6BC_inputStickangle;
 
             if (abs(tmp) > abs(inputStickangle)) {
@@ -93,9 +103,11 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
         throwflag_flag = 0;
     }
     if (throwflag_flag != 0) {
-        if (abs(fp->input.x620_lstick_x) > sa->x20_MARIO_SUPERJUMP_REVERSE_STICK_RANGE) {
+        if (abs(fp->input.x620_lstick_x) >
+            sa->x20_MARIO_SUPERJUMP_REVERSE_STICK_RANGE) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->x2C_facing_direction));
+            func_80075AF0(fp, 0,
+                          (f32) (HALF_PI * (f64) fp->x2C_facing_direction));
         }
     }
 }
@@ -139,12 +151,16 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         func_80085154(gobj);
-        fp->x80_self_vel.x = (f32) (fp->x80_self_vel.x * sa->x34_MARIO_SUPERJUMP_VEL_MUL);
-        fp->x80_self_vel.y = (f32) (fp->x80_self_vel.y * sa->x34_MARIO_SUPERJUMP_VEL_MUL);
-        fp->x80_self_vel.z = (f32) (fp->x80_self_vel.z * sa->x34_MARIO_SUPERJUMP_VEL_MUL);
+        fp->x80_self_vel.x =
+            (f32) (fp->x80_self_vel.x * sa->x34_MARIO_SUPERJUMP_VEL_MUL);
+        fp->x80_self_vel.y =
+            (f32) (fp->x80_self_vel.y * sa->x34_MARIO_SUPERJUMP_VEL_MUL);
+        fp->x80_self_vel.z =
+            (f32) (fp->x80_self_vel.z * sa->x34_MARIO_SUPERJUMP_VEL_MUL);
         return;
     }
-    func_8007D494(fp, sa->x30_MARIO_SUPERJUMP_GRAVITY, attr_ptr->x170_TerminalVelocity);
+    func_8007D494(fp, sa->x30_MARIO_SUPERJUMP_GRAVITY,
+                  attr_ptr->x170_TerminalVelocity);
     func_8007CF58(fp);
 }
 
@@ -172,7 +188,8 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else {
-            func_800831CC(gobj, &func_80096CC8, &ftMario_SpecialHi_CheckLanding);
+            func_800831CC(gobj, &func_80096CC8,
+                          &ftMario_SpecialHi_CheckLanding);
         }
     } else {
         func_80084104(gobj);

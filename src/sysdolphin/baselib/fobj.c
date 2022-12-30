@@ -73,7 +73,8 @@ void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
     }
 }
 
-inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
+inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj, void (*obj_update)(),
+                              f32 rate)
 {
     if (fobj->op_intrp == HSD_A_OP_KEY) {
         HSD_FObjInterpretAnim(fobj, obj, obj_update, rate);
@@ -89,7 +90,8 @@ void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
     HSD_FObjSetState(fobj, 0);
 }
 
-void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
+void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(),
+                         f32 rate)
 {
     for (; fobj != NULL; fobj = fobj->next) {
         HSD_FObjStopAnim(fobj, obj, obj_update, rate);
@@ -167,7 +169,8 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 ra
     }
 }
 
-void FObjUpdateAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void*, s32, FObjData*))
+void FObjUpdateAnim(HSD_FObj* fobj, void* obj,
+                    void (*obj_update)(void*, s32, FObjData*))
 {
     f32 phi_f0;
     FObjData fobjdata;
@@ -208,8 +211,8 @@ void FObjUpdateAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void*, s32, FO
     case HSD_A_OP_SPL:
     case HSD_A_OP_SLP:
         if (fobj->fterm != 0) {
-            fobjdata.fv = splGetHelmite(1.0 / fobj->fterm,
-                                        fobj->time, fobj->p0, fobj->p1, fobj->d0, fobj->d1);
+            fobjdata.fv = splGetHelmite(1.0 / fobj->fterm, fobj->time, fobj->p0,
+                                        fobj->p1, fobj->d0, fobj->d1);
         } else {
             fobjdata.fv = fobj->p1;
         }
