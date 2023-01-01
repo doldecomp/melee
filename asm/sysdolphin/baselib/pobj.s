@@ -2795,8 +2795,8 @@ lbl_8036E064:
 /* 8036E078 0036AC58  90 A3 00 04 */	stw r5, 4(r3)
 /* 8036E07C 0036AC5C  4E 80 00 20 */	blr
 
-.global func_8036E080
-func_8036E080:
+.global HSD_PObjGetMtxMark
+HSD_PObjGetMtxMark:
 /* 8036E080 0036AC60  7C 08 02 A6 */	mflr r0
 /* 8036E084 0036AC64  90 01 00 04 */	stw r0, 4(r1)
 /* 8036E088 0036AC68  94 21 FF D8 */	stwu r1, -0x28(r1)
