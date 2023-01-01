@@ -2,28 +2,13 @@
 
 #define MAX_FT_PARTS 140
 
-#define JOBJ_NEXT(jobj)   ((jobj) == NULL ? NULL : (jobj)->next)
-#define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)
-#define JOBJ_CHILD(jobj)  ((jobj) == NULL ? NULL : (jobj)->child)
+#define JOBJ_NEXT(jobj)        ((jobj) == NULL ? NULL : (jobj)->next)
+#define JOBJ_PARENT(jobj)      ((jobj) == NULL ? NULL : (jobj)->parent)
+#define JOBJ_CHILD(jobj)       ((jobj) == NULL ? NULL : (jobj)->child)
+#define JOBJ_PARENT_NEXT(jobj) ((jobj) == NULL ? NULL : JOBJ_NEXT((jobj)->parent))
 
 extern void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
                           s32* dobj_index, u32 hierarchy_depth);
-
-#define JOBJ_NEXT(jobj)   ((jobj) == NULL ? (HSD_JObj*)NULL : (jobj)->next)
-#define JOBJ_PARENT(jobj) ((jobj) == NULL ? (HSD_JObj*)NULL : (jobj)->parent)
-#define JOBJ_CHILD(jobj)  ((jobj) == NULL ? (HSD_JObj*)NULL : (jobj)->child)
-
-#define MAX_FT_PARTS 140
-
-typedef struct _FighterPartsTable {
-    u8* joint_to_part;
-    u8* part_to_joint;
-    u32 parts_num;
-} FighterPartsTable;
-
-extern FighterPartsTable** ftPartsTable;
-
-extern s32 func_8007506C(s32 ftkind, s32 part);
 
 void func_800743E0(HSD_GObj* fighter_obj)
 {
@@ -65,8 +50,8 @@ void func_800743E0(HSD_GObj* fighter_obj)
                 break;
             }
 
-            if (JOBJ_NEXT(JOBJ_PARENT(jobj)) != NULL) {
-                jobj = JOBJ_NEXT(JOBJ_PARENT(jobj));
+            if (JOBJ_PARENT_NEXT(jobj) != NULL) {
+                jobj = JOBJ_PARENT_NEXT(jobj);
                 hierarchy_depth--;
                 break;
             }
