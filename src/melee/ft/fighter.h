@@ -78,8 +78,8 @@ typedef enum FighterKind {
     FTKIND_GIRL,
     FTKIND_GKOOPS,
     FTKIND_SANDBAG,
-    FTKIND_NONE
-
+    FTKIND_NONE,
+    FTKIND_MAX = FTKIND_NONE
 } FighterKind;
 
 typedef enum CharacterKind {
@@ -116,8 +116,8 @@ typedef enum CharacterKind {
     CKIND_CREZYH,    // Crazy Hand (CrezyH) //
     CHKIND_SANDBAG,  // Sandbag //
     CHKIND_POPO,     // Popo //
-    CHKIND_NONE      // None //
-
+    CHKIND_NONE,     // None //
+    CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
 // Action State Change flags
