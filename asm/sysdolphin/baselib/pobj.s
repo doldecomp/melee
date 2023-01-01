@@ -2778,8 +2778,8 @@ HSD_PObjClearMtxMark:
 /* 8036E044 0036AC24  90 85 00 0C */	stw r4, 0xc(r5)
 /* 8036E048 0036AC28  4E 80 00 20 */	blr
 
-.global func_8036E04C
-func_8036E04C:
+.global HSD_PObjSetMtxMark
+HSD_PObjSetMtxMark:
 /* 8036E04C 0036AC2C  2C 03 00 02 */	cmpwi r3, 2
 /* 8036E050 0036AC30  4C 80 00 20 */	bgelr
 /* 8036E054 0036AC34  2C 03 00 00 */	cmpwi r3, 0
