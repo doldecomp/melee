@@ -24,21 +24,21 @@
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)();
 
-extern ft_callback ft_OnLoad[33];  // One load  callback for every character.
-extern ft_callback ft_OnDeath[33]; // One death callback for every character.
-extern ft_callback ft_OnAbsorb[33];
-extern ft_callback lbl_803C1DB4[33]; // probably ft_OnSomething
-extern ft_callback ft_OnUserDataRemove[33];
+extern ft_callback ft_OnLoad[FTKIND_MAX];  // One load  callback for every character.
+extern ft_callback ft_OnDeath[FTKIND_MAX]; // One death callback for every character.
+extern ft_callback ft_OnAbsorb[FTKIND_MAX];
+extern ft_callback lbl_803C1DB4[FTKIND_MAX]; // probably ft_OnSomething
+extern ft_callback ft_OnUserDataRemove[FTKIND_MAX];
 
-extern fn_ptr_t lbl_803C10D0[33];
+extern fn_ptr_t lbl_803C10D0[FTKIND_MAX];
 
-extern struct UnkCostumeList CostumeListsForeachCharacter[33];
+extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
-extern ftData* gFtDataList[33];
+extern ftData* gFtDataList[FTKIND_MAX];
 extern struct ActionState ActionStateList[341];
-extern struct ActionState* ActionStateTableByCharacter[33];
+extern struct ActionState* ActionStateTableByCharacter[FTKIND_MAX];
 
-extern s8 lbl_803C26FC[33];
+extern s8 lbl_803C26FC[FTKIND_MAX];
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
@@ -123,7 +123,7 @@ void Fighter_800679B0()
 
     g_spawnNumCounter = 1;
 
-    for (i = 0; i < 33; i++) {
+    for (i = 0; i < FTKIND_MAX; i++) {
         if (lbl_803C10D0[i])
             lbl_803C10D0[i]();
     }
