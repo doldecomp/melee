@@ -61,7 +61,6 @@ static char lbl_803C0BEC[] = "cant get fighter rot z!\n";
 
 // .bss
 u8 ft_jobj_scale[0x38];
-u8 lbl_804590D8[0x168];
 
 // .sdata
 static char lbl_804D3A30[] = "jobj.h";
