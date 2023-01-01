@@ -30,7 +30,7 @@ lbl_800855B8:
 /* 800855B8 00082198  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800855BC 0008219C  38 21 00 08 */	addi r1, r1, 8
 /* 800855C0 000821A0  7C 08 03 A6 */	mtlr r0
-/* 800855C4 000821A4  4E 80 00 20 */	blr 
+/* 800855C4 000821A4  4E 80 00 20 */	blr
 
 .global func_800855C8
 func_800855C8:
@@ -131,7 +131,7 @@ lbl_80085718:
 /* 8008571C 000822FC  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80085720 00082300  38 21 00 38 */	addi r1, r1, 0x38
 /* 80085724 00082304  7C 08 03 A6 */	mtlr r0
-/* 80085728 00082308  4E 80 00 20 */	blr 
+/* 80085728 00082308  4E 80 00 20 */	blr
 
 .global func_8008572C
 func_8008572C:
@@ -159,7 +159,7 @@ lbl_8008577C:
 /* 8008577C 0008235C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80085780 00082360  38 21 00 08 */	addi r1, r1, 8
 /* 80085784 00082364  7C 08 03 A6 */	mtlr r0
-/* 80085788 00082368  4E 80 00 20 */	blr 
+/* 80085788 00082368  4E 80 00 20 */	blr
 
 .global func_8008578C
 func_8008578C:
@@ -184,7 +184,7 @@ lbl_800857BC:
 /* 800857D0 000823B0  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800857D4 000823B4  38 21 00 08 */	addi r1, r1, 8
 /* 800857D8 000823B8  7C 08 03 A6 */	mtlr r0
-/* 800857DC 000823BC  4E 80 00 20 */	blr 
+/* 800857DC 000823BC  4E 80 00 20 */	blr
 
 .global func_800857E0
 func_800857E0:
@@ -199,12 +199,12 @@ func_800857E0:
 /* 80085800 000823E0  28 0C 00 00 */	cmplwi r12, 0
 /* 80085804 000823E4  41 82 00 0C */	beq lbl_80085810
 /* 80085808 000823E8  7D 88 03 A6 */	mtlr r12
-/* 8008580C 000823EC  4E 80 00 21 */	blrl 
+/* 8008580C 000823EC  4E 80 00 21 */	blrl
 lbl_80085810:
 /* 80085810 000823F0  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80085814 000823F4  38 21 00 08 */	addi r1, r1, 8
 /* 80085818 000823F8  7C 08 03 A6 */	mtlr r0
-/* 8008581C 000823FC  4E 80 00 20 */	blr 
+/* 8008581C 000823FC  4E 80 00 20 */	blr
 
 .global func_80085820
 func_80085820:
@@ -258,7 +258,7 @@ lbl_800858CC:
 /* 800858D4 000824B4  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 800858D8 000824B8  38 21 00 18 */	addi r1, r1, 0x18
 /* 800858DC 000824BC  7C 08 03 A6 */	mtlr r0
-/* 800858E0 000824C0  4E 80 00 20 */	blr 
+/* 800858E0 000824C0  4E 80 00 20 */	blr
 
 .global func_800858E4
 func_800858E4:
@@ -312,14 +312,14 @@ lbl_80085990:
 /* 80085998 00082578  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8008599C 0008257C  38 21 00 18 */	addi r1, r1, 0x18
 /* 800859A0 00082580  7C 08 03 A6 */	mtlr r0
-/* 800859A4 00082584  4E 80 00 20 */	blr 
+/* 800859A4 00082584  4E 80 00 20 */	blr
 
 .global func_800859A8
 func_800859A8:
 /* 800859A8 00082588  88 C3 06 1C */	lbz r6, 0x61c(r3)
 /* 800859AC 0008258C  7C C5 07 74 */	extsb r5, r6
 /* 800859B0 00082590  2C 05 FF FF */	cmpwi r5, -1
-/* 800859B4 00082594  4D 82 00 20 */	beqlr 
+/* 800859B4 00082594  4D 82 00 20 */	beqlr
 /* 800859B8 00082598  80 8D C1 8C */	lwz r4, lbl_804D782C@sda21(r13)
 /* 800859BC 0008259C  80 E4 00 20 */	lwz r7, 0x20(r4)
 /* 800859C0 000825A0  48 00 00 24 */	b lbl_800859E4
@@ -330,7 +330,7 @@ lbl_800859C4:
 /* 800859D0 000825B0  88 04 06 1C */	lbz r0, 0x61c(r4)
 /* 800859D4 000825B4  7C 00 07 74 */	extsb r0, r0
 /* 800859D8 000825B8  7C 05 00 00 */	cmpw r5, r0
-/* 800859DC 000825BC  4D 82 00 20 */	beqlr 
+/* 800859DC 000825BC  4D 82 00 20 */	beqlr
 lbl_800859E0:
 /* 800859E0 000825C0  80 E7 00 08 */	lwz r7, 8(r7)
 lbl_800859E4:
@@ -345,7 +345,7 @@ lbl_800859E4:
 /* 80085A04 000825E4  38 80 00 00 */	li r4, 0
 /* 80085A08 000825E8  50 80 3E 30 */	rlwimi r0, r4, 7, 0x18, 0x18
 /* 80085A0C 000825EC  98 03 00 06 */	stb r0, 6(r3)
-/* 80085A10 000825F0  4E 80 00 20 */	blr 
+/* 80085A10 000825F0  4E 80 00 20 */	blr
 
 .global func_80085A14
 func_80085A14:
@@ -417,7 +417,7 @@ lbl_80085AFC:
 /* 80085B00 000826E0  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80085B04 000826E4  38 21 00 38 */	addi r1, r1, 0x38
 /* 80085B08 000826E8  7C 08 03 A6 */	mtlr r0
-/* 80085B0C 000826EC  4E 80 00 20 */	blr 
+/* 80085B0C 000826EC  4E 80 00 20 */	blr
 
 .global func_80085B10
 func_80085B10:
@@ -454,7 +454,7 @@ func_80085B10:
 /* 80085B88 00082768  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80085B8C 0008276C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80085B90 00082770  7C 08 03 A6 */	mtlr r0
-/* 80085B94 00082774  4E 80 00 20 */	blr 
+/* 80085B94 00082774  4E 80 00 20 */	blr
 
 .global func_80085B98
 func_80085B98:
@@ -543,7 +543,7 @@ lbl_80085CC4:
 /* 80085CC8 000828A8  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 80085CCC 000828AC  38 21 00 30 */	addi r1, r1, 0x30
 /* 80085CD0 000828B0  7C 08 03 A6 */	mtlr r0
-/* 80085CD4 000828B4  4E 80 00 20 */	blr 
+/* 80085CD4 000828B4  4E 80 00 20 */	blr
 
 .global func_80085CD8
 func_80085CD8:
@@ -647,7 +647,7 @@ lbl_80085E3C:
 /* 80085E40 00082A20  80 01 00 74 */	lwz r0, 0x74(r1)
 /* 80085E44 00082A24  38 21 00 70 */	addi r1, r1, 0x70
 /* 80085E48 00082A28  7C 08 03 A6 */	mtlr r0
-/* 80085E4C 00082A2C  4E 80 00 20 */	blr 
+/* 80085E4C 00082A2C  4E 80 00 20 */	blr
 
 .global func_80085E50
 func_80085E50:
@@ -756,7 +756,7 @@ lbl_80085FC0:
 /* 80085FC4 00082BA4  80 01 00 74 */	lwz r0, 0x74(r1)
 /* 80085FC8 00082BA8  38 21 00 70 */	addi r1, r1, 0x70
 /* 80085FCC 00082BAC  7C 08 03 A6 */	mtlr r0
-/* 80085FD0 00082BB0  4E 80 00 20 */	blr 
+/* 80085FD0 00082BB0  4E 80 00 20 */	blr
 
 .global func_80085FD4
 func_80085FD4:
@@ -796,7 +796,7 @@ lbl_80086048:
 /* 80086050 00082C30  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80086054 00082C34  38 21 00 18 */	addi r1, r1, 0x18
 /* 80086058 00082C38  7C 08 03 A6 */	mtlr r0
-/* 8008605C 00082C3C  4E 80 00 20 */	blr 
+/* 8008605C 00082C3C  4E 80 00 20 */	blr
 
 .global func_80086060
 func_80086060:
@@ -826,7 +826,7 @@ lbl_800860B0:
 /* 800860B4 00082C94  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 800860B8 00082C98  38 21 00 18 */	addi r1, r1, 0x18
 /* 800860BC 00082C9C  7C 08 03 A6 */	mtlr r0
-/* 800860C0 00082CA0  4E 80 00 20 */	blr 
+/* 800860C0 00082CA0  4E 80 00 20 */	blr
 
 
 .section .data
@@ -1459,9 +1459,9 @@ ft_OnItemPickupExt:
     .4byte ftFox_OnItemPickup
     .4byte ftCFalcon_OnItemPickup
     .4byte ftDonkey_OnItemPickup
-    .4byte ftKirby_OnItemPickup 
+    .4byte ftKirby_OnItemPickup
     .4byte ftKoopa_OnItemPickup
-    .4byte ftLink_OnItemPickupExt 
+    .4byte ftLink_OnItemPickupExt
     .4byte ftSeak_OnItemPickup
     .4byte ftNess_OnItemPickup
     .4byte ftPeach_OnItemPickup
@@ -1470,12 +1470,12 @@ ft_OnItemPickupExt:
     .4byte ftPikachu_OnItemPickup
     .4byte ftSamus_OnItemPickup
     .4byte ftYoshi_OnItemPickup
-    .4byte ftPurin_OnItemPickup 
-    .4byte ftMewTwo_OnItemPickup 
+    .4byte ftPurin_OnItemPickup
+    .4byte ftMewTwo_OnItemPickup
     .4byte ftLuigi_OnItemPickup
     .4byte ftMars_OnItemPickup
     .4byte ftZelda_OnItemPickup
-    .4byte ftCLink_OnItemPickupExt 
+    .4byte ftCLink_OnItemPickupExt
     .4byte ftDrMario_OnItemPickup
     .4byte ftFalco_OnItemPickup
     .4byte ftPichu_OnItemPickup
@@ -2066,7 +2066,7 @@ lbl_803C20CC:
     .4byte NULL
     .4byte NULL
 
-# Multi-jump function table
+# Character model group (e.g. high poly, low poly, metal) visibility change callbacks
 .global lbl_803C2150
 lbl_803C2150:
     .4byte NULL
