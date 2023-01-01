@@ -24,8 +24,10 @@
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)();
 
-extern ft_callback ft_OnLoad[FTKIND_MAX];  // One load  callback for every character.
-extern ft_callback ft_OnDeath[FTKIND_MAX]; // One death callback for every character.
+extern ft_callback
+    ft_OnLoad[FTKIND_MAX]; // One load  callback for every character.
+extern ft_callback
+    ft_OnDeath[FTKIND_MAX]; // One death callback for every character.
 extern ft_callback ft_OnAbsorb[FTKIND_MAX];
 extern ft_callback lbl_803C1DB4[FTKIND_MAX]; // probably ft_OnSomething
 extern ft_callback ft_OnUserDataRemove[FTKIND_MAX];
