@@ -147,6 +147,7 @@ void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags);
 void HSD_ClearVtxDesc();
 struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
 
+void HSD_PObjClearMtxMark(void* obj, u32 mark);
 void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark);
 void HSD_PObjGetMtxMark(int idx, void** obj, u32* mark);
 
