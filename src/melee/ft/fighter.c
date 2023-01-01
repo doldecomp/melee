@@ -56,7 +56,7 @@ const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
 HSD_ObjAllocData fighter_alloc_data;
 HSD_ObjAllocData lbl_80458FFC;
-HSD_ObjAllocData lbl_80459028;
+HSD_ObjAllocData fighter_bones_alloc_data;
 HSD_ObjAllocData lbl_80459054;
 HSD_ObjAllocData lbl_80459080;
 HSD_ObjAllocData lbl_804590AC;
@@ -117,7 +117,7 @@ void Fighter_800679B0()
     func_800C8F6C();
     // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
     // data section, how does this work?
-    HSD_ObjAllocInit(&lbl_80459028, /*size*/ 0x8c0, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_bones_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459054, /*size*/ 0x1f0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459080, /*size*/ 0x80, /*align*/ 4);
 
@@ -3094,7 +3094,7 @@ void Fighter_Unload_8006DABC(void* user_data)
 
     HSD_ObjFree(&lbl_804590AC, fp->x59C);
     HSD_ObjFree(&lbl_804590AC, fp->x5A0);
-    HSD_ObjFree(&lbl_80459028, fp->x5E8_fighterBones);
+    HSD_ObjFree(&fighter_bones_alloc_data, fp->x5E8_fighterBones);
     HSD_ObjFree(&lbl_80459054, fp->x5EC_dobj_list.data);
     HSD_ObjFree(&lbl_80459080, fp->x2040);
     HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);

@@ -2350,4 +2350,11 @@ void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighter_gobj,
                                         f32 animStart, f32 animSpeed,
                                         f32 animBlend);
 
+extern HSD_ObjAllocData fighter_alloc_data;
+extern HSD_ObjAllocData lbl_80458FFC;
+extern HSD_ObjAllocData fighter_bones_alloc_data;
+extern HSD_ObjAllocData lbl_80459054;
+extern HSD_ObjAllocData lbl_80459080;
+extern HSD_ObjAllocData lbl_804590AC;
+
 #endif

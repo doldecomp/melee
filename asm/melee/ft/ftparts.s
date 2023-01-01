@@ -1838,9 +1838,9 @@ lbl_80074E44:
 .global func_80074E58
 func_80074E58:
 /* 80074E58 00071A38  7C 08 02 A6 */	mflr r0
-/* 80074E5C 00071A3C  3C 80 80 46 */	lis r4, lbl_80459028@ha
+/* 80074E5C 00071A3C  3C 80 80 46 */	lis r4, fighter_bones_alloc_data@ha
 /* 80074E60 00071A40  90 01 00 04 */	stw r0, 4(r1)
-/* 80074E64 00071A44  38 04 90 28 */	addi r0, r4, lbl_80459028@l
+/* 80074E64 00071A44  38 04 90 28 */	addi r0, r4, fighter_bones_alloc_data@l
 /* 80074E68 00071A48  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80074E6C 00071A4C  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80074E70 00071A50  93 C1 00 10 */	stw r30, 0x10(r1)
