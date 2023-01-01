@@ -9,6 +9,22 @@
 extern void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
                           s32* dobj_index, u32 hierarchy_depth);
 
+#define JOBJ_NEXT(jobj)   ((jobj) == NULL ? (HSD_JObj*)NULL : (jobj)->next)
+#define JOBJ_PARENT(jobj) ((jobj) == NULL ? (HSD_JObj*)NULL : (jobj)->parent)
+#define JOBJ_CHILD(jobj)  ((jobj) == NULL ? (HSD_JObj*)NULL : (jobj)->child)
+
+#define MAX_FT_PARTS 140
+
+typedef struct _FighterPartsTable {
+    u8* joint_to_part;
+    u8* part_to_joint;
+    u32 parts_num;
+} FighterPartsTable;
+
+extern FighterPartsTable** ftPartsTable;
+
+extern s32 func_8007506C(s32 ftkind, s32 part);
+
 void func_800743E0(HSD_GObj* fighter_obj)
 {
     u32 offset = 0;
@@ -23,24 +39,13 @@ void func_800743E0(HSD_GObj* fighter_obj)
         assert_line(503, 0);
     }
 
-    while (1) {
-        while (1) {
-            if (jobj == NULL) {
-                fighter->x5EC_dobj_list.count = dobj_count;
-                if (part != ftPartsTable[fighter->x4_fighterKind]->parts_num) {
-                    OSReport("fighter parts num not match! player %d\n", fighter->xC_playerID);
-                    assert_line(546, 0);
-                }
-                return;
-            }
-
-            if (func_8007506C(fighter->x4_fighterKind, part) == 0)
-                break;
-
-            fighter->x5E8_fighterBones[part++].x0_jobj = NULL;
+    for (; jobj != NULL; part++) {
+        if (func_8007506C(fighter->x4_fighterKind, part) != 0) {
+            fighter->x5E8_fighterBones[part].x0_jobj = NULL;
+            continue;
         }
 
-        func_80074194(fighter, fighter->x5E8_fighterBones[part++].x0_jobj,
+        func_80074194(fighter, fighter->x5E8_fighterBones[part].x0_jobj,
                       jobj, &dobj_count, hierarchy_depth);
 
         if ((HSD_JObjGetFlags(jobj) & JOBJ_INSTANCE) || JOBJ_CHILD(jobj) == NULL) {
@@ -67,5 +72,11 @@ void func_800743E0(HSD_GObj* fighter_obj)
             jobj = JOBJ_CHILD(jobj);
             hierarchy_depth++;
         }
+    }
+
+    fighter->x5EC_dobj_list.count = dobj_count;
+    if (part != ftPartsTable[fighter->x4_fighterKind]->parts_num) {
+        OSReport("fighter parts num not match! player %d\n", fighter->xC_playerID);
+        assert_line(546, 0);
     }
 }
