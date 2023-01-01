@@ -3146,7 +3146,7 @@ lbl_8036E548:
 lbl_8036E560:
 /* 8036E560 0036B140  38 7A 00 00 */	addi r3, r26, 0
 /* 8036E564 0036B144  38 81 00 88 */	addi r4, r1, 0x88
-/* 8036E568 0036B148  48 00 5D 45 */	bl func_803742AC
+/* 8036E568 0036B148  48 00 5D 45 */	bl _HSD_mkEnvelopeModelNodeMtx
 /* 8036E56C 0036B14C  3C 80 80 40 */	lis r4, HSD_PerfCurrentStat@ha
 /* 8036E570 0036B150  83 36 00 14 */	lwz r25, 0x14(r22)
 /* 8036E574 0036B154  38 84 72 18 */	addi r4, r4, HSD_PerfCurrentStat@l
