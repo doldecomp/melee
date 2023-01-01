@@ -156,7 +156,7 @@ void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest)
     }
 }
 
-void func_80379A20(Mtx src, Mtx dest)
+void HSD_MtxInverseTranspose(Mtx src, Mtx dest)
 {
     Mtx* m;
     Mtx tempMatrix;

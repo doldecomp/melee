@@ -169,7 +169,7 @@ lbl_8037957C:
 /* 80379588 00376168  83 C1 00 50 */	lwz r30, 0x50(r1)
 /* 8037958C 0037616C  38 21 00 60 */	addi r1, r1, 0x60
 /* 80379590 00376170  7C 08 03 A6 */	mtlr r0
-/* 80379594 00376174  4E 80 00 20 */	blr 
+/* 80379594 00376174  4E 80 00 20 */	blr
 
 .global HSD_MtxInverseConcat
 HSD_MtxInverseConcat:
@@ -466,10 +466,10 @@ lbl_803799F8:
 /* 80379A10 003765F0  CB 41 00 50 */	lfd f26, 0x50(r1)
 /* 80379A14 003765F4  38 21 00 80 */	addi r1, r1, 0x80
 /* 80379A18 003765F8  7C 08 03 A6 */	mtlr r0
-/* 80379A1C 003765FC  4E 80 00 20 */	blr 
+/* 80379A1C 003765FC  4E 80 00 20 */	blr
 
-.global func_80379A20
-func_80379A20:
+.global HSD_MtxInverseTranspose
+HSD_MtxInverseTranspose:
 /* 80379A20 00376600  7C 08 02 A6 */	mflr r0
 /* 80379A24 00376604  90 01 00 04 */	stw r0, 4(r1)
 /* 80379A28 00376608  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -601,7 +601,7 @@ lbl_80379C0C:
 /* 80379C14 003767F4  83 E1 00 54 */	lwz r31, 0x54(r1)
 /* 80379C18 003767F8  38 21 00 60 */	addi r1, r1, 0x60
 /* 80379C1C 003767FC  7C 08 03 A6 */	mtlr r0
-/* 80379C20 00376800  4E 80 00 20 */	blr 
+/* 80379C20 00376800  4E 80 00 20 */	blr
 
 .global HSD_MtxGetRotation
 HSD_MtxGetRotation:
@@ -832,7 +832,7 @@ lbl_80379F4C:
 /* 80379F5C 00376B3C  83 C1 00 50 */	lwz r30, 0x50(r1)
 /* 80379F60 00376B40  38 21 00 68 */	addi r1, r1, 0x68
 /* 80379F64 00376B44  7C 08 03 A6 */	mtlr r0
-/* 80379F68 00376B48  4E 80 00 20 */	blr 
+/* 80379F68 00376B48  4E 80 00 20 */	blr
 
 .global HSD_MtxGetTranslate
 HSD_MtxGetTranslate:
@@ -842,7 +842,7 @@ HSD_MtxGetTranslate:
 /* 80379F78 00376B58  D0 04 00 04 */	stfs f0, 4(r4)
 /* 80379F7C 00376B5C  C0 03 00 2C */	lfs f0, 0x2c(r3)
 /* 80379F80 00376B60  D0 04 00 08 */	stfs f0, 8(r4)
-/* 80379F84 00376B64  4E 80 00 20 */	blr 
+/* 80379F84 00376B64  4E 80 00 20 */	blr
 
 .global HSD_MtxGetScale
 HSD_MtxGetScale:
@@ -948,7 +948,7 @@ lbl_8037A108:
 /* 8037A110 00376CF0  83 C1 00 50 */	lwz r30, 0x50(r1)
 /* 8037A114 00376CF4  38 21 00 58 */	addi r1, r1, 0x58
 /* 8037A118 00376CF8  7C 08 03 A6 */	mtlr r0
-/* 8037A11C 00376CFC  4E 80 00 20 */	blr 
+/* 8037A11C 00376CFC  4E 80 00 20 */	blr
 
 .global HSD_MkRotationMtx
 HSD_MkRotationMtx:
@@ -1019,7 +1019,7 @@ HSD_MkRotationMtx:
 /* 8037A220 00376E00  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8037A224 00376E04  38 21 00 40 */	addi r1, r1, 0x40
 /* 8037A228 00376E08  7C 08 03 A6 */	mtlr r0
-/* 8037A22C 00376E0C  4E 80 00 20 */	blr 
+/* 8037A22C 00376E0C  4E 80 00 20 */	blr
 
 .global func_8037A230
 func_8037A230:
@@ -1030,7 +1030,7 @@ func_8037A230:
 /* 8037A240 00376E20  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8037A244 00376E24  38 21 00 08 */	addi r1, r1, 8
 /* 8037A248 00376E28  7C 08 03 A6 */	mtlr r0
-/* 8037A24C 00376E2C  4E 80 00 20 */	blr 
+/* 8037A24C 00376E2C  4E 80 00 20 */	blr
 
 .global HSD_MtxSRT
 HSD_MtxSRT:
@@ -1157,7 +1157,7 @@ lbl_8037A364:
 /* 8037A42C 0037700C  BB 61 00 24 */	lmw r27, 0x24(r1)
 /* 8037A430 00377010  38 21 00 88 */	addi r1, r1, 0x88
 /* 8037A434 00377014  7C 08 03 A6 */	mtlr r0
-/* 8037A438 00377018  4E 80 00 20 */	blr 
+/* 8037A438 00377018  4E 80 00 20 */	blr
 
 .global HSD_MtxSRTQuat
 HSD_MtxSRTQuat:
@@ -1230,7 +1230,7 @@ lbl_8037A508:
 /* 8037A53C 0037711C  83 81 00 50 */	lwz r28, 0x50(r1)
 /* 8037A540 00377120  38 21 00 60 */	addi r1, r1, 0x60
 /* 8037A544 00377124  7C 08 03 A6 */	mtlr r0
-/* 8037A548 00377128  4E 80 00 20 */	blr 
+/* 8037A548 00377128  4E 80 00 20 */	blr
 
 .global HSD_MtxScaledAdd
 HSD_MtxScaledAdd:
@@ -1282,7 +1282,7 @@ HSD_MtxScaledAdd:
 /* 8037A600 003771E0  C0 04 00 28 */	lfs f0, 0x28(r4)
 /* 8037A604 003771E4  EC 01 00 BA */	fmadds f0, f1, f2, f0
 /* 8037A608 003771E8  D0 05 00 2C */	stfs f0, 0x2c(r5)
-/* 8037A60C 003771EC  4E 80 00 20 */	blr 
+/* 8037A60C 003771EC  4E 80 00 20 */	blr
 
 .global HSD_VecAlloc
 HSD_VecAlloc:
@@ -1305,7 +1305,7 @@ lbl_8037A644:
 /* 8037A64C 0037722C  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8037A650 00377230  38 21 00 10 */	addi r1, r1, 0x10
 /* 8037A654 00377234  7C 08 03 A6 */	mtlr r0
-/* 8037A658 00377238  4E 80 00 20 */	blr 
+/* 8037A658 00377238  4E 80 00 20 */	blr
 
 .global HSD_VecFree
 HSD_VecFree:
@@ -1321,7 +1321,7 @@ lbl_8037A67C:
 /* 8037A67C 0037725C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8037A680 00377260  38 21 00 08 */	addi r1, r1, 8
 /* 8037A684 00377264  7C 08 03 A6 */	mtlr r0
-/* 8037A688 00377268  4E 80 00 20 */	blr 
+/* 8037A688 00377268  4E 80 00 20 */	blr
 
 .global HSD_MtxAlloc
 HSD_MtxAlloc:
@@ -1344,7 +1344,7 @@ lbl_8037A6C0:
 /* 8037A6C8 003772A8  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8037A6CC 003772AC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8037A6D0 003772B0  7C 08 03 A6 */	mtlr r0
-/* 8037A6D4 003772B4  4E 80 00 20 */	blr 
+/* 8037A6D4 003772B4  4E 80 00 20 */	blr
 
 .global HSD_MtxFree
 HSD_MtxFree:
@@ -1360,13 +1360,13 @@ lbl_8037A6F8:
 /* 8037A6F8 003772D8  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8037A6FC 003772DC  38 21 00 08 */	addi r1, r1, 8
 /* 8037A700 003772E0  7C 08 03 A6 */	mtlr r0
-/* 8037A704 003772E4  4E 80 00 20 */	blr 
+/* 8037A704 003772E4  4E 80 00 20 */	blr
 
 .global HSD_VecGetAllocData
 HSD_VecGetAllocData:
 /* 8037A708 003772E8  3C 60 80 4C */	lis r3, lbl_804C2310@ha
 /* 8037A70C 003772EC  38 63 23 10 */	addi r3, r3, lbl_804C2310@l
-/* 8037A710 003772F0  4E 80 00 20 */	blr 
+/* 8037A710 003772F0  4E 80 00 20 */	blr
 
 .global HSD_VecInitAllocData
 HSD_VecInitAllocData:
@@ -1381,13 +1381,13 @@ HSD_VecInitAllocData:
 /* 8037A734 00377314  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8037A738 00377318  38 21 00 08 */	addi r1, r1, 8
 /* 8037A73C 0037731C  7C 08 03 A6 */	mtlr r0
-/* 8037A740 00377320  4E 80 00 20 */	blr 
+/* 8037A740 00377320  4E 80 00 20 */	blr
 
 .global HSD_MtxGetAllocData
 HSD_MtxGetAllocData:
 /* 8037A744 00377324  3C 60 80 4C */	lis r3, lbl_804C233C@ha
 /* 8037A748 00377328  38 63 23 3C */	addi r3, r3, lbl_804C233C@l
-/* 8037A74C 0037732C  4E 80 00 20 */	blr 
+/* 8037A74C 0037732C  4E 80 00 20 */	blr
 
 .global HSD_MtxInitAllocData
 HSD_MtxInitAllocData:
@@ -1402,7 +1402,7 @@ HSD_MtxInitAllocData:
 /* 8037A770 00377350  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8037A774 00377354  38 21 00 08 */	addi r1, r1, 8
 /* 8037A778 00377358  7C 08 03 A6 */	mtlr r0
-/* 8037A77C 0037735C  4E 80 00 20 */	blr 
+/* 8037A77C 0037735C  4E 80 00 20 */	blr
 
 
 .section .bss, "wa"
