@@ -6,7 +6,7 @@
 
 #include <melee/lb/lbrefract.h>
 
-void func_80379310(Mtx src, Mtx dest);
+void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
 void HSD_MtxInverseTranspose(Mtx src, Mtx dest);
 void HSD_MtxGetRotation(Mtx m, Vec* vec);

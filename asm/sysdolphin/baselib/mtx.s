@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80379310
-func_80379310:
+.global HSD_MtxInverse
+HSD_MtxInverse:
 /* 80379310 00375EF0  7C 08 02 A6 */	mflr r0
 /* 80379314 00375EF4  90 01 00 04 */	stw r0, 4(r1)
 /* 80379318 00375EF8  94 21 FF A0 */	stwu r1, -0x60(r1)

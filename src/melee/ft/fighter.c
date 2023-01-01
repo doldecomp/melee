@@ -2423,7 +2423,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
 inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj,
                                                                 Mtx* mtx)
 {
-    func_80379310(&jobj->mtx, mtx);
+    HSD_MtxInverse(&jobj->mtx, mtx);
     return jobj;
 }
 
