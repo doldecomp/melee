@@ -137,6 +137,8 @@ typedef struct _HSD_PObjInfo {
     void (*update)(void* obj, u32 type, FObjData* val);
 } HSD_PObjInfo;
 
+extern HSD_PObjInfo hsdPObj;
+
 #define HSD_POBJ(o) ((HSD_PObj*) (o))
 #define HSD_POBJ_INFO(i) ((HSD_PObjInfo*) (i))
 #define HSD_POBJ_METHOD(o) HSD_POBJ_INFO(HSD_CLASS_METHOD(o))
