@@ -817,8 +817,8 @@ func_800740E4:
 /* 80074110 00070CF0  38 7F 00 A0 */	addi r3, r31, 0xa0
 /* 80074114 00070CF4  38 BF 00 E8 */	addi r5, r31, 0xe8
 /* 80074118 00070CF8  48 30 DB 01 */	bl hsdInitClassInfo
-/* 8007411C 00070CFC  3C 60 80 02 */	lis r3, func_800226A8@ha
-/* 80074120 00070D00  38 03 26 A8 */	addi r0, r3, func_800226A8@l
+/* 8007411C 00070CFC  3C 60 80 02 */	lis r3, lbRefract_PObjLoad@ha
+/* 80074120 00070D00  38 03 26 A8 */	addi r0, r3, lbRefract_PObjLoad@l
 /* 80074124 00070D04  3C 60 80 07 */	lis r3, lbl_80074048@ha
 /* 80074128 00070D08  90 1F 00 E4 */	stw r0, 0xe4(r31)
 /* 8007412C 00070D0C  38 03 40 48 */	addi r0, r3, lbl_80074048@l
