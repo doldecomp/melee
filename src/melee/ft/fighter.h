@@ -20,8 +20,6 @@
 #include <common_structs.h>
 #include <melee/ft/ftstatevars.h>
 
-BOOL func_80081298(HSD_GObj* gobj);
-
 typedef enum FighterKind {
     FTKIND_MARIO,
     FTKIND_FOX,

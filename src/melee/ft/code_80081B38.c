@@ -1,5 +1,6 @@
 #include <dolphin/types.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftwalljump.h>
 #include <melee/mp/mpcoll.h>
