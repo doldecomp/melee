@@ -31,7 +31,7 @@ void func_800743E0(HSD_GObj* fighter_obj)
     u32 part = 0;
     u32 hierarchy_depth = 0;
     HSD_JObj* jobj = fighter_obj->hsd_obj;
-    Fighter* fighter = getFighter(fighter_obj);
+    Fighter* fighter = (Fighter*)fighter_obj->user_data;
     u32 dobj_count = 0;
 
     if (ftPartsTable[fighter->x4_fighterKind]->parts_num > MAX_FT_PARTS) {
@@ -48,29 +48,31 @@ void func_800743E0(HSD_GObj* fighter_obj)
         func_80074194(fighter, fighter->x5E8_fighterBones[part].x0_jobj,
                       jobj, &dobj_count, hierarchy_depth);
 
-        if ((HSD_JObjGetFlags(jobj) & JOBJ_INSTANCE) || JOBJ_CHILD(jobj) == NULL) {
-            if (JOBJ_NEXT(jobj) == NULL) {
-                while (1) {
-                    if (JOBJ_PARENT(jobj) == NULL) {
-                        jobj = NULL;
-                        break;
-                    }
-
-                    if (JOBJ_NEXT(JOBJ_PARENT(jobj)) != NULL) {
-                        jobj = JOBJ_NEXT(JOBJ_PARENT(jobj));
-                        hierarchy_depth--;
-                        break;
-                    }
-
-                    jobj = JOBJ_PARENT(jobj);
-                    hierarchy_depth--;
-                }
-            } else {
-                jobj = JOBJ_NEXT(jobj);
-            }
-        } else {
+        if (!(HSD_JObjGetFlags(jobj) & JOBJ_INSTANCE) && JOBJ_CHILD(jobj) != NULL) {
             jobj = JOBJ_CHILD(jobj);
             hierarchy_depth++;
+            continue;
+        }
+
+        if (JOBJ_NEXT(jobj) != NULL) {
+            jobj = JOBJ_NEXT(jobj);
+            continue;
+        }
+
+        while (1) {
+            if (JOBJ_PARENT(jobj) == NULL) {
+                jobj = NULL;
+                break;
+            }
+
+            if (JOBJ_NEXT(JOBJ_PARENT(jobj)) != NULL) {
+                jobj = JOBJ_NEXT(JOBJ_PARENT(jobj));
+                hierarchy_depth--;
+                break;
+            }
+
+            jobj = JOBJ_PARENT(jobj);
+            hierarchy_depth--;
         }
     }
 
