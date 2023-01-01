@@ -75,6 +75,24 @@ static char lbl_804D3A5C[] = "rotate";
 static const f32 lbl_804D82C8 = 1.0F;
 static const f32 lbl_804D82CC = 0.0F;
 
+inline f32 _HSD_JObjGetScaleX(HSD_JObj* jobj)
+{
+    ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 875, lbl_804D3A38));
+    return jobj->scale.x;
+}
+
+inline f32 _HSD_JObjGetScaleY(HSD_JObj* jobj)
+{
+    ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 888, lbl_804D3A38));
+    return jobj->scale.y;
+}
+
+inline f32 _HSD_JObjGetScaleZ(HSD_JObj* jobj)
+{
+    ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 901, lbl_804D3A38));
+    return jobj->scale.x;
+}
+
 #pragma push
 asm void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
 { // clang-format off
