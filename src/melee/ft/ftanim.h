@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_FTANIM_H
 #define MELEE_FT_FTANIM_H
 
-#include <dolphin/types.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void func_8006E9B4();
 void func_8006EBA4(struct _HSD_GObj*);
@@ -23,5 +23,6 @@ void func_80070E74();
 void func_80070F28();
 void func_80070FB4(struct _HSD_GObj*, s32, s32);
 s32 func_80070FD0(struct _Fighter*);
+void Fighter_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
 
 #endif
