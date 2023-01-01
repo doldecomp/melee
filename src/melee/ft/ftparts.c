@@ -93,98 +93,26 @@ inline f32 _HSD_JObjGetScaleZ(HSD_JObj* jobj)
     return jobj->scale.z;
 }
 
-#pragma push
-asm void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
-{ // clang-format off
-    nofralloc
-/* 800735BC 0007019C  7C 08 02 A6 */	mflr r0
-/* 800735C0 000701A0  3C C0 80 40 */	lis r6, hsdJObj@ha
-/* 800735C4 000701A4  90 01 00 04 */	stw r0, 4(r1)
-/* 800735C8 000701A8  38 C6 67 08 */	addi r6, r6, hsdJObj@l
-/* 800735CC 000701AC  94 21 FF 80 */	stwu r1, -0x80(r1)
-/* 800735D0 000701B0  DB E1 00 78 */	stfd f31, 0x78(r1)
-/* 800735D4 000701B4  DB C1 00 70 */	stfd f30, 0x70(r1)
-/* 800735D8 000701B8  93 E1 00 6C */	stw r31, 0x6c(r1)
-/* 800735DC 000701BC  93 C1 00 68 */	stw r30, 0x68(r1)
-/* 800735E0 000701C0  93 A1 00 64 */	stw r29, 0x64(r1)
-/* 800735E4 000701C4  3B A5 00 00 */	addi r29, r5, 0
-/* 800735E8 000701C8  93 81 00 60 */	stw r28, 0x60(r1)
-/* 800735EC 000701CC  3B 83 00 00 */	addi r28, r3, 0
-/* 800735F0 000701D0  81 86 00 44 */	lwz r12, 0x44(r6)
-/* 800735F4 000701D4  3C C0 80 46 */	lis r6, ft_jobj_scale@ha
-/* 800735F8 000701D8  80 ED C1 74 */	lwz r7, lbl_804D7814(r13)
-/* 800735FC 000701DC  3B E6 92 40 */	addi r31, r6, ft_jobj_scale@l
-/* 80073600 000701E0  7D 88 03 A6 */	mtlr r12
-/* 80073604 000701E4  83 C7 00 2C */	lwz r30, 0x2c(r7)
-/* 80073608 000701E8  4E 80 00 21 */	blrl
-/* 8007360C 000701EC  C0 22 88 E8 */	lfs f1, 1.0F
-/* 80073610 000701F0  C0 1E 00 3C */	lfs f0, 0x3c(r30)
-/* 80073614 000701F4  FC 01 00 00 */	fcmpu cr0, f1, f0
-/* 80073618 000701F8  41 82 00 B0 */	beq lbl_800736C8
-/* 8007361C 000701FC  28 1C 00 00 */	cmplwi r28, 0
-/* 80073620 00070200  40 82 00 14 */	bne lbl_80073634
-/* 80073624 00070204  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
-/* 80073628 00070208  38 80 03 85 */	li r4, 0x385
-/* 8007362C 0007020C  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
-/* 80073630 00070210  48 31 4B F1 */	bl __assert
-lbl_80073634:
-/* 80073634 00070214  28 1C 00 00 */	cmplwi r28, 0
-/* 80073638 00070218  C3 FC 00 34 */	lfs f31, 0x34(r28)
-/* 8007363C 0007021C  40 82 00 14 */	bne lbl_80073650
-/* 80073640 00070220  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
-/* 80073644 00070224  38 80 03 78 */	li r4, 0x378
-/* 80073648 00070228  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
-/* 8007364C 0007022C  48 31 4B D5 */	bl __assert
-lbl_80073650:
-/* 80073650 00070230  28 1C 00 00 */	cmplwi r28, 0
-/* 80073654 00070234  C3 DC 00 30 */	lfs f30, 0x30(r28)
-/* 80073658 00070238  40 82 00 14 */	bne lbl_8007366C
-/* 8007365C 0007023C  38 6D 83 90 */	addi r3, r13, lbl_804D3A30
-/* 80073660 00070240  38 80 03 6B */	li r4, 0x36b
-/* 80073664 00070244  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
-/* 80073668 00070248  48 31 4B B9 */	bl __assert
-lbl_8007366C:
-/* 8007366C 0007024C  C0 02 88 E8 */	lfs f0, 1.0F
-/* 80073670 00070250  38 61 00 2C */	addi r3, r1, 0x2c
-/* 80073674 00070254  C0 3C 00 2C */	lfs f1, 0x2c(r28)
-/* 80073678 00070258  EC 40 F0 24 */	fdivs f2, f0, f30
-/* 8007367C 0007025C  EC 20 08 24 */	fdivs f1, f0, f1
-/* 80073680 00070260  EC 60 F8 24 */	fdivs f3, f0, f31
-/* 80073684 00070264  48 2C EF E5 */	bl PSMTXScale
-/* 80073688 00070268  38 7D 00 00 */	addi r3, r29, 0
-/* 8007368C 0007026C  38 BF 00 00 */	addi r5, r31, 0
-/* 80073690 00070270  38 81 00 2C */	addi r4, r1, 0x2c
-/* 80073694 00070274  48 2C EB 71 */	bl PSMTXConcat
-/* 80073698 00070278  38 7D 00 00 */	addi r3, r29, 0
-/* 8007369C 0007027C  38 81 00 2C */	addi r4, r1, 0x2c
-/* 800736A0 00070280  48 30 5C 71 */	bl HSD_MtxInverse
-/* 800736A4 00070284  38 7F 00 00 */	addi r3, r31, 0
-/* 800736A8 00070288  38 BF 00 00 */	addi r5, r31, 0
-/* 800736AC 0007028C  38 81 00 2C */	addi r4, r1, 0x2c
-/* 800736B0 00070290  48 2C EB 55 */	bl PSMTXConcat
-/* 800736B4 00070294  88 1F 00 30 */	lbz r0, 0x30(r31)
-/* 800736B8 00070298  38 60 00 01 */	li r3, 1
-/* 800736BC 0007029C  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
-/* 800736C0 000702A0  98 1F 00 30 */	stb r0, 0x30(r31)
-/* 800736C4 000702A4  48 00 00 14 */	b lbl_800736D8
-lbl_800736C8:
-/* 800736C8 000702A8  88 1F 00 30 */	lbz r0, 0x30(r31)
-/* 800736CC 000702AC  38 60 00 00 */	li r3, 0
-/* 800736D0 000702B0  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
-/* 800736D4 000702B4  98 1F 00 30 */	stb r0, 0x30(r31)
-lbl_800736D8:
-/* 800736D8 000702B8  80 01 00 84 */	lwz r0, 0x84(r1)
-/* 800736DC 000702BC  CB E1 00 78 */	lfd f31, 0x78(r1)
-/* 800736E0 000702C0  CB C1 00 70 */	lfd f30, 0x70(r1)
-/* 800736E4 000702C4  83 E1 00 6C */	lwz r31, 0x6c(r1)
-/* 800736E8 000702C8  83 C1 00 68 */	lwz r30, 0x68(r1)
-/* 800736EC 000702CC  83 A1 00 64 */	lwz r29, 0x64(r1)
-/* 800736F0 000702D0  83 81 00 60 */	lwz r28, 0x60(r1)
-/* 800736F4 000702D4  38 21 00 80 */	addi r1, r1, 0x80
-/* 800736F8 000702D8  7C 08 03 A6 */	mtlr r0
-/* 800736FC 000702DC  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
+void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
+{
+    Fighter* fighter = (Fighter*) lbl_804D7814->user_data;
+
+    hsdJObj.make_pmtx(jobj, mtx, rmtx);
+
+    if (fighter->x34_scale.z != 1.0F) {
+        Mtx temp_mtx;
+        f32 scale_z = _HSD_JObjGetScaleZ(jobj);
+        f32 scale_y = _HSD_JObjGetScaleY(jobj);
+        f32 scale_x = _HSD_JObjGetScaleX(jobj);
+        PSMTXScale(temp_mtx, 1.0F / scale_x, 1.0F / scale_y, 1.0F / scale_z);
+        PSMTXConcat(rmtx, temp_mtx, ft_jobj_scale.mtx);
+        HSD_MtxInverse(rmtx, temp_mtx);
+        PSMTXConcat(ft_jobj_scale.mtx, temp_mtx, ft_jobj_scale.mtx);
+        ft_jobj_scale.has_z_scale = TRUE;
+    } else {
+        ft_jobj_scale.has_z_scale = FALSE;
+    }
+}
 
 void Fighter_JObjInfoInit(void)
 {
