@@ -33,9 +33,9 @@ void Fighter_JObjInfoInit(void);
 void Fighter_IntpJObjInfoInit(void);
 void Fighter_PObjInfoInit(void);
 
-HSD_JObjInfo ftJObj = { Fighter_JObjInfoInit };
+HSD_JObjInfo ftJObj     = { Fighter_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { Fighter_IntpJObjInfoInit };
-HSD_PObjInfo ftPObj = { Fighter_PObjInfoInit };
+HSD_PObjInfo ftPObj     = { Fighter_PObjInfoInit };
 
 // .data
 static char lbl_803C09E0[] = "fighter_class_library";
