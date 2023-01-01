@@ -135,6 +135,8 @@ typedef struct _HSD_JObjInfo {
 
 extern HSD_JObjInfo hsdJObj;
 
+void HSD_JObjSetDefaultClass(HSD_JObjInfo* info);
+
 void HSD_JObjCheckDepend(HSD_JObj* jobj);
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);
 void HSD_JObjReqAnimAll(HSD_JObj*, f32);
@@ -144,6 +146,7 @@ void HSD_JObjSetupMatrixSub(HSD_JObj*);
 void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 void HSD_JObjUnref(HSD_JObj* jobj);
 void HSD_JObjRemoveAll(HSD_JObj*); // sysdolphin/baselib/jobj.s
+struct _HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj);
 HSD_JObj* HSD_JObjLoadJoint(HSD_Joint*);
 void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*, HSD_MatAnimJoint*,
                         HSD_ShapeAnimJoint*);
