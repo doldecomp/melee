@@ -143,6 +143,8 @@ extern HSD_PObjInfo hsdPObj;
 #define HSD_POBJ_INFO(i) ((HSD_PObjInfo*) (i))
 #define HSD_POBJ_METHOD(o) HSD_POBJ_INFO(HSD_CLASS_METHOD(o))
 
+void HSD_PObjSetDefaultClass(HSD_PObjInfo* info);
+
 u32 HSD_PObjGetFlags(HSD_PObj* pobj);
 void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags);
 void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags);
