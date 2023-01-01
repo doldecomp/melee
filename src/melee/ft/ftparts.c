@@ -2,19 +2,19 @@
 
 #define MAX_FT_PARTS 140
 
-#define JOBJ_NEXT(jobj)   ((jobj) == NULL ? NULL : (jobj)->next)
+#define JOBJ_NEXT(jobj) ((jobj) == NULL ? NULL : (jobj)->next)
 #define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)
-#define JOBJ_CHILD(jobj)  ((jobj) == NULL ? NULL : (jobj)->child)
+#define JOBJ_CHILD(jobj) ((jobj) == NULL ? NULL : (jobj)->child)
 
 extern u32 func_8007506C(s32 ftkind, s32 part);
 
 extern void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
                           u32* dobj_index, u32 tree_depth);
 
-void func_800743E0(HSD_GObj* fighter_obj)
+void Fighter_SetupParts(HSD_GObj* fighter_obj)
 {
     HSD_JObj* jobj = fighter_obj->hsd_obj;
-    Fighter* fighter = (Fighter*)fighter_obj->user_data;
+    Fighter* fighter = (Fighter*) fighter_obj->user_data;
     u32 part = 0;
     u32 tree_depth = 0;
     u32 dobj_count = 0;
@@ -31,10 +31,13 @@ void func_800743E0(HSD_GObj* fighter_obj)
             continue;
         }
 
-        func_80074194(fighter, &fighter->x5E8_fighterBones[part], jobj, &dobj_count, tree_depth);
+        func_80074194(fighter, &fighter->x5E8_fighterBones[part], jobj,
+                      &dobj_count, tree_depth);
         part++;
 
-        if (!(HSD_JObjGetFlags(jobj) & JOBJ_INSTANCE) && JOBJ_CHILD(jobj) != NULL) {
+        if (!(HSD_JObjGetFlags(jobj) & JOBJ_INSTANCE) &&
+            JOBJ_CHILD(jobj) != NULL)
+        {
             // Descend the left side of the tree
             jobj = JOBJ_CHILD(jobj);
             tree_depth++;
@@ -73,7 +76,8 @@ void func_800743E0(HSD_GObj* fighter_obj)
     fighter->x5EC_dobj_list.count = dobj_count;
 
     if (part != ftPartsTable[fighter->x4_fighterKind]->parts_num) {
-        OSReport("fighter parts num not match! player %d\n", fighter->xC_playerID);
+        OSReport("fighter parts num not match! player %d\n",
+                 fighter->xC_playerID);
         __assert("ftparts.c", 546, "0");
     }
 }

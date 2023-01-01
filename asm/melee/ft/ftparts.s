@@ -1029,8 +1029,8 @@ lbl_800743BC:
 /* 800743D8 00070FB8  7C 08 03 A6 */	mtlr r0
 /* 800743DC 00070FBC  4E 80 00 20 */	blr
 
-.global func_800743E0
-func_800743E0:
+.global Fighter_SetupParts
+Fighter_SetupParts:
 /* 800743E0 00070FC0  7C 08 02 A6 */	mflr r0
 /* 800743E4 00070FC4  3C 80 80 3C */	lis r4, lbl_803C08F8@ha
 /* 800743E8 00070FC8  90 01 00 04 */	stw r0, 4(r1)
