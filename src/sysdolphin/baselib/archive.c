@@ -91,7 +91,8 @@ void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
     offset = -1;
     for (i = 0; i < archive->header.nb_extern; i++) {
         if (strcmp(symbols,
-                   archive->symbols + archive->extern_info[i].symbol) == 0) {
+                   archive->symbols + archive->extern_info[i].symbol) == 0)
+        {
             offset = archive->extern_info[i].offset;
             break;
         }

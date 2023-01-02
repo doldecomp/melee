@@ -670,12 +670,12 @@ typedef struct _ftData {
         f32 xFC;
         u8 x100_fill[0x16C - 0x100];
         s32 x16C_idx;
-    } * x0;
+    }* x0;
     /* 0x04 */ void* ext_attr;
     struct {
         u8 x0_fill[0x10];
         u8 unk10, unk11, unk12;
-    } * x8;
+    }* x8;
     struct S_TEMP4* xC;
     u8* x10;
     s32 filler_x14[10];

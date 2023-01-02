@@ -329,9 +329,9 @@ extern struct {
         struct {
             u8 x0_pad[0xC];
             s32 xC;
-        } * xC;
-    } * x1D4;
-} * lbl_804D6D38;
+        }* xC;
+    }* x1D4;
+}* lbl_804D6D38;
 
 void func_801C0800(StructPairWithStageID* pair)
 {
@@ -339,7 +339,7 @@ void func_801C0800(StructPairWithStageID* pair)
     struct {
         s32 unk0;
         s32 unk4;
-    } * temp_r4_3;
+    }* temp_r4_3;
     s32 i;
 
     stage_data = lbl_803DFEDC[pair->stage_id];
@@ -696,7 +696,7 @@ void func_801C0FB8(StructPairWithStageID* pair)
         void* unk0;
         s32 unk4;
         void (*unk8)(s32);
-    } * cur;
+    }* cur;
     void* next;
 
     lbl_803DFEDC[pair->stage_id]->callback3();
@@ -723,7 +723,7 @@ void func_801C10B8(s32 arg0, s32 arg1)
     struct {
         void* unk0;
         s32 unk4, unk8;
-    } * temp_r3;
+    }* temp_r3;
 
     temp_r3 = HSD_MemAlloc(0xC);
     if (temp_r3 != NULL) {
@@ -1462,7 +1462,8 @@ void func_801C1FFC(void)
 void func_801C205C(GXColor* color)
 {
     if (stage_info.x12C != NULL && color != NULL &&
-        stage_info.x12C->ptr != NULL) {
+        stage_info.x12C->ptr != NULL)
+    {
         stage_info.x12C->ptr->color = *color;
     }
 }
@@ -1470,7 +1471,8 @@ void func_801C205C(GXColor* color)
 BOOL func_801C2090(GXColor* color)
 {
     if (stage_info.x12C != NULL && color != NULL &&
-        stage_info.x12C->ptr != NULL) {
+        stage_info.x12C->ptr != NULL)
+    {
         *color = stage_info.x12C->ptr->color;
         return TRUE;
     }
@@ -1777,7 +1779,8 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     break;
                 case 3:
                     if (func_80164840(9) &&
-                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
@@ -1785,7 +1788,8 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     break;
                 case 4:
                     if (func_80164840(21) &&
-                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
@@ -1793,7 +1797,8 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     break;
                 case 5:
                     if (func_803048C0(0x11A) &&
-                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
@@ -1801,7 +1806,8 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     break;
                 case 6:
                     if (func_80164ABC() &&
-                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
@@ -1809,7 +1815,8 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     break;
                 case 7:
                     if (func_80164600() &&
-                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
@@ -3329,7 +3336,7 @@ BOOL func_801C43C4(void* arg0)
     struct {
         void* unk0;
         u8 flag : 1;
-    } * phi_r4;
+    }* phi_r4;
     int i;
 
     tmp = func_801C6324()->unk4;
@@ -4354,9 +4361,9 @@ s32 func_801C5940(void)
         u8 x0_pad[0x4];
         struct {
             s16 a, b;
-        } * unk4;
+        }* unk4;
         s32 unk8;
-    } * phi_r8;
+    }* phi_r8;
     int i, j;
     UnkArchiveStruct* archive;
     s32 out_idx;

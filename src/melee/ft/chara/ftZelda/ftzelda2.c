@@ -490,7 +490,8 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
         inputVector.z = 0;
 
         if (!(lbvector_AngleXY(groundVector, (Point3d*) &inputVector.x) <
-              HALF_PI)) {
+              HALF_PI))
+        {
             if (func_8009A134(fighter_gobj) == 0) {
                 func_8007D9FC(fp);
 

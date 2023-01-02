@@ -157,7 +157,8 @@ HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc)
         HSD_ClassInfo* info;
 
         if (!mobjdesc->class_name ||
-            !(info = hsdSearchClassInfo(mobjdesc->class_name))) {
+            !(info = hsdSearchClassInfo(mobjdesc->class_name)))
+        {
             mobj = HSD_MObjAlloc();
         } else {
             mobj = hsdNew(info);
@@ -263,7 +264,8 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
 
         for (tobj_3 = tobj_top; tobj_3 != NULL; tobj_3 = tobj_3->next) {
             if ((tobj_3->flags & TEX_LIGHTMAP_SPECULAR) &&
-                tobj_3->id != GX_TEXMAP_NULL) {
+                tobj_3->id != GX_TEXMAP_NULL)
+            {
                 HSD_TOBJ_METHOD(tobj_3)->make_texp(
                     tobj_3, TEX_LIGHTMAP_SPECULAR, done, &spec, &alpha, list);
             }

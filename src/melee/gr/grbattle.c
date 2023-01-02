@@ -8,7 +8,7 @@ extern StageInfo stage_info;
 struct {
     s32 unk0;
     s32 unk4;
-} * lbl_804D6ACC;
+}* lbl_804D6ACC;
 
 static u8 lbl_804D6AC8;
 

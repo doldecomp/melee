@@ -221,7 +221,8 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             spAC = 0.0f; // lbl_804D836C; //change to actual label
             spA8 = 0.0f; // lbl_804D8370; //change to actual label
             if (func_800117F4(&phi_r26->x2F4, &spAC, &spA8, phi_r26->x3E0,
-                              arg1) != 0) {
+                              arg1) != 0)
+            {
                 phi_r30 = 1U;
             }
             phi_r25 += 1;

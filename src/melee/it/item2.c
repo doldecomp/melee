@@ -391,7 +391,8 @@ BOOL func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item? //
     {
         itemID_3 = item_data->x10_item_kind;
         if ((itemID_3 != It_Kind_Kyasarin_Egg) &&
-            (itemID_3 != It_Kind_WhispyApple)) {
+            (itemID_3 != It_Kind_WhispyApple))
+        {
             return TRUE;
         }
     }
@@ -529,7 +530,8 @@ void func_8026B7F8(
         RunCallbackUnk(item_data->xB8_itemLogicTable->x38_callback_OnUnknown,
                        enumGObj, fighter_gobj);
         if ((item_data->xDC8_word.flags.x13 != 0) &&
-            (itemOwner == fighter_gobj)) {
+            (itemOwner == fighter_gobj))
+        {
             func_8026A8EC(enumGObj);
         }
         enumGObj = enumGObj->next;
@@ -1291,11 +1293,14 @@ HSD_GObj* func_8026C258(
         {
             if (item_data->xD00_grabGObj == NULL) {
                 if (item_data->xDC8_word.flags.x13 == 0 ||
-                    item_data->x518_ownerGObj == NULL) {
+                    item_data->x518_ownerGObj == NULL)
+                {
                     if ((facingDir != -1.0f) ||
-                        !(item_data->x4C_pos.x > vector->x)) {
+                        !(item_data->x4C_pos.x > vector->x))
+                    {
                         if ((facingDir != 1.0f) ||
-                            !(item_data->x4C_pos.x < vector->x)) {
+                            !(item_data->x4C_pos.x < vector->x))
+                        {
                             xDist = vector->x - item_data->x4C_pos.x;
                             yDist = vector->y - item_data->x4C_pos.y;
                             magnitude = (xDist * xDist) + (yDist * yDist);

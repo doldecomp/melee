@@ -136,7 +136,8 @@ BOOL ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 {
     if (getFighter(fighter_gobj)->x10_action_state_index !=
-        AS_GAMEWATCH_ATTACK11) {
+        AS_GAMEWATCH_ATTACK11)
+    {
         return TRUE;
     }
     return FALSE;

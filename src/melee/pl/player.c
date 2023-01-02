@@ -315,7 +315,8 @@ void Player_80031DC8(void func_arg(s32, s32))
                 ftMapping_list[player_slots[slot].player_character].internal_id,
                 0);
             if (hasExtraFighterID(
-                    &ftMapping_list[player_slots[slot].player_character])) {
+                    &ftMapping_list[player_slots[slot].player_character]))
+            {
                 func_arg(ftMapping_list[player_slots[slot].player_character]
                              .extra_internal_id,
                          0);

@@ -117,7 +117,8 @@ s32 CARDReadAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset,
     CARDDir* ent;
 
     if (OFFSET(offset, CARD_SEG_SIZE) != 0 ||
-        OFFSET(length, CARD_SEG_SIZE) != 0) {
+        OFFSET(length, CARD_SEG_SIZE) != 0)
+    {
         return CARD_RESULT_FATAL_ERROR;
     }
     result = __CARDSeek(fileInfo, length, offset, &card);

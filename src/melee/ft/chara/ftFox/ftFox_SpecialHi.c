@@ -541,7 +541,8 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
     stick_x = stickGetDir(temp_stick, 0.0f);
 
     if ((stick_x + stick_y) >=
-        foxAttrs->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN) {
+        foxAttrs->x64_FOX_FIREFOX_DIRECTION_STICK_RANGE_MIN)
+    {
         if (temp_stick < 0.0f) {
             temp_stick = -temp_stick;
         }

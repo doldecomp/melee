@@ -159,7 +159,8 @@ void main(void)
     func_803A6048(0xC000);
     func_8015FBA4();
     if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 &&
-        func_803931A4(-1)) {
+        func_803931A4(-1))
+    {
         func_80393A54(1);
         while (!func_80393A04()) {
             OSReport("please setup server for USB\n");

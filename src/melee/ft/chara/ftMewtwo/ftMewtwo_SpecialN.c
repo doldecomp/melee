@@ -291,28 +291,32 @@ void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* fighter_gobj)
         }
         if (fp->mewtwoVars[0].SpecialN.chargeLevel > 0.0f) {
             if ((chargeLevel > 0.75f) &&
-                (fp->mewtwoVars[0].SpecialN.chargeLevel <= 0.75f)) {
+                (fp->mewtwoVars[0].SpecialN.chargeLevel <= 0.75f))
+            {
                 fp->mewtwoVars[0].SpecialN.chargeLevel = chargeLevel;
                 func_80088510(fp, shadowBallSFX[3], SFX_VOLUME_MAX,
                               SFX_PAN_MID);
                 return;
             }
             if ((chargeLevel > 0.5f) &&
-                (fp->mewtwoVars[0].SpecialN.chargeLevel <= 0.5f)) {
+                (fp->mewtwoVars[0].SpecialN.chargeLevel <= 0.5f))
+            {
                 fp->mewtwoVars[0].SpecialN.chargeLevel = chargeLevel;
                 func_80088510(fp, shadowBallSFX[2], SFX_VOLUME_MAX,
                               SFX_PAN_MID);
                 return;
             }
             if ((chargeLevel > 0.25f) &&
-                (fp->mewtwoVars[0].SpecialN.chargeLevel <= 0.25f)) {
+                (fp->mewtwoVars[0].SpecialN.chargeLevel <= 0.25f))
+            {
                 fp->mewtwoVars[0].SpecialN.chargeLevel = chargeLevel;
                 func_80088510(fp, shadowBallSFX[1], SFX_VOLUME_MAX,
                               SFX_PAN_MID);
                 return;
             }
             if ((chargeLevel > 0.0f) &&
-                (fp->mewtwoVars[0].SpecialN.chargeLevel <= 0.0f)) {
+                (fp->mewtwoVars[0].SpecialN.chargeLevel <= 0.0f))
+            {
                 fp->mewtwoVars[0].SpecialN.chargeLevel = chargeLevel;
                 func_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX,
                               SFX_PAN_MID);

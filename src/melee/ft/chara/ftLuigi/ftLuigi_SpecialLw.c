@@ -274,7 +274,8 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
 
     if ((s32) fp->xE0_ground_or_air == GA_Ground) {
         if (func_80082888(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) ==
-            FALSE) {
+            FALSE)
+        {
             ftLuigi_SpecialLw_GroundToAir(fighter_gobj);
             fp->luigiVars[0].SpecialLw.isUnkColl = FALSE;
         } else {

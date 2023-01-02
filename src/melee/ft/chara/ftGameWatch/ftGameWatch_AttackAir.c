@@ -315,7 +315,8 @@ BOOL ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
     s32 ASID = fp->x10_action_state_index;
 
     if ((ASID >= AS_GAMEWATCH_ATTACKAIRHI) &&
-        (ASID <= AS_GAMEWATCH_LANDINGAIRHI)) {
+        (ASID <= AS_GAMEWATCH_LANDINGAIRHI))
+    {
         return FALSE;
     }
     return TRUE;

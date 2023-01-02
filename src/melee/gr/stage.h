@@ -112,8 +112,8 @@ typedef struct _StageInfo {
         struct {
             u8 x0_pad[0x18];
             GXColor color;
-        } * ptr;
-    } * x12C;
+        }* ptr;
+    }* x12C;
     Vec x130, x13C, x148, x154, x160, x16C;
     BOOL(*x178)
     (s32);
@@ -126,7 +126,7 @@ typedef struct _StageInfo {
     struct {
         s32 unk0;
         s32 unk4;
-    } * *x6A8;
+    }** x6A8;
     void* x6AC;
     struct _UnkStage6B0* x6B0;
     u32* x6B4;

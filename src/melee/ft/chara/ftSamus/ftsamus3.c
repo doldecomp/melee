@@ -84,7 +84,8 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
         func_802B56E4(fp->sa.samus.x222C, &vec1, var_f0, x2230,
                       samus_attr->x18);
         if ((fp->x10_action_state_index == 0x15C) ||
-            (fp->xE0_ground_or_air == GA_Air)) {
+            (fp->xE0_ground_or_air == GA_Air))
+        {
             ftSamus_801293BC_inner(fighter_gobj);
         }
         fp->sa.samus.x2230 = 0U;
@@ -138,7 +139,8 @@ void ftSamus_80129684(HSD_GObj* fighter_gobj)
     ftSamus_801292E4(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if ((fp->x2340_stateVar1 == 1) ||
-            (fp->sa.samus.x2230 == samus_attr->x18)) {
+            (fp->sa.samus.x2230 == samus_attr->x18))
+        {
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0, NULL,
                                                0.0f, 1.0f, 0.0f);
         } else {

@@ -1657,7 +1657,8 @@ void resolveIKJoint1(HSD_JObj* jobj)
     }
     if (var_r28 != NULL) {
         if ((HSD_RObjGetByType(jobj->robj, REFTYPE_JOBJ, 3) == NULL) &&
-            (jobj != NULL)) {
+            (jobj != NULL))
+        {
             if (jobj->robj != NULL) {
                 HSD_RObjUpdateAll(jobj->robj, jobj, JObjUpdateFunc);
                 if (HSD_JObjMtxIsDirty(jobj)) {

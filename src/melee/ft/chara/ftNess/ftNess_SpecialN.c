@@ -14,7 +14,8 @@ BOOL ftNess_CheckSpecialNHold(
             if (fp->sa.ness.x2240_flashGObj != NULL) {
                 ASID = fp->x10_action_state_index;
                 if (ASID == AS_NESS_SPECIALN_HOLD ||
-                    ASID == AS_NESS_SPECIALAIRN_HOLD) {
+                    ASID == AS_NESS_SPECIALAIRN_HOLD)
+                {
                     return TRUE;
                 }
             }
@@ -350,7 +351,8 @@ void ftNess_SpecialAirNHold_Anim(
             return;
         }
         if ((s32) fp->x10_action_state_index !=
-            AS_NESS_SPECIALAIRN_HOLD_RELEASE) {
+            AS_NESS_SPECIALAIRN_HOLD_RELEASE)
+        {
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_NESS_SPECIALAIRN_HOLD_RELEASE, 0, NULL,
                 fp->x894_currentAnimFrame, 1.0f, 0.0f);

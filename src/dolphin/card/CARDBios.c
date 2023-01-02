@@ -606,7 +606,8 @@ static BOOL OnReset(BOOL f)
 {
     if (!f) {
         if (CARDUnmount(0) == CARD_RESULT_BUSY ||
-            CARDUnmount(1) == CARD_RESULT_BUSY) {
+            CARDUnmount(1) == CARD_RESULT_BUSY)
+        {
             return FALSE;
         }
     }

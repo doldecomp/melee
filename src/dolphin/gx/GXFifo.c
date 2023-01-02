@@ -33,7 +33,8 @@ static void GXCPInterruptHandler(__OSInterrupt unused, OSContext* ctx)
         __GXWriteFifoIntEnable(1, 0);
     }
     if (((((u32) __GXContexts.main->x8) >> 2) & 1) &&
-        (__GXContexts.main->xC & 1)) {
+        (__GXContexts.main->xC & 1))
+    {
         __GXOverflowCount++;
         __GXWriteFifoIntEnable(0, 1);
         __GXWriteFifoIntReset(1, 0);

@@ -482,7 +482,8 @@ BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj) // Ness Yo-Yo Think //
             func_802C0010(yoyo_GObj, &sp14);
             ASID = fp->x10_action_state_index;
             if ((ASID >= AS_NESS_ATTACKHI4) &&
-                (ASID <= AS_NESS_ATTACKHI4_RELEASE)) {
+                (ASID <= AS_NESS_ATTACKHI4_RELEASE))
+            {
                 func_80088510(fp, 0x334B3, SFX_VOLUME_MAX, SFX_PAN_MID);
             } else {
                 func_80088510(fp, 0x334AD, SFX_VOLUME_MAX, SFX_PAN_MID);
@@ -491,7 +492,8 @@ BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj) // Ness Yo-Yo Think //
             func_802BFEC4(yoyo_GObj);
         }
         if ((s32) fp->nessVars[0].AttackHi4.yoyoCurrentFrame ==
-            yoyoDespawnFrame) {
+            yoyoDespawnFrame)
+        {
             func_802BE958(fp->sa.ness.x222C_yoyoGObj);
         }
     } else if (yoyoSmashFrameCurr == yoyoSpawnFrame) {
@@ -829,7 +831,8 @@ void ftNess_AttackHi4_Charge_Anim(
     fp->nessVars[0].AttackHi4.yoyoCurrentFrame++;
     temp_ness_attr = getFtSpecialAttrs(temp_fp = getFighterPlus(fighter_gobj));
     if ((yoyo_GObj = GetYoyoGObj(temp_fp = getFighterPlus(fighter_gobj))) !=
-        NULL) {
+        NULL)
+    {
         item_data = yoyo_GObj->user_data;
         yoyo_attr = item_data->xC4_article_data->x4_specialAttributes;
         unk_float =

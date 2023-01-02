@@ -31,7 +31,8 @@ BOOL func_8000B09C(HSD_JObj* jobj)
             return TRUE;
         }
         if (jobj->child == NULL && jobj->next == NULL ||
-            (jobj->flags & JOBJ_INSTANCE)) {
+            (jobj->flags & JOBJ_INSTANCE))
+        {
             while (TRUE) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
@@ -59,7 +60,8 @@ BOOL func_8000B134(HSD_JObj* jobj)
             return TRUE;
         }
         if (jobj->child == NULL && jobj->next == NULL ||
-            (jobj->flags & JOBJ_INSTANCE)) {
+            (jobj->flags & JOBJ_INSTANCE))
+        {
             while (TRUE) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
@@ -220,7 +222,8 @@ void func_8000BA44(HSD_DObj* dobj, f32 val)
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
             if (pobj_type(cur) == POBJ_SHAPEANIM &&
-                cur->u.x14_unk->aobj != NULL) {
+                cur->u.x14_unk->aobj != NULL)
+            {
                 HSD_AObjSetRate(cur->u.x14_unk->aobj, val);
             }
         }
@@ -251,7 +254,8 @@ void func_8000BB24(HSD_DObj* dobj, f32 val)
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
             if (pobj_type(cur) == POBJ_SHAPEANIM &&
-                cur->u.x14_unk->aobj != NULL) {
+                cur->u.x14_unk->aobj != NULL)
+            {
                 HSD_AObjReqAnim(cur->u.x14_unk->aobj, val);
             }
         }

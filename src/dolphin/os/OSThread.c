@@ -158,7 +158,8 @@ s32 __OSGetEffectivePriority(OSThread* thread)
 
     OSMutex* mutex;
     for (mutex = thread->mutexQueue.head; mutex != NULL;
-         mutex = mutex->link.next) {
+         mutex = mutex->link.next)
+    {
         OSThread* mutexThread = mutex->queue.head;
         if (mutexThread != NULL && mutexThread->priority < prio) {
             prio = mutexThread->priority;

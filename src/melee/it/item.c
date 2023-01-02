@@ -208,7 +208,8 @@ void func_80267454(HSD_GObj* item_gobj) // Remove Camera Box //
 
     item_data = item_gobj->user_data;
     if (((item_data->xDCD_flag.bits.b01) != 0) &&
-        (item_data->x520_cameraBox != 0U)) {
+        (item_data->x520_cameraBox != 0U))
+    {
         func_800290D4(item_data->x520_cameraBox);
         item_data->x520_cameraBox = 0U;
         item_data->xDCD_flag.bits.b01 = 0;
@@ -1114,7 +1115,8 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
             for (temp_r0 = 0; temp_r0 < item_data->x374_dynamicBonesNum;
                  temp_r0++)
                 if (item_jobj ==
-                    item_data->xD4_dynamicBones[temp_r0].x4_root_jobj) {
+                    item_data->xD4_dynamicBones[temp_r0].x4_root_jobj)
+                {
                     if (anim_joint->next != NULL) {
                         functionArg1 = NULL;
                         functionArg2 = NULL;
@@ -1523,14 +1525,16 @@ s32 func_802696CC(HSD_GObj* item_gobj) // Item Think - Check for Blast Zones //
     item_data = item_gobj->user_data;
     temp_r0 = item_data->xDCC_flag.b4567;
     if ((temp_r0 & 8) &&
-        (item_data->x4C_pos.x > Stage_GetBlastZoneRightOffset())) {
+        (item_data->x4C_pos.x > Stage_GetBlastZoneRightOffset()))
+    {
         item_data->xD60 = 3;
         func_8026A8EC(item_gobj);
         return 1;
     }
     temp_r0 = item_data->xDCC_flag.b4567;
     if ((temp_r0 & 4) &&
-        (item_data->x4C_pos.x < Stage_GetBlastZoneLeftOffset())) {
+        (item_data->x4C_pos.x < Stage_GetBlastZoneLeftOffset()))
+    {
         item_data->xD60 = 3;
         func_8026A8EC(item_gobj);
         return 1;
@@ -1574,13 +1578,15 @@ void func_802697D4(HSD_GObj* item_gobj) // Item Think - Physics //
         if (item_data->xDC8_word.flags.x9 == 0) {
             PSVECAdd(&item_data->x40_vel, &item_data->x70_nudge, &sp1C);
             if ((item_data->xC0_unk_state == 0) &&
-                (item_data->xDCD_flag.bits.b3 == 0)) {
+                (item_data->xDCD_flag.bits.b3 == 0))
+            {
                 func_8027737C(item_gobj, &sp1C);
             }
             PSVECAdd(&item_data->x4C_pos, &sp1C, &item_data->x4C_pos);
         }
         if ((item_data->xDCC_flag.b3 == 1) &&
-            ((item_data->xDCC_flag.b4567 & 0xF) != 0)) {
+            ((item_data->xDCC_flag.b4567 & 0xF) != 0))
+        {
             if (func_802696CC(item_gobj) != 0) {
                 return;
             }
@@ -1600,7 +1606,8 @@ void func_802697D4(HSD_GObj* item_gobj) // Item Think - Physics //
     func_80273484(item_gobj);
     if ((s32) item_data->xC0_unk_state == 0) {
         if ((item_data->xDCE_flag.bits.b3 != 0) &&
-            (func_8026D604(item_gobj) != 0)) {
+            (func_8026D604(item_gobj) != 0))
+        {
             func_800567C0(item_data->xC30, &item_data->x4C_pos,
                           &item_data->x64_vec_unk2);
         } else {
@@ -2101,7 +2108,8 @@ void lbl_8026A294(HSD_GObj* item_gobj) // Item Think - Hit Collision //
         }
     } else if (item_data->xDCE_flag.bits.b6) {
         if (processCallback(item_data->itcb.xD24_callback_Inert, item_gobj,
-                            item_data)) {
+                            item_data))
+        {
             return;
         }
     }

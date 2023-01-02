@@ -133,7 +133,8 @@ static BOOL UnlockSram(BOOL commit, u32 offset)
 
             sram->checkSum = sram->checkSumInv = 0;
             for (p = (u16*) &sram->counterBias;
-                 p < (u16*) (Scb.sram + sizeof(OSSram)); p++) {
+                 p < (u16*) (Scb.sram + sizeof(OSSram)); p++)
+            {
                 sram->checkSum += *p;
                 sram->checkSumInv += ~*p;
             }
