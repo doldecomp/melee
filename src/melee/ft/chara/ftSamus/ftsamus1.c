@@ -83,7 +83,8 @@ void ftSamus_80128770(HSD_AObj* fighter_gobj, f32 rate)
     }
 }
 
-void ftSamus_CreateThrowGrappleBeam(HSD_GObj* fighter_gobj, s32 action_state, f32 anim_speed)
+void ftSamus_CreateThrowGrappleBeam(HSD_GObj* fighter_gobj, s32 action_state,
+                                    f32 anim_speed)
 {
     Fighter* fighter_copy;
     Vec scale;
@@ -96,10 +97,15 @@ void ftSamus_CreateThrowGrappleBeam(HSD_GObj* fighter_gobj, s32 action_state, f3
     scale.x = scale.y = scale.z = fp->x34_scale.y;
     HSD_JObjSetScale((fighter_copy = fp)->x20A0_accessory, &scale);
 
-    HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, beam->x8_anim_joint,beam->xC_matanim_joint, 0);
-    HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, beam->x4_anim_joints[action_state - ASID_THROWF], 0, 0);
-    HSD_ForeachAnim(fighter_copy->x20A0_accessory, JOBJ_TYPE, ALL_TYPE_MASK & ~TOBJ_MASK & ~MOBJ_MASK, &ftSamus_80128770, AOBJ_ARG_AF, anim_speed);
+    HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, beam->x8_anim_joint,
+                       beam->xC_matanim_joint, 0);
+    HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory,
+                       beam->x4_anim_joints[action_state - ASID_THROWF], 0, 0);
+    HSD_ForeachAnim(fighter_copy->x20A0_accessory, JOBJ_TYPE,
+                    ALL_TYPE_MASK & ~TOBJ_MASK & ~MOBJ_MASK, &ftSamus_80128770,
+                    AOBJ_ARG_AF, anim_speed);
     HSD_JObjReqAnimAll(fighter_copy->x20A0_accessory, 0.0f);
     HSD_JObjAnimAll(fighter_copy->x20A0_accessory);
-    func_8000C2F8(fighter_copy->x20A0_accessory, fighter_copy->x5E8_fighterBones[ThrowN].x0_jobj);
+    func_8000C2F8(fighter_copy->x20A0_accessory,
+                  fighter_copy->x5E8_fighterBones[ThrowN].x0_jobj);
 }
