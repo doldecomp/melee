@@ -126,6 +126,7 @@ endif
 # clang-format all source files
 format:
 	$(QUIET) find src include -type f \( -name '*.c' -o -name '*.h' \) -exec $(FORMAT) {} +
+	$(QUIET) tools/newlines.sh
 
 clean:
 	rm -f -d -r build $(ELF2DOL)
