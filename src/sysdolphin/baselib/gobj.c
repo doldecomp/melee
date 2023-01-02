@@ -74,7 +74,8 @@ void func_80390CFC(void)
                 proc->flags_3 = lbl_804D783C;
                 gobj = proc->gobj;
                 if (!(var_r31 & (1LL << gobj->p_link)) && !(proc->flags_1) &&
-                    !(proc->flags_2)) {
+                    !(proc->flags_2))
+                {
                     lbl_804D781C = gobj;
                     lbl_804D7838 = proc;
                     proc->callback(proc->gobj);

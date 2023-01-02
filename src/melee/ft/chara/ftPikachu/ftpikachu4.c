@@ -277,7 +277,8 @@ void ftPikachu_80126614(HSD_GObj* fighter_gobj)
 
     if (!func_80082888(fighter_gobj, &pika_attr->height_attributes)) {
         if ((collData->x134_envFlags & 0x3F) ||
-            (collData->x134_envFlags & 0xFC0)) {
+            (collData->x134_envFlags & 0xFC0))
+        {
             func_8007D60C(fp);
             ftPikachu_ActionChangeUpdateVel_80127534(fighter_gobj);
             return;

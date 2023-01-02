@@ -79,7 +79,8 @@ void lbl_801522BC(HSD_GObj* gobj)
     func_80085134(gobj);
 
     if ((--r31_fp->x2340_f32 > r30_attributes->x84) ||
-        (r31_fp->x2340_f32 < 0.0f)) {
+        (r31_fp->x2340_f32 < 0.0f))
+    {
         r31_fp->x80_self_vel.x = 0.0f;
     } else {
         func_8015C010(gobj, r30_attributes->x80);

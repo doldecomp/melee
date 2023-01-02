@@ -681,7 +681,8 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
 
     costume_id = Player_GetCostumeId(fp->xC_playerID);
     if (costume_id >=
-        CostumeListsForeachCharacter[fp->x4_fighterKind].numCostumes) {
+        CostumeListsForeachCharacter[fp->x4_fighterKind].numCostumes)
+    {
         costume_id = 0;
     }
 
@@ -947,12 +948,14 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     }
 
     if (((arg2 & FIGHTER_MODEL_NOUPDATE) == 0) &&
-        (fp->x221D_flag.bits.b2 != 0U)) {
+        (fp->x221D_flag.bits.b2 != 0U))
+    {
         func_80074A8C(fighter_gobj);
     }
 
     if (((arg2 & FIGHTER_MATANIM_NOUPDATE) == 0) &&
-        ((fp->x221E_flag.bits.b7) != 0)) {
+        ((fp->x221E_flag.bits.b7) != 0))
+    {
         func_80070654(fighter_gobj);
     }
 
@@ -1207,7 +1210,8 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         fp->x898_unk = 0.0f;
 
         if ((fp->x594_animCurrFlags1.bits.b0) ||
-            (fp->x594_animCurrFlags1.bits.b5)) {
+            (fp->x594_animCurrFlags1.bits.b5))
+        {
             animflags_bool = TRUE;
         } else {
             animflags_bool = FALSE;
@@ -1345,7 +1349,8 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
 
         if (animflags_bool) {
             if (!fp->x594_animCurrFlags1.bits.b0 &&
-                !fp->x594_animCurrFlags1.bits.b0) {
+                !fp->x594_animCurrFlags1.bits.b0)
+            {
                 !fp;
                 func_8007CC78(fp, fp->x110_attr.x138_DashrunTerminalVelocity);
             }
@@ -1566,7 +1571,8 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj)
                     fp->x2221_flag.bits.b4 = 0;
 
                     if (fp->x1974_heldItem &&
-                        itGetKind(fp->x1974_heldItem) == 0x67) {
+                        itGetKind(fp->x1974_heldItem) == 0x67)
+                    {
                         fp->x2221_flag.bits.b5 = 1;
                         func_800968C8(fighter_gobj);
                     } else {
@@ -1892,9 +1898,11 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
             }
 
             if (fp->input.x620_lstick_x >=
-                p_ftCommonData->x8_someStickThreshold) {
+                p_ftCommonData->x8_someStickThreshold)
+            {
                 if (fp->input.x628_lstick_x2 >=
-                    p_ftCommonData->x8_someStickThreshold) {
+                    p_ftCommonData->x8_someStickThreshold)
+                {
                     fp->x670_timer_lstick_tilt_x++;
                     if (fp->x670_timer_lstick_tilt_x > 0xFE) {
                         fp->x670_timer_lstick_tilt_x = 0xFE;
@@ -1914,9 +1922,11 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
                     fp->x2228_flag.bits.b7 = 1;
                 }
             } else if (fp->input.x620_lstick_x <=
-                       -p_ftCommonData->x8_someStickThreshold) {
+                       -p_ftCommonData->x8_someStickThreshold)
+            {
                 if (fp->input.x628_lstick_x2 <=
-                    -p_ftCommonData->x8_someStickThreshold) {
+                    -p_ftCommonData->x8_someStickThreshold)
+                {
                     fp->x670_timer_lstick_tilt_x++;
                     if (fp->x670_timer_lstick_tilt_x > 0xFE) {
                         fp->x670_timer_lstick_tilt_x = 0xFE;
@@ -2078,7 +2088,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
         }
 
         if (fp->x221D_flag.bits.b4 || fp->x2224_flag.bits.b2 ||
-            func_801A45E8(2)) {
+            func_801A45E8(2))
+        {
             fp->input.x630 = fp->input.x620_lstick_x;
             fp->input.x634 = fp->input.x624_lstick_y;
             fp->input.x648 = fp->input.x638_lsubStick_x;
@@ -2773,7 +2784,8 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
             {
                 fp->x1998_shieldHealth += p_ftCommonData->x27C;
                 if (fp->x1998_shieldHealth >
-                    p_ftCommonData->x260_startShieldHealth) {
+                    p_ftCommonData->x260_startShieldHealth)
+                {
                     fp->x1998_shieldHealth =
                         p_ftCommonData->x260_startShieldHealth;
                 }
@@ -2801,7 +2813,8 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
         if (fp->dmg.x189C_unk_num_frames > 0.0f) {
             fp->dmg.x189C_unk_num_frames--;
             if (fp->dmg.x189C_unk_num_frames <= 0.0f &&
-                !fp->dmg.x1850_forceApplied) {
+                !fp->dmg.x1850_forceApplied)
+            {
                 fp->dmg.x189C_unk_num_frames = 0.0f;
                 func_8007BE3C(fighter_gobj);
             }
@@ -2877,7 +2890,8 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
             bool1 = fp->x19A4;
         } else if (fp->dmg.x1918) {
             if ((fp->dmg.x191C) && (!fp->x1A58_interactedFighter) &&
-                (!fp->x1A60)) {
+                (!fp->x1A60))
+            {
                 func_8007DB58(fighter_gobj);
                 func_80099D9C(fighter_gobj);
             }
@@ -2927,7 +2941,8 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
             }
             if (fp->dmg.x195c_hitlag_frames > 0.0f) {
                 if (fp->dmg.x195c_hitlag_frames >
-                    p_ftCommonData->x194_unkHitLagFrames) {
+                    p_ftCommonData->x194_unkHitLagFrames)
+                {
                     fp->dmg.x195c_hitlag_frames =
                         p_ftCommonData->x194_unkHitLagFrames;
                 }

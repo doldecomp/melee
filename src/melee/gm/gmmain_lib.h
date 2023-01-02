@@ -144,7 +144,7 @@ extern struct gmm_x0 {
     /* 0x1850 */ s32 x1850;
     u8 padding_x1850[0x1868 - 0x1850 - 4];
     struct gmm_x1868 thing;
-} * lbl_804D3EE0;
+}* lbl_804D3EE0;
 
 struct gmm_retval_ED98 {
     u8 padding[0xC];

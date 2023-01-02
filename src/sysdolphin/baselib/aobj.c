@@ -151,7 +151,8 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
     }
 
     if (!(aobj->flags & AOBJ_LOOP) && (aobj->end_frame <= aobj->curr_frame) &&
-        aobj) {
+        aobj)
+    {
         HSD_FObjStopAnimAll(aobj->fobj, obj, update_func, aobj->framerate);
         aobj->flags |= AOBJ_NO_ANIM;
     }

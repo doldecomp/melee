@@ -223,8 +223,8 @@ asm void LCDisable(void)
     mtspr 0x398, r4
 } // clang-format on
 
-asm void LCStoreBlocks(register void* dst, register void* src, register u32 nblocks)
-{ // clang-format off
+asm void LCStoreBlocks(register void* dst, register void* src,
+                       register u32 nblocks){ // clang-format off
     rlwinm r6, nblocks, 30, 27, 31
     clrlwi dst, dst, 4
     or r6, r6, dst
@@ -313,7 +313,8 @@ void DMAErrorHandler(OSError error, OSContext* context, ...)
     OSReport("Machine check received\n");
     OSReport("HID2 = 0x%x   SRR1 = 0x%x\n", hid2, context->srr1);
     if (!(hid2 & (HID2_DCHERR | HID2_DNCERR | HID2_DCMERR | HID2_DQOERR)) ||
-        !(context->srr1 & SRR1_DMA_BIT)) {
+        !(context->srr1 & SRR1_DMA_BIT))
+    {
         OSReport("Machine check was not DMA/locked cache related\n");
         OSDumpContext(context);
         PPCHalt();
@@ -323,7 +324,8 @@ void DMAErrorHandler(OSError error, OSContext* context, ...)
     OSReport("The following errors have been detected and cleared :\n");
 
     if (hid2 & HID2_DCHERR) {
-        OSReport("\t- Requested a locked cache tag that was already in the cache\n");
+        OSReport(
+            "\t- Requested a locked cache tag that was already in the cache\n");
     }
 
     if (hid2 & HID2_DNCERR) {

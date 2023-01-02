@@ -420,7 +420,8 @@ void func_8007D174(Fighter* fp, f32 arg8, f32 arg9, f32 argA, f32 argB)
                     phi_f2 = argA - arg8;
                 }
                 if (arg8 + phi_f2 >
-                    fp->x110_attr.x188_HorizontalAirMobilityConstant) {
+                    fp->x110_attr.x188_HorizontalAirMobilityConstant)
+                {
                     phi_f2 =
                         fp->x110_attr.x188_HorizontalAirMobilityConstant - arg8;
                 }
@@ -431,7 +432,8 @@ void func_8007D174(Fighter* fp, f32 arg8, f32 arg9, f32 argA, f32 argB)
                 phi_f2 = argA - arg8;
             }
             if (arg8 + phi_f2 <
-                -fp->x110_attr.x188_HorizontalAirMobilityConstant) {
+                -fp->x110_attr.x188_HorizontalAirMobilityConstant)
+            {
                 phi_f2 =
                     -fp->x110_attr.x188_HorizontalAirMobilityConstant - arg8;
             }
@@ -785,7 +787,7 @@ void func_8007DB58(HSD_GObj* gobj)
 extern struct {
     Vec2* x0;
     s32 x4;
-} * lbl_804D652C;
+}* lbl_804D652C;
 
 void func_8007DBCC(Fighter* fp, BOOL arg1, f32 arg8)
 {
@@ -1804,7 +1806,8 @@ BOOL func_80080144(Fighter* fp)
 {
     int kind = fp->x4_fighterKind;
     if ((kind == FTKIND_POPO || kind == FTKIND_NANA) &&
-        fp->x619_costume_id >= 2) {
+        fp->x619_costume_id >= 2)
+    {
         return TRUE;
     }
     return FALSE;

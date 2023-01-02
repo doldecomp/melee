@@ -52,7 +52,8 @@ static s32 VerifyID(CARDControl* card)
     for (i = 0; i < 12; i++) {
         rand = (rand * 1103515245 + 12345) >> 16;
         if (id->serial[i] !=
-            (u8) (sramEx->flashID[card - __CARDBlock][i] + rand)) {
+            (u8) (sramEx->flashID[card - __CARDBlock][i] + rand))
+        {
             __OSUnlockSramEx(FALSE);
             return CARD_RESULT_BROKEN;
         }
@@ -82,7 +83,8 @@ static s32 VerifyDir(CARDControl* card, int* outCurrent)
         __CARDCheckSum(dir[i], CARD_SYSTEM_BLOCK_SIZE - sizeof(u32), &checkSum,
                        &checkSumInv);
         if (check[i]->checkSum != checkSum ||
-            check[i]->checkSumInv != checkSumInv) {
+            check[i]->checkSumInv != checkSumInv)
+        {
             ++errors;
             current = i;
             card->currentDir = 0;
@@ -154,7 +156,8 @@ static s32 VerifyFAT(CARDControl* card, int* outCurrent)
     if (0 == errors) {
         if (card->currentFat == 0) {
             if (((s16) fat[0][CARD_FAT_CHECKCODE] -
-                 (s16) fat[1][CARD_FAT_CHECKCODE]) < 0) {
+                 (s16) fat[1][CARD_FAT_CHECKCODE]) < 0)
+            {
                 current = 0;
             } else {
                 current = 1;

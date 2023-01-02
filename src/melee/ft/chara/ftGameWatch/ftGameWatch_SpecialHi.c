@@ -272,7 +272,8 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             } else
                 ledgeGrabDir = -1;
             if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) !=
-                FALSE) {
+                FALSE)
+            {
                 func_800D5CB0(fighter_gobj, 0,
                               gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 return;

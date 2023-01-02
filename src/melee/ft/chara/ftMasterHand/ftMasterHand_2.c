@@ -35,7 +35,8 @@ void func_8014FE5C(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if ((fp->x10_action_state_index == 341) ||
-        (fp->x10_action_state_index == 342)) {
+        (fp->x10_action_state_index == 342))
+    {
         fp->xB0_pos = fp->sa.masterhand.x2240_pos;
     } else {
         fp->sa.masterhand.x2240_pos = fp->xB0_pos;
@@ -57,7 +58,8 @@ void func_8014FF1C(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if ((fp->x10_action_state_index == 341) ||
-        (fp->x10_action_state_index == 342)) {
+        (fp->x10_action_state_index == 342))
+    {
         fp->xB0_pos = fp->sa.masterhand.x2240_pos;
     } else {
         fp->sa.masterhand.x2240_pos = fp->xB0_pos;
@@ -180,7 +182,8 @@ inline void lbl_80150230_inline_1(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x10_action_state_index == 0x155 ||
-        fp->x10_action_state_index == 0x156) {
+        fp->x10_action_state_index == 0x156)
+    {
         fp->xB0_pos = fp->sa.masterhand.x2240_pos;
     } else {
         fp->sa.masterhand.x2240_pos = fp->xB0_pos;

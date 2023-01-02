@@ -38,7 +38,7 @@ static struct {
     f32 unk4;
     f32 unk8;
     f32 vars[7];
-} * lbl_804D69B8;
+}* lbl_804D69B8;
 
 StageData lbl_803E274C = {
     0x0000000A,    lbl_803E26F0,  "/GrSt.dat",   func_801E3030,

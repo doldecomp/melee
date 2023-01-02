@@ -124,7 +124,8 @@ UnkArchiveStruct* func_801C6330(s32 arg0)
             if (lbl_8049EE10[i].unk0 != NULL) {
                 UnkStageDat* temp_r7 = lbl_8049EE10[i].unk4;
                 if (temp_r7 != NULL && temp_r7->unkC > arg0 &&
-                    temp_r7->unk8[arg0].unk0 != 0) {
+                    temp_r7->unk8[arg0].unk0 != 0)
+                {
                     return &lbl_8049EE10[i];
                 }
             }

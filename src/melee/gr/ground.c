@@ -18,69 +18,49 @@
 StageInfo stage_info;
 
 static StageData lbl_803DFEA8 = {
-    0,
-    NULL,
-    NULL,
-    func_801BFFA8,
-    func_801BFFAC,
-    func_801BFFA8,
-    func_801BFFA8,
+    0, NULL, NULL, func_801BFFA8, func_801BFFAC, func_801BFFA8, func_801BFFA8,
 };
 
-extern StageData
-    lbl_803DFEA8, lbl_803E5764, lbl_803E11A4, lbl_803E4ECC, lbl_803E1800,
-    lbl_803E52E0, lbl_803E3F6C, lbl_803E5130, lbl_803E1B2C, lbl_803E4D0C,
-    lbl_803E274C, lbl_803E51CC, lbl_803E0E5C, lbl_803E76D0, lbl_803E1F08,
-    lbl_803E54CC, lbl_803E1334, lbl_803E6A3C, lbl_803E33DC, lbl_803E2D20,
-    lbl_803E2858, lbl_803E3D94, lbl_803E4800, lbl_803E4950, lbl_803E4C00,
-    lbl_803E7A00, lbl_803E6748, lbl_803E650C, lbl_803E65E8, lbl_803E584C,
-    lbl_803E5988, lbl_803E5E0C, lbl_803E617C, lbl_803E5764, lbl_803E7E38,
-    lbl_803E7F90, lbl_803E7D34, lbl_803E7B10, lbl_803E85A4, lbl_803E8664,
-    lbl_803E872C, lbl_803E87EC, lbl_803E88AC, lbl_803E8974, lbl_803E8A34,
-    lbl_803E8AF4, lbl_803E8C0C, lbl_803E8CCC, lbl_803E8D8C, lbl_803E8E4C,
-    lbl_803E8F0C, lbl_803E8FCC, lbl_803E908C, lbl_803E914C, lbl_803E920C,
-    lbl_803E92CC, lbl_803E9394, lbl_803E9454, lbl_803E9514, lbl_803E95D4,
-    lbl_803E9694, lbl_803E9754, lbl_803E981C, lbl_803E98DC, lbl_803E84C4,
-    lbl_803E821C, lbl_803E62C0, lbl_803E6370, lbl_803E6420, lbl_803E5764;
+extern StageData lbl_803DFEA8, lbl_803E5764, lbl_803E11A4, lbl_803E4ECC,
+    lbl_803E1800, lbl_803E52E0, lbl_803E3F6C, lbl_803E5130, lbl_803E1B2C,
+    lbl_803E4D0C, lbl_803E274C, lbl_803E51CC, lbl_803E0E5C, lbl_803E76D0,
+    lbl_803E1F08, lbl_803E54CC, lbl_803E1334, lbl_803E6A3C, lbl_803E33DC,
+    lbl_803E2D20, lbl_803E2858, lbl_803E3D94, lbl_803E4800, lbl_803E4950,
+    lbl_803E4C00, lbl_803E7A00, lbl_803E6748, lbl_803E650C, lbl_803E65E8,
+    lbl_803E584C, lbl_803E5988, lbl_803E5E0C, lbl_803E617C, lbl_803E5764,
+    lbl_803E7E38, lbl_803E7F90, lbl_803E7D34, lbl_803E7B10, lbl_803E85A4,
+    lbl_803E8664, lbl_803E872C, lbl_803E87EC, lbl_803E88AC, lbl_803E8974,
+    lbl_803E8A34, lbl_803E8AF4, lbl_803E8C0C, lbl_803E8CCC, lbl_803E8D8C,
+    lbl_803E8E4C, lbl_803E8F0C, lbl_803E8FCC, lbl_803E908C, lbl_803E914C,
+    lbl_803E920C, lbl_803E92CC, lbl_803E9394, lbl_803E9454, lbl_803E9514,
+    lbl_803E95D4, lbl_803E9694, lbl_803E9754, lbl_803E981C, lbl_803E98DC,
+    lbl_803E84C4, lbl_803E821C, lbl_803E62C0, lbl_803E6370, lbl_803E6420,
+    lbl_803E5764;
 
 static StageData* lbl_803DFEDC[] = {
-    &lbl_803DFEA8, &lbl_803E5764, &lbl_803E11A4,
-    &lbl_803E4ECC, &lbl_803E1800, &lbl_803E52E0,
-    &lbl_803E3F6C, &lbl_803E5130, &lbl_803E1B2C,
-    &lbl_803E4D0C, &lbl_803E274C, &lbl_803E51CC,
-    &lbl_803E0E5C, &lbl_803E76D0, &lbl_803E1F08,
-    &lbl_803E54CC, &lbl_803E1334, &lbl_803E6A3C,
-    &lbl_803E33DC, &lbl_803E2D20, &lbl_803E2858,
-    &lbl_803E3D94, &lbl_803E4800, NULL,
-    &lbl_803E4950, &lbl_803E4C00, NULL,
-    &lbl_803E7A00, &lbl_803E6748, &lbl_803E650C,
-    &lbl_803E65E8, &lbl_803E584C, &lbl_803E5988,
-    &lbl_803E5E0C, &lbl_803E617C, &lbl_803E5764,
-    &lbl_803E7E38, &lbl_803E7F90, &lbl_803E7D34,
-    &lbl_803E7B10, &lbl_803E85A4, &lbl_803E8664,
-    &lbl_803E872C, &lbl_803E87EC, &lbl_803E88AC,
-    &lbl_803E8974, &lbl_803E8A34, &lbl_803E8AF4,
-    &lbl_803E8C0C, &lbl_803E8CCC, &lbl_803E8D8C,
-    &lbl_803E8E4C, &lbl_803E8F0C, &lbl_803E8FCC,
-    &lbl_803E908C, &lbl_803E914C, &lbl_803E920C,
-    &lbl_803E92CC, &lbl_803E9394, &lbl_803E9454,
-    &lbl_803E9514, &lbl_803E95D4, &lbl_803E9694,
-    &lbl_803E9754, &lbl_803E981C, &lbl_803E98DC,
-    &lbl_803E84C4, &lbl_803E821C, &lbl_803E62C0,
-    &lbl_803E6370, &lbl_803E6420, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
-    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803DFEA8, &lbl_803E5764, &lbl_803E11A4, &lbl_803E4ECC, &lbl_803E1800,
+    &lbl_803E52E0, &lbl_803E3F6C, &lbl_803E5130, &lbl_803E1B2C, &lbl_803E4D0C,
+    &lbl_803E274C, &lbl_803E51CC, &lbl_803E0E5C, &lbl_803E76D0, &lbl_803E1F08,
+    &lbl_803E54CC, &lbl_803E1334, &lbl_803E6A3C, &lbl_803E33DC, &lbl_803E2D20,
+    &lbl_803E2858, &lbl_803E3D94, &lbl_803E4800, NULL,          &lbl_803E4950,
+    &lbl_803E4C00, NULL,          &lbl_803E7A00, &lbl_803E6748, &lbl_803E650C,
+    &lbl_803E65E8, &lbl_803E584C, &lbl_803E5988, &lbl_803E5E0C, &lbl_803E617C,
+    &lbl_803E5764, &lbl_803E7E38, &lbl_803E7F90, &lbl_803E7D34, &lbl_803E7B10,
+    &lbl_803E85A4, &lbl_803E8664, &lbl_803E872C, &lbl_803E87EC, &lbl_803E88AC,
+    &lbl_803E8974, &lbl_803E8A34, &lbl_803E8AF4, &lbl_803E8C0C, &lbl_803E8CCC,
+    &lbl_803E8D8C, &lbl_803E8E4C, &lbl_803E8F0C, &lbl_803E8FCC, &lbl_803E908C,
+    &lbl_803E914C, &lbl_803E920C, &lbl_803E92CC, &lbl_803E9394, &lbl_803E9454,
+    &lbl_803E9514, &lbl_803E95D4, &lbl_803E9694, &lbl_803E9754, &lbl_803E981C,
+    &lbl_803E98DC, &lbl_803E84C4, &lbl_803E821C, &lbl_803E62C0, &lbl_803E6370,
+    &lbl_803E6420, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764, &lbl_803E5764,
+    &lbl_803E5764,
 };
 
 static u8* lbl_804D6950;
@@ -363,13 +343,17 @@ void func_801C0800(StructPairWithStageID* pair)
     s32 i;
 
     stage_data = lbl_803DFEDC[pair->stage_id];
-    func_801C38D0(stage_info.x6B0->x8, stage_info.x6B0->x14, stage_info.x6B0->x1C, stage_info.x6B0->x18);
+    func_801C38D0(stage_info.x6B0->x8, stage_info.x6B0->x14,
+                  stage_info.x6B0->x1C, stage_info.x6B0->x18);
     func_801C38EC(stage_info.x6B0->x10, stage_info.x6B0->xC);
     func_801C3970(stage_info.x6B0->x28);
-    func_801C3900(stage_info.x6B0->x2E, stage_info.x6B0->x30, stage_info.x6B0->x34, stage_info.x6B0->x38,
-                  stage_info.x6B0->x3C, stage_info.x6B0->x40, stage_info.x6B0->x44, stage_info.x6B0->x48);
-    func_801C392C(stage_info.x6B0->x50, stage_info.x6B0->x54, stage_info.x6B0->x58,
-                  stage_info.x6B0->x5C, stage_info.x6B0->x60, stage_info.x6B0->x64);
+    func_801C3900(stage_info.x6B0->x2E, stage_info.x6B0->x30,
+                  stage_info.x6B0->x34, stage_info.x6B0->x38,
+                  stage_info.x6B0->x3C, stage_info.x6B0->x40,
+                  stage_info.x6B0->x44, stage_info.x6B0->x48);
+    func_801C392C(stage_info.x6B0->x50, stage_info.x6B0->x54,
+                  stage_info.x6B0->x58, stage_info.x6B0->x5C,
+                  stage_info.x6B0->x60, stage_info.x6B0->x64);
     func_801C3960(stage_info.x6B0->x20);
     func_801C3950(stage_info.x6B0->x24);
     if (stage_info.x6A8 != NULL) {
@@ -732,7 +716,7 @@ void func_801C1074(StructPairWithStageID* pair, s32 arg1)
     lbl_803DFEDC[pair->stage_id]->callback1(arg1);
 }
 
-void OSPanic(const char *file, int line, const char *msg, ...);
+void OSPanic(const char* file, int line, const char* msg, ...);
 
 void func_801C10B8(s32 arg0, s32 arg1)
 {
@@ -1252,7 +1236,8 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     temp_r3_4 = HSD_JObjLoadJoint(&sp18);
     if (temp_r3_4 == NULL) {
         OSReport(get_jobj, __FILE__, 0x4C4);
-        while (TRUE) {}
+        while (TRUE) {
+        }
     }
     HSD_JObjAddNext(temp_r29, temp_r3_4);
     if (temp_r3_4 == NULL) {
@@ -1476,14 +1461,18 @@ void func_801C1FFC(void)
 
 void func_801C205C(GXColor* color)
 {
-    if (stage_info.x12C != NULL && color != NULL && stage_info.x12C->ptr != NULL) {
+    if (stage_info.x12C != NULL && color != NULL &&
+        stage_info.x12C->ptr != NULL)
+    {
         stage_info.x12C->ptr->color = *color;
     }
 }
 
 BOOL func_801C2090(GXColor* color)
 {
-    if (stage_info.x12C != NULL && color != NULL && stage_info.x12C->ptr != NULL) {
+    if (stage_info.x12C != NULL && color != NULL &&
+        stage_info.x12C->ptr != NULL)
+    {
         *color = stage_info.x12C->ptr->color;
         return TRUE;
     }
@@ -1746,7 +1735,8 @@ extern BOOL func_803048C0(s32);
 
 static const int BGM_Undefined = -1;
 
-static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2) {
+static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
+{
     s32 temp_r25;
     UnkBgmStruct* phi_r30;
     UnkBgmStruct* phi_r30_0;
@@ -1788,35 +1778,45 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2) {
                     }
                     break;
                 case 3:
-                    if (func_80164840(9) && (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                    if (func_80164840(9) &&
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
                     }
                     break;
                 case 4:
-                    if (func_80164840(21) && (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                    if (func_80164840(21) &&
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
                     }
                     break;
                 case 5:
-                    if (func_803048C0(0x11A) && (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                    if (func_803048C0(0x11A) &&
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
                     }
                     break;
                 case 6:
-                    if (func_80164ABC() && (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                    if (func_80164ABC() &&
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
                     }
                     break;
                 case 7:
-                    if (func_80164600() && (phi_r30->x16 > HSD_Randi(0x64) || temp_r25)) {
+                    if (func_80164600() &&
+                        (phi_r30->x16 > HSD_Randi(0x64) || temp_r25))
+                    {
                         arg1 |= 2;
                     } else {
                         arg1 |= 1;
@@ -1880,7 +1880,8 @@ BOOL func_801C28AC(s32 arg0, u32 arg1, s32* arg2)
     return func_801C24F8(arg0, arg1, arg2);
 }
 
-char str1[] = "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n";
+char str1[] =
+    "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n";
 char str2[] = "             check StageParam.csv or StageItem.csv, stdata.c\n";
 char str3[] = " stageid=%d\n";
 static asm void func_801C28CC(void*, s32)
@@ -2047,7 +2048,8 @@ f32 func_801C2AE8(s32 arg0)
         phi_r5 += 1;
     }
     OSReport("%s:%d: not found stage param in DAT\n", "ground.c", 0x927);
-    while (1) {}
+    while (1) {
+    }
 }
 
 HSD_GObj* func_801C2BA4(s32 i)
@@ -2407,196 +2409,38 @@ s32 func_801C33C0(s32 arg0, s32 arg1)
 }
 
 u32 unknown[] = {
-    0x00000002,
-    0,
-    0x42C80000,
-    0x43270000,
-    0,
-    0x00000002,
-    0x00000001,
-    0x42C80000,
-    0x43270000,
-    0,
-    0x00000002,
-    0x00000002,
-    0x42C80000,
-    0x43270000,
-    0,
-    0x00000002,
-    0x00000003,
-    0x42C80000,
-    0x43270000,
-    0,
-    0x00000002,
-    0x00000004,
-    0x42C80000,
-    0x43480000,
-    0,
-    0x00000002,
-    0x00000094,
-    0,
-    0x433B0000,
-    0,
-    0x0000000E,
-    0,
-    0xC28E0000,
-    0x436E0000,
-    0,
-    0x0000000E,
-    0x00000001,
-    0xC28E0000,
-    0x436E0000,
-    0,
-    0x0000000E,
-    0x00000002,
-    0xC28E0000,
-    0x436E0000,
-    0,
-    0x0000000E,
-    0x00000003,
-    0xC28E0000,
-    0x436E0000,
-    0,
-    0x0000000E,
-    0x00000094,
-    0,
-    0x43750000,
-    0,
-    0x00000015,
-    0x00000004,
-    0x41100000,
-    0x426C0000,
-    0,
-    0x00000015,
-    0,
-    0xC1100000,
-    0x42860000,
-    0,
-    0x00000015,
-    0x00000001,
-    0x42580000,
-    0x40000000,
-    0,
-    0x00000015,
-    0x00000002,
-    0xC2960000,
-    0x40800000,
-    0,
-    0x00000015,
-    0x00000003,
-    0x42AE0000,
-    0xC1500000,
-    0,
-    0x0000001F,
-    0,
-    0xC4750000,
-    0x42540000,
-    0,
-    0x0000001F,
-    0x00000004,
-    0xC4750000,
-    0x42F00000,
-    0,
-    0x0000001F,
-    0x00000099,
-    0x44C96000,
-    0x43480000,
-    0,
-    0x00000020,
-    0,
-    0x43700000,
-    0xC3928000,
-    0,
-    0x00000020,
-    0x00000099,
-    0x41200000,
-    0x40000000,
-    0,
-    0x00000020,
-    0x00000004,
-    0x43700000,
-    0,
-    0,
-    0x00000021,
-    0x00000099,
-    0,
-    0x446EC000,
-    0,
-    0x00000022,
-    0,
-    0xC47A0000,
-    0x42B00000,
-    0,
-    0x00000022,
-    0x00000004,
-    0xC47A0000,
-    0x42C80000,
-    0,
-    0x00000027,
-    0,
-    0x43C30000,
-    0x44610000,
-    0,
-    0x00000027,
-    0x00000094,
-    0x43C30000,
-    0x44610000,
-    0,
-    0x00000027,
-    0x00000004,
-    0x43C30000,
-    0x44610000,
-    0,
-    0x00000013,
-    0,
-    0xC2480000,
-    0x42700000,
-    0,
-    0x00000013,
-    0x00000004,
-    0x41F00000,
-    0x42C80000,
-    0,
-    0x00000006,
-    0,
-    0x41F00000,
-    0x42700000,
-    0,
-    0x00000006,
-    0x00000004,
-    0xC2200000,
-    0x42700000,
-    0,
-    0xFFFFFFFF,
-    0,
-    0,
-    0x40A00000,
-    0,
-    0xFFFFFFFF,
-    0x00000001,
-    0,
-    0x40A00000,
-    0,
-    0xFFFFFFFF,
-    0x00000002,
-    0,
-    0x40A00000,
-    0,
-    0xFFFFFFFF,
-    0x00000003,
-    0,
-    0x40A00000,
-    0,
-    0xFFFFFFFF,
-    0x00000094,
-    0,
-    0,
-    0,
-    0xFFFFFFFF,
-    0xFFFFFFFF,
-    0,
-    0,
-    0,
+    0x00000002, 0,          0x42C80000, 0x43270000, 0,          0x00000002,
+    0x00000001, 0x42C80000, 0x43270000, 0,          0x00000002, 0x00000002,
+    0x42C80000, 0x43270000, 0,          0x00000002, 0x00000003, 0x42C80000,
+    0x43270000, 0,          0x00000002, 0x00000004, 0x42C80000, 0x43480000,
+    0,          0x00000002, 0x00000094, 0,          0x433B0000, 0,
+    0x0000000E, 0,          0xC28E0000, 0x436E0000, 0,          0x0000000E,
+    0x00000001, 0xC28E0000, 0x436E0000, 0,          0x0000000E, 0x00000002,
+    0xC28E0000, 0x436E0000, 0,          0x0000000E, 0x00000003, 0xC28E0000,
+    0x436E0000, 0,          0x0000000E, 0x00000094, 0,          0x43750000,
+    0,          0x00000015, 0x00000004, 0x41100000, 0x426C0000, 0,
+    0x00000015, 0,          0xC1100000, 0x42860000, 0,          0x00000015,
+    0x00000001, 0x42580000, 0x40000000, 0,          0x00000015, 0x00000002,
+    0xC2960000, 0x40800000, 0,          0x00000015, 0x00000003, 0x42AE0000,
+    0xC1500000, 0,          0x0000001F, 0,          0xC4750000, 0x42540000,
+    0,          0x0000001F, 0x00000004, 0xC4750000, 0x42F00000, 0,
+    0x0000001F, 0x00000099, 0x44C96000, 0x43480000, 0,          0x00000020,
+    0,          0x43700000, 0xC3928000, 0,          0x00000020, 0x00000099,
+    0x41200000, 0x40000000, 0,          0x00000020, 0x00000004, 0x43700000,
+    0,          0,          0x00000021, 0x00000099, 0,          0x446EC000,
+    0,          0x00000022, 0,          0xC47A0000, 0x42B00000, 0,
+    0x00000022, 0x00000004, 0xC47A0000, 0x42C80000, 0,          0x00000027,
+    0,          0x43C30000, 0x44610000, 0,          0x00000027, 0x00000094,
+    0x43C30000, 0x44610000, 0,          0x00000027, 0x00000004, 0x43C30000,
+    0x44610000, 0,          0x00000013, 0,          0xC2480000, 0x42700000,
+    0,          0x00000013, 0x00000004, 0x41F00000, 0x42C80000, 0,
+    0x00000006, 0,          0x41F00000, 0x42700000, 0,          0x00000006,
+    0x00000004, 0xC2200000, 0x42700000, 0,          0xFFFFFFFF, 0,
+    0,          0x40A00000, 0,          0xFFFFFFFF, 0x00000001, 0,
+    0x40A00000, 0,          0xFFFFFFFF, 0x00000002, 0,          0x40A00000,
+    0,          0xFFFFFFFF, 0x00000003, 0,          0x40A00000, 0,
+    0xFFFFFFFF, 0x00000094, 0,          0,          0,          0xFFFFFFFF,
+    0xFFFFFFFF, 0,          0,          0,
 };
 char unkmsg[] = "%s:%d:Error (root=%08x joint=%08x)\n";
 static asm void func_801C34AC(s32, HSD_JObj*, HSD_Joint*)
@@ -2950,8 +2794,8 @@ void func_801C38EC(f32 depth, f32 zoom)
     stage_info.cam_info.cam_zoom_rate = zoom;
 }
 
-void func_801C3900(f32 arg8, f32 arg9, f32 argA, f32 argB,
-                   f32 up, f32 down, f32 left, f32 right)
+void func_801C3900(f32 arg8, f32 arg9, f32 argA, f32 argB, f32 up, f32 down,
+                   f32 left, f32 right)
 {
     stage_info.cam_info.x3C = arg8;
     stage_info.cam_info.pausecam_zpos_min = arg9;
@@ -3021,7 +2865,8 @@ void func_801C39C0(void)
     f32 phi_f2;
 
     if (func_801C2D24(0x95, &sp20) && func_801C2D24(0x96, &sp14) &&
-        func_801C2D24(0x94, &sp8)) {
+        func_801C2D24(0x94, &sp8))
+    {
         if (sp20.x < sp14.x) {
             phi_f3 = sp20.x - sp8.x;
             phi_f4 = sp14.x - sp8.x;
@@ -3423,7 +3268,8 @@ s32 func_801C4210(void)
     int i;
     for (i = 199; i < 220; i++) {
         if (stage_info.x280[i] != NULL &&
-            func_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], 0, 0) != NULL) {
+            func_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], 0, 0) != NULL)
+        {
             count++;
         }
     }
@@ -3527,7 +3373,6 @@ void func_801C445C(HSD_LObj* lobj)
         return;
     }
     for (cur = lobj; cur != NULL; cur = cur->next) {
-
         wobj = HSD_LObjGetPositionWObj(lobj);
         if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &sp38);
@@ -3886,7 +3731,6 @@ void func_801C4A08(HSD_GObj* gobj)
     }
     func_80390228(gobj);
 }
-
 
 void func_801C4B50(s32 arg0, s32 arg1, Vec3* arg2, f32 arg8)
 {

@@ -44,7 +44,8 @@ s32 ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     if ((fp->input.x620_lstick_x * fp->x2C_facing_direction) >=
-        p_ftCommonData->x24) {
+        p_ftCommonData->x24)
+    {
         return 1;
     }
     return 0;
