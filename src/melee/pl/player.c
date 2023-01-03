@@ -1660,7 +1660,7 @@ u8 Player_GetFlagsAEBit1(s32 slot)
 }
 
 ////output is actually void, but needs u8 to match, most likely typo from
-///Nintendo
+/// Nintendo
 u8 Player_SetFlagsAEBit1(s32 slot, u8 bit1)
 {
     StaticPlayer* player;

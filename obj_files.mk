@@ -592,7 +592,6 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/dolphin/os/OSError.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSError_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSExi.c.o\
-	$(BUILD_DIR)/asm/dolphin/os/OSExi_data.s.o\
 	$(BUILD_DIR)/src/dolphin/os/OSFont.c.o\
 	$(BUILD_DIR)/src/dolphin/os/OSInterrupt.c.o\
 	$(BUILD_DIR)/asm/dolphin/os/OSInterrupt_data.s.o\
@@ -656,7 +655,13 @@ TEXT_O_FILES +=\
 	$(BUILD_DIR)/asm/dolphin/ax/AXVPB.s.o\
 	$(BUILD_DIR)/asm/dolphin/ax/AXProf.s.o\
 	$(BUILD_DIR)/asm/dolphin/ax/DSPCode.s.o\
-	$(BUILD_DIR)/asm/dolphin/ax/ax_unk.s.o\
+
+TEXT_O_FILES +=\
+	$(BUILD_DIR)/asm/dolphin/axfx/reverb_hi.s.o\
+	$(BUILD_DIR)/asm/dolphin/axfx/reverb_std.s.o\
+	$(BUILD_DIR)/asm/dolphin/axfx/chorus.s.o\
+	$(BUILD_DIR)/asm/dolphin/axfx/delay.s.o\
+	$(BUILD_DIR)/asm/dolphin/axfx/axfx.s.o\
 
 TEXT_O_FILES +=\
 	$(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o\

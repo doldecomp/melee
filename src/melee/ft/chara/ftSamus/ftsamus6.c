@@ -94,7 +94,7 @@ void ftSamus_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 }
 
 ///// what the heck is up with the stack in this function... can't get rid of
-///unused params
+/// unused params
 void ftSamus_8012B150(HSD_GObj* fighter_gobj, s32 a, s32 b, s32 c, s32 d)
 {
     Fighter* fp = fighter_gobj->user_data;

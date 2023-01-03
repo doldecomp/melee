@@ -102,8 +102,7 @@ void Fighter_800679B0()
     func_8009F4A4();
     func_800C8064();
     func_800C8F6C();
-    // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
-    // data section, how does this work?
+
     HSD_ObjAllocInit(&lbl_80459028, /*size*/ 0x8c0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459054, /*size*/ 0x1f0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459080, /*size*/ 0x80, /*align*/ 4);

@@ -5,7 +5,8 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/types.h>
 
-typedef u8 __OSInterrupt;
+typedef s16 __OSInterrupt;
+
 typedef enum {
     OS_INTR_MEM_0,
     OS_INTR_MEM_1,
@@ -43,7 +44,17 @@ typedef enum {
     OS_INTR_MAX
 } OSInterruptType;
 
-typedef void (*OSInterruptHandler)(u8, OSContext*);
+#define OS_INTRMASK_EXI_0_EXI (0x80000000U >> OS_INTR_EXI_0_EXI)
+#define OS_INTRMASK_EXI_0_TC (0x80000000U >> OS_INTR_EXI_0_TC)
+#define OS_INTRMASK_EXI_0_EXT (0x80000000U >> OS_INTR_EXI_0_EXT)
+#define OS_INTRMASK_EXI_1_EXI (0x80000000U >> OS_INTR_EXI_1_EXI)
+#define OS_INTRMASK_EXI_1_TC (0x80000000U >> OS_INTR_EXI_1_TC)
+#define OS_INTRMASK_EXI_1_EXT (0x80000000U >> OS_INTR_EXI_1_EXT)
+#define OS_INTRMASK_EXI_2_EXI (0x80000000U >> OS_INTR_EXI_2_EXI)
+#define OS_INTRMASK_EXI_2_TC (0x80000000U >> OS_INTR_EXI_2_TC)
+#define OS_INTRMASK_PI_DEBUG (0x80000000U >> OS_INTR_PI_DEBUG)
+
+typedef void (*OSInterruptHandler)(__OSInterrupt, OSContext*);
 
 extern u32 __OSLastInterruptSrr0;
 extern s16 __OSLastInterrupt;
@@ -53,8 +64,8 @@ BOOL OSDisableInterrupts(void);
 BOOL OSEnableInterrupts(void);
 BOOL OSRestoreInterrupts(BOOL);
 
-OSInterruptHandler __OSSetInterruptHandler(s16, OSInterruptHandler);
-OSInterruptHandler __OSGetInterruptHandler(s16);
+OSInterruptHandler __OSSetInterruptHandler(__OSInterrupt, OSInterruptHandler);
+OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt);
 
 void __OSInterruptInit(void);
 

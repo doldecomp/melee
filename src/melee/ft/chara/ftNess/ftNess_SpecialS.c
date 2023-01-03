@@ -7,7 +7,7 @@ extern void func_802AA054(HSD_GObj*, Vec3*, Vec3*, f32, f32);
 void ftNess_ItemPKFireSpawn(
     HSD_GObj*
         fighter_gobj) //* Ness's PK Fire spawn function, stored as Accessory4
-                      //and summoned with Subaction Event 0x60 *//
+                      // and summoned with Subaction Event 0x60 *//
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;

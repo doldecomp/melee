@@ -308,8 +308,9 @@ BOOL func_8007FFD8(struct _Fighter*, f32);
 void func_8008021C();
 void func_8008031C();
 
-f32 func_800804EC(struct _Fighter*); // DataOffset_PlayerScale_MultiplyBySomething,
-                                     // returns fp->x40*fp->x34
+f32 func_800804EC(
+    struct _Fighter*); // DataOffset_PlayerScale_MultiplyBySomething,
+                       // returns fp->x40*fp->x34
 void func_800804FC();
 
 void func_800819A8();
