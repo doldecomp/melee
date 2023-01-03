@@ -2,6 +2,7 @@
 #include <sysdolphin/baselib/controller.h> // hehe
 #include <sysdolphin/baselib/initialize.h>
 #include <dolphin/gx/GXInit.h>
+#include <dolphin/os/OSMemory.h>
 
 extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;

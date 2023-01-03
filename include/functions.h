@@ -795,8 +795,6 @@ f32 PSVECMag(Vec* v);
 f32 PSVECDotProduct(Vec* a, Vec* b);
 #pragma endregion
 
-u32 OSGetConsoleSimulatedMemSize();
-
 void VIWaitForRetrace(void);
 
 struct _HSD_TObj* allocShadowTObj();
