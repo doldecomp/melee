@@ -795,8 +795,6 @@ f32 PSVECMag(Vec* v);
 f32 PSVECDotProduct(Vec* a, Vec* b);
 #pragma endregion
 
-void* OSAllocFromHeap(int, u32);
-
 void OSReport(char*, ...);
 
 u32 OSGetConsoleSimulatedMemSize();

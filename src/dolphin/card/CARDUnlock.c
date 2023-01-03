@@ -2,8 +2,6 @@
 
 #include <dolphin/os/os.h>
 
-extern CARDControl __CARDBlock[2];
-
 static u8 CardData[] ATTRIBUTE_ALIGN(32) = {
     // clang-format off
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -188,7 +186,6 @@ typedef struct DecodeParameters {
     u8* outputAddr;
 } DecodeParameters;
 
-extern u8 CardData[];
 static void InitCallback(void* task);
 static void DoneCallback(void* task);
 
