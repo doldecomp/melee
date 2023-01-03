@@ -1,4 +1,4 @@
-#include <dolphin/types.h>
+#include <dolphin/os/os.h>
 #include <melee/ft/fighter.h>
 #include <melee/lb/lbvector.h>
 #include <melee/ft/ftlib.h>

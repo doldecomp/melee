@@ -1,4 +1,6 @@
 #include <melee/if/ifstatus.h>
+
+#include <dolphin/os/os.h>
 #include <melee/lb/lbunknown_001.h>
 
 HudIndex* func_802F4910(void)

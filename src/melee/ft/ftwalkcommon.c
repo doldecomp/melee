@@ -1,3 +1,4 @@
+#include <dolphin/os/os.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/code_80081B38.h>
 

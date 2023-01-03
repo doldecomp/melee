@@ -1,5 +1,7 @@
 #include <melee/pl/player.h>
 
+#include <dolphin/os/os.h>
+
 typedef struct _ftMapping {
     s8 internal_id;
     s8 extra_internal_id;

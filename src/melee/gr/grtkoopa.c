@@ -1,5 +1,7 @@
 #include <melee/gr/grtkoopa.h>
 
+#include <dolphin/os/os.h>
+
 extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E8C70[4] = {

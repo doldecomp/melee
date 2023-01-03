@@ -1,4 +1,6 @@
 #include <melee/ft/ftcommon.h>
+
+#include <dolphin/os/os.h>
 #include <melee/ft/code_80081B38.h>
 
 #include <melee/it/itkind.h>

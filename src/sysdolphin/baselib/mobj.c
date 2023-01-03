@@ -1,5 +1,6 @@
 #include <sysdolphin/baselib/mobj.h>
 
+#include <dolphin/os/os.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/texp.h>
 
