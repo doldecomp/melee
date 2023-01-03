@@ -20,22 +20,26 @@ extern struct StructStageIDWithUnks unk_arr_803E9960[];
 
 f32 Stage_GetCamBoundsLeftOffset()
 {
-    return stage_info.cam_info.cam_bounds_left + stage_info.cam_info.cam_x_offset;
+    return stage_info.cam_info.cam_bounds_left +
+           stage_info.cam_info.cam_x_offset;
 }
 
 f32 Stage_GetCamBoundsRightOffset()
 {
-    return stage_info.cam_info.cam_bounds_right + stage_info.cam_info.cam_x_offset;
+    return stage_info.cam_info.cam_bounds_right +
+           stage_info.cam_info.cam_x_offset;
 }
 
 f32 Stage_GetCamBoundsTopOffset()
 {
-    return stage_info.cam_info.cam_bounds_top + stage_info.cam_info.cam_y_offset;
+    return stage_info.cam_info.cam_bounds_top +
+           stage_info.cam_info.cam_y_offset;
 }
 
 f32 Stage_GetCamBoundsBottomOffset()
 {
-    return stage_info.cam_info.cam_bounds_bottom + stage_info.cam_info.cam_y_offset;
+    return stage_info.cam_info.cam_bounds_bottom +
+           stage_info.cam_info.cam_y_offset;
 }
 
 f32 Stage_GetCamPanAngleRadians()
@@ -102,14 +106,20 @@ f32 Stage_GetBlastZoneBottomOffset()
 f32 Stage_CalcUnkCamY()
 {
     f32 cam_y_offset = stage_info.cam_info.cam_y_offset;
-    f32 y_pos = stage_info.cam_info.cam_bounds_bottom + cam_y_offset + (stage_info.blast_zone.bottom + cam_y_offset);
+    f32 y_pos = stage_info.cam_info.cam_bounds_bottom + cam_y_offset +
+                (stage_info.blast_zone.bottom + cam_y_offset);
     return 0.5F * y_pos;
 }
 
 f32 Stage_CalcUnkCamYBounds()
 {
-    f32 cam_offset = (stage_info.cam_info.cam_bounds_bottom + stage_info.cam_info.cam_y_offset);
-    f32 y_pos_product = 0.5F * ((stage_info.cam_info.cam_bounds_bottom + stage_info.cam_info.cam_y_offset) + (stage_info.blast_zone.bottom + stage_info.cam_info.cam_y_offset));
+    f32 cam_offset = (stage_info.cam_info.cam_bounds_bottom +
+                      stage_info.cam_info.cam_y_offset);
+    f32 y_pos_product =
+        0.5F *
+        ((stage_info.cam_info.cam_bounds_bottom +
+          stage_info.cam_info.cam_y_offset) +
+         (stage_info.blast_zone.bottom + stage_info.cam_info.cam_y_offset));
 
     return 0.5F * (cam_offset + y_pos_product);
 }
@@ -192,7 +202,8 @@ f32 Stage_GetCamFixedFov()
 
 BOOL Stage_80224DC8(s32 arg)
 {
-    return (arg == 0x3b || arg == 0x3f || arg == 0x42 || arg == 0x49 || arg == 0x4c) != 0;
+    return (arg == 0x3b || arg == 0x3f || arg == 0x42 || arg == 0x49 ||
+            arg == 0x4c) != 0;
 }
 
 void Stage_80224E38(Vec* arg0, s32 arg1)
@@ -214,7 +225,9 @@ void Stage_80224E64(s32 arg0, Vec* arg_vec)
     if (arg0 == 4) {
         bool1 = 0;
         for (counter_f = -10.0F; counter_f < 100.0f; counter_f += 10.0f) {
-            s32 temp_ret = func_80051EC8(&internal_vec, 0, 0, 0, 1, -1, -1, 0.0F, 10.0f + counter_f, 0.0F, counter_f);
+            s32 temp_ret =
+                func_80051EC8(&internal_vec, 0, 0, 0, 1, -1, -1, 0.0F,
+                              10.0f + counter_f, 0.0F, counter_f);
             if (temp_ret != 0) {
                 bool1 = 1;
                 break;
@@ -223,7 +236,9 @@ void Stage_80224E64(s32 arg0, Vec* arg_vec)
 
         if (bool1 == 0) {
             for (counter_f = -10.0F; counter_f > -100.0f; counter_f -= 10.0f) {
-                s32 temp_ret = func_80051EC8(&internal_vec, 0, 0, 0, 1, -1, -1, 0.0F, counter_f, 0.0F, counter_f - 10.0f);
+                s32 temp_ret =
+                    func_80051EC8(&internal_vec, 0, 0, 0, 1, -1, -1, 0.0F,
+                                  counter_f, 0.0F, counter_f - 10.0f);
 
                 if (temp_ret != 0) {
                     bool1 = 1;

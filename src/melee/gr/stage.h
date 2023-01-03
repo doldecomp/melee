@@ -39,7 +39,8 @@ enum InternalStageID {
 };
 
 // This struct is based in part on the datasheet
-// however the info there is likely incorrect as this doesn't quite match grGroundParam
+// however the info there is likely incorrect as this doesn't quite match
+// grGroundParam
 typedef struct _StageCameraInfo {
     f32 cam_bounds_left;      // 0x0
     f32 cam_bounds_right;     // 0x4
@@ -111,7 +112,7 @@ typedef struct _StageInfo {
         }* ptr;
     }* x12C;
     Vec x130, x13C, x148, x154, x160, x16C;
-    BOOL (*x178)
+    BOOL(*x178)
     (s32);
     void* x17C;
     struct _HSD_GObj* x180[4];
@@ -175,7 +176,7 @@ typedef struct _StageData {
     void (*callback2)(void);
     void (*callback3)(void);
     s32 (*callback4)();
-    BOOL (*callback5)
+    BOOL(*callback5)
     (s32);
     s32 (*callback6)(Vec*, s32, struct _HSD_JObj*);
     u32 flags2;

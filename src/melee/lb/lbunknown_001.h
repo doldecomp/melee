@@ -36,11 +36,13 @@ void func_8000C290(struct _HSD_JObj*, struct _HSD_JObj* constraint);
 void func_8000C2F8(struct _HSD_JObj*, struct _HSD_JObj* constraint);
 void func_8000C390(struct _HSD_JObj*);
 void func_8000C420(struct _HSD_JObj*, u32 flags, f32 limit);
-void func_8000C490(struct _HSD_JObj*, struct _HSD_JObj*, struct _HSD_JObj*, f32, f32);
+void func_8000C490(struct _HSD_JObj*, struct _HSD_JObj*, struct _HSD_JObj*, f32,
+                   f32);
 void func_8000C7BC(struct _HSD_JObj* src, struct _HSD_JObj* dst);
-void func_8000C868(struct _HSD_Joint*, struct _HSD_JObj*, struct _HSD_JObj*, f32, f32);
-static s32 lbGetFreeColorRegImpl(s32 i0, struct _HSD_TevDesc*,
-                                 union _HSD_TExp*, union _HSD_TExp*);
+void func_8000C868(struct _HSD_Joint*, struct _HSD_JObj*, struct _HSD_JObj*,
+                   f32, f32);
+static s32 lbGetFreeColorRegImpl(s32 i0, struct _HSD_TevDesc*, union _HSD_TExp*,
+                                 union _HSD_TExp*);
 s32 func_8000CC5C(s32 i0, struct _HSD_MObj*, union _HSD_TExp*);
 s32 func_8000CC8C(s32 i);
 s32 func_8000CCA4(s32 i);

@@ -46,7 +46,8 @@ void ftNess_OnAbsorb(HSD_GObj* gobj)
 
 f32 ftNess_GetAbsorbHeal(Fighter* fp)
 {
-    return ((ftNessAttributes*) fp->x2D4_specialAttributes)->x94_PSI_MAGNET_HEAL_MUL;
+    return ((ftNessAttributes*) fp->x2D4_specialAttributes)
+        ->x94_PSI_MAGNET_HEAL_MUL;
 }
 
 void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag)
@@ -74,12 +75,15 @@ void ftNess_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftNessAttributes);
 }
 
-void ftNess_OnKnockbackEnter(HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //
+void ftNess_OnKnockbackEnter(
+    HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //
 {
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj) // Change model's MatAnim frames to normal textures //
+void ftNess_OnKnockbackExit(
+    HSD_GObj*
+        fighter_gobj) // Change model's MatAnim frames to normal textures //
 {
     Fighter_OnKnockbackExit(fighter_gobj, 1);
 }

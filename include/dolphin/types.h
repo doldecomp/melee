@@ -41,14 +41,15 @@ typedef jmp_t jtbl_t[];
 
 #define FLT_MAX 3.4028235E38
 
-#define assert_line(line, cond) \
+#define assert_line(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
 
-#define STRUCT_PLACEHOLDER(module, number) \
-    extern struct _##module##_Unk##number; \
+#define STRUCT_PLACEHOLDER(module, number)                                     \
+    extern struct _##module##_Unk##number;                                     \
     typedef struct _##module##_Unk##number module##_Unk##number;
 
-#define CALLBACK_PLACEHOLDER(module, number) typedef void (*module##_UnkCallback##number)();
+#define CALLBACK_PLACEHOLDER(module, number)                                   \
+    typedef void (*module##_UnkCallback##number)();
 
 #define UNK_FUNC(name) unk_t name()
 

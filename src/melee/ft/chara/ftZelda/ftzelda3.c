@@ -45,7 +45,8 @@ void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     temp_f1 = 0;
     fp = fighter_gobj->user_data;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x155, 0, NULL, temp_f1, 1.0, temp_f1);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x155, 0, NULL, temp_f1,
+                                       1.0, temp_f1);
     func_8006EBA4(fighter_gobj);
 
     fighter2 = fighter_gobj->user_data;
@@ -92,7 +93,8 @@ void ftZelda_8013AA38(HSD_GObj* fighter_gobj)
 
     if (fp->x2200_ftcmd_var0 == 1) {
         fp->x2200_ftcmd_var0 = 2;
-        ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
+        ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84,
+                                &ftZelda_8013ADB0);
     }
 
     if (fp->x2200_ftcmd_var0 == 0) {
@@ -117,7 +119,8 @@ void ftZelda_8013AACC(HSD_GObj* fighter_gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
-        ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
+        ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84,
+                                &ftZelda_8013ADB0);
     }
 
     if (fp->x2200_ftcmd_var0 == 0U) {
@@ -129,8 +132,14 @@ void ftZelda_8013AACC(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftZelda_8013AB60(HSD_GObj* fighter_gobj) { return; }
-void ftZelda_8013AB64(HSD_GObj* fighter_gobj) { return; }
+void ftZelda_8013AB60(HSD_GObj* fighter_gobj)
+{
+    return;
+}
+void ftZelda_8013AB64(HSD_GObj* fighter_gobj)
+{
+    return;
+}
 
 // 8013AB68 - 8013AB9C (0x34 bytes)
 void ftZelda_8013AB68(HSD_GObj* fighter_gobj)
@@ -196,13 +205,15 @@ void ftZelda_8013AC88(HSD_GObj* fighter_gobj)
 
     fp = fighter_gobj->user_data;
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x156, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x156, 0x0C4C508E, NULL,
+                                       fp->x894_currentAnimFrame, 1.0, 0);
 
     fighter2 = fighter_gobj->user_data;
     attributes = ((u32) fighter2->x2D4_specialAttributes);
 
     if (fighter2->x2200_ftcmd_var0 == 2U) {
-        ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
+        ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84,
+                                &ftZelda_8013ADB0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A8AC;
 }
@@ -218,15 +229,20 @@ void ftZelda_8013AD1C(HSD_GObj* fighter_gobj)
 
     fp = fighter_gobj->user_data;
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x155, 0x0C4C508E, NULL, fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x155, 0x0C4C508E, NULL,
+                                       fp->x894_currentAnimFrame, 1.0, 0);
 
     fighter2 = fighter_gobj->user_data;
     attributes = ((u32) fighter2->x2D4_specialAttributes);
 
     if (fighter2->x2200_ftcmd_var0 == 2U) {
-        ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84, &ftZelda_8013ADB0);
+        ftColl_CreateReflectHit(fighter_gobj, attributes + 0x84,
+                                &ftZelda_8013ADB0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;
 }
 
-void ftZelda_8013ADB0(HSD_GObj* fighter_gobj) { return; }
+void ftZelda_8013ADB0(HSD_GObj* fighter_gobj)
+{
+    return;
+}

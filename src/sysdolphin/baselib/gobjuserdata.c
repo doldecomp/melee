@@ -1,6 +1,7 @@
 #include <sysdolphin/baselib/gobjuserdata.h>
 
-void GObj_InitUserData(HSD_GObj* gobj, u8 kind, void (*remove_func)(), void* data)
+void GObj_InitUserData(HSD_GObj* gobj, u8 kind, void (*remove_func)(),
+                       void* data)
 {
     assert_line(40, gobj->user_data_kind == HSD_GOBJ_USER_DATA_NONE);
     gobj->user_data_kind = kind;

@@ -24,21 +24,28 @@ static void GXCPInterruptHandler(__OSInterrupt unused, OSContext* ctx)
     OSContext sp10;
 
     __GXContexts.main->xC = __cpReg[0];
-    if (((((u32) __GXContexts.main->x8) >> 3) & 1) && ((__GXContexts.main->xC >> 1) & 1)) {
+    if (((((u32) __GXContexts.main->x8) >> 3) & 1) &&
+        ((__GXContexts.main->xC >> 1) & 1))
+    {
         OSResumeThread(__GXCurrentThread);
         GXOverflowSuspendInProgress = 0;
         __GXWriteFifoIntReset(1, 1);
         __GXWriteFifoIntEnable(1, 0);
     }
-    if (((((u32) __GXContexts.main->x8) >> 2) & 1) && (__GXContexts.main->xC & 1)) {
+    if (((((u32) __GXContexts.main->x8) >> 2) & 1) &&
+        (__GXContexts.main->xC & 1))
+    {
         __GXOverflowCount++;
         __GXWriteFifoIntEnable(0, 1);
         __GXWriteFifoIntReset(1, 0);
         GXOverflowSuspendInProgress = 1;
         OSSuspendThread(__GXCurrentThread);
     }
-    if (((((u32) __GXContexts.main->x8) >> 5) & 1) && ((__GXContexts.main->xC >> 4) & 1)) {
-        __GXContexts.main->x8 = (OSContext*) (((u32) __GXContexts.main->x8) & ~(1 << 5));
+    if (((((u32) __GXContexts.main->x8) >> 5) & 1) &&
+        ((__GXContexts.main->xC >> 4) & 1))
+    {
+        __GXContexts.main->x8 =
+            (OSContext*) (((u32) __GXContexts.main->x8) & ~(1 << 5));
         __cpReg[1] = (u16) __GXContexts.main->x8;
         if (BreakPointCB != NULL) {
             OSClearContext(&sp10);
@@ -121,8 +128,8 @@ void GXSetCPUFifo(GXFifoObj* fifo)
     OSRestoreInterrupts(intrEnabled);
     return;
 
-// Despite this obviously being dead code, it still is needed to match the function.
-// todo: This is weird; try to match without it.
+// Despite this obviously being dead code, it still is needed to match the
+// function. todo: This is weird; try to match without it.
 #ifndef NON_MATCHING
     asm {nop}
 #pragma peephole on

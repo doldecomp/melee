@@ -41,17 +41,9 @@ static struct {
 }* lbl_804D69B8;
 
 StageData lbl_803E274C = {
-    0x0000000A,
-    lbl_803E26F0,
-    "/GrSt.dat",
-    func_801E3030,
-    func_801E302C,
-    func_801E30A8,
-    func_801E30AC,
-    func_801E30D0,
-    func_801E36D0,
-    func_801E36D8,
-    0x00000001,
+    0x0000000A,    lbl_803E26F0,  "/GrSt.dat",   func_801E3030,
+    func_801E302C, func_801E30A8, func_801E30AC, func_801E30D0,
+    func_801E36D0, func_801E36D8, 0x00000001,
 };
 
 static void func_801E302C(s32)
@@ -318,16 +310,6 @@ s32 func_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
 }
 
 static u32 unused[] = {
-    0xC3920000,
-    0x42D20000,
-    0xC3920000,
-    0x42960000,
-    0xC3920000,
-    0x42480000,
-    0x43980000,
-    0x42DC0000,
-    0x43980000,
-    0x42B40000,
-    0,
-    0,
+    0xC3920000, 0x42D20000, 0xC3920000, 0x42960000, 0xC3920000, 0x42480000,
+    0x43980000, 0x42DC0000, 0x43980000, 0x42B40000, 0,          0,
 };

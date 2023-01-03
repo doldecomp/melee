@@ -66,13 +66,15 @@ void ftSamus_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 
     fp->xEC_ground_vel *= samus_attr->x6C;
     if (fp->x10_action_state_index == 0x28) {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0, NULL, 3.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0, NULL, 3.0f,
+                                           1.0f, 0.0f);
         ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
         fp->x2204_ftcmd_var1 = 2;
         ftSamus_8012B5F0(fighter_gobj);
         return;
     }
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0, NULL, 0.0f, 1.0f,
+                                       0.0f);
     func_8006EBA4(fighter_gobj);
     ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
 }
@@ -85,12 +87,14 @@ void ftSamus_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.x *= samus_attr->x70;
     fp->x80_self_vel.y = samus_attr->x58;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0, NULL, 0.0f, 1.0f,
+                                       0.0f);
     func_8006EBA4(fighter_gobj);
     ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
 }
 
-///// what the heck is up with the stack in this function... can't get rid of unused params
+///// what the heck is up with the stack in this function... can't get rid of
+///unused params
 void ftSamus_8012B150(HSD_GObj* fighter_gobj, s32 a, s32 b, s32 c, s32 d)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -140,7 +144,9 @@ void ftSamus_8012B358(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSamus_8012B3A4(HSD_GObj* fighter_gobj) {}
+void ftSamus_8012B3A4(HSD_GObj* fighter_gobj)
+{
+}
 
 void ftSamus_8012B3A8(HSD_GObj* fighter_gobj)
 {
@@ -149,11 +155,9 @@ void ftSamus_8012B3A8(HSD_GObj* fighter_gobj)
     attr* ft_attr = &fp->x110_attr;
 
     if (fp->x2200_ftcmd_var0) {
-        func_8007CADC(
-            fp,
-            0.0f,
-            ft_attr->x110_WalkInitialVelocity * samus_attr->x64,
-            ft_attr->x118_WalkMaximumVelocity * samus_attr->x5C);
+        func_8007CADC(fp, 0.0f,
+                      ft_attr->x110_WalkInitialVelocity * samus_attr->x64,
+                      ft_attr->x118_WalkMaximumVelocity * samus_attr->x5C);
         func_8007CB74(fighter_gobj);
     } else {
         func_80084F3C(fighter_gobj);
@@ -167,11 +171,9 @@ void ftSamus_8012B41C(HSD_GObj* fighter_gobj)
     attr* ft_attr = &fp->x110_attr;
 
     func_8007D4B8(fp);
-    func_8007D3A8(
-        fp,
-        0.0f,
-        ft_attr->x174_AerialDriftStickMult * samus_attr->x68,
-        ft_attr->x17C_AerialDriftMax * samus_attr->x60);
+    func_8007D3A8(fp, 0.0f,
+                  ft_attr->x174_AerialDriftStickMult * samus_attr->x68,
+                  ft_attr->x17C_AerialDriftMax * samus_attr->x60);
 }
 
 void ftSamus_8012B488(HSD_GObj* fighter_gobj)
@@ -214,7 +216,8 @@ void ftSamus_8012B570(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0x0C4C509C, NULL,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftSamus_UnkSetStateAndCb(fighter_gobj);
 }
 
@@ -224,7 +227,8 @@ void ftSamus_8012B5F0(HSD_GObj* fighter_gobj)
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->x80_self_vel.y = samus_attr->x54;
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0x0C4C509C, NULL,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->cb.x21BC_callback_Accessory4 = ftSamus_8012ADF0;
 }
 
@@ -232,6 +236,7 @@ void ftSamus_8012B668(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0x0C4C509C, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0x0C4C509C, NULL,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftSamus_UnkSetStateAndCb(fighter_gobj);
 }

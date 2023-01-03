@@ -40,12 +40,14 @@ inline void gobj_first_higher_prio(HSD_GObj* gobj)
     while (var_r4 != NULL && var_r4->p_priority < gobj->p_priority) {
         var_r4 = var_r4->next;
     }
-    GObj_PReorder(gobj, var_r4 != NULL ? var_r4->prev : plinklow_gobjs[gobj->p_link]);
+    GObj_PReorder(gobj,
+                  var_r4 != NULL ? var_r4->prev : plinklow_gobjs[gobj->p_link]);
 }
 
 extern char lbl_804084B8[];
 extern char lbl_804084C4[];
-HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority, HSD_GObj* position)
+HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority,
+                     HSD_GObj* position)
 {
     HSD_GObj* gobj;
 
@@ -120,7 +122,8 @@ void func_80390228(HSD_GObj* gobj)
 
 extern s32 lbl_804D783C;
 
-void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority, HSD_GObj* position)
+void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
+                   HSD_GObj* position)
 {
     HSD_GObjProc* proc_cur;
     HSD_GObjProc* child;

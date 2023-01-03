@@ -5,9 +5,8 @@
 #include <melee/ft/fighter.h>
 
 void func_80042374(CollData*, f32, f32, f32);
-void func_80042078(CollData* cd, HSD_GObj* gobj,
-                   HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*,
-                   HSD_JObj*, HSD_JObj*, HSD_JObj*, f32);
+void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*, HSD_JObj*,
+                   HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*, f32);
 void func_80041EE4(CollData*);
 unk_t func_800471F8();
 unk_t func_800473CC();

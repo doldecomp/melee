@@ -161,13 +161,16 @@ static void HSD_OSInit(void)
     u32 old_arena_lo = (u32) OSGetArenaLo();
     u32 old_arena_hi = (u32) OSGetArenaHi();
     memReport.total = OSGetPhysicalMemSize();
-    memReport.system = memReport.total - (u32) OSGetArenaHi() + (u32) OSGetArenaLo() - memReport.xfb - memReport.gxfifo;
-    old_arena_lo = (u32) OSInitAlloc((void*) old_arena_lo, (void*) old_arena_hi, iparam_heap_max_num);
+    memReport.system = memReport.total - (u32) OSGetArenaHi() +
+                       (u32) OSGetArenaLo() - memReport.xfb - memReport.gxfifo;
+    old_arena_lo = (u32) OSInitAlloc((void*) old_arena_lo, (void*) old_arena_hi,
+                                     iparam_heap_max_num);
     OSSetArenaLo((void*) old_arena_lo);
 
     new_arena_lo = OSRoundUp32B(old_arena_lo);
     new_arena_hi = OSRoundDown32B(old_arena_hi);
-    lbl_804D6018 = OSCreateHeap((void*) new_arena_lo, (void*) (new_arena_lo + iparam_audio_heap_size));
+    lbl_804D6018 = OSCreateHeap(
+        (void*) new_arena_lo, (void*) (new_arena_lo + iparam_audio_heap_size));
     new_arena_lo += iparam_audio_heap_size;
     hsd_heap_next_arena_lo = (void*) new_arena_lo;
     hsd_heap_next_arena_hi = (void*) new_arena_hi;
@@ -220,7 +223,8 @@ OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
     OSDestroyHeap(current_heap);
     current_heap = OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
     OSSetCurrentHeap(current_heap);
-    HSD_ObjSetHeap((u32) hsd_heap_next_arena_hi - (u32) hsd_heap_next_arena_lo, NULL);
+    HSD_ObjSetHeap((u32) hsd_heap_next_arena_hi - (u32) hsd_heap_next_arena_lo,
+                   NULL);
     return current_heap;
 }
 
@@ -335,7 +339,8 @@ BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
 
     if (init_done) {
         if (!shown) {
-            OSReport("init parameter should be set before invoking HSD_Init().\n");
+            OSReport(
+                "init parameter should be set before invoking HSD_Init().\n");
             shown = TRUE;
         }
         return FALSE;

@@ -4,11 +4,14 @@ extern u32 func_800386D8(void*, s32);
 extern BOOL func_801E2D14();
 
 // 0x800E5970
-// https://decomp.me/scratch/sI1ge // Check if Special Taunt has already been performed
+// https://decomp.me/scratch/sI1ge // Check if Special Taunt has already been
+// performed
 BOOL ftFox_AppealS_CheckIfUsed(Fighter* fp)
 {
     void* attackCount = Player_GetTotalAttackCountPtr((s32) fp->xC_playerID);
-    if ((func_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) && (func_801E2D14() != FALSE)) {
+    if ((func_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) &&
+        (func_801E2D14() != FALSE))
+    {
         return TRUE;
     }
     return FALSE;
@@ -38,7 +41,11 @@ BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     s32 ftKind = fp->x4_fighterKind;
 
-    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) && (func_801E2CE8() != FALSE) && ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == FALSE) && ((u8) fp->x682 == TRUE)) {
+    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
+        (func_801E2CE8() != FALSE) &&
+        ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == FALSE) &&
+        ((u8) fp->x682 == TRUE))
+    {
         if (ftFox_CheckAppealSCount() == 0) {
             ftFox_AppealS_Action(fighter_gobj);
             func_80040120(fp->xC_playerID, fp->x221F_flag.bits.b4);
@@ -66,10 +73,14 @@ inline BOOL ftFox_AppealS_GetLR(f32 x1, f32 x2)
         return 1;
 }
 
-static s32 ASID_AppealS[2][3] = { AS_FOX_APPEALS_START_R, AS_FOX_APPEALS_R, AS_FOX_APPEALS_END_R, AS_FOX_APPEALS_START_L, AS_FOX_APPEALS_L, AS_FOX_APPEALS_END_L };
+static s32 ASID_AppealS[2][3] = {
+    AS_FOX_APPEALS_START_R, AS_FOX_APPEALS_R, AS_FOX_APPEALS_END_R,
+    AS_FOX_APPEALS_START_L, AS_FOX_APPEALS_L, AS_FOX_APPEALS_END_L
+};
 
 // 0x800E5A90
-// https://decomp.me/scratch/PFxY9 // Fox & Falco's Special Taunt Action State handler
+// https://decomp.me/scratch/PFxY9 // Fox & Falco's Special Taunt Action State
+// handler
 void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
 {
     s32 facingDir;
@@ -86,7 +97,9 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     actionDir = fp->foxVars[0].AppealS.facingDir;
     animCount = fp->foxVars[0].AppealS.animCount;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[actionDir][animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj,
+                                       ASID_AppealS[actionDir][animCount], 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
 }
 
 extern void func_8008A324(HSD_GObj*);
@@ -95,7 +108,8 @@ extern s32 func_801E2C34();
 extern void ftFox_AppealS_OnTakeDamage(HSD_GObj*);
 
 // 0x800E5B18
-// https://decomp.me/scratch/7DvuI // Fox & Falco's Special Taunt Start Animation callback
+// https://decomp.me/scratch/7DvuI // Fox & Falco's Special Taunt Start
+// Animation callback
 void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
 {
     s32 ftKind;
@@ -133,7 +147,11 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
             func_8008A324(fighter_gobj);
             return;
         }
-        Fighter_ActionStateChange_800693AC(fighter_gobj, ASID_AppealS[fp->foxVars[0].AppealS.facingDir][fp->foxVars[0].AppealS.animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(
+            fighter_gobj,
+            ASID_AppealS[fp->foxVars[0].AppealS.facingDir]
+                        [fp->foxVars[0].AppealS.animCount],
+            0, NULL, 0.0f, 1.0f, 0.0f);
     }
 }
 
@@ -160,7 +178,8 @@ void ftFox_AppealS_Coll(HSD_GObj* fighter_gobj)
 extern void func_801E2AF4();
 
 // 0x800E5C7C
-// https://decomp.me/scratch/VkVGw // Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
+// https://decomp.me/scratch/VkVGw // Fox & Falco's Special Taunt
+// OnTakeDamage/OnDeath callback
 void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

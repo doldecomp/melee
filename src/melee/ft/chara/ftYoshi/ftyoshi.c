@@ -49,7 +49,8 @@ void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
     }
 }
 
-void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg, f32 start_frame)
+void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
+                   f32 start_frame)
 {
     s32 filler[2];
 
@@ -85,7 +86,8 @@ void func_8012B8A4(HSD_GObj* fighter_gobj)
     s32 unused[4];
     Fighter* fp = fighter_gobj->user_data;
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
-    f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth / p_ftCommonData->x260_startShieldHealth));
+    f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth /
+                                    p_ftCommonData->x260_startShieldHealth));
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
 }
@@ -371,10 +373,9 @@ lbl_8012BFF0:
 //     Fighter* fp;
 
 //     fp = getFighter(fighter_gobj);
-//     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
-//     fp->x672_input_timer_counter = 0xFE;
-//     fp->x221A_flag.bits.b7 = 0;
-//     fp->x221B_flag.bits.b0 = 0;
+//     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL,
+//     fp->x894_currentAnimFrame, 1.0f, 0.0f); fp->x672_input_timer_counter =
+//     0xFE; fp->x221A_flag.bits.b7 = 0; fp->x221B_flag.bits.b0 = 0;
 //     fp->x221C_flag.bits.b3 = 1;
 //     fp->x221C_flag.bits.b1 = 1;
 //     fp->x221C_flag.bits.b2 = 1;

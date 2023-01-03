@@ -22,10 +22,18 @@ void HSD_JObjCheckDepend(HSD_JObj* jobj)
     switch (HSD_JObjMtxIsDirty(jobj)) {
     case FALSE:
         if ((jobj->flags & JOBJ_USER_DEF_MTX)) {
-            if (!(jobj->flags & JOBJ_MTX_INDEP_PARENT) && jobj->parent != NULL && HSD_JObjMtxIsDirty(jobj->parent)) {
+            if (!(jobj->flags & JOBJ_MTX_INDEP_PARENT) &&
+                jobj->parent != NULL && HSD_JObjMtxIsDirty(jobj->parent))
+            {
                 jobj->flags |= JOBJ_MTX_DIRTY;
             }
-        } else if (jobj->parent != NULL && (jobj->parent->flags & JOBJ_MTX_DIRTY) || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT1 || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2 || (jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR || jobj->robj != NULL) {
+        } else if (jobj->parent != NULL &&
+                       (jobj->parent->flags & JOBJ_MTX_DIRTY) ||
+                   (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT1 ||
+                   (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2 ||
+                   (jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR ||
+                   jobj->robj != NULL)
+        {
             jobj->flags |= JOBJ_MTX_DIRTY;
         }
         break;
@@ -64,7 +72,8 @@ void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint)
     }
 }
 
-void HSD_JObjWalkTree0(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* args)
+void HSD_JObjWalkTree0(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32),
+                       void* args)
 {
     u32 type;
 
@@ -85,7 +94,8 @@ void HSD_JObjWalkTree0(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* 
     }
 }
 
-void HSD_JObjWalkTree(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32), void* args)
+void HSD_JObjWalkTree(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32),
+                      void* args)
 {
     if (jobj == NULL) {
         return;
@@ -145,14 +155,16 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
         } else {
             scl = NULL;
         }
-        HSD_MtxSRTQuat(jobj->mtx, &jobj->scale, &jobj->rotate, &jobj->translate, scl);
+        HSD_MtxSRTQuat(jobj->mtx, &jobj->scale, &jobj->rotate, &jobj->translate,
+                       scl);
     } else {
         if (has_scl(jobj->parent)) {
             scl = jobj->parent->scl;
         } else {
             scl = NULL;
         }
-        HSD_MtxSRT(jobj->mtx, &jobj->scale, (Vec*) &jobj->rotate, &jobj->translate, scl);
+        HSD_MtxSRT(jobj->mtx, &jobj->scale, (Vec*) &jobj->rotate,
+                   &jobj->translate, scl);
     }
     if (jobj->parent != NULL) {
         PSMTXConcat(jobj->parent->mtx, jobj->mtx, jobj->mtx);
@@ -297,16 +309,17 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
             has_dobj = TRUE;
         }
         if (has_dobj) {
-            HSD_DObjAddAnimAll(jobj->u.dobj,
-                               mat_joint != NULL ? mat_joint->matanim : NULL,
-                               sh_joint != NULL ? sh_joint->shapeanimdobj : NULL);
+            HSD_DObjAddAnimAll(
+                jobj->u.dobj, mat_joint != NULL ? mat_joint->matanim : NULL,
+                sh_joint != NULL ? sh_joint->shapeanimdobj : NULL);
         }
     }
 }
 #else
 #pragma push
 asm void HSD_JObjAddAnim(HSD_JObj*, HSD_AnimJoint* an_joint,
-                         HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint)
+                         HSD_MatAnimJoint* mat_joint,
+                         HSD_ShapeAnimJoint* sh_joint)
 { // clang-format off
     nofralloc
 /* 8036FA10 0036C5F0  7C 08 02 A6 */	mflr r0
@@ -440,8 +453,8 @@ void HSD_JObjAddAnimAll(HSD_JObj* jobj, HSD_AnimJoint* arg1,
 }
 #else
 #pragma push
-asm void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*,
-                            HSD_MatAnimJoint*, HSD_ShapeAnimJoint*)
+asm void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*, HSD_MatAnimJoint*,
+                            HSD_ShapeAnimJoint*)
 { // clang-format off
     nofralloc
 /* 8036FB5C 0036C73C  7C 08 02 A6 */	mflr r0
@@ -911,7 +924,9 @@ inline HSD_JObj* JObjLoadJointSub(HSD_Joint* joint, HSD_JObj* parent)
     if (joint == NULL) {
         return NULL;
     }
-    if (joint->class_name == NULL || !(info = hsdSearchClassInfo(joint->class_name))) {
+    if (joint->class_name == NULL ||
+        !(info = hsdSearchClassInfo(joint->class_name)))
+    {
         jobj = HSD_JObjAlloc();
     } else {
         jobj = hsdNew(info);
@@ -983,7 +998,8 @@ inline void ref_INC_alt(void* o)
     if (o != NULL) {
         HSD_OBJ(o)->ref_count++;
         if (!(HSD_OBJ(o)->ref_count != (u16) -1)) {
-            __assert(lbl_804068E4, 0x5D, "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
+            __assert(lbl_804068E4, 0x5D,
+                     "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF");
         }
     }
 }
@@ -1026,7 +1042,9 @@ char lbl_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
 inline int iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
-    HSD_OBJ(o)->ref_count_individual != 0 ? (void) 0 : __assert(lbl_804068E4, 0x9E, lbl_80406918);
+    HSD_OBJ(o)->ref_count_individual != 0
+        ? (void) 0
+        : __assert(lbl_804068E4, 0x9E, lbl_80406918);
 }
 
 inline BOOL iref_none(void* o)
@@ -1400,7 +1418,8 @@ HSD_JObj* HSD_JObjGetPrev(HSD_JObj* jobj)
         }
         cur = cur->next;
     }
-    HSD_Panic(__FILE__, 0x5EC, "can not find specified jobj. maybe jobj tree is broken.\n");
+    HSD_Panic(__FILE__, 0x5EC,
+              "can not find specified jobj. maybe jobj tree is broken.\n");
     return NULL;
 }
 
@@ -1520,7 +1539,8 @@ void HSD_JObjClearFlagsAll(HSD_JObj* jobj, u32 flags)
 
 HSD_JObj* HSD_JObjAlloc(void)
 {
-    HSD_JObj* jobj = hsdNew((HSD_ClassInfo*) (default_class != NULL ? default_class : &hsdJObj));
+    HSD_JObj* jobj = hsdNew(
+        (HSD_ClassInfo*) (default_class != NULL ? default_class : &hsdJObj));
     assert_line(0x7D3, jobj);
     return jobj;
 }
@@ -1636,7 +1656,9 @@ void resolveIKJoint1(HSD_JObj* jobj)
         var_r28 = jobj_get_effector_checked(jobj->child);
     }
     if (var_r28 != NULL) {
-        if ((HSD_RObjGetByType(jobj->robj, REFTYPE_JOBJ, 3) == NULL) && (jobj != NULL)) {
+        if ((HSD_RObjGetByType(jobj->robj, REFTYPE_JOBJ, 3) == NULL) &&
+            (jobj != NULL))
+        {
             if (jobj->robj != NULL) {
                 HSD_RObjUpdateAll(jobj->robj, jobj, JObjUpdateFunc);
                 if (HSD_JObjMtxIsDirty(jobj)) {
@@ -1676,7 +1698,8 @@ void resolveIKJoint1(HSD_JObj* jobj)
             temp_f5 = temp_f30 * temp_f30;
             var_f28 = var_f29 * var_f29;
             temp_f1_7 = temp_f5 - var_f28;
-            temp_f1_8 = 0.25F * (((2.0F * (temp_f5 + var_f28)) - temp_f31) - ((temp_f1_7 * temp_f1_7) / temp_f31));
+            temp_f1_8 = 0.25F * (((2.0F * (temp_f5 + var_f28)) - temp_f31) -
+                                 ((temp_f1_7 * temp_f1_7) / temp_f31));
             var_f27 = temp_f1_8;
             if (temp_f1_8 < 0.0F) {
                 var_f27 = 0.0F;
@@ -1776,7 +1799,8 @@ void resolveIKJoint2(HSD_JObj* jobj)
     PSVECScale(&sp7C, &sp7C, robj->u.ik_hint.bone_length * var_f31);
     PSVECAdd(&sp88, &sp7C, &sp94);
     PSVECSubtract(&var_r29->translate, &sp94, &sp7C);
-    PSVECScale(&sp7C, &sp7C, sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp7C, &sp7C))));
+    PSVECScale(&sp7C, &sp7C,
+               sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp7C, &sp7C))));
     temp_r28 = HSD_RObjGetByType(jobj->robj, 0x20000000, 5);
     temp_r29 = HSD_RObjGetByType(jobj->robj, 0x20000000, 6);
     if ((temp_r28 != NULL) || (temp_r29 != NULL)) {
@@ -1877,11 +1901,14 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
                     sp10.x = parent->mtx[0][0];
                     sp10.y = parent->mtx[1][0];
                     sp10.z = parent->mtx[2][0];
-                    PSVECScale(&sp10, &sp10, sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp10, &sp10))));
+                    PSVECScale(
+                        &sp10, &sp10,
+                        sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp10, &sp10))));
                     if (parent->scl != NULL) {
                         x_scale = parent->scl->x;
                     }
-                    PSVECScale(&sp10, &sp10, robj->u.ik_hint.bone_length * x_scale);
+                    PSVECScale(&sp10, &sp10,
+                               robj->u.ik_hint.bone_length * x_scale);
                     PSVECAdd(&sp1C, &sp10, &sp28);
                     jobj->mtx[0][3] = sp28.x;
                     jobj->mtx[1][3] = sp28.y;
@@ -2014,15 +2041,16 @@ static char unused12[] = "  sca(G): ";
 static char unused13[] = "  tra(G): ";
 #pragma pop
 
-void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx, u32 trsp_mask, u32 rendermode);
+void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx, u32 trsp_mask,
+                     u32 rendermode);
 void HSD_JObjMakeMatrix(HSD_JObj* jobj);
 void HSD_JObjMakePositionMtx(HSD_JObj* jobj, MtxPtr mtx, MtxPtr rmtx);
 
 void JObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&hsdJObj), HSD_CLASS_INFO(&hsdObj),
-                     "sysdolphin_base_library", "hsd_jobj", sizeof(HSD_JObjInfo),
-                     sizeof(HSD_JObj));
+                     "sysdolphin_base_library", "hsd_jobj",
+                     sizeof(HSD_JObjInfo), sizeof(HSD_JObj));
     HSD_CLASS_INFO(&hsdJObj)->init = JObjInit;
     HSD_CLASS_INFO(&hsdJObj)->release = JObjRelease;
     HSD_CLASS_INFO(&hsdJObj)->amnesia = JObjAmnesia;

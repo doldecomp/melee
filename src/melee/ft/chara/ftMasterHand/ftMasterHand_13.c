@@ -39,7 +39,8 @@ void lbl_80152928(HSD_GObj* gobj)
             temp_r4->x80_self_vel.x = 0.0f;
             temp_r4->x80_self_vel.y = 0.0f;
             temp_r31 = gobj->user_data;
-            Fighter_ActionStateChange_800693AC(gobj, 0x168, 0, 0, 0.0f, 1.0f, 0.0f);
+            Fighter_ActionStateChange_800693AC(gobj, 0x168, 0, 0, 0.0f, 1.0f,
+                                               0.0f);
             func_8006EBA4(gobj);
             func_80088148(temp_r31, 0x4E207, 0x7F, 0x40);
         }
@@ -74,10 +75,13 @@ static inline float my_sqrtf(float x)
     s32 unused = 0; // fakematch
     volatile float y;
     if (x > 0.0f) {
-        double guess = __frsqrte((double) x);                 // returns an approximation to
-        guess = _half * guess * (_three - guess * guess * x); // now have 12 sig bits
-        guess = _half * guess * (_three - guess * guess * x); // now have 24 sig bits
-        guess = _half * guess * (_three - guess * guess * x); // now have 32 sig bits
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess = _half * guess *
+                (_three - guess * guess * x); // now have 12 sig bits
+        guess = _half * guess *
+                (_three - guess * guess * x); // now have 24 sig bits
+        guess = _half * guess *
+                (_three - guess * guess * x); // now have 32 sig bits
         y = (float) (x * guess);
         return y;
     }

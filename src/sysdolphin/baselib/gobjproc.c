@@ -14,11 +14,15 @@ void func_8038FC18(HSD_GObjProc* gproc)
     if (lbl_804CE3E4.b0 && gproc == lbl_804D7830) {
         lbl_804D7830 = gproc->next;
     }
-    if (gproc == lbl_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)]) {
+    if (gproc ==
+        lbl_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)])
+    {
         if (gproc->prev != NULL && gproc->prev->gobj->p_link == temp_r7) {
-            lbl_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)] = gproc->prev;
+            lbl_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max +
+                                              1)] = gproc->prev;
         } else {
-            lbl_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)] = NULL;
+            lbl_804D7844[temp_r7 +
+                         temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)] = NULL;
         }
     }
     if (gproc->prev != NULL) {

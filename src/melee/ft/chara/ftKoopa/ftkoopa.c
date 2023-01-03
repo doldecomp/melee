@@ -176,7 +176,8 @@ void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj)
     fp->x2344_stateVar2 = 0;
     fp->x234C_stateVar4 = 0;
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, lbl_804D9AD8,
+                                       lbl_804D9ADC, lbl_804D9AD8);
 
     func_8006EBA4(gobj);
 
@@ -201,7 +202,8 @@ void ftKoopa_SpecialAirS_StartAction(HSD_GObj* gobj)
     fp->x2344_stateVar2 = 0;
     fp->x234C_stateVar4 = 0;
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0, 0, lbl_804D9AD8,
+                                       lbl_804D9ADC, lbl_804D9AD8);
 
     func_8006EBA4(gobj);
 
@@ -220,9 +222,11 @@ void func_8013302C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if ((s32) fp->x2344_stateVar2 != 0) {
-        Fighter_ActionStateChange_800693AC(gobj, 349, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 349, 0x80, 0, lbl_804D9AD8,
+                                           lbl_804D9ADC, lbl_804D9AD8);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 348, 0x0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 348, 0x0, 0, lbl_804D9AD8,
+                                           lbl_804D9ADC, lbl_804D9AD8);
     }
     fp->x2222_flag.bits.b2 = 1;
     func_8007E2F4(fp, 0x1FF);
@@ -238,9 +242,11 @@ void func_801330E4(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if ((s32) fp->x2344_stateVar2 != 0) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x163, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 0x163, 0x80, 0, lbl_804D9AD8,
+                                           lbl_804D9ADC, lbl_804D9AD8);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x162, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 0x162, 0, 0, lbl_804D9AD8,
+                                           lbl_804D9ADC, lbl_804D9AD8);
     }
     fp->x2222_flag.bits.b2 = 1;
     func_8007E2F4(fp, 0x1FF);
@@ -257,7 +263,9 @@ void func_8013319C(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0x0C4C5088, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0x0C4C5088, 0,
+                                       fp->x894_currentAnimFrame, lbl_804D9ADC,
+                                       lbl_804D9AD8);
     fp = gobj->user_data;
     func_8007E2D0(fp, 8, func_801330E4, NULL, func_800BC8D4);
     fp->x2340_stateVar1 = 0;
@@ -273,7 +281,9 @@ void func_8013322C(HSD_GObj* gobj)
 
     ft2 = gobj->user_data;
     func_8007D7FC(ft2);
-    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0x0C4C5088, 0, ft2->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0x0C4C5088, 0,
+                                       ft2->x894_currentAnimFrame, lbl_804D9ADC,
+                                       lbl_804D9AD8);
     ft1 = gobj->user_data;
     func_8007E2D0(ft1, 8, func_8013302C, NULL, func_800BC7E0);
     ft1->x2340_stateVar1 = 0;
@@ -303,7 +313,9 @@ void func_80133324(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0x0C4C5088, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0x0C4C5088, 0,
+                                       fp->x894_currentAnimFrame, lbl_804D9ADC,
+                                       lbl_804D9AD8);
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(gobj);
 }
@@ -329,7 +341,9 @@ void func_801333F8(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x044C1080, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x044C1080, 0,
+                                       fp->x894_currentAnimFrame, lbl_804D9ADC,
+                                       lbl_804D9AD8);
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(gobj);
     func_8006F0FC(gobj, lbl_804D9AD8);
@@ -365,7 +379,9 @@ void func_801334E4(HSD_GObj* gobj)
     if ((s32) fp->x234C_stateVar4 != 0) {
         fp->x2C_facing_direction = -fp->x2C_facing_direction;
     }
-    Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0x0C4C5088, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0x0C4C5088, 0,
+                                       fp->x894_currentAnimFrame, lbl_804D9ADC,
+                                       lbl_804D9AD8);
 
     if ((s32) fp->x234C_stateVar4 != 0) {
         fp->x2C_facing_direction = -fp->x2C_facing_direction;
@@ -386,7 +402,9 @@ void func_8013359C(HSD_GObj* gobj)
     if ((s32) fp->x234C_stateVar4 != 0) {
         fp->x2C_facing_direction = -fp->x2C_facing_direction;
     }
-    Fighter_ActionStateChange_800693AC(gobj, 0x160, 0x0C4C5088, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
+    Fighter_ActionStateChange_800693AC(gobj, 0x160, 0x0C4C5088, 0,
+                                       fp->x894_currentAnimFrame, lbl_804D9ADC,
+                                       lbl_804D9AD8);
     if ((s32) fp->x234C_stateVar4 != 0) {
         fp->x2C_facing_direction = -fp->x2C_facing_direction;
     }
@@ -432,9 +450,13 @@ void func_801336CC(HSD_GObj* gobj)
             fp->x2344_stateVar2 = 1;
             ft_temp = gobj->user_data;
             if ((s32) ft_temp->x2344_stateVar2 != 0) {
-                Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x80, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+                Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x80, 0,
+                                                   lbl_804D9AD8, lbl_804D9ADC,
+                                                   lbl_804D9AD8);
             } else {
-                Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0, 0, lbl_804D9AD8, lbl_804D9ADC, lbl_804D9AD8);
+                Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0, 0,
+                                                   lbl_804D9AD8, lbl_804D9ADC,
+                                                   lbl_804D9AD8);
             }
             ft_temp->x2222_flag.bits.b2 = 1;
             func_8007E2F4(ft_temp, 0x1FF);
@@ -445,7 +467,9 @@ void func_801336CC(HSD_GObj* gobj)
             return;
         }
         fp = gobj->user_data;
-        Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x80080, 0, fp->x894_currentAnimFrame, lbl_804D9ADC, lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x80080, 0,
+                                           fp->x894_currentAnimFrame,
+                                           lbl_804D9ADC, lbl_804D9AD8);
         func_8006F0FC(gobj, lbl_804D9AD8);
         fp->x2340_stateVar1 = 0;
         fp->x2200_ftcmd_var0 = 0;

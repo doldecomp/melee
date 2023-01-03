@@ -8,8 +8,7 @@ struct _OSResetSW_Unk1;
 typedef BOOL (*OSResetSW_Predicate)(struct _OSResetSW_Unk1*);
 typedef union {
     OSResetSW_Predicate predicate;
-    struct
-    {
+    struct {
         u8 x0_addr_prefix;
         u8 x1_addr_suffix;
     } bytes;

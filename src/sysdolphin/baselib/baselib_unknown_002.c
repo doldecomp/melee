@@ -128,8 +128,10 @@ typedef struct _baselib_Unk18 {
 /* 00395EEC */ extern u32* func_8039930C(u32*, u32*);
 /* 00395DB8 */ extern BOOL func_803991D8(HSD_JObj*, HSD_JObj*, f32, f32);
 /* 00395B6C */ extern void func_80398F8C(HSD_JObj*, f32);
-/* 00395AEC */ extern void func_80398F0C(s32, s32, f32, s32, s32, s32, s32, s32);
-/* 003957E4 */ extern void func_80398C04(BOOL, s32, s32, s32, s32, s32, s32, s32);
+/* 00395AEC */ extern void func_80398F0C(s32, s32, f32, s32, s32, s32, s32,
+                                         s32);
+/* 003957E4 */ extern void func_80398C04(BOOL, s32, s32, s32, s32, s32, s32,
+                                         s32);
 /* 003955E8 */ extern void func_80398A08();
 /* 00394F84 */ extern void func_803983A4(HSD_JObj*);
 /* 00394F84 */ extern void func_803983A4(HSD_JObj*);
@@ -153,10 +155,12 @@ typedef struct _baselib_Unk18 {
 /* 00391A6C */ extern void func_80394E8C(OSResetSW_MulticastPredicate);
 /* 003919D4 */ extern BOOL func_80394DF4(OSResetSW_Predicate*);
 /* 00391248 */ extern void func_80394668(s32, s32);
-/* 00391124 */ extern void func_80394544(s32, s32, s32, s32, s32, s32, s32, s32);
+/* 00391124 */ extern void func_80394544(s32, s32, s32, s32, s32, s32, s32,
+                                         s32);
 /* 00391014 */ extern void func_80394434(char*, ...);
 /* 00390EF4 */ extern void func_80394314();
-/* 0039090C */ extern void func_80393D2C(BOOL, OSResetSW_Unk1*, baselib_UnkCallbackContainer1*);
+/* 0039090C */ extern void func_80393D2C(BOOL, OSResetSW_Unk1*,
+                                         baselib_UnkCallbackContainer1*);
 /* 0038F61C */ extern baselib_Unk11 lbl_80392A3C;
 /* 0038F5E8 */ extern void func_80392A08(u32, BOOL, BOOL);
 /* 0038F514 */ extern void func_80392934();

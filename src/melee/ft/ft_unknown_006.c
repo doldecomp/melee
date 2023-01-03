@@ -39,7 +39,8 @@ s32 func_80087878(HSD_GObj* fighter_gobj, s32 arg1)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((fp->x1968_jumpsUsed <= 1) && (fp->x10_action_state_index == 0) && (arg1 != 0x23) && (arg1 != 0x24) && (arg1 != 0x25))
+    if ((fp->x1968_jumpsUsed <= 1) && (fp->x10_action_state_index == 0) &&
+        (arg1 != 0x23) && (arg1 != 0x24) && (arg1 != 0x25))
         return TRUE;
 
     return FALSE;
@@ -49,7 +50,8 @@ s32 func_800878BC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((fp->x1974_heldItem != NULL) && (func_8026B2B4(fp->x1974_heldItem) == 1))
+    if ((fp->x1974_heldItem != NULL) &&
+        (func_8026B2B4(fp->x1974_heldItem) == 1))
         return TRUE;
 
     return FALSE;
@@ -77,7 +79,8 @@ s32 func_80087944(HSD_GObj* fighter_gobj)
 
 s32 func_80087988(HSD_GObj* fighter_gobj)
 {
-    if ((ftGetParasolStatus(fighter_gobj) == 4) || (ftGetParasolStatus(fighter_gobj) == 5))
+    if ((ftGetParasolStatus(fighter_gobj) == 4) ||
+        (ftGetParasolStatus(fighter_gobj) == 5))
         return TRUE;
 
     return FALSE;
@@ -108,7 +111,9 @@ s32 func_80087A18(HSD_GObj* fighter_gobj)
     s32 var1;
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((fp->x2226_flag.bits.b4) && ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) && ((fp->x2226_flag.bits.b5)))
+    if ((fp->x2226_flag.bits.b4) &&
+        ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
+        ((fp->x2226_flag.bits.b5)))
         return TRUE;
 
     return FALSE;
@@ -165,7 +170,9 @@ s32 func_80087AEC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((fp->x34_scale.y != fp->x34_scale.x) || ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) || (fp->x197C != 0)))
+    if ((fp->x34_scale.y != fp->x34_scale.x) ||
+        ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) ||
+         (fp->x197C != 0)))
         return TRUE;
 
     return FALSE;
@@ -175,18 +182,25 @@ s32 func_80087B34(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     f32 atk_shield_kb_x = fp->x98_atk_shield_kb.x;
-    f32 fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) + (fp->x80_self_vel.y * fp->x80_self_vel.y);
+    f32 fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) +
+                (fp->x80_self_vel.y * fp->x80_self_vel.y);
     f32* atk_shield_kb_y = &fp->x98_atk_shield_kb.y;
-    f32 fVar2 = (atk_shield_kb_x * atk_shield_kb_x) + ((*atk_shield_kb_y) * (*atk_shield_kb_y));
+    f32 fVar2 = (atk_shield_kb_x * atk_shield_kb_x) +
+                ((*atk_shield_kb_y) * (*atk_shield_kb_y));
 
-    if (fVar1 > ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) + (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y))) {
-        if (fVar1 > ((atk_shield_kb_x * atk_shield_kb_x) + (fp->x98_atk_shield_kb.y * fp->x98_atk_shield_kb.y)))
+    if (fVar1 > ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) +
+                 (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y)))
+    {
+        if (fVar1 > ((atk_shield_kb_x * atk_shield_kb_x) +
+                     (fp->x98_atk_shield_kb.y * fp->x98_atk_shield_kb.y)))
             return 0;
 
         return 2;
     }
 
-    if ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) + (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y) > fVar2)
+    if ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) +
+            (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y) >
+        fVar2)
         return 1;
 
     return 2;
@@ -218,7 +232,9 @@ s32 func_80087C1C()
     s32 ftKind;
     u32 result = 0;
 
-    for (fighter_gobj = lbl_804D782C->x20_fighters; fighter_gobj != 0; fighter_gobj = fighter_gobj->next) {
+    for (fighter_gobj = lbl_804D782C->x20_fighters; fighter_gobj != 0;
+         fighter_gobj = fighter_gobj->next)
+    {
         ftKind = ((Fighter*) fighter_gobj->user_data)->x4_fighterKind;
         if (ftKind < 27) {
             result = result | 1 << ftKind;
@@ -323,7 +339,9 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x185:
         case 0x17F:
         case 0x173:
-            sfx_id = func_80087C70(fighter, sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
+            sfx_id = func_80087C70(
+                fighter,
+                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
             if (fighter->x2223_flag.bits.b7) {
                 sfx_id += 3;
             }
@@ -341,7 +359,9 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x155:
         case 0x14F:
         case 0x14C:
-            sfx_id = func_80087C70(fighter, sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
+            sfx_id = func_80087C70(
+                fighter,
+                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
             break;
         }
         break;
@@ -349,10 +369,13 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         ftKind = fighter->x4_fighterKind;
         if ((ftKind < 0xc) && (10 > ftKind)) {
             if ((0x1fbfd < sfx_id) &&
-                ((sfx_id < 0x1fc62 && (func_80080144(fighter) == 1)))) {
+                ((sfx_id < 0x1fc62 && (func_80080144(fighter) == 1))))
+            {
                 sfx_id += 0x66;
             }
-            if (((0x1fc63 < sfx_id) && (sfx_id < 0x1fcc8)) && (func_80080144(fighter) != 1)) {
+            if (((0x1fc63 < sfx_id) && (sfx_id < 0x1fcc8)) &&
+                (func_80080144(fighter) != 1))
+            {
                 sfx_id -= 0x66;
             }
         }
@@ -382,7 +405,9 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
     case 30:
     case 31:
     case 33:
-        if ((func_800230C8(ssm_id, &sp18, &sp14) == 0) && (sfx_id >= ((s32) (sp18 + func_80023220(ssm_id))))) {
+        if ((func_800230C8(ssm_id, &sp18, &sp14) == 0) &&
+            (sfx_id >= ((s32) (sp18 + func_80023220(ssm_id)))))
+        {
             sfx_id = func_80087C70(fighter, sfx_id);
         }
         break;

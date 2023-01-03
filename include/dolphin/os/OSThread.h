@@ -84,7 +84,8 @@ s32 __OSGetEffectivePriority(OSThread*);
 void __OSPromoteThread(OSThread*, s32);
 void __OSReschedule(void);
 void OSYieldThread(void);
-BOOL OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*, u32, s32, u16);
+BOOL OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*,
+                    u32, s32, u16);
 void OSExitThread(OSThread*);
 void OSCancelThread(OSThread*);
 BOOL OSJoinThread(OSThread*, void*);

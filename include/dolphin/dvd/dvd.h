@@ -11,8 +11,7 @@ struct bb2struct {
     void* FSTLocationInRam;
 };
 
-typedef struct
-{
+typedef struct {
     char gameName[4];
     char company[2];
     u8 diskNumber;
@@ -62,14 +61,15 @@ BOOL DVDOpen(char*, DVDFileInfo*);
 BOOL DVDClose(DVDFileInfo*);
 BOOL DVDChangeDir(char*);
 BOOL DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo);
-BOOL DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length, s32 offset, DVDCallback callback, s32 prio);
+BOOL DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length, s32 offset,
+                      DVDCallback callback, s32 prio);
 s32 DVDConvertPathToEntrynum(const char* pathPtr);
 void DVDReset(void);
 s32 DVDCancel(DVDCommandBlock* block);
 s32 DVDGetDriveStatus(void);
 void __CARDSetDiskID(const DVDDiskID* id);
 
-#define DVDReadAsync(fileInfo, addr, length, offset, callback) \
+#define DVDReadAsync(fileInfo, addr, length, offset, callback)                 \
     DVDReadAsyncPrio((fileInfo), (addr), (length), (offset), (callback), 2)
 
 #endif

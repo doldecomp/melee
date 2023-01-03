@@ -2,7 +2,8 @@
 
 extern const s32 lbl_803D3984[];
 // extern ? lbl_804D64F8;
-extern void* lbl_804D64FC; // lbl_804D64FC..lbl_804D6550 are initialized to 0 in Fighter_LoadCommonData, probably all pointers
+extern void* lbl_804D64FC; // lbl_804D64FC..lbl_804D6550 are initialized to 0 in
+                           // Fighter_LoadCommonData, probably all pointers
 extern void* lbl_804D6500;
 extern void* lbl_804D6504;
 extern void* lbl_804D6508;

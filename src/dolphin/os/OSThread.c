@@ -157,7 +157,9 @@ s32 __OSGetEffectivePriority(OSThread* thread)
     s32 prio = thread->WORD_0x2D4;
 
     OSMutex* mutex;
-    for (mutex = thread->mutexQueue.head; mutex != NULL; mutex = mutex->link.next) {
+    for (mutex = thread->mutexQueue.head; mutex != NULL;
+         mutex = mutex->link.next)
+    {
         OSThread* mutexThread = mutex->queue.head;
         if (mutexThread != NULL && mutexThread->priority < prio) {
             prio = mutexThread->priority;
@@ -476,7 +478,8 @@ lbl_8034B24C:
 #pragma pop
 
 #pragma push
-asm BOOL OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*, u32, s32, u16)
+asm BOOL OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*,
+                        u32, s32, u16)
 { // clang-format off
     nofralloc
 /* 8034B25C 00347E3C  7C 08 02 A6 */	mflr r0

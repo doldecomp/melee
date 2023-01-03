@@ -33,11 +33,14 @@ void GXSetTevOp(GXTevStageID id, GXTevMode mode)
         GXSetTevAlphaIn(id, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, inputAlpha);
         break;
     }
-    GXSetTevColorOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
-    GXSetTevAlphaOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE, GX_TEVPREV);
+    GXSetTevColorOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE,
+                    GX_TEVPREV);
+    GXSetTevAlphaOp(id, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TRUE,
+                    GX_TEVPREV);
 }
 
-void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTevColorArg c, GXTevColorArg d)
+void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b,
+                     GXTevColorArg c, GXTevColorArg d)
 {
     GXContext* gx = __GXContexts.main;
     u32* temp_r9 = &gx->x130_data[stage];
@@ -51,7 +54,8 @@ void GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a, GXTevColorArg b, GXTev
     set_x2(GX_FALSE);
 }
 
-void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b, GXTevAlphaArg c, GXTevAlphaArg d)
+void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b,
+                     GXTevAlphaArg c, GXTevAlphaArg d)
 {
     u32* temp_r9 = &__GXContexts.main->x170_data[stage];
 
@@ -64,7 +68,8 @@ void GXSetTevAlphaIn(GXTevStageID stage, GXTevAlphaArg a, GXTevAlphaArg b, GXTev
     set_x2(GX_FALSE);
 }
 
-void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
+void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias,
+                     GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
 {
     u32* temp_r3 = &__GXContexts.main->x130_data[stage];
 
@@ -84,7 +89,8 @@ void GXSetTevColorOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale 
     set_x2(GX_FALSE);
 }
 
-void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias, GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
+void GXSetTevAlphaOp(GXTevStageID stage, GXTevOp op, GXTevBias bias,
+                     GXTevScale scale, GXBool clamp, GXTevRegID out_reg)
 {
     u32* temp_r3 = &__GXContexts.main->x170_data[stage];
 
@@ -275,7 +281,8 @@ lbl_803403FC:
 
 // https://decomp.me/scratch/xoMcT // 2145 (2.50%)
 #pragma push
-asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel, GXTevSwapSel tex_sel)
+asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
+                          GXTevSwapSel tex_sel)
 { // clang-format off
     nofralloc
 /* 80340420 0033D000  54 63 10 3A */	slwi r3, r3, 2
@@ -305,7 +312,9 @@ asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel, GXTevSwapSel
 
 // https://decomp.me/scratch/y8FRa // 2545 (36.38%)
 #pragma push
-asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red, GXTevColorChan green, GXTevColorChan blue, GXTevColorChan alpha)
+asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
+                               GXTevColorChan green, GXTevColorChan blue,
+                               GXTevColorChan alpha)
 { // clang-format off
     nofralloc
 /* 80340478 0033D058  54 69 08 3C */	slwi r9, r3, 1
@@ -355,7 +364,8 @@ void GXSetTevClampMode(s32, s32)
 {
 }
 
-void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1, u8 ref1)
+void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1,
+                       u8 ref1)
 {
     u32 reg = 0;
     INSERT_FIELD(reg, ref0, 8, 0);
@@ -420,7 +430,8 @@ static u32 lbl_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
 
 // https://decomp.me/scratch/0H3SX // 780 (92.50%)
 #pragma push
-asm void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map, GXChannelID color)
+asm void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,
+                       GXChannelID color)
 { // clang-format off
     nofralloc
 /* 803405F0 0033D1D0  7C 67 0E 70 */	srawi r7, r3, 1
@@ -543,6 +554,9 @@ lbl_8034075C:
 
 void GXSetNumTevStages(u8 arg0)
 {
-    __GXContexts.main->callbacks[0x15] = (GXTexRegionCallback) (((u32) __GXContexts.main->callbacks[0x15] & 0xFFFFC3FF) | ((arg0 - 1) << 10));
+    __GXContexts.main->callbacks[0x15] =
+        (GXTexRegionCallback) (((u32) __GXContexts.main->callbacks[0x15] &
+                                0xFFFFC3FF) |
+                               ((arg0 - 1) << 10));
     __GXContexts.main->x4F0_flags |= 4;
 }

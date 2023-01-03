@@ -8,25 +8,11 @@ void __CARDExiHandler(s32 chan, OSContext* context);
 u16 __CARDVendorID = 0xFFFF;
 
 u32 SectorSizeTable[8] = {
-    8 * 1024,
-    16 * 1024,
-    32 * 1024,
-    64 * 1024,
-    128 * 1024,
-    256 * 1024,
-    0,
-    0,
+    8 * 1024, 16 * 1024, 32 * 1024, 64 * 1024, 128 * 1024, 256 * 1024, 0, 0,
 };
 
 u32 LatencyTable[8] = {
-    4,
-    8,
-    16,
-    32,
-    64,
-    128,
-    256,
-    512,
+    4, 8, 16, 32, 64, 128, 256, 512,
 };
 
 s32 CARDProbe(s32 chan)
@@ -77,7 +63,9 @@ s32 CARDProbeEx(s32 chan, s32* memSize, s32* sectorSize)
         result = CARD_RESULT_WRONGDEVICE;
     } else if (!EXIGetID(chan, 0, &id)) {
         result = CARD_RESULT_BUSY;
-    } else if ((id == 0x80000004 && __CARDVendorID != 0xFFFF) || !(id & 0xFFFF0000) && !(id & 3)) {
+    } else if ((id == 0x80000004 && __CARDVendorID != 0xFFFF) ||
+               !(id & 0xFFFF0000) && !(id & 3))
+    {
         if (memSize) {
             *memSize = (s32) (id & 0xfc);
         }
@@ -112,7 +100,9 @@ s32 DoMount(s32 chan)
     if (card->mountStep == 0) {
         if (EXIGetID(chan, 0, &id) == 0) {
             result = CARD_RESULT_NOCARD;
-        } else if ((id == 0x80000004 && __CARDVendorID != 0xFFFF) || !(id & 0xFFFF0000) && !(id & 3)) {
+        } else if ((id == 0x80000004 && __CARDVendorID != 0xFFFF) ||
+                   !(id & 0xFFFF0000) && !(id & 3))
+        {
             result = CARD_RESULT_READY;
         } else {
             result = CARD_RESULT_WRONGDEVICE;
@@ -203,8 +193,10 @@ s32 DoMount(s32 chan)
     }
 
     step = card->mountStep - 2;
-    result = __CARDRead(chan, (u32) card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
-                        (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step), __CARDMountCallback);
+    result =
+        __CARDRead(chan, (u32) card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
+                   (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
+                   __CARDMountCallback);
     if (result < 0) {
         __CARDPutControlBlock(card, result);
     }
@@ -284,7 +276,8 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
     card->result = CARD_RESULT_BUSY;
     card->workArea = workArea;
     card->extCallback = detachCallback;
-    card->apiCallback = attachCallback ? attachCallback : __CARDDefaultApiCallback;
+    card->apiCallback =
+        attachCallback ? attachCallback : __CARDDefaultApiCallback;
     card->exiCallback = 0;
 
     if (!card->attached && !EXIAttach(chan, __CARDExtHandler)) {

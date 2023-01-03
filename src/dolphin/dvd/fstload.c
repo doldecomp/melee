@@ -26,7 +26,8 @@ void cb(s32 param_1, DVDCommandBlock* block)
             break;
         case 1:
             status = 2;
-            DVDReadAbsAsyncForBS(block, bb2->FSTLocationInRam, OSRoundUp32B(bb2->_08), bb2->_04, cb);
+            DVDReadAbsAsyncForBS(block, bb2->FSTLocationInRam,
+                                 OSRoundUp32B(bb2->_08), bb2->_04, cb);
             break;
         }
     } else if (param_1 == -1)
@@ -58,13 +59,10 @@ void __fstLoad(void)
     memcpy(&info->diskId, idTmp, sizeof(info->diskId));
 
     OSReport("\n");
-    OSReport("  Game Name ... %c%c%c%c\n",
-             info->diskId.gameName[0],
-             info->diskId.gameName[1],
-             info->diskId.gameName[2],
+    OSReport("  Game Name ... %c%c%c%c\n", info->diskId.gameName[0],
+             info->diskId.gameName[1], info->diskId.gameName[2],
              info->diskId.gameName[3]);
-    OSReport("  Company ..... %c%c\n",
-             info->diskId.company[0],
+    OSReport("  Company ..... %c%c\n", info->diskId.company[0],
              info->diskId.company[1]);
     OSReport("  Disk # ...... %d\n", info->diskId.diskNumber);
     OSReport("  Game ver .... %d\n", info->diskId.gameVersion);

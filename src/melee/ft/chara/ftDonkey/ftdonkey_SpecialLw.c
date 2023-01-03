@@ -4,7 +4,8 @@ void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     fp->x2340_stateVar1 = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17F, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17F, 0, NULL, 0.0f, 1.0f,
+                                       0.0f);
     func_8006EBA4(fighter_gobj);
 }
 
@@ -16,7 +17,9 @@ void ftDonkey_8010DCD8(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010DD14(HSD_GObj* fighter_gobj) {}
+void ftDonkey_8010DD14(HSD_GObj* fighter_gobj)
+{
+}
 
 void ftDonkey_8010DD18(HSD_GObj* fighter_gobj)
 {
@@ -73,7 +76,8 @@ void ftDonkey_8010DE88_inner(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efAsync_Spawn(fighter_gobj, &fp->x60C, 1, 0x4CC, fp->x5E8_fighterBones[0].x0_jobj);
+        efAsync_Spawn(fighter_gobj, &fp->x60C, 1, 0x4CC,
+                      fp->x5E8_fighterBones[0].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -85,7 +89,8 @@ void ftDonkey_8010DE88(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     fp->cb.x21EC_callback = &ftDonkey_8010DE54;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x180, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x180, 0, NULL, 0.0f, 1.0f,
+                                       0.0f);
     ftDonkey_8010DE88_inner(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010DB3C;
 }
@@ -98,7 +103,9 @@ void ftDonkey_8010DF5C(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010DF98(HSD_GObj* fighter_gobj) {}
+void ftDonkey_8010DF98(HSD_GObj* fighter_gobj)
+{
+}
 
 void ftDonkey_8010DF9C(HSD_GObj* fighter_gobj)
 {
@@ -114,7 +121,8 @@ void ftDonkey_8010DFBC(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DFF8(HSD_GObj* fighter_gobj)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x181, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x181, 0, NULL, 0.0f, 1.0f,
+                                       0.0f);
 }
 
 void ftDonkey_8010E030(HSD_GObj* fighter_gobj)
@@ -124,7 +132,9 @@ void ftDonkey_8010E030(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010E06C(HSD_GObj* fighter_gobj) {}
+void ftDonkey_8010E06C(HSD_GObj* fighter_gobj)
+{
+}
 
 void ftDonkey_8010E070(HSD_GObj* fighter_gobj)
 {

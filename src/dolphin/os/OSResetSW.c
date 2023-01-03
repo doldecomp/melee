@@ -19,7 +19,8 @@ void __OSResetSWInterruptHandler(__OSInterrupt interrupt, OSContext* context)
 {
     HoldDown = __OSGetSystemTime();
     while (__OSGetSystemTime() - HoldDown < OSMicrosecondsToTicks(100) &&
-           !(__PIRegs[0] & 0x10000)) {
+           !(__PIRegs[0] & 0x10000))
+    {
         ;
     }
     if (!(__PIRegs[0] & 0x10000)) {
@@ -47,7 +48,9 @@ BOOL OSGetResetButtonState(void)
             state = HoldUp ? TRUE : FALSE;
             HoldDown = now;
         } else {
-            state = HoldUp || (OSMicrosecondsToTicks(100) < now - HoldDown) ? TRUE : FALSE;
+            state = HoldUp || (OSMicrosecondsToTicks(100) < now - HoldDown)
+                        ? TRUE
+                        : FALSE;
         }
     } else if (Down) {
         Down = FALSE;

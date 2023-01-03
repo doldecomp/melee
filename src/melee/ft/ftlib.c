@@ -71,8 +71,7 @@ HSD_GObj* func_80086198(HSD_GObj* gobj)
             continue;
         }
         // skip if same team
-        if (func_8016B168() && fp != NULL &&
-            fp2->x61B_team == fp->x61B_team) {
+        if (func_8016B168() && fp != NULL && fp2->x61B_team == fp->x61B_team) {
             continue;
         }
 
@@ -114,7 +113,8 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
         cur_fp = cur->user_data;
         // skip if same team
         if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team) {
+            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team)
+        {
             continue;
         }
         func_800866DC(cur, &cur_v);
@@ -155,12 +155,12 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
         }
         cur_fp = cur->user_data;
         if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team) {
+            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team)
+        {
             continue;
         }
         func_800866DC(cur, &sp24);
-        if (arg8 == -1.0f && sp24.x > v->x ||
-            arg8 == +1.0f && sp24.x < v->x) {
+        if (arg8 == -1.0f && sp24.x > v->x || arg8 == +1.0f && sp24.x < v->x) {
             continue;
         }
 
@@ -207,7 +207,8 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
         }
         cur_fp = cur->user_data;
         if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team) {
+            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team)
+        {
             continue;
         }
         func_800866DC(cur, &sp20);
@@ -371,12 +372,15 @@ void func_800868A4(void)
 BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
 {
     Fighter* fp = gobj->user_data;
-    if ((fp->x1974_heldItem != arg1) && (fp->x197C != arg1) && (fp->x1980 != arg1)) {
+    if ((fp->x1974_heldItem != arg1) && (fp->x197C != arg1) &&
+        (fp->x1980 != arg1))
+    {
         return 1;
     }
     if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b5 ||
         !fp->x221E_flag.bits.b3 && fp->x1974_heldItem == arg1 ||
-        (!fp->x221E_flag.bits.b4 && (fp->x197C == arg1 || fp->x1980 == arg1))) {
+        (!fp->x221E_flag.bits.b4 && (fp->x197C == arg1 || fp->x1980 == arg1)))
+    {
         return 0;
     } else {
         return 1;
@@ -408,7 +412,8 @@ inline void vector_add(Vec* dst, Vec* src, f32 x, f32 y, f32 z)
 void func_80086990(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = gobj->user_data;
-    f32 tmp = 0.5f * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y + fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
+    f32 tmp = 0.5f * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y +
+                      fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
     vector_add(v, &fp->xB0_pos, 0.0f, tmp, 0.0f);
 }
 
@@ -599,8 +604,10 @@ BOOL func_80086EC0(HSD_GObj* gobj)
 BOOL func_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b2 || Player_GetMoreFlagsBit4(fp->xC_playerID) ||
-        fp->x2228_flag.bits.b2 || fp->x2229_b3 || fp->x2220_flag.bits.b7) {
+    if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b2 ||
+        Player_GetMoreFlagsBit4(fp->xC_playerID) || fp->x2228_flag.bits.b2 ||
+        fp->x2229_b3 || fp->x2220_flag.bits.b7)
+    {
         return FALSE;
     }
     return TRUE;
@@ -755,7 +762,8 @@ void* func_800872B0(HSD_GObj* gobj)
 BOOL func_800872BC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return !fp->x221E_flag.bits.b1 && !fp->x2226_flag.bits.b4 && !fp->x221F_flag.bits.b4;
+    return !fp->x221E_flag.bits.b1 && !fp->x2226_flag.bits.b4 &&
+           !fp->x221F_flag.bits.b4;
 }
 
 s32 func_80087300(HSD_GObj* gobj)
@@ -824,7 +832,9 @@ BOOL func_800873CC(HSD_GObj* gobj)
 BOOL func_800873F4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x10_action_state_index >= 0x142 && fp->x10_action_state_index <= 0x144) {
+    if (fp->x10_action_state_index >= 0x142 &&
+        fp->x10_action_state_index <= 0x144)
+    {
         return TRUE;
     }
     return FALSE;

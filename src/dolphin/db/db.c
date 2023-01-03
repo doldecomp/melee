@@ -45,8 +45,7 @@ static asm void __DBExceptionDestination(void)
 #else
 static void __DBExceptionDestination(void)
 {
-    asm(
-        "mfmsr %r3\n"
+    asm("mfmsr %r3\n"
         "ori %r3, %r3, 0x30\n"
         "mtmsr %r3\n"
         "b __DBExceptionDestinationAux\n");
@@ -58,4 +57,6 @@ int __DBIsExceptionMarked(u8 a)
     return __DBInterface->exceptionMask & (1 << a);
 }
 
-void DBPrintf(char* str, ...) {}
+void DBPrintf(char* str, ...)
+{
+}

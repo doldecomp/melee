@@ -48,7 +48,8 @@ void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj)
         ftGameWatchAttributes* attr = fp->x2D4_specialAttributes;
         fp->x34_scale.z = attr->x0_GAMEWATCH_WIDTH;
         fp->x614 = attr->x14_GAMEWATCH_OUTLINE;
-        func_800BFB4C(fighter_gobj, &attr->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
+        func_800BFB4C(fighter_gobj,
+                      &attr->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
         fp->x5C8 = items[10];
 
         func_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);
@@ -104,7 +105,8 @@ void ftGameWatch_OnItemInvisible(HSD_GObj* gobj)
 }
 
 // 0x8014A6E0
-// https://decomp.me/scratch/ibIxi // Make held item visible (restores picked up item's hand held animation)
+// https://decomp.me/scratch/ibIxi // Make held item visible (restores picked up
+// item's hand held animation)
 void ftGameWatch_OnItemVisible(HSD_GObj* fighter_gobj)
 {
     Fighter_OnItemVisible(fighter_gobj, 1);
@@ -129,7 +131,8 @@ void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014A7B4
-// https://decomp.me/scratch/RJvAe // Copy Special Attributes from DAT file struct to Fighter*
+// https://decomp.me/scratch/RJvAe // Copy Special Attributes from DAT file
+// struct to Fighter*
 void ftGameWatch_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftGameWatchAttributes);
@@ -146,7 +149,8 @@ void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 }
 
 // 0x8014A814
-// https://decomp.me/scratch/BRo1r // Apply alt color to Mr. Game & Watch's items?
+// https://decomp.me/scratch/BRo1r // Apply alt color to Mr. Game & Watch's
+// items?
 void ftGameWatch_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 {
     Fighter* fp = getFighter(fighter_gobj);

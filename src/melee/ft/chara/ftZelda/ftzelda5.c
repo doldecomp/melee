@@ -12,7 +12,8 @@ void ftZelda_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
     temp_f1 = 0;
     fp = fighter_gobj->user_data;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, temp_f1, 1.0, temp_f1);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, temp_f1,
+                                       1.0, temp_f1);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -41,7 +42,8 @@ void ftZelda_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 
     temp_f1 = 0;
     fp = fighter_gobj->user_data;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0, NULL, temp_f1, 1.0, temp_f1);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0, NULL, temp_f1,
+                                       1.0, temp_f1);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -83,7 +85,8 @@ void ftZelda_8013B780(HSD_GObj* fighter_gobj)
         sp24.x = (temp_f2 * fp->x2C_facing_direction) + sp24.x;
         sp24.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->x2C_facing_direction, temp_f2);
+        temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->x2C_facing_direction,
+                                temp_f2);
         fp->sa.zelda.x222C = temp_r3;
 
         if (temp_r3 != 0) {
@@ -95,7 +98,8 @@ void ftZelda_8013B780(HSD_GObj* fighter_gobj)
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         temp_f1 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x158, 0, NULL, temp_f1, 1.0, temp_f1);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x158, 0, NULL,
+                                           temp_f1, 1.0, temp_f1);
         fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     }
 }
@@ -125,7 +129,8 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
         sp20.x = (temp_f2 * fp->x2C_facing_direction) + sp20.x;
         sp20.y += attributes->x24;
 
-        temp_r3_u32 = func_802C3BAC(fighter_gobj, &sp20, fp->x2C_facing_direction, temp_f2);
+        temp_r3_u32 = func_802C3BAC(fighter_gobj, &sp20,
+                                    fp->x2C_facing_direction, temp_f2);
         fp->sa.zelda.x222C = temp_r3_u32;
 
         if (temp_r3_u32 != 0) {
@@ -147,7 +152,8 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
     if (temp_r3_u32 == 0) {
         if (fp->x2340_stateVar1 <= 0 && fp->x2344_stateVar2_s32 <= 0) {
             temp_f1 = 0;
-            Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0, NULL, temp_f1, 1.0, temp_f1);
+            Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0, NULL,
+                                               temp_f1, 1.0, temp_f1);
         }
     } else {
         temp_r3 = func_802C3AF0(fp->sa.zelda.x222C);
@@ -208,7 +214,8 @@ void ftZelda_8013BA8C(HSD_GObj* fighter_gobj)
         sp24.x = (temp_f2 * fp->x2C_facing_direction) + sp24.x;
         sp24.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->x2C_facing_direction, temp_f2);
+        temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->x2C_facing_direction,
+                                temp_f2);
         fp->sa.zelda.x222C = temp_r3;
 
         if (temp_r3 != 0) {
@@ -220,7 +227,8 @@ void ftZelda_8013BA8C(HSD_GObj* fighter_gobj)
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         temp_f1 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, NULL, temp_f1, 1.0, temp_f1);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, NULL,
+                                           temp_f1, 1.0, temp_f1);
         fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     }
 }
@@ -249,7 +257,8 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
         sp20.x = temp_f2 * fp->x2C_facing_direction + sp20.x;
         sp20.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(fighter_gobj, &sp20, fp->x2C_facing_direction, temp_f2);
+        temp_r3 = func_802C3BAC(fighter_gobj, &sp20, fp->x2C_facing_direction,
+                                temp_f2);
         fp->sa.zelda.x222C = temp_r3;
 
         if (temp_r3 != 0) {
@@ -270,7 +279,8 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
     if (fp->sa.zelda.x222C == 0U) {
         if (fp->x2340_stateVar1 <= 0 && fp->x2344_stateVar2_s32 <= 0) {
             temp_f1 = 0;
-            Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0, NULL, temp_f1, 1.0, temp_f1);
+            Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0, NULL,
+                                               temp_f1, 1.0, temp_f1);
         }
     } else {
         temp_r3 = func_802C3AF0(fp->sa.zelda.x222C);
@@ -315,7 +325,10 @@ void ftZelda_8013BD10(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftZelda_8013BDD0(HSD_GObj* fighter_gobj) { return; }
+void ftZelda_8013BDD0(HSD_GObj* fighter_gobj)
+{
+    return;
+}
 
 // 8013BDD4 - 8013BE50 (0x7C bytes)
 // https://decomp.me/scratch/MaYEA
@@ -337,12 +350,19 @@ void ftZelda_8013BDD4(HSD_GObj* fighter_gobj)
 
     if ((var_r0 == 1) && !(fp->input.x65C_heldInputs & 0x200)) {
         temp_f1 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0, NULL, temp_f1, 1.0, temp_f1);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0, NULL,
+                                           temp_f1, 1.0, temp_f1);
     }
 }
 
-void ftZelda_8013BE50(HSD_GObj* fighter_gobj) { return; }
-void ftZelda_8013BE54(HSD_GObj* fighter_gobj) { return; }
+void ftZelda_8013BE50(HSD_GObj* fighter_gobj)
+{
+    return;
+}
+void ftZelda_8013BE54(HSD_GObj* fighter_gobj)
+{
+    return;
+}
 
 // 8013BE58 - 8013BED4 (0x7C bytes)
 // https://decomp.me/scratch/Zxkmg
@@ -364,11 +384,15 @@ void ftZelda_8013BE58(HSD_GObj* fighter_gobj)
 
     if (var_r0 == 1 && !(fp->input.x65C_heldInputs & 0x200)) {
         temp_f1 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0, NULL, temp_f1, 1.0, temp_f1);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0, NULL,
+                                           temp_f1, 1.0, temp_f1);
     }
 }
 
-void ftZelda_8013BED4(HSD_GObj* fighter_gobj) { return; }
+void ftZelda_8013BED4(HSD_GObj* fighter_gobj)
+{
+    return;
+}
 
 // 8013BED8 - 8013BF10 (0x38 bytes)
 // https://decomp.me/scratch/Sb7RS
@@ -486,7 +510,9 @@ void ftZelda_8013C070(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
     if (func_80082708(fighter_gobj) == 0) {
         func_8007D5D4(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0x0C4C5082, NULL, fp->x894_currentAnimFrame, 1.0, 0);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0x0C4C5082,
+                                           NULL, fp->x894_currentAnimFrame, 1.0,
+                                           0);
     }
 }
 
@@ -499,7 +525,9 @@ void ftZelda_8013C0DC(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
     if (func_80082708(fighter_gobj) == 0) {
         func_8007D5D4(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0x0C4C5080, NULL, fp->x894_currentAnimFrame, 1.0, 0);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0x0C4C5080,
+                                           NULL, fp->x894_currentAnimFrame, 1.0,
+                                           0);
     }
 }
 
@@ -511,7 +539,9 @@ void ftZelda_8013C148(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
     if (func_80082708(fighter_gobj) == 0) {
         func_8007D5D4(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0x0C4C5080, NULL, fp->x894_currentAnimFrame, 1.0, 0);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0x0C4C5080,
+                                           NULL, fp->x894_currentAnimFrame, 1.0,
+                                           0);
     }
 }
 
@@ -523,7 +553,9 @@ void ftZelda_8013C1B4(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
     if (func_80081D0C(fighter_gobj) != 0) {
         func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0x0C4C5082, NULL, fp->x894_currentAnimFrame, 1.0, 0);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0x0C4C5082,
+                                           NULL, fp->x894_currentAnimFrame, 1.0,
+                                           0);
     }
 }
 
@@ -535,7 +567,9 @@ void ftZelda_8013C220(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
     if (func_80081D0C(fighter_gobj) != 0) {
         func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x158, 0x0C4C5080, NULL, fp->x894_currentAnimFrame, 1.0, 0);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x158, 0x0C4C5080,
+                                           NULL, fp->x894_currentAnimFrame, 1.0,
+                                           0);
     }
 }
 
@@ -547,6 +581,8 @@ void ftZelda_8013C28C(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
     if (func_80081D0C(fighter_gobj) != 0) {
         func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x0C4C5080, NULL, fp->x894_currentAnimFrame, 1.0, 0);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x0C4C5080,
+                                           NULL, fp->x894_currentAnimFrame, 1.0,
+                                           0);
     }
 }

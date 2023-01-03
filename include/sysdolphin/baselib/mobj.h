@@ -39,7 +39,8 @@
 #define RENDER_VERTEX (1 << 1)
 #define RENDER_DIFFUSE (1 << 2)
 #define RENDER_SPECULAR (1 << 3)
-#define CHANNEL_FIELD (RENDER_CONSTANT | RENDER_VERTEX | RENDER_DIFFUSE | RENDER_SPECULAR)
+#define CHANNEL_FIELD                                                          \
+    (RENDER_CONSTANT | RENDER_VERTEX | RENDER_DIFFUSE | RENDER_SPECULAR)
 #define RENDER_TEX0 (1 << 4)
 #define RENDER_TEX1 (1 << 5)
 #define RENDER_TEX2 (1 << 6)
@@ -48,7 +49,9 @@
 #define RENDER_TEX5 (1 << 9)
 #define RENDER_TEX6 (1 << 10)
 #define RENDER_TEX7 (1 << 11)
-#define RENDER_TEXTURES (RENDER_TEX0 | RENDER_TEX1 | RENDER_TEX2 | RENDER_TEX3 | RENDER_TEX4 | RENDER_TEX5 | RENDER_TEX6 | RENDER_TEX7)
+#define RENDER_TEXTURES                                                        \
+    (RENDER_TEX0 | RENDER_TEX1 | RENDER_TEX2 | RENDER_TEX3 | RENDER_TEX4 |     \
+     RENDER_TEX5 | RENDER_TEX6 | RENDER_TEX7)
 #define RENDER_TOON (1 << 12)
 
 #define RENDER_ALPHA_SHIFT 13

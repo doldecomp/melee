@@ -1,19 +1,6 @@
 #include <sysdolphin/baselib/util.h>
 
-float HSD_identityMtx[] = {
-    1.0f,
-    0,
-    0,
-    0,
-    0,
-    1.0f,
-    0,
-    0,
-    0,
-    0,
-    1.0f,
-    0
-};
+float HSD_identityMtx[] = { 1.0f, 0, 0, 0, 0, 1.0f, 0, 0, 0, 0, 1.0f, 0 };
 
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest)
 {

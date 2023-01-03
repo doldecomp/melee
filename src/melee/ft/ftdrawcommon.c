@@ -128,7 +128,8 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         phi_r26 = fighter + 0x138 * 0;
         phi_r25 = 0U;
         do {
-            if (func_80009F54(&phi_r26->x914, arg1, fighter->x34_scale.y) != 0) {
+            if (func_80009F54(&phi_r26->x914, arg1, fighter->x34_scale.y) != 0)
+            {
                 phi_r30 = 1U;
             }
             temp_r25 = phi_r25 + 1;
@@ -140,7 +141,10 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             phi_r26 = fighter + (0U * 0x4C);
             phi_r30 = phi_r30;
             while (phi_r25 < fighter->x119E_hurtboxNum) {
-                if (func_8000A584(phi_r26->x11A0_fighterHurtbox, 1, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0) {
+                if (func_8000A584(phi_r26->x11A0_fighterHurtbox, 1, arg1,
+                                  func_8007F804(fighter),
+                                  fighter->xB0_pos.z) != 0)
+                {
                     phi_r30 = 1U;
                 }
                 phi_r25 += 1;
@@ -152,7 +156,10 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r26 = fighter;
                 phi_r30 = phi_r30;
                 while (phi_r25 < fighter->x119E_hurtboxNum) {
-                    if (func_8000A244(phi_r26->x11A0_fighterHurtbox, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0) {
+                    if (func_8000A244(phi_r26->x11A0_fighterHurtbox, arg1,
+                                      func_8007F804(fighter),
+                                      fighter->xB0_pos.z) != 0)
+                    {
                         phi_r30 = 1U;
                     }
                     phi_r25 += 1;
@@ -167,7 +174,10 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r26 = fighter;
                 phi_r30 = phi_r30;
                 while (phi_r25 < fighter->x119E_hurtboxNum) {
-                    if (func_8000A584(phi_r26->x11A0_fighterHurtbox, phi_r24, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0) {
+                    if (func_8000A584(phi_r26->x11A0_fighterHurtbox, phi_r24,
+                                      arg1, func_8007F804(fighter),
+                                      fighter->xB0_pos.z) != 0)
+                    {
                         phi_r30 = 1U;
                     }
                     phi_r25 += 1;
@@ -175,13 +185,22 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 }
             }
         }
-        if ((fighter->x2218_flag.bits.b3 != 0) && (func_8000A95C(fighter + 0x19E4, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0)) {
+        if ((fighter->x2218_flag.bits.b3 != 0) &&
+            (func_8000A95C(fighter + 0x19E4, arg1, func_8007F804(fighter),
+                           fighter->xB0_pos.z) != 0))
+        {
             phi_r30 = 1U;
         }
-        if ((fighter->x2218_flag.bits.b6 != 0) && (func_8000AB2C(fighter + 0x1A08, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0)) {
+        if ((fighter->x2218_flag.bits.b6 != 0) &&
+            (func_8000AB2C(fighter + 0x1A08, arg1, func_8007F804(fighter),
+                           fighter->xB0_pos.z) != 0))
+        {
             phi_r30 = 1U;
         }
-        if ((fighter->x221B_flag.bits.b0 != 0) && (func_8000A78C(fighter + 0x19C0, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0)) {
+        if ((fighter->x221B_flag.bits.b0 != 0) &&
+            (func_8000A78C(fighter + 0x19C0, arg1, func_8007F804(fighter),
+                           fighter->xB0_pos.z) != 0))
+        {
             phi_r30 = 1U;
         }
     }
@@ -201,40 +220,60 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         while (phi_r25 < fighter->x3E0) {
             spAC = 0.0f; // lbl_804D836C; //change to actual label
             spA8 = 0.0f; // lbl_804D8370; //change to actual label
-            if (func_800117F4(&phi_r26->x2F4, &spAC, &spA8, phi_r26->x3E0, arg1) != 0) {
+            if (func_800117F4(&phi_r26->x2F4, &spAC, &spA8, phi_r26->x3E0,
+                              arg1) != 0)
+            {
                 phi_r30 = 1U;
             }
             phi_r25 += 1;
             phi_r26 += 0x18;
         }
     }
-    if ((fighter->x21FC_flag.bits.b3 != 0) && (func_800B395C(gobj, arg1) != 0)) {
+    if ((fighter->x21FC_flag.bits.b3 != 0) && (func_800B395C(gobj, arg1) != 0))
+    {
         phi_r30 = 1U;
     }
-    if ((fighter->x21FC_flag.bits.b4 != 0) && (fighter->x2223_flag.bits.b5 != 0) && (func_80014770(fighter + 0x1930, arg1) != 0)) {
+    if ((fighter->x21FC_flag.bits.b4 != 0) &&
+        (fighter->x2223_flag.bits.b5 != 0) &&
+        (func_80014770(fighter + 0x1930, arg1) != 0))
+    {
         phi_r30 = 1U;
     }
     if (fighter->x21FC_flag.bits.b3 != 0) {
         temp_r24 = &fighter->x294_itPickup;
         if (fighter->xE0_ground_or_air == GA_Ground) {
-            if (func_8001E2F8(&temp_r24->x0_ground_light_offset, &fighter->xB0_pos, &lbl_804D3A88, arg1, fighter->x2C_facing_direction) != 0) {
+            if (func_8001E2F8(&temp_r24->x0_ground_light_offset,
+                              &fighter->xB0_pos, &lbl_804D3A88, arg1,
+                              fighter->x2C_facing_direction) != 0)
+            {
                 phi_r30 = 1U;
             }
-            if (func_8001E2F8(&temp_r24->x10_ground_heavy_offset, &fighter->xB0_pos, &lbl_804D3A90, arg1, fighter->x2C_facing_direction) != 0) {
+            if (func_8001E2F8(&temp_r24->x10_ground_heavy_offset,
+                              &fighter->xB0_pos, &lbl_804D3A90, arg1,
+                              fighter->x2C_facing_direction) != 0)
+            {
                 phi_r30 = 1U;
             }
-        } else if (func_8001E2F8(&temp_r24->x20_air_light_offset, &fighter->xB0_pos, &lbl_804D3A8C, arg1, fighter->x2C_facing_direction) != 0) {
+        } else if (func_8001E2F8(&temp_r24->x20_air_light_offset,
+                                 &fighter->xB0_pos, &lbl_804D3A8C, arg1,
+                                 fighter->x2C_facing_direction) != 0)
+        {
             phi_r30 = 1U;
         }
     }
-    if ((fighter->x21FC_flag.bits.b2 != 0) && (fighter->x2227_flag.bits.b2 == 0) && (func_8000A044(&fighter->x1064_thrownHitbox, arg1, fighter->x34_scale.y) != 0)) {
+    if ((fighter->x21FC_flag.bits.b2 != 0) &&
+        (fighter->x2227_flag.bits.b2 == 0) &&
+        (func_8000A044(&fighter->x1064_thrownHitbox, arg1,
+                       fighter->x34_scale.y) != 0))
+    {
         phi_r30 = 1U;
     }
     if ((fighter->x21FC_flag.bits.b0 != 0) && (fighter->x2229_b4 == 0)) {
         phi_r26 = fighter + (0U * 0x2C);
         phi_r25 = 0U;
         do {
-            if (func_8000A1A8(&phi_r26->x1614, arg1, fighter->x34_scale.y) != 0) {
+            if (func_8000A1A8(&phi_r26->x1614, arg1, fighter->x34_scale.y) != 0)
+            {
                 phi_r30 = 1U;
             }
             temp_r25 = phi_r25 + 1;
@@ -246,10 +285,15 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         HSD_StateInvalidate(-1);
     }
     if (fighter->x21FC_flag.bits.b7 != 0) {
-        if ((fighter->x221E_flag.bits.b0 == 0) && (fighter->x221E_flag.bits.b5 == 0) && (arg2 != 0)) {
+        if ((fighter->x221E_flag.bits.b0 == 0) &&
+            (fighter->x221E_flag.bits.b5 == 0) && (arg2 != 0))
+        {
             func_800750C8(fighter, 1, 0);
             func_800750C8(fighter, 4, 0);
-            if ((fighter->x2223_flag.bits.b7 != 0) || (fighter->x2226_flag.bits.b5 != 0) || (fighter->x2227_flag.bits.b3 != 0)) {
+            if ((fighter->x2223_flag.bits.b7 != 0) ||
+                (fighter->x2226_flag.bits.b5 != 0) ||
+                (fighter->x2227_flag.bits.b3 != 0))
+            {
                 func_800750C8(fighter, 0, 0);
                 func_800750C8(fighter, 2, 1);
             } else {
@@ -279,13 +323,15 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             fighter0 = gobj->hsd_obj;
             HSD_JObjDispAll(fighter0, phi_r29, func_80390EB8(arg1), 0);
             if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
-                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1, (MtxPtr) phi_r29);
+                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1,
+                                                      (MtxPtr) phi_r29);
             }
             func_800C8AF0(fighter);
             func_8009F7F8(fighter);
         }
         if ((u32) fighter->x20A0_accessory != 0U) {
-            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1), 0);
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1),
+                            0);
         }
         func_800C2600(gobj, arg1);
     }
@@ -780,7 +826,10 @@ void func_80080C28(HSD_GObj* gobj, s32 arg1)
 
     fighter = gobj->user_data;
     if (fighter->x21FC_flag.bits.b7 != 0) {
-        if ((fighter->x221E_flag.bits.b0 == 0) && (fighter->x221E_flag.bits.b5 == 0) && (fighter->x2226_flag.bits.b5 == 0)) {
+        if ((fighter->x221E_flag.bits.b0 == 0) &&
+            (fighter->x221E_flag.bits.b5 == 0) &&
+            (fighter->x2226_flag.bits.b5 == 0))
+        {
             func_8009F5AC(fighter);
             if (fighter->x5BC != 0U) {
                 func_800750C8(fighter, 0, 0);
@@ -814,13 +863,15 @@ void func_80080C28(HSD_GObj* gobj, s32 arg1)
             temp_r27 = gobj->hsd_obj;
             HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1), 0);
             if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
-                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1, (MtxPtr) phi_r28);
+                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1,
+                                                      (MtxPtr) phi_r28);
             }
             func_800C8AF0(fighter);
             func_8009F7F8(fighter);
         }
         if (fighter->x20A0_accessory != NULL) {
-            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1), 0);
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1),
+                            0);
         }
     }
 }

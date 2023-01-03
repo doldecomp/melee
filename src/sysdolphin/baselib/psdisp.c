@@ -12,16 +12,14 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/mtx.h>
 
-typedef struct
-{
+typedef struct {
     u8 filename[9];
     u8 message[39];
     unk_t pointers[3];
     u32 bitfields[8];
 } psdisp_UnknownType001;
 
-typedef struct
-{
+typedef struct {
     unk_t pointers[4];
     u8 message[36];
     u8 filename[9];

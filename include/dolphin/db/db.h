@@ -3,8 +3,7 @@
 
 #include <dolphin/types.h>
 
-typedef struct
-{
+typedef struct {
     u32 bPresent;
     u32 exceptionMask;
     void (*ExceptionDestination)(void);

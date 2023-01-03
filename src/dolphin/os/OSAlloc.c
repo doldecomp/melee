@@ -8,7 +8,8 @@ static void* ArenaStart;
 static void* ArenaEnd;
 volatile OSHeapHandle __OSCurrHeap = -1;
 
-#define InRange(addr, start, end) ((u8*) (start) <= (u8*) (addr) && (u8*) (addr) < (u8*) (end))
+#define InRange(addr, start, end)                                              \
+    ((u8*) (start) <= (u8*) (addr) && (u8*) (addr) < (u8*) (end))
 #define OFFSET(addr, align) (((uintptr_t) (addr) & ((align) -1)))
 
 #define ALIGNMENT 32
@@ -36,7 +37,8 @@ HeapCell* DLExtract(HeapCell* list, HeapCell* cell)
     return list;
 }
 
-HeapCell* DLInsert(HeapCell* list, HeapCell* cell, void* unused /* needed to match OSFreeToHeap */)
+HeapCell* DLInsert(HeapCell* list, HeapCell* cell,
+                   void* unused /* needed to match OSFreeToHeap */)
 {
     HeapCell* before = NULL;
     HeapCell* after = list;
@@ -248,7 +250,8 @@ size_t OSCheckHeap(OSHeapHandle heap)
 #pragma force_active on
 static char string__nOSDumpHeap__d___n[] = "\nOSDumpHeap(%d):\n";
 static char string_________Inactive_n[] = "--------Inactive\n";
-static char string_addr_tsize_t_tend_tprev_tnext_n[] = "addr\tsize\t\tend\tprev\tnext\n";
+static char string_addr_tsize_t_tend_tprev_tnext_n[] =
+    "addr\tsize\t\tend\tprev\tnext\n";
 static char string_________Allocated_n[] = "--------Allocated\n";
 static char string__x_t_d_t_x_t_x_t_x_n[] = "%x\t%d\t%x\t%x\t%x\n";
 static char string_________Free_n[] = "--------Free\n";
